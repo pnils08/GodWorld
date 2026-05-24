@@ -1,8 +1,8 @@
 ---
 name: sift
 description: Editorial planning for the edition. Reads sheet-primary canon (Oakland_Sports_Feed, Riley_Digest, Initiative_Tracker, Simulation_Ledger) + canon archive + NEWSROOM_MEMORY + city-hall production log. Proposes stories under cadence caps, locks slate via Mike approval gate, emits one brief per article slot + dispatch.json + letters candidate pool. The game moment.
-version: "2.0"
-updated: 2026-05-23
+version: "2.0.1"
+updated: 2026-05-24
 tags: [media, active]
 effort: high
 disable-model-invocation: true
@@ -22,6 +22,8 @@ v2.0 inverts /sift v1.x's city-hall-paper load-out to a reporter-agency model. T
 5. **Letters as candidate pool with rest-cycle pre-filter.** Step 10 emits `output/letters/c{XX}_candidates.md` filtered against `.claude/agent-memory/letters-desk/MEMORY.md §Rest Cycle Tracking`. Letters-desk LENS owns final selection; /write-edition Step 3.5b regenerates from compiled edition. Closes G-W33 + G-W39.
 
 v1.x companion files: [[../../../docs/media/brief_template|brief_template]] (v1) carries a DEPRECATED banner; stays in tree until v2.0 SKILL.md (this file) goes live, then archives per [[../../../docs/SCHEMA|SCHEMA]] §8.
+
+**v2.0.1 minor (S230, canon.3):** Step 5 gains a cross-layer canon check per [[../../../docs/adr/0007-cross-layer-canon-authority-precedence|ADR-0007]] — bay-tribune lookup before NEW classification; canon-layer-drift hits surface in `output/canon_drift_c{XX}.json` for engine-sheet backfill. Closes G-S18 + G-P38 cross-link. Six-decision triage unchanged; check runs as a preflight before the decision tree.
 
 ---
 
@@ -297,7 +299,22 @@ Boot-loaded civic-desk + freelance-firebrand RULES.md (S197 Wave 2) is the prima
 
 ### Step 5 — Triage (six-decision vocabulary)
 
-**Closes:** G-S13 (fold / covered-by-feature vocabulary)
+**Closes:** G-S13 (fold / covered-by-feature vocabulary), G-S18 + G-P38 cross-link (cross-layer canon drift detection)
+
+#### Cross-layer canon check (per ADR-0007, runs BEFORE the six-decision triage)
+
+For every candidate naming a citizen by name (not already POPID-confirmed at Step 4), run cross-layer verification per [[../../../docs/adr/0007-cross-layer-canon-authority-precedence|ADR-0007]] lookup precedence:
+
+| Outcome | What it means | Action |
+|---|---|---|
+| **Match in wd-citizens + bay-tribune consistent** | Citizen has prior structured layer + prior appearance | Proceed to six-decision triage as normal |
+| **Match in wd-citizens, no bay-tribune appearance** | Citizen exists in Sim_Ledger but never published | Proceed normal; flag in candidate `priorAppearance: false` |
+| **Match in bay-tribune, NO wd-citizens / NO Sim_Ledger** | **CANON-LAYER-DRIFT** — citizen is canon (paper-of-record) but structured layer is missing | Append entry to `output/canon_drift_c{XX}.json` with shape `{popid: null, name, bayTribuneHits: [docIds...], suggestedAction: "backfill", surfacedBy: "sift-step-5", cycle}`. Triage decision defaults to `defer-to-supplemental(target=wiki)` — citizen IS canon per ADR-0007 §Reconciliation rule 1, but engine-sheet must backfill Sim_Ledger row before /post-publish ingest can complete. **Do NOT classify as NEW.** |
+| **Name match across layers but different POPIDs / different name forms** | Cross-layer name disagreement | Apply ADR-0007 lookup precedence (Sim_Ledger POPID canonical for structured fields; bay-tribune appearance canonical for narrative role). Surface disagreement in `canon_drift_c{XX}.json`; use Sim_Ledger canonical name in brief. If corrections-forward map entry exists in [[../../../docs/canon/INSTITUTIONS|INSTITUTIONS]] §Citizens Corrections Forward, substitute per map. |
+
+**Why this check runs at Step 5, not Step 4:** Step 4 enrichment already pulls `lookup_citizen()` per candidate — the cross-layer check uses that result PLUS a `search_canon(name)` MCP call to verify bay-tribune presence. The combined check belongs at triage time because the outcome shapes the decision (canon-layer-drift → defer; clean → normal triage). Step 4 establishes the data; Step 5 acts on it.
+
+#### Six-decision triage
 
 Read [[../../../docs/media/sift_triage_vocabulary|sift_triage_vocabulary]] BEFORE this step. The six decisions:
 

@@ -48,6 +48,7 @@ Flags:
 | 3 civic wiki | ✓ | — | — | — |
 | 4 coverage ratings | ✓ | — (C93-gated) | — (C93-gated) | — (C93-gated) |
 | 5 citizen+business intake | ✓ | ✓ | ✓ | ✓ |
+| 5-bis wd-card rebuild (new POPIDs) | ✓ | ✓ | ✓ | ✓ |
 | 6 grade | ✓ | — | — | — |
 | 7 grade history | ✓ | — | — | — |
 | 8 exemplars | ✓ | — | — | — |
@@ -78,7 +79,8 @@ Several substeps are independent and can run concurrently to compress wall time.
 |-------|----------|-----------|
 | **Parallel-OK** | 2a citizen cards, 2c world summary, 4 coverage ratings | No interdependency. Each writes a different surface (world-data citizens, world-data summary, sheets). Run concurrently. |
 | **Sequential after parallel group** | Step 5 (citizen+business intake) | Depends on Step 2a completion via the verification gate (NAMES INDEX presence + parsed count). |
-| **Sequential after Step 5** | Steps 6 (grade), 7 (grade history), 8 (exemplars) | Depend on Step 5's intake JSON for entity attribution. |
+| **Sequential after Step 5** | Step 5-bis (wd-card rebuild for newly-appended POPIDs) | Depends on Step 5 output JSON for `appended[].popid` range. Closes G-P32 one-cycle card lag per [[../../../docs/adr/0007-cross-layer-canon-authority-precedence|ADR-0007]]. |
+| **Sequential after Step 5-bis** | Steps 6 (grade), 7 (grade history), 8 (exemplars) | Depend on Step 5's intake JSON for entity attribution; Step 5-bis must complete first so newly-appended citizens have wd-cards for grade lookups. |
 | **Parallel-OK with the grade group** | Step 9 (newsroom memory), Step 10 (criteria files) | Independent of the grade-chain output; can run alongside Steps 6-8. |
 | **Sequential at end** | Step 11 (filing + bot), Step 12 (production log), Step 13 (checklist) | Final state-of-the-skill steps; run after all prior substeps complete. |
 
@@ -132,7 +134,9 @@ Citizens who appeared get updated profiles in world-data. New citizens get cards
 
 **Why `--apply`:** the script defaults to dry-run (writes nothing). Without the flag the substep silently does no real work. (G-P12, S195 — caught on E93 when --apply surfaced the 401 retry storm; previous cycles likely shipped dry-runs masquerading as success.)
 
-**Verification gate:** stdout reports refreshed/created card count ≥ 1 when NAMES INDEX is non-empty. If NAMES INDEX is empty (some dispatches), gate is met by stdout "0 citizens to refresh — empty NAMES INDEX."
+**Verification gate (strengthened S230 per canon.3 / ADR-0007):** ALL THREE conditions must pass — (a) stdout reports refreshed/created card count ≥ 1 when NAMES INDEX is non-empty (or "0 citizens to refresh — empty NAMES INDEX" if empty); (b) stdout reports `Errors: 0`; (c) script exit code is 0. Any failing condition aborts /post-publish at Step 2a with a pointer to `output/citizen_card_failures_c<XX>.json` for engine-sheet diagnosis. The failure-list dump + non-zero exit ship via engine-sheet T6 (canon.3 plan); pre-T6 the script still exits 0 on partial failure, so the gate is partially load-bearing until T6 lands. Closes G-P34 lineage (S195 G-P12 → S222 G-P34 → S223 chunking fix → S230 gate strengthening).
+
+**Why this gate strengthening matters (per ADR-0007):** wd-citizens is the derived lookup layer that reporters + Mara + sift Step 4 enrichment hit via MCP `lookup_citizen`. A 19% partial-write failure (S222 C94 empirical) means wd-citizens has a silent gap per cycle that compounds — same shape as the bay-tribune-only-citizens drift the ADR governs. Non-zero exit + failure dump make the gap visible immediately instead of catching it three cycles later when a reporter notices a missing card.
 
 **2a-cul. Refresh cultural cards** (`--type {dispatch|interview|supplemental}` — only when NAMES INDEX contains CUL-IDs)
 
@@ -236,6 +240,26 @@ Where `<N>` = the entity count `ingestPublishedEntities.js` reported (sum of NAM
 2. `verifyNamesIndexParse.js --expected <N> --strict` exits 0 (source NAMES INDEX present AND row count matches parser-reported count).
 
 If gate 2 fails with "NAMES INDEX section absent": run `node scripts/emitFormatContractSections.js <source> --inject` to derive the strict sections from CITIZEN USAGE LOG, then re-run /post-publish Step 5. If gate 2 fails with "mismatch": investigate the parser regression before continuing — silent zero-entity ingest poisons bay-tribune retrieval.
+
+### Step 5-bis: Build wd-cards for newly-appended POPIDs (all types, when Step 5 appended new citizens)
+
+**Purpose:** closes G-P32 one-cycle card lag per [[../../../docs/adr/0007-cross-layer-canon-authority-precedence|ADR-0007]] §How to Apply. Step 2a's `buildCitizenCards.js` ran BEFORE Step 5 appended new POPIDs; without this substep, newly-published citizens have NO wd-card until next cycle's Step 2a runs — Mara's audit can't look them up, /sift Step 4 enrichment returns empty, future-cycle continuity checks miss them.
+
+Reads Step 5 output JSON (`output/intake_published_entities_c<XX>_<slug>.json`) for `appended[].popid`. If `appended` is empty, substep is skipped with stdout "0 new POPIDs — Step 5-bis N/A this artifact."
+
+If `appended` has 1+ POPIDs:
+
+```bash
+node scripts/buildCitizenCards.js --apply --popid-range POP-XXXXX:POP-YYYYY
+```
+
+Where `XXXXX:YYYYY` is the min/max of appended POPIDs. The `--popid-range` flag shipped S223 (engine.18) for surgical rebuilds.
+
+**Verification gate (same shape as Step 2a strengthened gate):** ALL THREE conditions — (a) stdout reports `Written: N` matching the appended POPID count; (b) stdout reports `Errors: 0`; (c) script exit code 0. Per ADR-0007 §How to Apply: this substep + Step 2a together enforce that every Sim_Ledger row has a wd-card within the same /post-publish run.
+
+**Why this runs after Step 5 (not folded into Step 2a):** Step 2a runs before the canonical artifact has been ingested to bay-tribune; new citizens aren't in Sim_Ledger yet so there's nothing to build. Step 5 appends to Sim_Ledger; Step 5-bis builds the matching wd-cards. Sequencing is structural, not optional.
+
+**Pre-T6 caveat (canon.3 plan):** until engine-sheet T6 ships the Errors-gate non-zero exit on `buildCitizenCards.js`, this substep can silent-partial-fail the same way Step 2a can. Production log Step 12 must log the appended POPID list + the substep's stdout summary so operator can manually inspect.
 
 ### Step 5b: Refresh `base_context.json` + desk packets (all types)
 ```bash

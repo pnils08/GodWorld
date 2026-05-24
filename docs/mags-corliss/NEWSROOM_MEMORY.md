@@ -7,6 +7,23 @@
 
 ## Standing Editorial Conventions
 
+### Scaffold-time citizen-reference lookup discipline (S230, canon.3 / ADR-0007)
+
+**Rule:** every citizen reference in production-log scaffolds, NEWSROOM_MEMORY edits, and sift slate JSON gets MCP-verified BEFORE write. No exceptions for "I'm pretty sure" or "saw it last cycle."
+
+**The verification:**
+- `lookup_citizen(name)` (MCP) → confirm POPID + canonical spelling against wd-citizens
+- `search_canon(name)` (MCP) → confirm prior appearance + narrative role against bay-tribune
+- If a scaffold cites a POPID, verify the POPID-to-name binding via Sim_Ledger (the canonical structured layer per [[../../docs/adr/0007-cross-layer-canon-authority-precedence|ADR-0007]])
+
+**Lookup precedence (per ADR-0007):** POPID → wd-citizens card → bay-tribune `search_canon` → drift hit. Any disagreement between layers means the scaffold is wrong; correct against the precedence rules before persisting.
+
+**Why this is a Standing Editorial Convention, not a one-off rule:** scaffold-time drift compounds across cycles. G-S15 (Beverly Hayes POPID drift) carried POP-00576 in production-log scaffold for 3+ cycles before anyone caught it — canon is POP-00772, POP-00576 doesn't exist as Beverly anywhere. G-S16 (JR Rosado misspelled "Rosada") carried across multiple cycles. Both originated as scaffold-time fabrications that no one MCP-verified before persisting. The downstream surfaces (sift Step 5 cross-layer check, post-publish Step 5 bay-tribune lookup) catch what slips through to ingest, but scaffold-time MCP-verify prevents the drift from being introduced in the first place. Upstream prevention beats downstream detection.
+
+**Applies to:** production-log scaffolds (`output/production_log_*`), NEWSROOM_MEMORY edits naming citizens or POPIDs, sift slate JSON, Mara-directive note prep, agent-memory entries naming citizens. Does NOT apply to in-prose article body (that's the reporter's job per Newsroom Rules) or to bay-tribune canon search results themselves (those ARE the verification source).
+
+**Cost:** ~0.2s per `lookup_citizen` MCP call. For a typical sift scaffold naming 8-15 citizens, ~2-3s total. Worth it.
+
 ### Paulson C94 interview canon — let-walks reset + after-a-parade championship intent + Varek call NOT received (S230, 2026-05-23) — sports-canon update
 
 **Decision:** Mike Paulson interview transcript (S230, slug `let_walks`, intended reporter Hal Richmond) is the C94+ canonical source for the let-walks storyline + the Varek-Paulson Oaks-GM recruitment thread + the dynasty-architecture sub-story around Dillon's deal. Transcript on disk at `editions/cycle_pulse_interview-transcript_94_let_walks.txt` + Drive Mara folder ID `1WiKfst-w8ugOjRilTL9yGx09HO8BUCK3`.

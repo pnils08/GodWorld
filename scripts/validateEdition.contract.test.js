@@ -84,8 +84,12 @@ console.log('\nTest 3: ENGINE_TERMS contains load-bearing patterns');
   assert("'severity level' pattern", /\/\\bseverity\s+level\\b\//.test(source));
   assert("'simulation' pattern", /\/\\bsimulation\\b\//.test(source));
   assert("'phase \\d+' pattern", /\/\\bphase\s+\\d\+\//.test(source));
-  assert("'ledger' pattern with Civic Ledger exclusion",
-    /\/\\bledger\\b\/[a-z]*\s*,\s*exclude:\s*\/Civic Ledger/.test(source));
+  // S231 pipeline.28 G-W51: ledger removed from ENGINE_TERMS — overloaded
+  // with journalism metaphor use ("on the ledger", "ledger entry"); was
+  // BLOCKING-tier false-positive on natural prose. Real engine vocabulary
+  // is unique (tension score / civic load / story seed / phase NN).
+  assert("'ledger' pattern REMOVED (G-W51, was false-positive on metaphor)",
+    !/\/\\bledger\\b\//.test(source));
   assert("'Edition \\d+' pattern", /\/\\bEdition\\s\+\\d\+\//.test(source));
 }
 

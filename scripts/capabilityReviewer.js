@@ -185,7 +185,25 @@ async function main() {
       r.tier = meta.tier; // assertions.json is authoritative for tier
       results.push(r);
       const flag = r.pass ? '✓' : (r.tier === 'blocking' ? '✗ BLOCK' : '✗ adv');
+      // S231 pipeline.28 G-W50 visibility: surface advisory failure detail
+      // inline so operators see counts + sample evidence without opening the
+      // JSON. Pre-fix the summary only showed pass/fail; operators had to
+      // crack open `output/capability_review_c{XX}.json` to see why anything
+      // failed. Now each failure prints reason + first 2 evidence values.
       console.log(`  ${flag}  ${r.id}`);
+      if (!r.pass) {
+        console.log(`        ${r.reason}`);
+        if (r.evidence) {
+          for (const [k, v] of Object.entries(r.evidence).slice(0, 2)) {
+            const summary = Array.isArray(v)
+              ? `[${v.length} item${v.length === 1 ? '' : 's'}]${v.length > 0 ? ' e.g. ' + JSON.stringify(v.slice(0, 1)[0]).slice(0, 80) : ''}`
+              : typeof v === 'object' && v !== null
+                ? JSON.stringify(v).slice(0, 120)
+                : String(v).slice(0, 120);
+            console.log(`        ${k}: ${summary}`);
+          }
+        }
+      }
     } catch (err) {
       console.error(`  ERR: ${meta.id} threw — ${err.message}`);
       results.push({

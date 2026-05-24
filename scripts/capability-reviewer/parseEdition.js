@@ -171,6 +171,13 @@ function parse(filePath) {
  * with no headline, preserving old-format behavior for editions that pre-date
  * the `#`-headlined consolidated format). Byline extracted from the body.
  */
+// LETTERS-section letter-boundary regex: 3-9 dashes on a line by themselves.
+// Disambiguated from the 10+ dash section divider (DIVIDER_RE). Each `---`
+// inside a LETTERS section's body marks the end of one letter + start of
+// the next. (G-W49 fix S231.)
+const LETTER_BOUNDARY_RE = /^-{3,9}$/;
+const LETTERS_SECTION_TITLES = new Set(['LETTERS', 'LETTERS TO THE EDITOR']);
+
 function finalizeSection(section) {
   // Footer sections (NAMES INDEX, BUSINESSES NAMED, etc.) carry editorial
   // metadata, not articles. Don't split by `# Headline`; capability assertions
@@ -186,8 +193,21 @@ function finalizeSection(section) {
   let currentHeadline = '';
   let currentLines = [];
 
+  const isLetters = LETTERS_SECTION_TITLES.has(section.title);
+
   for (let k = 0; k < lines.length; k++) {
     const line = lines[k];
+    // LETTERS sections: split on 3-9-dash separators between letters.
+    // Each letter becomes its own slice with no headline (letters are
+    // signature-attributed at the bottom, not headlined at top).
+    if (isLetters && LETTER_BOUNDARY_RE.test(line.trim())) {
+      if (currentLines.length > 0 || currentHeadline) {
+        slices.push({ headline: currentHeadline, lines: currentLines });
+      }
+      currentHeadline = '';
+      currentLines = [];
+      continue;
+    }
     // Only h1 markers `# Headline` count as article boundaries.
     // h2/h3 (`## Subhead`) appear inside article bodies for callouts;
     // splitting on those would break mid-article. h4+ same reasoning.
@@ -211,10 +231,17 @@ function finalizeSection(section) {
     const slice = slices[s];
     const body = slice.lines.join('\n').trim();
     if (!slice.headline && !body) continue;
-    // Byline: first `By <Name>` line in body. Allow up to 2 leading/trailing
-    // markdown markers (italic `*By ...*` or bold `**By ...**` per Hal's
-    // E93 wrap shape).
-    const bm = body.match(/(?:^|\n)\s*[*_]{0,2}By\s+([^|*_\n]+?)(?:\s*[|]|\s*[*_]{0,2}\s*(?:\n|$))/i);
+    // Byline extraction:
+    //   1) Article byline: first `By <Name>` line (with optional italic/bold).
+    //   2) LETTERS-section signature fallback: `— Name, age, neighborhood, role`
+    //      or `-- Name, ...` (em-dash, en-dash, or double-hyphen). Letters
+    //      attribute at the END not the top; this captures the signature
+    //      so reporter-name collision checks (G-W48 reporterNames set)
+    //      include letter writers. (G-W49 fix S231.)
+    let bm = body.match(/(?:^|\n)\s*[*_]{0,2}By\s+([^|*_\n]+?)(?:\s*[|]|\s*[*_]{0,2}\s*(?:\n|$))/i);
+    if (!bm && isLetters) {
+      bm = body.match(/(?:^|\n)\s*(?:—|–|--)\s*([A-Z][^,\n]{1,40})(?:,|\s*$)/);
+    }
     articles.push({
       headline: slice.headline,
       byline: bm ? bm[1].trim() : '',

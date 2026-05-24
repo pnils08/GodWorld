@@ -38,17 +38,27 @@ function check(ctx) {
   const articleFlags = [];
   const deskWords = {};
   for (const section of edition.sections) {
+    if (section.isFooter) continue; // footer sections carry metadata, not articles
     const desk = deskForSection(section.title);
     for (const article of section.articles) {
       const body = article.body || '';
       const count = wordCount(body);
       if (count === 0) continue;
-      if (count < MIN_WORDS) {
-        articleFlags.push({ section: section.title, headline: article.headline, wordCount: count, reason: 'too short' });
-      } else if (count > MAX_WORDS) {
-        articleFlags.push({ section: section.title, headline: article.headline, wordCount: count, reason: 'too long' });
+      // Per-article length range only applies to desk-balanced sections.
+      // LETTERS / PODCAST / OBITUARIES / FRONT PAGE / EDITOR'S DESK have
+      // their own length norms (letters are 100-200 words by convention,
+      // editor's desk is short, etc.) — skip the 200-1200 check there.
+      // (S231 pipeline.28 G-W49 fix — letters slate now correctly splits
+      // into 3 letters; pre-fix it was one ~600-word block that fit the
+      // range by accident.)
+      if (desk) {
+        if (count < MIN_WORDS) {
+          articleFlags.push({ section: section.title, headline: article.headline, wordCount: count, reason: 'too short' });
+        } else if (count > MAX_WORDS) {
+          articleFlags.push({ section: section.title, headline: article.headline, wordCount: count, reason: 'too long' });
+        }
+        deskWords[desk] = (deskWords[desk] || 0) + count;
       }
-      if (desk) deskWords[desk] = (deskWords[desk] || 0) + count;
     }
   }
 

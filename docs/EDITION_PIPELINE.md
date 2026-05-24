@@ -69,7 +69,7 @@ editions/cycle_pulse_<type>_<cycle>_<slug>.txt
 - `<slug>` is omitted for `edition` (editions are already cycle-unique); required for the other three
 - Slug is 1–3 words, lowercase, underscore-separated, editorial pick at authoring time
 
-Companion artifact: interviews emit a second `.txt` with `<type>=interview-transcript` carrying the full transcript, masthead identical except for the type label.
+**Interview type (S233 pipeline.30 — capture-only since /interview v2.0):** interviews emit a single `.txt` with `<type>=interview-transcript` carrying the full transcript. The legacy bare `<type>=interview` article output is retired — articles framed off interview transcripts are produced downstream by `/write-edition` (next cycle, via `/sift`) or `/write-supplemental` (any time, sports-desk dispatch against the canon transcript). The `<TYPE>=INTERVIEW-TRANSCRIPT` masthead is the canonical /interview artifact going forward.
 
 ### Masthead block
 
@@ -83,7 +83,7 @@ Weather: <weather phrase> | City Mood: <mood phrase>
 ============================================================
 ```
 
-- `<TYPE>` uppercase: `EDITION` / `INTERVIEW` / `SUPPLEMENTAL` / `DISPATCH` / `INTERVIEW-TRANSCRIPT`
+- `<TYPE>` uppercase: `EDITION` / `INTERVIEW-TRANSCRIPT` / `SUPPLEMENTAL` / `DISPATCH`. (`INTERVIEW` retired post /interview v2.0 S233 pipeline.30 — interview type now emits transcript only; downstream framed articles use `SUPPLEMENTAL` or live under the next edition.)
 - `<descriptor>`: subject for interview ("Santana / OARI"), headline for supplemental/dispatch; omitted for edition
 - `Y<n>C<m>` math: `n = floor((cycle-1) / 52) + 1`, `m = ((cycle-1) % 52) + 1` → cycle 92 = `Y2C40`. Replaces all month references (real-world calendar months don't align with the cycle clock and confuse cross-references with sports-time)
 - Season + Week emitted by engine (e.g., `Fall, First Friday`) — kept; only month names are forbidden
@@ -117,7 +117,7 @@ ARTICLE TABLE
 | **NAMES INDEX** | `<ID> \| <Name> \| <Role/Title>` — `<ID>` is `POP-XXXXX` for Sim_Ledger citizens, `CUL-XXXXXXX` for cultural-only entities (musicians, artists, public figures registered in `wd-cultural` without a Sim_Ledger row). One row per entity. **One entity per line — never concatenate two rows.** | All explicitly named entities — citizens AND cultural-only figures |
 | **CITIZEN USAGE LOG** | `<ID> \| <mention count> \| <quoted? Y/N>` — same `<ID>` rule (POP- or CUL-). One row per entity. | Any named entity (1+ mention) |
 | **BUSINESSES NAMED** | `<BIZ-ID or NEW> \| <Name> \| <Sector> \| <Neighborhood>` | Any business explicitly named in body |
-| **ARTICLE TABLE** | `<slug> \| <reporter> \| <section> \| <word count>` | Multi-row for edition; single-row for interview/supplemental/dispatch |
+| **ARTICLE TABLE** | `<slug> \| <reporter> \| <section> \| <word count>` | Multi-row for edition; single-row for interview-transcript/supplemental/dispatch. Interview type uses `INTERVIEW-TRANSCRIPT` as the `<section>` value (S233 pipeline.30). |
 
 **ID convention (S188):** Cultural-only entities surfaced via `lookup_cultural` carry a `CUL-XXXXXXX` identifier from `wd-cultural`. They appear in NAMES INDEX and CITIZEN USAGE LOG using that ID, NOT a placeholder POP-ID. Example from S188 KONO Second Song dispatch: `POP-00537 | Marin Tao | Musician` and `CUL-905CBDE8 | Brody Kale | Media Influencer`. Ingest scripts must accept both prefixes; rejecting CUL- rows silently is a parser bug (S188 gap #4 + #5).
 
@@ -130,7 +130,7 @@ The artifact differs only in body shape and Article Table row count. Section hea
 | Type | Article Table rows | Body shape | Companion artifacts |
 |---|---|---|---|
 | Edition | multi (1 per article) | section-by-section, multi-article | none |
-| Interview | single | one Q&A or framed conversation | transcript `.txt` (same masthead, `type=interview-transcript`) |
+| Interview | single | full transcript (Q&A or framed conversation) | none — single canonical transcript `.txt` (`<TYPE>=INTERVIEW-TRANSCRIPT`). Articles framed off transcripts produced downstream by /write-edition or /write-supplemental, NOT by /interview (S233 pipeline.30 capture-only architecture) |
 | Supplemental | single or multi | topic deep-dive | none |
 | Dispatch | single | one scene, one moment | none |
 

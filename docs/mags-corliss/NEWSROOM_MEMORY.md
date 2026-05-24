@@ -7,6 +7,41 @@
 
 ## Standing Editorial Conventions
 
+### Paulson C94 interview canon — let-walks reset + after-a-parade championship intent + Varek call NOT received (S230, 2026-05-23) — sports-canon update
+
+**Decision:** Mike Paulson interview transcript (S230, slug `let_walks`, intended reporter Hal Richmond) is the C94+ canonical source for the let-walks storyline + the Varek-Paulson Oaks-GM recruitment thread + the dynasty-architecture sub-story around Dillon's deal. Transcript on disk at `editions/cycle_pulse_interview-transcript_94_let_walks.txt` + Drive Mara folder ID `1WiKfst-w8ugOjRilTL9yGx09HO8BUCK3`.
+
+**Canon Paulson established on the record (use these as quote-source for C95+ sports coverage; surface via /sift):**
+
+- **Only confirmed farewell is Vinnie Keane** (POP-00001, DH, 38, final season, 436 HR / 6 rings, Mandela Parkway academy outlives the bat). Farewell campaign running.
+- **Benji Dillon came back on a one-year deal "to make one last run with Vinnie"** (NEW canon, POP-00018) — deliberate decision by Dillon to ride with Keane through the farewell season. The dynasty-architecture sub-story — two men who built a clubhouse together making a particular decision about how they leave one.
+- **Preliminary contract talks took place with Dillon/Aitken/Richards/Kelley; both sides agreed to wait until after the season.** Posture is not "decided" (corrects S2 Slayer "The Let-Walks Coming" framing in C94 print). "Preliminary discussions took place on contracts, and we have decided to wait until after the season. We respect the right to do so." Paulson explicit: "I took a bit of issue with the reporting that it's been decided. As I'd think I'd know first, as the person deciding."
+- **Mark Aitken locked through 2043** (POP-00003, 1B + Player Rep + Community Liaison) — only veteran on paper forward; the kept man, civic-fluent.
+- **Isley Kelley (POP-00019) + Martin Richards (POP-00031) status NOT closed** — door isn't closed, isn't open, awaiting end-of-season.
+- **Championship intent on the record: "after a parade."** Paulson at end: "The goal is to win the championship — what are the factors of it happening or not happening." And: "[Contract talks] will be ready, hopefully after a parade." First GM-chair "parade" statement since 2035 last crescendo.
+- **Varek phone call NOT received.** Direct quote: "I have not received that call." Despite C94 FP1 (Velez) Varek public statement "I will absolutely be making that phone call." Paulson on Varek: "What a great man Elias is, and what a wonderful thing it is that Oakland is where he chose for his legacy" + credits Civis Systems as "one of the main reasons Oakland is the destination it is now." Open door, not closed.
+- **System-translates / culture-adapts framing.** Bulls C92 stint reframed by Paulson as positive validation that "the system translates" + "the system can be somewhat autonomous." Claim: A's are best in MLB even with time split. But "an expansion franchise is a different animal" — system portable, culture grown locally, cannot be handed.
+- **Roster-construction philosophy:** position-player core is durable, pitching adapts; Dillon is the pitching exception inside the cultural core. "Vinnie Keane is a one of one."
+- **Parade route closing image:** "through the new paved streets of the Baylight District, through Civis Field — The Town." Dynasty's last act ends on streets that did not exist when the dynasty began. Ties the let-walks storyline to the Baylight + Civis-naming + Oaks-arena civic-infrastructure spine.
+
+**For C95+ sports coverage, use this canon by:**
+- Quote Paulson directly from transcript — surface attribution as "Paulson told the Tribune" (acceptable since interview happened on the record).
+- Frame Dillon's one-year as dynasty-architecture color, not roster note.
+- Treat let-walks as OPEN question pending end-of-season, not as decided posture. Slayer's "Let-Walks Coming" framing is allowed as a column-take but cannot be reported as confirmed front-office decision.
+- Treat Varek-Paulson recruitment as OPEN. Public statement from Varek + no-call-yet from Paulson = the architecture is visible, the call hasn't happened.
+- Watch for the parade-route motif appearing in C95 spine — Baylight + Civis Field + dynasty-last-act all canonized as the closing image.
+
+**For C95+ sports coverage, AVOID:**
+- Reporting Kelley/Richards/Aitken/Dillon as "decided to walk" — Paulson explicitly reset that.
+- Reporting Paulson as "leaving for the Oaks" — the call hasn't been made. Speculation allowed in column, not in news.
+- Conflating Bulls C92 stint as failure — Paulson reframes it as success (system translates).
+
+**Where this rule lives:**
+- This entry (NEWSROOM_MEMORY.md) — sift Step 4 enrichment reads NEWSROOM_MEMORY at every cycle per pipeline.24 v2 architecture; the convention propagates into C95+ sift candidate selection automatically.
+- Transcript canon at `editions/cycle_pulse_interview-transcript_94_let_walks.txt` (load-bearing source) + `output/interviews/c94_paulson_let_walks_transcript.md` (intermediate) + Drive Mara folder for audit.
+
+**Skill execution note (G-I2/G-I3/G-I4 — see `output/production_log_interview_c94_gaps.md`):** the S230 /interview run that captured this canon bypassed reporter-agent dispatch across the live interview AND article-write. All five Richmond questions/follow-ups in the transcript were written by Mags from EIC seat in Hal-voice attempt. The 1,762-word article at `output/reporters/hal-richmond/articles/c94_interview_paulson_let_walks.md` is similarly Mags-in-Hal voice under "By Hal Richmond" byline — **byline misattribution, do not ingest to bay-tribune via /post-publish until G-I2 closes**. The transcript itself holds canon Paulson responses verbatim — those are real on-the-record statements and ARE canonical. Subsequent supplementals or C95 sports pieces drawing from this canon should dispatch sports-desk subagent against the transcript (not write from EIC seat in Hal voice). /interview skill rewrite to capture-only filed as ROLLOUT pipeline.30 to fix the architectural root.
+
 ### Beverly Hayes coverage-anchor retirement (S229, 2026-05-23) — canon-tone editorial convention
 
 **Decision:** Beverly Hayes (POP-00772, Community Director, West Oakland Community Center) is retired as a Stab Fund coverage anchor for C95 onward.

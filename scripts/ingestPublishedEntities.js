@@ -105,6 +105,101 @@ function deriveSlug(filePath, type, cycle) {
 }
 
 // ---------------------------------------------------------------------------
+// Letter-footer + pronoun signal extraction — S232 canon.3 followup.
+//
+// Closes the squatter problem surfaced in T9: NAMES INDEX is too sparse
+// (Name / role / neighborhood only, no age, no gender), so ingest defaults
+// BirthYear=2003 + relies on citizenDerivation.deriveCitizenProfile for
+// Gender. Both defaults regularly contradict bay-tribune canon (POP-00953
+// Carmen Solis ended up Gender=male; POP-00955 Keisha Morris ended up age 38
+// when E94 said 51).
+//
+// Letter-footer pattern in editions (E82/E86/E94 verified):
+//   — Name, AGE, Neighborhood[, Role]
+// Pronoun signal: count he/his/him vs she/her near each candidate's name.
+// ---------------------------------------------------------------------------
+
+// Capture group 1 = name (2-3 capitalized words, hyphen tolerant),
+// group 2 = age (1-3 digits), group 3 = neighborhood (until next comma or EOL),
+// group 4 = optional role.
+const LETTER_FOOTER_RE = /[—–-]\s+([A-Z][a-z]+(?:[- ][A-Z][a-z]+){1,3}),\s*(\d{1,3}),\s*([A-Za-z][^,\n]+?)(?:,\s*([^\n]+?))?\s*$/gm;
+
+function normalizeFullName(name) {
+  return String(name)
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+// Extract structured signals (age, neighborhood, role) from letter footers
+// in the published text. Returns a Map<normalizedName, signalRow>. Multiple
+// footers for the same name keep the first occurrence — operator can override
+// downstream if needed.
+function extractLetterFooterSignals(text) {
+  const out = new Map();
+  if (!text) return out;
+  LETTER_FOOTER_RE.lastIndex = 0;
+  let m;
+  while ((m = LETTER_FOOTER_RE.exec(text)) !== null) {
+    const name = m[1].trim();
+    const age = parseInt(m[2], 10);
+    const neighborhood = (m[3] || '').trim();
+    const role = (m[4] || '').trim();
+    if (!Number.isFinite(age) || age < 5 || age > 110) continue;
+    const key = normalizeFullName(name);
+    if (!key || key.split(' ').length < 2) continue;
+    if (out.has(key)) continue;
+    out.set(key, { name, age, neighborhood, role });
+  }
+  return out;
+}
+
+// Count he/his/him vs she/her in a ±400-character window around each
+// occurrence of `fullName`. Returns 'male' | 'female' | null (tie/no signal).
+function detectGenderFromPronouns(text, fullName) {
+  if (!text || !fullName) return null;
+  const escaped = fullName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const occRe = new RegExp('\\b' + escaped + '\\b', 'g');
+  const malePronoun = /\b(?:he|his|him)\b/gi;
+  const femalePronoun = /\b(?:she|her|hers)\b/gi;
+  let male = 0;
+  let female = 0;
+  let m;
+  occRe.lastIndex = 0;
+  while ((m = occRe.exec(text)) !== null) {
+    const lo = Math.max(0, m.index - 400);
+    const hi = Math.min(text.length, m.index + fullName.length + 400);
+    const window = text.slice(lo, hi);
+    const mc = (window.match(malePronoun) || []).length;
+    const fc = (window.match(femalePronoun) || []).length;
+    male += mc;
+    female += fc;
+  }
+  if (male === 0 && female === 0) return null;
+  if (male >= 2 && male > female * 2) return 'male';
+  if (female >= 2 && female > male * 2) return 'female';
+  return null;  // ambiguous — leave to citizenDerivation default
+}
+
+// Enrich a candidate with letter-footer and pronoun signals. Returns the
+// candidate (mutated in place) with signal* fields when available.
+function enrichCandidateWithProseSignals(candidate, footerMap, fullText) {
+  const fullName = candidate.first + ' ' + candidate.last;
+  const key = normalizeFullName(fullName);
+  const footer = footerMap.get(key);
+  if (footer) {
+    if (footer.age) candidate.signalAge = footer.age;
+    if (footer.neighborhood && !candidate.neighborhood) candidate.signalNeighborhood = footer.neighborhood;
+    if (footer.role) candidate.signalRole = footer.role;
+  }
+  const gender = detectGenderFromPronouns(fullText, fullName);
+  if (gender) candidate.signalGender = gender;
+  return candidate;
+}
+
+// ---------------------------------------------------------------------------
 // Section finder (reuses pattern from ingestEditionWiki.js)
 // ---------------------------------------------------------------------------
 function findSection(lines, header, endPatterns) {
@@ -442,10 +537,19 @@ async function appendCitizens(candidates, headers, maxPopNum, sheetsClient, shee
     // S184 (Phase 4.1.c) — derive 8 demographic + lifecycle fields per candidate.
     // Pre-T1 NAMES INDEX entries lack BirthYear / Neighborhood; defaults: age 38,
     // neighborhood drawn by frequency-weighted citywide distribution.
+    //
+    // S232 canon.3 follow-up — letter-footer prose signals (c.signalAge / c.signalNeighborhood
+    // / c.signalGender / c.signalRole) populated by enrichCandidateWithProseSignals
+    // override the heuristic defaults below. Signals fire when E*.txt carries
+    // canonical footer rows like "— Keisha Morris, 51, West Oakland, counselor"
+    // or pronoun-weighted prose ≥2 male/female words near the name.
     const seed = c.first + '|' + (c.last || '') + '|' + popId;
-    const birthYear = c.birthYear ? parseInt(c.birthYear, 10) : 2003;
+    const birthYear = c.birthYear
+      ? parseInt(c.birthYear, 10)
+      : (c.signalAge ? 2041 - c.signalAge : 2003);
     const age = 2041 - (Number.isFinite(birthYear) && birthYear > 1900 ? birthYear : 2003);
-    const profile = citizenDerivation.deriveCitizenProfile(seed, age, c.neighborhood || '', ledgerFreq);
+    const effectiveNeighborhood = c.neighborhood || c.signalNeighborhood || '';
+    const profile = citizenDerivation.deriveCitizenProfile(seed, age, effectiveNeighborhood, ledgerFreq);
 
     // Build row aligned with headers
     const row = headers.map(h => {
@@ -456,10 +560,10 @@ async function appendCitizens(candidates, headers, maxPopNum, sheetsClient, shee
       if (h === 'CreatedAt') return now;
       if (h === 'Last Updated') return now;
       if (h === 'BirthYear') return birthYear;
-      if (h === 'Neighborhood') return profile._neighborhood;
-      if (h === 'RoleType') return profile.RoleType;
+      if (h === 'Neighborhood') return effectiveNeighborhood || profile._neighborhood;
+      if (h === 'RoleType') return c.signalRole || profile.RoleType;
       if (h === 'EducationLevel') return profile.EducationLevel;
-      if (h === 'Gender') return profile.Gender;
+      if (h === 'Gender') return c.signalGender || profile.Gender;
       if (h === 'YearsInCareer') return profile.YearsInCareer;
       if (h === 'DebtLevel') return profile.DebtLevel;
       if (h === 'NetWorth') return profile.NetWorth;
@@ -709,6 +813,21 @@ async function main() {
   const citizenResolution = await resolveCitizens(parsedCitizens, sheetsClient, sheetId);
   const bizResolution = await resolveBusinesses(parsedBusinesses, sheetsClient, sheetId);
 
+  // S232 canon.3 follow-up — extract prose signals (letter footers + pronoun
+  // weights) and enrich each NEW candidate. Closes the squatter problem:
+  // pre-S232 NEW candidates landed with BirthYear=2003 + heuristic Gender
+  // because NAMES INDEX lacks age + pronoun information.
+  const footerMap = extractLetterFooterSignals(text);
+  let signalHits = 0;
+  for (const c of citizenResolution.candidates) {
+    enrichCandidateWithProseSignals(c, footerMap, text);
+    if (c.signalAge || c.signalNeighborhood || c.signalGender || c.signalRole) signalHits++;
+  }
+  if (citizenResolution.candidates.length > 0) {
+    console.log('[prose-signals] ' + signalHits + ' of ' + citizenResolution.candidates.length +
+      ' new candidates enriched (footer-rows: ' + footerMap.size + ').');
+  }
+
   console.log('CITIZENS:');
   console.log('  matched:    ' + citizenResolution.matched.length);
   console.log('  candidates: ' + citizenResolution.candidates.length + ' (new — would append)');
@@ -730,6 +849,14 @@ async function main() {
     citizenResolution.candidates.forEach((c, i) => {
       const popNum = citizenResolution.maxPopNum + 1 + i;
       console.log('  ' + 'POP-' + String(popNum).padStart(5, '0') + '  ' + c.first + ' ' + c.last + (c.description ? ' — ' + c.description.slice(0, 60) : ''));
+      const signals = [];
+      if (c.signalAge) signals.push('age=' + c.signalAge);
+      if (c.signalNeighborhood) signals.push('hood=' + c.signalNeighborhood);
+      if (c.signalGender) signals.push('gender=' + c.signalGender);
+      if (c.signalRole) signals.push('role=' + c.signalRole);
+      if (signals.length > 0) {
+        console.log('            [prose-signals] ' + signals.join(' | '));
+      }
     });
     console.log('');
   }
@@ -810,7 +937,18 @@ async function main() {
   console.log('Report written: ' + outPath);
 }
 
-main().catch(err => {
-  console.error('[FATAL]', err);
-  process.exit(1);
-});
+// S232 canon.3 follow-up — export prose-signal helpers for unit testing.
+// require.main guard keeps main() side-effect-free when required as a module.
+module.exports = {
+  extractLetterFooterSignals: extractLetterFooterSignals,
+  enrichCandidateWithProseSignals: enrichCandidateWithProseSignals,
+  detectGenderFromPronouns: detectGenderFromPronouns,
+  normalizeFullName: normalizeFullName
+};
+
+if (require.main === module) {
+  main().catch(err => {
+    console.error('[FATAL]', err);
+    process.exit(1);
+  });
+}

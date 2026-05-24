@@ -1,65 +1,111 @@
 ---
 name: build-world-summary
-description: Mechanical data assembly after a cycle run. Reads sheets + engine-review, produces world summary document. No editorial judgment.
-version: "1.0"
-updated: 2026-04-17
+description: Wrapper around scripts/buildWorldSummary.js — deterministic Node writer that assembles output/world_summary_c{XX}.md from sheets + engine_audit JSON. No LLM in the writer loop. Run after /engine-review, before /city-hall + /sift.
+version: "2.0"
+updated: 2026-05-24
 tags: [engine, active]
-effort: medium
-disable-model-invocation: true
+effort: low
+argument-hint: "[cycle-number]"
 ---
 
-# /build-world-summary — World Summary Assembly
+# /build-world-summary — World Summary Assembly (wrapper, v2.0)
+
+## What's new in v2.0 (S230, pipeline.31 closure)
+
+v2.0 collapses the skill to a thin wrapper around `scripts/buildWorldSummary.js` v1.0.0 (pipeline.25 S231). The script is the deterministic Node writer — reads sheets via `lib/sheets.js` + `output/engine_audit_c{XX}.json` + `output/production_log_city_hall_c{XX}.md`, emits `output/world_summary_c{XX}.md` with verbatim column rendering and zero LLM judgment. v1.x's model-assembled body retired — every fabrication vector (G-S6/G-S7/G-S17/G-PREP4) closed structurally because the model is no longer in the writer loop.
+
+The `disable-model-invocation: true` flag from v1.0 dropped — model invocation IS the call to the script; autonomous flow (e.g., /run-cycle) can fire this skill without operator gate.
 
 ## Purpose
 
-Assemble a factual world summary from engine output. No editorial judgment. No story picks. Just: what happened in the world this cycle.
+Assemble `output/world_summary_c{XX}.md` from engine output. Mechanical data assembly, no editorial judgment. The script is authoritative for content; this skill is the invocation contract + operator-facing documentation.
 
-This document is what Mags and Mike sift from together in `/sift`.
+## Usage
 
-## Inputs
+```bash
+node scripts/buildWorldSummary.js <cycle>
+```
 
-Read from sheets via service account:
+For dry-run inspection (writes to stdout, not disk):
 
-- **Riley_Digest** — current cycle + previous 2 cycles (3 total for trend detection)
-- **Oakland_Sports_Feed** — current cycle + previous 2 cycles (Mike's hand-written entries — treat as gospel)
+```bash
+node scripts/buildWorldSummary.js <cycle> --dry-run
+```
 
-Read from disk:
+For custom output path:
 
-- **Civic production log** — `output/production_log_city_hall_c{XX}.md` (if city-hall has run)
-- **Engine review** — `output/engine_review_c{XX}.md` (ailments, improvements, incoherence from `/engine-review`)
+```bash
+node scripts/buildWorldSummary.js <cycle> --output <path>
+```
 
-## What Goes In the Summary
+Default output path: `output/world_summary_c{XX}.md`.
 
-Follow the C91 template at `output/world_summary_c91.md`. Sections:
+## What the script reads
 
-1. **Header** — cycle number, season, weather, cycle weight, civic load, pattern flag, shock flag
-2. **City State** — population, employment, economy, sentiment, traffic, retail, tourism, nightlife, domain counts
-3. **Civic Decisions** — from city-hall production log. Locked canon. Copy, don't reinterpret.
-4. **Sports** — from Oakland_Sports_Feed. Mike's entries verbatim. Player stats, records, arcs.
-5. **Evening Texture** — famous people, restaurants, fast food, nightlife, city events, evening media, streaming
-6. **World Events** — from Riley_Digest. Health, civic, safety, faith events with severity and neighborhood.
-7. **Three-Cycle Trends** — compare current + previous 2 cycles. What's recurring, escalating, improving, or new.
-8. **Engine Review Findings** — from engine-review output. Pull actionable findings INTO this document fully — ailment headlines, what's stuck, what's improving, what's incoherent, recommended remedy paths. The world summary is the ONLY document sift reads for engine state. If a finding isn't in the world summary, sift won't see it. The engine review file stays on disk as the audit trail but its substance lives here.
-9. **Approval Ratings** — from civic production log or Civic_Office_Ledger.
+Sheets via `lib/sheets.js` (service account):
 
-## Output
+- **Riley_Digest** — current cycle + previous 2 cycles (trend detection, world events, city state)
+- **Oakland_Sports_Feed** — current cycle + previous 2 cycles. Sports section emits the `StoryAngle` column **verbatim per row** — no paraphrasing, no fabrication, no career-stat lookup. (Closes G-S6 / G-S7 / G-S17 root cause.)
+- **Civic_Office_Ledger** — Mayor + Council approval ratings
+- **Neighborhood_Map** — neighborhood table (sorted by RetailVitality desc, ties by name asc)
+- **World_Population** — population aggregate
+- **Simulation_Calendar** — cycle calendar state
 
-Write to `output/world_summary_c{XX}.md`
+Disk:
 
-Supermemory ingest happens in `/post-publish`, not here. This skill produces the file. Post-publish canonizes it.
+- **Engine audit JSON** — `output/engine_audit_c{XX}.json` (output of `/engine-review`). **FAIL LOUD** if missing — script exits non-zero with diagnostic pointing at the file path. Run `/engine-review {XX}` first.
+- **City-hall production log** — `output/production_log_city_hall_c{XX}.md` (if present). Civic Decisions section becomes a **pointer to this log** rather than LLM-extracted content (closes G-PREP4). If the log is absent, the Civic Decisions section says so explicitly — does NOT gate the rest of the run.
 
-## What This Skill Does NOT Do
+## What the script emits
 
-- Pick stories — that's `/sift`
-- Judge what matters — that's `/sift`
-- Frame articles — that's `/sift` and `/write-edition`
-- Check engine code — that's `/pre-mortem`
-- Diagnose world state — that's `/engine-review`
+Single Markdown file with these sections (codified in `scripts/buildWorldSummary.js` section emitters):
 
-## Where This Sits
+1. Header (cycle / season / weather / cycle weight / civic load / pattern + shock flags)
+2. City State (population / employment / economy / sentiment / domain counts / neighborhood table)
+3. Civic Decisions (pointer to `output/production_log_city_hall_c{XX}.md`)
+4. Sports (per-row `StoryAngle` verbatim from `Oakland_Sports_Feed`)
+5. Evening Texture (famous people / restaurants / nightlife / streaming from Riley_Digest)
+6. World Events (severity + neighborhood from Riley_Digest)
+7. Three-Cycle Trends (current vs prev 2 cycles)
+8. Engine Review Findings (structured pattern fields from engine_audit JSON; no editorial gloss)
+9. Approval Ratings (filtered to MAYOR-* + COUNCIL-D* rows, sorted by OfficeId)
+10. Footer (script version + source citation)
 
-Step 5 in the run-cycle chain. After engine-review. Before city-hall and sift.
+Section structure is owned by the script. If a section format needs changing, edit the emitter function in `scripts/buildWorldSummary.js` (and its test in `scripts/buildWorldSummary.test.js`) — do NOT edit prose in this skill or hand-edit the generated `.md`.
 
-## Sheet Access
+## Verification gate
 
-Service account via `lib/sheets.js`. Spreadsheet ID from `.env`.
+Script exits 0 on success with `Wrote N bytes to <output-path>` to stdout. Script exits non-zero on:
+
+- Missing `output/engine_audit_c{XX}.json`
+- Sheet read failures (auth / network)
+- Required column absent from source sheet
+
+Operator confirms file exists at expected path + has non-zero size. No deeper editorial verification needed at this step — content fidelity is enforced by the script's verbatim-column-render rules, not by post-hoc inspection.
+
+## Where this sits
+
+Step 5 in the run-cycle chain:
+
+1. `/engine-review` writes `output/engine_audit_c{XX}.json`
+2. `/city-hall-prep` + `/city-hall` write `output/production_log_city_hall_c{XX}.md` (optional input for Civic Decisions section pointer)
+3. **`/build-world-summary` runs this wrapper** → produces `output/world_summary_c{XX}.md`
+4. `/sift` reads world_summary as orientation-only (per `/sift` v2.0 §What's new — sheet-primary, world_summary is engine numbers + tables, not narrative content)
+
+`/post-publish` Step 2c handles Supermemory ingest. This skill produces the file; post-publish canonizes it.
+
+## What this skill does NOT do
+
+- Pick stories (`/sift`)
+- Judge what matters (`/sift`)
+- Frame articles (`/sift` + `/write-edition`)
+- Check engine code (`/pre-mortem`)
+- Diagnose world state (`/engine-review`)
+- Editorialize engine findings — Engine Review Findings section renders structured pattern fields verbatim from `engine_audit_c{XX}.json`; no "editorial pivot" gloss
+
+## Sources
+
+- **Script:** `scripts/buildWorldSummary.js` v1.0.0 (pipeline.25 S231)
+- **Test:** `scripts/buildWorldSummary.test.js` (12 groups / 80 assertions)
+- **Plan:** [[../../../docs/plans/2026-05-22-c94-gap-log-triage]] §3 C3 (originating gap-log cluster)
+- **Companion ROLLOUT row:** pipeline.31 (this skill rewrite) — research-build half of pipeline.25

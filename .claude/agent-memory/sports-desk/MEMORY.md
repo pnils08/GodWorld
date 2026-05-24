@@ -1,6 +1,6 @@
 # Sports Desk — Editorial Memory
 
-Last Updated: 2026-04-08 | Last edition written: C91
+Last Updated: 2026-05-24 | Last edition written: C94 + C94 Supplemental (Let-Walks Reset)
 
 ## A's Roster Notes (C87 confirmed — ALL verified against briefing/packet)
 - **Mark Aitken**: 1B (NOT 3B — recurring error). 3x Gold Glove, .273 AVG, 195 HR, Playoff MVP 2037. Community liaison.

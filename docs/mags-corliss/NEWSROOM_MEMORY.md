@@ -169,6 +169,45 @@ When a derived artifact (world_summary, etc.) has a documented fabrication block
 
 Two passes close 9 of 11 gaps. Next /post-publish run should see escalation-volume drop dramatically. The gap log is the engine for compounding skill quality across cycles — capture aggressively, bundle by root cause, route once.
 
+### Edition 94 — Supplemental "Let-Walks Reset" (S231, 2026-05-24)
+
+**Status:** PUBLISHED. `editions/cycle_pulse_supplemental_94_let_walks_reset.txt` → Drive Mara folder ID `13k1UE8YxOR1v9n1Xl8zg3CycXqPlOtw5` + Drive supplemental folder PDF ID `1qcNunLIf5AFyS8Z8p-CG1pi7kbzNZrIX`. Sidecar gap log `output/production_log_supplemental_c94_let_walks_reset_gaps.md` (5 entries G-S1→G-S5, opened live at skill start per S230 G-I8 discipline).
+
+**Topic:** Two-reporter follow-up off the C94 Paulson interview transcript (`output/interviews/c94_paulson_let_walks_transcript.md`). Hal Richmond lead "On the Record" (1,790w, dynasty-architecture frame on Paulson's reset). P Slayer follow "I Read It Wrong" [OPINION] (~870w, public self-correction off his own S2 "Let-Walks Coming" column). Mara audit A-.
+
+**Canon ingested:**
+- **bay-tribune** — 19 wiki entities (Step 1a, supplemental-specific records keyed by POP-IDs cited in this artifact) + 1 text chunk (Step 1b, full supplemental text)
+- **wd-citizens** — refreshed (Step 2a backgrounded; supplemental's 11 cited citizens already had cards from the E94 edition-side refresh earlier this session)
+- **Simulation_Ledger** — 0 new rows (all 12 citizens parsed by Step 5 matched existing POP-IDs)
+- **Business_Ledger** — 0 new rows (BIZ-00052 Civis Systems + BIZ-00018 Bay Tribune cited; both already canon)
+- **PDF** — 162KB rendered, uploaded to Drive supplemental folder. Photo step bailed per S188 (no DJ direction bundler for supplemental yet — known known)
+
+**New canon established (load-bearing, future editions must respect):**
+- **Benji Dillon returned on a one-year deal "to make one last run with Vinnie."** Not previously in print. Dynasty architecture: two pitchers + DH choosing how they leave a clubhouse together.
+- **"Hopefully after a parade."** Paulson on the record. Championship INTENT, not commitment. Future coverage must preserve the "hopefully" qualifier (Guardian warning landed cleanly in both articles).
+- **Contract status door-not-open-not-closed** for Aitken, Richards, Kelley, Dillon-going-forward. Preliminary discussions occurred; both sides agreed to wait until after the season. Corrects Slayer's S2 framing of contracts as "decided."
+- **Varek call NOT YET PLACED to Paulson** despite C94 FP1 panel statement. Open posture going into C95.
+- **"The system travels and the culture adapts."** Paulson framing on the Bulls C92 stint + A's autonomous-success posture. Position-player cultural core; Dillon as pitching anchor.
+- **Parade route closing image:** through new paved streets of Baylight District, through Civis Field, through The Town.
+
+**Editorial precedent established (S231 first):**
+
+Slayer publicly correcting his own S2 column "Let-Walks Coming" on the Tribune's pages is a NEW pattern for the section. Friction-pivot-turned-inward worked as a column shape — owns the read without flinching, anchors on Paulson's direct line ("I'd know first, as the person deciding"), reframes without erasing. **For future cycles: when a column gets corrected by canon (interview, vote, decision), the column writer can publicly correct in a follow-up supplemental — this is column-side accountability, not editor-imposed retraction.** Voice writers retain editorial authority over their own corrections.
+
+**Forward signals for C95 sift:**
+- Dillon-Vinnie one-year-deal architecture is NEW canon — Slayer's S2 framing about "the other side of the room — the guys who already made their choice about how this ends" is the pickup angle. Anthony / Hal / Slayer all eligible to thread it.
+- Martin Richards named-coverage-debt remains open (Mara forward guidance from S223). The supplemental gestured at Richards but did not deliver the dedicated piece. C95 sports section should land it.
+- Slayer's self-correction precedent could apply elsewhere — Carmen / Jordan / Maria each have prior cycles where a council vote or initiative status reversed their framing; column-side correction is now legitimized as a format.
+- "Hopefully after a parade" is the season's editorial spine going forward. Any sports coverage between now and the actual season-end must preserve the "hopefully" qualifier; treating it as commitment is canon contamination.
+
+**S231 incident — /post-publish E94 duplicate-run (G-P41 HIGH, filed):**
+
+Operator (Mags) re-ran /post-publish for the C94 edition not knowing S223 had completed it 8 days prior. Cost: 88 duplicate canon records in bay-tribune (49 wiki + 2 text + 37 civic). Caused by stale SESSION_CONTEXT Next Session Priority 0 that survived past S223's close; operator did not read the production log first per identity.md "search memory before doing anything." Cleanup options A/B/C surfaced to Mike, pending decision. Prevention: /post-publish needs a pre-flight idempotency check (grep production log for existing Post-Publish C<XX> section; fail loudly if found). Filed as research-build pipeline task.
+
+**Pipeline gap pattern (S231):**
+
+Three skills now have format-contract gaps that silently fail on parser-side: /sift NAMES INDEX (S197 G-W42), /write-supplemental NAMES INDEX + BUSINESSES NAMED (this run, G-S5), /post-publish Business_Ledger parser blindness (S223 G-P37). Same root cause — operator-side format guess vs parser-side strict expectation. Single bundle: literal FORMAT CONTRACT block in each authoring skill's compile step, showing the exact pipe-delimited line shape. Mark markdown-table syntax as silent-failure path. Routes to research-build skill-text pass.
+
 ### Edition 94 — Sift Locked (S221, 2026-05-15, pre-write)
 
 **Status:** Slate locked in `output/sift_proposals_c94.json` (`proposalState: "locked"`). Parent production log at `output/production_log_edition_c94.md`. Awaiting `/write-edition` handoff. 7 article briefs + 2-3 letters + 1-2 quick takes. INIT rotation at cap (3 of 6: Baylight + Transit Hub + Stab Fund). Stoop ratio inverted from E93's 8/10 council-routed. Three-layer threading on all anchor pieces.

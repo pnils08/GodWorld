@@ -67,10 +67,18 @@ const ENGINE_TERMS = [
   { pattern: /\bCreationDay\b/g },
   // System language — with exclusions for legitimate uses
   // "the engine" is OK as a sports metaphor ("engine of the offense")
-  // "Ledger" is OK in desk titles ("Civic Ledger") and place names
+  // "Ledger" used to be flagged here as engine-language, but it's overloaded
+  //   with metaphor use in journalism prose ("on the ledger", "ledger entry",
+  //   "an 8-0 ledger entry") AND Carmen Delaine's byline is "Bay Tribune
+  //   Civic Ledger". The actual engine-leak risk vocabulary is unique to
+  //   the simulation: "tension score / civic load / severity level / cycle
+  //   weight / raw decimals / story seed / phase NN" — those are caught
+  //   above and are not overloaded. Dropping "ledger" closes G-W51
+  //   (S231 pipeline.28) — pre-fix flagged 2 CRITICAL on natural metaphor
+  //   use in C94 (Editor's Desk + P Slayer columns) and would have
+  //   blocked publish if not manually rephrased.
   { pattern: /\bsimulation\b/gi },
   { pattern: /\bphase \d+/gi },
-  { pattern: /\bledger\b/gi, exclude: /Civic Ledger|Tribune.*Ledger/i },
   { pattern: /\bmedia intake\b/gi },
   { pattern: /\bstory seed\b/gi },
   // Edition number references (reporters don't know edition numbers)
@@ -167,16 +175,20 @@ function checkCouncilNames(editionText, canon) {
   }
 
   // Check for wrong first names (the Ashford/Mobley swap pattern)
-  for (const [lastName, member] of Object.entries(lastNameToMember)) {
+  // S231 pipeline.28 G-W53 dedup: collect by (memberLast, foundFirst) and
+  // emit once per unique pair with occurrenceCount + sample contexts.
+  // Pre-fix the same warning fired N times for N occurrences (e.g.,
+  // "Daniel Han ↔ Victor Han" fired 5× in C94 for 5 mentions of
+  // Daniel Han); validator output got noisy without adding signal.
+  const councilCollisions = new Map(); // key → { severity, member, foundFirst, occurrenceCount, samples }
+  for (const [, member] of Object.entries(lastNameToMember)) {
     // Look for "FirstName LastName" where LastName is a council member
     const pattern = new RegExp(`\\b([A-Z][a-z]+)\\s+${member.name.split(' ').pop()}\\b`, 'g');
     let match;
     while ((match = pattern.exec(editionText)) !== null) {
       const foundFirst = match[1];
       const expectedFirst = member.name.split(' ')[0];
-      // Skip if the match is part of a longer name or title
       if (foundFirst === expectedFirst) continue;
-      // Skip common words, titles, and articles that appear before council last names
       const skipWords = ['The', 'And', 'But', 'For', 'With', 'From', 'About', 'When', 'While',
         'After', 'Before', 'Since', 'Until', 'Where', 'That', 'This', 'These', 'Those',
         'Councilmember', 'Councilwoman', 'Councilman', 'Council', 'Member', 'Representative',
@@ -185,23 +197,45 @@ function checkCouncilNames(editionText, canon) {
         'Both', 'Each', 'Every', 'Either', 'Neither', 'Whether', 'Although',
         'Former', 'Current', 'Incoming', 'Outgoing', 'Late', 'Dear', 'Said'];
       if (skipWords.includes(foundFirst)) continue;
-      // S197 BUNDLE-C — last-name collision tier. CRITICAL when council
-      // member's full name appears in text (probable typo); WARNING when
-      // it doesn't (likely different person sharing the last name).
       const memberLast = member.name.split(' ').pop();
       const memberFirst = member.name.split(' ')[0];
       const sev = severityForLastNameMismatch(editionText, memberFirst, memberLast, foundFirst);
-      issues.push({
-        severity: sev,
-        check: 'Council Name',
-        detail: (sev === CRITICAL
-          ? `Found "${foundFirst} ${memberLast}" — should be "${member.name}" (${member.district}, ${member.faction})`
-          : `Found "${foundFirst} ${memberLast}" — shares last name with "${member.name}" (${member.district}, ${member.faction}); council member's full name not in text — verify this is a different person`),
-        fix: (sev === CRITICAL
-          ? `Replace "${foundFirst} ${memberLast}" → "${member.name}"`
-          : `Verify "${foundFirst} ${memberLast}" is not a typo of council member "${member.name}"`)
-      });
+      const key = `${memberLast}|${foundFirst}|${sev}`;
+      const sampleContext = editionText.slice(
+        Math.max(0, match.index - 30),
+        Math.min(editionText.length, match.index + match[0].length + 30)
+      ).replace(/\s+/g, ' ').trim();
+      const existing = councilCollisions.get(key);
+      if (existing) {
+        existing.occurrenceCount++;
+        if (existing.samples.length < 3) existing.samples.push(sampleContext);
+      } else {
+        councilCollisions.set(key, {
+          severity: sev,
+          member,
+          memberLast,
+          foundFirst,
+          occurrenceCount: 1,
+          samples: [sampleContext],
+        });
+      }
     }
+  }
+  // Flush deduped collisions to issues.
+  for (const c of councilCollisions.values()) {
+    const occNote = c.occurrenceCount > 1
+      ? ` (${c.occurrenceCount}× in edition; sample: "${c.samples.slice(0, 2).join('" / "')}")`
+      : '';
+    issues.push({
+      severity: c.severity,
+      check: 'Council Name',
+      detail: (c.severity === CRITICAL
+        ? `Found "${c.foundFirst} ${c.memberLast}"${occNote} — should be "${c.member.name}" (${c.member.district}, ${c.member.faction})`
+        : `Found "${c.foundFirst} ${c.memberLast}"${occNote} — shares last name with "${c.member.name}" (${c.member.district}, ${c.member.faction}); council member's full name not in text — verify this is a different person`),
+      fix: (c.severity === CRITICAL
+        ? `Replace "${c.foundFirst} ${c.memberLast}" → "${c.member.name}"`
+        : `Verify "${c.foundFirst} ${c.memberLast}" is not a typo of council member "${c.member.name}"`)
+    });
   }
 
   // Check for wrong district assignments
@@ -328,6 +362,80 @@ function checkVoteBreakdownConsistency(editionText, canon) {
   return issues;
 }
 
+// Position name mapping for natural language — hoisted so derivePositionCode
+// can build its reverse-lookup once per process. Keys are canonical position
+// codes (LF, P, SP, etc.); values are natural-language terms the code may
+// appear as in journalism prose.
+const POSITION_NAMES = {
+  'P': ['pitcher', 'starting pitcher', 'reliever', 'closer', 'on the mound'],
+  'SP': ['pitcher', 'starting pitcher', 'starter', 'on the mound'],
+  'RP': ['reliever', 'relief pitcher', 'bullpen'],
+  'CL': ['closer', 'closing pitcher'],
+  'C': ['catcher', 'behind the plate'],
+  '1B': ['first baseman', 'first base', 'at first'],
+  '2B': ['second baseman', 'second base', 'at second'],
+  '3B': ['third baseman', 'third base', 'at third', 'hot corner'],
+  'SS': ['shortstop', 'short stop', 'at short'],
+  'LF': ['left fielder', 'left field', 'in left'],
+  'CF': ['center fielder', 'center field', 'in center'],
+  'RF': ['right fielder', 'right field', 'in right'],
+  'DH': ['designated hitter', 'DH'],
+  'Manager': ['manager', 'skipper'],
+};
+
+// S231 pipeline.28 G-W52 fix: derive a canonical position code (LF, P, SP, etc.)
+// from a free-form player.position string. Canon's roster carries strings like
+// "Left Fielder, Las Vegas Aviators (AAA)" for AAA call-ups — pre-fix the
+// code lookup keyed on this full string, returned undefined, and the
+// skipPositions Set was empty, which made every wrong-position regex fire
+// against natural prose for ANY AAA call-up using their actual position name
+// ("JR Rosado, the left fielder..." flagged CRITICAL).
+//
+// Algorithm: scan the position string lower-cased for any term in POSITION_NAMES;
+// first match wins, with longer terms preferred (so "starting pitcher" beats
+// "pitcher"). Also accepts exact code matches at word boundaries ("1B", "DH").
+// Canonical position-string indicators: canon roster strings carry verbose
+// position descriptors ("Left Fielder, Las Vegas Aviators (AAA)" /
+// "Starting Pitcher" / "Manager"). These map each specific indicator to its
+// code. The wider POSITION_NAMES table is for equivalence checking in
+// natural-prose attribution (P player called "pitcher" is OK), NOT for
+// reverse-resolving canon strings. Kept separate so the two concerns
+// don't contaminate each other (S231 pipeline.28 G-W52).
+const CANON_POSITION_INDICATORS = [
+  // Order: most-specific first. First match wins.
+  ['starting pitcher', 'SP'],
+  ['relief pitcher', 'RP'],
+  ['closing pitcher', 'CL'],
+  ['designated hitter', 'DH'],
+  ['first baseman', '1B'],
+  ['second baseman', '2B'],
+  ['third baseman', '3B'],
+  ['left fielder', 'LF'],
+  ['center fielder', 'CF'],
+  ['right fielder', 'RF'],
+  ['shortstop', 'SS'],
+  ['catcher', 'C'],
+  ['manager', 'Manager'],
+  ['closer', 'CL'],     // after "closing pitcher" so verbose form wins
+  ['pitcher', 'P'],     // generic pitcher last
+];
+
+function derivePositionCode(positionString) {
+  if (!positionString) return null;
+  const lower = String(positionString).toLowerCase();
+  // Pass 1: canonical indicator lookup.
+  for (const [indicator, code] of CANON_POSITION_INDICATORS) {
+    if (lower.includes(indicator)) return code;
+  }
+  // Pass 2: exact code at word boundary ("(LF)", "1B", "DH", "SS").
+  const allCodes = Array.from(new Set(CANON_POSITION_INDICATORS.map(([, c]) => c)));
+  for (const code of allCodes) {
+    const re = new RegExp(`\\b${code.toLowerCase()}\\b`);
+    if (re.test(lower)) return code;
+  }
+  return null;
+}
+
 function checkPlayerPositions(editionText, canon) {
   const issues = [];
   if (!canon) return issues;
@@ -339,28 +447,16 @@ function checkPlayerPositions(editionText, canon) {
 
   for (const player of roster) {
     const name = player.name;
-    const pos = player.position || player.roleType;
-    positionMap[name.toLowerCase()] = { name, position: pos };
-    if (pos === 'DH') dhPlayers.push(name);
+    const rawPos = player.position || player.roleType;
+    // Derive canonical code so the equivalence + skip logic below can key on
+    // POSITION_NAMES entries even when canon carries a verbose position
+    // string ("Left Fielder, Las Vegas Aviators (AAA)").
+    const positionCode = derivePositionCode(rawPos) || rawPos;
+    positionMap[name.toLowerCase()] = { name, position: positionCode, rawPosition: rawPos };
+    if (positionCode === 'DH') dhPlayers.push(name);
   }
 
-  // Position name mapping for natural language
-  const positionNames = {
-    'P': ['pitcher', 'starting pitcher', 'reliever', 'closer', 'on the mound'],
-    'SP': ['pitcher', 'starting pitcher', 'starter', 'on the mound'],
-    'RP': ['reliever', 'relief pitcher', 'bullpen'],
-    'CL': ['closer', 'closing pitcher'],
-    'C': ['catcher', 'behind the plate'],
-    '1B': ['first baseman', 'first base', 'at first'],
-    '2B': ['second baseman', 'second base', 'at second'],
-    '3B': ['third baseman', 'third base', 'at third', 'hot corner'],
-    'SS': ['shortstop', 'short stop', 'at short'],
-    'LF': ['left fielder', 'left field', 'in left'],
-    'CF': ['center fielder', 'center field', 'in center'],
-    'RF': ['right fielder', 'right field', 'in right'],
-    'DH': ['designated hitter', 'DH'],
-    'Manager': ['manager', 'skipper'],
-  };
+  const positionNames = POSITION_NAMES;
 
   // For each player, check if a WRONG position is DIRECTLY attributed
   // Use tight patterns that require direct attribution, not just proximity
@@ -592,16 +688,18 @@ function checkPlayerFirstNames(editionText, canon, knownOfficialNames) {
   // Known civic official first names by last name — skip these (not players)
   const officialFirstsByLast = knownOfficialNames || {};
 
+  // S231 pipeline.28 G-W53 dedup (player-name path — same as council path
+  // above). Collect collisions into a Map keyed by (lastName, foundFirst, sev)
+  // so 5× "Daniel Han ↔ Victor Han" emits ONE issue with occurrenceCount=5
+  // + sample contexts, not 5 duplicate issues.
+  const playerCollisions = new Map();
   for (const [lastNameLower, player] of Object.entries(lastNameToPlayer)) {
-    // Search for "[SomeFirstName] [LastName]" in the edition
     const escapedLast = player.lastName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const pattern = new RegExp(`\\b([A-Z][a-z]+)\\s+${escapedLast}\\b`, 'g');
     let match;
     while ((match = pattern.exec(editionText)) !== null) {
       const foundFirst = match[1];
-      if (foundFirst === player.firstName) continue; // correct name
-
-      // Skip common words that appear before names
+      if (foundFirst === player.firstName) continue;
       const skipWords = ['The', 'And', 'But', 'For', 'With', 'From', 'About', 'When', 'While',
         'After', 'Before', 'Since', 'Until', 'Where', 'That', 'This', 'These', 'Those',
         'Manager', 'Coach', 'Pitcher', 'Catcher', 'Shortstop', 'Outfielder', 'Baseman',
@@ -609,27 +707,43 @@ function checkPlayerFirstNames(editionText, canon, knownOfficialNames) {
         'Both', 'Each', 'Every', 'Either', 'Neither', 'Whether', 'Although',
         'Former', 'Current', 'Rookie', 'Veteran', 'Said', 'Like', 'Via', 'Per'];
       if (skipWords.includes(foundFirst)) continue;
-
-      // Skip if this is a known civic official with this last name (not a player error)
       const officialFirsts = officialFirstsByLast[lastNameLower] || [];
       if (officialFirsts.includes(foundFirst)) continue;
-
-      // S197 BUNDLE-C — tier by full-name presence. Same false-positive
-      // class as council/civic checks: a citizen sharing a last name with
-      // a player shouldn't trigger CRITICAL. Demote to WARNING when the
-      // player's full name is absent from the edition.
       const sev = severityForLastNameMismatch(editionText, player.firstName, player.lastName, foundFirst);
-      issues.push({
-        severity: sev,
-        check: 'Player Name',
-        detail: (sev === CRITICAL
-          ? `Found "${foundFirst} ${player.lastName}" — roster says "${player.fullName}"`
-          : `Found "${foundFirst} ${player.lastName}" — shares last name with roster player "${player.fullName}"; player's full name not in text — verify this is a different person`),
-        fix: (sev === CRITICAL
-          ? `Replace "${foundFirst} ${player.lastName}" → "${player.fullName}"`
-          : `Verify "${foundFirst} ${player.lastName}" is not a typo of roster player "${player.fullName}"`)
-      });
+      const key = `${player.lastName}|${foundFirst}|${sev}`;
+      const sampleContext = editionText.slice(
+        Math.max(0, match.index - 30),
+        Math.min(editionText.length, match.index + match[0].length + 30)
+      ).replace(/\s+/g, ' ').trim();
+      const existing = playerCollisions.get(key);
+      if (existing) {
+        existing.occurrenceCount++;
+        if (existing.samples.length < 3) existing.samples.push(sampleContext);
+      } else {
+        playerCollisions.set(key, {
+          severity: sev,
+          player,
+          foundFirst,
+          occurrenceCount: 1,
+          samples: [sampleContext],
+        });
+      }
     }
+  }
+  for (const c of playerCollisions.values()) {
+    const occNote = c.occurrenceCount > 1
+      ? ` (${c.occurrenceCount}× in edition; sample: "${c.samples.slice(0, 2).join('" / "')}")`
+      : '';
+    issues.push({
+      severity: c.severity,
+      check: 'Player Name',
+      detail: (c.severity === CRITICAL
+        ? `Found "${c.foundFirst} ${c.player.lastName}"${occNote} — roster says "${c.player.fullName}"`
+        : `Found "${c.foundFirst} ${c.player.lastName}"${occNote} — shares last name with roster player "${c.player.fullName}"; player's full name not in text — verify this is a different person`),
+      fix: (c.severity === CRITICAL
+        ? `Replace "${c.foundFirst} ${c.player.lastName}" → "${c.player.fullName}"`
+        : `Verify "${c.foundFirst} ${c.player.lastName}" is not a typo of roster player "${c.player.fullName}"`)
+    });
   }
 
   return issues;
@@ -792,6 +906,11 @@ function checkCivicOfficeNames(editionText, civicOfficials, knownPlayerNames) {
   // Known player first names by last name — skip these (not civic errors)
   const playerFirstsByLast = knownPlayerNames || {};
 
+  // S231 pipeline.28 G-W53 dedup (civic-official path — third instance of
+  // the same per-occurrence emission bug). C94 surfaced 5× "Daniel Han ↔
+  // Victor Han" warnings for 5 mentions of Daniel Han; deduped here to
+  // one warning with occurrenceCount + sample contexts.
+  const officialCollisions = new Map();
   for (const official of civicOfficials) {
     const holder = (official.Holder || '').trim();
     const title = (official.Title || '').trim();
@@ -802,42 +921,57 @@ function checkCivicOfficeNames(editionText, civicOfficials, knownPlayerNames) {
     const lastName = parts[parts.length - 1];
     if (lastName.length < 3) continue;
 
-    // Search for wrong first name + this last name, same as player/council checks
     const escapedLast = lastName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const pattern = new RegExp(`\\b([A-Z][a-z]+)\\s+${escapedLast}\\b`, 'g');
     let match;
     while ((match = pattern.exec(editionText)) !== null) {
       const foundFirst = match[1];
       if (foundFirst === firstName) continue;
-
       const skipWords = ['The', 'And', 'But', 'For', 'With', 'From', 'About', 'When', 'While',
         'After', 'Before', 'Since', 'Until', 'Where', 'That', 'This',
         'Councilmember', 'Councilwoman', 'Councilman', 'Council', 'Chief', 'Director',
         'Mr', 'Mrs', 'Ms', 'Dr', 'If', 'Or', 'Even', 'Not', 'Just', 'Only',
         'Former', 'Current', 'Said', 'Mayor', 'Deputy'];
       if (skipWords.includes(foundFirst)) continue;
-
-      // Skip if this is a known player with this last name (not a civic error)
       const playerFirsts = playerFirstsByLast[lastName.toLowerCase()] || [];
       if (playerFirsts.includes(foundFirst)) continue;
-
-      // S197 BUNDLE-C — tier by full-name presence. C93 surfaced 99 CRITICAL
-      // findings with ~95% false positives because every citizen sharing a
-      // last name with a Civic_Office_Ledger official triggered "wrong first
-      // name." Maria Reyes (citizen) shouldn't trigger Caleb Reyes (Public
-      // Defender) as a CRITICAL.
       const sev = severityForLastNameMismatch(editionText, firstName, lastName, foundFirst);
-      issues.push({
-        severity: sev,
-        check: 'Civic Official Name',
-        detail: (sev === CRITICAL
-          ? `Found "${foundFirst} ${lastName}" — Civic_Office_Ledger says "${holder}" (${title})`
-          : `Found "${foundFirst} ${lastName}" — shares last name with civic official "${holder}" (${title}); official's full name not in text — verify this is a different person`),
-        fix: (sev === CRITICAL
-          ? `Replace "${foundFirst} ${lastName}" → "${holder}"`
-          : `Verify "${foundFirst} ${lastName}" is not a typo of civic official "${holder}"`)
-      });
+      const key = `${lastName}|${foundFirst}|${sev}`;
+      const sampleContext = editionText.slice(
+        Math.max(0, match.index - 30),
+        Math.min(editionText.length, match.index + match[0].length + 30)
+      ).replace(/\s+/g, ' ').trim();
+      const existing = officialCollisions.get(key);
+      if (existing) {
+        existing.occurrenceCount++;
+        if (existing.samples.length < 3) existing.samples.push(sampleContext);
+      } else {
+        officialCollisions.set(key, {
+          severity: sev,
+          holder,
+          title,
+          lastName,
+          foundFirst,
+          occurrenceCount: 1,
+          samples: [sampleContext],
+        });
+      }
     }
+  }
+  for (const c of officialCollisions.values()) {
+    const occNote = c.occurrenceCount > 1
+      ? ` (${c.occurrenceCount}× in edition; sample: "${c.samples.slice(0, 2).join('" / "')}")`
+      : '';
+    issues.push({
+      severity: c.severity,
+      check: 'Civic Official Name',
+      detail: (c.severity === CRITICAL
+        ? `Found "${c.foundFirst} ${c.lastName}"${occNote} — Civic_Office_Ledger says "${c.holder}" (${c.title})`
+        : `Found "${c.foundFirst} ${c.lastName}"${occNote} — shares last name with civic official "${c.holder}" (${c.title}); official's full name not in text — verify this is a different person`),
+      fix: (c.severity === CRITICAL
+        ? `Replace "${c.foundFirst} ${c.lastName}" → "${c.holder}"`
+        : `Verify "${c.foundFirst} ${c.lastName}" is not a typo of civic official "${c.holder}"`)
+    });
   }
 
   return issues;
@@ -1097,4 +1231,17 @@ Exit codes:
   }
 }
 
-main().catch(err => { console.error('Fatal:', err.message); process.exit(2); });
+// Exports for test harnesses + future modular consumers. The script's primary
+// invocation path remains the CLI `main()` below; require.main guard added
+// S231 pipeline.28 G-W52 so the script can be require()'d without auto-running
+// against the live spreadsheet.
+module.exports = {
+  derivePositionCode,
+  POSITION_NAMES,
+  checkPlayerPositions,
+  checkCitizenNames,
+};
+
+if (require.main === module) {
+  main().catch(err => { console.error('Fatal:', err.message); process.exit(2); });
+}

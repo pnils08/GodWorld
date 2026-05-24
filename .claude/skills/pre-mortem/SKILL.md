@@ -42,10 +42,10 @@ grep -rn "Math\.random" phase*/ utilities/ --include="*.js" \
 For each hit, classify:
 
 - **CRITICAL** — the file is on the cycle path (invoked by `godWorldEngine2.js` or any phase function that runs during a cycle). Trace callers if unsure: `grep -rn "functionName(" phase*/ scripts/ lib/ --include="*.js"`.
-- **WARNING (acknowledged, off-path)** — the file is outside the cycle path. Known acknowledged sites as of 2026-04-19:
-  - `phase05-citizens/civicInitiativeEngine.js:2009` — manual-vote path, explicit "no ctx.rng outside cycle" comment
-  - `phase05-citizens/citizenContextBuilder.js:1068` — `getCitizensForQuotes`, media-room helper
-  - `phase05-citizens/generateChicagoCitizensv1.js:433` — `testChicagoCitizenGeneration_`, test function
+- **WARNING (acknowledged, off-path)** — the file is outside the cycle path. Known acknowledged sites keyed by **function name** (not line number) per S230 G-RC5 — line numbers drift on every refactor; function names are stable. Grep with `grep -nE 'function <funcName>|<funcName> = function|<funcName>:' <file>` to find current location.
+  - `phase05-citizens/civicInitiativeEngine.js#runManualVote_` — manual-vote path, explicit "no ctx.rng outside cycle" comment (S230 verified drift: line 2009 → 2069, +60)
+  - `phase05-citizens/citizenContextBuilder.js#getCitizensForQuotes` — media-room helper (S230 verified drift: line 1068 → 1064, −4)
+  - `phase05-citizens/generateChicagoCitizensv1.js#testChicagoCitizenGeneration_` — test function (S230 verified drift: line 433 → 434, +1; file disabled S229 but retained for reversibility)
 - **CLEAN (defensive throw)** — the mention is inside a `throw new Error(...)` string for a removed fallback. These are guards, not violations. Pattern: `phase04-events/generationalEventsEngine.js:105,111`, `phase05-citizens/generateGenericCitizens.js:98`, `utilities/safeRand.js:35`.
 
 Anything not on the acknowledged or defensive-throw lists is CRITICAL until proven otherwise — verify by tracing callers back to the engine entry point.
@@ -128,7 +128,7 @@ CRITICAL (will cause silent failures in the cycle):
 
 WARNINGS (acknowledged off-path or doc drift):
 3. [file:line] — Column "HousingStress" in householdFormationEngine.js not found in SCHEMA_HEADERS.md
-4. [file:line] — Math.random in civicInitiativeEngine.js:2009 — manual-vote path, outside cycle (known acknowledged)
+4. [file:line] — Math.random in civicInitiativeEngine.js#runManualVote_ — manual-vote path, outside cycle (known acknowledged; grep to resolve current line)
 5. [file:line] — Neighborhood "Coliseum District" in someFile.js:89 not in canon-12 OR Neighborhood_Map 17 OR child-mapping
 
 CLEAN:

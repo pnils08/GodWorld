@@ -10,38 +10,42 @@ Four terminals (S211: mags trimmed; research-build is apparatus steward. S221: u
 
 | Terminal | Focus | Production Log |
 |----------|-------|---------------|
-| **Civic** | `/city-hall-prep` → `/city-hall` — voices govern, projects hallucinate | `production_log_city_hall_c{XX}.md` |
-| **Media** | `/sift` → `/write-edition` → `/post-publish` + `/edition-print`; also `/write-supplemental`, `/dispatch`, `/interview`, `/podcast` | `production_log_edition_c{XX}.md` |
-| **Engine** | Engine code, ledger maintenance, ingest scripts, `clasp push`, trait profile generation. Hosts `/run-cycle`, `/pre-flight`, `/pre-mortem`, `/engine-review`, `/build-world-summary` | None |
+| **Civic** | `/city-hall-prep` → `/city-hall` — voices govern, projects hallucinate | `output/production_log_c{XX}.md` (unified, target) |
+| **Media** | `/sift` → `/write-edition` → `/post-publish` + `/edition-print`; also `/write-supplemental`, `/dispatch`, `/interview`, `/podcast` | `output/production_log_c{XX}.md` (unified, target) |
+| **Engine** | Engine code, ledger maintenance, ingest scripts, `clasp push`, trait profile generation. Hosts `/run-cycle`, `/pre-flight`, `/pre-mortem`, `/engine-review`, `/build-world-summary` | None (no production log; substrate operations log at exec level) |
 | **Research/Build** | Skills, docs, research, architecture | None |
+
+**Target convention (S230 G-EPD3):** one production log per cycle at `output/production_log_c{XX}.md`. Every cycle-active skill (civic + media) appends its named section. C93 implemented unified shape; C94 reverted to per-terminal split (`production_log_edition_c94.md` + `production_log_city_hall_c94_*.md`, transitional). Per-skill path-cascade audits (5-7 skills read/write the unified path) filed as `pipeline.32` follow-up — this table records the convention as target state, not current implementation. See §Production Log Lifecycle below for shape + `docs/media/production_log_template.md` for per-section spec.
 
 ---
 
 ## Master Chain
 
+**Terminal tags inline** (S230 G-EPD1) — `[terminal]` after each skill name. §Architecture table at top of doc still lists terminal-to-skill mapping authoritatively for cross-reference.
+
 ```
-/run-cycle (orchestrator)
-    ├── /pre-flight            — verify manual inputs (sports feed, intakes, tracker, ratings)
-    ├── /pre-mortem            — engine code health scan
-    ├── Mike runs cycle in GAS — engine runs in Google's cloud
-    ├── /engine-review         — Phase 38 auditor → 7-field pattern briefs
-    └── /build-world-summary   — factual world summary, ingest to world-data
+/run-cycle [engine-sheet] (orchestrator)
+    ├── /pre-flight [engine-sheet]         — verify manual inputs (sports feed, intakes, tracker, ratings)
+    ├── /pre-mortem [engine-sheet]         — engine code health scan
+    ├── Mike runs cycle in GAS [engine-sheet] — engine runs in Google's cloud
+    ├── /engine-review [engine-sheet]      — Phase 38 auditor → 7-field pattern briefs
+    └── /build-world-summary [engine-sheet] — factual world summary, ingest to world-data
                 │
                 ▼
-/city-hall-prep                — reads world summary + engine review + sheets → pending_decisions.md per voice
+/city-hall-prep [civic]        — reads world summary + engine review + sheets → pending_decisions.md per voice
                 │
                 ▼
-/city-hall                     — voices govern, projects hallucinate, tracker updates (locked canon)
+/city-hall [civic]             — voices govern, projects hallucinate, tracker updates (locked canon)
                 │
                 ▼
-/sift                          — editorial planning, the game moment (Mags proposes, Mike picks)
+/sift [media]                  — editorial planning, the game moment (Mags proposes, Mike picks)
                 │
                 ▼
-/write-edition                 — executes sift output: launch reporters, review, compile, reviewer chain, publish
+/write-edition [media]         — executes sift output: launch reporters, review, compile, reviewer chain, publish
                 │
-                ├──▶ /edition-print      (parallel — DJ Hartley art direction, photos, PDF, Drive)
-                ├──▶ /post-publish       (feedback loop close — canon, ratings, grading, criteria)
-                └──▶ /podcast            (optional post-edition add-on — audio)
+                ├──▶ /edition-print [media]      (parallel — DJ Hartley art direction, photos, PDF, Drive)
+                ├──▶ /post-publish [media]       (feedback loop close — canon, ratings, grading, criteria)
+                └──▶ /podcast [media]            (optional post-edition add-on — audio)
 ```
 
 **Handoff:** every stage leaves on-disk output the next stage reads. No in-memory handoffs.
@@ -291,7 +295,8 @@ Not alternate starts. Run AFTER an edition publishes. Append to the media produc
 | `engine_audit_c{XX}.json` | Phase 38 auditor (inside `/engine-review`) | `/sift` for storyHandles + capabilityHooks |
 | `baseline_briefs_c{XX}.json` | Phase 38.8 generator | `/sift` Step 2b triage |
 | `engine_anomalies_c{XX}.json` | Phase 38.7 anomaly gate | `/sift`, `/write-edition` Tier C flagging |
-| Civic production log | `/city-hall` Step 7 | `/sift` Step 1 |
+| Civic production log (legacy per-terminal split) | `/city-hall` Step 7 | `/sift` Step 1 — DEPRECATED path; use unified log per next row |
+| Prior-cycle production log (unified, target convention) | `/post-publish` closing block (prior cycle) | `/city-hall-prep` Step 1 (civic-continuity carry-forward) + `/sift` Step 1 (canon archive search). Path: `output/production_log_c<XX-1>.md`. Pre-S230 per-terminal path `production_log_city_hall_c<XX-1>.md` is DEPRECATED (G-EPD3 / pipeline.32 cascade). |
 | World summary | `/build-world-summary` output | All media skills |
 | Truesource | `truesource_reference.json` | Citizen/player verification |
 | Bay-tribune Supermemory | Canon archive | Verification, continuity |
@@ -363,9 +368,31 @@ Lane schema contract: `docs/engine/REVIEWER_LANE_SCHEMA.md` — four fields (pro
 - **Cycles only.** Edition numbers FORBIDDEN in article text. "Cycle" allowed and encouraged (per `.claude/rules/newsroom.md`, S146 reversal).
 - **Ages: `2041 − BirthYear`.** Every citizen age uses the 2041 anchor. Don't trust `Age` in derived docs.
 - **Agents get identity + assignment.** No 170K char data dumps. Bounded input. Memory Fence (Layer 2) + Context Scan (Layer 4) before every brief handoff.
-- **One production log per terminal.** Civic has its own. Media skills all append to one.
+- **One production log per cycle (target convention, S230 G-EPD3).** Every cycle-active skill appends its named section at `output/production_log_c{XX}.md`. Log persists from `/city-hall-prep` (opens) through `/post-publish` (closes). C93 implemented unified shape; C94 reverted to per-terminal split (transitional). Per-skill path-cascade audits filed as `pipeline.32`. See §Production Log Lifecycle below + `docs/media/production_log_template.md` for shape.
 - **City-hall is mandatory — never skippable.** No alternate path. Voices govern every cycle (when decisions are due); the edition reports FROM city-hall's output.
 - **The world runs on cycles.** The newspaper covers what the engine produced. The engine doesn't simulate sports — Mike does.
+
+---
+
+## Production Log Lifecycle (S230 G-EPD4)
+
+The production log is the spine that connects every stage of a cycle. One log per cycle, opened at cycle start, appended by each cycle-active skill, closed at /post-publish. The unified path `output/production_log_c{XX}.md` is the target convention (C93 implemented; C94 reverted to per-terminal split; per-skill path-cascade audits filed as `pipeline.32`).
+
+**Lifecycle stages:**
+
+| Stage | Skill | Action | Section header |
+|-------|-------|--------|---------------|
+| **Open** | `/city-hall-prep [civic]` | Creates `output/production_log_c{XX}.md` with cycle-header + carry-forward table + tracker snapshot + approval ratings snapshot | `## /city-hall-prep (S<NNN>) — <YYYY-MM-DD HH:MM>` |
+| **Append** | `/city-hall [civic]` | Appends governance section (voice statements, decisions, vote tallies, ImplementationPhase advances) | `## /city-hall (S<NNN>) — <YYYY-MM-DD HH:MM>` |
+| **Append** | `/sift [media]` | Appends editorial-planning section (slate proposals, six-decision triage outcomes, Memory-Fence-wrapped excerpts) | `## /sift (S<NNN>) — <YYYY-MM-DD HH:MM>` |
+| **Append** | `/write-edition [media]` | Appends edition-build section (reporter dispatches, reviewer chain outcomes, compile + publish events) | `## /write-edition (S<NNN>) — <YYYY-MM-DD HH:MM>` |
+| **Close** | `/post-publish [media]` | Appends closing block with edition Drive ID + bay-tribune ingest doc IDs + world-data ingest summary + ratings applied; this marks the log as canonized | `## /post-publish (S<NNN>) — <YYYY-MM-DD HH:MM>` + final `### Closing Block` sub-section |
+
+**What "closed" means:** the log is no longer mutable after /post-publish writes the closing block. Future cycles read it for continuity (carry-forward initiatives, approval baselines, prior decisions). The closing block is the canonization signal — `/city-hall-prep` next cycle reads from the closing block down for the carry-forward table.
+
+**Per-section content spec + closing-block field list:** `docs/media/production_log_template.md` is the canonical template every section conforms to. New skills that touch the log load the template at run time.
+
+**Sidecar gap logs** (e.g., `production_log_edition_c{XX}_write_gaps.md`) live alongside the production log as named sidecars per `docs/plans/GAP_LOG_TEMPLATE.md`; they are NOT appended into the production log itself (separation of canonical record from heavy-skill gap capture per ADR-0005).
 
 ---
 

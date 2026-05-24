@@ -1,9 +1,9 @@
 ---
 name: pre-flight
 description: Verify manual inputs are ready before running a cycle. Sports feed, intakes, initiative tracker, coverage ratings.
-version: "1.0"
-updated: 2026-04-17
-tags: [media, active]
+version: "1.1"
+updated: 2026-05-24
+tags: [engine-sheet, active]
 effort: low
 disable-model-invocation: true
 ---
@@ -38,13 +38,34 @@ NOT WIRED. Placeholder for when storyline intake from editions feeds back to the
 
 ## Step 5: Initiative Tracker
 
-Read `Initiative_Tracker` for all rows. Check:
+Read `Initiative_Tracker` for all rows. Check **only**:
 
-- Every row has Name, Status, ImplementationPhase, PolicyDomain, AffectedNeighborhoods populated
-- Status values match engine's known set: announced, vote-scheduled, visioning, visioning-complete, design-phase, construction-planning, construction-active, implementation-active, disbursement-active, dispatch-live, pilot-active, operational, complete, stalled, blocked, suspended, defunded
-- ImplementationPhase values match the same set
+- Every real-initiative row has Name, Status, ImplementationPhase, PolicyDomain, AffectedNeighborhoods populated (per §Placeholder Convention below — placeholder rows are NOT flagged as malformed)
+- Status field is non-empty (string contents not validated)
+- ImplementationPhase field is non-empty (string contents not validated)
 
-Flag malformed rows as NOT READY.
+**Enum policing REMOVED (S230 G-RC3, governance.14 T9):** pre-S230 the skill enforced a hardcoded enum list (announced / vote-scheduled / visioning / design-phase / etc.) that drifted every cycle as the engine added new phase values (C94 saw 4 phases missing from the skill's list: `design-development-active`, `legislation-filed`, `pilot_evaluation`, `vote-ready`). **Phase value validation now belongs to engine-side `applyTrackerUpdates.js`** — pre-flight's role is empty/required-field checks, not value-set policing. Mike S230 ruling: drop enum entirely; trust engine writer validation.
+
+Flag malformed rows (missing required fields) as NOT READY per §Placeholder Convention.
+
+## §Placeholder Convention (S230 G-RC4, governance.14 T9)
+
+Initiative_Tracker rows fall into three classes. Pre-flight treats each differently:
+
+| Class | Detection | Severity | Action |
+|---|---|---|---|
+| **Placeholder** | InitiativeID populated, all other fields empty (slot reserved for upcoming initiative) | INFO | Skip, don't block. Log "placeholder row INIT-NNN — reserved slot, no validation required." |
+| **Partial-real** | InitiativeID + Name + some fields populated, BUT missing one or more engine-critical (Status, ImplementationPhase, PolicyDomain, AffectedNeighborhoods) | HIGH (NOT READY) | Block pre-flight pass. List the missing fields per row. Operator decides: complete the row or remove. |
+| **Real** | InitiativeID + Name + (Status OR Phase) + at least PolicyDomain or AffectedNeighborhoods | passes | No action. |
+| **Sheet bloat** | Fully empty rows past the last real row | INFO | Ignore. (Common when sheet was extended for future capacity.) |
+
+Decision tree (apply in order; first match wins):
+1. All cells empty → sheet bloat (INFO, ignore).
+2. Only InitiativeID populated → placeholder (INFO, skip).
+3. InitiativeID + Name + some fields, missing engine-critical → partial-real (NOT READY, block).
+4. InitiativeID + Name + required fields → real (pass).
+
+**Why this convention exists:** pre-S230 pre-flight treated placeholder rows identically to malformed mid-life data and false-flagged every cycle. C94 INIT-004 (placeholder, only InitiativeID populated, persisted across many cycles without engine complaint) demonstrated the gap. The convention preserves operator visibility (placeholders logged as INFO) without blocking on intentional reserved slots.
 
 ## Step 6: Edition Coverage Ratings
 

@@ -38,8 +38,6 @@ paths:
   - ".claude/skills/sports-desk/**"
   - ".claude/skills/interview/**"
   - ".claude/skills/save-to-bay-tribune/**"
-  - ".claude/skills/run-cycle/**"
-  - ".claude/skills/pre-flight/**"
   - ".claude/skills/cycle-review/**"
   - ".claude/skills/capability-review/**"
   - ".claude/skills/adversarial-review/**"

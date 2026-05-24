@@ -3,6 +3,8 @@ paths:
   - "phase*/**/*.js"
   - "scripts/*.js"
   - "lib/*.js"
+  - ".claude/skills/run-cycle/**"
+  - ".claude/skills/pre-flight/**"
 ---
 
 # Engine Code Rules

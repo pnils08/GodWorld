@@ -262,11 +262,13 @@ pointers:
      |---|---|---|---|
      | Mark Aitken | POP-00003 | POP-00020 (player-truesource) | Legacy ID assignment pre-S94 ledger recovery; truesource layer ingested with new ID. Mike ruling S230: legacy POP-00003 is canonical. |
      ```
-  2. `scripts/ingestPublishedEntities.js`: add a top-level `POPID_ALIASES` map: `{ 'POP-00020': 'POP-00003' }`. In the NEW-candidate classification path (T7), normalize candidate POPID references through this map before Sim_Ledger lookup. Prevents future double-classification.
-  3. Module exports add `POPID_ALIASES` for downstream scripts to reuse (player-truesource resolver, citizen-card builder).
+  2. ~~`scripts/ingestPublishedEntities.js`: add a top-level `POPID_ALIASES` map: `{ 'POP-00020': 'POP-00003' }`.~~ **PLAN-PREMISE CORRECTION (S233 engine-sheet measure-twice catch):** naive map cannot ship. POP-00020 is NOT a phantom slot — it is actively occupied in Sim_Ledger by Elena Vásquez (live verify S233). Naive alias would silently shim every POP-00020 reference to Aitken, contaminating Elena Vásquez's row on every encounter. **Shipped semantic is name-scoped:** `POPID_ALIASES = { 'POP-00020': { canonicalPopId: 'POP-00003', surfaceNamePattern: /^mark\s+aitken$/i } }` + `resolvePopIdAlias(popId, fullName)` helper. Alias fires only when surface name matches the alias's canonical citizen; Elena Vásquez references at POP-00020 pass through untouched. Wired into `resolveCitizens` at line 403 before `byPopId.get()`; matched array gains `sourcePopId` field when alias fires so downstream consumers can surface the canonical row while preserving the source reference.
+  3. Module exports add `POPID_ALIASES` + `resolvePopIdAlias` for downstream scripts to reuse (player-truesource resolver, citizen-card builder).
 - **Verify:**
-  - `grep -n "POP-00020\|POPID_ALIASES" scripts/ingestPublishedEntities.js docs/mags-corliss/NEWSROOM_MEMORY.md` → entries present.
-- **Status:** [ ] not started — engine-sheet pickup
+  - `grep -n "POP-00020\|POPID_ALIASES" scripts/ingestPublishedEntities.js` → entries present S233.
+  - Empirical fixture run with 4 NAMES INDEX rows (POP-00020|Mark Aitken + POP-00020|Elena Vásquez + POP-00003|Mark Aitken + POP-00777|Made-Up Person) produced: row 1 aliased to POP-00003 (sourcePopId=POP-00020), row 2 kept POP-00020 (NO contamination of Elena Vásquez), row 3 passthrough, row 4 matched POP-00777 with drift warning vs ledger Rico Valdez.
+  - **NEWSROOM_MEMORY half DEFERRED to research-build** — `docs/mags-corliss/*` is research-build's owned scope per engine-sheet TERMINAL.md §NOT Your Files. Stays open inside the canon.3 ROLLOUT row for research-build pickup.
+- **Status:** [x] done-pending-archive (engine-sheet half) — S233. NEWSROOM_MEMORY pointer half open for research-build.
 
 ### Task 12: Business_Ledger backfill — BIZ-00061 Adams Point UMC + BIZ-00062 Dario's Bar [engine-sheet, data]
 

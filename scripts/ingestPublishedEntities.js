@@ -66,6 +66,38 @@ const NEW_CITIZEN_DEFAULTS = {
 };
 
 // ---------------------------------------------------------------------------
+// T11 canon.3 / ADR-0007 §POPID aliasing — cross-layer canonical resolution.
+//
+// Some citizens carry multiple POPIDs across canon layers due to legacy
+// migrations (per ADR-0007 §G-S20). Per Reconciliation rule 4 (POPIDs
+// permanent once assigned), aliases are documented + resolved at read time,
+// not migrated.
+//
+// CRITICAL — name-scoped. A naive `'POP-00020': 'POP-00003'` map would shim
+// every POP-00020 reference to Aitken, but POP-00020 is actively occupied in
+// Sim_Ledger by a different citizen (verified S233 live: POP-00020 = Elena
+// Vásquez). Aliases fire only when the surface name matches the alias's
+// canonical citizen, so legitimate POP-00020 → Elena Vásquez references are
+// untouched. T11-shipped semantic differs from plan §T11 step 2's naive map.
+// See commit body for plan-premise correction.
+//
+// Currently active aliases:
+//   - Mark Aitken: player-truesource POP-00020 → canonical POP-00003.
+//     Mike ruling S230 favors legacy POP-00003 (wd-card + Sim_Ledger).
+// ---------------------------------------------------------------------------
+const POPID_ALIASES = {
+  'POP-00020': { canonicalPopId: 'POP-00003', surfaceNamePattern: /^mark\s+aitken$/i },
+};
+
+function resolvePopIdAlias(popId, fullName) {
+  const alias = POPID_ALIASES[popId];
+  if (!alias) return popId;
+  if (!fullName) return popId;
+  if (!alias.surfaceNamePattern.test(normalizeFullName(fullName))) return popId;
+  return alias.canonicalPopId;
+}
+
+// ---------------------------------------------------------------------------
 // CLI flag parsing — mirrors T6/T7/T9 pattern
 // ---------------------------------------------------------------------------
 function parseFlag(name) {
@@ -462,7 +494,12 @@ async function resolveCitizens(parsed, sheetsClient, sheetId) {
     }
 
     if (entry.popId) {
-      const hit = byPopId.get(entry.popId);
+      // T11 — apply name-scoped POPID alias before lookup. Resolves
+      // cross-layer legacy IDs (e.g. POP-00020 Aitken from player-truesource
+      // → canonical POP-00003) without contaminating live rows that occupy
+      // the alias key for a different citizen.
+      const lookupPopId = resolvePopIdAlias(entry.popId, entry.fullName);
+      const hit = byPopId.get(lookupPopId);
       if (!hit) {
         phantom.push({ popId: entry.popId, fullName: entry.fullName, reason: 'POP-ID not in ledger' });
         continue;
@@ -472,7 +509,14 @@ async function resolveCitizens(parsed, sheetsClient, sheetId) {
       const driftWarning = ledgerName.toLowerCase() !== entry.fullName.toLowerCase()
         ? `name drift: ledger "${ledgerName}" vs index "${entry.fullName}"`
         : null;
-      matched.push({ popId: entry.popId, fullName: entry.fullName, driftWarning });
+      // Surface aliased POPIDs as the canonical one so downstream consumers
+      // (citizen cards, briefs) reference the live row, not the legacy ID.
+      matched.push({
+        popId: lookupPopId,
+        sourcePopId: lookupPopId !== entry.popId ? entry.popId : undefined,
+        fullName: entry.fullName,
+        driftWarning,
+      });
     } else {
       // Lookup by First+Last
       const tokens = entry.fullName.split(/\s+/).filter(Boolean);
@@ -1064,7 +1108,10 @@ module.exports = {
   detectGenderFromPronouns: detectGenderFromPronouns,
   normalizeFullName: normalizeFullName,
   // S233 canon.3 T7 — bay-tribune drift partition
-  partitionCandidatesByBayTribuneIndex: partitionCandidatesByBayTribuneIndex
+  partitionCandidatesByBayTribuneIndex: partitionCandidatesByBayTribuneIndex,
+  // S233 canon.3 T11 — POPID alias resolution (name-scoped)
+  POPID_ALIASES: POPID_ALIASES,
+  resolvePopIdAlias: resolvePopIdAlias
 };
 
 if (require.main === module) {

@@ -105,7 +105,11 @@ if (!API_KEY) {
 // ═══════════════════════════════════════════════════════════════════════════
 
 function searchSupermemory(query, container) {
-  return new Promise(function(resolve, reject) {
+  // Single-arg Promise constructor — searchSupermemory intentionally never
+  // rejects; all error paths (parse error, request error, timeout) resolve
+  // with [] so callers don't need .catch. Pre-fix had `function(resolve, reject)`
+  // with unused reject param.
+  return new Promise(function(resolve) {
     var payload = JSON.stringify({
       q: query,
       containerTag: container,

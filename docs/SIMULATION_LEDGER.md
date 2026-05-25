@@ -1,16 +1,16 @@
 # Simulation_Ledger — Citizen Architecture Guide
 
 **Tab:** `Simulation_Ledger` on GodWorld spreadsheet
-**Simulation_Ledger rows:** ~837 (S185 sheet-hygiene trim 911→837; max POPID POP-00951 after S184 female-balance +150) | **Columns:** 47 (A–AU) | **Sim Year:** 2041
+**Simulation_Ledger rows:** 858 (S234 verify; +22 from S232 canon.3 T9 backfill; max POPID POP-00973) | **Columns:** 47 (A–AU) | **Sim Year:** 2041
 **Age rule:** Age = 2041 - BirthYear. Always.
 
 This is the single source of truth for every simulated person in the main ledger. Other ledgers (Generic_Citizens, Cultural_Ledger, Business_Ledger, Faith_Organizations, Chicago_Citizens) hold additional populations — total world population is **1,200+** across all ledgers combined.
 
 **Canonical column definitions:** `schemas/SCHEMA_HEADERS.md` under `## Simulation_Ledger` — auto-generated header list, refreshed via Apps Script `exportAndPushToGitHub`. SCHEMA_HEADERS currently reports **47 columns** — the A–AT table below covers 46; column AU (Gender, confirmed S146) is not yet documented in §Column Reference. When the sheet drifts from this doc, SCHEMA_HEADERS is ground truth. *(Phase 41.6 backlink, S156.)*
 
-**Authoritative current-state pointer:** `docs/engine/LEDGER_AUDIT.md` — refreshed via `scripts/auditSimulationLedger.js` (engine-sheet's lane). Last refresh S181 (pre-S184/S185); next regen captures the +150 female balance + sheet-hygiene trim. Headline counts in this doc are approximate; LEDGER_AUDIT is ground truth for tier/status/POPID-gap distributions.
+**Authoritative current-state pointer:** `docs/engine/LEDGER_AUDIT.md` — refreshed via `scripts/auditSimulationLedger.js` (engine-sheet's lane). Last refresh S234 (captures S232 canon.3 T9 backfill +22 rows + NEW pending-Status drift + lowercase 'active' regression). Headline counts in this doc are approximate; LEDGER_AUDIT is ground truth for tier/status/POPID-gap distributions.
 
-Last audited: Session 187 (2026-04-29, /doc-audit data group) — row count refreshed S185 trim; ClockMode/Tier/Status sub-counts last verified S105-S140 and confirmed drifted (LEDGER_AUDIT S181 shows T1 17 / T2 60 / T3 218 / T4 391 + 150 S184 additions ≈ T4 541). Re-run audit script for fresh sub-counts.
+Last audited: Session 234 (2026-05-24, /doc-audit data group) — row count refreshed (858; S232 canon.3 T9 backfill added POP-00958..00973 + 6 squatter realignments). Tier breakdown from S234 audit script: T1 21 / T2 64 / T3 210 / T4 563. Status breakdown: 826 Active + 22 pending + 9 Retired + 1 lowercase 'active' (last is new drift since S201 normalization).
 
 ---
 

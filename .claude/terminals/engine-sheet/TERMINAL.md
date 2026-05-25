@@ -233,15 +233,15 @@ When this terminal discovers something that needs design/research:
 ## Current Engine State
 
 - **Engine version:** v3.3
-- **Cycle:** 92 (ran 2026-04-19 02:12 — `Riley_Digest` row for C92 present; Phase2-CityDynamics error recurring but non-blocking — see ENGINE_REPAIR follow-ups)
-- **Citizens:** 836 in Simulation_Ledger post-S184 female-balance ingest (POP-00802..00951 added; +150 rows). Total population 1,200+ across all citizen tabs. Sheet trimmed S185 from 911 → 837 rows (74 trailing blank rows removed; last citizen POP-00951). See `docs/SIMULATION_LEDGER.md` for tier + mode breakdown.
+- **Cycle:** 94 (ran ~2026-05-09; E94 PUBLISHED + S94 supplemental `let_walks_reset` PUBLISHED per SESSION_CONTEXT line 5).
+- **Citizens:** 858 in Simulation_Ledger (S234 audit: extant=858 / POPID range POP-00001 → POP-00973 / 115 gaps). Growth since S185: +21 net via S229 backfills (POP-00952..00973 cohort from canon.3 T9 batch — 14 from Generic_Citizens + 2 from E82/E86 explicit canon markers + 2 squatter alignments at POP-00952/00953 + 4 followup squatter alignments POP-00954..00957). See `docs/engine/LEDGER_AUDIT.md` for tier/status breakdown.
 - **Columns:** 47 (A-AU). Past Z: Income=col26, EducationLevel=col31, CareerStage=col33, Gender=col47 (AU).
-- **Pipeline:** v2 (S134) — 4 terminals, 9 reporters, bounded traits
+- **Pipeline:** v2 (S134) — 4 terminals (post-S211), 9 reporters, bounded traits.
 - **Feedback loop (S137b):** 3 intake channels operational — coverage ratings, sports feed (6 texture columns), civic voice sentiment. Initiative ImplementationPhase → neighborhood effects. Approval ratings dynamic. Citizen life events feel the loop.
-- **Function count:** 154 engine files / 929 functions (S185 STUB_MAP regen post-DELETE batch). Down from S156 baseline due to 20-function dead-code removal (commit `bbdca3a`, ~722 LOC removed).
-- **Last deploy:** S185 — 2 clasp pushes (`recordWorldEventsv3.js` v3.6 + DELETE batch). Apps Script-side has 7 fewer files post-DELETE.
-- **Open engine items (post-E92):** See `docs/engine/ENGINE_REPAIR.md` (Row 8 Phase 42 — UNBLOCKED S185, redesign batch ready; Row 11 pipeline gating; Rows 1, 2, 4, 5, 6, 15, 17 closed S181-S184). Plus `docs/engine/ROLLOUT_PLAN.md` "Data & Pipeline" section.
-- **S186 entry-task (engine-sheet):** **Phase 42 §5.6 phase05-ledger redesign batch** — ~10-13 commits in one session. Phase 1 init at `godWorldEngine2.js` pre-phase-04 entry; 18 SL touchers (16 full-range writers + 2 per-row + 5 post-phase05 readers) route through `ctx.ledger.rows`; Phase 10 single replace intent. Canonical doc: mags `hQE4rREEWBpS9aS1g3mQ3M`. Prereq-delete shipped S185 (`1a77e54` research-build); B2 mechanical migrations become trivial after this lands.
+- **Function count:** 154 engine files / 929 functions per S185 STUB_MAP regen. Since S185, net deletes: `arcLifecycleEngine.js` (S199 `bbdca3a`), `hookLifecycleEngine.js` (S201 `954d994`), `worldEventsLedger.js` (S199 `52f0026`), `rollbackToCycle80.js` (S199 `2cbe045`), `citizenFameTracker.js` (S184), `generateCitizensEvents.js` (S185 prereq `1a77e54`); plus various dedups in B.4-B.6 collision sweep. Net file count is ~6 lower; regen via `node scripts/stubEngine.js` when authoritative number needed.
+- **Last deploy:** S229 — 2 clasp pushes (post-batch-2: runCivicElectionsv1 + bondEngine + generateChicagoCitizens; post-batch-3: godWorldEngine2 Chicago Path B disables). S232/S233 work was Node-side only (scripts + canon docs + tests); no Apps Script writes.
+- **Open engine items:** See `docs/engine/ENGINE_REPAIR.md` — Row 8 Phase 42 (B3-B7 batches still pending; §3.5 cluster CLOSED S229 across batches 1-3), Row 20 household structure (parked for dedicated session). All other rows closed. Plus `docs/engine/ROLLOUT_PLAN.md` `engine.*` rows: engine.25 (C94 print parser fixes G-PR2/G-PR6/G-PR7/G-PR8e/G-PR11 — filed S229, ready), engine.26 (BUSINESSES NAMED parser defensive-emit silent-zero — filed S233, ready, mirrors engine.24).
+- **Next engine-sheet picks:** engine.25 / engine.26 / canon.3 T12 (Business_Ledger backfill, needs Mike approval) / canon.3 T13 (verify wd-card rebuild on S232 backfill POPIDs) / engine.2 broader Phase 42 (B5/B6/B7 from original plan).
 - **Refresh rule:** Update this block whenever a cycle runs or schema shifts. Stale state here poisons every engine-sheet boot.
 
 ---

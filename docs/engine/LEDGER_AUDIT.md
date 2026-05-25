@@ -1,13 +1,108 @@
 # Simulation_Ledger Data Integrity Audit
 
 **Created:** Session 68 (2026-02-28)
-**Last Refresh:** Session 199 (2026-05-04) — S184/S185 ingest captured; new drift surfaced
+**Last Refresh:** Session 234 (2026-05-24) — S229 canon.3 T9 backfill captured (POP-00958..00973 + 6 squatter realignments); new pending-status + lowercase-active drift surfaced
 **Priority:** CRITICAL — All downstream ledgers depend on this data being correct
 **Rule:** Age = 2041 - BirthYear. Always. The simulation year is 2041.
 
 This is the single tracking document for the Simulation_Ledger overhaul. All audit progress, decisions, and remaining work live here. Other docs reference this file — they don't duplicate it.
 
-> **Document timeline.** S68 baseline (this doc) → S94 corruption recovery (`LEDGER_REPAIR.md`) → S99 schema bump + civic-officials cleanup (`LEDGER_REPAIR.md` post-recovery section) → S181 verification + drift snapshot → **S199 refresh (this section, below) — captures S184 +150 female-balance ingest + S185 trim + post-S184 drift**. Read top-down for current state; the historical S68 / S69 / S72 / S181 sections below are archive.
+> **Document timeline.** S68 baseline (this doc) → S94 corruption recovery (`LEDGER_REPAIR.md`) → S99 schema bump + civic-officials cleanup (`LEDGER_REPAIR.md` post-recovery section) → S181 verification + drift snapshot → S199 refresh (S184 +150 female-balance ingest + S185 trim + post-S184 drift) → **S234 refresh (this section, below) — captures S232 canon.3 T9 backfill + new pending-Status drift + lowercase 'active' regression + +2 non-canon-neighborhood drift**. Read top-down for current state; the historical S199 / S181 / S72 / S69 / S68 sections below are archive.
+
+---
+
+## Current State — S234 refresh (2026-05-24)
+
+**Verifier:** `scripts/auditSimulationLedger.js` (run from engine-sheet to refresh).
+
+### Headline numbers
+
+| Metric | Value | S199 → S234 delta | Note |
+|--------|-------|-------------------|------|
+| Schema | 47 cols A–AU | unchanged | Stable since S181 |
+| Total rows | 858 | +22 (was 836) | S232 canon.3 T9 backfill: 16 appends POP-00958..00973 (14 from Generic_Citizens + 2 from E82/E86 explicit canon markers) + 6 squatter realignments (POP-00952/00953 + POP-00954..00957) |
+| Extant citizens | 858 | +22 (was 836) | All net-new rows are extant |
+| POPID range | POP-00001 → POP-00973 | new max +22 (was → POP-00951) | |
+| POPID gaps | 115 | unchanged | Same gap pattern persists |
+| Tier distribution | 21 T1 / 64 T2 / 210 T3 / 563 T4 | T4 +22 (was 541); T1/T2/T3 unchanged | S232 backfill all T4 ENGINE |
+| Status enum | 826 Active + 22 pending + 9 Retired + 1 lowercase 'active' | **NEW DRIFT** | Pending = canon.3 T9 backfill writer (scripts/canon3_backfill_t9.js + canon3_followup_squatters.js) — needs route decision; 1 lowercase 'active' is new single-row regression since S201 normalization |
+| Age sanity (2041 anchor) | 0 out-of-bounds | unchanged | All BirthYear values yield ages 0–110 ✓ |
+| RoleType="Citizen" sentinel | **0 citizens** | unchanged | Still 0 — Path B demographic-voice fallback (ENGINE_REPAIR Row 17) holding |
+| Non-canon-12 neighborhoods | **221 citizens / 8 variants** | +2 / unchanged variants | S232 backfill added 1 Uptown + 1 Laurel; per-variant breakdown below |
+
+### S94 recovery claims — VERIFIED HOLDING (S234 re-verification)
+
+LEDGER_REPAIR.md §"Recovery Status: COMPLETE (S94)" claims hold against live data:
+
+| Claim | S94 baseline | S234 live | Holds? |
+|-------|--------------|-----------|--------|
+| 0 missing names | 0 | 0 missing First, 0 missing Last | ✅ |
+| 0 "Citizen" RoleTypes | 0 | 0 (S184 closed, still 0 S234) | ✅ |
+| Tiers all numeric | yes | yes (1–4) | ✅ |
+| Income populated | 100% | 100% | ✅ |
+| Age sanity | OK | 0 out-of-bounds | ✅ |
+| Headcount | 675 | 858 (+183 via S184 ingest + S232 canon.3 backfill, no shrinkage) | ✅ growth, no shrinkage |
+
+**Verdict:** S94 recovery stands. Historical corruption does not regenerate. S232 canon.3 backfill added 22 net rows cleanly (no Citizen-sentinel propagation; no tier inflation; held the 47-col A-AU schema). Two NEW drift classes opened by the backfill writer — Status-enum pending propagation + 1 single-row lowercase 'active' regression — both noted below as actionable.
+
+### Tier × ClockMode matrix (S234)
+
+| | ENGINE | GAME | CIVIC | MEDIA | LIFE |
+|---|---|---|---|---|---|
+| **T1** | 4 | 14 | 1 | 2 | 0 |
+| **T2** | 38 | 5 | 9 | 12 | 0 |
+| **T3** | 82 | 67 | 35 | 26 | 0 |
+| **T4** | 552 | 4 | 4 | 3 | 0 |
+
+S232 backfill added 22 T4 ENGINE citizens (S199's 530 → S234's 552). T1/T2/T3 frozen vs S199 — confirms canon.3 work targeted T4 demographic-voice rows only, no Tier-2 promotions. LIFE clock mode still 0 — never adopted, candidate for enum removal.
+
+### Drift surfaced by S234 audit
+
+1. **Status enum: 22 pending — NEW DRIFT from S232 backfill writer.** Origin: `scripts/canon3_backfill_t9.js` + `scripts/canon3_followup_squatters.js` set `Status='pending'` for the 16 newly-appended canon-drift rows + 4 followup squatter realignments (POP-00954..00957 from E94 batch); add the 2 retained squatter-update rows at POP-00952/00953 = 22 total. **Engine-side consumer behavior:** SL consumers default-handle non-'Active' status via case-insensitive contains checks (`godWorldEngine2.js:1104` filters 'Deceased' only; `generateMonthlyCivicSweep.js:111` lowercases first; `checkForPromotions.js:363` reads Generic_Citizens not SL). No engine code strict-equals SL.Status === 'pending'. **Risk:** these 22 citizens read as inactive-but-not-deceased — they will not surface in active-citizen queries that filter `Status==='Active'`. Action: pending status is the intended interim per canon.3 — these citizens await verification before promotion to Active. Either (a) keep pending until manual approval/rejection per canon.3 workflow, or (b) bulk-flip to Active if canon.3 validation downstream of T9 is operationally treating them as live citizens already.
+
+2. **Status enum: 1 lowercase 'active' — single-row regression since S201 normalization.** Identity TBD (audit script doesn't surface the POPID). S201 normalized all 151 lowercase entries via `lib/sheets.batchUpdate`; this single regression is post-S201. Origin candidates: a writer that bypassed normalization, or a manual sheet edit. Low priority (1 row) — fold into next normalization sweep when one fires; or fix in-place via `lib/sheets.js` direct write.
+
+3. **Non-canon-12 neighborhood drift — 221 citizens across 8 variants (+2 since S199).** Distribution:
+   - 85 Uptown (was 84 — +1 from S232 backfill)
+   - 63 Laurel (was 62 — +1 from S232 backfill)
+   - 57 Piedmont Ave (unchanged)
+   - 12 KONO (unchanged)
+   - 1 Downtown Oakland (unchanged)
+   - 1 Coliseum District (unchanged)
+   - 1 Jingletown (newly enumerated S234 — S199 likely had "+ 2 more variants per audit script; see live output for tail" rolling these up)
+   - 1 Ivy Hill (newly enumerated S234 — same)
+
+   Per Row 14 closure (S180), engine code is correct under canon-12 ← fine-grained-17 parent-child layering. Uptown/Laurel/Piedmont Ave/KONO are valid fine-grained children; new S232 backfill rows landing here is on-pattern (Generic_Citizens migrants frequently use child neighborhoods). The Downtown Oakland / Coliseum District / Jingletown / Ivy Hill singletons are format-drift candidates for cleanup, but localized and low priority.
+
+4. **POPID gaps — unchanged at 115.** No change since S199 (which was unchanged from S181). The S232 backfill appended sequentially POP-00958..00973 — no new gaps created.
+
+5. **'Recovering' status row disappeared since S199.** S199 documented 1 Recovering row (POP-00044 Elliott Crane per S199 §Drift surfaced #1). S234 scan shows 0 Recovering rows. Status either reverted to Active at some point or was overwritten by a backfill pass. Not load-bearing — no engine code reads SL.Status === 'Recovering'. Note for completeness; no action.
+
+### Per-column completeness (cols below 100%, S234 live)
+
+Population tracked by `auditSimulationLedger.js`. Highlights at S234 (858 rows total):
+
+| Column | Populated | % | S199 → S234 delta |
+|--------|-----------|---|-------------------|
+| Middle | 3 | 0.3% | unchanged |
+| OriginGame | 824 | 96% | massive jump (was 32.7% / 224 of 686) — S232 backfill likely populated OriginGame ='generic-citizens' or 'canon' for ingested rows |
+| OrginCity | 409 | 47.7% | jump (was 37.8% / 259 of 686) — S232 backfill populated this for migrants |
+| LifeHistory | 657 | 76.6% | drop from 94.6% — S232 backfill rows have empty LifeHistory by design (not auto-generated at intake) |
+| CreatedAt | 816 | 95.1% | NEW field reporting since S199 |
+| LastUpdated | 814 | 94.9% | massive jump (was 38.6% / 265) — S232 backfill stamped LastUpdated; S199 likely under-counted |
+| TraitProfile | 404 | 47.1% | tracking — S184 +150 / S232 +22 left intake without traits, holds 47-50% pattern |
+| UsageCount | 313 | 36.5% | jump (was 23.6%) — likely from coverage-rating writer (S232+ cycles) |
+| HouseholdId | 532 | 62% | drop from 77.6% — S232 new rows unhoused (Row 20 household structure work outstanding) |
+| MaritalStatus | 763 | 88.9% | unchanged tracking |
+| NumChildren | 842 | 98.1% | unchanged tracking |
+| CitizenBio | 32 | 3.7% | unchanged (T2 narrative anchors, slow growth) |
+| Gender | (not reported in S234 scan tail) | — | Pending — S199 had 99.6% |
+
+(MigrationReason / MigrationDestination columns from S199 — still 0% per design, still candidate for either a writer or a drop. Not load-bearing.)
+
+### Refresh cadence
+
+Run `node scripts/auditSimulationLedger.js` whenever a major ledger-touching cycle ships, or before any decision that depends on ledger health. JSON output (`--json`) suitable for ingestion into reviewer pipelines.
 
 ---
 

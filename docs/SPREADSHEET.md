@@ -6,7 +6,7 @@
 
 **Canonical column map:** `schemas/SCHEMA_HEADERS.md` — auto-generated row/col counts and A/B/C header list for every visible tab (53 as of 2026-04-15 refresh). Refresh via Apps Script `exportAndPushToGitHub` in `utilities/exportSchemaHeaders.js`. Ground truth when this doc's tab descriptions drift. *(Phase 41.6 backlink, S156.)*
 
-Last audited: Session 187 (2026-04-29, /doc-audit data group) — Simulation_Ledger row count bumped to ~837 (S185 sheet-hygiene trim). Other per-tab row counts still from S105 and increasingly drifted — SCHEMA_HEADERS is the authoritative source for any specific tab. SCHEMA_HEADERS itself last regenerated 2026-04-27 (pre-S185 trim); next regen on engine-sheet's schedule.
+Last audited: Session 234 (2026-05-24, /doc-audit data group) — Simulation_Ledger row count bumped to 858 (S232 canon.3 T9 backfill +22; max POPID POP-00973). Other per-tab row counts still from S105 and increasingly drifted — SCHEMA_HEADERS is the authoritative source for any specific tab. SCHEMA_HEADERS itself last regenerated 2026-05-12 (S213). Active Tabs table below carries S187 row counts — engine-sheet refresh on next dedicated audit pass.
 
 ---
 

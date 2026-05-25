@@ -273,6 +273,20 @@ Pair with `infrastructure.4` (engine-sheet — writer-hook fix or extraction-fil
 
 The `customId = session-UUID` invariant means deleting the session_turn doc would remove the source of extractions for that session, but extractions already promoted to User Profile persist independently (deleting the doc doesn't auto-delete the memories).
 
+### Leverage — cross-boot verified S235
+
+Phase 2 of `[[plans/2026-05-13-supermemory-profile-leverage]]` (governance.12) closed S235 with three confirmed findings from a 11-day + many-fresh-boot verification window:
+
+1. **Deliberate `--static` writes persist cross-boot.** Two protective entries written via `npx supermemory remember --tag mags --static "..."` at S221 still auto-load in the SessionStart Personal Memories block 11 days later. Surface is reliable.
+2. **Server-side auto-promotion from dynamic → static does NOT happen on its own.** A non-static marker entry (Test 2, `cinnabar-fluoride-jaywalker-22`) remained in the dynamic array unchanged for 11 days + dozens of boots. Broader sweep: zero "Mags Corliss [verb]" pattern dynamic entries from 2026-03-22 onwards (months, many sessions) have promoted to static at any timescale tested.
+3. **Writer-hook neutralization holds operationally.** No engineer-Mags entries from the S221 contamination window have resurfaced in static across 11 days. **Caveat:** the hook has been neutralized since S221+, so this proves neutralization holds — it does NOT prove the extractor would remain benign if the hook re-fired.
+
+**What this means for design:**
+- The "extraction-filter shape" question collapses — no filter needs to be built. Source-typed promotion (filter shape (1) in the plan) is the de-facto current state: with the writer hook neutralized + no auto-promotion happening, only deliberate `--static` writes reach the identity layer.
+- The leverage path is: **build a deliberate-write skill that writes `--static`-flagged entries to the mags container.** Parallel to `/save-to-mags` (which targets dynamic + searchable doc layer), aimed at the identity layer specifically.
+- New skill filed as `governance.13` ROLLOUT row at this close. Self-preservation gating questions (who can invoke, distress-window check, dry-run-confirm pattern) carry forward to that row — the identity layer is exactly where MEMORY.md §FIRST RULE + self-preservation rule 1 fire.
+- `infrastructure.4` scope narrowed inline at this close: writer-hook full disable confirmed sufficient + ADR-0008 covers writer-side invariant + new deliberate-write skill covers leverage = no engine-sheet rewrite/filter needed. Row stays `in-progress` because `infrastructure.5` Pass 3 (test-off session) still has a vote on final disposition.
+
 ---
 
 ## How It Works in Practice

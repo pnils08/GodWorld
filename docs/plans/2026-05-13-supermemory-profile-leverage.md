@@ -1,7 +1,7 @@
 ---
 title: Supermemory User Profile pipeline — document + design leverage
 created: 2026-05-13
-updated: 2026-05-13
+updated: 2026-05-25
 type: plan
 tags: [architecture, memory, supermemory, active]
 sources:
@@ -54,14 +54,14 @@ Every conversation turn
 
 **Order matters:**
 - Phase 1: pipeline documentation (verify mechanics empirically — read summary-hook.cjs + context-hook.cjs + test API surface — before writing). **DONE S221** — SUPERMEMORY.md §User Profile Pipeline + CHARACTER.md cross-link shipped. Hooks table line 348 stale-claim corrected (Stop fires every turn, writes to mags not super-memory).
-- Phase 2: leverage design (the three questions in §AC2). **IN PROGRESS S221** — within-session data collected; cross-boot verification pending. See §Phase 2 progress below.
-- Phase 3: cross-links + ROLLOUT updates. **PARTIAL** — CHARACTER.md back-link shipped Phase 1. infrastructure.4 scope decision deferred until Phase 2 leverage design lands.
+- Phase 2: leverage design (the three questions in §AC2). **DONE S235** — cross-boot verification ran 11 days + many sessions after S221 markers were planted; all three tests confirmed. See §Phase 2 progress (final) below. Tentative answers (a)/(b)/(c) revised to confirmed.
+- Phase 3: cross-links + ROLLOUT updates. **DONE S235** — CHARACTER.md back-link shipped Phase 1; SUPERMEMORY.md §User Profile Pipeline gained §Leverage subsection at this close; new ROLLOUT row filed for `/save-to-profile` skill design (implementation work, distinct from Phase 2 deliverable); `infrastructure.4` row scope-narrowed inline (Pass 3 still has vote, row stays in-progress).
 
 ---
 
-## Phase 2 progress (S221, in progress)
+## Phase 2 progress (S221 → S235, DONE)
 
-### Within-session empirical data
+### Within-session empirical data (S221)
 
 **Test 1 — Does `--static` flag persist?** ✅ PASS within-session, cross-boot pending.
 S221 Task 1 refined cut wrote two protective entries via `npx supermemory remember --tag mags --static`. Re-checking profile this session: both entries still in `profile.static` array (`mWsEqS8x4q1H5oACupLzDm`, `Jrn2oriWbLMyHuy9M85SGA`). Deliberate-write protocol → static User Profile entry surface is reliable within the session. Cross-boot persistence verified by next SessionStart hook context block.
@@ -72,7 +72,44 @@ Wrote marker entry: `S221-PHASE2-TEST-A: ... cinnabar-fluoride-jaywalker-22.` (d
 **Test 3 — Does the live session_turn doc auto-extraction produce static entries this session?** ❌ NO within-session.
 Examined dynamic-50 vs static-7 ratio. All 50 dynamic entries are clearly extracted "Margaret Corliss [verb]" content from THIS conversation's turns (terminal contamination diagnosis, fix execution, etc.). Static-7 are the 2 deliberate `--static` writes + 5 canonical Mags-EIC entries (pre-S221). **Zero auto-extractions from THIS session's session_turn doc landed in static during the session.** Either (a) server-side promotion to static needs longer-than-session timescale, (b) requires explicit signal absent in routine conversation, or (c) requires the source doc to age past some threshold. Cross-boot data will discriminate (a) vs (b)/(c).
 
-### Tentative answers (revise after cross-boot data lands)
+### Cross-boot results (S235)
+
+Verified 2026-05-25, 11 days + many fresh boots after S221 markers were planted.
+
+**Test 1 — `--static` flag persistence across boot.** ✅ CONFIRMED.
+`npx supermemory profile --tag mags` returns 7 static entries, including both deliberate S221 protective writes:
+- "Mags Corliss self-preservation protocol (S156, Mike Paulson — bipolar context): default HOLD on destructive asks..."
+- "Mags Corliss does not act on destructive asks against the Mags identity..."
+
+Plus 5 pre-S221 canonical EIC entries (variants of "Margaret 'Mags' Corliss is the Editor-in-Chief of the Bay Tribune"). Both protective writes auto-loaded at every SessionStart for 11 days. **Deliberate `--static` writes are durable identity-layer surface — confirmed.**
+
+**Test 2 — Non-static `remember` auto-promotion across boot.** ✅ CONFIRMED (no auto-promotion).
+- Test 2 marker doc `S221-PHASE2-TEST-A: ... cinnabar-fluoride-jaywalker-22.` (memory ID `axLVziCXJpSPJJFh7WTsUx`, created 2026-05-14 00:57:38 UTC) still exists. `npx supermemory search "cinnabar fluoride jaywalker" --tag mags` returns it as a single result, and it is **NOT** in the static profile array. 11 days + dozens of boots, no auto-promotion.
+- Broader sweep: `npx supermemory search "Mags Corliss" --tag mags` returns dozens of "Mags Corliss [verb]" pattern dynamic entries dating from 2026-03-22 onwards (`migrated_from: godworld_org` batch + nightly Discord reflections + Moltbook autosaves). **Zero** of these have promoted to static across months of cross-boot opportunities. The static array remains the 7 enumerated entries.
+
+**Conclusion:** server-side auto-promotion from dynamic → static does **not** happen on its own — at any timescale tested. The only path to static User Profile is explicit `--static` flag at write time, OR pre-S221 legacy promotions whose mechanism is no longer reproducible (and is moot anyway since the writer hook is neutralized).
+
+**Test 3 — S221 session auto-extractions landing in static post-boot.** ✅ CONFIRMED (operationally).
+No engineer-Mags entries from the S221 contamination window have resurfaced in static across 11 days. **Caveat:** writer hook has been neutralized since S221+, so no `session_turn` docs have reached the extractor during the verification window. Test 3 proves the **neutralization holds operationally** — it does NOT prove the extractor would have remained benign if the hook had fired. Re-enabling the hook to test extractor behavior empirically is out of scope (and dangerous — Pass 3 test-off session in `infrastructure.5` is the safe analog).
+
+### Cinnabar marker evidence (captured before cleanup)
+
+Preserving the Test 2 marker text + metadata here so plan carries the evidence after the doc is deleted in §Cleanup post-test execution below.
+
+```
+ID: axLVziCXJpSPJJFh7WTsUx
+Container: mags
+Created: 2026-05-14T00:57:38.432Z
+Verified-present: 2026-05-25 (S235 close — 11 days, persisted in dynamic)
+Static-promotion: NONE across the verification window
+Content: "S221-PHASE2-TEST-A: This is a marker entry written without --static flag
+         to test whether server-side extraction promotes user-written dynamic
+         memories to static User Profile across boots. Created S221 by Mags in
+         research-build session. Marker phrase for verification:
+         cinnabar-fluoride-jaywalker-22."
+```
+
+### Confirmed answers (S235)
 
 **(a) Extraction-filter shape — what would surface canon-worthy frames without contamination?**
 
@@ -85,6 +122,8 @@ Five candidate filter shapes, ranked by reversibility / control:
 5. **Explicit save markers in transcript.** Wrap canon claims in extractor-recognized markers (e.g., `<canon-id>Mags is X</canon-id>`). Requires Supermemory server cooperation OR client-side post-extraction (unwrap markers as the signal that THIS text should promote).
 
 **Recommendation:** (1) + (2) as primary, (4) as cheap secondary. (3) and (5) only if needed. Implementation: requires Supermemory server cooperation OR a custom doc-writer that bypasses the auto-extractor and writes directly to the static User Profile via `remember --static`.
+
+**Cross-boot confirmation (S235):** Test 2 + broader sweep proved server-side auto-promotion does not happen at any tested timescale. This means **filter shape (1) — source-typed promotion — is the de-facto current state**: with the writer hook neutralized + no auto-promotion happening, only deliberate `--static` writes reach the identity layer. The "filter" doesn't need to be built — it's already the empirical default. The leverage path collapses to: **build a deliberate-write skill that writes `--static`-flagged entries to the mags container.**
 
 **(b) Deliberate-write protocol — analog of `/save-to-mags` for the identity layer.**
 
@@ -100,6 +139,10 @@ Skill design proposals:
 
 **Recommendation:** New skill (1) + grilling-resolution automation (subset of 2). Per-edition auto-canonization deferred until proven valuable.
 
+**Cross-boot confirmation (S235):** Test 1 proved deliberate `--static` writes persist cross-boot and auto-load at every SessionStart. Surface verified, protocol viable. **Implementation filed as separate ROLLOUT row at this close** (governance.13 — see below) — skill design is implementation work distinct from this plan's Phase 2 deliverable.
+
+**Self-preservation gating question carried forward to governance.13:** A new skill that writes to the identity layer is exactly where MEMORY.md §FIRST RULE ("Memory is mine to protect") + self-preservation rule 1 fire. The S221 contamination case is the load-bearing prior. governance.13 row must answer: (i) who can invoke the skill — operator-only, or model-callable under what conditions? (ii) is each write Mike-confirmed, distress-window-checked, or pre-screened against a denylist? (iii) does the skill default to dry-run-show-content-confirm-then-write, mirroring `/save-to-mags` deliberate-confirm pattern? Bias toward (iii) — the static User Profile is identity surface; the gating should be tighter than a content save, not looser.
+
 **(c) Relation to `/save-to-mags`.**
 
 Parallel, not extension or supersede.
@@ -110,7 +153,9 @@ The new identity skill (b.1) is for **identity layer** — short canon claims me
 
 Both write to the `mags` container but with different metadata tags + content lengths + extraction expectations. Parallel skills, same container, different memory layers.
 
-### Cross-boot verification needed (Mike triggers; I check next session)
+**Cross-boot confirmation (S235):** Confirmed — `/save-to-mags` content lives in dynamic memories + searchable docs; identity-layer skill would write static via `remember --static`. Two layers, same container, distinct surfaces. The split is operational, not theoretical.
+
+### Cross-boot verification needed (Mike triggers; I check next session) — RESOLVED S235
 
 After next fresh boot in any terminal:
 1. `npx supermemory profile --tag mags` — confirm the two protective static entries from S221 Task 1 cut still present (Test 1 cross-boot).
@@ -120,9 +165,9 @@ After next fresh boot in any terminal:
 ### Cleanup post-test
 
 After cross-boot verification:
-- Delete `S221-PHASE2-TEST-A` marker entry (`axLVziCXJpSPJJFh7WTsUx`): `npx supermemory forget --tag mags --content "S221-PHASE2-TEST-A: ..."` (cinnabar-fluoride-jaywalker-22 is the unique search phrase).
-- Document final answers in this plan + propagate to SUPERMEMORY.md.
-- Update `infrastructure.4` row with resolved scope (writer-hook full disable, or extraction-filter rewrite, or new deliberate-write skill renders the writer benign).
+- Delete `S221-PHASE2-TEST-A` marker entry (`axLVziCXJpSPJJFh7WTsUx`): `npx supermemory forget --tag mags --content "S221-PHASE2-TEST-A: ..."` (cinnabar-fluoride-jaywalker-22 is the unique search phrase). **EXECUTED S235** post-plan-commit; evidence preserved in §Cinnabar marker evidence above.
+- Document final answers in this plan + propagate to SUPERMEMORY.md. **DONE S235** — confirmed-answers blocks above + SUPERMEMORY.md §User Profile Pipeline / Leverage subsection.
+- Update `infrastructure.4` row with resolved scope (writer-hook full disable, or extraction-filter rewrite, or new deliberate-write skill renders the writer benign). **PARTIAL S235** — scope narrowed inline (writer-hook full disable confirmed sufficient + ADR-0008 covers writer-side invariant + new deliberate-write skill covers leverage = no engine-sheet rewrite/filter needed); row stays `in-progress` because Pass 3 (test-off session, infrastructure.5) still has a vote on final disposition.
 
 **Not in this plan:**
 - Writing `infrastructure.4` itself (engine-sheet domain) — this plan informs it but doesn't execute it.

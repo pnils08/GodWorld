@@ -250,10 +250,10 @@ function loadPhotoBase64(photoDir, filename) {
  * side and the parsed-section side guarantees equality on legitimate
  * matches regardless of which separator the writer chose.
  */
-function normalizeSectionId(s) {
-  if (!s) return '';
-  return s.toUpperCase().replace(/[_\s]+/g, ' ').trim();
-}
+// S235 G-PR7 — single source moved to lib/editionParser. Local alias kept so
+// the existing module.exports + S234 G-PR6 test suite keep resolving the
+// symbol from this file.
+var normalizeSectionId = editionParser.normalizeSectionId;
 
 /**
  * Find photo for a section from the manifest.
@@ -291,13 +291,16 @@ function buildArticleHtml(article, options) {
 
   // Article body
   var bodyText = article.text;
-  // Strip headline, subhead, and byline from the body text
+  // Strip headline, subhead, and byline from the body text.
+  // S235 G-PR7 — added `^# ` (h1) match. Pre-fix the strip caught `###` and
+  // `**bold**` only; new editions use `# h1` for canonical headlines and the
+  // unstripped h1 leaked into the body as a duplicate top line.
   if (bodyText) {
     var bodyLines = bodyText.split('\n');
     var startIdx = 0;
     for (var k = 0; k < Math.min(bodyLines.length, 8); k++) {
       var bl = bodyLines[k].trim();
-      if (bl.match(/^###/) || bl.match(/^\*\*.+\*\*$/) || bl.match(/^By\s+/)) {
+      if (bl.match(/^#\s+/) || bl.match(/^###\s+/) || bl.match(/^\*\*.+\*\*$/) || bl.match(/^By\s+/)) {
         startIdx = k + 1;
       }
     }
@@ -324,16 +327,26 @@ function buildSectionHtml(section, photoDataUri, options) {
   // Special handling by beat
   if (beat === 'editorial') {
     html.push('<div class="editors-desk">');
+    // S235 G-PR7 — show editorial headline (ED slot from ARTICLE TABLE).
+    // Pre-fix the editorial block rendered section-label + byline + body
+    // only, dropping the canonical ED title. centered to match editors-desk
+    // visual convention.
+    if (section.headline) {
+      html.push('<div class="headline-secondary" style="text-align:center">' + escapeHtml(section.headline) + '</div>');
+    }
     if (section.byline) {
       html.push('<div class="byline" style="text-align:center">' + escapeHtml(section.byline) + '</div>');
     }
     html.push('<div class="article-body">');
     var edText = section.text;
-    // Strip byline from text
+    // Strip headline + byline from body text so they don't render twice.
     var edLines = edText.split('\n');
     var edStart = 0;
-    for (var e = 0; e < Math.min(edLines.length, 4); e++) {
-      if (edLines[e].trim().match(/^By\s+/)) edStart = e + 1;
+    for (var e = 0; e < Math.min(edLines.length, 6); e++) {
+      var elTrim = edLines[e].trim();
+      if (elTrim.match(/^#\s+/) || elTrim.match(/^###\s+/) || elTrim.match(/^\*\*.+\*\*$/) || elTrim.match(/^By\s+/)) {
+        edStart = e + 1;
+      }
     }
     html.push(textToHtml(edLines.slice(edStart).join('\n')));
     html.push('</div>');
@@ -537,7 +550,9 @@ function buildNewspaperHtml(parsed, options) {
         var fpStart = 0;
         for (var f = 0; f < Math.min(fpLines.length, 10); f++) {
           var fl = fpLines[f].trim();
-          if (fl.match(/^###/) || fl.match(/^\*\*.+\*\*$/) || fl.match(/^By\s+/)) {
+          // S235 G-PR7 — added `^# ` (h1) match so the canonical title doesn't
+          // duplicate into the dropcap body.
+          if (fl.match(/^#\s+/) || fl.match(/^###\s+/) || fl.match(/^\*\*.+\*\*$/) || fl.match(/^By\s+/)) {
             fpStart = f + 1;
           }
         }

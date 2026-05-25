@@ -169,12 +169,122 @@ function resolveDestination(dest) {
   return ROOTS.publications;
 }
 
-async function uploadFile(filePath, destKey) {
+// S235 G-PR11 — Derive a stem prefix from a filename to identify prior-version
+// files of the same type+cycle in the destination folder. Stems strip the
+// trailing slug (for non-edition types) so a re-run of supplemental C94
+// `let_walks_reset` matches earlier `let_walks_initial` etc. of the same
+// (type, cycle) pair when present. Examples:
+//   bay_tribune_e94.pdf                              → bay_tribune_e94
+//   bay_tribune_supplemental_c94_let_walks_reset.pdf → bay_tribune_supplemental_c94
+//   bay_tribune_interview_c92_santana.pdf            → bay_tribune_interview_c92
+//   bay_tribune_dispatch_c93_kono.pdf                → bay_tribune_dispatch_c93
+// Returns null when the filename doesn't match a canonical stem shape — in
+// that case --supersede is a no-op (defensive default; better than wild
+// regex matches deleting unrelated files).
+function deriveStemForSupersede(fileName) {
+  var base = fileName.replace(/\.[a-zA-Z0-9]+$/, '');
+  // Edition stem
+  var editionMatch = base.match(/^(bay_tribune_e\d+)$/);
+  if (editionMatch) return editionMatch[1];
+  // Non-edition stem: bay_tribune_<type>_c<cycle>[_<slug>]
+  var nonEditionMatch = base.match(/^(bay_tribune_(?:interview|supplemental|dispatch|interview-transcript)_c\d+)(?:_.*)?$/);
+  if (nonEditionMatch) return nonEditionMatch[1];
+  return null;
+}
+
+// Find or create the archive subfolder inside a destination folder. Used by
+// --supersede archive mode (the default disposition). Returns the archive
+// folder ID. Idempotent — name-search first, create only if absent.
+async function findOrCreateArchiveSubfolder(drive, parentFolderId) {
+  var list = await drive.files.list({
+    q: "'" + parentFolderId + "' in parents and name = 'archive' and mimeType = 'application/vnd.google-apps.folder' and trashed = false",
+    fields: 'files(id, name)',
+    pageSize: 5
+  });
+  var existing = (list.data.files || [])[0];
+  if (existing) return existing.id;
+  var created = await drive.files.create({
+    requestBody: {
+      name: 'archive',
+      mimeType: 'application/vnd.google-apps.folder',
+      parents: [parentFolderId]
+    },
+    fields: 'id'
+  });
+  console.log('Created archive subfolder: ' + created.data.id);
+  return created.data.id;
+}
+
+// List files in destFolder whose name starts with the derived stem. Excludes
+// the archive subfolder itself + already-archived files (which live under
+// archive/, not the dest folder). Returns the array of {id, name} objects.
+async function findPriorVersions(drive, folderId, stem) {
+  // Drive search: `name contains` matches anywhere; we filter for prefix in
+  // memory because Drive's search doesn't support startsWith.
+  var list = await drive.files.list({
+    q: "'" + folderId + "' in parents and name contains '" + stem + "' and trashed = false and mimeType != 'application/vnd.google-apps.folder'",
+    fields: 'files(id, name)',
+    pageSize: 100
+  });
+  var all = list.data.files || [];
+  return all.filter(function (f) { return f.name.indexOf(stem) === 0; });
+}
+
+// Supersede prior versions of the same stem before upload. mode='archive'
+// (default) moves matched files into the archive/ subfolder; mode='delete'
+// trashes them. Logs each action so the operator can audit later. Returns
+// the count of files acted on.
+async function supersedePriorVersions(drive, folderId, fileName, mode) {
+  var stem = deriveStemForSupersede(fileName);
+  if (!stem) {
+    console.log('[supersede] filename "' + fileName + '" does not match a canonical stem shape — skipping (no-op).');
+    return 0;
+  }
+  console.log('[supersede] mode=' + mode + ' stem=' + stem + ' folder=' + folderId);
+  var priors = await findPriorVersions(drive, folderId, stem);
+  if (priors.length === 0) {
+    console.log('[supersede] no prior versions found — proceeding with upload.');
+    return 0;
+  }
+  console.log('[supersede] found ' + priors.length + ' prior version(s):');
+  for (var i = 0; i < priors.length; i++) {
+    console.log('  - ' + priors[i].name + ' (' + priors[i].id + ')');
+  }
+
+  if (mode === 'delete') {
+    for (var d = 0; d < priors.length; d++) {
+      await drive.files.delete({ fileId: priors[d].id });
+      console.log('  [delete] ' + priors[d].name);
+    }
+  } else {
+    var archiveFolderId = await findOrCreateArchiveSubfolder(drive, folderId);
+    for (var m = 0; m < priors.length; m++) {
+      await drive.files.update({
+        fileId: priors[m].id,
+        addParents: archiveFolderId,
+        removeParents: folderId,
+        fields: 'id, name, parents'
+      });
+      console.log('  [archive] ' + priors[m].name + ' → archive/');
+    }
+  }
+  return priors.length;
+}
+
+async function uploadFile(filePath, destKey, opts) {
+  opts = opts || {};
   var auth = getAuth();
   var drive = google.drive({ version: 'v3', auth });
 
   var fileName = path.basename(filePath);
   var folderId = resolveDestination(destKey);
+
+  // S235 G-PR11 — when --supersede is set, move/delete prior same-stem
+  // versions in the destination folder before uploading. Default disposition
+  // is archive (safer; recoverable). Use --supersede-mode delete to trash.
+  if (opts.supersede) {
+    await supersedePriorVersions(drive, folderId, fileName, opts.supersedeMode || 'archive');
+  }
 
   // Detect MIME type and read mode from extension
   var ext = path.extname(filePath).toLowerCase();
@@ -320,6 +430,11 @@ async function main() {
     console.log('--type {edition|interview|supplemental|dispatch|interview-transcript}');
     console.log('--cycle N      required when --type ≠ edition (informational metadata)');
     console.log('--dry-run      log the resolved destination + metadata; skip upload');
+    console.log('--supersede    before upload, move/delete prior-version PDFs of the');
+    console.log('               same type+cycle stem in the destination folder.');
+    console.log('--supersede-mode {archive|delete}  default: archive (safer). archive');
+    console.log('               moves prior versions to an archive/ subfolder; delete');
+    console.log('               trashes them via Drive API.');
     console.log('');
     console.log('Run --test to verify write access.');
     process.exit(0);
@@ -375,16 +490,33 @@ async function main() {
     dryRun: dryRun
   }, null, 2));
 
+  // S235 G-PR11 — supersede flag plumbing
+  var supersede = process.argv.includes('--supersede');
+  var supersedeMode = parseFlag('supersede-mode') || 'archive';
+  if (supersedeMode !== 'archive' && supersedeMode !== 'delete') {
+    console.error('[ERROR] --supersede-mode must be "archive" or "delete" (got "' + supersedeMode + '")');
+    process.exit(1);
+  }
+
   if (dryRun) {
     console.log('[DRY] Would upload ' + path.basename(filePath) +
-      ' → ' + dest + ' (' + resolveDestination(dest) + ')');
+      ' → ' + dest + ' (' + resolveDestination(dest) + ')' +
+      (supersede ? ' [supersede=' + supersedeMode + ', stem=' + deriveStemForSupersede(path.basename(filePath)) + ']' : ''));
     return;
   }
 
-  await uploadFile(filePath, dest);
+  await uploadFile(filePath, dest, { supersede: supersede, supersedeMode: supersedeMode });
 }
 
-main().catch(function(err) {
-  console.error('Fatal:', err.message);
-  process.exit(1);
-});
+// S235 G-PR11 — exports for unit testing the pure deriveStemForSupersede
+// helper. require.main guard keeps main() side-effect-free when required.
+module.exports = {
+  deriveStemForSupersede: deriveStemForSupersede
+};
+
+if (require.main === module) {
+  main().catch(function(err) {
+    console.error('Fatal:', err.message);
+    process.exit(1);
+  });
+}

@@ -380,6 +380,34 @@ function parseNamesIndex(sectionLines) {
 }
 
 // ---------------------------------------------------------------------------
+// Parser sanity check — shared by NAMES INDEX + BUSINESSES NAMED guards
+// ---------------------------------------------------------------------------
+// S229 engine.24 closed silent-zero on NAMES INDEX via inline guard at
+// :880-891. S234 engine.26 generalizes that pattern: any parser-bearing
+// section that has non-separator content lines but produced zero entities
+// is a format-contract violation, throw with diagnostic carrying the
+// section name + line count + sample. CLI callsite catches the throw and
+// converts to process.exit(1). Tests assert the throw shape without
+// needing process.exit mocking.
+//
+// `sectionLines` may be null/undefined (no section header in source) or
+// an empty array (header present, content empty) — both pass through
+// silently. Only fires when content lines > 0 AND parsed count == 0.
+function assertParserSanity({ sectionName, sectionLines, parsedCount }) {
+  if (!sectionLines) return;
+  const contentLines = sectionLines.filter(l => {
+    const t = l.trim();
+    return t && !/^[=\-─━_]+$/.test(t);
+  });
+  if (contentLines.length === 0) return;
+  if (parsedCount > 0) return;
+  const sample = contentLines[0].trim();
+  throw new Error(sectionName + ' section had ' + contentLines.length +
+    ' non-empty content lines but parser extracted 0 entities. ' +
+    'Sample line: "' + sample + '"');
+}
+
+// ---------------------------------------------------------------------------
 // BUSINESSES NAMED parser — strict pipe-format, bullet prefix optional
 // ---------------------------------------------------------------------------
 // S229 engine.24 coupling fix (G-P37 root cause): bullet prefix REQUIRED
@@ -871,23 +899,27 @@ async function main() {
   if (!bizSection && !fallbackUsed) console.log('  (no BUSINESSES NAMED section in source)');
   console.log('');
 
-  // Fail-loud sanity check: NAMES INDEX section had non-empty content lines
-  // but parser extracted zero citizens. Closes gap-log finding #9 and the E1
-  // false-success pattern at the script level (complements E8's skill-level
-  // cross-check). Counts only non-separator content lines so the existing
-  // "pure-atmosphere artifact" path stays valid for sections that legitimately
-  // contain only headers + separators.
-  if (namesSection) {
-    const contentLines = namesSection.filter(l => {
-      const t = l.trim();
-      return t && !/^[=\-─━_]+$/.test(t);
+  // Fail-loud sanity check: section had non-empty content lines but parser
+  // extracted zero entities. Closes gap-log finding #9 (NAMES INDEX) + S231
+  // G-S5 (BUSINESSES NAMED) at script level. Counts only non-separator
+  // content lines so legitimate pure-atmosphere artifact sections (header
+  // + separator only) still pass through silently. Helper throws on
+  // violation; this site converts the throw to a process.exit(1) preserving
+  // pre-refactor exit-code behavior + CLI diagnostic format.
+  try {
+    assertParserSanity({
+      sectionName: 'NAMES INDEX',
+      sectionLines: namesSection,
+      parsedCount: parsedCitizens.length,
     });
-    if (contentLines.length > 0 && parsedCitizens.length === 0) {
-      console.error('[ERROR] NAMES INDEX section had ' + contentLines.length +
-        ' non-empty content lines but parser extracted 0 citizens. ' +
-        'Sample line: "' + contentLines[0].trim() + '"');
-      process.exit(1);
-    }
+    assertParserSanity({
+      sectionName: 'BUSINESSES NAMED',
+      sectionLines: bizSection,
+      parsedCount: parsedBusinesses.length,
+    });
+  } catch (e) {
+    console.error('[ERROR] ' + e.message);
+    process.exit(1);
   }
 
   if (parsedCitizens.length === 0 && parsedBusinesses.length === 0) {
@@ -1111,7 +1143,9 @@ module.exports = {
   partitionCandidatesByBayTribuneIndex: partitionCandidatesByBayTribuneIndex,
   // S233 canon.3 T11 — POPID alias resolution (name-scoped)
   POPID_ALIASES: POPID_ALIASES,
-  resolvePopIdAlias: resolvePopIdAlias
+  resolvePopIdAlias: resolvePopIdAlias,
+  // S234 engine.26 — generalized parser sanity check (NAMES INDEX + BUSINESSES NAMED)
+  assertParserSanity: assertParserSanity
 };
 
 if (require.main === module) {

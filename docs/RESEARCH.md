@@ -2099,3 +2099,69 @@ The `Task` tool today spawns Claude subagents that each produce one reply and ex
 
 **Addendum (S207, 2026-05-08):** Anthropic announced creative-tool connectors Apr 28 2026 ("Claude for Creative Work") — Adobe Creative Cloud is now reachable via Claude with 50+ tools across Photoshop, Premiere, Express, etc. **This opens a 5th intervention path:** post-process failure modes in Photoshop instead of regenerating from FLUX. The S196 mesa case (3 regens, 3 different failure modes) is the canonical fit — instead of forcing FLUX to suppress real QuikCAM/ERB stadium logos via prompt rewrite, generate the scene then have Claude operate Photoshop to cover or replace the offending brand artifacts. Pairs naturally with path 1 (OCR post-check) — OCR detects the failure region, Photoshop step removes it. ROLLOUT Watch List trigger: "returning to this research." Filed S207 tech reading: `docs/mags-corliss/TECH_READING_ARCHIVE.md §2026-05-08`.
 
+### S235 — Context-management beta flag eval: `context-management-2025-06-27` (2026-05-25)
+
+**Source:** Anthropic Messages API beta — `context-management-2025-06-27` beta header. Pulled via context7 (`/websites/platform_claude_en_api`). Cookbook companion: `tool_use/memory_cookbook.ipynb` (already cataloged in S114 cookbook audit at RESEARCH.md §S114, line 845).
+
+**Trigger:** ROLLOUT `research.6` open since pre-S225; advisor pass at session-start S235 surfaced the right scope (bounded eval, layer-of-application discriminator, verdict required).
+
+**What the flag does.** Opt-in via `betas: ["context-management-2025-06-27"]` header on `/v1/messages` requests. Enables a `context_management.edits[]` body parameter accepting two edit types:
+
+1. **`clear_tool_uses_20250919`** — trims old `tool_use` + `tool_result` content blocks from message history before generation. Configurable:
+   - `trigger: { type: "input_tokens" | "tool_uses", value: N }` — fires when input tokens or accumulated tool-call count crosses threshold.
+   - `clear_at_least: { type: "input_tokens", value: N }` — minimum tokens to clear when triggered.
+   - `clear_tool_inputs: "all" | string[]` — clear all tools or only named tools.
+   - `exclude_tools: string[]` — never clear these tool names.
+   - `keep: { type: "tool_uses", value: N }` — retain N most recent tool uses.
+
+2. **`clear_thinking_20251015`** — removes `thinking` content blocks from older assistant turns. Configurable: `keep: { type: "thinking_turns", value: N }` or `keep: { type: "all" }`.
+
+Response includes `context_management.applied_edits[]` (e.g., `beta_clear_tool_uses_20250919_edit_response` with `cleared_input_tokens` + `cleared_tool_uses` counts). Token-counting endpoint exposes `context_management.original_input_tokens` for cost-shaping.
+
+**Adjacent tools (S145 teach-the-landscape framing):**
+
+| Mechanism | Layer | What it does | Our usage |
+|-----------|-------|--------------|-----------|
+| `context-management-2025-06-27` | Anthropic API request | API trims old tool-call / thinking blocks before processing on the server side | THIS EVAL — does it fit? |
+| Claude Code native auto-compact | Harness (Claude Code) | Auto-compresses prior messages as conversation approaches context limit | Active in every CC session — out of our control |
+| claude-mem autodream | Harness (cron) | Off-session consolidation of build observations into cross-session memory | Active per `docs/CLAUDE-MEM.md` |
+| Cookbook instant compaction pattern (`misc/session_memory_compaction.ipynb`) | App-level (Python harness) | Background-thread proactive summary build at soft-token threshold | Cataloged S114 "graduated to rollout" per RESEARCH.md:879 — not ported into our direct-API callers |
+| Self-managed message-array trim (e.g., `mags-discord-bot.js` MAX_HISTORY trim) | App-level (our code) | Truncate `messages[]` array to N most recent pairs before sending | Already implemented in Discord bot |
+
+The flag is a server-side-trim primitive sitting under message-array-trim and over Claude Code auto-compact. **Wrong layer for our harness work** (Claude Code already handles its own context); **right layer for direct-API callers** that build long tool-using conversations.
+
+**Fit check — our direct Anthropic-API callers (grep across `scripts/` + `lib/`):**
+
+| Caller | Model | Multi-turn? | Tools? | Thinking? | Flag fits? |
+|--------|-------|-------------|--------|-----------|------------|
+| `scripts/mags-discord-bot.js` | Haiku 4.5 | Yes (MAX_HISTORY-trimmed pair list) | No | No | NO — no tools/thinking to trim |
+| `scripts/moltbook-heartbeat.js` | — | Short | No | No | NO |
+| `scripts/daily-reflection.js` | — | Single-turn | No | No | NO |
+| `scripts/discord-reflection.js` | — | Single-turn | No | No | NO |
+| `scripts/generate.js` | — | Single-turn | No | No | NO |
+| `scripts/rheaTwoPass.js` | Reviewer model | Two-pass | No | No | NO |
+| `scripts/photoQA.js` | Haiku vision | Single-turn | No | No | NO |
+| `scripts/generate-edition-photos.js` + `lib/photoGenerator.js` | FLUX (image-gen, non-Anthropic) | — | — | — | N/A — not Anthropic API |
+
+None of the direct API callers in the repo today use tools OR extended thinking. The flag's two edits (`clear_tool_uses_20250919` + `clear_thinking_20251015`) operate on content blocks we don't produce. **Adopting the flag against these callers would add request overhead with zero behavioral effect.**
+
+**Verdict: WATCH / DEFER (not ADOPT, not REJECT).** The flag is sound design and would matter if any of our callers grew into tool-using multi-turn conversations with extended thinking — but the fit is contingent, not current.
+
+**Concrete adopt-triggers (revisit when any fires):**
+- `MIGRATION_OFF_CLAUDE` (research.4) graduates from needs-info to a built desk-agent harness using the Anthropic SDK directly with tools (writer/canon-check/ledger-lookup tools) — long conversations + tool history accumulation would benefit.
+- `infrastructure.3` (Claude Managed Agents pilot) ships and exposes a path where we own the conversation loop with tools — same fit.
+- `rheaTwoPass.js` evolves from two-pass text review into a tool-using reviewer that calls canon-check / sheet-lookup / cross-reference tools across many turns.
+- `mags-discord-bot.js` gains MCP/tool wiring so it can search canon, fetch citizen cards, or invoke any tool surface — current MAX_HISTORY trim becomes coarse compared to the flag's selective-tool-result trim.
+
+**Why not ADOPT (pre-mortem check per advisor):** An "adopt now" verdict requires a named next-action with a real fit. The current next-action would be "add `context-management-2025-06-27` header and `clear_thinking_20251015` config to Discord bot" — but Discord bot has no thinking blocks to clear. That's not "adopt," that's "performance-of-adopt." Verdict stays WATCH/DEFER.
+
+**Why not REJECT:** the flag has genuine architectural fit for the trajectories named above (post-MIGRATION_OFF_CLAUDE desk-agent harness, Managed Agents pilot, tool-using reviewer evolution). Rejecting now would erase the trigger list.
+
+**Why filed at all (vs no entry):** the cookbook reference at RESEARCH.md §S114 line 845 says "Maps to our persistence system. The context clearing strategy (clear thinking blocks first, then old tool results, keep memory) could improve our compaction." That claim was about Claude Code's compaction (which we don't control via this flag) AND about our hypothetical future direct-API agent harness (where the flag does fit). This entry separates the two and corrects the cookbook-derived ambiguity: **the flag does not improve Claude Code's compaction; it improves direct-Anthropic-API-call conversation flows we don't currently own.**
+
+**Cost of carrying as WATCH:** ~0. Trigger checks happen organically when research.4 / infrastructure.3 / rheaTwoPass / mags-discord-bot tooling rows surface. ROLLOUT row stays alive as the watch index.
+
+**ROLLOUT update:** `research.6` flips `ready` → `watch` with adopt-trigger list inline + pointer to this entry. Closed-as-watched; archive-after-trigger pattern instead of close-and-forget.
+
+**Status:** WATCH. No build, no implementation. Trigger-aware. Doc-only deliverable shipped at S235 close.
+

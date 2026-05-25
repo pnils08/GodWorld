@@ -832,6 +832,34 @@ Source: Mike-shared news 2026-05-08 covering arstechnica + venturebeat + zdnet +
 
 ---
 
+### S235 — Anthropic context-management beta flag (`context-management-2025-06-27`)
+
+Server-side context-trim primitive: opt-in via `betas: ["context-management-2025-06-27"]` request header, configure `context_management.edits[]` with `clear_tool_uses_20250919` (trim old tool inputs/outputs by token-count or tool-use-count trigger; configurable keep / exclude / clear-tool-inputs) and/or `clear_thinking_20251015` (trim thinking blocks from older assistant turns, keep N most recent). Response surfaces `applied_edits[]` for observability; token-counting endpoint exposes pre-edit `original_input_tokens`.
+
+**Adjacent-tools framing** (per S145 teach-the-landscape — captured in full at [[../RESEARCH]] §S235):
+
+| Layer | Mechanism | Our usage |
+|-------|-----------|-----------|
+| Anthropic API server-side | `context-management-2025-06-27` flag | THIS EVAL |
+| Claude Code harness | Native auto-compact | Active, out of our control |
+| Cron / off-session | claude-mem autodream | Active per [[../CLAUDE-MEM]] |
+| App-level cookbook pattern | Instant compaction (S114 cookbook §`misc/session_memory_compaction.ipynb`) | Cataloged, not ported |
+| App-level our code | MAX_HISTORY trim in `mags-discord-bot.js` | Active |
+
+**Verdict: WATCH / DEFER.** Empirical fit-check across all direct Anthropic API callers in `scripts/` + `lib/` — none use tools OR extended thinking. Flag's two edits operate on content blocks we don't currently produce. Adopting now would add request overhead with zero behavioral effect.
+
+**Adopt triggers** (revisit when any fires):
+- `MIGRATION_OFF_CLAUDE` (research.4) builds a direct-SDK desk-agent harness with tools
+- `infrastructure.3` (Claude Managed Agents pilot) ships and exposes a path where we own the conversation loop with tools
+- `rheaTwoPass.js` evolves into a tool-using reviewer
+- `mags-discord-bot.js` gains MCP/tool wiring
+
+**Correction to S114 cookbook framing:** cookbook entry at [[../RESEARCH]] §S114 line 845 said the flag "could improve our compaction." That was ambiguous between Claude Code's compaction (which this flag does NOT improve — different layer) and a hypothetical future direct-API agent harness (where the flag DOES fit). This entry separates the two.
+
+Sources: Anthropic Messages API docs via context7 (`/websites/platform_claude_en_api`), [[../RESEARCH]] §S235 carries the full eval with API-shape detail + per-caller fit-check table.
+
+---
+
 ### S207 — Anthropic "Claude for Creative Work" (Apr 28 2026, updated May 1)
 
 Anthropic announced a creative-tool connector pack — Ableton, Adobe Creative Cloud (50+ tools across Photoshop / Premiere / Express), Affinity by Canva, Autodesk Fusion, Blender (MCP-based, Python API), Resolume Arena/Wire, SketchUp, Splice. Plus Claude Design (new Anthropic Labs product, Canva export). Plus art/design school partnerships (RISD, Ringling, Goldsmiths). Source: Mike-shared Drive PDF S207 (downloaded via service account from `1drdmc2pa21V9S1LeFa5YbYK5Vv0Zu13s`).

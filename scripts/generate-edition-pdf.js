@@ -239,15 +239,32 @@ function loadPhotoBase64(photoDir, filename) {
 }
 
 /**
+ * Normalize a section identifier for cross-source comparison.
+ *
+ * S234 engine.25 G-PR6 fix: DJ photo direction writes section IDs with
+ * underscore separators (`FRONT_PAGE`) while edition text writes them with
+ * spaces (`FRONT PAGE`); pre-S234 comparison was uppercase-only and the
+ * mismatch silently dropped FP1 photos. Normalize both sides by collapsing
+ * any run of underscore-or-whitespace into a single space, uppercasing,
+ * and trimming. Applies symmetrically — calling this on both the manifest
+ * side and the parsed-section side guarantees equality on legitimate
+ * matches regardless of which separator the writer chose.
+ */
+function normalizeSectionId(s) {
+  if (!s) return '';
+  return s.toUpperCase().replace(/[_\s]+/g, ' ').trim();
+}
+
+/**
  * Find photo for a section from the manifest.
  */
 function findPhotoForSection(manifest, sectionName) {
   if (!manifest || !manifest.photos) return null;
   if (!sectionName) return null;
-  var sectionUpper = sectionName.toUpperCase();
+  var sectionNorm = normalizeSectionId(sectionName);
   return manifest.photos.find(function(p) {
     if (!p.section) return false;
-    return p.section.toUpperCase() === sectionUpper;
+    return normalizeSectionId(p.section) === sectionNorm;
   });
 }
 
@@ -726,14 +743,14 @@ async function main() {
     // generate). Surface the unmatched section list so the operator decides.
     var photoSections = {};
     filteredPhotos.forEach(function(p) {
-      if (p.section) photoSections[p.section.toUpperCase()] = true;
+      if (p.section) photoSections[normalizeSectionId(p.section)] = true;
     });
     var META_SECTIONS = { 'ARTICLE TABLE': 1, 'NAMES INDEX': 1, 'CITIZEN USAGE LOG': 1,
       'STORYLINES UPDATED': 1, 'CONTINUITY NOTES': 1, 'BUSINESSES NAMED': 1,
       'COMING NEXT EDITION': 1, 'END EDITION': 1 };
     var missingPhotoSections = [];
     for (var ms = 0; ms < parsed.sections.length; ms++) {
-      var sectionName = (parsed.sections[ms].name || '').toUpperCase().trim();
+      var sectionName = normalizeSectionId(parsed.sections[ms].name || '');
       if (!sectionName || META_SECTIONS[sectionName]) continue;
       if (!photoSections[sectionName]) missingPhotoSections.push(sectionName);
     }
@@ -792,7 +809,17 @@ async function main() {
   console.log('');
 }
 
-main().catch(function(err) {
-  console.error('Fatal error:', err);
-  process.exit(1);
-});
+// S234 engine.25 G-PR6 — exports for unit testing of normalizeSectionId +
+// findPhotoForSection. require.main guard keeps main() side-effect-free when
+// required as a module.
+module.exports = {
+  normalizeSectionId: normalizeSectionId,
+  findPhotoForSection: findPhotoForSection,
+};
+
+if (require.main === module) {
+  main().catch(function(err) {
+    console.error('Fatal error:', err);
+    process.exit(1);
+  });
+}

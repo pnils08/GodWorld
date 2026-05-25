@@ -1,12 +1,34 @@
 ---
 name: write-supplemental
 description: Produce a supplemental edition — variety coverage that builds the world beyond the Cycle Pulse. Any topic, any reporter, any format.
-version: "1.1"
-updated: 2026-04-26
+version: "1.2"
+updated: 2026-05-24
 tags: [media, active]
 effort: high
 disable-model-invocation: true
 argument-hint: "[topic]"
+---
+
+## What's new in v1.2 (2026-05-24, S233 pipeline.33)
+
+**Step 3.4 envelope-wrap discipline + format-contract inline + Step 2 brief pre-extraction.** v1.1 deferred all format-shape detail to [[../../../docs/EDITION_PIPELINE]] §Published .txt Format Contract; the S231 C94 `let_walks_reset` supplemental run surfaced three structural failure modes when Mags-during-compile re-interpreted that pointer:
+
+- **G-S5 silent-zero on NAMES INDEX + BUSINESSES NAMED** — Step 3.4 .txt compile output used markdown-table syntax (`| POPID | Name | Role |` with header + `|---|---|` separator) for NAMES INDEX and dash-list for BUSINESSES NAMED. Parser `scripts/ingestEditionWiki.js:294` requires strict pipe-format with first field matching `/^[A-Z]+-[A-Z0-9]+$/`; markdown-table form parses to 0 entities silently. Source-of-mis-training: `editions/SUPPLEMENTAL_TEMPLATE.md` v2.0 used markdown-table syntax on ARTICLE TABLE which Mags then patterned across the parser-strict sections.
+- **G-S4 compile re-introduced engine-language** — Step 3.4 free-form rewrite of agent .md content transformed Hal's `"this cycle"` cross-reference into `"Edition 94"` (Hal's source agent had complied with the prior rule; compile broke compliance). Note: governance.15 S233 carved out edition-number cross-references in editorial chrome contexts (See also / byline / sidebar) — so the specific G-S4 trigger is partially mooted, but the deeper principle stays: Step 3.4 is envelope-wrap, not editorial-pass.
+- **G-S3 brief asked agent to grep inside full edition .txt** for a specific prior article — search inside 40KB file for one section when pre-extraction to a single file would be cleaner.
+
+**What changed:**
+- **Step 2 brief pre-extraction (G-S3)** — one sentence added: when brief references a specific prior article for the agent to read, pre-extract it to `output/reporters/<reporter>/articles/<source-cycle>_<slug>.md` and reference that path in the brief rather than directing the agent to grep inside the full edition .txt.
+- **Step 3 small guardrail (G-S4 deeper principle)** — added clarifying clause: compile preserves agent-written prose verbatim where it satisfies canon-rules; quality checks (deck lines, photo credits, name verification, opinion markers) are validation operations, not rewrite operations.
+- **Step 3.4 FORMAT CONTRACT inline (G-S5)** — explicit line-shape exemplars for NAMES INDEX (`POP-NNNNN | Full Name | Role/Title`) + BUSINESSES NAMED (`BIZ-NNNNN | Name | Sector | Neighborhood`); explicit warning against markdown-table syntax (silent-zero pattern); §What Step 3.4 IS / IS NOT framing (envelope-wrap not editorial-pass); verification gate citing expected ingestEditionWiki.js entity count > 0.
+- **`editions/SUPPLEMENTAL_TEMPLATE.md` v2.0 → v2.1 (G-S5 root cause fix)** — added §NAMES INDEX + §BUSINESSES NAMED sections in strict pipe-format mirroring `docs/media/EDITION_FORMAT_TEMPLATE.txt` canonical exemplar; reformatted §Article Table from markdown-table to flat strict pipe so all three intake sections share consistent shape; ADR-0006 Contract A pattern notes inline.
+
+**Cross-link:** engine.26 follow-up filed for parser defensive-emit (warning when standalone BUSINESSES NAMED section has non-empty content but parser extracts 0 — same defensive-emit shape engine.24 added to NAMES INDEX S229 — fail-loud rather than silent-zero).
+
+**Out of scope (deferred):** mechanical assembly script for Step 3.4 (operator-driven discipline holds for now via FORMAT CONTRACT inline + template alignment; mechanical guard files if format-contract violations recur).
+
+**Source:** `output/production_log_supplemental_c94_let_walks_reset_gaps.md` (entries G-S3 + G-S4 + G-S5).
+
 ---
 
 # /write-supplemental — Supplemental Edition Production
@@ -247,6 +269,7 @@ Enhanced data loaded:
 - **Don't default to struggle.** If the topic is a neighborhood, show what's good about it, not what's wrong with it.
 - **Use fresh citizens.** Check the Citizen Usage Log — if a citizen has appeared in the last 3 editions, find someone else.
 - **Authorize new canon.** Reporters can discover businesses, venues, cultural events. Specify how many new entities they can create.
+- **Pre-extract any referenced prior article (G-S3, S233 pipeline.33).** If the brief directs the agent to read a specific prior article (e.g., correcting an earlier columnist piece, building off a published interview), extract that article to its own file at `output/reporters/<reporter>/articles/<source-cycle>_<slug>.md` BEFORE dispatching the agent — then reference that path in the brief. Don't direct the agent to grep inside the full edition .txt for one section; that puts the agent in a 40KB search loop when a single-file reference is cleaner.
 
 ---
 
@@ -361,7 +384,7 @@ After agents return, Mags compiles:
 
 1. **Assemble articles** in editorial order (story logic)
 2. **Add the header** (see template)
-3. **Quality checks:**
+3. **Quality checks** (S233 pipeline.33 — these are VALIDATION operations, not rewrite operations; preserve agent-written prose verbatim where it satisfies canon-rules):
    - Deck lines under every headline
    - Standardized bylines
    - Cross-references to past coverage where relevant
@@ -379,19 +402,75 @@ Show the compiled supplemental to the user.
 
 ## Step 3.4: Compile to `.txt`
 
-The editorial compile (Step 3) produced article body + tracking data. Now wrap it in the [[EDITION_PIPELINE]] §Published `.txt` Format Contract envelope — Bay Tribune masthead + 5 structural sections (HEADER / BODY / NAMES INDEX / CITIZEN USAGE LOG / BUSINESSES NAMED / ARTICLE TABLE).
+The editorial compile (Step 3) produced article body + tracking data. Now wrap it in the [[../../../docs/EDITION_PIPELINE]] §Published `.txt` Format Contract envelope — Bay Tribune masthead + 5 structural sections (HEADER / BODY / NAMES INDEX / CITIZEN USAGE LOG / BUSINESSES NAMED / ARTICLE TABLE).
+
+**Step 3.4 IS:** envelope-wrap of the editorial product. Concat masthead + headers + body + intake sections + end marker. Preserve agent-written prose verbatim. Apply ADR-0006 Contract A pattern — template (`editions/SUPPLEMENTAL_TEMPLATE.md`) and canonical exemplar (`docs/media/EDITION_FORMAT_TEMPLATE.txt`) are the format-shape source; parser (`scripts/ingestEditionWiki.js`) is authoritative.
+
+**Step 3.4 IS NOT:** editorial-pass. Don't free-form-rewrite content from the agent .md files. Quality checks happen in Step 3 (validation), not here. S231 G-S4 evidence: this step turned Hal's `"this cycle"` into `"Edition 94"` because the wrap path was treated as a rewrite path. Step 3.4 is concatenation, not interpretation.
 
 **Output:** `editions/cycle_pulse_supplemental_<cycle>_<slug>.txt`
 
-- Body: the assembled article(s)
+- Body: the assembled article(s) verbatim
 - Article Table: one row per article (`<slug> | <reporter> | <section> | <word count>`)
 - Masthead `<TYPE>=SUPPLEMENTAL`, descriptor = topic theme
 
 Slug rule: 1–3 words from the topic theme, lowercase, underscore-separated (e.g., `health_center_unstuck`). Editorial pick at authoring time. Once published, immutable. Replicated identically across filename, masthead descriptor, sift queries, MCP search, Mara, packets, production log, bay-tribune metadata.
 
-Names Index, Citizen Usage Log, Businesses Named populated from the citizens/businesses cited in the body — separate sections after the body, never inline (S172 metadata-leak rule).
-
 `Y<n>C<m>` math: `n = floor((cycle-1) / 52) + 1`, `m = ((cycle-1) % 52) + 1`. No month names.
+
+### FORMAT CONTRACT — NAMES INDEX + BUSINESSES NAMED (S233 pipeline.33, ADR-0006 Contract A)
+
+Names Index, Citizen Usage Log, Businesses Named populated from the citizens/businesses cited in the body — separate sections after the body, never inline (S172 metadata-leak rule). **These three sections have STRICT format-contract requirements**; the parser silently parses to 0 entities on wrong-shape input (S231 G-S5 silent-zero pattern).
+
+**NAMES INDEX — strict pipe-format, no leading pipe, no markdown header:**
+
+```
+############################################################
+NAMES INDEX
+############################################################
+
+POP-NNNNN | Full Name | Role/Title
+POP-NNNNN | Full Name | Role/Title
+CUL-NNNNNNN | Name | Role
+FAITH-NEW | Org Name | Faith Org | Neighborhood
+Name — Role
+```
+
+- Parser entry: `scripts/ingestEditionWiki.js:294` splits on `|`, requires first field to match `/^[A-Z]+-[A-Z0-9]+$/`.
+- ID prefixes: `POP-NNNNN` / `CUL-NNNNNNN` / `BIZ-NNNNN` / `FAITH-NEW`.
+- Bullet em-dash form also accepted: `- Name — Role` (ingester promotes to POP-pending).
+- **FORBIDDEN format (silent-zero):** markdown-table syntax — `| POPID | Name | Role |` with leading pipe, `|--|--|--|` separator row, or `| Header | Header | Header |` first row. Leading pipe produces empty `parts[0]` which fails the ID regex → 0 entities parsed → silent failure (no warning, no exception).
+
+**BUSINESSES NAMED — strict pipe-format, no leading pipe:**
+
+```
+############################################################
+BUSINESSES NAMED
+############################################################
+
+BIZ-NNNNN | Name | Sector | Neighborhood
+NEW | Name | Sector | Neighborhood
+```
+
+- Parser entry: `scripts/ingestEditionWiki.js:203` (loosened S229 per engine.24 to accept optional `- ` bullet prefix).
+- `BIZ-NNNNN` for existing businesses, `NEW` prefix for new businesses (Sector/Neighborhood blank-permissible).
+- **FORBIDDEN format (silent-zero):** same markdown-table failure mode as NAMES INDEX.
+
+**ARTICLE TABLE — flat pipe-format (parser-tolerant):**
+
+Parser `parseEdition.js` (capability-reviewer/) treats ARTICLE TABLE as opaque footer text — `isFooter: true`, body retained verbatim, no row extraction. Markdown-table syntax doesn't break the parser here, but `editions/SUPPLEMENTAL_TEMPLATE.md` v2.1 normalizes Article Table to flat pipe-format so all three intake sections share consistent shape (S231 G-S5 root cause was the markdown-shape on ARTICLE TABLE training the compile to use markdown-shape on NAMES INDEX / BUSINESSES NAMED).
+
+**Canonical exemplar:** `docs/media/EDITION_FORMAT_TEMPLATE.txt` §NAMES INDEX + §BUSINESSES NAMED + §ARTICLE TABLE. Read it before first-cycle supplemental compile if format-shape is unclear.
+
+### Verification gate (S233 pipeline.33)
+
+After Step 3.4 emits the `.txt`, expect Step 3.5 validation to confirm:
+
+```bash
+node scripts/ingestEditionWiki.js editions/cycle_pulse_supplemental_<cycle>_<slug>.txt --type supplemental --dry-run
+```
+
+Parser stdout should report **entity count ≥ 1 per non-empty NAMES INDEX section** AND **biz count ≥ 1 per non-empty BUSINESSES NAMED section**. If the section had content lines but parser reports 0 entities, that's the G-S5 silent-zero signature — fix the format-shape inline (markdown-table → strict pipe) before publish. Parser defensive-emit improvements (warning instead of silent-zero) tracked at `engine.26` for engine-sheet.
 
 ## Step 3.5: Validation
 

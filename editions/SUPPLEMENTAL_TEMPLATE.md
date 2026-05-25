@@ -1,4 +1,4 @@
-# SUPPLEMENTAL EDITION TEMPLATE v2.0
+# SUPPLEMENTAL EDITION TEMPLATE v2.1
 
 **Purpose:** Guide the production of supplemental editions — variety coverage that builds the world beyond the Cycle Pulse. Supplementals add texture, canon, and life to GodWorld. One per cycle minimum.
 
@@ -175,6 +175,50 @@ For civic supplementals covering initiatives approaching a vote:
 
 Every supplemental ends with engine-facing intake sections. This is how supplemental canon integrates back into the simulation.
 
+### NAMES INDEX
+
+```
+############################################################
+NAMES INDEX
+############################################################
+
+POP-NNNNN | Full Name | Role/Title
+POP-NNNNN | Full Name | Role/Title
+CUL-NNNNNNN | Name | Role
+FAITH-NEW | Org Name | Faith Org | Neighborhood
+Name — Role
+```
+
+**Format contract (S233 pipeline.33 — ADR-0006 Contract A pattern, mirrors `docs/media/EDITION_FORMAT_TEMPLATE.txt` §NAMES INDEX):**
+
+- **Strict pipe-format, no leading pipe, no markdown-table header row, no `|---|` separator.** Parser `scripts/ingestEditionWiki.js:294` splits on `|` and requires the first field to match `/^[A-Z]+-[A-Z0-9]+$/`. Markdown-table syntax (`|POPID |Name |Role|` with leading pipe) silently parses to 0 entities — same silent-zero shape as S188 KONO pattern.
+- ID prefixes: `POP-NNNNN` (Sim_Ledger citizens), `CUL-NNNNNNN` (cultural-only entities from `wd-cultural`), `BIZ-NNNNN` (businesses, when surfaced here rather than BUSINESSES NAMED), `FAITH-NEW` (new faith org).
+- Bullet em-dash form (`- Name — Role`) also accepted by parser for citizens not yet in canon (ingester promotes to POP-pending).
+- One row per named entity. Avoid prose-bullet form (`- POP-NNNNN | Name | Prose description`) — `emitFormatContractSections.js` may emit incorrectly per G-W43.
+- Pure-separator lines (hyphens, equals, em-dashes only) are tolerated as visual dividers — parser skips them.
+
+-----
+
+### BUSINESSES NAMED
+
+```
+############################################################
+BUSINESSES NAMED
+############################################################
+
+BIZ-NNNNN | Name | Sector | Neighborhood
+NEW | Name | Sector | Neighborhood
+```
+
+**Format contract (S233 pipeline.33 — ADR-0006 Contract A pattern, mirrors `docs/media/EDITION_FORMAT_TEMPLATE.txt` §BUSINESSES NAMED):**
+
+- **Strict pipe-format, no leading pipe, no markdown-table header row, no `|---|` separator.** Parser at `scripts/ingestEditionWiki.js:203` (loosened S229 per engine.24) accepts optional `- ` bullet prefix.
+- `BIZ-NNNNN` for existing businesses; `NEW` prefix for businesses not yet in canon.
+- Sector and Neighborhood may be blank if not yet established for NEW entries.
+- One row per named business cited in the body.
+
+-----
+
 ### Article Table
 
 ```
@@ -182,10 +226,11 @@ Every supplemental ends with engine-facing intake sections. This is how suppleme
 ARTICLE TABLE — ENGINE INTAKE FORMAT
 ############################################################
 
-|Reporter      |StoryType|SignalSource    |Headline                        |ArticleText                              |CulturalMentions|
-|--------------|---------|---------------|--------------------------------|-----------------------------------------|----------------|
-|Mason Ortega  |feature  |culture-event  |Headline here                   |One-line summary of article content      |Temescal,food   |
+Reporter | StoryType | SignalSource | Headline | ArticleText | CulturalMentions
+Mason Ortega | feature | culture-event | Headline here | One-line summary of article content | Temescal,food
 ```
+
+**Format note (S233 pipeline.33):** flat strict pipe-format (no leading pipe, no markdown-table header-separator row) — matches `docs/media/EDITION_FORMAT_TEMPLATE.txt` §ARTICLE TABLE. The previous markdown-table form (`|Reporter|...|` with `|--|--|` separator) was tolerated by current parsers (`parseEdition.js` treats ARTICLE TABLE as opaque footer text) but was the structural pattern that mis-trained the compile to use markdown syntax on NAMES INDEX + BUSINESSES NAMED — where the parser DOES require strict pipe-format and silently fails on markdown syntax (S231 G-S5 silent-zero). Aligning shape across all three sections prevents the cross-contamination.
 
 **StoryType options:** breaking, feature, analysis, opinion, tracker, news, wire, social, profile, review, essay
 **SignalSource options:** civic-initiative, civic-project, sports-roster, sports-game, culture-event, neighborhood, food-dining, arts, lifestyle, editorial, wire-report, social-media, weather, education, health, public-safety
@@ -257,3 +302,9 @@ END SUPPLEMENTAL EDITION — [TOPIC]
 - File naming: `editions/supplemental_{topic_slug}_c{XX}.txt` (or `special_edition_{topic_slug}.txt` for non-cycle-tied specials)
 - **One per cycle minimum.** This is how the world gets texture.
 - **Rotate reporters.** Track who's been used and give the bench players time.
+
+-----
+
+## Changelog
+
+- 2026-05-24 (S233 pipeline.33, research-build) — **v2.0 → v2.1.** Added §NAMES INDEX + §BUSINESSES NAMED sections in strict pipe-format mirroring `docs/media/EDITION_FORMAT_TEMPLATE.txt` (canonical edition exemplar). Reformatted §Article Table from markdown-table syntax (leading pipe + header row + `|---|` separator) to flat strict pipe-format so all three intake sections share consistent shape. Format-contract notes added inline citing ADR-0006 Contract A (template = exemplar + parser = authoritative) + parser entry points + the S188 KONO + S231 G-S5 silent-zero pattern that markdown-table syntax triggers in NAMES INDEX + BUSINESSES NAMED extraction. Source: `output/production_log_supplemental_c94_let_walks_reset_gaps.md` G-S5.

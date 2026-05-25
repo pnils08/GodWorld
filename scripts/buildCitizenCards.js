@@ -39,6 +39,7 @@ var fs = require('fs');
 var path = require('path');
 var https = require('https');
 var sheets = require('../lib/sheets');
+var coverageAnchors = require('../lib/coverageAnchorRetirements');
 
 var API_KEY = process.env.SUPERMEMORY_CC_API_KEY;
 var CONTAINER_TAG = 'world-data';
@@ -481,6 +482,16 @@ async function buildCard(citizen, appearances) {
       var memText = (a.memory || '').substring(0, 200);
       lines.push('- ' + memText);
     }
+  }
+
+  // S235 G-PR8e — Coverage convention block for editorially-retired anchors.
+  // Surfaces NEWSROOM_MEMORY §Standing Editorial Conventions retirement
+  // inline in the wd-citizens card so Mara + downstream agents reading the
+  // card (not just sift Step 4 reading NEWSROOM_MEMORY) see the convention
+  // alongside identity/role/bio. POP-00772 Beverly Hayes is the first entry.
+  var conventionLines = coverageAnchors.renderConventionBlock(citizen.popId);
+  for (var cl = 0; cl < conventionLines.length; cl++) {
+    lines.push(conventionLines[cl]);
   }
 
   return lines.join('\n');

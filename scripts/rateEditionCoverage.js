@@ -27,6 +27,7 @@ require('/root/GodWorld/lib/env');  // S197 BUNDLE-B (G-P7) — loads GODWORLD_S
 var fs = require('fs');
 var path = require('path');
 var sheets = require('../lib/sheets');
+var coverageAnchors = require('../lib/coverageAnchorRetirements');
 
 var args = process.argv.slice(2);
 var filePath = args.find(function(a) { return !a.startsWith('--'); });
@@ -328,6 +329,22 @@ for (var a = 0; a < articles.length; a++) {
   if (art.reporter.toLowerCase().includes('caldera') || art.reporter.toLowerCase().includes('jax')) {
     if (result.rating > -1) result.rating = Math.max(-3, result.rating - 2);
     if (result.tone !== 'negative') result.tone = 'negative';
+  }
+
+  // S235 G-PR8e — Coverage-anchor-retirement downweight. Articles touching a
+  // retired-anchor's name AND any avoidFramings keyword get their rating
+  // halved (toward 0) so the article's domain contribution carries the
+  // editorial-retirement signal. NEWSROOM_MEMORY §Standing Editorial
+  // Conventions §Beverly Hayes is the load-bearing case (S229 G-PR8e).
+  var anchorText = (art.headline || '') + ' ' + (art.text || '');
+  var anchorHits = coverageAnchors.detectRetiredAnchorHits(anchorText);
+  if (anchorHits.length > 0) {
+    var preWeight = result.rating;
+    // Halve toward zero. Math.trunc(rating / 2) collapses ±1 to 0 too —
+    // editorial-retirement signal should fully attenuate marginal scores.
+    result.rating = Math.trunc(result.rating / 2);
+    var framingsByAnchor = anchorHits.map(function (h) { return h.fullName + ' (' + h.matchedFramings.slice(0, 3).join('/') + ')'; }).join(', ');
+    console.log('  [retired-anchor] downweight ' + preWeight + ' → ' + result.rating + ' — ' + framingsByAnchor);
   }
 
   console.log('  [' + art.section + '] ' + (art.headline || '(no headline)').substring(0, 60) +

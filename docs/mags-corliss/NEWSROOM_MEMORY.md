@@ -24,6 +24,40 @@
 
 **Cost:** ~0.2s per `lookup_citizen` MCP call. For a typical sift scaffold naming 8-15 citizens, ~2-3s total. Worth it.
 
+### POPID Aliases (S230/S233, canon.3 / ADR-0007)
+
+**Decision:** Some citizens carry multiple POPIDs across canon layers due to legacy migrations. Per ADR-0007 rule 4 (POPIDs permanent once assigned), aliases are documented here, not migrated. Reporters and scaffolders encountering either form resolve to the canonical POPID via this table.
+
+| Citizen | Canonical POPID | Aliases | Source of Drift |
+|---|---|---|---|
+| Mark Aitken | POP-00003 | POP-00020 (player-truesource) | Legacy ID assignment pre-S94 ledger recovery; truesource layer ingested with new ID. Mike ruling S230: legacy POP-00003 is canonical. |
+
+**Name-scoped resolution (S233 engine-sheet):** `scripts/ingestPublishedEntities.js` carries `POPID_ALIASES = { 'POP-00020': { canonicalPopId: 'POP-00003', surfaceNamePattern: /^mark\s+aitken$/i } }` plus a `resolvePopIdAlias(popId, fullName)` helper. The alias fires ONLY when the surface name matches "Mark Aitken." POP-00020 is actively occupied in Sim_Ledger by Elena Vásquez — naïve POPID swap would silently contaminate her row on every reference. The name-scoped semantic prevents that contamination.
+
+**For reporters and scaffolders:** when you see POP-00020 in a source artifact (player-truesource, older bay-tribune wiki entries, legacy briefing materials), check the surface name. If the name is "Mark Aitken," resolve to POP-00003 in your output. If the name is "Elena Vásquez," keep POP-00020 — that is her canonical POPID. Any other combination at POP-00020 is drift and should be flagged.
+
+**Where this rule lives:**
+- This entry (NEWSROOM_MEMORY.md) — sift Step 2 ranged-read at every cycle propagates the rule.
+- `scripts/ingestPublishedEntities.js` `POPID_ALIASES` map + `resolvePopIdAlias` helper — the structural enforcement at ingest time.
+- [[../../docs/adr/0007-cross-layer-canon-authority-precedence|ADR-0007]] §Rule 4 (POPIDs permanent) — the underlying authority precedence rule.
+
+### Citizens Corrections Forward — Elena Soria Dominguez → Eloise Soria-Dominguez (S230/S233, canon.3 / ADR-0007)
+
+**Decision:** Eloise Soria-Dominguez (POP-00791) is the canonical citizen name going forward. The bay-tribune E93 published form "Elena Soria Dominguez" stands as paper-of-record (never edited backward per ADR-0007 §Reconciliation rule 1) — but every C95+ reference normalizes to "Eloise Soria-Dominguez."
+
+**Why:** Three name forms drifted across canon layers — bay-tribune E93 ("Elena Soria Dominguez"), wd-card / Sim_Ledger POP-00791 ("Eloise Soria-Dominguez"), and a partial "Soria Dominguez" last-name-only form in derived docs. Mike S230 ruling: wd-card form wins (legacy form on the structured layer). The corrections-forward mechanism — same shape as canon.2 S218 §Faith Corrections Forward — preserves the paper-of-record while normalizing future references.
+
+**For reporters and scaffolders:**
+- Sift slate JSON, brief generation, scaffolds → use "Eloise Soria-Dominguez" / POP-00791.
+- Encountered "Elena" or "Elena Soria Dominguez" in source briefing material (E93 prose, older Mara directive notes) → substitute "Eloise Soria-Dominguez" with a CONTINUITY NOTE flagging E93 as the prior-name source.
+- Bay-tribune E93 wiki entry is NOT edited — the corrections-forward map is the substitution mechanism; the published edition stays unchanged.
+
+**Where this rule lives:**
+- This entry (NEWSROOM_MEMORY.md) — sift Step 2 ranged-read at every cycle propagates the rule.
+- [[../../docs/canon/INSTITUTIONS|INSTITUTIONS.md]] §Citizens Corrections Forward — the canonical corrections-forward map (mirrors §Faith Corrections Forward shape).
+- [[../../docs/canon/CANON_RULES|CANON_RULES.md]] §Corrections-Forward Maps active-maps list — registers this map alongside Faith.
+- [[../../docs/adr/0007-cross-layer-canon-authority-precedence|ADR-0007]] §Reconciliation rule 1 (paper-of-record) — the underlying authority precedence rule.
+
 ### Paulson C94 interview canon — let-walks reset + after-a-parade championship intent + Varek call NOT received (S230, 2026-05-23) — sports-canon update
 
 **Decision:** Mike Paulson interview transcript (S230, slug `let_walks`, intended reporter Hal Richmond) is the C94+ canonical source for the let-walks storyline + the Varek-Paulson Oaks-GM recruitment thread + the dynasty-architecture sub-story around Dillon's deal. Transcript on disk at `editions/cycle_pulse_interview-transcript_94_let_walks.txt` + Drive Mara folder ID `1WiKfst-w8ugOjRilTL9yGx09HO8BUCK3`.

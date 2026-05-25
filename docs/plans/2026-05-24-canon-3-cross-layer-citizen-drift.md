@@ -240,8 +240,8 @@ pointers:
 - **Verify:**
   - `grep -n "Soria-Dominguez" docs/canon/INSTITUTIONS.md docs/canon/CANON_RULES.md` → INSTITUTIONS L352 + CANON_RULES L180 entries present (S233).
   - Sim_Ledger POP-00791 First=`Eloise` / Last=`Soria-Dominguez` verified live S233 — no write needed.
-  - **NEWSROOM_MEMORY half DEFERRED to research-build** — `docs/mags-corliss/*` is research-build's owned scope per engine-sheet TERMINAL.md §NOT Your Files. Engine-sheet does not edit. Step 4 (NEWSROOM_MEMORY pointer to Citizens Corrections Forward + Soria normalization note) stays open inside the canon.3 ROLLOUT row for research-build pickup (queues against the same file as T11 NEWSROOM_MEMORY half).
-- **Status:** [x] done-pending-archive (engine-sheet half) — S233. NEWSROOM_MEMORY pointer half open for research-build.
+  - **NEWSROOM_MEMORY half CLOSED S234 research-build** — `docs/mags-corliss/NEWSROOM_MEMORY.md` §Standing Editorial Conventions gained new subsection `### Citizens Corrections Forward — Elena Soria Dominguez → Eloise Soria-Dominguez (S230/S233, canon.3 / ADR-0007)` cross-linking [[../../docs/canon/INSTITUTIONS|INSTITUTIONS.md]] §Citizens Corrections Forward + [[../../docs/canon/CANON_RULES|CANON_RULES.md]] §Corrections-Forward Maps + ADR-0007 §Reconciliation rule 1. Reporter / scaffolder guidance carries the normalization rule (Eloise wins forward; bay-tribune E93 stays unchanged per paper-of-record). Sibling-coupled to T11 NEWSROOM_MEMORY half, shipped same commit.
+- **Status:** [x] done-pending-archive — S233 (engine-sheet half) + S234 (research-build NEWSROOM_MEMORY half).
 
 ### Task 11: Aitken POPID alias doc [engine-sheet, data]
 
@@ -267,8 +267,8 @@ pointers:
 - **Verify:**
   - `grep -n "POP-00020\|POPID_ALIASES" scripts/ingestPublishedEntities.js` → entries present S233.
   - Empirical fixture run with 4 NAMES INDEX rows (POP-00020|Mark Aitken + POP-00020|Elena Vásquez + POP-00003|Mark Aitken + POP-00777|Made-Up Person) produced: row 1 aliased to POP-00003 (sourcePopId=POP-00020), row 2 kept POP-00020 (NO contamination of Elena Vásquez), row 3 passthrough, row 4 matched POP-00777 with drift warning vs ledger Rico Valdez.
-  - **NEWSROOM_MEMORY half DEFERRED to research-build** — `docs/mags-corliss/*` is research-build's owned scope per engine-sheet TERMINAL.md §NOT Your Files. Stays open inside the canon.3 ROLLOUT row for research-build pickup.
-- **Status:** [x] done-pending-archive (engine-sheet half) — S233. NEWSROOM_MEMORY pointer half open for research-build.
+  - **NEWSROOM_MEMORY half CLOSED S234 research-build** — `docs/mags-corliss/NEWSROOM_MEMORY.md` §Standing Editorial Conventions gained new subsection `### POPID Aliases (S230/S233, canon.3 / ADR-0007)` carrying the canonical/aliases table (Mark Aitken | POP-00003 | POP-00020), full documentation of the name-scoped resolution semantic (Elena Vásquez at POP-00020 NOT contaminated), and reporter/scaffolder resolution guidance. Cross-links `scripts/ingestPublishedEntities.js` `POPID_ALIASES` map + ADR-0007 §Rule 4. Sibling-coupled to T10 NEWSROOM_MEMORY half, shipped same commit.
+- **Status:** [x] done-pending-archive — S233 (engine-sheet half) + S234 (research-build NEWSROOM_MEMORY half).
 
 ### Task 12: Business_Ledger backfill — BIZ-00061 Adams Point UMC + BIZ-00062 Dario's Bar [engine-sheet, data]
 
@@ -314,3 +314,4 @@ pointers:
 ## Changelog
 
 - 2026-05-24 — Initial draft (S230, research-build). Approved structure-first by Mike before write. 13 tasks across two terminals. Research-build T1-T5 ship same session (this plan + ADR-0007 + spec edits + memory note); engine-sheet T6-T13 pickup when ready (T7 logically blocks future /post-publish runs from regressing the gap; T6 blocks T13 verification gate). Mike rulings locked pre-write: Soria → Eloise Soria-Dominguez; Aitken → POP-00003 canonical with POP-00020 alias.
+- 2026-05-24 — T10 + T11 NEWSROOM_MEMORY halves closed (S234, research-build). Two new subsections shipped to `docs/mags-corliss/NEWSROOM_MEMORY.md` §Standing Editorial Conventions: `### POPID Aliases (S230/S233, canon.3 / ADR-0007)` carrying the Aitken canonical/alias table + name-scoped resolution semantic + reporter guidance; `### Citizens Corrections Forward — Elena Soria Dominguez → Eloise Soria-Dominguez (S230/S233, canon.3 / ADR-0007)` carrying the canonical-form decision + corrections-forward cross-links + reporter normalization rule. Both subsections clustered topically with the existing S230 Scaffold-time citizen-reference lookup discipline entry so the canon.3 / ADR-0007 cluster reads as one editorial-convention block. Sibling-coupled — one commit, one file touched (NEWSROOM_MEMORY.md), scope tight per advisor pass. Closes the cross-terminal halves engine-sheet shipped S233 (T10 + T11 engine code/canon-doc layer). Row state stays `in-progress` per T12 (Business_Ledger BIZ-00061+BIZ-00062 backfill) + T13 (verify wd-card rebuild on backfilled POPIDs) still pending engine-sheet.

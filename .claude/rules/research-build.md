@@ -52,7 +52,7 @@ If a doc would be isolated (no natural parent), question whether it should exist
 
 When closing a rollout entry: move to `ROLLOUT_ARCHIVE.md` with full details (commit hashes, what shipped, what was learned). Don't delete inline.
 
-When triaging stale entries: `node scripts/rolloutTriage.js <cycle>` (S212 fix — regex extended to accept S204 state-taxonomy suffix; entry-context filter drops §Convention example tag; table-row title extraction reordered before bullet match). Run before refreshing priorities so stale HIGHs inform what gets elevated.
+Stale-entry triage runs through the rollout discipline itself — `done-pending-archive` state visibility + governance.10-class archive sweeps every 1-2 closes + per-terminal sweep ownership. The compounding-HIGH problem (G-W16 meta-pattern S195) that previously required a separate scan (`scripts/rolloutTriage.js`, RETIRED S235 / governance.6 close) is structurally addressed by S212+S229 architecture. Unarchive trigger documented in script header if rollout-discipline cadence falls behind by >3 sessions OR a HIGH ROLLOUT row sits across >3 cycles without movement.
 
 ## Plan workflow
 

@@ -11,7 +11,6 @@
 //       rotateJournalRecent → JOURNAL content-quality check → writeShippedBlock
 //       → auditPlanTagDrift (informational) → cross-terminal stack check
 //       → [opt-in] SESSION_HISTORY rotation → pm2 restart
-//   - research-build also runs rolloutTriage <current-cycle>
 //   - engine-sheet (stripped persona):
 //       writeShippedBlock → auditPlanTagDrift (informational)
 //       → cross-terminal stack check → [opt-in] SESSION_HISTORY rotation
@@ -206,33 +205,6 @@ function subAuditPlanTagDrift(args) {
 }
 
 // ---------------------------------------------------------------------------
-// Sub-step: rolloutTriage (research-build only)
-// ---------------------------------------------------------------------------
-
-function subRolloutTriage(args) {
-  if (args.dryRun) {
-    console.log('  (dry-run) skipped');
-    return { ok: true };
-  }
-  try {
-    const ctxContent = fs.readFileSync(SESSION_CONTEXT_PATH, 'utf8');
-    const m = ctxContent.match(/Cycle:\s*(\d+)/);
-    if (!m) {
-      console.log('  ⚠ could not parse Cycle from SESSION_CONTEXT.md — skipping');
-      return { ok: true };
-    }
-    const cycle = m[1];
-    const out = execSync(`node scripts/rolloutTriage.js ${cycle}`, { cwd: ROOT, stdio: 'pipe' });
-    out.toString().trim().split('\n').forEach(line => console.log('  ' + line));
-    console.log(`  ✓ rolloutTriage C${cycle}`);
-    return { ok: true };
-  } catch (err) {
-    console.log(`  ⚠ rolloutTriage error: ${err.message} — continuing`);
-    return { ok: true };
-  }
-}
-
-// ---------------------------------------------------------------------------
 // Sub-step: cross-terminal git stack check (read-only report)
 // ---------------------------------------------------------------------------
 
@@ -406,7 +378,6 @@ function subPm2Restart(args) {
 
 function buildSteps(args) {
   const isPersona = PERSONA_TERMINALS.has(args.terminal);
-  const isResearchBuild = args.terminal === 'research-build';
   const steps = [];
   if (isPersona) {
     steps.push({ name: 'rotateJournalRecent', fn: subRotateJournalRecent });
@@ -414,9 +385,6 @@ function buildSteps(args) {
   }
   steps.push({ name: 'writeShippedBlock', fn: subWriteShippedBlock });
   steps.push({ name: 'auditPlanTagDrift (informational)', fn: subAuditPlanTagDrift });
-  if (isResearchBuild) {
-    steps.push({ name: 'rolloutTriage <current-cycle>', fn: subRolloutTriage });
-  }
   steps.push({ name: 'cross-terminal git stack check (read-only)', fn: subStackCheck });
   if (args.rotateHistory) {
     steps.push({ name: 'SESSION_HISTORY rotation (opt-in)', fn: subRotateHistory });

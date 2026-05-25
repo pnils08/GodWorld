@@ -2,6 +2,36 @@
 // rolloutTriage.js — ROLLOUT HIGH entry staleness scanner
 // Phase 3 of docs/plans/2026-05-03-rollout-triage-cadence.md
 //
+// ============================================================================
+// RETIRED S235 (2026-05-25) — governance.6 close
+// ============================================================================
+// The compounding-HIGH problem this script solved (G-W16 meta-pattern from
+// S195) is now structurally addressed by:
+//   - S212 state taxonomy (`done-pending-archive` makes ship-but-not-archived
+//     visible at every ROLLOUT read)
+//   - Per-terminal sweep ownership (no terminal can compound stale work
+//     invisibly — research-build owns governance.10-class sweeps)
+//   - governance.10-class archive sweep cadence (~one sweep per 1-2 closes
+//     since §S227 backlog drain; S229/S230/S233/S234/S235 all swept)
+//
+// Empirical proof of obsolescence: `node scripts/rolloutTriage.js <cycle>`
+// returns "ERROR: No (promoted: C<N>, severity: HIGH) tags found in
+// ROLLOUT_PLAN.md" — the data it needed has dried up because the rollout-
+// discipline solution made the tagging convention redundant.
+//
+// Retire scope: removed from `sessionEndMechanical.js` step list S235.
+// File preserved in-place (not deleted) per SCHEMA §7 archive≠delete.
+//
+// Unarchive triggers (revisit if either fires):
+//   - Archive sweep cadence falls behind by >3 sessions
+//   - HIGH-severity gap sits as `ready`/`in-progress` across >3 cycles
+//     without movement
+// Either signal means the rollout-discipline solution failed and the
+// script-layer solution should come back.
+//
+// Original cycle-promoted-tag scheme retained below for reference.
+// ============================================================================
+//
 // First-run note (C93): all promoted tags use C92/C93. Max age = 1 cycle.
 // STALE-2C threshold requires >2 cycles. Stale list will be empty on first run.
 // Staleness accumulates as entries remain unaddressed across future cycles.

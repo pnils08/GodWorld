@@ -12,7 +12,7 @@ sources:
   - scripts/rotateJournalRecent.js (S211)
   - scripts/writeShippedBlock.js (S207)
   - scripts/auditPlanTagDrift.js (S212)
-  - scripts/rolloutTriage.js (S212 fix)
+  - ~~scripts/rolloutTriage.js (S212 fix)~~ — RETIRED S235 per governance.6 close
 pointers:
   - "[[../engine/ROLLOUT_PLAN]] — governance.7 row"
   - "[[../SCHEMA]] — doc conventions"
@@ -24,7 +24,7 @@ pointers:
 
 **Goal:** Collapse `/session-end` from 13 steps to **4 model-judgment steps + 1 mechanical script invocation**, so session close stops being a 20-minute ritual that drifts (S228 walked the very ritual whose collapse this plan addresses — and missed CHARACTER.md drift inherited from a rename three sessions earlier).
 
-**Architecture:** Build `scripts/sessionEndMechanical.js` — a single Node entry point that takes `--terminal=<name>` and runs the scriptable sub-steps in the right order: `rotateJournalRecent` (persona terminals only) → `writeShippedBlock` → `auditPlanTagDrift` (informational, never fatal) → `rolloutTriage <cycle>` (research-build only) → cross-terminal git stack check (read-only report) → JOURNAL-quality content guard → `pm2 restart`. Skill rewrite then slims SKILL.md to: detect terminal → write journal → write SESSION_CONTEXT STATUS + ROLLOUT updates → run mechanical script → commit & push (model-written message). Two-commit cadence — ship the script with dry-run validation first, then flip the skill.
+**Architecture:** Build `scripts/sessionEndMechanical.js` — a single Node entry point that takes `--terminal=<name>` and runs the scriptable sub-steps in the right order: `rotateJournalRecent` (persona terminals only) → `writeShippedBlock` → `auditPlanTagDrift` (informational, never fatal) → cross-terminal git stack check (read-only report) → JOURNAL-quality content guard → `pm2 restart`. (Original architecture included `rolloutTriage <cycle>` research-build-only step — RETIRED S235 per governance.6 close; compounding-HIGH problem structurally solved by state taxonomy + per-terminal sweep + governance.10 archive cadence.) Skill rewrite then slims SKILL.md to: detect terminal → write journal → write SESSION_CONTEXT STATUS + ROLLOUT updates → run mechanical script → commit & push (model-written message). Two-commit cadence — ship the script with dry-run validation first, then flip the skill.
 
 **Terminal:** research-build
 
@@ -88,7 +88,7 @@ node scripts/sessionEndMechanical.js --terminal=<name> [--rotate-history] [--dry
 | JOURNAL content-quality check (last entry body > 5 lines) | ✓ | ✓ | ✓ | — |
 | `writeShippedBlock` | ✓ | ✓ | ✓ | ✓ |
 | `auditPlanTagDrift` (informational, never fatal) | ✓ | ✓ | ✓ | ✓ |
-| `rolloutTriage <current-cycle>` | ✓ | — | — | — |
+| ~~`rolloutTriage <current-cycle>`~~ RETIRED S235 | — | — | — | — |
 | Cross-terminal git stack check (read-only report) | ✓ | ✓ | ✓ | ✓ |
 | SESSION_HISTORY rotation (opt-in `--rotate-history`) | ✓ | ✓ | ✓ | ✓ |
 | `pm2 restart mags-bot godworld-dashboard` | ✓ | ✓ | ✓ | ✓ |
@@ -202,7 +202,7 @@ The model-quality `<one-line summary>` heading style used by existing SESSION_HI
   7. JOURNAL content-quality check: `require('../lib/sessionLog').readLast(JOURNAL_PATH, 1)[0]` → `body.split('\n').length >= 5` → warn but don't exit on fail.
   8. `writeShippedBlock`: execSync.
   9. `auditPlanTagDrift`: execSync but trap exit 1; print stdout under informational header; do not propagate exit code.
-  10. `rolloutTriage`: research-build only; read current cycle from `SESSION_CONTEXT.md` line 5 (`Cycle: <N>`) with regex; execSync `node scripts/rolloutTriage.js <N>`.
+  10. ~~`rolloutTriage`: research-build only; read current cycle from `SESSION_CONTEXT.md` line 5 (`Cycle: <N>`) with regex; execSync `node scripts/rolloutTriage.js <N>`.~~ — REMOVED S235 per governance.6 close.
   11. SESSION_HISTORY rotation: opt-in via `--rotate-history`. Parser per design above. Dry-run prints plan, live writes.
   12. Cross-terminal git stack check: execSync `git log --oneline origin/main..HEAD`; print result under clear header.
   13. `pm2 restart mags-bot godworld-dashboard`: execSync; trap errors, warn, continue.

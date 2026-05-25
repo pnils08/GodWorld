@@ -219,7 +219,7 @@ Use when Mike will re-boot the next session immediately. The next session reads 
 3. **Prepend one-line STATUS to SESSION_CONTEXT.md** — single line, no narrative paragraphs. Form: `**STATUS (S<N> [terminal] — soft close, chaining to S<N+1>):** N commits, see Shipped block. Detail: see commit bodies.` That's it.
 4. **Commit both** SESSION_CONTEXT.md + the boundary state file in one commit. Push.
 
-Skip on soft close: persistence counter bump, journal entry, JOURNAL_RECENT rotation, ROLLOUT triage scan, plan tag drift audit, done-pending-archive sweep, RESEARCH.md update, `/save-to-mags`, PM2 restart, write-verification reads. Next session's boot can run the deterministic ones (`rolloutTriage`, `auditPlanTagDrift`) if it cares; the rest accumulate until the next hard close.
+Skip on soft close: persistence counter bump, journal entry, JOURNAL_RECENT rotation, plan tag drift audit, done-pending-archive sweep, RESEARCH.md update, `/save-to-mags`, PM2 restart, write-verification reads. Next session's boot can run the deterministic ones (`auditPlanTagDrift`) if it cares; the rest accumulate until the next hard close. (`rolloutTriage` RETIRED S235 — governance.6 close; compounding-HIGH problem now structurally addressed by state taxonomy + per-terminal sweep + governance.10 archive cadence.)
 
 ### Hard close (~5-10 min) — end of day, multi-day break, or cold-pickup boundary
 
@@ -250,4 +250,4 @@ Update during Step 2 of the slimmed SKILL alongside SESSION_CONTEXT + ROLLOUT:
 - **`/save-to-mags`** — save architecture decisions, design rationale, anything the next session needs to understand *why* a choice was made. Tag with `[research/build]`. Optional — model judgment.
 - **SESSION_CONTEXT.md STATUS paragraph** — what was designed, what was handed off, what's next, tagged `[research/build]`.
 
-**Mechanical (Step 3) — auto-runs from `sessionEndMechanical.js --terminal=research-build`:** `rotateJournalRecent` + JOURNAL content-quality check + `writeShippedBlock` + `auditPlanTagDrift` (informational, never fatal) + `rolloutTriage <current-cycle>` + cross-terminal git stack check + opt-in `--rotate-history` SESSION_CONTEXT → SESSION_HISTORY rotation + `pm2 restart`. Plan: [[../../../docs/plans/2026-05-23-session-end-collapse]].
+**Mechanical (Step 3) — auto-runs from `sessionEndMechanical.js --terminal=research-build`:** `rotateJournalRecent` + JOURNAL content-quality check + `writeShippedBlock` + `auditPlanTagDrift` (informational, never fatal) + cross-terminal git stack check + opt-in `--rotate-history` SESSION_CONTEXT → SESSION_HISTORY rotation + `pm2 restart`. Plan: [[../../../docs/plans/2026-05-23-session-end-collapse]]. (`rolloutTriage` step removed S235 — see governance.6 close.)

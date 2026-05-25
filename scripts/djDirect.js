@@ -141,8 +141,63 @@ function bylineMatchesReporter(byline, reporter) {
          reporter.toLowerCase().indexOf(nameOnly) !== -1;
 }
 
-// Best-match an article in the parsed edition for a sift proposal
+// Read a proposal field tolerating sift v1 / v2 schema drift.
+// Sift JSON v2 emits `headline_working` + `leadReporter` + `id` (slot);
+// older sift v1 + downstream tools used `title` + `reporter` (no slot).
+// S235 G-PR2 — pre-fix djDirect read v1 keys only; C94 sift JSON emitted
+// only v2 keys, so EVERY proposal routed to unmatched ("no article body")
+// because bylineMatchesReporter(byline, undefined) returns false.
+function proposalTitle(proposal) {
+  return proposal.title || proposal.headline_working || '';
+}
+function proposalReporter(proposal) {
+  return proposal.reporter || proposal.leadReporter || '';
+}
+function proposalSlot(proposal) {
+  return proposal.id || proposal.slot || '';
+}
+
+// Best-match an article in the parsed edition for a sift proposal.
+//
+// Match strategy (in order):
+//   1. Canonical slot match — when parsed.articleTable.canonicalShape is true
+//      (post-S235 G-PR7) the table row's headline was bound onto a parsed
+//      article. Find article by slot → table-row → headline equality. Bypasses
+//      reporter/title heuristics entirely.
+//   2. Byline + section-beat match — primary legacy path.
+//   3. Byline match across all sections — fallback for cross-section drift.
+//   4. Title-word disambiguation among multiple candidates — last-resort.
 function findArticleForProposal(parsed, proposal) {
+  var propTitle = proposalTitle(proposal);
+  var propReporter = proposalReporter(proposal);
+  var propSlot = proposalSlot(proposal);
+
+  // (1) Canonical slot match against ARTICLE TABLE.
+  if (parsed.articleTable && parsed.articleTable.canonicalShape && propSlot) {
+    var tableRow = null;
+    for (var ti = 0; ti < parsed.articleTable.rows.length; ti++) {
+      if (parsed.articleTable.rows[ti].slot.toUpperCase() === propSlot.toUpperCase()) {
+        tableRow = parsed.articleTable.rows[ti];
+        break;
+      }
+    }
+    if (tableRow) {
+      var tableSecNorm = editionParser.normalizeSectionId(tableRow.section);
+      for (var ss = 0; ss < parsed.sections.length; ss++) {
+        var psec = parsed.sections[ss];
+        if (editionParser.normalizeSectionId(psec.name) !== tableSecNorm) continue;
+        for (var pa = 0; pa < psec.articles.length; pa++) {
+          if (psec.articles[pa].headline === tableRow.headline) {
+            return { article: psec.articles[pa], section: psec };
+          }
+        }
+      }
+      // LETTERS slot or articleTable bind skipped → headline match misses;
+      // fall through to byline-based legacy paths below rather than failing.
+    }
+  }
+
+  // (2) Byline + section-beat match.
   var sectionBeat = editionParser.guessBeat(proposal.section || '');
   var candidates = [];
   for (var s = 0; s < parsed.sections.length; s++) {
@@ -150,18 +205,18 @@ function findArticleForProposal(parsed, proposal) {
     if (sectionBeat !== 'general' && sec.beat !== sectionBeat) continue;
     for (var a = 0; a < sec.articles.length; a++) {
       var art = sec.articles[a];
-      if (bylineMatchesReporter(art.byline, proposal.reporter)) {
+      if (bylineMatchesReporter(art.byline, propReporter)) {
         candidates.push({ article: art, section: sec });
       }
     }
   }
-  // If no section-beat match, fall back to byline match across all sections
+  // (3) Cross-section byline fallback.
   if (candidates.length === 0) {
     for (var s2 = 0; s2 < parsed.sections.length; s2++) {
       var sec2 = parsed.sections[s2];
       for (var a2 = 0; a2 < sec2.articles.length; a2++) {
         var art2 = sec2.articles[a2];
-        if (bylineMatchesReporter(art2.byline, proposal.reporter)) {
+        if (bylineMatchesReporter(art2.byline, propReporter)) {
           candidates.push({ article: art2, section: sec2 });
         }
       }
@@ -169,8 +224,9 @@ function findArticleForProposal(parsed, proposal) {
   }
   if (candidates.length === 0) return null;
   if (candidates.length === 1) return candidates[0];
-  // Multiple matches — prefer one whose headline shares words with proposal title
-  var titleWords = (proposal.title || '').toLowerCase().split(/\W+/).filter(function (w) { return w.length > 3; });
+
+  // (4) Title-word disambiguation. Reads v2 `headline_working` via fallback.
+  var titleWords = propTitle.toLowerCase().split(/\W+/).filter(function (w) { return w.length > 3; });
   var best = candidates[0];
   var bestHits = 0;
   for (var c = 0; c < candidates.length; c++) {
@@ -252,10 +308,10 @@ function composeBundle(opts) {
     var entry = matches[m];
     var prop = entry.proposal;
     var match = entry.match;
-    lines.push('### ' + (m + 1) + '. ' + prop.title);
+    lines.push('### ' + (m + 1) + '. ' + (proposalTitle(prop) || '(untitled)'));
     lines.push('');
     lines.push('- **Section:** ' + prop.section);
-    lines.push('- **Reporter:** ' + (prop.reporter || '(unknown)'));
+    lines.push('- **Reporter:** ' + (proposalReporter(prop) || '(unknown)'));
     lines.push('- **Sift score:** ' + (prop.score || 'n/a') +
                '  |  **Priority:** ' + (prop.priority || 'n/a') +
                '  |  **Front page:** ' + (prop.frontPage ? 'yes' : 'no'));
@@ -275,7 +331,7 @@ function composeBundle(opts) {
       lines.push(match.article.text);
     } else {
       lines.push('*[No matching article body found in compiled edition. ' +
-                 'Reporter: ' + (prop.reporter || 'unknown') + '. ' +
+                 'Reporter: ' + (proposalReporter(prop) || 'unknown') + '. ' +
                  'Use proposal source signal as direction context.]*');
     }
     lines.push('');
@@ -436,8 +492,8 @@ function composeBundle(opts) {
     lines.push('still draw on their source signal:');
     lines.push('');
     for (var u = 0; u < unmatched.length; u++) {
-      lines.push('- ' + unmatched[u].id + ' · ' + unmatched[u].title +
-                 ' (reporter: ' + (unmatched[u].reporter || 'unknown') + ')');
+      lines.push('- ' + unmatched[u].id + ' · ' + (proposalTitle(unmatched[u]) || '(untitled)') +
+                 ' (reporter: ' + (proposalReporter(unmatched[u]) || 'unknown') + ')');
     }
     lines.push('');
   }
@@ -725,7 +781,7 @@ function main() {
       ? '0 proposals'
       : data.unmatched.length + ' proposals (no article body): ' +
         data.unmatched.map(function (u) {
-          return (u.id || '?') + ' "' + (u.title || 'untitled').slice(0, 40) + '"';
+          return (u.id || '?') + ' "' + (proposalTitle(u) || 'untitled').slice(0, 40) + '"';
         }).join(', ');
     summary = {
       featured: data.matches.length + ' articles (top ' + topN + ' by sift)',

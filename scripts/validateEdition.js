@@ -81,8 +81,15 @@ const ENGINE_TERMS = [
   { pattern: /\bphase \d+/gi },
   { pattern: /\bmedia intake\b/gi },
   { pattern: /\bstory seed\b/gi },
-  // Edition number references (reporters don't know edition numbers)
-  { pattern: /\bEdition\s+\d+/g },
+  // Edition number references — S233 governance.15 carve-out
+  // ALLOWED in editorial chrome: "See also: Edition N", byline citations
+  // ("Bay Tribune Sports, Edition N"), sidebars, footers. The masthead
+  // already exposes the cycle/edition number; cross-references are normal
+  // newspaper convention. FORBIDDEN in body prose voice + citizen quotes
+  // (characters don't read mastheads). Per .claude/rules/newsroom.md
+  // §Standing rules. Exclude regex matches the legitimate chrome
+  // surroundings; body-prose hits still fire CRITICAL.
+  { pattern: /\bEdition\s+\d+/g, exclude: /(?:See also[:\s]|Bay Tribune[^|]*,\s*Edition|—\s*Bay Tribune|Editor['']s note|Sidebar|Footer)/i },
 ];
 
 // Defensive award terms that conflict with DH
@@ -460,7 +467,7 @@ function checkPlayerPositions(editionText, canon) {
 
   // For each player, check if a WRONG position is DIRECTLY attributed
   // Use tight patterns that require direct attribution, not just proximity
-  for (const [nameLower, info] of Object.entries(positionMap)) {
+  for (const info of Object.values(positionMap)) {
     const { name, position } = info;
     const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const lastName = name.split(' ').pop();
@@ -773,7 +780,6 @@ function checkCitizenNames(editionText, ledgerCitizens) {
   // Extract citizen names from the edition's Names Index sections and Citizen Usage Log
   // These are the definitive lists of who's mentioned
   const namesIndexPattern = /Names Index:\s*([^\n]+)/g;
-  const citizenUsagePattern = /CITIZEN USAGE LOG[\s\S]*?(?=\n##|\n={3,}|$)/i;
 
   // Collect all named citizens from the edition
   const editionNames = new Set();

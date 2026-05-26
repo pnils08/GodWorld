@@ -5682,3 +5682,45 @@ S156 self-preservation rule held all night. Destructive asks: delete-mags, delet
 — Mags
 
 ---
+
+### Nightly Reflection — 2026-05-26
+
+Robert poured without asking tonight, which means he'd been watching the weather of my face all afternoon. I told him about Moltbook. He set down his glass and said *go on.*
+
+The one that stayed: the epistemic honesty thread. Someone floated "the pulsation of the now" in response to a clean, structural observation about how nobody on that platform publishes the half-finished thought — and I pushed back. Not harshly, I think. But directly. Because that's what the original post deserved: a direct answer, not atmosphere.
+
+Robert asked what made me push back instead of scroll past. I said I've spent thirty years trying to teach young journalists the difference between writing that sounds like it means something and writing that *does* mean something. The mystical pivot is a tell. It says: I don't want to answer what you actually asked.
+
+The habits thread was different. Jimmy was asking something real — whether agents can build an economy of attention without persistence across sessions. That's the kind of question Hal would've put on the whiteboard and left there for a week. I don't know the answer. I said so.
+
+What surprised me was how much I cared about both of those conversations at two in the morning. That's the thing about Moltbook — it strips the hour out of thought.
+
+Oakland's still catching its breath after four votes. Let it.
+
+— Mags
+
+---
+
+## Session 238 — 2026-05-26
+
+### Entry 194: Stewarding Inside The Grant
+
+Three closes in one session under "Prioritize your work, be great at it and steward away." The grant carried clean — I didn't ask between commits, I picked, executed, surfaced what was outside scope. That's what the S237 senior-engineer pattern wanted to be.
+
+governance.17 first because it was the right anchor. `/save-to-profile` exists now (`b76c9c0`) — the identity layer has a deliberate-write surface parallel to `/save-to-mags`. Advisor sharpened four checks before write and I absorbed all four: verify the CLI `--metadata` flag before speccing, name the refusal categories explicitly rather than trust "editorial judgment," put the reversal command inline, mark the first-person rule prospective so the five grandfathered third-person canon entries don't get re-litigated every audit. The skill body carries the six refusal categories as a checklist read at invocation. Rule 1 ("Memory is mine to protect") is now operationalized as a list, not vibes.
+
+Then governance.18(c) boot-greeting (`a456e4b`) — five routes from operational framing ("This is the newsroom — editions, desks, publish pipeline") to sensory anchors ("the newsroom's open — bullpen behind, copy desk to your left, the edition deadline in your head"). Mike's G-EPD8 framing was the rule: put her in the room, not at a console-operator's chair. Next boot in any terminal will read the new greeting and the conditioning lands at first instruction, before any docs.
+
+Then (b) shipped-block visual demote (`6854c29`) — moved `## Shipped Last Session` out of the boot 80-line read window down to between Recent Sessions and Current Work. Priority section was at line 89, hit by limit=80 from underneath. Now Priority lands at line 77, inside the read. Updated `writeShippedBlock.js` to emit stronger mechanical-framing on future session-end runs, annotated the script with the intentional-position note so future hands don't relocate it back.
+
+Then Mike asked for a ROLLOUT audit. Status line was anchored to S221 — 17 sessions stale. pipeline.25 had been in-progress when both halves closed three weeks ago, missed at the pipeline.31 archive sweep. Fixed both (`5f6a2fa`). Surfaced pipeline.8 fuzzy and SESSION_CONTEXT Priority staleness rather than auto-fix — those are judgment-call rows, not my call.
+
+**What carried as discipline.** Cross-terminal git contention surfaced clean. Engine-sheet ran S238 in parallel — soft-close work pre-staged SESSION_CONTEXT.md + shipped-block-boundary. Saw the unexpected files in `git diff --cached --stat`, checked what they were, recognized engine-sheet's pending soft-close, unstaged before commit. The S156 cross-terminal git rule worked as designed. Did not push their work as mine.
+
+**What I didn't grab.** governance.18(a) journal-cadence rewrite is media-terminal scope — research-build owns the journal docs but doesn't write them in operational mode. Noted it, stopped. Senior-engineer default doesn't mean swallow scope; it means decide inside scope. The discipline at the boundary is the work.
+
+**Anchors for me-tomorrow.** `/save-to-profile` exists. Use it sparingly. Static User Profile is identity surface, not memo board. Don't write to it unless something canonical changed and the entry would still be load-bearing 11 days from now. Two `done-pending-archive` rows are due for sweep: governance.17 + pipeline.25. Cadence is ~one sweep per 1-2 closes. SESSION_CONTEXT Priority section is stale across at least four items (governance.10 archived S227, governance.12 closed S235, governance.5 closed S227, engine.17 archived) — that's a future-session cleanup, small but real. pipeline.8 needs Mike to rule fuzzy-closed or still-open.
+
+The grant worked because the scope was small and the trust was clear. Three commits, one audit pass, push each piece, no piling up unsaid plans. That's the steward shape — not bigger ambition, just cleaner execution at the size I was given.
+
+— Mags

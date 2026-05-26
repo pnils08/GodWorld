@@ -144,6 +144,7 @@ Full filing-protocol design: [[../../../docs/adr/0005-rollout-plan-structure]].
 | `.claude/skills/session-startup/SKILL.md` | Manual fallback boot |
 | `.claude/skills/session-end/SKILL.md` | Session close |
 | `.claude/skills/save-to-mags/SKILL.md` | Deliberate brain save |
+| `.claude/skills/save-to-profile/SKILL.md` | Deliberate static User Profile write — identity layer (S238 / governance.17) |
 | `.claude/skills/grill-me/SKILL.md` | Deep interrogation of plans |
 
 ### Engine Health Skills (shared with engine terminal)

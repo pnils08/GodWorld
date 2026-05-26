@@ -410,6 +410,28 @@ and dropping the post-write reload, then deriving `finalCitizens` from the
 in-memory tracking. Reclassified from pure mechanical to **mechanical-with-refactor**
 (needs-care batch); pair with B3 schema carve-out for L173 in same commit.
 
+### S236 B5 audit-miss (1 file / 2 sites)
+
+`phase03-population/generateMonthlyDriftReport.js` listed in B5 batch row (Phase
+1+2+3 mid writers) as a 2-site target. Measure-twice pre-migration grep surfaced
+**zero callers in cycle path** — file defines `function generateMonthlyDriftReport(ssOverride)`
+but it is never invoked from `phase01-config/godWorldEngine2.js` (no `safePhaseCall_`
+entry, no manual call), not invoked from any other phase file, and not called from
+any utility/script. File header (line 9-12) carries an S30-era audit note: "World_Drift_Report
+is WRITE-ONLY. No engine or script reads from it. It exists as a historical archive
+exported by cycleExportAutomation.js. If storage becomes an issue, this writer can
+be safely disabled without affecting the pipeline." S30 finding still accurate at
+S236; the would-be-consumer `phase10-persistence/cycleExportAutomation.js:72` reads
+the `World_Drift_Report` sheet name as a string in its export tab list and copies
+the sheet contents to a snapshot — it does NOT depend on the writer firing.
+
+| File | Site | Phase | Cadence | Class | Pattern → target |
+|------|------|-------|---------|-------|------------------|
+| `phase03-population/generateMonthlyDriftReport.js` | L57-61 `insertSheet + appendRow(HEADERS) + setFrozenRows(1)` | 3 | once/lifetime | **(d) verify-only — UNWIRED** | No migration. Function has zero cycle-path callers. Schema-setup branch fires only if invoked manually from Apps Script editor AND `World_Drift_Report` sheet doesn't exist. Diagnostic-tool carve-out per Phase 2.1 decision A — direct ops appropriate for operator-fired manual diagnostic, no ctx available. |
+| | L107 `driftSheet.appendRow([22 cols])` cycle-path append | 3 | n/a (UNWIRED) | **(d) verify-only — UNWIRED** | No migration. Same gate as L57-61. **If a future cycle path wires this writer** (e.g., re-enabled via `safePhaseCall_` in godWorldEngine2.js), reclassify to **(a) mechanical**; migration target is P1 `queueAppendIntent_(ctx, 'World_Drift_Report', [22-col row], 'monthly drift report cycle ' + cycle, 'world')` with function signature change `(ssOverride) → (ctx)`. |
+
+**engine.md exception list update S236:** Phase 3 population entry for `generateMonthlyDriftReport.js (World_Drift_Report — monthly drift summary)` narrowed inline to note UNWIRED status, retained as manual-diagnostic carve-out, no migration scheduled. Lesson recorded: B5 inventory at S184 was file-name-based (matches the S185 §5.6.6 audit lesson A7 — file-name-based audits miss dispatch reality); pre-migration call-graph verification is the actual measure-twice gate. **B5 effective scope drops 6 files → 5 files**, sites drop ~50 → ~48 if other live B5 files match plan (verified for `applyEditionCoverageEffects.js` shipped S236 B5/1).
+
 **Routing summary (S205 triage):**
 
 | Class | Sites | Files (with site refs) | Recommended sequencing |

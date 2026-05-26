@@ -712,61 +712,16 @@ function parseContinuityNotes_(ss, section) {
 // invoked. Active parser pipeline routes through different helpers.
 
 
-function determineNoteType_(line, subsection) {
-  var lower = line.toLowerCase();
-  var subLower = (subsection || '').toLowerCase();
-  
-  // Timeline patterns
-  if (line.match(/^C\d+[:\s\-]/i) || line.match(/^Year\s+\d/i) || line.match(/^Q[1-4]\s/i)) {
-    return 'introduced';
-  }
-  if (subLower.indexOf('timeline') >= 0) {
-    return 'introduced';
-  }
-  
-  // Key numbers/reference patterns
-  if (subLower.indexOf('number') >= 0 || subLower.indexOf('reference') >= 0 || 
-      subLower.indexOf('target') >= 0 || subLower.indexOf('key') >= 0) {
-    return 'introduced';
-  }
-  
-  // Built on patterns
-  if (subLower.indexOf('built on') >= 0 || subLower.indexOf('previous') >= 0) {
-    return 'builton';
-  }
-  
-  // New threads patterns
-  if (subLower.indexOf('new thread') >= 0 || subLower.indexOf('introduced') >= 0) {
-    return 'introduced';
-  }
-  
-  // Calendar notes
-  if (subLower.indexOf('calendar') >= 0) {
-    return 'introduced';
-  }
-  
-  // Question patterns
-  if (line.charAt(line.length - 1) === '?') {
-    return 'question';
-  }
-  
-  // Resolution patterns
-  if (lower.indexOf('resolved') >= 0 || lower.indexOf('completed') >= 0) {
-    return 'resolved';
-  }
-  
-  // Callback patterns
-  if (lower.indexOf('callback') >= 0 || lower.indexOf('refer back') >= 0) {
-    return 'callback';
-  }
-  
-  // Key: Value format = introduced data
-  if (line.match(/^[^:]+:\s+\S/)) {
-    return 'introduced';
-  }
-  
-  return 'builton';
-}
+// S237 REMOVED: `determineNoteType_` (was here at L715-793). Caller graph =
+// zero — only call site is inside phase11-media-intake/continuityNotesParser.js
+// which carries its own def at L199. This def collided with that one in the
+// Apps Script flat namespace (silently overridden depending on load order).
+// Adjacent dead helpers (isSubsectionHeader_/cleanSubsectionName_/
+// parseNoteLine_) were swept S185 — this one was missed. Surfaced during
+// Phase 42 §B5 audit-miss 3 cross-phase function collision audit (the audit
+// script's CLASP_DIRS list was stale → blind to phase09-digest +
+// phase11-media-intake; fixed in same commit). Pattern:
+// feedback_measure-twice-cascading-effects.
 
 
 function extractCitizenNames_(line) {

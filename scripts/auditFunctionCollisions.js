@@ -30,12 +30,19 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
 
-// Mirror .claspignore exclusions — only audit what gets pushed to Apps Script
+// Mirror .claspignore exclusions — only audit what gets pushed to Apps Script.
+// S237 correction: list was stale — phase09 dir on disk is `phase09-digest`
+// (not `phase09-rollups`) and phase11 is `phase11-media-intake` (not
+// `phase11-misc`). Stale paths caused audit blind spots for 2 collisions
+// surfaced during Phase 42 §B5 audit-miss 3 work:
+//   - applyCycleWeightForLatestCycle_ (phase01-config stub vs phase09-digest v2.3)
+//   - determineNoteType_ (phase07 dead def vs phase11 v3 impl)
+// Both resolved in same S237 commit. Audit-list now matches `ls phase*` truth.
 const CLASP_DIRS = [
   'phase01-config', 'phase02-world-state', 'phase03-population',
   'phase04-events', 'phase05-citizens', 'phase06-analysis',
-  'phase07-evening-media', 'phase08-v3-chicago', 'phase09-rollups',
-  'phase10-persistence', 'phase11-misc', 'utilities',
+  'phase07-evening-media', 'phase08-v3-chicago', 'phase09-digest',
+  'phase10-persistence', 'phase11-media-intake', 'utilities',
 ];
 
 const FN_RE = /^function\s+([A-Za-z_\$][A-Za-z0-9_\$]*)\s*\(/;

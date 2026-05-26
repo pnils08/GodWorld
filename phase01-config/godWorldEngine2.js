@@ -58,6 +58,18 @@
 /**
  * Logs engine errors to Logger and optionally to Engine_Errors sheet.
  * No schema impact - creates sheet only if it doesn't exist.
+ *
+ * Phase 42 §B5 audit-miss 3 carve-out (S237): TWO direct sheet writes here
+ * are intentional, not migration candidates:
+ *   (1) L88-94 insertSheet + header appendRow — schema-setup carve-out per
+ *       engine.md §Phase 42 §1.1 (fires ≤1× per spreadsheet lifetime,
+ *       outside cycle-write path).
+ *   (2) L99-110 errSheet.appendRow(error row) — error-path transactional
+ *       carve-out. Cannot route through writeIntents/Phase 10 because Phase
+ *       10 itself can throw (recorded by this function); deferred error log
+ *       on a Phase 10 failure would never persist. Meta-error class. Same
+ *       reasoning as Apps Script try/catch persistence pattern in lib/
+ *       diagnosticLedger.js (companion node-side reader on Engine_Errors).
  */
 function logEngineError_(ctx, phase, error) {
   var msg = 'GodWorld Engine Error [' + phase + ']: ' + error.message;
@@ -894,48 +906,19 @@ function updateWorldPopulation_(ctx) {
 }
 
 
-/**
- * ============================================================================
- * APPEND POPULATION HISTORY v1.0
- * ============================================================================
- * Copies World_Population row 2 (current state) to the end of the sheet.
- * Row 2 stays as "current state" for all existing readers.
- * Rows 3+ build a time series for trend analysis.
- * Runs after ExecuteIntents so all Phase writes have landed on row 2.
- */
-function appendPopulationHistory_(ctx) {
-  // DRY-RUN FIX: Skip direct sheet writes in dry-run mode
-  var isDryRun = ctx.mode && ctx.mode.dryRun;
-  if (isDryRun) {
-    Logger.log('appendPopulationHistory_: Skipping (dry-run mode)');
-    return;
-  }
-
-  var sheet = ctx.ss.getSheetByName('World_Population');
-  if (!sheet) return;
-  var data = sheet.getDataRange().getValues();
-  if (data.length < 2) return;
-  var currentRow = data[1]; // row 2 (0-indexed) — this is the canonical live row
-  // Set timestamp and cycle on the history copy
-  var header = data[0];
-  var row = currentRow.slice(); // copy
-  var tsIdx = header.indexOf('timestamp');
-  var cyIdx = header.indexOf('cycle');
-  if (tsIdx >= 0) row[tsIdx] = new Date();
-  var cycleId = ctx.summary.cycleId || ctx.summary.absoluteCycle || '';
-  if (cyIdx >= 0) row[cyIdx] = cycleId;
-
-  // Dedup: skip if last history row already has this cycle
-  if (data.length > 2 && cyIdx >= 0) {
-    var lastHistoryCycle = data[data.length - 1][cyIdx];
-    if (lastHistoryCycle == cycleId) {
-      Logger.log('appendPopulationHistory_: Cycle ' + cycleId + ' already recorded, skipping');
-      return;
-    }
-  }
-
-  sheet.appendRow(row);
-}
+// S237 REMOVED: `appendPopulationHistory_` (was here at L897-938). Two
+// v3.2-removed comment markers at the cycle-phases entry points (L438 +
+// L1738 — both kept as archaeology) confirmed the function had been
+// unreachable since v3.2. Caller graph audit verified zero callers
+// project-wide; only references left were the two removal markers and
+// the function's own Logger.log strings. Body was a Phase-10-following
+// step that copied World_Population row 2 → end-of-sheet for trend
+// history; superseded by the explicit cache-flush-aware history path
+// noted in the L438 marker. Surfaced during Phase 42 §B5 audit-miss 3
+// per-site classification as the 3rd dead-function in same audit pass
+// (alongside applyCycleWeightForLatestCycle_ stub + determineNoteType_).
+// Pattern: feedback_measure-twice-cascading-effects (cohort-C scope
+// expansion class — dead writers masquerading as migration candidates).
 
 
 /**
@@ -957,6 +940,18 @@ function padStart_(str, targetLength, padChar) {
   return str;
 }
 
+/**
+ * Phase 42 §B5 audit-miss 3 carve-out (S237): the `intake.getRange(...).
+ * clearContent()` direct write at L1085 is intentional. Intake is an
+ * operator-fed source tab; processIntake_'s stage-then-clear pattern is
+ * transactional with its own ledger.rows push. Deferring the clear to
+ * Phase 10 would split that transaction across phases (stage commits, but
+ * clear waits; if Phase 10 partial-fails the source rows live on and are
+ * re-staged next cycle → duplicates). The writeIntents API also has no
+ * clear intent type; introducing one would be invasive for a single
+ * use-case. Same reasoning as the healthCauseIntake operator-fired
+ * carve-out documented in engine.md §Phase 11 media intake (S236).
+ */
 function processIntake_(ctx) {
   // Phase 42 §5.6: SL writes via shared ctx.ledger (push staged rows;
   // Phase 10 consolidated commit auto-extends the sheet). Direct
@@ -1298,30 +1293,26 @@ function writeDigest_(ctx) {
 }
 
 
-/**
- * ============================================================================
- * APPLY CYCLE WEIGHT FOR LATEST CYCLE
- * ============================================================================
- */
-function applyCycleWeightForLatestCycle_(ctx) {
-  var sheet = ctx.ss.getSheetByName('Riley_Digest');
-  if (!sheet) return;
-
-  var lastRow = sheet.getLastRow();
-
-  // EventsGenerated is column 5 (E)
-  var events = Number(sheet.getRange(lastRow, 5).getValue()) || 0;
-
-  var weight = 'low-signal';
-  if (events >= 20) {
-    weight = 'high-signal';
-  } else if (events >= 5) {
-    weight = 'medium-signal';
-  }
-
-  // CycleWeight column = 7 (G)
-  sheet.getRange(lastRow, 7).setValue(weight);
-}
+// S237 REMOVED: stub `applyCycleWeightForLatestCycle_` definition.
+// Collided with the canonical v2.3 impl in
+// phase09-digest/applyCycleWeightForLatestCycle.js (Apps Script flat namespace
+// — one def silently overrides the other based on load order). The stub:
+//   - Read EventsGenerated col 5 + wrote CycleWeight col 7 only
+//   - Hardcoded thresholds (events ≥20 → high-signal, ≥5 → medium-signal)
+//   - Wrote to lastRow without cycle-safe row targeting
+// vs phase09-digest v2.3:
+//   - Calls applyCycleWeight_(ctx) for full scoring (sets
+//     S.cycleWeight/Reason/Score on ctx.summary)
+//   - Cycle-safe row targeting (lastIndexOf cycle in Cycle col → targetRow)
+//   - Writes 9 columns: CycleWeight + CycleWeightReason + CycleWeightScore +
+//     6 calendar columns (Holiday/HolidayPriority/FirstFriday/CreationDay/
+//     SportsSeason/Season/CalendarSummary)
+// The two cycle-phases call sites at L372/L1694 now bind unambiguously to
+// the v2.3 impl. Caller graph: only those two sites + a doc-comment ref in
+// phase03-population/finalizeWorldPopulation.js (already accurate). Surfaced
+// during Phase 42 §B5 audit-miss 3 per-site classification work — exact
+// Phase A reversal class (S199 recordWorldEventsv25). Pattern:
+// feedback_measure-twice-cascading-effects.
 
 
 /**

@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * applyEditionCoverageEffects_ v2.0 (ES5)
+ * applyEditionCoverageEffects_ v2.1 (ES5)
  * ============================================================================
  * [engine/sheet] — Phase 27.1 coverage ratings channel
  *
@@ -17,6 +17,13 @@
  * Sheet populated by rateEditionCoverage.js (automated, post-publish).
  *
  * The newspaper covered X. Now the city reacts.
+ *
+ * ============================================================================
+ *
+ * v2.1 (S236, Phase 42 §B5 P3) — mark-processed `setValue` loop migrated to
+ *   `queueCellIntent_`. dryRun guard dropped (intents respect dryRun at
+ *   commit time per Phase 10). Edition_Coverage_Ratings removed from the
+ *   engine.md §Phase 2 direct-write exceptions list. 1 site migrated.
  *
  * ============================================================================
  */
@@ -37,13 +44,13 @@ function applyEditionCoverageEffects_(ctx) {
 
   var sheet = ss.getSheetByName('Edition_Coverage_Ratings');
   if (!sheet) {
-    Logger.log('applyEditionCoverageEffects_ v2.0: Edition_Coverage_Ratings sheet not found (skipping)');
+    Logger.log('applyEditionCoverageEffects_ v2.1: Edition_Coverage_Ratings sheet not found (skipping)');
     return;
   }
 
   var data = sheet.getDataRange().getValues();
   if (data.length < 2) {
-    Logger.log('applyEditionCoverageEffects_ v2.0: No data rows');
+    Logger.log('applyEditionCoverageEffects_ v2.1: No data rows');
     return;
   }
 
@@ -99,11 +106,11 @@ function applyEditionCoverageEffects_(ctx) {
   }
 
   if (entries.length === 0) {
-    Logger.log('applyEditionCoverageEffects_ v2.0: No unprocessed entries for cycle ' + currentCycle);
+    Logger.log('applyEditionCoverageEffects_ v2.1: No unprocessed entries for cycle ' + currentCycle);
     return;
   }
 
-  Logger.log('applyEditionCoverageEffects_ v2.0: Processing ' + entries.length + ' domain ratings');
+  Logger.log('applyEditionCoverageEffects_ v2.1: Processing ' + entries.length + ' domain ratings');
 
   // ═══════════════════════════════════════════════════════════════════════════
   // DOMAIN-SPECIFIC RIPPLE RULES
@@ -346,24 +353,31 @@ function applyEditionCoverageEffects_(ctx) {
   // Apply sentiment to city mood
   if (totalSentiment !== 0) {
     S.sentiment = (S.sentiment || 0) + totalSentiment;
-    Logger.log('applyEditionCoverageEffects_ v2.0: Sentiment adjustment: ' + totalSentiment.toFixed(4));
+    Logger.log('applyEditionCoverageEffects_ v2.1: Sentiment adjustment: ' + totalSentiment.toFixed(4));
   }
 
-  Logger.log('applyEditionCoverageEffects_ v2.0: Complete. ' + entries.length + ' domains → ' +
+  Logger.log('applyEditionCoverageEffects_ v2.1: Complete. ' + entries.length + ' domains → ' +
     'sentiment ' + totalSentiment.toFixed(4) + ', ' +
     coverageTriggers.length + ' triggers, ' +
     Object.keys(domainBalance).length + ' domain balance entries');
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // MARK PROCESSED (direct sheet write — documented exception)
+  // MARK PROCESSED (Phase 42 §B5 P3 — queueCellIntent_ replaces setValue loop)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  var isDryRun = ctx.mode && ctx.mode.dryRun;
-  if (!isDryRun && processedCol !== -1 && processedRows.length > 0) {
+  if (processedCol !== -1 && processedRows.length > 0) {
     for (var pi = 0; pi < processedRows.length; pi++) {
-      sheet.getRange(processedRows[pi], processedCol + 1).setValue('TRUE');
+      queueCellIntent_(
+        ctx,
+        'Edition_Coverage_Ratings',
+        processedRows[pi],
+        processedCol + 1,
+        'TRUE',
+        'mark edition-coverage row processed (cycle ' + currentCycle + ')',
+        'world'
+      );
     }
-    Logger.log('applyEditionCoverageEffects_ v2.0: Marked ' + processedRows.length + ' rows as processed');
+    Logger.log('applyEditionCoverageEffects_ v2.1: Queued ' + processedRows.length + ' mark-processed cell intents');
   }
 
   ctx.summary = S;

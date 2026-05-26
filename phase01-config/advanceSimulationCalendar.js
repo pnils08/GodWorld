@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * advanceSimulationCalendar_ v2.3
+ * advanceSimulationCalendar_ v2.4
  * ============================================================================
  *
  * Cycle-based simulation calendar per GODWORLD CALENDAR v1.0.
@@ -18,6 +18,15 @@
  * - Season from SimMonth
  * - Holiday from cycle
  * - Weather baseline from season
+ *
+ * ============================================================================
+ *
+ * v2.4 (S236, Phase 42 §B5/2 P3) — 6 single-cell `setValue` writes to row 2
+ *   of Simulation_Calendar migrated to `queueCellIntent_`. Phase 1 timekeeping
+ *   substrate; runs every cycle. Sheet-existence guard at L29-30 retained
+ *   (queueing intents for a missing tab would fail at Phase 10 commit).
+ *   Simulation_Calendar removed from the engine.md §Phase 1 direct-write
+ *   exceptions list. 6 sites migrated.
  *
  * ============================================================================
  */
@@ -167,15 +176,16 @@ function advanceSimulationCalendar_(ctx) {
   // E: HolidayFlag
   // F: Notes (optional)
   
-  sheet.getRange(2, 1).setValue(godWorldYear);
-  sheet.getRange(2, 2).setValue(simMonth);
-  sheet.getRange(2, 3).setValue(cycleInMonth);
-  sheet.getRange(2, 4).setValue(season);
-  sheet.getRange(2, 5).setValue(holiday);
-  
+  // Phase 42 §B5/2 P3 (S236) — 6 cell intents replace setValue writes.
+  queueCellIntent_(ctx, 'Simulation_Calendar', 2, 1, godWorldYear,  'calendar advance: GodWorld year',     'world');
+  queueCellIntent_(ctx, 'Simulation_Calendar', 2, 2, simMonth,      'calendar advance: SimMonth',          'world');
+  queueCellIntent_(ctx, 'Simulation_Calendar', 2, 3, cycleInMonth,  'calendar advance: cycle-in-month',    'world');
+  queueCellIntent_(ctx, 'Simulation_Calendar', 2, 4, season,        'calendar advance: season',            'world');
+  queueCellIntent_(ctx, 'Simulation_Calendar', 2, 5, holiday,       'calendar advance: holiday flag',      'world');
+
   // Optional: Write cycle info to Notes column
   var cycleNote = "Cycle " + cycleOfYear + " (Abs: " + absoluteCycle + ")";
-  sheet.getRange(2, 6).setValue(cycleNote);
+  queueCellIntent_(ctx, 'Simulation_Calendar', 2, 6, cycleNote,     'calendar advance: cycle note',        'world');
 
   // ═══════════════════════════════════════════════════════════════════════════
   // MONTH NAME LOOKUP

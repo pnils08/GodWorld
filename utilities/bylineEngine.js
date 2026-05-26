@@ -492,7 +492,7 @@ function scoreAllBylines_(seed, state) {
 //   node utilities/bylineEngine.js
 // In Apps Script (no `require`) and Node `require()` calls, the guard skips.
 // ─────────────────────────────────────────────────────────────────────────────
-function _runSelfTests_() {
+function _runBylineSelfTests_() {
   var pass = 0, fail = 0;
   function eq(label, actual, expected) {
     if (actual === expected) { pass++; return; }
@@ -922,5 +922,5 @@ if (typeof module !== 'undefined' && module.exports) {
 }
 
 if (typeof require !== 'undefined' && typeof module !== 'undefined' && require.main === module) {
-  _runSelfTests_();
+  _runBylineSelfTests_();
 }

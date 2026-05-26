@@ -442,7 +442,7 @@ function isConsequenceFloor_(seed, auditPattern, storylineState, coverageState) 
 //   node utilities/priorityEngine.js
 // In Apps Script (no `require`) and Node `require()` calls, the guard skips.
 // ─────────────────────────────────────────────────────────────────────────────
-function _runSelfTests_() {
+function _runPrioritySelfTests_() {
   var pass = 0, fail = 0;
   function eq(label, actual, expected) {
     if (actual === expected) { pass++; return; }
@@ -715,5 +715,5 @@ if (typeof module !== 'undefined' && module.exports) {
 }
 
 if (typeof require !== 'undefined' && typeof module !== 'undefined' && require.main === module) {
-  _runSelfTests_();
+  _runPrioritySelfTests_();
 }

@@ -1,31 +1,41 @@
 /**
  * ============================================================================
- * registerCulturalEntity_ v2.4
+ * registerCulturalEntity_ v2.5 (Phase 42 §B6 — writeIntents migration)
  * ============================================================================
  *
  * Automatically classifies and registers cultural entities with calendar awareness.
  *
- * v2.3 Enhancements:
+ * v2.5 — Phase 42 §B6 mechanical scope (1 file / 9 sites):
+ * - All sheet writes routed through writeIntents
+ *   - UPDATE branch: 8 setValue calls → queueCellIntent_
+ *   - CREATE branch: 1 appendRow → queueAppendIntent_
+ * - Per-cycle in-process registry on `ctx.summary.culturalRegistry` resolves
+ *   same-cycle multi-register dedup hazard exposed by the migration.
+ *   Snapshot read at L43 captures pre-cycle committed state only; pending
+ *   writeIntents are not visible. Without the registry, the second-or-later
+ *   call for the same entity in one cycle would:
+ *     (a) for an entity NEW this cycle — duplicate-append (snapshot doesn't see
+ *         the pending appendIntent from the first call), or
+ *     (b) for an entity that existed before this cycle — recompute FameScore
+ *         from stale snapshot value, losing the first call's increment under
+ *         persistenceExecutor's LWW per (tab, row, col) semantics.
+ *   The registry stores the intent object reference returned by queue* helpers
+ *   plus an accumulator. Repeat calls mutate the intent's `values` in place;
+ *   no re-queueing, no second-call snapshot reads needed.
+ * - Helpers (updateMediaSpread_, updateTrendTrajectory_, updateCityTier_)
+ *   remain caller-passed-sheet direct-write (Phase 42 B4 batch, pending).
+ *   They fire only on first-cycle-call for an existing-in-snapshot entity
+ *   (registry-miss UPDATE path) so their semantics stay intact pre-B4.
+ *
+ * v2.3/v2.4 features preserved:
  * - ES5 syntax for Google Apps Script compatibility
  * - Defensive guards for ctx/summary
  * - for loops instead of arrow functions
  *
- * v2.2 Features:
- * - Expanded to 12 Oakland neighborhoods
- * - GodWorld Calendar integration (30+ holidays)
- * - Holiday-based fame score modifiers
- * - First Friday boosts for arts entities
- * - Sports season boosts for athletes
- * - Creation Day community figure awareness
- * - Cultural activity and community engagement modifiers
- * - Calendar context tracking
- * - Aligned with GodWorld Calendar v1.0
- *
- * Previous features (v2.1):
- * - FameCategory classification
- * - CulturalDomain classification
- * - Oakland neighborhood awareness
- * - Economic mood affects fame scoring
+ * v2.2 features preserved:
+ * - 12 Oakland neighborhoods, GodWorld Calendar integration (30+ holidays),
+ *   holiday/First Friday/sports-season fame modifiers, calendar context
+ *   tracking.
  *
  * Ensures Media Room always knows WHY an entity is famous.
  *
@@ -268,84 +278,170 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
   // ═══════════════════════════════════════════════════════════════════════════
   // COLUMN INDICES
   // ═══════════════════════════════════════════════════════════════════════════
+  // Column indices used downstream — others (RoleType, FirstSeenCycle, Status,
+  // TrendTrajectory, FirstRefSource, MediaSpread, CityTier, FirstSeenHoliday)
+  // are written positionally on CREATE only; no read/update site needs the
+  // header-derived index, so they're not looked up.
   var iCulId = col('CUL-ID');
   var iName = col('Name');
-  var iRoleType = col('RoleType');
   var iFameCat = col('FameCategory');
   var iCulDom = col('CulturalDomain');
   var iNeighborhood = col('Neighborhood');
-  var iFirstSeen = col('FirstSeenCycle');
   var iLastSeen = col('LastSeenCycle');
   var iMediaCount = col('MediaCount');
   var iFameScore = col('FameScore');
-  var iTrend = col('TrendTrajectory');
-  var iFirstRef = col('FirstRefSource');
-  var iMediaSpread = col('MediaSpread');
-  var iCityTier = col('CityTier');
-  var iStatus = col('Status');
-
-  // Calendar columns (v2.2)
-  var iFirstHoliday = col('FirstSeenHoliday');
   var iLastHoliday = col('LastSeenHoliday');
   var iCalendarContext = col('CalendarContext');
 
+  // Build calendar context string (v2.2) — hoisted, referenced from both
+  // first-call and registry-hit branches below.
+  function buildCalendarContext_() {
+    var parts = [];
+    if (holiday !== "none") parts.push(holiday);
+    if (isFirstFriday) parts.push("FirstFriday");
+    if (isCreationDay) parts.push("CreationDay");
+    if (sportsSeason !== "off-season") parts.push(sportsSeason);
+    return parts.join(", ") || "";
+  }
+
   // ═══════════════════════════════════════════════════════════════════════════
-  // UPDATE IF EXISTS
+  // PER-CYCLE REGISTRY (v2.5 — §B6 dedup hazard fix)
+  //
+  // Stores `{ culId, kind, accum, intents }` per entity name registered this
+  // cycle. `intents` are object references returned by queue* helpers;
+  // mutating their `values` array re-targets the persistence executor's
+  // future cell/append write to the new value (no re-queueing, no LWW games).
+  // ═══════════════════════════════════════════════════════════════════════════
+  ctx.summary.culturalRegistry = ctx.summary.culturalRegistry || {};
+  var reg = ctx.summary.culturalRegistry[name];
+
+  // ───── REPEAT CALL: snapshot-UPDATE branch ─────
+  // Entity existed in pre-cycle committed state; first call this cycle queued
+  // cell intents at row `reg.row`. Mutate those intents in place to bump
+  // FameScore/MediaCount/LastSeenCycle/holiday columns.
+  if (reg && reg.kind === 'snapshot-update') {
+    reg.accum.mediaCount += 1;
+    reg.accum.fameScore += 5 + fameBonus;
+    if (holiday !== "none") reg.accum.lastHoliday = holiday;
+    reg.accum.calendarContext = buildCalendarContext_();
+    reg.accum.lastSeenCycle = cycle;
+
+    if (reg.intents.lastSeen) reg.intents.lastSeen.values[0][0] = reg.accum.lastSeenCycle;
+    if (reg.intents.mediaCount) reg.intents.mediaCount.values[0][0] = reg.accum.mediaCount;
+    if (reg.intents.fameScore) reg.intents.fameScore.values[0][0] = reg.accum.fameScore;
+    if (reg.intents.lastHoliday && reg.accum.lastHoliday) reg.intents.lastHoliday.values[0][0] = reg.accum.lastHoliday;
+    if (reg.intents.calendarContext) reg.intents.calendarContext.values[0][0] = reg.accum.calendarContext;
+
+    // Skip helpers + summary-array push on repeat (first call already fired
+    // helpers and pushed entry; tracking arrays show first-call snapshot for
+    // briefing-momentum display, stale-on-repeat acceptable per spec).
+    return reg.culId;
+  }
+
+  // ───── REPEAT CALL: pending-create branch ─────
+  // Entity was NEW this cycle; first call queued an append intent. Mutate the
+  // pending row's mutable columns (LastSeenCycle, MediaCount, FameScore,
+  // LastSeenHoliday, CalendarContext). Column indices are positional in the
+  // newRow construction at the bottom of CREATE branch.
+  if (reg && reg.kind === 'pending-create') {
+    reg.accum.mediaCount += 1;
+    reg.accum.fameScore += 5 + fameBonus;
+    if (holiday !== "none") reg.accum.lastHoliday = holiday;
+    reg.accum.calendarContext = buildCalendarContext_();
+    reg.accum.lastSeenCycle = cycle;
+
+    var pendingRow = reg.intents.append.values[0];
+    pendingRow[9] = reg.accum.lastSeenCycle;          // LastSeenCycle
+    pendingRow[10] = reg.accum.mediaCount;            // MediaCount
+    pendingRow[11] = reg.accum.fameScore;             // FameScore
+    if (reg.accum.lastHoliday) pendingRow[18] = reg.accum.lastHoliday;  // LastSeenHoliday
+    pendingRow[19] = reg.accum.calendarContext;       // CalendarContext
+
+    return reg.culId;
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // UPDATE IF EXISTS (snapshot path — first call this cycle for the entity)
   // ═══════════════════════════════════════════════════════════════════════════
   for (var i = 1; i < data.length; i++) {
     var rowName = iName >= 0 ? data[i][iName] : data[i][2];
-    
+
     if (rowName === name) {
 
-      // Update LastSeenCycle
+      var rowNum = i + 1;
+      var intents = {};
+
+      // LastSeenCycle
       if (iLastSeen >= 0) {
-        sheet.getRange(i + 1, iLastSeen + 1).setValue(cycle);
+        intents.lastSeen = queueCellIntent_(ctx, 'Cultural_Ledger', rowNum, iLastSeen + 1, cycle, 'registerCulturalEntity_: LastSeenCycle', 'media');
       }
 
       // MediaCount
       var mcCol = iMediaCount >= 0 ? iMediaCount : 10;
       var mc = Number(data[i][mcCol] || 0) + 1;
-      sheet.getRange(i + 1, mcCol + 1).setValue(mc);
+      intents.mediaCount = queueCellIntent_(ctx, 'Cultural_Ledger', rowNum, mcCol + 1, mc, 'registerCulturalEntity_: MediaCount', 'media');
 
       // FameScore with calendar bonus
       var fsCol = iFameScore >= 0 ? iFameScore : 11;
       var baseFame = Number(data[i][fsCol] || 0);
       var newFame = baseFame + 5 + fameBonus;
-      sheet.getRange(i + 1, fsCol + 1).setValue(newFame);
+      intents.fameScore = queueCellIntent_(ctx, 'Cultural_Ledger', rowNum, fsCol + 1, newFame, 'registerCulturalEntity_: FameScore', 'media');
 
       // FameCategory + Domain refresh
-      if (iFameCat >= 0) sheet.getRange(i + 1, iFameCat + 1).setValue(fam.cat);
-      if (iCulDom >= 0) sheet.getRange(i + 1, iCulDom + 1).setValue(fam.dom);
+      if (iFameCat >= 0) queueCellIntent_(ctx, 'Cultural_Ledger', rowNum, iFameCat + 1, fam.cat, 'registerCulturalEntity_: FameCategory', 'media');
+      if (iCulDom >= 0) queueCellIntent_(ctx, 'Cultural_Ledger', rowNum, iCulDom + 1, fam.dom, 'registerCulturalEntity_: CulturalDomain', 'media');
 
       // Neighborhood update if provided and column exists
       if (iNeighborhood >= 0 && validNeighborhood) {
-        sheet.getRange(i + 1, iNeighborhood + 1).setValue(validNeighborhood);
+        queueCellIntent_(ctx, 'Cultural_Ledger', rowNum, iNeighborhood + 1, validNeighborhood, 'registerCulturalEntity_: Neighborhood', 'media');
       }
 
       // Calendar columns update (v2.2)
+      var lastHolidayValue = "";
       if (iLastHoliday >= 0 && holiday !== "none") {
-        sheet.getRange(i + 1, iLastHoliday + 1).setValue(holiday);
+        lastHolidayValue = holiday;
+        intents.lastHoliday = queueCellIntent_(ctx, 'Cultural_Ledger', rowNum, iLastHoliday + 1, holiday, 'registerCulturalEntity_: LastSeenHoliday', 'media');
       }
+      var calCtxValue = "";
       if (iCalendarContext >= 0) {
-        var calCtx = buildCalendarContext_();
-        sheet.getRange(i + 1, iCalendarContext + 1).setValue(calCtx);
+        calCtxValue = buildCalendarContext_();
+        intents.calendarContext = queueCellIntent_(ctx, 'Cultural_Ledger', rowNum, iCalendarContext + 1, calCtxValue, 'registerCulturalEntity_: CalendarContext', 'media');
       }
 
-      // Helper updates
+      // Helper updates (B4 batch pending — still caller-passed-sheet direct
+      // writes; remain valid here on first-cycle-call because UPDATE branch
+      // resolved a real committed row. Skipped on subsequent same-cycle
+      // calls via registry short-circuit above.)
       if (typeof updateMediaSpread_ === 'function') {
-        updateMediaSpread_(sheet, i + 1, journalistName);
+        updateMediaSpread_(sheet, rowNum, journalistName);
       }
       if (typeof updateTrendTrajectory_ === 'function') {
-        updateTrendTrajectory_(sheet, i + 1, newFame);
+        updateTrendTrajectory_(sheet, rowNum, newFame);
       }
       if (typeof updateCityTier_ === 'function') {
-        updateCityTier_(sheet, i + 1, newFame, mc);
+        updateCityTier_(sheet, rowNum, newFame, mc);
       }
+
+      // Register for same-cycle repeat-call dedup
+      var existingCulId = iCulId >= 0 ? data[i][iCulId] : data[i][1];
+      ctx.summary.culturalRegistry[name] = {
+        kind: 'snapshot-update',
+        culId: existingCulId,
+        row: rowNum,
+        accum: {
+          fameScore: newFame,
+          mediaCount: mc,
+          lastSeenCycle: cycle,
+          lastHoliday: lastHolidayValue,
+          calendarContext: calCtxValue
+        },
+        intents: intents
+      };
 
       // Track in summary
       S.culturalEntityUpdates = S.culturalEntityUpdates || [];
       S.culturalEntityUpdates.push({
-        culId: iCulId >= 0 ? data[i][iCulId] : data[i][1],
+        culId: existingCulId,
         name: name,
         fameCategory: fam.cat,
         domain: fam.dom,
@@ -357,7 +453,7 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
         sportsSeason: sportsSeason
       });
 
-      return iCulId >= 0 ? data[i][iCulId] : data[i][1];
+      return existingCulId;
     }
   }
 
@@ -366,40 +462,48 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
   // ═══════════════════════════════════════════════════════════════════════════
   var culId = "CUL-" + (typeof shortId_ === 'function' ? shortId_().toUpperCase() : rng().toString(36).substr(2, 6).toUpperCase());
 
-  // Build calendar context string (v2.2)
-  function buildCalendarContext_() {
-    var parts = [];
-    if (holiday !== "none") parts.push(holiday);
-    if (isFirstFriday) parts.push("FirstFriday");
-    if (isCreationDay) parts.push("CreationDay");
-    if (sportsSeason !== "off-season") parts.push(sportsSeason);
-    return parts.join(", ") || "";
-  }
+  var initialFameScore = 10 + fameBonus;
+  var initialCalCtx = buildCalendarContext_();
+  var initialLastHoliday = holiday !== "none" ? holiday : "";
 
   var newRow = [
-    new Date(),               // Timestamp
-    culId,                    // CUL-ID
-    name,                     // Name
-    roleType,                 // RoleType
-    fam.cat,                  // FameCategory
-    fam.dom,                  // CulturalDomain
-    "Active",                 // Status
-    "",                       // UniverseLinks
-    cycle,                    // FirstSeenCycle
-    cycle,                    // LastSeenCycle
-    1,                        // MediaCount
-    10 + fameBonus,           // FameScore start (with calendar bonus)
-    "rising",                 // TrendTrajectory
-    journalistName || "",     // FirstRefSource
-    1,                        // MediaSpread
-    "Local",                  // CityTier
-    validNeighborhood,        // Neighborhood
-    holiday !== "none" ? holiday : "",  // FirstSeenHoliday (v2.2)
-    holiday !== "none" ? holiday : "",  // LastSeenHoliday (v2.2)
-    buildCalendarContext_()   // CalendarContext (v2.2)
+    new Date(),               // 0  Timestamp
+    culId,                    // 1  CUL-ID
+    name,                     // 2  Name
+    roleType,                 // 3  RoleType
+    fam.cat,                  // 4  FameCategory
+    fam.dom,                  // 5  CulturalDomain
+    "Active",                 // 6  Status
+    "",                       // 7  UniverseLinks
+    cycle,                    // 8  FirstSeenCycle
+    cycle,                    // 9  LastSeenCycle           (mutable on repeat)
+    1,                        // 10 MediaCount              (mutable on repeat)
+    initialFameScore,         // 11 FameScore               (mutable on repeat)
+    "rising",                 // 12 TrendTrajectory
+    journalistName || "",     // 13 FirstRefSource
+    1,                        // 14 MediaSpread
+    "Local",                  // 15 CityTier
+    validNeighborhood,        // 16 Neighborhood
+    initialLastHoliday,       // 17 FirstSeenHoliday (v2.2)
+    initialLastHoliday,       // 18 LastSeenHoliday  (v2.2, mutable on repeat)
+    initialCalCtx             // 19 CalendarContext  (v2.2, mutable on repeat)
   ];
 
-  sheet.appendRow(newRow);
+  var appendIntent = queueAppendIntent_(ctx, 'Cultural_Ledger', newRow, 'registerCulturalEntity_: CREATE', 'media');
+
+  // Register for same-cycle repeat-call dedup
+  ctx.summary.culturalRegistry[name] = {
+    kind: 'pending-create',
+    culId: culId,
+    accum: {
+      fameScore: initialFameScore,
+      mediaCount: 1,
+      lastSeenCycle: cycle,
+      lastHoliday: initialLastHoliday,
+      calendarContext: initialCalCtx
+    },
+    intents: { append: appendIntent }
+  };
 
   // Track in summary
   S.culturalEntityCreates = S.culturalEntityCreates || [];
@@ -426,7 +530,7 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
  * ============================================================================
  * CULTURAL ENTITY REGISTRATION REFERENCE
  * ============================================================================
- * 
+ *
  * FAME CATEGORIES:
  * - actor, musician, artist, dancer, curator
  * - athlete, sports-figure
@@ -437,18 +541,18 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
  * - model
  * - business-figure
  * - unknown
- * 
+ *
  * CULTURAL DOMAINS:
  * - Arts, Sports, Media, Civic, Culinary
  * - Literature, Fashion, Business, Other
- * 
+ *
  * NEIGHBORHOODS (12):
  * - Temescal, Downtown, Fruitvale, Lake Merritt
  * - West Oakland, Laurel, Rockridge, Jack London
  * - Uptown, KONO, Chinatown, Piedmont Ave
- * 
+ *
  * FAME SCORE MODIFIERS (v2.2):
- * 
+ *
  * | Factor | Domain/Category | Bonus |
  * |--------|-----------------|-------|
  * | Economic mood ≥65 | All | +2 |
@@ -467,16 +571,20 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
  * | Late-season | Sports | +2 |
  * | High cultural activity | Arts | +2 |
  * | High community engagement | Civic/community | +2 |
- * 
- * NEW LEDGER COLUMNS (v2.2):
- * - FirstSeenHoliday: Holiday when entity first registered
- * - LastSeenHoliday: Most recent holiday when entity referenced
- * - CalendarContext: Combined calendar state string
- * 
+ *
+ * LEDGER COLUMNS (v2.2, positional indices used by v2.5 pending-create mutation):
+ *  0 Timestamp        1 CUL-ID           2 Name             3 RoleType
+ *  4 FameCategory     5 CulturalDomain   6 Status           7 UniverseLinks
+ *  8 FirstSeenCycle   9 LastSeenCycle*  10 MediaCount*     11 FameScore*
+ * 12 TrendTrajectory 13 FirstRefSource  14 MediaSpread     15 CityTier
+ * 16 Neighborhood    17 FirstSeenHoliday 18 LastSeenHoliday* 19 CalendarContext*
+ * (* = mutable on same-cycle repeat-call via ctx.summary.culturalRegistry.)
+ *
  * SUMMARY TRACKING:
- * - culturalEntityUpdates: Array of updated entities
- * - culturalEntityCreates: Array of new entities
- * - Both include calendar context (v2.2)
- * 
+ * - culturalEntityUpdates: Array of updated entities (first-call snapshot)
+ * - culturalEntityCreates: Array of new entities (first-call snapshot)
+ * - culturalRegistry: per-cycle name → {culId, kind, accum, intents} map for
+ *   intent-object-ref dedup on same-cycle multi-register
+ *
  * ============================================================================
  */

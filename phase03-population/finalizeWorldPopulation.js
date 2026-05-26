@@ -1,9 +1,19 @@
 /**
  * ============================================================================
- * FINALIZE WORLD POPULATION v1.2 (S203 — v1.1 calendar path removed)
+ * FINALIZE WORLD POPULATION v1.3 (S236 — Phase 42 §B5/3 P3 migration)
  * ============================================================================
  *
  * PURPOSE: Writes complete cycle summary data to World_Population sheet
+ *
+ * v1.3 Changes (S236 [engine-sheet] Phase 42 §B5/3 P3):
+ * - 17 single-cell `setValue` writes to row 2 of World_Population migrated
+ *   to `queueCellIntent_`. Each gated by the existing `idx(colName) >= 0`
+ *   header presence check — header read at function entry still resolves
+ *   column indices before queueing intents. dryRun guard at function entry
+ *   removed (intents respect dryRun at Phase 10 commit per Pattern P3 spec
+ *   §2.3); sheet-existence guard + empty-header guard retained. World_
+ *   Population removed from the engine.md §Phase 3 direct-write exceptions
+ *   list. Largest single-file mechanical migration in B5.
  *
  * v1.2 Changes (S203 [engine-sheet] header-drift detector audit):
  * - Removed v1.1 calendar field writes (season/holiday/holidayPriority/
@@ -55,13 +65,10 @@
  */
 
 function finalizeWorldPopulation_(ctx) {
-  // DRY-RUN FIX: Skip direct sheet writes in dry-run mode
-  var isDryRun = ctx.mode && ctx.mode.dryRun;
-  if (isDryRun) {
-    Logger.log('finalizeWorldPopulation_: Skipping (dry-run mode)');
-    return;
-  }
-
+  // dryRun handling: queue intents normally; executePersistIntents_ checks
+  // ctx.mode.dryRun at Phase 10 commit time and logs without writing
+  // (per Phase 42 §2.3 P3 spec — guarding at writer site is now redundant +
+  // breaks dryRun intent visibility). v1.2's pre-flight return removed S236.
   var sheet = ctx.ss.getSheetByName('World_Population');
   if (!sheet) {
     Logger.log('finalizeWorldPopulation_: World_Population sheet not found');
@@ -88,40 +95,44 @@ function finalizeWorldPopulation_(ctx) {
   var D = S.cityDynamics || {};
   var W = S.weather || {};
 
+  // Phase 42 §B5/3 P3 (S236) — 17 cell intents replace setValue writes.
+  // Header existence guards retained: only queue intents for columns that
+  // actually exist in the live World_Population schema.
+
   // -------------------------------------------------------------------------
   // CYCLE METADATA
   // -------------------------------------------------------------------------
-  
+
   if (idx('cycle') >= 0) {
-    sheet.getRange(dataRow, idx('cycle') + 1).setValue(S.cycleId || '');
+    queueCellIntent_(ctx, 'World_Population', dataRow, idx('cycle') + 1, S.cycleId || '', 'finalize: cycle', 'world');
   }
-  
+
   if (idx('cycleWeight') >= 0) {
-    sheet.getRange(dataRow, idx('cycleWeight') + 1).setValue(S.cycleWeight || '');
+    queueCellIntent_(ctx, 'World_Population', dataRow, idx('cycleWeight') + 1, S.cycleWeight || '', 'finalize: cycleWeight', 'world');
   }
-  
+
   if (idx('cycleWeightReason') >= 0) {
-    sheet.getRange(dataRow, idx('cycleWeightReason') + 1).setValue(S.cycleWeightReason || '');
+    queueCellIntent_(ctx, 'World_Population', dataRow, idx('cycleWeightReason') + 1, S.cycleWeightReason || '', 'finalize: cycleWeightReason', 'world');
   }
 
   // -------------------------------------------------------------------------
   // SIGNALS & FLAGS
   // -------------------------------------------------------------------------
-  
+
   if (idx('civicLoad') >= 0) {
-    sheet.getRange(dataRow, idx('civicLoad') + 1).setValue(S.civicLoad || '');
+    queueCellIntent_(ctx, 'World_Population', dataRow, idx('civicLoad') + 1, S.civicLoad || '', 'finalize: civicLoad', 'world');
   }
-  
+
   if (idx('migrationDrift') >= 0) {
-    sheet.getRange(dataRow, idx('migrationDrift') + 1).setValue(S.migrationDrift || 0);
+    queueCellIntent_(ctx, 'World_Population', dataRow, idx('migrationDrift') + 1, S.migrationDrift || 0, 'finalize: migrationDrift', 'world');
   }
-  
+
   if (idx('patternFlag') >= 0) {
-    sheet.getRange(dataRow, idx('patternFlag') + 1).setValue(S.patternFlag || '');
+    queueCellIntent_(ctx, 'World_Population', dataRow, idx('patternFlag') + 1, S.patternFlag || '', 'finalize: patternFlag', 'world');
   }
-  
+
   if (idx('shockFlag') >= 0) {
-    sheet.getRange(dataRow, idx('shockFlag') + 1).setValue(S.shockFlag || '');
+    queueCellIntent_(ctx, 'World_Population', dataRow, idx('shockFlag') + 1, S.shockFlag || '', 'finalize: shockFlag', 'world');
   }
 
   // -------------------------------------------------------------------------
@@ -130,47 +141,47 @@ function finalizeWorldPopulation_(ctx) {
 
   if (idx('worldEventsCount') >= 0) {
     var eventsArray = S.worldEvents || [];
-    sheet.getRange(dataRow, idx('worldEventsCount') + 1).setValue(eventsArray.length);
+    queueCellIntent_(ctx, 'World_Population', dataRow, idx('worldEventsCount') + 1, eventsArray.length, 'finalize: worldEventsCount', 'world');
   }
 
   // -------------------------------------------------------------------------
   // WEATHER
   // -------------------------------------------------------------------------
-  
+
   if (idx('weatherType') >= 0) {
-    sheet.getRange(dataRow, idx('weatherType') + 1).setValue(W.type || '');
+    queueCellIntent_(ctx, 'World_Population', dataRow, idx('weatherType') + 1, W.type || '', 'finalize: weatherType', 'world');
   }
-  
+
   if (idx('weatherImpact') >= 0) {
-    sheet.getRange(dataRow, idx('weatherImpact') + 1).setValue(W.impact || '');
+    queueCellIntent_(ctx, 'World_Population', dataRow, idx('weatherImpact') + 1, W.impact || '', 'finalize: weatherImpact', 'world');
   }
 
   // -------------------------------------------------------------------------
   // CITY DYNAMICS
   // -------------------------------------------------------------------------
-  
+
   if (idx('trafficLoad') >= 0) {
-    sheet.getRange(dataRow, idx('trafficLoad') + 1).setValue(D.traffic || '');
+    queueCellIntent_(ctx, 'World_Population', dataRow, idx('trafficLoad') + 1, D.traffic || '', 'finalize: trafficLoad', 'world');
   }
-  
+
   if (idx('retailLoad') >= 0) {
-    sheet.getRange(dataRow, idx('retailLoad') + 1).setValue(D.retail || '');
+    queueCellIntent_(ctx, 'World_Population', dataRow, idx('retailLoad') + 1, D.retail || '', 'finalize: retailLoad', 'world');
   }
-  
+
   if (idx('tourismLoad') >= 0) {
-    sheet.getRange(dataRow, idx('tourismLoad') + 1).setValue(D.tourism || '');
+    queueCellIntent_(ctx, 'World_Population', dataRow, idx('tourismLoad') + 1, D.tourism || '', 'finalize: tourismLoad', 'world');
   }
-  
+
   if (idx('nightlifeLoad') >= 0) {
-    sheet.getRange(dataRow, idx('nightlifeLoad') + 1).setValue(D.nightlife || '');
+    queueCellIntent_(ctx, 'World_Population', dataRow, idx('nightlifeLoad') + 1, D.nightlife || '', 'finalize: nightlifeLoad', 'world');
   }
-  
+
   if (idx('publicSpacesLoad') >= 0) {
-    sheet.getRange(dataRow, idx('publicSpacesLoad') + 1).setValue(D.publicSpaces || '');
+    queueCellIntent_(ctx, 'World_Population', dataRow, idx('publicSpacesLoad') + 1, D.publicSpaces || '', 'finalize: publicSpacesLoad', 'world');
   }
-  
+
   if (idx('sentiment') >= 0) {
-    sheet.getRange(dataRow, idx('sentiment') + 1).setValue(D.sentiment || '');
+    queueCellIntent_(ctx, 'World_Population', dataRow, idx('sentiment') + 1, D.sentiment || '', 'finalize: sentiment', 'world');
   }
 
   // -------------------------------------------------------------------------
@@ -190,9 +201,9 @@ function finalizeWorldPopulation_(ctx) {
   // -------------------------------------------------------------------------
   
   if (idx('timestamp') >= 0) {
-    sheet.getRange(dataRow, idx('timestamp') + 1).setValue(ctx.now || new Date());
+    queueCellIntent_(ctx, 'World_Population', dataRow, idx('timestamp') + 1, ctx.now || new Date(), 'finalize: timestamp', 'world');
   }
 
-  Logger.log('finalizeWorldPopulation_ v1.2: Complete for Cycle ' + (S.cycleId || 'unknown') +
+  Logger.log('finalizeWorldPopulation_ v1.3: Queued intents for Cycle ' + (S.cycleId || 'unknown') +
     ' | Holiday: ' + (S.holiday || 'none') + ' | Sports: ' + (S.sportsSeason || 'off-season'));
 }

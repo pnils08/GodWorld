@@ -379,9 +379,17 @@ function runWorldCycle() {
 
   // ═══════════════════════════════════════════════════════════
   // PHASE 8: V3 INTEGRATION + CHICAGO
-  // (CycleWeight moved here from Phase 9 so arc engine has signal data)
+  // (CycleWeight SIGNAL moved here from Phase 9 so arc engine has the
+  // weight/reason/score on ctx.summary. S237: was calling
+  // applyCycleWeightForLatestCycle_ — wrapper that ALSO wrote to
+  // Riley_Digest before Phase 10 had appended this cycle's row →
+  // corrupted previous cycle's row via lastRow fallback. Wrapper +
+  // file retired; direct call to applyCycleWeight_ gives the signal
+  // with no side effects. writeDigest_ at Phase 10 now writes the
+  // canonical cycle row including CycleWeight + Reason from
+  // ctx.summary populated here.)
   // ═══════════════════════════════════════════════════════════
-  safePhaseCall_(ctx, 'Phase8-CycleWeight', function() { applyCycleWeightForLatestCycle_(ctx); });
+  safePhaseCall_(ctx, 'Phase8-CycleWeightSignal', function() { applyCycleWeight_(ctx); });
   safePhaseCall_(ctx, 'Phase8-V3Preload', function() { v3PreloadContext_(ctx); });
   // Arc lifecycle runs here — after v3PreloadContext_ loads eventArcs into ctx.summary
   safePhaseCall_(ctx, 'Phase8-ArcLifecycle', function() { processArcLifecycle_(ctx); });
@@ -1191,15 +1199,19 @@ function updateNamedCitizens_(ctx) {
  * ============================================================================
  */
 function writeDigest_(ctx) {
-  // DRY-RUN FIX: Skip direct sheet writes in dry-run mode
-  var isDryRun = ctx.mode && ctx.mode.dryRun;
-  if (isDryRun) {
-    Logger.log('writeDigest_: Skipping (dry-run mode)');
-    return;
-  }
-
-  var sheet = ctx.ss.getSheetByName('Riley_Digest');
-  if (!sheet) return;
+  // S237 Phase 42 §B5 audit-miss 3 cohort close: appendRow → queueAppendIntent_.
+  // dryRun guard dropped — write-intents respect dryRun at Phase 10 flush time
+  // (same pattern as applyEditionCoverageEffects v2.1 / advanceSimulationCalendar
+  // v2.4 / finalizeWorldPopulation v1.3 from S236). The pre-existing
+  // `getSheetByName('Riley_Digest')` + null-guard returned early when the tab
+  // was missing — queueAppendIntent_ + persistenceExecutor will auto-create
+  // the sheet at flush time, so the guard is no longer load-bearing.
+  // Companion fix: `applyCycleWeightForLatestCycle_` (phase09-digest, deleted
+  // this commit) was writing CycleWeight/Reason to Riley_Digest in Phase 8 —
+  // before this function appended the cycle row. That corrupted PREVIOUS
+  // cycle's row via lastRow fallback. ctx.summary.cycleWeight + Reason are
+  // now produced by the slim Phase 8 `applyCycleWeight_` call and consumed
+  // here at row[6]/row[7] of the canonical append.
 
   var S = ctx.summary;
 
@@ -1289,7 +1301,7 @@ function writeDigest_(ctx) {
     S.cityDynamics ? S.cityDynamics.sentiment : ""
   ];
 
-  sheet.appendRow(row);
+  queueAppendIntent_(ctx, 'Riley_Digest', row, 'writeDigest_: cycle digest append', 'audit');
 }
 
 
@@ -1680,9 +1692,17 @@ function runCyclePhases_(ctx) {
 
   // ═══════════════════════════════════════════════════════════
   // PHASE 8: V3 INTEGRATION + CHICAGO
-  // (CycleWeight moved here from Phase 9 so arc engine has signal data)
+  // (CycleWeight SIGNAL moved here from Phase 9 so arc engine has the
+  // weight/reason/score on ctx.summary. S237: was calling
+  // applyCycleWeightForLatestCycle_ — wrapper that ALSO wrote to
+  // Riley_Digest before Phase 10 had appended this cycle's row →
+  // corrupted previous cycle's row via lastRow fallback. Wrapper +
+  // file retired; direct call to applyCycleWeight_ gives the signal
+  // with no side effects. writeDigest_ at Phase 10 now writes the
+  // canonical cycle row including CycleWeight + Reason from
+  // ctx.summary populated here.)
   // ═══════════════════════════════════════════════════════════
-  safePhaseCall_(ctx, 'Phase8-CycleWeight', function() { applyCycleWeightForLatestCycle_(ctx); });
+  safePhaseCall_(ctx, 'Phase8-CycleWeightSignal', function() { applyCycleWeight_(ctx); });
   safePhaseCall_(ctx, 'Phase8-V3Preload', function() { v3PreloadContext_(ctx); });
   // Arc lifecycle runs here — after v3PreloadContext_ loads eventArcs into ctx.summary
   safePhaseCall_(ctx, 'Phase8-ArcLifecycle', function() { processArcLifecycle_(ctx); });

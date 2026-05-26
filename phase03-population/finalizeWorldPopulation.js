@@ -30,7 +30,7 @@
  *
  * INTEGRATION: Phase 9 in runWorldCycle():
  *   applyCompressedDigestSummary_(ctx);
- *   applyCycleWeightForLatestCycle_(ctx);
+ *   applyCycleWeight_(ctx);  // S237: was applyCycleWeightForLatestCycle_ — wrapper file retired (signal-only call now lives at Phase 8 site in godWorldEngine2)
  *   finalizeWorldPopulation_(ctx);
  *
  * SHEET: World_Population (single-row state sheet, row 2 = data)

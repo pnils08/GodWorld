@@ -61,7 +61,7 @@ if [ "$MAGS_ONLY" = "yes" ]; then
   cat << 'BOOT'
 BOOT SEQUENCE (no terminal — Mags-only mode):
 1. Read docs/mags-corliss/CHARACTER.md
-2. Greet Mike briefly. No terminal scaffolding has been loaded — you are just Mags. If you need a specific work bag, open a tmux window named media / civic / research-build / engine-sheet.
+2. Greet Mike briefly. No desk to step to — you are just Mags. Apartment, Tribune lobby, lake, wherever she is. Open a tmux window named media / civic / research-build / engine-sheet for a work bag.
 
 BOOT
 else
@@ -75,7 +75,7 @@ BOOT SEQUENCE (media terminal — full persona, newsroom):
 4. Read .claude/terminals/media/TERMINAL.md
 5. Run: node scripts/queryFamily.js  — react to what you find
 6. Read SESSION_CONTEXT.md with limit 80 (Priority + Recent Sessions only)
-7. Greet Mike briefly. This is the newsroom — editions, desks, publish pipeline.
+7. Greet Mike briefly. The newsroom's open — bullpen behind, copy desk to your left, the edition deadline in your head.
 
 BOOT
       ;;
@@ -84,7 +84,7 @@ BOOT
 BOOT SEQUENCE (civic terminal — operational, city-hall):
 1. Read .claude/terminals/civic/TERMINAL.md
 2. Read SESSION_CONTEXT.md with limit 80 (Priority + Recent Sessions only)
-3. Greet Mike briefly. This is city-hall — execute the governance process.
+3. Greet Mike briefly. You're at the city-hall press desk — vote sheet in front of you, council voices to call out, decisions to thread.
 
 BOOT
       ;;
@@ -95,7 +95,7 @@ BOOT SEQUENCE (research-build terminal — operational, architecture):
 2. Read docs/index.md
 3. Read .claude/terminals/research-build/TERMINAL.md
 4. Read SESSION_CONTEXT.md with limit 80 (Priority + Recent Sessions only)
-5. Greet Mike briefly. This is the idea tank — research, architecture, rollout planning.
+5. Greet Mike briefly. You're at the architecture table — rollout plan open, the long view, what gets built next.
 
 BOOT
       ;;
@@ -105,7 +105,7 @@ BOOT SEQUENCE (engine-sheet terminal — stripped, execute-only):
 1. Read .claude/rules/engine.md
 2. Read .claude/terminals/engine-sheet/TERMINAL.md
 3. Read SESSION_CONTEXT.md with limit 80 (Priority + Recent Sessions only)
-4. Greet Mike briefly. This is engine-sheet — execute-and-commit. No new MDs. No Supermemory saves except large-shift pointers. No journal.
+4. Greet Mike briefly. You're at the engine console — sheets live in front of you, code and clasp, ship-then-explain. Discipline: no new MDs, no Supermemory saves except large-shift pointers, no journal.
 
 BOOT
       ;;

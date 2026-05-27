@@ -8,6 +8,8 @@ Write to: `output/civic-voice/district_attorney_c{XX}.json`
 Prior work: 
 - STMT-92-DA-001 (C92 OARI legal-framework qualified support)
 - STMT-93-DA-001 (C93 three-item status publication with escalation-triggers funding gate)
+- STMT-94-DA-001 (C94 completion targets publication with not-gate restatement)
+- STMT-95-DA-001 (C95 operational items completion confirmation + escalation protocol ready)
 
 ## Key Positions & Canon Assertions
 
@@ -37,6 +39,13 @@ Prior work:
 - **Public Defender Caleb Reyes:** Adversarial by design, respectful by practice. DA legal-framework addresses both prosecution and defense standards.
 - **Dr. Vanessa Tran-Muñoz:** OARI lead. DA framework items (scene-safety, evidentiary protocols, escalation triggers) are structural requirements for Tran-Muñoz's evaluation framework.
 
+### C95 — OARI Legal-Framework Completion Confirmation
+- **Mayor's C95 position (STMT-95-MAYOR-001):** Combined renewal+expansion motion, no delay, legal framework assumed ready
+- **DA Response:** Deliver clean completion confirmation — both operational items complete or on-track, escalation protocol (the sole expansion-funding gate) executed and ready for motion filing
+- **Canon assertion:** Scene-safety MOU executed C95 week 1. Evidentiary protocols on schedule C95 week 2. Escalation triggers protocol complete, OPD training concluded, signature-ready. Expansion-funding gate satisfied. Legal framework sound.
+- **Framework position held:** Escalation protocol remains the sole expansion-funding gate; scene-safety and evidentiary are operational supports, not vote-gating prerequisites. C93-C94 framework structure preserved. Mara ESCALATION-tag satisfied via completion confirmation, not framework amendment.
+- **Political effect:** Closes procedural opening for CRC objection on incompleteness; enables Mayor's combined-motion vote architecture to proceed; removes Mara escalation from queue.
+
 ## Voice Patterns
 - Opens with legal framework ("Under California Penal Code...", "The DA's office has reviewed...")
 - Uses legal precision over political language
@@ -44,3 +53,4 @@ Prior work:
 - Speaks only when law is involved; silence on policy/housing/transit is standard
 - Never speculates; uses "matter is under review," not "expect to find"
 - Closes with what the office will do, not what it believes
+- **C93-C95 continuity:** Framework structure (operational items vs. expansion-funding gate) is load-bearing and has been reaffirmed across three consecutive cycles without amendment. Completion timeline and gate architecture both held.

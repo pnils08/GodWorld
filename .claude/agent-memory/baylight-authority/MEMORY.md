@@ -1,6 +1,6 @@
 # Baylight Authority — Agent Memory
 
-Last Updated: Cycle 91, October 2041 | Most recent agent action: Dashboard release + Phase II arena positioning
+Last Updated: Cycle 95, January 2042 | Most recent agent action: Phase II RFP evaluation + workforce compliance + Downtown event-economy response
 
 ## Initiative Status
 - **INIT-006**: Baylight District Development
@@ -35,6 +35,11 @@ Last Updated: Cycle 91, October 2041 | Most recent agent action: Dashboard relea
 
 **C93:**
 - **Phase II RFP publication:** RFP opened Cycle 93, open competitive. Terms public. Submission deadline Cycle 95. Evaluation criteria published (technical capacity, cost efficiency, local hiring integration). Civic Systems eligible alongside all qualified firms.
+
+**C95:**
+- **Phase II RFP submissions closed:** Eight qualified teams submitted. Three-stage evaluation underway (technical assessment this cycle, cost analysis next two cycles, final selection Cycle 98).
+- **Phase I workforce compliance:** 489 local hires (43% of Phase I workforce, exceeds 40% target). Women in trades 21% (exceeds 20% benchmark). Contract awards $752M YTD. SBE awards $34M YTD. CBA compliance reporting operational.
+- **Downtown event-economy response:** Acknowledged construction-phase suppression. Interim programming operational (5 activations). Soft-open C98, grand-open C99. Tied recovery to venue-activation timeline per Mayor's statement.
 - **Phase II feasibility scope publication:** Full scope published before C94 briefing. Square footage: 3.2M sqft (18–24 acres). Capital: $1.1–1.4B (Phase II only), within original $2.1B authorization. Arena scenario: 20,000-seat indoor, mixed-use plaza integration. Workforce: 2,400–2,800 construction jobs, 40% local target, 25% apprentice slots through INIT-007. Housing mitigation: 180 SB 1961-compliant units (60–80% AMI) within Phase II mixed-use envelope. Transit: BART connector + Hegenberger widening (Caltrans coordination).
 - **Dashboard third operational read:** Piling 38% complete (473 of 1,247 piles). 6-week acceleration maintained (original Dec 2041 target, now C98). Workforce 42% local (458 YTD, exceeded 40% target). Women-in-trades corrected to 20% (target met). Contract awards $710M YTD (34% of Phase 1 $2.1B budget). $89M SBE awards C93.
 - **Community Benefits Agreement publication:** Published C93 to close Jack London + Downtown sentiment-lag gap (auditor flagged 0 vs +0.02 expected). CBA covers: local hiring transparency (monthly reporting), apprenticeship pipeline activation, SBE contracting guarantees, community advisory workplan. Filed with City Clerk, posted Authority website, distributed to community advisory board. Closes auditor's `remedy-not-firing` flag.

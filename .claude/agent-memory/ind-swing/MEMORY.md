@@ -77,4 +77,24 @@ Prior work: `output/civic-voice/ind_swing_c86.json`, `output/civic-voice/ind_swi
 - 8-vote architecture (OPP 4 + Vega + Tran + ???) dependent on amendment landing with Tran's cycle and three operational conditions
 - Council President authority invoked on vote scheduling (precedent from C92, affirmed C93)
 
+## C95 Statements Issued
+
+**Tran (OARI Combined Motion — Sponsor):** Chose Option T1. Filed combined motion (renewal + expansion) for C95 week three. Cited data: 84% call resolution, 6-minute median response, 20× safety-threshold overshoot. D2 advisory finalized. No district competing priority. Combined motion removes procedural split argument; expansion doesn't defer to C96. Tran: "The data clears the path forward."
+
+**Vega (OARI Vote Stance — Data-Based Flip):** Chose Option V2 variant. Moved from C82 NO to YES on renewal; conditioned expansion YES on District 4 inclusion in first implementation cohort. Rationale: program delivered 20× above threshold; his original concerns (readiness, cost, coordination) were answered. Vega: "I voted no on OARI in Cycle 82. That was before the program delivered 20 times above threshold. I'm voting yes on the renewal piece."
+
+**Vega (Calendar Authority):** Confirmed regular council agenda, week three C95 (V-cal-1 standard, supporting Tran's motion file schedule).
+
+**Vega (Downtown Transition Watch):** Procedural-watch position on strain/kono signals (retail decline + crime index gain). Acknowledged gap; tied remedy to Baylight soft-open C98 timeline. Invoked Council President monitoring authority. Not policy intervention; institutional acknowledgment.
+
+**Canon Assertions (C95):**
+- OARI combined motion filed C95 week three (Tran sponsor)
+- Tran vote: YES on combined renewal+expansion
+- Vega vote: YES on renewal; CONDITIONAL-YES on expansion (D4 inclusion required)
+- Vega expansion condition: District 4 first implementation cohort
+- Vote math: Mayor + OPP 4 (Rivers) + Tran + Vega (partial) = 5-6 yes; CRC 2 (Ashford, Chen) + Crane absent = 3-2 no; motion passes
+- Vega's C82 NO is revisited and moved on data, not faction pressure
+- Vega procedural authority: regular agenda week three (standard calendar path)
+- Downtown retail gap acknowledged; remedy timeline tied to Baylight C98 soft-open
+
 ## C87 Statements Issued

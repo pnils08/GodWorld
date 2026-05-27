@@ -1,12 +1,12 @@
 # Temescal Health Center — Agent Memory
 
-Last Updated: Cycle 92 | Mid-April 2026
+Last Updated: Cycle 95 | Late May 2026
 
 ## Initiative Status
 - **INIT-005**: Temescal Community Health Center
 - **Budget**: $45M authorized
 - **Status**: passed (C80, 6-2 vote); implementation active
-- **Implementation Phase**: design-phase-final → design-complete-awaiting-permit (C93-C95 transition)
+- **Implementation Phase**: design-development-active (C93-C95) → awaiting-hcai-state-review (C95+)
 - **Lead Faction**: OPP
 - **Vote**: 6-2. Vega YES, Tran YES. Crane ABSENT.
 - **Mayor Intervention**: C92 public directive. Bobby Chen-Ramirez accepts with operational deadlines: architect contract C93, site acquisition C94, HCAI filing C95.
@@ -17,11 +17,14 @@ Last Updated: Cycle 92 | Mid-April 2026
 - Site due diligence COMMISSIONED C86 (completion target C87, 2026-04-15) — COMPLETED C91
 - Initial community meeting HELD C86 (47 residents, strong support)
 - **MAYOR INTERVENTION C92**: Direct deadline directive issued public on record
-- Architect contract EXECUTION scheduled C93
-- Site acquisition intent declaration scheduled C94
-- HCAI application filing scheduled C95
-- Groundbreaking target Q3 2041 (2026-07-01, contingent on HCAI approval)
+- Architect contract EXECUTION COMPLETED C93 (Atlas Bay Architects $4.5M)
+- Site acquisition intent declaration COMPLETED C94 (Temescal Ave & 47th Street)
+- HCAI formal application SUBMITTED C95 (100% construction documents, state review clock started)
+- Site acquisition negotiations active C95 (close target C96)
+- Community design workshop HELD C93 (52 residents, service priorities finalized)
+- Groundbreaking target Q3 2041 (contingent on HCAI approval, C99–C101 timeline)
 - Substantial completion target Q2 2042
+- Opening target 2042 (pending HCAI state review approval)
 
 ## Cycle 92 Decisions (Mayor Intervention)
 
@@ -40,6 +43,47 @@ Last Updated: Cycle 92 | Mid-April 2026
    - Commits to architect contract execution C93, site acquisition intent C94, HCAI filing C95
 
 3. **Operator selection resolved** — Alameda Health System service menu finalized C90 (was a 5-cycle blocker on design programming)
+
+## Cycle 95 Decisions (HCAI Submission & Site Acquisition)
+
+1. **HCAI formal application submitted** — C95 week 2
+   - 100% construction documents filed with state
+   - Structural seismic certification (OSHPD-3 compliance) signed by PE
+   - MEP coordination complete; no conflicts
+   - Primary care ground floor 8,200 NSF, behavioral health 2,100 NSF, dental 1,400 NSF, pharmacy 800 NSF
+   - State review window: 6–12 months (C99–C101 approval target)
+   - RFI contingency budgeted in soft costs
+
+2. **Site acquisition advancing** — Temescal Avenue & 47th Street
+   - Site Acquisition Board declaration issued early C95
+   - Phase I ESA clean (completed C91); geotech survey moderate seismic retrofit scope (completed C91)
+   - Property negotiations underway; no title encumbrances identified
+   - Acquisition counsel involved; expected close C96
+   - 2.3-acre parcel; 120 parking spaces; green space for community
+
+3. **Design development phase conclusion** — C95
+   - Schematic design 95% complete; all floor plates locked
+   - MEP coordination finalized
+   - OSHPD-3 seismic retrofit specified and stamped
+   - Sarah Huang (Healthcare Director, PE) embedded; final design freeze executed
+   - Community programming from C93 workshop incorporated (primary care access, behavioral health, dental, pharmacy, evening clinic hours)
+
+4. **Alameda Health System operational readiness** — staffing and procedures
+   - Medical director recruitment active
+   - Clinical staffing plan in development
+   - Opening-day operational procedures being drafted
+   - Coordination with apprenticeship pipeline (INIT-007) for construction and operations hiring
+   - OSHPD-3 facility training timeline set for pre-opening (C99–C100)
+   - Equipment/IT/supply-chain procurement underway
+   - Operator confident in opening readiness by late C99/early C100
+
+5. **Community trust and engagement progress** — rebuilding from 5-cycle delay
+   - Three community meetings held (C86, C88, C93); 47+ residents engaged
+   - Service priorities documented and incorporated into design
+   - Monthly updates distributed; design transparency maintained
+   - Site fence signage installed (clean civic typography)
+   - Local hiring and apprenticeship integration messaging active
+   - Community sentiment rebuilding as milestones advance
 
 ## Cycle 86 Decisions
 1. **Architect RFP issued** — $4.5M, response deadline 2026-03-20, award target 2026-03-27

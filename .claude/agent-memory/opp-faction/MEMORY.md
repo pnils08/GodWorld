@@ -66,6 +66,20 @@ Prior work: `output/civic-voice/opp_faction_c91.json`, `output/civic-voice/opp_f
   - **West Oakland crisis:** Option A + escalation. Amplified Mayor's signature-clearance commitment; added OPP-led oversight + weekly reporting. Carter spotlight. Coalition while maintaining pressure.
   - **Oaks naming:** Hybrid A + heritage-equity framing. Validated Mayor's M4 (heritage). Added OPP mandate (jobs structure) tied to INIT-007 + CBA + Phase II workforce modeling.
 
+## C95 Statements
+- **Statements Generated:** 5
+- **Rivers (STMT-95-OPP-001):** OARI combined motion whip position. East Oakland violence index drop (−1.0) as policy anchor. Bloc discipline statement. "Crime down one point. 84% non-police. We move expansion this cycle, combined, unified."
+- **Delgado (STMT-95-OPP-002):** OARI expansion with Fruitvale dispatch language-capacity condition. 6.2min median response time. Explicit yes-vote contingent on Spanish/Mam-language dispatch locked. Closes record per Mara directive. "Six point two minutes median in Fruitvale. We need Spanish-language dispatch capacity locked before the vote. That's the condition for my yes."
+- **Carter (STMT-95-OPP-003):** OARI yes + Stabilization Fund OPP-004 weekly report deployed. West Oakland 5.8min fastest dispatch. 191-cleared, 127 families home. Pairs vote with accountability. "West Oakland OARI dispatch is fastest. We're hitting Stabilization Fund targets. Accountability."
+- **Mobley (STMT-95-OPP-004):** OARI bloc-yes + D9 mental-health response substance. Laurel/Uptown families stay together instead of cycling criminal legal system. "Mental health calls dropped because people get care, not cuffs."
+- **Rivers (STMT-95-OPP-005):** Phase 2 economic initiative amplification. Stab Fund necessary-not-sufficient framing. Pressures Mayor on scope/boldness. Signals OPP co-authorship intent. "Phase one cleared. Retail still depressed. The second layer has to be bigger."
+- **Decision Logic:**
+  - **OARI vote:** Option R1 + disciplined execution. Combined motion whips 4 OPP + Mayor = 5 yes. Violence-index data (−1.0) provides political cover. Delgado's language-capacity condition adds constructive substance without breaking bloc. Mobley's D9 substance diversifies narrative without fracture.
+  - **Delgado record-closing:** Option D1 + conditional. Public yes-vote + specific Fruitvale commitment (language dispatch). Closes silence pattern flagged by Mara. Condition is defensible, achievable, linked to C94 Transit Hub precedent (Mam-language framework).
+  - **Carter integration:** OARI + OPP-004 report creates paired-statement strategy. Emphasizes West Oakland dispatch speed + stabilization outcomes. Weekly report artifact (Webb audit bundle, 127 families, 48 households, 16 mixed-tenure units) substantiates vote with numbers.
+  - **Mobley voice:** Allows D9-specific read (mental-health response in Laurel/Uptown). Keeps individual member tone distinct while holding bloc yes. Avoids bloc-anonymous position.
+  - **Phase 2 pressure:** Rivers amplifies Mayor's second-initiative commitment while conditioning support on scope. Signals council's intent to co-author, not just approve. Frames stabilization as Phase 1 complete, opens legislative space for bolder Phase 2 design.
+
 ## C86 Snapshot (for reference)
 - Rivers: OARI Day 30 implementation
 - Carter: Phase 1 disbursement (Beverly Hayes, 12 families)

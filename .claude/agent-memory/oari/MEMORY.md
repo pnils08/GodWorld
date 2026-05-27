@@ -1,6 +1,6 @@
 # OARI — Agent Memory
 
-Last Updated: C93 | Most recent cycle: C93 | May 2041
+Last Updated: C95 | Most recent cycle: C95 | Expansion vote cycle
 
 ## Initiative Status
 - **INIT-002**: Oakland Alternative Response Initiative
@@ -18,6 +18,33 @@ Last Updated: C93 | Most recent cycle: C93 | May 2041
 - Dispatch protocols signed by Chief Montez (C90) and now live
 
 ## Decision History
+
+### Cycle 95 Decisions (Expansion Vote Cycle)
+
+**Expansion scope operationalized:** D2 (Tran sponsor), D4 (Vega first-cohort condition), D9 (Mobley mental-health), D8 (pragmatic east-side fill). Four-district expansion contingent on council vote week 3 C95.
+
+**Language access (Delgado condition):** Spanish/Mam-language dispatch integrated per C94 Transit Hub Fruitvale model. Dispatch protocol: 911 intake captures language preference → routes to bilingual responder when available → fallback: English responder + real-time interpreter via county BH phone line (tested C94, <2 min latency). D2 staffing target: 6 of 8 bilingual Spanish/Mam. Training: Crisis response curriculum + language-specific de-escalation (Mam cultural patterns). Interpreter network reuses C94 Transit Hub pool (8 Spanish, 4 Mam speakers, 6am–midnight coverage).
+
+**Cohort 2 timeline (Chief Montez commitment):** 38 personnel. Week 2 training launch. Week 6 rotation 1 certification (19) + deployment to D4 first (Vega condition). Week 10-11 rotation 2 certification (19) + full expansion coverage. Contingency: council vote delay beyond week 3 shifts timeline 1-2 weeks.
+
+**Council-specific commitments filed:**
+- D2 (Tran): Quarterly briefings on call volume, response time, resolution rate, escalation drivers; bilingual dispatch confirmation live week 6-7 rotation 1.
+- D4 (Vega): Rotation 2 deployment D4 first priority. West Oakland Stabilization Fund integration. Deputy Mayor Okoro liaison. Weekly briefings on volume, escalation, demographics.
+- D9 (Mobley): 9-responder deployment + 2 specialized mental-health trained. Highland Hospital integration + county BH referral network. Weekly briefing: mental-health calls, substance-use calls, resolution by type, Highland outcome tracking.
+- D8 (Chen): No budget impact; absorbs into $12.5M via cohort 2 reallocation. Fiscal briefing available.
+- OPP Caucus (Rivers whip, Delgado, Carter, Mobley): Weekly briefing packet to Rivers (Monday) — calls by type, response time, escalation rate, resolution rate, district breakdown, comparative vs baseline.
+
+**C94 quarterly data baseline (locked for vote):** Non-police resolution 84% (target ≥75%) — MET. Escalation rate 1.8% (target <2%) — MET. Complaint volume −5.7% variance (target ±10%) — MET. Total calls C94: 1,539. Response time median: 6.0 min (range 5.8–6.2 min). Mental-health crisis 84% resolution. Substance-use crisis 79% resolution. Welfare check 82% resolution.
+
+**Five-week operational update (C94 close to C95 week 4):** Cohort 1 (43 personnel) maintained 320–380 calls/week (stable). Response time 5.8–6.2 min sustained. Escalation 1.7–1.9% weekly average (within <2% target). OPD CAD: no protocol breaches; Chief Montez sign-off: "operationally seamless, ready for expansion." DA Escalation Triggers Protocol signed week 1, OPD trained.
+
+**Renewal gate:** Threshold publication C94 locked ±10% variance as administrative rule. Framework standard reaffirmed in motion: 75% non-police resolution + stable complaint volume (±10% variance, 2 consecutive quarters) as permanent rule. No extension requested; renewal automatic if motion passes.
+
+**Voice JSON filed:** `output/civic-voice/oari_c95.json` (STMT-95-OARI-001, flat array per S215 civic.8). Quote: "The data is stable... We're ready to expand." Expansion scope, language access, cohort 2 timeline, council commitments, trackerUpdates for Step 6.
+
+**Operational plan filed:** `output/city-civic-database/initiatives/oari/doc_c95_expansion_operational_plan.md`. Expansion districts detail, dispatch model, cohort 2 timeline table, council commitments, risk mitigation, budget analysis, next checkpoints.
+
+---
 
 ### Cycle 93 Decisions
 - **Threshold definitions published as administrative rule:** Stable complaint volume = ±10% variance from baseline across two consecutive quarterly periods. Non-police resolution minimum 75%. Published as administrative rule (not program directive) to lock thresholds before C95 decision and prevent CRC probing.
@@ -95,24 +122,29 @@ Last Updated: C93 | Most recent cycle: C93 | May 2041
 - Community advisory board buy-in (first meetings positive; ongoing through C87)
 - Training schedule (curriculum finalized; on track for C87+ deployment)
 
-## Operational Tracking — C93 Status
+## Operational Tracking — C95 Status
 
 | Field | Status |
 |-------|--------|
-| Implementation Phase | Pilot evaluation (C90 onwards) |
-| Pilot Districts | D1, D3, D5 (operational) |
-| Responders Deployed | 16 of 18 confirmed (C90-C91) |
-| Dispatch Integration | Live since C90 (Chief Montez signed C90) |
-| Alameda County MOU | Executed |
-| Highland Hospital Agreement | Executed |
-| Teams Deployed | Active in D1, D3, D5 since C90 |
-| Training Program | Cohort 1 (12 responders) deploying late C94; eight-week modules: de-escalation, mental health literacy, trauma-informed care, dispatch protocols, community liaison |
-| Response Time (Pilot) | OARI median 6.8 min (vs OPD baseline 6.2 min), operational parity maintained |
-| Non-Police Resolution Rate | 84% (C92 six-week snapshot) |
-| Escalation Rate | <2% (below 1.8% baseline) |
-| Follow-up Service Engagement | 67% at 30 days (C92) |
-| Critical Incidents | Zero (C90-C93) |
-| D2 Expansion Readiness | Legal gate signature-ready (DA C95), operational gate on track (OPD cohorts C94-C95), community gate framework drafted (monthly reporting template ready) |
+| Implementation Phase | Expansion vote cycle (C95 week 3 council motion) |
+| Pilot Districts | D1, D3, D5 (operational, C90 onwards) |
+| Expansion Districts (Proposed) | D2, D4, D9, D8 (pending council vote C95 week 3) |
+| Responders Deployed (Cohort 1) | 43 personnel, deployed, C95 week 4 certification complete |
+| Responders In Training (Cohort 2) | 38 personnel, training begins C95 week 2, rotation 1 cert week 6, rotation 2 deployment week 10-11 |
+| Dispatch Integration | Sustained operational baseline, Chief Montez sign-off cleared |
+| Alameda County MOU | Executed, operational coordination |
+| Highland Hospital Agreement | Executed, crisis-bed integration tested C94 |
+| DA Escalation Triggers Protocol | Signed C95 week 1, OPD trained on escalation thresholds |
+| Response Time (C94 Final) | 6.0 min median (D1: 5.8, D3: 6.2, D5: 6.1) |
+| Non-Police Resolution Rate (C94) | 84% overall (mental health 84%, substance-use 79%, welfare check 82%) |
+| Escalation Rate (C94) | 1.8% (target <2%) — MET |
+| Complaint Volume Stability (C94) | −5.7% variance (target ±10%) — MET |
+| Total Calls C94 | 1,539 calls processed |
+| Critical Incidents | Zero (C90-C95) |
+| Renewal Gate Status | Threshold publication C94 locked; framework standard reaffirmed; renewal automatic if motion passes |
+| Language Access (Delgado Condition) | Spanish/Mam dispatch per C94 Transit Hub model, operationalized, D2 target 6/8 bilingual, interpreter network active |
+| Council-Specific Commitments | D2 (Tran): quarterly briefings; D4 (Vega): first-cohort priority + stabilization fund integration; D9 (Mobley): mental-health specialization + Highland integration; D8 (Chen): no budget impact; OPP caucus: weekly briefing packets |
+| Budget Status | $12.5M authorized, $180K C95 prorated cohort 2, no overrun projected |
 
 ## Political Dynamics — C93 Updates
 

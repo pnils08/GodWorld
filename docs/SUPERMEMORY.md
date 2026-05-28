@@ -406,6 +406,10 @@ File: `.claude/.supermemory-claude/config.json` (gitignored)
 
 `personalContainerTag` → `mags` (deliberate brain). `repoContainerTag` → `super-memory` (junk drawer). This means `/super-save` writes to `super-memory` by default, keeping `mags` clean. `/super-search --user` hits `mags`, `--repo` hits `super-memory`. Use `/save-to-mags` for deliberate brain saves. Use `/save-to-bay-tribune` for canon saves.
 
+**Plugin version: `claude-supermemory` v0.0.4** (upgraded from 0.0.2 S241, restart-applied + smoke-tested S242 — project-scope; cloud client, no local store to migrate). Old `0.0.2` cache retained for rollback. Upgrade detail: [[plans/2026-05-28-claude-supermemory-v0-0-2-to-v0-0-4-upgrade]].
+
+**Source attribution (new in 0.0.4):** the writer scripts (`add-memory.cjs`, `save-project-memory.cjs`) now stamp `sm_source: "claude-code"` metadata on every memory they write. This distinguishes plugin-written memories from records written by other paths (Mara's connector, the curl `/v4` API used for multi-tag `world-data` writes). Useful for provenance filtering; no action required — additive, doesn't change read/search behavior.
+
 ### Hooks
 
 | Hook | When | Container |
@@ -415,6 +419,8 @@ File: `.claude/.supermemory-claude/config.json` (gitignored)
 | **PostToolUse** | NOT DEFINED IN UPSTREAM | Old plugin version had auto-capture; we ran a local `PostToolUse: []` override. S177 upgrade dropped the override — upstream removed the hook entirely, so no risk of re-pollution. Historical context preserved in S177 changelog. |
 
 ### Skills
+
+**Alias-additive in 0.0.4 (confirmed S242):** v0.0.4 added kebab-renamed skills `/supermemory-save` + `/supermemory-search` **alongside** the originals `/super-save` + `/super-search` — all four skill dirs ship in the plugin. The old names still work; existing references across GodWorld skills/agents need no rewrite. The table below uses the canonical `/super-*` forms.
 
 | Command | What it does | Container |
 |---------|-------------|-----------|

@@ -1,8 +1,14 @@
 # Claude-Mem — Local Work History & Code Tools
 
-**Plugin:** `claude-mem` v10.5.2 (thedotmack, marketplace install)
+**Plugin:** `claude-mem` v13.3.0 (thedotmack, marketplace install) — upgraded from v10.5.2 S241, restart-applied + smoke-tested S242. License relicensed AGPL-3.0 → Apache-2.0 at v13.0.0.
 **Worker:** Bun service on port 37777 | **DB:** SQLite + Chroma at `~/.claude-mem/`
 **Role:** Work log — what happened, what was built, what went wrong. Complements Supermemory (the brain).
+
+> **Upgrade lineage:** v10.5.2 → v13.3.0 (three majors). Breaking-change scan + per-version migration table: [[plans/2026-05-28-claude-mem-v13-upgrade-evaluation]] §Breaking-change scan. All v11/v12/v13 migrations auto-ran on first restart (Migration 25 `platform_source` column, schema v31→v32 dead-column drops, one-shot v12.4.3 cleanup). Pre-upgrade insurance: full 2.2 GB store backed up to `/root/.claude-mem.bak-S241/`; old `10.5.2` plugin cache retained for rollback.
+
+## Post-upgrade gotcha (S242) — missing zod
+
+The v13.3.0 cache shipped **without `zod` installed** (declares `zod: ^4.3.6` in package.json; only the tree-sitter native modules got built). The Stop/PostToolUse/SessionStart hooks all run through `worker-service.cjs`, which imports `zod/v3` — so every session-end threw `Cannot find module 'zod/v3'` and **no memory was captured**. Fix (S242): `cd /root/.claude/plugins/cache/thedotmack/claude-mem/13.3.0/ && npm install zod@^4.3.6 --no-save` (zod 4 ships the `zod/v3` back-compat subpath). Smoke test confirmed clean. **This fix lives in the version-pinned cache dir — if claude-mem auto-updates, the new dir may ship without zod again; same one-line fix.**
 
 ---
 
@@ -52,7 +58,7 @@ This is the structured work history at the top of every conversation. It shows ~
 
 ## Skills (Non-Memory)
 
-Claude-mem bundles useful code tools that have nothing to do with memory:
+Claude-mem bundles code/workflow tools. v13.3.0 ships a much larger set than v10.5.2 (added: `oh-my-issues`, `design-is`, `pathfinder`, `learn-codebase`, `knowledge-agent`, `timeline-report`, `weekly-digests`, `wowerpoint`, `babysit`, `version-bump`, `how-it-works`). **The two GodWorld previously fit-checked both came back SKIP** — `oh-my-issues` assumes GitHub-issues-as-source-of-truth (project tracks defects in files), `design-is` audits against Dieter Rams (wrong lineage for newspaper-layout editions). Verdicts: [[plans/2026-05-28-claude-mem-v13-upgrade-evaluation]] §oh-my-issues + §design-is.
 
 | Skill | Purpose | Overlap |
 |-------|---------|---------|
@@ -60,6 +66,9 @@ Claude-mem bundles useful code tools that have nothing to do with memory:
 | `make-plan` | Create phased implementation plans with documentation discovery | None — unique |
 | `do` | Execute phased plans using subagents | None — unique |
 | `mem-search` | Search observation history by keyword/semantic | Partial overlap with `/super-search` |
+| `oh-my-issues` | Root-cause clustering of a GitHub issue backlog → plan-master issues | SKIP (GitHub-issues input; project uses files) |
+| `design-is` | Audit a design against Dieter Rams' ten principles | SKIP for editions (wrong design lineage); DEFER for dashboard |
+| `pathfinder` / `learn-codebase` / `knowledge-agent` / `timeline-report` / `weekly-digests` | Codebase mapping, priming, knowledge-base build, timeline narratives | Unevaluated — on-demand only |
 
 ---
 
@@ -82,7 +91,7 @@ Settings at `~/.claude-mem/settings.json`:
 | Setting | Current Value | Notes |
 |---------|--------------|-------|
 | `CLAUDE_MEM_MODEL` | `claude-sonnet-4-6` | Model used for observation summarization. **Cost concern — see below.** |
-| `CLAUDE_MEM_PROVIDER` | `claude` | AI provider for summarization |
+| `CLAUDE_MEM_PROVIDER` | `openrouter` | AI provider for summarization. **Live value drifted from `claude` → `openrouter`** (model row still says sonnet; `CLAUDE_MEM_OPENROUTER_MODEL=deepseek/deepseek-chat:free`). Both `CLAUDE_MEM_OPENROUTER_API_KEY` and `CLAUDE_MEM_GEMINI_API_KEY` are **empty** in `settings.json`; `CLAUDE_MEM_CLAUDE_AUTH_METHOD=cli` is also set. Which path actually runs at summarization time is unverified as of S242 — flagged, not resolved. v13's local mode does **not** expose the server-beta multi-provider routing ([[plans/2026-05-28-claude-mem-v13-upgrade-evaluation]] §Multi-provider verdict: DEFER). |
 | `CLAUDE_MEM_CONTEXT_OBSERVATIONS` | `50` | Observations loaded at boot |
 | `CLAUDE_MEM_WORKER_PORT` | `37777` | Worker HTTP API port |
 | `CLAUDE_MEM_SKIP_TOOLS` | ListMcpResourcesTool, SlashCommand, Skill, TodoWrite, AskUserQuestion | Tools excluded from capture |
@@ -97,12 +106,12 @@ Settings at `~/.claude-mem/settings.json`:
 
 | Component | Size | Location |
 |-----------|------|----------|
-| SQLite DB | 219 MB | `~/.claude-mem/claude-mem.db` |
-| Chroma vector store | 383 MB | `~/.claude-mem/chroma/` |
-| Logs + misc | ~5 MB | `~/.claude-mem/logs/` |
-| **Total** | **741 MB** | 3% of 25GB droplet |
+| SQLite DB | 418 MB | `~/.claude-mem/claude-mem.db` |
+| Chroma vector store | 1.5 GB | `~/.claude-mem/chroma/` |
+| **Live store total** | **2.2 GB** | `~/.claude-mem/` (live as of S242) |
+| S241 pre-upgrade backup | 2.2 GB | `/root/.claude-mem.bak-S241/` — delete after a few sessions of confirmed-stable post-upgrade operation |
 
-Monitor this. If it grows past 1GB, investigate retention/cleanup options.
+Store nearly tripled since the last snapshot (was 741 MB) — Chroma growth dominates. Monitor; the duplicate 2.2 GB backup means ~4.4 GB committed to memory until the backup is retired. Retention/cleanup investigation is now overdue, not "if it grows past 1GB."
 
 ---
 

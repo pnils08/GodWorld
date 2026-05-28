@@ -87,6 +87,25 @@ if (rangeArg > 0) {
   }
 }
 
+// --popid X,Y,Z — exact-match list filter on POPID. Format: 'POP-00036,POP-00500'.
+// Added engine.27 Phase A (S242): wd-cards daemon detects scattered changed POPIDs
+// (not contiguous ranges), so it dispatches a single targeted rebuild with the
+// exact set rather than N per-ID spawns each re-reading the full ledger.
+var popidArg = process.argv.indexOf('--popid');
+var POPID_SET = null;
+if (popidArg > 0) {
+  POPID_SET = new Set(
+    String(process.argv[popidArg + 1] || '')
+      .split(',')
+      .map(function (s) { return s.trim(); })
+      .filter(Boolean)
+  );
+  if (POPID_SET.size === 0) {
+    console.error('[ERROR] --popid expects a comma-separated POPID list (e.g. POP-00036,POP-00500)');
+    process.exit(1);
+  }
+}
+
 // Wipe-old GET pass tuning
 var WIPE_LIST_PAGE_SIZE = 100;
 var WIPE_LIST_SLEEP_MS = 200;
@@ -583,6 +602,7 @@ async function main() {
       var popNum = parseInt(popMatch[1], 10);
       if (popNum < POPID_RANGE_LO || popNum > POPID_RANGE_HI) continue;
     }
+    if (POPID_SET !== null && !POPID_SET.has(popId)) continue;
 
     citizens.push({
       popId: popId,

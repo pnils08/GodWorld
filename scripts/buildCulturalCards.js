@@ -51,8 +51,14 @@ var WIPE_OLD = process.argv.includes('--wipe-old');
 var nameArg = process.argv.indexOf('--name');
 var NAME_FILTER = nameArg > 0 ? process.argv[nameArg + 1] : null;
 
+// --cul CUL-XXXXXX[,CUL-YYYYYY,...] — exact-match filter on CUL-ID. Single value or
+// comma-separated list (engine.27 Phase A, S242: wd-cards daemon dispatches the
+// changed-ID set in one rebuild rather than N per-ID spawns).
 var culArg = process.argv.indexOf('--cul');
 var CUL_FILTER = culArg > 0 ? process.argv[culArg + 1] : null;
+var CUL_SET = CUL_FILTER
+  ? new Set(CUL_FILTER.split(',').map(function (s) { return s.trim(); }).filter(Boolean))
+  : null;
 
 var limitArg = process.argv.indexOf('--limit');
 var LIMIT = limitArg > 0 ? parseInt(process.argv[limitArg + 1], 10) : 999;
@@ -432,7 +438,7 @@ async function main() {
       sportsSeason: clean(r[idx.sportsSeason])
     };
 
-    if (CUL_FILTER && fig.culId !== CUL_FILTER) continue;
+    if (CUL_SET && !CUL_SET.has(fig.culId)) continue;
     if (NAME_FILTER && name.toLowerCase().indexOf(NAME_FILTER.toLowerCase()) < 0) continue;
 
     figures.push(fig);

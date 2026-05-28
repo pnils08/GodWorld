@@ -83,5 +83,28 @@ module.exports = {
     error_file: 'logs/spacemolt-error.log',
     out_file: 'logs/spacemolt-out.log',
     log_date_format: 'YYYY-MM-DD HH:mm:ss Z'
+  }, {
+    // engine.27 Phase A (S242) — wd-* card auto-invalidation daemon.
+    // Row-hash polls Simulation_Ledger / Business_Ledger / Cultural_Ledger /
+    // Faith_Organizations; dispatches targeted scripts/build*Cards.js rebuilds
+    // when an operator backfill or Sheets UI edit changes a row.
+    // NOT auto-started — live enable is the gated step (continuous wd-* writes).
+    name: 'wd-cards-daemon',
+    script: 'scripts/wdCardsDaemon.js',
+    cwd: '/root/GodWorld',
+    watch: false,
+    autorestart: true,
+    max_restarts: 10,
+    restart_delay: 5000,
+    max_memory_restart: '256M',
+    env: {
+      NODE_ENV: 'production',
+      GODWORLD_ENV_FILE: GODWORLD_ENV_FILE,
+      WD_CARDS_POLL_SECONDS: '300'
+    },
+    env_file: GODWORLD_ENV_FILE,
+    error_file: 'logs/wd-cards-daemon-error.log',
+    out_file: 'logs/wd-cards-daemon-out.log',
+    log_date_format: 'YYYY-MM-DD HH:mm:ss Z'
   }]
 };

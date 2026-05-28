@@ -59,7 +59,7 @@ The originating pain point is operator-backfill projection lag (canon.3 T12/T13)
   - `node scripts/buildCulturalCards.js --dry-run --popid CUL-001` → reports filtering to 1 row
   - `node scripts/buildFaithCards.js --dry-run --faith FAITH-001` → reports filtering to 1 row
   - `node scripts/buildCulturalCards.js --dry-run` (no flag) → reports full ~39 rows
-- **Status:** [ ] not started
+- **Status:** [x] DONE S242 — but **corrected vs plan**: cultural already had `--cul CUL-ID` (CUL-ID is the key, col B, NOT POPID); faith has NO ID column (key = Organization name, existing `--name`). Real work = comma-list support so daemon dispatches the changed-set in one rebuild (not N spawns). Added `--popid` list to buildCitizenCards.js; extended `--biz`/`--cul` to comma-lists (backward-compatible). Verified: citizen/business/cultural each matched 2 on list dry-run. Faith unchanged (per-org `--name` dispatch).
 
 #### Task A2: State file format + persistence
 
@@ -91,7 +91,7 @@ The originating pain point is operator-backfill projection lag (canon.3 T12/T13)
   - `node scripts/wdCardsDaemon.js --once --dry-run` on fresh state → "first-tick baseline mode, no rebuilds dispatched, state file initialized"
   - Second `--once --dry-run` against unchanged sheets → "no changes detected, 0 rebuilds"
   - Manual edit a Sim_Ledger row, run third `--once --dry-run` → "POP-00XYZ changed, would dispatch buildCitizenCards --popid POP-00XYZ"
-- **Status:** [ ] not started
+- **Status:** [x] DONE S242 — `scripts/wdCardsDaemon.js` created. Atomic tmp+fsync+rename write. Cold-start baseline mode verified (baselined:4, 0 dispatch). State shape confirmed: 858/62/42/16 rows across the 4 sheets. Gitignored via `output/**`.
 
 #### Task A3: Row-hash diff implementation
 
@@ -112,7 +112,7 @@ The originating pain point is operator-backfill projection lag (canon.3 T12/T13)
 - **Verify:**
   - Synthetic test: hash sheet, manually flip 1 row in state file, run `--once --dry-run`, confirm correct ID + projection identified
   - Empirical: edit a real Sim_Ledger row (e.g., normalize POP-00036 Marcus Osei Status from `Active` back to `active` then back to `Active`), confirm daemon detects 2 sequential changes across 2 ticks
-- **Status:** [ ] not started
+- **Status:** [x] DONE S242 — hash = sha256 of row material EXCLUDING id col + volatile cols (Sim_Ledger: LastUpdated; Cultural: Timestamp+LastSeenCycle; resolved by header name at runtime). Synthetic-flip test across all 4 sheets detected the exact changed ID + correct dispatch format: `--popid POP-00001` / `--biz BIZ-00001` / `--cul CUL-3913E3E5` (col-B key) / `--name "Telegraph Presbyterian Fellowship"` (quoted, per-org). Dry-run leaves changes PENDING (re-reports, doesn't consume) so a dry-run period can't swallow a real change before live enable.
 
 #### Task A4: Dispatcher with failure handling
 
@@ -132,7 +132,7 @@ The originating pain point is operator-backfill projection lag (canon.3 T12/T13)
 - **Verify:**
   - Simulate failure: chmod -x a build script momentarily, run `--once`, confirm Engine_Errors row appended + daemon continues + state file unchanged for that projection
   - Restore + re-run `--once` → confirm retry happens + success path updates state
-- **Status:** [ ] not started
+- **Status:** [x] DONE S242 — execFile dispatch, serialized; failure = non-zero exit OR `/Errors: [1-9]/` in stdout. LIVE failure test (broke builder, 1 synthetic change): execFile errored → appended Engine_Errors row [ts, '', 'wd-cards-daemon', 'wd-citizens rebuild failed for: POP-00001', stderr-excerpt, 'CardRebuildFailure', 'daemon-rowhash', 'WARN'] → daemon continued (didn't crash) → state NOT advanced for citizens (still flipped → retry-safe). 0 Supermemory writes (builder failed before write). One diagnostic test row left in Engine_Errors.
 
 #### Task A5: Polling loop + signal handling
 
@@ -151,7 +151,7 @@ The originating pain point is operator-backfill projection lag (canon.3 T12/T13)
 - **Verify:**
   - `timeout 60 node scripts/wdCardsDaemon.js --dry-run` exits cleanly after 60s with at least 1 tick logged
   - Send SIGTERM to running daemon mid-tick → confirms graceful shutdown + exit 0
-- **Status:** [ ] not started
+- **Status:** [x] DONE S242 — loop sleeps in 1s slices for signal responsiveness. CLI: `--once`, `--dry-run`, `--rebuild-all <projection>`. SIGTERM/SIGINT → finish current tick → "stopped cleanly" → exit 0 (verified: multi-tick loop at poll=2s, SIGTERM caught, clean exit).
 
 #### Task A6: pm2 ecosystem entry
 
@@ -176,7 +176,7 @@ The originating pain point is operator-backfill projection lag (canon.3 T12/T13)
 - **Verify:**
   - `pm2 ecosystem` parses without error
   - `pm2 list` shows `wd-cards-daemon` as stopped (entry present, not running)
-- **Status:** [ ] not started
+- **Status:** [x] DONE S242 — entry added to `ecosystem.config.js` (5th app), matching existing `logs/` + `env_file` conventions (NOT plan's `/root/.pm2/logs/`). autorestart, max_memory_restart 256M, WD_CARDS_POLL_SECONDS=300. Parse-verified via require(). NOT started — live enable is gated (A8).
 
 #### Task A7: Dry-run smoke
 
@@ -192,7 +192,7 @@ The originating pain point is operator-backfill projection lag (canon.3 T12/T13)
   - 2 ticks logged with correct timestamps
   - State file present + has all 5 sheets with non-empty rowHashes
   - Detected edit's ID matches the row I edited
-- **Status:** [ ] not started
+- **Status:** [ ] GATED S242 — pm2 dry-run smoke (5-min live-process observation, no writes). Precursor to A8; runs in the live-enable window.
 
 #### Task A8: Enable live + 1-hour monitor
 
@@ -210,7 +210,7 @@ The originating pain point is operator-backfill projection lag (canon.3 T12/T13)
   - 0 false positives (no rebuilds without a real edit)
   - Test-edit detected + rebuilt within 1 tick
   - MCP lookup returns fresh data post-rebuild
-- **Status:** [ ] not started
+- **Status:** [ ] GATED S242 — live enable + 1hr monitor. Cross-boundary (continuous wd-* Supermemory writes) → Mike's explicit go-call per engine-sheet authority. Doesn't fit a soft close; own window. **NOTE:** cold-start baselines current state — does NOT retroactively rebuild the already-stale T12/T13 cards. Run `--rebuild-all <projection>` once at enable to clear the existing backlog.
 
 ---
 
@@ -382,3 +382,4 @@ Four trigger options were filed in the original engine.27 row:
 ## Changelog
 
 - 2026-05-26 — Plan written (S238 engine-sheet). Hybrid option (d) recommended; 3-phase rollout. Filed for engine.27 row state transition `needs-info` → `ready`.
+- 2026-05-28 — **Phase A built + verified (S242 engine-sheet).** Tasks A1–A6 DONE; A7–A8 GATED on live-enable window. Measure-twice corrections to the plan's projection map (advisor-reviewed before build): (1) cultural keys on **CUL-ID col B**, not POPID — `--cul` already existed; (2) **Faith_Organizations has no ID column** — key is Organization name, `--name` already existed; A1 became comma-list support (one targeted rebuild vs N per-ID spawns) not new flags; (3) **Chicago_Citizens EXCLUDED** — no `build*Cards.js` consumes it (DISABLED/frozen); (4) **neighborhood + initiative EXCLUDED from Phase A** — engine-cycle-written, belong on Phase B's marker (neighborhood also aggregates 3 sheets, no 1:1 map); (5) hash excludes volatile bookkeeping cols (Sim LastUpdated; Cultural Timestamp+LastSeenCycle) to protect the A8 "0 false positives" criterion. Pattern: feedback_measure-twice-cascading-effects. Files: `scripts/wdCardsDaemon.js` (new), `scripts/buildCitizenCards.js` + `buildBusinessCards.js` + `buildCulturalCards.js` (comma-list flags), `ecosystem.config.js` (stopped pm2 entry). No clasp push (pure Node). One diagnostic test row left in Engine_Errors from the A4 live failure test.

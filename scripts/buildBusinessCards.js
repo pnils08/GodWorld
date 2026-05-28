@@ -43,8 +43,14 @@ var WIPE_OLD = process.argv.includes('--wipe-old');
 var nameArg = process.argv.indexOf('--name');
 var NAME_FILTER = nameArg > 0 ? process.argv[nameArg + 1] : null;
 
+// --biz BIZ-XXXXX[,BIZ-YYYYY,...] — exact-match filter on BIZ_ID. Single value or
+// comma-separated list (engine.27 Phase A, S242: wd-cards daemon dispatches the
+// changed-ID set in one rebuild rather than N per-ID spawns).
 var bizArg = process.argv.indexOf('--biz');
 var BIZ_FILTER = bizArg > 0 ? process.argv[bizArg + 1] : null;
+var BIZ_SET = BIZ_FILTER
+  ? new Set(BIZ_FILTER.split(',').map(function (s) { return s.trim(); }).filter(Boolean))
+  : null;
 
 var limitArg = process.argv.indexOf('--limit');
 var LIMIT = limitArg > 0 ? parseInt(process.argv[limitArg + 1], 10) : 999;
@@ -375,7 +381,7 @@ async function main() {
       keyPersonnel: clean(r[8])
     };
 
-    if (BIZ_FILTER && biz.bizId !== BIZ_FILTER) continue;
+    if (BIZ_SET && !BIZ_SET.has(biz.bizId)) continue;
     if (NAME_FILTER && name.toLowerCase().indexOf(NAME_FILTER.toLowerCase()) < 0) continue;
 
     businesses.push(biz);

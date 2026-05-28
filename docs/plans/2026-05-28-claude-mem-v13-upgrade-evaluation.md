@@ -75,7 +75,33 @@ pointers:
   4. Output: §Breaking-change scan section appended to this plan with per-major findings table (version / breaking item / migration cost / GodWorld exposure).
   5. Verdict line: SAFE-TO-UPGRADE (no migration required) / NEEDS-MIGRATION (one or more steps required, list them) / BREAKING (regression risk too high; pin v10.5.2 and skip).
 - **Verify:** §Breaking-change scan section in this plan with verdict line.
-- **Status:** [ ] not started — pure investigation, 30-45 min WebFetch + read
+- **Status:** [x] DONE 2026-05-28 (S241) — see §Breaking-change scan below.
+
+#### Breaking-change scan (S241 finding)
+
+**Verdict: SAFE-TO-UPGRADE.** No blocking migrations. Per-version surface from claude-mem CHANGELOG fetch:
+
+| Version | Breaking item | Migration |
+|---------|---------------|-----------|
+| 10.5.5 | Removed `CLAUDE_MEM_CONTEXT_OBSERVATION_TYPES` + `..._CONCEPTS` env vars | Remove from config if present (project: not used) |
+| 10.6.0 | OpenClaw context injection moved from `MEMORY.md` to system prompt | Update OpenClaw agent config (project: doesn't use OpenClaw — N/A) |
+| 10.6.1 | Removed `dump_to_file` parameter from context API | Remove from scripts using this param (project: not used) |
+| 10.7.0 | Install command delegates to native Claude plugin system | Re-run installer for Claude Code |
+| 11.0.0 | Strict observer response contract: prose-style skips no longer accepted | Observer returns `<observation>` XML or empty response (auto via plugin) |
+| 12.0.0 | `platform_source` column added to `sdk_sessions` (Migration 25) | **Auto-migrates on startup** |
+| 12.2.0 | Worktree observations consolidated via auto-adoption | Run `npx claude-mem adopt` if merged worktrees exist |
+| 12.3.0 | Removed bearer-token authentication from worker API | Remove `Authorization` headers from hook clients (project: not used) |
+| 12.4.0 | Removed retry-counter and per-message FIFO tracking | **Auto-migrates** (schema v31→v32 drop dead columns) |
+| 12.4.3 | One-shot DB cleanup removes observer-sessions + stuck pending msgs | **Auto-runs at startup** (opt-out via `CLAUDE_MEM_SKIP_CLEANUP_V12_4_3=1`) |
+| 12.5.0 | Observation pipeline simplified; `kind`/`skipped` enums removed | Parser auto-returns binary valid/invalid |
+| 13.0.0 | Relicense AGPL-3.0 → Apache-2.0; Server Beta opt-in | Review license; Server Beta disabled by default (project: not enabling) |
+| 13.1.0 | Server Beta event pipeline (Postgres + BullMQ) | Only affects `CLAUDE_MEM_QUEUE_ENGINE=bullmq` users (project: N/A) |
+
+**Recommended upgrade steps (when engine-sheet picks up Task 4):**
+1. Upgrade npm package or re-run installer.
+2. Restart Claude Code / worker daemon once.
+3. Optional: `npx claude-mem adopt` if merged worktrees exist (project: no current merged worktrees per S241 check).
+4. Smoke test: `/mem-search` returns existing observations.
 
 ### Task 2a: `oh-my-issues` fit-check against project gap-log / ENGINE_REPAIR / ROLLOUT triage
 

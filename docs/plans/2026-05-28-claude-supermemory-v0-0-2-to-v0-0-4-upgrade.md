@@ -75,7 +75,23 @@ pointers:
   3. If names changed (e.g., `super-search` → `mem-super-search`), every project skill reference needs an update. Catalog the diff.
   4. Verdict: BACKWARD-COMPATIBLE (no renames affecting project use) / RENAMED-COMPATIBLE (renames exist but aliases preserved) / RENAMED-BREAKING (project must update references on upgrade).
 - **Verify:** §Skill-rename verdict section in this plan with verdict line + (if RENAMED-BREAKING) the per-skill diff catalog.
-- **Status:** [ ] not started — investigation, ~15 min
+- **Status:** [x] DONE 2026-05-28 (S241) — see §Skill-rename verdict below.
+
+#### Skill-rename verdict (S241 finding)
+
+**Verdict: RENAMED-COMPATIBLE-LIKELY (aliases-added pattern).** v0.0.4 commit `3a92496` patch fetch shows two NEW skill files added: `plugin/skills/supermemory-save/SKILL.md` + `plugin/skills/supermemory-search/SKILL.md`. The commit message language reads "add supermemory-search/supermemory-save skill aliases" — *add*, not rename. WebFetch interpretation: old `super-save` + `super-search` skills remain alongside the new aliases, both work post-upgrade.
+
+**Project exposure if interpretation is correct:** zero — `.claude/settings.local.json:8-9` permissions for `Skill(claude-supermemory:super-search)` + `Skill(claude-supermemory:super-save)` keep working. `docs/reference/PROJECT_GOALS.md:206-209` doc references keep accurate (could optionally update to new names for consistency, but old names remain functional).
+
+**Project exposure if interpretation is wrong (renames not aliases):** small — 4 references to update:
+- `.claude/settings.local.json:8` (`super-search`)
+- `.claude/settings.local.json:9` (`super-save`)
+- `docs/reference/PROJECT_GOALS.md:207-209` (3 lines)
+- `docs/plans/2026-05-28-claude-supermemory-v0-0-2-to-v0-0-4-upgrade.md:74` (this plan)
+
+**Confirmation step at upgrade execution (Task 4):** read `/root/.claude/plugins/cache/supermemory-plugins/claude-supermemory/0.0.4/plugin/skills/` — if both `super-save/` and `supermemory-save/` directories exist (or symlinks/aliases), interpretation confirmed alias-additive. If only `supermemory-save/` exists, interpretation was wrong and updates required.
+
+**Other skills (`/project-config`, `/logout`, `/index`):** no evidence of rename in the patch — these stay untouched.
 
 ### Task 2: Source attribution evaluation — fit-check against ADR-0008 speaker attribution
 
@@ -88,7 +104,25 @@ pointers:
   2. Compare against ADR-0008's speaker-attribution invariant: ADR-0008 enforces speaker labeling in memory content; source attribution would label memory provenance. Different layers — complementary, not redundant.
   3. Verdict: ADOPT (upgrade gains audit-ability; pairs with ADR-0008) / DEFER (feature works but no current audit gap forces it) / SKIP (feature doesn't fit project's actual provenance needs).
 - **Verify:** §Source-attribution verdict section in this plan with verdict line.
-- **Status:** [ ] not started — investigation, ~15 min
+- **Status:** [x] DONE 2026-05-28 (S241) — see §Source-attribution verdict below.
+
+#### Source-attribution verdict (S241 finding)
+
+**Verdict: ADOPT.** v0.0.4 implementation (per patch read):
+- **Request-header stamp:** `x-sm-source: claude-code` set in `SupermemoryClient` constructor's `defaultHeaders` — every API request from the plugin carries the source header.
+- **Memory-metadata stamp:** `sm_source: claude-code` written into the metadata object in `addMemory()` — every memory document created by the plugin carries the source field.
+- **Literal value:** `"claude-code"` (note: was `"claude-code-plugin"` in v0.0.3; v0.0.4 shortened).
+- **Channel differentiation:** writes from OTHER channels (mags-discord-bot.js using its own SupermemoryClient instance, discord-reflection.js using its own HTTP POST, web UI manual writes, mobile app writes, direct API curl) do NOT inherit this stamp — they're distinguishable by absence-of-field or different source values.
+
+**Fit with ADR-0008 (speaker-attribution invariant):** complementary, different layer.
+- ADR-0008 labels WHO SPEAKS in memory content (speaker-attribution discipline at content layer).
+- v0.0.4 source attribution labels WHICH CHANNEL wrote the memory (provenance discipline at metadata layer).
+- Both layers stack — speaker label (Mags vs Robert vs Mike vs anonymous) + channel label (claude-code vs mags-discord-bot vs discord-reflection vs web UI). Post-S221 contamination investigations could distinguish all four writer channels by `sm_source`.
+
+**Operational gains post-upgrade:**
+- Audit query "which writer channel wrote what to mags container?" answerable via `sm_source` metadata filter.
+- Future contamination-class investigations (analog of S221 / governance.12 / infrastructure.4) can scope queries by channel.
+- Pairs naturally with infrastructure.5 Phase 3 test-off session — if mags + super-memory reads/writes are disabled, the channel breakdown shows which writers got silenced and whether daily-work degraded.
 
 ### Task 3: Stale `console.supermemory.ai` URL hygiene pass — CLOSED INVALID (S241)
 

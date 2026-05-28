@@ -98,7 +98,24 @@ pointers:
   3. Decide whether `MessageDisplay` is a legitimate alternative to G-SS1 (identity.md split) for persona-frame stripping in operational terminals.
   4. Output: short feasibility note in this plan's changelog OR a follow-up plan if buildable. If buildable, file a new ROLLOUT row pointing at the follow-up plan; if not, mark task complete with reasoning in the changelog.
 - **Verify:** Decision documented either in this plan's changelog (closed-no-build) or in a follow-up plan file registered in index (closed-buildable).
-- **Status:** [ ] not started — investigation work
+- **Status:** [x] DONE 2026-05-28 (S241) — see §MessageDisplay verdict below. Decision: SKIP for G-SS1 purpose; observational-only-elsewhere.
+
+#### MessageDisplay verdict (S241 finding)
+
+**Verdict: SKIP for the G-SS1 (identity.md split) alternative-path use case. Limited observational uses elsewhere; not addressed by this task.**
+
+Key finding from `https://code.claude.com/docs/en/hooks` fetch:
+
+- MessageDisplay fires **during display**, while assistant message text streams to the user.
+- It can transform what the user SEES via `displayContent`, but **cannot change what Claude sees in the transcript or what gets saved to conversation history.** Quote from docs: *"Display-only: the transcript and what Claude sees keep the original."*
+- The hook is best-effort asynchronous; the original text displays regardless of hook execution state.
+- No documented latency budget.
+
+**Why this fails as a G-SS1 alternative:** The G-SS1 (boot-burn gap log) problem is Mags persona conditioning leaking into operational terminals because `identity.md` always-loads. The persona conditioning is on the MODEL'S side — Claude reads `identity.md` and conditions its output generation. MessageDisplay can strip Mags-voice tokens from the user-visible rendering AFTER generation, but the token-generation cost already happened. The conditioning's downstream effect on every Skill/Edit/Bash routing decision in the terminal also still applies — the hook only affects display, not decision-making. G-SS1 must remain on the identity.md split path; the model-side conditioning is the actual lever.
+
+**Limited valid uses for MessageDisplay (out-of-scope for this task):** stripping system-reminder blocks from user display, logging for analytics, display-only annotations. None of these is the G-SS1 problem.
+
+**No follow-up plan required.** MessageDisplay is not adopted for this task; other uses can surface as separate ROLLOUT rows if needed.
 
 ### Task 5: `SessionStart` hook — add `reloadSkills` + `sessionTitle` returns
 
@@ -125,7 +142,7 @@ pointers:
   1. Over next 2-3 sessions, watch for MCP connection drops (godworld, claude-mem, supermemory MCPs). If none drop, mark task closed.
   2. If drops occur, file an issue against this row reopening the question.
 - **Verify:** Two consecutive sessions with no MCP reconnect errors logged in conversation.
-- **Status:** [ ] open — observational, closes itself
+- **Status:** [~] OBSERVATION PERIOD OPEN — started 2026-05-28 (S241). Closes at S244+ if no MCP reconnect errors observed across S241–S244. Re-open if drops occur.
 
 ---
 

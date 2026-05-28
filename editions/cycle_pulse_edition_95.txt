@@ -7,9 +7,9 @@ Weather: cool, 64°F, northwest breeze, overcast | City Mood: confident, holding
 FRONT PAGE
 ------------------------------------------------------------
 
-# Three Portfolios, One Test: Okoro Posts Numbers Before The Checkpoint
+### Three Portfolios, One Test: Okoro Posts Numbers Before The Checkpoint
 
-**By Carmen Delaine | Bay Tribune Civic Affairs**
+By Carmen Delaine | Bay Tribune Civic Affairs
 
 ---
 
@@ -54,9 +54,9 @@ The contractor on 14th has a six-month lease buildout ahead of him. The city, fo
 EDITOR'S DESK
 ------------------------------------------------------------
 
-# The Cycle The Hard Calls Came Due
+### The Cycle The Hard Calls Came Due
 
-**By Mags Corliss | Bay Tribune**
+By Mags Corliss | Bay Tribune
 
 ---
 
@@ -77,9 +77,9 @@ Both clocks are this city.
 CIVIC
 ------------------------------------------------------------
 
-# OARI Expansion Heads To Council Week Three As Vega Flips Yes On Renewal
+### OARI Expansion Heads To Council Week Three As Vega Flips Yes On Renewal
 
-**By Carmen Delaine | Bay Tribune Civic Affairs**
+By Carmen Delaine | Bay Tribune Civic Affairs
 
 ---
 
@@ -105,9 +105,9 @@ The combined motion goes to a vote Tuesday. Mayor Avery Santana has not signaled
 
 ------------------------------------------------------------
 
-# The Deadline That Held: HCAI Application Submitted For Temescal Health Center
+### The Deadline That Held: HCAI Application Submitted For Temescal Health Center
 
-**By Dr. Lila Mezran | Bay Tribune Health Affairs**
+By Dr. Lila Mezran | Bay Tribune Health Affairs
 
 ---
 
@@ -133,9 +133,9 @@ The building at Temescal Avenue and 47th Street does not exist yet. The state cl
 
 ------------------------------------------------------------
 
-# Chen D8 Speaks As CRC: Canon-Roster Reconciled On The Floor
+### Chen D8 Speaks As CRC: Canon-Roster Reconciled On The Floor
 
-**By Carmen Delaine | Bay Tribune Civic Affairs**
+By Carmen Delaine | Bay Tribune Civic Affairs
 
 ---
 
@@ -148,9 +148,9 @@ The correction is procedural. The roster does what the roster does: it records. 
 CULTURE
 ------------------------------------------------------------
 
-# On Stoops Without Coffee: The KONO Inflow Doesn't Move
+### On Stoops Without Coffee: The KONO Inflow Doesn't Move
 
-**By Maria Keen | Bay Tribune Culture**
+By Maria Keen | Bay Tribune Culture
 
 ---
 
@@ -176,9 +176,9 @@ By 5 o'clock, it'll be different people. By next cycle, maybe it'll be different
 
 ------------------------------------------------------------
 
-# Quiet Care, Many Doors: The City's Faith Community After The Spike
+### Quiet Care, Many Doors: The City's Faith Community After The Spike
 
-**By Maria Keen | Bay Tribune Culture**
+By Maria Keen | Bay Tribune Culture
 
 ---
 
@@ -203,9 +203,9 @@ I drove home past Lake Merritt, and the city looked ordinary. Council members we
 BUSINESS
 ------------------------------------------------------------
 
-# Eight Bidders File For Baylight Phase Two
+### Eight Bidders File For Baylight Phase Two
 
-**By Jordan Velez | Bay Tribune Business**
+By Jordan Velez | Bay Tribune Business
 
 ---
 
@@ -220,9 +220,9 @@ Event programming remains active across five concurrent activations in the phase
 OPINION
 ------------------------------------------------------------
 
-# The Call That Hasn't Come: Varek, Paulson, And The Front Office Door Left Open
+### The Call That Hasn't Come: Varek, Paulson, And The Front Office Door Left Open
 
-**By Jax Caldera | Bay Tribune Opinion**
+By Jax Caldera | Bay Tribune Opinion
 
 ---
 
@@ -273,9 +273,9 @@ Does Elias Varek still intend to make that call?
 SPORTS
 ------------------------------------------------------------
 
-# Thirty-Two And Six: The Cy Young Race In Oakland Tightens
+### Thirty-Two And Six: The Cy Young Race In Oakland Tightens
 
-**By Anthony Raines | Bay Tribune Sports**
+By Anthony Raines | Bay Tribune Sports
 
 ---
 
@@ -299,9 +299,9 @@ Coles and Ramos are the two most visible exhibits of that holding. Which one fin
 
 ------------------------------------------------------------
 
-# The Door Won't Close: Martin Richards At Third In A Contract Year
+### The Door Won't Close: Martin Richards At Third In A Contract Year
 
-**By P Slayer | Bay Tribune Sports**
+By P Slayer | Bay Tribune Sports
 
 ---
 
@@ -406,20 +406,20 @@ NEW | Atlas Bay Architects |  |
 
 ARTICLE TABLE
 
-| Section | Headline | Reporter |
-|---------|----------|----------|
-| FRONT PAGE | OARI Expansion Heads To Council Week Three As Vega Flips Yes On Renewal | Carmen Delaine |
-| EDITOR'S DESK | The Cycle The Hard Calls Came Due | Mags Corliss |
-| CIVIC | Three Portfolios, One Test: Okoro Posts Numbers Before The Checkpoint | Carmen Delaine |
-| CIVIC | The Deadline That Held: HCAI Application Submitted For Temescal Health Center | Dr. Lila Mezran |
-| CIVIC | Chen D8 Speaks As CRC: Canon-Roster Reconciled On The Floor | Carmen Delaine |
-| CULTURE | On Stoops Without Coffee: The KONO Inflow Doesn't Move | Maria Keen |
-| CULTURE | Quiet Care, Many Doors: The City's Faith Community After The Spike | Maria Keen |
-| BUSINESS | Eight Bidders File For Baylight Phase Two | Jordan Velez |
-| OPINION | The Call That Hasn't Come: Varek, Paulson, And The Front Office Door Left Open | Jax Caldera |
-| SPORTS | Thirty-Two And Six: The Cy Young Race In Oakland Tightens | Anthony Raines |
-| SPORTS | The Door Won't Close: Martin Richards At Third In A Contract Year | P Slayer |
-| LETTERS | Letters to the Editor — Cycle 95 | Letters Desk |
+| Slot | Section | Headline | Reporter |
+|------|---------|----------|----------|
+| FP1 | FRONT PAGE | OARI Expansion Heads To Council Week Three As Vega Flips Yes On Renewal | Carmen Delaine |
+| ED | EDITOR'S DESK | The Cycle The Hard Calls Came Due | Mags Corliss |
+| C1 | CIVIC | Three Portfolios, One Test: Okoro Posts Numbers Before The Checkpoint | Carmen Delaine |
+| C2 | CIVIC | The Deadline That Held: HCAI Application Submitted For Temescal Health Center | Dr. Lila Mezran |
+| C3 | CIVIC | Chen D8 Speaks As CRC: Canon-Roster Reconciled On The Floor | Carmen Delaine |
+| N1 | CULTURE | On Stoops Without Coffee: The KONO Inflow Doesn't Move | Maria Keen |
+| N2 | CULTURE | Quiet Care, Many Doors: The City's Faith Community After The Spike | Maria Keen |
+| B1 | BUSINESS | Eight Bidders File For Baylight Phase Two | Jordan Velez |
+| O1 | OPINION | The Call That Hasn't Come: Varek, Paulson, And The Front Office Door Left Open | Jax Caldera |
+| S1 | SPORTS | Thirty-Two And Six: The Cy Young Race In Oakland Tightens | Anthony Raines |
+| S2 | SPORTS | The Door Won't Close: Martin Richards At Third In A Contract Year | P Slayer |
+| L1 | LETTERS | Letters to the Editor — Cycle 95 | Letters Desk |
 CITIZEN USAGE LOG
 
 CIVIC / GOVERNMENT

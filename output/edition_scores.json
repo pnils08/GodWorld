@@ -380,6 +380,27 @@
       "notes": 0,
       "deskErrors": {},
       "noteText": "Auto-graded by gradeEdition.js. 11 articles, 0 errata entries."
+    },
+    {
+      "edition": 95,
+      "cycle": 95,
+      "type": "edition",
+      "date": "2026-05-28",
+      "grade": "A",
+      "maraGrade": "A",
+      "criticals": 0,
+      "warnings": 0,
+      "notes": 0,
+      "deskErrors": {
+        "civic": [],
+        "business": [],
+        "culture": [],
+        "sports": [],
+        "letters": [],
+        "editor": [],
+        "freelance": []
+      },
+      "noteText": "Auto-graded by gradeEdition.js. 12 articles, 0 errata entries."
     }
   ]
 }

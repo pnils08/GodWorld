@@ -90,22 +90,23 @@ pointers:
 - **Verify:** §Source-attribution verdict section in this plan with verdict line.
 - **Status:** [ ] not started — investigation, ~15 min
 
-### Task 3: Stale `console.supermemory.ai` URL hygiene pass (independent of upgrade)
+### Task 3: Stale `console.supermemory.ai` URL hygiene pass — CLOSED INVALID (S241)
 
-- **Cost-of-delay:** Low. URL likely 301-redirects to `app.supermemory.ai`; not breaking. Doc-hygiene work — 5 files carry the stale URL.
-- **NOT gated** on Tasks 1–2 — URL migration is server-side, independent of plugin version. Can ship today.
-- **Files:**
-  - `docs/RESEARCH.md` — modify (find/replace `console.supermemory.ai` → `app.supermemory.ai`)
-  - `docs/SUPERMEMORY.md` — modify (same)
-  - `docs/STACK.md` — modify (same)
-  - `docs/engine/ROLLOUT_PLAN.md` — modify (same)
-  - `scripts/migrateSupermemory.js` — modify (same)
-- **Steps:**
-  1. For each of the 5 files, find the `console.supermemory.ai` reference and verify the surrounding context (URL pattern, link text, code reference).
-  2. Replace `console.supermemory.ai` → `app.supermemory.ai` preserving the surrounding URL path. Some references may be in code (script), some in docs (markdown links) — preserve syntax.
-  3. Spot-check: open one updated URL in a browser equivalent (or fetch via WebFetch) to confirm the migrated URL resolves.
-- **Verify:** `grep -l 'console.supermemory.ai' docs/ scripts/ .claude/ 2>/dev/null` → empty.
-- **Status:** [ ] not started — small mechanical pass, ~10 min, ships independently
+- **Status:** CLOSED INVALID 2026-05-28 (S241) — survey thesis was wrong; zero references are stale.
+- **What was claimed:** 5 project files carry stale `console.supermemory.ai` URL post-March-5 migration; find/replace to `app.supermemory.ai` would close the paper cut.
+- **What verification showed:** WebFetch of `https://console.supermemory.ai` resolves live to a page titled "Supermemory Console" (admin interface). The URL did NOT redirect to `app.supermemory.ai`. S177 docs (April 25, post-March-5-migration) carry the correct framing: two URLs, two functions — `app.supermemory.ai` = browse memories, `console.supermemory.ai` = admin (org management, billing, API keys, scoped key creation). The March 5 commit "Migrate console.supermemory.ai to app.supermemory.ai" most likely moved specific features between the two (memory browsing → app while admin stayed on console), not retired console wholesale. The plugin's `openBrowser()` URL change to app per S177 was the only URL-in-code migration; `scripts/migrateSupermemory.js:234` was updated in S177 to distinguish admin/browse and is already correct.
+- **All 9 occurrences across the 5 files are intentional admin-URL labels, NOT stale references:**
+  - `docs/STACK.md:30` — Supermemory Console row labels the admin URL.
+  - `docs/SUPERMEMORY.md:3` — header explicitly labels `Admin: console.supermemory.ai | Browse: app.supermemory.ai`.
+  - `docs/SUPERMEMORY.md:445` — "Create at console.supermemory.ai" — scoped API key creation is admin function.
+  - `docs/SUPERMEMORY.md:688` — table entry labels console as "Admin — org management, billing, API keys".
+  - `docs/SUPERMEMORY.md:727` — S177 changelog entry historical reference.
+  - `docs/RESEARCH.md:94` — "Available at console.supermemory.ai" — scoped API key creation admin context.
+  - `docs/engine/ROLLOUT_PLAN.md:202` — governance.24 row (this plan's parent — text claims "5 stale files," will be corrected).
+  - `docs/engine/ROLLOUT_PLAN.md:288` — S177 changelog entry historical reference.
+  - `scripts/migrateSupermemory.js:234` — distinguishes "app.supermemory.ai (browse) / console.supermemory.ai (admin)" — already correct.
+- **Lesson:** verification before action caught a measure-twice violation. The survey assumed "console URL deprecated" from a one-line commit message without confirming. WebFetch verification flipped the verdict. Pattern: `feedback_measure-twice-cascading-effects`.
+- **What stays open:** governance.24 row text needs correction (claims "5 stale URL references" — that's wrong; will be amended in the same commit that ships this plan update).
 
 ### Task 4 (conditional): Execute upgrade
 
@@ -134,3 +135,4 @@ pointers:
 ## Changelog
 
 - 2026-05-28 — Initial draft (S241). Mike S241 directive: *"anything new here https://github.com/supermemoryai/claude-supermemory"* → survey of commits to main (v0.0.2 release page incomplete-load, so commit history used as primary source) → version-gap check (`0.0.2` installed vs `0.0.4` latest = 2 minor versions). 4 tasks; Task 3 (URL hygiene) ships independent of upgrade decision. Nothing crucial-now per honest read; Task 3 is the only "could ship today" item if session window allows.
+- 2026-05-28 — Task 3 closed INVALID same session (S241). Mike approved Task 3 ship-now. Pre-execution verification (WebFetch of `console.supermemory.ai`) flipped the verdict: URL is live admin interface, not deprecated. All 9 occurrences across 5 files are intentional admin-URL labels per S177 framing (admin vs browse distinction). Find/replace would have damaged docs. Pattern: `feedback_measure-twice-cascading-effects` — verification before action caught a survey-side wrong assumption. Tasks 1 + 2 + 4 unchanged.

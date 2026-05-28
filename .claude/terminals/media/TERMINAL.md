@@ -247,6 +247,12 @@ When this terminal discovers something broken during a skill run:
 
 ---
 
+## End-of-Session Diagnostic (S241 governance.22)
+
+At session-close, Mike runs `/usage` and pastes the per-category breakdown (skills / subagents / plugins / MCP servers) into the session-close commit body when notable. Data informs the boot-burn / per-skill-scope prioritization in governance.22. Source: Claude Code v2.1.149.
+
+---
+
 ## Session Close
 
 **Two close modes (S226).** Pick by next-session cadence, not by how much work shipped. Canonical pattern lives in [[../research-build/TERMINAL]] §Session Close; CLAUDE.md §Session Lifecycle carries the headline.

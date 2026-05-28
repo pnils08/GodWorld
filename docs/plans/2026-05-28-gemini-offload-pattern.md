@@ -91,7 +91,7 @@ Project Knowledge: *"Voice hardening occurs within the first 50 Moltbook posts."
      > **§Apps Script Side-Panel Workflow** — In-sheet Apps Script code (cycle triggers, custom menus, on-edit handlers, sheet-side utilities) may originate in the Google Apps Script editor's Gemini side panel. Iterate there against the live sheet, then bring working code back via `clasp pull` + commit. Node.js engine code in `/root/GodWorld/` stays in this terminal — do not route engine work to the Apps Script side panel. See `docs/GEMINI_OFFLOAD.md` for the full offload triage.
   3. Verify the inbound link to `docs/GEMINI_OFFLOAD.md` is exactly that path (no `[[...]]` wikilink syntax in TERMINAL.md unless other TERMINAL.md entries already use it).
 - **Verify:** `grep -c 'GEMINI_OFFLOAD' .claude/terminals/engine-sheet/TERMINAL.md` → ≥1 (back-link satisfies the no-isolated-MDs rule for the new offload doc).
-- **Status:** [ ] not started
+- **Status:** [x] DONE 2026-05-28 (S241) — §Apps Script Side-Panel Workflow added to engine-sheet TERMINAL.md before §Session Close. Includes `[gemini-pull]` commit-tag convention per Open Question §2 (provisional yes adopted). Back-links to `docs/GEMINI_OFFLOAD.md` satisfying no-isolated-MDs rule.
 
 ### Task 3: Register `docs/GEMINI_OFFLOAD.md` in `docs/index.md`
 
@@ -102,7 +102,7 @@ Project Knowledge: *"Voice hardening occurs within the first 50 Moltbook posts."
   2. Add a line entry: `**[[GEMINI_OFFLOAD]]** — Gemini offload triage. Three permissible offload paths (Apps Script side panel, Sheets formula sidebar, Drive Docs for tier-4 content), no-go zone (canon-bearing work + reviewer lanes + EIC seat), Moltbook voice-hardening caveat. Companion to the S241 boot-burn gap log. *(reference, governance, infrastructure, token-budget, active)*`
   3. Add a line entry under `docs/plans/` for this plan file: `**[[plans/2026-05-28-gemini-offload-pattern]]** — Gemini offload pattern. governance.21. 3 tasks: create GEMINI_OFFLOAD.md / add Apps Script side-panel workflow to engine-sheet TERMINAL.md / index registration. Source: S241 conversation. *(plan, governance, infrastructure, active)*`
 - **Verify:** `grep -c 'GEMINI_OFFLOAD' docs/index.md` → 1. `grep -c '2026-05-28-gemini-offload-pattern' docs/index.md` → 1.
-- **Status:** [ ] not started
+- **Status:** [x] DONE 2026-05-28 (S241) — both entries shipped: plan-file entry at initial filing commit; GEMINI_OFFLOAD.md entry in same commit as Task 1.
 
 ### Task 4: File ROLLOUT_PLAN row governance.21
 
@@ -116,7 +116,7 @@ Project Knowledge: *"Voice hardening occurs within the first 50 Moltbook posts."
      ```
   3. Do not touch existing rows.
 - **Verify:** `grep -c 'governance.21' docs/engine/ROLLOUT_PLAN.md` → 1.
-- **Status:** [ ] not started
+- **Status:** [x] DONE 2026-05-28 (S241) — governance.21 row shipped at initial filing commit `94e7c17`.
 
 ---
 

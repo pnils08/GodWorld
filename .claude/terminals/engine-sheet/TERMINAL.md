@@ -246,6 +246,24 @@ When this terminal discovers something that needs design/research:
 
 ---
 
+## Apps Script Side-Panel Workflow (S241 governance.21)
+
+In-sheet Apps Script code (cycle triggers, custom menus, on-edit handlers, sheet-side utilities) may originate in the Google Apps Script editor's Gemini side panel. Iterate there against the live sheet, then bring working code back via `clasp pull` + commit. Node.js engine code in `/root/GodWorld/` stays in this terminal — do not route engine work to the Apps Script side panel. The boundary is "code that runs inside the sheet" vs "code that runs outside the sheet against the sheet." See `docs/GEMINI_OFFLOAD.md` for the full offload triage. Commit-message convention: include `[gemini-pull]` tag suffix when code originated in the Apps Script side panel.
+
+---
+
+## Skill Iteration (S241 governance.22)
+
+When editing skill files (`.claude/skills/**/SKILL.md`) mid-session, run `/reload-skills` to apply changes without restarting Claude Code. Source: Claude Code v2.1.152. Pairs with engine-sheet's `clasp pull` + commit rhythm for sheet-side iteration — both eliminate restart-to-test friction.
+
+---
+
+## End-of-Session Diagnostic (S241 governance.22)
+
+At session-close, Mike runs `/usage` and pastes the per-category breakdown (skills / subagents / plugins / MCP servers) into the session-close commit body when notable. Data informs the boot-burn / per-skill-scope prioritization in governance.22. Source: Claude Code v2.1.149.
+
+---
+
 ## Session Close
 
 **Two close modes (S226).** Pick by next-session cadence, not by how much work shipped. Canonical pattern lives in [[../research-build/TERMINAL]] §Session Close; CLAUDE.md §Session Lifecycle carries the headline.

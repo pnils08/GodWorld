@@ -55,7 +55,7 @@ pointers:
      > **§End-of-Session Diagnostic** — at session-close, Mike runs `/usage` and pastes the per-category breakdown (skills / subagents / plugins / MCP servers) into the session-close commit body when notable. Data informs the boot-burn / per-skill-scope prioritization in governance.22.
   2. Do not touch other sections.
 - **Verify:** `grep -c 'End-of-Session Diagnostic' .claude/terminals/*/TERMINAL.md` → 4.
-- **Status:** [ ] not started
+- **Status:** [x] DONE 2026-05-28 (S241) — §End-of-Session Diagnostic added to all 4 TERMINAL.md files before §Session Close. Cadence note sets the empirical-data primitive for boot-burn / per-skill-scope prioritization. Verification gate met.
 
 ### Task 2: `disallowed-tools` frontmatter — per-skill scope audit
 
@@ -84,7 +84,7 @@ pointers:
      > **§Skill Iteration** — when editing skill files (`.claude/skills/**/SKILL.md`) mid-session, run `/reload-skills` to apply the changes without restarting. Source: Claude Code v2.1.152.
   2. Append same to engine-sheet TERMINAL.md.
 - **Verify:** `grep -c 'reload-skills' .claude/terminals/research-build/TERMINAL.md .claude/terminals/engine-sheet/TERMINAL.md` → 2.
-- **Status:** [ ] not started — tiny
+- **Status:** [x] DONE 2026-05-28 (S241) — §Skill Iteration added to both research-build + engine-sheet TERMINAL.md. Engine-sheet variant cross-links to clasp pull rhythm for sheet-side iteration consistency.
 
 ### Task 4: `MessageDisplay` hook event — fit-for-purpose investigation
 

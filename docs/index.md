@@ -64,6 +64,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 - **[[CLAUDE-MEM]]** — claude-mem architecture, autodream, scheduled agents. *(reference, infrastructure, active)*
 - **[[SUPERMEMORY]]** — 6 containers, API patterns, terminal-tag isolation rules. *(reference, infrastructure, active)*
 - **[[MIGRATION_OFF_CLAUDE]]** — S154 desk-agent migration: DeepSeek V3.1 via OpenRouter beat 3-pass Claude on c87 business desk for 1/25th the cost. Test script + next steps + what survives. *(project, infrastructure, active)*
+- **[[GEMINI_OFFLOAD]]** — S241 governance.21. Three permissible offload paths (Apps Script side panel, Sheets formula sidebar, Drive Docs for tier-4 content), no-go zone (canon-bearing work + reviewer lanes + EIC seat), Moltbook voice-hardening caveat. Companion to S241 boot-burn gap log (internal lever). Different in kind from MIGRATION_OFF_CLAUDE (model substitution INSIDE pipeline) — this is task-class offload OUTSIDE pipeline. *(reference, governance, infrastructure, token-budget, active)*
 - **[[ACTION_MANAGED_AGENTS]]** — research on Claude Managed Agents. Ready to evaluate. *(reference, research, active)*
 - **[[CANCELLATION]]** — monthly costs and cancellation paths for every paid service. *(reference, infrastructure, active)*
 

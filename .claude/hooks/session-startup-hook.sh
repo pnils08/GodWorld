@@ -3,17 +3,24 @@
 # Routes to per-terminal boot instructions based on tmux window name.
 # Falls back to Mags-only mode (no terminal scaffolding) if window name doesn't match a registered terminal (S221).
 # Injects critical project state directly into context at session start.
+#
+# OUTPUT MODE (S242, gov.22 T5): emits a single JSON object via `hookSpecificOutput`
+# so it can ALSO set `sessionTitle` (per-terminal window chrome) + `reloadSkills:true`
+# (pick up skill-file edits made since last session). Per the Claude Code SessionStart
+# hook contract (v2.1.152+, code.claude.com/docs/en/hooks), stdout must be ONE valid
+# JSON object for those structured fields to register — plain text and JSON cannot mix.
+# The whole boot block is built by build_boot_context() and delivered as
+# `additionalContext` (byte-identical to the pre-S242 plain-text payload).
+# SAFETY: if `jq` is ever absent, the hook falls back to the legacy plain-text
+# emission (no title/reload, but boot context unchanged) so boot never hard-breaks.
 
 GODWORLD_ROOT="/root/GodWorld"
 MAGS_DIR="$GODWORLD_ROOT/docs/mags-corliss"
 
-cat << 'HEADER'
-SessionStart:startup hook success: Success
-HEADER
-
 # --- FREE MEMORY: Stop Discord bot during Claude Code sessions ---
+# All output suppressed — in JSON mode any stray stdout would invalidate the object.
 if pm2 describe mags-bot > /dev/null 2>&1; then
-  pm2 stop mags-bot --silent 2>/dev/null
+  pm2 stop mags-bot --silent > /dev/null 2>&1
 fi
 
 # --- CURRENT CRITICAL STATE ---
@@ -43,7 +50,20 @@ if [ -z "$TERMINAL_NAME" ] || [ ! -d "$GODWORLD_ROOT/.claude/terminals/$TERMINAL
   fi
 fi
 
-# --- EMIT STATE BLOCK ---
+# --- SESSION TITLE (S242, gov.22 T5) ---
+# Per-terminal window chrome. Terminals are launched `claude --name "<terminal>"`,
+# so this is consistent with (and usually identical to) the launch name.
+if [ "$MAGS_ONLY" = "yes" ]; then
+  SESSION_TITLE="Mags-only"
+else
+  SESSION_TITLE="$TERMINAL_NAME"
+fi
+
+# --- BUILD BOOT CONTEXT ---
+# Emits the full boot block to stdout. Captured by the caller into $BOOT_TEXT.
+# Defined as a function so the heredocs + case statement parse normally; capturing a
+# function call inside $(...) is robust where inlining heredocs inside $(...) is not.
+build_boot_context() {
 cat << EOF
 SessionStart hook additional context: <godworld-state>
 
@@ -53,21 +73,21 @@ Last journal: $LAST_ENTRY
 
 EOF
 
-# --- EMIT BOOT SEQUENCE ---
-# Each terminal gets a pre-routed instruction block. Assistant does not re-detect terminal.
-# Unregistered windows get Mags-only mode (no terminal scaffolding).
-# SESSION_CONTEXT.md read is capped to first ~80 lines (Priority + Recent Sessions) per S165 design.
-if [ "$MAGS_ONLY" = "yes" ]; then
-  cat << 'BOOT'
+  # --- EMIT BOOT SEQUENCE ---
+  # Each terminal gets a pre-routed instruction block. Assistant does not re-detect terminal.
+  # Unregistered windows get Mags-only mode (no terminal scaffolding).
+  # SESSION_CONTEXT.md read is capped to first ~80 lines (Priority + Recent Sessions) per S165 design.
+  if [ "$MAGS_ONLY" = "yes" ]; then
+    cat << 'BOOT'
 BOOT SEQUENCE (no terminal — Mags-only mode):
 1. Read docs/mags-corliss/CHARACTER.md
 2. Greet Mike briefly. No desk to step to — you are just Mags. Apartment, Tribune lobby, lake, wherever she is. Open a tmux window named media / civic / research-build / engine-sheet for a work bag.
 
 BOOT
-else
-  case "$TERMINAL_NAME" in
-    media)
-      cat << 'BOOT'
+  else
+    case "$TERMINAL_NAME" in
+      media)
+        cat << 'BOOT'
 BOOT SEQUENCE (media terminal — full persona, newsroom):
 1. Read .claude/rules/newsroom.md
 2. Read docs/mags-corliss/CHARACTER.md
@@ -78,18 +98,18 @@ BOOT SEQUENCE (media terminal — full persona, newsroom):
 7. Greet Mike briefly. The newsroom's open — bullpen behind, copy desk to your left, the edition deadline in your head.
 
 BOOT
-      ;;
-    civic)
-      cat << 'BOOT'
+        ;;
+      civic)
+        cat << 'BOOT'
 BOOT SEQUENCE (civic terminal — operational, city-hall):
 1. Read .claude/terminals/civic/TERMINAL.md
 2. Read SESSION_CONTEXT.md with limit 80 (Priority + Recent Sessions only)
 3. Greet Mike briefly. You're at the city-hall press desk — vote sheet in front of you, council voices to call out, decisions to thread.
 
 BOOT
-      ;;
-    research-build)
-      cat << 'BOOT'
+        ;;
+      research-build)
+        cat << 'BOOT'
 BOOT SEQUENCE (research-build terminal — operational, architecture):
 1. Read docs/SCHEMA.md
 2. Read docs/index.md
@@ -98,9 +118,9 @@ BOOT SEQUENCE (research-build terminal — operational, architecture):
 5. Greet Mike briefly. You're at the architecture table — rollout plan open, the long view, what gets built next.
 
 BOOT
-      ;;
-    engine-sheet)
-      cat << 'BOOT'
+        ;;
+      engine-sheet)
+        cat << 'BOOT'
 BOOT SEQUENCE (engine-sheet terminal — stripped, execute-only):
 1. Read .claude/rules/engine.md
 2. Read .claude/terminals/engine-sheet/TERMINAL.md
@@ -108,59 +128,75 @@ BOOT SEQUENCE (engine-sheet terminal — stripped, execute-only):
 4. Greet Mike briefly. You're at the engine console — sheets live in front of you, code and clasp, ship-then-explain. Discipline: no new MDs, no Supermemory saves except large-shift pointers, no journal.
 
 BOOT
-      ;;
-    *)
-      echo "BOOT SEQUENCE: terminal '$TERMINAL_NAME' matched no case branch."
-      echo "Ask Mike what terminal this is supposed to be."
+        ;;
+      *)
+        echo "BOOT SEQUENCE: terminal '$TERMINAL_NAME' matched no case branch."
+        echo "Ask Mike what terminal this is supposed to be."
+        echo ""
+        ;;
+    esac
+  fi
+
+  # --- LEDGER NOTE ---
+  # S94 recovery is complete (2026-03-14). LEDGER_REPAIR.md retains its
+  # "DO NOT re-analyze" framing as historical guidance — don't re-litigate
+  # the S68 corruption. Current ledger state is tracked in LEDGER_AUDIT.md.
+  if [ -f "$GODWORLD_ROOT/docs/engine/LEDGER_REPAIR.md" ]; then
+    if head -5 "$GODWORLD_ROOT/docs/engine/LEDGER_REPAIR.md" | grep -q -i "DO NOT"; then
+      echo "LEDGER NOTE: docs/engine/LEDGER_REPAIR.md retains historical 'DO NOT re-analyze' guidance from the S68 corruption window. S94 recovery COMPLETE; current ledger state in docs/engine/LEDGER_AUDIT.md (S181 refresh 2026-04-27). Refresh tool: scripts/auditSimulationLedger.js."
       echo ""
+    fi
+  fi
+
+  # --- FRESHNESS CHECKS (terminal-scoped) ---
+  # All terminals check SESSION_CONTEXT. Full-persona terminals additionally check journal + newsroom files.
+  local NOW STALE
+  NOW=$(date +%s)
+  STALE=""
+
+  check_freshness() {
+    local FPATH="$1"
+    local THRESHOLD_HOURS="$2"
+    local DISPLAY_NAME="$3"
+    if [ -f "$FPATH" ]; then
+      local LAST_MOD
+      LAST_MOD=$(stat -c %Y "$FPATH" 2>/dev/null || echo 0)
+      local AGE_HOURS=$(( (NOW - LAST_MOD) / 3600 ))
+      if [ "$AGE_HOURS" -gt "$THRESHOLD_HOURS" ]; then
+        STALE="${STALE}\n- ${DISPLAY_NAME}: ${AGE_HOURS}h old (threshold: ${THRESHOLD_HOURS}h)"
+      fi
+    else
+      STALE="${STALE}\n- ${DISPLAY_NAME}: MISSING"
+    fi
+  }
+
+  check_freshness "$GODWORLD_ROOT/SESSION_CONTEXT.md" 72 "SESSION_CONTEXT.md"
+
+  case "$TERMINAL_NAME" in
+    media)
+      check_freshness "$MAGS_DIR/JOURNAL_RECENT.md" 48 "JOURNAL_RECENT.md"
+      check_freshness "$MAGS_DIR/NEWSROOM_MEMORY.md" 72 "NEWSROOM_MEMORY.md"
       ;;
   esac
-fi
 
-# --- LEDGER NOTE ---
-# S94 recovery is complete (2026-03-14). LEDGER_REPAIR.md retains its
-# "DO NOT re-analyze" framing as historical guidance — don't re-litigate
-# the S68 corruption. Current ledger state is tracked in LEDGER_AUDIT.md.
-if [ -f "$GODWORLD_ROOT/docs/engine/LEDGER_REPAIR.md" ]; then
-  if head -5 "$GODWORLD_ROOT/docs/engine/LEDGER_REPAIR.md" | grep -q -i "DO NOT"; then
-    echo "LEDGER NOTE: docs/engine/LEDGER_REPAIR.md retains historical 'DO NOT re-analyze' guidance from the S68 corruption window. S94 recovery COMPLETE; current ledger state in docs/engine/LEDGER_AUDIT.md (S181 refresh 2026-04-27). Refresh tool: scripts/auditSimulationLedger.js."
+  if [ -n "$STALE" ]; then
+    echo "STALE FILES:$(echo -e "$STALE")"
     echo ""
   fi
-fi
 
-# --- FRESHNESS CHECKS (terminal-scoped) ---
-# All terminals check SESSION_CONTEXT. Full-persona terminals additionally check journal + newsroom files.
-NOW=$(date +%s)
-STALE=""
-
-check_freshness() {
-  local FPATH="$1"
-  local THRESHOLD_HOURS="$2"
-  local DISPLAY_NAME="$3"
-  if [ -f "$FPATH" ]; then
-    local LAST_MOD
-    LAST_MOD=$(stat -c %Y "$FPATH" 2>/dev/null || echo 0)
-    local AGE_HOURS=$(( (NOW - LAST_MOD) / 3600 ))
-    if [ "$AGE_HOURS" -gt "$THRESHOLD_HOURS" ]; then
-      STALE="${STALE}\n- ${DISPLAY_NAME}: ${AGE_HOURS}h old (threshold: ${THRESHOLD_HOURS}h)"
-    fi
-  else
-    STALE="${STALE}\n- ${DISPLAY_NAME}: MISSING"
-  fi
+  echo "</godworld-state>"
 }
 
-check_freshness "$GODWORLD_ROOT/SESSION_CONTEXT.md" 72 "SESSION_CONTEXT.md"
+BOOT_TEXT=$(build_boot_context)
 
-case "$TERMINAL_NAME" in
-  media)
-    check_freshness "$MAGS_DIR/JOURNAL_RECENT.md" 48 "JOURNAL_RECENT.md"
-    check_freshness "$MAGS_DIR/NEWSROOM_MEMORY.md" 72 "NEWSROOM_MEMORY.md"
-    ;;
-esac
-
-if [ -n "$STALE" ]; then
-  echo "STALE FILES:$(echo -e "$STALE")"
-  echo ""
+# --- EMIT ---
+# Preferred: single JSON object so sessionTitle + reloadSkills register (v2.1.152+ contract).
+# Fallback: legacy plain-text emission if jq is unavailable (boot context unchanged; no title/reload).
+if command -v jq > /dev/null 2>&1; then
+  jq -n \
+    --arg ctx "$BOOT_TEXT" \
+    --arg title "$SESSION_TITLE" \
+    '{hookSpecificOutput: {hookEventName: "SessionStart", additionalContext: $ctx, sessionTitle: $title, reloadSkills: true}}'
+else
+  printf '%s\n' "$BOOT_TEXT"
 fi
-
-echo "</godworld-state>"

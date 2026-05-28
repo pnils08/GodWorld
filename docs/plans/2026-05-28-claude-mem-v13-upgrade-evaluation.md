@@ -115,7 +115,26 @@ pointers:
   3. If observation-based: the project has thousands of claude-mem observations across cycles; clustering could surface patterns. If text-input-based: feeding it gap logs + ENGINE_REPAIR rows + ROLLOUT entries could surface cross-cutting root causes.
   4. Fit-check verdict: USE-AS-IS (the skill applies directly to project gap-log triage) / ADAPT (the skill needs project-specific shaping in a wrapper) / SKIP (the skill assumes inputs the project doesn't have).
 - **Verify:** Fit-check verdict documented in this plan's §`oh-my-issues` verdict section.
-- **Status:** [ ] not started — gated on Task 1
+- **Status:** [x] DONE 2026-05-28 (S241) — see §oh-my-issues verdict below.
+
+#### oh-my-issues verdict (S241 finding)
+
+**Verdict: SKIP.** Skill assumes GitHub-issues-as-source-of-truth; project uses files-as-tracking.
+
+Per skill body fetched from `https://github.com/thedotmack/claude-mem/blob/main/plugin/skills/oh-my-issues/SKILL.md`:
+- **Inputs:** GitHub issues from a repository's open backlog accessed via GitHub CLI (`gh issue list`, `gh issue view`). NOT claude-mem observations, NOT arbitrary text input, NOT file paths.
+- **Outputs:** plan-master issues (one per architectural defect cluster) + `plans/0X-<slug>.md` design docs + standardized redirect comments closing child issues. Goal: "open issues == open plans, 1:1."
+- **Method:** semantic/architectural reasoning by Claude. "Clustering by root cause, not by surface" + "does one architectural change retire all of these?"
+- **Prerequisites:** GitHub CLI + `plans/` directory + repo willingness to adopt issue-as-plan pattern.
+
+**Project mismatch:** GodWorld tracks defects in three filesystem surfaces, none of them GitHub Issues:
+- Gap logs → `output/production_log_*_gaps.md`
+- ENGINE_REPAIR → `docs/engine/ENGINE_REPAIR.md` rows
+- ROLLOUT → `docs/engine/ROLLOUT_PLAN.md` rows
+
+Adapting would require either porting to GitHub Issues (breaks ADR-0005, massive migration, no value) or a brittle wrapper that fakes issue-shaped text from file rows. Neither pays back.
+
+**The architectural pattern is portable; the skill isn't.** Root-cause-clustering → plan-master design docs is exactly what the project already does via ADR-0005 + ROLLOUT triage cadence + governance.10 archive sweeps. Adopting the skill would pay installation cost to do a thing the project already does.
 
 ### Task 2b: `design-is` fit-check against `/edition-print` PDF QA layer
 
@@ -129,7 +148,23 @@ pointers:
   3. Compare against project's PDF-rendering pipeline (`generate-edition-pdf.js`) and current QA gates (`photoQA.js` for images, `validateEdition.js` for text).
   4. Fit-check verdict: USE-AS-IS / ADAPT / SKIP.
 - **Verify:** Fit-check verdict documented in this plan's §`design-is` verdict section.
-- **Status:** [ ] not started — gated on Task 1
+- **Status:** [x] DONE 2026-05-28 (S241) — see §design-is verdict below.
+
+#### design-is verdict (S241 finding)
+
+**Verdict: SKIP for `/edition-print` PDF QA (wrong design lineage). DEFER for dashboard QA until concrete need.**
+
+Per skill body fetched from `https://github.com/thedotmack/claude-mem/blob/main/plugin/skills/design-is/SKILL.md`:
+- **Inputs:** Live URLs, running dev servers (via `agent-browser` subagent), repo paths, Figma frames, screenshots. Adaptive.
+- **Audit standard:** Dieter Rams' ten principles verbatim, in exact order. Non-negotiable scoring anchors.
+- **Output:** Per-principle 0–3 score + total /30 + verdict (NEW / REFINE / REDESIGN).
+- **Prerequisites:** `agent-browser` subagent for live URLs; five parallel evidence-gathering subagents (Structural, Visual, Copy & Honesty, Weight & Friction, Accessibility) before orchestrator scoring.
+
+**`/edition-print` mismatch:** Tribune edition layout follows newspaper-design lineage (masthead typography, column grids, hierarchy, byline conventions, dateline format) — Tufte / Vignelli typographic discipline. Consumer-product Dieter Rams ("innovative," "as little design as possible," "long-lasting") is the wrong scoring axis. A 30-point Rams scorecard for a Tribune edition would optimize toward Braun-radio minimalism instead of what makes a newspaper page work. Technically computable, editorially useless.
+
+**Possible alternative — dashboard QA — DEFER:** The Express + React dashboard at port 3001 IS a digital product where Rams principles apply. But the dashboard isn't a current pain point; `agent-browser` dependency needs separate investigation; this wasn't the proposed use. Re-evaluate when a concrete dashboard-quality concern surfaces.
+
+**Net:** the skill targets a real design discipline, but the project's two visual surfaces (Tribune editions + internal dashboard) either don't fit the discipline or don't currently need it.
 
 ### Task 3: Multi-provider support (v13.1.0) evaluation — claude-mem generation via Gemini
 
@@ -143,7 +178,26 @@ pointers:
   3. If observation summarization is provider-selectable: routing it through Gemini = Claude tokens saved on every session-end claude-mem write. Direct fit with governance.21 Gemini-offload thesis.
   4. Fit-check verdict: ADOPT (route to Gemini for specific ops) / DEFER (provider abstraction in place, but Anthropic-default is fine) / SKIP (multi-provider not actually about offload).
 - **Verify:** Fit-check verdict documented in this plan's §Multi-provider verdict section. If ADOPT, file a follow-up plan or piggyback into governance.21 Task 1.
-- **Status:** [ ] not started — gated on Task 1
+- **Status:** [x] DONE 2026-05-28 (S241) — see §Multi-provider verdict below.
+
+#### Multi-provider verdict (S241 finding)
+
+**Verdict: DEFER. Multi-provider is server-beta-only; server-beta is itself deferred. Governance.21 Gemini-offload thesis is unaffected.**
+
+Per v13.1.0 changelog:
+- **Operation supported:** observation generation (the pipeline that converts `agent_event` → `observation_generation_jobs`).
+- **Providers:** Anthropic, OpenAI, Google. Per-team-project scope enforcement.
+- **Gating:** routing lives inside the server-beta infrastructure (Postgres + BullMQ + Docker). Local-mode claude-mem does NOT expose provider selection.
+- **Config:** team/project-scope at deployment time, not per-user CLI flags.
+
+**The chain that doesn't materialize:**
+1. Multi-provider requires server-beta runtime.
+2. Server-beta is already DEFERRED in this plan (overkill for single-user; Supermemory already covers centralized memory).
+3. Therefore multi-provider is also deferred, by transitive dependency.
+
+**Governance.21 unaffected.** That plan's three offload paths are external (Apps Script side panel, Sheets sidebar, Drive Docs for tier-4). They don't rely on plugin-internal routing. The "invisible offload via plugin-internal multi-provider" hypothesis was a bonus path that doesn't materialize here; the primary offload thesis stands.
+
+**Re-evaluate when:** (a) server-beta becomes viable (concrete cross-machine need), OR (b) multi-provider ships in local-mode in a future claude-mem version. Until either: watch-list, not active work.
 
 ### Task 4 (conditional): Execute upgrade
 
@@ -159,7 +213,7 @@ pointers:
   4. Update `docs/CLAUDE-MEM.md` to reflect post-upgrade state (new skills, new tools, multi-provider config if adopted).
   5. File closing changelog entry on this plan.
 - **Verify:** `claude-mem --version` → 13.3.0 (or whichever target version). Smoke test passes. `docs/CLAUDE-MEM.md` updated.
-- **Status:** [ ] not started — conditional on Tasks 1–3
+- **Status:** [~] EXECUTED-STAGED 2026-05-28 (S241, engine-sheet) — `claude plugin update claude-mem@thedotmack --scope user` ran clean (10.5.2 → 13.3.0; "Restart to apply changes"). New cache dir `13.3.0` present, old `10.5.2` retained for rollback; `installed_plugins.json` points at 13.3.0. **Mike directive overrode the stated gate** (Tasks 2a/2b/3 fit-checks never run — this is upgrade-to-stay-current on the Task-1 SAFE verdict, not skill-proven). **Pre-upgrade insurance:** full 2.2 GB local store backed up to `/root/.claude-mem.bak-S241/` (`claude-mem.db` byte-identical) BEFORE update — guards the forward-only v11/v12/v13 migrations (Migration 25 / schema v31→v32 / one-shot cleanup) that fire on first restart and cannot be un-migrated by reinstalling 10.5.2. **PENDING (next session, restart-gated):** (1) Mike restarts Claude Code → claude-mem runs migrations; (2) smoke test `/mem-search "boot-burn"` returns existing observations with no index regression; (3) rewrite `docs/CLAUDE-MEM.md` to post-upgrade state. If smoke test regresses: stop worker, restore `/root/.claude-mem.bak-S241/` over `/root/.claude-mem/`, reinstall 10.5.2 from retained cache.
 
 ---
 
@@ -173,3 +227,4 @@ pointers:
 ## Changelog
 
 - 2026-05-28 — Initial draft (S241). Mike S241 directive: *"anything new here https://github.com/thedotmack/claude-mem"* → survey of v13.0.0–v13.3.0 releases → version-gap check (`10.5.2` installed vs `13.3.0` latest = three majors) → plan files the evaluation work without committing to upgrade. Nothing crucial-now per honest read; gated on breaking-change scan (Task 1) before any execution. Cross-link surface: Task 3 (multi-provider) feeds governance.21 (Gemini offload) thesis from the plugin-internal angle.
+- 2026-05-28 — Task 4 EXECUTED-STAGED (S241, engine-sheet, /remote-control). Mike "Proceed" on engine-sheet handoff. Measure-twice surfaced the step neither plan owned: claude-mem holds a 2.2 GB local store (`/root/.claude-mem/`) with forward-only auto-migrations on first restart — "SAFE-TO-UPGRADE" (Task 1) was a changelog read, never a live-DB assessment. Backed up the full store to `/root/.claude-mem.bak-S241/` before updating. Also surfaced: user-scope (affects all projects, not just GodWorld) + stated gate (ADOPT from 2a/2b/3) was never met — proceeded on stay-current rationale per Mike. `claude plugin marketplace update thedotmack` (stale Feb-25 clone → v13.3.0 visible) → `claude plugin update claude-mem@thedotmack --scope user` → 10.5.2 → 13.3.0 staged, restart-gated. Old `10.5.2` cache retained. Smoke test + `docs/CLAUDE-MEM.md` rewrite deferred to post-restart next session. Pattern: feedback_measure-twice-cascading-effects.

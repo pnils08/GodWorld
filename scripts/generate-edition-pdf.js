@@ -268,6 +268,21 @@ function findPhotoForSection(manifest, sectionName) {
   });
 }
 
+// Find ALL photos for a section (S244 ES-1, G-PR-NEW4). findPhotoForSection
+// uses .find() and returns only the first match, so a section with two
+// manifest entries (e.g. C95 CIVIC oari+temescal, CULTURE faith+kono, SPORTS
+// cy-young+martin) silently rendered just one <img> — generator metrics said
+// "5 placed" while the HTML carried 4. manifest.photos is already filtered for
+// dropped/editorialFlag at load, so this returns every live placement for the
+// section, in manifest order.
+function findPhotosForSection(manifest, sectionName) {
+  if (!manifest || !manifest.photos || !sectionName) return [];
+  var sectionNorm = normalizeSectionId(sectionName);
+  return manifest.photos.filter(function(p) {
+    return p.section && normalizeSectionId(p.section) === sectionNorm;
+  });
+}
+
 // ---------------------------------------------------------------------------
 // Section HTML Builders
 // ---------------------------------------------------------------------------
@@ -395,15 +410,25 @@ function buildSectionHtml(section, photoDataUri, options) {
     }
   }
 
-  // Photo placement (before articles, after section label)
-  if (photoDataUri) {
-    html.push('<div class="photo-full">');
-    html.push('  <img src="' + photoDataUri + '" alt="' + escapeHtml(section.headline || section.name) + '">');
-    var photoInfo = findPhotoForSection(options.manifest, section.name);
-    if (photoInfo && photoInfo.credit) {
-      html.push('  <div class="photo-credit">' + escapeHtml(photoInfo.credit) + '</div>');
+  // Photo placement (before articles, after section label). Renders EVERY live
+  // photo the manifest assigns to this section (G-PR-NEW4), not just the first.
+  // options.sectionPhotos = [{ dataUri, credit }]; falls back to the single
+  // photoDataUri param when the caller didn't supply the array (back-compat).
+  var sectionPhotos = options.sectionPhotos;
+  if ((!sectionPhotos || !sectionPhotos.length) && photoDataUri) {
+    sectionPhotos = [{ dataUri: photoDataUri, credit: (findPhotoForSection(options.manifest, section.name) || {}).credit }];
+  }
+  if (sectionPhotos && sectionPhotos.length) {
+    for (var ph = 0; ph < sectionPhotos.length; ph++) {
+      var sp = sectionPhotos[ph];
+      if (!sp || !sp.dataUri) continue;
+      html.push('<div class="photo-full">');
+      html.push('  <img src="' + sp.dataUri + '" alt="' + escapeHtml(section.headline || section.name) + '">');
+      if (sp.credit) {
+        html.push('  <div class="photo-credit">' + escapeHtml(sp.credit) + '</div>');
+      }
+      html.push('</div>');
     }
-    html.push('</div>');
   }
 
   // Determine column count
@@ -504,13 +529,18 @@ function buildNewspaperHtml(parsed, options) {
     // Skip meta sections
     if (section.beat === 'meta') continue;
 
-    // Find photo for this section
+    // Find photo(s) for this section. G-PR-NEW4: load every live placement,
+    // not just the first. photoDataUri stays the lead (front-page path + alt).
     var photoDataUri = null;
+    var sectionPhotos = [];
     if (usePhotos && manifest && photoDir) {
-      var photoInfo = findPhotoForSection(manifest, section.name);
-      if (photoInfo) {
-        photoDataUri = loadPhotoBase64(photoDir, photoInfo.file);
+      var sectionPhotoInfos = findPhotosForSection(manifest, section.name);
+      for (var spi = 0; spi < sectionPhotoInfos.length; spi++) {
+        var info = sectionPhotoInfos[spi];
+        var uri = loadPhotoBase64(photoDir, info.file);
+        if (uri) sectionPhotos.push({ dataUri: uri, credit: info.credit, file: info.file });
       }
+      if (sectionPhotos.length) photoDataUri = sectionPhotos[0].dataUri;
     }
 
     // Front page gets special grid treatment
@@ -563,7 +593,7 @@ function buildNewspaperHtml(parsed, options) {
       continue;
     }
 
-    var sectionHtml = buildSectionHtml(section, photoDataUri, { manifest: manifest });
+    var sectionHtml = buildSectionHtml(section, photoDataUri, { manifest: manifest, sectionPhotos: sectionPhotos });
     if (sectionHtml) {
       html.push(sectionHtml);
     }
@@ -792,6 +822,23 @@ async function main() {
     type: type,
     cycle: resolvedCycle
   });
+
+  // Photo parity check (S244 ES-1, G-PR-NEW4). Generator-side "Photos found: N"
+  // counted manifest placements; the render silently dropped any beyond the
+  // first per section. Count the <img> tags actually emitted and compare to the
+  // live (filtered) manifest count so a future drop fails loud instead of
+  // shipping a PDF that's quietly missing photos.
+  if (!noPhotos && manifest && manifest.photos) {
+    var renderedImgs = (newspaperHtml.match(/<img\b/g) || []).length;
+    var expectedImgs = manifest.photos.length;
+    if (renderedImgs === expectedImgs) {
+      console.log('Photo parity: OK (' + renderedImgs + ' <img> = ' + expectedImgs + ' manifest placements)');
+    } else {
+      console.error('[PHOTO PARITY MISMATCH] rendered ' + renderedImgs + ' <img> but manifest has ' +
+                    expectedImgs + ' live placement(s) — one or more photos were dropped at render. ' +
+                    'Check findPhotosForSection coverage + per-section assignment.');
+    }
+  }
 
   // Save HTML
   var outputDir = path.join(__dirname, '..', 'output', 'pdfs');

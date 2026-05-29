@@ -205,7 +205,7 @@ function advanceSimulationCalendar_(ctx) {
   S.godWorldYear = godWorldYear;
   S.cycleOfYear = cycleOfYear;
   S.cycleInMonth = cycleInMonth;
-  S.simYear = godWorldYear;  // Alias for backwards compatibility
+  S.simYear = 2040 + (godWorldYear - 1);  // calendar year for age math (simYear - birthYear); godWorldYear stays the ordinal used by cycleRef/elections/display. S243 fix: was aliased to the ordinal, freezing every age-gated life event (age = 2 - birthYear ≈ -2000).
   S.simMonth = simMonth;
   S.simDay = cycleInMonth;   // Alias for backwards compatibility
   S.monthName = monthName;

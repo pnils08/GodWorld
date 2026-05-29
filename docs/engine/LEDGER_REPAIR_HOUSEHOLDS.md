@@ -1,346 +1,274 @@
 ---
-title: Household Pairing & Youth Population — Ledger Repair Plan
+title: Household & Family Simulation — Representative Sample Model
 created: 2026-05-04
-updated: 2026-05-04
+updated: 2026-05-29
 type: plan
-tags: [engine, citizens, ledger, active]
+tags: [engine, citizens, ledger, family, active]
 sources:
   - S201 live audit — Simulation_Ledger MaritalStatus + HouseholdId scan (engine-sheet)
-  - "[[engine/ROLLOUT_PLAN]] §Data & Pipeline — 'FIX: Youth population gap'"
+  - S243 model reframe (Mike-direct) — tracked citizens are a representative SAMPLE of ~375,985 simulated Oaklanders; families materialize through publication, not backfill
+  - "[[engine/ROLLOUT_PLAN]] §Data & Pipeline — engine.5"
   - "[[engine/ENGINE_REPAIR]] Row 20 (this plan)"
-  - "[[engine/LEDGER_AUDIT]] §Current State — S199 refresh"
+  - "[[engine/LEDGER_AUDIT]] §Current State"
 pointers:
   - "[[engine/LEDGER_REPAIR]] — S94 historical recovery record (different scope — read first)"
   - "[[engine/LEDGER_AUDIT]] — current ledger state authority"
   - "[[engine/ENGINE_REPAIR]] — tactical tracker; Row 20 points here"
-  - "[[plans/2026-04-28-female-citizen-balance]] — sibling pattern (S184 ingest of 150 female citizens — generator + verification gates this plan mirrors)"
-  - "phase05-citizens/householdFormationEngine.js — `generateBirths_()` is currently a stub (line 428 'TODO: Implement birth generation')"
+  - "phase05-citizens/householdFormationEngine.js — `generateBirths_()` stub (line ~428) is the home for the engine birth simulation"
+  - "phase05-citizens/runYouthEngine.js — youth lifecycle engine; currently no-ops (no youth on ledger)"
 ---
 
-# Household Pairing & Youth Population — Ledger Repair Plan
+# Household & Family Simulation — Representative Sample Model
 
-Forward-build plan for the citizen ledger. Sibling to [[engine/LEDGER_REPAIR]] but
-different scope — that doc is the S94 historical recovery record (DO NOT re-analyze).
-This plan addresses three structural gaps that prevent realistic family-event simulation.
+**Status:** REWRITTEN S243 (2026-05-29). The S201 three-stage backfill (pair-married →
+reconcile-NumChildren → ingest-youth) is **superseded** — it was built on a wrong premise.
+This doc now carries the Representative Sample model + the engine-driven family build.
 
-**Status:** drafted S201, parked for a dedicated session. Three-stage build, executes in order.
-
----
-
-## The Gaps (S201 live audit)
-
-### Gap 1 — Married citizens have no actual partners
-
-S184 demographic backfill set `MaritalStatus` for every citizen via a CDF
-(49.6% married). The backfill held — live distribution:
-
-| Status | Count | % |
-|---|---|---|
-| married | 375 | 44.9% |
-| single | 165 | 19.7% |
-| divorced | 118 | 14.1% |
-| (empty) | 79 | 9.4% |
-| partnered | 51 | 6.1% |
-| widowed | 48 | 5.7% |
-
-**But no spouse linkage exists.** Citizens are flagged "married" with no
-`SpouseId` field, no shared `HouseholdId`, no shared-children backlink.
-The 426 paired citizens (married + partnered) reference 426 ghost partners.
-
-### Gap 2 — Households are singletons
-
-| Metric | Value |
-|---|---|
-| Citizens with HouseholdId set | 532 |
-| Citizens with HouseholdId empty | 304 |
-| Distinct HouseholdIds | 529 |
-| Size-1 households (singletons) | 526 |
-| Size-2 households | **3** (HH-0084-001, HH-0084-002, HH-0084-004) |
-
-Of 426 married/partnered citizens: 303 have a singleton HHid, 123 have no HHid,
-**6 are in actual shared households** (the 3 size-2 examples — likely Tier-1
-manual edits or canon pairs).
-
-### Gap 3 — Youth population is functionally empty
-
-| Bracket | Count | % |
-|---|---|---|
-| 0-4 (preschool) | 1 | 0.1% |
-| 5-12 (elem/middle) | 2 | 0.2% |
-| **13-17 (HS)** | **0** | 0% |
-| 18-22 (college/early adult) | 17 | 2.0% |
-| 23-29 (young adult) | 65 | 7.8% |
-| 30-44 (adult) | 217 | 26.0% |
-| 45-64 (mid) | 376 | 45.0% |
-| 65-79 (senior) | 148 | 17.7% |
-| 80+ | 10 | 1.2% |
-
-**Total under-18 = 3 (0.4%).** Zero teenagers. The simulation has 543 adults
-claiming 1,161 children via `NumChildren`, but only 3 actual youth exist on
-the ledger.
-
-`runYouthEngine.js` runs every cycle, finds ~21 eligible citizens (5-22),
-and effectively no-ops. `householdFormationEngine.js:428 generateBirths_()`
-is a stub: `// TODO: Implement birth generation`.
+Sibling to [[engine/LEDGER_REPAIR]] (S94 historical recovery — different scope, DO NOT
+re-analyze).
 
 ---
 
-## Root cause
+## The premise correction (S243)
 
-S184 ingest set MaritalStatus + NumChildren via independent CDFs without
-generating relational backlinks. Each field is statistically plausible in
-isolation but collectively meaningless — there are no actual marriages,
-no actual parent-child relations, and no actual households.
+The S201 plan treated the tracked citizens as **the population** and tried to wire internal
+family structure into it — pair every "married" citizen to another tracked citizen, reconcile
+NumChildren against tracked kids, bulk-ingest youth attached to tracked parents. Building it
+surfaced why it's wrong: a 232M/180F gender imbalance made opposite-gender pairing
+arithmetically cap at ~84%, and the only way to "complete" households was to fabricate couples
+between independent citizens and rename ~173 of them. That's manufacturing relationships that
+don't exist. **Make-believe.**
 
-The structural fix has dependencies:
+The correction: **the ~858 tracked citizens are a representative SAMPLE of ~375,985 simulated
+Oaklanders** (≈1 tracked citizen per 438 people). They are the voices for the greater populace.
+
+### The model (locked S243)
+
+1. **Tier = tracking status.** Tier 1–4 live in `Simulation_Ledger` = the tracked sample. Tier 5
+   = the ~375k untracked masses. To be in the ledger at all you are Tier 4+.
+2. **Demographic flags are properties of a representative voice, not promises of tracked relations.**
+   "Married" / "NumChildren = 2" describe the citizen as a representative of married / 2-child
+   Oaklanders. The spouse and children live **off-sample** (Tier 5) by default.
+3. **Distributions across the tracked sample mirror real Oakland** — calibrated to census-class
+   rates — *with a documented selection skew*: tracked citizens are story-participants (civic
+   figures, athletes, media subjects, workers), so the set skews adult. We do not force a full
+   age-representative redraw; we seed enough youth that the engine and youth coverage can function.
+4. **Families materialize through PUBLICATION.** When an edition names a family member — Benji
+   Dillon's wife, his son Rick — the post-publish "new citizens" ingestion promotes them
+   Tier 5 → Tier 4 and attaches them to the household. This is the *only* mechanism that grows
+   tracked households. Canon-driven, organic, already the pipeline's job.
+5. **The engine simulates life over cycles** — marriage, births, aging, household co-location —
+   by calibrated random chance at real rates. Not a one-time backfill.
+6. **INVARIANT — a tracked child requires ≥1 tracked adult in its household** (not necessarily a
+   parent). No orphan tracked youth. A tracked kid needs only one tracked parent, or none, as
+   long as this invariant holds.
+
+### What this supersedes
+
+- **`pairMarriedCitizens.js` (built S243, shelved):** wrong tool. Pre-wiring couples between
+  independent sample points is the make-believe the model rejects. Kept on disk until this
+  plan's build phases land, then removed.
+- **Old Stage 2 (reconcile NumChildren):** moot. NumChildren is a demographic attribute; the
+  kids are off-sample until a story names one or the engine births one. Do not reconcile it to
+  tracked rows. It updates only when a real tracked child is attached.
+- **Singleton households are correct,** not a defect. Independent sample points. The S201 "526 of
+  529 are singletons" framing was reading a feature as a bug.
+
+---
+
+## Build sequence
 
 ```
-Stage 1 (pair married → households)
+Phase 1 (youth seed — small, functional)        ← prerequisite: gives the engine live material
    ↓
-Stage 2 (reconcile NumChildren claims)
+Phase 2 (engine life-event simulation)          ← the meat: births, marriage, household formation
    ↓
-Stage 3 (add ~120 youth attached to real parents)
+Phase 3 (publication ingestion + invariant)     ← how tracked families grow, going forward
 ```
 
-You cannot add youth without households. You cannot form households without
-pairing partners. So the order is fixed.
+### Phase 1 — Youth seed (functional, ~30–60)
 
----
+**Goal:** promote a small cohort of Tier-5 youth to Tier-4 so (a) the engine's youth/birth/aging
+logic has live data to operate on, and (b) youth coverage has subjects. NOT a representative
+age redraw. Reframed correctly: **promotion to tracked, not fabrication of lives.**
 
-## Stage 1 — `pairMarriedCitizens.js`
-
-**Goal:** assign shared `HouseholdId` to married/partnered couples. Optionally
-add `SpouseId` field to Simulation_Ledger if not already present (verify
-schema; if absent, the link via shared HouseholdId is sufficient).
-
-### Pairing rule (Mike-decided S201)
-
-Primary: **age range** within ±5 years.
-Preference: **same neighborhood** within the age-range pool.
-Tier-1 citizens: **bypassed** for manual review (canonical biographies may
-declare specific spouses, separations, or deliberate single-parent status).
-
-Deterministic pairing via POPID hash to ensure idempotent re-runs.
-
-### Last-name policy (Mike-decided S201)
-
-**Couples share a last name.** Required for stage 3 — kids inherit a parent's
-last name, so partners must agree on which one. Implementation:
-
-1. Identify each couple's two last names (e.g., POP-A surname=Vega, POP-B surname=Patel)
-2. Pick one via deterministic rule (alphabetical first OR partner-with-lower-POPID keeps theirs — TBD at build time; pick the simpler one)
-3. Update the other partner's `Last` column to match
-4. Log the change in their `LifeHistory` column with `[Engine] adopted partner surname C{XX}` event
-
-This is destructive on the `Last` column for ~213 citizens. Tier-1 bypass
-prevents canon-name changes (Robert Corliss won't be renamed to Robert Vega).
-
-### Approach
-
-1. Read Sim_Ledger, filter to non-Tier-1, MaritalStatus ∈ {married, partnered}, exclude already-paired (size-2 HH members)
-2. Bucket by (neighborhood, age_decade) — e.g., (Fruitvale, 30s)
-3. Within each bucket, sort by POPID; pair adjacent rows (POPID-N with POPID-N+1, etc.)
-4. If bucket has odd count, last citizen pairs across-decade with closest match in same neighborhood
-5. If still unpaired (no neighborhood-mates in similar age), pair across-neighborhood within age range
-6. Generate HHid: `HH-C{XX}-XXX` format (matches existing HH-0084-XXX convention; bump cycle prefix)
-7. Update both partners' rows: HouseholdId, Last (per policy), LifeHistory append
-8. Output: `output/pair_married_citizens.json` with full pairing log + neighborhood-mismatch flags
-
-### Acceptance gates
-
-| Gate | Target |
-|---|---|
-| Married/partnered with shared HHid | ≥ 95% (allow up to 5% bypass for Tier-1 + edge cases) |
-| Households with size 2 | ~213 (was 3) |
-| Cross-neighborhood pairings | < 10% (most should match within neighborhood) |
-| Cross-decade pairings | < 5% (age range was preference, age-decade ideal) |
-| Tier-1 untouched | 100% — verify Tier-1 citizens have zero changes to HouseholdId or Last |
-| Determinism | Re-run with same input produces zero-diff |
-
-### Effort
-
-~1 engine-sheet session. Mirrors S184 female-balance ingest pattern
-(generator + dry-run + apply + verification gates).
-
----
-
-## Stage 2 — `reconcileNumChildren.js` (optional)
-
-**Goal:** decide what to do with the 1,161 claimed `NumChildren` total.
-
-Three options:
-
-**(a) Zero out + rebuild from Stage 3 actuals.** After Stage 3 ingests ~120
-real youth with ParentIds set, each parent's `NumChildren` field updates
-from actual count of children pointing to them. Cleanest end-state — every
-NumChildren value reflects real ledger entries.
-
-**(b) Trust as Stage 3 sizing hint.** Use the existing claims as a
-distribution signal (which parents are flagged with how many kids). Stage 3
-generates youth attached to those parents. Caveat: 1,161 claims with only
-~120 youth means most claims won't get a real child.
-
-**(c) Skip.** Leave NumChildren as-is. Engine code that reads NumChildren
-gets noisy data but no breakage.
-
-Recommend **(a)** — combined with Stage 3, end-state has ~120 NumChildren
-total spread across ~80 parent rows. Honest data.
-
-### Acceptance gates
-
-| Gate | Target |
-|---|---|
-| Sum(NumChildren) post-reconcile | = count of youth in ledger (Stage 3 output) |
-| Per-parent NumChildren | = count of rows with that POPID in ParentIds |
-| LifeHistory event per change | logged for adults whose NumChildren changed |
-
-### Effort
-
-~30 min. Pure read + recompute + write. Runs AFTER Stage 3.
-
----
-
-## Stage 3 — `ingestYouthBalance.js`
-
-**Goal:** add ~120 youth (POP-00952..POP-01071) attached to real households
-formed in Stage 1.
-
-### Distribution
-
-| Bracket | Add | Engine reads |
-|---|---|---|
-| 0-4 (preschool) | 30 | minimal — household texture only |
-| 5-12 (elem/middle) | 50 | `runYouthEngine.js` school-level branches |
-| 13-17 (HS) | 40 | `runYouthEngine.js` event types + emergence pipeline |
-| 18-22 | 0 | already 17 — promotion path will sustain |
-| **Total** | **120** | |
-
-End-state: 123 under-18 / 956 total = **~13% under-18** (vs current 0.4%).
-
-### Per-youth row spec
+**Spec (PENDING AUDIT VALIDATION — Step 2 of this session confirms every field against live schema + engine expectations):**
 
 | Field | Value |
 |---|---|
-| POPID | sequential POP-00952.. |
-| First | from name pool (need a 0-17 first-name pool — see open question) |
-| Last | inherits from parent household |
-| OriginGame | 'Engine' |
-| ClockMode | 'ENGINE' |
+| POPID | sequential from **POP-00974** (live max is POP-00973 — S229 consumed 952–973; do NOT reuse the S201 plan's 952 range) |
 | Tier | 4 |
-| RoleType | 'student' (per `generateGenericCitizens.js:516` rule for age 5-22) |
-| Status | 'Active' (canonical case — not 'active') |
-| BirthYear | computed: 2041 − target_age (deterministic per row by hash) |
-| Neighborhood | parent's neighborhood |
-| HouseholdId | parent's HouseholdId (the post-Stage-1 shared HH) |
-| ParentIds | JSON array `[motherPopId, fatherPopId]` |
+| ClockMode | ENGINE |
+| Status | Active (canonical case) |
+| RoleType | student (per generateGenericCitizens age-5–22 rule — VALIDATE) |
+| Age spread | ~30–60 youth across 0–17, weighted toward 5–17 (engine-readable brackets) |
+| BirthYear | 2041 − target_age |
+| HouseholdId | an EXISTING tracked adult's household (satisfies the invariant) |
+| Neighborhood | the host adult's neighborhood |
+| Last | inherits the host adult's surname |
+| ParentIds | optional — one tracked guardian or empty (invariant is adult-in-household, not parent-specific) |
 | Gender | ~50/50 deterministic by hash |
-| MaritalStatus | 'single' (canonical lowercase per S184 convention) |
+| MaritalStatus | single |
 | NumChildren | 0 |
-| EducationLevel | 'in-progress' or age-appropriate band ('elementary', 'middle', 'high-school') |
-| All other lifecycle fields | empty or 0 (engines fill on triggers) |
+| EducationLevel | age-appropriate band (VALIDATE against what runEducationEngine expects) |
 
-### Parent selection
+**Host-adult selection:** place each seed youth into a tracked adult's household. Prefer adults
+who are age-plausible guardians (≈25–60) and flagged with NumChildren > 0 (honors the demographic
+hint without destructively reconciling it). One youth per host household in v1; the host adult
+becomes the tracked adult satisfying the invariant (parent or not). The host adult is already the
+`HeadOfHousehold` of their `Household_Ledger` row — that stays; the youth joins as a member.
 
-1. Stage 1 produces ~213 couple households
-2. Distribute 120 children across ~85-100 households (some have 1 child, some have 2)
-3. Avoid households where both partners are 60+ (childless empty-nesters)
-4. Avoid households where the older partner is < 22 (no parent-child age cliff)
-5. Per-household child count: deterministic via household-POPID hash + Stage-2 NumChildren hint
+**DUAL-WRITE (Step-2 audit catch — plan v1 of this rewrite missed it):** the engine has TWO
+parallel household stores and the seed must write **both**, or the engine won't see the youth:
+1. **`Simulation_Ledger`** row — POPID, BirthYear, Status, Neighborhood, HouseholdId (= host
+   adult's HH), Last, etc. (`runYouthEngine.getNamedYouth_` reads here; picks up age-5–17
+   automatically next cycle.)
+2. **`Household_Ledger`** — append the youth POPID to the host household's `Members` JSON array;
+   flip `HouseholdType` singleton→`family` if it was a solo household. (`loadHouseholds_` +
+   `updateHouseholdIncomes_` + `generationalWealthEngine` read Members here.)
+`Family_Relationships` is **skipped** — it holds 2 vestigial rows with malformed IDs (`POP-0001`,
+4-digit) and is not the live model; SL `ParentIds`/`ChildrenIds` + `Household_Ledger.Members` are.
 
-### Acceptance gates
+**ParentIds decision:** seed youth get **empty `ParentIds` (`[]`)** — parents are off-sample.
+`generationalWealthEngine` uses ParentIds for wealth inheritance; empty = no inheritance, which is
+correct for an off-sample parent. (Only set a tracked parent when one genuinely exists, e.g. via
+publication.)
+
+**Age weighting (audit catch):** `runYouthEngine` processes ages **5–22 only** (MIN_AGE 5). Ages
+0–4 are inert to it — household texture, no events. Weight the seed toward **5–17** so the engine
+has live material; include a few 0–4 for realism knowing they're event-silent until they age up.
+
+**Acceptance gates (FINALIZED after Step 2 audit):**
 
 | Gate | Target |
 |---|---|
-| Total youth added | 120 (±2 for distribution rounding) |
-| Per-bracket distribution | 30/50/40 ±10% per bucket |
-| Every youth has HouseholdId | 100% |
-| Every youth has ParentIds | 100% |
-| Every youth's last name matches parent's | 100% |
-| Every youth's neighborhood matches parent's | 100% |
-| `runYouthEngine.js` finds N youth post-ingest | N ≈ 90 (5-22 range, was ~21) |
-| Re-run determinism | zero-diff |
+| Youth added | 30–60 |
+| Every youth's household contains ≥1 tracked adult | 100% (the invariant) |
+| Every youth's Last matches host adult's Last | 100% |
+| Every youth's Neighborhood matches host adult's | 100% |
+| POPID sequential from 00974, no collision | 100% |
+| Determinism (re-run zero-diff) | 100% |
+| `runYouthEngine.js` finds N youth post-seed | N rises from ~0 |
 
-### Effort
+Dry-run first; the full row set is shown before any write; apply is gated on Mike's go-call
+(many-row ledger ADD = cross-boundary per TERMINAL.md).
 
-~1 engine-sheet session.
+### Phase 2 — Engine life-event simulation
 
----
+**Goal:** the citizen lives are simulated by the engine, by calibrated random chance at real rates.
 
-## Out of scope
+**PREREQUISITE — fix the Status-case bug first (Step-2 audit catch, latent/masked).**
+`householdFormationEngine.loadCitizens_` filters `citizen.status === 'active'` (lowercase, strict),
+but the SL enum is `"Active"` (827 rows, capitalized). The engine currently loads **~zero** real
+citizens — masked today only because `generateBirths_`/`processMarriages_`/`processDivorces_` are
+stubs that no-op. The moment Phase 2 implements them they'd operate on an empty/wrong set. Fix to
+case-fold (`String(status).toLowerCase() === 'active'`) before building any life-event logic.
+`runYouthEngine` already case-folds — the inconsistency is the tell. File as an ENGINE_REPAIR row.
 
-- **Tier-1 manual review.** ~17 named characters with canon biographies. Mike will
-  pair / single-parent / re-spouse them by hand after Stage 1 completes.
-- **`householdFormationEngine.js generateBirths_()` implementation.** The stub
-  at line 428 generates new births per cycle. After Stages 1-3 land, future
-  births can plug into the existing households cleanly. Separate multi-session
-  build.
-- **MaritalStatus enum case canonicalization.** Currently lowercase
-  (`married` / `single` / etc.) — same pattern as the Status drift S201 closed.
-  Engine consumers either case-fold or pattern-match lowercase, so live state
-  is functional. Worth normalizing in a future pass but not blocking this build.
-  Same writer (`scripts/ingestFemaleCitizensBalance.js:312` was the Status
-  source — likely sets MaritalStatus the same way).
-- **Citizen archetype + traits backfill for new youth.** Existing trait engines
-  fill these on triggers; new youth land with empty trait fields. Engine fills
-  over subsequent cycles.
-- **SchoolQuality + Career fields for youth.** Age-appropriate engines populate
-  these — youth at age 5-12 don't have `CareerStage` or `Income`; those land
-  via `runEducationEngine` + `runCareerEngine` when they hit the right age band.
+All three life-event functions are confirmed **bare stubs** (`// TODO`). Both `runHouseholdEngine_`
+and `processHouseholdFormation_` ARE wired into the cycle (Phase 5, godWorldEngine2 L277/290 +
+cycle-phases L1595/1608) — they fire every cycle and no-op on births/marriages/divorces.
 
----
+- **Births** — implement `householdFormationEngine.generateBirths_()` (currently a stub). Eligible
+  tracked adults (age, household, marital signal) roll a per-cycle birth chance calibrated to real
+  Oakland fertility. A birth creates a tracked Tier-4 infant attached to the household (invariant
+  holds — the parent is the tracked adult). Off-sample births are NOT created (they're implicit).
+- **Marriage / partnership transitions** — tracked citizens roll marital-status transitions
+  (single→married, married→divorced/widowed) at real rates; this updates the demographic flag.
+  Forming a *tracked* couple (both spouses tracked) happens only when chance links two compatible
+  tracked citizens OR via publication — rare by design.
+- **Aging** — youth age up each cycle; education bands advance; the seed cohort matures so teens
+  exist within a few cycles without a representative bulk-add.
 
-## Open questions for build session
+Real-rate anchors (census-class, refine in Step 2):
 
-1. **Last-name pick rule** when partners have different surnames. Options:
-   alphabetical-first / lower-POPID-keeps / random-by-hash. Pick at build time.
-2. **First-name pool for 0-17 youth.** Need an age-appropriate name pool
-   (different from `generateGenericCitizens.js`'s adult pool). Generate via
-   the same diversity-conscious pattern as S184 (multi-origin, gender-balanced,
-   no Tier-3 real-public-figure names).
-3. **Cross-neighborhood pairing handling.** What % is acceptable before
-   bucket logic is reconsidered? S184 found ~5% inevitable cross-bucket
-   distribution; Stage 1 is similar.
-4. **Adoption / step-parent paths.** Skip for v1 — every youth gets two
-   biological parents in their household. Future complexity.
-5. **NumChildren reconcile order.** Stage 2 runs after Stage 3, but during
-   Stage 3 dry-run we'd want to know existing claims. Resolve by: Stage 3
-   reads NumChildren as hint (option b), Stage 2 reconciles after.
+| Attribute | Real Oakland (~) | Engine target |
+|---|---|---|
+| Under 18 | ~21% of general pop | functional seed, then organic growth (tracked set skews adult) |
+| Now-married (total pop) | ~32–38% | hold tracked flag distribution near this band |
+| Annual birth rate | ~12 / 1,000 | scale to per-cycle, per-eligible-adult chance |
 
----
+This is the largest build — its own session(s). Each sub-engine is a separate guarded change with
+caller-graph + dry-run discipline.
 
-## Pre-build checklist
+### Phase 3 — Publication ingestion + invariant enforcement
 
-Before starting the build session, verify these still hold:
+**Goal:** wire the canon-driven family materialization (model point 4) + enforce the invariant
+(point 6).
 
-- [ ] Stage 0 — Re-audit MaritalStatus + HouseholdId post-C94 (engine cycle may
-  shift values via cohort-C processing — verify no regression from the S201 numbers above)
-- [ ] Stage 0 — Confirm `SpouseId` field absence on Sim_Ledger schema (47 cols
-  A-AU per [[engine/LEDGER_AUDIT]] — no SpouseId currently)
-- [ ] Stage 0 — Confirm Tier-1 list: 21 T1 citizens per S199 audit. Each gets
-  a single-row review for canonical pair/spouse/single status
-- [ ] Stage 0 — Reach decision on the 5 open questions above
-- [ ] Plan clasp-push window: Stage 1 + Stage 3 are local/service-account writes;
-  no Apps Script changes expected. Stage 2 NumChildren reconcile may touch
-  every parent row — verify cohort-C alignment holds (post-C94 readback)
+- **VERIFY FIRST (no guessing):** what does the current post-publish "new citizens" ingestion do
+  today? Does it set HouseholdId / ParentIds / ChildrenIds and attach the named family member to
+  the host citizen's household, or just append a bare row? Step 2 audit reads the ingestion path
+  (`mediaRoomIntake.js` / advancement intake / post-publish) and reports actual behavior.
+- **Wire household attachment** if absent: a named family member ingested as Tier-4 joins the
+  named citizen's household, inherits surname/neighborhood, sets the relation backlink.
+- **Enforce the invariant** in validation (pre-flight / a guard): reject/flag any tracked child
+  (age < 18) whose household has no tracked adult.
 
 ---
 
-## Why this is a separate session
+## What the Step-2 audit must answer
 
-- ~3 scripts × ~300 LOC each = ~900 LOC of new code
-- ~300+ destructive Sim_Ledger writes (HouseholdId + Last + ParentIds + new rows)
-- Cascading-effects audit needed for each stage
-- Verification gates need to run AFTER Mike fires C94 cycle (cohort-C processing
-  may shift ledger state in ways that affect the pairing distribution)
-- Tier-1 manual review by Mike is interleaved between stages
+Before this plan is trusted, the ledger + engine audit (this session, Step 2) must establish:
 
-Estimated total: 2-3 engine-sheet sessions + 1 Mike-review session for Tier-1.
+1. **Family-column reality** — completeness + value shapes for HouseholdId, MaritalStatus,
+   NumChildren, ParentIds, ChildrenIds (formats: JSON arrays? POPID lists? counts?). How many
+   empty, how many malformed.
+2. **Engine expectations** — caller-graph every engine consumer of those columns
+   (`householdFormationEngine`, `runYouthEngine`, `generationalWealthEngine`,
+   `migrationTrackingEngine`, `seedRelationBondsv1`, education/career engines). What format each
+   reads, what each writes, what invariants each assumes. Specifically: does anything read the
+   "household members share a neighborhood" or "child has a parent" invariant?
+3. **Youth-engine readiness** — what exactly `runYouthEngine.js` looks for (age band, fields) so
+   the seed produces rows it will actually process.
+4. **Ingestion behavior** — what post-publish new-citizen ingestion does with family fields today.
+5. **Seed-spec validation** — confirm every Phase-1 field value against the live schema + engine
+   reads; finalize the acceptance gates.
+
+### Step-2 audit findings (S243 — answered)
+
+1. **Family-column reality.** HouseholdId 62% (`HH-NNNN-NNN` + 1 `HH-KEANE`), MaritalStatus 88.9%,
+   NumChildren 98.1%, ParentIds/ChildrenIds 69.6%/69.5% (JSON arrays of POPID strings; 594/592 are
+   `[]`). **Only 4 citizens have tracked children** — the Corliss + Dillon Tier-1 canonical families
+   (POP-00005/00594→00595/00596; POP-00018/00742→00743). **543 of 547** adults with NumChildren>0
+   have zero tracked children → off-sample, exactly as the model predicts. Confirmed.
+2. **Engine expectations:**
+   - `runYouthEngine.getNamedYouth_` — reads SL via `ctx.ledger`; youth = age **5–22** (BirthYear-
+     derived), Status≠deceased; reads POPID/First/Last/BirthYear/Neighborhood. Ignores HouseholdId.
+   - `householdFormationEngine.loadCitizens_` — reads SL family cols (ParentIds/ChildrenIds JSON-
+     parsed). **Status-case bug** (see Phase 2 prereq). `loadHouseholds_` reads `Household_Ledger`.
+   - `generationalWealthEngine` — reads ParentIds (inheritance) + HouseholdId (household-wealth agg).
+   - **No engine enforces "household members share a neighborhood"** — co-location is cosmetic.
+3. **Youth-engine readiness** — seed rows with BirthYear→age 5–17 + Status=Active are processed
+   automatically next cycle. 0–4 inert.
+4. **Backing sheets** — `Household_Ledger` **529 populated rows** (Members JSON, HeadOfHousehold,
+   HouseholdType, income); parallel to SL → **dual-write required** (see Phase 1). `Family_Relationships`
+   = 2 vestigial malformed rows, effectively dead.
+5. **Ingestion behavior (Phase 3)** — still to verify at Phase-3 scoping (post-publish new-citizen
+   path); not blocking the seed.
+
+**Net plan revisions from the audit:** (a) dual-write SL + Household_Ledger.Members; (b) ParentIds
+empty for seed; (c) age-weight 5–17; (d) Phase-2 Status-case-bug prerequisite; (e) Family_Relationships
+out of scope for seed. All folded into the sections above. The plan is now grounded in live state.
+
+---
+
+## Out of scope (unchanged intent)
+
+- Tier-1 manual review of named-character family (Mike, by hand).
+- Adoption / step-parent modeling (engine v2).
+- MaritalStatus enum case canonicalization (functional lowercase; future pass).
+- Trait/career/school backfill for new youth (engines fill on triggers).
 
 ---
 
 ## Changelog
 
-- 2026-05-04 (S201, engine-sheet) — Initial draft. Triggered by Mike's
-  question on youth count; investigation surfaced household-pairing as the
-  prerequisite. Three-stage plan locked. Last-name policy + age-range pairing
-  + Tier-1 bypass per Mike's S201 directive.
+- 2026-05-04 (S201, engine-sheet) — Initial draft. Three-stage backfill (pair-married → reconcile
+  NumChildren → ingest 120 youth). Age-range pairing + Tier-1 bypass + shared-surname policy.
+- 2026-05-29 (S243, engine-sheet, Mike-direct) — **Full rewrite.** Premise corrected: tracked
+  citizens are a representative SAMPLE of ~375,985, not the population. Backfill pairing
+  superseded (`pairMarriedCitizens.js` built then shelved). New model: off-sample families,
+  publication-driven materialization, engine-simulated life events at real rates, functional
+  youth seed, and the tracked-child-needs-tracked-adult invariant. Build resequenced to
+  seed → engine simulation → publication ingestion. Step-2 ledger+engine audit pending before build.

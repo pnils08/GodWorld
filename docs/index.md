@@ -108,7 +108,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 - **[[engine/LEDGER_AUDIT]]** — Simulation_Ledger integrity audit. CLEAN since S68. *(reference, citizens, active)*
 - **[[engine/LEDGER_HEAT_MAP]]** — sheet health, bloat risk, cleanup priorities. *(reference, infrastructure, active)*
 - **[[engine/LEDGER_REPAIR]]** — S94 ledger recovery record. RECOVERY COMPLETE. *(reference, citizens, archived)*
-- **[[engine/LEDGER_REPAIR_HOUSEHOLDS]]** — household pairing + youth population build plan (S201 draft, parked for dedicated session). Pointed to by ENGINE_REPAIR Row 20. *(plan, engine, citizens, ledger, active)*
+- **[[engine/LEDGER_REPAIR_HOUSEHOLDS]]** — household + family simulation plan. Representative Sample model (rewritten S243): tracked citizens are a ~858-of-375,985 sample; families materialize via publication; engine simulates life events at real rates; functional youth seed. Supersedes the S201 backfill-pairing draft. Pointed to by ENGINE_REPAIR Row 20. *(plan, engine, citizens, ledger, family, active)*
 - **[[engine/DOCUMENTATION_LEDGER]]** — older registry of active docs (predates this index). Will fold in over time. *(reference, architecture, active)*
 
 ---

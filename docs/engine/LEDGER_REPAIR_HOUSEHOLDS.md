@@ -157,6 +157,16 @@ Dry-run first; the full row set is shown before any write; apply is gated on Mik
 
 **Goal:** the citizen lives are simulated by the engine, by calibrated random chance at real rates.
 
+**S243 DISCOVERY — DO NOT build the household-engine stubs. The life-event engine ALREADY EXISTS
+and is wired every cycle (`generationalEventsEngine.runGenerationalEngine_`) — but it fires
+near-zero milestones (SL LifeHistory column: 0 weddings/births/promotions/graduations,
+1 death, all-time). See ENGINE_REPAIR Row 23 for the full diagnosis + ruled-out causes. Phase 2
+is therefore: (a) `/diagnose` why `chance_` near-never clears in the working engine and fix it
+[the real work — citizen lives are frozen], (b) retire the dead duplicate `householdFormationEngine`,
+(c) calibrate rates + decide the wedding-gate / column-sync design questions. The
+`generateBirths_`/`processMarriages_`/`processDivorces_` stubs below are dead duplicates to
+retire, NOT to implement.**
+
 **PREREQUISITE — fix the Status-case bug first (Step-2 audit catch, latent/masked).**
 `householdFormationEngine.loadCitizens_` filters `citizen.status === 'active'` (lowercase, strict),
 but the SL enum is `"Active"` (827 rows, capitalized). The engine currently loads **~zero** real

@@ -671,6 +671,79 @@ function checkEngineLanguage(editionText) {
   return issues;
 }
 
+// ─── ARTICLE TABLE Placement Consistency (S244 ES-1, G-W62) ──────────────
+//
+// The ARTICLE TABLE is the canonical machine-readable signal for what prints
+// in each section — DJ's photo bundler, post-publish ingest, and the capability
+// reviewer all read it. At C95 the table reflected the sift slate, not the
+// compile-time layout reorder: it claimed OARI was the FRONT PAGE lede while the
+// prose actually printed Okoro on the front page and OARI under CIVIC. Because
+// bindCanonicalHeadlines binds positionally, the disagreement is silent — the
+// rendered FRONT PAGE shows the OARI headline over the Okoro body.
+//
+// The forward fix is compile-side (regenerate the table from final placement,
+// RB-2). This is the fail-loud guard: cross-check every canonical table row
+// against where its headline physically prints (the `### ` lines per section).
+// Only runs on canonical-shape editions — legacy vintages have no table contract.
+function checkArticleTablePlacement(editionPath) {
+  const issues = [];
+  const editionParser = require('/root/GodWorld/lib/editionParser');
+
+  let parsed;
+  try {
+    parsed = editionParser.parseEdition(editionPath);
+  } catch (err) {
+    issues.push({
+      severity: CRITICAL,
+      check: 'ARTICLE TABLE Placement',
+      detail: `Parser threw binding the ARTICLE TABLE: ${err.message}`,
+      fix: 'Edition violates the canonical ARTICLE TABLE contract (ADR-0006). Fix compile output before proceeding.'
+    });
+    return issues;
+  }
+
+  const at = parsed.articleTable;
+  if (!at || !at.present || !at.canonicalShape) return issues; // no contract on legacy editions
+
+  const norm = (s) => String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+
+  // Where each printed ### headline physically lives (normalized section id).
+  const headlineToSection = {};
+  for (const sec of parsed.sections) {
+    if (sec.beat === 'meta') continue;
+    const key = editionParser.normalizeSectionId(sec.name);
+    const hls = (sec.text.match(/^###\s+(.+)$/gm) || []).map((h) => norm(h.replace(/^###\s+/, '')));
+    for (const h of hls) headlineToSection[h] = key;
+  }
+
+  for (const row of at.rows) {
+    const claimed = editionParser.normalizeSectionId(row.section);
+    // Letters carry summary tags, not ### headlines — same carve-out as the binder.
+    if (claimed === 'LETTERS' || claimed === 'LETTERS TO THE EDITOR') continue;
+    const h = norm(row.headline);
+    if (!h) continue;
+
+    const printedIn = headlineToSection[h];
+    if (printedIn === undefined) {
+      issues.push({
+        severity: CRITICAL,
+        check: 'ARTICLE TABLE Placement',
+        detail: `ARTICLE TABLE lists "${row.headline}" under ${row.section}, but that headline prints as no ### headline anywhere in the edition`,
+        fix: 'Regenerate ARTICLE TABLE from final compile placement (G-W62) — the table reflects the sift slate, not the printed prose.'
+      });
+    } else if (printedIn !== claimed) {
+      issues.push({
+        severity: CRITICAL,
+        check: 'ARTICLE TABLE Placement',
+        detail: `ARTICLE TABLE assigns "${row.headline}" to ${row.section}, but it prints under ${printedIn}`,
+        fix: 'Regenerate ARTICLE TABLE from final compile placement (G-W62). bindCanonicalHeadlines binds positionally, so this disagreement silently mislabels the rendered headline.'
+      });
+    }
+  }
+
+  return issues;
+}
+
 // ─── Player First Name Check (the Edition 87 gap) ──────────────
 
 function checkPlayerFirstNames(editionText, canon, knownOfficialNames) {
@@ -1115,6 +1188,11 @@ Exit codes:
   const engineIssues = checkEngineLanguage(editionText);
   allIssues.push(...engineIssues);
   console.log(`  [${engineIssues.length === 0 ? '✓' : '!'}] Engine language: ${engineIssues.length} issues`);
+
+  // 7b. ARTICLE TABLE placement consistency (G-W62) — static, uses the parser.
+  const placementIssues = checkArticleTablePlacement(editionPath);
+  allIssues.push(...placementIssues);
+  console.log(`  [${placementIssues.length === 0 ? '✓' : '!'}] ARTICLE TABLE placement: ${placementIssues.length} issues`);
 
   // Build cross-domain exclusion maps to prevent false positives on shared last names
   // officialFirstsByLast: { "ramos": ["Keisha"], "ellis": ["Simone"], ... }

@@ -123,9 +123,21 @@ function validateSpec(spec, idx) {
   if (missing.length > 0) {
     return { valid: false, reason: 'spec ' + idx + ' missing fields: ' + missing.join(', ') };
   }
+  // Slug convention (S244 ES-1, G-PR-NEW7). The validator is the canonical
+  // filename anchor (lowercase_underscore — underscores are filesystem-safer
+  // than hyphens for some shell tools). DJ IDENTITY/SKILL historically emitted
+  // kebab-case, which failed the whole batch on a delimiter mismatch (~48K
+  // token waste per the C95 gap log). Rather than reject, normalize kebab→
+  // underscore in place so the spec passes and every downstream filename
+  // (<slug>.png / .meta.json / outDir) uses the canonical underscore form.
+  // RB reconciles the DJ docs to emit underscore directly — this is the
+  // belt-and-suspenders ES half.
+  if (typeof spec.slug === 'string' && spec.slug.indexOf('-') !== -1) {
+    spec.slug = spec.slug.replace(/-/g, '_');
+  }
   var slug = spec.slug;
   if (!/^[a-z0-9_]+$/.test(slug)) {
-    return { valid: false, reason: 'spec ' + idx + ' slug "' + slug + '" not lowercase_underscore' };
+    return { valid: false, reason: 'spec ' + idx + ' slug "' + slug + '" not lowercase_underscore (after kebab→underscore normalization)' };
   }
   var wc = spec.image_prompt.split(/\s+/).filter(Boolean).length;
   if (wc < 100 || wc > 220) {

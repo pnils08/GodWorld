@@ -109,6 +109,21 @@ pointers:
 - **Verify:** synthetic over-threshold live file → nudge fires; SESSION_HISTORY.md status resolved + pointer present.
 - **Status:** [ ] not started
 
+### Task 6: Unified-close write-ownership protocol (research-build)
+
+Surfaced live S243: two terminals soft-closing concurrently both tried to write `SESSION_CONTEXT.md`; the second writer lost the edit race repeatedly (the G-SE1 cross-terminal-contention hazard). The span model (D2 — span shared across terminals) needs a write-ownership rule so concurrent STATUS paragraphs don't collide.
+
+- **Files:**
+  - `.claude/skills/session-end/SKILL.md` — add §Unified Close.
+  - `.claude/terminals/{research-build,engine-sheet,media,civic}/TERMINAL.md` §Session Close — pointer to the protocol.
+  - ADR-0009 §Unified close — record the rule.
+- **Steps:**
+  1. Define the protocol: during a unified close (≥2 terminals closing the same span concurrently), **one terminal owns the `SESSION_CONTEXT.md` write**. Non-owner terminals hand their one-line STATUS to the owner (via chat to Mike, or a per-terminal STATUS stub file the owner splices) rather than editing the live file directly. The owner writes all STATUS paragraphs + runs `writeShippedBlock` once + commits the close. Then Mike gives the word for the single push.
+  2. Owner-selection rule: default owner = the terminal that runs the hard close (or, for an all-soft unified close, the last terminal to finish work). Simple, deterministic, no negotiation.
+  3. Alternative considered (note in ADR): a file lock / sequential-write signal — rejected as heavier than the work warrants; hand-the-STATUS-to-one-owner is sufficient at two-terminal scale.
+- **Verify:** session-end SKILL §Unified Close present; a concurrent close test (or the next real one) lands both STATUS paragraphs with zero edit-race retries.
+- **Status:** [ ] not started
+
 ---
 
 ## Open questions
@@ -120,3 +135,4 @@ pointers:
 ## Changelog
 
 - 2026-05-29 — Initial draft (S243, research-build). Extracted from [[2026-05-29-c95-gap-log-triage]] §RB-6 per Mike's S243 directive to file it as its own plan. Four prior open questions resolved as decisions D1–D4 (defaults, Mike-overridable). First of a three-part log-system redesign (ROLLOUT + JOURNAL siblings to follow). ROLLOUT pointer row governance.26.
+- 2026-05-29 — Added Task 6 (unified-close write-ownership protocol) after the hazard surfaced live during the S243 unified close: two terminals raced the `SESSION_CONTEXT.md` write, second writer lost the edit race twice. The span model needs a single-writer rule per close window — Mike approved adding it here (S243).

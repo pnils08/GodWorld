@@ -234,7 +234,7 @@ When this terminal discovers something that needs design/research:
 
 - **Engine version:** v3.3
 - **Cycle:** 94 (ran ~2026-05-09; E94 PUBLISHED + S94 supplemental `let_walks_reset` PUBLISHED per SESSION_CONTEXT line 5).
-- **Citizens:** 858 in Simulation_Ledger (S234 audit: extant=858 / POPID range POP-00001 → POP-00973 / 115 gaps). Growth since S185: +21 net via S229 backfills (POP-00952..00973 cohort from canon.3 T9 batch — 14 from Generic_Citizens + 2 from E82/E86 explicit canon markers + 2 squatter alignments at POP-00952/00953 + 4 followup squatter alignments POP-00954..00957). See `docs/engine/LEDGER_AUDIT.md` for tier/status breakdown.
+- **Citizens:** 903 in Simulation_Ledger (S243: extant=903 / POPID range POP-00001 → POP-01018 / 115 gaps). Growth: S234=858; +45 S243 engine.5 Phase 1 youth seed (POP-00974..01018, `scripts/seedYouthBalance.js`, Tier-4 student, dual-written to Household_Ledger Members; under-18 cohort 3→48 / 5.3%). Prior +21 net via S229 canon.3 backfills (POP-00952..00973). See `docs/engine/LEDGER_AUDIT.md` for tier/status breakdown; engine.5 model + remaining phases in `docs/engine/LEDGER_REPAIR_HOUSEHOLDS.md`.
 - **Columns:** 47 (A-AU). Past Z: Income=col26, EducationLevel=col31, CareerStage=col33, Gender=col47 (AU).
 - **Pipeline:** v2 (S134) — 4 terminals (post-S211), 9 reporters, bounded traits.
 - **Feedback loop (S137b):** 3 intake channels operational — coverage ratings, sports feed (6 texture columns), civic voice sentiment. Initiative ImplementationPhase → neighborhood effects. Approval ratings dynamic. Citizen life events feel the loop.

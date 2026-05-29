@@ -76,6 +76,36 @@ Oaklanders** (≈1 tracked citizen per 438 people). They are the voices for the 
 
 ---
 
+## Current state & multi-session roadmap (S243)
+
+Self-contained handoff so a fresh session executes without reconstructing tonight's work.
+
+| Phase | State | What's left |
+|---|---|---|
+| **1 — youth seed** | ✅ **DONE + verified S243** | 45 youth live (POP-00974..01018), 858→903, under-18 3→48. `scripts/seedYouthBalance.js`. Nothing left. |
+| **2 — life-event simulation** | 🔬 **diagnosed + cornered, NOT fixed** | The engine exists (`generationalEventsEngine`) but fires zero life-events. Execute the kill-shot sequence below. |
+| **3 — publication materialization** | ⏭️ not started | Verify post-publish new-citizen ingestion; wire household attachment + invariant. Scope when Phase 2 lands. |
+
+**Phase 2 — what's PROVEN (don't re-derive):**
+- Logic is healthy — `/tmp/trace_generational.js` replayed the exact checks against 770 real citizens × 95 cycles → 81 weddings / 12 births / 119 promotions / 95 retirements / 23 graduations.
+- RNG is healthy — `/tmp/rng_proof.js`: live `seededRng_` profiles statistically uniform (0.45% < 0.004, 5.2% < 0.05). The `state*1103515245 > 2^53` overflow smell does NOT degrade the distribution. (Tidy-up candidate, not the bug.)
+- All 6 milestone checks gate on `&& birthYear` (`phase04-events/generationalEventsEngine.js` L281/292/306/318/330/342). Non-gated `checkHealthEvent_` DOES fire (Health/Recovery tags exist; life-milestones don't).
+- **Leading hypothesis:** at runtime `birthYear` (or a shared column index) reads falsy from `ctx.ledger.rows`, so every gated check is skipped before the dice. Reads fine from the raw sheet → why the harness works and the live engine doesn't. Full proof: ENGINE_REPAIR Row 23.
+
+### Phase 2 execution roadmap — NEXT SESSION (fresh, focused; deploy + cycle gated)
+
+**Acceptance criteria:** (1) one fired cycle produces > 0 weddings/births in the SL `LifeHistory` column; (2) `generationalEventsEngine` fix deployed + smoke-tested; (3) dead `householdFormationEngine` retired; (4) determinism preserved (no `Math.random`, `ctx.rng` only).
+
+- **Task 2a — Instrument (read-only, no behavior change).** In `phase04-events/generationalEventsEngine.js runGenerationalEngine_`, after the loop, log to a debug sink (Engine_Errors INFO row or a temp tab): `iBirthYear`, count of citizens passing the `birthYear` gate, count of `chance_` clears per type. **Verify:** pre-commit hook passes (no Math.random/direct-write). **Deploy-gated (Mike go).**
+- **Task 2b — Deploy + fire one cycle.** `clasp push` (Mike go) → Mike fires C96 → read the debug sink via service account. **Verify:** the instrumentation reveals whether `iBirthYear` is −1 / `birthYear` falsy / gate count 0.
+- **Task 2c — Fix the pinpointed cause.** Almost certainly small (column-index resolution in `ctx.ledger`, or the `&& birthYear` gate). Apply, re-deploy, fire a cycle. **Verify:** SL `LifeHistory` column gains `[Wedding]`/`[Birth]` tags; counts ≈ harness rates.
+- **Task 2d — Retire the dead duplicate.** `householdFormationEngine` (Status-case bug, Row 22) — decide with Mike: fix-and-keep (resurrects structural formation/income/stress) vs retire (delete the birth/marriage/divorce stubs + the engine if its unique structural work isn't wanted). **Blast-radius decision — Mike's call (which engine owns households).**
+- **Task 2e — Calibrate + design calls.** Once alive: tune rates to real Oakland; decide the wedding-gate on births + whether milestones sync to NumChildren/MaritalStatus columns.
+
+**Out of scope for the kill-shot:** building the `householdFormationEngine` stubs (they're dead duplicates — see ENGINE_REPAIR Row 20/23).
+
+---
+
 ## Build sequence
 
 ```
@@ -282,3 +312,9 @@ out of scope for seed. All folded into the sections above. The plan is now groun
   publication-driven materialization, engine-simulated life events at real rates, functional
   youth seed, and the tracked-child-needs-tracked-adult invariant. Build resequenced to
   seed → engine simulation → publication ingestion. Step-2 ledger+engine audit pending before build.
+- 2026-05-29 (S243, engine-sheet) — **Phase 1 shipped + Phase 2 diagnosed in one session.** Phase 1
+  youth seed live (45 youth, verified). Phase 2 cornered: trace harness proved logic healthy + RNG
+  uniform → freeze is live execution (birthYear-gate hypothesis). Consolidated into this one plan
+  (§Current state & multi-session roadmap) as the self-contained handoff. NO code/deploy this
+  session by design — Phase 2 kill-shot (instrument → deploy → fire cycle → fix) is next session's
+  focused work. Full diagnosis: ENGINE_REPAIR Row 23.

@@ -11,6 +11,7 @@ sources:
   - "[[../adr/0004-skill-bag-naming-principle]] — civic + media are generator terminals; gap logs are the evaluation pass"
 pointers:
   - "[[TEMPLATE]] — plan template (sibling)"
+  - "[[GAP_LOG_TRIAGE_PLAYBOOK]] — project-level method: how a cycle's gap logs get triaged into a phased two-track plan (this template is the single-log input to that method)"
   - "[[../engine/ROLLOUT_PLAN]] §How to add work — gap logs reference back from ROLLOUT rows"
   - "[[../index]] — register new gap log MD entry in same commit"
 ---

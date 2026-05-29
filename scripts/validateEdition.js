@@ -724,14 +724,14 @@ function checkArticleTablePlacement(editionPath) {
     if (!h) continue;
 
     const printedIn = headlineToSection[h];
-    if (printedIn === undefined) {
-      issues.push({
-        severity: CRITICAL,
-        check: 'ARTICLE TABLE Placement',
-        detail: `ARTICLE TABLE lists "${row.headline}" under ${row.section}, but that headline prints as no ### headline anywhere in the edition`,
-        fix: 'Regenerate ARTICLE TABLE from final compile placement (G-W62) — the table reflects the sift slate, not the printed prose.'
-      });
-    } else if (printedIn !== claimed) {
+    // Only the SWAP case is an unambiguous placement defect: the headline
+    // appears as a printed ### line, but under a different section than the
+    // table claims (C95 OARI↔Okoro). A headline that matches NO ### line is
+    // NOT flagged — some edition vintages (e.g. C94) carry headlines only in
+    // the ARTICLE TABLE and lead each article with a **bold** summary instead
+    // of a ### line, so "prints nowhere" is the vintage's design, not drift.
+    // Flagging it produced 8 false-positive CRITICALs on C94.
+    if (printedIn !== undefined && printedIn !== claimed) {
       issues.push({
         severity: CRITICAL,
         check: 'ARTICLE TABLE Placement',

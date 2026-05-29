@@ -192,7 +192,7 @@ The originating pain point is operator-backfill projection lag (canon.3 T12/T13)
   - 2 ticks logged with correct timestamps
   - State file present + has all 5 sheets with non-empty rowHashes
   - Detected edit's ID matches the row I edited
-- **Status:** [ ] GATED S242 — pm2 dry-run smoke (5-min live-process observation, no writes). Precursor to A8; runs in the live-enable window.
+- **Status:** [x] DONE S242 — collapsed into live start: state was already baselined (foreground dry-runs), so the daemon's first live pm2 tick was inherently write-free (rebuilds:0) — that IS the no-writes smoke. Confirmed online under pm2 (id 4).
 
 #### Task A8: Enable live + 1-hour monitor
 
@@ -210,7 +210,10 @@ The originating pain point is operator-backfill projection lag (canon.3 T12/T13)
   - 0 false positives (no rebuilds without a real edit)
   - Test-edit detected + rebuilt within 1 tick
   - MCP lookup returns fresh data post-rebuild
-- **Status:** [ ] GATED S242 — live enable + 1hr monitor. Cross-boundary (continuous wd-* Supermemory writes) → Mike's explicit go-call per engine-sheet authority. Doesn't fit a soft close; own window. **NOTE:** cold-start baselines current state — does NOT retroactively rebuild the already-stale T12/T13 cards. Run `--rebuild-all <projection>` once at enable to clear the existing backlog.
+- **Status:** [x] DONE S242 (Mike go-call) — daemon LIVE under pm2 (id 4, poll 300s). Live success path proven via synthetic state-flip on POP-00036 (zero ledger mutation — card rewritten with identical current data): detected → live dispatch → rebuilds:1, failures:0 (~12s) → MCP `lookup_citizen "Marcus Osei"` returns card with `updatedAt 2026-05-29T01:16:21Z` matching the rebuild timestamp. End-to-end loop confirmed.
+- **TRAILING (2 items, not blocking):**
+  1. **pm2 save for reboot-persistence** (acceptance #1) — DEFERRED: mags-bot/moltbook/spacemolt currently stopped; `pm2 save` now would persist them stopped + break their resurrect. Do once the full intended process set is up (or at a session-end `pm2 restart` + save).
+  2. **Backlog rebuild** — cold-start baselined current state; the already-stale T12/T13 cards were NOT retroactively rebuilt. Run `node scripts/wdCardsDaemon.js --rebuild-all citizens|business|cultural|faith` (or per-projection) once to clear the existing backlog — separate ~966-card burst, do deliberately.
 
 ---
 
@@ -382,4 +385,4 @@ Four trigger options were filed in the original engine.27 row:
 ## Changelog
 
 - 2026-05-26 — Plan written (S238 engine-sheet). Hybrid option (d) recommended; 3-phase rollout. Filed for engine.27 row state transition `needs-info` → `ready`.
-- 2026-05-28 — **Phase A built + verified (S242 engine-sheet).** Tasks A1–A6 DONE; A7–A8 GATED on live-enable window. Measure-twice corrections to the plan's projection map (advisor-reviewed before build): (1) cultural keys on **CUL-ID col B**, not POPID — `--cul` already existed; (2) **Faith_Organizations has no ID column** — key is Organization name, `--name` already existed; A1 became comma-list support (one targeted rebuild vs N per-ID spawns) not new flags; (3) **Chicago_Citizens EXCLUDED** — no `build*Cards.js` consumes it (DISABLED/frozen); (4) **neighborhood + initiative EXCLUDED from Phase A** — engine-cycle-written, belong on Phase B's marker (neighborhood also aggregates 3 sheets, no 1:1 map); (5) hash excludes volatile bookkeeping cols (Sim LastUpdated; Cultural Timestamp+LastSeenCycle) to protect the A8 "0 false positives" criterion. Pattern: feedback_measure-twice-cascading-effects. Files: `scripts/wdCardsDaemon.js` (new), `scripts/buildCitizenCards.js` + `buildBusinessCards.js` + `buildCulturalCards.js` (comma-list flags), `ecosystem.config.js` (stopped pm2 entry). No clasp push (pure Node). One diagnostic test row left in Engine_Errors from the A4 live failure test.
+- 2026-05-28 — **Phase A COMPLETE + LIVE (S242 engine-sheet).** Tasks A1–A8 DONE. Daemon running under pm2 (id 4, poll 300s); live success path proven end-to-end (synthetic flip → rebuild → MCP fresh read). Two trailing non-blockers: pm2-save reboot-persistence (deferred — stopped services) + one-time backlog rebuild for stale T12/T13 cards. Measure-twice corrections to the plan's projection map (advisor-reviewed before build): (1) cultural keys on **CUL-ID col B**, not POPID — `--cul` already existed; (2) **Faith_Organizations has no ID column** — key is Organization name, `--name` already existed; A1 became comma-list support (one targeted rebuild vs N per-ID spawns) not new flags; (3) **Chicago_Citizens EXCLUDED** — no `build*Cards.js` consumes it (DISABLED/frozen); (4) **neighborhood + initiative EXCLUDED from Phase A** — engine-cycle-written, belong on Phase B's marker (neighborhood also aggregates 3 sheets, no 1:1 map); (5) hash excludes volatile bookkeeping cols (Sim LastUpdated; Cultural Timestamp+LastSeenCycle) to protect the A8 "0 false positives" criterion. Pattern: feedback_measure-twice-cascading-effects. Files: `scripts/wdCardsDaemon.js` (new), `scripts/buildCitizenCards.js` + `buildBusinessCards.js` + `buildCulturalCards.js` (comma-list flags), `ecosystem.config.js` (stopped pm2 entry). No clasp push (pure Node). One diagnostic test row left in Engine_Errors from the A4 live failure test.

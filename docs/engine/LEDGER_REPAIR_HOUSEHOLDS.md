@@ -83,7 +83,8 @@ Self-contained handoff so a fresh session executes without reconstructing tonigh
 | Phase | State | What's left |
 |---|---|---|
 | **1 — youth seed** | ✅ **DONE + verified S243** | 45 youth live (POP-00974..01018), 858→903, under-18 3→48. `scripts/seedYouthBalance.js`. Nothing left. |
-| **2 — life-event simulation** | 🔬 **diagnosed + cornered, NOT fixed** | The engine exists (`generationalEventsEngine`) but fires zero life-events. Execute the kill-shot sequence below. |
+| **2a — unfreeze (plumbing)** | ✅ **FIXED + deployed S244** | `simYear` was the ordinal `godWorldYear` (=2), not a calendar year → every age ≈ −2000 → all age-gated events rejected. Fixed `advanceSimulationCalendar.js:208` → `2040 + (godWorldYear-1)`. Events now fire. **This was plumbing, not the mission.** |
+| **2b — events must MEAN something (the real work)** | 🔴 **NOT STARTED — this is the actual engine.5** | Events fire into a VACUUM. See §Phase 2b below. This is where the session should live. |
 | **3 — publication materialization** | ⏭️ not started | Verify post-publish new-citizen ingestion; wire household attachment + invariant. Scope when Phase 2 lands. |
 
 **Phase 2 — what's PROVEN (don't re-derive):**
@@ -103,6 +104,61 @@ Self-contained handoff so a fresh session executes without reconstructing tonigh
 - **Task 2e — Calibrate + design calls.** Once alive: tune rates to real Oakland; decide the wedding-gate on births + whether milestones sync to NumChildren/MaritalStatus columns.
 
 **Out of scope for the kill-shot:** building the `householdFormationEngine` stubs (they're dead duplicates — see ENGINE_REPAIR Row 20/23).
+
+---
+
+## Phase 2b — Events must MEAN something (the vacuum) — THE REAL ENGINE.5
+
+**Captured S244 so it never has to be re-derived.** The S244 simYear fix unfroze the
+event-firing layer, but firing a `[Wedding]` tag into a column is confetti, not a life.
+The engine has the *event* layer; the layer that makes an event *mean* something was
+never built. This is the actual mission ("give the citizens a life") and the whole
+session's worth of design below must NOT evaporate again.
+
+### What "in a vacuum" means — confirmed in code (don't re-investigate)
+
+`applyMilestone_` (generationalEventsEngine L1020) writes ONLY `row[iLife]` (the LifeHistory
+tag) + `row[iLastU]`. It never touches structural state. Consequence:
+
+- **Wedding → binds no one.** `spouseId` is null unless a romantic bond already existed
+  (`checkWedding_` L675), so it's almost always one citizen "marrying" nobody. `MaritalStatus`
+  is never updated by any life event (only `processAdvancementIntake` writes it — the manual
+  intake path, L498).
+- **Birth → creates no child.** `triggerBirthCascade_` pushes a `priority_shift` cascade flag.
+  No new citizen, no household growth, `NumChildren`/`ChildrenIds` untouched.
+- **Promotion → changes no job.** `triggerPromotionCascade_` only tweaks existing bond
+  intensities. `CareerStage`/`TierRole`/`Income` stay exactly as they were.
+- **No accumulation.** Events are independent dice rolls, not a trajectory. A life is
+  married → kids → career arc → retirement → death, connected. The engine has none of that chain.
+- The `householdFormationEngine` birth/marriage/divorce functions that were SUPPOSED to do
+  this connecting work are bare `// TODO` stubs (ENGINE_REPAIR Row 20/23).
+
+### The OPEN DESIGN FORKS — Mike's direction sets these (do NOT assume — pairMarriedCitizens was killed for assuming)
+
+These are the questions that decide whether citizens get lives or another round of make-believe.
+Answered by Mike, then built:
+
+1. **Wedding semantics.** Does a wedding (a) bind two *tracked* citizens into a couple,
+   (b) materialize an off-sample spouse (Tier-5→Tier-4) and attach them, or (c) just flip
+   `MaritalStatus=married` and leave the partner implicit/off-sample? (Model says off-sample
+   spouse is the default; tracked-couple binding is rare/publication-driven.)
+2. **Birth materialization.** When does a birth create a *real* tracked child (Tier-4, in the
+   household, `ParentIds` linked, invariant held) vs. just increment `NumChildren` as an
+   off-sample kid? (Tracked-child creation is the thing that grows households — point 4 of the
+   model — but at what rate, and does it require a tracked co-parent?)
+3. **Accumulation + surfacing.** How much of the life-chain (marriage→kids→career→retirement)
+   does the ENGINE weave by chance, vs. PUBLICATION (a named family member promotes Tier-5→4)?
+   And where does the accumulated life surface so it isn't write-only — the citizen's own
+   structural columns, coverage, world state?
+
+### Build (after the forks are set)
+
+- Make `applyMilestone_` (or a sibling) mutate the citizen's structural state, not just the tag:
+  wedding → `MaritalStatus` + spouse linkage per fork 1; birth → child per fork 2 + `NumChildren`++;
+  promotion → `CareerStage`/`TierRole`/`Income`.
+- Decide the wedding-gate on births (birth currently requires a prior `[Wedding]` tag — L682).
+- Calibrate rates to real Oakland (table in Phase 2 below).
+- Retire the dead `householdFormationEngine` stubs OR resurrect them as the home for this — fork.
 
 ---
 

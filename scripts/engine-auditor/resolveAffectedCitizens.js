@@ -67,15 +67,57 @@ function buildNeighborhoodIndex(ledgerRows) {
   return byNeighborhood;
 }
 
+// G-ER3 (S244 ES-3) — neighborhood-name set from Neighborhood_Map (+ any
+// neighborhood that actually has citizens in the ledger, so a token resolves
+// even if the map lags). Lowercase key → canonical casing.
+function buildNeighborhoodNameSet(ctx, byNeighborhood) {
+  const names = new Map();
+  const nmap = (ctx.snapshot && ctx.snapshot.Neighborhood_Map) || [];
+  for (const row of nmap) {
+    const n = (row.Neighborhood || '').trim();
+    if (n) names.set(n.toLowerCase(), n);
+  }
+  for (const key of Object.keys(byNeighborhood || {})) {
+    if (!names.has(key)) names.set(key, key);
+  }
+  return names;
+}
+
+// G-ER3 — repeating-event patterns surface their signal in evidence tokens
+// (recurringIssue / recurringTokens), not in affectedEntities.neighborhoods.
+// "kono" is the canonical KONO neighborhood but shipped with neighborhoods:[],
+// so the resolver found no residents and the brief read like filler. If any token
+// names a known neighborhood, scope the pattern to it; the citizen resolver below
+// then fills residents. Error-fragment clusters (the "strain" pattern's "cannot
+// read properties undefined" tokens) match nothing and correctly stay city-level.
+function resolveNeighborhoodTokens(pattern, neighborhoodNames) {
+  const ae = pattern.affectedEntities;
+  if (Array.isArray(ae.neighborhoods) && ae.neighborhoods.length > 0) return;
+  const f = (pattern.evidence && pattern.evidence.fields) || {};
+  const tokens = [];
+  if (f.recurringIssue) tokens.push(f.recurringIssue);
+  if (Array.isArray(f.recurringTokens)) tokens.push(...f.recurringTokens);
+  const matched = [];
+  for (const t of tokens) {
+    const canonical = neighborhoodNames.get(String(t || '').trim().toLowerCase());
+    if (canonical && !matched.includes(canonical)) matched.push(canonical);
+  }
+  if (matched.length > 0) ae.neighborhoods = matched;
+}
+
 function enrich(patterns, ctx) {
   const ledger = (ctx.snapshot && ctx.snapshot.Simulation_Ledger) || [];
   if (ledger.length === 0) return;
 
   const byNeighborhood = buildNeighborhoodIndex(ledger);
+  const neighborhoodNames = buildNeighborhoodNameSet(ctx, byNeighborhood);
 
   for (let p = 0; p < patterns.length; p++) {
     const pattern = patterns[p];
     if (!pattern || !pattern.affectedEntities) continue;
+    // G-ER3 — promote neighborhood-named tokens into affectedEntities.neighborhoods
+    // before resolving citizens (no-op when neighborhoods already populated).
+    resolveNeighborhoodTokens(pattern, neighborhoodNames);
     // Preserve any citizens a detector already populated (rare today, but
     // detectors may evolve to attach citizens directly to their patterns).
     const existing = Array.isArray(pattern.affectedEntities.citizens)

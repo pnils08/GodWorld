@@ -1106,7 +1106,20 @@ function applyCityDynamics_(ctx) {
       else if (nhCrime >= 1) { nm.nightlife *= 0.96; nm.sentiment -= 0.03; }
 
       // v3.0: Neighborhood momentum — blend with previous cycle's state
-      var prevNhoodState = prevState.neighborhoodDynamics || {};
+      // S247 FIX (substrate-critical): `prevState` is a var declared at L1254 —
+      // 145 lines AFTER this momentum block, which runs inside the per-neighborhood
+      // loop. var-hoisting made `prevState` undefined here, so the original
+      // `prevState.neighborhoodDynamics` threw "Cannot read properties of undefined
+      // (reading 'neighborhoodDynamics')" on the FIRST neighborhood EVERY cycle
+      // since S136 (89a7057, "34.4 Neighborhood momentum"). safePhaseCall_ caught
+      // the throw (logged to Riley_Digest.Issues) and continued, but applyCityDynamics_
+      // died before setting S.cityDynamics/S.neighborhoodDynamics — leaving the entire
+      // cityDynamics column family (Riley_Digest W–AB incl. CitySentiment) blank and
+      // every downstream consumer on `||0` fallbacks (applyCycleWeight sentiment,
+      // v3NeighborhoodWriter base, godWorldEngine2 illness/employment drift). Read the
+      // source directly (same expr as L1254). finalizeCycleState v1.3 already snapshots
+      // neighborhoodDynamics → previousCycleState, so momentum self-heals from cycle 2.
+      var prevNhoodState = (S.previousCycleState || {}).neighborhoodDynamics || {};
       var prevNhood = prevNhoodState[nhood] || null;
       if (prevNhood) {
         var nhMom = 0.3; // 30% carry-forward from last cycle

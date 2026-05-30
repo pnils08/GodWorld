@@ -259,9 +259,25 @@ function batchUpdateNeighborhoodDemographics_(ss, demographicsMap, cycle) {
     if (!demographicsMap.hasOwnProperty(neighborhood)) continue;
 
     var demo = demographicsMap[neighborhood];
-    var rowData = [];
-    for (var c = 0; c < header.length; c++) {
-      rowData.push('');
+    var existingRowIndex = existingRows[neighborhood.toLowerCase()];
+
+    // S247 CLOBBER FIX: seed rowData from the EXISTING row so columns this writer
+    // does NOT manage carry forward instead of being blanked. The original
+    // `rowData = fill('')` + full-width setValues wiped the 5 education cols
+    // (SchoolQualityIndex/GraduationRate/CollegeReadinessRate/TeacherQuality/Funding,
+    // header idx 7-11) EVERY cycle — which is why addEducationCareerColumns' defaults
+    // never persisted (blanked on the next Phase 3 run) and the cols read blank to
+    // the positive-display readers (buildNeighborhoodCards/MCP wd-* projection,
+    // buildInitiativePackets, buildCivicVoicePackets). General fix: any future column
+    // added to this sheet is now preserved, not silently zeroed by this writer.
+    var rowData;
+    if (existingRowIndex !== undefined) {
+      rowData = values[existingRowIndex].slice();   // copy existing row → preserve unmanaged cols
+      while (rowData.length < header.length) rowData.push('');
+      rowData.length = header.length;               // normalize to header width
+    } else {
+      rowData = [];
+      for (var c = 0; c < header.length; c++) rowData.push('');
     }
 
     rowData[iNeighborhood] = neighborhood;
@@ -272,7 +288,6 @@ function batchUpdateNeighborhoodDemographics_(ss, demographicsMap, cycle) {
     rowData[iSick] = demo.sick || 0;
     rowData[iLastUpdated] = cycle;
 
-    var existingRowIndex = existingRows[neighborhood.toLowerCase()];
     if (existingRowIndex !== undefined) {
       // Store for batch update
       outputRows.push({ rowIndex: existingRowIndex + 1, data: rowData });

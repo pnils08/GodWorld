@@ -403,6 +403,16 @@ function detectCareerMobility_(ctx, cycle, rng) {
 // SCHOOL QUALITY CHECKS
 // ════════════════════════════════════════════════════════════════════════════
 
+// CANON NOTE (S247): SCHOOL_QUALITY_CRISIS (quality<3) and DROPOUT_WAVE (grad<65%)
+// are deprivation-coded hooks. GodWorld Oakland is the ascended/prosperous timeline
+// (median >$90K) — school CRISIS is off-canon by construction. Neighborhood_Demographics
+// education columns are backfilled with prosperity-calibrated values (>=7 quality /
+// >=85 grad via scripts/backfillNeighborhoodEducation.js), so these gates stay DORMANT
+// BY THE DATA, which is correct — do NOT "fix" the dormancy by lowering school values to
+// make crises fire (that re-introduces the S245 invented-struggle fidelity failure). The
+// function still runs as a guard: if a real value ever dropped below the gates it would
+// surface, but in canon it should not. The columns feed POSITIVE display downstream
+// (buildNeighborhoodCards/MCP, buildInitiativePackets, buildCivicVoicePackets).
 function checkSchoolQuality_(ss, ctx, cycle) {
   var sheet = ss.getSheetByName('Neighborhood_Demographics');
   if (!sheet) return { alerts: 0 };

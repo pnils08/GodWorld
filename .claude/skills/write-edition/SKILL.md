@@ -1,8 +1,8 @@
 ---
 name: write-edition
 description: Execute the edition from sift output. Launch reporters, review articles, compile, validate, Mara audit, publish. Mechanical when sift is right.
-version: "2.2"
-updated: 2026-05-11
+version: "2.3"
+updated: 2026-05-30
 tags: [media, active]
 effort: high
 disable-model-invocation: true
@@ -12,6 +12,7 @@ sources:
   - docs/EDITION_PIPELINE.md
   - docs/media/story_evaluation.md
   - docs/media/brief_template.md
+  - docs/media/EDITION_FORMAT_TEMPLATE.txt
 ---
 
 # /write-edition — Edition Execution
@@ -28,10 +29,15 @@ If sift is right, this is mechanical.
 ## Prerequisites
 
 Verify these exist before starting:
-- `output/production_log_c{XX}.md` — from `/sift` (has story picks, assignments, citizen table, brief paths). S225 pipeline.23 consolidated edition-flow log to canonical S195 path; civic-side log at `production_log_city_hall_c{XX}.md` is a separate file.
-- `output/reporters/{reporter}/c{XX}_brief.md` — angle briefs from `/sift` (one per assigned reporter)
+- `output/dispatch_c{XX}.json` — from `/sift` — the mechanical launch spec. Per-article entries carry `{slot, section, briefFile, reporter, desk, headline, outputPath, voiceDirective, spine, threeLayerKeys, initsTouched}`; plus `letters[]`, `quickTakes[]` (QT entries may have `reporter: null`), and header fields (`cycle, edition, generatedAt, slateLockedBy, ...`). This file is the source of truth for Step 1 — launch from it directly.
+- `output/reporters/{reporter}/c{XX}_{SLOT}_brief.md` — per-slot angle briefs from `/sift` (path is in each dispatch entry's `briefFile`; QT briefs live at `output/quick-takes/c{XX}_{SLOT}_brief.md`). **Naming is per-slot, not per-reporter** (G-W50 — the old `c{XX}_brief.md` per-reporter form was skill drift; a reporter with two slots has two briefs).
+- `output/production_log_c{XX}.md` — from `/sift` (story picks, assignments, citizen table). S225 pipeline.23 consolidated edition-flow log to canonical S195 path; civic-side log at `production_log_city_hall_c{XX}.md` is a separate file.
 
-If either is missing, `/sift` didn't complete. Don't proceed.
+If `dispatch_c{XX}.json` is missing, `/sift` didn't complete its slate lock. Don't proceed.
+
+## Step 0: Bootstrap production log if missing (G-W47)
+
+If `output/production_log_c{XX}.md` is absent but `dispatch_c{XX}.json` is present, bootstrap the log from the dispatch header rather than halting — `/sift` produces the dispatch spec even on runs where the consolidated log wasn't written (pipeline.32 unified-path convention). Seed it with cycle/edition/generatedAt + the slate (one line per `articles[]`/`letters[]`/`quickTakes[]` entry: `slot | section | reporter | headline`), then continue. If BOTH are missing, `/sift` didn't run — stop.
 
 ## Rules
 - **Brief-led mode is canonical (S215, closes G-W4).** When a desk agent is launched by `/write-edition`, the agent's job is: read brief + IDENTITY.md, write. The desk SKILL.md boot sequences (LENS + RULES + workspace + voice files) are heavier than the brief-led model needs. The agents have been trained to short-circuit boot under brief-led invocation; this skill's rule overrides desk SKILL.md when there's conflict.
@@ -49,16 +55,26 @@ If either is missing, `/sift` didn't complete. Don't proceed.
 
 Read the production log for assignments. Launch each reporter with direct editorial direction.
 
-**Prompt structure per reporter:**
+**Prompt structure per reporter — fully mechanical from the dispatch entry (G-W51, G-W52).** Every field below is a literal `dispatch.articles[i]` value. **Pass the brief PATH, never paste brief content** — the agent reads its own brief; pasting it doubles tokens and invites the agent to treat recalled-canon excerpts as instructions (defeats the Memory Fence).
 ```
-You are [Reporter Name]. Here is your assignment:
+You are {reporter}. Brief-led mode.
 
-ARTICLE — [headline/topic]
-[Specific direction from the angle brief — who, what, angle, citizens to use]
-
-Read your IDENTITY.md at [path]. Use ONLY citizens named in this assignment.
-Write to [output path]. [word count]. Do NOT spend time reading other files — write.
+ARTICLE — {headline}
+Read your brief at {briefFile}. Read your IDENTITY.md.
+Editorial direction: {voiceDirective}
+Use ONLY citizens named in the brief. Write to {outputPath}.
+Do NOT read other files — write.
 ```
+Launch via the `{desk}` agent (the dispatch entry names it). `{reporter}` + `{briefFile}` + `{outputPath}` come straight off the entry; no lookups.
+
+**Unnamed-reporter QT sub-template (G-W49).** Quick-Take entries in `dispatch.quickTakes[]` may carry `reporter: null` (no beat reporter assigned — the QT is a compile-time short piece). Do NOT invent a reporter name. Launch the `{desk}` agent with:
+```
+You are the {desk} desk. Brief-led mode.
+ARTICLE — {headline} (Quick Take, short)
+Read the brief at {briefFile}. Write a tight short piece to {outputPath}.
+Byline: "By Bay Tribune {Section}" (no individual reporter). Do NOT read other files — write.
+```
+If a QT has no `briefFile` or source material, it is a compile-time drop — see Step 3 QUICK TAKES handling, don't launch a placeholder.
 
 **The E90 lesson:** Agents told what to write produce articles. Agents told to figure it out spend all their tokens reading files and produce nothing.
 
@@ -83,13 +99,22 @@ Beat is editor-judgment per launch unless the dispatch.json names the agent. Whe
 
 **Firebrand boot trim (S215, closes G-W11).** Freelance-firebrand IDENTITY/RULES/SKILL chain is heavier than the brief-led model needs. Under brief-led invocation, the agent self-trims to "read brief + IDENTITY, write." Same trim recommendation as G-W4 — desk and conditional agents alike.
 
-**Output:** Each reporter writes to `output/reporters/{reporter}/articles/c{XX}_{slug}.md` (per-reporter path; see Rules).
+**Output:** Each reporter writes to the `outputPath` named in its dispatch entry (`output/reporters/{reporter}/articles/c{XX}_{SLOT}.md`; QTs to `output/quick-takes/c{XX}_{SLOT}.md`).
 
-**Update production log** with reporter results table (reporter, articles, status).
+**Mandatory dispatch-result table (G-W61).** After all launches complete, write one row per dispatch entry (`articles[]` + `letters[]` + `quickTakes[]` — every slot, no exceptions) to the production log:
 
-## Step 2: Read Every Article
+```
+| Slot | Desk Agent | Dispatch ID | Output Path | File Exists | Words | Status |
+|------|-----------|-------------|-------------|-------------|-------|--------|
+```
 
-Before compiling, Mags reads every article. Not a scan — a read. Check:
+`File Exists` is checked at completion time (`outputPath` present on disk, non-empty). A slot that dispatched but produced no file is **DROPPED** — record it with the reason (e.g., `agent returned empty`, `session-limit kill` — the S231 G-S2 signature: `<total_tokens>0</total_tokens>` + ~500ms duration + session-limit string). Never let a slot vanish silently: C95 lost three culture pieces this way. Step 3 compile reconciles against this table — a slot with `File Exists = no` must appear in compile's dropped-slot report, not just disappear.
+
+## Step 2: Two-Pass Review (G-W63)
+
+**Pass 1 — completeness (mechanical).** Before reading for quality, reconcile coverage against the dispatch spec. Walk every `dispatch.articles[]` + `dispatch.letters[]` + `dispatch.quickTakes[]` slot and the Step 1 dispatch-result table; confirm each slot either (a) produced a file that will be placed in a section, or (b) is an explicit, reason-logged drop. A slot that is neither is a silent loss — recover the file or re-launch it before compiling. No slot leaves Step 2 unaccounted for. This pass is what makes the G-W61 culture-drop class structurally visible instead of discovered at print.
+
+**Pass 2 — quality + framing.** Mags reads every surviving article. Not a scan — a read. Check:
 - Did the agent follow the angle brief?
 - Are citizen names correct? (verify any you're unsure of via MCP)
 - Does the voice match the reporter?
@@ -113,11 +138,24 @@ The edition is story-driven, not section-driven.
 3. Label each with its section tag from sift assignments
 4. If a section has no story this cycle, it doesn't appear
 
-**Canonical format exemplar (S227 — ADR-0006 Contract A):** Use [[../../docs/media/EDITION_FORMAT_TEMPLATE]] as the authoritative format reference. Copy + fill placeholders. The template is the contract. The format snippet below is explanatory (rule definitions); the template carries the canonical literal shape (masthead `===`-frame / `---`-divider sandwich for section labels / `# headline` + optional `**tagline**` + `By Reporter | Bay Tribune Section` + `---` body block / NAMES INDEX strict pipe-format / CITIZEN USAGE LOG `(NEW CANON THIS CYCLE)` sub-format the emit script parses for biz/faith).
+**Canonical format exemplar (S227 — ADR-0006 Contract A):** Use [[../../docs/media/EDITION_FORMAT_TEMPLATE]] as the authoritative format reference. Copy + fill placeholders. The template is the contract. The format snippet below is explanatory (rule definitions); the template carries the canonical literal shape (masthead `===`-frame / `---`-divider sandwich for section labels / `### headline` + optional `**tagline**` + plain `By Reporter | Bay Tribune Section` byline + `---` body block / NAMES INDEX strict pipe-format / CITIZEN USAGE LOG `(NEW CANON THIS CYCLE)` sub-format the emit script parses for biz/faith).
 
 If template + skill text disagree on detail, **template is canonical**. Skill drift gets caught next cycle; template stays the literal artifact reviewers parse against.
 
-**Article body header convention (S227, closes G-W38).** Reporters may emit `# Headline` + `*By {Reporter}*` + `---` separator at the top of their article body file, or write prose-only. Compile (this step) is responsible for canonical headline + byline placement per template — the headline comes from sift's assignment metadata, the byline format is `By {Reporter Name} | Bay Tribune {Section/Bureau}` per template. **Strip any reporter-emitted `# Headline` / byline-line / leading `---` before placing the article in its section block**; emit the canonical headline + byline from sift metadata + template format. This keeps the compiled edition uniform regardless of which desk agents emit headers vs prose-only. Until desk-agent IDENTITY/RULES standardize emit shape, compile is the canonicalization layer.
+**Article body header convention (S227, closes G-W38).** Reporters may emit a headline line + `*By {Reporter}*` + `---` separator at the top of their article body file, or write prose-only. Compile (this step) is responsible for canonical headline + byline placement per template — the headline comes from the dispatch `headline` field, the byline format is `By {Reporter Name} | Bay Tribune {Section/Bureau}`. **Strip any reporter-emitted headline line / byline-line / leading `---` before placing the article in its section block**; emit the canonical headline + byline from dispatch metadata + template format. This keeps the compiled edition uniform regardless of which desk agents emit headers vs prose-only. Until desk-agent IDENTITY/RULES standardize emit shape, compile is the canonicalization layer.
+
+**Parser contract — the three coupled shapes compile MUST emit (S235/S240 regression, closes G-W62 + G-P-NEW1).** `lib/editionParser.js` (hardened in ES-1) is the fixed point; compile emits what it parses. Three things, all three required together — S240's first PDF shipped unusable (taglines-and-bylines rendered as headlines, empty body divs) because the compiled `.txt` violated all three, and the parser's canonical-binding path silently fell back:
+1. **Headlines are `### Headline` (H3), never `# Headline` (H1).** The parser detects a headline only as `^### ` or `^**…**$` — a `# H1` line is invisible to it, so the `**tagline**` underneath gets grabbed as the headline. Emit `### {dispatch.headline}`.
+2. **Bylines are plain `By {Reporter} | Bay Tribune {Section}`, never `**By …**`.** The parser's article filter matches `^By\s+`; a bold byline doesn't match, collapsing the byline-article count and throwing the fail-loud `bylineArticles.length !== rows.length` guard in `bindCanonicalHeadlines`.
+3. **ARTICLE TABLE is the 4-column canonical shape** — header `| Slot | Section | Reporter | Headline |` (extra cols like `Words` tolerated), **every** row's `Slot` a canonical ID matching `^(FP\d+|ED|C\d+|N\d+|S\d+|L\d+|O\d+|B\d+|CH\d+|Q\d+)$`. A bare ordinal (`1`, `2`) fails the pattern and drops the whole table to the legacy silent-skip path. **Regenerate the ARTICLE TABLE from FINAL placement** (the slots that actually shipped, in print order), not from sift metadata — sift order drifts from final placement (G-W62). The `Headline` cell is the binding source of truth; a parsed section with N bylined articles must have exactly N table rows or the parser throws.
+
+**Compile-time `canonicalShape` gate — run it, FAIL LOUD (G-P-NEW1).** After writing the `.txt`, before continuing, gate on the parser's own verdict:
+
+```bash
+node -e "const p=require('./lib/editionParser').parseEdition('editions/cycle_pulse_edition_{XX}.txt'); if(!p.articleTable.canonicalShape){console.error('COMPILE FAIL: ARTICLE TABLE not canonicalShape — check Slot IDs + 4 required columns'); process.exit(1)} console.log('OK canonicalShape=true,', p.articleTable.rows.length, 'slots:', p.articleTable.rows.map(r=>r.slot).join(','))"
+```
+
+If it exits non-zero, the edition will not render — fix the table/headlines/bylines and re-run before any downstream step. This converts the entire S235/S240 silent-breakage class into a loud compile-time error that cannot ship.
 
 **Edition format (rule reference):**
 

@@ -8,7 +8,7 @@ Weather: {plain-language one-liner} | City Mood: {plain-language one-liner}
 FRONT PAGE
 ------------------------------------------------------------
 
-# {Headline of the cycle's best story}
+### {Headline of the cycle's best story}
 
 **{Bold tagline — single paragraph, ~30-50 words, drops the body's frame into the eye in one breath. Optional but conventional for front page and feature pieces.}**
 
@@ -28,7 +28,7 @@ By {Reporter Name} | Bay Tribune {Section or Bureau}
 EDITOR'S DESK
 ------------------------------------------------------------
 
-# {Editor's column headline}
+### {Editor's column headline}
 
 By Margaret Corliss | Editor-in-Chief
 
@@ -42,7 +42,7 @@ By Margaret Corliss | Editor-in-Chief
 CIVIC
 ------------------------------------------------------------
 
-# {Headline of C1}
+### {Headline of C1}
 
 **{Bold tagline if used for this piece — optional.}**
 
@@ -52,7 +52,7 @@ By {Reporter} | Bay Tribune {Section or Bureau}
 
 {C1 body prose.}
 
-# {Headline of C2 — multi-article sections separate articles with blank line + next `#` headline, no internal divider}
+### {Headline of C2 — multi-article sections separate articles with blank line + next `###` headline, no internal divider}
 
 **{Tagline.}**
 
@@ -90,13 +90,13 @@ OPINION
 LETTERS
 ------------------------------------------------------------
 
-# {Letter 1 headline OR `Re: {referenced article}`}
+### {Letter 1 headline OR `Re: {referenced article}`}
 
 {Letter prose, 80-150 words.}
 
 — {Writer Name}, {Neighborhood}
 
-# {Letter 2 headline}
+### {Letter 2 headline}
 
 {Letter prose.}
 

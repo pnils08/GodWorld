@@ -237,6 +237,23 @@ async function authProbe() {
   return r.status;
 }
 
+// S247 (G-P-NEW2 part 2 / BUNDLE-401-COHORT): pure decision for an ambiguous 401.
+// A Supermemory 401 on a write is ambiguous — real auth failure OR rate-limit
+// surfaced as 401 under sustained bulk load (the C93/C95 cohort: 100/448 cards
+// failed 401 while 348 SUCCEEDED with the SAME key in the SAME run → key valid →
+// rate-limit, not auth). writeMemory probes the key against /v3/documents/list and
+// passes the probe status here. Separated from the retry loop so the
+// rate-limit-vs-auth branch is unit-testable without HTTP. Returns the action:
+//   'retry-rate-limit'          probe 200 (key valid) + attempts remain → cooldown-retry
+//   'fail-rate-limit-exhausted' probe 200 but retries exhausted → loud, recoverable by re-run
+//   'fail-auth'                 probe != 200 → real auth failure → fail-fast (S197 concern)
+function classify401Action(probeStatus, attempt, maxRetries) {
+  if (probeStatus === 200) {
+    return attempt < maxRetries ? 'retry-rate-limit' : 'fail-rate-limit-exhausted';
+  }
+  return 'fail-auth';
+}
+
 async function writeMemory(content, citizen, popidIdMap) {
   var meta = {
     title: citizen.first + ' ' + citizen.last,
@@ -259,10 +276,31 @@ async function writeMemory(content, citizen, popidIdMap) {
     if (r.status >= 200 && r.status < 300) {
       return { status: r.status, id: r.body && r.body.id, op: method };
     }
-    // Fail-fast on 401. If a future cycle observes legitimate rate-limit-
-    // as-401 again, surface it via authProbe() retest pattern in caller.
+    // S247: 401 is ambiguous (real auth vs rate-limit-as-401). Probe the key,
+    // then classify (implements the authProbe retest the S197 comment deferred).
+    // A probe error means we cannot confirm key validity → fail-fast (conservative,
+    // preserves the S197 concern that real-401 retries waste 32s/card).
     if (r.status === 401) {
-      throw new Error('HTTP 401 (auth) — refusing to retry. Body: ' +
+      var probeStatus;
+      try {
+        probeStatus = await authProbe();
+      } catch (e) {
+        throw new Error('HTTP 401 on ' + method + ' ' + apiPath + '; authProbe errored (' +
+          e.message + ') — cannot confirm key validity, refusing to retry.');
+      }
+      var action = classify401Action(probeStatus, attempt, WRITE_MAX_RETRIES);
+      if (action === 'retry-rate-limit') {
+        console.log('  [retry] ' + method + ' got 401 but authProbe=200 (rate-limit-as-401); sleeping ' +
+          (WRITE_RETRY_SLEEP_MS / 1000) + 's, attempt ' + (attempt + 2) + '/' + (WRITE_MAX_RETRIES + 1));
+        await smSleep(WRITE_RETRY_SLEEP_MS);
+        continue;
+      }
+      if (action === 'fail-rate-limit-exhausted') {
+        throw new Error('HTTP 401 (rate-limit-as-401, authProbe=200) on ' + method + ' ' + apiPath +
+          ' — exhausted ' + (WRITE_MAX_RETRIES + 1) + ' attempts; re-run after cooldown to recover this card.');
+      }
+      // fail-auth: probe != 200 → real auth failure
+      throw new Error('HTTP 401 (auth, authProbe=' + probeStatus + ') — refusing to retry. Body: ' +
         (typeof r.body === 'string' ? r.body : JSON.stringify(r.body)));
     }
     // Transient retries: 429 (rate limit) + 5xx (server).
@@ -807,7 +845,7 @@ function emitErrorGateDump(stats) {
   return failPath;
 }
 
-module.exports = { emitErrorGateDump: emitErrorGateDump };
+module.exports = { emitErrorGateDump: emitErrorGateDump, classify401Action: classify401Action };
 
 if (require.main === module) {
   main().catch(function(e) { console.error('[FATAL]', e); process.exit(1); });

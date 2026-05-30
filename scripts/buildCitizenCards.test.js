@@ -183,6 +183,42 @@ total++; passed += passing('dump returns string path, not undefined', function (
 });
 
 // -----------------------------------------------------------------
+// Group 4 — classify401Action (S247 ambiguous-401 decision)
+// -----------------------------------------------------------------
+console.log('\nGroup 4 — classify401Action (rate-limit-as-401 vs real auth)');
+
+total++; passed += passing('probe 200 + attempts remain → retry-rate-limit', function () {
+  var mod = freshRequire();
+  assert.strictEqual(mod.classify401Action(200, 0, 3), 'retry-rate-limit');
+  assert.strictEqual(mod.classify401Action(200, 2, 3), 'retry-rate-limit');
+});
+
+total++; passed += passing('probe 200 + retries exhausted → fail-rate-limit-exhausted', function () {
+  var mod = freshRequire();
+  assert.strictEqual(mod.classify401Action(200, 3, 3), 'fail-rate-limit-exhausted');
+  assert.strictEqual(mod.classify401Action(200, 5, 3), 'fail-rate-limit-exhausted');
+});
+
+total++; passed += passing('probe 401 → fail-auth (real auth failure, preserves S197 fail-fast)', function () {
+  var mod = freshRequire();
+  assert.strictEqual(mod.classify401Action(401, 0, 3), 'fail-auth');
+  assert.strictEqual(mod.classify401Action(401, 3, 3), 'fail-auth');
+});
+
+total++; passed += passing('probe non-200/non-401 (e.g. 500) → fail-auth (cannot confirm key valid)', function () {
+  var mod = freshRequire();
+  assert.strictEqual(mod.classify401Action(500, 0, 3), 'fail-auth');
+  assert.strictEqual(mod.classify401Action(0, 1, 3), 'fail-auth');
+});
+
+total++; passed += passing('boundary: last allowed retry attempt vs first exhausted', function () {
+  var mod = freshRequire();
+  // maxRetries=3 → attempts 0,1,2 retry; attempt 3 (the WRITE_MAX_RETRIES-th) exhausts
+  assert.strictEqual(mod.classify401Action(200, 2, 3), 'retry-rate-limit');
+  assert.strictEqual(mod.classify401Action(200, 3, 3), 'fail-rate-limit-exhausted');
+});
+
+// -----------------------------------------------------------------
 // Summary
 // -----------------------------------------------------------------
 console.log('\n[T6] ' + passed + '/' + total + ' assertions passed');

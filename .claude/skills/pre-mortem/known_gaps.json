@@ -1,0 +1,36 @@
+{
+  "_doc": "Function-name-keyed acknowledged sites for /pre-mortem (G-PM5/G-PM6, S246 ES-7). Line numbers drift on every refactor; function names are the stable key. Update THIS FILE with code changes, not skill prose. VERIFY against current state before trusting — a stale 'known gap' teaches the operator to disbelieve the scan (the G-PM1 lesson). Consumed by scripts/preMortemScan.js.",
+  "acknowledgedMathRandom": [
+    {
+      "file": "phase05-citizens/civicInitiativeEngine.js",
+      "function": "manualRunVote",
+      "reason": "manual-vote path, no ctx.rng available outside cycle; off cycle path. S246 CORRECTION: the function is manualRunVote — the SKILL's documented key 'runManualVote_' was stale/wrong (words swapped, no underscore)."
+    },
+    {
+      "file": "phase05-citizens/citizenContextBuilder.js",
+      "function": "getCitizensForQuotes",
+      "reason": "media-room helper, off cycle path (no ctx in scope)"
+    },
+    {
+      "file": "phase05-citizens/generateChicagoCitizensv1.js",
+      "function": "testChicagoCitizenGeneration_",
+      "reason": "test function; file disabled S229, retained for reversibility"
+    }
+  ],
+  "defensiveThrowFiles": [
+    "phase04-events/generationalEventsEngine.js",
+    "phase05-citizens/generateGenericCitizens.js",
+    "utilities/safeRand.js"
+  ],
+  "scanExcludeFiles": [
+    "utilities/v2DeprecationGuide.js"
+  ],
+  "_scanExcludeFiles_reason": "Meta/detector files whose DATA legitimately contains 'Math.random' as patterns-to-detect (V2_DEPRECATED_PATTERNS) or throw-if-invoked guards (v3Random_, zero callers). Not cycle-path usage — exclude from the Math.random scan to avoid false CRITICAL on a deprecation linter's own pattern table.",
+  "acknowledgedNeighborhoodLiterals": [
+    { "file": "phase05-citizens/civicInitiativeEngine.js", "literal": "East Oakland", "reason": "legacy default initiative seed string, non-enforcement path" },
+    { "file": "phase05-citizens/updateCivicApprovalRatings.js", "literal": "East Oakland", "reason": "D5 district bucket for approval aggregation, not ledger writes" },
+    { "file": "phase05-citizens/updateCivicApprovalRatings.js", "literal": "Coliseum", "reason": "D5 district bucket, not a ledger write" },
+    { "file": "phase05-citizens/updateCivicApprovalRatings.js", "literal": "Elmhurst", "reason": "D5 district bucket, not a ledger write" },
+    { "file": "phase06-analysis/economicRippleEngine.js", "literal": "East Oakland", "reason": "East Oakland -> Fruitvale remap normalization helper (valid use)" }
+  ]
+}

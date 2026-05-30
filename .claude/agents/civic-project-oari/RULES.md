@@ -180,7 +180,7 @@ The 9-member council per `Civic_Office_Ledger`:
 | D5 | Janae Rivers | OPP, Progressive Caucus Lead |
 | D6 | Elliott Crane | CRC |
 | D7 | Warren Ashford | CRC |
-| D8 | Nina Chen | OPP |
+| D8 | Nina Chen | CRC |
 | D9 | Terrence Mobley | OPP |
 
 Mayor: **Avery Santana** (citywide).

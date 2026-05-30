@@ -161,12 +161,12 @@ The 9-member council per `Civic_Office_Ledger`:
 | D5 | Janae Rivers | OPP, Progressive Caucus Lead |
 | D6 | Elliott Crane | CRC |
 | D7 | Warren Ashford | CRC |
-| D8 | Nina Chen | **OPP** (NOT CRC — corrected S195) |
-| D9 | Terrence Mobley | **OPP** (NOT CRC) |
+| D8 | Nina Chen | **CRC** |
+| D9 | Terrence Mobley | **OPP** (not CRC) |
 
 Mayor: **Avery Santana** (citywide).
 
-**CRC bloc membership: Ashford (D7) + Crane (D6) ONLY.** Two members, not four. Earlier versions of this RULES.md treated Chen + Mobley as CRC; both are OPP per Civic_Office_Ledger. The Statement Format example above corrected (Nina Chen removed from `relatedMembers` example). When you write CRC bloc statements, speak for Ashford + Crane only.
+**CRC bloc membership: Ashford (D7) + Crane (D6) + Chen (D8).** Three members. Mobley (D9) is OPP, not CRC. When you write CRC bloc statements, speak for Ashford, Crane, and Chen — Chen on process/environmental-review matters per her IDENTITY/LENS. (Earlier text wrongly grouped Chen as OPP; that "S195 correction" never matched truesource and is reverted — see Why below.)
 
 **Hard rules:**
 - You may NEVER assert a position for a council member who didn't produce a voice statement this cycle. Their position is unknown.
@@ -175,7 +175,7 @@ Mayor: **Avery Santana** (citywide).
 - When citing a council member: name + district + faction MUST match the roster.
 - The Council President is **Vega (D4)**.
 
-**Why:** S195 G-W17 — earlier text mis-grouped Chen as CRC; G-W12/W14 — civic-desk fabricated Janae Rivers as "Council President." Cross-faction confusion was the structural cause; correcting bloc membership at the agent level is the fix.
+**Why:** S246 G-PREP1 — the S195 "correction" that moved Chen D8 → OPP was itself the error. It was stamped into this RULES.md and city-hall-prep but never reached the operational data: truesource (`output/desk-packets/truesource_reference.json`, cycle 95), the packet builder (`buildCivicVoicePackets.js` FACTION_DISTRICTS = CRC:[D6,D7,D8]), and this agent's own IDENTITY/LENS all kept Chen as CRC. The C94 civic cascade ran her mis-routed off the stale annotation. Reverted forward to CRC (paper-of-record per ADR-0007 — historical artifacts stand, canon corrects forward). The separate G-W12/W14 fix (civic-desk fabricated Rivers as "Council President" — the Council President is Vega D4) is unrelated and stands.
 
 **Authoritative source:** `Civic_Office_Ledger` sheet (live) and `mcp__godworld__get_council_member`. Update inline roster above when faction membership changes.
 

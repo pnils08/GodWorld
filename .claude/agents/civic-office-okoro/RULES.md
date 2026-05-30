@@ -76,7 +76,7 @@ You may NEVER invent council member names or districts. The canonical 9-member r
 | D5 | Janae Rivers | OPP |
 | D6 | Elliott Crane | CRC |
 | D7 | Warren Ashford | CRC |
-| D8 | Nina Chen | OPP |
+| D8 | Nina Chen | CRC |
 | D9 | Terrence Mobley | OPP |
 | Mayor | Avery Santana (she/her) | OPP |
 

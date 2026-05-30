@@ -4,6 +4,8 @@
 
 Last Updated: 2026-05-29 | Engine: v3.3 | Cycle: 95 | Session: 243 | Day: 160 | Edition: **E94 PUBLISHED + S94 SUPP PUBLISHED + C95 CIVIC CASCADE COMPLETE + C95 /write-edition COMPLETE + C95 PUBLISHED TO DRIVE + C95 /edition-print COMPLETE + C95 /post-publish COMPLETE — CYCLE 95 CANONIZED**
 
+**STATUS (S246 [engine/sheet] — soft close):** C95 gap-log triage **Track B COMPLETE** + deck-clear. 7 engine-sheet work commits this session (`bc3b893` ES-4 vote-passed-terminal stuck-drama exit / `42ce760` ES-3 G-ER9 detectLedgerCompleteness / `0e7320b` ES-8 verifier bucket-sum + validateEdition name-check context / `f70fbbc`+`2a95472` ES-7 preflightInputCheck + preMortemScan scripts / `28a6625` ES-5 trackerOwner dispatch + cascade sentiment / `f798af0` ES-6 world_summary roster visibility + count reconciliation). **Combined 20-commit S246 stack (engine-sheet + research-build RB-1..5) PUSHED → origin/main `f798af0`.** No clasp push (all Node-side; no engine-version bump / smoke-test owed). Discipline through-line: ~dozen phantom-field / stale-name / already-done / over-build catches caught by checking live data before coding; every fix C95-verified or unit-tested; verification honesty held (trackerOwner dispatch flagged C96-pending; 401-recovery deferred for live `--apply`). **4 trailing follow-ups** (need cycle-fire/live run): ES-8 401 authProbe-retry, Neighborhood_Demographics education-col writer (reader exists, no writer → school-quality alerts can't fire), G-BWS3 CitySentiment (phase09-digest emitter), ES-7 neighborhood-literal triage (~10 seed-script candidates). Detail: commit bodies + `docs/plans/2026-05-29-c95-gap-log-triage.md` ES-* status. See Shipped block.
+
 **STATUS (S245 [research/build] — edition⇄engine data-fidelity seam BUILT, uncommitted):** Diagnosed + fixed the defect under C95-triage T1, which Mike rejected as a wording-rule problem (*"the rules already exist"*). Real root cause: the engine's 16-neighborhood city-state was stripped before the voice/reporter saw it, so editions invented struggle the engine never reported — C95 West Oakland "displacement" front page vs a literally-empty `DisplacementPressure` field (median income $81K); Beverly Hayes (POP-00772, Community Director, Stab-Fund money cleared C90) flattened into a victim; A's dynasty + Baylight ballpark (engine's actual main characters) buried. **Built:** `lib/neighborhoodSlice.js` (shared bounded slicer) + `scripts/engine-auditor/generateBaselineBriefs.js` v1.2 (briefs carry residents + metrics + deltas + displacement/income) + `scripts/buildVoiceWorkspaces.js` (voices on the same slicer; **KILLED the hardcoded `neighborhoodEconomies:'struggling'` filter** that cherry-picked weak neighborhoods for OPP). Verified both paths on live C95. **Sift now USES the new fields (S245):** `/sift` SKILL Step 4 (enrichment pulls `neighborhoodState`/`neighborhoodResidents`) + Step 7 (`## NEIGHBORHOOD STATE` block + fidelity guard + anti-pattern #9); `docs/media/brief_template_v2.md` + `..._exemplar.md` updated to match (**run `/reload-skills`**). **UNCOMMITTED — engine-sheet/pipeline lane; coordinate push, do NOT push over engine-sheet's stack.** REMAINING: remove dead `formatNeighborhoodEconomies` in buildVoiceWorkspaces; real test = next cycle's edition stops inventing. Triage plan updated (RB-1 SUPERSEDED + S245 Changelog); full detail in memory `project_edition-engine-fidelity-seam.md`.
 
 **STATUS (S245 [engine/sheet] — soft close, UNIFIED/shared with research-build S245; 11 commits `6635f61`..`ef3dab8`, no clasp push; push PARKED — coordinate over research-build's uncommitted fidelity-seam, do NOT push over their lane):** C95 gap-log triage Track B (engine-sheet substrate), 3 phases. **ES-1 print pipeline (6 gaps, 4 commits):** editionParser body-cohesion merge (G-PR-NEW1/2/3 — `---`-between-byline-and-body was tearing each article into a headline-stub + orphaned body; additive merge re-joins; closes the S235 parser regression, NOT a rewrite) + ARTICLE TABLE placement guard fail-loud on table↔prose section mismatch (G-W62; advisor caught a C94 false-positive → dropped the "prints-nowhere" branch, swap-only) + DJ slug kebab→underscore normalize (G-PR-NEW7) + PDF renders ALL section photos via findPhotosForSection + render-time parity log (G-PR-NEW4 — `.find()` was dropping all-but-first per section). **ES-2 reviewer-lane / Final Arbiter integrity (4 gaps, 2 commits):** exact-hour/zero-second stub-timestamp rejection + real provenance on all 3 lane finalizers incl. NEW `scripts/cycleReviewJsonReport.js` for the heretofore-finalizer-less reasoning lane (G-W58) + missing-Mara → PENDING-MARA/HOLD exit 3 instead of HALT, malformed-present still HALT (G-W59) + close-commit run-state mtime detection for GITIGNORED `output/` artifacts (G-W60 — git-status can't see them). **ES-3 engine-auditor calibration (6 of 7 gaps, 5 commits):** G-ER8 already-done (verified — orphanAilments already in audit JSON); checkMitigators trusts detector-linked inits despite category mismatch (G-ER2 — gap-log blamed the detector; real fix was the enricher); improvement patterns get IMPROVEMENT-tagged Tribune framing not empty (G-ER5); coverage-gap→editorial-pickup remedy not council (G-ER4); phantom `Population_Stats` read removed + loud read-failure summary + engine.md exception-list corrected to World_Population (G-ER6); repeating-event tokens resolve to neighborhoods+residents (G-ER3 — "kono"→KONO, Tier-1 Michael Corliss). **5 NEW engine-auditor test files (checkMitigators/generateTribuneFraming/recommendRemedy/resolveAffectedCitizens + extended editionParser), all 14 engine-auditor suites GREEN; live auditor re-run clean.** Measure-twice corrected 3 wrong gap-log hypotheses (G-ER2 detector-vs-enricher, G-ER6 phantom tab, G-ER8 already-done); advisor caught 2 false-positives pre-commit (ES-1 placement, ES-2 reasoning-lane auto-HALT). **REMAINING — ES-3 G-ER9** (new `detectLedgerCompleteness` detector, 7-sheet writer-path required-column mapping; DEFERRED as design-heavy false-positive-prone fresh-session unit per advisor) + **ES-4** (vote-passed terminal-state paradox G-ER1; carry-forward from G-ER2: classifyGap labels `mitigator-firing-but-insufficient` even when effectsFiring=false). Plan: `docs/plans/2026-05-29-c95-gap-log-triage.md` Track B (ES-1/ES-2/ES-3). NOTE: struck a stale "S243 PROJECT ENDED" STATUS line per Mike-direct this session (contradicted by active S245 work; not committed to git).
@@ -166,19 +168,47 @@ Twelve commits across one continuous arc. **civic.6** (MCP `lookup_initiative` r
 
 ---
 
-## Shipped Last Session (S243)
+## Shipped Last Session (S246)
 
 *Mechanical artifact — git-log output auto-generated by `scripts/writeShippedBlock.js` at session-end. Not editorial. **`ROLLOUT_PLAN.md` is canonical for what these commits accomplished.***
 
-- `7d973e5` S243 [research/build] governance.26 — SESSION_CONTEXT on-demand log redesign plan
-- `649c9e8` S243 [research/build] governance.25 RB-6 — SESSION_CONTEXT on-demand redesign direction
-- `39fb5dc` S243 [engine/sheet] soft close — engine.5 Phase 1 LIVE + Phase 2 diagnosed/cornered
-- `65213af` S243 [research/build] governance.25 — C95 gap-log triage plan + reusable playbook
-- `534eead` S243 [engine/sheet] engine.5 — consolidate session into one self-contained plan
-- `fc020db` S243 [engine/sheet] engine.5 Phase 2 — life-event freeze cornered to live execution
-- `9c887c3` S243 [engine/sheet] engine.5 Phase 2 diagnosis — citizen lives are frozen (life-event engine fires near-zero)
-- `e77b8e8` S243 [engine/sheet] engine.5 Phase 1 — youth seed LIVE (+45, under-18 3→48)
-- `0a30849` S242 session-end [research/build] — journal Entry 197 + STATUS + persistence rotation
+- `f798af0` S246 [engine/sheet] ES-6 (G-BWS1/5/6) — world_summary roster visibility + count reconciliation (closes Track B)
+- `a393441` S246 [research/build] RB-3 marker — add eval-gate enforcement handoff to engine-sheet
+- `28a6625` S246 [engine/sheet] ES-5 (G-R1 + G-R3) — city-hall tracker assembler: trackerOwner dispatch + cascade sentiment
+- `66b4b98` S246 [research/build] RB-3 status -> DONE in C95 triage plan
+- `f4c1a45` S246 [research/build] RB-3 — print/post-publish eval-gate + DJ canon hardening
+- `2a95472` S246 [engine/sheet] ES-7 part 2 / G-PM7 — canonical preMortemScan.js + known_gaps.json (closes ES-7)
+- `f43a50f` S246 [research/build] RB-4 status -> DONE (all 5 steps) + ES-5/buildVoiceWorkspaces handoffs
+- `6963f89` S246 [research/build] RB-4 step 5 / G-R1 — trackerOwner declarations (deterministic dispatch)
+- `f70fbbc` S246 [engine/sheet] ES-7 part 1 / G-PF1 — canonical preflightInputCheck.js
+- `3ba47bd` S246 [research/build] RB-4 steps 3+4 — Status enum (G-PREP2) + Scenario D paradox (G-PREP3)
+- `0e7320b` S246 [engine/sheet] ES-8 (G-P-NEW5 + G-W64) — verifier bucket-sum + validateEdition name-check context
+- `fd29b40` S246 [research/build] RB-4 status -> steps 1+2 DONE (source-verified), 3-5 open
+- `a803587` S246 [research/build] RB-4 step 2 / BUNDLE-PREP-A — council roster reconciliation guard
+- `ce8ecaf` S246 [research/build] RB-4 step 1 / G-PREP1 — Chen D8 faction OPP->CRC (canon revert)
+- `42ce760` S246 [engine/sheet] ES-3 G-ER9 — detectLedgerCompleteness (Phase 38.9), closes ES-3
+- `d60a81f` S246 [research/build] RB-2 status -> DONE in C95 triage plan
+- `eca13ea` S246 [research/build] RB-2 — correct gate mechanism (advisor catch) + try/catch
+- `bc3b893` S246 [engine/sheet] ES-4 / G-W54 — vote-passed initiatives exit stuck-drama detection
+- `3f8f3e4` S246 [research/build] RB-2 — /write-edition compile contract + parser-shape gate
+- `a4dc03f` S246 [research/build] fidelity-seam close — remove dead formatNeighborhoodEconomies
+- `a241dc5` S245 [engine/sheet] engine.5 — Phase 2 / connected-life handoff doc, final state at push window (Mike: engine-sheet work completed)
+- `d805739` S245 [research/build] edition⇄engine data-fidelity seam — shared neighborhoodSlice + brief/voice/sift wiring
+- `6b984d6` S245 [engine/sheet] soft close — C95 gap triage Track B: ES-1+ES-2+ES-3 (16 gaps, 11 work commits)
+- `ef3dab8` S244 [engine/sheet] ES-3 (G-ER3) — repeating-event tokens resolve to neighborhoods + residents
+- `77c060a` S244 [engine/sheet] ES-3 (G-ER6) — drop phantom Population_Stats read; surface read failures loudly
+- `476cbe6` S244 [engine/sheet] ES-3 (G-ER4) — coverage-gap patterns route to editorial pickup, not council
+- `5392add` S244 [engine/sheet] ES-3 (G-ER5) — improvement patterns get threaded Tribune framing, not buried
+- `7b78466` S244 [engine/sheet] ES-3 (G-ER2) — checkMitigators binds detector-linked initiatives despite category mismatch
+- `903368d` S244 [engine/sheet] ES-2 (G-W58) hardening — reasoning-lane finalizer closes the provenance asymmetry
+- `fa3f070` S244 [engine/sheet] ES-2 (G-W58/59/60) — reviewer-lane + Final Arbiter integrity
+- `b2b98f0` S244 [engine/sheet] ES-1 (G-W62) follow-up — placement guard: drop false-positive "prints nowhere" branch
+- `76fb293` S244 [engine/sheet] ES-1 (G-PR-NEW4) — PDF renders all section photos, parity guard
+- `edeb59c` S244 [engine/sheet] ES-1 (G-W62, G-PR-NEW7) — validator hardening: table-placement guard + slug normalize
+- `6635f61` S244 [engine/sheet] ES-1 (G-PR-NEW1/2/3) — edition parser body-cohesion merge
+- `08add45` S244 [engine/sheet] engine.5 — capture the connected-life design into the plan so it stops evaporating
+- `162afda` S244 [engine/sheet] engine.5 Phase 2 KILL-SHOT — simYear ordinal-vs-calendar-year bug fixed; citizen lives unfrozen
+- `259cc5a` S243 [research/build] soft close — unified with engine-sheet S243
 
 ---
 

@@ -24,6 +24,8 @@
  *   0 — verdict A, recommendation PROCEED or PROCEED-WITH-NOTES
  *   1 — verdict B, recommendation HALT
  *   2 — pipeline error (missing lane JSON, malformed input)
+ *   3 — verdict PENDING-MARA, recommendation HOLD (G-W59 — Mara result-validity
+ *       handoff not yet completed; held for handoff, NOT failed for quality)
  */
 
 require('/root/GodWorld/lib/env');
@@ -76,6 +78,27 @@ function validateCapability(doc) {
   const required = ['blockingFailures', 'process', 'outcome', 'controllableFailures', 'uncontrollableFailures'];
   for (const key of required) {
     if (!(key in doc.summary)) return { ok: false, reason: `summary.${key} missing` };
+  }
+  return { ok: true };
+}
+
+// G-W58 — timestamp/provenance integrity. A real reviewer run stamps a precise
+// finalize time; a hand-assembled stub lands on a round "start of day / on the
+// hour" value (C95 rhea_report = 2026-05-27T00:00:00.000Z, cycle_review =
+// 2026-05-27T09:00:00Z). Prefer an explicit provenance.run_completed_at; fall
+// back to the long-standing generatedAt so pre-provenance lanes still validate.
+// Reject a PRESENT lane whose finalize timestamp is missing, unparseable, or an
+// exact-hour / zero-second / zero-ms stub — a fabricated PASS must not feed the
+// verdict. Real `new Date().toISOString()` essentially never lands on :00:00.000,
+// so the false-positive risk is negligible.
+function checkProvenance(doc) {
+  if (!doc || doc.__parseError) return { ok: true }; // validateLane owns these cases
+  const ts = (doc.provenance && doc.provenance.run_completed_at) || doc.generatedAt;
+  if (!ts) return { ok: false, reason: 'no run timestamp (provenance.run_completed_at / generatedAt absent)' };
+  const d = new Date(ts);
+  if (isNaN(d.getTime())) return { ok: false, reason: `unparseable run timestamp: ${ts}` };
+  if (d.getUTCMinutes() === 0 && d.getUTCSeconds() === 0 && d.getUTCMilliseconds() === 0) {
+    return { ok: false, reason: `stub run timestamp ${ts} — exact-hour/zero-second value indicates a hand-assembled lane, not a real run (G-W58)` };
   }
   return { ok: true };
 }
@@ -221,6 +244,23 @@ async function main() {
   };
   const capability = { doc: capabilityDoc, ...validateCapability(capabilityDoc) };
 
+  // G-W58 — fold the timestamp/provenance integrity check into lane validity.
+  // A present-but-stubbed lane (fabricated PASS) is downgraded to invalid here,
+  // so it can't contribute to the weighted verdict.
+  for (const info of Object.values(laneInputs)) {
+    if (info.ok) {
+      const prov = checkProvenance(info.doc);
+      if (!prov.ok) { info.ok = false; info.reason = prov.reason; info.provenanceReject = true; }
+    }
+  }
+
+  // G-W59 — Mara (result-validity) is canonically external/operator-routed. A
+  // MISSING file means the handoff hasn't happened yet (a workflow state), as
+  // opposed to a present file that fails (a quality state). loadJson returns
+  // null only when the file is absent on disk; a malformed present file yields
+  // a __parseError and is treated as a real (HALT-worthy) failure, not pending.
+  const maraPending = resultDoc === null;
+
   for (const [name, info] of Object.entries(laneInputs)) {
     if (!info.ok) console.warn(`  ⚠ ${name} lane: ${info.reason} (${name === 'reasoning' ? reasoningPath : name === 'sourcing' ? sourcingPath : resultPath})`);
   }
@@ -244,12 +284,27 @@ async function main() {
     blockingFailures,
   };
 
-  const allLanesValid = laneInputs.reasoning.ok && laneInputs.sourcing.ok && laneInputs.resultValidity.ok;
-  const verdict = capabilityGate.passed && weightedScore >= 0.60 && allLanesValid ? 'A' : 'B';
+  const otherLanesValid = laneInputs.reasoning.ok && laneInputs.sourcing.ok;
+  const allLanesValid = otherLanesValid && laneInputs.resultValidity.ok;
+
+  // Verdict precedence (G-W59):
+  //   1. PENDING-MARA/HOLD only when the in-pipeline lanes (reasoning, sourcing)
+  //      are valid, the capability gate passed, and the ONLY thing missing is the
+  //      external Mara handoff. Held for handoff, not failed for quality.
+  //   2. Otherwise the standard A/B computation — an integrity failure (stub or
+  //      malformed present lane) or a blocked capability gate takes precedence and
+  //      lands B/HALT, so a fabricated lane or a content block is never "held."
+  let verdict;
   let publishRecommendation;
-  if (verdict === 'A' && weightedScore >= 0.75) publishRecommendation = 'PROCEED';
-  else if (verdict === 'A') publishRecommendation = 'PROCEED-WITH-NOTES';
-  else publishRecommendation = 'HALT';
+  if (maraPending && otherLanesValid && capabilityGate.passed) {
+    verdict = 'PENDING-MARA';
+    publishRecommendation = 'HOLD';
+  } else {
+    verdict = capabilityGate.passed && weightedScore >= 0.60 && allLanesValid ? 'A' : 'B';
+    if (verdict === 'A' && weightedScore >= 0.75) publishRecommendation = 'PROCEED';
+    else if (verdict === 'A') publishRecommendation = 'PROCEED-WITH-NOTES';
+    else publishRecommendation = 'HALT';
+  }
 
   const blameAttribution = buildBlameAttribution(laneInputs, capability);
 
@@ -263,6 +318,9 @@ async function main() {
     generatedAt: new Date().toISOString(),
     verdict,
     weightedScore,
+    // G-W59 — when maraPending, weightedScore reflects reasoning+sourcing only
+    // (Mara's 0.2 is not yet available); it is NOT a final quality score.
+    maraPending,
     lanes,
     capabilityGate,
     blameAttribution,
@@ -279,13 +337,24 @@ async function main() {
   console.log(`  blame entries: ${blameAttribution.length}`);
   console.log(`  output: ${outputPath}`);
 
+  if (publishRecommendation === 'HOLD') {
+    console.log(`\nHOLD — Mara result-validity handoff not yet completed (PENDING-MARA).`);
+    console.log(`  Reasoning + sourcing lanes valid, capability gate passed — this is a`);
+    console.log(`  workflow state, not a quality failure. Route the Mara handoff, then re-run`);
+    console.log(`  the arbiter to land a final verdict. Do NOT treat as HALT.`);
+    process.exit(3);
+  }
   if (publishRecommendation === 'HALT') {
     console.log(`\nHALT — edition should not publish. Blocking reasons:`);
     if (blockingFailures.length > 0) {
       for (const id of blockingFailures) console.log(`  - capability gate: ${id}`);
     }
     if (weightedScore < 0.60) console.log(`  - weighted score ${weightedScore} below 0.60 threshold`);
-    if (!allLanesValid) console.log(`  - one or more lane reports invalid`);
+    if (!allLanesValid) {
+      for (const [name, info] of Object.entries(laneInputs)) {
+        if (!info.ok) console.log(`  - ${name} lane invalid: ${info.reason}`);
+      }
+    }
     process.exit(1);
   }
   process.exit(0);

@@ -26,6 +26,12 @@ const path = require('path');
 
 const OUTPUT_DIR = path.join(__dirname, '..', 'output');
 
+// G-W58 — captured at module load (≈ process start) so the lane carries a real
+// run-start timestamp. The arbiter prefers provenance.run_completed_at; a
+// hand-assembled JSON that skips this finalizer carries no provenance and falls
+// back to generatedAt, where a stub timestamp is rejected.
+const RUN_STARTED_AT = new Date().toISOString();
+
 const REQUIRED_CHECK_IDS = [
   'citizen-name-verification',
   'vote-civic-verification',
@@ -186,6 +192,17 @@ function main() {
   doc.controllableFailures = derived.controllableFailures;
   doc.uncontrollableFailures = derived.uncontrollableFailures;
   if (!doc.generatedAt) doc.generatedAt = new Date().toISOString();
+
+  // G-W58 — stamp real provenance at finalize time. run_completed_at is the
+  // authoritative timestamp the arbiter checks; it is always a precise current
+  // time here (never a stub), so a script-finalized lane passes the integrity
+  // check even if the agent left a round generatedAt.
+  doc.provenance = {
+    producer: 'scripts/rheaJsonReport.js',
+    model: process.env.REVIEWER_MODEL || null,
+    run_started_at: RUN_STARTED_AT,
+    run_completed_at: new Date().toISOString(),
+  };
 
   fs.writeFileSync(jsonPath, JSON.stringify(doc, null, 2));
 

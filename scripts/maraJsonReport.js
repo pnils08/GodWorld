@@ -25,6 +25,8 @@ const fs = require('fs');
 const path = require('path');
 
 const OUTPUT_DIR = path.join(__dirname, '..', 'output');
+// G-W58 — module-load run-start timestamp (see rheaJsonReport.js for rationale).
+const RUN_STARTED_AT = new Date().toISOString();
 const CHECK_IDS = ['completeness', 'gave-up-detection', 'coverage-breadth'];
 const CHECK_LABELS = {
   completeness: 'Completeness',
@@ -146,6 +148,13 @@ function buildLaneJson(parsed) {
     weight: 0.2,
     cycle: parsed.cycle,
     generatedAt: new Date().toISOString(),
+    // G-W58 — real provenance; run_completed_at is the arbiter's trusted stamp.
+    provenance: {
+      producer: 'scripts/maraJsonReport.js',
+      model: process.env.REVIEWER_MODEL || null,
+      run_started_at: RUN_STARTED_AT,
+      run_completed_at: new Date().toISOString(),
+    },
     score: laneScore,
     verdict,
     checks: checksOut,

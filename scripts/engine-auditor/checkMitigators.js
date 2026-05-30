@@ -199,14 +199,23 @@ function enrich(patterns, ctx) {
 
     const linkedIds = pattern.affectedEntities.initiatives || [];
     if (linkedIds.length > 0) {
+      // G-ER2 — the detector already bound these initiatives as the active
+      // mitigators for this pattern. detectMathImbalances writes a neighborhood's
+      // matching INIT-ids into affectedEntities.initiatives AND names them in the
+      // description ("despite 1 active mitigator(s) [INIT-006]"). Trust that
+      // binding — don't drop it on a category-heuristic mismatch. The old guards
+      // (skip unless pattern-category === initiative-category) left explicitly-
+      // bound patterns reporting gap:no-mitigator → "propose new initiative" when
+      // the real situation is "INIT-006 exists but isn't moving the math." Use the
+      // initiative's own category for effect computation, falling back to the
+      // pattern's; skip only when neither resolves.
       for (const id of linkedIds) {
         const row = lookupInitiative(id, ctx.snapshot);
         if (!row) continue;
         const rowCategory = categoryForPattern({ evidence: { fields: { PolicyDomain: row.PolicyDomain } } }, registry);
-        if (!category) continue;
-        if (!rowCategory) continue;
-        if (category !== rowCategory) continue;
-        mitigators.push(buildMitigatorEntry(row, category, ctx, registry, pattern));
+        const effectCategory = rowCategory || category;
+        if (!effectCategory) continue;
+        mitigators.push(buildMitigatorEntry(row, effectCategory, ctx, registry, pattern));
       }
     } else if (category) {
       const candidates = findMitigatorsByCategory(category, pattern, ctx, registry);

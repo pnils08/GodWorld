@@ -122,7 +122,7 @@ Mike S240 meta-principle: "any token burn spent figuring out file paths, formats
 - **Source gaps:** G-W47, G-W48, G-W49, G-W50, G-W51, G-W52, G-W61, G-W62, G-W63, G-P-NEW1(compile-side).
 - **Absorbs ROLLOUT:** pipeline.24 sift→write-edition handoff fields; pipeline.32 (G-W47 path).
 - **Cross-track:** pairs with ES-1 (parser hardening + C95 regression fixture). Forward-fix = compile emits the shape; ES-1 makes the parser robust + tested.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S246 — write-edition v2.2→2.3 + EDITION_FORMAT_TEMPLATE.txt (H1→H3); 2 commits (`3f8f3e4` contract+gate, `eca13ea` gate-mechanism correction). All 10 source gaps closed (G-W48 covered by existing G-W34). Compile contract + fail-loud parser gate verified empirically against known-good C95 + all 3 malformation modes (bad-slot→canonicalShape=false; H1/bold-byline→parseEdition throw). Template was a second drift-carrier; sweep confirmed no others (EDITION_PIPELINE.md clean).
 
 ### Phase RB-3: edition-print + post-publish skill flow + DJ direction (Theme T3/T4 RB-half + DJ)
 

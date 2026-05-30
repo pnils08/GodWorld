@@ -25,6 +25,31 @@
  *          remains voice-emergent (not engine-coded); this reweight changes
  *          what the auditor highlights, not how phases advance. Plan:
  *          docs/plans/2026-05-22-engine-regulatory-friction.md §Task 4.
+ *   1.4.0  S246 ES-4 / G-W54 — votePassedTerminalState. Mike's standing canon:
+ *          an initiative that was voted YES is operationally COMPLETE — the
+ *          policy is settled, money disburses, no ongoing drama coverage. The
+ *          engine had been treating settled programs (INIT-001 W Oakland Stab
+ *          Fund, voted C78) as stuck-initiative HIGH every cycle for 17 cycles;
+ *          city-hall picked the flags up as cascade topics, /sift routed them
+ *          to the front page, and Beverly Hayes (POP-00772) got anchored across
+ *          published canon as a "relocation case." Contamination started HERE,
+ *          at the detector. Fix: an initiative with Status==='passed' and
+ *          (cycle - VoteCycle) > VOTE_PASSED_TERMINAL_CYCLES exits stuck-
+ *          detection entirely — no pattern emitted. The STUCK_THRESHOLD>=3 gate
+ *          already keeps fresh launches out, and the >N-since-vote guard keeps a
+ *          just-passed initiative's launch window coverable; once settled it is
+ *          terminal. The positive story still surfaces via detectImprovements
+ *          (independent detector) — success gets covered, just not as crisis.
+ *          NOTE: this supersedes the v1.3.0 lagged downgrade for the settled
+ *          case (passed initiatives are now suppressed before severity is even
+ *          computed); v1.3.0 is retained as defense-in-depth for the narrow
+ *          freshly-passed (<=N-since-vote) residual. The "unless a genuinely new
+ *          event" exception (scandal/breach/public statement) is handled by the
+ *          editorial layers (Mara directive + city-hall filter, research-build),
+ *          not the engine detector. NB the spec gap named a phantom field
+ *          `VotePhase` (absent from the live Initiative_Tracker schema —
+ *          every row reads undefined); the real signal is Status==='passed' +
+ *          VoteCycle, verified live S246 before coding.
  *
  * cyclesInState semantics: best available evidence that an initiative has been
  * stuck in its current ImplementationPhase. The number reflects retained audit
@@ -40,12 +65,26 @@
  * is shallow. max() of the two preserves the stuck classification.
  */
 
-const VERSION = '1.3.0';
+const VERSION = '1.4.0';
 const STUCK_THRESHOLD = 3;
+// G-W54 — a vote-passed initiative that has been settled longer than this many
+// cycles since its vote exits stuck-initiative drama-detection. Small N so a
+// just-passed initiative's launch window stays coverable; once past it the
+// program is terminal and generates no ongoing stuck-flag drama.
+const VOTE_PASSED_TERMINAL_CYCLES = 3;
 const POSITIVE_REMEDY_VERDICTS = new Set([
   'remedy-firing-as-expected',
   'remedy-overshot',
 ]);
+
+// G-W54 — true when the initiative is operationally settled: vote passed and
+// more than VOTE_PASSED_TERMINAL_CYCLES cycles have elapsed since the vote.
+function isVotePassedTerminal(row, cycle) {
+  if (String(row.Status || '').trim().toLowerCase() !== 'passed') return false;
+  const voteCycle = parseCycleHint(row.VoteCycle);
+  if (voteCycle == null || voteCycle > cycle) return false;
+  return (cycle - voteCycle) > VOTE_PASSED_TERMINAL_CYCLES;
+}
 
 function parseCycleHint(val) {
   if (val == null || val === '') return null;
@@ -144,6 +183,13 @@ function detect(ctx) {
     const activeLike = /active|in.?progress|pending|stalled/i.test(status);
     if (!activeLike && !phase) continue;
 
+    // G-W54 — vote-passed + settled initiatives exit stuck-detection entirely.
+    // The policy is decided; ongoing phase tenure is implementation, not drama.
+    // Suppress before cyclesInState/severity so no pattern reaches the
+    // city-hall/sift front-page routing. (detectImprovements still surfaces the
+    // positive story independently.)
+    if (isVotePassedTerminal(row, ctx.cycle)) continue;
+
     const cyclesInState = computeCyclesInState(row, ctx);
     if (cyclesInState < STUCK_THRESHOLD) continue;
 
@@ -192,4 +238,4 @@ function detect(ctx) {
   return out;
 }
 
-module.exports = { detect, version: VERSION, computeCyclesInState, findPriorPositiveRemedyIds };
+module.exports = { detect, version: VERSION, computeCyclesInState, findPriorPositiveRemedyIds, isVotePassedTerminal };

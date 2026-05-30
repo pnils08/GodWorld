@@ -229,7 +229,7 @@ The S235 commit `37aef8c` regressed `lib/editionParser.js`. RB-2 forward-fixes b
 - **Verify:** `node -e "require('./lib/editionParser').parseEdition('editions/cycle_pulse_edition_95.txt').articleTable.canonicalShape"` → true; test suite green; re-render `/edition-print 95` produces usable PDF.
 - **Source gaps:** G-PR-NEW1, G-PR-NEW2, G-PR-NEW3, G-PR-NEW4, G-W62, G-PR-NEW7(ES-half).
 - **Cross-track:** pairs with RB-2.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S244 — 6 gaps / 4 commits (`6635f61` parser body-cohesion, `edeb59c`+`b2b98f0` ARTICLE TABLE placement guard + DJ slug, `76fb293` PDF photo parity). 14 suites green.
 
 ### Phase ES-2: Reviewer-lane + Final Arbiter integrity (Theme T4)
 
@@ -243,7 +243,7 @@ The S235 commit `37aef8c` regressed `lib/editionParser.js`. RB-2 forward-fixes b
   3. writeShippedBlock: detect uncommitted `output/` artifacts newer than last commit; refuse close or surface them in the shipped block (G-W60 — lying close commit).
 - **Verify:** synthetic zero-timestamp lane JSON → rejected; missing Mara → PENDING-MARA; uncommitted artifact → close warns.
 - **Source gaps:** G-W58, G-W59, G-W60.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S244 — 4 gaps / 2 commits (`fa3f070` stub-timestamp rejection + provenance + PENDING-MARA/HOLD + run-state detection, `903368d` reasoning-lane finalizer closing the provenance asymmetry).
 
 ### Phase ES-3: Engine auditor enricher + detector calibration (Theme T5)
 
@@ -260,7 +260,7 @@ The S235 commit `37aef8c` regressed `lib/editionParser.js`. RB-2 forward-fixes b
 - **Verify:** re-run `node scripts/engineAuditor.js` on C95 inputs; math-imbalance binds INIT-006; kono resolves residents; improvements carry framing; orphanAilments in JSON; ledger-completeness fires.
 - **Source gaps:** G-ER2, G-ER3, G-ER4, G-ER5, G-ER6, G-ER8, G-ER9.
 - **Absorbs ROLLOUT:** engine.19 (C94 cluster C10 auditor calibration).
-- **Status:** [ ] not started
+- **Status:** [~] MOSTLY DONE S244 — 6 of 7 gaps / 5 commits (`7b78466` G-ER2 mitigator binding, `ef3dab8` G-ER3 token→neighborhood/resident resolution, `476cbe6` G-ER4 coverage-gap→editorial routing, `5392add` G-ER5 improvement framing, `77c060a` G-ER6 phantom Population_Stats read dropped; G-ER8 orphanAilments verified already-present via `checkOrphanAilments.js`). 5 new test files, 14 suites green. **OPEN: G-ER9** — new `detectLedgerCompleteness` detector (Phase 38.9 candidate, 7 Mike-named sheets + Population_Stats current-cycle row completeness) deferred S245.
 
 ### Phase ES-4: Vote-passed terminal state + remedy-overshot paradox (Theme T2)
 
@@ -277,7 +277,7 @@ Removes the fake-drama-on-settled-programs at its engine source. Folds the regul
 - **Source gaps:** G-W54(engine), G-ER1, G-PREP3(source-removal).
 - **Absorbs ROLLOUT:** engine.20b/c/d → points at [[2026-05-22-engine-regulatory-friction]] for detail (do not restate); this phase carries the C95 forward task.
 - **Cross-track:** RB-4 Scenario D + Mara-directive vote-passed exclusion are the skill/agent companions.
-- **Status:** [ ] not started
+- **Status:** [x] G-W54 DONE S246 — `detectStuckInitiatives` v1.3→v1.4: `votePassedTerminalState` suppression. **Measure-twice catch:** the spec coded against `Initiative_Tracker.VotePhase === 'PASSED'`, a phantom field (absent from live schema, every row `undefined`); real signal is `Status==='passed'` + `VoteCycle`, verified live before coding. Keyed on `Status==='passed' && (cycle − VoteCycle) > 3` → exits stuck-detection entirely. Empirical discriminator (fixed auditor on live C95): stuck-initiative patterns 2→**0** (INIT-001 HIGH+overshoot+"layer 2nd initiative"+front-page AND INIT-002 both suppressed); positive stories still surface via `detectImprovements` (INIT-006 Baylight advance + INIT-002 crime-overshoot). 54-assertion test suite + all 15 auditor suites green. Node-side, no clasp. **G-ER1 (reclassification) DEFERRED** — the empirical re-run shows **0 residual HIGH+overshoot paradox**: G-W54 eliminates G-ER1's only live trigger (the paradox required a passed+overshooting+phase-stuck pattern to survive; all passed initiatives now suppressed). The plan's G-ER1 reclassification was authored against the same phantom-`VotePhase` premise and is subsumed by the real-field suppression. Building the `measureRemedies`-reorder + new-gap + template machinery now = speculative against a case that cannot currently occur; re-open only if a non-passed firing+overshooting+phase-stuck initiative actually appears. **Step 3 (Initiative_Tracker flip to terminal) operator-gated — deferred for Mike + cycle.**
 
 ### Phase ES-5: City-hall tracker assembler (Theme T8)
 

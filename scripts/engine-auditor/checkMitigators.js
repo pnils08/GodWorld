@@ -190,7 +190,11 @@ function recommendedActionFor(gap, mitigators) {
 function enrich(patterns, ctx) {
   const registry = loadRegistry();
   for (const pattern of patterns) {
-    if (pattern.type === 'improvement' || pattern.type === 'anomaly') {
+    // ledger-completeness (G-ER9) is an internal substrate-health signal, not a
+    // council ailment — route not-applicable so recommendRemedy doesn't propose
+    // "a new initiative" for a blank spreadsheet cell (the G-ER4 error class) and
+    // generateTribuneFraming hands it empty story handles (not a Tribune story).
+    if (pattern.type === 'improvement' || pattern.type === 'anomaly' || pattern.type === 'ledger-completeness') {
       pattern.mitigatorState = { exists: false, mitigators: [], gap: 'not-applicable', recommendedAction: 'none' };
       continue;
     }

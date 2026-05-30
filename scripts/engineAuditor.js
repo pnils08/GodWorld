@@ -30,6 +30,10 @@ const ailmentDetectors = {
   detectProductionImbalance: require('./engine-auditor/detectProductionImbalance'),
   detectImprovements: require('./engine-auditor/detectImprovements'),
   detectIncoherence: require('./engine-auditor/detectIncoherence'),
+  // G-ER9 (Phase 38.9) — substrate-health: current-cycle ledger completeness.
+  // Emits ledger-completeness patterns (routed not-applicable by checkMitigators)
+  // + stashes ctx.ledgerCompleteness summary written into the audit JSON below.
+  detectLedgerCompleteness: require('./engine-auditor/detectLedgerCompleteness'),
 };
 
 const anomalyDetector = require('./engine-auditor/detectAnomalies');
@@ -73,6 +77,11 @@ const SHEETS_TO_READ = [
   'Storyline_Tracker',
   'Simulation_Ledger',
   'LifeHistory_Log',  // S184 (Row 6): citizen life events for baseline-brief subject attribution
+  // G-ER9 (S246 ES-3): consumed by detectLedgerCompleteness for current-cycle
+  // row-presence. World_Population / WorldEvents_V3_Ledger / Transit_Metrics /
+  // Event_Arc_Ledger already read above; these two were the gap.
+  'WorldEvents_Ledger',
+  'Texture_Trigger_Log',
 ];
 
 async function getCurrentCycle() {
@@ -244,6 +253,9 @@ async function runEngineAudit(ctx) {
     // S215 civic.10c — orphan-ailment summary (HIGH-severity patterns with
     // neighborhoods lacking a district owner per Neighborhood_Map.District).
     orphanAilments: ctx.orphanAilments || { highImpactChecked: 0, orphanCount: 0, unmappedNeighborhoods: [], patterns: [] },
+    // G-ER9 (S246 ES-3) — current-cycle ledger-completeness summary from
+    // detectLedgerCompleteness (substrate-health: zero-row + blank-required-col).
+    ledgerCompleteness: ctx.ledgerCompleteness || { cycle, sheetsChecked: 0, zeroRow: [], partialColumns: [], ok: [], notLoaded: [] },
   };
 
   const anomaliesOutput = {

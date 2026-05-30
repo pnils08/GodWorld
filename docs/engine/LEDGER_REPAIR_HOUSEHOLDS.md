@@ -186,6 +186,17 @@ retire — the engine owns live-intended `formNewHouseholds_` / `updateHousehold
 S245 class) + verify the formation/dissolve Household_Ledger writes are canon-safe. Its
 birth/marriage/divorce stubs stay **retired** — those live in Track 1. Separate session/deploy.
 
+**Promotion (Track 1 follow-up, NOT shipped S248 — see [[ENGINE_REPAIR]] Row 24).** Tracing the
+promotion structural-sync surfaced a third dormant subsystem + a dual-system incoherence:
+`generationalEventsEngine` (phase04) fires a hollow `[Promotion]` tag (no structural effect),
+while `educationCareerEngine` (phase05, the CareerStage owner) advances CareerStage structurally
+but emits no tag — and is itself **enum-frozen** (`CAREER_STAGES.ENTRY = 'entry-level'` matches
+0 live rows; `MID = 'mid-career'` misses the 64 `mid` rows; years/cooldown gates verified NOT
+the bottleneck). Fix design (drift-tolerance + tag-stamp-in-owner + retire-phase04-dice) is a
+deliberate C96-class reactivation — held off C96 to avoid a 4th unsurfaced reactivation in one
+fire (attribution trap), and the phase04 retirement is an editorial-cadence call (Mike's seat).
+Full design + evidence in ENGINE_REPAIR Row 24. Sequence after C96 verifies Track 1.
+
 ---
 
 ## Build sequence

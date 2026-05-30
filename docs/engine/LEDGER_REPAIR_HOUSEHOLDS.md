@@ -133,32 +133,40 @@ tag) + `row[iLastU]`. It never touches structural state. Consequence:
 - The `householdFormationEngine` birth/marriage/divorce functions that were SUPPOSED to do
   this connecting work are bare `// TODO` stubs (ENGINE_REPAIR Row 20/23).
 
-### The OPEN DESIGN FORKS — Mike's direction sets these (do NOT assume — pairMarriedCitizens was killed for assuming)
+### What the model ALREADY decides (these are NOT open — build them as specified)
 
-These are the questions that decide whether citizens get lives or another round of make-believe.
-Answered by Mike, then built:
+The Representative Sample model (locked S243, top of this doc) settles the connecting layer.
+Do not re-open these as questions:
 
-1. **Wedding semantics.** Does a wedding (a) bind two *tracked* citizens into a couple,
-   (b) materialize an off-sample spouse (Tier-5→Tier-4) and attach them, or (c) just flip
-   `MaritalStatus=married` and leave the partner implicit/off-sample? (Model says off-sample
-   spouse is the default; tracked-couple binding is rare/publication-driven.)
-2. **Birth materialization.** When does a birth create a *real* tracked child (Tier-4, in the
-   household, `ParentIds` linked, invariant held) vs. just increment `NumChildren` as an
-   off-sample kid? (Tracked-child creation is the thing that grows households — point 4 of the
-   model — but at what rate, and does it require a tracked co-parent?)
-3. **Accumulation + surfacing.** How much of the life-chain (marriage→kids→career→retirement)
-   does the ENGINE weave by chance, vs. PUBLICATION (a named family member promotes Tier-5→4)?
-   And where does the accumulated life surface so it isn't write-only — the citizen's own
-   structural columns, coverage, world state?
+1. **Wedding** → off-sample spouse by default (model point 2). The event flips the citizen's
+   `MaritalStatus`; the partner stays Tier-5/implicit. Tracked-couple binding is rare and
+   publication-driven, not the common path.
+2. **Accumulation + surfacing** → the engine weaves the life-chain by calibrated random chance
+   (point 5); publication materializes named family Tier-5→Tier-4 (point 4). The accumulated
+   life surfaces in the citizen's own structural columns + coverage.
 
-### Build (after the forks are set)
+### The ONE genuine seam — a contradiction inside this doc, needs Mike's word to reconcile
+
+Model **point 4** says publication is *"the only mechanism that grows tracked households."*
+But the older **Phase 2 — Births** text below says *"a birth creates a tracked Tier-4 infant
+attached to the household."* Both cannot be true. Either:
+- (a) Births stay off-sample — a birth increments `NumChildren` only; the child is Tier-5 until a
+  story names it (publication is the only path to a tracked child — point 4 wins), OR
+- (b) The engine DOES create tracked infants at real rates (the invariant holds — the parent is
+  the tracked adult), and point 4 softens to "publication is *a* mechanism, not the only one."
+
+This is the only thing that needs a decision, and it's reconciling two of the model's own
+sentences — not a new approach.
+
+### Build (mechanical, once the seam above is settled)
 
 - Make `applyMilestone_` (or a sibling) mutate the citizen's structural state, not just the tag:
-  wedding → `MaritalStatus` + spouse linkage per fork 1; birth → child per fork 2 + `NumChildren`++;
-  promotion → `CareerStage`/`TierRole`/`Income`.
-- Decide the wedding-gate on births (birth currently requires a prior `[Wedding]` tag — L682).
+  wedding → `MaritalStatus` (+ spouse linkage only in the rare tracked-couple case); birth →
+  per the seam decision (`NumChildren`++ always; tracked child only if (b)); promotion →
+  `CareerStage`/`TierRole`/`Income`.
+- The wedding-gate on births (birth requires a prior `[Wedding]` tag — L682) stays per the model.
 - Calibrate rates to real Oakland (table in Phase 2 below).
-- Retire the dead `householdFormationEngine` stubs OR resurrect them as the home for this — fork.
+- Retire the dead `householdFormationEngine` stubs OR resurrect them as the home for this work.
 
 ---
 

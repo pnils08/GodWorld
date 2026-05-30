@@ -512,7 +512,16 @@ function generateVoiceBriefing(agent, cycle, baseContext) {
     // Surface previous cycle documents for context
     if (baseContext && baseContext.canon && baseContext.canon.initiatives) {
       for (const init of baseContext.canon.initiatives) {
-        const key = (init.id || '').toLowerCase().replace('init-002', 'oari').replace('init-001', 'stabilization_fund').replace('init-003', 'health_center').replace('init-004', 'baylight').replace('init-005', 'transit_hub');
+        // S246 ES-5 (RB-4 handoff bug): routing map was stale — had
+        // init-003=health_center / init-004=baylight / init-005=transit_hub,
+        // contradicting truesource (INIT-003=Transit Hub, INIT-005=Health
+        // Center, INIT-006=Baylight; INIT-004 is a placeholder with no agent).
+        const key = (init.id || '').toLowerCase()
+          .replace('init-001', 'stabilization_fund')
+          .replace('init-002', 'oari')
+          .replace('init-003', 'transit_hub')
+          .replace('init-005', 'health_center')
+          .replace('init-006', 'baylight');
         if (agent.focusInitiatives.includes(key) && init.notes) {
           md += `> **${init.name || init.initiative}** — ${init.notes}\n\n`;
         }

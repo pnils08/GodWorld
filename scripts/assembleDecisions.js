@@ -127,11 +127,7 @@ const VOICE_LABEL = {
 const args = process.argv.slice(2);
 const cycleArg = args.find(a => /^\d+$/.test(a));
 const apply = args.includes('--apply');
-if (!cycleArg) {
-  console.error('Usage: node scripts/assembleDecisions.js <cycle> [--apply]');
-  process.exit(2);
-}
-const cycle = parseInt(cycleArg, 10);
+const cycle = cycleArg ? parseInt(cycleArg, 10) : null;
 
 // ────────────────────────────────────────────────────────────────────────────
 // Load + normalize voice JSONs
@@ -238,12 +234,23 @@ function buildGroups(voices) {
 // Pick primary voice for an initiative
 // ────────────────────────────────────────────────────────────────────────────
 function pickPrimary(group, init) {
+  // G-R1 (S246 ES-5, RB-4 trackerOwner contract): the statement whose
+  // trackerOwner === this initiative is the operational owner — the deterministic
+  // primary for the tracker write. The owning project agent (e.g. Webb on
+  // INIT-001) drives ImplementationPhase / MilestoneNotes / NextScheduledAction;
+  // Mayor / faction framing folds in as commentary via concatMilestoneNotes.
+  // This resolves the default-primary collisions the deprecation window logged.
+  // Falls back to priority weighting when NO statement claims ownership —
+  // pre-trackerOwner cycles (C95 and earlier; field absent → no change) and
+  // INIT-007 (Youth Apprenticeship, no owning project agent per RB-4 handoff).
+  const owned = group.filter(g => String(g.statement.trackerOwner || '').toUpperCase() === init);
+  const pool = owned.length > 0 ? owned : group;
   let best = null;
   let bestScore = -1;
-  for (let i = 0; i < group.length; i++) {
-    const score = priorityFor(group[i].voiceBasename, init, group[i].statement);
+  for (let i = 0; i < pool.length; i++) {
+    const score = priorityFor(pool[i].voiceBasename, init, pool[i].statement);
     if (score > bestScore) {
-      best = group[i];
+      best = pool[i];
       bestScore = score;
     }
   }
@@ -320,39 +327,52 @@ function buildDecisions(init, group, cycle) {
   return { slug, payload: out };
 }
 
+// S246 ES-5 — export the pure assembly functions so the trackerOwner-dispatch
+// logic is unit-testable without running the CLI / reading the voice dir.
+module.exports = {
+  loadVoiceFiles, attributeInitiative, voiceFor, priorityFor, buildGroups,
+  pickPrimary, concatMilestoneNotes, buildDecisions,
+};
+
 // ────────────────────────────────────────────────────────────────────────────
-// Main
+// Main (CLI only)
 // ────────────────────────────────────────────────────────────────────────────
-const voices = loadVoiceFiles(cycle);
-const groups = buildGroups(voices);
+if (require.main === module) {
+  if (!cycle) {
+    console.error('Usage: node scripts/assembleDecisions.js <cycle> [--apply]');
+    process.exit(2);
+  }
+  const voices = loadVoiceFiles(cycle);
+  const groups = buildGroups(voices);
 
-console.log(`assembleDecisions C${cycle} — ${voices.length} voice files, ${groups.size} initiatives attributed`);
-console.log(`Mode: ${apply ? 'APPLY (writes)' : 'DRY-RUN (preview)'}`);
-console.log('');
+  console.log(`assembleDecisions C${cycle} — ${voices.length} voice files, ${groups.size} initiatives attributed`);
+  console.log(`Mode: ${apply ? 'APPLY (writes)' : 'DRY-RUN (preview)'}`);
+  console.log('');
 
-const baseDir = path.resolve(__dirname, '..', 'output', 'city-civic-database', 'initiatives');
-const writes = [];
+  const baseDir = path.resolve(__dirname, '..', 'output', 'city-civic-database', 'initiatives');
+  const writes = [];
 
-for (const [init, group] of [...groups.entries()].sort()) {
-  const { slug, payload } = buildDecisions(init, group, cycle);
-  const targetDir = path.join(baseDir, slug);
-  const targetFile = path.join(targetDir, `decisions_c${cycle}.json`);
+  for (const [init, group] of [...groups.entries()].sort()) {
+    const { slug, payload } = buildDecisions(init, group, cycle);
+    const targetDir = path.join(baseDir, slug);
+    const targetFile = path.join(targetDir, `decisions_c${cycle}.json`);
 
-  console.log(`${init} → ${slug}/decisions_c${cycle}.json`);
-  console.log(`  primary: ${payload.primaryVoice}`);
-  console.log(`  contributing statements: ${group.length}`);
-  console.log(`  trackerUpdates fields: ${Object.keys(payload.trackerUpdates).join(', ')}`);
+    console.log(`${init} → ${slug}/decisions_c${cycle}.json`);
+    console.log(`  primary: ${payload.primaryVoice}`);
+    console.log(`  contributing statements: ${group.length}`);
+    console.log(`  trackerUpdates fields: ${Object.keys(payload.trackerUpdates).join(', ')}`);
+
+    if (apply) {
+      if (!fs.existsSync(targetDir)) fs.mkdirSync(targetDir, { recursive: true });
+      fs.writeFileSync(targetFile, JSON.stringify(payload, null, 2));
+      writes.push(targetFile);
+    }
+    console.log('');
+  }
 
   if (apply) {
-    if (!fs.existsSync(targetDir)) fs.mkdirSync(targetDir, { recursive: true });
-    fs.writeFileSync(targetFile, JSON.stringify(payload, null, 2));
-    writes.push(targetFile);
+    console.log(`Wrote ${writes.length} decisions files.`);
+  } else {
+    console.log('Re-run with --apply to write the files.');
   }
-  console.log('');
-}
-
-if (apply) {
-  console.log(`Wrote ${writes.length} decisions files.`);
-} else {
-  console.log('Re-run with --apply to write the files.');
 }

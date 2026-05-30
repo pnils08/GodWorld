@@ -37,6 +37,12 @@ require('/root/GodWorld/lib/env');
 const fs = require('fs');
 const path = require('path');
 const sheets = require('../lib/sheets');
+// G-R3 (S246 ES-5) — reuse assembleDecisions' canonical voice-statement
+// attribution (3-signal fallback incl. project-file + topic) so cascade
+// sentiment counts every initiative the cascade touched, not just the subset
+// whose statements carry an explicit InitiativeID. Safe to import: its main run
+// is require.main-guarded.
+const assemble = require('./assembleDecisions');
 
 const ROOT = path.resolve(__dirname, '..');
 const DECISIONS_DIR = path.join(ROOT, 'output/city-civic-database/initiatives');
@@ -352,12 +358,17 @@ async function main() {
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // CIVIC VOICE SENTIMENT — aggregate from all decisions (S137b)
+  // CIVIC VOICE SENTIMENT — aggregate across the whole cascade (S137b; G-R3 S246)
   // ═══════════════════════════════════════════════════════════════════════════
-  // Score each decision's ImplementationPhase for sentiment.
-  // Positive phases (disbursement-active, dispatch-live) = city is working.
-  // Negative phases (stalled, blocked) = city is failing.
-  // Write to file for engine Phase 2 to read.
+  // G-R3 (S246 ES-5): pre-fix sentiment scored only the `decisions` that hit the
+  // tracker-write path (C95: 2 of 4, because (a) it iterated decisions not the
+  // cascade and (b) brittle substring matching missed phase variants like
+  // `design-development-active` / `active-construction-phase-2-planning`). With
+  // 40 voice statements across 11 agents, deriving city temperature from 2
+  // decisions undercounts the cascade by an order of magnitude. Fix: score EVERY
+  // initiative that drew voice activity (audit.byInitiative), weight by statement
+  // count (volume = cascade weight), and match phases by KEYWORD TOKEN so name
+  // variants resolve. Engine Phase 2 reads civicVoiceSentiment.
 
   const PHASE_SENTIMENT = {
     'disbursement-active': 0.8, 'dispatch-live': 0.8, 'operational': 0.7,
@@ -367,52 +378,77 @@ async function main() {
     'vote-scheduled': 0, 'announced': 0, 'visioning': 0,
     'stalled': -0.6, 'blocked': -0.8, 'suspended': -0.7, 'defunded': -1.0
   };
-
-  let sentimentSum = 0;
-  let sentimentCount = 0;
-
-  for (const dec of decisions) {
-    // Use trackerUpdate phase if present; else fall back to current tracker state.
-    // A decision that reaffirms the current phase (no flip) is still a civic signal.
-    let phase = (dec.trackerUpdates.ImplementationPhase || '').toLowerCase();
+  // Token fallback (checked in order) — resolves phase-name variants the exact
+  // table misses. e.g. 'design-development-active' → design 0.3;
+  // 'active-construction-phase-2-planning' → construction 0.6.
+  const PHASE_TOKENS = [
+    [/defund/, -1.0], [/block/, -0.8], [/suspend/, -0.7], [/stall/, -0.6],
+    [/disburs/, 0.8], [/dispatch|live/, 0.8], [/operational/, 0.7],
+    [/construction/, 0.6], [/implementation/, 0.6], [/pilot/, 0.5],
+    [/complete/, 0.5], [/vote-ready|vote_ready/, 0.3], [/design/, 0.3],
+    [/legislation|visioning/, 0.1], [/announce|vote-sched/, 0.0],
+  ];
+  function phaseScore(phase) {
+    if (!phase) return undefined;
+    if (PHASE_SENTIMENT[phase] !== undefined) return PHASE_SENTIMENT[phase];
+    for (const pk of Object.keys(PHASE_SENTIMENT)) if (phase.indexOf(pk) >= 0) return PHASE_SENTIMENT[pk];
+    for (const [re, s] of PHASE_TOKENS) if (re.test(phase)) return s;
+    return undefined;
+  }
+  function phaseForInitiative(initId) {
+    const dec = decisions.find(d => d.initiativeId === initId);
+    let phase = dec ? (dec.trackerUpdates.ImplementationPhase || '').toLowerCase() : '';
     if (!phase) {
-      const currentRow = trackerRows.find(r =>
-        r.InitiativeID === dec.initiativeId ||
-        r.ID === dec.initiativeId ||
-        r.id === dec.initiativeId
-      );
-      if (currentRow) phase = (currentRow.ImplementationPhase || '').toLowerCase();
+      const row = trackerRows.find(r => r.InitiativeID === initId || r.ID === initId || r.id === initId);
+      if (row) phase = (row.ImplementationPhase || '').toLowerCase();
     }
-    if (!phase) continue;
-
-    let score = PHASE_SENTIMENT[phase];
-    if (score === undefined) {
-      // Partial match
-      for (const pk of Object.keys(PHASE_SENTIMENT)) {
-        if (phase.indexOf(pk) >= 0) { score = PHASE_SENTIMENT[pk]; break; }
-      }
-    }
-    if (score !== undefined) {
-      sentimentSum += score;
-      sentimentCount++;
-    }
+    return phase;
   }
 
-  const civicSentiment = sentimentCount > 0 ? sentimentSum / sentimentCount : 0;
+  // Cascade attribution via assembleDecisions' 3-signal grouping (project-file +
+  // topic fallbacks) — the audit's narrower InitiativeID-only resolution drops
+  // owner statements (no explicit InitiativeID) to UNKNOWN, which is what
+  // undercounted sentiment to 2. Fall back to the audit if the grouping is empty.
+  let cascadeCounts = {};
+  try {
+    const groups = assemble.buildGroups(assemble.loadVoiceFiles(CYCLE));
+    for (const [initId, grp] of groups.entries()) cascadeCounts[initId] = grp.length;
+  } catch (e) {
+    console.warn(`  WARN: cascade grouping failed (${e.message}); falling back to audit attribution`);
+    for (const k of Object.keys(audit.byInitiative)) cascadeCounts[k] = audit.byInitiative[k].length;
+  }
+
+  // Score across every initiative the cascade touched, weighted by statement count.
+  const initiativesWithActivity = Object.keys(cascadeCounts).filter(k => k && k !== 'UNKNOWN');
+  let weightedSum = 0, weightTotal = 0, initiativesScored = 0;
+  const unscored = [];
+  for (const initId of initiativesWithActivity) {
+    const weight = cascadeCounts[initId]; // statement count
+    const score = phaseScore(phaseForInitiative(initId));
+    if (score === undefined) { unscored.push(initId); continue; }
+    weightedSum += score * weight;
+    weightTotal += weight;
+    initiativesScored++;
+  }
+  const civicSentiment = weightTotal > 0 ? weightedSum / weightTotal : 0;
+  const statementsScored = initiativesWithActivity
+    .filter(k => unscored.indexOf(k) === -1)
+    .reduce((n, k) => n + cascadeCounts[k], 0);
   const sentimentFile = path.join(ROOT, 'output', `civic_sentiment_c${CYCLE}.json`);
 
   const sentimentData = {
     cycle: CYCLE,
     civicVoiceSentiment: parseFloat(civicSentiment.toFixed(3)),
-    decisionsScored: sentimentCount,
+    statementsScored,
+    initiativesScored,
+    decisionsScored: initiativesScored, // back-compat field name
+    derivation: 'statement-weighted across cascade (G-R3 S246)',
     timestamp: new Date().toISOString()
   };
 
-  // S215 civic.9b (G-R15) — sentiment write is APPLY-gated. Pre-fix the
-  // script wrote civic_sentiment_c{XX}.json regardless of --apply, which
-  // violated the dry-run contract. The sentiment value still gets logged
-  // either way for visibility.
-  console.log(`\nCivic Voice Sentiment: ${civicSentiment.toFixed(3)} (from ${sentimentCount} decisions)`);
+  // S215 civic.9b (G-R15) — sentiment write is APPLY-gated (dry-run contract).
+  console.log(`\nCivic Voice Sentiment: ${civicSentiment.toFixed(3)} (statement-weighted across ${initiativesScored} initiatives / ${statementsScored} statements)`);
+  if (unscored.length > 0) console.log(`  (unscored — no resolvable phase: ${unscored.join(', ')})`);
   if (APPLY) {
     fs.writeFileSync(sentimentFile, JSON.stringify(sentimentData, null, 2));
     console.log(`Written to: ${path.basename(sentimentFile)}`);

@@ -123,6 +123,17 @@ Read all 10 inputs above. For each:
 
 Log tracker state, approval ratings, and key findings in the production log.
 
+**Council Roster Reconciliation (BUNDLE-PREP-A, S246 — closes the class that produced G-PREP1).** The MCP `get_council_member` call above returns each district's live faction from truesource; that signal is wasted unless it's reconciled against this skill's static roster. The Chen D8 mis-routing (a stale "S195 correction" that flipped her CRC→OPP in the skill text + 8 agent roster tables while truesource kept her CRC) survived multiple cycles precisely because nobody compared the two. Run the reconciliation every prep:
+
+```bash
+# Truesource faction per district (the authority — the same source the MCP wraps):
+node -e "require('./output/desk-packets/truesource_reference.json').council.forEach(m=>console.log(m.district+': '+m.faction+' ('+m.name+')'))"
+```
+
+(In-session, the `mcp__godworld__get_council_member` tool returns the same per-district faction — either source works; both read truesource. `scripts/godworld-mcp.py` is an MCP stdio server, not a CLI, so don't shell out to it.)
+
+Compare each district's truesource faction against (a) the **Council canonical roster** in §Voice Data Routing above, and (b) the per-district roster tables in the civic-office agent RULES.md files. **Any mismatch is a HIGH anomaly** — surface it to Mike and do NOT proceed past Step 1 until the static roster is corrected to match truesource (`truesource_reference.json` + `buildCivicVoicePackets.js` FACTION_DISTRICTS are the operational source; static skill/agent text is the thing that drifts). Truesource wins; the text gets fixed forward. Faction membership is load-bearing for the entire cascade — a mis-routed member means the wrong faction agent speaks for them and vote-math attribution is wrong.
+
 **World summary stale-civic-decisions framing (S215, closes G-7).** The world summary's §Civic Decisions section can read stale if the current cycle's `/city-hall` hasn't run yet — it presents the prior-cycle cascade as if locked, with a small disclaimer reader has to notice. When ingesting world_summary at Step 1, treat any §Civic Decisions data as "Last Locked (C{XX-1})" until the current cycle produces new voice JSONs. Don't propagate stale framing into pending_decisions packets — voice agents must see explicit "C{XX-1} canon, C{XX} not yet decided" labeling. Engine-side fix is filed at pipeline.14 (world_summary auto-rebuild after /city-hall); until that ships, the disclaimer-respect rule lives here.
 
 **Auto-investigate engine-flagged initiatives (S216, closes civic.11).** Engine review can false-flag a phase-advanced initiative as `mitigator-stuck` or `remedy-not-firing` — civic.7's INIT-005 C93 case was a Scenario C engine-auditor bug where `cyclesInPhase` walked priors, found a phase mismatch, and triggered the cold-start fallback. Before propagating any engine-review ailment of class `mitigator-stuck` or `remedy-not-firing` into topic assignments, run the MilestoneNotes reader for each affected initiative:
@@ -141,6 +152,7 @@ Runs at Step 1, before Step 2 builds topic assignments. The auto-investigation p
 
 **Anomaly-only present-to-Mike gate (S215, closes G-6 Step 1 side).** Previous convention: always present Step 1 input summary to Mike. New convention: compute input completeness automatically (all expected files present, all approval ratings reasonable, all initiatives accounted for) and surface to Mike ONLY on anomaly:
 
+- **Council roster reconciliation mismatch** — any district whose truesource faction differs from the static roster (BUNDLE-PREP-A; HIGH, blocks past Step 1)
 - Approval shift >5pts on any council member from prior cycle
 - HIGH-severity engine ailment unaddressed (no topic assignment in §Topic Assignments for it)
 - New initiative phase change since prior cycle (vote-ready, design-active, etc.)

@@ -1,7 +1,20 @@
 ---
+# G-SS10 (S247/RB-6): bare `output/**` was too broad — reading ANY output/ artifact
+# (engine audit JSON, build/engine gap logs, civic packets) auto-loaded the full EIC
+# conditioning in operational terminals. Narrowed to the newsroom-OWNED output subdirs
+# (the dirs newsroom skills write). Media terminal still loads newsroom.md directly at
+# boot, so real edition work is unaffected; non-newsroom output reads no longer trigger.
 paths:
   - "editions/**"
-  - "output/**"
+  - "output/reporters/**"
+  - "output/desk-output/**"
+  - "output/desk-packets/**"
+  - "output/letters/**"
+  - "output/quick-takes/**"
+  - "output/photos/**"
+  - "output/grades/**"
+  - "output/grade-examples/**"
+  - "output/city-civic-database/**"
   - "docs/media/**"
   - "docs/mags-corliss/**"
   - ".claude/terminals/media/TERMINAL.md"

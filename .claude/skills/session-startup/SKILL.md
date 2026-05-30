@@ -62,11 +62,11 @@ Per that TERMINAL.md's **Always Load** table. Each terminal's list differs:
 
 - **mags** — identity.md (if not loaded), CHARACTER.md, JOURNAL_RECENT.md (persona files)
 - **media** — newsroom.md, CHARACTER.md, JOURNAL_RECENT.md
-- **civic** — CHARACTER.md
-- **research-build** — SCHEMA.md, docs/index.md, CHARACTER.md
+- **civic** — civic.md (operational mode — no CHARACTER.md per CLAUDE.md §Terminal architecture, S221)
+- **research-build** — SCHEMA.md, docs/index.md (operational mode — no CHARACTER.md, S221)
 - **engine-sheet** — engine.md, README.md
 
-(If persona files are needed and not loaded, run `/boot` — don't re-implement persona-load logic here.)
+(G-SS9: operational terminals (civic / research-build / engine-sheet) do NOT load CHARACTER.md — they're persona-stripped per S221. Only mags + media load persona files. If persona files are genuinely needed, run `/boot` — don't re-implement persona-load logic here.)
 
 ### 4. Compact SESSION_CONTEXT
 ```

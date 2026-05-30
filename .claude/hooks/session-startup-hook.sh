@@ -69,9 +69,15 @@ SessionStart hook additional context: <godworld-state>
 
 Session: $SESSION_NUM | Day: $DAY_NUM | Cycle: $CYCLE_NUM
 Terminal: $TERMINAL_NAME$FALLBACK_NOTE
-Last journal: $LAST_ENTRY
-
 EOF
+
+  # G-SS3: the journal is a persona artifact — emit "Last journal" only for
+  # media + Mags-only boots. Operational terminals (civic / research-build /
+  # engine-sheet) don't load the journal, so the line is noise there.
+  if [ "$MAGS_ONLY" = "yes" ] || [ "$TERMINAL_NAME" = "media" ]; then
+    echo "Last journal: $LAST_ENTRY"
+  fi
+  echo ""
 
   # --- EMIT BOOT SEQUENCE ---
   # Each terminal gets a pre-routed instruction block. Assistant does not re-detect terminal.
@@ -137,16 +143,12 @@ BOOT
     esac
   fi
 
-  # --- LEDGER NOTE ---
-  # S94 recovery is complete (2026-03-14). LEDGER_REPAIR.md retains its
-  # "DO NOT re-analyze" framing as historical guidance — don't re-litigate
-  # the S68 corruption. Current ledger state is tracked in LEDGER_AUDIT.md.
-  if [ -f "$GODWORLD_ROOT/docs/engine/LEDGER_REPAIR.md" ]; then
-    if head -5 "$GODWORLD_ROOT/docs/engine/LEDGER_REPAIR.md" | grep -q -i "DO NOT"; then
-      echo "LEDGER NOTE: docs/engine/LEDGER_REPAIR.md retains historical 'DO NOT re-analyze' guidance from the S68 corruption window. S94 recovery COMPLETE; current ledger state in docs/engine/LEDGER_AUDIT.md (S181 refresh 2026-04-27). Refresh tool: scripts/auditSimulationLedger.js."
-      echo ""
-    fi
-  fi
+  # --- LEDGER NOTE (removed S247/RB-6, G-SS11) ---
+  # S94 recovery complete (2026-03-14). The hook used to emit a clarifying note
+  # whenever LEDGER_REPAIR.md's head still carried "DO NOT re-analyze" framing.
+  # That framing was reworded to plain HISTORICAL status (same commit), so the
+  # note had nothing left to clarify — block removed rather than left as a dead
+  # no-op grep. Current ledger state: docs/engine/LEDGER_AUDIT.md.
 
   # --- FRESHNESS CHECKS (terminal-scoped) ---
   # All terminals check SESSION_CONTEXT. Full-persona terminals additionally check journal + newsroom files.

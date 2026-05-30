@@ -1,8 +1,8 @@
-# Ledger Repair — Read This First
+# Ledger Repair — HISTORICAL (S68 corruption, recovered S94)
 
-**DO NOT re-analyze the damage. DO NOT propose blind restore from backup. START FROM THE 5-STEP PLAN.**
+**This document is incident archaeology, not active guidance.** The S68 Simulation_Ledger corruption was fully recovered in Session 94 (2026-03-14). Preserved for the record — no need to re-analyze the damage or propose a blind restore; that work is done. **Current ledger state lives in `docs/engine/LEDGER_AUDIT.md`** (S181 refresh 2026-04-27; refresh tool `scripts/auditSimulationLedger.js`). The original 5-step recovery plan below is retained as the record of how recovery proceeded.
 
-Last Updated: 2026-03-14 | Session 94 | **RECOVERY COMPLETE**
+Last Updated: 2026-03-14 | Session 94 | **RECOVERY COMPLETE** | head reframed S247/RB-6 (G-SS11 — boot LEDGER NOTE retired)
 
 ---
 

@@ -149,13 +149,17 @@ If template + skill text disagree on detail, **template is canonical**. Skill dr
 2. **Bylines are plain `By {Reporter} | Bay Tribune {Section}`, never `**By …**`.** The parser's article filter matches `^By\s+`; a bold byline doesn't match, collapsing the byline-article count and throwing the fail-loud `bylineArticles.length !== rows.length` guard in `bindCanonicalHeadlines`.
 3. **ARTICLE TABLE is the 4-column canonical shape** — header `| Slot | Section | Reporter | Headline |` (extra cols like `Words` tolerated), **every** row's `Slot` a canonical ID matching `^(FP\d+|ED|C\d+|N\d+|S\d+|L\d+|O\d+|B\d+|CH\d+|Q\d+)$`. A bare ordinal (`1`, `2`) fails the pattern and drops the whole table to the legacy silent-skip path. **Regenerate the ARTICLE TABLE from FINAL placement** (the slots that actually shipped, in print order), not from sift metadata — sift order drifts from final placement (G-W62). The `Headline` cell is the binding source of truth; a parsed section with N bylined articles must have exactly N table rows or the parser throws.
 
-**Compile-time `canonicalShape` gate — run it, FAIL LOUD (G-P-NEW1).** After writing the `.txt`, before continuing, gate on the parser's own verdict:
+**Compile-time parser gate — run it, FAIL LOUD (G-P-NEW1).** After writing the `.txt`, before continuing, run the shipped parser against the file and gate on it:
 
 ```bash
-node -e "const p=require('./lib/editionParser').parseEdition('editions/cycle_pulse_edition_{XX}.txt'); if(!p.articleTable.canonicalShape){console.error('COMPILE FAIL: ARTICLE TABLE not canonicalShape — check Slot IDs + 4 required columns'); process.exit(1)} console.log('OK canonicalShape=true,', p.articleTable.rows.length, 'slots:', p.articleTable.rows.map(r=>r.slot).join(','))"
+node -e "try{const p=require('./lib/editionParser').parseEdition('editions/cycle_pulse_edition_{XX}.txt'); if(!p.articleTable.canonicalShape){console.error('COMPILE FAIL: ARTICLE TABLE not canonicalShape — check 4 required columns + Slot IDs'); process.exit(1)} console.log('OK canonicalShape=true,', p.articleTable.rows.length, 'slots:', p.articleTable.rows.map(r=>r.slot).join(','))}catch(e){console.error('COMPILE FAIL: parser threw —', e.message); process.exit(1)}"
 ```
 
-If it exits non-zero, the edition will not render — fix the table/headlines/bylines and re-run before any downstream step. This converts the entire S235/S240 silent-breakage class into a loud compile-time error that cannot ship.
+**What this catches and how (precise — don't overclaim).** The gate exits non-zero on all three malformations above, but by **two distinct paths**, because `canonicalShape` is a **table-only** boolean (`hasAllRequired 4 cols && every Slot matches the canonical pattern`) — it does NOT inspect headline level or byline style:
+- **Mode 3 (bad ARTICLE TABLE — bare-ordinal slot or missing column):** `parseEdition` succeeds, `canonicalShape === false` → the explicit check exits 1.
+- **Modes 1 & 2 (H1 headline / bold byline):** `parseEdition` itself **throws** inside `bindCanonicalHeadlines` (the `bylineArticles.length !== rows.length` fail-loud guard — H1 and bold bylines both break which chunks register as byline-bearing articles) → the `catch` exits 1. Empirically verified C95: bold byline → "found 0 byline-bearing"; H1 → "found 1 of 3".
+
+So the command closes the full fatal S235/S240 class, but `### Headline` (mode 1) is enforced by **this compile instruction + the parser throw**, not by the `canonicalShape` flag. The `### ` form also keeps stray H1/tagline cruft out of the retained body text. If the gate exits non-zero, the edition will not render — fix the table/headlines/bylines and re-run before any downstream step.
 
 **Edition format (rule reference):**
 

@@ -38,7 +38,8 @@ This is a game moment — Mike decides what the newspaper covers.
 ## Prerequisites
 
 Verify these exist before starting:
-- Service account at `/root/.config/godworld/.env` (sheet primary reads require it; fail-loud if absent)
+- Service account at `~/.config/godworld/.env` (sheet primary reads require it; fail-loud if absent)
+- **Environment (G-S22):** Node-CLI sheet reads need the env loaded first — use the canonical loader `require('./lib/env')` (sources `~/.config/godworld/.env`, sets `GODWORLD_SHEET_ID`). A bare `getSheetData()` snippet fails with `GODWORLD_SHEET_ID not set` because there is no project-root `.env`; do **not** point `dotenv` at one. Run snippets from the repo root so `./lib/env` resolves, or `node -r ./lib/env -e "…"`.
 - `output/world_summary_c{XX}.md` — from `/build-world-summary` (orientation only in v2 — engine numbers + tables; narrative content sourced from sheets)
 - `output/production_log_city_hall_c{XX}.md` — from `/city-hall` (voice decisions, quotes, tracker updates; one input among many, NOT the spine)
 - `docs/mags-corliss/NEWSROOM_MEMORY.md` — updated by post-publish (errata, coverage gaps, arcs, character continuity)

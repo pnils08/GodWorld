@@ -1,8 +1,8 @@
 ---
 name: build-world-summary
 description: Wrapper around scripts/buildWorldSummary.js — deterministic Node writer that assembles output/world_summary_c{XX}.md from sheets + engine_audit JSON. No LLM in the writer loop. Run after /engine-review, before /city-hall + /sift.
-version: "2.0"
-updated: 2026-05-24
+version: "2.0.1"
+updated: 2026-05-30
 tags: [engine, active]
 effort: low
 argument-hint: "[cycle-number]"
@@ -85,12 +85,13 @@ Operator confirms file exists at expected path + has non-zero size. No deeper ed
 
 ## Where this sits
 
-Step 5 in the run-cycle chain:
+Step 5 in the run-cycle chain (canonical order per `.claude/skills/run-cycle/SKILL.md`):
 
-1. `/engine-review` writes `output/engine_audit_c{XX}.json`
-2. `/city-hall-prep` + `/city-hall` write `output/production_log_city_hall_c{XX}.md` (optional input for Civic Decisions section pointer)
-3. **`/build-world-summary` runs this wrapper** → produces `output/world_summary_c{XX}.md`
+1. `/engine-review` (Step 4) writes `output/engine_audit_c{XX}.json`
+2. **`/build-world-summary` runs this wrapper (Step 5)** → produces `output/world_summary_c{XX}.md`
+3. *Downstream* — `/city-hall-prep` + `/city-hall` write `output/production_log_city_hall_c{XX}.md`. **City-hall runs AFTER this skill** (run-cycle §What Happens After), so the Civic Decisions section is a FORWARD pointer to a not-yet-written log, **not** a past input. If the log is absent at run time, the section says so explicitly — that's correct chain state, not a missed prereq (G-BWS2).
 4. `/sift` reads world_summary as orientation-only (per `/sift` v2.0 §What's new — sheet-primary, world_summary is engine numbers + tables, not narrative content)
+5. `/write-edition` reads sift output → reporters → compile → publish
 
 `/post-publish` Step 2c handles Supermemory ingest. This skill produces the file; post-publish canonizes it.
 

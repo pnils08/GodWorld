@@ -1,8 +1,8 @@
 ---
 name: engine-review
 description: Post-cycle engine state diagnostic. Runs the deterministic engine auditor, then frames its findings as 7-field ailment briefs with remedy paths. Phase 38 (revised S146 to consume auditor JSON instead of re-scanning sheets).
-version: "1.0"
-updated: 2026-04-17
+version: "1.1"
+updated: 2026-05-30
 tags: [engine, active]
 effort: medium
 disable-model-invocation: true
@@ -104,19 +104,19 @@ As of S146, most events in `WorldEvents_V3_Ledger` resolve to `eventType: misc-e
 
 For every `type: 'improvement'` in `patterns[]`, write one short paragraph: what's working and why. Don't bury good news. Phase 38.4 (S146 spine step 5) now also threads improvement-side handles into `tribuneFraming.storyHandles` when a positive trend has a named cause — surface those as story candidates for sift, same format as ailment briefs but tagged **IMPROVEMENT** at the top.
 
-## Step 7 — Measurement check (cycles after the first)
+## Step 7 — Measurement check
 
 The audit JSON carries measurement state directly: every pattern has a `measurement` field; the JSON has a top-level `measurementHistory[]` rollup. Don't read prior `engine_review_*.md` files — the structured fields already record what fired and what didn't.
 
+**The normal case is mixed (G-ER7).** Past the first cycle, the auditor always carries `measurementHistory[]`, but each cycle still surfaces *new* patterns with no prior to match against. C95, for example: 3 of 7 ailments had `measurement.available: true`; 4 were new patterns this cycle with `available: false` / `reason: 'no-prior-match'`. So **render the table by default** — the genuine first-run / no-table case is the rare exception, not the lead.
+
 Render in three parts:
 
-1. **Per-pattern table.** One row per pattern with `measurement.available === true`: pattern type, affected entity, prior remedy type, expected, observed, verdict. If every pattern is `available: false` because no prior audit exists yet (`reason: 'no-prior-audit'`), write the single line `First review — no prior to compare. Measurement loop will activate on next cycle.` and skip the table.
+1. **Per-pattern table.** Render a row for **every** pattern, not only the `available: true` ones. For `available: true`: pattern type, affected entity, prior remedy type, expected, observed, verdict. For `available: false`, gate the verdict cell on `measurement.reason`: `no-prior-match` → `—`; `prior-had-no-expectation` → `no prior expectation`. Don't omit `available: false` rows silently — a new pattern with no prior is signal, not absence. **Skip the table entirely only in the genuine first-run case**: every pattern is `available: false` AND `reason: 'no-prior-audit'` — then write the single line `First review — no prior to compare. Measurement loop will activate on next cycle.`
 
 2. **Remedy-type track record.** Group `measurementHistory[]` by `priorRemedyType`, count verdicts (`remedy-firing-as-expected`, `remedy-firing-insufficient`, `remedy-not-firing`, `remedy-overshot`). One row per type. This is the city's multi-cycle learning signal — what kind of intervention has actually moved the world.
 
 3. **Win callout.** If any pattern this cycle reads `verdict: 'remedy-firing-as-expected'` AND its prior-cycle entry in `measurementHistory[]` was `remedy-not-firing`, name it in voice: the gap closed — that's a story candidate, not just a data point. One line under the table.
-
-For `available: false` rows other than the first-run case, gate display on `measurement.reason`: `no-prior-match` → render as `—`; `prior-had-no-expectation` → render as `no prior expectation`. Don't omit them silently.
 
 ## Output File
 

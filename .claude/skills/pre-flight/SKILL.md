@@ -1,8 +1,8 @@
 ---
 name: pre-flight
 description: Verify manual inputs are ready before running a cycle. Sports feed, intakes, initiative tracker, coverage ratings.
-version: "1.1"
-updated: 2026-05-24
+version: "1.2"
+updated: 2026-05-30
 tags: [engine-sheet, active]
 effort: low
 disable-model-invocation: true
@@ -14,7 +14,42 @@ disable-model-invocation: true
 
 Checks that manual inputs are ready before the engine runs. The engine won't fail without these — it will produce a cycle with silent gaps.
 
-## Step 1: Sports Feed
+## Run (canonical)
+
+```bash
+node scripts/preflightInputCheck.js              # auto-derive target cycle from SESSION_CONTEXT
+node scripts/preflightInputCheck.js --cycle=96   # explicit target
+```
+
+The script (ES-7 / G-PF1) is the deterministic check — it loads env via `require('../lib/env')`, reads the sheets, classifies every Initiative_Tracker row by §Placeholder Convention, and prints the §Output report. **Run it; review the output.** The step descriptions below document *what it checks* so you can read the verdict — they are not a manual procedure to re-derive each cycle.
+
+**Exit codes:** `0` READY (or warnings only) · `1` NOT READY (missing required sports cols OR partial-real initiative rows) · `2` argument/data error. Fail the gate on a non-zero exit.
+
+Real output (C95):
+
+```
+PRE-FLIGHT: Cycle 95
+========================================
+Target derivation: --cycle=95 (explicit)
+
+[x] Sports Feed: 5 entries, all required + recommended columns populated
+[ ] Citizen Intake: NOT WIRED
+[ ] Business Intake: NOT WIRED
+[ ] Storyline Intake: NOT WIRED
+[x] Initiative Tracker: 6 real / 1 placeholder / 0 bloat
+      INFO placeholder INIT-004 — reserved slot, no validation required
+[x] Coverage Ratings: C94 — 3 rows (0 unprocessed, ready for engine intake)
+========================================
+READY
+```
+
+Gap fixes baked into the script vs the pre-S246 manual flow: env-loader (G-PF2), 3-class initiative output (G-PF3), cycle auto-derivation (G-PF4), Processed-enum semantics (G-PF5), canonical `InitiativeID` keying (G-PF6).
+
+---
+
+## What the script checks (reference)
+
+### Step 1: Sports Feed
 
 Read `Oakland_Sports_Feed` for the target cycle number.
 
@@ -72,25 +107,14 @@ Decision tree (apply in order; first match wins):
 Read `Edition_Coverage_Ratings` for previous cycle.
 
 - Rows exist with Cycle, Domain, Rating populated
-- Rows not already marked Processed
+- Rows not already marked Processed. **Processed enum (G-PF5):** a row counts as unprocessed unless its `Processed` cell lowercases to `'true'` — matches the write-side check in `phase02-world/applyEditionCoverageEffects.js`.
 
 Flag missing as WARNING — engine runs without media feedback.
 
 ## Output
 
-```
-PRE-FLIGHT: Cycle {XX}
-========================
-[x] Sports Feed: 3 entries, all required columns populated
-[ ] Citizen Intake: NOT WIRED
-[ ] Business Intake: NOT WIRED
-[ ] Storyline Intake: NOT WIRED
-[x] Initiative Tracker: 6 rows, all valid
-[!] Coverage Ratings: MISSING for C{XX-1}
-========================
-READY / NOT READY
-```
+Canonical output shape is shown under §Run above (real C95 verdict). The Initiative Tracker line carries the §Placeholder Convention 3-class breakdown — `<real> real / <placeholder> placeholder / <bloat> bloat` with per-row INFO/partial-real detail — **not** a flat "all valid" (G-PF3). Verdict line is `READY` / `NOT READY` matching the exit code.
 
 ## Sheet Access
 
-Service account via `lib/sheets.js`. Spreadsheet ID from `.env`.
+Service account via `lib/sheets.js`. Env loaded via `require('../lib/env')` (sources `~/.config/godworld/.env`, **NOT** a project-root `.env` — that file doesn't exist). Spreadsheet ID = `GODWORLD_SHEET_ID`. The canonical script already does this load; only relevant if you read sheets by hand. (G-PF2)

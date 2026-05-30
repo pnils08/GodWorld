@@ -86,6 +86,31 @@ function buildTechSide(pattern, templates) {
   };
 }
 
+// G-ER4 (S244 ES-3) — coverage-gap patterns are Tribune-side editorial gaps, not
+// council/engine ailments. A domain producing events with zero prior-cycle
+// coverage resolves to gap:no-mitigator (no initiative addresses it — correctly,
+// because there's nothing for council to vote on), and the no-mitigator templates
+// then recommend "propose a new initiative" + "mayoral pressure" — wrong class.
+// The real remedy is sift promoting the matching domain brief. The detector
+// already supplies routingHint (dedicated-piece-warranted | roundup-thread-
+// acceptable), so route accordingly.
+function buildCoverageGapRemedy(pattern) {
+  const f = (pattern.evidence && pattern.evidence.fields) || {};
+  const domain = f.domain || 'this domain';
+  const count = f.eventCount != null ? f.eventCount : 'several';
+  const dedicated = f.routingHint === 'dedicated-piece-warranted';
+  return {
+    type: 'editorial-pickup',
+    target: 'sift / desk assignment',
+    action: dedicated
+      ? `promote a dedicated ${domain} brief this edition`
+      : `thread the ${domain} events into a roundup / desk thread`,
+    rationale: `${count} ${domain} event(s) produced this cycle with zero prior-cycle Tribune coverage — an editorial coverage gap, not a council or mayoral matter. Remedy: sift promotes the matching ${domain} baseline brief(s), not a new initiative.`,
+    expectedEngineEffect: `${domain} coverage registers next cycle; production-without-consumption gap closes`,
+    measurementSpec: null,
+  };
+}
+
 function confidenceFor(gap, mitigators) {
   if (gap === 'remedy-working') return 'high';
   if (gap === 'mitigator-stuck') {
@@ -106,6 +131,17 @@ function enrich(patterns, ctx) {
         worldSide: [],
         techSide: { triggered: false, bugReport: null },
         confidence: 'n/a',
+      };
+      continue;
+    }
+
+    // G-ER4 — coverage-gap is an editorial remedy class, routed before the
+    // council/engine gap-keyed templates.
+    if (pattern.type === 'coverage-gap') {
+      pattern.remedyPath = {
+        worldSide: [buildCoverageGapRemedy(pattern)],
+        techSide: { triggered: false, bugReport: null },
+        confidence: 'medium',
       };
       continue;
     }

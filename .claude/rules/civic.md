@@ -53,6 +53,18 @@ Per S212 generation-vs-evaluation asymmetry: the **City Clerk is not bureaucracy
 
 Each office is a separate `.claude/agents/civic-office-*/` agent with IDENTITY + RULES + SKILL. Don't blur. Don't have one agent speak for another.
 
+## Council member status enum (G-PREP2)
+
+Every council seat carries a status from `Civic_Office_Ledger`. Truesource (`get_council_member` / `truesource_reference.json`) exposes it; disk artifacts (world_summary) have historically dropped non-`active` members and the operator bridged the gap manually. Don't drop them — status is load-bearing for vote-math.
+
+| Status | Meaning | Vote-math | Topic routing |
+|--------|---------|-----------|---------------|
+| `active` | Full voting member | Marked YES / NO | Normal topic assignment |
+| `recovering` | Seated but not actively voting this window (e.g. D6 Crane) | **Counted in the 9-seat roster, NAMED as ABSENT every tally**; participates via written statement only. Reduces the active-voter denominator (8 active → majority 5) | Written-statement-only assignment, routed through the bloc spokesperson |
+| `vacant` | Seat empty, no member | Named as VACANT in the roster; not a voter | No assignment |
+
+**Vote-math rule (extends "list all 9 members"):** every vote ships the full 9-seat roster with each seat's disposition — `active` members YES/NO, `recovering`/`vacant` seats named explicitly (Mara hard-rule S225: no "5-3 with one absent" without naming the absentee; a 5-3-1 over 9 reads correctly, a 5-3 over 8 drifts). Majority is computed on active voters, not the nominal 9. When a bloc has a recovering member (CRC with Crane recovering → 2 active CRC voters), every cross-bloc vote-math calculation must use the active count. Engine-side companion (Civic_Office_Ledger filter `active`→`active,recovering` in `buildWorldSummary.js`) is engine-sheet's (G-PREP2 ES-half); this rule is the canonical documentation of the enum + vote-math mapping.
+
 ## Production output rules
 
 - **Output to `output/production_log_city_hall_c{XX}.md`** — single source for the cycle's civic state.

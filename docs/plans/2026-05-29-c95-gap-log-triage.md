@@ -156,7 +156,7 @@ Mike S240 meta-principle: "any token burn spent figuring out file paths, formats
 - **Verify:** MCP `get_council_member D8` = CRC matches civic.md + skill; `grep -l trackerOwner .claude/agents/civic-*/RULES.md` → 11; `/reload-skills`.
 - **Source gaps:** G-PREP1, G-PREP2(RB-half), G-PREP3, G-R1(RB-half).
 - **Absorbs ROLLOUT:** civic.12 remnant (G-R1 trackerOwner cascade).
-- **Status:** [ ] not started
+- **Status:** [~] STEPS 1+2 DONE S246 (`ce8ecaf` Chen correction, `a803587` reconciliation guard). **Step 1 / G-PREP1 source-verified:** Chen D8 = CRC confirmed at every layer incl. the upstream `Civic_Office_Ledger` sheet itself (the authority the S195/S197 "correction to OPP" cited — it says CRC, so the OPP annotation never had data backing). Swept 10 files (8 agent roster tables + crc-faction RULES + city-hall-prep; OPP 5→4, CRC 2→3, Mobley D9 stays OPP). ES-6 ledger-companion is MOOT (ledger already CRC). Card/recall layer: C94 OPP packet did NOT list Chen as a member (`Chen in members: false`); agent-memory already CRC; live wd-card MCP read pending reconnect (low risk — ledger-backed). civic.md needed no edit (spokespersons only). **Step 2 / BUNDLE-PREP-A:** reconciliation guard added to city-hall-prep Step 1 + anomaly gate; command verified (truesource JSON read, not the non-CLI `godworld-mcp.py`). **OPEN: Steps 3 (Status enum doc, G-PREP2), 4 (Scenario D paradox — companion to ES-4 just shipped `bc3b893`, G-PREP3), 5 (trackerOwner ×11 agents, G-R1).**
 
 ### Phase RB-5: pre-cycle + engine-review + build-world-summary + sift skill text (Themes T6/T5/T7 RB-half + T-sift)
 

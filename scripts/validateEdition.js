@@ -132,6 +132,63 @@ function severityForLastNameMismatch(editionText, expectedFirst, expectedLast,
   return CRITICAL;
 }
 
+// G-W64 (S246 ES-8) — shared skip-list for the surname-mismatch checks
+// (council / player / civic-office). Previously three identical inline copies.
+// A capitalized token preceding a known surname is only a name-typo signal when
+// it could plausibly BE a first name. Sentence prepositions / articles /
+// conjunctions / titles that appear capitalized in headlines ("Vega Flips Yes
+// On Renewal" → "As Vega", "On Vega") are NOT typos — the C95 false-positive
+// "As Vega" (preposition) flagged as a typo of Ramon Vega. Expanded with the
+// preposition/article/conjunction set so headline fragments stop false-firing.
+const SKIP_FIRST_WORDS = new Set([
+  // sentence connectors / subordinators (original set)
+  'The', 'And', 'But', 'For', 'With', 'From', 'About', 'When', 'While',
+  'After', 'Before', 'Since', 'Until', 'Where', 'That', 'This', 'These', 'Those',
+  'If', 'Or', 'Even', 'Not', 'Just', 'Only', 'Both', 'Each', 'Every',
+  'Either', 'Neither', 'Whether', 'Although', 'Said',
+  // titles / honorifics / role words (original set, union of all three checks)
+  'Councilmember', 'Councilwoman', 'Councilman', 'Council', 'Member',
+  'Representative', 'Commissioner', 'Senator', 'Governor', 'Mayor', 'Judge',
+  'Officer', 'Deputy', 'Chief', 'Director', 'Mr', 'Mrs', 'Ms', 'Dr',
+  'Former', 'Current', 'Incoming', 'Outgoing', 'Late', 'Dear',
+  // G-W64 additions — prepositions / articles / conjunctions / headline leads
+  // (never real first names; appear capitalized in title-case headlines)
+  'As', 'At', 'By', 'In', 'Of', 'On', 'Up', 'An', 'A', 'To',
+  'Nor', 'So', 'Yet', 'Via', 'Per', 'Amid', 'Into', 'Onto', 'Over', 'Under',
+  'Toward', 'Towards', 'Despite', 'Across', 'Among', 'Atop', 'Unto', 'Vs',
+  'Than', 'Then', 'Thus', 'Here', 'There', 'Now', 'Today', 'Against', 'Amongst',
+  // baseball / role position words (from the player-name check) — never first
+  // names, harmless across all three checks
+  'Manager', 'Coach', 'Pitcher', 'Catcher', 'Shortstop', 'Outfielder', 'Baseman',
+  'Rookie', 'Veteran', 'Like',
+]);
+
+// G-W64 — extract the full "First Last(-Last)?" name token starting at a match
+// index, tolerating compound/hyphenated/accented surnames (Tran-Muñoz,
+// Chen-Ramirez). Used to test whether a surname-share match is actually a
+// distinct canonical citizen rather than a typo.
+function extractFullNameAt(text, index) {
+  const slice = text.slice(index);
+  const m = slice.match(/^([A-ZÀ-Þ][a-zà-ÿ'’.]+(?:\s+[A-ZÀ-Þ][a-zà-ÿ'’.]+(?:[-][A-ZÀ-Þ][a-zà-ÿ'’.]+)*)+)/u);
+  return m ? m[1] : null;
+}
+
+function normalizeName(s) {
+  return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+}
+
+// G-W64 — true when the found full name at this match position is itself a
+// known canonical person (citizen / official / player / council). A surname
+// shared between two DISTINCT canonical people (Vanessa Tran-Muñoz vs Leonard
+// Tran) is not a typo of either — skip it. A genuine typo (Wayne Ashford where
+// Warren Ashford belongs) is NOT in the canonical set, so it still flags.
+function isDistinctCanonicalName(editionText, matchIndex, knownCanonicalFullNames) {
+  if (!knownCanonicalFullNames || knownCanonicalFullNames.size === 0) return false;
+  const token = extractFullNameAt(editionText, matchIndex);
+  if (!token) return false;
+  return knownCanonicalFullNames.has(normalizeName(token));
+}
+
 function loadJSON(filepath) {
   try {
     return JSON.parse(fs.readFileSync(filepath, 'utf-8'));
@@ -162,7 +219,7 @@ function loadBlocklist(filepath) {
 
 // ─── Validation Checks ─────────────────────────────────────────
 
-function checkCouncilNames(editionText, canon) {
+function checkCouncilNames(editionText, canon, knownCanonicalFullNames) {
   const issues = [];
   if (!canon || !canon.council) return issues;
 
@@ -196,14 +253,11 @@ function checkCouncilNames(editionText, canon) {
       const foundFirst = match[1];
       const expectedFirst = member.name.split(' ')[0];
       if (foundFirst === expectedFirst) continue;
-      const skipWords = ['The', 'And', 'But', 'For', 'With', 'From', 'About', 'When', 'While',
-        'After', 'Before', 'Since', 'Until', 'Where', 'That', 'This', 'These', 'Those',
-        'Councilmember', 'Councilwoman', 'Councilman', 'Council', 'Member', 'Representative',
-        'Commissioner', 'Senator', 'Governor', 'Mayor', 'Judge', 'Officer', 'Deputy',
-        'Mr', 'Mrs', 'Ms', 'Dr', 'If', 'Or', 'Even', 'Not', 'Just', 'Only',
-        'Both', 'Each', 'Every', 'Either', 'Neither', 'Whether', 'Although',
-        'Former', 'Current', 'Incoming', 'Outgoing', 'Late', 'Dear', 'Said'];
-      if (skipWords.includes(foundFirst)) continue;
+      if (SKIP_FIRST_WORDS.has(foundFirst)) continue;
+      // G-W64 — skip if the matched full name is itself a distinct canonical
+      // person (e.g. "Vanessa Tran-Muñoz" sharing surname "Tran" with Leonard
+      // Tran). A real typo's full name is NOT canonical, so it still flags.
+      if (isDistinctCanonicalName(editionText, match.index, knownCanonicalFullNames)) continue;
       const memberLast = member.name.split(' ').pop();
       const memberFirst = member.name.split(' ')[0];
       const sev = severityForLastNameMismatch(editionText, memberFirst, memberLast, foundFirst);
@@ -780,13 +834,7 @@ function checkPlayerFirstNames(editionText, canon, knownOfficialNames) {
     while ((match = pattern.exec(editionText)) !== null) {
       const foundFirst = match[1];
       if (foundFirst === player.firstName) continue;
-      const skipWords = ['The', 'And', 'But', 'For', 'With', 'From', 'About', 'When', 'While',
-        'After', 'Before', 'Since', 'Until', 'Where', 'That', 'This', 'These', 'Those',
-        'Manager', 'Coach', 'Pitcher', 'Catcher', 'Shortstop', 'Outfielder', 'Baseman',
-        'Mr', 'Mrs', 'Ms', 'Dr', 'If', 'Or', 'Even', 'Not', 'Just', 'Only',
-        'Both', 'Each', 'Every', 'Either', 'Neither', 'Whether', 'Although',
-        'Former', 'Current', 'Rookie', 'Veteran', 'Said', 'Like', 'Via', 'Per'];
-      if (skipWords.includes(foundFirst)) continue;
+      if (SKIP_FIRST_WORDS.has(foundFirst)) continue;
       const officialFirsts = officialFirstsByLast[lastNameLower] || [];
       if (officialFirsts.includes(foundFirst)) continue;
       const sev = severityForLastNameMismatch(editionText, player.firstName, player.lastName, foundFirst);
@@ -978,7 +1026,7 @@ function checkInitiativeFacts(editionText, initiatives) {
 
 // ─── Civic Office Name Check (vs Civic_Office_Ledger) ───────────
 
-function checkCivicOfficeNames(editionText, civicOfficials, knownPlayerNames) {
+function checkCivicOfficeNames(editionText, civicOfficials, knownPlayerNames, knownCanonicalFullNames) {
   const issues = [];
   if (!civicOfficials || civicOfficials.length === 0) return issues;
 
@@ -1006,14 +1054,12 @@ function checkCivicOfficeNames(editionText, civicOfficials, knownPlayerNames) {
     while ((match = pattern.exec(editionText)) !== null) {
       const foundFirst = match[1];
       if (foundFirst === firstName) continue;
-      const skipWords = ['The', 'And', 'But', 'For', 'With', 'From', 'About', 'When', 'While',
-        'After', 'Before', 'Since', 'Until', 'Where', 'That', 'This',
-        'Councilmember', 'Councilwoman', 'Councilman', 'Council', 'Chief', 'Director',
-        'Mr', 'Mrs', 'Ms', 'Dr', 'If', 'Or', 'Even', 'Not', 'Just', 'Only',
-        'Former', 'Current', 'Said', 'Mayor', 'Deputy'];
-      if (skipWords.includes(foundFirst)) continue;
+      if (SKIP_FIRST_WORDS.has(foundFirst)) continue;
       const playerFirsts = playerFirstsByLast[lastName.toLowerCase()] || [];
       if (playerFirsts.includes(foundFirst)) continue;
+      // G-W64 — skip if the matched full name is itself a distinct canonical
+      // person (e.g. "Rose Delgado" sharing surname with "Shawna Delgado").
+      if (isDistinctCanonicalName(editionText, match.index, knownCanonicalFullNames)) continue;
       const sev = severityForLastNameMismatch(editionText, firstName, lastName, foundFirst);
       const key = `${lastName}|${foundFirst}|${sev}`;
       const sampleContext = editionText.slice(
@@ -1152,10 +1198,39 @@ Exit codes:
   // ─── Run all checks ───
   const allIssues = [];
 
+  // G-W64 — build the cross-domain canonical-name oracle once: every full name
+  // we know is a real person (ledger citizen, civic-office holder, A's roster,
+  // council member, mayor). The surname-mismatch checks consult it to skip a
+  // shared-surname hit that is itself a distinct canonical person rather than a
+  // typo (e.g. Vanessa Tran-Muñoz vs Leonard Tran).
+  const knownCanonicalFullNames = new Set();
+  for (const c of ledgerCitizens) {
+    const first = (c.First || '').trim();
+    const last = (c.Last || '').trim();
+    if (first && last) knownCanonicalFullNames.add(normalizeName(first + ' ' + last));
+  }
+  for (const o of civicOfficials) {
+    const holder = (o.Holder || '').trim();
+    if (holder && holder.includes(' ')) knownCanonicalFullNames.add(normalizeName(holder));
+  }
+  for (const p of (canon && canon.asRoster ? canon.asRoster : [])) {
+    if (p && p.name && p.name.includes(' ')) knownCanonicalFullNames.add(normalizeName(p.name));
+  }
+  for (const m of (canon && canon.council ? canon.council : [])) {
+    const nm = m.member || m.name;
+    if (nm && nm.includes(' ')) knownCanonicalFullNames.add(normalizeName(nm));
+  }
+  if (canon && canon.executiveBranch && canon.executiveBranch.mayor) {
+    const mayor = typeof canon.executiveBranch.mayor === 'string'
+      ? canon.executiveBranch.mayor
+      : (canon.executiveBranch.mayor.name || '');
+    if (mayor && mayor.includes(' ')) knownCanonicalFullNames.add(normalizeName(mayor));
+  }
+
   console.log('\nRunning checks...');
 
   // 1. Council names
-  const councilIssues = checkCouncilNames(editionText, canon);
+  const councilIssues = checkCouncilNames(editionText, canon, knownCanonicalFullNames);
   allIssues.push(...councilIssues);
   console.log(`  [${councilIssues.length === 0 ? '✓' : '!'}] Council names: ${councilIssues.length} issues`);
 
@@ -1241,7 +1316,7 @@ Exit codes:
   }
 
   if (civicOfficials.length > 0) {
-    const civicIssues = checkCivicOfficeNames(editionText, civicOfficials, playerFirstsByLast);
+    const civicIssues = checkCivicOfficeNames(editionText, civicOfficials, playerFirstsByLast, knownCanonicalFullNames);
     allIssues.push(...civicIssues);
     console.log(`  [${civicIssues.length === 0 ? '✓' : '!'}] Civic office names (live): ${civicIssues.length} issues`);
   } else {
@@ -1324,6 +1399,12 @@ module.exports = {
   POSITION_NAMES,
   checkPlayerPositions,
   checkCitizenNames,
+  // G-W64 (S246 ES-8)
+  checkCouncilNames,
+  checkCivicOfficeNames,
+  extractFullNameAt,
+  isDistinctCanonicalName,
+  SKIP_FIRST_WORDS,
 };
 
 if (require.main === module) {

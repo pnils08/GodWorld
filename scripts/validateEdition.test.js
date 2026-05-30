@@ -133,5 +133,61 @@ console.log('\nTest 5: checkCitizenNames basic smoke');
   assertEqual('correct name in Names Index — 0 citizen issues', issues.length, 0);
 }
 
+// ────────────────────────────────────────────────────────────────────────────
+// Test 6: G-W64 — checkCouncilNames false-positive suppression
+// ────────────────────────────────────────────────────────────────────────────
+console.log('\nTest 6: G-W64 — council name-check context awareness');
+{
+  const canon = {
+    council: [
+      { member: 'Leonard Tran', district: 'D2', faction: 'IND' },
+      { member: 'Ramon Vega', district: 'D1', faction: 'IND' },
+      { member: 'Nina Chen', district: 'D8', faction: 'CRC' },
+    ],
+  };
+
+  // (a) Preposition headline fragment "As Vega" must NOT flag as a Ramon typo.
+  const headlineText = 'As Vega Flips Yes On Renewal, the council moved. Ramon Vega cast the deciding vote.';
+  const hIssues = helper.checkCouncilNames(headlineText, canon, new Set(['ramon vega', 'leonard tran', 'nina chen']));
+  const asVega = hIssues.filter(i => /\bAs Vega\b/.test(i.detail || ''));
+  assertEqual('"As Vega" preposition fragment — 0 council issues', asVega.length, 0);
+
+  // (b) Distinct canonical citizen sharing a surname must NOT flag.
+  const known = new Set(['leonard tran', 'ramon vega', 'nina chen', 'vanessa tran-muñoz', 'bobby chen-ramirez']);
+  const distinctText = 'OARI Director Vanessa Tran-Muñoz testified. Leonard Tran (D2) questioned the budget. Bobby Chen-Ramirez gave the health update; Nina Chen (D8) responded.';
+  const dIssues = helper.checkCouncilNames(distinctText, canon, known);
+  const tranFP = dIssues.filter(i => /Vanessa Tran/.test(i.detail || ''));
+  const chenFP = dIssues.filter(i => /Bobby Chen/.test(i.detail || ''));
+  assertEqual('"Vanessa Tran-Muñoz" distinct citizen — 0 false typo flags', tranFP.length, 0);
+  assertEqual('"Bobby Chen-Ramirez" distinct citizen — 0 false typo flags', chenFP.length, 0);
+
+  // (c) A REAL typo (wrong first name, not a known canonical person) STILL flags.
+  const typoText = 'Wayne Tran (D2) voted no, though Leonard Tran is the councilmember.';
+  const tIssues = helper.checkCouncilNames(typoText, canon, known);
+  const realTypo = tIssues.filter(i => /Wayne Tran/.test(i.detail || ''));
+  assert('real typo "Wayne Tran" still flagged (regression guard)', realTypo.length >= 1,
+    `expected ≥1, got ${realTypo.length}`);
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// Test 7: G-W64 — helper units
+// ────────────────────────────────────────────────────────────────────────────
+console.log('\nTest 7: G-W64 — extractFullNameAt + SKIP_FIRST_WORDS units');
+{
+  assertEqual('extractFullNameAt grabs hyphenated surname',
+    helper.extractFullNameAt('Vanessa Tran-Muñoz testified', 0), 'Vanessa Tran-Muñoz');
+  assertEqual('extractFullNameAt grabs simple two-token name',
+    helper.extractFullNameAt('Leonard Tran spoke', 0), 'Leonard Tran');
+  assert('SKIP_FIRST_WORDS has prepositions (As/Of/On/In)',
+    helper.SKIP_FIRST_WORDS.has('As') && helper.SKIP_FIRST_WORDS.has('Of') &&
+    helper.SKIP_FIRST_WORDS.has('On') && helper.SKIP_FIRST_WORDS.has('In'));
+  assert('SKIP_FIRST_WORDS retains original titles (Mayor/Deputy)',
+    helper.SKIP_FIRST_WORDS.has('Mayor') && helper.SKIP_FIRST_WORDS.has('Deputy'));
+  assert('isDistinctCanonicalName true for known full name',
+    helper.isDistinctCanonicalName('Vanessa Tran-Muñoz testified', 0, new Set(['vanessa tran-muñoz'])) === true);
+  assert('isDistinctCanonicalName false when set empty',
+    helper.isDistinctCanonicalName('Vanessa Tran-Muñoz', 0, new Set()) === false);
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed > 0 ? 1 : 0);

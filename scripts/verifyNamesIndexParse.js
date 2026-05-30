@@ -21,6 +21,18 @@
  *
  * Flags:
  *   --expected <N>  Compare source count against this number; fail on mismatch.
+ *   --buckets <csv> Compare source count against the SUM of these bucket counts
+ *                   (e.g. `--buckets 29,5,2` = matched,cultural,canon-drift).
+ *                   G-P-NEW5 (S246 ES-8): ingestPublishedEntities partitions
+ *                   NAMES INDEX rows into matched (→ Sim_Ledger) + cultural-only
+ *                   (CUL-IDs) + canon-drift (deferred backfill) buckets. The
+ *                   verifier counts ALL source rows; comparing against only the
+ *                   matched count false-FAILs when rows legitimately route to
+ *                   other buckets (C95: 36 source vs 29 matched = false FAIL,
+ *                   but 29+5+2 = 36 accounted-for). When --buckets is supplied
+ *                   it overrides --expected: source must equal the sum of all
+ *                   buckets (every row accounted for, in any bucket) — a real
+ *                   silent-drop (source > sum) still FAILs, preserving signal.
  *   --strict        Fail loud when NAMES INDEX section is absent, even when
  *                   no --expected is supplied. Per S197 BUNDLE-A: /post-publish
  *                   Step 5 invokes with --strict to enforce format-contract
@@ -116,6 +128,27 @@ if (expectedRaw !== null) {
   }
 }
 
+// G-P-NEW5 — --buckets <csv> sums all ingest buckets (matched + cultural +
+// canon-drift + appended) and uses that as the effective expected, so source
+// count == total-accounted-for passes even when rows route to non-matched
+// buckets. Overrides --expected (and is the correct comparison for bucketed
+// ingest). A genuine silent-drop (source > bucket sum) still mismatches → FAIL.
+const bucketsRaw = parseFlag('buckets');
+let bucketSum = null;
+if (bucketsRaw !== null) {
+  const parts = String(bucketsRaw).split(',').map(s => s.trim()).filter(s => s !== '');
+  const nums = parts.map(p => parseInt(p, 10));
+  if (nums.length === 0 || nums.some(n => !Number.isFinite(n) || n < 0)) {
+    console.error('[ERROR] --buckets must be a comma-separated list of non-negative integers (e.g. 29,5,2)');
+    process.exit(2);
+  }
+  bucketSum = nums.reduce((a, b) => a + b, 0);
+  if (expected !== null && expected !== bucketSum) {
+    console.log('[NOTE] --buckets sum (' + bucketSum + ') overrides --expected (' + expected + ') — comparing source against total-accounted-for.');
+  }
+  expected = bucketSum;
+}
+
 const fullPath = path.resolve(filePath);
 if (!fs.existsSync(fullPath)) {
   console.error('[ERROR] File not found: ' + fullPath);
@@ -188,10 +221,14 @@ if (!result.found && expected > 0) {
 }
 
 if (result.count !== expected) {
+  const basis = bucketSum !== null
+    ? 'ingest accounted for ' + expected + ' across all buckets (' + bucketsRaw + ')'
+    : 'ingest script parsed ' + expected;
   console.error('[FAIL] mismatch — source has ' + result.count +
-    ' NAMES INDEX rows but ingest script parsed ' + expected);
+    ' NAMES INDEX rows but ' + basis +
+    (bucketSum !== null && result.count > expected ? ' — ' + (result.count - expected) + ' source row(s) unaccounted for (genuine drop)' : ''));
   process.exit(1);
 }
 
-console.log('[OK] source count matches expected');
+console.log('[OK] source count matches ' + (bucketSum !== null ? 'total-accounted-for across buckets' : 'expected'));
 process.exit(0);

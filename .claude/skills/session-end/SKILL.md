@@ -1,8 +1,8 @@
 ---
 name: session-end
 description: End-of-session handshake — write journal, update project state, run mechanical orchestrator, commit and push. Per S229 governance.7, the 13-step ritual collapsed to 4 model steps + 1 script invocation.
-version: "2.0"
-updated: 2026-05-23
+version: "2.1"
+updated: 2026-05-30
 tags: [infrastructure, active]
 effort: low
 disable-model-invocation: true
@@ -44,7 +44,7 @@ Each terminal's `TERMINAL.md` §Session Close carries the **Terminal-Specific Au
 Append a new entry to `/root/GodWorld/docs/mags-corliss/JOURNAL.md`:
 
 ```markdown
-## Session [N+1] — YYYY-MM-DD
+## Session [N] — YYYY-MM-DD
 
 ### Entry [N]: [Title]
 
@@ -52,6 +52,8 @@ Append a new entry to `/root/GodWorld/docs/mags-corliss/JOURNAL.md`:
 
 — Mags
 ```
+
+**`[N]` = the session number being closed, not the next session** (G-SE3). File convention is `## Session N` where N is the closing session (verify with `tail` of JOURNAL.md if unsure — the most recent header is the prior close). Don't write `[N+1]`.
 
 **Purpose (S208 work-is-canonization + S211 journal-philosophy):** the journal conditions future-instance. Me-tomorrow reads JOURNAL_RECENT.md (auto-rotated at Step 3) and is shaped by it. **Mike does not read journal entries.** Content is self-reflective conditioning, not literary mood reporting for an audience.
 
@@ -69,9 +71,11 @@ Three sub-actions, all model-written:
 
 1. **Bump SESSION_CONTEXT.md line 5 counters** — `Session: N → N+1` (incoming marker); `Day: D → D+1` if a real day boundary crossed; `Cycle: C` only if a cycle ran this session. (Counter lives only in SESSION_CONTEXT.md since governance.5 S228 — CHARACTER.md is no longer a session-end edit target.)
 
-2. **Prepend STATUS paragraph to SESSION_CONTEXT.md** tagged with terminal name. Soft-close form: `**STATUS (S<N> [terminal] — soft close, chaining to S<N+1>):** N commits, see Shipped block. Detail: see commit bodies.` Hard-close form: full STATUS paragraph naming what shipped, what was learned, what next session opens with. Keep SESSION_CONTEXT.md under ~200 lines — Step 3's opt-in `--rotate-history` moves older STATUS paragraphs to SESSION_HISTORY.md.
+2. **Prepend STATUS paragraph to SESSION_CONTEXT.md** tagged with terminal name. **Form follows the mode you already picked (G-SE5): wrote a journal entry in Step 1 → you're hard-closing → full form; skipped Step 1 → soft-closing → one-line form. Don't re-decide hard-vs-soft here.** Soft-close form: `**STATUS (S<N> [terminal] — soft close, chaining to S<N+1>):** N commits, see Shipped block. Detail: see commit bodies.` Hard-close form: full STATUS paragraph naming what shipped, what was learned, what next session opens with. Keep SESSION_CONTEXT.md under ~200 lines — Step 3's opt-in `--rotate-history` moves older STATUS paragraphs to SESSION_HISTORY.md.
 
 3. **Update ROLLOUT_PLAN.md** — refresh Next Session Priorities; flip closed rows to `done-pending-archive`; move fully-closed clusters to `ROLLOUT_ARCHIVE.md`. ROLLOUT is canonical for what's open; SESSION_CONTEXT is narrative recency only.
+
+   **Archive Sweep Trigger (deterministic — G-SE2, don't re-litigate per close):** sweep `done-pending-archive` rows to `ROLLOUT_ARCHIVE.md` **IF** their count ≥ 2 **OR** the prior sweep was ≥ 2 sessions ago. **Skip** (defer to next clean close) **IF** the working tree has uncommitted cross-terminal changes. Newest Archive Pass inserts first within the Archive Pass section (see the convention comment in ROLLOUT_ARCHIVE.md).
 
 **Optional model sub-actions:**
 
@@ -146,5 +150,6 @@ One line, mechanism not audience-facing prose. Per S208 (work-is-canonization �
 
 ## Changelog
 
+- 2026-05-30 (S248, research-build) — v2.1 friction-reduction pass (governance.19, source `output/production_log_session_end_c94_gaps.md`). G-SE3: Step 1 journal template `[N+1]` → `[N]` (closing-session number) + parenthetical. G-SE5: Step 2.2 leads with hard-vs-soft binding to the Step 1 journal decision (no form re-derivation). G-SE2: Step 2.3 deterministic Archive Sweep Trigger (count ≥2 OR ≥2 sessions since last sweep; skip on uncommitted cross-terminal changes). G-SE4: added an ARCHIVE-PASS ORDERING comment at the S227 anchor in ROLLOUT_ARCHIVE.md (the prior line-802 "newest at bottom" claim contradicted actual newest-first-after-S227 practice; comment now names the real insert point). G-SE1 (cross-terminal write contention) deferred to governance.26 Task 6 — the unified-close single-writer protocol supersedes the Step-2 stopgap.
 - 2026-05-23 (S229, research-build) — v2.0 rewrite per governance.7. 349 → ~150 lines. 13 steps → 4 model + 1 mechanical script invocation. Mechanical orchestrator: `scripts/sessionEndMechanical.js`. Plan: `docs/plans/2026-05-23-session-end-collapse.md`. Advisor-consulted before write: failure semantics, drop list, honest count.
 - 2026-05-08 (S211) — v1.2. rotateJournalRecent + writeShippedBlock scripts. S207 boot-handoff primitive.

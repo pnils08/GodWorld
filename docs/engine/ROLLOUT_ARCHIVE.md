@@ -805,6 +805,9 @@ Cluster counts: pipeline 16 / engine 9 / canon 3 / civic 14 / governance 7.
 
 Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 disk-audit + S204 ROLLOUT state-labels + research/claude-mem-vs-ecc), §S217 Archive Pass (engine.15 + engine.16 + engine.17 test-coverage rollout), §S218 Archive Pass (canon.2 faith Tier-3 scrub). governance.10 itself sweeps in this pass per S212 precedent (sweep-row + work-row archived together).
 
+<!-- ARCHIVE-PASS ORDERING CONVENTION (G-SE4, added S248). Foundational Phase sections + named passes through this S227 anchor are CHRONOLOGICAL top→bottom (oldest first). The post-S227 sweep-pass region below is NEWEST-FIRST going forward: insert a new "## S<NN> Archive Pass" block immediately below this comment (above the current first post-S227 pass), so the most recent pass sits nearest this anchor. The existing post-S227 region is NOT cleanly sorted (S230/S238/S236/S235/S234/S233 as of S248) — do NOT re-sort it; just insert new passes here at the top of the run. Each pass header records its own session + a "This pass: N rows" line. -->
+
+
 ### pipeline.* (16)
 
 - **pipeline.4** [research-build] — /sift C93 gap log triaged S215 — open entries promoted to pipeline.14/15/18/19/20 + canon.1; closed entries marked in §Status **Close-note:** `output/production_log_edition_c93_sift_gaps.md` §Status updates

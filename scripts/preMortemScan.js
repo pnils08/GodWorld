@@ -50,17 +50,10 @@ const SCAN_DIRS = [...PHASE_DIRS, 'utilities']; // Math.random + neighborhood sc
 const KNOWN_GAPS_PATH = path.join(__dirname, '..', '.claude', 'skills', 'pre-mortem', 'known_gaps.json');
 const ENGINE_RULES_PATH = path.join(__dirname, '..', '.claude', 'rules', 'engine.md');
 
-// §5 canonical neighborhoods (pre-mortem SKILL §5).
-const CANON_12 = ['Temescal', 'Downtown', 'Fruitvale', 'Lake Merritt', 'West Oakland', 'Laurel',
-  'Rockridge', 'Jack London', 'Uptown', 'KONO', 'Chinatown', 'Piedmont Ave'];
-const MAP_17 = ['Adams Point', 'Brooklyn', 'Chinatown', 'Dimond', 'Downtown', 'Eastlake', 'Fruitvale',
-  'Glenview', 'Grand Lake', 'Ivy Hill', 'Jack London', 'Laurel', 'Piedmont Ave', 'Rockridge',
-  'San Antonio', 'Temescal', 'West Oakland'];
-const CHILDREN = ['Adams Point', 'Grand Lake', 'Lakeshore', 'Eastlake', 'Ivy Hill', 'San Antonio',
-  'Dimond', 'Glenview', 'Maxwell Park', 'Old Oakland', 'City Center', 'Jack London Square',
-  'Koreatown-Northgate', 'Koreatown', 'Northgate', 'Montclair', 'Claremont', 'Longfellow',
-  'Shafter', 'Brooklyn'];
-const CANONICAL_HOODS = new Set([...CANON_12, ...MAP_17, ...CHILDREN].map(s => s.toLowerCase()));
+// §5 canonical neighborhoods — single source of truth in lib/canonNeighborhoods (S247;
+// was inline here + a divergent stale copy in auditSimulationLedger; centralized to kill
+// the drift). CANONICAL_HOODS re-exported below for preMortemScan.test.js.
+const { CANONICAL_HOODS } = require('../lib/canonNeighborhoods');
 // Known stray (non-canon) tokens that have leaked into engine literals (SKILL §5
 // WARNINGS list). Deterministic known-stray scan; novel strays still need the
 // SKILL's manual literal sweep. NOTE: bare "Coliseum" is deliberately excluded —

@@ -18,6 +18,7 @@
 
 require('../lib/env');
 const { google } = require('googleapis');
+const { CANONICAL_HOODS } = require('../lib/canonNeighborhoods'); // S247: shared canon set (kills audit/pre-mortem list drift)
 const path = require('path');
 
 const SHEET = 'Simulation_Ledger';
@@ -71,6 +72,14 @@ async function main() {
     'Temescal', 'Rockridge', 'Lake Merritt', 'Jack London',
     'Chinatown', 'Montclair', 'Piedmont Avenue', 'Adams Point'
   ]);
+  // S247: the drift check now uses the FULL canonical set (core-12 + Map-17 + children
+  // from lib/canonNeighborhoods), not just CANON12. Pre-S247 it flagged VALID Map-17
+  // neighborhoods (Uptown 89, Laurel 65, Piedmont Ave 59, KONO 12, Ivy Hill 1) as
+  // "drift" — 226 false positives inflating the boot-state count. Union is ADDITIVE:
+  // CANON12's own members (incl. 'East Oakland'/'Montclair'/'Piedmont Avenue', which the
+  // audit has always treated as canon) stay canon, so nothing newly flags. Case-insensitive.
+  const VALID_HOODS = new Set([...CANON12].map(s => s.toLowerCase()));
+  for (const h of CANONICAL_HOODS) VALID_HOODS.add(h);
 
   let extantCount = 0;
   for (let r = 0; r < data.length; r++) {
@@ -107,7 +116,7 @@ async function main() {
     }
 
     const nbhd = String(row[c('Neighborhood')] || '').trim();
-    if (nbhd && !CANON12.has(nbhd)) {
+    if (nbhd && !VALID_HOODS.has(nbhd.toLowerCase())) {
       nonCanonNeighborhood[nbhd] = (nonCanonNeighborhood[nbhd] || 0) + 1;
     }
 
@@ -181,7 +190,7 @@ async function main() {
   console.log(`  RoleType="Citizen":     ${roleTypeCitizen.length}` + (roleTypeCitizen.length ? ' — ' + roleTypeCitizen.slice(0,5).map(x => `${x.popid} ${x.name}`).join('; ') : ''));
   console.log(`  BirthYear age OOB:      ${birthYearOOB.length}` + (birthYearOOB.length ? ' — ' + birthYearOOB.slice(0,5).map(x => `${x.popid} age=${x.age}`).join('; ') : ''));
   const nonCanonTotal = Object.values(nonCanonNeighborhood).reduce((a,b)=>a+b,0);
-  console.log(`  Non-canon-12 neighborhood: ${nonCanonTotal} citizens across ${Object.keys(nonCanonNeighborhood).length} variants`);
+  console.log(`  Non-canon neighborhood: ${nonCanonTotal} citizens across ${Object.keys(nonCanonNeighborhood).length} variants`);
   if (nonCanonTotal) {
     Object.entries(nonCanonNeighborhood).sort(([,a],[,b]) => b - a).slice(0, 8).forEach(([k, v]) => console.log(`    ${v.toString().padStart(4)} ${k}`));
   }

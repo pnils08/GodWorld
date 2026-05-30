@@ -60,7 +60,11 @@ const SHEETS_TO_READ = [
   'Neighborhood_Map',
   'WorldEvents_V3_Ledger',
   'Civic_Office_Ledger',
-  'Population_Stats',
+  // G-ER6 (S244 ES-3) — 'Population_Stats' removed: the tab does not exist
+  // (real population tab is World_Population, below), no engine writes it
+  // (economicRippleEngine.js writes World_Population — the engine.md exception
+  // note naming Population_Stats is stale), and no detector consumed it. It was
+  // a phantom read producing "Unable to parse range" every run.
   'World_Population',
   'Crime_Metrics',
   'Transit_Metrics',
@@ -82,17 +86,25 @@ async function getCurrentCycle() {
 }
 
 async function loadSnapshot() {
+  const failures = [];
   const results = await Promise.all(
     SHEETS_TO_READ.map(async (name) => {
       try {
         const data = await sheets.getSheetAsObjects(name);
         return [name, data];
       } catch (err) {
-        console.warn(`  warn: ${name} read failed — ${err.message}`);
+        failures.push({ name, error: err.message });
         return [name, []];
       }
     })
   );
+  // G-ER6 — surface read failures as a loud summary instead of warns that scroll
+  // past. A configured tab that fails to read means every detector consuming it
+  // runs on an empty fixture and degrades silently; make that visible at the top.
+  if (failures.length > 0) {
+    console.error(`  ⚠ ${failures.length} of ${SHEETS_TO_READ.length} sheet read(s) FAILED — detectors consuming them run on empty data:`);
+    for (const f of failures) console.error(`    - ${f.name}: ${f.error}`);
+  }
   return Object.fromEntries(results);
 }
 

@@ -173,31 +173,6 @@ function formatCivicLoad(data) {
   return md + '\n';
 }
 
-function formatNeighborhoodEconomies(data, filter) {
-  if (!data || typeof data !== 'object') return '';
-  var hoods = Object.keys(data);
-  if (hoods.length === 0) return '';
-
-  if (Array.isArray(filter)) {
-    hoods = hoods.filter(function(h) {
-      return filter.some(function(f) { return h.toLowerCase().indexOf(f.toLowerCase()) !== -1; });
-    });
-  } else if (filter === 'struggling') {
-    hoods = hoods.filter(function(h) {
-      var val = (data[h] || '').toLowerCase();
-      return val.indexOf('struggling') !== -1 || val.indexOf('declining') !== -1 ||
-             val.indexOf('stressed') !== -1 || val.indexOf('weak') !== -1;
-    });
-  }
-
-  if (hoods.length === 0) return '';
-  var md = '## Neighborhood Economies\n';
-  for (var i = 0; i < hoods.length; i++) {
-    md += '- **' + hoods[i] + ':** ' + data[hoods[i]] + '\n';
-  }
-  return md + '\n';
-}
-
 // S245: accurate neighborhood state from the shared slicer (lib/neighborhoodSlice).
 // Replaces the prose-descriptor + 'struggling' cherry-pick. scope: true = city-wide
 // (Mayor, factions), [names] = scoped to a project voice's patch (e.g. Baylight →

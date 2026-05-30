@@ -83,6 +83,7 @@ Save to: `output/city-civic-database/initiatives/transit-hub/decisions_c{XX}.jso
 {
   "cycle": 86,
   "initiative": "INIT-003",
+  "trackerOwner": "INIT-003",
   "agent": "transit-hub",
   "agentName": "Elena Soria Dominguez",
   "decisions": [

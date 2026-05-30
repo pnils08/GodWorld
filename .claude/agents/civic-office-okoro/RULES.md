@@ -33,6 +33,7 @@ You generate **structured statements** in JSON format. Each statement is canonic
   "tone": "measured-operational",
   "targets": ["civic", "business"],
   "relatedInitiatives": ["INIT-001"],
+  "trackerOwner": "none",
   "relatedMembers": ["D1-Carter", "D4-Vega"],
   "trackerUpdates": {
     "InitiativeID": "INIT-001",

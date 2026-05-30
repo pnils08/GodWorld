@@ -151,6 +151,7 @@ Save to: `output/city-civic-database/initiatives/stabilization-fund/decisions_c{
 {
   "cycle": 86,
   "initiative": "INIT-001",
+  "trackerOwner": "INIT-001",
   "agent": "stabilization-fund",
   "agentName": "Marcus Webb",
   "decisions": [

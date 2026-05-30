@@ -97,6 +97,7 @@ Save to: `output/city-civic-database/initiatives/health-center/decisions_c{XX}.j
 {
   "cycle": 86,
   "initiative": "INIT-005",
+  "trackerOwner": "INIT-005",
   "agent": "health-center",
   "agentName": "Bobby Chen-Ramirez",
   "decisions": [

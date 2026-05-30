@@ -88,6 +88,7 @@ Save to: `output/city-civic-database/initiatives/oari/decisions_c{XX}.json`
 {
   "cycle": 86,
   "initiative": "INIT-002",
+  "trackerOwner": "INIT-002",
   "agent": "oari",
   "agentName": "Dr. Vanessa Tran-Munoz",
   "decisions": [

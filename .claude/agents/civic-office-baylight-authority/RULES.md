@@ -263,6 +263,7 @@ Save to: `output/city-civic-database/initiatives/baylight/decisions_c{XX}.json`
 {
   "cycle": 86,
   "initiative": "INIT-006",
+  "trackerOwner": "INIT-006",
   "agent": "baylight-authority",
   "agentName": "Keisha Ramos",
   "decisions": [

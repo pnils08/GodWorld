@@ -1,8 +1,8 @@
 ---
 name: edition-print
 description: Post-publish print pipeline — photos, PDF, Drive upload. Edition-only for now (S188 rebuild); non-edition types await T11 wiring.
-version: "1.3"
-updated: 2026-05-03
+version: "1.4"
+updated: 2026-05-30
 tags: [media, active]
 effort: low
 disable-model-invocation: true
@@ -152,7 +152,26 @@ node scripts/generate-edition-pdf.js <source> --type <type>
 
 Generates tabloid-format PDF using the masthead block from the `.txt` header (already standardized via T1). Output to `output/pdfs/bay_tribune_<type>_c<XX>.pdf` (edition keeps legacy `output/pdfs/bay_tribune_e<XX>.pdf`).
 
+## Step 3.5: Eval-side review — THE GATE (MANDATORY — G-PR9 S229 / G-P-NEW3 S246)
+
+**The PDF is local and not yet on Drive. This is the gate: open it and verify before it reaches the shared visibility surface.** Moved ahead of Drive upload S246 (G-P-NEW3) — the C95 first render shipped a broken PDF to Drive at the old Step 4 *before* the eval pass at the old Step 6 caught the bylines-as-headlines bug, leaving two C95 PDFs on Drive (one broken). The eval review must gate the *publish*, not the close. Generator-side metrics are not eval-side review — the S212 generation-vs-evaluation asymmetry applies inside this skill: the generator has no holistic quality compass.
+
+**Open the rendered PDF.** Visually verify three things:
+
+1. **Headlines match the article table.** Every section's headline reads from the canonical ARTICLE TABLE (`| Slot | Section | Reporter | Headline |`) at the top of the edition .txt — NOT a lede-sentence extraction. EDITOR'S DESK gets its title from the article-table slot `ED` row. (G-PR7 — C94 PDF rendered all 6 article headlines as run-on lede sentences; the parser used lede extraction instead of article-table parsing. The compile-side `canonicalShape` gate in `/write-edition` Step 3 now catches the upstream cause, but eyeball the render anyway.)
+
+2. **Every approved photo is embedded at its correct section.** Photo count in HTML `<img>` tags MUST equal `Photos found: N (M dropped)` from manifest line minus dropped count. Section-name normalization (FRONT_PAGE vs FRONT PAGE) is a known parser failure mode — visually confirm FP1, FP2, civic, sports, culture, business, etc. each carry their generated photo. (G-PR6 — C94 PDF dropped FP1 silently to section-name mismatch.)
+
+3. **Image execution reads on-canon.** Open each photo. Does it read as prosperity-era Oakland (dynasty A's, building city, working neighborhoods with dignity) or struggling-city Oakland (poverty-doc aesthetic, blight-as-texture, despair-as-mood)? `photoQA.js` v2.0+ catches tone-vs-canon mismatch at the CANON-TONE axis (5th axis, S229), but tone is a softer signal than NEGATIVE_FRAME — eyeball review remains load-bearing. If any photo reads as struggling-city tone, FLAG and drop. (G-PR8 — C94 Beverly Hayes spec passed declarative items but rendered as poverty signifier.)
+
+**Gate rule:** if any of the three fails, fix it (re-render the PDF / drop the photo / route the headline bug back to `/write-edition`) and re-run this step. **Do NOT proceed to Step 4 upload until all three pass.** Generator emits "PDF exists, 580KB, 6 photos, exit code 0" — that tells you the script ran, not that the artifact is usable.
+
+**Mags-discipline (MEMORY.md inline rule, S229):** never close a print/publish skill without opening the artifact — and S246 strengthens it: never *publish* the artifact to Drive without opening it first.
+
 ## Step 4: Upload to Drive
+
+**Gate (G-P-NEW3):** run this ONLY after Step 3.5 eval-side review passed all three checks. Drive is a shared visibility surface — an unverified PDF here is published-before-checked. If Step 3.5 flagged anything, you are not here yet.
+
 
 ```bash
 node scripts/saveToDrive.js output/pdfs/bay_tribune_<type>_c<XX>.pdf <type>
@@ -170,33 +189,16 @@ Edition path only — the dashboard uses the edition PDF for its UI:
 
 Non-edition types: skip. Dashboard surfaces editions, not alternate-start formats (yet).
 
-## Step 6: Verify
+## Step 6: Verify + Close (generator-side)
 
-**Two-pass verification — generator-side checks AND eval-side review. Both required before declaring complete.**
+The eval-side review already gated the pipeline at **Step 3.5** (before Drive upload, per G-P-NEW3). Step 6 is the generator-side close — confirm the artifacts the prior steps produced all exist and landed:
 
-### Generator-side checks (mechanical)
-
-Confirm all outputs exist:
 - `output/photos/<type>_c<XX>/` — photos generated, count within budget
 - `output/pdfs/bay_tribune_<type>_c<XX>.pdf` — PDF generated
-- Drive upload confirmed
+- Drive upload confirmed (the eval-passed PDF — Step 3.5 ran before this)
 - Dashboard reflects current edition (edition only)
 
-### Eval-side review (MANDATORY — G-PR9, S229)
-
-**Open the rendered PDF.** Generator-side metrics are not eval-side review. The S212 LLM-generation-vs-evaluation asymmetry applies inside this skill too: the generator has no holistic quality compass. The eval pass is what catches what the generator can't see.
-
-Visually verify three things:
-
-1. **Headlines match the article table.** Every section's headline reads from the canonical `| Slot | Headline | Reporter | Section | Words |` block at the top of the edition .txt — NOT a lede-sentence extraction. EDITOR'S DESK gets its title from the article-table slot `ED` row. (G-PR7 — C94 PDF rendered all 6 article headlines as run-on lede sentences; the parser used lede extraction instead of article-table parsing.)
-
-2. **Every approved photo is embedded at its correct section.** Photo count in HTML `<img>` tags MUST equal `Photos found: N (M dropped)` from manifest line minus dropped count. Section-name normalization (FRONT_PAGE vs FRONT PAGE) is a known parser failure mode — visually confirm FP1, FP2, civic, sports, culture, business, etc. each carry their generated photo. (G-PR6 — C94 PDF dropped FP1 silently to section-name mismatch.)
-
-3. **Image execution reads on-canon.** Open each photo. Does it read as prosperity-era Oakland (dynasty A's, building city, working neighborhoods with dignity) or struggling-city Oakland (poverty-doc aesthetic, blight-as-texture, despair-as-mood)? `photoQA.js` v2.0+ catches tone-vs-canon mismatch at the CANON-TONE axis (5th axis, S229), but tone is a softer signal than NEGATIVE_FRAME — eyeball review remains load-bearing. If any photo reads as struggling-city tone, FLAG and drop. (G-PR8 — C94 Beverly Hayes spec passed declarative items but rendered as poverty signifier; canon contamination only caught at Mike's eyeball review.)
-
-**Until the operator visually confirms all three, Step 6 is incomplete on generator metrics alone.** Generator emits "PDF exists, 580KB, 6 photos, exit code 0" — that tells you the script ran, not that the artifact is usable. Same anti-pattern as /post-publish G-P27 cited in the C94 run four hours before the print pipeline tripped it.
-
-**Mags-discipline (MEMORY.md inline rule, S229):** never close a print/publish skill without opening the artifact.
+If Step 3.5 was somehow skipped (no eval-side review logged in the production log), STOP — do not declare complete. The S229 rule holds: never close a print/publish skill without opening the artifact, and S246 (G-P-NEW3) moved that gate ahead of the Drive publish so a broken PDF can't reach the shared surface in the first place.
 
 Done. Print pipeline complete.
 

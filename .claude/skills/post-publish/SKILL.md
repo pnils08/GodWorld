@@ -1,8 +1,8 @@
 ---
 name: post-publish
 description: Close the feedback loop. Canonize to Supermemory, update world-data, write ratings to sheets, grade reporters, update criteria files, update newsroom memory. Type-aware — edition, interview, supplemental, dispatch all converge here.
-version: "1.7"
-updated: 2026-05-23
+version: "1.8"
+updated: 2026-05-30
 tags: [media, active]
 effort: high
 disable-model-invocation: true
@@ -314,7 +314,15 @@ Distill into `docs/mags-corliss/NEWSROOM_MEMORY.md`:
 
 ### Step 10: Update Criteria Files (`--type edition` only)
 
-**Run `/skill-check` for each skill that produced a cycle artifact** — S216 governance.2 extended skill-check from 2 targets (write-edition + sift) to 5 (added city-hall + dispatch + interview). For each target, check whether the cycle has the relevant artifact; if yes, run /skill-check; if no, skip with one-line "no <skill> artifact this cycle" note.
+**Grade-conditional /skill-check gate (G-P-NEW4, S246 — token-burn).** /skill-check is a model-reasoning task per target; running it ×5 every cycle is high-cost / low-marginal-value when the edition already graded clean and the direct-evidence sources (grades, production log, Mara corrections, this conversation) already carry the editorial findings. Gate on the edition's Final Arbiter verdict (`output/final_arbiter_c<XX>.json`):
+
+- **Verdict A (PROCEED, weighted ≥ 0.75) → SKIP /skill-check ×5 by default.** The structural assertions are assumed-pass on a clean edition; write the criteria-file updates directly from the direct-evidence sources below. Log "skill-check skipped — edition graded A (Arbiter PROCEED {score}); criteria updated from direct evidence" in the production log.
+- **Verdict A with PROCEED-WITH-NOTES (0.60–0.75) or Verdict B (HALT/below) → RUN the full /skill-check ×5 suite.** A sub-clean grade is exactly when the structural assertion pass earns its cost — it surfaces *which* skill mechanically drifted.
+- **Operator override either way:** if a specific skill felt off this cycle regardless of grade, run /skill-check on that one target. Don't run all five to check one.
+
+(Alternative consolidation if you do run them: batch into a single multi-skill model call rather than 5 separate invocations — same structural value, lower token cost.)
+
+**When the gate says RUN — `/skill-check` for each skill that produced a cycle artifact** — S216 governance.2 extended skill-check from 2 targets (write-edition + sift) to 5 (added city-hall + dispatch + interview). For each target, check whether the cycle has the relevant artifact; if yes, run /skill-check; if no, skip with one-line "no <skill> artifact this cycle" note.
 
 | Skill | Artifact check (run /skill-check if exists) | Writes |
 |-------|---------------------------------------------|--------|

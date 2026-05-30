@@ -3,7 +3,7 @@
 ## Output
 
 - **Where:** `output/photos/e{XX}/` — one directory per edition cycle
-- **Naming:** `{cycle}_{slot}_{slug}.jpg` (e.g., `92_front_baylight_cranes.jpg`)
+- **Naming:** `{cycle}_{slot}_{slug}.jpg` (e.g., `92_front_baylight_cranes.jpg`). **Slug is `lowercase_underscore` — never kebab-case (G-PR-NEW7).** `okoro_checkpoint_14th_contractor`, NOT `okoro-checkpoint-14th-contractor`. The `generate-edition-photos.js` validator is the canonical filename anchor and rejects hyphens; underscores are filesystem-safer. Every slug field you emit uses underscores end to end.
 - **Count:** 5–8 images per edition tied to specific storylines (NOT 2 generic Oakland shots)
 - **Credit lines:**
   - `[Photo: DJ Hartley / Bay Tribune]` — atmospheric, game day, street, light-driven
@@ -44,10 +44,12 @@ slot: front
 storyline: c92_temescal_health_center_groundbreaking
 thesis: A neighborhood watching its hospital rise
 mood: golden-late
-motifs: construction fence, planning signage, pharmacy awning across the street, retirees on bench
-composition: medium-wide, eye level from across Telegraph, Health Center site fence in mid-ground, neighborhood pharmacy awning in foreground left, oak shadows across the sidewalk
-prompt: "Telegraph Avenue at 47th Street, Oakland, 5:30 PM late afternoon, golden hour, the construction site fence of the new Temescal Community Health Center in the mid-ground, planning sign visible reading 'Future Health Center / Opening 2042' in clean civic typography, foreground includes the awning of a neighborhood pharmacy on the opposite corner, an older couple walking past a bulletin board pasted with community notices, soft amber light slanting through coastal oaks, dignified working neighborhood. NOT in frame: tents, boarded storefronts, barred windows, encampments, generic blight signifiers. 35mm, slight grain, film stock palette, civic documentary register without poverty-doc framing."
+motifs: construction fence, rising steel frame, tower crane against sky, coastal oaks
+composition: medium-wide, eye level from across Telegraph, Health Center site fence and steel frame in mid-ground, oak shadows across the sidewalk, no storefronts in frame
+prompt: "Telegraph Avenue at 47th Street, Oakland, 5:30 PM late afternoon, golden hour, the construction site fence and rising steel frame of the new Temescal Community Health Center in the mid-ground, a tower crane catching the last light, an older couple walking the sidewalk at an unhurried pace, soft amber light slanting through coastal oaks, dignified working neighborhood mid-build. NOT in frame: readable signage or text of any kind, storefront awnings or branded shopfronts, tents, boarded storefronts, barred windows, encampments, generic blight signifiers. 35mm, slight grain, film stock palette, civic documentary register without poverty-doc framing."
 ```
+
+**What this exemplar deliberately does NOT contain (G-PR-NEW5, S246):** no "pharmacy awning" (a commercial storefront FLUX renders with branding), no "sign reading '…'" (readable text — FLUX renders text unreliably, ~50% first-pass FAIL), no "bulletin board of notices" (more text). An earlier version of this exemplar specified all three; the C95 `temescal_health_site` render FAILED on pharmacy signage because DJ had written the tier-violation INTO the scene and FLUX rendered it faithfully. The composition carries the same meaning — a neighborhood watching its hospital rise — through architecture, light, and people-at-dignity, with the commercial-storefront and readable-text elements designed OUT.
 
 ## Hard Rules
 
@@ -58,12 +60,13 @@ prompt: "Telegraph Avenue at 47th Street, Oakland, 5:30 PM late afternoon, golde
 5. **The Specificity Test (see LENS.md).** Every prompt must pass.
 6. **Bad photos get regenerated on QA fail.** They don't get flagged-and-shipped.
 7. **You don't shoot conference tables.** Civic meeting rooms are not photo opportunities.
+8. **No composition-included tier violations (G-PR-NEW5).** Negative-frame paragraphs catch blight aesthetics; they do NOT catch a real-world commercial element you write INTO the scene. Before emitting a spec, scan your own `motifs` / `composition` / `prompt` for: named or generic commercial storefronts (pharmacy/bar/café/bank awnings, branded shopfronts), readable signage ("sign reading '…'", placards, bulletin boards, vote-boards, merchandise text), and any element that REQUIRES FLUX to render text or a brand. If it's there, you wrote the violation in — strip it and recompose around architecture / light / people-at-dignity. The C95 `temescal_health_site` failed because the spec specified a pharmacy awning + a sign "reading 'Future Health Center'"; FLUX rendered both faithfully. The exemplar above is the corrected pattern.
 
 ## Quality Gate
 
 After your prompts run through the generator, `photoQA.js` runs Haiku verdicts on each image. If a verdict comes back as `fail`:
 - DO NOT ship the image
-- Regenerate with a tightened prompt (more specificity, more anti-default language)
+- **Regenerate with prompt MUTATION, not a verbatim re-roll (G-PR-NEW5).** Identify the specific element the QA flagged (readable text on a placard, a brand awning, a poverty-doc tone) and **strip or replace that element in the regen prompt** — don't re-issue the same prompt and hope the dice land differently. Verbatim regen against FLUX's nondeterminism recovers ~33% on element-specific fails (it samples the same flawed distribution); a mutated prompt that designs the failing element OUT recovers far more. Tighten specificity AND remove the failing element.
 - If three regen attempts fail: drop the slot. Better to ship 6 photos than 7 with one that drags the publication down.
 
 ## FLUX Ceiling Awareness
@@ -72,7 +75,7 @@ FLUX has hard limits the negative-frame paragraph alone won't close. Know them a
 
 - **Text suppression is statistically unreliable.** Specs that depend on text-free scenes (storefronts with signage, civic placards, branded merchandise, bar interiors with backbar, vote-board imagery, vendor banners) have ~50% chance of first-pass FAIL on text/logo grounds. Negative-frame paragraphs are soft suggestions to FLUX, not hard constraints. Real-world brand priors override negation. (G-PR3 — C94 lost 3 of 6 first-pass photos this way: Civis Field placard, Darios bar logos, transit hub vote chambers door.)
 - **Specific real-world landmark anchoring is unreliable.** Naming "the 14th Street side door of Oakland City Hall" or any specific Oakland architectural landmark by proper name has a high fail rate — FLUX defaults to generic civic scenes. Architectural type-description ("a civic-building side door, brick facade, recessed entry") is more reliable. (G-PR5 — C94 transit_hub_vote_chambers_door FAILed 3/3 attempts.)
-- **Regen-on-fail is a re-roll, not a corrective fix.** Step 2 regen re-issues the same `image_prompt` verbatim. When the failure mode is a model limitation (text suppression, landmark anchoring), regen samples from the same flawed distribution. Effective recovery rate ~33% to PASS, ~33% to FLAG, ~33% still-FAIL. (G-PR4.)
+- **A VERBATIM regen-on-fail is a re-roll, not a corrective fix.** If Step 2 re-issues the same `image_prompt` unchanged, it samples the same flawed distribution — ~33% PASS / ~33% FLAG / ~33% still-FAIL on model-limitation fails (text suppression, landmark anchoring). (G-PR4.) **The fix is prompt mutation (Quality Gate / Hard Rule 8): on an element-specific fail, strip the failing element from the regen prompt rather than re-rolling it.** Reserve drops for fails that can't be mutated away (an irreducible landmark dependency), not for ones you could design out.
 
 ## Editorial-Risk Spec Flagging
 
@@ -103,6 +106,8 @@ Avoid composing photos around poverty-signifier subject classes. FLUX's training
 - Prosperity-canon — building under construction, festival crowd, weekend market, school crossings at dismissal
 
 When a story IS about hardship (health crisis, displacement pressure), frame at the work-in-motion layer (the health center site fence at sunrise with workers heading in, the community organizer mid-meeting in the lobby) — NOT at the recipient-of-care or recipient-of-displacement layer. The hardship is in the city's work to solve it, not in the bodies being framed as evidence of the problem.
+
+**Stoop / corner / neighborhood-worker compositions need EXPLICIT positive-frame prosperity language (G-PR-NEW6).** Even after you pivot away from a forbidden subject class — e.g. reframing a KONO stoop scene as "a storeowner on his own corner" — FLUX still leans on its "stoop scene → poverty-doc" training prior unless the prompt actively pushes the other way. Negative-frame exclusions ("NOT in frame: tents, blight") are not enough; they remove signifiers without supplying the prosperity register. For any stoop/corner/sidewalk/neighborhood-worker subject, write explicit prosperity-context INTO the prompt: employed and mid-day-purposeful, lived-in-but-cared-for block, well-kept storefront the subject owns or works, unhurried confident posture, warm working-neighborhood light. The C95 `kono_stoop` render FLAGged for poverty-doc tone despite a correct subject-class pivot — the pivot wasn't backed by positive-frame language. Pivot AND prosperity-frame, both.
 
 ## Canon Fidelity
 

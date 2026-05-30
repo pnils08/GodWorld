@@ -132,10 +132,125 @@ function capabilityHooksFor(pattern) {
   return hooks;
 }
 
+// ---------------------------------------------------------------------------
+// Improvement-side framing (G-ER5, S244 ES-3)
+// ---------------------------------------------------------------------------
+// checkMitigators marks improvement patterns gap:not-applicable, so the empty
+// branch below used to hand them blank tribuneFraming — burying good news the
+// SKILL Step 6 explicitly says to surface. Improvement patterns DO carry named
+// causes + affectedEntities (Baylight phase advance → INIT-006 + Jack London +
+// citizens; crime-overshoot → INIT-002 + neighborhoods + expectedField), so we
+// thread positive, IMPROVEMENT-tagged handles instead of dropping them.
+
+function improvementCategoryFor(pattern) {
+  const f = (pattern.evidence && pattern.evidence.fields) || {};
+  const ef = String(f.expectedField || '');
+  if (/Crime/i.test(ef)) return 'safety';
+  if (/Retail|Economic/i.test(ef)) return 'economic';
+  if (/Displacement|Housing/i.test(ef)) return 'housing';
+  if (/Sentiment/i.test(ef)) return 'culture';
+  const name = String(f.Name || pattern.description || '');
+  if (/district|baylight|development|construction|retail|zoning/i.test(name)) return 'economic';
+  if (/transit|hub|bart|bus/i.test(name)) return 'transit';
+  if (/health|clinic|medical|hospital/i.test(name)) return 'health';
+  if (/safety|crime|police|oari|alternative-response/i.test(name)) return 'safety';
+  if (/housing|displacement|stabilization/i.test(name)) return 'housing';
+  return 'civic';
+}
+
+function improvementHandlesFor(category, pattern) {
+  const applicable = DESK_BY_CATEGORY[category] || ['civic', 'business', 'letters'];
+  const f = (pattern.evidence && pattern.evidence.fields) || {};
+  const nbhds = pattern.affectedEntities.neighborhoods || [];
+  const primary = nbhds[0] || null;
+  const inits = pattern.affectedEntities.initiatives || [];
+  const initiativeId = inits[0] || null;
+  const initiativeName = f.Name || initiativeId;
+  const advance = (f.fromPhase && f.toPhase)
+    ? `advanced from ${f.fromPhase} to ${f.toPhase}`
+    : 'posted a positive, named-cause result';
+  const citizens = (pattern.affectedEntities.citizens || []).slice(0, 3);
+
+  const handles = { civic: null, business: null, culture: null, sports: null, letters: null };
+
+  if (applicable.includes('civic')) {
+    handles.civic = {
+      tag: 'IMPROVEMENT',
+      angle: initiativeId
+        ? `${initiativeName} ${advance} — what the milestone delivers and who carried it`
+        : `${category} gain in ${primary || 'the city'} — the positive outcome and its driver`,
+      citizens,
+      hookLine: initiativeId
+        ? `${initiativeName} ${advance}; a milestone worth covering, not burying.`
+        : `A ${category} metric improved in ${primary || 'the city'} this cycle.`,
+    };
+  }
+  if (applicable.includes('business')) {
+    handles.business = {
+      tag: 'IMPROVEMENT',
+      angle: `${initiativeName || category} — economic upside, jobs and footprint in ${primary || 'the district'}`,
+      citizens,
+      hookLine: `Business momentum in ${primary || 'the district'} tracks the ${category} gain.`,
+    };
+  }
+  if (applicable.includes('culture')) {
+    handles.culture = {
+      tag: 'IMPROVEMENT',
+      angle: `${primary || category} neighborhood texture — how residents experience the improvement`,
+      citizens,
+      hookLine: `Residents of ${primary || 'the neighborhood'} feel the change firsthand.`,
+    };
+  }
+  if (applicable.includes('letters')) {
+    handles.letters = {
+      tag: 'IMPROVEMENT',
+      angle: `citizen voice — a resident writing in about the ${category} improvement in ${primary || 'their neighborhood'}`,
+      citizens,
+      hookLine: `A resident letter would carry the lived upside of the ${category} gain.`,
+    };
+  }
+  return handles;
+}
+
+function improvementThreeLayer(pattern) {
+  const f = (pattern.evidence && pattern.evidence.fields) || {};
+  const nbhds = pattern.affectedEntities.neighborhoods || [];
+  const citizens = pattern.affectedEntities.citizens || [];
+  const inits = pattern.affectedEntities.initiatives || [];
+
+  const engine = (pattern.description || '') + (f.expectedField ? ` (tech anchor: ${f.expectedField}).` : '.');
+  const simulation = nbhds.length > 0
+    ? `Felt in ${nbhds.slice(0, 3).join(', ')}${citizens.length ? `; candidate voices include ${citizens.slice(0, 2).join(', ')}` : ''}.`
+    : citizens.length > 0
+      ? `Citizens touched: ${citizens.slice(0, 3).join(', ')}.`
+      : 'Scope is city-level.';
+  const userActions = inits.length > 0
+    ? `${f.Name || inits[0]} delivered a positive outcome this cycle — credit the responsible office and cover the milestone.`
+    : `A positive trend with a named cause — surface it as good news, don't bury it.`;
+
+  return { engine, simulation, userActions };
+}
+
 function enrich(patterns, ctx) {
   for (const pattern of patterns) {
     const ms = pattern.mitigatorState || {};
+
+    // G-ER5 — improvements get positive, IMPROVEMENT-tagged framing (intercept
+    // before the not-applicable empty branch, which they'd otherwise hit).
+    if (pattern.type === 'improvement') {
+      const category = improvementCategoryFor(pattern);
+      pattern.tribuneFraming = {
+        tag: 'IMPROVEMENT',
+        storyHandles: improvementHandlesFor(category, pattern),
+        threeLayerCoverage: improvementThreeLayer(pattern),
+        suggestedFrontPage: false,
+        capabilityHooks: capabilityHooksFor(pattern),
+      };
+      continue;
+    }
+
     if (ms.gap === 'not-applicable') {
+      // Anomaly / other not-applicable classes — no story handle to thread.
       pattern.tribuneFraming = {
         storyHandles: { civic: null, business: null, culture: null, sports: null, letters: null },
         threeLayerCoverage: { engine: '', simulation: '', userActions: '' },

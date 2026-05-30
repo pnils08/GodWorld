@@ -19,6 +19,8 @@ const fs = require('fs');
 const path = require('path');
 
 const getCurrentCycle = require('../lib/getCurrentCycle');
+const sheets = require('../lib/sheets');
+const { createSlicer } = require('../lib/neighborhoodSlice');
 const CYCLE = getCurrentCycle();
 const CLEAN = process.argv.includes('--clean');
 
@@ -45,7 +47,7 @@ const AGENTS = [
     focusInitiatives: ['oari', 'stabilization_fund', 'health_center'],
     domain: {
       label: 'OPP Faction — Janae Rivers',
-      civicLoad: true, neighborhoodEconomies: 'struggling',
+      civicLoad: true, neighborhoodEconomies: true,  // S245: was 'struggling' — killed the hardcoded deprivation filter that cherry-picked weak neighborhoods for OPP
       migration: true, demographicShifts: true,
       hookDomains: ['HEALTH', 'COMMUNITY', 'CIVIC', 'HOUSING']
     }
@@ -196,6 +198,27 @@ function formatNeighborhoodEconomies(data, filter) {
   return md + '\n';
 }
 
+// S245: accurate neighborhood state from the shared slicer (lib/neighborhoodSlice).
+// Replaces the prose-descriptor + 'struggling' cherry-pick. scope: true = city-wide
+// (Mayor, factions), [names] = scoped to a project voice's patch (e.g. Baylight →
+// Jack London/Downtown). Surfaces real metrics, deltas, displacement pressure,
+// median income, and named residents so a voice writes from truth, not invention.
+function formatNeighborhoodSlices(slicer, scope) {
+  if (!slicer) return '';
+  var hoods = slicer.allNeighborhoods();
+  if (Array.isArray(scope)) {
+    hoods = hoods.filter(function (h) {
+      return scope.some(function (f) { return h.toLowerCase().indexOf(f.toLowerCase()) !== -1; });
+    });
+  }
+  if (hoods.length === 0) return '';
+  var md = '## Neighborhood State (engine truth, current cycle)\n';
+  for (var i = 0; i < hoods.length; i++) {
+    md += '- ' + slicer.describe(hoods[i]) + '\n';
+  }
+  return md + '\n';
+}
+
 function formatMigration(data) {
   if (!data || typeof data !== 'object') return '';
   var md = '## Migration\n';
@@ -282,12 +305,13 @@ function formatEconomicStatus(econCtx) {
 
 // ─── DOMAIN BRIEFING GENERATOR ──────────────────────────
 
-function generateDomainBriefing(agent, cycle, eveningCtx, econCtx) {
+function generateDomainBriefing(agent, cycle, eveningCtx, econCtx, slicer) {
   var dd = agent.domain;
   if (!dd) return null;
 
   var hasV39 = eveningCtx.crimeSnapshot || eveningCtx.transit || eveningCtx.civicLoad ||
-               eveningCtx.storyHooks || eveningCtx.neighborhoodEconomies || eveningCtx.migration;
+               eveningCtx.storyHooks || eveningCtx.neighborhoodEconomies || eveningCtx.migration ||
+               (slicer && slicer.allNeighborhoods().length);
   var md = '# ' + dd.label + ' — Domain Briefing, Cycle ' + cycle + '\n\n';
 
   if (!hasV39 && !econCtx.economyDescription) {
@@ -337,9 +361,10 @@ function generateDomainBriefing(agent, cycle, eveningCtx, econCtx) {
     md += formatCivicLoad(eveningCtx.civicLoad);
   }
 
-  if (dd.neighborhoodEconomies && eveningCtx.neighborhoodEconomies) {
-    var nhFilter = dd.neighborhoodEconomies === true ? null : dd.neighborhoodEconomies;
-    md += formatNeighborhoodEconomies(eveningCtx.neighborhoodEconomies, nhFilter);
+  if (dd.neighborhoodEconomies) {
+    // S245: accurate slicer (city-wide for true, scoped name-list for project voices).
+    var nhScope = Array.isArray(dd.neighborhoodEconomies) ? dd.neighborhoodEconomies : true;
+    md += formatNeighborhoodSlices(slicer, nhScope);
   }
 
   if (dd.migration && eveningCtx.migration) {
@@ -534,7 +559,7 @@ function generateVoiceBriefing(agent, cycle, baseContext) {
 
 // ─── MAIN ────────────────────────────────────────────────
 
-function main() {
+async function main() {
   console.log(`\n=== buildVoiceWorkspaces.js v2.0 — Cycle ${CYCLE} ===\n`);
 
   const baseContext = readJsonIfExists(path.join(PACKETS_DIR, 'base_context.json'));
@@ -546,6 +571,23 @@ function main() {
   const civicPacket = readJsonIfExists(path.join(PACKETS_DIR, `civic_c${CYCLE}.json`));
   const eveningCtx = (civicPacket && civicPacket.eveningContext) || {};
   const econCtx = (civicPacket && civicPacket.economicContext) || {};
+
+  // S245: shared neighborhood slicer — accurate per-neighborhood state for the
+  // voices, drawn from the same source as the baseline-brief path
+  // (lib/neighborhoodSlice). Replaces the prose descriptor + 'struggling' filter.
+  let voiceSlicer = null;
+  try {
+    const ledger = await sheets.getSheetAsObjects('Simulation_Ledger');
+    const nmap = await sheets.getSheetAsObjects('Neighborhood_Map');
+    const priorAudit = readJsonIfExists(path.join(MARA_DIR, `engine_audit_c${CYCLE - 1}.json`));
+    const priorNmap = (priorAudit && priorAudit.snapshots && priorAudit.snapshots.Neighborhood_Map) || [];
+    voiceSlicer = createSlicer({ ledger, neighborhoodMap: nmap, priorNeighborhoodMap: priorNmap });
+    console.log('Neighborhood slicer:', voiceSlicer.allNeighborhoods().length, 'neighborhoods,',
+      'deltas=' + (priorNmap.length ? 'yes' : 'no'));
+  } catch (e) {
+    console.warn('  warn: neighborhood slicer unavailable —', e.message);
+  }
+
   console.log('Engine data:',
     'hooks=' + (eveningCtx.storyHooks || []).length,
     'crime=' + (eveningCtx.crimeSnapshot ? 'yes' : 'no'),
@@ -635,7 +677,7 @@ function main() {
     console.log(`  briefing.md (generated)`);
     agentFiles++;
 
-    const domainBriefing = generateDomainBriefing(agent, CYCLE, eveningCtx, econCtx);
+    const domainBriefing = generateDomainBriefing(agent, CYCLE, eveningCtx, econCtx, voiceSlicer);
     if (domainBriefing) {
       fs.writeFileSync(path.join(currentDir, 'domain_briefing.md'), domainBriefing);
       var kb = (domainBriefing.length / 1024).toFixed(1);
@@ -690,4 +732,4 @@ function main() {
   console.log(`\n=== Done: ${totalFiles} files across ${AGENTS.length} voice agents ===\n`);
 }
 
-main();
+main().catch(function (e) { console.error(e); process.exit(1); });

@@ -61,6 +61,13 @@ pointers:
 - **Council/Officials:** {District or Office} — {Full Name} — {faction or role}.
   [note: For civic vote coverage, list all 9 council members (D1-D9) + Mayor as FROZEN canon block — see [[../mags-corliss/NEWSROOM_MEMORY]] §Standing Directives. For non-vote civic pieces, list only officials actually referenced.]
 
+## NEIGHBORHOOD STATE
+[note: S245 — include only when the piece is set in a neighborhood; omit for citywide pieces. Worked example below uses the C95 West Oakland slice — the exact case the fix addresses. Source: baseline brief `neighborhoodState` + `neighborhoodResidents` (lib/neighborhoodSlice), or get_neighborhood_state().]
+
+- **West Oakland:** crime 4 (+3), retail 5.64 (+0.14), sentiment -0.04 (+0.02), median income $81,072, displacement pressure: none, gentrification: none.
+- **Residents:** Elias Varek (Founder, Civis Systems), Brenda Okoro (Deputy Mayor), Ernesto Quintero (A's DH), Gregory Mims.
+- Ground neighborhood texture in these figures. Do NOT assert a condition absent from them — displacement, blight, decline, struggle, recovery the engine didn't report does not exist this cycle.
+
 ## WHAT NOT TO COVER
 
 - {topic owned by another slot} — {SLOT_CODE} {Reporter Name}.

@@ -93,6 +93,13 @@ The skeleton below is the canonical shape. Sections are mandatory unless marked 
 - **Initiatives:** {INIT-NNN — Name — current phase}. Multi-line.
 - **Council/Officials:** {District/Office — Name — faction/role} (only for civic pieces; FROZEN 9-member roster per [[../mags-corliss/NEWSROOM_MEMORY]] §Standing Directives if vote coverage).
 
+## NEIGHBORHOOD STATE
+{S245 — include only when the piece is set in a neighborhood. Engine truth, sourced from the baseline brief's `neighborhoodState` + `neighborhoodResidents` (built by `lib/neighborhoodSlice`), or `get_neighborhood_state()`. The reporter grounds neighborhood texture HERE rather than inventing it.}
+
+- **{Neighborhood}:** crime {n} ({±Δ}), retail {n} ({±Δ}), sentiment {n} ({±Δ}), median income ${n}, displacement pressure: {none|value}, gentrification: {none|phase}.
+- **Residents:** {Name} ({role}), … (bounded, notable-first — the neighborhood's actual people).
+- Ground texture in these figures. Do NOT assert a condition absent from them (displacement / blight / decline / struggle / recovery the engine didn't report does not exist this cycle).
+
 ## WHAT NOT TO COVER
 
 - {Topics owned by other reporters this cycle, named explicitly: "Transit Hub Phase II — Carmen's C1."}
@@ -145,7 +152,7 @@ Helps the reporter see how their piece connects to the rest of the slate without
 - One paragraph. 4-7 sentences. ~80-150 words.
 - States: what happened, why now, three-layer angle (engine + simulation + user actions threaded — not labeled).
 - DOES NOT prescribe prose structure. "The reporter opens with X" is forbidden. "Beverly Hayes is at the corner of 47th" is forbidden. The reporter chooses.
-- DOES include load-bearing engine numbers / dates / canonical quotes if they're the load-bearing fact. "RetailVitality 5.50 lowest in city" stays in SIGNAL because it's the angle; reporter doesn't have to fish for it.
+- DOES include load-bearing engine numbers / dates / canonical quotes if they're the load-bearing fact. "RetailVitality 5.50 lowest in city" stays in SIGNAL because it's the angle; reporter doesn't have to fish for it. (When the piece is set in a neighborhood, the full figures live in the NEIGHBORHOOD STATE block below — SIGNAL pulls the one that's the angle.)
 - Allowed forms of quote inclusion: `Mayor says "We cleared the backlog. Now we diagnose why West Oakland's retail engine isn't responding yet."` Reporter MAY use the quote, MAY reframe, MAY use it as scene-anchor. Their call.
 
 ### `## VOICE DIRECTION` bullets
@@ -164,6 +171,13 @@ Helps the reporter see how their piece connects to the rest of the slate without
 - DO NOT include role/age/neighborhood/occupation columns inline — that's v1's CITIZENS-TO-USE table. The reporter looks it up.
 - DO include the ID — that's the canon-pointer's load-bearing field.
 - For civic pieces with vote coverage: the 9-member council roster is FROZEN canon, list all 9 + Mayor under `**Council/Officials:**` with their faction tag (D1-D9 + Mayor; see [[../mags-corliss/NEWSROOM_MEMORY]] §Standing Directives).
+
+### `## NEIGHBORHOOD STATE` block (S245)
+
+- Include ONLY when the piece is set in a neighborhood. Omit for citywide / non-geographic pieces.
+- Engine truth — sourced from the baseline brief's `neighborhoodState` + `neighborhoodResidents` (built by `lib/neighborhoodSlice`), or `get_neighborhood_state()` if no matching baseline brief.
+- One metrics line (crime / retail / sentiment with deltas, median income, displacement pressure, gentrification) + a bounded residents line (notable-first, the neighborhood's actual people).
+- Closes with the fidelity guard: the reporter grounds neighborhood texture in these figures and does NOT assert a condition the engine didn't report. This is data-fidelity, not a tone rule — it replaced the rejected "standing canon rules" approach (C95 triage T1; the West Oakland "displacement" front page was written against an empty `DisplacementPressure` field).
 
 ### `## WHAT NOT TO COVER` list
 

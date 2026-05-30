@@ -82,10 +82,14 @@ Each phase is one focused research-build session. Skill-text edits: run `/reload
 
 ### Phase RB-1: Standing canon rules architecture (Theme T1) — HIGHEST LEVERAGE
 
-The load-bearing cluster. Standing rules Mike has repeated for 17+ cycles ("no deprivation-coding of Oakland neighborhoods"; "vote-passed = complete, no ongoing drama") live only in his head and contaminate every generator. Mara-equiv regraded C95 to F under the deprivation rule. Architect the rules into the generator stack.
+The load-bearing cluster. Standing rules Mike has repeated for 17+ cycles live only in his head and contaminate every generator. Mara-equiv regraded C95 to F. Architect the rules into the generator stack.
+
+**S243 Mike recalibration (rules reframed; wording presented, awaiting nod before write).** The root defect is bigger than "deprivation-coding" — *the editions render present-day Oakland's problems onto an ascended elite city.* GodWorld Oakland is elite in this timeline: 6 A's championships, 14 straight playoff appearances, thriving tech, a 73%-approval mayor, citywide prosperity. The deprivation prohibition is a *consequence* of the positive frame, not the headline. And Rule 2 must NOT flatten civic coverage to "votes passed, nothing to report" — Mike flagged the first draft as "too strict / civic stories are just votes." Recalibrated wording:
+- **Rule 1 — Render the ascended city, not present-day Oakland.** Write the elite timeline-Oakland (championships, tech, 73% mayor, prosperity, median >$90K, Temescal middle-class, West Oakland gentrifying). No importing present-day problems — deprivation, blight, food deserts, "underserved," struggle-framing, resident-as-poverty-signifier.
+- **Rule 2 — Settled votes don't get fake drama, but civic life still has stakes.** PASSED = settled canon (no stalled-rollout suspense / "will it survive" / opposition-still-fighting); implementation has texture, results have winners/tradeoffs, not every story is a vote. Kill fake conflict, keep genuine stakes.
 
 - **Files:**
-  - `docs/canon/STANDING_RULES.md` — create. Canonical home for Mike's repeated standing rules. Seed with: (1) no deprivation-coding of Oakland neighborhoods (prosperity-era; median >$90K; Temescal middle-class; West Oakland gentrifying) + ≥3 anti-example excerpts from C95 (C2 Temescal, Patricia Nolan letter, Caldera O1, C1 Stab Fund); (2) vote-passed = operationally complete, no ongoing drama-coverage. Register in `docs/index.md` + back-link from CANON_RULES.md.
+  - `docs/canon/STANDING_RULES.md` — create. Canonical home for Mike's repeated standing rules. Seed with the two recalibrated rules above + ≥3 anti-example excerpts from C95 (C2 Temescal, Patricia Nolan letter, Caldera O1, C1 Stab Fund) PLUS ≥1 positive-frame exemplar (what the ascended city reads like). Register in `docs/index.md` + back-link from CANON_RULES.md.
   - `.claude/agents/{civic,culture,letters,business,sports}-desk/RULES.md` — modify. Add a §Standing Canon Frame section citing STANDING_RULES.md with the anti-examples (G-W53, G-W56).
   - `.claude/skills/sift/SKILL.md` — modify. Brief-writer (Step 4) ships the standing-rule frame with every brief (G-W53).
   - `.claude/skills/write-edition/SKILL.md` — modify. Add Step 3b: framing-rule scan on compiled order BEFORE 3.25 — if front-page piece fails any standing rule, swap to next-best candidate + document swap (G-W55). EIC reads STANDING_RULES.md at Step 3 before writing Editor's Desk (G-W57).
@@ -99,7 +103,7 @@ The load-bearing cluster. Standing rules Mike has repeated for 17+ cycles ("no d
 - **Verify:** `grep -l "STANDING_RULES" .claude/agents/*-desk/RULES.md` → 5 files; STANDING_RULES.md registered in index; `/reload-skills`; next /write-edition dry-read confirms Step 3b present.
 - **Source gaps:** G-W53, G-W54(rule-side), G-W55, G-W56, G-W57.
 - **Absorbs ROLLOUT:** none (new canon surface).
-- **Status:** [ ] not started
+- **Status:** ⛔ SUPERSEDED S245 — Mike REJECTED the standing-rules / ascended-city approach outright (*"very restrictive and the rules already exist. There is nothing to address here."*). Root cause is **data-fidelity, not canon wording**: the engine's neighborhood city-state is stripped before the voice/reporter sees it. Do NOT write `docs/canon/STANDING_RULES.md` or cascade wording rules into desk agents. Replaced by the data-fidelity seam — see Changelog S245 + memory `project_edition-engine-fidelity-seam.md`.
 
 ### Phase RB-2: write-edition skill mechanics + compile contract shape (Themes T9 + T3 RB-half)
 
@@ -177,7 +181,9 @@ The skill-text half of the engine-sheet canonicalization work — ships alongsid
 
 ### Phase RB-6: Boot/close token economy (Theme T11)
 
-Mike S240: Mags should load for EIC work specifically — most operational boots don't need her. Highest single fix = identity.md split (G-SS1).
+**S243 Mike corrections — two steps were stale, the gap log re-surfaced closed work:**
+- **Step 1 (identity.md split) DROPPED.** G-SS1 closed *no-build* in S242 — the persona is ~6 intentional lines (not bloat) and the heavy ritual (CHARACTER.md / journal / family) already stays out of operational terminals. C95 gap log G-SS1 re-flagged a settled item; the triage absorbed it without checking. No split.
+- **Step 2 (MEMORY.md) REFRAMED.** Mike: relocating bloat to feedback files hides it rather than fixing it; the real problem is MEMORY.md overflows the 24.4KB ceiling and *only partially loads* — a "not being read" failure. Fix = audit what genuinely belongs on a memory file vs. over-long index entries that drifted in, and cut the latter. NOT relocate-everything. The S156 "rules inline only" framing-change question is moot if the cut alone gets it under ceiling; revisit only if it doesn't.
 
 - **Files:**
   - `.claude/rules/identity.md` → split into `.claude/rules/identity-core.md` (always) + `.claude/rules/identity-mags.md` (path-scoped media + Mags-only).
@@ -356,12 +362,14 @@ Removes the fake-drama-on-settled-programs at its engine source. Folds the regul
 
 ## Open questions
 
-- [ ] pipeline.34 gap-log path convention — Mike picks A (flat) / B (subject-slugged) / C (edition-grouped). Blocks the ~30-min skill-text sweep, not the rest of the plan.
-- [ ] RB-6 step 1 (identity.md split shape) + step 2 (S156 framing change) — Mike confirms before execution; both touch always-loaded files.
-- [ ] G-SS2 — does the harness expose a per-terminal Supermemory recall scope? Confirm before promoting the hook-side recall suppression.
+- [x] pipeline.34 gap-log path convention — **DECIDED in-scope S243 (research-build).** Keep the existing flat, subject-slugged, cycle-tagged shape `output/production_log_<skill>_c<XX>_gaps.md` (≈ what's already on disk; no migration). AI-to-AI file placement — not a Mike fork (S236 no-fake-path-forks). One-line convention note folds into the RB-5 skill-text sweep.
+- [x] RB-6 step 1 (identity.md split) — **DROPPED S243:** G-SS1 closed no-build S242 (persona = 6 lines, not bloat). RB-6 step 2 (S156 framing) — **REFRAMED S243:** audit-what-belongs + cut over-long index entries, not relocate; S156 framing change moot unless the cut alone misses ceiling.
+- [x] RB-1 STANDING_RULES wording — **REJECTED S245.** Mike: *"the rules already exist… there is nothing to address here."* The real defect is data-fidelity (engine city-state stripped before the voice), not canon wording. Replaced by the data-fidelity seam — see Changelog S245.
+- [ ] G-SS2 — does the harness expose a per-terminal Supermemory recall scope? **Research-build to read `.claude/hooks/session-startup-hook.sh` directly when RB-6 executes** — not a Mike question.
 
 ---
 
 ## Changelog
 
+- 2026-05-29 (S245, research-build) — **T1 reframed + data-fidelity seam BUILT (uncommitted, engine-sheet/pipeline lane — coordinate push).** Mike rejected RB-1's standing-rules/ascended-city approach ("the rules already exist"). Diagnosed the real defect from C95 receipts: editions invent struggle the engine never reported — West Oakland "displacement" front-page story written against a literally-empty `DisplacementPressure` field (median income $81K); Beverly Hayes (POP-00772, Community Director, Stab-Fund money cleared C90) flattened into a victim "waiting on $18k"; A's dynasty + new Baylight ballpark (engine's actual main characters) buried. Root cause = the engine's 16-neighborhood city-state (metrics, deltas, sports→economy coupling, residents) is **stripped before the voice** — baseline-brief world-event class emitted `subjectIds:[]` + "set in <nbhd>"; `buildVoiceWorkspaces` had a hardcoded `neighborhoodEconomies:'struggling'` filter cherry-picking weak neighborhoods for OPP. **Built:** `lib/neighborhoodSlice.js` (shared bounded slicer — K notable residents + metrics + cycle deltas + displacement/income); `scripts/engine-auditor/generateBaselineBriefs.js` v1.2 (world-event briefs carry the slice); `scripts/buildVoiceWorkspaces.js` (voice path on the same slicer, killed the 'struggling' filter). Verified both paths on live C95 (West Oakland brief now carries Varek/Okoro/Quintero + `displacement: none` + crime +3; voices scoped — Mayor city-wide, Baylight→Jack London/Downtown). **Sift wired (S245):** `/sift` SKILL Step 4 carries `neighborhoodState`/`neighborhoodResidents` into enrichment; Step 7 emits a `## NEIGHBORHOOD STATE` block with the fidelity guard + anti-pattern #9 (no asserting conditions the engine didn't report); `docs/media/brief_template_v2.md` + `..._exemplar.md` carry the contract (run `/reload-skills`). **Remaining:** remove dead `formatNeighborhoodEconomies` in buildVoiceWorkspaces; real test = next cycle's edition stops inventing. Full detail: memory `project_edition-engine-fidelity-seam.md`.
 - 2026-05-29 — Initial draft (S243, research-build). Read all 12 C95 gap logs (~80 gaps), clustered into 11 themes (§Cluster Map), routed to two execution tracks (RB apparatus / ES substrate) across 6 + 8 phases. Folded correlated open rows by reference (engine.28, civic.12/13, governance.18/20, engine.19, pipeline.24/28/32, regulatory-friction sub-plan, canon.3 T6) — forward task only, no backward history. Method generalized to [[GAP_LOG_TRIAGE_PLAYBOOK]]. One ROLLOUT pointer row to follow; per-phase summaries land on the row as phases close.

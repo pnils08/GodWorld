@@ -21,9 +21,21 @@
  * paradigm, three-layer coverage principle). The pre-S184 comment claimed these
  * were "deferred until EventType taxonomy supports them"; the actual gap was that
  * the auditor wasn't reading the right tab.
+ *
+ * v1.2 scope (neighborhood-scoped positioning): world-event briefs now carry a
+ * bounded neighborhood slice — the K most-notable residents of the event's
+ * neighborhood (subjectIds populated), plus the neighborhood's current metrics
+ * and cycle-over-cycle deltas (crime, retail, sentiment, median income/rent,
+ * displacement pressure, gentrification phase) read from Neighborhood_Map.
+ * Closes the "agent covering West Oakland sees nothing" gap: the brief positions
+ * the voice on the TRUE state of the neighborhood (accuracy) bounded to a small
+ * slice (token economy), instead of the bare "set in <nbhd>" handle that left
+ * voices to invent struggle the engine never reported.
  */
 
-const VERSION = '1.1.0';
+const VERSION = '1.2.0';
+
+const { createSlicer } = require('../../lib/neighborhoodSlice');
 
 // S184 (Row 6) — structural EventTag values worth a baseline brief.
 // Excludes high-frequency texture tags (Micro-Event, Daily, Relationship,
@@ -93,6 +105,15 @@ function generate(ctx, ailmentPatterns) {
     };
   }
 
+  // --- Neighborhood-scoped positioning (v1.2; shared lib/neighborhoodSlice) ---
+  // Hoisted prior audit (also reused by the milestone + approval sections below).
+  const priorAudit = prior.find(p => p.cycle === cycle - 1) || null;
+  const slicer = createSlicer({
+    ledger,
+    neighborhoodMap: snapshot.Neighborhood_Map || [],
+    priorNeighborhoodMap: (priorAudit && priorAudit.snapshots && priorAudit.snapshots.Neighborhood_Map) || [],
+  });
+
   // --- World events ---
   const events = snapshot.WorldEvents_V3_Ledger || [];
   const thisCycleEvents = events.filter(e => parseInt(e.Cycle, 10) === cycle);
@@ -129,10 +150,12 @@ function generate(ctx, ailmentPatterns) {
     if (String(e.ShockFlag).toLowerCase() === 'true') hints.push('ShockFlag set');
     if (!rawDesc) hints.push('Description synthesized from EventType — verify source-ledger row before promoting');
 
+    const slice = slicer.slice(nbhd);
+
     briefs.push(makeBrief({
       id: makeId('event', `${domain}-${idx}`),
       eventClass: 'world-event',
-      subjectIds: [],
+      subjectIds: slice ? slice.residents.map(r => r.popId).filter(Boolean) : [],
       neighborhood: nbhd,
       facts: {
         description,
@@ -142,10 +165,12 @@ function generate(ctx, ailmentPatterns) {
         severity: e.Severity,
         impactScore: e.ImpactScore,
         lastDomainCoverageCycle: lastEditionByDomain[domain] || null,
+        neighborhoodState: slice ? slice.state : null,
+        neighborhoodResidents: slice ? slice.residents : [],
       },
       threeLayerHandle: {
         engine: `${domain} domain event, impact ${e.ImpactScore || 'n/a'}`,
-        simulation: nbhd ? `set in ${nbhd}` : 'no neighborhood attached',
+        simulation: slicer.describe(nbhd, slice),
         userActions: activeAilmentInitiatives.size > 0 ? `overlaps initiatives: ${[...activeAilmentInitiatives].join(', ')}` : '',
       },
       promotionHints: hints,
@@ -185,7 +210,7 @@ function generate(ctx, ailmentPatterns) {
   });
 
   // --- Initiative milestones (phase changed vs prior audit) ---
-  const priorAudit = prior.find(p => p.cycle === cycle - 1);
+  // priorAudit hoisted to top of generate() (v1.2).
   const priorInits = priorAudit && priorAudit.snapshots && priorAudit.snapshots.Initiative_Tracker;
   if (priorInits) {
     const priorById = new Map(priorInits.map(r => [r.InitiativeID || r.Name, r]));

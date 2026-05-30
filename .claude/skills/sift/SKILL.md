@@ -249,10 +249,14 @@ For every candidate proposal, enrich with verified canon pointers + three-layer 
 
 **Three-layer threading test** (required for anchor pieces FP1, C1, S1):
 - **engine** — one-line plain-language summary of what code is producing (ailment, math, trend).
-- **simulation** — one-line summary of citizen lived experience (consequences, neighborhood texture).
+- **simulation** — one-line summary of citizen lived experience, **grounded in the neighborhood's engine state** (see below), not invented texture.
 - **userActions** — one-line summary of what was decided / done / typed-by-Mike.
 
 Texture pieces may have empty strings on the unused layer (e.g., pure atmospheric pieces are simulation+userActions; pure engine ailment pieces are engine+userActions).
+
+**Neighborhood state (S245 — when the piece is set in a neighborhood):**
+- The baseline brief (`output/baseline_briefs_c{XX}.json`) carries `neighborhoodState` (crime / retail / sentiment with cycle-over-cycle deltas, median income + rent, displacement pressure, gentrification phase) and `neighborhoodResidents` (bounded, notable-first), built from `lib/neighborhoodSlice`. Carry these into the enriched candidate. If a slot has no matching baseline brief, call `get_neighborhood_state(neighborhood)` for the same figures.
+- **The engine is the source of truth for what a neighborhood is.** A condition it did not report — displacement, blight, decline, struggle, recovery — does not exist for that neighborhood this cycle. Ground the simulation layer in the figures; do not narrate against them. (This is data-fidelity, not a tone rule: the C95 West Oakland "displacement" front page was written against a literally-empty `DisplacementPressure` field.)
 
 **Enriched candidate shape (additions to Step 3 candidate):**
 
@@ -582,6 +586,13 @@ Brief shape per v2 template (canonical):
 - **Initiatives:** {INIT-NNN} — {Name} — {phase}.
 - **Council/Officials:** {District} — {Name} — {faction/role}.
 
+## NEIGHBORHOOD STATE
+<!-- S245 — include only when the piece is set in a neighborhood. Populate from the baseline brief's `neighborhoodState` + `neighborhoodResidents` (lib/neighborhoodSlice), or get_neighborhood_state(). Engine truth — the reporter grounds texture here, does not invent against it. -->
+
+- **{Neighborhood}:** crime {n} ({±Δ}), retail {n} ({±Δ}), sentiment {n} ({±Δ}), median income ${n}, displacement pressure: {none|value}, gentrification: {none|phase}.
+- **Residents:** {Name} ({role}), {Name} ({role}), … (bounded, notable-first — these are the neighborhood's actual people).
+- Ground neighborhood texture in these figures. Do NOT assert a condition absent from them.
+
 ## WHAT NOT TO COVER
 
 - {topic} — {SLOT} {Reporter}.
@@ -606,6 +617,7 @@ See [[brief_template_v2_exemplar]] for the placeholder-filled reference brief.
 6. Off-allowlist section tag (`NEIGHBORHOODS` / `QUICK_TAKES` / spaced form).
 7. Pre-prescribed scene ("Beverly Hayes is at the corner of 47th").
 8. Memory-Fence bypass (canon excerpts without `wrap()` markers — Step 9 enforces mechanical wrap).
+9. Neighborhood condition the engine didn't report — asserting displacement / blight / decline / struggle / recovery absent from the NEIGHBORHOOD STATE block. The engine is the source of truth for what a neighborhood is (S245 edition⇄engine fidelity).
 
 ### Step 8 — dispatch.json emission
 

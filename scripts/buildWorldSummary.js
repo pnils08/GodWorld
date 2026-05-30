@@ -68,6 +68,16 @@ function fmtNum(n, decimals = 2) {
   return x.toFixed(decimals);
 }
 
+// G-BWS6 (S246 ES-6): World_Population.totalPopulation carries accumulator drift
+// (e.g. 375985.0135). Round to a whole-person integer with thousands separators
+// for human display; the raw sheet cell keeps its precision (render-side fix per
+// the gap — durable upstream Math.round is a separate phase03 follow-up).
+function fmtPopulation(n) {
+  const x = Number(n);
+  if (!Number.isFinite(x)) return (n == null || n === '') ? '—' : String(n);
+  return Math.round(x).toLocaleString('en-US');
+}
+
 function parseJsonField(s, fallback = null) {
   if (s === undefined || s === null || s === '') return fallback;
   if (typeof s !== 'string') return s;
@@ -100,9 +110,15 @@ function sortNeighborhoods(rows) {
   });
 }
 
+// G-BWS1 (S246 ES-6): include `recovering` seats, not just `active`. A
+// recovering councilmember (D6 Elliott Crane, CRC) is a real seat — dropping it
+// silently understated the faction split (5/2/2 vs the true 5/2/3) and hid a CRC
+// vote from /sift orientation. Status is rendered per-row so recovering seats are
+// visible-but-flagged. Vacant seats (no holder) stay excluded from the roster.
+const ROSTER_STATUSES = ['active', 'recovering'];
 function filterApprovalRows(allOffices) {
   return allOffices
-    .filter(r => r.Status === 'active')
+    .filter(r => ROSTER_STATUSES.includes(r.Status))
     .filter(r => /^MAYOR-/.test(r.OfficeId) || /^COUNCIL-D/.test(r.OfficeId))
     .sort((a, b) => {
       // Mayor first, then council by district number
@@ -174,7 +190,7 @@ function emitCityState(rileyCurr, worldPop, neighborhoodsC, prevRileyCount) {
   const lines = [
     '## City State',
     '',
-    `- **Population:** ${worldPop.totalPopulation || '—'} | Illness rate ${fmtNum(Number(worldPop.illnessRate) * 100, 1)}% | Employment ${fmtNum(Number(worldPop.employmentRate) * 100, 1)}% | Economy ${worldPop.economy || '—'}`,
+    `- **Population:** ${fmtPopulation(worldPop.totalPopulation)} | Illness rate ${fmtNum(Number(worldPop.illnessRate) * 100, 1)}% | Employment ${fmtNum(Number(worldPop.employmentRate) * 100, 1)}% | Economy ${worldPop.economy || '—'}`,
     `- **Migration:** ${worldPop.migration || '—'} (MigrationDrift ${rileyCurr.MigrationDrift || '—'} this cycle)`,
     `- **Events generated:** ${rileyCurr.EventsGenerated || '—'}${eventsDelta} | **Citizens aged:** ${rileyCurr.CitizensAged || '—'} | **Intake processed:** ${rileyCurr.IntakeProcessed || '0'}`,
     `- **Story seed count:** ${rileyCurr.StorySeedCount || '—'}${seedDelta}`,
@@ -358,15 +374,26 @@ function emitEngineReviewFindings(cycle, auditJson) {
   const lines = [`## Engine Review Findings (from \`output/engine_audit_c${cycle}.json\`)`, ''];
 
   const summary = auditJson.summary || {};
-  lines.push(`**Ailment total:** ${(summary.highSeverity || 0) + (summary.mediumSeverity || 0) + (summary.lowSeverity || 0)} patterns (${summary.highSeverity || 0} high, ${summary.mediumSeverity || 0} medium, ${summary.lowSeverity || 0} low) | **Improvements:** ${summary.improvements || 0} | **Incoherence:** ${summary.incoherence || 0}`);
+  // G-BWS5 (S246 ES-6): the severity total counts ALL patterns (improvement +
+  // incoherence patterns carry severities too), so "Ailment total N | Improvements
+  // X | Incoherence Y" read ambiguously — does N include X+Y or not? It does.
+  // Rename to "Total patterns" and split By-type into the same trichotomy with
+  // subtotals so a reader of world_summary alone can reconcile (ailments +
+  // improvements + incoherence = total).
+  const totalPatterns = (summary.highSeverity || 0) + (summary.mediumSeverity || 0) + (summary.lowSeverity || 0);
+  lines.push(`**Total patterns:** ${totalPatterns} (${summary.highSeverity || 0} high, ${summary.mediumSeverity || 0} medium, ${summary.lowSeverity || 0} low)`);
   lines.push('');
 
   if (summary.byType) {
-    const typeBreakdown = Object.entries(summary.byType)
-      .sort((a, b) => b[1] - a[1])
-      .map(([t, n]) => `${t} ${n}`)
-      .join(', ');
-    lines.push(`**By type:** ${typeBreakdown}`);
+    const entries = Object.entries(summary.byType).sort((a, b) => b[1] - a[1]);
+    const fmt = arr => arr.map(([t, n]) => `${t} ${n}`).join(', ');
+    const sum = arr => arr.reduce((s, [, n]) => s + n, 0);
+    const improvements = entries.filter(([t]) => t === 'improvement');
+    const incoherence = entries.filter(([t]) => t === 'incoherence');
+    const ailments = entries.filter(([t]) => t !== 'improvement' && t !== 'incoherence');
+    lines.push(`**Ailments (${sum(ailments)}):** ${fmt(ailments) || '—'}`);
+    lines.push(`**Improvements (${sum(improvements)}):** ${fmt(improvements) || '—'}`);
+    lines.push(`**Incoherence (${sum(incoherence)}):** ${fmt(incoherence) || '—'}`);
     lines.push('');
   }
 
@@ -423,15 +450,17 @@ function emitEngineReviewFindings(cycle, auditJson) {
 
 function emitApprovalRatings(approvalRows) {
   const lines = [
-    '## Approval Ratings (Civic_Office_Ledger, Status=active, filtered to Mayor + Council)',
+    '## Approval Ratings (Civic_Office_Ledger, Status ∈ {active, recovering}, Mayor + Council)',
     '',
-    '| Office | Holder | Faction | Approval |',
-    '|---|---|---|---:|'
+    '| Office | Holder | Faction | Status | Approval |',
+    '|---|---|---|---|---:|'
   ];
   for (const r of approvalRows) {
     const office = r.Title || r.OfficeId;
     const districtTag = r.District && r.District !== 'citywide' ? ` (${r.District})` : '';
-    lines.push(`| ${office}${districtTag} | ${r.Holder || '—'} | ${r.Faction || '—'} | ${r.Approval || '—'} |`);
+    // G-BWS1 — flag non-active seats so recovering members are visible.
+    const statusTag = r.Status === 'active' ? 'active' : `**${r.Status || '—'}**`;
+    lines.push(`| ${office}${districtTag} | ${r.Holder || '—'} | ${r.Faction || '—'} | ${statusTag} | ${r.Approval || '—'} |`);
   }
   lines.push('');
 
@@ -441,7 +470,11 @@ function emitApprovalRatings(approvalRows) {
     factionCount[f] = (factionCount[f] || 0) + 1;
   }
   const factionStr = Object.entries(factionCount).sort((a, b) => b[1] - a[1]).map(([f, n]) => `${n} ${f}`).join(' / ');
-  lines.push(`**Faction split (active Mayor + Council):** ${factionStr}`);
+  const recovering = approvalRows.filter(r => r.Status === 'recovering');
+  lines.push(`**Faction split (Mayor + Council, active + recovering):** ${factionStr}`);
+  if (recovering.length > 0) {
+    lines.push(`**Recovering seats:** ${recovering.map(r => `${r.OfficeId} ${r.Holder || ''} (${r.Faction || '—'})`).join('; ')}`);
+  }
   lines.push('');
   return lines;
 }

@@ -141,15 +141,17 @@ console.log('\nTest 6: filterApprovalRows (active + Mayor/Council only, Mayor fi
     { OfficeId: 'MAYOR-01', Status: 'active', Title: 'Mayor' },
     { OfficeId: 'COUNCIL-D5', Status: 'active', Title: 'Council D5' },
     { OfficeId: 'COUNCIL-D1', Status: 'active', Title: 'Council D1' },
+    { OfficeId: 'COUNCIL-D6', Status: 'recovering', Title: 'Council D6' }, // G-BWS1: now included
     { OfficeId: 'STAFF-COS', Status: 'active', Title: 'Chief of Staff' },
     { OfficeId: 'COUNCIL-D2', Status: 'inactive', Title: 'Council D2' },
     { OfficeId: 'DA-01', Status: 'active', Title: 'DA' }
   ];
   const filtered = helper.filterApprovalRows(all);
-  assertEqual('order: Mayor first then councils', filtered.map(r => r.OfficeId), ['MAYOR-01', 'COUNCIL-D1', 'COUNCIL-D5']);
+  assertEqual('order: Mayor first then councils (incl. recovering D6)', filtered.map(r => r.OfficeId), ['MAYOR-01', 'COUNCIL-D1', 'COUNCIL-D5', 'COUNCIL-D6']);
+  assertEqual('recovering D6 INCLUDED (G-BWS1)', filtered.find(r => r.OfficeId === 'COUNCIL-D6').Status, 'recovering');
   assertEqual('STAFF-COS filtered out', filtered.find(r => r.OfficeId === 'STAFF-COS'), undefined);
   assertEqual('DA-01 filtered out', filtered.find(r => r.OfficeId === 'DA-01'), undefined);
-  assertEqual('inactive D2 filtered out', filtered.find(r => r.OfficeId === 'COUNCIL-D2'), undefined);
+  assertEqual('inactive D2 still filtered out', filtered.find(r => r.OfficeId === 'COUNCIL-D2'), undefined);
 }
 
 // ────────────────────────────────────────────────────────────────────────────
@@ -247,7 +249,12 @@ console.log('\nTest 10: emitEngineReviewFindings');
     ]
   };
   const out = helper.emitEngineReviewFindings(94, audit).join('\n');
-  assertIncludes('summary line', out, '3 patterns (1 high, 2 medium, 0 low)');
+  // G-BWS5 — "Total patterns" (renamed from "Ailment total") + By-type split into
+  // the severity trichotomy so the counts reconcile.
+  assertIncludes('total patterns line', out, '**Total patterns:** 3 (1 high, 2 medium, 0 low)');
+  assertIncludes('ailments subtotal', out, '**Ailments (3):**');
+  assertIncludes('incoherence subtotal', out, '**Incoherence (1):**');
+  assertExcludes('no ambiguous "Ailment total" wording', out, 'Ailment total');
   assertIncludes('high-pattern description verbatim', out, 'disbursement-active');
   assertIncludes('mitigator line verbatim', out, 'observedDelta=0 verdict=effects-not-firing');
   assertIncludes('medium table summary', out, '| repeating-event | 2 |');
@@ -263,14 +270,18 @@ console.log('\nTest 10: emitEngineReviewFindings');
 console.log('\nTest 11: emitApprovalRatings');
 {
   const rows = [
-    { OfficeId: 'MAYOR-01', Title: 'Mayor', District: 'citywide', Holder: 'Avery Santana', Faction: 'OPP', Approval: '88' },
-    { OfficeId: 'COUNCIL-D1', Title: 'City Council District 1', District: 'D1', Holder: 'Denise Carter', Faction: 'OPP', Approval: '76' },
-    { OfficeId: 'COUNCIL-D7', Title: 'City Council District 7', District: 'D7', Holder: 'Warren Ashford', Faction: 'CRC', Approval: '61' }
+    { OfficeId: 'MAYOR-01', Title: 'Mayor', District: 'citywide', Holder: 'Avery Santana', Faction: 'OPP', Status: 'active', Approval: '88' },
+    { OfficeId: 'COUNCIL-D1', Title: 'City Council District 1', District: 'D1', Holder: 'Denise Carter', Faction: 'OPP', Status: 'active', Approval: '76' },
+    { OfficeId: 'COUNCIL-D6', Title: 'City Council District 6', District: 'D6', Holder: 'Elliott Crane', Faction: 'CRC', Status: 'recovering', Approval: '54' },
+    { OfficeId: 'COUNCIL-D7', Title: 'City Council District 7', District: 'D7', Holder: 'Warren Ashford', Faction: 'CRC', Status: 'active', Approval: '61' }
   ];
   const out = helper.emitApprovalRatings(rows).join('\n');
-  assertIncludes('Mayor row', out, '| Mayor | Avery Santana | OPP | 88 |');
+  // G-BWS1 — Status column added; recovering seats visible-but-flagged.
+  assertIncludes('Mayor row (with Status col)', out, '| Mayor | Avery Santana | OPP | active | 88 |');
   assertIncludes('D1 with district tag', out, 'District 1 (D1)');
-  assertIncludes('faction split line', out, '2 OPP / 1 CRC');
+  assertIncludes('D6 recovering seat rendered + flagged', out, '| Elliott Crane | CRC | **recovering** | 54 |');
+  assertIncludes('faction split counts recovering (2 OPP / 2 CRC)', out, '2 OPP / 2 CRC');
+  assertIncludes('recovering-seats footer names Crane', out, 'COUNCIL-D6 Elliott Crane (CRC)');
 }
 
 // ────────────────────────────────────────────────────────────────────────────

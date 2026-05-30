@@ -1,7 +1,29 @@
 /**
  * ============================================================================
- * GENERATIONAL EVENTS ENGINE V2.6 (Phase 42 B2 — LifeHistory_Log via queueAppendIntent_)
+ * GENERATIONAL EVENTS ENGINE V2.7 (S248 Track 1 — milestones mutate structural state)
  * ============================================================================
+ *
+ * v2.7 Changes (S248 / 2026-05-30 — LEDGER_REPAIR_HOUSEHOLDS Phase 2b Track 1):
+ * - Milestones now MEAN something beyond the LifeHistory tag. Previously
+ *   applyMilestone_ wrote only the tag + LastUpdated; a [Wedding] bound no one
+ *   and a [Birth] created no child ("events fired into a vacuum"). Now, at the
+ *   milestone call-sites in runGenerationalEngine_, the citizen's structural
+ *   ctx.ledger row is mutated in place (persists via Phase 10 §5.6 commit):
+ *     · wedding → MaritalStatus = "married" (lowercase, matches live SL enum)
+ *     · birth   → NumChildren++ on the parent ONLY (OFF-SAMPLE per Mike's S248
+ *                 seam decision: the child stays Tier-5 until a published story
+ *                 names it; NO tracked infant row is created here)
+ * - Two indices added (iMarital, iNumChildren), every write guarded `>= 0`.
+ * - Determinism untouched (no new RNG); no direct sheet writes (row[] mutation
+ *   on ctx.ledger, same pattern as the existing death/health row[iStatus] writes).
+ * - DEFERRED to a follow-up: promotion → CareerStage/Income structural sync.
+ *   checkPromotion_ carries only previousRole; the live CareerStage enum is
+ *   drifted (mid-career/mid/senior/early/entry/early-career, no canonical
+ *   ladder) and there is no TierRole column in SL — needs a progression-ladder
+ *   + income-% design, not pure mechanism. Filed engine-side.
+ * - DEPLOY HELD until C96 confirms the S244 simYear fix (Track 1 age-math
+ *   rides on it; deploying life-event mutations on an unverified age-fix would
+ *   write garbage MaritalStatus/NumChildren keyed off broken ages).
  *
  * v2.6 Changes (S204 B2 / 2026-05-06):
  * - LifeHistory_Log appendRow → queueAppendIntent_ (Phase 42 B2 mechanical
@@ -176,6 +198,12 @@ function runGenerationalEngine_(ctx) {
   var iStatusStart = idx("StatusStartCycle");
   var iHealthCause = idx("HealthCause");
 
+  // S248 Track 1 (LEDGER_REPAIR_HOUSEHOLDS Phase 2b) — structural columns the
+  // milestone events now mutate, so a [Wedding]/[Birth] means something beyond
+  // the LifeHistory tag. Guard every write on `>= 0` (column may be absent).
+  var iMarital = idx("MaritalStatus");
+  var iNumChildren = idx("NumChildren");
+
   // LifeHistory_Log handle removed S204 B2 — appends route through queueAppendIntent_.
   var cycle = (ctx.summary && ctx.summary.cycleId) || (ctx.config && ctx.config.cycleCount) || 0;
 
@@ -295,6 +323,11 @@ function runGenerationalEngine_(ctx) {
         ctx.summary.generationalEvents.push(applyMilestone_(
           ctx, row, iLife, iLastU, weddingResult, name, popId, neighborhood, cycle, calendarContext
         ));
+        // S248 Track 1: a wedding flips MaritalStatus (lowercase enum, matches
+        // live SL: married/single/divorced/partnered/widowed). The off-sample
+        // spouse stays implicit (S248 seam = births/partners off-sample);
+        // tracked-couple binding still routes through createGenerationalBond_.
+        if (iMarital >= 0) row[iMarital] = "married";
         if (weddingResult.spouseId) {
           createGenerationalBond_(ctx, popId, weddingResult.spouseId, "romantic", "wedding", "", neighborhood, "Married partners");
         }
@@ -309,6 +342,10 @@ function runGenerationalEngine_(ctx) {
         ctx.summary.generationalEvents.push(applyMilestone_(
           ctx, row, iLife, iLastU, birthResult, name, popId, neighborhood, cycle, calendarContext
         ));
+        // S248 Track 1 (seam = OFF-SAMPLE births, Mike S248): a birth increments
+        // the parent's NumChildren only. NO tracked infant row is created — the
+        // child lives Tier-5 until a published story names it (model point 4).
+        if (iNumChildren >= 0) row[iNumChildren] = (Number(row[iNumChildren]) || 0) + 1;
         triggerBirthCascade_(ctx, popId, name, neighborhood, cycle, calendarContext);
         updatedRows[r] = true;
         counts.births++;

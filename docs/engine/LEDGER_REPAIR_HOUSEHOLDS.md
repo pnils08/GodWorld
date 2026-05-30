@@ -145,28 +145,46 @@ Do not re-open these as questions:
    (point 5); publication materializes named family Tier-5→Tier-4 (point 4). The accumulated
    life surfaces in the citizen's own structural columns + coverage.
 
-### The ONE genuine seam — a contradiction inside this doc, needs Mike's word to reconcile
+### The ONE genuine seam — RESOLVED S248 (Mike's word): option (a), births stay off-sample
 
-Model **point 4** says publication is *"the only mechanism that grows tracked households."*
-But the older **Phase 2 — Births** text below says *"a birth creates a tracked Tier-4 infant
-attached to the household."* Both cannot be true. Either:
-- (a) Births stay off-sample — a birth increments `NumChildren` only; the child is Tier-5 until a
-  story names it (publication is the only path to a tracked child — point 4 wins), OR
-- (b) The engine DOES create tracked infants at real rates (the invariant holds — the parent is
-  the tracked adult), and point 4 softens to "publication is *a* mechanism, not the only one."
+Model **point 4** said publication is *"the only mechanism that grows tracked households."*
+The older **Phase 2 — Births** text below said *"a birth creates a tracked Tier-4 infant."*
+Both could not be true. **Mike's decision (S248): option (a) — births stay off-sample.**
+A `[Birth]` increments the parent's `NumChildren` only; the child lives Tier-5 (untracked)
+until a published story names it. **Publication remains THE only mechanism that grows the
+tracked-citizen count** (model point 4 stands, unsoftened). Rationale: keeps the ~903 tracked
+set a curated representative-voice sample rather than ballooning with storyless engine-born
+infants. The Phase-2 "birth creates a tracked infant" text below is **superseded** — do not
+create tracked infant rows in the engine.
 
-This is the only thing that needs a decision, and it's reconciling two of the model's own
-sentences — not a new approach.
+### Build — TWO TRACKS (S248 measure-twice split; seam settled = option (a))
 
-### Build (mechanical, once the seam above is settled)
+The S248 caller-graph + live-ledger quant (Status: `Active=872/Retired=9/pending=22`;
+`householdFormationEngine.loadCitizens_` admits **0** today, case-fold admits **872**) split
+this into two independent tracks. **Track 1 is the mission-central, no-fork work and ships
+first; Track 2 is a separate dormant-subsystem reactivation that needs its own canon-safety pass.**
 
-- Make `applyMilestone_` (or a sibling) mutate the citizen's structural state, not just the tag:
-  wedding → `MaritalStatus` (+ spouse linkage only in the rare tracked-couple case); birth →
-  per the seam decision (`NumChildren`++ always; tracked child only if (b)); promotion →
-  `CareerStage`/`TierRole`/`Income`.
+**Track 1 — events MEAN something (`generationalEventsEngine.applyMilestone_`).** This is where
+milestones already fire every cycle. Make the milestone path mutate the citizen's structural
+columns in `ctx.ledger`, not just the LifeHistory tag:
+- **wedding** → flip `MaritalStatus` to married (+ spouse linkage only in the rare tracked-couple
+  case where `spouseId` is non-null);
+- **birth** → `NumChildren`++ on the parent's row ONLY (off-sample, per the S248 seam decision —
+  NO tracked infant row created);
+- **promotion** → `CareerStage` / `TierRole` / `Income`.
 - The wedding-gate on births (birth requires a prior `[Wedding]` tag — L682) stays per the model.
-- Calibrate rates to real Oakland (table in Phase 2 below).
-- Retire the dead `householdFormationEngine` stubs OR resurrect them as the home for this work.
+- Determinism preserved (`ctx.rng` only); writes go through `ctx.ledger` (Phase 42 §5.6), never
+  direct sheet writes. Deploy HELD until C96 confirms the S244 simYear fix (Track 1 age-math
+  rides on it — deploying life-event mutations on an unverified age-fix would write garbage).
+
+**Track 2 — household reactivation (`householdFormationEngine`, Row 22).** Keep-and-fix, NOT
+retire — the engine owns live-intended `formNewHouseholds_` / `updateHouseholdIncomes_` /
+`detectHouseholdStress_` / `dissolveStressedHouseholds_` machinery, all dormant only because
+`loadCitizens_` returns 0. The Row 22 case-fold reactivates all of it 0→872 in one line —
+**cityDynamics S136 class.** Before flipping: calibrate/suppress the rent-burden-crisis hooks
+(`rentBurden≥0.50 → generateRentBurdenHook_`) for prosperity canon (deprivation-coding hazard,
+S245 class) + verify the formation/dissolve Household_Ledger writes are canon-safe. Its
+birth/marriage/divorce stubs stay **retired** — those live in Track 1. Separate session/deploy.
 
 ---
 

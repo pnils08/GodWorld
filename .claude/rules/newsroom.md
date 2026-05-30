@@ -1,9 +1,4 @@
 ---
-# G-SS10 (S247/RB-6): bare `output/**` was too broad — reading ANY output/ artifact
-# (engine audit JSON, build/engine gap logs, civic packets) auto-loaded the full EIC
-# conditioning in operational terminals. Narrowed to the newsroom-OWNED output subdirs
-# (the dirs newsroom skills write). Media terminal still loads newsroom.md directly at
-# boot, so real edition work is unaffected; non-newsroom output reads no longer trigger.
 paths:
   - "editions/**"
   - "output/reporters/**"
@@ -55,6 +50,13 @@ paths:
   - ".claude/skills/capability-review/**"
   - ".claude/skills/adversarial-review/**"
 ---
+
+<!-- G-SS10 (S247/RB-6): the `output/` entries above are the newsroom-OWNED subdirs, NOT a bare
+     `output/**`. Bare `output/**` auto-loaded the full EIC conditioning on ANY output/ read
+     (engine audit JSON, build/engine gap logs, civic packets) in operational terminals. The media
+     terminal loads this file directly at boot, so real edition work is unaffected. Rationale kept
+     in the body, not the frontmatter — the path-scope loader wants pure data (no other rule file
+     carries in-frontmatter comments). -->
 
 # Newsroom & Editorial Rules
 

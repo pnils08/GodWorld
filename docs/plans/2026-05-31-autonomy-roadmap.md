@@ -20,6 +20,7 @@ pointers:
   - "[[POST_MORTEM_C92_CONTAMINATION]] — the drift event autonomy amplifies; canon-fidelity layer is the answer"
   - "[[canon/CANON_RULES]] + [[canon/INSTITUTIONS]] — the scaffold that must hold harder as horizon grows"
   - "[[plans/2026-05-28-gemini-offload-pattern]] (governance.21) — adjacent token-budget lever, not part of autonomy"
+  - "[[../RESEARCH]] §S248 — SkillOpt (Microsoft text-space skill optimizer) — the Layer-2 learning mechanism; scorer (finalArbiter.js) already exists, gap is held-out set + optimizer harness + rollout-cost ceiling"
 ---
 
 # Autonomy Roadmap — Continuous Sim + Autonomous Agents (umbrella)
@@ -59,6 +60,7 @@ Run the reporters / civic voices / reviewers unattended — they wake, read stat
 - **Status:** NOT STARTED. Agents exist (four-file identities, pipeline runs them today under editor orchestration). The move is: replace editor-per-cycle orchestration with a loop.
 - **Gate:** reviewer lanes (Rhea / cycle-review / Mara / capability / Final Arbiter) must fire **every** autonomous cycle, not on-demand — unattended generation without per-cycle eval is exactly the 183-crimes-in-4-days / C92 failure mode. Confirm the gen-eval chain is loop-safe before removing the human-in-loop editor step.
 - **Cost note:** the reviewer chain is already the expensive part of a cycle; autonomy multiplies cycle count, so this layer's token bill is real even though the agents themselves run on file access.
+- **Learning mechanism — SkillOpt over finalArbiter (S248, [[../RESEARCH]] §S248 — SkillOpt):** autonomous ≠ improving. To make the newsroom *get better* unattended, not just run, the published recipe is SkillOpt (Microsoft) — optimize the skill `.md` against a held-out score, accept an edit only if it strictly beats validation. **The scorer it requires already exists:** `scripts/finalArbiter.js` emits `weightedScore ∈ [0,1]` per cycle (C95 0.836); Mara is the 0.2 Result-Validity lane, MCP-reachable (`mcp__claude_ai_Mara__*`) — the human shuttle is the only manual hop. HAVE: scorer + skill docs. NEED: (a) held-out validation set of graded cycles, (b) optimizer-rollout harness, (c) a rollout-COST ceiling — one rollout = one full edition (hundreds-K tokens), so SkillOpt's "1000 rollouts" is trivial for its trivia benchmarks but the largest bill we'd ever run; our version is "signal from 20–50," not 1000. Mike S248: automated scoring is "true automation," and Mara-as-claude.ai is the automatable manual layer. NOT a build row — graduates when this layer reaches execution AND the cost ceiling is set. **⚠ Molding deltas before any build (full list [[../RESEARCH]] §S248 — SkillOpt):** SkillOpt does not drop in as published — #1 rollouts 1000→~20–50 (tuning), #2 held-out validation set WE BUILD (unsolved: replay past cycles w/ known Arbiter scores? — gate can't run without it), #3 scorer is subjective-stable not deterministic so the "strictly improves" gate needs a noise band or 2–3× averaging, #4 optimize ONE skill at a time (write-edition or sift) not the whole bag. #1/#3 tuning, #2/#4 genuine design we own.
 
 ### Layer 3 — Citizen-autonomous (the inhabitants, the real Emergence parallel)
 

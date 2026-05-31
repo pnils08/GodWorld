@@ -61,9 +61,13 @@ var NO_STRIP = process.argv.includes('--no-strip');
 // `ARTICLE TABLE` — those without a trailing colon are the canonical
 // post-body sections and stay).
 //
-// Pairs with the desk-emission FIX (separate ROLLOUT item) — this is the
-// "defense-in-depth" safety net so silent regressions can't poison
-// bay-tribune canon retrieval.
+// Pairs with the desk-emission FIX (pipeline.9, S249) — the emission-time
+// half lives in scripts/validateEdition.js checkMetadataLeak(), which asserts
+// this strip would be a no-op on the compiled artifact and fails loud on any
+// in-body leak. This stays the "defense-in-depth" safety net at ingest so
+// silent regressions can't poison bay-tribune canon retrieval.
+// SYNC: keep the blockStart / inlineNamesIndex patterns below in lockstep with
+// checkMetadataLeak() in validateEdition.js — they share the leak-marker forms.
 function stripMetadataLeaks(content) {
   var lines = content.split('\n');
   var out = [];

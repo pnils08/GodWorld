@@ -725,6 +725,49 @@ function checkEngineLanguage(editionText) {
   return issues;
 }
 
+// ─── In-Body Metadata Leak Gate (pipeline.9, S249) ──────────────────────────
+//
+// The C92 contamination: desk reporters appended audit/tracking blocks
+// (EVIDENCE, ARTICLE TABLE ENTRIES, CITIZEN USAGE LOG, FACTUAL ASSERTIONS,
+// CONTINUITY NOTES, Names Index) INSIDE the article body. ingestEdition.js
+// strips these at INGEST time (stripMetadataLeaks, S180) so the ledger stays
+// clean — but the published .txt artifact itself (Drive / bay-tribune
+// Supermemory / Mara / MCP search_canon source) is never run through that
+// strip. This gate is the emission-time half: it asserts the strip would be a
+// NO-OP on the compiled artifact, failing loud (CRITICAL) on any leak marker so
+// the dirty .txt never ships. (S172 encoded the sections-after-body rule as
+// format law; this is its structural enforcement.)
+//
+// SYNC: the two patterns below are kept in lockstep with
+// scripts/ingestEdition.js stripMetadataLeaks() — same block-start forms. The
+// canonical post-body sections (NAMES INDEX / BUSINESSES NAMED / CITIZEN USAGE
+// LOG / ARTICLE TABLE, NO trailing colon) are deliberately NOT matched — those
+// are legitimate trailers. The colon / `##` / bold scaffolding forms are
+// illegal anywhere in a clean published artifact, which is what these catch.
+function checkMetadataLeak(editionText) {
+  const issues = [];
+  const lines = editionText.split('\n');
+  const blockStart = /^(##\s+(EVIDENCE|Names\s+Index)\s*$|ARTICLE TABLE ENTRIES:\s*$|CITIZEN USAGE LOG:\s*$|CONTINUITY NOTES:\s*$|FACTUAL ASSERTIONS:\s*$|\*\*\s*(ARTICLE TABLE ENTRIES|CITIZEN USAGE LOG|CONTINUITY NOTES|FACTUAL ASSERTIONS|NAMES INDEX|Names Index)\s*:?\s*\*\*\s*$)/;
+  const inlineNamesIndex = /^Names Index:\s*\S/;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    let marker = null;
+    if (blockStart.test(line)) marker = line.trim();
+    else if (inlineNamesIndex.test(line)) marker = line.trim().slice(0, 60);
+    if (!marker) continue;
+
+    issues.push({
+      severity: CRITICAL,
+      check: 'Metadata Leak',
+      detail: `Audit/tracking block leaked into article text at line ${i + 1}: "${marker}"`,
+      fix: 'Desk emission leaked a metadata block into the prose (C92 pattern). Remove it — the canonical tracking sections (NAMES INDEX / CITIZEN USAGE LOG / BUSINESSES NAMED / ARTICLE TABLE) belong AFTER the body with no trailing colon, per EDITION_PIPELINE format law. ingestEdition.js would strip this at ingest; the published .txt must not carry it.'
+    });
+  }
+
+  return issues;
+}
+
 // ─── ARTICLE TABLE Placement Consistency (S244 ES-1, G-W62) ──────────────
 //
 // The ARTICLE TABLE is the canonical machine-readable signal for what prints
@@ -1268,6 +1311,12 @@ Exit codes:
   const placementIssues = checkArticleTablePlacement(editionPath);
   allIssues.push(...placementIssues);
   console.log(`  [${placementIssues.length === 0 ? '✓' : '!'}] ARTICLE TABLE placement: ${placementIssues.length} issues`);
+
+  // 7c. In-body metadata leak gate (pipeline.9, C92 desk-emission fix) — asserts
+  // stripMetadataLeaks() would be a no-op on the published artifact.
+  const leakIssues = checkMetadataLeak(editionText);
+  allIssues.push(...leakIssues);
+  console.log(`  [${leakIssues.length === 0 ? '✓' : '!'}] Metadata leak: ${leakIssues.length} issues`);
 
   // Build cross-domain exclusion maps to prevent false positives on shared last names
   // officialFirstsByLast: { "ramos": ["Keisha"], "ellis": ["Simone"], ... }

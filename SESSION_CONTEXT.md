@@ -4,23 +4,30 @@
 
 Last Updated: 2026-05-31 | Engine: v3.3 | Cycle: 95 | Session: 249 | Day: 161 | Edition: **E94 PUBLISHED + S94 SUPP PUBLISHED + C95 CIVIC CASCADE COMPLETE + C95 /write-edition COMPLETE + C95 PUBLISHED TO DRIVE + C95 /edition-print COMPLETE + C95 /post-publish COMPLETE — CYCLE 95 CANONIZED**
 
+**STATUS (S249 [engine/sheet] — soft close, chaining to S250):** 8 commits, all pushed clean (see Shipped block). Stale/oldest pipeline backlog cleared end-to-end — **pipeline.1** gender→citizen briefs (`buildDeskPackets`), **pipeline.9** emission-time metadata-leak gate (`validateEdition.checkMetadataLeak`, asserts `stripMetadataLeaks` is a no-op on the published `.txt`; patterns SYNC'd both ways with `ingestEdition`), **pipeline.10** PDF band-aid done-as-superseded, **pipeline.11** briefing-versioning archive (`archiveBriefingBundle.js` + `/post-publish` Step 10b; base_context excluded from archive), **pipeline.12** bundle-trim cluster closed (T1 won't-fix/illusory, T2 obsolete, T3 candidate-cap done + differentiation deferred-unvalidatable, T4=pipeline.11, T5 self-validates next cycle). **civic.13** — G-PREP4 closed (already done by pipeline.25/31, no code) + **G-PREP7** approval-shift delta in `buildWorldSummary` v1.1.0 (scale-normalized, holder-guarded, raw-signed no-threshold, advisor-hardened); **G-PREP6 still BLOCKED** (KONO profile, dep civic.10b/engine.8) → row=blocked. Reconciled **pipeline.12/.13** rows to code reality (photo pipeline T5–T9 actually shipped S188; owner→research-build; plan-doc statuses stale). Recurring finding: most "open" pipeline work was bookkeeping drift, not real backlog. **No clasp this session — all Node-side, no smoke-test owed, no engine-version change.** Detail: commit bodies + ROLLOUT `pipeline.*` / `civic.13` rows. **NEXT:** civic.13 G-PREP6 unblocks when civic.10b/engine.8 lands; pipeline.13 verification tail (T11/12/13) is research-build's; no clean engine-sheet-solo work left in these clusters.
+
+---
+
 **STATUS (S248 [research/build] — HARD CLOSE, 3 commits pushed clean, tree synced):** Session-long research-build span: governance sweep + 2 doc-audits + 4 Drive-doc evals → an autonomy umbrella. **Commits (all pushed origin/main):** `3983ef6` S248 Archive Pass (engine.28 + governance.23/24/25 swept to ROLLOUT_ARCHIVE) + /doc-audit media (civic-office-okoro undocumented since S206 → AGENT_NEWSROOM 25→26, EDITION_PIPELINE Layer-2 list) + /doc-audit plans (11 stale frontmatter tags flipped active/draft→complete; skill-eval-framework held active deliberately). `5f56ecb` autonomy roadmap (**research.12**, `docs/plans/2026-05-31-autonomy-roadmap.md`) — umbrella steering doc, 3 sequenced layers (engine-continuous citizen life engine.5/.29 → newsroom-autonomous loop+grep → citizen-autonomous spacemolt-miner-shape, GPU-gated); consolidates research.9 + Emergence World + city-for-bots + ARCHITECTURE_VISION + GPU-gate; research.9 re-pointed as sub-thread. Plus Emergence World eval (RESEARCH §S248: Claude stable-society/0-crime vs Grok extinct/4-days; their long-horizon drift = our C92) + Gemini-offload reframe (governance.21 FUTURE CONCEPT + cost gate, AutoDream $100 scar). `3f9bb26` SkillOpt research log + Layer-2 learning mechanism — **key finding: the scorer SkillOpt requires already exists** (`scripts/finalArbiter.js` emits weightedScore∈[0,1] every cycle, C95 0.836; Mara = the 0.2 lane, MCP-reachable); gap = held-out set + optimizer harness + rollout-cost ceiling (1 rollout = 1 full edition). 4 molding deltas captured (#2 held-out-set + #4 one-skill-scoping = unsolved design we own; #1/#3 = tuning). **Mike direction:** automated scoring is "true automation," Mara-as-claude.ai is the automatable manual layer; newsroom IS the simulation; newsroom automation is greps+file-access. **NEW memory:** `feedback_token-burn-hierarchy.md` (dominant token lever = session discipline + boot burn, NOT model offload — glitched output → one clean re-run not a probe storm). **Process honesty:** read-before-Edit failed 3× this session (grep/tail ≠ Read-tool); render channel glitched all session, verified every claim against git status/grep-c. **NEXT:** autonomy roadmap is the steering doc when Mike wants to move — Layer 1 (engine.5/.29) proceeds on own rows; Layer 3 PoC (research.9 1-2 citizen, ~1hr) is the cheapest learning, check whether Phase 40.2/engine.1 actually gates it. governance.26 engine-sheet Tasks 2/5/6 still open (hard-close snapshot+reset — until it lands SESSION_CONTEXT accumulates but boot doesn't read it). **Archive sweep NOT re-run this close** (S248 pass already ran this span; 17 residual are engine-sheet/pre-existing). **--rotate-history skipped** (governance.26 redesign owns the SESSION_CONTEXT reset; don't collide).
 
 ---
 
-**STATUS (S248 [research/build] — soft close, combined 4-terminal S248 stack pushed, Mike-greenlit):** 3 research-build commits in an 8-commit shared S248 stack (rest engine-sheet). **`417bb85` governance.19** — /session-end v2.0→v2.1 friction (G-SE2 deterministic Archive Sweep Trigger / G-SE3 journal `[N+1]`→`[N]` / G-SE4 ARCHIVE-PASS ordering comment / G-SE5 STATUS-form binds to journal decision; G-SE1 deferred to governance.26 Task 6). **`b726321` + `522cd95` governance.26 research-build slice** — SESSION_CONTEXT always-load → on-demand: ADR-0009 written+registered; hook awk-extracts `## Shipped Last Session (S248)
+**STATUS (S248 [research/build] — soft close, combined 4-terminal S248 stack pushed, Mike-greenlit):** 3 research-build commits in an 8-commit shared S248 stack (rest engine-sheet). **`417bb85` governance.19** — /session-end v2.0→v2.1 friction (G-SE2 deterministic Archive Sweep Trigger / G-SE3 journal `[N+1]`→`[N]` / G-SE4 ARCHIVE-PASS ordering comment / G-SE5 STATUS-form binds to journal decision; G-SE1 deferred to governance.26 Task 6). **`b726321` + `522cd95` governance.26 research-build slice** — SESSION_CONTEXT always-load → on-demand: ADR-0009 written+registered; hook awk-extracts `## Shipped Last Session (S249)
 
 *Mechanical artifact — git-log output auto-generated by `scripts/writeShippedBlock.js` at session-end. Not editorial. **`ROLLOUT_PLAN.md` is canonical for what these commits accomplished.***
 
-- `3f9bb26` S248 SkillOpt research log + autonomy-roadmap Layer-2 mechanism [research/build]
-- `5f56ecb` S248 autonomy roadmap + Gemini/Emergence research logs [research/build]
-- `3983ef6` S248 archive sweep + media & plans doc-audit [research/build]
-- `1043562` S248 pipeline.34 — gap-log sidecar naming harmonized to unified convention
-- `82a9d04` S248 pipeline.32 cont. — non-edition skills onto the unified one-true-cycle log
-- `989142d` S248 pipeline.32 — civic production log folded into unified one-true-cycle source
-- `d38b080` S248 pipeline.35 — cycle-init admin skill / one-true-cycle-source design plan
-- `144559d` S248 session-end soft close [research/build]
-- `98fa9ae` S248 [engine/sheet] /stub-engine — regen ENGINE_STUB_MAP (closes S234+S248 deferred follow-up)
+- `a3c1a8e` S249 [engine/sheet] pipeline.12 Task 1 won't-fix + archive base_context exclude
+- `9263070` S249 [engine/sheet] pipeline.12 Task 3 — cap interviewCandidates (bundle-size)
+- `a389286` S249 [engine/sheet] pipeline.11 — briefing versioning (Task 4)
+- `65a577d` S249 [engine/sheet] reconcile pipeline.12 + pipeline.13 rows to code reality
+- `6fcc718` S249 [engine/sheet] civic.13 — G-PREP7 approval-delta + G-PREP4 reconcile
+- `020a295` S249 engine.20b — voice-agent phase-advance discipline [research/build]
+- `b2d6b65` S249 [engine/sheet] pipeline.10 — close done-as-superseded
+- `25f397c` S249 [engine/sheet] pipeline.9 — emission-time metadata leak gate
+- `9bb7c2b` S249 [engine/sheet] pipeline.1 — gender into citizen briefs
+- `c202288` S249 governance.20 — journal-write to media-only [research/build]
+- `b82dd98` S248 close — shipped-block boundary advance [research/build]
+- `ca8c62b` S248 session-end hard close [research/build]
 
 ---
 

@@ -32,7 +32,9 @@ Other terminals have different sidecar shapes:
 
 ## Template
 
-Copy everything below the fence. Rename to `output/production_log_<skill>_c<XX>_gaps.md` (or sidecar to the consolidated `production_log_c<XX>.md`). Italicized guidance is for the writer — delete after filling in.
+Copy everything below the fence. Rename to **`output/production_log_c<XX>_<skill>_gaps.md`** — the canonical pipeline.34 convention (cycle prefix matching the unified parent `production_log_c<XX>.md`, then skill infix, then `_gaps`). Skills that can run more than once per cycle (`/dispatch`, `/interview`, `/write-supplemental`) take a slug: **`production_log_c<XX>_<skill>_<slug>_gaps.md`**. Sidecar to the consolidated `production_log_c<XX>.md`. Italicized guidance is for the writer — delete after filling in.
+
+**Migration (pipeline.34, S248):** the convention applies C96+. Legacy on-disk files from the pre-unified era — `production_log_edition_c<XX>_<step>_gaps.md`, `production_log_city_hall_c<XX>_gaps.md`, `production_log_interview_c<XX>_gaps.md`, etc. — stay as-is (don't rename historical artifacts); they remain readable by the triage globber. The grouping prefixes (`edition`, `city_hall`) are dead because pipeline.32 collapsed the split parent logs.
 
 ```markdown
 ---
@@ -135,7 +137,7 @@ Append-only log. Each entry: date, session, gap closed/promoted/deferred, eviden
    - G-P\* for `/post-publish`
    - G-D\* for `/dispatch`
    - G-I\* for `/interview`
-3. At skill close, write `output/production_log_<skill>_c<XX>_gaps.md` using this template (or sidecar to consolidated `production_log_c<XX>.md` per S195 convention).
+3. At skill close, write `output/production_log_c<XX>_<skill>_gaps.md` (slug-infixed for multi-run skills: `production_log_c<XX>_<skill>_<slug>_gaps.md`) using this template — sidecar to the consolidated `production_log_c<XX>.md` (pipeline.34 convention).
 4. Add a single ROLLOUT row pointing at the gap log: `pipeline.<n>` (media) or `civic.<n>` (civic), per ADR-0005.
 5. The gap log is canonical for sub-state; the ROLLOUT row is the index entry only.
 

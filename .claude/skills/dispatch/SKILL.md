@@ -235,7 +235,7 @@ Both skills append their `## /dispatch — {slug}` section to the unified `outpu
 
 At skill close, capture friction observed during dispatch production as a gap log. /dispatch is a heavy skill at the **media generator terminal**; sidecar gap logs catch inefficiency the skill couldn't catch while running.
 
-**Output path:** `output/production_log_dispatch_c<XX>_<slug>_gaps.md` (one per dispatch since dispatches can run multiple times per cycle).
+**Output path:** `output/production_log_c<XX>_dispatch_<slug>_gaps.md` (pipeline.34 convention `production_log_c{XX}_<skill>_<slug>_gaps.md` — slug-infixed because dispatches can run multiple times per cycle; one gap log per dispatch).
 
 **Gap prefix:** **G-D\*** (e.g., G-D1).
 

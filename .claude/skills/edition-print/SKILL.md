@@ -206,7 +206,7 @@ Done. Print pipeline complete.
 
 At skill close, capture friction observed during the print pipeline as a gap log. /edition-print is a heavy skill at the **media generator terminal**; sidecar gap logs catch inefficiency the skill couldn't catch while running.
 
-**Output path:** `output/production_log_edition_c<XX>_print_gaps.md` (sidecar to consolidated `output/production_log_c<XX>.md` per S195 convention).
+**Output path:** `output/production_log_c<XX>_print_gaps.md` (sidecar to the unified `output/production_log_c<XX>.md`; pipeline.34 convention `production_log_c{XX}_<skill>_gaps.md`).
 
 **Gap prefix:** **G-PR\*** (e.g., G-PR1, G-PR8, G-PR10).
 

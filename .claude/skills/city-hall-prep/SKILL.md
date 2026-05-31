@@ -267,7 +267,7 @@ GodWorld MCP for structured lookups. Supermemory `bay-tribune` for canon search.
 
 At skill close, capture friction observed during prep as a gap log. /city-hall-prep is a heavy skill at the **civic generator terminal**; sidecar gap logs catch inefficiency the skill couldn't catch while running.
 
-**Output path:** `output/production_log_city_hall_c<XX>_gaps.md` (sidecar to `output/production_log_city_hall_c<XX>.md`).
+**Output path:** `output/production_log_c<XX>_city_hall_prep_gaps.md` (sidecar to the unified `output/production_log_c<XX>.md`; pipeline.34 convention `production_log_c{XX}_<skill>_gaps.md`).
 
 **Gap prefix:** **G-PREP\*** (e.g., G-PREP1, G-PREP15. /city-hall *run* uses G-R\*.)
 

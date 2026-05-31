@@ -463,7 +463,7 @@ These elements were part of the old write-edition (pre-S144) and are now handled
 
 At skill close, capture friction observed during edition write as a gap log. /write-edition is the heaviest skill at the **media generator terminal**; sidecar gap logs catch inefficiency the skill couldn't catch while running.
 
-**Output path:** `output/production_log_edition_c<XX>_write_gaps.md` (sidecar; the `_edition_` infix on gap-log sidecars is intentional — anchors per-skill sidecars to the edition flow even though the parent log is consolidated `production_log_c<XX>.md` per S195).
+**Output path:** `output/production_log_c<XX>_write_gaps.md` (sidecar to the unified `output/production_log_c<XX>.md`; pipeline.34 convention `production_log_c{XX}_<skill>_gaps.md` — the old `_edition_` grouping infix was retired when pipeline.32 collapsed the split logs).
 
 **Gap prefix:** **G-W\*** (e.g., G-W1, G-W19, G-W22).
 

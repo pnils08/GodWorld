@@ -325,7 +325,7 @@ The production log is the ONLY civic document sift reads. If a voice quote, deci
 
 At skill close, capture friction observed during the city-hall run as a gap log. /city-hall is a heavy skill at the **civic generator terminal**; sidecar gap logs catch inefficiency the skill couldn't catch while running.
 
-**Output path:** `output/production_log_city_hall_c<XX>_run_gaps.md` (sidecar to `output/production_log_city_hall_c<XX>.md`).
+**Output path:** `output/production_log_c<XX>_city_hall_run_gaps.md` (sidecar to the unified `output/production_log_c<XX>.md`; pipeline.34 convention `production_log_c{XX}_<skill>_gaps.md`).
 
 **Gap prefix:** **G-R\*** (e.g., G-R1, G-R8 — for `/city-hall` *run* gaps. /city-hall-prep uses G-PREP\*.)
 

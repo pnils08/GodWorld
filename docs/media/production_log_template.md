@@ -58,8 +58,12 @@ pointers:
 - `output/production_log_c<XX>_write_gaps.md`
 - `output/production_log_c<XX>_post_publish_gaps.md`
 - `output/production_log_c<XX>_print_gaps.md`
+- `output/production_log_c<XX>_run_cycle_gaps.md` ← engine-side, mechanical detectors
+- `output/production_log_c<XX>_dispatch_<slug>_gaps.md` ← multi-run, slug-infixed (one per dispatch)
+- `output/production_log_c<XX>_interview_<subject-slug>_gaps.md` ← multi-run, slug-infixed
+- `output/production_log_c<XX>_write_supplemental_<slug>_gaps.md` ← multi-run, slug-infixed
 
-*(Sidecars are NOT for downstream consumption — they capture skill drift for governance review. The production log itself is the canonical record.)*
+*(Naming convention pipeline.34 (S248): `production_log_c<XX>_<skill>_gaps.md`, with a `_<slug>` infix for skills that can run more than once per cycle. Sidecars are NOT for downstream consumption — they capture skill drift for governance review, are transient, and fold into the cycle's compiled triage plan (GAP_LOG_TRIAGE_PLAYBOOK) before being archived. The production log itself is the canonical record.)*
 ```
 
 ## §Carry-Forward from Prior Cycle (written by /city-hall-prep at open)

@@ -835,7 +835,7 @@ When /sift v2 completes, `/write-edition` picks up by reading:
 
 At skill close, capture friction observed during sift as a gap log. /sift is a heavy skill at the **media generator terminal**; sidecar gap logs catch inefficiency the skill couldn't catch while running.
 
-**Output path:** `output/production_log_edition_c<XX>_sift_gaps.md` (sidecar to `output/production_log_c<XX>.md`).
+**Output path:** `output/production_log_c<XX>_sift_gaps.md` (sidecar to `output/production_log_c<XX>.md`; pipeline.34 convention `production_log_c{XX}_<skill>_gaps.md`).
 
 **Gap prefix:** **G-S\*** (e.g., G-S1, G-S2).
 

@@ -25,7 +25,7 @@ argument-hint: "[mode] [subject]"
 
 **Downstream:** articles framed off interview transcripts come from `/write-edition` (next cycle, via `/sift` surfacing the transcript as canon source) or `/write-supplemental` (any time, sports-desk subagent dispatch against the transcript). The article-generation cognitive act lives at the dispatch terminal, not at EIC.
 
-**Companion row:** `pipeline.34` (gap-log path convention harmonization across 5 heavy skills — /sift / /write-edition / /post-publish / /edition-print / /interview / /write-supplemental) split out per advisor pass S233; current interview gap-log path `output/production_log_interview_c<XX>_<subject-slug>_gaps.md` preserved here until pipeline.34 settles canonical convention.
+**Companion row:** `pipeline.34` (gap-log path convention harmonization across 5 heavy skills — /sift / /write-edition / /post-publish / /edition-print / /interview / /write-supplemental) split out per advisor pass S233; **SETTLED S248** — canonical convention `output/production_log_c<XX>_interview_<subject-slug>_gaps.md` (`production_log_c{XX}_<skill>_<slug>_gaps.md`, slug-infixed since interviews can run multiple times per cycle).
 
 **Source:** `output/production_log_interview_c94_gaps.md` (13 entries G-I1→G-I13, triage at bottom) + JOURNAL Entry 188 (S230 — "the plan was the work") + plan [[../../../docs/plans/2026-05-24-pipeline-30-interview-rewrite]].
 
@@ -100,7 +100,7 @@ No length target. The conversation shapes itself. Mike decides when it ends.
 **Status:** IN PROGRESS
 ```
 
-**B. Open gap-log file as live-append target** at `output/production_log_interview_c<XX>_<subject-slug>_gaps.md` (current per-interview subject-slugged form; `pipeline.34` will harmonize canonical convention across all heavy skills). The file opens with §Run summary frontmatter from [[../../../docs/plans/GAP_LOG_TEMPLATE]] and stays open through Steps 1-8 as a live-append target.
+**B. Open gap-log file as live-append target** at `output/production_log_c<XX>_interview_<subject-slug>_gaps.md` (pipeline.34 convention `production_log_c{XX}_<skill>_<slug>_gaps.md`, settled S248 — slug-infixed since interviews can run multiple times per cycle). The file opens with §Run summary frontmatter from [[../../../docs/plans/GAP_LOG_TEMPLATE]] and stays open through Steps 1-8 as a live-append target.
 
 ```markdown
 # Production Log — /interview Skill Run, C{XX} ({subject})
@@ -304,7 +304,7 @@ After Step 7 the transcript `.txt` is on disk. Run `/post-publish` against the t
 
 Gap log opens at **Step 0** as live-append target (see Step 0 §B above); friction-during-skill goes there before it's lost to context. At skill close, append a §Disposition summary + close the file with patterns cited. /interview is a heavy skill at the **media generator terminal**; sidecar gap logs catch inefficiency the skill couldn't catch while running. Interviews can spawn world-altering canon — friction here is high-stakes.
 
-**Output path:** `output/production_log_interview_c<XX>_<subject-slug>_gaps.md` (current per-interview subject-slugged form; `pipeline.34` will harmonize canonical convention across all 5 heavy skills + /write-supplemental).
+**Output path:** `output/production_log_c<XX>_interview_<subject-slug>_gaps.md` (pipeline.34 convention `production_log_c{XX}_<skill>_<slug>_gaps.md`, settled S248 — slug-infixed since interviews can run multiple times per cycle).
 
 **Gap prefix:** **G-I\*** (e.g., G-I1).
 

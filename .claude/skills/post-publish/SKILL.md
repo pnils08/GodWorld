@@ -485,7 +485,7 @@ If you're tempted to "wait it out" on Step 2a or Step 10, set expectation accord
 
 At skill close, capture friction observed during post-publish as a gap log. /post-publish is a heavy skill at the **media generator terminal**; sidecar gap logs catch inefficiency the skill couldn't catch while running. Type-aware: same gap log structure for edition / interview / supplemental / dispatch publishes.
 
-**Output path:** `output/production_log_<type>_c<XX>_post_publish_gaps.md` (sidecar to consolidated `output/production_log_c<XX>.md` per S195 convention).
+**Output path:** `output/production_log_c<XX>_post_publish_gaps.md` (sidecar to the unified `output/production_log_c<XX>.md`; pipeline.34 convention `production_log_c{XX}_<skill>_gaps.md`).
 
 **Gap prefix:** **G-P\*** (e.g., G-P1, G-P14).
 

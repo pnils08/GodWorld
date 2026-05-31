@@ -3,7 +3,7 @@ title: /session-end Ritual Collapse
 created: 2026-05-23
 updated: 2026-05-23
 type: plan
-tags: [infrastructure, governance, active]
+tags: [infrastructure, governance, complete]
 sources:
   - docs/engine/ROLLOUT_PLAN.md §governance.7
   - .claude/skills/session-end/SKILL.md v1.2 (current 13-step shape)

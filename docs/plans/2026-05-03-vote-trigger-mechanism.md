@@ -3,7 +3,7 @@ title: Vote-Trigger Wiring Plan (Engine Investigation)
 created: 2026-05-03
 updated: 2026-05-03
 type: plan
-tags: [engine, civic, active]
+tags: [engine, civic, complete]
 sources:
   - output/production_log_city_hall_c93_run_gaps.md G-R11 (vote-that-didn't-trigger)
   - phase05-citizens/civicInitiativeEngine.js (existing 9-seat vote resolver, lines 130-460)

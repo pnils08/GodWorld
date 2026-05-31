@@ -2,7 +2,7 @@
 
 **Status:** Implemented (Claude Code agents + skills)
 **Architecture:** Claude Code permanent agents (`.claude/agents/`) + orchestration skills (`.claude/skills/`)
-**Last Updated:** 2026-05-08 (S206 — content verified: 25 agent dirs in `.claude/agents/` matches doc; four-file structure intact across 24 active agents; engine-validator scope-noted N/A)
+**Last Updated:** 2026-05-31 (S248 — content verified: 26 agent dirs in `.claude/agents/` matches doc; `civic-office-okoro` Deputy Mayor added since S206; four-file structure intact across 25 active agents; engine-validator scope-noted N/A)
 
 ---
 
@@ -10,7 +10,7 @@
 
 The Agent Newsroom runs inside Claude Code using two layers:
 
-1. **Permanent Agents** (`.claude/agents/`) — 25 agents across: desk (7 — business, chicago, civic, culture, letters, podcast, sports), civic office (7 — mayor, opp-faction, crc-faction, ind-swing, police-chief, baylight-authority, district-attorney), civic project (4 — stabilization-fund, oari, health-center, transit-hub), review lanes (rhea-morgan, final-arbiter, freelance-firebrand), audit (city-clerk, engine-validator), media support (dj-hartley), core (mags-corliss). **Four-file structure (post-S175 canon-fidelity rollout):** IDENTITY.md (persona), LENS.md (three-tier framework application — see [[canon/CANON_RULES]]), RULES.md (constraints), SKILL.md (boot sequence). engine-validator is scope-noted N/A as code-only; the other 24 carry full four-file structure. See [[plans/2026-04-25-canon-fidelity-rollout]]. **Pipeline v2 (S134):** edition production launches 9 individual reporter personas mapped across the 7 desk folders via `/write-edition`.
+1. **Permanent Agents** (`.claude/agents/`) — 26 agents across: desk (7 — business, chicago, civic, culture, letters, podcast, sports), civic office (8 — mayor, okoro, opp-faction, crc-faction, ind-swing, police-chief, baylight-authority, district-attorney), civic project (4 — stabilization-fund, oari, health-center, transit-hub), review lanes (rhea-morgan, final-arbiter, freelance-firebrand), audit (city-clerk, engine-validator), media support (dj-hartley), core (mags-corliss). **Four-file structure (post-S175 canon-fidelity rollout):** IDENTITY.md (persona), LENS.md (three-tier framework application — see [[canon/CANON_RULES]]), RULES.md (constraints), SKILL.md (boot sequence). engine-validator is scope-noted N/A as code-only; the other 25 carry full four-file structure. See [[plans/2026-04-25-canon-fidelity-rollout]]. **Pipeline v2 (S134):** edition production launches 9 individual reporter personas mapped across the 7 desk folders via `/write-edition`.
 
 2. **Workspace Builders** (`scripts/`) — Zero-LLM scripts that populate per-agent workspace folders before launch: `buildDeskFolders.js` (7 desks), `buildVoiceWorkspaces.js` (7 civic offices), `buildInitiativeWorkspaces.js` (4 civic projects).
 

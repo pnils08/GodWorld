@@ -3,7 +3,7 @@ title: Boot + Persona Contamination Cleanup Plan
 created: 2026-05-13
 updated: 2026-05-13
 type: plan
-tags: [architecture, boot, persona, active]
+tags: [architecture, boot, persona, complete]
 sources:
   - .claude/rules/research-build.md — path-scope wildcards diagnosed S221
   - docs/mags-corliss/PERSISTENCE.md — mislabeled (identity + character content under "persistence" filename)

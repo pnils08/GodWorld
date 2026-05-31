@@ -3,7 +3,7 @@ title: pipeline.29 Research-Build Slice — DJ Photo Skill Discipline + FLUX-Cei
 created: 2026-05-23
 updated: 2026-05-23
 type: plan
-tags: [media, canon, photo-pipeline, active]
+tags: [media, canon, photo-pipeline, complete]
 sources:
   - docs/engine/ROLLOUT_PLAN.md §pipeline.29
   - docs/plans/2026-05-22-c94-gap-log-triage.md §3 C8

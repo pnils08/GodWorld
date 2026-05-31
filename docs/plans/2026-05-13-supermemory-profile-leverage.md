@@ -3,7 +3,7 @@ title: Supermemory User Profile pipeline — document + design leverage
 created: 2026-05-13
 updated: 2026-05-25
 type: plan
-tags: [architecture, memory, supermemory, active]
+tags: [architecture, memory, supermemory, complete]
 sources:
   - .claude/plugins/marketplaces/supermemory-plugins/plugin/hooks/hooks.json — SessionStart + Stop hook config
   - .claude/plugins/marketplaces/supermemory-plugins/plugin/scripts/summary-hook.cjs — writer (auto-extracts "Margaret Corliss [verb]" from turns)

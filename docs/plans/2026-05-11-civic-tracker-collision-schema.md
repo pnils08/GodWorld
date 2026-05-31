@@ -3,7 +3,7 @@ title: Civic tracker-collision schema — primary-owner field + Mayor cascade ro
 created: 2026-05-11
 updated: 2026-05-11
 type: plan
-tags: [civic, architecture, schema, active]
+tags: [civic, architecture, schema, complete]
 sources:
   - "[[../../output/production_log_city_hall_c93_run_gaps.md]] §G-R4 / G-R1 / G-R15 — the three gaps this plan closes"
   - "[[../engine/ROLLOUT_PLAN]] §civic.9 — parent ROLLOUT entry"

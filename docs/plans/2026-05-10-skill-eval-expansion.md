@@ -3,7 +3,7 @@ title: Skill-Eval Expansion — /city-hall + /dispatch + /interview
 created: 2026-05-10
 updated: 2026-05-10
 type: plan
-tags: [media, civic, architecture, draft]
+tags: [media, civic, architecture, complete]
 sources:
   - "[[skill-eval-framework]] — parent framework plan (S141 design + S156 first-skill shipped)"
   - "[[../engine/ROLLOUT_PLAN]] §governance.2 — HIGH C93"

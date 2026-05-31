@@ -204,7 +204,7 @@ City-hall is not atomic either. Internal order matters because Mayor's decisions
 | 2 | — | Mags writes | `pending_decisions.md` per voice |
 | 3 | **Layer 1: Mayor first** | `civic-office-mayor` | `mayor_c{XX}.json` |
 | — | cascade | — | update each remaining voice's pending_decisions with Mayor's relevant decisions |
-| 4 | **Layer 2: Voices parallel** | police-chief, opp, crc, ind-swing, baylight-authority, district-attorney | `{voice}_c{XX}.json` |
+| 4 | **Layer 2: Voices parallel** | okoro (Deputy Mayor), police-chief, opp, crc, ind-swing, baylight-authority, district-attorney | `{voice}_c{XX}.json` |
 | 5 | **Layer 3: Project agents** | civic-project-stabilization-fund, oari, health-center, transit-hub | `{project}_c{XX}.json` |
 | 5.5 | — | — | verify all outputs exist |
 | 5.6 | **City Clerk (closer)** | `city-clerk` | `clerk_audit_c{XX}.json` |

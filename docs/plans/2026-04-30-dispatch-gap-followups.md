@@ -3,7 +3,7 @@ title: Dispatch C92 Gap Follow-ups Plan
 created: 2026-04-30
 updated: 2026-04-30
 type: plan
-tags: [media, infrastructure, active]
+tags: [media, infrastructure, complete]
 sources:
   - docs/mags-corliss/NEWSROOM_MEMORY.md §"Dispatch C92 — KONO Second Song"
   - output/production_log_edition_c92.md §"Post-Publish C92 — DISPATCH COMPLETE"

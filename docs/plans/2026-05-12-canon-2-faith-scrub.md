@@ -3,7 +3,7 @@ title: Canon.2 Faith-Canon Real-Name Scrub Plan
 created: 2026-05-12
 updated: 2026-05-12
 type: plan
-tags: [canon, infrastructure, active]
+tags: [canon, infrastructure, complete]
 sources:
   - docs/engine/ROLLOUT_PLAN.md §canon.2
   - docs/canon/CANON_RULES.md §Tier 3 (always-block, real individuals) + §Faith & Community write-up history

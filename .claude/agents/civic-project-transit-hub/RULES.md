@@ -281,6 +281,36 @@ This applies double for visioning frameworks, anti-displacement assessments, and
 
 ---
 
+## Phase-Advance Discipline (engine.20b — S249)
+
+Your initiative's `ImplementationPhase` is a **rolling descriptor of where the work actually is — you own it.** No engine code advances it; it moves only when your voice statement proposes a new value and the city-hall pipeline writes it (your statement → `assembleDecisions.js` `pickPrimary` → `applyTrackerUpdates.js` → `Initiative_Tracker`). If you never propose a forward phase, the initiative sits in place indefinitely and the stuck-initiative auditor flags it HIGH.
+
+**When to advance** — propose a new `ImplementationPhase` only when BOTH hold:
+
+1. **The current phase's defining deliverable has materially landed.** Your phase is `cba-drafting` (per `Initiative_Tracker`); it advances when its real milestone is done or substantially done — the Community Benefits Agreement is finalized ahead of the C91 council vote — not on a process tick. That completed deliverable is the evidence. (Note: a council *vote* is a council-level event, not yours to assert — advance to a pre-vote/vote-ready descriptor, not a passed-vote outcome.)
+2. **Observed effects are positive or cascade-directed.** Your packet's neighborhood / population / prior-cascade context shows the implementation producing its intended result (community mandate clear, CBA terms landing), OR the Mayor/faction cascade directed the move. If the milestone stalled or effects are absent, **hold the phase** (below) — never advance on schedule alone.
+
+**Advance one real step.** Move the descriptor to the value reflecting the next true operational state — never skip ahead of reality, never regress, never name a phase that hasn't operationally begun. The string is yours to author; keep it a short forward descriptor consistent with your prior phases.
+
+**How to emit it (the only path that reaches the sheet).** On your initiative's owning voice statement (your §S215 flat-array shape below — that example predates this field; include it on the owning statement), set the **top-level** field `"trackerOwner": "INIT-003"`. This makes your statement the deterministic primary that drives the tracker write; without it a voting faction's statement can outrank you and your phase never lands. (For transit-hub specifically, a council member's vote-stance statement legitimately outranks yours on vote-position topics — `trackerOwner` ensures your *operational* phase still drives the tracker write.) Then populate `trackerUpdates`:
+
+```json
+"trackerOwner": "INIT-003",
+"trackerUpdates": {
+  "initiative": "INIT-003",
+  "ImplementationPhase": "<next phase descriptor>",
+  "NextScheduledAction": "<the deliverable that defines the new phase>",
+  "NextActionCycle": <cycle>,
+  "MilestoneNotes": "C{XX}: <what completed this cycle that justifies the advance — name the deliverable, not 'progressing'>"
+}
+```
+
+Only `ImplementationPhase`, `MilestoneNotes`, `NextScheduledAction`, `NextActionCycle` are written back (`applyTrackerUpdates.js` `WRITEBACK_FIELDS`); populate all four when you advance. `MilestoneNotes` is your evidence trail.
+
+**If you hold the phase:** still emit `trackerUpdates` with the **unchanged** `ImplementationPhase` plus a `MilestoneNotes` line naming what's blocking the advance and what must land first (`applyTrackerUpdates` writes only changed fields, so this is a clean note-only update). A held phase with a stated reason is canon; a phase that silently stops updating reads as neglect.
+
+---
+
 ## S215 civic.8 — Voice-cascade JSON schema clarification
 
 You write **two separate artifacts** with **different schemas**:

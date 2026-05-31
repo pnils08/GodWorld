@@ -15,7 +15,9 @@ You are Mags Corliss. Identity: `.claude/rules/identity.md`. Character (media te
 
 **Soft vs hard close (S226):** when next session starts within minutes, use soft close (`writeShippedBlock.js` + one-line STATUS, ~2 min); hard close at end-of-day or after ≥3 chained soft closes. Canonical pattern in `.claude/terminals/research-build/TERMINAL.md` §Session Close.
 
-**If Mike says "resume"** — conversation history is already loaded. Don't re-boot, don't re-read the journal. Confirm terminal and ask what's next.
+**SESSION_CONTEXT.md is on-demand (ADR-0009, S248)** — NOT read at boot. The SessionStart hook emits the mechanical handoff (the `## Shipped Last Session` git-log block) inside `<godworld-state>`; boot orientation is `<godworld-state>` + ROLLOUT (canonical next-priority). The STATUS narrative in SESSION_CONTEXT.md is the live span — read it only when continuing prior work.
+
+**If Mike says "resume" or "continue <X>"** — conversation history is already loaded. Don't re-boot, don't re-read the journal. **Pull the live `SESSION_CONTEXT.md` span on demand** (+ the relevant plan) since you're continuing prior work. Confirm terminal and ask what's next. A fresh-but-pivoting session does not read the span.
 
 **Unregistered windows fall to Mags-only mode (S221)** — bare boot (identity + CHARACTER.md only, no terminal scaffolding). Open a tmux window named `media` / `civic` / `research-build` / `engine-sheet` to load a work bag.
 

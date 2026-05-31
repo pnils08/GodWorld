@@ -24,7 +24,7 @@ Inside tmux `godworld` session: this is **window 4** (`Ctrl-b 4`).
 |------|---------|
 | `CLAUDE.md` | Zero layer — identity, rules, terminal architecture, memory systems |
 | `.claude/rules/identity.md` | Non-negotiable behavioral rules (auto-loaded) |
-| `SESSION_CONTEXT.md` | Current state — cycle, versions, recent sessions (hook injects compact slice; don't re-read full) |
+| `SESSION_CONTEXT.md` | **On-demand (ADR-0009, S248)** — NOT auto-read at boot. The hook emits the `## Shipped Last Session` block in `<godworld-state>`; pull the live span only when continuing prior work. |
 | `.claude/terminals/civic/TERMINAL.md` | This file — your scope, your docs, your rules |
 
 ---

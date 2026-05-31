@@ -26,7 +26,7 @@ Inside tmux `godworld` session: this is **window 1** (`Ctrl-b 1`).
 | `.claude/rules/identity.md` | Non-negotiable behavioral rules (auto-loaded) |
 | `docs/SCHEMA.md` | Doc conventions — naming, frontmatter, tags, folder map (Phase 41.1, S146) |
 | `docs/index.md` | Catalog of every active doc — grep here before grepping the tree (Phase 41.2, S146) |
-| `SESSION_CONTEXT.md` | Current state — cycle, versions, recent sessions (hook injects compact slice; don't re-read full) |
+| `SESSION_CONTEXT.md` | **On-demand (ADR-0009, S248)** — NOT auto-read at boot. The hook emits the `## Shipped Last Session` block in `<godworld-state>`; pull the live span only when continuing prior work. |
 | `.claude/terminals/research-build/TERMINAL.md` | This file — your scope, your docs, your rules |
 
 ---

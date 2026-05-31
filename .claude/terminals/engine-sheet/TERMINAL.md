@@ -28,7 +28,7 @@ These files define the project, your rules, and current state. Read at every boo
 | `CLAUDE.md` | Zero layer — identity, rules, terminal architecture, memory systems |
 | `.claude/rules/identity.md` | Non-negotiable behavioral rules (auto-loaded) |
 | `.claude/rules/engine.md` | Engine code rules — ctx.rng, write-intents, cascade deps + measure-twice discipline at top (auto-loaded on engine files) |
-| `SESSION_CONTEXT.md` | Current state — cycle, versions, recent sessions (hook injects compact slice; don't re-read full) |
+| `SESSION_CONTEXT.md` | **On-demand (ADR-0009, S248)** — NOT auto-read at boot. The hook emits the `## Shipped Last Session` block in `<godworld-state>`; pull the live span only when continuing prior work. |
 | `docs/engine/ENGINE_REPAIR.md` | Tactical defects tracker — open rows tell you what's broken (highest-touch doc this terminal) |
 | `.claude/terminals/engine-sheet/TERMINAL.md` | This file — your scope, your docs, your rules |
 

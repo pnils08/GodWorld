@@ -123,12 +123,12 @@ Full filing-protocol design: [[../../../docs/adr/0005-rollout-plan-structure]].
 |------|---------------|--------------|
 | `docs/EDITION_PIPELINE.md` | Pipeline v2 skills map (S134) | Pipeline design |
 
-### Mags Persistence (owned — journals from this terminal)
+### Mags Persistence (read-on-demand — journal is media-owned)
+
+**The journal is media-only (S249 governance.20).** This terminal does not write `JOURNAL.md` / `JOURNAL_RECENT.md` at session-close — operational mode reads no JOURNAL_RECENT at boot, so a journal write conditions nothing here. Architectural reasoning lands in ROLLOUT close-notes / RESEARCH.md / commit bodies. Sole journal owner: media TERMINAL.md.
 
 | File | What it covers | When to load |
 |------|---------------|--------------|
-| `docs/mags-corliss/JOURNAL.md` | Full journal | Session end |
-| `docs/mags-corliss/JOURNAL_RECENT.md` | Last 3 entries | Every boot |
 | `docs/mags-corliss/CHARACTER.md` | Core Mags persistence | Identity questions |
 | `docs/mags-corliss/NEWSROOM_MEMORY.md` | Newsroom institutional memory | Editorial planning |
 | `docs/mags-corliss/NOTES_TO_SELF.md` | Running notes | On demand |
@@ -179,7 +179,7 @@ Full filing-protocol design: [[../../../docs/adr/0005-rollout-plan-structure]].
 1. **Designs apparatus changes before media/civic build.** Architecture decisions, pipeline redesigns, new phase plans for media/civic — start here. Engine-sheet substrate work is peer-stewarded (S218); only apparatus-cutting substrate changes route through research-build design.
 2. **Owns the rollout plan.** Tags work items with `(engine terminal)`, `(media terminal)`, `(civic terminal)` for handoff.
 3. **Runs research sessions.** Evaluates external tools, reads papers, audits patterns. Writes to `docs/RESEARCH.md`.
-4. **Journals.** Research findings, build decisions, architecture outcomes. Updates `JOURNAL.md` and `JOURNAL_RECENT.md`.
+4. **Captures architectural reasoning** — research findings, build decisions, architecture outcomes land in `RESEARCH.md`, ROLLOUT close-notes, and commit bodies (NOT the journal — that's media-only, S249 governance.20).
 5. **Can do engine work if needed.** But the engine/sheet chat is the persistent home for engine state and connections.
 
 ---
@@ -225,7 +225,7 @@ At session-close, Mike runs `/usage` and pastes the per-category breakdown (skil
 
 ### Soft close (~2 min) — when starting a new session within minutes
 
-Use when Mike will re-boot the next session immediately. The next session reads the just-shipped commits from git + the Shipped Last Session block in SESSION_CONTEXT; it doesn't need journal conditioning yet (journal conditions me-tomorrow, not me-in-15-minutes).
+Use when Mike will re-boot the next session immediately. The next session reads the just-shipped commits from git + the Shipped Last Session block in SESSION_CONTEXT. (This terminal writes no journal at all — S249 governance.20 — so there's no conditioning to defer; the soft/hard distinction here is purely about the STATUS + sweep + audit overhead.)
 
 1. **Cross-terminal git stack check.** `git log --oneline origin/main..HEAD` — expect empty (push-per-commit cadence). If non-empty, push or coordinate before declaring close.
 2. **`node scripts/writeShippedBlock.js`** — auto-generates the `## Shipped Last Session` block in SESSION_CONTEXT from git log boundary, updates the boundary file.
@@ -238,9 +238,9 @@ Skip on soft close: persistence counter bump, journal entry, JOURNAL_RECENT rota
 
 Use when no immediate next session is queued, OR when soft closes have chained for several sessions and conscience checkpoint is due (rule of thumb: ≥3 chained soft closes → hard close at next natural break).
 
-**Trade-off honesty:** soft close skips journal. If you chain 3+ soft closes then sleep, three sessions' worth of conscience-conditioning don't get written. Mitigation: hard close at end-of-day always.
+**Trade-off honesty:** research-build writes no journal (S249 governance.20), so the chained-soft-close conscience cost that bites the media terminal does not apply here. The real soft-close risk is ROLLOUT / RESEARCH.md drift accumulating — done-pending-archive rows not swept, findings not logged. Hard close at end-of-day catches those up.
 
-Per S229 governance.7 the hard-close ritual collapsed from 13 steps to 4 model + 1 mechanical (`scripts/sessionEndMechanical.js`). Run the slimmed `/session-end` SKILL: Step 0 detect terminal → Step 1 journal → Step 2 SESSION_CONTEXT STATUS + ROLLOUT updates → Step 3 mechanical script → Step 4 commit & push. Full skill: `.claude/skills/session-end/SKILL.md` v2.0.
+Per S229 governance.7 the hard-close ritual collapsed from 13 steps to 4 model + 1 mechanical (`scripts/sessionEndMechanical.js`). Run the slimmed `/session-end` SKILL: Step 0 detect terminal → **Step 1 journal is SKIPPED here (media-only, S249 governance.20)** → Step 2 SESSION_CONTEXT STATUS + ROLLOUT updates → Step 3 mechanical script → Step 4 commit & push. Full skill: `.claude/skills/session-end/SKILL.md` v2.2.
 
 ### Terminal-Specific Audit
 
@@ -263,4 +263,4 @@ Update during Step 2 of the slimmed SKILL alongside SESSION_CONTEXT + ROLLOUT:
 - **`/save-to-mags`** — save architecture decisions, design rationale, anything the next session needs to understand *why* a choice was made. Tag with `[research/build]`. Optional — model judgment.
 - **SESSION_CONTEXT.md STATUS paragraph** — what was designed, what was handed off, what's next, tagged `[research/build]`.
 
-**Mechanical (Step 3) — auto-runs from `sessionEndMechanical.js --terminal=research-build`:** `rotateJournalRecent` + JOURNAL content-quality check + `writeShippedBlock` + `auditPlanTagDrift` (informational, never fatal) + cross-terminal git stack check + opt-in `--rotate-history` SESSION_CONTEXT → SESSION_HISTORY rotation + `pm2 restart`. Plan: [[../../../docs/plans/2026-05-23-session-end-collapse]]. (`rolloutTriage` step removed S235 — see governance.6 close.)
+**Mechanical (Step 3) — auto-runs from `sessionEndMechanical.js --terminal=research-build`:** `writeShippedBlock` + `auditPlanTagDrift` (informational, never fatal) + cross-terminal git stack check + opt-in `--rotate-history` SESSION_CONTEXT → SESSION_HISTORY rotation + `pm2 restart`. (No `rotateJournalRecent` / JOURNAL content-quality — those are media-only per S249 governance.20; the script auto-skips them for this terminal arg.) Plan: [[../../../docs/plans/2026-05-23-session-end-collapse]]. (`rolloutTriage` step removed S235 — see governance.6 close.)

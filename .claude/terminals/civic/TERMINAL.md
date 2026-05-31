@@ -235,7 +235,7 @@ Use when the next civic session opens within minutes.
 
 ### Hard close (~5-10 min) — end of day, multi-day break, or cold-pickup boundary
 
-Per S229 governance.7 the hard-close ritual collapsed from 13 steps to 4 model + 1 mechanical (`scripts/sessionEndMechanical.js`). Run the slimmed `/session-end` SKILL: Step 0 detect terminal → Step 1 journal → Step 2 SESSION_CONTEXT STATUS + ROLLOUT updates + terminal-specific saves → Step 3 mechanical script → Step 4 commit & push. Full skill: `.claude/skills/session-end/SKILL.md` v2.0.
+Per S229 governance.7 the hard-close ritual collapsed from 13 steps to 4 model + 1 mechanical (`scripts/sessionEndMechanical.js`). Run the slimmed `/session-end` SKILL: Step 0 detect terminal → **Step 1 journal is SKIPPED here (civic has no journal — media-only, S249 governance.20)** → Step 2 SESSION_CONTEXT STATUS + ROLLOUT updates + terminal-specific saves → Step 3 mechanical script → Step 4 commit & push. Full skill: `.claude/skills/session-end/SKILL.md` v2.2.
 
 ### Terminal-Specific Audit
 
@@ -258,4 +258,4 @@ Update during Step 2 of the slimmed SKILL alongside SESSION_CONTEXT + ROLLOUT:
 - **SESSION_CONTEXT.md STATUS paragraph** — what decisions were made, which initiatives moved, what's pending, tagged `[civic]`.
 - **Flag for media terminal** — note in the production log what's ready for the newsroom. The civic production log is the media terminal's input.
 
-**Mechanical (Step 3) — auto-runs from `sessionEndMechanical.js --terminal=civic`:** `rotateJournalRecent` + JOURNAL content-quality check + `writeShippedBlock` + `auditPlanTagDrift` (informational, never fatal) + cross-terminal git stack check + opt-in `--rotate-history` SESSION_CONTEXT → SESSION_HISTORY rotation + `pm2 restart`. Plan: [[../../../docs/plans/2026-05-23-session-end-collapse]].
+**Mechanical (Step 3) — auto-runs from `sessionEndMechanical.js --terminal=civic`:** `writeShippedBlock` + `auditPlanTagDrift` (informational, never fatal) + cross-terminal git stack check + opt-in `--rotate-history` SESSION_CONTEXT → SESSION_HISTORY rotation + `pm2 restart`. (No `rotateJournalRecent` / JOURNAL content-quality — civic has no journal; media-only per S249 governance.20, and the script auto-skips them for this terminal arg.) Plan: [[../../../docs/plans/2026-05-23-session-end-collapse]].

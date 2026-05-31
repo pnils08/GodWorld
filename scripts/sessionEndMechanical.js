@@ -7,11 +7,12 @@
 // rotateJournalRecent picks up the new journal entry.
 //
 // Per-terminal sub-step routing:
-//   - persona terminals (research-build / media / civic):
+//   - media (journal terminal — the only terminal that reads JOURNAL_RECENT at
+//     boot, so the only one the journal conditions; S249 governance.20):
 //       rotateJournalRecent → JOURNAL content-quality check → writeShippedBlock
 //       → auditPlanTagDrift (informational) → cross-terminal stack check
 //       → [opt-in] SESSION_HISTORY rotation → pm2 restart
-//   - engine-sheet (stripped persona):
+//   - research-build / civic / engine-sheet (no journal):
 //       writeShippedBlock → auditPlanTagDrift (informational)
 //       → cross-terminal stack check → [opt-in] SESSION_HISTORY rotation
 //       → pm2 restart
@@ -43,7 +44,11 @@ const SESSION_HISTORY_PATH = path.join(ROOT, 'docs/mags-corliss/SESSION_HISTORY.
 const JOURNAL_PATH = path.join(ROOT, 'docs/mags-corliss/JOURNAL.md');
 
 const TERMINALS = ['research-build', 'media', 'civic', 'engine-sheet'];
-const PERSONA_TERMINALS = new Set(['research-build', 'media', 'civic']);
+// Only media writes the journal (S249 governance.20). Media is the one terminal
+// that reads JOURNAL_RECENT at boot, so it is the only one the journal conditions.
+// research-build / civic / engine-sheet are operational (no journal-read at boot),
+// so they skip rotateJournalRecent + the JOURNAL content-quality check.
+const JOURNAL_TERMINALS = new Set(['media']);
 
 const KEEP_RECENT_SESSIONS = 5;
 const JOURNAL_MIN_BODY_LINES = 5;
@@ -377,9 +382,9 @@ function subPm2Restart(args) {
 // ---------------------------------------------------------------------------
 
 function buildSteps(args) {
-  const isPersona = PERSONA_TERMINALS.has(args.terminal);
+  const writesJournal = JOURNAL_TERMINALS.has(args.terminal);
   const steps = [];
-  if (isPersona) {
+  if (writesJournal) {
     steps.push({ name: 'rotateJournalRecent', fn: subRotateJournalRecent });
     steps.push({ name: 'JOURNAL content-quality check', fn: subJournalQuality });
   }

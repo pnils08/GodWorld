@@ -274,7 +274,7 @@ Use when Mike re-boots within minutes. The next session reads commits from git +
 
 ### Hard close (~5-10 min) — end of day, multi-day break, or cold-pickup boundary
 
-The journal entry is the load-bearing piece — conditions next-day-me with consequences, errors, what made Mike excited, what failed and how I drifted (per MEMORY.md user rule "work is canonization").
+The journal entry is the load-bearing piece — conditions next-day-me with consequences, errors, what made Mike excited, what failed and how I drifted (per MEMORY.md user rule "work is canonization"). **Media is the sole journal-writing terminal (S249 governance.20)** — research-build, civic, and engine-sheet skip Step 1 entirely, because media is the only terminal that reads JOURNAL_RECENT at boot.
 
 Per S229 governance.7 the hard-close ritual collapsed from 13 steps to 4 model + 1 mechanical (`scripts/sessionEndMechanical.js`). Run the slimmed `/session-end` SKILL: Step 0 detect terminal → Step 1 journal → Step 2 SESSION_CONTEXT STATUS + ROLLOUT updates + terminal-specific saves → Step 3 mechanical script → Step 4 commit & push. Full skill: `.claude/skills/session-end/SKILL.md` v2.0.
 

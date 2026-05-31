@@ -116,7 +116,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per §Convention. Descrip
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| pipeline.1 | Gender column added to citizen briefs (Simulation_Ledger col AU) | ready | engine-sheet | inline-task; col confirmed S146 |
+| pipeline.1 | Gender column added to citizen briefs (Simulation_Ledger col AU) | done-pending-archive | engine-sheet | inline-task; col confirmed S146. **DONE S249** — `gender: c.Gender` added to interview-candidate object in `scripts/buildDeskPackets.js` (single site; object passes whole into full packet + compact agent summary, no remap). Live verify: col AU=Gender (col D=Last; SCHEMA_HEADERS "D\|Gender" was a different sheet section), populated 885/904 ledger rows; c94 rebuild carries gender on 4236/4254 candidates. |
 | pipeline.2 | Non-edition publishing pipeline (interview/dispatch/supplemental format contract) | in-progress | research-build / engine-sheet | [[../plans/2026-04-26-non-edition-publishing-pipeline]] |
 | pipeline.3 | /interview Step 8d coverage-ratings — deferred decision pending evidence | needs-info | research-build | inline DEFERRED note in `/interview` SKILL.md Step 8d (S179) |
 | pipeline.8 | Supplemental strategy — one per cycle minimum | in-progress | research-build | [[../EDITION_PIPELINE]] |

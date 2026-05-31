@@ -542,6 +542,7 @@ function getInterviewCandidates(simLedger, neighborhoods, bizIndex) {
       name: fullName,
       popId: popId,
       age: age,
+      gender: c.Gender || '',
       neighborhood: hood,
       role: c.RoleType,
       tier: c.Tier,

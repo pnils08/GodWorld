@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-05-07 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-05-31 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -21,13 +21,15 @@
 ### godWorldEngine2.js
 - **logEngineError_(ctx, phase, error)**
   Reads: S.cycleId
-  Writes: S.auditIssues
+  Writes: S.auditIssues, S.engineErrorCount
   Sheets: Engine_Errors
+
+- **computeShortHash_(input)**
 
 - **safePhaseCall_(ctx, phaseName, fn)**
 
 - **runWorldCycle()**
-  Reads: S.auditIssues, S.cityEvents, S.eveningSports, S.mediaIntake, S.nightlife, S.nightlifeVolume
+  Reads: S.auditIssues, S.cityEvents, S.engineErrorCount, S.eveningSports, S.mediaIntake, S.nightlife, S.nightlifeVolume
   Writes: S.faithStorySignals, S.transitStorySignals, S.validationReport
 
 - **loadConfig_(ctx)**
@@ -40,10 +42,6 @@
   Reads: S.cityDynamics, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.weather, S.worldEvents
   Writes: S.worldPopulation
   RNG: ctx.rng / safeRand_(ctx)
-
-- **appendPopulationHistory_(ctx)**
-  Reads: S.absoluteCycle, S.cycleId
-  Sheets: World_Population
 
 - **padStart_(str, targetLength, padChar)**
 
@@ -60,9 +58,6 @@
 
 - **writeDigest_(ctx)**
   Reads: S.auditIssues, S.citizensUpdated, S.cityDynamics, S.cityEvents, S.civicLoad, S.cycleId, S.cycleWeight, S.cycleWeightReason, S.eveningFood, S.eveningMedia, S.eveningSports, S.eventsGenerated, S.famousPeople, S.intakeProcessed, S.migrationDrift, S.nightlife, S.patternFlag, S.shockFlag, S.storySeeds, S.streamingTrend, S.weather, S.worldEvents
-  Sheets: Riley_Digest
-
-- **applyCycleWeightForLatestCycle_(ctx)**
   Sheets: Riley_Digest
 
 - **runDryRunCycle()**
@@ -92,7 +87,7 @@
 
 ### applyCityDynamics.js
 - **applyCityDynamics_(ctx)**
-  Reads: S.absoluteCycle, S.cityCapacity, S.crimeByNeighborhood, S.crimeEvents, S.crimeSpikes, S.cycleId, S.editionNeighborhoodEffects, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.manualDynamicsInputs, S.mediaCount, S.mediaCoverage, S.neighborhoodEconomies, S.neighborhoodWeather, S.previousCycleState, S.season, S.shockFlag, S.sportsSeason, S.storySeeds, S.weather, S.worldEvents
+  Reads: S.absoluteCycle, S.cityCapacity, S.crimeByNeighborhood, S.crimeEvents, S.crimeSpikes, S.cycleId, S.editionNeighborhoodEffects, S.editionSentimentBoost, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.manualDynamicsInputs, S.mediaCount, S.mediaCoverage, S.neighborhoodEconomies, S.neighborhoodWeather, S.previousCycleState, S.season, S.shockFlag, S.sportsSeason, S.storySeeds, S.weather, S.worldEvents
   Writes: S.activityObservations, S.cityDynamics, S.cityDynamicsCapacity, S.cityDynamicsLag, S.clusterDefinitions, S.clusterDynamics, S.neighborhoodDemographics, S.neighborhoodDynamics, S.previousCityDynamics, S.previousClusterDynamics, S.previousNeighborhoodDynamics, S.resetDynamicsMomentum, S.storySeedSignals
   Config: ctx.config.cityCapacity, ctx.config.cycleCount, ctx.config.manualDynamicsInputs
 
@@ -593,7 +588,6 @@
 - **saveV3BondsToLedger_(ctx)**
   Reads: S.cycleId, S.relationshipBonds
   Config: ctx.config.cycleCount
-  Sheets: Relationship_Bond_Ledger
 
 - **diagnoseBondEngine()**
   Sheets: Citizen_Directory, Relationship_Bonds
@@ -1374,7 +1368,7 @@
   Reads: S.cityDynamics, S.civicLoad, S.crimeMetrics, S.cycleId, S.cycleWeight, S.cycleWeightReason, S.domainPresence, S.editionCoverageTriggers, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.manualStoryInputs, S.migrationDrift, S.namedSpotlights, S.patternFlag, S.season, S.seasonalStorySeeds, S.shockFlag, S.sportsSeason, S.storySeedsUI, S.weather, S.worldEvents, S.worldPopulation
   Writes: S.activeStorylineCount, S.storySeeds
   Config: ctx.config.cycleCount, ctx.config.manualStoryInputs
-  Sheets: Storyline_Tracker
+  Sheets: Edition_Coverage_Ratings, Storyline_Tracker
 
 - **renderStorySeedsForUI_(ctx, maxSeeds)**
   Reads: S.storySeeds
@@ -1428,7 +1422,7 @@
 ### culturalLedger.js
 - **registerCulturalEntity_(ctx, name, roleType, journalistName, neighborhood)**
   Reads: S.cityDynamics, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.sportsSeason
-  Writes: S.culturalEntityCreates, S.culturalEntityUpdates
+  Writes: S.culturalEntityCreates, S.culturalEntityUpdates, S.culturalRegistry
   Config: ctx.config.cycleCount
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -1642,8 +1636,6 @@
 
 - **parseContinuityNotes_(ss, section)**
   Sheets: LifeHistory_Log, World_Config
-
-- **determineNoteType_(line, subsection)**
 
 - **extractCitizenNames_(line)**
 
@@ -1865,12 +1857,6 @@
 
 - **writeCycleWeightToDigest_(ctx)**
   Reads: S.cycleWeight, S.cycleWeightCalendarFactors, S.cycleWeightReason
-  Sheets: Riley_Digest
-
-### applyCycleWeightForLatestCycle.js
-- **applyCycleWeightForLatestCycle_(ctx)**
-  Reads: S.cycle, S.cycleId, S.cycleWeight, S.cycleWeightReason, S.cycleWeightScore, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason
-  Config: ctx.config.cycleCount
   Sheets: Riley_Digest
 
 ### finalizeCycleState.js
@@ -2139,6 +2125,37 @@
   Writes: S.healthCauseBriefing
 
 ## Utilities (`utilities/`)
+
+### bylineEngine.js
+- **categorizeConfidence_(topScore, secondScore)**
+
+- **themeAxis_(seed, journalist)**
+
+- **inferSeedFormat_(seed)**
+
+- **formatFitScore_(journalistName, format)**
+
+- **formatAxis_(seed, journalistName)**
+
+- **loadCycleCadence_(targetCycle, deckData)**
+
+- **cadenceMultiplier_(journalistName, cadence, totalSeeds)**
+
+- **cadenceAxis_(journalistName, state)**
+
+- **loadArcBinding_(seed, storylineData)**
+
+- **arcBindingScore_(journalistName, arcBinding)**
+
+- **arcBindingAxis_(journalistName, state)**
+
+- **filterRosterForByline_(roster)**
+
+- **scoreByline_(seed, journalistName, state)**
+
+- **scoreAllBylines_(seed, state)**
+
+- **_runBylineSelfTests_()**
 
 ### citizenDerivation.js
 - **canonicalRolesSet_()**
@@ -2469,6 +2486,27 @@
 ### godWorldMenu.js
 - **onOpen()**
 
+### priorityEngine.js
+- **computeArcMultiplier_(seed, storylineState)**
+
+- **parseStorylineRow_(row, headers, currentCycle)**
+
+- **loadStorylineStateForSeed_(seed, storylineData, currentCycle)**
+
+- **normalizeCoverageDomain_(domain)**
+
+- **parseCoverageRow_(row, headers)**
+
+- **loadCoverageStateForDomain_(seedDomain, coverageData, currentCycle)**
+
+- **computeCoverageMultiplier_(seedDomain, coverageState)**
+
+- **computePriorityScore_(seed, auditPattern, storylineState, coverageState)**
+
+- **isConsequenceFloor_(seed, auditPattern, storylineState, coverageState)**
+
+- **_runPrioritySelfTests_()**
+
 ### rosterLookup.js
 - **loadRoster_()**
 
@@ -2664,5 +2702,5 @@
 
 ---
 
-**Files scanned:** 152
-**Functions mapped:** 893
+**Files scanned:** 153
+**Functions mapped:** 915

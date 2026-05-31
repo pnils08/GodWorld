@@ -25,15 +25,15 @@ Mags decides when to produce a podcast. Not every edition gets one.
 ## Prerequisites
 - Edition published at `editions/cycle_pulse_edition_{XX}.txt`
 - World summary exists: `output/world_summary_c{XX}.md`
-- Media production log exists: `output/production_log_edition_c{XX}.md`
-- Civic production log exists: `output/production_log_city_hall_c{XX}.md` (if civic content matters)
+- Unified production log exists: `output/production_log_c{XX}.md` (the one-true-cycle source; legacy fallback `production_log_edition_c{XX}.md`). Civic content lives in its `## /city-hall` section (legacy `production_log_city_hall_c{XX}.md`).
+- Newsroom memory: `docs/mags-corliss/NEWSROOM_MEMORY.md` — read §Standing Editorial Conventions for character continuity + name corrections (host dialogue must not re-introduce a corrected name or mispronounce a citizen the edition already fixed).
 
 ## Step 0: Production Log
 
-Read the existing media production log: `output/production_log_edition_c{XX}.md`. Append a new section:
+Read the existing unified production log: `output/production_log_c{XX}.md` (legacy fallback `production_log_edition_c{XX}.md`). Append a new section:
 
 ```markdown
-## Podcast: {format}
+## /podcast — {format}
 **Started:** {timestamp}
 **Format:** {Morning Edition / Postgame / Debrief}
 **Hosts:** {Host 1} + {Host 2}

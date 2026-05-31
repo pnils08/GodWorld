@@ -104,7 +104,7 @@ So the admin skill lays the **uniform containers + carry-over + folder + log + T
   1. Repoint each from `production_log_edition_c{XX}.md` → unified `production_log_c{XX}.md`, append a named section (legacy dual-read fallback during transition).
   2. `/interview` already has the fallback pattern — align the others to it.
 - **Verify:** grep shows no `production_log_edition_c` / `production_log_city_hall_c` write-targets remain in cycle-active skills (reads may retain fallback).
-- **Status:** [ ] not started
+- **Status:** [x] DONE S248 (folded out of pipeline.35 into the pipeline.32 sweep, Mike-directed). All 4 repointed to unified `production_log_c{XX}.md` with named sections (`## /dispatch — {slug}`, `## /interview`, `## /write-supplemental`, `## /podcast — {format}`); civic reads → `## /city-hall` section + legacy fallback; NEWSROOM_MEMORY reads added to /dispatch + /podcast (interview + supplemental already had them); template add-on-sections block added. Gap-log sidecars left = pipeline.34.
 
 ### Task 6: NEWSROOM_MEMORY tie-in ⚙
 - **Files:** `docs/mags-corliss/NEWSROOM_MEMORY.md` (read; media-owned — coordinate), this plan

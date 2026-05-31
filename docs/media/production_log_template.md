@@ -18,7 +18,7 @@ pointers:
 
 # Production Log Template (per-cycle unified)
 
-**Every cycle's production log conforms to this shape.** Path: `output/production_log_c{XX}.md` (unified per `[[../EDITION_PIPELINE]]` §Production Log Lifecycle, S230 G-EPD3 target convention; C93 implemented, C94 reverted to per-terminal split, per-skill path cascade filed as `pipeline.32`).
+**Every cycle's production log conforms to this shape.** Path: `output/production_log_c{XX}.md` (unified per `[[../EDITION_PIPELINE]]` §Production Log Lifecycle, S230 G-EPD3 target convention; C93 implemented, C94 reverted to per-terminal split, per-skill path cascade DONE S248 (`pipeline.32` — civic + all add-on skills now write named sections to this one log); cycle-init opener redesign tracked as `pipeline.35`).
 
 **Cardinality:** one file per cycle. Five+ skills append. /city-hall-prep opens; /post-publish closes (writes closing block + canonization signal).
 
@@ -334,6 +334,17 @@ Mike opens PDF + visually verifies article-table headlines + photo placement + o
 | 11 filing + bot | git commit + push + PM2 restart | clean |
 | 12 production log finalize | wiki-pattern entries | this section |
 | 13 checklist | per /post-publish Step 13 | <PASS | items remaining> |
+
+### Optional add-on sections (non-edition skills)
+
+These skills don't run every cycle. When they do, each appends its own named section to the same unified log (pipeline.32), routes its newsroom-memory write-back through `/post-publish --type <type>`, and reads continuity from `docs/mags-corliss/NEWSROOM_MEMORY.md` before generating. They append **before** the §Closing Block (the log is still open until /post-publish canonizes it).
+
+| Section header | Skill | Notes |
+|---|---|---|
+| `## /dispatch — <slug>` | `/dispatch` | One per dispatch; can run multiple times per cycle (slug disambiguates). |
+| `## /interview (S<NNN>) — <ts>` | `/interview` | Reads the §/city-hall section for voice interviews. |
+| `## /write-supplemental (S<NNN>) — <ts>` | `/write-supplemental` | Deep-dive; reads world summary + §/city-hall + NEWSROOM_MEMORY. |
+| `## /podcast — <format>` | `/podcast` | Post-edition audio; reads the published edition + NEWSROOM_MEMORY for pronunciation/continuity. |
 
 ### Closing Block
 

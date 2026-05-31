@@ -85,7 +85,7 @@ No length target. The conversation shapes itself. Mike decides when it ends.
 
 - `output/world_summary_c{XX}.md` — current cycle context
 - `output/production_log_c{XX}.md` — what was covered in the edition (unified per S230 governance.14 convention; falls back to `production_log_edition_c{XX}.md` legacy path if unified absent)
-- `output/production_log_city_hall_c{XX}.md` — recent civic decisions (for voice interviews)
+- `output/production_log_c{XX}.md` §/city-hall section — recent civic decisions (for voice interviews; legacy fallback `production_log_city_hall_c{XX}.md` if the unified log lacks a civic section)
 
 ## Step 0: Production Log + Open Gap Log
 

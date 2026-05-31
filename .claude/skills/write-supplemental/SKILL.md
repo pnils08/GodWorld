@@ -79,7 +79,7 @@ The Cycle Pulse is the engine's newspaper — it reports what the simulation pro
 
 ## Step 0: Production Log
 
-Read the existing media production log: `output/production_log_edition_c{XX}.md`. This is the same log write-edition uses — all media work for this cycle lives in one document.
+Read the existing unified production log: `output/production_log_c{XX}.md` (legacy fallback `production_log_edition_c{XX}.md` if absent). This is the one-true-cycle source write-edition + city-hall both use — all of the cycle's work (civic + edition + supplemental) lives in one document.
 
 If the edition has already been produced, the log exists and has Steps 0-9 filled in. Append a new section:
 
@@ -251,7 +251,7 @@ All of these are optional. If none exist, the brief works exactly as today. Chec
 | Errata | `output/errata.jsonl` | Always (if exists) | **GUARDIAN WARNINGS** — filter to topic's domain, list errors to avoid |
 | Mara guidance | `output/mara-directives/mara_directive_c{XX}.txt` | Always (if exists) | **MARA GUIDANCE** — forward editorial direction from last audit |
 | Voice statements | `output/civic-voice/{office}_c{XX}.json` | Civic pieces only | **CIVIC VOICE SOURCE MATERIAL** — from city-hall production log |
-| Civic production log | `output/production_log_city_hall_c{XX}.md` | Civic pieces only | **LOCKED CIVIC CANON** — what voices decided |
+| Civic production log | `output/production_log_c{XX}.md` §/city-hall section | Civic pieces only | **LOCKED CIVIC CANON** — what voices decided (legacy `production_log_city_hall_c{XX}.md`) |
 | Grade history | `output/grades/grade_history.json` | Always (if exists) | Reporter grade context in assignments (1-line summary per reporter) |
 
 **Data availability table** — include in the production log which of the 6 sources were found and loaded. Example:
@@ -535,7 +535,7 @@ After Step 4 the `.txt` is approved canon on disk. Two skills converge here, run
 
 **S188 photo-pipeline status:** `/edition-print` is currently edition-only for the photo step (DJ-direction pipeline rebuilt S188 — djDirect.js bundles edition+sift+world_summary; non-edition types await bundler extension). Supplementals will route through `/edition-print` for PDF + Drive but the photo step bails on missing `dj_direction.json`. Post-T11 follow-up will extend djDirect.js to handle supplemental source files.
 
-Both skills append to the same supplemental section of `output/production_log_edition_c{XX}.md` with inline Supermemory doc IDs for direct query next cycle.
+Both skills append their `## /write-supplemental` section to the unified `output/production_log_c{XX}.md` with inline Supermemory doc IDs for direct query next cycle.
 
 ---
 

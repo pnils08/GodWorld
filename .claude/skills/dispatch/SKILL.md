@@ -43,6 +43,7 @@ The difference: "The bar erupted when Horn's ball cleared the fence" is reportin
 - **Read the brief, don't exhaust it.** The brief lists citizens available in the scene. The dispatch uses only the ones that serve the moment — usually 2-3, not all of them. Don't turn a dispatch into a roll call. Some citizens in the brief are there for color; some don't make the final piece.
 - **Follow brief template for structure.** `docs/media/brief_template.md` — dispatch briefs are different from article briefs but citizen handling, canon rules, and verification standards are the same.
 - **World summary is your context.** Read `output/world_summary_c{XX}.md` — weather, mood, what's happening in the city. The dispatch lives in the same world as the edition.
+- **Newsroom memory for continuity.** Read `docs/mags-corliss/NEWSROOM_MEMORY.md` §Standing Editorial Conventions before naming citizens — name corrections, POPID aliases, character continuity, active arcs. Same continuity discipline the edition flow runs; keeps a dispatch from re-introducing a corrected name or contradicting a live arc.
 - **No calendar dates.** Natural time references only.
 - **Get user approval** on the scene concept and reporter before writing.
 - **Memory Fence (Phase 40.6 Layer 2).** Scene briefs assembled in Step 1 pull recalled citizen/canon context that the reporter agent reads. Wrap recalled excerpts via `require('/root/GodWorld/lib/memoryFence').wrap(text, 'bay-tribune')` before embedding. Full convention: [[SUPERMEMORY]] §Memory Fence.
@@ -167,9 +168,9 @@ If it needs revision, edit directly or re-brief the agent with specific notes.
 ## Step 4: File and Log
 
 1. **Final article** stays at `output/reporters/{reporter}/articles/c{XX}_dispatch_{slug}.md`
-2. **Append to production log** (`output/production_log_edition_c{XX}.md`):
+2. **Append to the unified production log** (`output/production_log_c{XX}.md` — the one-true-cycle source per pipeline.32; legacy fallback `production_log_edition_c{XX}.md` if the unified log is absent). Dispatches can run multiple times per cycle, so each gets its own slugged section:
    ```markdown
-   ## Dispatch: {scene title}
+   ## /dispatch — {slug}
    - Reporter: {name}
    - Location: {place}
    - Citizens: {names}
@@ -214,7 +215,7 @@ After Step 4.5 the `.txt` is on disk. Two skills converge here, run in parallel:
 
 **S188 photo-pipeline status:** `/edition-print` is currently edition-only for the photo step (DJ-direction pipeline rebuilt S188 — djDirect.js bundles edition+sift+world_summary; non-edition types await bundler extension). Dispatches will route through `/edition-print` for PDF + Drive but the photo step bails on missing `dj_direction.json`. Post-T11 follow-up will extend djDirect.js to handle dispatch source files.
 
-Both skills append to the same dispatch section in `output/production_log_edition_c{XX}.md` with inline Supermemory doc IDs for direct query next cycle.
+Both skills append their `## /dispatch — {slug}` section to the unified `output/production_log_c{XX}.md` with inline Supermemory doc IDs for direct query next cycle.
 
 ---
 

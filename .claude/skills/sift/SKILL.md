@@ -41,7 +41,7 @@ Verify these exist before starting:
 - Service account at `~/.config/godworld/.env` (sheet primary reads require it; fail-loud if absent)
 - **Environment (G-S22):** Node-CLI sheet reads need the env loaded first — use the canonical loader `require('./lib/env')` (sources `~/.config/godworld/.env`, sets `GODWORLD_SHEET_ID`). A bare `getSheetData()` snippet fails with `GODWORLD_SHEET_ID not set` because there is no project-root `.env`; do **not** point `dotenv` at one. Run snippets from the repo root so `./lib/env` resolves, or `node -r ./lib/env -e "…"`.
 - `output/world_summary_c{XX}.md` — from `/build-world-summary` (orientation only in v2 — engine numbers + tables; narrative content sourced from sheets)
-- `output/production_log_city_hall_c{XX}.md` — from `/city-hall` (voice decisions, quotes, tracker updates; one input among many, NOT the spine)
+- `output/production_log_c{XX}.md` §/city-hall section — from `/city-hall` (voice decisions, quotes, tracker updates; one input among many, NOT the spine). Legacy fallback during transition: `output/production_log_city_hall_c{XX}.md` if the unified log lacks a civic section — pipeline.32 item (d); drop after 3+ clean cycles.
 - `docs/mags-corliss/NEWSROOM_MEMORY.md` — updated by post-publish (errata, coverage gaps, arcs, character continuity)
 
 If city-hall hasn't run, sift can still proceed with sheet primary + canon archive + newsroom memory — civic stories will be thin, but the architecture works.
@@ -58,7 +58,7 @@ v2 separates **canon content sources** (Steps 1-2) from **structured inputs** (S
 
 ### Structured inputs (auditor JSONs + city-hall log)
 
-4. **City-hall production log** — `output/production_log_city_hall_c{XX}.md` — voice decisions + key quotes + tracker updates. One input slice, NOT the spine (closes G-S5(g) civic-as-default-spine).
+4. **City-hall production log** — the `## /city-hall` section of `output/production_log_c{XX}.md` — voice decisions + key quotes + tracker updates. One input slice, NOT the spine (closes G-S5(g) civic-as-default-spine).
 5. **Engine audit JSON** — `output/engine_audit_c{XX}.json` — `patterns[]` with `tribuneFraming.storyHandles[desk]` + `tribuneFraming.suggestedFrontPage` + `tribuneFraming.capabilityHooks`. Auditor seeds; sift gates.
 6. **Baseline briefs JSON** — `output/baseline_briefs_c{XX}.json` — auto-generated event briefs from Phase 38.8. Step 5 triage decides per brief.
 
@@ -138,7 +138,7 @@ const ledgerRows    = await getSheetData('Simulation_Ledger');       // citizen 
 
 ALSO read the city-hall + auditor + baseline-briefs slice (these are inputs, not the spine):
 
-- `output/production_log_city_hall_c{XX}.md` — voice outputs + tracker updates (one input)
+- `output/production_log_c{XX}.md` §/city-hall section — voice outputs + tracker updates (one input)
 - `output/engine_audit_c{XX}.json` — patterns + tribuneFraming + storyHandles
 - `output/baseline_briefs_c{XX}.json` — auto-generated event briefs (Step 5 triage input)
 - `output/world_summary_c{XX}.md` — ORIENTATION ONLY (engine numbers + tables; narrative content NOT consumed as canon)

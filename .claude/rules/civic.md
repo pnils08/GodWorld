@@ -4,7 +4,7 @@ paths:
   - ".claude/agents/civic-project-*/**"
   - ".claude/agents/city-clerk/**"
   - ".claude/skills/city-hall/**"
-  - "output/production_log_city_hall*"
+  - "output/production_log_c*"
   - "docs/mara-vance/**"
 ---
 
@@ -23,8 +23,8 @@ Production order is canonical, not a suggestion:
 3. **Decisions cascade** — factions (CRC, OPP, IND) react to Mayor's position
 4. **Projects report** — civic project agents (OARI, Stabilization Fund, Health Center, Transit Hub, Baylight) produce status updates
 5. **City Clerk verifies** — Clerk checks all outputs exist + tracker updated (this is the architectural review pass — see below)
-6. **Production log written** — `output/production_log_city_hall_c{XX}.md`
-7. **Handoff to media** — civic production log becomes input to `/write-edition`
+6. **Production log written** — the `## /city-hall` section of the unified `output/production_log_c{XX}.md` (one-true-cycle log; per `docs/media/production_log_template.md`)
+7. **Handoff to media** — the civic section of the unified log becomes input to `/write-edition`
 
 Skipping or reordering the cascade is canonical violation. Factions cannot "react" before Mayor has positioned. Projects cannot report without the cycle's decisions known. Clerk cannot verify what hasn't yet been produced.
 
@@ -67,7 +67,7 @@ Every council seat carries a status from `Civic_Office_Ledger`. Truesource (`get
 
 ## Production output rules
 
-- **Output to `output/production_log_city_hall_c{XX}.md`** — single source for the cycle's civic state.
+- **Output to the `## /city-hall` section of `output/production_log_c{XX}.md`** — the unified one-true-cycle log; the civic section is the source for the cycle's civic state.
 - **Tag Supermemory saves with `[civic]` prefix.**
 - **No edition prose at this terminal.** Output is structured source material — quotes, vote tallies, decision summaries, project status — not journalism. Polishing happens at the media terminal.
 - **Clerk verification before declaring done.** No exceptions.

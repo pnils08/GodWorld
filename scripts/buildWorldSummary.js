@@ -212,19 +212,25 @@ function emitCityState(rileyCurr, worldPop, neighborhoodsC, prevRileyCount) {
 }
 
 function emitCivicDecisions(cycle) {
-  const cityHallPath = `output/production_log_city_hall_c${cycle}.md`;
-  const absPath = path.join(REPO_ROOT, cityHallPath);
-  const exists = fs.existsSync(absPath);
+  // Unified one-true-cycle log (pipeline.32): civic decisions are the `## /city-hall`
+  // section of production_log_c{XX}.md, not a separate production_log_city_hall file.
+  // This skill runs before /city-hall in the chain, so the section is normally not yet
+  // present — check section-presence, not mere file-existence (the file may be opened by
+  // /city-hall-prep before /city-hall writes the section).
+  const logPath = `output/production_log_c${cycle}.md`;
+  const absPath = path.join(REPO_ROOT, logPath);
+  const hasCivicSection = fs.existsSync(absPath)
+    && fs.readFileSync(absPath, 'utf8').includes('## /city-hall');
 
   const lines = ['## Civic Decisions', ''];
-  if (exists) {
-    lines.push(`Civic decisions for this cycle are in **\`${cityHallPath}\`** (produced by \`/city-hall\` at the civic terminal).`);
+  if (hasCivicSection) {
+    lines.push(`Civic decisions for this cycle are in the **\`## /city-hall\`** section of **\`${logPath}\`** (produced by \`/city-hall\` at the civic terminal).`);
     lines.push('');
-    lines.push('This section deliberately does not extract or summarize that log — sift consumes the civic log directly. Renaming/summarizing here risks the G-S6/G-S7-class fabrication that motivated the deterministic builder (pipeline.25).');
+    lines.push('This section deliberately does not extract or summarize that log — sift consumes the civic section directly. Renaming/summarizing here risks the G-S6/G-S7-class fabrication that motivated the deterministic builder (pipeline.25).');
   } else {
-    lines.push(`**No city-hall run for this cycle.** \`${cityHallPath}\` does not exist.`);
+    lines.push(`**No city-hall section for this cycle yet.** The \`## /city-hall\` section of \`${logPath}\` is not present (city-hall runs after this skill in the chain).`);
     lines.push('');
-    lines.push('When city-hall runs, this section will point at its production log. Sift should not attempt to derive civic decisions from this file in the absence of the city-hall log — fail loud upstream instead.');
+    lines.push('When city-hall runs, this section will point at its civic section. Sift should not attempt to derive civic decisions in its absence — fail loud upstream instead.');
   }
   lines.push('');
   return lines;

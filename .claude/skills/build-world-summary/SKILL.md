@@ -12,7 +12,7 @@ argument-hint: "[cycle-number]"
 
 ## What's new in v2.0 (S230, pipeline.31 closure)
 
-v2.0 collapses the skill to a thin wrapper around `scripts/buildWorldSummary.js` v1.0.0 (pipeline.25 S231). The script is the deterministic Node writer — reads sheets via `lib/sheets.js` + `output/engine_audit_c{XX}.json` + `output/production_log_city_hall_c{XX}.md`, emits `output/world_summary_c{XX}.md` with verbatim column rendering and zero LLM judgment. v1.x's model-assembled body retired — every fabrication vector (G-S6/G-S7/G-S17/G-PREP4) closed structurally because the model is no longer in the writer loop.
+v2.0 collapses the skill to a thin wrapper around `scripts/buildWorldSummary.js` v1.0.0 (pipeline.25 S231). The script is the deterministic Node writer — reads sheets via `lib/sheets.js` + `output/engine_audit_c{XX}.json` + the `## /city-hall` section of `output/production_log_c{XX}.md`, emits `output/world_summary_c{XX}.md` with verbatim column rendering and zero LLM judgment. v1.x's model-assembled body retired — every fabrication vector (G-S6/G-S7/G-S17/G-PREP4) closed structurally because the model is no longer in the writer loop.
 
 The `disable-model-invocation: true` flag from v1.0 dropped — model invocation IS the call to the script; autonomous flow (e.g., /run-cycle) can fire this skill without operator gate.
 
@@ -54,7 +54,7 @@ Sheets via `lib/sheets.js` (service account):
 Disk:
 
 - **Engine audit JSON** — `output/engine_audit_c{XX}.json` (output of `/engine-review`). **FAIL LOUD** if missing — script exits non-zero with diagnostic pointing at the file path. Run `/engine-review {XX}` first.
-- **City-hall production log** — `output/production_log_city_hall_c{XX}.md` (if present). Civic Decisions section becomes a **pointer to this log** rather than LLM-extracted content (closes G-PREP4). If the log is absent, the Civic Decisions section says so explicitly — does NOT gate the rest of the run.
+- **City-hall production log** — the `## /city-hall` section of `output/production_log_c{XX}.md` (if present). Civic Decisions section becomes a **pointer to this log** rather than LLM-extracted content (closes G-PREP4). Since this skill runs before `/city-hall` in the chain, the section is normally a forward pointer (log not yet written); if absent it says so explicitly — does NOT gate the rest of the run. (pipeline.35 may make this skill the log-opener; for now the path is just unified per pipeline.32.)
 
 ## What the script emits
 
@@ -62,7 +62,7 @@ Single Markdown file with these sections (codified in `scripts/buildWorldSummary
 
 1. Header (cycle / season / weather / cycle weight / civic load / pattern + shock flags)
 2. City State (population / employment / economy / sentiment / domain counts / neighborhood table)
-3. Civic Decisions (pointer to `output/production_log_city_hall_c{XX}.md`)
+3. Civic Decisions (pointer to the `## /city-hall` section of `output/production_log_c{XX}.md`)
 4. Sports (per-row `StoryAngle` verbatim from `Oakland_Sports_Feed`)
 5. Evening Texture (famous people / restaurants / nightlife / streaming from Riley_Digest)
 6. World Events (severity + neighborhood from Riley_Digest)
@@ -89,7 +89,7 @@ Step 5 in the run-cycle chain (canonical order per `.claude/skills/run-cycle/SKI
 
 1. `/engine-review` (Step 4) writes `output/engine_audit_c{XX}.json`
 2. **`/build-world-summary` runs this wrapper (Step 5)** → produces `output/world_summary_c{XX}.md`
-3. *Downstream* — `/city-hall-prep` + `/city-hall` write `output/production_log_city_hall_c{XX}.md`. **City-hall runs AFTER this skill** (run-cycle §What Happens After), so the Civic Decisions section is a FORWARD pointer to a not-yet-written log, **not** a past input. If the log is absent at run time, the section says so explicitly — that's correct chain state, not a missed prereq (G-BWS2).
+3. *Downstream* — `/city-hall-prep` + `/city-hall` write the `## /city-hall` section of the unified `output/production_log_c{XX}.md` (pipeline.32). **City-hall runs AFTER this skill** (run-cycle §What Happens After), so the Civic Decisions section is a FORWARD pointer to a not-yet-written civic section, **not** a past input. If the section is absent at run time, it says so explicitly — that's correct chain state, not a missed prereq (G-BWS2). *(The opener-ordering — that this skill precedes the log open — is exactly what pipeline.35's cycle-init redesign addresses.)*
 4. `/sift` reads world_summary as orientation-only (per `/sift` v2.0 §What's new — sheet-primary, world_summary is engine numbers + tables, not narrative content)
 5. `/write-edition` reads sift output → reporters → compile → publish
 

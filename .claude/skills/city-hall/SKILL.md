@@ -54,25 +54,24 @@ This prevents the E90 problem where five articles covered the same two stories. 
 
 ## Step 0: Production Log
 
-Create `output/production_log_city_hall_c{XX}.md`:
+Append a `## /city-hall` section to `output/production_log_c{XX}.md` — the unified one-true-cycle log `/city-hall-prep` opened (per `docs/media/production_log_template.md`). Do NOT create a separate civic file; the civic state is a named section of the one cycle log. (Legacy fallback during transition: if the unified log is absent — e.g. city-hall-prep didn't run — open it yourself, item (d) pipeline.32; drop after 3+ clean cycles.)
 
 ```markdown
-# City Hall C{XX} Production Log
-**Started:** {timestamp}
+## /city-hall (S{NNN}) — {timestamp}
 **Cycle:** {XX}
 **Pressure from Mike:** {what he said needs to happen}
 
-## Tracker State (before voices)
+### Tracker State (before voices)
 {read Initiative_Tracker — ImplementationPhase + MilestoneNotes only}
 
-## Voice Decisions
+### Voice Decisions
 {filled in as voices return}
 
-## Tracker Updates Applied
+### Tracker Updates Applied
 {filled in after --apply}
 ```
 
-Update this file at every step. This is how you survive compaction.
+Update this section at every step. This is how you survive compaction.
 
 ## Step 1: Read the Tracker + Approval Ratings
 
@@ -320,7 +319,7 @@ The production log is the ONLY civic document sift reads. If a voice quote, deci
 [world-building specifics the desks can use — operational details, names, places invented by project agents]
 ```
 
-**Save location:** `output/production_log_city_hall_c{XX}.md` — this file persists. It survives compaction, session changes, and context loss. The edition pipeline reads it.
+**Save location:** the `## /city-hall` section of `output/production_log_c{XX}.md` — the unified cycle log persists. It survives compaction, session changes, and context loss. The edition pipeline reads this section.
 
 ## Gap log (S212 — see [[../../docs/plans/GAP_LOG_TEMPLATE]])
 

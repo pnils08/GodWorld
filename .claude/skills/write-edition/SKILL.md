@@ -31,7 +31,7 @@ If sift is right, this is mechanical.
 Verify these exist before starting:
 - `output/dispatch_c{XX}.json` — from `/sift` — the mechanical launch spec. Per-article entries carry `{slot, section, briefFile, reporter, desk, headline, outputPath, voiceDirective, spine, threeLayerKeys, initsTouched}`; plus `letters[]`, `quickTakes[]` (QT entries may have `reporter: null`), and header fields (`cycle, edition, generatedAt, slateLockedBy, ...`). This file is the source of truth for Step 1 — launch from it directly.
 - `output/reporters/{reporter}/c{XX}_{SLOT}_brief.md` — per-slot angle briefs from `/sift` (path is in each dispatch entry's `briefFile`; QT briefs live at `output/quick-takes/c{XX}_{SLOT}_brief.md`). **Naming is per-slot, not per-reporter** (G-W50 — the old `c{XX}_brief.md` per-reporter form was skill drift; a reporter with two slots has two briefs).
-- `output/production_log_c{XX}.md` — from `/sift` (story picks, assignments, citizen table). S225 pipeline.23 consolidated edition-flow log to canonical S195 path; civic-side log at `production_log_city_hall_c{XX}.md` is a separate file.
+- `output/production_log_c{XX}.md` — from `/sift` (story picks, assignments, citizen table). S225 pipeline.23 consolidated edition-flow to this canonical S195 path; pipeline.32 (S248) folded the civic side in too — civic decisions now live in the `## /city-hall` section of this same unified log, not a separate `production_log_city_hall` file.
 
 If `dispatch_c{XX}.json` is missing, `/sift` didn't complete its slate lock. Don't proceed.
 

@@ -23,7 +23,7 @@ When this is done right, `/city-hall` runs clean — voices wake, decide, done.
 
 1. **World summary** — `output/world_summary_c{XX}.md` (from `/build-world-summary`)
 2. **Engine review** — `output/engine_review_c{XX}.md` (from `/engine-review`) — ailments that need civic response, stuck initiatives, recurring crises
-3. **Previous city-hall log** — `output/production_log_city_hall_c{XX-1}.md` — what was promised last cycle, what cascaded
+3. **Previous cycle log** — `output/production_log_c{XX-1}.md` §/city-hall section — what was promised last cycle, what cascaded. (Legacy fallback during transition: `output/production_log_city_hall_c{XX-1}.md` if the unified prior-cycle log is absent — pipeline.32 item (d); drop after 3+ clean cycles.)
 4. **Previous voice outputs** — `output/civic-voice/{office}_c{XX-1}.json` — exact quotes, positions, tracker updates from last cycle per voice. Continuity source.
 5. **Mara directive** — `output/mara-directives/mara_directive_c{XX}.txt` (if exists) — Mara's editorial pressure for this cycle
 
@@ -86,7 +86,7 @@ Full convention: [[SUPERMEMORY]] §Memory Fence. Covers the threat model and whe
 
 ### Step 0: Production Log
 
-Create `output/production_log_city_hall_c{XX}.md` with header, timestamp, cycle, Mike's pressure.
+Create/open `output/production_log_c{XX}.md` — the unified one-true-cycle source every cycle-active skill appends a named section to (per `docs/media/production_log_template.md`). Write the §Cycle Header (timestamp, cycle, sim day) + §Carry-Forward, then append this skill's `## /city-hall-prep` section with Mike's pressure. (Until the `pipeline.35` cycle-init admin skill ships, `/city-hall-prep` is the log opener; afterward it becomes an appender.)
 
 **Mike's pressure auto-derive (S215, closes G-5).** "Pressure from Mike" defaults to the synthesis of: engine review HIGH-severity ailments (`output/engine_review_c{XX}.md` §Ailments / §Stuck Initiatives), Mara directive content (`output/mara-directives/mara_directive_c{XX}.txt` if present), and active civic items in `docs/engine/ROLLOUT_PLAN.md` §civic.*. Compute the default, write it into the production log, then ask Mike to confirm or override. Mike-override fires only when his read of the cycle differs from those engine signals (e.g., front-page-rotation pressure, audit follow-up ask, off-rubric editorial direction) — anomaly-only escalation, not always-on.
 
@@ -232,7 +232,7 @@ Default outcome: silent pass. Mike-review outcome: anomaly named + suggested fix
 
 | File | Purpose |
 |------|---------|
-| `output/production_log_city_hall_c{XX}.md` | Started — Steps 0-2 complete, tracker state, approvals, topic assignments |
+| `output/production_log_c{XX}.md` | Opened — §Cycle Header + §Carry-Forward + `## /city-hall-prep` section (Steps 0-2 complete, tracker state, approvals, topic assignments) |
 | `output/civic-voice-workspace/{office}/current/pending_decisions.md` | One per voice with decisions this cycle |
 
 ## Handoff to /city-hall
@@ -241,7 +241,7 @@ When this skill completes, `/city-hall` picks up by reading:
 
 | File | What city-hall does with it |
 |------|---------------------------|
-| `output/production_log_city_hall_c{XX}.md` | Continues writing to this log — adds voice decisions, tracker updates, media handoff |
+| `output/production_log_c{XX}.md` | Appends its `## /city-hall` section to this log — voice decisions, tracker updates, media handoff |
 | `output/civic-voice-workspace/{office}/current/pending_decisions.md` | Each voice agent reads ONLY this file + their IDENTITY.md. Nothing else. |
 
 `/city-hall` does NOT re-read sheets, MCP, or Supermemory. Everything it needs is in the files this skill produced. If the prep is right, city-hall is mechanical.

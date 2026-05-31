@@ -326,9 +326,9 @@ Distill into `docs/mags-corliss/NEWSROOM_MEMORY.md`:
 
 | Skill | Artifact check (run /skill-check if exists) | Writes |
 |-------|---------------------------------------------|--------|
-| `write-edition` | `output/production_log_edition_c<XX>.md` exists | `output/skill_check_write-edition_c<XX>.json` |
+| `write-edition` | `output/production_log_c<XX>.md` has a `## /write-edition` section (legacy fallback: `production_log_edition_c<XX>.md` exists) | `output/skill_check_write-edition_c<XX>.json` |
 | `sift` | `output/sift_proposals_c<XX>.json` exists | `output/skill_check_sift_c<XX>.json` |
-| `city-hall` | `output/production_log_city_hall_c<XX>.md` exists | `output/skill_check_city-hall_c<XX>.json` |
+| `city-hall` | `output/production_log_c<XX>.md` has a `## /city-hall` section (legacy fallback: `production_log_city_hall_c<XX>.md` exists) | `output/skill_check_city-hall_c<XX>.json` |
 | `dispatch` | `editions/cycle_pulse_dispatch_c<XX>_*.txt` exists | `output/skill_check_dispatch_c<XX>.json` |
 | `interview` | `editions/cycle_pulse_interview-transcript_c<XX>_*.txt` exists | `output/skill_check_interview_c<XX>.json` |
 

@@ -26,9 +26,9 @@ Automated grader for GodWorld production skills. One skill, one cycle, one asser
 
 | Skill | Assertion source | Transcript | Outputs |
 |-------|------------------|------------|---------|
-| `write-edition` | `docs/media/story_evaluation.md` | `output/production_log_edition_c<N>.md` | `output/reporters/*/articles/c<N>_*.md`, `output/engine_audit_c<N>.json` (for signal cross-ref) |
-| `sift` | `docs/media/story_evaluation.md` (priority signals + three-layer test) | `output/sift_proposals_c<N>.json` (proposal set — written by sift Step 2 before Mike picks) + `output/production_log_edition_c<N>.md` Step 2 (picks) | `output/engine_audit_c<N>.json`, `output/baseline_briefs_c<N>.json`, `output/reporters/*/c<N>_brief.md` |
-| `city-hall` | `docs/media/city_hall_evaluation.md` (S216 governance.2) | `output/production_log_city_hall_c<N>.md` | `output/civic-voice/*_c<N>.json` |
+| `write-edition` | `docs/media/story_evaluation.md` | `output/production_log_c<N>.md` (`## /write-edition` section; legacy `production_log_edition_c<N>.md`) | `output/reporters/*/articles/c<N>_*.md`, `output/engine_audit_c<N>.json` (for signal cross-ref) |
+| `sift` | `docs/media/story_evaluation.md` (priority signals + three-layer test) | `output/sift_proposals_c<N>.json` (proposal set — written by sift Step 2 before Mike picks) + `output/production_log_c<N>.md` Step 2 picks (legacy `production_log_edition_c<N>.md`) | `output/engine_audit_c<N>.json`, `output/baseline_briefs_c<N>.json`, `output/reporters/*/c<N>_brief.md` |
+| `city-hall` | `docs/media/city_hall_evaluation.md` (S216 governance.2) | `output/production_log_c<N>.md` `## /city-hall` section (legacy `production_log_city_hall_c<N>.md`) | `output/civic-voice/*_c<N>.json` |
 | `dispatch` | `docs/media/dispatch_evaluation.md` (S216 governance.2) | reporter production log | `editions/cycle_pulse_dispatch_c<N>_<slug>.txt` |
 | `interview` | `docs/media/interview_evaluation.md` (S216 governance.2) | reporter production log + transcript | `editions/cycle_pulse_interview_c<N>_<subject>.txt` + transcript file |
 

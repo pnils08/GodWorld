@@ -35,6 +35,7 @@ pointers:
 
 **Decisions (S243 defaults — Mike can override; resolved so the plan ships buildable):**
 - **D1 — Boot drops the SESSION_CONTEXT body read entirely.** Not a trimmed slice. Anything a "Priority slice" would keep duplicates ROLLOUT (canonical next-priority). Boot orientation = `<godworld-state>` + Shipped block + ROLLOUT + a one-line greeting pointer to the live span. (Resolves RB-6 open-Q a.)
+  - **D1 PREMISE CORRECTION (S248, verified at execution):** the plan-as-drafted assumed the Shipped block was already a boot primitive the model would still see after the read drops. It is NOT — two empirical facts contradict the draft: (a) `session-startup-hook.sh` never emitted the `## Shipped Last Session` block (it only emits `<godworld-state>`: session/day/cycle/terminal); (b) governance.18(b) (S238) physically relocated the Shipped block to ~line 177 of SESSION_CONTEXT.md, OUTSIDE the 80-line boot read window. So **today's actual boot handoff is the STATUS paragraphs (lines 5–76, inside the 80-line read), not the Shipped block.** Dropping the read therefore removes the only handoff the model currently sees. **Resolution (consistent with D1's intent):** the hook must START emitting the Shipped block. The hook already reads SESSION_CONTEXT.md for the session/day/cycle counters; it gains an `awk` extraction of the existing `## Shipped Last Session` section (maintained mechanically by `writeShippedBlock.js` at close) and emits it inside `<godworld-state>`. No new script. **Keystone constraint:** the hook-emits-Shipped change and the boot-read-drop MUST land in the same commit — otherwise there is a boot with no handoff at all. This moves to Task 3.
 - **D2 — Snapshots are separate numbered files** in `docs/session-context/` (folder registered once in index; individual snapshots referenced by path/ID, NOT indexed individually — avoids index bloat). `SESSION_CONTEXT_S<##>.md` where `##` = the session at which the hard close happens; the file header records the span range (e.g. "Span S242–S245"). (Resolves RB-6 open-Q b.) Reconciles with the existing `SESSION_HISTORY.md` rotation target — see Task 5.
 - **D3 — Continuation discovery = greeting pointer + "resume/continue" convention.** Boot greeting carries "Last span: SESSION_CONTEXT.md (live) · last snapshot docs/session-context/S<##>.md". CLAUDE.md "If Mike says resume" extends to "read the live SESSION_CONTEXT span." A pivoting session ignores it; a continuing session pulls it. (Resolves RB-6 open-Q c.)
 - **D4 — Growth is bounded by span length, accepted with a guard.** A soft-cap nudge fires (in the greeting / at soft close) when the live file exceeds a threshold OR ≥3 soft closes have chained, reinforcing the existing TERMINAL.md "≥3 chained soft closes → hard close" rule. (Resolves RB-6 open-Q d.)
@@ -56,10 +57,10 @@ pointers:
   - `docs/adr/0009-session-context-on-demand.md` — create.
   - `docs/index.md` — add entry (same commit).
 - **Steps:**
-  1. Write ADR-0009 per ADR-0001/0007/0008 shape: context (G-SE5 98KB + contingent-relevance argument), decision (span unit + numbered on-demand snapshot + boot drops the read), rejected alternatives (keep auto-boot; rotate-default-only crude fix), reversal triggers, the D1–D4 decisions. Note it's the pilot of the three-part log-system redesign.
+  1. Write ADR-0009 per ADR-0001/0007/0008 shape: context (G-SE5 98KB + contingent-relevance argument), decision (span unit + numbered on-demand snapshot + boot drops the read + hook becomes the Shipped-block carrier per D1 premise correction), rejected alternatives (keep auto-boot; rotate-default-only crude fix), reversal triggers, the D1–D4 decisions. Note it's the pilot of the three-part log-system redesign.
   2. Register in index.
 - **Verify:** ADR-0009 in `docs/adr/`; index entry present.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S248.
 
 ### Task 2: Snapshot + reset at hard close (engine-sheet)
 
@@ -82,12 +83,13 @@ pointers:
   - `.claude/terminals/{media,civic,research-build,engine-sheet}/TERMINAL.md` — modify Always-Load tables.
   - `.claude/skills/session-startup/SKILL.md` — modify Step 4.
 - **Steps:**
-  1. Hook: remove the SESSION_CONTEXT 80-line read from the boot sequence; emit a one-line "Last span: …" pointer in the greeting instead (D3).
-  2. CLAUDE.md: replace "Read this file at the start of every session" premise — SESSION_CONTEXT is on-demand; boot orientation is `<godworld-state>` + Shipped block + ROLLOUT.
-  3. Four TERMINAL.md Always-Load tables: SESSION_CONTEXT row → "on-demand (pull live span when continuing prior work)."
+  0. **(S248 keystone, do FIRST in the same commit per D1 premise correction)** Hook: add an `awk` extraction of the `## Shipped Last Session` section from SESSION_CONTEXT.md and emit it inside `<godworld-state>`, so the mechanical handoff survives the read drop. The block is bounded by its `## Shipped Last Session` header and the next `## ` header (or EOF). Degradation: if the section is absent, emit nothing (boot still works).
+  1. Hook: remove the "Read SESSION_CONTEXT.md with limit 80" line from all 4 boot-sequence case branches; emit a one-line "Last span: SESSION_CONTEXT.md (live)" pointer in the greeting instead (D3).
+  2. CLAUDE.md: replace "Read this file at the start of every session" premise — SESSION_CONTEXT is on-demand; boot orientation is `<godworld-state>` (now carrying the Shipped block) + ROLLOUT.
+  3. Four TERMINAL.md Always-Load tables: SESSION_CONTEXT row → "on-demand (pull live span when continuing prior work; the hook emits the Shipped block at boot)."
   4. session-startup SKILL.md Step 4: "compact SESSION_CONTEXT" → "pull live span doc only if continuing prior work."
-- **Verify:** a fresh boot's injected context shows no SESSION_CONTEXT body + the last-span greeting pointer present; `/reload-skills`.
-- **Status:** [ ] not started
+- **Verify:** run the hook directly (`TMUX_PANE` unset → Mags-only path; or set per-terminal) and confirm stdout `<godworld-state>` carries the Shipped block + no "Read SESSION_CONTEXT" instruction + the last-span pointer; `bash -n` clean; `jq` still produces one valid object; `/reload-skills`.
+- **Status:** [x] DONE S248 (research-build slice) — see ADR-0009 + commit.
 
 ### Task 4: Continuation convention (research-build)
 
@@ -96,7 +98,7 @@ pointers:
 - **Steps:**
   1. Extend the resume convention: "resume" / "continue <X>" → read the live `SESSION_CONTEXT.md` span (+ the relevant plan). Fresh-but-pivoting sessions don't.
 - **Verify:** CLAUDE.md resume section names the on-demand pull.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S248 (research-build slice).
 
 ### Task 5: Span-length guard + SESSION_HISTORY reconciliation (engine-sheet + research-build)
 

@@ -29,6 +29,14 @@ DAY_NUM=$(grep -oP 'Day: \K[0-9]+' "$GODWORLD_ROOT/SESSION_CONTEXT.md" 2>/dev/nu
 CYCLE_NUM=$(grep -oP 'Cycle: \K[0-9]+' "$GODWORLD_ROOT/SESSION_CONTEXT.md" 2>/dev/null || echo "?")
 LAST_ENTRY=$(grep -oP '### Entry \d+: .*' "$MAGS_DIR/JOURNAL_RECENT.md" 2>/dev/null | tail -1 || echo "unknown")
 
+# --- SHIPPED BLOCK (ADR-0009, governance.26 Task 3) ---
+# Boot no longer reads the SESSION_CONTEXT.md body. The mechanical handoff slice
+# (the git-log "## Shipped Last Session" block, maintained by writeShippedBlock.js
+# at close) is extracted here and emitted inside <godworld-state> so it survives
+# the read drop. awk: print from the "## Shipped Last Session" header through the
+# line before the next "## " header. Graceful: empty if the section is absent.
+SHIPPED_BLOCK=$(awk '/^## Shipped Last Session/{f=1;print;next} /^## /{f=0} f{print}' "$GODWORLD_ROOT/SESSION_CONTEXT.md" 2>/dev/null || echo "")
+
 # --- DETECT TERMINAL ---
 # Resolve tmux window name if available. Fall back to Mags-only mode (S221).
 TERMINAL_NAME=""
@@ -100,8 +108,7 @@ BOOT SEQUENCE (media terminal — full persona, newsroom):
 3. Read docs/mags-corliss/JOURNAL_RECENT.md
 4. Read .claude/terminals/media/TERMINAL.md
 5. Run: node scripts/queryFamily.js  — react to what you find
-6. Read SESSION_CONTEXT.md with limit 80 (Priority + Recent Sessions only)
-7. Greet Mike briefly. The newsroom's open — bullpen behind, copy desk to your left, the edition deadline in your head.
+6. Greet Mike briefly. The newsroom's open — bullpen behind, copy desk to your left, the edition deadline in your head. Last span: SESSION_CONTEXT.md (live) — read on demand only if continuing prior work; the Shipped block above is your handoff.
 
 BOOT
         ;;
@@ -109,8 +116,7 @@ BOOT
         cat << 'BOOT'
 BOOT SEQUENCE (civic terminal — operational, city-hall):
 1. Read .claude/terminals/civic/TERMINAL.md
-2. Read SESSION_CONTEXT.md with limit 80 (Priority + Recent Sessions only)
-3. Greet Mike briefly. You're at the city-hall press desk — vote sheet in front of you, council voices to call out, decisions to thread.
+2. Greet Mike briefly. You're at the city-hall press desk — vote sheet in front of you, council voices to call out, decisions to thread. Last span: SESSION_CONTEXT.md (live) — read on demand only if continuing prior work; the Shipped block above is your handoff.
 
 BOOT
         ;;
@@ -120,8 +126,7 @@ BOOT SEQUENCE (research-build terminal — operational, architecture):
 1. Read docs/SCHEMA.md
 2. Read docs/index.md
 3. Read .claude/terminals/research-build/TERMINAL.md
-4. Read SESSION_CONTEXT.md with limit 80 (Priority + Recent Sessions only)
-5. Greet Mike briefly. You're at the architecture table — rollout plan open, the long view, what gets built next.
+4. Greet Mike briefly. You're at the architecture table — rollout plan open, the long view, what gets built next. Last span: SESSION_CONTEXT.md (live) — read on demand only if continuing prior work; the Shipped block above is your handoff.
 
 BOOT
         ;;
@@ -130,8 +135,7 @@ BOOT
 BOOT SEQUENCE (engine-sheet terminal — stripped, execute-only):
 1. Read .claude/rules/engine.md
 2. Read .claude/terminals/engine-sheet/TERMINAL.md
-3. Read SESSION_CONTEXT.md with limit 80 (Priority + Recent Sessions only)
-4. Greet Mike briefly. You're at the engine console — sheets live in front of you, code and clasp, ship-then-explain. Discipline: no new MDs, no Supermemory saves except large-shift pointers, no journal.
+3. Greet Mike briefly. You're at the engine console — sheets live in front of you, code and clasp, ship-then-explain. Last span: SESSION_CONTEXT.md (live) — read on demand only if continuing prior work; the Shipped block above is your handoff. Discipline: no new MDs, no Supermemory saves except large-shift pointers, no journal.
 
 BOOT
         ;;
@@ -141,6 +145,15 @@ BOOT
         echo ""
         ;;
     esac
+  fi
+
+  # --- SHIPPED BLOCK EMISSION (ADR-0009) ---
+  # The always-true mechanical handoff. Replaces the dropped SESSION_CONTEXT
+  # 80-line body read. STATUS narrative is now on-demand (read the live span
+  # only when continuing prior work — see the greeting pointer above).
+  if [ -n "$SHIPPED_BLOCK" ]; then
+    echo "$SHIPPED_BLOCK"
+    echo ""
   fi
 
   # --- LEDGER NOTE (removed S247/RB-6, G-SS11) ---

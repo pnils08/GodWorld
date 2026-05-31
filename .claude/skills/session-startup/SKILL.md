@@ -31,7 +31,7 @@ If Mags identity is also lost (not just terminal context), run `/boot` first, th
 
 **If the SessionStart hook already injected a `<godworld-state>` block with `BOOT SEQUENCE (<terminal> terminal — ...)` for this session, the reads are already done — skip Steps 0–4 and go to Step 5 (orient).** Only run the full sequence when the godworld-state block is absent (hook genuinely misfired).
 
-Why: the hook reads the same files (`docs/SCHEMA.md`, `docs/index.md`, `TERMINAL.md`, `SESSION_CONTEXT.md`) the skill steps below specify. Running both duplicates work. The skill is the *recovery path* for hook misfire — not a parallel boot. Source: `output/production_log_session-startup_c95_gaps.md` G-SS8.
+Why: the hook routes the same boot reads (`docs/SCHEMA.md`, `docs/index.md`, `TERMINAL.md`) the skill steps below specify, and emits the `## Shipped Last Session` block directly (ADR-0009 — SESSION_CONTEXT.md is no longer a boot read; it's on-demand). Running both duplicates work. The skill is the *recovery path* for hook misfire — not a parallel boot. Source: `output/production_log_session-startup_c95_gaps.md` G-SS8.
 
 ---
 
@@ -68,14 +68,15 @@ Per that TERMINAL.md's **Always Load** table. Each terminal's list differs:
 
 (G-SS9: operational terminals (civic / research-build / engine-sheet) do NOT load CHARACTER.md — they're persona-stripped per S221. Only mags + media load persona files. If persona files are genuinely needed, run `/boot` — don't re-implement persona-load logic here.)
 
-### 4. Compact SESSION_CONTEXT
-```
-Read: SESSION_CONTEXT.md
-```
+### 4. Pull live span ONLY if continuing prior work (ADR-0009, S248)
 
-Post-S207, the file is ~80 lines. Top of file carries (in order): STATUS paragraph → **`## Shipped Last Session` block** (auto-generated, authoritative, mechanical) → Maintenance Rule → Key Tools → Next Session Priority → Recent Sessions narrative.
+**SESSION_CONTEXT.md is on-demand — NOT read at boot.** Per ADR-0009, the SessionStart hook emits the `## Shipped Last Session` git-log block inside `<godworld-state>` as the mechanical boot handoff. That block is your "what just shipped" ground truth — no relearning. ROLLOUT_PLAN.md is canonical for what those commits accomplished + what's next.
 
-The Shipped Last Session block is the new boot-handoff primitive (S207): it lists every commit since the previous session-end boundary, filtered to drop session-close commits. Treat it as ground truth for "what just shipped" — no relearning, no rediscovery. ROLLOUT_PLAN.md is canonical for what those commits accomplished.
+Only read the live span if you are **continuing prior work** (Mike said "resume" / "continue <X>", or you're picking up a thread the Shipped block + ROLLOUT don't fully orient you on):
+```
+Read: SESSION_CONTEXT.md   (on-demand — the live span: STATUS paragraphs since last hard close)
+```
+A fresh-but-pivoting session does not read it. (Pre-ADR-0009 this step was an unconditional ~80-line read; the contingent-relevance argument retired that — see ADR-0009.)
 
 ### 5. Orient
 

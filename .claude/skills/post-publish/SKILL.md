@@ -54,6 +54,7 @@ Flags:
 | 8 exemplars | ✓ | — | — | — |
 | 9 newsroom memory | ✓ | ✓ | ✓ | ✓ |
 | 10 criteria files | ✓ | — | — | — |
+| 10b archive briefing bundle | ✓ | — | — | — |
 | 11 filing + bot | ✓ | ✓ | ✓ | ✓ |
 | 12 production log | ✓ | ✓ | ✓ | ✓ |
 | 13 checklist | ✓ | ✓ | ✓ | ✓ |
@@ -363,6 +364,20 @@ Each updated criteria file gets a changelog entry at the bottom:
 ```
 
 **Verification gate:** for each skill whose artifact existed this cycle, a corresponding /skill-check JSON exists in output/ AND its assertion file has a new changelog entry dated this cycle. Skills whose artifact didn't exist this cycle are skipped (one-line skip note in the post-publish production log).
+
+### Step 10b: Archive Briefing Bundle (`--type edition` only — pipeline.11, briefing versioning)
+```bash
+node scripts/archiveBriefingBundle.js <XX>
+```
+Copies each desk's live bundle (`output/desks/{desk}/current/*`) to a cycle-keyed
+archive (`output/desks/{desk}/archive/c<XX>_bundle/`) so retro audits can ask
+"did the briefing cause the grade?" across cycles. Pure additive copy — no live-data
+mutation; idempotent (re-running replaces that cycle's bundle dir). `--dry-run` previews.
+
+**Verification gate:** stdout reports `N desk(s) archived` (expect 6: business / chicago /
+civic / culture / letters / sports) with `0 skipped`, and `output/desks/business/archive/c<XX>_bundle/`
+contains `briefing.md` + `packet.json` + `summary.json`. A desk skipped means its
+`current/` bundle was missing this cycle — note it in the Step 12 production log.
 
 ### Step 11: Filing + Cleanup
 ```bash

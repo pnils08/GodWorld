@@ -233,6 +233,7 @@ Edition is published but not canonized and not fed back to the engine. This skil
 | 8 | Extract exemplars (A-grade articles → desk workspaces) | `extractExemplars.js` |
 | 9 | Update `NEWSROOM_MEMORY.md` — errata, coverage patterns, arcs | — |
 | 10 | Update criteria files (story_evaluation, brief_template, citizen_selection) after `/skill-check write-edition {XX}` | `/skill-check`, `gradeEdition.js` |
+| 10b | Archive each desk's briefing bundle to `output/desks/{desk}/archive/c{XX}_bundle/` (briefing versioning — retro audit; edition-only) | `archiveBriefingBundle.js` |
 | 11 | Filing + cleanup; restart mags-bot | `postRunFiling.js`, `pm2 restart mags-bot` |
 | 12 | Finalize production log — wiki pattern with inline Supermemory doc IDs | — |
 | 13 | Completion checklist | — |

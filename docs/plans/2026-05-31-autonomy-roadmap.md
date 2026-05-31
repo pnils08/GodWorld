@@ -66,7 +66,7 @@ Run the reporters / civic voices / reviewers unattended — they wake, read stat
 
 N citizens as live agent loops (spacemolt-miner shape): wake → load my ledger row + neighborhood + recent canon → decide one action → write it → sleep → repeat. The newsroom (Layer 2) covers what emerges. This is the city-for-bots pivot (S114) and the SpaceMolt-plus-narrative moat.
 
-- **Status:** NOT STARTED, long-term at our population size. **First concrete step is NOT the harness — it's the research.9 PoC:** 1–2 citizens, short window (~1 hour), output to a throwaway file, nobody publishes, analyze-only.
+- **Status:** NOT STARTED, long-term at our population size. **First concrete step is NOT the harness — it's the narration-only life-loop PoC, now spec'd:** [[2026-05-31-citizen-autonomous-poc]] (research.13, S249). 1–2 Tier-1 citizens, ~1 hour, throwaway file, nobody publishes, analyze-only. Resolves the interview-vs-life-loop seam toward the life-loop (Mike's words) and folds in the S249 sports-awareness tweak (wake-piece #4). **Unblocked** — the 40.2 cattle refactor gates the *interview* build (research.9), not a reporterless citizen loop.
 - **Why 1–2 for an hour, not 10 for a day:** failure shows up early (Grok hit 183 crimes in 4 days — the break is visible fast). Learn character-hold + drift rate + token bill at near-zero cost before committing to the harness or the bill of ten.
 - **The four questions the PoC must answer (from research.9 / S172):**
   1. **Character-hold** across a full window — does the citizen stay in voice, or drift by turn 3?

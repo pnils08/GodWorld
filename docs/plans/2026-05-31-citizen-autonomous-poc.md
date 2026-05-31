@@ -73,6 +73,15 @@ PoC citizens **narrate**; they do **not** mutate the ledger. A clean run proves 
 ### Precondition finding (verified against [[../engine/PHASE_40_PLAN]] §40.2)
 The `research.9` ROLLOUT row is blocked on **Phase 40.2 — the reporter-as-cattle refactor** (split reporter voice files from disposable, restartable brief-execution state, so a reporter can crash mid-article and reboot from the production log). That gates the **interview** build, because you don't drop a stateful "pet" reporter into a live multi-turn loop. **This citizen life-loop has no reporter** — it's a solo citizen narrating — so 40.2 does **not** gate it. (Injection defense, the layer that would matter for any ingest path, is Phase 40.6, already DONE S156 — and moot here anyway since there's no publish path.) So this PoC is a separate, **unblocked** sub-thread (`research.13`); the interview build (`research.9`) stays blocked on 40.2. Re-confirm at build time.
 
+## Design refinements (S249, post-smoke — Mike-direct, validated against research + engine data)
+
+The smoke held on free-text Bio, but two findings reshape the wake-context for the real (Tier-2/3) build:
+
+- **Voice = the TraitProfile, not the Bio.** What gives a citizen a stable voice is the structured `TraitProfile` column — `{Archetype, Tone, Motifs, Traits}` (~342 of ~685 rows carry one; per [[../RESEARCH]] TraitProfile design + research4_1 numeric-trait note). The PoC fed Bio + LifeHistory (free text) and skipped TraitProfile — fine for Tier-1 notables who *have* a rich bio, but **Tier-2/3 citizens (the retargeted audience) mostly don't have a bio; they have a TraitProfile.** So TraitProfile is the *scalable* voice anchor → add it to wake-piece #1.
+- **The "8 details" = bounded MEMORY, not identity.** Mike's recalled "8 details a sim bot can carry" traces to **Dwarf Fortress's 8 short-term memory slots, grouped Social/Work/Family/Health** (`docs/research4_1.md:196`) — keep the strongest per slot, promote to long-term on a schedule, prevents *emotional runaway*. It is **not** a cap on identity facts. This is the **drift-control mechanism for the untested Q1 (horizon character-hold)**, and it was already earmarked for our citizen sentiment/media-impact system (`research4_1.md:209`). It replaces wake-piece #5's naive "last 3 raw entries."
+- **Net wake-context shape:** voice = TraitProfile (+ role + neighborhood); memory = 8 bounded slots (the citizen's event-memory). Two different fields; don't conflate them.
+- **Memory-slot mechanism (where it lives + how maintained):** OPEN design as of S249 — leaning Layer-1/engine-maintained (deterministic, all citizens, distilled from the `LifeHistory_Log` event stream; promotes to TraitProfile shifts on a schedule), with the Layer-3 agent *reading* it, not owning it. Spec to be recorded once settled. Substrate confirmed: `LifeHistory_Log` is the live append-only per-citizen event stream (written by Phase 4/5 engines); no bounded-memory structure exists yet.
+
 ## Acceptance criteria
 
 The build go-ahead is complete when the run answers the four questions (lifted from research.9 / S172):

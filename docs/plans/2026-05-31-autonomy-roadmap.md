@@ -75,6 +75,16 @@ N citizens as live agent loops (spacemolt-miner shape): wake → load my ledger 
   4. **Output usability** — does what they produce become engine signal / newsroom source, or noise needing a post-processor?
 - **Gate:** GPU / hardware (`project_gpu-is-go-live-gate`) for any at-scale run; + the drift-amplification finding (the harder you push autonomy over long horizons, the more load-bearing the canon layer becomes — Emergence World is external evidence, C92 is our scar). Real harness build is research.9 path-(a), promote to its own execution plan when the PoC says go.
 
+#### Citizen archetypes — autonomy is routed by what the citizen IS, not just by tier (S249, Mike-direct, validated against engine data)
+
+The research.13 smoke surfaced this and Mike sorted it: a citizen's row determines which autonomous mechanism it belongs to. Three archetypes, three different builds:
+
+1. **Voice / interview agents** — Tier-1 notables with major storyline attention (e.g. **Elias Varek** / Civis Systems, **Vinnie Keane**). They carry enough canon to sustain a *live conversation* → this is the **research.9 interview branch**, not the life-loop. They already generate canon in publication, so they stay in — as the **conversation** surface. (No Varek/Keane voice agent exists yet; they're candidates.)
+2. **Engine field-actors** — special citizens whose *presence* shifts world metrics rather than narrating or conversing (e.g. **Lucia Polito** — "Aura"/Codex-Linked, bio: "her presence radiates calmness"). Right instinct to file her near the **chaos-cars engine** (engine.11) — both are "an engine character whose presence moves the metrics" — but chaos-cars today is *disruptive stochastic event injection* (decay toward dysfunction); Lucia is the **inverse**: a continuous *positive presence field*. Genuinely unmapped — a sibling concept, separate build. (Her "Aura" label is real canon; it also traces partly to an S185-fixed column-split bug, but the bio underneath is canonical.)
+3. **Life-loop narrators** — **Tier-2 / Tier-3 ordinary citizens** generating "what life feels like in the sim." The biggest gain and the texture frontier (Division III principle). **research.13 retargets here** — Tier-1 stays in but is *not* the frontier (Tier-1 rows skew notable: ballplayers, founders, canon entities).
+
+What gives each its voice + how it remembers: see [[2026-05-31-citizen-autonomous-poc]] §Design refinements (voice = TraitProfile; memory = 8 bounded slots, Dwarf Fortress pattern).
+
 ---
 
 ## Open questions

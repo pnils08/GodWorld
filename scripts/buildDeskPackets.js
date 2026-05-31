@@ -96,6 +96,17 @@ const getCurrentCycle = require('../lib/getCurrentCycle');
 const contextScan = require('../lib/contextScan');
 const CYCLE = getCurrentCycle();
 const PROJECT_ROOT = path.resolve(__dirname, '..');
+// pipeline.12 Task 3 — cap the full packet's interviewCandidates so the bundle
+// stops shipping the whole desk-ranked pool (~350/desk). The list is already
+// desk-specific (priority-by-neighborhood + freshness in getInterviewCandidates);
+// this is the bundle-size cap. The full pool count is preserved as
+// interviewCandidatesFullCount. Cap applies ONLY to the emitted packet/summary —
+// the unsliced `candidates` still feeds citizen-name extraction (no cascade to
+// citizenArchive/voiceCards). (The plan's richer 5-signal score+reasons rubric is
+// declined: its +2 voiceCards signal is circular — voiceCards are built downstream
+// of candidates — and the existing neighborhood ranking already yields desk-specific
+// shortlists.)
+const INTERVIEW_CANDIDATE_CAP = 20;
 
 // Phase 40.6 Layer 4 — scan any packet we write and abort the build on a hit.
 function writeAndScanPacket(filepath, content) {
@@ -2517,7 +2528,8 @@ async function main() {
           status: e.Status
         };
       }),
-      interviewCandidates: candidates,
+      interviewCandidates: candidates.slice(0, INTERVIEW_CANDIDATE_CAP),
+      interviewCandidatesFullCount: candidates.length,
       canonReference: deskCanon,
       sportsFeeds: deskSportsFeeds,
       sportsFeedDigest: sportsFeedDigest,
@@ -2586,7 +2598,8 @@ async function main() {
       hooks: deskHooks.length,
       arcs: deskArcs.length,
       storylines: deskStorylines.length,
-      interviewCandidates: candidates.length
+      interviewCandidates: Math.min(candidates.length, INTERVIEW_CANDIDATE_CAP),
+      interviewCandidatesPool: candidates.length
     };
     manifest.packets.push(stats);
 

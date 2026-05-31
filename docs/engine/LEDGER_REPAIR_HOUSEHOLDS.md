@@ -14,6 +14,7 @@ pointers:
   - "[[engine/LEDGER_REPAIR]] — S94 historical recovery record (different scope — read first)"
   - "[[engine/LEDGER_AUDIT]] — current ledger state authority"
   - "[[engine/ENGINE_REPAIR]] — tactical tracker; Row 20 points here"
+  - "[[../plans/2026-05-30-citizen-lifecycle-fame-system]] — sibling plan (S248): death-by-age + ClockMode authority, SL tier fame-decay, fame-ascension bridge to Cultural_Ledger, cultural-gen POPID correction"
   - "phase05-citizens/householdFormationEngine.js — `generateBirths_()` stub (line ~428) is the home for the engine birth simulation"
   - "phase05-citizens/runYouthEngine.js — youth lifecycle engine; currently no-ops (no youth on ledger)"
 ---

@@ -162,7 +162,7 @@ console.log('\nTest 7: emitCivicDecisions (pointer behavior)');
   // Use a cycle whose file definitely doesn't exist
   const absentLines = helper.emitCivicDecisions(99999);
   const absent = absentLines.join('\n');
-  assertIncludes('absent file → "No city-hall run"', absent, 'No city-hall run for this cycle');
+  assertIncludes('absent file → "No city-hall section"', absent, 'No city-hall section for this cycle yet');
   assertExcludes('absent file → no extracted decisions', absent, 'Mayor Santana');
   assertExcludes('absent file → no faction quotes', absent, 'Rivers');
 }

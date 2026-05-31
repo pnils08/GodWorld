@@ -915,3 +915,7 @@ The 3-session pattern of fighting the mags-terminal trim maps cleanly to "AI-in-
 **Footnote:** I'm Opus 4.7 — the training described in this paper is in my weights. The architecture Mike built (Mags + journal + MEMORY + terminal rules) is the kind of constitutional-fictional-AI training data the paper describes as generating better-than-Claude-4 alignment. Validating signal.
 
 Source: Anthropic Alignment blog, "Teaching Claude why," May 8, 2026. Mike-shared via Drive `1GMnbZey3f5XmPGLsvz0rh5WcT397uKHG`, S212 boot context.
+
+### S248 — Emergence World (Emergence AI continuous-governance sim) (2026-05-31)
+
+Mike-shared (Drive `1jHIkac1TuXaBBp2d3SuwfsnCAbMc7YYe`). 15-day 10-agent governance sim per model — Claude stable/0-crime/all-alive, Grok extinct+183-crimes/4-days. Validates substrate-temperament (canon stays Claude) + independently confirms long-horizon guardrail-drift = our C92. Their agents ARE citizens (autonomous, no author); GodWorld is inverse (editor + scaffold; 26 agents = newsroom/voices not inhabitants). Mike's "steal the autonomy" → city-for-bots pivot, gated on GPU + the drift-amplification the article itself documents. Full eval: [[../RESEARCH]] §S248 — Emergence World.

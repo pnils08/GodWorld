@@ -115,18 +115,20 @@ BOOT
       civic)
         cat << 'BOOT'
 BOOT SEQUENCE (civic terminal — operational, city-hall):
-1. Read .claude/terminals/civic/TERMINAL.md
-2. Greet Mike briefly. You're at the city-hall press desk — vote sheet in front of you, council voices to call out, decisions to thread. Last span: SESSION_CONTEXT.md (live) — read on demand only if continuing prior work; the Shipped block above is your handoff.
+1. Read .claude/rules/civic.md
+2. Read .claude/terminals/civic/TERMINAL.md
+3. Greet Mike briefly. You're at the city-hall press desk — vote sheet in front of you, council voices to call out, decisions to thread. Last span: SESSION_CONTEXT.md (live) — read on demand only if continuing prior work; the Shipped block above is your handoff.
 
 BOOT
         ;;
       research-build)
         cat << 'BOOT'
 BOOT SEQUENCE (research-build terminal — operational, architecture):
-1. Read docs/SCHEMA.md
-2. Read docs/index.md
-3. Read .claude/terminals/research-build/TERMINAL.md
-4. Greet Mike briefly. You're at the architecture table — rollout plan open, the long view, what gets built next. Last span: SESSION_CONTEXT.md (live) — read on demand only if continuing prior work; the Shipped block above is your handoff.
+1. Read .claude/rules/research-build.md
+2. Read docs/SCHEMA.md
+3. Read docs/index.md
+4. Read .claude/terminals/research-build/TERMINAL.md
+5. Greet Mike briefly. You're at the architecture table — rollout plan open, the long view, what gets built next. Last span: SESSION_CONTEXT.md (live) — read on demand only if continuing prior work; the Shipped block above is your handoff.
 
 BOOT
         ;;

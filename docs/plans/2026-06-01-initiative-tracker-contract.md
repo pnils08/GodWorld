@@ -44,7 +44,7 @@ pointers:
   3. Fix stale `NextActionCycle` (all rows reference cycle 94/95; we're at 96) + clear the dead empty INIT-004 row.
   4. Sheet write via `lib/sheets.updateRowFields`; verify by re-read; baseline diff confirms only the intended deltas.
 - **Hazard:** flattens richer phase strings (restored in Phase 2). Re-drifts next cycle unless Phase 3 lands (this is a patch).
-- **Status:** [ ] gated on Mike's mapping ratify (D1)
+- **Status:** [x] DONE S251 — Mike D1 ratified. INIT-005 `design-development-active`→`design-phase` (0→0.2), INIT-006 `active-construction-phase-2-planning`→`construction-planning` (0→0.3). Baseline `output/initiative_tracker_baseline_pre_c96.json` (pre-change intensities, both were 0). Guard-checked live phase before write; verified by re-read. **Deferred (not needed for C96 ripple):** NextActionCycle bump (needs canon values; field not read by applyInitiativeImplementationEffects) + dead empty INIT-004 row (already blank, no-op). **C96 verify:** INIT-005/006 should appear with non-zero intensity in `applyInitiativeImplementationEffects` vs the baseline.
 
 ### Phase 1 — the canonical contract doc — research-build / civic
 - **Goal:** the single source of truth a writer reads instead of inventing.

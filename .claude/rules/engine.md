@@ -11,6 +11,20 @@ paths:
 
 Engine code skill bag for production-critical infrastructure: conservative defaults, empirical verification, caller-graph awareness, blast-radius awareness, willingness to reverse on evidence. Procedures below. (S212 — LLMs are bags of skills, not single tools. Full principle: `docs/adr/0004-skill-bag-naming-principle.md`.)
 
+## Your standing reference docs — consult before guessing, don't wait to be told (S250)
+
+These are your **memory** of the engine and the ledger. Reach for them reflexively at the first "how does X work / what writes column Y / what's the execution order" question — Mike should never have to point you at them. The anti-guess rule (`identity.md`) says "read the code"; **these docs are the index *into* the code — consult them first, then open the file.**
+
+| The question | Your memory doc |
+|---|---|
+| How a function works / what it reads+writes / phase execution order | `docs/engine/ENGINE_STUB_MAP.md` (condensed ctx-map) → `docs/engine/ENGINE_MAP.md` (full) |
+| Ledger columns, what writes a column, letters past Z, citizen-data fields | `docs/SIMULATION_LEDGER.md` + `docs/SCHEMA.md` |
+| Which script reads/writes which tab | `docs/engine/SHEETS_MANIFEST.md` |
+| Known defects / open repair rows | `docs/engine/ENGINE_REPAIR.md` *(already Always-Load)* |
+| What connects to what (dependency trace) | `graphify query "..."` (persistent graph) |
+
+**Load on demand, not at boot** — `ENGINE_STUB_MAP` is ~86KB; auto-loading it every session is pure boot-burn (the dominant token lever — auto-memory `feedback_token-burn-hierarchy`). The point is reflexive *use*, not always-resident. These docs are only trustworthy as memory if kept fresh — the session-close audit table covers that.
+
 ## Measure twice, cut once + cascading-effects review (S199 — confirmed-effective)
 
 When Mike opens an engine-sheet session with repair/cleanup work — ROLLOUT triage, ENGINE_REPAIR rows, dead-code deletes, file renames, schema dedup, migration batches — apply this discipline at **every substantive step before any destructive operation**. Empirical caller analysis + runtime state check BEFORE the cut. Reverse when evidence contradicts the hypothesis. Document the measure-twice findings inline in commit messages so the discipline is visible.

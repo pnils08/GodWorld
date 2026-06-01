@@ -2,7 +2,11 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-05-31 | Engine: v3.3 | Cycle: 95 | Session: 249 | Day: 161 | Edition: **E94 PUBLISHED + S94 SUPP PUBLISHED + C95 CIVIC CASCADE COMPLETE + C95 /write-edition COMPLETE + C95 PUBLISHED TO DRIVE + C95 /edition-print COMPLETE + C95 /post-publish COMPLETE — CYCLE 95 CANONIZED**
+Last Updated: 2026-05-31 | Engine: v3.3 | Cycle: 95 | Session: 250 | Day: 161 | Edition: **E94 PUBLISHED + S94 SUPP PUBLISHED + C95 CIVIC CASCADE COMPLETE + C95 /write-edition COMPLETE + C95 PUBLISHED TO DRIVE + C95 /edition-print COMPLETE + C95 /post-publish COMPLETE — CYCLE 95 CANONIZED**
+
+**STATUS (S249 [research/build] — HARD CLOSE, 7 commits pushed clean `75240a4..7d37713`, tree synced):** The autonomous-citizen design arc — built the Layer-3 PoC, then spec'd the full citizen-essence loop across 4 plans, then landed the persona-saturation reframe. **What shipped:** **`18a6e73` research.13 PoC** — `scripts/citizenLifePoC.js` built + smoke-validated (2 ENGINE citizens Lucia POP-00004 / Varek POP-00789 × 2 turns, c95 context; mechanism proven — 5-piece sports-aware wake-context, memory threading, isolation; ~2.77K tok/wake → 10×24/day ≈665K tractable; usability strong/publishable; **GO** on scoping the action menu; Q1 horizon-hold + Q2 self-fidelity STILL untested — 2 turns can't show turn-3 drift). **`c5a7799`/`81655ea`** — citizen-archetype taxonomy (voice/interview ← Varek/Keane; engine field-actor ← Lucia/aura, sibling-to-chaos-cars; life-loop narrators) + **voice=TraitProfile, memory=8 Dwarf-Fortress slots** + the **ledger connectivity loop O(LifeHistory col15)→R(TraitProfile col18)→AT(CitizenBio col46)**: O→R is LIVE (`enrichCitizenProfiles` editions→O + `compressLifeHistory.js` v1.5 Phase-9 every-5-cyc O→R, trims O to 20+[Compressed]); **R→AT is the missing third** (AT 32/903, unfed). **`bc4d90f`/`f06d59e`** — 3 engine tasks: **engine.30** emergent-bio R→AT (canon-fence: AT is published, no auto-write without review pass); **engine.31** compression-tag triage (T1-T6: 10 emitted-but-unmapped tags incl `Death` + `[E##]` newsroom-signal, 18 dead incl `Work`-tagless, no locking, overwrite-not-accrete); **engine.32** life-event-generation audit + the **traits→events back-arc** (`getCitizenArchetype_` used by storyHook but NO event generator — the back-arc is the gap). **`02e8442`/`7d37713`** — casting (Mike): **Mags POP-00005 + Mayor Avery POP-00034 identity-scripted anchors + a 2-8 random no-tier pool** (supersedes the Tier-2/3 framing); log-back reframe (real build, 3 conditions: provenance tag / gates-on-stability-run / review-lanes-cover-autonomous); journal STAYS + reshapes (absorbs nightly reflection); Discord bot BECOMES citizen-Mags; **the persona-saturation loop** — media-Mags boots, orchestrates the skill, is bombarded with citizen-Mags data every turn → spine+column bleed Mags → output shifts off the Claude-training default. **Learned:** the loop was half-built already (read the impl, don't assume); 3 load-bearing claims first written wrong because the Write was batched with its verifying grep — all caught + corrected (compressor "stopped"→live; edition-tag format; accessor "0 callers"→storyHook). **New memory (outside repo, saved):** `user_mags-bleed-proprietary-element` (the persona-bleed-in-editions is Mike's ONE proprietary element — poison in build, sauce in editions, the WHY behind the terminal strip; the citizen-loop industrializes it) + `feedback_verify-before-write-not-parallel`. **NEXT — engine.31 is the FIRST BUILD** (before engine.30; engine.32 audits T1/T2/T4 are read-only, run parallel). It's execution-ready — full T1-T6 + routing-audit data + sequencing + acceptance already in the plan; **no scoping gap**. Execute in a fresh **engine-sheet** session (code edits to `compressLifeHistory.js` + generators + tag map = clasp territory) with `docs/plans/2026-05-31-compression-tag-triage.md` as the spec. Full thread: `docs/plans/2026-05-31-citizen-autonomous-poc.md` (PoC + casting + loop) + `-autonomy-roadmap.md` (research.12 archetypes) + engine.30/.31/.32 plans.
+
+---
 
 **STATUS (S249 [research/build] — soft close, chaining):** 2 commits, pushed clean (in Shipped block). **`c202288` governance.20** — journal-write now media-only: research-build + civic join engine-sheet skipping Step 1 (`sessionEndMechanical.js` `PERSONA_TERMINALS`→`JOURNAL_TERMINALS={media}`; SKILL v2.2; 3 TERMINAL.md); brings mechanics into line with CLAUDE.md's already-stated "operational = no journal"; verified empirically across all 4 terminals (media 6-step keeps journal, others identical 4-step). **`020a295` engine.20b** — `## Phase-Advance Discipline` section added to all 5 owning agents' RULES.md (stab-fund/oari/health-center/transit-hub/baylight): when to advance the rolling `ImplementationPhase` (deliverable lands + effects positive) + the verified emit shape (top-level `trackerOwner:"INIT-XXX"` + `trackerUpdates` writeback fields) + hold-with-reason path. Live-code-verified the voice schema (lowercase `trackerUpdates.initiative`, not the subagent's PascalCase). Unblocked **engine.20c**, filed **engine.20e** (stale `applyTrackerUpdates` VALID_OWNERS audit vs the trackerOwner contract — cosmetic non-blocking warning, engine-sheet follow-up). **governance.25 already closed/archived S248** (was a stale number on the list). Detail: commit bodies + ROLLOUT `governance.20` / `engine.20b/c/e`.
 
@@ -20,18 +24,15 @@ Last Updated: 2026-05-31 | Engine: v3.3 | Cycle: 95 | Session: 249 | Day: 161 | 
 
 *Mechanical artifact — git-log output auto-generated by `scripts/writeShippedBlock.js` at session-end. Not editorial. **`ROLLOUT_PLAN.md` is canonical for what these commits accomplished.***
 
-- `a3c1a8e` S249 [engine/sheet] pipeline.12 Task 1 won't-fix + archive base_context exclude
-- `9263070` S249 [engine/sheet] pipeline.12 Task 3 — cap interviewCandidates (bundle-size)
-- `a389286` S249 [engine/sheet] pipeline.11 — briefing versioning (Task 4)
-- `65a577d` S249 [engine/sheet] reconcile pipeline.12 + pipeline.13 rows to code reality
-- `6fcc718` S249 [engine/sheet] civic.13 — G-PREP7 approval-delta + G-PREP4 reconcile
-- `020a295` S249 engine.20b — voice-agent phase-advance discipline [research/build]
-- `b2d6b65` S249 [engine/sheet] pipeline.10 — close done-as-superseded
-- `25f397c` S249 [engine/sheet] pipeline.9 — emission-time metadata leak gate
-- `9bb7c2b` S249 [engine/sheet] pipeline.1 — gender into citizen briefs
-- `c202288` S249 governance.20 — journal-write to media-only [research/build]
-- `b82dd98` S248 close — shipped-block boundary advance [research/build]
-- `ca8c62b` S248 session-end hard close [research/build]
+- `7d37713` S249 research.13 — journal resolved (stays+reshapes) + the persona-saturation loop
+- `02e8442` S249 research.13/.12, engine.32 — life-loop casting + log-back + every-column note
+- `f06d59e` S249 engine.32 — life-event generation audit + the traits→events back-arc
+- `bc4d90f` S249 engine.30/.31 — emergent-bio (R→AT) spec + compression-tag triage
+- `81655ea` S249 research.13 — lock 8-slot memory mechanism + ledger connectivity loop (O/R/AT)
+- `c5a7799` S249 research.12/.13 — citizen-archetype taxonomy + voice/memory design refinements
+- `18a6e73` S249 research.13 — citizen-autonomous PoC (Layer 3 toe-dip) built + mechanism-validated
+- `75240a4` S249 research-build soft close — STATUS for gov.20 + engine.20b [research/build]
+- `d6b0d4f` S249 [engine/sheet] soft close — stale pipeline backlog cleared
 
 ---
 

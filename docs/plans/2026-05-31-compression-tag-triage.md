@@ -64,15 +64,54 @@ In DF terms the axes are exactly what a *core* memory shifts when it promotes. S
 > **Deploy discipline (S250, terminal rule):** this build does NOT ride the C96 clasp deploy — C96 already carries two un-smoke-tested reactivations (cityDynamics + simYear). Design + commit locally now; clasp-deploy in a clean window after C96 smoke-tests, on Mike's go.
 
 - **Phase 0 — Exhaustive writer/tag inventory + uniform-tagging (prerequisite, read-then-fix).** ✅ *Read-audit DONE S250 → [[../engine/TAG_REGISTRY]]* (the canonical tag→category map + Conduct vocab + fix list). Full universe (~50 tags) traced to source; texture-tier principle locked (slots are for events that change you, not weather); structural finding = no central registry (~14 engines mint tags independently → the registry becomes the single source both engines + compressor read). **Code remainder (gated post-C96):** fix the 3 raw-line writers (promotion / arrival / career `lifeOut`), standardize the edition tag, build the registry constant. *(Absorbs old T1 route-unmapped + T2 dead-mappings + T3 tag→category.)*
-- **Phase 1 — `MemoryState` column + the slot data model.** Add the column; define the slot structure (8 slots / 5 categories / strength / age / promotion counter / long-term + core sets); write the serializer + a *robust* round-trip parser (must survive `|`/`:` in any derived text).
+- **Phase 1 — `MemoryState` column + the slot data model.** ✅ *Designed S250 — see §Phase 1 design detail below.* 10 slots (2×5 categories), JSON encoding, the salience function (reads CareerStage/NumChildren/Age/etc.), reinforcement-gated promotion. **Code (gated post-C96):** add the column, write the JSON serializer/parser + salience function.
 - **Phase 2 — Stateful merge + strongest-keeps + decay.** Invert `compressLifeHistory_` to read-merge-write. Implement strongest-keeps per slot, the salience function (reads SL columns), decay of non-core. Pin the promotion cadence in cycles.
 - **Phase 3 — Promotion ladder + axis shift.** short-term → long-term → core; core never decays; core promotions shift the 5 axes (accretive, never recompute). R re-derived from `MemoryState`.
 - **Phase 4 — Conduct category.** Bidirectional transgression/resistance slots; severity ladder; dark `Outlaw` core (+ virtue handling); confirm bound gates momentum. *(Event GENERATION is engine.32 — here we only build the receiving category + cores.)*
 - **Phase 5 — Multi-cycle test harness + verification.** Trace 10+ cycles on sample citizens; confirm R never erases, slots stay bounded, promotion fires correctly, conduct core locks only on a pattern. Then — and only then — clasp deploy (post-C96, Mike's go).
 
+## Phase 1 design detail (S250 — slot model + salience function)
+
+### The data finding that shapes everything
+`docs/engine/CYCLE_SEPARATION.md`: **"Probability gates are low (~20% base). Most citizens get 0 events per cycle."** And the calendar: **52 cycles = 1 simYear** (`cycleOfYear = ((absoluteCycle-1) % 52)+1`; a cycle ≈ a week). Consequence: **slots mostly sit and age quietly — there's rarely a same-category event to displace them.** So promotion **cannot be survival-by-time** (in a sparse stream everything would eventually core). Promotion must require **reinforcement** — the memory has to *recur* (a second same-category, same-direction event), DF's "reliving." This makes Mike's "do too many becomes their core" mechanically *necessary*, not decorative: a one-off decays; a **pattern reinforces and promotes.** The bound + the reinforcement gate together are what keep "more bad begets bad" a slow burn.
+
+### Slot data model
+Per citizen, `MemoryState` = **5 categories × 2 slots = 10 slots** (DF's 2-per-category capacity preserved; "8" was tied to 4 categories — the *bound* is sacred, the number is tunable). Each slot:
+```
+{ tag, gist, salience, bornCycle, lastSeenCycle, reinforced, tier }   // tier: short | long | core
+```
+Plus per-citizen: the 5 trait axes (personality — shifted only by core promotions) + archetype + a derived conduct signal.
+
+### Encoding (resolves the open question)
+`MemoryState` column = **JSON** (`JSON.stringify` / `JSON.parse`). Robust round-trip — the `|`/`:` corruption risk dissolves because the machine state never touches the pipe-format. Tiny (<2KB for 10 slots; well under the 50k-char cell limit). **R-TraitProfile is derived from it** and stays the pipe-string the 6 readers consume.
+
+### Salience function (the de-siloing — reads the SL)
+`salience = base(tag) × relevance(category, citizen) × intensity × recency`
+- **base(tag)** — per-tag base weight from `TAG_REGISTRY` (milestones + Conduct high ~0.8–1.0; routine Social/Work ~0.4–0.6; texture excluded — never reaches a slot).
+- **relevance(category, citizen)** — the integration, reading confirmed SL columns:
+  - **Work** × f(`CareerStage` AH, `CareerMobility` AJ, `YearsInCareer` AI) — a promotion lands harder on a striver/high-mobility citizen.
+  - **Family** × f(`NumChildren` W, `MaritalStatus` V, `HouseholdId` U) — a birth lands harder on someone building a family.
+  - **Health** × f(Age = 2041 − `BirthYear` M, `Status` L) — a health scare scales with age + Recovering status.
+  - **Conduct** × f(severity, existing conduct-core from R) — the **dark-momentum multiplier**: a transgression resonates more with someone already dark (and `Resisted` resonates more with an integrity core). This is "good begets good / bad begets bad," made into a number.
+  - **Social** × f(social axis from R) — social citizens feel social events more.
+- **intensity** — event-carried magnitude (petty/serious/grave; normal-game vs pennant).
+- **recency** — `0.95^age` decay (existing); **core memories exempt** (never decay).
+
+### Strongest-keeps + reinforcement + promotion
+- **Route** the event to its category via `TAG_REGISTRY` (texture/route-by-content handled per registry).
+- **Reinforce** if it matches an existing slot's tag/direction → bump salience, `reinforced++`, update `lastSeenCycle`.
+- **Displace** if the category's 2 slots are full and the new salience beats the weakest → replace; else discard.
+- **Promote (reinforcement-gated, not time-gated):**
+  - short → long: `salience ≥ θ_long` **and** `reinforced ≥ 2` (it recurred).
+  - long → core: `reinforced ≥ 3–4` sustained across **≥ ~52 cycles (a simYear)**, with a per-eligible-run stochastic gate (DF's 1-in-3, via `ctx.rng` — deterministic).
+- **Core is permanent** (no decay) and **shifts the 5 axes** on promotion (dark core → raises `volatile` + sets a darkness signal → `Outlaw` eligibility; virtue core → deepens `grounded`/Caretaker). Axes are **accreted by core promotions, never recomputed.**
+
+### R derivation (format contract held)
+After merge+promotion, re-derive R's readable string from `MemoryState`: `Archetype:` (from axes + any core) | `Mods:` | the 5 axes | `TopTags:` (from slots) | `Motifs:` | **`Conduct:`** (new — e.g. `dark-2` / `integrity-1`, the back-arc signal engine.32 reads) | `…|V|Hash|Updated:cN`. Keeps pipe-format + `Archetype:` → the 6 readers are untouched.
+
 ## Acceptance criteria
 1. R-TraitProfile is **never erased** — a multi-cycle trace shows merge, not rebuild; core memories persist across runs.
-2. Memory is **bounded** — never more than 8 slots; same-group memories collapse to the strongest.
+2. Memory is **bounded** — never more than 10 slots (2 per category); same-group memories collapse to the strongest.
 3. Every emitted O tag routes to exactly one of the 5 categories; zero events fall to Untagged; all writers emit uniform tags.
 4. Promotion ladder demonstrably fires (short→long→core) on sustained memories; core shifts axes; one-off events don't.
 5. Conduct category accretes both poles; a sustained transgression pattern locks a dark core; a single petty act does not.
@@ -80,12 +119,13 @@ In DF terms the axes are exactly what a *core* memory shifts when it promotes. S
 7. `MemoryState` round-trips robustly (no corruption from `|`/`:` in derived text).
 8. R exposes a readable conduct-core signal engine.32 can consume (the back-arc seam).
 
-## Open design questions (resolve in-phase, don't block planning)
-- **Promotion cadence** — concrete cycle counts for short→long→core vs the 5-cycle compression. (Phase 2)
-- **Virtue archetype symmetry** — one dark `Outlaw`, or a matched virtuous endpoint too? (Phase 4 — Mike's call)
-- **`MemoryState` encoding** — compact structured string vs JSON-in-cell vs delimited sub-format robust to event text. (Phase 1)
-- **Slot distribution** — 8 slots across 5 categories: even (not divisible) or weighted (e.g. Conduct gets fewer, high-salience)? (Phase 1)
+## Open design questions
+- ✅ **`MemoryState` encoding** — RESOLVED S250: JSON-in-cell (robust round-trip; R derived from it stays pipe-format). See Phase 1 design.
+- ✅ **Slot distribution** — RESOLVED S250: 2 per category = 10 slots (the bound is the principle; number tunable). See Phase 1 design.
+- ✅ **Promotion cadence** — RESOLVED S250: reinforcement-gated, not time-gated (sparse-stream finding); core needs `reinforced ≥ 3–4` sustained ≥ ~52 cycles (1 simYear) + 1-in-3 stochastic gate. Thresholds `θ_long` / exact counts tuned empirically in Phase 5. See Phase 1 design.
+- **Virtue archetype symmetry** — one dark `Outlaw`, or a matched virtuous endpoint too? (Phase 4 — Mike's call; current lean: one `Outlaw`, virtue deepens existing wholesome archetypes.)
 
 ## Changelog
+- 2026-06-01 (S250, engine-sheet) — **Phase 1 designed** (slot model + salience function). Key driver: the sparse-stream finding (~20% gates, most citizens 0 events/cycle, 52 cycles/simYear) → promotion is **reinforcement-gated, not time-gated**, making "do too many → core" mechanically necessary. Resolved: JSON encoding, 10 slots (2×5), salience formula reading confirmed SL columns (CareerStage/CareerMobility/NumChildren/MaritalStatus/Age/Status), dark-momentum multiplier. Phase 0 read-audit shipped (`42089f6`, `TAG_REGISTRY.md`). No code yet — design only; deploy gated post-C96.
 - 2026-06-01 (S250, engine-sheet) — **Full redesign from "Compression-tag triage" to "Citizen bounded-memory engine."** Mike-direct design session established: never-erase R (stateful accretion), DF 8-slot bounded memory as the real model (not tag-routing), 5th Conduct category for crime (bidirectional, dark core, no-one-safe), R-feeds-outcome moral momentum gated by the bound, new `MemoryState` column with R as derived face. Grounded in a S250 consumer-map audit (R lightly read → reshapeable; AT empty; crime city-level-only) + an independent re-derivation of the emitted-tag universe. Old T1–T6 absorbed into Phase 0. Deploy gated post-C96 per the S250 terminal rollout-attribution rule. **No code yet — model + plan only.**
 - 2026-05-31 (S249, research-build) — Original tag-triage version (T1–T6). Built then fully reverted; superseded by the S250 redesign above. (History retained in git + claude-mem 26421/26469/26493/26543.)

@@ -46,10 +46,13 @@ pointers:
 - **Hazard:** flattens richer phase strings (restored in Phase 2). Re-drifts next cycle unless Phase 3 lands (this is a patch).
 - **Status:** [x] DONE S251 — Mike D1 ratified. INIT-005 `design-development-active`→`design-phase` (0→0.2), INIT-006 `active-construction-phase-2-planning`→`construction-planning` (0→0.3). Baseline `output/initiative_tracker_baseline_pre_c96.json` (pre-change intensities, both were 0). Guard-checked live phase before write; verified by re-read. **Deferred (not needed for C96 ripple):** NextActionCycle bump (needs canon values; field not read by applyInitiativeImplementationEffects) + dead empty INIT-004 row (already blank, no-op). **C96 verify:** INIT-005/006 should appear with non-zero intensity in `applyInitiativeImplementationEffects` vs the baseline.
 
-### Phase 1 — the canonical contract doc — research-build / civic
+### Phase 1 — the canonical contract doc (the process MD) — research-build / civic
 - **Goal:** the single source of truth a writer reads instead of inventing.
-- **Steps:** Author the contract: (a) full 28-col schema with field semantics; (b) the authoritative `ImplementationPhase` vocabulary reconciled from `PHASE_INTENSITY` + the richer industry phases the agents legitimately use, with an intensity for each; (c) lifecycle/transition rules (which phase follows which, per initiative type); (d) how-to-add-an-initiative. Cross-link from civic.md, city-hall SKILL, the 5 project-agent RULES, and supersede the stale schema in INITIATIVE_TRACKER_VOTER_LOGIC.
-- **Status:** [ ] not started
+- **Deliverables (explicit named outputs):**
+  - **D-1.1 — `docs/mara-vance/INITIATIVE_TRACKER_CONTRACT.md` (the process MD) — NEW.** The authority. Contains: (a) full **28-col schema** with field semantics (supersedes the stale 17-col schema in [[../mara-vance/INITIATIVE_TRACKER_VOTER_LOGIC]], which back-links here); (b) the authoritative **`ImplementationPhase` vocabulary** + intensity per phase (reconciled from engine `PHASE_INTENSITY` + the richer industry phases agents legitimately use); (c) **lifecycle / transition rules** (which phase follows which, per initiative type); (d) the **how-to-add-an-initiative procedure** (required fields, ID assignment, default phase/status, domain/neighborhood tagging). Registered in index.md + parent back-links (no-isolated-MDs). *(Doc home open-question resolved here: new dedicated doc, not an extension of voter-logic.)*
+  - **D-1.2 — city-hall SKILL read-pointer.** `.claude/skills/city-hall/SKILL.md` tracker-write step gains an explicit pointer: "phase values + lifecycle + add-procedure live in `INITIATIVE_TRACKER_CONTRACT.md` — read it, do not invent." (Read-pointer only here; the emit/enforce mechanism is Phase 3.)
+  - **D-1.3 — back-links from civic.md + the 5 project-agent RULES** so every writer surface routes to the same authority.
+- **Status:** [ ] not started — **research-build pickup** (doc-only, no clasp, not C96-gated)
 
 ### Phase 2 — engine drift-tolerance (code, clasp, POST-C96) — engine-sheet
 - **Goal:** the engine honors the canonical vocabulary instead of flattening it; restores the canon Phase 0 had to drop.
@@ -58,7 +61,10 @@ pointers:
 
 ### Phase 3 — writer-side normalization + enforcement — research-build (RULES/SKILL) + engine-sheet (scripts)
 - **Goal:** agents stop drifting at the source.
-- **Steps:** assembleDecisions/applyTrackerUpdates canonicalize phase to the vocabulary on write; agent RULES + city-hall SKILL reference the contract; restore a validation gate (pointed at the canonical vocab, not the hardcoded enum S230 removed).
+- **Deliverables (explicit named outputs):**
+  - **D-3.1 — city-hall SKILL enforcement step.** Beyond the Phase-1 read-pointer: the tracker-write step instructs agents to emit a contract-valid phase, and what to do when their real-world phase isn't in the vocabulary (propose adding it to the contract — don't free-form). This is the behavior change that ends the drift.
+  - **D-3.2 — agent RULES phase-emission constraint.** The 5 project-agent RULES gain a §Phase constraint pointing at the contract vocabulary (sibling to the ES-5 trackerOwner §Pre-Write Constraint pattern from [[2026-05-11-civic-tracker-collision-schema]]).
+  - **D-3.3 — writer normalization + validation gate (engine-sheet).** assembleDecisions/applyTrackerUpdates canonicalize phase to the vocabulary on write; restore a validation gate pointed at the **contract doc's list** (NOT the hardcoded enum S230 removed — the gate validates against D-1.1, which is maintainable).
 - **Status:** [ ] blocked on Phase 1
 
 ### Phase 4 — "agent can add an initiative" capability — research-build / civic

@@ -1,0 +1,137 @@
+#!/usr/bin/env node
+// docLoopStatus.js — Surface the doc-loop state. DETECTOR ONLY — it surfaces,
+// the session decides (detector/framer split; same discipline that retired
+// rolloutTriage.js, S235). No priority-ranking, no auto-firing watch triggers,
+// no writes.
+//
+// Per ROLLOUT governance.28 (S250). Enabled by governance.27's uniform fields
+// (state tags S204 + research verdict enum) — this is the script the structure
+// was built to make possible.
+//
+// Three surfacings over the now-uniform fields:
+//   1. archive  — `done-pending-archive` rows eligible to move to ROLLOUT_ARCHIVE
+//   2. next     — `ready` rows, grouped by terminal ("pickable now, by whom")
+//   3. watch    — `watch`-verdict research files + their triggers (the Watch List)
+//
+// Usage:
+//   node scripts/docLoopStatus.js            # full report (all three)
+//   node scripts/docLoopStatus.js --archive  # sweep candidates only
+//   node scripts/docLoopStatus.js --next     # ready-by-terminal only
+//   node scripts/docLoopStatus.js --watch    # watch-verdict research only
+//   node scripts/docLoopStatus.js --json     # machine-readable, all three
+//
+// Always exits 0 — it's a surfacing report, not a gate.
+
+'use strict';
+
+const fs = require('fs');
+const path = require('path');
+
+const ROOT = path.join(__dirname, '..');
+const ROLLOUT = path.join(ROOT, 'docs', 'engine', 'ROLLOUT_PLAN.md');
+const RESEARCH_DIR = path.join(ROOT, 'docs', 'research');
+const RESEARCH_SKIP = new Set(['TEMPLATE.md', 'index.md']);
+
+const STATES = new Set([
+  'ready', 'in-progress', 'done-pending-archive', 'blocked', 'needs-info', 'wontfix', 'parked',
+]);
+const VERDICTS = new Set(['adopt', 'watch', 'take-nothing']);
+// A work row leads with a `group.number` id cell, e.g. governance.28, engine.31, civic.10b.
+const ROW_ID = /^\|\s*([a-z][a-z-]*\.\d+[a-z]?)\s*\|/;
+
+// --- ROLLOUT parse -------------------------------------------------------
+// Rows are markdown tables: | id | desc | state | terminal | pointer |
+// We locate the STATE cell by controlled-vocab value (robust to pipes earlier
+// in the desc), then terminal = next cell, pointer = last non-empty cell.
+function parseRollout() {
+  const rows = [];
+  const lines = fs.readFileSync(ROLLOUT, 'utf8').split('\n');
+  for (const line of lines) {
+    const idMatch = line.match(ROW_ID);
+    if (!idMatch) continue;
+    const cells = line.split('|').map(c => c.trim());
+    const stateIdx = cells.findIndex(c => STATES.has(c));
+    if (stateIdx === -1) continue;
+    const id = idMatch[1];
+    const state = cells[stateIdx];
+    const terminal = cells[stateIdx + 1] || '(unspecified)';
+    // Pointer = last cell, but only trust it when it's pointer-shaped. Some
+    // descriptions contain literal `|`, which splits a fragment into the tail
+    // cell. The id is the reliable lookup key; the pointer is decoration.
+    const nonEmpty = cells.filter(Boolean);
+    const last = nonEmpty[nonEmpty.length - 1] || '';
+    const isPtr = /^(\[\[|source:|http|enabled by|→ FOLDED|absorbs)/i.test(last);
+    // Truncate for scannability — the id is the lookup key, the pointer is a hint.
+    const pointer = isPtr ? (last.length > 90 ? last.slice(0, 90) + ' …' : last) : '';
+    rows.push({ id, state, terminal, pointer });
+  }
+  return rows;
+}
+
+// --- research verdict parse ---------------------------------------------
+function parseResearch() {
+  const out = [];
+  if (!fs.existsSync(RESEARCH_DIR)) return out;
+  for (const f of fs.readdirSync(RESEARCH_DIR)) {
+    if (!f.endsWith('.md') || RESEARCH_SKIP.has(f)) continue;
+    const content = fs.readFileSync(path.join(RESEARCH_DIR, f), 'utf8');
+    const vMatch = content.match(/\*\*Verdict:\*\*\s*`?([a-z-]+)`?/i);
+    if (!vMatch) continue;
+    const verdict = vMatch[1].toLowerCase();
+    if (!VERDICTS.has(verdict)) continue;
+    // Grab the Verdict paragraph (verdict line through next blank line) as the trigger/why.
+    const para = content.slice(content.indexOf(vMatch[0]));
+    const trigger = para.split(/\n\s*\n/)[0].replace(/\s+/g, ' ').trim();
+    out.push({ file: f, verdict, trigger });
+  }
+  return out;
+}
+
+// --- render --------------------------------------------------------------
+function buildReport() {
+  const rollout = parseRollout();
+  return {
+    archive: rollout.filter(r => r.state === 'done-pending-archive'),
+    next: rollout.filter(r => r.state === 'ready'),
+    watch: parseResearch().filter(r => r.verdict === 'watch'),
+  };
+}
+
+function printSection(report, which) {
+  if (which === 'archive') {
+    console.log(`\n## Archive sweep candidates (${report.archive.length})  —  done-pending-archive → ROLLOUT_ARCHIVE`);
+    if (!report.archive.length) console.log('  (none)');
+    for (const r of report.archive) console.log(`  - ${r.id}  (${r.terminal})  ${r.pointer}`);
+  }
+  if (which === 'next') {
+    console.log(`\n## Next steps — ready rows by terminal (${report.next.length})`);
+    if (!report.next.length) console.log('  (none)');
+    const byTerm = {};
+    for (const r of report.next) (byTerm[r.terminal] ||= []).push(r);
+    for (const term of Object.keys(byTerm).sort()) {
+      console.log(`  ${term}:`);
+      for (const r of byTerm[term]) console.log(`    - ${r.id}  ${r.pointer}`);
+    }
+  }
+  if (which === 'watch') {
+    console.log(`\n## Watch List — research watch-verdicts + triggers (${report.watch.length})`);
+    if (!report.watch.length) console.log('  (none)');
+    for (const r of report.watch) console.log(`  - ${r.file}\n      ${r.trigger}`);
+  }
+}
+
+function main() {
+  const args = process.argv.slice(2);
+  const report = buildReport();
+  if (args.includes('--json')) {
+    console.log(JSON.stringify(report, null, 2));
+    return;
+  }
+  const only = ['archive', 'next', 'watch'].filter(s => args.includes(`--${s}`));
+  const sections = only.length ? only : ['archive', 'next', 'watch'];
+  console.log('# Doc-loop status (detector — surfaces, does not decide)');
+  for (const s of sections) printSection(report, s);
+  console.log('');
+}
+
+main();

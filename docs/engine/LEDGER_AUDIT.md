@@ -1,31 +1,31 @@
 # Simulation_Ledger Data Integrity Audit
 
 **Created:** Session 68 (2026-02-28)
-**Last Refresh:** Session 234 (2026-05-24) — S229 canon.3 T9 backfill captured (POP-00958..00973 + 6 squatter realignments); new pending-status + lowercase-active drift surfaced
+**Last Refresh:** Session 250 (2026-06-01) — **headline counts refreshed real-time via `auditSimulationLedger.js`:** 903 rows (+45 vs S234 = S243 engine.5 Phase 1 youth seed POP-00974..01018, all T4), Status lowercase-'active' normalized. Structural rows (non-canon neighborhoods / age sanity / RoleType sentinel) carry from the S234 baseline below — not re-verified S250. *Prior: S234 — S229 canon.3 T9 backfill (POP-00958..00973 + 6 squatter realignments) + pending-status + lowercase-active drift.*
 **Priority:** CRITICAL — All downstream ledgers depend on this data being correct
 **Rule:** Age = 2041 - BirthYear. Always. The simulation year is 2041.
 
 This is the single tracking document for the Simulation_Ledger overhaul. All audit progress, decisions, and remaining work live here. Other docs reference this file — they don't duplicate it.
 
-> **Document timeline.** S68 baseline (this doc) → S94 corruption recovery (`LEDGER_REPAIR.md`) → S99 schema bump + civic-officials cleanup (`LEDGER_REPAIR.md` post-recovery section) → S181 verification + drift snapshot → S199 refresh (S184 +150 female-balance ingest + S185 trim + post-S184 drift) → **S234 refresh (this section, below) — captures S232 canon.3 T9 backfill + new pending-Status drift + lowercase 'active' regression + +2 non-canon-neighborhood drift**. Read top-down for current state; the historical S199 / S181 / S72 / S69 / S68 sections below are archive.
+> **Document timeline.** S68 baseline (this doc) → S94 corruption recovery (`LEDGER_REPAIR.md`) → S99 schema bump + civic-officials cleanup (`LEDGER_REPAIR.md` post-recovery section) → S181 verification + drift snapshot → S199 refresh (S184 +150 female-balance ingest + S185 trim + post-S184 drift) → S234 refresh — captures S232 canon.3 T9 backfill + new pending-Status drift + lowercase 'active' regression + +2 non-canon-neighborhood drift → **S250 headline refresh (this section, below) — 903 rows (+45 S243 youth seed), lowercase-'active' normalized; structural rows carry from S234**. Read top-down for current state; the historical S199 / S181 / S72 / S69 / S68 sections below are archive.
 
 ---
 
-## Current State — S234 refresh (2026-05-24)
+## Current State — S250 headline refresh (2026-06-01) over S234 structural baseline
 
-**Verifier:** `scripts/auditSimulationLedger.js` (run from engine-sheet to refresh).
+**Verifier:** `scripts/auditSimulationLedger.js` (run from engine-sheet to refresh). *Headline counts (rows/extant/POPID/tier/status) re-verified S250; structural rows carry from S234.*
 
 ### Headline numbers
 
-| Metric | Value | S199 → S234 delta | Note |
+| Metric | Value (S250) | Latest delta | Note |
 |--------|-------|-------------------|------|
 | Schema | 47 cols A–AU | unchanged | Stable since S181 |
-| Total rows | 858 | +22 (was 836) | S232 canon.3 T9 backfill: 16 appends POP-00958..00973 (14 from Generic_Citizens + 2 from E82/E86 explicit canon markers) + 6 squatter realignments (POP-00952/00953 + POP-00954..00957) |
-| Extant citizens | 858 | +22 (was 836) | All net-new rows are extant |
-| POPID range | POP-00001 → POP-00973 | new max +22 (was → POP-00951) | |
-| POPID gaps | 115 | unchanged | Same gap pattern persists |
-| Tier distribution | 21 T1 / 64 T2 / 210 T3 / 563 T4 | T4 +22 (was 541); T1/T2/T3 unchanged | S232 backfill all T4 ENGINE |
-| Status enum | 826 Active + 22 pending + 9 Retired + 1 lowercase 'active' | **NEW DRIFT** | Pending = canon.3 T9 backfill writer (scripts/canon3_backfill_t9.js + canon3_followup_squatters.js) — needs route decision; 1 lowercase 'active' is new single-row regression since S201 normalization |
+| Total rows | 903 | +45 vs S234 (was 858) | S243 engine.5 Phase 1 youth seed POP-00974..01018 (45 appends, all T4 student). Prior S232 canon.3 T9 backfill +22 (POP-00958..00973 + 6 squatter realignments) |
+| Extant citizens | 903 | +45 vs S234 (was 858) | All net-new rows are extant |
+| POPID range | POP-00001 → POP-01018 | new max +45 vs S234 (was → POP-00973) | |
+| POPID gaps | 115 | unchanged (S250 re-verified) | Same gap pattern persists |
+| Tier distribution | 21 T1 / 64 T2 / 210 T3 / 608 T4 | T4 +45 vs S234 (was 563); T1/T2/T3 unchanged | S243 youth seed all T4 ENGINE |
+| Status enum | 872 Active + 22 pending + 9 Retired | lowercase 'active' RESOLVED | S234's single lowercase-'active' regression has normalized to Active. Pending (22) persists = canon.3 T9 backfill writer — still needs route decision |
 | Age sanity (2041 anchor) | 0 out-of-bounds | unchanged | All BirthYear values yield ages 0–110 ✓ |
 | RoleType="Citizen" sentinel | **0 citizens** | unchanged | Still 0 — Path B demographic-voice fallback (ENGINE_REPAIR Row 17) holding |
 | Non-canon-12 neighborhoods | **221 citizens / 8 variants** | +2 / unchanged variants | S232 backfill added 1 Uptown + 1 Laurel; per-variant breakdown below |

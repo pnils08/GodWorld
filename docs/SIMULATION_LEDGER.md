@@ -1,7 +1,7 @@
 # Simulation_Ledger — Citizen Architecture Guide
 
 **Tab:** `Simulation_Ledger` on GodWorld spreadsheet
-**Simulation_Ledger rows:** 858 (S234 verify; +22 from S232 canon.3 T9 backfill; max POPID POP-00973) | **Columns:** 47 (A–AU) | **Sim Year:** 2041
+**Simulation_Ledger rows:** 903 (S250 verify via `auditSimulationLedger.js`; +45 from S243 engine.5 Phase 1 youth seed POP-00974..01018; max POPID POP-01018, 115 gaps) | **Columns:** 47 (A–AU) | **Sim Year:** 2041
 **Age rule:** Age = 2041 - BirthYear. Always.
 
 This is the single source of truth for every simulated person in the main ledger. Other ledgers (Generic_Citizens, Cultural_Ledger, Business_Ledger, Faith_Organizations, Chicago_Citizens) hold additional populations — total world population is **1,200+** across all ledgers combined.
@@ -10,7 +10,7 @@ This is the single source of truth for every simulated person in the main ledger
 
 **Authoritative current-state pointer:** `docs/engine/LEDGER_AUDIT.md` — refreshed via `scripts/auditSimulationLedger.js` (engine-sheet's lane). Last refresh S234 (captures S232 canon.3 T9 backfill +22 rows + NEW pending-Status drift + lowercase 'active' regression). Headline counts in this doc are approximate; LEDGER_AUDIT is ground truth for tier/status/POPID-gap distributions.
 
-Last audited: Session 234 (2026-05-24, /doc-audit data group) — row count refreshed (858; S232 canon.3 T9 backfill added POP-00958..00973 + 6 squatter realignments). Tier breakdown from S234 audit script: T1 21 / T2 64 / T3 210 / T4 563. Status breakdown: 826 Active + 22 pending + 9 Retired + 1 lowercase 'active' (last is new drift since S201 normalization).
+Last audited: Session 250 (2026-06-01, real-time refresh via `auditSimulationLedger.js`) — total 903. Tier: T1 21 / T2 64 / T3 210 / T4 608 (T4 +45 vs S234 = the S243 youth seed). Status: 872 Active + 22 pending + 9 Retired (the S234 lowercase 'active' sentinel has since normalized to Active). Prior: S234 (858; S232 canon.3 T9 backfill POP-00958..00973 + 6 squatter realignments).
 
 ---
 

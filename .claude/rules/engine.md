@@ -23,7 +23,9 @@ These are your **memory** of the engine and the ledger. Reach for them reflexive
 | Known defects / open repair rows | `docs/engine/ENGINE_REPAIR.md` *(already Always-Load)* |
 | What connects to what (dependency trace) | `graphify query "..."` (persistent graph) |
 
-**Load on demand, not at boot** — `ENGINE_STUB_MAP` is ~86KB; auto-loading it every session is pure boot-burn (the dominant token lever — auto-memory `feedback_token-burn-hierarchy`). The point is reflexive *use*, not always-resident. These docs are only trustworthy as memory if kept fresh — the session-close audit table covers that.
+**Load on demand, not at boot** — `ENGINE_STUB_MAP` is ~86KB; auto-loading it every session is pure boot-burn (the dominant token lever — auto-memory `feedback_token-burn-hierarchy`). The point is reflexive *use*, not always-resident.
+
+**Keep them true in real time — that IS the maintenance mechanism, not the session-close audit (S250, Mike-direct).** A truth doc you reconcile *later* is a lying memory *now*, while you're coding against it. So: change engine structure → regenerate STUB_MAP (`/stub-engine`) **in the same commit** as the code; change rows/columns/schema → update SIMULATION_LEDGER + SCHEMA_HEADERS **in the same commit**. The doc is the working surface you and the next session code against. Proof of the failure mode: SIMULATION_LEDGER still reads "858 rows, last audited S234" vs live **903** — it drifted +45 across the S243 youth seed because the update waited for an audit instead of riding the change commit. The session-close audit table is a **backstop** for what slips through, NOT where maintenance happens. This is how memory hands off cleanly in a stripped-persona terminal: the truth docs ARE the handoff.
 
 ## Measure twice, cut once + cascading-effects review (S199 — confirmed-effective)
 

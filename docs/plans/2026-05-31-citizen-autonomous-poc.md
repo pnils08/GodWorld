@@ -80,7 +80,41 @@ The smoke held on free-text Bio, but two findings reshape the wake-context for t
 - **Voice = the TraitProfile, not the Bio.** What gives a citizen a stable voice is the structured `TraitProfile` column — `{Archetype, Tone, Motifs, Traits}` (~342 of ~685 rows carry one; per [[../RESEARCH]] TraitProfile design + research4_1 numeric-trait note). The PoC fed Bio + LifeHistory (free text) and skipped TraitProfile — fine for Tier-1 notables who *have* a rich bio, but **Tier-2/3 citizens (the retargeted audience) mostly don't have a bio; they have a TraitProfile.** So TraitProfile is the *scalable* voice anchor → add it to wake-piece #1.
 - **The "8 details" = bounded MEMORY, not identity.** Mike's recalled "8 details a sim bot can carry" traces to **Dwarf Fortress's 8 short-term memory slots, grouped Social/Work/Family/Health** (`docs/research4_1.md:196`) — keep the strongest per slot, promote to long-term on a schedule, prevents *emotional runaway*. It is **not** a cap on identity facts. This is the **drift-control mechanism for the untested Q1 (horizon character-hold)**, and it was already earmarked for our citizen sentiment/media-impact system (`research4_1.md:209`). It replaces wake-piece #5's naive "last 3 raw entries."
 - **Net wake-context shape:** voice = TraitProfile (+ role + neighborhood); memory = 8 bounded slots (the citizen's event-memory). Two different fields; don't conflate them.
-- **Memory-slot mechanism (where it lives + how maintained):** OPEN design as of S249 — leaning Layer-1/engine-maintained (deterministic, all citizens, distilled from the `LifeHistory_Log` event stream; promotes to TraitProfile shifts on a schedule), with the Layer-3 agent *reading* it, not owning it. Spec to be recorded once settled. Substrate confirmed: `LifeHistory_Log` is the live append-only per-citizen event stream (written by Phase 4/5 engines); no bounded-memory structure exists yet.
+### Memory-slot mechanism — SETTLED (S249, Mike-blessed)
+
+The 8 bounded slots are **engine-maintained Layer-1 state**, not Layer-3 / agent state. Each cycle, a deterministic engine step (no LLM — runs for every citizen, ~1,366 of them):
+
+1. Reads the citizen's **new `LifeHistory_Log` events this cycle** (the raw, unbounded event stream the Phase 4/5 engines already write).
+2. Buckets each by category — **Social / Work / Family / Health**.
+3. Keeps the **strongest per slot** — a stronger emotional weight overrides a weaker one ("50 corpses is one slot, not 50"); caps at **8**.
+4. **Decays** older slots over a few cycles (asymmetric: positive fades fast, negative lingers — already a project principle).
+5. On a schedule, **promotes** the strongest / most-relived slot into a permanent **TraitProfile** shift — *memory feeds voice*: the citizen's character evolves from what happens to it.
+
+**Properties:** cheap (no model calls), **universal** (all citizens, whether or not ever run as an agent), persistent. A life-loop agent (Layer 3) **reads** its slots at wake — it does not compute or own them. This is also the **drift-control answer to Q1** (bounded memory is what prevents the long-horizon runaway the smoke couldn't test).
+
+**Two memory streams, distinct — do not conflate:** this **event-memory** (what happened *to* the citizen; engine-maintained; all citizens) ≠ the agent's **narration-continuity** (what it *said* it did last cycle; run-scoped; the PoC's `.state.json` scratch file).
+
+**Ledger home:** the slots live in the live ledger — leaning the **TraitProfile column (R)** as the running compression of the **LifeHistory event stream (O)**, with the earned story accreting into **CitizenBio (AT)**. The full column-level loop (O → R → AT, and the "deploy any citizen, instantly itself" essence-reload) is worked in **§Ledger connectivity loop (S249)** below.
+
+## Ledger connectivity loop (S249 — Mike-direct review, verified against live Simulation_Ledger)
+
+**Mike's insight: the loop already half-exists in the ledger schema.** Three columns ARE the three stages of the citizen-essence loop. Column letters confirmed against the live sheet: **O = LifeHistory (col 15), R = TraitProfile (col 18), AT = CitizenBio (col 46)** — all three exactly as Mike called them. Live population of 903 rows: **O 660 / R 410 / AT 32.**
+
+**The loop:**
+- **O / LifeHistory = what happens** — the raw, append-only event stream (the input).
+- **R / TraitProfile = the working essence** — the live *compression* of O (the bounded memory + the voice).
+- **AT / CitizenBio = the earned self** — the narrative story that *emerges* from R over time.
+- **Deploy = load R + AT** → a citizen instantly steps back into being: R supplies voice + memory, AT supplies the story of who they've become; O is the audit trail. This is the "any citizen drawn up and deployed instantly steps back into their essence" connectivity.
+
+**Current state per stage (verified from real values):**
+
+| Stage | Today | Gap to the loop |
+|---|---|---|
+| **O LifeHistory** | Mixed. Clean for some (Hal Richmond: timestamped, categorized — `2026-03-14 — [Personal] …`, `[Media] …` — this is the right shape). Bio-contaminated for others (Amara, Lucia: seed-bio prose pasted in, duplicated into AT) — Mike's "some have bios in here accidentally," confirmed. | **Clean O to events-only;** move seeded-bio prose out (it belongs in AT/a seed field, not the event stream). |
+| **R TraitProfile** | **Mike's "R = compression of O" — CONFIRMED IN CODE, live.** Built by `utilities/compressLifeHistory.js` v1.5 — a real **Phase 9 engine step** (Phase 42 §5.6, mutates `ctx.ledger`, commits at Phase 10) running **every 5 cycles per citizen**: parses O's tagged events, decay-weights them (0.95/unit, entry- or cycle-basis), maps ~70 tags → **5 trait axes** (social/reflective/driven/grounded/volatile), assigns **1 of 7 archetypes**, extracts top-5 tags + top-3 motifs → the pipe string (Amara: `Archetype:Watcher\|…\|Entries:3\|Basis:entries\|V:1.5\|Hash:..\|Updated:c93`). It also **trims O to the last 20 raw entries + a `[Compressed:]` block** — so a bounded-memory mechanism *already exists*. `Updated:c93` at c95 is normal (within the 5-cycle cadence), **not** stopped. So **R is the live compression home for the 8 slots**, exactly as Mike said. Caveat: two R formats coexist — engine-compressed (≥3 tagged events) vs hand-authored lore (Lucia has 1 untagged bio entry → compressor skips her, authored profile survives). | The 8-grouped-slot (Social/Work/Family/Health) model is a **reshape of this working compressor, not a new build**: today's bounding is top-5-tags + keep-20-raw + decay; the DF model swaps in explicit per-category slots + a discrete promote-to-trait step. **Design choice, not a gap.** Reconcile the two formats. |
+| **AT CitizenBio** | **The genuinely unbuilt third of the loop.** Only 32/903 populated, and where present it's a *copy of the seed bio* (Amara: AT == O == seed text), not earned. Hal (rich event history) has AT **empty**. Nothing distills accumulated memory into a growing narrative. | **Build R→AT:** a generator that periodically distills R (+ O) into a growing *earned* narrative — "the story that emerges." This is the real missing engine. |
+
+**Net — the loop is more built than it looked.** **O→R is LIVE:** `scripts/enrichCitizenProfiles.js` feeds published editions → O (the newsroom literally writes citizen memory — "coverage → O → R" is the Layer-2-feeds-Layer-3 connection); engine event generators also append O; `utilities/compressLifeHistory.js` compresses O → R every 5 cycles (Phase 9), and trims O. **The genuinely missing third is R→AT** — nothing turns R (+O) into a growing *earned* CitizenBio (AT 32/903, unfed). That's where the build effort goes. Plus two cleanups: **de-contaminate O** (seed-bio prose out of the event stream) and **reconcile the two R formats**. **No new column needed** — O/R/AT already are the three loop stages, the 8 slots live in R, and the compressor that maintains R already exists. Proposed work (S249 review), gated on Mike's go-ahead; engine-step work routes to engine-sheet. *(Correction: an earlier draft of this section said the compressor "ran then stopped / no builder found" — wrong. `compressLifeHistory.js` is the live Phase 9 builder; caught on reading the impl, per measure-twice.)*
 
 ## Acceptance criteria
 

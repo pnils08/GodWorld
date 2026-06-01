@@ -1,5 +1,7 @@
 # Research — What's Out There, What Helps Us
 
+> **FROZEN LEGACY LOG (S250).** This file is the early-project learning log + chronological findings (S99–S248) — Mags teaching herself the field, then session-by-session source notes. It is **frozen for append.** New deliberate research goes to per-topic files in `docs/research/` using [[research/TEMPLATE]], catalogued in [[research/index]]. Existing sections below are a historical snapshot; they migrate opportunistically (not in a sweep) if ever revisited. Why the change: this log mixed learning history, findings, and a pending-work lane in one 2200-line file where grep was the only retrieval — see `docs/plans/2026-06-01-doc-loop-consolidation.md`.
+
 **Load this at the start of a Research session.** Then load the architecture docs you need for context on what we have.
 
 ---
@@ -617,11 +619,9 @@ This is the difference between "Marcus Webb reviewed the Stabilization Fund appl
 
 ---
 
-## Ready for Rollout
+## Ready for Rollout — RETIRED (S250)
 
-Items that have enough research to become build phases. Move these to `docs/engine/ROLLOUT_PLAN.md` when ready to build.
-
-*(empty — items graduate out when they're ready)*
+This lane was pending-state living inside a research doc — the anti-pattern the S250 doc-loop consolidation kills. **Pending-state now lives only in [[engine/ROLLOUT_PLAN]]**, routed by a research file's verdict (`adopt` → a `ready` row; `watch` → the Watch List with a trigger; `take-nothing` → no row). It was empty at retirement, so nothing moved. See [[research/TEMPLATE]] §"verdict, never state".
 
 ---
 

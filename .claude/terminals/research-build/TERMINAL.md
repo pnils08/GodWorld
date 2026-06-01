@@ -89,7 +89,9 @@ Full filing-protocol design: [[../../../docs/adr/0005-rollout-plan-structure]].
 
 | File | What it covers | When to load |
 |------|---------------|--------------|
-| `docs/RESEARCH.md` | Findings log, all evaluations, sources | Any research |
+| `docs/research/TEMPLATE.md` | Research-file template (S250) — source-mining record shape + verdict-not-state + never-archives rules | Filing any new research source |
+| `docs/research/index.md` | Research sub-catalog — every per-topic research instance | Finding prior research before re-reviewing a source |
+| `docs/RESEARCH.md` | **FROZEN legacy learning log** (S99–S248) — findings + early AI-literacy. New research → per-topic files via the template | Historical reference only |
 | `docs/research4_1.md` | Engineering patterns — bounded memory, death spirals, dual-output | Architecture decisions |
 | `docs/research4_2.md` | Ryan dissertation — story sifter, Hennepin, curation | Design philosophy |
 

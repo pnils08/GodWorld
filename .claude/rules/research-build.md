@@ -78,10 +78,14 @@ When work surfaces that doesn't belong in research-build:
 
 When evaluating papers, tools, or external patterns:
 
-- Log findings in `docs/RESEARCH.md` with date, source, citation (path + section if local — never title-only, S145 token-cost rule), and actionable takeaway
+- **File each source as a per-topic research file** from [[../../../docs/research/TEMPLATE]] → `docs/research/YYYY-MM-DD-<topic>.md`, catalogued in [[../../../docs/research/index]] (the sub-catalog — NOT top-level index.md). `docs/RESEARCH.md` is the **frozen legacy log** (S250); don't append to it. A research file is a source-mining record: one source in, "what's usable for the sim and where" out, grep-able forever. Cite precisely (path + section / Drive-ID — never title-only, S145 token-cost rule).
 - Add reading-archive entry in `docs/mags-corliss/TECH_READING_ARCHIVE.md`
+- **Research/plan boundary.** Research = *what's true / what are the options.* Plan = *what we'll build / the tasks.* The plan cites `Research basis:`; the research lists `Ignited plans:`. No content duplication — research is the measure-twice substrate behind the plan via a pointer, never folded into it.
+- **Verdict, never state.** A research file carries a verdict (`adopt` / `watch` / `take-nothing`), not a rollout state. Pending-ness is ROLLOUT's job: take-nothing → no row; adopt → a `ready` row; watch → the Watch List with a trigger. A terminal knows research is pending because it reads ROLLOUT at boot, not because it opens the research file.
+- **Research never archives.** Unlike a plan (finalizes → ships its rollout pointer to ROLLOUT_ARCHIVE), a research file is a standing library — grep-able forever, accreting applications. It does not move to archive.
 - Don't propose adoption from a single source — name the adjacent tools / alternatives Mike could have picked instead, so the choice is contextualized (S145 teach-the-landscape rule)
 - Sources Mike shares deliberately are load-bearing — papers in chat = what he's wrestling with, not curiosities
+- Full design: [[../../../docs/plans/2026-06-01-doc-loop-consolidation]].
 
 ## Architectural measure-twice
 

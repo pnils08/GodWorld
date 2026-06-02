@@ -85,6 +85,7 @@ Gotchas: Ledger columns past Z (Income=col26), service account can't create shee
 - **Intake system** — DONE S137b. Three feedback channels operational. Don't re-design.
 - **Population** — ~1,366 total (Simulation_Ledger 836, Generic_Citizens 289, Cultural_Ledger 40, Business_Ledger 61, Faith_Organizations 16, Chicago_Citizens 124 — S212 live counts). Don't cite "675" or "761" — both stale.
 - **Simulation subject = Oakland.** Oakland IS the world. Outside world exists in canon (Chicago — Mike Paulson's home + the Bulls; sports opponent cities) but real-world sector/geography claims don't import. Tech ecosystem is Oakland; dynasty sports is Oakland; civic action is Oakland. Don't reason from "tech is SF / finance is NYC / auto is Detroit" — those dismiss canon as implausible. Locked S170.
+- **Operating loop — `GodWorld_My_Oakland.md` (read before any cycle run: `/city-hall` · `/sift` · `/write-edition`).** The sheets/citizens ARE the world; City Hall serves the sheets, editions serve the citizens — never the reverse. Engine signals are the story: errors = crises, spikes/drops = stories. Civic + media capture them so Mike can answer with real interventions that push compensating signals back into the ledger. Suppressing a recurring signal as noise, or narrating struggle the sheet denies, is the inversion this doc exists to stop.
 
 ## Editorial work (media terminal)
 

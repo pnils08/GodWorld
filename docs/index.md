@@ -35,6 +35,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 - **`CONTEXT.md`** — project vocabulary. Every meaningful term defined exactly once. Read at boot; cite by canonical term; update inline when grilling sessions resolve a term. Adopted S187 (ADR-0001). *(reference, vocabulary, active)*
 - **`CLAUDE.md`** — top-level harness rules and routing. Auto-loaded by Claude Code. *(reference, infrastructure, active)*
 - **`MEMORY.md`** — Mags' persistent-memory layer (separate from this catalog). Lives under `/root/.claude/projects/-root-GodWorld/memory/`.
+- **`GodWorld_My_Oakland.md`** — the operating doctrine. The sheets/citizens are the world; City Hall serves the sheets, editions serve the citizens; engine signals (errors = crises, spikes/drops = stories) are what civic + media capture so Mike can intervene with real fixes. Read before any cycle run. Pointer in CLAUDE.md §Canon facts. *(reference, doctrine, active)*
 
 ---
 

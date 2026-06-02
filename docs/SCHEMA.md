@@ -174,6 +174,8 @@ docs/
 ├── entities/              — citizen/business/faith-org wiki pages (agent-owned, new S156)
 ├── concepts/              — architectural principles in long form (agent-owned, new S156)
 ├── comparisons/           — side-by-side evaluations (agent-owned, new S156)
+├── canon/                 — fourth-wall enforcement: CANON_RULES + INSTITUTIONS (agent-owned, new S174)
+├── adr/                   — architectural decision records, numbered 0001+ (agent-owned, new S187)
 ├── archive/               — frozen, read-only history (raw, immutable)
 └── drive-files/           — binary artifacts (PDFs, source papers) (raw, immutable)
 ```
@@ -188,6 +190,8 @@ Where to put a new doc:
 - Side-by-side tool/model/approach evaluation → `comparisons/`
 - In-flight plan not yet executed → `plans/`
 - Research audit or findings report → `research/` (papers go in `research/papers/`)
+- Fourth-wall / canon-substitute reference (CANON_RULES, INSTITUTIONS) → `canon/`
+- Architectural decision record (numbered, names rejected alternatives) → `adr/`
 - Top-level vision, architecture, schema → `docs/` root
 - When in doubt → root, then move it once a folder pattern emerges
 
@@ -308,3 +312,4 @@ Not every file needs one. Reference docs that get rewritten as a whole don't. Cr
 - 2026-04-14 — Initial draft (Phase 41.1, S146). Eleven sections. Approved structure-first by Mike before write. Companion file `docs/index.md` written same session. Wired into CLAUDE.md, boot skill, and research-build TERMINAL.md.
 - 2026-04-17 — Added §11 Skills frontmatter (Phase 41.4, S156). Required fields: name, description, version, updated, tags, effort. Optional: allowed-tools, argument-hint, disable-model-invocation, related_skills, sources. Hermes `license` + nested `metadata.hermes.*` deliberately skipped. Prior §11 (Changelog) renumbered to §12.
 - 2026-04-17 — Expanded §7 Folder map with three-layer principle (Phase 41.3, S156). Raw / agent-owned / log roles labeled on every folder. Added `docs/entities/`, `docs/concepts/`, `docs/comparisons/` to the tree with README.md stubs. Placement rules updated to route new docs to the right layer.
+- 2026-06-01 — Backfilled §7 folder tree + placement rules with `docs/canon/` (new S174) and `docs/adr/` (new S187) — both load-bearing dirs were absent from the map. Caught by `/doc-audit boot` (S251).

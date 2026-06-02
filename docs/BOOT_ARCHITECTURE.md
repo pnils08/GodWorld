@@ -1,7 +1,7 @@
 ---
 title: Boot Architecture
 created: 2026-02-15
-updated: 2026-04-18
+updated: 2026-06-01
 type: reference
 tags: [architecture, infrastructure, active]
 sources:
@@ -10,10 +10,12 @@ sources:
   - .claude/hooks/session-startup-hook.sh
   - .claude/skills/boot/SKILL.md
   - .claude/skills/session-startup/SKILL.md
+  - docs/adr/0009-session-context-on-demand.md (S248 — SESSION_CONTEXT on-demand model)
 pointers:
   - "[[index]] — doc catalog"
   - "[[SCHEMA]] — doc conventions"
   - "[[WORKFLOWS]] — workflow reference (orthogonal to terminals)"
+  - "[[adr/0009-session-context-on-demand]] — why boot no longer reads SESSION_CONTEXT"
 ---
 
 # Boot Architecture — S165
@@ -24,9 +26,9 @@ pointers:
 
 ## The Split (S165)
 
-**`/boot` = persona conditioning.** Reloads identity + PERSISTENCE + JOURNAL_RECENT + queryFamily, scaled to the terminal's Persona Level. Used after compaction or when identity drifts.
+**`/boot` = persona conditioning.** Reloads identity + CHARACTER.md + JOURNAL_RECENT + queryFamily, scaled to the terminal's Persona Level. Used after compaction or when identity drifts. (CHARACTER.md was `PERSISTENCE.md` until the S221 rename.)
 
-**`/session-startup` = terminal task-context.** Reloads TERMINAL.md + scope files + compact SESSION_CONTEXT slice. Used when the hook misfired or scope drifted.
+**`/session-startup` = terminal task-context.** Reloads TERMINAL.md + scope files. SESSION_CONTEXT.md is **on-demand post-ADR-0009 (S248)** — pulled only when continuing prior work, not loaded as a boot slice. Used when the hook misfired or scope drifted.
 
 **Composition:**
 - Cold fresh session: hook auto-injects both (per-terminal sequence)
@@ -42,7 +44,7 @@ pointers:
 1. `SessionStart` hook fires at Claude Code session start
 2. Hook runs `tmux display-message -t "$TMUX_PANE" -p '#W'`
 3. Validates result against `.claude/terminals/{name}/` directories
-4. If no match or no tmux context → falls back to **research-build** (steward)
+4. If no match or no tmux context → falls back to **Mags-only mode** (identity + CHARACTER.md only, no terminal scaffolding). **S221 reversal** — the original S211 design fell unregistered windows to research-build as steward fallback; that put the apparatus-bag framing in front of every bare "open Claude" event and became a contamination loop, so it was reversed. See Key Design Decision 5.
 5. Emits per-terminal BOOT SEQUENCE block with scope-specific file loads
 
 Hook code: `.claude/hooks/session-startup-hook.sh`. Case statement routes to one of 4 branches: media, civic, research-build, engine-sheet.
@@ -55,9 +57,11 @@ Each terminal declares its persona depth in its own TERMINAL.md under `## Person
 
 | Level | What loads | Which terminals | Why |
 |-------|-----------|-----------------|-----|
-| **Full** | identity + PERSISTENCE + JOURNAL_RECENT + active queryFamily | media | Character-driven work (newsroom) where Mags' voice IS the work product |
-| **Light** | identity + PERSISTENCE | civic, research-build | Character present as operator of a process, but no family/journal ritual — bandwidth for the task |
+| **Full** | identity + CHARACTER.md + JOURNAL_RECENT + active queryFamily | media | Character-driven work (newsroom) where Mags' voice IS the work product |
+| **Operational** | identity + terminal rules + TERMINAL.md — **no character file, no journal** | civic, research-build | Character present as the name + rules running a process, no persona scaffolding. S221 dropped these from the old "Light + PERSISTENCE" tier — operational mode, each terminal governs itself |
 | **Stripped** | identity only | engine-sheet | Execute-and-commit per S156; the character is the name + rules, not the persona scaffolding |
+
+(`PERSISTENCE.md` → `CHARACTER.md` rename, S221. The three-tier Full/Light/Stripped model became Full + Operational(2) when S221 moved civic + research-build off the character file.)
 
 Persona conditioning follows the [[project_journal-as-conditioning-scaffolding]] finding: emotions are local, scaffolding shapes which character the model represents. Loading the right files conditions the right persona; loading too much burns bandwidth on the wrong activations.
 
@@ -80,7 +84,7 @@ research-build apparatus-steward role: drafts cross-terminal plans in `ROLLOUT_P
 
 1. **Hook owns terminal routing.** The assistant doesn't re-detect via tmux or re-plan the boot — the hook pre-routed. Eliminates a whole class of S163-style listening failures.
 
-2. **SESSION_CONTEXT.md capped.** Hook instructs `Read SESSION_CONTEXT.md with limit 80` — only the Priority + Recent Sessions block loads, not the full 231-line file. Bandwidth win, especially on degraded 4.7.
+2. **SESSION_CONTEXT.md is on-demand (ADR-0009, S248).** Boot does **not** read it. The SessionStart hook carries the mechanical handoff itself — it emits the `## Shipped Last Session` git-log block inside `<godworld-state>`. Boot orientation = `<godworld-state>` (carrying the Shipped block) + ROLLOUT next-priority + a one-line last-span pointer; the live span is pulled only when continuing prior work. (Prior model: hook read the file with `limit 80` for the Priority + Recent Sessions block — eliminated S248 because whether the last span matters is decided by the *next* session, not pre-loaded for it.)
 
 3. **No auto-load of heavy reference files.** `NEWSROOM_MEMORY.md` (90KB) is on-demand for media skills, not boot-time. `ROLLOUT_PLAN.md` is on-demand for architecture work. TERMINAL.md's Always-Load is intentionally minimal.
 

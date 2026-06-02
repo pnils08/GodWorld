@@ -62,9 +62,9 @@ Full discipline + standing rules + canon-critical reminders live in `.claude/rul
 
 Triage and fixes route to **research-build** (skill / RULES / docs / canon edits) or **engine-sheet** (code / sheets / scripts). Never route work back here.
 
-Gap logs surfaced during a skill run land at `output/production_log_edition_c{XX}_*_gaps.md` per [[../../../docs/plans/GAP_LOG_TEMPLATE]] — that is this terminal's filing channel. Research-build picks them up next session and triages into ROLLOUT.
+**Your gap log is your research layer — and the ONLY place issues get logged.** Gap logs surfaced during a skill run land at `output/production_log_edition_c{XX}_*_gaps.md` per [[../../../docs/plans/GAP_LOG_TEMPLATE]]. That is this terminal's filing channel: issues, friction, observations during a run go in the gap log, nowhere else. **Never blind-log on ROLLOUT** — ROLLOUT is the shared map every terminal reads at boot; raw issues there tax everyone. Research-build triages the gap log into tracked rows next session.
 
-Per-terminal scope rule: [[../../../docs/adr/0005-rollout-plan-structure]] §Part 3.
+Doctrine every terminal follows: [[../../../docs/engine/rollout-rules]] (§2 = the gap-log keystone). Per-terminal scope rule: [[../../../docs/adr/0005-rollout-plan-structure]] §Part 3.
 
 ---
 

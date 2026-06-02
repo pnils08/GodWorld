@@ -61,15 +61,16 @@ This terminal primarily files into:
 
 Plus **stewardship across all groups** — architectural decisions can land in `pipeline.*` / `engine.*` / `canon.*` / `civic.*` / `infrastructure.*` via ADR + cross-terminal handoff. Research-build owns ROLLOUT_PLAN structure itself + the canonical session-end sweep cadence.
 
-For the entry template + protocol see [[../../../docs/engine/ROLLOUT_PLAN]] §How to add work. Description content lives in the pointer doc:
+**Research-build owns [[../../../docs/engine/rollout-rules]] — the doc-work doctrine all four terminals follow.** Steward it; it is the contract for research / plan / rollout / archive, templates + save paths (§2), how to add/close (§4–§5), triage (the gap-log→rollout bridge this terminal runs), and archiving + sweep code (§6). Description content lives in the pointer doc:
 - Designed work → copy [[../../../docs/plans/TEMPLATE]] to `docs/plans/YYYY-MM-DD-<topic>.md`; register in [[../../../docs/index]] same commit per S147 inbound-link rule
-- Research evaluations → append to [[../../../docs/RESEARCH]] §section or create `docs/research/<topic>.md`
+- Research evaluations → new per-topic file from [[../../../docs/research/TEMPLATE]] at `docs/research/YYYY-MM-DD-<topic>.md` ([[../../../docs/RESEARCH]] is FROZEN legacy, S250 — don't append)
+- Gap-log triage → copy [[../../../docs/plans/GAP_TRIAGE_TEMPLATE]] (method: [[../../../docs/plans/GAP_LOG_TRIAGE_PLAYBOOK]])
 - Architectural decisions → next ADR following ADR-0001 / 0004 / 0005 shape
 - Reading log → [[../../../docs/mags-corliss/TECH_READING_ARCHIVE]] entry per source
 
-When work completes: set state `done-pending-archive`; session-end sweep moves the row to [[../../../docs/engine/ROLLOUT_ARCHIVE]] (research-build runs the canonical sweep across all groups).
+When work completes: set state `done-pending-archive`; session-end sweep moves the row to [[../../../docs/engine/ROLLOUT_ARCHIVE]] (research-build runs the canonical sweep across all groups); closed plans move to `docs/archive/plans/` (rollout-rules §6).
 
-Full filing-protocol design: [[../../../docs/adr/0005-rollout-plan-structure]].
+Rationale: [[../../../docs/adr/0005-rollout-plan-structure]]; operating rules: [[../../../docs/engine/rollout-rules]].
 
 ---
 

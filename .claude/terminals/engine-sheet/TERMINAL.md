@@ -95,14 +95,14 @@ This terminal primarily files into:
 - `engine.*` — engine code, ledger, schema, tech debt, engine-sheet repair
 - `governance.*` (occasional) — engine-spec docs, schema specs, helper-script specs
 
-For the entry template + protocol see [[../../../docs/engine/ROLLOUT_PLAN]] §How to add work. Description content lives in the pointer doc:
+**The doc-work doctrine every terminal follows is [[../../../docs/engine/rollout-rules]]** — four roles (research / plan / rollout / archive), templates + save paths (§2), how to add/close (§4–§5), archiving + sweep code (§6). Read it before adding or closing a ROLLOUT row. Description content lives in the pointer doc:
 - Designed work → copy [[../../../docs/plans/TEMPLATE]] to `docs/plans/YYYY-MM-DD-<topic>.md`
 - Engine work → existing parent spec ([[../../../docs/engine/PHASE_42_PATTERNS]], [[../../../docs/engine/ENGINE_REPAIR]] row)
 - In-flight observations → engine gap logs (`output/production_log_..._gaps.md`)
 
-When work completes: set state `done-pending-archive`; session-end sweep moves the row to [[../../../docs/engine/ROLLOUT_ARCHIVE]] (engine-sheet sweeps `engine.*` rows it owns).
+When work completes: set state `done-pending-archive`; session-end sweep moves the row to [[../../../docs/engine/ROLLOUT_ARCHIVE]] (engine-sheet sweeps `engine.*` rows it owns). Closed plans move to `docs/archive/plans/` (rollout-rules §6).
 
-Full filing-protocol design: [[../../../docs/adr/0005-rollout-plan-structure]].
+Rationale: [[../../../docs/adr/0005-rollout-plan-structure]]; operating rules: [[../../../docs/engine/rollout-rules]].
 
 ---
 

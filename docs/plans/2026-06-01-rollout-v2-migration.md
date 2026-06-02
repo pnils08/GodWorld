@@ -88,7 +88,7 @@ pointers:
 
 - [ ] D1 grouping — confirm by-terminal before Task 2.
 - [x] **RESOLVED S251** — `rollout-rules.md` is a new file (not folded into ADR-0005). It carries the operating rules; ADR-0005 keeps the rationale + alternatives. The doc points to ADR-0005 for the "why," no duplication. Mike S251 expanded its scope past "thin": it is the governing doctrine every terminal MD references — so it carries the full four-role model + filing + gap-log keystone, not just the evicted sections.
-- [ ] **NEW (Cut 2, Mike S251):** each terminal MD (research-build / engine-sheet / civic / media) must point to `rollout-rules.md` and carry role + measure-twice rules + a useful-docs list. Skill terminals (civic/media) especially need the "gap log is your research doc; don't blind-log on rollout" rule surfaced at their level. Gated — these are always-loaded-at-boot files.
+- [x] **DONE S251 (Cut 2)** — all four terminal MDs wired to [[../engine/rollout-rules]]. Each already carried role + measure-twice + useful-docs; the edits added the doctrine pointer and (research-build + engine-sheet) repointed the now-evicted `ROLLOUT_PLAN §How to add work` link. civic + media got the gap-log keystone surfaced at their level ("your gap log is your research layer — the ONLY place issues get logged; never blind-log on ROLLOUT"). research-build named as doctrine owner; also fixed its stale "append to RESEARCH.md" (frozen S250) → per-topic research file. Always-loaded-file hazard gated on Mike's explicit Cut-2 green-light.
 
 ---
 

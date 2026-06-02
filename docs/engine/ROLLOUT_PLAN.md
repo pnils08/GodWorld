@@ -5,112 +5,30 @@
 **This file is canonical for open/closed work** (S207). `SESSION_CONTEXT.md` carries narrative recency only — orientation, not work-tracking. When something closes, update its state here; don't rely on a SESSION_CONTEXT priority block to communicate handoff.
 
 **Status:** ACTIVE (building) | **Last Updated:** Session 238 (2026-05-26) — governance.17 done-pending-archive (`/save-to-profile` skill v1.0 shipped) + governance.18 in-progress (items (b) shipped-block visual demote + (c) boot-greeting sensory rewrite closed S238; item (a) journal-cadence open) + engine.27 ready (S238 wd-* auto-invalidation hook design plan written) + pipeline.25 done-pending-archive (engine-sheet half S231 + research-build half pipeline.31 archived S233)
-**Filing protocol (S212):** semantic groups + pointer-only entries — see §Group taxonomy + §How to add work + §How to close work below. Full design: [[../adr/0005-rollout-plan-structure]].
+**Filing protocol (S212):** semantic groups + pointer-only entries — see [[rollout-rules]] §3–§5 (taxonomy, add, close). Full design: [[../adr/0005-rollout-plan-structure]].
 **North star:** `docs/ARCHITECTURE_VISION.md` — Jarvis + persistent sessions. Everything we build points there.
 **Completed phase details:** [[engine/ROLLOUT_ARCHIVE]] — read on demand, not at boot.
 **Research context:** `docs/RESEARCH.md` — findings log, evaluations, sources.
 **Wiki layer:** [[SCHEMA]] (conventions) + [[index]] (catalog) — read at boot. (Phase 41.1 + 41.2, S146.)
-**Plan-file contract:** [[plans/TEMPLATE]] — every new plan copies this shape (S152). Also referenced from §How to add work below.
+**Plan-file contract:** [[plans/TEMPLATE]] — every new plan copies this shape (S152). Also referenced from [[rollout-rules]] §4.
 **Phase backlog:** [[plans/BACKLOG]] — designs catalogued but not yet scheduled. Promote to its own plan file when a session picks one up.
 **Terminal owners:** `engine-sheet` / `media` / `civic` / `research-build`. Research-build owns this doc; engine-sheet executes engine code; media runs editions; civic runs city-hall.
 
 ---
 
-## The Spine (S145 — 10-step ordered rollout)
+## Rules & conventions → [[rollout-rules]]
 
-The planned rollout, in order. Read top to bottom: this is what the project has been building, and where it's going next. Each step is a distinct deliverable; steps ahead depend on steps behind.
+**The operating doctrine for this tracker lives in [[rollout-rules]].** State labels, group taxonomy, how to add/close work, filing, archiving, and the sweep code — one doctrine, every terminal follows it. Read it before adding or closing a row.
 
-| # | Phase | Status | Session | Plan |
-|---|-------|--------|---------|------|
-| 1 | 41.1 + 41.2 wiki layer — SCHEMA.md + index.md | DONE | S146 | [[SCHEMA]], [[index]] |
-| 2 | 38.1 engine auditor detector — 8 modules + JSON output | DONE | S146 | [[engine/PHASE_38_PLAN]] |
-| 3 | 38.7 + 38.8 anomaly gate + baseline briefs | DONE | S146 | [[engine/PHASE_38_PLAN]] |
-| 4 | 39.1 capability reviewer — 9 assertions, E91 replay passes | DONE | S146 | [[engine/PHASE_39_PLAN]] |
-| 5 | 38.2 + 38.3 + 38.4 mitigator + remedy + Tribune framing | DONE | S146 | [[engine/PHASE_38_PLAN]] |
-| 6 | 39.2–39.7 + 39.3 three-lane review + Final Arbiter + two-pass hallucination | DONE | S147 | [[engine/PHASE_39_PLAN]] |
-| 7 | 39.9 + 39.8 + 39.10 tiered review + reward-hacking scans + adversarial review | DONE | S148 | [[engine/PHASE_39_PLAN]] |
-| 8 | 38.5 measurement loop (engine) + 38.6 skill shrink | DONE | S156 | [[plans/2026-04-16-phase-38-5-measurement-loop]], [[plans/2026-04-16-phase-38-6-skill-shrink]] |
-| 9 | 40.1 session-log interface + 40.6 layered injection defense | DONE | S156 | [[plans/2026-04-16-phase-40-1-session-log-interface]], [[plans/2026-04-16-phase-40-6-injection-defense]] |
-| 10 | Sandcastle + Daytona evaluation | DONE | S156 | [[engine/PHASE_33_PLAN]] §33.13 |
+**Before you log an issue here:** rollout is the clean shared map. Skill terminals (civic/media) log issues in their per-cycle production gap log (that's the research layer) — **not** as raw rollout rows. A row only appears here when work is *promoted* to tracked, and it points at the gap log rather than reproducing it. Full rule: [[rollout-rules]] §2.
 
-**Spine walked — all 10 steps closed S156.** Step 9 shipped all six Phase 40.6 Layer tasks (memoryFence, memory-write gate hook, contextScan + skill/script wiring, tool-gate permissions, Rhea injection scan + agent extension); Entry 123 pressure test all three vectors blocked. Step 10 closed via code inspection of `/tmp/sandcastle` 0.4.5 templates + live PoC round-trip — `scripts/sandcastlePoC.js` created a Daytona Tier 1 sandbox, ran `echo` and `uname` inside it, destroyed cleanly. Findings + Phase 39 fit analysis in §33.13. Off-spine work lives in the sections below.
-
-**Full analysis:** mags Supermemory doc `n5cBYS3vVN5DKrddnNp7K8` (S144 keystone framing, still load-bearing).
-
----
-
-## Convention — State labels (S204)
-
-Adapted from Pocock's `triage` skill (MIT). Every active rollout item carries one state tag inline.
-
-| State | Meaning |
-|-------|---------|
-| `ready` | Clear acceptance, picker can grab it now. |
-| `needs-info` | Gated on Mike's decision, another terminal's output, or external signal. |
-| `in-progress` | Active work claimed; partial-shipped or being chipped at. |
-| `blocked` | Depends on something not yet landed (preconditions named in the entry). |
-| `done-pending-archive` | Completed, awaiting move to ROLLOUT_ARCHIVE at next session-end sweep. |
-| `wontfix` | Decided not to do. Rare; document the reason. |
-
-Tag inline in the entry's prose alongside severity/promoted: e.g. `(promoted: C93, severity: HIGH, state: ready)`. Terminal tags `(engine-sheet)`, `(media)`, `(civic)`, `(research-build)` are orthogonal — state answers "is this pickable right now"; terminal answers "by whom."
-
-Watch List items below are tracking-only (`wontfix`-or-`needs-info` until trigger fires) and don't carry state tags. The Spine table is historical (all DONE).
-
----
-
-## Group taxonomy (S212 — see [[../adr/0005-rollout-plan-structure]])
-
-Open work is grouped by type-of-work. Each entry codes as `<group>.<n>`. Numbers within a group are identifiers, not strictly sequential — new work picks the next available number; deletions don't renumber. Cross-cutting work picks the **primary group** (don't multi-tag).
-
-| Group | Scope | Typical pointer destinations |
-|-------|-------|------------------------------|
-| **pipeline** | Edition production end-to-end (sift / write-edition / post-publish / dispatch / interview / supplemental / print / photos) | `[[../plans/...]]`, `[[../../output/production_log_..._gaps]]`, `[[../media/...]]` |
-| **engine** | Engine code, ledger, schema, tech debt, engine-sheet repair | `[[../plans/...]]`, `[[PHASE_42_PATTERNS]]`, `[[ENGINE_REPAIR]]` rows |
-| **canon** | World-fidelity layer, citizens, voices, real-name blocklists, contamination scrub | `[[../canon/CANON_RULES]]`, `[[../canon/INSTITUTIONS]]` |
-| **civic** | City-hall, voice agents, council canon, civic-process gap-logs, governance simulation | `[[../plans/...]]`, civic gap-logs, `[[../mara-vance/...]]` |
-| **infrastructure** | Supermemory, Discord, dashboard, MCP, claude-mem, services, ingest pipelines | `[[../STACK]]`, `[[../SUPERMEMORY]]`, `[[../plans/...]]` |
-| **research** | Papers, external tools, evaluations, watch-list items | `[[../RESEARCH]] §section`, `[[../mags-corliss/TECH_READING_ARCHIVE]] §S<N>` |
-| **governance** | Skills, MDs, ADRs, MEMORY rules, doc-audit, project-internal hygiene | `[[../adr/...]]`, `[[../plans/...]]`, `.claude/skills/...` |
-
-Full taxonomy + alternatives considered: [[../adr/0005-rollout-plan-structure]].
-
----
-
-## How to add work (S212 protocol)
-
-1. Identify primary group from §Group taxonomy.
-2. Pick the next available number in that group.
-3. Title ≤80 chars — clearly identifies the work.
-4. Set state per §Convention (typically `ready` for picker-grabable, `needs-info` if gated).
-5. Set terminal — **builder terminals only**: `engine-sheet` (code / sheets / scripts) or `research-build` (skill / RULES / docs / ADRs / triage). Slash-separated for cross-builder work. Never `media` or `civic` — those are generator spaces (run skills, produce artifacts, no routed work). See [[../adr/0005-rollout-plan-structure]] §Part 3.
-6. **Identify or create the pointer doc:**
-   - **Designed work** → copy [[../plans/TEMPLATE]] to `docs/plans/YYYY-MM-DD-<topic>.md`; register in [[../index]] same commit per S147 inbound-link rule.
-   - **In-flight observations** → existing gap log (`output/production_log_..._gaps.md`).
-   - **Evaluations** → append to [[../RESEARCH]] §section or create `docs/research/<topic>.md`.
-   - **Architectural decisions** → next ADR (follow ADR-0001 / 0004 / 0005 shape).
-   - **Engine work** → existing parent spec ([[PHASE_42_PATTERNS]], [[ENGINE_REPAIR]] row).
-7. Add the row to the appropriate group table in §Open Work.
-
-**Description content lives in the pointer doc, NOT the ROLLOUT row.** ROLLOUT is the index, not the encyclopedia. (S147 rule, ADR-0005 enforcement.)
-
----
-
-## How to close work (S212 protocol)
-
-1. Update the row's State field to `done-pending-archive`.
-2. Add a brief note in the row's pointer doc: what shipped, commit hash, session.
-3. At session-end, sweep all `done-pending-archive` rows to [[ROLLOUT_ARCHIVE]]:
-   - Move the row (don't delete).
-   - Archive section mirrors the ROLLOUT_PLAN group structure.
-   - Include the closing-session note inline in the archive row.
-
-Sweep cadence: every session-end. Research-build owns the sweep per terminal stewardship. Engine-sheet sweep applies to `engine.*` rows it owns; civic sweep applies to `civic.*`; media sweep applies to `pipeline.*`.
+Rationale + alternatives: [[../adr/0005-rollout-plan-structure]]. The completed S145 10-step **Spine** roadmap is archived in [[ROLLOUT_ARCHIVE]].
 
 ---
 
 ## Open Work — by group
 
-Per ADR-0005: each entry codes as `<group>.<n>`. State per §Convention. Description lives in pointer doc, NOT in the row. Heavy-skill gap logs (civic + media generator terminals) follow [[../plans/GAP_LOG_TEMPLATE]].
+Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3. Description lives in pointer doc, NOT in the row. Heavy-skill gap logs (civic + media generator terminals) follow [[../plans/GAP_LOG_TEMPLATE]].
 
 ### pipeline.* — Edition production
 
@@ -201,7 +119,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per §Convention. Descrip
 | governance.22 | Claude Code v2.1.149–v2.1.153 feature adoption — 6 candidate items from May 22–28 releases: (1) `/usage` per-category cadence note **CLOSED S241** — §End-of-Session Diagnostic in all 4 TERMINAL.md, (2) `disallowed-tools` per-skill scope audit **AUDIT DONE S242 (research-build)** — [[../plans/2026-05-28-disallowed-tools-skill-audit]]: 48-skill matrix (10 FULL / 2 LOADER / 16 WRITEOWN / 20 READONLY), mechanics verified via claude-code-guide (pattern scoping `Bash(rm *)`, `Agent` not "Task", Q4 cascade + Q5 run-while-disallowed undocumented). **Reframed AUTONOMY-GATED per Mike S242** — feature's design intent is unattended skills; GodWorld is human-in-loop today, so the matrix is durable prep and the pilot-first editing rollout waits for the unattended/scheduled-execution transition (NOT a near-term picker). No skill files edited, (3) `/reload-skills` workflow note **CLOSED S241** — §Skill Iteration in research-build + engine-sheet, (4) `MessageDisplay` hook investigation **CLOSED S241 SKIP** — display-only event, can't change model-side persona conditioning that drives G-SS1; identity.md split remains the actual lever, (5) `SessionStart` hook upgrade (`reloadSkills` + `sessionTitle` returns) **EXECUTED-PENDING-BOOT-VERIFY S242 (research-build):** hook converted to single-JSON-object output (whole-stdout-JSON required for structured fields per verified contract) — `build_boot_context()` fn + `jq`-built `{hookSpecificOutput:{additionalContext,sessionTitle,reloadSkills:true}}` + jq-missing plain-text fallback. Offline verification all-pass; live-boot ingestion gated on Mike's next fresh session (revert = git revert the S242 commit), (6) Stateful MCP reconnect **OBSERVATION OPEN S241→S244+**. Version verified current (`claude --version` → `2.1.153`); no upgrade gate. 5-of-6 resolved; **no near-term pickable work remains** — T5 awaits Mike's boot-verify, T6 observation runs to S244, T2 edit-rollout is autonomy-gated. Source: S241 conversation + GitHub release notes. Sibling to governance.21 (Gemini offload — external lever on same token-budget concern; this is the internal lever). | needs-info | research-build | [[../plans/2026-05-28-claude-code-2-1-149-153-feature-adoption]] |
 | governance.26 | SESSION_CONTEXT on-demand log redesign — flip `SESSION_CONTEXT.md` from always-loaded boot primitive to on-demand wiki doc: span unit (soft closes between hard closes), hard close snapshots to numbered `docs/session-context/S<##>.md`, boot drops the 80-line read (orientation = `<godworld-state>` + Shipped block + ROLLOUT + one-line last-span pointer), continuing session pulls the live span on demand. Solves G-SE5 (98KB) at design level; supersedes the rotate-default crude fix. Detail + 5 tasks + decisions D1–D4 in the plan. **First of a three-part log-system redesign** — ROLLOUT + JOURNAL siblings to follow (Mike S243 "work smarter"). ADR-0009 lands at Task 1 (reverses always-load premise across CLAUDE.md + 4 TERMINAL.md + hook). **RESEARCH-BUILD SLICE DONE S248** (Mike full-slice go-ahead): Task 1 ADR-0009 written + registered; Task 3 hook now emits the `## Shipped Last Session` block inside `<godworld-state>` (awk-extracted) + dropped the limit-80 SESSION_CONTEXT read from all 4 boot branches + added last-span greeting pointer (verified live on research-build + media branches: read gone, Shipped block present, pointer present, queryFamily/journal preserved on media); CLAUDE.md on-demand premise + resume-convention pull; 4 TERMINAL.md Always-Load rows → on-demand; session-startup SKILL Step 4 → conditional pull. **D1 PREMISE CORRECTION (measure-twice):** the Shipped block was NOT a boot primitive pre-S248 — hook never emitted it + governance.18(b) had moved it outside the read window; so the hook-emits-Shipped change + read-drop shipped same-commit (keystone). **ENGINE-SHEET TASKS REMAIN:** Task 2 (sessionEndMechanical hard-close snapshot → `docs/session-context/S<##>.md` + reset live to thin header), Task 5 (span-length guard + SESSION_HISTORY reconciliation), Task 6 (unified-close single-writer protocol — also absorbs governance.19 G-SE1). Until Task 2 lands, the live file keeps accumulating STATUS paragraphs — boot just stops reading them. | in-progress | research-build / engine-sheet | [[../plans/2026-05-29-session-context-on-demand]] |
 | governance.29 | `scripts/rolloutSweep.js` — mutating sweep tool, sibling to governance.28's read-only detector. Moves `done-pending-archive` rows from ROLLOUT_PLAN Open Work → ROLLOUT_ARCHIVE verbatim (table-row → archive-bullet; splits on the state token so prose-wall pipes survive). **dry-run by default**, `--apply` to execute; prints line-count deltas. Makes the recurring archive sweep (S227/S248 did it with throwaway helpers) repeatable + safe. **DONE S250** — first run executed the doc-loop v2.0 cut: 13 rows swept (7 pipeline + 1 engine + 5 governance incl. the just-closed .27/.28), ROLLOUT_PLAN 307→294, verified verbatim (pipeline.12 spot-check) + detector confirms 0 candidates remain. Open Work now holds only live rows; note-heavy *live* rows (move 2 of v2.0) still pending + cross-terminal. | done-pending-archive | research-build | `scripts/rolloutSweep.js` + S250 Archive Pass in [[ROLLOUT_ARCHIVE]] + [[../plans/2026-06-01-doc-loop-consolidation]] |
-| governance.30 | ROLLOUT v2.0 migration — retire this junk box, stand up a fresh structured rollout. Manual session: evict how-to logic → `rollout-rules.md`, move structured rows → ROLLOUT_V2 (grouped by terminal, D1), decompose each wall into its existing plan, drain + retire legacy (rename-at-retirement preserves links). Coded sweeps (docLoopStatus + rolloutSweep, S250) maintain v2 after. Root cause: ~205 sessions free-texted their own style with nothing enforcing shape; v2 = structure + code ends the drift. **This row lives on the legacy rollout during transition; it migrates to v2 itself.** | ready | research-build | [[../plans/2026-06-01-rollout-v2-migration]] |
+| governance.30 | ROLLOUT v2.0 migration — retire this junk box, stand up a fresh structured rollout. **Task 1 DONE S251** (rules evicted → [[rollout-rules]]; Spine → ARCHIVE). Next: Cut 2 terminal-MD wiring (gated), then v2 shell + wall drain + retire. | in-progress | research-build | [[../plans/2026-06-01-rollout-v2-migration]] |
 
 ---
 

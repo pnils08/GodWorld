@@ -50,7 +50,7 @@ pointers:
 - **Files:** `docs/engine/rollout-rules.md` (create); `docs/index.md` (register)
 - **Steps:** Move the legacy rollout's §The Spine + §Convention State labels + §Group taxonomy + §How to add work + §How to close work into `rollout-rules.md`. Legacy rollout keeps a 2-line header pointer to it.
 - **Verify:** legacy rollout no longer contains how-to sections; rollout-rules.md registered.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S251 — `docs/engine/rollout-rules.md` created as full operating doctrine (not just the evicted sections): four-role pipeline (research/plan/rollout/archive) + the gap-log-is-research keystone (skill terminals don't blind-log on rollout) + clean-tracker discipline + state labels + group taxonomy + how-to-add/close + filing + archiving/sweep-code. State labels, taxonomy, how-to-add, how-to-close evicted from ROLLOUT_PLAN; replaced with §Rules & conventions pointer header. **§The Spine relocated to ROLLOUT_ARCHIVE** (completed roadmap — a rules doc shouldn't carry it; deviates from the literal Task-1 instruction but serves "rollout stays clean / archive completed"). Registered in index.md. O2 resolved (below). **Pending Mike review before Cut 2** (the four terminal-MD wirings — always-loaded files).
 
 #### Task 2: Create the v2.0 shell (after D1 confirmed)
 - **Files:** `docs/engine/ROLLOUT_V2.md` + `docs/engine/ROLLOUT_ARCHIVE_V2.md` (create); `docs/index.md`
@@ -87,7 +87,8 @@ pointers:
 ## Open questions
 
 - [ ] D1 grouping — confirm by-terminal before Task 2.
-- [ ] Whether `rollout-rules.md` is a new file or the how-to logic just folds into existing ADR-0005 (which already documents the structure). Lean toward a thin `rollout-rules.md` that points to ADR-0005 for rationale + carries only the operating rules.
+- [x] **RESOLVED S251** — `rollout-rules.md` is a new file (not folded into ADR-0005). It carries the operating rules; ADR-0005 keeps the rationale + alternatives. The doc points to ADR-0005 for the "why," no duplication. Mike S251 expanded its scope past "thin": it is the governing doctrine every terminal MD references — so it carries the full four-role model + filing + gap-log keystone, not just the evicted sections.
+- [ ] **NEW (Cut 2, Mike S251):** each terminal MD (research-build / engine-sheet / civic / media) must point to `rollout-rules.md` and carry role + measure-twice rules + a useful-docs list. Skill terminals (civic/media) especially need the "gap log is your research doc; don't blind-log on rollout" rule surfaced at their level. Gated — these are always-loaded-at-boot files.
 
 ---
 

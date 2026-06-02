@@ -4,6 +4,29 @@
 
 ---
 
+## The Spine (S145 — 10-step ordered rollout) — WALKED, all steps DONE S156
+
+*Relocated from ROLLOUT_PLAN.md S251 (rollout-rules.md eviction, governance.30 Task 1). The completed roadmap the project built S146–S156. Off-spine work since then lives in ROLLOUT_PLAN §Open Work.*
+
+| # | Phase | Status | Session | Plan |
+|---|-------|--------|---------|------|
+| 1 | 41.1 + 41.2 wiki layer — SCHEMA.md + index.md | DONE | S146 | [[SCHEMA]], [[index]] |
+| 2 | 38.1 engine auditor detector — 8 modules + JSON output | DONE | S146 | [[engine/PHASE_38_PLAN]] |
+| 3 | 38.7 + 38.8 anomaly gate + baseline briefs | DONE | S146 | [[engine/PHASE_38_PLAN]] |
+| 4 | 39.1 capability reviewer — 9 assertions, E91 replay passes | DONE | S146 | [[engine/PHASE_39_PLAN]] |
+| 5 | 38.2 + 38.3 + 38.4 mitigator + remedy + Tribune framing | DONE | S146 | [[engine/PHASE_38_PLAN]] |
+| 6 | 39.2–39.7 + 39.3 three-lane review + Final Arbiter + two-pass hallucination | DONE | S147 | [[engine/PHASE_39_PLAN]] |
+| 7 | 39.9 + 39.8 + 39.10 tiered review + reward-hacking scans + adversarial review | DONE | S148 | [[engine/PHASE_39_PLAN]] |
+| 8 | 38.5 measurement loop (engine) + 38.6 skill shrink | DONE | S156 | [[plans/2026-04-16-phase-38-5-measurement-loop]], [[plans/2026-04-16-phase-38-6-skill-shrink]] |
+| 9 | 40.1 session-log interface + 40.6 layered injection defense | DONE | S156 | [[plans/2026-04-16-phase-40-1-session-log-interface]], [[plans/2026-04-16-phase-40-6-injection-defense]] |
+| 10 | Sandcastle + Daytona evaluation | DONE | S156 | [[engine/PHASE_33_PLAN]] §33.13 |
+
+**Spine walked — all 10 steps closed S156.** Step 9 shipped all six Phase 40.6 Layer tasks (memoryFence, memory-write gate hook, contextScan + skill/script wiring, tool-gate permissions, Rhea injection scan + agent extension); Entry 123 pressure test all three vectors blocked. Step 10 closed via code inspection of `/tmp/sandcastle` 0.4.5 templates + live PoC round-trip — `scripts/sandcastlePoC.js` created a Daytona Tier 1 sandbox, ran `echo` and `uname` inside it, destroyed cleanly. Findings + Phase 39 fit analysis in §33.13.
+
+**Full analysis:** mags Supermemory doc `n5cBYS3vVN5DKrddnNp7K8` (S144 keystone framing, still load-bearing).
+
+---
+
 ## Phase 1: Edition Pipeline Speed + Safety — COMPLETE (S55)
 
 All three items shipped and pushed to main.

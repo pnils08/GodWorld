@@ -38,3 +38,10 @@ Prior work: `output/civic-voice/police_chief_c86.json` (C86)
 - **Statement 1 (STMT-93-OPD-001):** Training commitment. Four cohorts × four weeks, conditional sign-by-C95 on DA protocol + OPD testing completion. Positions as 'operational precision meeting mayoral accountability.'
 - **Statement 2 (STMT-93-OPD-002):** Operational performance reaffirm. Six months of sustained pilot data confirms C92 position. Handoff protocols executing, response times within 6.2-min baseline, escalation <2%, no critical incidents. Dispatch categorization accuracy improved. OARI integration working at operational scale. Supports Tran-Muñoz C94 data release.
 - **Position toward expansion:** OPD operationally ready for training phase C94-C95. Training completion conditional on DA protocol finalization.
+
+## C96 Decision
+- **DECISION: Operational readiness confirmed for week-10 deployment start. Downtown uptick acknowledged transparently.**
+- **Reasoning:** Cohort 1 (43 personnel) fully trained and deployed. Cohort 2 (38 personnel) in training, on-track for week-10 rotation. DA protocol finalized (C95). The Mayor's D2-week-10 rollout schedule is now operationally clear: no department-side barriers. Downtown violent crime 55→57 is modest, flagged for transparency but not alarming; operational response posture sustained. Quiet cycle overall.
+- **Statement 1 (STMT-96-OPD-001):** Cohort readiness confirmation. Cohort 1 deployed, Cohort 2 on-track. Week-10 dispatch and co-response protocols in place. OPD confirms readiness to execute expansion.
+- **Statement 2 (STMT-96-OPD-002):** Downtown monitoring update. +2 uptick is within variance, not a trend. Response times steady, patrol deployment stable. Operational reading is quiet cycle with seasonal variations.
+- **Position toward expansion:** OPD ready to execute. Cohorts staffed. Protocols operational. Deployment rotation begins week 10 as scheduled.

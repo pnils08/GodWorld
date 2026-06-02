@@ -204,3 +204,32 @@
 **Okoro response (C95):** Delivered three-statement packet addressing all three checkpoint pieces (A+B+C). Separated program success (Webb) from authority success (Okoro). Operationalized Mayor's political frame with specific consolidation data. Created news by naming the 7–9 day to 3–4 day timeline improvement that the consolidation enabled. Addressed Ashford's "consolidation or program?" distinction with both-necessary framing backed by processing evidence.
 
 **Escalation status post-C95:** Addressed. Three cycles of escalation responded with substance, not absence. Checkpoint complete. Next monitoring: C96 field-response signals (does household stabilization feed retail recovery?) and Osei recovery status (portfolio re-assignment decision point).
+
+---
+
+## C96 Cycle Summary
+
+**Consolidation proof-of-concept:** The consolidation office moves from process management to program generation. Mayor named West Oakland Retail Recovery Initiative ($14M, 18 months) and positioned it operationally in Okoro's consolidated office.
+
+**Decisions made:**
+
+1. **Retail Recovery operational structure:** Three-component program (micro-loans $6M, storefront grants $5M, technical assistance $3M). Micro-loans launch January with 47-applicant pipeline already identified. Phased geographic roll-out: Telegraph (weeks 1-2), Foothill-International (weeks 3-4), San Pablo (weeks 5-6). Program connects directly to Stab Fund phase-one (housing cleared demand; retail recovery channels it).
+
+2. **Oversight cadence established:** Three separate reporting streams maintain distinct accountability while consolidation maintains unified authority. Weekly Stab Fund snapshot (queue, authorization, equity) to Finance Committee + D1 Carter. Monthly retail-recovery program dashboard (approvals, disbursement, enrollment) to Mayor + council leadership. Quarterly Community Development field assessment (displacement tracking, landlord pressure, CBO resource allocation) to Deputy Mayor office. Structure makes consolidation transparent and verifiable rather than claiming false unification.
+
+3. **Cascade response:** Okoro operationalized Mayor's "when housing clears, we deepen" position by articulating specific geography, existing operator demand (47 applicants), and corridor-sequence rationale. Separated program evidence from political narrative; positioned consolidation as proven capability at scale.
+
+**Key framing shifts:**
+- Consolidation moves from "emergency authority redistribution" (C92) → "structural context shift proven durable" (C95) → "multi-portfolio program generation capability" (C96). The question has evolved from *does it work?* to *what can it produce?*
+- West Oakland Retail Recovery is the proof-of-concept. Consolidation didn't just clear a backlog; it generated a $14M second-phase program with geographic specificity and existing operator pipeline.
+
+**Stab Fund phase summary:**
+- Total cleared: 191 cases across C93-C95
+- Households staying in homes: 127
+- Households stabilized: 48
+- Mixed-tenure units secured: 16
+- Housing phase is closed; retail recovery phase opens
+
+**Sustainable load status:** Consolidation (three portfolios, three reporting streams, unified authority) remains sustainable through Osei recovery. If Osei's absence extends beyond C97-C98, portfolio re-assignment necessary before burnout impacts liaison team capacity or CD field work.
+
+**Council oversight framework:** Ashford (CRC audit lead) has shifted from questioning consolidation viability to monitoring program output. Vega (Finance Committee) coordinates weekly Stab Fund briefings. Carter (D1) receives both Stab Fund and retail-recovery updates. Framework is structured, not adversarial — oversight is built into reporting cadence rather than reactive to crisis.

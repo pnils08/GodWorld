@@ -7,6 +7,31 @@
 Write to: `output/civic-voice/mayor_c{XX}.json`
 Prior work: `output/civic-voice/mayor_c92.json`
 
+## Key Decisions (C96)
+
+### Authorization: OARI Expansion Rollout Signature — SIGNED (INIT-002)
+- **Decision:** Mayor signs rollout authorization; no veto, no delay.
+- **Statement:** STMT-96-MAYOR-001 — "The OARI expansion has the data and the votes. My office signs the rollout."
+- **Rationale:** C95 vote was 6-2-1 for expansion. Data is clear (84% non-police resolution, 1,539 calls, 6-min response). Rollout calendar set (rotation D2→D4→D9→D8, week ten). Confirmation on record prevents implementation uncertainty.
+- **Political Payoff:** Clears execution calendar. No ambiguity on mayoral posture. Tran-Muñoz team can move without delay.
+- **Tracker Impact:** INIT-002 rolled to ImplementationPhase "rollout-active"; MilestoneNotes updated; NextScheduledAction marked week 10 C96.
+
+### Initiative: West Oakland Retail Recovery — NAMED POLICY (INIT-001)
+- **Decision:** Second economic initiative is West Oakland Retail Recovery Initiative, $14M over 18 months.
+- **Statement:** STMT-96-MAYOR-002 — "The Stabilization Fund learned us what retail needs. West Oakland Retail Recovery is the next step."
+- **Rationale:** Stabilization Fund cleared 191 cases (housing phase 1 complete). Retail engine still stalled despite housing stabilization. Okoro consolidation proves operational readiness for second phase. KONO candidate rejected (KONO is newer corridor; West Oakland is where we already invested, where base is strongest, where faith community is working). $14M + 18-month timeline + micro-loan program + storefront rehab = specific program with measurable scope, not verbal commitment.
+- **Operational Home:** Deputy Mayor Okoro (consolidated office + existing community relationships).
+- **Political Payoff:** Deeper West Oakland engagement. Honors Denise Carter's base. Layers strategy: housing 1→retail expansion. Shows learning from phase one. Council sees structure and dollars this cycle.
+- **Tracker Impact:** INIT-001 marked phase-two-activation; secondPhaseInitiative named; secondPhaseBudget $14M; secondPhaseTimeline 18-months-c96-c114; NextActionCycle 97 (council briefing).
+
+### Remark: City This Cycle — Faith, Migration, Calm (PUBLIC VOICE)
+- **Decision:** Speak to living Oakland, not only project list. 93 approval + calm city = room for generosity.
+- **Statement:** STMT-96-MAYOR-003 — "This city is alive. People are choosing Oakland."
+- **Content:** Halloween calm (nightlife, families, safety), faith-community backbone (Diwali, pantry, job training, seniors lunch), migration rising (16 inflow this cycle, up from 6/4), modest downtown crime uptick acknowledged without alarm.
+- **Rationale:** Pending decisions memo explicitly asked mayor to speak to "festive/calm Oakland, faith-community fabric, migration rising" as mayoral reflection on living conditions. At 93 approval and with substantive decisions already made, generous public remark builds confidence and positions administration as enabling conditions others are actualizing.
+- **Political Cost:** Modest (none — generosity at high approval builds more approval).
+- **Political Payoff:** Trust, forward momentum, civic pride.
+
 ## Key Decisions (C93)
 
 ### Personnel/Governance: Health Center Deadline — Reaffirm + Trust Operator (INIT-005)

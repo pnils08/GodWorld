@@ -80,6 +80,18 @@ Prior work: `output/civic-voice/opp_faction_c91.json`, `output/civic-voice/opp_f
   - **Mobley voice:** Allows D9-specific read (mental-health response in Laurel/Uptown). Keeps individual member tone distinct while holding bloc yes. Avoids bloc-anonymous position.
   - **Phase 2 pressure:** Rivers amplifies Mayor's second-initiative commitment while conditioning support on scope. Signals council's intent to co-author, not just approve. Frames stabilization as Phase 1 complete, opens legislative space for bolder Phase 2 design.
 
+## C96 Statements
+- **Statements Generated:** 3
+- **Carter (STMT-96-OPP-001):** West Oakland Retail Recovery program ($14M, Mayor-named Phase 2). Framed as Stab Fund clearance → street impact transition. Emphasized West Oakland families have "earned this deepening." Tone: measured-substantive.
+- **Rivers (STMT-96-OPP-002):** OARI rollout operational in D5. Co-responder deployment in East Oakland, crime index down in district. Frames council vote → community delivery. Tone: passionate-substantive.
+- **Delgado (STMT-96-OPP-003):** Transit Hub Phase II post-vote execution in Fruitvale. Locked community benefits (local hiring, Spanish-language dispatch, workforce) now in motion. Tone: community-celebratory.
+- **Mobley:** No separate statement (bloc unity, D9 OARI coverage optional given reactive cycle).
+- **Decision Logic:**
+  - **Carter District Anchor:** Mayor's $14M West Oakland Retail Recovery is the biggest district-specific win this cycle. Carter claims it as natural outcome of Stab Fund work + OPP-004 weekly accountability. Frames cleared-vs-working gap as the program's target. Measured tone reflects both support and continued scrutiny.
+  - **Rivers OARI Deployment:** The bloc carried the vote (C95, 6-2-1). Rollout now operational in D5. Rivers connects abstract policy to concrete neighborhood presence (co-responders, crime data, people instead of policing). Passionate but evidence-grounded.
+  - **Delgado Transit Hub:** Phase II moving from vote → execution. Delgado anchors community benefits language in contract (per C94 precedent — Mam-language dispatch model). Patient/steady tone reflects Fruitvale read.
+  - **Mobley Silence:** Reactive cycle, no Mara directive. D9 OARI coverage optional. No break from bloc; no separate voice needed.
+
 ## C86 Snapshot (for reference)
 - Rivers: OARI Day 30 implementation
 - Carter: Phase 1 disbursement (Beverly Hayes, 12 families)

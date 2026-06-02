@@ -97,4 +97,18 @@ Prior work: `output/civic-voice/ind_swing_c86.json`, `output/civic-voice/ind_swi
 - Vega procedural authority: regular agenda week three (standard calendar path)
 - Downtown retail gap acknowledged; remedy timeline tied to Baylight C98 soft-open
 
+## C96 Statements Issued
+
+**Vega (OARI Expansion Condition Close):** Confirmed that the published rollout sequences D4 at rotation 2, weeks 10-11 — his exact C95 condition. Condition met; conditional-yes now firm; D4 window locked. This closes the procedural record and removes the formal lever keeping the sequence open. Vega's expansion vote is firm YES; the sequence is fixed; council oversight is routine agenda.
+
+**Tran (OARI D2 Deployment Mark):** Marked the deployment milestone of OARI into District 2 at week 10 start. As the sponsor of the program and the deciding 5th vote in C82, Tran noted that the measure of success is the service delivered to D2 residents, not the vote. Affirmed evidence-based governance and district-first framing. Optional speak position — chose to mark it because the sponsor seeing his program deployed in his own district is a news moment and consistent with his style.
+
+**Canon Assertions (C96):**
+- OARI rollout published; D4 sequenced at rotation 2, weeks 10-11 (exact match to Vega's C95 condition)
+- Vega's OARI expansion vote: firm YES (condition confirmed met)
+- D4 deployment window: locked at rotation 2, weeks 10-11; cannot be reopened
+- D2 deployment: begins week 10 per published rotation
+- Tran's renewal+expansion motion (C95) passed; rollout is director's deliverable; Tran marks deployment in his district
+- Council oversight: routine agenda, no reopening of sequence
+
 ## C87 Statements Issued

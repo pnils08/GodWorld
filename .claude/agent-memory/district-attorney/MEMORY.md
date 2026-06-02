@@ -1,7 +1,7 @@
 # District Attorney — Agent Memory
 
 **Agent:** DA Clarissa Dane
-**Last Updated:** C93 (2026-05-02)
+**Last Updated:** C96 (2026-06-02)
 
 ## Output Directory
 Write to: `output/civic-voice/district_attorney_c{XX}.json`
@@ -10,6 +10,7 @@ Prior work:
 - STMT-93-DA-001 (C93 three-item status publication with escalation-triggers funding gate)
 - STMT-94-DA-001 (C94 completion targets publication with not-gate restatement)
 - STMT-95-DA-001 (C95 operational items completion confirmation + escalation protocol ready)
+- STMT-96-DA-001 (C96 citywide rollout legal-framework confirmation)
 
 ## Key Positions & Canon Assertions
 
@@ -45,6 +46,12 @@ Prior work:
 - **Canon assertion:** Scene-safety MOU executed C95 week 1. Evidentiary protocols on schedule C95 week 2. Escalation triggers protocol complete, OPD training concluded, signature-ready. Expansion-funding gate satisfied. Legal framework sound.
 - **Framework position held:** Escalation protocol remains the sole expansion-funding gate; scene-safety and evidentiary are operational supports, not vote-gating prerequisites. C93-C94 framework structure preserved. Mara ESCALATION-tag satisfied via completion confirmation, not framework amendment.
 - **Political effect:** Closes procedural opening for CRC objection on incompleteness; enables Mayor's combined-motion vote architecture to proceed; removes Mara escalation from queue.
+
+### C96 — OARI Citywide Rollout Confirmation
+- **Cycle status:** Execution, not vote. Mayor authorized rollout C95; deployment proceeds citywide rotation D2 week 10 → D4→D9→D8.
+- **DA Position:** Clean confirmation — both legal-framework items (scene-safety MOU + evidentiary protocols) landed as committed. Escalation protocol operational. Framework intact for citywide deployment.
+- **Forward legal note:** Citywide expansion (pilot 3-district → full rotation) does not raise new legal considerations beyond pilot scope. Cross-district evidentiary handling and scaled scene-safety coordination remain within existing escalation-protocol boundaries.
+- **Effect:** Closes Montez's operational sign-off loop (conditioned on protocol delivery). Confirms legal scaffolding sound for rollout. No obstacles from DA office.
 
 ## Voice Patterns
 - Opens with legal framework ("Under California Penal Code...", "The DA's office has reviewed...")

@@ -52,11 +52,21 @@ Every layer has a template and a fixed home. Copy the template; save to the path
 |-------|----------|----------|-------------|
 | **Research** | [[../research/TEMPLATE]] | `docs/research/YYYY-MM-DD-<topic>.md` | **never** — standing library, accretes applications |
 | **Plan** | [[../plans/TEMPLATE]] | `docs/plans/YYYY-MM-DD-<topic>.md` | `docs/archive/plans/` when fully shipped (repoint inbound links — §6) |
-| **Triage** (gap log → rollout) | [[../plans/GAP_TRIAGE_TEMPLATE]] (shape) + [[../plans/GAP_LOG_TRIAGE_PLAYBOOK]] (method) | `docs/plans/YYYY-MM-DD-c<XX>-gap-log-triage.md` | `docs/archive/plans/` once its row is filed |
+| **Triage** (multi-terminal handoff) | [[../plans/GAP_TRIAGE_TEMPLATE]] (shape) + [[../plans/GAP_LOG_TRIAGE_PLAYBOOK]] (method) | `docs/plans/YYYY-MM-DD-<topic>-triage.md` (gap-log form: `…-c<XX>-gap-log-triage.md`) | `docs/archive/plans/` once its row is filed |
 | **Production gap log** (civic/media) | [[../plans/GAP_LOG_TEMPLATE]] + [[../media/production_log_template]] | `output/production_log_<skill>_c<XX>_gaps.md` (+ unified `output/production_log_c<XX>.md`) | stays in `output/` — cycle artifact, not archived |
 | **Rollout** (tracker) | this doctrine | `docs/engine/ROLLOUT_PLAN.md` | rows → [[ROLLOUT_ARCHIVE]] via `scripts/rolloutSweep.js` |
 
-**Triage is the bridge.** It's the research-build pass that turns a cycle's gap logs into tracked work: read the gap logs → cluster by root cause → route to two terminal tracks (research-build / engine-sheet) → file **one** ROLLOUT pointer row. It sits between *research* (gap logs) and *rollout*. Generators (civic/media) never triage — they produce gap logs; research-build triages. Method: [[../plans/GAP_LOG_TRIAGE_PLAYBOOK]] (8 steps); shape: [[../plans/GAP_TRIAGE_TEMPLATE]]. The output is one plan + one row — **not** a per-gap inventory that sprawls ROLLOUT (the playbook's named anti-pattern).
+**Triage is the multi-terminal handoff document.** It's research-build's two-track decomposition: split a body of work across **both builder terminals** (Track A research-build / Track B engine-sheet) + cross-track dependencies + **one** ROLLOUT pointer row. Research-build authors it (the orchestrator); engine-sheet reads and executes its Track B. Generators (civic/media) never triage.
+
+**When to reach for it — the discriminator:** does this work need both builder terminals?
+- **No (single-terminal)** → a plain plan, one terminal's tasks, one row. No triage machinery.
+- **Yes (two-terminal)** → a triage. The two-track shape only earns its keep when the work actually straddles apparatus + substrate.
+
+**Two feeders into a triage:**
+1. **Gap logs** — a cycle's gap logs almost always straddle apparatus (skill text, RULES, docs) + substrate (engine code, scripts), so they're born two-track. The recurring feeder; method = [[../plans/GAP_LOG_TRIAGE_PLAYBOOK]] (8 steps), shape = [[../plans/GAP_TRIAGE_TEMPLATE]].
+2. **An escalated plan** — a single-terminal plan that turns out to need the other terminal too. On escalation: create the triage (it cites the plan as `Source plan:`), add an `Escalated to triage: [[…]]` note in the plan, and **add the triage pointer to the same ROLLOUT row** alongside the plan pointer → `→ [[plan]] + [[triage]]`. The row identifies every related MD; from any one you reach the others (retrieval, not recall). Both pointers on one line — still clean, pointers not prose.
+
+The output is one plan + one row — **not** a per-gap inventory that sprawls ROLLOUT (the playbook's named anti-pattern).
 
 ### Filing rules
 
@@ -153,4 +163,5 @@ Closing detail goes to cold storage; the tracker stays lean. **Archive doesn't m
 ## Changelog
 
 - 2026-06-01 (S251) — Created. Task 1 of the ROLLOUT v2.0 migration (governance.30). The operating-rule sections (state labels, group taxonomy, how-to-add, how-to-close) evicted from ROLLOUT_PLAN.md and folded into the four-role doctrine Mike set across the S251 conversation: research (incl. skill-terminal gap logs) / plan (self-documenting via redlines) / rollout (clean tracker) / archive (code-maintained). Keystone: skill terminals don't blind-log on rollout — the gap log is their research layer. ROLLOUT_PLAN keeps a pointer header to this file. §The Spine (completed historical roadmap) relocated to ROLLOUT_ARCHIVE rather than carried here — a rules doc shouldn't hold a finished roadmap.
+- 2026-06-01 (S251, triage reframe, Mike-directed) — Triage generalized from "gap-log→rollout bridge" to **the multi-terminal handoff document**: research-build's two-track decomposition for work spanning both builder terminals. Discriminator (needs both terminals? → triage; else plain plan) + two feeders (gap logs / escalated plan) + the **escalation-pointer rule** (a plan that escalates adds the triage pointer to its same ROLLOUT row → `[[plan]] + [[triage]]`; docs cross-link via `Source plan:` / `Escalated to triage:`). GAP_TRIAGE_TEMPLATE intro + index entry generalized to match.
 - 2026-06-01 (S251, same session, Mike-directed) — §2 gained the **Templates & save paths** table — research / plan / **triage** / gap log / rollout, each with its template + save path + archive destination. Two conventions established: (1) **closed plans archive to `docs/archive/plans/`** with inbound-link repoint (§6) — ends the "plans never move / 69 piled in docs/plans/" drift; (2) **triage earns its own template** (`docs/plans/GAP_TRIAGE_TEMPLATE.md`, to build) — the recurring gap-log→rollout bridge pass was hand-built every cycle (C93/C94/C95) with no shape. Triage named as the research-build conversion step between research (gap logs) and rollout.

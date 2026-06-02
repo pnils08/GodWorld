@@ -15,9 +15,15 @@ pointers:
   - "[[../engine/rollout-rules]] — doctrine (§2 triage = the bridge)"
 ---
 
-# Gap-Log Triage — C<XX>
+# Triage — <C<XX> gap logs | topic>
 
-**Run [[GAP_LOG_TRIAGE_PLAYBOOK]] for the method (8 steps); this is the document shape it produces.** Research-build's bridge pass (rollout-rules §2): read this cycle's gap logs → cluster by root cause → route to two terminal tracks → emit ONE ROLLOUT pointer row. Generators (civic/media) produce gap logs; research-build triages.
+**The multi-terminal handoff document** (rollout-rules §2): research-build's two-track decomposition of work that spans **both builder terminals** — read the input → cluster by root cause → route to Track A (research-build) + Track B (engine-sheet) → emit ONE ROLLOUT pointer row. Research-build authors; engine-sheet executes its Track B; generators (civic/media) never triage.
+
+**Two feeders** (same shape, different input):
+- **Gap logs** — a cycle's gap logs straddle apparatus + substrate; run [[GAP_LOG_TRIAGE_PLAYBOOK]] (8 steps) to produce this doc.
+- **An escalated plan** — a single-terminal plan that turns out to need both. Cite it as `Source plan:` below; add `Escalated to triage: [[this]]` in the plan; add this triage's pointer to the plan's ROLLOUT row (→ `[[plan]] + [[triage]]`).
+
+If the work needs only ONE terminal, it doesn't belong here — write a plain plan ([[TEMPLATE]]).
 
 **The shape — non-negotiable (playbook anti-patterns):**
 - **NOT** a C94-style per-entry inventory that spawns a row per cluster — that moves bloat into ROLLOUT. Keep the C94 *thinking* (read → cluster → route); use the C95 *shape*.

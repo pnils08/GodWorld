@@ -42,8 +42,8 @@ console.log('\nTest 2: CLASP_DIRS array covers 12 phase dirs');
   const required = [
     'phase01-config', 'phase02-world-state', 'phase03-population',
     'phase04-events', 'phase05-citizens', 'phase06-analysis',
-    'phase07-evening-media', 'phase08-v3-chicago', 'phase09-rollups',
-    'phase10-persistence', 'phase11-misc', 'utilities',
+    'phase07-evening-media', 'phase08-v3-chicago', 'phase09-digest',
+    'phase10-persistence', 'phase11-media-intake', 'utilities',
   ];
   for (const dir of required) {
     assert(`CLASP_DIRS includes '${dir}'`, source.includes(`'${dir}'`));

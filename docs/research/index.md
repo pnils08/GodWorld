@@ -27,6 +27,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 |------|---------|---------|
 | **[[2026-06-01-headroom-context-compression]]** | Headroom context-compression toolkit — does it earn a place in the stack? | `take-nothing` (canon needs fidelity not compression; boot-burn already solved by discipline) |
 | **[[2026-06-01-initiative-tracker-state]]** | Initiative_Tracker subsystem — read/write graph, the missing ImplementationPhase contract, multi-layer drift | `adopt` (ignites [[../plans/2026-06-01-initiative-tracker-contract]]) |
+| **[[2026-06-02-show-your-work-engine-fidelity]]** | Show-Your-Work — present the engine AS a world (arc+cause), not raw coordinates; Mags_Ledger + brief show-your-work sections; KONO error-exception | `adopt` (ignites [[../plans/2026-06-02-show-your-work-build]]) |
 
 ---
 

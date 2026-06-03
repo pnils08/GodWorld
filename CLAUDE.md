@@ -31,7 +31,7 @@ Search BEFORE guessing. Order: GodWorld MCP (city data) → claude-mem (decision
 
 ## GodWorld MCP
 
-Direct tool access to city data — use FIRST instead of reading files or running manual searches. Tools: `lookup_citizen`, `lookup_business`, `lookup_initiative`, `lookup_faith_org`, `lookup_cultural`, `search_canon`, `search_world`, `search_articles`, `get_roster`, `get_neighborhood_state`, `get_council_member`, `get_domain_ratings`. Server: `mcp_servers/godworld/`. Full reference: `docs/SUPERMEMORY.md` §Search-and-save Matrix.
+Direct tool access to city data — use FIRST instead of reading files or running manual searches. Tools: `search_everything` (federated — bare string, no entity type, fans out to all shelves at once: world-data + bay-tribune + dashboard + disk grep), `lookup_citizen`, `lookup_business`, `lookup_initiative`, `lookup_faith_org`, `lookup_cultural`, `search_canon`, `search_world`, `search_articles`, `get_roster`, `get_neighborhood_state`, `get_council_member`, `get_domain_ratings`. Server: `scripts/godworld-mcp.py`. Full reference: `docs/SUPERMEMORY.md` §Search-and-save Matrix.
 
 ## Terminal architecture
 

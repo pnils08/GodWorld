@@ -11,6 +11,7 @@ Usage:
   python3 scripts/godworld-mcp.py --http 3032        # HTTP mode (remote agents)
 
 Tools:
+  search_everything(query)   — federated: world-data + bay-tribune + dashboard + disk grep
   lookup_citizen(name)       — citizen profile from world-data + bay-tribune
   lookup_initiative(name)    — initiative state from tracker sheet
   search_canon(query)        — search bay-tribune Supermemory
@@ -157,6 +158,68 @@ def read_json_file(path: str) -> dict:
     if full_path.exists():
         return json.loads(full_path.read_text())
     return {"error": f"File not found: {path}"}
+
+
+def _disk_rank(rel_path: str) -> int:
+    """Rank a disk hit so structured/current data surfaces above prose and
+    journals. Lower = higher priority. The federated search caps results, so
+    ranking decides what survives truncation on common terms."""
+    p = rel_path.replace('\\', '/')
+    if p.startswith('output/desk-packets/'):
+        return 0
+    if p.startswith('output/') and p.endswith('.json'):
+        return 1
+    if p.startswith('output/'):
+        return 2
+    if p.startswith('docs/mags-corliss/'):  # journals / session history — noisy
+        return 5
+    if p.startswith('docs/'):
+        return 3
+    return 4
+
+
+def disk_search(query: str, max_files: int = 12) -> str:
+    """Live grep across output/ + docs/ for any text. No index — reads the
+    actual files every call, so it can't go stale (an entity in the ledger is
+    always findable). grep (not rg): rg on this droplet is only a Claude Code
+    shell-function wrapper, unreachable from a subprocess; grep is universal and
+    clears the full ~4,850-file corpus in <1s. Ranks structured data above prose
+    (see _disk_rank) and caps output to avoid token blowup on common terms."""
+    q = query.strip()
+    if not q:
+        return "(empty query)"
+    try:
+        # -r recursive, -I skip binary, -l files-with-matches, -i case-insensitive.
+        # -F fixed-string so names with punctuation aren't treated as regex.
+        cmd = ['grep', '-rIliF', q,
+               '--include=*.json', '--include=*.md', '--include=*.txt',
+               'output', 'docs']
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=15,
+                                cwd=str(PROJECT_ROOT))
+        files = [ln.strip() for ln in result.stdout.splitlines() if ln.strip()]
+        if not files:
+            return f"No disk hits for '{q}'"
+        files.sort(key=_disk_rank)
+        total = len(files)
+        top = files[:max_files]
+
+        lines = [f"{total} file(s) matched on disk"
+                 + (f" (showing top {max_files} by priority)" if total > max_files else "")]
+        for rel in top:
+            snippet = ''
+            try:
+                snip = subprocess.run(
+                    ['grep', '-m1', '-niF', q, rel],
+                    capture_output=True, text=True, timeout=5,
+                    cwd=str(PROJECT_ROOT))
+                first = snip.stdout.splitlines()[0] if snip.stdout else ''
+                snippet = first.strip()[:160]
+            except Exception:
+                snippet = ''
+            lines.append(f"  {rel}" + (f"\n      {snippet}" if snippet else ''))
+        return '\n'.join(lines)
+    except Exception as e:
+        return f"Disk search error: {str(e)}"
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -493,6 +556,64 @@ def get_neighborhood_state(name: str) -> str:
     Narrower than the existing get_neighborhood tool — returns only the
     neighborhood card (17 in world-data) without mixing in unrelated mentions."""
     return supermemory_search(name, 'wd-neighborhood', 3, mode='hybrid', threshold=0.3)
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# FEDERATED SEARCH (S252 — one query, all shelves)
+# ═══════════════════════════════════════════════════════════════════════════
+
+@mcp.tool()
+def search_everything(query: str) -> str:
+    """Search EVERYTHING for a bare string — no entity type required. Fans out to
+    all three storage shelves at once and returns merged, source-tagged hits:
+      1. world-data Supermemory  — umbrella tag; unions citizen/business/faith/
+         cultural/neighborhood domain cards in one call.
+      2. bay-tribune Supermemory — published canon history, newest-first.
+      3. dashboard articles API  — published-article index.
+      4. disk (live grep)        — output/ + docs/, structured data ranked first.
+
+    Use when you don't know (or don't care) what KIND of thing you're looking up —
+    'vinnie keane', 'Baylight', 'the brass-fitting line'. For a known entity type,
+    the narrower tools (lookup_citizen, lookup_business, lookup_initiative, …) are
+    cheaper. Each source degrades to a 'no results' line independently — one shelf
+    being down never blanks the whole answer."""
+    q = (query or '').strip()
+    if not q:
+        return "search_everything: empty query"
+
+    def _safe(fn, label):
+        try:
+            out = fn()
+            return out.strip() if out and out.strip() else f"(no results in {label})"
+        except Exception as e:
+            return f"({label} unavailable: {e})"
+
+    # Fan out concurrently — the four sources are independent I/O (two npx
+    # subprocesses, one HTTP call, one grep). Sequential they stack to ~7s;
+    # threaded they collapse to the slowest single call (~2-3s). Threads are
+    # safe here: no shared state, each call is its own subprocess/socket.
+    from concurrent.futures import ThreadPoolExecutor
+    sources = {
+        'world-data': lambda: supermemory_search(q, 'world-data', 5, mode='hybrid', threshold=0.3),
+        'bay-tribune': lambda: supermemory_search(q, 'bay-tribune', 3, mode='hybrid',
+                                                  threshold=0.3, sort='recency'),
+        'dashboard': lambda: (dashboard_get(f'/api/search/articles?q={quote(q)}') or '')[:2000],
+        'disk': lambda: disk_search(q),
+    }
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        futures = {label: pool.submit(_safe, fn, label) for label, fn in sources.items()}
+        results = {label: fut.result() for label, fut in futures.items()}
+    world, canon, articles, disk = (
+        results['world-data'], results['bay-tribune'],
+        results['dashboard'], results['disk'])
+
+    return (
+        f"╔═══ SEARCH_EVERYTHING: '{q}' ═══╗\n\n"
+        f"=== SUPERMEMORY · world-data (structured cards, all domains) ===\n{world}\n\n"
+        f"=== SUPERMEMORY · bay-tribune (published canon, newest first) ===\n{canon}\n\n"
+        f"=== DASHBOARD · published articles ===\n{articles}\n\n"
+        f"=== DISK · live grep (output/ + docs/) ===\n{disk}"
+    )
 
 
 # ═══════════════════════════════════════════════════════════════════════════

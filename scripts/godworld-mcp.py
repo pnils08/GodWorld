@@ -165,6 +165,8 @@ def _disk_rank(rel_path: str) -> int:
     journals. Lower = higher priority. The federated search caps results, so
     ranking decides what survives truncation on common terms."""
     p = rel_path.replace('\\', '/')
+    if p.startswith('output/simulation_ledger_snapshot'):  # live ledger — most authoritative
+        return -1
     if p.startswith('output/desk-packets/'):
         return 0
     if p.startswith('output/') and p.endswith('.json'):
@@ -192,8 +194,8 @@ def disk_search(query: str, max_files: int = 12) -> str:
         # -r recursive, -I skip binary, -l files-with-matches, -i case-insensitive.
         # -F fixed-string so names with punctuation aren't treated as regex.
         cmd = ['grep', '-rIliF', q,
-               '--include=*.json', '--include=*.md', '--include=*.txt',
-               'output', 'docs']
+               '--include=*.json', '--include=*.jsonl', '--include=*.md',
+               '--include=*.txt', 'output', 'docs']
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=15,
                                 cwd=str(PROJECT_ROOT))
         files = [ln.strip() for ln in result.stdout.splitlines() if ln.strip()]

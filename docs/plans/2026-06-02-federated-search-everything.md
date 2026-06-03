@@ -74,6 +74,32 @@ None — resolved at design time (live grep vs index; world-data vs wd-* fan-out
 
 ---
 
+---
+
+## Phase 2: Live ledger as the disk shelf (S252, same session)
+
+**Why:** The four shelves reach `Simulation_Ledger` data only indirectly — via Supermemory cards built by `buildCitizenCards.js` (a snapshot that lags the sheet until cards rebuild). The live ledger is a Google Sheet behind the service account; the Python MCP can't read it. Asked "what if a copy lived on disk?" — that sidesteps the Python/Node seam entirely, because the disk-grep shelf already walks `output/`.
+
+**Build:** `scripts/dumpLedger.js` — mimics `queryLedger.js` (same `lib/env` + `lib/sheets` + `getSheetAsObjects('Simulation_Ledger')`). Writes `output/simulation_ledger_snapshot.jsonl` (gitignored generated data).
+
+**Two format decisions that make the grep shelf work:**
+1. **JSONL, one citizen per line** — so `grep "Vinnie Keane"` returns the *entire* row on one line, every column in the hit. Pretty-printed JSON would isolate the name on its own line.
+2. **Synthesized `Name` field** (`${First} ${Last}`) injected first — `getSheetAsObjects` splits the name across `First`/`Last` columns, so a full-name grep would otherwise miss. Verified: without it, 0 hits; with it, the row lands.
+3. **Stable filename, overwritten each cycle** — only ONE snapshot ever on disk = the current one, so grep can't surface a prior-cycle row. This is how the snapshot dodges the staleness hazard (vs. the index, which was rejected for exactly that failure mode).
+
+**MCP changes (`disk_search`):**
+- Added `--include=*.jsonl` to the grep — *critical*: `--include=*.json` does NOT match `.jsonl` (verified empirically), so without this the snapshot was invisible to its own shelf.
+- `_disk_rank`: ledger snapshot ranked `-1` (above desk-packets) — it's the most authoritative disk source.
+
+**Refresh trigger:** `/city-hall-prep` Step 1.5 runs `node scripts/dumpLedger.js {XX} --quiet` each cycle, post-engine (ledger freshest). Non-blocking — failure degrades to the Supermemory card, doesn't break the tool.
+
+**Verified:** 904 citizens dumped (matches live ~903–904, fresher than the stale "858" in SIMULATION_LEDGER.md); Vinnie Keane's full current row (POP-00001, Tier 1, DH) leads the disk shelf as the top-ranked hit.
+
+**Next (not built — Mike's "all skills should use this"):** broader skill adoption of `search_everything` as the default lookup. Deferred — sweeping all skill files is its own scoped pass, not a same-session change.
+
+---
+
 ## Changelog
 
 - 2026-06-02 — Built and shipped in one session (S252). Plan + build + test + index registration same commit. Disk layer = live grep (no index), 4-source fan-out.
+- 2026-06-02 — Phase 2 same session: live `Simulation_Ledger` added as the disk shelf via `scripts/dumpLedger.js` (JSONL snapshot, `Name` synthesized, stable filename) + `disk_search` jsonl-include fix + `/city-hall-prep` Step 1.5 refresh trigger. The 5th source without a 5th connector.

@@ -173,6 +173,8 @@ def _disk_rank(rel_path: str) -> int:
         return 1
     if p.startswith('output/'):
         return 2
+    if p.startswith('editions/'):  # published canon — must outrank generic docs
+        return 2
     if p.startswith('docs/mags-corliss/'):  # journals / session history — noisy
         return 5
     if p.startswith('docs/'):
@@ -193,9 +195,13 @@ def disk_search(query: str, max_files: int = 12) -> str:
     try:
         # -r recursive, -I skip binary, -l files-with-matches, -i case-insensitive.
         # -F fixed-string so names with punctuation aren't treated as regex.
-        cmd = ['grep', '-rIliF', q,
-               '--include=*.json', '--include=*.jsonl', '--include=*.md',
-               '--include=*.txt', 'output', 'docs']
+        # `--` terminates option parsing so a query starting with '-' is treated
+        # as the pattern, not a grep flag (argument-injection guard).
+        # 'editions' = root canon (published cycle editions); without it a name
+        # search silently misses every published mention.
+        cmd = ['grep', '-rIliF', '--include=*.json', '--include=*.jsonl',
+               '--include=*.md', '--include=*.txt', '--', q,
+               'output', 'docs', 'editions']
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=15,
                                 cwd=str(PROJECT_ROOT))
         files = [ln.strip() for ln in result.stdout.splitlines() if ln.strip()]
@@ -204,6 +210,13 @@ def disk_search(query: str, max_files: int = 12) -> str:
         files.sort(key=_disk_rank)
         total = len(files)
         top = files[:max_files]
+        # Guarantee canon representation: prolific citizens match 100+ output/
+        # files that flood the cap, so editions (published canon) never survive
+        # truncation by rank alone. If editions matched but none made the cut,
+        # reserve up to 2 slots for the top editions hits.
+        ed_hits = [f for f in files if f.startswith('editions/')]
+        if ed_hits and not any(f.startswith('editions/') for f in top):
+            top = top[:max(0, max_files - 2)] + ed_hits[:2]
 
         lines = [f"{total} file(s) matched on disk"
                  + (f" (showing top {max_files} by priority)" if total > max_files else "")]
@@ -211,11 +224,15 @@ def disk_search(query: str, max_files: int = 12) -> str:
             snippet = ''
             try:
                 snip = subprocess.run(
-                    ['grep', '-m1', '-niF', q, rel],
+                    ['grep', '-m1', '-niF', '--', q, rel],
                     capture_output=True, text=True, timeout=5,
                     cwd=str(PROJECT_ROOT))
                 first = snip.stdout.splitlines()[0] if snip.stdout else ''
-                snippet = first.strip()[:160]
+                # Full line for the live-ledger snapshot — its whole value is the
+                # complete citizen row (Income/Tier/Stats live past char 160).
+                # Tight snippet for prose/packet files where 160 chars is plenty.
+                cap = 1500 if 'simulation_ledger_snapshot' in rel else 160
+                snippet = first.strip()[:cap]
             except Exception:
                 snippet = ''
             lines.append(f"  {rel}" + (f"\n      {snippet}" if snippet else ''))

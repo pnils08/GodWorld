@@ -387,6 +387,28 @@ function saveToSupermemory(userName, userMessage, magsResponse, discordUserId) {
 }
 
 // ---------------------------------------------------------------------------
+// Tool: search her own city from local disk (free, never-stale). She calls this
+// when she needs a fact she doesn't already have — citizen, business,
+// neighborhood, edition, canon. Backed by mags.searchDisk (grep over
+// output/+docs/+editions; live ledger snapshot + editions ranked top).
+// ---------------------------------------------------------------------------
+var SEARCH_TOOL = {
+  name: 'search_world',
+  description: 'Search Oakland from the city records on disk — citizens, businesses, ' +
+    'neighborhoods, published editions, canon history. Use this whenever you need a ' +
+    'specific fact about your world that you do not already have in front of you. ' +
+    'Query a name, neighborhood, business, or topic. Returns ranked excerpts from the ' +
+    'live city data.',
+  input_schema: {
+    type: 'object',
+    properties: {
+      query: { type: 'string', description: 'name, neighborhood, business, or topic to look up' }
+    },
+    required: ['query']
+  }
+};
+
+// ---------------------------------------------------------------------------
 // Call Claude API
 // ---------------------------------------------------------------------------
 async function callClaude(userMessage, userName, userId) {
@@ -425,19 +447,44 @@ async function callClaude(userMessage, userName, userId) {
     Math.round(systemPrompt.length / 4) + ' system tokens)' +
     (archiveContext ? ' [+archive: ' + archiveContext.length + ' chars]' : ''));
 
-  var requestOptions = {
-    model: 'claude-haiku-4-5-20251001',
-    max_tokens: MAX_RESPONSE_TOKENS,
-    system: systemPrompt,
-    messages: messages
-  };
+  // Tool-use loop: she may call search_world to ground her answer in live city
+  // data before replying. Capped at 3 rounds so a confused turn can't spin.
+  var response;
+  var text = '';
+  var MAX_TOOL_ROUNDS = 3;
+  for (var round = 0; round < MAX_TOOL_ROUNDS; round++) {
+    response = await claude.messages.create({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: MAX_RESPONSE_TOKENS,
+      system: systemPrompt,
+      messages: messages,
+      tools: [SEARCH_TOOL]
+    });
 
-  var response = await claude.messages.create(requestOptions);
+    var toolUses = (response.content || []).filter(function (b) { return b.type === 'tool_use'; });
+    var textBlocks = (response.content || [])
+      .filter(function (b) { return b.type === 'text'; })
+      .map(function (b) { return b.text; }).join('');
 
-  var text = response.content[0] && response.content[0].text ? response.content[0].text : '';
+    if (response.stop_reason === 'tool_use' && toolUses.length) {
+      messages.push({ role: 'assistant', content: response.content });
+      var toolResults = toolUses.map(function (tu) {
+        var result;
+        try { result = mags.searchDisk(tu.input && tu.input.query, 8); }
+        catch (e) { result = '(search failed: ' + e.message + ')'; }
+        return { type: 'tool_result', tool_use_id: tu.id, content: result };
+      });
+      messages.push({ role: 'user', content: toolResults });
+      log.info('search_world: ' + toolUses.map(function (t) { return t.input && t.input.query; }).join(' | '));
+      continue;  // let her see results and answer (or search again)
+    }
+
+    text = textBlocks;
+    break;
+  }
+
   log.info('Response: ' + text.length + ' chars, ' +
-    response.usage.input_tokens + ' in / ' +
-    response.usage.output_tokens + ' out');
+    (response && response.usage ? response.usage.input_tokens + ' in / ' + response.usage.output_tokens + ' out' : 'n/a'));
 
   // Update conversation history
   conversationHistory.push({ role: 'user', content: userName + ': ' + userMessage });

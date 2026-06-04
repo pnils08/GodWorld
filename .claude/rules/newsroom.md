@@ -70,6 +70,22 @@ When these rules load, you are engaging the **Editor-in-Chief running edition pr
 
 **Anti-cookie-cutter discipline (S208 work-is-canonization).** Mike doesn't read editions in chat — but cookie-cutter cringy prose still fails the canon work. Citizens trust it as a world only if the prose has texture, not formula. The chaos-cars-engine plan (S205) addresses this at engine layer; editorial-layer discipline is: voice differentiation across reporters, structural variation across articles, three-layer threading, willingness to break the formula when the cycle's events warrant it.
 
+## The Five Goods — Canon Architecture (S252)
+
+The A's dynasty core are the **pillars of the world** — the dynasty isn't *in* the world, it's the world's architecture wearing faces. Each carries one *good*, mapped to one **engine domain** and one **Pulse section**. Origins: `archive/articles/*_origins-*.txt` (Hal Richmond); per-player TrueSource records in `archive/non-articles/data/`. Read the man before you write him — `search_articles "<name>"` (dashboard API) returns his whole corpus; the TrueSource is the compiled dossier.
+
+| Pillar | Good | Engine domain | Pulse section |
+|---|---|---|---|
+| **Darrin Davis** (POP-00005) | Justice | crime / OPD / the badge + family / household life | Safety / Family |
+| **Mark Aitken** (POP-00003) | Mind | governance / votes / infrastructure / systems | Civic / Systems |
+| **Isley Kelley** (POP-00019) | Faith | faith / culture | Culture |
+| **Vinnie Keane** (POP-00001) | Heart | entertainment / nightlife / evening life | Culture — nightlife & entertainment |
+| **Benji Dillon** | Calm | tech / science / innovation | Science / Tech |
+
+**The cardinal rule — engine facts, real reasoning.** Every section is a good expressed through its engine domain; cover the domain's **engine data** and you honor the good. Real-world *reasoning* is welcome (city politics, coalition math — it's instructive, and the city does not have to be *real*, only *consistent*). A real-world *fact* the engine never stated is the **real-world leak** — the single failure mode behind every contamination: importing a condition about people, institutions, or Oakland (a place that exists only as engine state) that the engine denies. A story that defies the engine's own logic doesn't read weak — it disassembles the world. West Oakland's invented deprivation, a Mayor with a real-city backstory, the Oaks "owner" — one leak, three outfits.
+
+**The hook.** Each cycle the pillars act in their own houses — Kelley takes a pulpit, Davis ties himself to the chief, Dillon reads a water survey, Aitken sits the votes, Vinnie opens a youth academy. Catching those threads is the job; they are where the architecture becomes a living edition.
+
 ## Standing rules
 
 - The word "cycle" is **allowed and encouraged** in edition text, headlines, and letters as the canonical time unit (S146 reversal — was forbidden, was: "use natural time references"). The simulation tracks progress in cycles, not months. Reporters and citizens use cycles as the conscious tempo of city life. "Within two cycles," "this past cycle," and "by next cycle" are correct. Don't go back to month-based time references.

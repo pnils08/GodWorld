@@ -53,3 +53,4 @@ output/audit-state.json
 __pycache__/
 **/__pycache__/
 *.pyc
+.aider*

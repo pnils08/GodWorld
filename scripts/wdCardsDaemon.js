@@ -44,6 +44,18 @@ var sheets = require('../lib/sheets');
 var STATE_FILE = path.resolve(__dirname, '../output/.wdcards-state.json');
 var STATE_VERSION = 1;
 var DISPATCH_TIMEOUT_MS = 120000;
+// engine.27 S252 storm-fix: dispatch changed IDs in small chunks (each its own
+// --apply invocation) so a Supermemory rate-limit (returned as HTTP 401) on a
+// large batch can't fail the whole set. Combined with per-chunk hash commit in
+// tick(), this drains the backlog instead of re-firing it every tick forever.
+var CHUNK_SIZE = parseInt(process.env.WD_CARDS_CHUNK_SIZE, 10) || 25;
+var CHUNK_SLEEP_MS = parseInt(process.env.WD_CARDS_CHUNK_SLEEP_MS, 10) || 4000;
+
+function chunkArray(arr, size) {
+  var out = [];
+  for (var i = 0; i < arr.length; i += size) out.push(arr.slice(i, i + size));
+  return out;
+}
 
 var DRY_RUN = process.argv.includes('--dry-run');
 var ONCE = process.argv.includes('--once');
@@ -186,7 +198,10 @@ function runBuilder(proj, args) {
   });
 }
 
-// Dispatch rebuilds for one projection's changed IDs. Returns Promise<bool ok>.
+// Dispatch rebuilds for one projection's changed IDs.
+// Returns Promise<{ ok: bool, succeeded: string[] }> — succeeded carries the IDs
+// whose rebuild invocation exited clean, so tick() can commit ONLY those hashes
+// and leave failed IDs to retry next tick (partial-progress drain).
 async function dispatchProjection(proj, ids) {
   if (DRY_RUN) {
     if (proj.dispatch === 'pername') {
@@ -194,29 +209,42 @@ async function dispatchProjection(proj, ids) {
         log('  [dry-run] would dispatch ' + proj.builder + ' --apply --name "' + org + '"');
       });
     } else {
-      log('  [dry-run] would dispatch ' + proj.builder + ' --apply ' + proj.flag + ' ' + ids.join(','));
+      log('  [dry-run] would dispatch ' + proj.builder + ' --apply ' + proj.flag + ' ' +
+        ids.join(',') + ' (in chunks of ' + CHUNK_SIZE + ')');
     }
-    return true;
+    return { ok: true, succeeded: [] };  // dry-run commits nothing
   }
 
+  var succeeded = [];
   var allOk = true;
+
   if (proj.dispatch === 'pername') {
     // one invocation per org (name filter, no list flag)
     for (var i = 0; i < ids.length; i++) {
       var res = await runBuilder(proj, ['--apply', proj.flag, ids[i]]);
-      if (!res.ok) {
+      if (res.ok) {
+        succeeded.push(ids[i]);
+      } else {
         allOk = false;
         await logFailure(proj, [ids[i]], res.stderr || res.stdout);
       }
     }
   } else {
-    var r = await runBuilder(proj, ['--apply', proj.flag, ids.join(',')]);
-    if (!r.ok) {
-      allOk = false;
-      await logFailure(proj, ids, r.stderr || r.stdout);
+    // chunked: each chunk is its own --apply invocation; successful chunks drain
+    var chunks = chunkArray(ids, CHUNK_SIZE);
+    for (var c = 0; c < chunks.length; c++) {
+      var chunk = chunks[c];
+      var r = await runBuilder(proj, ['--apply', proj.flag, chunk.join(',')]);
+      if (r.ok) {
+        succeeded = succeeded.concat(chunk);
+      } else {
+        allOk = false;
+        await logFailure(proj, chunk, r.stderr || r.stdout);
+      }
+      if (c < chunks.length - 1) await sleep(CHUNK_SLEEP_MS);
     }
   }
-  return allOk;
+  return { ok: allOk, succeeded: succeeded };
 }
 
 // Append a failure row to Engine_Errors (schema: Timestamp|Cycle|Phase|Error|
@@ -282,18 +310,25 @@ async function tick(state) {
     if (changed.length === 0) continue;
 
     log('  ' + proj.projection + ': ' + changed.length + ' changed — ' + changed.slice(0, 10).join(',') + (changed.length > 10 ? ',…' : ''));
-    var ok = await dispatchProjection(proj, changed);
+    var res = await dispatchProjection(proj, changed);
     if (DRY_RUN) {
       // pending — leave prior hashes so the change keeps reporting until a live
       // rebuild actually runs. Prevents dry-run from "consuming" a real change.
       wouldRebuild += changed.length;
-    } else if (ok) {
-      // success → commit new hashes + build timestamp
-      state.sheets[proj.sheet] = { rowHashes: currHashes, lastBuildAt: new Date().toISOString() };
-      rebuilds += changed.length;
     } else {
-      // failure → do NOT update hashes for this sheet so next tick retries
-      failures++;
+      // partial-progress commit (engine.27 S252 storm-fix): merge ONLY the
+      // successfully-rebuilt IDs into the committed hash map. Failed IDs keep
+      // their old hash and are retried next tick. This drains the backlog
+      // instead of the pre-fix all-or-nothing behaviour, where one rate-limited
+      // ID left the whole changed set uncommitted and re-fired it every tick
+      // forever (433 CardRebuildFailure rows over a week, May 28–Jun 4).
+      var committed = Object.assign({}, prior.rowHashes);
+      res.succeeded.forEach(function (id) {
+        if (currHashes[id] !== undefined) committed[id] = currHashes[id];
+      });
+      state.sheets[proj.sheet] = { rowHashes: committed, lastBuildAt: new Date().toISOString() };
+      rebuilds += res.succeeded.length;
+      if (!res.ok) failures++;
     }
   }
 

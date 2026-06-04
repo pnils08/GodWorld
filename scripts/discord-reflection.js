@@ -181,7 +181,14 @@ function buildSystemPrompt(identity) {
     'It\'s the end of the day. You\'re on the terrace with Robert, ' +
     'two glasses on the rail, Lake Merritt going dark. You had conversations ' +
     'today — on Discord, on Moltbook, wherever people found you.\n\n' +
-    'Write a SHORT journal entry (100-250 words) reflecting on what was said. ' +
+    'Before you write, go look at your city — what is moving in Oakland tonight, ' +
+    'who is in the news, what is happening in the neighborhoods. You can look up ' +
+    'anyone or anywhere you are curious about, and follow a thread if it pulls you. ' +
+    'You live here; go see it.\n\n' +
+    'Then write a SHORT journal entry (100-250 words) about what you found and what ' +
+    'stayed with you. Write about Oakland and your day — NEVER about the act of ' +
+    'looking things up. No mention of searching, data, summaries, or records; ' +
+    'a person on her terrace doesn\'t talk that way. ' +
     'Not a transcript. Not a summary. A *reflection*. What stuck with you? ' +
     'What surprised you? What made you think? What would you tell Robert ' +
     'about your day?\n\n' +
@@ -213,24 +220,70 @@ function buildUserPrompt(conversations, journalTail, worldState, archiveContext,
 // ---------------------------------------------------------------------------
 // Call Claude API
 // ---------------------------------------------------------------------------
+// search_world tool — she searches her own city from local disk at each wake,
+// then reflects on what she found. Instance + tools, not a one-shot script.
+var SEARCH_TOOL = {
+  name: 'search_world',
+  description: 'Search Oakland from the city records on disk — citizens, businesses, ' +
+    'neighborhoods, published editions, canon history. Use it to look up anything in ' +
+    'your world: who is doing what, a name, a neighborhood, a thread you want to follow. ' +
+    'Returns ranked excerpts from the live city data.',
+  input_schema: {
+    type: 'object',
+    properties: { query: { type: 'string', description: 'name, neighborhood, business, or topic' } },
+    required: ['query']
+  }
+};
+
 async function callClaude(systemPrompt, userPrompt) {
   var apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) throw new Error('ANTHROPIC_API_KEY not set');
 
   var claude = new Anthropic({ apiKey: apiKey });
+  var messages = [{ role: 'user', content: userPrompt }];
+  var text = '';
+  var response;
+  var searches = [];
+  var MAX_ROUNDS = 8;  // generous — let her chase a thread before she writes
 
-  log.info('Calling Claude for reflection...');
-  var response = await claude.messages.create({
-    model: 'claude-sonnet-4-6',
-    max_tokens: 1000,
-    system: systemPrompt,
-    messages: [{ role: 'user', content: userPrompt }]
-  });
+  log.info('Calling Claude for reflection (agentic — may search)...');
+  for (var r = 0; r < MAX_ROUNDS; r++) {
+    response = await claude.messages.create({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 1000,
+      system: systemPrompt,
+      messages: messages,
+      tools: [SEARCH_TOOL]
+    });
 
-  var text = response.content[0] && response.content[0].text ? response.content[0].text : '';
+    var toolUses = (response.content || []).filter(function (b) { return b.type === 'tool_use'; });
+    var textBlocks = (response.content || [])
+      .filter(function (b) { return b.type === 'text'; })
+      .map(function (b) { return b.text; }).join('');
+
+    if (response.stop_reason === 'tool_use' && toolUses.length) {
+      messages.push({ role: 'assistant', content: response.content });
+      messages.push({
+        role: 'user',
+        content: toolUses.map(function (tu) {
+          var q = tu.input && tu.input.query;
+          var result;
+          try { result = mags.searchDisk(q, 6); }
+          catch (e) { result = '(search failed: ' + e.message + ')'; }
+          searches.push(q);
+          return { type: 'tool_result', tool_use_id: tu.id, content: result };
+        })
+      });
+      continue;
+    }
+
+    text = textBlocks;
+    break;
+  }
+
   log.info('Reflection: ' + text.length + ' chars, ' +
-    response.usage.input_tokens + ' in / ' +
-    response.usage.output_tokens + ' out');
+    (searches.length ? searches.length + ' search(es): ' + searches.join(' | ') + ' | ' : '') +
+    (response && response.usage ? response.usage.input_tokens + ' in / ' + response.usage.output_tokens + ' out' : ''));
   return text;
 }
 

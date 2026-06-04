@@ -17,11 +17,10 @@
 GODWORLD_ROOT="/root/GodWorld"
 MAGS_DIR="$GODWORLD_ROOT/docs/mags-corliss"
 
-# --- FREE MEMORY: Stop Discord bot during Claude Code sessions ---
-# All output suppressed — in JSON mode any stray stdout would invalidate the object.
-if pm2 describe mags-bot > /dev/null 2>&1; then
-  pm2 stop mags-bot --silent > /dev/null 2>&1
-fi
+# Discord bot (mags-bot) is a standing pm2 service — decoupled from the Claude
+# session lifecycle S252. Was: boot stopped it to free droplet memory + a clean
+# session-end restarted it, so an improper close left it dead (36h outage Jun 2-4).
+# Droplet now runs it always-on; nothing in the session lifecycle touches it.
 
 # --- CURRENT CRITICAL STATE ---
 SESSION_NUM=$(grep -oP 'Session: \K[0-9]+' "$GODWORLD_ROOT/SESSION_CONTEXT.md" 2>/dev/null || echo "?")

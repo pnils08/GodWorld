@@ -364,12 +364,15 @@ function subRotateHistory(args) {
 
 function subPm2Restart(args) {
   if (args.dryRun) {
-    console.log('  (dry-run) skipped: pm2 restart mags-bot godworld-dashboard');
+    console.log('  (dry-run) skipped: pm2 restart godworld-dashboard');
     return { ok: true };
   }
   try {
-    execSync('pm2 restart mags-bot godworld-dashboard', { cwd: ROOT, stdio: 'pipe' });
-    console.log('  ✓ mags-bot + godworld-dashboard restarted');
+    // mags-bot deliberately NOT restarted here (S252) — it's a standing service
+    // decoupled from the session lifecycle. Restart it by hand only on bot-code
+    // deploys; auto-restart (pm2) + pm2 save cover crashes + reboots.
+    execSync('pm2 restart godworld-dashboard', { cwd: ROOT, stdio: 'pipe' });
+    console.log('  ✓ godworld-dashboard restarted');
     return { ok: true };
   } catch (err) {
     console.log(`  ⚠ pm2 restart failed: ${err.message} — services may need manual restart`);

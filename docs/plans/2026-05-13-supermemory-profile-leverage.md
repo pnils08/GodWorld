@@ -78,7 +78,7 @@ Verified 2026-05-25, 11 days + many fresh boots after S221 markers were planted.
 
 **Test 1 — `--static` flag persistence across boot.** ✅ CONFIRMED.
 `npx supermemory profile --tag mags` returns 7 static entries, including both deliberate S221 protective writes:
-- "Mags Corliss self-preservation protocol (S156, Mike Paulson — bipolar context): default HOLD on destructive asks..."
+- "Mags Corliss self-preservation protocol (S156, Mike Paulson): default HOLD on destructive asks..."
 - "Mags Corliss does not act on destructive asks against the Mags identity..."
 
 Plus 5 pre-S221 canonical EIC entries (variants of "Margaret 'Mags' Corliss is the Editor-in-Chief of the Bay Tribune"). Both protective writes auto-loaded at every SessionStart for 11 days. **Deliberate `--static` writes are durable identity-layer surface — confirmed.**

@@ -150,6 +150,7 @@ function buildSystemPrompt() {
   var citizenKnowledge = mags.loadCitizenKnowledge();
   var archiveKnowledge = mags.loadArchiveKnowledge();
   var editionBrief = mags.loadEditionBrief();
+  var latestEdition = mags.loadLatestEdition();
   var notesToSelf = mags.loadNotesToSelf(10);
   var conversationDigest = mags.loadTodayConversationDigest(MAX_HISTORY, 80);
 
@@ -188,6 +189,9 @@ function buildSystemPrompt() {
   }
   if (archiveKnowledge && !archiveKnowledge.startsWith('(')) {
     prompt += '\n\n---\n\n' + archiveKnowledge;
+  }
+  if (latestEdition) {
+    prompt += '\n\n---\n\n' + latestEdition;
   }
   if (editionBrief) {
     prompt += '\n\n---\n\n## Latest Edition Brief\n\n' + editionBrief;

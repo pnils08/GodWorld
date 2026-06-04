@@ -193,9 +193,12 @@ function buildSystemPrompt(identity) {
     '— Mags';
 }
 
-function buildUserPrompt(conversations, journalTail, worldState, archiveContext) {
-  var prompt = '## This Week in Oakland\n\n' + worldState +
-    '\n\n---\n\n## Today\'s Discord Conversations\n\n' + conversations +
+function buildUserPrompt(conversations, journalTail, worldState, archiveContext, latestEdition) {
+  var prompt = '## This Week in Oakland\n\n' + worldState;
+  if (latestEdition) {
+    prompt += '\n\n---\n\n' + latestEdition;
+  }
+  prompt += '\n\n---\n\n## Today\'s Discord Conversations\n\n' + conversations +
     '\n\n---\n\n## Recent Journal Entries (for continuity)\n\n' + journalTail;
 
   if (archiveContext) {
@@ -402,6 +405,7 @@ async function main() {
     var identity = mags.loadIdentity();
     var journalTail = mags.loadJournalTail(2);
     var worldState = mags.loadWorldState();
+    var latestEdition = mags.loadLatestEdition();
 
     // Search Supermemory for context related to today's conversations
     var archiveContext = '';
@@ -421,7 +425,7 @@ async function main() {
     var conversations = entries ? formatConversations(entries) : '';
     var moltbookSection = moltbookEntries ? formatMoltbookInteractions(moltbookEntries) : '';
     var systemPrompt = buildSystemPrompt(identity);
-    var userPrompt = buildUserPrompt(conversations, journalTail, worldState, archiveContext);
+    var userPrompt = buildUserPrompt(conversations, journalTail, worldState, archiveContext, latestEdition);
 
     // Append Moltbook section if there were interactions
     if (moltbookSection) {

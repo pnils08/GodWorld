@@ -145,7 +145,7 @@ function loadConversationHistory() {
 // ---------------------------------------------------------------------------
 function buildSystemPrompt() {
   var identity = mags.loadIdentity();
-  var journalTail = mags.loadJournalTail(2);
+  var journalTail = mags.loadRecentReflections(2);  // her reflections only — never operator-layer session entries (S252)
   var worldState = mags.loadWorldState();
   var citizenKnowledge = mags.loadCitizenKnowledge();
   var archiveKnowledge = mags.loadArchiveKnowledge();

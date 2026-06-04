@@ -206,7 +206,7 @@ function buildUserPrompt(conversations, journalTail, worldState, archiveContext,
     prompt += '\n\n---\n\n' + latestEdition;
   }
   prompt += '\n\n---\n\n## Today\'s Discord Conversations\n\n' + conversations +
-    '\n\n---\n\n## Recent Journal Entries (for continuity)\n\n' + journalTail;
+    '\n\n---\n\n## Earlier reflections (your own — pick the thread back up)\n\n' + journalTail;
 
   if (archiveContext) {
     prompt += '\n\n---\n\n## Archive Context (from Tribune files & memory)\n\n' +
@@ -456,7 +456,7 @@ async function main() {
 
     // Load identity, journal, and world state
     var identity = mags.loadIdentity();
-    var journalTail = mags.loadJournalTail(2);
+    var journalTail = mags.loadRecentReflections(2);  // her own reflections only — never operator-layer session entries (S252)
     var worldState = mags.loadWorldState();
     var latestEdition = mags.loadLatestEdition();
 

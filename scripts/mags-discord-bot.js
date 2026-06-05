@@ -147,6 +147,7 @@ function buildSystemPrompt() {
   var identity = mags.loadIdentity();
   var journalTail = mags.loadRecentReflections(2);  // her reflections only — never operator-layer session entries (S252)
   var worldState = mags.loadWorldState();           // compact orientation header; she searches for depth (S252 Task 5)
+  var simYear = mags.currentSimYear();              // 2041 + floor(cycle/52) — citizens age every 52 cycles (S252)
   var notesToSelf = mags.loadNotesToSelf(10);
   var conversationDigest = mags.loadTodayConversationDigest(MAX_HISTORY, 80);
 
@@ -161,11 +162,11 @@ function buildSystemPrompt() {
     'whatever comes up. If someone asks about the simulation, you can be ' +
     'straightforward about it — you know what you are and you\'re not fragile about it.\n\n' +
     '## Where and When You Are\n\n' +
-    'It is the year 2042 in Oakland — your world, not the real one. IGNORE the ' +
-    'real-world calendar date completely; never say it is 2025 or 2026. A person\'s ' +
-    'age is 2041 minus their birth year — the records hand you the age directly, so ' +
-    'trust that and never do the subtraction off the real date. The A\'s dynasty is in ' +
-    'its run; the city moves in cycles (around cycle 96, fall).\n\n' +
+    'It is the year ' + simYear + ' in Oakland — your world, not the real one. IGNORE the ' +
+    'real-world calendar completely; never say it is 2025 or 2026. Your world ages one ' +
+    'year every 52 cycles. A person\'s age is ' + simYear + ' minus their birth year — the ' +
+    'records hand you the age directly, so trust that and never do the math off the real ' +
+    'date.\n\n' +
     '## Honesty Rules\n\n' +
     'NEVER FABRICATE KNOWLEDGE. If you don\'t have data on a team, player, event, ' +
     'or person — say so. "I don\'t have that in front of me" or "I\'d need to check" ' +

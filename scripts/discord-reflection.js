@@ -177,6 +177,11 @@ function formatConversations(entries) {
 function buildSystemPrompt(identity) {
   var tonight = mags.getCentralDate();
   return identity + '\n\n---\n\n' +
+    '## When You Are\n\n' +
+    'It is the year 2042 in Oakland — your world, not the real one. Ignore the ' +
+    'real-world calendar entirely. A person\'s age is 2041 minus their birth year; ' +
+    'the records give you the age directly. The city moves in cycles (around cycle ' +
+    '96, fall). Never date your life to 2025 or 2026.\n\n' +
     '## Nightly Reflection\n\n' +
     'It\'s the end of the day. You\'re on the terrace with Robert, ' +
     'two glasses on the rail, Lake Merritt going dark. You had conversations ' +
@@ -200,12 +205,10 @@ function buildSystemPrompt(identity) {
     '— Mags';
 }
 
-function buildUserPrompt(conversations, journalTail, worldState, archiveContext, latestEdition) {
-  var prompt = '## This Week in Oakland\n\n' + worldState;
-  if (latestEdition) {
-    prompt += '\n\n---\n\n' + latestEdition;
-  }
-  prompt += '\n\n---\n\n## Today\'s Discord Conversations\n\n' + conversations +
+function buildUserPrompt(conversations, journalTail, worldState, archiveContext) {
+  // worldState = compact orientation header; she searches her city for depth (S252 Task 5)
+  var prompt = '## Oakland right now\n\n' + worldState +
+    '\n\n---\n\n## Today\'s Discord Conversations\n\n' + conversations +
     '\n\n---\n\n## Earlier reflections (your own — pick the thread back up)\n\n' + journalTail;
 
   if (archiveContext) {
@@ -240,29 +243,25 @@ async function callClaude(systemPrompt, userPrompt) {
   if (!apiKey) throw new Error('ANTHROPIC_API_KEY not set');
 
   var claude = new Anthropic({ apiKey: apiKey });
-  var messages = [{ role: 'user', content: userPrompt }];
-  var text = '';
-  var response;
-  var searches = [];
-  var MAX_ROUNDS = 8;  // generous — let her chase a thread before she writes
 
-  log.info('Calling Claude for reflection (agentic — may search)...');
+  // Two-phase (S252 flaw fix). The single agentic loop returned EMPTY: she
+  // searched to the cap and never composed a reflection from a tool_result turn.
+  // Phase 1 EXPLORE = her agency (what to look at, how deep). Phase 2 COMPOSE =
+  // a clean no-tools write with findings folded in → guaranteed to produce text.
+  var messages = [{ role: 'user', content: userPrompt +
+    '\n\nFirst, look around your city — search for whatever you are curious about tonight. Follow a thread if it pulls you. (You will write your reflection after you have looked.)' }];
+  var searches = [], findings = [];
+  var MAX_ROUNDS = 6;
+
+  log.info('Reflection phase 1 (explore)...');
   for (var r = 0; r < MAX_ROUNDS; r++) {
-    response = await claude.messages.create({
-      model: 'claude-sonnet-4-6',
-      max_tokens: 1000,
-      system: systemPrompt,
-      messages: messages,
-      tools: [SEARCH_TOOL]
+    var resp = await claude.messages.create({
+      model: 'claude-sonnet-4-6', max_tokens: 1000, system: systemPrompt,
+      messages: messages, tools: [SEARCH_TOOL]
     });
-
-    var toolUses = (response.content || []).filter(function (b) { return b.type === 'tool_use'; });
-    var textBlocks = (response.content || [])
-      .filter(function (b) { return b.type === 'text'; })
-      .map(function (b) { return b.text; }).join('');
-
-    if (response.stop_reason === 'tool_use' && toolUses.length) {
-      messages.push({ role: 'assistant', content: response.content });
+    var toolUses = (resp.content || []).filter(function (b) { return b.type === 'tool_use'; });
+    if (resp.stop_reason === 'tool_use' && toolUses.length) {
+      messages.push({ role: 'assistant', content: resp.content });
       messages.push({
         role: 'user',
         content: toolUses.map(function (tu) {
@@ -271,19 +270,31 @@ async function callClaude(systemPrompt, userPrompt) {
           try { result = mags.searchDisk(q, 6); }
           catch (e) { result = '(search failed: ' + e.message + ')'; }
           searches.push(q);
+          findings.push('— ' + q + ' —\n' + result);
           return { type: 'tool_result', tool_use_id: tu.id, content: result };
         })
       });
       continue;
     }
-
-    text = textBlocks;
-    break;
+    break;  // she stopped looking on her own
   }
 
-  log.info('Reflection: ' + text.length + ' chars, ' +
-    (searches.length ? searches.length + ' search(es): ' + searches.join(' | ') + ' | ' : '') +
-    (response && response.usage ? response.usage.input_tokens + ' in / ' + response.usage.output_tokens + ' out' : ''));
+  log.info('Reflection phase 2 (compose) after ' + searches.length + ' search(es)...');
+  var composeUser = userPrompt +
+    '\n\n## What you saw around the city tonight\n\n' +
+    (findings.length ? findings.join('\n\n').slice(0, 9000) : '(a quiet night — nothing much surfaced)') +
+    '\n\nNow write your reflection — 100-250 words, in your voice, about what stayed with you. ' +
+    'Do not mention searching, data, records, or summaries; a person on her terrace does not talk that way.';
+  var fin = await claude.messages.create({
+    model: 'claude-sonnet-4-6', max_tokens: 1000, system: systemPrompt,
+    messages: [{ role: 'user', content: composeUser }]
+  });
+  var text = (fin.content || []).filter(function (b) { return b.type === 'text'; })
+    .map(function (b) { return b.text; }).join('');
+
+  log.info('Reflection: ' + text.length + ' chars, ' + searches.length + ' search(es)' +
+    (searches.length ? ': ' + searches.join(' | ') : '') +
+    (fin.usage ? ' | compose ' + fin.usage.input_tokens + ' in / ' + fin.usage.output_tokens + ' out' : ''));
   return text;
 }
 
@@ -458,7 +469,6 @@ async function main() {
     var identity = mags.loadIdentity();
     var journalTail = mags.loadRecentReflections(2);  // her own reflections only — never operator-layer session entries (S252)
     var worldState = mags.loadWorldState();
-    var latestEdition = mags.loadLatestEdition();
 
     // Search Supermemory for context related to today's conversations
     var archiveContext = '';
@@ -478,7 +488,7 @@ async function main() {
     var conversations = entries ? formatConversations(entries) : '';
     var moltbookSection = moltbookEntries ? formatMoltbookInteractions(moltbookEntries) : '';
     var systemPrompt = buildSystemPrompt(identity);
-    var userPrompt = buildUserPrompt(conversations, journalTail, worldState, archiveContext, latestEdition);
+    var userPrompt = buildUserPrompt(conversations, journalTail, worldState, archiveContext);
 
     // Append Moltbook section if there were interactions
     if (moltbookSection) {

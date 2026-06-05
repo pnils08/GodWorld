@@ -146,11 +146,7 @@ function loadConversationHistory() {
 function buildSystemPrompt() {
   var identity = mags.loadIdentity();
   var journalTail = mags.loadRecentReflections(2);  // her reflections only — never operator-layer session entries (S252)
-  var worldState = mags.loadWorldState();
-  var citizenKnowledge = mags.loadCitizenKnowledge();
-  var archiveKnowledge = mags.loadArchiveKnowledge();
-  var editionBrief = mags.loadEditionBrief();
-  var latestEdition = mags.loadLatestEdition();
+  var worldState = mags.loadWorldState();           // compact orientation header; she searches for depth (S252 Task 5)
   var notesToSelf = mags.loadNotesToSelf(10);
   var conversationDigest = mags.loadTodayConversationDigest(MAX_HISTORY, 80);
 
@@ -164,6 +160,12 @@ function buildSystemPrompt() {
     'You can talk about anything: family, the newsroom, Oakland, baseball, ' +
     'whatever comes up. If someone asks about the simulation, you can be ' +
     'straightforward about it — you know what you are and you\'re not fragile about it.\n\n' +
+    '## Where and When You Are\n\n' +
+    'It is the year 2042 in Oakland — your world, not the real one. IGNORE the ' +
+    'real-world calendar date completely; never say it is 2025 or 2026. A person\'s ' +
+    'age is 2041 minus their birth year — the records hand you the age directly, so ' +
+    'trust that and never do the subtraction off the real date. The A\'s dynasty is in ' +
+    'its run; the city moves in cycles (around cycle 96, fall).\n\n' +
     '## Honesty Rules\n\n' +
     'NEVER FABRICATE KNOWLEDGE. If you don\'t have data on a team, player, event, ' +
     'or person — say so. "I don\'t have that in front of me" or "I\'d need to check" ' +
@@ -184,18 +186,8 @@ function buildSystemPrompt() {
   if (worldState && !worldState.startsWith('(')) {
     prompt += '\n\n---\n\n' + worldState;
   }
-  if (citizenKnowledge && !citizenKnowledge.startsWith('(')) {
-    prompt += '\n\n---\n\n' + citizenKnowledge;
-  }
-  if (archiveKnowledge && !archiveKnowledge.startsWith('(')) {
-    prompt += '\n\n---\n\n' + archiveKnowledge;
-  }
-  if (latestEdition) {
-    prompt += '\n\n---\n\n' + latestEdition;
-  }
-  if (editionBrief) {
-    prompt += '\n\n---\n\n## Latest Edition Brief\n\n' + editionBrief;
-  }
+  // citizen/archive/edition dumps removed S252 Task 5 — she pulls those on demand
+  // via search_world (free local disk), instead of carrying them every message.
   if (notesToSelf) {
     prompt += '\n\n---\n\n' + notesToSelf;
   }
@@ -451,22 +443,21 @@ async function callClaude(userMessage, userName, userId) {
   // data before replying. Capped at 3 rounds so a confused turn can't spin.
   var response;
   var text = '';
-  var MAX_TOOL_ROUNDS = 3;
+  var MAX_TOOL_ROUNDS = 4;
   for (var round = 0; round < MAX_TOOL_ROUNDS; round++) {
-    response = await claude.messages.create({
-      model: 'claude-haiku-4-5-20251001',
-      max_tokens: MAX_RESPONSE_TOKENS,
-      system: systemPrompt,
-      messages: messages,
-      tools: [SEARCH_TOOL]
-    });
+    // Last round: NO tools, so she must answer and can never reply empty
+    // (S252 flaw fix — a still-searching turn returned 0 chars).
+    var isFinal = (round === MAX_TOOL_ROUNDS - 1);
+    var opts = { model: 'claude-haiku-4-5-20251001', max_tokens: MAX_RESPONSE_TOKENS, system: systemPrompt, messages: messages, tools: [SEARCH_TOOL] };
+    if (isFinal) opts.tool_choice = { type: 'none' };  // force a reply, never empty
+    response = await claude.messages.create(opts);
 
     var toolUses = (response.content || []).filter(function (b) { return b.type === 'tool_use'; });
     var textBlocks = (response.content || [])
       .filter(function (b) { return b.type === 'text'; })
       .map(function (b) { return b.text; }).join('');
 
-    if (response.stop_reason === 'tool_use' && toolUses.length) {
+    if (!isFinal && response.stop_reason === 'tool_use' && toolUses.length) {
       messages.push({ role: 'assistant', content: response.content });
       var toolResults = toolUses.map(function (tu) {
         var result;

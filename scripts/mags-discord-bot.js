@@ -221,7 +221,7 @@ function searchSupermemory(query) {
   return new Promise(function(resolve) {
     var payload = JSON.stringify({
       q: query,
-      containerTags: ['world-data', 'bay-tribune', 'mags'],
+      containerTags: ['world-data', 'bay-tribune'],
       limit: 5
     });
 

@@ -221,7 +221,7 @@ function searchSupermemory(query) {
   return new Promise(function(resolve) {
     var payload = JSON.stringify({
       q: query,
-      containerTags: ['mags', 'bay-tribune'],
+      containerTags: ['world-data', 'bay-tribune', 'mags'],
       limit: 5
     });
 
@@ -380,6 +380,28 @@ function saveToSupermemory(userName, userMessage, magsResponse, discordUserId) {
 }
 
 // ---------------------------------------------------------------------------
+// Dashboard articles shelf — the 4th search_everything source (published-article
+// index). HTTP GET to the local dashboard with basic auth. (S252)
+// ---------------------------------------------------------------------------
+function searchDashboard(query) {
+  return new Promise(function (resolve) {
+    var user = (process.env.DASHBOARD_USER || '').trim();
+    var pass = (process.env.DASHBOARD_PASS || '').trim();
+    var headers = {};
+    if (user || pass) headers['Authorization'] = 'Basic ' + Buffer.from(user + ':' + pass).toString('base64');
+    var p = '/api/search/articles?q=' + encodeURIComponent(query);
+    var req = require('http').request({ hostname: 'localhost', port: 3001, path: p, method: 'GET', headers: headers, timeout: 5000 }, function (res) {
+      var data = '';
+      res.on('data', function (c) { data += c; });
+      res.on('end', function () { resolve(res.statusCode === 200 ? (data || '').slice(0, 2000) : ''); });
+    });
+    req.on('error', function () { resolve(''); });
+    req.on('timeout', function () { req.destroy(); resolve(''); });
+    req.end();
+  });
+}
+
+// ---------------------------------------------------------------------------
 // Tool: search her own city from local disk (free, never-stale). She calls this
 // when she needs a fact she doesn't already have — citizen, business,
 // neighborhood, edition, canon. Backed by mags.searchDisk (grep over
@@ -411,11 +433,13 @@ async function callClaude(userMessage, userName, userId) {
   var results = await Promise.all([
     searchSupermemory(userMessage),
     fetchUserProfile(userId),
-    mags.loadFamilyData()
+    mags.loadFamilyData(),
+    searchDashboard(userMessage)
   ]);
   var archiveContext = results[0];
   var userProfile = results[1];
   var familyData = results[2];
+  var dashboardArticles = results[3];
 
   if (familyData && !familyData.startsWith('(')) {
     systemPrompt += '\n\n---\n\n' + familyData;
@@ -430,6 +454,10 @@ async function callClaude(userMessage, userName, userId) {
     systemPrompt += '\n\n---\n\n## Archive Knowledge (from Tribune files)\n\n' +
       'The following was found in your archives. Use it naturally — don\'t quote it ' +
       'verbatim, just know it.\n\n' + archiveContext;
+  }
+
+  if (dashboardArticles) {
+    systemPrompt += '\n\n---\n\n## Published articles (dashboard index)\n\n' + dashboardArticles;
   }
 
   // Build messages array from conversation history + new message

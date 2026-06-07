@@ -28,6 +28,8 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 | **[[2026-06-01-headroom-context-compression]]** | Headroom context-compression toolkit — does it earn a place in the stack? | `take-nothing` (canon needs fidelity not compression; boot-burn already solved by discipline) |
 | **[[2026-06-01-initiative-tracker-state]]** | Initiative_Tracker subsystem — read/write graph, the missing ImplementationPhase contract, multi-layer drift | `adopt` (ignites [[../plans/2026-06-01-initiative-tracker-contract]]) |
 | **[[2026-06-02-show-your-work-engine-fidelity]]** | Show-Your-Work — present the engine AS a world (arc+cause), not raw coordinates; Mags_Ledger + brief show-your-work sections; KONO error-exception | `adopt` (ignites [[../plans/2026-06-02-show-your-work-build]]) |
+| **[[2026-06-04-boot-orientation-cleanup]]** | Boot = mechanical-orientation-only; `CLAUDE.md` sole auto-hook, rest on `/session-startup`; history on-call + terminal-tag-scoped; governing-Mags vs worker-Mags; hook-relocation not redesign | `adopt` (direction; no plan — shape emerges when Mike rolls it out) |
+| **[[2026-06-05-anthropic-skills-blog]]** | Anthropic "how we use skills" — Gotchas = highest-signal content (our biggest gap); gotchas+memory live IN the skill not a global file; progressive disclosure works when *triggered*; don't-state-the-obvious; descriptions are triggers | `adopt` (institute Gotchas; skill-local gotchas/memory; corroborates boot md) |
 
 ---
 

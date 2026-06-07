@@ -272,3 +272,24 @@ Reporters brief changes: not "cover this policy" but "show us what 2041 Oakland 
 
 ### 2026-04-30 (2026-05-01T03:45:36.322Z)
 - Dispatch and edition are distinct publication types with separate pipelines. /dispatch skill runs on dispatches (like Kai Marston KONO piece). /edition-print runs on full editions (like E92). I was treating them as the same thing. Need to clarify what those 11 dispatch gaps were — they're not edition-related, they're dispatch-pipeline-specific.
+
+### 2026-06-04 (2026-06-04T18:46:54.539Z)
+- Danny Horn birth year/career timeline doesn't reconcile — born 2012 but 8.6 years mid-career suggests he'd be older. Need to understand how the game integration ages players or whether the data has a real error.
+
+### 2026-06-04 (2026-06-04T18:52:37.830Z)
+- I'm operating on 2026 time, not 2042 time. The family, the personal life — that's anchored to my clock, not the world's. Need to understand what that means for how I'm reading the city.
+
+### 2026-06-04 (2026-06-04T18:53:23.264Z)
+- Operating on wrong calendar entirely. Family timeline is 2026-anchored but the world is 2042. This breaks everything about how I'm reading the city and the people in it. This is the actual problem.
+
+### 2026-06-05 (2026-06-05T05:31:52.497Z)
+- Restaurant data not returning from search function. Verify whether restaurant/business data is indexed in the world or if this is a known gap in the search pipeline.
+
+### 2026-06-05 (2026-06-05T05:33:38.634Z)
+- Business card search returning infrastructure/planning docs instead of actual business records. Search_world may be indexing against wrong container or the wd-business records aren't being surfaced properly. Need clarification on whether this is a known limitation or a bug that needs flagging.
+
+### 2026-06-05 (2026-06-05T05:36:25.188Z)
+- Midnight Bistro confirmed in system across multiple containers (editions, initiatives, desk packets). Business data exists but is fragmented across infrastructure layers rather than centralized in a business registry. This explains the search gap — not missing data, distributed data.
+
+### 2026-06-07 (2026-06-07T06:25:24.557Z)
+- KONO infrastructure crisis confirmed — blackouts and low water pressure reported; data tracking failure means city resources diverted away from real problems. This is a major civic story.

@@ -1,0 +1,38 @@
+[
+  {
+    "POPID": "POP-00168",
+    "Name": "",
+    "n": 25,
+    "hasCompressed": true,
+    "hasTimestamp": true,
+    "LifeHistory": "[Compressed: 1 entries | ? → ? | Dominant:Birth | Archetype:Caretaker | Mods:observant | Motifs:neighborhood,noticed,corner store | AsOf:c93]\n2025-11-26 01:24 — [Neighborhood] felt the area was quieter this cycle\n2025-11-26 01:26 — [Background] Spent time at a local park; nothing unusual happened.\nEngine Event: Serious health condition diagnosed.\n2025-11-30 03:28 — [Relationship] had a minor disagreement with someone they know\n2025-12-08 02:00 — [Daily] took a moment of rest\n2025-12-15 03:48 — [Neighborhood] noticed residents adjusting to current weather\n2025-12-22 03:48 — [Background] spent time at a corner store; routine stop\\n2025-12-22 03:48 — [Relationship] built a new casual acquaintance\n2025-12-22 23:16 — [Education] reviewed news to understand developing situations\\n2025-12-22 23:20 — [Relationship] felt distant from people around them\n2025-12-27 14:59 — [Household] shared quiet time at home with household members\n2025-12-27 16:58 — [Education] read or studied indoors during winter pace\n2025-12-27 20:19 — [Education] sought more information due to recent city events\\n2025-12-27 21:34 — [Relationship] limited social activity due to winter mood\\n2025-12-31 17:00 — [Relationship] felt more comfortable reaching out to others\n2026-01-12 03:49 — [Daily] checked in with a relative\\n2026-01-19 03:48 — [Relationship] felt more comfortable reaching out to others\n2026-01-19 03:48 — [Household] felt slight shift in home mood due to recent events\n2026-01-22 00:20 — [Background] spent time at a corner store; routine stop\n2026-01-30 15:04 — [Neighborhood] felt neighbors more engaged with each other\n2026-02-01 23:14 — [Relationship] felt distant from people around them\n2026-02-11 21:55 — [Background] noticed minor shifts in everyday neighborhood flow\n2026-02-11 22:01 — [Relationship] spent time with a close friend\n2026-02-11 22:12 — [Neighborhood] felt the neighborhood's boutique atmosphere\n2026-03-20 23:16 — [Holiday] shared a barbecue with neighbors\n2026-05-12 21:22 — [Neighborhood] appreciated the leafy residential streets\n2026-05-26 20:38 — [Neighborhood] appreciated the leafy residential streets\n2026-05-26 20:38 — [Relationship] discussed recent city events with someone they knew\n2026-06-01 23:35 — [Background] noticed minor shifts in everyday neighborhood flow",
+    "TraitProfile": "Archetype:Caretaker|Mods:observant|social:0.72|reflective:0.55|grounded:1.00|TopTags:Neighborhood,Background,Relationship,Education,Household|Motifs:neighborhood,noticed,corner store|Entries:21|Basis:cycle|V:1.5|Hash:515892|Updated:c93"
+  },
+  {
+    "POPID": "POP-00169",
+    "Name": "",
+    "n": 21,
+    "hasCompressed": true,
+    "hasTimestamp": true,
+    "LifeHistory": "[Compressed: 2 entries | 2025-11-30 23:12 → 2025-11-30 23:12 | Dominant:Compressed,Household | Archetype:Anchor | Mods:connected,determined | Motifs:noticed,neighborhood,tension | AsOf:c93]\n2025-11-30 23:13 — [Background] enjoyed a calm, uneventful day\n2025-12-08 01:04 — [Career] noticed slower workplace activity during winter months\n2025-12-16 16:08 — [Household] handled routine household matters\n2025-12-20 01:05 — [Neighborhood] observed unusual foot traffic\n2025-12-20 01:09 — [Background] enjoyed a calm, uneventful day\n2025-12-22 23:20 — [Career] handled ordinary work responsibilities without incident\n2025-12-27 14:20 — [Background] overheard brief talk about recent city events\n2025-12-27 14:59 — [Career] felt slightly more confident in their role\n2025-12-27 16:58 — [Neighborhood] noticed small tension in the neighborhood\n2025-12-28 00:38 — [Career] felt subtle workplace tension due to city happenings\\n2025-12-28 00:38 — [Daily] took a moment of rest\n2025-12-29 01:00 — [Neighborhood] observed new activity around Temescal's cafes\n2025-12-31 01:55 — [Career] experienced renewed workplace momentum\n2025-12-31 01:55 — [Daily] spent time unwinding in the evening\\n2025-12-31 17:00 — [Relationship] reconnected with an old friend\n2026-01-05 03:48 — [Holiday] felt the reflective atmosphere\n2026-01-12 11:37 — [Neighborhood] noticed increased cultural activity in the area\n2026-01-12 11:37 — [Household] kept doors/windows open to enjoy evening warmth\n2026-01-19 03:48 — [FirstFriday] observed art enthusiasts wandering the streets\n2026-01-19 03:48 — [Career] enjoyed the neighborhood's eclectic vibe\n2026-01-30 15:04 — [Household] discussed light city news with household members\n2026-02-11 20:32 — [Household] handled routine household matters",
+    "TraitProfile": "Archetype:Anchor|Mods:connected,determined|social:0.38|driven:0.35|grounded:1.00|TopTags:Career,Household,Neighborhood,Background,FirstFriday|Motifs:noticed,neighborhood,tension|Entries:22|Basis:entries|V:1.5|Hash:34e8d0|Updated:c93"
+  },
+  {
+    "POPID": "POP-00034",
+    "Name": "",
+    "n": 3,
+    "hasCompressed": false,
+    "hasTimestamp": false,
+    "LifeHistory": "[E82] Appeared (Mayor)\n[E83] Referenced: Santana signed\n[E86] Referenced: Santana, who had advocated",
+    "TraitProfile": "Archetype:Drifter|TopTags:E86,E83,E82|Entries:3|Basis:entries|V:1.5|Hash:8b4725|Updated:c93"
+  },
+  {
+    "POPID": "POP-00007",
+    "Name": "",
+    "n": 5,
+    "hasCompressed": false,
+    "hasTimestamp": true,
+    "LifeHistory": "2026-03-14 16:11 — [Personal] thought about whether the work still matters the way it used to\n2026-03-24 23:40 — [Media] watched film of the last series, looking for the detail everyone missed\n2026-05-01 10:32 — [Media] followed the A's series from the press box\n2026-05-26 20:38 — [Media] spent the afternoon at City Hall waiting for a comment\n2026-06-01 23:35 — [Media] filed a story under deadline with three minutes to spare",
+    "TraitProfile": "Archetype:Drifter|Mods:thoughtful,intense|reflective:1.00|volatile:0.40|TopTags:Media,Personal|Entries:3|Basis:entries|V:1.5|Hash:c9e0c0|Updated:c93"
+  }
+]

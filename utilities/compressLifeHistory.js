@@ -1,7 +1,25 @@
 /**
  * ============================================================================
- * compressLifeHistory.js v1.4
+ * compressLifeHistory.js v2.0 — citizen dial engine (engine.31 Phase 2, S253)
  * ============================================================================
+ *
+ * Scans LifeHistory and ACCRETES it into a per-citizen 7-dial trait profile.
+ * TraitProfile is now the DERIVED readable face; the machine state (base+streak)
+ * lives in the DialState column.
+ *
+ * v2.0 — STATEFUL inversion (the spine): the old behavior recomputed TraitProfile
+ * from scratch every run (erase-and-rebuild — identity wiped each cycle). v2.0
+ * never erases. It folds events LEAVING the raw-20 window into permanent `base`
+ * dials (fold-on-trim — each event folded exactly once by construction, no
+ * watermark / no double-count), runs the harden-on-streak mechanic, and derives
+ * the readable face (Archetype + dials + Conduct seam) from `base`. Crime =
+ * erosion of the integrity dial. Dial logic lives in citizenMemory.js +
+ * citizenDialMap.js (globals in Apps Script; injected by the Node test).
+ * REQUIRES a DialState column — inert no-op without it (never wipes; the column
+ * is added at deploy alongside Phase 3 back-dating, which seeds `base` for all).
+ * The v1.x trait-axis machinery below (TAG_TRAIT_MAP/computeProfile_/ARCHETYPES/
+ * assignArchetype_/getModifiers_/extractMotifs_) is now DEAD — retained for a
+ * separate measure-twiced cleanup commit, not wired into the v2.0 path.
  *
  * Scans LifeHistory and compresses accumulated events into a personality profile
  * stored in TraitProfile (or OriginVault fallback).
@@ -51,7 +69,7 @@
 // CONSTANTS
 // ============================================================================
 
-var COMPRESS_VERSION = '1.5';
+var COMPRESS_VERSION = '2.0';
 
 // Decay per unit (entry or cycle depending on basis)
 var TAG_DECAY_RATE = 0.95;
@@ -204,7 +222,6 @@ function compressLifeHistory_(ctx, options) {
   options = options || {};
   var trimHistory = options.trimHistory !== false;
   var forceAll = options.forceAll || false;
-  var basisOverride = options.basis || null;
 
   // Phase 42 §5.6 (A3): SL read/mutate via shared ctx.ledger; commit at Phase 10.
   // Phase 9 — runs after all phase05 mutations; reads + writes route through
@@ -226,6 +243,7 @@ function compressLifeHistory_(ctx, options) {
   var iLifeHistory = idx('LifeHistory');
   var iTraitProfile = idx('TraitProfile');
   if (iTraitProfile < 0) iTraitProfile = idx('OriginVault');
+  var iDialState = idx('DialState');
 
   if (iPopID < 0 || iLifeHistory < 0) {
     Logger.log('compressLifeHistory_: Missing required columns');
@@ -233,6 +251,14 @@ function compressLifeHistory_(ctx, options) {
   }
   if (iTraitProfile < 0) {
     Logger.log('compressLifeHistory_: No TraitProfile or OriginVault column found');
+    return;
+  }
+  // v2.0 stateful accretion REQUIRES a persistence column. Without it the dial
+  // engine cannot carry `base` across runs — re-deriving from neutral every cycle
+  // would silently WIPE back-dated identity. Inert no-op until DialState exists
+  // (added at deploy alongside Phase 3 back-dating). Fail-safe: never wipe.
+  if (iDialState < 0) {
+    Logger.log('compressLifeHistory_ v' + COMPRESS_VERSION + ': DialState column absent — inert (no-op) until added (deploy w/ back-dating).');
     return;
   }
 
@@ -244,9 +270,11 @@ function compressLifeHistory_(ctx, options) {
     var popId = row[iPopID];
     var lifeHistory = row[iLifeHistory] ? String(row[iLifeHistory]) : '';
     var existingProfile = row[iTraitProfile] ? String(row[iTraitProfile]) : '';
+    var existingDialState = row[iDialState] ? String(row[iDialState]) : '';
 
     if (!popId || !lifeHistory) continue;
 
+    // cadence guard: at most once per MIN_CYCLES_BETWEEN_COMPRESS (reads Updated:cN off the face)
     if (!forceAll && existingProfile) {
       var lastUpdate = parseLastUpdateCycle_(existingProfile);
       if (lastUpdate > 0 && (cycle - lastUpdate) < MIN_CYCLES_BETWEEN_COMPRESS) {
@@ -263,15 +291,25 @@ function compressLifeHistory_(ctx, options) {
       continue;
     }
 
-    var basis = basisOverride || (parsed.hasCycleMarkers ? 'cycle' : DEFAULT_DECAY_BASIS);
+    // Load persisted dial state (base + streak); neutral if absent/corrupt. `mood`
+    // is NOT persisted — base is the permanent self, mood is a re-derivable swing.
+    var c = deserialize_(parseDialState_(existingDialState));
 
-    var profile = computeProfile_(entries, cycle, basis);
-    var profileString = formatProfileString_(profile, cycle, basis);
+    // FOLD-ON-TRIM (the stateful spine): events LEAVING the raw-20 window accrete
+    // into base + streak, each folded exactly once by construction (the window
+    // physically removes them on trim). No watermark, no double-count. Inert tags
+    // (Compressed / CareerState / edition citations) map to {} -> no movement.
+    foldAgedOutEntries_(c, entries, KEEP_RAW_ENTRIES);
+    zeroMood_(c); // aged-out events leave no lingering mood; base carries the permanent mark
+
+    // derive the readable face from BASE (stable identity, no run-to-run flicker)
+    var profileString = formatDialFace_(c, entries, cycle);
 
     row[iTraitProfile] = profileString;
+    row[iDialState] = serializeDialState_(c);
 
     if (trimHistory && entries.length > KEEP_RAW_ENTRIES) {
-      row[iLifeHistory] = trimLifeHistory_(entries, KEEP_RAW_ENTRIES, profile, cycle);
+      row[iLifeHistory] = trimLifeHistory_(entries, KEEP_RAW_ENTRIES, dialFaceShim_(c), cycle);
     }
 
     rows[r] = row;
@@ -742,13 +780,133 @@ function parseProfileString_(profileStr) {
 
     if (key === 'Archetype') result.archetype = value;
     else if (key === 'Mods') result.modifiers = value ? value.split(',') : [];
-    else if (key === 'TopTags' || key === 'Motifs' || key === 'Entries' || key === 'Updated' || key === 'Basis' || key === 'V' || key === 'Hash') {
+    else if (key === 'TopTags' || key === 'Motifs' || key === 'Entries' || key === 'Updated' || key === 'Basis' || key === 'V' || key === 'Hash' || key === 'Conduct') {
       result.meta[key] = value;
     } else {
       result.traits[key] = parseFloat(value) || 0;
     }
   }
   return result;
+}
+
+// ============================================================================
+// DIAL ENGINE BRIDGE (v2.0 — engine.31 Phase 2, S253)
+// ----------------------------------------------------------------------------
+// Pure-logic dial functions live in citizenMemory.js (newCitizen_/deserialize_/
+// applyEvent_/band_/bandIndex_/describe_/DIALS) + citizenDialMap.js
+// (nudgesForEvent_). In Apps Script all are globals (same project scope); in
+// Node the test injects them onto global before requiring this file.
+// ============================================================================
+
+// DialState cell (JSON {base, streak}) -> object; corrupt/empty -> {} (neutral
+// seed; back-dating re-seeds, so a parse failure degrades gracefully not loudly).
+function parseDialState_(str) {
+  if (!str) return {};
+  try {
+    var o = JSON.parse(str);
+    return (o && typeof o === 'object') ? o : {};
+  } catch (e) { return {}; }
+}
+
+// persist base + streak ONLY (mood is a re-derivable window swing, never stored)
+function serializeDialState_(c) {
+  return JSON.stringify({ base: c.base, streak: c.streak });
+}
+
+function zeroMood_(c) {
+  for (var i = 0; i < DIALS.length; i++) c.mood[DIALS[i]] = 0;
+}
+
+// Fold events LEAVING the raw window into base+streak. Mirrors the EXACT
+// oldEntries split trimLifeHistory_ uses (CareerState excluded + persisted), so
+// fold and trim always agree on what ages out — each aged-out event folds once.
+function foldAgedOutEntries_(c, entries, keepCount) {
+  var filtered = [];
+  for (var k = 0; k < entries.length; k++) {
+    if (entries[k].tag !== 'CareerState') filtered.push(entries[k]);
+  }
+  if (filtered.length <= keepCount) return; // nothing ages out -> nothing folds
+  var oldCount = filtered.length - keepCount;
+  for (var i = 0; i < oldCount; i++) {
+    var e = filtered[i];
+    applyEvent_(c, { label: e.tag, effects: nudgesForEvent_(e.tag) }); // inert tags -> {} no-op
+  }
+}
+
+// Map the 7 dial bands -> one of the readable archetypes the 6 readers expect.
+// Low integrity -> Outlaw (dark endpoint); low composure -> Catalyst; else the
+// strongest HIGH-band dial wins; a neutral citizen is a Drifter (old default).
+function deriveArchetypeFromBands_(c) {
+  var b = c.base;
+  if (bandIndex_(b.integrity) <= 0) return 'Outlaw';
+  if (bandIndex_(b.composure) <= 0) return 'Catalyst';
+  var cand = [
+    { a: 'Striver',   v: b.drive },
+    { a: 'Connector', v: b.sociability },
+    { a: 'Caretaker', v: (b.warmth + b.family) / 2 },
+    { a: 'Watcher',   v: b.openness },
+    { a: 'Anchor',    v: b.composure }
+  ];
+  var best = null;
+  for (var i = 0; i < cand.length; i++) {
+    if (bandIndex_(cand[i].v) >= 3 && (best === null || cand[i].v > best.v)) best = cand[i];
+  }
+  return best ? best.a : 'Drifter';
+}
+
+// Build the readable face from BASE. Holds the format contract: pipe-delimited +
+// Archetype: token (the 6 readers parse only Archetype:/the whole string). Adds a
+// Conduct: token (signed integrity band) as the engine.32 read-seam.
+function formatDialFace_(c, entries, cycle) {
+  var faceCitizen = newCitizen_(c.base); // mood 0 -> current == base
+  var parts = [];
+  parts.push('Archetype:' + deriveArchetypeFromBands_(c));
+  var desc = describe_(faceCitizen);
+  if (desc) parts.push('Mods:' + desc.split(', ').join(','));
+  for (var i = 0; i < DIALS.length; i++) {
+    parts.push(DIALS[i] + ':' + Math.round(c.base[DIALS[i]]));
+  }
+  parts.push('Conduct:b' + band_(faceCitizen, 'integrity'));
+  // TopTags retained for desk texture (from the parsed window)
+  var tagCounts = {};
+  for (var t = 0; t < entries.length; t++) {
+    var tg = entries[t].tag || 'Untagged';
+    tagCounts[tg] = (tagCounts[tg] || 0) + 1;
+  }
+  var topTags = getTopN_(tagCounts, 5);
+  if (topTags.length) parts.push('TopTags:' + topTags.join(','));
+  parts.push('Entries:' + entries.length);
+  parts.push('V:' + COMPRESS_VERSION);
+  parts.push('Hash:' + shortHash_(parts.join('|')));
+  parts.push('Updated:c' + cycle);
+  return parts.join('|');
+}
+
+// minimal profile shim so trimLifeHistory_'s [Compressed:] block keeps working
+function dialFaceShim_(c) {
+  var mods = describe_(newCitizen_(c.base));
+  return {
+    archetype: deriveArchetypeFromBands_(c),
+    modifiers: mods ? mods.split(', ') : [],
+    topMotifs: []
+  };
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    compressLifeHistory_: compressLifeHistory_,
+    parseLifeHistoryEntries_: parseLifeHistoryEntries_,
+    parseLastUpdateCycle_: parseLastUpdateCycle_,
+    parseDialState_: parseDialState_,
+    serializeDialState_: serializeDialState_,
+    foldAgedOutEntries_: foldAgedOutEntries_,
+    deriveArchetypeFromBands_: deriveArchetypeFromBands_,
+    formatDialFace_: formatDialFace_,
+    parseProfileString_: parseProfileString_,
+    COMPRESS_VERSION: COMPRESS_VERSION,
+    KEEP_RAW_ENTRIES: KEEP_RAW_ENTRIES,
+    MIN_CYCLES_BETWEEN_COMPRESS: MIN_CYCLES_BETWEEN_COMPRESS
+  };
 }
 
 

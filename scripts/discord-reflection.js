@@ -285,7 +285,12 @@ async function callClaude(systemPrompt, userPrompt) {
     '\n\n## What you saw around the city tonight\n\n' +
     (findings.length ? findings.join('\n\n').slice(0, 9000) : '(a quiet night — nothing much surfaced)') +
     '\n\nNow write your reflection — 100-250 words, in your voice, about what stayed with you. ' +
-    'Do not mention searching, data, records, or summaries; a person on her terrace does not talk that way.';
+    'Do not mention searching, data, records, or summaries; a person on her terrace does not talk that way.' +
+    '\n\nThis is the NEXT night after your "Earlier reflections" above — they are yours, not a fresh start. ' +
+    'Do NOT repeat them: not the same opening, not the same image, not the same contrast. ' +
+    'If last night you said you would do something tomorrow, this IS tomorrow — pick up that thread and ' +
+    'move it forward (did you do it? what came of it?), do not restate the intention. ' +
+    'Write about what is NEW or what CHANGED since last night. A life moves; so should this.';
   var fin = await claude.messages.create({
     model: 'claude-sonnet-4-6', max_tokens: 1000, system: systemPrompt,
     messages: [{ role: 'user', content: composeUser }]
@@ -307,18 +312,18 @@ async function callClaude(systemPrompt, userPrompt) {
 // 2026-04-11: model wrote "2026-02-23" despite prompt saying 2026-04-11).
 // This post-processing enforces the correct date regardless of model output.
 function normalizeReflectionDate(reflection, today) {
-  var headerPattern = /(###\s+Nightly Reflection\s+—\s+)\d{4}-\d{2}-\d{2}/;
-  if (headerPattern.test(reflection)) {
-    var before = reflection.match(headerPattern)[0];
-    var after = '### Nightly Reflection — ' + today;
-    if (before !== after) {
-      log.warn('Model wrote wrong date in header: "' + before + '" → normalized to "' + after + '"');
-    }
-    return reflection.replace(headerPattern, '$1' + today);
+  // The model emits its own header(s) — sometimes a hallucinated date, sometimes
+  // a flavor line like "### Nightly Reflection — Cycle 96, Late Evening". The old
+  // logic only matched a real YYYY-MM-DD header; a flavor header fell through and
+  // a SECOND header was prepended → the duplicate-header bug that poisoned
+  // loadRecentReflections' read-back. Strip every leading "### Nightly Reflection"
+  // header the model produced, then prepend exactly ONE canonical date header.
+  // Guarantees a single header per entry. (S252)
+  var stripped = reflection.replace(/^(\s*###\s+Nightly Reflection\b[^\n]*\n+)+/, '');
+  if (stripped !== reflection.replace(/^\s+/, '')) {
+    log.info('Normalized model header(s) → single "### Nightly Reflection — ' + today + '"');
   }
-  // Model didn't produce a header at all — prepend one.
-  log.warn('Model output missing "### Nightly Reflection — DATE" header — prepending.');
-  return '### Nightly Reflection — ' + today + '\n\n' + reflection;
+  return '### Nightly Reflection — ' + today + '\n\n' + stripped.trim() + '\n';
 }
 
 // ---------------------------------------------------------------------------

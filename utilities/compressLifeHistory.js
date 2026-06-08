@@ -829,7 +829,7 @@ function foldAgedOutEntries_(c, entries, keepCount) {
   var oldCount = filtered.length - keepCount;
   for (var i = 0; i < oldCount; i++) {
     var e = filtered[i];
-    applyEvent_(c, { label: e.tag, effects: nudgesForEvent_(e.tag) }); // inert tags -> {} no-op
+    applyEvent_(c, { label: e.tag, effects: nudgesForEvent_(e.tag, 1, e.text) }); // structural markers -> {} no-op
   }
 }
 

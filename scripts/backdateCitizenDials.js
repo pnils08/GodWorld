@@ -39,7 +39,7 @@ function backdate(events) {
       const gap = Math.min(ev.cycle - lastCycle, 10); // bound settle iterations
       for (let k = 0; k < gap; k++) E.settleCycle_(c);
     }
-    E.applyEvent_(c, { label: ev.tag, effects: M.nudgesForEvent_(ev.tag) });
+    E.applyEvent_(c, { label: ev.tag, effects: M.nudgesForEvent_(ev.tag, 1, ev.text) });
     if (ev.cycle != null) lastCycle = ev.cycle;
   }
   for (const d of E.DIALS) c.mood[d] = 0; // base is the seed; mood not persisted
@@ -67,7 +67,7 @@ function offNeutralDials(c) {
     const tag = String(a.EventTag || '').trim();
     if (M.hasTag_(tag)) archMapped++; else archInert++;
     const cyc = parseInt(a.Cycle, 10);
-    (archByPop[a.POPID] = archByPop[a.POPID] || []).push({ tag, cycle: isNaN(cyc) ? null : cyc, src: 'archive' });
+    (archByPop[a.POPID] = archByPop[a.POPID] || []).push({ tag, text: a.EventText || '', cycle: isNaN(cyc) ? null : cyc, src: 'archive' });
   }
 
   const rows = [];
@@ -81,7 +81,7 @@ function offNeutralDials(c) {
 
     // events = archive (older) + parsed O column (recent), chronological
     const oParsed = C.parseLifeHistoryEntries_(String(cit.LifeHistory || ''));
-    const oEvents = oParsed.entries.map((e, i) => ({ tag: e.tag, cycle: e.cycle != null ? e.cycle : null, src: 'O' }));
+    const oEvents = oParsed.entries.map((e) => ({ tag: e.tag, text: e.text || '', cycle: e.cycle != null ? e.cycle : null, src: 'O' }));
     const events = (archByPop[cit.POPID] || []).concat(oEvents);
     // stable chronological sort: known cycles ascending, unknown-cycle events keep relative order at the end
     events.forEach((e, i) => e._i = i);
@@ -96,7 +96,6 @@ function offNeutralDials(c) {
     if (events.length > 0 && mappedHere === 0) allInertHistory++;
 
     const c = backdate(events);
-    const face = C.formatDialFace_(c, oParsed.entries, 0);
     const archetype = C.deriveArchetypeFromBands_(c);
     archetypeDist[archetype] = (archetypeDist[archetype] || 0) + 1;
 

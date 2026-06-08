@@ -112,6 +112,14 @@ Texture tags (Weather/Holiday/FirstFriday/Sports) carry **near-zero** nudges —
 7. The **tag→dial map covers every emitted tag**, is extensible, and supersedes `TAG_TRAIT_MAP`.
 8. Dial **bands are exposed as the seam engine.32 reads** (Integrity→crime, Drive→career, Family-oriented→births).
 
+## Forward program — the dial system is the new BASE (S253, Mike)
+
+Once the dials lock, **every output on the Simulation_Ledger feeds into them** — events, careers, relationships, health, civic, fame. The whole citizen system recalibrates *toward* this base over time; the more each input is weighted, the more unique each citizen becomes. This is a program of later phases, not this build:
+
+- **Event-generation RATE + severity (the diagnosed cause of 86%-neutral).** Measured S253: **64% of citizens have ≤2 mapped events**, but **100% of citizens with ≥10 events differentiate** — so the system is *starved, not broken*. The half-built generators ran few cycles and many citizens get 0 events in a ~1-week cycle. Fix = dailies fire more often + severity spreads into buckets (petty→grave), so compression has real material. **engine.32 / generator calibration.**
+- **Whole-ledger calibration.** Each SL subsystem (career mobility, household, health lifecycle, civic role, fame) gets weighted into the salience/nudge model so its signal shapes the dials. Incremental, per-subsystem.
+- **Milestones-stay-in-full + the self-STORY layer (earned bio).** Compression must protect formative events from trim; the narrative that turns "high-drive/low-family" into "I chose work and carry it" is **engine.30**, sitting on top of these dials.
+
 ## Open design questions
 - **Band thresholds + count** — 5 extreme-weighted bands is the working cut; tune widths + count empirically in Phase 1/6.
 - **Nudge sizes + harden params** — per-tag deltas, the harden streak (proto: 3) + fraction (proto: 0.4) + decay (proto: 0.8) — tune empirically.

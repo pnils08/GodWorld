@@ -46,6 +46,7 @@ var DIAL_MAP = {
   'Quoted':             { sociability: 3 },
   'Public':             { sociability: 4 },           // public life / recognition
   'Team':               { sociability: 3 },           // sports/team belonging
+  'Season':             { drive: 3, sociability: 2 },  // Game-mode: competing through a season
   'Cultural':           { openness: 5, sociability: 3 },
   'Lifestyle':          { openness: 3 },
   'Mentorship':         { warmth: 6, drive: 2 },

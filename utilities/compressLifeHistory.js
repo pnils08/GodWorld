@@ -764,6 +764,43 @@ function getCitizenArchetype_(ctx, popId) {
   return profile;
 }
 
+// engine.31 Phase 5 — the event-bias SEAM engine.32 reads.
+// Reads the AUTHORITATIVE DialState (machine truth), NOT the derived TraitProfile
+// face string, and returns the band surface generators consume. Cached per ctx
+// like the archetype. Returns null when DialState is absent/empty (pre-deploy, or
+// a never-seeded citizen) — engine.32 generators treat null as "use base rates."
+// Contract (criterion 8): Integrity low band -> crime reachable; Drive band ->
+// career-event frequency; Family band -> birth/marriage frequency. Generation
+// itself lives in engine.32; this only EXPOSES the read surface.
+function getCitizenDialBands_(ctx, popId) {
+  if (!ctx._dialBandCache) ctx._dialBandCache = {};
+  if (ctx._dialBandCache.hasOwnProperty(popId)) return ctx._dialBandCache[popId];
+
+  var citizen = ctx.citizenLookup && ctx.citizenLookup[popId];
+  var dialStr = citizen && citizen.DialState;
+  if (!dialStr) { ctx._dialBandCache[popId] = null; return null; }
+
+  var parsed = parseDialState_(dialStr);
+  if (!parsed.base) { ctx._dialBandCache[popId] = null; return null; }
+
+  var c = deserialize_(parsed);
+  var bands = {}, mult = {};
+  for (var i = 0; i < DIALS.length; i++) {
+    var d = DIALS[i];
+    bands[d] = band_(c, d);            // signed -2..+2 (readable / engine.32)
+    mult[d] = bandMultiplier_(c, d);   // 0.5..1.5 event-probability multiplier
+  }
+  var result = {
+    bands: bands,
+    mult: mult,
+    crimeReachable: bandIndex_(current_(c, 'integrity')) <= 0, // low band gates crime at all
+    careerFreq: mult.drive,                                    // Drive -> career events
+    familyFreq: mult.family                                    // Family-oriented -> birth/marriage
+  };
+  ctx._dialBandCache[popId] = result;
+  return result;
+}
+
 function parseProfileString_(profileStr) {
   if (!profileStr) return null;
 
@@ -904,6 +941,7 @@ if (typeof module !== 'undefined' && module.exports) {
     deriveArchetypeFromBands_: deriveArchetypeFromBands_,
     formatDialFace_: formatDialFace_,
     parseProfileString_: parseProfileString_,
+    getCitizenDialBands_: getCitizenDialBands_,
     COMPRESS_VERSION: COMPRESS_VERSION,
     KEEP_RAW_ENTRIES: KEEP_RAW_ENTRIES,
     MIN_CYCLES_BETWEEN_COMPRESS: MIN_CYCLES_BETWEEN_COMPRESS

@@ -220,6 +220,9 @@ function generateCitizensEvents_(ctx) {
     // v2.7: TraitProfile column (or OriginVault fallback)
     var iTraitProfile = idx("TraitProfile");
     if (iTraitProfile < 0) iTraitProfile = idx("OriginVault");
+    // engine.31 Phase 5: DialState carries the machine truth the dial-band seam
+    // reads (getCitizenDialBands_). Inert (-1 -> "") until the column exists.
+    var iDialState = idx("DialState");
 
     for (var ri = 0; ri < rows.length; ri++) {
       var rowL = rows[ri];
@@ -239,7 +242,9 @@ function generateCitizensEvents_(ctx) {
         Occupation: iOccupation >= 0 ? (rowL[iOccupation] || "") : "",
         BirthYear: iBirthYear >= 0 ? Number(rowL[iBirthYear] || 0) : 0,
         // v2.7: TraitProfile for archetype/motif access
-        TraitProfile: iTraitProfile >= 0 ? (rowL[iTraitProfile] || "") : ""
+        TraitProfile: iTraitProfile >= 0 ? (rowL[iTraitProfile] || "") : "",
+        // engine.31 Phase 5: dial-band seam source (empty until DialState exists)
+        DialState: iDialState >= 0 ? (rowL[iDialState] || "") : ""
       };
     }
   }

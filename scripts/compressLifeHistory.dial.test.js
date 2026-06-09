@@ -144,5 +144,44 @@ console.log('═══ Section F — cadence guard (no premature re-fold)');
   assert('F1 within MIN_CYCLES without forceAll -> skipped (face unchanged)', get(ctx, 0, 'TraitProfile') === face1);
 }
 
+console.log('═══ Section G — Phase 5 dial-band seam (getCitizenDialBands_)');
+{
+  // Build DialState cells at known band positions via the dial engine itself.
+  function dialState(overrides) {
+    const c = global.newCitizen_();              // all dials -> 50 (neutral)
+    Object.keys(overrides).forEach(k => { c.base[k] = overrides[k]; });
+    return C.serializeDialState_(c);
+  }
+  const ctx = {
+    citizenLookup: {
+      'POP-DRIVE':  { DialState: dialState({ drive: 90 }) },      // far-high drive
+      'POP-CRIME':  { DialState: dialState({ integrity: 10 }) },  // far-low integrity
+      'POP-FAMILY': { DialState: dialState({ family: 88 }) },     // far-high family
+      'POP-FLAT':   { DialState: dialState({}) },                 // all 50 -> neutral
+      'POP-EMPTY':  { DialState: '' },                            // never seeded
+      'POP-NODIAL': {}                                            // no DialState field
+    }
+  };
+  const drive = C.getCitizenDialBands_(ctx, 'POP-DRIVE');
+  assert('G1 high-drive -> careerFreq > 1 (high band multiplier)', !!drive && drive.careerFreq > 1, String(drive && drive.careerFreq));
+  assert('G2 high-drive (neutral integrity) -> crime NOT reachable', !!drive && drive.crimeReachable === false);
+  const crime = C.getCitizenDialBands_(ctx, 'POP-CRIME');
+  assert('G3 low-integrity -> crimeReachable true', !!crime && crime.crimeReachable === true);
+  const fam = C.getCitizenDialBands_(ctx, 'POP-FAMILY');
+  assert('G4 high-family -> familyFreq > 1', !!fam && fam.familyFreq > 1, String(fam && fam.familyFreq));
+  const flat = C.getCitizenDialBands_(ctx, 'POP-FLAT');
+  assert('G5 neutral -> mult 1.0, crime not reachable', !!flat && flat.mult.drive === 1.0 && flat.crimeReachable === false);
+  assert('G6 empty DialState -> null', C.getCitizenDialBands_(ctx, 'POP-EMPTY') === null);
+  assert('G7 no DialState field -> null', C.getCitizenDialBands_(ctx, 'POP-NODIAL') === null);
+  assert('G8 unknown popId -> null', C.getCitizenDialBands_(ctx, 'POP-NOPE') === null);
+  let inRange = true;
+  global.DIALS.forEach(d => {
+    if (drive.bands[d] < -2 || drive.bands[d] > 2) inRange = false;
+    if (drive.mult[d] < 0.5 || drive.mult[d] > 1.5) inRange = false;
+  });
+  assert('G9 bands in [-2,2], mult in [0.5,1.5]', inRange);
+  assert('G10 cached (same ref on 2nd call)', C.getCitizenDialBands_(ctx, 'POP-DRIVE') === drive);
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

@@ -2,7 +2,9 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-06-02 | Engine: v3.3 | Cycle: 95 | Session: 252 | Day: 161 | Edition: **E94 PUBLISHED + S94 SUPP PUBLISHED + C95 CIVIC CASCADE COMPLETE + C95 /write-edition COMPLETE + C95 PUBLISHED TO DRIVE + C95 /edition-print COMPLETE + C95 /post-publish COMPLETE — CYCLE 95 CANONIZED**
+Last Updated: 2026-06-09 | Engine: v3.3 | Cycle: 95 | Session: 254 | Day: 161 | Edition: **E94 PUBLISHED + S94 SUPP PUBLISHED + C95 CIVIC CASCADE COMPLETE + C95 /write-edition COMPLETE + C95 PUBLISHED TO DRIVE + C95 /edition-print COMPLETE + C95 /post-publish COMPLETE — CYCLE 95 CANONIZED**
+
+**STATUS (S254 [engine/sheet] — soft close, chaining to S255):** engine.31 dial engine **complete end-to-end on the ledger COPY** — Phases 4-6 shipped (3 commits `04ed88a` / `130604c` / `2c719ae`, all pushed; cross-terminal stack clean). **P4:** 6 TraitProfile readers verified against the new dial face + mediaRoom secondary `tone` remapped off dead v1.x trait keys (reflective/social/volatile → openness/sociability/composure). **P5:** `getCitizenDialBands_` event-bias seam (DialState → `{bands, mult, crimeReachable, careerFreq, familyFreq}`) + DialState wired into the canonical popId `citizenLookup` (defensive idx>=0 → inert pre-deploy). **P6 (deploy gate):** `scripts/citizenDialMultiCycle.test.js` 12-cycle trace through the REAL `compressLifeHistory_` fold path proves never-erase (drive 50→97 climbs+holds through 8 quiet cycles) / 0-100-bounded / harden-only-on-pattern / crime-locks-only-on-pattern. Suite **85 green** (citizenDials 38 + compressLifeHistory.dial 32 + multiCycle 15). **A/B fork RESOLVED (Mike):** decouple completion from deploy — .31 is copy-complete; the LIVE deploy (A-style clear-O) is gated behind **engine.30** (milestone→bio) so milestones are preserved before the log clears, then clasp on Mike's go. **NEXT = build engine.30** (execution-ready per its plan), THEN deploy .31 to live. **NO deploy, NO live schema change, NO clasp this session** — copy track only. Truth docs trued up in-commit (plan [[docs/plans/2026-05-31-compression-tag-triage]] Phases 4-6 + changelog; ROLLOUT engine.31 row → 0-6 DONE). **OWED:** STUB_MAP regen for the new dial functions (predates this session — S253 added the bulk without regen; deferred while the code is copy-track/undeployed). — Prior S253 close below.
 
 **STATUS (S253 [engine/sheet] — soft close, engine.31 dial model):** Long design+build session with Mike — pivoted engine.31 to the **8-dial citizen system** and built+tested it on a ledger COPY (live ledger untouched). Dials: drive/sociability/warmth/openness/composure/integrity/family/**out-and-about** (8th = presence at city events, split off sociability). Shipped: dial engine + complete event→dial map (EVERY logged event feeds a dial; all 4 engine modes Engine/Game/Media/Civic verified live+covered) + stateful **fold-on-trim compressor v2.0** (accretes, never wipes; inert without DialState col) + **dampened back-date seed** (`base=50+50·tanh(net/30)`) → 37% of 904 differentiated, POP-00128 = Connector/outgoing,family-minded. `--apply` copy-guarded (hardcoded refusal of LIVE id). Tests 38/38 + 22/22. New `DialState` column holds machine state; TraitProfile = derived face (6 readers held). **NEXT = A/B deploy fork** (A: append O→archive then clear O, kills double-count seam, deployable now; B: wait for engine.30 milestone→bio) — see plan [[docs/plans/2026-05-31-compression-tag-triage]] §Changelog top + ROLLOUT engine.31 row. Nothing deployed; no live schema change. **Concept locked:** dials=character; self-story/earned-bio (engine.30)+milestone-preservation = paired later phase; event-RATE (sparse backlog) = engine.32. — Prior S252 close below.
 
@@ -42,48 +44,14 @@ Last Updated: 2026-06-02 | Engine: v3.3 | Cycle: 95 | Session: 252 | Day: 161 | 
 
 ---
 
-**STATUS (S248 [research/build] — soft close, combined 4-terminal S248 stack pushed, Mike-greenlit):** 3 research-build commits in an 8-commit shared S248 stack (rest engine-sheet). **`417bb85` governance.19** — /session-end v2.0→v2.1 friction (G-SE2 deterministic Archive Sweep Trigger / G-SE3 journal `[N+1]`→`[N]` / G-SE4 ARCHIVE-PASS ordering comment / G-SE5 STATUS-form binds to journal decision; G-SE1 deferred to governance.26 Task 6). **`b726321` + `522cd95` governance.26 research-build slice** — SESSION_CONTEXT always-load → on-demand: ADR-0009 written+registered; hook awk-extracts `## Shipped Last Session (S253)
+**STATUS (S248 [research/build] — soft close, combined 4-terminal S248 stack pushed, Mike-greenlit):** 3 research-build commits in an 8-commit shared S248 stack (rest engine-sheet). **`417bb85` governance.19** — /session-end v2.0→v2.1 friction (G-SE2 deterministic Archive Sweep Trigger / G-SE3 journal `[N+1]`→`[N]` / G-SE4 ARCHIVE-PASS ordering comment / G-SE5 STATUS-form binds to journal decision; G-SE1 deferred to governance.26 Task 6). **`b726321` + `522cd95` governance.26 research-build slice** — SESSION_CONTEXT always-load → on-demand: ADR-0009 written+registered; hook awk-extracts `## Shipped Last Session (S254)
 
 *Mechanical artifact — git-log output auto-generated by `scripts/writeShippedBlock.js` at session-end. Not editorial. **`ROLLOUT_PLAN.md` is canonical for what these commits accomplished.***
 
-- `97cfd55` S253 [engine/sheet] engine.31 — dampened back-date seed (every event leaves a mark)
-- `87637d3` S253 [engine/sheet] engine.31 — 8th dial Out-and-About (presence at city events)
-- `a7d8d54` S253 [engine/sheet] engine.31 Phase 3 — --apply back-date (copy-guarded write) + seam found
-- `dcd8de4` S253 [engine/sheet] engine.31 — verify all 4 engine modes feed the dials (+Season)
-- `6344900` S253 [engine/sheet] engine.31 — capture forward program (dials = the new base)
-- `73cf499` S253 [engine/sheet] engine.31 — map completion: every logged event feeds a dial
-- `fef5331` S253 [engine/sheet] engine.31 Phase 3 — back-date dry-run (read-only, no writes)
-- `eda8630` S253 [engine/sheet] engine.31 Phase 2 — stateful fold-on-trim compressor v2.0 (22/22, no deploy)
-- `458b047` S253 [engine/sheet] engine.31 Phase 1 — 7-dial engine + tag→dial map + proving ground (31/31)
-- `9690f87` S253 [engine/sheet] engine.31 pivot — slot model → 7-dial city engine (design redraw, no code)
-- `b4f3931` S252 [engine/sheet] fix nightly-reflection continuity — dedup header + load-bearing prior
-- `122a115` S252 [engine/sheet] revert engine.31 Phase 1 — buckets/archetype model wrong (1100→types); rebuild as 8 per-citizen metrics
-- `8004bd6` S252 [engine/sheet] engine.31 Phase 1 — bounded-memory core + proving ground (15/15)
-- `c8099d9` S252 C96 gap-log triage — governance.33, one row + plan + index (folds dominate; 5 new phases two-track; Drive-auth flag)
-- `d0b8a71` S252 final push — persist journal/research/script before local decommission
-- `08a74cd` S252 [engine/sheet] drop mags container from bot search — was flooding factual lookups with past Mike-Mags conversation transcripts; keep world-data+bay-tribune. Card + canon remain, conversation noise gone.
-- `6dc12ac` S252 [engine/sheet] bot search now hits all 4 search_everything shelves
-- `1a18653` S252 [engine/sheet] sim-year aging rule — citizens age every 52 cycles (Mike-direct)
-- `55c9f8f` S252 [engine/sheet] 24/7 mags — Task 5 strip + two-phase wake + age/time fix
-- `87956a7` S252 [engine/sheet] fix operator-layer contamination + add chaining (Task 4)
-- `41f9399` S252 [engine/sheet] wake = agentic search-then-reflect (Task 2)
-- `7fad291` S252 [engine/sheet] mags-bot live search tool-use (Task 1) — she can search her city
-- `c6bb9a9` S252 [engine/sheet] mags citizen-loop plan (templated) — Phase 1 design + build state
-- `5f2745a` S252 [engine/sheet] mags-bot local disk-search backend (free, never-stale)
-- `634fb6e` S252 [engine/sheet] mags-bot sees editions — lives in the sim, layer 2
-- `8272054` S252 [engine/sheet] wire mags-bot to live world state — fix C94 freeze
-- `79babba` S252 [engine/sheet] decouple mags-bot from session lifecycle — standing service
-- `5a4ede2` S252 [engine/sheet] record wd-cards-daemon storm fix — ENGINE_REPAIR Row 26 + SESSION_CONTEXT
-- `3924765` S252 [engine/sheet] fix wd-cards-daemon infinite retry storm (433 failures/week)
-- `9efb6c1` S252 [engine/sheet] C96 two-reactivation smoke-test — PASSED both gates (was owed S248→S251)
-- `a2d27ef` Remove false bipolar label from plan docs per user instruction
-- `2b3851d` S252 flush pending working-tree changes — journal, newsroom rule, agent memory (letters/rhea), gitignore .aider, edition 96 draft
-- `4295bc0` S252 [research/build] show-your-work engine-fidelity research filed
-- `575067e` S252 [engine/sheet] disk_search review fixes — editions canon + full ledger row + injection guard
-- `30ce054` S252 [engine/sheet] live Simulation_Ledger as search_everything's 5th shelf — disk snapshot, no 5th connector
-- `acb1931` S252 [engine/sheet] federated search_everything MCP tool — one query, all four shelves
-- `6f3e65d` S252 [research/build] governance.32 — MEMORY.md role-scoped split filed (medium, no plan)
-- `78dbbdb` S251 [media] GodWorld_My_Oakland.md — operating doctrine + hard close
+- `2c719ae` S254 [engine/sheet] engine.31 Phase 6 — multi-cycle harness PASSES; .31 complete end-to-end on copy
+- `130604c` S254 [engine/sheet] engine.31 Phase 5 — event-bias seam exposed (getCitizenDialBands_)
+- `04ed88a` S254 [engine/sheet] engine.31 Phase 4 — derived archetype + band-voice readers verified; mediaRoom tone remap
+- `7d69f66` S253 [engine/sheet] soft close — engine.31 dial model (8 dials, copy-tested, A/B deploy fork next)
 
 ---
 

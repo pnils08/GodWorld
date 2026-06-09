@@ -927,9 +927,11 @@ function generateCitizenSpotlight_(ctx, S, cal) {
     for (var pi = 0; pi < parts.length; pi++) {
       var part = parts[pi];
       if (part.indexOf('Archetype:') === 0) archetype = part.substring(10);
-      if (part.indexOf('reflective:') === 0 && parseFloat(part.substring(11)) >= 0.6) tone = 'noir';
-      if (part.indexOf('social:') === 0 && parseFloat(part.substring(7)) >= 0.6) tone = 'bright';
-      if (part.indexOf('volatile:') === 0 && parseFloat(part.substring(9)) >= 0.6) tone = 'tense';
+      // Tone reads the dial face (citizenMemory bands, 0-100): curious->investigative,
+      // social->uplifting, volatile(low composure)->conflict. Order: tense last wins on ties.
+      if (part.indexOf('openness:') === 0 && parseFloat(part.substring(9)) >= 60) tone = 'noir';
+      if (part.indexOf('sociability:') === 0 && parseFloat(part.substring(12)) >= 60) tone = 'bright';
+      if (part.indexOf('composure:') === 0 && parseFloat(part.substring(10)) < 40) tone = 'tense';
     }
 
     var name = ((citizen.First || '') + ' ' + (citizen.Last || '')).trim() || popId;

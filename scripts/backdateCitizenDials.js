@@ -31,6 +31,7 @@ const C = require('/root/GodWorld/utilities/compressLifeHistory.js');
 const fs = require('fs');
 const LIVE_ID = '1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk'; // NEVER --apply here
 const SEED_CYCLE = 95; // stamps Updated:cN on the seeded face
+const SEED_SCALE = 30; // dampened-seed sensitivity: net signal / SCALE -> tanh (tune Phase 6)
 const NEUTRAL_BAND = E.bandIndex_(50);
 
 function arg(name) {
@@ -39,20 +40,21 @@ function arg(name) {
 }
 function colLetter(n) { var s = ''; while (n > 0) { var m = (n - 1) % 26; s = String.fromCharCode(65 + m) + s; n = Math.floor((n - 1) / 26); } return s; }
 
-// chronological replay of a citizen's events -> dials (settle as cycles advance,
-// so a one-off fades and only a sustained pattern hardens into base).
+// DAMPENED SEED: sum each dial's net signal across the whole life, then map
+// through a saturating curve so EVERY event leaves a proportional mark but
+// prolific citizens asymptote toward the poles (never blow past 0/100). No
+// streak/harden here — that's the LIVE compressor's job going forward; the seed
+// just reflects the net shape of a life. base 50 = no signal.
 function backdate(events) {
-  const c = E.newCitizen_();
-  let lastCycle = null;
+  const net = {}; E.DIALS.forEach(d => net[d] = 0);
   for (const ev of events) {
-    if (ev.cycle != null && lastCycle != null && ev.cycle > lastCycle) {
-      const gap = Math.min(ev.cycle - lastCycle, 10);
-      for (let k = 0; k < gap; k++) E.settleCycle_(c);
-    }
-    E.applyEvent_(c, { label: ev.tag, effects: M.nudgesForEvent_(ev.tag, 1, ev.text) });
-    if (ev.cycle != null) lastCycle = ev.cycle;
+    const fx = M.nudgesForEvent_(ev.tag, 1, ev.text);
+    for (const d in fx) if (net[d] != null && Object.prototype.hasOwnProperty.call(fx, d)) net[d] += fx[d];
   }
-  for (const d of E.DIALS) c.mood[d] = 0; // base is the seed; mood not persisted
+  const c = E.newCitizen_(); // base 50, mood 0, streak 0 (live harden starts fresh)
+  for (const d of E.DIALS) {
+    c.base[d] = Math.max(0, Math.min(100, 50 + 50 * Math.tanh(net[d] / SEED_SCALE)));
+  }
   return c;
 }
 

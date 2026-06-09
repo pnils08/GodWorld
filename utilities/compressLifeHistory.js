@@ -845,7 +845,8 @@ function deriveArchetypeFromBands_(c) {
     { a: 'Connector', v: b.sociability },
     { a: 'Caretaker', v: (b.warmth + b.family) / 2 },
     { a: 'Watcher',   v: b.openness },
-    { a: 'Anchor',    v: b.composure }
+    { a: 'Anchor',    v: b.composure },
+    { a: 'Regular',   v: b.outabout }   // a fixture at the city's events
   ];
   var best = null;
   for (var i = 0; i < cand.length; i++) {

@@ -24,7 +24,7 @@ function replay(c, tag, n, mult) { for (let i = 0; i < n; i++) { E.applyEvent_(c
 console.log('═══ Section A — dial mechanic');
 {
   const c = E.newCitizen_();
-  assert('A1 all 7 dials init at midpoint 50', E.DIALS.every(d => E.current_(c, d) === 50));
+  assert('A1 all 8 dials init at midpoint 50', E.DIALS.length === 8 && E.DIALS.every(d => E.current_(c, d) === 50));
   assert('A2 snapshot reflects neutral', E.snapshot_(c).drive === 50 && E.snapshot_(c).integrity === 50);
 
   const c2 = E.newCitizen_();
@@ -87,6 +87,11 @@ console.log('═══ Section C — tag -> dial map');
   assert('C6b structural marker (Compressed) -> inert (summary, not an event)', JSON.stringify(M.nudgesForEvent_('Compressed')) === '{}');
   assert('C6c content-routed sentence-tag (health) -> composure down', M.nudgesForEvent_('Serious health condition diagnosed.').composure < 0);
   assert('C6d untagged ordinary day -> small default nudge (never inert)', M.hasTag_('Untagged', 'just another day'));
+  // Out-and-About split: attendance/evening events feed outabout, NOT sociability
+  assert('C7a FirstFriday -> out-and-about, not sociability', M.nudgesForEvent_('FirstFriday').outabout > 0 && !M.nudgesForEvent_('FirstFriday').sociability);
+  assert('C7b Sports/Team -> out-and-about', M.nudgesForEvent_('Sports').outabout > 0 && M.nudgesForEvent_('Team').outabout > 0);
+  assert('C7c Cultural -> out-and-about + openness', M.nudgesForEvent_('Cultural').outabout > 0 && M.nudgesForEvent_('Cultural').openness > 0);
+  assert('C7d Relationship still feeds sociability (depth of connection)', M.nudgesForEvent_('Relationship').sociability > 0 && !M.nudgesForEvent_('Relationship').outabout);
   assert('C7 Conduct severity ladder: Grave erodes integrity more than Petty', M.nudgesForEvent_('Transgression-Grave').integrity < M.nudgesForEvent_('Transgression-Petty').integrity);
   assert('C8 severityMult scales deltas', M.nudgesForEvent_('Transgression-Petty', 2).integrity === M.nudgesForEvent_('Transgression-Petty').integrity * 2);
   assert('C9 Death is terminal -> empty (never a self-memory)', JSON.stringify(M.nudgesForEvent_('Death')) === '{}');

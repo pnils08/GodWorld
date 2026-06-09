@@ -45,9 +45,9 @@ var DIAL_MAP = {
   'Media':              { sociability: 4 },
   'Quoted':             { sociability: 3 },
   'Public':             { sociability: 4 },           // public life / recognition
-  'Team':               { sociability: 3 },           // sports/team belonging
-  'Season':             { drive: 3, sociability: 2 },  // Game-mode: competing through a season
-  'Cultural':           { openness: 5, sociability: 3 },
+  'Team':               { outabout: 3 },               // at the games
+  'Season':             { outabout: 3, drive: 1 },     // following/competing through a season
+  'Cultural':           { openness: 4, outabout: 3 },  // a cultural night out
   'Lifestyle':          { openness: 3 },
   'Mentorship':         { warmth: 6, drive: 2 },
   'Faith':              { warmth: 3, composure: 2 },   // faith community + grounding
@@ -91,11 +91,11 @@ var DIAL_MAP = {
   'Life Event':         { composure: 1 },
   'Life':               { composure: 1 },
   'Personal':           { openness: 2 },               // introspection / reflection
-  'PrevEvening':        { sociability: 1 },             // engaged with last night's city
-  'FirstFriday':        { sociability: 2 },             // going out
-  'Holiday':            { sociability: 2, family: 1 },
-  'CreationDay':        { sociability: 1, family: 1 },
-  'Sports':             { sociability: 2 },
+  'PrevEvening':        { outabout: 2 },                // out in last night's city
+  'FirstFriday':        { outabout: 3 },                // the First Friday art walk
+  'Holiday':            { outabout: 2, family: 1 },
+  'CreationDay':        { outabout: 1, family: 1 },
+  'Sports':             { outabout: 3 },                // at / following the game
   'Weather':            { composure: 1 },               // attuned to place
   'Arrival':            { openness: 3 }                 // arrived in Oakland -> new start
 };

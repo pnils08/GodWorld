@@ -21,15 +21,16 @@
  * forgiving/greedy/loyal/temper) — mechanic kept, dial list replaced.
  */
 
-// the 7 city dials (low pole <-> high pole):
+// the 8 city dials (low pole <-> high pole):
 //   drive       aimless    <-> relentless
-//   sociability reclusive  <-> magnetic
+//   sociability reclusive  <-> magnetic        (DEPTH of connection to people)
 //   warmth      cold       <-> tender
 //   openness    set-in-ways<-> adventurous
 //   composure   volatile   <-> unshakable
 //   integrity   corrupt    <-> incorruptible   (the crime axis — erosion = crime)
 //   family      unattached <-> devoted to family
-var DIALS = ['drive', 'sociability', 'warmth', 'openness', 'composure', 'integrity', 'family'];
+//   outabout    homebody   <-> always out      (PRESENCE at the city's events — feeds the evening engine; not "more social", it's showing up)
+var DIALS = ['drive', 'sociability', 'warmth', 'openness', 'composure', 'integrity', 'family', 'outabout'];
 
 var MIDPOINT = 50;          // bipolar center; below 50 IS the negative pole
 var MOOD_DECAY = 0.8;       // temporary swing fades 20%/cycle back toward baseline
@@ -114,7 +115,8 @@ var PHRASE = {
   openness:    ['set in their ways', 'cautious', '', 'curious', 'adventurous'],
   composure:   ['volatile', 'anxious', '', 'steady', 'unshakable'],
   integrity:   ['corrupt', 'slippery', '', 'principled', 'incorruptible'],
-  family:      ['unattached', 'independent', '', 'family-minded', 'devoted to family']
+  family:      ['unattached', 'independent', '', 'family-minded', 'devoted to family'],
+  outabout:    ['homebody', 'stays in', '', 'often out', 'always out']
 };
 function describe_(c) {
   var notes = [];

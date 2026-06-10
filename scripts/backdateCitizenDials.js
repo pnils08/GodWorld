@@ -11,10 +11,18 @@
  *   DRY-RUN (default): writes NOTHING. Prints a distribution report.
  *   --apply --sheet=<id>: writes DialState + TraitProfile to that sheet.
  *     HARD GUARD: refuses the live ledger id. Intended for a throwaway COPY.
+ *   --apply --live: THE DEPLOY PATH (engine.31 A-style, S256). Targets the
+ *     LIVE ledger. Runs the full sequence: seed DialState + TraitProfile,
+ *     append every LifeHistory(O) entry to LifeHistory_Archive (cold store,
+ *     verified landed), THEN clear O — kills the double-count seam (seed and
+ *     the live fold-on-trim compressor would otherwise both fold the same
+ *     events). Clear only fires after the archive append is verified.
+ *     Milestones survive via the archive (buildCitizenCards reads it).
  *
  * Run (dry-run, live read):   node scripts/backdateCitizenDials.js
  * Run (dry-run vs copy):      node scripts/backdateCitizenDials.js --sheet=<id>
  * Run (apply to copy):        node scripts/backdateCitizenDials.js --apply --sheet=<id>
+ * Run (LIVE deploy):          node scripts/backdateCitizenDials.js --apply --live
  */
 
 require('/root/GodWorld/lib/env'); // loads creds + LIVE id (override:true)
@@ -60,14 +68,21 @@ function backdate(events) {
 
 (async () => {
   const apply = process.argv.includes('--apply');
+  const live = process.argv.includes('--live');
   const sheetArg = arg('sheet');
 
   if (sheetArg) process.env.GODWORLD_SHEET_ID = sheetArg; // override AFTER lib/env (read at call-time)
   const targetId = process.env.GODWORLD_SHEET_ID;
 
   if (apply) {
-    if (!sheetArg) { console.error('--apply requires --sheet=<copy-id> (refusing to default).'); process.exit(1); }
-    if (targetId === LIVE_ID) { console.error('REFUSING: --apply target is the LIVE ledger. Use a copy.'); process.exit(1); }
+    if (live) {
+      if (sheetArg && sheetArg !== LIVE_ID) { console.error('--live with a non-live --sheet: pick one.'); process.exit(1); }
+      if (targetId !== LIVE_ID) { console.error('--live but env target is not the live ledger. Aborting.'); process.exit(1); }
+      console.log('*** LIVE DEPLOY: seed + archive-append + clear-O on the LIVE ledger ***');
+    } else {
+      if (!sheetArg) { console.error('--apply requires --sheet=<copy-id> (refusing to default). LIVE deploy requires --live.'); process.exit(1); }
+      if (targetId === LIVE_ID) { console.error('REFUSING: --apply target is the LIVE ledger. Use a copy, or pass --live for the deploy path.'); process.exit(1); }
+    }
   }
   const sheets = require('/root/GodWorld/lib/sheets.js');
   console.log(`${apply ? 'APPLY' : 'DRY-RUN'} | target sheet: ${String(targetId).slice(0, 14)} ${targetId === LIVE_ID ? '(LIVE)' : '(copy/other)'}`);
@@ -80,6 +95,9 @@ function backdate(events) {
   const iPop = header.indexOf('POPID');
   const iLife = header.indexOf('LifeHistory');
   const iTrait = header.indexOf('TraitProfile');
+  const iFirst = header.indexOf('First');
+  const iLast = header.indexOf('Last');
+  const iNbhd = header.indexOf('Neighborhood');
   let iDial = header.indexOf('DialState');
 
   const archByPop = {};
@@ -89,7 +107,7 @@ function backdate(events) {
     (archByPop[a.POPID] = archByPop[a.POPID] || []).push({ tag: String(a.EventTag || '').trim(), text: a.EventText || '', cycle: isNaN(cyc) ? null : cyc });
   }
 
-  const dialCol = [], faceCol = [];
+  const dialCol = [], faceCol = [], clearCol = [], archAppendRows = [];
   const archetypeDist = {}; const dialMove = {}; E.DIALS.forEach(d => dialMove[d] = 0);
   let offNeutral = 0, allNeutral = 0;
   const vivid = [];
@@ -99,6 +117,22 @@ function backdate(events) {
     const pop = row[iPop];
     const oParsed = C.parseLifeHistoryEntries_(String(row[iLife] || ''));
     const oEvents = oParsed.entries.map(e => ({ tag: e.tag, text: e.text || '', cycle: e.cycle != null ? e.cycle : null }));
+    // A-style clear-O bookkeeping (live deploy): every O entry moves to the
+    // archive (modern schema: Timestamp/POPID/Name/EventTag/EventText/Neighborhood/Cycle),
+    // then O is cleared so the live fold-on-trim compressor never re-folds
+    // events the seed already counted.
+    clearCol.push(['']);
+    for (const e of oParsed.entries) {
+      archAppendRows.push([
+        e.timestamp || '',
+        pop || '',
+        [(iFirst >= 0 ? row[iFirst] : ''), (iLast >= 0 ? row[iLast] : '')].filter(Boolean).join(' '),
+        e.tag || '',
+        e.text || '',
+        (iNbhd >= 0 ? row[iNbhd] : '') || '',
+        e.cycle != null ? e.cycle : ''
+      ]);
+    }
     const events = (archByPop[pop] || []).concat(oEvents);
     events.forEach((e, i) => e._i = i);
     events.sort((a, b) => (a.cycle == null && b.cycle == null) ? a._i - b._i : a.cycle == null ? 1 : b.cycle == null ? -1 : (a.cycle - b.cycle || a._i - b._i));
@@ -118,15 +152,36 @@ function backdate(events) {
   console.log(`citizens=${N}  off-neutral=${offNeutral} (${(offNeutral/N*100).toFixed(0)}%)  all-neutral=${allNeutral}`);
   console.log('archetypes:', Object.entries(archetypeDist).sort((a,b)=>b[1]-a[1]).map(([a,n])=>`${a}:${n}`).join('  '));
   console.log('dial moves:', E.DIALS.map(d=>`${d}:${dialMove[d]}`).join('  '));
+  console.log(`clear-O plan: ${archAppendRows.length} O entries -> LifeHistory_Archive (currently ${archive.length} rows), then clear O for ${N} citizens`);
 
   if (!apply) {
     fs.writeFileSync('/root/GodWorld/output/engine31_backdate_dryrun.md',
-      `# back-date dry-run\ncitizens ${N} | off-neutral ${offNeutral} | all-neutral ${allNeutral}\n\n## vivid\n` + vivid.slice(0,20).map(v=>'- '+v).join('\n'));
+      `# back-date dry-run\ncitizens ${N} | off-neutral ${offNeutral} | all-neutral ${allNeutral} | O entries to archive ${archAppendRows.length}\n\n## vivid\n` + vivid.slice(0,20).map(v=>'- '+v).join('\n'));
     console.log('dry-run only — no writes. report -> output/engine31_backdate_dryrun.md');
     return;
   }
 
-  // ---- APPLY (copy only, guarded above) ----
+  // ---- APPLY ----
+  // LIVE deploy order matters: (1) archive-append + VERIFY the landing,
+  // (2) seed DialState + TraitProfile, (3) clear O only after (1) verified.
+  // If anything fails mid-sequence, O is never cleared before its copy exists.
+  if (live) {
+    if (archAppendRows.length > 0) {
+      const beforeCount = archive.length;
+      const CHUNK = 500;
+      for (let a = 0; a < archAppendRows.length; a += CHUNK) {
+        await sheets.appendRows('LifeHistory_Archive', archAppendRows.slice(a, a + CHUNK));
+      }
+      const archBack = await sheets.getSheetAsObjects('LifeHistory_Archive');
+      if (archBack.length !== beforeCount + archAppendRows.length) {
+        console.error(`ABORT before clear-O: archive verify failed — expected ${beforeCount + archAppendRows.length} rows, found ${archBack.length}. O untouched.`);
+        process.exit(1);
+      }
+      console.log(`archived ${archAppendRows.length} O entries -> LifeHistory_Archive (${beforeCount} -> ${archBack.length} rows) VERIFIED`);
+    } else {
+      console.log('no O entries to archive');
+    }
+  }
   if (iDial < 0) {
     iDial = header.length; // new column at the end
     await sheets.resizeSheet('Simulation_Ledger', iDial + 1); // expand grid (rows unchanged) before writing
@@ -140,14 +195,22 @@ function backdate(events) {
   await sheets.updateRange(`Simulation_Ledger!${traitLetter}2:${traitLetter}${N + 1}`, faceCol);
   console.log(`wrote ${dialCol.length} DialState (${dialLetter}) + ${faceCol.length} TraitProfile (${traitLetter})`);
 
+  // clear O — live deploy only, and only after the archive append verified above.
+  if (live) {
+    const lifeLetter = colLetter(iLife + 1);
+    await sheets.updateRange(`Simulation_Ledger!${lifeLetter}2:${lifeLetter}${N + 1}`, clearCol);
+    console.log(`cleared LifeHistory (${lifeLetter}) for ${N} citizens — double-count seam dead`);
+  }
+
   // verify: re-read 3 rows
   const back = await sheets.getSheetData('Simulation_Ledger');
   let ok = 0;
   for (const ri of [1, Math.floor(N / 2), N]) {
     const ds = back[ri][iDial], tp = back[ri][iTrait];
-    let valid = false; try { const o = JSON.parse(ds); valid = o && o.base && /^Archetype:/.test(tp); } catch (e) {}
+    const oCleared = !live || !String(back[ri][iLife] || '').trim();
+    let valid = false; try { const o = JSON.parse(ds); valid = o && o.base && /^Archetype:/.test(tp) && oCleared; } catch (e) {}
     if (valid) ok++;
-    console.log(`  verify row ${ri}: DialState ${ds ? 'set' : 'EMPTY'} | face ${String(tp).slice(0, 30)}`);
+    console.log(`  verify row ${ri}: DialState ${ds ? 'set' : 'EMPTY'} | face ${String(tp).slice(0, 30)}${live ? ' | O ' + (oCleared ? 'cleared' : 'NOT CLEARED') : ''}`);
   }
   console.log(ok === 3 ? 'VERIFIED — writes landed' : 'WARNING — verify failed');
 })().catch(e => { console.error(e.stack || e.message); process.exit(1); });

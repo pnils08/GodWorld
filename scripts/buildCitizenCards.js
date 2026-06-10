@@ -562,6 +562,17 @@ function parseIdList_(raw) {
 // must survive the .31 deploy log-clear (ROLLOUT engine.30 dependency note).
 var MILESTONE_RE = /\[(Wedding|Marriage|Divorce|Birth|Death|Retirement|Promotion)\]/i;
 
+// Archive Timestamp normalizer — the tab carries two formats ("2026-06-01 23:35"
+// engine-stamped, "11/30/2025 3:27:23" legacy). Returns "YYYY-MM-DD" or ''.
+function archiveDate_(ts) {
+  var s = String(ts || '').trim();
+  var iso = s.match(/^(\d{4}-\d{2}-\d{2})/);
+  if (iso) return iso[1];
+  var us = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+  if (us) return us[3] + '-' + ('0' + us[1]).slice(-2) + '-' + ('0' + us[2]).slice(-2);
+  return '';
+}
+
 // LifeHistory uses both real newlines and literal '\n' two-char sequences
 // (observed live: POP-00331). Split on both.
 function extractMilestones_(lifeHistory) {
@@ -698,10 +709,13 @@ async function buildCard(citizen, appearances, refs) {
     lines.push('Usage: ' + citizen.usageCount + ' mentions');
   }
 
-  // Milestones (engine.30) — dated life anchors parsed from LifeHistory(O).
-  // This is the preservation surface for the .31 deploy log-clear: end-state
-  // lives in columns, but the WHEN only lives here once O is cleared.
-  var milestones = extractMilestones_(citizen.lifeHistory);
+  // Milestones (engine.30) — dated life anchors from LifeHistory_Archive
+  // (post-.31-deploy home of all pre-deploy history) + LifeHistory(O) (events
+  // since). Exact-string dedupe covers the append-then-clear window. The card
+  // is the preservation surface: end-state lives in columns, the WHEN lives here.
+  var archMs = (refs.archMilestones && refs.archMilestones[citizen.popId]) || [];
+  var oMs = extractMilestones_(citizen.lifeHistory);
+  var milestones = archMs.concat(oMs.filter(function (m) { return archMs.indexOf(m) < 0; }));
   if (milestones.length > 0) {
     lines.push('');
     lines.push('MILESTONES:');
@@ -844,7 +858,39 @@ async function main() {
   }
   console.log('[buildCitizenCards] Cultural figures linked to POPIDs: ' + Object.keys(fameByPopId).length);
 
-  var cardRefs = { bizNames: bizNames, fameByPopId: fameByPopId };
+  // LifeHistory_Archive: POPID -> dated milestone lines. The engine.31 A-style
+  // deploy moves every LifeHistory(O) entry to this cold store and clears O —
+  // the card must read BOTH sources or the deploy clear silently drops every
+  // pre-deploy milestone (the exact loss engine.30 exists to prevent).
+  // Headers: Timestamp(0)/POPID(1)/Name(2)/EventTag(3)/EventText(4)/Neighborhood(5)/Cycle(6).
+  var archMilestonesByPop = {};
+  try {
+    var archRes = await client.spreadsheets.values.get({
+      spreadsheetId: spreadsheetId,
+      range: 'LifeHistory_Archive!A:G'
+    });
+    var archRows = archRes.data.values || [];
+    var ARCH_MILESTONE_RE = /^(Wedding|Marriage|Divorce|Birth|Death|Retirement|Promotion)$/i;
+    for (var ari = 1; ari < archRows.length; ari++) {
+      var arow = archRows[ari];
+      var aPop = (arow[1] || '').trim();
+      var aTag = (arow[3] || '').trim();
+      if (!aPop || !ARCH_MILESTONE_RE.test(aTag)) continue;
+      var aDate = archiveDate_(arow[0]);
+      // Some archived EventText blobs carry ride-along events joined by
+      // literal '\n' two-char sequences (pre-archive O cells used both real
+      // and literal newlines; the compressor parser only splits on real ones).
+      // The milestone is the first segment — the riders are texture-class.
+      var aText = (arow[4] || '').trim().split('\\n')[0].trim();
+      var aLine = (aDate ? aDate + ' ' : '') + '[' + aTag + '] ' + aText;
+      (archMilestonesByPop[aPop] = archMilestonesByPop[aPop] || []).push(aLine);
+    }
+  } catch (e) {
+    console.error('[WARN] LifeHistory_Archive read failed (' + e.message + ') — cards will carry only LifeHistory(O) milestones.');
+  }
+  console.log('[buildCitizenCards] Archive milestone citizens: ' + Object.keys(archMilestonesByPop).length);
+
+  var cardRefs = { bizNames: bizNames, fameByPopId: fameByPopId, archMilestones: archMilestonesByPop };
 
   // Column indices (0-based): A=0 POPID, B=1 First, D=3 Last, J=9 Tier,
   // K=10 RoleType, L=11 Status, M=12 BirthYear, O=14 LifeHistory,
@@ -999,7 +1045,8 @@ async function main() {
     // engine.30: milestone-bearing citizens always pass — the card is the
     // preservation surface for dated milestones once .31's deploy clears
     // LifeHistory(O); gating them out would silently lose the WHEN.
-    var hasMilestones = extractMilestones_(cit.lifeHistory).length > 0;
+    var hasMilestones = extractMilestones_(cit.lifeHistory).length > 0 ||
+      ((cardRefs.archMilestones && cardRefs.archMilestones[cit.popId]) || []).length > 0;
     if (!NO_QUALITY_GATE && appearances.length === 0 && !cit.traitProfile && !cit.bio && !hasMilestones) {
       // Bare ledger data only — not worth a Supermemory write
       continue;

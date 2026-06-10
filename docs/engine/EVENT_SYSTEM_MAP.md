@@ -23,7 +23,7 @@ This is the T1 deliverable: the inventory the traits→events back-arc (T5), the
 | `generateCivicModeEvents.js` | 5 | CIVIC | civic roles | ~40 role pools | 0.15 +tier, ×health penalty | ≤0.40 | No | HARD (role-primary) — skip |
 | `runCareerEngine.js` | 5 | ENGINE | T3-4, non-UNI/MED/CIV, 10/cyc | transitions [promotion/layoff/sector/lateral] + ~20 micro + training; CareerState persistence | promo 0.01+tenure+pressure+skill (≤0.08); layoff 0.004 (≤0.07) | 10/cyc | tenure/skill state | **EASY** — `careerFreq` on promoChance ~L308 pre-clamp |
 | `runRelationshipEngine.js` | 5 | ENGINE | T3-4, 8/cyc | ~60 (base/seasonal/holiday×30/bond-aware rivalry-alliance-mentorship/arc) | 0.02 + mods | 8/cyc | bonds/arcs | **EASY** — `mult.sociability` on driftChance pre-boost |
-| `runHouseholdEngine.js` | 5 | ENGINE | T3-4, 6/cyc | ~70 home/family texture (holiday-heavy) | 0.02 + mods | 6/cyc | No | **EASY** — `familyFreq` at L399 |
+| `runHouseholdEngine.js` | 5 | ENGINE | T3-4, 6/cyc | ~70 home/family texture (holiday-heavy) + **T4 (S255):** circumstance pools (partnered ×4 gated MaritalStatus, parent ×4 gated NumChildren>0, tag Household) + health texture (ailment ×4 → `Health`, wellness ×4 → `Recovering`) | 0.02 + mods | 6/cyc | YES — MaritalStatus/NumChildren gates (T4) | **EASY** — `familyFreq` at L399 (wired T5) |
 | `runEducationEngine.js` | 5 | ENGINE | T3-4, age≥15, 10/cyc | ~50 learning texture | 0.02 + mods (18-35 +0.01) | 10/cyc | age | **EASY** — `mult.openness` at L357. ⚠ anomaly: direct `logSheet.appendRow` L437 (not queueAppendIntent_) |
 | `runNeighborhoodEngine.js` | 5 | ENGINE | T3-4, 6/cyc | ~70 neighborhood mood ×12 + holiday-neighborhood | 0.02 + mods | 6/cyc | neighborhood | **EASY** — `mult.outabout` at L380 |
 | `runConductEngine.js` **(T7, S255)** | 5 | ENGINE | T3-4, non-UNI/MED/CIV, age≥16, 3/cyc | moral tests: 8 petty + 6 serious + 4 grave + 8 resist; tags = DIAL_MAP Conduct vocab (Transgression-Petty/-Serious/-Grave, Resisted) | 0.012 (×1.25 low composure, ×1.2 econ≤35, ×0.7 crime spike) | chance≤0.03, 3/cyc | YES — **dialBands REQUIRED** (inert pre-deploy) | **CORE** — crimeReachable gates commit (band −2 only, accessor contract); commitP .35+(−band×.20); severity by band; spike counterweight ×0.6 commit |
@@ -50,10 +50,10 @@ This is the T1 deliverable: the inventory the traits→events back-arc (T5), the
 | generational (milestones) | warm | warm | **warm** (wedding/birth/divorce only) | **hot** (lifecycle) | — |
 | citizensEvents (T3-4) | hot | warm | — | — | — (QoL tension ≠ personal conduct) |
 | media/civic modes | — | hot | — | — | — |
-| career/relationship/household/education/neighborhood engines | warm | hot | warm (ambient) | — | — |
+| career/relationship/household/education/neighborhood engines | warm | hot | **warm+ (T4: circumstance-gated partnered/parent pools)** | **warm (T4: ambient ailment/wellness texture)** | — |
 | youth | warm | — | warm | warm | — |
 | conduct engine (T7, S255) | — | — | — | — | **hot** (moral tests, dial-gated) |
-| **TOTAL** | strong | strong | **thin (milestone-only)** | **thin (generational-only)** | **covered (T7 `runConductEngine.js` — Resisted/Transgression ladder, inert until DialState deploys)** |
+| **TOTAL** | strong | strong | **covered (milestones + T4 circumstance ambient)** | **covered (lifecycle + T4 ambient texture)** | **covered (T7 `runConductEngine.js` — Resisted/Transgression ladder, inert until DialState deploys)** |
 
 Fame (`UsageCount`): read by intake/context code only — **no generator gates on fame** (T3 confirmed gap, deferred to its own pass).
 
@@ -61,7 +61,7 @@ Fame (`UsageCount`): read by intake/context code only — **no generator gates o
 
 Columns generators READ as gates today: ClockMode, Tier, Status, BirthYear(age), Neighborhood, Occupation/TierRole, LifeHistory(thin-history boost + dedup), TraitProfile, DialState(dormant), UNI/MED/CIV flags, EmergenceCount(GC).
 Columns generators WRITE: LifeHistory, LastUpdated, MaritalStatus + NumChildren (generational v2.7 structural), Income + EmployerBizId (career transitions), Status + StatusStartCycle + HealthCause (health lifecycle), Neighborhood (assigned if missing).
-Columns carrying state but driving NO event selection (open outcome axes): **Income** (no wealth-gated events), **MaritalStatus/NumChildren** (no family-circumstance events outside milestones — a married parent draws the same pool as a single 25-y-o), **EducationLevel/CareerStage** (career engine keeps its own CareerState instead), **UsageCount/fame** (T3), **CitizenBio**. These are the chaos-cars per-column generalization frontier.
+Columns carrying state but driving NO event selection (open outcome axes): **Income** (no wealth-gated events), **EducationLevel/CareerStage** (career engine keeps its own CareerState instead), **UsageCount/fame** (T3), **CitizenBio**. These are the chaos-cars per-column generalization frontier. ~~MaritalStatus/NumChildren~~ **closed T4 (S255)** — runHouseholdEngine now gates partnered/parent pools on them; a married parent finally draws a different home life than a single 25-y-o.
 
 ## 5. RNG + write-path compliance (audited in sweep)
 

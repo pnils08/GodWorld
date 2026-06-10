@@ -53,6 +53,8 @@ function runHouseholdEngine_(ctx) {
   var iLastUpd = idx('LastUpdated');
   var iNeighborhood = idx('Neighborhood');
   var iDialState = idx('DialState'); // engine.32 T5 — Family dial -> home-event frequency
+  var iMarital = idx('MaritalStatus');     // engine.32 T4 — circumstance-gated family pools
+  var iNumChildren = idx('NumChildren');   // engine.32 T4
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WORLD CONTEXT
@@ -355,6 +357,46 @@ function runHouseholdEngine_(ctx) {
   };
 
   // ═══════════════════════════════════════════════════════════════════════════
+  // CIRCUMSTANCE POOLS (engine.32 T4) — gated per-citizen on MaritalStatus /
+  // NumChildren below, so a married parent finally draws a different home life
+  // than a single 25-year-old (per-column outcome-space, EVENT_SYSTEM_MAP §4).
+  // Tag stays Household -> Family category.
+  // ═══════════════════════════════════════════════════════════════════════════
+  var partneredPool = [
+    "cooked dinner with their spouse and talked through the week",
+    "settled into a quiet evening on the couch with their partner",
+    "split the weekend errands with their spouse",
+    "planned the month's budget together with their partner"
+  ];
+
+  var parentPool = [
+    "helped the kids with homework at the kitchen table",
+    "wrangled the kids through the bedtime routine",
+    "watched a movie with the kids piled on the couch",
+    "packed school lunches for the morning rush"
+  ];
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // HEALTH TEXTURE (engine.32 T4) — first ambient Health-category output
+  // outside the generational lifecycle. Reuses existing DIAL_MAP vocab:
+  // ailments tag 'Health' (composure -2), wellness tags 'Recovering'
+  // (composure +2) — no new tags minted, TAG_REGISTRY routing unchanged.
+  // ═══════════════════════════════════════════════════════════════════════════
+  var ailmentPool = [
+    "fought off a head cold that lingered all week",
+    "nursed a sore back after overdoing it around the house",
+    "slept badly for a few nights running",
+    "skipped plans to rest off a stubborn bug"
+  ];
+
+  var wellnessPool = [
+    "finally shook the cold that had been hanging around",
+    "got back into a morning walk routine",
+    "cooked healthier meals all week and felt the difference",
+    "caught up on sleep and woke up feeling like themselves again"
+  ];
+
+  // ═══════════════════════════════════════════════════════════════════════════
   // MERGE INTO FINAL POOL
   // ═══════════════════════════════════════════════════════════════════════════
   var pool = [].concat(
@@ -370,7 +412,9 @@ function runHouseholdEngine_(ctx) {
     communityPool,
     dynamicsPool,
     econPool,
-    sportsPool
+    sportsPool,
+    ailmentPool,
+    wellnessPool
   );
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -458,13 +502,24 @@ function runHouseholdEngine_(ctx) {
       for (var i = 0; i < np.length; i++) { citizenPool.push(np[i]); }
     }
 
+    // engine.32 T4 — circumstance gates: partnered/parent lines only for
+    // citizens whose ledger row says so (lowercase enum per generational S248).
+    var marital = iMarital >= 0 ? (row[iMarital] || "").toString().toLowerCase() : "";
+    if (marital === "married" || marital === "partnered") {
+      for (var pi = 0; pi < partneredPool.length; pi++) { citizenPool.push(partneredPool[pi]); }
+    }
+    var numKids = iNumChildren >= 0 ? Number(row[iNumChildren]) || 0 : 0;
+    if (numKids > 0) {
+      for (var ki = 0; ki < parentPool.length; ki++) { citizenPool.push(parentPool[ki]); }
+    }
+
     // ═══════════════════════════════════════════════════════════════════════
     // PICK AND LOG
     // ═══════════════════════════════════════════════════════════════════════
     var pick = citizenPool[Math.floor(hRng() * citizenPool.length)];
     var stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
 
-    // Determine event tag (v2.2)
+    // Determine event tag (v2.2; health tags added engine.32 T4)
     var eventTag = "Household";
     if (firstFridayPool.indexOf(pick) >= 0) {
       eventTag = "Household-FirstFriday";
@@ -472,6 +527,10 @@ function runHouseholdEngine_(ctx) {
       eventTag = "Household-CreationDay";
     } else if (holidayPool.indexOf(pick) >= 0) {
       eventTag = "Household-Holiday";
+    } else if (ailmentPool.indexOf(pick) >= 0) {
+      eventTag = "Health";
+    } else if (wellnessPool.indexOf(pick) >= 0) {
+      eventTag = "Recovering";
     }
 
     var line = stamp + " — [" + eventTag + "] " + pick;
@@ -528,10 +587,13 @@ function runHouseholdEngine_(ctx) {
  * ============================================================================
  * 
  * Event Tags:
- * - Household: Base household events
+ * - Household: Base household events (incl. T4 circumstance pools —
+ *   partnered/parent lines gated on MaritalStatus / NumChildren)
  * - Household-FirstFriday: Art walk prep/recovery
  * - Household-CreationDay: Foundational reflection
  * - Household-Holiday: Holiday-specific home events
+ * - Health: ambient ailment texture (engine.32 T4 — composure -2 in DIAL_MAP)
+ * - Recovering: ambient wellness texture (engine.32 T4 — composure +2)
  * 
  * Holiday Household Focus:
  * - Thanksgiving: Meal prep, hosting family, gratitude

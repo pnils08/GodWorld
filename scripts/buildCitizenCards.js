@@ -29,9 +29,16 @@
  * business cards) are not touched.
  *
  * Columns from Simulation_Ledger:
- *   A=POPID, B=First, D=Last, J=Tier, K=RoleType, M=BirthYear,
- *   R=TraitProfile, S=UsageCount, T=Neighborhood, AS=EmployerBizId,
- *   AT=CitizenBio, AU=Gender
+ *   A=POPID, B=First, D=Last, J=Tier, K=RoleType, L=Status, M=BirthYear,
+ *   O=LifeHistory (milestones), R=TraitProfile, S=UsageCount, T=Neighborhood,
+ *   V=MaritalStatus, W=NumChildren, X=ParentIds, Y=ChildrenIds, Z=WealthLevel,
+ *   AA=Income, AC=NetWorth, AF=EducationLevel, AH=CareerStage,
+ *   AK=LastPromotionCycle, AS=EmployerBizId, AT=CitizenBio, AU=Gender,
+ *   DialState (header-resolved — lands post-engine.31 deploy; absent = no Essence line)
+ *
+ * Cross-ledger reads (engine.30, S255):
+ *   Business_Ledger A:B  — BIZ_ID -> Name (employer renders by name, ID in parens)
+ *   Cultural_Ledger A:T  — UniverseLinks POPID -> fame record (Fame line on linked citizens)
  */
 
 require('/root/GodWorld/lib/env');
@@ -40,6 +47,7 @@ var path = require('path');
 var https = require('https');
 var sheets = require('../lib/sheets');
 var coverageAnchors = require('../lib/coverageAnchorRetirements');
+var citizenMemory = require('../utilities/citizenMemory'); // engine.31 dial model — describe_/deserialize_ for the Essence line
 
 var API_KEY = process.env.SUPERMEMORY_CC_API_KEY;
 var CONTAINER_TAG = 'world-data';
@@ -501,7 +509,93 @@ async function wipeOldCitizenCards(citizens) {
 // BUILD CITIZEN CARD
 // ═══════════════════════════════════════════════════════════════════════════
 
-async function buildCard(citizen, appearances) {
+// ── engine.30 deterministic formatters (S255) ────────────────────────────────
+// Pure functions over existing ledger columns. No prose generation, no writes.
+
+// Employer sentinels that aren't Business_Ledger BIZ-IDs (live counts S255:
+// 155 SELF_EMPLOYED, 7 SPORTS_OTHER; 496 real BIZ-IDs all align, 0 orphans).
+var EMPLOYER_SENTINELS = {
+  'SELF_EMPLOYED': 'Self-employed',
+  'SPORTS_OTHER': 'Sports (other)'
+};
+
+// WealthLevel 1-10 -> coarse label. Deterministic band map, same spirit as the
+// dial band layer: the number is the data, the label is the readable face.
+function wealthLabel_(level) {
+  var n = parseInt(level, 10);
+  if (!n || n < 1) return null;
+  var label = n <= 2 ? 'struggling' : n <= 4 ? 'getting by' : n <= 6 ? 'comfortable' : n <= 8 ? 'well-off' : 'wealthy';
+  return n + '/10 (' + label + ')';
+}
+
+// EducationLevel ledger tokens -> readable. Unmapped tokens pass through as-is
+// (legacy values like "High School"/"Elementary" are already readable).
+var EDUCATION_LABELS = {
+  'hs-diploma': 'high school diploma',
+  'trade-cert': 'trade certificate',
+  'associates': "associate's degree",
+  'bachelors': "bachelor's degree",
+  'masters': "master's degree",
+  'doctorate': 'doctorate'
+};
+
+function formatMoney_(raw) {
+  var n = parseInt(String(raw).replace(/[^0-9-]/g, ''), 10);
+  if (isNaN(n)) return null;
+  return '$' + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+// ParentIds/ChildrenIds cells are JSON arrays ('["POP-00005","POP-00594"]'),
+// sometimes empty string. Corrupt -> [] (formatter never throws on a cell).
+function parseIdList_(raw) {
+  var s = (raw || '').trim();
+  if (!s || s === '[]') return [];
+  try {
+    var arr = JSON.parse(s);
+    return Array.isArray(arr) ? arr.filter(Boolean) : [];
+  } catch (e) { return []; }
+}
+
+// Milestone classes worth carrying on the card. LifeHistory(O) also holds
+// [Daily]/[Background]/[Career]/[Relationship] texture — that ages into the
+// dial fold (engine.31), not the card. These are the dated life anchors that
+// must survive the .31 deploy log-clear (ROLLOUT engine.30 dependency note).
+var MILESTONE_RE = /\[(Wedding|Marriage|Divorce|Birth|Death|Retirement|Promotion)\]/i;
+
+// LifeHistory uses both real newlines and literal '\n' two-char sequences
+// (observed live: POP-00331). Split on both.
+function extractMilestones_(lifeHistory) {
+  if (!lifeHistory) return [];
+  var lines = String(lifeHistory).split(/\\n|\n/);
+  var out = [];
+  for (var i = 0; i < lines.length; i++) {
+    var line = lines[i].trim();
+    if (!line || !MILESTONE_RE.test(line)) continue;
+    // Strip clock time, keep the date: "2026-06-01 23:35 — [Retirement] ..." -> "2026-06-01 [Retirement] ..."
+    out.push(line.replace(/^(\d{4}-\d{2}-\d{2})\s+\d{2}:\d{2}\s*—\s*/, '$1 '));
+  }
+  return out;
+}
+
+// DialState (JSON {base,streak}, engine.31) -> "driven, warm, often out".
+// Absent/corrupt/all-neutral -> null (no Essence line). Uses the real dial
+// model (citizenMemory describe_), not a duplicate band map — the card can
+// never drift from the engine's read of the same cell.
+function dialEssence_(dialStateRaw) {
+  var s = (dialStateRaw || '').trim();
+  if (!s) return null;
+  var parsed;
+  try { parsed = JSON.parse(s); } catch (e) { return null; }
+  if (!parsed || typeof parsed !== 'object' || !parsed.base) return null;
+  var c = citizenMemory.deserialize_(parsed);
+  var desc = citizenMemory.describe_(c);
+  return desc || 'even-keeled, unremarkable'; // all dials mid-band — by design the quiet middle
+}
+
+async function buildCard(citizen, appearances, refs) {
+  refs = refs || {};
+  var bizNames = refs.bizNames || {};
+  var fameByPopId = refs.fameByPopId || {};
   var lines = [];
 
   // Header — identity-level fields. Gender included so Mara's canon-fidelity
@@ -514,24 +608,106 @@ async function buildCard(citizen, appearances) {
     'Birth: ' + (citizen.birthYear || '?')
   ];
   if (citizen.gender) headerParts.push('Gender: ' + citizen.gender);
+  // Status only when it carries information (engine.30): Active is the default
+  // and stays implicit; Retired/deceased/pending change how the citizen can be used.
+  if (citizen.status && citizen.status.toLowerCase() !== 'active') {
+    headerParts.push('Status: ' + citizen.status);
+  }
   lines.push(headerParts.join(' | '));
 
-  // Operational metadata — render only when populated so empty cards stay clean.
+  // Employer — render by Business_Ledger name with the ID kept for cross-
+  // reference; sentinels (SELF_EMPLOYED etc.) render readable; an unmapped
+  // BIZ-ID renders raw so misalignment stays visible, never silently dropped.
   if (citizen.employerBizId) {
-    lines.push('Employer: ' + citizen.employerBizId);
+    var emp = citizen.employerBizId;
+    if (EMPLOYER_SENTINELS[emp]) {
+      lines.push('Employer: ' + EMPLOYER_SENTINELS[emp]);
+    } else if (bizNames[emp]) {
+      lines.push('Employer: ' + bizNames[emp] + ' (' + emp + ')');
+    } else {
+      lines.push('Employer: ' + emp);
+    }
   }
-  if (citizen.usageCount && parseInt(citizen.usageCount, 10) > 0) {
-    lines.push('Usage: ' + citizen.usageCount + ' mentions');
+
+  // Life line (engine.30) — the structured life facts the card always had
+  // access to but never stated: marital status, children, parents.
+  var lifeParts = [];
+  if (citizen.maritalStatus) lifeParts.push(citizen.maritalStatus);
+  var childIds = parseIdList_(citizen.childrenIds);
+  var parentIds = parseIdList_(citizen.parentIds);
+  var numChildren = parseInt(citizen.numChildren || '0', 10) || 0;
+  if (childIds.length > 0) {
+    lifeParts.push(childIds.length + (childIds.length === 1 ? ' child (' : ' children (') + childIds.join(', ') + ')');
+  } else if (numChildren > 0 && parentIds.length === 0) {
+    // Guard: a row with parents but no ChildrenIds can carry an inherited
+    // sibling count (live: POP-00595) — never claim children for a child.
+    lifeParts.push(numChildren + (numChildren === 1 ? ' child' : ' children'));
   }
+  if (parentIds.length > 0) lifeParts.push('parents: ' + parentIds.join(', '));
+  if (lifeParts.length > 0) lines.push('Life: ' + lifeParts.join(' | '));
+
+  // Work line (engine.30) — career stage, promotion, education, income, wealth.
+  var workParts = [];
+  if (citizen.careerStage) {
+    var careerBit = citizen.careerStage;
+    var promo = parseInt(citizen.lastPromotionCycle || '0', 10) || 0;
+    if (promo > 0) careerBit += ', promoted C' + promo;
+    workParts.push(careerBit);
+  }
+  if (citizen.educationLevel) {
+    workParts.push('education: ' + (EDUCATION_LABELS[citizen.educationLevel] || citizen.educationLevel));
+  }
+  var incomeStr = formatMoney_(citizen.income);
+  if (incomeStr) workParts.push('income ' + incomeStr + '/yr');
+  var wealthStr = wealthLabel_(citizen.wealthLevel);
+  if (wealthStr) workParts.push('wealth ' + wealthStr);
+  var netWorthStr = formatMoney_(citizen.netWorth);
+  if (netWorthStr) workParts.push('net worth ' + netWorthStr);
+  if (workParts.length > 0) lines.push('Work: ' + workParts.join(' | '));
+
+  // Essence line (engine.30, dial-aware) — renders the 8-dial bands via the
+  // real dial model once engine.31's deploy lands DialState; absent today -> no
+  // line. The card stays correct across the deploy without re-touching this script.
+  var essence = dialEssence_(citizen.dialState);
+  if (essence) lines.push('Essence: ' + essence);
 
   // Trait profile
   if (citizen.traitProfile) {
     lines.push('Traits: ' + citizen.traitProfile);
   }
 
+  // Fame line (engine.30) — threads Cultural_Ledger into the card for the
+  // POPID-linked cultural figures (9 live), so fame is visible where agents
+  // actually look a citizen up. Unlinked Cultural_Ledger rows are unaffected.
+  var fame = fameByPopId[citizen.popId];
+  if (fame) {
+    var fameParts = [fame.category + (fame.domain ? ' (' + fame.domain + ')' : '')];
+    if (fame.score) fameParts.push('score ' + fame.score);
+    if (fame.trend) fameParts.push('trend ' + fame.trend);
+    if (fame.mediaCount) fameParts.push(fame.mediaCount + ' media mentions');
+    if (fame.lastSeen) fameParts.push('last seen C' + fame.lastSeen);
+    lines.push('Fame: ' + fameParts.join(', '));
+  }
+
   // Bio
   if (citizen.bio) {
     lines.push('Bio: ' + citizen.bio);
+  }
+
+  if (citizen.usageCount && parseInt(citizen.usageCount, 10) > 0) {
+    lines.push('Usage: ' + citizen.usageCount + ' mentions');
+  }
+
+  // Milestones (engine.30) — dated life anchors parsed from LifeHistory(O).
+  // This is the preservation surface for the .31 deploy log-clear: end-state
+  // lives in columns, but the WHEN only lives here once O is cleared.
+  var milestones = extractMilestones_(citizen.lifeHistory);
+  if (milestones.length > 0) {
+    lines.push('');
+    lines.push('MILESTONES:');
+    for (var mi = 0; mi < milestones.length; mi++) {
+      lines.push('- ' + milestones[mi]);
+    }
   }
 
   // Appearances from bay-tribune
@@ -593,13 +769,14 @@ async function main() {
     console.log('');
   }
 
-  // Read Simulation_Ledger — columns A,B,D,J,K,M,R,T,AT
+  // Read Simulation_Ledger. Range extends past AU so a post-engine.31 deploy
+  // DialState column (header-resolved below) is picked up without a code change.
   var client = await sheets.getClient();
   var spreadsheetId = process.env.GODWORLD_SHEET_ID;
 
   var res = await client.spreadsheets.values.get({
     spreadsheetId: spreadsheetId,
-    range: 'Simulation_Ledger!A:AU'
+    range: 'Simulation_Ledger!A:BZ'
   });
 
   var rows = res.data.values || [];
@@ -610,9 +787,71 @@ async function main() {
 
   console.log('[buildCitizenCards] Ledger rows: ' + (rows.length - 1));
 
+  // DialState is header-resolved (engine.31 adds it on deploy); absent = -1,
+  // cards simply carry no Essence line until it lands.
+  var dialStateIdx = rows[0].indexOf('DialState');
+  console.log('[buildCitizenCards] DialState column: ' + (dialStateIdx >= 0 ? 'present (idx ' + dialStateIdx + ')' : 'absent (pre-engine.31 — no Essence lines)'));
+
+  // Cross-ledger reference maps (engine.30) — one read each.
+  // Business_Ledger: BIZ_ID -> Name, so employers render by name.
+  var bizNames = {};
+  try {
+    var bizRes = await client.spreadsheets.values.get({
+      spreadsheetId: spreadsheetId,
+      range: 'Business_Ledger!A:B'
+    });
+    var bizRows = bizRes.data.values || [];
+    for (var bi = 1; bi < bizRows.length; bi++) {
+      var bId = (bizRows[bi][0] || '').trim();
+      var bName = (bizRows[bi][1] || '').trim();
+      if (bId && bName) bizNames[bId] = bName;
+    }
+  } catch (e) {
+    console.error('[WARN] Business_Ledger read failed (' + e.message + ') — employers will render as raw IDs.');
+  }
+  console.log('[buildCitizenCards] Business names loaded: ' + Object.keys(bizNames).length);
+
+  // Cultural_Ledger: UniverseLinks POPID -> fame record, so linked cultural
+  // figures (9 live at S255) carry their fame on the citizen card.
+  // Headers: ...RoleType(3), FameCategory(4), CulturalDomain(5), UniverseLinks(7),
+  // LastSeenCycle(9), MediaCount(10), FameScore(11), TrendTrajectory(12).
+  var fameByPopId = {};
+  try {
+    var cultRes = await client.spreadsheets.values.get({
+      spreadsheetId: spreadsheetId,
+      range: 'Cultural_Ledger!A:T'
+    });
+    var cultRows = cultRes.data.values || [];
+    for (var fi = 1; fi < cultRows.length; fi++) {
+      var cr = cultRows[fi];
+      var links = (cr[7] || '').trim();
+      var popMatches = links.match(/POP-\d+/g);
+      if (!popMatches) continue;
+      var fameRec = {
+        category: (cr[4] || '').trim() || (cr[3] || '').trim() || 'cultural figure',
+        domain: (cr[5] || '').trim(),
+        lastSeen: (cr[9] || '').trim(),
+        mediaCount: (cr[10] || '').trim(),
+        score: (cr[11] || '').trim(),
+        trend: (cr[12] || '').trim()
+      };
+      for (var pm = 0; pm < popMatches.length; pm++) {
+        fameByPopId[popMatches[pm]] = fameRec;
+      }
+    }
+  } catch (e) {
+    console.error('[WARN] Cultural_Ledger read failed (' + e.message + ') — cards will carry no Fame lines.');
+  }
+  console.log('[buildCitizenCards] Cultural figures linked to POPIDs: ' + Object.keys(fameByPopId).length);
+
+  var cardRefs = { bizNames: bizNames, fameByPopId: fameByPopId };
+
   // Column indices (0-based): A=0 POPID, B=1 First, D=3 Last, J=9 Tier,
-  // K=10 RoleType, M=12 BirthYear, R=17 TraitProfile, S=18 UsageCount,
-  // T=19 Neighborhood, AS=44 EmployerBizId, AT=45 CitizenBio, AU=46 Gender.
+  // K=10 RoleType, L=11 Status, M=12 BirthYear, O=14 LifeHistory,
+  // R=17 TraitProfile, S=18 UsageCount, T=19 Neighborhood, V=21 MaritalStatus,
+  // W=22 NumChildren, X=23 ParentIds, Y=24 ChildrenIds, Z=25 WealthLevel,
+  // AA=26 Income, AC=28 NetWorth, AF=31 EducationLevel, AH=33 CareerStage,
+  // AK=36 LastPromotionCycle, AS=44 EmployerBizId, AT=45 CitizenBio, AU=46 Gender.
   var citizens = [];
   for (var i = 1; i < rows.length; i++) {
     var r = rows[i];
@@ -621,13 +860,26 @@ async function main() {
     var last = (r[3] || '').trim();
     var tier = parseInt(r[9] || '0', 10);
     var role = (r[10] || '').trim();
+    var status = (r[11] || '').trim();
     var birthYear = (r[12] || '').trim();
+    var lifeHistory = (r[14] || '').trim();
     var traitProfile = (r[17] || '').trim();
     var usageCount = (r[18] || '').trim();
     var neighborhood = (r[19] || '').trim();
+    var maritalStatus = (r[21] || '').trim();
+    var numChildren = (r[22] || '').trim();
+    var parentIds = (r[23] || '').trim();
+    var childrenIds = (r[24] || '').trim();
+    var wealthLevel = (r[25] || '').trim();
+    var income = (r[26] || '').trim();
+    var netWorth = (r[28] || '').trim();
+    var educationLevel = (r[31] || '').trim();
+    var careerStage = (r[33] || '').trim();
+    var lastPromotionCycle = (r[36] || '').trim();
     var employerBizId = (r[44] || '').trim();
     var bio = (r[45] || '').trim();
     var gender = (r[46] || '').trim();
+    var dialState = dialStateIdx >= 0 ? (r[dialStateIdx] || '').trim() : '';
 
     if (!popId || !first) continue;
 
@@ -648,13 +900,26 @@ async function main() {
       last: last,
       tier: tier,
       role: role,
+      status: status,
       birthYear: birthYear,
+      lifeHistory: lifeHistory,
       traitProfile: traitProfile,
       usageCount: usageCount,
       neighborhood: neighborhood,
+      maritalStatus: maritalStatus,
+      numChildren: numChildren,
+      parentIds: parentIds,
+      childrenIds: childrenIds,
+      wealthLevel: wealthLevel,
+      income: income,
+      netWorth: netWorth,
+      educationLevel: educationLevel,
+      careerStage: careerStage,
+      lastPromotionCycle: lastPromotionCycle,
       employerBizId: employerBizId,
       bio: bio,
-      gender: gender
+      gender: gender,
+      dialState: dialState
     });
   }
 
@@ -723,7 +988,7 @@ async function main() {
     if (appearances.length > 0) withAppearances++;
 
     // Build the card
-    var card = await buildCard(cit, appearances);
+    var card = await buildCard(cit, appearances, cardRefs);
 
     // Quality gate — skip thin cards with no appearances, no traits, no bio.
     // Disabled by --no-quality-gate (S183 cold-start fix): thin cards are a
@@ -731,7 +996,11 @@ async function main() {
     // pollution. Hybrid search ranks by similarity, so thin cards only
     // surface on direct name/role/neighborhood queries — exactly what
     // discovery looks like.
-    if (!NO_QUALITY_GATE && appearances.length === 0 && !cit.traitProfile && !cit.bio) {
+    // engine.30: milestone-bearing citizens always pass — the card is the
+    // preservation surface for dated milestones once .31's deploy clears
+    // LifeHistory(O); gating them out would silently lose the WHEN.
+    var hasMilestones = extractMilestones_(cit.lifeHistory).length > 0;
+    if (!NO_QUALITY_GATE && appearances.length === 0 && !cit.traitProfile && !cit.bio && !hasMilestones) {
       // Bare ledger data only — not worth a Supermemory write
       continue;
     }
@@ -740,7 +1009,7 @@ async function main() {
       if (ci < 5 || appearances.length > 0) {
         console.log('--- ' + fullName + ' (' + cit.popId + ') ---');
         console.log('PAYLOAD: containerTags=[' + CONTAINER_TAG + ', ' + DOMAIN_TAG + '] | metadata.title="' + fullName + '" | metadata.popid="' + cit.popId + '"');
-        console.log(card.substring(0, 300));
+        console.log(card.substring(0, 600));
         console.log('  [' + appearances.length + ' appearances]');
         console.log('');
       }
@@ -845,7 +1114,17 @@ function emitErrorGateDump(stats) {
   return failPath;
 }
 
-module.exports = { emitErrorGateDump: emitErrorGateDump, classify401Action: classify401Action };
+module.exports = {
+  emitErrorGateDump: emitErrorGateDump,
+  classify401Action: classify401Action,
+  // engine.30 formatters — exported for unit tests
+  buildCard: buildCard,
+  extractMilestones_: extractMilestones_,
+  dialEssence_: dialEssence_,
+  wealthLabel_: wealthLabel_,
+  formatMoney_: formatMoney_,
+  parseIdList_: parseIdList_
+};
 
 if (require.main === module) {
   main().catch(function(e) { console.error('[FATAL]', e); process.exit(1); });

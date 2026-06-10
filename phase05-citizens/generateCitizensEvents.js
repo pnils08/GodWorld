@@ -785,6 +785,25 @@ function generateCitizensEvents_(ctx) {
         ["source:prevEvening", "evening:sports"], 1.1, false));
     }
 
+    // engine.32 T8 — fan-out: last night's SPECIFIC city events reach citizens.
+    // Same neighborhood -> attended (evening:cityEventAttend gets a sociability
+    // weight in the dial loop); elsewhere -> heard about it. PrevEvening memory
+    // tag -> outabout nudge via citizenDialMap, closing the dial feedback loop.
+    var cityEvs = prev.cityEvents || [];
+    for (var cvi = 0; cvi < cityEvs.length; cvi++) {
+      var cv = cityEvs[cvi];
+      if (!cv || !cv.name) continue;
+      if (neighborhood && cv.neighborhood === neighborhood) {
+        pool.push(makeEntry("joined the crowd at " + cv.name + " last night",
+          ["source:prevEvening", "evening:cityEventAttend", "nh:" + neighborhood], 1.25, false));
+        pool.push(makeEntry("ran into neighbors at " + cv.name,
+          ["source:prevEvening", "evening:cityEventAttend", "nh:" + neighborhood], 1.1, false));
+      } else {
+        pool.push(makeEntry("heard about " + cv.name + (cv.neighborhood ? " over in " + cv.neighborhood : "") + " last night",
+          ["source:prevEvening", "evening:cityEvent"], 1.0, false));
+      }
+    }
+
     return pool;
   }
 
@@ -1333,6 +1352,7 @@ function generateCitizensEvents_(ctx) {
           else if (dwTag === 'source:neighborhood' || dwTag === 'source:prevEvening') dwMod *= dm.outabout;
           else if (dwTag === 'source:firstFriday' || dwTag === 'source:holiday' || dwTag === 'source:sports' || dwTag === 'source:creationDay') dwMod *= dm.outabout;
           else if (dwTag === 'source:continuity') dwMod *= dm.composure < 1 ? (2 - dm.composure) : 1; // low composure dwells on unresolved tension
+          else if (dwTag === 'evening:cityEventAttend') dwMod *= dm.sociability; // engine.32 T8 — attending stacks sociability on top of prevEvening's outabout
         }
         if (dwMod !== 1.0) dwEntry.weight = (dwEntry.weight || 1) * dwMod;
       }

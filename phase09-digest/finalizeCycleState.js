@@ -172,6 +172,23 @@ function snapshotEveningForCarryForward_(ctx) {
     }
   }
 
+  // engine.32 T8 — carry the SPECIFIC city events forward so next cycle's
+  // citizen generators can fan them out (attendance / heard-about memories).
+  // Until now only crowd scores/vibe survived the cycle boundary; the events
+  // themselves were dropped. Compact: first 3 events, up to 3 tags each.
+  snapshot.cityEvents = [];
+  var cityDetails = S.cityEventDetails || [];
+  for (var cei = 0; cei < Math.min(cityDetails.length, 3); cei++) {
+    var ce = cityDetails[cei];
+    if (ce && ce.name) {
+      snapshot.cityEvents.push({
+        name: ce.name,
+        neighborhood: ce.neighborhood || '',
+        tags: (ce.tags || []).slice(0, 3)
+      });
+    }
+  }
+
   // Compact crowd: top 4 neighborhoods with scores
   var crowdMap = S.crowdMap || {};
   var crowdKeys = Object.keys(crowdMap);

@@ -362,6 +362,14 @@ function generateGenericCitizenMicroEvents_(ctx) {
     if (prevEve.famousNames && prevEve.famousNames.length > 0) {
       prevEvePool.push("heard someone spotted a celebrity in town last night");
     }
+    // engine.32 T8 — the specific city event reaches ambient texture too
+    var prevCityEvs = prevEve.cityEvents || [];
+    if (prevCityEvs.length > 0 && prevCityEvs[0] && prevCityEvs[0].name) {
+      prevEvePool.push("heard about " + prevCityEvs[0].name + " from last night");
+      if (prevCityEvs.length > 1 && prevCityEvs[1] && prevCityEvs[1].name) {
+        prevEvePool.push("caught talk of " + prevCityEvs[1].name + (prevCityEvs[1].neighborhood ? " in " + prevCityEvs[1].neighborhood : ""));
+      }
+    }
   }
 
   // Build basePool

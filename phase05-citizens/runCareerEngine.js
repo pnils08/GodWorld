@@ -68,6 +68,7 @@ function runCareerEngine_(ctx) {
   var iIncome = idx('Income');
   var iEconKey = idx('EconomicProfileKey');
   var iEmployerBizId = idx('EmployerBizId'); // v2.4: employer tracking
+  var iDialState = idx('DialState'); // engine.32 T5 — Drive dial -> career-event frequency
 
   if (iPopID < 0 || iTier < 0 || iClock < 0 || iLife < 0 || iLastUpd < 0) return;
 
@@ -305,6 +306,7 @@ function runCareerEngine_(ctx) {
 
     var skillCore = (st.skill && st.skill.general) ? st.skill.general : 0.25;
     var promoChance = 0.01 + (st.tenure * 0.004) + (Math.max(0, pressure) * 0.02) + (skillCore * 0.015);
+    promoChance *= (context.careerFreq || 1); // engine.32 T5 — Drive dial biases promotion odds
     promoChance = clamp(promoChance, 0, 0.08);
 
     var layoffChance = 0.004 + (Math.max(0, -pressure) * 0.03) + (chaosP * 0.01);
@@ -693,6 +695,11 @@ function runCareerEngine_(ctx) {
     var macroP = getMacroPressure_(econMood);
     if (macroP <= -0.65 || macroP >= 0.7) chance += 0.006;
 
+    // engine.32 T5 — Drive dial scales career-event frequency (0.5..1.5).
+    // null bands (no DialState) -> base rates unchanged.
+    var dialBands = getCitizenDialBands_(ctx, popId, iDialState >= 0 ? (row[iDialState] || "") : "");
+    if (dialBands) chance *= dialBands.careerFreq;
+
     // Cap chance
     if (chance > 0.14) chance = 0.14;
     if (!chanceHit(chance)) continue;
@@ -716,7 +723,8 @@ function runCareerEngine_(ctx) {
       season: season,
       holiday: holiday,
       chaos: chaos,
-      weather: weather
+      weather: weather,
+      careerFreq: dialBands ? dialBands.careerFreq : 1 // engine.32 T5
     });
 
     // Choose drift output

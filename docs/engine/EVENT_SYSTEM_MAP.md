@@ -4,7 +4,9 @@
 **Parent:** [[../plans/2026-05-31-life-event-generation]] (engine.32) · **Companions:** [[TAG_REGISTRY]] (tag→category vocab), `utilities/citizenDialMap.js` (event→dial nudges), [[ENGINE_STUB_MAP]].
 **Registered:** [[../index]].
 
-This is the T1 deliverable: the inventory the traits→events back-arc (T5), the Conduct generator (T7), and the city-event fan-out (T8) build against. Per-generator detail lives in the tables; the seam column is where `getCitizenDialBands_(ctx, popId)` injects (null → base rates, the contract from engine.31 Phase 5).
+This is the T1 deliverable: the inventory the traits→events back-arc (T5), the Conduct generator (T7), and the city-event fan-out (T8) build against. Per-generator detail lives in the tables; the seam column is where `getCitizenDialBands_(ctx, popId, dialStrOpt)` injects (null → base rates, the contract from engine.31 Phase 5; `dialStrOpt` added S255 so row-iterating generators resolve bands before `citizenLookup` exists).
+
+**T5 WIRED (S255, same session):** all EASY/MEDIUM seams below + the 3 targeted generational fns now call the seam — genericMicro ×`mult.outabout`, gameModeMicro ×`mult.outabout`, citizensEvents ×`mult.outabout` on chance + per-category pool weights (relationship→sociability, occupation→drive, neighborhood/calendar→outabout, continuity→low-composure dwell), career ×`careerFreq` (drift + promoChance), relationship ×`mult.sociability`, household ×`familyFreq`, education ×`mult.openness`, neighborhood ×`mult.outabout`, youth ×`mult.drive`, generational wedding/birth ×`familyFreq` + promotion ×`careerFreq` (cache primed in caller loop). All multipliers apply pre-cap; null bands → base rates (inert until DialState deploys). Tests: G11-G14 cover the override path.
 
 ---
 

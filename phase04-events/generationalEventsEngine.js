@@ -203,6 +203,7 @@ function runGenerationalEngine_(ctx) {
   // the LifeHistory tag. Guard every write on `>= 0` (column may be absent).
   var iMarital = idx("MaritalStatus");
   var iNumChildren = idx("NumChildren");
+  var iDialState = idx("DialState"); // engine.32 T5 — dial-biased milestone odds
 
   // LifeHistory_Log handle removed S204 B2 — appends route through queueAppendIntent_.
   var cycle = (ctx.summary && ctx.summary.cycleId) || (ctx.config && ctx.config.cycleCount) || 0;
@@ -262,6 +263,10 @@ function runGenerationalEngine_(ctx) {
 
     var age = birthYear ? (simYear - birthYear) : 0;
     var name = ((row[iFirst] || "") + " " + (row[iLast] || "")).trim();
+
+    // engine.32 T5 — prime the per-ctx dial-band cache from the row (phase04
+    // runs before citizenLookup exists); check*_ fns read it via (ctx, popId).
+    getCitizenDialBands_(ctx, popId, iDialState >= 0 ? (row[iDialState] || "") : "");
 
     // HEALTH STATUS LIFECYCLE
     if (status === "hospitalized" || status === "critical" || status === "recovering" ||
@@ -682,6 +687,10 @@ function checkWedding_(ctx, popId, age, lifeHistory, cal) {
   }
   if (romanticBond) c += 0.01;
 
+  // engine.32 T5 — Family dial biases marriage odds (0.5..1.5; null -> base rate)
+  var dialBands = getCitizenDialBands_(ctx, popId);
+  if (dialBands) c *= dialBands.familyFreq;
+
   if (!chance_(ctx, c)) return null;
 
   var descriptions;
@@ -729,6 +738,10 @@ function checkBirth_(ctx, popId, age, lifeHistory, cal) {
   if (cal.month === 9) c *= 2.0;
   if (cal.month >= 7 && cal.month <= 10) c *= 1.3;
 
+  // engine.32 T5 — Family dial biases birth odds (0.5..1.5; null -> base rate)
+  var dialBands = getCitizenDialBands_(ctx, popId);
+  if (dialBands) c *= dialBands.familyFreq;
+
   if (c < 0.0005) c = 0.0005;
   if (!chance_(ctx, c)) return null;
 
@@ -757,6 +770,11 @@ function checkPromotion_(ctx, popId, age, lifeHistory, tier, tierRole, cal) {
   if (tier <= 2) c = 0.001;
 
   if (cal.month === 1 || cal.month === 12) c *= 1.5;
+
+  // engine.32 T5 — Drive dial biases promotion odds (0.5..1.5; null -> base rate)
+  var dialBands = getCitizenDialBands_(ctx, popId);
+  if (dialBands) c *= dialBands.careerFreq;
+
   if (!chance_(ctx, c)) return null;
 
   var descriptions = [

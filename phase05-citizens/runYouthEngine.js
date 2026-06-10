@@ -142,6 +142,11 @@ function runYouthEngine_(ctx) {
       prob *= 1.1; // Youth in hotspots have more notable events
     }
 
+    // engine.32 T5 — Drive dial scales youth-event frequency (0.5..1.5).
+    // null bands (no DialState) -> base rates unchanged.
+    var dialBands = getCitizenDialBands_(ctx, youth.id, youth.dialState || "");
+    if (dialBands) prob *= dialBands.mult.drive;
+
     // Roll for event
     if (rng() < prob) {
       // v1.1: Pass QoL context to event generator
@@ -284,6 +289,7 @@ function getNamedYouth_(ctx) {
   var iBirthYear = idx('BirthYear');
   var iNeighborhood = idx('Neighborhood');
   var iStatus = idx('Status');
+  var iDialState = idx('DialState'); // engine.32 T5 — Drive dial -> youth-event frequency
 
   // v1.2 FIX: Require valid ID column
   if (iId < 0) {
@@ -328,6 +334,7 @@ function getNamedYouth_(ctx) {
         name: citizenName,
         age: age,
         neighborhood: String(row[iNeighborhood] || ''),
+        dialState: iDialState >= 0 ? String(row[iDialState] || '') : '', // engine.32 T5
         source: 'named'
       });
     }

@@ -74,6 +74,7 @@ function runNeighborhoodEngine_(ctx) {
   var iFirst = idx('First');
   var iLast = idx('Last');
   var iBirthYear = idx('BirthYear');
+  var iDialState = idx('DialState'); // engine.32 T5 — Out-and-About dial -> neighborhood-event frequency
 
   // ═══════════════════════════════════════════════════════════════════════════
   // OAKLAND NEIGHBORHOODS (12 total - v2.2)
@@ -430,6 +431,11 @@ function runNeighborhoodEngine_(ctx) {
     if (holidayNeighborhood && neighborhood === holidayNeighborhood) {
       driftChance += 0.02;
     }
+
+    // engine.32 T5 — Out-and-About dial scales neighborhood-event frequency
+    // (0.5..1.5). null bands (no DialState) -> base rates unchanged.
+    var dialBands = getCitizenDialBands_(ctx, (row[iPopID] || "").toString(), iDialState >= 0 ? (row[iDialState] || "") : "");
+    if (dialBands) driftChance *= dialBands.mult.outabout;
 
     // Cap driftChance
     if (driftChance > 0.12) driftChance = 0.12;

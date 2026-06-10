@@ -59,6 +59,7 @@ function generateGameModeMicroEvents_(ctx) {
   var iLastUpd = (idx("LastUpdated") >= 0) ? idx("LastUpdated") : idx("Last Updated");
   var iOriginGame = idx("OriginGame");
   var iTrait = idx("TraitProfile");
+  var iDialState = idx("DialState"); // engine.32 T5 — dial-biased event frequency
 
   if (iPopID < 0 || iClock < 0 || iStatus < 0 || iLife < 0) return;
 
@@ -504,6 +505,11 @@ function generateGameModeMicroEvents_(ctx) {
       else if (sportsSeason === "playoffs" || sportsSeason === "post-season") chance += 0.015;
       else if (sportsSeason === "regular") chance += 0.01;
     }
+
+    // engine.32 T5 — Out-and-About dial scales public-figure micro-event
+    // frequency (0.5..1.5). null bands (no DialState) -> base rates unchanged.
+    var dialBands = getCitizenDialBands_(ctx, popId, iDialState >= 0 ? (row[iDialState] || "") : "");
+    if (dialBands) chance *= dialBands.mult.outabout;
 
     if (chance > 0.15) chance = 0.15;
     if (!hit(chance)) continue;

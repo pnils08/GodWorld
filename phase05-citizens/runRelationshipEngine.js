@@ -61,6 +61,7 @@ function runRelationshipEngine_(ctx) {
   var iFirst = idx('First');
   var iLast = idx('Last');
   var iNeighborhood = idx('Neighborhood');
+  var iDialState = idx('DialState'); // engine.32 T5 — Sociability dial -> social-event frequency
 
   // ═══════════════════════════════════════════════════════════════════════════
   // PULL GODWORLD STATE
@@ -460,6 +461,11 @@ function runRelationshipEngine_(ctx) {
     if (typeof hasWeatherCondition_ === 'function' && hasWeatherCondition_(ctx, 'heat_wave')) {
       driftChance += 0.01;
     }
+
+    // engine.32 T5 — Sociability dial scales social-event frequency (0.5..1.5).
+    // null bands (no DialState) -> base rates unchanged.
+    var dialBands = getCitizenDialBands_(ctx, popId, iDialState >= 0 ? (row[iDialState] || "") : "");
+    if (dialBands) driftChance *= dialBands.mult.sociability;
 
     // Cap drift chance
     if (driftChance > 0.15) driftChance = 0.15;

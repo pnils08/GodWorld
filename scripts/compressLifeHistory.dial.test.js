@@ -181,6 +181,16 @@ console.log('═══ Section G — Phase 5 dial-band seam (getCitizenDialBands
   });
   assert('G9 bands in [-2,2], mult in [0.5,1.5]', inRange);
   assert('G10 cached (same ref on 2nd call)', C.getCitizenDialBands_(ctx, 'POP-DRIVE') === drive);
+
+  // engine.32 T5 — dialStrOpt override (generators that iterate ledger rows
+  // directly, before/without citizenLookup)
+  const ctxNoLookup = {};
+  const ovr = C.getCitizenDialBands_(ctxNoLookup, 'POP-ROW', dialState({ drive: 90 }));
+  assert('G11 no citizenLookup + dialStrOpt -> bands resolve', !!ovr && ovr.careerFreq > 1, String(ovr && ovr.careerFreq));
+  assert('G12 override result cached (same ref on 2nd call, no override passed)', C.getCitizenDialBands_(ctxNoLookup, 'POP-ROW') === ovr);
+  assert('G13 no citizenLookup + no override -> null', C.getCitizenDialBands_(ctxNoLookup, 'POP-OTHER') === null);
+  assert('G14 citizenLookup wins over override when both present',
+    C.getCitizenDialBands_({ citizenLookup: { 'POP-X': { DialState: dialState({ family: 88 }) } } }, 'POP-X', dialState({ drive: 90 })).familyFreq > 1);
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

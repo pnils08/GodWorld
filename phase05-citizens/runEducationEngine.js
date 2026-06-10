@@ -57,6 +57,7 @@ function runEducationEngine_(ctx) {
   var iLife = idx('LifeHistory');
   var iLastUpd = idx('LastUpdated');
   var iNeighborhood = idx('Neighborhood');
+  var iDialState = idx('DialState'); // engine.32 T5 — Openness dial -> learning-event frequency
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WORLD CONTEXT
@@ -394,6 +395,11 @@ function runEducationEngine_(ctx) {
 
     // Community engagement boost (v2.2)
     if (dynamics.communityEngagement >= 1.3) chance += 0.005;
+
+    // engine.32 T5 — Openness dial scales learning-event frequency (0.5..1.5).
+    // null bands (no DialState) -> base rates unchanged.
+    var dialBands = getCitizenDialBands_(ctx, (row[iPopID] || "").toString(), iDialState >= 0 ? (row[iDialState] || "") : "");
+    if (dialBands) chance *= dialBands.mult.openness;
 
     if (chance > 0.12) chance = 0.12;
 

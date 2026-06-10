@@ -1097,6 +1097,12 @@ function generateCitizensEvents_(ctx) {
       chance *= eventBoost;
     }
 
+    // engine.32 T5 — Out-and-About dial scales how much happens to this citizen
+    // (0.5..1.5). citizenLookup carries DialState here (built L215-250).
+    // null bands (no DialState) -> base rates unchanged.
+    var dialBands = getCitizenDialBands_(ctx, popId);
+    if (dialBands) chance *= dialBands.mult.outabout;
+
     var citizenBonds = [];
     var hasRivalry = false;
     var hasAlliance = false;
@@ -1308,6 +1314,27 @@ function generateCitizensEvents_(ctx) {
         if (traits.driven >= 0.6 && awEntry.text.indexOf('work') >= 0) weightMod *= 1.15;
 
         awEntry.weight = (awEntry.weight || 1) * weightMod;
+      }
+    }
+
+    // engine.32 T5 — dial bands bias WHICH events a citizen draws (pool-entry
+    // weights by category, 0.5..1.5 each). Authoritative DialState, not the
+    // TraitProfile face. Stacks with archetype weights; null -> no bias.
+    if (dialBands) {
+      var dm = dialBands.mult;
+      for (var dwi = 0; dwi < pool.length; dwi++) {
+        var dwEntry = pool[dwi];
+        var dwTags = dwEntry.tags || [];
+        var dwMod = 1.0;
+        for (var dwti = 0; dwti < dwTags.length; dwti++) {
+          var dwTag = dwTags[dwti];
+          if (dwTag.indexOf('relationship:') === 0) dwMod *= dm.sociability;
+          else if (dwTag === 'source:occupation') dwMod *= dm.drive;
+          else if (dwTag === 'source:neighborhood' || dwTag === 'source:prevEvening') dwMod *= dm.outabout;
+          else if (dwTag === 'source:firstFriday' || dwTag === 'source:holiday' || dwTag === 'source:sports' || dwTag === 'source:creationDay') dwMod *= dm.outabout;
+          else if (dwTag === 'source:continuity') dwMod *= dm.composure < 1 ? (2 - dm.composure) : 1; // low composure dwells on unresolved tension
+        }
+        if (dwMod !== 1.0) dwEntry.weight = (dwEntry.weight || 1) * dwMod;
       }
     }
 

@@ -42,6 +42,7 @@ function generateGenericCitizenMicroEvents_(ctx) {
   var iLife = idx("LifeHistory");
   var iLastUpd = idx("LastUpdated");
   var iNeighborhood = idx("Neighborhood");
+  var iDialState = idx("DialState"); // engine.32 T5 — dial-biased event frequency
 
   if (iPopID < 0 || iTier < 0 || iClock < 0 || iLife < 0) return;
 
@@ -470,6 +471,11 @@ function generateGenericCitizenMicroEvents_(ctx) {
 
     if ((dynamics.culturalActivity || 1) >= 1.4) chance += 0.008;
     if ((dynamics.communityEngagement || 1) >= 1.3) chance += 0.005;
+
+    // engine.32 T5 — Out-and-About dial scales ambient-event frequency (0.5..1.5).
+    // null bands (no DialState — pre-deploy / unseeded) -> base rates unchanged.
+    var dialBands = getCitizenDialBands_(ctx, popId, iDialState >= 0 ? (row[iDialState] || "") : "");
+    if (dialBands) chance *= dialBands.mult.outabout;
 
     if (chance > 0.12) chance = 0.12;
     if (!hit(chance)) continue;

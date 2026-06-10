@@ -772,12 +772,16 @@ function getCitizenArchetype_(ctx, popId) {
 // Contract (criterion 8): Integrity low band -> crime reachable; Drive band ->
 // career-event frequency; Family band -> birth/marriage frequency. Generation
 // itself lives in engine.32; this only EXPOSES the read surface.
-function getCitizenDialBands_(ctx, popId) {
+// dialStrOpt (engine.32 T5): generators that iterate ledger rows directly
+// (phase04 + the phase05 life engines run before citizenLookup is built) pass
+// the row's DialState cell — citizenLookup stays the lookup of record when
+// present, the override fills the phase-order gap. Same cache either way.
+function getCitizenDialBands_(ctx, popId, dialStrOpt) {
   if (!ctx._dialBandCache) ctx._dialBandCache = {};
   if (ctx._dialBandCache.hasOwnProperty(popId)) return ctx._dialBandCache[popId];
 
   var citizen = ctx.citizenLookup && ctx.citizenLookup[popId];
-  var dialStr = citizen && citizen.DialState;
+  var dialStr = (citizen && citizen.DialState) || dialStrOpt;
   if (!dialStr) { ctx._dialBandCache[popId] = null; return null; }
 
   var parsed = parseDialState_(dialStr);

@@ -65,6 +65,7 @@ function generateCitizensEvents_(ctx) {
   var iOccupation = idx("Occupation");
   var iTierRole = idx("TierRole");
   var iType = idx("Type");
+  var iUsage = idx("UsageCount"); // engine.32 T3 — fame seam (SL appearance counter)
 
   if (iTier < 0 || iClock < 0 || iLife < 0 || iLastU < 0 || iPopID < 0) return;
 
@@ -512,6 +513,7 @@ function generateCitizensEvents_(ctx) {
     if (has("source:qol")) return "QoL";
     if (has("source:media")) return "Media";
     if (has("source:weather")) return "Weather";
+    if (has("source:fame")) return "Reputation"; // engine.32 T3
     if (has("relationship:rivalry")) return "Rivalry";
     if (has("relationship:alliance")) return "Alliance";
     if (has("relationship:mentorship")) return "Mentorship";
@@ -1034,6 +1036,7 @@ function generateCitizensEvents_(ctx) {
     var birthYear = (iBirthYear >= 0) ? Number(row[iBirthYear] || 0) : 0;
     var occupation = (iOccupation >= 0) ? String(row[iOccupation] || "") : "";
     var ageGroup = ageGroup_(birthYear);
+    var usageCount = (iUsage >= 0) ? Number(row[iUsage]) || 0 : 0; // T3 — blank reads 0
 
     if (tier !== 3 && tier !== 4) continue;
     if (mode !== "ENGINE") continue;
@@ -1100,6 +1103,10 @@ function generateCitizensEvents_(ctx) {
       if (isFirstFriday) chance += 0.003;
     }
     if (ageGroup === "senior" && dynamics.communityEngagement >= 1.2) chance += 0.003;
+
+    // engine.32 T3 — fame factor: repeat edition appearances make a citizen
+    // slightly more eventful (people approach them). Modest, pre-cap.
+    if (usageCount >= 8) chance += 0.005;
     if (occupation && (occupation.toLowerCase().indexOf("driver") >= 0 || occupation.toLowerCase().indexOf("security") >= 0)) {
       if (weather.impact >= 1.3) chance += 0.003;
     }
@@ -1244,6 +1251,26 @@ function generateCitizensEvents_(ctx) {
         pool.push(makeEntry(op[opi].text, mergeTags(op[opi].tags, calendarTags), op[opi].weight, false));
       }
     }
+
+    // engine.32 T3 — fame seam: citizens with repeated edition appearances
+    // (UsageCount = SL appearance counter, written by mediaRoomIntake) draw
+    // public-recognition events. Threshold 8 ≈ the top ~10 ENGINE T3-4
+    // citizens live (S255 audit: 96/904 nonzero, 15 at 8+). Tag routes to
+    // 'Reputation' (Social, slot-eligible; DIAL_MAP integrity+3/sociability+2)
+    // — coverage → fame → recognition → Reputation memory closes the loop.
+    // Forward-compatible with engine.29: decay/ascension change how
+    // UsageCount evolves, not what it means here.
+    if (usageCount >= 8) {
+      var famePool = [
+        "got recognized by a stranger who'd read about them in the Tribune",
+        "fielded questions at the corner store about the story they'd appeared in",
+        "was greeted by name by someone they'd never met",
+        "overheard their own name in a conversation outside the cafe"
+      ];
+      for (var fmi = 0; fmi < famePool.length; fmi++) {
+        pool.push(makeEntry(famePool[fmi], mergeTags(["source:fame"], calendarTags), 1.15, false));
+      }
+    }
     var agp = agePoolFor_(ageGroup);
     for (var agi = 0; agi < agp.length; agi++) {
       pool.push(makeEntry(agp[agi].text, mergeTags(agp[agi].tags, calendarTags), agp[agi].weight, false));
@@ -1353,6 +1380,7 @@ function generateCitizensEvents_(ctx) {
           else if (dwTag === 'source:firstFriday' || dwTag === 'source:holiday' || dwTag === 'source:sports' || dwTag === 'source:creationDay') dwMod *= dm.outabout;
           else if (dwTag === 'source:continuity') dwMod *= dm.composure < 1 ? (2 - dm.composure) : 1; // low composure dwells on unresolved tension
           else if (dwTag === 'evening:cityEventAttend') dwMod *= dm.sociability; // engine.32 T8 — attending stacks sociability on top of prevEvening's outabout
+          else if (dwTag === 'source:fame') dwMod *= dm.sociability; // engine.32 T3 — sociable citizens lean into recognition
         }
         if (dwMod !== 1.0) dwEntry.weight = (dwEntry.weight || 1) * dwMod;
       }

@@ -26,6 +26,7 @@ This is the T1 deliverable: the inventory the traits→events back-arc (T5), the
 | `runHouseholdEngine.js` | 5 | ENGINE | T3-4, 6/cyc | ~70 home/family texture (holiday-heavy) | 0.02 + mods | 6/cyc | No | **EASY** — `familyFreq` at L399 |
 | `runEducationEngine.js` | 5 | ENGINE | T3-4, age≥15, 10/cyc | ~50 learning texture | 0.02 + mods (18-35 +0.01) | 10/cyc | age | **EASY** — `mult.openness` at L357. ⚠ anomaly: direct `logSheet.appendRow` L437 (not queueAppendIntent_) |
 | `runNeighborhoodEngine.js` | 5 | ENGINE | T3-4, 6/cyc | ~70 neighborhood mood ×12 + holiday-neighborhood | 0.02 + mods | 6/cyc | neighborhood | **EASY** — `mult.outabout` at L380 |
+| `runConductEngine.js` **(T7, S255)** | 5 | ENGINE | T3-4, non-UNI/MED/CIV, age≥16, 3/cyc | moral tests: 8 petty + 6 serious + 4 grave + 8 resist; tags = DIAL_MAP Conduct vocab (Transgression-Petty/-Serious/-Grave, Resisted) | 0.012 (×1.25 low composure, ×1.2 econ≤35, ×0.7 crime spike) | chance≤0.03, 3/cyc | YES — **dialBands REQUIRED** (inert pre-deploy) | **CORE** — crimeReachable gates commit (band −2 only, accessor contract); commitP .35+(−band×.20); severity by band; spike counterweight ×0.6 commit |
 | `runYouthEngine.js` | 5 | (none) | named youth 5-22 | youth-* pools (academic/sports/civic/resilience/safety/coming-of-age) | 0.15-0.25 by school level ±calendar ±QoL | 25/cyc, 5/nbhd | age/school/QoL | MEDIUM — `mult.drive` pre-QoL ~L131 |
 | `checkForPromotions.js` | 5 | (none) | Generic_Citizens EmergenceCount≥3 | promotion to Tier-3 (not a pool) | 0.20 ×calendar | — | No | N/A (citizen-agnostic by design) |
 
@@ -51,7 +52,8 @@ This is the T1 deliverable: the inventory the traits→events back-arc (T5), the
 | media/civic modes | — | hot | — | — | — |
 | career/relationship/household/education/neighborhood engines | warm | hot | warm (ambient) | — | — |
 | youth | warm | — | warm | warm | — |
-| **TOTAL** | strong | strong | **thin (milestone-only)** | **thin (generational-only)** | **ZERO — T7 builds it** |
+| conduct engine (T7, S255) | — | — | — | — | **hot** (moral tests, dial-gated) |
+| **TOTAL** | strong | strong | **thin (milestone-only)** | **thin (generational-only)** | **covered (T7 `runConductEngine.js` — Resisted/Transgression ladder, inert until DialState deploys)** |
 
 Fame (`UsageCount`): read by intake/context code only — **no generator gates on fame** (T3 confirmed gap, deferred to its own pass).
 

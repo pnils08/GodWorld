@@ -275,6 +275,7 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase5-Career', function() { runCareerEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Education', function() { runEducationEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Household', function() { runHouseholdEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-Conduct', function() { runConductEngine_(ctx); }); // engine.32 T7 — moral tests (inert until DialState deploys)
   safePhaseCall_(ctx, 'Phase5-Generational', function() { runGenerationalEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Youth', function() { runYouthEngine_(ctx); });
 
@@ -1593,6 +1594,7 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase5-Career', function() { runCareerEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Education', function() { runEducationEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Household', function() { runHouseholdEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-Conduct', function() { runConductEngine_(ctx); }); // engine.32 T7 — moral tests (inert until DialState deploys)
   safePhaseCall_(ctx, 'Phase5-Generational', function() { runGenerationalEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Youth', function() { runYouthEngine_(ctx); });
 

@@ -43,16 +43,16 @@ pointers:
 
 **D1 — Death curve.** Escalating chance from age **85** (mirror `checkRetirement_`'s age-laddered curve: e.g. 85→low, 90→higher, 95→higher, ~100 near-certain). NOT a hard final age. Deaths stay **rare and representative**: 1 tracked death = ~438 real deaths, so a sub-85 death is a *major story* (it represents 438 similar), not a routine cull. The 85+ clock is the primary death path; young deaths are rare exceptions (illness escalation), never frequent.
 
-**D2 — ClockMode event-authority matrix.** ClockMode gates what the engine may do to a citizen:
+**D2 — ClockMode event-authority matrix.** ClockMode gates what the engine may do to a citizen. **REVISED S255 (Mike-direct): all civilians can die** — MEDIA/CIVIC death protection dropped; protection is expressed as *succession*, not immortality.
 
 | ClockMode | live count | Engine death | Illness | Injury |
 |-----------|:--:|:--:|:--:|:--:|
 | **ENGINE** | 721 | ✓ 85+ clock | ✓ | ✓ |
-| **GAME** | 90 | ✓ 85+ clock | ✓ | ✗ — Paulson's game injures athletes |
-| **MEDIA** | 43 | ✗ won't die off | ✓ (big story) | ✓ (big story) |
-| **CIVIC** | 49 | ✗ won't die off | ✓ (big story) | ✓ (big story) |
+| **GAME** | 90 | ✓ **only once Retired** (career gate first, then the 85+ clock) | ✓ | ✗ — Paulson's game injures athletes |
+| **MEDIA** | 43 | ✓ — death **prompts a new voice in that job** (agent/voice tie recast) | ✓ (big story) | ✓ (big story) |
+| **CIVIC** | 49 | ✓ (all civilians die) — vacancy via existing civic succession/election machinery *(inference: Mike named the MEDIA recast explicitly; CIVIC succession path to confirm)* | ✓ (big story) | ✓ (big story) |
 
-ENGINE is the "fair game" representative population. GAME ages out at 85+ but the engine never injures them. MEDIA/CIVIC are agent voices — protected from engine death, but illness/injury within their events (and any such event is a big story). *(Inference flagged for confirm: GAME illness defaulted to ✓ — only injury was carved to Paulson. Adjust if illness should also be Paulson's.)*
+ENGINE is the "fair game" representative population. GAME citizens can't die while active athletes — retirement releases them to the normal mortality clock. MEDIA/CIVIC deaths are big stories AND job-continuity events: the role persists, the person doesn't (a MEDIA death recasts the voice in that job). *(S248 inference still open: GAME illness defaulted to ✓ — only injury was carved to Paulson. Adjust if illness should also be Paulson's.)*
 
 **D3 — Fame-ascension threshold.** `UsageCount ≥ 30` → ascend to Cultural_Ledger. Single factor — verified no second accumulating fame signal exists on the SL (`MediaCount`/`FameScore`/`EmergenceCount` are all absent from Simulation_Ledger; they live on Cultural_Ledger). A second factor would require a new SL column (out of scope unless added).
 
@@ -84,7 +84,9 @@ ENGINE is the "fair game" representative population. GAME ages out at 85+ but th
   1. Add `AGE_RANGES.DEATH = { min: 85 }` (no max). Add an escalating age curve in `checkDeath_` mirroring `checkRetirement_` (85→~0.01, 90→~0.04, 95→~0.12, ~100→near-certain — tune to keep deaths rare/representative).
   2. Add a ClockMode authority helper read in the loop (the loop already reads `mode = row[iClock]`). Gate per D2: death only for `ENGINE`/`GAME`; illness/injury per matrix; GAME injury suppressed (route to Paulson's game, i.e. engine emits no injury for GAME).
   3. Keep the "any death is a 1:438 story" framing — death cascade already exists (`triggerDeathCascade_`); ensure it tags a high-priority story hook so the newsroom surfaces it.
-- **Verify:** harness re-trace (`/tmp/trace_generational.js` style) — confirm 0 deaths under 85 from the age path; ENGINE/GAME 85+ produce a low non-zero rate; MEDIA/CIVIC produce 0 engine deaths; GAME produces 0 engine injuries.
+  4. **Health columns (S255 ride-along):** add SL columns `StatusStartCycle` + `HealthCause` — the hospital lifecycle already header-resolves both (`generationalEventsEngine.js:198-199`, `>= 0` guarded) so adding the columns activates the dead duration mechanics with zero code: forced resolution after 5 cycles hospitalized, critical 3+ cycles → 60% resolve, recovery wipes cause. Without them `statusDuration` is always 0 (patients linger on pure dice) and assigned causes have nowhere to persist (`healthCauseIntake.js:308` lazily self-heals HealthCause on first intake run; StatusStartCycle has no self-heal). **Health system verdict (S255):** SL Status IS the illness/injury tracker (hospitalized/critical/recovering/injured/serious-condition arc native); `Health_Cause_Queue` tab = hospital-intake board (engine hospitalizes cause-blind → media assigns cause → writeback), KEEP — 3 stale unprocessed rows to clear on first real run; separate `Health_Civic` spreadsheet = abandoned (empty, untouched since 2025-11), ignore.
+  5. **GAME death career-gate (S255 D2 revision):** GAME death checks Retired status first, not just age; MEDIA/CIVIC deaths allowed — emit a succession/recast hook with the death cascade (new voice in that job).
+- **Verify:** harness re-trace (`/tmp/trace_generational.js` style) — confirm 0 deaths under 85 from the age path; active GAME citizens produce 0 deaths (retired GAME 85+ produce the normal low rate); MEDIA/CIVIC deaths emit succession hooks; GAME produces 0 engine injuries; a hospitalized fixture citizen force-resolves by cycle 5 once StatusStartCycle exists.
 - **Status:** [ ] not started — post-C96.
 
 ### Phase B — SL tier fame-decay + appearance feed
@@ -124,7 +126,10 @@ ENGINE is the "fair game" representative population. GAME ages out at 85+ but th
 - [ ] **Decay rate / half-life** (Phase B) — Mike's feel call: fast-fickle vs slow-reputation-lingers. Blocks Phase B calibration.
 - [ ] **GAME illness** (Phase A / D2) — defaulted ✓ (only injury carved to Paulson). Confirm or carve illness to Paulson too.
 - [ ] **Decay target** (Phase B) — decay `UsageCount` directly vs a separate derived fame score (lean: separate score, preserve raw count).
+- [ ] **CIVIC death succession** (Phase A / D2, S255) — Mike confirmed all civilians die + named the MEDIA recast explicitly; CIVIC vacancy presumably routes through existing civic succession/election machinery. Confirm.
+- [ ] **MEDIA recast mechanism** (Phase A, S255) — death "prompts a new voice in that job": engine-side hook only (newsroom/agent layer does the recast), or engine mints the successor row? Lean: hook only.
 
 ## Changelog
 
 - 2026-05-30 — Initial draft (S248, engine-sheet). Design from Mike-direct session: D1 death-by-age, D2 ClockMode authority matrix, D3 fame threshold 30, D4 full-SL cultural-gen. Verified current state (death no-age-gate, ClockMode dist, disjoint ledgers, Isley example, UsageCount sole signal). Four phases sequenced post-C96. Canon lock reframed as scaffolding (superseded by ClockMode gating). Sibling to [[../engine/LEDGER_REPAIR_HOUSEHOLDS]]; ENGINE_REPAIR Row 25 to be opened pointing here.
+- 2026-06-10 — S255 (engine-sheet, Mike-direct via lifecycle Q&A). **D2 REVISED:** all civilians can die — MEDIA/CIVIC death protection dropped, replaced by succession (MEDIA death recasts the voice in that job); GAME death career-gated (only once Retired, then the 85+ clock). **Phase A scope grew:** health columns ride-along — add `StatusStartCycle` + `HealthCause` to SL (engine already header-resolves both; activates dead duration timers + cause persistence, zero code). Health system audited: SL Status is the native illness tracker; `Health_Cause_Queue` = hospital intake (keep); `Health_Civic` spreadsheet abandoned (ignore). Two new open questions (CIVIC succession, recast mechanism). Context: ENGINE_REPAIR Row 27 (Isabelle Louis zombie-row, closed) prompted the lifecycle review.

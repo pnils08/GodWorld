@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-05-31 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-06-10 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -1072,6 +1072,13 @@
   Config: ctx.config.cycleCount
   RNG: ctx.rng / safeRand_(ctx)
 
+### runConductEngine.js
+- **runConductEngine_(ctx)**
+  Reads: S.absoluteCycle, S.crimeMetrics, S.cycleId, S.economicMood
+  Writes: S.conductEvents, S.eventsGenerated
+  Config: ctx.config.cycleCount
+  RNG: ctx.rng / safeRand_(ctx)
+
 ### runEducationEngine.js
 - **runEducationEngine_(ctx)**
   Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.simYear, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
@@ -1868,7 +1875,7 @@
 - **compactMediaEffects_(mediaEffects)**
 
 - **snapshotEveningForCarryForward_(ctx)**
-  Reads: S.crowdHotspots, S.crowdMap, S.cycleId, S.eveningFood, S.eveningSafety, S.eveningSports, S.eveningTraffic, S.famousSightings, S.nightlife, S.nightlifeVolume, S.streamingTrend
+  Reads: S.cityEventDetails, S.crowdHotspots, S.crowdMap, S.cycleId, S.eveningFood, S.eveningSafety, S.eveningSports, S.eveningTraffic, S.famousSightings, S.nightlife, S.nightlifeVolume, S.streamingTrend
   Writes: S.eveningSnapshot
 
 - **saveEveningSnapshot_(ctx)**
@@ -2200,6 +2207,44 @@
 
 - **deriveCitizenProfile_(seed, age, neighborhood, ledgerFreq, options)**
 
+### citizenDialMap.js
+- **baseTag_(tag)**
+
+- **scale_(fx, mult)**
+
+- **nudgesForEvent_(tag, severityMult, text)**
+
+- **hasTag_(tag, text)**
+
+### citizenMemory.js
+- **clamp100_(n)**
+
+- **round1_(n)**
+
+- **newCitizen_(base)**
+
+- **current_(c, dial)**
+
+- **applyEvent_(c, event)**
+
+- **applyTaggedEvent_(c, tag, dialMap, severityMult)**
+
+- **settleCycle_(c)**
+
+- **bandIndex_(v)**
+
+- **band_(c, dial)**
+
+- **bandMultiplier_(c, dial)**
+
+- **describe_(c)**
+
+- **snapshot_(c)**
+
+- **serialize_(c)**
+
+- **deserialize_(obj)**
+
 ### compressLifeHistory.js
 - **compressLifeHistory_(ctx, options)**
   Reads: S.absoluteCycle, S.cycleId
@@ -2239,7 +2284,23 @@
 
 - **getCitizenArchetype_(ctx, popId)**
 
+- **getCitizenDialBands_(ctx, popId, dialStrOpt)**
+
 - **parseProfileString_(profileStr)**
+
+- **parseDialState_(str)**
+
+- **serializeDialState_(c)**
+
+- **zeroMood_(c)**
+
+- **foldAgedOutEntries_(c, entries, keepCount)**
+
+- **deriveArchetypeFromBands_(c)**
+
+- **formatDialFace_(c, entries, cycle)**
+
+- **dialFaceShim_(c)**
 
 ### cycleModes.js
 - **seededRng_(seed)**
@@ -2702,5 +2763,5 @@
 
 ---
 
-**Files scanned:** 153
-**Functions mapped:** 915
+**Files scanned:** 156
+**Functions mapped:** 942

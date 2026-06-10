@@ -2,7 +2,9 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-06-09 | Engine: v3.3 | Cycle: 95 | Session: 254 | Day: 161 | Edition: **E94 PUBLISHED + S94 SUPP PUBLISHED + C95 CIVIC CASCADE COMPLETE + C95 /write-edition COMPLETE + C95 PUBLISHED TO DRIVE + C95 /edition-print COMPLETE + C95 /post-publish COMPLETE — CYCLE 95 CANONIZED**
+Last Updated: 2026-06-10 | Engine: v3.3 | Cycle: 95 | Session: 255 | Day: 161 | Edition: **E94 PUBLISHED + S94 SUPP PUBLISHED + C95 CIVIC CASCADE COMPLETE + C95 /write-edition COMPLETE + C95 PUBLISHED TO DRIVE + C95 /edition-print COMPLETE + C95 /post-publish COMPLETE — CYCLE 95 CANONIZED**
+
+**STATUS (S255 [engine/sheet] — soft close):** engine.32 **ALL 8 TASKS COMPLETE on the ledger COPY** — 6 commits pushed (`c575db1` T1 inventory → `b9144ba` T5 dial wiring → `68418a1` T8 city-event fan-out → `fee7fd9` T4 + `f0b21b8` T7 conduct engine → `f33c36d` multi-cycle gate → `282de73` T2/T3). **Gate verdict (acceptance #5):** the events→dials→events loop **CONVERGES, heavily damped** — engine.31 folds on trim only, runaway structurally impossible at background volume; 19/19 (`scripts/engine32MultiCycle.test.js`). T7 `runConductEngine.js` live-inert (crimeReachable = band −2 only, accessor contract). T2 clock audit coherent (one seam → engine.29: generational gates ENGINE+CIVIC, 133 GAME/MEDIA citizens milestone-less). T3 fame seam: `generateCitizensEvents.js` recognition pool `UsageCount ≥ 8` → `Reputation`, 12/12 — coverage→fame→recognition→memory loop closes. Suite **115 green / 6 harnesses**. **NO clasp, NO live writes** — copy track only. Truth docs trued in-commit (EVENT_SYSTEM_MAP incl. new §6, TAG_REGISTRY, plan changelog, ROLLOUT engine.32 row → in-progress). **Deploy order confirmed with Mike: build engine.30 → deploy .31+.32 together on his go → engine.29 rides after, piece by piece (NOT a deploy dependency).** Remaining on .32: C96 copy-run verify of T8's `PREV_EVENING_JSON` snapshot round-trip. **OWED (carried):** STUB_MAP regen (S253 debt; deferred while copy-track). — Prior S254 close below.
 
 **STATUS (S254 [engine/sheet] — soft close, chaining to S255):** engine.31 dial engine **complete end-to-end on the ledger COPY** — Phases 4-6 shipped (3 commits `04ed88a` / `130604c` / `2c719ae`, all pushed; cross-terminal stack clean). **P4:** 6 TraitProfile readers verified against the new dial face + mediaRoom secondary `tone` remapped off dead v1.x trait keys (reflective/social/volatile → openness/sociability/composure). **P5:** `getCitizenDialBands_` event-bias seam (DialState → `{bands, mult, crimeReachable, careerFreq, familyFreq}`) + DialState wired into the canonical popId `citizenLookup` (defensive idx>=0 → inert pre-deploy). **P6 (deploy gate):** `scripts/citizenDialMultiCycle.test.js` 12-cycle trace through the REAL `compressLifeHistory_` fold path proves never-erase (drive 50→97 climbs+holds through 8 quiet cycles) / 0-100-bounded / harden-only-on-pattern / crime-locks-only-on-pattern. Suite **85 green** (citizenDials 38 + compressLifeHistory.dial 32 + multiCycle 15). **A/B fork RESOLVED (Mike):** decouple completion from deploy — .31 is copy-complete; the LIVE deploy (A-style clear-O) is gated behind **engine.30** (milestone→bio) so milestones are preserved before the log clears, then clasp on Mike's go. **NEXT = build engine.30** (execution-ready per its plan), THEN deploy .31 to live. **NO deploy, NO live schema change, NO clasp this session** — copy track only. Truth docs trued up in-commit (plan [[docs/plans/2026-05-31-compression-tag-triage]] Phases 4-6 + changelog; ROLLOUT engine.31 row → 0-6 DONE). **OWED:** STUB_MAP regen for the new dial functions (predates this session — S253 added the bulk without regen; deferred while the code is copy-track/undeployed). — Prior S253 close below.
 
@@ -44,14 +46,22 @@ Last Updated: 2026-06-09 | Engine: v3.3 | Cycle: 95 | Session: 254 | Day: 161 | 
 
 ---
 
-**STATUS (S248 [research/build] — soft close, combined 4-terminal S248 stack pushed, Mike-greenlit):** 3 research-build commits in an 8-commit shared S248 stack (rest engine-sheet). **`417bb85` governance.19** — /session-end v2.0→v2.1 friction (G-SE2 deterministic Archive Sweep Trigger / G-SE3 journal `[N+1]`→`[N]` / G-SE4 ARCHIVE-PASS ordering comment / G-SE5 STATUS-form binds to journal decision; G-SE1 deferred to governance.26 Task 6). **`b726321` + `522cd95` governance.26 research-build slice** — SESSION_CONTEXT always-load → on-demand: ADR-0009 written+registered; hook awk-extracts `## Shipped Last Session (S254)
+**STATUS (S248 [research/build] — soft close, combined 4-terminal S248 stack pushed, Mike-greenlit):** 3 research-build commits in an 8-commit shared S248 stack (rest engine-sheet). **`417bb85` governance.19** — /session-end v2.0→v2.1 friction (G-SE2 deterministic Archive Sweep Trigger / G-SE3 journal `[N+1]`→`[N]` / G-SE4 ARCHIVE-PASS ordering comment / G-SE5 STATUS-form binds to journal decision; G-SE1 deferred to governance.26 Task 6). **`b726321` + `522cd95` governance.26 research-build slice** — SESSION_CONTEXT always-load → on-demand: ADR-0009 written+registered; hook awk-extracts `## Shipped Last Session (S255)
 
 *Mechanical artifact — git-log output auto-generated by `scripts/writeShippedBlock.js` at session-end. Not editorial. **`ROLLOUT_PLAN.md` is canonical for what these commits accomplished.***
 
-- `2c719ae` S254 [engine/sheet] engine.31 Phase 6 — multi-cycle harness PASSES; .31 complete end-to-end on copy
-- `130604c` S254 [engine/sheet] engine.31 Phase 5 — event-bias seam exposed (getCitizenDialBands_)
-- `04ed88a` S254 [engine/sheet] engine.31 Phase 4 — derived archetype + band-voice readers verified; mediaRoom tone remap
-- `7d69f66` S253 [engine/sheet] soft close — engine.31 dial model (8 dials, copy-tested, A/B deploy fork next)
+- `282de73` S255 [engine/sheet] engine.32 T2+T3 — clock audit coherent, fame seam built; all 8 tasks complete on copy
+- `aba5e59` S255 [engine/sheet] engine.32 rollout row trued — built on copy, gate passes
+- `f33c36d` S255 [engine/sheet] engine.32 GATE — multi-cycle closed-loop harness PASSES (19/19)
+- `7902935` docs(media): add Cycle 96 supplemental edition - The Call
+- `fee7fd9` S255 [engine/sheet] engine.32 T4 — circumstance pools + ambient Health texture (household engine)
+- `f0b21b8` S255 [engine/sheet] engine.32 T7 — Conduct moral-test engine (copy-track, measured harness)
+- `68418a1` S255 [engine/sheet] engine.32 T8 — city-event→citizen fan-out via prev-evening channel
+- `b9144ba` S255 [engine/sheet] engine.32 T5 — dials→event probability wired (10 generators, copy-track)
+- `c575db1` S255 [engine/sheet] engine.32 T1 — event-system map (3-agent sweep)
+- `b223b81` S254 [engine/sheet] engine.30 repurposed + engine.32 T8 filed (Mike-direct)
+- `36ac44a` S254 [engine/sheet] engine.30 design revision — bay-tribune source, buildCitizenCards-reverse, dial-anchored
+- `99e1601` S254 [engine/sheet] soft close — engine.31 complete end-to-end on copy (Phases 4-6, deploy gate passes)
 
 ---
 

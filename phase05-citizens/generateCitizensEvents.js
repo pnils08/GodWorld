@@ -529,6 +529,7 @@ function generateCitizensEvents_(ctx) {
       if (has("state:retail")) return "Lifestyle";
       return "Neighborhood";
     }
+    if (has("source:faith")) return "Faith"; // engine.33 T9 — dial warmth/composure + hood pulse
     if (has("source:neighborhood")) return "Neighborhood";
     if (has("source:firstFriday")) return "FirstFriday";
     if (has("source:creationDay")) return "CreationDay";
@@ -907,6 +908,41 @@ function generateCitizensEvents_(ctx) {
         ["source:nbhdState", "state:mood-down"], 1.1, false));
     }
 
+    return pool;
+  }
+
+  // =========================================================================
+  // engine.33 T9: FAITH FAN-OUT (S.faithEvents.events — SAME cycle:
+  // Phase4-FaithEvents runs before Phase5-CitizenEvents at both entry
+  // points). A faith org's event reaches the citizens of ITS hood as
+  // attendance texture; org-side record stays with faithEventsEngine.
+  // Capped at 2 pool entries so faith never dominates a citizen's draw.
+  // =========================================================================
+  function faithPool_(neighborhood) {
+    var pool = [];
+    var evs = (S.faithEvents && S.faithEvents.events) || [];
+    if (!evs.length || !neighborhood) return pool;
+    for (var fi = 0; fi < evs.length && pool.length < 2; fi++) {
+      var fev = evs[fi];
+      if (!fev || fev.neighborhood !== neighborhood) continue;
+      var orgName = fev.organization || "a local congregation";
+      if (fev.eventType === 'holy_day') {
+        pool.push(makeEntry("joined the " + (fev.holyDay || "holy day") + " observance at " + orgName,
+          ["source:faith", "faith:holy-day"], 1.15, false));
+      } else if (fev.eventType === 'community_program') {
+        pool.push(makeEntry("stopped by a community program run out of " + orgName,
+          ["source:faith", "faith:program"], 1.1, false));
+      } else if (fev.eventType === 'crisis_response') {
+        pool.push(makeEntry("pitched in with " + orgName + "'s response effort",
+          ["source:faith", "faith:crisis-response"], 1.15, false));
+      } else if (fev.eventType === 'outreach') {
+        pool.push(makeEntry("was welcomed by an outreach table from " + orgName,
+          ["source:faith", "faith:outreach"], 1.0, false));
+      } else {
+        pool.push(makeEntry("caught a notable service at " + orgName,
+          ["source:faith", "faith:service"], 1.0, false));
+      }
+    }
     return pool;
   }
 
@@ -1309,6 +1345,12 @@ function generateCitizensEvents_(ctx) {
     var nbhdStatePool = neighborhoodStatePool_(neighborhood);
     for (var nsi = 0; nsi < nbhdStatePool.length; nsi++) {
       pool.push(makeEntry(nbhdStatePool[nsi].text, mergeTags(nbhdStatePool[nsi].tags, calendarTags), nbhdStatePool[nsi].weight, false));
+    }
+
+    // engine.33 T9: faith fan-out (this cycle's faith events in THIS hood)
+    var faithFanPool = faithPool_(neighborhood);
+    for (var ffi = 0; ffi < faithFanPool.length; ffi++) {
+      pool.push(makeEntry(faithFanPool[ffi].text, mergeTags(faithFanPool[ffi].tags, calendarTags), faithFanPool[ffi].weight, false));
     }
 
     // Neighborhood

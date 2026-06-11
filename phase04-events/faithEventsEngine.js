@@ -166,7 +166,10 @@ function runFaithEventsEngine_(ctx) {
     generated: events.length,
     cycle: cycle,
     byType: countEventsByType_(events),
-    hasCrisis: hasCrisis
+    hasCrisis: hasCrisis,
+    // engine.33 T9 — full entries for the Phase 5 citizen fan-out
+    // (same-cycle: Phase4-FaithEvents runs before Phase5-CitizenEvents).
+    events: events
   };
 
   // Also add to worldEvents for integration

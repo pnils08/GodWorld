@@ -46,6 +46,29 @@ var NMAP_NEIGHBORHOODS = [
   'KONO'
 ];
 
+// engine.33 pulse fold constants — citizen events accumulated at emit time
+// (utilities/neighborhoodPulseMap.js recordPulse_) nudge the 4 citizen-movable
+// columns. Dampen/cap sized from live column ranges measured S256 (cycle 96):
+// CrimeIndex 0-1, RetailVitality 6.6-15.1, EventAttractiveness 16-79,
+// Sentiment 0.55-0.66. Citizens shade the hood; they never overwrite the
+// world signals.
+var PULSE_FOLD = {
+  sentiment:      { dampen: 0.02, cap: 0.15 },
+  crime:          { dampen: 0.02, cap: 0.10 },
+  vitality:       { dampen: 0.10, cap: 1.00 },
+  attractiveness: { dampen: 0.25, cap: 4.00 }
+};
+
+// engine.33 — dampened, capped pulse delta for one metric (0 when no pulse).
+function pulseFoldDelta_(pulse, key) {
+  if (!pulse) return 0;
+  var raw = Number(pulse[key] || 0) * PULSE_FOLD[key].dampen;
+  var cap = PULSE_FOLD[key].cap;
+  if (raw > cap) return cap;
+  if (raw < -cap) return -cap;
+  return raw;
+}
+
 // S215 civic.10b — neighborhood→district owner map. Canon-authorized only;
 // unmapped neighborhoods get blank District (civic.10c auditor flags them
 // as orphans, forcing canon expansion before they get a synthetic mapping).
@@ -250,6 +273,15 @@ function saveV3NeighborhoodMap_(ctx) {
     var retail = round2(Math.max(0, baseRetail * profile.retailMod * (1 + variance())));
     var eventAttract = Math.max(0, Math.round(baseEventAttract * effectiveEventMod));
     var sent = round2(baseSentiment + effectiveSentimentMod + (variance() * 0.1));
+
+    // engine.33 pulse fold — this cycle's emitted citizen events for this hood
+    var pulse = (S.neighborhoodPulse && S.neighborhoodPulse[name]) || null;
+    if (pulse) {
+      crime = round2(Math.max(0, crime + pulseFoldDelta_(pulse, 'crime')));                   // engine.33 pulse fold
+      retail = round2(Math.max(0, retail + pulseFoldDelta_(pulse, 'vitality')));              // engine.33 pulse fold
+      eventAttract = round2(Math.max(0, eventAttract + pulseFoldDelta_(pulse, 'attractiveness'))); // engine.33 pulse fold
+      sent = round2(sent + pulseFoldDelta_(pulse, 'sentiment'));                              // engine.33 pulse fold
+    }
 
     var demoLabel = getDemographicMarkerV35_(name, baseDemoLabel, arcByNeighborhood, S, holiday, isFirstFriday, isCreationDay);
 

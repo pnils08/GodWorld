@@ -159,6 +159,29 @@ var NEIGHBORHOOD_CRIME_PROFILES = {
     responseMod: 0.8,
     baseIncidents: 10,
     character: 'deep east, underserved'
+  },
+  // S256 roster alignment — event-active CANON_12 hoods that had no crime profile
+  // (silent-skipped by the crime engine every cycle). Thriving-register / low rates.
+  'Laurel': {
+    propertyCrimeMod: 0.7,
+    violentCrimeMod: 0.5,
+    responseMod: 1.0,
+    baseIncidents: 3,
+    character: 'residential family neighborhood'
+  },
+  'Uptown': {
+    propertyCrimeMod: 1.0,
+    violentCrimeMod: 0.6,
+    responseMod: 1.1,
+    baseIncidents: 6,
+    character: 'arts and nightlife district'
+  },
+  'KONO': {
+    propertyCrimeMod: 0.9,
+    violentCrimeMod: 0.6,
+    responseMod: 1.0,
+    baseIncidents: 5,
+    character: 'emerging arts corridor'
   }
 };
 

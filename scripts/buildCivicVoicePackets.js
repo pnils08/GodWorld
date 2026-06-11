@@ -42,12 +42,14 @@ const OUTPUT_DIR = path.join(PROJECT_ROOT, 'output/civic-voice-packets');
 // Based on Civic_Office_Ledger notes and Oakland geography.
 const DISTRICT_NEIGHBORHOODS = {
   D1: ['West Oakland', 'Brooklyn'],                           // Carter (OPP)
-  D2: ['Downtown', 'Chinatown', 'Jack London', 'KONO'],      // Tran (IND)
+  D2: ['Downtown', 'Chinatown', 'Jack London'],              // Tran (IND)
   D3: ['Fruitvale', 'San Antonio'],                           // Delgado (OPP)
   D4: ['Glenview', 'Dimond', 'Ivy Hill'],                     // Vega (IND)
   D5: ['East Oakland', 'Coliseum', 'Elmhurst'],               // Rivers (OPP)
   D6: ['Montclair', 'Piedmont Ave'],                           // Crane (CRC)
-  D7: ['Temescal', 'Rockridge'],                               // Ashford (CRC)
+  // S256 — KONO moved D2→D7 to conform to locked canon (INSTITUTIONS §Neighborhoods,
+  // canonized S215/civic.10a). Duplicate of lib/districtMap.js; fixed in lockstep.
+  D7: ['Temescal', 'Rockridge', 'KONO'],                      // Ashford (CRC)
   D8: ['Lake Merritt', 'Adams Point', 'Grand Lake', 'Eastlake'], // Chen (CRC)
   D9: ['Laurel', 'Uptown']                                    // Mobley (OPP)
 };

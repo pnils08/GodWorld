@@ -33,9 +33,12 @@
  *   deeper severity on commit.
  *
  * Population counterweight (RimWorld adaptation-factor, research4_1.md:211):
- * when Crime_Metrics cityWide spikes, the engine leans POSITIVE — fewer
- * tests, higher resist odds — a real city's resilience. Without it the
- * moral momentum could cascade the whole tracked cohort dark.
+ * when crime pressure spikes, the engine leans POSITIVE — fewer tests,
+ * higher resist odds — a real city's resilience. Without it the moral
+ * momentum could cascade the whole tracked cohort dark. Hood-grain since
+ * engine.33 T8: 0.6 × hood CrimeIndex (prev cycle's Neighborhood_Map, /2
+ * normalized) + 0.4 × citywide (Crime_Metrics /100); hood missing ->
+ * citywide-only at the old >=60 threshold.
  *
  * INERT PRE-DEPLOY: requires DialState (ledger COPY only until the engine.31
  * deploy) — null bands -> citizen skipped entirely. Live behavior unchanged.
@@ -79,11 +82,25 @@ function runConductEngine_(ctx) {
   var LIMIT = 3; // resolved moral tests per cycle (committed OR resisted)
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // POPULATION COUNTERWEIGHT — read citywide crime pressure (Phase 3 output)
+  // POPULATION COUNTERWEIGHT — crime pressure, hood-grain since engine.33 T8.
+  // Citywide (Phase 3 Crime_Metrics, 0-100) blended 0.4 against the hood's
+  // CrimeIndex (prev cycle's Neighborhood_Map via T5 loader, count scale
+  // 0..~2, /2 normalized) at 0.6. Hood missing/null -> citywide-only at the
+  // old >=60 threshold exactly (accessor contract). The counterweight now
+  // answers the hood the citizen lives in, not the whole city's average.
   // ═══════════════════════════════════════════════════════════════════════════
   var cw = (S.crimeMetrics && S.crimeMetrics.cityWide) || {};
   var crimePressure = ((cw.avgPropertyCrime || 50) + (cw.avgViolentCrime || 50)) / 2;
-  var spike = crimePressure >= 60;
+  var cityCrimeNorm = crimePressure / 100; // 0.6 == old spike threshold
+
+  function crimeSpikeFor_(hood) {
+    var st = (S.neighborhoodState && hood) ? S.neighborhoodState[hood] : null;
+    if (!st || st.crimeIndex === null || st.crimeIndex === undefined) {
+      return cityCrimeNorm >= 0.6; // citywide fallback, unchanged semantics
+    }
+    var localNorm = Math.min(1, st.crimeIndex / 2);
+    return (0.6 * localNorm + 0.4 * cityCrimeNorm) >= 0.6;
+  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // TEXT POOLS — mundane moral tests, prosperity-era Oakland scale.
@@ -168,8 +185,9 @@ function runConductEngine_(ctx) {
     if (dialBands.bands.composure <= -1) chance *= 1.25;
     if (econMood <= 35) chance *= 1.2;
 
-    // Counterweight: under citywide pressure the engine leans positive —
-    // fewer tests fire at all
+    // Counterweight: under crime pressure (hood-grain, engine.33 T8) the
+    // engine leans positive — fewer tests fire at all
+    var spike = crimeSpikeFor_(neighborhood);
     if (spike) chance *= 0.7;
 
     // Cap
@@ -186,7 +204,7 @@ function runConductEngine_(ctx) {
       // band-generic ladder: -1 -> 0.55, -2 -> 0.75. Today only -2 is
       // reachable (accessor contract); the -1 rung is dormant, not dead.
       commitP = 0.35 + (-intBand * 0.20);
-      // Counterweight: resilience under citywide pressure
+      // Counterweight: resilience under crime pressure (hood-grain, T8)
       if (spike) commitP *= 0.6;
     }
 
@@ -285,12 +303,14 @@ function runConductEngine_(ctx) {
  * - commit odds: only band -2 reachable today (accessor) -> .75; the .55
  *   -1 rung is dormant pending any engine.31 contract widening
  * - severity by band: grave .02/.05/.10, serious .15/.30/.45 (+.05 low composure)
- * - counterweight at crimePressure>=60: tests ×0.7, commit ×0.6
+ * - counterweight (hood-grain T8): 0.6×local(/2) + 0.4×city(/100) >= 0.6
+ *   -> tests ×0.7, commit ×0.6; no hood data -> citywide >=60 as before
  *
  * The dark loop: commit -> integrity drops -> deeper band -> higher commit
  * odds next test (bad begets bad), BOUNDED by engine.31's promotion ladder
  * (single petty act decays; only sustained patterns promote to a dark core)
- * + the citywide counterweight (no cohort-wide darkening on a metrics spike).
+ * + the counterweight (no cohort-wide darkening on a metrics spike — and
+ * since T8, no cohort-wide response at all: pressure answers at hood grain).
  *
  * ============================================================================
  */

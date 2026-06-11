@@ -48,12 +48,16 @@ pointers:
 
 ### engine-sheet track
 
-**ES-1 — Fail-closed civic/citizen claim gates (marquee).**
+**ES-1 — Fail-closed civic/citizen claim gates (marquee).** — **GATES 1+3 DONE S256 (`3d281c4`); GATE 2 DEFERRED.**
 The root finding (G-S5): civic/citizen generation isn't mechanically bound to engine fields, so the model can write what the engine denies and no model-reviewer reliably catches it. Build the deterministic gate in `validateEdition` / compile:
-- Reject any quoted citizen name that does not resolve to a Simulation_Ledger POP-ID (G-W1/W2 — invention is the disqualifying contamination).
-- Flag civic assertions that cite no engine field+value (G-S5).
-- Flag in-world narration of the data/reporting layer ("reporting cycle", "data office", "logged error", "the fields the city monitors") — engine-language leaking onto the page (G-W6/W7).
-- Source gaps: G-S5, G-W1, G-W2, G-W6, G-W7 (gate-side). Pairs with pipeline.24 sift-side (assign POP-IDs / render in-world at brief time).
+- ✅ **Gate 1 (G-W1/W2)** — `checkQuotedSourcesResolve`: every attributed quoted speaker must resolve to a Simulation_Ledger POP-ID (the SL IS the citizen model — Mike-confirmed; mayor/council/athletes/civic directors all verified as SL rows). Calibrated FP-clean against the 38-edition corpus (name-token class kills possessives/contractions/acronyms; nameTokens resolves compound surnames; STOP/BARE/PLACES drop titles/orgs/places). WARNING severity; CRITICAL promotion is a follow-up once resolution policy locked + a recent edition runs clean.
+- ⏸️ **Gate 2 (G-S5) — DEFERRED, not cleanly mechanizable.** "Flag civic assertions that cite no engine field+value" has two fuzzy halves ("civic assertion" + "cites a field" detection); a naive heuristic flags large amounts of legitimate prose, and as CRITICAL would noise-block the gate that matters. Needs a narrow deterministic subset (e.g. numeric neighborhood-metric claims cross-checked against engine state — overlaps `checkInitiativeFacts`) or a model-reviewer lane, not a regex gate. Re-file as its own scoped task.
+- ✅ **Gate 3 (G-W6/W7)** — `ENGINE_TERMS` extended with data/reporting-layer phrases. 0 FP on corpus; CRITICAL via existing `checkEngineLanguage`.
+- Source gaps: G-W1/W2 (✅ gate 1), G-W6/W7 (✅ gate 3), G-S5 (⏸️ gate 2 deferred). Pairs with pipeline.24 sift-side (assign POP-IDs / render in-world at brief time).
+
+**ES-1 spin-off (architecture, surfaced S256 by Mike during the gate calibration) — citizen-store consolidation onto Simulation_Ledger.** The gate exposed that quoted names trace to multiple stores; the POP-ID-on-SL IS the canonical citizen model. Two design items fall out:
+- **Generic_Citizens + Chicago_Citizens are DORMANT** (bypassed; not in active coverage). A citizen there who gets covered again should be PROMOTED onto Simulation_Ledger with a new POP-ID and the dormant row retired — not resolved in place. Generic_Citizens citizens "with history" are the migration candidates; Chicago still exists in-sim but is uncovered editorially. Net direction: migrate-on-coverage, then retire both dormant ledgers. (Files alongside engine.29 lifecycle/fame work.)
+- **Cultural_Ledger is the bigger gap — it's actively used** and is a *separate tracking system* (CUL-IDs, fame events). Open question Mike raised: should cultural figures also exist on Simulation_Ledger, with a fame threshold promoting a sim citizen onto the cultural/fame track (ties to `citizenFameTracker` / engine.29 fame)? Design decision, not gate code.
 
 **ES-2 — Engine detector hygiene + KONO CityDynamics crash.**
 - `detectRepeatingEvents` must filter raw error-string tokens out of its issue-token corpus so a stack trace can't surface as a civic ailment (G-EC35 — the KONO "strain" false-positive was a fragmented crash trace).

@@ -28,7 +28,11 @@ var NEIGHBORHOOD_DEMOGRAPHICS_HEADERS = [
 var DEMO_NEIGHBORHOODS = [
   'Downtown', 'Temescal', 'Laurel', 'West Oakland', 'Fruitvale', 'Jack London',
   'Rockridge', 'Adams Point', 'Grand Lake', 'Piedmont Ave', 'Chinatown',
-  'Brooklyn', 'Eastlake', 'Glenview', 'Dimond', 'Ivy Hill', 'San Antonio'
+  'Brooklyn', 'Eastlake', 'Glenview', 'Dimond', 'Ivy Hill', 'San Antonio',
+  // S256 roster alignment — these MAP_NEIGHBORHOODS hoods had residents but no
+  // demographics row (silent skip, same class as the KONO G-S6 bug). KONO was
+  // also missing here despite being canon since S215.
+  'KONO', 'Lake Merritt', 'Uptown', 'Baylight District'
 ];
 
 /**
@@ -52,7 +56,15 @@ var NEIGHBORHOOD_PROFILES = {
   'Glenview': { studentMod: 1.2, adultMod: 1.0, seniorMod: 1.0, character: 'family suburban' },
   'Dimond': { studentMod: 1.1, adultMod: 1.0, seniorMod: 1.0, character: 'neighborhood village' },
   'Ivy Hill': { studentMod: 1.0, adultMod: 0.9, seniorMod: 1.3, character: 'quiet residential' },
-  'San Antonio': { studentMod: 1.2, adultMod: 1.0, seniorMod: 0.9, character: 'diverse working' }
+  'San Antonio': { studentMod: 1.2, adultMod: 1.0, seniorMod: 0.9, character: 'diverse working' },
+  // S256 roster alignment — thriving-Oakland register (prosperity sim, not 2026 Oakland).
+  // Mods are age-distribution weights, not prosperity dials.
+  'KONO': { studentMod: 0.9, adultMod: 1.3, seniorMod: 0.7, character: 'emerging arts corridor' },
+  'Lake Merritt': { studentMod: 0.8, adultMod: 1.2, seniorMod: 1.0, character: 'lakeside civic core' },
+  'Uptown': { studentMod: 0.8, adultMod: 1.4, seniorMod: 0.6, character: 'arts & nightlife district' },
+  // Baylight: the A's-anchor flagship build — 35k-seat stadium + 3,200 brand-new
+  // residential units; young professionals + incoming families, few seniors.
+  'Baylight District': { studentMod: 1.0, adultMod: 1.3, seniorMod: 0.5, character: 'new stadium district' }
 };
 
 

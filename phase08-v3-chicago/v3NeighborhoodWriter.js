@@ -82,8 +82,14 @@ var NEIGHBORHOOD_DISTRICT_MAP = {
   'KONO': 'D7',          // Ashford (CRC). Canon: KONO entry §Neighborhoods.
   'Temescal': 'D7',      // Ashford (CRC). Canon: KONO/Temescal corridor adjacency.
   'Downtown': 'D2',      // Tran (IND). Canon: KONO entry §Neighborhoods adjacency.
-  'Adams Point': 'D8'    // Chen (CRC). Canon: KONO entry §Neighborhoods adjacency.
-  // 13 other neighborhoods (Laurel, West Oakland, Fruitvale, Jack London,
+  'Adams Point': 'D8',   // Chen (CRC). Canon: KONO entry §Neighborhoods adjacency.
+  // S256 roster alignment — canon-authorized in INSTITUTIONS §Neighborhoods (S256).
+  'Lake Merritt': 'D8',  // Chen (CRC). Lake-ring cluster (Adams Point/Grand Lake/Eastlake).
+  'Uptown': 'D9',        // Mobley (OPP). Legacy lib/districtMap assignment, ratified S256.
+  'Baylight District': 'D5' // Rivers (OPP). Coliseum-site build (Baylight Authority LENS:
+                          // 65-acre former-Coliseum grounds, Elmhurst/Coliseum-area context);
+                          // sim map already places Coliseum+Elmhurst in D5.
+  // 10 other neighborhoods (Laurel, West Oakland, Fruitvale, Jack London,
   // Rockridge, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake,
   // Glenview, Dimond, Ivy Hill, San Antonio) — pending canon authorization.
 };

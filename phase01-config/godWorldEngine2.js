@@ -222,6 +222,7 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase2-InitiativeEffects', function() { applyInitiativeImplementationEffects_(ctx); });  // v1.0 S137b
   safePhaseCall_(ctx, 'Phase2-Weather', function() { applyWeatherModel_(ctx); });
   safePhaseCall_(ctx, 'Phase2-CityDynamics', function() { applyCityDynamics_(ctx); });
+  safePhaseCall_(ctx, 'Phase2-NeighborhoodState', function() { loadNeighborhoodState_(ctx); });  // engine.33 — inbound loop (prev cycle's Neighborhood_Map)
   safePhaseCall_(ctx, 'Phase2-Transit', function() { updateTransitMetrics_Phase2_(ctx); });
 
   // ═══════════════════════════════════════════════════════════
@@ -1541,6 +1542,7 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase2-InitiativeEffects', function() { applyInitiativeImplementationEffects_(ctx); });  // v1.0 S137b
   safePhaseCall_(ctx, 'Phase2-Weather', function() { applyWeatherModel_(ctx); });
   safePhaseCall_(ctx, 'Phase2-CityDynamics', function() { applyCityDynamics_(ctx); });
+  safePhaseCall_(ctx, 'Phase2-NeighborhoodState', function() { loadNeighborhoodState_(ctx); });  // engine.33 — inbound loop (prev cycle's Neighborhood_Map)
   safePhaseCall_(ctx, 'Phase2-Transit', function() { updateTransitMetrics_Phase2_(ctx); });
 
   // ═══════════════════════════════════════════════════════════

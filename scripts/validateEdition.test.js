@@ -189,5 +189,49 @@ console.log('\nTest 7: G-W64 — extractFullNameAt + SKIP_FIRST_WORDS units');
     helper.isDistinctCanonicalName('Vanessa Tran-Muñoz', 0, new Set()) === false);
 }
 
+// ────────────────────────────────────────────────────────────────────────────
+// Test 8: ES-1 (G-W1/W2) — quoted-source resolution gate, two-sided
+// ────────────────────────────────────────────────────────────────────────────
+console.log('\nTest 8: ES-1 — checkQuotedSourcesResolve (quoted source must resolve to SL POP-ID)');
+{
+  const ledger = [
+    { POPID: 'POP-00034', First: 'Avery', Last: 'Santana', Tier: '2' },
+    { POPID: 'POP-00504', First: 'Warren', Last: 'Ashford', Tier: '3' },
+    { POPID: 'POP-00791', First: 'Eloise', Last: 'Soria-Dominguez', Tier: '3' },
+  ];
+  const fn = helper.checkQuotedSourcesResolve;
+
+  // NEGATIVE — real SL citizens resolve clean (incl. compound surname spaced in prose).
+  const clean = '"The budget holds," said Avery Santana. Warren Ashford countered. Eloise Soria Dominguez briefed the council.';
+  assertEqual('real SL speakers (incl. spaced compound surname) — 0 issues', fn(clean, ledger).length, 0);
+
+  // POSITIVE — invented quoted source flags.
+  const poison = '"We cannot wait," said Zephyrina Quillbottom, an organizer.';
+  const pIssues = fn(poison, ledger);
+  assert('invented quoted source "Zephyrina Quillbottom" — flagged',
+    pIssues.some(i => /Zephyrina Quillbottom/.test(i.detail)), `got ${pIssues.length}`);
+
+  // FP GUARDS — places, bare titles, orgs, pronouns, possessives must NOT flag.
+  const guards = '"Yes," said Downtown\'s council. The Mayor said no. "Done," said the Authority. Nobody said otherwise. Ashford\'s office said little.';
+  assertEqual('place/title/org/pronoun/possessive — 0 false flags', fn(guards, ledger).length, 0);
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// Test 9: ES-1 (G-W6/W7) — data/reporting-layer engine-language additions
+// ────────────────────────────────────────────────────────────────────────────
+console.log('\nTest 9: ES-1 — checkEngineLanguage data/reporting-layer phrases');
+{
+  const fn = helper.checkEngineLanguage;
+  // POSITIVE — in-world narration of the data layer flags.
+  const leak = 'The city data office logged an error during the reporting cycle; the fields the city monitors showed strain.';
+  assert('"data office" flagged', fn(leak).some(i => /data office/i.test(i.detail)));
+  assert('"logged an error" flagged', fn(leak).some(i => /logged an error/i.test(i.detail)));
+  assert('"the fields the city monitors" flagged', fn(leak).some(i => /fields the city monitors/i.test(i.detail)));
+  // NEGATIVE — "quarterly reporting cycle" (fiscal prose) excluded; plain prose clean.
+  assertEqual('"quarterly reporting cycle" (fiscal) — not flagged',
+    fn('The firm closed its quarterly reporting cycle.').filter(i => /reporting cycle/i.test(i.detail)).length, 0);
+  assertEqual('clean civic prose — 0 engine-language', fn('The council met at the lake on a warm afternoon.').length, 0);
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed > 0 ? 1 : 0);

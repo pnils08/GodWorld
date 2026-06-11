@@ -90,6 +90,18 @@ const ENGINE_TERMS = [
   // §Standing rules. Exclude regex matches the legitimate chrome
   // surroundings; body-prose hits still fire CRITICAL.
   { pattern: /\bEdition\s+\d+/g, exclude: /(?:See also[:\s]|Bay Tribune[^|]*,\s*Edition|—\s*Bay Tribune|Editor['']s note|Sidebar|Footer)/i },
+  // ─── G-W6/W7 (ES-1, S256) — data/reporting-layer narration ────────────
+  // The engine leaking onto the page as if the CITY runs a data office /
+  // reporting cycle / logs errors. Distinct from "cycle" (canonical time
+  // unit, allowed): these narrate the simulation's measurement apparatus as
+  // in-world fact. Severity calibrated against the 38-edition corpus before
+  // CRITICAL. "reporting cycle" carries a real-prose collision risk (quarterly
+  // reporting cycle) — excluded when adjacent to fiscal/quarterly framing.
+  { pattern: /\breporting cycle\b/gi, exclude: /(?:quarterly|fiscal|annual|earnings|budget)/i },
+  { pattern: /\bdata office\b/gi },
+  { pattern: /\blogged (?:an?\s+)?error\b/gi },
+  { pattern: /\bthe fields (?:that )?the city (?:monitors|tracks|logs|watches)\b/gi },
+  { pattern: /\bthe city(?:'s)? (?:data|reporting) (?:office|layer|system|cycle)\b/gi },
 ];
 
 // Defensive award terms that conflict with DH
@@ -987,6 +999,104 @@ function checkCitizenNames(editionText, ledgerCitizens) {
   return issues;
 }
 
+// ─── Quoted-Source Resolution Gate (ES-1, G-W1/W2, S256) ─────────────────
+//
+// Fail-CLOSED on invented quoted sources. checkCitizenNames above flags a
+// WRONG first name for a known last name but SKIPS names whose last name isn't
+// on the ledger ("could be a new citizen") — the fail-OPEN gap G-W1/W2 targets:
+// a fully invented person handed a direct quote sails through. All canonical
+// people — mayor, council, civic officials, athletes, business/cultural owners
+// — are Simulation_Ledger rows with POP-IDs (verified S256, Mike-confirmed:
+// "all citizens live on the simulation_ledger"). So a person given an
+// attribution verb who resolves to NOTHING in SL is an invented source = the
+// disqualifying C92-class contamination.
+//
+// Resolution is deliberately PERMISSIVE (first OR last OR full name) — the gate
+// fires only on pure invention, not shared-name ambiguity. Org/place
+// attributions ("asked City Hall", "said the Authority") and titles
+// ("Mayor Santana said") are handled. Severity starts WARNING; promoted to
+// CRITICAL only once corpus calibration shows FP≈0 on known-good editions.
+function checkQuotedSourcesResolve(editionText, ledgerCitizens) {
+  const issues = [];
+  if (!ledgerCitizens || ledgerCitizens.length === 0) return issues;
+
+  const firstNames = new Set(), fullNames = new Set(), nameTokens = new Set();
+  for (const c of ledgerCitizens) {
+    const f = (c.First || '').trim().toLowerCase();
+    const l = (c.Last || '').trim().toLowerCase();
+    if (f) firstNames.add(f);
+    if (f && l) fullNames.add(`${f} ${l}`);
+    // every name-WORD (split on space + hyphen) so compound/hyphenated surnames
+    // resolve on their parts — "Soria-Dominguez" (SL) ⇄ "Soria Dominguez" (prose).
+    for (const w of `${f} ${l}`.split(/[\s-]+/)) if (w && w.length >= 2) nameTokens.add(w);
+  }
+  // Place names are not people — neighborhoods + opponent/peer cities seen in
+  // sports/business prose ("said Downtown's…", "said Milwaukee's offense").
+  let PLACES;
+  try {
+    const { CANONICAL_HOODS } = require('/root/GodWorld/lib/canonNeighborhoods');
+    PLACES = new Set(CANONICAL_HOODS);
+  } catch (_) { PLACES = new Set(); }
+  for (const p of ['oakland','milwaukee','chicago','stockton','sacramento','fremont','berkeley','alameda','hayward','richmond','bridgeport','seattle','houston','detroit','cleveland']) PLACES.add(p);
+
+  // Editorial content only — drop the post-body tracking trailers.
+  const editorial = editionText.split(/ARTICLE TABLE|NAMES INDEX|CITIZEN USAGE LOG|BUSINESSES NAMED/i)[0] || editionText;
+
+  // Capitalized attributions that are NOT people (orgs/places) — skip.
+  const ORG = /\b(Hall|Council|Department|Dept|Authority|Office|Tribune|Party|Coalition|Center|Centre|Stadium|Coliseum|District|City|Oakland|Police|Fire|Bureau|Commission|Board|Committee|Fund|Initiative|Academy|Church|Tabernacle|Cathedral|Sangha|Fellowship|Temple|Mosque|School|University|College|Hospital|Clinic|Association|Union|League|Company|Co|Inc|LLC|Group|Authority|Hawks|Athletics|Ports)\b/;
+  // Leading honorifics/titles — strip before resolving the name.
+  const TITLES = /^(?:Mayor|Councilmember|Councilman|Councilwoman|Council President|Deputy Mayor|Director|Chief|Reverend|Rev\.?|Doctor|Dr\.?|Bishop|Pastor|Father|Coach|Officer|Sergeant|Sgt\.?|Captain|Capt\.?|Lieutenant|Lt\.?|Detective|District Attorney|DA|Attorney|Sister|Imam|Rabbi|President|Commissioner|Superintendent|Principal|Professor|Prof\.?|Ms\.?|Mr\.?|Mrs\.?|Miss)\s+/;
+  // Non-name capitalized words that can follow/precede an attribution verb —
+  // days, months, pronouns, collective-speaker nouns, sentence-initial adverbs.
+  const STOP = new Set(['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday',
+    'January','February','March','April','May','June','July','August','September','October','November','December',
+    'The','A','An','This','That','These','Those','Some','Many','Most','Several','Few','One','Both','Each','Either','Neither',
+    'Now','Here','There','It','He','She','They','We','I','You','Today','Tonight','Earlier','Later','Then','Meanwhile','Instead','Indeed','Once','Twice',
+    'When','While','After','Before','Despite','Yet','Still','Even','But','And','So','Because','Although',
+    'Nobody','Somebody','Anybody','Everybody','Someone','Anyone','Everyone','None','Others','Another',
+    'Skeptics','Critics','Supporters','Residents','Neighbors','Neighbours','Officials','Locals','Organizers','Advocates','Opponents','Boosters','Detractors','Fans','Voters','Parents','Students','Workers','Members']);
+  // Bare role/title words — a speaker that is ONLY a title ("the Mayor said",
+  // "the GM said") is not an invented person, it's an unnamed canonical role.
+  const BARE = new Set(['Mayor','GM','Chief','Director','Council','President','Coach','Councilmember','Councilman','Councilwoman','Deputy','Officer','Sergeant','Captain','Lieutenant','Detective','Commissioner','Superintendent','Principal','Professor','Doctor','Reverend','Bishop','Pastor','Sister','Imam','Rabbi','Attorney','Spokesperson','Spokesman','Spokeswoman','Manager','Owner','Founder','Trainer','Chair','Chairman','Chairwoman','Secretary','Treasurer']);
+
+  // Name token: Capital + lowercase, hyphen/apostrophe-joined parts only
+  // (Chen-Ramirez, O'Brien). Cannot match ALL-CAPS acronyms (EBMUD/BART/GM),
+  // cannot span a period (sentence boundary), auto-stops before a possessive
+  // 's or a contraction ('d/'ve) since those aren't [-'’][A-Z][a-z]+.
+  const NAME = '[A-Z][a-z]+(?:[-\'’][A-Z][a-z]+)*';
+  const VERBS = 'said|added|noted|asked|argued|explained|recalled|insisted|warned|cautioned|continued|observed|replied|remarked|stated|told|acknowledged|conceded|countered|emphasized|emphasised|stressed|wondered|reflected|admitted|agreed|announced|declared';
+  const reA = new RegExp('\\b(?:' + VERBS + ')\\s+(' + NAME + '(?:\\s+' + NAME + '){0,2})', 'g');
+  const reB = new RegExp('(' + NAME + '(?:\\s+' + NAME + '){0,2}),?\\s+(?:' + VERBS + ')\\b', 'g');
+
+  const seen = new Set();
+  function consider(raw) {
+    let name = raw.replace(TITLES, '').trim();
+    if (!name) return;
+    const toks = name.split(/\s+/);
+    if (STOP.has(toks[0])) return;            // "said Tuesday", "Nobody said"
+    if (toks.length === 1 && BARE.has(toks[0])) return; // bare role ("the Mayor said")
+    if (ORG.test(name)) return;               // org/place, not a person
+    const lc = name.toLowerCase();
+    if (PLACES.has(lc)) return;               // neighborhood / city, not a person
+    if (fullNames.has(lc)) return;            // exact full-name resolve
+    const last = toks[toks.length - 1].toLowerCase();
+    const first = toks[0].toLowerCase();
+    if (nameTokens.has(last)) return;         // surname-word on ledger (handles compounds)
+    if (toks.length === 1 && firstNames.has(first)) return; // single given-name on ledger
+    if (seen.has(lc)) return; seen.add(lc);
+    issues.push({
+      severity: WARNING,
+      check: 'Quoted Source',
+      detail: `Attributed speaker "${name}" resolves to no Simulation_Ledger citizen (no POP-ID)`,
+      fix: `The Simulation_Ledger IS the citizen model — a quoted person without a POP-ID breaks it. If "${name}" is a real citizen in a DORMANT ledger (Generic_Citizens / Chicago_Citizens), promote them onto Simulation_Ledger with a new POP-ID and retire the dormant row. If a Cultural_Ledger figure, see the fame→SL promotion design. Otherwise the source is invented — replace with a real citizen or cut the attribution.`
+    });
+  }
+  let m;
+  while ((m = reA.exec(editorial)) !== null) consider(m[1]);
+  while ((m = reB.exec(editorial)) !== null) consider(m[1]);
+  return issues;
+}
+
 // ─── Initiative Fact Check (vs Initiative_Tracker) ──────────────
 
 function checkInitiativeFacts(editionText, initiatives) {
@@ -1352,8 +1462,15 @@ Exit codes:
     const citizenIssues = checkCitizenNames(editionText, ledgerCitizens);
     allIssues.push(...citizenIssues);
     console.log(`  [${citizenIssues.length === 0 ? '✓' : '!'}] Citizen names (live): ${citizenIssues.length} issues`);
+
+    // 9b. Quoted-source resolution (ES-1, G-W1/W2) — every attributed speaker
+    // must resolve to an SL POP-ID; the Simulation_Ledger IS the citizen model.
+    const quotedIssues = checkQuotedSourcesResolve(editionText, ledgerCitizens);
+    allIssues.push(...quotedIssues);
+    console.log(`  [${quotedIssues.length === 0 ? '✓' : '!'}] Quoted sources (live): ${quotedIssues.length} issues`);
   } else {
     console.log('  [—] Citizen names: skipped (no sheet data)');
+    console.log('  [—] Quoted sources: skipped (no sheet data)');
   }
 
   if (initiatives.length > 0) {
@@ -1448,6 +1565,9 @@ module.exports = {
   POSITION_NAMES,
   checkPlayerPositions,
   checkCitizenNames,
+  // ES-1 (S256) quoted-source resolution gate
+  checkQuotedSourcesResolve,
+  checkEngineLanguage,
   // G-W64 (S246 ES-8)
   checkCouncilNames,
   checkCivicOfficeNames,

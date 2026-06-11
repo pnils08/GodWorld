@@ -43,7 +43,12 @@ var NMAP_NEIGHBORHOODS = [
   // S215 civic.10b — KONO (Koreatown-Northgate) added per canon. Telegraph
   // Avenue corridor north of Downtown, south of Temescal. C92 "KONO Second
   // Song" dispatch is the canon precedent.
-  'KONO'
+  'KONO',
+  // S256 neighborhood-roster alignment — three CANON_12/canon hoods where citizens
+  // already live but Neighborhood_Map had no row (live set-difference: Lake Merritt 98,
+  // Uptown 89 residents) + Baylight District (INIT-006 $2.1B Coliseum redevelopment;
+  // forward-looking row, low residents now, grows as the build completes). Mike-approved.
+  'Lake Merritt', 'Uptown', 'Baylight District'
 ];
 
 // engine.33 pulse fold constants — citizen events accumulated at emit time
@@ -234,7 +239,17 @@ function saveV3NeighborhoodMap_(ctx) {
     'Glenview': { nightlifeMod: 0.6, noiseMod: 0.5, crimeMod: 0.4, retailMod: 0.7, eventMod: 0.5, sentimentMod: 0.05 },
     'Dimond': { nightlifeMod: 0.7, noiseMod: 0.6, crimeMod: 0.5, retailMod: 0.8, eventMod: 0.6, sentimentMod: 0.04 },
     'Ivy Hill': { nightlifeMod: 0.5, noiseMod: 0.4, crimeMod: 0.3, retailMod: 0.5, eventMod: 0.4, sentimentMod: 0.06 },
-    'San Antonio': { nightlifeMod: 0.9, noiseMod: 1.0, crimeMod: 1.1, retailMod: 0.8, eventMod: 0.8, sentimentMod: -0.02 }
+    'San Antonio': { nightlifeMod: 0.9, noiseMod: 1.0, crimeMod: 1.1, retailMod: 0.8, eventMod: 0.8, sentimentMod: -0.02 },
+    // S256 — KONO was in the roster but had NO profile, so saveV3NeighborhoodMap_
+    // silently skipped it every cycle (line ~259 `if (!profile) continue`) → dark row,
+    // 12 residents untracked. Telegraph arts corridor: event/nightlife dense.
+    'KONO': { nightlifeMod: 1.15, noiseMod: 1.0, crimeMod: 0.85, retailMod: 1.1, eventMod: 1.15, sentimentMod: 0.03 },
+    // S256 neighborhood-roster alignment (Mike-approved profiles).
+    'Lake Merritt': { nightlifeMod: 0.9, noiseMod: 0.7, crimeMod: 0.6, retailMod: 1.0, eventMod: 1.0, sentimentMod: 0.06 },
+    'Uptown': { nightlifeMod: 1.25, noiseMod: 1.2, crimeMod: 1.0, retailMod: 1.2, eventMod: 1.25, sentimentMod: 0.02 },
+    // Baylight District — under-construction remediation zone: quiet retail/nightlife now,
+    // construction noise, investment optimism in sentiment. Profile rises as the build completes.
+    'Baylight District': { nightlifeMod: 0.5, noiseMod: 1.3, crimeMod: 0.9, retailMod: 0.5, eventMod: 0.6, sentimentMod: 0.04 }
   };
 
   // Holiday / calendar neighborhood boosts

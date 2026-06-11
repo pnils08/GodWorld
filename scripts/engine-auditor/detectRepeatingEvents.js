@@ -14,10 +14,38 @@
  *          into one pattern; representative token = longest (most specific);
  *          full token group surfaced under `recurringTokens` evidence field.
  *          Preserves backward-compatible `recurringIssue` field for downstream.
+ *   1.2.0  S256 ES-2a (G-EC35) — error-clause strip. Riley_Digest.Issues can
+ *          glue a raw engine stack trace onto a real civic clause, e.g.
+ *          "[Phase2-CityDynamics] Cannot read properties of undefined (reading
+ *          'neighborhoodDynamics'), CIVIC – Inflow Strain – KONO – high". The
+ *          crash tokens recur every cycle and surfaced as a FAKE neighborhood
+ *          ailment ("KONO strain"). stripErrorClauses() drops the error clause
+ *          BEFORE tokenization while PRESERVING the civic signal — the crash is
+ *          a real story, but it belongs to Engine_Errors / the crisis layer
+ *          (where it drove the actual fix), not the civic-ailment corpus.
+ *          Errors-are-stories is upheld: we strip the code string masquerading
+ *          as a civic crisis, not the crisis itself.
  */
 
-const VERSION = '1.1.0';
+const VERSION = '1.2.0';
 const RECUR_WINDOW = 3;
+
+// A clause carrying engine/JS-exception grammar — a stack trace leaked into a
+// civic free-text field, not a civic condition. Calibrated against live
+// Riley_Digest: real civic clauses ("CIVIC – Inflow Strain – KONO – high",
+// "Health Crisis – Laurel – Level 2", "Migration Shock") carry none of these.
+const ERROR_SIGNATURE = /\[Phase\d|cannot read propert|is not (?:defined|a function|iterable)|\(reading '|(?:Type|Reference|Range|Syntax)Error|persistent error handler|errorHandler|at Object\.|\bundefined\b|\bNaN\b/i;
+
+// Drop error clauses, keep civic clauses. Riley_Digest.Issues comma-separates
+// clauses; an error trace is its own clause ahead of the real signal. We remove
+// the trace and preserve everything else so the genuine story still surfaces.
+function stripErrorClauses(s) {
+  if (!s) return s;
+  return String(s)
+    .split(',')
+    .filter(clause => !ERROR_SIGNATURE.test(clause))
+    .join(',');
+}
 
 function tokenize(s) {
   if (!s) return [];
@@ -52,7 +80,7 @@ function detect(ctx) {
   let appearanceCounter = 0;
   for (const { row, idx } of recent) {
     const c = parseInt(row.Cycle, 10);
-    const issueTokens = tokenize(row.Issues);
+    const issueTokens = tokenize(stripErrorClauses(row.Issues));   // ES-2a G-EC35: drop leaked stack traces, keep civic clause
     const flagTokens = tokenize(row.PatternFlag);
     flagTokens.forEach(t => patternFlagTokens.add(t));
     const tokens = new Set(issueTokens.concat(flagTokens));

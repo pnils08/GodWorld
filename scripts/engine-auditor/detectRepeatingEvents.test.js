@@ -183,6 +183,57 @@ console.log('\nTest 6: short tokens (< 4 chars) ignored');
   assert('short tokens filtered → no recurrence', found.length === 0);
 }
 
+// ────────────────────────────────────────────────────────────────────────────
+// Test 7: ES-2a (G-EC35) — leaked stack trace stripped, civic clause preserved
+// ────────────────────────────────────────────────────────────────────────────
+console.log('\nTest 7: G-EC35 — error-clause strip (crash tokens out, civic story kept)');
+{
+  // The live KONO cell: a raw JS stack trace glued onto a real civic clause,
+  // recurring every cycle (the crash fired every cycle).
+  const glued = "[Phase2-CityDynamics] Cannot read properties of undefined (reading 'neighborhoodDynamics'), CIVIC – Inflow Strain – KONO – high";
+  const ctx = {
+    cycle: 96,
+    snapshot: {
+      Riley_Digest: [
+        { Cycle: 94, Issues: glued, PatternFlag: '' },
+        { Cycle: 95, Issues: glued, PatternFlag: '' },
+        { Cycle: 96, Issues: glued, PatternFlag: '' },
+      ],
+      Initiative_Tracker: [],
+    },
+  };
+  const found = detector.detect(ctx);
+  const allTokens = found.flatMap(f => f.evidence.fields.recurringTokens || []).join(' ');
+
+  // (a) The real civic story STILL surfaces (errors-are-stories: signal preserved).
+  assert('KONO inflow-strain civic story preserved', /strain|inflow|kono|civic/.test(allTokens),
+    `tokens="${allTokens}"`);
+  // (b) No stack-trace token leaks into a civic pattern.
+  const crash = /neighborhooddynamics|citydynamics|phase2|cannot|properties|undefined|reading|handler/;
+  assert('no crash-trace token surfaces as a civic ailment', !crash.test(allTokens),
+    `leaked in "${allTokens}"`);
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// Test 8: pure-error row contributes nothing (no civic clause to keep)
+// ────────────────────────────────────────────────────────────────────────────
+console.log('\nTest 8: G-EC35 — pure stack-trace row emits no pattern');
+{
+  const err = "[Phase2-CityDynamics] Cannot read properties of undefined (reading 'neighborhoodDynamics')";
+  const ctx = {
+    cycle: 96,
+    snapshot: {
+      Riley_Digest: [
+        { Cycle: 94, Issues: err, PatternFlag: '' },
+        { Cycle: 95, Issues: err, PatternFlag: '' },
+        { Cycle: 96, Issues: err, PatternFlag: '' },
+      ],
+      Initiative_Tracker: [],
+    },
+  };
+  assert('pure error trace → 0 patterns', detector.detect(ctx).length === 0);
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed > 0) process.exit(1);
 process.exit(0);

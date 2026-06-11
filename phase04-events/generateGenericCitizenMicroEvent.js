@@ -510,6 +510,22 @@ function generateGenericCitizenMicroEvents_(ctx) {
       }
     }
 
+    // engine.33 T7 — hood microclimate texture when it diverges from the
+    // citywide read (applyWeatherModel PART 6). Static weatherPool above
+    // stays the citywide fallback; unknown hood -> no entries. Temp gap
+    // >=4°F only at heat-front extremes (tempMod -2..+2 plus ±2 HEAT amp).
+    var nhW = (S.neighborhoodWeather && neighborhood) ? S.neighborhoodWeather[neighborhood] : null;
+    if (nhW) {
+      if (nhW.type === "fog" && weather.type !== "fog") {
+        pool.push("moved through fog that had settled over " + neighborhood);
+      }
+      if (nhW.temp !== undefined && weather.temp !== undefined) {
+        var nhTempGap = nhW.temp - weather.temp;
+        if (nhTempGap >= 4) pool.push("noticed " + neighborhood + " running warmer than the rest of the city");
+        else if (nhTempGap <= -4) pool.push("felt the cool pocket " + neighborhood + " keeps");
+      }
+    }
+
     var pick = uniquePickGlobal_(pool);
     if (!pick) continue;
 

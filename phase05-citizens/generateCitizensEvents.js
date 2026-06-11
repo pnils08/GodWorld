@@ -670,14 +670,23 @@ function generateCitizensEvents_(ctx) {
   // =========================================================================
   // v2.6: WEATHER v3.5 ENHANCED POOLS
   // =========================================================================
-  function weatherV35Pool_() {
+  function weatherV35Pool_(neighborhood) {
     var pool = [];
 
+    // engine.33 T7 — prefer the hood's microclimate where it carries the
+    // field (applyWeatherModel PART 6: temp/type/windSpeed/precipitation);
+    // citywide fallback unchanged. visibility + frontType are citywide-only
+    // fields and stay citywide. Unknown hood -> null -> fallback (accessor
+    // contract, same shape as engine.31 crimeReachable).
+    var nhW = (S.neighborhoodWeather && neighborhood) ? S.neighborhoodWeather[neighborhood] : null;
+    var precipLocal = (nhW && nhW.precipitationIntensity !== undefined) ? nhW.precipitationIntensity : precipitationIntensity;
+    var windLocal = (nhW && nhW.windSpeed !== undefined) ? nhW.windSpeed : windSpeed;
+
     // Precipitation intensity
-    if (precipitationIntensity >= 0.7) {
+    if (precipLocal >= 0.7) {
       pool.push(makeEntry("got caught in heavy rain and had to take shelter", ["source:weather", "weather:heavy-rain"], 1.2, false));
       pool.push(makeEntry("watched the downpour from a doorway, waiting it out", ["source:weather", "weather:heavy-rain"], 1.1, false));
-    } else if (precipitationIntensity >= 0.3) {
+    } else if (precipLocal >= 0.3) {
       pool.push(makeEntry("walked through drizzle, unbothered", ["source:weather", "weather:drizzle"], 1.0, false));
     }
 
@@ -688,8 +697,27 @@ function generateCitizensEvents_(ctx) {
     }
 
     // Wind
-    if (windSpeed >= 25) {
+    if (windLocal >= 25) {
       pool.push(makeEntry("braced against strong gusts on the walk home", ["source:weather", "weather:wind"], 1.1, false));
+    }
+
+    // engine.33 T7 — microclimate divergence: the hood's weather differs
+    // from the citywide read. Fog rolled into THIS hood while the city
+    // stayed clear; temp gap >=4°F only at heat-front extremes (tempMod
+    // -2..+2 plus ±2 HEAT amplification, measured applyWeatherModel L27-39).
+    if (nhW && nhW.type === 'fog' && weather.type !== 'fog') {
+      pool.push(makeEntry("watched fog settle over " + neighborhood + " while the rest of the city stayed clear",
+        ["source:weather", "weather:microclimate-fog"], 1.1, false));
+    }
+    if (nhW && nhW.temp !== undefined && weather.temp !== undefined) {
+      var dTemp = nhW.temp - weather.temp;
+      if (dTemp >= 4) {
+        pool.push(makeEntry("felt " + neighborhood + " holding the heat more than the rest of town",
+          ["source:weather", "weather:warm-pocket"], 1.0, false));
+      } else if (dTemp <= -4) {
+        pool.push(makeEntry("felt the cool pocket " + neighborhood + " keeps when the bay air rolls in",
+          ["source:weather", "weather:cool-pocket"], 1.0, false));
+      }
     }
 
     // Front types
@@ -1266,7 +1294,7 @@ function generateCitizensEvents_(ctx) {
     }
 
     // v2.6: Add weather v3.5 events
-    var wv35 = weatherV35Pool_();
+    var wv35 = weatherV35Pool_(neighborhood); // engine.33 T7 — hood microclimate preferred
     for (var wi = 0; wi < wv35.length; wi++) {
       pool.push(makeEntry(wv35[wi].text, mergeTags(wv35[wi].tags, calendarTags), wv35[wi].weight, false));
     }

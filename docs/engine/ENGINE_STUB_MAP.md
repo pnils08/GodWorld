@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-06-10 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-06-11 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -240,6 +240,11 @@
 
 - **getSeasonFromCycle_(cycleOfYear)**
 
+### loadNeighborhoodState.js
+- **loadNeighborhoodState_(ctx)**
+  Writes: S.neighborhoodState, S.neighborhoodStateCount
+  Sheets: Neighborhood_Map
+
 ### updateTransitMetrics.js
 - **updateTransitMetrics_Phase2_(ctx)**
   Reads: S.absoluteCycle, S.holiday, S.season, S.weather
@@ -434,7 +439,7 @@
 
 ### generateGenericCitizenMicroEvent.js
 - **generateGenericCitizenMicroEvents_(ctx)**
-  Reads: S.cityDynamics, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.previousEvening, S.season, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.cityDynamics, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.neighborhoodWeather, S.previousEvening, S.season, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventsGenerated, S.microEvents
   Config: ctx.config.cycleCount, ctx.config.rngSeed
   RNG: ctx.rng / safeRand_(ctx)
@@ -840,7 +845,7 @@
 
 ### generateCitizensEvents.js
 - **generateCitizensEvents_(ctx)**
-  Reads: S.cityDynamics, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.previousEvening, S.season, S.simYear, S.simulationYear, S.sportsSeason, S.weather, S.worldEvents
+  Reads: S.cityDynamics, S.cycleId, S.economicMood, S.faithEvents, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.simYear, S.simulationYear, S.sportsSeason, S.weather, S.worldEvents
   Writes: S.citizenEventMemory, S.crimeMetrics, S.cycleActiveCitizens, S.eventsGenerated, S.localEntities, S.templateCooldowns
   Config: ctx.config.cycleCount, ctx.config.rngSeed
   Sheets: LifeHistory_Log
@@ -1074,7 +1079,7 @@
 
 ### runConductEngine.js
 - **runConductEngine_(ctx)**
-  Reads: S.absoluteCycle, S.crimeMetrics, S.cycleId, S.economicMood
+  Reads: S.absoluteCycle, S.crimeMetrics, S.cycleId, S.economicMood, S.neighborhoodState
   Writes: S.conductEvents, S.eventsGenerated
   Config: ctx.config.cycleCount
   RNG: ctx.rng / safeRand_(ctx)
@@ -1819,8 +1824,10 @@
   Config: ctx.config.cycleCount
 
 ### v3NeighborhoodWriter.js
+- **pulseFoldDelta_(pulse, key)**
+
 - **saveV3NeighborhoodMap_(ctx)**
-  Reads: S.cityDynamics, S.cycleId, S.demographicDrift, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.migrationDrift, S.sportsSeason, S.storyHooks, S.storySeeds, S.v3Arcs, S.weather, S.worldEvents
+  Reads: S.cityDynamics, S.cycleId, S.demographicDrift, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.migrationDrift, S.neighborhoodPulse, S.sportsSeason, S.storyHooks, S.storySeeds, S.v3Arcs, S.weather, S.worldEvents
   Config: ctx.config.cycleCount
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -2547,6 +2554,19 @@
 ### godWorldMenu.js
 - **onOpen()**
 
+### neighborhoodPulseMap.js
+- **mergeFx_(acc, fx)**
+
+- **pulseForEvent_(tag, tags, text)**
+  Reads: S.neighborhoodPulse
+
+- **recordPulse_(S, neighborhood, tag, tags, text)**
+  Writes: S.neighborhoodPulse
+
+### neighborhoodPulseMap.test.js
+- **check(name, cond)**
+  Reads: S.neighborhoodPulse
+
 ### priorityEngine.js
 - **computeArcMultiplier_(seed, storylineState)**
 
@@ -2763,5 +2783,5 @@
 
 ---
 
-**Files scanned:** 156
-**Functions mapped:** 942
+**Files scanned:** 159
+**Functions mapped:** 948

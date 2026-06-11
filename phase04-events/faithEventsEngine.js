@@ -161,6 +161,20 @@ function runFaithEventsEngine_(ctx) {
     batchRecordFaithEvents_(ctx, events);
   }
 
+  // engine.33 T10 — org-side pulse: each emitted faith event moves its own
+  // hood. Crisis response signals strain (Faith-Crisis, sent -3); everything
+  // else lifts (Faith, sent +1 / attr +1). Capped list = canonical emit
+  // (feeds ledger + summary + worldEvents). Fold at phase08 writer.
+  if (typeof recordPulse_ === 'function') {
+    for (var pf = 0; pf < events.length; pf++) {
+      var pev = events[pf];
+      if (!pev || !pev.neighborhood) continue;
+      recordPulse_(S, pev.neighborhood,
+        pev.eventType === 'crisis_response' ? 'Faith-Crisis' : 'Faith',
+        null, pev.description || '');
+    }
+  }
+
   // Store in summary for Phase 6 analysis
   S.faithEvents = {
     generated: events.length,

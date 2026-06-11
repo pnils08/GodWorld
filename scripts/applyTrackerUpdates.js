@@ -58,7 +58,13 @@ const WRITEBACK_FIELDS = [
   'NextActionCycle'
 ];
 
-const VALID_OWNERS = ['primary', 'secondary', 'advisory'];
+// RB-4/ES-5 trackerOwner contract (S246; audit reconciled engine.20e, S256):
+// trackerOwner names the INITIATIVE a statement owns (e.g. "INIT-002"), or
+// "none"/absent — it is NOT the stale S215 primary/secondary/advisory role enum.
+// A well-formed INIT-XXX or "none"/absent is valid; anything else (e.g. an
+// office name like "okoro" leaking into the field) is a real schema violation.
+const OWNER_FORM = /^INIT-\d+$/i;
+const isValidOwnerForm = (v) => !v || v === 'none' || OWNER_FORM.test(v);
 const SECONDARY_FOLD_CAP = 3;
 
 const getCurrentCycle = require('../lib/getCurrentCycle');
@@ -136,10 +142,13 @@ function auditVoiceStatementSchema(cycle) {
         || (s.relatedInitiatives || [])[0]
         || 'UNKNOWN';
 
-      let owner = (s.trackerOwner || '').toLowerCase();
-      if (!owner) {
-        // Deprecation default — primary during C94-C95 transition window.
-        owner = 'primary';
+      const rawOwner = s.trackerOwner;
+      const ownerNorm = (rawOwner || '').toUpperCase(); // '' | 'NONE' | 'INIT-002' | malformed
+      if (!rawOwner) {
+        // No trackerOwner stamped. Under the RB-4/ES-5 contract the owning
+        // project agent MUST carry its INIT-XXX or assembleDecisions can't pick
+        // it as primary — the root of the G-R2 phase-drop (owned by civic.14).
+        // Record as missing; it is NOT a violation and gets no default role.
         missingOwnerCount++;
         deprecation.push({
           office: s.office,
@@ -147,41 +156,43 @@ function auditVoiceStatementSchema(cycle) {
           initiative: initId,
           topic: s.topic,
         });
-      } else if (VALID_OWNERS.indexOf(owner) === -1) {
-        // Schema violation — invalid value. Log + skip to advisory.
-        console.warn(`  SCHEMA VIOLATION: ${s.statementId} on ${initId} has trackerOwner="${s.trackerOwner}" (valid: ${VALID_OWNERS.join('/')}). Treating as advisory.`);
-        owner = 'advisory';
+      } else if (!isValidOwnerForm(rawOwner)) {
+        // Malformed value (office name, stale S215 role token, etc.). THIS is
+        // the real schema violation the audit exists to surface — e.g. okoro
+        // emitting trackerOwner="okoro" instead of "none".
+        console.warn(`  SCHEMA VIOLATION: ${s.statementId} on ${initId} has trackerOwner="${rawOwner}" — expected an INIT-XXX id or "none".`);
       }
+      // A statement OWNS its touched initiative iff trackerOwner names that init.
+      const ownsInit = OWNER_FORM.test(rawOwner || '') && ownerNorm === String(initId).toUpperCase();
 
       if (!byInitiative[initId]) byInitiative[initId] = [];
       byInitiative[initId].push({
         office: s.office,
         statementId: s.statementId,
         topic: s.topic,
-        owner,
+        owner: ownerNorm,
+        ownsInit,
         trackerUpdates: s.trackerUpdates,
-        ownerMissing: !s.trackerOwner,
+        ownerMissing: !rawOwner,
       });
     }
   }
 
-  // Collision detection — only on (initiative, cycle) pairs with >1 primary.
+  // Collision detection — >1 statement claiming ownership (trackerOwner===INIT)
+  // of the SAME initiative. Under the contract each initiative has exactly one
+  // owning project agent; two explicit owner-claims is always strict.
   for (const initId of Object.keys(byInitiative)) {
-    const primaries = byInitiative[initId].filter(s => s.owner === 'primary');
-    if (primaries.length > 1) {
-      // Downgrade to warning if ALL competing primaries are missing the field
-      // (deprecation transition); strict failure if any of them carried it
-      // explicitly.
-      const anyExplicit = primaries.some(s => !s.ownerMissing);
+    const owners = byInitiative[initId].filter(s => s.ownsInit);
+    if (owners.length > 1) {
       collisions.push({
         initiative: initId,
-        primaries: primaries.map(s => ({
+        primaries: owners.map(s => ({
           office: s.office,
           statementId: s.statementId,
           topic: s.topic,
-          explicitField: !s.ownerMissing,
+          explicitField: true,
         })),
-        strict: anyExplicit,
+        strict: true,
       });
     }
   }
@@ -202,10 +213,11 @@ function summarizeSchemaAudit(audit) {
   }
   console.log(`  Voice schema: ${audit.totalStatements} statements with trackerUpdates across ${Object.keys(audit.byInitiative).length} initiatives.`);
   if (audit.allMissing) {
-    console.log(`  DEPRECATION: 0 of ${audit.totalStatements} statements carry the trackerOwner field. ` +
-      `Strict enforcement engages C96+ (see docs/plans/2026-05-11-civic-tracker-collision-schema.md).`);
+    console.log(`  MISSING-OWNER: 0 of ${audit.totalStatements} statements carry trackerOwner — ` +
+      `owner-dispatch is dark; assembleDecisions falls back to priority weighting ` +
+      `(G-R2 phase-drop risk; owned by civic.14).`);
   } else if (audit.deprecation.length > 0) {
-    console.log(`  DEPRECATION: ${audit.deprecation.length} of ${audit.totalStatements} statements missing trackerOwner; default=primary:`);
+    console.log(`  MISSING-OWNER: ${audit.deprecation.length} of ${audit.totalStatements} statements lack trackerOwner; their initiatives can't be owner-dispatched (civic.14):`);
     for (const d of audit.deprecation.slice(0, 8)) {
       console.log(`    - ${d.statementId} (${d.office}) on ${d.initiative}: ${d.topic}`);
     }
@@ -216,15 +228,12 @@ function summarizeSchemaAudit(audit) {
   if (audit.collisions.length > 0) {
     console.log('');
     for (const c of audit.collisions) {
-      const severity = c.strict ? 'COLLISION' : 'COLLISION (deprecation-warning)';
-      console.log(`  ${severity} on ${c.initiative} (cycle ${CYCLE}):`);
+      console.log(`  OWNER COLLISION on ${c.initiative} (cycle ${CYCLE}): ${c.primaries.length} statements claim trackerOwner==="${c.initiative}":`);
       for (let i = 0; i < c.primaries.length; i++) {
         const p = c.primaries[i];
-        const tag = p.explicitField ? '' : ' [default-primary; trackerOwner missing]';
-        console.log(`    Primary claim ${i + 1}: ${p.office} — ${p.statementId} (topic: "${p.topic}")${tag}`);
+        console.log(`    Owner claim ${i + 1}: ${p.office} — ${p.statementId} (topic: "${p.topic}")`);
       }
-      console.log(`    Resolution: re-run upstream voice agent(s) and downgrade one claim to secondary.`);
-      console.log(`    Convention: Mayor wins on political framing; project director wins on operational detail.`);
+      console.log(`    Resolution: exactly one project agent owns an initiative — clear trackerOwner on the non-owning statement(s).`);
     }
   }
   console.log('');
@@ -273,10 +282,11 @@ async function main() {
     console.log(`--- ${dec.agent} (${dec.initiativeId}) ---`);
     console.log(`  File: ${path.basename(dec.file)}`);
 
-    // S215 civic.9b — secondary fold-in. When schema audit identified
-    // secondary voice statements on this initiative, append their
-    // MilestoneNotes to the consolidated decision's note string (cap 3;
-    // overflow auto-demotes to advisory and is logged but not folded).
+    // S215 civic.9b — secondary fold-in. NOTE (engine.20e, S256): under the
+    // RB-4/ES-5 contract `owner` is now a normalized INIT-XXX, never the S215
+    // role token 'secondary', so this filter yields [] and the fold-in is inert
+    // — left intact (zero change to sheet writes); its redesign belongs to
+    // civic.14, which owns the ownership contract end-to-end.
     const voiceStmts = audit.byInitiative[dec.initiativeId] || [];
     const secondaries = voiceStmts.filter(s => s.owner === 'secondary');
     const folded = secondaries.slice(0, SECONDARY_FOLD_CAP);

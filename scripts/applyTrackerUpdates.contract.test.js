@@ -102,11 +102,15 @@ console.log('\nTest 7: WRITEBACK_FIELDS allowlist constrains write surface');
   assert('allowlist includes NextActionCycle', source.includes("'NextActionCycle'"));
 }
 
-console.log('\nTest 8: trackerOwner schema constants present (S215 civic.9b)');
+console.log('\nTest 8: trackerOwner contract constants present (RB-4/ES-5; engine.20e S256)');
 {
-  // The S215 trackerOwner schema layer should still be wired.
-  assert("VALID_OWNERS = ['primary', 'secondary', 'advisory']",
-    /VALID_OWNERS\s*=\s*\[\s*['"]primary['"]\s*,\s*['"]secondary['"]\s*,\s*['"]advisory['"]\s*\]/.test(source));
+  // trackerOwner names an initiative (INIT-XXX) or "none" — NOT the stale S215
+  // primary/secondary/advisory role enum. engine.20e reconciled the audit.
+  assert('OWNER_FORM INIT-id regex present',
+    source.includes('OWNER_FORM') && source.includes('/^INIT-\\d+$/i'));
+  assert('isValidOwnerForm helper present', source.includes('isValidOwnerForm'));
+  assert('stale VALID_OWNERS role enum removed',
+    !/VALID_OWNERS\s*=\s*\[\s*['"]primary['"]/.test(source));
   assert('SECONDARY_FOLD_CAP constant present', /SECONDARY_FOLD_CAP\s*=\s*\d+/.test(source));
 }
 

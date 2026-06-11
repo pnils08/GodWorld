@@ -254,6 +254,10 @@ function runConductEngine_(ctx) {
     rows[r] = row;
     count++;
     S.eventsGenerated = (S.eventsGenerated || 0) + 1;
+
+    // engine.33 — emit-time neighborhood pulse. Resolved tests only (this is
+    // the write path); Transgression-* raise local crime, Resisted lowers it.
+    if (typeof recordPulse_ === 'function') recordPulse_(S, neighborhood, eventTag, null, pick);
   }
 
   // Phase 42 §5.6: flip ctx.ledger.dirty; consolidated commit at Phase 10.

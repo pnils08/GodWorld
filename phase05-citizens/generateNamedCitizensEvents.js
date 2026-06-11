@@ -709,6 +709,10 @@ function generateNamedCitizenEvents_(ctx) {
     globalEvents++;
 
     rows[r] = row;
+
+    // engine.33 — emit-time neighborhood pulse (public-footprint events move
+    // neighborhood metrics; fold at phase08 v3NeighborhoodWriter).
+    if (typeof recordPulse_ === 'function') recordPulse_(S, neighborhood, tag, null, description);
   }
 
   // Commit back to ledger

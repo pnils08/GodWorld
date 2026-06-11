@@ -522,6 +522,13 @@ function generateCitizensEvents_(ctx) {
       if (tags[ti].indexOf("arcType:") === 0) return "Arc";
     }
     if (has("source:prevEvening")) return "PrevEvening";
+    // engine.33 T6 — state-conditioned entries route to existing dial/pulse
+    // vocab by state kind (no new dial vocab).
+    if (has("source:nbhdState")) {
+      if (has("state:community")) return "Community";
+      if (has("state:retail")) return "Lifestyle";
+      return "Neighborhood";
+    }
     if (has("source:neighborhood")) return "Neighborhood";
     if (has("source:firstFriday")) return "FirstFriday";
     if (has("source:creationDay")) return "CreationDay";
@@ -804,6 +811,72 @@ function generateCitizensEvents_(ctx) {
         pool.push(makeEntry("heard about " + cv.name + (cv.neighborhood ? " over in " + cv.neighborhood : "") + " last night",
           ["source:prevEvening", "evening:cityEvent"], 1.0, false));
       }
+    }
+
+    return pool;
+  }
+
+  // =========================================================================
+  // engine.33 T6: NEIGHBORHOOD STATE POOL (S.neighborhoodState, prev cycle's
+  // Neighborhood_Map via Phase2-NeighborhoodState loader — one-cycle lag).
+  // Thresholds sized from live ranges measured S256 cycle 96: crimeIndex 0-1,
+  // retailVitality 6.6-15.1, sentiment 0.55-0.66 (pulse fold cap ±0.15 makes
+  // both mood branches reachable through the loop). Gentrification /
+  // displacement branches dormant until gentrificationEngine populates the
+  // slow cols (phase vocab: early/accelerating/advanced; pressure /10 scale).
+  // =========================================================================
+  function neighborhoodStatePool_(neighborhood) {
+    var pool = [];
+    var st = (S.neighborhoodState && neighborhood) ? S.neighborhoodState[neighborhood] : null;
+    if (!st) return pool;
+
+    // Gentrification — rent pressure reaches kitchen-table conversation
+    var gPhase = (st.gentrificationPhase || '').toLowerCase();
+    if (gPhase === 'accelerating' || gPhase === 'advanced') {
+      pool.push(makeEntry("overheard another conversation about rents going up in " + neighborhood,
+        ["source:nbhdState", "state:gentrification"], 1.15, false));
+      pool.push(makeEntry("noticed a longtime neighbor packing up to move out",
+        ["source:nbhdState", "state:gentrification"], 1.1, false));
+    } else if (gPhase === 'early') {
+      pool.push(makeEntry("noticed new faces and new prices around " + neighborhood,
+        ["source:nbhdState", "state:gentrification"], 1.05, false));
+    }
+
+    // Displacement pressure (/10) — community organizes; ≥6 is the
+    // gentrificationEngine's own "accelerating" gate
+    if ((st.displacementPressure || 0) >= 6) {
+      pool.push(makeEntry("stopped by a tenants' meeting about staying in " + neighborhood,
+        ["source:nbhdState", "state:community"], 1.15, false));
+      pool.push(makeEntry("signed a neighbor's petition about housing in the area",
+        ["source:nbhdState", "state:community"], 1.05, false));
+    }
+
+    // Retail vitality — street life or papered storefronts
+    if ((st.retailVitality || 0) >= 13) {
+      pool.push(makeEntry("checked out a new shop that just opened nearby",
+        ["source:nbhdState", "state:retail"], 1.1, false));
+      pool.push(makeEntry("browsed a busy weekend market in " + neighborhood,
+        ["source:nbhdState", "state:retail"], 1.05, false));
+    } else if ((st.retailVitality || 0) > 0 && st.retailVitality <= 8) {
+      pool.push(makeEntry("walked past another papered-over storefront in " + neighborhood,
+        ["source:nbhdState", "state:retail-low"], 1.05, false));
+    }
+
+    // Local crime index high — watchfulness at hood grain (not citywide)
+    if ((st.crimeIndex || 0) >= 1) {
+      pool.push(makeEntry("double-checked the locks after talk of break-ins nearby",
+        ["source:nbhdState", "state:watchful"], 1.1, false));
+      pool.push(makeEntry("noticed neighbors swapping safety tips on the block",
+        ["source:nbhdState", "state:watchful"], 1.05, false));
+    }
+
+    // Neighborhood mood, strongly ±
+    if ((st.sentiment || 0) >= 0.7) {
+      pool.push(makeEntry("felt " + neighborhood + " riding a genuine good stretch",
+        ["source:nbhdState", "state:mood-up"], 1.1, false));
+    } else if (st.sentiment !== null && st.sentiment <= 0.2) {
+      pool.push(makeEntry("picked up on a heaviness around " + neighborhood + " lately",
+        ["source:nbhdState", "state:mood-down"], 1.1, false));
     }
 
     return pool;
@@ -1202,6 +1275,12 @@ function generateCitizensEvents_(ctx) {
     var prevEvePool = previousEveningPool_(neighborhood);
     for (var pei = 0; pei < prevEvePool.length; pei++) {
       pool.push(makeEntry(prevEvePool[pei].text, mergeTags(prevEvePool[pei].tags, calendarTags), prevEvePool[pei].weight, false));
+    }
+
+    // engine.33 T6: neighborhood-state flavor (prev cycle's Neighborhood_Map)
+    var nbhdStatePool = neighborhoodStatePool_(neighborhood);
+    for (var nsi = 0; nsi < nbhdStatePool.length; nsi++) {
+      pool.push(makeEntry(nbhdStatePool[nsi].text, mergeTags(nbhdStatePool[nsi].tags, calendarTags), nbhdStatePool[nsi].weight, false));
     }
 
     // Neighborhood

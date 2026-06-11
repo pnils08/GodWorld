@@ -59,10 +59,11 @@ The root finding (G-S5): civic/citizen generation isn't mechanically bound to en
 - **Generic_Citizens + Chicago_Citizens are DORMANT** (bypassed; not in active coverage). A citizen there who gets covered again should be PROMOTED onto Simulation_Ledger with a new POP-ID and the dormant row retired — not resolved in place. Generic_Citizens citizens "with history" are the migration candidates; Chicago still exists in-sim but is uncovered editorially. Net direction: migrate-on-coverage, then retire both dormant ledgers. (Files alongside engine.29 lifecycle/fame work.)
 - **Cultural_Ledger is the bigger gap — it's actively used** and is a *separate tracking system* (CUL-IDs, fame events). Open question Mike raised: should cultural figures also exist on Simulation_Ledger, with a fame threshold promoting a sim citizen onto the cultural/fame track (ties to `citizenFameTracker` / engine.29 fame)? Design decision, not gate code.
 
-**ES-2 — Engine detector hygiene + KONO CityDynamics crash.**
-- `detectRepeatingEvents` must filter raw error-string tokens out of its issue-token corpus so a stack trace can't surface as a civic ailment (G-EC35 — the KONO "strain" false-positive was a fragmented crash trace).
-- Fix the CityDynamics crash on KONO's `neighborhoodDynamics` (the only dark Neighborhood_Map row of 18) and populate the KONO row (G-S6 structural). Unblocks civic.13 G-PREP6 (KONO neighborhood profile).
-- Source gaps: G-EC35, G-S6.
+**ES-2 — Engine detector hygiene + KONO CityDynamics crash.** — **DONE S256 (`b760188` + `e9f06c8`); 1 upstream follow-up filed.**
+- ✅ **ES-2a (G-EC35)** — `detectRepeatingEvents` v1.1.0→v1.2.0: `stripErrorClauses()` drops comma-clauses carrying JS-exception grammar BEFORE tokenization, so a leaked stack trace can't surface as a civic ailment, while PRESERVING the civic clause in the same cell (errors-are-stories: the crash IS a story but lives in Engine_Errors/the crisis layer, not the civic corpus). Live @C96: emits the genuine "strain | civic inflow kono" pattern, 0 crash-token leaks. Tests 7+8, 18/18.
+- ✅ **G-S6 structural (the "crash" framing was stale)** — the var-hoist CityDynamics crash was already fixed S247 (verified C96/S252). KONO's actual issue was a **dark Neighborhood_Map row** = a missing profile in `v3NeighborhoodWriter.NMAP` (silently skipped every cycle). Fixed in the S256 neighborhood-roster-alignment work (`e9f06c8`) — KONO profile added; **populates on next cycle after the phase08 deploy at C97**. Unblocks civic.13 G-PREP6.
+- ⏸️ **Upstream follow-up (engine, clasp-gated → C97):** root leak is `phase01-config/godWorldEngine2.js:81` — `safePhaseCall_`'s catch pushes `'[' + phase + '] ' + error.message` into `ctx.summary.auditIssues`, which feeds `Riley_Digest.Issues`. Line 75 already builds a separate `Engine_Errors` msg, so the fix is to NOT also route the raw exception into `auditIssues` (the civic-digest feed) — or tag it so the digest writer excludes engine-error entries. ES-2a's strip is defense-in-depth; this is the source stop. File alongside the C97 phase08 deploy window.
+- Source gaps: G-EC35 (✅), G-S6 (✅ via roster alignment).
 
 ### research-build track
 

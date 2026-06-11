@@ -170,7 +170,7 @@ Every column is a data point in someone's life. This maps who writes each column
 
 | Col | # | Header | Valid Values | Writers | Readers |
 |-----|---|--------|-------------|---------|---------|
-| T | 20 | Neighborhood | One of 17 Oakland neighborhoods | runNeighborhoodEngine, migrationTrackingEngine, processIntakeV3 | Everything location-aware: buildDeskPackets, aggregateNeighborhoodEconomics, civic engines, gentrification |
+| T | 20 | Neighborhood | Canonical Oakland neighborhood (see `lib/canonNeighborhoods.js`; 21-name map roster as of S256) | runNeighborhoodEngine, migrationTrackingEngine, processIntakeV3 | Everything location-aware: buildDeskPackets, aggregateNeighborhoodEconomics, civic engines, gentrification |
 | U | 21 | HouseholdId | `HH-XXXX-XXX` format | householdFormationEngine, seedHouseholds | generationalWealthEngine, migrationTrackingEngine, queryFamily |
 | V | 22 | MaritalStatus | Single / Married / Divorced / Widowed | householdFormationEngine | buildInitiativePackets |
 | W | 23 | NumChildren | Integer | householdFormationEngine | — |
@@ -243,9 +243,15 @@ The UNI, MED, and CIV columns contain "Yes"/"yes"/"No"/"no"/"n" values. The engi
 
 ---
 
-## 17 Oakland Neighborhoods
+## Oakland Neighborhoods (col T value space)
 
-Adams Point, Brooklyn, Chinatown, Coliseum District, Downtown, East Oakland, Fruitvale, Grand Lake, Ivy Hill, Jack London, KONO, Lake Merritt, Laurel, Montclair, Piedmont Ave, Rockridge, Temescal, West Oakland
+**Single source of truth: `lib/canonNeighborhoods.js`** (do not hand-copy the list here — this section drifted into a stale 4th roster before S256). Three layers:
+- `CANON_12` — core sim neighborhoods (citizen-residence assignment draws from this).
+- `MAP_NEIGHBORHOODS` — the Neighborhood_Map roster, **21 as of S256** (was MAP_17; +Lake Merritt, Uptown, KONO, Baylight District).
+- `CHILDREN` — sub-areas that legitimately appear in data (Montclair, Dimond, etc.).
+- `CANONICAL_HOODS` — lowercased union; the membership test auditSimulationLedger + preMortemScan use.
+
+**S256 roster alignment:** citizen-residence (CANON_12) and the map writer (`phase08 v3NeighborhoodWriter.js` NMAP_NEIGHBORHOODS) had drifted apart — 205 citizens lived in untracked hoods. Added Lake Merritt (98)/Uptown (89)/KONO-profile (12)/Baylight District to the writer; **live Neighborhood_Map still has 17 rows until the phase08 change deploys at C97** (new rows populate the cycle after). 6 stray col-T values reassigned to canon (Coliseum District→Baylight District, East Oakland→San Antonio, Montclair→Dimond, Jingletown→Fruitvale, Downtown Oakland→Downtown) — 0 strays remain. 'East Oakland' + 'Jingletown' are deliberately NON-canon (broad-region tokens) per canonNeighborhoods.
 
 ---
 

@@ -62,10 +62,11 @@ The root finding (G-S5): civic/citizen generation isn't mechanically bound to en
 
 ### research-build track
 
-**RB-1 — Skill gap-log automation + review-lane edit gate.**
-- Make the gap-log append a mechanical gated step / skill-close hook for heavy skills (sift, write-edition) — refuse to close until the gap section exists (G-S1 — the operator was the automation and skipped it).
-- Hard-gate: no edition/article edits between compile and Final Arbiter except those routed from a lane's REVISE verdict (G-W4 — operator pre-editing destroyed the raw-generation measurement signal).
-- Source gaps: G-S1, G-W4.
+**RB-1 — Skill gap-log automation + review-lane edit gate.** ✅ **Gap-log gate SHIPPED S256** (G-S1). Deferred: G-W4 edit-gate (separate, heavier — detector-at-Arbiter design).
+- ~~Make the gap-log append a mechanical gated step / skill-close hook for heavy skills~~ → **DONE.** `scripts/gapLogGate.js` (dual-mode: `--cycle/--skill` in-skill self-check + `--stop-gate` blocking Stop-hook backstop). Wired into `hooks.json` Stop array; SessionStart stamps `.claude/state/session-start.txt` to window-bound the backstop. Close-gate step added to sift / write-edition / city-hall / city-hall-prep SKILL.md. Fail-open on error, `GAPLOG_GATE_OFF=1` escape hatch. The mechanical enforcement is the blocking Stop hook, not skill text — a written instruction can't enforce itself (that WAS G-S1).
+- **RB-2 naming-reconcile folded in (Mike's call S256):** can't gate a path with 3 live forms. Pinned canonical = `output/production_log_run_cycle_c<XX>_gaps.md` (one-true-log, leg-per-skill: `## LEG: /<skill> (G-<prefix>)`). Updated GAP_LOG_TEMPLATE + GAP_LOG_TRIAGE_PLAYBOOK + the 4 skill destinations. Closes most of RB-2; RB-2's G-R1 city-hall-destination rewrite is included (city-hall now appends to the one-true-log).
+- **DEFERRED — G-W4 edit-gate:** no edition/article edits between compile and Final Arbiter except REVISE-routed (operator pre-editing destroyed the raw-generation measurement signal). Separate phase: hash the compiled `.txt` at compile-complete, diff at Arbiter, flag un-sanctioned changes. Detector-framer split. Not bundled with the gap-log gate.
+- Source gaps: G-S1 (done), G-W4 (deferred).
 
 **RB-2 — City-hall gap-log destination → one-true-log + naming reconcile.**
 - Rewrite `city-hall` + `city-hall-prep` SKILL §Gap log: append into the cycle's `production_log_run_cycle_c{XX}_gaps.md`, not a separate `_city_hall_run_gaps.md` sidecar (G-R1).
@@ -83,3 +84,4 @@ The root finding (G-S5): civic/citizen generation isn't mechanically bound to en
 
 ## Changelog
 - 2026-06-07 — Triage filed (S252). One row → governance.*; phases execute per track.
+- 2026-06-11 — **RB-1 gap-log gate shipped (S256).** `scripts/gapLogGate.js` + Stop-hook backstop + SessionStart stamp + close-gate in 4 skills. RB-2 naming-reconcile folded in (one-true-log `production_log_run_cycle_c<XX>_gaps.md` pinned canonical; template + playbook + 4 skill destinations updated). G-W4 edit-gate deferred as a separate phase. Remaining in governance.33: ES-1, ES-2, RB-3, RB-2-residual (pipeline.35 cross-link), G-W4, G-W5 Drive-auth flag.

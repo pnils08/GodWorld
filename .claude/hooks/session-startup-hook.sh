@@ -17,6 +17,13 @@
 GODWORLD_ROOT="/root/GodWorld"
 MAGS_DIR="$GODWORLD_ROOT/docs/mags-corliss"
 
+# --- SESSION-START STAMP (RB-1, governance.33) ---
+# Bounds the gap-log Stop-gate's "ran this session" window (scripts/gapLogGate.js
+# --stop-gate). Best-effort: the Stop-gate FAILS OPEN if this is absent, so a
+# write failure here can never trap a session or break boot. Rewritten on every
+# SessionStart (including resume) — a resume is a fresh window for gate purposes.
+date +%s > "$GODWORLD_ROOT/.claude/state/session-start.txt" 2>/dev/null || true
+
 # Discord bot (mags-bot) is a standing pm2 service — decoupled from the Claude
 # session lifecycle S252. Was: boot stopped it to free droplet memory + a clean
 # session-end restarted it, so an improper close left it dead (36h outage Jun 2-4).

@@ -835,7 +835,13 @@ When /sift v2 completes, `/write-edition` picks up by reading:
 
 At skill close, capture friction observed during sift as a gap log. /sift is a heavy skill at the **media generator terminal**; sidecar gap logs catch inefficiency the skill couldn't catch while running.
 
-**Output path:** `output/production_log_c<XX>_sift_gaps.md` (sidecar to `output/production_log_c<XX>.md`; pipeline.34 convention `production_log_c{XX}_<skill>_gaps.md`).
+**Destination (RB-1/RB-2 — one-true gap log):** append a leg to the cycle's single gap log `output/production_log_run_cycle_c{XX}_gaps.md` (the file the engine cycle audit opens each cycle). Do **not** write a separate `_sift_gaps.md` sidecar — that split convention is retired. Open the leg with the fixed header the gate greps for:
+
+```
+## LEG: /sift (G-S)
+```
+
+Then the G-S entries below it — or `No gaps this run.` on a clean run. The header must be present either way.
 
 **Gap prefix:** **G-S\*** (e.g., G-S1, G-S2).
 
@@ -849,6 +855,14 @@ At skill close, capture friction observed during sift as a gap log. /sift is a h
 - dispatch-emission (schema violation, briefFile non-resolve)
 
 **Discipline:** write the gap log even on clean runs (zero-gap entry confirms skill ran). File a ROLLOUT row in `pipeline.<n>` pointing at the gap log per ADR-0005 §How to add work. Promote individual HIGH gaps to standalone work items as bandwidth allows.
+
+**Close gate (mechanical — RB-1, G-S1).** The final action of /sift is:
+
+```bash
+node scripts/gapLogGate.js --cycle <XX> --skill sift
+```
+
+It exits non-zero until the `## LEG: /sift (G-S)` leg exists in the cycle gap log; skill close is defined as this exit 0. A Stop-hook backstop (`gapLogGate.js --stop-gate`) blocks **session** close for the same reason if this step is skipped — the G-S1 failure was the operator skipping a written instruction, so the enforcement is mechanical, not prose. Deliberate bypass: `GAPLOG_GATE_OFF=1`.
 
 ## Where This Sits
 

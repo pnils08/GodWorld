@@ -122,6 +122,11 @@
         "hooks": [
           {
             "type": "command",
+            "command": "node \"${CLAUDE_PROJECT_ROOT}/scripts/gapLogGate.js\" --stop-gate",
+            "timeout": 10
+          },
+          {
+            "type": "command",
             "command": "bash \"${CLAUDE_PROJECT_ROOT}/.claude/hooks/stop-hook.sh\"",
             "timeout": 10
           },

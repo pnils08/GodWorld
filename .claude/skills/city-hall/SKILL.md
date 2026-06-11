@@ -325,7 +325,13 @@ The production log is the ONLY civic document sift reads. If a voice quote, deci
 
 At skill close, capture friction observed during the city-hall run as a gap log. /city-hall is a heavy skill at the **civic generator terminal**; sidecar gap logs catch inefficiency the skill couldn't catch while running.
 
-**Output path:** `output/production_log_c<XX>_city_hall_run_gaps.md` (sidecar to the unified `output/production_log_c<XX>.md`; pipeline.34 convention `production_log_c{XX}_<skill>_gaps.md`).
+**Destination (RB-1/RB-2 — one-true gap log, closes G-R1):** append a leg to the cycle's single gap log `output/production_log_run_cycle_c{XX}_gaps.md` (the file the engine cycle audit opens each cycle). Do **not** write a separate `_city_hall_run_gaps.md` sidecar — that split convention is retired (the C96 G-R1 finding was exactly this: city-hall gaps landing in their own file instead of the one-true-log). Open the leg with the fixed header the gate greps for:
+
+```
+## LEG: /city-hall (G-R)
+```
+
+Then the G-R entries below it — or `No gaps this run.` on a clean run. The header must be present either way.
 
 **Gap prefix:** **G-R\*** (e.g., G-R1, G-R8 — for `/city-hall` *run* gaps. /city-hall-prep uses G-PREP\*.)
 
@@ -336,6 +342,14 @@ At skill close, capture friction observed during the city-hall run as a gap log.
 - reviewer-side (City Clerk reads quarantine directory, audit JSON malformed, applyTrackerUpdates dry-run gate)
 
 **Discipline:** write the gap log even on clean runs. File a ROLLOUT row in `civic.<n>` pointing at the gap log per ADR-0005 §How to add work. Promote individual HIGH gaps to standalone work items as bandwidth allows.
+
+**Close gate (mechanical — RB-1, G-S1).** The final action of /city-hall is:
+
+```bash
+node scripts/gapLogGate.js --cycle <XX> --skill city-hall
+```
+
+It exits non-zero until the `## LEG: /city-hall (G-R)` leg exists in the cycle gap log; skill close is defined as this exit 0. A Stop-hook backstop (`gapLogGate.js --stop-gate`) blocks **session** close for the same reason if this step is skipped. Deliberate bypass: `GAPLOG_GATE_OFF=1`.
 
 **City hall is done. Edition is a separate session.**
 

@@ -463,7 +463,13 @@ These elements were part of the old write-edition (pre-S144) and are now handled
 
 At skill close, capture friction observed during edition write as a gap log. /write-edition is the heaviest skill at the **media generator terminal**; sidecar gap logs catch inefficiency the skill couldn't catch while running.
 
-**Output path:** `output/production_log_c<XX>_write_gaps.md` (sidecar to the unified `output/production_log_c<XX>.md`; pipeline.34 convention `production_log_c{XX}_<skill>_gaps.md` — the old `_edition_` grouping infix was retired when pipeline.32 collapsed the split logs).
+**Destination (RB-1/RB-2 — one-true gap log):** append a leg to the cycle's single gap log `output/production_log_run_cycle_c{XX}_gaps.md` (the file the engine cycle audit opens each cycle). Do **not** write a separate `_write_gaps.md` sidecar — that split convention is retired. Open the leg with the fixed header the gate greps for:
+
+```
+## LEG: /write-edition (G-W)
+```
+
+Then the G-W entries below it — or `No gaps this run.` on a clean run. The header must be present either way.
 
 **Gap prefix:** **G-W\*** (e.g., G-W1, G-W19, G-W22).
 
@@ -475,6 +481,14 @@ At skill close, capture friction observed during edition write as a gap log. /wr
 - reviewer-handoff (Mara format expectations, Final Arbiter override propagation)
 
 **Discipline:** write the gap log even on clean runs. File a ROLLOUT row in `pipeline.<n>` pointing at the gap log per ADR-0005 §How to add work. Promote individual HIGH gaps as bandwidth allows. The S195 G-W16 meta-pattern (HIGHs sit on shelf and compound across cycles) makes promotion-cadence load-bearing.
+
+**Close gate (mechanical — RB-1, G-S1).** The final action of /write-edition is:
+
+```bash
+node scripts/gapLogGate.js --cycle <XX> --skill write-edition
+```
+
+It exits non-zero until the `## LEG: /write-edition (G-W)` leg exists in the cycle gap log; skill close is defined as this exit 0. A Stop-hook backstop (`gapLogGate.js --stop-gate`) blocks **session** close for the same reason if this step is skipped — the G-S1 failure was the operator skipping a written instruction, so the enforcement is mechanical, not prose. Deliberate bypass: `GAPLOG_GATE_OFF=1`.
 
 ## Where This Sits
 

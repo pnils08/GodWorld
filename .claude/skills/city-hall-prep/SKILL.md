@@ -277,7 +277,13 @@ GodWorld MCP for structured lookups. Supermemory `bay-tribune` for canon search.
 
 At skill close, capture friction observed during prep as a gap log. /city-hall-prep is a heavy skill at the **civic generator terminal**; sidecar gap logs catch inefficiency the skill couldn't catch while running.
 
-**Output path:** `output/production_log_c<XX>_city_hall_prep_gaps.md` (sidecar to the unified `output/production_log_c<XX>.md`; pipeline.34 convention `production_log_c{XX}_<skill>_gaps.md`).
+**Destination (RB-1/RB-2 — one-true gap log):** append a leg to the cycle's single gap log `output/production_log_run_cycle_c{XX}_gaps.md` (the file the engine cycle audit opens each cycle). Do **not** write a separate `_city_hall_prep_gaps.md` sidecar — that split convention is retired. Open the leg with the fixed header the gate greps for:
+
+```
+## LEG: /city-hall-prep (G-PREP)
+```
+
+Then the G-PREP entries below it — or `No gaps this run.` on a clean run. The header must be present either way.
 
 **Gap prefix:** **G-PREP\*** (e.g., G-PREP1, G-PREP15. /city-hall *run* uses G-R\*.)
 
@@ -288,6 +294,14 @@ At skill close, capture friction observed during prep as a gap log. /city-hall-p
 - canon-risk (faction-bloc topology in voice routing table — Mara-additive framing, faction-vs-individual confusion)
 
 **Discipline:** write the gap log even on clean runs. File a ROLLOUT row in `civic.<n>` pointing at the gap log per ADR-0005 §How to add work. Promote individual HIGH gaps as bandwidth allows.
+
+**Close gate (mechanical — RB-1, G-S1).** The final action of /city-hall-prep is:
+
+```bash
+node scripts/gapLogGate.js --cycle <XX> --skill city-hall-prep
+```
+
+It exits non-zero until the `## LEG: /city-hall-prep (G-PREP)` leg exists in the cycle gap log; skill close is defined as this exit 0. A Stop-hook backstop (`gapLogGate.js --stop-gate`) blocks **session** close for the same reason if this step is skipped. Deliberate bypass: `GAPLOG_GATE_OFF=1`.
 
 ## Changelog
 

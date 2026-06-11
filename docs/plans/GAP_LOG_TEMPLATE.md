@@ -32,9 +32,18 @@ Other terminals have different sidecar shapes:
 
 ## Template
 
-Copy everything below the fence. Rename to **`output/production_log_c<XX>_<skill>_gaps.md`** — the canonical pipeline.34 convention (cycle prefix matching the unified parent `production_log_c<XX>.md`, then skill infix, then `_gaps`). Skills that can run more than once per cycle (`/dispatch`, `/interview`, `/write-supplemental`) take a slug: **`production_log_c<XX>_<skill>_<slug>_gaps.md`**. Sidecar to the consolidated `production_log_c<XX>.md`. Italicized guidance is for the writer — delete after filling in.
+**Destination — one-true gap log (RB-1/RB-2, C96+ canonical).** There is **one gap log per cycle**: `output/production_log_run_cycle_c<XX>_gaps.md`. The engine cycle audit (`scripts/engineCycleAudit.js`) opens it each cycle and writes the mechanical `G-EC` leg; every operator-run heavy skill **appends its own leg** to that same file rather than writing a separate `_<skill>_gaps.md` sidecar. A leg opens with a fixed, greppable header:
 
-**Migration (pipeline.34, S248):** the convention applies C96+. Legacy on-disk files from the pre-unified era — `production_log_edition_c<XX>_<step>_gaps.md`, `production_log_city_hall_c<XX>_gaps.md`, `production_log_interview_c<XX>_gaps.md`, etc. — stay as-is (don't rename historical artifacts); they remain readable by the triage globber. The grouping prefixes (`edition`, `city_hall`) are dead because pipeline.32 collapsed the split parent logs.
+```
+## LEG: /sift (G-S)
+## LEG: /write-edition (G-W)
+## LEG: /city-hall (G-R)
+## LEG: /city-hall-prep (G-PREP)
+```
+
+The body below the header follows the per-leg shape in the fence (severity counts → HIGH/MED/LOW entries → patterns → bundles). On a clean run, write the header + `No gaps this run.` — the header must be present either way. `scripts/gapLogGate.js --skill <name>` greps for the leg and is the close gate; the Stop-hook backstop (`--stop-gate`) blocks session close if a heavy skill ran but its leg is missing (RB-1, closes G-S1). Multi-run skills (`/dispatch`, `/interview`, `/write-supplemental`) add a slug to the leg header — `## LEG: /interview (G-I) — <slug>` — not a separate file.
+
+**Migration (RB-1/RB-2, supersedes pipeline.34 per-skill naming).** The one-true-log applies C96+. Legacy split files from the pre-unified era — `production_log_edition_c<XX>_<step>_gaps.md`, `production_log_city_hall_c<XX>_gaps.md`, `production_log_c<XX>_<skill>_gaps.md`, etc. — stay as-is (don't rename historical artifacts); they remain readable by the triage globber. The per-skill sidecar naming (`production_log_c<XX>_<skill>_gaps.md`) is retired going forward: it was spec'd at pipeline.34 but never actually written, so disk reality was three competing forms (split-by-skill, `run_cycle` one-true-log, and the unwritten spec). RB-1 pins the `run_cycle` one-true-log as canonical.
 
 ```markdown
 ---
@@ -137,7 +146,7 @@ Append-only log. Each entry: date, session, gap closed/promoted/deferred, eviden
    - G-P\* for `/post-publish`
    - G-D\* for `/dispatch`
    - G-I\* for `/interview`
-3. At skill close, write `output/production_log_c<XX>_<skill>_gaps.md` (slug-infixed for multi-run skills: `production_log_c<XX>_<skill>_<slug>_gaps.md`) using this template — sidecar to the consolidated `production_log_c<XX>.md` (pipeline.34 convention).
+3. At skill close, **append your leg** to the cycle's one gap log `output/production_log_run_cycle_c<XX>_gaps.md` — open with `## LEG: /<skill> (G-<prefix>)`, then the template body below it (slug-suffix the header for multi-run skills). Do not write a separate per-skill file. The skill's close gate (`node scripts/gapLogGate.js --cycle <XX> --skill <name>`) verifies the leg exists. See §Destination above.
 4. Add a single ROLLOUT row pointing at the gap log: `pipeline.<n>` (media) or `civic.<n>` (civic), per ADR-0005.
 5. The gap log is canonical for sub-state; the ROLLOUT row is the index entry only.
 

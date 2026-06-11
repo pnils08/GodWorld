@@ -39,7 +39,7 @@ pointers:
 find output/ -iname "*production_log*_c<XX>_gaps.md" | sort
 ```
 
-Logs are scattered and not uniformly named (a known gap — see pipeline.34). Expect ~10-12 per full cycle: pre-flight, pre-mortem, engine-review, build-world-summary, city-hall-prep, city-hall-run, sift, write-edition, edition-print, post-publish, session-startup, session-end. Also check the unified `production_log_c<XX>.md`. Some skills file under `engine-sheet` cadence (pre-flight, pre-mortem, engine-review, build-world-summary), some under `civic` (city-hall*), most under `media` (edition skills). Gap logs are gitignored — they live only on disk.
+**C96+ canonical: one gap log per cycle (RB-1/RB-2).** `output/production_log_run_cycle_c<XX>_gaps.md` holds every heavy skill's gaps as `## LEG: /<skill> (G-<prefix>)` sections — engine audit (`G-EC`), city-hall-prep (`G-PREP`), city-hall (`G-R`), sift (`G-S`), write-edition (`G-W`), etc. Read the legs, not separate files. The glob above still works: for C96+ it returns the single `run_cycle` file; for legacy cycles (≤C95) it also returns the old per-skill split files (`production_log_edition_c<XX>_sift_gaps.md`, `production_log_city_hall_c<XX>_gaps.md`, …) — read those as-is, they're not renamed. Also check the unified prose log `production_log_c<XX>.md` (separate from the gap log). Gap logs are gitignored — they live only on disk.
 
 ### 2. Read all of them directly — don't fan out
 

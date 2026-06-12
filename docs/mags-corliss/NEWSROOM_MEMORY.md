@@ -58,6 +58,16 @@
 - [[../../docs/canon/CANON_RULES|CANON_RULES.md]] §Corrections-Forward Maps active-maps list — registers this map alongside Faith.
 - [[../../docs/adr/0007-cross-layer-canon-authority-precedence|ADR-0007]] §Reconciliation rule 1 (paper-of-record) — the underlying authority precedence rule.
 
+### Business backfill — Adams Point UMC (BIZ-00061) + Dario's Bar (BIZ-00062) (S230/S236, canon.3 / ADR-0007) — active story anchors
+
+**What:** Two businesses that appeared in E94 are now canon-backfilled into Business_Ledger + wd-business cards (engine-sheet T12 half, S236). Track them as active story anchors going forward:
+- **Adams Point UMC (BIZ-00061)** — Adams Point United Methodist Church, Faith/Religious, Adams Point. E94 N1 anchor. Key personnel **Rev. Daniel Han (POP-00954)**. wd-business card live (`lookup_business "Adams Point United Methodist Church"`).
+- **Dario's Bar (BIZ-00062)** — Hospitality/Bar, Lake Merritt area (E94 narrative). E94 L3-letter anchor. wd-business card live (`lookup_business "Dario's Bar"`).
+
+**Why this lives here:** completes the canon.3 cross-terminal closure pattern — engine-sheet landed the structured layer (ledger cells E–I + wd-card rebuild, S236), research-build logs the newsroom-memory half so reporters carry both as recurring anchors, not one-off mentions. Same shape as the T10/T11 (POPID Aliases / Citizens Corrections Forward) sibling entries above.
+
+**For reporters and scaffolders:** when E94's Adams Point UMC or Dario's Bar recurs, treat as established canon businesses with full economic + personnel data on their wd-cards — don't re-invent a sector, neighborhood, or namesake. Bay-tribune E94 is paper-of-record (never edited backward, ADR-0007 §Reconciliation rule 1).
+
 ### Paulson C94 interview canon — let-walks reset + after-a-parade championship intent + Varek call NOT received (S230, 2026-05-23) — sports-canon update
 
 **Decision:** Mike Paulson interview transcript (S230, slug `let_walks`, intended reporter Hal Richmond) is the C94+ canonical source for the let-walks storyline + the Varek-Paulson Oaks-GM recruitment thread + the dynasty-architecture sub-story around Dillon's deal. Transcript on disk at `editions/cycle_pulse_interview-transcript_94_let_walks.txt` + Drive Mara folder ID `1WiKfst-w8ugOjRilTL9yGx09HO8BUCK3`.

@@ -78,9 +78,9 @@ The root finding (G-S5): civic/citizen generation isn't mechanically bound to en
 - Reconcile the naming convention in GAP_LOG_TEMPLATE + GAP_LOG_TRIAGE_PLAYBOOK (cycle-first vs skill-first order). Cross-link pipeline.35 (one-true-log family).
 - Source gaps: G-R1.
 
-**RB-3 — City-hall-prep input completeness.**
-- /city-hall-prep injects a "City This Cycle" world_summary digest into every packet (Mayor citywide + per-voice neighborhood pulse), independent of Mara's initiative-centric directive (G-PREP3 — Mara is structurally blind to the live world_summary; this is a sim, not a civic-initiative sim).
-- Step 0 mechanically greps ROLLOUT §civic.* and lists in-progress rows so the pressure-input can't be silently skipped (G-PREP4).
+**RB-3 — City-hall-prep input completeness. ✅ DONE S256.** `/city-hall-prep` SKILL v1.3→v1.4.
+- ✅ City This Cycle digest formalized (G-PREP3): Step 1 reads `baseline_briefs_c{XX}.json`; Step 3 REQUIRES a `## City This Cycle` block in every packet — Mayor/citywide = world_summary citywide digest, neighborhood voices = snapshot-table pulse + baseline_briefs filtered by neighborhood. Independent of Mara's initiative-blind directive. Scope-discipline line keeps synthesized non-events reported as the modest delta they are.
+- ✅ ROLLOUT §civic.* mechanical pull (G-PREP4): Step 0 grep of in-progress civic.*/infrastructure.*/canon.* rows + reconcile-don't-duplicate instruction (the C96 civic.14 miss → G-PREP1/G-R2 parallel-tracking failure).
 - Source gaps: G-PREP3, G-PREP4.
 
 ## §5 Flag — not in either track, surface to operator
@@ -89,4 +89,5 @@ The root finding (G-S5): civic/citizen generation isn't mechanically bound to en
 
 ## Changelog
 - 2026-06-07 — Triage filed (S252). One row → governance.*; phases execute per track.
+- 2026-06-11 — **RB-3 city-hall-prep input completeness shipped (S256).** SKILL v1.4: City This Cycle digest required in every packet (G-PREP3, baseline_briefs + world_summary, Mara-independent); Step 0 mechanical ROLLOUT §civic.* grep + reconcile (G-PREP4). Remaining in governance.33: ES-1, ES-2 residual, RB-2-residual (pipeline.35 cross-link), G-W4 edit-gate.
 - 2026-06-11 — **RB-1 gap-log gate shipped (S256).** `scripts/gapLogGate.js` + Stop-hook backstop + SessionStart stamp + close-gate in 4 skills. RB-2 naming-reconcile folded in (one-true-log `production_log_run_cycle_c<XX>_gaps.md` pinned canonical; template + playbook + 4 skill destinations updated). G-W4 edit-gate deferred as a separate phase. Remaining in governance.33: ES-1, ES-2, RB-3, RB-2-residual (pipeline.35 cross-link), G-W4, G-W5 Drive-auth flag.

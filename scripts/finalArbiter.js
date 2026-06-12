@@ -111,23 +111,45 @@ function checkProvenance(doc) {
 // lane findings as raw-generation signal. Absent file (cycle pre-dates the gate,
 // or the verify step was skipped) → 'unsealed' (advisory, non-blocking).
 function readMeasurementIntegrity(cycle) {
-  const p = path.join(OUTPUT_DIR, `edition_seal_verify_c${cycle}.json`);
-  if (!fs.existsSync(p)) {
-    return { status: 'unsealed', clean: null, checkpoint: null, unsanctioned: [],
-      note: 'no edition_seal_verify file — seal/verify not run this cycle (G-W4 gate not exercised)' };
+  // Glob every per-checkpoint verify file and OR them: contamination at ANY
+  // checkpoint (first-lane, arbiter, …) sticks — a later CLEAN verify can never
+  // erase an earlier CONTAMINATED one (advisor S256). Files are written by
+  // scripts/editionSeal.js --verify as edition_seal_verify_c{XX}_{gate}.json.
+  const prefix = `edition_seal_verify_c${cycle}_`;
+  let names = [];
+  try {
+    names = fs.readdirSync(OUTPUT_DIR).filter(f => f.startsWith(prefix) && f.endsWith('.json'));
+  } catch (_) { names = []; }
+
+  if (names.length === 0) {
+    return { status: 'unsealed', clean: null, checkpoints: [], unsanctioned: [],
+      note: 'no edition_seal_verify files — seal/verify not run this cycle (G-W4 gate not exercised)' };
   }
-  let v;
-  try { v = JSON.parse(fs.readFileSync(p, 'utf8')); } catch (_) {
-    return { status: 'unsealed', clean: null, checkpoint: null, unsanctioned: [], note: 'edition_seal_verify unreadable' };
+
+  const checkpoints = [];
+  const unsanctioned = [];
+  let anyContaminated = false, anyClean = false;
+  for (const name of names.sort()) {
+    let v;
+    try { v = JSON.parse(fs.readFileSync(path.join(OUTPUT_DIR, name), 'utf8')); } catch (_) { continue; }
+    checkpoints.push({ checkpoint: v.checkpoint || name, status: v.status, unsanctioned: (v.unsanctioned || []).length });
+    if (v.status === 'contaminated') {
+      anyContaminated = true;
+      for (const u of (v.unsanctioned || [])) unsanctioned.push({ ...u, checkpoint: v.checkpoint || name });
+    } else if (v.status === 'clean') {
+      anyClean = true;
+    }
   }
+
+  const status = anyContaminated ? 'contaminated' : (anyClean ? 'clean' : 'unsealed');
   return {
-    status: v.status || 'unsealed',
-    clean: v.clean,
-    checkpoint: v.checkpoint || null,
-    unsanctioned: v.unsanctioned || [],
-    note: v.status === 'contaminated'
-      ? `${(v.unsanctioned || []).length} un-sanctioned pre-edit(s) detected at ${v.checkpoint} — lane signal measures a hand-edited hybrid, not raw generation (G-W4)`
-      : (v.status === 'clean' ? 'raw generation intact through review lanes' : 'seal manifest absent at verify time'),
+    status,
+    clean: status === 'contaminated' ? false : (status === 'clean' ? true : null),
+    checkpoints,
+    unsanctioned,
+    note: status === 'contaminated'
+      ? `${unsanctioned.length} un-sanctioned pre-edit(s) across ${checkpoints.filter(c => c.status === 'contaminated').map(c => c.checkpoint).join(', ')} — lane signal measures a hand-edited hybrid, not raw generation (G-W4)`
+      : (status === 'clean' ? 'raw generation intact across all checkpoints' : 'seal manifest absent at verify time'),
   };
 }
 
@@ -347,7 +369,7 @@ async function main() {
         lane: 'measurement-integrity',
         category: 'unsanctioned-pre-edit',
         controllable: true,
-        fix: `${u.path} [${u.status}] edited between compile and ${measurementIntegrity.checkpoint} with no lane REVISE verdict — run lanes on raw output FIRST; fixes come only from lane findings (G-W4). Lane signal this cycle is contaminated.`,
+        fix: `${u.path} [${u.status}] edited before the ${u.checkpoint} checkpoint with no lane REVISE verdict — run lanes on raw output FIRST; fixes come only from lane findings (G-W4). Lane signal this cycle is contaminated.`,
       });
     }
   }

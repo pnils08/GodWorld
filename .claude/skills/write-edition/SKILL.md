@@ -266,7 +266,7 @@ Save to `editions/cycle_pulse_edition_{XX}.txt`.
 node scripts/editionSeal.js --seal --cycle {XX} --reason compile
 ```
 
-This is the measurement-integrity baseline. The review lanes exist to measure where the SKILL fails on RAW output — that signal is destroyed if the edition/articles are hand-edited before the lanes run (C96 G-W4: 12 manual edits + renames pre-lane → lanes measured a laundered hybrid, taught research-build nothing). After this seal, **no edits to the edition `.txt` or any reporter `.md` are permitted except those routed from a lane REVISE verdict** (Step 4 / 4.1). Every sanctioned REVISE round re-seals (see those steps); therefore any un-sanctioned operator pre-edit shows as a hash mismatch at the Step 3.25 verify. Flag-not-block (S256): a detected pre-edit doesn't halt the pipeline, but the Final Arbiter marks the run `measurementIntegrity: contaminated`.
+This is the measurement-integrity baseline. The review lanes exist to measure where the SKILL fails on RAW output — that signal is destroyed if the edition/articles are hand-edited before the lanes run (C96 G-W4: 12 manual edits + renames pre-lane → lanes measured a laundered hybrid, taught research-build nothing). After this seal, **no edits to the edition `.txt` or any reporter `.md` are permitted except those routed from a lane REVISE verdict** (Step 4 / 4.1). Every sanctioned REVISE round re-seals ONLY the files it changed, by name (`--files`); an un-sanctioned operator pre-edit is never blessed, so it shows as a hash mismatch at the next verify. Verify runs at first-lane entry (Step 3.25, primary) and again at the Arbiter (Step 5.5, backstop); contamination at either checkpoint is **sticky** — a later clean verify can't erase it. Flag-not-block (S256): a detected pre-edit doesn't halt the pipeline, but the Final Arbiter marks the run `measurementIntegrity: contaminated`.
 
 **Update production log** with compile details (front page, total articles, edition path).
 
@@ -367,13 +367,13 @@ node scripts/rheaJsonReport.js {XX}
 - verdict REVISE → fix and rerun, max 2 rounds
 - verdict FAIL → halt, route back to desks
 
-**Re-seal after a sanctioned REVISE fix (G-W4, S256) — mechanical.** A Rhea REVISE that edits the edition or a reporter article is a *sanctioned* change. The final action of each REVISE round, after applying the fix, is to re-seal so the change is attributed and the next verify stays clean:
+**Re-seal after a sanctioned REVISE fix (G-W4, S256) — mechanical.** A Rhea REVISE that edits the edition or a reporter article is a *sanctioned* change. The final action of each REVISE round, after applying the fix, is to re-seal — **naming ONLY the files the fix touched** with `--files`:
 
 ```bash
-node scripts/editionSeal.js --seal --cycle {XX} --reason revise:rhea-r{N}
+node scripts/editionSeal.js --seal --cycle {XX} --reason revise:rhea-r{N} --files output/reporters/<reporter>/articles/c{XX}_<slot>.md[,editions/cycle_pulse_edition_{XX}.txt]
 ```
 
-`--seal` re-hashes only the files the fix actually changed (unchanged files keep their `compile` attribution). Skipping this re-seal will false-flag the legit REVISE as an un-sanctioned edit at the Arbiter backstop — so it's part of the REVISE round, not optional.
+`--files` is **required** for a `revise:*` re-seal (the command errors without it). This is the load-bearing rule: a blanket re-seal would re-bless *every* currently-divergent file — including an un-sanctioned operator pre-edit that happens to precede this REVISE — laundering the exact contamination the gate catches. By naming only the lane-fixed files, any un-named pre-edit stays off-seal and is caught at the next verify. Skipping the re-seal entirely false-flags the legit fix; a blanket re-seal launders. Name the files.
 
 **Update production log** with validation results and Rhea's lane score.
 
@@ -384,7 +384,7 @@ Run `/cycle-review` as the **Reasoning Lane** (Phase 39.4, weight 0.5). Produces
 - Internal consistency, evidence-based deduction, argument quality.
 - Does NOT re-check names, votes, stats, engine language — those belong to Rhea and capability.
 - verdict PASS/REVISE/FAIL same semantics as Rhea.
-- **Re-seal after a sanctioned REVISE fix (G-W4, S256):** if a cycle-review REVISE edits the edition/articles, re-seal with `node scripts/editionSeal.js --seal --cycle {XX} --reason revise:cycle-review-r{N}` as the final action of the round — same discipline as Step 4.
+- **Re-seal after a sanctioned REVISE fix (G-W4, S256):** if a cycle-review REVISE edits the edition/articles, re-seal naming only the touched files — `node scripts/editionSeal.js --seal --cycle {XX} --reason revise:cycle-review-r{N} --files <touched-paths>` — as the final action of the round (same `--files`-required discipline as Step 4).
 
 **Update production log** with cycle-review lane score.
 
@@ -424,7 +424,7 @@ node scripts/editionSeal.js --verify --cycle {XX} --gate arbiter
 node scripts/finalArbiter.js {XX}
 ```
 
-`finalArbiter.js` reads `output/edition_seal_verify_c{XX}.json` and stamps the verdict with `measurementIntegrity` (`clean` / `contaminated` / `unsealed`). Flag-not-block: a contaminated result does NOT change the A/B verdict or the publish recommendation — it adds a `measurement-integrity` blame entry naming the pre-edited files, so research-build knows this cycle's lane findings describe a hand-edited hybrid (G-W4). If `unsealed` (the seal/verify steps were skipped), the Arbiter records that the gate wasn't exercised rather than asserting clean.
+`finalArbiter.js` reads every per-checkpoint verify file (`output/edition_seal_verify_c{XX}_*.json`) and ORs them — contamination at *any* checkpoint sticks — to stamp the verdict with `measurementIntegrity` (`clean` / `contaminated` / `unsealed`). Flag-not-block: a contaminated result does NOT change the A/B verdict or the publish recommendation — it adds a `measurement-integrity` blame entry naming the pre-edited files and the checkpoint that caught each, so research-build knows this cycle's lane findings describe a hand-edited hybrid (G-W4). If `unsealed` (the seal/verify steps were skipped), the Arbiter records that the gate wasn't exercised rather than asserting clean.
 
 Deterministic computation — reads the four lane JSONs (reasoning, sourcing, result-validity, capability), applies the 0.5/0.3/0.2 weights, enforces the capability gate as a hard block, emits `output/final_arbiter_c{XX}.json` with a single verdict (A/B), blame attribution, and a publish recommendation:
 

@@ -1,8 +1,8 @@
 ---
 name: write-edition
 description: Execute the edition from sift output. Launch reporters, review articles, compile, validate, Mara audit, publish. Mechanical when sift is right.
-version: "2.3"
-updated: 2026-05-30
+version: "2.4"
+updated: 2026-06-11
 tags: [media, active]
 effort: high
 disable-model-invocation: true
@@ -260,6 +260,14 @@ Save to `editions/cycle_pulse_edition_{XX}.txt`.
 
 **Compile complete; file ready at canonical path. Continue to Step 3.25.** (S227 correction, closes G-W45: Mike's canon-review point is Step 5, not Step 3. Step 3 produces a complete file; Step 5 is the USER APPROVAL GATE for canon-verify before Mara/ingest exposure.)
 
+**Seal the raw generation (G-W4, S256) — mechanical, final action of Step 3.** The instant compile completes, before ANY review lane or operator read, hash the raw edition + reporter articles:
+
+```bash
+node scripts/editionSeal.js --seal --cycle {XX} --reason compile
+```
+
+This is the measurement-integrity baseline. The review lanes exist to measure where the SKILL fails on RAW output — that signal is destroyed if the edition/articles are hand-edited before the lanes run (C96 G-W4: 12 manual edits + renames pre-lane → lanes measured a laundered hybrid, taught research-build nothing). After this seal, **no edits to the edition `.txt` or any reporter `.md` are permitted except those routed from a lane REVISE verdict** (Step 4 / 4.1). Every sanctioned REVISE round re-seals (see those steps); therefore any un-sanctioned operator pre-edit shows as a hash mismatch at the Step 3.25 verify. Flag-not-block (S256): a detected pre-edit doesn't halt the pipeline, but the Final Arbiter marks the run `measurementIntegrity: contaminated`.
+
 **Update production log** with compile details (front page, total articles, edition path).
 
 **QUICK TAKES handling (S227, closes G-W44).** /sift slates sometimes carry "Quick Takes" (QT) entries; the section allowlist has no QUICK TAKES section. Two routes:
@@ -269,6 +277,14 @@ Save to `editions/cycle_pulse_edition_{XX}.txt`.
 Default: (a) when source material exists, (b) when it doesn't. Editor's Desk may also absorb spine framing the QT was carrying — that's the third path. The intent of QT was lightweight texture, not architectural separation; the section allowlist deliberately omits a QT section so texture lands inside topical sections.
 
 ## Step 3.25: Adversarial Review + Tier Classification + Reward Hacking Scan (Phase 39.8/39.9/39.10, S148)
+
+**FIRST — measurement-integrity verify (G-W4, S256). This is the non-negotiable checkpoint.** Before any lane consumes the files, confirm the raw generation sealed at compile is intact:
+
+```bash
+node scripts/editionSeal.js --verify --cycle {XX} --gate first-lane
+```
+
+No legit REVISE has happened yet at this point, so a CLEAN result is expected. A `contaminated` result means the edition or a reporter article was hand-edited between compile and now with no lane REVISE verdict behind it — the exact G-W4 failure. Flag-not-block: the pipeline continues, but record it in the production log and know that this cycle's lane findings now describe a hand-edited hybrid, not raw generation. The right recovery is to re-run the lanes against the raw output; if that's not possible, the run is a contaminated measurement (the Final Arbiter will stamp it).
 
 Three deterministic pre-review steps, all run in parallel after compile:
 
@@ -351,6 +367,14 @@ node scripts/rheaJsonReport.js {XX}
 - verdict REVISE → fix and rerun, max 2 rounds
 - verdict FAIL → halt, route back to desks
 
+**Re-seal after a sanctioned REVISE fix (G-W4, S256) — mechanical.** A Rhea REVISE that edits the edition or a reporter article is a *sanctioned* change. The final action of each REVISE round, after applying the fix, is to re-seal so the change is attributed and the next verify stays clean:
+
+```bash
+node scripts/editionSeal.js --seal --cycle {XX} --reason revise:rhea-r{N}
+```
+
+`--seal` re-hashes only the files the fix actually changed (unchanged files keep their `compile` attribution). Skipping this re-seal will false-flag the legit REVISE as an un-sanctioned edit at the Arbiter backstop — so it's part of the REVISE round, not optional.
+
 **Update production log** with validation results and Rhea's lane score.
 
 ## Step 4.1: Cycle-Review (Reasoning Lane)
@@ -360,6 +384,7 @@ Run `/cycle-review` as the **Reasoning Lane** (Phase 39.4, weight 0.5). Produces
 - Internal consistency, evidence-based deduction, argument quality.
 - Does NOT re-check names, votes, stats, engine language — those belong to Rhea and capability.
 - verdict PASS/REVISE/FAIL same semantics as Rhea.
+- **Re-seal after a sanctioned REVISE fix (G-W4, S256):** if a cycle-review REVISE edits the edition/articles, re-seal with `node scripts/editionSeal.js --seal --cycle {XX} --reason revise:cycle-review-r{N}` as the final action of the round — same discipline as Step 4.
 
 **Update production log** with cycle-review lane score.
 
@@ -392,9 +417,14 @@ node scripts/maraJsonReport.js {XX}
 
 ## Step 5.5: Final Arbiter (Phase 39.7)
 
+**Backstop measurement-integrity verify FIRST (G-W4, S256).** The Step 3.25 verify is the primary checkpoint; this backstop catches any un-sanctioned edit made *after* the lanes began (e.g., between Rhea and Mara). Run it before the Arbiter so the Arbiter reads a current result:
+
 ```bash
+node scripts/editionSeal.js --verify --cycle {XX} --gate arbiter
 node scripts/finalArbiter.js {XX}
 ```
+
+`finalArbiter.js` reads `output/edition_seal_verify_c{XX}.json` and stamps the verdict with `measurementIntegrity` (`clean` / `contaminated` / `unsealed`). Flag-not-block: a contaminated result does NOT change the A/B verdict or the publish recommendation — it adds a `measurement-integrity` blame entry naming the pre-edited files, so research-build knows this cycle's lane findings describe a hand-edited hybrid (G-W4). If `unsealed` (the seal/verify steps were skipped), the Arbiter records that the gate wasn't exercised rather than asserting clean.
 
 Deterministic computation — reads the four lane JSONs (reasoning, sourcing, result-validity, capability), applies the 0.5/0.3/0.2 weights, enforces the capability gate as a hard block, emits `output/final_arbiter_c{XX}.json` with a single verdict (A/B), blame attribution, and a publish recommendation:
 

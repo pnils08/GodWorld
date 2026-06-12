@@ -103,6 +103,34 @@ function checkProvenance(doc) {
   return { ok: true };
 }
 
+// G-W4 (S256) — read the edition seal verify result (scripts/editionSeal.js).
+// Detects operator hand-edits to the raw edition/articles between compile and
+// the review lanes — edits NOT routed from a lane REVISE verdict. Flag-not-block
+// (Mike's call S256): this does NOT change the A/B verdict; it stamps the run's
+// measurement integrity so research-build doesn't mine a hand-edited hybrid's
+// lane findings as raw-generation signal. Absent file (cycle pre-dates the gate,
+// or the verify step was skipped) → 'unsealed' (advisory, non-blocking).
+function readMeasurementIntegrity(cycle) {
+  const p = path.join(OUTPUT_DIR, `edition_seal_verify_c${cycle}.json`);
+  if (!fs.existsSync(p)) {
+    return { status: 'unsealed', clean: null, checkpoint: null, unsanctioned: [],
+      note: 'no edition_seal_verify file — seal/verify not run this cycle (G-W4 gate not exercised)' };
+  }
+  let v;
+  try { v = JSON.parse(fs.readFileSync(p, 'utf8')); } catch (_) {
+    return { status: 'unsealed', clean: null, checkpoint: null, unsanctioned: [], note: 'edition_seal_verify unreadable' };
+  }
+  return {
+    status: v.status || 'unsealed',
+    clean: v.clean,
+    checkpoint: v.checkpoint || null,
+    unsanctioned: v.unsanctioned || [],
+    note: v.status === 'contaminated'
+      ? `${(v.unsanctioned || []).length} un-sanctioned pre-edit(s) detected at ${v.checkpoint} — lane signal measures a hand-edited hybrid, not raw generation (G-W4)`
+      : (v.status === 'clean' ? 'raw generation intact through review lanes' : 'seal manifest absent at verify time'),
+  };
+}
+
 function laneRecord(doc, weight, validOk) {
   if (!validOk) return { score: 0, weight, outcome: 0, process: 0 };
   return {
@@ -308,6 +336,22 @@ async function main() {
 
   const blameAttribution = buildBlameAttribution(laneInputs, capability);
 
+  // G-W4 (S256) — measurement integrity. Flag-not-block: does NOT alter verdict.
+  // A contaminated run gets a blame entry naming the pre-edited files so the
+  // contamination is visible to research-build (the lane findings this cycle
+  // describe a hand-edited hybrid, not raw generation).
+  const measurementIntegrity = readMeasurementIntegrity(cycle);
+  if (measurementIntegrity.status === 'contaminated') {
+    for (const u of measurementIntegrity.unsanctioned) {
+      blameAttribution.push({
+        lane: 'measurement-integrity',
+        category: 'unsanctioned-pre-edit',
+        controllable: true,
+        fix: `${u.path} [${u.status}] edited between compile and ${measurementIntegrity.checkpoint} with no lane REVISE verdict — run lanes on raw output FIRST; fixes come only from lane findings (G-W4). Lane signal this cycle is contaminated.`,
+      });
+    }
+  }
+
   // Phase 39.8/39.9 enrichment (S148) — include tier distribution and reward-hacking scan
   const tierSummary = tierDoc && tierDoc.summary ? tierDoc.summary : null;
   const rewardHackingSummary = rewardHackingDoc && rewardHackingDoc.summary ? rewardHackingDoc.summary : null;
@@ -325,6 +369,7 @@ async function main() {
     capabilityGate,
     blameAttribution,
     publishRecommendation,
+    measurementIntegrity,
     tierDistribution: tierSummary,
     rewardHackingScan: rewardHackingSummary,
   };
@@ -334,6 +379,7 @@ async function main() {
 
   console.log(`  verdict=${verdict}  weightedScore=${weightedScore}  gate=${capabilityGate.passed ? 'PASS' : 'BLOCK'}`);
   console.log(`  recommendation: ${publishRecommendation}`);
+  console.log(`  measurement integrity: ${measurementIntegrity.status}${measurementIntegrity.status === 'contaminated' ? ` (${measurementIntegrity.unsanctioned.length} un-sanctioned pre-edit(s) — G-W4)` : ''}`);
   console.log(`  blame entries: ${blameAttribution.length}`);
   console.log(`  output: ${outputPath}`);
 

@@ -75,7 +75,7 @@ So the admin skill lays the **uniform containers + carry-over + folder + log + T
 ### Task 2: Define the per-cycle folder layout ⚙
 - **Files:** this plan (spec), `docs/media/production_log_template.md` (cross-ref)
 - **Steps:**
-  1. Decide `output/cycle_c{XX}/` contents: `production_log.md`, `voice-packets/`, `desk-packets/`, `initiative-packets/`, gap-log sidecars — vs keeping current top-level `output/` dirs and only unifying the log. (Trade-off: a per-cycle folder is cleaner "one home" but touches every script's output path; log-only unification is lower-blast-radius.)
+  1. Decide `output/cycle_c{XX}/` contents: `production_log.md`, `voice-packets/`, `desk-packets/`, `initiative-packets/`, the cycle gap log — vs keeping current top-level `output/` dirs and only unifying the log. (Trade-off: a per-cycle folder is cleaner "one home" but touches every script's output path; log-only unification is lower-blast-radius.) **Gap-log naming is NOT an open question (RB-1/RB-2, S256):** the cycle gap log is the pinned one-true-log `output/production_log_run_cycle_c{XX}_gaps.md` (sidecar naming retired) — see [[GAP_LOG_TEMPLATE]] §Migration. The only decision here is its *location* (top-level vs inside the per-cycle folder), and whether this admin skill opens it (it currently is opened by the engine cycle audit). Adopt the convention; don't re-spec it.
   2. Spec the chosen layout here.
 - **Verify:** layout table in this plan; every packet script's output path accounted for.
 - **Status:** [ ] not started

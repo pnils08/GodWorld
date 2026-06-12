@@ -9,7 +9,7 @@
  * S215 (civic.9b) — additionally walks voice statement JSONs under
  * output/civic-voice/*_c{XX}.json and enforces the trackerOwner schema
  * (`primary` / `secondary` / `advisory`) from
- * docs/plans/2026-05-11-civic-tracker-collision-schema.md. During the
+ * docs/archive/plans/2026-05-11-civic-tracker-collision-schema.md. During the
  * deprecation window (C94-C95), missing `trackerOwner` defaults to `primary`
  * with a per-statement deprecation warning and collisions downgrade to
  * warnings (not failures). Strict enforcement engages once voice agents

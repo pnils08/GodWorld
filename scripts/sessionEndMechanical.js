@@ -30,7 +30,7 @@
 //   node scripts/sessionEndMechanical.js --terminal=<name>
 //   node scripts/sessionEndMechanical.js --terminal=research-build --rotate-history --dry-run
 //
-// Plan: docs/plans/2026-05-23-session-end-collapse.md
+// Plan: docs/archive/plans/2026-05-23-session-end-collapse.md
 
 'use strict';
 
@@ -88,7 +88,7 @@ If you run this BEFORE writing the journal, rotateJournalRecent picks up the
 prior session's entry and the new entry is silently absent from JOURNAL_RECENT
 until the next session-end.
 
-Plan: docs/plans/2026-05-23-session-end-collapse.md
+Plan: docs/archive/plans/2026-05-23-session-end-collapse.md
 `);
 }
 

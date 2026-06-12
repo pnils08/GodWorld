@@ -10,7 +10,7 @@ disable-model-invocation: true
 
 # /session-end — Close the Session
 
-> **Skill bag:** session closer running gen-eval pass on the session's work. Step 2 audits what the session generated (writes STATUS + ROLLOUT updates); Step 3 runs the mechanical sub-steps (rotation, shipped-block, audits, restart) as a single fail-loud script. The terminal load-out (Session Close section in TERMINAL.md) directs which steps apply — only the media terminal runs the journal step; civic, research-build, and engine-sheet skip it (S249 governance.20). Per S229 governance.7 (plan: `docs/plans/2026-05-23-session-end-collapse.md`).
+> **Skill bag:** session closer running gen-eval pass on the session's work. Step 2 audits what the session generated (writes STATUS + ROLLOUT updates); Step 3 runs the mechanical sub-steps (rotation, shipped-block, audits, restart) as a single fail-loud script. The terminal load-out (Session Close section in TERMINAL.md) directs which steps apply — only the media terminal runs the journal step; civic, research-build, and engine-sheet skip it (S249 governance.20). Per S229 governance.7 (plan: `docs/archive/plans/2026-05-23-session-end-collapse.md`).
 
 **Purpose:** Leave enough of yourself behind that the next version of you can find her way back.
 
@@ -101,7 +101,7 @@ Wraps: `rotateJournalRecent` (media only) → JOURNAL content-quality check (med
 - Informational (prints under `does not fail close` header, continues): `auditPlanTagDrift` drift, JOURNAL content-quality body-line warning.
 - Tolerant (prints warning, continues): `pm2 restart` failure, cross-terminal stack check error.
 
-Plan: `docs/plans/2026-05-23-session-end-collapse.md`.
+Plan: `docs/archive/plans/2026-05-23-session-end-collapse.md`.
 
 ### Step 4: Commit & Push — model judgment
 
@@ -152,5 +152,5 @@ One line, mechanism not audience-facing prose. Per S208 (work-is-canonization �
 
 - 2026-05-31 (S249, research-build) — v2.2 journal-write to media-only (governance.20, Mike S238 directive). Step 1 (journal) now runs **only on the media terminal**; research-build + civic join engine-sheet in skipping it (operational mode reads no JOURNAL_RECENT at boot, so a journal write conditions nothing there). `scripts/sessionEndMechanical.js`: `PERSONA_TERMINALS` → `JOURNAL_TERMINALS = {media}` (the set's only use was journal-step gating). Brings the SKILL + script + research-build/civic TERMINAL.md into line with CLAUDE.md §Terminal architecture, which already stated operational terminals have "no journal." research-build + civic TERMINAL.md §Session Close + §Owned-docs updated same commit. Conditioning for operational terminals lands in ROLLOUT close-notes / RESEARCH.md / commit bodies / ENGINE_MAP.
 - 2026-05-30 (S248, research-build) — v2.1 friction-reduction pass (governance.19, source `output/production_log_session_end_c94_gaps.md`). G-SE3: Step 1 journal template `[N+1]` → `[N]` (closing-session number) + parenthetical. G-SE5: Step 2.2 leads with hard-vs-soft binding to the Step 1 journal decision (no form re-derivation). G-SE2: Step 2.3 deterministic Archive Sweep Trigger (count ≥2 OR ≥2 sessions since last sweep; skip on uncommitted cross-terminal changes). G-SE4: added an ARCHIVE-PASS ORDERING comment at the S227 anchor in ROLLOUT_ARCHIVE.md (the prior line-802 "newest at bottom" claim contradicted actual newest-first-after-S227 practice; comment now names the real insert point). G-SE1 (cross-terminal write contention) deferred to governance.26 Task 6 — the unified-close single-writer protocol supersedes the Step-2 stopgap.
-- 2026-05-23 (S229, research-build) — v2.0 rewrite per governance.7. 349 → ~150 lines. 13 steps → 4 model + 1 mechanical script invocation. Mechanical orchestrator: `scripts/sessionEndMechanical.js`. Plan: `docs/plans/2026-05-23-session-end-collapse.md`. Advisor-consulted before write: failure semantics, drop list, honest count.
+- 2026-05-23 (S229, research-build) — v2.0 rewrite per governance.7. 349 → ~150 lines. 13 steps → 4 model + 1 mechanical script invocation. Mechanical orchestrator: `scripts/sessionEndMechanical.js`. Plan: `docs/archive/plans/2026-05-23-session-end-collapse.md`. Advisor-consulted before write: failure semantics, drop list, honest count.
 - 2026-05-08 (S211) — v1.2. rotateJournalRecent + writeShippedBlock scripts. S207 boot-handoff primitive.

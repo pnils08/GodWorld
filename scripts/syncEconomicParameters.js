@@ -3,7 +3,7 @@
  * syncEconomicParameters.js — keep the Apps Script ECONOMIC_PARAMETERS constant
  * in sync with data/economic_parameters.json (the canonical source).
  *
- * Plan: docs/plans/2026-04-28-intake-side-citizen-derivation.md §Task 4.3
+ * Plan: docs/archive/plans/2026-04-28-intake-side-citizen-derivation.md §Task 4.3
  *
  * Apps Script can't require() JSON, so the citizenDerivation.js library has the
  * 198-entry profile pool embedded as a JS array literal. This script regenerates

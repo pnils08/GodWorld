@@ -6,7 +6,7 @@
  * faith cross-walk + Simulation_Ledger faith-leader POPs) to
  * `output/faith_canon_export_c93.md` for research-build P1 substitution authoring.
  *
- * Plan: docs/plans/2026-05-12-canon-2-faith-scrub.md §Phase 0
+ * Plan: docs/archive/plans/2026-05-12-canon-2-faith-scrub.md §Phase 0
  */
 
 require('/root/GodWorld/lib/env');
@@ -74,7 +74,7 @@ function mdTable(header, rows) {
   out.push('**Generated:** ' + new Date().toISOString());
   out.push('**Source:** Live Google Sheets via `lib/sheets.js`');
   out.push('**Purpose:** canon.2 Phase 0 contamination surface for research-build P1 substitution authoring.');
-  out.push('**Plan:** `docs/plans/2026-05-12-canon-2-faith-scrub.md`');
+  out.push('**Plan:** `docs/archive/plans/2026-05-12-canon-2-faith-scrub.md`');
   out.push('');
   out.push('---');
   out.push('');

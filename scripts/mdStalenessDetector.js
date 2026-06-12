@@ -11,7 +11,7 @@
  *   node scripts/mdStalenessDetector.js --stale-days 60   # tighter staleness threshold
  *   node scripts/mdStalenessDetector.js --active-days 14  # tighter active window
  *
- * Plan: docs/plans/2026-04-21-md-audit-skill.md
+ * Plan: docs/archive/plans/2026-04-21-md-audit-skill.md
  */
 
 const fs = require('fs');

@@ -53,7 +53,7 @@ Both are needed. `/doc-audit` checks whether the docs you decided to keep are st
 
 ## Plan + acceptance
 
-Plan file: `docs/plans/2026-04-21-md-audit-skill.md` (S170, drafted research-build).
+Plan file: `docs/archive/plans/2026-04-21-md-audit-skill.md` (S170, drafted research-build).
 
 Phase 3 (gated archival via `scripts/archiveStaleMd.js`) intentionally not built — first run informs whether the classifier needs tuning before destructive action enters the loop.
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // rolloutTriage.js — ROLLOUT HIGH entry staleness scanner
-// Phase 3 of docs/plans/2026-05-03-rollout-triage-cadence.md
+// Phase 3 of docs/archive/plans/2026-05-03-rollout-triage-cadence.md
 //
 // ============================================================================
 // RETIRED S235 (2026-05-25) — governance.6 close

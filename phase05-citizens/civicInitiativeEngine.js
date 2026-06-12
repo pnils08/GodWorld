@@ -16,7 +16,7 @@
  *   needs a fresh schedule after a non-vote-resolving phase transition."
  * - Added 2 column lookups: iImplementationPhase, iNextActionCycle.
  * - Engine-internal trigger; no new ingest path; uses existing tracker fields.
- * - Plan: docs/plans/2026-05-03-vote-trigger-mechanism.md
+ * - Plan: docs/archive/plans/2026-05-03-vote-trigger-mechanism.md
  *
  * v1.8 Changes (2026-02-18):
  * - FIX: Record all 9 individual council votes in Notes (was only 2 swing voters)

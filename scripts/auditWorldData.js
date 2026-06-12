@@ -4,7 +4,7 @@
  *
  * Read-only. No writes, no deletes.
  *
- * Plan: docs/plans/2026-04-27-world-data-unified-ingest-rebuild.md (Task 1.1)
+ * Plan: docs/archive/plans/2026-04-27-world-data-unified-ingest-rebuild.md (Task 1.1)
  *
  * Method (two-pass):
  *   PASS 1 — POST /v3/documents/list paginates the entire org. Server-side tag filter
@@ -321,7 +321,7 @@ async function main() {
 
   const inventory = {
     auditedAt: new Date().toISOString(),
-    plan: 'docs/plans/2026-04-27-world-data-unified-ingest-rebuild.md (Task 1.1)',
+    plan: 'docs/archive/plans/2026-04-27-world-data-unified-ingest-rebuild.md (Task 1.1)',
     method: 'two-pass: list-enumerate + GET-classify',
     scope: {
       orgTotalItems: pass1.totalItemsAllOrg,

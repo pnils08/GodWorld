@@ -62,7 +62,7 @@ If 0 mechanical entries observed: file states "0 mechanical gaps observed" with 
 
 **Gate:** File exists on disk. ROLLOUT pointer added under `Edition Post-Publish` for any HIGH-severity findings: `RUN-CYCLE C{XX} GAP LOG — S{N} (engine-sheet), N entries, severity`.
 
-Plan: `docs/plans/2026-05-03-run-cycle-gap-log-surface.md` (Phase 2 done S199; Phase 3 validation runs at next /run-cycle invocation).
+Plan: `docs/archive/plans/2026-05-03-run-cycle-gap-log-surface.md` (Phase 2 done S199; Phase 3 validation runs at next /run-cycle invocation).
 
 ## What Happens After
 

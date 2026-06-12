@@ -3,7 +3,7 @@
  * validateIntakeDerivation.js — Phase 5 validation for the intake-side
  * citizen derivation library.
  *
- * Plan: docs/plans/2026-04-28-intake-side-citizen-derivation.md §Phase 5
+ * Plan: docs/archive/plans/2026-04-28-intake-side-citizen-derivation.md §Phase 5
  *
  * Confirms the Node-side `lib/citizenDerivation` produces:
  *   - all 8 fields populated for every synthetic candidate

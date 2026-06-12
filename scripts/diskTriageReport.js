@@ -8,7 +8,7 @@
  * Read-only — no archival, no deletion. Output is a recommendation document
  * for Mike to scan; archival decisions are human-gated downstream.
  *
- * Plan: docs/plans/2026-05-05-disk-inventory-and-dead-file-detection.md
+ * Plan: docs/archive/plans/2026-05-05-disk-inventory-and-dead-file-detection.md
  *
  * Usage:
  *   node scripts/diskTriageReport.js                # latest classified

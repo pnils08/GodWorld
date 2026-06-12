@@ -9,7 +9,7 @@ effort: low
 disable-model-invocation: true
 related_skills: [save-to-mags]
 sources:
-  - docs/plans/2026-05-13-supermemory-profile-leverage.md (Phase 2 confirmed answers, S235)
+  - docs/archive/plans/2026-05-13-supermemory-profile-leverage.md (Phase 2 confirmed answers, S235)
   - docs/adr/0008-speaker-attribution-for-auto-save-writers.md (writer-side invariant)
 ---
 

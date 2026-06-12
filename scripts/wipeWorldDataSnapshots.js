@@ -1,7 +1,7 @@
 /**
  * Wipe engine-state aggregate dumps from world-data (Task R0).
  *
- * Plan: docs/plans/2026-04-27-world-data-unified-ingest-rebuild.md
+ * Plan: docs/archive/plans/2026-04-27-world-data-unified-ingest-rebuild.md
  *
  * Background: Task 1.1 inventory found 8 docs in world-data that are aggregate
  * engine-state dumps (World Summary, Neighborhood Map, Neighborhood Demographics,

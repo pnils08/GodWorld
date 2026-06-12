@@ -109,7 +109,7 @@ effort: high
 | `docs/WORKFLOWS.md` | 7 workflow patterns — match actual session usage? Post-S165 reframe (workflow reference, not boot file) reflected? |
 | `docs/RESEARCH.md` | Findings log current? Recent evaluations recorded (DeepSeek S154, Sandcastle/Daytona S156, outside-AI reviews S170)? |
 | `docs/research4_1.md` + `docs/research4_2.md` | Engineering patterns + Ryan dissertation — still load-bearing reference? Cross-references in current plans? |
-| `docs/research/briefing_bloat_audit_2026-04-17.md` | Audit findings still accurate? Trim plan ([[plans/2026-04-17-briefing-bundle-trim]]) status? |
+| `docs/research/briefing_bloat_audit_2026-04-17.md` | Audit findings still accurate? Trim plan ([[archive/plans/2026-04-17-briefing-bundle-trim]]) status? |
 
 ### data — Drift when sheets change.
 
@@ -130,16 +130,16 @@ effort: high
 |-----|---------------|
 | `docs/plans/TEMPLATE.md` | Reference template — verify shape matches active plan files. Audit-light. |
 | `docs/plans/BACKLOG.md` | Consolidated parked-phase backlog — verify phases listed are still parked (not started, not complete elsewhere). Cross-check against ROLLOUT_PLAN spine. |
-| `docs/plans/skill-eval-framework.md` | HIGH priority not started — verify status; check first skill `/skill-check` shipped S156 reference still accurate. |
-| `docs/plans/2026-04-16-phase-38-5-measurement-loop.md` | DONE S156 — verify Status section reflects completion; consider archive flag. |
-| `docs/plans/2026-04-16-phase-38-6-skill-shrink.md` | DONE S156 — verify Status section reflects completion. |
-| `docs/plans/2026-04-16-phase-40-1-session-log-interface.md` | DONE S156 — verify. |
-| `docs/plans/2026-04-16-phase-40-3-credential-audit.md` | Drafted S156, engine/sheet picks up when priority rises — verify status hasn't changed silently. |
-| `docs/plans/2026-04-16-phase-40-6-injection-defense.md` | Drafted by research-build; engine/sheet builds — verify build status. |
-| `docs/plans/2026-04-17-briefing-bundle-trim.md` | Drafted S156; media terminal executes — verify execution status. |
+| `docs/archive/plans/skill-eval-framework.md` | HIGH priority not started — verify status; check first skill `/skill-check` shipped S156 reference still accurate. |
+| `docs/archive/plans/2026-04-16-phase-38-5-measurement-loop.md` | DONE S156 — verify Status section reflects completion; consider archive flag. |
+| `docs/archive/plans/2026-04-16-phase-38-6-skill-shrink.md` | DONE S156 — verify Status section reflects completion. |
+| `docs/archive/plans/2026-04-16-phase-40-1-session-log-interface.md` | DONE S156 — verify. |
+| `docs/archive/plans/2026-04-16-phase-40-3-credential-audit.md` | Drafted S156, engine/sheet picks up when priority rises — verify status hasn't changed silently. |
+| `docs/archive/plans/2026-04-16-phase-40-6-injection-defense.md` | Drafted by research-build; engine/sheet builds — verify build status. |
+| `docs/archive/plans/2026-04-17-briefing-bundle-trim.md` | Drafted S156; media terminal executes — verify execution status. |
 | `docs/plans/2026-04-21-memento-cbr-case-bank.md` | 4-phase rollout; reward-tuple capture has standalone value — verify phase 1 status and ≥500 tuples / droplet headroom thresholds for phase B. |
-| `docs/plans/2026-04-21-md-audit-skill.md` | `/md-audit` skill plan — verify status; merges with /doc-audit eventually (Option B in S175 review). |
-| `docs/plans/2026-04-25-canon-fidelity-rollout.md` | DONE S175 — verify Status section reflects 25/25 completion + Q1/Q2/Q3 resolutions + Out-of-scope findings. |
+| `docs/archive/plans/2026-04-21-md-audit-skill.md` | `/md-audit` skill plan — verify status; merges with /doc-audit eventually (Option B in S175 review). |
+| `docs/archive/plans/2026-04-25-canon-fidelity-rollout.md` | DONE S175 — verify Status section reflects 25/25 completion + Q1/Q2/Q3 resolutions + Out-of-scope findings. |
 | `docs/plans/mara-reference-files.md` | COMPLETE S105 — verify archive status; consider folder move to archive. |
 
 **Plan-file specific checks:**
@@ -290,7 +290,7 @@ Next group due: [group name]
 
 ## Future Direction (S175 — Option B deferred)
 
-The current 7-group structure is a surgical patch over the original 5-group v1.0. Long-term, the `/md-audit` skill ([[plans/2026-04-21-md-audit-skill]]) will handle existence-staleness (orphan MDs, mtime drift, broken inbound links) — complementary to this skill's content-staleness focus.
+The current 7-group structure is a surgical patch over the original 5-group v1.0. Long-term, the `/md-audit` skill ([[archive/plans/2026-04-21-md-audit-skill]]) will handle existence-staleness (orphan MDs, mtime drift, broken inbound links) — complementary to this skill's content-staleness focus.
 
 **Option B (deferred to next major refactor):** replace fixed groups with **frontmatter-driven audit cadence**. Each doc declares its own `audit_cadence:` field (e.g., `every-session`, `weekly`, `monthly`, `on-change`); `/doc-audit` reads frontmatter across `docs/`, computes overdue set, audits whatever's stale. Converges with `/md-audit` (both walk frontmatter); eventually they merge into a single `/audit` skill with content + existence checks.
 

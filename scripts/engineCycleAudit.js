@@ -26,7 +26,7 @@
  *   - phase-ordering
  *   - silent-fail
  *
- * Plan: docs/plans/2026-05-03-run-cycle-gap-log-surface.md
+ * Plan: docs/archive/plans/2026-05-03-run-cycle-gap-log-surface.md
  * header-drift detector plan: docs/plans/2026-05-05-writer-header-alignment-detector.md
  * Surfaced: SESSION_CONTEXT.md S197 meta-gap on run-cycle observation surface
  */
@@ -689,7 +689,7 @@ function emit(cycle, findings, auditJson, writeMode) {
   md += `# /run-cycle Gap Log — Cycle ${cycle}\n\n`;
   md += `**Generated:** ${new Date().toISOString()}\n`;
   md += `**Script:** \`scripts/engineCycleAudit.js\` (mechanical V1)\n`;
-  md += `**Plan:** \`docs/plans/2026-05-03-run-cycle-gap-log-surface.md\`\n\n`;
+  md += `**Plan:** \`docs/archive/plans/2026-05-03-run-cycle-gap-log-surface.md\`\n\n`;
 
   if (auditJson && auditJson.summary) {
     const s = auditJson.summary;

@@ -13,7 +13,7 @@
  * Default: --dry-run (prints proposed writes; no sheet contact for writes).
  * Use --apply to execute the batch.
  *
- * Plan: docs/plans/2026-05-12-canon-2-faith-scrub.md §Phase 3 Tasks 3.1, 3.2
+ * Plan: docs/archive/plans/2026-05-12-canon-2-faith-scrub.md §Phase 3 Tasks 3.1, 3.2
  */
 
 require('/root/GodWorld/lib/env');

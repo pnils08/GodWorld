@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "created": "2026-04-28",
-  "purpose": "Female-coded first-name pool for one-shot female-citizen balance ingest. Curated research-build S184 per plan docs/plans/2026-04-28-female-citizen-balance.md. Net-additive vs phase05-citizens/generateGenericCitizens.js v2.7 pool — zero hard duplicates with v2.7 female-coded names. Tier-3 (real public figure) names screened during curation. Last names draw from v2.7's 144-name lastNames pool unchanged; no separate file needed.",
+  "purpose": "Female-coded first-name pool for one-shot female-citizen balance ingest. Curated research-build S184 per plan docs/archive/plans/2026-04-28-female-citizen-balance.md. Net-additive vs phase05-citizens/generateGenericCitizens.js v2.7 pool — zero hard duplicates with v2.7 female-coded names. Tier-3 (real public figure) names screened during curation. Last names draw from v2.7's 144-name lastNames pool unchanged; no separate file needed.",
   "count": 150,
   "origins": {
     "latina": 30,

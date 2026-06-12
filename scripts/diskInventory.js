@@ -9,7 +9,7 @@
  * Read-only end-to-end — never mutates a single byte on disk outside the
  * output JSON.
  *
- * Plan: docs/plans/2026-05-05-disk-inventory-and-dead-file-detection.md
+ * Plan: docs/archive/plans/2026-05-05-disk-inventory-and-dead-file-detection.md
  * Sibling tools (narrower scope, kept separate per Q4):
  *   - scripts/scanDeadCode.js (function-level)
  *   - scripts/mdStalenessDetector.js (docs/ only)

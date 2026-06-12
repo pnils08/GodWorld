@@ -17,7 +17,7 @@
  *
  * Read-only — never mutates source files.
  *
- * Plan: docs/plans/2026-05-05-disk-inventory-and-dead-file-detection.md
+ * Plan: docs/archive/plans/2026-05-05-disk-inventory-and-dead-file-detection.md
  *
  * Usage:
  *   node scripts/diskClassify.js                  # use latest refscan

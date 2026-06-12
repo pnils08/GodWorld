@@ -2,7 +2,7 @@
 /**
  * ingestFemaleCitizensBalance.js — S184 follow-up
  *
- * Plan: docs/plans/2026-04-28-female-citizen-balance.md
+ * Plan: docs/archive/plans/2026-04-28-female-citizen-balance.md
  *
  * One-shot ingest: appends 150 new female citizens to Simulation_Ledger to
  * lift the live gender share from 33% F → 40.7% F. Existing canon untouched

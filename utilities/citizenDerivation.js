@@ -1,7 +1,7 @@
 /**
  * citizenDerivation.js — intake-side citizen derivation library (Apps Script)
  *
- * Plan: docs/plans/2026-04-28-intake-side-citizen-derivation.md
+ * Plan: docs/archive/plans/2026-04-28-intake-side-citizen-derivation.md
  * Sister: lib/citizenDerivation.js (Node — same per-field algorithms)
  *
  * Purpose: when a new citizen is created at intake, derive realistic values for

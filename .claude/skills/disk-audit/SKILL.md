@@ -85,7 +85,7 @@ End-to-end: ~15s on a ~7K-file droplet. Output: `output/disk_audit_<YYYY-MM-DD>.
 
 ## Plan + acceptance
 
-Plan file: `docs/plans/2026-05-05-disk-inventory-and-dead-file-detection.md` (drafted S202, executed S203).
+Plan file: `docs/archive/plans/2026-05-05-disk-inventory-and-dead-file-detection.md` (drafted S202, executed S203).
 
 Phase 2.3 batch-API submission for the `review` tier intentionally not built — first runs will reveal whether the mechanical classifier handles enough of the load. If batch is needed later, the `review` bucket entries are pre-shaped for `mcp__claude-batch__send_to_batch` consumption.
 

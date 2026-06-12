@@ -92,7 +92,7 @@ This is the **project's** vocabulary, not the world's. World canon (citizen name
 
 **Capability reviewer** — Deterministic editorial assertions (e.g. ≥3 female citizens in non-official roles per Edition). Runs alongside the three lanes; emits its own report.
 
-**Generator vs Reviewer** — Canon-fidelity classification. Generators write content; Reviewers audit it; Final Arbiter is a third class (propagates lane findings rather than fresh-auditing). Determines which RULES.md template applies. Full agent census in `docs/plans/2026-04-25-canon-fidelity-rollout.md`.
+**Generator vs Reviewer** — Canon-fidelity classification. Generators write content; Reviewers audit it; Final Arbiter is a third class (propagates lane findings rather than fresh-auditing). Determines which RULES.md template applies. Full agent census in `docs/archive/plans/2026-04-25-canon-fidelity-rollout.md`.
 
 **IDENTITY / LENS / RULES / SKILL** — The four-file structure inside every canon-fidelity agent directory. IDENTITY = who they are, LENS = how they see the world, RULES = canon-fidelity enforcement, SKILL = the actual procedure. Locked S175.
 
@@ -226,7 +226,7 @@ Deeper definitions and full content for terms above:
 - **Three-layer coverage principle** — `/root/.claude/projects/-root-GodWorld/memory/project_three-layer-coverage-principle.md`
 - **File/format conventions (this is vocabulary, that is shape)** — `docs/SCHEMA.md`
 - **Doc catalog** — `docs/index.md`
-- **Canon-fidelity four-file structure** — `docs/plans/2026-04-25-canon-fidelity-rollout.md`
+- **Canon-fidelity four-file structure** — `docs/archive/plans/2026-04-25-canon-fidelity-rollout.md`
 - **Adoption rationale for this file** — `docs/adr/0001-adopt-context-and-adrs.md`
 
 ---

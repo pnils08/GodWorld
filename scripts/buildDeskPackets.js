@@ -2034,6 +2034,20 @@ async function main() {
     return (a.Phase || '').toLowerCase() !== 'resolved' && a.ArcId;
   });
 
+  // S256 — ARC FEED PULLED FROM DESK PACKETS (C97). The crisis-arc generator
+  // (generateCrisisBuckets) is not wired to the data it names: it reads ONE
+  // city-wide illnessRate, then picks the neighborhood by weighted dice and the
+  // subtype from a fixed pool — "HEALTH crisis: Flu Season Strain in Fruitvale"
+  // is fabricated specificity, not a measured signal. Feeding that to desks lets
+  // journalists write fiction off a real neighborhood's name. Three engine breaks
+  // compound it (spawner generateNewArcs_ deleted S185, phase03 spawn clobbered by
+  // phase08 ledger-reload, age dropped on load → 36 arcs frozen at peak since C81).
+  // Decision (Mike): remove now, do NOT restore the broken system — rebuild as a
+  // connected per-hood story signal (Neighborhood_Demographics Sick/Unemployed +
+  // Neighborhood_Map sentiment/crime + citizen linkage) as a deliberate post-C97
+  // build. RESTORE = delete the next line once the connected generator ships.
+  arcs = [];
+
   // Civic and initiatives (filter empty rows — sheet has 1000 rows, ~35 filled)
   var civicOfficers = allToObjects(civicRaw).filter(function(o) { return o.Title; });
   var initiatives = allToObjects(initiativeRaw);

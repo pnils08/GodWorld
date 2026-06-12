@@ -85,7 +85,7 @@ The root finding (G-S5): civic/citizen generation isn't mechanically bound to en
 
 ## §5 Flag — not in either track, surface to operator
 
-**G-W5 — Drive auth dead (`invalid_grant`). — RESOLVED S256.** NOT the service-account key (reads work) and NOT the operator's Jun-2 Gemini API key (red herring — bare API key, unused by Drive/Sheets). The dead credential was the OAuth2 `GOOGLE_REFRESH_TOKEN` for `saveToDrive.js` writes (separate auth from SA reads). Re-minted via `reauthorizeDrive.js`; `--test` confirmed round-trip; C97 publish unblocked. **Durable follow-up (operator, Cloud Console):** publish OAuth consent screen Testing→In production (project godworld-486407) — Testing-mode refresh tokens expire every 7 days, which is why it died ~8 days after the Jun-3 re-auth. Until published, ~weekly re-auth recurs.
+**G-W5 — Drive auth dead (`invalid_grant`). — RESOLVED S256.** NOT the service-account key (reads work) and NOT the operator's Jun-2 Gemini API key (red herring — bare API key, unused by Drive/Sheets). The dead credential was the OAuth2 `GOOGLE_REFRESH_TOKEN` for `saveToDrive.js` writes (separate auth from SA reads). Re-minted via `reauthorizeDrive.js`; `--test` confirmed round-trip; C97 publish unblocked. **Durable fix DONE S256:** operator published the OAuth consent screen Testing→In production (project godworld-486407) — refresh token now permanent; weekly re-auth recurrence eliminated (re-verified `saveToDrive.js --test` post-publish). G-W5 fully closed.
 
 ## Changelog
 - 2026-06-07 — Triage filed (S252). One row → governance.*; phases execute per track.

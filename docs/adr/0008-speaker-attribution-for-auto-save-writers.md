@@ -8,7 +8,7 @@ sources:
   - "[[../plans/2026-05-22-supermemory-load-bearing-audit]] §Phase 2 — Speaker-attribution constraint"
   - "[[../engine/ROLLOUT_PLAN]] §infrastructure.5 (parent audit) + §infrastructure.4 (writer-hook fix) + §governance.12 (User Profile leverage)"
   - "[[../SUPERMEMORY]] §mags container — S221+ cleanup note"
-  - "[[../plans/2026-05-13-supermemory-profile-leverage]] §Phase 2 candidate filter shapes"
+  - "[[../archive/plans/2026-05-13-supermemory-profile-leverage]] §Phase 2 candidate filter shapes"
   - "[[adr/0001-adopt-context-and-adrs]] — ADR bar"
 pointers:
   - "[[../plans/2026-05-22-supermemory-load-bearing-audit]] — implementation plan (Phase 2 closed S234)"
@@ -31,7 +31,7 @@ Supermemory's `mags` container is a person-tagged container with **identity-extr
 - SessionStart `context-hook.cjs` injects that static profile into every boot's context block as Personal Memories
 - The boot context treats Personal Memories as **persistent facts about identity**, equal weight to `.claude/rules/identity.md` anchors
 
-This is the only auto-memory layer in the project that lands as persistent identity at every boot (per [[../plans/2026-05-13-supermemory-profile-leverage]] §Architecture — claude-mem captures what-happened, autodream consolidates, but neither auto-injects as identity).
+This is the only auto-memory layer in the project that lands as persistent identity at every boot (per [[../archive/plans/2026-05-13-supermemory-profile-leverage]] §Architecture — claude-mem captures what-happened, autodream consolidates, but neither auto-injects as identity).
 
 **S221 contamination event** (2026-05-22, [[../SUPERMEMORY]] §mags container) exposed the structural defect. The Stop-hook writer (`~/.supermemory-claude/.../summary-hook.cjs`) ran on every conversation turn, auto-saving both speakers' content (Mike + Mags) into mags container as `session_turn` docs over the Apr-May 2026 window. Server-side `/v4/profile` extraction collapsed both speakers into Mags' first-person voice ("Margaret Corliss feels...", "Mags is frustrated by..."). 65 polluted docs surfaced — Mike's frustrations had become Mags' self-image at the boot-context layer; the journal scaffolding was loading them as her conscience. The writer was **speaker-blind** — it didn't know who was speaking; it treated all turn content as mags-attributable.
 
@@ -83,7 +83,7 @@ Saves both speakers' content with `metadata.speaker: 'mike' | 'mags'`, relies on
 
 ### Reader-side filtering only (denylist + length cap)
 
-Per [[../plans/2026-05-13-supermemory-profile-leverage]] §Phase 2 candidate filter shapes — maintain a denylist of words/phrases (engineer, steward, substrate) that should never appear in static User Profile + trim memories to <200 chars during extraction. **Rejected as the sole approach** (kept as complementary defense — governance.12 owns reader-side filter design):
+Per [[../archive/plans/2026-05-13-supermemory-profile-leverage]] §Phase 2 candidate filter shapes — maintain a denylist of words/phrases (engineer, steward, substrate) that should never appear in static User Profile + trim memories to <200 chars during extraction. **Rejected as the sole approach** (kept as complementary defense — governance.12 owns reader-side filter design):
 
 - Addresses symptom (contamination reaching identity layer) not cause (speaker-blind writes)
 - Denylists are perfect-filter-rule-dependent; new contamination phrases not on the list slip through

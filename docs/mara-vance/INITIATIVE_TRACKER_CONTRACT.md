@@ -12,7 +12,7 @@ sources:
 pointers:
   - "[[INITIATIVE_TRACKER_VOTER_LOGIC]] — Status-column lifecycle + vote math (its 17-col schema is SUPERSEDED by §1 here)"
   - "[[CIVIC_GOVERNANCE_MASTER_REFERENCE]] §Initiative Status Lifecycle — the Status arc (distinct column from ImplementationPhase)"
-  - "[[../plans/2026-05-11-civic-tracker-collision-schema]] — trackerOwner WHO-writes contract (ES-5); this is the WHAT/lifecycle contract"
+  - "[[../archive/plans/2026-05-11-civic-tracker-collision-schema]] — trackerOwner WHO-writes contract (ES-5); this is the WHAT/lifecycle contract"
 ---
 
 # Initiative_Tracker Contract

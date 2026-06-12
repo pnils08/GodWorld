@@ -5,8 +5,8 @@ updated: 2026-05-12
 type: reference
 tags: [media, evaluation, active]
 sources:
-  - "[[../plans/2026-05-10-skill-eval-expansion]] — parent plan (governance.2)"
-  - "[[../plans/skill-eval-framework]] — framework parent"
+  - "[[../archive/plans/2026-05-10-skill-eval-expansion]] — parent plan (governance.2)"
+  - "[[../archive/plans/skill-eval-framework]] — framework parent"
   - "[[story_evaluation]] — sibling assertion file (write-edition + sift)"
   - "[[../EDITION_PIPELINE]] §Published .txt Format Contract — filename + masthead rules"
   - "[[../canon/CANON_RULES]] — Tier 2 canon-substitute rule"

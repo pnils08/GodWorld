@@ -13,7 +13,7 @@ pointers:
   - "[[engine/ROLLOUT_PLAN]] — parent rollout (governance.22)"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — register in same commit"
-  - "[[2026-05-28-gemini-offload-pattern]] — sibling S241 plan, governance.21 — different lever on the same token-budget concern"
+  - "[[archive/plans/2026-05-28-gemini-offload-pattern]] — sibling S241 plan, governance.21 — different lever on the same token-budget concern"
   - ".claude/hooks/session-startup-hook.sh — Task 5 modification target"
   - ".claude/terminals/research-build/TERMINAL.md — Tasks 1 + 3 modification target"
   - ".claude/terminals/engine-sheet/TERMINAL.md — Task 3 modification target"
@@ -29,7 +29,7 @@ pointers:
 
 **Pointers:**
 - Companion: `output/production_log_session-startup_c95_gaps.md` — the S241 boot-burn gap log. Task 1 (`/usage` cadence) provides empirical data on which gap-log fix prioritizes first; Task 2 (`disallowed-tools`) is the per-skill scoping that pairs with the gap-log's G-SS1 identity-split (different layers, same goal: scope-tighten what loads).
-- Sibling: [[2026-05-28-gemini-offload-pattern]] (governance.21) — Gemini offload triage is the *external* lever on token budget; this plan is the *internal* lever (use the harness's own newer scoping mechanisms).
+- Sibling: [[archive/plans/2026-05-28-gemini-offload-pattern]] (governance.21) — Gemini offload triage is the *external* lever on token budget; this plan is the *internal* lever (use the harness's own newer scoping mechanisms).
 - Version confirmed current: `claude --version` → `2.1.153 (Claude Code)` at plan-write time. All six features available right now; no upgrade gate.
 
 **Acceptance criteria:**

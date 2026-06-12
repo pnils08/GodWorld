@@ -6,7 +6,7 @@ type: plan
 tags: [civic, engine, schema, architecture, active]
 sources:
   - "Research basis: [[../research/2026-06-01-initiative-tracker-state]] — the full diagnosis + read/write graph + blast-radius"
-  - "[[2026-05-11-civic-tracker-collision-schema]] — the trackerOwner WHO-writes contract (ES-5, done); this plan is the WHAT/lifecycle contract"
+  - "[[archive/plans/2026-05-11-civic-tracker-collision-schema]] — the trackerOwner WHO-writes contract (ES-5, done); this plan is the WHAT/lifecycle contract"
   - "output/production_log_city_hall_c95_run_gaps.md §G-R1 — silent-skip gap"
   - "phase02-world-state/applyInitiativeImplementationEffects.js — PHASE_INTENSITY (de-facto vocabulary authority)"
 pointers:
@@ -63,7 +63,7 @@ pointers:
 - **Goal:** agents stop drifting at the source.
 - **Deliverables (explicit named outputs):**
   - **D-3.1 — city-hall SKILL enforcement step.** Beyond the Phase-1 read-pointer: the tracker-write step instructs agents to emit a contract-valid phase, and what to do when their real-world phase isn't in the vocabulary (propose adding it to the contract — don't free-form). This is the behavior change that ends the drift.
-  - **D-3.2 — agent RULES phase-emission constraint.** The 5 project-agent RULES gain a §Phase constraint pointing at the contract vocabulary (sibling to the ES-5 trackerOwner §Pre-Write Constraint pattern from [[2026-05-11-civic-tracker-collision-schema]]).
+  - **D-3.2 — agent RULES phase-emission constraint.** The 5 project-agent RULES gain a §Phase constraint pointing at the contract vocabulary (sibling to the ES-5 trackerOwner §Pre-Write Constraint pattern from [[archive/plans/2026-05-11-civic-tracker-collision-schema]]).
   - **D-3.3 — writer normalization + validation gate (engine-sheet).** assembleDecisions/applyTrackerUpdates canonicalize phase to the vocabulary on write; restore a validation gate pointed at the **contract doc's list** (NOT the hardcoded enum S230 removed — the gate validates against D-1.1, which is maintainable).
 - **Status:** [ ] blocked on Phase 1
 

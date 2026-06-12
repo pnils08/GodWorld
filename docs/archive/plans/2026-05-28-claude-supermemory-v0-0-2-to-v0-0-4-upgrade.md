@@ -87,7 +87,7 @@ pointers:
 - `.claude/settings.local.json:8` (`super-search`)
 - `.claude/settings.local.json:9` (`super-save`)
 - `docs/reference/PROJECT_GOALS.md:207-209` (3 lines)
-- `docs/plans/2026-05-28-claude-supermemory-v0-0-2-to-v0-0-4-upgrade.md:74` (this plan)
+- `docs/archive/plans/2026-05-28-claude-supermemory-v0-0-2-to-v0-0-4-upgrade.md:74` (this plan)
 
 **Confirmation step at upgrade execution (Task 4):** read `/root/.claude/plugins/cache/supermemory-plugins/claude-supermemory/0.0.4/plugin/skills/` — if both `super-save/` and `supermemory-save/` directories exist (or symlinks/aliases), interpretation confirmed alias-additive. If only `supermemory-save/` exists, interpretation was wrong and updates required.
 

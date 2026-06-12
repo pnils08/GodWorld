@@ -5,8 +5,8 @@ updated: 2026-05-12
 type: reference
 tags: [media, evaluation, active]
 sources:
-  - "[[../plans/2026-05-10-skill-eval-expansion]] — parent plan (governance.2)"
-  - "[[../plans/skill-eval-framework]] — framework parent"
+  - "[[../archive/plans/2026-05-10-skill-eval-expansion]] — parent plan (governance.2)"
+  - "[[../archive/plans/skill-eval-framework]] — framework parent"
   - "[[story_evaluation]] — sibling assertion file (write-edition + sift)"
   - "[[../EDITION_PIPELINE]] §Published .txt Format Contract — filename + masthead rules"
   - "[[../canon/CANON_RULES]] — Tier 1-2 canon protected entities"
@@ -62,4 +62,4 @@ Testable assertions for `/skill-check interview <cycle>`. Each must be verifiabl
 _Updated by `/post-publish` Step 10 after each cycle. What changed and why._
 
 - S216 — Initial version (governance.2 close). 9 criteria covering theme statement, canon grounding, question progression, subject canon consistency, file paths, archetype-match, canon-substitute compliance, world-altering canon flagging, and voice differentiation. Voice differentiation (criterion 9) is the most subjective and most likely to need sharpening; the matchCitizenToJournalist_ archetype reference (criterion 6) depends on the helper existing — verify path before first run.
-- S233 — pipeline.30 alignment. /interview v2.0 capture-only architectural rewrite removed the article-write step; this rubric grades the transcript as the sole canonical artifact. §Goals updated to capture-only framing with pointer to downstream framing skills' rubrics (story_evaluation.md for /write-edition, equivalent for /write-supplemental). §Criteria header updated to single canonical filename pattern (`cycle_pulse_interview-transcript_*` not legacy bare `cycle_pulse_interview_*`). Criterion 5 rewritten — single artifact path, no companion article. Criterion 8 rewritten — canon-shift identifiable in transcript so downstream framer can pull it directly. Source: [[../plans/2026-05-24-pipeline-30-interview-rewrite]].
+- S233 — pipeline.30 alignment. /interview v2.0 capture-only architectural rewrite removed the article-write step; this rubric grades the transcript as the sole canonical artifact. §Goals updated to capture-only framing with pointer to downstream framing skills' rubrics (story_evaluation.md for /write-edition, equivalent for /write-supplemental). §Criteria header updated to single canonical filename pattern (`cycle_pulse_interview-transcript_*` not legacy bare `cycle_pulse_interview_*`). Criterion 5 rewritten — single artifact path, no companion article. Criterion 8 rewritten — canon-shift identifiable in transcript so downstream framer can pull it directly. Source: [[../archive/plans/2026-05-24-pipeline-30-interview-rewrite]].

@@ -4,7 +4,7 @@
 **Worker:** Bun service on port 37777 | **DB:** SQLite + Chroma at `~/.claude-mem/`
 **Role:** Work log — what happened, what was built, what went wrong. Complements Supermemory (the brain).
 
-> **Upgrade lineage:** v10.5.2 → v13.3.0 (three majors). Breaking-change scan + per-version migration table: [[plans/2026-05-28-claude-mem-v13-upgrade-evaluation]] §Breaking-change scan. All v11/v12/v13 migrations auto-ran on first restart (Migration 25 `platform_source` column, schema v31→v32 dead-column drops, one-shot v12.4.3 cleanup). Pre-upgrade insurance: full 2.2 GB store backed up to `/root/.claude-mem.bak-S241/`; old `10.5.2` plugin cache retained for rollback.
+> **Upgrade lineage:** v10.5.2 → v13.3.0 (three majors). Breaking-change scan + per-version migration table: [[archive/plans/2026-05-28-claude-mem-v13-upgrade-evaluation]] §Breaking-change scan. All v11/v12/v13 migrations auto-ran on first restart (Migration 25 `platform_source` column, schema v31→v32 dead-column drops, one-shot v12.4.3 cleanup). Pre-upgrade insurance: full 2.2 GB store backed up to `/root/.claude-mem.bak-S241/`; old `10.5.2` plugin cache retained for rollback.
 
 ## Post-upgrade gotcha (S242) — missing zod
 
@@ -58,7 +58,7 @@ This is the structured work history at the top of every conversation. It shows ~
 
 ## Skills (Non-Memory)
 
-Claude-mem bundles code/workflow tools. v13.3.0 ships a much larger set than v10.5.2 (added: `oh-my-issues`, `design-is`, `pathfinder`, `learn-codebase`, `knowledge-agent`, `timeline-report`, `weekly-digests`, `wowerpoint`, `babysit`, `version-bump`, `how-it-works`). **The two GodWorld previously fit-checked both came back SKIP** — `oh-my-issues` assumes GitHub-issues-as-source-of-truth (project tracks defects in files), `design-is` audits against Dieter Rams (wrong lineage for newspaper-layout editions). Verdicts: [[plans/2026-05-28-claude-mem-v13-upgrade-evaluation]] §oh-my-issues + §design-is.
+Claude-mem bundles code/workflow tools. v13.3.0 ships a much larger set than v10.5.2 (added: `oh-my-issues`, `design-is`, `pathfinder`, `learn-codebase`, `knowledge-agent`, `timeline-report`, `weekly-digests`, `wowerpoint`, `babysit`, `version-bump`, `how-it-works`). **The two GodWorld previously fit-checked both came back SKIP** — `oh-my-issues` assumes GitHub-issues-as-source-of-truth (project tracks defects in files), `design-is` audits against Dieter Rams (wrong lineage for newspaper-layout editions). Verdicts: [[archive/plans/2026-05-28-claude-mem-v13-upgrade-evaluation]] §oh-my-issues + §design-is.
 
 | Skill | Purpose | Overlap |
 |-------|---------|---------|
@@ -91,7 +91,7 @@ Settings at `~/.claude-mem/settings.json`:
 | Setting | Current Value | Notes |
 |---------|--------------|-------|
 | `CLAUDE_MEM_MODEL` | `claude-sonnet-4-6` | Model used for observation summarization. **Cost concern — see below.** |
-| `CLAUDE_MEM_PROVIDER` | `openrouter` | AI provider for summarization. **Live value drifted from `claude` → `openrouter`** (model row still says sonnet; `CLAUDE_MEM_OPENROUTER_MODEL=deepseek/deepseek-chat:free`). Both `CLAUDE_MEM_OPENROUTER_API_KEY` and `CLAUDE_MEM_GEMINI_API_KEY` are **empty** in `settings.json`; `CLAUDE_MEM_CLAUDE_AUTH_METHOD=cli` is also set. Which path actually runs at summarization time is unverified as of S242 — flagged, not resolved. v13's local mode does **not** expose the server-beta multi-provider routing ([[plans/2026-05-28-claude-mem-v13-upgrade-evaluation]] §Multi-provider verdict: DEFER). |
+| `CLAUDE_MEM_PROVIDER` | `openrouter` | AI provider for summarization. **Live value drifted from `claude` → `openrouter`** (model row still says sonnet; `CLAUDE_MEM_OPENROUTER_MODEL=deepseek/deepseek-chat:free`). Both `CLAUDE_MEM_OPENROUTER_API_KEY` and `CLAUDE_MEM_GEMINI_API_KEY` are **empty** in `settings.json`; `CLAUDE_MEM_CLAUDE_AUTH_METHOD=cli` is also set. Which path actually runs at summarization time is unverified as of S242 — flagged, not resolved. v13's local mode does **not** expose the server-beta multi-provider routing ([[archive/plans/2026-05-28-claude-mem-v13-upgrade-evaluation]] §Multi-provider verdict: DEFER). |
 | `CLAUDE_MEM_CONTEXT_OBSERVATIONS` | `50` | Observations loaded at boot |
 | `CLAUDE_MEM_WORKER_PORT` | `37777` | Worker HTTP API port |
 | `CLAUDE_MEM_SKIP_TOOLS` | ListMcpResourcesTool, SlashCommand, Skill, TodoWrite, AskUserQuestion | Tools excluded from capture |

@@ -162,7 +162,7 @@ Side-effect-free dry-run. Cycle hygiene.
 
 When civic.9a ships (this plan file lands + ROLLOUT pointer wired), follow-up skill-text edits land in a separate research-build commit:
 
-- **`.claude/skills/city-hall/SKILL.md` §Step 2 (Write Pending Decisions):** add explicit instruction to voice agents: "Your statement must include `trackerOwner: 'primary' | 'secondary' | 'advisory'` per the civic-tracker-collision schema. Default ownership table per agent class lives in `docs/plans/2026-05-11-civic-tracker-collision-schema.md` §Default ownership."
+- **`.claude/skills/city-hall/SKILL.md` §Step 2 (Write Pending Decisions):** add explicit instruction to voice agents: "Your statement must include `trackerOwner: 'primary' | 'secondary' | 'advisory'` per the civic-tracker-collision schema. Default ownership table per agent class lives in `docs/archive/plans/2026-05-11-civic-tracker-collision-schema.md` §Default ownership."
 - **`.claude/skills/city-hall/SKILL.md` §Step 4 (Run Remaining Voices):** replace "build cascade block + append to all downstream voices" with "invoke `scripts/cascadeMayorDecisions.js {cycle}` to write targeted cascade blocks per the routing table."
 - **Voice agent RULES.md files** (Mayor, Okoro, Chief, DA, factions, projects): add §`trackerOwner` field section pointing at this spec + the default-ownership table.
 

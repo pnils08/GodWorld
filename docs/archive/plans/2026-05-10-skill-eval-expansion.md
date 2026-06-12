@@ -164,7 +164,7 @@ pointers:
 
 - **Files:**
   - `docs/index.md` — add 3 entries
-  - `docs/plans/skill-eval-framework.md` — append changelog entry
+  - `docs/archive/plans/skill-eval-framework.md` — append changelog entry
   - `docs/engine/ROLLOUT_PLAN.md` — flip `governance.2` state to in-progress (or done-pending-archive after Tasks 7-8 succeed)
   - `docs/engine/ROLLOUT_PLAN.md` — Changelog entry
 - **Steps:**

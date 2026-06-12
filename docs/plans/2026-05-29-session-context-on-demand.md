@@ -5,16 +5,16 @@ updated: 2026-05-29
 type: plan
 tags: [architecture, infrastructure, boot-arch, governance, draft]
 sources:
-  - docs/plans/2026-05-29-c95-gap-log-triage.md §RB-6 (origin — design direction extracted here)
+  - docs/archive/plans/2026-05-29-c95-gap-log-triage.md §RB-6 (origin — design direction extracted here)
   - output/production_log_session_end_c95_gaps.md (G-SE5 — SESSION_CONTEXT 98KB, rotation opt-in never fires)
   - output/production_log_session-startup_c95_gaps.md (G-SS5 — boot read cost)
-  - docs/plans/2026-05-23-session-end-collapse.md (sessionEndMechanical.js — where snapshot+reset lands)
+  - docs/archive/plans/2026-05-23-session-end-collapse.md (sessionEndMechanical.js — where snapshot+reset lands)
   - docs/BOOT_ARCHITECTURE.md (boot-handoff primitive this changes)
   - S243 Mike directive — "session that spans soft closes; hard close ends it; snapshot SESSION_CONTEXT_S## wiki-referenceable; auto-boot is contingent-relevance noise; on-demand document"
 pointers:
   - "[[TEMPLATE]] — plan shape"
   - "[[../engine/ROLLOUT_PLAN]] — single pointer row (governance.26)"
-  - "[[2026-05-29-c95-gap-log-triage]] — RB-6 points here; origin of the concept"
+  - "[[archive/plans/2026-05-29-c95-gap-log-triage]] — RB-6 points here; origin of the concept"
   - "[[../BOOT_ARCHITECTURE]] — boot sequence this rewrites"
   - "[[../index]] — registered same commit"
 ---
@@ -28,8 +28,8 @@ pointers:
 **Terminal:** research-build (ADR + hook + CLAUDE.md + TERMINAL.md + skill text + convention) + engine-sheet (`sessionEndMechanical.js` snapshot+reset + span-length guard).
 
 **Pointers:**
-- Origin: [[2026-05-29-c95-gap-log-triage]] §RB-6 (concept captured there; this plan extracts + commits to it).
-- Mechanics home: [[2026-05-23-session-end-collapse]] (`scripts/sessionEndMechanical.js`).
+- Origin: [[archive/plans/2026-05-29-c95-gap-log-triage]] §RB-6 (concept captured there; this plan extracts + commits to it).
+- Mechanics home: [[archive/plans/2026-05-23-session-end-collapse]] (`scripts/sessionEndMechanical.js`).
 - Boot spec: [[../BOOT_ARCHITECTURE]].
 - Sibling plans (to come): ROLLOUT on-demand redesign, JOURNAL on-demand redesign.
 
@@ -136,5 +136,5 @@ Surfaced live S243: two terminals soft-closing concurrently both tried to write 
 
 ## Changelog
 
-- 2026-05-29 — Initial draft (S243, research-build). Extracted from [[2026-05-29-c95-gap-log-triage]] §RB-6 per Mike's S243 directive to file it as its own plan. Four prior open questions resolved as decisions D1–D4 (defaults, Mike-overridable). First of a three-part log-system redesign (ROLLOUT + JOURNAL siblings to follow). ROLLOUT pointer row governance.26.
+- 2026-05-29 — Initial draft (S243, research-build). Extracted from [[archive/plans/2026-05-29-c95-gap-log-triage]] §RB-6 per Mike's S243 directive to file it as its own plan. Four prior open questions resolved as decisions D1–D4 (defaults, Mike-overridable). First of a three-part log-system redesign (ROLLOUT + JOURNAL siblings to follow). ROLLOUT pointer row governance.26.
 - 2026-05-29 — Added Task 6 (unified-close write-ownership protocol) after the hazard surfaced live during the S243 unified close: two terminals raced the `SESSION_CONTEXT.md` write, second writer lost the edit race twice. The span model needs a single-writer rule per close window — Mike approved adding it here (S243).

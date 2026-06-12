@@ -7,13 +7,13 @@ tags: [infrastructure, memory, supermemory, active]
 sources:
   - docs/engine/ROLLOUT_PLAN.md §infrastructure.4 (writer-hook disable, engine-sheet — partially closed S221+)
   - docs/engine/ROLLOUT_PLAN.md §governance.12 (pipeline doc + leverage design, research-build)
-  - docs/plans/2026-05-13-supermemory-profile-leverage.md (sibling plan — leverage design)
+  - docs/archive/plans/2026-05-13-supermemory-profile-leverage.md (sibling plan — leverage design)
   - docs/SUPERMEMORY.md (parent reference)
   - Mike framing 2026-05-22: "We are using MDs for personas and rules, etc... your memory and persistence is getting really good so I'm open to improvements and setting aside a session to optimize supermemory as its main purpose is AI memory"
 pointers:
   - "[[engine/ROLLOUT_PLAN]] — infrastructure.5 row (parent)"
   - "[[engine/ROLLOUT_PLAN]] — infrastructure.4 (paired — writer-hook fix; this plan informs scope)"
-  - "[[plans/2026-05-13-supermemory-profile-leverage]] — sibling plan (governance.12)"
+  - "[[archive/plans/2026-05-13-supermemory-profile-leverage]] — sibling plan (governance.12)"
   - "[[SUPERMEMORY]] — canonical reference; audit findings update this doc"
   - "[[index]] — register in same commit"
 ---
@@ -199,7 +199,7 @@ The container's `~/.supermemory-claude/settings.json` writer-hook neutralization
 
 **Rule:** Any auto-save writer path landing content in a container that has identity-extracting readers (currently: `mags`) MUST save only content authored by the speaker that container represents. Mike's content (Discord messages, frustrations, opinions, corrections) never auto-routes to mags — it gets dropped, routed to a different container that doesn't auto-extract first-person identity, OR transformed through an explicit voice barrier (e.g., Mags writes a reflection ABOUT the conversation, but the reflection's voice is Mags-first-person, not auto-extracted from Mike's words).
 
-The constraint applies at the WRITER side (entry point). Reader-side guards (denylist, length cap, first-person-framing filter) live in [[2026-05-13-supermemory-profile-leverage]] (`governance.12`) — those address what gets promoted to static User Profile from already-written dynamic entries. ADR-0008 establishes the writer-side invariant; governance.12 designs the reader-side filter; `infrastructure.4` implements/disables writers per ADR.
+The constraint applies at the WRITER side (entry point). Reader-side guards (denylist, length cap, first-person-framing filter) live in [[archive/plans/2026-05-13-supermemory-profile-leverage]] (`governance.12`) — those address what gets promoted to static User Profile from already-written dynamic entries. ADR-0008 establishes the writer-side invariant; governance.12 designs the reader-side filter; `infrastructure.4` implements/disables writers per ADR.
 
 ### Violation examples
 
@@ -215,7 +215,7 @@ Three candidate writer-side patterns considered:
 | Option | Shape | Trade-off | Verdict |
 |---|---|---|---|
 | (a) Writer splits each turn into per-speaker chunks before saving | Each turn produces N docs, one per speaker, each speaker-tagged | High overhead; doc count inflates; complicates retrieval | rejected |
-| (b) Writer only saves designated-speaker content to person-tagged containers | mags writer drops Mike content (or routes to a separate container); Mike-tagged container receives Mike content if needed | Cleanest invariant; aligns with deliberate-write protocol [[2026-05-13-supermemory-profile-leverage]] §AC2(b) | **adopted** |
+| (b) Writer only saves designated-speaker content to person-tagged containers | mags writer drops Mike content (or routes to a separate container); Mike-tagged container receives Mike content if needed | Cleanest invariant; aligns with deliberate-write protocol [[archive/plans/2026-05-13-supermemory-profile-leverage]] §AC2(b) | **adopted** |
 | (c) Writer tags speaker as metadata; downstream consumers handle routing | Saves both speakers' content, relies on consumer-side filter | Defers the problem; same failure mode S221 surfaced (consumer didn't filter) | rejected |
 
 **Adopted:** (b) Writer-side speaker check is a precondition for any auto-save path landing in a person-tagged container with identity-extracting readers. Manual deliberate-write skills (e.g., `/save-to-mags`) trust the operator's voice judgment; auto-save paths require structural enforcement.

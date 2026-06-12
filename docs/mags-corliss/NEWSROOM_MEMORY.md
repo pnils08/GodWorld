@@ -126,7 +126,7 @@
 - DJ RULES.md §Subject Class Constraints (S229) — the visual-side enforcement at spec-compose time.
 - /edition-print SKILL.md Step 6 (S229) — the eval-side check on canon-tone via photoQA CANON-TONE axis (S229) + operator visual review.
 
-**Cross-link:** pipeline.29 research-build slice plan (`docs/plans/2026-05-23-pipeline-29-research-build.md`), G-PR8 in `output/production_log_edition_c94_print_gaps.md`.
+**Cross-link:** pipeline.29 research-build slice plan (`docs/archive/plans/2026-05-23-pipeline-29-research-build.md`), G-PR8 in `output/production_log_edition_c94_print_gaps.md`.
 
 ---
 

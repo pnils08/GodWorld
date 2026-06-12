@@ -6,7 +6,7 @@ type: reference
 tags: [architecture, infrastructure, boot-arch, governance, decision, active]
 sources:
   - "[[../plans/2026-05-29-session-context-on-demand]] — implementation plan (this ADR is Task 1)"
-  - "[[../plans/2026-05-29-c95-gap-log-triage]] §RB-6 — origin of the concept"
+  - "[[../archive/plans/2026-05-29-c95-gap-log-triage]] §RB-6 — origin of the concept"
   - "output/production_log_session_end_c95_gaps.md G-SE5 — SESSION_CONTEXT 98KB, rotation opt-in never fires"
   - "[[../BOOT_ARCHITECTURE]] — the boot sequence this reverses"
   - "[[adr/0001-adopt-context-and-adrs]] — ADR bar"

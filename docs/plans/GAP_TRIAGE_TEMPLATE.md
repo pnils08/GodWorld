@@ -10,7 +10,7 @@ sources:
 pointers:
   - "[[GAP_LOG_TRIAGE_PLAYBOOK]] — THE METHOD (8 steps). Run it; this file is just the shape it fills."
   - "[[TEMPLATE]] — the generic plan shape this specializes"
-  - "[[2026-05-29-c95-gap-log-triage]] — canonical worked example (model on this, NOT C94)"
+  - "[[archive/plans/2026-05-29-c95-gap-log-triage]] — canonical worked example (model on this, NOT C94)"
   - "[[../engine/ROLLOUT_PLAN]] — ONE pointer row lands here"
   - "[[../engine/rollout-rules]] — doctrine (§2 triage = the bridge)"
 ---

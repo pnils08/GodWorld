@@ -5,8 +5,8 @@ updated: 2026-05-12
 type: reference
 tags: [civic, media, evaluation, active]
 sources:
-  - "[[../plans/2026-05-10-skill-eval-expansion]] — parent plan (governance.2)"
-  - "[[../plans/skill-eval-framework]] — framework parent"
+  - "[[../archive/plans/2026-05-10-skill-eval-expansion]] — parent plan (governance.2)"
+  - "[[../archive/plans/skill-eval-framework]] — framework parent"
   - "[[story_evaluation]] — sibling assertion file (write-edition + sift)"
   - "[[../../.claude/rules/civic]] — civic cascade discipline + faction architecture"
   - "[[../canon/CANON_RULES]] — Tier 2 canon-substitute rule"

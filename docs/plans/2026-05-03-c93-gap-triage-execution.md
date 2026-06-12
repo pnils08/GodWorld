@@ -255,7 +255,7 @@ Group ~25 engine-sheet gaps into 8 clean bundles. Each bundle = one ROLLOUT entr
 ### Task 4.3: ROLLOUT triage cadence plan
 
 - **Files:**
-  - `docs/plans/2026-05-03-rollout-triage-cadence.md` — created S197, READY S198
+  - `docs/archive/plans/2026-05-03-rollout-triage-cadence.md` — created S197, READY S198
 - **Bundle:** G-W16 meta-pattern. All 5 Phase 1 open questions closed S198 via blanket approval (trailing inline tag / STALE-2C threshold / in-place flag / explicit PARKED override / /session-end scan).
 - **Status:** [x] Plan READY S198, Phase 2-4 builds unblocked
 

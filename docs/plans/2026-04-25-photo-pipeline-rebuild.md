@@ -14,7 +14,7 @@ sources:
 pointers:
   - "[[engine/ROLLOUT_PLAN]] — parent rollout"
   - "[[EDITION_PIPELINE]] — pipeline map"
-  - "[[plans/2026-04-25-canon-fidelity-rollout]] — DJ four-file structure source (S174/S175)"
+  - "[[archive/plans/2026-04-25-canon-fidelity-rollout]] — DJ four-file structure source (S174/S175)"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — register here in same commit"
 ---
@@ -31,7 +31,7 @@ pointers:
 - Parent rollout entry: [[engine/ROLLOUT_PLAN]] §Edition Production → REBUILD: Photo pipeline (HIGH)
 - Pipeline map: [[EDITION_PIPELINE]] §Post-Edition Add-Ons
 - DJ agent files (LOCKED — see Guardrail): `.claude/agents/dj-hartley/{IDENTITY,LENS,RULES,SKILL}.md`
-- Canon-fidelity rollout (DJ source): [[plans/2026-04-25-canon-fidelity-rollout]]
+- Canon-fidelity rollout (DJ source): [[archive/plans/2026-04-25-canon-fidelity-rollout]]
 - S170 feedback: `docs/mags-corliss/NEWSROOM_MEMORY.md` E92 entry
 
 **Acceptance criteria:**

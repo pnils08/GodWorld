@@ -102,7 +102,7 @@ Project Knowledge: *"Voice hardening occurs within the first 50 Moltbook posts."
 - **Steps:**
   1. Open `docs/index.md`, locate the appropriate top-level docs section (where `docs/STACK.md` / `docs/OPERATIONS.md` / `docs/SUPERMEMORY.md` are listed — top-level project reference docs, not under `docs/plans/`).
   2. Add a line entry: `**[[GEMINI_OFFLOAD]]** — Gemini offload triage. Three permissible offload paths (Apps Script side panel, Sheets formula sidebar, Drive Docs for tier-4 content), no-go zone (canon-bearing work + reviewer lanes + EIC seat), Moltbook voice-hardening caveat. Companion to the S241 boot-burn gap log. *(reference, governance, infrastructure, token-budget, active)*`
-  3. Add a line entry under `docs/plans/` for this plan file: `**[[plans/2026-05-28-gemini-offload-pattern]]** — Gemini offload pattern. governance.21. 3 tasks: create GEMINI_OFFLOAD.md / add Apps Script side-panel workflow to engine-sheet TERMINAL.md / index registration. Source: S241 conversation. *(plan, governance, infrastructure, active)*`
+  3. Add a line entry under `docs/plans/` for this plan file: `**[[archive/plans/2026-05-28-gemini-offload-pattern]]** — Gemini offload pattern. governance.21. 3 tasks: create GEMINI_OFFLOAD.md / add Apps Script side-panel workflow to engine-sheet TERMINAL.md / index registration. Source: S241 conversation. *(plan, governance, infrastructure, active)*`
 - **Verify:** `grep -c 'GEMINI_OFFLOAD' docs/index.md` → 1. `grep -c '2026-05-28-gemini-offload-pattern' docs/index.md` → 1.
 - **Status:** [x] DONE 2026-05-28 (S241) — both entries shipped: plan-file entry at initial filing commit; GEMINI_OFFLOAD.md entry in same commit as Task 1.
 
@@ -114,7 +114,7 @@ Project Knowledge: *"Voice hardening occurs within the first 50 Moltbook posts."
   1. Open `docs/engine/ROLLOUT_PLAN.md`, locate the `### governance.* — Skills, MDs, ADRs, project hygiene` group.
   2. Append a new row after the last governance entry (currently governance.20):
      ```
-     | governance.21 | Gemini offload pattern — document the triage for moving Google-environment-native work (Apps Script side panel, Sheets formula sidebar, Drive Docs for tier-4 content) to Gemini; canon-bearing work + reviewer lanes + EIC seat + architecture stay Claude. Source: S241 token-burn conversation. Companion to the S241 boot-burn gap log (Claude-side per-boot recovery via G-SS1 identity.md split + G-SS7 MEMORY.md overflow trim + G-SS8 skill ↔ hook duplication guard). 3 small tasks: create `docs/GEMINI_OFFLOAD.md` / add §Apps Script Side-Panel Workflow to engine-sheet TERMINAL.md / index + ROLLOUT registration. | ready | research-build | [[../plans/2026-05-28-gemini-offload-pattern]] |
+     | governance.21 | Gemini offload pattern — document the triage for moving Google-environment-native work (Apps Script side panel, Sheets formula sidebar, Drive Docs for tier-4 content) to Gemini; canon-bearing work + reviewer lanes + EIC seat + architecture stay Claude. Source: S241 token-burn conversation. Companion to the S241 boot-burn gap log (Claude-side per-boot recovery via G-SS1 identity.md split + G-SS7 MEMORY.md overflow trim + G-SS8 skill ↔ hook duplication guard). 3 small tasks: create `docs/GEMINI_OFFLOAD.md` / add §Apps Script Side-Panel Workflow to engine-sheet TERMINAL.md / index + ROLLOUT registration. | ready | research-build | [[../archive/plans/2026-05-28-gemini-offload-pattern]] |
      ```
   3. Do not touch existing rows.
 - **Verify:** `grep -c 'governance.21' docs/engine/ROLLOUT_PLAN.md` → 1.

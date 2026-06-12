@@ -11,7 +11,7 @@ sources:
   - docs/engine/ROLLOUT_PLAN.md §Infrastructure D4 entry (S187)
 pointers:
   - "[[CLAUDE-MEM]] — claude-mem architecture reference"
-  - "[[plans/skill-eval-framework]] — destination for the borrow-able primitives, not claude-mem"
+  - "[[archive/plans/skill-eval-framework]] — destination for the borrow-able primitives, not claude-mem"
   - "[[engine/ROLLOUT_PLAN]] — D4 entry being closed by this comparison"
   - "[[comparisons/README]] — folder purpose"
 ---
@@ -20,13 +20,13 @@ pointers:
 
 **The S187 research prompt:** *"Walk ECC v2 spec, compare to claude-mem's actual storage shape, decide if there's a meaningful upgrade path or if claude-mem's simpler model is enough."* This file closes that prompt.
 
-**Verdict at the top:** claude-mem's simpler model is enough for its use case. ECC v2 is solving a different problem; it isn't claude-mem's upgrade path. The one borrow-able primitive (confidence scoring) belongs in [[plans/skill-eval-framework]], not in claude-mem.
+**Verdict at the top:** claude-mem's simpler model is enough for its use case. ECC v2 is solving a different problem; it isn't claude-mem's upgrade path. The one borrow-able primitive (confidence scoring) belongs in [[archive/plans/skill-eval-framework]], not in claude-mem.
 
 ---
 
 ## Why this comparison
 
-The S187 ROLLOUT entry framed ECC v2 as a possible upgrade target for claude-mem — calling out four specific mechanisms claude-mem was missing: 100%-deterministic Pre/PostToolUse capture, atomic instincts with confidence 0.3–0.9, decay-on-contradiction, aggregation into skills/commands. The S187 instinct also flagged confidence-scoring as the missing primitive for `[[plans/skill-eval-framework]]`.
+The S187 ROLLOUT entry framed ECC v2 as a possible upgrade target for claude-mem — calling out four specific mechanisms claude-mem was missing: 100%-deterministic Pre/PostToolUse capture, atomic instincts with confidence 0.3–0.9, decay-on-contradiction, aggregation into skills/commands. The S187 instinct also flagged confidence-scoring as the missing primitive for `[[archive/plans/skill-eval-framework]]`.
 
 Walking ECC v2.1's actual SKILL.md changes the framing.
 
@@ -118,11 +118,11 @@ The intended *consumer* is different. claude-mem feeds agent context invisibly v
 
 ### 1. Confidence scoring — **REAL gap, but in skill-eval, NOT claude-mem.**
 
-S187's instinct was correct: confidence-scoring is the missing primitive. But it's missing in `[[plans/skill-eval-framework]]`, not in claude-mem. claude-mem's observations are post-hoc summaries of what happened — not action-patterns being scored on whether they succeed when applied. Without a "skill fired → outcome was X" feedback signal, there's nothing to score.
+S187's instinct was correct: confidence-scoring is the missing primitive. But it's missing in `[[archive/plans/skill-eval-framework]]`, not in claude-mem. claude-mem's observations are post-hoc summaries of what happened — not action-patterns being scored on whether they succeed when applied. Without a "skill fired → outcome was X" feedback signal, there's nothing to score.
 
 Skill-eval is the right home: assertion files exist (story_evaluation, brief_template, citizen_selection), `/skill-check` is shipped, what's missing is per-assertion confidence accumulating over runs. ECC v2's instinct shape (id, trigger, confidence 0.3–0.9, source) maps directly to "assertion id, trigger pattern, current confidence, last source cycle."
 
-**Action:** note ECC v2 confidence shape as reference in `[[plans/skill-eval-framework]]` when that picks up.
+**Action:** note ECC v2 confidence shape as reference in `[[archive/plans/skill-eval-framework]]` when that picks up.
 
 ### 2. Decay-on-contradiction — low priority
 
@@ -153,7 +153,7 @@ We author skills with human judgment + grilling sessions. Auto-clustering instin
 ## Action items
 
 - ROLLOUT D4 entry → `done-pending-archive` (this comparison closes it).
-- When `[[plans/skill-eval-framework]]` picks up, add a "Reference: ECC v2.1 instinct YAML shape" note in the plan — `id`/`trigger`/`confidence`/`source` fields map directly onto per-assertion confidence accumulation.
+- When `[[archive/plans/skill-eval-framework]]` picks up, add a "Reference: ECC v2.1 instinct YAML shape" note in the plan — `id`/`trigger`/`confidence`/`source` fields map directly onto per-assertion confidence accumulation.
 
 ---
 

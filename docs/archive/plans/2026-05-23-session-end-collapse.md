@@ -228,7 +228,7 @@ The model-quality `<one-line summary>` heading style used by existing SESSION_HI
 
 - **Files:**
   - `scripts/sessionEndMechanical.js` (new)
-  - `docs/plans/2026-05-23-session-end-collapse.md` (new — this file)
+  - `docs/archive/plans/2026-05-23-session-end-collapse.md` (new — this file)
   - `docs/index.md` (registration entry)
 - **Steps:**
   1. Stage path-specifically.
@@ -272,8 +272,8 @@ The model-quality `<one-line summary>` heading style used by existing SESSION_HI
   - `docs/index.md` — add plan entry
   - `docs/engine/ROLLOUT_PLAN.md` — flip governance.7 ready → done-pending-archive with closure details
 - **Steps:**
-  1. `docs/index.md` under `docs/plans/`: `- **[[plans/2026-05-23-session-end-collapse]]** — /session-end ritual collapse plan (governance.7). 4 model + 1 mechanical. *(plan, infrastructure, active)*`
-  2. `docs/engine/ROLLOUT_PLAN.md` governance.7 row: state `ready` → `done-pending-archive`; pointer block to `[[../plans/2026-05-23-session-end-collapse]]`; closure summary inline (commits + acceptance evidence + v1.0 ship vs deferred items).
+  1. `docs/index.md` under `docs/plans/`: `- **[[archive/plans/2026-05-23-session-end-collapse]]** — /session-end ritual collapse plan (governance.7). 4 model + 1 mechanical. *(plan, infrastructure, active)*`
+  2. `docs/engine/ROLLOUT_PLAN.md` governance.7 row: state `ready` → `done-pending-archive`; pointer block to `[[../archive/plans/2026-05-23-session-end-collapse]]`; closure summary inline (commits + acceptance evidence + v1.0 ship vs deferred items).
 - **Verify:** `grep -n "governance.7" docs/engine/ROLLOUT_PLAN.md` shows the done-pending-archive row.
 - **Status:** [ ] not started
 

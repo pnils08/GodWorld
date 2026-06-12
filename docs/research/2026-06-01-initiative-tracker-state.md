@@ -12,7 +12,7 @@ sources:
   - output/production_log_city_hall_c95_run_gaps.md §G-R1 (the silent-skip gap)
   - docs/mara-vance/INITIATIVE_TRACKER_VOTER_LOGIC.md (Status lifecycle + STALE 17-col schema)
   - docs/mara-vance/CIVIC_GOVERNANCE_MASTER_REFERENCE.md §Initiative Status Lifecycle
-  - docs/plans/2026-05-11-civic-tracker-collision-schema.md (trackerOwner = who-writes contract)
+  - docs/archive/plans/2026-05-11-civic-tracker-collision-schema.md (trackerOwner = who-writes contract)
   - .claude/agent-memory/health-center/MEMORY.md (drift source — agent mints its own phase strings)
 pointers:
   - "[[../engine/ROLLOUT_PLAN]] — pending-state home"

@@ -96,7 +96,7 @@ pointers:
 ### Task 2.2: Define classification buckets
 
 - **Files:**
-  - `docs/plans/2026-05-05-disk-inventory-and-dead-file-detection.md` — modify (this section, replace with locked taxonomy)
+  - `docs/archive/plans/2026-05-05-disk-inventory-and-dead-file-detection.md` — modify (this section, replace with locked taxonomy)
 - **Steps:**
   1. Lock the four buckets:
      - **load-bearing** — `refCount > 0` AND `mtime` within 30 days

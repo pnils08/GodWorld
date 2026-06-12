@@ -6,14 +6,14 @@ type: reference
 tags: [architecture, process, governance, active]
 sources:
   - docs/plans/2026-05-22-c94-gap-log-triage.md (C94 worked example — analysis method)
-  - docs/plans/2026-05-29-c95-gap-log-triage.md (C95 worked example — two-track phased model)
+  - docs/archive/plans/2026-05-29-c95-gap-log-triage.md (C95 worked example — two-track phased model)
   - docs/plans/GAP_LOG_TEMPLATE.md (sibling — how to write ONE gap log)
   - docs/plans/TEMPLATE.md (sibling — the plan shape this method outputs)
   - S243 Mike directive — "phase out the work on a logical plan … work completed per plan.md and summarized to rollout … 2 terminals carry out the work, research-build and engine-sheet … keep 2 instances more aligned with the work of their expertise"
 pointers:
   - "[[GAP_LOG_TEMPLATE]] — how to write one gap log (input to this method)"
   - "[[TEMPLATE]] — the plan shape this method produces"
-  - "[[2026-05-29-c95-gap-log-triage]] — canonical worked example"
+  - "[[archive/plans/2026-05-29-c95-gap-log-triage]] — canonical worked example"
   - "[[../engine/ROLLOUT_PLAN]] — where the single pointer row lands"
   - "[[../adr/0005-rollout-plan-structure]] — pointer-not-notes rollout discipline"
   - "[[../index]] — register here"
@@ -96,4 +96,4 @@ As each phase ships, the executing instance adds a one-line summary to the singl
 
 ## Changelog
 
-- 2026-05-29 — Initial draft (S243, research-build). Generalized from two worked examples: [[2026-05-22-c94-gap-log-triage]] (analysis method) + [[2026-05-29-c95-gap-log-triage]] (two-track phased model + single-row discipline). Written per Mike's S243 directive to capture the gap-log-work logic for reuse.
+- 2026-05-29 — Initial draft (S243, research-build). Generalized from two worked examples: [[2026-05-22-c94-gap-log-triage]] (analysis method) + [[archive/plans/2026-05-29-c95-gap-log-triage]] (two-track phased model + single-row discipline). Written per Mike's S243 directive to capture the gap-log-work logic for reuse.

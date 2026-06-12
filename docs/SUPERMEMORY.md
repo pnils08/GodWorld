@@ -225,7 +225,7 @@ Empirical (S183 M1-M4 commit `c77cb37`): Masjid Al-Islam `wd-faith` query return
 
 ## User Profile Pipeline (S221 — third auto-memory layer)
 
-The plugin runs two paired hooks that together form the **identity-layer auto-memory loop** — the third auto-memory layer alongside claude-mem (what-happened) and autodream (claude-mem consolidation), and the only one that lands as **persistent identity at every boot**. Documented S221 after the engineer-Mags contamination case revealed the pipeline had been operating undocumented for months. Leverage design pending in `[[plans/2026-05-13-supermemory-profile-leverage]]` (governance.12).
+The plugin runs two paired hooks that together form the **identity-layer auto-memory loop** — the third auto-memory layer alongside claude-mem (what-happened) and autodream (claude-mem consolidation), and the only one that lands as **persistent identity at every boot**. Documented S221 after the engineer-Mags contamination case revealed the pipeline had been operating undocumented for months. Leverage design pending in `[[archive/plans/2026-05-13-supermemory-profile-leverage]]` (governance.12).
 
 ### Writer — Stop hook (`summary-hook.cjs`)
 
@@ -275,7 +275,7 @@ The `customId = session-UUID` invariant means deleting the session_turn doc woul
 
 ### Leverage — cross-boot verified S235
 
-Phase 2 of `[[plans/2026-05-13-supermemory-profile-leverage]]` (governance.12) closed S235 with three confirmed findings from a 11-day + many-fresh-boot verification window:
+Phase 2 of `[[archive/plans/2026-05-13-supermemory-profile-leverage]]` (governance.12) closed S235 with three confirmed findings from a 11-day + many-fresh-boot verification window:
 
 1. **Deliberate `--static` writes persist cross-boot.** Two protective entries written via `npx supermemory remember --tag mags --static "..."` at S221 still auto-load in the SessionStart Personal Memories block 11 days later. Surface is reliable.
 2. **Server-side auto-promotion from dynamic → static does NOT happen on its own.** A non-static marker entry (Test 2, `cinnabar-fluoride-jaywalker-22`) remained in the dynamic array unchanged for 11 days + dozens of boots. Broader sweep: zero "Mags Corliss [verb]" pattern dynamic entries from 2026-03-22 onwards (months, many sessions) have promoted to static at any timescale tested.
@@ -406,7 +406,7 @@ File: `.claude/.supermemory-claude/config.json` (gitignored)
 
 `personalContainerTag` → `mags` (deliberate brain). `repoContainerTag` → `super-memory` (junk drawer). This means `/super-save` writes to `super-memory` by default, keeping `mags` clean. `/super-search --user` hits `mags`, `--repo` hits `super-memory`. Use `/save-to-mags` for deliberate brain saves. Use `/save-to-bay-tribune` for canon saves.
 
-**Plugin version: `claude-supermemory` v0.0.4** (upgraded from 0.0.2 S241, restart-applied + smoke-tested S242 — project-scope; cloud client, no local store to migrate). Old `0.0.2` cache retained for rollback. Upgrade detail: [[plans/2026-05-28-claude-supermemory-v0-0-2-to-v0-0-4-upgrade]].
+**Plugin version: `claude-supermemory` v0.0.4** (upgraded from 0.0.2 S241, restart-applied + smoke-tested S242 — project-scope; cloud client, no local store to migrate). Old `0.0.2` cache retained for rollback. Upgrade detail: [[archive/plans/2026-05-28-claude-supermemory-v0-0-2-to-v0-0-4-upgrade]].
 
 **Source attribution (new in 0.0.4):** the writer scripts (`add-memory.cjs`, `save-project-memory.cjs`) now stamp `sm_source: "claude-code"` metadata on every memory they write. This distinguishes plugin-written memories from records written by other paths (Mara's connector, the curl `/v4` API used for multi-tag `world-data` writes). Useful for provenance filtering; no action required — additive, doesn't change read/search behavior.
 

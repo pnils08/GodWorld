@@ -13,7 +13,7 @@ pointers:
   - "[[engine/ROLLOUT_PLAN]] — governance.12 row"
   - "[[engine/ROLLOUT_PLAN]] — infrastructure.4 (paired — writer-hook fix, engine-sheet)"
   - "[[SUPERMEMORY]] — parent spec to be expanded"
-  - "[[plans/2026-05-13-boot-persona-contamination]] — S221 cleanup that surfaced the pipeline; Task 1 caveat documents what this plan addresses"
+  - "[[archive/plans/2026-05-13-boot-persona-contamination]] — S221 cleanup that surfaced the pipeline; Task 1 caveat documents what this plan addresses"
 ---
 
 # Supermemory User Profile pipeline — document + design leverage
@@ -40,7 +40,7 @@ Every conversation turn
 **Pointers:**
 - Pipeline mechanics partially documented in `[[SUPERMEMORY]]` at lines 131 (writer→super-memory mention), 227 (`/v4/profile` for mags + bay-tribune), 239 (Stop hook saves session summary to mags), 345 (SessionStart reads profiles). **Gap:** the auto-extraction step between session_turn writes and static User Profile entries is not explained — that's the contamination vector and the leverage point.
 - Adjacent rollout: `infrastructure.4` (engine-sheet, ready) — writer-hook disable or extraction-filter rewrite. This plan and infrastructure.4 converge: leverage design here decides what shape the filter should take; infrastructure.4 builds it.
-- Source plan that surfaced this: `[[plans/2026-05-13-boot-persona-contamination]]` Task 1 caveat.
+- Source plan that surfaced this: `[[archive/plans/2026-05-13-boot-persona-contamination]]` Task 1 caveat.
 
 **Acceptance criteria:**
 

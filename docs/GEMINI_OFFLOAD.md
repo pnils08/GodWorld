@@ -10,7 +10,7 @@ sources:
   - "Mike S241 Gemini PDFs — HCAI/Baylight cross-canon mashup as no-canon-scaffolding evidence"
 pointers:
   - "[[engine/ROLLOUT_PLAN]] — governance.21 (parent rollout row)"
-  - "[[plans/2026-05-28-gemini-offload-pattern]] — governance.21 plan (architecture + acceptance + task list)"
+  - "[[archive/plans/2026-05-28-gemini-offload-pattern]] — governance.21 plan (architecture + acceptance + task list)"
   - "[[canon/CANON_RULES]] — canon-fidelity tier system Gemini does not run"
   - "[[canon/INSTITUTIONS]] — institutional canon substitutes Gemini does not see"
   - "[[index]] — registered same commit per S147 inbound-link rule"
@@ -90,7 +90,7 @@ Combined recovery: ~25–30% per operational boot.
 ## Pointers
 
 - ROLLOUT row: `governance.21` in [[engine/ROLLOUT_PLAN]]
-- Plan: [[plans/2026-05-28-gemini-offload-pattern]] — full task list + acceptance criteria
+- Plan: [[archive/plans/2026-05-28-gemini-offload-pattern]] — full task list + acceptance criteria
 - Companion boot-burn gap log: `output/production_log_session-startup_c95_gaps.md` (S241)
 - Canon scaffolding Gemini lacks: [[canon/CANON_RULES]] + [[canon/INSTITUTIONS]]
 - Adjacent thesis: [[MIGRATION_OFF_CLAUDE]] — model substitution INSIDE Claude's pipeline (research.4); different question from this doc (task-class offload OUTSIDE the pipeline). Both can ship independently.

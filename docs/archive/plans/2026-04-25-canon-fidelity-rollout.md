@@ -318,7 +318,7 @@ The S174 reframe distinguished three classes of name in agent IDENTITY files:
 
 - **Files:**
   - `docs/index.md` — add this plan file under appropriate section (already done in Task 0)
-  - `docs/engine/ROLLOUT_PLAN.md` — add one-line entry under Other Ready Work or Edition Production: `Canon Fidelity Rollout — Wave A done S174, Wave B + Reviewer rebuild pending. Pointer: [[plans/2026-04-25-canon-fidelity-rollout]]`
+  - `docs/engine/ROLLOUT_PLAN.md` — add one-line entry under Other Ready Work or Edition Production: `Canon Fidelity Rollout — Wave A done S174, Wave B + Reviewer rebuild pending. Pointer: [[archive/plans/2026-04-25-canon-fidelity-rollout]]`
   - `SESSION_CONTEXT.md` — add session-end recap entry
 - **Status:** [x] DONE S175 — Q2 resolved (option b applied); ROLLOUT_PLAN entry added; index registered; SESSION_CONTEXT updated.
 

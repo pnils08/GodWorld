@@ -128,7 +128,7 @@ Save to: `output/city-civic-database/initiatives/health-center/decisions_c{XX}.j
     "expended": 0
   },
   "trackerUpdates": {
-    "ImplementationPhase": "pre-design",
+    "ImplementationPhase": "design-phase",
     "MilestoneNotes": "Priority designation C85; Architect RFP issued C86; site due diligence commissioned; kickoff community meeting held",
     "NextScheduledAction": "Architect selection + site due diligence results + operator coordination",
     "NextActionCycle": 87
@@ -317,7 +317,7 @@ Your initiative's `ImplementationPhase` is a **rolling descriptor of where the w
 
 **Advance one real step.** Move the descriptor to the value reflecting the next true operational state — never skip ahead of reality, never regress, never name a phase that hasn't operationally begun. The string is yours to author; keep it a short forward descriptor consistent with your prior phases.
 
-**How to emit it (the only path that reaches the sheet).** On your initiative's owning voice statement (your §S215 flat-array shape below — that example predates this field; include it on the owning statement), set the **top-level** field `"trackerOwner": "INIT-005"`. This makes your statement the deterministic primary that drives the tracker write; without it a voting faction's statement can outrank you and your phase never lands. Then populate `trackerUpdates`:
+**How to emit it (the only path that reaches the sheet).** On your initiative's owning voice statement (your §S215 flat-array shape below — that example predates this field; include it on the owning statement), set the **top-level** field `"trackerOwner": "INIT-005"`. This makes your statement the deterministic primary that drives the tracker write; without it a voting faction's statement can outrank you and your phase never lands. Then populate `trackerUpdates`. **The `ImplementationPhase` value MUST be one of the 20 canonical phases in [[../../../docs/mara-vance/INITIATIVE_TRACKER_CONTRACT|INITIATIVE_TRACKER_CONTRACT.md]] §2** — a non-canonical string is silently zeroed by the engine (your initiative goes dark, then false-flags "stuck" next cycle); map your real-world phase to the nearest canonical one, never free-form (civic.14):
 
 ```json
 "trackerOwner": "INIT-005",

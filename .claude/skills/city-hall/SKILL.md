@@ -132,6 +132,8 @@ For each voice that has a decision this cycle, write `output/civic-voice-workspa
 ```
 **Every voice must include `trackerUpdates` if their decision changes an initiative's state.** This is how the tracker gets updated — no manual extraction.
 
+**`ImplementationPhase` values + lifecycle + add-procedure live in [[../../../docs/mara-vance/INITIATIVE_TRACKER_CONTRACT|INITIATIVE_TRACKER_CONTRACT.md]] — read it, do not invent (civic.14 Phase 1).** The `ImplementationPhase` field in `trackerUpdates` MUST be one of the 20 canonical phases (contract §2); a free-formed phase the engine doesn't recognize is **silently zeroed** — the initiative goes dark, then false-flags "stuck" next cycle (the C96 root cause). If a voice's real-world phase isn't in the vocabulary, map it to the nearest canonical phase in the same arc (contract §5 variant map) — do not write the novel string. (Read-pointer only; the emit/enforce mechanism is civic.14 Phase 3.)
+
 **statementId is opaque; route on `office` (S215, closes G-R3).** S193 ran six voices with four different statementId prefix conventions (`STMT-93-MAYOR-001`, `STMT-93-OPD-001`, `STMT-93-IND-VEGA-001`, `STMT-93-baylight_authority-001`). Downstream tooling (applyTrackerUpdates, civic_sentiment aggregator, future analytics) should NOT parse the prefix — they route on the `office` field, which is consistent. Voice agents may use any statementId convention they like as long as it's unique within their own JSON; the field is for traceability, not dispatch. Document only — no need to enforce a single prefix shape across agents.
 
 ## Step 3: Run Mayor FIRST (Layer 1)

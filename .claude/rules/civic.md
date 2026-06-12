@@ -67,6 +67,7 @@ Every council seat carries a status from `Civic_Office_Ledger`. Truesource (`get
 
 ## Production output rules
 
+- **Initiative_Tracker writes conform to [[../../docs/mara-vance/INITIATIVE_TRACKER_CONTRACT|INITIATIVE_TRACKER_CONTRACT.md]] (civic.14 Phase 1).** The 28-col schema, the 20-value `ImplementationPhase` vocabulary (free-formed phases are silently zeroed → the C96 dark-initiative root cause), per-Type lifecycle arcs, and the add-an-initiative procedure all live there. Every tracker-writing surface (city-hall + voice + the 5 project agents) routes to that one authority.
 - **Output to the `## /city-hall` section of `output/production_log_c{XX}.md`** — the unified one-true-cycle log; the civic section is the source for the cycle's civic state.
 - **Tag Supermemory saves with `[civic]` prefix.**
 - **No edition prose at this terminal.** Output is structured source material — quotes, vote tallies, decision summaries, project status — not journalism. Polishing happens at the media terminal.

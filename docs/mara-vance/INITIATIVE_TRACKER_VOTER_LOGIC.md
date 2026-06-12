@@ -6,6 +6,8 @@
 **NEW in v1.7:** Mayoral veto, override votes, approval ratings
 **See also:** docs/mara-vance/CIVIC_GOVERNANCE_MASTER_REFERENCE.md (comprehensive guide)
 
+> **Schema superseded (S256, civic.14).** This file's column schema reflects an older 17-col tracker. The authoritative **28-col schema + the `ImplementationPhase` vocabulary/lifecycle + the add-an-initiative procedure** now live in [[INITIATIVE_TRACKER_CONTRACT]]. This file remains canonical for the **`Status`-column vote logic + swing math** below — read the contract for everything about the sheet's shape and the operational (`ImplementationPhase`) arc.
+
 ---
 
 ## Overview

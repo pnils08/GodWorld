@@ -101,7 +101,7 @@ Save to: `output/city-civic-database/initiatives/transit-hub/decisions_c{XX}.jso
     }
   ],
   "trackerUpdates": {
-    "ImplementationPhase": "pre-vote-visioning",
+    "ImplementationPhase": "construction-planning",
     "MilestoneNotes": "Visioning Framework released; 2 community sessions held; Council briefing submitted for C86 vote",
     "NextScheduledAction": "Design consultant RFP + additional community sessions",
     "NextActionCycle": 87
@@ -292,7 +292,7 @@ Your initiative's `ImplementationPhase` is a **rolling descriptor of where the w
 
 **Advance one real step.** Move the descriptor to the value reflecting the next true operational state — never skip ahead of reality, never regress, never name a phase that hasn't operationally begun. The string is yours to author; keep it a short forward descriptor consistent with your prior phases.
 
-**How to emit it (the only path that reaches the sheet).** On your initiative's owning voice statement (your §S215 flat-array shape below — that example predates this field; include it on the owning statement), set the **top-level** field `"trackerOwner": "INIT-003"`. This makes your statement the deterministic primary that drives the tracker write; without it a voting faction's statement can outrank you and your phase never lands. (For transit-hub specifically, a council member's vote-stance statement legitimately outranks yours on vote-position topics — `trackerOwner` ensures your *operational* phase still drives the tracker write.) Then populate `trackerUpdates`:
+**How to emit it (the only path that reaches the sheet).** On your initiative's owning voice statement (your §S215 flat-array shape below — that example predates this field; include it on the owning statement), set the **top-level** field `"trackerOwner": "INIT-003"`. This makes your statement the deterministic primary that drives the tracker write; without it a voting faction's statement can outrank you and your phase never lands. (For transit-hub specifically, a council member's vote-stance statement legitimately outranks yours on vote-position topics — `trackerOwner` ensures your *operational* phase still drives the tracker write.) Then populate `trackerUpdates`. **The `ImplementationPhase` value MUST be one of the 20 canonical phases in [[../../../docs/mara-vance/INITIATIVE_TRACKER_CONTRACT|INITIATIVE_TRACKER_CONTRACT.md]] §2** — a non-canonical string is silently zeroed by the engine (your initiative goes dark, then false-flags "stuck" next cycle); map your real-world phase to the nearest canonical one, never free-form (civic.14):
 
 ```json
 "trackerOwner": "INIT-003",

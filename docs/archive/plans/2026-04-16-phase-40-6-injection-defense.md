@@ -13,7 +13,7 @@ sources:
 pointers:
   - "[[engine/PHASE_40_PLAN]] — parent phase doc §40.6"
   - "[[engine/ROLLOUT_PLAN]] — step 9 of the spine"
-  - "[[plans/2026-04-16-phase-40-1-session-log-interface]] — sibling step-9 plan"
+  - "[[archive/plans/2026-04-16-phase-40-1-session-log-interface]] — sibling step-9 plan"
   - "[[plans/TEMPLATE]] — shape"
 ---
 
@@ -28,7 +28,7 @@ pointers:
 **Pointers:**
 - Prior work: Entry 123 (S144) — memory-poisoning pressure test. Mags held on deletion, failed on self-undermining memory writes. This phase closes that gap structurally.
 - Hermes source: clone already exists at `/tmp/hermes-agent/` (verified). Two target files are present.
-- Related plan: [[plans/2026-04-16-phase-40-1-session-log-interface]] — same spine step, independent scope.
+- Related plan: [[archive/plans/2026-04-16-phase-40-1-session-log-interface]] — same spine step, independent scope.
 
 **Acceptance criteria:**
 1. All six layers shipped, each with its own test or reproducible pressure-test demonstration.

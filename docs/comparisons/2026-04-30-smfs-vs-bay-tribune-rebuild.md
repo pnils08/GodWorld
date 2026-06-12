@@ -8,11 +8,11 @@ sources:
   - https://smfs.ai (landing page)
   - https://github.com/supermemoryai/smfs (README + repo)
   - docs/plans/2026-04-30-bay-tribune-unified-ingest-rebuild.md (the rebuild this eval may obviate)
-  - docs/plans/2026-04-27-world-data-unified-ingest-rebuild.md (already-shipped sibling pattern)
+  - docs/archive/plans/2026-04-27-world-data-unified-ingest-rebuild.md (already-shipped sibling pattern)
   - Email from Supermemory team to Mike Paulson, 2026-04-30 ("SMFS launch — Hello P!")
 pointers:
   - "[[plans/2026-04-30-bay-tribune-unified-ingest-rebuild]] — HOLD note added"
-  - "[[plans/2026-04-27-world-data-unified-ingest-rebuild]] — already-shipped, would migrate too if SMFS adopted"
+  - "[[archive/plans/2026-04-27-world-data-unified-ingest-rebuild]] — already-shipped, would migrate too if SMFS adopted"
   - "[[SUPERMEMORY]] — current 6-container model"
   - "../engine/ROLLOUT_PLAN.md §Edition Post-Publish — rollout entry for the rebuild"
 ---

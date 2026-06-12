@@ -10,7 +10,7 @@ sources:
   - "output/production_log_edition_c94_post_publish_gaps.md G-P32 / G-P34 / G-P38 — ingest-side instances"
   - "[[../canon/CANON_RULES]] §Corrections-Forward Maps (canon.2 S218 precedent)"
   - "[[../canon/INSTITUTIONS]] §Faith Corrections Forward (S218 reference implementation)"
-  - "[[../plans/2026-05-12-canon-2-faith-scrub]] — paper-of-record principle established"
+  - "[[../archive/plans/2026-05-12-canon-2-faith-scrub]] — paper-of-record principle established"
   - "[[adr/0001-adopt-context-and-adrs]] — ADR bar"
   - "[[adr/0006-parser-validator-format-contracts]] — sibling reviewer-stack contract"
 pointers:

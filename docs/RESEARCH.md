@@ -1929,14 +1929,14 @@ Income: ${Income}. {MaritalStatus}, {NumChildren} children. Tier {Tier}.
 
 Git gives history; it doesn't give evaluation-gated evolution or monotonicity checks.
 
-**Downstream: the retirement side of lifecycle.** In conversation with Mike, he pointed out that versioning-forward only makes sense if there's also a retirement-backward discipline — MDs that go stale should have a delete protocol. Autogenesis doesn't address retirement (it focuses on evolving what's active), but the same lifecycle framing applies: resources need both commit gates and sunset rules. Operationalized in `[[plans/2026-04-21-md-audit-skill]]` (staleness detection + archival, not auto-delete).
+**Downstream: the retirement side of lifecycle.** In conversation with Mike, he pointed out that versioning-forward only makes sense if there's also a retirement-backward discipline — MDs that go stale should have a delete protocol. Autogenesis doesn't address retirement (it focuses on evolving what's active), but the same lifecycle framing applies: resources need both commit gates and sunset rules. Operationalized in `[[archive/plans/2026-04-21-md-audit-skill]]` (staleness detection + archival, not auto-delete).
 
 **Lessons:**
 1. Not every paper is a Memento. No code release + single author + 5 days old = conceptual framing, not a build-ready reference. Log the vocabulary and the named gap; don't generate a rollout plan from a paper this thin.
 2. The RSPL/SEPL vocabulary may be useful later if we ever build a version-lineage system for skills/agents. Keep it as durable mental model, not as adoption target.
 3. The retirement-side insight (Mike's contribution, not the paper's) is the actionable thing that surfaced. Versioning-forward + retirement-backward are two halves of the same lifecycle.
 
-**Docs updated:** RESEARCH.md (this entry). Related build: `[[plans/2026-04-21-md-audit-skill]]` (drafted same session).
+**Docs updated:** RESEARCH.md (this entry). Related build: `[[archive/plans/2026-04-21-md-audit-skill]]` (drafted same session).
 
 ---
 
@@ -2058,7 +2058,7 @@ The `Task` tool today spawns Claude subagents that each produce one reply and ex
 
 ## S197 — FLUX Text-Suppression Ceiling (2026-05-03)
 
-**Source:** C93 print run gap log G-PR10 / G-PR11 / G-PR14 (`output/production_log_edition_c93_print_gaps.md`). Surfaced during S196 /edition-print run — first full-edition print since E91/S188 (2-cycle silence). Bundled here as Wave 5 of [[plans/2026-05-03-c93-gap-triage-execution]].
+**Source:** C93 print run gap log G-PR10 / G-PR11 / G-PR14 (`output/production_log_edition_c93_print_gaps.md`). Surfaced during S196 /edition-print run — first full-edition print since E91/S188 (2-cycle silence). Bundled here as Wave 5 of [[archive/plans/2026-05-03-c93-gap-triage-execution]].
 
 **What we observed (C93 evidence):** 4 of 6 generated photos hit text-legibility issues despite mandatory negative-frame paragraphs. Failure modes:
 

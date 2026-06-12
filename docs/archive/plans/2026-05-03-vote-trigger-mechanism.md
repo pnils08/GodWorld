@@ -9,7 +9,7 @@ sources:
   - phase05-citizens/civicInitiativeEngine.js (existing 9-seat vote resolver, lines 130-460)
 pointers:
   - "[[engine/ROLLOUT_PLAN]] — parent rollout"
-  - "[[plans/2026-05-03-c93-gap-triage-execution]] — Wave 4 parent"
+  - "[[archive/plans/2026-05-03-c93-gap-triage-execution]] — Wave 4 parent"
   - "[[SCHEMA]] — doc conventions"
 ---
 
@@ -167,6 +167,6 @@ When all three hold, engine writes `VoteCycle = NextActionCycle` and `Status = '
 
 ## Changelog
 
-- 2026-05-03 — Initial draft (S197). Wave 4 of [[plans/2026-05-03-c93-gap-triage-execution]]. Two-mechanism design (`/council-vote` skill + `/city-hall-prep` route-to-9). Five Phase 1 design questions on tally semantics. Status: DRAFT awaiting grill.
+- 2026-05-03 — Initial draft (S197). Wave 4 of [[archive/plans/2026-05-03-c93-gap-triage-execution]]. Two-mechanism design (`/council-vote` skill + `/city-hall-prep` route-to-9). Five Phase 1 design questions on tally semantics. Status: DRAFT awaiting grill.
 - 2026-05-03 — REWRITTEN IN PLACE (S198). Original draft retired — Mike corrected the architectural diagnosis: votes are engine-handled, not skill-handled. The engine has a complete 9-seat resolver in `phase05-citizens/civicInitiativeEngine.js` (faction math + swing voters + Tier-3 demographics + sentiment; handles veto + override). Skill-layer `/council-vote` would duplicate engine logic. Real bug class is much narrower: follow-up votes have no scheduling path — `VoteCycle` doesn't get bumped after a vote resolves with follow-up intent. Replacement plan is an engine-sheet investigation + wiring fix in `civicInitiativeEngine.js` (or its post-vote handler). Five Phase 1 tally-semantics questions retired (engine already resolves them). One narrow Phase 1 schema question remains: reuse `VoteCycle` vs add `FollowUpVoteCycle` vs generalize `OverrideVoteCycle`. Tags shifted `[civic, architecture, draft]` → `[engine, civic, draft]`. Title changed from "Vote-Trigger Mechanism Plan" to "Vote-Trigger Wiring Plan (Engine Investigation)". File slug preserved so existing inbound links keep resolving.
 - 2026-05-03 — Phase 1 + Phase 2.1 DONE (S199, engine-sheet). INIT-003 ground truth captured via `node scripts/queryLedger.js initiative "Transit Hub"` (status=visioning-complete, voteCycle=86 stuck since visioning began, implPhase=vote-ready, nextActionCycle=94). Diagnosed bug class: broader than "follow-up votes" — covers any vote needing fresh schedule after non-vote-resolving phase transition. Schema decision: option (a) reuse `VoteCycle`, engine-internal trigger. Implemented in `civicInitiativeEngine.js` v1.8: 2 new column lookups + ~30-line phase-transition handler in per-row loop (between v1.5 delayed-retry block and line-204 trigger check). Trace-verified across 4 cases (Transit Hub C93→C94 fires, no-op for visioning-in-progress, no-op for past nextActionCycle, no regression for existing pending-vote rows). Phase 2.2 + Phase 3 PENDING `clasp push` of v1.8 + actual C94 cycle run + civic terminal validation.

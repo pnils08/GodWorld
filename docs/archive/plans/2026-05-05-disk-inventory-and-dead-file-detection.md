@@ -10,12 +10,12 @@ sources:
   - scripts/mdStalenessDetector.js — MD orphan + git-mtime staleness (docs/ scoped)
   - .claude/skills/md-audit/SKILL.md — current MD audit skill, docs/ only
   - .claude/skills/context-budget/SKILL.md — uses claude-batch MCP (precedent for batch invocation)
-  - docs/plans/2026-04-21-md-audit-skill.md — prior staleness-detector plan as shape reference
+  - docs/archive/plans/2026-04-21-md-audit-skill.md — prior staleness-detector plan as shape reference
 pointers:
   - "[[engine/ROLLOUT_PLAN]] — parent rollout"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — register in same commit"
-  - "[[plans/2026-04-21-md-audit-skill]] — sibling plan, narrower scope (docs/ only)"
+  - "[[archive/plans/2026-04-21-md-audit-skill]] — sibling plan, narrower scope (docs/ only)"
 ---
 
 # Disk Inventory and Dead-File Detection Plan
@@ -30,7 +30,7 @@ pointers:
 - Sibling tool — `scripts/mdStalenessDetector.js` covers `docs/` only at the file layer; `scripts/scanDeadCode.js` covers code only at the function layer. Neither sees `/root/.claude-mem/`, `/root/.claude/projects/`, `/root/GodWorld/output/`, `/root/GodWorld/legacy/`, `/root/GodWorld/archive/`, scattered `.sh` scripts, or config JSONs.
 - Triggering case — S202 droplet at 88% required ad-hoc audit of prescrub backups, claude-mem logs, WAL state. Audit took ~10 minutes manually. A standing inventory makes the same triage one bash command.
 - Batch precedent — `.claude/skills/context-budget/SKILL.md` lists `claude-batch` as an available MCP server; deferred-tool list in this session confirms `mcp__claude-batch__send_to_batch` + `batch_status` + `batch_fetch` exist.
-- Companion to — `[[plans/2026-04-21-md-audit-skill]]` (docs scope, file existence) + `scripts/scanDeadCode.js` (code scope, function reachability). This plan unions their patterns at filesystem scope.
+- Companion to — `[[archive/plans/2026-04-21-md-audit-skill]]` (docs scope, file existence) + `scripts/scanDeadCode.js` (code scope, function reachability). This plan unions their patterns at filesystem scope.
 
 **Acceptance criteria:**
 1. `node scripts/diskInventory.js` produces `output/disk_inventory_<DATE>.json` listing every file under `/root` minus the ignorelist; manifest includes path, size, ext, git-tracked, mtime, sha1; runs in under 2 minutes.

@@ -6,12 +6,12 @@ type: plan
 tags: [media, civic, infrastructure, complete]
 sources:
   - docs/engine/ROLLOUT_PLAN.md §Data & Pipeline ("ALIGN: Skills need supermemory rules aligned for search and save" — added S182, unblocked S183)
-  - docs/plans/2026-04-27-world-data-unified-ingest-rebuild.md (parent project — DONE S183)
+  - docs/archive/plans/2026-04-27-world-data-unified-ingest-rebuild.md (parent project — DONE S183)
   - docs/SUPERMEMORY.md (reference doc to be enriched)
   - scripts/godworld-mcp.py (post-M1-M4 — 14 MCP tools live)
 pointers:
   - "[[engine/ROLLOUT_PLAN]] — parent rollout, §Data & Pipeline ALIGN item"
-  - "[[plans/2026-04-27-world-data-unified-ingest-rebuild]] — predecessor that landed the writers + tags"
+  - "[[archive/plans/2026-04-27-world-data-unified-ingest-rebuild]] — predecessor that landed the writers + tags"
   - "[[SUPERMEMORY]] — canonical reference; matrix lands in new §Search/save matrix section"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — register in same commit"
@@ -159,7 +159,7 @@ Research-build executes in this order:
 
 ## Changelog
 
-- 2026-04-28 — Initial draft (S184, research-build). Sibling project to [[plans/2026-04-27-world-data-unified-ingest-rebuild]] which landed the writers + tags S183. ROLLOUT entry added S182, unblocked S183 by engine-sheet.
+- 2026-04-28 — Initial draft (S184, research-build). Sibling project to [[archive/plans/2026-04-27-world-data-unified-ingest-rebuild]] which landed the writers + tags S183. ROLLOUT entry added S182, unblocked S183 by engine-sheet.
 - 2026-04-28 — Phase 1 inventory complete (S184, research-build, Task 1.1). Output: `output/skill_supermemory_inventory.md`. 17 skill files with Supermemory references. Disposition: 8 ALIGN, 6 MINOR ENRICH, 2 UPDATE, 1 BUG FIX, 1 SKIP. Notable drift: `/save-to-mags` line 17 incorrectly directs canon saves to `/super-save` (writes super-memory, not bay-tribune); correct is `/save-to-bay-tribune`. Open scope question surfaced: extend to `.claude/agents/` (17 agents)?
 - 2026-04-28 — Scope confirmed (Mike S184): all skills + agents. Agent inventory found only `rhea-morgan` references Supermemory directly (3 files). Other 16 agents correctly consume pre-fenced packets from skills (Memory Fence pattern, Phase 40.6 Layer 2). Rhea reclassified UPDATE → MINOR ENRICH after discovering she has Bash but no MCP server access — CLI is her primary path, just needs matrix pointer + wd-* tag awareness, not MCP swap.
 - 2026-04-28 — Phase 2 + Phase 3 batches DONE (S184, research-build):

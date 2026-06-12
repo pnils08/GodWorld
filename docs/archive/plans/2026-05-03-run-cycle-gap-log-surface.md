@@ -10,7 +10,7 @@ sources:
   - output/production_log_*c93_*gaps.md (the 6 existing gap logs from other skills)
 pointers:
   - "[[engine/ROLLOUT_PLAN]] — parent rollout"
-  - "[[plans/2026-05-03-c93-gap-triage-execution]] — Wave 4 parent"
+  - "[[archive/plans/2026-05-03-c93-gap-triage-execution]] — Wave 4 parent"
   - "[[SCHEMA]] — doc conventions"
   - "[[engine/ENGINE_REPAIR]] — companion tracker for engine defects across sessions (different shape — gap log captures cycle-run observations, ENGINE_REPAIR tracks cross-session defects)"
 ---
@@ -77,7 +77,7 @@ pointers:
 
 - **Files:**
   - `docs/index.md` — modify
-- **Status:** [x] DONE S199. Existing `[[plans/2026-05-03-run-cycle-gap-log-surface]]` entry rewritten with Phase 2 SHIPPED state, names `scripts/engineCycleAudit.js` inline (the script's inbound link from the parent spec, satisfying no-isolated-MDs even though the script isn't an MD), tags shifted `(plan, engine, infrastructure, architecture, draft)` → `(... active)`. SKILL.md change is exempt per global rule (skill files exempt from no-isolated-MDs).
+- **Status:** [x] DONE S199. Existing `[[archive/plans/2026-05-03-run-cycle-gap-log-surface]]` entry rewritten with Phase 2 SHIPPED state, names `scripts/engineCycleAudit.js` inline (the script's inbound link from the parent spec, satisfying no-isolated-MDs even though the script isn't an MD), tags shifted `(plan, engine, infrastructure, architecture, draft)` → `(... active)`. SKILL.md change is exempt per global rule (skill files exempt from no-isolated-MDs).
 
 ---
 
@@ -124,7 +124,7 @@ All four S197 open questions closed S198:
 
 ## Changelog
 
-- 2026-05-03 — Initial draft (S197). Wave 4 of [[plans/2026-05-03-c93-gap-triage-execution]]. Phase 1 had four open questions. Status: DRAFT awaiting grill.
+- 2026-05-03 — Initial draft (S197). Wave 4 of [[archive/plans/2026-05-03-c93-gap-triage-execution]]. Phase 1 had four open questions. Status: DRAFT awaiting grill.
 - 2026-05-03 — REWRITTEN IN PLACE (S198) after Mike grill closed all four open questions. Q1 widened: engine-sheet "Never create MDs" rule replaced wholesale with alignment to global no-isolated-MDs rule (broader reach than gap logs alone — per-phase audit notes, schema specs, helper-script docs all become valid output). Q3 picked up coder-persona directive: script-heavy hybrid, judgment entries in terse mechanical voice (commit-message style, no narrative prose). Q2 + Q4 confirmed. Status: ready for engine-sheet pickup once Phase 1 rule updates land. Plan is now action-ready.
 - 2026-05-03 — Phase 2 SHIPPED S199 (engine-sheet). Tasks 2.1 + 2.2 + 2.3 all DONE. `scripts/engineCycleAudit.js` ~285 LOC implementing 4 V1 classes (writeback-drift, math-anomaly, cross-cycle-debt, determinism-break) + 4 V2-pending stubs awaiting engine-run-log ingest path. `/run-cycle` SKILL.md gained §Step 6 "Gap Log Close" wiring the script invocation. `docs/index.md` plan entry rewritten with Phase 2 SHIPPED state + tag flipped `draft → active`. C93 dry-run produced 23 mechanical entries (7 HIGH / 16 MED) — Transit Hub stuck-initiative correctly flagged (89 cycles in vote-ready), coverage writeback drift correctly flagged (14/17 neighborhoods flat), Math.random sweep flagged 13 hits across phase01/04/05 worth follow-up audit. Phase 3 (validation) pending next /run-cycle invocation against the live engine.
 - 2026-05-05 — Phase 4 added (S202): V2 detector ingest path design note. Two paths captured (Logger.getLog snapshot vs sheet-tab poll); decision-deferred-to-post-C94 because the empirical trigger to pick is V1 catch rate at the first real validation cycle. Ships nothing in S202; just the design surface so the post-C94 decision has somewhere to land.

@@ -8,7 +8,7 @@ sources:
   - "[[../engine/ROLLOUT_PLAN]] §canon.3"
   - "[[../plans/2026-05-22-c94-gap-log-triage]] §3 C7"
   - "[[../adr/0007-cross-layer-canon-authority-precedence]] — companion ADR (this plan implements it)"
-  - "[[../plans/2026-05-12-canon-2-faith-scrub]] — corrections-forward map precedent"
+  - "[[../archive/plans/2026-05-12-canon-2-faith-scrub]] — corrections-forward map precedent"
   - "output/production_log_edition_c94_sift_gaps.md G-S15 / G-S16 / G-S18 / G-S19 / G-S20"
   - "output/production_log_edition_c94_post_publish_gaps.md G-P32 / G-P34 / G-P38"
 pointers:
@@ -31,7 +31,7 @@ pointers:
 - Parent ROLLOUT row: `canon.3` in [[../engine/ROLLOUT_PLAN]]
 - Companion ADR: [[../adr/0007-cross-layer-canon-authority-precedence]]
 - Cluster triage: [[../plans/2026-05-22-c94-gap-log-triage]] §3 C7
-- Prior pattern: [[../plans/2026-05-12-canon-2-faith-scrub]] (canon.2 S218 corrections-forward map)
+- Prior pattern: [[../archive/plans/2026-05-12-canon-2-faith-scrub]] (canon.2 S218 corrections-forward map)
 
 **Mike rulings (S230, locked before plan-write):**
 - Soria Dominguez canonical name = **Eloise Soria-Dominguez** (wd-card form wins; bay-tribune E93 "Elena" gets corrections-forward map entry per canon.2 S218 pattern)

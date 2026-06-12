@@ -46,7 +46,7 @@ pointers:
 - **Steps:**
   1. Grep for `production_log_`, `JOURNAL.md`, and `ctx.summary` across `scripts/` and `.claude/skills/`.
   2. For each hit, record: file, line, what it reads, what shape it expects (last N? between timestamps? whole file?).
-  3. Write the inventory to `docs/plans/2026-04-16-phase-40-1-session-log-interface.md` under a new `## Inventory` section below.
+  3. Write the inventory to `docs/archive/plans/2026-04-16-phase-40-1-session-log-interface.md` under a new `## Inventory` section below.
 - **Verify:** Inventory has ≥5 entries OR a one-line "no ad-hoc readers found, this phase is premature — escalate."
 - **Status:** [x] done — S156
 
@@ -122,7 +122,7 @@ pointers:
   - `docs/engine/PHASE_40_PLAN.md` — modify
   - `docs/index.md` — modify
 - **Steps:**
-  1. In PHASE_40_PLAN.md §40.1, append a line pointing to `[[plans/2026-04-16-phase-40-1-session-log-interface]]` as the execution plan. Add a changelog entry dated today.
+  1. In PHASE_40_PLAN.md §40.1, append a line pointing to `[[archive/plans/2026-04-16-phase-40-1-session-log-interface]]` as the execution plan. Add a changelog entry dated today.
   2. In `docs/index.md`, add an entry for this plan file under the `docs/plans/` section.
 - **Verify:** Both files grep positive for `phase-40-1-session-log-interface`.
 - **Status:** [x] done — S156

@@ -282,7 +282,7 @@ function deriveCitizenProfile(seed, age, neighborhood, ledgerFreq) {
 ```javascript
 // ═══════════════════════════════════════════════════════════════
 // citizenDerivation.gs — intake-side derivation library
-// Spec: docs/plans/2026-04-28-intake-side-citizen-derivation.md
+// Spec: docs/archive/plans/2026-04-28-intake-side-citizen-derivation.md
 // ═══════════════════════════════════════════════════════════════
 
 // Embedded canonical pool (sync'd from data/economic_parameters.json

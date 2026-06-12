@@ -14,7 +14,7 @@ pointers:
   - "[[engine/ROLLOUT_PLAN]] — parent, Parked / Opportunistic table"
   - "[[SCHEMA]] — doc conventions"
   - "[[engine/PHASE_39_PLAN]] — Phase 39 is the review layer; Phase 40 is the agent architecture underneath"
-  - "[[plans/2026-04-16-phase-38-5-measurement-loop]] — in-flight work that depends on no 40.x item"
+  - "[[archive/plans/2026-04-16-phase-38-5-measurement-loop]] — in-flight work that depends on no 40.x item"
 ---
 
 # Phase 40 Implementation Plan — Agent Architecture Hardening
@@ -49,7 +49,7 @@ Production logs (`output/production_log_*.md`), `ctx.summary`, and JOURNAL entri
 
 **Cheapest win.** Build first.
 
-**Execution plan:** [[plans/2026-04-16-phase-40-1-session-log-interface]] (research-build drafted S156; engine/sheet built S156). **DONE S156** — `lib/sessionLog.js` ships `readLast(path, n)` and `readSince(path, isoTimestamp)`. `readByTag` dropped from MVP per inventory (no current consumer). Session-end skill migrated as the proof migration. 17/17 tests passing.
+**Execution plan:** [[archive/plans/2026-04-16-phase-40-1-session-log-interface]] (research-build drafted S156; engine/sheet built S156). **DONE S156** — `lib/sessionLog.js` ships `readLast(path, n)` and `readSince(path, isoTimestamp)`. `readByTag` dropped from MVP per inventory (no current consumer). Session-end skill migrated as the proof migration. 17/17 tests passing.
 
 ### 40.2 Reporter-as-cattle refactor (paper 3 "Don't adopt a pet")
 
@@ -63,7 +63,7 @@ Today `credentials/service-account.json`, `.env`, Supermemory API keys live in t
 
 **LOW priority until someone tries, HIGH priority if they do.**
 
-**DONE S156 (2026-04-17, engine-sheet).** Plan: [[plans/2026-04-16-phase-40-3-credential-audit]]. Commits: `056eae0` (safe tasks: inventory, settings deny rule, Supermemory write-gate, doc updates, dead file delete) and `91d8649` (live-infra tasks in one restart window: `.env` + `credentials/service-account.json` relocated to `/root/.config/godworld/`, `lib/env.js` central loader with `override:true`, 78 dotenv sites swept, 9 hardcoded paths fixed, `ecosystem.config.js` rewritten to match live PM2 registry with per-app `env_file`, `TOGETHER_API_KEY` removed, Discord bot file-read refusal shipped). Audit re-run: zero old-path hits in code. Smoke tests green (queryFamily, engineAuditor, dashboard :3001, Discord bot reconnect).
+**DONE S156 (2026-04-17, engine-sheet).** Plan: [[archive/plans/2026-04-16-phase-40-3-credential-audit]]. Commits: `056eae0` (safe tasks: inventory, settings deny rule, Supermemory write-gate, doc updates, dead file delete) and `91d8649` (live-infra tasks in one restart window: `.env` + `credentials/service-account.json` relocated to `/root/.config/godworld/`, `lib/env.js` central loader with `override:true`, 78 dotenv sites swept, 9 hardcoded paths fixed, `ecosystem.config.js` rewritten to match live PM2 registry with per-app `env_file`, `TOGETHER_API_KEY` removed, Discord bot file-read refusal shipped). Audit re-run: zero old-path hits in code. Smoke tests green (queryFamily, engineAuditor, dashboard :3001, Discord bot reconnect).
 
 ### 40.4 Four-component model mapping + named environments (paper 4)
 
@@ -104,7 +104,7 @@ Entry 123 proved memory is the softest injection surface. Multi-layer defense. H
   
   On match, block the file load and log what was blocked. This is the layer that protects against a poisoned letters-desk output or a published edition injecting instructions into the next cycle's voice agent.
 
-**Execution plan:** [[plans/2026-04-16-phase-40-6-injection-defense]] (research-build drafted S156; engine/sheet builds).
+**Execution plan:** [[archive/plans/2026-04-16-phase-40-6-injection-defense]] (research-build drafted S156; engine/sheet builds).
 - **Layer 5 (tool gate):** Service-account writes, Supermemory writes to `mags`/`bay-tribune`, and file deletions require explicit user approval. Partially enforced by identity.md rules; make structural via settings.json permissions.
 - **Layer 6 (review):** Rhea scans published content for injection patterns (prompts embedded in letters, quoted citizen speech that looks like an instruction) — same regex set as Layer 4, applied to desk output before publish.
 
@@ -126,10 +126,10 @@ Each item can be its own session. When one is ready to build, fork a dated plan 
 ## Changelog
 
 - 2026-04-16 — Extracted from [[engine/ROLLOUT_PLAN]] §Phase 40 (S152). Content preserved verbatim; frontmatter + structure added to match PHASE_38_PLAN / PHASE_39_PLAN shape.
-- 2026-04-16 — §40.1 execution plan drafted at [[plans/2026-04-16-phase-40-1-session-log-interface]] (S156, research-build). Ready for engine/sheet to build.
+- 2026-04-16 — §40.1 execution plan drafted at [[archive/plans/2026-04-16-phase-40-1-session-log-interface]] (S156, research-build). Ready for engine/sheet to build.
 - 2026-04-16 — §40.1 BUILT (S156, engine/sheet). `lib/sessionLog.js` + `lib/sessionLog.test.js`. `readByTag` dropped from MVP per inventory (zero consumers). Migration target: `.claude/skills/session-end/SKILL.md` line 107 now calls `readLast(journal, 3)`. 17/17 tests passing on synthetic + real production logs and JOURNAL.md.
-- 2026-04-16 — §40.6 execution plan drafted at [[plans/2026-04-16-phase-40-6-injection-defense]] (S156, research-build). Hermes source confirmed, regex set reproduced verbatim. Ready for engine/sheet to build.
+- 2026-04-16 — §40.6 execution plan drafted at [[archive/plans/2026-04-16-phase-40-6-injection-defense]] (S156, research-build). Hermes source confirmed, regex set reproduced verbatim. Ready for engine/sheet to build.
 - 2026-04-16 — §40.4 four-component map shipped at [[FOUR_COMPONENT_MAP]] (S156, research-build). Out of planned build-sequence order (spec put 40.4 before 40.6) but 40.6 shipped fine without it because defense layers already implicitly assumed the component boundaries; map now documents them.
 - 2026-04-16 — §40.5 Plan Mode gate shipped in [[WORKFLOWS]] §Plan Mode Gate (S156, research-build). Five-item checklist + four anti-patterns. S140 `/dispatch` drift named as canonical anti-example.
-- 2026-04-16 — §40.3 credential audit plan drafted at [[plans/2026-04-16-phase-40-3-credential-audit]] (S156, research-build). Inventory + reachability + 8-task execution plan. Engine-sheet terminal picks up when priority rises.
+- 2026-04-16 — §40.3 credential audit plan drafted at [[archive/plans/2026-04-16-phase-40-3-credential-audit]] (S156, research-build). Inventory + reachability + 8-task execution plan. Engine-sheet terminal picks up when priority rises.
 - 2026-04-17 — §40.3 EXECUTED end-to-end (S156, engine-sheet). All 9 tasks closed. Two commits: `056eae0` (safe tasks) + `91d8649` (live-infra in one restart window). Credentials relocated to `/root/.config/godworld/` outside repo working dir. Phase 40 now at 5/6: only 40.2 cattle refactor remains.

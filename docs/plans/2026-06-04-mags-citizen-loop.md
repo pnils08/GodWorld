@@ -24,7 +24,7 @@ pointers:
 
 **Pointers:**
 - Prior work (S252, shipped): `79babba` (bot decoupled from session lifecycle), `8272054` (`loadWorldState`→live world_summary), `634fb6e` (`loadLatestEdition`), `5f2745a` (`searchDisk` backend).
-- Related plan: [[plans/2026-05-31-autonomy-roadmap]] (Layer 3); [[plans/2026-06-02-federated-search-everything]] (the disk shelf `searchDisk` mirrors).
+- Related plan: [[plans/2026-05-31-autonomy-roadmap]] (Layer 3); [[archive/plans/2026-06-02-federated-search-everything]] (the disk shelf `searchDisk` mirrors).
 - Research basis: SpaceMolt miner ran ~2mo, 0 ores mined, stuck on `no_fuel`, failed silently — *deployment* failure (script + no attention), not concept failure. MCP scaffolding is for a reasoning instance to wield. Evidence: `logs/spacemolt/.miner-state.json`, `logs/spacemolt/captains-log.md`.
 
 **Acceptance criteria:**

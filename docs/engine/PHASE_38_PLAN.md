@@ -19,7 +19,7 @@ pointers:
 
 **Spine step:** 2 of 10 (after 41.1 + 41.2 wiki layer).
 **Terminal handoff:** `(engine terminal)` — research/build wrote this plan; engine/sheet terminal executes.
-**Status:** MOSTLY DONE S146. 38.1 detector + 38.2/38.3/38.4 enrichers + 38.7 anomaly gate + 38.8 baseline briefs all shipped S146 (spine steps 2, 3, 5). 38.5 measurement loop and 38.6 skill shrink extracted to separate plan files: [[plans/2026-04-16-phase-38-5-measurement-loop]] (DONE S156) + [[plans/2026-04-16-phase-38-6-skill-shrink]] (DONE S156). All Phase 38 sub-phases now closed. This plan file remains for design intent + spec reference.
+**Status:** MOSTLY DONE S146. 38.1 detector + 38.2/38.3/38.4 enrichers + 38.7 anomaly gate + 38.8 baseline briefs all shipped S146 (spine steps 2, 3, 5). 38.5 measurement loop and 38.6 skill shrink extracted to separate plan files: [[archive/plans/2026-04-16-phase-38-5-measurement-loop]] (DONE S156) + [[archive/plans/2026-04-16-phase-38-6-skill-shrink]] (DONE S156). All Phase 38 sub-phases now closed. This plan file remains for design intent + spec reference.
 
 ---
 
@@ -547,7 +547,7 @@ After 38.4 lands, the audit JSON shape changes — `patterns[]` carries `mitigat
 
 Both follow-ups are downstream skill edits, not engine work — flag them in ROLLOUT_PLAN as `(research-build terminal)` after 38.4 ships.
 
-The measurement-check portion of the skill-shrink work is scoped separately in [[plans/2026-04-16-phase-38-6-skill-shrink]] (Phase 38.6, research/build terminal).
+The measurement-check portion of the skill-shrink work is scoped separately in [[archive/plans/2026-04-16-phase-38-6-skill-shrink]] (Phase 38.6, research/build terminal).
 
 ---
 
@@ -627,7 +627,7 @@ Plan offered Path A (add `measurementSpec` to `remedyTemplates.json` + resolver)
 ### 18.8 Downstream
 
 - `/engine-review` skill Step 7 already wired to consume these fields (S154 commit `539f084`). Builds the per-pattern table, remedy-type track record, and win callout.
-- Phase 38.6 skill-shrink plan ([[plans/2026-04-16-phase-38-6-skill-shrink]]) is separately scoped and unblocked by this work.
+- Phase 38.6 skill-shrink plan ([[archive/plans/2026-04-16-phase-38-6-skill-shrink]]) is separately scoped and unblocked by this work.
 
 ---
 
@@ -636,5 +636,5 @@ Plan offered Path A (add `measurementSpec` to `remedyTemplates.json` + resolver)
 - 2026-04-14 — Initial plan (S146, research/build terminal). Designed the detector/framer split that wasn't in the original ROLLOUT_PLAN spec — code does deterministic detection, skill does narrative framing. Eight detector modules enumerated. Acceptance criteria locked. Handed off to engine/sheet terminal.
 - 2026-04-15 — Appended §§11–13 (Phase 38.7 anomaly gate + 38.8 baseline briefs) so engine terminal has the full spine-step-3 spec in one document. Source paragraphs from Nieman Reports paper5.pdf pp.21, 30–31 verified verbatim. Three combined acceptance criteria added.
 - 2026-04-15 — Appended §§14–17 (Phase 38.2 mitigator check + 38.3 remedy path recommendation + 38.4 Tribune framing brief). Same enricher-pipeline pattern as the original detectors. Each module mutates patterns in place with structured new fields (`mitigatorState`, `remedyPath`, `tribuneFraming`). Temescal paradigm threads end-to-end as the validating acceptance test for §17. Two downstream follow-ups noted: `/engine-review` and `/sift` skill rewrites once 38.4 ships.
-- 2026-04-16 — Appended §18 (Phase 38.5 measurement loop). Implemented S154/S156 per [[plans/2026-04-16-phase-38-5-measurement-loop]]. Closes spine step 8 (engine side); 38.6 skill shrink remains.
-- 2026-04-16 — §16.5 back-link added pointing to [[plans/2026-04-16-phase-38-6-skill-shrink]] (S156, research/build). Phase 38.6 closed: skill reads `patterns[*].measurement` + `measurementHistory[]` directly (S154 commit `539f084`), verified against C91 audit JSON (27 patterns, all `measurement.available: false` / `reason: no-prior-match` on first run, as expected). Criteria 1–5 and 7 met; criterion 6 (net shrink) traded for richer structured-framing instructions (+23 lines net) — documented in plan file.
+- 2026-04-16 — Appended §18 (Phase 38.5 measurement loop). Implemented S154/S156 per [[archive/plans/2026-04-16-phase-38-5-measurement-loop]]. Closes spine step 8 (engine side); 38.6 skill shrink remains.
+- 2026-04-16 — §16.5 back-link added pointing to [[archive/plans/2026-04-16-phase-38-6-skill-shrink]] (S156, research/build). Phase 38.6 closed: skill reads `patterns[*].measurement` + `measurementHistory[]` directly (S154 commit `539f084`), verified against C91 audit JSON (27 patterns, all `measurement.available: false` / `reason: no-prior-match` on first run, as expected). Criteria 1–5 and 7 met; criterion 6 (net shrink) traded for richer structured-framing instructions (+23 lines net) — documented in plan file.

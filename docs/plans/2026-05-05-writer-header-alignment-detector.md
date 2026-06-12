@@ -6,12 +6,12 @@ type: plan
 tags: [engine, infrastructure, audit, complete]
 sources:
   - SESSION_CONTEXT.md (S201 §5 — Story_Seed_Deck/Story_Hook_Deck header drift incident; 469 stale cells, ~10 cycles of silently-dropped engine routing data)
-  - docs/plans/2026-05-03-run-cycle-gap-log-surface.md (parent — V2 detector class slot)
+  - docs/archive/plans/2026-05-03-run-cycle-gap-log-surface.md (parent — V2 detector class slot)
   - schemas/SCHEMA_HEADERS.md (live regen output, S199-onward refresh cadence)
   - .claude/rules/engine.md (Phase 10 + 38 documented direct-write exceptions — the writer set this detector covers)
 pointers:
   - "[[engine/ROLLOUT_PLAN]] — parent rollout"
-  - "[[plans/2026-05-03-run-cycle-gap-log-surface]] — engineCycleAudit.js parent (this is the V2 detector slot)"
+  - "[[archive/plans/2026-05-03-run-cycle-gap-log-surface]] — engineCycleAudit.js parent (this is the V2 detector slot)"
   - "[[engine/LEDGER_HEAT_MAP]] — sibling tracker for column-level health (S202 audit pass surfaced this gap class)"
   - "[[engine/ENGINE_REPAIR]] — cross-session defect log; this detector finds new ENGINE_REPAIR rows"
 ---

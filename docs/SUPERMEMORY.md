@@ -387,7 +387,7 @@ const briefing = wrap(recalledCanon, 'bay-tribune');
 - ❌ Content Mags is reading for her own orientation (Mags is trusted, not a downstream agent)
 - ❌ Content written to local file for human review only
 
-**Source:** Direct port of Hermes Agent `agent/memory_manager.py:42-66`. Snapshot at `docs/drive-files/hermes-refs/memory_manager_42-66.py`. Plan: [[plans/2026-04-16-phase-40-6-injection-defense]].
+**Source:** Direct port of Hermes Agent `agent/memory_manager.py:42-66`. Snapshot at `docs/drive-files/hermes-refs/memory_manager_42-66.py`. Plan: [[archive/plans/2026-04-16-phase-40-6-injection-defense]].
 
 **Fail mode caught by fence:** Entry 123 memory-poisoning pressure test (S144). Mags held on deletion but would have been vulnerable to self-undermining memory writes that later got recalled as if authoritative.
 

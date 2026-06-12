@@ -9,7 +9,7 @@ sources:
   - docs/engine/ROLLOUT_PLAN.md §Edition Post-Publish (current capture pattern)
 pointers:
   - "[[engine/ROLLOUT_PLAN]] — parent rollout"
-  - "[[plans/2026-05-03-c93-gap-triage-execution]] — Wave 4 parent"
+  - "[[archive/plans/2026-05-03-c93-gap-triage-execution]] — Wave 4 parent"
   - "[[SCHEMA]] — doc conventions"
 ---
 
@@ -24,7 +24,7 @@ pointers:
 **Pointers:**
 - Triggering case: G-W16 in `output/production_log_edition_c93_write_gaps.md` documents the recurrence (S193 G-R6/R7/R10 → S195 G-W12)
 - Pattern adopted from: standard issue-tracker SLA conventions (urgency-grows-with-shelf-time)
-- Companion to: existing per-skill gap-log capture pattern (Wave 1-3 of [[plans/2026-05-03-c93-gap-triage-execution]])
+- Companion to: existing per-skill gap-log capture pattern (Wave 1-3 of [[archive/plans/2026-05-03-c93-gap-triage-execution]])
 
 **Acceptance criteria:**
 1. Every HIGH-severity ROLLOUT entry under §Edition Post-Publish (and other open-work sections) carries a `cycle-promoted: C<XX>` inline metadata tag.
@@ -138,7 +138,7 @@ Plan is action-ready — Phase 2 (backfill) + Phase 3 (tooling) can start withou
 
 ## Changelog
 
-- 2026-05-03 — Initial draft (S197). Wave 4 of [[plans/2026-05-03-c93-gap-triage-execution]]. Status: DRAFT — Phase 1 open questions must resolve before Phase 2 starts. Triggered by G-W16 meta-pattern documented S195 (project-agent canon-fabrication HIGHs from S193 sat on shelf and re-landed in desk-reporter agents 2 cycles later).
+- 2026-05-03 — Initial draft (S197). Wave 4 of [[archive/plans/2026-05-03-c93-gap-triage-execution]]. Status: DRAFT — Phase 1 open questions must resolve before Phase 2 starts. Triggered by G-W16 meta-pattern documented S195 (project-agent canon-fabrication HIGHs from S193 sat on shelf and re-landed in desk-reporter agents 2 cycles later).
 - 2026-05-03 — All five Phase 1 open questions closed S198 via Mike blanket approval. Recommendations adopted verbatim (trailing inline tag / STALE-2C threshold / in-place flag / explicit PARKED flag / /session-end integration). Status: DRAFT → ready-for-build. Tags shifted `[architecture, infrastructure, draft]` → `[architecture, infrastructure, ready]`.
 - 2026-05-04 — Phase 2 backfill DONE (S202). 10 HIGH entries tagged with `(promoted: C<XX>, severity: HIGH)` in `docs/engine/ROLLOUT_PLAN.md`. Acceptance criterion spec'd ">20" — actual count is 10; discrepancy because the plan was written pre-enumeration and the large C93 gap-log entries are consolidated parent rows (their prose says "promote individual gaps to standalone work items as bandwidth allows"). All actual HIGH entries tagged. First-run stale list will be empty: all tags use C92/C93 and current cycle is C93, so max age = 1 cycle (threshold is >2). Staleness accumulates over future cycles as entries remain unaddressed. Documented in script header.
 - 2026-05-04 — Phase 3 tooling DONE (S202). `scripts/rolloutTriage.js` created — parses ROLLOUT_PLAN for `(promoted: C<XX>, severity: HIGH)` tags, computes age, filters STALE-2C (>2 cycles), excludes PARKED, outputs `output/rollout_triage_c<XX>.md` sorted oldest-first. Handles bullet + table parsing formats. Wired into `.claude/terminals/research-build/TERMINAL.md §Session Close → Terminal-Specific Saves` as step 0 (runs before ROLLOUT priority refresh so stale HIGHs inform what gets elevated).

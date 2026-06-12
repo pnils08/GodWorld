@@ -17,8 +17,8 @@
 | 5 | 38.2 + 38.3 + 38.4 mitigator + remedy + Tribune framing | DONE | S146 | [[engine/PHASE_38_PLAN]] |
 | 6 | 39.2–39.7 + 39.3 three-lane review + Final Arbiter + two-pass hallucination | DONE | S147 | [[engine/PHASE_39_PLAN]] |
 | 7 | 39.9 + 39.8 + 39.10 tiered review + reward-hacking scans + adversarial review | DONE | S148 | [[engine/PHASE_39_PLAN]] |
-| 8 | 38.5 measurement loop (engine) + 38.6 skill shrink | DONE | S156 | [[plans/2026-04-16-phase-38-5-measurement-loop]], [[plans/2026-04-16-phase-38-6-skill-shrink]] |
-| 9 | 40.1 session-log interface + 40.6 layered injection defense | DONE | S156 | [[plans/2026-04-16-phase-40-1-session-log-interface]], [[plans/2026-04-16-phase-40-6-injection-defense]] |
+| 8 | 38.5 measurement loop (engine) + 38.6 skill shrink | DONE | S156 | [[archive/plans/2026-04-16-phase-38-5-measurement-loop]], [[archive/plans/2026-04-16-phase-38-6-skill-shrink]] |
+| 9 | 40.1 session-log interface + 40.6 layered injection defense | DONE | S156 | [[archive/plans/2026-04-16-phase-40-1-session-log-interface]], [[archive/plans/2026-04-16-phase-40-6-injection-defense]] |
 | 10 | Sandcastle + Daytona evaluation | DONE | S156 | [[engine/PHASE_33_PLAN]] §33.13 |
 
 **Spine walked — all 10 steps closed S156.** Step 9 shipped all six Phase 40.6 Layer tasks (memoryFence, memory-write gate hook, contextScan + skill/script wiring, tool-gate permissions, Rhea injection scan + agent extension); Entry 123 pressure test all three vectors blocked. Step 10 closed via code inspection of `/tmp/sandcastle` 0.4.5 templates + live PoC round-trip — `scripts/sandcastlePoC.js` created a Daytona Tier 1 sandbox, ran `echo` and `uname` inside it, destroyed cleanly. Findings + Phase 39 fit analysis in §33.13.
@@ -586,7 +586,7 @@ Framework operational across all 24 content-generating + content-reviewing agent
 
 ### Wave 3 Engine-Sheet Handoff Bundles — DONE S197
 
-S197 research-build → engine-sheet handoff cluster. 8 bundles grouping ~25 cross-cycle gaps. Research-build wrote bundle specs to ROLLOUT (commit `374d7a9`); engine-sheet shipped all 8 same day in 16 commits to origin/main. ~22 gaps closed in code; `resolveCitizens` Sr./Jr. tokenizer surfaced + parked as separate gap (still active in ROLLOUT_PLAN §Data & Pipeline). Plan: [[plans/2026-05-03-c93-gap-triage-execution]] §Wave 3. Parent triage frame: [[plans/2026-05-03-c93-gap-triage-execution]].
+S197 research-build → engine-sheet handoff cluster. 8 bundles grouping ~25 cross-cycle gaps. Research-build wrote bundle specs to ROLLOUT (commit `374d7a9`); engine-sheet shipped all 8 same day in 16 commits to origin/main. ~22 gaps closed in code; `resolveCitizens` Sr./Jr. tokenizer surfaced + parked as separate gap (still active in ROLLOUT_PLAN §Data & Pipeline). Plan: [[archive/plans/2026-05-03-c93-gap-triage-execution]] §Wave 3. Parent triage frame: [[archive/plans/2026-05-03-c93-gap-triage-execution]].
 
 #### BUNDLE-A — Format contract enforcement on .txt outputs (HIGH) — DONE S197 (engine-sheet)
 
@@ -625,7 +625,7 @@ Closed G-P22 + G-PR18. **postRunFiling.js (G-P22):** checklist refreshed to pipe
 
 ### Dispatch C92 Gap Follow-ups — DONE S189
 
-Plan: [[plans/2026-04-30-dispatch-gap-followups]]. Closed S189 across 11 items; ROLLOUT pointer carried "7 engine-sheet items remain active" 12 sessions after closure, surfaced + cleared via S201 triage sweep.
+Plan: [[archive/plans/2026-04-30-dispatch-gap-followups]]. Closed S189 across 11 items; ROLLOUT pointer carried "7 engine-sheet items remain active" 12 sessions after closure, surfaced + cleared via S201 triage sweep.
 
 **Research-build (R1-R4) DONE S189:** `/dispatch` SKILL.md `lookup_cultural` one-liner + EDITION_PIPELINE format spec CUL-ID enumeration with "one entity per line" rule + Step 0 auto-resolve eval documented inline + PDF visual review (surfaced E5a/b/c render bugs).
 
@@ -665,7 +665,7 @@ Path (a) chosen — `/post-publish` substep `2d. Refresh A's player truesource �
 
 #### DISPATCH C92 GAP FOLLOW-UPS — DONE S189 (pointer cleanup)
 
-Already archived in detail under §S201 Archive Pass (above) — Plan: [[plans/2026-04-30-dispatch-gap-followups]], 11 items closed, 6 commits `e83a5a3` + `15e7f3e` + `e9b0d37` + `6c2f45a` + `c20bb3d` + `a805e76`. Stale-pointer carrying "7 engine-sheet items remain active" was cleared S201; this S202 pass removes the residual active-rollout entry that pointed at the S201 archive.
+Already archived in detail under §S201 Archive Pass (above) — Plan: [[archive/plans/2026-04-30-dispatch-gap-followups]], 11 items closed, 6 commits `e83a5a3` + `15e7f3e` + `e9b0d37` + `6c2f45a` + `c20bb3d` + `a805e76`. Stale-pointer carrying "7 engine-sheet items remain active" was cleared S201; this S202 pass removes the residual active-rollout entry that pointed at the S201 archive.
 
 #### Wave 3 — Engine-Sheet Handoff Bundles (S197 research-build → engine-sheet) — DONE S197
 
@@ -673,12 +673,12 @@ Detail already in §S198 Archive Pass (above) — all 8 bundles A-H shipped S197
 
 #### C93 GAP TRIAGE EXECUTION PLAN — DONE across all 5 waves (S197+S198)
 
-Plan: [[plans/2026-05-03-c93-gap-triage-execution]]. Cross-cycle triage frame across 115 C93 gaps spanning 6 sidecar logs.
+Plan: [[archive/plans/2026-05-03-c93-gap-triage-execution]]. Cross-cycle triage frame across 115 C93 gaps spanning 6 sidecar logs.
 
 - **Wave 1** DOC-drift sweep (~15 gaps closed) — DONE S197 commit `279b290`
 - **Wave 2** canon RULES hardening (~7 gaps closed) — DONE S197 commit `cd89cc5`
 - **Wave 3** engine-sheet handoff bundles A-H (~22 gaps closed in code) — DONE S197, archived S198
-- **Wave 4** 3 architectural design plans — all closed S198: [[plans/2026-05-03-vote-trigger-mechanism]] REWRITTEN as engine-sheet wiring handoff (engine owns vote resolution; original /council-vote skill design retired; engine-sheet shipped v1.9 fix S199), [[plans/2026-05-03-run-cycle-gap-log-surface]] REWRITTEN with all 4 Q's closed (engine-sheet MDs rule loosened wholesale; coder-persona hybrid; 8-class taxonomy; engine-sheet shipped Phase 2 S199), [[archive/plans/2026-05-03-rollout-triage-cadence]] BUILT S202 (Phase 2 backfill + Phase 3 tooling + Phase 4 validation)
+- **Wave 4** 3 architectural design plans — all closed S198: [[archive/plans/2026-05-03-vote-trigger-mechanism]] REWRITTEN as engine-sheet wiring handoff (engine owns vote resolution; original /council-vote skill design retired; engine-sheet shipped v1.9 fix S199), [[archive/plans/2026-05-03-run-cycle-gap-log-surface]] REWRITTEN with all 4 Q's closed (engine-sheet MDs rule loosened wholesale; coder-persona hybrid; 8-class taxonomy; engine-sheet shipped Phase 2 S199), [[archive/plans/2026-05-03-rollout-triage-cadence]] BUILT S202 (Phase 2 backfill + Phase 3 tooling + Phase 4 validation)
 - **Wave 5** FLUX text-suppression ceiling research note — DONE S197 commit `e62133e` in `docs/RESEARCH.md` §S197
 
 Acceptance met: every gap-log `Status:` line moved from `logged` to closed-state. ~30 LOW gaps remain unwaved (opportunistic close during related work). Six individual sidecar gap logs (city-hall-prep S192, sift S194, write-edition S195, edition-print S196, post-publish S195, city-hall-run S193) stay active in ROLLOUT — they hold the un-promoted LOW remainder.
@@ -735,7 +735,7 @@ Shipped at `.claude/skills/context-budget/SKILL.md` (~210 lines). Token-overhead
 
 #### `/md-audit` skill — Phase 1+2 DONE S189
 
-Plan: [[plans/2026-04-21-md-audit-skill]]. `scripts/mdStalenessDetector.js` + `.claude/skills/md-audit/SKILL.md` shipped. First run: 0 orphans / 0 stale-but-linked / 48 stable-by-reference / 109 fresh at 60d/30d baseline (after directory-walk detector patch — voice files load by `docs/media/voices/` glob, not per-file ref). Phase 3 archival script not built — no orphans to archive. Phase 4/5 deferred (no triggering need yet). Active plan-file entry stays open (status `partial`) for the deferred phases; ROLLOUT-table row archived since Phases 1+2 are the load-bearing build.
+Plan: [[archive/plans/2026-04-21-md-audit-skill]]. `scripts/mdStalenessDetector.js` + `.claude/skills/md-audit/SKILL.md` shipped. First run: 0 orphans / 0 stale-but-linked / 48 stable-by-reference / 109 fresh at 60d/30d baseline (after directory-walk detector patch — voice files load by `docs/media/voices/` glob, not per-file ref). Phase 3 archival script not built — no orphans to archive. Phase 4/5 deferred (no triggering need yet). Active plan-file entry stays open (status `partial`) for the deferred phases; ROLLOUT-table row archived since Phases 1+2 are the load-bearing build.
 
 ---
 
@@ -815,7 +815,7 @@ Canon.2 faith-canon Tier-3 scrub closed end-to-end across both terminals in a si
 
 - **canon.2 — Faith Tier-3 scrub** — DONE S218 (joint research-build + engine-sheet). Six phases / 11 tasks (Task 3.3 ruled N/A: zero `Business_Ledger.Name ∈ Faith_Organizations.Organization` matches; cross-walk gap noted in `INSTITUTIONS.md` §Out of scope for canon.2 → follow-up). Commits across both terminals: `5c27780` plan + index + ROLLOUT pointer (research-build) → `96a3725` P0 export script + dump (engine-sheet) → `f9883c8` P1+P2 INSTITUTIONS substitution table + REAL_NAMES_BLOCKLIST sync + CANON_RULES §Corrections-Forward Maps subsection (research-build) → `4f650f6` P3.1+P3.2 atomic 62-range FO + SL batch write + 0-drift verification (engine-sheet) → `f88a2b3` P3.3 N/A ruling (research-build) → `5e43ec6` P4 `lib/canonBlocklist.js` + 12-assertion test + `buildFaithCards.js` startup filter (engine-sheet) → `81dadcb` P5 wd-faith Supermemory wipe+rewrite 16/16 + wd-citizens scoped rebuild 16/16 (engine-sheet). **Measure-twice trap caught pre-write** (P5.1, engine-sheet): legacy `wipeOldFaithCards` allowlist matched only against current FO rows (now canon-named), so plain `--wipe-old` would have left 16 stale legacy cards in place and written 16 canon cards alongside (32 docs / contamination persisted). Fix shipped same commit: allowlist unions `canonBlocklist.loadFaithBlocklist().orgs` (durable contract change for future Tier-3 rename scrubs), `EXPECT_WIPE_MATCHES=N` env-guard aborts pre-DELETE on count mismatch. **S195 interim substitutes retired same pass:** Greater Hope Pentecostal Church + Bishop Calvin Reeves Sr. (both flagged S217 "too close to real" — same failure mode that motivated the canon.2 plan) blocked-forward in REAL_NAMES_BLOCKLIST + corrections-forward map. **Pattern generalized in CANON_RULES.md** §Corrections-Forward Maps subsection — any future Tier-3 retroactive scrub authors a `[[INSTITUTIONS]] §<Domain> Corrections Forward` map; bay-tribune paper-of-record principle preserved. Mara `AUDIT_TEMPLATE.md` §Canon Audit Tier-3 sub-check (S217) now redundant for faith-canon at lookup-time but stays for residual bay-tribune source-briefing reads.
 
-Row swept from ROLLOUT_PLAN §canon.* table at S218 session-end. Canon.2 plan (`docs/plans/2026-05-12-canon-2-faith-scrub.md`) carries the 6-phase task-by-task history; ARCHIVE entry is the summary.
+Row swept from ROLLOUT_PLAN §canon.* table at S218 session-end. Canon.2 plan (`docs/archive/plans/2026-05-12-canon-2-faith-scrub.md`) carries the 6-phase task-by-task history; ARCHIVE entry is the summary.
 
 ### Backlog flagged (NOT swept this pass)
 

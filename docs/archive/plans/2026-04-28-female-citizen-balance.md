@@ -6,14 +6,14 @@ type: plan
 tags: [engine, citizens, architecture, done]
 sources:
   - docs/engine/ROLLOUT_PLAN.md (S184 INGEST item — UNBLOCKED → this plan)
-  - docs/plans/2026-04-28-intake-side-citizen-derivation.md (library this plan consumes)
+  - docs/archive/plans/2026-04-28-intake-side-citizen-derivation.md (library this plan consumes)
   - lib/citizenDerivation.js (deriveCitizenProfile + genderOverride)
   - data/citizen_female_first_names.json (Phase 1 output, this session)
   - phase05-citizens/generateGenericCitizens.js v2.7 (lastNames pool + cluster-cap pattern)
   - scripts/backfillLifecycleDefaults.js (script-pattern template)
 pointers:
   - "[[engine/ROLLOUT_PLAN]] — parent rollout (INGEST item)"
-  - "[[plans/2026-04-28-intake-side-citizen-derivation]] — library this plan consumes"
+  - "[[archive/plans/2026-04-28-intake-side-citizen-derivation]] — library this plan consumes"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — registered in same commit"
 ---

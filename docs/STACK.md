@@ -87,7 +87,7 @@ spacemolt-miner       cron      3x daily, stopped between runs
 
 ## Credentials Locations
 
-Phase 40.3 isolation: all GodWorld credentials live OUTSIDE the repo working directory at `/root/.config/godworld/` (dir chmod 700, files chmod 600). See `docs/plans/2026-04-16-phase-40-3-credential-audit.md`.
+Phase 40.3 isolation: all GodWorld credentials live OUTSIDE the repo working directory at `/root/.config/godworld/` (dir chmod 700, files chmod 600). See `docs/archive/plans/2026-04-16-phase-40-3-credential-audit.md`.
 
 | What | Where |
 |------|-------|

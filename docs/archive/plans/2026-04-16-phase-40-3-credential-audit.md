@@ -13,7 +13,7 @@ pointers:
   - "[[engine/PHASE_40_PLAN]] — parent phase doc (§40.3)"
   - "[[FOUR_COMPONENT_MAP]] — the tools ↔ environment seam this plan hardens"
   - "[[reference/DISASTER_RECOVERY]] — recovery path for credential loss (existing doc)"
-  - "[[plans/2026-04-16-phase-40-6-injection-defense]] — sister defense layer"
+  - "[[archive/plans/2026-04-16-phase-40-6-injection-defense]] — sister defense layer"
   - "[[plans/TEMPLATE]] — shape this plan follows"
 ---
 
@@ -122,7 +122,7 @@ Full audit of all 25 agents in `.claude/agents/` (Task 1, S156 engine-sheet). Re
 ### Task 1: Lock the inventory
 
 - **Files:**
-  - `docs/plans/2026-04-16-phase-40-3-credential-audit.md` — this file
+  - `docs/archive/plans/2026-04-16-phase-40-3-credential-audit.md` — this file
 - **Steps:**
   1. Expand Inventory §3 (sub-agent Read reachability) with every agent in `.claude/agents/`, not just the four spot-checked. Grep agent frontmatter for `allowed-tools`; any agent missing it inherits everything.
   2. Cross-reference with `.claude/settings.json` to see what's already denied.

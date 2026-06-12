@@ -29,7 +29,7 @@
 - Billy Donovan (also listed under NBA — he's a coach)
 
 ### Faith Organizations & Clergy (S195 expanded S218 — canon.2 plan complete)
-**Always-block — no real churches, no real pastors, no exception.** Engine seeded `Faith_Organizations` + `Simulation_Ledger` faith-leader POPs with real Oakland faith institutions + their real clergy. Authoritative substitution table lives in `docs/canon/INSTITUTIONS.md` §Faith & Community; this section is the runtime block-list `lib/canonBlocklist.js` reads at `buildFaithCards.js` startup (P4 of `[[../plans/2026-05-12-canon-2-faith-scrub]]`).
+**Always-block — no real churches, no real pastors, no exception.** Engine seeded `Faith_Organizations` + `Simulation_Ledger` faith-leader POPs with real Oakland faith institutions + their real clergy. Authoritative substitution table lives in `docs/canon/INSTITUTIONS.md` §Faith & Community; this section is the runtime block-list `lib/canonBlocklist.js` reads at `buildFaithCards.js` startup (P4 of `[[../archive/plans/2026-05-12-canon-2-faith-scrub]]`).
 
 #### Organizations (16)
 

@@ -4,7 +4,7 @@
 
 Last Updated: 2026-04-17 | Session: 156
 
-**IMPORTANT — Phase 40.3 relocation:** `.env` and `credentials/` live at `/root/.config/godworld/`, NOT inside the repo. They must never be placed inside the working directory. See `docs/plans/2026-04-16-phase-40-3-credential-audit.md` for the rationale.
+**IMPORTANT — Phase 40.3 relocation:** `.env` and `credentials/` live at `/root/.config/godworld/`, NOT inside the repo. They must never be placed inside the working directory. See `docs/archive/plans/2026-04-16-phase-40-3-credential-audit.md` for the rationale.
 
 ---
 

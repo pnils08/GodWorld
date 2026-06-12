@@ -11,7 +11,7 @@ sources:
 pointers:
   - "[[engine/PHASE_38_PLAN]] — parent phase doc (contains §§4, 14, 15, 16 enricher pattern this extends)"
   - "[[engine/ROLLOUT_PLAN]] — old spine step 8; splitting out now"
-  - "[[plans/2026-04-16-phase-38-6-skill-shrink]] — downstream skill edit that consumes this enricher's output"
+  - "[[archive/plans/2026-04-16-phase-38-6-skill-shrink]] — downstream skill edit that consumes this enricher's output"
   - "[[plans/TEMPLATE]] — shape this plan follows"
 ---
 
@@ -25,7 +25,7 @@ pointers:
 
 **Pointers:**
 - Prior work: `scripts/engine-auditor/checkMitigators.js` (38.2), `recommendRemedy.js` (38.3), `generateTribuneFraming.js` (38.4) — same enricher pattern
-- Related plan: [[plans/2026-04-16-phase-38-6-skill-shrink]] (blocked-by this one for full measurement display; can partially land without it)
+- Related plan: [[archive/plans/2026-04-16-phase-38-6-skill-shrink]] (blocked-by this one for full measurement display; can partially land without it)
 - Research basis: PHASE_38_PLAN §16.5 measurement follow-up
 - Parent rollout entry: ROLLOUT_PLAN §Phase 38 item 38.5
 
@@ -144,7 +144,7 @@ pointers:
 - **Steps:**
   1. Append a `## 18. Phase 38.5 — Measurement loop` section using the §14/§15/§16 shape. Cover goal, files, schema, logic, acceptance criteria, out-of-scope.
   2. Update the plan's top-of-file pointers frontmatter to add the 38.5 spine reference.
-  3. Add a changelog line: `2026-04-16 — Appended §18 (Phase 38.5 measurement loop). Implemented S??? per [[plans/2026-04-16-phase-38-5-measurement-loop]].`
+  3. Add a changelog line: `2026-04-16 — Appended §18 (Phase 38.5 measurement loop). Implemented S??? per [[archive/plans/2026-04-16-phase-38-5-measurement-loop]].`
 - **Verify:** `grep -c "Phase 38.5" docs/engine/PHASE_38_PLAN.md` returns ≥ 2 (one in TOC/header, one in new section).
 - **Status:** [x] done — S156
 

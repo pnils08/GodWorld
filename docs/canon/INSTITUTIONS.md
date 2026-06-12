@@ -216,7 +216,7 @@ When filling a tier-2 canon substitute, pick something that fits the prosperity-
 
 **Canon rule (S195, post-Mara C93 audit): No real churches. No real pastors. Always-block — no escalation, no exception.**
 
-Faith organizations: invent at neighborhood scale per CANON_RULES §Invention Authority. Named clergy: invent. `Faith_Organizations` ledger sheet was seeded by the engine with 16 real Oakland faith institutions + their real clergy; `Simulation_Ledger` faith-leader POPs were seeded with real-Oakland clergy names. The substitution table below is canon-forward as of S218 (plan: `[[../plans/2026-05-12-canon-2-faith-scrub]]`).
+Faith organizations: invent at neighborhood scale per CANON_RULES §Invention Authority. Named clergy: invent. `Faith_Organizations` ledger sheet was seeded by the engine with 16 real Oakland faith institutions + their real clergy; `Simulation_Ledger` faith-leader POPs were seeded with real-Oakland clergy names. The substitution table below is canon-forward as of S218 (plan: `[[../archive/plans/2026-05-12-canon-2-faith-scrub]]`).
 
 ### Naming conventions
 

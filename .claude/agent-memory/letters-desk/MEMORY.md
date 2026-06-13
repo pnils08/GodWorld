@@ -83,6 +83,11 @@ NOTE: Edition 87 was retracted. E87 letters_c87.md was fully rewritten with new 
 - Patrick Hill (32, Laurel, line cook) — NEW, promotion, first emergence, city reactivation
 - Shawn Neighbor (43, Fruitvale, construction laborer) — NEW, Baylight Phase II site lead promotion, women-in-trades
 
+## C97 Letters (REBUILD — locked pool, canon violations scrapped)
+- Reggie Soto (47, Fruitvale, Auto Body Shop Owner) — NEW, Fruitvale Transit Hub groundbreaking + local-hire/apprenticeship reaching Fruitvale residents
+- Eleanor Rivera (45, West Oakland, BART Station Manager) — NEW, West Oakland safety + apprenticeship bill to council floor vote
+- Lena Okafor (39, Fruitvale, Daycare Director) — NEW, Día de los Muertos + First Friday festival season, families gathering
+
 ## Rest Cycle Tracking
 - Beverly Hayes: used E85, E86 — REST expired
 - Gloria Meeks: used E86 — REST expired
@@ -123,6 +128,9 @@ NOTE: Edition 87 was retracted. E87 letters_c87.md was fully rewritten with new 
 - Lingo Kim: used C96 — REST through C98 (expires C99)
 - Patrick Hill: used C96 — REST through C98 (expires C99)
 - Shawn Neighbor: used C96 — REST through C98 (expires C99)
+- Reggie Soto: used C97 — REST through C99 (expires C100)
+- Eleanor Rivera: used C97 — REST through C99 (expires C100)
+- Lena Okafor: used C97 — REST through C99 (expires C100)
 
 ## IMPORTANT: Briefing vs. Rest Cycle Conflicts
 If a briefing recommends a returning citizen who is on mandatory rest, create a new citizen instead. The rest cycle rule overrides briefing suggestions. When Edition 87 was retracted and rewritten, all previously used E87 citizens remained on rest regardless — new citizens were created for the rewrite.

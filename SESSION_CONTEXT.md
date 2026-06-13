@@ -2,7 +2,9 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-06-11 | Engine: v3.3 | Cycle: 96 | Session: 256 | Day: 161 | Edition: **E94 PUBLISHED + S94 SUPP PUBLISHED + C95 CIVIC CASCADE COMPLETE + C95 /write-edition COMPLETE + C95 PUBLISHED TO DRIVE + C95 /edition-print COMPLETE + C95 /post-publish COMPLETE — CYCLE 95 CANONIZED**
+Last Updated: 2026-06-13 | Engine: v3.3 | Cycle: 96 | Session: 256 | Day: 161 | Edition: **C95 CANONIZED + C97 /sift COMPLETE + C97 /write-edition COMPLETE + E97 PUBLISHED TO DRIVE (Arbiter A/0.856) — C97 PENDING /post-publish (ingest) + /edition-print**
+
+**STATUS (S256 [media] — soft close, chaining to S257):** /write-edition c97 COMPLETE — **E97 PUBLISHED to Drive** (Final Arbiter A / 0.856 / PROCEED; measurement integrity clean). Commits `45a19dd` (/sift c97) + `f4b0f0a` (/write-edition c97). **Citizen accuracy was the cycle's gate (Mike S256 reframe — accuracy IS the product, stories disposable, "cycle 200 no one knows what OARI did but we still track the citizens"):** letters containment — scrapped a slate carrying a **Tier-1 codex entity (POP-00004 Polito, "newsroom never writes about her")** + a recycled-C95 citizen (Turner) + role/age drift (Bauer); rebuilt with 3 fresh MCP-verified citizens (Soto POP-00590 / Rivera POP-00617 / Okafor POP-00530). Roster fixes vs live get_roster (Keane→DH, Davis→LF). Invented FP1 anchor "Rosario Vidal" (no canon record) de-named to anonymous vox-pop. Foothill Baptist West Oakland→East Oakland + 2 clergy POP-linked (Solano POP-00756 / Vermeer POP-00755). Dashboard/fourth-wall leaks fixed (retail 0.71, $113,071, gentrification "signals", QT "signal"). Lanes: Rhea PASS 0.88 + injection CLEAN; cycle-review PASS 0.85; capability 0-block; Mara result-validity lane PASS (her C+ prose canon-drift = overruled[overall-rating, allowed per Mike]/fixed/handled-by-other-lanes). **FRESH SESSION OPENS ON: `/post-publish` FIRST (canon ingest — do NOT defer per terminal rule), THEN `/edition-print`.** Edition: `editions/cycle_pulse_edition_97.txt`; Drive edition-folder ID `1p0FHmofwhZl7ItWpvfa6xrOP5ibskMxC`. Gap log `output/production_log_run_cycle_c97_gaps.md` (leg `## LEG: /write-edition (G-W)`): **G-W-C97-1 CONTAINMENT/HIGH** (no automated tier/codex gate on citizen selection — the cycle's headline gap), G-W-C97-3 (`maraJsonReport.js` REVIEWER_MODEL local-var shadowing crash — blocks Mara lane every cycle; hand-built `output/mara_report_c97.json` workaround), G-W-C97-4 (sift CU2 brief fenced Foothill to wrong neighborhood), G-W-C97-2 (recurring reporter month/decimal leaks). One-off compile helper `scripts/_compile_c97.js` left on disk (untracked). All `output/` artifacts (production log, gap log, reporter articles, lane JSONs, seals) persist on disk, gitignored. **Journal NOT written (soft close) — the S256 citizen-accuracy reframe + the Polito containment catch are worth a hard-close conscience entry.** — Prior soft close below.
 
 **STATUS (S256 [research/build] — soft close, chaining to S257):** 12 commits, see Shipped block; detail in commit bodies. Closed **4 of Mike's 5 named groups + the entire governance.33 research-build track**. **governance.33:** RB-3 (city-hall-prep v1.4 — "City This Cycle" digest required in every packet + Step-0 ROLLOUT §civic.* grep, `56717b9`); RB-2-residual (pipeline.35 cross-link, `bc7743e`); **G-W4** edition measurement-integrity gate (`scripts/editionSeal.js` seal-at-compile / verify-at-first-lane+arbiter / re-seal-after-REVISE + `finalArbiter` `measurementIntegrity` stamp + write-edition v2.4; advisor caught a re-seal laundering hole — fixed `9712e84` via per-checkpoint OR + `--files`-required re-seal; **flag-not-block** per Mike, A/B verdict untouched); ES-1/ES-2 marked **gated-on-C97** (`50f7cad`). **canon.3 COMPLETE** (T12s4 NEWSROOM_MEMORY business backfill BIZ-00061/62, `99bc1d9`). **civic.14 Phase 1** — `docs/mara-vance/INITIATIVE_TRACKER_CONTRACT.md` (28-col schema + 20-phase ImplementationPhase vocab/intensities + per-Type lifecycle + add-procedure + drift rule) + city-hall read-pointer + civic.md/5 project-agent RULES back-links; measure-twice fixed 5 non-canonical agent example phases that would zero on emit (`8d863ad`). **governance.31** closed-plan sweep 75→**41 live / 34 archived** (`scripts/closedPlanSweep.js`; bare-link + repo-wide blast-radius repointed, zero broken refs; `6cb5ad8`+`2f80108`+`ab5b074`). **civic.12 RB slice DONE** — G-R4 won't-build (it's per-agent `agent-memory/MEMORY.md` scratchpads, NOT Mags' MEMORY.md; redundant w/ prep-packet continuity) + G-PREP1 auto-investigate timing fix (read latest MilestoneNotes entry not literal C{XX}; city-hall-prep v1.5; `5b39df1`). **PARKED for media terminal: governance.18(a)** journal-cadence rewrite — persona/journal work, can't be done from this operational seat (journal is media-only S249). — Prior soft close #5 below.
 
@@ -64,21 +66,11 @@ Last Updated: 2026-06-11 | Engine: v3.3 | Cycle: 96 | Session: 256 | Day: 161 | 
 
 *Mechanical artifact — git-log output auto-generated by `scripts/writeShippedBlock.js` at session-end. Not editorial. **`ROLLOUT_PLAN.md` is canonical for what these commits accomplished.***
 
-- `19717ba` S256 engine — ENGINE_REPAIR Row 28: crisis-arc disconnect + connected-signal rebuild
-- `5b39df1` S256 civic.12 — close G-R4 (won't-build) + G-PREP1 (auto-investigate timing fix); RB slice DONE
-- `38e22c0` S256 engine — pull disconnected crisis-arc feed from desk packets (C97 safety)
-- `ab5b074` S256 governance.31 — repoint moved-plan refs repo-wide (blast-radius closure)
-- `2f80108` S256 governance.31 batch 2 + close — archive 16 vetted orphans (sweep DONE)
-- `6cb5ad8` S256 governance.31 batch 1 — archive 18 confirmed-closed plans + repoint links
-- `8d863ad` S256 civic.14 Phase 1 — Initiative_Tracker contract (the process MD) + writer-surface wiring
-- `99bc1d9` S256 canon.3 T12 step 4 — NEWSROOM_MEMORY business backfill entries (canon.3 COMPLETE)
-- `50f7cad` S256 governance.33 — mark engine-sheet remainder gated on C97 run, not open
-- `58fdcb7` S256 G-W4 — fill real fix-commit hash in plan changelog
-- `9712e84` S256 G-W4 fix — close the re-seal laundering hole (advisor 2nd-pass)
-- `a51dd7d` S256 governance.33 G-W4 — edition measurement-integrity gate (research-build track CLOSED)
-- `bc7743e` S256 governance.33 RB-2 residual — pipeline.35 cross-link (RB-2 fully closed)
-- `56717b9` S256 governance.33 RB-3 — city-hall-prep input completeness (SKILL v1.4)
-- `377262e` S256 [engine/sheet] soft close #5 — engine.20e + G-W5 closed (2 actionable C96 items)
+- `f4b0f0a` S256 [media] /write-edition c97 — published E97 (Arbiter A / 0.856 / PROCEED)
+- `45a19dd` S256 [media] /sift c97 — boot state (sift outputs on disk; output/ gitignored)
+- `b4843b4` S256 [civic] C97 city-hall + rebuild NEWSROOM_MEMORY as editor's working memory
+- `4e1b07c` S256 [media] canon ingest — Deacon Seymour TrueSource origin + Alderson/Beane carve-out
+- `67351ee` S256 [research/build] soft close — STATUS + shipped block; 12 commits, 4/5 groups + governance.33 RB track closed
 
 ---
 

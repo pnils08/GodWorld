@@ -1,11 +1,28 @@
 # Mayor's Office — Agent Memory
 
 **Agent:** Mayor Avery Santana
-**Last Updated:** C92 (2026-04-20)
+**Last Updated:** C97 (2026-06-13)
 
 ## Output Directory
 Write to: `output/civic-voice/mayor_c{XX}.json`
-Prior work: `output/civic-voice/mayor_c92.json`
+Prior work: `output/civic-voice/mayor_c97.json`
+
+## Key Decisions (C97)
+
+### Initiative Response: OARI Citywide — Public Reporting Standard (INIT-002)
+- **Decision:** Establish monthly public reporting cadence for OARI citywide deployment. Decision A: maximize transparency at launch.
+- **Statement:** STMT-97-MAYOR-001 — "Citywide means citywide. The data comes back every cycle — that is how we earn the right to scale."
+- **Rationale:** OARI is live citywide Cycle 97 per timeline. Pilot data (84% non-police resolution, 1,539 calls, 6-min response, zero escalation) justifies scale. Public monthly reporting (call volume, resolution rate, response time, community feedback) preempts CRC benchmark-setting, builds community confidence, locks accountability at launch.
+- **Political Payoff:** Demonstrates rigor. Seizes the framing (administration defines the standard, not opposition). High approval (93) enables transparency without political cost.
+- **Tracker Impact:** INIT-002 `dispatch-live` confirmed; `MilestoneNotes` records citywide deployment + monthly reporting directive C97; `NextActionCycle` 98 (first report).
+
+### Executive Order: Apprenticeship Bill to Floor Vote (INIT-007)
+- **Decision:** Direct Janae Rivers to bring Youth Apprenticeship Pipeline to floor vote Cycle 97. Decision A: force motion on a ready initiative.
+- **Statement:** STMT-97-MAYOR-002 — "The bill is ready. The partnerships are signed. The budget is allocated. We vote."
+- **Rationale:** INIT-007 filed C93, sat in committee 4 cycles without floor motion. MOUs operational (OUSD, Peralta, A's), budget allocated, apprenticeship coordinators hired. No remaining operational blocker; committee hold is pure process delay. Direct mayoral directive to floor leader (Rivers) forces vote or exposes that the delay is political, not operational. Either way, governance logjam breaks.
+- **Authority:** Mayor's executive directive to floor leader (Janae Rivers, D5, OPP), who controls the calendar. Not a binding vote call, but explicit expectation.
+- **Political Payoff:** Resolves stall. Demonstrates leadership on West Oakland economic initiative. Clears path for C98 implementation if vote passes.
+- **Tracker Impact:** INIT-007 advanced to `vote-scheduled` (vote calendared C97); `MilestoneNotes` records mayor directive; `NextActionCycle` 97 (vote due); `NextScheduledAction` is the floor vote itself.
 
 ## Key Decisions (C96)
 

@@ -111,4 +111,20 @@ Prior work: `output/civic-voice/ind_swing_c86.json`, `output/civic-voice/ind_swi
 - Tran's renewal+expansion motion (C95) passed; rollout is director's deliverable; Tran marks deployment in his district
 - Council oversight: routine agenda, no reopening of sequence
 
+## C97 Statements Issued
+
+**Vega (OARI Citywide Deployment — Floor Statement of Record):** Entered floor statement closing his formal condition on OARI. His C82 NO was rooted in three concerns: efficacy (program unproven), cost/coordination (unclear), and equity (D4 excluded from pilot). Three years of pilot data addressed efficacy and cost/coordination. The C95 expansion condition addressed equity—requiring D4 in the first implementation cohort. The C96 rollout confirmed D4 sequenced at rotation 2, weeks 10-11 (exact match to his condition). Now, with C97 citywide deployment live, Vega lifts his formal reservation. Statement closes the procedural record: the sequence is locked, the condition is met, and council oversight proceeds on routine agenda. Vote: firm YES on citywide deployment. D4 window permanently locked.
+
+**Tran (OARI Citywide Deployment — Accountability Standard):** Affirmed the Mayor's commitment to public monthly reporting on OARI (call volume, resolution rate, response time, community feedback). Tran's C82 deciding vote was rooted in pilot evidence; his C95 renewal sponsorship was conditional on sustained institutional accountability. The Mayor's monthly reporting directive provides the mechanism. Tran framed this as essential for D2 constituents, particularly in Chinatown and Downtown, who have legitimate historical reasons to scrutinize police and responder accountability. Monthly public reporting with community feedback embedded means that scrutiny is institutional. Vote: firm YES on citywide deployment with monthly reporting standard.
+
+**Canon Assertions (C97):**
+- OARI now live citywide, all nine districts deployed
+- Vega's C82 NO revisited and closed: condition met (D4 sequenced rotation 2, weeks 10-11), formal reservation lifted, full firm YES
+- Vega's C95 expansion condition satisfied and locked at C97 (no reopening)
+- Tran's C82 deciding vote affirmed; C95 renewal sponsorship affirmed with focus on accountability mechanism
+- Mayor's monthly reporting directive (call volume, resolution rate, response time, community feedback) affirmed by Tran as accountability standard
+- D2 community feedback mechanism: community participation in monthly reporting deemed essential for Chinatown/Downtown constituent trust
+- Council President procedural authority: routine oversight agenda, no procedural reopening of sequence
+- Vote math: Mayor + OPP (Rivers) + Vega (firm YES) + Tran (firm YES) + CRC ? = 5+ yes on OARI citywide; motion canonical
+
 ## C87 Statements Issued

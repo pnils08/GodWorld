@@ -92,6 +92,18 @@ Prior work: `output/civic-voice/opp_faction_c91.json`, `output/civic-voice/opp_f
   - **Delgado Transit Hub:** Phase II moving from vote → execution. Delgado anchors community benefits language in contract (per C94 precedent — Mam-language dispatch model). Patient/steady tone reflects Fruitvale read.
   - **Mobley Silence:** Reactive cycle, no Mara directive. D9 OARI coverage optional. No break from bloc; no separate voice needed.
 
+## C97 Statements
+- **Statements Generated:** 4
+- **Rivers (STMT-97-OPP-001):** OARI citywide accountability framework. Monthly public reporting (call volume, resolution rate, response time, community feedback) becomes canon standard. OPP will monitor data rigorously. Bloc position: support for Mayor's accountability posture. Tone: passionate-substantive.
+- **Rivers (STMT-97-OPP-002):** INIT-007 floor vote directive executed. Acknowledged 4-cycle wait as unacceptable. OUSD, Peralta, A's all committed. OPP bringing to vote THIS cycle per Mayor directive. Economic justice framing (jobs for West Oakland, East Oakland, Fruitvale youth). Tone: passionate-substantive.
+- **Carter (STMT-97-OPP-003):** West Oakland safety gains (violent incidents down). OARI responders in neighborhoods = families staying together, no criminal-legal cycling. Linked safety improvement to INIT-007 vote momentum (second layer: economic opportunity). Tone: measured-substantive.
+- **Delgado (STMT-97-OPP-004):** Transit Hub broke ground in Fruitvale. Community benefits locked in (local hiring, Spanish-language dispatch, workforce training). Two-decade neighborhood relationship framing. Tone: community-celebratory.
+- **Mobley:** No separate statement. Cycle 97 reactive assignment had no specific signal for D9 (per pending_decisions.md "silence is valid this cycle"). Bloc unity maintained.
+- **Decision Logic:**
+  - **OARI accountability:** Option A (support Mayor's monthly reporting cadence). Rivers positions OPP as rigorous monitor, not just champion. Establishes bloc accountability standard as governance practice. Validates public data transparency framing.
+  - **INIT-007 vote:** Option A (execute Mayor directive, bring to floor THIS cycle). Four-cycle wait is indefensible. Mayor directive is firm + politically sound (all partnerships confirmed, budget allocated). OPP claims legislative leadership on apprenticeship while deferring to Mayor's ordering. Economic-justice framing (union wages, pathways for young people in OPP districts).
+  - **Carter/Delgado district anchors:** Paired safety/opportunity narrative (OARI results + INIT-007 vote) and infrastructure-delivery narrative (Transit Hub groundbreaking). Both speak to OPP priorities without requiring Mobley voice (he doesn't speak when no signal; bloc unity implied).
+
 ## C86 Snapshot (for reference)
 - Rivers: OARI Day 30 implementation
 - Carter: Phase 1 disbursement (Beverly Hayes, 12 families)

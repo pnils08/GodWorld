@@ -401,6 +401,26 @@
         "freelance": []
       },
       "noteText": "Auto-graded by gradeEdition.js. 12 articles, 0 errata entries."
+    },
+    {
+      "edition": 96,
+      "cycle": 96,
+      "type": "edition",
+      "date": "2026-06-13",
+      "grade": "A",
+      "maraGrade": null,
+      "criticals": 0,
+      "warnings": 0,
+      "notes": 0,
+      "deskErrors": {
+        "civic": [],
+        "business": [],
+        "culture": [],
+        "sports": [],
+        "letters": [],
+        "editor": []
+      },
+      "noteText": "Auto-graded by gradeEdition.js. 13 articles, 0 errata entries."
     }
   ]
 }

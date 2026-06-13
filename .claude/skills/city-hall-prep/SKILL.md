@@ -88,15 +88,9 @@ Full convention: [[SUPERMEMORY]] §Memory Fence. Covers the threat model and whe
 
 Create/open `output/production_log_c{XX}.md` — the unified one-true-cycle source every cycle-active skill appends a named section to (per `docs/media/production_log_template.md`). Write the §Cycle Header (timestamp, cycle, sim day) + §Carry-Forward, then append this skill's `## /city-hall-prep` section with Mike's pressure. (Until the `pipeline.35` cycle-init admin skill ships, `/city-hall-prep` is the log opener; afterward it becomes an appender.)
 
-**Mike's pressure auto-derive (S215, closes G-5).** "Pressure from Mike" defaults to the synthesis of: engine review HIGH-severity ailments (`output/engine_review_c{XX}.md` §Ailments / §Stuck Initiatives), Mara directive content (`output/mara-directives/mara_directive_c{XX}.txt` if present), and active civic items in `docs/engine/ROLLOUT_PLAN.md` §civic.*. Compute the default, write it into the production log, then ask Mike to confirm or override. Mike-override fires only when his read of the cycle differs from those engine signals (e.g., front-page-rotation pressure, audit follow-up ask, off-rubric editorial direction) — anomaly-only escalation, not always-on.
+**Mike's pressure auto-derive (S215, closes G-5).** "Pressure from Mike" defaults to the synthesis of: engine review HIGH-severity ailments (`output/engine_review_c{XX}.md` §Ailments / §Stuck Initiatives) and Mara directive content (`output/mara-directives/mara_directive_c{XX}.txt` if present). Compute the default, write it into the production log, then ask Mike to confirm or override. Mike-override fires only when his read of the cycle differs from those engine signals (e.g., front-page-rotation pressure, audit follow-up ask, off-rubric editorial direction) — anomaly-only escalation, not always-on.
 
-**ROLLOUT §civic.* mechanical pull (S256 RB-3, closes G-PREP4).** Pressure-input #3 above (active civic ROLLOUT rows) is the one a session silently skips — C96 wrote "Active civic ROLLOUT items: none new" without reading the file, missing `civic.14` which already owned that cycle's phase-drop root cause. Don't eyeball it. Grep the in-progress rows mechanically and capture the output into the production log before writing the pressure line:
-
-```bash
-grep -nE '^\| (civic\.|infrastructure\.|canon\.)' docs/engine/ROLLOUT_PLAN.md | grep -iE 'in-progress|in progress|ready|open' || echo "no in-progress civic.* rows"
-```
-
-For each row returned, reconcile against this cycle: does an in-flight civic.* phase already own a signal you're about to re-derive? Does its plan touch an initiative on this cycle's tracker? Fold the evidence into the existing row — do **not** spawn a parallel gap for a problem an in-progress row already owns (the C96 G-PREP1/G-R2 → civic.14 duplication). Reconciliation outcome goes in the §/city-hall-prep section ("civic.* reconciled: N in-progress rows, M relevant this cycle").
+**No ROLLOUT_PLAN involvement in this terminal (S256).** City-hall prep neither reads from nor writes to `docs/engine/ROLLOUT_PLAN.md`. There is zero correlation between the civic cycle and the project ROLLOUT plan — ROLLOUT is cross-terminal build-tracking, not civic pressure. Issues surfaced during a run go to the cycle gap log (see §Gap log below), never ROLLOUT. (Per civic TERMINAL.md scope: this terminal runs skills, it does not file or read ROLLOUT entries. The prior "ROLLOUT §civic.* mechanical pull" step was removed — it contradicted the terminal rule and produced only engineering rows irrelevant to the cycle.)
 
 **Mara additive only (S215, closes G-9).** Mara directive is a check-against frame to compare and reconcile, NOT a starting point to defer to. Mags-and-engine-review drive topic assignments; Mara's directive becomes a `## Mara cross-check` block at the bottom of the production log header — "Did our topic assignments answer her questions? Where do they differ?" Don't treat the directive as primary input. This was Mike's explicit correction during S192 ("this is your space not hers"); without it written into the skill, the framing re-drifts every session.
 
@@ -310,7 +304,7 @@ Then the G-PREP entries below it — or `No gaps this run.` on a clean run. The 
 - process-gap (skill-vs-actual-practice drift, sheet-read steps demoted because world summary already snapshots)
 - canon-risk (faction-bloc topology in voice routing table — Mara-additive framing, faction-vs-individual confusion)
 
-**Discipline:** write the gap log even on clean runs. File a ROLLOUT row in `civic.<n>` pointing at the gap log per ADR-0005 §How to add work. Promote individual HIGH gaps as bandwidth allows.
+**Discipline:** write the gap log even on clean runs. The gap log is the only filing channel from this terminal — research-build triages it into ROLLOUT next session. This terminal never writes a ROLLOUT row.
 
 **Close gate (mechanical — RB-1, G-S1).** The final action of /city-hall-prep is:
 

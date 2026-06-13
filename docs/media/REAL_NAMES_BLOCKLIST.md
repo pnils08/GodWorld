@@ -22,6 +22,8 @@
 
 **S175 sports-history carveout (see [[canon/CANON_RULES]]):** historical real-MLB figures are permitted as franchise context per Mike's sports-universe-laxer policy (e.g., Reggie Jackson, Rickey Henderson, the Bash Brothers era — Hal Richmond's archive references them legitimately). **Current real MLB players outside the canon roster remain Tier 3 / always-block.** When verifying, ask: is this a historical figure framing the dynasty's lineage, or a current player being inserted into 2041 canon? Former is allowed; latter is a leak.
 
+**S256 named front-office exceptions (Mike-approved):** **Sandy Alderson** and **Billy Beane** are permitted as historical front-office lineage grounding Mike Paulson's analytical descent — first canonized in Hal Richmond's "The System and the Soul" (C96 supplemental, bay-tribune doc `jaXGs2a8MQy9MTp8UpKfyi`). They are historical executives framing the dynasty's intellectual lineage, not current roster — do NOT strip on cleanup passes. Same allowance class as the Jackson/Henderson carveout above.
+
 ### NFL Players
 (none yet)
 

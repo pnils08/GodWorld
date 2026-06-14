@@ -91,7 +91,7 @@ function generate(ctx, ailmentPatterns) {
 
   const makeId = (prefix, key) => `${prefix}-${key}-c${cycle}`;
 
-  function makeBrief({ id, eventClass, subjectIds = [], neighborhood = null, facts = {}, threeLayerHandle, promotionHints = [] }) {
+  function makeBrief({ id, eventClass, subjectIds = [], neighborhood = null, facts = {}, threeLayerHandle, promotionHints = [], synthesized = false }) {
     return {
       id,
       eventClass,
@@ -101,6 +101,10 @@ function generate(ctx, ailmentPatterns) {
       facts,
       threeLayerHandle,
       tier: 'C',
+      // G-S5 (S257): top-level machine-readable flag so sift can deprioritize a
+      // thin/synthesized-description brief without digging into facts. Mirrors
+      // facts.descriptionSource === 'synthesized'; surfaced here for visibility.
+      synthesized,
       promotionHints,
     };
   }
@@ -148,7 +152,7 @@ function generate(ctx, ailmentPatterns) {
     if (nbhd && activeAilmentNeighborhoods.has(nbhd)) hints.push(`${nbhd} has an active ailment this cycle — event contextualizes it`);
     if (num(e.ImpactScore) != null && num(e.ImpactScore) >= 0.7) hints.push('High ImpactScore — likely newsworthy');
     if (String(e.ShockFlag).toLowerCase() === 'true') hints.push('ShockFlag set');
-    if (!rawDesc) hints.push('Description synthesized from EventType — verify source-ledger row before promoting');
+    if (!rawDesc) hints.push('SYNTHESIZED DESCRIPTION (thin canon) — no source-ledger EventDescription; deprioritize for promotion and verify the source row before any story use');
 
     const slice = slicer.slice(nbhd);
 
@@ -174,6 +178,7 @@ function generate(ctx, ailmentPatterns) {
         userActions: activeAilmentInitiatives.size > 0 ? `overlaps initiatives: ${[...activeAilmentInitiatives].join(', ')}` : '',
       },
       promotionHints: hints,
+      synthesized: !rawDesc,
     }));
   });
 

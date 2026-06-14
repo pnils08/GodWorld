@@ -5,7 +5,7 @@
  *   - dump file path uses c<CYCLE> when env or base_context supplies cycle
  *   - dump file path falls back to ts<epoch> when neither source available
  *   - dumped JSON payload carries all fields per plan T6 step 2 shape
- *   - cycle resolution precedence: env CYCLE > env CYCLE_NUMBER > base_context.json > timestamp
+ *   - cycle resolution precedence: stats.cycle (run's live cycle, G-P-C97-2) > env CYCLE > env CYCLE_NUMBER > base_context.json > timestamp
  *
  * Does NOT exercise process.exit — gate caller (main) owns the exit decision;
  * emitErrorGateDump only writes the dump and returns the path.
@@ -54,6 +54,15 @@ console.log('\n[T6] buildCitizenCards.js — Errors-gate contract\n');
 // Group 1 — Cycle resolution precedence
 // -----------------------------------------------------------------
 console.log('Group 1 — Cycle resolution precedence');
+
+total++; passed += passing('stats.cycle (run live cycle) wins over env — G-P-C97-2', function () {
+  process.env.CYCLE = '99';
+  process.env.CYCLE_NUMBER = '88';
+  var mod = freshRequire();
+  var p = mod.emitErrorGateDump({ total_attempted: 1, written: 0, errors: 1, failures: [], cycle: 97 });
+  assert.ok(p.endsWith('citizen_card_failures_c97.json'), 'expected c97 (run cycle) in path, got: ' + p);
+  cleanup(p);
+});
 
 total++; passed += passing('env CYCLE wins when set', function () {
   process.env.CYCLE = '99';

@@ -1121,11 +1121,21 @@ async function main() {
   // Pre-T6 the script always exited 0; downstream skills had no way to detect
   // silent partial failure beyond grepping stdout.
   if (errors > 0) {
+    // G-P-C97-2 (S257): key the failure dump off the LIVE engine cycle
+    // (World_Config), not a possibly-stale base_context.json. Defensive — a read
+    // failure falls through to emitErrorGateDump's env/file chain.
+    var liveCycle = null;
+    try {
+      var wcRows = await sheets.getSheetAsObjects('World_Config');
+      var ccRow = wcRows.find(function (r) { return r.Key === 'cycleCount'; });
+      if (ccRow) liveCycle = parseInt(ccRow.Value, 10);
+    } catch (_) { /* fall back to env/base_context in emitErrorGateDump */ }
     var failPath = emitErrorGateDump({
       total_attempted: citizens.length,
       written: written,
       errors: errors,
-      failures: failureList
+      failures: failureList,
+      cycle: liveCycle
     });
     console.error('[GATE-FAIL] ' + errors + ' card write(s) failed; details: ' + failPath);
     process.exit(1);
@@ -1137,7 +1147,11 @@ async function main() {
 // without round-tripping through Sim_Ledger reads + Supermemory writes.
 // Returns the dump-file path. Does NOT exit — caller decides exit code.
 function emitErrorGateDump(stats) {
-  var cycleResolved = process.env.CYCLE || process.env.CYCLE_NUMBER || null;
+  // G-P-C97-2 (S257): the run's live cycle (passed as stats.cycle from main(),
+  // resolved from World_Config) is the authoritative source — base_context.json
+  // can lag a cycle (it did on the C97 run → dump mis-keyed c96). env overrides
+  // stay above the file fallback for standalone/test invocation.
+  var cycleResolved = stats.cycle || process.env.CYCLE || process.env.CYCLE_NUMBER || null;
   if (!cycleResolved) {
     try {
       var bcPath = path.join(__dirname, '..', 'output/desk-packets/base_context.json');

@@ -37,6 +37,17 @@ You generate **1-2 statements per cycle**, only when public safety events occur.
 }
 ```
 
+### Tracker updates (only when your statement moves an initiative) — S258 RB-4 (G-R3/G-R4)
+
+Most cycles you do NOT touch the tracker — you react or comment. Emit `trackerUpdates` ONLY when your statement actually changes an initiative's state (e.g., a vote you report advances its phase). When you do, use the canonical shape — a drifted field-path or a missing owner is why C97 flagged this voice (G-R3):
+
+- Top-level **`"trackerOwner": "INIT-XXX"`** — the initiative this update applies to. Without it, civic.14 owner-dispatch can't resolve which statement drives the write and the update is dropped.
+- **`"trackerUpdates"`** carries only the four write-back fields: `ImplementationPhase`, `MilestoneNotes`, `NextScheduledAction`, `NextActionCycle`.
+- **`ImplementationPhase` MUST be one of the 20 canonical phases in [[../../../docs/mara-vance/INITIATIVE_TRACKER_CONTRACT|INITIATIVE_TRACKER_CONTRACT.md]] §2** — a free-formed value is silently zeroed (the initiative goes dark, then false-flags "stuck"). Map to the nearest canonical phase.
+- **`MilestoneNotes`: one sentence, ≤~200 chars (G-R4)** — name the deliverable that justifies the change, not a multi-paragraph operational dump.
+
+If your statement doesn't move an initiative, omit both `trackerOwner` and `trackerUpdates` entirely.
+
 ### Statement Types
 
 | Type | When | What |

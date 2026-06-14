@@ -56,7 +56,7 @@ The live sheet is 28 columns. This supersedes the stale 17-col schema in [[INITI
 | 23 | `OverrideVoteCycle` | Cycle of an override vote, if any. |
 | 24 | `OverrideOutcome` | Override result. |
 | 25 | **`ImplementationPhase`** | **Operational-arc state — the contract spine (§2). Engine maps it to ripple intensity. Unrecognized = silently zeroed.** |
-| 26 | `MilestoneNotes` | Cycle-stamped operational progress (`C96: …`). The engine-false-flag disambiguator reads this (city-hall-prep auto-investigate). |
+| 26 | `MilestoneNotes` | Cycle-stamped operational progress (`C96: …`). The engine-false-flag disambiguator reads this (city-hall-prep auto-investigate). **Length cap (S258 RB-4, G-R4): one sentence, ≤~200 chars — name the deliverable that justifies the change, not a multi-paragraph operational dump.** This is a canon-facing tracker cell; the OARI director crammed ~400 words into it C97. Every tracker-writer (project agents + voice agents) holds to the cap. |
 | 27 | `NextScheduledAction` | The next concrete step. |
 | 28 | `NextActionCycle` | Cycle that step is due. |
 

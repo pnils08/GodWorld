@@ -138,6 +138,8 @@ For each voice that has a decision this cycle, write `output/civic-voice-workspa
 
 ## Step 3: Run Mayor FIRST (Layer 1)
 
+**Model tier for ALL voice + project subagents (S258 RB-4, operator instruction G-R2): dispatch on Sonnet.** Every `civic-office-*` and `civic-project-*` agent launched in Steps 3–5 runs with `model: sonnet` (the Agent-tool `model` param). They default to Haiku otherwise — C97 ran the whole cascade on `claude-haiku-4-5`, which the operator flagged. Set the tier on every launch in this skill.
+
 Launch `civic-office-mayor` agent. Mayor gets:
 - `.claude/agents/civic-office-mayor/IDENTITY.md`
 - `output/civic-voice-workspace/civic-office-mayor/current/pending_decisions.md`

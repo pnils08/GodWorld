@@ -247,6 +247,16 @@ Check all files exist:
 - Any pending_decisions referencing a council member matches the canonical 9-member roster (D1-D9 per Civic_Office_Ledger)
 - Vote-trigger detection: any initiative at `vote-ready` phase with NextActionCycle = current cycle is routed to all 9 council voices via faction-bloc agents (G-R11 pre-condition)
 
+**Deterministic telemetry linter — HARD GATE before voice dispatch (ES-2 step 2 backstop, wired S259).** The Step-3 translation contract is the rule; `scripts/lintCivicPackets.js` is the mechanical enforcer (the operator is the contamination source, so instruction alone can't be the gate). Run it over every written packet:
+
+```bash
+for f in output/civic-voice-workspace/*/current/pending_decisions.md; do
+  node scripts/lintCivicPackets.js --file "$f" || echo "TELEMETRY LEAK — $f (HALT)"
+done
+```
+
+It flags σ / signed sub-1 deltas / phase-codes / `Engine:` tags / backtick code-spans / raw decimals next to a metric word. **Any non-zero exit is a HARD anomaly** — translate the flagged values to perception per the Step-3 contract and re-run until every packet exits 0 before `/city-hall` dispatches the voices. (Wired via `--file` per-packet: the script's bare-`<cycle>` glob targets top-level `output/pending_decisions*.md`, which is NOT where prep writes packets — flagged back to engine-sheet to point `resolveFiles` at `output/civic-voice-workspace/*/current/`. Until that lands, the `--file` loop is authoritative.)
+
 **Anomaly-only present-to-Mike (S215, closes G-6 Step 4 side).** City Clerk pre-flight pass verifies voice files exist for assigned voices, content matches assignments, no canon violations. If Clerk passes clean, Step 4 completes silently with one-line "prep verified — running /city-hall" log entry. Mike's review fires only when Clerk flags a structural issue:
 
 - Pending_decisions packet references a non-canonical council member (e.g., wrong district)

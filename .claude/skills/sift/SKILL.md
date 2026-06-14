@@ -753,6 +753,14 @@ Emit `output/letters/c{XX}_candidates.md` — candidate POOL (NOT assignment). L
 - **(b) Card integrity.** Drop any citizen whose card is self-contradictory (POP-00029 shape — conflicting role/age/status fields). A broken card can't ground an accurate letter.
 - **(c) Freshness against the LIVE cycle window.** Exclude any citizen with a published edition appearance in the trailing N cycles — checked against the canon archive / appearance index (`search_canon` + `media/ARTICLE_INDEX_BY_POPID`), NOT only the loaded rest-cycle tracker range. The rest-cycle filter above misses appearances outside the tracker window (Calvin Turner appeared E95 but slipped the loaded tracker).
 
+**Deterministic eligibility gate — HARD STOP after the pool file is written (ES-2 step 1 backstop, wired S259).** The screen above is the LLM first line; the operator is the contamination source, so a mechanical gate is the backstop. Once `output/letters/c{XX}_candidates.md` is written, run:
+
+```bash
+node scripts/checkLetterEligibility.js {XX}
+```
+
+It reads the candidates file directly, resolves every candidate POPID against the live `Simulation_Ledger`, and flags any that is a canon field-actor (e.g. POP-00004 Lucia Polito), carries an entity bio-marker, or is unresolvable on the ledger. **Exit 1 = HALT:** strip the flagged POPIDs from the pool, re-emit, and re-run until it exits 0 before the pool is final / handed to letters-desk selection. Do not proceed on a non-zero exit. (Scope: letters pool only — incidental cameos are a deferred separate gate.)
+
 **Pool shape** (per brief_template_v2 §Letters-desk variant):
 
 ```markdown

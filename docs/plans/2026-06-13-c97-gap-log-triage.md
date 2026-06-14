@@ -145,6 +145,11 @@ FLUX forced a Black man onto canonically-white Isley Kelley across three generat
 
 **RB TRACK COMPLETE (S258): RB-1..6 all shipped.** Commits: RB-1 `3e8731b`, RB-2 `0ff2789`, RB-3 `9309e77`, RB-4 `ea8415e`, RB-5+RB-6 (this commit). ES track (engine-sheet, ES-1..5) remains — governance.34 stays in-progress for it.
 
+**Skill-wiring of the ES-2 gates — DONE S259 (research-build).** ES-2 built the two deterministic scripts (S257) but flagged "WIRING into the skills surfaced separately" — that wiring is apparatus (skill edits) = research-build, executed S259:
+- `scripts/checkLetterEligibility.js` → sift Step 10 (after the candidate-pool emit; `node … {XX}`, exit 1 = HALT). Verified firing on live c97 candidates: POP-00004 caught INELIGIBLE, exit 1.
+- `scripts/lintCivicPackets.js` → city-hall-prep Step 4 (before voice dispatch). Verified: all 7 c97 workspace packets clean.
+- **Flag back to engine-sheet (substrate path bug):** `lintCivicPackets.js` `resolveFiles` bare-`<cycle>` mode globs top-level `output/pending_decisions*.md`, but prep writes packets to `output/civic-voice-workspace/*/current/pending_decisions.md` — the `<cycle>` form finds zero files. Wired via a `--file` loop as the stopgap (uses the validated `lintText` path); engine-sheet should point `resolveFiles` at the workspace glob so the documented `<cycle>` usage works.
+
 ---
 
 ## Track B — engine-sheet (substrate: engine code, scripts, parsers, sheets)

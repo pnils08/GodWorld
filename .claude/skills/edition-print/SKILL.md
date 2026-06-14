@@ -68,7 +68,7 @@ Read the consolidated media production log: `output/production_log_c<XX>.md`. Ap
 
 ```markdown
 ## Print Pipeline (<type>)
-**Started:** {timestamp}
+**Started:** Cycle <XX> · SimYear <Y>, <Month> <Day>   <!-- S258 RB-3 (G-PR-C97-5): in-world marker — the production log is canon-facing (sift reads it). Pull SimYear/Month/Day from world_summary_c<XX>.md §Calendar context. NO real-world clock here; gap-logs + other out-of-world artifacts may keep wall-clock. -->
 **Type:** <type>
 **Source:** <path>
 **Status:** IN PROGRESS

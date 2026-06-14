@@ -1,8 +1,8 @@
 ---
 name: city-hall-prep
 description: Prepare all inputs for city-hall voice agents. Reads tracker, approvals, world summary, engine review, coverage ratings, previous log, canon, Mara directive. Writes pending decisions per voice.
-version: "1.5"
-updated: 2026-06-12
+version: "1.6"
+updated: 2026-06-14
 tags: [civic, active]
 effort: high
 disable-model-invocation: true
@@ -230,6 +230,11 @@ For each voice with a decision, write `output/civic-voice-workspace/{office}/cur
 - Full initiative packets
 - Anything from buildInitiativePackets.js
 
+**Engine→in-world translation contract — NO raw telemetry in any packet (S258 RB-3, closes G-PREP5).** A pending_decisions packet *is* the voice's memory; engine values are foreign objects in it. Translate every engine signal to perception before it enters the packet — never carry it raw:
+- **Forbidden in any packet:** metrics, σ values (`−4.9σ`), decimals (`+0.84`), backtick phase-codes (`` `vote-ready → construction-planning` ``), and `(engine)` / `Engine:` tags. The C97 first-pass OPP packet leaked all four.
+- **Express engine state as perception only:** "violent crime is down sharply this cycle," not `violent crime −4.9σ`; "the mood downtown has lifted," not `sentiment +0.84`; "the project just cleared its planning vote and is moving to construction," not the phase-code arrow.
+- The deterministic packet linter that enforces this at the Step-4 gate is ES-2 (engine-sheet) — the mechanical backstop, because the operator is the contamination source. This rule is what that linter checks.
+
 ### Step 4: Verify Prep Outputs (anomaly-only gate, S215 G-6)
 
 Check all files exist:
@@ -321,3 +326,4 @@ It exits non-zero until the `## LEG: /city-hall-prep (G-PREP)` leg exists in the
 - 2026-05-12 — v1.2 (S216, research-build closing civic.11). **Step 1 — Auto-investigate engine-flagged initiatives:** wired `scripts/readInitiativeMilestoneNotes.js` for `mitigator-stuck` / `remedy-not-firing` ailments. Three dispositions (Scenario A / B / C) computed before Step 2 topic-assignment build, capturing the civic.7 INIT-005 false-positive case as a routine prep-time disambiguation rather than a same-cycle wasted voice cycle. Plan: [[../../../docs/plans/2026-05-11-civic-7-init-005-investigation]].
 - 2026-06-12 — v1.5 (S256, research-build closing civic.12 G-PREP1). **Auto-investigate timing fix:** the Step 1 disambiguation checked for a `C{XX}` MilestoneNotes entry, but runs at prep — before `/city-hall` Step 6 writes that entry — so the current-cycle entry can't exist and every flagged initiative mis-fired into Scenario A (real-signal), defeating the civic.11 false-positive disambiguation. Reframed the three dispositions to read the **latest existing entry** (normally `C{XX-1}`) instead of literal `C{XX}`. Option (c) per the civic.12 plan — lowest blast-radius, preserves the Scenario A/B/C/D framework, no step-move/gating. Restores intended civic.11 behavior rather than changing it.
 - 2026-06-11 — v1.4 (S256, research-build closing governance.33 RB-3). **G-PREP4 — ROLLOUT §civic.* mechanical pull:** Step 0 pressure-input #3 (active civic ROLLOUT rows) was prose a session could skip; C96 wrote "none new" without reading and missed civic.14. Added a mechanical grep + reconcile-don't-duplicate instruction. **C96 G-PREP3 — City This Cycle digest:** Step 1 reads `baseline_briefs_c{XX}.json`; Step 3 now REQUIRES a `## City This Cycle` block in every packet (Mayor/citywide = world_summary citywide digest; neighborhood voices = snapshot-table pulse + baseline_briefs filtered by neighborhood), independent of Mara's initiative-blind directive. Formalizes the operator manual bridge from C96. Pairs with the Mara-additive-not-primary framing (S215 G-9). *Note: an earlier gap run's "G-PREP3" label persists inline at Step 1 §Scenario D (OARI paradox) — different gap, left untouched; this entry refers to the C96 Mara-world-blind G-PREP3.* Source gaps: `output/production_log_run_cycle_c96_gaps.md` §G-PREP3, §G-PREP4. Plan: [[../../../docs/plans/2026-06-07-c96-gap-log-triage]] RB-3.
+- 2026-06-14 — v1.6 (S258, research-build closing C97 triage RB-3 G-PREP5). **Engine→in-world translation contract at Step 3:** added a no-raw-telemetry rule to the "does NOT include" block — no metrics/σ/decimals/backtick phase-codes/`(engine)` tags in any packet; engine state expressed as perception only (the C97 first-pass OPP packet leaked `Engine: sentiment +0.84`, `−4.9σ`, a phase-code arrow, `(engine)` tags). The deterministic Step-4 packet linter that enforces this is ES-2 (engine-sheet); this rule is what it checks. Source gap: `output/production_log_run_cycle_c97_gaps.md` §G-PREP5. Plan: [[../../../docs/plans/2026-06-13-c97-gap-log-triage]] RB-3.

@@ -42,7 +42,7 @@ pointers:
 ```markdown
 # Production Log — Cycle <XX>
 
-**Opened:** <YYYY-MM-DD HH:MM> by /city-hall-prep (S<NNN>)
+**Opened:** Cycle <XX> · SimYear <Y>, <Month> <Day> by /city-hall-prep (S<NNN>)  <!-- S258 RB-3 (G-PREP2): in-world marker — this log is canon-facing (sift reads it). SimYear/Month/Day from world_summary §Calendar context. Wall-clock process-tracking lives in the Session(s) field below + git; gap-logs keep wall-clock. -->
 **Cycle:** <XX>
 **Day (sim calendar):** <NNN>
 **Session(s) running stages:** S<NNN> (open), S<NNN+M> (close)  ← updated as cycle advances across sessions
@@ -119,12 +119,12 @@ Read from `Civic_Office_Ledger` sheet via `lib/sheets.js`. Filter to MAYOR-* + C
 Each skill that runs during the cycle appends a section with the header pattern:
 
 ```
-## /<skill-name> (S<NNN>) — <YYYY-MM-DD HH:MM>
+## /<skill-name> (S<NNN>) — Cycle <XX>
 ```
 
 Followed by the skill-specific fields below.
 
-### `## /city-hall-prep (S<NNN>) — <YYYY-MM-DD HH:MM>`
+### `## /city-hall-prep (S<NNN>) — Cycle <XX>`
 
 ```markdown
 ### Inputs read
@@ -157,7 +157,7 @@ For each mitigator-stuck / remedy-not-firing initiative in engine review:
 `pending_decisions` packet ready at `output/civic-voice/`. Outstanding gaps logged in `output/production_log_c<XX>_city_hall_prep_gaps.md` sidecar.
 ```
 
-### `## /city-hall (S<NNN>) — <YYYY-MM-DD HH:MM>`
+### `## /city-hall (S<NNN>) — Cycle <XX>`
 
 ```markdown
 ### Inputs read
@@ -194,7 +194,7 @@ Per-office `output/civic-voice/<office>_c<XX>.json` files written. Tracker updat
 Civic source-material ready in `output/civic-voice/` + `output/city-civic-database/`. /sift Step 1 reads these.
 ```
 
-### `## /sift (S<NNN>) — <YYYY-MM-DD HH:MM>`
+### `## /sift (S<NNN>) — Cycle <XX>`
 
 ```markdown
 ### Inputs read (sheet-primary per v2.0)
@@ -246,7 +246,7 @@ For citizens not POPID-confirmed at Step 4:
 Briefs + dispatch.json + letters candidate pool ready. /write-edition Step 1 reads these.
 ```
 
-### `## /write-edition (S<NNN>) — <YYYY-MM-DD HH:MM>`
+### `## /write-edition (S<NNN>) — Cycle <XX>`
 
 ```markdown
 ### Inputs read
@@ -282,7 +282,7 @@ USER APPROVAL GATE per S227 pipeline.26: canon-verify before Mara/Drive.
 Edition `.txt` ready at `editions/`. /post-publish reads it for canon ingest + grading.
 ```
 
-### `## /edition-print (S<NNN>) — <YYYY-MM-DD HH:MM>` (parallel to /post-publish)
+### `## /edition-print (S<NNN>) — Cycle <XX>` (parallel to /post-publish)
 
 ```markdown
 ### Inputs read
@@ -307,7 +307,7 @@ N photos generated via FLUX. Pass rate: N/N (after photoQA.js 5-axis check: comp
 Mike opens PDF + visually verifies article-table headlines + photo placement + on-canon tone before declaring complete.
 ```
 
-### `## /post-publish (S<NNN>) — <YYYY-MM-DD HH:MM>`
+### `## /post-publish (S<NNN>) — Cycle <XX>`
 
 ```markdown
 ### Inputs read
@@ -353,7 +353,7 @@ These skills don't run every cycle. When they do, each appends its own named sec
 ### Closing Block
 
 ```
-**Cycle <XX> CLOSED <YYYY-MM-DD HH:MM>**
+**Cycle <XX> CLOSED — SimYear <Y>, <Month> <Day>**
 
 - **Edition:** E<XX> "<headline-spine>"
 - **Drive ID:** <Drive-folder-or-file-ID>

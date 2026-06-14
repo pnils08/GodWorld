@@ -22,7 +22,7 @@ pointers:
 
 **Goal:** Close the C97 production gaps (3 gap logs, ~30 entries) as two-track phased work — research-build (apparatus) + engine-sheet (substrate) — with ROLLOUT carrying one pointer row and this plan carrying all detail + per-phase tracking.
 
-**Architecture:** Three C97 sidecar gap logs (run-cycle, print, post-publish) clustered by root cause into themes (§Cluster Map) and routed to the terminal whose expertise owns each fix. Two themes this cycle are **operator scope directives**, not bugs (T7 strip-civic-initiatives, T1 lifecycle-misfire-becomes-story) — they reshape what the pipeline generates, so they lead. Correlated open ROLLOUT rows are folded by reference (forward task only). The dominant signal of C97: **citizen accuracy is the product, stories are disposable** (Mike S256) — every citizen-bearing surface needs an accuracy gate; that thread runs through T2, T3, T6.
+**Architecture:** Three C97 sidecar gap logs (run-cycle, print, post-publish) clustered by root cause into themes (§Cluster Map) and routed to the terminal whose expertise owns each fix. Two themes are **operator editorial directives**, not bugs (T7 citizens-are-the-main-characters, T1 lifecycle-misfire-becomes-story) — they reshape edition story-selection, so they lead. **T7 corrected by Mike S257:** the S256 gap-log wording ("strip civic initiatives" / "75/25 ratio") is retracted — civic initiatives still generate and ingest to the engine; the only fix is editorial story-selection (citizens are the protagonist, civic-initiative material is background, not auto-front-page). Correlated open ROLLOUT rows are folded by reference (forward task only). The dominant signal of C97: **citizen accuracy is the product, stories are disposable** (Mike S256) — every citizen-bearing surface needs an accuracy gate; that thread runs through T2, T3, T6.
 
 **Terminal:** research-build (Track A) + engine-sheet (Track B). Research-build owns this plan + the single ROLLOUT row + the session-end summarization cadence.
 
@@ -36,7 +36,7 @@ pointers:
 1. Every HIGH/MED C97 gap is either (a) assigned to a numbered phase in Track A or B, (b) folded into a named existing ROLLOUT row, or (c) listed in §Already-Addressed / §Out-of-Scope with disposition. No HIGH/MED gap unaccounted for.
 2. ROLLOUT carries exactly one new row pointing here (state `in-progress`); no per-cluster sprawl.
 3. Each phase is one focused session for one terminal — exact files, a verify step, source gaps listed.
-4. The two operator scope directives (T1 story-promotion branch, T7 civic-initiative strip) are captured as phases, not buried as notes — they gate next cycle's generation.
+4. The two operator editorial directives (T1 story-promotion branch, T7 citizens-are-the-main-characters story-selection) are captured as phases, not buried as notes — they gate next cycle's edition story-selection. No "strip" and no numeric ratio (Mike S257 correction).
 
 ---
 
@@ -49,10 +49,10 @@ Severity = highest constituent. Track = primary executor; (+other) = also has a 
 | T1 | Engine flipped sitting Mayor to "retired" — lifecycle misfire on office-holders + real-world date in milestone strings | HIGH | G-S1, G-S2 | B | [[2026-05-30-citizen-lifecycle-fame-system]] |
 | T2 | No deterministic citizen-eligibility / card-integrity gate — Tier-1 codex entity reached a finished letter | HIGH | G-W-C97-1, G-P-C97-1, G-P-C97-3 | B (gates/matcher) + A (sift pool builder, letters RULES) | canon.3 T6 |
 | T3 | Engine telemetry / real-world dates / months leak into canon-facing text | HIGH | G-PREP5, G-W-C97-2, G-PR-C97-5, G-PREP2 | A (skill/template/RULES) + B (deterministic linter + validator) | — |
-| T4 | Civic voice cascade + dispatch fidelity (75/25 ratio, Sonnet tier, Mayor-first injection, ESCALATION carve-out, tracker schema) | HIGH | G-R1, G-R2, G-PREP8, G-PREP9, G-R3, G-R4 | A (skill + agent RULES) | civic.14 (trackerOwner half) |
+| T4 | Civic voice cascade + dispatch fidelity (Sonnet tier, Mayor-first injection, ESCALATION carve-out, tracker schema) | HIGH | G-R2, G-PREP8, G-PREP9, G-R3, G-R4 | A (skill + agent RULES) | civic.14 (trackerOwner half) |
 | T5 | FLUX race-default + DJ doesn't look up canon appearance | HIGH | G-PR-C97-2, G-PR-C97-3, G-PR-C97-4, G-PR-C97-6 | A (DJ RULES + model eval) + B (`--slug` regen path) | — |
 | T6 | maraJsonReport.js `process` shadow crashes Arbiter lane | HIGH | G-W-C97-3 | B | — |
-| T7 | **Operator scope directive — strip civic-initiative apparatus to Baylight; engine/sim bugs ARE the lead story** | DIRECTION | G-R5, G-S6, G-S7 | A (sift triage branch + city-hall roster scope) | pipeline.38 (engine-errors-as-news) |
+| T7 | **Operator editorial principle — citizens are the main characters, civic initiatives are background machinery (still generate + ingest to engine, just aren't auto-promoted to stories); engine/sim bugs visible in citizen data are story material** | DIRECTION | G-R1, G-R5, G-S6, G-S7 | A (sift story-selection lens) | pipeline.38 (engine-errors-as-news) |
 | T8 | Sift/tracker data hygiene — stale Initiative_Tracker MCP, recycled-seed noise, synthesized briefs, Foothill neighborhood fence | MED | G-S3, G-S4, G-S5, G-W-C97-4 | B (deck/tracker writeback) + A (sift canon-fence) | civic.14 (tracker writeback) |
 | T9 | Photo QA autonomy-blocker — Haiku credit exhaustion returns silent per-image ERROR | MED | G-PR-C97-1 | B (loud HALT state) | — |
 
@@ -64,19 +64,17 @@ LOW / moot / already-resolved / operator-execution items in §Already-Addressed 
 
 Each phase is one focused research-build session. After skill-text edits run `/reload-skills` per TERMINAL.md §Skill Iteration.
 
-### Phase RB-1: Sift story-promotion branch + civic-initiative scope strip (Themes T7, T1-media-half) — HIGHEST LEVERAGE, OPERATOR DIRECTIVE
+### Phase RB-1: Citizens are the main characters — sift story-selection reframe + engine-bugs-as-news branch (Themes T7, T1-media-half) — HIGHEST LEVERAGE, OPERATOR DIRECTIVE
 
-The cycle's biggest reframe, twice-stated by Mike (S256): (a) the civic-initiative cascade (OARI, Transit, apprenticeship, Stab Fund, Health Center + council/faction/tracker theater) is layered apparatus, does not resonate in the sim, and **should not generate edition stories** — Baylight stays (it reshapes the physical world). (b) An engine bug that surfaces in citizen-visible data (the Mayor "retired") is NOT a thing to suppress — it's the FRONT PAGE; the in-world story (Mayor publicly corrects the record) is how the world heals the bug and justifies the card correction.
+**Mike S257 (corrects the S256 gap-log wording):** *not* a strip, *not* a 75/25 ratio. Civic initiatives still generate and their voice output still **ingests to the engine** (that's canon — nothing to ration). The principle is editorial story-selection: **citizens are the main characters; civic initiatives are background machinery, not the protagonist.** The fix lives entirely in what sift promotes to an edition *story* — citizen/sim life leads; civic-initiative material is context, not auto-front-page. No change to whether the civic cascade runs or how much the voices say. The second half (b): an engine bug that surfaces in citizen-visible data (the Mayor "retired") is story material, not just a suppressed gap-log flag — fence the bogus state from being canonized as true, but a character can still speak to it ("a database glitch retired the mayor for a cycle").
 
 - **Files:**
-  - `.claude/skills/sift/SKILL.md` — modify
-  - `.claude/skills/city-hall-prep/SKILL.md` — modify (roster scope)
+  - `.claude/skills/sift/SKILL.md` — modify (story-selection lens only)
 - **Steps:**
-  1. sift triage: add a decision branch — engine-bug/anomaly visible in citizen data → **promote as in-world story** (character speaks on it), flag the card/state for correction justified by the published story. Do NOT default such events to suppress/fence/contamination. (G-S6)
-  2. sift scope: edition stories come from engine/sim output (citizen-life incl. bugs, A's feed, neighborhood crime/sentiment, festivals/faith, Baylight, illness/migration) — NOT the civic-initiative apparatus. Stop standing up/surfacing OARI/Transit/apprenticeship/Stab/Health features. (G-S7)
-  3. city-hall-prep: roster scope reduces to Baylight + whatever genuinely touches citizen/district life; do NOT stand up OARI/INIT-007/Transit/Stab/Health voices next cycle. (G-R5)
-- **Verify:** grep both SKILLs for the new branch + scope language; confirm no remaining instruction to generate the named civic initiatives as features.
-- **Source gaps:** G-S6, G-S7, G-R5. **Absorbs ROLLOUT:** pipeline.38 (engine-errors-as-news editorial-direction note — step 1 is its implementation; flip to done-pending-archive when RB-1 closes). **Status:** [ ] not started
+  1. sift story-selection lens: citizens/sim life are the protagonists of the edition (citizen-life incl. bugs, A's feed, neighborhood crime/sentiment, festivals/faith, Baylight, illness/migration). Civic-initiative material (OARI/Transit/apprenticeship/Stab/Health + council/faction theater) is **background context, not an auto-promoted feature** — it earns a story only when a citizen is genuinely voiced in it, never as initiative-theater for its own sake. Do NOT strip generation; the cascade still runs and ingests to the engine. (reframes G-S7, G-R5)
+  2. sift triage branch: engine-bug/anomaly visible in citizen data → a character can **speak to it as an in-world beat** (flag the card/state for correction justified by the published story); fence the bogus value from being canonized as true, but don't default the *event* to silent suppression. (G-S6)
+- **Verify:** grep sift for the protagonist lens + the engine-bug beat branch; confirm NO "strip/do-not-generate civic initiatives" language (that was the retracted S256 wording) and NO numeric ratio rule.
+- **Source gaps:** G-S6, G-S7 (reframed), G-R5 (reframed). **Absorbs ROLLOUT:** pipeline.38 (engine-errors-as-news — step 2 is its implementation; flip to done-pending-archive when RB-1 closes). **Status:** [ ] not started
 
 ### Phase RB-2: Citizen-bearing accuracy gate — sift pool builder + letters-desk RULES (Theme T2, A-half) — HIGH
 
@@ -110,19 +108,18 @@ Engine telemetry, σ, decimals, phase-codes, real-world dates, and calendar mont
 
 ### Phase RB-4: Civic voice cascade + dispatch fidelity (Theme T4) — HIGH
 
-The C97 inversion: voices ran ~90% civic-initiative, ~10% district life — fails the operator 75/25 bar. Plus dispatch ran on Haiku not Sonnet, prep pre-scripted the Mayor's decisions, and the ESCALATION-override collided with engine-primacy.
+Dispatch + cascade fidelity, independent of story-selection. **G-R1 (voices ran ~90% civic-initiative) is NOT fixed here** — Mike S257: the voices saying a lot about civic initiatives is fine, it ingests to the engine; the editorial fix is in RB-1 story-selection (citizens are the protagonist), not a packet ratio. This phase keeps the genuine cascade-mechanics fixes: Haiku-not-Sonnet, prep pre-scripting the Mayor, ESCALATION-vs-engine-primacy, tracker schema.
 
 - **Files:**
   - `.claude/skills/city-hall-prep/SKILL.md` + `.claude/skills/city-hall/SKILL.md` — modify
   - civic-office agent `RULES.md` files (police_chief, crc, ind) — modify (tracker schema)
 - **Steps:**
-  1. Encode the 75/25 ratio in city-hall-prep Step 3 (packets lead 75% district life from baseline_briefs citizen-life + neighborhood events; civic decision is the 25% tail) and reinforce in the /city-hall dispatch prompts. (G-R1)
-  2. Set voice subagent model tier to Sonnet at the /city-hall dispatch step. (G-R2)
-  3. Cascade mechanism: /city-hall runs Mayor first, injects her **actual** output into reacting voices at runtime; prep must NOT pre-script a "Mayor's Decisions" block. (G-PREP8)
-  4. ESCALATION carve-out: a Mara ESCALATION cannot override engine-primacy for a subject absent from the initiative tracker (no manufacturing civic source material for non-tracked programs). (G-PREP9)
-  5. Harmonize trackerUpdates field-path schema across voice-agent RULES + require `trackerOwner`. (G-R3 — pairs with civic.14 ES half; cap milestone-note length G-R4.)
-- **Verify:** SKILLs grep for 75/25 + Sonnet tier + Mayor-first injection; voice RULES carry uniform trackerUpdates shape.
-- **Source gaps:** G-R1, G-R2, G-PREP8, G-PREP9, G-R3, G-R4. **Status:** [ ] not started
+  1. Set voice subagent model tier to Sonnet at the /city-hall dispatch step. (G-R2)
+  2. Cascade mechanism: /city-hall runs Mayor first, injects her **actual** output into reacting voices at runtime; prep must NOT pre-script a "Mayor's Decisions" block. (G-PREP8)
+  3. ESCALATION carve-out: a Mara ESCALATION cannot override engine-primacy for a subject absent from the initiative tracker (no manufacturing civic source material for non-tracked programs). (G-PREP9)
+  4. Harmonize trackerUpdates field-path schema across voice-agent RULES + require `trackerOwner`. (G-R3 — pairs with civic.14 ES half; cap milestone-note length G-R4.)
+- **Verify:** SKILLs grep for Sonnet tier + Mayor-first injection; voice RULES carry uniform trackerUpdates shape; NO 75/25 ratio rule present.
+- **Source gaps:** G-R2, G-PREP8, G-PREP9, G-R3, G-R4. (G-R1 reframed → handled by RB-1 story-selection, not a ratio.) **Status:** [ ] not started
 
 ### Phase RB-5: DJ canon-appearance lookup + image-model evaluation (Theme T5, A-half) — HIGH
 
@@ -241,4 +238,5 @@ None. (The stub-card question was retired S257 — its triggering scenario was a
 
 ## Changelog
 
-- 2026-06-13 — Initial draft (S257, research-build). Three C97 gap logs (run-cycle 23 gaps, print 6, post-publish 3) clustered into 9 themes across two tracks per [[GAP_LOG_TRIAGE_PLAYBOOK]]. Two operator scope directives (T7 strip-civic-initiatives, T1 promote-engine-bugs-as-stories) lead the research-build track. Lifecycle-fame root cause folded by reference to its existing plan, not double-filed.
+- 2026-06-13 — Initial draft (S257, research-build). Three C97 gap logs (run-cycle 23 gaps, print 6, post-publish 3) clustered into 9 themes across two tracks per [[GAP_LOG_TRIAGE_PLAYBOOK]]. Lifecycle-fame root cause folded by reference to its existing plan, not double-filed.
+- 2026-06-14 — T7 corrected (Mike S257). Retracted the S256 gap-log wording "strip civic-initiative apparatus" and the 75/25 ratio (RB-4 step 1) — both were a misread. Civic initiatives still generate and ingest to the engine; the real principle is editorial: **citizens are the main characters, civic initiatives are background, not auto-promoted to stories.** RB-1 reframed from scope-strip to sift story-selection lens (no city-hall roster strip); RB-4 drops the ratio step, keeps the cascade-mechanics fixes; G-R1 rerouted to RB-1. Engine-bugs-as-news branch (G-S6/pipeline.38) unchanged.

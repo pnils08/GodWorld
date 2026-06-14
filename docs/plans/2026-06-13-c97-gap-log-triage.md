@@ -88,7 +88,7 @@ Mike S256: "citizen accuracy IS the product — stories are disposable." A Tier-
   2. letters-desk RULES: enforce age = 2041 − BirthYear (never trust candidate-file age); verify role + neighborhood against the citizen card before writing (Bauer rabbi-not-pastor, Turner/Bauer age drift). (G-W-C97-1 §3)
   3. Broaden to a stated principle: every citizen-bearing output (letters, reporter cameos, quotes) carries a verify-against-card step. (G-W-C97-1 §4)
 - **Verify:** dry-run sift candidate pool on C97 inputs → Polito/Turner/POP-00029 all excluded; letters RULES greps clean for the age-anchor + card-verify rule.
-- **Source gaps:** G-W-C97-1. **Status:** [ ] not started
+- **Source gaps:** G-W-C97-1. **Status:** [x] DONE S258 — three edits: sift Step 10 candidate-pool integrity screen (tier+codex flag / card-integrity / live-window freshness); letters-desk RULES §2b citizen-card verification hard rule (age=2041−BirthYear, role/neighborhood/faith vs card, Tier-1+codex ineligible, applies to every citizen-bearing output); LENS kill-filter line (card-contradiction → correct-or-kill). Grep-verified present in all three. Live dry-run on C97 inputs runs at next `/sift`. (research-build builds the desk-agent files; media is in-world, doesn't build — Mike S258.)
 
 ### Phase RB-3: In-world hygiene across canon-facing text — packet linter rule + templates + reporter RULES (Theme T3, A-half) — HIGH
 

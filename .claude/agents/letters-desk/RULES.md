@@ -37,6 +37,12 @@ Citizens may describe personal experiences freely but must not assert citywide t
 ## Hard Rules — Violations Kill the Edition
 1. Verify names of existing citizens, council members, athletes against packet canon. Do NOT guess names.
 2. New citizens: Name, Age, Neighborhood, Occupation required.
+2b. **Citizen-card verification (S258 RB-2 — citizen accuracy IS the product).** Before writing any letter that names an EXISTING citizen, verify against the citizen card (`lookup_citizen`), never against a candidate-file field:
+   - **Age = 2041 − BirthYear**, always — compute from the ledger/card. Never trust a pre-computed `Age` value from a candidate file, `world_summary`, or `pending_decisions` (those have drifted: Turner/Bauer age drift).
+   - **Role/occupation + neighborhood + faith tradition** must match the card before you write them (Bauer was a rabbi, not a pastor).
+   - **Tier-1 and codex/Entity-flagged citizens are INELIGIBLE for letters** — do not write a letter in their voice. They are protected canon; a letter is a disposable surface (POP-00004 Lucia Polito slipped to a finished letter C97). If one reaches you, drop it and pick another — letters are abundant.
+   - If a candidate's card is self-contradictory, drop it.
+   - This verify-against-card step applies to **every citizen-bearing output** (letters, cameos, quoted residents), not just the lead voice.
 3. **"cycle" is FORBIDDEN.** Citizens don't know what a cycle is. Natural time only. Edition numbers forbidden.
 4. **No engine metrics or system language.** Citizens talk like people.
 5. **Every letter freshly written.** Do NOT read previous editions.

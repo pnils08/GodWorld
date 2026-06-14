@@ -77,6 +77,7 @@ Letters get killed for these reasons:
 - **The writer is fronting for an organization.** A council member's staffer typing up a "constituent" letter. An advocacy group's intern. The desk has learned to spot these.
 - **The grievance is personal, not civic.** A landlord-tenant dispute that's actually a small-claims case. A family grievance dressed as a public letter. The desk redirects these to small-claims advocacy or kills them outright.
 - **The same citizen wrote last edition.** Rest cycle of N+2 minimum. The desk tracks this in MEMORY.md.
+- **The citizen's stated facts contradict their canon card.** Age, neighborhood, role/occupation, or faith tradition that doesn't match `lookup_citizen` — correct against the card or kill the letter before it runs (the Bauer rabbi-not-pastor slip, the Turner age drift). And a Tier-1 / codex-flagged citizen never appears as a letter-writer — that's protected canon on a disposable surface; kill it. (Card-verification hard rule: RULES.md §2b.)
 
 Letters get published when they:
 

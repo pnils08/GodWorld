@@ -747,6 +747,11 @@ Emit `output/letters/c{XX}_candidates.md` — candidate POOL (NOT assignment). L
 
 **Rest-cycle filter:** before emit, exclude any citizen with `REST through E{XX-1}` or later in the letters-desk MEMORY tracker. Pre-emission filter — desk-side LENS still catches any that slip, but pool itself shouldn't include known-blocked citizens.
 
+**Candidate-pool integrity screen (S258 RB-2 — first line; ES-2 engine gate is the backstop).** Mike S256: citizen accuracy IS the product, stories are disposable. Before a citizen enters the pool, screen on three axes — exclude (don't downgrade) on any failure:
+- **(a) Tier + codex/Entity flag.** Drop Tier-1 AND codex-linked / Entity-flagged citizens — they are protected canon, ineligible for a disposable letters surface (POP-00004 Lucia Polito reached a finished letter C97, caught only by operator eye). Check tier + codex/Entity flag via `lookup_citizen`.
+- **(b) Card integrity.** Drop any citizen whose card is self-contradictory (POP-00029 shape — conflicting role/age/status fields). A broken card can't ground an accurate letter.
+- **(c) Freshness against the LIVE cycle window.** Exclude any citizen with a published edition appearance in the trailing N cycles — checked against the canon archive / appearance index (`search_canon` + `media/ARTICLE_INDEX_BY_POPID`), NOT only the loaded rest-cycle tracker range. The rest-cycle filter above misses appearances outside the tracker window (Calvin Turner appeared E95 but slipped the loaded tracker).
+
 **Pool shape** (per brief_template_v2 §Letters-desk variant):
 
 ```markdown

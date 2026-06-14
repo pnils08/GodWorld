@@ -165,6 +165,14 @@ function normalizeFullName(name) {
     .trim();
 }
 
+// G-P-C97-1 (S257): leading title tokens to strip before first/last picking in
+// the no-POP-ID name matcher. A freeform NAMES INDEX row ("Dr. Vanessa
+// Tran-Muñoz — Director, OARI") can arrive truncated to "Dr. Tran-Muñoz"; with
+// the honorific stripped, "Tran-Muñoz" last-name-anchors to the existing
+// POP-00781 row instead of minting a duplicate (POP-01021). NOT "sr" — that's a
+// generational suffix handled by SUFFIX_RE, not a leading title.
+const HONORIFIC_RE = /^(?:dr|rev|revd|fr|prof|professor|mr|mrs|ms|mx|bishop|rabbi|imam|pastor|deacon|sister|father|mother|elder|hon|sen|rep|gov|mayor|councilmember|councilman|councilwoman|capt|lt|sgt|ofc|det|chief)\.?$/i;
+
 // Extract structured signals (age, neighborhood, role) from letter footers
 // in the published text. Returns a Map<normalizedName, signalRow>. Multiple
 // footers for the same name keep the first occurrence — operator can override
@@ -476,6 +484,7 @@ async function resolveCitizens(parsed, sheetsClient, sheetId) {
   // Build lookup tables
   const byPopId = new Map();
   const byFirstLast = new Map();
+  const byLast = new Map();  // G-P-C97-1: normalized last name → [{pop,row}] for honorific+truncation anchoring
   let maxPopNum = 0;
 
   for (const row of data) {
@@ -497,6 +506,9 @@ async function resolveCitizens(parsed, sheetsClient, sheetId) {
       } else {
         byFirstLast.set(key, [{ pop, row }]);
       }
+      const lastKey = last.toLowerCase();
+      if (byLast.has(lastKey)) byLast.get(lastKey).push({ pop, row });
+      else byLast.set(lastKey, [{ pop, row }]);
     }
   }
 
@@ -564,6 +576,38 @@ async function resolveCitizens(parsed, sheetsClient, sheetId) {
       if (nameTokens.length >= 3 && SUFFIX_RE.test(nameTokens[nameTokens.length - 1])) {
         suffix = nameTokens.pop();
       }
+      // G-P-C97-1: strip leading honorific/title tokens so "Dr. Vanessa
+      // Tran-Muñoz" → Vanessa Tran-Muñoz, and a TRUNCATED "Dr. Tran-Muñoz" →
+      // bare "Tran-Muñoz" (handled by the last-name anchor below).
+      let strippedHonorific = false;
+      while (nameTokens.length >= 2 && HONORIFIC_RE.test(nameTokens[0])) {
+        nameTokens.shift();
+        strippedHonorific = true;
+      }
+
+      if (nameTokens.length === 1) {
+        // Only a last name survives — the honorific+truncation case. Anchor on
+        // last name BEFORE defaulting to append, so we don't mint a duplicate
+        // (the POP-01021 regression). Conservative: require a honorific to have
+        // been present (a bare single-token person name otherwise stays
+        // ambiguous), and only auto-resolve on a UNIQUE last-name match.
+        if (!strippedHonorific) {
+          ambiguous.push({ fullName: entry.fullName, reason: 'single-token name; cannot match' });
+          continue;
+        }
+        const lastHits = byLast.get(nameTokens[0].toLowerCase()) || [];
+        if (lastHits.length === 1) {
+          matched.push({ popId: lastHits[0].pop, fullName: entry.fullName, resolved: true, matchNote: 'honorific+lastname-anchored (G-P-C97-1)' });
+        } else if (lastHits.length > 1) {
+          ambiguous.push({ fullName: entry.fullName, reason: 'honorific + bare last name matches ' + lastHits.length + ' citizens', popIds: lastHits.map(h => h.pop) });
+        } else {
+          // No ledger last-name match — do NOT auto-append a bare-honorific
+          // name (that minted POP-01021). Flag for POP-ID resolution at brief.
+          ambiguous.push({ fullName: entry.fullName, reason: 'honorific + bare last name, no ledger last-name match — resolve POP-ID at brief, not auto-append' });
+        }
+        continue;
+      }
+
       const first = nameTokens[0];
       const lastBare = nameTokens[nameTokens.length - 1];
       const middle = nameTokens.length > 2 ? nameTokens.slice(1, -1).join(' ') : '';
@@ -1145,7 +1189,9 @@ module.exports = {
   POPID_ALIASES: POPID_ALIASES,
   resolvePopIdAlias: resolvePopIdAlias,
   // S234 engine.26 — generalized parser sanity check (NAMES INDEX + BUSINESSES NAMED)
-  assertParserSanity: assertParserSanity
+  assertParserSanity: assertParserSanity,
+  // S257 G-P-C97-1 — honorific + last-name-anchored matcher (duplicate-mint guard)
+  resolveCitizens: resolveCitizens
 };
 
 if (require.main === module) {

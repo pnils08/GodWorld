@@ -143,7 +143,9 @@ FLUX forced a Black man onto canonically-white Isley Kelley across three generat
 
 ---
 
-**RB TRACK COMPLETE (S258): RB-1..6 all shipped.** Commits: RB-1 `3e8731b`, RB-2 `0ff2789`, RB-3 `9309e77`, RB-4 `ea8415e`, RB-5+RB-6 (this commit). ES track (engine-sheet, ES-1..5) remains — governance.34 stays in-progress for it.
+**RB TRACK COMPLETE (S258): RB-1..6 all shipped.** Commits: RB-1 `3e8731b`, RB-2 `0ff2789`, RB-3 `9309e77`, RB-4 `ea8415e`, RB-5+RB-6 `0bfba5d`.
+
+**ES TRACK — S259 reconciliation (research-build, git-verified):** engine-sheet shipped most of Track B in S257; the plan's per-phase `[ ] not started` markers were wholesale stale. Verified state: **ES-3 DONE** (`6a0d904`+`d0a8bbf`); **ES-5 DONE** (`a9cd061`); **ES-2 code DONE + wired** (`e40bb21`+`2361cfc`+`6033c26`+`f987211`) — destructive POP-01021→POP-00781 merge HELD for Mike's go; **ES-1 PARTIAL** (`9b769ce` step 1 only; steps 2+3 open; clasp-deploy deferred post-C98); **ES-4 PARTIAL** (`e690aa2`+`f5b0fbd` steps 3+4; steps 1+2 = G-S3 deck / G-S4 tracker writeback open). **Genuine ES residual:** ES-1 steps 2+3 + ES-4 steps 1+2 + the ES-2 held merge (operator) + ES-1 clasp deploy. governance.34 **stays in-progress** for that residual.
 
 **Skill-wiring of the ES-2 gates — DONE S259 (research-build).** ES-2 built the two deterministic scripts (S257) but flagged "WIRING into the skills surfaced separately" — that wiring is apparatus (skill edits) = research-build, executed S259:
 - `scripts/checkLetterEligibility.js` → sift Step 10 (after the candidate-pool emit; `node … {XX}`, exit 1 = HALT). Verified firing on live c97 candidates: POP-00004 caught INELIGIBLE, exit 1.
@@ -166,7 +168,7 @@ The engine fired a "retired" lifecycle/fame event on sitting Mayor Santana (POP-
   2. Strip real-world dates ("2026-06-12") from milestone strings — in-world-only rule.
   3. Baseline-brief generator: exclude office-holder retirement life-events (or rely on the source fix) — deleting the artifact without fixing the generator is not a fix (the C97 regen proved it). (G-S2)
 - **Verify:** re-run baseline-brief generation on C97 inputs → no Mayor-retirement brief; no real-world date in any milestone string.
-- **Source gaps:** G-S1, G-S2. **Absorbs/relates:** [[2026-05-30-citizen-lifecycle-fame-system]]. **Status:** [ ] not started
+- **Source gaps:** G-S1, G-S2. **Absorbs/relates:** [[2026-05-30-citizen-lifecycle-fame-system]]. **Status:** [~] PARTIAL S257 — **step 1 DONE** (`9b769ce`): `generationalEventsEngine.checkRetirement_` CIV guard (no office-holder/media citizen auto-retires) + AGE_RANGES.RETIREMENT.min 58→68; live cleanup blanked the stray [Retirement] tag on POP-00034. **Step 2 (strip real-world dates from milestone strings) + step 3 (baseline-brief generator exclude office-holder retirement) NOT done** — the live tag was hand-blanked but `buildBaselineBriefs.js` source not fixed (plan's own warning: deleting the artifact ≠ fixing the generator). **Deploy DEFERRED** — clasp push held (engine.33/.31/.32 rode C97; C98 smoke pending; build-local only). Election-challenger-from-SL deferred (B) per Mike, working-as-designed stub.
 
 ### Phase ES-2: Deterministic citizen-eligibility + packet linter gates (Themes T2-engine, T3-linter) — HIGH
 
@@ -181,7 +183,7 @@ The catch must be mechanical — the operator is the contamination source, so se
   2. Packet linter at Step-4: grep packets for σ, `+0.`, backtick phase-codes, `engine`/`Engine:` tags → fail the gate. (G-PREP5 ES half)
   3. ingestPublishedEntities matcher: normalize honorific + middle-name truncation (`Dr./Rev./Bishop <First> <Middle?> <Last>` match full + last-name-anchored before append; hit canon-drift path when a bay-tribune person-record exists). Then merge POP-01021 → POP-00781 and delete the POP-01021 row. (G-P-C97-1)
 - **Verify:** gate run → POP-00004 ineligible; linter flags a telemetry-laced test packet; `lookup_citizen` POP-01021 → not found, POP-00781 intact.
-- **Source gaps:** G-W-C97-1 §1, G-PREP5, G-P-C97-1. **Status:** [ ] not started
+- **Source gaps:** G-W-C97-1 §1, G-PREP5, G-P-C97-1. **Status:** [x] CODE DONE S257 + wired S259 — **one operator action pending.** Step 1 field-actor letter-eligibility gate `scripts/checkLetterEligibility.js` (`e40bb21`); step 2 civic packet telemetry linter `scripts/lintCivicPackets.js` (`2361cfc`); step 3 matcher — honorific-strip + last-name-anchored dedup in `ingestPublishedEntities` resolveCitizens (`6033c26`). **Gate-wiring into sift Step 10 + city-hall-prep Step 4 DONE S259** (`f987211`; see Track A §Skill-wiring note — POP-00004 caught INELIGIBLE on live c97, exit 1). **PENDING: the destructive merge POP-01021→POP-00781 + delete POP-01021 row is HELD for Mike's go** (matcher shipped part 2; the merge is part 1, deliberately held — operator go-call, irreversible ledger write).
 
 ### Phase ES-3: Pre-compile leak scan + maraJsonReport crash fix (Themes T3-validator, T6) — HIGH
 
@@ -192,7 +194,7 @@ The catch must be mechanical — the operator is the contamination source, so se
   1. maraJsonReport.js: rename the local `const process = Number(...)` shadow (e.g. `processScore`) OR capture `const { REVIEWER_MODEL } = globalThis.process.env` before the shadow. Unblocks the Mara lane JSON → Final Arbiter result-validity. (rheaJsonReport.js line 202 has the same `.env` read but no shadow — leave it.) (G-W-C97-3)
   2. Pre-compile scan: month-name regex + decimal-near-"sentiment" regex over reporter prose so Step 2 isn't the only catch. (G-W-C97-2 validator half)
 - **Verify:** `node scripts/maraJsonReport.js <c97 inputs>` exits 0 with REVIEWER_MODEL populated; scan flags "November dusk" + "sentiment sits above 0.71" test strings.
-- **Source gaps:** G-W-C97-3, G-W-C97-2. **Status:** [ ] not started
+- **Source gaps:** G-W-C97-3, G-W-C97-2. **Status:** [x] DONE S257 — step 1 maraJsonReport `process`-shadow renamed → `processRatio` (returned field unchanged; unblocks Mara lane → Final Arbiter) (`6a0d904`); step 2 `checkInWorldLeaks(editionText)` pre-compile scan — month-name + decimal-near-sentiment regex, WARNING severity, editorial-content-only split (`d0a8bbf`). Both steps shipped; node scripts, no clasp gate.
 
 ### Phase ES-4: Story-deck + tracker-writeback hygiene (Theme T8-B) — MED
 
@@ -206,7 +208,7 @@ The catch must be mechanical — the operator is the contamination source, so se
   3. Prefer ledger-sourced descriptions; flag `synthesized` ones more loudly. (G-S5)
   4. buildCitizenCards.js: derive the failure-dump cycle from the run's cycle (C97 run wrote `citizen_card_failures_c96.json`). (G-P-C97-2)
 - **Verify:** deck regen on C97 → recycled share capped, Chicago seeds gated; `lookup_initiative(INIT-007)` no longer "untracked"; failure dump named for the run cycle.
-- **Source gaps:** G-S3, G-S4, G-S5, G-P-C97-2. **Status:** [ ] not started
+- **Source gaps:** G-S3, G-S4, G-S5, G-P-C97-2. **Status:** [~] PARTIAL S257 — **steps 3+4 DONE:** step 3 G-S5 synthesized world-event briefs flagged louder (`e690aa2`; ledger-sourced rawDesc already preferred); step 4 G-P-C97-2 `buildCitizenCards` failure-dump keys off LIVE World_Config cycleCount (was writing `_c96` on the C97 run) (`f5b0fbd`). **Steps 1+2 NOT started:** step 1 G-S3 (deck recycled-followup cap — C97 was 71% recycled — + Chicago/Bulls seed gating on live sports-feed presence); step 2 G-S4 (Initiative_Tracker MCP writeback reconcile — INIT-002/007 lag the milestone layer; pairs with civic.14).
 
 ### Phase ES-5 (small): Single-spec edition regen path + photo-QA loud HALT (Themes T5-B, T9) — MED
 
@@ -216,7 +218,7 @@ The catch must be mechanical — the operator is the contamination source, so se
   1. Honor `--slug <s>` as a spec filter for `--type edition` — regenerate only the matching spec, merge its entry into the existing manifest (no full-manifest clobber). Natural fix path for canon corrections caught at Step 3.5. (G-PR-C97-4)
   2. Surface credit-exhaustion / all-ERROR QA as a distinct loud failure state that HALTs for operator (not silent per-image ERROR rows that read like "no FAILs → proceed"); document FLUX/Together vs Anthropic/Haiku separate billing. (G-PR-C97-1)
 - **Verify:** `generate-edition-photos.js --type edition --slug <one>` rewrites one spec + merges manifest, leaves the other 6 frames untouched; simulated all-ERROR QA → HALT, not PROCEED.
-- **Source gaps:** G-PR-C97-4, G-PR-C97-1. **Status:** [ ] not started
+- **Source gaps:** G-PR-C97-4, G-PR-C97-1. **Status:** [x] DONE S257 (`a9cd061`) — step 1 `--slug` now filters `--type edition` to one matching spec + merges its manifest entry (no full clobber; the Kelley canon fix's backup/restore dance is gone); step 2 all-ERROR / credit-exhaustion QA surfaced as a distinct loud HALT state (was silent per-image ERROR rows reading like a pass). Both steps shipped; node script, no clasp gate.
 
 ---
 

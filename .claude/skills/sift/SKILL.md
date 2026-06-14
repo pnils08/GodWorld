@@ -186,6 +186,8 @@ Fail loud at Step 11 if `canonSearches.length === 0` OR `restCycleTrackerLoaded 
 
 **Closes:** G-S2 (thread template buckets), G-S3 (atmospheric-overlay rule), G-S14 (role=reporter filter cross-link), G-PR2 (real-headline emission)
 
+**Story-selection lens — citizens are the main characters (operator directive, S257).** The protagonists of the edition are citizens and sim-life: citizen lives (including engine bugs visible in their data), the A's, neighborhood crime/sentiment, festivals/faith, Baylight, illness/migration. Civic-initiative material (OARI / Transit / apprenticeship / Stab Fund / Health Center + council/faction theater) is **background machinery, not the protagonist** — it earns a slate story only when a citizen is genuinely voiced in it, never as initiative-theater for its own sake. Story-selection only: the civic cascade still runs and still ingests to the engine — nothing is stripped or rationed. In bucket terms: WORLD + CIVIC-WITH-WEIGHT candidates that are pure initiative-theater with no citizen voiced drop to CIVIC-TRACKER-ONLY / baseline, not the slate. (Reframes G-S7, G-R5; not a strip and not a numeric ratio — that was the retracted S256 wording.)
+
 Walk Step 1 raw inputs + Step 2 annotations through the five buckets:
 
 | Bucket | Source | What goes here |
@@ -305,6 +307,10 @@ Boot-loaded civic-desk + freelance-firebrand RULES.md (S197 Wave 2) is the prima
 ### Step 5 — Triage (six-decision vocabulary)
 
 **Closes:** G-S13 (fold / covered-by-feature vocabulary), G-S18 + G-P38 cross-link (cross-layer canon drift detection)
+
+#### Engine-bug-as-beat branch (S257, operator directive)
+
+When an engine bug or anomaly shows up in citizen-facing data (the engine flipping a sitting Mayor to "retired"), it is **story material, not an auto-suppressed flag**. A character may speak to it as an in-world beat ("a database glitch retired the mayor for a cycle"); fence the bogus value from being canonized as true (flag the card/state for correction — the published story justifies the fix), but do NOT default the event to silent suppression. Extends the existing `engineVsActionPuzzle` narrative-weight criterion (Step 3) to the case where the engine state is wrong rather than merely contested. (Implements pipeline.38 engine-errors-as-news; closes G-S6.)
 
 #### Cross-layer canon check (per ADR-0007, runs BEFORE the six-decision triage)
 

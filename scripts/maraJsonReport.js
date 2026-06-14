@@ -127,7 +127,10 @@ function buildLaneJson(parsed) {
   }
 
   const passedCount = CHECK_IDS.filter((id) => parsed.checks[id].verdict === 'PASS').length;
-  const process = Number((passedCount / CHECK_IDS.length).toFixed(3));
+  // G-W-C97-3 (S257): renamed from `process` — the local shadowed Node's global
+  // `process`, so `process.env.REVIEWER_MODEL` below read `.env` off a Number and
+  // crashed the Mara lane → blocked Final Arbiter result-validity. Field stays `process`.
+  const processRatio = Number((passedCount / CHECK_IDS.length).toFixed(3));
   const allPass = passedCount === CHECK_IDS.length;
   const outcome = allPass ? 1 : 0;
 
@@ -158,7 +161,7 @@ function buildLaneJson(parsed) {
     score: laneScore,
     verdict,
     checks: checksOut,
-    process,
+    process: processRatio,
     outcome,
     controllableFailures: parsed.controllableFailures,
     uncontrollableFailures: parsed.uncontrollableFailures,

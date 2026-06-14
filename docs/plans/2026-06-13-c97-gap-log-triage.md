@@ -131,7 +131,7 @@ FLUX forced a Black man onto canonically-white Isley Kelley across three generat
   1. DJ RULES: for every **named** citizen in a spec, pull appearance from `lookup_citizen` before writing the subject; front-load canon race/descriptor in `image_prompt` with an explicit negative to beat the FLUX default; for crowds/generics compose to Oakland's actual demographic mix. (G-PR-C97-3, G-PR-C97-2 contract half)
   2. Scope alternative image models with race/attribute adherence as the eval axis (deliverable: a short comparison note, not a swap this session). (G-PR-C97-2)
 - **Verify:** DJ RULES grep for the named-subject lookup + front-load-race rule.
-- **Source gaps:** G-PR-C97-2, G-PR-C97-3. **Status:** [ ] not started
+- **Source gaps:** G-PR-C97-2, G-PR-C97-3. **Status:** [x] DONE S258 (step 1) — dj-hartley RULES §Named-Subject Canon Appearance: every named citizen → `lookup_citizen` before writing the subject; front-load canon race/age/build with an explicit negative to beat the FLUX default; no-appearance-on-file → compose face non-load-bearing or escalate; crowds → Oakland demographic mix. Twin of letters RULES §2b. **Step 2 (image-model eval) FILED as research watch-row** (G-PR-C97-2) — replacing FLUX needs a current-model comparison on race/attribute adherence, a focused research pass, not a rushed note; row added to ROLLOUT research.*.
 
 ### Phase RB-6 (small): Sift canon-fence validation (Theme T8-A)
 
@@ -139,7 +139,11 @@ FLUX forced a Black man onto canonically-white Isley Kelley across three generat
 - **Steps:**
   1. sift brief canon-fence: validate any neighborhood fence against `Faith_Organizations` / `lookup_faith_org` before writing it into a voiceDirective (Foothill Baptist = East Oakland, the fence said West). (G-W-C97-4)
 - **Verify:** sift greps for the canon-fence check.
-- **Source gaps:** G-W-C97-4. **Status:** [ ] not started
+- **Source gaps:** G-W-C97-4. **Status:** [x] DONE S258 — sift Step 7 Validation rules gained a canon-fence check: any neighborhood/geographic fence about a named faith org / business / cultural venue MUST be verified against `lookup_faith_org` / `lookup_business` / `lookup_cultural` before it's written, never asserted from memory.
+
+---
+
+**RB TRACK COMPLETE (S258): RB-1..6 all shipped.** Commits: RB-1 `3e8731b`, RB-2 `0ff2789`, RB-3 `9309e77`, RB-4 `ea8415e`, RB-5+RB-6 (this commit). ES track (engine-sheet, ES-1..5) remains — governance.34 stays in-progress for it.
 
 ---
 

@@ -679,6 +679,7 @@ Emit `output/dispatch_c{XX}.json` per the STRICT SCHEMA. Single dispatch file pe
 - `section` MUST be from underscored-routing allowlist (NOT spaced form, NOT `NEIGHBORHOODS`, NOT `QUICK_TAKES`).
 - `headline` MUST be real (not "untitled" / "TBD" / "placeholder" / empty).
 - `reporter` MUST be `role: reporter` in REPORTER_DESK_INDEX.
+- **Canon-fence validation (S258 RB-6, closes G-W-C97-4):** any neighborhood / geographic fence asserted about a named faith org, business, or cultural venue in a `voiceDirective` or brief MUST be verified against its authoritative lookup (`lookup_faith_org` / `lookup_business` / `lookup_cultural`) before it's written — never assert a neighborhood from memory. C97 a fence placed Foothill Baptist in West Oakland; it's East Oakland.
 
 **Canonical exemplar reference:** `docs/media/examples/dispatch_canonical_example.json` (placeholders) + `docs/media/examples/dispatch_c94_worked_example.json` (C94 real values).
 

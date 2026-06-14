@@ -737,6 +737,82 @@ function checkEngineLanguage(editionText) {
   return issues;
 }
 
+// ─── In-World Time + Engine-Metric Leak Scan (G-W-C97-2, ES-3 S257) ─────────
+//
+// Deterministic backstop for two recurring reporter leaks the operator kept
+// catching by eye at Step 2 (C97: "November dusk", "first week of April",
+// "September chase", "Retail sentiment sits above 0.71"):
+//   1. Real calendar months in canon prose — the fence is cycles-not-months.
+//   2. Raw engine metric decimals (sentiment/approval/etc.) in prose.
+// WARNING severity — surfaces for review without blocking compile (CRITICAL is
+// reserved for hard canon breaks; this matches the should-fix exit model).
+// Scans editorial content only (split at ARTICLE TABLE), like checkEngineLanguage.
+
+// Months that are NOT common given names → flag on any prose occurrence.
+const MONTHS_UNAMBIGUOUS = ['January', 'February', 'July', 'September', 'October', 'November', 'December'];
+// Months that ARE common given names → flag only in a temporal construction,
+// never as a bare token (avoids false-positive on "April <Lastname>").
+const MONTHS_NAMELIKE = ['March', 'April', 'May', 'June', 'August'];
+// Metric words whose nearby decimals are engine telemetry (not sports/money).
+const METRIC_WORDS = ['sentiment', 'approval', 'momentum', 'rating', 'index', 'load'];
+// Temporal cues that precede a name-like month used as a date.
+const TEMPORAL_CUE_BEFORE = /(?:\b(?:in|by|since|early|late|mid|this|last|next|through|until|before|after)\s+$)|(?:\b(?:week|weeks|month|end|start|beginning|middle|spring|summer|fall|autumn|winter)\s+of\s+$)/i;
+
+function checkInWorldLeaks(editionText) {
+  const issues = [];
+  const editorial = editionText.split(/ARTICLE TABLE/i)[0] || editionText;
+
+  const flagMonth = (m, index, asDate) => {
+    const ctx = editorial.substring(Math.max(0, index - 40), index + m.length + 40).replace(/\n/g, ' ').trim();
+    issues.push({
+      severity: WARNING,
+      check: 'In-World Time Leak',
+      detail: `Calendar month "${m}"${asDate ? ' used as a date' : ''} in prose — canon uses cycles, not real months`,
+      fix: `Recast as a cycle/season reference near: "...${ctx}..."`
+    });
+  };
+
+  // 1a. Unambiguous months — any prose occurrence is a leak.
+  for (const m of MONTHS_UNAMBIGUOUS) {
+    const re = new RegExp('\\b' + m + '\\b', 'g');
+    let match;
+    while ((match = re.exec(editorial)) !== null) flagMonth(m, match.index, false);
+  }
+
+  // 1b. Name-like months — flag only when preceded by a temporal cue or
+  //     followed by a day number/ordinal ("first week of April", "April 3rd").
+  for (const m of MONTHS_NAMELIKE) {
+    const re = new RegExp('\\b' + m + '\\b', 'g');
+    let match;
+    while ((match = re.exec(editorial)) !== null) {
+      const before = editorial.substring(Math.max(0, match.index - 24), match.index);
+      const after = editorial.substring(match.index + m.length, match.index + m.length + 6);
+      if (TEMPORAL_CUE_BEFORE.test(before) || /^\s+\d{1,2}(?:st|nd|rd|th)?\b/.test(after)) {
+        flagMonth(m, match.index, true);
+      }
+    }
+  }
+
+  // 2. Engine metric decimals — a decimal (with leading digit, so batting ".312"
+  //    and sports integer scores are excluded) within ~30 chars of a metric word.
+  const metricAlt = METRIC_WORDS.join('|');
+  const decimalNearMetric = new RegExp(
+    '(?:(?:' + metricAlt + ')[^.\\n]{0,30}?\\d+\\.\\d+)|(?:\\d+\\.\\d+[^.\\n]{0,30}?(?:' + metricAlt + '))',
+    'gi'
+  );
+  let dm;
+  while ((dm = decimalNearMetric.exec(editorial)) !== null) {
+    issues.push({
+      severity: WARNING,
+      check: 'Engine Metric Leak',
+      detail: `Raw engine decimal near a metric word — "${dm[0].replace(/\n/g, ' ').trim()}"`,
+      fix: `Express as perception ("rising"/"strong"), not a raw score`
+    });
+  }
+
+  return issues;
+}
+
 // ─── In-Body Metadata Leak Gate (pipeline.9, S249) ──────────────────────────
 //
 // The C92 contamination: desk reporters appended audit/tracking blocks
@@ -1428,6 +1504,12 @@ Exit codes:
   allIssues.push(...leakIssues);
   console.log(`  [${leakIssues.length === 0 ? '✓' : '!'}] Metadata leak: ${leakIssues.length} issues`);
 
+  // 7d. In-world time + engine-metric leak scan (G-W-C97-2, ES-3) — deterministic
+  // backstop for reporter month/decimal leaks the operator caught by eye at Step 2.
+  const inWorldIssues = checkInWorldLeaks(editionText);
+  allIssues.push(...inWorldIssues);
+  console.log(`  [${inWorldIssues.length === 0 ? '✓' : '!'}] In-world time/metric leak: ${inWorldIssues.length} issues`);
+
   // Build cross-domain exclusion maps to prevent false positives on shared last names
   // officialFirstsByLast: { "ramos": ["Keisha"], "ellis": ["Simone"], ... }
   // playerFirstsByLast: { "ramos": ["Arturo"], "ellis": ["John"], ... }
@@ -1568,6 +1650,8 @@ module.exports = {
   // ES-1 (S256) quoted-source resolution gate
   checkQuotedSourcesResolve,
   checkEngineLanguage,
+  // ES-3 (S257 G-W-C97-2) in-world time + engine-metric leak scan
+  checkInWorldLeaks,
   // G-W64 (S246 ES-8)
   checkCouncilNames,
   checkCivicOfficeNames,

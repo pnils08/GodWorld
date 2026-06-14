@@ -91,6 +91,7 @@ pointers:
   - `scripts/sessionEndMechanical.js` — modify (call the Task 2 deriver; stamp the mechanical header)
   - `SESSION_CONTEXT.md` — the writer rewrites the header line + Shipped block; leaves the STATUS slot authored
 - **Steps:**
+  0. **First, enumerate every current writer:** `grep -rl SESSION_CONTEXT scripts/ .claude/` — the "single-writer" claim is only safe once you know all paths that touch the file today (known: `writeShippedBlock.js` + the close skill; confirm there are no others before asserting single-writer).
   1. At close, `sessionEndMechanical.js` calls the Task 2 deriver and writes the full mechanical header line (Cycle/Session/Day/date/engine/edition-status) — no hand-typing.
   2. Confirm single-writer: only `sessionEndMechanical.js` (via the deriver + `writeShippedBlock.js`) writes mechanical regions; the close skill writes ONLY the STATUS paragraph. Document the boundary in the skill + script headers.
   3. (Defer the on-demand snapshot-to-`docs/session-context/S<##>.md` half of governance.26 Task 2 if not already shipped — cross-check before duplicating.)

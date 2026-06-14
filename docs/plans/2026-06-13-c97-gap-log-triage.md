@@ -136,14 +136,13 @@ FLUX forced a Black man onto canonically-white Isley Kelley across three generat
 - **Verify:** DJ RULES grep for the named-subject lookup + front-load-race rule.
 - **Source gaps:** G-PR-C97-2, G-PR-C97-3. **Status:** [ ] not started
 
-### Phase RB-6 (small): Sift canon-fence validation + stub-card question (Themes T8-A, T2 latent)
+### Phase RB-6 (small): Sift canon-fence validation (Theme T8-A)
 
 - **Files:** `.claude/skills/sift/SKILL.md` — modify
 - **Steps:**
   1. sift brief canon-fence: validate any neighborhood fence against `Faith_Organizations` / `lookup_faith_org` before writing it into a voiceDirective (Foothill Baptist = East Oakland, the fence said West). (G-W-C97-4)
-  2. Decide the Step 5-bis stub-card question (build a minimal stub card for a genuinely-new civic-persona POPID with 0 person-attributed appearances vs skip) — surface as an Open question if it needs Mike; otherwise pick the stub default per ADR-0007. (G-P-C97-3)
 - **Verify:** sift greps for the canon-fence check.
-- **Source gaps:** G-W-C97-4, G-P-C97-3. **Status:** [ ] not started
+- **Source gaps:** G-W-C97-4. **Status:** [ ] not started
 
 ---
 
@@ -232,10 +231,11 @@ The catch must be mechanical — the operator is the contamination source, so se
 - **G-PR-C97-6** — FLUX signage gibberish: known text-rendering ceiling, subsumed by the model-replacement eval in T5/RB-5.
 - **G-W-C97-1 resolution** — the C97 slate was scrapped + regenerated with 3 verified fresh citizens (operator-side, manual). The *fix* (gates) is RB-2 + ES-2; the cycle's content is already clean.
 - **canon.3 T6 (pre-existing row)** — `buildCitizenCards.js` exits 0 on partial failure; tracked under canon.3, not re-filed here.
+- **G-P-C97-3** — the "genuinely-new civic-persona with 0 quotes" scenario is moot: the trigger (POP-01021 "Dr. Tran-Muñoz") was an **engine error** — a duplicate minted off a truncated name (Mike S257). There is no mechanism that spawns a real new civic office, so no stub-card policy is needed. The real fix is the dedup/matcher in **ES-2 step 3** (merge POP-01021→POP-00781 + honorific/middle-name truncation normalization). G-P-C97-3 closes there; no separate phase.
 
 ## Open questions
 
-- [ ] **G-P-C97-3 (RB-6 step 2)** — for a genuinely-new civic-persona POPID with 0 person-attributed appearances, build a minimal stub wd-card or skip? Default lean: stub, per ADR-0007 ("every Sim_Ledger row has a wd-card within the run"). Confirm before encoding.
+None. (The stub-card question was retired S257 — its triggering scenario was an engine duplicate, not a real new persona; see §Already-Addressed.)
 
 ---
 

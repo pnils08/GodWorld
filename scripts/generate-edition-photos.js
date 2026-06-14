@@ -206,6 +206,27 @@ async function main() {
     console.log('Editorial note: ' + editorialNote);
   }
 
+  // G-PR-C97-4 (S257): --slug as a single-spec filter for --type edition.
+  // Regenerate ONLY the matching spec and merge it into the existing manifest
+  // (no full-manifest clobber) — the natural fix path for a canon correction
+  // caught at the Step 3.5 gate without re-rolling the other good frames.
+  var editionSlugFilter = null;
+  if (argv.type === 'edition' && argv.slug) {
+    editionSlugFilter = argv.slug.replace(/-/g, '_');  // match validateSpec normalization
+    var filtered = specs.filter(function (sp) {
+      return String(sp.slug).replace(/-/g, '_') === editionSlugFilter;
+    });
+    if (filtered.length === 0) {
+      console.error('Error: --slug "' + argv.slug + '" matched no spec in dj_direction.json');
+      console.error('  Available slugs: ' + specs.map(function (sp) { return sp.slug; }).join(', '));
+      process.exit(1);
+    }
+    specs = filtered;
+    console.log('Single-spec edition regen: only "' + editionSlugFilter +
+                '" regenerates; existing manifest entries for other specs are preserved.');
+    console.log('');
+  }
+
   // Validate all specs upfront — fail fast if any are malformed
   var invalid = [];
   for (var s = 0; s < specs.length; s++) {
@@ -354,22 +375,38 @@ async function main() {
   }
 
   // Manifest
-  var manifestSlug = argv.type === 'edition' ? 'e' + cycle : argv.type + '_c' + cycle + '_' + argv.slug;
-  var manifest = {
-    cycle: cycle,
-    type: argv.type,
-    slug: manifestSlug,
-    provider: 'together',
-    model: model,
-    generatedAt: new Date().toISOString(),
-    specCount: specs.length,
-    successCount: results.length,
-    failureCount: failures.length,
-    photos: results,
-    failures: failures
-  };
   var manifestPath = path.join(outDir, 'manifest.json');
-  fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
+  var manifest;
+  if (editionSlugFilter && fs.existsSync(manifestPath)) {
+    // G-PR-C97-4: merge — keep existing manifest, replace/insert only the
+    // regenerated slug's photo + failure entries; preserve all other frames.
+    manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
+    var keepSlug = function (p) { return String(p.slug).replace(/-/g, '_') !== editionSlugFilter; };
+    manifest.photos = (manifest.photos || []).filter(keepSlug).concat(results);
+    manifest.failures = (manifest.failures || []).filter(keepSlug).concat(failures);
+    manifest.successCount = manifest.photos.length;
+    manifest.failureCount = manifest.failures.length;
+    manifest.specCount = manifest.photos.length + manifest.failures.length;
+    manifest.regeneratedSlug = editionSlugFilter;
+    manifest.regeneratedAt = new Date().toISOString();
+    fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
+  } else {
+    var manifestSlug = argv.type === 'edition' ? 'e' + cycle : argv.type + '_c' + cycle + '_' + argv.slug;
+    manifest = {
+      cycle: cycle,
+      type: argv.type,
+      slug: manifestSlug,
+      provider: 'together',
+      model: model,
+      generatedAt: new Date().toISOString(),
+      specCount: specs.length,
+      successCount: results.length,
+      failureCount: failures.length,
+      photos: results,
+      failures: failures
+    };
+    fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
+  }
 
   console.log('='.repeat(72));
   console.log('Generation complete');
@@ -461,6 +498,42 @@ async function runQaAndRegenLoop(opts) {
       console.log('');
       qaResults.push({ slug: slug, file: photo.file, qa: null, error: err.message, regenAttempt: 0 });
     }
+  }
+
+  // G-PR-C97-1 (S257): all-QA-errored HALT. When EVERY photo's QA errored
+  // (e.g. Anthropic '400 credit balance is too low'), there are no FAIL
+  // verdicts to arm regen-on-fail, so the run would otherwise "complete" with
+  // zero quality verdict — reading like "no FAILs → proceed" and shipping
+  // unverified photos. Surface a distinct loud failure and HALT for the operator
+  // (exit 3). Together/FLUX generation and Anthropic/Haiku QA bill separately —
+  // images can generate fine while the QA lane is down.
+  var initialQaErrors = qaResults.filter(function (r) { return !r.qa; });
+  if (results.length > 0 && initialQaErrors.length === results.length) {
+    var creditHit = initialQaErrors.some(function (r) {
+      return r.error && /credit balance is too low|insufficient|quota|\b400\b/i.test(r.error);
+    });
+    console.error('');
+    console.error('!'.repeat(72));
+    console.error('HALT — PHOTO QA UNAVAILABLE: all ' + results.length + ' QA evaluations errored.');
+    if (creditHit) {
+      console.error('  Signature: Anthropic credit/quota exhaustion (QA bills separately from');
+      console.error('  Together/FLUX generation — images generated fine; the QA lane is down).');
+    }
+    console.error('  No quality verdict produced. NOT shipping unverified photos.');
+    console.error('  Operator: restore Anthropic credit, then rerun with --qa-only');
+    console.error('  (images already exist; --qa-only skips regeneration).');
+    console.error('!'.repeat(72));
+    console.error('');
+    fs.writeFileSync(path.join(outDir, 'qa_report.json'), JSON.stringify({
+      cycle: cycle,
+      photoDir: path.basename(outDir),
+      evaluatedAt: new Date().toISOString(),
+      status: 'HALT-QA-UNAVAILABLE',
+      creditExhaustion: creditHit,
+      summary: { pass: 0, flag: 0, fail: 0, errorOrSkip: initialQaErrors.length },
+      results: qaResults.map(function (r) { return { slug: r.slug, file: r.file, verdict: 'ERROR', error: r.error || 'unknown' }; })
+    }, null, 2));
+    process.exit(3);
   }
 
   // Regen pass — only for FAIL verdicts

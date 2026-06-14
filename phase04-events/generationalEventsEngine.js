@@ -80,7 +80,7 @@ var AGE_RANGES = {
   WEDDING: { min: 24, max: 50 },
   BIRTH: { min: 26, max: 42 },
   PROMOTION: { min: 28, max: 58 },
-  RETIREMENT: { min: 58, max: 72 },
+  RETIREMENT: { min: 68, max: 72 },
   DEATH_NATURAL: { min: 65, max: 100 }
 };
 
@@ -193,6 +193,7 @@ function runGenerationalEngine_(ctx) {
   var iLife = idx("LifeHistory");
   var iLastU = idx("LastUpdated");
   var iTierRole = idx("TierRole");
+  var iCIV = idx("CIV (y/n)");
   var iNeighborhood = idx("Neighborhood");
 
   var iStatusStart = idx("StatusStartCycle");
@@ -251,6 +252,7 @@ function runGenerationalEngine_(ctx) {
     var tier = Number(row[iTier]) || 0;
     var mode = row[iClock] || "ENGINE";
     var tierRole = row[iTierRole] || "";
+    var civFlag = iCIV >= 0 ? (row[iCIV] || "").toString().toLowerCase().trim() : "";
     var lifeHistory = row[iLife] ? row[iLife].toString() : "";
     var neighborhood = iNeighborhood >= 0 ? (row[iNeighborhood] || "") : "";
 
@@ -369,7 +371,7 @@ function runGenerationalEngine_(ctx) {
       }
     }
 
-    if (counts.retirements < limits.retirements && birthYear) {
+    if (counts.retirements < limits.retirements && birthYear && civFlag.charAt(0) !== "y") {
       var retireResult = checkRetirement_(ctx, popId, age, lifeHistory, tier, calendarContext);
       if (retireResult) {
         ctx.summary.generationalEvents.push(applyMilestone_(
@@ -796,10 +798,7 @@ function checkRetirement_(ctx, popId, age, lifeHistory, tier, cal) {
   if (lifeHistory.indexOf("[Retirement]") >= 0) return null;
   if (age < AGE_RANGES.RETIREMENT.min) return null;
 
-  var c = 0.001;
-  if (age >= 62) c = 0.005;
-  if (age >= 65) c = 0.01;
-  if (age >= 68) c = 0.02;
+  var c = 0.02;
   if (age >= 70) c = 0.05;
   if (tier >= 4) c *= 0.5;
 

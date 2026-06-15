@@ -69,7 +69,9 @@ var SEED_DECK_HEADERS = [
   'PriorityComponents',   // O  (v3.6 — Engine A breakdown JSON)
   'BylineCandidate',      // P  (v3.7 — Engine B top-ranked journalist name)
   'BylineConfidence',     // Q  (v3.7 — Engine B confidence label: high/medium/low)
-  'BylineRationale'       // R  (v3.7 — Engine B JSON: {components, alternates} — top components + top-3 alternates)
+  'BylineRationale',      // R  (v3.7 — Engine B JSON: {components, alternates} — top components + top-3 alternates)
+  'PacketRef',            // S  (v3.8 — S259 engine.35 P2: baseline_brief id for engine-emergent pattern seeds; '' for in-cycle calendar/texture/followup seeds)
+  'CoveringJournalistPOPID' // T  (v3.8 — S259 engine.35 P2: covering citizen-journalist POPID from Bay_Tribune_Oakland; '' for in-cycle seeds)
 ];
 
 
@@ -117,7 +119,13 @@ function saveV3Seeds_(ctx) {
       // and degraded-mode runs (empty roster, scoreAllBylines_ throw, etc.).
       s.bylineCandidate || '',                                           // P  BylineCandidate (v3.7)
       s.bylineConfidence || '',                                          // Q  BylineConfidence (v3.7)
-      s.bylineRationale ? JSON.stringify(s.bylineRationale) : ''         // R  BylineRationale JSON (v3.7)
+      s.bylineRationale ? JSON.stringify(s.bylineRationale) : '',        // R  BylineRationale JSON (v3.7)
+      // v3.8 (S259 engine.35 P2): PacketRef + CoveringJournalistPOPID are populated
+      // ONLY by the post-cycle Node router (routePatternSeeds.js) on pattern-emergent
+      // seeds. In-cycle calendar/texture/followup seeds carry '' here — the columns
+      // exist so the deck stays width-aligned across both writers.
+      s.packetRef || '',                                                 // S  PacketRef (v3.8)
+      s.coveringJournalistPopid || ''                                    // T  CoveringJournalistPOPID (v3.8)
     ]);
   }
 
@@ -159,6 +167,11 @@ function saveV3Seeds_(ctx) {
  * P   BylineCandidate (v3.7 — Engine B top-ranked journalist)
  * Q   BylineConfidence (v3.7 — high/medium/low confidence label)
  * R   BylineRationale (v3.7 — Engine B JSON {components, alternates})
+ * S   PacketRef (v3.8 — S259 engine.35 P2 — baseline_brief id; '' for in-cycle seeds)
+ * T   CoveringJournalistPOPID (v3.8 — S259 engine.35 P2 — covering journalist POPID; '' for in-cycle seeds)
+ *
+ * Live-sheet widen (S→T) is a service-account add at the C98 rollout window (like
+ * the S206 M-O / P-R widenings) — ensureSheet_ does not extend existing sheets.
  *
  * Note: Calendar columns existed in v3.2-v3.3 (cols I-N) but were never read.
  * Removed in v3.4, columns I-L repurposed in v3.5 for seed metadata.

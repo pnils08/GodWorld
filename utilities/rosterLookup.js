@@ -1019,3 +1019,18 @@ function matchCitizenToJournalist_(citizenArchetype, neighborhoodContext, storyD
 
   return result;
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Node dual-runtime export (S259 engine.35 Phase 2). Additive — in Apps Script
+// `module` is undefined so this block is skipped and global-scope dispatch is
+// unchanged. Lets the Node engine-auditor pull the embedded voice profiles
+// (themes/desk/tone) to enrich the canonical Bay_Tribune_Oakland roster.
+// Pattern mirrors utilities/priorityEngine.js + utilities/bylineEngine.js.
+// ─────────────────────────────────────────────────────────────────────────────
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    loadRoster_: loadRoster_,
+    getRoster_: getRoster_,
+    getVoiceGuidance_: (typeof getVoiceGuidance_ !== 'undefined') ? getVoiceGuidance_ : undefined
+  };
+}

@@ -48,6 +48,34 @@ Corroborates the S252 research: **passive boot-pointers fail; the model honors C
 
 ---
 
+## Present boot load — what currently lands (before-state)
+
+The redistribution edits against this. Verified S259 (own boot context + hook source).
+
+**Auto-loaded by Claude Code (in context before any action, cwd = repo):**
+1. `CLAUDE.md` — grounded draft (claudeMd block)
+2. `.claude/rules/identity.md` — behavioral non-negotiables (claudeMd block)
+3. `MEMORY.md` — ~5,860 tokens, **all four terminals**, every session (auto-memory block)
+   (Path-scoped rules — engine.md, newsroom.md — do NOT load at boot; only on a matching file edit.)
+
+**Injected by the SessionStart hook (`<godworld-state>` block):**
+4. Boot header (Session/Cycle/Terminal) + the numbered **BOOT SEQUENCE** (instructions to Read the terminal files) + the Shipped-Last-Session git block. The hook injects *instructions*, not content.
+
+**Manually read because the sequence named them (not auto):**
+5. The terminal's files — for research-build: `research-build.md`, `SCHEMA.md`, `index.md`, `TERMINAL.md`. Plus claude-mem observations injected on tool calls.
+
+**Cascade mapping + the two scope-mismatches:**
+
+| Cascade layer | Present reality |
+|---|---|
+| **Base** — CLAUDE.md = trained-model → GodWorld-model handoff | ✓ what the grounded draft is |
+| **Universal** — true for all terminals/sessions | Slot auto-loads, but it's **two files** (`identity.md` rules + `MEMORY.md` feedback/state), and **MEMORY.md's content isn't actually universal** — it carries role-specific rules (media-journal, engine-sheet coder) that bleed into terminals that can't use them |
+| **Fork** — terminal identity + rules + files | ✓ the hook (tmux `#W`) instructs the worker reads — works, but convention-pointer not enforced (Q6) |
+
+**So the structure already matches the target cascade; the content is in the wrong drawers.** Redistribution = purify each layer to its scope: grounding → CLAUDE.md; only-true-for-all → identity.md + a purified MEMORY.md; everything role-specific → the terminal fork. (The seam question decides whether the universal layer stays two files or one.)
+
+---
+
 ## Worked example — the grounded CLAUDE.md (base layer)
 
 Six grounded sections, no pointer-dump: **The project** / **The handle** (Mags as communication tool) / **The partnership** (Mike is a vibe coder learning; "approved" = trust not sign-off) / **Where you boot** (handoff only — work-logic to be trimmed per Mike S259) / **Search before you guess** / reserved notes-doc line. Behavioral non-negotiables stay in `identity.md` (the seam: this file = what/who, identity.md = how you act).

@@ -295,7 +295,7 @@ The stripped-persona framing applies to hard close. Per S229 governance.7, the s
 
 ---
 
-**Engine-sheet runs a stripped-persona session-end.** Per S156 + S198 (loosened) rule (in MEMORY.md): "Engine-sheet terminal: execute and commit; coder persona. MDs allowed if they follow the no-isolated-MDs rule (register in `docs/index.md`, link both ways from a parent spec). No journal. No Supermemory writes for routine work; large project shifts may save a pointer entry per S165. Coder voice: terse, mechanical, commit-message style." That overrides the persona-state portions of the shared `/session-end` SKILL.md.
+**Engine-sheet runs a stripped-persona session-end.** Per S156 + S198 (loosened) rule (canonical home is this TERMINAL.md after the S259 MEMORY.md redistribution): "Engine-sheet terminal: execute and commit; coder persona. MDs allowed if they follow the no-isolated-MDs rule (register in `docs/index.md`, link both ways from a parent spec). No journal. No Supermemory writes for routine work; large project shifts may save a pointer entry per S165. Coder voice: terse, mechanical, commit-message style." That overrides the persona-state portions of the shared `/session-end` SKILL.md.
 
 ### What this terminal does NOT do at session-end
 

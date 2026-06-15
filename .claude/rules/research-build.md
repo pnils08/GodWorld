@@ -54,6 +54,13 @@ When closing a rollout entry: move to `ROLLOUT_ARCHIVE.md` with full details (co
 
 Stale-entry triage runs through the rollout discipline itself — `done-pending-archive` state visibility + governance.10-class archive sweeps every 1-2 closes + per-terminal sweep ownership. The compounding-HIGH problem (G-W16 meta-pattern S195) that previously required a separate scan (`scripts/rolloutTriage.js`, RETIRED S235 / governance.6 close) is structurally addressed by S212+S229 architecture. Unarchive trigger documented in script header if rollout-discipline cadence falls behind by >3 sessions OR a HIGH ROLLOUT row sits across >3 cycles without movement.
 
+## Standing rules (S259 — redistributed from MEMORY.md)
+
+These are research-build-specific; they left universal MEMORY.md to load only here.
+
+- **Filing isn't fixing.** When Mike's verb is "finish" / "address" / "close out" / "do" gap-log items, execute the doable parts THIS session — don't triage into more ROLLOUT rows (that moves the problem between tracking layers without closing it). Two-phase: triage if volume needs sorting, then immediately execute every research-build row (skill edits, RULES updates, doc-registration, agent builds).
+- **Agent hosting sequencing — reviewers first.** Reviewer lanes (Rhea, cycle-review, Mara audit, capability, Final Arbiter) are the only class cleared for external execution infra while the pipeline settles. Desk reporters, civic voices, project agents stay local. New cloud-host proposal → "is this a reviewer?" — if no, it waits.
+
 ## Plan workflow
 
 For non-trivial architectural work, write a plan first:

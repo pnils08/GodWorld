@@ -562,19 +562,15 @@ function parseIdList_(raw) {
 // must survive the .31 deploy log-clear (ROLLOUT engine.30 dependency note).
 var MILESTONE_RE = /\[(Wedding|Marriage|Divorce|Birth|Death|Retirement|Promotion)\]/i;
 
-// Archive Timestamp normalizer — the tab carries two formats ("2026-06-01 23:35"
-// engine-stamped, "11/30/2025 3:27:23" legacy). Returns "YYYY-MM-DD" or ''.
-function archiveDate_(ts) {
-  var s = String(ts || '').trim();
-  var iso = s.match(/^(\d{4}-\d{2}-\d{2})/);
-  if (iso) return iso[1];
-  var us = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);
-  if (us) return us[3] + '-' + ('0' + us[1]).slice(-2) + '-' + ('0' + us[2]).slice(-2);
-  return '';
-}
-
 // LifeHistory uses both real newlines and literal '\n' two-char sequences
 // (observed live: POP-00331). Split on both.
+//
+// S259 ES-1 (G-S1): real-world dates must NOT appear on canon-facing cards
+// (E91 time rules — cycles, not real-world dates). The live O-cell line is
+// "YYYY-MM-DD HH:MM — [Tag] text" but the string carries no cycle, so strip the
+// whole real-world prefix and keep "[Tag] text". (The engine-side stamp change
+// that writes an in-world C{cycle} into the O string is the clasp-gated follow
+// up; the archive path below already shows C{cycle} from its Cycle column.)
 function extractMilestones_(lifeHistory) {
   if (!lifeHistory) return [];
   var lines = String(lifeHistory).split(/\\n|\n/);
@@ -582,10 +578,19 @@ function extractMilestones_(lifeHistory) {
   for (var i = 0; i < lines.length; i++) {
     var line = lines[i].trim();
     if (!line || !MILESTONE_RE.test(line)) continue;
-    // Strip clock time, keep the date: "2026-06-01 23:35 — [Retirement] ..." -> "2026-06-01 [Retirement] ..."
-    out.push(line.replace(/^(\d{4}-\d{2}-\d{2})\s+\d{2}:\d{2}\s*—\s*/, '$1 '));
+    // Drop any leading prefix (real-world date/time + em-dash); keep from [Tag].
+    var m = line.match(/\[(?:Wedding|Marriage|Divorce|Birth|Death|Retirement|Promotion)\].*/i);
+    out.push(m ? m[0].trim() : line);
   }
   return out;
+}
+
+// Dedup key — milestones from the archive carry a "C{cycle}" prefix, live O
+// milestones carry none; compare on the "[Tag] text" body so the same event
+// isn't shown twice when it exists in both layers.
+function milestoneKey_(line) {
+  var m = String(line).match(/\[(?:Wedding|Marriage|Divorce|Birth|Death|Retirement|Promotion)\].*/i);
+  return (m ? m[0] : String(line)).trim().toLowerCase();
 }
 
 // DialState (JSON {base,streak}, engine.31) -> "driven, warm, often out".
@@ -715,7 +720,8 @@ async function buildCard(citizen, appearances, refs) {
   // is the preservation surface: end-state lives in columns, the WHEN lives here.
   var archMs = (refs.archMilestones && refs.archMilestones[citizen.popId]) || [];
   var oMs = extractMilestones_(citizen.lifeHistory);
-  var milestones = archMs.concat(oMs.filter(function (m) { return archMs.indexOf(m) < 0; }));
+  var archKeys = archMs.map(milestoneKey_);
+  var milestones = archMs.concat(oMs.filter(function (m) { return archKeys.indexOf(milestoneKey_(m)) < 0; }));
   if (milestones.length > 0) {
     lines.push('');
     lines.push('MILESTONES:');
@@ -876,13 +882,15 @@ async function main() {
       var aPop = (arow[1] || '').trim();
       var aTag = (arow[3] || '').trim();
       if (!aPop || !ARCH_MILESTONE_RE.test(aTag)) continue;
-      var aDate = archiveDate_(arow[0]);
+      // S259 ES-1 (G-S1): anchor on the in-world Cycle column (G), not the
+      // real-world Timestamp (A) — real-world dates must not reach the card.
+      var aCycle = (arow[6] == null ? '' : String(arow[6])).trim();
       // Some archived EventText blobs carry ride-along events joined by
       // literal '\n' two-char sequences (pre-archive O cells used both real
       // and literal newlines; the compressor parser only splits on real ones).
       // The milestone is the first segment — the riders are texture-class.
       var aText = (arow[4] || '').trim().split('\\n')[0].trim();
-      var aLine = (aDate ? aDate + ' ' : '') + '[' + aTag + '] ' + aText;
+      var aLine = (aCycle ? 'C' + aCycle.replace(/^C/i, '') + ' ' : '') + '[' + aTag + '] ' + aText;
       (archMilestonesByPop[aPop] = archMilestonesByPop[aPop] || []).push(aLine);
     }
   } catch (e) {

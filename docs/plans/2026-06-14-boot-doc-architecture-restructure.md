@@ -68,6 +68,12 @@ Draft lives in the working tree (`/root/GodWorld/CLAUDE.md`, uncommitted). Old p
 
 Engine-sheet / research-build can run on the lean base now (they don't generate canon content). media/civic are gated on step 1.
 
+### The work is shuffling, not inventing (Mike S259)
+
+CLAUDE.md is improved and **every other mechanism stays unchanged** — so the remaining work is moving each piece of currently-universal logic to the layer that actually needs it. The authoritative source list **already exists**: the boot-load-audit **§5 bleed map** (content type → lives in → should load in → which terminals it bleeds into). Execute that, don't rebuild it.
+
+Canonical example: **"Mayor Santana is she/her"** is a content-generator fact — it auto-loaded into engine-sheet + research-build, which never render the Mayor (pure bleed). Target: media/civic worker layer only, nowhere else. Same shape for the rest of the audit's bleed rows (memory-container rules → on-demand; canon-fidelity tiers → content-generators; family/EIC → media). The redistribution pass *is* the bleed-map remediation.
+
 ---
 
 ## Open questions (this is the editable part)
@@ -76,7 +82,8 @@ Engine-sheet / research-build can run on the lean base now (they don't generate 
 2. **The self-evolve mechanism (the unsolved 80%).** Where does a terminal's learned gotcha land so the next instance loads it? Candidates: a per-terminal notes doc loaded by the worker layer; skill-local gotchas (anthropic-skills-blog pattern); both. Reconcile with existing half-precedents: media JOURNAL, `NOTES_TO_SELF.md`, vestigial per-agent `agent-memory/MEMORY.md` scratchpads. This is what the S259 query-guess proved missing.
 3. **What exactly de-auto-loads from MEMORY.md**, and what stays universal (the feedback-discipline core). Needs the per-entry pass governance.32 scoped.
 4. **Work-logic trim** of CLAUDE.md "Where you boot" — reduce to the handoff fact per Mike S259.
-5. **Validation — how do we know it worked?** Only real test is a fresh boot acting more grounded / guessing less / less trust-friction. Define the success signal before deploying; a prior CLAUDE.md rewrite was reverted (no approval — closed; this one is Mike-directed).
+5. **Validation — how do we know it worked?** Only real test is a fresh boot acting more grounded / guessing less / less trust-friction. **The test is the next-session rollout (Mike S259):** the improved CLAUDE.md only proves out when a fresh instance boots on it. Define the success signal before that boot so we're observing, not hoping.
+6. **Is the base→worker handoff reliable enough?** Confirmed mechanism (hook source, S259): the SessionStart hook reads the tmux window name (`tmux display-message -p '#W'`), `case`-branches, and **echoes a numbered boot sequence** that includes "Read `.claude/terminals/<t>/TERMINAL.md`". TERMINAL.md is **not** auto-loaded — the hook injects the *instruction*; I act on it. That's itself a pointer — it gets followed where CLAUDE.md's don't because of **position + framing** (fresh imperative at session start, not buried in a reference doc), but it's still **convention, not enforcement**: under work-first entry ("commit push") or a `/session-startup` skim, the reads can be skipped (boot-orientation research failure mode). Open: leave the worker load as a well-positioned-pointer-by-convention, or harden it (e.g. hook-enforced read, or fold the worker-critical bits into the always-loaded base for that terminal). **Behavior to watch at next-session rollout.**
 
 ---
 

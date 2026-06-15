@@ -98,6 +98,15 @@ async function run() {
     assert.strictEqual(r.matched.length, 0);
   });
 
+  // Row 30 — append-time malformed-name backstop
+  total++; passed += await passing('Row 30: malformed-name guard rejects honorific-as-first + missing first/last, allows real names', async function () {
+    assert.strictEqual(mod.isMalformedCitizenName('Dr.', 'Tran-Muñoz'), true, 'honorific-as-first → malformed (the POP-01021 shape)');
+    assert.strictEqual(mod.isMalformedCitizenName('', 'Okonkwo'), true, 'missing first → malformed');
+    assert.strictEqual(mod.isMalformedCitizenName('Marisol', ''), true, 'missing last → malformed');
+    assert.strictEqual(mod.isMalformedCitizenName('Marisol', 'Okonkwo'), false, 'real first+last → OK');
+    assert.strictEqual(mod.isMalformedCitizenName('Vanessa', 'Tran-Muñoz'), false, 'real first+last with hyphenated surname → OK');
+  });
+
   console.log('\n[G-P-C97-1] ' + passed + '/' + total + ' assertions passed');
   process.exit(passed === total ? 0 : 1);
 }

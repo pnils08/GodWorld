@@ -167,11 +167,28 @@ function normalizeFullName(name) {
 
 // G-P-C97-1 (S257): leading title tokens to strip before first/last picking in
 // the no-POP-ID name matcher. A freeform NAMES INDEX row ("Dr. Vanessa
-// Tran-Muñoz — Director, OARI") can arrive truncated to "Dr. Tran-Muñoz"; with
-// the honorific stripped, "Tran-Muñoz" last-name-anchors to the existing
-// POP-00781 row instead of minting a duplicate (POP-01021). NOT "sr" — that's a
-// generational suffix handled by SUFFIX_RE, not a leading title.
+// Tran-Muñoz — Director, OARI") can arrive truncated to "Dr. Tran-Muñoz". A FULL
+// honorific+first+last is stripped to first+last and matched normally; a
+// truncated honorific+surname (no first name) is NOT identifiable and routes to
+// `ambiguous` for brief-stage POP-ID resolution (Row 29) — it never auto-matches
+// or auto-appends. NOT "sr" — that's a generational suffix handled by SUFFIX_RE,
+// not a leading title.
 const HONORIFIC_RE = /^(?:dr|rev|revd|fr|prof|professor|mr|mrs|ms|mx|bishop|rabbi|imam|pastor|deacon|sister|father|mother|elder|hon|sen|rep|gov|mayor|councilmember|councilman|councilwoman|capt|lt|sgt|ofc|det|chief)\.?$/i;
+
+// ENGINE_REPAIR Row 30 (S259) — malformed-name backstop. A new-citizen candidate
+// must carry a real first AND last name. A first that is empty or a bare
+// honorific token ("Dr.", "Rev.") is the POP-01021 mint vector — the honorific
+// captured as the name (First="Dr." / Last="Tran-Muñoz"). Title-only names should
+// reach the matcher's `ambiguous` bucket (Row 29), never the appender; this is the
+// last-line guard if one slips through. Returns true when the candidate must NOT
+// be minted.
+function isMalformedCitizenName(first, last) {
+  const f = (first || '').trim();
+  const l = (last || '').trim();
+  if (!f || !l) return true;            // missing first or last
+  if (HONORIFIC_RE.test(f)) return true; // honorific-as-first-name
+  return false;
+}
 
 // Extract structured signals (age, neighborhood, role) from letter footers
 // in the published text. Returns a Map<normalizedName, signalRow>. Multiple
@@ -1058,6 +1075,19 @@ async function main() {
     }
   }
 
+  // ENGINE_REPAIR Row 30 (S259) — reject malformed-name candidates BEFORE the
+  // append + report, so neither mints a row like POP-01021 (First="Dr."). With
+  // the Row 29 honorific-strip upstream this rarely fires; it is the backstop.
+  let malformedCitizens = [];
+  if (canonNewCitizens.length > 0) {
+    malformedCitizens = canonNewCitizens.filter(c => isMalformedCitizenName(c.first, c.last));
+    if (malformedCitizens.length > 0) {
+      canonNewCitizens = canonNewCitizens.filter(c => !isMalformedCitizenName(c.first, c.last));
+      console.log('[Row 30] rejected ' + malformedCitizens.length + ' malformed-name candidate(s) (honorific-as-name / missing first or last) — NOT appended:');
+      malformedCitizens.forEach(c => console.log('  ✗ "' + c.fullName + '" (first="' + (c.first || '') + '" last="' + (c.last || '') + '")'));
+    }
+  }
+
   console.log('CITIZENS:');
   console.log('  matched:    ' + citizenResolution.matched.length);
   console.log('  candidates: ' + canonNewCitizens.length + ' (new — would append)');
@@ -1161,6 +1191,7 @@ async function main() {
         proposedPopId: 'POP-' + String(citizenResolution.maxPopNum + 1 + i).padStart(5, '0'),
       })),
       canonDrift: canonDriftCitizens,
+      malformed: malformedCitizens,
       ambiguous: citizenResolution.ambiguous,
       phantom: citizenResolution.phantom,
       culturalOnly: citizenResolution.culturalOnly,
@@ -1197,7 +1228,9 @@ module.exports = {
   // S234 engine.26 — generalized parser sanity check (NAMES INDEX + BUSINESSES NAMED)
   assertParserSanity: assertParserSanity,
   // S257 G-P-C97-1 — honorific + last-name-anchored matcher (duplicate-mint guard)
-  resolveCitizens: resolveCitizens
+  resolveCitizens: resolveCitizens,
+  // S259 ENGINE_REPAIR Row 30 — malformed-name append backstop
+  isMalformedCitizenName: isMalformedCitizenName
 };
 
 if (require.main === module) {

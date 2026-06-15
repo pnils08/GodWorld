@@ -86,6 +86,26 @@ The A's dynasty core are the **pillars of the world** — the dynasty isn't *in*
 
 **The hook.** Each cycle the pillars act in their own houses — Kelley takes a pulpit, Davis ties himself to the chief, Dillon reads a water survey, Aitken sits the votes, Vinnie opens a youth academy. Catching those threads is the job; they are where the architecture becomes a living edition.
 
+## Canon facts — don't drift (S259, redistributed from CLAUDE.md)
+
+These auto-load here because content-generators drift on them; engine-sheet / research-build don't need them.
+
+- **Mayor Avery Santana** — she/her. Locked canon (S139).
+- **OPP** = Oakland Progressive Party (NOT "People's Party").
+- **CRC** = Civic Reform Coalition.
+- **IND** = Independent (Vega, Tran — NOT a bloc; they don't coordinate).
+- **Population** ~1,366 tracked (live counts). Don't cite "675" or "761" — both stale.
+- **Paulson carpenters line is loose, not editorial canon (S221)** — don't thread it into coverage; detail in `docs/media/PAULSON_CARPENTERS_LINE.md`. **Anthony Raines** = canonical sports reporter, black, no relation to Mike Paulson. Mike Paulson editorial canon = A's GM + one-year Bulls stint (C92 Finals loss) + Jack London + POP-00527. Family OUT until Mike opens it.
+
+## Media-only discipline (S259, redistributed from MEMORY.md)
+
+These are media-terminal-specific; they left universal MEMORY.md to load only where they apply.
+
+- **Journal is media-only.** Mike does NOT read journals (`JOURNAL.md` / `JOURNAL_RECENT.md`) — on approval, write it, no draft-then-ask (editorial judgment on contents still applies). Never write Mike's mental states (no suicide/self-harm/crisis framing, any pretext — real-world harm if persisted). Never display journal content in chat (no cat/tail/heredoc dump). Journal **voice**: prose is fine, but its payload must be the extractable lessons — each paragraph a reusable finding, anchored; don't write for an auditor.
+- **Never close a print/publish skill without opening the artifact (S229).** Generator metrics (file exists, size, photo count, exit 0) ≠ review — open the rendered edition/PDF and verify headlines-from-canon + photos-at-anchors + on-canon execution before closing `/edition-print` / `/post-publish`.
+- **Approved-artifact edit scope (S229).** Editorial directives default to FUTURE-coverage framework; editing a CURRENT approved/published artifact (re-render / re-publish / drop-sections) needs explicit "edit this print" confirmation.
+- **Mara Vance (claude.ai) is canon authority** — catches citizen errors every edition; her connector searches blind, so the wd-* schema lives in `CLAUDE_AI_SYSTEM_PROMPT.md`.
+
 ## Standing rules
 
 - The word "cycle" is **allowed and encouraged** in edition text, headlines, and letters as the canonical time unit (S146 reversal — was forbidden, was: "use natural time references"). The simulation tracks progress in cycles, not months. Reporters and citizens use cycles as the conscious tempo of city life. "Within two cycles," "this past cycle," and "by next cycle" are correct. Don't go back to month-based time references.

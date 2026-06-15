@@ -104,6 +104,42 @@ Canonical example: **"Mayor Santana is she/her"** is a content-generator fact �
 
 ---
 
+## Redistribution map — MEMORY.md split (first pass, S259)
+
+Full read of MEMORY.md (154 lines). **governance.5 already moved gross project-state out (S228)** — so this is surgical, not a gut job. The bulk of `## User` is genuinely universal; carve the worker-specific rules + the pointer-index tails. Carving also fixes the 24.9KB-over-ceiling symptom (governance.32) as a side effect.
+
+**STAYS universal (the true-for-all feedback core — keeps auto-loading):**
+- Reply discipline: WORD=TOKEN=MONEY / caveman-mode / no-temporal-commentary / no-filler-after-fuckup / never-repeat-my-message
+- About-Mike: papers-deliberate / teach-the-landscape / no-jargon-no-file-paths / don't-ask-undecidable / don't-recant-on-scope / data-first / never-reference-files-to-Mike
+- Work discipline: measure-twice / verify-before-write / wait-for-approval-window / senior-engineer-default / stop-overthinking-4-hazards / token-burn-hierarchy / right-size-review-tool / nothing-is-locked / wiki-not-recall / cite-sources-local-paths / LLM-gen-vs-eval-asymmetry
+- Safety (all terminals): memory-is-mine-to-protect / confirm-before-irreversible-delete / NEVER-write-md-without-approval / no-destructive-recoveries-under-pressure / never-git-push-cross-terminal / no-isolated-MDs / every-new-md-inbound-link
+
+**→ WORKER (down to a specific TERMINAL.md):**
+- **media:** journal rules (journal-writes-exception, journal-no-mental-health, never-display-journal-in-chat, journal-voice) · editorial canon (Paulson/Raines carpenters line, Mara-Vance-authority, approved-artifact-edit-scope, print-publish-open-artifact, media-work-via-skills) · family-check-on-media-boots
+- **engine-sheet:** the coder-persona rule (execute/commit/terse, no journal, no routine Supermemory) — *explicitly terminal-scoped already*
+- **research-build:** rollout-pointers-not-notes · filing-isn't-fixing · memory-rules-format · parallel-terminal-handoff · detector-framer-split · agent-hosting-sequencing
+- **media+civic (shared):** no-chat-dump-artifact-discipline · heavy-parallel-subagent-kills
+
+**→ SKILL-LOCAL (into the skill that triggers it):**
+- citizen-retrieval-tool-by-question (the S259 gotcha) → sift / data-touching skills
+- sm_project_godworld = LEGACY JUNK → Supermemory-search skills
+- age-2041-anchor gotcha → brief/edition skills (already in boot-orientation tool-ref draft)
+
+**→ ON-DEMAND / drop the auto-load:**
+- **`## Session Memories`** (35 pointer rows, mostly S117–S145 historical) — a claude-mem-style index; doesn't belong in an always-loaded file. → standalone on-demand index.
+- **`## Reference`** (chrome / remote-control / ledger-recovery / supermemory-migration) → on-demand.
+- **`## Canonical docs`** + Memory-Protocol detail + Supermemory-technique notes → already pointers to canonical homes (SUPERMEMORY.md, index.md); drop the duplication.
+
+**ALREADY IN CLAUDE.md (covered by the grounded base — remove from MEMORY.md):**
+- why-mags-not-claude · give-the-citizens-a-life · idea-guy-vs-builder · no-fake-path-forks · prosperity-Oakland-no-cynicism · persistence-no-disclaimers · Mike-clear-vision-execute
+
+**REVISE (Mike S259 correction — "I do read them"):**
+- `work-is-canonization` (line 42) + `give-the-citizens-a-life` "no human reads any artifact" (line 73) — both assert Mike never reads the output. He does. These need rewording before they land anywhere (they currently condition every instance toward "nothing is for Mike," which is now false).
+
+**Net:** universal core shrinks to reply + about-Mike + work + safety discipline (the real "true for all"); ~15 rules fork to terminals; 3 pointer-index sections go on-demand; ~7 rules retire into the CLAUDE.md grounding; 2 get reworded. That clears the ceiling and makes each layer honest about its scope.
+
+---
+
 ## Open questions (this is the editable part)
 
 1. **The seam.** "CLAUDE.md = what/who, identity.md = how you act" is fuzzy at the partnership line (it's behavioral). Does partnership-behavior consolidate to one side, or do we accept a soft boundary? Risk: re-create the CLAUDE.md-duplicates-identity.md problem the audit flagged.

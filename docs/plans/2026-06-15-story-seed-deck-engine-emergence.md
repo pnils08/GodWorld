@@ -167,8 +167,14 @@ inline mini-packet instead of a `PacketRef`.
 - **Phase 0 — investigate + decide convergence. ✅ DONE S259** (see §Phase 0 above). Decision: CONSUME
   (layered pipeline `engine_audit → baseline_briefs → deck → sift`), not merge. Packet already largely
   exists in `baseline_briefs`. Seed-packet schema defined.
-- **Phase 1 — gate the noise.** `applyStorySeeds.js` active-subject gate + recurrence/age cap.
-  Engine-sheet, clasp. Immediate ~70% noise cut + Chicago falls out. (C97 G-S3.) **Highest leverage, do first.**
+- **Phase 1 — gate the noise. ✅ BUILT S259 (local; deploy post-C98).** `applyStorySeeds.js`
+  `generateStorylineSeeds_` — followup fires only if NOT a non-Oakland-locale (dormant-subject) thread
+  AND `cyclesSinceAdded <= FOLLOWUP_AGE_CAP` (12). Simulated against the live 97 dormant storylines:
+  **97 → 43 followups (56% cut)** — 6 dropped non-Oakland (Chicago), 48 aged out, 43 live-Oakland kept.
+  Findings that shaped it: all 97 live storylines are `dormant`; `lastCoverageCycle` is unwritten (dead
+  signal) so the gate uses `cyclesSinceAdded`; `canonNeighborhoods.js` is inert in Apps Script so the
+  gate is inline (`sl.*` + a non-Oakland-locale regex + the age knob). **Smoke-test at first cycle
+  post-deploy:** deck `storyline-followup` count drops ~half, zero Chicago seeds. (C97 G-S3 + Chicago half.)
 - **Phase 2 — route patterns → seeds.** `engine_audit` patterns become primary deck seeds, each linked
   to its `baseline_brief` packet (`SeedID`↔`briefId`). Demote `storyline-followup` to the gated continuity
   from Phase 1. Confirm every emergent seed has a brief (extend `generateBaselineBriefs` coverage if not).
@@ -201,3 +207,4 @@ the engine says "here are the real stories this cycle, with everything a desk ne
 - 2026-06-15 — Drafted (S259, engine-sheet) from Mike's S259 framing (deck = engine's pre-computed, attributed, desk-ready story surface to cut edition token burn). Grounded in the live C97 deck distribution + the existing `engine_audit`/`tribuneFraming`/`neighborhoodSlice`/`baseline_briefs` infrastructure. Folds Row 28; supersedes C97 ES-4 step 1's framing. No code yet — design pass per Mike "requires genuine creativity."
 - 2026-06-15 — Added the division-of-labor split (Mike S259 follow-up): engine EMERGES (fresh what/why/who), Supermemory MAINTAINS (published articles + grades = continuity). Reframed move A — the `storyline-followup` recycling is the engine wrongly holding continuity that belongs to Supermemory; gating it removes a responsibility, not just noise. Continuity = a Supermemory lookup at edition time, not an engine-maintained seed stream.
 - 2026-06-15 — **Phase 0 done (S259).** Mapped the three surfaces + how sift reads each. Key finding: `baseline_briefs` is already a projection of `engine_audit` patterns AND already carries the desk-ready packet (`neighborhoodState` + `neighborhoodResidents` from `lib/neighborhoodSlice`). Decision: **CONSUME (layered `engine_audit → baseline_briefs → deck → sift`), not merge** — the deck stops re-deriving emergence, keeps priority/byline/calendar, drops recycling, references the brief packet. Packet largely exists → Phase 4 shrinks to a join. Seed-packet schema defined. ROLLOUT engine.35 → phase-0-done.
+- 2026-06-15 — **Phase 1 built (S259, local; deploy post-C98).** `applyStorySeeds.js` followup gate (non-Oakland-locale + age cap 12). Live-data findings: all 97 live storylines `dormant`, `lastCoverageCycle` dead, `canonNeighborhoods` inert in Apps Script → inline gate on `sl.*`. Simulated 97→43 followups (56% cut; 6 Chicago, 48 aged out). Deploy held for the C98 clasp window (rides post-engine.33-smoke); smoke = followup count halves + zero Chicago next cycle.

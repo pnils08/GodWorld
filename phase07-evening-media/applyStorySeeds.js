@@ -628,6 +628,20 @@ function applyStorySeeds_(ctx) {
   function generateStorylineSeeds_(storylines) {
     var storylineSeeds = [];
 
+    // engine.35 Phase 1 (S259) — gate the storyline-followup recycler. A followup
+    // is the engine re-nudging a quiet thread; per the division of labor (engine
+    // EMERGES, Supermemory MAINTAINS) continuity for quiet threads belongs to
+    // Supermemory (articles+grades), not a recycled engine seed. Two gates:
+    //  (1) dormant SUBJECT — a thread anchored to a non-Oakland locale (Chicago is
+    //      canonically disabled S229; Chase Center = SF) has no live anchor → no followup.
+    //  (2) age-out — stop re-nudging a thread after FOLLOWUP_AGE_CAP cycles since added.
+    // Live Oakland threads with genuine fresh activity resurface via engine_audit
+    // patterns (Phase 2 routes patterns→seeds), not a blind dormant re-nudge.
+    // FOLLOWUP_AGE_CAP is the tuning knob (Mike S259); raise/lower to trade
+    // continuity-recall against noise. Plan: 2026-06-15-story-seed-deck-engine-emergence.
+    var FOLLOWUP_AGE_CAP = 12;
+    var NON_OAKLAND_LOCALE_RE = /chicago|bridgeport|united center|chase center|\bbulls\b/i;
+
     for (var si = 0; si < storylines.length; si++) {
       var sl = storylines[si];
 
@@ -649,8 +663,15 @@ function applyStorySeeds_(ctx) {
       else if (sl.priority === 'high') basePriority = 2;
       else if (sl.priority === 'low' || sl.priority === 'background') basePriority = 0;
 
-      // Generate follow-up seed for dormant storylines (not mentioned in 3+ cycles)
-      if (sl.status === 'dormant' || sl.cyclesSinceAdded >= 3) {
+      // Generate follow-up seed for dormant storylines (not mentioned in 3+ cycles),
+      // gated by engine.35 Phase 1: skip non-Oakland-locale (dormant-subject) threads
+      // and threads aged past FOLLOWUP_AGE_CAP (continuity beyond that = Supermemory's).
+      var followupLocaleBlob = String(sl.neighborhood || '') + ' ' +
+        String(sl.relatedCitizens || '') + ' ' + String(sl.description || '');
+      var dormantSubject = NON_OAKLAND_LOCALE_RE.test(followupLocaleBlob);
+      var withinAgeCap = sl.cyclesSinceAdded <= FOLLOWUP_AGE_CAP;
+      if (!dormantSubject && withinAgeCap &&
+          (sl.status === 'dormant' || sl.cyclesSinceAdded >= 3)) {
         storylineSeeds.push(makeSeed(
           'FOLLOW-UP: ' + sl.description + ' — Last coverage was ' + sl.cyclesSinceAdded + ' cycles ago.',
           domain,

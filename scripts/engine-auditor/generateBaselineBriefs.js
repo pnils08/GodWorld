@@ -253,10 +253,24 @@ function generate(ctx, ailmentPatterns) {
   const lifeEvents = (snapshot.LifeHistory_Log || []).filter(r =>
     parseInt(r.Cycle, 10) === cycle && STRUCTURAL_LIFE_TAGS.has(r.EventTag)
   );
+  // S259 ES-1 step 3 (G-S2): a sitting office-holder cannot be retiring. If the
+  // engine ever stamps a Retirement on an active Civic_Office_Ledger holder (the
+  // C97 Mayor-retirement contaminant — source roll fixed S257b), do NOT emit a
+  // baseline brief for it; a genuine retirement vacates the seat, so a real
+  // retiree would no longer hold an active office. Deterministic backstop — the
+  // operator/regen is the contamination source, so the gate can't be self-policing.
+  const activeOfficeHolderPopIds = new Set(
+    (snapshot.Civic_Office_Ledger || []).map(c => c.PopId).filter(Boolean)
+  );
+  let suppressedOfficeRetirements = 0;
   lifeEvents.forEach((e, idx) => {
     const popId = e.POPID;
     if (!popId) return;
     const tag = e.EventTag;
+    if (tag === 'Retirement' && activeOfficeHolderPopIds.has(popId)) {
+      suppressedOfficeRetirements++;
+      return;
+    }
     const text = e.EventText || '';
     // LifeHistory neighborhoods include placeholder values like 'Engine' or 'Generational'.
     // Resolve to a real neighborhood from the ledger when placeholder.
@@ -300,6 +314,9 @@ function generate(ctx, ailmentPatterns) {
       promotionHints: hints,
     }));
   });
+  if (suppressedOfficeRetirements > 0) {
+    console.warn(`[baseline-briefs] suppressed ${suppressedOfficeRetirements} office-holder retirement life-event(s) — sitting holders cannot retire (G-S2 contaminant guard)`);
+  }
 
   // --- Approval shifts > 5pts ---
   const council = snapshot.Civic_Office_Ledger || [];

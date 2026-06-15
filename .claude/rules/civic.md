@@ -40,6 +40,7 @@ Per S212 generation-vs-evaluation asymmetry: the **City Clerk is not bureaucracy
 - **OPP = Oakland Progressive Party.** NOT "People's Party." Engine code had this wrong; fixed S139.
 - **CRC = Civic Reform Coalition.**
 - **Mayor Avery Santana — she/her.** Canon locked S139.
+- **Population** ~1,366 tracked (live counts). Don't cite "675" or "761" — both stale. (S259, redistributed from CLAUDE.md.)
 - **Vote math reconciles.** Every council vote: list all 9 members, mark YES / NO / ABSENT. Totals must add up. (`.claude/rules/newsroom.md` owns the rule for editions — same rule applies at the source-material layer.)
 - **Faction voices stay distinct.** OPP, CRC, IND each have characteristic tones (community-centered / fiscal-accountability / case-by-case). Crossing voices is canonical violation. Each faction's RULES.md owns its voice constraints.
 

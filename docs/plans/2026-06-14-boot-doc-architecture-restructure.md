@@ -136,7 +136,9 @@ Full read of MEMORY.md (154 lines). **governance.5 already moved gross project-s
 **REVISE (Mike S259 correction — "I do read them"):**
 - `work-is-canonization` (line 42) + `give-the-citizens-a-life` "no human reads any artifact" (line 73) — both assert Mike never reads the output. He does. These need rewording before they land anywhere (they currently condition every instance toward "nothing is for Mike," which is now false).
 
-**Net:** universal core shrinks to reply + about-Mike + work + safety discipline (the real "true for all"); ~15 rules fork to terminals; 3 pointer-index sections go on-demand; ~7 rules retire into the CLAUDE.md grounding; 2 get reworded. That clears the ceiling and makes each layer honest about its scope.
+**S259 execution finding — the worker rules are mostly ALREADY in the rules files.** civic.md already carried Mayor/OPP/CRC/IND (canon-critical section); newsroom.md already carried ages/no-engine-metrics/vote-math. That's the §4 duplication the audit flagged. So the remaining pass is **mostly verify-home-then-de-dupe-MEMORY, not add**: confirm each worker rule has a home in its rules file (add only the genuinely-missing few — media needed journal/print/canon-facts, civic needed only the population line), then DELETE the worker rules from MEMORY.md. Media + civic canon-facts orphan-gap is **closed** (newsroom.md got the block, civic.md already had it + got population) → the grounded CLAUDE.md is now safe to deploy.
+
+**Net:** universal core shrinks to reply + about-Mike + work + safety discipline (the real "true for all"); ~15 rules confirmed-homed-then-dropped from MEMORY.md; 3 pointer-index sections go on-demand; ~7 rules retire into the CLAUDE.md grounding; 2 get reworded. That clears the ceiling and makes each layer honest about its scope.
 
 ---
 

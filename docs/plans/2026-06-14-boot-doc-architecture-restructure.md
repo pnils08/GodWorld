@@ -19,7 +19,9 @@ pointers:
 
 **Goal:** Restructure the always-load boot stack into three clean layers — **base** (CLAUDE.md, grounding), **worker** (per-terminal TERMINAL.md, the job), **on-demand** (MEMORY / ROLLOUT / SESSION_CONTEXT, available but not auto-loaded) — plus a **self-evolve** mechanism so a terminal can write a learned gotcha to a home its next instance loads. Reverses governance.5 (CLAUDE.md pointer-only) for the governing-core content. Mike-directed S259.
 
-**Status: DESIGN. Nothing deployed.** The grounded CLAUDE.md is written to the working tree as a worked draft but the commit is **held**; no commit ships until this plan is settled + sequenced.
+**Status: REDISTRIBUTION SHIPPED S259.** The full cascade landed: worker rules homed (media→newsroom.md, civic→civic.md, engine-sheet→TERMINAL.md confirmed, research-build→research-build.md), MEMORY.md trimmed **24.9KB → 13.9KB** (under the 24.4KB ceiling; relocated/retired rules removed, universal core kept verbatim, Session Memories + Reference → on-demand `SESSION_MEMORIES.md`), grounded CLAUDE.md committed + old archived. Because MEMORY.md auto-loads from disk and CLAUDE.md from the working tree, the restructured stack is **what the next boot loads** — the git commits are durability, the next-session boot is the validation (open Q5).
+
+**Deferred (flagged, not done):** the deeper "Mike reads the output" reconciliation. MEMORY.md no longer auto-loads the overturned "no human reads / nothing is for Mike" framing (removed give-citizens-life + work-is-canonization lines; the healthy principle lives in CLAUDE.md), but the underlying topic files (`user_give-the-citizens-a-life.md`, `user_mags-bleed-proprietary-element.md`, `feedback`/`user` files carrying that framing) still assert it. Reconciling those source files is its own deliberate pass — they overturn the most-load-bearing memory framing, so they get Mike's eyes, not an autonomous sweep.
 
 ---
 

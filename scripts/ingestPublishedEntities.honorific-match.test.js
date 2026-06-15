@@ -1,10 +1,17 @@
 /**
- * ingestPublishedEntities.honorific-match.test.js — S257 G-P-C97-1 contract
+ * ingestPublishedEntities.honorific-match.test.js — S257 G-P-C97-1 +
+ * S259 ENGINE_REPAIR Row 29 corrected contract.
  *
- * Verifies the no-POP-ID matcher's honorific + last-name-anchored path so a
- * freeform NAMES INDEX row truncated to a title+last-name ("Dr. Tran-Muñoz")
- * resolves to the EXISTING citizen instead of minting a duplicate (the
- * POP-01021 regression: Dr. Vanessa Tran-Muñoz already holds POP-00781).
+ * The no-POP-ID matcher strips a leading honorific. For a FULL name
+ * ("Dr. Vanessa Tran-Muñoz") it then resolves by first+last — that path is
+ * safe and preserved. For a name truncated to a bare title+surname
+ * ("Dr. Tran-Muñoz", no first name) the earlier code auto-resolved on a
+ * UNIQUE surname match; Row 29 proved that is a false-positive vector (a
+ * title-only name is not identifiable, and on the live ledger POP-01021 is a
+ * malformed self-row First="Dr." Last="Tran-Muñoz" — the OARI Director is NOT
+ * POP-00781, which is barista Vanessa Treary). Corrected contract: a bare
+ * honorific+surname NEVER auto-matches and NEVER auto-appends — it routes to
+ * ambiguous with the surname candidates for brief-stage POP-ID resolution.
  *
  * resolveCitizens reads Simulation_Ledger!A1:AU via the sheets client — mocked
  * here with a tiny fixture (POPID col A; First/Last by header index).
@@ -51,11 +58,13 @@ async function run() {
   console.log('\n[G-P-C97-1] ingestPublishedEntities — honorific + last-name-anchored matcher\n');
   var total = 0, passed = 0;
 
-  total++; passed += await passing('truncated "Dr. Tran-Muñoz" matches existing POP-00781 (no duplicate mint)', async function () {
+  total++; passed += await passing('Row 29: truncated "Dr. Tran-Muñoz" → ambiguous, NEVER auto-matched (even on unique surname)', async function () {
     var r = await mod.resolveCitizens([{ fullName: 'Dr. Tran-Muñoz', popId: null }], mockClient(), 'x');
-    var m = r.matched.find(function (x) { return x.popId === 'POP-00781'; });
-    assert.ok(m, 'expected POP-00781 in matched, got matched=' + JSON.stringify(r.matched) + ' candidates=' + JSON.stringify(r.candidates));
-    assert.strictEqual(r.candidates.length, 0, 'must NOT append a candidate (POP-01021 regression)');
+    assert.strictEqual(r.matched.length, 0, 'a title-only name must NOT auto-match a unique surname (Row 29 false-positive vector)');
+    assert.strictEqual(r.candidates.length, 0, 'must NOT append a duplicate (POP-01021 regression)');
+    var a = r.ambiguous.find(function (x) { return /Tran-Muñoz/i.test(x.fullName); });
+    assert.ok(a, 'expected ambiguous flag for the truncated name');
+    assert.ok(a.popIds && a.popIds.indexOf('POP-00781') !== -1, 'ambiguous entry should carry the surname candidate(s) for brief-stage resolution');
   });
 
   total++; passed += await passing('full "Dr. Vanessa Tran-Muñoz" matches POP-00781 (honorific stripped, first+last)', async function () {

@@ -586,25 +586,31 @@ async function resolveCitizens(parsed, sheetsClient, sheetId) {
       }
 
       if (nameTokens.length === 1) {
-        // Only a last name survives — the honorific+truncation case. Anchor on
-        // last name BEFORE defaulting to append, so we don't mint a duplicate
-        // (the POP-01021 regression). Conservative: require a honorific to have
-        // been present (a bare single-token person name otherwise stays
-        // ambiguous), and only auto-resolve on a UNIQUE last-name match.
+        // Only a surname survives — honorific + truncated name with NO first
+        // name (e.g. "Dr. Tran-Muñoz"). ENGINE_REPAIR Row 29 (S259): a
+        // title-only name is not identifiable, and a UNIQUE surname match is
+        // NOT sufficient corroboration to resolve it. The prior code
+        // auto-resolved on a unique surname (`matched.push`); that is the
+        // false-positive vector — it would link "Dr. Treary" to the one Treary
+        // row regardless of who actually signed, and on a malformed row like
+        // POP-01021 (First="Dr." Last="Tran-Muñoz") it self-anchors. The
+        // incoming entry carries no first name / role / neighborhood to
+        // corroborate against the candidate row, so there is nothing to gate a
+        // safe auto-match on. NEVER auto-match and NEVER auto-append a bare
+        // honorific+surname: route to ambiguous with the surname-match
+        // candidates so the POP-ID is resolved at the brief stage, not here.
         if (!strippedHonorific) {
           ambiguous.push({ fullName: entry.fullName, reason: 'single-token name; cannot match' });
           continue;
         }
         const lastHits = byLast.get(nameTokens[0].toLowerCase()) || [];
-        if (lastHits.length === 1) {
-          matched.push({ popId: lastHits[0].pop, fullName: entry.fullName, resolved: true, matchNote: 'honorific+lastname-anchored (G-P-C97-1)' });
-        } else if (lastHits.length > 1) {
-          ambiguous.push({ fullName: entry.fullName, reason: 'honorific + bare last name matches ' + lastHits.length + ' citizens', popIds: lastHits.map(h => h.pop) });
-        } else {
-          // No ledger last-name match — do NOT auto-append a bare-honorific
-          // name (that minted POP-01021). Flag for POP-ID resolution at brief.
-          ambiguous.push({ fullName: entry.fullName, reason: 'honorific + bare last name, no ledger last-name match — resolve POP-ID at brief, not auto-append' });
-        }
+        ambiguous.push({
+          fullName: entry.fullName,
+          reason: lastHits.length
+            ? 'honorific + bare surname (no first name) — ' + lastHits.length + ' surname match(es); insufficient to identify, resolve POP-ID at brief, do not auto-match (Row 29)'
+            : 'honorific + bare surname, no ledger surname match — resolve POP-ID at brief, not auto-append',
+          popIds: lastHits.map(h => h.pop),
+        });
         continue;
       }
 

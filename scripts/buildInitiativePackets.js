@@ -651,10 +651,14 @@ async function main() {
         keywords: (init.Keywords || '').split(',').map(k => k.trim()).filter(Boolean),
         status: init.Status || 'UNKNOWN',
         voteCycle: init.VoteCycle ? parseInt(init.VoteCycle) : null,
-        vote: init.VoteResult || null,
+        // S259 ES-4 step 2 (G-S4): key-name fixes — these keyed off non-existent
+        // sheet columns so domain/neighborhoods/vote were always null/[], starving
+        // the MCP lookup_initiative Layer-2 read. Live Initiative_Tracker headers are
+        // Outcome / PolicyDomain / AffectedNeighborhoods (toObj keys by exact header).
+        vote: init.Outcome || null,
         budget: init.Budget || null,
-        domain: init.Domain || null,
-        neighborhoods: (init.Neighborhoods || '').split(',').map(n => n.trim()).filter(Boolean),
+        domain: init.PolicyDomain || null,
+        neighborhoods: (init.AffectedNeighborhoods || '').split(',').map(n => n.trim()).filter(Boolean),
         implementation: {
           status: (init.ImplementationPhase || 'untracked').toLowerCase(),
           phase: (init.ImplementationPhase || 'untracked').toLowerCase(),

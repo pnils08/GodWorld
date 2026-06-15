@@ -115,21 +115,70 @@ off a city-aggregate `illnessRate`, `CitizenCount=0`) and queued a rebuild as "a
 story signal driven by real metrics." **That rebuild and this deck redesign are the same effort** —
 the connected per-hood signal *is* the desk-ready seed. Build once; do not restore the old buckets.
 
+## Phase 0 — findings + decision (settled S259)
+
+**The three surfaces, and how `sift` already reads each:**
+- **`engine_audit_c<N>.json` `patterns[]`** (16 in C97, **all 16** carry `tribuneFraming`) = the canonical
+  emergence units. Detector suite already runs `resolveAffectedCitizens`, `recommendRemedy`,
+  `generateTribuneFraming`. Each pattern carries what (`type`/`description`), who (`affectedEntities`),
+  proof (`evidence`), framing (`tribuneFraming.storyHandles[civic|business|culture|sports|letters]` +
+  `suggestedFrontPage` + `capabilityHooks`), toward-why (`remedyPath`, `mitigatorState`). sift reads these
+  directly (Step 2 + WORLD/CIVIC lanes).
+- **`baseline_briefs_c<N>.json`** = a **projection** of those patterns, and it **already carries the
+  desk-ready packet**: `neighborhoodState` (crime/retail/sentiment w/ cycle-over-cycle deltas, median
+  income + rent, displacement pressure, gentrification phase) + `neighborhoodResidents` (bounded,
+  notable-first) from `lib/neighborhoodSlice`, + `threeLayerHandle` + `subjectIds`. sift triages at Step 5.
+- **`Story_Seed_Deck`** = the **separate** storyline-recycling + calendar/texture + signal surface,
+  carrying priority (Engine A, cols M-O) + byline (Engine B, cols P-R). sift reads cols M-R at T4.1 (Step 6).
+
+**The redundancy:** sift reads all three. The deck re-derives story candidates (from storylines / calendar
+/ signals) **in parallel** to the auditor's far richer patterns — and the deck's emergence is the weak,
+noisy one (71% recycled).
+
+**DECISION — CONSUME (layered pipeline), NOT merge.** One emergence engine, projected forward:
+
+> `engine_audit` (emerge: what/why/who/framing) → `baseline_briefs` (enrich into the desk-ready packet:
+> + neighborhoodState + residents — *already built*) → `Story_Seed_Deck` (rank [Engine A] + byline
+> [Engine B] + add the legitimate calendar/texture seeds + gate the recycling) → sift/desk read ONE
+> ranked surface, each deck row pointing at its packet.
+
+- The deck **stops** being a parallel emergence surface — its emergent seeds become projections of
+  `engine_audit` patterns (linked to the baseline_brief packet), not re-derived from storylines.
+- The deck **keeps** its genuine value-adds: priority ranking, byline assignment, and the calendar/texture
+  seeds (seasonal / holiday / firstfriday / cultural) that are NOT engine anomalies.
+- The deck **drops** storyline-followup recycling (continuity = Supermemory).
+- `baseline_briefs` is **NOT** deprecated — it IS the packet layer the deck references.
+
+**Consequence — the packet largely already exists, so Phase 4 shrinks.** The desk-ready packet is mostly
+built in `baseline_briefs` (neighborhoodState + residents + threeLayerHandle). Remaining build: (a) link
+each emergent deck row to its baseline_brief packet (a `SeedID`↔`briefId` join); (b) ensure every pattern
+that becomes a deck seed has a brief (today not all patterns → briefs); (c) the WHY enrichment (causal
+anchor beyond `remedyPath`/`mitigatorState`).
+
+**Seed-packet schema (Phase 0 output):** a deck row =
+`{ SeedID, Cycle, SeedType, Domain, Neighborhood, Priority, Byline, PacketRef }`
+where `PacketRef` resolves to the baseline_brief packet =
+`{ what: description/angle/hookLine, who: subjectIds + neighborhoodResidents, numbers: neighborhoodState,
+why: causalAnchor, handle: threeLayerHandle }`. Calendar/texture seeds (no underlying pattern) carry an
+inline mini-packet instead of a `PacketRef`.
+
 ## Phasing
 
-- **Phase 0 — investigate + decide convergence.** Map exactly what `tribuneFraming` + the pattern
-  detectors already carry toward what/why/who; confirm the `engine_audit` ↔ `baseline_briefs` ↔ deck
-  overlap; decide deck-consumes-emergence vs merge. Output: the seed-packet schema (the new
-  `Story_Seed_Deck` columns or a sidecar JSON the deck references).
+- **Phase 0 — investigate + decide convergence. ✅ DONE S259** (see §Phase 0 above). Decision: CONSUME
+  (layered pipeline `engine_audit → baseline_briefs → deck → sift`), not merge. Packet already largely
+  exists in `baseline_briefs`. Seed-packet schema defined.
 - **Phase 1 — gate the noise.** `applyStorySeeds.js` active-subject gate + recurrence/age cap.
-  Engine-sheet, clasp. Immediate ~70% noise cut + Chicago falls out. (C97 G-S3.)
-- **Phase 2 — route patterns → seeds.** Pattern story-units become primary deck seeds with
-  what/who/proof/framing inherited. Demote followups to gated continuity.
-- **Phase 3 — WHY layer.** Causal anchor per seed (build on / extend `tribuneFraming`).
-- **Phase 4 — desk-ready packet.** Bundle `neighborhoodSlice` + handle + byline into the seed.
-  Token-burn payoff lands here.
-- **Phase 5 — rewire consumption.** Update sift / `buildDeskPackets` (and the desk agents' RULES)
-  to read the packet instead of re-querying. Measure the per-edition token delta.
+  Engine-sheet, clasp. Immediate ~70% noise cut + Chicago falls out. (C97 G-S3.) **Highest leverage, do first.**
+- **Phase 2 — route patterns → seeds.** `engine_audit` patterns become primary deck seeds, each linked
+  to its `baseline_brief` packet (`SeedID`↔`briefId`). Demote `storyline-followup` to the gated continuity
+  from Phase 1. Confirm every emergent seed has a brief (extend `generateBaselineBriefs` coverage if not).
+- **Phase 3 — WHY layer.** Causal anchor per seed — extend `tribuneFraming`/`remedyPath`/`mitigatorState`
+  into an explicit cause link (the driver event/initiative-phase/migration/sentiment that produced the delta).
+- **Phase 4 — desk-ready packet (SHRUNK — packet mostly exists).** The `baseline_brief` already carries
+  `neighborhoodState` + `neighborhoodResidents` + `threeLayerHandle`. Work = wire the `PacketRef` join +
+  ensure completeness, not build the packet from scratch.
+- **Phase 5 — rewire consumption.** Point sift / `buildDeskPackets` (and desk RULES) at the deck→packet
+  surface instead of re-querying; retire the redundant triple-read. Measure the per-edition token delta.
 
 ## Token-burn rationale (why C is the point, not a nicety)
 
@@ -151,3 +200,4 @@ the engine says "here are the real stories this cycle, with everything a desk ne
 
 - 2026-06-15 — Drafted (S259, engine-sheet) from Mike's S259 framing (deck = engine's pre-computed, attributed, desk-ready story surface to cut edition token burn). Grounded in the live C97 deck distribution + the existing `engine_audit`/`tribuneFraming`/`neighborhoodSlice`/`baseline_briefs` infrastructure. Folds Row 28; supersedes C97 ES-4 step 1's framing. No code yet — design pass per Mike "requires genuine creativity."
 - 2026-06-15 — Added the division-of-labor split (Mike S259 follow-up): engine EMERGES (fresh what/why/who), Supermemory MAINTAINS (published articles + grades = continuity). Reframed move A — the `storyline-followup` recycling is the engine wrongly holding continuity that belongs to Supermemory; gating it removes a responsibility, not just noise. Continuity = a Supermemory lookup at edition time, not an engine-maintained seed stream.
+- 2026-06-15 — **Phase 0 done (S259).** Mapped the three surfaces + how sift reads each. Key finding: `baseline_briefs` is already a projection of `engine_audit` patterns AND already carries the desk-ready packet (`neighborhoodState` + `neighborhoodResidents` from `lib/neighborhoodSlice`). Decision: **CONSUME (layered `engine_audit → baseline_briefs → deck → sift`), not merge** — the deck stops re-deriving emergence, keeps priority/byline/calendar, drops recycling, references the brief packet. Packet largely exists → Phase 4 shrinks to a join. Seed-packet schema defined. ROLLOUT engine.35 → phase-0-done.

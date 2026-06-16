@@ -120,6 +120,26 @@ The first design pass floated closing the loop: reflection → writes back to Li
 
 So **Mags = the persona-MD pattern (hand-authored depth); a citizen = dials-as-CHARACTER + LifeHistory-as-journal (read) + the narrative store (their own written memory).** No per-citizen MD authoring; no engine-state write-back. Phase 2a's read-only separation is likely the *permanent* home, not a stepping stone — **the one open doctrine-fork for Mike** (below) is whether citizen subjectivity should *ever* influence the engine, which would require a deterministic projection, not raw prose.
 
+### Phase 2 the categorical bridge — RESOLVED (S261, Mike + code-confirmed)
+
+The doctrine-fork ("does citizen subjectivity ever feed the engine?") is **answered: yes — via a closed-vocabulary tag bridge, determinism intact.** Mike's framing: summarize a citizen's reflection into a *categorical bucket the dial system already accepts.* Confirmed in code:
+- The dial map is a **closed ~58-tag vocabulary** (`citizenDialMap.js` DIAL_MAP: Career / Promotion / Faith / Civic / Setback / Recovery / Reputation / Transgression-* / Personal / Daily / youth-* …).
+- `citizenMemory.js` exposes `applyTaggedEvent_(citizen, tag, severityMult)` — **tag in → deterministic dial-delta out, pure/I-O-free.** This is the exact bridge.
+- **Determinism preserved:** classification (reflection → tag) is an *input-generation step outside the cycle* — same class as media intake / Discord conversations, which the engine already ingests. The in-cycle math (tag → delta → apply) is a pure lookup, no `Math.random`. Reflection prose NEVER touches the engine; only the categorical tag does.
+- **Damping is already built:** `citizenMemory` models each dial as **base (permanent self) + mood (swing) + streak (reinforcement)**. A one-off reflection nudges mood and fades; only a *sustained* reflection pattern shifts the base. So over-drift is structurally handled — repetition is what makes change stick, for objective and subjective events alike.
+
+**Principle (the whole architecture):** *engine deterministic (objective events → tags → dials) / wakes reactive (reflections → classified tags → dials) / both write through the same `applyTaggedEvent_` door / full prose lives in the citizen's Supermemory page.* "Citizens develop both ways" = literally the base/mood/streak model fed from two sides.
+
+**The one genuinely new component: the classifier** (reflection → which of the 58 tags + severity). Must be constrained to the closed vocab and validated for label consistency, or dials drift on mislabels. **Severity discipline:** reflection-events ride a *lighter* severityMult than real life-events (nudge mood, rarely shift base) — subjective experience colors a citizen without overwriting what the engine says happened to them.
+
+### Phase 2 perception store = per-citizen Supermemory page (S261, Mike)
+
+The parallel narrative store is concretely a **per-citizen Supermemory "page"** (Facebook/profile shape — their accreting history). **Net-new ledger column** stores the citizen's Supermemory tag/ID (`save-column`); any use (wake / write-about / query) pulls their history via the tag. Pointers-not-recall applied to citizens. The column is an **engine-sheet schema task**. This page IS the narrative store from the two-layer design — unified.
+
+### Phase 2 wake structure — prompted + numbered (S261, Mike)
+
+Voice differentiation = **dials (who) × wake-prompt (what they're doing tonight) × neighborhood slice (what they see)** — three axes, not dials alone (which may cluster by neighborhood). Wakes are *prompted scenarios* ("meet 5 citizens," "follow up on your rent notice"), numbered/sequenced (wake-2, wake-3 …), reusing whatever voice method Mags lands on. The prompt variety carries differentiation the dials can't, and makes the validation prototype more likely to pass.
+
 ### Phase 2 validation gate — prototype BEFORE building rotation infra (S261, advisor)
 
 The load-bearing bet is **"different dials → different voice."** Untested, and `[[user_mags-bleed-proprietary-element]]` warns the depth is the hard, non-assemblable part — six dials + event tags is thin next to a hand-authored persona; the failure mode is every citizen sounding like the same "thoughtful Oakland resident" with different stats. **Gate: wake 2–3 real citizens from their actual dial vectors with a throwaway prompt and read the output.** Distinct → build rotation. Not distinct → the per-citizen seed needs enrichment first (more ledger particulars, relationship texture, occupation voice) before any infra. Same "validate the load-bearing bet first" that just paid off on loop-tightening. **Open precondition:** confirm per-citizen dial vectors are actually *persisted + readable* today (the map exists + engines consume it, but is the accumulated vector stored per POPID, or is accumulation still mid-build?) — the prototype can't wake "a real citizen's vector" until that's true. **Credits caveat:** the generation step needs API budget; assemble the seeds now, run when budget/Mike greenlights.
@@ -133,7 +153,8 @@ The load-bearing bet is **"different dials → different voice."** Untested, and
 - [ ] Search-announce UX (Task 1/2): does she say "let me pull that up" or answer silently with the grounded result? Lean silent (cleaner). Resolve before Task 1 ships.
 - [x] Citizen-selection policy (Phase 2 decision 2): **RESOLVED S261 (Mike) — event-magnitude-weighted** (wake whoever's living the biggest delta).
 - [x] Rotation vs. Mags-continuity (Phase 2): **RESOLVED S261 (Mike) — yes.** Mags stays the fixed nightly anchor (journals → media Mags → bot); other citizens rotate around her as the variety.
-- [ ] **DOCTRINE FORK (Mike): do citizen reflections ever write back into the deterministic engine, or stay in a narrative layer beside it?** Determinism closes the raw-prose-moves-dials option; the live question is whether the parallel narrative store is the permanent home, or whether citizen subjectivity should one day feed the engine via a *deterministic projection* (not prose). Holds the doctrine; not pre-built.
+- [x] **DOCTRINE FORK — RESOLVED S261 (Mike + code-confirmed):** citizen reflections DO feed the engine, via the closed-vocab tag bridge (`applyTaggedEvent_`), determinism intact (classification is input-side; tag→delta is pure). Prose stays in the Supermemory page; only the categorical tag touches dials. Damping already built (base/mood/streak). See §"the categorical bridge."
+- [ ] Classifier design (Phase 2, the one new component): reflection → {tag(s), severity} constrained to the 58-tag vocab. How is label consistency validated? Reflection-event severityMult calibration (lighter than real life-events). Resolve at build.
 - [ ] Prototype precondition: are per-citizen dial vectors persisted + readable per POPID today, or is accumulation still mid-build? Confirm before the 2–3-citizen voice test.
 
 ---

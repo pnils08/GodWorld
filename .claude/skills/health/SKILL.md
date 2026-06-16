@@ -1,8 +1,8 @@
 ---
 name: health
 description: Quick engine health check — combines determinism scan, orphan detection, and dependency chain verification in one pass. Lighter than /tech-debt-audit, faster than /pre-mortem.
-version: "1.0"
-updated: 2026-04-17
+version: "1.1"
+updated: 2026-06-16
 tags: [engine, active]
 effort: medium
 ---
@@ -50,9 +50,11 @@ For each chain: confirm the write exists AND the read file references it. If eit
 
 Quick check for ctx.summary fields written but not read by any other file:
 
-1. Extract all unique `S.fieldName =` patterns from phase*/*.js
-2. For each field, grep all phase*/*.js for reads of that field in a DIFFERENT file
-3. Report any field with 0 external readers
+```bash
+node scripts/ctxMap.js | tail -3   # Connected | Orphaned | Phantom counts
+```
+
+`ctxMap.js` is the deterministic backing (handles the `S = ctx.summary` alias) — it computes orphaned (writers>0, 0 external readers) and phantom (reads with no writer) fields directly. Do NOT extract-and-grep fields by hand; invoke the script (gov.40 substrate-scan discipline — these run as scripts, not Opus-by-hand). For a single field's detail: `node scripts/ctxMap.js <fieldName>`.
 
 This catches new orphans introduced since the last `/tech-debt-audit`.
 

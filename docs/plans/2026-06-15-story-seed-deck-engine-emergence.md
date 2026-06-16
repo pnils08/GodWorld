@@ -199,8 +199,24 @@ inline mini-packet instead of a `PacketRef`.
   to leave the 2 initiative improvements + stuck-initiative untouched.
   **C98 rollout:** service-account widen deck S→T → clasp push saveV3Seeds → cycle runs → /engine-review →
   `routePatternSeeds.js --apply --cycle 98`. **Demote `storyline-followup`** already done (Phase 1 gate).
-- **Phase 3 — WHY layer.** Causal anchor per seed — extend `tribuneFraming`/`remedyPath`/`mitigatorState`
-  into an explicit cause link (the driver event/initiative-phase/migration/sentiment that produced the delta).
+- **Phase 3 — WHY layer. ✅ BUILT S260 (local; rides C98).** A FAITHFUL causal anchor per seed (`routePatternSeeds.js`),
+  driver-grain matched to seed kind — **not** fabricated, each is real engine mechanics:
+  - **citywide synthesis seed → global additive driver.** The uniform cross-hood +0.11 is a global signal, not
+    per-hood pulse (8 hoods moving by the *same* delta from different baselines = one driver; per-hood citizen
+    pulse only explains the deviations). Source: `applySportsSeason.js` does `S.sentiment += totalSentiment`
+    (a winning A's stretch lifts the whole city) + citywide calendar (First Friday / holiday). C97: *"the A's
+    winning stretch (W4) + First Friday + DiaDeMuertos."*
+  - **per-hood outlier / event seed → the co-located cycle event** (baseline_brief world-event in that hood).
+    Fruitvale +0.25 ← its Transit-Hub milestone (`event-infrastructure-1`) — the advisor's predicted echo, confirmed.
+  - **initiative seed → the phase transition** (`fromPhase→toPhase`) or the stuck blocker (`stalled N cycles in <phase>`).
+  Cycle-pinned: reads `world_summary_c{N}.md` (built from Riley_Digest + Oakland_Sports_Feed + Simulation_Calendar)
+  so the WHY doesn't drift with live sheets; **soft** (absent summary degrades, never throws). The driver folds into
+  the existing `SuggestedAngle` (col J) — **no deck schema change, no clasp.** Key investigation finding: the real
+  per-hood pulse *composition* (citizen events) is NOT persisted post-cycle — but it only explains deviations, so
+  it's an *optional later* refinement (Phase 3b), not a prerequisite. The W-L record can't be parsed robustly from
+  the markdown (current+2-prior rows) so the driver uses the streak qualifier (reliable), not the exact record.
+  Determinism + structured `causalAnchor {kind,driver,confidence}` per seed verified. Advisor-reviewed (caught the
+  global-vs-pulse mis-trace pre-build). A structured causal-anchor *column* deferrable to Phase 3b if sift needs it.
 - **Phase 4 — desk-ready packet (SHRUNK — packet mostly exists).** The `baseline_brief` already carries
   `neighborhoodState` + `neighborhoodResidents` + `threeLayerHandle`. Work = wire the `PacketRef` join +
   ensure completeness, not build the packet from scratch.
@@ -237,4 +253,5 @@ the engine says "here are the real stories this cycle, with everything a desk ne
   stacking on the un-smoke-tested engine.33/Phase-1 stack until C98 clears). Phase 4 (PacketRef join)
   folded forward — subject-overlap join already emits packets where briefs exist.
 - 2026-06-15 — **Phase 1 built (S259, local; deploy post-C98).** `applyStorySeeds.js` followup gate (non-Oakland-locale + age cap 12). Live-data findings: all 97 live storylines `dormant`, `lastCoverageCycle` dead, `canonNeighborhoods` inert in Apps Script → inline gate on `sl.*`. Simulated 97→43 followups (56% cut; 6 Chicago, 48 aged out). Deploy held for the C98 clasp window (rides post-engine.33-smoke); smoke = followup count halves + zero Chicago next cycle.
+- 2026-06-16 — **Phase 3 WHY layer built (S260, local; rides C98).** Faithful causal anchor per seed in `routePatternSeeds.js`, driver-grain by seed kind: citywide synthesis → global additive (sports streak + First Friday + holiday, the uniform cross-hood signal); per-hood outlier → co-located baseline_brief event (Fruitvale +0.25 ← Transit milestone); initiative → phase transition / stuck blocker. Cycle-pinned to `world_summary_c{N}.md` (soft, never throws), folds into `SuggestedAngle` (no schema change, no clasp). Advisor caught a global-vs-citizen-pulse mis-trace pre-build — the real driver of the uniform +0.11 is the global sports/calendar add, not per-hood pulse (which is unpersisted and only explains deviations → optional Phase 3b). Streak qualifier used over the W-L record (markdown lists current+2-prior, record unparseable robustly). Deterministic; structured `causalAnchor{kind,driver,confidence}` per seed. Pattern: feedback_measure-twice-cascading-effects.
 - 2026-06-16 — **Citywide-sentiment-seed collapse built (S260, local; rides C98 with the Phase 2 routePatternSeeds live run).** The Phase 2 open refinement. `routePatternSeeds.js` restructured intents→collapse→byline so collapse runs before byline assignment (cadence no longer polluted by per-hood fragments): `collapseImprovements` clusters `improvement` intents by `*Delta` metric field + ±0.03 magnitude band (greedy, anchor=largest member, deterministic), `synthCitywide` folds any ≥3 cluster into one `Citywide` seed (capped 6-POPID resident union, single COMMUNITY byline, no PacketRef); outliers pass through keeping their packet. C97: 13→5 seeds, COMMUNITY 10→2, initiatives + excluded untouched, byline cadence 7/3→1-each, deterministic across runs. Measure-twice: grouping by metric field (not `type:improvement`) empirically proven to isolate exactly the 10 sentiment patterns. Advisor-reviewed pre-build. Pattern: feedback_measure-twice-cascading-effects.

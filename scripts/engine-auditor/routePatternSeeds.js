@@ -191,7 +191,7 @@ function improvementMetric(pattern) {
 const fmtDelta = (x) => '+' + Number(x).toFixed(2);
 
 // build a single citywide synthesis intent from a cluster of per-hood improvement intents
-function synthCitywide(members, metric, cycle) {
+function synthCitywide(members, metric, cycle, cycleCtx) {
   // deterministic: delta desc, then neighborhood name
   const sorted = members.slice().sort((a, b) => (b.delta - a.delta) || a.neighborhood.localeCompare(b.neighborhood));
   const hoods = sorted.map((m) => m.neighborhood);
@@ -208,19 +208,25 @@ function synthCitywide(members, metric, cycle) {
   }));
   const text = 'Citywide ' + metricLabel + ' rose across ' + hoods.length +
     ' neighborhoods (avg ' + fmtDelta(avg) + ', range ' + range + '): ' + hoods.join(', ');
+  // WHY: the uniform cross-hood lift is a global additive signal (sports + calendar)
+  const driver = citywideDriver(cycleCtx);
+  const causalAnchor = driver
+    ? { kind: 'global', driver, confidence: 'med' }
+    : { kind: 'global', driver: 'broad civic activity this cycle', confidence: 'low' };
   return {
     seedId: 'pat-c' + cycle + '-' + metric + '-citywide',
     idx: -1, patternType: 'improvement-citywide', severity: 'low',
     domain: sorted[0].domain, neighborhood: 'Citywide', priority: severityToPriority('low'),
     text,
-    angle: 'broad civic-mood lift across the city — the shared driver behind the simultaneous rise',
-    coveringCitizens: who, packet: null, metric, delta: avg, collapsedCount: hoods.length
+    angle: 'broad civic-mood lift across the city',
+    coveringCitizens: who, packet: null, metric, delta: avg, collapsedCount: hoods.length,
+    causalAnchor
   };
 }
 
 // partition intents: collapsible metric-improvements cluster into citywide synths;
 // everything else (initiatives, sub-threshold clusters) passes through unchanged.
-function collapseImprovements(intents, cycle) {
+function collapseImprovements(intents, cycle, cycleCtx) {
   const collapseLog = [];
   const passthrough = intents.filter((it) => it.metric == null);
   const movers = intents.filter((it) => it.metric != null);
@@ -238,7 +244,7 @@ function collapseImprovements(intents, cycle) {
     });
     clusters.forEach((cl) => {
       if (cl.members.length >= MIN_CLUSTER) {
-        out.push(synthCitywide(cl.members, metric, cycle));
+        out.push(synthCitywide(cl.members, metric, cycle, cycleCtx));
         collapseLog.push({ metric, anchor: cl.anchor, collapsed: cl.members.length,
           neighborhoods: cl.members.map((m) => m.neighborhood).sort() });
       } else {
@@ -272,10 +278,13 @@ function finalizeSeed(it, bylineState, roster) {
   if (picked && ranked) ranked = [picked].concat(ranked.filter((r) => r.name !== picked.name));
   const byName = (ranked && ranked.length) ? ranked[0].name : '';
   const byPopid = (byName && roster[byName]) ? roster[byName].popid : '';
+  // WHY (Phase 3): fold the faithful causal driver into the desk-facing angle
+  const ca = it.causalAnchor;
+  const angle = (ca && ca.driver) ? ((it.angle ? it.angle + ' — ' : '') + 'driver: ' + ca.driver) : it.angle;
   return {
     seedId: it.seedId, patternType: it.patternType, severity: it.severity,
     domain: it.domain, neighborhood: it.neighborhood, priority: it.priority,
-    text: it.text, angle: it.angle, coveringCitizens: it.coveringCitizens,
+    text: it.text, angle, causalAnchor: ca || null, coveringCitizens: it.coveringCitizens,
     priorityScore: pr ? Math.round(pr.priorityScore * 100) / 100 : '',
     consequenceFloor: floor === true,
     priorityComponents: pr ? pr.components : null,
@@ -296,6 +305,76 @@ function loadJson(file) {
   return JSON.parse(fs.readFileSync(p, 'utf8'));
 }
 
+// ── WHY layer (engine.35 Phase 3, S260): a FAITHFUL causal anchor per seed ────
+// The driver is real engine mechanics, not fabrication:
+//   - citywide sentiment lift → global additive signals: applySportsSeason does
+//     `S.sentiment += totalSentiment` (a winning A's stretch nudges the whole city),
+//     plus citywide calendar (First Friday / holiday). This is the uniform cross-hood
+//     +0.11 — a global driver; per-hood citizen pulse only explains the deviations.
+//   - per-hood outlier / event seed → the co-located cycle event in that hood (the
+//     baseline_brief world-event), e.g. Fruitvale +0.25 ← its Transit-Hub milestone.
+//   - initiative seed → the phase transition (fromPhase→toPhase) or the stuck blocker.
+// Cycle-pinned: reads world_summary_c{N}.md (the cycle's global snapshot built from
+// Riley_Digest + Oakland_Sports_Feed + Simulation_Calendar) so the WHY does not drift
+// with live sheets. SOFT — if the summary is absent the anchor degrades, never throws.
+
+function loadCycleContext(cycle) {
+  const p = path.join(OUTPUT_DIR, 'world_summary_c' + cycle + '.md');
+  if (!fs.existsSync(p)) return null;
+  const t = fs.readFileSync(p, 'utf8');
+  const m = (re) => { const x = t.match(re); return x ? x[1].trim() : null; };
+  // A's streak: the modal value across sports rows. The summary lists current + 2 prior
+  // cycles per player, so the W-L *record* can't be pulled robustly from markdown (a prior
+  // row's record repeats and out-votes the current) — the streak is the reliable, faithful
+  // "are they winning" signal, so we use the streak qualifier and skip the exact record.
+  const streaks = (t.match(/Streak (W\d+|L\d+)/g) || []).map((s) => s.replace('Streak ', ''));
+  const sfreq = {}; streaks.forEach((s) => { sfreq[s] = (sfreq[s] || 0) + 1; });
+  const asStreak = streaks.length ? Object.keys(sfreq).sort((a, b) => (sfreq[b] - sfreq[a]) || a.localeCompare(b))[0] : null;
+  return {
+    holiday: m(/holiday=([^\s|]+)/),
+    firstFriday: /First Friday:\s*true/i.test(t),
+    season: m(/\*\*Season:\*\*\s*([A-Za-z]+)/),
+    citySentiment: m(/CitySentiment\)?:\*\*\s*([+\-0-9.]+)/),
+    eventCounts: m(/Domain event counts \(([^)]+)\)/),
+    asStreak
+  };
+}
+
+// the global, citywide mood driver (sports performance + citywide calendar)
+function citywideDriver(cycleCtx) {
+  if (!cycleCtx) return null;
+  const bits = [];
+  if (cycleCtx.asStreak) {
+    const winning = /^W/.test(cycleCtx.asStreak);
+    bits.push("the A's " + (winning ? 'winning stretch' : 'skid') + ' (' + cycleCtx.asStreak + ')');
+  }
+  if (cycleCtx.firstFriday) bits.push('First Friday');
+  if (cycleCtx.holiday && cycleCtx.holiday.toLowerCase() !== 'none') bits.push(cycleCtx.holiday);
+  return bits.length ? bits.join(' + ') : null;
+}
+
+// causal anchor for an individual pattern seed: initiative phase-change, else the
+// co-located hood event, else the global signal as a weak fallback.
+function patternDriver(p, neighborhood, briefs, cycleCtx) {
+  const f = ((p.evidence || {}).fields) || {};
+  if (f.fromPhase && f.toPhase) {
+    return { kind: 'initiative', driver: 'advanced from "' + f.fromPhase + '" to "' + f.toPhase + '"', confidence: 'high' };
+  }
+  if (p.type === 'stuck-initiative') {
+    return { kind: 'initiative', driver: 'stalled ' + (p.cyclesInState || 0) + ' cycle(s) in "' +
+      (f.toPhase || f.ImplementationPhase || f.Phase || 'current phase') + '"', confidence: 'high' };
+  }
+  if (neighborhood) {
+    const ev = briefs.find((b) => /^event-/.test(b.id || '') && b.neighborhood === neighborhood);
+    if (ev) {
+      const et = ((ev.facts || {}).eventType || 'local event').replace(/-/g, ' ');
+      return { kind: 'event', driver: et + ' in ' + neighborhood + ' (' + ev.id + ')', confidence: 'med' };
+    }
+  }
+  const g = citywideDriver(cycleCtx);
+  return g ? { kind: 'global', driver: g, confidence: 'low' } : null;
+}
+
 // ── core ─────────────────────────────────────────────────────────────────────
 
 async function routePatternSeeds(cycle, opts) {
@@ -304,6 +383,8 @@ async function routePatternSeeds(cycle, opts) {
   const briefsDoc = loadJson('baseline_briefs_c' + cycle + '.json');
   const briefs = Array.isArray(briefsDoc) ? briefsDoc : (briefsDoc.briefs || []);
   const patterns = audit.patterns || [];
+
+  const cycleCtx = loadCycleContext(cycle); // global WHY signals (soft; null if absent)
 
   const { roster } = await buildBylineRoster();
   if (!roster || Object.keys(roster).length === 0) throw new Error('empty byline roster from Bay_Tribune_Oakland');
@@ -336,12 +417,13 @@ async function routePatternSeeds(cycle, opts) {
       domain, neighborhood, priority: severityToPriority(p.severity), text, angle,
       coveringCitizens: parsePopids((p.affectedEntities || {}).citizens),
       packet: joinPacket(p, briefs),
-      metric: m ? m.metric : null, delta: m ? m.delta : null
+      metric: m ? m.metric : null, delta: m ? m.delta : null,
+      causalAnchor: patternDriver(p, neighborhood, briefs, cycleCtx) // WHY (Phase 3)
     };
   });
 
   // ── Phase B: collapse same-metric / same-magnitude improvements into citywide synths ──
-  const { collapsed, collapseLog } = collapseImprovements(intents, cycle);
+  const { collapsed, collapseLog } = collapseImprovements(intents, cycle, cycleCtx);
 
   // ── Phase C: byline + priority over the collapsed set (highest-severity picks first) ──
   const sevRank = { HIGH: 3, MED: 2, LOW: 1 };
@@ -454,6 +536,12 @@ function printDryRun(result) {
     dom[s.domain] = (dom[s.domain] || 0) + 1;
     if (s.bylineCandidate) byl[s.bylineCandidate] = (byl[s.bylineCandidate] || 0) + 1;
     if (s.packetRef) withPacket++;
+  });
+  console.log('\nWHY (causal anchor per seed):');
+  seeds.forEach((s) => {
+    const ca = s.causalAnchor;
+    console.log('  ' + (s.neighborhood || '-').padEnd(15) + ' ' +
+      (ca ? ('[' + ca.kind + '/' + ca.confidence + '] ' + ca.driver) : '(no driver)'));
   });
   console.log('\nDOMAIN dist:', JSON.stringify(dom));
   console.log('BYLINE dist (cadence spread):', JSON.stringify(byl));

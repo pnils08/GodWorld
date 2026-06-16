@@ -19,6 +19,7 @@
 //   node scripts/docLoopStatus.js --next     # ready-by-terminal only
 //   node scripts/docLoopStatus.js --watch    # watch-verdict research only
 //   node scripts/docLoopStatus.js --json     # machine-readable, all three
+//   node scripts/docLoopStatus.js --lint     # flag rows that break the archive sweep
 //
 // Always exits 0 — it's a surfacing report, not a gate.
 
@@ -66,6 +67,41 @@ function parseRollout() {
     rows.push({ id, state, terminal, pointer });
   }
   return rows;
+}
+
+// --- lint: rows that won't survive the archive-sweep contract -----------
+// A work row (leads with `group.N` id) sweeps cleanly only when EXACTLY ONE
+// cell equals a state token. Zero → the sweep + this detector silently SKIP it
+// (it never archives → piles up → reconciliation token-burn). Two+ → a stray `|`
+// or a state-word (e.g. "ready") sitting in the prose creates a phantom state
+// cell, and the sweep may split on the wrong one. Both are the real failure
+// mode behind "the cleanup script won't work with too much prose."
+// Zero false-positives on legacy verbose rows — they're well-formed (one state).
+function lintRollout() {
+  const problems = [];
+  const lines = fs.readFileSync(ROLLOUT, 'utf8').split('\n');
+  lines.forEach((line, i) => {
+    const idMatch = line.match(ROW_ID);
+    if (!idMatch) return;
+    const id = idMatch[1];
+    const stateCells = line.split('|').map(c => c.trim()).filter(c => STATES.has(c));
+    if (stateCells.length === 0) {
+      problems.push(`  L${i + 1} ${id}: NO clean state-token cell → the sweep SILENTLY SKIPS this row (never archives). Fix: a bare \`| <state> |\` cell, no prose/pipes mangling it.`);
+    } else if (stateCells.length > 1) {
+      problems.push(`  L${i + 1} ${id}: ${stateCells.length} cells match a state token (${stateCells.join(', ')}) → a stray \`|\` or a state-word in the description is faking a state cell; the sweep may grab the wrong one. Fix: remove the literal \`|\` / state-word from the description.`);
+    }
+  });
+  return problems;
+}
+
+function runLint() {
+  const problems = lintRollout();
+  if (problems.length) {
+    console.log(`ROLLOUT LINT: ${problems.length} non-conforming row(s) — these break the archive sweep:`);
+    problems.forEach(p => console.log(p));
+  } else {
+    console.log('ROLLOUT LINT: clean — all work rows parse under the sweep contract.');
+  }
 }
 
 // --- research verdict parse ---------------------------------------------
@@ -122,6 +158,7 @@ function printSection(report, which) {
 
 function main() {
   const args = process.argv.slice(2);
+  if (args.includes('--lint')) { runLint(); return; }
   const report = buildReport();
   if (args.includes('--json')) {
     console.log(JSON.stringify(report, null, 2));

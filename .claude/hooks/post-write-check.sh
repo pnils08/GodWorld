@@ -88,6 +88,29 @@ if echo "$FILE_PATH" | grep -qE '(phase[0-9]|utilities/).*\.js$' 2>/dev/null; th
   fi
 fi
 
+# =====================================================
+# ROLLOUT SWEEP-CONTRACT LINT — rows must parse for the archive sweep
+# (reuses docLoopStatus.js so the hook check ≡ the sweep contract; no drift.
+#  deterministic script = zero model tokens, per governance.38)
+# =====================================================
+case "$FILE_PATH" in
+  */docs/engine/ROLLOUT_PLAN.md)
+    PROOT="${CLAUDE_PROJECT_ROOT:-/root/GodWorld}"
+    LINT=$(node "$PROOT/scripts/docLoopStatus.js" --lint 2>/dev/null)
+    if echo "$LINT" | grep -q 'non-conforming'; then
+      WARNINGS+="- ROLLOUT rows break the archive sweep (fix so cleanup stays hands-off):\n${LINT}\n"
+    fi
+    # soft nudge: did THIS edit add a long work-row with no [[pointer]]?
+    ADDED=$(echo "$INPUT" | jq -r '.tool_input.new_string // .tool_input.content // empty' 2>/dev/null)
+    FAT=$(printf '%s\n' "$ADDED" | grep -E '^\| *[a-z][a-z-]*\.[0-9]' | while IFS= read -r l; do
+      if [ ${#l} -gt 700 ] && ! printf '%s' "$l" | grep -q '\[\['; then echo "    ${l:0:64}…"; fi
+    done)
+    if [ -n "$FAT" ]; then
+      WARNINGS+="- Rollout row(s) long with no [[pointer]] — rows are pointers; push detail to a plan:\n${FAT}\n"
+    fi
+    ;;
+esac
+
 # Output warnings if any
 if [ -n "$WARNINGS" ]; then
   cat << EOF

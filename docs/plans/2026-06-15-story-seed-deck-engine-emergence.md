@@ -167,7 +167,7 @@ inline mini-packet instead of a `PacketRef`.
 - **Phase 0 — investigate + decide convergence. ✅ DONE S259** (see §Phase 0 above). Decision: CONSUME
   (layered pipeline `engine_audit → baseline_briefs → deck → sift`), not merge. Packet already largely
   exists in `baseline_briefs`. Seed-packet schema defined.
-- **Phase 1 — gate the noise. ✅ BUILT S259 (local; deploy post-C98).** `applyStorySeeds.js`
+- **Phase 1 — gate the noise. ✅ BUILT S259 (local; deploy rides the C98 pre-cycle clasp push — SAME push as `saveV3Seeds.js`, so the gate is LIVE for the C98 run; the "deploy post-C98" wording corrected S261).** `applyStorySeeds.js`
   `generateStorylineSeeds_` — followup fires only if NOT a non-Oakland-locale (dormant-subject) thread
   AND `cyclesSinceAdded <= FOLLOWUP_AGE_CAP` (12). Simulated against the live 97 dormant storylines:
   **97 → 43 followups (56% cut)** — 6 dropped non-Oakland (Chicago), 48 aged out, 43 live-Oakland kept.
@@ -197,8 +197,9 @@ inline mini-packet instead of a `PacketRef`.
   packet. C97 dry-run: 13→**5 seeds** (COMMUNITY 10→2 = citywide-of-9 + Fruitvale +0.25 outlier); initiatives
   untouched; byline cadence 7/3→1-each; deterministic across runs. Grouping by metric field (not `type`) proven
   to leave the 2 initiative improvements + stuck-initiative untouched.
-  **C98 rollout:** service-account widen deck S→T → clasp push saveV3Seeds → cycle runs → /engine-review →
-  `routePatternSeeds.js --apply --cycle 98`. **Demote `storyline-followup`** already done (Phase 1 gate).
+  **C98 rollout:** service-account widen deck S→T → clasp push **`saveV3Seeds.js` + `applyStorySeeds.js`** (both
+  Apps Script; the Phase 1 gate MUST be live pre-cycle for its followup-count smoke to be observable at C98 —
+  S261 correction) → cycle runs → /engine-review → `routePatternSeeds.js --apply --cycle 98`.
 - **Phase 3 — WHY layer. ✅ BUILT S260 (local; rides C98).** A FAITHFUL causal anchor per seed (`routePatternSeeds.js`),
   driver-grain matched to seed kind — **not** fabricated, each is real engine mechanics:
   - **citywide synthesis seed → global additive driver.** The uniform cross-hood +0.11 is a global signal, not
@@ -220,8 +221,36 @@ inline mini-packet instead of a `PacketRef`.
 - **Phase 4 — desk-ready packet (SHRUNK — packet mostly exists).** The `baseline_brief` already carries
   `neighborhoodState` + `neighborhoodResidents` + `threeLayerHandle`. Work = wire the `PacketRef` join +
   ensure completeness, not build the packet from scratch.
-- **Phase 5 — rewire consumption.** Point sift / `buildDeskPackets` (and desk RULES) at the deck→packet
-  surface instead of re-querying; retire the redundant triple-read. Measure the per-edition token delta.
+- **Phase 5 — rewire consumption. ◻ SPEC DONE S261 (research-build); BUILD GATED ON C98 SMOKE.** Convergence
+  target: sift reads ONE ranked surface — iterate `Story_Seed_Deck` rows (priority-ordered) → resolve
+  `PacketRef` → the baseline_brief packet (numbers + residents + WHY) — instead of independently reading all
+  three surfaces in parallel and matching the deck to proposals by `sourceSignal` text. This **inverts** sift's
+  flow (deck-row-first, not derive-then-overlay) and is **high-blast-radius**, so it stages:
+
+  - **The exact triple-read in sift today** (`.claude/skills/sift/SKILL.md`): (i) inputs 5–6 + WORLD /
+    CIVIC-WITH-WEIGHT lanes (Step 2, SKILL lines 62–63 / 195 / 198) read `engine_audit_c<N>.json` `patterns[]`
+    directly for emergence + gating; (ii) Step 5 (lines 261, 352) triages `baseline_briefs_c<N>.json` and pulls
+    `neighborhoodState` + `neighborhoodResidents` for packet enrichment; (iii) Step 6 / T4.1 (line 372) reads
+    `Story_Seed_Deck` cols M–R and matches seeds to proposals by `sourceSignal` text.
+
+  - **Phase 5a — additive, parallel cross-check (first cycle after C98 smokes the producer).** sift adds the
+    deck→`PacketRef`→brief path as the PRIMARY ranked entry, but KEEPS the existing direct `engine_audit` +
+    `baseline_briefs` reads as a fallback/cross-check for one cycle. **Measure coverage parity:** does every
+    pattern/brief the triple-read surfaced appear as (or behind) a deck row? Completeness is unproven today —
+    the plan's own Phase 4 note flags "not all patterns → briefs." Parity check is the gate to 5b. No reads
+    retired yet; the high-blast step does not fire.
+  - **Phase 5b — retire the redundant reads (only after 5a proves parity).** Collapse sift to the single
+    deck-row-first surface: Step 6/T4.1 match inverts into the Step 2 entry (iterate deck rows), Step 5 brief
+    triage becomes `PacketRef` resolution, the direct `engine_audit` WORLD-lane re-derivation drops. **This is
+    the irreversible-feeling edit — do NOT ship it until 5a parity is green.** Revert = restore the three reads
+    (git revert the 5b commit).
+  - **Ownership (spans 3 terminals — Phase 5 is not solo-buildable here):** research-build = this spec +
+    coordinate; **media** = the `sift` SKILL edits + any desk RULES that independently re-query surfaces
+    (`.claude/agents/*-desk/*` — point them at the packet, don't let them re-derive); **engine-sheet** = the
+    deck producer + C98 deploy + the `PacketRef`↔`briefId` join completeness (Phase 4 (b)).
+  - **Measure the per-edition token delta** (the whole point — collapse per-desk re-query) at 5a and 5b; record
+    in the plan changelog. **Hard dependency:** Phase 4 `PacketRef` join must be complete-enough that every
+    ranked deck row resolves to a packet before 5b, else retiring the brief read loses the numbers.
 
 ## Token-burn rationale (why C is the point, not a nicety)
 
@@ -254,4 +283,5 @@ the engine says "here are the real stories this cycle, with everything a desk ne
   folded forward — subject-overlap join already emits packets where briefs exist.
 - 2026-06-15 — **Phase 1 built (S259, local; deploy post-C98).** `applyStorySeeds.js` followup gate (non-Oakland-locale + age cap 12). Live-data findings: all 97 live storylines `dormant`, `lastCoverageCycle` dead, `canonNeighborhoods` inert in Apps Script → inline gate on `sl.*`. Simulated 97→43 followups (56% cut; 6 Chicago, 48 aged out). Deploy held for the C98 clasp window (rides post-engine.33-smoke); smoke = followup count halves + zero Chicago next cycle.
 - 2026-06-16 — **Phase 3 WHY layer built (S260, local; rides C98).** Faithful causal anchor per seed in `routePatternSeeds.js`, driver-grain by seed kind: citywide synthesis → global additive (sports streak + First Friday + holiday, the uniform cross-hood signal); per-hood outlier → co-located baseline_brief event (Fruitvale +0.25 ← Transit milestone); initiative → phase transition / stuck blocker. Cycle-pinned to `world_summary_c{N}.md` (soft, never throws), folds into `SuggestedAngle` (no schema change, no clasp). Advisor caught a global-vs-citizen-pulse mis-trace pre-build — the real driver of the uniform +0.11 is the global sports/calendar add, not per-hood pulse (which is unpersisted and only explains deviations → optional Phase 3b). Streak qualifier used over the W-L record (markdown lists current+2-prior, record unparseable robustly). Deterministic; structured `causalAnchor{kind,driver,confidence}` per seed. Pattern: feedback_measure-twice-cascading-effects.
+- 2026-06-15 — **Phase 5 consumption-rewire SPEC done (S261, research-build); BUILD gated on C98 smoke.** Located the exact triple-read in `sift/SKILL.md` (inputs 5–6 + WORLD/CIVIC lanes read `engine_audit` patterns; Step 5 triages `baseline_briefs` + pulls neighborhoodState/residents; Step 6/T4.1 reads deck cols M–R matched by `sourceSignal`). Convergence inverts the flow to deck-row-first → `PacketRef` → brief packet = high-blast-radius, so staged **5a** (additive parallel cross-check, measure coverage parity — completeness unproven, "not all patterns → briefs") → **5b** (retire redundant reads, only after 5a parity green; the irreversible-feeling edit). Ownership spans 3 terminals: research-build specs+coordinates, **media** edits the sift SKILL + desk RULES, **engine-sheet** owns the deck producer + C98 deploy + Phase 4 `PacketRef` join completeness. Hard dep: Phase 4 join complete-enough that every ranked row resolves a packet before 5b. Token-delta measured at 5a + 5b. Advisor-flagged: do NOT retire the live triple-read until C98 smokes the producer. Not solo-buildable here.
 - 2026-06-16 — **Citywide-sentiment-seed collapse built (S260, local; rides C98 with the Phase 2 routePatternSeeds live run).** The Phase 2 open refinement. `routePatternSeeds.js` restructured intents→collapse→byline so collapse runs before byline assignment (cadence no longer polluted by per-hood fragments): `collapseImprovements` clusters `improvement` intents by `*Delta` metric field + ±0.03 magnitude band (greedy, anchor=largest member, deterministic), `synthCitywide` folds any ≥3 cluster into one `Citywide` seed (capped 6-POPID resident union, single COMMUNITY byline, no PacketRef); outliers pass through keeping their packet. C97: 13→5 seeds, COMMUNITY 10→2, initiatives + excluded untouched, byline cadence 7/3→1-each, deterministic across runs. Measure-twice: grouping by metric field (not `type:improvement`) empirically proven to isolate exactly the 10 sentiment patterns. Advisor-reviewed pre-build. Pattern: feedback_measure-twice-cascading-effects.

@@ -4,12 +4,12 @@
 
 ---
 
-**PIN:** Session: 261 | Day: 161 | Cycle: 97 | Edition: C97 published (E97, Arbiter A/0.856) — pending /post-publish + /edition-print
+**PIN:** Session: 262 | Day: 161 | Cycle: 97 | Edition: C97 published (E97, Arbiter A/0.856) — pending /post-publish + /edition-print
 
 **NEXT[media]:** /post-publish c97 FIRST (canon ingest — do NOT defer per terminal rule), then /edition-print c97. Edition `editions/cycle_pulse_edition_97.txt`; Drive folder `1p0FHmofwhZl7ItWpvfa6xrOP5ibskMxC`.
 **NEXT[civic]:** run `node scripts/buildInitiativePackets.js` each cycle so the tracker JSON doesn't re-stale (last auto-refresh ~C89, civic.14).
 **NEXT[engine-sheet]:** C98 pre-cycle steps DONE S261 — deck widened S→T live (grid 18→20, verified) + clasp push LIVE (`saveV3Seeds.js` S/T schema + `applyStorySeeds.js` Phase-1 followup gate). **Awaiting Mike to run C98.** After it runs: `/engine-review` → `routePatternSeeds.js --apply --cycle 98` (Node) → smoke the full stacked deploy (Phase-1 followup gate halves + zero Chicago; engine.33 pulse-fold/microclimate + Neighborhood_Map 17→21; engine.31/.32 dial folds + T8 round-trip; generationalEventsEngine no CIV retirement) → ES-1 col-O cycle stamp. Sequence in ROLLOUT engine.35. **NEW: engine.36 filed** (isolated staging environment — run cycles on a sheet copy; post-C98 build, finish ctx.ss migration + fail-loud SIM_SSID default).
-**NEXT[research-build]:** loop-tightening VALIDATED 5/5 read-side (S261) — gov.37 build still gated on ≥2-3 clean CLOSES (0/3; this close = #1). Citizen-loop Phase 2 (research.14) DESIGN DONE + voice VALIDATED (Gemini + DeepSeek, N=4) → build handed to engine-sheet+bot, **start with the classifier**. Also filed: gov.38 (helper-offload principle), gov.35-remnant design done (engine-sheet wires 3 PIN fields), engine.35 Phase 5 spec (build gated on C98 smoke). OpenRouter key refreshed (~$10). Detail → ROLLOUT rows + plans; voice probes `scripts/_probe_voice_{grounded,openrouter}.js`.
+**NEXT[research-build]:** **Citizen-loop build is the live thread (research.14) — bot credits ADDED S261, fully unblocked.** Phase 2 design DONE + voice VALIDATED (Gemini + DeepSeek, N=4); build handed to engine-sheet+bot, **start with the reflection→tag classifier**; Mags stays the fixed anchor (research-build coordinates). Also ready (research-build): gov.38 (helper-offload — inventory + wire). Shipped S261: gov.39 rollout-lint (rows now WARN-guarded at write-time; states must be bare canonical tokens) — 5 engine.* rows pending engine-sheet tighten. Still gated: gov.37 cheap-closer (≥2-3 clean CLOSES; this close = #1 of 3); engine.35 Phase 5 (C98 smoke); gov.35-remnant (engine-sheet wires 3 PIN fields). OpenRouter live (~$10). Detail → ROLLOUT + plans; voice harness `scripts/_probe_voice_{grounded,openrouter}.js`.
 
 ---
 

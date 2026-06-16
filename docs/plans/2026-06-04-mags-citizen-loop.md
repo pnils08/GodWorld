@@ -140,6 +140,13 @@ The parallel narrative store is concretely a **per-citizen Supermemory "page"** 
 
 Voice differentiation = **dials (who) × wake-prompt (what they're doing tonight) × neighborhood slice (what they see)** — three axes, not dials alone (which may cluster by neighborhood). Wakes are *prompted scenarios* ("meet 5 citizens," "follow up on your rent notice"), numbered/sequenced (wake-2, wake-3 …), reusing whatever voice method Mags lands on. The prompt variety carries differentiation the dials can't, and makes the validation prototype more likely to pass.
 
+**Daypart scaffold (Mike, S262) — give them something to do, then let them say whatever.** The three daily wakes carry a light activity prompt, not a script:
+- **morning** → go meet people (e.g. "meet 5 citizens")
+- **midday** → walk the neighborhood / visit a business
+- **night** → dinner, wind down, reflect
+
+Illustrative, not literal — the point is a *seed action* per daypart so variety isn't carried by dials alone. The citizen then says whatever they say; the **reaction is the tag** (frustrated → a tag, excited → a tag). Over repeated days this is what produced the *mood differences* observed in Mags' continuous run — and as dials tune via the mood layer, citizens settle into stable temperaments (a "cranky node," an "excited node"). The damping model is what turns a repeated daily mood into a permanent disposition.
+
 ### Phase 2 floor-test result — local qwen2.5:3b (S261, DON'T re-run the 3B)
 
 Ran the voice prototype on the free local model (`qwen2.5:3b`, CPU) — 3 most-dial-divergent citizens (Amy Cook d95/s80/f87, Tiu Xiong s93/f80/outabout, + a neutral), SAME evening-reflection scenario so dials are the only variable. Throwaway probe: `scripts/_probe_citizen_voice.js` (uncommitted; swap the model const for the credit re-run).
@@ -203,6 +210,21 @@ Reference implementation: `scripts/_probe_classifier.js` — the prompt, vocab p
 - **Closed-loop stability:** this is a closed loop (engine state → perception → reflection → tag → engine state). The ONLY thing preventing runaway self-reinforcement is the **base/mood/streak damping + the lighter reflection severityMult** — a one-off reflection nudges mood and fades; only a sustained pattern shifts base. Keep both; they are the stability safeguard, not tuning niceties.
 - **GATE still holds: no write-back wired until the Phase-1 daily audit signs off.**
 
+### Phase 2 affect-tag gap — vocab is event-typed, mood doesn't register (S262, Mike + tested)
+
+Mike's requirement: "let them say whatever — if frustrated, that's a tag; if excited, a tag." **The current closed vocab can't do this** — it's event-typed (Career/Divorce/Faith…), with no affect dimension. Tested on DeepSeek (the validated classifier), bare-mood reflections collapse and often push the *wrong* dial:
+
+| reflection (no event, pure mood) | tag picked | dial effect | should be |
+|---|---|---|---|
+| frustrated / irritable | Personal | openness **+2** | composure − |
+| excited / buzzing | Personal | openness **+2** | composure + (drive +) |
+| anxious / on edge | Health | composure −2 | right sign, wrong domain (physical-health tag for a mental state) |
+| content / calm | Personal | openness **+2** | composure + |
+
+The base/mood/streak machinery is **ready** — `mood` is exactly the swing layer that yields a "cranky node" vs an "excited node," and damping converts a repeated daily mood into a permanent disposition. The missing piece is **vocab**: nothing routes affect into it.
+
+**Resolution direction (Mike-endorsed):** add a small **affect tag set** to `DIAL_MAP` and include it in the classifier's presented vocab — e.g. `Frustrated`/`Irritable` (composure −), `Excited`/`Energized` (composure +, drive +), `Anxious` (composure −), `Content`/`Calm` (composure +). Lightest possible fix: new map entries flowing through the same `applyTaggedEvent_` door — no new machinery. **Owner: engine-sheet** (DIAL_MAP is substrate). Severity stays the lighter reflection discount so a one-off mood fades and only a sustained pattern shifts the base — i.e. mood becomes temperament only through repetition, which is the intended behavior. Re-run `_probe_classifier.js` with the affect tags added to confirm the four cases above land correctly before wiring.
+
 ### Phase 2+ forward thread — citizen-agents feed the editions (Mike, S262)
 
 **The same engine→reactive-life path generalizes to media intake — and that's the payoff.** The architecture is *engine deterministic, life reactive to engine output* (Mike's S262 framing correction: the loop-back tag is the citizen's **damped reaction** to real engine events, never narrative authoring reality — the arrow "engine emerges → life captures" holds, with an agentic layer on top). Once a citizen is a model-citizen (dials + LifeHistory + Supermemory page), the newsroom stops using their **likeness** as set-dressing and can **actually interview them**:
@@ -226,7 +248,7 @@ The load-bearing bet is **"different dials → different voice."** Untested, and
 - [x] Citizen-selection policy (Phase 2 decision 2): **RESOLVED S261 (Mike) — event-magnitude-weighted** (wake whoever's living the biggest delta).
 - [x] Rotation vs. Mags-continuity (Phase 2): **RESOLVED S261 (Mike) — yes.** Mags stays the fixed nightly anchor (journals → media Mags → bot); other citizens rotate around her as the variety.
 - [x] **DOCTRINE FORK — RESOLVED S261 (Mike + code-confirmed):** citizen reflections DO feed the engine, via the closed-vocab tag bridge (`applyTaggedEvent_`), determinism intact (classification is input-side; tag→delta is pure). Prose stays in the Supermemory page; only the categorical tag touches dials. Damping already built (base/mood/streak). See §"the categorical bridge."
-- [ ] Classifier design (Phase 2, the one new component): reflection → {tag(s), severity} constrained to the 58-tag vocab. How is label consistency validated? Reflection-event severityMult calibration (lighter than real life-events). Resolve at build.
+- [~] Classifier design (Phase 2, the one new component): reflection → {tag(s), severity} constrained to the closed vocab. **Model + metric RESOLVED S262** (DeepSeek V3; dial-delta validation; gate GREEN — see §classifier gate + §classifier contract). **Still open:** (a) the **affect-tag gap** — vocab is event-typed, mood doesn't register; resolution direction filed (add affect tags to DIAL_MAP, engine-sheet owns) — see §affect-tag gap; (b) reflection-event severityMult calibration (the lighter discount constant); (c) single- vs multi-tag on long multi-theme reflections (single for the gate). Resolve (a)/(b) at build.
 - [x] Prototype precondition — **CONFIRMED MET S261.** Per-citizen dial vectors ARE persisted: `Simulation_Ledger` **col AV `DialState`** (engine.31 8-dial JSON, seeded for all 904 citizens S256 via `backdateCitizenDials.js`), **col R `TraitProfile`** = derived human-readable face, **col O `LifeHistory`** = per-cycle event journal (overflow → `LifeHistory_Archive`, engine.32 compressor). `getCitizenDialBands_(ctx, popId, row[iDialState])` is the read path. The 2–3-citizen voice prototype has everything it needs on the ledger today — **only remaining gate is API credits.**
 
 ---

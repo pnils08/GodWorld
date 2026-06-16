@@ -40,10 +40,13 @@ pointers:
 - **GPT Image content moderation.** Stricter policy may refuse crime/OPD/disaster news scenes — a real photojournalism hazard for a city paper; test on a Darrin-Davis-class safety spec before trusting it.
 - **Leaderboard ≠ our gauntlet.** Elo arenas score generic aesthetics, not named-canon-subject fidelity. The verdict here is landscape-level; only an in-fixture bake-off on our own specs is decisive.
 
-**Verdict:** `watch`. The apparatus mitigations (DJ canon front-loading S258, djDirect composition rule S197, editorialFlag + 3-strike gate) already make the ceiling a *managed cost*, so nothing is on fire. But the schnell confound means there is real, cheap headroom unexploited.
-- **Adopt-trigger (when image-fidelity bandwidth opens):** run a one-cycle bake-off on the standing fixture (mesa / baylight / transit_hub text cases + one named-subject case e.g. Isley Kelley), two axes each: **(a)** FLUX.1 dev/1.1 pro/FLUX.2 variant bump on Together AI (config-only baseline); **(b)** GPT Image 2 + Ideogram 3 on the same fixture. Outcomes route the rollout: variant bump clears it → *take-nothing on the swap*, just change `options.model`; a paid model clears what the bump can't → *adopt* with named cost-per-cycle; nothing clears both axes → FLUX ceiling is the field ceiling, double down on OCR-post-check + prompt-rewrite-on-retry (RESEARCH §S197 paths 1–2).
+**Verdict:** split — **`adopt` the variant bump (ready now), `watch` the outside-vendor swap.**
 
-**Ignited plans:** none yet (watch — graduates to a `ready` row when the bake-off trigger fires).
+The variant bump is NOT a watch item: photos render every cycle, the change is one model-ID in `lib/photoGenerator.js` on the *same provider*, and the cost delta is pennies/cycle (~8 photos × 1.03MP: schnell ~$0.02 → FLUX.1 dev ~$0.21 → FLUX.2 pro ~$0.24). There is nothing to wait for. → **engine.37 (ready, engine-sheet):** swap schnell → **FLUX.2 pro** (per-image billing, no step tuning, newest architecture — cleanest target; FLUX.1 dev also valid but needs `steps` 4→~28 or it underperforms). Verdict falls out of the next edition's photo-QA for free (did Isley render to canon? did in-frame text suppress?). The apparatus mitigations (DJ canon front-loading S258, djDirect composition rule S197, editorialFlag + 3-strike gate) stay on regardless — they're model-independent.
+
+The **outside-vendor swap stays `watch`** (GPT Image 2 / Ideogram 3): genuinely gated on new-API integration + per-image cost + content-moderation risk on crime/OPD/disaster scenes (a real photojournalism hazard). Adopt-trigger: the FLUX.2-pro bump (engine.37) ships and *still* misses one axis on real specs → then a one-cycle two-axis bake-off vs GPT Image 2 + Ideogram 3 on the standing fixture (mesa / baylight / transit_hub text cases + an Isley-class named subject) is worth the integration. If FLUX.2 pro clears both axes → take-nothing on the outside swap.
+
+**Ignited plans:** engine.37 (ready, engine-sheet) — FLUX.2 pro variant bump. Outside-vendor bake-off stays watch (no plan until engine.37 result shows a residual axis-miss).
 
 ---
 

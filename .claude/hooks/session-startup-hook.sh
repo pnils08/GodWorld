@@ -27,7 +27,11 @@ date +%s > "$GODWORLD_ROOT/.claude/state/session-start.txt" 2>/dev/null || true
 # Discord bot (mags-bot) is a standing pm2 service — decoupled from the Claude
 # session lifecycle S252. Was: boot stopped it to free droplet memory + a clean
 # session-end restarted it, so an improper close left it dead (36h outage Jun 2-4).
-# Droplet now runs it always-on; nothing in the session lifecycle touches it.
+# Now (S264, Mike-directed): boot never STOPS it and actively ENSURES it's up — if
+# it's off (crash, stray manual stop), this brings it back. `pm2 start <name>` is
+# idempotent: no-op on an already-online proc (no Discord-connection bounce), start
+# on a stopped one. Best-effort + backgrounded — can never block or break boot.
+(pm2 start mags-bot >/dev/null 2>&1 || true) &
 
 # --- CURRENT CRITICAL STATE ---
 SESSION_NUM=$(grep -oP 'Session: \K[0-9]+' "$GODWORLD_ROOT/SESSION_CONTEXT.md" 2>/dev/null || echo "?")

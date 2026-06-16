@@ -39,8 +39,10 @@ Why: the hook routes the same boot reads (`docs/SCHEMA.md`, `docs/index.md`, `TE
 
 ### 0. Free Memory (if hook didn't)
 ```bash
-pm2 stop godworld-dashboard mags-bot 2>/dev/null
+pm2 stop godworld-dashboard 2>/dev/null          # free memory; session-end restarts it
+pm2 start mags-bot 2>/dev/null || true           # standing service (S252) — never stop; ensure up if off
 ```
+mags-bot is a standing service (S252) — never stop it; ensure it's up if off (S264, Mike-directed).
 
 ### 1. Detect Terminal
 ```bash

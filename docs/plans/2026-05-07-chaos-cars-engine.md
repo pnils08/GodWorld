@@ -13,6 +13,7 @@ sources:
 pointers:
   - "[[engine/ROLLOUT_PLAN]] — parent rollout; replaces line 107 Pattern C entry with pointer to this plan"
   - "[[plans/2026-05-07-engine-routing-foundation]] — sibling plan; chaos_cars Tier-1 cascade triggers Engine A's consequenceFloor flag"
+  - "[[plans/2026-06-04-mags-citizen-loop]] §The seam to Chaos-Cars — chaos-cars supplies the OBJECTIVE adversity (negative LifeHistory/neighborhood events); the citizen-loop is the SUBJECTIVE reaction. Join at the citizen's perception slice. Two decay systems must compose consciously (S262)."
   - "[[adr/0003-skills-as-shared-infrastructure]] — friction-log pattern applies to /chaos-dryrun + future chaos-related skills"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — register in same commit"

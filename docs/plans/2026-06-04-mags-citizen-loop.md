@@ -238,6 +238,18 @@ Measured composure across **904 citizens: 0 volatile, 2 anxious, 777 neutral (86
 
 Axis = **composure** (volatile/anxious ↔ steady/unshakable); no new dial. Warmth adds cold-complainer vs warm-but-low nuance. Safeguard against pole-collapse: lighter reflection severity + **monitor the population composure distribution as the loop runs** (the table above is the baseline to watch against).
 
+#### The seam to Chaos-Cars (engine.11) — objective adversity + subjective reaction (S262, Mike)
+
+The negative pole is a **two-engine composition**, not the citizen-loop alone. [[plans/2026-05-07-chaos-cars-engine]] (engine.11, in-progress) is the **objective adversity injector** — 3–15 stochastic events/cycle writing to `LifeHistory_Log` / `Business_Ledger` / `Neighborhood_Map`, with **asymmetric decay (positive reverts fast, negative lingers 3–5 cycles, compounds toward dysfunction by design)**. That is the engine-side answer to the measured "ordinary days only drift positive" problem: chaos-cars *is* the source of real hardship that ordinary ambient life lacks.
+
+- **Chaos-cars = objective.** A chaos event hits a citizen (LifeHistory) or their block (Neighborhood_Map) → negative-tagged event → composure drops through the **existing** dial path. Engine-owned, deterministic; its asymmetric decay makes the hit linger.
+- **Citizen-loop = subjective.** The citizen *perceives* that event in their slice and reacts — the affect tag layered on the objective hit.
+- **The join (build them to compose):** the chaos event must land in the citizen's **perception slice** (LifeHistory tail + engine.33 neighborhood-slice) or the reaction loop never fires on it. This is the seam between engine.11 and research.14.
+
+**Payoff:** negativity becomes **grounded** — a citizen is cranky *because* a real chaos event hit their street, not from free-floating mood. Also resolves the "frustrated with no event" awkwardness above: with chaos-cars live there is usually a real event to react to; affect tags carry the reaction's valence.
+
+**Calibration flag — two decay systems now interact:** chaos-cars' asymmetric metric decay AND the dial base/mood/streak damping. A lingering negative chaos metric + repeated negative reflections about it *should* compound toward a cranky citizen (intended), but they must compose consciously — not double-count into a runaway past the no-death / no-runaway floor. Owner of the composition check: engine-sheet, when both engines are live.
+
 ### Phase 2+ forward thread — citizen-agents feed the editions (Mike, S262)
 
 **The same engine→reactive-life path generalizes to media intake — and that's the payoff.** The architecture is *engine deterministic, life reactive to engine output* (Mike's S262 framing correction: the loop-back tag is the citizen's **damped reaction** to real engine events, never narrative authoring reality — the arrow "engine emerges → life captures" holds, with an agentic layer on top). Once a citizen is a model-citizen (dials + LifeHistory + Supermemory page), the newsroom stops using their **likeness** as set-dressing and can **actually interview them**:

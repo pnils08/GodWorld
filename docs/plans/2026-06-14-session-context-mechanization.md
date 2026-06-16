@@ -56,14 +56,14 @@ pointers:
 ### Task 1: Session counter state file + reader
 
 - **Files:**
-  - `.claude/state/session-counter.txt` — create (single integer, seed `258`)
-  - `.claude/hooks/session-startup-hook.sh` — modify (read + increment on a genuine new session)
+  - `.claude/state/session-counter.txt` — create (single integer, seed to the current PIN value at implementation time, e.g. `260`)
+  - `.claude/hooks/session-startup-hook.sh` — modify (read + increment per boot)
 - **Steps:**
-  1. Seed `.claude/state/session-counter.txt` with the current session number (`258`).
-  2. Decide the increment trigger: a new session = a `SessionStart` with `source != "clear"`/compaction OR a date-boundary guard, to avoid double-bumping on `/clear` within one work session. Document the chosen rule inline in the hook.
-  3. Boot hook reads this file for `SESSION_NUM` instead of grepping SESSION_CONTEXT line 33.
-- **Verify:** boot twice in one day → counter advances once, not twice; `<godworld-state>` Session matches.
-- **Status:** [ ] not started
+  1. Seed `.claude/state/session-counter.txt` with the current PIN Session number (read it from `SESSION_CONTEXT.md`'s `**PIN:**` line at implementation time — do NOT hardcode 258).
+  2. Increment trigger — **RESOLVED (boot odometer, Mike S260):** bump once per genuine fresh boot, on `SessionStart source=startup`; do NOT bump on `/clear` or compaction. No soft/hard-close gating (that distinction is ritual-depth-only now). Document the rule inline in the hook.
+  3. Boot hook reads+increments this file for `SESSION_NUM` instead of grepping the PIN line. Then write the new value back into the PIN line (so the on-demand file stays true) — this is the "self-derive" half.
+- **Verify:** reboot (real new session) → counter advances by 1, PIN Session matches `<godworld-state>` Session; `/clear` within a context → no advance.
+- **Status:** [ ] not started — boot odometer model locked S260; remaining = wire it (engine-sheet, gov.35 remnant)
 
 ### Task 2: Cycle + edition-status deriver
 
@@ -114,7 +114,7 @@ pointers:
 ## Open questions
 
 - [ ] **Day counter semantics** (blocks Task 1 Day-half + Task 3 DAY_NUM). Day stayed `161` across S256 and S257 on different real-world dates, so it is neither calendar-days-since-epoch nor per-session. Candidates: per-engine-day-advance (the engine's own calendar advanced only on certain cycle runs), per-cycle, or a rarely-hand-bumped project counter. Engine-sheet to confirm the intended semantics + its authoritative source before mechanizing; until resolved, Day stays hand-typed with the hook grepping it as interim fallback.
-- [ ] **Increment-trigger for the session counter** (Task 1) — needs the `SessionStart` `source` values that fire on a real new session vs a `/clear`/compaction within one work session, to avoid double-bumping. Confirm against the hook's available env before wiring.
+- [x] **Increment-trigger for the session counter** (Task 1) — **RESOLVED S260 (Mike-approved, ADR-0009 §loop-tightening refinement 1):** the Session number is a **boot odometer** — bump once per genuine fresh boot, mechanically, zero judgment. Soft vs hard close no longer governs it (that distinction is now ritual-depth-only). Increment on `SessionStart source=startup` (real new boot); **do NOT** bump on `/clear` or compaction within one working context. Confirm the exact `source` enum against the hook env before wiring, but the rule is locked: per-boot odometer, startup-only. Seed `.claude/state/session-counter.txt` to the current PIN value at implementation time (260+), not 258.
 
 ---
 

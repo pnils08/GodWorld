@@ -9,7 +9,7 @@
 **NEXT[media]:** /post-publish c97 FIRST (canon ingest — do NOT defer per terminal rule), then /edition-print c97. Edition `editions/cycle_pulse_edition_97.txt`; Drive folder `1p0FHmofwhZl7ItWpvfa6xrOP5ibskMxC`.
 **NEXT[civic]:** run `node scripts/buildInitiativePackets.js` each cycle so the tracker JSON doesn't re-stale (last auto-refresh ~C89, civic.14).
 **NEXT[engine-sheet]:** C98 deploy window — service-account widen `Story_Seed_Deck` cols S→T, clasp push `saveV3Seeds.js`, then post-cycle `routePatternSeeds.js --cycle 98 --apply`; + ES-1 col-O cycle stamp; + engine.33/.31/.32 smoke. Sequence in ROLLOUT engine.35.
-**NEXT[research-build]:** engine.35 Phase 3 (WHY/causal layer) + Phase 5 (rewire /sift off the deck→packet surface); loop-tightening follow-on = governance.35 remnant (engine-sheet self-derives the PIN's mechanical fields from `output/`).
+**NEXT[research-build]:** loop-tightening SHIPPED (`79c376a`, push HELD behind engine-sheet's C98 commits — coordinate push). Carried set = `{PIN, NEXT[terminal]}`; session counter is now a **boot odometer**, NEXT is **resumption-state** (both Mike-approved, in ADR-0009 §loop-tightening). VALIDATE at next boot — run the checklist in plan §Validation checklist (does a fresh terminal orient on `{PIN, NEXT}` without the Shipped block?). That gates governance.37 (Sonnet closer). Then: engine.35 Phase 3+5; hand gov.35-remnant to engine-sheet (auto-derive PIN incl. odometer counter). (claude-mem: S260 loop-tightening + carried-set contract)
 
 ---
 

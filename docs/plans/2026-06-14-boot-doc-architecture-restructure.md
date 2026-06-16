@@ -173,6 +173,23 @@ Full read of MEMORY.md (154 lines). **governance.5 already moved gross project-s
 
 **Follow-ons (NOT this pass, filed to ROLLOUT):** (1) governance.35 remnant — engine-sheet self-derives the PIN's mechanical fields from `output/` (kills the C96-vs-C97 drift). (2) Cheap session-closer — once the structure proves out, a Sonnet agent runs the close (the tight contract leaves little judgment).
 
+### Validation checklist — run at the next research-build boot (the load-bearing bet)
+
+The whole design rests on one unproven claim: a fresh terminal orients on `{PIN, NEXT}` alone, without the Shipped block. This session booted on the OLD format; the new format only takes effect next boot. At that boot, check:
+
+**Mechanical (observe the `<godworld-state>` block):**
+1. **PIN carries Edition** — first line reads `Session: N | Day: N | Cycle: N | Edition: …`. Missing Edition → hook grep broke.
+2. **NEXT line present** — a `NEXT: <resumption line>` for research-build appears, carrying this session's state. Absent → per-terminal NEXT grep broke (check the hyphen/regex).
+3. **No Shipped block** — no `## Shipped Last Session` + commit list anywhere in boot context. Present → retirement incomplete.
+
+**Subjective (the actual test):**
+4. **Orient without the body** — can you state the next move from `{PIN, NEXT}` alone, *without* reading SESSION_CONTEXT's body or grepping? Yes → the loop works. Reach for narrative and feel lost → the bet failed; this is an ADR-0009 reversal-trigger data point, reconsider.
+5. **No reflex for the retired surface** — note if you instinctively hunt for the Shipped block / a STATUS paragraph. Graceful fall to `git log` + ROLLOUT = pass; flailing = signal worth logging.
+
+**Expected non-failures:** the Session counter shows the hand-set PIN value and does **not** auto-advance on reboot — gov.35 remnant (the auto-increment) isn't built yet, so that's correct, not a bug.
+
+**Verdict:** 1–3 mechanical ✓ + 4–5 subjective ✓ → green-light **governance.37** (Sonnet closer). Any fail → log it as an ADR-0009 reversal-trigger observation before building further.
+
 ---
 
 ## Absorbs / siblings

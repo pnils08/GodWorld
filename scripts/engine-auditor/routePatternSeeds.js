@@ -166,6 +166,130 @@ const BEAT_BONUS = 3; // tie-break toward the canonical beat without overriding 
                       // strong thematic fit (e.g. Maria Keen 9.0 on COMMUNITY) or
                       // blocking cadence spread when a beat saturates.
 
+// ── collapse: same-metric / same-magnitude improvements → citywide synthesis ──
+// engine.35 Phase 2 refinement (S260). The engine emits ONE improvement pattern per
+// neighborhood, so a single citywide mood-lift fragments into 8-10 near-identical
+// "X sentiment rose 0.11" seeds — deck noise that also skews byline cadence. Collapse
+// each cluster of ≥MIN_CLUSTER same-metric, same-magnitude-band improvements into one
+// citywide seed (synthesis, not faithful routing). Genuine outliers (delta outside the
+// band) pass through as individual seeds, keeping their packet. Initiative improvements
+// carry no *Delta field → metric=null → never collapsed.
+const MIN_CLUSTER = 3;     // a cluster this size or larger collapses
+const MAG_BAND = 0.03;     // |delta − cluster anchor| ≤ this = "same magnitude"
+
+// the metric an improvement pattern moved (sentimentDelta, retailVitalityDelta, …).
+// null = not a collapsible metric-improvement (initiative improvements, non-improvements).
+function improvementMetric(pattern) {
+  if (pattern.type !== 'improvement') return null;
+  const f = ((pattern.evidence || {}).fields) || {};
+  const dk = Object.keys(f).find((k) => /Delta$/.test(k));
+  if (!dk) return null;
+  const delta = Math.abs(parseFloat(f[dk]));
+  return isFinite(delta) ? { metric: dk, delta } : null;
+}
+
+const fmtDelta = (x) => '+' + Number(x).toFixed(2);
+
+// build a single citywide synthesis intent from a cluster of per-hood improvement intents
+function synthCitywide(members, metric, cycle) {
+  // deterministic: delta desc, then neighborhood name
+  const sorted = members.slice().sort((a, b) => (b.delta - a.delta) || a.neighborhood.localeCompare(b.neighborhood));
+  const hoods = sorted.map((m) => m.neighborhood);
+  const deltas = sorted.map((m) => m.delta);
+  const avg = deltas.reduce((s, d) => s + d, 0) / deltas.length;
+  const min = Math.min(...deltas), max = Math.max(...deltas);
+  const metricLabel = metric.replace(/Delta$/, ''); // "sentiment"
+  const range = (min === max) ? fmtDelta(min) : (fmtDelta(min) + '–' + fmtDelta(max));
+  // who: capped resident union across the cluster (engine.35 attribution thesis — a
+  // citywide-mood story still needs named citizens for the desk).
+  const seen = {}, who = [];
+  sorted.forEach((m) => (m.coveringCitizens || []).forEach((p) => {
+    if (!seen[p]) { seen[p] = 1; if (who.length < 6) who.push(p); }
+  }));
+  const text = 'Citywide ' + metricLabel + ' rose across ' + hoods.length +
+    ' neighborhoods (avg ' + fmtDelta(avg) + ', range ' + range + '): ' + hoods.join(', ');
+  return {
+    seedId: 'pat-c' + cycle + '-' + metric + '-citywide',
+    idx: -1, patternType: 'improvement-citywide', severity: 'low',
+    domain: sorted[0].domain, neighborhood: 'Citywide', priority: severityToPriority('low'),
+    text,
+    angle: 'broad civic-mood lift across the city — the shared driver behind the simultaneous rise',
+    coveringCitizens: who, packet: null, metric, delta: avg, collapsedCount: hoods.length
+  };
+}
+
+// partition intents: collapsible metric-improvements cluster into citywide synths;
+// everything else (initiatives, sub-threshold clusters) passes through unchanged.
+function collapseImprovements(intents, cycle) {
+  const collapseLog = [];
+  const passthrough = intents.filter((it) => it.metric == null);
+  const movers = intents.filter((it) => it.metric != null);
+  const byMetric = {};
+  movers.forEach((it) => { (byMetric[it.metric] = byMetric[it.metric] || []).push(it); });
+  const out = passthrough.slice();
+  Object.keys(byMetric).sort().forEach((metric) => {
+    const group = byMetric[metric].slice()
+      .sort((a, b) => (b.delta - a.delta) || a.neighborhood.localeCompare(b.neighborhood));
+    // greedy band clustering, anchor = first (largest) member — stable run-to-run
+    const clusters = [];
+    group.forEach((it) => {
+      const c = clusters.find((cl) => Math.abs(it.delta - cl.anchor) <= MAG_BAND);
+      if (c) c.members.push(it); else clusters.push({ anchor: it.delta, members: [it] });
+    });
+    clusters.forEach((cl) => {
+      if (cl.members.length >= MIN_CLUSTER) {
+        out.push(synthCitywide(cl.members, metric, cycle));
+        collapseLog.push({ metric, anchor: cl.anchor, collapsed: cl.members.length,
+          neighborhoods: cl.members.map((m) => m.neighborhood).sort() });
+      } else {
+        cl.members.forEach((m) => out.push(m)); // outlier — individual seed, keeps packet
+      }
+    });
+  });
+  return { collapsed: out, collapseLog };
+}
+
+// priority + byline for a finalized intent (run AFTER collapse so cadence isn't
+// polluted by the pre-collapse fragments). Behavior-preserving for passthrough seeds.
+function finalizeSeed(it, bylineState, roster) {
+  const seedForScore = { domain: it.domain, linkedStorylineId: null, seedType: PATTERN_SEED_TYPE, priority: it.priority };
+  const auditForScore = { severity: normSeverity(it.severity) };
+  const pr = priorityEngine.computePriorityScore_(seedForScore, auditForScore, null, null);
+  const floor = priorityEngine.isConsequenceFloor_(seedForScore, auditForScore, null, null);
+  let ranked = null;
+  try { ranked = bylineEngine.scoreAllBylines_(seedForScore, bylineState); }
+  catch (e) { ranked = null; }
+  let picked = null;
+  if (ranked && ranked.length) {
+    const adj = ranked.map((r) => ({
+      r, adj: r.score + ((roster[r.name] && roster[r.name].beatDomain === it.domain) ? BEAT_BONUS : 0)
+    }));
+    adj.sort((a, b) => b.adj - a.adj);
+    picked = adj[0].r;
+    bylineState.cadence[picked.name] = (bylineState.cadence[picked.name] || 0) + 1;
+  }
+  bylineState.totalSeeds += 1;
+  if (picked && ranked) ranked = [picked].concat(ranked.filter((r) => r.name !== picked.name));
+  const byName = (ranked && ranked.length) ? ranked[0].name : '';
+  const byPopid = (byName && roster[byName]) ? roster[byName].popid : '';
+  return {
+    seedId: it.seedId, patternType: it.patternType, severity: it.severity,
+    domain: it.domain, neighborhood: it.neighborhood, priority: it.priority,
+    text: it.text, angle: it.angle, coveringCitizens: it.coveringCitizens,
+    priorityScore: pr ? Math.round(pr.priorityScore * 100) / 100 : '',
+    consequenceFloor: floor === true,
+    priorityComponents: pr ? pr.components : null,
+    bylineCandidate: byName,
+    bylineConfidence: (ranked && ranked.length) ? (ranked[0].confidence || 'low') : '',
+    bylineRationale: (ranked && ranked.length) ? {
+      components: ranked[0].components,
+      alternates: ranked.slice(1, 3).map((r) => ({ name: r.name, score: r.score, components: r.components }))
+    } : null,
+    packetRef: it.packet ? it.packet.id : '',
+    coveringJournalistPopid: byPopid
+  };
+}
+
 function loadJson(file) {
   const p = path.join(OUTPUT_DIR, file);
   if (!fs.existsSync(p)) throw new Error('missing ' + p + ' (run /engine-review first)');
@@ -194,14 +318,11 @@ async function routePatternSeeds(cycle, opts) {
     else excluded.push({ type: p.type, severity: p.severity, reason: 'no world anchor (citizens/neighborhoods/initiatives all empty)' });
   });
 
-  // process highest-severity first so they get first byline pick (cadence spreads the rest)
-  const sevRank = { HIGH: 3, MED: 2, LOW: 1 };
-  included.sort((a, b) => sevRank[normSeverity(b.p.severity)] - sevRank[normSeverity(a.p.severity)]);
+  // (severity ordering for byline-pick priority happens in Phase C, post-collapse)
 
-  const bylineState = { roster, cadence: {}, totalSeeds: 0, arcBinding: null };
-  const seeds = [];
-
-  included.forEach(({ p, idx }) => {
+  // ── Phase A: build seed-intents (no byline yet — collapse must run first so the
+  //    byline cadence isn't polluted by the pre-collapse per-hood fragments) ──
+  const intents = included.map(({ p, idx }) => {
     const domain = resolveDomain(p);
     const neighborhood = (((p.affectedEntities || {}).neighborhoods) || [])[0] || '';
     // SeedText = the FACT (pattern.description carries the specifics/numbers, e.g.
@@ -209,64 +330,30 @@ async function routePatternSeeds(cycle, opts) {
     // narrative opening — kept as the angle, not the fact.
     const text = (p.description && p.description.trim()) ? p.description.trim() : resolveText(p, domain);
     const angle = resolveText(p, domain) || resolveAngle(p, domain);
-    const priority = severityToPriority(p.severity);
-    const coveringCitizens = parsePopids((p.affectedEntities || {}).citizens);
-
-    const seedForScore = { domain, linkedStorylineId: null, seedType: PATTERN_SEED_TYPE, priority };
-    const auditForScore = { severity: normSeverity(p.severity) };
-
-    const pr = priorityEngine.computePriorityScore_(seedForScore, auditForScore, null, null);
-    const floor = priorityEngine.isConsequenceFloor_(seedForScore, auditForScore, null, null);
-
-    let ranked = null;
-    try { ranked = bylineEngine.scoreAllBylines_(seedForScore, bylineState); }
-    catch (e) { ranked = null; }
-    // beat-affinity: prefer the canonical Bay_Tribune_Oakland beat for this domain.
-    // Additive bonus on the cadence-adjusted score → breaks 4.0 ties toward the
-    // beat journalist; a strong thematic fit can still win; cadence still spreads.
-    let picked = null;
-    if (ranked && ranked.length) {
-      const adj = ranked.map((r) => ({
-        r, adj: r.score + ((roster[r.name] && roster[r.name].beatDomain === domain) ? BEAT_BONUS : 0)
-      }));
-      adj.sort((a, b) => b.adj - a.adj);
-      picked = adj[0].r;
-      bylineState.cadence[picked.name] = (bylineState.cadence[picked.name] || 0) + 1;
-    }
-    bylineState.totalSeeds += 1;
-    // rebuild ranked with picked at head so rationale/confidence reflect the choice
-    if (picked && ranked) {
-      ranked = [picked].concat(ranked.filter((r) => r.name !== picked.name));
-    }
-
-    const byName = (ranked && ranked.length) ? ranked[0].name : '';
-    const byPopid = (byName && roster[byName]) ? roster[byName].popid : '';
-    const packet = joinPacket(p, briefs);
-
-    seeds.push({
-      seedId: 'pat-c' + cycle + '-' + idx,
-      patternType: p.type,
-      severity: p.severity,
-      domain, neighborhood, priority, text, angle,
-      coveringCitizens,
-      priorityScore: pr ? Math.round(pr.priorityScore * 100) / 100 : '',
-      consequenceFloor: floor === true,
-      priorityComponents: pr ? pr.components : null,
-      bylineCandidate: byName,
-      bylineConfidence: (ranked && ranked.length) ? (ranked[0].confidence || 'low') : '',
-      bylineRationale: (ranked && ranked.length) ? {
-        components: ranked[0].components,
-        alternates: ranked.slice(1, 3).map((r) => ({ name: r.name, score: r.score, components: r.components }))
-      } : null,
-      packetRef: packet ? packet.id : '',
-      coveringJournalistPopid: byPopid
-    });
+    const m = improvementMetric(p);
+    return {
+      seedId: 'pat-c' + cycle + '-' + idx, idx, patternType: p.type, severity: p.severity,
+      domain, neighborhood, priority: severityToPriority(p.severity), text, angle,
+      coveringCitizens: parsePopids((p.affectedEntities || {}).citizens),
+      packet: joinPacket(p, briefs),
+      metric: m ? m.metric : null, delta: m ? m.delta : null
+    };
   });
+
+  // ── Phase B: collapse same-metric / same-magnitude improvements into citywide synths ──
+  const { collapsed, collapseLog } = collapseImprovements(intents, cycle);
+
+  // ── Phase C: byline + priority over the collapsed set (highest-severity picks first) ──
+  const sevRank = { HIGH: 3, MED: 2, LOW: 1 };
+  collapsed.sort((a, b) => sevRank[normSeverity(b.severity)] - sevRank[normSeverity(a.severity)]);
+  const bylineState = { roster, cadence: {}, totalSeeds: 0, arcBinding: null };
+  const seeds = collapsed.map((it) => finalizeSeed(it, bylineState, roster));
 
   // sort final output by priorityScore desc for deck legibility
   seeds.sort((a, b) => (b.priorityScore || 0) - (a.priorityScore || 0));
 
-  return { cycle, seeds, included: included.length, excluded, totalPatterns: patterns.length, briefCount: briefs.length };
+  return { cycle, seeds, included: included.length, excluded, collapseLog,
+    totalPatterns: patterns.length, briefCount: briefs.length };
 }
 
 function seedToRow(s, cycle, now) {
@@ -339,9 +426,16 @@ async function applyToDeck(result, opts) {
 // ── CLI ──────────────────────────────────────────────────────────────────────
 
 function printDryRun(result) {
-  const { cycle, seeds, included, excluded, totalPatterns, briefCount } = result;
+  const { cycle, seeds, included, excluded, collapseLog, totalPatterns, briefCount } = result;
   console.log('\n═══ engine.35 Phase 2 — pattern→seed routing (DRY RUN) — cycle ' + cycle + ' ═══');
-  console.log(totalPatterns + ' patterns | ' + included + ' anchored → seeds | ' + excluded.length + ' excluded | ' + briefCount + ' briefs available\n');
+  console.log(totalPatterns + ' patterns | ' + included + ' anchored → ' + seeds.length + ' seeds (post-collapse) | ' +
+    excluded.length + ' excluded | ' + briefCount + ' briefs available\n');
+  if (collapseLog && collapseLog.length) {
+    console.log('COLLAPSED (same-metric/magnitude improvements → citywide synthesis):');
+    collapseLog.forEach((c) => console.log('  ' + c.metric + ' ~' + fmtDelta(c.anchor) + ' band: ' +
+      c.collapsed + ' hoods → 1 citywide seed [' + c.neighborhoods.join(', ') + ']'));
+    console.log('');
+  }
   console.log('SEEDS (sorted by PriorityScore):');
   console.log('  PRI   DOMAIN         NEIGHBORHOOD    BYLINE (POPID)              PACKET            TEXT');
   seeds.forEach((s) => {

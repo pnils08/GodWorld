@@ -190,8 +190,13 @@ inline mini-packet instead of a `PacketRef`.
   Apprenticeship→Velez/Economic, Transit→Shimizu/Infra), 6/13 packet-linked.
   **Mike S259 steer:** byline pool = the clean POPID-linked `Bay_Tribune_Oakland` ledger, not the embedded
   `rosterLookup` hardcode (rosterLookup now enriches themes by name-match; got a Node `module.exports`).
-  **Open refinement (→ Phase 3):** 10 near-identical "neighborhood sentiment rose 0.11" improvement seeds —
-  collapse same-type/magnitude improvements into one citywide seed (synthesis, not faithful routing).
+  **Citywide-sentiment-seed collapse — ✅ DONE S260** (local; rides C98). `routePatternSeeds.js` now clusters
+  same-metric (`*Delta` field) + same-magnitude (±0.03 greedy band, anchor=largest) improvement intents BEFORE
+  byline assignment; any cluster ≥3 collapses into one `Citywide` synthesis seed (capped 6-POPID resident union
+  preserves the "who", single COMMUNITY byline, no PacketRef). Outliers pass through individually keeping their
+  packet. C97 dry-run: 13→**5 seeds** (COMMUNITY 10→2 = citywide-of-9 + Fruitvale +0.25 outlier); initiatives
+  untouched; byline cadence 7/3→1-each; deterministic across runs. Grouping by metric field (not `type`) proven
+  to leave the 2 initiative improvements + stuck-initiative untouched.
   **C98 rollout:** service-account widen deck S→T → clasp push saveV3Seeds → cycle runs → /engine-review →
   `routePatternSeeds.js --apply --cycle 98`. **Demote `storyline-followup`** already done (Phase 1 gate).
 - **Phase 3 — WHY layer.** Causal anchor per seed — extend `tribuneFraming`/`remedyPath`/`mitigatorState`
@@ -232,3 +237,4 @@ the engine says "here are the real stories this cycle, with everything a desk ne
   stacking on the un-smoke-tested engine.33/Phase-1 stack until C98 clears). Phase 4 (PacketRef join)
   folded forward — subject-overlap join already emits packets where briefs exist.
 - 2026-06-15 — **Phase 1 built (S259, local; deploy post-C98).** `applyStorySeeds.js` followup gate (non-Oakland-locale + age cap 12). Live-data findings: all 97 live storylines `dormant`, `lastCoverageCycle` dead, `canonNeighborhoods` inert in Apps Script → inline gate on `sl.*`. Simulated 97→43 followups (56% cut; 6 Chicago, 48 aged out). Deploy held for the C98 clasp window (rides post-engine.33-smoke); smoke = followup count halves + zero Chicago next cycle.
+- 2026-06-16 — **Citywide-sentiment-seed collapse built (S260, local; rides C98 with the Phase 2 routePatternSeeds live run).** The Phase 2 open refinement. `routePatternSeeds.js` restructured intents→collapse→byline so collapse runs before byline assignment (cadence no longer polluted by per-hood fragments): `collapseImprovements` clusters `improvement` intents by `*Delta` metric field + ±0.03 magnitude band (greedy, anchor=largest member, deterministic), `synthCitywide` folds any ≥3 cluster into one `Citywide` seed (capped 6-POPID resident union, single COMMUNITY byline, no PacketRef); outliers pass through keeping their packet. C97: 13→5 seeds, COMMUNITY 10→2, initiatives + excluded untouched, byline cadence 7/3→1-each, deterministic across runs. Measure-twice: grouping by metric field (not `type:improvement`) empirically proven to isolate exactly the 10 sentiment patterns. Advisor-reviewed pre-build. Pattern: feedback_measure-twice-cascading-effects.

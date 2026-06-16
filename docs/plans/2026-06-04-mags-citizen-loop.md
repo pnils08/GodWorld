@@ -159,6 +159,15 @@ Re-ran the probe (`scripts/_probe_voice_multi.js`, throwaway) across **local qwe
 
 Clean confirming run (`scripts/_probe_voice_grounded.js`, throwaway): 4 strongly-shaped divergent citizens, each **grounded in their real LifeHistory tail** (col O: `timestamp — [Tag] event`), same scenario, Gemini. **PASS, decisively.** Four distinct people: Amy Cook (relentless/adventurous/family-keeper), Mags-citizen (magnetic-but-craving-off, no family — consistent with prior run), Luis Taz (head-down Fruitvale family man, cautious hope), Colt Biker (relentless West-Oakland community-protector). Each reflection built on the citizen's *actual logged event* — **grounding in real LifeHistory eliminated the confabulation** (no invented names). Confirms two design choices: (a) the perception surface = **LifeHistory tail + dials + neighborhood** is the right shape; (b) feed *real lived particulars*, never engine aggregates. **The validation gate is GREEN — build is cleared.** Note: LifeHistory entries already carry `[Tag]` from the same closed vocab the classifier targets — the prose→tag loop closes from the vocabulary already in the log.
 
+### Phase 2 model bake-off — Gemini vs DeepSeek vs Hermes (S261)
+
+Same 4 grounded citizens, same prompt, three cheap models (`scripts/_probe_voice_openrouter.js`, throwaway; OpenRouter key refreshed S261, ~$10 headroom, run cost cents):
+- **DeepSeek V3 (`deepseek/deepseek-chat`) — standout of the cheap models.** Naturalistic, concrete, restrained, distinct, well-grounded (Amy "can't stop moving… wondering if I'll ever learn to slow down"; Luis "James Williams at the taco truck… grandkids coming this weekend"). ~1/25th cost. Minor: slightly under-hit Mags' "magnetic" trait.
+- **Gemini (CLI) — also strong**, vivid contrast, **free + native Drive/Sheets read**.
+- **Hermes-3 70B — weaker for THIS task.** Roleplay-tuning surfaces as theatrical tics (`*sighs*`, "I'm a bull…") + a confabulation miss on Mags (invented kids vs family-50). Capable but wrong flavor for private-journal voice without prompt-suppression. **Skip for voice.**
+
+**Verdict: the bet holds across multiple cheap models — two good scaling options (Gemini free+sheet-read, DeepSeek cheap+most-naturalistic).** Pick by need; Hermes out. Confirms the multi-LLM strategy below: voice has more than one viable cheap home.
+
 ### Phase 2 strategic threads (Mike, S261) — to fold into the build
 
 - **Gemini's native Drive + Sheets read is an unlock.** Gemini (unique among the candidates) can read Google Sheets/Drive directly — so a Gemini-powered wake could pull its own world-slice *from the live ledger* rather than us building a separate read/injection layer. Explore: does the citizen wake even need a Node perception-assembly step, or can Gemini read the neighborhood slice + the citizen's row itself? (Caveat: keep determinism — Gemini reading is perception-side/input only, never writing engine state.)

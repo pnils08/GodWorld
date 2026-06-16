@@ -1,7 +1,7 @@
 ---
 title: Gemini Offload Triage
 created: 2026-05-28
-updated: 2026-05-28
+updated: 2026-06-16
 type: reference
 tags: [governance, infrastructure, token-budget, architecture, active]
 sources:
@@ -87,9 +87,45 @@ Combined recovery: ~25–30% per operational boot.
 
 ---
 
+## Job-routing inventory (governance.38)
+
+**Generalizes this doc from "Gemini-in-place" to the full helper roster.** governance.21 (above) named three Gemini paths; governance.38 (Mike, S261) widens the lens — *any* recurring scripted/pattern job is triaged against the cheap helpers before defaulting to premium Opus. The roster:
+
+- **No-LLM (Node/bash script)** — deterministic counts, greps, frontmatter/date scans, dead-ref checks. Free, exact, no API.
+- **Gemini CLI** (`gemini`, v0.42) — free, native Drive/Sheets read. The three paths above.
+- **OpenRouter** (`deepseek/deepseek-chat` via `lib/env` → `OPENROUTER_API_KEY`) — cheap LLM for narrow repeatable classification. `lib/reflectionClassifier.js` is the live precedent.
+- **Local Ollama** (`qwen2.5:3b`) — free, CPU, offline. Fallback for tiny classification when network/cost matters.
+
+**The load-bearing distinction (read before routing):** most "scripted jobs" need **no LLM at all** — they need a deterministic script plus the discipline to run it instead of doing it by hand in the premium seat. A cheap *model* is only warranted for genuine narrow classification (the band the reflection classifier occupies). Don't reach for Gemini/Ollama where a `grep` and a `wc -l` are the actual job.
+
+Three bands, by judgment content:
+
+| Band | Needs | Route to | Jobs |
+|------|-------|----------|------|
+| **Deterministic** | no LLM | Node/bash script | doc-audit claim-scan, ledger-count audits, grep/file sweeps, `/health` + determinism scans |
+| **Cheap-LLM** | narrow classify | OpenRouter / Ollama | reflection→tag classifier (**done** — DeepSeek) |
+| **Judgment** | holistic eval | Opus (stays) | doc-audit content-drift verdict, session-close NEXT line (gov.37) |
+
+**Existing deterministic scripts — the backbone is already built; invoke, don't rebuild:**
+
+| Job | Script | Status |
+|-----|--------|--------|
+| Doc existence-staleness (mtime / orphan / dead-ref) | `scripts/mdStalenessDetector.js` (`/md-audit`) | live — 219 docs/~32s, read-only |
+| Doc content-staleness pre-scan | `/doc-audit` Step 0 → invokes the above | wired S263 (gov.38) |
+| Plan-tag drift | `scripts/auditPlanTagDrift.js` | live (session-end mechanical) |
+| Rollout sweep-contract lint | `scripts/docLoopStatus.js --lint` | live (gov.39) |
+| Ledger integrity / counts | `scripts/auditSimulationLedger.js` + `audit*` family | live |
+| Reflection→tag classify | `lib/reflectionClassifier.js` (OpenRouter) | live (engine.35) |
+
+**No-go zone unchanged** — the canon-bearing / reviewer-lane / EIC-seat boundary above governs the whole roster, not just Gemini. A cheap model classifying reflection tags is fine; a cheap model writing an edition or a reviewer verdict is not.
+
+**Engine-sheet-owned jobs (routed, not wired here):** `/health` + determinism scans and ledger-count audits are substrate — engine-sheet's lane. gov.38 recommends they confirm those run as scripts (not Opus-by-hand) at their terminal; filed as an engine-sheet ROLLOUT row, not built cross-terminal from research-build.
+
+---
+
 ## Pointers
 
-- ROLLOUT row: `governance.21` in [[engine/ROLLOUT_PLAN]]
+- ROLLOUT rows: `governance.21` (Gemini paths) + `governance.38` (full-roster job inventory) in [[engine/ROLLOUT_PLAN]]
 - Plan: [[archive/plans/2026-05-28-gemini-offload-pattern]] — full task list + acceptance criteria
 - Companion boot-burn gap log: `output/production_log_session-startup_c95_gaps.md` (S241)
 - Canon scaffolding Gemini lacks: [[canon/CANON_RULES]] + [[canon/INSTITUTIONS]]

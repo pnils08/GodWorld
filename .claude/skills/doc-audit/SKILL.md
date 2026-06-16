@@ -1,8 +1,8 @@
 ---
 name: doc-audit
 description: Audit architecture and system docs for staleness, inaccuracy, and drift from actual codebase state. Grouped into 7 tiers for thorough coverage. Complement to /md-audit (existence-staleness — when that ships).
-version: "2.0"
-updated: 2026-04-25
+version: "2.1"
+updated: 2026-06-16
 tags: [engine, active]
 effort: high
 ---
@@ -214,6 +214,16 @@ Update this after each audit. `/doc-audit` with no argument picks the oldest.
 ---
 
 ## How to Audit
+
+### Step 0: Run the deterministic pre-scan first (gov.38)
+
+Before any judgment-mode auditing, run the existing scanner — free, deterministic, and it scopes your Opus pass to what's actually drifted:
+
+```bash
+node scripts/mdStalenessDetector.js   # → output/md_audit_<DATE>.md (mtime / orphan / dead-ref, ~32s, read-only)
+```
+
+Judgment-audit **only the docs it flags** (stale-by-mtime, orphan-candidate, dead-ref) plus the group's own one-liner count checks (`ls .claude/agents | wc -l`, etc.). Healthy-by-mtime docs don't need a full content pass unless their subject code changed this session. This is the gov.38 offload: the *scan* is deterministic (no model); only the content-drift *verdict* is judgment. Don't hand-walk ~80 docs in the premium seat when the scanner already ranked them. (Roster + band taxonomy: [[../../../docs/GEMINI_OFFLOAD]] §Job-routing inventory.)
 
 ### Step 1: Verify claims against reality
 

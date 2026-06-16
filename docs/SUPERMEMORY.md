@@ -7,9 +7,9 @@ Legacy GodWorld org ($19/mo) is dead — 57k junk memories. Old API key (`sm_atk
 
 ---
 
-## The Six Containers (updated S156)
+## The Containers (updated S262)
 
-**Five active + one legacy.** Active: `mags`, `bay-tribune`, `world-data`, `super-memory`, `mara`. Legacy: `sm_project_godworld` (57k junk memories on the old GodWorld org — never read, never written to, left in place until the old org is fully deprecated). When code or docs say "6 containers," the 6th is the legacy junk drawer.
+**Six active + one legacy.** Active: `mags`, `bay-tribune`, `world-data`, `super-memory`, `mara`, `citizen-pages` (S262 — citizen-loop per-citizen narrative store). Legacy: `sm_project_godworld` (57k junk memories on the old GodWorld org — never read, never written to, left in place until the old org is fully deprecated).
 
 ### `mags` — The Deliberate Brain
 
@@ -164,6 +164,24 @@ Automatic captures and quick saves. May have useful conversation details. Search
 
 ---
 
+### `citizen-pages` — The Citizen Narrative Store (S262)
+
+Per-citizen accreting reflection memory for the citizen-loop (plan `2026-06-04-mags-citizen-loop` §Phase 2). The subjective layer that rides ALONGSIDE the objective LifeHistory/dials — a woken citizen reflects, the prose accretes here; the engine's dials stay the deterministic record (two-layer ownership, never a loop).
+
+**Structure:** one parent tag `citizen-pages` groups all; each citizen has their own tag `cp-POP-XXXXX` (derived from POPID, stored in `Simulation_Ledger` col AW `SMPageId`). Each per-citizen tag is its own queryable namespace — a `/v4/search` by `cp-POP-XXXXX` returns ONLY that citizen's page. **Isolation verified S262** (two-tag smoke: cross-tag search does not leak across the shared parent).
+
+**What goes in:** a citizen's own wake-time reflections (first-person prose), one doc per wake, idempotent per `(popId, cycle, daypart)` via customId. **What does NOT:** anything objective/engine (dials, LifeHistory — those are the deterministic cycle's), and nothing from other citizens.
+
+**Why isolated (not nested in `world-data`):** reflections are subjective first-person prose ("I'm furious at my boss"). Mixed into `world-data` they would contaminate `lookup_citizen`/`search_world`/desk packets and could surface unfenced in angle briefs. A dedicated container is isolated by default — nothing reads it unless explicitly pointed via the AW tag. (Same contamination class the engineer-Mags case taught.)
+
+**Who reads:** the citizen-loop bot at wake-time (a citizen's own page, alongside their LifeHistory) + editions that interview model-citizens from their page (forward thread). **Who writes:** `lib/citizenPage.js` (`appendReflection_`) at wake-time. **NOT in the plugin config; NOT read at boot; NOT touched by MCP tools, desk agents, or Mara.**
+
+**Determinism:** wake-side only — `lib/citizenPage.js` is NEVER called from the cycle path (it's I/O; replay would re-hit Supermemory). The cycle only ever reads the persisted categorical tag (col AW / classifier intake), never this prose. Fence: consumers wrap recalled page content via `lib/memoryFence.js` at injection.
+
+**Status (S262):** container + module landed; populated at bot-wiring (citizen-loop piece 4 / bot terminal). The live AW pointer write (`ensurePagePointer_`) is exercised at bot-wiring against a sentinel row.
+
+---
+
 ## Search/save matrix (S184)
 
 **The at-a-glance reference for "I need X — what tool, what tag, what container?"** Skills and agents cite this matrix instead of duplicating Supermemory guidance inline. Updated 2026-04-28 (S184). Reflects post-S183 world-data tag scheme (`wd-citizens`, `wd-business`, `wd-faith`, `wd-cultural`, `wd-neighborhood`, `wd-initiative`, `wd-player-truesource`, `wd-summary`) + M1-M4 retrieval tools.
@@ -214,6 +232,7 @@ Automatic captures and quick saves. May have useful conversation details. Search
 | `world-data` | City state — entity cards + per-cycle summaries | MCP tools (`lookup_*`, `search_world`, `get_*`) | per-domain writers (`build*Cards.js`, `ingestPlayerTrueSource.js`), post-publish |
 | `super-memory` | Junk drawer + auto-saves | manual `super-search --repo` | Stop hook, `/super-save` |
 | `mara` | Mara's private | Mara only (claude.ai) | Mara only |
+| `citizen-pages` | Per-citizen narrative store (citizen-loop) | citizen-loop bot (wake), editions | `lib/citizenPage.js` (wake-side, direct API) |
 
 ### Retrieval mode override (S183 finding)
 
@@ -649,6 +668,7 @@ Retrieval-only by default. Container selection via the userId argument. Compose 
 | `world-data` | Read (direct API) + Write (cycle ingest) | No access | No access | No access | Read (MCP) |
 | `super-memory` | Read (`/super-search --repo`) + Write (Stop hook, `/super-save`) | No access | No access | No access | No access |
 | `mara` | **No access** | No access | No access | Read + Write | No access |
+| `citizen-pages` | No access (direct module/API only) | Read + Write (citizen-loop) | No access | No access | No access |
 
 **`world-data` (NEW — S131):** Full Simulation_Ledger ingested as neighborhood-grouped citizen registry documents. 675 citizens across 20 neighborhood docs. Searchable by name, neighborhood, occupation, demographics. Ingested via direct API. See Phase 32 in ROLLOUT_PLAN.md.
 

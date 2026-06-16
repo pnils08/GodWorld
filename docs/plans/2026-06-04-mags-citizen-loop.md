@@ -110,6 +110,34 @@ pointers:
 
 **Acceptance:** (1) a non-Mags citizen wakes, perceives only their slice, writes in a voice consistent with their dial vector; (2) two citizens on the same cycle produce visibly distinct perception+voice; (3) a no-conversation day still produces a world-triggered reflection.
 
+---
+
+### Phase 2 — BUILD STATE SYNTHESIS (S262, READ THIS FIRST)
+
+*Front door for the executor. The dated sections below are the decision log; this is the current resolved picture + where to find the detail. If this and a dated section disagree, this wins (it's newer).*
+
+**The architecture in one line:** engine emerges (incl. its chaos) → citizen perceives *their* slice → reacts in voice → reaction classified to one closed-vocab tag → tag nudges dials (damped) → prose accretes to the citizen's narrative store → the paper can later interview them. *Deterministic underneath, reactive/agentic on top — the arrow stays engine→life (S262 correction, §arrow in changelog).*
+
+**Resolved (with detail pointers):**
+- **Voice model:** DeepSeek V3 / Gemini — validated N=4 grounded (§voice bet CONFIRMED, §bake-off). Gemini free+sheet-read; DeepSeek cheap+most-naturalistic.
+- **Classifier model:** **DeepSeek V3, NOT the local 3B** (3B sign-flips Resisted→Transgression) — gate GREEN (§classifier gate). Contract = tag-only output, single dominant tag, fixed lighter reflection-severity (§classifier contract). Reference impl `scripts/_probe_classifier.js`.
+- **Determinism:** **persist-the-tag-then-read; classifier NEVER called in-cycle** (§classifier contract). The one don't-get-this-wrong.
+- **Perception surface:** the citizen's slice — LifeHistory tail + dials + engine.33 neighborhood-slice + real relationships. Lived particulars, never engine aggregates.
+- **Selection:** event-magnitude-weighted over the ~437 shaped citizens; **Mags = fixed nightly anchor**, citizens rotate around her (Open Qs, resolved).
+- **Wake structure:** daypart scaffold — morning meet-people / midday neighborhood-or-business / night dinner-reflect; seed action then free voice (§wake structure).
+- **Narrative store:** per-POPID Supermemory page + a net-new ledger SM-tag column (§perception store).
+- **Negative pole (the "everyone happy = miss" fix):** TWO engines compose — **chaos-cars (engine.11) = objective adversity** + **citizen-loop affect tags = subjective reaction**, joined at the perception slice (§negative-pole gap, §seam to Chaos-Cars). Needs affect tags added to DIAL_MAP (§affect-tag gap).
+- **Forward:** editions interview model-citizens from their Supermemory page, not just their likeness (§forward thread).
+
+**Build ownership:**
+- **research-build:** design — DONE. Mags stays the anchor; coordinates.
+- **engine-sheet (substrate):** affect tags → `DIAL_MAP`; SM-tag ledger column; per-citizen Supermemory page; classifier wiring (persist-then-read); the two-decay-system composition check when chaos-cars is also live.
+- **bot (`discord-reflection.js`):** citizen rotation (event-weighted), gate-inversion (world-perception triggers, not conversation-only), voice via Gemini/DeepSeek API (not CLI), daypart wake framing.
+
+**GATE (unchanged):** perception + reflection + narrative-store only. **No engine write-back** (dials/LifeHistory) until the classifier proves out under the Phase-1 daily audit.
+
+**Still open:** affect-tag set + deltas (calibrate symmetric-or-slightly-negative vs the measured 86%-neutral baseline); reflection severityMult constant; single- vs multi-tag on long reflections; first true end-to-end run on a *real* citizen reflection (gate is green on stand-ins only).
+
 ### Phase 2 write-side — determinism-resolved (S261, advisor + code check)
 
 The first design pass floated closing the loop: reflection → writes back to LifeHistory + nudges the citizen's own dials (self-authored personality drift). **A determinism check killed the dial half.** The dial vector is **engine cycle state** — `phase05/runConductEngine.js` consumes `citizenDialMap` directly, and the relationship/education/household/youth/crime engines read the dial fields to drive simulation. So letting **LLM reflection (non-reproducible prose) move dials would break cycle replay** — the exact invariant `ctx.rng`/no-`Math.random` protects. It's also the arrow backwards (engine emerges → narrative captures, never narrative → engine state — Mags' own Entry-202 lesson; same split engine.35 draws with "engine emerges, Supermemory maintains").

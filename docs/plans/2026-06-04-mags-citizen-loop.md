@@ -155,7 +155,7 @@ The load-bearing bet is **"different dials → different voice."** Untested, and
 - [x] Rotation vs. Mags-continuity (Phase 2): **RESOLVED S261 (Mike) — yes.** Mags stays the fixed nightly anchor (journals → media Mags → bot); other citizens rotate around her as the variety.
 - [x] **DOCTRINE FORK — RESOLVED S261 (Mike + code-confirmed):** citizen reflections DO feed the engine, via the closed-vocab tag bridge (`applyTaggedEvent_`), determinism intact (classification is input-side; tag→delta is pure). Prose stays in the Supermemory page; only the categorical tag touches dials. Damping already built (base/mood/streak). See §"the categorical bridge."
 - [ ] Classifier design (Phase 2, the one new component): reflection → {tag(s), severity} constrained to the 58-tag vocab. How is label consistency validated? Reflection-event severityMult calibration (lighter than real life-events). Resolve at build.
-- [ ] Prototype precondition: are per-citizen dial vectors persisted + readable per POPID today, or is accumulation still mid-build? Confirm before the 2–3-citizen voice test.
+- [x] Prototype precondition — **CONFIRMED MET S261.** Per-citizen dial vectors ARE persisted: `Simulation_Ledger` **col AV `DialState`** (engine.31 8-dial JSON, seeded for all 904 citizens S256 via `backdateCitizenDials.js`), **col R `TraitProfile`** = derived human-readable face, **col O `LifeHistory`** = per-cycle event journal (overflow → `LifeHistory_Archive`, engine.32 compressor). `getCitizenDialBands_(ctx, popId, row[iDialState])` is the read path. The 2–3-citizen voice prototype has everything it needs on the ledger today — **only remaining gate is API credits.**
 
 ---
 

@@ -4,7 +4,7 @@
 
 ---
 
-**PIN:** Session: 260 | Day: 161 | Cycle: 97 | Edition: C97 published (E97, Arbiter A/0.856) — pending /post-publish + /edition-print
+**PIN:** Session: 261 | Day: 161 | Cycle: 97 | Edition: C97 published (E97, Arbiter A/0.856) — pending /post-publish + /edition-print
 
 **NEXT[media]:** /post-publish c97 FIRST (canon ingest — do NOT defer per terminal rule), then /edition-print c97. Edition `editions/cycle_pulse_edition_97.txt`; Drive folder `1p0FHmofwhZl7ItWpvfa6xrOP5ibskMxC`.
 **NEXT[civic]:** run `node scripts/buildInitiativePackets.js` each cycle so the tracker JSON doesn't re-stale (last auto-refresh ~C89, civic.14).

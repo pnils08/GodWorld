@@ -12,9 +12,11 @@
 // pipes in the prose survive). Never report done based on stdout — verify counts.
 //
 // Usage:
-//   node scripts/rolloutSweep.js            # dry-run: show what would move
-//   node scripts/rolloutSweep.js --apply    # execute the move + print deltas
-//   node scripts/rolloutSweep.js --session=250   # session tag for the pass header (default: from arg)
+//   node scripts/rolloutSweep.js --session=264           # dry-run: show what would move
+//   node scripts/rolloutSweep.js --session=264 --apply   # execute the move + print deltas
+// Header is self-tightening (S263): --session=<N> REQUIRED; date auto = today (--date=YYYY-MM-DD
+// to override); label auto = "post-S<N-1> closures sweep" (--label="..." to override); insert anchor
+// auto-detected as the highest-session "## S<N> Archive Pass" header — no hand-maintained anchor/recap.
 
 'use strict';
 
@@ -26,9 +28,18 @@ const ROLLOUT = path.join(ROOT, 'docs', 'engine', 'ROLLOUT_PLAN.md');
 const ARCHIVE = path.join(ROOT, 'docs', 'engine', 'ROLLOUT_ARCHIVE.md');
 const STATE_TOKEN = ' | done-pending-archive | ';
 const ROW_ID = /^\|\s*([a-z][a-z-]*\.\d+[a-z]?)\s*\|/;
-// New pass inserts immediately above the current top-of-run pass (newest-first
-// region per the ARCHIVE-PASS ORDERING comment, G-SE4 S248).
-const INSERT_ANCHOR = '## S248 Archive Pass (2026-05-31, research-build) — post-S238 backlog sweep';
+const PASS_HEADER = /^## S(\d+) Archive Pass\b.*$/gm;
+// New pass inserts immediately above the newest existing pass (highest session
+// number), auto-detected from the archive — no hand-maintained anchor (S263 loop-tighten).
+function findNewestPassAnchor(archiveText) {
+  let best = null, bestN = -1, m;
+  PASS_HEADER.lastIndex = 0;
+  while ((m = PASS_HEADER.exec(archiveText)) !== null) {
+    const n = parseInt(m[1], 10);
+    if (n > bestN) { bestN = n; best = m[0]; }
+  }
+  return best;
+}
 
 function arg(name, def) {
   const hit = process.argv.find(a => a.startsWith(`--${name}=`));
@@ -54,30 +65,34 @@ function parseRows(rolloutText) {
   return rows;
 }
 
-function buildPassSection(rows, session) {
+function buildPassSection(rows, session, date, label) {
   const counts = {};
   for (const r of rows) {
     const group = r.id.split('.')[0];
     counts[group] = (counts[group] || 0) + 1;
   }
   const countStr = Object.entries(counts).map(([g, n]) => `${n} ${g}.*`).join(' + ');
+  const idStr = rows.map(r => r.id).join(' + ');
   const lines = [];
-  lines.push(`## S${session} Archive Pass (2026-06-01, research-build) — doc-loop v2.0 sweep`);
+  lines.push(`## S${session} Archive Pass (${date}, research-build) — ${label}`);
   lines.push('');
-  lines.push(`${rows.length} \`done-pending-archive\` rows swept to archive as part of the governance.27 doc-loop v2.0 cleanup (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: ${countStr}.`);
+  lines.push(`${rows.length} \`done-pending-archive\` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: ${countStr}.`);
   lines.push('');
   for (const r of rows) {
     lines.push(`- **${r.id}** [${r.terminal}] — ${r.desc} **State at archive:** done-pending-archive. Pointer: ${r.pointer}`);
   }
   lines.push('');
-  lines.push('Prior sweep passes: §S212 Migration Pass, §S217/§S218/§S227 (governance.10 backlog — 49 rows), §S230 (5), §S233 (4), §S234 (2), §S235 (3), §S236 (2), §S238 (2), §S248 (4). This pass: ' + rows.length + ' rows (doc-loop v2.0 — largest since the S227 backlog drain).');
+  lines.push(`This pass: ${rows.length} rows — ${idStr}. (Prior passes are the dated \`## S<N> Archive Pass\` headers above — no hand-maintained recap.)`);
   lines.push('');
   return lines.join('\n');
 }
 
 function main() {
   const apply = process.argv.includes('--apply');
-  const session = arg('session', '250');
+  const session = arg('session', '');
+  if (!session) { console.error('FATAL: --session=<N> required (current session number for the pass header).'); process.exit(1); }
+  const date = arg('date', new Date().toISOString().slice(0, 10));
+  const label = arg('label', `post-S${Number(session) - 1} closures sweep`);
 
   const rolloutText = fs.readFileSync(ROLLOUT, 'utf8');
   const archiveText = fs.readFileSync(ARCHIVE, 'utf8');
@@ -85,7 +100,10 @@ function main() {
 
   if (!rows.length) { console.log('No done-pending-archive rows. Nothing to sweep.'); return; }
 
-  const section = buildPassSection(rows, session);
+  const INSERT_ANCHOR = findNewestPassAnchor(archiveText);
+  if (!INSERT_ANCHOR) { console.error('FATAL: no "## S<N> Archive Pass" header found in ARCHIVE — cannot place new pass.'); process.exit(1); }
+
+  const section = buildPassSection(rows, session, date, label);
 
   console.log(`# rolloutSweep — ${apply ? 'APPLY' : 'DRY-RUN'}`);
   console.log(`\nWould move ${rows.length} rows:`);

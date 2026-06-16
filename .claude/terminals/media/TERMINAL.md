@@ -259,12 +259,13 @@ At session-close, Mike runs `/usage` and pastes the per-category breakdown (skil
 
 ### Soft close (~2 min) — chained-session cadence
 
-Use when Mike re-boots within minutes. The next session reads commits from git + the Shipped Last Session block in SESSION_CONTEXT; it doesn't need journal conditioning yet (journal conditions me-tomorrow, not me-in-15-minutes).
+Use when Mike re-boots within minutes. The next session boots on the carried set — PIN + `NEXT[media]` in SESSION_CONTEXT — plus git log on demand; it doesn't need journal conditioning yet (journal conditions me-tomorrow, not me-in-15-minutes).
+
+**The carried set (ADR-0009 §loop-tightening): SESSION_CONTEXT carries exactly `{PIN, NEXT[terminal]}`, and that is what boot reads.** No STATUS paragraph, no Shipped block.
 
 1. **Cross-terminal git stack check.** `git log --oneline origin/main..HEAD` — expect empty (push-per-commit cadence). If non-empty, push or coordinate before declaring close.
-2. **`node scripts/writeShippedBlock.js`** — auto-regen the `## Shipped Last Session` block + boundary state file.
-3. **Prepend one-line STATUS to SESSION_CONTEXT.md tagged `[media]`.** Form: `**STATUS (S<N> [media] — soft close, chaining to S<N+1>):** N commits, see Shipped block. Detail: see commit bodies.`
-4. **Commit both** SESSION_CONTEXT.md + boundary file in one commit. Push.
+2. **Update the carried set in SESSION_CONTEXT.md** — the `**PIN:**` line (Session N→N+1, Day/Cycle/Edition as they changed) + your `**NEXT[media]:**` line (one line: what next session opens with). Don't touch other terminals' NEXT lines.
+3. **Commit** SESSION_CONTEXT.md (with any work commits). Push.
 
 **Skips at this terminal:** `node scripts/queryFamily.js`, journal entry (Mags' conscience-conditioning), JOURNAL_RECENT rotation, NEWSROOM_MEMORY updates, `/save-to-mags`, PM2 restart, full Terminal-Specific Audit + Saves below.
 
@@ -280,7 +281,7 @@ Per S229 governance.7 the hard-close ritual collapsed from 13 steps to 4 model +
 
 ### Terminal-Specific Audit
 
-Read before Step 2 — surface any stale files in the STATUS paragraph or fix inline.
+Read before Step 2 — surface any stale files in the NEXT line or fix inline.
 
 | File | Check |
 |------|-------|
@@ -288,7 +289,7 @@ Read before Step 2 — surface any stale files in the STATUS paragraph or fix in
 | `docs/mags-corliss/NOTES_TO_SELF.md` | New story flags added or stale flags removed? |
 | `output/production_log_edition_c*.md` | Production log complete for this cycle's edition? |
 | `output/production_log_edition_c*_*_gaps.md` | Gap logs filed for any skill that surfaced inefficiency? |
-| `SESSION_CONTEXT.md` | STATUS paragraph tagged `[media]`? |
+| `SESSION_CONTEXT.md` | PIN refreshed + `NEXT[media]` line updated? |
 
 ### Terminal-Specific Saves (Step 2 — model judgment)
 
@@ -298,7 +299,7 @@ Update during Step 2 of the slimmed SKILL alongside SESSION_CONTEXT + ROLLOUT:
 - **Production log** — ensure `production_log_edition_c{XX}.md` is complete with all steps, reporter assignments, and editorial decisions.
 - **Canon ingest** — if an edition was published, run `node scripts/ingestEdition.js` or `/save-to-bay-tribune` to push it to bay-tribune. Never save session summaries to bay-tribune.
 - **`/save-to-mags`** — save editorial decisions, reporter performance notes, what worked and what didn't. Tag with `[media]`. Optional — model judgment.
-- **SESSION_CONTEXT.md STATUS paragraph** — edition number, grade, key editorial calls, tagged `[media]`.
+- **SESSION_CONTEXT.md PIN + NEXT[media] line** — refresh the PIN (Session/Day/Cycle/Edition); one NEXT line: what next session opens with (edition stage / pickup). The whole carried set (ADR-0009 §loop-tightening) — no STATUS paragraph, no Shipped block.
 - **Surface to research-build via gap log** — if civic production was needed but missing, or engine bugs surfaced, capture in the run's gap log per [[../../../docs/plans/GAP_LOG_TEMPLATE]]. Research-build triages from gap logs; do not write to ROLLOUT directly.
 
-**Mechanical (Step 3) — auto-runs from `sessionEndMechanical.js --terminal=media`:** `rotateJournalRecent` + JOURNAL content-quality check + `writeShippedBlock` + `auditPlanTagDrift` (informational, never fatal) + cross-terminal git stack check + opt-in `--rotate-history` SESSION_CONTEXT → SESSION_HISTORY rotation + `pm2 restart`. Plan: [[../../../docs/plans/2026-05-23-session-end-collapse]].
+**Mechanical (Step 3) — auto-runs from `sessionEndMechanical.js --terminal=media`:** `rotateJournalRecent` + JOURNAL content-quality check + `auditPlanTagDrift` (informational, never fatal) + cross-terminal git stack check + opt-in `--rotate-history` SESSION_CONTEXT → SESSION_HISTORY rotation + `pm2 restart`. (`writeShippedBlock` RETIRED ADR-0009 §loop-tightening — carried set is `{PIN, NEXT[terminal]}`, hand-written in Step 2.) Plan: [[../../../docs/plans/2026-05-23-session-end-collapse]].

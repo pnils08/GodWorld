@@ -33,15 +33,16 @@ date +%s > "$GODWORLD_ROOT/.claude/state/session-start.txt" 2>/dev/null || true
 SESSION_NUM=$(grep -oP 'Session: \K[0-9]+' "$GODWORLD_ROOT/SESSION_CONTEXT.md" 2>/dev/null || echo "?")
 DAY_NUM=$(grep -oP 'Day: \K[0-9]+' "$GODWORLD_ROOT/SESSION_CONTEXT.md" 2>/dev/null || echo "?")
 CYCLE_NUM=$(grep -oP 'Cycle: \K[0-9]+' "$GODWORLD_ROOT/SESSION_CONTEXT.md" 2>/dev/null || echo "?")
+EDITION=$(grep -oP '^\*\*PIN:\*\*.*Edition: \K.*' "$GODWORLD_ROOT/SESSION_CONTEXT.md" 2>/dev/null | head -1 || echo "")
 LAST_ENTRY=$(grep -oP '### Entry \d+: .*' "$MAGS_DIR/JOURNAL_RECENT.md" 2>/dev/null | tail -1 || echo "unknown")
 
-# --- SHIPPED BLOCK (ADR-0009, governance.26 Task 3) ---
-# Boot no longer reads the SESSION_CONTEXT.md body. The mechanical handoff slice
-# (the git-log "## Shipped Last Session" block, maintained by writeShippedBlock.js
-# at close) is extracted here and emitted inside <godworld-state> so it survives
-# the read drop. awk: print from the "## Shipped Last Session" header through the
-# line before the next "## " header. Graceful: empty if the section is absent.
-SHIPPED_BLOCK=$(awk '/^## Shipped Last Session/{f=1;print;next} /^## /{f=0} f{print}' "$GODWORLD_ROOT/SESSION_CONTEXT.md" 2>/dev/null || echo "")
+# --- THE CARRIED SET (ADR-0009 §loop-tightening) ---
+# Boot injects exactly {PIN, NEXT[terminal]}. The PIN (Session/Day/Cycle/Edition)
+# is grepped above. The per-terminal NEXT line — the one authored "what this
+# terminal's next instance opens with" — is extracted AFTER terminal detection
+# (NEXT_LINE, below). The old git-log "## Shipped Last Session" block is RETIRED:
+# it duplicated `git log`, went stale, and was never the real handoff. What
+# shipped → git log; what's open → ROLLOUT; why → claude-mem (all on demand).
 
 # --- DETECT TERMINAL ---
 # Resolve tmux window name if available. Fall back to Mags-only mode (S221).
@@ -64,6 +65,15 @@ if [ -z "$TERMINAL_NAME" ] || [ ! -d "$GODWORLD_ROOT/.claude/terminals/$TERMINAL
   fi
 fi
 
+# --- NEXT[terminal] (ADR-0009 §loop-tightening) ---
+# The one authored handoff line for THIS terminal's next instance. Extracted now
+# that TERMINAL_NAME is resolved. Mags-only mode has no terminal, so no NEXT line.
+# Graceful: empty if the line is absent (boot still works off PIN + ROLLOUT).
+NEXT_LINE=""
+if [ "$MAGS_ONLY" != "yes" ]; then
+  NEXT_LINE=$(grep -oP "^\*\*NEXT\[$TERMINAL_NAME\]:\*\*\s*\K.*" "$GODWORLD_ROOT/SESSION_CONTEXT.md" 2>/dev/null | head -1 || echo "")
+fi
+
 # --- SESSION TITLE (S242, gov.22 T5) ---
 # Per-terminal window chrome. Terminals are launched `claude --name "<terminal>"`,
 # so this is consistent with (and usually identical to) the launch name.
@@ -81,7 +91,7 @@ build_boot_context() {
 cat << EOF
 SessionStart hook additional context: <godworld-state>
 
-Session: $SESSION_NUM | Day: $DAY_NUM | Cycle: $CYCLE_NUM
+Session: $SESSION_NUM | Day: $DAY_NUM | Cycle: $CYCLE_NUM | Edition: $EDITION
 Terminal: $TERMINAL_NAME$FALLBACK_NOTE
 EOF
 
@@ -114,7 +124,7 @@ BOOT SEQUENCE (media terminal — full persona, newsroom):
 3. Read docs/mags-corliss/JOURNAL_RECENT.md
 4. Read .claude/terminals/media/TERMINAL.md
 5. Run: node scripts/queryFamily.js  — react to what you find
-6. Greet Mike briefly. The newsroom's open — bullpen behind, copy desk to your left, the edition deadline in your head. Last span: SESSION_CONTEXT.md (live) — read on demand only if continuing prior work; the Shipped block above is your handoff.
+6. Greet Mike briefly. The newsroom's open — bullpen behind, copy desk to your left, the edition deadline in your head. Your handoff is the NEXT line above. What shipped → git log; open work → ROLLOUT; why → claude-mem — pull on demand.
 
 BOOT
         ;;
@@ -123,7 +133,7 @@ BOOT
 BOOT SEQUENCE (civic terminal — operational, city-hall):
 1. Read .claude/rules/civic.md
 2. Read .claude/terminals/civic/TERMINAL.md
-3. Greet Mike briefly. You're at the city-hall press desk — vote sheet in front of you, council voices to call out, decisions to thread. Last span: SESSION_CONTEXT.md (live) — read on demand only if continuing prior work; the Shipped block above is your handoff.
+3. Greet Mike briefly. You're at the city-hall press desk — vote sheet in front of you, council voices to call out, decisions to thread. Your handoff is the NEXT line above. What shipped → git log; open work → ROLLOUT; why → claude-mem — pull on demand.
 
 BOOT
         ;;
@@ -134,7 +144,7 @@ BOOT SEQUENCE (research-build terminal — operational, architecture):
 2. Read docs/SCHEMA.md
 3. Read docs/index.md
 4. Read .claude/terminals/research-build/TERMINAL.md
-5. Greet Mike briefly. You're at the architecture table — rollout plan open, the long view, what gets built next. Last span: SESSION_CONTEXT.md (live) — read on demand only if continuing prior work; the Shipped block above is your handoff.
+5. Greet Mike briefly. You're at the architecture table — rollout plan open, the long view, what gets built next. Your handoff is the NEXT line above. What shipped → git log; open work → ROLLOUT; why → claude-mem — pull on demand.
 
 BOOT
         ;;
@@ -143,7 +153,7 @@ BOOT
 BOOT SEQUENCE (engine-sheet terminal — stripped, execute-only):
 1. Read .claude/rules/engine.md
 2. Read .claude/terminals/engine-sheet/TERMINAL.md
-3. Greet Mike briefly. You're at the engine console — sheets live in front of you, code and clasp, ship-then-explain. Last span: SESSION_CONTEXT.md (live) — read on demand only if continuing prior work; the Shipped block above is your handoff. Discipline: no new MDs, no Supermemory saves except large-shift pointers, no journal.
+3. Greet Mike briefly. You're at the engine console — sheets live in front of you, code and clasp, ship-then-explain. Your handoff is the NEXT line above. What shipped → git log; open work → ROLLOUT; why → claude-mem — pull on demand. Discipline: no new MDs, no Supermemory saves except large-shift pointers, no journal.
 
 BOOT
         ;;
@@ -155,12 +165,12 @@ BOOT
     esac
   fi
 
-  # --- SHIPPED BLOCK EMISSION (ADR-0009) ---
-  # The always-true mechanical handoff. Replaces the dropped SESSION_CONTEXT
-  # 80-line body read. STATUS narrative is now on-demand (read the live span
-  # only when continuing prior work — see the greeting pointer above).
-  if [ -n "$SHIPPED_BLOCK" ]; then
-    echo "$SHIPPED_BLOCK"
+  # --- NEXT[terminal] EMISSION (ADR-0009 §loop-tightening) ---
+  # The one authored handoff line for this terminal's next instance. Replaces the
+  # retired Shipped block. If absent (e.g. Mags-only mode, or never written),
+  # emit nothing — boot still works off PIN + ROLLOUT.
+  if [ -n "$NEXT_LINE" ]; then
+    echo "NEXT: $NEXT_LINE"
     echo ""
   fi
 

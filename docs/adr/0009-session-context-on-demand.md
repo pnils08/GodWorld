@@ -1,7 +1,7 @@
 ---
 title: "ADR-0009: SESSION_CONTEXT from always-load boot primitive to on-demand span log"
 created: 2026-05-30
-updated: 2026-05-30
+updated: 2026-06-15
 type: reference
 tags: [architecture, infrastructure, boot-arch, governance, decision, active]
 sources:
@@ -95,6 +95,30 @@ Keep reading SESSION_CONTEXT but only the Next-Priority section. **Rejected:** N
 - 4 TERMINAL.md Always-Load tables: SESSION_CONTEXT row → on-demand.
 - `[[index]]` ADRs section gains row for 0009.
 
+## Extension — §loop-tightening (S260)
+
+The original decision (S248) **de-boot-read** SESSION_CONTEXT but kept two things alive: the STATUS narrative (still written every close, now only on-demand) and the Shipped block (promoted to *the* boot carrier via the hook awk, per the D1 premise correction). S260 closes the loop the rest of the way.
+
+**Empirical trigger.** Reversal-Trigger #1 effectively fired — but not as drafted. The hook-emitted Shipped block didn't prove "insufficient orientation"; it proved **redundant and rot-prone**. At S260 boot it was discovered **frozen at S248** — `writeShippedBlock.js` hadn't run across ~11 sessions of soft closes, so the boot was handed an 11-session-stale git-log copy as its "handoff." The block duplicated `git log`; any hand/script-maintained copy of authoritative data drifts. The fix is not a fresher copy — it's **deleting the copy**.
+
+**The carried-set contract (Mike-directed S260):** persist a pointer, not a copy. SESSION_CONTEXT carries exactly two things, and they are exactly what boot injects:
+
+> **boot-read set ≡ session-end-write set = `{PIN, NEXT[terminal]}`**
+
+- **PIN** — the deterministic sim-state pin (`Session | Day | Cycle | Edition`). Declared truth that resolves contradictions; can't be searched out of claude-mem reliably. ~1 line.
+- **NEXT[terminal]** — one authored line per terminal: what that terminal's *next instance* opens with. A decision, not a fact — unsearchable, so it persists by value. Per-terminal because a single global line would clobber (media opens on `/post-publish`, engine-sheet on a deploy window, etc.). Boot greps `NEXT[$TERMINAL_NAME]`.
+
+Everything else is **referenced, not carried**: what shipped → `git log`; what's open → `ROLLOUT_PLAN.md`; why → claude-mem. Those are authoritative or searchable elsewhere; copying them in is the redundancy that rots.
+
+**What this supersedes from the original decision:**
+- **D1 (Shipped block as boot carrier) — RETIRED.** The hook drops the `## Shipped Last Session` awk extract + emit; it gains an Edition field on the PIN + a per-terminal NEXT emit. `writeShippedBlock.js` + its `.claude/state/shipped-block-boundary` file are `git rm`'d. The `writeShippedBlock` sub-step is removed from `sessionEndMechanical.js`.
+- **STATUS narrative — RETIRED entirely** (not just de-boot-read). Session-end Step 2 writes the PIN + NEXT line instead of a STATUS paragraph. Both soft and hard close write the *same* two things; the modes differ only in journal + sweep overhead.
+- **D2/D3/D4 (numbered-span snapshot + reset + span guard) — MOOT.** With no narrative carried, SESSION_CONTEXT is a thin pin file *by construction*, not by hard-close reset. There is nothing accumulating to snapshot; growth-bounding is automatic. The numbered `docs/session-context/S<##>.md` scheme is not built.
+
+**Composes with governance.35 (not collision).** governance.35 (`session-context-mechanization`) planned to *mechanize and keep* the Shipped block + STATUS paragraph; those tasks are obsolete under this contract. What survives — reduced — is its one good idea: make the PIN's *mechanical* fields (cycle, edition-stage) **self-derive** from `output/` artifacts so the hand-typed PIN can't drift (the C96-vs-C97 boot bug). That is engine-sheet substrate with unresolved open questions (Day-counter semantics) and stays tagged for them — a follow-on, not part of this pass.
+
+**Enables the cheap closer (Mike S260).** The tighter the write contract (stamp PIN + one NEXT line), the less judgment the closer needs — which makes a cheap Sonnet session-closing agent viable once the structure is proven.
+
 ## Reversal Triggers
 
 - **If the hook-emitted Shipped block proves insufficient orientation** (sessions repeatedly re-read the span anyway because the git-log slice doesn't carry enough) — reconsider whether a trimmed Priority slice belongs back in the boot read, or whether ROLLOUT Next-Priority needs to be richer.
@@ -118,4 +142,5 @@ Keep reading SESSION_CONTEXT but only the Next-Priority section. **Rejected:** N
 
 ## Changelog
 
+- 2026-06-15 — Extension §loop-tightening (S260, research-build). Closes the loop: carried set reduced to `{PIN, NEXT[terminal]}`, boot-read set ≡ session-end-write set. Retires D1's Shipped-block carrier (script + boundary `git rm`'d, frozen-at-S248 the empirical trigger), retires STATUS narrative entirely, makes D2/D3/D4 span-snapshot moot. Per-terminal NEXT line + Edition on the PIN. Composes with (reduces) governance.35 to its PIN-self-derive remnant. Mike-directed. Plan: [[../plans/2026-06-14-boot-doc-architecture-restructure]] §loop-tightening.
 - 2026-05-30 — Initial draft (S248, research-build). Task 1 of [[../plans/2026-05-29-session-context-on-demand]]. Records the D1 premise correction discovered at execution (Shipped block was never a hook-emitted boot primitive + was moved out of the read window by governance.18(b)) — resolved by making the hook the Shipped-block carrier, same-commit with the read drop. Mike gave full-slice go-ahead.

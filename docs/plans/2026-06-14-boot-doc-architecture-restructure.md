@@ -155,6 +155,26 @@ Full read of MEMORY.md (154 lines). **governance.5 already moved gross project-s
 
 ---
 
+## Phase: loop-tightening (SHIPPED S260)
+
+**Mike-directed continuation of the on-demand thread: minimize what persists; make session-end uniform with boot — a full tight loop.** The redistribution (above) purified the *always-loaded* layers; this phase purifies the *carried-across-sessions* layer (SESSION_CONTEXT + the close→boot loop).
+
+**The finding.** Boot and session-end were asymmetric: boot read a git-log *copy* (the Shipped block) + the PIN; session-end wrote a STATUS narrative paragraph boot *never read* + regenerated the Shipped block. Two leaks — a copy read, a narrative written-and-ignored. The Shipped block was found **frozen at S248** (~11 sessions stale), proving the rule: a maintained copy of authoritative data rots.
+
+**The contract.** `boot-read set ≡ session-end-write set = {PIN, NEXT[terminal]}`. PIN = `Session | Day | Cycle | Edition` (declared sim-state). NEXT[terminal] = one authored line per terminal, what its next instance opens with. Everything else referenced on demand: shipped → `git log`, open → ROLLOUT, why → claude-mem. Persist a pointer, not a copy.
+
+**Shipped (one coherent pass):**
+- `SESSION_CONTEXT.md` restructured → PIN + 4 NEXT lines + reference sections; STATUS stack / stale Priority / Recent-Sessions / Shipped block dropped (git-preserved).
+- `session-startup-hook.sh` — drop Shipped-block awk extract+emit; add Edition to PIN; add per-terminal NEXT grep+emit; rewrite 4 greeting handoff lines. Syntax-checked + dry-run verified.
+- `writeShippedBlock.js` + `.claude/state/shipped-block-boundary` — `git rm`'d (retired). `sessionEndMechanical.js` — writeShippedBlock sub-step removed.
+- `/session-end` SKILL v2.2→v2.3, `/session-startup` SKILL, 4× TERMINAL.md §Session Close — conformed to the carried-set contract.
+- ADR-0009 extended with §loop-tightening (contract record + supersession of D1/D2/D3/D4).
+- governance.35 reduced to its PIN-self-derive remnant (engine-sheet follow-on).
+
+**Follow-ons (NOT this pass, filed to ROLLOUT):** (1) governance.35 remnant — engine-sheet self-derives the PIN's mechanical fields from `output/` (kills the C96-vs-C97 drift). (2) Cheap session-closer — once the structure proves out, a Sonnet agent runs the close (the tight contract leaves little judgment).
+
+---
+
 ## Absorbs / siblings
 
 - **Absorbs governance.32** (MEMORY.md role-scoped split) — becomes step 2 of this cascade.
@@ -165,4 +185,5 @@ Full read of MEMORY.md (154 lines). **governance.5 already moved gross project-s
 
 ## Changelog
 
+- 2026-06-15 (S260, research-build) — §loop-tightening phase shipped. Carried set reduced to `{PIN, NEXT[terminal]}`; boot-read ≡ session-end-write. Shipped block + STATUS narrative + writeShippedBlock retired; per-terminal NEXT + Edition-on-PIN added; ADR-0009 extended; governance.35 reduced. Mike-directed ("apply this, then make session-end uniform to match boot — a full tight loop"). Two follow-ons filed (gov.35 PIN-self-derive; Sonnet closer).
 - 2026-06-14 (S259, research-build) — Plan opened as the editable container per Mike "plan, not deploy." Grounded CLAUDE.md written to working tree (commit held) + old archived. Captures: empirical finding, change-vs-add mechanism, three-layer model, orphan-gap bottom-up sequencing, 5 open questions. No deploy until sequenced.

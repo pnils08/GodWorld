@@ -2,23 +2,28 @@
 // sessionEndMechanical.js — S229 governance.7
 //
 // Orchestrator that collapses the mechanical sub-steps of /session-end into a
-// single invocation. Upstream model steps (write journal, write SESSION_CONTEXT
-// STATUS paragraph, update ROLLOUT_PLAN) MUST run BEFORE this script so that
-// rotateJournalRecent picks up the new journal entry.
+// single invocation. Upstream model steps (write journal, update SESSION_CONTEXT
+// PIN + NEXT[terminal] line, update ROLLOUT_PLAN) MUST run BEFORE this script so
+// that rotateJournalRecent picks up the new journal entry.
 //
 // Per-terminal sub-step routing:
 //   - media (journal terminal — the only terminal that reads JOURNAL_RECENT at
 //     boot, so the only one the journal conditions; S249 governance.20):
-//       rotateJournalRecent → JOURNAL content-quality check → writeShippedBlock
+//       rotateJournalRecent → JOURNAL content-quality check
 //       → auditPlanTagDrift (informational) → cross-terminal stack check
 //       → [opt-in] SESSION_HISTORY rotation → pm2 restart
 //   - research-build / civic / engine-sheet (no journal):
-//       writeShippedBlock → auditPlanTagDrift (informational)
+//       auditPlanTagDrift (informational)
 //       → cross-terminal stack check → [opt-in] SESSION_HISTORY rotation
 //       → pm2 restart
 //
+// writeShippedBlock RETIRED (ADR-0009 §loop-tightening): the boot loop carries
+// {PIN, NEXT[terminal]} only; the git-log "## Shipped Last Session" block was a
+// stale duplicate of `git log`. The closing terminal updates the PIN + its NEXT
+// line by hand (model Step 2.2); nothing mechanical regenerates a shipped block.
+//
 // Sub-step failures classified:
-//   - Fatal: writeShippedBlock, rotateJournalRecent, SESSION_HISTORY rotation
+//   - Fatal: rotateJournalRecent, SESSION_HISTORY rotation
 //   - Informational (continues on non-zero exit): auditPlanTagDrift, JOURNAL
 //     content-quality (warning only — short journal on quiet days is OK)
 //   - Tolerant (warning, continues): pm2 restart, cross-terminal stack check
@@ -77,12 +82,12 @@ function usage() {
   --rotate-history    Opt-in. Move sessions older than the most-recent
                       ${KEEP_RECENT_SESSIONS} from SESSION_CONTEXT to SESSION_HISTORY.
   --dry-run           Report what each writing sub-step would do without writing.
-                      Note: rotateJournalRecent and writeShippedBlock have no
-                      native dry-run; they are skipped entirely in dry-run.
+                      Note: rotateJournalRecent has no native dry-run; it is
+                      skipped entirely in dry-run.
 
 Upstream model steps must run FIRST (in order):
   1. Journal entry appended to JOURNAL.md
-  2. SESSION_CONTEXT.md STATUS paragraph prepended + ROLLOUT_PLAN.md updated
+  2. SESSION_CONTEXT.md PIN + NEXT[terminal] line updated + ROLLOUT_PLAN.md updated
 
 If you run this BEFORE writing the journal, rotateJournalRecent picks up the
 prior session's entry and the new entry is silently absent from JOURNAL_RECENT
@@ -102,7 +107,7 @@ function printBanner(args, steps) {
   console.log(bar());
   console.log('Expected upstream model steps (in order, BEFORE this script):');
   console.log('  1. Journal entry appended to JOURNAL.md');
-  console.log('  2. SESSION_CONTEXT.md STATUS prepended + ROLLOUT_PLAN.md updated');
+  console.log('  2. SESSION_CONTEXT.md PIN + NEXT[terminal] line + ROLLOUT_PLAN.md updated');
   console.log('');
   console.log(`Mechanical sub-steps (${steps.length}):`);
   steps.forEach((s, i) => console.log(`  [${i + 1}/${steps.length}] ${s.name}`));
@@ -158,26 +163,6 @@ function subJournalQuality(args) {
   } catch (err) {
     console.log(`  ⚠ content-quality check error: ${err.message} — continuing`);
     return { ok: true };
-  }
-}
-
-// ---------------------------------------------------------------------------
-// Sub-step: writeShippedBlock
-// ---------------------------------------------------------------------------
-
-function subWriteShippedBlock(args) {
-  if (args.dryRun) {
-    console.log('  (dry-run) skipped: node scripts/writeShippedBlock.js');
-    return { ok: true };
-  }
-  try {
-    const out = execSync('node scripts/writeShippedBlock.js', { cwd: ROOT, stdio: 'pipe' });
-    out.toString().trim().split('\n').forEach(line => console.log('  ' + line));
-    console.log('  ✓ writeShippedBlock');
-    return { ok: true };
-  } catch (err) {
-    console.log(`  ✗ writeShippedBlock failed: ${err.message}`);
-    return { ok: false };
   }
 }
 
@@ -391,7 +376,6 @@ function buildSteps(args) {
     steps.push({ name: 'rotateJournalRecent', fn: subRotateJournalRecent });
     steps.push({ name: 'JOURNAL content-quality check', fn: subJournalQuality });
   }
-  steps.push({ name: 'writeShippedBlock', fn: subWriteShippedBlock });
   steps.push({ name: 'auditPlanTagDrift (informational)', fn: subAuditPlanTagDrift });
   steps.push({ name: 'cross-terminal git stack check (read-only)', fn: subStackCheck });
   if (args.rotateHistory) {

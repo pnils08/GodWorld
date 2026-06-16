@@ -31,7 +31,7 @@ If Mags identity is also lost (not just terminal context), run `/boot` first, th
 
 **If the SessionStart hook already injected a `<godworld-state>` block with `BOOT SEQUENCE (<terminal> terminal — ...)` for this session, the reads are already done — skip Steps 0–4 and go to Step 5 (orient).** Only run the full sequence when the godworld-state block is absent (hook genuinely misfired).
 
-Why: the hook routes the same boot reads (`docs/SCHEMA.md`, `docs/index.md`, `TERMINAL.md`) the skill steps below specify, and emits the `## Shipped Last Session` block directly (ADR-0009 — SESSION_CONTEXT.md is no longer a boot read; it's on-demand). Running both duplicates work. The skill is the *recovery path* for hook misfire — not a parallel boot. Source: `output/production_log_session-startup_c95_gaps.md` G-SS8.
+Why: the hook routes the same boot reads (`docs/SCHEMA.md`, `docs/index.md`, `TERMINAL.md`) the skill steps below specify, and emits the carried set (PIN + this terminal's NEXT line) directly (ADR-0009 §loop-tightening — SESSION_CONTEXT.md is on-demand, not a boot read). Running both duplicates work. The skill is the *recovery path* for hook misfire — not a parallel boot. Source: `output/production_log_session-startup_c95_gaps.md` G-SS8.
 
 ---
 
@@ -70,11 +70,11 @@ Per that TERMINAL.md's **Always Load** table. Each terminal's list differs:
 
 ### 4. Pull live span ONLY if continuing prior work (ADR-0009, S248)
 
-**SESSION_CONTEXT.md is on-demand — NOT read at boot.** Per ADR-0009, the SessionStart hook emits the `## Shipped Last Session` git-log block inside `<godworld-state>` as the mechanical boot handoff. That block is your "what just shipped" ground truth — no relearning. ROLLOUT_PLAN.md is canonical for what those commits accomplished + what's next.
+**SESSION_CONTEXT.md is on-demand — NOT read at boot.** Per ADR-0009 §loop-tightening, the SessionStart hook emits the carried set — the PIN (Session/Day/Cycle/Edition) + this terminal's `NEXT[<terminal>]` line — inside `<godworld-state>` as the boot handoff. That NEXT line is what this terminal's last instance left you. What shipped → `git log`; what's open → ROLLOUT_PLAN.md (canonical); why → claude-mem.
 
-Only read the live span if you are **continuing prior work** (Mike said "resume" / "continue <X>", or you're picking up a thread the Shipped block + ROLLOUT don't fully orient you on):
+Only read the file if you are **continuing prior work** (Mike said "resume" / "continue <X>", or you're picking up a thread the NEXT line + ROLLOUT don't fully orient you on):
 ```
-Read: SESSION_CONTEXT.md   (on-demand — the live span: STATUS paragraphs since last hard close)
+Read: SESSION_CONTEXT.md   (on-demand — PIN + per-terminal NEXT lines; no narrative since §loop-tightening)
 ```
 A fresh-but-pivoting session does not read it. (Pre-ADR-0009 this step was an unconditional ~80-line read; the contingent-relevance argument retired that — see ADR-0009.)
 
@@ -82,10 +82,10 @@ A fresh-but-pivoting session does not read it. (Pre-ADR-0009 this step was an un
 
 Three lines to Mike (no narration of what you read):
 - Terminal: {name}, Persona: {Full/Light/Stripped}
-- Last shipped: {one-line summary of the Shipped block — count + headline}
+- Opens on: {the NEXT line for this terminal — what last instance left}
 - What's first?
 
-If the Shipped Last Session block is empty (`No qualifying commits since previous boundary`), say so — that means the previous session ran without committing, or committed only the session-close commit.
+If the NEXT line is empty (hook emitted no `NEXT:`), say so — that means the previous session didn't write one; fall back to `git log` + ROLLOUT to orient.
 
 ---
 

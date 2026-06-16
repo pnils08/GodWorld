@@ -24,7 +24,7 @@ Inside tmux `godworld` session: this is **window 4** (`Ctrl-b 4`).
 |------|---------|
 | `CLAUDE.md` | Zero layer — identity, rules, terminal architecture, memory systems |
 | `.claude/rules/identity.md` | Non-negotiable behavioral rules (auto-loaded) |
-| `SESSION_CONTEXT.md` | **On-demand (ADR-0009, S248)** — NOT auto-read at boot. The hook emits the `## Shipped Last Session` block in `<godworld-state>`; pull the live span only when continuing prior work. |
+| `SESSION_CONTEXT.md` | **On-demand (ADR-0009, S248)** — NOT auto-read at boot. The hook emits the PIN + your `NEXT[civic]` line in `<godworld-state>`; pull the file only when continuing prior work. |
 | `.claude/terminals/civic/TERMINAL.md` | This file — your scope, your docs, your rules |
 
 ---
@@ -222,10 +222,11 @@ At session-close, Mike runs `/usage` and pastes the per-category breakdown (skil
 
 Use when the next civic session opens within minutes.
 
+**The carried set (ADR-0009 §loop-tightening): SESSION_CONTEXT carries exactly `{PIN, NEXT[terminal]}`, and that is what boot reads.** No STATUS paragraph, no Shipped block.
+
 1. **Cross-terminal git stack check.** `git log --oneline origin/main..HEAD` — expect empty.
-2. **`node scripts/writeShippedBlock.js`** — auto-regen the `## Shipped Last Session` block + boundary state file.
-3. **Prepend one-line STATUS to SESSION_CONTEXT.md tagged `[civic]`.** Form: `**STATUS (S<N> [civic] — soft close, chaining to S<N+1>):** N commits, see Shipped block. Detail: see commit bodies.`
-4. **Commit both** SESSION_CONTEXT.md + boundary file in one commit. Push.
+2. **Update the carried set in SESSION_CONTEXT.md** — the `**PIN:**` line (Session N→N+1, Day/Cycle/Edition as they changed) + your `**NEXT[civic]:**` line (one line: what next session opens with). Don't touch other terminals' NEXT lines.
+3. **Commit** SESSION_CONTEXT.md (with any work commits). Push.
 
 **Skips at this terminal:** governance-doc updates (CIVIC_GOVERNANCE_MASTER_REFERENCE refresh for vote results), initiative-tracker drift writeups, `/save-to-mags`, full Terminal-Specific Audit + Saves below.
 
@@ -239,14 +240,14 @@ Per S229 governance.7 the hard-close ritual collapsed from 13 steps to 4 model +
 
 ### Terminal-Specific Audit
 
-Read before Step 2 — surface any stale files in the STATUS paragraph or fix inline.
+Read before Step 2 — surface any stale files in the NEXT line or fix inline.
 
 | File | Check |
 |------|-------|
 | `output/production_log_city_hall_c*.md` | Production log complete? All voice agents ran? Clerk verified? |
 | `output/production_log_city_hall_c*_*_gaps.md` | Gap logs filed for any skill that surfaced inefficiency? |
 | `docs/mara-vance/CIVIC_GOVERNANCE_MASTER_REFERENCE.md` | Updated if council votes or initiative statuses changed? |
-| `SESSION_CONTEXT.md` | STATUS paragraph tagged `[civic]`? |
+| `SESSION_CONTEXT.md` | PIN refreshed + `NEXT[civic]` line updated? |
 
 ### Terminal-Specific Saves (Step 2 — model judgment)
 
@@ -255,7 +256,7 @@ Update during Step 2 of the slimmed SKILL alongside SESSION_CONTEXT + ROLLOUT:
 - **Production log** — ensure `production_log_city_hall_c{XX}.md` is complete with Mayor decision, faction responses, project agent updates, and clerk verification.
 - **Governance docs** — if votes happened or initiatives moved, update the master reference and initiative tracker.
 - **`/save-to-mags`** — save civic decisions, what the Mayor chose, how factions reacted, anything the media terminal needs for journalism. Tag with `[civic]`. Optional — model judgment.
-- **SESSION_CONTEXT.md STATUS paragraph** — what decisions were made, which initiatives moved, what's pending, tagged `[civic]`.
+- **SESSION_CONTEXT.md PIN + NEXT[civic] line** — refresh the PIN (Session/Day/Cycle/Edition); one NEXT line: what next session opens with. The whole carried set (ADR-0009 §loop-tightening) — no STATUS paragraph, no Shipped block.
 - **Flag for media terminal** — note in the production log what's ready for the newsroom. The civic production log is the media terminal's input.
 
-**Mechanical (Step 3) — auto-runs from `sessionEndMechanical.js --terminal=civic`:** `writeShippedBlock` + `auditPlanTagDrift` (informational, never fatal) + cross-terminal git stack check + opt-in `--rotate-history` SESSION_CONTEXT → SESSION_HISTORY rotation + `pm2 restart`. (No `rotateJournalRecent` / JOURNAL content-quality — civic has no journal; media-only per S249 governance.20, and the script auto-skips them for this terminal arg.) Plan: [[../../../docs/plans/2026-05-23-session-end-collapse]].
+**Mechanical (Step 3) — auto-runs from `sessionEndMechanical.js --terminal=civic`:** `auditPlanTagDrift` (informational, never fatal) + cross-terminal git stack check + opt-in `--rotate-history` SESSION_CONTEXT → SESSION_HISTORY rotation + `pm2 restart`. (`writeShippedBlock` RETIRED ADR-0009 §loop-tightening — carried set is `{PIN, NEXT[terminal]}`, hand-written in Step 2. No `rotateJournalRecent` / JOURNAL content-quality — civic has no journal; the script auto-skips them for this terminal arg.) Plan: [[../../../docs/plans/2026-05-23-session-end-collapse]].

@@ -28,7 +28,7 @@ These files define the project, your rules, and current state. Read at every boo
 | `CLAUDE.md` | Zero layer — identity, rules, terminal architecture, memory systems |
 | `.claude/rules/identity.md` | Non-negotiable behavioral rules (auto-loaded) |
 | `.claude/rules/engine.md` | Engine code rules — ctx.rng, write-intents, cascade deps + measure-twice discipline at top (auto-loaded on engine files) |
-| `SESSION_CONTEXT.md` | **On-demand (ADR-0009, S248)** — NOT auto-read at boot. The hook emits the `## Shipped Last Session` block in `<godworld-state>`; pull the live span only when continuing prior work. |
+| `SESSION_CONTEXT.md` | **On-demand (ADR-0009, S248)** — NOT auto-read at boot. The hook emits the PIN + your `NEXT[engine-sheet]` line in `<godworld-state>`; pull the file only when continuing prior work. |
 | `docs/engine/ENGINE_REPAIR.md` | Tactical defects tracker — open rows tell you what's broken (highest-touch doc this terminal) |
 | `.claude/terminals/engine-sheet/TERMINAL.md` | This file — your scope, your docs, your rules |
 
@@ -274,12 +274,13 @@ At session-close, Mike runs `/usage` and pastes the per-category breakdown (skil
 
 ### Soft close (~2 min) — chained-session cadence
 
-Engine-sheet typically commits as-it-goes; soft close is often near-no-op (cross-terminal stack already clean, Shipped block already accurate). Use when the next engine-sheet session opens within minutes.
+Engine-sheet typically commits as-it-goes; soft close is often near-no-op (cross-terminal stack already clean, PIN current). Use when the next engine-sheet session opens within minutes.
+
+**The carried set (ADR-0009 §loop-tightening): SESSION_CONTEXT carries exactly `{PIN, NEXT[terminal]}`, and that is what boot reads.** No STATUS paragraph, no Shipped block.
 
 1. **Cross-terminal git stack check.** `git log --oneline origin/main..HEAD` — expect empty given commit-as-you-go cadence.
-2. **`node scripts/writeShippedBlock.js`** — auto-regen the `## Shipped Last Session` block + boundary state file.
-3. **Prepend one-line STATUS to SESSION_CONTEXT.md tagged `[engine/sheet]`.** Form: `**STATUS (S<N> [engine/sheet] — soft close, chaining to S<N+1>):** N commits, see Shipped block. Detail: see commit bodies.`
-4. **Commit both** SESSION_CONTEXT.md + boundary file in one commit. Push.
+2. **Update the carried set in SESSION_CONTEXT.md** — the `**PIN:**` line (Session N→N+1, Day/Cycle/Edition + engine-version if deployed) + your `**NEXT[engine-sheet]:**` line (one line: what next session opens with — incl. any "smoke-test pending" deploy note). Don't touch other terminals' NEXT lines.
+3. **Commit** SESSION_CONTEXT.md (with any work commits). Push.
 
 **Skips at this terminal:** Boot Quick-State doc refreshes (ENGINE_MAP / STUB_MAP / LEDGER_AUDIT / LEDGER_HEAT_MAP / SPREADSHEET / SIMULATION_LEDGER), Terminal-Specific Audit table below, MD Gap Self-Audit (S201), PM2 restart, ROLLOUT_PLAN status sweep beyond rows touched this session.
 
@@ -291,7 +292,7 @@ Engine-sheet typically commits as-it-goes; soft close is often near-no-op (cross
 
 ### Hard close (~5-10 min) — end of day, multi-day break, or cold-pickup boundary
 
-The stripped-persona framing applies to hard close. Per S229 governance.7, the slimmed `/session-end` SKILL v2.0 runs: Step 0 detect terminal → **(SKIP Step 1 journal)** → Step 2 SESSION_CONTEXT STATUS + ROLLOUT updates + code-state audit → Step 3 `scripts/sessionEndMechanical.js --terminal=engine-sheet` → Step 4 commit & push. Plan: [[../../../docs/plans/2026-05-23-session-end-collapse]].
+The stripped-persona framing applies to hard close. Per S229 governance.7, the slimmed `/session-end` SKILL runs: Step 0 detect terminal → **(SKIP Step 1 journal)** → Step 2 SESSION_CONTEXT PIN + NEXT[engine-sheet] + ROLLOUT updates + code-state audit → Step 3 `scripts/sessionEndMechanical.js --terminal=engine-sheet` → Step 4 commit & push. Plan: [[../../../docs/plans/2026-05-23-session-end-collapse]].
 
 ---
 
@@ -311,9 +312,9 @@ The stripped-persona framing applies to hard close. Per S229 governance.7, the s
 |---|---|
 | 0 | **Detect terminal** — `tmux display-message -t "$TMUX_PANE" -p '#W'` |
 | 2a | **Code-state audit** (table below) |
-| 2b | **Update SESSION_CONTEXT.md** — engine version bump if deployed; STATUS paragraph tagged `[engine/sheet]` |
+| 2b | **Update SESSION_CONTEXT.md** — PIN refresh (engine version bump if deployed) + `NEXT[engine-sheet]` line (one line, what next session opens with). No STATUS paragraph, no Shipped block (ADR-0009 §loop-tightening) |
 | 2c | **Update ROLLOUT_PLAN.md** — phase statuses, move completed items to ROLLOUT_ARCHIVE |
-| 3 | **Run mechanical orchestrator** — `node scripts/sessionEndMechanical.js --terminal=engine-sheet` (auto-skips journal sub-steps; runs `writeShippedBlock` + `auditPlanTagDrift` (informational, never fatal) + cross-terminal git stack check + opt-in `--rotate-history` + `pm2 restart`) |
+| 3 | **Run mechanical orchestrator** — `node scripts/sessionEndMechanical.js --terminal=engine-sheet` (auto-skips journal sub-steps; runs `auditPlanTagDrift` (informational, never fatal) + cross-terminal git stack check + opt-in `--rotate-history` + `pm2 restart`. `writeShippedBlock` RETIRED — ADR-0009 §loop-tightening) |
 | 4 | **Commit & push** — the central act of this terminal (model writes message, reads Step 3 stack-check report, decides hold-push if other terminals stacked) |
 
 ### Terminal-Specific Audit

@@ -8,7 +8,7 @@ sources:
   - docs/engine/ROLLOUT_PLAN.md §engine.27 (filed S236 from canon.3 T12+T13 close)
   - docs/SUPERMEMORY.md §wd-* (consumer canon — 7 projections, ~966 cards)
   - docs/adr/0007-cross-layer-canon-authority-precedence.md §Rule 3 (wd-cards as derived projection)
-  - docs/plans/2026-05-24-canon-3-cross-layer-citizen-drift.md §T12+§T13 (empirical wd-projection-lag findings)
+  - docs/archive/plans/2026-05-24-canon-3-cross-layer-citizen-drift.md §T12+§T13 (empirical wd-projection-lag findings)
 pointers:
   - "[[../engine/ROLLOUT_PLAN]] §engine.27 — parent rollout row"
   - "[[../adr/0007-cross-layer-canon-authority-precedence]] — Rule 3 substrate framing"
@@ -27,7 +27,7 @@ pointers:
 
 **Pointers:**
 - Prior work: canon.3 T12 close commit `32fe5ce` (S236) + T13 close commit `19c875a` (S236) — both surfaced the wd-projection-lag pattern (sheet write lands → MCP returns sector peers / stale entity until manual rebuild)
-- Related plan: [[2026-05-24-canon-3-cross-layer-citizen-drift]] — the cross-layer citizen drift work whose closures exposed engine.27 as substrate debt
+- Related plan: [[../archive/plans/2026-05-24-canon-3-cross-layer-citizen-drift]] — the cross-layer citizen drift work whose closures exposed engine.27 as substrate debt
 - ADR substrate framing: [[../adr/0007-cross-layer-canon-authority-precedence]] §Rule 3 — wd-cards are derived projections of Sim_Ledger × bay-tribune; right now every derivation is manual
 
 **Acceptance criteria:**

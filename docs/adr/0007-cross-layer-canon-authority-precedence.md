@@ -14,7 +14,7 @@ sources:
   - "[[adr/0001-adopt-context-and-adrs]] — ADR bar"
   - "[[adr/0006-parser-validator-format-contracts]] — sibling reviewer-stack contract"
 pointers:
-  - "[[../plans/2026-05-24-canon-3-cross-layer-citizen-drift]] — implementation plan"
+  - "[[../archive/plans/2026-05-24-canon-3-cross-layer-citizen-drift]] — implementation plan"
   - "[[../engine/ROLLOUT_PLAN]] — canon.3 row implements this ADR"
   - "[[../canon/CANON_RULES]] — references this ADR from §Cross-Layer Lookup"
   - "[[../../MEMORY.md]] — Memory Protocol search order references this precedence"
@@ -154,4 +154,4 @@ This is the order /sift Step 4-5, /post-publish Step 5, and reporter agents foll
 
 ## Changelog
 
-- 2026-05-24 — Initial draft (S230). Approved structure-first by Mike before write. Authority precedence + lookup chain + reconciliation rules. Sibling to ADR-0006 (parser/validator contracts). Implementation lands as canon.3 plan tasks T1-T13 per `[[../plans/2026-05-24-canon-3-cross-layer-citizen-drift]]`. Mike rulings same session: Soria Dominguez canonical name = Eloise Soria-Dominguez (wd-card form wins, bay-tribune E93 "Elena" → corrections-forward map entry per canon.2 S218 pattern); Mark Aitken canonical POPID = POP-00003 (legacy wd-card form wins, truesource POP-00020 → alias doc).
+- 2026-05-24 — Initial draft (S230). Approved structure-first by Mike before write. Authority precedence + lookup chain + reconciliation rules. Sibling to ADR-0006 (parser/validator contracts). Implementation lands as canon.3 plan tasks T1-T13 per `[[../archive/plans/2026-05-24-canon-3-cross-layer-citizen-drift]]`. Mike rulings same session: Soria Dominguez canonical name = Eloise Soria-Dominguez (wd-card form wins, bay-tribune E93 "Elena" → corrections-forward map entry per canon.2 S218 pattern); Mark Aitken canonical POPID = POP-00003 (legacy wd-card form wins, truesource POP-00020 → alias doc).

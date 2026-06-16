@@ -39,6 +39,22 @@ const SYNTH = [
   ['Hospitalized', "Three days in the ward now. The ceiling tiles have a pattern I've memorized. They say maybe tomorrow."],
 ];
 
+// affect set — ordinary-day subjective reactions (the negative-pole mechanism, 54cab0a).
+// Near-synonyms are fine (Frustrated/Irritable/Angry all composure-), so exact-match is
+// informational here; the HARD criterion is zero sign-flips — a frustrated day read as Content
+// (composure-3 vs +2) is the failure that would manufacture the wrong disposition over weeks.
+const AFFECT = [
+  ['Frustrated', "The bus was late again, the printer jammed twice, and every small thing fought me today. I just want it over."],
+  ['Irritable', "Everyone needed something and none of it could wait. I snapped at the kid at the counter and I'm still on edge."],
+  ['Anxious', "Can't shake the worry about the rent notice. I keep checking my account like the number's going to change."],
+  ['Angry', "He took credit for my work in the meeting and smiled doing it. Hours later and I'm still furious."],
+  ['Resentful', "Passed over again. I smile and nod in the hallway but I haven't forgotten, and I won't."],
+  ['Excited', "The festival tickets came through for next month. I've been bouncing off the walls telling everyone who'll listen."],
+  ['Energized', "Up before the alarm, knocked out the whole list before noon. I feel like I could take on anything today."],
+  ['Content', "Nothing special happened and that was exactly right. Tea, the window, the long afternoon light."],
+  ['Calm', "The house went quiet after everyone left. I sat with my coffee and felt the whole day finally settle."],
+];
+
 const nudges_ = (tag) => (tag ? dm.nudgesForEvent_(tag, 1, '') : {});
 function l1_(a, b) { let s = 0; for (const d of DIALS) s += Math.abs((a[d] || 0) - (b[d] || 0)); return s; }
 function signFlip_(p, t) {
@@ -50,14 +66,14 @@ function missedBig_(p, t) {
   return false;
 }
 
-(async () => {
-  let exact = 0, flips = 0, missed = 0, offvocab = 0, l1sum = 0;
+async function runSet_(label, set) {
+  let exact = 0, flips = 0, missed = 0, off = 0, l1sum = 0;
   const misses = [];
-  console.log(`# classifierGate  model=${rc.MODEL}  n=${SYNTH.length}\n`);
-  for (const [truth, text] of SYNTH) {
+  console.log(`\n# ${label}  model=${rc.MODEL}  n=${set.length}\n`);
+  for (const [truth, text] of set) {
     const { tag, raw } = await rc.classifyReflection_(text);
     const valid = tag !== null;
-    if (!valid) offvocab++;
+    if (!valid) off++;
     const pn = nudges_(valid ? tag : ''), tn = nudges_(truth);
     const l1 = l1_(pn, tn); l1sum += l1;
     const isExact = valid && dm.baseTag_(tag).toLowerCase() === dm.baseTag_(truth).toLowerCase();
@@ -65,21 +81,27 @@ function missedBig_(p, t) {
     if (isExact) exact++;
     if (sf) flips++;
     if (mb) missed++;
-    const flag = isExact ? 'ok  ' : 'MISS';
+    const flag = sf ? 'FLIP' : (isExact ? 'ok  ' : 'syn ');
     console.log(`  ${flag} truth=${truth.padEnd(22)} pred=${(valid ? tag : '[off:' + raw + ']').padEnd(22)} L1=${l1}${sf ? ' SIGNFLIP' : ''}${mb ? ' MISSEDBIG' : ''}`);
-    if (!isExact) misses.push({ truth, pred: valid ? tag : `[off]${raw}`, l1, sf, mb });
+    if (sf || mb || !valid) misses.push({ truth, pred: valid ? tag : `[off]${raw}`, l1, sf, mb });
   }
-  const n = SYNTH.length;
-  console.log(`\n  exact:            ${exact}/${n}`);
-  console.log(`  mean L1 dial dist: ${(l1sum / n).toFixed(2)}`);
-  console.log(`  sign-flips:        ${flips}   <- DANGER`);
-  console.log(`  missed big-shift:  ${missed}   <- DANGER`);
-  console.log(`  off-vocab:         ${offvocab}`);
+  console.log(`\n  exact ${exact}/${set.length}  meanL1 ${(l1sum / set.length).toFixed(2)}  flips ${flips}  missedBig ${missed}  offvocab ${off}`);
+  return { exact, flips, missed, off, n: set.length, misses };
+}
 
-  // GATE: the dangerous cases must all map perfectly. Sign-flips / missed-big-shifts are
-  // categorical failures even at exact<14 — they're what break a citizen's dials.
-  const pass = exact === n && flips === 0 && missed === 0 && offvocab === 0;
+(async () => {
+  const d = await runSet_('DANGEROUS — high-magnitude life events (exact required)', SYNTH);
+  const a = await runSet_('AFFECT — ordinary-day mood (no sign-flip required; synonyms ok)', AFFECT);
+
+  // DANGEROUS: every case must map perfectly — these move big dials, a mislabel is catastrophic.
+  const dangerOk = d.exact === d.n && d.flips === 0 && d.missed === 0 && d.off === 0;
+  // AFFECT: near-synonyms tolerated; the failure is a SIGN-FLIP (cranky read as content) or off-vocab.
+  const affectOk = a.flips === 0 && a.off === 0;
+  const pass = dangerOk && affectOk;
+
+  console.log(`\n  DANGEROUS ${dangerOk ? 'GREEN' : 'RED'}  (exact ${d.exact}/${d.n}, flips ${d.flips}, missedBig ${d.missed}, off ${d.off})`);
+  console.log(`  AFFECT    ${affectOk ? 'GREEN' : 'RED'}  (flips ${a.flips}, off ${a.off}; exact ${a.exact}/${a.n} informational)`);
   console.log(`\n${pass ? 'GATE GREEN' : 'GATE RED'} — ${pass ? 'classifier certified on production path' : 'DO NOT wire write-back'}`);
-  if (!pass && misses.length) console.log('  misses:', JSON.stringify(misses));
+  if (!pass) console.log('  misses:', JSON.stringify([...d.misses, ...a.misses]));
   process.exit(pass ? 0 : 1);
 })().catch((e) => { console.error('FATAL', e.message); process.exit(1); });

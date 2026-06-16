@@ -84,6 +84,24 @@ var DIAL_MAP = {
   'youth-safety_awareness':  { composure: 3 },
   'youth-coming_of_age':     { openness: 4, drive: 2 },
 
+  // --- Affect / mood (SUBJECTIVE reaction — the citizen-loop classifier emits these at
+  //     WAKE-TIME from a reflection, engine.31 Phase 2; NO objective engine event emits them.
+  //     Deliberately slightly negative-weighted: ordinary objective days only ever push
+  //     composure UP (ambient below), leaving the negative pole empty (904 citizens: 0 volatile),
+  //     so these are the ONLY path to reach a cranky/anxious disposition from daily life. They
+  //     ride the lighter reflection severityMult, so a one-off fades and only a sustained mood
+  //     shifts the base — mood becomes temperament through repetition. GATE: write-back unwired
+  //     until the Phase-1 daily audit signs off; until then these are inert in the cycle. ---
+  'Frustrated':         { composure: -3 },
+  'Irritable':          { composure: -3 },
+  'Anxious':            { composure: -3 },
+  'Angry':              { composure: -4, warmth: -2 },
+  'Resentful':          { composure: -3, warmth: -2 },
+  'Excited':            { composure: 3, drive: 2 },
+  'Energized':          { composure: 2, drive: 2 },
+  'Content':            { composure: 2 },
+  'Calm':               { composure: 2 },
+
   // --- Ambient / daily life (small but NEVER zero — a quiet life IS a calm person) ---
   'Background':         { composure: 2 },              // ordinary days at park/home -> settled
   'Daily':              { composure: 2, family: 1 },   // quiet moment at home -> calm homebody

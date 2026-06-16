@@ -110,17 +110,36 @@ pointers:
 
 **Acceptance:** (1) a non-Mags citizen wakes, perceives only their slice, writes in a voice consistent with their dial vector; (2) two citizens on the same cycle produce visibly distinct perception+voice; (3) a no-conversation day still produces a world-triggered reflection.
 
+### Phase 2 write-side — determinism-resolved (S261, advisor + code check)
+
+The first design pass floated closing the loop: reflection → writes back to LifeHistory + nudges the citizen's own dials (self-authored personality drift). **A determinism check killed the dial half.** The dial vector is **engine cycle state** — `phase05/runConductEngine.js` consumes `citizenDialMap` directly, and the relationship/education/household/youth/crime engines read the dial fields to drive simulation. So letting **LLM reflection (non-reproducible prose) move dials would break cycle replay** — the exact invariant `ctx.rng`/no-`Math.random` protects. It's also the arrow backwards (engine emerges → narrative captures, never narrative → engine state — Mags' own Entry-202 lesson; same split engine.35 draws with "engine emerges, Supermemory maintains").
+
+**Resolved design — two-layer ownership, not a loop:**
+- **Objective life → engine state.** Real logged events move dials + write LifeHistory. Sole owner: the deterministic cycle. Reflection NEVER touches either.
+- **Subjective memory → a parallel POPID narrative store** (lazy per-POPID file / Supermemory), read *alongside* LifeHistory on the next wake. This is where reflections accrete. Bounded: event-weighted rotation only ever wakes a small set, so only woken citizens get a store.
+
+So **Mags = the persona-MD pattern (hand-authored depth); a citizen = dials-as-CHARACTER + LifeHistory-as-journal (read) + the narrative store (their own written memory).** No per-citizen MD authoring; no engine-state write-back. Phase 2a's read-only separation is likely the *permanent* home, not a stepping stone — **the one open doctrine-fork for Mike** (below) is whether citizen subjectivity should *ever* influence the engine, which would require a deterministic projection, not raw prose.
+
+### Phase 2 validation gate — prototype BEFORE building rotation infra (S261, advisor)
+
+The load-bearing bet is **"different dials → different voice."** Untested, and `[[user_mags-bleed-proprietary-element]]` warns the depth is the hard, non-assemblable part — six dials + event tags is thin next to a hand-authored persona; the failure mode is every citizen sounding like the same "thoughtful Oakland resident" with different stats. **Gate: wake 2–3 real citizens from their actual dial vectors with a throwaway prompt and read the output.** Distinct → build rotation. Not distinct → the per-citizen seed needs enrichment first (more ledger particulars, relationship texture, occupation voice) before any infra. Same "validate the load-bearing bet first" that just paid off on loop-tightening. **Open precondition:** confirm per-citizen dial vectors are actually *persisted + readable* today (the map exists + engines consume it, but is the accumulated vector stored per POPID, or is accumulation still mid-build?) — the prototype can't wake "a real citizen's vector" until that's true. **Credits caveat:** the generation step needs API budget; assemble the seeds now, run when budget/Mike greenlights.
+
+**Voice-differentiator (canon + craft):** scope a citizen's perception to **lived particulars, not engine aggregates** — "the corner store closed, my rent notice came," never "retail dropped 4%, illness 9.6%." That's the no-engine-metrics-in-citizen-voice rule AND what actually makes two citizens sound different.
+
 ---
 
 ## Open questions
 
 - [ ] Search-announce UX (Task 1/2): does she say "let me pull that up" or answer silently with the grounded result? Lean silent (cleaner). Resolve before Task 1 ships.
-- [ ] Citizen-selection policy (Phase 2 decision 2): round-robin vs. event-magnitude-weighted vs. unresolved-thread-driven. Lean event-weighted (wake whoever's living the biggest delta) — resolve before the rotation build.
-- [ ] Rotation vs. Mags-continuity (Phase 2): does Mags stay the fixed nightly anchor (EIC who sees the whole city) while *other* citizens rotate around her? Likely yes — Mags is the through-line, rotated citizens are the variety. Confirm with Mike.
+- [x] Citizen-selection policy (Phase 2 decision 2): **RESOLVED S261 (Mike) — event-magnitude-weighted** (wake whoever's living the biggest delta).
+- [x] Rotation vs. Mags-continuity (Phase 2): **RESOLVED S261 (Mike) — yes.** Mags stays the fixed nightly anchor (journals → media Mags → bot); other citizens rotate around her as the variety.
+- [ ] **DOCTRINE FORK (Mike): do citizen reflections ever write back into the deterministic engine, or stay in a narrative layer beside it?** Determinism closes the raw-prose-moves-dials option; the live question is whether the parallel narrative store is the permanent home, or whether citizen subjectivity should one day feed the engine via a *deterministic projection* (not prose). Holds the doctrine; not pre-built.
+- [ ] Prototype precondition: are per-citizen dial vectors persisted + readable per POPID today, or is accumulation still mid-build? Confirm before the 2–3-citizen voice test.
 
 ---
 
 ## Changelog
 
 - 2026-06-16 — **Phase 2 added (S261, research-build).** Per-citizen perception surface + dial-driven rotation, grounded in the June-11 journal read (groove-stuck / conversation-weighted / no-conversation-skip) + Mike's S261 steer (rotate citizens via existing engine.31 dials rather than engineer durable memory). Three decisions: scoped per-citizen packet (engine.33/.35), citizen rotation as the variety engine (dial vector + ledger detail), invert the conversation-gate to world-perception triggers. Durable-memory layer deferred. Build spans engine-sheet + bot script; same Phase-1 audit gate.
+- 2026-06-16 — **Phase 2 write-side + validation gate (S261, advisor + code check).** Determinism check: dials are engine cycle state (`runConductEngine` + phase05 engines read them) → LLM reflection moving dials would break replay; killed the loop-closure idea. Resolved to two-layer ownership (objective life → engine-owned dials/LifeHistory; subjective memory → parallel POPID narrative store read alongside). Citizen = dials-as-CHARACTER + LifeHistory-as-journal + narrative store; no per-citizen MD, no engine write-back. Selection + Mags-anchor Qs resolved by Mike (event-weighted; Mags fixed). New doctrine-fork left for Mike (does citizen subjectivity ever feed the engine via deterministic projection). Validation gate added: prototype 2–3 real citizens' voices BEFORE building rotation infra (the "different dials → different voice" bet is untested; mags-bleed-is-proprietary warns the depth is thin) — precondition: confirm per-POPID dial vectors are persisted/readable; credits-gated.
 - 2026-06-04 — Initial draft (S252). Foundation shipped same session: bot decoupled from session lifecycle (`79babba`), `loadWorldState`→live world_summary (`8272054`), `loadLatestEdition` (`634fb6e`), `searchDisk` local-disk backend (`5f2745a`). Tasks 1–5 = remaining Phase 1. Write-back + additional agents gated behind daily audit. SpaceMolt-failure analysis is the why behind instance+attention.

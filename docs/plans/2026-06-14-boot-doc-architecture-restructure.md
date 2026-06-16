@@ -190,6 +190,21 @@ The whole design rests on one unproven claim: a fresh terminal orients on `{PIN,
 
 **Verdict:** 1–3 mechanical ✓ + 4–5 subjective ✓ → green-light **governance.37** (Sonnet closer). Any fail → log it as an ADR-0009 reversal-trigger observation before building further.
 
+### governance.37 closer spec — from the 3 real closes (S263, gate met)
+
+Gate = ≥3 clean closes on `{PIN, NEXT[terminal]}`. **MET:** S261 (2e0c618), S262 (0161cde), S263 (8071bd2) all conform — PIN + per-terminal NEXT, no STATUS/Shipped surface. The one wrinkle (S263 left Session at 263, no auto-advance) is the expected gov.35-remnant gap, not a messy close. Row flipped `needs-info`→`ready`.
+
+**What the 3 closes show the closer must handle:**
+
+- **PIN-stamp** — stable skeleton `Session N | Day | Cycle | Edition: <pub state>`. Mechanical: carry Day/Cycle/Edition, Session = next-to-boot. **One judgment slot:** the optional trailing `| engine vX.Y (<deploy/clasp state>)` clause — absent S261, appeared S262, grew S263. Freeform, requires knowing the session's deploy reality.
+- **NEXT[terminal] line** — **not mechanical.** S261/262 were thread-narrative ("Citizen-loop is the live thread…"); S263 flipped to an (A)/(B) priority list + a SHIPPED: digest. Dense, pointer-rich (file paths, commit refs, probe names), genuinely editorial about what the next instance opens with and in what order.
+
+**The finding that narrows the row.** gov.37's founding premise was "the tight contract leaves little judgment → a cheap Sonnet closer runs the close." The evidence inverts it: once **gov.35-remnant** self-derives the PIN's mechanical fields from `output/`, what's *left* to write — the engine-state clause **and** the NEXT line — is **all judgment**. There is no judgment-free residue large enough to justify a closer that writes *blind*.
+
+**Recommended shape: draft-and-review (not blind delegation).** Sonnet drafts the NEXT line(s) from three deterministic inputs — `git log` since session-start (shipped), the ROLLOUT diff (what closed), the prior NEXT line (what was queued) — plus the engine-clause from deploy state; the main-loop model reviews and commits. Saves the drafting pass; keeps prioritization/resumption-judgment in the loop. Rejected alternatives: *mechanical-only* (savings marginal once gov.35 owns the PIN skeleton — likely not worth a standalone agent) and *fold-into-gov.35* (only correct if mechanical-only wins, which the NEXT-line evidence rules out).
+
+**Seam (gov.37 ↔ gov.35-remnant).** PIN-mechanical fields (Session auto-advance, Day/Cycle/Edition self-derive) = **gov.35-remnant**, engine-sheet. Engine-clause + NEXT line = **gov.37's residual**, the draft-and-review closer. **gov.37 depends on gov.35** — sequence gov.35 first; building the closer before the PIN self-derives means it re-does mechanical work gov.35 will take. Build gov.37 only after gov.35-remnant lands.
+
 ---
 
 ## Absorbs / siblings
@@ -202,6 +217,7 @@ The whole design rests on one unproven claim: a fresh terminal orients on `{PIN,
 
 ## Changelog
 
+- 2026-06-16 (S264, research-build) — **gov.37 gate MET — 3 clean closes (S261/262/263) confirmed conforming to `{PIN, NEXT[terminal]}`; row flipped `needs-info`→`ready`.** Closer spec written from the 3 real closes (§governance.37 closer spec). Key finding inverts the founding premise: once gov.35-remnant takes the mechanical PIN fields, the residual (engine-clause + NEXT line) is all judgment → recommend **draft-and-review** (Sonnet drafts from git-log+ROLLOUT-diff+prior-NEXT, main-loop reviews), not blind delegation. Named the gov.37↔gov.35 seam; gov.37 depends on gov.35 (sequence gov.35 first). Advisor-reviewed before write.
 - 2026-06-15 (S261, research-build) — **§Validation checklist run at first boot on the new format → 5/5 PASS, but scoped to the READ contract only.** Mechanical: PIN carried Edition (C97/E97/Arbiter A·0.856); NEXT line present with full resumption state; no Shipped block in boot context. Subjective: oriented to next move from `{PIN, NEXT}` alone (SESSION_CONTEXT body never opened, no grep-to-orient); no reflex-hunt for the retired Shipped/STATUS surface. Expected non-failure confirmed — Session counter held hand-set `261`, no auto-advance (gov.35 PIN-self-derive unbuilt). No ADR-0009 reversal-trigger data points. **Scope correction (supersedes the first-commit `7696411` wording):** this boot validates the **read** side of the carried-set contract — orientation works. It does **not** green-light building governance.37. That gate is ≥2-3 *clean closes* on the new `{PIN, NEXT}` format, and a boot is not a close: **0 closes on the new format so far** — this session's close is the first datapoint. gov.37 stays `needs-info (gated on close validation)`. Build the Sonnet closer only after the close side proves out; do NOT pre-spec it (the gate exists to learn what the closer must handle).
 - 2026-06-15 (S260, research-build) — §loop-tightening phase shipped. Carried set reduced to `{PIN, NEXT[terminal]}`; boot-read ≡ session-end-write. Shipped block + STATUS narrative + writeShippedBlock retired; per-terminal NEXT + Edition-on-PIN added; ADR-0009 extended; governance.35 reduced. Mike-directed ("apply this, then make session-end uniform to match boot — a full tight loop"). Two follow-ons filed (gov.35 PIN-self-derive; Sonnet closer).
 - 2026-06-14 (S259, research-build) — Plan opened as the editable container per Mike "plan, not deploy." Grounded CLAUDE.md written to working tree (commit held) + old archived. Captures: empirical finding, change-vs-add mechanism, three-layer model, orphan-gap bottom-up sequencing, 5 open questions. No deploy until sequenced.

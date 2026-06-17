@@ -107,7 +107,7 @@ These were checked against current code, not assumed:
   2. The mechanics are identical to the civic-voice path (reporter agent ↔ voice agent, Mags mediates turns, voice gets questions not preset answers) — only the subject-agent source dir changes.
   3. Update the does-NOT-do line: still no *generic* citizen/player interviews (those are dispatches), but **named Tier-1 character voice agents are now valid Mode 1 subjects.**
 - **Verify:** SKILL.md diff is additive; civic path unchanged; new class documented with the agent-dir convention.
-- **Status:** [ ] not started
+- **Status:** [x] DONE (S264) — `/interview` v2.0→v2.1. Additive: Mode 1 now documents two subject classes (civic + `citizen-voice-*`); Step 3 dispatch notes `subagent_type: citizen-voice-<slug>`; does-NOT-do narrowed to *generic* citizens with the named-character exception; v2.1 "What's new" + version/updated bumped. Civic path untouched. (Step 1 already anticipated citizen subjects via `matchCitizenToJournalist_`.)
 
 ### Task 1.2: Run the Deacon interview end-to-end
 - **Files:** `output/interviews/c{XX}_deacon_seymour_*` (transcript artifacts)

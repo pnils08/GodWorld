@@ -1,13 +1,17 @@
 ---
 name: interview
 description: Capture-only — transcript becomes canon. Articles framed off interview transcripts move downstream to /write-edition (next cycle, via /sift) or /write-supplemental (any time, sports-desk subagent dispatch against the canon transcript).
-version: "2.0"
-updated: 2026-05-24
+version: "2.1"
+updated: 2026-06-17
 tags: [media, active]
 effort: medium
 disable-model-invocation: true
 argument-hint: "[mode] [subject]"
 ---
+
+## What's new in v2.1 (2026-06-17, S264 research.16)
+
+**Mode 1 now accepts citizen voice agents, not just civic.** A new subject class — **named Tier-1 character voice agents** (`.claude/agents/citizen-voice-*`: Keane, Dillon, Seymour, Varek, …) — is a valid Mode 1 voice-interview subject, dispatched via `subagent_type: citizen-voice-<slug>`. The civic-voice path is unchanged. The old blanket "don't interview citizens or players" rule is narrowed: it still bars *generic* ledger citizens/players (those are dispatches/supplementals), but authored citizen-voice agents now have personas deep enough to interview. Built by `/make-citizen-voice` (research.16). See Mode 1 + Step 3 + What This Skill Does NOT Do.
 
 ## What's new in v2.0 (2026-05-24, S233 pipeline.30)
 
@@ -53,12 +57,12 @@ Interviews are different from dispatches and supplementals:
 
 ### Mode 1: Voice Interview (Agent-to-Voice)
 
-Reporter agent interviews a civic voice agent. Both are agents. Used for:
-- Mayor, Chief, council members, DA, project directors
-- When you want structured civic canon deepening
-- When a voice has unresolved tension from city-hall decisions
+Reporter agent interviews a **voice agent** — both are agents. Two subject classes:
 
-Setup is like city-hall — voice gets questions but not preset answers. Voice responds from their IDENTITY.md and recent decisions. They can go off-script — offer a revelation, push back on the question, change the subject.
+- **Civic voice agent** (`.claude/agents/civic-office-*`) — Mayor, Chief, council members, DA, project directors. Used for structured civic canon deepening, or when a voice has unresolved tension from city-hall decisions.
+- **Citizen voice agent** (`.claude/agents/citizen-voice-*`, research.16) — a **named Tier-1 character** speaking for themselves: a player on a milestone (a farewell season), an owner on a build, a manager on a transition. These are authored four-file personas (IDENTITY/LENS/RULES/SKILL) via `/make-citizen-voice`. **NOT generic citizens/players** — only authored `citizen-voice-*` agents qualify (generic ledger citizens stay dispatch/supplemental material).
+
+Setup is the same either way — the voice gets questions but not preset answers, responds from their IDENTITY.md (+ LENS/RULES for citizen voices) and recent canon, and can go off-script: offer a revelation, push back on the question, change the subject.
 
 Target length: 1200-1800 word transcript. (Articles off this transcript get their own length targets at their downstream skill — `/write-supplemental` typically 800-1800 words per its spec; `/write-edition` per-desk-slot lengths per its spec.)
 
@@ -193,7 +197,7 @@ Mags mediates — she is the reporter's brain between exchanges. Sequential turn
 
 1. Read the interview brief and reporter IDENTITY.md
 2. Ask Q1 — write it in the reporter's voice, append to transcript file
-3. Launch voice agent with just: their IDENTITY.md + the brief theme + the current transcript up to Q1
+3. Launch the subject voice agent with the brief theme + the current transcript up to Q1. **Civic voice** → its `civic-office-*` agent. **Citizen voice** → dispatch `subagent_type: citizen-voice-<slug>` (it boots its own IDENTITY/LENS/RULES — pass the theme + transcript + an `INTERVIEW TURN` framing; it returns only its spoken answer).
 4. Voice responds. Append their answer to the transcript.
 5. Read the answer. Decide: follow up or move to Q2?
    - If the answer opened a thread worth pulling, write a follow-up
@@ -343,7 +347,7 @@ Full chain: `/run-cycle` → `/city-hall-prep` → `/city-hall` → `/sift` → 
 - **Write articles.** Articles framed off interview transcripts come from `/write-edition` (next cycle via `/sift`) or `/write-supplemental` (sports-desk dispatch against the canon transcript). The S230 Mags-in-Hal article failure (G-I4) is why this skill is capture-only since v2.0.
 - **Substitute EIC-seat writing for sports-desk dispatch in Mode 2.** Every question + follow-up MUST come from a Task tool dispatch. Dispatch dies (quota kill per G-S2), the skill stops; no fallback writing from EIC seat. This is the non-negotiable G-I3 rule.
 - **Render PDFs or invoke `/edition-print`.** Transcript is canonical text; photos and PDF render belong to downstream framed articles, which run their own `/edition-print` against the framed article's `.txt`.
-- **Interview citizens or players** — that's a dispatch or supplemental with quotes, not an interview
+- **Interview *generic* citizens or players** — that's a dispatch or supplemental with quotes, not an interview. **EXCEPTION (research.16):** named Tier-1 character **citizen voice agents** (`.claude/agents/citizen-voice-*`) ARE valid Mode 1 subjects — they carry authored four-file personas. Generic ledger citizens/players do not qualify.
 - **Run without a theme** — every interview has a reason
 - **Publish without user approval** — Paulson interviews especially need the review gate
 - **Force answers** — subjects can refuse, pivot, or go off-script. That's the point.

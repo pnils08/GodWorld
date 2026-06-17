@@ -506,16 +506,13 @@ function buildNewspaperHtml(parsed, options) {
   html.push('  <div class="masthead-flag">The Bay Tribune</div>');
   html.push('  <div class="masthead-sub">' + mastheadSub + '</div>');
   var metaParts = [];
-  // G-PR17 (S215): fall back to today's formatted date when parser couldn't
-  // extract a masthead date from the .txt. Pre-fix, missing date silently
-  // produced "Oakland, California | Weather" with no publication date.
+  // Masthead date is the in-world calendar marker (season · Y-token) parsed
+  // from the header by editionParser. No real-world clock — if the header
+  // carries no marker the date is simply omitted. (S265 — removes the G-PR17
+  // new Date() fallback, which printed wall-clock dates once headers dropped
+  // the legacy "Month YYYY" token and parsed.date came back empty every run.)
   if (parsed.date) {
     metaParts.push(parsed.date);
-  } else {
-    var today = new Date();
-    var months = ['January','February','March','April','May','June',
-                  'July','August','September','October','November','December'];
-    metaParts.push(months[today.getMonth()] + ' ' + today.getDate() + ', ' + today.getFullYear());
   }
   metaParts.push('Oakland, California');
   if (parsed.weather) metaParts.push(parsed.weather);

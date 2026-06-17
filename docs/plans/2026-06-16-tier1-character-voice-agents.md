@@ -116,7 +116,7 @@ These were checked against current code, not assumed:
   2. Reporter (Anthony Raines — his canonical analyst per MCP) interviews the Deacon voice agent, Mags mediating per the skill.
   3. Capture the transcript.
 - **Verify:** transcript reads as Deacon (the listener who asks one precise question), not as a generic citizen or as Mags; canon-accurate.
-- **Status:** [ ] not started
+- **Status:** [x] DONE (S264) — voice-validation test run via direct agent dispatch (Anthony Raines, dynasty-twilight/Keane theme). Transcript: `output/interviews/c97_deacon_seymour_voicetest_transcript.md`. **PASS:** recognizably Deacon (learning-over-winning, behavior-over-box-scores, the one question = "who are you when it's hard and nobody's watching?"), zero canon violations, no engine language, declined to eulogize Keane in-character. Mike read + confirmed. (Task 1.1 — productionize the /interview amendment — still pending; this test proved the voice via direct dispatch without the full publish pipeline.)
 
 ---
 

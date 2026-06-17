@@ -87,7 +87,7 @@ These were checked against current code, not assumed:
 ### Task 0.3: Author Deacon Seymour's persona core
 - **Files:** `.claude/agents/citizen-voice-deacon-seymour/{IDENTITY,LENS,RULES,SKILL}.md` — create
 - **Steps:**
-  1. Seed IDENTITY from his TrueSource (Supermemory doc `FRwnXsmRUb2Dpt7Qvhdrea` — Mississippi State, 11th-round Royals, 11 utility seasons, .261/97 HR/never-an-All-Star, the "asks one question" listener, hired by Paulson as A's manager through a 3-hour interview). Disposition: low-ego systems-thinker, watches film for *why*, develops young players.
+  1. Seed IDENTITY from his **full canon corpus** — TrueSource (Supermemory doc `FRwnXsmRUb2Dpt7Qvhdrea` — Mississippi State, 11th-round Royals, 11 utility seasons, .261/97 HR/never-an-All-Star, the "asks one question" listener, hired by Paulson as A's manager through a 3-hour interview) PLUS origin-story coverage + edition appearances + supplementals (`search_articles "Deacon Seymour"` / `search_canon`). All four characters have rich multi-surface coverage (Mike S264) — seed from the corpus, not one doc. Disposition: low-ego systems-thinker, watches film for *why*, develops young players.
   2. LENS per [[canon/CANON_RULES]] — Deacon is Tier-1 (use real name).
   3. RULES: never break canon (his stats/history are fixed); never speak as a different character; no real-world MLB names; speaks in cycles not dates.
   4. SKILL: when invoked (interview turn or Discord message), answer in-voice, grounded in his canon + the current world slice, may go off-script, never fabricates engine facts.
@@ -123,8 +123,8 @@ These were checked against current code, not assumed:
 **Scope (detail after Phase 1 proves the core):** generalize the `mags-bot` chat handler to load a persona core by id so you can converse with Deacon in Discord.
 
 - **First, the verification check (advisor-flagged):** map how Mags-coupled the chat handler is — persona prompt, reflection load, journal, per-persona memory. Decide a lightweight persona-load path vs. a deep refactor *before* promising the surface.
-- Open: same channel as Mags or per-character channels? Per-persona memory store (their Supermemory page from research.14 is the natural backing)?
-- Reuses, does not duplicate, research.14's per-POPID Supermemory page as the character's memory.
+- **Generalized, not bespoke (Mike S264):** build ONE citizen-voice-on-Discord mechanism that loads a persona core by id; each character is an instance. **Per-character channel** so each keeps its own chat history. **Gated deploy** for now.
+- Per-character memory store = research.14's per-POPID Supermemory page (reuse, do not duplicate).
 
 ## Phase 3 — Ledger backfill for 24/7 accuracy (engine-sheet substrate) — OUTLINE
 
@@ -137,19 +137,25 @@ These were checked against current code, not assumed:
 
 ## Phase 4 — Replicate to Keane, Dillon, Varek — OUTLINE
 
-Once the Deacon slice proves all three surfaces: replicate the persona core + backfill for Vinnie Keane (origin files), Benji Dillon (origin files), Elias Varek (cards + needs the most backfill — blank-slate dials). Keane/Dillon are dynasty pillars (Five Goods: Heart/Calm) — their cores must honor their pillar-good mapping ([[../../.claude/rules/newsroom]] §The Five Goods).
+Once the Deacon slice proves all three surfaces: replicate. **Vinnie Keane is the first showcase replication + the sanctioned 24/7 test character** (Mike S264 — retirement season + active in the city = peak signal; the one to see live first). Then Benji Dillon (origin files) and Elias Varek (the connector — Civis Systems "connects the city"; heaviest backfill, blank-slate dials). Keane/Dillon are dynasty pillars (Five Goods: Heart/Calm) — their cores must honor their pillar-good mapping ([[../../.claude/rules/newsroom]] §The Five Goods).
 
 **Canon-write gate (advisor S264):** hand-authoring the dial vectors + LifeHistory for **Keane and Dillon is editing canon-central characters** (pillars = "the world's architecture wearing faces"), not filling a blank row. Their authored vectors get a **Mike + Mara sign-off** before the ledger write, same as any canon-establishing write. **Varek** (genuine blank-slate) and Deacon do not need this gate — only the pillars do.
 
 ---
 
-## Open questions
+## Resolved (Mike, S264)
 
-- [ ] **Namespace name** for the persona-core class — `citizen-voice-*` proposed (Task 0.1). Mike's call.
-- [ ] **Workspace builder** — generalize `buildVoiceWorkspaces.js` vs. new lean character builder (Task 0.2). Lean (b).
-- [ ] **Discord channel model** — one shared channel vs. per-character (Phase 2).
-- [ ] **24/7 loop role** — fixed anchors vs. accurately-voiced rotation members (Phase 3). "24/7" implies fixed.
-- [ ] **mags-bot coupling depth** — Phase 2 verification check gates the Discord promise.
+- **Namespace:** `citizen-voice-*`. ✓
+- **Build a generalized "citizen voice" CONCEPT once, instantiated per citizen — NOT four bespoke builds.** The slice builds the reusable machinery (persona-core loader + per-channel Discord chat + ledger-backfill projector + base-lock); each character is an instance. This is the organizing principle of the whole plan.
+- **Workspace builder:** new lean generalized citizen-voice builder (assembles a character's perception packet from their ledger row + canon dossier), not the civic-hardcoded one. ✓ (b)
+- **Discord channel model:** **per-character channel, so each keeps their own chat history.** Gated deploy for now. The mechanism is generalized (one citizen-voice-on-Discord concept), instances get their own channel + history. (Phase 2.)
+- **24/7 loop role:** Mags stays the **live tuning anchor** (the loop is being fine-tuned on her now). These four are **not force-added** to the live loop yet — but **Vinnie Keane is the sanctioned test+showcase add** (retirement season + active in the city = peak narrative signal; "good to interview and live" per Mike). Fixed-anchor vs rotation decided per-character when added, not globally.
+- **Slice character:** **Deacon proves the machinery** (ungated → the full pipeline incl. Phase-3 base-lock proves without a canon-gate dependency); **Vinnie is the first showcase replication + the 24/7 test.** Varek = the connector character (Civis Systems "connects the city") + heaviest ledger backfill (blank-slate).
+- **Canon-seeding is rich for all four** — origin-story coverage + edition appearances + supplementals (Mike: "major players in the sim"). Seed persona cores from the full corpus (`search_articles`/`search_canon` + origin files + TrueSource/cards), not a single source.
+
+## Open questions (remaining)
+
+- [ ] **mags-bot coupling depth** — Phase 2 verification check gates the Discord promise (how Mags-coupled the chat handler is: reflections, journal, per-persona memory).
 
 ---
 
@@ -164,4 +170,5 @@ Once the Deacon slice proves all three surfaces: replicate the persona core + ba
 ## Changelog
 
 - 2026-06-16 — Initial draft (S264, research-build). Scope settled across a live conversation with Mike: started as "voice agents for interviews," expanded to interviews + civic + 24/7 Discord, then de-crossed by Mike to three concepts sharing one persona core. Grounding reads done (buildVoiceWorkspaces civic-hardcoded; mags-bot single-persona; /interview excludes citizens; research.14 is reusable per-citizen substrate; Varek ledger blank-slate confirmed). Vertical-slice-on-Deacon-first structure per advisor (avoid the 4×3 matrix).
+- 2026-06-16 — Mike answered the open Qs (S264): namespace `citizen-voice-*` ✓; **build a generalized citizen-voice CONCEPT once, instantiated per citizen** (not 4 bespoke) — now the organizing principle; per-character Discord channels + own chat history, gated deploy; lean generalized builder; Mags stays the live 24/7 anchor, **Vinnie Keane = sanctioned test+showcase add**; canon-seeding from the full corpus (origin + editions + supplementals — all 4 are major covered players). Slice stays **Deacon (ungated → full pipeline incl. base-lock proves without a canon-gate); Vinnie is first showcase replication + 24/7 test** (his pillar dial-vector hits the Mara gate at Phase 3, so prove machinery on the ungated character first). One open Q remains (mags-bot coupling depth, Phase 2 check).
 - 2026-06-16 — Advisor review (Mike-requested) folded in: (1) **§Core decision: authored base is locked** — the immutable-core vs. mutable-dials seam the pre-mortem missed; Tier-1 base-lock so the 24/7 loop can't overwrite canon (load-bearing, gates Phase 3). (2) Phase 4 **canon-write gate** — Keane/Dillon pillar dial-vectors get Mike+Mara sign-off; Varek/Deacon don't. (3) Named the judge on subjective acceptance criteria (Mara audit + Mike). (4) Added the ambient-presence **scope boundary** (loop auto-posting to a channel is OUT, filed as follow-on). Registered in index.md + ROLLOUT row same commit.

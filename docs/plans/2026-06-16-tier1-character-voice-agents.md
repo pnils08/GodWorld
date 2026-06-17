@@ -76,7 +76,7 @@ These were checked against current code, not assumed:
   1. Adopt the four-file pattern (IDENTITY / LENS / RULES / SKILL) from [[engine/INSTITUTIONAL_VOICE_AGENTS]], **reshaped for an individual person** (not an institution reacting to civic events). IDENTITY = who they are (canon biography + disposition); LENS = canon-tier framework ([[canon/CANON_RULES]] three-tier); RULES = voice/behavior guardrails; SKILL = what the agent does when invoked (answer in-voice, grounded, no fabrication).
   2. Pick the namespace. Proposed: `.claude/agents/citizen-voice-<name>/` (broader than "sports" — Varek is business/ownership; future Tier-1 citizens can join). **Open question for Mike — namespace name.**
 - **Verify:** decision recorded in plan; namespace dir chosen.
-- **Status:** [ ] not started
+- **Status:** [x] DONE (S264) — namespace `citizen-voice-*` adopted (Mike ✓); `.claude/agents/citizen-voice-deacon-seymour/` created. Four-file shape reshaped from the civic-institution pattern → individual-in-conversation (IDENTITY = canon bio+disposition+voice; LENS = perception+Tier-1; RULES = voice/canon/invention + per-surface behavior; SKILL = boot + 3-surface dispatch).
 
 ### Task 0.2: Resolve the workspace-builder question
 - **Files:** `scripts/buildVoiceWorkspaces.js` (read); decision in plan
@@ -84,7 +84,7 @@ These were checked against current code, not assumed:
   1. Decide: (a) generalize `buildVoiceWorkspaces.js` to a non-civic subject config, or (b) a new lean `buildCharacterVoiceWorkspace.js` that assembles a character's perception packet (their ledger row + LifeHistory tail + relationships + recent canon appearances). Lean toward (b) — the civic builder's domain-routing (civicLoad/hookDomains) is dead weight for a person.
   2. The character workspace needs: persona core files + canon dossier (TrueSource / origin files / MCP card) + recent appearances (`search_articles`/`search_canon`). NOT civic engine data.
 - **Verify:** builder approach chosen; input list enumerated.
-- **Status:** [ ] not started
+- **Status:** [~] DEFERRED to when first needed — the interview slice (Phase 1) doesn't need the workspace builder (the agent reads its own four files + the handed-in brief). The lean builder earns its keep when assembling the *perception packet* for the 24/7 wake (Phase 3) and Discord context (Phase 2). Approach confirmed: new lean `buildCitizenVoiceWorkspace.js`, not the civic-hardcoded one (Mike ✓).
 
 ### Task 0.3: Author Deacon Seymour's persona core
 - **Files:** `.claude/agents/citizen-voice-deacon-seymour/{IDENTITY,LENS,RULES,SKILL}.md` — create
@@ -94,7 +94,7 @@ These were checked against current code, not assumed:
   3. RULES: never break canon (his stats/history are fixed); never speak as a different character; no real-world MLB names; speaks in cycles not dates.
   4. SKILL: when invoked (interview turn or Discord message), answer in-voice, grounded in his canon + the current world slice, may go off-script, never fabricates engine facts.
 - **Verify:** four files exist; a cold read of IDENTITY.md conveys a recognizably specific person.
-- **Status:** [ ] not started
+- **Status:** [x] DONE (S264) — all four authored at full depth from his TrueSource + edition coverage. Disposition section in IDENTITY doubles as the source-of-truth for the Phase-3 dial backfill. Voice anchored on his canon line "That's the job. We watch." Pending Mike's eyeball + the Phase-1 interview as the empirical voice test.
 
 ---
 

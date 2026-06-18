@@ -61,6 +61,12 @@ creds.json
 # Stray Node.js scripts in root
 post_cycle_review.js
 
+# Test harnesses (plain-node, use require() — break Apps Script load if pushed).
+# lib/ and scripts/ are dir-ignored above; this catches utilities/ + any future
+# dir. Root cause of the C98 run crash: utilities/neighborhoodPulseMap.test.gs
+# threw "ReferenceError: require is not defined" at load (engine.33 deploy S257).
+**/*.test.js
+
 # Python virtual environments
 .venv/**
 venv/**

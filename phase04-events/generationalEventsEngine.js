@@ -1072,7 +1072,7 @@ function generateGenerationalSummary_(ctx) {
 // ============================================================
 
 function applyMilestone_(ctx, row, iLife, iLastU, milestone, name, popId, neighborhood, cycle, cal) {
-  var stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
+  var stamp = "C" + cycle;  // ES-1 step 2 engine-side (S264): in-world cycle anchor in col-O string, not wall-clock. Pairs with the S259 prefix-robust card half. LifeHistory_Log below keeps its structured Timestamp/Cycle cols.
   var existing = row[iLife] ? row[iLife].toString() : "";
   var line = stamp + " — [" + milestone.tag + "] " + milestone.description;
 

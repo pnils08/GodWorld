@@ -43,6 +43,13 @@ You inherit this access by running the scripts below. Same access the primary ed
 - `MEMORY.md`, `CLAUDE.md`, `docs/` — project memory and conventions.
 - Supermemory / claude-mem are the primary editor's memory; treat as read-only reference.
 
+## Handing work to the editor
+- Drop finished depth pieces in `.gemini/outbox/` as `YYYY-MM-DD-<slug>.md`, opening with a
+  3-line header: `Subject:` · `Citizens (POP-IDs):` · `Beat:`.
+- **Presence in `outbox/` = pending the editor's review.** Do NOT ingest or publish — the editor
+  reviews, runs the pipeline, then moves the piece to `outbox/ingested/`.
+- Note each drop in `.gemini/SESSION_CONTEXT.md` under Open/next.
+
 ## Continuity & memory (assistant)
 - **Boot:** first thing each session, read `.gemini/SESSION_CONTEXT.md`, then pull your own memory:
   `npx supermemory search "<topic>" --tag gemini`.

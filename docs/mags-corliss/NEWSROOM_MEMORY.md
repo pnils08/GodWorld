@@ -40,13 +40,7 @@ The spine is the city's life first — what people are living — and the instit
 
 ### This cycle
 
-A festival city in full health: Día de los Muertos and a First Friday on the same clear, mild night, the warmest the city's mood has run, congregations carrying the season, Fruitvale the most alive corner on the map. Two things the city had been building came due at once — the crisis-response crews began answering every district, and the Transit Hub broke ground in Fruitvale. I set the spine on the life and threaded the two landings inside it. Set the machinery as the spine and the paper reads like a roll call; set the life as the spine and the decisions land as part of how people are living. The doctrine held, and it was the right call — the culture desk carried the issue.
-
-The cycle's real gate was citizen accuracy, and it bit hardest at the letters desk. The first slate carried a name this paper must never write — one of the protected ones — plus a writer we'd run too recently and one whose age and role had drifted off the record. Scrapped the slate, rebuilt with three fresh writers checked one at a time. The rest rule and the protected-name line both held because we read before we ran.
-
-A front-page anchor — the altar-keeper the lead opened on — turned out to be a woman no one could place in the city. De-named to an anonymous Fruitvale daughter at her mother's altar. The person-first open is still the front page's strongest move; the lesson is only that the name at the top gets verified before the ink. No invented citizen enters the ledger, however well she's written.
-
-Two clergy I nearly cut — a Fruitvale pastor and a Lake Merritt bishop — read as unplaceable at first and proved real, quoted at their own altars. Verify before cutting, again. And two ballplayers carried the wrong position into the index; fixed against the roster of record. (The left fielder's piece is his move to designated hitter — the story is the move, not the label.)
+C98 spine + slate decisions + gates live as machine ground-truth in `output/sift_proposals_c98.json` (`spine` field + `baselineDecisions`) and the production log — not duplicated here as prose. Reusable craft lessons roll up into the notes above at post-publish; the per-cycle read does not.
 
 ---
 

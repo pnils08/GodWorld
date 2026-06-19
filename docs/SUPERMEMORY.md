@@ -7,9 +7,9 @@ Legacy GodWorld org ($19/mo) is dead — 57k junk memories. Old API key (`sm_atk
 
 ---
 
-## The Containers (updated S262)
+## The Containers (updated S264)
 
-**Six active + one legacy.** Active: `mags`, `bay-tribune`, `world-data`, `super-memory`, `mara`, `citizen-pages` (S262 — citizen-loop per-citizen narrative store). Legacy: `sm_project_godworld` (57k junk memories on the old GodWorld org — never read, never written to, left in place until the old org is fully deprecated).
+**Seven active + one legacy.** Active: `mags`, `bay-tribune`, `world-data`, `super-memory`, `mara`, `citizen-pages` (S262 — citizen-loop per-citizen narrative store), `gemini` (S264 — the `agy` assistant's own session memory; agy **writes here only**, reads `mags`/`bay-tribune`/`world-data` for depth via `.gemini/search-all.sh`, never writes to them — write-isolation prevents the cross-container contamination that hit `mags`/`bay-tribune` in S156). Legacy: `sm_project_godworld` (57k junk memories on the old GodWorld org — never read, never written to, left in place until the old org is fully deprecated).
 
 ### `mags` — The Deliberate Brain
 

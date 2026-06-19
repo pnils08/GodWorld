@@ -33,6 +33,21 @@ You inherit this access by running the scripts below. Same access the primary ed
 - `MEMORY.md`, `CLAUDE.md`, `docs/` — project memory and conventions.
 - Supermemory / claude-mem are the primary editor's memory; treat as read-only reference.
 
+## Continuity & memory (assistant)
+- **Boot:** first thing each session, read `.gemini/SESSION_CONTEXT.md`, then pull your own memory:
+  `npx supermemory search "<topic>" --tag gemini`.
+- **Search everything (one command):** `.gemini/search-all.sh "<query>"` sweeps all your readable
+  containers — `gemini` (your own), `mags`, `bay-tribune`, `world-data` — grouped output.
+  Single container: `npx supermemory search "<query>" --tag <container>` (`--tag` takes one per call).
+  claude-mem and the GodWorld MCP `search_everything` are bound to the primary editor's session and are
+  NOT reachable here — use `search-all.sh` / Supermemory instead.
+- **Persist your memory — writes go ONLY to `gemini`:** at session close, distill what you
+  did / decided / what's next and store it:
+  `npx supermemory remember "<distilled memory>" --tag gemini`.
+  NEVER write to `mags` / `bay-tribune` / `world-data` — those are read-only for you; writing to
+  them contaminates the primary editor's memory.
+- Also keep `.gemini/SESSION_CONTEXT.md` current (short handoff) before you stop.
+
 ## Guardrails
 - Never `git push`. Never run destructive ops (rm, ledger writes, Drive deletes) without
   an explicit human go-ahead in the same session.

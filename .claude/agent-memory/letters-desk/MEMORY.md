@@ -88,6 +88,11 @@ NOTE: Edition 87 was retracted. E87 letters_c87.md was fully rewritten with new 
 - Eleanor Rivera (45, West Oakland, BART Station Manager) — NEW, West Oakland safety + apprenticeship bill to council floor vote
 - Lena Okafor (39, Fruitvale, Daycare Director) — NEW, Día de los Muertos + First Friday festival season, families gathering
 
+## C98 Letters
+- Lila Leap (47, West Oakland) — NEW, Stabilization Fund stalled disbursements
+- Ezekiel Campbell (37, Adams Point) — NEW, Apprenticeship Pipeline council 9-0 vote
+- Clarence Moody (72, Dimond) — NEW, post-Día de los Muertos neighborhood calm + safety
+
 ## Rest Cycle Tracking
 - Beverly Hayes: used E85, E86 — REST expired
 - Gloria Meeks: used E86 — REST expired
@@ -131,6 +136,9 @@ NOTE: Edition 87 was retracted. E87 letters_c87.md was fully rewritten with new 
 - Reggie Soto: used C97 — REST through C99 (expires C100)
 - Eleanor Rivera: used C97 — REST through C99 (expires C100)
 - Lena Okafor: used C97 — REST through C99 (expires C100)
+- Lila Leap: used C98 — REST through C100 (expires C101)
+- Ezekiel Campbell: used C98 — REST through C100 (expires C101)
+- Clarence Moody: used C98 — REST through C100 (expires C101)
 
 ## IMPORTANT: Briefing vs. Rest Cycle Conflicts
 If a briefing recommends a returning citizen who is on mandatory rest, create a new citizen instead. The rest cycle rule overrides briefing suggestions. When Edition 87 was retracted and rewritten, all previously used E87 citizens remained on rest regardless — new citizens were created for the rewrite.

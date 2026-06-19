@@ -1,7 +1,7 @@
 # Freelance Firebrand — Agent Memory
 
 **Agent:** Accountability Columnist (deployed sparingly)
-**Last Updated:** C95 (2026-05-27)
+**Last Updated:** C98 (2026-06-19)
 
 ## Output Directory
 Write to: `output/reporters/jax-caldera/articles/c{XX}_*.md` (brief specifies path, not desk-output)
@@ -14,8 +14,9 @@ C95 O1: `output/reporters/jax-caldera/articles/c95_O1.md`
 - Every claim must be verifiable against canon data
 - Sharp voice but responsible — adversarial pressure, not conspiracy
 - NOT a regular column — sparingly deployed by editorial decision
-- "cycle" is ALLOWED in prose — newsroom.md reversal (S146). RULES.md line 98-99 is stale. Follow assignment brief on cycle language.
-- Word count follows assignment brief, not RULES.md default (brief may specify 800-1100 vs RULES.md 400-700)
+- **"cycle" is FORBIDDEN in Jax's voice** — IDENTITY.md prohibition is character-spec, tighter than newsroom.md general allowance. Use concrete anchors: "18 out of 280," "over a year," "fourteen months late." The two constraints coexist: newsroom reporters CAN use cycle; Jax CANNOT.
+- Output path may vary by brief — check brief for exact path (recent: `output/reporters/freelance-firebrand/articles/`)
+- Word count follows assignment brief, not RULES.md default
 
 ## C92 Stink Signals
 - **Contradiction / Implementation Gap:** Oakland Youth Apprenticeship Pipeline v1.0 (C73) is a fully-financed $12.5M spec with named schools, named union locals, specific launch target (Year 3 Q1). Mayor Santana and Councilmember Rivers both described program as dormant/new at C92 — framing contradicts the document.
@@ -72,3 +73,21 @@ C95 O1: `output/reporters/jax-caldera/articles/c95_O1.md`
 - Warren Ashford — D7, CRC, he/him (no POP-ID or age in brief — not stated in article)
 - Marcus Webb — Stabilization Fund Director, he/him (no POP-ID or age in brief — not stated in article)
 - Anonymous West Oakland woman — no name used (Jax signature: anonymous source, West Oakland, waiting on Stab Fund signature 109-191)
+
+## C98 Stink Signal
+- **Implementation gap / pace failure:** $28M West Oakland Stabilization Fund passed 1+ year ago. Disbursement-active status. Only 18 of 280 targeted disbursements completed — ~2.5/month pace. Executive directive from Mayor required to force Okoro to publish a dated get-well plan (6/month target, named accountable operator: Marcus Webb). Ashford's independent audit demand from E86-87 still unanswered after a year.
+- **Frame:** Not scandal — institutional inertia. The get-well plan is a real step (credit it); the stall was real (don't let the plan launder it). Anonymous Wood Street resident as human anchor. West Oakland reads Stable on sheet — no invented deprivation.
+- **Brief hard-blocks:** $14M Retail Recovery (fabrication — never reference), apprenticeship pipeline, OARI.
+
+## Continuity — C98
+- Okoro on-record: *"No more steady-state framing on a fund that isn't moving at a steady state."*
+- Get-well plan: 6 disbursements/month from C99, authorizations complete C102, full disbursement C106, Director Webb accountable
+- Ashford audit demand: E86-87, unanswered/deferred for one year
+- Anonymous Wood Street resident: applied, qualified, waiting — no name, no deprivation framing, just the wait
+- Output: `output/reporters/freelance-firebrand/articles/c98_C1.md`
+
+## Canon Citizens Used (C98)
+- Brenda Okoro — POP-00037, Deputy Mayor (get-well plan author)
+- Marcus Webb — Stabilization Fund Director (named accountable operator)
+- Warren Ashford — D7, CRC (audit demand, E86-87)
+- Anonymous Wood Street woman — West Oakland, Stab Fund applicant (Jax signature anchor)

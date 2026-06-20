@@ -188,17 +188,43 @@ function improvementMetric(pattern) {
   return isFinite(delta) ? { metric: dk, delta } : null;
 }
 
-const fmtDelta = (x) => '+' + Number(x).toFixed(2);
+// the metric a decay (math-imbalance) pattern moved, SIGN PRESERVED (negative).
+// math-imbalance carries decaySignals like ["Sentiment -0.450","RetailVitality
+// -3.96"]; cluster on the Sentiment signal — the citywide-mood metric present
+// across hoods — falling back to the first parseable signal. null = not a
+// collapsible decay. (S265 ES-4, C98 G-RC5: these never collapsed and each got
+// a positive WHY anchor on a declining hood.)
+function decayMetric(pattern) {
+  if (pattern.type !== 'math-imbalance') return null;
+  const sigs = (((pattern.evidence || {}).fields) || {}).decaySignals;
+  if (!Array.isArray(sigs) || !sigs.length) return null;
+  const parsed = sigs.map((s) => {
+    const m = String(s).match(/^([A-Za-z]+)\s+(-?\d+(?:\.\d+)?)/);
+    return m ? { metric: m[1], val: parseFloat(m[2]) } : null;
+  }).filter(Boolean);
+  if (!parsed.length) return null;
+  const pick = parsed.find((x) => /sentiment/i.test(x.metric)) || parsed[0];
+  return isFinite(pick.val) ? { metric: pick.metric.toLowerCase(), delta: pick.val } : null;
+}
 
-// build a single citywide synthesis intent from a cluster of per-hood improvement intents
-function synthCitywide(members, metric, cycle, cycleCtx) {
-  // deterministic: delta desc, then neighborhood name
-  const sorted = members.slice().sort((a, b) => (b.delta - a.delta) || a.neighborhood.localeCompare(b.neighborhood));
+// Sign-aware delta formatter — "+0.11" for a lift, "-0.45" for a decay. Identical
+// to the old '+' + toFixed for non-negative values, so improvement output is
+// unchanged; correct for the decay pole (S265 ES-4). (Old form printed "+-0.45".)
+const fmtDelta = (x) => (Number(x) < 0 ? '' : '+') + Number(x).toFixed(2);
+
+// build a single citywide synthesis intent from a cluster of per-hood intents.
+// pole = 'improvement' (lift) | 'decay' (cooldown) — drives verb, sign, and a
+// sign-coherent WHY anchor (S265 ES-4).
+function synthCitywide(members, metric, cycle, cycleCtx, pole) {
+  const decay = pole === 'decay';
+  // deterministic: improvement largest-lift-first, decay most-negative-first; then name
+  const sorted = members.slice().sort((a, b) =>
+    (decay ? (a.delta - b.delta) : (b.delta - a.delta)) || a.neighborhood.localeCompare(b.neighborhood));
   const hoods = sorted.map((m) => m.neighborhood);
   const deltas = sorted.map((m) => m.delta);
   const avg = deltas.reduce((s, d) => s + d, 0) / deltas.length;
   const min = Math.min(...deltas), max = Math.max(...deltas);
-  const metricLabel = metric.replace(/Delta$/, ''); // "sentiment"
+  const metricLabel = metric.replace(/Delta$/, '').toLowerCase(); // "sentiment"
   const range = (min === max) ? fmtDelta(min) : (fmtDelta(min) + '–' + fmtDelta(max));
   // who: capped resident union across the cluster (engine.35 attribution thesis — a
   // citywide-mood story still needs named citizens for the desk).
@@ -206,37 +232,56 @@ function synthCitywide(members, metric, cycle, cycleCtx) {
   sorted.forEach((m) => (m.coveringCitizens || []).forEach((p) => {
     if (!seen[p]) { seen[p] = 1; if (who.length < 6) who.push(p); }
   }));
-  const text = 'Citywide ' + metricLabel + ' rose across ' + hoods.length +
+  const verb = decay ? 'eased' : 'rose';
+  const text = 'Citywide ' + metricLabel + ' ' + verb + ' across ' + hoods.length +
     ' neighborhoods (avg ' + fmtDelta(avg) + ', range ' + range + '): ' + hoods.join(', ');
-  // WHY: the uniform cross-hood lift is a global additive signal (sports + calendar)
-  const driver = citywideDriver(cycleCtx);
-  const causalAnchor = driver
-    ? { kind: 'global', driver, confidence: 'med' }
-    : { kind: 'global', driver: 'broad civic activity this cycle', confidence: 'low' };
+  // WHY — sign-coherent. A lift is a global additive signal (sports + calendar); a
+  // citywide decay is broad mean-reversion, NOT the positive driver (G-RC5).
+  let causalAnchor;
+  if (decay) {
+    causalAnchor = { kind: 'global', driver: 'broad cooldown / mean-reversion after the prior cycle (no hood-specific cause)', confidence: 'low' };
+  } else {
+    const driver = citywideDriver(cycleCtx);
+    causalAnchor = driver
+      ? { kind: 'global', driver, confidence: 'med' }
+      : { kind: 'global', driver: 'broad civic activity this cycle', confidence: 'low' };
+  }
   return {
-    seedId: 'pat-c' + cycle + '-' + metric + '-citywide',
-    idx: -1, patternType: 'improvement-citywide', severity: 'low',
+    seedId: 'pat-c' + cycle + '-' + metric + '-citywide' + (decay ? '-decay' : ''),
+    idx: -1, patternType: decay ? 'decay-citywide' : 'improvement-citywide', severity: 'low',
     domain: sorted[0].domain, neighborhood: 'Citywide', priority: severityToPriority('low'),
     text,
-    angle: 'broad civic-mood lift across the city',
+    angle: decay ? 'broad civic-mood cooldown across the city' : 'broad civic-mood lift across the city',
     coveringCitizens: who, packet: null, metric, delta: avg, collapsedCount: hoods.length,
-    causalAnchor
+    pole: pole || 'improvement', causalAnchor
   };
 }
 
-// partition intents: collapsible metric-improvements cluster into citywide synths;
-// everything else (initiatives, sub-threshold clusters) passes through unchanged.
-function collapseImprovements(intents, cycle, cycleCtx) {
+// partition intents by pole into citywide synths; everything else (initiatives,
+// sub-threshold clusters) passes through unchanged. (S265 ES-4: was
+// collapseImprovements — improvement-only; now collapses both poles.)
+//
+// Improvement and decay collapse DIFFERENTLY because the engine produces them
+// differently: a citywide mood LIFT is a uniform global additive (~identical
+// per-hood deltas), so it magnitude-band-clusters to separate the true lift from
+// outliers. A citywide DECAY is mean-reversion off a prior peak — singular cause,
+// but per-hood magnitudes vary in proportion to how high each sat — so banding
+// would fragment one phenomenon into many seeds (the C98 G-RC5 failure). Decay
+// therefore collapses the WHOLE same-metric group at ≥MIN_CLUSTER, reporting the
+// range; sub-threshold decay passes through as individual seeds (a genuine local
+// decay keeps its packet).
+function collapseSeeds(intents, cycle, cycleCtx) {
   const collapseLog = [];
-  const passthrough = intents.filter((it) => it.metric == null);
-  const movers = intents.filter((it) => it.metric != null);
-  const byMetric = {};
-  movers.forEach((it) => { (byMetric[it.metric] = byMetric[it.metric] || []).push(it); });
-  const out = passthrough.slice();
-  Object.keys(byMetric).sort().forEach((metric) => {
-    const group = byMetric[metric].slice()
+  const out = intents.filter((it) => it.metric == null); // passthrough (initiatives, etc.)
+
+  // ── improvement pole: magnitude-band clustering (unchanged behavior) ──
+  const imp = {};
+  intents.filter((it) => it.pole === 'improvement').forEach((it) => {
+    (imp[it.metric] = imp[it.metric] || []).push(it);
+  });
+  Object.keys(imp).sort().forEach((metric) => {
+    const group = imp[metric].slice()
       .sort((a, b) => (b.delta - a.delta) || a.neighborhood.localeCompare(b.neighborhood));
-    // greedy band clustering, anchor = first (largest) member — stable run-to-run
     const clusters = [];
     group.forEach((it) => {
       const c = clusters.find((cl) => Math.abs(it.delta - cl.anchor) <= MAG_BAND);
@@ -244,14 +289,32 @@ function collapseImprovements(intents, cycle, cycleCtx) {
     });
     clusters.forEach((cl) => {
       if (cl.members.length >= MIN_CLUSTER) {
-        out.push(synthCitywide(cl.members, metric, cycle, cycleCtx));
-        collapseLog.push({ metric, anchor: cl.anchor, collapsed: cl.members.length,
+        out.push(synthCitywide(cl.members, metric, cycle, cycleCtx, 'improvement'));
+        collapseLog.push({ pole: 'improvement', metric, anchor: cl.anchor, collapsed: cl.members.length,
           neighborhoods: cl.members.map((m) => m.neighborhood).sort() });
       } else {
         cl.members.forEach((m) => out.push(m)); // outlier — individual seed, keeps packet
       }
     });
   });
+
+  // ── decay pole: collapse the whole same-metric group (no magnitude band) ──
+  const dec = {};
+  intents.filter((it) => it.pole === 'decay').forEach((it) => {
+    (dec[it.metric] = dec[it.metric] || []).push(it);
+  });
+  Object.keys(dec).sort().forEach((metric) => {
+    const group = dec[metric];
+    if (group.length >= MIN_CLUSTER) {
+      out.push(synthCitywide(group, metric, cycle, cycleCtx, 'decay'));
+      const avg = group.reduce((s, m) => s + m.delta, 0) / group.length;
+      collapseLog.push({ pole: 'decay', metric, anchor: avg, collapsed: group.length,
+        neighborhoods: group.map((m) => m.neighborhood).sort() });
+    } else {
+      group.forEach((m) => out.push(m)); // sub-threshold — individual seed, keeps packet
+    }
+  });
+
   return { collapsed: out, collapseLog };
 }
 
@@ -371,6 +434,11 @@ function patternDriver(p, neighborhood, briefs, cycleCtx) {
       return { kind: 'event', driver: et + ' in ' + neighborhood + ' (' + ev.id + ')', confidence: 'med' };
     }
   }
+  // Sign-coherence (S265 ES-4, G-RC5): a decaying hood must NOT cite the positive
+  // global driver (the A's winning stretch). Use a neutral mean-reversion anchor.
+  if (p.type === 'math-imbalance') {
+    return { kind: 'global', driver: 'broad cooldown / mean-reversion this cycle (no hood-specific cause)', confidence: 'low' };
+  }
   const g = citywideDriver(cycleCtx);
   return g ? { kind: 'global', driver: g, confidence: 'low' } : null;
 }
@@ -411,19 +479,23 @@ async function routePatternSeeds(cycle, opts) {
     // narrative opening — kept as the angle, not the fact.
     const text = (p.description && p.description.trim()) ? p.description.trim() : resolveText(p, domain);
     const angle = resolveText(p, domain) || resolveAngle(p, domain);
-    const m = improvementMetric(p);
+    const im = improvementMetric(p);
+    const dm = im ? null : decayMetric(p);   // S265 ES-4 — decay pole
+    const mv = im || dm;
     return {
       seedId: 'pat-c' + cycle + '-' + idx, idx, patternType: p.type, severity: p.severity,
       domain, neighborhood, priority: severityToPriority(p.severity), text, angle,
       coveringCitizens: parsePopids((p.affectedEntities || {}).citizens),
       packet: joinPacket(p, briefs),
-      metric: m ? m.metric : null, delta: m ? m.delta : null,
+      metric: mv ? mv.metric : null, delta: mv ? mv.delta : null,
+      pole: im ? 'improvement' : (dm ? 'decay' : null),
       causalAnchor: patternDriver(p, neighborhood, briefs, cycleCtx) // WHY (Phase 3)
     };
   });
 
-  // ── Phase B: collapse same-metric / same-magnitude improvements into citywide synths ──
-  const { collapsed, collapseLog } = collapseImprovements(intents, cycle, cycleCtx);
+  // ── Phase B: collapse same-metric improvements (band) + same-metric decay (whole
+  //    group) into citywide synths ──
+  const { collapsed, collapseLog } = collapseSeeds(intents, cycle, cycleCtx);
 
   // ── Phase C: byline + priority over the collapsed set (highest-severity picks first) ──
   const sevRank = { HIGH: 3, MED: 2, LOW: 1 };
@@ -513,8 +585,8 @@ function printDryRun(result) {
   console.log(totalPatterns + ' patterns | ' + included + ' anchored → ' + seeds.length + ' seeds (post-collapse) | ' +
     excluded.length + ' excluded | ' + briefCount + ' briefs available\n');
   if (collapseLog && collapseLog.length) {
-    console.log('COLLAPSED (same-metric/magnitude improvements → citywide synthesis):');
-    collapseLog.forEach((c) => console.log('  ' + c.metric + ' ~' + fmtDelta(c.anchor) + ' band: ' +
+    console.log('COLLAPSED (same-metric improvements [band] + same-metric decay [group] → citywide synthesis):');
+    collapseLog.forEach((c) => console.log('  [' + (c.pole || 'improvement') + '] ' + c.metric + ' ~' + fmtDelta(c.anchor) + ': ' +
       c.collapsed + ' hoods → 1 citywide seed [' + c.neighborhoods.join(', ') + ']'));
     console.log('');
   }
@@ -586,4 +658,6 @@ if (require.main === module) {
   main().catch((e) => { console.error('FAILED:', e.message); process.exit(1); });
 }
 
-module.exports = { routePatternSeeds, resolveDomain, joinPacket, seedToRow, DECK_HEADERS };
+module.exports = { routePatternSeeds, resolveDomain, joinPacket, seedToRow, DECK_HEADERS,
+  // S265 ES-4 — exported for unit testing the decay-pole collapse + sign-aware WHY
+  decayMetric, improvementMetric, collapseSeeds, synthCitywide };

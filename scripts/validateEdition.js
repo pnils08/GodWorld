@@ -313,8 +313,11 @@ function checkCouncilNames(editionText, canon, knownCanonicalFullNames) {
 
   // Check for wrong district assignments
   for (const member of councilNames) {
-    // Pattern: "MemberName (D[X])" or "MemberName, D[X]" or "District X"
-    const distPattern = new RegExp(`${member.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[^.]*?\\b(D\\d)\\b`, 'g');
+    // Pattern: "MemberName (D[X])" or "MemberName, D[X]" or "District X".
+    // [^.\n] (not [^.]) bounds the gap to a single line so the match can't bleed
+    // across the period-less footer lists (NAMES INDEX / CITIZEN USAGE LOG) into
+    // another line's bare D-token — the C98 26-false-positive class (S265 ES-2).
+    const distPattern = new RegExp(`${member.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[^.\\n]*?\\b(D\\d)\\b`, 'g');
     let match;
     while ((match = distPattern.exec(editionText)) !== null) {
       if (match[1] !== member.district) {
@@ -330,8 +333,10 @@ function checkCouncilNames(editionText, canon, knownCanonicalFullNames) {
 
   // Check for wrong faction assignments
   for (const member of councilNames) {
+    // [^.\n] bounds the gap to a single line — see distPattern above; the C98
+    // bleed hit bare CRC/D7 tokens in Ashford's footer line (S265 ES-2).
     const factionPattern = new RegExp(
-      `${member.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[^.]*?\\b(OPP|CRC|IND)\\b`, 'g'
+      `${member.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[^.\\n]*?\\b(OPP|CRC|IND)\\b`, 'g'
     );
     let match;
     while ((match = factionPattern.exec(editionText)) !== null) {

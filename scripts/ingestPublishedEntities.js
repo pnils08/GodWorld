@@ -418,11 +418,25 @@ function parseNamesIndex(sectionLines) {
 // `sectionLines` may be null/undefined (no section header in source) or
 // an empty array (header present, content empty) — both pass through
 // silently. Only fires when content lines > 0 AND parsed count == 0.
+// Absence sentinel — a placeholder line that legitimately means "zero entities
+// this cycle": "(no new businesses this cycle)", "(none this cycle)", "No new
+// citizens named". Real entity rows lead with a capitalized name, never
+// "no"/"none", so this never swallows a real row. (S265 ES-3, C98 G-P-C98-1:
+// the BUSINESSES NAMED sentinel was counted as a content line → 0 parsed →
+// assertParserSanity threw → exit(1) aborted the whole intake incl. 28 parsed
+// citizens, every no-new-business cycle.)
+function isAbsenceSentinel(line) {
+  const t = String(line).trim().replace(/^[-*•]\s*/, '').replace(/^\(/, '');
+  return /^(no|none)\b/i.test(t);
+}
+
 function assertParserSanity({ sectionName, sectionLines, parsedCount }) {
   if (!sectionLines) return;
   const contentLines = sectionLines.filter(l => {
     const t = l.trim();
-    return t && !/^[=\-─━_]+$/.test(t);
+    if (!t || /^[=\-─━_]+$/.test(t)) return false;
+    if (isAbsenceSentinel(t)) return false;
+    return true;
   });
   if (contentLines.length === 0) return;
   if (parsedCount > 0) return;
@@ -1227,6 +1241,7 @@ module.exports = {
   resolvePopIdAlias: resolvePopIdAlias,
   // S234 engine.26 — generalized parser sanity check (NAMES INDEX + BUSINESSES NAMED)
   assertParserSanity: assertParserSanity,
+  isAbsenceSentinel: isAbsenceSentinel,
   // S257 G-P-C97-1 — honorific + last-name-anchored matcher (duplicate-mint guard)
   resolveCitizens: resolveCitizens,
   // S259 ENGINE_REPAIR Row 30 — malformed-name append backstop

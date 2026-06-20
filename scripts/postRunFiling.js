@@ -86,12 +86,16 @@ function buildChecklist(cycle) {
       dest: null,
       required: true,
     },
-    // Mara audit packet (sent before her review)
+    // Mara audit packet (sent before her review). NOT required: this is a
+    // consumed transient INPUT to Mara's review, not a persistent pipeline
+    // output — it's commonly cleaned up by post-run, so flagging it MISSING is
+    // a false INCOMPLETE (S265 ES-3, C98 G-P-C98-4). The persistent record is
+    // audit_history.md below, which stays required.
     {
       name: 'Mara audit packet: edition',
       path: `output/mara-audit/edition_c${cycle}_for_review.txt`,
       dest: 'mara',
-      required: true,
+      required: false,
     },
     {
       name: 'Mara audit packet: history',

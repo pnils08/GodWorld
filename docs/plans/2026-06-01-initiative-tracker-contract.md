@@ -57,15 +57,15 @@ pointers:
 ### Phase 2 — engine drift-tolerance (code, clasp, POST-C96) — engine-sheet
 - **Goal:** the engine honors the canonical vocabulary instead of flattening it; restores the canon Phase 0 had to drop.
 - **Steps:** Mirror the existing `applyTrackerUpdates.js:366-383` partial-match tolerance into the Phase-2 `applyInitiativeImplementationEffects` map (Row-24 case-fold/family-map pattern). Reactivation (INIT-005/006 0→non-zero) → its own deliberate fire AFTER C96 verifies the current stack.
-- **Status:** [ ] blocked on C96 smoke-test
+- **Status:** [ ] OPEN — clasp engine-map piece (distinct from the D-3.3 Node gate). C96 smoke is past; now gated behind the **engine.38 C99 deploy window** (S250 deploy-attribution — don't stack the PHASE_INTENSITY tolerance on the un-smoke-tested engine.38 Phase A). The D-3.3 write-gate (S265) already canonicalizes phases *before* the sheet write, so a dark string no longer reaches the engine via the city-hall path — this Phase 2 closes the gap for any *other* writer/legacy row.
 
 ### Phase 3 — writer-side normalization + enforcement — research-build (RULES/SKILL) + engine-sheet (scripts)
 - **Goal:** agents stop drifting at the source.
 - **Deliverables (explicit named outputs):**
   - **D-3.1 — city-hall SKILL enforcement step.** Beyond the Phase-1 read-pointer: the tracker-write step instructs agents to emit a contract-valid phase, and what to do when their real-world phase isn't in the vocabulary (propose adding it to the contract — don't free-form). This is the behavior change that ends the drift.
   - **D-3.2 — agent RULES phase-emission constraint.** The 5 project-agent RULES gain a §Phase constraint pointing at the contract vocabulary (sibling to the ES-5 trackerOwner §Pre-Write Constraint pattern from [[archive/plans/2026-05-11-civic-tracker-collision-schema]]).
-  - **D-3.3 — writer normalization + validation gate (engine-sheet).** assembleDecisions/applyTrackerUpdates canonicalize phase to the vocabulary on write; restore a validation gate pointed at the **contract doc's list** (NOT the hardcoded enum S230 removed — the gate validates against D-1.1, which is maintainable).
-- **Status:** [ ] blocked on Phase 1
+  - **D-3.3 — writer normalization + validation gate (engine-sheet).** assembleDecisions/applyTrackerUpdates canonicalize phase to the vocabulary on write; restore a validation gate pointed at the **contract doc's list** (NOT the hardcoded enum S230 removed — the gate validates against D-1.1, which is maintainable). **[x] DONE S265 (engine-sheet, `18d9a6cc`+`62e8baaf`):** shared `lib/initiativePhaseContract.js` (mirrors §2/§3/§5) + pre-assembly validator `scripts/validateTrackerUpdates.js` (fail-loud on missing-attribution/unresolvable-phase; reuses `assembleDecisions.attributeInitiative` so it can't diverge) + `normalizeTrackerWrite()` gate in `applyTrackerUpdates.js` (canonicalize-before-write / vote-scheduled VoteCycle+NextActionCycle stamp / stale-cycle advance / motion-into-MilestoneNotes). 4-lens adversarial review (5-agent workflow) → 2 real findings fixed (validator false-block + NextActionCycle numeric guard), 15 dismissed. Node-only, no clasp. C98 acceptance: G-R1 phase-half + G-PREP1/2 + G-R3 covered at the pipeline layer; G-R2 flat-array = warning (assembleDecisions tolerates); missing-initiative *emission* + G-PREP3 junk-row are agent-RULES / one-off-cleanup, not gate scope.
+- **Status:** D-3.3 [x] DONE S265 (engine-sheet); D-3.1/D-3.2 [research-build slice — see `480bde70`].
 
 ### Phase 4 — "agent can add an initiative" capability — research-build / civic
 - **Goal:** the autonomy payoff — a writer (or future autonomous agent) can mint + track a new initiative.

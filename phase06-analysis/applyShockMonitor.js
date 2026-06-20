@@ -168,9 +168,25 @@ function applyShockMonitor_(ctx) {
   var shock = false;
   var shockReasons = [];
 
-  // 1) EVENT SPIKE
-  var eventSpikeThreshold = 10 + eventThresholdMod;
-  if (curEvents - prevEvents >= eventSpikeThreshold) {
+  // engine.38 B3 — POPULATION-RELATIVE event references. The old absolute event
+  // thresholds (spike >=10, stability-break >=10, dead-zone <5) were tuned to a
+  // ~52-event/cycle world; after full-population coverage (~600-750/cycle) the
+  // spike delta false-fires on normal noise, "stability break" is trivially true
+  // every cycle, and the dead-zone became unreachable. eventRef tracks volume via
+  // prevEvents (persisted as currentCycleState.events each cycle); the legacy 40
+  // floor preserves old behavior at low volume.
+  var eventRef = Math.max(prevEvents, 40);
+  // Regime-shift guard: a >=2.5x jump in TOTAL event volume is a coverage/deploy
+  // regime change (a bounded population can't organically 2.5x its event count),
+  // not an in-world shock. Skip the event-delta tests on such a cycle so the FIRST
+  // post-deploy cycle (prev~52 -> cur~600) doesn't fire a spurious shock. prevEvents
+  // rolls to curEvents next cycle, so this self-clears after one cycle.
+  var eventRegimeShift = (prevEvents > 0) && (curEvents >= prevEvents * 2.5 || prevEvents >= curEvents * 2.5);
+
+  // 1) EVENT SPIKE — relative: >=30% of the normal volume jumped in one cycle
+  // (with the legacy +10 absolute floor), and not on a regime-shift cycle.
+  var eventSpikeThreshold = Math.max(10 + eventThresholdMod, Math.round(0.30 * eventRef));
+  if (!eventRegimeShift && curEvents - prevEvents >= eventSpikeThreshold) {
     shock = true;
     shockReasons.push("event spike");
   }
@@ -220,9 +236,12 @@ function applyShockMonitor_(ctx) {
   if (civicLoad === "load-strain") { shock = true; shockReasons.push("civic overload"); }
   if (civicLoadScore >= 15)        { shock = true; shockReasons.push("civic strain extreme"); }
 
-  // 10) PATTERN BREAK
-  if (prevPattern === "stability-streak" && curEvents >= 10) { shock = true; shockReasons.push("stability break"); }
-  if (patternFlag === "strain-trend")                        { shock = true; shockReasons.push("strain trend"); }
+  // 10) PATTERN BREAK — engine.38 B3: a stability streak (quiet stretch) breaks
+  // when activity jumps >=40% above the streak's level (was absolute >=10, which
+  // is trivially true at high volume). Guarded against the deploy regime-shift.
+  if (prevPattern === "stability-streak" && !eventRegimeShift &&
+      curEvents >= Math.max(10, eventRef * 1.40)) { shock = true; shockReasons.push("stability break"); }
+  if (patternFlag === "strain-trend")             { shock = true; shockReasons.push("strain trend"); }
 
   // 11) ARC PEAK CLUSTER
   var peakArcs = 0;
@@ -238,8 +257,9 @@ function applyShockMonitor_(ctx) {
   if (mediaEffects.crisisSaturation && mediaEffects.crisisSaturation >= 0.8) { shock = true; shockReasons.push("media crisis saturation"); }
   if (mediaEffects.coverageIntensity === "saturated")                        { shock = true; shockReasons.push("media saturation"); }
 
-  // 13) CALENDAR-SPECIFIC SHOCKS
-  if (holidayPriority === "major" && curEvents < 5 && curChaos === 0) {
+  // 13) CALENDAR-SPECIFIC SHOCKS — engine.38 B3: dead-zone is <10% of normal
+  // volume on a major holiday (was absolute <5, unreachable at high volume).
+  if (holidayPriority === "major" && curEvents < Math.max(5, eventRef * 0.10) && curChaos === 0) {
     shock = true;
     shockReasons.push("holiday dead-zone");
   }

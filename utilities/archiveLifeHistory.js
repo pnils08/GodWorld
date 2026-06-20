@@ -3,17 +3,19 @@
  * archiveLifeHistory.js v1.0
  * ============================================================================
  *
- * Maintenance script: moves old LifeHistory_Log rows to LifeHistory_Archive.
+ * Moves old LifeHistory_Log rows to LifeHistory_Archive. Two ways to run:
+ *   1. AUTOMATIC (engine.38 B1): maintainLifeHistoryLog_(ctx) runs as the final
+ *      Phase-11 step every cycle — cheap getLastRow gate, heavy trim only when
+ *      the tab exceeds CYCLE_TRIGGER_ROWS. This is the live mechanism.
+ *   2. MANUAL: archiveLifeHistory / archiveLifeHistoryDryRun in the Apps Script
+ *      Run menu (operator retain = ARCHIVE_RETAIN_CYCLES = 50).
  *
- * LifeHistory_Log grows 20-50 rows per cycle. At C81 it has ~2,552 rows.
- * Without intervention it hits 10,000 rows around C250 and degrades Sheets
- * performance. The data is already compressed into Simulation_Ledger via
- * compressLifeHistory.js, so these rows are an audit trail — safe to archive.
- *
- * HOW TO RUN:
- *   1. Open Apps Script editor
- *   2. Select archiveLifeHistory (or archiveLifeHistoryDryRun for preview)
- *   3. Click Run
+ * Moved maintenance/ -> utilities/ in engine.38 (S264) so it DEPLOYS — the
+ * cycle-path wiring is useless if the file stays claspignored. After full-
+ * population coverage LifeHistory_Log grows ~600-750 rows/cycle (was 20-50), so
+ * unbounded growth is a deploy-blocker, not a someday-maintenance task. Data is
+ * already compressed into Simulation_Ledger via compressLifeHistory.js, so these
+ * rows are an audit trail — safe to archive.
  *
  * WHAT IT DOES:
  *   - Reads LifeHistory_Log
@@ -25,13 +27,22 @@
  *
  * SAFE TO RUN REPEATEDLY: Only archives rows not already moved.
  *
- * @version 1.0
- * @phase maintenance
+ * @version 1.1
+ * @phase phase11 (cycle-path) + manual
  * ============================================================================
  */
 
-// How many recent cycles to keep in the active sheet
+// How many recent cycles to keep in the active sheet (operator/manual default)
 var ARCHIVE_RETAIN_CYCLES = 50;
+
+// engine.38 B1 — cycle-path automatic maintenance. After full-population coverage
+// LifeHistory_Log grows ~600-750 rows/cycle (was 20-50), so the manual archiver
+// is no longer optional. maintainLifeHistoryLog_(ctx) runs as the final Phase-11
+// step; it is a cheap getLastRow() check on most cycles and only does the heavy
+// trim when the tab exceeds CYCLE_TRIGGER_ROWS. Retain is CYCLE-based (volume-
+// robust): always keeps the last N cycles whatever the per-cycle event volume.
+var CYCLE_TRIGGER_ROWS = 12000;   // only run the trim when the active log exceeds this
+var CYCLE_RETAIN_CYCLES = 12;     // keep last 12 cycles — > A2 anti-inert (3) + analysis 7-window, with margin
 
 // ============================================================================
 // PUBLIC ENTRY POINTS (appear in Apps Script Run menu)
@@ -53,11 +64,34 @@ function archiveLifeHistoryDryRun() {
 }
 
 // ============================================================================
+// CYCLE-PATH ENTRY (engine.38 B1) — wired at Phase 11 in godWorldEngine2.js
+// ============================================================================
+
+/**
+ * Bound LifeHistory_Log on the cycle path. Cheap no-op below the row trigger;
+ * heavy trim above it. Uses ctx.ss (does not re-open the spreadsheet) and the
+ * cycle retain window. Trims OLD rows only (older than maxCycle - retain), so it
+ * never touches the current cycle's freshly-written events.
+ */
+function maintainLifeHistoryLog_(ctx) {
+  if (!ctx || !ctx.ss) return;
+  var logSheet = ctx.ss.getSheetByName('LifeHistory_Log');
+  if (!logSheet) return;
+  // Cheap gate — one getLastRow call most cycles, then return.
+  if (logSheet.getLastRow() - 1 <= CYCLE_TRIGGER_ROWS) return;
+  runArchive_(false, { ss: ctx.ss, retainCycles: CYCLE_RETAIN_CYCLES });
+}
+
+// ============================================================================
 // MAIN LOGIC
 // ============================================================================
 
-function runArchive_(dryRun) {
-  var ss = openSimSpreadsheet_();
+function runArchive_(dryRun, opts) {
+  opts = opts || {};
+  // engine.38 B1: cycle path passes ctx.ss + a tighter retain; operator path
+  // defaults to its own spreadsheet handle + the manual 50-cycle retain.
+  var ss = opts.ss || openSimSpreadsheet_();
+  var retainCycles = (typeof opts.retainCycles === 'number') ? opts.retainCycles : ARCHIVE_RETAIN_CYCLES;
 
   // --- Read LifeHistory_Log ---
   var logSheet = ss.getSheetByName('LifeHistory_Log');
@@ -95,9 +129,9 @@ function runArchive_(dryRun) {
     return;
   }
 
-  var cutoff = maxCycle - ARCHIVE_RETAIN_CYCLES;
+  var cutoff = maxCycle - retainCycles;
   Logger.log('archiveLifeHistory: maxCycle=' + maxCycle +
-    ', retainCycles=' + ARCHIVE_RETAIN_CYCLES +
+    ', retainCycles=' + retainCycles +
     ', cutoff=' + cutoff +
     ', totalRows=' + rows.length);
 

@@ -12,7 +12,7 @@ Last Updated: 2026-05-24 | Cycle: 94 | Session: 234 (S234 stamp-only — tables 
 
 **Live deltas vs S202 baseline (C93→C94, 1 cycle elapsed):**
 - Simulation_Ledger: 836 → 858 rows (+22 from S232 canon.3 T9 backfill — POP-00958..00973 cohort + 6 squatter realignments). Schema unchanged (47 cols A-AU). Below YELLOW projections.
-- LifeHistory_Log: ~3,669 → ~3,762 (~93/cycle holds). Still RED — archive script (`maintenance/archiveLifeHistory.js` v1.0, S31) STILL not run in production. Headroom to C200 = ~106 cycles at current rate; ~5+ cycles of buffer.
+- LifeHistory_Log: ~3,669 → ~3,762 (~93/cycle at old volume). **RESOLVED engine.38 S264** — archiver wired to the cycle path (`utilities/archiveLifeHistory.js` v1.1 `maintainLifeHistoryLog_`, moved from `maintenance/` so it deploys; final Phase-11 step, row-count-gated at CYCLE_TRIGGER_ROWS=12000, retain 12 cycles). Necessary because full-population coverage (engine.38 Phase A) raised growth to ~600-750/cycle — the tab now self-bounds at ~9-12k rows instead of growing unbounded. No longer RED once engine.38 deploys (smoke-test pending the first cycle that trips the trigger).
 - Story_Seed_Deck: steady-state ~1,100 by design (S201 N=5 archival). Holding.
 - All other YELLOW tabs (Citizen_Media_Usage ~33/cycle, Story_Hook_Deck ~33/cycle, Texture_Trigger_Log ~28/cycle): incremented by ~1 cycle delta. Within tolerance.
 

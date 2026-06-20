@@ -466,6 +466,11 @@ function runWorldCycle() {
   // ═══════════════════════════════════════════════════════════
   safePhaseCall_(ctx, 'Phase11-MediaIntake', function() { processMediaIntake_(ctx); });
 
+  // engine.38 B1 — final step: bound LifeHistory_Log (full-population coverage
+  // grows it ~600-750 rows/cycle). Cheap getLastRow gate; heavy trim only above
+  // CYCLE_TRIGGER_ROWS. MUST be last — it rewrites the whole log tab.
+  safePhaseCall_(ctx, 'Phase11-MaintainLifeHistoryLog', function() { maintainLifeHistoryLog_(ctx); });
+
   } catch (fatalError) {
     // Log fatal error that crashed the entire cycle
     logEngineError_(ctx, 'FATAL-CycleError', fatalError);
@@ -1762,6 +1767,10 @@ function runCyclePhases_(ctx) {
   // PHASE 11: MEDIA INTAKE — process any unprocessed intake rows
   // ═══════════════════════════════════════════════════════════
   safePhaseCall_(ctx, 'Phase11-MediaIntake', function() { processMediaIntake_(ctx); });
+
+  // engine.38 B1 — final step: bound LifeHistory_Log (see first entry point).
+  // Cheap getLastRow gate; heavy trim only above CYCLE_TRIGGER_ROWS. Last write.
+  safePhaseCall_(ctx, 'Phase11-MaintainLifeHistoryLog', function() { maintainLifeHistoryLog_(ctx); });
 
   // Flush cache
   if (ctx.cache) {

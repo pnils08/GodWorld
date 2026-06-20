@@ -85,6 +85,30 @@ function applyPatternDetection_(ctx) {
   // Also check worldEvents count from ctx for current cycle
   var currentWorldEvents = (S.worldEvents || []).length;
 
+  // engine.38 B2 — POPULATION-RELATIVE event baseline. The old absolute event
+  // thresholds (45/55/60/75…) were calibrated to a ~52-event/cycle world; after
+  // full-population coverage (~600-750/cycle) every absolute band broke (stability
+  // unreachable, elevated permanently exceeded -> patternFlag pinned to strain).
+  // Fix: derive expected-events from the recent-history MEDIAN of this same window
+  // (self-calibrating to whatever volume the engine produces, and robust to the
+  // mixed-basis transition — median resists the old/new outliers a mean would not).
+  // Patterns now fire on DEVIATION from the local norm, which is the real intent
+  // (a "quiet week" / "busy wave" is relative, not an absolute count). Thin/early
+  // history (no window) falls back to the legacy absolute floor so behavior is
+  // unchanged when there isn't enough data to form a baseline.
+  function median_(arr) {
+    var a = arr.slice().filter(function(x) { return typeof x === "number" && !isNaN(x); }).sort(function(p, q) { return p - q; });
+    if (!a.length) return 0;
+    var mid = Math.floor(a.length / 2);
+    return (a.length % 2) ? a[mid] : (a[mid - 1] + a[mid]) / 2;
+  }
+  // Floor at the legacy ~52-event baseline: below the floor the thresholds stay
+  // at their old absolute values (no behavior change for the low-volume regime);
+  // above it they scale with actual volume. This keeps the fix surgical — it only
+  // changes behavior in the high-volume world that broke, not the legacy one.
+  var EVENT_BASELINE_FLOOR = 50;
+  var eventBaseline = Math.max(median_(eventsArr), EVENT_BASELINE_FLOOR);
+
   var pattern = "none";
   var calendarContext = {
     holiday: holiday,
@@ -110,12 +134,17 @@ function applyPatternDetection_(ctx) {
   var isHighActivityPeriod = isHighActivityHoliday || isFirstFriday ||
     sportsSeason === "championship" || sportsSeason === "playoffs";
 
-  // Adjusted thresholds for high-activity periods
-  var stabilityThreshold = isHighActivityPeriod ? 55 : 45;
-  var microWaveThreshold = isHighActivityPeriod ? 65 : 55;
-  var calmThreshold = isHighActivityPeriod ? 60 : 50;
-  var elevatedLow = isHighActivityPeriod ? 60 : 50;
-  var elevatedHigh = isHighActivityPeriod ? 75 : 60;
+  // engine.38 B2 — thresholds as ratios of the population-relative baseline.
+  // Ratios preserve the original intent (at the legacy ~52 baseline these land
+  // near the old 45/55/60/75 absolutes) but now scale with actual event volume.
+  // The high-activity-period factor still widens the bands so holidays/playoffs
+  // tolerate more activity before a "wave"/"elevated" call.
+  var hap = isHighActivityPeriod ? 1.18 : 1.0;
+  var stabilityThreshold = eventBaseline * 0.88 * hap; // below this for 5 cycles = stability-streak
+  var microWaveThreshold = eventBaseline * 1.20 * hap; // above this for 3 cycles = micro-event-wave
+  var calmThreshold      = eventBaseline * 1.00 * hap; // at/below norm post-shock = calm-after-shock
+  var elevatedLow        = eventBaseline * 1.12 * hap; // [low, high) avg = elevated-activity
+  var elevatedHigh       = eventBaseline * 1.50 * hap;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // PATTERN 1: stability-streak
@@ -152,8 +181,9 @@ function applyPatternDetection_(ctx) {
     var latestShock = shockArr[0];
     var latestIssues = issuesArr[0];
 
-    // High events but no shock/issues during holiday = holiday-elevated
-    if (latestEvents >= 55 && latestEvents < 80 &&
+    // High events but no shock/issues during holiday = holiday-elevated.
+    // engine.38 B2: relative band [1.1, 1.7)x baseline (was absolute 55/80).
+    if (latestEvents >= eventBaseline * 1.10 && latestEvents < eventBaseline * 1.70 &&
         latestShock !== "shock-flag" &&
         (!latestIssues || latestIssues.trim() === "")) {
       pattern = "holiday-elevated";

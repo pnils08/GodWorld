@@ -165,7 +165,9 @@ var TAG_TRAIT_MAP = {
   'Health': { grounded: 0.4, volatile: 0.4 },
   'Divorce': { volatile: 0.6, reflective: 0.4 },
 
-  // Named-Citizen Tags (v1.4: from generateNamedCitizensEvents.js)
+  // Named-Citizen Tags (v1.4; source generateNamedCitizensEvents.js DELETED
+  // engine.38 — now emitted by generateCitizensEvents_ via source:fame ->
+  // Reputation and nbhd-state -> Lifestyle/Community routing)
   'Lifestyle': { grounded: 0.5, social: 0.4 },
   'Reputation': { social: 0.5, driven: 0.4 },
 

@@ -73,6 +73,29 @@ function generateCitizensEvents_(ctx) {
   var S = ctx.summary || (ctx.summary = {});
   var cycle = S.cycleId || (ctx.config && ctx.config.cycleCount) || 0;
 
+  // engine.38 A2 — anti-inert floor signal. LifeHistory_Log is append-only (no
+  // clearer, compressor doesn't touch it), so its Cycle column is a persistent
+  // per-citizen "last event cycle" — and it sees coverage from ALL generators,
+  // not just this one. One read per cycle builds the map; a citizen dark for
+  // more than ANTI_INERT_N cycles is forced to live a quiet week (gate below).
+  var ANTI_INERT_N = 3;
+  var lastEventCycleByPop = Object.create(null);
+  if (lifeLog && typeof lifeLog.getLastRow === "function" && lifeLog.getLastRow() > 1) {
+    var logVals = lifeLog.getDataRange().getValues();
+    var logHdr = logVals[0] || [];
+    var iLogPop = logHdr.indexOf("POPID");
+    var iLogCyc = logHdr.indexOf("Cycle");
+    if (iLogPop >= 0 && iLogCyc >= 0) {
+      for (var lv = 1; lv < logVals.length; lv++) {
+        var lp = logVals[lv][iLogPop];
+        var lc = Number(logVals[lv][iLogCyc]) || 0;
+        if (lp && (!(lp in lastEventCycleByPop) || lc > lastEventCycleByPop[lp])) {
+          lastEventCycleByPop[lp] = lc;
+        }
+      }
+    }
+  }
+
   // Prefer injected RNG, else seed, else Math.random
   var rng = (typeof ctx.rng === "function")
     ? ctx.rng
@@ -146,13 +169,22 @@ function generateCitizensEvents_(ctx) {
 
   // Limit
   var count = 0;
-  var LIMIT = 25; // CATCH-UP: was 10, temporarily raised to fill thin citizens. Revert after ~5 cycles.
+  // engine.38 A1: full-population dial-weighted participation replaces the
+  // LIMIT=25 catch-up throttle. Every Tier-3/4 ENGINE citizen rolls to live a
+  // logged week at PARTICIPATION_BASE x activityScore(dials) — extroverts get
+  // eventful weeks, homebodies quiet ones. Tuned via scripts/coverageReport.js.
+  var PARTICIPATION_BASE = 0.72; // coverage-band tuned (target 60-80%)
+  var PARTICIPATION_MAX = 0.97;  // never guaranteed-100% — preserve quiet-week texture
 
-  // Active citizens tracker (dedup) - use object for ES5 Set-like behavior
+  // Active citizens tracker (dedup) - use object for ES5 Set-like behavior.
+  // guaranteedInObj = the upstream cycleActiveCitizens set, unioned in below as
+  // always-participate (events from upstream engines guarantee a logged week).
   var activeSetObj = Object.create(null);
+  var guaranteedInObj = Object.create(null);
   var initialActives = Array.isArray(S.cycleActiveCitizens) ? S.cycleActiveCitizens : [];
   for (var ai = 0; ai < initialActives.length; ai++) {
     activeSetObj[initialActives[ai]] = true;
+    guaranteedInObj[initialActives[ai]] = true;
   }
   S.cycleActiveCitizens = Object.keys(activeSetObj);
 
@@ -736,7 +768,7 @@ function generateCitizensEvents_(ctx) {
   // =========================================================================
   // PREVIOUS EVENING POOL (carry-forward from last cycle)
   // =========================================================================
-  function previousEveningPool_(neighborhood) {
+  function previousEveningPool_(neighborhood, outaboutMult) {
     var pool = [];
     var prev = S.previousEvening;
     if (!prev) return pool;
@@ -823,19 +855,30 @@ function generateCitizensEvents_(ctx) {
         ["source:prevEvening", "evening:sports"], 1.1, false));
     }
 
-    // engine.32 T8 — fan-out: last night's SPECIFIC city events reach citizens.
-    // Same neighborhood -> attended (evening:cityEventAttend gets a sociability
-    // weight in the dial loop); elsewhere -> heard about it. PrevEvening memory
-    // tag -> outabout nudge via citizenDialMap, closing the dial feedback loop.
+    // engine.32 T8 / engine.38 A4 — fan-out: last night's SPECIFIC city events
+    // reach citizens. Attendance is now an OUT-AND-ABOUT RADIUS, not a strict
+    // neighborhood match: same-neighborhood always attends; high-outabout
+    // citizens "travel" to attend events in other neighborhoods (damped weight);
+    // low-outabout citizens "hear about" the elsewhere events. The attend entry
+    // carries a reserve-the-draw weight so an eligible attendee reliably surfaces
+    // it from the weighted pool. evening:cityEventAttend -> ×sociability in the
+    // dial loop; source:prevEvening -> outabout nudge, closing the feedback loop.
+    var oa = (typeof outaboutMult === "number") ? outaboutMult : 1.0;
+    var travels = oa >= 1.15; // upper-band out-and-about -> attends across town
     var cityEvs = prev.cityEvents || [];
     for (var cvi = 0; cvi < cityEvs.length; cvi++) {
       var cv = cityEvs[cvi];
       if (!cv || !cv.name) continue;
       if (neighborhood && cv.neighborhood === neighborhood) {
+        // home-neighborhood event — reliably drawn (reserve-the-draw weight)
         pool.push(makeEntry("joined the crowd at " + cv.name + " last night",
-          ["source:prevEvening", "evening:cityEventAttend", "nh:" + neighborhood], 1.25, false));
+          ["source:prevEvening", "evening:cityEventAttend", "nh:" + neighborhood], 2.6, false));
         pool.push(makeEntry("ran into neighbors at " + cv.name,
-          ["source:prevEvening", "evening:cityEventAttend", "nh:" + neighborhood], 1.1, false));
+          ["source:prevEvening", "evening:cityEventAttend", "nh:" + neighborhood], 1.4, false));
+      } else if (travels) {
+        // out-and-about citizen travels to it — damped by how far out they get
+        pool.push(makeEntry("headed over to " + cv.name + (cv.neighborhood ? " in " + cv.neighborhood : "") + " last night",
+          ["source:prevEvening", "evening:cityEventAttend", "nh:" + (cv.neighborhood || "")], 1.6 * oa, false));
       } else {
         pool.push(makeEntry("heard about " + cv.name + (cv.neighborhood ? " over in " + cv.neighborhood : "") + " last night",
           ["source:prevEvening", "evening:cityEvent"], 1.0, false));
@@ -1162,7 +1205,8 @@ function generateCitizensEvents_(ctx) {
   // =========================================================================
   var logRows = [];
   for (var r = 0; r < rows.length; r++) {
-    if (count >= LIMIT) break;
+    // engine.38 A1: LIMIT=25 cap removed — full-population coverage. Runaway is
+    // structurally bounded: one emit max per citizen per cycle (<= rows.length).
 
     var row = rows[r];
     var tier = Number(row[iTier] || 0);
@@ -1175,9 +1219,17 @@ function generateCitizensEvents_(ctx) {
     var ageGroup = ageGroup_(birthYear);
     var usageCount = (iUsage >= 0) ? Number(row[iUsage]) || 0 : 0; // T3 — blank reads 0
 
-    if (tier !== 3 && tier !== 4) continue;
-    if (mode !== "ENGINE") continue;
+    // engine.38 A1 (option-1 gate): participation universe = named citizens
+    // (Tier-1/2, ANY clock-mode — 17 of 21 Tier-1 are GAME/MEDIA/CIVIC, so an
+    // ENGINE-only gate would miss the very citizens the newsroom + wake-loop
+    // read) UNION the Tier-3/4 ENGINE background population. GAME/MEDIA/CIVIC
+    // Tier-3/4 stay sim-driven for their primary events (not double-driven here).
+    // Named citizens get ambient texture on top of their sim life — A3 folds in
+    // their richer named-pool events.
     if (!popId) continue;
+    var isNamed = (tier === 1 || tier === 2);
+    if (!isNamed && (tier !== 3 && tier !== 4)) continue;
+    if (!isNamed && mode !== "ENGINE") continue;
 
     var mem = getMem(popId);
 
@@ -1191,15 +1243,11 @@ function generateCitizensEvents_(ctx) {
     var nhQoL = nhContext.qualityOfLifeIndex || 0.5;
     var isHotspot = crimeHotspots.indexOf(neighborhood) >= 0;
 
-    // Base chance
-    var chance = 0.02;
-
-    // CATCH-UP: Boost chance for citizens with thin LifeHistory
-    var existingLife = row[iLife] ? row[iLife].toString() : "";
-    var lineCount = existingLife ? existingLife.split("\n").length : 0;
-    if (lineCount <= 2) chance *= 5;
-    else if (lineCount <= 5) chance *= 3;
-    else if (lineCount <= 10) chance *= 1.5;
+    // engine.38 A1: dial-weighted participation base (was 0.02 + LIMIT=25 cap).
+    // The CATCH-UP thin-LifeHistory boost is removed — S256 cleared col-O to
+    // LifeHistory_Archive so line-count is no longer a thinness signal; the
+    // anti-inert floor (A2) handles long-dark citizens principledly instead.
+    var chance = PARTICIPATION_BASE;
 
     if (weather.impact >= 1.3) chance += 0.01;
     if (dynamics.sentiment <= -0.3) chance += 0.01;
@@ -1260,11 +1308,15 @@ function generateCitizensEvents_(ctx) {
       chance *= eventBoost;
     }
 
-    // engine.32 T5 — Out-and-About dial scales how much happens to this citizen
-    // (0.5..1.5). citizenLookup carries DialState here (built L215-250).
-    // null bands (no DialState) -> base rates unchanged.
+    // engine.38 A1 — participation is dial-weighted across drive + out-and-about
+    // + sociability (was engine.32 T5 outabout-only). activityScore 0.5..1.5;
+    // null bands (no DialState) -> base rate unchanged. The dominant dial decides
+    // whose week is eventful: strivers, socialites, and the out-and-about live more.
     var dialBands = getCitizenDialBands_(ctx, popId);
-    if (dialBands) chance *= dialBands.mult.outabout;
+    if (dialBands) {
+      var dmAct = dialBands.mult;
+      chance *= (dmAct.drive + dmAct.outabout + dmAct.sociability) / 3;
+    }
 
     var citizenBonds = [];
     var hasRivalry = false;
@@ -1306,8 +1358,18 @@ function generateCitizensEvents_(ctx) {
       chance += 0.01;
     }
 
-    if (chance > 0.18) chance = 0.18;
-    if (!chanceHit(chance)) continue;
+    // engine.38 A2 — anti-inert floor: a citizen in the log but dark for more
+    // than ANTI_INERT_N cycles is forced in regardless of the roll. Citizens
+    // never in the log fall through to normal participation (base covers them
+    // within a cycle or two), so this never mass-fires on a fresh log.
+    var lastEv = lastEventCycleByPop[popId];
+    var forcedInert = (typeof lastEv === "number") && (cycle - lastEv > ANTI_INERT_N);
+
+    // engine.38 A1: participation ceiling (was the 0.18 capped-world clamp that
+    // paired with LIMIT=25). Clamp below 100% to preserve quiet-week texture,
+    // then roll — but upstream-active + long-dark citizens always live their week.
+    if (chance > PARTICIPATION_MAX) chance = PARTICIPATION_MAX;
+    if (!guaranteedInObj[popId] && !forcedInert && !chanceHit(chance)) continue;
 
     // Build contextual pool
     var pool = [];
@@ -1335,8 +1397,10 @@ function generateCitizensEvents_(ctx) {
       pool.push(makeEntry(wv35[wi].text, mergeTags(wv35[wi].tags, calendarTags), wv35[wi].weight, false));
     }
 
-    // v2.8: Previous evening carry-forward
-    var prevEvePool = previousEveningPool_(neighborhood);
+    // v2.8: Previous evening carry-forward. engine.38 A4 — pass the citizen's
+    // out-and-about multiplier so high-outabout citizens travel to attend
+    // events outside their own neighborhood (dialBands computed above; null -> 1.0).
+    var prevEvePool = previousEveningPool_(neighborhood, dialBands ? dialBands.mult.outabout : 1.0);
     for (var pei = 0; pei < prevEvePool.length; pei++) {
       pool.push(makeEntry(prevEvePool[pei].text, mergeTags(prevEvePool[pei].tags, calendarTags), prevEvePool[pei].weight, false));
     }

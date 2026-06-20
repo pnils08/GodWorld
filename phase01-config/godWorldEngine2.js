@@ -1149,7 +1149,9 @@ function updateNamedCitizens_(ctx) {
   // Audit-miss: §5.6.6 spec did not list this writer (it's in godWorldEngine2.js
   // itself). Migrated S188 to keep its LastUpdated mutations from being
   // clobbered by the consolidated commit. Spec table A1 entry #11
-  // (`generateNamedCitizensEvents.js:715`) has zero callers — orphan.
+  // (`generateNamedCitizensEvents.js`) was a zero-caller orphan — DELETED
+  // engine.38 S264; named citizens now route through generateCitizensEvents_
+  // (Tier-1/2 participation gate), which already emits Reputation/Lifestyle.
   if (!ctx.ledger) {
     throw new Error('updateNamedCitizens_: ctx.ledger not initialized');
   }

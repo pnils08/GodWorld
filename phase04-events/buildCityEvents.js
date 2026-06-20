@@ -604,13 +604,16 @@ function buildCityEvents_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // EVENT COUNT (deterministic)
   // ═══════════════════════════════════════════════════════════════════════════
-  var count = rng() < 0.3 ? 2 : 1;
+  // engine.38 A4 — supply: 3-4 city events/cycle base (a cycle is a week; was
+  // 1-2, which starved the T8 fan-out). Calendar pushes the ceiling via Math.max
+  // so a festival/championship never lowers the base.
+  var count = 3 + (rng() < 0.4 ? 1 : 0);
 
   // Calendar increases event count
-  if (holidayPriority === "major" || holidayPriority === "oakland") count = Math.max(count, 2);
-  if (isFirstFriday) count = Math.max(count, 2);
-  if (sportsSeason === "championship") count = 3;
-  if (holiday === "OaklandPride" || holiday === "ArtSoulFestival") count = 3;
+  if (holidayPriority === "major" || holidayPriority === "oakland") count = Math.max(count, 4);
+  if (isFirstFriday) count = Math.max(count, 4);
+  if (sportsSeason === "championship") count = Math.max(count, 5);
+  if (holiday === "OaklandPride" || holiday === "ArtSoulFestival") count = Math.max(count, 5);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WEIGHTED SAMPLE WITHOUT REPLACEMENT (v2.4)

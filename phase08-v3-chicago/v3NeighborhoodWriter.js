@@ -64,10 +64,27 @@ var PULSE_FOLD = {
   attractiveness: { dampen: 0.25, cap: 4.00 }
 };
 
+// engine.38 S2 — pulse-fold volume normalization reference. The dampen/cap above
+// were sized at C96 (~25-52 TOTAL events/cycle -> ~1-3 per hood). After full-
+// population coverage (~600-750/cycle -> ~28/hood) the raw per-hood SUMS are
+// ~15x larger, so dampen*sum saturated every active hood to +/-cap every cycle,
+// erasing inter-neighborhood signal (a vibrant hood and a quiet one both pinned).
+// Fix: normalize the sum to a per-hood reference event count, but ONLY above that
+// reference — at or below it (the entire C96 regime) the math is byte-identical
+// to the old fold, so low-volume behavior is unchanged. Above it, the fold
+// reflects net per-event LEAN (direction/intensity), not raw volume.
+// NOTE: PULSE_REF_EVENTS=8 covers the C96 per-hood range; confirm against the
+// first C99 pulse ranges (the dampen/cap themselves may want a light re-tune once
+// live high-volume column ranges are measured — tracked as engine.38 S2 follow-up).
+var PULSE_REF_EVENTS = 8;
+
 // engine.33 — dampened, capped pulse delta for one metric (0 when no pulse).
+// engine.38 S2 — volume-normalized (see PULSE_REF_EVENTS).
 function pulseFoldDelta_(pulse, key) {
   if (!pulse) return 0;
-  var raw = Number(pulse[key] || 0) * PULSE_FOLD[key].dampen;
+  var events = Number(pulse.events || 0);
+  var denom = events > PULSE_REF_EVENTS ? events : PULSE_REF_EVENTS;
+  var raw = (Number(pulse[key] || 0) / denom) * PULSE_REF_EVENTS * PULSE_FOLD[key].dampen;
   var cap = PULSE_FOLD[key].cap;
   if (raw > cap) return cap;
   if (raw < -cap) return -cap;

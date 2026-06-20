@@ -197,6 +197,29 @@ function nudgesForEvent_(tag, severityMult, text) {
   return scale_(DEFAULT_AMBIENT, severityMult);           // a logged ordinary day
 }
 
+// Reflection write-back composer (citizen-loop dual-tag, engine.31 Phase 2).
+// The EVENT tag contributes its NON-composure dials; the AFFECT tag is the SOLE composure
+// authority and contributes its FULL deltas (incl. its own non-composure dials, e.g. Resentful
+// warmth -2). Additive on shared dials (Community warmth +2 + Resentful warmth -2 -> 0).
+//   composure-as-affect-only is scoped HERE — the reflection path — NOT in DIAL_MAP. The
+//   objective compressor/back-date path (compressLifeHistory_ fold, backdateCitizenDials) keeps
+//   real-event composure (Critical -8, Divorce -5) untouched. Composing here also avoids
+//   double-counting the objective event's composure: the same Divorce both folds (objective, -5)
+//   and is reflected on (subjective, affect-only) — only the affect mood reaches composure.
+//   A null/absent affect tag yields ZERO composure from this reflection (no event fallback).
+function nudgesForReflection_(eventTag, affectTag, severityMult, text) {
+  var out = {};
+  var ev = nudgesForEvent_(eventTag, severityMult, text);
+  for (var d in ev) {
+    if (ev.hasOwnProperty(d) && d !== 'composure') out[d] = (out[d] || 0) + ev[d];
+  }
+  var af = nudgesForEvent_(affectTag, severityMult, text);
+  for (var k in af) {
+    if (af.hasOwnProperty(k)) out[k] = (out[k] || 0) + af[k];
+  }
+  return out;
+}
+
 // true if a tag resolves to ANY dial movement (structural markers -> false).
 function hasTag_(tag, text) {
   var fx = nudgesForEvent_(tag, 1, text);
@@ -208,6 +231,7 @@ if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     DIAL_MAP: DIAL_MAP, CONTENT_RULES: CONTENT_RULES, STRUCTURAL: STRUCTURAL,
     EDITION_RE: EDITION_RE, CALENDAR_SUFFIXES: CALENDAR_SUFFIXES, DEFAULT_AMBIENT: DEFAULT_AMBIENT,
-    baseTag_: baseTag_, nudgesForEvent_: nudgesForEvent_, hasTag_: hasTag_
+    baseTag_: baseTag_, nudgesForEvent_: nudgesForEvent_,
+    nudgesForReflection_: nudgesForReflection_, hasTag_: hasTag_
   };
 }

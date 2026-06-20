@@ -88,6 +88,17 @@ function applyTaggedEvent_(c, tag, dialMap, severityMult) {
   applyEvent_(c, { label: tag, effects: effects });
 }
 
+// dual-tag reflection write-back (citizen-loop): EVENT tag -> non-composure dials, AFFECT tag ->
+// composure (composure-as-affect-only) + its own deltas, composed by dialMap.nudgesForReflection_.
+// Distinct from applyTaggedEvent_ (objective single tag): this is the SUBJECTIVE wake-reflection path.
+// INERT until the gated cycle wires it (a Phase-9 sibling, post Phase-1 audit) — no cycle caller today.
+function applyReflectionDualTag_(c, eventTag, affectTag, dialMap, severityMult) {
+  var effects = dialMap && dialMap.nudgesForReflection_
+    ? dialMap.nudgesForReflection_(eventTag, affectTag, severityMult)
+    : {};
+  applyEvent_(c, { label: (eventTag || '') + '|' + (affectTag || ''), effects: effects });
+}
+
 // end-of-cycle: temporary swings fade back toward the permanent self
 function settleCycle_(c) {
   for (var i = 0; i < DIALS.length; i++) {
@@ -153,7 +164,8 @@ if (typeof module !== 'undefined' && module.exports) {
     DIALS: DIALS, MIDPOINT: MIDPOINT, BAND_CUTS: BAND_CUTS, BAND_MULT: BAND_MULT,
     HARDEN_STREAK: HARDEN_STREAK,
     newCitizen_: newCitizen_, current_: current_,
-    applyEvent_: applyEvent_, applyTaggedEvent_: applyTaggedEvent_, settleCycle_: settleCycle_,
+    applyEvent_: applyEvent_, applyTaggedEvent_: applyTaggedEvent_,
+    applyReflectionDualTag_: applyReflectionDualTag_, settleCycle_: settleCycle_,
     bandIndex_: bandIndex_, band_: band_, bandMultiplier_: bandMultiplier_,
     describe_: describe_, snapshot_: snapshot_,
     serialize_: serialize_, deserialize_: deserialize_

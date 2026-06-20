@@ -158,8 +158,8 @@ async function generateVoice(system, user) {
   console.log('\n--- reflection ---\n' + reflection + '\n------------------');
 
   if (DRY) {
-    const tag = await classifier.classifyReflection_(reflection);
-    logLine(`[dry-run] would classify -> ${JSON.stringify(tag)}; no writes`);
+    const tags = await classifier.classifyDualReflection_(reflection);
+    logLine(`[dry-run] would classify -> ${JSON.stringify(tags)}; no writes`);
     process.exit(0);
   }
 
@@ -170,13 +170,16 @@ async function generateVoice(system, user) {
   if (appended.error) { logLine('appendReflection_ ERROR: ' + appended.error); process.exit(1); }
   logLine(`page ${ptr.tag} (${ptr.created ? 'created' : 'existing'}) <- reflection doc ${appended.id || '?'}`);
 
-  // 2) persist the classified tag to Reflection_Intake (the cycle reads this when the gate opens).
-  const cls = await classifier.classifyReflection_(reflection);
-  if (cls.tag) {
+  // 2) persist the dual classified tags to Reflection_Intake (the cycle reads this when the gate opens).
+  //    Row: [ts, popId, cycle, WAKE, EVENT(col E), snippet, applied='no', AFFECT(col H)] — A-G stay
+  //    positional (back-compat); affect is appended at H. composure-as-affect-only lives in the
+  //    cycle's gated write-back (nudgesForReflection_), not here.
+  const cls = await classifier.classifyDualReflection_(reflection);
+  if (cls.event || cls.affect) {
     await sheets.appendRows('Reflection_Intake', [[
-      new Date().toISOString(), c.popId, cycle, WAKE, cls.tag, reflection.slice(0, 180).replace(/\n/g, ' '), 'no',
+      new Date().toISOString(), c.popId, cycle, WAKE, cls.event || '', reflection.slice(0, 180).replace(/\n/g, ' '), 'no', cls.affect || '',
     ]]);
-    logLine(`Reflection_Intake <- [${cls.tag}] (applied=no, gated)`);
+    logLine(`Reflection_Intake <- event=[${cls.event || '-'}] affect=[${cls.affect || '-'}]${cls.affectFallback ? ' (affect fallback)' : ''} (applied=no, gated)`);
   } else {
     logLine(`classifier off-vocab/err, intake skipped: ${cls.raw}`);
   }

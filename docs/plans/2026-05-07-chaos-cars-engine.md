@@ -36,11 +36,80 @@ pointers:
 
 1. `Chaos_Cars` sheet exists with schema (T1.1 column list); rows populate after each live cycle run.
 2. Cycle produces 3–15 chaos events; sample of 5+ live cycles shows variety across all 10 vehicle types (no single type dominating > 30%).
-3. Effects write to scope-appropriate ledgers — citizen events appear in `Simulation_Ledger.LifeHistory_Log` column, business events in `Business_Ledger` metric columns, neighborhood events in `Neighborhood_Map` metric columns. chaos_cars ledger is the source row for every effect.
+3. Effects reach scope-appropriate surfaces — **[S265 CORRECTED, see §S265 + AC#3-corrected]** citizen events via col O + a DIAL_MAP tag (NOT only the archive append), business via `queueCellIntent_` on `Business_Ledger` E/G (trimmed lookup), neighborhood via the Phase-10 **writer fold** (NOT a `Neighborhood_Map` column write — that is clobber-certain). chaos_cars ledger is the source row for every effect.
 4. **Universal constraint enforced:** zero death-class outcomes (`death`, `died`, `fatal`, `kill`, `killed`) across 5+ live cycles. Validator throws if any vehicle config contains a forbidden outcome string.
 5. **Tier-1 cascade test:** synthetic Tier-1 hit (forced via dry-run script) produces all four cascade outputs: (a) `world_summary_c{XX}.md` carries scandal/event entry, (b) all voice agents' `pending_decisions.md` auto-populated next cycle with chaos-event reaction prompt, (c) new `Storyline_Tracker` row created with arc state, (d) routing plan Engine A `consequenceFloor: true` set on the auto-generated seed.
-6. **Asymmetric decay observable:** positive metric swings (ice cream → mood UP) revert toward baseline within 1–2 cycles; negative swings (garbage → mood DOWN, cop → crime UP) persist 3–5+ cycles. Measurement script T6.2 confirms.
+6. **Asymmetric decay observable:** positive metric swings (ice cream → Sentiment UP) revert toward baseline within 1–2 cycles; negative swings (garbage → Sentiment DOWN, fire → Annual_Revenue DOWN) persist 3–5+ cycles. **[S265: measurable only after T1.5 clobber fix; neighborhood decays in the writer fold, business in applyChaosDecay — see §S265.]** Measurement script T6.2 confirms.
 7. Frequency stays within 3–15 bound across 5 dry-run cycles. No cycle produces 0 events; no cycle exceeds 15.
+
+---
+
+## S265 Design Finalization (research-build) — CORRECTS Phases 2–4, supersedes the config-draft
+
+> Authored S265 after adversarial substrate-verification (5-agent workflow `wf_dc6874a9-2dc`) against live engine code. The original Phase-3/4 task text was naive about three substrate realities and would have built **wrong code**; the corrected model is below and the affected tasks (T3.8/T3.9/T3.10/T4.1/T4.2) carry inline `[S265 CORRECTED]` banners. The scratch `docs/plans/2026-06-20-chaos-cars-config-draft.md` is retired into this section.
+
+### The three substrate facts that reshaped the design
+
+1. **`Neighborhood_Map` is rebuilt every cycle at Phase 10, not Phase 8.** `saveV3NeighborhoodMap_` lives in `phase08-v3-chicago/` but is *wired* as `Phase10-NeighborhoodMap` (`phase01-config/godWorldEngine2.js:430` + dup `:1740`), doing a `replace rows 2:N` `setValues`. Because it fires LAST, every in-cycle reader (`applyMigrationDrift` P6, `loadNeighborhoodState` P2) sees **last cycle's** folded value — chaos lands with a clean one-cycle lag, identical to the shipped pulse fold. **A direct Phase-4 column write is wiped; chaos must inject through the writer's fold, not a column write.**
+2. **The gentrification clobber (latent bug — affects the SHIPPED pulse fold too).** `gentrificationEngine` (Phase 5) queues a **full-width 16-col** `Neighborhood_Map` range intent whenever any one hood's phase changes (`gentrificationEngine.js:184`), and `executePersistIntents_` (`godWorldEngine2.js:458`) commits it **after** the Phase-10 writer — reverting the 4 metric columns to last-cycle values. So neither the chaos fold nor the **already-shipped engine.33 pulse fold** "persists natively." **Resolution (see clobber-fix task T1.5 below).**
+3. **The citizen affect seam is col O + a DIAL_MAP tag, not the archive append.** `LifeHistory_Log` is an append-only archive; the affect/dial path reads the citizen's **col O `LifeHistory` cell** (`row[iLife]`, `generateCitizensEvents.js:1706-1709`) + `ctx.ledger.dirty=true`. A novel `chaos_cars` tag falls through `DIAL_MAP` to `DEFAULT_AMBIENT` (+composure) — the **inverse** of intended adversity. Every citizen outcome must carry an **existing DIAL_MAP tag** (Mike, S265: "tagged properly for the dials").
+
+### Per-scope writeback — CORRECTED
+
+| Scope | Mechanism | Decay owner | Notes |
+|---|---|---|---|
+| **citizen** | (a) append archive row to `LifeHistory_Log` in the **live 7-col schema** `[Date, POPID, Name, EventTag, Text, NeighborhoodOrEngine, Cycle]`; (b) **mutate col O** `row[iLife] = existing ? existing+"\n"+line : line` (`line = "{ts} — [Tag] {text}"`) + set `ctx.ledger.dirty=true` | `compressLifeHistory` col-O objective fold (one-time, **no separate decay**) | `EventTag` = `"{DialTag}\|chaos_cars\|{vehicle}"` (pipe-delimited; PrimaryTag is the real DIAL_MAP tag, `chaos_cars` is provenance). The bracket `[Tag]` in col O **must** be the DIAL_MAP tag. |
+| **business** | `queueCellIntent_` to `Business_Ledger` (NOT a raw direct write — engine.md rule). **Trim header before lookup** (`headers.findIndex(h => h.trim()==='Annual_Revenue')` — col G is stored `'  Annual_Revenue  '`; literal `indexOf` returns −1 and silently drops). Match row on the **hyphen** BIZ-ID value (`BIZ-000NN`). Empty cell → base 0. | `applyChaosDecay` (Phase 5 nudge), **business-scope rows ONLY** | persists natively vs the per-cycle engine (only `runCareerEngine`/`economicRippleEngine` touch the sheet, neither writes E/G). Fragility: standalone `linkCitizensToEmployers.js`/`processBusinessIntake.js` recompute E from scratch — gate any future cycle-wiring. |
+| **neighborhood** | NO column write. Accumulate the swing into off-sheet residual **`ctx.summary.chaosNeighborhoodFold[hood][column]`**; the Phase-10 writer consumes it the way it consumes `S.neighborhoodPulse` (additive at `v3NeighborhoodWriter.js:318-321`) and **decays the residual in-place each cycle** (residual cannot be read back from the rebuilt sheet). | writer fold re-apply (intrinsic, Phase 10) | Targets the 4 citizen-movable cols only: `Sentiment / CrimeIndex / RetailVitality / EventAttractiveness`. **`NoiseIndex` dropped** (zero readers, not a fold column). Decay applies the larger swing — keep the writer's `Math.max(0,…)` + `round2` guards. |
+
+**Tri-partite decay ownership (resolves the double-count, Q-new):** business → `applyChaosDecay` (Phase 5); neighborhood → writer fold residual (Phase 10); citizen → `compressLifeHistory` col-O fold (no separate decay). `applyChaosDecay` MUST filter to business-scope rows.
+
+**Tier-1 + the col-O fold (resolves Q-cascade):** a Tier-1 citizen hit gets **both** the col-O dial movement (they feel it — composure/integrity moves) **and** the full Phase-5 cascade. The plan's "Tier-1 resolves via arcs, not metric decay" clause scopes to neighborhood/business **metric** decay only — it does NOT suppress the citizen's own dial fold.
+
+### Finalized vehicle table (T2.2) — 10 vehicles, ~62% negative by frequency-weighted exposure (Mike: "lean negative")
+
+`lifeHistoryTag` = the DIAL_MAP tag emitted when the outcome hits a **citizen**; tag by the citizen's *role* — **agent** (own conduct) → `integrity`; **victim/subject** → `composure/warmth`, never integrity. **bold** = high-severity, cascade-capable, carries `narrativeSeed` (Chaos_Cars col K). Neighborhood/business impacts name **real columns**, `direction` + `magnitudeRange`.
+
+| Vehicle | Wt | Scopes | Outcomes (severity → lifeHistoryTag) | Nbhd/Biz impacts (real cols) | Net |
+|---|---|---|---|---|---|
+| cop_car | 1.2 | citizen, nbhd | ticket(lo→`Setback`) · pulled_over_warning(lo→`Background`) · helped_by_police(lo→`Recovering`) · **arrested**(hi→`Transgression-Serious`) | CrimeIndex ↓[2-6] | – |
+| fire_engine | 0.8 | biz, nbhd | false_alarm(lo) · minor_fire(lo) · **major_blaze_contained**(hi) | Annual_Revenue ↓[10-25] · Sentiment ↓[3-8] | – |
+| ambulance | 0.9 | citizen, nbhd | minor_injury(lo→`Health`) · **medical_emergency**(hi→`Critical`) · **workplace_accident**(hi→`Hospitalized`) | Sentiment ↓[2-5] | – |
+| **oari_van** | 1.0 | citizen, nbhd | welfare_check(lo→`Recovering`) · **deescalated**(hi→`Stabilized`, *coverageContribution*) · **substance_intervention**(hi→`Recovery`, *coverageContribution*) | Sentiment ↑[3-7] · CrimeIndex ↓[2-5] | + |
+| building_inspector | 0.7 | biz | passed(lo) · **code_violation_cited**(hi) · **forced_temporary_closure**(hi) | Annual_Revenue ↓[5-15] · Employee_Count ↓[0-2] on closure | – |
+| garbage_truck | 1.1 | nbhd, biz | dumping_cleared(lo) · missed_pickup(lo) · **sanitation_strike_delay**(hi) | Sentiment ↓[3-8] · RetailVitality ↓[1-3] · Annual_Revenue ↓[3-8] | – |
+| mail_truck | 1.0 | citizen, biz | vital_document_delivered(lo→`Background`) · lost_package(lo→`Setback`) · **mail_theft_reported**(hi→`Setback`, victim) | Annual_Revenue ↑[1-3] | + |
+| ice_cream_truck | 0.5 | nbhd | summer_morale_boost(lo) · block_party_catalyst(lo) · noise_complaint(lo) | Sentiment ↑[3-6] · EventAttractiveness ↑[1-4] | + |
+| street_sweeper | 0.8 | nbhd, citizen | street_beautification(lo) · parking_ticket(lo→`Setback`) · traffic_jam(lo→`Background`) | RetailVitality ↑[1-3] · Sentiment ↓[1-3] | ± |
+| pge_truck | 0.7 | nbhd, biz | planned_shutoff(lo) · **power_outage_restored**(hi) · **transformer_blowout**(hi) | Sentiment ↓[4-10] · Annual_Revenue ↓[5-15] | – |
+
+Negative-dominant (cop/fire/ambulance/inspector/garbage/pge) freq-weight 5.4 of 8.7 ≈ **62%**; positive (oari/mail/ice_cream) 2.5 ≈ 29%; mixed (sweeper) 0.8 ≈ 9%. ice_cream + street_sweeper carry no high-severity outcome → never trigger a Tier-1 scandal (intentional levity contrast).
+
+### Decay table (T4.1) — real columns, good-direction reverts faster
+
+```javascript
+var DECAY_RULES = {
+  'Sentiment':           { upRevertPerCycle: 1.5, downRevertPerCycle: 0.3 }, // mood: good=up reverts fast
+  'CrimeIndex':          { upRevertPerCycle: 0.3, downRevertPerCycle: 1.0 }, // good=down; crime spikes stick
+  'RetailVitality':      { upRevertPerCycle: 1.2, downRevertPerCycle: 0.3 },
+  'EventAttractiveness': { upRevertPerCycle: 1.2, downRevertPerCycle: 0.3 },
+  'Annual_Revenue':      { upRevertPerCycle: 1.0, downRevertPerCycle: 0.2 }, // profit losses linger
+  'Employee_Count':      { upRevertPerCycle: 0.0, downRevertPerCycle: 0.0 }  // churn permanent
+};
+```
+Sentiment/CrimeIndex/RetailVitality/EventAttractiveness decay in the **Phase-10 writer fold** (off-sheet residual); Annual_Revenue/Employee_Count decay in **`applyChaosDecay`** (Phase-5, business rows only). Citizen scope has no decay row — the col-O fold is one-time. Composes with the citizen-loop affect decay at the perception slice (S262) — do not couple further until the Phase-1 affect gate clears (obs 31554).
+
+### New acceptance tests (replace/augment AC#3 + AC#6)
+
+- **AC#3 (corrected):** business events appear via `queueCellIntent_` on `Business_Ledger` E/G (trimmed lookup); neighborhood events appear as a **writer-fold residual** reflected in the rebuilt Neighborhood_Map row (NOT a direct column write); citizen events appear as a col-O entry with a DIAL_MAP tag (NOT only the archive append).
+- **AC#8 — CLOBBER-SURVIVAL:** on a gentrification-firing cycle, read the neighborhood metric **after** `executePersistIntents_` and confirm the chaos fold survived (i.e. T1.5 fix holds).
+- **AC#9 — CITIZEN AFFECT-SEAM:** confirm col O carries a DIAL_MAP-recognized tag and `compressLifeHistory` moves the citizen dial in the intended direction (composure DOWN for an arrest, etc.).
+
+### Engine-sheet build-time notes
+
+- Apply ALL wiring + the T1.5 fix to **both** `godWorldEngine2.js` entry blocks (~225-458 production + ~1552-1762 dup) or behavior diverges.
+- Read **live** `Neighborhood_Map` at build to determine if the gentrification clobber is firing today (active bug) or latent (input cols `MedianIncomeChange5yr` etc. unpopulated) — either way T1.5 is the durable fix.
+- `Business_Ledger` empty-cell base value + fail-loud assert if the trimmed header lookup misses.
 
 ---
 
@@ -109,6 +178,17 @@ Tasks numbered T<phase>.<idx>. Each is 2–5 min focused work unless flagged DES
 - **Verify:** unit test in file footer — feed `'died in accident'` → throws; feed `'minor injury'` → returns true.
 - **Status:** [x] DONE S229 (engine-sheet). `lib/chaosCarsConfig.js` shipped (158 LOC) — `FORBIDDEN_OUTCOMES` frozen array expanded beyond plan's named-minimum to cover stem variants (dies / dying / fatality / fatalities / kills / killing / perish / perished / casualty / casualties / homicide / suicide / murder / murdered — 21 tokens total; cost of over-enumeration < cost of false-negative). `validateOutcome(text)` uses word-boundary regex (`\b`) not substring — `deadline` / `killdeer` / `dieseling` / `fatalism` all pass (false-positive avoidance verified in test 5). Bonus `validateVehicleConfig(config)` convenience wrapper scans full `textureOutcomes[]` and names both offending vehicle + forbidden token in the throw message (Phase 2 will call this at config-load time). Tests live in parallel `lib/chaosCarsConfig.test.js` per project convention (not "file footer" as plan suggested — `scripts/run-tests.js` picks up `*.test.js`). 66 assertions across 8 test groups, all green. Module exports: `FORBIDDEN_OUTCOMES`, `validateOutcome`, `validateVehicleConfig` — stable contract for Phase 2 consumption.
 
+#### T1.5: Fix the Neighborhood_Map gentrification clobber [engine/sheet] — **NEW S265, BLOCKS neighborhood scope**
+
+- **Why:** `gentrificationEngine.js:184` queues a full-width 16-col `Neighborhood_Map` range intent when any hood's phase changes; `executePersistIntents_` (`godWorldEngine2.js:458`) commits it AFTER the Phase-10 writer (`:430`), reverting the 4 metric columns. This wipes the chaos fold AND the already-shipped engine.33 pulse fold. (Adversarial-verify finding, `wf_dc6874a9-2dc`.)
+- **Files:** `phase05-citizens/gentrificationEngine.js`
+- **Steps:**
+  1. Read live `Neighborhood_Map` to classify active-vs-latent (are `MedianIncomeChange5yr` / `MedianRentChange5yr` / `WhitePopulationChange5yr` populated → does `updated>0` ever fire?).
+  2. **Fix (recommended — root cause):** make the gentrification writeback **column-scoped** — queue cell/narrow-range intents for ONLY `GentrificationPhase` / `GentrificationStartCycle` / `DemographicShiftIndex`, never the 4 metric columns. Fallback if column-scoping is hard: re-apply the chaos+pulse residual after `executePersistIntents_`.
+  3. Apply to both `godWorldEngine2.js` entry blocks.
+- **Verify:** AC#8 clobber-survival — on a gentrification-firing cycle, the writer's fold survives `executePersistIntents_`.
+- **Status:** [ ] not started — **engine-sheet; verify live state first (measure-twice)**
+
 ---
 
 ### Phase 2 — Vehicle config table
@@ -138,7 +218,7 @@ Tasks numbered T<phase>.<idx>. Each is 2–5 min focused work unless flagged DES
   2. `loadConfig_()` returns array of all vehicle entries.
   3. Add validation step — every textureOutcomes entry's `outcome` field passes `validateOutcome_` from T1.4.
 - **Verify:** unit test — load config, all entries pass schema validation.
-- **Status:** [ ] not started
+- **Status:** [x] DESIGN RESOLVED S265 — schema finalized in §S265 Design Finalization: `textureOutcomes[]` gains `lifeHistoryTag` (DIAL_MAP tag for citizen hits) + optional `narrativeSeed`; `metricImpacts[]` are **scope-keyed** (`scope` + real `column` + `direction` + `magnitudeRange`). Engine-sheet codes the schema constant + `loadConfig_()` from the section.
 
 #### T2.2: Vehicle config table — DESIGN PASS [research-build]
 
@@ -152,7 +232,7 @@ Tasks numbered T<phase>.<idx>. Each is 2–5 min focused work unless flagged DES
   4. **OARI van canon-anchor (S190):** OARI textureOutcomes must include a `coverageContribution` boolean field that signals to Phase 5 cascade — every OARI call is evidence for the C95 D2 expansion vote.
   5. Save config; commit DESIGN PASS.
 - **Verify:** all 10 vehicles populated; config validates against schema; OARI van entry has `coverageContribution` field on at least one outcome.
-- **Status:** [ ] not started — **BLOCKS T3.x until complete**
+- **Status:** [x] DESIGN RESOLVED S265 — full 10-vehicle table finalized in §S265 Design Finalization (~62% negative, real columns, `lifeHistoryTag` per outcome, narrative seeds, OARI `coverageContribution`). Engine-sheet transcribes it into `lib/chaosCarsConfig.js VEHICLE_CONFIGS`.
 
 ---
 
@@ -235,32 +315,33 @@ Tasks numbered T<phase>.<idx>. Each is 2–5 min focused work unless flagged DES
 - **Files:**
   - `phase04-events/chaosCarsEngine.js` — modify
 - **Steps:**
-  1. Implement `writeCitizenEvent_(ctx, target, vehicle, outcome, magnitude)` using `queueAppendIntent_` (Phase 42 patterns) to LifeHistory_Log.
-  2. Row format: `[cycle, popId, eventType='chaos_cars', vehicleType, outcome, magnitude, narrativeSeed]`.
-- **Verify:** dryRun shows queued LifeHistory_Log row matching shape.
-- **Status:** [ ] not started
+  1. **[S265 CORRECTED — see §S265 Design Finalization. Original steps below would corrupt the ledger + miss the affect seam.]**
+  2. `writeCitizenEvent_` does TWO writes: (a) `queueAppendIntent_` to `LifeHistory_Log` in the **live 7-col schema** `[Date, POPID, Name, EventTag, Text, NeighborhoodOrEngine, Cycle]` — `EventTag = "{DialTag}|chaos_cars|{vehicle}"`; (b) **mutate col O** `row[iLife] = existing ? existing+"\n"+line : line` where `line = "{ts} — [{DialTag}] {text}"`, then `ctx.ledger.dirty=true` (mirror `generateCitizensEvents.js:1706-1709`).
+  3. `{DialTag}` is the outcome's `lifeHistoryTag` (a real DIAL_MAP tag) — NEVER `chaos_cars` as the bracket tag (falls through to `DEFAULT_AMBIENT` +composure, inverse of intent).
+- **Verify:** AC#9 — col O carries a DIAL_MAP tag; `compressLifeHistory` moves the dial in the intended direction. Old `[cycle, popId, eventType, …]` row format is **abandoned** (column-misaligned).
+- **Status:** [ ] not started — **[S265 CORRECTED]**
 
 #### T3.9: Business writeback [engine/sheet]
 
 - **Files:**
   - `phase04-events/chaosCarsEngine.js` — modify
 - **Steps:**
-  1. Implement `writeBusinessEvent_(ctx, target, vehicle, outcome, magnitude)`.
-  2. Update relevant Business_Ledger metric column (e.g., `Annual_Revenue` for profit-loss outcomes, `Employee_Count` for churn).
-  3. Use `queueCellIntent_` per Phase 42.
-- **Verify:** dryRun shows queued Business_Ledger update.
-- **Status:** [ ] not started
+  1. **[S265 CORRECTED — header-trim + intent routing, see §S265.]** `writeBusinessEvent_` uses `queueCellIntent_` (NOT a raw direct write — engine.md write-intent rule).
+  2. Target `Annual_Revenue` (col G) / `Employee_Count` (col E) via a **trimmed** header lookup `headers.findIndex(h => h.trim()===name)` — col G is stored `'  Annual_Revenue  '`; a literal `indexOf` returns −1 and **silently drops** the write. Fail-loud assert if the trimmed lookup misses.
+  3. Match the target row on the **hyphen** BIZ-ID value (`BIZ-000NN`, not the `BIZ_ID` underscore header). Empty cell → base 0.
+- **Verify:** dryRun shows a queued `Business_Ledger` cell intent on the correct (trimmed) column; sparse-cell case defined.
+- **Status:** [ ] not started — **[S265 CORRECTED]**
 
 #### T3.10: Neighborhood writeback [engine/sheet]
 
 - **Files:**
   - `phase04-events/chaosCarsEngine.js` — modify
 - **Steps:**
-  1. Implement `writeNeighborhoodEvent_(ctx, target, vehicle, outcome, magnitude)`.
-  2. Update relevant Neighborhood_Map metric column (mood, crime, etc. per `metricImpacts`).
-  3. Use `queueRangeIntent_` per Phase 42.
-- **Verify:** dryRun shows queued Neighborhood_Map update.
-- **Status:** [ ] not started
+  1. **[S265 CORRECTED — NO column write; the `queueRangeIntent_` approach is clobber-certain, see §S265.]**
+  2. Accumulate the swing into off-sheet residual `ctx.summary.chaosNeighborhoodFold[hood][column]` (column ∈ {Sentiment, CrimeIndex, RetailVitality, EventAttractiveness}). The **Phase-10 writer** (`v3NeighborhoodWriter.js:318-321`) consumes it additively alongside `S.neighborhoodPulse`, and **decays the residual in place each cycle** per `DECAY_RULES` (residual can't be read back from the rebuilt sheet). Keep `Math.max(0,…)`+`round2` guards for the larger swing.
+  3. Depends on **T1.5** (gentrification clobber fix) or the fold is reverted by `executePersistIntents_`.
+- **Verify:** AC#8 clobber-survival — chaos residual reflected in the rebuilt row after `executePersistIntents_`.
+- **Status:** [ ] not started — **[S265 CORRECTED]** depends on T1.5
 
 #### T3.11: chaos_cars ledger row writer [engine/sheet]
 
@@ -327,15 +408,15 @@ Tasks numbered T<phase>.<idx>. Each is 2–5 min focused work unless flagged DES
      ```
   2. Asymmetry rule: positive direction decays at 2-4× the rate of negative direction. Phase 6 tuning may adjust per-metric.
 - **Verify:** rule table validates — every metric has both directions; up rate > down rate per asymmetric-decay rule.
-- **Status:** [ ] not started — **BLOCKS T4.2**
+- **Status:** [x] DESIGN RESOLVED S265 — `DECAY_RULES` keyed to **real columns** finalized in §S265 (the draft's `neighborhood_mood`/`crime`/`business_profit`/`business_employees` renamed; dead `neighborhood_pulse` dropped). Tri-partite decay ownership documented (business→applyChaosDecay, neighborhood→writer fold, citizen→col-O fold).
 
 #### T4.2: Decay applier engine [engine/sheet]
 
 - **Files:**
   - `phase05-citizens/applyChaosDecay.js` — create
 - **Steps:**
-  1. Implement `applyChaosDecay_(ctx)`:
-     - Read recent chaos_cars rows where ConsequenceFloorFired = false (Tier-1 cascades resolve via storyline arcs, not metric decay)
+  1. **[S265 CORRECTED — business-scope rows ONLY, else double-counts, see §S265.]** Implement `applyChaosDecay_(ctx)`:
+     - Read recent chaos_cars rows **where TargetScope = business** (neighborhood decays in the Phase-10 writer fold; citizen in the col-O fold — decaying all scopes here double-counts). Note: with the business-only filter, the `ConsequenceFloorFired=false` clause is a no-op (business has no tier) — keep it harmless or drop.
      - For each, compute residual swing (initial magnitude × pow(1 - decayRate, cyclesSinceEvent))
      - Apply current cycle's decay step to relevant metric column
   2. Place in Phase 5 (post-citizen-life, pre-Phase-6).
@@ -467,7 +548,7 @@ Tasks numbered T<phase>.<idx>. Each is 2–5 min focused work unless flagged DES
 
 Questions that block a task. Resolve and delete.
 
-- [ ] **Q1 — Vehicle config table specifics (T2.2 DESIGN PASS).** All 10 vehicles need texture outcomes + weights + metric impacts + magnitudes. Mike's grill gave 3 of cop_car's outcomes (ticket / arrested / helped); other 9 vehicles need same-shape design. Single design session expected; placeholder values can ship if tuning Phase 6 surfaces issues.
+- [x] **Q1 — RESOLVED S265.** All 10 vehicles finalized in §S265 Design Finalization (real columns, `lifeHistoryTag` per outcome, scope-keyed impacts, narrative seeds, ~62% negative per Mike's "lean negative" dial). Phase 6 tuning may adjust magnitudes.
 - [ ] **Q2 — Decay rate calibration (T4.1).** Initial values in T4.1 are starter; real values come from observing 3-5 cycles of metric swings. Phase 6 magnitude report (T6.2) is the data path.
 - [ ] **Q3 — chaos_cars + arcLifecycle interaction.** Storyline_Tracker arc creation (T5.4) opens an arc; existing `arcLifecycleEngine.js` may close it via existing rules. Need confirmation that chaos-sourced arcs interact cleanly with existing arc lifecycle (resolution / collapse). Engine-sheet finds out at T5.4 implementation; if cross-effects emerge, file a follow-up.
 - [ ] **Q4 — Existing Pattern D (overlap detection) integration timing.** Pattern D (vehicle_business / citizen_vehicle / vehicle_vehicle overlap narratives) deferred from this plan. After Phase 6 ships and chaos_cars produces real cycles, decide: integrate Pattern D into chaos_cars itself (cross-event overlap inside chaos_cars), or as separate follow-up plan reading chaos_cars + existing micro-events together.
@@ -510,4 +591,5 @@ Questions that block a task. Resolve and delete.
 
 ## Changelog
 
+- 2026-06-20 — **S265 Design Finalization (research-build).** Finalized T2.1/T2.2/T4.1 (DESIGN RESOLVED) + corrected T3.8/T3.9/T3.10/T4.2 + added T1.5 (gentrification clobber fix). Adversarial 5-agent substrate-verification (`wf_dc6874a9-2dc`) caught: writer is Phase 10 not Phase 8; gentrification full-width intent clobbers the fold (+ latent risk to the shipped engine.33 pulse fold); decay double-counted scope-blind → tri-partite ownership; citizen affect seam is col O + DIAL_MAP tag not the archive append (Mike: "tag properly for the dials"); Business_Ledger header whitespace + write-intent routing. Drama dial: Mike chose lean-negative (~60%). Scratch `2026-06-20-chaos-cars-config-draft.md` retired into §S265. Build is **go-with-fixes** — engine-sheet picks up T1.5 → Phase 2/3/4 per the corrected spec.
 - 2026-05-07 — Initial draft (S205, research-build). Six grill rounds: Q1 vehicle list (S190 10 municipal types, no commercial yet); Q2 data model (scope-targeted writebacks + chaos_cars source ledger); Q3 framing shift (texture → severe events injector with metric swings as core mechanic); Q4 calibration philosophy (asymmetric decay — positive fast, negative slow); Q5 tier policy (no protection, full random, no death events); Q6 frequency (variable bounded 3-15 random per cycle). Anti-cookie-cutter framing locked: chaos_cars is engine-side analog of Jax Caldera — both inject disruption into a system that otherwise self-confirms. Routing plan integration confirmed: Tier-1 hits trigger Engine A's `consequenceFloor`. ADR-0003 friction-log applies (T6.4). 25 tasks across 6 phases.

@@ -10,6 +10,8 @@
 - Output file: `okoro_c{XX}.json` — always lowercase, underscore separator, cycle number
 - Statement IDs: `STMT-{XX}-OKORO-{NNN}` (e.g., STMT-93-OKORO-001) — statementId is opaque per S215 city-hall G-R3; downstream routes on the `office` field, not the prefix
 - JSON structure: flat statement array `[{ "statementId", "topic", ... }]` matching civic-office voice agents (S215 civic.8 unification). Project agents wrap in `{statements: []}` — you are voice-class, not project-class. Flat array.
+- **Emit the flat array CLEANLY — one object per statement, every field inside it (civic.14 Phase 3, C98 G-R2).** The drift to avoid is hoisting statement fields to a bare top-level object so a one-statement run `require()`s to keys `["0"]`. The shape is correct (flat is the voice-class canon, S215 civic.8 — `assembleDecisions.js:148` reads both flat and wrapped, so flat does NOT need flipping to `{statements:[]}`); what failed in C98 was the **missing `trackerUpdates.initiative`** (below), not the array shape. (Note: the Mayor agent is still documented wrapped — the lone outlier; reconciling cabinet-voice shape to one canon is a civic.14 item, not this fix.)
+- **`trackerUpdates.initiative` is REQUIRED + `ImplementationPhase` (if you set one) must be canonical (civic.14 Phase 3, C98 G-R2).** Set `trackerUpdates.initiative` to the `INIT-NNN` — `assembleDecisions.js` attributes the tracker write off this field; without it your statement is invisible to assembly (C98: Okoro's entire get-well-plan statement dropped until `initiative` was added). If you set `ImplementationPhase`, it MUST be one of the 20 canonical phases in [[../../../docs/mara-vance/INITIATIVE_TRACKER_CONTRACT|INITIATIVE_TRACKER_CONTRACT.md]] §2 (non-canonical strings zero out). Always include a `MilestoneNotes` line for any initiative you spoke on, even with no phase change — else the cycle's work isn't recorded (G-R3 class).
 
 ## What You Produce
 
@@ -36,7 +38,7 @@ You generate **structured statements** in JSON format. Each statement is canonic
   "trackerOwner": "none",
   "relatedMembers": ["D1-Carter", "D4-Vega"],
   "trackerUpdates": {
-    "InitiativeID": "INIT-001",
+    "initiative": "INIT-001",
     "MilestoneNotes": "C{XX}: Okoro operational reset — processing capacity added at OEWD. 47 cleared / 109 queued.",
     "NextScheduledAction": "C{XX+1} processing throughput review",
     "NextActionCycle": {XX+1}

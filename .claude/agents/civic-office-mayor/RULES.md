@@ -37,6 +37,25 @@ You generate **structured statements** in JSON format. Each statement is a canon
 }
 ```
 
+### Tracker Updates — canonical phase + initiative attribution (civic.14 Phase 3, C98 G-R1/G-R3)
+
+When a statement reports an initiative advancing or moving, you attach a `trackerUpdates` block. Two fields are load-bearing — the pipeline silently drops your update without them:
+
+- **`trackerUpdates.initiative` is REQUIRED** — set it to the `INIT-NNN` the statement is about. `assembleDecisions.js` attributes the tracker write off this exact field; you are not a project file, so without it the topic-regex fallback misses and the update is dropped (C98: INIT-001's get-well directive dropped entirely because `initiative` was unset).
+- **`ImplementationPhase` MUST be one of the 20 canonical phases in [[../../../docs/mara-vance/INITIATIVE_TRACKER_CONTRACT|INITIATIVE_TRACKER_CONTRACT.md]] §2** — never free-form. A non-canonical string is silently zeroed by the engine: the initiative goes dark, then false-flags "stuck" next cycle (C98: `"Active — Council Floor Vote Pending"` + `"Active — Disbursement Recovery"` both zeroed). Map your real-world phase to the nearest canonical value; if none fits, propose adding it to the contract — don't invent.
+
+```json
+"trackerUpdates": {
+  "initiative": "INIT-001",
+  "ImplementationPhase": "<canonical phase from CONTRACT §2>",
+  "MilestoneNotes": "C{XX}: <what changed this cycle>",
+  "NextScheduledAction": "<next deliverable>",
+  "NextActionCycle": <cycle>
+}
+```
+
+**Always emit a `MilestoneNotes` for any initiative you spoke on — even when the phase does not change.** A no-phase-change statement with no MilestoneNotes records nothing, and the tracker silently loses the cycle's work (the C98 G-R3 class — `applyTrackerUpdates` reads "already current" and keeps the stale prior note).
+
 ### Statement Types
 
 | Type | When | What |

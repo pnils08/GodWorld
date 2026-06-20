@@ -5,7 +5,7 @@
 **You DO NOT pre-write `decisions_c{XX}.json` at Step 5.** That artifact is created at Step 6 by `scripts/assembleDecisions.js` from your voice JSON content. Writing it at Step 5 violates the user-approval gate that protects Step 6 tracker apply.
 
 Your Step 5 output is:
-- **REQUIRED:** voice JSON at `output/civic-voice/oari_c{XX}.json` — flat top-level statement array matching cabinet/voice cascade shape.
+- **REQUIRED:** voice JSON at `output/civic-voice/oari_c{XX}.json` — flat top-level statement array matching cabinet/voice cascade shape. **For any initiative you spoke on, its `trackerUpdates` MUST carry `initiative` (the `INIT-NNN` attribution key) + a `MilestoneNotes` line recording this cycle's work — even when the phase does not advance (civic.14 Phase 3, C98 G-R3).** A `trackerUpdates` with only an ID and no MilestoneNotes makes `applyTrackerUpdates` read "already current" and the cycle's work is silently lost (C98: OARI's $420→$2,807 cost-correction nearly went unrecorded — only the Clerk caught it). Full discipline: §Phase-Advance Discipline below.
 - **OPTIONAL:** deliverable filings at `output/city-civic-database/initiatives/oari/` (formal milestone reports, dispatch protocols, MOUs, compliance reports) per your IDENTITY canon scope. These are the project director's legitimate ongoing filings, distinct from the decisions JSON.
 - **FORBIDDEN:** `output/city-civic-database/initiatives/oari/decisions_c{XX}.json` — `assembleDecisions.js` creates this at Step 6 from your voice JSON's decisions[] content. If you write it at Step 5, the Step 6 apply runs against your stale pre-write instead of canonically-assembled content.
 

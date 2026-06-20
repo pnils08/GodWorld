@@ -43,6 +43,7 @@ const sheets = require('../lib/sheets');
 // whose statements carry an explicit InitiativeID. Safe to import: its main run
 // is require.main-guarded.
 const assemble = require('./assembleDecisions');
+const C = require('../lib/initiativePhaseContract'); // S265 civic.14 Phase 3 — phase canonicalization
 
 const ROOT = path.resolve(__dirname, '..');
 const DECISIONS_DIR = path.join(ROOT, 'output/city-civic-database/initiatives');
@@ -50,13 +51,93 @@ const VOICE_DIR = path.join(ROOT, 'output/civic-voice');
 const SHEET_NAME = 'Initiative_Tracker';
 const APPLY = process.argv.includes('--apply');
 
-// Columns we write back — must exist on Initiative_Tracker
+// Write-surface allowlist — the ONLY Initiative_Tracker columns the gate may
+// write. Enforced in normalizeTrackerWrite.setField (defense: a field outside
+// this list throws rather than silently writing). VoteCycle added S265 for the
+// G-PREP1 vote-scheduled stamp.
 const WRITEBACK_FIELDS = [
   'ImplementationPhase',
   'MilestoneNotes',
   'NextScheduledAction',
-  'NextActionCycle'
+  'NextActionCycle',
+  'VoteCycle'
 ];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Writer-normalization gate (S265 civic.14 Phase 3, engine-sheet — D-3.3)
+//
+// Canonicalizes what reaches the sheet so a drifted agent emission can't write a
+// dark phase or leave the tracker stale. Pure function (testable): takes the
+// statement's trackerUpdates + the current sheet row + the cycle, returns the
+// field-diff to write plus any warnings. Defense-in-depth behind the pre-assembly
+// validator (validateTrackerUpdates.js): the validator FLAGS pre-write, this gate
+// FIXES on write. Behaviors:
+//   - ImplementationPhase → canonicalized to §2 (variant/partial mapped); an
+//     UNRESOLVABLE phase is NOT written (leaves the prior value, loud warn) so
+//     the engine never gets a dark string (G-R1).
+//   - vote-scheduled advance with no VoteCycle → stamp VoteCycle + NextActionCycle
+//     = cycle+1, so the vote-trigger is deterministic not Mara-inferred (G-PREP1).
+//   - any write with a stale/empty NextActionCycle → advance to cycle+1 (G-PREP2).
+//   - a phase advance with no MilestoneNotes → stamp "C<cycle>: advanced to <phase>"
+//     so the cycle's motion is recorded, never silently lost (G-R3).
+function normalizeTrackerWrite(trackerUpdates, currentRow, cycle) {
+  const tu = trackerUpdates || {};
+  const cur = currentRow || {};
+  const updates = {};
+  const warnings = [];
+  const changes = [];
+  const setField = (field, newVal) => {
+    if (WRITEBACK_FIELDS.indexOf(field) === -1) {
+      throw new Error(`normalizeTrackerWrite: "${field}" is not in the WRITEBACK_FIELDS allowlist`);
+    }
+    const v = String(newVal);
+    const old = cur[field] != null ? String(cur[field]) : '';
+    if (v !== old) { updates[field] = v; changes.push({ field, old, new: v }); }
+  };
+
+  // ImplementationPhase — canonicalize before write.
+  let finalPhase = (cur.ImplementationPhase || '').toLowerCase();
+  if (tu.ImplementationPhase != null && String(tu.ImplementationPhase).trim() !== '') {
+    const res = C.canonicalizePhase(tu.ImplementationPhase);
+    if (res.how === 'none') {
+      warnings.push(`UNRESOLVABLE ImplementationPhase "${res.original}" — NOT written (engine would zero it); prior value "${cur.ImplementationPhase || ''}" kept. Emit a §2 phase or propose adding it.`);
+    } else {
+      if (res.how === 'variant' || res.how === 'partial') {
+        warnings.push(`ImplementationPhase "${res.original}" normalized → "${res.canonical}" (${res.how}).`);
+      }
+      setField('ImplementationPhase', res.canonical);
+      finalPhase = res.canonical;
+    }
+  }
+
+  // Plain writeback fields (MilestoneNotes / NextScheduledAction / NextActionCycle).
+  ['MilestoneNotes', 'NextScheduledAction', 'NextActionCycle'].forEach((field) => {
+    if (tu[field] !== undefined) setField(field, tu[field]);
+  });
+
+  // G-PREP1 — vote-scheduled needs a deterministic VoteCycle + NextActionCycle.
+  // Respect an emitted VoteCycle; otherwise stamp cycle+1 when the row has none.
+  if (finalPhase === 'vote-scheduled') {
+    const emittedVote = tu.VoteCycle != null ? String(tu.VoteCycle).trim() : '';
+    const curVote = cur.VoteCycle != null ? String(cur.VoteCycle).trim() : '';
+    if (emittedVote) setField('VoteCycle', tu.VoteCycle);
+    else if (!curVote || curVote === '-') setField('VoteCycle', cycle + 1);
+    if (updates.NextActionCycle === undefined && tu.NextActionCycle === undefined) setField('NextActionCycle', cycle + 1);
+  }
+
+  // G-PREP2 — any write must leave NextActionCycle forward, never stale.
+  if (Object.keys(updates).length > 0 && updates.NextActionCycle === undefined && tu.NextActionCycle === undefined) {
+    const curNext = parseInt(cur.NextActionCycle, 10);
+    if (!Number.isFinite(curNext) || curNext < cycle) setField('NextActionCycle', cycle + 1);
+  }
+
+  // G-R3 — a phase advance with no MilestoneNotes records the cycle's motion.
+  if (updates.ImplementationPhase !== undefined && updates.MilestoneNotes === undefined && tu.MilestoneNotes === undefined) {
+    setField('MilestoneNotes', `C${cycle}: advanced to ${updates.ImplementationPhase}`);
+  }
+
+  return { updates, warnings, changes };
+}
 
 // RB-4/ES-5 trackerOwner contract (S246; audit reconciled engine.20e, S256):
 // trackerOwner names the INITIATIVE a statement owns (e.g. "INIT-002"), or
@@ -327,18 +408,13 @@ async function main() {
     const sheetRow = rowIndex + 2;
     const currentRow = trackerRows[rowIndex];
 
-    // Build the update fields — only write fields that exist in WRITEBACK_FIELDS
-    const updates = {};
-    for (const field of WRITEBACK_FIELDS) {
-      if (dec.trackerUpdates[field] !== undefined) {
-        const newVal = String(dec.trackerUpdates[field]);
-        const oldVal = currentRow[field] || '';
-        if (newVal !== oldVal) {
-          updates[field] = newVal;
-          console.log(`  ${field}: "${oldVal}" → "${newVal}"`);
-        }
-      }
-    }
+    // Build the update fields via the writer-normalization gate (S265 civic.14
+    // Phase 3): canonicalize phase, stamp vote-cycle, advance NextActionCycle,
+    // record motion in MilestoneNotes. Replaces the old verbatim WRITEBACK_FIELDS
+    // copy that let drifted phases reach the sheet and the engine zero them.
+    const { updates, warnings: gateWarnings, changes } = normalizeTrackerWrite(dec.trackerUpdates, currentRow, CYCLE);
+    changes.forEach(ch => console.log(`  ${ch.field}: "${ch.old}" → "${ch.new}"`));
+    gateWarnings.forEach(w => console.log(`  ⚠ ${w}`));
 
     // Always update LastUpdated
     const today = new Date().toLocaleDateString('en-US');
@@ -482,4 +558,9 @@ async function main() {
   console.log('');
 }
 
-main().catch(e => { console.error(e); process.exit(1); });
+if (require.main === module) {
+  main().catch(e => { console.error(e); process.exit(1); });
+}
+
+// S265 civic.14 Phase 3 — exported for unit testing the write-normalization gate.
+module.exports = { normalizeTrackerWrite };

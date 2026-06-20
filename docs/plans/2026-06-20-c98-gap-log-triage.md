@@ -184,7 +184,7 @@ pointers:
   2. `generate-edition-pdf.js`: place orphaned QA-passed ATMOSPHERIC frames into a masthead/section-break/filler/FRONT-PAGE-secondary slot rather than silently dropping (coordinate with RB-3 cap — either DJ stops emitting them OR the generator hosts them; pick one, don't double-handle).
 - **Verify:** dropped photos show `dropped:true` in manifest.json; a QA-passed atmospheric frame either renders or is capped at source.
 - **Absorbs ROLLOUT:** pipeline.13 — note forward.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S265 (`bc7d9af3`) — step 1 only. `syncDropStateToManifest()` copies sidecar drop-state into `manifest.photos[]` at QA close (idempotent; explicit `dropped:false` for live photos); added `require.main` guard + export. **Step 2 (PDF orphan-hosting) NOT built** — Open Q resolved DJ-cap-at-source (RB-3), hosting would double-handle. Test `generate-edition-photos.syncDropState.test.js` (5/5). Node-side, no clasp.
 
 ### ES-6: Canon-ledger backfills + sports-feed downstream-taint check
 
@@ -199,7 +199,7 @@ pointers:
   3. Mateo Walker: decide ledger backfill vs canon-only acceptance (Mike call if Tier-1); Dario Vega: confirm pure invention, no action.
 - **Verify:** Wilson Shepard resolves via `lookup_citizen`; NBA-taint trace documented.
 - **Absorbs ROLLOUT:** none (backfills + verify).
-- **Status:** [ ] not started
+- **Status:** [x] DONE S265 (Mike go-call on the live-ledger write). **(1) Wilson Shepard backfilled** → `POP-01022` (First=Wilson, Last=Shepard, OriginGame=GodWorld, UNI=yes/MED=no/CIV=no, ClockMode=GAME, Tier=3, Status=Active, RoleType="Head Coach, Oakland Oaks", CitizenBio set; BirthYear/Neighborhood/Gender/economics left blank — not invented, pending Paulson-domain enrichment). Verified live (ledger 906→907 rows, row reads back correct). Structural fields mirror Paulson POP-00527 (sports figure) + Vanessa POP-01021 (sparse-backfill precedent, cycle-safe). **(2) NBA taint — CONTAINED:** the malformed `Team Record` date fired a breaking-news @ Jack London trigger, but no downstream propagation — Jack London's decay (-0.45) is mid-pack in the citywide cooldown (normal mean-reversion, not an NBA spike); the only NBA deck item is the legitimate Oaks expansion-draft story (Q3); the "Jack London" sift proposal is the Anna Baker retirement. Cell-fix itself is Paulson-domain (out-of-scope per triage). **(3) Dario Vega** = pure reflection invention → dropped, no action. **Mateo Walker = REVERSAL ON EVIDENCE (do NOT backfill, Mike-confirmed):** measure-twice found POP-00725 = "Matthew Welker" (Jack London, Trade Union Representative) — exact match to the C98 "Mateo Walker, 62, Jack London, Trade Union Rep" canon. "Mateo Walker" is a name-drift mis-rendering of existing citizen Matthew Welker, NOT a missing person; a card would create a duplicate phantom (same class as the killed POP-01021/POP-00781 merge). Real fix is editorial name-fidelity (RB-1 provenance fence already covers loop-bot drift). No new card. Pattern: feedback_measure-twice-cascading-effects.
 
 ---
 

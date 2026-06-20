@@ -42,5 +42,13 @@ ok(g.updates.MilestoneNotes === 'C98: crews live in D7', 'emitted MilestoneNotes
 var h = normalizeTrackerWrite({ ImplementationPhase: 'operational' }, { ImplementationPhase: 'operational', NextActionCycle: '120' }, CY);
 ok(Object.keys(h.updates).length === 0, 'no-op write produces empty updates (no churn)');
 
+// garbage / stale emitted NextActionCycle → cycle+1 fallback, not the bad literal (S265 review LOW)
+var i = normalizeTrackerWrite({ ImplementationPhase: 'operational', NextActionCycle: '99abc' }, { ImplementationPhase: 'implementation-active' }, CY);
+ok(i.updates.NextActionCycle === '99', 'garbage NextActionCycle "99abc" → cycle+1, not written verbatim');
+var j = normalizeTrackerWrite({ ImplementationPhase: 'operational', NextActionCycle: 90 }, { ImplementationPhase: 'implementation-active' }, CY);
+ok(j.updates.NextActionCycle === '99', 'stale NextActionCycle (90 < 98) → cycle+1');
+var k = normalizeTrackerWrite({ ImplementationPhase: 'operational', NextActionCycle: 105 }, { ImplementationPhase: 'implementation-active' }, CY);
+ok(k.updates.NextActionCycle === '105', 'valid forward NextActionCycle (105) respected');
+
 console.log((fail === 0 ? 'ALL ' + pass + ' PASS' : fail + ' FAILURES / ' + pass + ' pass'));
 process.exit(fail === 0 ? 0 : 1);

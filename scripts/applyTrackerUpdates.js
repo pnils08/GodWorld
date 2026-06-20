@@ -110,10 +110,18 @@ function normalizeTrackerWrite(trackerUpdates, currentRow, cycle) {
     }
   }
 
-  // Plain writeback fields (MilestoneNotes / NextScheduledAction / NextActionCycle).
-  ['MilestoneNotes', 'NextScheduledAction', 'NextActionCycle'].forEach((field) => {
+  // Plain writeback fields (MilestoneNotes / NextScheduledAction).
+  ['MilestoneNotes', 'NextScheduledAction'].forEach((field) => {
     if (tu[field] !== undefined) setField(field, tu[field]);
   });
+  // NextActionCycle — validate it's a forward cycle int; a garbage/stale emitted
+  // value (e.g. "99abc", or a cycle already past) falls back to cycle+1 rather
+  // than writing the bad literal (S265 review LOW fix).
+  if (tu.NextActionCycle !== undefined) {
+    const n = parseInt(tu.NextActionCycle, 10);
+    if (Number.isFinite(n) && n >= cycle) setField('NextActionCycle', n);
+    else { setField('NextActionCycle', cycle + 1); warnings.push(`NextActionCycle "${tu.NextActionCycle}" invalid/stale → ${cycle + 1}.`); }
+  }
 
   // G-PREP1 — vote-scheduled needs a deterministic VoteCycle + NextActionCycle.
   // Respect an emitted VoteCycle; otherwise stamp cycle+1 when the row has none.

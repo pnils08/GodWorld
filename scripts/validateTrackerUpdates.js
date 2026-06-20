@@ -25,6 +25,12 @@
 const fs = require('fs');
 const path = require('path');
 const C = require('../lib/initiativePhaseContract');
+// Reuse the pipeline's own attribution so the validator can NEVER resolve an
+// InitiativeID differently than assembleDecisions does (S265 review fix: a
+// 2-signal local resolver false-flagged 26 real C94-C98 statements the pipeline's
+// 4-signal attributeInitiative resolves cleanly — topic-keyword + project-file
+// fallbacks). assembleDecisions is require.main-guarded; importing is side-effect-free.
+const { attributeInitiative } = require('./assembleDecisions');
 
 const ROOT = path.resolve(__dirname, '..');
 const DECISIONS_DIR = path.join(ROOT, 'output/city-civic-database/initiatives');
@@ -110,6 +116,7 @@ function loadRecords(cycle) {
   if (fs.existsSync(VOICE_DIR)) {
     for (const f of fs.readdirSync(VOICE_DIR).filter(x => x.endsWith(`_c${cycle}.json`))) {
       const fp = path.join(VOICE_DIR, f);
+      const basename = f.replace(`_c${cycle}.json`, ''); // PROJECT_FILE_TO_INIT key
       let data; try { data = JSON.parse(fs.readFileSync(fp, 'utf-8')); } catch (e) {
         records.push({ source: `voice:${f}`, shape: 'unparseable', initiativeId: null, trackerUpdates: {}, parseError: e.message }); continue;
       }
@@ -119,7 +126,9 @@ function loadRecords(cycle) {
         if (!s || !hasTrackerWork(s.trackerUpdates)) continue;
         records.push({ source: `voice:${f}#${s.statementId || s.office || '?'}`,
           shape: flat ? 'flat-array-element' : 'object',
-          initiativeId: resolveInitiativeId(s.trackerUpdates, s), trackerUpdates: s.trackerUpdates });
+          // attributeInitiative = the pipeline's 4-signal resolver (topic-keyword +
+          // project-file fallback) so the validator mirrors assembleDecisions exactly.
+          initiativeId: attributeInitiative(s, basename), trackerUpdates: s.trackerUpdates });
       }
     }
   }

@@ -1,5 +1,7 @@
 // Test for the pre-assembly tracker validator (S265 civic.14 Phase 2).
-var { validateRecords } = require('./validateTrackerUpdates');
+var fs = require('fs');
+var path = require('path');
+var { validateRecords, validateCycle } = require('./validateTrackerUpdates');
 
 var pass = 0, fail = 0;
 function ok(cond, label) { if (cond) { pass++; console.log('  PASS  ' + label); } else { fail++; console.log('  FAIL  ' + label); } }
@@ -62,6 +64,29 @@ var r7 = validateRecords([
   { source: 'voice:oari#s1', shape: 'object', initiativeId: 'INIT-002', trackerUpdates: { InitiativeID: 'INIT-002' } },
 ]);
 ok(r7.violations.length === 0, 'G-R3: bare-InitiativeID record is attributed → no hard violation (gate defaults notes)');
+
+// Integration regression (S265 review HIGH fix): a project-file voice statement
+// with NO explicit initiative must resolve via the pipeline's attributeInitiative
+// (PROJECT_FILE_TO_INIT) — the 2-signal local resolver false-flagged these as
+// missing-attribution and exit-1 blocked the operator on C94-C97.
+var VOICE_DIR = path.resolve(__dirname, '..', 'output', 'civic-voice');
+var TMP_CYCLE = 9994;
+var tmpFile = path.join(VOICE_DIR, 'health_center_c' + TMP_CYCLE + '.json');
+var cleanup = false;
+if (fs.existsSync(VOICE_DIR)) {
+  fs.writeFileSync(tmpFile, JSON.stringify([{
+    office: 'Health Center', statementId: 'STMT-TEST-001',
+    topic: 'temescal-clinic-progress',
+    trackerUpdates: { ImplementationPhase: 'design-phase', MilestoneNotes: 'C9994: test' }
+  }]));
+  cleanup = true;
+  var rc = validateCycle(TMP_CYCLE);
+  var attrViol = rc.violations.filter(function (v) { return v.code === 'missing-initiative-attribution'; });
+  ok(attrViol.length === 0, 'project-file voice statement (no explicit initiative) resolves via attributeInitiative — NOT a missing-attribution false-flag');
+  if (cleanup) fs.unlinkSync(tmpFile);
+} else {
+  console.log('  SKIP  project-file attribution test (no civic-voice dir)');
+}
 
 console.log((fail === 0 ? 'ALL ' + pass + ' PASS' : fail + ' FAILURES / ' + pass + ' pass'));
 process.exit(fail === 0 ? 0 : 1);

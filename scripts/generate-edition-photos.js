@@ -680,6 +680,11 @@ async function runQaAndRegenLoop(opts) {
     regenAttempts: failures.length,
     runAt: new Date().toISOString()
   };
+  // G-PR-C98-3 (S265 ES-5): propagate per-photo drop-state from the sidecars into
+  // manifest.photos[] so the manifest and sidecars AGREE. Drop verdicts were only
+  // written to <slug>.meta.json; the PDF generator reads sidecars so print was
+  // fine, but any manifest-only consumer treated dropped photos as live.
+  syncDropStateToManifest(manifest, outDir);
   fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
 
   // Write regen log
@@ -704,6 +709,28 @@ async function runQaAndRegenLoop(opts) {
   console.log('');
 }
 
+// G-PR-C98-3 (S265 ES-5): reconcile manifest.photos[] with the per-photo sidecars.
+// QA drop verdicts (dropped / editorialFlag / droppedReason) are written only to
+// <slug>.meta.json during the regen loop; copy them onto the matching manifest
+// entry so manifest and sidecar never disagree. Idempotent; safe if a sidecar is
+// missing (entry keeps its prior state). Explicitly stamps dropped:false for live
+// photos so a manifest-only consumer can trust the field rather than read absence.
+function syncDropStateToManifest(manifest, outDir) {
+  if (!manifest || !Array.isArray(manifest.photos)) return;
+  manifest.photos.forEach(function (p) {
+    var sidecarPath = path.join(outDir, (p.slug || '') + '.meta.json');
+    if (!p.slug || !fs.existsSync(sidecarPath)) return;
+    var meta;
+    try { meta = JSON.parse(fs.readFileSync(sidecarPath, 'utf-8')); }
+    catch (e) { return; }
+    p.dropped = meta.dropped === true;
+    p.editorialFlag = meta.editorialFlag === true;
+    if (meta.droppedReason) p.droppedReason = meta.droppedReason; else delete p.droppedReason;
+    if (meta.editorialFlagReason) p.editorialFlagReason = meta.editorialFlagReason; else delete p.editorialFlagReason;
+    if (meta.droppedAfterAttempts != null) p.droppedAfterAttempts = meta.droppedAfterAttempts;
+  });
+}
+
 function writeQaSidecar(outDir, slug, file, cycle, qa) {
   var perImageReport = {
     slug: slug,
@@ -724,7 +751,12 @@ function writeQaSidecar(outDir, slug, file, cycle, qa) {
   fs.writeFileSync(perImagePath, JSON.stringify(perImageReport, null, 2));
 }
 
-main().catch(function (err) {
-  console.error('Fatal error:', err);
-  process.exit(1);
-});
+if (require.main === module) {
+  main().catch(function (err) {
+    console.error('Fatal error:', err);
+    process.exit(1);
+  });
+}
+
+// S265 ES-5 — exported for unit testing the manifest/sidecar drop-state sync.
+module.exports = { syncDropStateToManifest: syncDropStateToManifest };

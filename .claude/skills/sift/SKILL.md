@@ -1,8 +1,8 @@
 ---
 name: sift
 description: Editorial planning for the edition. Reads sheet-primary canon (Oakland_Sports_Feed, Riley_Digest, Initiative_Tracker, Simulation_Ledger) + canon archive + NEWSROOM_MEMORY + city-hall production log. Proposes stories under cadence caps, locks slate via Mike approval gate, emits one brief per article slot + dispatch.json + letters candidate pool. The game moment.
-version: "2.0.1"
-updated: 2026-05-24
+version: "2.0.2"
+updated: 2026-06-20
 tags: [media, active]
 effort: high
 disable-model-invocation: true
@@ -249,6 +249,15 @@ For every candidate proposal, enrich with verified canon pointers + three-layer 
 - `lookup_business(name)` — confirm BIZID, sector, neighborhood. For citizen-named candidates, ALSO pull the citizen's employer biz (this closes G-W35 fabrication surface).
 - `get_council_member(district)` — for civic candidates, frozen 9-member roster + Mayor.
 - `lookup_initiative(name)` — current phase, status, NextActionCycle.
+
+**Provenance fence — block real-world + non-ledger anchors before they reach a brief (RB-1, C98 G-S2/G-S3/G-S4/G-W).** Names and specifics that arrive from impressionistic or recalled sources are NOT pre-verified by their source — each must clear an authoritative lookup at THIS step before any brief carries it:
+
+- **Loop-bot nightly reflections are impressionistic, NOT a verification source.** Any citizen or institution name sourced from a loop-bot reflection (or any citizen-loop wake text) must pass `lookup_citizen` / `lookup_faith_org` / `lookup_business` before it anchors a brief. C98: a reflection anchored "Mateo Walker" (bay-tribune canon only, no Sim_Ledger card) and "Dario Vega" (pure reflection invention, no layer at all) — neither is ledger-backed. An unverified reflection name is a fabrication surface.
+- **Prior-edition canon-recall is not self-certifying.** A name or fact pulled from `search_canon` / NEWSROOM_MEMORY because "we published it before" still gets a live `lookup_*` / ledger check at brief-time — published-once ≠ ledger-true (the canon-layer-drift case, Step 5).
+- **Real-world-institution fence.** A real Oakland specific (school, church, business, venue) surfaced by canon-recall is NOT automatically canon. Flag it `status-TBD` and keep the canon generic — "a West Oakland high school," not "McClymonds High" — unless `lookup_*` / Sim_Ledger / bay-tribune confirms the specific exists in-world. C98: sift seeded real-but-uncanon "McClymonds High" into the Quintero brief — a real-world leak at the sift layer. Extends the S258 RB-6 geographic fence (Step 8) backward to name-introduction time.
+- **Age resolves against the ledger at brief-time.** Every citizen age in a brief is `2041 − BirthYear` read live from `lookup_citizen` / Sim_Ledger BirthYear — never carried from a reflection, a prior edition, or a derived doc. C98: Quintero POP-00050 drifted 23-vs-24 between recall and ledger.
+
+This hardens into the skill text a discipline the S256/S258 candidate-integrity pass already enforced by eye — all four C98 instances were caught pre-brief by operator discipline, not by the skill. The rule survives a discipline lapse; it is not a net-new mechanism.
 
 **Three-layer threading test** (required for anchor pieces FP1, C1, S1):
 - **engine** — one-line plain-language summary of what code is producing (ailment, math, trend).
@@ -894,6 +903,7 @@ Full chain: `/run-cycle` → `/city-hall-prep` → `/city-hall` → `/sift` → 
 
 ## Changelog
 
+- 2026-06-20 (S265, research-build) — v2.0.2 minor (governance.41 RB-1). Step 4 gains the **provenance fence**: loop-bot reflections are impressionistic not a verification source; prior-edition canon-recall is not self-certifying; real-world institutions surfaced by recall flag `status-TBD` and stay generic until lookup confirms; age resolves against ledger BirthYear at brief-time. Hardens into skill text the candidate-integrity discipline the S256/S258 pass enforced by eye. Closes C98 G-S2 / G-S3 / G-S4 / G-W (McClymonds). Net-new rule text, no mechanism change.
 - 2026-05-23 (S228, research-build) — v2.0 ship. Pipeline.24 Task 6. Full SKILL.md replacement consuming Tasks 3 (brief_template_v2) + 4 (dispatch_schema) + 5 (sift_triage_vocabulary). Eleven steps (0 retired + 1-11). Closes: G-S1 / G-S2 / G-S3 / G-S5 / G-S8 / G-S13 / G-S14 / G-S21 / G-W30 / G-W31 / G-W32 / G-W33 / G-W35 / G-W39 / G-PR2 / G-PR6 (cross-link). Preserves Engine A T4.1 (priority data consumption at Step 6), Engine B T3.8 (byline shadow log at Step 6 post-lock), T4.2 (confidence threshold — still shadow), T5.2 (rationale suffix rendering at Step 6). v1.x companion `brief_template.md` carries DEPRECATED banner; will archive after first clean v2 cycle. Dry-run on C94 (Task 7) + live-run on C95 (Task 8) remain.
 - 2026-05-23 (S228 morning) — v1.3 final state captured before v2.0 rewrite.
 - See `git log` for v1.x changelog history pre-rewrite.

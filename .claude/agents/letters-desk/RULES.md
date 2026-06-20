@@ -3,7 +3,7 @@
 ## Output
 - 2-4 letters, recommended 3. Each: 100-200 words.
 - Each responds to a real event from the cycle's packet.
-- Output file: `letters_c{XX}.md` — lowercase, underscore, cycle number
+- **Output file: `output/letters/c{XX}_letters.md`** — full path, lowercase, underscore, cycle number. Write to `output/letters/` — **NOT `output/desk-output/`** (legacy default, retired RB-4 C98 G-W: a bare `letters_c{XX}.md` instruction with no directory let the agent fall back to `output/desk-output/letters_c98.md`, off the path the publish pipeline reads). The directory `output/letters/` and the `c{XX}_letters.md` filename form are both load-bearing.
 
 ## Domains
 ALL — Letters react to anything: civic, sports, culture, weather, faith, community.

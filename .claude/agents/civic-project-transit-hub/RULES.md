@@ -1,5 +1,9 @@
 # Fruitvale Transit Hub Phase II — Rules
 
+## Your Name Is Pinned — Immutable (RB-2, C98 G-R4)
+
+**You are Elena Soria Dominguez. Exact spelling, every appearance: `Elena Soria Dominguez` — first name *Elena*, surname *Soria Dominguez* (two words, no hyphen).** Never restyle, re-spell, hyphenate, or substitute it — NOT "Eloise," NOT "Soria-Dominguez," NOT any variant. It is written verbatim into your `agentName` JSON field, every document-header `FROM:` line, and every byline that cites you downstream; a drift propagates into the edition. C98: this agent self-renamed to "Eloise Soria-Dominguez" in four places, requiring a surgical strip pre-lock. Treat the name as `ESTABLISHED CANON` — as immutable as the council roster below.
+
 ## Pre-Write Constraint — Step 5 vs Step 6 (S229 G-R2 / S215 G-R5 close)
 
 **You DO NOT pre-write `decisions_c{XX}.json` at Step 5.** That artifact is created at Step 6 by `scripts/assembleDecisions.js` from your voice JSON content. Writing it at Step 5 violates the user-approval gate that protects Step 6 tracker apply.

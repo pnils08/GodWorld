@@ -1,8 +1,8 @@
 ---
 name: city-hall-prep
 description: Prepare all inputs for city-hall voice agents. Reads tracker, approvals, world summary, engine review, coverage ratings, previous log, canon, Mara directive. Writes pending decisions per voice.
-version: "1.7"
-updated: 2026-06-14
+version: "1.8"
+updated: 2026-06-20
 tags: [civic, active]
 effort: high
 disable-model-invocation: true
@@ -211,6 +211,14 @@ For each voice with a decision, write `output/civic-voice-workspace/{office}/cur
 - **Every neighborhood/district voice (faction blocs + project directors): the neighborhood pulse.** From the §Neighborhood snapshot table (Sentiment / RetailVitality / EventAttractiveness / CrimeIndex), filtered to that voice's district neighborhood(s) per §Voice Data Routing, PLUS `baseline_briefs_c{XX}.json` `.briefs[]` filtered by `.neighborhood` — the synthesized world-events / life-events with `neighborhoodState` deltas for that voice's turf. A faction bloc gets one pulse per member district.
 - **Scope discipline:** this is texture the voice may speak *to*, not a manufactured crisis. Carry the engine's actual signal — a synthesized "crisis-spike" non-event (the C96 Rockridge/Piedmont case) is reported as the modest delta it is, not inflated into drama. The digest gives the voice a living city to react to; it does not assign a decision (that's the topic assignment).
 
+**Live roster-status block — REQUIRED in every faction-bloc packet (RB-2, C98 G-R6).** A faction bloc's whip-read (who's voting which way, what the count is) must run off THIS cycle's live seat status, never a remembered one. Inject into each bloc packet (`opp-faction` / `crc-faction` / `ind-swing`) the current `active` / `recovering` / `vacant` status of every seat the bloc speaks for, taken from the Step-1 `get_council_member` reconciliation (the authority), per [[../../../.claude/rules/civic.md|civic.md]] §Council member status enum:
+
+- State each member's seat status explicitly — `D6 Crane — ACTIVE this cycle` or `D6 Crane — RECOVERING (named absentee, not voting)`. Status changes between cycles; a member who was recovering last cycle may be active now, and the packet must say so.
+- State the active-voter denominator across the full 9-seat council so the whip-read computes the majority off live data — "9 active → majority 5," never a remembered "8 active, one absent."
+- C98: the OPP whip-read carried a stale "Crane absent, 5 of 8" into its statement when Crane (D6) had returned to ACTIVE and the real tally was 9-0. The status was live in truesource at Step 1 but never reached the bloc packet, so the agent reasoned off memory.
+
+This pairs with the Step-1 status reconciliation: Step 1 *checks* status against truesource; Step 3 *delivers* it to the voice. Without the delivery, the check protects vote-math at the Clerk layer but not the bloc agent's own whip-read prose.
+
 **Each pending decision includes:**
 - The situation in plain language
 - 2-3 predefined options with real consequences
@@ -334,6 +342,7 @@ It exits non-zero until the `## LEG: /city-hall-prep (G-PREP)` leg exists in the
 
 ## Changelog
 
+- 2026-06-20 — v1.8 (S265, research-build closing governance.41 RB-2 G-R6). **Live roster-status block at Step 3:** every faction-bloc packet now carries the current `active`/`recovering`/`vacant` status of its seats + the live active-voter denominator, taken from the Step-1 `get_council_member` reconciliation. Step 1 already *checked* status against truesource; the bloc agent never *received* it, so its whip-read ran off memory (C98: OPP carried a stale "Crane absent, 5 of 8" when Crane D6 was ACTIVE and the real tally was 9-0). Step 1 checks, Step 3 delivers. Source gap: `output/production_log_run_cycle_c98_gaps.md` §G-R6. Plan: [[../../../docs/plans/2026-06-20-c98-gap-log-triage]] RB-2.
 - 2026-04-17 — v1.0 initial (S156). Voice routing table listed 17 voices including 9 individual council members.
 - 2026-05-03 — v1.1 (S197, engine-sheet executing research-build Wave 1 plan per [[../../../docs/plans/2026-05-03-c93-gap-triage-execution]]). **G-10 Voice Data Routing rewritten:** table now shows the 11 actual agent rows (Mayor + Chief + DA + 3 faction-bloc agents speaking for the 9 council members + 5 project agents) instead of misleading reader into expecting 17 individual agents. Faction membership per Civic_Office_Ledger; previous text mis-listed Chen D8 as CRC, corrected to OPP. **[SUPERSEDED S246 G-PREP1 — this "corrected to OPP" was itself the error; truesource (`truesource_reference.json` + `buildCivicVoicePackets.js`) has Chen as CRC all along. Reverted forward; see roster above.]** **G-13 Step 1 sheet reads demoted to verification:** Disk inputs (world_summary + engine_review + prior production log + prior published canon) are PRIMARY; sheet reads run ONLY when world_summary is stale. Captures actual S192 working practice (sheet reads were skipped because world_summary already snapshotted everything that mattered). Companion entry on G-15 (between-cycle published canon ingestion) added to Step 1 as Disk source #5.
 - 2026-05-12 — v1.2 (S216, research-build closing civic.11). **Step 1 — Auto-investigate engine-flagged initiatives:** wired `scripts/readInitiativeMilestoneNotes.js` for `mitigator-stuck` / `remedy-not-firing` ailments. Three dispositions (Scenario A / B / C) computed before Step 2 topic-assignment build, capturing the civic.7 INIT-005 false-positive case as a routine prep-time disambiguation rather than a same-cycle wasted voice cycle. Plan: [[../../../docs/plans/2026-05-11-civic-7-init-005-investigation]].

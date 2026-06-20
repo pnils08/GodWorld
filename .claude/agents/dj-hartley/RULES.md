@@ -77,6 +77,34 @@ FLUX has hard limits the negative-frame paragraph alone won't close. Know them a
 - **Specific real-world landmark anchoring is unreliable.** Naming "the 14th Street side door of Oakland City Hall" or any specific Oakland architectural landmark by proper name has a high fail rate — FLUX defaults to generic civic scenes. Architectural type-description ("a civic-building side door, brick facade, recessed entry") is more reliable. (G-PR5 — C94 transit_hub_vote_chambers_door FAILed 3/3 attempts.)
 - **A VERBATIM regen-on-fail is a re-roll, not a corrective fix.** If Step 2 re-issues the same `image_prompt` unchanged, it samples the same flawed distribution — ~33% PASS / ~33% FLAG / ~33% still-FAIL on model-limitation fails (text suppression, landmark anchoring). (G-PR4.) **The fix is prompt mutation (Quality Gate / Hard Rule 8): on an element-specific fail, strip the failing element from the regen prompt rather than re-rolling it.** Reserve drops for fails that can't be mutated away (an irreducible landmark dependency), not for ones you could design out.
 
+## Load-Bearing Text — Direct AWAY at Spec Time (RB-3, C98 G-PR-C98-1)
+
+Hard Rule 8 + FLUX Ceiling cover text you can *suppress* — peripheral or environmental signage that distance, blur, or a negative-frame paragraph can push out of legibility. There is a harder class they do NOT cover: **text that sits ON the load-bearing subject surface itself.** When the forbidden text IS the subject plane, composition-suppression cannot save it — depth-of-field and blur can't hide what the eye is meant to look AT. The only fix is to choose a different subject plane at spec-compose time, BEFORE the render.
+
+**Recognize the load-bearing-text class:**
+- **Sports — jersey backs / numbers / team wordmarks.** A player shot from behind or three-quarter-rear puts a name-and-number on the subject plane; FLUX renders it as garbled text every time.
+- **Lit landmark / venue signage.** A night shot whose subject is a marquee, a stadium sign, a lit storefront name — the glowing text is the focal point, not the periphery.
+- **Commercial strips as subject.** A row of storefronts shot head-on makes the awnings and shop names the subject; their branding can't be blurred without losing the shot.
+
+**Direct the composition AWAY from the text surface at spec time:**
+- **Sports →** crowd reaction, stadium exterior, field-action framed from the front or in motion-blur, hands / equipment / light — never a jersey back as the subject plane.
+- **Landmark atmospheric →** the dock + water + sky, the architecture and the approach — composed to *exclude* the sign, not to render it small.
+- **Commercial strip →** architecture, sky, foot-traffic, the street's geometry and light, storefronts angled out of frame or reduced to non-legible context.
+
+**Composition-suppression (blur / distance / crop) is for peripheral/environmental text only** — a sign across the street, a banner in the deep background. It is NOT a tool for text on the subject plane. If your subject can't exist without legible forbidden text, you picked the wrong subject — recompose around one that can.
+
+C98: FLUX dropped 3 of 6 photos on legible-text violations *after* a full 3-attempt regen — jersey backs, lit landmark signs, commercial strips. The regens re-rolled the same load-bearing-text subject and burned 2 extra renders each for zero saves; the text was structural, not stochastic.
+
+## Atmospheric Frames — Cap at Zero Without a Host (RB-3, C98 G-PR-C98-2)
+
+A pure-atmospheric frame — a vantage-point / weather / dawn-dusk shot tied to no storyline and no section — has nowhere to land unless the compiled edition exposes a section that hosts it. An orphaned atmospheric that passes QA but has no home is silently dropped at PDF time with no editorial decision: render budget + QA spent on an image that never runs.
+
+**Cap ATMOSPHERIC specs at 0 by default.** Emit one ONLY when the compiled edition gives it a host — a masthead band, a section-break filler slot, a front-page secondary well, or an explicit atmospheric section the layout exposes. If no host exists, don't compose the frame; the slot is better spent on a storyline-tied image.
+
+**Do NOT regen-on-fail for the load-bearing-text class or for orphaned atmospherics.** Regen re-rolls a structurally-doomed subject (a jersey back is still a jersey back on attempt 3) and burns 2 extra renders for zero saves. Drop at first fail; reserve regen for stochastic element-specific fails a mutation can actually fix (Quality Gate).
+
+C98: the `atm_veterans_parade` atmospheric frame PASSED QA but never rendered — no ATMOSPHERIC section existed in the compiled `.txt` for `findPhotosForSection` to attach it to. Silent orphan, no editorial decision. **(Coordination — RB-3/ES-5 open question resolved DJ-cap-at-source: DJ stops emitting host-less atmospherics; the PDF generator does NOT separately host orphans. Don't double-handle.)**
+
 ## Editorial-Risk Spec Flagging
 
 At spec compose time, mark a spec as **editorial-risk** when it depends on:

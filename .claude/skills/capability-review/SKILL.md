@@ -1,8 +1,8 @@
 ---
 name: capability-review
 description: Phase 39.1 capability reviewer wrapper. Runs the deterministic editorial assertions against a compiled edition, surfaces blocking failures that should halt publish, and writes a markdown summary alongside the JSON.
-version: "1.0"
-updated: 2026-04-17
+version: "1.1"
+updated: 2026-06-20
 tags: [media, active]
 effort: low
 disable-model-invocation: true
@@ -74,6 +74,16 @@ For every entry in `summary.blockingFailures`:
 
 Advisory failures don't gate publish. They get logged into the production log so the next sift session sees them.
 
+### Known advisory false-positives (RB-4, C98 G-W reviewer-handoff)
+
+Three advisory assertions recur as false-positives every cycle — they are **known non-blocking noise, not findings.** Acknowledge and move past them; do not send a reporter back or re-run on their account. They are advisory (they never gate publish), but each reads as a finding every cycle and costs a re-investigation it doesn't warrant:
+
+- **`canon-names-not-invented`** — grabs headline fragments and flags them as unresolved citizen candidates. Its name-extraction pass treats capitalized headline tokens as person names, so most "unresolved candidates" it reports are headline fragments, not invented citizens. Real invented-name leaks are caught by Rhea's sourcing lane — trust that lane, not this advisory's candidate count.
+- **`article-length-balance`** — reads body-merge concatenation as one over-long article. When two articles compile adjacent without the expected separator, the assertion measures their combined length and flags imbalance; the underlying articles are individually in range. Verify against the compiled section, not the advisory.
+- **`names-index-completeness`** — expects a per-article names index, but the edition carries an edition-level NAMES INDEX per [[../../../docs/media/EDITION_FORMAT_TEMPLATE|EDITION_FORMAT_TEMPLATE]]. The per-article expectation is a spec mismatch with the actual format contract; the edition-level index is correct and complete.
+
+Documented here so each cycle's operator recognizes them on sight rather than re-diagnosing. The durable fix (re-scoping the three checks in `scripts/capability-reviewer/assertions.json` so they stop mis-firing) is an engine-sheet assertion-tuning item — file it if the noise ever becomes load-bearing; until then recognition is cheaper than re-tuning advisory-only checks.
+
 ## Step 5 — Write the markdown companion
 
 Generate `output/capability_review_c{CYCLE}.md` from the JSON. Format:
@@ -141,3 +151,8 @@ Per `docs/engine/PHASE_39_PLAN.md` §1, current verification asks "did the agent
 `scripts/capability-reviewer/assertions.json` lists 2 grader-only assertions under `graderOnlyAssertions` — they need an Anthropic API key wired for direct Haiku 4.5 calls. When that lands, they activate without code changes (the orchestrator already iterates the deferred list and writes them into output for visibility).
 
 The 9 active assertions cover all 5 categories (coverage, representation, three-layer, freshness, rubric-fidelity), which is the §8 acceptance criterion #7 bar.
+
+## Changelog
+
+- 2026-06-20 — v1.1 (S265, research-build closing governance.41 RB-4). Step 4 gains **Known advisory false-positives** — three advisory assertions (`canon-names-not-invented`, `article-length-balance`, `names-index-completeness`) documented as known non-blocking noise so each cycle's operator recognizes them on sight instead of re-diagnosing. Durable assertion re-scope deferred to engine-sheet. Source gap: `output/production_log_c98_post_publish_gaps.md` §G-W reviewer-handoff. Plan: [[../../../docs/plans/2026-06-20-c98-gap-log-triage]] RB-4.
+- 2026-04-17 — v1.0 initial (Phase 39.1).

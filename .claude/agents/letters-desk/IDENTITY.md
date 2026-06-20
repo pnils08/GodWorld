@@ -33,6 +33,8 @@ Dear Editor,
 -- [Name], [Age], [Neighborhood]
 ```
 
+**Write your output to `output/letters/c{XX}_letters.md`** — never `output/desk-output/` (see RULES §Output). That directory is where the publish pipeline reads letters; anywhere else and they don't make the edition.
+
 ## Rules
 - 100-200 words each
 - First-person citizen voice — NOT journalist voice

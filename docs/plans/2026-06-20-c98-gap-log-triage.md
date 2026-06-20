@@ -72,7 +72,7 @@ pointers:
   3. Note in the skill that S256/S258 candidate-integrity discipline already caught all four C98 instances pre-brief — this phase hardens the rule into the skill text so it survives a discipline lapse, not a net-new mechanism.
 - **Verify:** `grep -n "lookup_citizen\|loop-bot\|status-TBD" .claude/skills/sift/SKILL.md` → fence rules present.
 - **Absorbs ROLLOUT:** none (new hardening).
-- **Status:** [ ] not started
+- **Status:** [x] DONE S265 — sift SKILL.md v2.0.2, Step 4 provenance fence (loop-bot non-source / canon-recall not self-certifying / real-world-institution status-TBD / age-at-brief-time). CANON_RULES confirmed (no-fly + invention-authority cover the class; no edit needed). Verify grep passes.
 
 ### RB-2: Voice-agent canon-fidelity drift — name + roster fidelity in project/faction agents
 
@@ -87,7 +87,7 @@ pointers:
   3. In city-hall-prep, inject the current active/recovering/vacant roster status (per `.claude/rules/civic.md` §Council member status enum) into each bloc packet so whip-reads don't carry stale absence assumptions.
 - **Verify:** `grep -n "Elena Soria Dominguez" .claude/agents/civic-project-transit-hub/RULES.md` → name pinned; roster-injection step present in city-hall-prep.
 - **Absorbs ROLLOUT:** none.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S265 — transit-hub RULES name-pin (immutable callout); health-center RULES office-holder-collision rule (general form rides civic.14 Phase 3 to other agents); city-hall-prep v1.8 Step-3 live roster-status block (Step 1 checks, Step 3 delivers). Both verify greps pass.
 
 ### RB-3: DJ photo-direction — load-bearing-text spec-pattern + atmospheric-orphan cap
 
@@ -99,7 +99,7 @@ pointers:
   2. Cap ATMOSPHERIC specs at 0 unless the compiled edition exposes a host section (pairs with ES-5 placement option). Note: regen-on-fail re-rolls the same prompt and burns 2 extra renders for zero saves on this class — recommend gating regen-off for it (coordinate with ES-5).
 - **Verify:** `grep -n "load-bearing\|subject plane\|ATMOSPHERIC" .claude/agents/dj-hartley/*.md` → spec-pattern + cap present.
 - **Absorbs ROLLOUT:** partial-feeds pipeline.13 (DJ-direction layer) — note forward, don't restate.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S265 — dj-hartley RULES: "Load-Bearing Text — Direct AWAY at Spec Time" (jersey-backs/lit-signs/commercial-strips → recompose off the text plane) + "Atmospheric Frames — Cap at Zero Without a Host" (regen-off for both classes). **Open Q resolved DJ-cap-at-source** (see §Open questions) — ES-5 must NOT also host orphans. Verify grep passes.
 
 ### RB-4: Skill/agent text drift — letters path, expected-N formula, capability advisories
 
@@ -114,7 +114,7 @@ pointers:
   3. Document the 3 capability-reviewer advisory false-positive classes as known-non-blocking so they stop reading as findings each cycle.
 - **Verify:** `grep -n "output/letters/" .claude/agents/letters-desk/*.md` → new default; expected-N note in post-publish SKILL.
 - **Absorbs ROLLOUT:** none.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S265 — letters-desk RULES+IDENTITY pinned to `output/letters/c{XX}_letters.md` (desk-output legacy default killed); post-publish Step 5 expected-N = parser total parsed-row count (canon-drift IS a row, no bucket-sum); capability-review v1.1 §Known advisory false-positives (3 classes, durable re-scope → engine-sheet). Both verify greps pass.
 
 ---
 
@@ -146,7 +146,7 @@ pointers:
   2. validateEdition: bound the faction/district match to a single line/sentence, not `[^.]*?` across a period-less list block.
 - **Verify:** craft a fixture edition with a body paragraph opening "By" + a period-less footer council list → parser/validator pass with zero false positives.
 - **Absorbs ROLLOUT:** engine.8 (header/parser-alignment class) — note forward.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S265 (`41ea8d97`). Unified byline detection on a shared `looksLikeByline()` predicate (38 cases; also fixed a latent mis-reject of the comma-bureau form); bounded the council district/faction regex to one line (`[^.\n]*?`) — proven old→4 FPs / new→0. Regression tests: `scripts/lib.editionParser.byline.test.js` (5/5), `scripts/validateEdition.councilBleed.test.js` (1/1); parser suite 48/48; E98 still PASSABLE. Node-side, no clasp.
 
 ### ES-3: Post-publish intake robustness — sentinel-abort + stale-manifest
 
@@ -159,7 +159,7 @@ pointers:
   2. `postRunFiling.js`: drop the Mara pre-review packet (`edition_c<XX>_for_review.txt`) from the required-files set — it's an input, not an output.
 - **Verify:** run intake against a no-new-business fixture edition → completes (matched/appended/drift counts produced, verify gate runs), no abort. `postRunFiling` reports COMPLETE without the pre-review packet.
 - **Absorbs ROLLOUT:** pipeline.37 (post-publish friction) — note forward.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S265 (`03683d99`). `isAbsenceSentinel()` filters the "(no new … this cycle)" family out of the parser-sanity content count (genuine-unparsed guard intact); for_review packet → `required:false`. Regression test `scripts/ingestPublishedEntities.sentinel.test.js` (11/11); real-E98 dry-run intake now EXIT=0 (27 matched, no abort); `postRunFiling --cycle 98` now COMPLETE. Node-side, no clasp.
 
 ### ES-4: engine.35 router — extend collapse to the decay/negative pole + sign-aware WHY anchor
 
@@ -171,7 +171,7 @@ pointers:
   2. Make the WHY anchor sign-aware: a declining hood must not cite a positive global driver. The collapse was built/validated against C97 (improvement-dominant cycle); C98 is the first decay-dominant cycle through it — untested router shape.
 - **Verify:** re-run `routePatternSeeds.js --cycle 98` (dry) → citywide decay collapses to ≤1 synthesis seed; no declining hood carries a positive WHY anchor.
 - **Absorbs ROLLOUT:** **engine.35** (router) — this is forward work on that row; note `Absorbs ROLLOUT: engine.35 (decay-pole collapse)`.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S265 (`85553ea8`). `decayMetric()` + `collapseSeeds()` (both poles): improvement keeps magnitude-band clustering, decay folds the whole same-metric group at ≥MIN_CLUSTER (mean-reversion is non-uniform, banding would fragment it); sign-aware WHY (decay → mean-reversion anchor, not the positive A's-streak). Real C98 dry-run: **18 seeds → 2** (17 decaying hoods → 1 citywide-decay synth; lone positive anchor is the West Oakland initiative, correct). Unit test `routePatternSeeds.decay.test.js` (11/11). Node-side, no clasp, deck write path untouched.
 
 ### ES-5: Photo manifest/sidecar sync + atmospheric-orphan placement
 
@@ -241,7 +241,7 @@ pointers:
 
 ## Open questions
 
-- [ ] **ES-5 / RB-3 atmospheric-orphan ownership** — does the DJ stop emitting ATMOSPHERIC frames the layout can't host (RB-3 cap), or does the PDF generator host orphaned QA-passed frames (ES-5)? Pick one to avoid double-handling. (Recommend: DJ cap at source — cheaper than rendering frames with no editorial slot. Mike-light decision, doesn't block either track from starting.)
+- [x] **ES-5 / RB-3 atmospheric-orphan ownership** — RESOLVED S265 **DJ-cap-at-source** (research-build call, the recommended path). DJ caps ATMOSPHERIC at 0 unless the compiled edition exposes a host (RB-3, shipped). **ES-5 must therefore NOT add orphan-hosting to the PDF generator** — its manifest/sidecar drop-state sync (the other half of ES-5) still stands, but the atmospheric-placement option is dropped to avoid double-handling. Cheaper to cap at source than render frames with no editorial slot. (Mike can flip to PDF-host if he prefers the layout to absorb orphans; until then, source-cap holds.)
 
 ---
 

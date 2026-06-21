@@ -462,14 +462,15 @@ Tasks numbered T<phase>.<idx>. Each is 2–5 min focused work unless flagged DES
 
 #### T5.2: World summary scandal tag [research-build]
 
+- **[S265 file-pointer CORRECTED]** `build-world-summary` is a **deterministic Node writer** — section structure is owned by the script, and the SKILL.md explicitly says "do NOT edit prose in this skill." So the real work is a new **emitter function in `scripts/buildWorldSummary.js`** + its test, NOT the SKILL.md.
 - **Files:**
-  - `.claude/skills/build-world-summary/SKILL.md` — modify
+  - `scripts/buildWorldSummary.js` — add a `## Chaos Events — Cycle {XX}` section emitter reading `Chaos_Cars` rows where `ConsequenceFloorFired=TRUE` for the current cycle (the writer already reads sheets via `lib/sheets.js`)
+  - `scripts/buildWorldSummary.test.js` — add a fixture + assertion group
+  - `.claude/skills/build-world-summary/SKILL.md` — add the new section to the §"What the script emits" list (doc-sync only)
 - **Steps:**
-  1. After existing world-summary section, add new section reading `ctx.summary.tier1ChaosEvents` (or chaos_cars rows where ConsequenceFloorFired=true for current cycle).
-  2. Render each as a "scandal/event" entry with vehicle + outcome + named target.
-  3. Section header: `## Chaos Events — Cycle {XX}`.
-- **Verify:** synthetic Tier-1 chaos event → world_summary contains Chaos Events section with the named entity.
-- **Status:** [ ] not started
+  1. Emitter renders each Tier-1 chaos row as a scandal entry: vehicle + dice outcome + named target + `ChaosNarrativeSeed` (col K).
+- **Verify:** AC#9-adjacent — synthetic Tier-1 chaos row → world_summary contains the Chaos Events section with the named entity.
+- **Status:** [ ] not started — **producer-blocked: reads `Chaos_Cars` rows; pick up AFTER engine-sheet ships T1.3 + T5.1 (Tier-1 detector). Author emitter + fixture together against a real synthetic row.**
 
 #### T5.3: Voice agent pending_decisions auto-populate [research-build]
 
@@ -478,9 +479,9 @@ Tasks numbered T<phase>.<idx>. Each is 2–5 min focused work unless flagged DES
 - **Steps:**
   1. When chaos_cars Tier-1 event exists for current cycle, prepend a "Cycle Chaos Reaction" decision block to every voice's `pending_decisions.md`.
   2. Block format: `**[CHAOS CASCADE]** [Named entity] was hit by [vehicle] this cycle, outcome: [dice-rolled outcome]. Decision required: how does {voice} respond?`
-  3. Reads chaos_cars rows where ConsequenceFloorFired=TRUE.
+  3. Reads chaos_cars rows where ConsequenceFloorFired=TRUE (via a Step-1 helper like `readInitiativeMilestoneNotes.js`/`dumpLedger.js` — a `dumpChaosCascade.js {XX}` read helper is the likely engine-sheet companion).
 - **Verify:** city-hall-prep run with synthetic Tier-1 chaos event shows CHAOS CASCADE block in mayor's pending_decisions.md.
-- **Status:** [ ] not started
+- **Status:** [ ] not started — **producer-blocked: reads `Chaos_Cars` rows; pick up AFTER engine-sheet ships T1.3 + T5.1. The Step-2 prose rule is authorable against the locked §S265 schema, but the read mechanism + verification need the producer — author + test together, not blind.**
 
 #### T5.4: Storyline_Tracker arc creation [engine/sheet]
 

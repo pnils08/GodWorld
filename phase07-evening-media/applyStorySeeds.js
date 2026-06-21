@@ -1510,6 +1510,24 @@ function applyStorySeeds_(ctx) {
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
+  // engine.11 chaos-cars (T5.5) — Tier-1 cascade seeds
+  // ═══════════════════════════════════════════════════════════════════════════
+  // A chaos hit on a Tier-1 citizen forces front-page coverage. Force priorityScore 9.5 +
+  // consequenceFloor=true (Engine A respects the floor; this just emits the seed). Pushed
+  // before dedup/sort so it ranks at the top.
+  var tier1Chaos = S.tier1ChaosEvents || [];
+  for (var tci = 0; tci < tier1Chaos.length; tci++) {
+    var cev = tier1Chaos[tci];
+    var cText = '[CHAOS] ' + cev.targetId + ' — ' + String(cev.vehicleType).replace(/_/g, ' ') +
+      ': ' + String(cev.diceOutcome).replace(/_/g, ' ') + (cev.narrativeSeed ? '. ' + cev.narrativeSeed : '.');
+    var cSeed = makeSeed(cText, 'ACCOUNTABILITY', '', 9, 'chaos-cascade', [cev.targetId], null);
+    cSeed.priorityScore = 9.5;     // force high (routing plan T2.4)
+    cSeed.consequenceFloor = true; // front-page floor
+    cSeed.themes = ['scandal', 'accountability', 'breaking'];
+    seeds.push(cSeed);
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
   // FINAL CLEAN-UP
   // ═══════════════════════════════════════════════════════════════════════════
 

@@ -139,6 +139,68 @@ function weaveStorylines_(ctx) {
 
 
 // ════════════════════════════════════════════════════════════════════════════
+// engine.11 chaos-cars (T5.4) — Tier-1 chaos arc creation
+// ════════════════════════════════════════════════════════════════════════════
+
+/**
+ * Append a Storyline_Tracker arc per Tier-1 chaos hit (ctx.summary.tier1ChaosEvents,
+ * set by the Phase-4 chaos generator). 26-col schema (verified S265). Status 'active',
+ * source marked in Description; StaleAfterCycles set so arcLifecycle/storylineHealth can
+ * wrap it normally.
+ *
+ * Q3 (OPEN, plan §Open questions): chaos-sourced arcs feed the existing arcLifecycle /
+ * storylineHealth engines next cycle. Interaction (resolution/collapse) is NOT yet verified
+ * — observe at C99/dry-run; if chaos arcs accumulate stale or mis-resolve, file a follow-up.
+ * StaleAfterCycles=6 + a ResolutionCondition are the mitigation so they don't pile up.
+ */
+function createChaosArcs_(ctx) {
+  var S = ctx.summary || {};
+  var tier1 = S.tier1ChaosEvents || [];
+  if (!tier1.length) return 0;
+  var cycle = ctx.config.cycleCount;
+  var created = 0;
+  for (var i = 0; i < tier1.length; i++) {
+    var ev = tier1[i];
+    var arcId = 'chaos-' + ev.eventId;
+    var title = 'Chaos: ' + String(ev.vehicleType).replace(/_/g, ' ') + ' / ' + String(ev.diceOutcome).replace(/_/g, ' ');
+    var desc = (ev.narrativeSeed || title) + ' (' + ev.targetId + ', source: chaos_cars)';
+    var row = [
+      new Date(),       // 0  Timestamp
+      cycle,            // 1  CycleAdded
+      'chaos_cascade',  // 2  StorylineType
+      desc,             // 3  Description
+      '',               // 4  Neighborhood
+      ev.targetId,      // 5  RelatedCitizens (primaryActor)
+      9,                // 6  Priority (Tier-1 hit = high)
+      'active',         // 7  Status
+      '',               // 8  Season
+      '',               // 9  Holiday
+      '',               // 10 HolidayPriority
+      '',               // 11 IsFirstDay
+      '',               // 12 IsCreationDay
+      '',               // 13 SportsSeason
+      arcId,            // 14 StorylineId
+      title,            // 15 Title
+      '',               // 16 LinkedArc
+      cycle,            // 17 LastMentionedCycle
+      0,                // 18 LastCoverageCycle
+      0,                // 19 MentionCount
+      0,                // 20 CoverageGap
+      'Resolved when covered or after staleness window', // 21 ResolutionCondition
+      6,                // 22 StaleAfterCycles (Q3 mitigation — lets arcLifecycle wrap it)
+      'FALSE',          // 23 IsStale
+      'FALSE',          // 24 WrapUpGenerated
+      ''                // 25 AssignedReporter
+    ];
+    queueAppendIntent_(ctx, 'Storyline_Tracker', row, 'chaos_cars Tier-1 arc', 'chaos');
+    created++;
+  }
+  if (typeof Logger !== 'undefined') Logger.log('createChaosArcs_: ' + created + ' chaos arc(s) queued');
+  return created;
+}
+
+
+// ════════════════════════════════════════════════════════════════════════════
 // DATA LOADING
 // ════════════════════════════════════════════════════════════════════════════
 
@@ -549,3 +611,12 @@ function updateCrossStorylineLinks_(ss, storylines, multiCitizens) {
 // ════════════════════════════════════════════════════════════════════════════
 
 // Main function for external calls
+
+// Node dual-runtime export (additive — Apps Script skips it). Enables unit-testing the
+// chaos arc row schema (engine.11 T5.4). Pattern: utilities/rosterLookup.js.
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    weaveStorylines_: weaveStorylines_,
+    createChaosArcs_: createChaosArcs_
+  };
+}

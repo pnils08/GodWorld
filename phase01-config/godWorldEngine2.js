@@ -384,6 +384,10 @@ function runWorldCycle() {
 
   safePhaseCall_(ctx, 'Phase7-SeasonalSeeds', function() { applySeasonalStorySeeds_(ctx); });
   safePhaseCall_(ctx, 'Phase7-ChaosWeights', function() { applyChaosCategoryWeights_(ctx); });
+  // engine.11 chaos-cars (T5.4) — create a Storyline_Tracker arc per Tier-1 chaos hit.
+  // Standalone (NOT inside weaveStorylines_, which is wired only in the production block) so it
+  // runs in BOTH entry blocks alongside applyStorySeeds_.
+  safePhaseCall_(ctx, 'Phase7-ChaosArcs', function() { createChaosArcs_(ctx); });
   safePhaseCall_(ctx, 'Phase7-StorySeeds', function() { applyStorySeeds_(ctx); });
 
 
@@ -1719,6 +1723,10 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase7-MediaFeedback', function() { runMediaFeedbackEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase7-SeasonalSeeds', function() { applySeasonalStorySeeds_(ctx); });
   safePhaseCall_(ctx, 'Phase7-ChaosWeights', function() { applyChaosCategoryWeights_(ctx); });
+  // engine.11 chaos-cars (T5.4) — create a Storyline_Tracker arc per Tier-1 chaos hit.
+  // Standalone (NOT inside weaveStorylines_, which is wired only in the production block) so it
+  // runs in BOTH entry blocks alongside applyStorySeeds_.
+  safePhaseCall_(ctx, 'Phase7-ChaosArcs', function() { createChaosArcs_(ctx); });
   safePhaseCall_(ctx, 'Phase7-StorySeeds', function() { applyStorySeeds_(ctx); });
 
   // ═══════════════════════════════════════════════════════════

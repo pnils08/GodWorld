@@ -111,6 +111,19 @@ Sentiment/CrimeIndex/RetailVitality/EventAttractiveness decay in the **Phase-10 
 - Read **live** `Neighborhood_Map` at build to determine if the gentrification clobber is firing today (active bug) or latent (input cols `MedianIncomeChange5yr` etc. unpopulated) — either way T1.5 is the durable fix.
 - `Business_Ledger` empty-cell base value + fail-loud assert if the trimmed header lookup misses.
 
+### Cross-terminal build split — the cascade closes across BOTH terminals
+
+The Hard-Constraint "Tier-1 hit forces full cascade — all four outputs live" canNOT close from engine-sheet alone. The four cascade outputs split 2/2:
+
+| Output | Task | Terminal |
+|---|---|---|
+| world_summary scandal tag | T5.2 (`build-world-summary` SKILL) | **research-build** |
+| voice pending_decisions | T5.3 (`city-hall-prep` SKILL) | **research-build** |
+| Storyline_Tracker arc | T5.4 | engine-sheet |
+| routing consequenceFloor seed | T5.5 | engine-sheet |
+
+**Engine-sheet** builds the substrate + producer: T1.3 (sheet), T1.5 (clobber fix), T3.x (generator + writebacks), T4.2/T4.3 (business decay + wiring), T5.1 (Tier-1 detector), T5.4, T5.5, T6.4 (friction log). **Research-build retains its own pieces** — the cascade CONSUMERS (T5.2/T5.3, skill files) + validators (T6.1 dry-run / T6.2 magnitude / T6.3 frequency, scripts). These consume the producer, so research-build picks them up **right behind** engine-sheet's T5.1 + T3.12 (dry-run path) and authors+verifies them against a real synthetic Tier-1 event (measure-twice — read the dry-run output, then write the consumer; not blind). Neither terminal's half is optional for the cascade Hard Constraint.
+
 ---
 
 ## Tasks

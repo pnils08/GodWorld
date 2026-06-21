@@ -302,6 +302,72 @@ function accumulateNeighborhoodFold_(ctx, hood, impacts, magnitudesByColumn) {
   }
 }
 
+// ── neighborhood residual persistence (T3.10 cross-cycle, S265 verify-fix) ────
+// ctx.summary is rebuilt every cycle, and Neighborhood_Map is replaced wholesale by the
+// Phase-10 writer, so the residual can't be read back from the sheet (§S265). It persists
+// in PropertiesService (the established T8 PREV_EVENING_JSON pattern), keyed per hood per
+// column — which also fixes the multi-impact secondary-loss (Chaos_Cars stores only the
+// primary metric, but the live residual here holds ALL columns). Run AFTER the generator
+// (Phase 4) and BEFORE the Phase-10 writer: load prior → decay one step → add this cycle's
+// fresh swings → hand the total to the writer (ctx.summary.chaosNeighborhoodFold) → persist.
+// CAVEAT (same as business decay): persistence makes this non-idempotent on a re-run.
+
+var CHAOS_NBHD_STORE_KEY = 'CHAOS_NBHD_FOLD_JSON';
+
+function readChaosNeighborhoodStore_() {
+  try {
+    if (typeof PropertiesService === 'undefined') return {};
+    var json = PropertiesService.getScriptProperties().getProperty(CHAOS_NBHD_STORE_KEY);
+    return json ? JSON.parse(json) : {};
+  } catch (e) { return {}; }
+}
+
+function writeChaosNeighborhoodStore_(fold) {
+  try {
+    if (typeof PropertiesService === 'undefined') return;
+    PropertiesService.getScriptProperties().setProperty(CHAOS_NBHD_STORE_KEY, JSON.stringify(fold || {}));
+  } catch (e) { /* best-effort persistence; a write failure just resets the residual */ }
+}
+
+function resolveChaosNeighborhoodFold_(ctx) {
+  function r2(n) { return Math.round(n * 100) / 100; }
+  var prior = readChaosNeighborhoodStore_();
+  var fresh = (ctx.summary && ctx.summary.chaosNeighborhoodFold) || {};
+  var merged = {};
+
+  // decay last cycle's residual one step (per-column asymmetric, snap-to-zero)
+  for (var h in prior) {
+    if (!prior.hasOwnProperty(h)) continue;
+    for (var c in prior[h]) {
+      if (!prior[h].hasOwnProperty(c)) continue;
+      var decayed = chaosDecayResidualOneCycle_(prior[h][c], c);
+      if (decayed !== 0) { if (!merged[h]) merged[h] = {}; merged[h][c] = decayed; }
+    }
+  }
+  // add this cycle's fresh swings (full magnitude — not yet decayed)
+  for (var h2 in fresh) {
+    if (!fresh.hasOwnProperty(h2)) continue;
+    for (var c2 in fresh[h2]) {
+      if (!fresh[h2].hasOwnProperty(c2)) continue;
+      if (!merged[h2]) merged[h2] = {};
+      var v = r2((merged[h2][c2] || 0) + fresh[h2][c2]);
+      if (v === 0) delete merged[h2][c2]; else merged[h2][c2] = v;
+    }
+  }
+  // prune empty hoods
+  for (var h3 in merged) {
+    if (merged.hasOwnProperty(h3)) {
+      var any = false;
+      for (var k in merged[h3]) if (merged[h3].hasOwnProperty(k)) { any = true; break; }
+      if (!any) delete merged[h3];
+    }
+  }
+
+  ctx.summary.chaosNeighborhoodFold = merged; // total residual the Phase-10 writer folds
+  writeChaosNeighborhoodStore_(merged);       // persist for next cycle
+  return merged;
+}
+
 // ── orchestrator (T3.12 + T5.1) ──────────────────────────────────────────────
 
 function pickTargetByScope_(rng, ctx, scope) {
@@ -427,6 +493,7 @@ if (typeof module !== 'undefined' && module.exports) {
     weightedPickChaos_: weightedPickChaos_,
     pickFromArrayChaos_: pickFromArrayChaos_,
     chaosEventId_: chaosEventId_,
+    resolveChaosNeighborhoodFold_: resolveChaosNeighborhoodFold_,
     runChaosCarsEngine_: runChaosCarsEngine_
   };
 }

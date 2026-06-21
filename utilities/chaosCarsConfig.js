@@ -349,6 +349,19 @@ function validateAllChaosConfigs_() {
         throw new Error('chaos_cars: vehicle "' + cfg.name + '" metricImpact unknown column "' + impacts[m].column + '"');
       }
     }
+    // B11 (S265 verify): a lifeHistoryTag must be a REAL DIAL_MAP key, else the citizen col-O
+    // fold routes it to DEFAULT_AMBIENT (+composure) — inverting intended adversity. Checked
+    // only when DIAL_MAP is in scope (Apps Script global, or Node test injects it); a typo'd
+    // tag throws here at config-load rather than silently mis-folding every cycle.
+    if (typeof DIAL_MAP !== 'undefined') {
+      for (var t = 0; t < cfg.textureOutcomes.length; t++) {
+        var tag = cfg.textureOutcomes[t].lifeHistoryTag;
+        if (tag && !DIAL_MAP[tag]) {
+          throw new Error('chaos_cars: vehicle "' + cfg.name + '" outcome "' + cfg.textureOutcomes[t].outcome +
+            '" lifeHistoryTag "' + tag + '" is not a DIAL_MAP key (would fold to +composure).');
+        }
+      }
+    }
   }
   return true;
 }

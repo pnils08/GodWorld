@@ -321,6 +321,18 @@ function saveV3NeighborhoodMap_(ctx) {
       sent = round2(sent + pulseFoldDelta_(pulse, 'sentiment'));                              // engine.33 pulse fold
     }
 
+    // engine.11 chaos-cars fold — multi-cycle residual resolved by resolveChaosNeighborhoodFold_
+    // (PropertiesService-persisted, decayed in place). Additive on the same 4 movable cols, with
+    // the writer's Math.max(0)+round2 guards (§S265). Distinct from the pulse fold: this carries
+    // across cycles (negative swings linger; AC#6) where the pulse is this-cycle only.
+    var cFold = (S.chaosNeighborhoodFold && S.chaosNeighborhoodFold[name]) || null;
+    if (cFold) {
+      crime = round2(Math.max(0, crime + (cFold.CrimeIndex || 0)));
+      retail = round2(Math.max(0, retail + (cFold.RetailVitality || 0)));
+      eventAttract = round2(Math.max(0, eventAttract + (cFold.EventAttractiveness || 0)));
+      sent = round2(Math.max(0, sent + (cFold.Sentiment || 0))); // clamp ≥0: chaos hits harder than pulse
+    }
+
     var demoLabel = getDemographicMarkerV35_(name, baseDemoLabel, arcByNeighborhood, S, holiday, isFirstFriday, isCreationDay);
 
     // S215 civic.10b — District resolved from canon map; blank for unmapped.

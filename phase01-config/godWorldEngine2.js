@@ -435,6 +435,10 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase10-RecordEvents25', function() { recordWorldEvents25_(ctx); });
   safePhaseCall_(ctx, 'Phase10-RecordEventsV3', function() { recordWorldEventsv3_(ctx); });
 
+  // engine.11 chaos-cars — resolve the persisted neighborhood residual (load→decay→add fresh→
+  // save) BEFORE the writer folds it. Must precede Phase10-NeighborhoodMap; reads this cycle's
+  // fresh swings (generator Phase 4) + prior residual (PropertiesService).
+  safePhaseCall_(ctx, 'Phase10-ChaosNbhdResolve', function() { resolveChaosNeighborhoodFold_(ctx); });
   safePhaseCall_(ctx, 'Phase10-NeighborhoodMap', function() { saveV3NeighborhoodMap_(ctx); });
   safePhaseCall_(ctx, 'Phase10-Arcs', function() { saveV3ArcsToLedger_(ctx); });
   safePhaseCall_(ctx, 'Phase10-Bonds', function() { saveRelationshipBonds_(ctx); });
@@ -1753,6 +1757,10 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase10-CycleWeather', function() { recordCycleWeather_(ctx); });
   safePhaseCall_(ctx, 'Phase10-RecordEvents25', function() { recordWorldEvents25_(ctx); });
   safePhaseCall_(ctx, 'Phase10-RecordEventsV3', function() { recordWorldEventsv3_(ctx); });
+  // engine.11 chaos-cars — resolve the persisted neighborhood residual (load→decay→add fresh→
+  // save) BEFORE the writer folds it. Must precede Phase10-NeighborhoodMap; reads this cycle's
+  // fresh swings (generator Phase 4) + prior residual (PropertiesService).
+  safePhaseCall_(ctx, 'Phase10-ChaosNbhdResolve', function() { resolveChaosNeighborhoodFold_(ctx); });
   safePhaseCall_(ctx, 'Phase10-NeighborhoodMap', function() { saveV3NeighborhoodMap_(ctx); });
   safePhaseCall_(ctx, 'Phase10-Arcs', function() { saveV3ArcsToLedger_(ctx); });
   safePhaseCall_(ctx, 'Phase10-Bonds', function() { saveRelationshipBonds_(ctx); });

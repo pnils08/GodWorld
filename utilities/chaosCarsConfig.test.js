@@ -246,6 +246,29 @@ console.log('\nTest 10: validateAllChaosConfigs_ on the finalized table');
 }
 
 // ────────────────────────────────────────────────────────────────────────────
+// Test 11: B11 (verify-fix) — lifeHistoryTags validated against the REAL DIAL_MAP
+// ────────────────────────────────────────────────────────────────────────────
+console.log('\nTest 11: lifeHistoryTag validated against DIAL_MAP when in scope');
+{
+  const dialMod = require('./citizenDialMap');
+  global.DIAL_MAP = dialMod.DIAL_MAP;
+  assert('all config lifeHistoryTags are real DIAL_MAP keys', helper.validateAllChaosConfigs_() === true);
+  // every tag the table uses resolves
+  const tags = [];
+  for (const v of helper.VEHICLE_CONFIGS) for (const o of v.textureOutcomes) if (o.lifeHistoryTag) tags.push(o.lifeHistoryTag);
+  assert('config uses >=1 tag', tags.length > 0);
+  assert('every used tag exists in DIAL_MAP', tags.every((t) => !!dialMod.DIAL_MAP[t]));
+  // a typo'd tag must throw (would fold to +composure otherwise)
+  const orig = helper.VEHICLE_CONFIGS[0].textureOutcomes[0].lifeHistoryTag;
+  helper.VEHICLE_CONFIGS[0].textureOutcomes[0].lifeHistoryTag = 'Setbck'; // typo
+  let threw = false;
+  try { helper.validateAllChaosConfigs_(); } catch (e) { threw = /not a DIAL_MAP key/.test(e.message); }
+  assert('typo tag → throws at config-load', threw);
+  helper.VEHICLE_CONFIGS[0].textureOutcomes[0].lifeHistoryTag = orig; // restore
+  delete global.DIAL_MAP;
+}
+
+// ────────────────────────────────────────────────────────────────────────────
 console.log('\n' + '─'.repeat(60));
 if (failed === 0) {
   console.log(`✓ all ${passed} assertions passed`);

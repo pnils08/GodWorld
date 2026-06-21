@@ -11,6 +11,16 @@ const decay = require('../utilities/chaosCarsDecay');
 global.validateOutcome = cfg.validateOutcome;
 global.loadChaosCarsConfig_ = cfg.loadChaosCarsConfig_;
 global.validateAllChaosConfigs_ = cfg.validateAllChaosConfigs_;
+global.chaosDecayResidualOneCycle_ = decay.chaosDecayResidualOneCycle_;
+
+// PropertiesService stub (in-memory key/value) for the neighborhood residual store.
+let _props = {};
+global.PropertiesService = {
+  getScriptProperties: () => ({
+    getProperty: (k) => (k in _props ? _props[k] : null),
+    setProperty: (k, v) => { _props[k] = v; }
+  })
+};
 
 // captured intents
 let appendIntents = [];
@@ -69,7 +79,7 @@ function makeCtx(seed) {
   };
 }
 
-function reset() { appendIntents = []; cellIntents = []; chaosRows = []; }
+function reset() { appendIntents = []; cellIntents = []; chaosRows = []; _props = {}; }
 
 // ── Test 1: event count bounds + determinism ──
 console.log('Test 1: count bounds + determinism');
@@ -199,6 +209,31 @@ console.log('\nTest 6: Tier-1 cascade flag');
   }
   assert('Tier-1 cascade fired at least once over 400 seeds', sawTier1);
   assert('every consequenceFloorFired row is a Tier-1 citizen', consistentFlag);
+}
+
+// ── Test 7: neighborhood residual — persist + decay + multi-cycle linger (verify-fix) ──
+console.log('\nTest 7: neighborhood residual persistence (resolveChaosNeighborhoodFold_)');
+{
+  _props = {};
+  // Cycle A: fresh swings on Fruitvale (Sentiment slow-revert; CrimeIndex fast-revert).
+  const ctxA = { summary: { chaosNeighborhoodFold: { Fruitvale: { Sentiment: -0.10, CrimeIndex: -0.08 } } } };
+  const a = eng.resolveChaosNeighborhoodFold_(ctxA);
+  assert('A: total carries fresh swing', Math.abs(a.Fruitvale.Sentiment + 0.10) < 1e-9 && Math.abs(a.Fruitvale.CrimeIndex + 0.08) < 1e-9);
+  assert('A: persisted to store', !!_props.CHAOS_NBHD_FOLD_JSON);
+  assert('A: writer reads total via ctx.summary', ctxA.summary.chaosNeighborhoodFold === a);
+
+  // Cycle B: no fresh → prior decays one step. Sentiment down=0.15 → -0.085; CrimeIndex down=0.60 → -0.032.
+  const ctxB = { summary: {} };
+  const b = eng.resolveChaosNeighborhoodFold_(ctxB);
+  assert('B: Sentiment lingers (slow) → -0.085', Math.abs(b.Fruitvale.Sentiment + 0.085) < 1e-9, `got ${b.Fruitvale.Sentiment}`);
+  assert('B: CrimeIndex reverts (fast) → -0.032', Math.abs(b.Fruitvale.CrimeIndex + 0.032) < 1e-9, `got ${b.Fruitvale.CrimeIndex}`);
+
+  // Cycle C: fresh -0.05 Sentiment adds on top of the decayed prior (multi-cycle linger).
+  const ctxC = { summary: { chaosNeighborhoodFold: { Fruitvale: { Sentiment: -0.05 } } } };
+  const c = eng.resolveChaosNeighborhoodFold_(ctxC);
+  assert('C: fresh adds on decayed prior → -0.12', Math.abs(c.Fruitvale.Sentiment + 0.12) < 1e-9, `got ${c.Fruitvale.Sentiment}`);
+  assert('C: CrimeIndex keeps decaying (no fresh)', c.Fruitvale.CrimeIndex < 0 && c.Fruitvale.CrimeIndex > -0.032);
+  assert('C: multi-column held across cycles (B6 fix)', 'Sentiment' in c.Fruitvale && 'CrimeIndex' in c.Fruitvale);
 }
 
 console.log('\n' + '─'.repeat(60));

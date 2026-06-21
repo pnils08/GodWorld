@@ -155,13 +155,26 @@ function updateGentrificationPhases_(ctx, cycle) {
       gentrifying++;
     }
 
-    // Update if phase changed
+    var sheetRow = r + 2; // rows = values.slice(1), so sheet row is r + 2 (1-based, past header)
+
+    // Update if phase changed — T1.5: column-scoped per-cell intents ONLY.
+    // The owned cols (GentrificationPhase/StartCycle/DemographicShiftIndex) are
+    // non-adjacent, so each is a separate cell intent. A full-width range intent
+    // here is clobber-certain: the Phase-10 writer (saveV3NeighborhoodMap_) rebuilds
+    // rows 2:N directly and folds engine.33 pulse + chaos residual into the 4 metric
+    // cols; executePersistIntents_ flushes queued intents AFTER the writer, so a
+    // full-width intent carrying function-start (last-cycle) metric values reverts
+    // the fold. Cell-scoping the owned cols leaves the metric cols untouched.
     if (newPhase !== currentPhase) {
       row[iGenPhase] = newPhase;
+      queueCellIntent_(ctx, 'Neighborhood_Map', sheetRow, iGenPhase + 1, newPhase,
+        'gentrification phase update', 'civic');
 
       // Record start cycle if entering gentrification
       if (currentPhase === GENTRIFICATION_PHASES.NONE && newPhase !== GENTRIFICATION_PHASES.NONE) {
         row[iGenStart] = cycle;
+        queueCellIntent_(ctx, 'Neighborhood_Map', sheetRow, iGenStart + 1, cycle,
+          'gentrification start cycle', 'civic');
       }
 
       updated++;
@@ -169,6 +182,7 @@ function updateGentrificationPhases_(ctx, cycle) {
 
     // Simulate demographic shift index (0-10)
     // Based on rate of change in income, rent, and demographics
+    var oldDemoShift = Number(row[iDemoShift]) || 0;
     var demoShift = 0;
     if (incomeChange > 10) demoShift += 2;
     if (incomeChange > 25) demoShift += 2;
@@ -177,12 +191,15 @@ function updateGentrificationPhases_(ctx, cycle) {
     if (whiteChange > 5) demoShift += 1;
     if (whiteChange > 15) demoShift += 1;
 
-    row[iDemoShift] = Math.min(demoShift, 10);
-  }
-
-  if (updated > 0) {
-    queueRangeIntent_(ctx, 'Neighborhood_Map', 2, 1, rows,
-      'gentrification phase update', 'civic');
+    var newDemoShift = Math.min(demoShift, 10);
+    row[iDemoShift] = newDemoShift;
+    // T1.5: persist demoShift via its own cell intent whenever it changes. (Pre-fix,
+    // this was only flushed by the range intent gated on updated>0 — so a demoShift
+    // change with no phase change was silently dropped. Per-cell closes that too.)
+    if (newDemoShift !== oldDemoShift && iDemoShift >= 0) {
+      queueCellIntent_(ctx, 'Neighborhood_Map', sheetRow, iDemoShift + 1, newDemoShift,
+        'gentrification demographic shift index', 'civic');
+    }
   }
 
   return { analyzed: analyzed, updated: updated, gentrifying: gentrifying };

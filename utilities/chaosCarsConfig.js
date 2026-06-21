@@ -147,6 +147,18 @@ function isArrayChaos_(x) {
  *
  * Starter weights/magnitudes — Phase 6 tuning (T6.2) may adjust; the no-death floor,
  * scope-keying, and direction asymmetry are locked (plan §Hard Constraints).
+ *
+ * S265 SCALE CALIBRATION (engine-sheet, Mike-approved): §S265's neighborhood magnitudes
+ * were written on a 0-100 mental scale; the live columns are far smaller — Sentiment is a
+ * 0-1 mood index (live 0.20-0.33), CrimeIndex an integer incident count (live 0-1). The
+ * engine.33 pulse fold caps its own deltas at Sentiment ±0.15 / CrimeIndex ±0.10. So the
+ * Sentiment/CrimeIndex magnitudes here are fractional (0.02-0.15), sized just above the
+ * pulse-fold caps — chaos hits harder than ambient texture but does not floor a hood (a
+ * -0.15 pge hit on a 0.27 hood → 0.12). RetailVitality (live ~7-11, cap 1.0) and
+ * EventAttractiveness (live ~15-25, cap 4.0) were already in scale → unchanged. Business
+ * Annual_Revenue/Employee_Count magnitudes await a Business_Ledger scale check (T3.9/T6.2).
+ * FLAG for research-build: no vehicle currently RAISES CrimeIndex (cop/oari both push down
+ * on a ~0 baseline) → that channel is low-signal until a crime-spiking outcome exists.
  */
 
 var VEHICLE_CONFIGS = [
@@ -161,7 +173,7 @@ var VEHICLE_CONFIGS = [
         narrativeSeed: 'An arrest on the block — the booking, and the morning after for everyone who watched.' }
     ],
     metricImpacts: [
-      { scope: 'neighborhood', column: 'CrimeIndex', direction: 'down', magnitudeRange: [2, 6] }
+      { scope: 'neighborhood', column: 'CrimeIndex', direction: 'down', magnitudeRange: [0.05, 0.15] }
     ]
   },
   {
@@ -174,8 +186,8 @@ var VEHICLE_CONFIGS = [
         narrativeSeed: 'Smoke over the rooftops — a blaze contained, but the block smells it for days.' }
     ],
     metricImpacts: [
-      { scope: 'business',     column: 'Annual_Revenue', direction: 'down', magnitudeRange: [10, 25] },
-      { scope: 'neighborhood', column: 'Sentiment',      direction: 'down', magnitudeRange: [3, 8]   }
+      { scope: 'business',     column: 'Annual_Revenue', direction: 'down', magnitudeRange: [10, 25]    },
+      { scope: 'neighborhood', column: 'Sentiment',      direction: 'down', magnitudeRange: [0.04, 0.12] }
     ]
   },
   {
@@ -189,7 +201,7 @@ var VEHICLE_CONFIGS = [
         narrativeSeed: 'An accident on the job floor — a stretcher out the loading door.' }
     ],
     metricImpacts: [
-      { scope: 'neighborhood', column: 'Sentiment', direction: 'down', magnitudeRange: [2, 5] }
+      { scope: 'neighborhood', column: 'Sentiment', direction: 'down', magnitudeRange: [0.03, 0.08] }
     ]
   },
   {
@@ -203,8 +215,8 @@ var VEHICLE_CONFIGS = [
         narrativeSeed: 'A quiet intervention, a ride to treatment instead of a cell — the program working as promised.' }
     ],
     metricImpacts: [
-      { scope: 'neighborhood', column: 'Sentiment',  direction: 'up',   magnitudeRange: [3, 7] },
-      { scope: 'neighborhood', column: 'CrimeIndex',  direction: 'down', magnitudeRange: [2, 5] }
+      { scope: 'neighborhood', column: 'Sentiment',  direction: 'up',   magnitudeRange: [0.04, 0.10] },
+      { scope: 'neighborhood', column: 'CrimeIndex',  direction: 'down', magnitudeRange: [0.04, 0.12] }
     ]
   },
   {
@@ -232,9 +244,9 @@ var VEHICLE_CONFIGS = [
         narrativeSeed: 'Bags piling at the curb — a sanitation delay the whole block can smell.' }
     ],
     metricImpacts: [
-      { scope: 'neighborhood', column: 'Sentiment',      direction: 'down', magnitudeRange: [3, 8] },
-      { scope: 'neighborhood', column: 'RetailVitality', direction: 'down', magnitudeRange: [1, 3] },
-      { scope: 'business',     column: 'Annual_Revenue', direction: 'down', magnitudeRange: [3, 8] }
+      { scope: 'neighborhood', column: 'Sentiment',      direction: 'down', magnitudeRange: [0.04, 0.12] },
+      { scope: 'neighborhood', column: 'RetailVitality', direction: 'down', magnitudeRange: [1, 3]      },
+      { scope: 'business',     column: 'Annual_Revenue', direction: 'down', magnitudeRange: [3, 8]      }
     ]
   },
   {
@@ -259,8 +271,8 @@ var VEHICLE_CONFIGS = [
       { outcome: 'noise_complaint',      weight: 0.25, severity: 'low' }
     ],
     metricImpacts: [
-      { scope: 'neighborhood', column: 'Sentiment',           direction: 'up', magnitudeRange: [3, 6] },
-      { scope: 'neighborhood', column: 'EventAttractiveness', direction: 'up', magnitudeRange: [1, 4] }
+      { scope: 'neighborhood', column: 'Sentiment',           direction: 'up', magnitudeRange: [0.04, 0.10] },
+      { scope: 'neighborhood', column: 'EventAttractiveness', direction: 'up', magnitudeRange: [1, 4]       }
     ]
   },
   {
@@ -272,8 +284,8 @@ var VEHICLE_CONFIGS = [
       { outcome: 'traffic_jam',           weight: 0.25, severity: 'low', lifeHistoryTag: 'Background',  role: 'subject' }
     ],
     metricImpacts: [
-      { scope: 'neighborhood', column: 'RetailVitality', direction: 'up',   magnitudeRange: [1, 3] },
-      { scope: 'neighborhood', column: 'Sentiment',      direction: 'down', magnitudeRange: [1, 3] }
+      { scope: 'neighborhood', column: 'RetailVitality', direction: 'up',   magnitudeRange: [1, 3]      },
+      { scope: 'neighborhood', column: 'Sentiment',      direction: 'down', magnitudeRange: [0.02, 0.05] }
     ]
   },
   {
@@ -287,8 +299,8 @@ var VEHICLE_CONFIGS = [
         narrativeSeed: 'A transformer blows — a block goes dark, freezers thaw, registers go cold.' }
     ],
     metricImpacts: [
-      { scope: 'neighborhood', column: 'Sentiment',      direction: 'down', magnitudeRange: [4, 10] },
-      { scope: 'business',     column: 'Annual_Revenue', direction: 'down', magnitudeRange: [5, 15]  }
+      { scope: 'neighborhood', column: 'Sentiment',      direction: 'down', magnitudeRange: [0.05, 0.15] },
+      { scope: 'business',     column: 'Annual_Revenue', direction: 'down', magnitudeRange: [5, 15]       }
     ]
   }
 ];

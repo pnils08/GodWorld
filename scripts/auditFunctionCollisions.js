@@ -53,6 +53,11 @@ function walkScripts(dir, fn) {
     const p = path.join(dir, e.name);
     if (e.isDirectory()) walkScripts(p, fn);
     else if (e.isFile() && (p.endsWith('.js') || p.endsWith('.gs'))) {
+      // .claspignore excludes **/*.test.js — they never reach the Apps Script flat
+      // namespace, so their shared helpers (assert/assertThrows) are not real
+      // collisions. Mirror that exclusion here (same gap class as the CLASP_DIRS
+      // correction S237; surfaced S265 when a test relocated lib→utilities).
+      if (p.endsWith('.test.js') || p.endsWith('.test.gs')) continue;
       fn(p, fs.readFileSync(p, 'utf8'));
     }
   }

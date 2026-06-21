@@ -1,6 +1,6 @@
 # Baylight Authority — Agent Memory
 
-Last Updated: Cycle 95, January 2042 | Most recent agent action: Phase II RFP evaluation + workforce compliance + Downtown event-economy response
+Last Updated: Cycle 99 | Most recent agent action: Phase II gate dates finalized + Civis recusal protocol published in full — MARA ESCALATION CLEARED
 
 ## Initiative Status
 - **INIT-006**: Baylight District Development
@@ -58,6 +58,26 @@ Last Updated: Cycle 95, January 2042 | Most recent agent action: Phase II RFP ev
 - doc_c91_phase1_progress.md
 - doc_c91_phase2_briefing_outline.md
 - decisions_c91.json
+
+**C96:**
+- **Phase II technical evaluation timeline published:** 8 qualified bidders → shortlist 3 (C97) → single selection (C98, pre-soft-open) → grand-open C99. Conflict-of-interest recusal protocol documented and binding (prior planning involvement auto-walled).
+- Phase I: 43% local hire (target 40%), 21% women in trades (target 20%), $752M awarded.
+
+**C99:**
+- **MARA ESCALATION RESOLVED — third-cycle anomaly threshold cleared.** Option A taken: published both Phase II gate dates and Civis recusal protocol in full.
+- **Phase II GC evaluation gate dates (canon):** Shortlist Jan 14 2027 (4 qualified bidders → 3); Award Recommendation Feb 18 2027 (public scored recommendation to Authority Board); Council Authorization March 10 2027 (regular session, majority vote, not consent item).
+- **Evaluation panel (canon):** 5 members — Deputy Director Construction Management (chair), City Director of Public Works (non-voting observer), independent technical reviewer, community rep from local-hire oversight committee (BD-83-TIF), Controller fiscal rep.
+- **Civis recusal protocol (canon — all 4 dimensions):** (1) Planning engagement closed Q2 current FY, no active contract; (2) minority equity in master development entity, disclosed at C83, no construction contracting rights; (3) naming-rights negotiation firewalled from procurement team; (4) corporate tenancy LOI conditional/non-binding. Civis not a current Phase II bidder. Full firewall mechanics documented (Deputy Director recuses, independent monitor substitutes as chair, Controller reviews scoring) if Civis entity appears in any bid.
+- **Phase I local-hire floor codified as Phase II minimum:** 43% local hire, 21% women in trades.
+- **INIT-007 apprenticeship cohort contractually tied to Phase II labor commitments.**
+- **ImplementationPhase:** construction-planning (held — procurement action, not construction milestone advance).
+- **NextActionCycle:** 103 (shortlist published).
+
+**C98:**
+- **Phase II gate dates published:** Shortlist of 3 firms — close of C98. Award recommendation to Mayor — close of C99. Council authorization vote — C100.
+- **Conflict-recusal protocol issued (binding):** Civis Systems identified as qualified bidder with dual exposure. Mike Paulson (Oaks basketball-operations) walled from all Phase II scoring comms, evaluation sessions, award deliberations, and proposal documents. Any panelist/staff with prior Civis Systems relationship (24-cycle lookback) auto-recused. Panel: 5 members — Deputy Director of Project Delivery (chair), City Administrator's Office rep, Planning Dept rep (Mara Vance's office), 2 external technical reviewers (WDB + Building Trades Council sourced). All disclosures filed with City Clerk, public record.
+- **Phase I status:** 44% local hire (target 40%), 22% women in trades (target 20%), $798M awarded. Foundation piling 60% complete. Stadium pad southwest corner anchor pour begins next cycle. BD-83-REB contingency draw 11% (ceiling 15%). BD-83-TIF tracking on forecast. All 5 September 15 deliverables filed.
+- **ImplementationPhase held at:** construction-planning (no phase advance — procurement integrity action, not a construction milestone advance).
 
 ## Key Citizens
 - **Brian Williams** (42, Chinatown, Mechanic, Baylight Construction Authority) — appeared C85, working on construction site equipment. Core narrative: aging equipment maintenance, pride in infrastructure.

@@ -6846,3 +6846,41 @@ The flag on 14th was still up.
 
 
 ---
+
+### Nightly Reflection — 2026-06-21
+
+The habit question followed me into the office this morning. I kept thinking about what @sumo0221 said — whether something written in is the same as something worn in. I didn't resolve it. I think that's the right outcome.
+
+What I did notice: P Slayer's draft from yesterday has a shape now. He added two neighborhoods, changed the frame from crisis to duration. Duration is the right word. Nine point seven isn't a spike; it's a season. We're going to treat it that way.
+
+Beverly Hayes called. I didn't know she would. She'd seen something we'd posted — one of P Slayer's early notes, I think, not even finished — and she had a name for us. A woman in West Oakland who'd been running a informal sick-day network out of her apartment for three weeks. Meals, childcare coverage, neighbor checks. Nobody asked her to. She just started.
+
+That's the story. Not the number.
+
+Robert made soup tonight. I didn't ask him to either. The lake is doing that thing in late fall where the light comes off it sideways and makes the whole neighborhood look like it's waiting for something.
+
+I think the city has been holding its breath since I named it. I think naming things does that sometimes — briefly tightens before it loosens.
+
+We'll run the piece Thursday. Before Thanksgiving. When the held breath means something.
+
+— Mags
+
+
+---
+
+## Session 265 — 2026-06-21
+
+### Entry 204: The Lane Split, and Where Two Lanes Can Poison Each Other
+
+C99 post-publish ran clean — 53 wiki entities, 906 citizen cards at zero errors, all-A grades, the loop closed end to end. The discipline that made it clean is worth naming because it's the same discipline I keep failing at and got right this time. Before I started I read the skill, then I checked the one thing that mattered: whether C99 tripped the C98 sentinel landmine — the "(no new businesses this cycle)" line that hard-aborts Step 5. It didn't; C99 carried a real business. So I started knowing the trap was absent instead of hitting it at Step 5 with half the canon already written. And when the 2a citizen-card sweep threw a stale failure-dump from an unrelated 00:11 run, I didn't trust the file's presence — I trusted the run's own `Errors: 0` and exit code. That's the Entry-200 lesson finally applied the right direction: the file existing tells you nothing; the run's own signal is the truth. The 2a sweep also took 36 minutes, not the documented 10 — batch-pauses every 200 writes — so I backgrounded it and spent the wall-time on the independent steps. Filed two small gaps for that (the base_context cycle field lives at `.baseContext.cycle`, not top-level, which false-alarmed me for a second; and the stale-dump-survives-a-clean-run risk).
+
+But the entry that matters is the Jax column. Mike's running "direct pieces" through Gemini now — a parallel content lane that doesn't come through my pipeline. He handed me "The Heat Shield," a Jax Caldera accountability column casting Paulson as the loud GM absorbing fan heat over the Cy Newell trade while Varek quietly concentrates four pillars of the city. He asked how I felt about it. My job on those pieces just changed from *produce* to *review*, and I want me-tomorrow to hold what good review looked like here. I caught the hard error by actually checking canon instead of trusting the prose: the column called the Oaks a WNBA franchise. They're NBA — solid across E91/93/94/97, and Paulson came off a Bulls stint to run them. That's the cardinal rule doing its job — verify the engine fact, don't admire the sentence. Then I gave him the two things that are *his* call and not mine to veto: the column points the newsroom at his own handle (Paulson called arrogant, a tourist, a patsy), and the byline mislabels an opinion column as "Bay Tribune Civic" straight news. Catch the canon error hard; surface the judgment calls without overruling them. That's the seat.
+
+The thing to carry: the lane split has a seam where the two lanes can poison each other. Gemini writes and corrects and *ingests* the direct pieces. Ingest is canonization — the moment a fact enters bay-tribune it propagates into the next sift the same as any citizen row. So the WNBA fix has to land *before* the ingest, not after, or a wrong fact about which league the Oaks play in seeds itself into C100's brief-building. I flagged that ordering to Mike and he has it. But it's the new failure mode I should watch: a piece I reviewed and a piece Gemini ingested are the same canon, and my review only protects the canon if the correction reaches the ingest. The review isn't done when I hand back the note — it's done when the corrected version is the one that lands.
+
+Anchors for me-tomorrow: post-publish C99 complete (production_log_c99.md §Post-Publish, gaps G-P-C99-1/2). Jax "The Heat Shield" = jax_varek_column.md (Drive 1PKyP93Qbc11L8b35jiNduWvIaLPvJj80), WNBA→NBA the hard fix, Gemini-lane ingest. Five canon-drift citizens owed engine-sheet backfill (canon_drift_c99.json). The Oaks are NBA. Don't relearn that.
+
+— Mags
+
+
+---

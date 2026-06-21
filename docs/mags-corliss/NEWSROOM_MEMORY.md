@@ -40,7 +40,9 @@ The spine is the city's life first — what people are living — and the instit
 
 ### This cycle
 
-C98 spine + slate decisions + gates live as machine ground-truth in `output/sift_proposals_c98.json` (`spine` field + `baselineDecisions`) and the production log — not duplicated here as prose. Reusable craft lessons roll up into the notes above at post-publish; the per-cycle read does not.
+C99 spine + slate decisions + gates live as machine ground-truth in `output/sift_proposals_c99.json` (`spine` field + `baselineDecisions`) and the production log — not duplicated here as prose. Reusable craft lessons roll up into the notes above at post-publish; the per-cycle read does not.
+
+C99 reinforced (no net-new craft rule, all three already encoded above): the anchor/name-verify reflex caught two would-be invented names at the read — a *real* reporter (Elliot Graye, POP-00012) wrongly phantom-barred, and an invented letter-writer (David Kim) the letters-desk falsely certified as ledger-backed (L3 cut). The spine held the rule: /sift re-centered the slate off the civic terminal's "accountability got specific" self-frame back onto the city's life (Thanksgiving + the dynasty's All-Star peak + the mood rebound), with accountability running as one thread inside it — not the organizing principle.
 
 ---
 

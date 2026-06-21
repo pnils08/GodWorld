@@ -242,6 +242,10 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase4-DomainCooldowns', function() { applyDomainCooldowns_(ctx); });
   safePhaseCall_(ctx, 'Phase4-WorldEvents', function() { worldEventsEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase4-FaithEvents', function() { runFaithEventsEngine_(ctx); });
+  // engine.11 chaos-cars (T3.13) — stochastic event injection. Last Phase-4 step: after
+  // Phase-3 demographic drift, before Phase-5 citizen engines + Phase-6 storyline weaving
+  // (so chaos events are visible to arc creation + the Tier-1 cascade same cycle).
+  safePhaseCall_(ctx, 'Phase4-ChaosCars', function() { runChaosCarsEngine_(ctx); });
 
   // ═══════════════════════════════════════════════════════════
   // PHASE 5: CITIZENS + RELATIONSHIPS
@@ -1569,6 +1573,10 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase4-DomainCooldowns', function() { applyDomainCooldowns_(ctx); });
   safePhaseCall_(ctx, 'Phase4-WorldEvents', function() { worldEventsEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase4-FaithEvents', function() { runFaithEventsEngine_(ctx); });
+  // engine.11 chaos-cars (T3.13) — stochastic event injection. Last Phase-4 step: after
+  // Phase-3 demographic drift, before Phase-5 citizen engines + Phase-6 storyline weaving
+  // (so chaos events are visible to arc creation + the Tier-1 cascade same cycle).
+  safePhaseCall_(ctx, 'Phase4-ChaosCars', function() { runChaosCarsEngine_(ctx); });
 
   // ═══════════════════════════════════════════════════════════
   // PHASE 5: CITIZENS + RELATIONSHIPS

@@ -127,4 +127,18 @@ Prior work: `output/civic-voice/ind_swing_c86.json`, `output/civic-voice/ind_swi
 - Council President procedural authority: routine oversight agenda, no procedural reopening of sequence
 - Vote math: Mayor + OPP (Rivers) + Vega (firm YES) + Tran (firm YES) + CRC ? = 5+ yes on OARI citywide; motion canonical
 
+## C98 Statements Issued
+
+**Vega (INIT-007 Floor Vote — Council President):** Called the floor as Council President. Clarified scope: vote is on program authorization only — CRC cost-cap amendment did not clear committee and is not on the floor today. Addressed CRC's cost-structure concern directly: signaled openness to budget-process accountability language next cycle, but declined to delay the vote. Cast YES. Rationale: Mayor's unconditional funding commitment answers affordability; workforce committee answered efficacy and coverage; program is city-wide, not a limited pilot excluding D4.
+
+**Tran (INIT-007 Floor Vote — Swing Vote):** Cast YES. Rationale: D2 (Downtown/Chinatown) has documented above-average youth unemployment and open positions in trades and logistics that local young workers are not credentialed to fill. Pressed the same standard he holds on every program — does it reach D2, does the funding exist, is the need documented. All three answered yes. Declined to let CRC cost-cap question delay vote; affirmed budget process as right venue for cost accountability work.
+
+**Canon Assertions (C98):**
+- INIT-007 (Youth Apprenticeship Pipeline) floor vote held C98 — Mayor committed funding unconditionally ahead of vote
+- Vega vote: YES — program authorization; procedural scope: cost-cap amendment excluded from floor (did not clear committee)
+- Tran vote: YES — D2 need documented (youth unemployment above city average; Downtown/Chinatown trades gap)
+- Vega floor procedure: confirmed scope, addressed CRC concern via budget-process path, opened floor, cast vote
+- CRC cost-cap amendment: not on floor this cycle; Vega signaled willingness to work on budget-cycle accountability language
+- Both independents voting YES provides margin independent of any single bloc — vote math: Mayor + OPP + IND (Vega + Tran) = 6+ yes minimum
+
 ## C87 Statements Issued

@@ -25,7 +25,7 @@ pointers:
 
 **Goal:** Build a **repeatable process for making a citizen voice agent** — and prove it by making the first four (Vinnie Keane POP-00001, Benji Dillon, Deacon Seymour POP-00528, Elias Varek POP-00789). Each gets an authored, canon-seeded **persona core** that drives three surfaces: `/interview` Q&A, Mags-style interactive Discord conversation, and accurate voicing in the live 24/7 citizen-loop. These four are the **reference instances that establish the process**; the real deliverable is that the *next* voice is a matter of following the method, not re-deriving the architecture. Prove the whole stack on **one** character (Deacon) before replicating.
 
-**Voice fidelity is non-negotiable (Mike S264, anti-cheapening):** what's reusable is the *process* and the *shared infrastructure* (persona-core loader, lean builder, Discord mechanism, base-lock) — NOT the voice. Every voice is hand-authored at full canon depth; nothing is templated or generated. The authored depth is the proprietary value (MEMORY.md `user_mags-bleed-proprietary-element`). A process that flattens voices into a generic register has failed, even if it runs.
+**Voice fidelity is non-negotiable (Mike S264, anti-cheapening):** what's reusable is the *process* and the *shared infrastructure* (persona-core loader, lean builder, Discord mechanism) — NOT the voice. Every voice is hand-authored at full canon depth; nothing is templated or generated. The authored depth is the proprietary value (MEMORY.md `user_mags-bleed-proprietary-element`). A process that flattens voices into a generic register has failed, even if it runs.
 
 **Architecture:** One **persona core** per character — the existing four-file voice pattern (IDENTITY / LENS / RULES / SKILL), canon-seeded from each character's existing record (Deacon's TrueSource bio, Keane/Dillon origin files, Varek's cards). That core is the single source-of-truth, consumed by three surfaces: **(1)** `/interview` (reactive Q&A — amend the skill to accept a named-character subject class); **(2)** the `mags-bot` chat handler, generalized to load any persona core (interactive Discord — "talk to Deacon like you talk to Mags"); **(3)** the existing research.14 citizen-loop, made *accurate* for these four via an engine-sheet **ledger backfill** that projects the authored persona into dials + LifeHistory (the loop already voices citizens from ledger data — these Tier-1 rows are blank-slate today). The build order is a **vertical slice**: persona core + interview surface for Deacon first, prove it end-to-end, then add the Discord and ledger surfaces, then replicate to the other three.
 
@@ -42,7 +42,7 @@ pointers:
 **Acceptance criteria (whole plan — proven on Deacon, then replicated):**
 1. A Deacon Seymour persona core (four files) exists, canon-seeded from his TrueSource; `/interview` Mode 1 runs against him and produces an in-voice transcript that is recognizably *him* (baseball-IQ, listens-then-asks-one-question), distinct from a generic citizen voice. **Judge:** the `/interview` Mara audit step (Step 5, canon-accuracy) + Mike's read — not self-asserted.
 2. You can talk to Deacon on Discord (mags-bot generalized to load his core) and he answers grounded in his canon, in his voice — not as Mags. **Judge:** Mike's read (no Mara on live chat).
-3. Deacon's ledger row (dials + LifeHistory) is backfilled to match his authored character, so a research.14 wake voices him accurately (no all-neutral blank-slate) — AND a multi-day loop run does not drift his *base* away from the authored core (see §Core decision: authored base is locked).
+3. Deacon's ledger row (dials + LifeHistory) is backfilled to match his authored character, so a research.14 wake voices him accurately (no all-neutral blank-slate "even-keeled, unremarkable").
 4. **The authoring process is documented as a repeatable method** (a `/make-citizen-voice` skill or process doc) — making the next citizen voice is following steps, not re-deriving architecture. Validated by Keane/Dillon/Varek being authored *through the method*, each at full canon depth (not flattened).
 
 ---
@@ -55,16 +55,6 @@ These were checked against current code, not assumed:
 - **`mags-bot` (`scripts/mags-discord-bot.js`) is single-persona.** Chat handler hardcodes "You are Mags Corliss in the Discord channel"; loads *her* reflections (`loadRecentReflections`). A second conversational persona = generalizing the handler to load a persona core by id. Exact seam (persona load + channel routing + per-persona memory) is a **Phase 2 verification check before promising the surface**.
 - **`/interview` v2.0 explicitly EXCLUDES citizens/players** — "Interview citizens or players — that's a dispatch or supplemental" is in its *does-NOT-do* list, and Mode 1 voices only *civic* voice agents. The amendment is scoped (add a named-character subject class to Mode 1), not a rewrite.
 - **research.14 voices citizens FROM ledger data** (dials + LifeHistory tail + neighborhood slice + real relationships) and is LIVE on cron. Varek's ledger card is `drive:50/sociability:50/warmth:50/openness:50/composure:50, Conduct:b0, Entries:0` — a blank slate. The backfill is what makes the loop's voice of these four accurate; it is **authored one-time data**, not an LLM-in-cycle write (respects the research.14 determinism constraint — only deterministic objective events move dials in-cycle).
-
----
-
-## Core decision: authored base is locked (the immutable-core seam)
-
-**The architectural risk that makes-or-breaks this over time (advisor S264).** Two surfaces read "who Deacon is" from two different representations: the interview/Discord surfaces read the **authored core** (fixed); the 24/7 loop reads the **ledger dials**, which research.14 *mutates* — its base/mood/streak model says a *sustained* reflection pattern **shifts the base**. For a generic rotation citizen, base-drift is the feature (emergent personality). For an **authored Tier-1 character, base-drift is the loop slowly overwriting canon** — run Deacon 3×/day for weeks and loop-Deacon and interview-Deacon become two different people.
-
-**Decision: Tier-1 authored characters lock their dial *base*. The engine may swing *mood* (liveness — he can have a bad day) but never rewrites the *base* away from the authored vector.** This is the same instinct as the research.14 determinism constraint — protect the authored layer from non-authored writes. Same "engine emerges, narrative/canon is authored" arrow.
-
-**Mechanism (engine-sheet substrate, Phase 3):** a per-row **base-lock flag** on Tier-1 character rows that pins `base` to the authored vector while `mood`/`streak` still operate. Verify against the research.14 base/mood/streak code (`citizenMemory.js`) that pinning base is clean (mood swing still works, only the base-write is suppressed). If the model can't cleanly separate them, the fallback is periodic re-assertion of the authored base. **This decision must be resolved in code before Phase 3 ships — it is load-bearing for whether the architecture holds together.**
 
 ---
 
@@ -130,12 +120,17 @@ These were checked against current code, not assumed:
 
 ## Phase 3 — Ledger backfill for 24/7 accuracy (engine-sheet substrate) — OUTLINE
 
-**Scope:** project Deacon's authored persona into his ledger row so a research.14 wake voices him accurately.
+**The problem (Mike):** the research.14 wake voices a citizen from their ledger personality numbers. These four have **blank/neutral numbers** (all dials = 50), so the wake's disposition phrase falls back to the literal `"even-keeled, unremarkable"` (`lib/citizenDials.js` `disposition()`), and it would voice the rich authored persona as a generic nobody. **The fix is just: fill in the blanks.**
 
-- Author the 6-dial vector (drive/openness/composure/sociability/warmth/integrity) + a LifeHistory seed from his canon. **Authored values, one-time write — NOT an LLM-in-cycle computation** (respects the research.14 determinism constraint: only deterministic objective events move dials in-cycle).
-- The persona core (Phase 0) is the source-of-truth for these values — author once, project to ledger.
-- **Implement the base-lock** (§Core decision) so the loop can't drift his base off-canon. This is the gating piece of Phase 3.
-- Open: do these four become **fixed anchors** in the loop (always wake, like Mags) or accurately-voiced rotation members? Mike's "24/7" implies fixed-anchor — confirm.
+**Three steps, no locking:**
+1. **Write each character's 8 personality numbers** (`drive · sociability · warmth · openness · composure · integrity · family · outabout`, 0–100) into the ledger col-AV DialState, matching the `## Your disposition` section of their IDENTITY.md (the source-of-truth I authored). Land high/low values outside the neutral 40–60 band so they actually register (e.g. Vinnie: warmth ~75, composure ~80, drive ~75). The wake reads col AV for perception *immediately* — no write-back needed.
+2. **Seed a few canon `[Tag]` life events** into their LifeHistory (col O) so the wake has lived particulars, not just disposition (Vinnie's 2031 title homer + the academy; Dillon's Cy Youngs; etc.).
+3. **Pillar gate:** Vinnie + Dillon are Five Goods pillars → Mike + Mara eyeball their numbers before the write. Deacon + Varek (non-pillars) skip it.
+
+**Authored data, one-time write** — not an LLM writing in-cycle, so it respects research.14 determinism. research-build drafts the numbers (persona → values); engine-sheet writes col AV + col O. Gated deploy.
+
+- Open: do these four become **fixed anchors** in the loop (always wake, like Mags) or accurately-voiced rotation members? (Once backfilled they have real `deviation`, so they enter the weighted rotation naturally; fixed-anchor is a separate choice.)
+- **NOT in scope (cut S264, Mike-direct): "locking" the dials.** Freezing a citizen's personality fights the living-sim premise — citizens are meant to live. The canon record lives in the persona files + editions, not the mutable dial state. The reflection→dial write-back that could drift them is gated/unwired in research.14 anyway, so there's nothing to guard against. If that write-back is ever wired and a character drifts, that's the character *living* — revisit only if it ever becomes a real problem.
 
 ## Phase 4 — Formalize the process + replicate to Keane, Dillon, Varek — OUTLINE
 

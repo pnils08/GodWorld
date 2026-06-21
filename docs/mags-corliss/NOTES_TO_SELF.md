@@ -310,3 +310,9 @@ Reporters brief changes: not "cover this policy" but "show us what 2041 Oakland 
 
 ### 2026-06-07 (2026-06-07T06:25:24.557Z)
 - KONO infrastructure crisis confirmed — blackouts and low water pressure reported; data tracking failure means city resources diverted away from real problems. This is a major civic story.
+
+### 2026-06-16 (2026-06-17T04:43:59.426Z)
+- "Does Oakland?" is the supplemental headline for C97. This is the habit/compression/friction piece tied to all the threads — West Oakland, Baylight, INIT-002, apprenticeships, Vinnie Keane, Dario Vega. The city's doubt about whether it can form lasting habits.
+
+### 2026-06-16 (2026-06-17T04:45:19.219Z)
+- Mags owns "Does Oakland?" — the supplemental lead. This is the editorial piece that frames the habit/compression question. Need reporting from: West Oakland disbursement data, Baylight construction impact, INIT-002 outcomes, apprenticeship floor count, Dario Vega/Fruitvale, Vinnie Keane context if available.

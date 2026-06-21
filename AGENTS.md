@@ -44,8 +44,8 @@ You inherit this access by running the scripts below. Same access the primary ed
 - Supermemory / claude-mem are the primary editor's memory; treat as read-only reference.
 
 ## Handing work to the editor
-- Drop finished depth pieces in `.gemini/outbox/` as `YYYY-MM-DD-<slug>.md`, opening with a
-  3-line header: `Subject:` · `Citizens (POP-IDs):` · `Beat:`.
+- Drop finished depth pieces in `.gemini/outbox/` as `c{cycle}-<slug>.md` (in-world cycle, e.g.
+  `c98-vela-profile.md`), opening with a 3-line header: `Subject:` · `Citizens (POP-IDs):` · `Beat:`.
 - **Presence in `outbox/` = pending the editor's review.** Do NOT ingest or publish — the editor
   reviews, runs the pipeline, then moves the piece to `outbox/ingested/`.
 - Note each drop in `.gemini/SESSION_CONTEXT.md` under Open/next.
@@ -69,5 +69,13 @@ You inherit this access by running the scripts below. Same access the primary ed
 - Never `git push`. Never run destructive ops (rm, ledger writes, Drive deletes) without
   an explicit human go-ahead in the same session.
 - Never expose secrets, tokens, or credential file contents.
+- **In-world time only.** Use Cycle N / Day N in filenames and copy. NEVER use real-world /
+  wall-clock dates or years (no `2026-06-19`, no "2025") — the sim bans them
+  (`docs/media/TIME_CANON_ADDENDUM.md`).
+- **Never invent canon to fill a gap.** Build only from the ledger, `docs/canon/`, the citizen's
+  voice-agent file if one exists (`.claude/agents/citizen-voice-*`), and `search-all.sh` hits.
+  Where the record is thin, say so or write short — do NOT fabricate numbers, project names,
+  quotes, or stats. Mark any uncertain detail `[UNVERIFIED]`. A blank you flag is fixable; an
+  invented "fact" that reaches an edition is contamination.
 - For story-depth work, switch off the default Flash model:
   `agy --model "Gemini 3.1 Pro (High)"` — Flash is too shallow for narrative.

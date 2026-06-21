@@ -1,0 +1,23 @@
+🕊 5. Cultural & Human Interest Division
+
+Outlet Name: The Pulse of Oakland
+Parent Entity: Bay Tribune Cultural Affairs Bureau
+Mission: Illuminate the spirit of Oakland through art, lifestyle, and community stories.
+Lead Steward: Riley (Chief Operations Steward)
+Primary Journalist: Marla Keen — Cultural Correspondent
+Tone: Warm, narrative, and community-driven storytelling
+
+Coverage Scope:
+ • Art exhibits, education highlights, and public creative programs
+ • Local lifestyle, wellness, and neighborhood profiles
+ • Community health initiatives and cultural milestones
+
+Publishing Rhythm: Weekly Friday features + special cultural reports
+Vault Integration: /Universe/Media/The_Pulse_of_Oakland
+Checksum Path: CUL-2040A-GW4-005
+
+🧭 Integration Notes
+Feeds into:
+ • Riley_System_Log for checksum & sync validation
+ • Creative Vault for cultural data archival
+ • Universe Vault for narrative enrichment

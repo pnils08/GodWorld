@@ -1,19 +1,14 @@
 /**
- * chaosCarsConfig.test.js — S229 engine.11 T1.4 universal no-death constraint coverage.
+ * chaosCarsConfig.test.js — engine.11 chaos-cars config + no-death coverage.
  *
- * Pairs with lib/chaosCarsConfig.js. If you change FORBIDDEN_OUTCOMES,
- * validateOutcome, or validateVehicleConfig — confirm the assertions
- * below still match the new behavior.
+ * Pairs with utilities/chaosCarsConfig.js (RELOCATED S265 from lib/ — see that
+ * file's header for why). Tests 1–8: T1.4 no-death validator (unchanged behavior
+ * after the var/global rewrite). Tests 9–10: T2 config table + validateAllChaosConfigs_.
  *
- * Run: node lib/chaosCarsConfig.test.js
- * Exits 0 on pass, 1 on failure.
+ * Run: node utilities/chaosCarsConfig.test.js   (exit 0 pass / 1 fail)
+ * Claspignored via *.test.js — Node-only, never pushed.
  *
- * Plan reference: docs/plans/2026-05-07-chaos-cars-engine.md §T1.4 Verify
- *   "unit test in file footer — feed `'died in accident'` → throws;
- *    feed `'minor injury'` → returns true."
- *
- * Project convention deviates from the plan's "file footer" — tests live
- * in a parallel `.test.js` file picked up by scripts/run-tests.js.
+ * Plan: docs/plans/2026-05-07-chaos-cars-engine.md §T1.4 / §T2 / §S265.
  */
 
 'use strict';
@@ -56,8 +51,10 @@ console.log('Test 1: module exports + FORBIDDEN_OUTCOMES shape');
   assert('exports.FORBIDDEN_OUTCOMES present', Array.isArray(helper.FORBIDDEN_OUTCOMES));
   assert('exports.validateOutcome is function', typeof helper.validateOutcome === 'function');
   assert('exports.validateVehicleConfig is function', typeof helper.validateVehicleConfig === 'function');
+  assert('exports.VEHICLE_CONFIGS present', Array.isArray(helper.VEHICLE_CONFIGS));
+  assert('exports.loadChaosCarsConfig_ is function', typeof helper.loadChaosCarsConfig_ === 'function');
+  assert('exports.validateAllChaosConfigs_ is function', typeof helper.validateAllChaosConfigs_ === 'function');
   assert('FORBIDDEN_OUTCOMES is frozen', Object.isFrozen(helper.FORBIDDEN_OUTCOMES));
-  // Plan §T1.4 named the minimum set:
   for (const required of ['death', 'died', 'dying', 'fatal', 'killed', 'kill', 'deceased', 'dead']) {
     assert(`FORBIDDEN_OUTCOMES contains "${required}"`, helper.FORBIDDEN_OUTCOMES.indexOf(required) >= 0);
   }
@@ -68,18 +65,12 @@ console.log('Test 1: module exports + FORBIDDEN_OUTCOMES shape');
 // ────────────────────────────────────────────────────────────────────────────
 console.log('\nTest 2: validateOutcome plan-spec acceptance');
 {
-  // Plan §T1.4 Verify: "feed 'died in accident' → throws"
-  assertThrows(
-    'died in accident → throws',
-    () => helper.validateOutcome('died in accident'),
-    'died'
-  );
-  // Plan §T1.4 Verify: "feed 'minor injury' → returns true"
+  assertThrows('died in accident → throws', () => helper.validateOutcome('died in accident'), 'died');
   assert('minor injury → returns true', helper.validateOutcome('minor injury') === true);
 }
 
 // ────────────────────────────────────────────────────────────────────────────
-// Test 3: validateOutcome — common chaos-cars outcomes (per plan Phase 2 vehicle examples)
+// Test 3: validateOutcome — common chaos-cars outcomes
 // ────────────────────────────────────────────────────────────────────────────
 console.log('\nTest 3: validateOutcome accepts canonical chaos outcomes');
 {
@@ -100,11 +91,7 @@ console.log('\nTest 4: validateOutcome rejects every FORBIDDEN_OUTCOMES token');
 {
   for (const token of helper.FORBIDDEN_OUTCOMES) {
     const wrapped = 'event: ' + token + ' in the street';
-    assertThrows(
-      `rejects "${wrapped}"`,
-      () => helper.validateOutcome(wrapped),
-      token
-    );
+    assertThrows(`rejects "${wrapped}"`, () => helper.validateOutcome(wrapped), token);
   }
 }
 
@@ -113,27 +100,15 @@ console.log('\nTest 4: validateOutcome rejects every FORBIDDEN_OUTCOMES token');
 // ────────────────────────────────────────────────────────────────────────────
 console.log('\nTest 5: validateOutcome word boundaries — avoid false-positive on substring matches');
 {
-  // `deadline`, `killdeer` (bird), `dieseling` should NOT trip the forbidden list
-  // because the forbidden tokens are word-boundary anchored. `fatalism` likewise —
-  // \b matches between word/non-word, so `\bfatal\b` doesn't fire inside `fatalism`
-  // (both `l` and `i` are word chars, no boundary between them).
   assert('"deadline approached" passes', helper.validateOutcome('deadline approached') === true);
   assert('"killdeer flew overhead" passes', helper.validateOutcome('killdeer flew overhead') === true);
   assert('"dieseling engine" passes', helper.validateOutcome('dieseling engine') === true);
   assert('"fatalism in voice" passes (no \\b break inside fatalism)',
     helper.validateOutcome('fatalism in voice') === true);
-
-  // But standalone forbidden words inside larger strings SHOULD trip:
-  assertThrows(
-    '"the dead are buried" → throws (whole-word "dead")',
-    () => helper.validateOutcome('the dead are buried'),
-    'dead'
-  );
-  assertThrows(
-    '"fatal accident reported" → throws (whole-word "fatal")',
-    () => helper.validateOutcome('fatal accident reported'),
-    'fatal'
-  );
+  assertThrows('"the dead are buried" → throws (whole-word "dead")',
+    () => helper.validateOutcome('the dead are buried'), 'dead');
+  assertThrows('"fatal accident reported" → throws (whole-word "fatal")',
+    () => helper.validateOutcome('fatal accident reported'), 'fatal');
 }
 
 // ────────────────────────────────────────────────────────────────────────────
@@ -165,13 +140,11 @@ console.log('\nTest 7: validateOutcome input-shape guards');
 console.log('\nTest 8: validateVehicleConfig scans full textureOutcomes[]');
 {
   const cleanConfig = {
-    name: 'ice_cream_truck',
-    displayName: 'Ice cream truck',
-    scopes: ['citizen'],
+    name: 'ice_cream_truck', displayName: 'Ice cream truck', scopes: ['citizen'],
     textureOutcomes: [
-      { outcome: 'mood boost',          weight: 0.5, severity: 'low' },
+      { outcome: 'mood boost', weight: 0.5, severity: 'low' },
       { outcome: 'ice cream sales spike', weight: 0.3, severity: 'low' },
-      { outcome: 'kid frenzy',          weight: 0.2, severity: 'low' },
+      { outcome: 'kid frenzy', weight: 0.2, severity: 'low' },
     ],
   };
   assert('clean config passes', helper.validateVehicleConfig(cleanConfig) === true);
@@ -179,38 +152,99 @@ console.log('\nTest 8: validateVehicleConfig scans full textureOutcomes[]');
   const dirtyConfig = {
     name: 'cop_car',
     textureOutcomes: [
-      { outcome: 'ticket',               weight: 0.5, severity: 'low' },
-      { outcome: 'fatal shooting',       weight: 0.1, severity: 'high' }, // BANNED
-      { outcome: 'helped_by_police',     weight: 0.4, severity: 'low' },
+      { outcome: 'ticket', weight: 0.5, severity: 'low' },
+      { outcome: 'fatal shooting', weight: 0.1, severity: 'high' },
+      { outcome: 'helped_by_police', weight: 0.4, severity: 'low' },
     ],
   };
-  assertThrows(
-    'config with banned outcome → throws + names vehicle',
-    () => helper.validateVehicleConfig(dirtyConfig),
-    'cop_car'
-  );
-  assertThrows(
-    'config with banned outcome → throws + names forbidden token',
-    () => helper.validateVehicleConfig(dirtyConfig),
-    'fatal'
-  );
+  assertThrows('config with banned outcome → throws + names vehicle',
+    () => helper.validateVehicleConfig(dirtyConfig), 'cop_car');
+  assertThrows('config with banned outcome → throws + names forbidden token',
+    () => helper.validateVehicleConfig(dirtyConfig), 'fatal');
 
-  // Edge cases
   assertThrows('null config → throws', () => helper.validateVehicleConfig(null), 'expects an object');
   assert('config with empty textureOutcomes passes',
     helper.validateVehicleConfig({ name: 'x', textureOutcomes: [] }) === true);
-  assert('config with missing textureOutcomes passes (Phase 2 schema validates)',
+  assert('config with missing textureOutcomes passes',
     helper.validateVehicleConfig({ name: 'x' }) === true);
-  // Shape-mismatched entries skipped (Phase 2 schema validator's job, per T1.4 source comment)
-  assert('entries without outcome string are skipped (Phase 2 problem)',
-    helper.validateVehicleConfig({
-      name: 'partial',
-      textureOutcomes: [{ weight: 0.5 }, { outcome: 'ok' }],
-    }) === true);
+  assert('entries without outcome string are skipped',
+    helper.validateVehicleConfig({ name: 'partial', textureOutcomes: [{ weight: 0.5 }, { outcome: 'ok' }] }) === true);
 }
 
 // ────────────────────────────────────────────────────────────────────────────
-// Summary
+// Test 9: VEHICLE_CONFIGS table — §S265 finalized shape
+// ────────────────────────────────────────────────────────────────────────────
+console.log('\nTest 9: VEHICLE_CONFIGS finalized 10-vehicle table');
+{
+  const cfgs = helper.loadChaosCarsConfig_();
+  assert('loadChaosCarsConfig_ returns the array', cfgs === helper.VEHICLE_CONFIGS);
+  assert('exactly 10 vehicles', cfgs.length === 10);
+
+  const EXPECTED = ['cop_car', 'fire_engine', 'ambulance', 'oari_van', 'building_inspector',
+    'garbage_truck', 'mail_truck', 'ice_cream_truck', 'street_sweeper', 'pge_truck'];
+  const names = cfgs.map((c) => c.name);
+  for (const n of EXPECTED) assert(`vehicle "${n}" present`, names.indexOf(n) >= 0);
+
+  const VALID_SCOPES = { citizen: 1, business: 1, neighborhood: 1 };
+  const VALID_COLS = {
+    Sentiment: 1, CrimeIndex: 1, RetailVitality: 1, EventAttractiveness: 1,
+    Annual_Revenue: 1, Employee_Count: 1,
+  };
+  for (const c of cfgs) {
+    assert(`${c.name}: has baseFrequencyWeight > 0`, Number(c.baseFrequencyWeight) > 0);
+    assert(`${c.name}: scopes non-empty`, Array.isArray(c.scopes) && c.scopes.length > 0);
+    assert(`${c.name}: all scopes valid`, c.scopes.every((s) => VALID_SCOPES[s]));
+    // texture weights sum ~1.0
+    const sum = c.textureOutcomes.reduce((a, o) => a + (Number(o.weight) || 0), 0);
+    assert(`${c.name}: texture weights sum ~1.0 (got ${sum.toFixed(3)})`, Math.abs(sum - 1) <= 0.001);
+    // every outcome string passes no-death
+    for (const o of c.textureOutcomes) {
+      assert(`${c.name}/${o.outcome}: outcome passes no-death`, helper.validateOutcome(o.outcome) === true);
+    }
+    // metricImpacts: real columns, valid scope, no citizen-scope impact
+    for (const m of (c.metricImpacts || [])) {
+      assert(`${c.name}: impact column "${m.column}" is real`, !!VALID_COLS[m.column]);
+      assert(`${c.name}: impact scope "${m.scope}" is biz|nbhd`,
+        m.scope === 'business' || m.scope === 'neighborhood');
+      assert(`${c.name}: impact direction valid`, m.direction === 'up' || m.direction === 'down');
+      assert(`${c.name}: magnitudeRange [min<=max]`,
+        Array.isArray(m.magnitudeRange) && m.magnitudeRange[0] <= m.magnitudeRange[1]);
+    }
+  }
+
+  // §S265 specifics: arrest is the agent/integrity tag; OARI carries coverageContribution;
+  // ice_cream + street_sweeper carry NO high-severity outcome.
+  const cop = cfgs.find((c) => c.name === 'cop_car');
+  const arrest = cop.textureOutcomes.find((o) => o.outcome === 'arrested');
+  assert('cop arrested → Transgression-Serious tag', arrest.lifeHistoryTag === 'Transgression-Serious');
+  assert('cop arrested → role agent', arrest.role === 'agent');
+  assert('cop arrested → severity high', arrest.severity === 'high');
+
+  const oari = cfgs.find((c) => c.name === 'oari_van');
+  assert('oari has a coverageContribution outcome',
+    oari.textureOutcomes.some((o) => o.coverageContribution === true));
+
+  for (const lo of ['ice_cream_truck', 'street_sweeper']) {
+    const v = cfgs.find((c) => c.name === lo);
+    assert(`${lo}: no high-severity outcome (never cascades)`,
+      v.textureOutcomes.every((o) => o.severity !== 'high'));
+  }
+
+  // building_inspector Employee_Count impact is outcome-conditional
+  const insp = cfgs.find((c) => c.name === 'building_inspector');
+  const empImpact = insp.metricImpacts.find((m) => m.column === 'Employee_Count');
+  assert('inspector Employee_Count impact is gated onOutcome',
+    !!empImpact && empImpact.onOutcome === 'forced_temporary_closure');
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// Test 10: validateAllChaosConfigs_ passes on the live table
+// ────────────────────────────────────────────────────────────────────────────
+console.log('\nTest 10: validateAllChaosConfigs_ on the finalized table');
+{
+  assert('validateAllChaosConfigs_ returns true', helper.validateAllChaosConfigs_() === true);
+}
+
 // ────────────────────────────────────────────────────────────────────────────
 console.log('\n' + '─'.repeat(60));
 if (failed === 0) {

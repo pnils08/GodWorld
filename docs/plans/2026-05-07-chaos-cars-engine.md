@@ -17,6 +17,7 @@ pointers:
   - "[[adr/0003-skills-as-shared-infrastructure]] — friction-log pattern applies to /chaos-dryrun + future chaos-related skills"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — register in same commit"
+  - "[[engine/CHAOS_CARS_DEPLOY]] — C99-gated deploy runbook (S265); execute when the gate clears"
 ---
 
 # Chaos Cars Engine Plan

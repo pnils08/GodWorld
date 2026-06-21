@@ -15,9 +15,7 @@ pointers:
 
 # Chaos-Cars (engine.11) — C99-Gated Deploy Runbook
 
-**Status (S265):** built + verified + on `origin/main` (8 commits `486d070a`→`8822e6b5`). **NOT clasp-deployed.** Deploy is **C99-gated** — execute this runbook only after the gate clears, on Mike's go-call.
-
-Why staged: engine.38 Phase A is live but un-smoke-tested (smoke at C99). Landing engine.11 on top of an unverified engine.38 destroys failure-attribution (deploy-attribution discipline, S250). Deploy in a clean window *after* engine.38's C99 verdict is clean.
+**Status (S265):** ✅ **CLASP-DEPLOYED LIVE S265 (Mike go-call).** Gate cleared — engine.38 Phase A smoke-tested CLEAN 5/5 at C99 (deploy-attribution discipline honored, S250). Pre-deploy gates re-verified green on tree (323/323 tests, 0 collisions, single config source, `.test.js` excluded), `clasp push` exit 0, 5 new + 5 modified files verified in Tracked scope / test files in Untracked. **SMOKE PENDING C100** (first chaos cycle — see §Post-deploy smoke). Built on 8 commits `486d070a`→`8822e6b5` (origin/main).
 
 ---
 

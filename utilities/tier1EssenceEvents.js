@@ -117,6 +117,177 @@ var TIER1_ESSENCE = {
       { tag: 'Cultural',   text: 'Always at the table where the district’s next chapter gets decided.' },
       { tag: 'Stabilized', text: 'A dealmaker’s steadiness — doesn’t flinch at scale or timeline.' }
     ]
+  },
+
+  // ============================================================================
+  // Tier-2 — the remaining A's (essence from 2041 dynasty coverage + voice-file
+  // cross-references). docs/media/2041_athletics_roster.md. Drive is the dominant
+  // dial for the athletes; integrity rides Reputation (couples sociability — see the
+  // map-coupling finding in the plan; "silent/unsung" archetypes can't read low-social).
+  // ============================================================================
+
+  // ---- POP-00003 Mark Aitken — 1B, player rep + community liaison, "sees angles" ----
+  'POP-00003': {
+    name: 'Mark Aitken', pillar: null,
+    target: { drive: 'high', sociability: 'high', openness: 'high', integrity: 'high',
+              composure: 'moderate', warmth: 'neutral', family: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Promotion',  text: 'Won the 2040 Home Run Derby.' },
+      { tag: 'Career',     text: 'First baseman — the steady bat in the dynasty’s lineup, playing a contract year on his merits.' },
+      { tag: 'Civic Role', text: 'Players’ union representative and community liaison — the bridge between the clubhouse and the city.' },
+      { tag: 'Civic Role', text: 'Often at civic events; carries the team’s voice into Oakland.' },
+      { tag: 'Education-Cultural', text: 'Sees angles others don’t think in — reads the game three moves ahead.' },
+      { tag: 'Lifestyle',  text: 'A student of the game’s angles, on and off the field.' },
+      { tag: 'Reputation', text: 'Son of a former mayor; carries the name with a straight back.' },
+      { tag: 'Reputation', text: 'Honest, cerebral, dependable — leads by understanding the whole board.' },
+      { tag: 'Background', text: 'A measured presence in the clubhouse.' }
+    ]
+  },
+
+  // ---- POP-00019 Isley Kelley — SS, "The Machine", 3x MVP, inner-circle HOF ----
+  'POP-00019': {
+    name: 'Isley Kelley', pillar: null,
+    target: { drive: 'vhigh', composure: 'high', integrity: 'high', openness: 'high',
+              sociability: 'moderate', warmth: 'neutral', family: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Promotion',  text: 'Three-time MVP (2032, 2034, 2035) — “The Machine.”' },
+      { tag: 'Promotion',  text: 'Rookie of the Year, ten-time All-Star, eight Silver Sluggers, a batting title; inner-circle Hall of Fame.' },
+      { tag: 'Career',     text: '92.1 career WAR — the everyday machine, never a day off at shortstop.' },
+      { tag: 'Career',     text: 'The standard the clubhouse measures itself against.' },
+      { tag: 'Education-Cultural', text: 'Reads a ball like he lived in the dirt — instinct honed past thought.' },
+      { tag: 'Lifestyle',  text: 'A student of the game’s geometry — sees the angles in everything.' },
+      { tag: 'Background', text: 'Machine-steady; the same flawless glove every night.' },
+      { tag: 'Stabilized', text: 'Unshowy excellence — lets the numbers speak, season after season.' },
+      { tag: 'Reputation', text: 'Plays it straight; the work is the statement.' },
+      { tag: 'Reputation', text: 'Quiet authority — never asks for credit.' }
+    ]
+  },
+
+  // ---- POP-00021 Darrin Davis — LF, "The Ohio Outlaw", .186→MVP comeback, gave up his spot ----
+  'POP-00021': {
+    name: 'Darrin Davis', pillar: null,
+    target: { drive: 'high', composure: 'high', warmth: 'high', integrity: 'high',
+              openness: 'neutral', sociability: 'moderate', family: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Promotion',  text: '2040 MVP (.293/38/107) — after hitting .186 in 2039. The redemption season.' },
+      { tag: 'Recovery',   text: 'Collapsed to .186 in 2039 and clawed all the way back to MVP — didn’t break.' },
+      { tag: 'Stabilized', text: 'Found his center after the worst year of his career.' },
+      { tag: 'Mentorship', text: 'Moved off his natural position to left field to make room for 24-year-old Quintero — sacrificed his body and his spot for the next generation.' },
+      { tag: 'Mentorship', text: 'The veteran who gives way for the kid.' },
+      { tag: 'Career',     text: '“The Ohio Outlaw” — brings the fire every night.' },
+      { tag: 'Reputation', text: 'Honest about the slump, honest about the comeback.' },
+      { tag: 'Reputation', text: 'Plays with intensity and gives it away for the team.' }
+    ]
+  },
+
+  // ---- POP-00022 Danny Horn — CF, best player in baseball, franchise pillar ----
+  'POP-00022': {
+    name: 'Danny Horn', pillar: null,
+    target: { drive: 'vhigh', composure: 'high', integrity: 'high', sociability: 'moderate',
+              openness: 'neutral', warmth: 'neutral', family: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Promotion',  text: 'The best player in baseball — 99 overall, 8.0 WAR.' },
+      { tag: 'Promotion',  text: 'Three-time All-Star, Silver Slugger — perfect in center field.' },
+      { tag: 'Career',     text: 'Franchise pillar; the everyday centerpiece of the lineup.' },
+      { tag: 'Career',     text: 'Perfect fielding — the standard in center.' },
+      { tag: 'Career',     text: 'Carries the franchise without noise.' },
+      { tag: 'Background', text: 'Quietly dominant — lets the game come to him.' },
+      { tag: 'Stabilized', text: 'Unshakable at the center of the order and the outfield.' },
+      { tag: 'Reputation', text: 'The pillar — steady, honest, dependable.' },
+      { tag: 'Reputation', text: 'Greatness without the noise.' }
+    ]
+  },
+
+  // ---- POP-00024 Henry Rivas — SP, "silent workhorse", Puerto Rico ----
+  'POP-00024': {
+    name: 'Henry Rivas', pillar: null,
+    target: { drive: 'high', composure: 'high', integrity: 'high', sociability: 'moderate',
+              openness: 'neutral', warmth: 'neutral', family: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Career',     text: 'Silent workhorse — first-round, 2029, out of Puerto Rico.' },
+      { tag: 'Career',     text: 'Logs his innings without a word; the rotation’s quiet anchor.' },
+      { tag: 'Career',     text: '14-12, 3.70, 169 strikeouts — the work, every fifth day.' },
+      { tag: 'Background', text: 'Says little; lets the work speak.' },
+      { tag: 'Stabilized', text: 'Unflappable on the mound — the same temperament every start.' },
+      { tag: 'Stabilized', text: 'The steady hand in the rotation.' },
+      { tag: 'Reputation', text: 'No spin, no flash — the honest workhorse.' },
+      { tag: 'Reputation', text: 'Earns it inning by inning.' }
+    ]
+  },
+
+  // ---- POP-00031 Martin Richards — 3B, "unsung hero", 1.000 FLD, no coverage ----
+  'POP-00031': {
+    name: 'Martin Richards', pillar: null,
+    target: { drive: 'high', composure: 'high', integrity: 'high', warmth: 'moderate',
+              sociability: 'moderate', openness: 'neutral', family: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Career',     text: 'Unsung hero — 6.8 WAR, zero dedicated coverage; does the job for its own sake.' },
+      { tag: 'Career',     text: 'Third baseman, 1.000 fielding — flawless and uncelebrated.' },
+      { tag: 'Background', text: 'Quiet, steady, no spotlight.' },
+      { tag: 'Stabilized', text: 'The same reliable glove and bat, year after year.' },
+      { tag: 'Stabilized', text: 'Unbothered by the lack of attention.' },
+      { tag: 'Reputation', text: 'Plays it straight; the work is the reward.' },
+      { tag: 'Reputation', text: 'Three-time All-Star who never asked for credit.' },
+      { tag: 'Mentorship', text: 'A player’s player — the one the others quietly respect.' }
+    ]
+  },
+
+  // ---- POP-00033 John Ellis — SP, 26, "cheap, reliable, growing" ----
+  'POP-00033': {
+    name: 'John Ellis', pillar: null,
+    target: { drive: 'high', openness: 'high', composure: 'moderate', integrity: 'neutral',
+              sociability: 'neutral', warmth: 'neutral', family: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Career',     text: 'Twenty-six, cheap and reliable — 16-6, 3.89, growing into the rotation.' },
+      { tag: 'Education',  text: 'Still learning the craft; a little better every start.' },
+      { tag: 'Education-Cultural', text: 'Studies the veterans, absorbs the dynasty’s way.' },
+      { tag: 'Career',     text: 'Pre-arbitration — earning his place.' },
+      { tag: 'Background', text: 'Composed beyond his years for a young arm.' },
+      { tag: 'Personal',   text: 'Open, curious, hungry to improve.' }
+    ]
+  },
+
+  // ---- POP-00597 Eric Taveras — 2B, 25, "$225M gamble", HR Derby winner (already Entries:4 → supplemental) ----
+  'POP-00597': {
+    name: 'Eric Taveras', pillar: null,
+    target: { drive: 'high', composure: 'moderate', openness: 'moderate', outabout: 'neutral',
+              sociability: 'neutral', warmth: 'neutral', family: 'neutral', integrity: 'neutral' },
+    events: [
+      { tag: 'Promotion',  text: 'Home Run Derby winner, 2039 — raw, prodigious power.' },
+      { tag: 'Career',     text: 'A $225M gamble at second base — a career .244 hitter carrying a max contract.' },
+      { tag: 'Career',     text: 'Everyday starter, not a utility man — the bet is on the ceiling.' },
+      { tag: 'Background', text: 'Carries the weight of the contract every at-bat.' },
+      { tag: 'Personal',   text: 'Swinging for the ceiling that justified the gamble.' }
+    ]
+  },
+
+  // ---- POP-00025 Arturo Ramos — SP, new, details TBD (THIN canon → baseline athlete) ----
+  'POP-00025': {
+    name: 'Arturo Ramos', pillar: null,
+    target: { drive: 'high', composure: 'moderate', openness: 'moderate',
+              sociability: 'neutral', warmth: 'neutral', integrity: 'neutral', family: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Career',     text: 'New to the rotation — a No. 2 starter whose story is still being written.' },
+      { tag: 'Career',     text: 'Earning his spot in a championship rotation.' },
+      { tag: 'Background', text: 'Settling into a new clubhouse.' },
+      { tag: 'Arrival',    text: 'Arrived in Oakland for a fresh chapter.' }
+    ]
+  },
+
+  // ---- POP-00124 Steve Conrad — Ex-A's star RF, post-career elder (Entries:5 → supplemental; THIN specific canon) ----
+  'POP-00124': {
+    name: 'Steve Conrad', pillar: null,
+    target: { composure: 'high', warmth: 'high', family: 'high', drive: 'neutral',
+              openness: 'neutral', sociability: 'neutral', integrity: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Mentorship', text: 'The elder presence — passes on what the dynasty taught him.' },
+      { tag: 'Mentorship', text: 'Gives the younger players what an older player once gave him.' },
+      { tag: 'PostCareer', text: 'Ex-A’s star right fielder, now in the chapter after playing.' },
+      { tag: 'Retirement', text: 'Stepped away from the game he gave his prime to.' },
+      { tag: 'Daily',      text: 'A settled life after baseball.' },
+      { tag: 'Background', text: 'Carries the calm of a man who already proved it.' },
+      { tag: 'Stabilized', text: 'The steadiness of a man with nothing left to prove.' }
+    ]
   }
 
 };

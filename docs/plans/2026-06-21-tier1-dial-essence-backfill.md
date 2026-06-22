@@ -90,12 +90,13 @@ The base this plan seeds is the floor; the write-back (Seam C) moves `mood`/`str
 ## Status
 
 - [x] Mechanism designed + POC validated S265 — 4 voiced faces, 32/32 (`utilities/tier1EssenceEvents.js`, `scripts/seedTier1Essence.js`).
-- [ ] Tier-1 authoring (civic + media voices — extraction).
-- [ ] Tier-2 authoring (remaining A's — from coverage).
-- [ ] Tier-3 authoring (family / Mara / Paulson / Lucia).
-- [ ] Map pure-integrity/warmth tag decision (do before Tier-2 if the coupling bites).
-- [ ] Engine-sheet live write + live verify (handoff).
+- [x] Tier-2 authoring (remaining A's) — DONE S265, 10 citizens (Aitken, Isley, Davis, Horn, Rivas, Ramos, Richards, Ellis, Taveras, Conrad). Harness **112/112 across all 14, clean**. Ramos/Conrad flagged THIN canon (baseline athlete / post-career elder). Taveras/Conrad supplemental (existing entries).
+- [ ] Tier-1 voiced extension (civic Mayor/factions/projects + media reporters) — confirm ledger POPIDs first.
+- [ ] Tier-3 authoring (Corliss family Robert/Michael / Mara / Paulson / Lucia; skip Mags — already shaped).
+- [ ] **Map pure-integrity / pure-warmth tag — CONFIRMED needed (engine-sheet, small additive map change).** The A's tier confirmed the coupling finding: every "principled/silent" archetype (Rivas, Richards, Isley…) reads `sociability` moderate (~60) not low, because `integrity` only comes via `Reputation` (which adds sociability) and no event can drive a dial *below* neutral. Absorbed by the `moderate`/`neutral` band for now; a pure-integrity tag (e.g. `Principled {integrity:4}`) would let silent/unsung characters read precisely. Design here → engine-sheet adds to `citizenDialMap`.
+- [ ] Engine-sheet live write + live verify (handoff — 4 faces flagged ready in SESSION_CONTEXT NEXT[engine-sheet]; A's follow once Tier-3 lands or as a batch).
 
 ## Changelog
 
 - 2026-06-21 — Initial draft + POC validated (S265, research-build). Seam A of the citizen-loop closure (Mike's loop). Mechanism: complete-the-history, not shield-Tier-1. 4 faces proven 32/32. Roster tiered by canon source per Mike's guidance (voiced agents easy / A's from coverage / family-planner-GM from canon). Filed as research.18.
+- 2026-06-21 — Tier-2 A's authored + validated (S265): 10 citizens from `2041_athletics_roster` + voice-file cross-refs; harness 112/112 across all 14, clean. 4 faces handed to engine-sheet for the live write (SESSION_CONTEXT). Map pure-integrity/warmth tag confirmed needed (the silent/unsung A's archetypes) → engine-sheet additive map change, designed here.

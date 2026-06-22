@@ -87,7 +87,7 @@ pointers:
   2. Coordinate with ES-4: the fix is primarily rubric-side (distinguish brand text from stadium-typical numerals); DJ guidance is the secondary half.
 - **Verify:** `grep -n "stadium\|jersey\|ballpark" .claude/agents/dj-hartley/RULES.md` → guidance present.
 - **Absorbs ROLLOUT:** continues C98 RB-3 DJ-photo lineage + pipeline.13 (note forward).
-- **Status:** [x] DONE (S267) — **secondary half only.** dj-hartley RULES new §"Sports Frames — Don't Self-Censor to Zero" (keep speccing the high-value sports frame; peripheral stadium numerals are FLAG-not-FAIL once ES-4 lands; still direct jersey-back-as-subject-plane away). **The photo defect is NOT fully closed — the primary fix is ES-4 (photoQA rubric, engine-sheet, still OPEN).** Until ES-4 ships a stadium frame may still FAIL on peripheral numerals.
+- **Status:** [x] DONE (S267). dj-hartley RULES new §"Sports Frames — Don't Self-Censor to Zero" (keep speccing the high-value sports frame; peripheral stadium numerals are FLAG-not-FAIL; still direct jersey-back-as-subject-plane away). **Photo defect FULLY CLOSED — the primary half ES-4 (photoQA rubric, engine-sheet) shipped same session (`14e8b6ef`); both C99 frames FAIL→FLAG live-verified.** RB-2 guidance + ES-4 rubric together.
 
 ### RB-3: Parser/validator brittleness — sift/template half (CU→N slot, QT separator)
 

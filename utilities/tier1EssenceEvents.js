@@ -559,6 +559,102 @@ var TIER1_ESSENCE = {
       { tag: 'Personal',   text: 'Curious, independent-minded; thinks it through.' },
       { tag: 'Reputation', text: 'Speaks for himself — no bloc, plays it straight.' }
     ]
+  },
+
+  // ============================================================================
+  // Civic — project directors (accountable program-director archetype: deadline-driven,
+  // data-grounded, "these are not projections". Essence from canon statements/bios via
+  // lookup_citizen. integrity authored to the 'high' ceiling — vhigh wants engine.39.
+  // ============================================================================
+
+  // ---- POP-01021 Vanessa Tran-Muñoz — OARI Program Director ($12.5M crisis-response) ----
+  'POP-01021': {
+    name: 'Vanessa Tran-Muñoz', pillar: null,
+    target: { drive: 'high', integrity: 'high', composure: 'high', warmth: 'moderate',
+              openness: 'moderate', sociability: 'moderate', family: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Career',     text: 'Program Director of OARI — the $12.5M civilian crisis-response program.' },
+      { tag: 'Promotion',  text: 'Built the crisis-response program from a mobile pilot into a citywide deployment.' },
+      { tag: 'Education',  text: 'DrPH and an MSW; ran a crisis pilot before Oakland recruited her.' },
+      { tag: 'Stabilized', text: 'Steady under council scrutiny — never reactive.' },
+      { tag: 'Education-Cultural', text: 'Reads the call-type data district by district.' },
+      { tag: 'Mentorship', text: 'Crisis-care at the core — meets people on their worst day.' },
+      { tag: 'Reputation', text: 'These are not projections — what the program has already diverted.' },
+      { tag: 'Reputation', text: 'Puts the real benchmark on the record, accountable for it.' },
+      { tag: 'Reputation', text: 'Plays it straight; the data has to hold.' }
+    ]
+  },
+
+  // ---- POP-00790 Marcus Webb — OEWD / West Oakland Stabilization Fund Director ----
+  //      (distinct from the cultural-card novelist "Marcus Webb" CUL-72BD508A; this is the citizen row.)
+  'POP-00790': {
+    name: 'Marcus Webb', pillar: null,
+    target: { drive: 'high', integrity: 'high', composure: 'high', openness: 'moderate',
+              sociability: 'moderate', warmth: 'neutral', family: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Career',     text: 'Director of the West Oakland Stabilization Fund (OEWD) — accountable on the disbursement schedule.' },
+      { tag: 'Career',     text: 'Gets the checks to the households; outcome over optics.' },
+      { tag: 'Stabilized', text: 'Steady operator; clear on the timeline even under pressure.' },
+      { tag: 'Background', text: 'Measured, deliberate — the foundation before the structure.' },
+      { tag: 'Education-Cultural', text: 'Reads the disbursement-to-impact chain in cycles, not slogans.' },
+      { tag: 'Reputation', text: 'A family stays housed because the Fund moved — accountable for that.' },
+      { tag: 'Reputation', text: 'Operationalizes the position; no spin, just delivery.' },
+      { tag: 'Reputation', text: 'Plays it straight; the numbers and the timeline hold.' }
+    ]
+  },
+
+  // ---- POP-00791 Eloise Soria-Dominguez — Fruitvale Transit Hub Planning Lead ----
+  //      NAME DRIFT (C98 RB-2 / C99 G-S5): ledger row = "Eloise Soria-Dominguez"; canonical/agent
+  //      pinned name = "Elena Soria Dominguez". Keyed by POPID; engine-sheet reconcile at write.
+  'POP-00791': {
+    name: 'Eloise Soria-Dominguez', pillar: null,
+    target: { drive: 'high', integrity: 'high', composure: 'high', openness: 'moderate',
+              sociability: 'moderate', warmth: 'neutral', family: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Career',     text: 'Planning Lead for the $230M Fruitvale Transit Hub Phase II.' },
+      { tag: 'Career',     text: 'Maps every step from a young person without a trade to a paid apprentice on the project.' },
+      { tag: 'Promotion',  text: 'Got the Community Benefits Agreement signed — not pending, executed.' },
+      { tag: 'Stabilized', text: 'Precise and unflappable through the visioning and the gates.' },
+      { tag: 'Background', text: 'Measured — describes every step on the record.' },
+      { tag: 'Education-Cultural', text: 'Reads the anti-displacement and workforce mechanics end to end.' },
+      { tag: 'Reputation', text: 'The terms Councilmember Delgado held firm on are the terms in the document — not value-engineered.' },
+      { tag: 'Reputation', text: 'Accountable to the public tracker, monthly, by name.' },
+      { tag: 'Reputation', text: 'Plays it straight; signed means signed.' }
+    ]
+  },
+
+  // ---- POP-00792 Bobby Chen-Ramirez — Health Center Project Director ($45M Temescal) ----
+  'POP-00792': {
+    name: 'Bobby Chen-Ramirez', pillar: null,
+    target: { drive: 'high', integrity: 'high', composure: 'high', warmth: 'moderate',
+              openness: 'moderate', sociability: 'moderate', family: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Career',     text: 'Project Director of the $45M Temescal Community Health Center.' },
+      { tag: 'Career',     text: 'Architect selection, site due diligence, HCAI licensing — carries the build.' },
+      { tag: 'Stabilized', text: 'Steady through the long permitting and construction runway.' },
+      { tag: 'Background', text: 'Methodical — the milestones in order, none skipped.' },
+      { tag: 'Education-Cultural', text: 'Reads the licensing and construction systems precisely.' },
+      { tag: 'Mentorship', text: 'Builds for the community’s health — the people who’ll walk in the door.' },
+      { tag: 'Reputation', text: 'Accountable for the public dollars and the timeline.' },
+      { tag: 'Reputation', text: 'Plays it straight; the project has to be real, not announced.' }
+    ]
+  },
+
+  // ---- POP-00041 Keisha Ramos — Director, Baylight Redevelopment Authority ($2.1B district) ----
+  'POP-00041': {
+    name: 'Keisha Ramos', pillar: null,
+    target: { drive: 'high', integrity: 'high', composure: 'high', openness: 'moderate',
+              sociability: 'moderate', warmth: 'neutral', family: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Career',     text: 'Director of the Baylight Redevelopment Authority — the $2.1B district build.' },
+      { tag: 'Promotion',  text: 'Carries a multibillion-dollar redevelopment from milestone to milestone.' },
+      { tag: 'Career',     text: 'TIF reports, workforce agreements, deliverable filings — the whole apparatus.' },
+      { tag: 'Stabilized', text: 'Unflinching at the scale of it; doesn’t blink at the numbers.' },
+      { tag: 'Background', text: 'Measured, exact — every gate documented.' },
+      { tag: 'Education-Cultural', text: 'Reads the financing and construction board several moves ahead.' },
+      { tag: 'Reputation', text: 'Accountable for the public stake in a private-scale build.' },
+      { tag: 'Reputation', text: 'Plays it straight; the deliverables are filed or they aren’t.' }
+    ]
   }
 
 };

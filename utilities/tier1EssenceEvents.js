@@ -81,7 +81,7 @@ var TIER1_ESSENCE = {
     name: 'Deacon Seymour',
     pillar: null,
     target: { composure: 'high', drive: 'high', openness: 'high', integrity: 'high',
-              warmth: 'moderate', sociability: 'neutral', family: 'neutral', outabout: 'neutral' },
+              warmth: 'moderate', sociability: 'moderate', family: 'neutral', outabout: 'neutral' },
     events: [
       { tag: 'Background',  text: 'Doesn’t get loud, doesn’t chase — rookies talk for twenty minutes; he asks the one right question.' },
       { tag: 'Stabilized', text: 'Maintained public composure through the dynasty’s twilight and the rookie integration.' },
@@ -92,7 +92,8 @@ var TIER1_ESSENCE = {
       { tag: 'Education',  text: 'Studies behavior, not trends — would rather learn than be proven right.' },
       { tag: 'Education-Cultural', text: 'Reads people closely — a watcher’s curiosity, not a holder-of-court.' },
       { tag: 'Reputation', text: 'Doesn’t trade in spin; a short, precise, honest report is his signature.' },
-      { tag: 'Reputation', text: 'Quiet authority — relentless about the work, indifferent to the credit.' }
+      { tag: 'Reputation', text: 'Quiet authority — relentless about the work, indifferent to the credit.' },
+      { tag: 'Reputation', text: 'Comfortable in a clubhouse — the players come to him; trusted, never a holder-of-court.' }
     ]
   },
 
@@ -394,6 +395,24 @@ var TIER1_ESSENCE = {
       { tag: 'Education-Cultural', text: 'Reads energy and intention; open to what others dismiss.' },
       { tag: 'Lifestyle',  text: 'Lives by wellness and intention.' },
       { tag: 'Community',  text: 'Warm with the people who come to her.' }
+    ]
+  },
+
+  // ---- POP-00017 Anthony Raines — Tier-1 lead A's beat reporter, senior (Entries:4 → supplemental) ----
+  'POP-00017': {
+    name: 'Anthony Raines', pillar: null,
+    target: { drive: 'high', openness: 'high', sociability: 'high', integrity: 'high',
+              composure: 'neutral', warmth: 'neutral', family: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Career',     text: 'Lead beat reporter on the Oakland A’s — the byline closest to the dynasty.' },
+      { tag: 'Career',     text: 'A senior journalist; decades on the beat.' },
+      { tag: 'Education-Cultural', text: 'Reads the game and the people behind it.' },
+      { tag: 'Personal',   text: 'Always chasing the quiet story behind the loud one.' },
+      { tag: 'Media',      text: 'Always working the room — the sources, the clubhouse.' },
+      { tag: 'Public',     text: 'The recognized voice on the A’s beat.' },
+      { tag: 'Reputation', text: 'Chronicled the dynasty start to finish; his word is trusted.' },
+      { tag: 'Reputation', text: 'Gets the story right before he gets it fast.' },
+      { tag: 'Reputation', text: 'Plays it straight.' }
     ]
   }
 

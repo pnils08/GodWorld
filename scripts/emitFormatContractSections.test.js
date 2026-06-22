@@ -316,15 +316,36 @@ console.log('\nTest 9: preflightContractB fail-loud diagnostics');
     d1.some(s => s.startsWith('Contract B violation') && s.includes('BIZ-')),
     `got: ${JSON.stringify(d1)}`);
 
-  // Case (ii): standalone (NEW CANON THIS CYCLE) but zero of any kind
+  // Case (ii): G-W9 (ES-1, S267) — corrected semantics. An empty subsection
+  // (seen, 0 rows) and an all-citizen subsection are valid NO-OPS, not
+  // violations. Only a subsection that had rows which ALL failed to parse is a
+  // violation. (Pre-fix this flagged an all-POP-pending-citizen subsection at
+  // C99 — citizens route to NAMES INDEX, not biz/faith.)
   const subsectionEmpty = {
-    citizens: [],
-    businesses: [],
-    faithOrgs: [],
-    meta: { unclassifiedNewCanon: [], newCanonSubsectionSeen: true, bizMentionSeenInCul: false },
+    citizens: [], businesses: [], faithOrgs: [],
+    meta: { unclassifiedNewCanon: [], newCanonSubsectionSeen: true, bizMentionSeenInCul: false,
+            newCanonRowsSeen: 0, newCanonCitizenCount: 0 },
   };
-  const d2 = helper.preflightContractB(subsectionEmpty);
-  assert('standalone NEW-CANON with zero classification → violation',
+  assert('empty NEW-CANON subsection (0 rows) → valid no-op, no violation',
+    !helper.preflightContractB(subsectionEmpty).some(s => s.startsWith('Contract B violation')),
+    `got: ${JSON.stringify(helper.preflightContractB(subsectionEmpty))}`);
+
+  const subsectionAllCitizen = {
+    citizens: [{ fullName: 'Jordan Reyes', popId: 'POP-pending', role: 'x' }], businesses: [], faithOrgs: [],
+    meta: { unclassifiedNewCanon: [], newCanonSubsectionSeen: true, bizMentionSeenInCul: false,
+            newCanonRowsSeen: 2, newCanonCitizenCount: 2 },
+  };
+  assert('all-citizen NEW-CANON subsection → valid no-op, no violation (G-W9 / C99)',
+    !helper.preflightContractB(subsectionAllCitizen).some(s => s.startsWith('Contract B violation')),
+    `got: ${JSON.stringify(helper.preflightContractB(subsectionAllCitizen))}`);
+
+  const subsectionBroken = {
+    citizens: [], businesses: [], faithOrgs: [],
+    meta: { unclassifiedNewCanon: [], newCanonSubsectionSeen: true, bizMentionSeenInCul: false,
+            newCanonRowsSeen: 3, newCanonCitizenCount: 0 },
+  };
+  const d2 = helper.preflightContractB(subsectionBroken);
+  assert('NEW-CANON subsection with rows that ALL fail to parse → violation',
     d2.some(s => s.startsWith('Contract B violation') && s.includes('(NEW CANON THIS CYCLE)')),
     `got: ${JSON.stringify(d2)}`);
 

@@ -334,11 +334,19 @@ function parseCitizenUsageLog(sectionLines) {
   const unclassifiedNewCanon = []; // S229: NEW CANON rows that classified 'unknown'
   let newCanonSubsectionSeen = false;
   let bizMentionSeenInCul = false;
+  // G-W9 (ES-1): distinguish an all-citizen / empty NEW CANON subsection (valid
+  // no-op) from a genuinely broken one. newCanonRowsSeen = bullet rows under the
+  // standalone subsection; newCanonCitizenCount = those classified as citizens
+  // (which route to rawCitizens, not biz/faith/unclassified). Check (ii) fires
+  // only when rows existed but NONE landed in any bucket → true parse breakage.
+  let newCanonRowsSeen = 0;
+  let newCanonCitizenCount = 0;
 
   if (!sectionLines || sectionLines.length === 0) {
     return {
       citizens: [], businesses, faithOrgs,
-      meta: { unclassifiedNewCanon, newCanonSubsectionSeen, bizMentionSeenInCul },
+      meta: { unclassifiedNewCanon, newCanonSubsectionSeen, bizMentionSeenInCul,
+              newCanonRowsSeen, newCanonCitizenCount },
     };
   }
 
@@ -422,10 +430,12 @@ function parseCitizenUsageLog(sectionLines) {
 
     // S229 engine.24: in NEW_CANON_LIST mode, per-line classification.
     if (newCanonListMode) {
+      newCanonRowsSeen++;
       const parsed = parseNewCanonRow(stripped);
       if (!parsed) continue;
       if (parsed.kind === 'citizen') {
         rawCitizens.push(parsed.record);
+        newCanonCitizenCount++;
       } else if (parsed.kind === 'biz') {
         pushOrg('biz', parsed.record);
       } else if (parsed.kind === 'faith') {
@@ -496,7 +506,8 @@ function parseCitizenUsageLog(sectionLines) {
 
   return {
     citizens, businesses, faithOrgs,
-    meta: { unclassifiedNewCanon, newCanonSubsectionSeen, bizMentionSeenInCul },
+    meta: { unclassifiedNewCanon, newCanonSubsectionSeen, bizMentionSeenInCul,
+            newCanonRowsSeen, newCanonCitizenCount },
   };
 }
 
@@ -671,15 +682,22 @@ function preflightContractB(parsed) {
     );
   }
 
-  // (ii) Standalone (NEW CANON THIS CYCLE) seen but no classification fired
+  // (ii) Standalone (NEW CANON THIS CYCLE) seen, had bullet rows, but NONE
+  // landed in any bucket → true parse breakage (rows all returned null).
+  // G-W9 (ES-1): an all-citizen subsection (citizens route to NAMES INDEX, not
+  // biz/faith) and an empty subsection (0 rows) are valid no-ops, not failures —
+  // the C99 hard-fail fired on an all-POP-pending-citizen subsection. So require
+  // rows-seen > 0 AND zero citizens extracted before flagging.
   if (meta.newCanonSubsectionSeen &&
+      (meta.newCanonRowsSeen || 0) > 0 &&
+      (meta.newCanonCitizenCount || 0) === 0 &&
       parsed.businesses.length === 0 &&
       parsed.faithOrgs.length === 0 &&
       meta.unclassifiedNewCanon.length === 0) {
     diagnostics.push(
-      'Contract B violation: standalone (NEW CANON THIS CYCLE) subsection present ' +
-      'but yielded 0 biz / 0 faith / 0 unclassified rows. Subsection parsing ' +
-      'broken or CUL subsection is empty.'
+      'Contract B violation: standalone (NEW CANON THIS CYCLE) subsection had ' +
+      meta.newCanonRowsSeen + ' bullet row(s) but yielded 0 biz / 0 faith / 0 ' +
+      'citizen / 0 unclassified — every row failed to parse (silent drop).'
     );
   }
 

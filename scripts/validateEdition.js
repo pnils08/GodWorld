@@ -102,6 +102,15 @@ const ENGINE_TERMS = [
   { pattern: /\blogged (?:an?\s+)?error\b/gi },
   { pattern: /\bthe fields (?:that )?the city (?:monitors|tracks|logs|watches)\b/gi },
   { pattern: /\bthe city(?:'s)? (?:data|reporting) (?:office|layer|system|cycle)\b/gi },
+  // ─── G-W5 (ES-1, S267) — engine measurement apparatus narrated in-world ───
+  // C99 leak: "The engine's sentiment tracker flagged it: +0.63" — the
+  // simulation's measurement layer surfacing as if the CITY runs a tracker.
+  // "sentiment tracker" / "<metric> tracker" is unambiguous engine telemetry.
+  // "the engine" stays allowed as a sports/economic metaphor ("engine of the
+  // offense", "engine of growth") — flag it ONLY when it flags/tracks/logs/
+  // measures a value (the data-narration sense), excluding the metaphor uses.
+  { pattern: /\b(?:sentiment|approval|momentum|crime|civic)\s+tracker\b/gi },
+  { pattern: /\bthe engine(?:'s)?\s+(?:\w+\s+){0,2}(?:flagged|tracked|logged|measured|recorded|registered|scored)\b/gi, exclude: /(?:offense|offensive|defense|lineup|rotation|of (?:the )?(?:offense|attack|growth|economy|team)|growth engine|economic engine)/i },
 ];
 
 // Defensive award terms that conflict with DH
@@ -762,6 +771,14 @@ const MONTHS_NAMELIKE = ['March', 'April', 'May', 'June', 'August'];
 const METRIC_WORDS = ['sentiment', 'approval', 'momentum', 'rating', 'index', 'load'];
 // Temporal cues that precede a name-like month used as a date.
 const TEMPORAL_CUE_BEFORE = /(?:\b(?:in|by|since|early|late|mid|this|last|next|through|until|before|after)\s+$)|(?:\b(?:week|weeks|month|end|start|beginning|middle|spring|summer|fall|autumn|winter)\s+of\s+$)/i;
+// G-W7 (ES-1): baseball/sports IDIOM uses of a month — NOT calendar dates.
+// "October baseball", "October-ready", "playing into October", "July swoon".
+// October = the postseason, July = midsummer/All-Star; these are figurative and
+// must not flag as real-month leaks. Narrow by design: a bare "in July" date
+// construction is NOT covered here (it stays a WARNING — conservative against a
+// genuine real-date leak that an editor should still see).
+const MONTH_IDIOM_AFTER = /^(?:-(?:ready|bound|tested|hardened|caliber|worthy)|\s+(?:baseball|ball|push|run|magic|glory|heroics|drama|chase|stage|dreams?|swoon|slump|surge|heat))\b/i;
+const MONTH_IDIOM_BEFORE = /\b(?:into|toward|towards|reaching|reached|reach|play(?:ing|ed)?\s+(?:into|in|through)|postseason|midsummer|all-star)\s+$/i;
 
 function checkInWorldLeaks(editionText) {
   const issues = [];
@@ -777,19 +794,32 @@ function checkInWorldLeaks(editionText) {
     });
   };
 
-  // 1a. Unambiguous months — any prose occurrence is a leak.
+  // G-W7: is this month occurrence a baseball/sports idiom (not a date)?
+  const isMonthIdiom = (index, m) => {
+    const before = editorial.substring(Math.max(0, index - 24), index);
+    const after = editorial.substring(index + m.length, index + m.length + 12);
+    return MONTH_IDIOM_AFTER.test(after) || MONTH_IDIOM_BEFORE.test(before);
+  };
+
+  // 1a. Unambiguous months — any prose occurrence is a leak, UNLESS it reads as
+  //     a baseball idiom ("October-ready", "October baseball", "into October").
   for (const m of MONTHS_UNAMBIGUOUS) {
     const re = new RegExp('\\b' + m + '\\b', 'g');
     let match;
-    while ((match = re.exec(editorial)) !== null) flagMonth(m, match.index, false);
+    while ((match = re.exec(editorial)) !== null) {
+      if (isMonthIdiom(match.index, m)) continue;
+      flagMonth(m, match.index, false);
+    }
   }
 
   // 1b. Name-like months — flag only when preceded by a temporal cue or
-  //     followed by a day number/ordinal ("first week of April", "April 3rd").
+  //     followed by a day number/ordinal ("first week of April", "April 3rd"),
+  //     and never when it reads as a sports idiom.
   for (const m of MONTHS_NAMELIKE) {
     const re = new RegExp('\\b' + m + '\\b', 'g');
     let match;
     while ((match = re.exec(editorial)) !== null) {
+      if (isMonthIdiom(match.index, m)) continue;
       const before = editorial.substring(Math.max(0, match.index - 24), match.index);
       const after = editorial.substring(match.index + m.length, match.index + m.length + 6);
       if (TEMPORAL_CUE_BEFORE.test(before) || /^\s+\d{1,2}(?:st|nd|rd|th)?\b/.test(after)) {
@@ -815,6 +845,74 @@ function checkInWorldLeaks(editionText) {
     });
   }
 
+  return issues;
+}
+
+// ─── Faith-org canon-name near-miss (G-W4, ES-1, S267) ──────────────────────
+// The Tier-3 blocklist (canonBlocklist) catches REAL-Oakland faith names; it
+// does NOT catch a TYPO of a CANON faith-org name. C99 shipped "Cathedral of the
+// Living World" ×2 where canon is "Cathedral of the Living Word" (Bishop
+// Vermeer, POP-00755). This compares faith-org-shaped prose against the canon
+// registry (REAL_NAMES_BLOCKLIST.md RHS, via canonBlocklist) and flags a
+// single-word-edit near-miss with the correction. Editorial only.
+function levenshtein(a, b) {
+  a = String(a).toLowerCase(); b = String(b).toLowerCase();
+  if (a === b) return 0;
+  const m = a.length, n = b.length;
+  if (!m) return n;
+  if (!n) return m;
+  let prev = [];
+  for (let j = 0; j <= n; j++) prev[j] = j;
+  for (let i = 1; i <= m; i++) {
+    const cur = [i];
+    for (let j = 1; j <= n; j++) {
+      cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    }
+    prev = cur;
+  }
+  return prev[n];
+}
+
+function checkFaithOrgNames(editionText) {
+  const issues = [];
+  let canonOrgs;
+  try {
+    canonOrgs = require('/root/GodWorld/lib/canonBlocklist').loadFaithBlocklist().canonOrgs;
+  } catch (e) {
+    return issues; // registry unavailable — skip rather than false-fail
+  }
+  if (!canonOrgs || !canonOrgs.size) return issues;
+
+  const editorial = editionText.split(/ARTICLE TABLE/i)[0] || editionText;
+  const rawWords = editorial.split(/\s+/);
+  const norm = (w) => w.replace(/^[^A-Za-z']+|[^A-Za-z']+$/g, '');
+  const words = rawWords.map(norm);
+
+  for (const canon of canonOrgs) {
+    const cWords = canon.split(/\s+/);
+    const k = cWords.length;
+    if (k < 2) continue; // single-word orgs too ambiguous to fuzzy-match
+    for (let i = 0; i + k <= words.length; i++) {
+      let exact = 0, nearIdx = -1, nearDist = 0, bail = false;
+      for (let j = 0; j < k; j++) {
+        const wv = words[i + j];
+        if (!wv) { bail = true; break; }
+        if (wv.toLowerCase() === cWords[j].toLowerCase()) { exact++; continue; }
+        const d = levenshtein(wv, cWords[j]);
+        if (d >= 1 && d <= 2 && nearIdx === -1) { nearIdx = j; nearDist = d; }
+        else { bail = true; break; } // 2nd off-word, or too far → not this org
+      }
+      if (bail || nearIdx === -1 || exact !== k - 1) continue;
+      const phrase = words.slice(i, i + k).join(' ');
+      if (phrase.toLowerCase() === canon.toLowerCase()) continue;
+      issues.push({
+        severity: nearDist === 1 ? CRITICAL : WARNING,
+        check: 'Faith-Org Canon Name',
+        detail: `Faith org "${phrase}" is a near-miss of canon "${canon}" (one-word typo, edit-distance ${nearDist})`,
+        fix: `Use the canon institution name "${canon}"`
+      });
+    }
+  }
   return issues;
 }
 
@@ -1515,6 +1613,12 @@ Exit codes:
   allIssues.push(...inWorldIssues);
   console.log(`  [${inWorldIssues.length === 0 ? '✓' : '!'}] In-world time/metric leak: ${inWorldIssues.length} issues`);
 
+  // 7e. Faith-org canon-name near-miss (G-W4, ES-1) — a typo of a canon faith
+  // institution that the real-name blocklist structurally can't catch.
+  const faithOrgIssues = checkFaithOrgNames(editionText);
+  allIssues.push(...faithOrgIssues);
+  console.log(`  [${faithOrgIssues.length === 0 ? '✓' : '!'}] Faith-org canon name: ${faithOrgIssues.length} issues`);
+
   // Build cross-domain exclusion maps to prevent false positives on shared last names
   // officialFirstsByLast: { "ramos": ["Keisha"], "ellis": ["Simone"], ... }
   // playerFirstsByLast: { "ramos": ["Arturo"], "ellis": ["John"], ... }
@@ -1657,6 +1761,9 @@ module.exports = {
   checkEngineLanguage,
   // ES-3 (S257 G-W-C97-2) in-world time + engine-metric leak scan
   checkInWorldLeaks,
+  // G-W4 (S267 ES-1) faith-org canon-name near-miss
+  checkFaithOrgNames,
+  levenshtein,
   // G-W64 (S246 ES-8)
   checkCouncilNames,
   checkCivicOfficeNames,

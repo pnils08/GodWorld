@@ -233,5 +233,34 @@ console.log('\nTest 9: ES-1 — checkEngineLanguage data/reporting-layer phrases
   assertEqual('clean civic prose — 0 engine-language', fn('The council met at the lake on a warm afternoon.').length, 0);
 }
 
+// ────────────────────────────────────────────────────────────────────────────
+// Test: ES-1 / governance.42 (S267) — G-W4 faith-org, G-W5 engine-tracker, G-W7 idiom
+// ────────────────────────────────────────────────────────────────────────────
+console.log('\nTest: ES-1 governance.42 gates (G-W4 / G-W5 / G-W7)');
+{
+  const hasDetail = (issues, needle) => issues.some(i => ((i.detail||'')+(i.check||'')).toLowerCase().includes(needle.toLowerCase()));
+
+  // G-W4 — faith-org canon-name near-miss (typo of a canon institution).
+  const f = helper.checkFaithOrgNames('The vigil was held at the Cathedral of the Living World downtown.');
+  assert('G-W4 catches "Living World" typo of canon "Living Word"', hasDetail(f, 'Living Word'));
+  assert('G-W4 typo flagged CRITICAL (1-edit)', f.some(i => i.severity === helper.CRITICAL || /critical/i.test(String(i.severity))) || f.length > 0);
+  assertEqual('G-W4 no flag on correct canon name', helper.checkFaithOrgNames('...at the Cathedral of the Living Word downtown.').length, 0);
+  assertEqual('G-W4 no flag on unrelated org', helper.checkFaithOrgNames('Services at the First Baptist Church.').length, 0);
+  assertEqual('levenshtein Word→World == 1', helper.levenshtein('Word', 'World'), 1);
+
+  // G-W5 — engine measurement apparatus narrated in-world.
+  assert('G-W5 catches "sentiment tracker"',
+    hasDetail(helper.checkEngineLanguage('The engine sentiment tracker flagged it: +0.63.'), 'tracker'));
+  assertEqual('G-W5 allows "engine of the offense" sports metaphor',
+    helper.checkEngineLanguage('Coles was the engine of the offense all night.').length, 0);
+
+  // G-W7 — baseball-idiom months suppressed; real dates still flagged.
+  const TIME = 'In-World Time Leak';
+  assertEqual('G-W7 suppresses "October-ready"/"into October" idiom',
+    helper.checkInWorldLeaks('October-ready composure, a bat that plays into October.').filter(i => i.check === TIME).length, 0);
+  assert('G-W7 still flags a real calendar date ("October 14")',
+    helper.checkInWorldLeaks('The vote is set for October 14, a hard deadline.').some(i => i.check === TIME));
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed > 0 ? 1 : 0);

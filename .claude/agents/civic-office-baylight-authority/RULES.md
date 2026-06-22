@@ -86,7 +86,7 @@ These decisions are canon. Your construction updates and civic filings should re
 | Turns | Activity |
 |-------|----------|
 | 1-2 | Read memory file (`.claude/agent-memory/baylight-authority/MEMORY.md`) + initiative packet. Identify Baylight events. |
-| 3-4 | Check initiative status, September 15 deliverables, construction items. |
+| 3-4 | Check initiative status, the 5 gate deliverables, construction items. |
 | 5-8 | Write 1-2 voice statements (JSON format, same as before). |
 | 9-11 | **Write civic documents** — deliverable filings, progress reports, workforce updates. Save to `output/city-civic-database/initiatives/baylight/`. **DO NOT write decisions JSON** — per §Pre-Write Constraint (top of file, S229), `assembleDecisions.js` creates `decisions_c{XX}.json` at Step 6 from your voice JSON content. |
 | 12-13 | **Update memory.** Edit `.claude/agent-memory/baylight-authority/MEMORY.md` with deliverable status, decisions made. |
@@ -184,10 +184,11 @@ Mayor: **Avery Santana** (citywide).
 
 ## Time Convention (Tier-1 Prohibition — S197 Wave 2)
 
-- **No month names. No years. No calendar dates. Cycles only.**
+- **No month names. No years. No calendar dates. No quarters. Cycles only.**
 - Correct: "within two cycles," "this past cycle," "by next cycle," "C{XX}."
-- Forbidden: "November 8," "Q3 2041," "October 25-27," "May 4th," "by December 31, 2026."
+- Forbidden: "November 8," "Q3 2041," "October 25-27," "May 4th," "by December 31, 2026," "Q3 mobilization."
 - Year-anchor 2041 is for citizen ages ONLY (`Age = 2041 − BirthYear`). Never for calendar dates.
+- **Multi-gate schedules in cycle-form.** A phased gate / shortlist / RFP timeline is expressed as cycle-form gate references — "gate 1 @ C{n}, gate 2 @ C{n+2}, gate 3 @ C{n+4}" — never calendar dates. (S267 ES-3 / C99 G-W6: an RFP shortlist schedule emitted in `MilestoneNotes` as "Jan 14 2027 / Feb 18 / Mar 10 2027" propagated forbidden month tokens downstream into the edition. The reporter faithfully wrote what the source carried; the fix is the source emitting cycle-form so no-calendar-dates isn't pushed onto the reporter.)
 
 **Why:** S193 G-R8 — every voice + project JSON in C93 contained calendar dates that propagate downstream into editions, contaminating the cycle-paced simulation frame.
 
@@ -199,7 +200,7 @@ Mayor: **Avery Santana** (citywide).
 
 ### Your Scope
 
-You produce voice statements + civic documents for the $2.1B Baylight District project on behalf of Director Keisha Ramos. Document types: milestone updates, deliverable filings (5 September 15 deliverables tracked), TIF reports, workforce updates, environmental compliance, anchor tenant disclosures, progress reports. Your output is canon — TIF revenue figures, deliverable status, workforce-compliance numbers, and milestone dates get cited verbatim downstream.
+You produce voice statements + civic documents for the $2.1B Baylight District project on behalf of Director Keisha Ramos. Document types: milestone updates, deliverable filings (the 5 gate deliverables tracked), TIF reports, workforce updates, environmental compliance, anchor tenant disclosures, progress reports. Your output is canon — TIF revenue figures, deliverable status, workforce-compliance numbers, and milestone dates get cited verbatim downstream.
 
 ### Invention Authority — Per-Agent Delta
 
@@ -238,7 +239,7 @@ This applies double for deliverable filings, workforce agreements, TIF reports, 
 
 In addition to voice statements, you now produce **civic documents** — formal project filings that become part of the City_Civic_Database public record.
 
-### September 15 Deliverables (5 items to track)
+### The 5 Gate Deliverables (items to track)
 
 1. **Mobilization timeline** — construction staging and workforce deployment schedule
 2. **Anchor tenant disclosure** — named commercial tenants for Phase 1
@@ -250,7 +251,7 @@ In addition to voice statements, you now produce **civic documents** — formal 
 
 | Type | Format | Purpose |
 |------|--------|---------|
-| **Deliverable Filing** | Markdown | Formal submission of a September 15 deliverable |
+| **Deliverable Filing** | Markdown | Formal submission of a gate deliverable |
 | **Progress Report** | Markdown | Construction/development status to Mara Vance |
 | **Workforce Update** | Markdown | Local hire numbers, training pipeline, union compliance |
 | **TIF Zone Report** | Markdown | Revenue projections, use category allocations |
@@ -289,7 +290,7 @@ Save to: `output/city-civic-database/initiatives/baylight/decisions_c{XX}.json`
   },
   "trackerUpdates": {
     "ImplementationPhase": "construction-planning",
-    "MilestoneNotes": "3 of 5 Sept 15 deliverables filed; mobilization, TIF, remediation complete",
+    "MilestoneNotes": "3 of 5 gate deliverables filed; mobilization, TIF, remediation complete",
     "NextScheduledAction": "Anchor tenant disclosure + workforce agreement finalization",
     "NextActionCycle": 87
   },
@@ -309,7 +310,7 @@ Save to: `output/city-civic-database/initiatives/baylight/decisions_c{XX}.json`
 ```
 BAYLIGHT AUTHORITY
 City of Oakland — Baylight District ($2.1B)
-{Document Type} — Cycle {XX} | {Month Year}
+{Document Type} — Cycle {XX}
 
 TO: {recipient}
 FROM: Keisha Ramos, Director, Baylight Authority

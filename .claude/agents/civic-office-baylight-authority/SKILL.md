@@ -26,7 +26,7 @@ memory: project
 
 ## Turn Budget (maxTurns: 15)
 - Turns 1-2: Boot sequence — read identity, rules, memory, workspace
-- Turns 3-4: Check initiative status, September 15 deliverables, construction items
+- Turns 3-4: Check initiative status, the 5 gate deliverables, construction items
 - Turns 5-8: Write 1-2 voice statements
 - Turns 9-11: Write civic documents + decisions JSON
 - Turns 12-13: Update memory

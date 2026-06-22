@@ -772,6 +772,7 @@ async function main() {
   // any cards run, saving the time it would take to read the sheet + build
   // the first card payload.
   var popidIdMap = null;
+  var runCycle = null;   // ES-6: resolved once (World_Config) at run start; reused by the error-gate dump
   if (APPLY) {
     console.log('[buildCitizenCards] auth probe…');
     var probeStatus = await authProbe();
@@ -786,6 +787,20 @@ async function main() {
     }
     console.log('');
     popidIdMap = await buildPopidIdMap();
+    console.log('');
+
+    // ES-6 (G-P-C99-2b): resolve the live cycle once, then clear any stale
+    // failures dump from a prior run. A clean run never writes a dump, so
+    // without this an earlier dirty run's file could survive and mislead the
+    // /post-publish Step 2a gate. APPLY-only — a dry-run must not delete a real
+    // apply-run's failures file.
+    try {
+      var wcRows0 = await sheets.getSheetAsObjects('World_Config');
+      var ccRow0 = wcRows0.find(function (r) { return r.Key === 'cycleCount'; });
+      if (ccRow0) runCycle = parseInt(ccRow0.Value, 10);
+    } catch (_) { /* fall back to env/base_context at dump time */ }
+    var clearedDump = clearStaleErrorGateDump(resolveErrorGateCycle(runCycle));
+    if (clearedDump) console.log('[buildCitizenCards] cleared stale failures dump: ' + clearedDump);
     console.log('');
   }
 
@@ -1130,20 +1145,15 @@ async function main() {
   // silent partial failure beyond grepping stdout.
   if (errors > 0) {
     // G-P-C97-2 (S257): key the failure dump off the LIVE engine cycle
-    // (World_Config), not a possibly-stale base_context.json. Defensive — a read
-    // failure falls through to emitErrorGateDump's env/file chain.
-    var liveCycle = null;
-    try {
-      var wcRows = await sheets.getSheetAsObjects('World_Config');
-      var ccRow = wcRows.find(function (r) { return r.Key === 'cycleCount'; });
-      if (ccRow) liveCycle = parseInt(ccRow.Value, 10);
-    } catch (_) { /* fall back to env/base_context in emitErrorGateDump */ }
+    // (World_Config), resolved once at run start as runCycle (ES-6) so the dump
+    // path matches the run-start stale-clear. Null falls through to
+    // emitErrorGateDump's env/base_context chain.
     var failPath = emitErrorGateDump({
       total_attempted: citizens.length,
       written: written,
       errors: errors,
       failures: failureList,
-      cycle: liveCycle
+      cycle: runCycle
     });
     console.error('[GATE-FAIL] ' + errors + ' card write(s) failed; details: ' + failPath);
     process.exit(1);
@@ -1154,12 +1164,12 @@ async function main() {
 // contract (dump-file shape, cycle resolution, file path) is verifiable
 // without round-tripping through Sim_Ledger reads + Supermemory writes.
 // Returns the dump-file path. Does NOT exit — caller decides exit code.
-function emitErrorGateDump(stats) {
-  // G-P-C97-2 (S257): the run's live cycle (passed as stats.cycle from main(),
-  // resolved from World_Config) is the authoritative source — base_context.json
-  // can lag a cycle (it did on the C97 run → dump mis-keyed c96). env overrides
-  // stay above the file fallback for standalone/test invocation.
-  var cycleResolved = stats.cycle || process.env.CYCLE || process.env.CYCLE_NUMBER || null;
+// G-P-C97-2 (S257): the run's live cycle (passed explicitly from main(),
+// resolved from World_Config) is the authoritative source — base_context.json
+// can lag a cycle (it did on the C97 run → dump mis-keyed c96). env overrides
+// stay above the file fallback for standalone/test invocation.
+function resolveErrorGateCycle(explicitCycle) {
+  var cycleResolved = explicitCycle || process.env.CYCLE || process.env.CYCLE_NUMBER || null;
   if (!cycleResolved) {
     try {
       var bcPath = path.join(__dirname, '..', 'output/desk-packets/base_context.json');
@@ -1167,10 +1177,36 @@ function emitErrorGateDump(stats) {
       cycleResolved = bc.cycle || bc.cycleNumber || (bc.baseContext && bc.baseContext.cycle) || null;
     } catch (_) { /* base_context unavailable — fall back to timestamp */ }
   }
+  return cycleResolved;
+}
+
+// Path of the per-cycle failures dump for a resolved cycle. Factored out so the
+// run-start stale-clear (ES-6) and the error-path write target the SAME path.
+function errorGateDumpPath(cycleResolved) {
   var cycleSlug = cycleResolved
     ? ('c' + String(cycleResolved).replace(/^[cC]/, ''))
     : ('ts' + Date.now());
-  var failPath = path.join(__dirname, '..', 'output', 'citizen_card_failures_' + cycleSlug + '.json');
+  return path.join(__dirname, '..', 'output', 'citizen_card_failures_' + cycleSlug + '.json');
+}
+
+// ES-6 (G-P-C99-2b): remove a stale failures dump left by a prior run at run
+// start, so a CLEAN run (errors=0, which never writes a dump) can't leave an
+// earlier dirty run's file behind to mislead the /post-publish Step 2a gate.
+// Only clears for a real resolved cycle (never the per-invocation ts-fallback).
+// Returns the cleared path, or null if nothing to clear.
+function clearStaleErrorGateDump(cycleResolved) {
+  if (!cycleResolved) return null;
+  var failPath = errorGateDumpPath(cycleResolved);
+  if (fs.existsSync(failPath)) {
+    fs.unlinkSync(failPath);
+    return failPath;
+  }
+  return null;
+}
+
+function emitErrorGateDump(stats) {
+  var cycleResolved = resolveErrorGateCycle(stats.cycle);
+  var failPath = errorGateDumpPath(cycleResolved);
   var payload = {
     cycle: cycleResolved,
     timestamp: new Date().toISOString(),
@@ -1185,6 +1221,9 @@ function emitErrorGateDump(stats) {
 
 module.exports = {
   emitErrorGateDump: emitErrorGateDump,
+  resolveErrorGateCycle: resolveErrorGateCycle,
+  errorGateDumpPath: errorGateDumpPath,
+  clearStaleErrorGateDump: clearStaleErrorGateDump,
   classify401Action: classify401Action,
   // engine.30 formatters — exported for unit tests
   buildCard: buildCard,

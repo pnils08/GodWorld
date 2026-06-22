@@ -102,8 +102,20 @@ function buildLedgerPopIdSet(rows) {
 }
 
 // Extract candidate POPIDs from a candidates.md file body.
+// G-S4 (C99): scope extraction to the "## Candidate pool" section when present,
+// so POPIDs named in an editorial header / "hard exclusions" line or the Notes
+// section don't trip a false-positive HALT (a POPID *listed as excluded* is not
+// a candidate). Falls back to the whole string for --popids lists and any file
+// without the heading, so existing callers are unaffected.
 function extractCandidatePopIds(text) {
-  const ids = String(text || '').match(POPID_RE) || [];
+  let scope = String(text || '');
+  const m = scope.match(/^##\s+Candidate pool\s*$/im);
+  if (m) {
+    const rest = scope.slice(m.index + m[0].length);
+    const next = rest.search(/^##\s+/im);
+    scope = next === -1 ? rest : rest.slice(0, next);
+  }
+  const ids = scope.match(POPID_RE) || [];
   return [...new Set(ids)];
 }
 

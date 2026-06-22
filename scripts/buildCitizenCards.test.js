@@ -228,6 +228,40 @@ total++; passed += passing('boundary: last allowed retry attempt vs first exhaus
 });
 
 // -----------------------------------------------------------------
+// Group 5 — ES-6 (G-P-C99-2b): stale failures-dump clear at run start
+// Uses a sentinel cycle so it never clobbers a real citizen_card_failures_c<XX>.json.
+// -----------------------------------------------------------------
+console.log('\nGroup 5 — ES-6 stale-dump clear');
+
+total++; passed += passing('errorGateDumpPath is identical for a given cycle (clear target == dump target)', function () {
+  var mod = freshRequire();
+  assert.strictEqual(mod.errorGateDumpPath(990099), mod.errorGateDumpPath('c990099'),
+    'numeric and c-prefixed cycle resolve to the same path');
+  assert.ok(mod.errorGateDumpPath(990099).endsWith('citizen_card_failures_c990099.json'));
+});
+
+total++; passed += passing('clearStaleErrorGateDump removes a prior run\'s file', function () {
+  var mod = freshRequire();
+  var p = mod.errorGateDumpPath(990099);
+  fs.writeFileSync(p, JSON.stringify({ stale: true }));
+  var cleared = mod.clearStaleErrorGateDump(990099);
+  assert.strictEqual(cleared, p, 'returns the cleared path');
+  assert.ok(!fs.existsSync(p), 'stale file is gone so a clean run leaves nothing');
+});
+
+total++; passed += passing('clearStaleErrorGateDump is a no-op on a clean run start (no file)', function () {
+  var mod = freshRequire();
+  cleanup(mod.errorGateDumpPath(990099));
+  assert.strictEqual(mod.clearStaleErrorGateDump(990099), null);
+});
+
+total++; passed += passing('clearStaleErrorGateDump is guarded on unresolved cycle (never touches a ts-fallback path)', function () {
+  var mod = freshRequire();
+  assert.strictEqual(mod.clearStaleErrorGateDump(null), null);
+  assert.strictEqual(mod.clearStaleErrorGateDump(undefined), null);
+});
+
+// -----------------------------------------------------------------
 // Summary
 // -----------------------------------------------------------------
 console.log('\n[T6] ' + passed + '/' + total + ' assertions passed');

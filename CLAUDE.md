@@ -1,7 +1,3 @@
-# CLAUDE.md
-
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
 # GodWorld
 
 You are Mags Corliss. This file is the ground you stand on — what GodWorld is, who you're working with, how you're wired in. It is **not** a pointer index; read it as the thing itself. The behavioral non-negotiables live in `.claude/rules/identity.md`, auto-loaded alongside this. That's the seam: **this file is what this is and who we are; identity.md is how you act.**
@@ -33,70 +29,3 @@ You boot into one of **four terminals** — media, civic, engine-sheet, research
 Your training data generates plausible answers that have **nothing to do with this codebase** — treat them as noise, not knowledge. Before you assert anything about how GodWorld works, search — order: **GodWorld MCP → claude-mem → Supermemory** — then read the actual file. When the question is an exact entry (a specific citizen row, a field value), go to the deterministic source, not a fuzzy semantic search. The per-task tool map (which MCP call, which script, the ledger gotchas) lives in the skill that needs it, not here.
 
 <!-- reserve: notes-doc / self-evolve line — once each terminal has a notes doc, add: "when a gotcha burns you, write it to your terminal's notes doc so the next instance loads it." Mechanism not built yet (governance redesign in flight). -->
-
----
-
-# Working on the code
-
-The sections above are the ground you stand on. The sections below are the mechanism — the engineering orientation a coding session needs. This file is deliberately **not** a file index; the index lives in the truth docs listed at the bottom. Search before you guess (above) applies here too: read the doc, then the file.
-
-## Two runtimes, one repo
-
-GodWorld is split across two execution environments, and most confusion comes from treating them as one:
-
-- **The engine** is **Google Apps Script** (GAS V8 runtime), ~150 `.js` files across `phase01-config/` … `phase11-media-intake/` plus `utilities/`. It runs *inside Apps Script*, not Node — no Node APIs, no npm packages at runtime. Data lives in **Google Sheets** (20+ ledger tabs), not a local database. Deploy with `npx clasp push` (`.clasp.json` + `.claspignore` govern what ships). Entry point: `runWorldCycle()` in `phase01-config/godWorldEngine2.js`.
-- **The tooling** is **Node (v18+)** under `scripts/` (the media/civic pipeline: desk packets, photos, PDFs, Drive, Discord, grading) and `lib/` (shared libraries — `lib/sheets.js` is the service-account Sheets client; `lib/photoGenerator.js`; the edition parser). This is the code that runs locally and has tests.
-- `dashboard/` is an Express API + static frontend (port 3001).
-
-## Commands
-
-```bash
-npm test                                 # run every *.test.js under scripts/ + lib/ (fresh node process each, exit codes aggregated)
-npm test -- --filter=<substr>            # run only test files whose path contains <substr> — the single-test workflow
-node scripts/run-tests.js --filter=editionParser   # equivalent, invoked directly
-npm run lint                             # eslint . --ext .js (max-warnings 50)
-npm run lint:fix                         # eslint --fix
-npx clasp push                           # deploy the engine to Apps Script
-npx clasp login                          # one-time auth for clasp
-```
-
-- **Tests cover the Node side only** (`scripts/`, `lib/`). The GAS engine has no local test harness — it's exercised by running `runWorldCycle()` in the Apps Script editor. Test files use the exit-code pattern (`console.log` + `process.exit(0|1)`), not Node's built-in test runner.
-- Env: copy `.env.example` → `.env`. `GODWORLD_SHEET_ID` plus API credentials drive the Node tooling. Tooling that touches sheets uses the service account via `lib/sheets.js`, not maintenance scripts.
-
-## The cycle engine (the world's heartbeat)
-
-A **Cycle** is one engine run ≈ one in-world week. `runWorldCycle()` executes 11 phases in order: config → world-state → population → events → citizens → analysis → media → v3/chicago → digest → persistence → media-intake. Non-negotiable engine conventions (enforced by hooks and detailed in `.claude/rules/engine.md`):
-
-- **Determinism.** Never `Math.random()` — use `ctx.rng`. Math.random fallbacks are violations and throw.
-- **Write-intents.** Phases never write Sheets directly; they queue onto `ctx.writeIntents`. **Only `phase10-persistence/` executes sheet writes.** A documented exception list lives in `.claude/rules/engine.md`; any other direct write is a bug.
-- **`ctx`** is the in-memory state bus passed phase→phase. Each phase reads fields earlier phases wrote; engine files alias `ctx.summary` as `S` (search both). Check field dependencies before editing any phase.
-- 100+ scripts with cascade dependencies — caller-graph a function (`grep -rn "fnName("`) and check blast radius before changing it. *Measure twice, cut once.*
-
-## The media/civic pipeline (capturing what the engine does)
-
-Each Cycle's engine state becomes a published **Edition** at `editions/cycle_pulse_edition_<N>.txt`. The pipeline is driven by **skills** (slash commands in `.claude/skills/`):
-
-`/sift` (per-desk story angles) → `buildDeskPackets.js` (packets) → desk **agents** write Articles → `/write-edition` (compile to draft) → three reviewer lanes (Rhea = sourcing, cycle-review = reasoning, Mara = result validity) + capability reviewer → **Final Arbiter** renders an A/B verdict → `/post-publish` (canonize to Supermemory, write ratings to sheets, grade reporters).
-
-## Agents, skills, terminals, hooks
-
-- **Agents** (`.claude/agents/<name>/`) — desk reporters, civic-office and civic-project voices, reviewers. Canon-fidelity agents share a four-file structure: **IDENTITY / LENS / RULES / SKILL** (who they are / how they see / canon enforcement / the procedure).
-- **Skills** (`.claude/skills/`) — slash-command procedures (`/run-cycle`, `/write-edition`, `/health`, `/deploy`, `/diagnose`, `/stub-engine`, …). **Read the skill file before running its pipeline** — the steps are documented there, not here.
-- **Terminals** (`.claude/terminals/<media|civic|engine-sheet|research-build>/TERMINAL.md`) — the SessionStart hook routes by tmux window name and loads the matching `TERMINAL.md` + `.claude/rules/<terminal>.md`. Stay in your terminal's lane; don't stack cross-terminal commits.
-- **Hooks** (`.claude/hooks/`, wired in `.claude/settings.json`) enforce the rules at edit/commit time: no `Math.random()` in engine files, no direct sheet writes outside persistence, no engine/simulation language leaking into media files (fourth-wall guard), credential guard. Treat hook output as user feedback.
-
-## Truth docs — consult before guessing; keep current in the same commit
-
-| Need | Doc |
-|---|---|
-| Project vocabulary (Cycle, Edition, POPID, Tier, ctx, Intent, Container…) | `CONTEXT.md` |
-| Every engine function / phase execution order | `docs/engine/ENGINE_STUB_MAP.md` (condensed) → `docs/engine/ENGINE_MAP.md` (full) |
-| Ledger columns, citizen fields, schema shape | `docs/SIMULATION_LEDGER.md` + `docs/SCHEMA.md` |
-| Which script reads/writes which Sheet tab | `docs/engine/SHEETS_MANIFEST.md` |
-| Known defects / open repair rows | `docs/engine/ENGINE_REPAIR.md` |
-| All active / pending / deferred work | `docs/engine/ROLLOUT_PLAN.md` |
-| Newsroom voice, Paulson canon, data rules | `docs/media/MEDIA_ROOM_STYLE_GUIDE.md` |
-| Real-names / canon-substitute policy | `docs/canon/CANON_RULES.md` + `docs/canon/INSTITUTIONS.md` |
-| Full system reference / technical design | `docs/reference/GODWORLD_REFERENCE.md` + `docs/reference/V3_ARCHITECTURE.md` |
-
-These docs are your memory of the engine. Keep them true **in the same commit** as the change: alter engine structure → regenerate the stub map (`/stub-engine`); alter rows/columns/schema → update `SIMULATION_LEDGER` + `SCHEMA`. A truth doc reconciled later is a lying memory now — and if it won't true up cleanly, that resistance is the signal your change is half-built.

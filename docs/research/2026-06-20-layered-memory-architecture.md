@@ -44,7 +44,7 @@ pointers:
 
 ## Applications (living)
 
-- 2026-06-20 — Initial extraction (S265). Split out of the C98 gap-log triage ([[../plans/2026-06-20-c98-gap-log-triage]] §Strategic Input) per GAP_LOG_TRIAGE_PLAYBOOK anti-pattern #5 (surface strategic items, don't jam them into the two-track fix model).
+- 2026-06-20 — Initial extraction (S265). Split out of the C98 gap-log triage ([[../archive/plans/2026-06-20-c98-gap-log-triage]] §Strategic Input) per GAP_LOG_TRIAGE_PLAYBOOK anti-pattern #5 (surface strategic items, don't jam them into the two-track fix model).
 
 ---
 

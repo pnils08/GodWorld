@@ -9,7 +9,7 @@ sources:
   - output/production_log_c99_print_gaps.md (print: G-PR-C99-*)
   - output/production_log_c99_post_publish_gaps.md (post-publish: G-P-C99-*)
   - docs/plans/GAP_LOG_TRIAGE_PLAYBOOK.md (the 8-step method this executes)
-  - docs/plans/2026-06-20-c98-gap-log-triage.md (governance.41 — prior cycle, structural template)
+  - docs/archive/plans/2026-06-20-c98-gap-log-triage.md (governance.41 — prior cycle, structural template)
 pointers:
   - "[[engine/ROLLOUT_PLAN]] — parent rollout (governance.42 single pointer row)"
   - "[[GAP_LOG_TRIAGE_PLAYBOOK]] — method"
@@ -29,7 +29,7 @@ pointers:
 **Terminal:** research-build (triage author + RB track) / engine-sheet (ES track)
 
 **Pointers:**
-- Prior cycle: [[2026-06-20-c98-gap-log-triage]] (governance.41)
+- Prior cycle: [[../archive/plans/2026-06-20-c98-gap-log-triage]] (governance.41)
 - Folds into: [[2026-06-01-initiative-tracker-contract]] (civic.14 Phases 2–3), [[engine/ENGINE_REPAIR]] / engine.8 / engine.29 / pipeline.13
 
 **Acceptance criteria:**

@@ -154,5 +154,5 @@ The 9 active assertions cover all 5 categories (coverage, representation, three-
 
 ## Changelog
 
-- 2026-06-20 — v1.1 (S265, research-build closing governance.41 RB-4). Step 4 gains **Known advisory false-positives** — three advisory assertions (`canon-names-not-invented`, `article-length-balance`, `names-index-completeness`) documented as known non-blocking noise so each cycle's operator recognizes them on sight instead of re-diagnosing. Durable assertion re-scope deferred to engine-sheet. Source gap: `output/production_log_c98_post_publish_gaps.md` §G-W reviewer-handoff. Plan: [[../../../docs/plans/2026-06-20-c98-gap-log-triage]] RB-4.
+- 2026-06-20 — v1.1 (S265, research-build closing governance.41 RB-4). Step 4 gains **Known advisory false-positives** — three advisory assertions (`canon-names-not-invented`, `article-length-balance`, `names-index-completeness`) documented as known non-blocking noise so each cycle's operator recognizes them on sight instead of re-diagnosing. Durable assertion re-scope deferred to engine-sheet. Source gap: `output/production_log_c98_post_publish_gaps.md` §G-W reviewer-handoff. Plan: [[../../../docs/archive/plans/2026-06-20-c98-gap-log-triage]] RB-4.
 - 2026-04-17 — v1.0 initial (Phase 39.1).

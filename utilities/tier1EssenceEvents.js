@@ -414,6 +414,151 @@ var TIER1_ESSENCE = {
       { tag: 'Reputation', text: 'Gets the story right before he gets it fast.' },
       { tag: 'Reputation', text: 'Plays it straight.' }
     ]
+  },
+
+  // ============================================================================
+  // Civic — council + executive voices (essence from role + .claude/rules/civic.md
+  // faction tones; civic-office IDENTITY files carry no dial block). All on the
+  // Simulation_Ledger (Mike-confirmed S265). integrity-forward figures (Dane/Ashford/
+  // Montez) are authored to the CURRENT-MAP ceiling (integrity 'high'); their ideal
+  // is integrity-vhigh, which needs the engine.39 pure-integrity tag (integrity only
+  // comes bundled with sociability today). Re-upgrade those targets once engine.39 ships.
+  // ============================================================================
+
+  // ---- POP-00034 Avery Santana — Mayor of Oakland (she/her) ----
+  'POP-00034': {
+    name: 'Avery Santana', pillar: null,
+    target: { drive: 'high', sociability: 'high', composure: 'high', integrity: 'high',
+              warmth: 'moderate', openness: 'moderate', family: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Promotion',  text: 'Won the mayoralty; leads Oakland through its biggest decisions.' },
+      { tag: 'Civic Role', text: 'Mayor of Oakland — sets policy and speaks for the city.' },
+      { tag: 'Civic Role', text: 'Carries the city’s direction into every chamber.' },
+      { tag: 'Public',     text: 'The public face of City Hall.' },
+      { tag: 'Stabilized', text: 'Steady under the weight of the whole city’s demands.' },
+      { tag: 'Community',  text: 'Close to the neighborhoods she governs.' },
+      { tag: 'Education-Cultural', text: 'Reads the city as a system of competing needs.' },
+      { tag: 'Reputation', text: 'Means what she signs; accountable for the call.' },
+      { tag: 'Reputation', text: 'Leads straight, owns the outcomes.' }
+    ]
+  },
+
+  // ---- POP-00037 Brenda Okoro — Deputy Mayor, Community Affairs (operational, not political) ----
+  'POP-00037': {
+    name: 'Brenda Okoro', pillar: null,
+    target: { drive: 'high', composure: 'high', integrity: 'high', warmth: 'moderate',
+              sociability: 'moderate', openness: 'neutral', family: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Career',     text: 'Deputy Mayor for Community Affairs — the operational reality behind the politics.' },
+      { tag: 'Career',     text: 'Runs the Stabilization Fund and community/economic development — gets it done.' },
+      { tag: 'Career',     text: 'Carries the Mayor’s office operational load.' },
+      { tag: 'Stabilized', text: 'Steady under operational pressure.' },
+      { tag: 'Background', text: 'Measured, unflashy, effective.' },
+      { tag: 'Mentorship', text: 'Tends to the community’s real needs, not the headlines.' },
+      { tag: 'Reputation', text: 'Operational honesty — the delivery, not the spin.' },
+      { tag: 'Reputation', text: 'Does the work, indifferent to the political credit.' },
+      { tag: 'Reputation', text: 'The numbers have to add up before she signs.' }
+    ]
+  },
+
+  // ---- POP-00143 Clarissa Dane — District Attorney, former federal prosecutor (integrity→vhigh post-engine.39) ----
+  'POP-00143': {
+    name: 'Clarissa Dane', pillar: null,
+    target: { integrity: 'high', composure: 'high', drive: 'high', openness: 'moderate',
+              sociability: 'moderate', warmth: 'neutral', family: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Career',     text: 'District Attorney; a former federal prosecutor — precise, exacting.' },
+      { tag: 'Promotion',  text: 'Took the DA’s office on a record of hard, clean convictions.' },
+      { tag: 'Stabilized', text: 'Unshakable in the courtroom; controls the room with precision.' },
+      { tag: 'Background', text: 'Measured, deliberate — every word on the record chosen.' },
+      { tag: 'Education-Cultural', text: 'Reads a case the way a chemist reads a reaction — element by element.' },
+      { tag: 'Reputation', text: 'No spin — the law, the facts, the honest charge.' },
+      { tag: 'Reputation', text: 'Plays it straight; the framework holds or it doesn’t.' },
+      { tag: 'Reputation', text: 'Incorruptible about the process — precise to the letter.' }
+    ]
+  },
+
+  // ---- POP-00136 Rafael Montez — Police Chief (professional, measured, data-driven) ----
+  'POP-00136': {
+    name: 'Rafael Montez', pillar: null,
+    target: { composure: 'high', integrity: 'high', drive: 'high', openness: 'moderate',
+              sociability: 'moderate', warmth: 'neutral', family: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Career',     text: 'Police Chief — professional, measured, data-driven.' },
+      { tag: 'Career',     text: 'Runs the department by the numbers, not the noise.' },
+      { tag: 'Stabilized', text: 'Steady under public scrutiny; never reactive.' },
+      { tag: 'Background', text: 'Measured in every public statement.' },
+      { tag: 'Education-Cultural', text: 'Reads the crime data for what it actually says.' },
+      { tag: 'Reputation', text: 'Professional and accountable — the facts, plainly.' },
+      { tag: 'Reputation', text: 'Plays it straight; owns the department’s record.' },
+      { tag: 'Reputation', text: 'Disciplined, principled, by the book.' }
+    ]
+  },
+
+  // ---- POP-00043 Janae Rivers — OPP spokesperson (progressive, community-centered, equity) ----
+  'POP-00043': {
+    name: 'Janae Rivers', pillar: null,
+    target: { sociability: 'high', warmth: 'high', openness: 'high', drive: 'high',
+              integrity: 'moderate', composure: 'moderate', family: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Civic Role', text: 'Oakland Progressive Party voice on the City Council — community-centered, equity-focused.' },
+      { tag: 'Civic Role', text: 'Carries the progressive bloc’s positions into the chamber.' },
+      { tag: 'Community',  text: 'Rooted in the neighborhoods — speaks for the people on the margins.' },
+      { tag: 'Community',  text: 'Warm, present, organizing — meets people where they are.' },
+      { tag: 'Mentorship', text: 'Lifts up the communities the city overlooks.' },
+      { tag: 'Education-Cultural', text: 'Sees the equity dimension others miss.' },
+      { tag: 'Lifestyle',  text: 'Open to new approaches; the old answers haven’t worked for everyone.' },
+      { tag: 'Public',     text: 'A recognized progressive voice in the city.' },
+      { tag: 'Reputation', text: 'Means the equity she fights for.' }
+    ]
+  },
+
+  // ---- POP-00504 Warren Ashford — CRC spokesperson (fiscal accountability, oversight, process) ----
+  'POP-00504': {
+    name: 'Warren Ashford', pillar: null,
+    target: { integrity: 'high', drive: 'high', composure: 'high', openness: 'moderate',
+              sociability: 'moderate', warmth: 'neutral', family: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Career',     text: 'Civic Reform Coalition voice on the Council — fiscal accountability and oversight.' },
+      { tag: 'Career',     text: 'Process-focused — every dollar and every step has to justify itself.' },
+      { tag: 'Stabilized', text: 'Steady, exacting; unmoved by political pressure.' },
+      { tag: 'Background', text: 'Measured, deliberate, scrutinizing.' },
+      { tag: 'Education-Cultural', text: 'Reads the budget line by line for what doesn’t add up.' },
+      { tag: 'Reputation', text: 'Demands the process hold; oversight before approval.' },
+      { tag: 'Reputation', text: 'Principled about accountability — no shortcuts.' },
+      { tag: 'Reputation', text: 'Plays it straight; the numbers have to reconcile.' }
+    ]
+  },
+
+  // ---- POP-00042 Ramon Vega — City Council President, IND (case-by-case swing; NOT a bloc) ----
+  'POP-00042': {
+    name: 'Ramon Vega', pillar: null,
+    target: { composure: 'high', openness: 'high', integrity: 'high', sociability: 'moderate',
+              drive: 'moderate', warmth: 'neutral', family: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Civic Role', text: 'City Council President — convenes the chamber, an independent who weighs each issue on its merits.' },
+      { tag: 'Stabilized', text: 'Steady hand presiding; doesn’t chase a faction.' },
+      { tag: 'Background', text: 'Measured — listens to all sides before he moves.' },
+      { tag: 'Education-Cultural', text: 'Weighs each question case by case, second-order effects and all.' },
+      { tag: 'Education-Cultural', text: 'An independent mind — open to the argument, not the party.' },
+      { tag: 'Reputation', text: 'No bloc, no spin — calls it as he sees it.' },
+      { tag: 'Reputation', text: 'Principled about the process he presides over.' }
+    ]
+  },
+
+  // ---- POP-00502 Leonard Tran — City Council Member, IND (case-by-case swing; speaks for himself) ----
+  'POP-00502': {
+    name: 'Leonard Tran', pillar: null,
+    target: { openness: 'high', composure: 'high', integrity: 'moderate', drive: 'moderate',
+              sociability: 'neutral', warmth: 'neutral', family: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Education-Cultural', text: 'An independent on the Council — studies each issue, votes his own read.' },
+      { tag: 'Education-Cultural', text: 'Open to the argument over the alliance; weighs it himself.' },
+      { tag: 'Stabilized', text: 'Even-keeled; doesn’t swing with the room.' },
+      { tag: 'Background', text: 'Measured, deliberate, his own counsel.' },
+      { tag: 'Personal',   text: 'Curious, independent-minded; thinks it through.' },
+      { tag: 'Reputation', text: 'Speaks for himself — no bloc, plays it straight.' }
+    ]
   }
 
 };

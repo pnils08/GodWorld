@@ -167,14 +167,21 @@ function backdate(events) {
     console.log('\nno new essence rows to append (author-once: all already present)');
   }
 
+  // ONE batched write for all targets — NOT a per-row sequential loop. The sequential version
+  // fired 2 updateRange calls per citizen (84 for a 42-citizen run) and hit the Sheets write
+  // quota partway, silently aborting the high-row tail (POP-00636/00799 left unwritten S265).
+  // sheets.batchUpdate sends every range in a single API call. (Rate-limit fix, S266.)
   function colLetter(n) { let s = ''; while (n > 0) { const m = (n - 1) % 26; s = String.fromCharCode(65 + m) + s; n = Math.floor((n - 1) / 26); } return s; }
   const dialLetter = colLetter(iDial + 1), traitLetter = colLetter(iTrait + 1);
+  const updates = [], wrote = [];
   for (let r = 1; r < grid.length; r++) {
     const pop = grid[r][iPop]; if (!writes[pop]) continue;
-    await sheets.updateRange(`Simulation_Ledger!${dialLetter}${r + 1}`, [[writes[pop].dialState]]);
-    await sheets.updateRange(`Simulation_Ledger!${traitLetter}${r + 1}`, [[writes[pop].face]]);
-    console.log(`  wrote ${pop} -> DialState ${dialLetter}${r + 1} + TraitProfile ${traitLetter}${r + 1}`);
+    updates.push({ range: `Simulation_Ledger!${dialLetter}${r + 1}`, values: [[writes[pop].dialState]] });
+    updates.push({ range: `Simulation_Ledger!${traitLetter}${r + 1}`, values: [[writes[pop].face]] });
+    wrote.push(pop);
   }
+  await sheets.batchUpdate(updates);
+  console.log(`  batch-wrote ${wrote.length} citizens (${updates.length} ranges) in one call`);
 
   // verify
   const back = await sheets.getSheetData('Simulation_Ledger');

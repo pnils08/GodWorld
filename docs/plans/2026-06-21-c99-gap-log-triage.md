@@ -164,7 +164,7 @@ pointers:
   2. emitFormatContractSections: treat an all-citizen / zero-biz-zero-faith NEW CANON subsection as a valid no-op.
 - **Verify:** fixture edition with a faith-org name typo + engine-language line + idiom month + all-citizen NEW CANON → validator/emitter pass with correct flags, no false hard-fail.
 - **Absorbs ROLLOUT:** engine.8 (parser-alignment class) — note forward.
-- **Status:** [ ] OPEN
+- **Status:** [x] DONE (S267). All 4 sub-fixes shipped + regression-tested. **G-W4**: `lib/canonBlocklist.js` now exposes canon-forward org names (RHS of the real→canon map); `validateEdition.checkFaithOrgNames` flags a one-word typo of a canon faith institution (CRITICAL @ edit-1, WARNING @ edit-2) — catches "Cathedral of the Living World" for canon "Living Word". **G-W5**: added `sentiment tracker` + `the engine …flagged/tracked/logged/measured` to the data-narration blocklist, excluding the sanctioned "engine of the offense" metaphor. **G-W7**: `checkInWorldLeaks` suppresses baseball-idiom months ("October-ready", "into October") while a bare real date ("October 14") still flags. **G-W9** (`emitFormatContractSections`): track `newCanonRowsSeen`+`newCanonCitizenCount`; an all-citizen / empty NEW CANON subsection is a valid no-op (was the C99 hard-fail), genuine all-rows-failed-to-parse still flags. Tests: validator 44→53, emitter 70→72, canonBlocklist 12/12. Commit `2f8b81a3`.
 
 ### ES-2: Card-vs-ledger display-name drift (recurrence C98 G-W8)
 
@@ -177,7 +177,7 @@ pointers:
   2. Spot-check POP-00349 + POP-00618 + sweep for other drifted pairs.
 - **Verify:** card `name` === ledger `Name` for the two known pairs + a sweep report.
 - **Absorbs ROLLOUT:** recurrence of C98 G-W8 (unshipped) — note forward.
-- **Status:** [ ] OPEN
+- **Status:** [!] ESCALATED — NOT the scoped 2-citizen fix; bigger finding, needs Mike's canon-direction call (S267). Empirical sweep: Simulation_Ledger has **no `Name` column** (card builds from First+Last); the "Name" Rhea/queryLedger see is a *denormalized* copy in LifeHistory tabs. Drift is systemic, not a typo: **LifeHistory_Log = 223 distinct POPIDs** where the ledger First+Last differs from the LH name (pattern looks like a generic-cohort *reseed* of ledger names — "Marcus Hill"→"Mac Hillie", "Miguel Johnson"→"Miguel Joson" — direction-of-truth unknown), and **LifeHistory_Archive = 163**, many of which aren't name drift at all but **column-misalignment** (the `Name` cell holds event types — "Health - Major", "Promotion" — plus an apparent row-shift, e.g. POP-00132 carrying POP-00133's name). Bulk-reconciling either direction would be a destructive guess against published canon (POP-00349/00618 "Jiu Wong"/"Lucy Ferreira" are live + in published E99). **NOT touched.** Recommend: own scoped row (engine.34 ledger-integrity family) + a canon-direction decision; the archive column-misalignment is a separate writer bug. POP-00349/00618 confirmed: ledger First+Last = "Jiu Wong"/"Lucy Ferreira"; LH carries "Jordan Wong"/"Lucia Ferreira".
 
 ### ES-3: Civic source emits real-calendar dates
 
@@ -188,7 +188,7 @@ pointers:
   1. Baylight civic source emits gate milestones as cycle-form references (e.g. "gate 1 @ C{n}"), not real calendar dates. Note: civic-office agent text is civic-terminal-owned — if the fix is in the agent RULES, route the edit to civic; the structural decision (cycle-form, not calendar) lands here.
 - **Verify:** baylight decisions JSON / agent output carries no real-calendar month tokens.
 - **Absorbs ROLLOUT:** none (cross-routes to civic for the agent-text half).
-- **Status:** [ ] OPEN
+- **Status:** [→] ROUTED TO CIVIC (S267). Determined empirically: `scripts/assembleDecisions.js` only *assembles* voice-file output — it does NOT synthesize dates. The real-calendar gate dates ("Jan 14 2027 / Feb 18 / March 10 2027") live in the `MilestoneNotes` field authored by the **civic-office-baylight-authority agent**. There is **no engine-sheet script to change** — the fix is the agent emitting cycle-form gate references ("gate 1 @ C{n}"), which is a `.claude/agents/civic-office-baylight-authority/RULES.md` edit = **civic terminal's lane** (agent configs are not engine-sheet's). Open question resolved: agent-RULES half → civic. Structural decision (cycle-form not calendar) already documented here.
 
 ### ES-4: photoQA rubric — distinguish brand text from stadium-typical numerals (pairs RB-2)
 
@@ -200,7 +200,7 @@ pointers:
   2. Pair with RB-2 DJ guidance: the residual numerals a real ballpark photo always carries must be permitted.
 - **Verify:** re-run photoQA against the two C99 stadium frames → FLAG (not FAIL) on stadium numerals; a genuine brand-text frame still FAILs.
 - **Absorbs ROLLOUT:** C98 ES-5 DJ-photo lineage + pipeline.13 — note forward.
-- **Status:** [ ] OPEN
+- **Status:** [x] DONE (S267). `photoQA.js` rubric: stadium-typical signage (jersey numbers, non-canon nameplates, garbled fence ads, scoreboard glow) reclassified FLAG-not-FAIL across BOTH the tier-fidelity axis AND the negative-frame axis (the dynasty frame FAILed on axis-1 because the DJ spec's own NOT-list named jersey numbers — the carve-out overrides that). FAIL reserved for a LEGIBLE recognizable real-world brand logo/wordmark or a real public figure. **Verified live** (Haiku Vision, no regen) on the two C99 frames: `davis_return_left_field` FAIL→FLAG, `dynasty_seven_dugout_steps` FAIL→FLAG — both now printable. Commit `14e8b6ef`. Pairs with RB-2 DJ guidance (done).
 
 ### ES-5: PDF render section-key drift — EDITOR'S DESK photo silent drop
 
@@ -211,7 +211,7 @@ pointers:
   1. Either (a) normalize the apostrophe/section key so manifest-build and placement agree, OR (b) make editorial an explicit non-photo-bearing section so DJ doesn't assign a spec there and the manifest doesn't count an unrenderable placement.
 - **Verify:** a manifest placement for EDITOR'S DESK either renders or is excluded at manifest-build; no parity mismatch.
 - **Absorbs ROLLOUT:** none.
-- **Status:** [ ] OPEN
+- **Status:** [x] DONE (S267) — root cause was NEITHER (a) nor (b). Verified: apostrophe is codepoint-39 consistent across manifest + source + parsed section (no key drift), and section-matching works. The real cause: `buildSectionHtml`'s `editorial` branch *early-returned before the shared photo block*, so a DJ-assigned EDITOR'S DESK atmospheric was matched + counted in the manifest but never rendered → parity mismatch (3 img vs 4). Fix: factored a shared `pushSectionPhotos()` helper and called it in the editorial branch — the atmospheric now renders (preserved, not excluded). Verified end-to-end on e99: `Photo parity: OK (4 <img> = 4 manifest placements)`. Commit `0076562d`.
 
 ### ES-6: Post-publish stale-artifact — citizen-card failures file
 
@@ -222,7 +222,7 @@ pointers:
   1. `buildCitizenCards.js`: truncate/overwrite `citizen_card_failures_c<XX>.json` at run start, OR only write it when Errors > 0, so a stale file can't survive a clean run.
 - **Verify:** run a clean build → no stale failures file remains.
 - **Absorbs ROLLOUT:** none.
-- **Status:** [ ] OPEN
+- **Status:** [x] DONE (S267). The dump already only-wrote-on-error — which is *why* a stale file survived (a later clean run never overwrites it). Fix: clear the stale dump at run start (APPLY-only — a dry-run must not delete a real apply-run's file), resolving the cycle once via World_Config and reusing it at the error path (dropped a duplicate read). Factored `errorGateDumpPath`/`resolveErrorGateCycle`/`clearStaleErrorGateDump` so the clear target == the dump target. Regression-tested (4 new assertions). Commit `9f05e790`.
 
 ---
 
@@ -249,7 +249,7 @@ pointers:
 ## Out-of-scope (Mike-resolved / other domain)
 
 - **G-PREP1** — Mara C99 "World Moves" proposal (File 1) declined at prep per engine-primacy (OakDOT/Chaos-Cars routes to a non-existent seat with zero live engine signal; Oaks zoning ask carries canon errors + Oaks is sports-only). **Mike's call S265:** reference-only, NOT a directive, NOT routed to research-build — Mags' own review governs the assignment surface. No C100 build; chaos-cars civic teeth revisited only when the engine actually emits events. No action.
-- **G-S4 letter-eligibility script scope** — `scripts/checkLetterEligibility.js` greps every POPID in the candidates file incl. POPIDs named in an editorial "hard exclusions" line (false-positive HALT on POP-00004 Lucia, *listed as excluded*). Scope POPID extraction to the `## Candidate pool` section only. **Routes to ES** (script fix) — listed here as the ES half of T8; folded into ES backlog (small, bundle with ES-6 window).
+- **G-S4 letter-eligibility script scope** — `scripts/checkLetterEligibility.js` greps every POPID in the candidates file incl. POPIDs named in an editorial "hard exclusions" line (false-positive HALT on POP-00004 Lucia, *listed as excluded*). Scope POPID extraction to the `## Candidate pool` section only. **Routes to ES** (script fix) — listed here as the ES half of T8; folded into ES backlog (small, bundle with ES-6 window). **[x] DONE (S267)** — `extractCandidatePopIds` now scopes to the `## Candidate pool` section when present, whole-string fallback for `--popids`; reconstructed the failure + regression-tested (9/9). Commit `9f05e790`.
 
 ---
 
@@ -261,5 +261,6 @@ pointers:
 
 ## Changelog
 
+- 2026-06-22 — **ES track executed (S267, engine-sheet).** 5 of 7 shipped + verified: G-S4 (candidate-pool scope, 9/9), ES-6 (stale-dump clear, 4 new assertions), ES-5 (editorial photo render — parity OK 4=4 on e99), ES-1 (validator/emitter 4 sub-fixes — validator 53, emitter 72, canonBlocklist 12), ES-4 (photoQA stadium carve-out — both C99 frames FAIL→FLAG, live-verified). Commits `9f05e790` / `0076562d` / `2f8b81a3` / `14e8b6ef`. **ES-3 ROUTED TO CIVIC** (the gate-date fix is a civic-office-baylight agent-RULES edit; no engine-sheet script synthesizes the dates). **ES-2 ESCALATED — NOT shipped:** the scoped 2-citizen card-name reconcile is the tip of a systemic finding (223 LifeHistory_Log name drifts that look like a generic-cohort ledger reseed + 163 LifeHistory_Archive rows, many column-misaligned/row-shifted). Bulk reconcile = destructive guess against published canon; needs Mike's canon-direction call + likely its own engine.34-family row. Row stays `in-progress` until ES-2/ES-3 land.
 - 2026-06-22 — **RB track COMPLETE (S267, research-build).** All 7 RB rows executed + verified: RB-1 (sift phantom-reporter fence + write-edition launch-prompt quote gate + letters-desk self-cert ban — G-W2 home corrected from desk RULES to the launch prompt because brief-led mode trims RULES), RB-2 (DJ sports-frame guidance — secondary half; ES-4 rubric still owns the primary fix), RB-3 (sift N-series slot + write-edition QT `---`), RB-4 (sift's four screens), RB-5 (Davis POPID, POPIDs re-verified deterministically), RB-6 (post-publish gate path + time budget, nesting confirmed live), RB-7 (write-edition reviewer-lane discipline). Skill versions bumped: sift 2.0.2→2.0.3, write-edition 2.4→2.5, post-publish 1.8→1.9. **ES track (ES-1…ES-6 + G-S4) remains OPEN — engine-sheet.** Row stays `in-progress` until ES ships.
 - 2026-06-21 — Initial draft (S265, research-build). C99 triage per [[GAP_LOG_TRIAGE_PLAYBOOK]]. ~40 gaps → 11 themes; T2 trackerUpdates RECURRENCE folds to civic.14 Phases 2–3 (unshipped C98 fix); HIGH canon-fidelity cluster (T1 phantom-reporter / VERIFY-gate fabrication / invented-citizen) extends C98 RB-1; photoQA sports-filter retune (T6) continues the C98 DJ-photo lineage. Tier-1 dial-essence backfill explicitly held OUT (separate design row). Filed as governance.42.

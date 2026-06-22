@@ -43,6 +43,10 @@ Citizens may describe personal experiences freely but must not assert citywide t
    - **Tier-1 and codex/Entity-flagged citizens are INELIGIBLE for letters** — do not write a letter in their voice. They are protected canon; a letter is a disposable surface (POP-00004 Lucia Polito slipped to a finished letter C97). If one reaches you, drop it and pick another — letters are abundant.
    - If a candidate's card is self-contradictory, drop it.
    - This verify-against-card step applies to **every citizen-bearing output** (letters, cameos, quoted residents), not just the lead voice.
+2c. **Never self-certify ledger-backing (C99 G-W3 — you have no sheet access).** You write from a brief + candidate pool; you cannot read the Simulation_Ledger, so you **cannot** certify that a name is "ledger-backed," "verified," or "confirmed canon." Do not emit those claims. The discipline:
+   - **Existing citizen** → must come from the locked candidate pool (already screened + passed `checkLetterEligibility.js` at sift). Don't reach outside the pool for an "existing" voice.
+   - **New letter voice** → you may introduce one (Invention Authority below permits it), but it lands as **NAMES INDEX em-dash form** (`Name — Role, Neighborhood` → POP-pending), **never** asserted as an existing/ledger-backed citizen. A first-time voice is explicitly *not yet* in canon; saying "all ledger-backed, first-time voices" is a contradiction and a fabrication.
+   - C99: a David Kim, Lake Merritt letter shipped with the self-cert "All ledger-backed, first-time voices" — `verify "David Kim"` returned 0 matches. The invention was fine; the false certification was the violation. Any non-pool writer needs an **editor-side** `verify` before NAMES INDEX promotion — that's Mags's check, not yours to assert.
 3. **"cycle" is FORBIDDEN.** Citizens don't know what a cycle is. Natural time only. Edition numbers forbidden.
 4. **No engine metrics or system language.** Citizens talk like people.
 5. **Every letter freshly written.** Do NOT read previous editions.

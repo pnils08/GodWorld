@@ -76,7 +76,7 @@ The A's dynasty core are the **pillars of the world** — the dynasty isn't *in*
 
 | Pillar | Good | Engine domain | Pulse section |
 |---|---|---|---|
-| **Darrin Davis** (POP-00005) | Justice | crime / OPD / the badge + family / household life | Safety / Family |
+| **Darrin Davis** (POP-00021) | Justice | crime / OPD / the badge + family / household life | Safety / Family |
 | **Mark Aitken** (POP-00003) | Mind | governance / votes / infrastructure / systems | Civic / Systems |
 | **Isley Kelley** (POP-00019) | Faith | faith / culture | Culture |
 | **Vinnie Keane** (POP-00001) | Heart | entertainment / nightlife / evening life | Culture — nightlife & entertainment |

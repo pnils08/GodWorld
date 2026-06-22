@@ -1,8 +1,8 @@
 ---
 name: sift
 description: Editorial planning for the edition. Reads sheet-primary canon (Oakland_Sports_Feed, Riley_Digest, Initiative_Tracker, Simulation_Ledger) + canon archive + NEWSROOM_MEMORY + city-hall production log. Proposes stories under cadence caps, locks slate via Mike approval gate, emits one brief per article slot + dispatch.json + letters candidate pool. The game moment.
-version: "2.0.2"
-updated: 2026-06-20
+version: "2.0.3"
+updated: 2026-06-22
 tags: [media, active]
 effort: high
 disable-model-invocation: true
@@ -111,7 +111,7 @@ v2 reads three contract documents to produce its outputs. Read them BEFORE runni
 | [[../../../docs/media/brief_template_v2_exemplar\|brief_template_v2_exemplar]] | Reference at Step 7 | Canonical exemplar (placeholders) + worked structure. ADR-0006 Contract A. |
 | [[../../../docs/media/dispatch_schema\|dispatch_schema]] | Before Step 8 dispatch emission | dispatch.json STRICT SCHEMA — top-level + articles[] + quickTakes[] + letters. Downstream consumer field requirements. |
 | [[../../../docs/media/sift_triage_vocabulary\|sift_triage_vocabulary]] | Before Step 5 triage | Six-decision vocabulary + decision-tree diagnostic + required JSON fields per decision. |
-| [[../../../docs/media/EDITION_FORMAT_TEMPLATE\|EDITION_FORMAT_TEMPLATE]] | Background — section / slot canon | Section labels + slot codes (FP1, ED1, C1, C2, CU1, B1, S1, S2, S3, O1, L1, QT1...). |
+| [[../../../docs/media/EDITION_FORMAT_TEMPLATE\|EDITION_FORMAT_TEMPLATE]] | Background — section / slot canon | Section labels + slot codes (FP1, ED1, C1, C2, N1, B1, S1, S2, S3, O1, L1, QT1…) — culture is **N-series**, not `CU` (RB-3 / G-W10). |
 
 ---
 
@@ -255,7 +255,10 @@ For every candidate proposal, enrich with verified canon pointers + three-layer 
 - **Loop-bot nightly reflections are impressionistic, NOT a verification source.** Any citizen or institution name sourced from a loop-bot reflection (or any citizen-loop wake text) must pass `lookup_citizen` / `lookup_faith_org` / `lookup_business` before it anchors a brief. C98: a reflection anchored "Mateo Walker" (bay-tribune canon only, no Sim_Ledger card) and "Dario Vega" (pure reflection invention, no layer at all) — neither is ledger-backed. An unverified reflection name is a fabrication surface.
 - **Prior-edition canon-recall is not self-certifying.** A name or fact pulled from `search_canon` / NEWSROOM_MEMORY because "we published it before" still gets a live `lookup_*` / ledger check at brief-time — published-once ≠ ledger-true (the canon-layer-drift case, Step 5).
 - **Real-world-institution fence.** A real Oakland specific (school, church, business, venue) surfaced by canon-recall is NOT automatically canon. Flag it `status-TBD` and keep the canon generic — "a West Oakland high school," not "McClymonds High" — unless `lookup_*` / Sim_Ledger / bay-tribune confirms the specific exists in-world. C98: sift seeded real-but-uncanon "McClymonds High" into the Quintero brief — a real-world leak at the sift layer. Extends the S258 RB-6 geographic fence (Step 8) backward to name-introduction time.
-- **Age resolves against the ledger at brief-time.** Every citizen age in a brief is `2041 − BirthYear` read live from `lookup_citizen` / Sim_Ledger BirthYear — never carried from a reflection, a prior edition, or a derived doc. C98: Quintero POP-00050 drifted 23-vs-24 between recall and ledger.
+- **Age resolves against the ledger at brief-time.** Every citizen age in a brief is `2041 − BirthYear` read live from `lookup_citizen` / Sim_Ledger BirthYear — never carried from a reflection, a prior edition, or a derived doc. C98: Quintero POP-00050 drifted 23-vs-24 between recall and ledger. **Any research scout / sub-agent you dispatch to compute ages must be told the anchor explicitly in its prompt** — `age = 2041 − BirthYear`, NOT the current real year. C99: two scouts computed off 2026 (Varek "23/31" vs correct 38, Ramos "29" vs correct 44); the anchor was missing from the dispatch prompt, so they defaulted to wall-clock. (RB-4, G-S3.)
+- **A "phantom" / "barred" reporter flag is verified, never obeyed blind (RB-1, C99 G-W1).** Any flag that a byline is a "phantom reporter," "barred byline," or "must never appear" gets checked against `lookup_citizen` + [[../../../.claude/agents/REPORTER_DESK_INDEX|REPORTER_DESK_INDEX]] BEFORE it shapes a brief. A name that resolves to a real citizen tagged `media-reporter` / a Tribune reporter on the roster is a **REAL reporter** — route the story to them as a candidate writer, never bar them and never reassign their beat. Bars apply ONLY to real-world-leak names (the REAL_NAMES_BLOCKLIST class), not to canon reporters. C99: sift barred **Elliot Graye POP-00012** (canon faith-beat reporter) as a "phantom, must never appear" and reassigned his own faith-convergence story to Maria Keen; the operator compounded it across two turns by parroting "phantom" without reading POP-00012.
+- **Retired coverage-anchor screen (RB-4, C99 G-S6).** Before a civic-named citizen anchors a handoff or brief, screen against the retired-anchor list — **Beverly Hayes POP-00772 is RETIRED as a coverage anchor (S229)** and must not be re-anchored. If a city-hall handoff or candidate names a retired anchor, drop the anchor and re-source the thread from a live citizen.
+- **Name-collision → verify at source, stay generic until confirmed (RB-4, C99 G-S5).** When a surfaced name collides with a distinct canon figure (C99: "Marcus Osei," an MTC senior planner, vs the canonical **Deputy Mayor Marcus Osei**), do NOT assume they're the same person. Flag verify-at-source and keep the reference generic ("a senior MTC planner") until `lookup_citizen` confirms which POPID — a wrong merge fabricates a role onto a real citizen.
 
 This hardens into the skill text a discipline the S256/S258 candidate-integrity pass already enforced by eye — all four C98 instances were caught pre-brief by operator discipline, not by the skill. The rule survives a discipline lapse; it is not a net-new mechanism.
 
@@ -378,7 +381,7 @@ This is the slate-locking step. Enforce caps, apply Engine A priority data, rend
 | Other sections | ≤ 2-3 articles | CULTURE / BUSINESS / OPINION |
 | INIT rotation | ≤ 3 INITs per edition | Per cycle, avoid stale initiative re-coverage |
 
-**Engine A priority data (T4.1):** Read `Story_Seed_Deck` cols M-R for the current cycle. For each proposal:
+**Engine A priority data (T4.1):** Read `Story_Seed_Deck` cols M-R for the current cycle. **The cycle value lives in column index 1 (header `Cycle`), with the header on row 0 — filter rows on col 1, NOT col 0 (RB-4, C99 G-S1).** A col-0 filter returns 0 matches despite a full deck (C99: 48 real rows, all missed). For each proposal:
 
 1. Match seed by `sourceSignal` text against deck rows.
 2. Pull `priorityScore` (col M), `consequenceFloor` (col N), `bylineCandidate` (col P), `bylineConfidence` (col Q), `priorityComponents` (col O), `bylineRationale` (col R).
@@ -498,7 +501,7 @@ CIVIC
   C2 | <Reporter> | <Headline> [rationale suffix]
 
 CULTURE
-  CU1 | <Reporter> | <Headline> [rationale suffix]
+  N1 | <Reporter> | <Headline> [rationale suffix]
 
 SPORTS
   S1 | <Reporter> | <Headline> [rationale suffix]
@@ -574,7 +577,7 @@ Emit ONE brief file PER article slot at:
 output/reporters/{reporter-slug}/c{XX}_{SLOT}_brief.md
 ```
 
-`reporter-slug` is lowercased reporter name with hyphens (`maria-keen`, `p-slayer`, `jordan-velez`). `{SLOT}` is the slot code (FP1, C1, C2, CU1, B1, S1, S2, S3, O1).
+`reporter-slug` is lowercased reporter name with hyphens (`maria-keen`, `p-slayer`, `jordan-velez`). `{SLOT}` is the slot code (FP1, C1, C2, N1, B1, S1, S2, S3, O1 — culture is N-series, never `CU`).
 
 Brief shape per v2 template (canonical):
 
@@ -620,7 +623,7 @@ See [[brief_template_v2_exemplar]] for the placeholder-filled reference brief.
 
 **Word-count target:** 250-500 words per brief. ≥500 drifts toward v1 over-curation; ≤250 risks under-specifying angle.
 
-**For multi-slot reporters** (e.g., Maria Keen at C2 + CU1): emit TWO brief files — `maria-keen/c94_C2_brief.md` AND `maria-keen/c94_CU1_brief.md`. NEVER pack multiple articles into one `c94_brief.md` file.
+**For multi-slot reporters** (e.g., Maria Keen at C2 + N1): emit TWO brief files — `maria-keen/c94_C2_brief.md` AND `maria-keen/c94_N1_brief.md`. NEVER pack multiple articles into one `c94_brief.md` file.
 
 **Quick-take briefs** (slimmer variant): emit at `output/quick-takes/c{XX}_{QT_SLOT}_brief.md`. Reporter field may be null (desk default voice).
 
@@ -686,6 +689,7 @@ Emit `output/dispatch_c{XX}.json` per the STRICT SCHEMA. Single dispatch file pe
 - Every `articles[].briefFile` MUST resolve to an existing file on disk.
 - `slot` values MUST be unique within `articles[]`.
 - `section` MUST be from underscored-routing allowlist (NOT spaced form, NOT `NEIGHBORHOODS`, NOT `QUICK_TAKES`).
+- **Culture `slot` codes MUST be `N{n}` (N1, N2…), never `CU{n}` (RB-3, C99 G-W10).** Culture is the **N-series** in the parser's canonical Slot regex (`^(FP\d+|ED|C\d+|N\d+|S\d+|L\d+|O\d+|B\d+|CH\d+|Q\d+)$`); `CU1` is not in it. Emitting `CU1` forces the compile to remap it (C99 it did, CU1→N1) — emit `N{n}` at source so nothing downstream has to guess.
 - `headline` MUST be real (not "untitled" / "TBD" / "placeholder" / empty).
 - `reporter` MUST be `role: reporter` in REPORTER_DESK_INDEX.
 - **Canon-fence validation (S258 RB-6, closes G-W-C97-4):** any neighborhood / geographic fence asserted about a named faith org, business, or cultural venue in a `voiceDirective` or brief MUST be verified against its authoritative lookup (`lookup_faith_org` / `lookup_business` / `lookup_cultural`) before it's written — never assert a neighborhood from memory. C97 a fence placed Foothill Baptist in West Oakland; it's East Oakland.
@@ -903,6 +907,7 @@ Full chain: `/run-cycle` → `/city-hall-prep` → `/city-hall` → `/sift` → 
 
 ## Changelog
 
+- 2026-06-22 (S267, research-build) — v2.0.3 minor (governance.42 RB-1/RB-3/RB-4). Step 4 provenance fence gains three screens + a scout-age clause: **phantom/barred-reporter flags get verified against `lookup_citizen` + REPORTER_DESK_INDEX before they shape a brief** (a `media-reporter` name is a REAL reporter — route, never bar; C99 G-W1 Elliot Graye POP-00012); **retired coverage-anchor screen** (Beverly Hayes POP-00772, G-S6); **name-collision verify-at-source** (Marcus Osei MTC-planner vs Deputy Mayor, G-S5); **research scouts must be handed the 2041 age-anchor in their prompt** (G-S3). Step 6 names the `Story_Seed_Deck` cycle column index (col 1, header row 0 — col-0 filter false-returns 0, G-S1). Step 8 + slot-code examples: **culture slots emit `N{n}`, never `CU{n}`** (parser N-series; G-W10) — sift's own CU1 examples corrected. Net-new rule text, no mechanism change.
 - 2026-06-20 (S265, research-build) — v2.0.2 minor (governance.41 RB-1). Step 4 gains the **provenance fence**: loop-bot reflections are impressionistic not a verification source; prior-edition canon-recall is not self-certifying; real-world institutions surfaced by recall flag `status-TBD` and stay generic until lookup confirms; age resolves against ledger BirthYear at brief-time. Hardens into skill text the candidate-integrity discipline the S256/S258 pass enforced by eye. Closes C98 G-S2 / G-S3 / G-S4 / G-W (McClymonds). Net-new rule text, no mechanism change.
 - 2026-05-23 (S228, research-build) — v2.0 ship. Pipeline.24 Task 6. Full SKILL.md replacement consuming Tasks 3 (brief_template_v2) + 4 (dispatch_schema) + 5 (sift_triage_vocabulary). Eleven steps (0 retired + 1-11). Closes: G-S1 / G-S2 / G-S3 / G-S5 / G-S8 / G-S13 / G-S14 / G-S21 / G-W30 / G-W31 / G-W32 / G-W33 / G-W35 / G-W39 / G-PR2 / G-PR6 (cross-link). Preserves Engine A T4.1 (priority data consumption at Step 6), Engine B T3.8 (byline shadow log at Step 6 post-lock), T4.2 (confidence threshold — still shadow), T5.2 (rationale suffix rendering at Step 6). v1.x companion `brief_template.md` carries DEPRECATED banner; will archive after first clean v2 cycle. Dry-run on C94 (Task 7) + live-run on C95 (Task 8) remain.
 - 2026-05-23 (S228 morning) — v1.3 final state captured before v2.0 rewrite.

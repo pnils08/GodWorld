@@ -1,8 +1,8 @@
 ---
 name: post-publish
 description: Close the feedback loop. Canonize to Supermemory, update world-data, write ratings to sheets, grade reporters, update criteria files, update newsroom memory. Type-aware — edition, interview, supplemental, dispatch all converge here.
-version: "1.8"
-updated: 2026-05-30
+version: "1.9"
+updated: 2026-06-22
 tags: [media, active]
 effort: high
 disable-model-invocation: true
@@ -269,7 +269,7 @@ Side effect: takes ~60 seconds. Harmless — desk packets get rebuilt anyway pre
 
 Plan reference: [[../../../docs/plans/2026-04-26-discord-bot-edition-currency]] Task 1 (S180 surfaced; S184 wired here).
 
-**Verification gate:** `output/desk-packets/base_context.json` mtime updated; `cycle` field in the JSON matches `<XX>`.
+**Verification gate:** `output/desk-packets/base_context.json` mtime updated; the cycle field matches `<XX>` — the field is **nested**, so check `jq '.baseContext.cycle' output/desk-packets/base_context.json`, NOT `jq '.cycle'` (top-level `.cycle` returns `null` and false-alarms; the top-level keys are `baseContext` / `bondStats` / `canon` / `householdStats`). (G-P-C99-1.)
 
 ### Step 6: Grade Edition (`--type edition` only)
 ```bash
@@ -466,7 +466,7 @@ Substeps vary widely in wall time. Surface the most expensive ones up front so o
 |---------|-----------|-------|
 | 1a wiki ingest | ~30s | Fast, single API call per chunk |
 | 1b text ingest | ~30s | Same |
-| 2a citizen cards (--apply) | **10+ min** | Loops 800+ ledger rows; the largest single substep. ~4 min in dry-run. |
+| 2a citizen cards (--apply) | **~30-40 min** | Loops 800+ ledger rows; the largest single substep. The `--apply` path **batch-pauses 60s every 200 writes** (rate-limit guard), so wall time scales with ledger size — C99 ran ~36 min, not the ~10 min an unpaused loop would suggest. ~4 min in dry-run (no writes, no pauses). (G-P-C99-2a.) |
 | 2a-cul cultural cards | ~10s per CUL-ID | Negligible at typical 1-3 IDs |
 | 2c world summary | ~5s | Single API write |
 | 4 coverage ratings | ~30s | Sheet write |
@@ -521,6 +521,7 @@ After `/write-edition` (edition path) or after `/interview`, `/dispatch`, `/writ
 
 ## Changelog
 
+- 2026-06-22 — v1.9 (S267, research-build). governance.42 RB-6. **Step 5b verification gate path fix:** the base_context.json cycle field is **nested** — gate now checks `jq '.baseContext.cycle'`, not the top-level `jq '.cycle'` (which returns `null` and false-alarms; verified live — top-level keys are `baseContext`/`bondStats`/`canon`/`householdStats`). Closes G-P-C99-1. **Step 2a Time Budget bump:** `~10+ min` → `~30-40 min`, with the `--apply` batch-pause cadence (60s every 200 writes) noted as the reason wall time scales with ledger size (C99 ran ~36 min). Closes G-P-C99-2a. Doc-text only, no code change.
 - 2026-04-17 — Initial 13-step skill (S156, post-publish formalized).
 - 2026-04-26 — v1.1 (S180, research-build). Type-aware: `--type {edition|interview|supplemental|dispatch}` flag added. Per-type substep matrix encodes default skips; `--skip-<name>` required only for matrix-✓ opt-outs. Verification gate declared on every substep. Coverage ratings (Step 4) explicitly C93-gated for non-edition. Convergence point for the unified non-edition publishing pipeline (plan [[plans/2026-04-26-non-edition-publishing-pipeline]] T3).
 - 2026-04-30 — v1.4 (S189, research-build). Wired E6 + E8 from [[archive/plans/2026-04-30-dispatch-gap-followups]]. **Step 2a-cul cultural-card refresh** (matrix-✓ for dispatch / interview / supplemental when CUL-IDs in NAMES INDEX): `buildCitizenCards.js` is Sim_Ledger-only, so cultural-only entities (Marin Tao type, Brody Kale type) need a parallel `buildCulturalCards.js --apply --cul <CUL-ID>` invocation per CUL-ID parsed from NAMES INDEX. Closes the S188 Brody Kale unrefreshed gap. **Step 5 verification gate cross-check**: after `ingestPublishedEntities.js` reports its parsed entity count, run `verifyNamesIndexParse.js <source> --expected <N>` to independently count NAMES INDEX rows in the source `.txt` — exit 1 (block publish) if counts disagree. Defense-in-depth against future parser regressions reintroducing the S188 silent-zero false-success failure mode. Step 13 checklist + Step 12 production-log section both gain the new substep row.

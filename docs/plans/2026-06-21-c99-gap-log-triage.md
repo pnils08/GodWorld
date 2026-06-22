@@ -75,7 +75,7 @@ pointers:
   3. Letters-desk: scope to the locked verified pool only; a brief-led agent must NOT emit a "ledger-backed" certification it cannot substantiate (no sheet access). Any non-pool writer requires an editor-side `verify` before NAMES INDEX promotion.
 - **Verify:** `grep -n "phantom\|barred\|media-reporter\|VERIFY before quoting\|ledger-backed" .claude/skills/sift/SKILL.md .claude/agents/letters-desk/RULES.md` → fence + cert-ban present.
 - **Absorbs ROLLOUT:** extends C98 governance.41 RB-1 provenance fence (note forward, don't restate).
-- **Status:** [ ] OPEN
+- **Status:** [x] DONE (S267). G-W1 → sift Step 4 provenance fence (phantom/barred-reporter verify-before-bar). **G-W2 home corrected: NOT desk RULES — the universal `/write-edition` Step 1 launch prompt + Step 2 Pass-2 review.** Under brief-led mode the agent reads only brief + IDENTITY.md (write-edition §Rules trims RULES.md), so a quote gate in desk RULES would never fire; the launch prompt is the one channel every reporter receives. G-W3 → letters-desk RULES new Hard Rule 2c (no self-cert of ledger-backing; new voices are POP-pending em-dash, never "ledger-backed").
 
 ### RB-2: DJ photo-direction — sports/stadium frame guidance (pairs ES-4 rubric)
 
@@ -87,7 +87,7 @@ pointers:
   2. Coordinate with ES-4: the fix is primarily rubric-side (distinguish brand text from stadium-typical numerals); DJ guidance is the secondary half.
 - **Verify:** `grep -n "stadium\|jersey\|ballpark" .claude/agents/dj-hartley/RULES.md` → guidance present.
 - **Absorbs ROLLOUT:** continues C98 RB-3 DJ-photo lineage + pipeline.13 (note forward).
-- **Status:** [ ] OPEN
+- **Status:** [x] DONE (S267) — **secondary half only.** dj-hartley RULES new §"Sports Frames — Don't Self-Censor to Zero" (keep speccing the high-value sports frame; peripheral stadium numerals are FLAG-not-FAIL once ES-4 lands; still direct jersey-back-as-subject-plane away). **The photo defect is NOT fully closed — the primary fix is ES-4 (photoQA rubric, engine-sheet, still OPEN).** Until ES-4 ships a stadium frame may still FAIL on peripheral numerals.
 
 ### RB-3: Parser/validator brittleness — sift/template half (CU→N slot, QT separator)
 
@@ -100,7 +100,7 @@ pointers:
   2. write-edition QT sub-template: state the `### head / By … / --- / body` block REQUIRES the `---` separator after the byline.
 - **Verify:** `grep -n "N-series\|N{n}\|CU" .claude/skills/sift/SKILL.md` + `grep -n "\-\-\-" .claude/skills/write-edition/SKILL.md` → both present.
 - **Absorbs ROLLOUT:** none (skill-text hardening).
-- **Status:** [ ] OPEN
+- **Status:** [x] DONE (S267). Sift Step 8 validation: culture slots emit `N{n}`, never `CU{n}` (parser N-series); sift's own CU1 examples corrected. write-edition Step 3 QT handling: the QT block is the same 4-line article shape — `### head` / `By … | Bay Tribune Section` / `---` / body — with the `---` after byline REQUIRED (parser counts bylines + binds; omission throws the fail-loud guard). Note: EDITION_FORMAT_TEMPLATE.txt has no CU slot codes (only a CULTURE header) so no template edit needed — line 114's claim that it lists CU1 was stale, now fixed in sift.
 
 ### RB-4: Sift pipeline fragility + canon screens
 
@@ -113,7 +113,7 @@ pointers:
   3. Add retired-anchor screen + name-collision verify-at-source to the sift canon pass (Beverly Hayes class + Osei class).
 - **Verify:** `grep -n "col 1\|2041\|retired-anchor\|Beverly" .claude/skills/sift/SKILL.md` → screens present.
 - **Absorbs ROLLOUT:** none.
-- **Status:** [ ] OPEN
+- **Status:** [x] DONE (S267). All four screens in sift: seed cycle col-1 index (Step 6); 2041 age-anchor clause for dispatched research scouts (Step 4 age bullet); retired coverage-anchor screen (Beverly Hayes POP-00772, Step 4 fence); name-collision verify-at-source (Marcus Osei, Step 4 fence).
 
 ### RB-5: Canon rule-file fix — Davis POPID in newsroom.md Five Goods table
 
@@ -124,7 +124,7 @@ pointers:
   1. Correct the Five Goods table: Darrin Davis → POP-00021. Confirm no other row in the table mis-attributes POP-00005.
 - **Verify:** `grep -n "Davis\|POP-00005\|POP-00021" .claude/rules/newsroom.md` → Davis = POP-00021; POP-00005 = Mags only.
 - **Absorbs ROLLOUT:** none.
-- **Status:** [ ] OPEN
+- **Status:** [x] DONE (S267). newsroom.md Five Goods table: Darrin Davis → POP-00021. POPIDs re-verified deterministically pre-edit via `queryLedger.js` (POP-00021 = Darrin Davis, POP-00005 = Mags Corliss) — not the semantic tool, per the exact-POPID rule. No other table row mis-attributes POP-00005.
 
 ### RB-6: Post-publish gate text — base_context.json path + Step 2a time budget
 
@@ -136,7 +136,7 @@ pointers:
   2. Step 2a Time Budget: bump to ~30–40 min and note the batch-pause cadence.
 - **Verify:** `grep -n "baseContext.cycle\|30-40 min\|batch-pause" .claude/skills/post-publish/SKILL.md` → both present.
 - **Absorbs ROLLOUT:** pipeline.37 (note forward).
-- **Status:** [ ] OPEN
+- **Status:** [x] DONE (S267). Step 5b gate → `jq '.baseContext.cycle'` (nesting confirmed live: top-level `.cycle`=null, `.baseContext.cycle`=99). Step 2a Time Budget → ~30-40 min + batch-pause cadence (60s/200 writes) noted.
 
 ### RB-7: Operator discipline — run documented lanes only inside a skill
 
@@ -147,7 +147,7 @@ pointers:
   1. write-edition Step 4: add an explicit note — inside a skill run, run ONLY the documented review lanes; capture issues in the gap log as they surface; do not substitute an out-of-band reviewer (`advisor`) or narrate decisions back to the user. (The `advisor` tool is for pre-substantive-work checkpoints in open sessions, not mid-skill.)
 - **Verify:** `grep -n "documented lanes\|out-of-band\|advisor" .claude/skills/write-edition/SKILL.md` → guardrail present.
 - **Absorbs ROLLOUT:** none.
-- **Status:** [ ] OPEN
+- **Status:** [x] DONE (S267). write-edition Step 4 reviewer-lane boundary note: run the fixed lane sequence, capture gaps as they surface, no out-of-band `advisor` mid-skill, no narration to chat, no freelanced slate/publish decisions. Quotes Mike's C99 line.
 
 ---
 
@@ -261,4 +261,5 @@ pointers:
 
 ## Changelog
 
+- 2026-06-22 — **RB track COMPLETE (S267, research-build).** All 7 RB rows executed + verified: RB-1 (sift phantom-reporter fence + write-edition launch-prompt quote gate + letters-desk self-cert ban — G-W2 home corrected from desk RULES to the launch prompt because brief-led mode trims RULES), RB-2 (DJ sports-frame guidance — secondary half; ES-4 rubric still owns the primary fix), RB-3 (sift N-series slot + write-edition QT `---`), RB-4 (sift's four screens), RB-5 (Davis POPID, POPIDs re-verified deterministically), RB-6 (post-publish gate path + time budget, nesting confirmed live), RB-7 (write-edition reviewer-lane discipline). Skill versions bumped: sift 2.0.2→2.0.3, write-edition 2.4→2.5, post-publish 1.8→1.9. **ES track (ES-1…ES-6 + G-S4) remains OPEN — engine-sheet.** Row stays `in-progress` until ES ships.
 - 2026-06-21 — Initial draft (S265, research-build). C99 triage per [[GAP_LOG_TRIAGE_PLAYBOOK]]. ~40 gaps → 11 themes; T2 trackerUpdates RECURRENCE folds to civic.14 Phases 2–3 (unshipped C98 fix); HIGH canon-fidelity cluster (T1 phantom-reporter / VERIFY-gate fabrication / invented-citizen) extends C98 RB-1; photoQA sports-filter retune (T6) continues the C98 DJ-photo lineage. Tier-1 dial-essence backfill explicitly held OUT (separate design row). Filed as governance.42.

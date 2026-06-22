@@ -1,8 +1,8 @@
 ---
 name: write-edition
 description: Execute the edition from sift output. Launch reporters, review articles, compile, validate, Mara audit, publish. Mechanical when sift is right.
-version: "2.4"
-updated: 2026-06-11
+version: "2.5"
+updated: 2026-06-22
 tags: [media, active]
 effort: high
 disable-model-invocation: true
@@ -63,9 +63,12 @@ ARTICLE — {headline}
 Read your brief at {briefFile}. Read your IDENTITY.md.
 Editorial direction: {voiceDirective}
 Use ONLY citizens named in the brief. Write to {outputPath}.
+QUOTE DISCIPLINE: attribute a direct quote to a citizen ONLY when the verbatim line is supplied in your brief (or the packet it cites). If the brief says "VERIFY before quoting," that is a HARD STOP — no quote unless the exact filed statement is in hand; otherwise paraphrase the action. A synthesized attributed quote is the highest-severity fabrication class.
 Do NOT read other files — write.
 ```
 Launch via the `{desk}` agent (the dispatch entry names it). `{reporter}` + `{briefFile}` + `{outputPath}` come straight off the entry; no lookups.
+
+**Why the QUOTE DISCIPLINE line is in the launch prompt, not desk RULES (RB-1, C99 G-W2).** Under brief-led mode the agent reads only its brief + IDENTITY.md — desk RULES.md is trimmed out (see §Rules) — so a quote gate placed in RULES would never fire. The launch prompt is the one channel every reporter receives, so the universal gate lives here. C99: Jordan Velez ran a synthesized quote *"These should have been on the record two cycles ago"* attributed to Keisha Ramos despite the B1 brief's explicit *"VERIFY before quoting"* gate; the actual filed line was *"The process is clean — and now it's documented."* Step 2 Pass 2 (below) is the editor-side backstop.
 
 **Unnamed-reporter QT sub-template (G-W49).** Quick-Take entries in `dispatch.quickTakes[]` may carry `reporter: null` (no beat reporter assigned — the QT is a compile-time short piece). Do NOT invent a reporter name. Launch the `{desk}` agent with:
 ```
@@ -119,6 +122,7 @@ Beat is editor-judgment per launch unless the dispatch.json names the agent. Whe
 - Are citizen names correct? (verify any you're unsure of via MCP)
 - Does the voice match the reporter?
 - Any fabricated facts, stats, game results?
+- **Any direct attributed quote not traceable to the brief / cited packet? (RB-1, G-W2)** A quote that reads plausible but isn't the citizen's filed line is fabrication — check every attributed quote against the brief's supplied statement; if the brief said "VERIFY before quoting" and the reporter quoted anyway, cut or paraphrase. In-scene reporter-range quote invention (Step §Rules) is allowed craft; off-scene synthesized attribution to a named civic figure is not.
 - Any calendar dates that should be cycle references?
 - Any engine language?
 - Any names not in the brief? (hallucination flag)
@@ -271,7 +275,14 @@ This is the measurement-integrity baseline. The review lanes exist to measure wh
 **Update production log** with compile details (front page, total articles, edition path).
 
 **QUICK TAKES handling (S227, closes G-W44).** /sift slates sometimes carry "Quick Takes" (QT) entries; the section allowlist has no QUICK TAKES section. Two routes:
-- **(a) Fold into existing section** — if a QT has a topical home, place it as a standalone short piece inside CIVIC / CULTURE / etc. with its own `#` headline + `By Reporter | Bay Tribune Section` block. No QT separator needed; it reads as a short article.
+- **(a) Fold into existing section** — if a QT has a topical home, place it as a standalone short piece inside CIVIC / CULTURE / etc. It reads as a short article and therefore takes the **same canonical block as any article — all four lines required (RB-3, C99 G-W11):**
+  ```
+  ### {headline}
+  By {Reporter} | Bay Tribune {Section}
+  ---
+  {body}
+  ```
+  The `---` separator after the byline is **REQUIRED**, not optional. `lib/editionParser.js` counts a byline-bearing article by the `^By\s+` line and binds it to the headline; the `---` is what closes the byline block so the body registers. Omitting it (C99: the first QT compile) makes the parser undercount bylines vs ARTICLE TABLE rows and throws the fail-loud `bylineArticles.length !== rows.length` guard. Headline is `### ` (H3), never `# ` (H1) — same parser contract as Step 3 ¶Parser contract.
 - **(b) Drop from the cycle** — if no reporter source material exists or the QT lacks anchor (no civic-office statement for an Okoro mini-take, no DJ photo for a walk feature), cut it from compile. Don't carry through to a half-written placeholder.
 
 Default: (a) when source material exists, (b) when it doesn't. Editor's Desk may also absorb spine framing the QT was carrying — that's the third path. The intent of QT was lightweight texture, not architectural separation; the section allowlist deliberately omits a QT section so texture lands inside topical sections.
@@ -349,6 +360,8 @@ Final Arbiter (Step 5.5) MUST read `editorOverride[]` and demote any overridden 
 **Update production log** with capability review counts (passed/total, blocking, advisory) and any overrides taken.
 
 ## Step 4: Validation + Rhea (Sourcing Lane)
+
+**Reviewer-lane discipline — run the documented lanes, nothing else (RB-7, C99 G-W12).** From here through Step 5.5, the review is the **fixed lane sequence**: validateEdition → Rhea → cycle-review → Mara → capability → Final Arbiter. Run each lane and **capture every issue it surfaces into the cycle gap log (G-W*) as you go.** Do NOT substitute an out-of-band reviewer — in particular, do **not** call the `advisor` tool here or narrate its reasoning back into chat (that burns Mike's tokens for a check the lanes already do), and do not freelance slate/publish decisions outside the lanes. The `advisor` tool is for pre-substantive-work checkpoints in an open session, never mid-skill. Mike, C99, explicit: *"if you aren't running the skill and reporting the gaps this is a complete waste."* If a lane is genuinely blocked, file the gap and surface the infra gap — don't write the lane's verdict from the editor seat.
 
 ```bash
 node scripts/validateEdition.js editions/cycle_pulse_edition_{XX}.txt

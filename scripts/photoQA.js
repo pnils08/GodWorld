@@ -58,6 +58,13 @@ Evaluate on five axes:
    Common forbidden items: tents, encampments, boarded storefronts, barred
    windows, broken glass, anyone in distress, decorative grit, real-world
    brand logos, recognizable real-world commercial identification.
+   EXCEPTION (ES-4, G-PR-C99-1): stadium-typical numerals/signage — legible
+   jersey numbers, non-canon nameplates, garbled fence ads, scoreboard glow —
+   are FLAG-not-FAIL even when the spec's NOT-list names them. A real ballpark
+   photo inherently carries these; failing the negative-frame axis on them means
+   no sports frame can ever clear (the C99 failure mode). They downgrade the
+   verdict to FLAG, not FAIL. A genuinely forbidden item (tents, broken glass, a
+   LEGIBLE real-world commercial brand, a real public figure) still FAILs.
 
 2. POSITIVE-FRAME COMPLIANCE
    The spec calls for specific subject (age, role, clothing, what they hold),
@@ -73,9 +80,24 @@ Evaluate on five axes:
    - **Oakland Athletics (A's)** — uniforms, "Athletics" wordmark, elephant
      logo, green/gold color scheme. The A's are the canon Oakland MLB team.
      A's branding in a Coliseum or sports-context shot is correct, not a
-     violation. (However, jersey numbers must match the canon 2041 roster
-     OR be illegible — fabricated player names like "CALHOUN" or numbers
-     not on the canon roster are a FAIL.)
+     violation. (Jersey numbers and nameplates that don't match the canon
+     2041 roster are stadium-typical generic detail, NOT a real-world brand —
+     FLAG-not-FAIL per the stadium-typical carve-out below. The only FAIL on
+     a jersey is a LEGIBLE recognizable REAL MLB player's name/number combo
+     that depicts an actual public figure.)
+
+   **Stadium-typical signage — FLAG, never FAIL (ES-4, G-PR-C99-1):**
+   A real ballpark photo inherently carries generic signage that FLUX renders
+   as plausible-but-arbitrary detail. These are NOT real-world brand violations
+   and must not FAIL — at most FLAG:
+   - jersey numbers / fabricated nameplates (e.g. "CALHOUN") on players
+   - garbled or illegible outfield-fence advertisements, ribbon-board text
+   - scoreboard glow, generic concourse / gate signage, pennants
+   A blanket FAIL on these means no sports frame can ever clear — the C99
+   failure mode (both ballpark frames FAILed 3/3 on legible numerals). Reserve
+   FAIL for a LEGIBLE, recognizable, real-world commercial brand rendered as a
+   logo/wordmark ("Toyota", "Coca-Cola", "Chevron", "Bank of America") or a
+   real public figure — not for stadium-typical numerals.
    - **Canon Oakland landmarks** — Fox Theater Oakland, Paramount Theatre,
      Heinold's First and Last Chance Saloon, Oakland Museum of California
      (OMCA), Lake Merritt pergola, Jack London Square, Oakland Coliseum,
@@ -131,9 +153,13 @@ Evaluate on five axes:
 Verdict rubric:
 - PASS = all four axes green; printable as-is
 - FLAG = printable but minor issues (gibberish sign text, slight composition
-        drift, non-critical motif missing)
+        drift, non-critical motif missing, AND all stadium-typical signage:
+        jersey numbers / non-canon nameplates / garbled fence ads / scoreboard)
 - FAIL = negative-frame violation (forbidden element visible), tier violation
-        (real brand or real face), or wrong subject entirely
+        (a LEGIBLE recognizable real-world brand logo/wordmark, or a real public
+        figure), or wrong subject entirely. Stadium-typical numerals are NOT a
+        FAIL (see the stadium-typical carve-out) — do not fail a sports frame
+        for jersey numbers or illegible fence ads.
 
 Respond with EXACTLY this format. Each field gets directive content, not
 template placeholders. Write actual sentences.

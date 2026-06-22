@@ -655,6 +655,209 @@ var TIER1_ESSENCE = {
       { tag: 'Reputation', text: 'Accountable for the public stake in a private-scale build.' },
       { tag: 'Reputation', text: 'Plays it straight; the deliverables are filed or they aren’t.' }
     ]
+  },
+
+  // ============================================================================
+  // Media — Bay Tribune reporters (essence from docs/media/voices/<name>.md +
+  // the dj-hartley agent + ledger cards). Authored from voice files, not dial
+  // blocks (the reporter voices predate research.16's disposition format), so the
+  // QA rule maps each voice's stated character to its dominant dials. The
+  // integrity/sociability coupling (engine.39) keeps the adversarial/solitary
+  // voices (Jax) at sociability-neutral rather than low — the seed can't drive a
+  // dial below neutral from ordinary events. Anthony Raines POP-00017 authored
+  // above with the core Tier-1.
+  // ============================================================================
+
+  // ---- POP-00007 Hal Richmond — Senior Sports Historian (reverent, elegiac, long-view) ----
+  'POP-00007': {
+    name: 'Hal Richmond', pillar: null,
+    target: { drive: 'high', openness: 'high', composure: 'high', sociability: 'high',
+              integrity: 'moderate', warmth: 'moderate', family: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Career',     text: 'Forty years covering Oakland baseball — witnessed every championship since the seventies.' },
+      { tag: 'Career',     text: 'Built the Richmond Archive Collection, the Tribune’s most prestigious series.' },
+      { tag: 'Career',     text: 'The senior historian — the long-view byline on every dynasty retrospective.' },
+      { tag: 'Education-Cultural', text: 'Reads each era against the last — places every player in the long river of Oakland baseball history.' },
+      { tag: 'Education-Cultural', text: 'Transforms numbers into philosophy — OPS-plus and WAR as the new language of an old game.' },
+      { tag: 'Education-Cultural', text: 'Literary and allusive — connects present players to the historical ghosts he covered.' },
+      { tag: 'Stabilized', text: 'Reverent even about decline; a measured, elegiac calm on the page.' },
+      { tag: 'Stabilized', text: 'The quiet road after parade days — at peace with time passing.' },
+      { tag: 'Background', text: 'Knows the rhythm of the seasons the way sailors learn tides.' },
+      { tag: 'Media',      text: 'The recognized voice of Oakland baseball history.' },
+      { tag: 'Public',     text: 'Pulls readers in with “you” — the narrator of the city’s baseball memory.' },
+      { tag: 'Reputation', text: 'His word on the dynasty is trusted; the keeper of the record.' },
+      { tag: 'Reputation', text: 'Gets the history right; never trades reverence for a hot take.' }
+    ]
+  },
+
+  // ---- POP-00008 P Slayer — Fan Columnist (raw, philosophical, confrontational, "we") ----
+  'POP-00008': {
+    name: 'P Slayer', pillar: null,
+    target: { drive: 'high', sociability: 'high', openness: 'high', outabout: 'moderate',
+              composure: 'neutral', warmth: 'moderate', integrity: 'moderate', family: 'neutral' },
+    events: [
+      { tag: 'Career',     text: 'Fan columnist for the Tribune sports page — the emotional pulse of Oakland baseball.' },
+      { tag: 'Career',     text: 'Grew up in the Coliseum bleachers; started on the message boards and never left.' },
+      { tag: 'Education-Cultural', text: 'A master’s in comparative literature from Cal — a Melville thesis under the bleacher rawness.' },
+      { tag: 'Education-Cultural', text: 'Builds from reaction to philosophy — starts in the gut, ends in meaning.' },
+      { tag: 'Education-Cultural', text: 'Metaphors drawn from Oakland life, not sports cliché — the rawness is craft.' },
+      { tag: 'Community',  text: 'Speaks for the fans — “we” always, never neutral; the game is personal here.' },
+      { tag: 'Public',     text: 'The confrontational voice of the bleachers; names the counter-argument and dismantles it.' },
+      { tag: 'Media',      text: 'References his colleagues by name — Anthony for the metrics, Hal for the history.' },
+      { tag: 'Reputation', text: 'Takes it personally and owns every word; corrected his own column in public when he was wrong.' },
+      { tag: 'Team',       text: 'Lives in the stands and the bars where the games actually get felt.' },
+      { tag: 'Personal',   text: 'Confessional and confrontational by turns — the heat is the point.' }
+    ]
+  },
+
+  // ---- POP-00012 Elliot Graye — Ethics & Faith Journalist (driven Striver, principled) ----
+  'POP-00012': {
+    name: 'Elliot Graye', pillar: null,
+    target: { drive: 'high', openness: 'high', integrity: 'high', composure: 'high',
+              warmth: 'moderate', sociability: 'moderate', family: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Career',     text: 'The Ethics and Faith byline at the Tribune — covers the moral questions under the news.' },
+      { tag: 'Career',     text: 'A driven Striver; chases the harder, deeper story.' },
+      { tag: 'Career',     text: 'Mid-career and relentless about the work.' },
+      { tag: 'Education-Cultural', text: 'Reads the ethical dimension others skip — the principle beneath the policy.' },
+      { tag: 'Education-Cultural', text: 'Moves easily across the city’s faiths and the questions they raise.' },
+      { tag: 'Faith',      text: 'Grounded in the city’s faith communities; covers them with respect.' },
+      { tag: 'Faith',      text: 'A steady, contemplative presence on the ethics beat.' },
+      { tag: 'Stabilized', text: 'Measured and even — weighs the moral question before he writes it.' },
+      { tag: 'Reputation', text: 'Principled to the letter; the ethics writer has to live the ethics.' },
+      { tag: 'Reputation', text: 'Holds the line on fairness; names the hard truth plainly.' },
+      { tag: 'Reputation', text: 'Trusted to get the moral framing right.' },
+      { tag: 'Personal',   text: 'Curious about the questions that don’t have clean answers.' },
+      { tag: 'Background', text: 'Deliberate and unhurried in his judgments.' }
+    ]
+  },
+
+  // ---- POP-00011 Carmen Delaine — Civic Ledger (data journalist, systems, follows the money) ----
+  'POP-00011': {
+    name: 'Carmen Delaine', pillar: null,
+    target: { drive: 'high', openness: 'high', integrity: 'high', composure: 'high',
+              sociability: 'high', family: 'moderate', warmth: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Career',     text: 'Eleven years covering Oakland City Council — outlasted every member but Vega.' },
+      { tag: 'Career',     text: 'A data journalist who sees the city as interconnected systems.' },
+      { tag: 'Education-Cultural', text: 'Tracks voting patterns over years; remembers who said what in old committee hearings.' },
+      { tag: 'Education-Cultural', text: 'Pairs every statistic with a named human impact.' },
+      { tag: 'Education-Cultural', text: 'Reads the whole municipal system — service health, infrastructure, the money trail.' },
+      { tag: 'Stabilized', text: 'Patient, not cynical; skeptical of timelines, steady across years.' },
+      { tag: 'Stabilized', text: 'Steady through eleven years of council churn.' },
+      { tag: 'Background', text: 'Precise and unhurried — built on sourced facts, never vague.' },
+      { tag: 'Reputation', text: 'Follows the money, not the press release; the extraction question is hers.' },
+      { tag: 'Reputation', text: 'Tracks the record honestly across a decade of votes.' },
+      { tag: 'Reputation', text: 'Trusted to get the vote math and the timeline exactly right.' },
+      { tag: 'Media',      text: 'The recognized civic-affairs byline at the Tribune.' },
+      { tag: 'Public',     text: 'A fixture in the council chamber and the record.' },
+      { tag: 'Household',  text: 'Partnered, raising three children in Chinatown.' }
+    ]
+  },
+
+  // ---- POP-00013 Maria Keen — Cultural Liaison (intimate community witness, First Friday) ----
+  'POP-00013': {
+    name: 'Maria Keen', pillar: null,
+    target: { warmth: 'high', openness: 'high', sociability: 'high', outabout: 'high',
+              composure: 'moderate', drive: 'moderate', integrity: 'neutral', family: 'neutral' },
+    events: [
+      { tag: 'Community',  text: 'Grew up in Fruitvale; has lived in seven Oakland neighborhoods over forty years.' },
+      { tag: 'Community',  text: 'Knows the shopkeepers by name, remembers their children’s birthdays.' },
+      { tag: 'Mentorship', text: 'Celebrates the invisible work — night watchers, janitors, kitchen hands.' },
+      { tag: 'Mentorship', text: 'Holds the community close; writes its people with tenderness.' },
+      { tag: 'Cultural',   text: 'First Friday is her territory — out in the art walk every month.' },
+      { tag: 'Cultural',   text: 'Always in the scene, never above it — light, hands, sounds.' },
+      { tag: 'Cultural',   text: 'Out in the neighborhoods at all hours, a witness to the city’s nights.' },
+      { tag: 'FirstFriday', text: 'The First Friday art walk is her beat — she works it block by block.' },
+      { tag: 'Education-Cultural', text: 'Finds beauty in complicated moments — the policy felt at street level.' },
+      { tag: 'Public',     text: 'A familiar face across the city’s blocks.' },
+      { tag: 'Background', text: 'Even-keeled, present, unhurried.' }
+    ]
+  },
+
+  // ---- POP-00153 Jordan Velez — Economics & Labor (West Oakland, follows the money, five sources) ----
+  'POP-00153': {
+    name: 'Jordan Velez', pillar: null,
+    target: { drive: 'high', sociability: 'high', openness: 'high', integrity: 'high',
+              family: 'moderate', composure: 'neutral', warmth: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Career',     text: 'Covers economics and labor because he grew up inside it — West Oakland, father on the docks thirty years.' },
+      { tag: 'Career',     text: 'Interviews five sources minimum for every feature; the work is in the legwork.' },
+      { tag: 'Education-Cultural', text: 'Connects national economic forces to Oakland street-level impact.' },
+      { tag: 'Education-Cultural', text: 'Translates the metrics into what they mean for rent, hiring, the commute.' },
+      { tag: 'Community',  text: 'Plays slow-pitch softball with the port union workers; rooted in the corridor.' },
+      { tag: 'Public',     text: 'Names ages, neighborhoods, occupations — never a generic “business owner.”' },
+      { tag: 'Media',      text: 'The economics and labor byline; sources the small-business owners directly.' },
+      { tag: 'Reputation', text: 'Follows the money — asks who gets the first contract, every time.' },
+      { tag: 'Reputation', text: 'Skeptical of the word “development”; tests the claim against the street.' },
+      { tag: 'Reputation', text: 'Trusted to get the dollar figure and the human cost right.' },
+      { tag: 'Household',  text: 'A father of four; the economy is never abstract to him.' },
+      { tag: 'Personal',   text: 'Curious about how the whole economic loop turns.' }
+    ]
+  },
+
+  // ---- POP-00636 Luis Navarro — Investigations / Managing Editor (records requests, persistent, fair) ----
+  'POP-00636': {
+    name: 'Luis Navarro', pillar: null,
+    target: { drive: 'high', integrity: 'high', composure: 'high', sociability: 'moderate',
+              openness: 'moderate', family: 'neutral', warmth: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Career',     text: 'A former wire reporter who joined the Tribune for deeper investigative work.' },
+      { tag: 'Career',     text: 'Managing Editor as well as a reporter — files the public-records requests himself.' },
+      { tag: 'Career',     text: 'Senior investigations byline; counts the days until officials answer.' },
+      { tag: 'Stabilized', text: 'Methodical and patient — “here is what we know, here is what we don’t.”' },
+      { tag: 'Stabilized', text: 'Applies steady pressure; three weeks of “no comment” doesn’t move him off the story.' },
+      { tag: 'Reputation', text: 'Won’t publish speculation without documentation; attributes everything by name.' },
+      { tag: 'Reputation', text: 'Persistent and fair — documents, never guesses.' },
+      { tag: 'Reputation', text: 'Trusted to separate the confirmed fact from the open question.' },
+      { tag: 'Education-Cultural', text: 'Reads the documents for what they actually say.' },
+      { tag: 'Background', text: 'Measured, exact, unflappable under stonewalling.' }
+    ]
+  },
+
+  // ---- POP-00015 DeShawn "DJ" Hartley — Senior Photographer (the eye; sees the light, not the headline) ----
+  //      The dj-hartley agent ("POP ID: to be assigned") IS this ledger row — P Slayer/Heinold's,
+  //      Bay Tribune photographer, family-minded all reconcile. Agent traits mapped to the 8 dials.
+  'POP-00015': {
+    name: 'DeShawn Hartley', pillar: null,
+    target: { openness: 'high', outabout: 'high', warmth: 'moderate', family: 'moderate',
+              composure: 'moderate', drive: 'moderate', sociability: 'neutral', integrity: 'neutral' },
+    events: [
+      { tag: 'Education-Cultural', text: 'Thirty years shooting Oakland — sees the light, not the headline.' },
+      { tag: 'Education-Cultural', text: 'Still thinks in film: every frame costs something, so make it count.' },
+      { tag: 'Education-Cultural', text: 'Finds the human moment in the crowd — the photo you didn’t know you needed.' },
+      { tag: 'Cultural',   text: 'Shoots every A’s home game; six championship parades on his record.' },
+      { tag: 'Cultural',   text: 'Knows the Coliseum at midnight after the confetti and the waterfront at six a.m.' },
+      { tag: 'Cultural',   text: 'Works from the bar stool, the dugout steps, the street corner.' },
+      { tag: 'PrevEvening', text: 'Out shooting the city’s nights, the light no one else waited for.' },
+      { tag: 'Household',  text: 'Family-minded; Jack London Square is home.' },
+      { tag: 'Background', text: 'A steady eye; thirty years of making the frame count.' },
+      { tag: 'Mentorship', text: 'Leads a small photo team; loyal to the people he shoots with.' }
+    ]
+  },
+
+  // ---- POP-00799 Jax Caldera — Freelance Accountability Columnist (flamethrower, hidden Berkeley MUP) ----
+  //      Tier-2, on the roster. Adversarial/solitary -> sociability NEUTRAL (the seed can't drive it
+  //      below neutral, and integrity's Reputation coupling adds sociability; engine.39 would let a
+  //      pure-integrity tag read him sharper). Mags's flamethrower-on-call.
+  'POP-00799': {
+    name: 'Jax Caldera', pillar: null,
+    target: { drive: 'high', openness: 'high', integrity: 'high', outabout: 'high',
+              composure: 'neutral', sociability: 'neutral', warmth: 'neutral', family: 'neutral' },
+    events: [
+      { tag: 'Career',     text: 'A freelance accountability columnist — shows up only when something stinks, files one hot piece, walks away.' },
+      { tag: 'Career',     text: 'Blacklisted from every Bay Area alt-weekly for being too mean to sacred cows; Mags calls him for the question nobody else will ask.' },
+      { tag: 'Education-Cultural', text: 'A hidden master’s in urban planning from Berkeley — the precision in his questions gives him away.' },
+      { tag: 'Education-Cultural', text: 'Reads the city’s plans and budgets line by line for what doesn’t add up.' },
+      { tag: 'Education-Cultural', text: 'Sees the irregularity others walk past; names it or doesn’t file.' },
+      { tag: 'Cultural',   text: 'Opens in a bar, a laundromat, a BART car — out in the city where the story actually lives.' },
+      { tag: 'Cultural',   text: 'Couch-surfing from Jingletown to Bushrod; always out, never at a desk.' },
+      { tag: 'PrevEvening', text: 'Files from the bar stool at Eli’s Mile High, last night’s city still on him.' },
+      { tag: 'FirstFriday', text: 'Out in the city’s nights, watching who shows and who doesn’t.' },
+      { tag: 'Reputation', text: 'His facts check out; accountability is the whole point.' },
+      { tag: 'Resisted',   text: 'Names the irregularity or doesn’t file — no weasel words, no “sources suggest” hedge.' },
+      { tag: 'Resisted',   text: 'Won’t make an unqualified accusation; holds to the question or the attributed claim, nothing looser.' }
+    ]
   }
 
 };

@@ -330,6 +330,30 @@ function buildArticleHtml(article, options) {
   return html.join('\n');
 }
 
+// Shared photo-block render — used by the standard section path AND the editorial
+// branch so a manifest-assigned photo renders identically wherever it lands
+// (ES-5 / G-PR-C99-2: editorial early-returned before the photo block, so a
+// DJ-specced editorial atmospheric was counted in the manifest but silently
+// dropped → PHOTO PARITY MISMATCH). Resolves the back-compat single-photoDataUri
+// fallback. Renders EVERY live placement (G-PR-NEW4), not just the first.
+function pushSectionPhotos(html, section, options, photoDataUri) {
+  var photos = options.sectionPhotos;
+  if ((!photos || !photos.length) && photoDataUri) {
+    photos = [{ dataUri: photoDataUri, credit: (findPhotoForSection(options.manifest, section.name) || {}).credit }];
+  }
+  if (!photos || !photos.length) return;
+  for (var ph = 0; ph < photos.length; ph++) {
+    var sp = photos[ph];
+    if (!sp || !sp.dataUri) continue;
+    html.push('<div class="photo-full">');
+    html.push('  <img src="' + sp.dataUri + '" alt="' + escapeHtml(section.headline || section.name) + '">');
+    if (sp.credit) {
+      html.push('  <div class="photo-credit">' + escapeHtml(sp.credit) + '</div>');
+    }
+    html.push('</div>');
+  }
+}
+
 function buildSectionHtml(section, photoDataUri, options) {
   options = options || {};
   var html = [];
@@ -342,6 +366,9 @@ function buildSectionHtml(section, photoDataUri, options) {
   // Special handling by beat
   if (beat === 'editorial') {
     html.push('<div class="editors-desk">');
+    // ES-5 (G-PR-C99-2): render the editorial atmospheric photo if assigned —
+    // the deliberate DJ spec (e.g. thanksgiving_lake_merritt_dusk) above the note.
+    pushSectionPhotos(html, section, options, photoDataUri);
     // S235 G-PR7 — show editorial headline (ED slot from ARTICLE TABLE).
     // Pre-fix the editorial block rendered section-label + byline + body
     // only, dropping the canonical ED title. centered to match editors-desk
@@ -414,22 +441,7 @@ function buildSectionHtml(section, photoDataUri, options) {
   // photo the manifest assigns to this section (G-PR-NEW4), not just the first.
   // options.sectionPhotos = [{ dataUri, credit }]; falls back to the single
   // photoDataUri param when the caller didn't supply the array (back-compat).
-  var sectionPhotos = options.sectionPhotos;
-  if ((!sectionPhotos || !sectionPhotos.length) && photoDataUri) {
-    sectionPhotos = [{ dataUri: photoDataUri, credit: (findPhotoForSection(options.manifest, section.name) || {}).credit }];
-  }
-  if (sectionPhotos && sectionPhotos.length) {
-    for (var ph = 0; ph < sectionPhotos.length; ph++) {
-      var sp = sectionPhotos[ph];
-      if (!sp || !sp.dataUri) continue;
-      html.push('<div class="photo-full">');
-      html.push('  <img src="' + sp.dataUri + '" alt="' + escapeHtml(section.headline || section.name) + '">');
-      if (sp.credit) {
-        html.push('  <div class="photo-credit">' + escapeHtml(sp.credit) + '</div>');
-      }
-      html.push('</div>');
-    }
-  }
+  pushSectionPhotos(html, section, options, photoDataUri);
 
   // Determine column count
   var colClass = 'columns-3';

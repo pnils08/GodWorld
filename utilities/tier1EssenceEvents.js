@@ -288,6 +288,113 @@ var TIER1_ESSENCE = {
       { tag: 'Background', text: 'Carries the calm of a man who already proved it.' },
       { tag: 'Stabilized', text: 'The steadiness of a man with nothing left to prove.' }
     ]
+  },
+
+  // ============================================================================
+  // Tier-3 — family / planner / GM (canon from CHARACTER.md §My Family + ledger).
+  // ============================================================================
+
+  // ---- POP-00594 Robert Corliss — Mags' husband, retired PG&E engineer, "the steady one" ----
+  'POP-00594': {
+    name: 'Robert Corliss', pillar: null,
+    target: { composure: 'high', warmth: 'high', family: 'high', integrity: 'high',
+              drive: 'neutral', sociability: 'moderate', openness: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Wedding',    text: 'Married to Mags Corliss; holds her hand on their morning lake walks.' },
+      { tag: 'Daily',      text: 'Two glasses on the terrace at Lake Merritt, watching the lake go dark.' },
+      { tag: 'Daily',      text: 'A quiet, settled life — morning walks, Sunday chili.' },
+      { tag: 'Retirement', text: 'Retired PG&E engineer; stepped back from the work.' },
+      { tag: 'Background', text: 'The steady one; fixes things slowly and perfectly.' },
+      { tag: 'Reputation', text: 'Methodical and exact — does it right, not fast.' },
+      { tag: 'Reputation', text: 'Dependable to the core; loses his glasses, never his patience.' },
+      { tag: 'Mentorship', text: 'Tender with the people he loves; the calm anchor of the household.' },
+      { tag: 'Stabilized', text: 'Unhurried, unshakable — the steady one.' }
+    ]
+  },
+
+  // ---- POP-00596 Michael Corliss — Mags' son, freelance photographer, port-cities documentary ----
+  'POP-00596': {
+    name: 'Michael Corliss', pillar: null,
+    target: { openness: 'vhigh', drive: 'high', outabout: 'high', composure: 'neutral',
+              warmth: 'neutral', family: 'neutral', sociability: 'neutral', integrity: 'neutral' },
+    events: [
+      { tag: 'Education-Cultural', text: 'A freelance photographer documenting port cities — chasing the image others walk past.' },
+      { tag: 'Cultural',   text: 'Always out with a camera, documenting the life of the city.' },
+      { tag: 'Cultural',   text: 'Travels light; follows the work to wherever the light is.' },
+      { tag: 'Cultural',   text: 'Restless for the next frame, the next port.' },
+      { tag: 'Lifestyle',  text: 'No insurance, no plan — the artist’s life, lived for the next image.' },
+      { tag: 'Personal',   text: 'Sees what others overlook; open to everything.' },
+      { tag: 'Career',     text: 'Builds a photography life one assignment at a time.' }
+    ]
+  },
+
+  // ---- POP-00595 Sarah Corliss — Mags' daughter (Tier-2 family), CS, independent ----
+  //      (real-world employer name in CHARACTER.md dropped — canon-fence on brands.)
+  'POP-00595': {
+    name: 'Sarah Corliss', pillar: null,
+    target: { drive: 'high', openness: 'high', composure: 'high', integrity: 'moderate',
+              sociability: 'neutral', warmth: 'neutral', family: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Career',     text: 'A capacity analyst in tech — sharp, analytical, self-made.' },
+      { tag: 'Education',  text: 'UC Berkeley computer science; built her own path.' },
+      { tag: 'Education-Cultural', text: 'Reads systems for a living; analytical to the core.' },
+      { tag: 'Career',     text: 'Independent — too independent to lean on people.' },
+      { tag: 'Background', text: 'Self-contained, composed; keeps her own counsel.' },
+      { tag: 'Stabilized', text: 'Steady and self-reliant; carries her own weight.' },
+      { tag: 'Reputation', text: 'Careful, precise, principled in her work.' }
+    ]
+  },
+
+  // ---- POP-00507 Mara Vance — City Planning Director (Entries:5 → supplemental) ----
+  'POP-00507': {
+    name: 'Mara Vance', pillar: null,
+    target: { openness: 'high', drive: 'high', integrity: 'high', composure: 'high',
+              sociability: 'moderate', warmth: 'neutral', family: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Career',     text: 'City Planning Director — reads Oakland as a system to be shaped.' },
+      { tag: 'Education-Cultural', text: 'Sees the whole board — the second- and third-order effects of every plan.' },
+      { tag: 'Education-Cultural', text: 'A planner’s mind — patterns, flows, consequences.' },
+      { tag: 'Career',     text: 'Decades shaping the city’s bones.' },
+      { tag: 'Background', text: 'Measured, deliberate — a planner’s composure.' },
+      { tag: 'Stabilized', text: 'Steady under the weight of the city’s decisions.' },
+      { tag: 'Reputation', text: 'Rigorous and principled — the plan has to hold up.' },
+      { tag: 'Reputation', text: 'Tells it straight, even when it’s unwelcome.' }
+    ]
+  },
+
+  // ---- POP-00527 Mike Paulson — GM, A's & Bulls (Entries:4 → supplemental).
+  //      MIKE-CONFIRM: Paulson is sports-domain + the Maker's in-world handle. Light baseline
+  //      from public GM canon; Mike's call to confirm/override the essence. ----
+  'POP-00527': {
+    name: 'Mike Paulson', pillar: null,
+    target: { drive: 'high', composure: 'high', sociability: 'moderate', integrity: 'moderate',
+              openness: 'neutral', warmth: 'neutral', family: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Career',     text: 'General Manager of the Oakland A’s and the Chicago Bulls — the dual role, again.' },
+      { tag: 'Promotion',  text: 'Holds a dynasty’s window open; a historic legacy taking on a new chapter.' },
+      { tag: 'Career',     text: 'Carries two franchises on one set of shoulders.' },
+      { tag: 'Background', text: 'Steady under the weight of two front offices.' },
+      { tag: 'Stabilized', text: 'Unflinching through roster decisions that define eras.' },
+      { tag: 'Civic Role', text: 'The public face of the franchise’s direction.' },
+      { tag: 'Reputation', text: 'His word holds; builds for the long arc.' }
+    ]
+  },
+
+  // ---- POP-00004 Lucia Polito — Aura Wellness Practitioner, Fruitvale (Tier-1 PROTECTED, codex-linked) ----
+  'POP-00004': {
+    name: 'Lucia Polito', pillar: null,
+    target: { warmth: 'high', composure: 'high', openness: 'high', sociability: 'moderate',
+              drive: 'neutral', integrity: 'neutral', family: 'neutral', outabout: 'neutral' },
+    events: [
+      { tag: 'Faith',      text: 'An aura-wellness practitioner; grounded in the spiritual rhythms of Fruitvale.' },
+      { tag: 'Faith',      text: 'Holds space for others’ healing; faith and calm are her practice.' },
+      { tag: 'Mentorship', text: 'Tends to people’s well-being — warm, present, healing.' },
+      { tag: 'Stabilized', text: 'A practitioner’s calm; the still, grounding presence in the room.' },
+      { tag: 'Background', text: 'Centered, unhurried, attuned.' },
+      { tag: 'Education-Cultural', text: 'Reads energy and intention; open to what others dismiss.' },
+      { tag: 'Lifestyle',  text: 'Lives by wellness and intention.' },
+      { tag: 'Community',  text: 'Warm with the people who come to her.' }
+    ]
   }
 
 };

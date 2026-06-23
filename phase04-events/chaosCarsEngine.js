@@ -137,9 +137,13 @@ function loadBusinessRows_(ctx) {
   if (ctx._chaosBizCache) return ctx._chaosBizCache;
   var data = null;
   if (ctx.cache && typeof ctx.cache.getData === 'function') {
-    data = ctx.cache.getData('Business_Ledger');
+    // getData returns the cache wrapper {values, header, sheet, exists} — unwrap to the
+    // 2D values array. (S271 fix: was treating the wrapper as an array → data.slice threw
+    // live, since tests run without ctx.cache and silently took the direct-read fallback.)
+    var cd = ctx.cache.getData('Business_Ledger');
+    data = cd && cd.values ? cd.values : null;
   }
-  if (!data) {
+  if (!Array.isArray(data)) {
     var sh = ctx.ss.getSheetByName('Business_Ledger');
     data = sh ? sh.getDataRange().getValues() : [];
   }
@@ -182,8 +186,11 @@ function pickBusinessTarget_(rng, ctx) {
 function loadNeighborhoodNames_(ctx) {
   if (ctx._chaosNbCache) return ctx._chaosNbCache;
   var data = null;
-  if (ctx.cache && typeof ctx.cache.getData === 'function') data = ctx.cache.getData('Neighborhood_Map');
-  if (!data) {
+  if (ctx.cache && typeof ctx.cache.getData === 'function') {
+    var cd = ctx.cache.getData('Neighborhood_Map');  // unwrap cache wrapper {values,...} — S271 fix (same class as loadBusinessRows_)
+    data = cd && cd.values ? cd.values : null;
+  }
+  if (!Array.isArray(data)) {
     var sh = ctx.ss.getSheetByName('Neighborhood_Map');
     data = sh ? sh.getDataRange().getValues() : [];
   }
@@ -228,7 +235,7 @@ function writeCitizenEvent_(ctx, target, vehicle, outcome, cycle, text) {
       vehicle.name + ') has no lifeHistoryTag — would fall through DIAL_MAP to +composure.');
   }
 
-  var stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), 'yyyy-MM-dd HH:mm');
+  var stamp = inWorldStamp_(ctx);
   var line = stamp + ' — [' + dialTag + '] ' + text;
   var existing = (iLife >= 0 && row[iLife]) ? row[iLife].toString() : '';
   if (iLife >= 0) row[iLife] = existing ? existing + '\n' + line : line;
@@ -241,7 +248,7 @@ function writeCitizenEvent_(ctx, target, vehicle, outcome, cycle, text) {
   var name = ((iFirst >= 0 ? row[iFirst] : '') + ' ' + (iLast >= 0 ? row[iLast] : '')).toString().trim();
   var eventTag = dialTag + '|chaos_cars|' + vehicle.name;
   queueAppendIntent_(ctx, 'LifeHistory_Log',
-    [ctx.now, (iPop >= 0 ? row[iPop] : target.popId), name, eventTag, text,
+    [inWorldStamp_(ctx), (iPop >= 0 ? row[iPop] : target.popId), name, eventTag, text,
       (iNb >= 0 ? (row[iNb] || '') : target.neighborhood), cycle],
     'chaos_cars citizen event', 'chaos');
 }

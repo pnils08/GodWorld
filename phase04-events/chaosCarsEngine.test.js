@@ -32,6 +32,9 @@ global.writeChaosCarsRow_ = (ctx, payload) => chaosRows.push(payload);
 global.Logger = { log: () => {} };
 global.Utilities = { formatDate: () => '2026-06-20 12:00' };
 global.Session = { getScriptTimeZone: () => 'UTC' };
+// S271: chaos now stamps in-world (inWorldStamp_, defined in advanceSimulationCalendar.js
+// — an Apps Script global). Stub it for the Node harness, same pattern as the others.
+global.inWorldStamp_ = (ctx) => (ctx && ctx.summary && ctx.summary.cycleRef) || 'C100';
 
 const eng = require('./chaosCarsEngine');
 

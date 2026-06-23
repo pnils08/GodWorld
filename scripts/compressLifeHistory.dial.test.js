@@ -22,7 +22,17 @@ const E = require('../utilities/citizenMemory.js');
 Object.keys(E).forEach(k => { global[k] = E[k]; });   // newCitizen_, deserialize_, applyEvent_, band_, bandIndex_, describe_, DIALS, ...
 const M = require('../utilities/citizenDialMap.js');
 global.nudgesForEvent_ = M.nudgesForEvent_;
+global.nudgesForReflection_ = M.nudgesForReflection_;   // reflection drain composer (S269)
 global.baseTag_ = M.baseTag_;
+
+// Capturing mock of the Phase-10 cell-intent queue (writeIntents.js is Apps Script
+// globals, no exports). The drain calls this to mark Reflection_Intake rows applied='yes'.
+global.queueCellIntent_ = function(ctx, tab, row, col, value, reason, domain, priority) {
+  if (!ctx.persist) ctx.persist = { updates: [] };
+  var intent = { tab: tab, kind: 'cell', row: row, col: col, value: value, reason: reason, domain: domain, priority: priority };
+  ctx.persist.updates.push(intent);
+  return intent;
+};
 
 const C = require('../utilities/compressLifeHistory.js');
 
@@ -191,6 +201,94 @@ console.log('═══ Section G — Phase 5 dial-band seam (getCitizenDialBands
   assert('G13 no citizenLookup + no override -> null', C.getCitizenDialBands_(ctxNoLookup, 'POP-OTHER') === null);
   assert('G14 citizenLookup wins over override when both present',
     C.getCitizenDialBands_({ citizenLookup: { 'POP-X': { DialState: dialState({ family: 88 }) } } }, 'POP-X', dialState({ drive: 90 })).familyFreq > 1);
+}
+
+// ── Reflection write-back drain (research.14 S269) ──────────────────────────
+// fake ss exposing a Reflection_Intake tab. intakeRows: [ts,popId,cycle,wake,event,snippet,applied,affect]
+function fakeSS(intakeRows) {
+  const values = [['ts', 'popId', 'cycle', 'wake', 'event', 'snippet', 'applied', 'affect']].concat(intakeRows);
+  const sheet = { getDataRange: () => ({ getValues: () => values }) };
+  return { getSheetByName: (n) => (n === 'Reflection_Intake' ? sheet : null) };
+}
+function drainCtx(rowsSpec, intakeRows, cycle) {
+  const headers = ['POPID', 'LifeHistory', 'TraitProfile', 'DialState'];
+  const rows = rowsSpec.map(s => [s.POPID, s.LifeHistory || '', s.TraitProfile || '', s.DialState || '']);
+  return {
+    mode: {}, summary: { absoluteCycle: cycle || 100 },
+    ledger: { headers, rows, dirty: false, sheet: 'Simulation_Ledger' },
+    persist: { updates: [] },
+    ss: fakeSS(intakeRows)
+  };
+}
+const dialJSON = (overrides) => { const c = global.newCitizen_(); Object.keys(overrides || {}).forEach(k => { c.base[k] = overrides[k]; }); return C.serializeDialState_(c); };
+const baseOf = (ctx, i) => JSON.parse(get(ctx, i, 'DialState')).base;
+const intk = (popId, event, affect) => ['t', popId, 100, 'evening', event || '', 'snip', 'no', affect || ''];
+// expected per-reflection base move for a single dial = mapDelta × MULT × FRAC
+const STEP = C.REFLECTION_MULT * C.REFLECTION_ACCRETION_FRAC;   // 0.45 × 0.5 = 0.225
+
+console.log('═══ Section H — reflection drain accretes into base');
+{
+  // H1 lone Anxious (composure -3): base.composure down a SMALL bounded amount, not zero
+  const ctx = drainCtx([{ POPID: 'POP-A', LifeHistory: '' }], [intk('POP-A', '', 'Anxious')], 100);
+  C.compressLifeHistory_(ctx, { forceAll: true });
+  const comp = baseOf(ctx, 0).composure;
+  assert('H1 lone Anxious moves composure base down a hair (not zero, not huge)',
+    Math.abs(comp - (50 - 3 * STEP)) < 1e-9 && comp < 50 && comp > 49, 'composure=' + comp);
+
+  // H2 five sustained Anxious: meaningfully more than one (lock-in)
+  const ctx2 = drainCtx([{ POPID: 'POP-B', LifeHistory: '' }],
+    [0, 1, 2, 3, 4].map(() => intk('POP-B', '', 'Anxious')), 100);
+  C.compressLifeHistory_(ctx2, { forceAll: true });
+  const comp5 = baseOf(ctx2, 0).composure;
+  assert('H2 5 sustained Anxious accrete ~5x (lock-in)', Math.abs(comp5 - (50 - 5 * 3 * STEP)) < 1e-9 && comp5 < comp, 'composure=' + comp5);
+
+  // H3 resentful Promotion: composure nets DOWN (affect-only), drive still UP — not the +2 bug
+  const ctx3 = drainCtx([{ POPID: 'POP-C', LifeHistory: '' }], [intk('POP-C', 'Promotion', 'Resentful')], 100);
+  C.compressLifeHistory_(ctx3, { forceAll: true });
+  const b3 = baseOf(ctx3, 0);
+  assert('H3 resentful Promotion nets composure DOWN', b3.composure < 50 && Math.abs(b3.composure - (50 - 3 * STEP)) < 1e-9, 'composure=' + b3.composure);
+  assert('H3 ...and drive still UP (event non-composure carried)', b3.drive > 50 && Math.abs(b3.drive - (50 + 8 * STEP)) < 1e-9, 'drive=' + b3.drive);
+
+  // H4 each drained row gets an applied='yes' cell intent on Reflection_Intake col 7
+  const ups = ctx2.persist.updates;
+  assert('H4 one applied=yes intent per pending row (5)', ups.length === 5);
+  assert('H4 ...targeting Reflection_Intake col 7 value yes, rows 2..6',
+    ups.every((u, k) => u.tab === 'Reflection_Intake' && u.col === 7 && u.value === 'yes' && u.row === k + 2),
+    JSON.stringify(ups.map(u => [u.row, u.col, u.value])));
+
+  // H5 clamp: a near-floor citizen never goes below 0
+  const ctx5 = drainCtx([{ POPID: 'POP-D', DialState: dialJSON({ composure: 1 }) }],
+    [0, 1, 2, 3, 4].map(() => intk('POP-D', '', 'Anxious')), 100);
+  C.compressLifeHistory_(ctx5, { forceAll: true });
+  assert('H5 base clamps at 0 (no negative composure)', baseOf(ctx5, 0).composure === 0, 'composure=' + baseOf(ctx5, 0).composure);
+
+  // H6 drain-only citizen (no LifeHistory -> no compress) still persists DialState + marks dirty
+  const ctx6 = drainCtx([{ POPID: 'POP-E', LifeHistory: '' }], [intk('POP-E', '', 'Anxious')], 100);
+  C.compressLifeHistory_(ctx6, { forceAll: true });
+  assert('H6 drain-only citizen marks ledger dirty', ctx6.ledger.dirty === true);
+  assert('H6 ...writes DialState but leaves TraitProfile untouched (no face recompute)',
+    !!get(ctx6, 0, 'DialState') && get(ctx6, 0, 'TraitProfile') === '');
+}
+
+console.log('═══ Section I — no-pending byte-identical regression (objective path unperturbed)');
+{
+  // Same fixture citizen, three intake conditions that must all read as "no pending":
+  //   (a) no ss at all   (b) empty intake   (c) intake rows present but all applied='yes' / other popIds
+  const f = { ...byId['POP-00168'], TraitProfile: '', DialState: '' };
+  const noSS = makeCtx([f], 100, true);
+  C.compressLifeHistory_(noSS, { forceAll: true });
+
+  const empty = drainCtx([{ POPID: f.POPID, LifeHistory: f.LifeHistory, TraitProfile: '', DialState: '' }], [], 100);
+  C.compressLifeHistory_(empty, { forceAll: true });
+
+  const otherApplied = drainCtx([{ POPID: f.POPID, LifeHistory: f.LifeHistory, TraitProfile: '', DialState: '' }],
+    [['t', f.POPID, 100, 'evening', '', 'snip', 'yes', 'Anxious'], intk('POP-OTHER', '', 'Angry')], 100);
+  C.compressLifeHistory_(otherApplied, { forceAll: true });
+
+  assert('I1 empty intake -> DialState byte-identical to no-ss run', get(empty, 0, 'DialState') === get(noSS, 0, 'DialState'));
+  assert('I2 empty intake -> TraitProfile byte-identical', get(empty, 0, 'TraitProfile') === get(noSS, 0, 'TraitProfile'));
+  assert('I3 applied=yes/other-pop intake -> DialState still byte-identical (filtered out)', get(otherApplied, 0, 'DialState') === get(noSS, 0, 'DialState'));
+  assert('I4 ...and no applied intent queued for this citizen', otherApplied.persist.updates.length === 0);
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

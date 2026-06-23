@@ -91,12 +91,43 @@ function applyTaggedEvent_(c, tag, dialMap, severityMult) {
 // dual-tag reflection write-back (citizen-loop): EVENT tag -> non-composure dials, AFFECT tag ->
 // composure (composure-as-affect-only) + its own deltas, composed by dialMap.nudgesForReflection_.
 // Distinct from applyTaggedEvent_ (objective single tag): this is the SUBJECTIVE wake-reflection path.
-// INERT until the gated cycle wires it (a Phase-9 sibling, post Phase-1 audit) — no cycle caller today.
+// SUPERSEDED for the live drain by accreteReflectionsIntoBase_ (S269 finding: this moves MOOD,
+// which zeroMood_ wipes every compress — it never persists). Retained for the offline composer
+// test (Test 7) + as the mood-path reference. No live cycle caller.
 function applyReflectionDualTag_(c, eventTag, affectTag, dialMap, severityMult) {
   var effects = dialMap && dialMap.nudgesForReflection_
     ? dialMap.nudgesForReflection_(eventTag, affectTag, severityMult)
     : {};
   applyEvent_(c, { label: (eventTag || '') + '|' + (affectTag || ''), effects: effects });
+}
+
+// Direct-base reflection accretion — the LIVE write-back path (citizen-loop research.14, S269).
+// Why not applyReflectionDualTag_/applyEvent_: those land deltas in `mood`, and the compressor's
+// serializeDialState_ persists only {base, streak} (zeroMood_ wipes mood each cycle), so a
+// reflection's effect would evaporate; and `base` is reached objectively ONLY via a >=HARDEN_STREAK
+// run, so a lone reflection aged out among real events never durably registers. The subjective
+// wake-reflection must reach durable `base` WITHOUT that streak gate. So: compose the dual-tag
+// deltas (nudgesForReflection_ — event's non-composure dials + affect's full deltas) and accrete a
+// SMALL bounded fraction directly into base. A one-off nudges base a hair, later movement dilutes it
+// ("fades"); a sustained same-direction run sums into permanent lock-in. base clamped 0-100.
+// Pure (dialMap injected, ES5, no I/O). reflections = [{ event, affect, text }]. Returns #moved.
+function accreteReflectionsIntoBase_(c, reflections, dialMap, mult, frac) {
+  if (!c || !reflections || !reflections.length || !dialMap || !dialMap.nudgesForReflection_) return 0;
+  var moved = 0;
+  for (var i = 0; i < reflections.length; i++) {
+    var rfl = reflections[i] || {};
+    var fx = dialMap.nudgesForReflection_(rfl.event, rfl.affect, mult, rfl.text);
+    var any = false;
+    for (var d in fx) {
+      if (!fx.hasOwnProperty(d) || c.base[d] == null) continue;
+      var delta = fx[d] * frac;
+      if (!delta) continue;
+      c.base[d] = clamp100_(c.base[d] + delta);
+      any = true;
+    }
+    if (any) moved++;
+  }
+  return moved;
 }
 
 // end-of-cycle: temporary swings fade back toward the permanent self
@@ -165,7 +196,8 @@ if (typeof module !== 'undefined' && module.exports) {
     HARDEN_STREAK: HARDEN_STREAK,
     newCitizen_: newCitizen_, current_: current_,
     applyEvent_: applyEvent_, applyTaggedEvent_: applyTaggedEvent_,
-    applyReflectionDualTag_: applyReflectionDualTag_, settleCycle_: settleCycle_,
+    applyReflectionDualTag_: applyReflectionDualTag_,
+    accreteReflectionsIntoBase_: accreteReflectionsIntoBase_, settleCycle_: settleCycle_,
     bandIndex_: bandIndex_, band_: band_, bandMultiplier_: bandMultiplier_,
     describe_: describe_, snapshot_: snapshot_,
     serialize_: serialize_, deserialize_: deserialize_

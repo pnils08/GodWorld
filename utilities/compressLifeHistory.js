@@ -80,6 +80,24 @@ var KEEP_RAW_ENTRIES = 20;
 // Minimum cycles between compression runs per citizen
 var MIN_CYCLES_BETWEEN_COMPRESS = 5;
 
+// --- Reflection write-back drain (citizen-loop research.14, S269) ---------------
+// Wake reflections land a frozen dual tag in Reflection_Intake; the drain (composed
+// INTO this compressor's per-row RMW — NOT a Phase-9 sibling, which would re-read
+// pre-Phase-10 DialState and clobber the objective fold) accretes a small bounded
+// fraction of the composed dual-tag deltas DIRECTLY into base (mood evaporates each
+// compress; base is the only durable axis). REFLECTION_MULT discounts a subjective
+// reflection below an objective event; REFLECTION_ACCRETION_FRAC sets how much of that
+// reaches durable base per wake. Net per-dial base move = mapDelta x MULT x FRAC.
+// Both are TUNABLE against the population composure distribution (S262 baseline:
+// 0 volatile / 86% neutral / positive-skew) — a lone reflection must be a fraction of a
+// band; a sustained run over N wakes a band move. Calibrate at smoke, not from theory.
+var REFLECTION_INTAKE_TAB = 'Reflection_Intake';
+var REFLECTION_MULT = 0.45;
+var REFLECTION_ACCRETION_FRAC = 0.5;
+// Reflection_Intake column layout (1-based): A ts | B popId | C cycle | D wake |
+// E event | F snippet | G applied | H affect. (citizen-wake.js writer, S262.)
+var RI_COL_POPID = 2, RI_COL_EVENT = 5, RI_COL_SNIPPET = 6, RI_COL_APPLIED = 7, RI_COL_AFFECT = 8;
+
 // Default decay basis
 var DEFAULT_DECAY_BASIS = 'entries';
 
@@ -213,6 +231,36 @@ var TRAIT_MODIFIERS = {
 // MAIN FUNCTION
 // ============================================================================
 
+// Read unprocessed (applied != 'yes') Reflection_Intake rows, grouped by popId.
+// Apps-Script-only sheet read (ctx.ss). Returns {} when ss/tab is absent (Node tests,
+// fresh spreadsheet) so the objective compress path is byte-identical without reflections.
+// NOTE: reads the full tab each cycle; the unprocessed set is small (~1k rows/yr at 3
+// wakes/day) — a periodic prune of applied='yes' rows is a future hygiene item.
+function readPendingReflections_(ctx) {
+  var out = {};
+  if (!ctx || !ctx.ss || typeof ctx.ss.getSheetByName !== 'function') return out;
+  var sh = ctx.ss.getSheetByName(REFLECTION_INTAKE_TAB);
+  if (!sh) return out;
+  var values = sh.getDataRange().getValues();
+  for (var r = 1; r < values.length; r++) {           // row 0 = header
+    var vrow = values[r];
+    var popId = vrow[RI_COL_POPID - 1];
+    if (!popId) continue;
+    if (String(vrow[RI_COL_APPLIED - 1] || '').toLowerCase() === 'yes') continue;
+    var event = vrow[RI_COL_EVENT - 1];
+    var affect = vrow[RI_COL_AFFECT - 1];
+    if (!event && !affect) continue;                   // nothing composable
+    if (!out[popId]) out[popId] = [];
+    out[popId].push({
+      rowNum: r + 1,                                   // 1-based sheet row
+      event: event,
+      affect: affect,
+      text: vrow[RI_COL_SNIPPET - 1] || ''
+    });
+  }
+  return out;
+}
+
 function compressLifeHistory_(ctx, options) {
   // DRY-RUN FIX: Skip direct sheet writes in dry-run mode
   var isDryRun = ctx.mode && ctx.mode.dryRun;
@@ -267,53 +315,79 @@ function compressLifeHistory_(ctx, options) {
   var updated = 0;
   var skipped = 0;
 
+  // Reflection write-back drain (research.14 S269): one cheap read of the intake tab,
+  // grouped by popId. {} when ss/tab absent — keeps the objective path byte-identical.
+  var pendingByPop = readPendingReflections_(ctx);
+  // composer is an Apps Script global; typeof-guard keeps the objective path alive in any
+  // harness where the reflection surface isn't loaded (drain simply stays dormant).
+  var reflectionDialMap = (typeof nudgesForReflection_ !== 'undefined') ? { nudgesForReflection_: nudgesForReflection_ } : null;
+  var reflectionsMoved = 0, reflectionCitizens = 0;
+
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
     var popId = row[iPopID];
+    if (!popId) continue;
+
     var lifeHistory = row[iLifeHistory] ? String(row[iLifeHistory]) : '';
     var existingProfile = row[iTraitProfile] ? String(row[iTraitProfile]) : '';
     var existingDialState = row[iDialState] ? String(row[iDialState]) : '';
+    var pending = pendingByPop[popId] || [];
 
-    if (!popId || !lifeHistory) continue;
-
-    // cadence guard: at most once per MIN_CYCLES_BETWEEN_COMPRESS (reads Updated:cN off the face)
-    if (!forceAll && existingProfile) {
+    // Compress eligibility — gates ONLY the objective fold/face/trim, NOT the reflection
+    // drain. A sparsely-active (<3 entries) or cadence-skipped citizen still accretes
+    // pending reflections into base, else the sparsest-woken — the ones the loop exists
+    // to reach — would never durably register a reflection (S269 finding 2).
+    var compressEligible = !!lifeHistory;
+    if (compressEligible && !forceAll && existingProfile) {
+      // cadence guard: at most once per MIN_CYCLES_BETWEEN_COMPRESS (reads Updated:cN off the face)
       var lastUpdate = parseLastUpdateCycle_(existingProfile);
-      if (lastUpdate > 0 && (cycle - lastUpdate) < MIN_CYCLES_BETWEEN_COMPRESS) {
-        skipped++;
-        continue;
-      }
+      if (lastUpdate > 0 && (cycle - lastUpdate) < MIN_CYCLES_BETWEEN_COMPRESS) compressEligible = false;
+    }
+    var entries = null;
+    if (compressEligible) {
+      entries = parseLifeHistoryEntries_(lifeHistory).entries;
+      if (!entries || entries.length < 3) compressEligible = false;
     }
 
-    var parsed = parseLifeHistoryEntries_(lifeHistory);
-    var entries = parsed.entries;
-
-    if (!entries || entries.length < 3) {
-      skipped++;
-      continue;
-    }
+    if (!compressEligible && !pending.length) { skipped++; continue; }
 
     // Load persisted dial state (base + streak); neutral if absent/corrupt. `mood`
     // is NOT persisted — base is the permanent self, mood is a re-derivable swing.
     var c = deserialize_(parseDialState_(existingDialState));
 
-    // FOLD-ON-TRIM (the stateful spine): events LEAVING the raw-20 window accrete
-    // into base + streak, each folded exactly once by construction (the window
-    // physically removes them on trim). No watermark, no double-count. Inert tags
-    // (Compressed / CareerState / edition citations) map to {} -> no movement.
-    foldAgedOutEntries_(c, entries, KEEP_RAW_ENTRIES);
-    zeroMood_(c); // aged-out events leave no lingering mood; base carries the permanent mark
-
-    // derive the readable face from BASE (stable identity, no run-to-run flicker)
-    var profileString = formatDialFace_(c, entries, cycle);
-
-    row[iTraitProfile] = profileString;
-    row[iDialState] = serializeDialState_(c);
-
-    if (trimHistory && entries.length > KEEP_RAW_ENTRIES) {
-      row[iLifeHistory] = trimLifeHistory_(entries, KEEP_RAW_ENTRIES, dialFaceShim_(c), cycle);
+    if (compressEligible) {
+      // FOLD-ON-TRIM (the stateful spine): events LEAVING the raw-20 window accrete
+      // into base + streak, each folded exactly once by construction (the window
+      // physically removes them on trim). No watermark, no double-count. Inert tags
+      // (Compressed / CareerState / edition citations) map to {} -> no movement.
+      foldAgedOutEntries_(c, entries, KEEP_RAW_ENTRIES);
+      zeroMood_(c); // aged-out events leave no lingering mood; base carries the permanent mark
     }
 
+    // Accrete pending reflections into base BEFORE deriving the face, so the readable
+    // face and DialState agree in-cycle. Mark each drained row applied='yes' via a
+    // Phase-10 cell intent — idempotent ACROSS cycles (next cycle skips applied='yes').
+    // NOT atomic with the DialState (ledger) write: the two land in separate per-tab
+    // executeSheetIntents_ passes, so a mid-Phase-10 crash leaves a bounded sub-point
+    // single-dial double-/under-count window — accepted (see header note + plan).
+    if (pending.length) {
+      reflectionsMoved += accreteReflectionsIntoBase_(c, pending, reflectionDialMap, REFLECTION_MULT, REFLECTION_ACCRETION_FRAC);
+      reflectionCitizens++;
+      for (var p = 0; p < pending.length; p++) {
+        queueCellIntent_(ctx, REFLECTION_INTAKE_TAB, pending[p].rowNum, RI_COL_APPLIED, 'yes',
+          'reflection-drain accreted (citizen-loop)', 'citizens', 100);
+      }
+    }
+
+    if (compressEligible) {
+      // derive the readable face from BASE (stable identity, no run-to-run flicker)
+      row[iTraitProfile] = formatDialFace_(c, entries, cycle);
+      if (trimHistory && entries.length > KEEP_RAW_ENTRIES) {
+        row[iLifeHistory] = trimLifeHistory_(entries, KEEP_RAW_ENTRIES, dialFaceShim_(c), cycle);
+      }
+    }
+
+    row[iDialState] = serializeDialState_(c);
     rows[r] = row;
     updated++;
   }
@@ -327,11 +401,14 @@ function compressLifeHistory_(ctx, options) {
     cycle: cycle,
     updated: updated,
     skipped: skipped,
+    reflectionsMoved: reflectionsMoved,
+    reflectionCitizens: reflectionCitizens,
     version: COMPRESS_VERSION
   };
 
   ctx.summary = S;
-  Logger.log('compressLifeHistory_ v' + COMPRESS_VERSION + ': Updated ' + updated + ', skipped ' + skipped);
+  Logger.log('compressLifeHistory_ v' + COMPRESS_VERSION + ': Updated ' + updated + ', skipped ' + skipped +
+    ', reflections ' + reflectionsMoved + '/' + reflectionCitizens + ' citizens');
 }
 
 // ============================================================================
@@ -948,9 +1025,12 @@ if (typeof module !== 'undefined' && module.exports) {
     formatDialFace_: formatDialFace_,
     parseProfileString_: parseProfileString_,
     getCitizenDialBands_: getCitizenDialBands_,
+    readPendingReflections_: readPendingReflections_,
     COMPRESS_VERSION: COMPRESS_VERSION,
     KEEP_RAW_ENTRIES: KEEP_RAW_ENTRIES,
-    MIN_CYCLES_BETWEEN_COMPRESS: MIN_CYCLES_BETWEEN_COMPRESS
+    MIN_CYCLES_BETWEEN_COMPRESS: MIN_CYCLES_BETWEEN_COMPRESS,
+    REFLECTION_MULT: REFLECTION_MULT,
+    REFLECTION_ACCRETION_FRAC: REFLECTION_ACCRETION_FRAC
   };
 }
 

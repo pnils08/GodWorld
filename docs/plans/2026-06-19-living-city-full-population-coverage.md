@@ -120,6 +120,33 @@ pointers:
 - **Verify:** over a multi-cycle dry-run, citizens' event-class mix correlates with their dominant dials; no dial runs away past the floor.
 - **Status:** [ ] not started
 
+#### Task B3: Ordinary-bad event content — the negative-pole supply (objective, deterministic; gate INDEPENDENT of B1)
+
+**The gap (S269, data-verified):** the good side of life is richly covered; the bad side is **bimodal — catastrophe or nothing.** The only ordinary-bad objective event in all 13 generators is `layoff` @ 0.004 (effectively never). Every ambient/ordinary tag pushes composure **up or neutral** → measured 0 volatile / 86% neutral / positive-skew. A real life has ordinary downs that fade; they don't exist. This is the OBJECTIVE half of "valence diverges them" (B1 is the subjective/classifier half). **Option-B routing (Mike S269): rebalance the existing pools + activate built-bad machinery, NOT a new generator.**
+
+- **Files:**
+  - `utilities/citizenDialMap.js` — **add mild objective-negative vocab** (additive, engine.39 pattern, no existing entry touched)
+  - `phase04-events/generateGenericCitizenMicroEvent.js`, `phase05-citizens/generateCitizensEvents.js` (ambient), `runCareerEngine.js`, `runRelationshipEngine.js`, `runHouseholdEngine.js`, `runNeighborhoodEngine.js` — add ordinary-bad pools + per-pool valence ratio
+  - `phase05-citizens/runConductEngine.js` (T7, inert) + `phase04-events/chaosCarsEngine.js` (engine.11, smoke-pending) — the built negative-source machinery to **activate**, not rebuild
+- **Steps:**
+  1. **Vocab first — the ordinary-negative tags don't exist.** `DIAL_MAP` ordinary negatives are only `Health{-2}` / `Rivalry{-3}`, then a cliff to catastrophe (`Setback{-5}`+); the affect tags (`Frustrated`/`Anxious`) are **reserved wake-time-only** (boundary — objective events must NOT emit them). Add ~−1/−2 objective tags for the everyday-friction band: e.g. `WorkSetback{drive:-2,composure:-1}` (passed over / tense review / project failed), `MoneyTight{composure:-2}`, `Argument{sociability:-2,warmth:-1}`, `Friction{composure:-2}` (got hassled / a sour errand), `Unsettled{composure:-2}` (felt unsafe / block trouble), `RunDown{composure:-2}` (a rough physical stretch short of `Health`). Additive only; same care as the S264 dual-tag work (DIAL_MAP byte-unchanged elsewhere).
+  2. **Ordinary-bad pools** in the engines above — everyday friction at ordinary scale, tagged to the new vocab. NOT catastrophe (they fade, low magnitude); the counterweight to the all-positive ambient.
+  3. **Per-pool valence ratio** — give every event-emitting pool an explicit good:neutral:bad mix (today good/neutral-only). The ratio is the divergence knob; start conservative, tune against the distribution.
+  4. **Dial-valence weighting** (composes with B2 selection-by-dial) — a low-composure citizen draws proportionally MORE friction and reads neutral events sourly; the steady one shrugs them off. Same street, two lives. Bounded by the no-runaway floor.
+  5. **Activate the built machinery** — `runConductEngine` (the Conduct negative pole) deploys with DialState; chaos-cars (objective adversity) clears its C100 smoke. B3 sequences the ordinary-friction band between ambient-positive and these catastrophe/conduct sources.
+- **Gate — INDEPENDENT of B1 (the leverage):** objective bad events are deterministic + engine-tagged — **no classifier in the loop.** So B3's divergence is verifiable on its own terms and can ship AHEAD of the classifier re-audit that gates the write-back. **Verify:** a multi-cycle dry-run measuring the population composure distribution **widens** vs the 86%-neutral baseline (negative pole fills), no LLM in loop, no dial past the floor.
+- **Status:** [ ] not started
+
+#### Task B4: Cross-system composure composition cap (B3 objective fold × research.14 reflection write-back)
+
+**The interaction that passes both isolated specs and still runs away.** Once both are live, the same bad day hits composure **twice** — the objective event folds (B3) AND the citizen's reflection about it accretes (research.14 write-back). The composure-as-affect-only fix only deconflicts event-vs-affect *within one reflection*; it does nothing for objective-fold + separate-reflection on the same underlying event. (The plan flagged this for chaos-cars specifically; B4 generalizes it to every ordinary-bad event.)
+
+- **Steps:**
+  1. **Decide the rule explicitly:** grounded compounding is **intended-but-bounded** — a citizen *should* get crankier because a real thing happened AND they dwelled on it, but capped. Implement a per-citizen per-cycle **net composure-delta cap** across BOTH feeders (objective fold + reflection accretion) + the two decay systems (chaos asymmetric decay + dial base/streak).
+  2. Owner of the composition check: engine-sheet, when both halves are live. Do NOT leave the interaction implicit — it is the runaway surface.
+- **Verify:** a citizen hit by a real bad event AND reflecting negatively on it ends the cycle more negative than either alone, but within the cap; no citizen crosses the no-death / no-runaway floor over a multi-cycle dry-run.
+- **Status:** [ ] not started (depends-on B3 + research.14 write-back both landing)
+
 ### Phase C — Opinion layer to full population (paid, throughput-capped) — DEPENDS-ON Phase A
 
 #### Task C1: Expand wake eligibility to all 906
@@ -161,4 +188,5 @@ pointers:
 
 ## Changelog
 
+- 2026-06-23 — **Phase B extended: B3 ordinary-bad event content + B4 cross-system cap (S269, research-build, Mike-approved Option-B + advisor).** The "real-life generator, good & bad events" ask resolved to the OBJECTIVE half of Phase B's valence/divergence (B1 = the subjective/classifier half). Data-verified gap (EVENT_SYSTEM_MAP + DIAL_MAP read): good life richly covered; bad is **bimodal — catastrophe or nothing**, only ordinary-bad is `layoff`@0.004; every ambient tag pushes composure up/neutral → 0 volatile / 86% neutral. **B3** = (1) add mild objective-negative VOCAB (~−1/−2, additive — DIAL_MAP has none at ordinary scale; affect tags are wake-reserved, `Setback{-5}` is catastrophe-scale), (2) ordinary-bad pools in the 6 existing engines, (3) per-pool good:neutral:bad valence ratio, (4) dial-valence weighting (low-composure draws more friction), (5) activate built machinery (`runConductEngine` inert, chaos-cars smoke-pending) — Option-B (rebalance-in-place), NOT a new generator. **Key leverage: B3 is deterministic (no classifier) → ships on its own composure-distribution-widens dry-run gate, AHEAD of / independent of B1's affect re-audit.** **B4** = the cross-system cap: objective fold (B3) + reflection accretion (research.14 write-back) both hit composure on the same bad day → grounded-compounding-but-bounded via a per-citizen per-cycle net composure-delta cap across both feeders + both decay systems. Composer/apply for the write-back already built; B3 vocab + pools are the new build.
 - 2026-06-19 — Initial draft (S264, research-build). Diagnosed from S264 live data: 14%/cycle coverage, named generator orphaned, T8 four-gate throttle. Advisor-reviewed (4 load-bearing points folded: valence-is-the-crux dependency on research.14 affect-fix; free-engine vs paid-opinion split; coverage-prerequisite-for-opinion confabulation guard; don't-drown number + compressor verify). Sequencing grep-verified: texture-coverage is composure-neutral (runway to parallelize Phase A while Phase B lands). Mike-directed: every ledger citizen eligible for the 24/7 lifecycle + own opinions. Engine.38 row filed; research.14 + engine.32 cross-linked.

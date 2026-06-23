@@ -60,8 +60,8 @@ News (the Cycle Pulse) and "ask them about the world" are higher rungs **on top 
 
 ### Tier 1 — continuity + immediate world (the immediate build)
 - **Own page read-back**, BOUNDED (last-N reflections or a rolling summary, not the whole page — PT-3) and GUARDED (a fabrication/canon check before re-injection — PT-1). Closes the amnesia; the most direct serving of "consistent existence with their output."
-- **Sports feed** (`Oakland_Sports_Feed`) — cheap, canonical, Oakland cares about the A's; the research.13 PoC had it.
-- **Richer neighborhood state** via `lib/neighborhoodSlice` — what's *happening* on their block, translated to lived particulars (not aggregates).
+- **Sports feed** (`Oakland_Sports_Feed`) — cheap, canonical, Oakland cares about the A's; the research.13 PoC had it. **Genuinely Tier-1 cheap** — canonical feed, no translation step.
+- **Neighborhood state is NOT a Tier-1 freebie (CV-2 correction).** The slicer (`lib/neighborhoodSlice`) already runs at wake and returns `{residents, state}`; `state` is **aggregates** (`crimeIndex`, `sentiment`) and `describe()` renders them as metrics. Feeding it raw violates the lived-particulars guardrail (the `retail −4%` failure). So neighborhood-state is the **input to T2's translation**, not a standalone Tier-1 add — it moves to T2. What's already wired is the *data path*, not a usable surface.
 
 ### Tier 2 — the city beyond the block (a real translation build, PT-2)
 - A per-neighborhood **lived-particulars digest** of the world summary: "the festival downtown, rent notices going around," NOT "leisure +3 / retail −4%." This is a generative/translation step with its own cost + determinism (frozen at wake) + contamination surface — **not free reuse** of `baseline_briefs` (which gives state, not what-a-person-notices). Scope it as a build, not a wiring.
@@ -95,13 +95,20 @@ Generated the design, then attacked it. Findings folded into the tiers above:
 
 ---
 
+## Code verification (S270 — measure-twice against live wake)
+
+Both load-bearing premises confirmed against `scripts/citizen-wake.js` + `lib/neighborhoodSlice.js` (advisor was overloaded; this is the code-grounding pass that doesn't need it):
+
+- **CV-1: "writes a memory it never reads" — CONFIRMED.** `buildVoicePrompts` (L124–131) assembles perception from exactly disposition + `c.life` (last-5 inline LifeHistory, L90) + `neighbors` (3 names+occupation). `appendReflection_` writes the page every wake (L169); the page is **never** read back into the prompt. PT-1 stands.
+- **CV-2: "no world beyond the block" — CONFIRMED, with a wiring nuance.** System prompt (L129) = self + recent life + people-around-you; no sports/world/news. The slicer **already runs** at wake (L117–118) and computes neighborhood `state` (`crimeIndex`, `sentiment`) but the wake discards all but `residents`. The data path exists; the usable surface does not — `state` is aggregates, so it belongs to T2's translation, not Tier 1 (folded above).
+
 ## Build sequence (tasks)
 
 | # | Task | Terminal | Gate |
 |---|------|----------|------|
 | T1a | Bounded + canon-guarded own-page read-back into the wake perception | bot + research.17 filter | none (own data, guarded) |
-| T1b | Sports feed + richer neighborhood-state (lived particulars) into perception | bot | none |
-| T2 | World-summary → per-neighborhood lived-particulars translation layer (frozen at wake) | research-build (design) → bot/engine-sheet | none (deterministic snapshot) |
+| T1b | Sports feed (`Oakland_Sports_Feed`) into perception — canonical, no translation | bot | none |
+| T2 | World-summary **+ neighborhood `state`** → per-neighborhood lived-particulars translation layer (frozen at wake). Slicer data-path already runs at wake (CV-2); the build is the aggregate→lived-particular translation, not the wiring. | research-build (design) → bot/engine-sheet | none (deterministic snapshot) |
 | T3 | Read-the-Pulse pilot, reaction-only, **routed through research.17 injection filter** | research.17 must land first | research.17 filter live |
 | T4 | Ask-the-citizen agency rung | research.12 Layer 3 | GPU + drift gate (autonomy roadmap) |
 
@@ -120,4 +127,5 @@ Generated the design, then attacked it. Findings folded into the tiers above:
 
 ## Changelog
 
+- 2026-06-23 (S270) — Code-verification pass (advisor still overloaded): both premises confirmed against `citizen-wake.js`/`neighborhoodSlice.js` (CV-1 page-never-read, CV-2 no-world-beyond-block). Correction: neighborhood `state` is computed-but-discarded aggregates → moves from Tier-1 to T2 translation; T1b reduced to sports feed only. Advisor pressure-test still owed.
 - 2026-06-23 — Initial draft (S269, research-build, Mike-approved "write it up"). Audit of current citizen perception (thin: disposition + last-5 LifeHistory + 3 names; writes-a-memory-never-read; no world beyond the block). Four-ingredient immersion frame (continuity / world-larger-than-self / relationships / stakes). Four-tier access architecture mapping Mike's candidates (Supermemory / Cycle Pulse / world-summary / agency). Self-pressure-test (advisor overloaded — PENDING): page-readback amplifies fabrication, Tier-2 translation is a real build, page growth needs bounding, immersion amplifies the write-back, Tier-3 needs a real filter not a prompt. Cross-linked research.14/.12/.17 + engine.38 B3.

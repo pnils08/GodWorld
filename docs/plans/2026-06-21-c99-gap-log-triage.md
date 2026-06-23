@@ -256,7 +256,7 @@ pointers:
 ## Open questions
 
 - [x] **ES-3 baylight gate-form ownership** — RESOLVED S267/S268. Empirically the fix is in the agent RULES (no script synthesizes dates), and per the four-terminal split a behavior change to an agent is research-build-designed + **engine-sheet-built**, NOT civic. Built S268 (RULES + SKILL).
-- [ ] **ES-3 follow-up (research-build) — extend the cycle-form design to the baylight agent's voice files.** `IDENTITY.md:41` models "begins in Q3" and `LENS.md` carries "Q3 mobilization" + world-history anchors "2040"/"2046" — the same calendar-leak class, but voice/character text that's research-build's design seat. Mike held ES-3 to RULES+SKILL scope (S268); this residual is the voice-file half.
+- [ ] **ES-3 follow-up (research-build) — extend the cycle-form design to the baylight agent's voice files.** `IDENTITY.md:41` models "begins in Q3" and `LENS.md` carries "Q3 mobilization" + world-history anchors "2040"/"2046" — the same calendar-leak class, but voice/character text that's research-build's design seat. Mike held ES-3 to RULES+SKILL scope (S268); this residual is the voice-file half. **Filed forward as `governance.43` (ready, S268)** — this plan's sole open thread; plan moves to `docs/archive/plans/` when gov.43 closes.
 
 ---
 

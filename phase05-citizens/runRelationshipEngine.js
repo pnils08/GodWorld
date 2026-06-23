@@ -571,7 +571,7 @@ function runRelationshipEngine_(ctx) {
         }
       }
 
-      var stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
+      var stamp = inWorldStamp_(ctx);
 
       var existing = row[iLife] ? row[iLife].toString() : "";
       var line = stamp + " — [" + eventTag + "] " + pick;

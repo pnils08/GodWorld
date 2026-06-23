@@ -580,7 +580,7 @@ function getRecentFaithEvents_(ss, cyclesBack) {
  */
 function recordFaithEvent_(ctx, event) {
   var cycle = (ctx.summary && ctx.summary.absoluteCycle) || 0;
-  var timestamp = ctx.now || new Date();
+  var timestamp = inWorldStamp_(ctx);
 
   var rowData = [
     timestamp,
@@ -614,7 +614,7 @@ function batchRecordFaithEvents_(ctx, events) {
   if (!events || events.length === 0) return;
 
   var cycle = (ctx.summary && ctx.summary.absoluteCycle) || 0;
-  var timestamp = ctx.now || new Date();
+  var timestamp = inWorldStamp_(ctx);
 
   var rows = [];
   for (var i = 0; i < events.length; i++) {

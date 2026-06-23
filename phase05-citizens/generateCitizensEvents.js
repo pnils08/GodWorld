@@ -1702,7 +1702,7 @@ function generateCitizensEvents_(ctx) {
     var primaryTag = primaryFromTags(tags);
     var tagString = [primaryTag].concat(tags).join("|");
 
-    var stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
+    var stamp = inWorldStamp_(ctx);
     var existing = row[iLife] ? row[iLife].toString() : "";
     var line = stamp + " — [" + primaryTag + "] " + pick;
 

@@ -411,7 +411,7 @@ function runCivicRoleEngine_(ctx) {
     if (econMood <= 35) context += " Economic concerns affect civic priorities.";
     if (econMood >= 65) context += " Economic optimism supports civic agenda.";
 
-    var stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
+    var stamp = inWorldStamp_(ctx);
 
     var existing = row[iLife] ? row[iLife].toString() : "";
     var finalLine = stamp + " — [Civic Role] " + baseNote + context;

@@ -729,7 +729,7 @@ function runCareerEngine_(ctx) {
 
     // Choose drift output
     var pick = null;
-    var stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
+    var stamp = inWorldStamp_(ctx);
 
     // Determine event tag (v2.2)
     var eventTag = "Career";

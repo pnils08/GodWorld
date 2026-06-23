@@ -542,7 +542,7 @@ function generateGenericCitizenMicroEvents_(ctx) {
     else if (communityPool.indexOf(pick) >= 0) tag = "Community";
     else if (prevEvePool.indexOf(pick) >= 0) tag = "PrevEvening";
 
-    var stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
+    var stamp = inWorldStamp_(ctx);
     var line = stamp + " — [" + tag + "] " + pick;
 
     var existing = row[iLife] ? row[iLife].toString() : "";
@@ -551,7 +551,7 @@ function generateGenericCitizenMicroEvents_(ctx) {
     if (iLastUpd >= 0) row[iLastUpd] = ctx.now;
 
     logRows.push([
-      ctx.now,
+      inWorldStamp_(ctx),
       popId,
       '',
       "Micro-Event",

@@ -598,7 +598,7 @@ function countYouthEventsByLevel_(events) {
  */
 function recordYouthLifeHistory_(ctx, events) {
   var cycle = (ctx.summary && ctx.summary.absoluteCycle) || 0;
-  var timestamp = ctx.now || new Date();
+  var timestamp = inWorldStamp_(ctx);
 
   for (var i = 0; i < events.length; i++) {
     var e = events[i];

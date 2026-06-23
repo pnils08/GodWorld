@@ -419,7 +419,7 @@ function runEducationEngine_(ctx) {
     // PICK EVENT
     // ═══════════════════════════════════════════════════════════════════════
     var pick = pool[Math.floor(rng() * pool.length)];
-    var stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
+    var stamp = inWorldStamp_(ctx);
 
     // Determine event tag (v2.2)
     var eventTag = "Education";

@@ -387,7 +387,7 @@ function getTransitSummary_(ss, cycle) {
  */
 function recordTransitMetrics_(ctx, metrics) {
   var cycle = (ctx.summary && ctx.summary.absoluteCycle) || 0;
-  var timestamp = ctx.now || new Date();
+  var timestamp = inWorldStamp_(ctx);
 
   var rowData = [
     timestamp,
@@ -420,7 +420,7 @@ function batchRecordTransitMetrics_(ctx, metricsArray) {
   if (!metricsArray || metricsArray.length === 0) return;
 
   var cycle = (ctx.summary && ctx.summary.absoluteCycle) || 0;
-  var timestamp = ctx.now || new Date();
+  var timestamp = inWorldStamp_(ctx);
 
   var rows = [];
   for (var i = 0; i < metricsArray.length; i++) {

@@ -238,7 +238,7 @@ function runConductEngine_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     // LOG — same write path as the other Phase 5 life engines
     // ═══════════════════════════════════════════════════════════════════════
-    var stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
+    var stamp = inWorldStamp_(ctx);
     var line = stamp + " — [" + eventTag + "] " + pick;
     var existing = row[iLife] ? row[iLife].toString() : "";
 

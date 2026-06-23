@@ -83,7 +83,7 @@ function buildCyclePacket_(ctx) {
   lines.push('=== CYCLE PACKET ===');
   lines.push('Cycle: ' + (S.absoluteCycle || S.cycleId || ''));
   lines.push('CycleRef: ' + (S.cycleRef || 'Y' + cal.godWorldYear + 'C' + cal.cycleOfYear));
-  lines.push('Timestamp: ' + (ctx.now || new Date()).toISOString());
+  lines.push('Timestamp: ' + inWorldStamp_(ctx));  // S271 in-world, not wall-clock
   
   if (civic.electionWindow) {
     lines.push('🗳️ ELECTION WINDOW ACTIVE — Group ' + civic.electionGroup);
@@ -752,7 +752,7 @@ function buildCyclePacket_(ctx) {
   var startRow = Math.max(sheet.getLastRow() + 1, 2);
   sheet.getRange(startRow, 1, 1, 3).setValues([
     [
-      ctx.now,                                    // A  Timestamp
+      inWorldStamp_(ctx),                         // A  Timestamp (S271 in-world)
       S.absoluteCycle || S.cycleId || '',         // B  Cycle
       "'" + packet                                // C  PacketText
     ]

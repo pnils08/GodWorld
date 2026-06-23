@@ -461,7 +461,7 @@ function generateCivicModeEvents_(ctx) {
     if (!picked) continue;
 
     var primaryTag = picked.primary || "Civic";
-    var stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
+    var stamp = inWorldStamp_(ctx);
     var line = stamp + " — [" + primaryTag + "] " + picked.text;
 
     var existing = row[iLife] ? row[iLife].toString() : "";

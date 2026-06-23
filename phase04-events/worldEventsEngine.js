@@ -405,7 +405,7 @@ function worldEventsEngine_(ctx) {
       description: results[r].description,
       severity: results[r].severity,
       source: "WORLD_EVENTS_ENGINE",
-      timestamp: ctx.now || new Date(),
+      timestamp: inWorldStamp_(ctx),
       holidayContext: (holiday !== "none") ? holiday : null,
       sportsSeason: sportsSeason
     });

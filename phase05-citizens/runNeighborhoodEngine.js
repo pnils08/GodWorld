@@ -509,7 +509,7 @@ function runNeighborhoodEngine_(ctx) {
       }
 
       // Stamp entry
-      var stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
+      var stamp = inWorldStamp_(ctx);
       var existing = row[iLife] ? row[iLife].toString() : "";
       var line = stamp + " — [" + eventTag + "] " + entry;
 

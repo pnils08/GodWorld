@@ -309,6 +309,22 @@ function advanceSimulationCalendar_(ctx) {
 
 
 /**
+ * In-world event stamp — the canonical replacement for wall-clock ctx.now in
+ * any citizen-facing life record (LifeHistory_Log Timestamp col, col-O life
+ * strings). Returns the in-world cycle anchor "Y{year}C{cycle}" set in
+ * advanceSimulationCalendar_. Real-world dates must never land in the sim's
+ * lived record. Falls back to absolute-cycle then "C?" if calendar not yet run.
+ */
+function inWorldStamp_(ctx) {
+  var S = (ctx && ctx.summary) || {};
+  if (S.cycleRef) return S.cycleRef;
+  if (S.absoluteCycle != null) return 'C' + S.absoluteCycle;
+  if (S.cycle != null) return 'C' + S.cycle;
+  return 'C?';
+}
+
+
+/**
  * ============================================================================
  * SIMULATION_CALENDAR SHEET SCHEMA
  * ============================================================================

@@ -1085,7 +1085,7 @@ function applyMilestone_(ctx, row, iLife, iLastU, milestone, name, popId, neighb
   queueAppendIntent_(
     ctx,
     'LifeHistory_Log',
-    [ctx.now, popId, '', milestone.tag, milestone.description, '', cycle],
+    [inWorldStamp_(ctx), popId, '', milestone.tag, milestone.description, '', cycle],
     'generational milestone',
     'events'
   );

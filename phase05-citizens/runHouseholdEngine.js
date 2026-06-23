@@ -517,7 +517,7 @@ function runHouseholdEngine_(ctx) {
     // PICK AND LOG
     // ═══════════════════════════════════════════════════════════════════════
     var pick = citizenPool[Math.floor(hRng() * citizenPool.length)];
-    var stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
+    var stamp = inWorldStamp_(ctx);
 
     // Determine event tag (v2.2; health tags added engine.32 T4)
     var eventTag = "Household";

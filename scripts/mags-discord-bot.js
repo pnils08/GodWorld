@@ -1,15 +1,25 @@
 #!/usr/bin/env node
 /**
- * Mags' Discord Presence — scripts/mags-discord-bot.js
+ * Discord Persona Presence — scripts/mags-discord-bot.js
  *
- * Always-on bot that lets Mags chat in #mags-morning.
- * She loads her identity at startup, keeps a rolling conversation
- * history, and responds as herself — warm, reflective, real.
+ * Always-on bot that hosts one or more conversational personas on Discord, one per channel.
+ * Mags chats in her channel (#mags-morning); each Tier-1 citizen voice (research.16) chats in
+ * its own channel. Each persona loads its identity at startup, keeps its OWN rolling conversation
+ * history, and responds in its own voice.
+ *
+ * The machinery here (Anthropic call loop, tool-use rounds, rolling history, message-splitting) is
+ * persona-agnostic; identity + framing + dynamic context + memory writes flow through a persona
+ * PROVIDER (lib/personaProvider). Mags is one provider, built inline below from lib/mags; citizens
+ * are citizenVoiceProvider(popId). Channel routing is a channelId -> provider map. (research.16
+ * Phase 2, S270.)
  *
  * Usage:
  *   node scripts/mags-discord-bot.js
  *
- * Requires .env: ANTHROPIC_API_KEY, DISCORD_BOT_TOKEN
+ * Requires .env: ANTHROPIC_API_KEY, DISCORD_BOT_TOKEN, DISCORD_CHANNEL_ID (Mags' channel).
+ * Optional .env: CITIZEN_VOICE_CHANNELS — JSON map of { "<channelId>": "POP-XXXXX" } adding a
+ *   citizen-voice persona per channel. Unset -> Mags-only (no behavior change). GATED: a citizen
+ *   channel only goes live once Mike sets this env and restarts the bot.
  */
 
 require('/root/GodWorld/lib/env');
@@ -19,6 +29,7 @@ const fs = require('fs');
 const path = require('path');
 const mags = require('../lib/mags');
 const contextScan = require('../lib/contextScan');
+const personaProvider = require('../lib/personaProvider');
 
 // ---------------------------------------------------------------------------
 // Phase 40.3 Task 6 — Discord credential-read refusal
@@ -90,14 +101,16 @@ const USE_SUPERMEMORY = !!SUPERMEMORY_KEY;
 const claude = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 // ---------------------------------------------------------------------------
-// State
+// State — per-channel sessions. Each persona keeps its OWN conversation history,
+// prompt cache, and daily-log cache so two personas on two channels never cross
+// contaminate. Keyed by channelId.
 // ---------------------------------------------------------------------------
-var conversationHistory = [];
-var lastIdentityLoad = 0;
-var cachedSystemPrompt = '';
-var userCooldowns = new Map();
-var cachedLogDate = '';           // current day string for log caching
-var cachedLogEntries = [];        // in-memory log entries for current day
+var sessions = new Map();         // channelId -> { history, cachedPrompt, lastLoad, logDate, logEntries }
+var userCooldowns = new Map();    // userId -> last-reply ts (global; cooldown is per-user, not per-channel)
+
+function newSession() {
+  return { history: [], cachedPrompt: '', lastLoad: 0, logDate: '', logEntries: [] };
+}
 
 // ---------------------------------------------------------------------------
 // Logger
@@ -109,41 +122,42 @@ const log = {
 };
 
 // ---------------------------------------------------------------------------
-// Conversation history persistence — survive PM2 restarts
+// Conversation history persistence — survive PM2 restarts. Per-provider file.
 // ---------------------------------------------------------------------------
-const HISTORY_FILE = path.join(__dirname, '..', 'logs', 'discord-conversation-history.json');
-
-function saveConversationHistory() {
+function saveConversationHistory(provider, session) {
   try {
-    fs.writeFileSync(HISTORY_FILE, JSON.stringify({
+    fs.writeFileSync(provider.historyFile, JSON.stringify({
       savedAt: Date.now(),
-      history: conversationHistory
+      history: session.history
     }));
   } catch (err) {
-    log.error('Failed to save conversation history: ' + err.message);
+    log.error('[' + provider.label + '] Failed to save conversation history: ' + err.message);
   }
 }
 
-function loadConversationHistory() {
+function loadConversationHistory(provider, session) {
   try {
-    if (!fs.existsSync(HISTORY_FILE)) return;
-    var data = JSON.parse(fs.readFileSync(HISTORY_FILE, 'utf-8'));
+    if (!fs.existsSync(provider.historyFile)) return;
+    var data = JSON.parse(fs.readFileSync(provider.historyFile, 'utf-8'));
     // 6-hour staleness check — don't load yesterday's stale context
     if (Date.now() - data.savedAt > 6 * 60 * 60 * 1000) {
-      log.info('Conversation history too stale (>6h), starting fresh');
+      log.info('[' + provider.label + '] Conversation history too stale (>6h), starting fresh');
       return;
     }
-    conversationHistory = data.history || [];
-    log.info('Restored ' + conversationHistory.length + ' messages from disk');
+    session.history = data.history || [];
+    log.info('[' + provider.label + '] Restored ' + session.history.length + ' messages from disk');
   } catch (err) {
-    log.warn('Could not restore conversation history: ' + err.message);
+    log.warn('[' + provider.label + '] Could not restore conversation history: ' + err.message);
   }
 }
 
 // ---------------------------------------------------------------------------
-// Build system prompt from identity + journal
+// Mags persona — the system prompt builder + dynamic-context augment that were
+// the bot's original behavior, now wrapped as one provider. Preserved verbatim.
 // ---------------------------------------------------------------------------
-function buildSystemPrompt() {
+const MAGS_HISTORY_FILE = path.join(__dirname, '..', 'logs', 'discord-conversation-history.json');
+
+function buildMagsSystemPrompt() {
   var identity = mags.loadIdentity();
   var journalTail = mags.loadRecentReflections(2);  // her reflections only — never operator-layer session entries (S252)
   var worldState = mags.loadWorldState();           // compact orientation header; she searches for depth (S252 Task 5)
@@ -196,24 +210,69 @@ function buildSystemPrompt() {
     prompt += '\n\n---\n\n' + conversationDigest;
   }
 
-  cachedSystemPrompt = prompt;
-  lastIdentityLoad = Date.now();
   log.info('System prompt built (' + prompt.length + ' chars)');
   return prompt;
 }
 
-// ---------------------------------------------------------------------------
-// Get system prompt (with hourly refresh)
-// ---------------------------------------------------------------------------
-function getSystemPrompt() {
-  if (!cachedSystemPrompt || (Date.now() - lastIdentityLoad) > IDENTITY_REFRESH_MS) {
-    return buildSystemPrompt();
+// Mags' per-message dynamic context: user profile + archive RAG + family + dashboard, exactly as
+// the original callClaude did. Returns the augmented system prompt.
+async function magsAugment(systemPrompt, opts) {
+  opts = opts || {};
+  var results = await Promise.all([
+    searchSupermemory(opts.userMessage),
+    fetchUserProfile(opts.userId),
+    mags.loadFamilyData(),
+    searchDashboard(opts.userMessage)
+  ]);
+  var archiveContext = results[0];
+  var userProfile = results[1];
+  var familyData = results[2];
+  var dashboardArticles = results[3];
+
+  if (familyData && !familyData.startsWith('(')) {
+    systemPrompt += '\n\n---\n\n' + familyData;
   }
-  return cachedSystemPrompt;
+  if (userProfile) {
+    systemPrompt += '\n\n---\n\n## About This Person\n\n' +
+      'You remember this about who you\'re talking to:\n' + userProfile;
+  }
+  if (archiveContext) {
+    systemPrompt += '\n\n---\n\n## Archive Knowledge (from Tribune files)\n\n' +
+      'The following was found in your archives. Use it naturally — don\'t quote it ' +
+      'verbatim, just know it.\n\n' + archiveContext;
+  }
+  if (dashboardArticles) {
+    systemPrompt += '\n\n---\n\n## Published articles (dashboard index)\n\n' + dashboardArticles;
+  }
+  return systemPrompt;
+}
+
+const magsProvider = {
+  id: 'mags',
+  label: 'Mags',
+  notesEnabled: true,
+  logSubdir: '',                       // root logs/discord-conversations/ — her digest reads this path
+  historyFile: MAGS_HISTORY_FILE,
+  buildSystemPrompt: buildMagsSystemPrompt,
+  augment: magsAugment,
+  persistResponse: function (userName, userMessage, response, userId) {
+    saveToSupermemory(userName, userMessage, response, userId);
+  },
+};
+
+// ---------------------------------------------------------------------------
+// Get system prompt (with hourly refresh) — per session.
+// ---------------------------------------------------------------------------
+function getSystemPrompt(provider, session) {
+  if (!session.cachedPrompt || (Date.now() - session.lastLoad) > IDENTITY_REFRESH_MS) {
+    session.cachedPrompt = provider.buildSystemPrompt();
+    session.lastLoad = Date.now();
+  }
+  return session.cachedPrompt;
 }
 
 // ---------------------------------------------------------------------------
-// Search Supermemory for relevant context before responding
+// Search Supermemory for relevant context before responding (Mags' RAG)
 // ---------------------------------------------------------------------------
 function searchSupermemory(query) {
   if (!USE_SUPERMEMORY) return Promise.resolve('');
@@ -343,7 +402,7 @@ function fetchUserProfile(discordUserId) {
 }
 
 // ---------------------------------------------------------------------------
-// Save conversation to Supermemory for user profile building
+// Save conversation to Supermemory for user profile building (Mags)
 // ---------------------------------------------------------------------------
 function saveToSupermemory(userName, userMessage, magsResponse, discordUserId) {
   if (!USE_SUPERMEMORY) return;
@@ -402,10 +461,9 @@ function searchDashboard(query) {
 }
 
 // ---------------------------------------------------------------------------
-// Tool: search her own city from local disk (free, never-stale). She calls this
-// when she needs a fact she doesn't already have — citizen, business,
-// neighborhood, edition, canon. Backed by mags.searchDisk (grep over
-// output/+docs/+editions; live ledger snapshot + editions ranked top).
+// Tool: search the city from local disk (free, never-stale). Shared by every
+// persona — it's a generic world-fact lookup (citizen, business, neighborhood,
+// edition, canon), backed by mags.searchDisk.
 // ---------------------------------------------------------------------------
 var SEARCH_TOOL = {
   name: 'search_world',
@@ -424,57 +482,29 @@ var SEARCH_TOOL = {
 };
 
 // ---------------------------------------------------------------------------
-// Call Claude API
+// Call Claude API — generalized over a persona provider + its channel session.
 // ---------------------------------------------------------------------------
-async function callClaude(userMessage, userName, userId) {
-  var systemPrompt = getSystemPrompt();
+async function callClaude(provider, session, userMessage, userName, userId) {
+  var systemPrompt = getSystemPrompt(provider, session);
 
-  // Fetch user profile + search archive + family data in parallel
-  var results = await Promise.all([
-    searchSupermemory(userMessage),
-    fetchUserProfile(userId),
-    mags.loadFamilyData(),
-    searchDashboard(userMessage)
-  ]);
-  var archiveContext = results[0];
-  var userProfile = results[1];
-  var familyData = results[2];
-  var dashboardArticles = results[3];
+  // Per-message dynamic context is provider-specific (Mags: profile/archive/family/dashboard;
+  // citizen: their own fenced page recall).
+  systemPrompt = await provider.augment(systemPrompt, { userMessage: userMessage, userId: userId });
 
-  if (familyData && !familyData.startsWith('(')) {
-    systemPrompt += '\n\n---\n\n' + familyData;
-  }
-
-  if (userProfile) {
-    systemPrompt += '\n\n---\n\n## About This Person\n\n' +
-      'You remember this about who you\'re talking to:\n' + userProfile;
-  }
-
-  if (archiveContext) {
-    systemPrompt += '\n\n---\n\n## Archive Knowledge (from Tribune files)\n\n' +
-      'The following was found in your archives. Use it naturally — don\'t quote it ' +
-      'verbatim, just know it.\n\n' + archiveContext;
-  }
-
-  if (dashboardArticles) {
-    systemPrompt += '\n\n---\n\n## Published articles (dashboard index)\n\n' + dashboardArticles;
-  }
-
-  // Build messages array from conversation history + new message
-  var messages = conversationHistory.slice();
+  // Build messages array from this channel's conversation history + new message
+  var messages = session.history.slice();
   messages.push({ role: 'user', content: userName + ': ' + userMessage });
 
-  log.info('Calling Claude (' + messages.length + ' messages, ~' +
-    Math.round(systemPrompt.length / 4) + ' system tokens)' +
-    (archiveContext ? ' [+archive: ' + archiveContext.length + ' chars]' : ''));
+  log.info('[' + provider.label + '] Calling Claude (' + messages.length + ' messages, ~' +
+    Math.round(systemPrompt.length / 4) + ' system tokens)');
 
-  // Tool-use loop: she may call search_world to ground her answer in live city
-  // data before replying. Capped at 3 rounds so a confused turn can't spin.
+  // Tool-use loop: the persona may call search_world to ground its answer in live city
+  // data before replying. Capped at 4 rounds so a confused turn can't spin.
   var response;
   var text = '';
   var MAX_TOOL_ROUNDS = 4;
   for (var round = 0; round < MAX_TOOL_ROUNDS; round++) {
-    // Last round: NO tools, so she must answer and can never reply empty
+    // Last round: NO tools, so it must answer and can never reply empty
     // (S252 flaw fix — a still-searching turn returned 0 chars).
     var isFinal = (round === MAX_TOOL_ROUNDS - 1);
     var opts = { model: 'claude-haiku-4-5-20251001', max_tokens: MAX_RESPONSE_TOKENS, system: systemPrompt, messages: messages, tools: [SEARCH_TOOL] };
@@ -495,29 +525,29 @@ async function callClaude(userMessage, userName, userId) {
         return { type: 'tool_result', tool_use_id: tu.id, content: result };
       });
       messages.push({ role: 'user', content: toolResults });
-      log.info('search_world: ' + toolUses.map(function (t) { return t.input && t.input.query; }).join(' | '));
-      continue;  // let her see results and answer (or search again)
+      log.info('[' + provider.label + '] search_world: ' + toolUses.map(function (t) { return t.input && t.input.query; }).join(' | '));
+      continue;  // let it see results and answer (or search again)
     }
 
     text = textBlocks;
     break;
   }
 
-  log.info('Response: ' + text.length + ' chars, ' +
+  log.info('[' + provider.label + '] Response: ' + text.length + ' chars, ' +
     (response && response.usage ? response.usage.input_tokens + ' in / ' + response.usage.output_tokens + ' out' : 'n/a'));
 
-  // Update conversation history
-  conversationHistory.push({ role: 'user', content: userName + ': ' + userMessage });
-  conversationHistory.push({ role: 'assistant', content: text });
+  // Update this channel's conversation history
+  session.history.push({ role: 'user', content: userName + ': ' + userMessage });
+  session.history.push({ role: 'assistant', content: text });
 
   // Trim to max history (pairs of 2)
-  while (conversationHistory.length > MAX_HISTORY * 2) {
-    conversationHistory.shift();
-    conversationHistory.shift();
+  while (session.history.length > MAX_HISTORY * 2) {
+    session.history.shift();
+    session.history.shift();
   }
 
   // Persist to disk so PM2 restarts don't lose context
-  saveConversationHistory();
+  saveConversationHistory(provider, session);
 
   return text;
 }
@@ -562,51 +592,54 @@ function splitMessage(text) {
 }
 
 // ---------------------------------------------------------------------------
-// Conversation logging — daily JSON files
+// Conversation logging — daily JSON files, per persona. Mags logs to the root
+// logs/discord-conversations/ (her digest reads it); citizens log to a per-POPID
+// subdir so transcripts never mix.
 // ---------------------------------------------------------------------------
 const CONVO_LOG_DIR = path.join(__dirname, '..', 'logs', 'discord-conversations');
 const NOTES_FILE = path.join(__dirname, '..', 'docs', 'mags-corliss', 'NOTES_TO_SELF.md');
 
-function logConversation(userName, userMessage, magsResponse) {
+function logConversation(provider, session, userName, userMessage, response) {
   try {
-    if (!fs.existsSync(CONVO_LOG_DIR)) {
-      fs.mkdirSync(CONVO_LOG_DIR, { recursive: true });
+    var dir = provider.logSubdir ? path.join(CONVO_LOG_DIR, provider.logSubdir) : CONVO_LOG_DIR;
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
     }
     var today = mags.getCentralDate();
 
     // Day rolled over — reset cache, load new day's file if it exists
-    if (today !== cachedLogDate) {
-      cachedLogDate = today;
-      var logFile = path.join(CONVO_LOG_DIR, today + '.json');
-      if (fs.existsSync(logFile)) {
+    if (today !== session.logDate) {
+      session.logDate = today;
+      var logFileToLoad = path.join(dir, today + '.json');
+      if (fs.existsSync(logFileToLoad)) {
         try {
-          cachedLogEntries = JSON.parse(fs.readFileSync(logFile, 'utf8'));
+          session.logEntries = JSON.parse(fs.readFileSync(logFileToLoad, 'utf8'));
         } catch (parseErr) {
-          log.warn('Could not parse existing log, starting fresh: ' + parseErr.message);
-          cachedLogEntries = [];
+          log.warn('[' + provider.label + '] Could not parse existing log, starting fresh: ' + parseErr.message);
+          session.logEntries = [];
         }
       } else {
-        cachedLogEntries = [];
+        session.logEntries = [];
       }
     }
 
-    cachedLogEntries.push({
+    session.logEntries.push({
       timestamp: new Date().toISOString(),
       user: userName,
       message: userMessage,
-      response: magsResponse
+      response: response
     });
 
-    var logFile = path.join(CONVO_LOG_DIR, today + '.json');
-    fs.writeFileSync(logFile, JSON.stringify(cachedLogEntries, null, 2));
-    log.info('Conversation logged (' + cachedLogEntries.length + ' exchanges today)');
+    var logFile = path.join(dir, today + '.json');
+    fs.writeFileSync(logFile, JSON.stringify(session.logEntries, null, 2));
+    log.info('[' + provider.label + '] Conversation logged (' + session.logEntries.length + ' exchanges today)');
   } catch (err) {
-    log.error('Failed to log conversation: ' + err.message);
+    log.error('[' + provider.label + '] Failed to log conversation: ' + err.message);
   }
 }
 
 // ---------------------------------------------------------------------------
-// Notes to Self — extract, save, and strip [NOTE_TO_SELF: ...] tags
+// Notes to Self — extract, save, and strip [NOTE_TO_SELF: ...] tags (Mags only)
 // ---------------------------------------------------------------------------
 var NOTE_PATTERN = /\[NOTE_TO_SELF:\s*([\s\S]*?)\]/g;
 
@@ -641,6 +674,40 @@ function saveNotesToSelf(notes) {
 }
 
 // ---------------------------------------------------------------------------
+// Persona registry — build the channelId -> provider map. Mags on her channel;
+// each citizen-voice persona on its configured channel (CITIZEN_VOICE_CHANNELS).
+// ---------------------------------------------------------------------------
+function buildPersonaRegistry() {
+  var registry = new Map();
+  registry.set(CHANNEL_ID, magsProvider);
+
+  var raw = (process.env.CITIZEN_VOICE_CHANNELS || '').trim();
+  if (!raw) return registry;
+
+  var map;
+  try {
+    map = JSON.parse(raw);
+  } catch (err) {
+    log.error('CITIZEN_VOICE_CHANNELS is not valid JSON — ignoring. ' + err.message);
+    return registry;
+  }
+  Object.keys(map).forEach(function (channelId) {
+    var popId = map[channelId];
+    if (channelId === CHANNEL_ID) {
+      log.warn('CITIZEN_VOICE_CHANNELS maps Mags\' own channel ' + channelId + ' to ' + popId + ' — ignoring (Mags wins her channel)');
+      return;
+    }
+    try {
+      registry.set(channelId, personaProvider.citizenVoiceProvider(popId));
+      log.info('Citizen voice registered: ' + popId + ' on channel ' + channelId);
+    } catch (err) {
+      log.error('Could not register citizen voice ' + popId + ' on ' + channelId + ': ' + err.message);
+    }
+  });
+  return registry;
+}
+
+// ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
 async function main() {
@@ -654,11 +721,15 @@ async function main() {
     process.exit(1);
   }
 
-  // Restore conversation history from last run (if fresh enough)
-  loadConversationHistory();
+  var personas = buildPersonaRegistry();
 
-  // Pre-load identity
-  buildSystemPrompt();
+  // Restore each persona's conversation history + pre-load its identity
+  personas.forEach(function (provider, channelId) {
+    var session = newSession();
+    sessions.set(channelId, session);
+    loadConversationHistory(provider, session);
+    getSystemPrompt(provider, session);
+  });
 
   log.info('Supermemory RAG: ' + (USE_SUPERMEMORY ? 'ON (archive search before each response)' : 'OFF'));
 
@@ -687,15 +758,18 @@ async function main() {
   client.once(Events.ClientReady, function(readyClient) {
     log.info('Logged in as ' + readyClient.user.tag);
     log.info('Guilds: ' + readyClient.guilds.cache.size);
-    log.info('Watching channel: ' + CHANNEL_ID);
+    log.info('Watching ' + personas.size + ' channel(s): ' +
+      Array.from(personas.entries()).map(function (e) { return e[1].label + '@' + e[0]; }).join(', '));
   });
 
   client.on(Events.MessageCreate, async function(message) {
     // Ignore bots (including self)
     if (message.author.bot) return;
 
-    // Only respond in the designated channel
-    if (message.channelId !== CHANNEL_ID) return;
+    // Resolve which persona owns this channel; ignore everything else
+    var provider = personas.get(message.channelId);
+    if (!provider) return;
+    var session = sessions.get(message.channelId);
 
     // Check cooldown
     if (isOnCooldown(message.author.id)) {
@@ -705,7 +779,7 @@ async function main() {
 
     var userName = message.author.displayName || message.author.username;
     var userMessage = message.content;
-    log.info('Message from ' + userName + ': ' + userMessage.substring(0, 100));
+    log.info('[' + provider.label + '] Message from ' + userName + ': ' + userMessage.substring(0, 100));
 
     // Phase 40.3 Task 6 — refuse credential-read / injection attempts
     const injectionCheck = scanForInjection(userMessage, userName, message.author.id);
@@ -726,11 +800,13 @@ async function main() {
       await message.channel.sendTyping();
 
       // Call Claude
-      var response = await callClaude(userMessage, userName, message.author.id);
+      var response = await callClaude(provider, session, userMessage, userName, message.author.id);
 
-      // Extract and save any notes to self
-      var notes = extractNotes(response);
-      if (notes.length) saveNotesToSelf(notes);
+      // Extract and save any notes to self (Mags only); always strip the tags
+      if (provider.notesEnabled) {
+        var notes = extractNotes(response);
+        if (notes.length) saveNotesToSelf(notes);
+      }
       var cleanResponse = stripNotes(response);
 
       // Send response (split if needed)
@@ -740,18 +816,18 @@ async function main() {
       }
 
       // Log the exchange to daily file (log clean version)
-      logConversation(userName, userMessage, cleanResponse);
+      logConversation(provider, session, userName, userMessage, cleanResponse);
 
-      // Save to Supermemory for user profile building (fire and forget)
-      saveToSupermemory(userName, userMessage, cleanResponse, message.author.id);
+      // Persona-specific memory write (Mags -> Supermemory profile; citizen -> no-op)
+      provider.persistResponse(userName, userMessage, cleanResponse, message.author.id);
     } catch (err) {
-      log.error('Error handling message: ' + err.message);
+      log.error('[' + provider.label + '] Error handling message: ' + err.message);
 
       // Send an in-character error message
       try {
         await message.channel.send(
           'Sorry — my thoughts got tangled for a moment. ' +
-          'The coffee hasn\'t kicked in yet. Try me again in a minute.'
+          'Give me a minute and try again.'
         );
       } catch (sendErr) {
         log.error('Failed to send error message: ' + sendErr.message);

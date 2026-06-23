@@ -73,6 +73,26 @@ function pickDemographicVoiceRole_(seed) {
   return DEMOGRAPHIC_VOICE_ROLES[hashSeed_(seed) % DEMOGRAPHIC_VOICE_ROLES.length];
 }
 
+// Phase 42 §B7 (Row 8, S269) — processed-flag write, cycle/operator ctx-branch.
+// Cycle path: queue through writeIntents so the 'Y' flag commits at Phase 10
+// ATOMICALLY with the same-cycle UsageCount bump (which lands in ctx.ledger,
+// also committed at Phase 10). A crash between Phase 5 and Phase 10 then loses
+// neither — else the row would be flag='Y' but bump-less, skipped forever on
+// the next cycle (the L300-ish `alreadyProcessed → continue` guard).
+// Operator path (runAdvancementIntakeManual) sets ctx.manualRun and never runs
+// Phase 10, so it writes direct — same behavior it always had.
+// NOTE: the 'Processed' header-create (processMediaUsage_ L~206) intentionally
+// stays a DIRECT write — the column must physically exist before Phase 10
+// commits these cell intents.
+function markUsageProcessed_(ctx, usageSheet, row1, col1, value) {
+  if (ctx && ctx.manualRun) {
+    usageSheet.getRange(row1, col1).setValue(value);
+  } else {
+    queueCellIntent_(ctx, 'Citizen_Media_Usage', row1, col1, value,
+      'advancement: mark media-usage row processed', 'citizens');
+  }
+}
+
 function processAdvancementIntake_(ctx) {
   var ss = ctx ? ctx.ss : openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
   var now = ctx ? ctx.now : new Date();
@@ -125,6 +145,8 @@ function runAdvancementIntakeManual() {
     now: new Date(),
     summary: { cycleId: getCurrentCycleFromConfig_(ss) },
     config: {},
+    manualRun: true,  // Phase 42 §B7 (S269): no Phase 10 here — processed-flag
+                      // writes go direct (queued intents would never commit).
     ledger: {
       sheet: 'Simulation_Ledger',
       headers: values[0],
@@ -239,7 +261,7 @@ function processMediaUsage_(ctx, now, cycle) {
     var countsForEmergence = isEmergenceUsage_(usageType);
     
     if (!countsForEmergence) {
-      usageSheet.getRange(i + 1, processedCol + 1).setValue('Y');
+      markUsageProcessed_(ctx, usageSheet, i + 1, processedCol + 1, 'Y');
       results.skipped++;
       continue;
     }
@@ -306,7 +328,7 @@ function processMediaUsage_(ctx, now, cycle) {
       }
     }
     
-    usageSheet.getRange(i + 1, processedCol + 1).setValue('Y');
+    markUsageProcessed_(ctx, usageSheet, i + 1, processedCol + 1, 'Y');
     if (found) {
       results.processed++;
     } else {

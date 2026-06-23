@@ -76,6 +76,16 @@ var DIAL_MAP = {
   'Transgression-Grave':   { integrity: -12, composure: -3 },
   'Resisted':              { integrity: 5 },
 
+  // --- Temperament (pure-axis authoring tags, engine.39) ---
+  //     integrity rides Reputation (which couples sociability) and warmth rides
+  //     family/mentorship/community events — so a "principled-but-private" or
+  //     "warm-but-reserved" archetype can't be seeded without dragging sociability
+  //     up with it. These pure-axis tags let dial-essence authoring (research.18
+  //     backdate) drive integrity/warmth ALONE. No objective engine emits them;
+  //     additive only — no existing DIAL_MAP entry touched.
+  'Principled':            { integrity: 4 },           // quiet, uncoupled integrity
+  'Warm':                  { warmth: 4 },               // tender temperament, no sociability lift
+
   // --- youth-* developmental ---
   'youth-academic':          { drive: 4, openness: 2 },
   'youth-sports':            { drive: 3, composure: 2 },

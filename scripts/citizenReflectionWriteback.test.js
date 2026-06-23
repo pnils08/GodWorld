@@ -80,5 +80,17 @@ console.log('\nTest 7: applyReflectionDualTag_ moves mood per the composite');
   assert('applyTaggedEvent_ left intact (still exported)', typeof mem.applyTaggedEvent_ === 'function');
 }
 
+console.log('\nTest 8: engine.39 pure-axis temperament tags (uncoupled integrity / warmth)');
+{
+  // Principled drives integrity ALONE (no sociability coupling the way Reputation does)
+  const pr = dm.nudgesForEvent_('Principled', 1, '');
+  assert('Principled = integrity only', eq(pr, { integrity: 4 }), JSON.stringify(pr));
+  assert('Reputation still couples sociability (unchanged)', eq(dm.nudgesForEvent_('Reputation', 1, ''), { integrity: 3, sociability: 2 }));
+  // Warm drives warmth ALONE (no sociability/family the way Community/Mentorship do)
+  const wm = dm.nudgesForEvent_('Warm', 1, '');
+  assert('Warm = warmth only', eq(wm, { warmth: 4 }), JSON.stringify(wm));
+  assert('Community still couples sociability (unchanged)', eq(dm.nudgesForEvent_('Community', 1, ''), { sociability: 4, warmth: 2 }));
+}
+
 console.log(`\n${failed === 0 ? 'PASS' : 'FAIL'} — ${passed} passed, ${failed} failed`);
 process.exit(failed === 0 ? 0 : 1);

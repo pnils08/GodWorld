@@ -239,7 +239,7 @@ function writeCitizenEvent_(ctx, target, vehicle, outcome, cycle, text) {
   var line = stamp + ' — [' + dialTag + '] ' + text;
   var existing = (iLife >= 0 && row[iLife]) ? row[iLife].toString() : '';
   if (iLife >= 0) row[iLife] = existing ? existing + '\n' + line : line;
-  if (iLastU >= 0) row[iLastU] = ctx.now;
+  if (iLastU >= 0) row[iLastU] = inWorldStamp_(ctx);  // S271 in-world, not wall-clock
   rows[target.rowIndex] = row;
   ctx.ledger.dirty = true;
 

@@ -15,15 +15,14 @@ var CHAOS_CARS_TAB = 'Chaos_Cars';
 var CHAOS_CARS_HEADERS = [
   'CycleId', 'EventId', 'VehicleType', 'TargetScope', 'TargetId', 'TargetTier',
   'DiceOutcome', 'PrimaryMetric', 'MetricMagnitude', 'ConsequenceFloorFired',
-  'ChaosNarrativeSeed', 'TimestampUtc'
+  'ChaosNarrativeSeed', 'CycleStamp'
 ];
 
+// S271: in-world cycle stamp (Y{year}C{cycle}), NOT a real-world wall clock.
+// Header renamed TimestampUtc → CycleStamp (tab never created yet, no consumers).
 function chaosTimestampUtc_(ctx) {
-  if (typeof Utilities !== 'undefined' && ctx && ctx.now) {
-    return Utilities.formatDate(ctx.now, 'UTC', "yyyy-MM-dd'T'HH:mm:ss'Z'");
-  }
-  // Node fallback (tests / dry-run); ctx.now is a Date.
-  return (ctx && ctx.now && ctx.now.toISOString) ? ctx.now.toISOString() : '';
+  if (typeof inWorldStamp_ === 'function') return inWorldStamp_(ctx);
+  return (ctx && ctx.summary && ctx.summary.cycleRef) || '';
 }
 
 /**

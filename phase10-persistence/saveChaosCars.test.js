@@ -9,6 +9,8 @@ let ensures = [];
 global.queueAppendIntent_ = (ctx, tab, row, reason, domain) => appends.push({ tab, row, reason, domain });
 global.queueEnsureTabIntent_ = (ctx, tab, headers, reason, domain) => ensures.push({ tab, headers, reason, domain });
 
+global.inWorldStamp_ = (ctx) => (ctx && ctx.summary && ctx.summary.cycleRef) || 'C?';  // S271 in-world stamp
+
 const s = require('./saveChaosCars');
 
 let passed = 0, failed = 0;
@@ -17,7 +19,7 @@ function assert(label, cond, detail) {
   else { console.error(`  FAIL ${label}${detail ? ': ' + detail : ''}`); failed++; }
 }
 
-const ctx = { now: new Date('2026-06-20T12:34:56Z') };
+const ctx = { now: new Date('2026-06-20T12:34:56Z'), summary: { cycleRef: 'Y2C48' } };
 const p1 = {
   cycleId: 99, eventId: 'abc12345', vehicleType: 'cop_car', targetScope: 'citizen',
   targetId: 'POP-00001', targetTier: 1, diceOutcome: 'arrested', primaryMetric: 'Transgression-Serious',
@@ -42,8 +44,8 @@ assert('CycleId/EventId/Vehicle in place', r1[0] === 99 && r1[1] === 'abc12345' 
 assert('Tier-1 → tier preserved; consequenceFloor TRUE', r1[5] === 1 && r1[9] === 'TRUE');
 assert('neighborhood tier null → blank; consequenceFloor FALSE', r2[5] === '' && r2[9] === 'FALSE');
 assert('magnitude carried (0.07)', r2[8] === 0.07);
-// Apps Script path → '...:56Z'; Node fallback (toISOString) → '...:56.000Z'. Accept both.
-assert('TimestampUtc ISO-Z', /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?Z$/.test(r1[11]));
+// S271: CycleStamp is the in-world cycle anchor (Y{year}C{cycle}), not a wall clock.
+assert('CycleStamp in-world (Y2C48)', r1[11] === 'Y2C48');
 
 console.log('\n' + '─'.repeat(60));
 if (failed === 0) { console.log(`✓ all ${passed} assertions passed`); process.exit(0); }

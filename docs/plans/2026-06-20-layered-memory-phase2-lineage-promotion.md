@@ -135,6 +135,34 @@ pointers:
 
 ---
 
+## Build Handoff — Origin-Stamp Instrumentation (engine terminal)
+
+**State:** design complete (Tasks 1–3 DONE S265). This section is the execution spec. **GATE: do not start until C100 chaos smoke is green** (chaos-cars first-cycle smoke; same gate that blocks engine rows 22/24/25). Reason: chaos-cars adds the `chaos-event` creation paths — wire every path in one pass, not two.
+
+**Owner:** engine-sheet (`engine terminal`). Schema + instrumentation are substrate-routine; no further research-build design pass.
+
+**Build sequence:**
+
+1. **Schema — Sim_Ledger entity-row column (source of truth).** Add one column carrying the JSON `originStamp = {originId, originKind, bornCycle}` on the entity's row. Empty/null for pre-existing entities (no backfill — you cannot retrofit an origin never recorded; only forward from build cycle). Mirror lands later in the bt-wiki record (research-build/infra, not blocking).
+2. **Instrument the live creation paths** (write the stamp forward at creation), per the audited table in §Origin-Stamp Schema:
+   - `phase05-citizens/householdFormationEngine.js` → `household`
+   - `processIntakeV3.js` / `processAdvancementIntake.js` → `intake`
+   - `civicInitiativeEngine.js` → `initiative`
+   - `phase06-analysis/economicRippleEngine.js`, `runCareerEngine.js` → `business`
+   - `storylineWeavingEngine.js` / `applyStorySeeds.js` → `arc` / `seed`
+   - `generateGenericCitizens.js` → **decide at execution** (`seed` or leave unstamped — generic pop is Tier-4 texture, promote-value ≈ 0; recommend leave unstamped to save writes)
+3. **Instrument the chaos-event path** — engine.11 producer entity + Tier-1 cascade → `chaos-event`. This is the path the C100 gate exists for; wire it in the same pass as step 2.
+
+**Acceptance:**
+- New entities created post-deploy carry a populated `originStamp`; pre-existing rows stay null (no backfill).
+- `bornCycle` = the cycle the entity was minted; `originId` resolves to a real `INIT-###` / `BIZ-#####` / `POP-#####` / arc-id / chaos-event-id; `originKind` matches the enum.
+- Non-destructive: stamp is additive, no existing field rewritten.
+- Idempotent on re-run (re-minting the same entity does not double-write).
+
+**Explicitly NOT in this handoff:** the promotion sweep (deferred — separate signal-gated build, un-gates when ≥1 major-event signal is live in production) and the bt-wiki mirror (research-build/infra follow-up, non-blocking). This handoff is creation-path stamping only.
+
+---
+
 ## Open questions
 
 - [ ] Source-of-truth for the stamp — ledger entity row vs bt-wiki record (Task 2 resolves; both may carry it with one canonical).
@@ -145,4 +173,5 @@ pointers:
 
 ## Changelog
 
+- 2026-06-23 — Added §Build Handoff — Origin-Stamp Instrumentation (S270, research-build). Execution spec for engine-sheet: ledger column + live-path stamping + chaos-event path, gated on C100 chaos smoke (same gate as engine rows 22/24/25). Promotion sweep + bt-wiki mirror explicitly carved out. Design unchanged; this is the build-routing artifact. Rollout row re-tagged `(engine terminal)`, gated.
 - 2026-06-20 — Initial draft + design-session fill (S265, research-build). Phase 2 of research.17 (the unsolved core). ADR-0011 written; §Origin-Stamp Schema + §Promotion Walk filled (creation-path classes audited across phase05/06/07; walk granularity = direct-origin docs + bounded recursion). All three design tasks closed this session; build is C99-gated (stamp instrumentation) + signal-gated (promotion sweep). Decisive design call: lineage lives in the maintenance layer (Supermemory + ledger), NOT a new engine stream — settled by engine.35's engine-EMERGES / Supermemory-MAINTAINS division of labor (Mike S259), caught by reading engine.35 before designing (advisor-flagged near-reinvention). Split on the timing axis: origin-stamp schema = irreversible/now; stamp instrumentation = C99-gated (chaos-cars adds the creation paths); promotion sweep = deferred until majors are live. ADR-0011 carries the schema decision.

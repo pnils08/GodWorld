@@ -92,5 +92,17 @@ console.log('\nTest 8: engine.39 pure-axis temperament tags (uncoupled integrity
   assert('Community still couples sociability (unchanged)', eq(dm.nudgesForEvent_('Community', 1, ''), { sociability: 4, warmth: 2 }));
 }
 
+console.log('\nTest 9: engine.38 B3 ordinary-bad vocab (objective negative pole, fades)');
+{
+  // ordinary-bad sits at -1/-2 composure — below the wake-reserved affect tags (-3),
+  // well above catastrophe (Setback -5). Deterministic, no classifier.
+  assert('Friction composure -2', eq(dm.nudgesForEvent_('Friction', 1, ''), { composure: -2 }));
+  assert('Strain composure -1', eq(dm.nudgesForEvent_('Strain', 1, ''), { composure: -1 }));
+  assert('Stumble composure -2 + drive -1', eq(dm.nudgesForEvent_('Stumble', 1, ''), { composure: -2, drive: -1 }));
+  assert('Spat composure -1 + warmth -1', eq(dm.nudgesForEvent_('Spat', 1, ''), { composure: -1, warmth: -1 }));
+  assert('ordinary-bad is milder than catastrophe Setback (-5)', dm.nudgesForEvent_('Friction', 1, '').composure > dm.nudgesForEvent_('Setback', 1, '').composure);
+  assert('Setback (catastrophe) unchanged', eq(dm.nudgesForEvent_('Setback', 1, ''), { composure: -5 }));
+}
+
 console.log(`\n${failed === 0 ? 'PASS' : 'FAIL'} — ${passed} passed, ${failed} failed`);
 process.exit(failed === 0 ? 0 : 1);

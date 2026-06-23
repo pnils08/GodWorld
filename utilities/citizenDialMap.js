@@ -112,6 +112,22 @@ var DIAL_MAP = {
   'Content':            { composure: 2 },
   'Calm':               { composure: 2 },
 
+  // --- Ordinary-bad (OBJECTIVE negative pole, engine.38 B3) ---
+  //     The bad side of life was bimodal: catastrophe (Setback -5 / Critical -8) or
+  //     nothing — every ambient tag pushed composure UP, so the population sat 86%
+  //     neutral / 0 volatile. These are everyday friction at ORDINARY scale (-1/-2,
+  //     below the wake-reserved affect tags' -3): a bad shift, a snag, a small scrape.
+  //     ENGINE-EMITTED + deterministic (no classifier — distinct from the subjective
+  //     affect block above). One-off fades via mood; a sustained run hardens base —
+  //     an ordinary rough patch becomes a wearier person. Additive; pools that emit
+  //     these land in engine.38 B3 step 2 (until then these tags are inert/unemitted).
+  'Friction':           { composure: -2 },              // an ordinary hassle / bad day
+  'Strain':             { composure: -1 },              // low-grade ongoing stress
+  'Stumble':            { composure: -2, drive: -1 },   // a small work/goal setback (not catastrophe)
+  'Spat':               { composure: -1, warmth: -1 },  // a minor interpersonal scrape
+  'Disappointment':     { composure: -2 },              // a hoped-for thing didn't land
+  'Ailment':            { composure: -1 },              // an ordinary cold/ache (not Health/Critical)
+
   // --- Ambient / daily life (small but NEVER zero — a quiet life IS a calm person) ---
   'Background':         { composure: 2 },              // ordinary days at park/home -> settled
   'Daily':              { composure: 2, family: 1 },   // quiet moment at home -> calm homebody

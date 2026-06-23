@@ -174,6 +174,40 @@ function executePersistIntents_(ctx) {
 
 
 /**
+ * Retry wrapper for sheet write operations (S271).
+ * Transient Google Spreadsheets service errors ("Service Spreadsheets timed
+ * out", "try again later", internal errors) are a KNOWN recurring event in
+ * this environment. Without retry, a single hiccup during Phase 10 drops the
+ * ENTIRE cycle's writes — C100 lost 0/25 intents on one doc timeout. Backoff:
+ * 0 / 2 / 5 / 12s. Only transient classes retry; real errors (bad range, type
+ * errors) rethrow immediately so genuine bugs still surface. Safe to retry: a
+ * thrown setValues writes nothing (atomic all-or-throw); setValue is idempotent
+ * (same cell, same value); clearContent+rewrite is idempotent. fn() runs
+ * synchronously, so loop-var closures resolve to the current iteration.
+ */
+function persistWithRetry_(fn, label) {
+  var delays = [0, 2000, 5000, 12000];
+  var lastErr = null;
+  for (var a = 0; a < delays.length; a++) {
+    if (delays[a] > 0 && typeof Utilities !== 'undefined') Utilities.sleep(delays[a]);
+    try {
+      return fn();
+    } catch (e) {
+      lastErr = e;
+      var msg = String((e && e.message) || e);
+      if (!/timed out|Service Spreadsheets|try again|temporarily|rate limit|quota|Internal error|too many/i.test(msg)) {
+        throw e; // not transient — surface the real bug, don't mask it behind retries
+      }
+      if (typeof Logger !== 'undefined') {
+        Logger.log('persistWithRetry_[' + label + ']: transient attempt ' + (a + 1) + '/' + delays.length + ' — ' + msg);
+      }
+    }
+  }
+  throw lastErr;
+}
+
+
+/**
  * Executes an ensure-tab intent.
  * Creates the tab and writes headers if missing; no-op if tab already exists.
  * Idempotency-collapse for same-tab repeats is handled by caller.
@@ -193,13 +227,15 @@ function executeEnsureIntent_(ctx, intent) {
       return { success: true };
     }
 
-    sheet = ctx.ss.insertSheet(intent.tab);
     var headers = (intent.values && intent.values[0]) || [];
-    if (headers.length > 0) {
-      sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
-      sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
-      sheet.setFrozenRows(1);
-    }
+    persistWithRetry_(function() {
+      sheet = ctx.ss.getSheetByName(intent.tab) || ctx.ss.insertSheet(intent.tab);
+      if (headers.length > 0) {
+        sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+        sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
+        sheet.setFrozenRows(1);
+      }
+    }, intent.tab + ' ensure');
     Logger.log('executeEnsureIntent_: Created ' + intent.tab + ' with ' + headers.length + ' headers');
     return { success: true };
 
@@ -226,43 +262,33 @@ function executeReplaceIntent_(ctx, intent) {
       sheet = ctx.ss.insertSheet(intent.tab);
     }
 
-    // Clear existing content (preserve formatting)
-    if (sheet.getLastRow() > 0) {
-      sheet.getDataRange().clearContent();
-    }
-
-    // Write all data
+    // Build padded rows first, then clear+write atomically under one retry — a
+    // re-attempt re-clears and re-writes, so a transient mid-replace never leaves
+    // the tab wiped (S271: clearContent-then-timeout was the one destructive path).
     var rows = intent.values;
+    var maxCols = 0;
+    var paddedRows = [];
     if (rows && rows.length > 0) {
-      // Find max columns
-      var maxCols = 0;
       for (var i = 0; i < rows.length; i++) {
-        if (rows[i] && rows[i].length > maxCols) {
-          maxCols = rows[i].length;
-        }
+        if (rows[i] && rows[i].length > maxCols) maxCols = rows[i].length;
       }
-
-      // Pad rows to same length
-      var paddedRows = [];
       for (var i = 0; i < rows.length; i++) {
         var padded = (rows[i] || []).slice();
-        while (padded.length < maxCols) {
-          padded.push('');
-        }
+        while (padded.length < maxCols) padded.push('');
         paddedRows.push(padded);
       }
+    }
 
-      // Write data
-      sheet.getRange(1, 1, paddedRows.length, maxCols).setValues(paddedRows);
-
-      // Format header row if present
+    persistWithRetry_(function() {
+      if (sheet.getLastRow() > 0) sheet.getDataRange().clearContent();
       if (paddedRows.length > 0) {
+        sheet.getRange(1, 1, paddedRows.length, maxCols).setValues(paddedRows);
         sheet.getRange(1, 1, 1, maxCols).setFontWeight('bold');
         sheet.setFrozenRows(1);
       }
-    }
+    }, intent.tab + ' replace');
 
-    Logger.log('executeReplaceIntent_: Replaced ' + intent.tab + ' with ' + rows.length + ' rows');
+    Logger.log('executeReplaceIntent_: Replaced ' + intent.tab + ' with ' + (rows ? rows.length : 0) + ' rows');
     return { success: true };
 
   } catch (e) {
@@ -317,7 +343,9 @@ function executeSheetIntents_(ctx, sheetName, intents) {
       var intent = cellIntents[i];
       try {
         var value = intent.values[0][0];
-        sheet.getRange(intent.address.row, intent.address.col).setValue(value);
+        persistWithRetry_(function() {
+          sheet.getRange(intent.address.row, intent.address.col).setValue(value);
+        }, sheetName + ' cell');
         result.cells++;
         result.executed++;
       } catch (e) {
@@ -334,7 +362,9 @@ function executeSheetIntents_(ctx, sheetName, intents) {
         var numCols = rows[0] ? rows[0].length : 0;
 
         if (numRows > 0 && numCols > 0) {
-          sheet.getRange(intent.address.row, intent.address.col, numRows, numCols).setValues(rows);
+          persistWithRetry_(function() {
+            sheet.getRange(intent.address.row, intent.address.col, numRows, numCols).setValues(rows);
+          }, sheetName + ' range');
           result.ranges++;
           result.executed++;
         }
@@ -374,9 +404,13 @@ function executeSheetIntents_(ctx, sheetName, intents) {
             paddedRows.push(padded);
           }
 
-          // Batch append
-          var startRow = sheet.getLastRow() + 1;
-          sheet.getRange(startRow, 1, paddedRows.length, maxCols).setValues(paddedRows);
+          // Batch append. getLastRow() inside the retry so a re-attempt recomputes
+          // the tail (a thrown setValues added nothing, so startRow stays correct —
+          // no double-append).
+          persistWithRetry_(function() {
+            var startRow = sheet.getLastRow() + 1;
+            sheet.getRange(startRow, 1, paddedRows.length, maxCols).setValues(paddedRows);
+          }, sheetName + ' append');
 
           result.appends = appendIntents.length;
           result.executed += appendIntents.length;

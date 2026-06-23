@@ -68,6 +68,73 @@ function recentEventMagnitude(lifeTail) {
   return Object.values(fx).reduce((s, v) => s + Math.abs(v), 0);
 }
 
+// T1a (research.19) — canon-anchored self-state read-back. The amnesia fix: a citizen perceives
+// their own life ARC, not just the recent tail. Sourced from LifeHistory_Log (the canonical
+// append-only per-citizen event history), NOT generated reflection prose — so there is no
+// fabrication to re-inject (the AP-reframe: the "shady Greg"-class invention lives in the prose
+// page, which we deliberately never read back). Inline col O is heavily compressed, so the milestone
+// arc must come from the Log, not the inline tail (which is folded into the dial base over time).
+const ARC_TAGS = /^(Promotion|Advancement|Wedding|Birth|Retirement|Graduation|CivicRole|Death|Stabilized|Setback|Friction|Strain|Stumble|Spat|Disappointment|Ailment)$/i;
+async function loadLifeArc(popId) {
+  try {
+    const rows = await sheets.getRawSheetData('LifeHistory_Log');
+    if (!rows || rows.length < 2) return '';
+    const h = rows[0];
+    const iPop = h.findIndex((x) => String(x).toLowerCase() === 'popid');
+    const iTag = h.findIndex((x) => String(x).toLowerCase() === 'eventtag');
+    if (iPop < 0 || iTag < 0) return '';
+    const counts = {};
+    for (let i = 1; i < rows.length; i++) {
+      if (String(rows[i][iPop]).toUpperCase() !== popId) continue;
+      const t = String(rows[i][iTag] || '').trim();
+      if (ARC_TAGS.test(t)) counts[t.toLowerCase()] = (counts[t.toLowerCase()] || 0) + 1;
+    }
+    return Object.entries(counts).sort((a, b) => b[1] - a[1])
+      .map(([t, n]) => (n > 1 ? `${n} ${t} events` : `a ${t}`)).join(', ');
+  } catch (e) { return ''; }
+}
+
+// T1a — dial TRAJECTORY: how their temperament has moved (current vs back-dated base). DORMANT today —
+// currentDials reads base+mood and live DialState carries no mood/streak until the reflection
+// write-back drain deploys, so current==base and this returns ''. Forward-compatible: it surfaces a
+// shift line ONLY when real movement exists; it never fabricates one (canon-anchored).
+function dialTrajectory(baseDials, cur) {
+  if (!baseDials || !cur) return '';
+  const shifts = [];
+  for (const d of dials.DIALS) {
+    const b = baseDials[d], c = cur[d];
+    if (b == null || c == null || Math.abs(c - b) < 8) continue; // below noticeable
+    const band = dials.bandIdx(c);
+    if (band >= 0) shifts.push(dials.POLES[d][band]);
+  }
+  return shifts.slice(0, 2).join('; ');
+}
+
+// T1b (research.19) — world-larger-than-self: the A's as any Oaklander would know them. Canonical feed
+// (Paulson's domain), narrative NOT metrics (no FanSentiment aggregate in voice — lived-particulars
+// guardrail). Spot-checked canon-clean S270 (NamesUsed = GodWorld A's roster, fictionalized opponents).
+async function loadSportsSlice() {
+  try {
+    const rows = await sheets.getRawSheetData('Oakland_Sports_Feed');
+    if (!rows || rows.length < 2) return '';
+    const h = rows[0];
+    const col = (n) => h.findIndex((x) => String(x).toLowerCase() === n.toLowerCase());
+    const iCycle = col('Cycle'), iNotes = col('Notes'), iRec = col('Team Record'), iStreak = col('Streak'), iTeam = col('TeamsUsed');
+    let maxC = -1; for (let i = 1; i < rows.length; i++) { const cN = Number(rows[i][iCycle]) || 0; if (cN > maxC) maxC = cN; }
+    // A's only — the team every Oaklander follows; the Oaks-expansion rows carry no record ('-') and
+    // would conflate two franchises under one "The A's are…" framing. Real game record lives on A's rows.
+    const latest = rows.slice(1).filter((r) => Number(r[iCycle]) === maxC
+      && /a's/i.test(String(r[iTeam] || '')) && String(r[iNotes] || '').trim());
+    if (!latest.length) return '';
+    latest.sort((a, b) => String(b[iNotes]).length - String(a[iNotes]).length); // richest note
+    const r = latest[0];
+    const validRec = iRec >= 0 && /\d+-\d+/.test(String(r[iRec] || ''));
+    const rec = validRec ? `The A's are ${String(r[iRec]).trim()}` : "The A's";
+    const streak = validRec && iStreak >= 0 && r[iStreak] ? ` (${String(r[iStreak]).trim()})` : '';
+    return `${rec}${streak}. ${String(r[iNotes]).trim().slice(0, 220)}`;
+  } catch (e) { return ''; }
+}
+
 async function buildPool() {
   const rows = await sheets.getRawSheetData('Simulation_Ledger');
   const h = rows[0];
@@ -81,6 +148,7 @@ async function buildPool() {
     if (!dj || String(dj).trim().length < 5) continue;
     const cur = dials.currentDials(dj);
     if (!cur || dials.deviation(cur) < SHAPED_MIN) continue;
+    let baseDials = null; try { const dp = JSON.parse(dj); baseDials = (dp && dp.base) || null; } catch (e) {} // T1a trajectory anchor
     const life = iLife >= 0 ? String(r[iLife] || '').trim() : '';
     if (life.length < LIFE_MIN_CHARS) continue;
     const name = (iName >= 0 && r[iName]) ? r[iName] : [r[iFirst], r[iLast]].filter(Boolean).join(' ');
@@ -91,7 +159,7 @@ async function buildPool() {
     pool.push({
       popId: String(r[iPop]).toUpperCase(), name, occ: iOcc >= 0 ? r[iOcc] : '', nh,
       age: (iBirth >= 0 && r[iBirth]) ? (2041 - Number(r[iBirth])) : '',
-      cur, life: lifeTail, eventMag: recentEventMagnitude(lifeTail),
+      cur, baseDials, life: lifeTail, eventMag: recentEventMagnitude(lifeTail),
     });
   }
   return pool;
@@ -121,12 +189,16 @@ async function coResidents(nh, selfPop) {
   return sl.residents.filter((rr) => String(rr.popId).toUpperCase() !== selfPop).slice(0, RESIDENT_CAP);
 }
 
-function buildVoicePrompts(c, neighbors) {
+function buildVoicePrompts(c, neighbors, sportsLine, lifeArc) {
   const disp = dials.disposition(c.cur);
   const who = neighbors.length
     ? `\n\nPeople around you in ${c.nh}: ${neighbors.map((n) => `${n.name}${n.occupation ? ' (' + n.occupation + ')' : ''}`).join(', ')}.`
     : '';
-  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.\n\nReal things from your life recently:\n${c.life}${who}`;
+  const traj = dialTrajectory(c.baseDials, c.cur);                    // T1a trajectory (dormant until drain)
+  const arcLine = lifeArc ? `\n\nYour life so far: ${lifeArc}.` : ''; // T1a self-state read-back (Log-sourced)
+  const trajLine = traj ? ` Lately you've been ${traj}.` : '';
+  const sports = sportsLine ? `\n\nAround Oakland: ${sportsLine}` : ''; // T1b world-larger-than-self
+  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}\n\nReal things from your life recently:\n${c.life}${who}${sports}`;
   const user = `${WAKE_FRAME[WAKE] || WAKE_FRAME.evening}. In 4-5 sentences write a private, honest reflection — the small things on your mind, drawing on what's actually been happening in your life. Don't narrate events like a story; just think on the page the way you actually would. First person.`;
   return { system, user, disp };
 }
@@ -151,9 +223,12 @@ async function generateVoice(system, user) {
   const state = loadState();
   const c = selectCitizen(pool, state);
   const neighbors = await coResidents(c.nh, c.popId);
-  const { system, user, disp } = buildVoicePrompts(c, neighbors);
+  const sportsLine = await loadSportsSlice();                 // T1b — one feed read, shared across the wake
+  const lifeArc = await loadLifeArc(c.popId);                 // T1a — canonical milestone arc from LifeHistory_Log
+  const { system, user, disp } = buildVoicePrompts(c, neighbors, sportsLine, lifeArc);
 
   logLine(`woke ${c.popId} ${c.name} — ${c.occ || 'resident'}, ${c.nh}${c.age ? ', ' + c.age : ''} | eventMag=${c.eventMag} | ${disp}`);
+  if (DRY) console.log('\n--- perception (system prompt) ---\n' + system + '\n----------------------------------');
   const reflection = await generateVoice(system, user);
   console.log('\n--- reflection ---\n' + reflection + '\n------------------');
 

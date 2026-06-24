@@ -391,7 +391,11 @@ function runChaosCarsEngine_(ctx) {
   validateAllChaosConfigs_(); // config-load-time no-death + scale + weight gate
   var rng = ctx.rng;
   var configs = loadChaosCarsConfig_();
-  var cycle = ctx.cycle || (ctx.summary && ctx.summary.cycle) || 0;
+  // S271 G-EC31: live engine sets ctx.summary.cycleId / ctx.config.cycleCount (set Phase1-AdvanceTime,
+  // before Phase4-ChaosCars), NOT ctx.cycle — old read fell through to 0 on the live path. Match the
+  // proven worldEventsEngine_ idiom; keep ctx.cycle last so the ctx.cycle-based test fixtures still pass.
+  var cycle = (ctx.summary && (ctx.summary.absoluteCycle || ctx.summary.cycleId)) ||
+    (ctx.config && ctx.config.cycleCount) || ctx.cycle || (ctx.summary && ctx.summary.cycle) || 0;
 
   if (!ctx.summary.chaosCarsEvents) ctx.summary.chaosCarsEvents = [];
   if (!ctx.summary.tier1ChaosEvents) ctx.summary.tier1ChaosEvents = [];

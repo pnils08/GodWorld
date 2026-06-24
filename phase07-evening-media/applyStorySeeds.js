@@ -1528,6 +1528,70 @@ function applyStorySeeds_(ctx) {
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
+  // engine.41 (S271) — broad chaos field → seeds
+  // ═══════════════════════════════════════════════════════════════════════════
+  // The Tier-1 block above seeds only consequenceFloorFired events (front-page).
+  // The rest of the chaos field never reached desks: at C100 all 6 events had
+  // floor=FALSE, so zero chaos seeds were produced. Story-worthy filter = the
+  // engine's own signal: a non-empty narrativeSeed (chaosCarsConfig: "one-line
+  // desk-packet seed ... present on high-severity"). Empty narrativeSeed = the
+  // engine intentionally did not mark it for coverage -> skip (no fabricated
+  // prose; same discipline that retired the arc generator). Plan:
+  // docs/plans/2026-06-24-engine-output-canon-coverage.md
+  function chaosSeedDomain_(scope, metric) {
+    if (scope === 'business') return 'BUSINESS';
+    var m = String(metric || '');
+    if (m === 'CrimeIndex') return 'CRIME';
+    if (m === 'Health') return 'HEALTH';
+    if (m === 'Annual_Revenue') return 'BUSINESS';
+    return 'COMMUNITY'; // Sentiment + citizen lifeHistoryTags; narrativeSeed carries the specificity
+  }
+  var allChaos = S.chaosCarsEvents || [];
+  for (var cai = 0; cai < allChaos.length; cai++) {
+    var ev = allChaos[cai];
+    if (ev.consequenceFloorFired) continue;   // already seeded by the Tier-1 block above
+    if (!ev.narrativeSeed) continue;           // engine did not mark it desk-worthy
+    var evNh = (ev.targetScope === 'neighborhood') ? ev.targetId : '';
+    seeds.push(makeSeed(
+      ev.narrativeSeed,
+      chaosSeedDomain_(ev.targetScope, ev.primaryMetric),
+      evNh,
+      3,                                       // above the desk Priority>1 filter, below the floor-fired 9
+      'chaos',
+      ev.targetScope === 'citizen' ? [ev.targetId] : [],
+      null
+    ));
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // engine.41 (S271) — neighborhood texture → seeds
+  // ═══════════════════════════════════════════════════════════════════════════
+  // Texture_Trigger_Log (S.textureTriggers, Phase-6) is already seed-shaped
+  // (domain + neighborhood + a human reason) and was dead — no canon consumer
+  // read it. Ambient, so priority 2 (survives the desk Priority>1 filter, ranks
+  // low — enriches, doesn't dominate). Caps: top TEXTURE_SEED_CAP by intensity;
+  // FAITH sub-cap so texture can't amplify the existing faith-event flood. Plan:
+  // docs/plans/2026-06-24-engine-output-canon-coverage.md
+  var TEXTURE_SEED_CAP = 8;
+  var TEXTURE_FAITH_CAP = 2;
+  var INTENSITY_RANK = { high: 3, moderate: 2, low: 1 };
+  var textureRaw = (S.textureTriggers || []).slice().filter(function(t) { return t && t.reason; });
+  textureRaw.sort(function(a, b) {
+    return (INTENSITY_RANK[b.intensity] || 0) - (INTENSITY_RANK[a.intensity] || 0);
+  });
+  var textureFaith = 0, textureTaken = 0;
+  for (var txi = 0; txi < textureRaw.length && textureTaken < TEXTURE_SEED_CAP; txi++) {
+    var tx = textureRaw[txi];
+    var txDomain = tx.domain || 'COMMUNITY';
+    if (txDomain === 'FAITH') {
+      if (textureFaith >= TEXTURE_FAITH_CAP) continue;
+      textureFaith++;
+    }
+    seeds.push(makeSeed(tx.reason, txDomain, tx.neighborhood || '', 2, 'texture'));
+    textureTaken++;
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
   // FINAL CLEAN-UP
   // ═══════════════════════════════════════════════════════════════════════════
 

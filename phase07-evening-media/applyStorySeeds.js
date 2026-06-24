@@ -1592,6 +1592,32 @@ function applyStorySeeds_(ctx) {
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
+  // engine.41 (S271) — Riley evening layer: story-worthy fields -> seeds (Wire 3b)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // Phase7-CityEvents/Famous/EveningMedia all run BEFORE Phase7-StorySeeds (verified,
+  // godWorldEngine2 both entry blocks L374-391 / L1715-1730), so S.cityEvents /
+  // S.famousPeople / S.eveningMedia are populated here. The ambient layer rides
+  // eveningContext (Wire 3a, desk-side read of Riley_Digest); these are the
+  // story-shaped fields that belong in the seed deck. Faithful restatement of real
+  // named events/trends only — no fabricated angle (arc-generator discipline). Famous
+  // people get ONE consolidated seed (not per-name): avoids noise + sports-name
+  // mis-routing to CULTURE. Plan: docs/plans/2026-06-24-engine-output-canon-coverage.md
+  var cityEvents = S.cityEvents || [];
+  for (var cei = 0; cei < cityEvents.length && cei < 6; cei++) {
+    if (!cityEvents[cei]) continue;
+    seeds.push(makeSeed('[CITY EVENT] ' + cityEvents[cei], 'CULTURE', '', 2, 'city-event'));
+  }
+  var streamingTrend = (S.eveningMedia && S.eveningMedia.streaming) || '';
+  if (streamingTrend) {
+    seeds.push(makeSeed('[TREND] City is streaming: ' + streamingTrend, 'CULTURE', '', 2, 'culture-trend'));
+  }
+  var famousPeople = S.famousPeople || [];
+  if (famousPeople.length > 0) {
+    seeds.push(makeSeed('Famous around town this cycle: ' + famousPeople.slice(0, 6).join(', '),
+      'CULTURE', '', 2, 'famous-sighting', famousPeople.slice(0, 3)));
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
   // FINAL CLEAN-UP
   // ═══════════════════════════════════════════════════════════════════════════
 

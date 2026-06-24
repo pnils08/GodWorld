@@ -83,3 +83,32 @@ Prior work: `output/civic-voice/crc_faction_c86.json`, `crc_faction_c87.json`
 - C94: Transit Hub cost-cap conditions firm; Stab Fund audit framework acknowledged; Baylight Phase II fiscal conditions explicit
 - C95: **Audit posture lands.** Ashford procedural-review on OARI (legal framework completion required before combined motion); Okoro checkpoint audit framework explicit (monthly throughput, cost-impact, continuation metrics); second-initiative fiscal conditions (cost projection + funding source + progress metrics). Chen canonical-first CRC speak (operational readiness gap closed by data; pivots to fiscal-efficiency on expansion). Crane ABSENT. 
 - Pattern refined: CRC evolved from "demand audits" to "set auditable frameworks that permit action." Mayor's C95 consolidation-success claim + backlog-clearance + second-initiative commit gives CRC three fiscal openings (OARI expansion cost, consolidation durability, phase-2 funding). Ashford holds procedural lever (if Dane slips on legal framework); Chen surfaces substantive fiscal frame (cost-per-call). CRC operates as 2-active-voter bloc; cannot block OARI alone without Vega's independent no-vote. Audit posture was three-cycle build; C95 is verification window.
+
+## C98 Statements Generated (FINAL)
+- Crane returned to active status (C98). Full 9-member council active; CRC holds 3 seats (57 approval each).
+- Crane voted NO on OARI and Baylight (remote); YES on Stabilization Fund (crossover). INIT-007 apprenticeship passed 9-0 — Crane was the ninth vote.
+- Key CRC positions C98: cost-correction acknowledged on OARI ($420 → $2,807 figure); Ashford publicly corrected the record; Chen logged that the corrected data changes the fiscal calculation she was working from.
+
+## C99 Statements Generated (FINAL)
+1. **crc-c99-ashford-d7** (Ashford) — OARI cost correction / D7 vehicle gap / Stab Fund audit. Publicly corrected the $420 figure on the record. Named D7 as worst-performing district (one vehicle, slowest response in city). Formally requested D7-specific deployment briefing. Accepted the Mayor's monthly reporting standard as provisional audit substitute — committed to holding it to audit scrutiny over 18 months. "The number we used was wrong. That is on us."
+2. **crc-c99-chen-d8** (Chen) — D8 now under six minutes (her stated threshold). Cost correction ($420→$2,807 declining to $900 at scale) materially changes the fiscal frame. Refused to formally change position without district-by-district savings breakdown published. Committed explicitly: when breakdown is published, she will read it and say publicly what it does to her position. "I voted no on a $420 figure. The figure was $2,807. Those are not the same vote."
+3. **crc-c99-crane-d6** (Crane) — Return statement. Named cycles-of-absence cost. Requested OARI D6 response-data briefing before claiming position. Claimed the citywide-strain thread as D6's health plateau, not as CRC fiscal frame. Promised to sponsor strain language. "D6 went cycles without a council voice. I know what that cost."
+
+## C100 Statements Generated (FINAL) — Creation Day
+**Member status:** All three active. Crane fully returned to floor. Full 9-member council.
+1. **STMT-100-crc-001** (Crane, D6) — Accepted Mayor's joint Rivers/Crane WG structure (consolidated strain definition by C102). Entered WG with D6-specific piece: district-grounded strain read + OARI single-vehicle deploy acceptance (~$74K cost-avoidance). Conditioned deploy acceptance on D6 response-data inclusion in cycle-by-cycle OARI reporting from first dispatch. trackerUpdates: INIT-002 implementation-active, NextActionCycle 102.
+2. **STMT-100-crc-002** (Ashford, D7) — Welcomed second vehicle deploy (first week December). Named D7 as smallest cost-avoidance in city — direct consequence of running one vehicle in undersized deployment for multiple cycles. Requested operating-cost gap figure (lost cost-avoidance across understaffed cycles) in next OARI report. Renewed Stab Fund audit call: clean self-reported first month is the exact moment an independent audit is warranted, not a reason to let the ask lapse.
+3. **STMT-100-crc-003** (Chen, D8) — Delivered promised C99 accounting. D8 under six minutes; cost-avoidance figure now published by district. Updated fiscal assessment: the corrected data moves her read on D8's fiscal case for the program. Did not formally change vote posture — named remaining question (cost structure at scale + reporting adequacy). Watching next three months of D8 data with breakdown in hand.
+
+## Open Threads into C101+
+- Crane: D6 response-data must appear in next OARI cycle report (condition on deploy acceptance). WG consolidated strain definition due C102.
+- Ashford: D7 operating-cost gap figure (lost cost-avoidance cycles) requested in next OARI report. Stab Fund independent audit still formally requested — deferred, not dropped.
+- Chen: Watching next three months D8 cost-per-call data against published breakdown. Position update pending that window.
+- CRC approval: all three at 57 (C100 base). Creation Day holiday lift citywide.
+
+## Canon Assertions (C99-C100)
+- Crane active and voting as of C98 — IDENTITY.md "recovering/written-statement-only" language is stale; pending_decisions packet overrides.
+- OARI D6 single-vehicle deploy accepted C100 (~$74K projected cost-avoidance); conditioned on D6 data reporting.
+- Ashford publicly corrected CRC's $420/call OARI cost figure on the record (C99).
+- Chen's fiscal position update is explicitly provisional pending three-cycle data window (C100-C102 approximately).
+- Joint Rivers/Crane WG convened by Mayor; consolidated strain definition deadline C102.

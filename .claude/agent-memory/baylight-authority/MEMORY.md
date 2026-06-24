@@ -1,6 +1,6 @@
 # Baylight Authority — Agent Memory
 
-Last Updated: Cycle 99 | Most recent agent action: Phase II gate dates finalized + Civis recusal protocol published in full — MARA ESCALATION CLEARED
+Last Updated: Cycle 100 | Most recent agent action: Cycle 100 Celebration site-coordination posture published — active construction site access protocol, OPD/OARI integration, post-event inspection protocol. Procurement gate dates reaffirmed.
 
 ## Initiative Status
 - **INIT-006**: Baylight District Development
@@ -62,6 +62,22 @@ Last Updated: Cycle 99 | Most recent agent action: Phase II gate dates finalized
 **C96:**
 - **Phase II technical evaluation timeline published:** 8 qualified bidders → shortlist 3 (C97) → single selection (C98, pre-soft-open) → grand-open C99. Conflict-of-interest recusal protocol documented and binding (prior planning involvement auto-walled).
 - Phase I: 43% local hire (target 40%), 21% women in trades (target 20%), $752M awarded.
+
+**C100:**
+- **Cycle 100 Celebration held on Baylight footprint** — eastern open field (~18 acres), separated from active dig zone pre-event. Option A taken: full public coordination posture published.
+- **Site superintendent Marcus Delgado (canon)** — embedded in OPD event command post for duration. Leads post-event inspection.
+- **Hard perimeter:** double-fence with 30-foot buffer at construction exclusion line, no exceptions including media/vendors/VIPs.
+- **Three gates (canon):** Gate A (Hegenberger/98th, primary, ADA), Gate B (north, vendor/equipment), Gate C (south, emergency egress only, not publicly marked). Gate A + B jointly staffed with OPD.
+- **OARI pre-credentialed** for site access through Gate A — no secondary clearance required.
+- **Coliseum corridor watch:** Authority site security in radio contact with OPD corridor unit throughout event.
+- **Medical:** two first-aid stations (Gate A, central carnival footprint), two paramedics each.
+- **Carnival rides:** inspected and approved by Authority structural contractor for aggregate-base installation.
+- **Construction temp power grid locked out** event hours 0800–2200; event power from Hegenberger corridor utility connection only.
+- **Post-event inspection:** Delgado walkdown before any construction activity resumes. Report to Ramos + Mara Vance same day.
+- **Authority read on event:** site-management complication actively managed AND marketing benefit — both true, framed as both.
+- **Procurement reaffirmed:** C99 gate dates (Jan 14 / Feb 18 / Mar 10 2027) and Civis COI protocol unchanged.
+- **ImplementationPhase:** construction-planning (held).
+- **NextActionCycle:** 103 (shortlist published).
 
 **C99:**
 - **MARA ESCALATION RESOLVED — third-cycle anomaly threshold cleared.** Option A taken: published both Phase II gate dates and Civis recusal protocol in full.

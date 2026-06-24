@@ -141,4 +141,19 @@ Prior work: `output/civic-voice/ind_swing_c86.json`, `output/civic-voice/ind_swi
 - CRC cost-cap amendment: not on floor this cycle; Vega signaled willingness to work on budget-cycle accountability language
 - Both independents voting YES provides margin independent of any single bloc — vote math: Mayor + OPP + IND (Vega + Tran) = 6+ yes minimum
 
+## C100 Statements Issued
+
+**Tran (Piedmont Avenue Infrastructure Crisis-Spike):** Chose Option A — public statement now. Named the event explicitly: anomalous spike on a stability cycle in D2's Piedmont corridor. Committed to reviewing response timeline and publishing OARI response data once available. Connected to ongoing Downtown safety watch (two cycles running). Framed as a data question: does OARI capture infrastructure-event response quality? Approval trend is slightly negative; silence not an option.
+
+**Vega (Mandated Joint Rivers/Crane Working Group — Strain Item):** Own-move as Council President. Endorsed the Mayor's decision to have council lead via joint WG rather than administration absorption. Affirmed Rivers-Crane pairing as workable across faction lines. Stated three conditions publicly: WG reports to full council (not to administration or faction caucus); C102 consolidation deadline is firm; analysis must be interrogatable by all nine members. Not calling a floor vote — positioned as council president watching the mechanism run clean before relying on it.
+
+**Canon Assertions (C100):**
+- Piedmont Avenue (D2) had infrastructure crisis-spike this cycle — anomalous on a citywide stability cycle; Tran named it publicly
+- Tran's downtown safety watch extended to Piedmont corridor infrastructure response
+- Tran flagged OARI data-capture gap question: does program record infrastructure-event response quality?
+- Mayor mandated joint Rivers/Crane working group to lead strain work; council leads, not administration
+- Vega endorsed joint WG mechanism with three named conditions: reports to full council, C102 deadline firm, underlying analysis available to all 9 members
+- Crane back to active status this cycle (full 9-member roster)
+- Vega did not call a floor vote; positioned as monitor/evaluator of WG before C102
+
 ## C87 Statements Issued

@@ -1203,8 +1203,33 @@ function buildEconomicContext(worldPopRaw, simLedger, activeHouseholds, neighbor
  * v2.2: Build evening context from Media_Ledger + Cycle_Packet text.
  * Extracts nightlife, food scene, media climate, weather mood, and cultural activity.
  */
-function buildEveningContext(cycleMedia, packetText) {
+function buildEveningContext(cycleMedia, packetText, rileyRow) {
   var ctx = {};
+
+  // engine.41 (S271) — full evening layer from Riley_Digest (the structured tab),
+  // not the lossy Cycle_Packet-text scrape below. These are the fields desks never
+  // saw: TV/movie/streaming lineup, famous-people buzz, city events, food + nightlife
+  // detail. Ambient context (the desk decides what to use), NOT seeds — story-worthy
+  // distillation rides Story_Seed_Deck. Plan: docs/plans/2026-06-24-engine-output-canon-coverage.md
+  if (rileyRow) {
+    function rileyJson_(v) { try { return v ? JSON.parse(v) : {}; } catch (e) { return {}; } }
+    var em = rileyJson_(rileyRow.EveningMedia);
+    var ef = rileyJson_(rileyRow.EveningFood);
+    var nl = rileyJson_(rileyRow.NightLife);
+    ctx.riley = {
+      tv: em.tv || [],
+      movies: em.movies || [],
+      streaming: em.streaming || rileyRow.StreamingTrend || '',
+      sportsBroadcast: em.sportsBroadcast || '',
+      famousPeople: rileyRow.FamousPeople || '',
+      cityEvents: rileyRow.CityEvents || '',
+      restaurants: ef.restaurantDetails || [],
+      foodTrend: ef.trend || '',
+      nightlifeSpots: nl.spotDetails || [],
+      nightlifeVibe: nl.vibe || '',
+      citySentiment: rileyRow.CitySentiment || ''
+    };
+  }
 
   // Media Ledger entries — structured evening data
   if (cycleMedia.length > 0) {
@@ -1980,7 +2005,8 @@ async function main() {
     chicagoRaw, culturalRaw, oakSportsRaw, chiSportsRaw,
     storylineRaw, packetRaw, historyRaw,
     householdRaw, bondsRaw, worldPopRaw, simCalRaw,
-    neighborhoodMapRaw, businessLedgerRaw, mediaLedgerRaw
+    neighborhoodMapRaw, businessLedgerRaw, mediaLedgerRaw,
+    rileyRaw
   ] = await Promise.all([
     safeGet('Story_Seed_Deck'),
     safeGet('Story_Hook_Deck'),
@@ -2002,7 +2028,8 @@ async function main() {
     safeGet('Simulation_Calendar'),
     safeGet('Neighborhood_Map'),
     safeGet('Business_Ledger'),
-    safeGet('Media_Ledger')
+    safeGet('Media_Ledger'),
+    safeGet('Riley_Digest')
   ]);
 
   console.log('Sheets pulled in ' + (Date.now() - startTime) + 'ms');
@@ -2135,7 +2162,15 @@ async function main() {
   if (currentPacket.length > 0) {
     cyclePacketText = currentPacket[0].PacketText || '';
   }
-  var eveningContext = buildEveningContext(cycleMedia, cyclePacketText);
+  // engine.41 (S271) — Riley_Digest carries the full evening layer (TV lineup,
+  // famous people, city events, streaming, food, nightlife detail) that world_summary
+  // surfaces but desk packets never read. Pull the current-cycle row into eveningContext
+  // as ambient context. Plan: docs/plans/2026-06-24-engine-output-canon-coverage.md
+  var rileyRow = null;
+  var allRiley = allToObjects(rileyRaw);
+  var curRiley = allRiley.filter(function(r) { return String(r.Cycle) === String(CYCLE); });
+  if (curRiley.length > 0) rileyRow = curRiley[curRiley.length - 1];
+  var eveningContext = buildEveningContext(cycleMedia, cyclePacketText, rileyRow);
   console.log('  Evening context:', eveningContext.nightlife ? 'populated' : 'empty',
               '| Media entries:', (eveningContext.mediaEntries || []).length,
               '| Dynamics:', eveningContext.cityDynamics ? 'yes' : 'no',

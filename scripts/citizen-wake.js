@@ -135,6 +135,31 @@ async function loadSportsSlice() {
   } catch (e) { return ''; }
 }
 
+// T2 (research.19) — immediate world: the lived texture of the citizen's own neighborhood
+// this cycle, what a resident would NOTICE walking around. Reads the shared frozen artifact
+// (output/neighborhood_texture_c{XX}.md, built by scripts/buildNeighborhoodTexture.js after
+// the world-summary, before the wake) and returns THIS hood's block. Lived-particulars, never
+// aggregates (the digest already stripped metrics + ran a canon sweep). Graceful: '' if the
+// artifact or the hood block is absent — exactly like loadSportsSlice. Frozen artifact => every
+// wake in the cycle reads the identical block (determinism holds; perception is input-side).
+function loadNeighborhoodTexture(nh, cycle) {
+  try {
+    if (!nh || !cycle) return '';
+    const p = path.join(__dirname, '..', 'output', `neighborhood_texture_c${cycle}.md`);
+    const md = fs.readFileSync(p, 'utf8');
+    const parts = md.split(/^###\s+/m);
+    for (const part of parts.slice(1)) {
+      const nl = part.indexOf('\n');
+      if (nl < 0) continue;
+      if (part.slice(0, nl).trim().toLowerCase() !== String(nh).trim().toLowerCase()) continue;
+      const body = part.slice(nl + 1).split(/\n###\s/)[0].trim().replace(/\s+/g, ' ').trim();
+      if (/^a quiet week/i.test(body)) return ''; // no engine signal -> nothing to perceive, omit the line
+      return body;
+    }
+    return '';
+  } catch (e) { return ''; }
+}
+
 async function buildPool() {
   const rows = await sheets.getRawSheetData('Simulation_Ledger');
   const h = rows[0];
@@ -189,7 +214,7 @@ async function coResidents(nh, selfPop) {
   return sl.residents.filter((rr) => String(rr.popId).toUpperCase() !== selfPop).slice(0, RESIDENT_CAP);
 }
 
-function buildVoicePrompts(c, neighbors, sportsLine, lifeArc) {
+function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine) {
   const disp = dials.disposition(c.cur);
   const who = neighbors.length
     ? `\n\nPeople around you in ${c.nh}: ${neighbors.map((n) => `${n.name}${n.occupation ? ' (' + n.occupation + ')' : ''}`).join(', ')}.`
@@ -198,7 +223,9 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc) {
   const arcLine = lifeArc ? `\n\nYour life so far: ${lifeArc}.` : ''; // T1a self-state read-back (Log-sourced)
   const trajLine = traj ? ` Lately you've been ${traj}.` : '';
   const sports = sportsLine ? `\n\nAround Oakland: ${sportsLine}` : ''; // T1b world-larger-than-self
-  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}\n\nReal things from your life recently:\n${c.life}${who}${sports}`;
+  const texture = textureLine ? `\n\nAround your neighborhood: ${textureLine}` : ''; // T2 immediate world
+  // immersion-ingredient order: continuity (T1a arc/traj) -> world/A's (T1b) -> immediate surroundings (T2)
+  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}\n\nReal things from your life recently:\n${c.life}${who}${sports}${texture}`;
   const user = `${WAKE_FRAME[WAKE] || WAKE_FRAME.evening}. In 4-5 sentences write a private, honest reflection — the small things on your mind, drawing on what's actually been happening in your life. Don't narrate events like a story; just think on the page the way you actually would. First person.`;
   return { system, user, disp };
 }
@@ -225,7 +252,8 @@ async function generateVoice(system, user) {
   const neighbors = await coResidents(c.nh, c.popId);
   const sportsLine = await loadSportsSlice();                 // T1b — one feed read, shared across the wake
   const lifeArc = await loadLifeArc(c.popId);                 // T1a — canonical milestone arc from LifeHistory_Log
-  const { system, user, disp } = buildVoicePrompts(c, neighbors, sportsLine, lifeArc);
+  const textureLine = loadNeighborhoodTexture(c.nh, cycle);   // T2 — this hood's frozen lived-particulars block
+  const { system, user, disp } = buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine);
 
   logLine(`woke ${c.popId} ${c.name} — ${c.occ || 'resident'}, ${c.nh}${c.age ? ', ' + c.age : ''} | eventMag=${c.eventMag} | ${disp}`);
   if (DRY) console.log('\n--- perception (system prompt) ---\n' + system + '\n----------------------------------');

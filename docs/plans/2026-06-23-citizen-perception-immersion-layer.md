@@ -119,7 +119,8 @@ Stronger-reviewer pass on the design. Three findings + one reframe that resolves
 |---|------|----------|------|
 | T1a | Canon-anchored self-state read-back (LifeHistory rollup + dial trajectory) into the wake perception — NOT prose read-back (AP-reframe). Closes amnesia with no fabrication re-injection. | bot | **none (canon-anchored; no research.17/canon-filter dependency)** |
 | T1b | Sports feed (`Oakland_Sports_Feed`) into perception — canonical, no translation. Pre-pipe: confirm feed canon-clean (no real-name leak). Serves ingredient 2 (world), not continuity. | bot | none |
-| T2 | World-summary **+ neighborhood `state`** → per-neighborhood lived-particulars translation layer (frozen at wake). Slicer data-path already runs at wake (CV-2); the build is the aggregate→lived-particular translation, not the wiring. | research-build (design) → bot/engine-sheet | none (deterministic snapshot) |
+| T2 | World-summary **+ neighborhood `state`** → per-neighborhood lived-particulars translation layer (frozen at wake). Slicer data-path already runs at wake (CV-2); the build is the aggregate→lived-particular translation, not the wiring. **Design DONE S273 — §T2 Design below.** | research-build (design DONE S273) → engine-sheet (build) | none (deterministic snapshot) |
+| T1a′ | **Arc-to-particular refinement** (S273 production finding). T1a ships an *aggregate* arc ("6 advancement events") that doesn't surface in prose — the self-axis version of "retail −4%". Translate the arc to a **named most-recent milestone** ("you made foreman two springs back", from the LifeHistory_Log row, not a count). Same metric→lived-particular pass as T2, on the self-axis. §T1a refinement below. | research-build (design DONE S273) → engine-sheet (build, alongside T2) | none (canon-anchored — Log is canon) |
 | T3 | Read-the-Pulse pilot, reaction-only, **routed through research.17 injection filter** | research.17 must land first | research.17 filter live |
 | T4 | Ask-the-citizen agency rung | research.12 Layer 3 | GPU + drift gate (autonomy roadmap) |
 
@@ -127,10 +128,94 @@ Stronger-reviewer pass on the design. Three findings + one reframe that resolves
 
 ---
 
+## T2 Design (S273) — shared generative per-neighborhood texture digest
+
+**Decision (Mike-approved S273, "take your recommendation"):** T2 is a **shared, generative, frozen per-neighborhood cycle artifact** the wake reads. Two knobs were open; both resolved.
+
+### Knob 1 — shape: shared cycle artifact, NOT per-wake (resolves OQ2)
+
+One digest covering all ~21 neighborhoods, generated **once per cycle**, frozen, then the wake reads the citizen's neighborhood block. Rejected the per-wake per-citizen translation (906× the cost, and non-deterministic unless frozen anyway). Three reasons shared wins:
+- **Cost** — 21 neighborhood translations/cycle vs ~906 per-citizen.
+- **Determinism** — frozen before any wake reads it, exactly like `world_summary_c{XX}.md`. Perception stays input-side; only the bounded reflection tag reaches the engine (Phase-1 gate unchanged).
+- **The differentiation argument** — two Fruitvale residents *should* perceive the **same** neighborhood facts ("the gallery walk downtown, another storefront dark on the strip") and diverge **in their own voice** when they react. Differentiation lives at the citizen-voice layer (dials → disposition), not in the digest. Per-citizen translation would be solving a problem we don't have.
+
+### Knob 2 — method: generative, NOT rule-based
+
+A rule-based band→phrase map (crime>0.8 → canned string) reproduces `neighborhoodSlice.describe()` with nicer words: every Fruitvale citizen reads the *identical sentence every cycle* — aggregates in costume, violating the lived-particulars guardrail in spirit. The whole reason T2 exists (rather than piping `describe()` into the wake) is the metric→lived-particular rewrite. Only a generative step earns the layer. Cost is bounded (≤~21 short generations + a canon sweep, once/cycle).
+
+### Artifact
+
+- **Path:** `output/neighborhood_texture_c{XX}.md` — one block per neighborhood (~21), parallel to `world_summary_c{XX}.md`.
+- **Block shape:** neighborhood name + **2–4 sentences of lived particulars** — what a resident would *notice* this cycle walking around. NO metrics in the output (no `+0.95`, no `retail 9.16`), NO real-world institutions/people.
+- **Pipeline position:** generated **after** `world_summary_c{XX}.md` (which already assembles the per-hood raw material) and **before** the wake reads. Frozen for the cycle.
+
+### Generator
+
+- **Input (per neighborhood):** the world-summary's per-hood material — the Neighborhood snapshot row (sentiment/retail/eventAttractiveness/crime + deltas), neighborhood-tagged **World Events**, **Evening Texture** items in that hood (restaurants/nightlife/city events), **faith holy-days** in that hood — **plus** `neighborhoodSlice.state` for the two facts the summary table omits: **displacementPressure + medianIncome/rent** (the C95 invent-struggle guardrail data).
+- **Grounding rule (bounds fabrication):** a block may only render particulars that **trace to a source line for that neighborhood**. No source events + flat metrics → "a quiet week, nothing much out of the ordinary." **Never invent drama.** This is the wall against the digest free-associating beyond engine truth.
+- **Call shape:** one **batched** LLM call producing all ~21 blocks (the model sees the whole city, varies texture hood-to-hood, one generation — cheapest). The prompt **partitions source lines per-neighborhood** so a block draws only from its own hood's sources (guards cross-hood bleed). Same OpenRouter/DeepSeek path the wake's `generateVoice` already uses. *(Sub-question left for engine-sheet: if batched bleed shows in testing, fall back to per-hood-with-shared-city-context calls.)*
+
+### Canon pass (proportional — wake-input-only, never published)
+
+- **Mandatory, deterministic:** blocklist sweep over the 21 blocks — `docs/media/REAL_NAMES_BLOCKLIST.md` + `docs/canon/INSTITUTIONS.md` no-fly. Cheap, automated, fail-loud.
+- **Light:** a CANON_RULES spot pass for alternate-timeline drift. NOT a full Rhea lane — this text feeds perception, never an edition. Right-sized to the surface.
+
+### Determinism
+
+The generator is non-deterministic run-to-run (LLM), but runs **once** per cycle → its output is the canonical **frozen** artifact, same class as an edition or the world_summary. Every wake in the cycle reads the identical frozen block. Determinism holds because perception is input-side and frozen; the Phase-1 gate (only the classified tag reaches the cycle) is untouched.
+
+### Wake integration (the real seam)
+
+Mirrors T1b exactly (`scripts/citizen-wake.js`):
+- New `loadNeighborhoodTexture(nh, cycle)` — reads `output/neighborhood_texture_c{XX}.md`, returns the citizen's hood block, `''` if absent (graceful, like `loadSportsSlice` returning `''`).
+- `buildVoicePrompts` takes a `textureLine` param; inject after the sports line (L200), following the immersion-ingredient order **continuity (T1a) → world/A's (T1b) → immediate surroundings (T2)**:
+  ```
+  const texture = textureLine ? `\n\nAround your neighborhood: ${textureLine}` : '';
+  ```
+  appended to the system prompt after `${sports}`.
+
+### Guardrails inherited (from §Guardrails)
+
+- **Lived particulars, never aggregates** — enforced structurally by no-metrics-in-output + the source-grounding rule.
+- **Scale honesty** — hood-scoped, not city-wide: a citizen perceives *their corner*, not omniscience. (This is *why* the digest is per-neighborhood, not a city feed.)
+- **C92 containment** — blocklist sweep + wake-input-only + the digest is never published.
+- **PT-4 coupling** — T2 enriches perception → marginally richer reflections → marginally more dial movement. Rides the **same gate**: do not scale past engine.38 B4 composure cap + the research.14 affect re-audit before fanning to all-906.
+
+### Build handoff → engine-sheet
+
+**What to build:**
+1. `scripts/buildNeighborhoodTexture.js` (or fold into the world-summary build chain) — reads `world_summary_c{XX}.md` + `Neighborhood_Map` (via `lib/neighborhoodSlice`), one batched OpenRouter call, blocklist sweep, writes `output/neighborhood_texture_c{XX}.md`. Runs after `/build-world-summary`, before the wake.
+2. `scripts/citizen-wake.js` — add `loadNeighborhoodTexture(nh, cycle)` + `textureLine` param in `buildVoicePrompts` + the injection line. Wake-side, no clasp.
+
+**Acceptance criteria:**
+- Artifact generated each cycle post-world-summary, ~21 blocks present.
+- **Zero metrics in output** (regex sweep: no bare decimal / ±N adjacent to a metric word).
+- **Zero blocklist hits**; light canon spot-pass clean.
+- Every particular traceable to a hood source line (spot-check 3 hoods).
+- Empty/flat hood → quiet-week line, **no invented drama**.
+- Wake dry-run on a citizen (`--dry-run --pop=POP-XXXXX`) shows `Around your neighborhood:` populated from that citizen's hood block.
+- Determinism: the same frozen artifact is read across every wake in the cycle.
+
+---
+
+## T1a refinement (S273 — production verification finding)
+
+**Finding:** dry-ran the live wake on two citizens (POP-00001 Vinnie, POP-00231 Calvin) to verify T1a is producing in production. It **is** — `Your life so far: 6 advancement events` / `3 advancement events` both populate the system prompt. But across the 15 post-upgrade reflections, the arc **never surfaces in the prose**, while T1b's narrative A's line lands in nearly every one.
+
+**Diagnosis:** the arc format `loadLifeArc` emits is an **aggregate** — `"6 advancement events"`, a *count*. No person thinks "I have had 6 advancement events," so the LLM drops it. It's the **self-axis twin of the T2 problem**: T1b feeds narrative ("The A's are 74-24… carnival rides and food trucks") and lands; T1a feeds a number and lands nowhere. T1a is *built* but not *earning its place*.
+
+**Refinement (T1a′):** translate the arc from a count to a **named most-recent milestone** — pull the latest `ARC_TAGS` row from `LifeHistory_Log` and render its *description* ("made foreman", "married", "lost the shop"), optionally with a coarse sim-time anchor ("a couple springs back"), instead of `Object.entries(counts)…`. Still canon-anchored (the Log is canon; no fabrication, no gate — the AP-reframe invariant holds). Same metric→lived-particular pass T2 runs, applied to the self-axis. Cheap: it's a different reduction over rows `loadLifeArc` already reads, not a new data source.
+
+**Build note for engine-sheet:** edit `loadLifeArc` in `scripts/citizen-wake.js` to return the named latest-milestone string; keep the count as a fallback only if the latest row has no usable description. Verify via the same `--dry-run --pop=` check; acceptance = the milestone *name* appears in the prompt and bleeds into ≥1 of 3 test reflections. Ride the T2 build (both are wake-side, no clasp).
+
+**Aside (not a repair):** the dry-run also surfaced legacy real-world timestamps (`2026-06-20 23:35 — [Faith]`) in the inline LifeHistory tail. These are **pre-fix residue** — the live writer was corrected at S271 (`eb7ef6d6` "kill real-world wall-clock from the sim's life record") + S264 (`ecbdca42` col-O → `C{cycle}`). Residual dated rows age out of the last-5 inline tail as new sim-time events push them off; no sweep / no ENGINE_REPAIR row warranted.
+
+---
+
 ## Open questions
 
 - [x] **Page read-back shape** — RESOLVED by AP-reframe. Neither raw last-N reflections nor a rolling prose summary (both re-inject the contaminated generated prose). The read-back is a **canon-anchored self-state rollup** (LifeHistory + dial trajectory), which carries no fabrication to compound. The prose page stays write-only for now.
-- [ ] **Tier-2 translation owner** — does the lived-particulars digest live in the wake (bot, per-citizen, costly) or as a per-neighborhood cycle artifact the wake reads (cheaper, shared)? Lean shared artifact.
+- [x] **Tier-2 translation owner** — RESOLVED S273: **shared per-neighborhood cycle artifact** (frozen, generative), NOT per-wake. See §T2 Design. Cost + determinism + differentiation-lives-at-voice-layer all point to shared.
 - [ ] **Tier 3 sequencing** — does it wait on research.17 fully, or can a no-canon-names subset (weather/sports/civic-mood) pilot earlier?
 - [ ] **Relationships-with-texture (immersion ingredient 3)** — bonds ledger exists (`Relationship_Bonds`); is co-resident texture a Tier-1 add or its own task? Not yet placed.
 
@@ -138,6 +223,7 @@ Stronger-reviewer pass on the design. Three findings + one reframe that resolves
 
 ## Changelog
 
+- 2026-06-26 (S273) — **T2 designed (Mike: "take your recommendation").** Resolved both open knobs: shape = **shared generative per-neighborhood cycle artifact** (`output/neighborhood_texture_c{XX}.md`, ~21 blocks, frozen post-world-summary, wake reads the hood block) over per-wake translation (cost + determinism + differentiation-lives-at-voice-layer); method = **generative** over rule-based (rule-based just reskins `describe()`; the metric→lived-particular rewrite is the whole reason T2 exists). Added §T2 Design with generator spec (batched OpenRouter call, per-hood source partition, displacement/income from slicer), source-grounding-bounds-fabrication rule, proportional canon pass (deterministic blocklist sweep + light CANON_RULES, NOT a Rhea lane — wake-input-only), the wake seam (mirrors T1b's `Around Oakland:` → `Around your neighborhood:`), inherited guardrails + PT-4 coupling, and the engine-sheet build handoff with acceptance criteria. Marked OQ2 resolved + T2 build-row `design DONE S273 → engine-sheet`, fixed stale `bot` terminal ref. Advisor was overloaded; reasoned + code-grounded the seam against `citizen-wake.js` L192–204 instead. **Also (production-verification finding):** dry-ran the live wake (POP-00001/POP-00231) — T1a *is* producing but its arc is an aggregate (`"6 advancement events"`) that never surfaces in 15 post-upgrade reflections (self-axis twin of the T2 metric problem); T1b's narrative A's line lands everywhere. Filed **T1a′ refinement** (arc count → named latest milestone from LifeHistory_Log, same translation pass, canon-anchored/ungated) + §T1a refinement. Confirmed the real-world-timestamp residue in the life tail is pre-fix (S271 `eb7ef6d6` / S264 `ecbdca42`) and self-ages-out — no repair row.
 - 2026-06-23 (S270) — **Canon distinction (Mike):** subjective invention ≠ contamination. A citizen making up "shady Greg" is characterization (how they remember), not a sim record; the wall is the subjective→canon-publication boundary, not invention itself. Refines PT-1/AP-2 + added as a Guardrail. The AP-reframe stays the right *first* build (no boundary-marking machinery needed); prose read-back returns as a later tier once the subjective layer is fenced from canon.
 - 2026-06-23 (S270) — **Advisor pass run (owed since S269).** Three findings + a reframe folded in. AP-1: T1a smuggled a gate + category error — research.17 is a salience filter, not a canon-truth validator, so it never guarded PT-1. AP-2: prose read-back compounds C92 (rolling summary doesn't save it). AP-3: T1b is the safe true-first build but serves world (ingredient 2), not continuity. **Reframe: pivot T1a from prose-read-back to canon-anchored self-state read-back (LifeHistory rollup + dial trajectory) — ungated AND contamination-free, since the fabrication lives in the prose, not the canon self-history.** Updated: Tier-1 desc, tier table canon-risk (Low–Med→None), T1a/T1b build rows, coupling line (Tier 1 no longer depends on research.17; that's a Tier-3-only dependency now), open-question 1 RESOLVED. Headline build now off the C100 wall.
 - 2026-06-23 (S270) — Code-verification pass (advisor still overloaded): both premises confirmed against `citizen-wake.js`/`neighborhoodSlice.js` (CV-1 page-never-read, CV-2 no-world-beyond-block). Correction: neighborhood `state` is computed-but-discarded aggregates → moves from Tier-1 to T2 translation; T1b reduced to sports feed only. Advisor pressure-test still owed.

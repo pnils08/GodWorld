@@ -101,7 +101,11 @@ This is why there is no ADR yet: an ADR records a *decided* mechanism, and these
 3. **Dedup vs engine story-seeds.** engine.35 already mints ~46 seeds/cycle. Citizen-signal seeds must **complement**, not duplicate — how do the two seed sources relate (merge, tag-by-origin, citizen-seeds as corroboration weight on engine-seeds)?
 4. **Output shape.** Detector emits a **story-seed** (cleanest — rides existing seed→sift flow) vs a draft (premature). Lean seed.
 5. **Consumption.** Who reads citizen-signal seeds — /sift directly? A dedicated pass? How do they enter the existing flow without bloating it?
-6. **Cost model — the offload claim.** The WHY is token-offload from "citizen audits in print." Pin what that costs today (still owed from S273) so the detector targets the real saving; the cost-gate to "editions-not-always" needs the quality bar above.
+6. **Cost model — PINNED S273 (real numbers): cost is a NON-constraint.** DeepSeek `deepseek-chat` via OpenRouter = **$0.20/M input, $0.80/M output** (authoritative, `/api/v1/models`). A wake = voice gen (~600 in + 260 out) + classifier (~350 in + 20 out) ≈ **$0.0004/wake**. T2 texture-gen = 1 batched call/cycle ≈ $0.0016/cycle (negligible). Scenarios (cycle = 7 days, month = 4 cycles):
+   - **3/day** → 84/month → **~$0.034/month**
+   - **10/day** → 280/month → **~$0.11/month**
+   - **all 900/day** → 27,000/month → **~$11/month**
+   So even painting the **entire population every day** costs less than a couple of editions (9 Opus desks + reviewers, multi-pass = *dollars* each; DeepSeek is 1/25th of one 3-pass Claude desk per `[[../MIGRATION_OFF_CLAUDE]]`). **Implication:** throughput is **not** budget-gated — size it by *signal value + rotation freshness* (don't re-wake the last N; enough distinct shaped citizens to converge on), not by cost. Mike's "I don't think 900 need to run a day" is right for **signal** reasons, not cost. The offload-from-editions claim (research.21 thesis) is confirmed on the cost axis; the open gate is the **quality** bar, not the price.
 
 ---
 

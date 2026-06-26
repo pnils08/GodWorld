@@ -175,6 +175,59 @@ function loadNeighborhoodTexture(nh, cycle) {
   } catch (e) { return ''; }
 }
 
+// T1c (research.19, relationships-with-texture — immersion ingredient 3) — the people a citizen
+// has HISTORY with, not just 3 names off the block. Reads Relationship_Bonds (live active bonds,
+// canon engine state) for the woken citizen, resolves the other party's name from the ledger, and
+// renders bond-type + warmth as plain relationship texture ("a close friend", "someone you know
+// through work"). Canon-anchored — names from the ledger, bond types from the bond engine; no
+// invention. Cross-neighborhood by design (relationships reach beyond the block, unlike co-residents).
+const BOND_PHRASE = {
+  family: (close) => (close ? 'close family' : 'family'),
+  friendship: (close) => (close ? 'a close friend' : 'a friend'),
+  professional: () => 'someone you know through work',
+  alliance: (close) => (close ? 'someone you count on' : 'an ally'),
+  rivalry: () => 'someone you butt heads with',
+};
+async function loadBonds(popId) {
+  try {
+    const [bonds, led] = await Promise.all([
+      sheets.getRawSheetData('Relationship_Bonds'),
+      sheets.getRawSheetData('Simulation_Ledger'),
+    ]);
+    if (!bonds || bonds.length < 2 || !led || led.length < 2) return '';
+    const bh = bonds[0];
+    const iA = bh.indexOf('CitizenA'), iB = bh.indexOf('CitizenB'), iT = bh.indexOf('BondType'), iI = bh.indexOf('Intensity'), iS = bh.indexOf('Status');
+    if (iA < 0 || iB < 0) return '';
+    const lh = led[0];
+    const lp = lh.findIndex((x) => String(x).toLowerCase() === 'popid');
+    const ln = lh.findIndex((x) => String(x).toLowerCase() === 'name');
+    const lf = lh.findIndex((x) => String(x).toLowerCase() === 'first');
+    const ll = lh.findIndex((x) => String(x).toLowerCase() === 'last');
+    const nameOf = {};
+    for (let i = 1; i < led.length; i++) {
+      const k = String(led[i][lp]).toUpperCase();
+      nameOf[k] = (ln >= 0 && led[i][ln]) ? led[i][ln] : [led[i][lf], led[i][ll]].filter(Boolean).join(' ');
+    }
+    const mine = [];
+    for (let i = 1; i < bonds.length; i++) {
+      const r = bonds[i];
+      if (String(r[iS] || '').toLowerCase() !== 'active') continue;
+      const a = String(r[iA]).toUpperCase(), b = String(r[iB]).toUpperCase();
+      if (a !== popId && b !== popId) continue;
+      const other = a === popId ? b : a;
+      const name = nameOf[other];
+      if (!name) continue; // unresolved POPID -> skip (anti-confabulation: never invent a name)
+      const intensity = Number(r[iI]) || 0;
+      const fn = BOND_PHRASE[String(r[iT] || '').toLowerCase()];
+      const phrase = fn ? fn(intensity >= 5) : (intensity >= 5 ? 'someone close to you' : 'someone you know');
+      mine.push({ name, phrase, intensity });
+    }
+    if (!mine.length) return '';
+    mine.sort((x, y) => y.intensity - x.intensity); // closest first
+    return mine.slice(0, 3).map((m) => `${m.name}, ${m.phrase}`).join('; ');
+  } catch (e) { return ''; }
+}
+
 async function buildPool() {
   const rows = await sheets.getRawSheetData('Simulation_Ledger');
   const h = rows[0];
@@ -229,18 +282,19 @@ async function coResidents(nh, selfPop) {
   return sl.residents.filter((rr) => String(rr.popId).toUpperCase() !== selfPop).slice(0, RESIDENT_CAP);
 }
 
-function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine) {
+function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine) {
   const disp = dials.disposition(c.cur);
   const who = neighbors.length
     ? `\n\nPeople around you in ${c.nh}: ${neighbors.map((n) => `${n.name}${n.occupation ? ' (' + n.occupation + ')' : ''}`).join(', ')}.`
     : '';
+  const bonds = bondsLine ? `\n\nPeople you have history with: ${bondsLine}.` : ''; // T1c relationships-with-texture
   const traj = dialTrajectory(c.baseDials, c.cur);                    // T1a trajectory (dormant until drain)
   const arcLine = lifeArc ? `\n\nYour life so far: ${lifeArc}.` : ''; // T1a self-state read-back (Log-sourced)
   const trajLine = traj ? ` Lately you've been ${traj}.` : '';
   const sports = sportsLine ? `\n\nAround Oakland: ${sportsLine}` : ''; // T1b world-larger-than-self
   const texture = textureLine ? `\n\nAround your neighborhood: ${textureLine}` : ''; // T2 immediate world
-  // immersion-ingredient order: continuity (T1a arc/traj) -> world/A's (T1b) -> immediate surroundings (T2)
-  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}\n\nReal things from your life recently:\n${c.life}${who}${sports}${texture}`;
+  // immersion-ingredient order: continuity (T1a) -> people (around you + T1c history-with) -> world/A's (T1b) -> surroundings (T2)
+  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}\n\nReal things from your life recently:\n${c.life}${who}${bonds}${sports}${texture}`;
   const user = `${WAKE_FRAME[WAKE] || WAKE_FRAME.evening}. In 4-5 sentences write a private, honest reflection — the small things on your mind, drawing on what's actually been happening in your life. Don't narrate events like a story; just think on the page the way you actually would. First person.`;
   return { system, user, disp };
 }
@@ -268,7 +322,8 @@ async function generateVoice(system, user) {
   const sportsLine = await loadSportsSlice();                 // T1b — one feed read, shared across the wake
   const lifeArc = await loadLifeArc(c.popId);                 // T1a — canonical milestone arc from LifeHistory_Log
   const textureLine = loadNeighborhoodTexture(c.nh, cycle);   // T2 — this hood's frozen lived-particulars block
-  const { system, user, disp } = buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine);
+  const bondsLine = await loadBonds(c.popId);                 // T1c — people the citizen has history with (canon bonds)
+  const { system, user, disp } = buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine);
 
   logLine(`woke ${c.popId} ${c.name} — ${c.occ || 'resident'}, ${c.nh}${c.age ? ', ' + c.age : ''} | eventMag=${c.eventMag} | ${disp}`);
   if (DRY) console.log('\n--- perception (system prompt) ---\n' + system + '\n----------------------------------');

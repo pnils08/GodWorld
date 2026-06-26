@@ -31,6 +31,7 @@ const memoryFence = require('/root/GodWorld/lib/memoryFence');
 const classifier = require('/root/GodWorld/lib/reflectionClassifier');
 const { createSlicer } = require('/root/GodWorld/lib/neighborhoodSlice');
 const getCurrentCycle = require('/root/GodWorld/lib/getCurrentCycle');
+const { selectProvocation } = require('/root/GodWorld/lib/provocationBank'); // T5 varied-provocation bank
 
 const ARGV = process.argv.slice(2);
 const DRY = ARGV.includes('--dry-run');
@@ -45,10 +46,15 @@ const RESIDENT_CAP = 3;         // real co-residents fed for grounding (names on
 const STATE_FILE = path.join(__dirname, '..', 'logs', 'citizen-wake-state.json');
 const LOG_FILE = path.join(__dirname, '..', 'logs', 'citizen-wake.log');
 
+// Five distinct dayparts — one per cron fire (7:30/12:30/15:30/19:30/21:30).
+// Pre-T5 the 5 fires reused 3 frames (15:30->midday, 21:30->evening); afternoon
+// + night make all five genuinely distinct (research.19 T5, S273).
 const WAKE_FRAME = {
   morning: 'It is early morning. You are waking into the day, the day still ahead of you',
   midday: 'It is the middle of the day, a pause in the neighborhood or at work',
+  afternoon: 'It is mid-afternoon. The day\'s weight has settled in; there is still some of it left to go',
   evening: 'It is evening. You are winding down after an ordinary day',
+  night: 'It is late night. The neighborhood has gone quiet around you and most people are asleep',
 };
 
 function logLine(s) {
@@ -309,7 +315,7 @@ async function coResidents(nh, selfPop) {
   return sl.residents.filter((rr) => String(rr.popId).toUpperCase() !== selfPop).slice(0, RESIDENT_CAP);
 }
 
-function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, pageMemory) {
+function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, pageMemory, cycle) {
   const disp = dials.disposition(c.cur);
   const who = neighbors.length
     ? `\n\nPeople around you in ${c.nh}: ${neighbors.map((n) => `${n.name}${n.occupation ? ' (' + n.occupation + ')' : ''}`).join(', ')}.`
@@ -325,8 +331,17 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
   const memory = pageMemory ? `\n\n---\n\nWhat's been on your mind lately, from your own private reflections:\n${pageMemory}` : '';
   // immersion-ingredient order: continuity (T1a state + T1c own-memory) -> people (around you + history-with) -> world/A's (T1b) -> surroundings (T2)
   const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}\n\nReal things from your life recently:\n${c.life}${who}${bonds}${sports}${texture}${memory}`;
-  const user = `${WAKE_FRAME[WAKE] || WAKE_FRAME.evening}. In 4-5 sentences write a private, honest reflection — the small things on your mind, drawing on what's actually been happening in your life. Don't narrate events like a story; just think on the page the way you actually would. First person.`;
-  return { system, user, disp };
+  // T5 — varied-provocation question bank. The fixed "small things on your mind"
+  // prompt becomes a deterministically-seeded pick latching a real signal this
+  // citizen perceives, so two citizens woken the same cycle are prompted
+  // DIFFERENTLY (fixes vector-2: the shared question that converges the mode).
+  const prov = selectProvocation(c.popId, cycle, WAKE, {
+    citizen: { name: c.name, occ: c.occ, nh: c.nh, age: c.age, disp: disp },
+    neighbors: neighbors, sportsLine: sportsLine, lifeArc: lifeArc,
+    textureLine: textureLine, bondsLine: bondsLine, traj: traj,
+  });
+  const user = `${WAKE_FRAME[WAKE] || WAKE_FRAME.evening}. ${prov.text}\n\nIn 4-5 sentences, think on the page the way you actually would — private, honest, first person. Don't narrate events like a story; just sit with it.`;
+  return { system, user, disp, prov };
 }
 
 async function generateVoice(system, user) {
@@ -354,10 +369,11 @@ async function generateVoice(system, user) {
   const textureLine = loadNeighborhoodTexture(c.nh, cycle);   // T2 — this hood's frozen lived-particulars block
   const bondsLine = await loadBonds(c.popId);                 // relationships-with-texture — people the citizen has history with (canon bonds)
   const pageMemory = await loadOwnPageReadback(c.popId);      // T1c — fenced own-page prose read-back (most recent reflections)
-  const { system, user, disp } = buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, pageMemory);
+  const { system, user, disp, prov } = buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, pageMemory, cycle);
 
-  logLine(`woke ${c.popId} ${c.name} — ${c.occ || 'resident'}, ${c.nh}${c.age ? ', ' + c.age : ''} | eventMag=${c.eventMag} | ${disp}`);
+  logLine(`woke ${c.popId} ${c.name} — ${c.occ || 'resident'}, ${c.nh}${c.age ? ', ' + c.age : ''} | eventMag=${c.eventMag} | ${disp} | provocation=${prov.id} route=${prov.route} wake=${WAKE}`);
   if (DRY) console.log('\n--- perception (system prompt) ---\n' + system + '\n----------------------------------');
+  if (DRY) console.log('\n--- provocation (user prompt, T5) ---\n' + user + '\n----------------------------------');
   const reflection = await generateVoice(system, user);
   console.log('\n--- reflection ---\n' + reflection + '\n------------------');
 

@@ -14,6 +14,7 @@ pointers:
   - "[[../RESEARCH]] — S272 entry: deltas list, test artifacts, cost-measurement gate"
   - "[[../engine/ROLLOUT_PLAN]] — build rows land here (engine-sheet substrate deltas)"
   - "[[index]] — ADR registered same commit"
+  - "[[../plans/2026-06-25-deep-dispatch-write-edition-build]] — the phased build plan executing this ADR"
   - "test artifacts: output/desk-test/sports_c100_deep_hal.md, output/desk-test/civic_c100_deep_carmen.md"
 ---
 

@@ -14,6 +14,7 @@ pointers:
   - "[[../adr/0012-autonomous-deep-dispatch-write-edition]] — load-bearing decision"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — registered same commit"
+  - "[[2026-06-26-citizen-signal-story-emergence]] — research.21 supplies the aggregation+consumption half of report-through-citizens this plan's reporting-shift needed; complementary (deep-dispatch reshapes HOW a desk writes, that generates WHAT gets written about, bottom-up)"
 ---
 
 # Autonomous Deep-Dispatch — write-edition Build Plan

@@ -68,13 +68,24 @@ function recentEventMagnitude(lifeTail) {
   return Object.values(fx).reduce((s, v) => s + Math.abs(v), 0);
 }
 
-// T1a (research.19) — canon-anchored self-state read-back. The amnesia fix: a citizen perceives
-// their own life ARC, not just the recent tail. Sourced from LifeHistory_Log (the canonical
-// append-only per-citizen event history), NOT generated reflection prose — so there is no
-// fabrication to re-inject (the AP-reframe: the "shady Greg"-class invention lives in the prose
-// page, which we deliberately never read back). Inline col O is heavily compressed, so the milestone
-// arc must come from the Log, not the inline tail (which is folded into the dial base over time).
-const ARC_TAGS = /^(Promotion|Advancement|Wedding|Birth|Retirement|Graduation|CivicRole|Death|Stabilized|Setback|Friction|Strain|Stumble|Spat|Disappointment|Ailment)$/i;
+// T1a' (research.19, S273 production finding) — canon-anchored self-state read-back, the
+// amnesia fix: a citizen perceives a genuine life MILESTONE, not just the recent tail. Sourced
+// from LifeHistory_Log (canonical append-only per-citizen history), NOT generated reflection prose
+// — no fabrication to re-inject (the AP-reframe: "shady Greg"-class invention lives in the prose
+// page, deliberately never read back).
+//
+// WHY a named milestone and NOT a count (S273): the original loadLifeArc emitted an aggregate
+// ("6 advancement events") that never surfaced in 15 post-upgrade reflections — no person thinks
+// in counts (self-axis twin of T2's "retail -4%" problem). And 94% of ARC rows are Advancement/
+// Promotion whose EventText is engine BOOKKEEPING ("Updated to Tier 3. 29 West Oakland Server...")
+// — rendering it leaks engine vocab, worse than the count. So: render the latest PERSON-READABLE
+// life-event milestone's own description; if none, OMIT (no count fallback — the count IS the bug).
+// Live reach is thin (~1.9% of the wake pool have a clean milestone — weddings/retirements are rare,
+// and the engine doesn't yet write person-readable Advancement text); the honest line beats a leaky
+// one. Closing the amnesia hole at scale is the UPSTREAM lane (cleaner ARC descriptions at the
+// engine-write site + engine.38 B3 milestone supply), tracked separately — not this wake-side task.
+const MILESTONE_TAGS = /^(Wedding|Birth|Retirement|Graduation|Stabilized)$/i; // Death omitted: incoherent for a living reflector
+const BOOKKEEPING_PREFIX = /^(Updated to Tier|Added to Simulation_Ledger|Emerged into Tier|Neighborhood council|Local civic|Development civic)/i;
 async function loadLifeArc(popId) {
   try {
     const rows = await sheets.getRawSheetData('LifeHistory_Log');
@@ -82,15 +93,19 @@ async function loadLifeArc(popId) {
     const h = rows[0];
     const iPop = h.findIndex((x) => String(x).toLowerCase() === 'popid');
     const iTag = h.findIndex((x) => String(x).toLowerCase() === 'eventtag');
-    if (iPop < 0 || iTag < 0) return '';
-    const counts = {};
+    const iText = h.findIndex((x) => String(x).toLowerCase() === 'eventtext');
+    const iCyc = h.findIndex((x) => String(x).toLowerCase() === 'cycle');
+    if (iPop < 0 || iTag < 0 || iText < 0) return '';
+    let best = null; // latest (highest cycle) clean milestone
     for (let i = 1; i < rows.length; i++) {
       if (String(rows[i][iPop]).toUpperCase() !== popId) continue;
-      const t = String(rows[i][iTag] || '').trim();
-      if (ARC_TAGS.test(t)) counts[t.toLowerCase()] = (counts[t.toLowerCase()] || 0) + 1;
+      if (!MILESTONE_TAGS.test(String(rows[i][iTag] || '').trim())) continue;
+      const text = String(rows[i][iText] || '').trim();
+      if (text.length < 8 || BOOKKEEPING_PREFIX.test(text)) continue; // sanitize: drop engine-bookkeeping text
+      const cyc = iCyc >= 0 ? (Number(rows[i][iCyc]) || 0) : i;
+      if (!best || cyc >= best.cyc) best = { text, cyc };
     }
-    return Object.entries(counts).sort((a, b) => b[1] - a[1])
-      .map(([t, n]) => (n > 1 ? `${n} ${t} events` : `a ${t}`)).join(', ');
+    return best ? best.text : '';
   } catch (e) { return ''; }
 }
 

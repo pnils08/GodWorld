@@ -42,6 +42,18 @@ Read Riley_Digest (3 cycles), Sports Feed (3 cycles), civic production log (if e
 
 **Gate:** File exists on disk + ingest confirmed.
 
+### Step 5.5: Neighborhood texture (citizen perception — research.19 T2)
+
+Translate the cycle's per-hood engine signal into the lived particulars a resident would *notice* — the shared, frozen perception artifact the citizen-wake loop reads. **Wake-input only — never published, never canon.**
+
+```bash
+node scripts/buildNeighborhoodTexture.js {XX}
+```
+
+Reads the same Riley_Digest + Neighborhood_Map sources as Step 5 (structured, not the world_summary markdown), runs ONE batched DeepSeek generation (~21 short blocks), deterministic real-name blocklist sweep (fail-loud). Output: `output/neighborhood_texture_c{XX}.md`, frozen for the cycle. Hoods with no engine signal get a quiet-week line (no invented drama). The cron `citizen-wake.js` reads each citizen's hood block via `loadNeighborhoodTexture` and injects it as `Around your neighborhood:`. Adds one cheap LLM gen/cycle; degrades gracefully (wake omits the line) if absent.
+
+**Gate:** File exists on disk.
+
 ### Step 6: Gap Log Close (engine-sheet)
 
 Run the mechanical baseline audit and append judgment-layer entries.

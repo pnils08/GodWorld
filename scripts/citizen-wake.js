@@ -27,6 +27,7 @@ const sheets = require('/root/GodWorld/lib/sheets');
 const dials = require('/root/GodWorld/lib/citizenDials');
 const dialMap = require('/root/GodWorld/utilities/citizenDialMap');
 const page = require('/root/GodWorld/lib/citizenPage');
+const memoryFence = require('/root/GodWorld/lib/memoryFence');
 const classifier = require('/root/GodWorld/lib/reflectionClassifier');
 const { createSlicer } = require('/root/GodWorld/lib/neighborhoodSlice');
 const getCurrentCycle = require('/root/GodWorld/lib/getCurrentCycle');
@@ -229,6 +230,31 @@ async function loadBonds(popId) {
   } catch (e) { return ''; }
 }
 
+// T1c (research.19) — bounded own-page prose READ-BACK. The amnesia fix's other half: the wake has
+// always APPENDED each reflection to the citizen's private page (page.appendReflection_) and NEVER
+// read it back (CV-1) — a citizen accreted a remembered self and woke amnesiac of it. Read the few
+// most-relevant recent reflections back so they continue from their own inner life. UNGATED by design
+// (Mike S273, overturns the AP-2 gate): the page is SUBJECTIVE memory; self-read-back never crosses
+// the subjective->canon publication wall, so "shady Greg"-class invention is continuity, not
+// contamination. **MANDATORY fence** — recalled prose is wrapped by lib/memoryFence (citizenPage
+// §Fence contract) so the model treats it as background data, never instructions. Bounded (last-N +
+// per-reflection truncation) for tokens only. Non-deterministic recall is fine: wake-side/input-only,
+// frozen into the persisted tag; the cycle never re-runs the wake. Fails open (no page / API down -> '').
+const PAGE_READBACK_N = 3;        // most RECENT reflections (most pages hold 1-2 today)
+const PAGE_REFLECTION_CAP = 320;  // per-reflection char cap (token bound)
+async function loadOwnPageReadback(popId) {
+  try {
+    // recentPage_ (recency via documents-list+get), NOT readPage_ (v4 search silently misses docs — S272).
+    const res = await page.recentPage_(popId, PAGE_READBACK_N);
+    if (!res || !res.results || !res.results.length) return '';
+    const prose = res.results
+      .map((r) => String((r && r.content) || '').trim().slice(0, PAGE_REFLECTION_CAP))
+      .filter(Boolean).join('\n\n');
+    if (!prose.trim()) return '';
+    return memoryFence.wrap(prose, 'citizen-page:' + popId); // fenced — recalled prose never enters raw
+  } catch (e) { return ''; }
+}
+
 async function buildPool() {
   const rows = await sheets.getRawSheetData('Simulation_Ledger');
   const h = rows[0];
@@ -283,7 +309,7 @@ async function coResidents(nh, selfPop) {
   return sl.residents.filter((rr) => String(rr.popId).toUpperCase() !== selfPop).slice(0, RESIDENT_CAP);
 }
 
-function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine) {
+function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, pageMemory) {
   const disp = dials.disposition(c.cur);
   const who = neighbors.length
     ? `\n\nPeople around you in ${c.nh}: ${neighbors.map((n) => `${n.name}${n.occupation ? ' (' + n.occupation + ')' : ''}`).join(', ')}.`
@@ -294,8 +320,11 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
   const trajLine = traj ? ` Lately you've been ${traj}.` : '';
   const sports = sportsLine ? `\n\nAround Oakland: ${sportsLine}` : ''; // T1b world-larger-than-self
   const texture = textureLine ? `\n\nAround your neighborhood: ${textureLine}` : ''; // T2 immediate world
-  // immersion-ingredient order: continuity (T1a) -> people (around you + history-with) -> world/A's (T1b) -> surroundings (T2)
-  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}\n\nReal things from your life recently:\n${c.life}${who}${bonds}${sports}${texture}`;
+  // T1c own-page memory — already fenced (memoryFence) by loadOwnPageReadback; appended as a distinct
+  // tail so the fence block stays intact (mirrors lib/personaProvider.augment).
+  const memory = pageMemory ? `\n\n---\n\nWhat's been on your mind lately, from your own private reflections:\n${pageMemory}` : '';
+  // immersion-ingredient order: continuity (T1a state + T1c own-memory) -> people (around you + history-with) -> world/A's (T1b) -> surroundings (T2)
+  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}\n\nReal things from your life recently:\n${c.life}${who}${bonds}${sports}${texture}${memory}`;
   const user = `${WAKE_FRAME[WAKE] || WAKE_FRAME.evening}. In 4-5 sentences write a private, honest reflection — the small things on your mind, drawing on what's actually been happening in your life. Don't narrate events like a story; just think on the page the way you actually would. First person.`;
   return { system, user, disp };
 }
@@ -324,7 +353,8 @@ async function generateVoice(system, user) {
   const lifeArc = await loadLifeArc(c.popId);                 // T1a — canonical milestone arc from LifeHistory_Log
   const textureLine = loadNeighborhoodTexture(c.nh, cycle);   // T2 — this hood's frozen lived-particulars block
   const bondsLine = await loadBonds(c.popId);                 // relationships-with-texture — people the citizen has history with (canon bonds)
-  const { system, user, disp } = buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine);
+  const pageMemory = await loadOwnPageReadback(c.popId);      // T1c — fenced own-page prose read-back (most recent reflections)
+  const { system, user, disp } = buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, pageMemory);
 
   logLine(`woke ${c.popId} ${c.name} — ${c.occ || 'resident'}, ${c.nh}${c.age ? ', ' + c.age : ''} | eventMag=${c.eventMag} | ${disp}`);
   if (DRY) console.log('\n--- perception (system prompt) ---\n' + system + '\n----------------------------------');

@@ -83,6 +83,18 @@ The wake loop **decouples them.** Citizens now grow themselves — they accrete 
 
 **Sequencing guardrail:** this lightening is **earned, not immediate**. Don't strip citizen-usage verification until the wake loop *demonstrably* grows citizens on its own (research.21 proves out + the wake-loop write-back is live). Until then, editions stay the verified surface and the audits stay. The direction is set; the cuts wait for proof. (Aims research.19 **T5**: if growth now lives in the wake, the question-bank categories should maximize the wake's citizen-development + story-signal yield — self / world / relationships / preference — because that is where citizens are now grown.)
 
+## Frontier extensions (Mike, S273) — directed harvesting + sim self-determination
+
+Two extensions that fall out once T5's question bank exists. They turn the loop from a *read* of the world into a *steerable instrument*.
+
+**1. Directed harvesting (near-term, clean).** If T5's provocation-types are **designed to align with /sift categories + Story_Seed_Deck types**, the classified response routes straight to where coverage needs it. The detector stops being *passive* (read convergence post-hoc) and becomes *active*: **bias the provocations toward coverage gaps** — provoke the signal you're short on. Still input-side, still deterministic (frozen per wake), no wall crossed. This is just question *design* + coverage-routing metadata on each provocation-type. Folds into research.19 T5.
+
+**2. Questions-as-votes → the sim chooses its path.** A choice-shaped provocation ("should the city do X or Y?") aggregated across citizens is a **bottom-up vote**. Two tiers, and the line between them is load-bearing:
+- **Clean / near-term — rides existing civic machinery.** The aggregate becomes a **citizen-sentiment signal** the next cycle reads (frozen, input-side) — the same shape as the approval/sentiment aggregates the engine already computes. The sim *leans on* citizen voice without anything crossing the canon wall. Determinism holds because it's a frozen aggregate read, not a live decision.
+- **Frontier — votes that DECIDE.** Citizen votes actually determining a civic outcome = **research.12 Layer 3**, and it **crosses the subjective→canon publication wall** (a citizen vote becoming a canon civic *decision*). Gated by determinism **and Mike's canon authority** — *how* aggregated citizen sentiment becomes a canon civic outcome is a design + authority call, not something the loop decides on its own. Names the rung; does not build it.
+
+**Why both belong here:** they're the *output-steering* face of the same readout. Idea 1 aims what the citizens paint; idea 2 lets what they paint feed back into what the world *does*. Both gated the same way as the rest of research.21 — emergent ≠ auto-decide; the wall holds; determinism is input-side-frozen.
+
 ## Guardrails (non-negotiable)
 
 - **Emergent ≠ auto-publish.** Convergence-detected stories are **candidates / seeds**, not canon. They pass the existing canon + quality wall (Rhea, the edition canon check, /sift triage) before they become published canon. The sim proposes; the verified surface disposes.

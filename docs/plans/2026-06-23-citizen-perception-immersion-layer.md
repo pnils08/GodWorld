@@ -245,9 +245,13 @@ Mirrors T1b exactly (`scripts/citizen-wake.js`):
 - **Throughput** — "different from others in the same wake cycle" only *pays off* when many wake per cycle. T5 supplies variety; raising wake cadence supplies volume. Both are needed for "900+ painting the picture" (research.21 §scale; cost analysis: throughput is **not** cost-constrained — see research.21 OQ6).
 - **research.21** — T5 is the variety engine that **conditions the convergence signal**: differentiated provocations make a genuine cross-citizen convergence meaningful rather than a shared-question artifact. T5 + T2 together instrument the detector.
 
+### Coverage-aligned provocations (Mike, S273) — the design lever
+
+Provocation-types aren't only for variety — **design them to map onto /sift categories + Story_Seed_Deck types** so the classified response routes straight to where coverage needs it. The question becomes a **targeting instrument**: provoke the response in the shape the downstream consumer (/sift, the seed deck) wants, and the harvest lands where you aimed it. This upgrades the research.21 detector from *passive* (read convergence post-hoc) to *active* (**bias provocations toward coverage gaps**). Clean, input-side, near-term — it's question *design*, not a new path. (Full treatment: research.21 §Frontier extensions.)
+
 ### Build handoff → engine-sheet
 
-Add a `QUESTION_BANK` (in `citizen-wake.js` or a sibling lib) + a seeded `selectProvocation(popId, cycle, daypart, signals)` that returns a filled provocation; replace the fixed `WAKE_FRAME` user-prompt in `buildVoicePrompts`. **Acceptance:** (1) 3 dry-runs on the same citizen across cycles → 3 different provocation-types; (2) categories render *real* signal values, not placeholders; (3) a same-cycle multi-citizen run shows varied provocations; (4) determinism — same `(popId,cycle,daypart)` → same provocation.
+Add a `QUESTION_BANK` (in `citizen-wake.js` or a sibling lib) + a seeded `selectProvocation(popId, cycle, daypart, signals)` that returns a filled provocation; replace the fixed `WAKE_FRAME` user-prompt in `buildVoicePrompts`. Tag each provocation-type with its target /sift-category / seed-type (coverage-routing metadata). **Acceptance:** (1) 3 dry-runs on the same citizen across cycles → 3 different provocation-types; (2) categories render *real* signal values, not placeholders; (3) a same-cycle multi-citizen run shows varied provocations; (4) determinism — same `(popId,cycle,daypart)` → same provocation.
 
 ---
 

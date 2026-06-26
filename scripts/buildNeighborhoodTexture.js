@@ -83,12 +83,18 @@ function assembleHoodSources(hood, slicer, worldEvents, venues, cityEventsByHood
   const sources = [];
 
   // World events tagged to THIS hood (exact .neighborhood match) — incl. FAITH holy-days.
+  // Feed ONLY the real human description — NEVER the engine domain/subdomain words
+  // ("CULTURE", "crisis-spike"): those are system taxonomy, and handing them to the model
+  // leaks them into perception (the C100 Rockridge "crisis in bold letters" leak, advisor
+  // S272). Suppress contentless events: a bare impactScore spike whose description falls
+  // through to "<DOMAIN> event" boilerplate has no human content to translate — dropping it
+  // is the source-grounding rule (never invent drama from an empty signal).
   for (const ev of worldEvents) {
     if (String(ev.neighborhood || '').trim() !== hood) continue;
     const domain = ev.domain || 'event';
-    const sub = ev.subdomain || ev.subtype || '';
-    const desc = ev.description || `${domain} event`;
-    sources.push(`EVENT (${domain}${sub ? '/' + sub : ''}): ${desc}`);
+    const desc = String(ev.description || '').trim();
+    if (!desc || desc.toLowerCase() === `${domain} event`.toLowerCase()) continue;
+    sources.push(`EVENT: ${desc}`);
   }
   // Venues (restaurants / fast food / nightlife) in this hood.
   for (const v of venues) {

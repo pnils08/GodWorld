@@ -175,7 +175,8 @@ function loadNeighborhoodTexture(nh, cycle) {
   } catch (e) { return ''; }
 }
 
-// T1c (research.19, relationships-with-texture — immersion ingredient 3) — the people a citizen
+// research.19 relationships-with-texture (immersion ingredient 3 — task # TBD by research-build;
+// NOT "T1c", which is the prose-page read-back) — the people a citizen
 // has HISTORY with, not just 3 names off the block. Reads Relationship_Bonds (live active bonds,
 // canon engine state) for the woken citizen, resolves the other party's name from the ledger, and
 // renders bond-type + warmth as plain relationship texture ("a close friend", "someone you know
@@ -287,13 +288,13 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
   const who = neighbors.length
     ? `\n\nPeople around you in ${c.nh}: ${neighbors.map((n) => `${n.name}${n.occupation ? ' (' + n.occupation + ')' : ''}`).join(', ')}.`
     : '';
-  const bonds = bondsLine ? `\n\nPeople you have history with: ${bondsLine}.` : ''; // T1c relationships-with-texture
+  const bonds = bondsLine ? `\n\nPeople you have history with: ${bondsLine}.` : ''; // relationships-with-texture (ingredient 3)
   const traj = dialTrajectory(c.baseDials, c.cur);                    // T1a trajectory (dormant until drain)
   const arcLine = lifeArc ? `\n\nYour life so far: ${lifeArc}.` : ''; // T1a self-state read-back (Log-sourced)
   const trajLine = traj ? ` Lately you've been ${traj}.` : '';
   const sports = sportsLine ? `\n\nAround Oakland: ${sportsLine}` : ''; // T1b world-larger-than-self
   const texture = textureLine ? `\n\nAround your neighborhood: ${textureLine}` : ''; // T2 immediate world
-  // immersion-ingredient order: continuity (T1a) -> people (around you + T1c history-with) -> world/A's (T1b) -> surroundings (T2)
+  // immersion-ingredient order: continuity (T1a) -> people (around you + history-with) -> world/A's (T1b) -> surroundings (T2)
   const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}\n\nReal things from your life recently:\n${c.life}${who}${bonds}${sports}${texture}`;
   const user = `${WAKE_FRAME[WAKE] || WAKE_FRAME.evening}. In 4-5 sentences write a private, honest reflection — the small things on your mind, drawing on what's actually been happening in your life. Don't narrate events like a story; just think on the page the way you actually would. First person.`;
   return { system, user, disp };
@@ -322,7 +323,7 @@ async function generateVoice(system, user) {
   const sportsLine = await loadSportsSlice();                 // T1b — one feed read, shared across the wake
   const lifeArc = await loadLifeArc(c.popId);                 // T1a — canonical milestone arc from LifeHistory_Log
   const textureLine = loadNeighborhoodTexture(c.nh, cycle);   // T2 — this hood's frozen lived-particulars block
-  const bondsLine = await loadBonds(c.popId);                 // T1c — people the citizen has history with (canon bonds)
+  const bondsLine = await loadBonds(c.popId);                 // relationships-with-texture — people the citizen has history with (canon bonds)
   const { system, user, disp } = buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine);
 
   logLine(`woke ${c.popId} ${c.name} — ${c.occ || 'resident'}, ${c.nh}${c.age ? ', ' + c.age : ''} | eventMag=${c.eventMag} | ${disp}`);

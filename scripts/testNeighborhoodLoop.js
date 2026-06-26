@@ -41,6 +41,9 @@ global.Utilities = { formatDate: () => '2041-01-01 10:00' };
 global.Session = { getScriptTimeZone: () => 'UTC' };
 global.queueAppendIntent_ = () => {};
 global.queueBatchAppendIntent_ = () => {};
+// inWorldStamp_ lives in phase01 advanceSimulationCalendar.js (not loaded here);
+// stub the in-world cycle stamp so generateCitizensEvents_ runs in the harness.
+global.inWorldStamp_ = (ctx) => 'C' + ((ctx && ctx.config && ctx.config.cycleCount) || 0);
 
 const E = require('../utilities/citizenMemory.js');
 Object.keys(E).forEach(k => { global[k] = E[k]; });
@@ -393,6 +396,53 @@ console.log('═══ C5 — determinism: two identical-seed closed-loop runs a
   assert('C5a same seed -> byte-identical ledger + map + log', runA === runB);
   const runC = closedLoopRun(100);
   assert('C5b different seed -> different trace (harness is not vacuous)', runA !== runC);
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+console.log('═══ C6 — G-EC33: per-hood sentiment breaks citywide lockstep (S273 fix)');
+{
+  // Two cycles. The citywide scalar swings UNIFORMLY +0.16 (the old lockstep
+  // driver). Per-hood dynamics move DIFFERENTLY: Fruitvale drops (e.g. crime),
+  // Rockridge ticks up, Downtown is flat. Pre-fix every hood's delta == +0.16
+  // (output = citywide + frozen offset). Post-fix the per-hood track is the base
+  // and the citywide scalar is demoted to a CITY_SENTIMENT_NUDGE (0.15) shade.
+  function sentRun(seed, citySent, nhoodDyn) {
+    rngImpl = mulberry32(seed);
+    const sheets = {};
+    const ss = memSS(sheets);
+    const ctx = {
+      now: new Date(0), config: { cycleCount: 95 }, mode: {}, ss,
+      summary: {
+        cityDynamics: { sentiment: citySent, traffic: 1, retail: 1.5, publicSpaces: 1, nightlife: 0.7 },
+        weather: Object.assign({}, CITY_WEATHER), worldEvents: [], storySeeds: [], storyHooks: [],
+        neighborhoodDynamics: nhoodDyn
+      }
+    };
+    saveV3NeighborhoodMap_(ctx);
+    const data = sheets['Neighborhood_Map']._data;
+    const header = data[0];
+    const sCol = header.indexOf('Sentiment');
+    const nCol = header.indexOf('Neighborhood');
+    const byHood = {};
+    for (let r = 1; r < data.length; r++) if (data[r][nCol]) byHood[data[r][nCol]] = Number(data[r][sCol]);
+    return byHood;
+  }
+  // Same seed both cycles -> per-hood variance() draws identical -> cancels in delta.
+  const dynA = { 'Fruitvale': { sentiment: 0.30 }, 'Rockridge': { sentiment: 0.60 }, 'Downtown': { sentiment: 0.45 } };
+  const dynB = { 'Fruitvale': { sentiment: 0.20 }, 'Rockridge': { sentiment: 0.62 }, 'Downtown': { sentiment: 0.45 } };
+  const A = sentRun(555, 0.40, dynA);
+  const B = sentRun(555, 0.56, dynB);  // citywide +0.16 uniform swing
+  const dFrui = B['Fruitvale'] - A['Fruitvale'];
+  const dRock = B['Rockridge'] - A['Rockridge'];
+  const dDown = B['Downtown'] - A['Downtown'];
+  console.log(`   deltas — Fruitvale=${dFrui.toFixed(3)} Rockridge=${dRock.toFixed(3)} Downtown=${dDown.toFixed(3)} (citywide swing +0.160)`);
+  const spread = Math.max(dFrui, dRock, dDown) - Math.min(dFrui, dRock, dDown);
+  assert('C6a per-hood deltas NON-uniform (lockstep broken; pre-fix spread==0)', spread > 0.05, 'spread=' + spread.toFixed(3));
+  assert('C6b a hood can fall while the city rises (Fruitvale down, citywide up)', dFrui < 0, 'dFrui=' + dFrui.toFixed(3));
+  assert('C6c flat-dynamics hood moves only ~nudge*swing (0.024), NOT full 0.16', Math.abs(dDown) < 0.05, 'dDown=' + dDown.toFixed(3));
+  // Fallback: a hood with NO neighborhoodDynamics entry still writes a finite sentiment.
+  const F = sentRun(555, 0.40, dynA);
+  assert('C6d hood with no dynamics entry falls back to citywide scalar (finite)', isFinite(F['Temescal']), String(F['Temescal']));
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

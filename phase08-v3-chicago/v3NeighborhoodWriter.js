@@ -78,6 +78,19 @@ var PULSE_FOLD = {
 // live high-volume column ranges are measured — tracked as engine.38 S2 follow-up).
 var PULSE_REF_EVENTS = 8;
 
+// G-EC33 fix (sentiment lockstep) — weight of the citywide sentiment scalar when
+// it is DEMOTED from per-hood base to a shared nudge. Pre-fix, every hood's
+// sentiment was `dynamics.sentiment` (one citywide finalCity scalar, carrying the
+// edition-coverage boost) + a frozen profile offset, so a +0.16 citywide swing
+// moved all 21 hoods +0.16 in lockstep. The fix bases each hood on its own
+// `S.neighborhoodDynamics[hood].sentiment` (input-driven: cluster + adjacency
+// bleed + per-hood crime/economy/demographics/weather, persisting 30%/cycle via
+// momentum) so hoods move independently. The citywide scalar is retained ONLY as
+// a light shared shade at this weight — preserving the S216 coverage→neighborhood
+// chain (file header L7-15) without letting it dominate the movement. At 0.15 a
+// +0.16 citywide swing contributes ~+0.024 shared, well under the per-hood deltas.
+var CITY_SENTIMENT_NUDGE = 0.15;
+
 // engine.33 — dampened, capped pulse delta for one metric (0 when no pulse).
 // engine.38 S2 — volume-normalized (see PULSE_REF_EVENTS).
 function pulseFoldDelta_(pulse, key) {
@@ -310,7 +323,14 @@ function saveV3NeighborhoodMap_(ctx) {
     var crime = Math.max(0, Math.round(baseCrimeCount * profile.crimeMod + (rng() < 0.3 ? 1 : 0)));
     var retail = round2(Math.max(0, baseRetail * profile.retailMod * (1 + variance())));
     var eventAttract = Math.max(0, Math.round(baseEventAttract * effectiveEventMod));
-    var sent = round2(baseSentiment + effectiveSentimentMod + (variance() * 0.1));
+    // G-EC33 fix: per-hood base from the per-hood dynamics track (input-driven,
+    // persists 30%/cycle) breaks the citywide-scalar lockstep. Frozen profile
+    // offset still separates within-cluster hoods; citywide scalar demoted to a
+    // small shared nudge (CITY_SENTIMENT_NUDGE) to keep the coverage chain alive.
+    // Fallback to the citywide scalar for any hood with no dynamics entry.
+    var nd = (S.neighborhoodDynamics && S.neighborhoodDynamics[name]) || null;
+    var hoodBaseSent = (nd && isFinite(Number(nd.sentiment))) ? Number(nd.sentiment) : baseSentiment;
+    var sent = round2(hoodBaseSent + effectiveSentimentMod + (baseSentiment * CITY_SENTIMENT_NUDGE) + (variance() * 0.1));
 
     // engine.33 pulse fold — this cycle's emitted citizen events for this hood
     var pulse = (S.neighborhoodPulse && S.neighborhoodPulse[name]) || null;

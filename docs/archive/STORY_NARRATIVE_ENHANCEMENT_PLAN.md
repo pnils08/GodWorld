@@ -1,4 +1,9 @@
-# Story & Narrative Enhancement Plan — GodWorld v3
+# Story & Narrative Enhancement Plan — GodWorld v3  
+
+**Current Implementation Status**: ✅ Fully Deployed (2026-02-11)  
+**Total Engines Added**: 6  
+**Total Columns Added**: 38  
+**Total Hook Types Added**: 12  
 
 **Created:** 2026-02-11
 **Current System:** storyHook.js v3.9, mediaFeedbackEngine.js v2.2
@@ -17,8 +22,14 @@
 
 **🎉 PLAN COMPLETE! All 4 weeks deployed 2026-02-11. Grand total: 38 new columns, 6 new engines, 12 new hook types.**
 
-**Week 1 Achievements:**
-- ✅ 18 columns added (Simulation_Ledger, Generic_Citizens, Chicago_Citizens, Storyline_Tracker)
+**Week 1 Achievements**: Citizen Fame & Media Exposure  
+- ✅ **Columns Added**: 18  
+  - Simulation_Ledger: 7 (FameScore, Notoriety, MediaMentions, etc.)
+  - Generic_Citizens: 3 (PromotionCandidate, PromotionScore, PromotionReason)  
+  - Chicago_Citizens: 4 (FameScore, MediaMentions, etc.)
+  - Storyline_Tracker: 4 (CoverageGap, IsStale, etc.)
+- ✅ **Coverage**: Integrated into Phase 11 intake processing
+- ✅ **Cross-Ledger Sync**: All 4 citizen ledgers synchronized  
 - ✅ Fame tracking integrated into Phase 11 intake processing
 - ✅ Generic_Citizens auto-promotion flagging (3+ mentions)
 - ✅ Cross-ledger synchronization (all 4 citizen ledgers)
@@ -72,7 +83,19 @@
 
 ---
 
-## Citizen Ledger Architecture
+## System Architecture  
+
+```mermaid
+graph TD
+    A[Citizen Ledgers] --> B[Fame Tracking]
+    A --> C[Arc Lifecycle]
+    A --> D[Story Weaving] 
+    B --> E[Media Feedback]
+    C --> F[Phase Transitions]
+    D --> G[Relationship Mapping]
+```
+
+### Citizen Ledger Architecture  
 
 GodWorld uses **4 citizen ledgers** with different purposes:
 

@@ -106,13 +106,10 @@ function current_(c, dial) {
 }
 
 // Clear cache when mood changes
-function applyEvent_(c, event) {
-  c._currentCache = {}; // Clear cached current values
-  var fx = (event && event.effects) || {};
-  // ... rest of existing applyEvent_ code ...
 
 // event = { label, effects: { dial: deltaInt, ... } } — effects come from citizenDialMap.
 function applyEvent_(c, event) {
+  c._currentCache = {}; // Clear cached current values
   var fx = (event && event.effects) || {};
   for (var d in fx) {
     if (!fx.hasOwnProperty(d) || c.base[d] == null) continue;

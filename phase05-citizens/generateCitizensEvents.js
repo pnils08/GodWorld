@@ -1203,7 +1203,21 @@ function generateCitizensEvents_(ctx) {
   // =========================================================================
   // MAIN CITIZEN LOOP
   // =========================================================================
-  var logRows = [];
+  // Pre-compute column indices once
+  var colIndices = {
+    tier: iTier,
+    mode: iClock,
+    popId: iPopID, 
+    neighborhood: iNeighborhood,
+    birthYear: iBirthYear,
+    occupation: iOccupation,
+    usage: iUsage
+  };
+  
+  // Prepare empty array upfront for log rows
+  var logRows = new Array(Math.min(rows.length, 1000));
+  var logRowIdx = 0;
+  
   for (var r = 0; r < rows.length; r++) {
     // engine.38 A1: LIMIT=25 cap removed — full-population coverage. Runaway is
     // structurally bounded: one emit max per citizen per cycle (<= rows.length).

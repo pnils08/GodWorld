@@ -140,9 +140,23 @@ function settleCycle_(c) {
 }
 
 // raw 0-100 -> band index 0..4 (the ONLY thing consumers read)
+// Cache band index lookups since they're called very frequently
+var BAND_INDEX_CACHE = [];
+function initBandCache_() {
+  for (var v = 0; v <= 100; v++) {
+    for (var i = 0; i < BAND_CUTS.length; i++) { 
+      if (v < BAND_CUTS[i]) {
+        BAND_INDEX_CACHE[v] = i;
+        break;
+      }
+    }
+    if (BAND_INDEX_CACHE[v] === undefined) BAND_INDEX_CACHE[v] = BAND_CUTS.length;
+  }
+}
+initBandCache_();
+
 function bandIndex_(v) {
-  for (var i = 0; i < BAND_CUTS.length; i++) { if (v < BAND_CUTS[i]) return i; }
-  return BAND_CUTS.length; // top band
+  return BAND_INDEX_CACHE[Math.round(v)] || 0;
 }
 // signed band -2..+2 (for readable output / engine.32 seam)
 function band_(c, dial) { return BAND_SIGNED[bandIndex_(current_(c, dial))]; }

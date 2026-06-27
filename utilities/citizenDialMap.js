@@ -193,15 +193,25 @@ function baseTag_(tag) {
   return s;
 }
 
+// Cache scaled dial maps to avoid re-computation
+var SCALE_CACHE = {};
+
 function scale_(fx, mult) {
-  if (mult == null || mult === 1) {
-    var copy = {};
-    for (var k in fx) { if (fx.hasOwnProperty(k)) copy[k] = fx[k]; }
-    return copy;
+  if (mult == null || mult === 1) return fx;
+  
+  // Generate cache key
+  var keys = Object.keys(fx).sort();
+  var cacheKey = keys.join(',') + '|' + mult;
+  
+  if (!SCALE_CACHE[cacheKey]) {
+    var out = {};
+    for (var i = 0; i < keys.length; i++) {
+      var d = keys[i];
+      out[d] = fx[d] * mult;
+    }
+    SCALE_CACHE[cacheKey] = out;
   }
-  var out = {};
-  for (var d in fx) { if (fx.hasOwnProperty(d)) out[d] = fx[d] * mult; }
-  return out;
+  return SCALE_CACHE[cacheKey];
 }
 
 // tag (+ optional text) -> { dial: delta }. severityMult scales (default 1).

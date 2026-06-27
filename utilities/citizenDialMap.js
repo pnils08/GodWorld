@@ -190,16 +190,25 @@ var DEFAULT_AMBIENT = { composure: 1 };
 // real compound tags like 'Career-Transition' or 'Transgression-Petty'.)
 var CALENDAR_SUFFIXES = ['FirstFriday', 'CreationDay', 'Holiday', 'Sports'];
 
+// Cache base tag computations since called frequently
+var BASE_TAG_CACHE = {};
+
 function baseTag_(tag) {
   if (!tag) return '';
   var s = String(tag);
+  if (BASE_TAG_CACHE.hasOwnProperty(s)) return BASE_TAG_CACHE[s];
+  
   var dash = s.lastIndexOf('-');
   if (dash > 0) {
     var tail = s.substring(dash + 1);
     for (var i = 0; i < CALENDAR_SUFFIXES.length; i++) {
-      if (tail === CALENDAR_SUFFIXES[i]) return s.substring(0, dash);
+      if (tail === CALENDAR_SUFFIXES[i]) {
+        BASE_TAG_CACHE[s] = s.substring(0, dash);
+        return BASE_TAG_CACHE[s];
+      }
     }
   }
+  BASE_TAG_CACHE[s] = s;
   return s;
 }
 

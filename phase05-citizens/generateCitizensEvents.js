@@ -1230,7 +1230,28 @@ function generateCitizensEvents_(ctx) {
   var logRows = new Array(Math.min(rows.length, 1000));
   var logRowIdx = 0;
   
+  // Prepare cached row data upfront
+  var rowCache = new Array(rows.length);
+  for (var ri = 0; ri < rows.length; ri++) {
+    var row = rows[ri];
+    rowCache[ri] = {
+      tier: Number(row[iTier] || 0),
+      mode: row[iClock] || "ENGINE",
+      popId: row[iPopID],
+      neighborhood: iNeighborhood >= 0 ? (row[iNeighborhood] || "") : "",
+      birthYear: (iBirthYear >= 0) ? Number(row[iBirthYear] || 0) : 0,
+      occupation: (iOccupation >= 0) ? String(row[iOccupation] || "") : "",
+      usageCount: (iUsage >= 0) ? Number(row[iUsage]) || 0 : 0
+    };
+  }
+
   for (var r = 0; r < rows.length; r++) {
+    var row = rows[r];
+    var cached = rowCache[r];
+    var tier = cached.tier;
+    var mode = cached.mode;
+    var popId = cached.popId;
+    var neighborhood = cached.neighborhood;
     // engine.38 A1: LIMIT=25 cap removed — full-population coverage. Runaway is
     // structurally bounded: one emit max per citizen per cycle (<= rows.length).
 

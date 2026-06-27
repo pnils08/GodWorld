@@ -75,14 +75,41 @@ function newCitizen_(base) {
   return c;
 }
 
+var poolStats = { hits: 0, misses: 0, releases: 0 };
+
 function releaseCitizen_(citizen) {
   if (citizenPoolSize < MAX_POOL_SIZE) {
+    citizen._pooled = true;
     citizenPool[citizenPoolSize++] = citizen;
+    poolStats.releases++;
   }
 }
 
+function getPoolStats() {
+  return {
+    hits: poolStats.hits,
+    misses: poolStats.misses,
+    releases: poolStats.releases,
+    size: citizenPoolSize,
+    utilization: (poolStats.hits / (poolStats.hits + poolStats.misses) * 100).toFixed(1) + '%'
+  };
+}
+
 // where a dial sits RIGHT NOW = permanent self + current swing
-function current_(c, dial) { return clamp100_(c.base[dial] + c.mood[dial]); }
+// Cache current calcs within citizen cycle
+function current_(c, dial) {
+  if (!c._currentCache) c._currentCache = {};
+  if (c._currentCache.hasOwnProperty(dial)) return c._currentCache[dial];
+  
+  c._currentCache[dial] = clamp100_(c.base[dial] + c.mood[dial]);
+  return c._currentCache[dial]; 
+}
+
+// Clear cache when mood changes
+function applyEvent_(c, event) {
+  c._currentCache = {}; // Clear cached current values
+  var fx = (event && event.effects) || {};
+  // ... rest of existing applyEvent_ code ...
 
 // event = { label, effects: { dial: deltaInt, ... } } — effects come from citizenDialMap.
 function applyEvent_(c, event) {

@@ -110,6 +110,21 @@ function current_(c, dial) {
 // event = { label, effects: { dial: deltaInt, ... } } — effects come from citizenDialMap.
 function applyEvent_(c, event) {
   c._currentCache = {}; // Clear cached current values
+  
+  // Track story-worthy state changes
+  if (event.effects) {
+    for (var d in event.effects) {
+      if (Math.abs(event.effects[d]) >= 5) { // Significant dial movement
+        if (!c._storySeeds) c._storySeeds = [];
+        c._storySeeds.push({
+          dial: d,
+          delta: event.effects[d],
+          label: event.label || '',
+          cycle: (ctx && ctx.summary && ctx.summary.cycleId) || 0
+        });
+      }
+    }
+  }
   var fx = (event && event.effects) || {};
   for (var d in fx) {
     if (!fx.hasOwnProperty(d) || c.base[d] == null) continue;

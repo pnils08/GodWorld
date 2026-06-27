@@ -21,8 +21,8 @@
 
 var DIAL_MAP = {
   // --- Work / Drive ---
-  'Career':             { drive: 4 },
-  'Career-Transition':  { drive: 3, openness: 3 },
+  'Career':             { drive: 4, _storyWeight: 0.7 }, // Medium story potential
+  'Career-Transition':  { drive: 3, openness: 3, _storyWeight: 1.2 }, // High story potential
   'Career-Training':    { drive: 3 },
   'Promotion':          { drive: 8, composure: 2 },
   'Education':          { drive: 5, openness: 3 },

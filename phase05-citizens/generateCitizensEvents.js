@@ -1775,6 +1775,18 @@ function generateCitizensEvents_(ctx) {
     if (typeof recordPulse_ === 'function') recordPulse_(S, neighborhood, primaryTag, tags, pick);
 
     remember(popId, primaryTag, pick, chosenVenue, neighborhood, contact && contact.name, tags);
+    
+    // Extract story seeds from high-potential events
+    if (entry._storyWeight > 1 || tags.some(t => t.startsWith('arc:'))) {
+      if (!S.storySeeds) S.storySeeds = [];
+      S.storySeeds.push({
+        popId: popId,
+        text: pick,
+        tags: tags,
+        neighborhood: neighborhood,
+        weight: entry._storyWeight || 1
+      });
+    }
 
     activeSetObj[popId] = true;
     S.eventsGenerated = (S.eventsGenerated || 0) + 1;

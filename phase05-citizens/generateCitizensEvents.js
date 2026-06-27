@@ -1777,7 +1777,11 @@ function generateCitizensEvents_(ctx) {
     remember(popId, primaryTag, pick, chosenVenue, neighborhood, contact && contact.name, tags);
     
     // Extract story seeds from high-potential events
-    if (entry._storyWeight > 1 || tags.some(t => t.startsWith('arc:'))) {
+    var hasChaosTag = false;
+    for (var chaosTagI = 0; chaosTagI < tags.length; chaosTagI++) {
+      if (tags[chaosTagI] === 'source:chaos') { hasChaosTag = true; break; }
+    }
+    if (entry._storyWeight > 1 || tags.some(t => t.startsWith('arc:')) || hasChaosTag) {
       if (!S.storySeeds) S.storySeeds = [];
       S.storySeeds.push({
         popId: popId,

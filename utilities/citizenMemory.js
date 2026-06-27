@@ -111,6 +111,20 @@ function current_(c, dial) {
 function applyEvent_(c, event) {
   c._currentCache = {}; // Clear cached current values
   
+  // Tag chaos-influenced events
+  if (event.tags && event.tags.indexOf('source:chaos') >= 0) {
+    if (!c.chaosExposure) {
+      c.chaosExposure = { 
+        firstSeen: (ctx && ctx.cycle) || 0,
+        lastSeen: (ctx && ctx.cycle) || 0,
+        count: 1
+      };
+    } else {
+      c.chaosExposure.lastSeen = (ctx && ctx.cycle) || c.chaosExposure.lastSeen;
+      c.chaosExposure.count++;
+    }
+  }
+  
   // Track story-worthy state changes
   if (event.effects) {
     for (var d in event.effects) {

@@ -1030,12 +1030,28 @@ function generateCitizensEvents_(ctx) {
   if (weather.type === "cold") weatherPool.push(makeEntry("bundled up against the cold", ["source:weatherPool", "weather:cold"], 1, false));
   if (weather.type === "wind") weatherPool.push(makeEntry("noted windy evening conditions", ["source:weatherPool", "weather:wind"], 1, false));
 
-  var chaosPool = (chaos.length > 0)
-    ? [
-        makeEntry("reflected briefly on today's city happenings", ["source:chaos"], 1, false),
-        makeEntry("felt a subtle shift in the city's tone", ["source:chaos"], 1, false)
-      ]
-    : [];
+  var chaosPool = [];
+  if (chaos.length > 0) {
+    chaos.forEach(chaosEvent => {
+      const severity = chaosEvent.severity || 1;
+      const type = chaosEvent.type || 'general';
+      const weight = severity * 1.5;
+      
+      chaosPool.push(
+        makeEntry(`noticed the aftermath of ${chaosEvent.description || 'the chaos'}`, 
+          [`source:chaos:${type}`, severity > 1 ? 'chaos:major' : 'chaos:minor'], 
+          weight, false)
+      );
+      
+      if (severity > 1) {
+        chaosPool.push(
+          makeEntry(`felt unsettled by ${chaosEvent.description || 'the major disruption'}`, 
+            ['source:chaos:major', `chaos:${type}`], 
+            weight * 1.2, false)
+        );
+      }
+    });
+  }
 
   var sentimentPool = [];
   if (dynamics.sentiment >= 0.3) sentimentPool.push(makeEntry("felt uplifted by the city mood", ["source:sentiment", "sentiment:positive"], 1, false));

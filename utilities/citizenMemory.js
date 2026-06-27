@@ -111,17 +111,32 @@ function current_(c, dial) {
 function applyEvent_(c, event) {
   c._currentCache = {}; // Clear cached current values
   
-  // Tag chaos-influenced events
-  if (event.tags && event.tags.indexOf('source:chaos') >= 0) {
-    if (!c.chaosExposure) {
-      c.chaosExposure = { 
-        firstSeen: (ctx && ctx.cycle) || 0,
-        lastSeen: (ctx && ctx.cycle) || 0,
-        count: 1
-      };
-    } else {
-      c.chaosExposure.lastSeen = (ctx && ctx.cycle) || c.chaosExposure.lastSeen;
-      c.chaosExposure.count++;
+  // Track chaos impact with severity levels
+  if (event.tags) {
+    const chaosTag = event.tags.find(t => t.startsWith('source:chaos'));
+    if (chaosTag) {
+      if (!c.chaosExposure) {
+        c.chaosExposure = {
+          firstSeen: (ctx && ctx.cycle) || 0,
+          lastSeen: (ctx && ctx.cycle) || 0,
+          count: 1,
+          severity: chaosTag.includes('major') ? 2 : 1,
+          types: new Set([chaosTag.split(':')[1] || 'general'])
+        };
+      } else {
+        c.chaosExposure.lastSeen = (ctx && ctx.cycle) || c.chaosExposure.lastSeen;
+        c.chaosExposure.count++;
+        c.chaosExposure.severity = Math.max(c.chaosExposure.severity, 
+          chaosTag.includes('major') ? 2 : 1);
+        if (chaosTag.includes(':')) {
+          c.chaosExposure.types.add(chaosTag.split(':')[1]);
+        }
+      }
+      
+      // Apply temporary composure penalty based on chaos severity
+      const severityMult = chaosTag.includes('major') ? 1.5 : 1;
+      if (!event.effects) event.effects = {};
+      event.effects.composure = (event.effects.composure || 0) - (2 * severityMult);
     }
   }
   
@@ -279,6 +294,30 @@ function deserialize_(obj) {
   return c;
 }
 
+// Chaos reaction thresholds
+function checkChaosReaction_(citizen) {
+  if (!citizen.chaosExposure) return null;
+  
+  const { count, severity, types } = citizen.chaosExposure;
+  const typeArr = Array.from(types);
+  
+  if (count >= 3 && severity >= 2) {
+    return {
+      reaction: 'traumatized',
+      dialEffects: { composure: -8, openness: -4 },
+      tags: ['chaos:trauma', ...typeArr.map(t => `chaos-type:${t}`)]
+    };
+  }
+  if (count >= 2) {
+    return {
+      reaction: 'wary',
+      dialEffects: { composure: -4, openness: -2 },
+      tags: ['chaos:wary', ...typeArr.map(t => `chaos-type:${t}`)]
+    };
+  }
+  return null;
+}
+
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     DIALS: DIALS, MIDPOINT: MIDPOINT, BAND_CUTS: BAND_CUTS, BAND_MULT: BAND_MULT,
@@ -289,6 +328,7 @@ if (typeof module !== 'undefined' && module.exports) {
     accreteReflectionsIntoBase_: accreteReflectionsIntoBase_, settleCycle_: settleCycle_,
     bandIndex_: bandIndex_, band_: band_, bandMultiplier_: bandMultiplier_,
     describe_: describe_, snapshot_: snapshot_,
-    serialize_: serialize_, deserialize_: deserialize_
+    serialize_: serialize_, deserialize_: deserialize_,
+    checkChaosReaction_: checkChaosReaction_
   };
 }

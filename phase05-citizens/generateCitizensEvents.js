@@ -1774,6 +1774,19 @@ function generateCitizensEvents_(ctx) {
     // neighborhood metrics; fold at phase08 v3NeighborhoodWriter).
     if (typeof recordPulse_ === 'function') recordPulse_(S, neighborhood, primaryTag, tags, pick);
 
+    // Check for chaos reactions
+    const citizen = ctx.citizenLookup && ctx.citizenLookup[popId];
+    if (citizen && typeof checkChaosReaction_ === 'function') {
+      const reaction = checkChaosReaction_(citizen);
+      if (reaction) {
+        tags = mergeTags(tags, reaction.tags);
+        applyEvent_(citizen, {
+          label: `chaos_reaction:${reaction.reaction}`,
+          effects: reaction.dialEffects
+        });
+      }
+    }
+
     remember(popId, primaryTag, pick, chosenVenue, neighborhood, contact && contact.name, tags);
     
     // Extract story seeds from high-potential events

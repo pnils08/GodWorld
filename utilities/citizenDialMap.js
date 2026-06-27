@@ -154,23 +154,33 @@ var EDITION_FX = { sociability: 2 };
 
 // Content routing for rows whose meaning is in the prose, not the tag:
 // Untagged, EngineEvent, and the old improper-ingest sentence-tags.
-var CONTENT_RULES = [
-  { re: /diagnos|hospital|illness|injur|health condition|condition diagnosed/, fx: { composure: -6 } },
-  { re: /recover|stabil|healed|back on (his|her|their) feet/,                  fx: { composure: 5 } },
-  { re: /born into population|born during/,                                    fx: { family: 2 } },
-  { re: /promot|raise|bonus|reward/,                                           fx: { drive: 7, composure: 2 } },
-  { re: /inherit|windfall/,                                                    fx: { composure: 3, family: 2 } },
-  { re: /invest|lost money|bad debt|financial loss/,                           fx: { composure: -5 } },
-  { re: /business|venture|startup|started a small/,                            fx: { drive: 6, openness: 3 } },
-  { re: /new relationship|married|wedding|engaged|partner/,                    fx: { sociability: 4, warmth: 3, family: 2 } },
-  { re: /moved to|relocat|larger home|new home/,                              fx: { family: 4, openness: 2 } },
-  { re: /transition|role:|new job|new role|hired|teacher/,                     fx: { drive: 5, openness: 2 } },
-  { re: /recognition|award|featured|honored|spotlight|public/,                fx: { sociability: 4 } },
-  { re: /misunderstanding|conflict|argument|dispute|scandal/,                  fx: { composure: -4 } },
-  { re: /tier 2|tier 3|tier 4|tier 5|advanced|elevated/,                       fx: { drive: 6 } },
-  { re: /relative|friend|neighbor|community|gathering/,                        fx: { sociability: 3, warmth: 2 } },
-  { re: /quiet|calm|unwind|routine|uneventful|relax|at home|rest/,             fx: { composure: 2 } }
-];
+// Compile regex once and reuse
+var CONTENT_RULES = (function() {
+  var rules = [
+    [/diagnos|hospital|illness|injur|health condition|condition diagnosed/, { composure: -6 }],
+    [/recover|stabil|healed|back on (his|her|their) feet/, { composure: 5 }],
+    [/born into population|born during/, { family: 2 }],
+    [/promot|raise|bonus|reward/, { drive: 7, composure: 2 }],
+    [/inherit|windfall/, { composure: 3, family: 2 }],
+    [/invest|lost money|bad debt|financial loss/, { composure: -5 }],
+    [/business|venture|startup|started a small/, { drive: 6, openness: 3 }],
+    [/new relationship|married|wedding|engaged|partner/, { sociability: 4, warmth: 3, family: 2 }],
+    [/moved to|relocat|larger home|new home/, { family: 4, openness: 2 }],
+    [/transition|role:|new job|new role|hired|teacher/, { drive: 5, openness: 2 }],
+    [/recognition|award|featured|honored|spotlight|public/, { sociability: 4 }],
+    [/misunderstanding|conflict|argument|dispute|scandal/, { composure: -4 }],
+    [/tier 2|tier 3|tier 4|tier 5|advanced|elevated/, { drive: 6 }],
+    [/relative|friend|neighbor|community|gathering/, { sociability: 3, warmth: 2 }],
+    [/quiet|calm|unwind|routine|uneventful|relax|at home|rest/, { composure: 2 }]
+  ];
+  
+  return rules.map(function(rule) {
+    return {
+      re: typeof rule[0] === 'string' ? new RegExp(rule[0]) : rule[0],
+      fx: rule[1]
+    };
+  });
+})();
 
 // Any non-structural event that matched nothing above = an ordinary logged day.
 var DEFAULT_AMBIENT = { composure: 1 };

@@ -48,15 +48,37 @@ function clamp100_(n) { return n < 0 ? 0 : (n > 100 ? 100 : n); }
 function round1_(n) { return Math.round(n * 10) / 10; }
 
 // A citizen = permanent self (base) + current swing (mood) + reinforcement (streak), per dial.
+// Reusable citizen object pool
+var citizenPool = [];
+var citizenPoolSize = 0;
+var MAX_POOL_SIZE = 1000;
+
 function newCitizen_(base) {
-  var c = { base: {}, mood: {}, streak: {} };
-  for (var i = 0; i < DIALS.length; i++) {
-    var d = DIALS[i];
-    c.base[d] = (base && base[d] != null) ? clamp100_(base[d]) : MIDPOINT;
-    c.mood[d] = 0;
-    c.streak[d] = 0;
+  var c;
+  if (citizenPoolSize > 0) {
+    c = citizenPool[--citizenPoolSize];
+    // Reset existing object
+    for (var d in c.base) {
+      c.base[d] = (base && base[d] != null) ? clamp100_(base[d]) : MIDPOINT;
+      c.mood[d] = 0;
+      c.streak[d] = 0;
+    }
+  } else {
+    c = { base: {}, mood: {}, streak: {} };
+    for (var i = 0; i < DIALS.length; i++) {
+      var d = DIALS[i];
+      c.base[d] = (base && base[d] != null) ? clamp100_(base[d]) : MIDPOINT;
+      c.mood[d] = 0;
+      c.streak[d] = 0;
+    }
   }
   return c;
+}
+
+function releaseCitizen_(citizen) {
+  if (citizenPoolSize < MAX_POOL_SIZE) {
+    citizenPool[citizenPoolSize++] = citizen;
+  }
 }
 
 // where a dial sits RIGHT NOW = permanent self + current swing

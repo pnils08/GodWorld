@@ -176,15 +176,27 @@ function generateCitizensEvents_(ctx) {
   var PARTICIPATION_BASE = 0.72; // coverage-band tuned (target 60-80%)
   var PARTICIPATION_MAX = 0.97;  // never guaranteed-100% — preserve quiet-week texture
 
-  // Active citizens tracker (dedup) - use object for ES5 Set-like behavior.
-  // guaranteedInObj = the upstream cycleActiveCitizens set, unioned in below as
-  // always-participate (events from upstream engines guarantee a logged week).
-  var activeSetObj = Object.create(null);
-  var guaranteedInObj = Object.create(null);
+  // Reuse same objects each cycle to avoid allocations
+  if (!ctx._citizenTracking) {
+    ctx._citizenTracking = {
+      activeSet: Object.create(null),
+      guaranteedSet: Object.create(null)
+    };
+  }
+  var tracking = ctx._citizenTracking;
+  var activeSetObj = tracking.activeSet;
+  var guaranteedInObj = tracking.guaranteedSet;
+  
+  // Clear previous cycle's data
+  for (var key in activeSetObj) delete activeSetObj[key];
+  for (var key in guaranteedInObj) delete guaranteedInObj[key];
+  
+  // Populate with new data
   var initialActives = Array.isArray(S.cycleActiveCitizens) ? S.cycleActiveCitizens : [];
   for (var ai = 0; ai < initialActives.length; ai++) {
-    activeSetObj[initialActives[ai]] = true;
-    guaranteedInObj[initialActives[ai]] = true;
+    var popId = initialActives[ai];
+    activeSetObj[popId] = true;
+    guaranteedInObj[popId] = true;
   }
   S.cycleActiveCitizens = Object.keys(activeSetObj);
 

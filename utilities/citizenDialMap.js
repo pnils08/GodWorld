@@ -24,16 +24,16 @@ var DIAL_MAP = {
   'Career':             { drive: 4, _storyWeight: 0.7 }, // Medium story potential
   'Career-Transition':  { drive: 3, openness: 3, _storyWeight: 1.2 }, // High story potential
   'Career-Training':    { drive: 3 },
-  'Promotion':          { drive: 8, composure: 2 },
-  'Education':          { drive: 5, openness: 3 },
-  'Education-Cultural': { openness: 5, drive: 2 },
-  'Graduation':         { drive: 8, openness: 2 },
-  'Arc':                { drive: 4, openness: 2 },
-  'Work':               { drive: 4 },                 // legacy generic work tag
-  'CivicRole':          { sociability: 5, drive: 2 },
-  'Civic Role':         { sociability: 5, drive: 2 }, // space variant
-  'Civic':              { sociability: 4, drive: 2 },
-  'Civic Perception':   { sociability: 2 },
+  'Promotion':          { drive: 8, composure: 2, _storyWeight: 1.5, _storyScore: 0.9 },
+  'Education':          { drive: 5, openness: 3, _storyWeight: 0.8, _storyScore: 0.6 },
+  'Education-Cultural': { openness: 5, drive: 2, _storyWeight: 0.9, _storyScore: 0.7 },
+  'Graduation':         { drive: 8, openness: 2, _storyWeight: 1.3, _storyScore: 0.85 },
+  'Arc':                { drive: 4, openness: 2, _storyWeight: 1.0, _storyScore: 0.7 },
+  'Work':               { drive: 4, _storyWeight: 0.5, _storyScore: 0.3 },                 // legacy generic work tag
+  'CivicRole':          { sociability: 5, drive: 2, _storyWeight: 1.1, _storyScore: 0.75 },
+  'Civic Role':         { sociability: 5, drive: 2, _storyWeight: 1.1, _storyScore: 0.75 }, // space variant
+  'Civic':              { sociability: 4, drive: 2, _storyWeight: 0.9, _storyScore: 0.6 },
+  'Civic Perception':   { sociability: 2, _storyWeight: 0.6, _storyScore: 0.4 },
 
   // --- Social / Sociability ---
   'Relationship':       { sociability: 5, warmth: 2 },
@@ -282,11 +282,34 @@ function hasTag_(tag, text) {
   return false;
 }
 
+// Story seed scoring and aggregation
+function computeStorySeedScore_(tag, severityMult, text) {
+  var fx = nudgesForEvent_(tag, severityMult, text);
+  var baseScore = (fx._storyScore !== undefined) ? fx._storyScore : 0.3;
+  var weight = (fx._storyWeight !== undefined) ? fx._storyWeight : 0.5;
+  
+  // Boost score based on dial movement magnitude
+  var totalDelta = 0;
+  var dialCount = 0;
+  for (var d in fx) {
+    if (fx.hasOwnProperty(d) && d !== '_storyScore' && d !== '_storyWeight') {
+      totalDelta += Math.abs(fx[d]);
+      dialCount++;
+    }
+  }
+  var avgDelta = dialCount > 0 ? totalDelta / dialCount : 0;
+  var deltaBoost = Math.min(avgDelta / 10, 0.3); // max +0.3 boost
+  
+  // Final score 0-1
+  return Math.min(baseScore + deltaBoost, 1.0);
+}
+
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     DIAL_MAP: DIAL_MAP, CONTENT_RULES: CONTENT_RULES, STRUCTURAL: STRUCTURAL,
     EDITION_RE: EDITION_RE, CALENDAR_SUFFIXES: CALENDAR_SUFFIXES, DEFAULT_AMBIENT: DEFAULT_AMBIENT,
     baseTag_: baseTag_, nudgesForEvent_: nudgesForEvent_,
-    nudgesForReflection_: nudgesForReflection_, hasTag_: hasTag_
+    nudgesForReflection_: nudgesForReflection_, hasTag_: hasTag_,
+    computeStorySeedScore_: computeStorySeedScore_
   };
 }

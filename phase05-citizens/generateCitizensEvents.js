@@ -1803,6 +1803,46 @@ function generateCitizensEvents_(ctx) {
     lifeLog.getRange(startRow, 1, logRows.length, logRows[0].length).setValues(logRows);
   }
 
+  // Score and categorize story seeds
+  if (S.storySeeds && S.storySeeds.length > 0) {
+    // Score seeds
+    var scoredSeeds = [];
+    for (var i = 0; i < S.storySeeds.length; i++) {
+      var seed = S.storySeeds[i];
+      var score = (typeof computeStorySeedScore_ === 'function') 
+        ? computeStorySeedScore_(seed.tags[0] || '', 1, seed.text)
+        : 0.5 * (seed.weight || 1);
+      
+      scoredSeeds.push({
+        popId: seed.popId,
+        text: seed.text,
+        tags: seed.tags,
+        neighborhood: seed.neighborhood,
+        score: score
+      });
+    }
+    
+    // Sort by score descending
+    scoredSeeds.sort(function(a, b) { return b.score - a.score; });
+    
+    // Store top seeds
+    S.storySeedsTop = scoredSeeds.slice(0, 10); 
+    
+    // Calculate neighborhood trends
+    var nhTrends = {};
+    for (var j = 0; j < scoredSeeds.length; j++) {
+      var nh = scoredSeeds[j].neighborhood;
+      if (!nh) continue;
+      
+      if (!nhTrends[nh]) {
+        nhTrends[nh] = { count: 0, totalScore: 0 };
+      }
+      nhTrends[nh].count++;
+      nhTrends[nh].totalScore += scoredSeeds[j].score;
+    }
+    S.storySeedNeighborhoodTrends = nhTrends;
+  }
+
   S.cycleActiveCitizens = Object.keys(activeSetObj);
   S.citizenEventMemory = MEM;
   ctx.summary = S;

@@ -48,112 +48,22 @@ function clamp100_(n) { return n < 0 ? 0 : (n > 100 ? 100 : n); }
 function round1_(n) { return Math.round(n * 10) / 10; }
 
 // A citizen = permanent self (base) + current swing (mood) + reinforcement (streak), per dial.
-// Reusable citizen object pool
-var citizenPool = [];
-var citizenPoolSize = 0;
-var MAX_POOL_SIZE = 1000;
-
 function newCitizen_(base) {
-  var c;
-  if (citizenPoolSize > 0) {
-    c = citizenPool[--citizenPoolSize];
-    // Reset existing object
-    for (var d in c.base) {
-      c.base[d] = (base && base[d] != null) ? clamp100_(base[d]) : MIDPOINT;
-      c.mood[d] = 0;
-      c.streak[d] = 0;
-    }
-  } else {
-    c = { base: {}, mood: {}, streak: {} };
-    for (var i = 0; i < DIALS.length; i++) {
-      var d = DIALS[i];
-      c.base[d] = (base && base[d] != null) ? clamp100_(base[d]) : MIDPOINT;
-      c.mood[d] = 0;
-      c.streak[d] = 0;
-    }
+  var c = { base: {}, mood: {}, streak: {} };
+  for (var i = 0; i < DIALS.length; i++) {
+    var d = DIALS[i];
+    c.base[d] = (base && base[d] != null) ? clamp100_(base[d]) : MIDPOINT;
+    c.mood[d] = 0;
+    c.streak[d] = 0;
   }
   return c;
 }
 
-var poolStats = { hits: 0, misses: 0, releases: 0 };
-
-function releaseCitizen_(citizen) {
-  if (citizenPoolSize < MAX_POOL_SIZE) {
-    citizen._pooled = true;
-    citizenPool[citizenPoolSize++] = citizen;
-    poolStats.releases++;
-  }
-}
-
-function getPoolStats() {
-  return {
-    hits: poolStats.hits,
-    misses: poolStats.misses,
-    releases: poolStats.releases,
-    size: citizenPoolSize,
-    utilization: (poolStats.hits / (poolStats.hits + poolStats.misses) * 100).toFixed(1) + '%'
-  };
-}
-
 // where a dial sits RIGHT NOW = permanent self + current swing
-// Cache current calcs within citizen cycle
-function current_(c, dial) {
-  if (!c._currentCache) c._currentCache = {};
-  if (c._currentCache.hasOwnProperty(dial)) return c._currentCache[dial];
-  
-  c._currentCache[dial] = clamp100_(c.base[dial] + c.mood[dial]);
-  return c._currentCache[dial]; 
-}
-
-// Clear cache when mood changes
+function current_(c, dial) { return clamp100_(c.base[dial] + c.mood[dial]); }
 
 // event = { label, effects: { dial: deltaInt, ... } } — effects come from citizenDialMap.
 function applyEvent_(c, event) {
-  c._currentCache = {}; // Clear cached current values
-  
-  // Track chaos impact with severity levels
-  if (event.tags) {
-    const chaosTag = event.tags.find(t => t.startsWith('source:chaos'));
-    if (chaosTag) {
-      if (!c.chaosExposure) {
-        c.chaosExposure = {
-          firstSeen: (ctx && ctx.cycle) || 0,
-          lastSeen: (ctx && ctx.cycle) || 0,
-          count: 1,
-          severity: chaosTag.includes('major') ? 2 : 1,
-          types: new Set([chaosTag.split(':')[1] || 'general'])
-        };
-      } else {
-        c.chaosExposure.lastSeen = (ctx && ctx.cycle) || c.chaosExposure.lastSeen;
-        c.chaosExposure.count++;
-        c.chaosExposure.severity = Math.max(c.chaosExposure.severity, 
-          chaosTag.includes('major') ? 2 : 1);
-        if (chaosTag.includes(':')) {
-          c.chaosExposure.types.add(chaosTag.split(':')[1]);
-        }
-      }
-      
-      // Apply temporary composure penalty based on chaos severity
-      const severityMult = chaosTag.includes('major') ? 1.5 : 1;
-      if (!event.effects) event.effects = {};
-      event.effects.composure = (event.effects.composure || 0) - (2 * severityMult);
-    }
-  }
-  
-  // Track story-worthy state changes
-  if (event.effects) {
-    for (var d in event.effects) {
-      if (Math.abs(event.effects[d]) >= 5) { // Significant dial movement
-        if (!c._storySeeds) c._storySeeds = [];
-        c._storySeeds.push({
-          dial: d,
-          delta: event.effects[d],
-          label: event.label || '',
-          cycle: (ctx && ctx.summary && ctx.summary.cycleId) || 0
-        });
-      }
-    }
-  }
   var fx = (event && event.effects) || {};
   for (var d in fx) {
     if (!fx.hasOwnProperty(d) || c.base[d] == null) continue;
@@ -230,23 +140,9 @@ function settleCycle_(c) {
 }
 
 // raw 0-100 -> band index 0..4 (the ONLY thing consumers read)
-// Cache band index lookups since they're called very frequently
-var BAND_INDEX_CACHE = [];
-function initBandCache_() {
-  for (var v = 0; v <= 100; v++) {
-    for (var i = 0; i < BAND_CUTS.length; i++) { 
-      if (v < BAND_CUTS[i]) {
-        BAND_INDEX_CACHE[v] = i;
-        break;
-      }
-    }
-    if (BAND_INDEX_CACHE[v] === undefined) BAND_INDEX_CACHE[v] = BAND_CUTS.length;
-  }
-}
-initBandCache_();
-
 function bandIndex_(v) {
-  return BAND_INDEX_CACHE[Math.round(v)] || 0;
+  for (var i = 0; i < BAND_CUTS.length; i++) { if (v < BAND_CUTS[i]) return i; }
+  return BAND_CUTS.length; // top band
 }
 // signed band -2..+2 (for readable output / engine.32 seam)
 function band_(c, dial) { return BAND_SIGNED[bandIndex_(current_(c, dial))]; }
@@ -294,30 +190,6 @@ function deserialize_(obj) {
   return c;
 }
 
-// Chaos reaction thresholds
-function checkChaosReaction_(citizen) {
-  if (!citizen.chaosExposure) return null;
-  
-  const { count, severity, types } = citizen.chaosExposure;
-  const typeArr = Array.from(types);
-  
-  if (count >= 3 && severity >= 2) {
-    return {
-      reaction: 'traumatized',
-      dialEffects: { composure: -8, openness: -4 },
-      tags: ['chaos:trauma', ...typeArr.map(t => `chaos-type:${t}`)]
-    };
-  }
-  if (count >= 2) {
-    return {
-      reaction: 'wary',
-      dialEffects: { composure: -4, openness: -2 },
-      tags: ['chaos:wary', ...typeArr.map(t => `chaos-type:${t}`)]
-    };
-  }
-  return null;
-}
-
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     DIALS: DIALS, MIDPOINT: MIDPOINT, BAND_CUTS: BAND_CUTS, BAND_MULT: BAND_MULT,
@@ -328,7 +200,6 @@ if (typeof module !== 'undefined' && module.exports) {
     accreteReflectionsIntoBase_: accreteReflectionsIntoBase_, settleCycle_: settleCycle_,
     bandIndex_: bandIndex_, band_: band_, bandMultiplier_: bandMultiplier_,
     describe_: describe_, snapshot_: snapshot_,
-    serialize_: serialize_, deserialize_: deserialize_,
-    checkChaosReaction_: checkChaosReaction_
+    serialize_: serialize_, deserialize_: deserialize_
   };
 }

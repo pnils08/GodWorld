@@ -176,27 +176,15 @@ function generateCitizensEvents_(ctx) {
   var PARTICIPATION_BASE = 0.72; // coverage-band tuned (target 60-80%)
   var PARTICIPATION_MAX = 0.97;  // never guaranteed-100% — preserve quiet-week texture
 
-  // Reuse same objects each cycle to avoid allocations
-  if (!ctx._citizenTracking) {
-    ctx._citizenTracking = {
-      activeSet: Object.create(null),
-      guaranteedSet: Object.create(null)
-    };
-  }
-  var tracking = ctx._citizenTracking;
-  var activeSetObj = tracking.activeSet;
-  var guaranteedInObj = tracking.guaranteedSet;
-  
-  // Clear previous cycle's data
-  for (var key in activeSetObj) delete activeSetObj[key];
-  for (var key in guaranteedInObj) delete guaranteedInObj[key];
-  
-  // Populate with new data
+  // Active citizens tracker (dedup) - use object for ES5 Set-like behavior.
+  // guaranteedInObj = the upstream cycleActiveCitizens set, unioned in below as
+  // always-participate (events from upstream engines guarantee a logged week).
+  var activeSetObj = Object.create(null);
+  var guaranteedInObj = Object.create(null);
   var initialActives = Array.isArray(S.cycleActiveCitizens) ? S.cycleActiveCitizens : [];
   for (var ai = 0; ai < initialActives.length; ai++) {
-    var popId = initialActives[ai];
-    activeSetObj[popId] = true;
-    guaranteedInObj[popId] = true;
+    activeSetObj[initialActives[ai]] = true;
+    guaranteedInObj[initialActives[ai]] = true;
   }
   S.cycleActiveCitizens = Object.keys(activeSetObj);
 
@@ -1030,28 +1018,12 @@ function generateCitizensEvents_(ctx) {
   if (weather.type === "cold") weatherPool.push(makeEntry("bundled up against the cold", ["source:weatherPool", "weather:cold"], 1, false));
   if (weather.type === "wind") weatherPool.push(makeEntry("noted windy evening conditions", ["source:weatherPool", "weather:wind"], 1, false));
 
-  var chaosPool = [];
-  if (chaos.length > 0) {
-    chaos.forEach(chaosEvent => {
-      const severity = chaosEvent.severity || 1;
-      const type = chaosEvent.type || 'general';
-      const weight = severity * 1.5;
-      
-      chaosPool.push(
-        makeEntry(`noticed the aftermath of ${chaosEvent.description || 'the chaos'}`, 
-          [`source:chaos:${type}`, severity > 1 ? 'chaos:major' : 'chaos:minor'], 
-          weight, false)
-      );
-      
-      if (severity > 1) {
-        chaosPool.push(
-          makeEntry(`felt unsettled by ${chaosEvent.description || 'the major disruption'}`, 
-            ['source:chaos:major', `chaos:${type}`], 
-            weight * 1.2, false)
-        );
-      }
-    });
-  }
+  var chaosPool = (chaos.length > 0)
+    ? [
+        makeEntry("reflected briefly on today's city happenings", ["source:chaos"], 1, false),
+        makeEntry("felt a subtle shift in the city's tone", ["source:chaos"], 1, false)
+      ]
+    : [];
 
   var sentimentPool = [];
   if (dynamics.sentiment >= 0.3) sentimentPool.push(makeEntry("felt uplifted by the city mood", ["source:sentiment", "sentiment:positive"], 1, false));
@@ -1231,43 +1203,8 @@ function generateCitizensEvents_(ctx) {
   // =========================================================================
   // MAIN CITIZEN LOOP
   // =========================================================================
-  // Pre-compute column indices once
-  var colIndices = {
-    tier: iTier,
-    mode: iClock,
-    popId: iPopID, 
-    neighborhood: iNeighborhood,
-    birthYear: iBirthYear,
-    occupation: iOccupation,
-    usage: iUsage
-  };
-  
-  // Prepare empty array upfront for log rows
-  var logRows = new Array(Math.min(rows.length, 1000));
-  var logRowIdx = 0;
-  
-  // Prepare cached row data upfront
-  var rowCache = new Array(rows.length);
-  for (var ri = 0; ri < rows.length; ri++) {
-    var row = rows[ri];
-    rowCache[ri] = {
-      tier: Number(row[iTier] || 0),
-      mode: row[iClock] || "ENGINE",
-      popId: row[iPopID],
-      neighborhood: iNeighborhood >= 0 ? (row[iNeighborhood] || "") : "",
-      birthYear: (iBirthYear >= 0) ? Number(row[iBirthYear] || 0) : 0,
-      occupation: (iOccupation >= 0) ? String(row[iOccupation] || "") : "",
-      usageCount: (iUsage >= 0) ? Number(row[iUsage]) || 0 : 0
-    };
-  }
-
+  var logRows = [];
   for (var r = 0; r < rows.length; r++) {
-    var row = rows[r];
-    var cached = rowCache[r];
-    var tier = cached.tier;
-    var mode = cached.mode;
-    var popId = cached.popId;
-    var neighborhood = cached.neighborhood;
     // engine.38 A1: LIMIT=25 cap removed — full-population coverage. Runaway is
     // structurally bounded: one emit max per citizen per cycle (<= rows.length).
 
@@ -1790,36 +1727,7 @@ function generateCitizensEvents_(ctx) {
     // neighborhood metrics; fold at phase08 v3NeighborhoodWriter).
     if (typeof recordPulse_ === 'function') recordPulse_(S, neighborhood, primaryTag, tags, pick);
 
-    // Check for chaos reactions
-    const citizen = ctx.citizenLookup && ctx.citizenLookup[popId];
-    if (citizen && typeof checkChaosReaction_ === 'function') {
-      const reaction = checkChaosReaction_(citizen);
-      if (reaction) {
-        tags = mergeTags(tags, reaction.tags);
-        applyEvent_(citizen, {
-          label: `chaos_reaction:${reaction.reaction}`,
-          effects: reaction.dialEffects
-        });
-      }
-    }
-
     remember(popId, primaryTag, pick, chosenVenue, neighborhood, contact && contact.name, tags);
-    
-    // Extract story seeds from high-potential events
-    var hasChaosTag = false;
-    for (var chaosTagI = 0; chaosTagI < tags.length; chaosTagI++) {
-      if (tags[chaosTagI] === 'source:chaos') { hasChaosTag = true; break; }
-    }
-    if (entry._storyWeight > 1 || tags.some(t => t.startsWith('arc:')) || hasChaosTag) {
-      if (!S.storySeeds) S.storySeeds = [];
-      S.storySeeds.push({
-        popId: popId,
-        text: pick,
-        tags: tags,
-        neighborhood: neighborhood,
-        weight: entry._storyWeight || 1
-      });
-    }
 
     activeSetObj[popId] = true;
     S.eventsGenerated = (S.eventsGenerated || 0) + 1;
@@ -1834,46 +1742,6 @@ function generateCitizensEvents_(ctx) {
   if (lifeLog && logRows.length) {
     var startRow = lifeLog.getLastRow() + 1;
     lifeLog.getRange(startRow, 1, logRows.length, logRows[0].length).setValues(logRows);
-  }
-
-  // Score and categorize story seeds
-  if (S.storySeeds && S.storySeeds.length > 0) {
-    // Score seeds
-    var scoredSeeds = [];
-    for (var i = 0; i < S.storySeeds.length; i++) {
-      var seed = S.storySeeds[i];
-      var score = (typeof computeStorySeedScore_ === 'function') 
-        ? computeStorySeedScore_(seed.tags[0] || '', 1, seed.text)
-        : 0.5 * (seed.weight || 1);
-      
-      scoredSeeds.push({
-        popId: seed.popId,
-        text: seed.text,
-        tags: seed.tags,
-        neighborhood: seed.neighborhood,
-        score: score
-      });
-    }
-    
-    // Sort by score descending
-    scoredSeeds.sort(function(a, b) { return b.score - a.score; });
-    
-    // Store top seeds
-    S.storySeedsTop = scoredSeeds.slice(0, 10); 
-    
-    // Calculate neighborhood trends
-    var nhTrends = {};
-    for (var j = 0; j < scoredSeeds.length; j++) {
-      var nh = scoredSeeds[j].neighborhood;
-      if (!nh) continue;
-      
-      if (!nhTrends[nh]) {
-        nhTrends[nh] = { count: 0, totalScore: 0 };
-      }
-      nhTrends[nh].count++;
-      nhTrends[nh].totalScore += scoredSeeds[j].score;
-    }
-    S.storySeedNeighborhoodTrends = nhTrends;
   }
 
   S.cycleActiveCitizens = Object.keys(activeSetObj);

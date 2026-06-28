@@ -21,19 +21,19 @@
 
 var DIAL_MAP = {
   // --- Work / Drive ---
-  'Career':             { drive: 4, _storyWeight: 0.7 }, // Medium story potential
-  'Career-Transition':  { drive: 3, openness: 3, _storyWeight: 1.2 }, // High story potential
+  'Career':             { drive: 4 },
+  'Career-Transition':  { drive: 3, openness: 3 },
   'Career-Training':    { drive: 3 },
-  'Promotion':          { drive: 8, composure: 2, _storyWeight: 1.5, _storyScore: 0.9 },
-  'Education':          { drive: 5, openness: 3, _storyWeight: 0.8, _storyScore: 0.6 },
-  'Education-Cultural': { openness: 5, drive: 2, _storyWeight: 0.9, _storyScore: 0.7 },
-  'Graduation':         { drive: 8, openness: 2, _storyWeight: 1.3, _storyScore: 0.85 },
-  'Arc':                { drive: 4, openness: 2, _storyWeight: 1.0, _storyScore: 0.7 },
-  'Work':               { drive: 4, _storyWeight: 0.5, _storyScore: 0.3 },                 // legacy generic work tag
-  'CivicRole':          { sociability: 5, drive: 2, _storyWeight: 1.1, _storyScore: 0.75 },
-  'Civic Role':         { sociability: 5, drive: 2, _storyWeight: 1.1, _storyScore: 0.75 }, // space variant
-  'Civic':              { sociability: 4, drive: 2, _storyWeight: 0.9, _storyScore: 0.6 },
-  'Civic Perception':   { sociability: 2, _storyWeight: 0.6, _storyScore: 0.4 },
+  'Promotion':          { drive: 8, composure: 2 },
+  'Education':          { drive: 5, openness: 3 },
+  'Education-Cultural': { openness: 5, drive: 2 },
+  'Graduation':         { drive: 8, openness: 2 },
+  'Arc':                { drive: 4, openness: 2 },
+  'Work':               { drive: 4 },                 // legacy generic work tag
+  'CivicRole':          { sociability: 5, drive: 2 },
+  'Civic Role':         { sociability: 5, drive: 2 }, // space variant
+  'Civic':              { sociability: 4, drive: 2 },
+  'Civic Perception':   { sociability: 2 },
 
   // --- Social / Sociability ---
   'Relationship':       { sociability: 5, warmth: 2 },
@@ -154,33 +154,23 @@ var EDITION_FX = { sociability: 2 };
 
 // Content routing for rows whose meaning is in the prose, not the tag:
 // Untagged, EngineEvent, and the old improper-ingest sentence-tags.
-// Compile regex once and reuse
-var CONTENT_RULES = (function() {
-  var rules = [
-    [/diagnos|hospital|illness|injur|health condition|condition diagnosed/, { composure: -6 }],
-    [/recover|stabil|healed|back on (his|her|their) feet/, { composure: 5 }],
-    [/born into population|born during/, { family: 2 }],
-    [/promot|raise|bonus|reward/, { drive: 7, composure: 2 }],
-    [/inherit|windfall/, { composure: 3, family: 2 }],
-    [/invest|lost money|bad debt|financial loss/, { composure: -5 }],
-    [/business|venture|startup|started a small/, { drive: 6, openness: 3 }],
-    [/new relationship|married|wedding|engaged|partner/, { sociability: 4, warmth: 3, family: 2 }],
-    [/moved to|relocat|larger home|new home/, { family: 4, openness: 2 }],
-    [/transition|role:|new job|new role|hired|teacher/, { drive: 5, openness: 2 }],
-    [/recognition|award|featured|honored|spotlight|public/, { sociability: 4 }],
-    [/misunderstanding|conflict|argument|dispute|scandal/, { composure: -4 }],
-    [/tier 2|tier 3|tier 4|tier 5|advanced|elevated/, { drive: 6 }],
-    [/relative|friend|neighbor|community|gathering/, { sociability: 3, warmth: 2 }],
-    [/quiet|calm|unwind|routine|uneventful|relax|at home|rest/, { composure: 2 }]
-  ];
-  
-  return rules.map(function(rule) {
-    return {
-      re: typeof rule[0] === 'string' ? new RegExp(rule[0]) : rule[0],
-      fx: rule[1]
-    };
-  });
-})();
+var CONTENT_RULES = [
+  { re: /diagnos|hospital|illness|injur|health condition|condition diagnosed/, fx: { composure: -6 } },
+  { re: /recover|stabil|healed|back on (his|her|their) feet/,                  fx: { composure: 5 } },
+  { re: /born into population|born during/,                                    fx: { family: 2 } },
+  { re: /promot|raise|bonus|reward/,                                           fx: { drive: 7, composure: 2 } },
+  { re: /inherit|windfall/,                                                    fx: { composure: 3, family: 2 } },
+  { re: /invest|lost money|bad debt|financial loss/,                           fx: { composure: -5 } },
+  { re: /business|venture|startup|started a small/,                            fx: { drive: 6, openness: 3 } },
+  { re: /new relationship|married|wedding|engaged|partner/,                    fx: { sociability: 4, warmth: 3, family: 2 } },
+  { re: /moved to|relocat|larger home|new home/,                              fx: { family: 4, openness: 2 } },
+  { re: /transition|role:|new job|new role|hired|teacher/,                     fx: { drive: 5, openness: 2 } },
+  { re: /recognition|award|featured|honored|spotlight|public/,                fx: { sociability: 4 } },
+  { re: /misunderstanding|conflict|argument|dispute|scandal/,                  fx: { composure: -4 } },
+  { re: /tier 2|tier 3|tier 4|tier 5|advanced|elevated/,                       fx: { drive: 6 } },
+  { re: /relative|friend|neighbor|community|gathering/,                        fx: { sociability: 3, warmth: 2 } },
+  { re: /quiet|calm|unwind|routine|uneventful|relax|at home|rest/,             fx: { composure: 2 } }
+];
 
 // Any non-structural event that matched nothing above = an ordinary logged day.
 var DEFAULT_AMBIENT = { composure: 1 };
@@ -190,47 +180,28 @@ var DEFAULT_AMBIENT = { composure: 1 };
 // real compound tags like 'Career-Transition' or 'Transgression-Petty'.)
 var CALENDAR_SUFFIXES = ['FirstFriday', 'CreationDay', 'Holiday', 'Sports'];
 
-// Cache base tag computations since called frequently
-var BASE_TAG_CACHE = {};
-
 function baseTag_(tag) {
   if (!tag) return '';
   var s = String(tag);
-  if (BASE_TAG_CACHE.hasOwnProperty(s)) return BASE_TAG_CACHE[s];
-  
   var dash = s.lastIndexOf('-');
   if (dash > 0) {
     var tail = s.substring(dash + 1);
     for (var i = 0; i < CALENDAR_SUFFIXES.length; i++) {
-      if (tail === CALENDAR_SUFFIXES[i]) {
-        BASE_TAG_CACHE[s] = s.substring(0, dash);
-        return BASE_TAG_CACHE[s];
-      }
+      if (tail === CALENDAR_SUFFIXES[i]) return s.substring(0, dash);
     }
   }
-  BASE_TAG_CACHE[s] = s;
   return s;
 }
 
-// Cache scaled dial maps to avoid re-computation
-var SCALE_CACHE = {};
-
 function scale_(fx, mult) {
-  if (mult == null || mult === 1) return fx;
-  
-  // Generate cache key
-  var keys = Object.keys(fx).sort();
-  var cacheKey = keys.join(',') + '|' + mult;
-  
-  if (!SCALE_CACHE[cacheKey]) {
-    var out = {};
-    for (var i = 0; i < keys.length; i++) {
-      var d = keys[i];
-      out[d] = fx[d] * mult;
-    }
-    SCALE_CACHE[cacheKey] = out;
+  if (mult == null || mult === 1) {
+    var copy = {};
+    for (var k in fx) { if (fx.hasOwnProperty(k)) copy[k] = fx[k]; }
+    return copy;
   }
-  return SCALE_CACHE[cacheKey];
+  var out = {};
+  for (var d in fx) { if (fx.hasOwnProperty(d)) out[d] = fx[d] * mult; }
+  return out;
 }
 
 // tag (+ optional text) -> { dial: delta }. severityMult scales (default 1).
@@ -282,34 +253,11 @@ function hasTag_(tag, text) {
   return false;
 }
 
-// Story seed scoring and aggregation
-function computeStorySeedScore_(tag, severityMult, text) {
-  var fx = nudgesForEvent_(tag, severityMult, text);
-  var baseScore = (fx._storyScore !== undefined) ? fx._storyScore : 0.3;
-  var weight = (fx._storyWeight !== undefined) ? fx._storyWeight : 0.5;
-  
-  // Boost score based on dial movement magnitude
-  var totalDelta = 0;
-  var dialCount = 0;
-  for (var d in fx) {
-    if (fx.hasOwnProperty(d) && d !== '_storyScore' && d !== '_storyWeight') {
-      totalDelta += Math.abs(fx[d]);
-      dialCount++;
-    }
-  }
-  var avgDelta = dialCount > 0 ? totalDelta / dialCount : 0;
-  var deltaBoost = Math.min(avgDelta / 10, 0.3); // max +0.3 boost
-  
-  // Final score 0-1
-  return Math.min(baseScore + deltaBoost, 1.0);
-}
-
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     DIAL_MAP: DIAL_MAP, CONTENT_RULES: CONTENT_RULES, STRUCTURAL: STRUCTURAL,
     EDITION_RE: EDITION_RE, CALENDAR_SUFFIXES: CALENDAR_SUFFIXES, DEFAULT_AMBIENT: DEFAULT_AMBIENT,
     baseTag_: baseTag_, nudgesForEvent_: nudgesForEvent_,
-    nudgesForReflection_: nudgesForReflection_, hasTag_: hasTag_,
-    computeStorySeedScore_: computeStorySeedScore_
+    nudgesForReflection_: nudgesForReflection_, hasTag_: hasTag_
   };
 }

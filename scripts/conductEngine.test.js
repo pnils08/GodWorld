@@ -23,6 +23,8 @@ global.nudgesForEvent_ = M.nudgesForEvent_;
 global.baseTag_ = M.baseTag_;
 const C = require('../utilities/compressLifeHistory.js');
 global.getCitizenDialBands_ = C.getCitizenDialBands_;
+// inWorldStamp_ lives in phase01 advanceSimulationCalendar.js (not loaded here)
+global.inWorldStamp_ = (ctx) => 'C' + ((ctx && ctx.config && ctx.config.cycleCount) || 0);
 
 global.Utilities = { formatDate: () => 'STAMP' };
 global.Session = { getScriptTimeZone: () => 'UTC' };
@@ -169,7 +171,7 @@ console.log('═══ T7 Section 4 — caps, write path, dial-loop closure');
   // memory line format on the row + tag must be a real DIAL_MAP key
   const iLife = HEADERS.indexOf('LifeHistory');
   const touched = ctx.ledger.rows.filter(r => r[iLife]);
-  assert('4.5 memory line lands as "STAMP — [Tag] text"', touched.length > 0 && /^STAMP — \[[A-Za-z-]+\] .+/.test(touched[0][iLife]), touched[0] && touched[0][iLife]);
+  assert('4.5 memory line lands as "C<cycle> — [Tag] text"', touched.length > 0 && /^C\d+ — \[[A-Za-z-]+\] .+/.test(touched[0][iLife]), touched[0] && touched[0][iLife]);
   const tagsUsed = evs.map(e => e.tag);
   const nudgeMoves = tagsUsed.every(t => {
     const fx = M.nudgesForEvent_(t, 1, '');

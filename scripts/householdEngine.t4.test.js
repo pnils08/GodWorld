@@ -21,6 +21,8 @@ global.getCitizenDialBands_ = () => null;
 global.Utilities = { formatDate: () => 'STAMP' };
 global.Session = { getScriptTimeZone: () => 'UTC' };
 global.queueAppendIntent_ = () => {};
+// inWorldStamp_ lives in phase01 advanceSimulationCalendar.js (not loaded here)
+global.inWorldStamp_ = (ctx) => 'C' + ((ctx && ctx.config && ctx.config.cycleCount) || 0);
 
 function mulberry32(seed) {
   return function () {

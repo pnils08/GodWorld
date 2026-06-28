@@ -54,3 +54,5 @@ __pycache__/
 **/__pycache__/
 *.pyc
 .aider*
+!.aiderignore
+!.aider.conf.yml

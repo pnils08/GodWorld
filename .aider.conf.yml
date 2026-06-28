@@ -9,3 +9,7 @@ env-file: .env
 # (defaults false): test-cmd alone only enables manual /test, not the auto-gate.
 test-cmd: npm test
 auto-test: true
+
+# engine.9 (S274): always load the rules file so Aider sees the engine landmines
+# + canon rules every run (was authored but never wired — Aider never read it).
+read: CONVENTIONS.md

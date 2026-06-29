@@ -6,6 +6,7 @@ package-lock.json
 # repo working dir MUST be ignored even if accidentally created.
 .env
 .env.*
+.envx
 
 # Service account credentials (never commit) — Phase 40.3 relocated outside repo
 credentials/

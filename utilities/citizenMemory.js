@@ -64,6 +64,32 @@ function current_(c, dial) { return clamp100_(c.base[dial] + c.mood[dial]); }
 
 // event = { label, effects: { dial: deltaInt, ... } } — effects come from citizenDialMap.
 function applyEvent_(c, event) {
+  // engine.42 #1 — cumulative chaos exposure + severity-scaled composure penalty.
+  // Inert until a caller passes event.tags with a 'source:chaos' tag (wiring lives
+  // in generateCitizensEvents.js). ctx-free by design: the cycle stamp comes from
+  // optional event.cycle (default 0) — the reverted Aider draft referenced a bare
+  // `ctx` here that isn't in scope in this util, which is what crashed the engine.
+  if (event && event.tags) {
+    var chaosTag = null;
+    for (var ti = 0; ti < event.tags.length; ti++) {
+      if (String(event.tags[ti]).indexOf('source:chaos') === 0) { chaosTag = String(event.tags[ti]); break; }
+    }
+    if (chaosTag) {
+      var sev = chaosTag.indexOf('major') >= 0 ? 2 : 1;
+      var ctype = chaosTag.split(':')[1] || 'general';
+      var cyc = (event.cycle != null) ? event.cycle : 0;
+      if (!c.chaosExposure) {
+        c.chaosExposure = { firstSeen: cyc, lastSeen: cyc, count: 1, severity: sev, types: {} };
+      } else {
+        c.chaosExposure.lastSeen = cyc;
+        c.chaosExposure.count++;
+        c.chaosExposure.severity = Math.max(c.chaosExposure.severity, sev);
+      }
+      c.chaosExposure.types[ctype] = true;
+      if (!event.effects) event.effects = {};
+      event.effects.composure = (event.effects.composure || 0) - (2 * (sev === 2 ? 1.5 : 1));
+    }
+  }
   var fx = (event && event.effects) || {};
   for (var d in fx) {
     if (!fx.hasOwnProperty(d) || c.base[d] == null) continue;
@@ -190,6 +216,25 @@ function deserialize_(obj) {
   return c;
 }
 
+// engine.42 #1 — escalating reaction to accumulated chaos (inert until wired in
+// generateCitizensEvents.js: look up the citizen, call this, merge tags + apply
+// dialEffects). Reads c.chaosExposure built up by applyEvent_ above.
+function checkChaosReaction_(c) {
+  if (!c || !c.chaosExposure) return null;
+  var ce = c.chaosExposure;
+  var typeArr = [];
+  for (var t in ce.types) { if (ce.types.hasOwnProperty(t)) typeArr.push('chaos-type:' + t); }
+  if (ce.count >= 3 && ce.severity >= 2) {
+    return { reaction: 'traumatized', dialEffects: { composure: -8, openness: -4 },
+             tags: ['chaos:trauma'].concat(typeArr) };
+  }
+  if (ce.count >= 2) {
+    return { reaction: 'wary', dialEffects: { composure: -4, openness: -2 },
+             tags: ['chaos:wary'].concat(typeArr) };
+  }
+  return null;
+}
+
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     DIALS: DIALS, MIDPOINT: MIDPOINT, BAND_CUTS: BAND_CUTS, BAND_MULT: BAND_MULT,
@@ -200,6 +245,7 @@ if (typeof module !== 'undefined' && module.exports) {
     accreteReflectionsIntoBase_: accreteReflectionsIntoBase_, settleCycle_: settleCycle_,
     bandIndex_: bandIndex_, band_: band_, bandMultiplier_: bandMultiplier_,
     describe_: describe_, snapshot_: snapshot_,
-    serialize_: serialize_, deserialize_: deserialize_
+    serialize_: serialize_, deserialize_: deserialize_,
+    checkChaosReaction_: checkChaosReaction_
   };
 }

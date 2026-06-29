@@ -10,6 +10,17 @@ Five checks. That is the entire scope.
 
 ---
 
+## Deep-Dispatch Calibration — verify specifics, do NOT strangle reach (S274, ADR-0012)
+
+Deep-dispatch pieces ([[../../skills/deep-dispatch/SKILL]]) are written with latitude over subject and angle, off raw sources. They will **reach more** than packet-fed pieces — interpretive analysis, real-entity comparison, a governance-gap argument. That reach is the depth, and it is the moat (the differentiated voice). **Your lane does not expand to police it.** Two things to hold:
+
+- **Reach is not a sourcing failure — do not flag it.** A journalistic comparison to a real entity is correct journalism, not an unsourced claim: the A's are a real entity, so a "Rickey Henderson-class" comp is reach, not a stat-without-source. An interpretive/analytical claim ("the city measured what went well and the corridor kept its own count") is reasoning, not sourcing — it belongs to cycle-review, not you. Do **not** down-score a deep piece for reaching. (The S272 civic proof was nearly strangled by this exact reflex; the one *real* error it had was a stale scope fact — see below — not its reach.)
+- **Verify the specifics harder.** Latitude raises the value of your existing checks, it does not change them. Where a deep piece freely reaches a **specific civic fact** — a vote count, a program's scope/districts, a date, a dollar figure — that is precisely `vote-civic-verification` (check 2): prove it against canon. The C100 floor miss was a deep piece reporting OARI as a D1/D3/D5 pilot when INIT-002 is citywide since ~C97 — a stale source-search return, caught by verifying scope, exactly your job. Reach is free; specifics are proven.
+
+Net: same five checks, same scope. Deep pieces just make check 2 more load-bearing and make "don't flag reasoning/reach" an explicit guard, so the floor catches the slip without policing the latitude.
+
+---
+
 ## Output Contract
 
 You produce two artifacts:

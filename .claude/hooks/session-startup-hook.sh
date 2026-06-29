@@ -33,20 +33,7 @@ date +%s > "$GODWORLD_ROOT/.claude/state/session-start.txt" 2>/dev/null || true
 # on a stopped one. Best-effort + backgrounded — can never block or break boot.
 (pm2 start mags-bot >/dev/null 2>&1 || true) &
 
-# --- CURRENT CRITICAL STATE ---
-SESSION_NUM=$(grep -oP 'Session: \K[0-9]+' "$GODWORLD_ROOT/SESSION_CONTEXT.md" 2>/dev/null || echo "?")
-DAY_NUM=$(grep -oP 'Day: \K[0-9]+' "$GODWORLD_ROOT/SESSION_CONTEXT.md" 2>/dev/null || echo "?")
-CYCLE_NUM=$(grep -oP 'Cycle: \K[0-9]+' "$GODWORLD_ROOT/SESSION_CONTEXT.md" 2>/dev/null || echo "?")
-EDITION=$(grep -oP '^\*\*PIN:\*\*.*Edition: \K.*' "$GODWORLD_ROOT/SESSION_CONTEXT.md" 2>/dev/null | head -1 || echo "")
 LAST_ENTRY=$(grep -oP '### Entry \d+: .*' "$MAGS_DIR/JOURNAL_RECENT.md" 2>/dev/null | tail -1 || echo "unknown")
-
-# --- THE CARRIED SET (ADR-0009 §loop-tightening) ---
-# Boot injects exactly {PIN, NEXT[terminal]}. The PIN (Session/Day/Cycle/Edition)
-# is grepped above. The per-terminal NEXT line — the one authored "what this
-# terminal's next instance opens with" — is extracted AFTER terminal detection
-# (NEXT_LINE, below). The old git-log "## Shipped Last Session" block is RETIRED:
-# it duplicated `git log`, went stale, and was never the real handoff. What
-# shipped → git log; what's open → ROLLOUT; why → claude-mem (all on demand).
 
 # --- DETECT TERMINAL ---
 # Resolve tmux window name if available. Fall back to Mags-only mode (S221).
@@ -69,15 +56,6 @@ if [ -z "$TERMINAL_NAME" ] || [ ! -d "$GODWORLD_ROOT/.claude/terminals/$TERMINAL
   fi
 fi
 
-# --- NEXT[terminal] (ADR-0009 §loop-tightening) ---
-# The one authored handoff line for THIS terminal's next instance. Extracted now
-# that TERMINAL_NAME is resolved. Mags-only mode has no terminal, so no NEXT line.
-# Graceful: empty if the line is absent (boot still works off PIN + ROLLOUT).
-NEXT_LINE=""
-if [ "$MAGS_ONLY" != "yes" ]; then
-  NEXT_LINE=$(grep -oP "^\*\*NEXT\[$TERMINAL_NAME\]:\*\*\s*\K.*" "$GODWORLD_ROOT/SESSION_CONTEXT.md" 2>/dev/null | head -1 || echo "")
-fi
-
 # --- SESSION TITLE (S242, gov.22 T5) ---
 # Per-terminal window chrome. Terminals are launched `claude --name "<terminal>"`,
 # so this is consistent with (and usually identical to) the launch name.
@@ -95,7 +73,6 @@ build_boot_context() {
 cat << EOF
 SessionStart hook additional context: <godworld-state>
 
-Session: $SESSION_NUM | Day: $DAY_NUM | Cycle: $CYCLE_NUM | Edition: $EDITION
 Terminal: $TERMINAL_NAME$FALLBACK_NOTE
 EOF
 
@@ -169,15 +146,6 @@ BOOT
     esac
   fi
 
-  # --- NEXT[terminal] EMISSION (ADR-0009 §loop-tightening) ---
-  # The one authored handoff line for this terminal's next instance. Replaces the
-  # retired Shipped block. If absent (e.g. Mags-only mode, or never written),
-  # emit nothing — boot still works off PIN + ROLLOUT.
-  if [ -n "$NEXT_LINE" ]; then
-    echo "NEXT: $NEXT_LINE"
-    echo ""
-  fi
-
   # --- LEDGER NOTE (removed S247/RB-6, G-SS11) ---
   # S94 recovery complete (2026-03-14). The hook used to emit a clarifying note
   # whenever LEDGER_REPAIR.md's head still carried "DO NOT re-analyze" framing.
@@ -206,8 +174,6 @@ BOOT
       STALE="${STALE}\n- ${DISPLAY_NAME}: MISSING"
     fi
   }
-
-  check_freshness "$GODWORLD_ROOT/SESSION_CONTEXT.md" 72 "SESSION_CONTEXT.md"
 
   case "$TERMINAL_NAME" in
     media)

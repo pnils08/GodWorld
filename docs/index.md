@@ -55,6 +55,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 - **[[ARCHITECTURE_VISION]]** — Jarvis at /root, persistent sessions, the technical north star Phase 41 builds toward. *(concept, architecture, active)*
 - **[[BOOT_ARCHITECTURE]]** — boot sequence reference for S165. Skill split (boot=persona / session-startup=terminal), per-terminal persona levels, hook routing. *(reference, architecture, active)*
 - **[[FOUR_COMPONENT_MAP]]** — `model + harness + tools + environment` cross-section. Per-role model choices, terminal inventory, skill slice samples, Phase 40 seam map. *(reference, architecture, active)*
+- **[[MODEL_HIERARCHY]]** — model division of labor + cost-to-reasoning ratio (Opus=brain, Sonnet=desks, Gemini=Jarvis/admin, Aider=hands, Haiku=civic voices). S274 §File Boundaries: control plane (`.claude/**`, `CLAUDE.md`, `SESSION_CONTEXT.md`) read-only to Gemini/Aider via `.aiderignore` + `.githooks/pre-commit`; cheap agents home-based in `.agents/`. *(reference, architecture, isolation, active)*
 - **[[WORKFLOWS]]** — 7 workflow patterns (media-room, civic, build/deploy, maintenance, cycle run, research, chat-with-mags). Orthogonal to terminals. Post-S165: workflow reference, not boot file. *(reference, architecture, active)*
 
 ### Stack & ops

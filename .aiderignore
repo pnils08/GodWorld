@@ -1,0 +1,10 @@
+# Claude control plane — READ-ONLY to Aider (S274 cheap-agent isolation).
+# Aider is "the hands": it may edit engine code, scripts/, lib/, utilities/,
+# phase*/, and most of docs/ — but it must NOT modify the orchestration layer
+# Mags/Claude runs on. These paths are excluded from Aider's editable map.
+# Policy + rationale: docs/MODEL_HIERARCHY.md §File Boundaries.
+.claude/
+CLAUDE.md
+SESSION_CONTEXT.md
+.githooks/
+.aiderignore

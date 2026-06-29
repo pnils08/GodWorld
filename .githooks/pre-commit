@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Cheap-agent isolation guard (S274) — soft tier.
+#
+# Blocks any commit that touches the Claude control plane unless a Claude
+# session explicitly opts in with CLAUDE_CTL=1. Gemini/Aider run as root (same
+# user as Claude), so this is accident-prevention + a default-deny backstop —
+# NOT kernel-enforced read-only. Aider is additionally contained at the context
+# layer by .aiderignore; Gemini respects the boundary by policy.
+# A determined process can still bypass (git commit --no-verify, direct write).
+# Policy + rationale: docs/MODEL_HIERARCHY.md §File Boundaries.
+#
+# Activate (once, local config): git config core.hooksPath .githooks
+
+protected='^(\.claude/|CLAUDE\.md|SESSION_CONTEXT\.md)'
+staged="$(git diff --cached --name-only | grep -E "$protected" || true)"
+
+if [ -n "$staged" ] && [ "$CLAUDE_CTL" != "1" ]; then
+  echo "" >&2
+  echo "BLOCKED — commit touches Claude control-plane files (read-only to Gemini/Aider, S274):" >&2
+  echo "$staged" | sed 's/^/  - /' >&2
+  echo "" >&2
+  echo "If you are a Claude session legitimately editing the control plane," >&2
+  echo "re-run the commit with CLAUDE_CTL=1 prefixed. e.g.:" >&2
+  echo "  CLAUDE_CTL=1 git commit -m \"...\"" >&2
+  echo "" >&2
+  exit 1
+fi
+
+exit 0

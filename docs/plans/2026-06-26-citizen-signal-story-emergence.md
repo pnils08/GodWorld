@@ -2,14 +2,16 @@
 title: Citizen-Signal Story Emergence (the self-contained world-reporting loop)
 created: 2026-06-26
 type: plan
-status: design (thesis captured; signal→story mechanism UNDESIGNED)
-terminal: research-build (design) → engine-sheet (build) — ADR pending mechanism-lock
+status: design (mechanism DESIGNED S274 → [[2026-06-29-citizen-signal-detector-build]] + [[../adr/0013-citizen-signal-emergent-story-source|ADR-0013]]; build pending T5)
+terminal: research-build (design DONE) → engine-sheet (build) — mechanism locked S274
 tags: [citizens, citizen-loop, story-emergence, reporting, architecture, research, plan]
 paths:
   - "[[2026-06-23-citizen-perception-immersion-layer]] — research.19, the INPUT side; this is its second readout"
   - "[[2026-06-04-mags-citizen-loop]] — research.14, the reflection→dial write-back loop"
   - "[[2026-06-25-deep-dispatch-write-edition-build]] — research.20, report-through-citizens; this supplies its missing aggregation+consumption half"
   - "engine.35 Story_Seed_Deck — the existing story-seed surface this feeds (a new SOURCE, not a parallel pipeline)"
+  - "[[2026-06-29-citizen-signal-detector-build]] — the executable build plan (Phase 2 mechanism resolved + engine-sheet §3)"
+  - "[[../adr/0013-citizen-signal-emergent-story-source]] — ADR-0013, the locked decision"
 registered: "[[../index]]"
 ---
 
@@ -127,8 +129,8 @@ This is why there is no ADR yet: an ADR records a *decided* mechanism, and these
 |---|---|---|---|
 | 0 | **Thesis capture** (this doc) | research-build | **DONE S273** |
 | 1 | research.19 **T5 question-bank** — the variety engine that conditions the signal (separate row; build in parallel) | research-build design → engine-sheet | T5 design in progress |
-| 2 | **Signal→story mechanism design** — resolve §Open questions; **ADR here** ("stories emerge from citizen signal" vs "Mags curates editions" — load-bearing, hard-to-reverse) | research-build | next design |
-| 3 | **Detector build** — tally/threshold over `Reflection_Intake` → seed into `Story_Seed_Deck` | engine-sheet | gated on Phase 2 |
+| 2 | **Signal→story mechanism design** — resolve §Open questions; **ADR here** ("stories emerge from citizen signal" vs "Mags curates editions" — load-bearing, hard-to-reverse) | research-build | **DONE S274 → [[2026-06-29-citizen-signal-detector-build]] + [[../adr/0013-citizen-signal-emergent-story-source|ADR-0013]]** |
+| 3 | **Detector build** — tally/threshold over `Reflection_Intake` → seed into `Story_Seed_Deck` | engine-sheet | gated on Phase 2 (DONE) + T5; spec = build plan §3 |
 | 4 | **Pilot + head-to-head** — one cycle's citizen-signal seeds vs one real edition; quality bar before any offload | media + research-build | gated on Phase 3 |
 
 **Sequencing logic:** T5 (variety) and T2 (signal-conditioning) make the signal legible, so they come first / in parallel. The detector is worthless against a flat or monotone baseline. Don't build Phase 3 before the perception layer differentiates.
@@ -143,6 +145,12 @@ This is why there is no ADR yet: an ADR records a *decided* mechanism, and these
 - **engine.35 Story_Seed_Deck** — the sink. Citizen-signal seeds are a new source feeding it; do not fork the seed pipeline.
 
 ---
+
+## Status log
+
+### research.21 — status (drained from ROLLOUT, 2026-06-26 / S274)
+
+**Citizen-signal story emergence — the self-contained world-reporting loop** (S273 Mike-direct, "this is likely how this all automates"). The citizen-loop's **second readout**: citizens *describe* the world they live in (creative LLM turning engine aggregates → lived experience), and **cross-citizen convergence IS bottom-up story signal**. Key inversion: the S273 monotone-"A's-on-fire" tic is also the signal — when N citizens independently converge, that's a storyline surfacing. **Reframes research.19 T2 as signal-conditioning** (differentiate the baseline so convergence means real salience, not shared-input artifact). Detector = tally+threshold over **already-persisted substrate**: `Reflection_Intake` 8-col `[ts,popId,cycle,daypart,event,snippet,applied,affect]` + `reflectionClassifier` tags + engine.35 `Story_Seed_Deck` sink (C100=46 seeds). A new SOURCE into the existing seed→/sift→edition flow, NOT a parallel pipeline. **Supplies research.20's missing aggregation+consumption half** (advisor S273 named scale/aggregation/consumption; this fills the latter two). Guardrails: emergent≠auto-publish (seeds pass canon+quality wall), editions stay verified until proven on a QUALITY bar (not just cost), publication wall holds (`project_subjective-hallucination-is-canon`), determinism unaffected (read-only over persisted rows). **Phase 0 thesis capture DONE S273.** Open mechanism Qs (THE NEXT DESIGN — ADR lands there): what's a "larger signal" (metric+threshold), scale/cadence (1 wake/run vs accumulating corpus), dedup-vs-engine-seeds, seed-vs-draft output, consumption path, cost-target (pin "citizen audits in print"). **NO ADR yet — mechanism undefined.**
 
 ## Changelog
 

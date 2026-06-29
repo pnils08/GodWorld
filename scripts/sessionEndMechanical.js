@@ -116,6 +116,26 @@ function printBanner(args, steps) {
 }
 
 // ---------------------------------------------------------------------------
+// Sub-step: ROLLOUT conformance lint (exit 0 informational, never fatal)
+// Surfaces non-conforming ROLLOUT rows — mangled state cell (breaks the archive
+// sweep) OR item cell over the pointer budget (a notes blob, not a pointer) — so
+// bloat is caught at close, not at the next reconciliation. The teeth behind
+// rollout-rules §1 "pointer-only": doctrine alone bloated anyway (governance.30
+// / S274). Drain offenders with scripts/rolloutDrain.js.
+// ---------------------------------------------------------------------------
+
+function subRolloutLint(args) {
+  try {
+    const out = execSync('node scripts/docLoopStatus.js --lint', { cwd: ROOT, stdio: 'pipe' });
+    out.toString().trim().split('\n').forEach(line => console.log('  ' + line));
+    return { ok: true };
+  } catch (err) {
+    console.log(`  ⚠ rollout lint error: ${err.message} — continuing`);
+    return { ok: true };
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Sub-step: rotateJournalRecent
 // ---------------------------------------------------------------------------
 
@@ -377,6 +397,7 @@ function buildSteps(args) {
     steps.push({ name: 'JOURNAL content-quality check', fn: subJournalQuality });
   }
   steps.push({ name: 'auditPlanTagDrift (informational)', fn: subAuditPlanTagDrift });
+  steps.push({ name: 'ROLLOUT conformance lint (informational)', fn: subRolloutLint });
   steps.push({ name: 'cross-terminal git stack check (read-only)', fn: subStackCheck });
   if (args.rotateHistory) {
     steps.push({ name: 'SESSION_HISTORY rotation (opt-in)', fn: subRotateHistory });

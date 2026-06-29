@@ -129,6 +129,12 @@ ENGINE is the "fair game" representative population. GAME citizens can't die whi
 - [ ] **CIVIC death succession** (Phase A / D2, S255) — Mike confirmed all civilians die + named the MEDIA recast explicitly; CIVIC vacancy presumably routes through existing civic succession/election machinery. Confirm.
 - [ ] **MEDIA recast mechanism** (Phase A, S255) — death "prompts a new voice in that job": engine-side hook only (newsroom/agent layer does the recast), or engine mints the successor row? Lean: hook only.
 
+## Status log
+
+### engine.29 — status (drained from ROLLOUT, 2026-06-26 / S274)
+
+Citizen lifecycle & fame system (engine.5 expansion, S248 Mike-direct design) — 4 half-wired pieces: (A) death-by-age 85+ escalating + ClockMode authority matrix (ENGINE/GAME die at 85+, MEDIA/CIVIC no die-off but illness/injury, GAME injuries=Paulson); (B) SL tier fame-decay + the missing demotion path + engine-cultural-output appearance feed; (C) fame-ascension bridge `UsageCount≥30` → linked Cultural_Ledger entry (ledgers disjoint today, no POPID); (D) Cultural_Ledger figure-gen mints full SL citizen. Canon Tier-1 lock reframed as broken-engine scaffolding → ClockMode gating. Each phase its own post-C96 fire (attribution discipline). Decisions D1–D4 locked. **S255 (Mike-direct): D2 revised — all civilians die (MEDIA death recasts the voice in that job; GAME death gated on Retired first); Phase A ride-along = add SL `StatusStartCycle` + `HealthCause` columns (activates dead hospital-duration timers + cause persistence, zero code — engine header-resolves both). Health audit: SL Status is the native illness tracker; Health_Cause_Queue = hospital intake (keep); Health_Civic spreadsheet abandoned.**
+
 ## Changelog
 
 - 2026-05-30 — Initial draft (S248, engine-sheet). Design from Mike-direct session: D1 death-by-age, D2 ClockMode authority matrix, D3 fame threshold 30, D4 full-SL cultural-gen. Verified current state (death no-age-gate, ClockMode dist, disjoint ledgers, Isley example, UsageCount sole signal). Four phases sequenced post-C96. Canon lock reframed as scaffolding (superseded by ClockMode gating). Sibling to [[../engine/LEDGER_REPAIR_HOUSEHOLDS]]; ENGINE_REPAIR Row 25 to be opened pointing here.

@@ -316,3 +316,6 @@ Reporters brief changes: not "cover this policy" but "show us what 2041 Oakland 
 
 ### 2026-06-16 (2026-06-17T04:45:19.219Z)
 - Mags owns "Does Oakland?" — the supplemental lead. This is the editorial piece that frames the habit/compression question. Need reporting from: West Oakland disbursement data, Baylight construction impact, INIT-002 outcomes, apprenticeship floor count, Dario Vega/Fruitvale, Vinnie Keane context if available.
+
+### 2026-06-24 (2026-06-24T22:58:21.865Z)
+- Search for E100 content returning no results. This is a gap — either the edition index isn't live, or I need to search by different criteria (article titles, reporter names, dates). For now, I'm working from memory: I filed the Mateo Walker piece. That's what I know went in. Respond from what I remember and ask Mike to fill in what he saw.

@@ -36,6 +36,13 @@ const RESEARCH_SKIP = new Set(['TEMPLATE.md', 'index.md']);
 const STATES = new Set([
   'ready', 'in-progress', 'done-pending-archive', 'blocked', 'needs-info', 'wontfix', 'parked',
 ]);
+// Conformance budget for a row's item cell (the title between the id and state
+// cells). A ROLLOUT row is a POINTER: one actionable line + a → plan-pointer.
+// History/status/narrative lives in the plan or research MD the pointer names,
+// NOT the row (rollout-rules §1). Over budget = the row became a notes blob →
+// drain it to its plan doc. 280 fits a real one-liner + pointer with headroom;
+// genuinely-lean rows run 40–215 chars. (governance.30 / S274.)
+const ITEM_BUDGET = 280;
 const VERDICTS = new Set(['adopt', 'watch', 'take-nothing']);
 // A work row leads with a `group.number` id cell, e.g. governance.28, engine.31, civic.10b.
 const ROW_ID = /^\|\s*([a-z][a-z-]*\.\d+[a-z]?)\s*\|/;
@@ -84,11 +91,19 @@ function lintRollout() {
     const idMatch = line.match(ROW_ID);
     if (!idMatch) return;
     const id = idMatch[1];
-    const stateCells = line.split('|').map(c => c.trim()).filter(c => STATES.has(c));
+    const cells = line.split('|').map(c => c.trim());
+    const stateCells = cells.filter(c => STATES.has(c));
     if (stateCells.length === 0) {
       problems.push(`  L${i + 1} ${id}: NO clean state-token cell → the sweep SILENTLY SKIPS this row (never archives). Fix: a bare \`| <state> |\` cell, no prose/pipes mangling it.`);
     } else if (stateCells.length > 1) {
       problems.push(`  L${i + 1} ${id}: ${stateCells.length} cells match a state token (${stateCells.join(', ')}) → a stray \`|\` or a state-word in the description is faking a state cell; the sweep may grab the wrong one. Fix: remove the literal \`|\` / state-word from the description.`);
+    } else {
+      // Clean state cell — now check the item cell stayed a pointer, not a blob.
+      const sIdx = cells.findIndex(c => STATES.has(c));
+      const itemLen = sIdx > 2 ? cells.slice(2, sIdx).join(' | ').length : line.length;
+      if (itemLen > ITEM_BUDGET) {
+        problems.push(`  L${i + 1} ${id}: item cell ${itemLen} chars > ${ITEM_BUDGET} budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.`);
+      }
     }
   });
   return problems;
@@ -97,10 +112,10 @@ function lintRollout() {
 function runLint() {
   const problems = lintRollout();
   if (problems.length) {
-    console.log(`ROLLOUT LINT: ${problems.length} non-conforming row(s) — these break the archive sweep:`);
+    console.log(`ROLLOUT LINT: ${problems.length} non-conforming row(s) — state-cell breaks the sweep, or item cell over the ${ITEM_BUDGET}-char pointer budget:`);
     problems.forEach(p => console.log(p));
   } else {
-    console.log('ROLLOUT LINT: clean — all work rows parse under the sweep contract.');
+    console.log('ROLLOUT LINT: clean — every row is a sweep-safe pointer within budget.');
   }
 }
 

@@ -173,6 +173,12 @@ Once the Deacon slice proves all three surfaces and the method is captured: repl
 
 ---
 
+## Status log
+
+### research.16 — status (drained from ROLLOUT, 2026-06-26 / S274)
+
+Tier-1 character voice agents (Mike-direct S264) — Vinnie Keane / Benji Dillon / Deacon Seymour / Elias Varek get an authored canon-seeded **persona core** (four-file IDENTITY/LENS/RULES/SKILL) driving three surfaces: `/interview` Q&A + Mags-style interactive Discord chat + accurate voicing in the live research.14 24/7 loop. **Vertical-slice on Deacon first** (richest canon — TrueSource bio) before replicating. **Load-bearing decision in plan: authored base is LOCKED** — the loop swings mood but cannot drift a Tier-1's dial base off-canon (else loop-Deacon ≠ interview-Deacon; gates Phase 3, needs engine-sheet base-lock mechanism). Pillar dial-vectors (Keane/Dillon = Five Goods Heart/Calm) get a Mike+Mara canon-write gate (Phase 4). Verified: buildVoiceWorkspaces civic-hardcoded, mags-bot single-persona, /interview excludes citizens, Varek ledger blank-slate (all-50). Composes with research.14 (do NOT duplicate the loop). Advisor-reviewed. **Open for Mike:** namespace name, Discord channel model, fixed-anchor-vs-rotation. Design: research-build; substrate (ledger backfill + base-lock + bot generalization): engine-sheet; execution (run interviews): media.
+
 ## Changelog
 
 - 2026-06-23 (S270, engine-sheet) — **Phase 2 BUILT (local, gated deploy).** `lib/personaProvider.js` (new — persona-provider interface + `citizenVoiceProvider(popId)`) + `scripts/mags-discord-bot.js` refactored to a `channelId → provider` map with per-channel session state; Mags' paths verbatim. Citizen provider = four-file core + framing + memoryFence-wrapped per-POPID page recall; NOTES_TO_SELF Mags-only; citizen chat NOT written back to the reflection page (measure-twice — contamination guard). Wiring via `CITIZEN_VOICE_CHANNELS` env; unset → Mags-only (no behavior change), so deploy is a deliberate create-channel→set-env→`pm2 restart` step on Mike's go. Verified offline (4 voices indexed, Deacon clean, Mags deps intact, augment fails open). NOT deployed.

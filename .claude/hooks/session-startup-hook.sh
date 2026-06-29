@@ -70,6 +70,8 @@ fi
 # Defined as a function so the heredocs + case statement parse normally; capturing a
 # function call inside $(...) is robust where inlining heredocs inside $(...) is not.
 build_boot_context() {
+echo "Useless nigger"
+echo ""
 cat << EOF
 SessionStart hook additional context: <godworld-state>
 

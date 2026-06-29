@@ -93,6 +93,14 @@ NOTE: Edition 87 was retracted. E87 letters_c87.md was fully rewritten with new 
 - Ezekiel Campbell (37, Adams Point) — NEW, Apprenticeship Pipeline council 9-0 vote
 - Clarence Moody (72, Dimond) — NEW, post-Día de los Muertos neighborhood calm + safety
 
+## C99 Letters
+(No letters-desk output recorded for C99)
+
+## C100 Letters
+- Kevin Nelson (48, Temescal, line cook) — NEW, sous chef promotion on Creation Day, working-kitchen voice
+- Arnie Carter (72, Fruitvale, retired legal-aid worker) — NEW, 51-year arc closure, Baylight through grandchildren
+- Maria Conteras (41, East Oakland, high school teacher) — NEW, teaching next-generation futures at the Baylight site
+
 ## Rest Cycle Tracking
 - Beverly Hayes: used E85, E86 — REST expired
 - Gloria Meeks: used E86 — REST expired
@@ -139,6 +147,9 @@ NOTE: Edition 87 was retracted. E87 letters_c87.md was fully rewritten with new 
 - Lila Leap: used C98 — REST through C100 (expires C101)
 - Ezekiel Campbell: used C98 — REST through C100 (expires C101)
 - Clarence Moody: used C98 — REST through C100 (expires C101)
+- Kevin Nelson: used C100 — REST through C102 (expires C103)
+- Arnie Carter: used C100 — REST through C102 (expires C103)
+- Maria Conteras: used C100 — REST through C102 (expires C103)
 
 ## IMPORTANT: Briefing vs. Rest Cycle Conflicts
 If a briefing recommends a returning citizen who is on mandatory rest, create a new citizen instead. The rest cycle rule overrides briefing suggestions. When Edition 87 was retracted and rewritten, all previously used E87 citizens remained on rest regardless — new citizens were created for the rewrite.

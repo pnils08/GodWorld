@@ -86,5 +86,11 @@ pointers:
 - [ ] Contract doc home: new `docs/mara-vance/INITIATIVE_TRACKER_CONTRACT.md`, or extend INITIATIVE_TRACKER_VOTER_LOGIC.md §Schema/§Lifecycle? (Lean: new dedicated doc; the voter-logic file is voter-logic.)
 - [ ] Does the `Status` column need the same contract treatment, or is it stable enough? (Research shows it's documented + auto-advance-ruled; lower priority.)
 
+## Status log
+
+### civic.14 — status (drained from ROLLOUT, 2026-06-26 / S274)
+
+Initiative_Tracker contract + fine-tune. Root: no phase contract exists (engine PHASE_INTENSITY = de-facto authority), writers free-form, unrecognized strings silently zeroed. **Phase 0 DONE S251** (C96 data stopgap). **Phase 1 DONE S256 (research-build)** — `docs/mara-vance/INITIATIVE_TRACKER_CONTRACT.md` authored (28-col schema + 20-phase ImplementationPhase vocab/intensities + per-Type lifecycle + add-procedure + drift rule), registered, city-hall read-pointer + civic.md + 5 project-agent RULES back-links, VOTER_LOGIC supersede note. Measure-twice catch: corrected 5 non-canonical example phases in the project-agent RULES that would have zeroed on emit (active-construction/pre-design/pre-deployment/disbursement-pending/pre-vote-visioning → live canonical). **NEXT → Phase 2 engine drift-tolerance (post-C96 clasp, engine-sheet) + Phase 3 writer-enforcement (the emit behavior-change) + Phase 4 add-initiative capability.**
+
 ## Changelog
 - 2026-06-01 (S251, engine-sheet) — Initial draft. Ignited from [[../research/2026-06-01-initiative-tracker-state]] during the engine.20c investigation. Phase 0 stopgap fenced from post-C96 code work per S250 deploy-attribution + S248 cycle-order. D1 mapping surfaced for Mike's canon ratify before any sheet write.

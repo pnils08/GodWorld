@@ -97,7 +97,7 @@ New per-session containers (`build`, `media`, `research`, etc.) would be ADDED a
 
 | Component | Status | What's needed |
 |-----------|--------|---------------|
-| Droplet (2GB, DO) | Running | Sufficient for now. 4GB if running Ollama + multiple sessions. |
+| Droplet (8GB, DO) | Running | Memory expanded. Plenty of headroom for bounded tests and multiple sessions. |
 | tmux | Running | Already keeps sessions alive |
 | PM2 | Running | Dashboard, Discord bot |
 | Remote Control | Account-gated | `claude remote` returns "not yet enabled." Waiting on Anthropic. |

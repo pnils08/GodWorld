@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-06-11 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-06-29 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -17,6 +17,9 @@
   Config: ctx.config.cycleCount
   Sheets: Simulation_Calendar
   RNG: ctx.rng / safeRand_(ctx)
+
+- **inWorldStamp_(ctx)**
+  Reads: S.absoluteCycle, S.cycle, S.cycleRef
 
 ### godWorldEngine2.js
 - **logEngineError_(ctx, phase, error)**
@@ -389,6 +392,76 @@
   Config: ctx.config.cycleCount, ctx.config.rngSeed
   RNG: ctx.rng / safeRand_(ctx)
 
+### chaosCarsEngine.js
+- **chaosEventId_(rng)**
+
+- **pickFromArrayChaos_(rng, arr)**
+
+- **weightedPickChaos_(rng, items, weightFn)**
+
+- **pickEventCount_(rng)**
+
+- **pickVehicle_(rng, configs)**
+
+- **rollOutcome_(rng, vehicle, scope)**
+
+- **sampleMagnitude_(rng, impact)**
+
+- **impactsForScope_(vehicle, scope, outcomeName)**
+
+- **pickCitizenTarget_(rng, ctx)**
+
+- **loadBusinessRows_(ctx)**
+  Sheets: Business_Ledger
+
+- **pickBusinessTarget_(rng, ctx)**
+
+- **loadNeighborhoodNames_(ctx)**
+  Sheets: Neighborhood_Map
+
+- **pickNeighborhoodTarget_(rng, ctx)**
+
+- **writeCitizenEvent_(ctx, target, vehicle, outcome, cycle, text)**
+
+- **accumulateBusinessEvent_(ctx, target, impacts, magnitudesByColumn)**
+  Writes: S.chaosBusinessFold
+
+- **flushBusinessFold_(ctx)**
+  Reads: S.chaosBusinessFold, S.chaosNeighborhoodFold, S.neighborhoodPulse
+
+- **accumulateNeighborhoodFold_(ctx, hood, impacts, magnitudesByColumn)**
+  Writes: S.chaosNeighborhoodFold
+
+- **readChaosNeighborhoodStore_()**
+
+- **writeChaosNeighborhoodStore_(fold)**
+
+- **resolveChaosNeighborhoodFold_(ctx)**
+  Writes: S.chaosNeighborhoodFold
+
+- **pickTargetByScope_(rng, ctx, scope)**
+
+- **runChaosCarsEngine_(ctx)**
+  Reads: S.absoluteCycle, S.cycle, S.cycleId
+  Writes: S.chaosCarsEvents, S.tier1ChaosEvents
+  Config: ctx.config.cycleCount
+  RNG: ctx.rng / safeRand_(ctx)
+
+- **chaosEventText_(vehicle, outcome, target, scope)**
+  Reads: S.chaosFriction
+
+- **writeChaosFrictionLog_(ctx, cycle, friction)**
+  Writes: S.chaosFriction
+
+### chaosCarsEngine.test.js
+- **assert(label, cond, detail)**
+
+- **rngFrom(seed)**
+
+- **makeCtx(seed)**
+
+- **reset()**
+
 ### eventArcEngine.js
 - **getCurrentCycle_(ctx)**
   Reads: S.absoluteCycle, S.cycleCount, S.cycleId
@@ -515,6 +588,16 @@
   RNG: ctx.rng / safeRand_(ctx)
 
 ## Phase 5: Citizens (`phase05-citizens/`)
+
+### applyChaosDecay.js
+- **applyChaosDecay_(ctx)**
+  Reads: S.cycle
+  Sheets: Business_Ledger, Chaos_Cars
+
+### applyChaosDecay.test.js
+- **assert(label, cond, detail)**
+
+- **ctxWith(cycle, cc, bl)**
 
 ### applyNamedCitizenSpotlight.js
 - **applyNamedCitizenSpotlights_(ctx)**
@@ -886,14 +969,6 @@
 - **generateMonthlyCivicSweep(ssOverride)**
   Sheets: Civic_Sweep_Report, Simulation_Ledger, World_Population
 
-### generateNamedCitizensEvents.js
-- **generateNamedCitizenEvents_(ctx)**
-  Reads: S.cityDynamics, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.season, S.sportsSeason, S.weather, S.weatherEventPools, S.weatherMood, S.worldEvents
-  Writes: S.cycleActiveCitizens, S.eventsGenerated
-  Config: ctx.config.cycleCount
-  Sheets: LifeHistory_Log, Simulation_Ledger
-  RNG: ctx.rng / safeRand_(ctx)
-
 ### generationalWealthEngine.js
 - **processGenerationalWealth_(ctx)**
   Reads: S.cycleId
@@ -1007,6 +1082,8 @@
 
 ### processAdvancementIntake.js
 - **pickDemographicVoiceRole_(seed)**
+
+- **markUsageProcessed_(ctx, usageSheet, row1, col1, value)**
 
 - **processAdvancementIntake_(ctx)**
   Reads: S.cycleId
@@ -1377,7 +1454,7 @@
 
 ### applyStorySeeds.js
 - **applyStorySeeds_(ctx)**
-  Reads: S.cityDynamics, S.civicLoad, S.crimeMetrics, S.cycleId, S.cycleWeight, S.cycleWeightReason, S.domainPresence, S.editionCoverageTriggers, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.manualStoryInputs, S.migrationDrift, S.namedSpotlights, S.patternFlag, S.season, S.seasonalStorySeeds, S.shockFlag, S.sportsSeason, S.storySeedsUI, S.weather, S.worldEvents, S.worldPopulation
+  Reads: S.chaosCarsEvents, S.cityDynamics, S.cityEvents, S.civicLoad, S.crimeMetrics, S.cycleId, S.cycleWeight, S.cycleWeightReason, S.domainPresence, S.editionCoverageTriggers, S.eveningMedia, S.eventArcs, S.famousPeople, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.manualStoryInputs, S.migrationDrift, S.namedSpotlights, S.patternFlag, S.season, S.seasonalStorySeeds, S.shockFlag, S.sportsSeason, S.storySeedsUI, S.textureTriggers, S.tier1ChaosEvents, S.weather, S.worldEvents, S.worldPopulation
   Writes: S.activeStorylineCount, S.storySeeds
   Config: ctx.config.cycleCount, ctx.config.manualStoryInputs
   Sheets: Edition_Coverage_Ratings, Storyline_Tracker
@@ -1673,9 +1750,17 @@
   Config: ctx.config.cycleCount
   Sheets: Storyline_Tracker
 
+### storylineWeavingEngine.chaos.test.js
+- **assert(label, cond, detail)**
+
 ### storylineWeavingEngine.js
 - **weaveStorylines_(ctx)**
+  Reads: S.tier1ChaosEvents
   Writes: S.storyHooks, S.storylineWeaving
+  Config: ctx.config.cycleCount
+
+- **createChaosArcs_(ctx)**
+  Reads: S.tier1ChaosEvents
   Config: ctx.config.cycleCount
 
 - **loadActiveStorylinesForWeaving_(ss)**
@@ -1827,7 +1912,7 @@
 - **pulseFoldDelta_(pulse, key)**
 
 - **saveV3NeighborhoodMap_(ctx)**
-  Reads: S.cityDynamics, S.cycleId, S.demographicDrift, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.migrationDrift, S.neighborhoodPulse, S.sportsSeason, S.storyHooks, S.storySeeds, S.v3Arcs, S.weather, S.worldEvents
+  Reads: S.chaosNeighborhoodFold, S.cityDynamics, S.cycleId, S.demographicDrift, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.migrationDrift, S.neighborhoodDynamics, S.neighborhoodPulse, S.sportsSeason, S.storyHooks, S.storySeeds, S.v3Arcs, S.weather, S.worldEvents
   Config: ctx.config.cycleCount
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -2031,6 +2116,8 @@
 ### persistenceExecutor.js
 - **executePersistIntents_(ctx)**
 
+- **persistWithRetry_(fn, label)**
+
 - **executeEnsureIntent_(ctx, intent)**
 
 - **executeReplaceIntent_(ctx, intent)**
@@ -2079,6 +2166,15 @@
   Config: ctx.config.cycleCount
   Sheets: WorldEvents_V3_Ledger
   RNG: ctx.rng / safeRand_(ctx)
+
+### saveChaosCars.js
+- **chaosTimestampUtc_(ctx)**
+  Reads: S.cycleRef
+
+- **writeChaosCarsRow_(ctx, payload)**
+
+### saveChaosCars.test.js
+- **assert(label, cond, detail)**
 
 ### saveV3Seeds.js
 - **saveV3Seeds_(ctx)**
@@ -2140,6 +2236,19 @@
 
 ## Utilities (`utilities/`)
 
+### archiveLifeHistory.js
+- **archiveLifeHistory()**
+
+- **archiveLifeHistoryDryRun()**
+
+- **maintainLifeHistoryLog_(ctx)**
+  Sheets: LifeHistory_Log
+
+- **runArchive_(dryRun, opts)**
+  Sheets: LifeHistory_Archive, LifeHistory_Log
+
+- **logCycleSummary_(rows, iCycle, label)**
+
 ### bylineEngine.js
 - **categorizeConfidence_(topScore, secondScore)**
 
@@ -2170,6 +2279,34 @@
 - **scoreAllBylines_(seed, state)**
 
 - **_runBylineSelfTests_()**
+
+### chaosCarsConfig.js
+- **validateOutcome(outcomeText)**
+
+- **validateVehicleConfig(config)**
+
+- **escapeRegExpChaos_(s)**
+
+- **isArrayChaos_(x)**
+
+- **loadChaosCarsConfig_()**
+
+- **validateAllChaosConfigs_()**
+
+### chaosCarsConfig.test.js
+- **assert(label, cond, detail)**
+
+- **assertThrows(label, fn, expectedMessageFragment)**
+
+### chaosCarsDecay.js
+- **chaosDecayFraction_(column, residual)**
+
+- **chaosDecayResidualOneCycle_(residual, column)**
+
+- **chaosResidualAfter_(initialMagnitude, column, cyclesSince)**
+
+### chaosCarsDecay.test.js
+- **assert(label, cond, detail)**
 
 ### citizenDerivation.js
 - **canonicalRolesSet_()**
@@ -2221,6 +2358,8 @@
 
 - **nudgesForEvent_(tag, severityMult, text)**
 
+- **nudgesForReflection_(eventTag, affectTag, severityMult, text)**
+
 - **hasTag_(tag, text)**
 
 ### citizenMemory.js
@@ -2235,6 +2374,10 @@
 - **applyEvent_(c, event)**
 
 - **applyTaggedEvent_(c, tag, dialMap, severityMult)**
+
+- **applyReflectionDualTag_(c, eventTag, affectTag, dialMap, severityMult)**
+
+- **accreteReflectionsIntoBase_(c, reflections, dialMap, mult, frac)**
 
 - **settleCycle_(c)**
 
@@ -2252,7 +2395,20 @@
 
 - **deserialize_(obj)**
 
+- **accrueChaos_(c, severity, type, cycle)**
+
+- **checkChaosReaction_(c)**
+
+- **applyChaosReaction_(c)**
+
+- **decayChaosExposure_(c, currentCycle)**
+
+### citizenNames.js
+_No top-level function declarations found (helper/constants file)._
+
 ### compressLifeHistory.js
+- **readPendingReflections_(ctx)**
+
 - **compressLifeHistory_(ctx, options)**
   Reads: S.absoluteCycle, S.cycleId
   Writes: S.lifeHistoryCompression
@@ -2692,6 +2848,9 @@
 
 - **runTextCrawler()**
 
+### tier1EssenceEvents.js
+_No top-level function declarations found (helper/constants file)._
+
 ### utilityFunctions.js
 - **pickRandom_(arr, rng)**
 
@@ -2783,5 +2942,5 @@
 
 ---
 
-**Files scanned:** 159
-**Functions mapped:** 948
+**Files scanned:** 172
+**Functions mapped:** 1011

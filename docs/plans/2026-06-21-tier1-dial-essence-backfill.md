@@ -102,6 +102,12 @@ The base this plan seeds is the floor; the write-back (Seam C) moves `mood`/`str
   - **Ellis / Taveras / Ramos (42 / 34 / 21) → genuinely faint, faithful as-is.** Reaching 60 needs a 2nd/3rd high dial their canon doesn't support (Ramos is an explicit "baseline athlete," 4 events); they won't clear even with engine.39. A lightly-canonized rookie reading near-neutral is correct. **No action — ever.** Forcing them over the gate would be fabrication.
 - [ ] Engine-sheet live write + live verify (handoff — 4 faces flagged ready in SESSION_CONTEXT NEXT[engine-sheet]; A's follow once Tier-3 lands or as a batch).
 
+## Status log
+
+### engine.39 — status (drained from ROLLOUT, 2026-06-26 / S274)
+
+**`citizenDialMap` pure-integrity (and pure-warmth) tag — small additive map change.** Surfaced by research.18 Tier-1 dial-essence authoring (S265): `integrity` is only reachable via the `Reputation` tag, which also adds `sociability`, and no event can drive a dial *below* neutral — so "silent workhorse / unsung / principled-but-private" archetypes (Rivas, Richards, Isley, Benji) **cannot read low-social**; they land `sociability` ~60 (faint-high) when canon wants quiet. Fix = add a pure-integrity tag (e.g. `Principled {integrity:4}`) + optionally a pure-warmth tag, so principled/warm temperament decouples from sociability/family events. **Additive only** — new tag, no existing `DIAL_MAP` entry touched (same care as the S264 dual-tag work that kept DIAL_MAP byte-unchanged); clasp-deploy with the next dial change. Design + rationale in the research.18 plan §roster status. Non-blocking (current authoring absorbs it via the `moderate` band). **BUILT S270 (engine-sheet, local commit, clasp-gated):** added `Principled {integrity:4}` + `Warm {warmth:4}` (additive only, exact-tag match wins → zero behavior change for existing data; composer Test 8 green). Deploys on the next deliberate clasp window with the research.14 drain + processAdvancementIntake migration; **then re-run `seedTier1EssenceLive.js` → clear Sarah/Rivas past dev≥60 + bundle the Dane/council vhigh-integrity re-upgrade.**
+
 ## Changelog
 
 - 2026-06-21 — Initial draft + POC validated (S265, research-build). Seam A of the citizen-loop closure (Mike's loop). Mechanism: complete-the-history, not shield-Tier-1. 4 faces proven 32/32. Roster tiered by canon source per Mike's guidance (voiced agents easy / A's from coverage / family-planner-GM from canon). Filed as research.18.

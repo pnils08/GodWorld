@@ -163,6 +163,12 @@ citizen-Mags (autonomous, in-sim) generates an ever-accumulating corpus of *her 
 - Confirm zero ingest path: nothing from `output/poc_citizen_life/` reaches editions / bay-tribune / world-data / Supermemory.
 - Write the go/no-go to the changelog and update the `research.13` ROLLOUT row.
 
+## Status log
+
+### research.13 — status (drained from ROLLOUT, 2026-06-26 / S274)
+
+Citizen-autonomous PoC — narration-only life-loop (Layer 3 toe-dip). 1–2 Tier-1 citizens wake on a timer (spacemolt-miner shape), read a five-piece sports-aware wake-context (own ledger row + neighborhoodSlice + world-summary slice + Oakland_Sports_Feed + own rolling memory), narrate one cycle of life to a throwaway file, sleep, repeat ~1hr. Analyze-only, zero ingest path; answers research.9's four questions (character-hold / canon-sync / token bill / usability) → go/no-go on the real Layer-3 build (engine action menu). **Unblocked** (40.2 gates the interview build research.9, not a reporterless loop; 40.6 injection-defense done). **BUILT S249, MECHANISM smoke-validated** (`scripts/citizenLifePoC.js`): 2 Tier-1 ENGINE citizens × 2 turns, c95. Smoke PROVED mechanism (5-piece assembly + memory threading + cost + isolation) + early strong read on usability (publishable texture) & cost (~2.77K tok/wake; 10×24/day ≈ 665K, tractable; prompt-caching cuts ~80%). **STILL UNTESTED:** Q1 horizon character-hold (2 turns can't show turn-3 drift) + Q2 self-fidelity (eval checked external canon only, not own-row honoring). **Verdict GO** on scoping the engine action menu — NOT "Layer 3 proven." Finding: Tier-1 ENGINE rows skew notable (Lucia Codex-Linked; Varek no bio) → everyday test = Tier-2/3.
+
 ## Changelog
 
 - 2026-05-31 (S249, research-build) — **BUILT; mechanism smoke-validated (NOT the full PoC).** `scripts/citizenLifePoC.js` written (dry-run + live modes, `--citizens/--turns/--interval/--memory/--max-tokens/--model/--dry-run/--force`, hard turn cap, cost guard, per-citizen state snapshot for crash-resume). Reuses `lib/neighborhoodSlice.js`; reads `Simulation_Ledger` + `Neighborhood_Map` + latest `output/world_summary_cXX.md`; writes throwaway `output/poc_citizen_life/` (git-ignored — isolation confirmed at the git layer). **Smoke run: 2 Tier-1 ENGINE citizens (Lucia Polito / Elias Varek) × 2 turns, c95 context.**

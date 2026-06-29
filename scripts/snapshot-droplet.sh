@@ -3,8 +3,8 @@
 # Automated Droplet Snapshot — Phase 8.3
 # ============================================================================
 #
-# Takes a weekly snapshot of the GodWorld droplet and rotates old ones.
-# Keeps the 4 most recent snapshots (1 month of weekly backups).
+# Takes a monthly snapshot of the GodWorld droplet and rotates old ones.
+# Keeps the 1 most recent snapshot (a single rolling restore point).
 #
 # Usage:
 #   ./scripts/snapshot-droplet.sh          # run manually
@@ -30,7 +30,7 @@ fi
 
 DROPLET_ID="549312661"
 SNAPSHOT_PREFIX="godworld-auto"
-KEEP_COUNT=4
+KEEP_COUNT=1
 DATE_TAG=$(date +%Y-%m-%d)
 SNAPSHOT_NAME="${SNAPSHOT_PREFIX}-${DATE_TAG}"
 API="https://api.digitalocean.com/v2"

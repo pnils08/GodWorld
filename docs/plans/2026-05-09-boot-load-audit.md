@@ -537,6 +537,16 @@ The §8 sharpened answers stand unchanged after the broader review. Q2 / Q3 / Q4
 - Boot architecture (referenced from CLAUDE.md): `docs/BOOT_ARCHITECTURE.md`
 - Skills: `.claude/skills/boot/SKILL.md` + `.claude/skills/session-startup/SKILL.md`
 
+## Status log
+
+### governance.3 — status (drained from ROLLOUT, 2026-06-26 / S274)
+
+Mags-at-/root steward layer — future build when /root holds projects beyond GodWorld. Today /root is greenfield (no CLAUDE.md, no rules dir, no PERSISTENCE, no SESSION_CONTEXT). Spec gives no guidance on multi-project hierarchy; this is a GodWorld-internal architecture choice deferred until the constraint actually exists (more than one project under /root).
+
+### governance.8 — status (drained from ROLLOUT, 2026-06-26 / S274)
+
+Plugin gating per terminal — investigation: does Claude Code support per-terminal plugin disable, or `ECC_DISABLED_HOOKS`-style env-var control (Affaan-m pattern)? ~13 plugins auto-load universally today; engine-sheet (Stripped) gets the same plugin tool definitions as mags/media (Full). If gating is possible, engine-sheet gains the most (skips plugin hooks irrelevant to its scope).
+
 ## Changelog
 
 - 2026-05-09 (S210, research-build) — Initial audit. Pre-redesign data dump only; restructure proposal awaits joint review of these findings.

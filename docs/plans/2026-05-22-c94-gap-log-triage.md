@@ -429,6 +429,16 @@ Next research-build session (after Mike review of this triage):
 
 ---
 
+## Status log
+
+### civic.13 — status (drained from ROLLOUT, 2026-06-26 / S274)
+
+City-hall engine-sheet reconciliation (engine-sheet half of civic.12). **CLOSED:** G-R1 tracker assembler + G-PREP5 D6 Crane roster (S246 ES-5/ES-6, governance.25 archive); G-PREP4 world_summary reconcile + G-PREP7 approval-delta (S249 `6fcc718`). **OPEN: G-PREP6** — KONO neighborhood profile (Neighborhood_Map row exists but no v3NeighborhoodWriter profile); blocked on civic.10b / engine.8 header-drift sweep.
+
+### governance.18 — status (drained from ROLLOUT, 2026-06-26 / S274)
+
+C12 boot-conditioning residual — **OPEN: item (a) journal-cadence rewrite** (G-EPD8 residual, media scope — journal write timing + content shape relative to boot conditioning; candidate write surfaces: session-end SKILL Step 1 or a static User Profile claim via `/save-to-profile`). Items (b) shipped-block visual demote + (c) boot-greeting sensory rewrite **DONE S238** — full closure detail in the plan §C12 Closure log.
+
 ## Changelog
 
 - 2026-05-22 — Initial draft (S224, research-build). Maps 146 C94 gap entries across 9 source files into 16 candidate ROLLOUT clusters following S215 C93 triage precedent. Phase 1 deliverable; Phase 2 (row-filing + source-stamping) deferred to next research-build session pending Mike review of cluster shape.

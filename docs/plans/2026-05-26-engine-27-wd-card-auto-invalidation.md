@@ -382,6 +382,12 @@ Four trigger options were filed in the original engine.27 row:
 
 ---
 
+## Status log
+
+### engine.27 — status (drained from ROLLOUT, 2026-06-26 / S274)
+
+wd-card auto-invalidation hook — upstream sheet writes (Sim_Ledger/Business/Cultural/Faith/Chicago) trigger downstream wd-card rebuilds. **Phase A DONE + LIVE S242** (daemon `scripts/wdCardsDaemon.js` under pm2 id 4, 300s poll; A1–A8; live loop proven end-to-end). **OPEN: Phase B** (Phase 10 cycle-end marker hook, Apps Script) + **Phase C** (monitoring/tuning) + 2 trailing non-blockers (pm2-save persistence, one-time --rebuild-all backlog). **S270 readiness assessment (engine-sheet):** Phase A daemon healthy (online 19d, 2 restarts, pm2 `wd-cards-daemon`); it already row-hash-diffs all 4 projections per poll → coverage complete, only ≤5min lag at cycle handoff remains. **B2a (writeIntents row-ID enrichment) is AVOIDABLE** — read the intent shapes (`utilities/writeIntents.js`): cell intents carry row-index+col but NOT POPID, mid-sheet range intents lack col A, so an Apps Script hook can't enumerate exact POPIDs without a sheet read or the B2a refactor; BUT the daemon already computes exact changed IDs via its diff, so the marker only needs to name the **projection touched** (trigger, not payload). Collapses Phase B to B1+B2+B3+B4, no B2a. **DISPOSITION: build HELD post-C100 (deploy-attribution).** B2 is Apps Script → would ride the next clasp push as a 4th change (alongside tier1EssenceEvents rider + Row 8 processAdvancementIntake migration + 2 manual deletes), breaking attribution on the C100 chaos window. Phase A covers the gap at ≤5min meanwhile. Sequence Phase B as its own deliberate build+deploy AFTER C100 chaos + Row 8 clear. Pattern: feedback_measure-twice-cascading-effects
+
 ## Changelog
 
 - 2026-05-26 — Plan written (S238 engine-sheet). Hybrid option (d) recommended; 3-phase rollout. Filed for engine.27 row state transition `needs-info` → `ready`.

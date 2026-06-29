@@ -1,7 +1,7 @@
 ---
 title: Photo Pipeline Rebuild Plan
 created: 2026-04-25
-updated: 2026-04-25
+updated: 2026-06-29
 type: plan
 tags: [media, research, active]
 sources:
@@ -122,7 +122,7 @@ If a task appears to require editing DJ's agent files, stop and re-read this gua
   3. Pass instruction: "produce 5–8 image specs matching the shape in §Worked Example of `docs/plans/2026-04-25-photo-pipeline-rebuild.md`"
   4. DJ returns spec array; script writes `output/photos/e{XX}/dj_direction.json`
 - **Verify:** `node scripts/djDirect.js 92` writes valid JSON with 5–8 specs meeting AC #1
-- **Status:** [ ] not started
+- **Status:** [x] DONE S188 — `scripts/djDirect.js` shipped (`a1fa7c5c`, later schema-fix `47c26957` S235). Verified-state reconcile S277.
 
 ### Task 6: Refactor `generate-edition-photos.js`
 
@@ -134,7 +134,7 @@ If a task appears to require editing DJ's agent files, stop and re-read this gua
   4. Save image to `output/photos/e{XX}/{slug}.png` (slug from DJ spec)
   5. Write per-image metadata sidecar `{slug}.meta.json` (full spec + provider + cost + timestamp)
 - **Verify:** `node scripts/generate-edition-photos.js 92` produces 5–8 images named after DJ slugs; sidecar JSONs present; no synthesis code remains
-- **Status:** [ ] not started
+- **Status:** [x] DONE S188 — script consumes `dj_direction.json` (line 160); `extractScene`/`buildPhotoPrompt` synthesis removed (zero matches). Verified-state reconcile S277.
 
 ### Task 7: Fix `photoQA.js`
 
@@ -144,7 +144,7 @@ If a task appears to require editing DJ's agent files, stop and re-read this gua
   2. If rubric flagged: rebuild rubric to read DJ's spec sidecar and ask Haiku to verify against spec — specifically negative-frame constraints
   3. Output: per-image verdict `{slug}.qa.json` with pass/flag/fail + reasoning
 - **Verify:** `node scripts/photoQA.js output/photos/e92` produces real verdicts; spot-check one fail + one pass
-- **Status:** [ ] not started
+- **Status:** [x] DONE S188 — `photoQA.js` emits real verdicts + `specCompliance.negativeFramePass` (lines 224–225) reading DJ sidecar. Verified-state reconcile S277.
 
 ### Task 8: Add regen-on-fail loop
 
@@ -156,7 +156,7 @@ If a task appears to require editing DJ's agent files, stop and re-read this gua
   4. If still fails: mark `editorial-flag` in sidecar; continue (do not halt)
   5. Log all regen attempts to print pipeline production log
 - **Verify:** simulate a fail; confirm 1 retry fires; second fail flagged + pipeline continues
-- **Status:** [ ] not started
+- **Status:** [x] DONE S197 (BUNDLE-E `5a96b5b`) — regen-on-fail + `editorialFlag` shipped. **AC drift:** cap is **2 retries (3 total attempts)**, not 1 — BUNDLE-E revised the S176 default. Verified-state reconcile S277.
 
 ### Task 9: Drop month-year from masthead (cycles-only)
 
@@ -172,7 +172,7 @@ If a task appears to require editing DJ's agent files, stop and re-read this gua
   2. Update each compile step to emit `Bay Tribune | Cycle {N} | {Season}` — drop "Month YYYY" portion
   3. Update `lib/editionParser.js` date-regex section to be a no-op or remove (PDF generator's `parsed.date` line will become empty; masthead-meta join handles missing date gracefully — confirm by re-reading PDF generator lines 393–397)
 - **Verify:** generate any test edition; first line reads `Bay Tribune | Cycle {N} | {Season}` with no month-year token
-- **Status:** [ ] not started
+- **Status:** [x] DONE — masthead now emits `Bay Tribune | Cycle {N} | Y{n}C{m} | {Season}, {Week}` (`write-edition` SKILL.md:173); no month-year token. Verified-state reconcile S277.
 
 ### Task 10: Update `/edition-print` SKILL.md
 
@@ -182,7 +182,7 @@ If a task appears to require editing DJ's agent files, stop and re-read this gua
   2. Update §Step 2 to describe regen-on-fail loop
   3. Remove "Future (Phase 21.3)" note — it's now current
 - **Verify:** SKILL.md reflects implemented architecture; no stale "Future" reference
-- **Status:** [ ] not started
+- **Status:** [x] DONE S188 (edition-print SKILL v1.2) — two-stage `djDirect.js` flow documented; "Future (Phase 21.3)" note removed. Verified-state reconcile S277.
 
 ### Task 11: Wire alternate-start convergence
 
@@ -194,7 +194,7 @@ If a task appears to require editing DJ's agent files, stop and re-read this gua
   1. Add a final step to each: "After publication, run `/edition-print {XX}` if output warrants visual assets"
   2. Document trigger condition (supplementals always; dispatch + interview at editorial discretion)
 - **Verify:** all three skills have explicit `/edition-print` trigger language
-- **Status:** [ ] not started
+- **Status:** [x] DONE — `dispatch` (`/edition-print --type dispatch`, SKILL.md:207) + `write-supplemental` (`--type supplemental`, SKILL.md:527) wired. `interview` **intentionally drops** `/edition-print` (G-I13: transcripts carry no photos) — by-design exclusion, not a gap. Verified-state reconcile S277.
 
 ### Task 12: A/B test — Together AI vs OpenAI gpt-image-1
 
@@ -207,7 +207,7 @@ If a task appears to require editing DJ's agent files, stop and re-read this gua
   5. Run `photoQA.js` against both; produce `output/photos/e92_bakeoff/comparison.md`
   6. Surface: cost per image, QA pass rate, negative-prompt adherence
 - **Verify:** comparison report exists; provider winner identified
-- **Status:** [ ] not started
+- **Status:** [ ] NOT STARTED (confirmed S277 — `scripts/photoProviderBakeoff.js` absent). Genuine residual.
 
 ### Task 13: Smoke test — E92 reprint
 
@@ -217,7 +217,7 @@ If a task appears to require editing DJ's agent files, stop and re-read this gua
   2. Run `/edition-print 92`
   3. Verify all acceptance criteria green on real output
 - **Verify:** all 7 acceptance criteria pass; Mike review of resulting photos vs original C92 set
-- **Status:** [ ] not started
+- **Status:** [ ] NOT STARTED (confirmed S277 — `output/photos/e92_bakeoff/` absent; depends on T12). Genuine residual.
 
 ---
 
@@ -260,4 +260,5 @@ DJ produces 5–8 of these per journalism skill output. Coverage spreads across:
 ## Changelog
 
 - 2026-04-25 — Initial draft (S176, research-build terminal). Drafted from ROLLOUT_PLAN §Edition Production REBUILD entry. Incorporates S176 Mike calls: TOGETHER_API_KEY operational; OpenAI gpt-image-1 evaluation deferred to A/B task; regen retry default 1 then editorial flag; DJ four-file canon-fidelity structure (S174/S175) LOCKED. 13 tasks, one open question.
+- 2026-06-29 — Verified-state reconcile (S277, research-build). Per-task statuses were WHOLESALE STALE (T5–T13 still marked "[ ] not started"). Code-checked each: **T5–T11 SHIPPED** (T5 `djDirect.js`; T6 `dj_direction.json` consumer + synthesis removed; T7 `photoQA.js` `specCompliance.negativeFramePass`; T8 regen-on-fail/`editorialFlag`, cap **2 retries** not 1 — AC#4 drift noted; T9 masthead month-year dropped; T10 edition-print SKILL v1.2 two-stage flow; T11 dispatch+supplemental wired, interview intentionally excluded per G-I13). **Genuine residual = T12 (provider A/B bakeoff — `photoProviderBakeoff.js` absent) + T13 (E92 reprint smoke — depends on T12).** Both are verification/tuning, not core build. ROLLOUT pipeline.13 row to be updated in same close.
 - 2026-04-25 — Tasks 1–4 closed (S176, research-build terminal). Audits done for `generate-edition-photos.js`, `photoQA.js`, `generate-edition-pdf.js`. Task 3 surfaced scope revision: PDF script has no hardcoded date — masthead inherits from journalism-skill compile output. Per Mike "we don't use months anymore we use cycles," Task 9 revised from "fix PDF script" to "drop month-year from masthead emission across journalism skills." Task 4 §Worked Example written (Temescal Health Center site fence, 143 words, in DJ voice). Hand-off ready for media terminal at Task 5.

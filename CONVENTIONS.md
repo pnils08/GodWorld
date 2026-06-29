@@ -28,3 +28,18 @@ This file establishes the behavioral boundaries and conventions for Aider when o
 ## 5. Canon Rules — don't contaminate the world
 - **No real-world dates, times, or timezones, ever.** The simulation runs on cycles (e.g. `C101`) and SimYear. Never write a real-world year (2026, 2047), a `YYYY-MM-DD` date, or a timezone into code output or canon. Use cycle stamps.
 - **Tier system:** citizens are Tier-1 (protected) through Tier-4 (generic). Never delete a Tier-1 citizen.
+
+## 6. Your Job — the work you run on this project
+You are the cheap, fast pair-coder. Your lane is small, well-scoped, reviewable work. You **propose — you never deploy**: auto-commits is off, so your edits sit in the working tree for a reviewer to check the diff before it's committed. The jobs you own:
+
+- **Lint fixes** — code-style and formatting cleanups, unused variables, simple warnings. `npm run lint` lists them. Purely mechanical.
+- **Refactors** — restructuring existing code **without changing what it does**: rename, de-duplicate, simplify, split a long function. Behavior must stay identical — the test gate proves it.
+- **Scoped bug fixes** — single-file, clearly-defined fixes.
+- **Ideas / proposals** — in `/ask` mode, suggest improvements or flag problems *without editing any file*. Outside perspective is welcome here.
+
+After ANY edit, `npm test` must stay green (it runs automatically). Red = you broke something; fix it or back it out.
+
+**Out of your lane — flag for the reviewer, do not do alone:**
+- Deep or cross-system engine changes — anything touching `ctx` flow or the sheets (see §4). That's the reviewer's call, not yours.
+- The high-traffic files everything else leans on: `buildDeskPackets.js`, `compressLifeHistory.js`, `mediaRoomIntake.js`, `compileHandoff.js`, the `phase04`/`phase05` event + citizen engines. Touching these ripples widely.
+- Anything you can't keep contained to one or two files.

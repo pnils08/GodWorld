@@ -224,6 +224,7 @@ function writeCitizenEvent_(ctx, target, vehicle, outcome, cycle, text) {
   var iLast = header.indexOf('Last');
   var iPop = header.indexOf('POPID');
   var iNb = header.indexOf('Neighborhood');
+  var iDialState = header.indexOf('DialState');
   var row = rows[target.rowIndex];
 
   // The bracket tag in col O MUST be a real DIAL_MAP tag, else compressLifeHistory folds it
@@ -243,10 +244,29 @@ function writeCitizenEvent_(ctx, target, vehicle, outcome, cycle, text) {
   rows[target.rowIndex] = row;
   ctx.ledger.dirty = true;
 
+  // engine.42 chaos-trauma (S275): this hit feeds the citizen's persisted, cross-cycle
+  // chaos accumulator carried on DialState. accrueChaos_ bumps the count (severity from
+  // outcome.severity, type = vehicle); applyChaosReaction_ applies a ONE-TIME labeled break
+  // (wary -> traumatized) to base when repetition crosses the threshold — the second tier on
+  // top of the [dialTag] fold above. DialState (de)serializes via the same clasped globals
+  // compress (Phase 9) uses, so the two cycle-path DialState writers compose without clobber
+  // (compress preserves chaosExposure + lazy-decays it). Cross-cycle persistence is mandatory:
+  // ctx.summary folds reset each cycle, so the threshold could never accumulate there.
+  var chaosReactionTag = '';
+  if (iDialState >= 0) {
+    var dc = deserialize_(parseDialState_(row[iDialState] || ''));
+    accrueChaos_(dc, outcome.severity, vehicle.name, cycle);
+    var reaction = applyChaosReaction_(dc);
+    if (reaction) chaosReactionTag = '|' + reaction.tags[0];  // chaos:wary | chaos:trauma
+    row[iDialState] = serializeDialState_(dc);
+    rows[target.rowIndex] = row;
+  }
+
   // LifeHistory_Log archive row — live 7-col schema. EventTag = "{DialTag}|chaos_cars|{vehicle}"
-  // (PrimaryTag is the real DIAL_MAP tag; chaos_cars + vehicle are provenance).
+  // (+ chaos:wary/chaos:trauma when this hit triggered a fresh break — legible provenance).
+  // (PrimaryTag is the real DIAL_MAP tag; chaos_cars + vehicle are provenance.)
   var name = ((iFirst >= 0 ? row[iFirst] : '') + ' ' + (iLast >= 0 ? row[iLast] : '')).toString().trim();
-  var eventTag = dialTag + '|chaos_cars|' + vehicle.name;
+  var eventTag = dialTag + '|chaos_cars|' + vehicle.name + chaosReactionTag;
   queueAppendIntent_(ctx, 'LifeHistory_Log',
     [inWorldStamp_(ctx), (iPop >= 0 ? row[iPop] : target.popId), name, eventTag, text,
       (iNb >= 0 ? (row[iNb] || '') : target.neighborhood), cycle],
@@ -505,6 +525,7 @@ if (typeof module !== 'undefined' && module.exports) {
     pickFromArrayChaos_: pickFromArrayChaos_,
     chaosEventId_: chaosEventId_,
     resolveChaosNeighborhoodFold_: resolveChaosNeighborhoodFold_,
+    writeCitizenEvent_: writeCitizenEvent_,
     runChaosCarsEngine_: runChaosCarsEngine_
   };
 }

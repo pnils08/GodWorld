@@ -37,6 +37,15 @@ var MOOD_DECAY = 0.8;       // temporary swing fades 20%/cycle back toward basel
 var HARDEN_STREAK = 3;      // same-direction push sustained N times -> permanent baseline shift
 var HARDEN_FRACTION = 0.4;  // fraction of a sustained swing that bakes in permanently
 
+// engine.42 chaos-trauma accumulator (S275). A SECOND, faster-threshold accumulator
+// running parallel to harden: repeated chaos-cars hits on one citizen escalate to a
+// labeled break (wary -> traumatized) that hardens base ONCE per escalation, on TOP of
+// each hit's own gradual DIAL_MAP fold. "Random repetition changes the citizen faster"
+// (Mike, S275). Chaos is sparse per citizen (~3-15 events/cycle over ~900), so the count
+// MUST persist on DialState across cycles or the threshold never fires.
+var CHAOS_SEV = { high: 2, low: 1 };  // outcome.severity -> numeric severity
+var CHAOS_FADE_GAP = 6;               // chaos-free cycles before exposure fades one step (recovery)
+
 // Band layer (S253 working cut — 5 bands, tune empirically in Phase 1/6).
 // BAND_CUTS slice 0-100 into band index 0..4. The middle band (40-60) is the
 // wide, quiet "unremarkable / average person"; the ends are where stories live.
@@ -63,33 +72,10 @@ function newCitizen_(base) {
 function current_(c, dial) { return clamp100_(c.base[dial] + c.mood[dial]); }
 
 // event = { label, effects: { dial: deltaInt, ... } } — effects come from citizenDialMap.
+// Chaos exposure does NOT route through here (the fold sees only the col-O primary tag,
+// which can't distinguish a chaos Setback from an ordinary one). The accumulator is fed
+// at chaos-cars emission time via accrueChaos_ below — see header note.
 function applyEvent_(c, event) {
-  // engine.42 #1 — cumulative chaos exposure + severity-scaled composure penalty.
-  // Inert until a caller passes event.tags with a 'source:chaos' tag (wiring lives
-  // in generateCitizensEvents.js). ctx-free by design: the cycle stamp comes from
-  // optional event.cycle (default 0) — the reverted Aider draft referenced a bare
-  // `ctx` here that isn't in scope in this util, which is what crashed the engine.
-  if (event && event.tags) {
-    var chaosTag = null;
-    for (var ti = 0; ti < event.tags.length; ti++) {
-      if (String(event.tags[ti]).indexOf('source:chaos') === 0) { chaosTag = String(event.tags[ti]); break; }
-    }
-    if (chaosTag) {
-      var sev = chaosTag.indexOf('major') >= 0 ? 2 : 1;
-      var ctype = chaosTag.split(':')[1] || 'general';
-      var cyc = (event.cycle != null) ? event.cycle : 0;
-      if (!c.chaosExposure) {
-        c.chaosExposure = { firstSeen: cyc, lastSeen: cyc, count: 1, severity: sev, types: {} };
-      } else {
-        c.chaosExposure.lastSeen = cyc;
-        c.chaosExposure.count++;
-        c.chaosExposure.severity = Math.max(c.chaosExposure.severity, sev);
-      }
-      c.chaosExposure.types[ctype] = true;
-      if (!event.effects) event.effects = {};
-      event.effects.composure = (event.effects.composure || 0) - (2 * (sev === 2 ? 1.5 : 1));
-    }
-  }
   var fx = (event && event.effects) || {};
   for (var d in fx) {
     if (!fx.hasOwnProperty(d) || c.base[d] == null) continue;
@@ -202,8 +188,14 @@ function snapshot_(c) {
   return o;
 }
 
-// storage round-trip (Phase 2 will persist this in TraitProfile/JSON) — pure objects, no I/O
-function serialize_(c) { return { base: c.base, mood: c.mood, streak: c.streak }; }
+// storage round-trip (Phase 2 will persist this in TraitProfile/JSON) — pure objects, no I/O.
+// chaosExposure rides along only when present (additive; old DialState rows lack it and
+// deserialize to no exposure — backward compatible with the S256-live dial spine).
+function serialize_(c) {
+  var o = { base: c.base, mood: c.mood, streak: c.streak };
+  if (c.chaosExposure) o.chaosExposure = c.chaosExposure;
+  return o;
+}
 function deserialize_(obj) {
   var c = newCitizen_(obj && obj.base);
   if (obj) {
@@ -212,27 +204,87 @@ function deserialize_(obj) {
       if (obj.mood && obj.mood[d] != null) c.mood[d] = obj.mood[d];
       if (obj.streak && obj.streak[d] != null) c.streak[d] = obj.streak[d];
     }
+    if (obj.chaosExposure) c.chaosExposure = obj.chaosExposure;
   }
   return c;
 }
 
-// engine.42 #1 — escalating reaction to accumulated chaos (inert until wired in
-// generateCitizensEvents.js: look up the citizen, call this, merge tags + apply
-// dialEffects). Reads c.chaosExposure built up by applyEvent_ above.
+// engine.42 chaos-trauma (S275) — three pure helpers feeding c.chaosExposure, the
+// persisted cross-cycle accumulator. Fed at chaos-cars emission (accrueChaos_), broken
+// once per escalation (applyChaosReaction_), healed over chaos-free time (decayChaosExposure_).
+// All operate on c.base + c.chaosExposure; no I/O, ES5-safe (Node + Apps Script clasped).
+
+// A chaos-cars hit lands: bump the persisted exposure. severity is the outcome's
+// 'high'/'low' (mapped to 2/1) — no string-parsing of tags (the old draft's bug). type
+// is the vehicle name. reactedLevel tracks which labeled break has already fired.
+function accrueChaos_(c, severity, type, cycle) {
+  if (!c) return;
+  var sev = (typeof severity === 'number') ? severity : (CHAOS_SEV[String(severity)] || 1);
+  var cyc = (cycle != null) ? cycle : 0;
+  var ctype = type || 'general';
+  if (!c.chaosExposure) {
+    c.chaosExposure = { firstSeen: cyc, lastSeen: cyc, count: 1, severity: sev, types: {}, reactedLevel: 0 };
+  } else {
+    c.chaosExposure.lastSeen = cyc;
+    c.chaosExposure.count++;
+    c.chaosExposure.severity = Math.max(c.chaosExposure.severity, sev);
+  }
+  c.chaosExposure.types[ctype] = true;
+}
+
+// escalating reaction to accumulated chaos. Reads c.chaosExposure; pure read (no mutation).
 function checkChaosReaction_(c) {
   if (!c || !c.chaosExposure) return null;
   var ce = c.chaosExposure;
   var typeArr = [];
   for (var t in ce.types) { if (ce.types.hasOwnProperty(t)) typeArr.push('chaos-type:' + t); }
   if (ce.count >= 3 && ce.severity >= 2) {
-    return { reaction: 'traumatized', dialEffects: { composure: -8, openness: -4 },
+    return { reaction: 'traumatized', level: 2, dialEffects: { composure: -8, openness: -4 },
              tags: ['chaos:trauma'].concat(typeArr) };
   }
   if (ce.count >= 2) {
-    return { reaction: 'wary', dialEffects: { composure: -4, openness: -2 },
+    return { reaction: 'wary', level: 1, dialEffects: { composure: -4, openness: -2 },
              tags: ['chaos:wary'].concat(typeArr) };
   }
   return null;
+}
+
+// Apply the labeled break to base ONCE per escalation (transition-gated by reactedLevel),
+// so a citizen who stays traumatized doesn't re-take -8 composure every cycle (runaway to
+// floor). The per-hit gradual DIAL_MAP fold is the separate, always-on first tier; this is
+// the second tier that fires only when repetition crosses a threshold. Returns the reaction
+// (for provenance tagging) on a fresh break, else null.
+function applyChaosReaction_(c) {
+  var r = checkChaosReaction_(c);
+  if (!r) return null;
+  var ce = c.chaosExposure;
+  if (r.level <= (ce.reactedLevel || 0)) return null;   // already broke at/above this level
+  for (var d in r.dialEffects) {
+    if (r.dialEffects.hasOwnProperty(d) && c.base[d] != null) {
+      c.base[d] = clamp100_(c.base[d] + r.dialEffects[d]);
+    }
+  }
+  ce.reactedLevel = r.level;
+  return r;
+}
+
+// Recovery: chaos-free time fades the accumulator one step per CHAOS_FADE_GAP cycles, and
+// drops the labeled break as exposure recedes — so positive folds (Faith/Recovery/Community)
+// and quiet weeks heal a citizen instead of locking trauma forever. Clears the field at 0.
+// Lazy (called when the citizen is next touched in compress), advancing lastSeen by exactly
+// the consumed gaps so the remainder carries forward. Returns true if anything changed.
+function decayChaosExposure_(c, currentCycle) {
+  if (!c || !c.chaosExposure) return false;
+  var ce = c.chaosExposure;
+  var gap = (currentCycle != null ? currentCycle : 0) - (ce.lastSeen || 0);
+  if (gap < CHAOS_FADE_GAP) return false;
+  var steps = Math.floor(gap / CHAOS_FADE_GAP);
+  ce.count -= steps;
+  if (ce.count <= 0) { delete c.chaosExposure; return true; }
+  if (ce.count < 2) ce.reactedLevel = 0;
+  else if (ce.count < 3 && (ce.reactedLevel || 0) > 1) ce.reactedLevel = 1;
+  ce.lastSeen = (ce.lastSeen || 0) + steps * CHAOS_FADE_GAP;
+  return true;
 }
 
 if (typeof module !== 'undefined' && module.exports) {
@@ -246,6 +298,7 @@ if (typeof module !== 'undefined' && module.exports) {
     bandIndex_: bandIndex_, band_: band_, bandMultiplier_: bandMultiplier_,
     describe_: describe_, snapshot_: snapshot_,
     serialize_: serialize_, deserialize_: deserialize_,
-    checkChaosReaction_: checkChaosReaction_
+    accrueChaos_: accrueChaos_, checkChaosReaction_: checkChaosReaction_,
+    applyChaosReaction_: applyChaosReaction_, decayChaosExposure_: decayChaosExposure_
   };
 }

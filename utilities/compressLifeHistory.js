@@ -355,6 +355,12 @@ function compressLifeHistory_(ctx, options) {
     // is NOT persisted — base is the permanent self, mood is a re-derivable swing.
     var c = deserialize_(parseDialState_(existingDialState));
 
+    // engine.42 chaos-trauma (S275): chaos-free time heals. Lazily fade the persisted
+    // chaos accumulator (and lift the labeled break) so positive folds + quiet weeks recover
+    // a citizen instead of locking trauma — the symmetric counterpart to chaos-cars accrual.
+    // Gap-based, so a citizen compressed every few cycles still decays at the right rate.
+    decayChaosExposure_(c, cycle);
+
     if (compressEligible) {
       // FOLD-ON-TRIM (the stateful spine): events LEAVING the raw-20 window accrete
       // into base + streak, each folded exactly once by construction (the window
@@ -928,9 +934,13 @@ function parseDialState_(str) {
   } catch (e) { return {}; }
 }
 
-// persist base + streak ONLY (mood is a re-derivable window swing, never stored)
+// persist base + streak ONLY (mood is a re-derivable window swing, never stored).
+// chaosExposure (engine.42 chaos-trauma, S275) rides along when present — additive,
+// backward-compatible; old rows lack it and deserialize to no exposure.
 function serializeDialState_(c) {
-  return JSON.stringify({ base: c.base, streak: c.streak });
+  var o = { base: c.base, streak: c.streak };
+  if (c.chaosExposure) o.chaosExposure = c.chaosExposure;
+  return JSON.stringify(o);
 }
 
 function zeroMood_(c) {

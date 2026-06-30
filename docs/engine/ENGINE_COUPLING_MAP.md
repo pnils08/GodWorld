@@ -202,6 +202,16 @@ The external-misfortune counterpart to conduct's internal agency — both write 
 
 ---
 
+## Economic / civic SL-writer engines (full-read pass, S277)
+
+These mutate structural SL columns (beyond LifeHistory) and feed cross-sheet state — verified by full read.
+
+### `generationalWealthEngine.js` (`processGenerationalWealth_`, Phase 5) — FULL-READ
+- **Writes SL:** `Income` (unseeded citizens only — seeded ones managed by `applyEconomicProfiles` + career transitions), `WealthLevel` (0–10 from effective income = income + 5% NetWorth, +inheritance/−debt), `SavingsRate` (if unseeded), `InheritanceReceived`/`NetWorth` (to heirs).
+- **Inheritance cascade:** reads `ctx.summary.generationalEvents` deaths → `findHeirs_` (ParentIds JSON) → distributes 80% of deceased NetWorth → heir NetWorth/InheritanceReceived + `Family_Relationships` (own-sheet, direct) + `GENERATIONAL_WEALTH_TRANSFER` story hook. So **generational death → wealth inheritance → heir wealth level** is a real coupled chain.
+- **Aggregates:** SL Income/WealthLevel → `Household_Ledger` (HouseholdWealth/Income/SavingsBalance).
+- **⚠ Full-read catch:** `trackWealthMobility_` + `trackHomeOwnership_` are **placeholder stubs** (`return {events:0}` / `{purchased:0}`) — the header advertises wealth-mobility events + home-ownership tracking as features, but neither is implemented. `WEALTH_GAP_WIDENING`/`DOWNWARD_MOBILITY`/`HOME_OWNERSHIP_ACHIEVED` hooks never fire.
+
 ## Cross-engine cascades (VERIFIED)
 
 The coupling is not only event→dial; whole engines feed each other across sheets, closing loops.

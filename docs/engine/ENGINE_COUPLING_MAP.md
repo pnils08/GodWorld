@@ -221,6 +221,11 @@ These mutate structural SL columns (beyond LifeHistory) and feed cross-sheet sta
 - **Writes SL:** `DisplacementRisk` (0–10 from `Neighborhood_Map.DisplacementPressure` + `Household_Ledger` rent burden + no-college +2 + senior +1), `MigrationIntent` (staying/considering/planning by risk ≥5/≥8). Reads EducationLevel (written by educationCareer earlier in Phase 5 — ordering matters).
 - **⚠ Full-read catch:** `processMigrationEvents_` + `checkForDisplacedCitizens_` are **placeholders** — risk/intent are assessed but **no citizen is actually relocated**, and the `Migration_Events` sheet log is a TODO. Hooks FORCED_MIGRATION (≥9) / MASS_EXODUS (5+/hood) fire, but the structural move doesn't happen here (population-level migration is `applyDemographicDrift`/`applyMigrationDrift`, aggregate not per-citizen).
 
+### `gentrificationEngine.js` (`processGentrification_`, Phase 5) — FULL-READ
+- **Writes `Neighborhood_Map` (NOT Simulation_Ledger):** `GentrificationPhase` (none/early/accelerating/advanced/stable-affluent), `GentrificationStartCycle`, `DemographicShiftIndex` — via `queueCellIntent_`, **cell-scoped on purpose (T1.5)** so it doesn't clobber the Phase-10 `saveV3NeighborhoodMap_` metric-col fold (which flushes after intents). Reads Neighborhood_Map (`MedianIncomeChange5yr`/`MedianRentChange5yr`/`WhitePopulationChange5yr`/`HighEducationPct`/`DisplacementPressure`).
+- **Coupling:** gentrification phase + displacement pressure → migration engine reads it for citizen `DisplacementRisk` → `MigrationIntent`; citizensEvents `neighborhoodStatePool_` reads `GentrificationPhase` for "rents going up / neighbor moving out" texture. Hooks: GENTRIFICATION_ACCELERATING/EARLY, NEIGHBORHOOD_TRANSFORMATION, DISPLACEMENT_CRISIS. May be data-dormant if the extended 5yr-change columns are unpopulated.
+- **⚠ Grep-error correction (this is why grep is banned):** an earlier grep listed this engine as an SL-column writer (`DemoShift/GenPhase/GenStart`); the full read shows those are *Neighborhood_Map* columns — the grep matched `row[i…]=` blind to which sheet the rows came from. Verified: it never writes Simulation_Ledger.
+
 ## Cross-engine cascades (VERIFIED)
 
 The coupling is not only event→dial; whole engines feed each other across sheets, closing loops.

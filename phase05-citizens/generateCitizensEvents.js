@@ -66,6 +66,7 @@ function generateCitizensEvents_(ctx) {
   var iTierRole = idx("TierRole");
   var iType = idx("Type");
   var iUsage = idx("UsageCount"); // engine.32 T3 — fame seam (SL appearance counter)
+  var iStatus = idx("Status"); // engine.38 A1-cont (S277) — deceased-exclusion guard
 
   if (iTier < 0 || iClock < 0 || iLife < 0 || iLastU < 0 || iPopID < 0) return;
 
@@ -175,6 +176,12 @@ function generateCitizensEvents_(ctx) {
   // eventful weeks, homebodies quiet ones. Tuned via scripts/coverageReport.js.
   var PARTICIPATION_BASE = 0.72; // coverage-band tuned (target 60-80%)
   var PARTICIPATION_MAX = 0.97;  // never guaranteed-100% — preserve quiet-week texture
+  // engine.38 A1-cont (S277): per-participating-citizen emit count is a random
+  // 1..ATMOSPHERIC_MAX_EVENTS (was fixed 1). CONSERVATIVE DEFAULT 4 pending the
+  // Task 6 perf gate — Mike's target is 6-8 "depending on what a cycle run can
+  // handle"; tune UP only after a clean full-cycle run confirms runtime/quota
+  // + compressor capacity at the higher multiple. Keep low until then.
+  var ATMOSPHERIC_MAX_EVENTS = 4;
 
   // Active citizens tracker (dedup) - use object for ES5 Set-like behavior.
   // guaranteedInObj = the upstream cycleActiveCitizens set, unioned in below as
@@ -1227,9 +1234,17 @@ function generateCitizensEvents_(ctx) {
     // Named citizens get ambient texture on top of their sim life — A3 folds in
     // their richer named-pool events.
     if (!popId) continue;
+    // engine.38 A1-cont (S277): the atmospheric layer extends to ALL citizens
+    // regardless of ClockMode. The old mode gate (`!isNamed && mode!=="ENGINE"`)
+    // excluded ~141 dark non-ENGINE T3/4; it is removed. Canon-safety holds —
+    // this generator writes ONLY col-O LifeHistory + log (no structural cols),
+    // and the role-specific occupation pool stays ENGINE-only (guarded below).
+    // Deceased are excluded (AC3): the dead draw no daily-life texture. (Live
+    // S277: every non-Active citizen is ENGINE, so this also closes the prior
+    // latent inclusion of deceased ENGINE citizens.)
     var isNamed = (tier === 1 || tier === 2);
     if (!isNamed && (tier !== 3 && tier !== 4)) continue;
-    if (!isNamed && mode !== "ENGINE") continue;
+    if (iStatus >= 0 && String(row[iStatus] || "").trim().toLowerCase() === "deceased") continue;
 
     var mem = getMem(popId);
 
@@ -1458,7 +1473,12 @@ function generateCitizensEvents_(ctx) {
       }
     }
 
-    if (occupation) {
+    // engine.38 A1-cont (S277) Task 2 disposition: the occupation work-texture
+    // pool is canon-safe ONLY for ENGINE citizens, whose Occupation cell IS their
+    // canon job. For GAME/CIVIC/MEDIA citizens the role is owned by their mode
+    // engine (athlete/official/journalist) and Occupation may be a stale legacy
+    // value → a contradicting "work moment as a [stale job]" event. Guard it.
+    if (occupation && mode === "ENGINE") {
       var op = occupationPoolFor_(occupation);
       for (var opi = 0; opi < op.length; opi++) {
         pool.push(makeEntry(op[opi].text, mergeTags(op[opi].tags, calendarTags), op[opi].weight, false));
@@ -1616,12 +1636,23 @@ function generateCitizensEvents_(ctx) {
       }
     }
 
+    // engine.38 A1-cont (S277): emit a random 1..N atmospheric events for this
+    // citizen (was exactly 1). cycleSeen hard-blocks duplicate text within the
+    // cycle (the soft >=6 fallback below re-admits mem.recentTexts but never
+    // cycleSeen). Pulse fires once per citizen (ev===0, below) so volume scaling
+    // leaves the neighborhood-metric grain unchanged. Body indentation is left
+    // at the original level to keep this a minimal, reviewable diff.
+    var eventCount = 1 + Math.floor(roll() * ATMOSPHERIC_MAX_EVENTS); // 1..N
+    var cycleSeen = [];
+    var emittedAny = false;
+    for (var ev = 0; ev < eventCount; ev++) {
     // Filter out recently repeated content
     var filtered = [];
     var recent = mem ? mem.recentTexts : [];
     for (var fi = 0; fi < pool.length; fi++) {
       var pe = pool[fi];
       var nrm = normText_(pe.text);
+      if (cycleSeen.indexOf(nrm) >= 0) continue; // hard: never repeat within a cycle
       var seen = false;
       for (var ri2 = 0; ri2 < recent.length; ri2++) {
         if (recent[ri2] === nrm) { seen = true; break; }
@@ -1629,6 +1660,16 @@ function generateCitizensEvents_(ctx) {
       if (!seen) filtered.push(pe);
     }
     var usePool = filtered.length >= 6 ? filtered : pool;
+    // Apply the hard within-cycle exclusion to the fallback pool too, so a draw
+    // from the full pool can't repeat an already-emitted line this cycle.
+    if (filtered.length < 6) {
+      var hardPool = [];
+      for (var hpi = 0; hpi < usePool.length; hpi++) {
+        if (cycleSeen.indexOf(normText_(usePool[hpi].text)) < 0) hardPool.push(usePool[hpi]);
+      }
+      usePool = hardPool;
+    }
+    if (!usePool.length) break; // nothing fresh left to say this cycle
 
     var entry = pickWeighted_(usePool);
     var pick = entry.text;
@@ -1725,13 +1766,23 @@ function generateCitizensEvents_(ctx) {
 
     // engine.33 — emit-time neighborhood pulse (public-footprint events move
     // neighborhood metrics; fold at phase08 v3NeighborhoodWriter).
-    if (typeof recordPulse_ === 'function') recordPulse_(S, neighborhood, primaryTag, tags, pick);
+    // engine.38 A1-cont (S277): pulse ONCE per citizen (ev===0). recordPulse_
+    // writes neighborhood sentiment/crime/vitality; firing it per-draw would
+    // scale those metrics with texture volume and confound the live G-EC33
+    // uniformity watch + the engine.38 convergence concern. Once-per-citizen
+    // holds the metric grain at exactly today's rate.
+    if (ev === 0 && typeof recordPulse_ === 'function') recordPulse_(S, neighborhood, primaryTag, tags, pick);
 
     remember(popId, primaryTag, pick, chosenVenue, neighborhood, contact && contact.name, tags);
-
-    activeSetObj[popId] = true;
+    cycleSeen.push(normText_(pick));
     S.eventsGenerated = (S.eventsGenerated || 0) + 1;
-    count++;
+    emittedAny = true;
+    } // end 1..N atmospheric emit loop
+
+    if (emittedAny) {
+      activeSetObj[popId] = true;
+      count++;
+    }
   }
 
   // Phase 42 §5.6: flip ctx.ledger.dirty; consolidated commit at Phase 10.

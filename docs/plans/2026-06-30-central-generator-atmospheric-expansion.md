@@ -97,21 +97,21 @@ Status: Active 874 / pending 37 / Retired 8 / deceased 3. LifeHistory populated 
   1. Branch pool assembly: atmospheric core available to all eligible citizens; structural/role pools restricted to ENGINE (preserve current ENGINE richness).
   2. Keep ctx.rng (no Math.random), write-intents discipline, recordPulse couplings intact.
 - **Verify:** dry-run / test fixture shows mode citizens draw only atmospheric pools.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S277 — occupation pool guarded `occupation && mode === "ENGINE"` (the one Task-2 collision). No other pool needed a mode branch. Syntax-clean; functional verify = the Task-6/7 cycle run.
 
 ### Task 4: Remove the mode/tier eligibility gate for the atmospheric layer
 - **Files:** `phase05-citizens/generateCitizensEvents.js` — modify (gate `isNamed ∪ ENGINE T3/4`)
 - **Steps:**
   1. Open eligibility to all active non-deceased citizens for the atmospheric core (retain exclusions: deceased, and any class that must stay out).
 - **Verify:** re-run tally → dark cohorts (T3 GAME/CIVIC/MEDIA) now covered.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S277 — removed `if (!isNamed && mode !== "ENGINE") continue;` (kept the T1–4 restriction). Added `iStatus` index + a deceased skip. **Measure-twice finding:** live read shows **every non-Active citizen is ENGINE** (pending 37 / Retired 8 / deceased 3, all ENGINE) — so opening the mode gate admits *only Active non-ENGINE* citizens (zero resurrection risk), and the deceased guard also closes a pre-existing latent inclusion of deceased ENGINE citizens. **Open for Mike:** pending (37, flagged as Status-drift) + Retired (8) are alive-ish and currently drawing events — decide if either should be excluded (left in for now).
 
 ### Task 5: Replace ≤1/citizen cap with random 1..N per citizen
 - **Files:** `phase05-citizens/generateCitizensEvents.js` — modify
 - **Steps:**
   1. Per citizen, draw event count = random integer 1..N via ctx.rng (N from Open Questions, perf-tuned). Anti-repeat filter must still apply across the multiple draws.
 - **Verify:** tally shows per-citizen counts distributed 1..N; anti-repeat holds (no duplicate text within a citizen's cycle).
-- **Status:** [ ] not started
+- **Status:** [x] DONE S277 — wrapped pick→render→emit→remember in `for (ev=0; ev<eventCount; ev++)` where `eventCount = 1 + floor(roll()*ATMOSPHERIC_MAX_EVENTS)` (1..N, ctx.rng — no Math.random). **Anti-repeat hardened:** the soft `filtered.length>=6 ? filtered : pool` fallback re-admitted `mem.recentTexts`; added a hard `cycleSeen` set so no line repeats *within* a citizen's cycle even on the fallback path (advisor catch — the soft filter did NOT dedup for free). `break` when the fresh pool is exhausted. col-O appends per draw; `recordPulse_`/`activeSetObj`/`count` fire once per citizen; `S.eventsGenerated` per emit. **N=ATMOSPHERIC_MAX_EVENTS=4** (conservative; Task 6 tunes toward 6–8 after perf). Functional verify = Task 6/7 cycle run.
 
 ### Task 6: Perf + storage gate
 - **Files:** cycle-run harness; `LifeHistory_Log` growth check; compressor (`utilities/compressLifeHistory.js`)
@@ -144,11 +144,13 @@ Status: Active 874 / pending 37 / Retired 8 / deceased 3. LifeHistory populated 
 
 ## Open questions
 
-- [ ] **N (max events/citizen/cycle)** — Mike says 6–8 target, "depending on what a cycle run can handle." Resolve in Task 6 (perf gate). Blocks Task 5.
-- [ ] **Atmospheric-vs-canon taxonomy** — Task 2 design seam (research-build). Blocks Task 3.
-- [ ] **Lever 2 (Mike's "2.")** — second directive not yet given. Placeholder; fill when provided.
-- [ ] **Volume scope** — does random 1..N apply to all citizens, or higher floor for previously-dark cohorts? (Assume uniform 1..N unless told otherwise.)
-- [ ] **EventTag hygiene** — the column currently stores full slotter-metadata strings (e.g. `Daily|source:daily|...|tier:4`); decide whether the atmospheric layer emits a clean tag for 24/7-loop legibility (AC4).
+- [~] **N (max events/citizen/cycle)** — coded as `ATMOSPHERIC_MAX_EVENTS=4` (conservative). Task 6 perf gate tunes toward Mike's 6–8 after a clean full-cycle run. Not blocking; a one-line const bump.
+- [x] **Atmospheric-vs-canon taxonomy** — Task 2 done (occupation pool ENGINE-only; all else safe).
+- [ ] **Lever 2 (Mike's "2.")** — second directive STILL not given. Placeholder; fill when provided.
+- [ ] **pending/Retired status (NEW, S277 build):** every non-Active citizen is ENGINE (pending 37 / Retired 8 / deceased 3). Deceased now excluded. **pending** is flagged as Status-*drift* (not a clean lifecycle state) yet currently draws events; **Retired** are alive. Mike to decide whether pending and/or Retired should also be excluded from the atmospheric layer.
+- [ ] **Depth ≠ volume (advisor, S277):** Tasks 3–5 raised *coverage + volume* from the **same ~25 pools** — more draws = more repetition of existing content, NOT deeper content. The pool-deepening step Mike named ("this wasn't the deepen-the-pool step yet") is still open and is now *more* pressing.
+- [ ] **Volume scope** — coded uniform 1..N for all citizens (no higher floor for previously-dark cohorts). Revisit if dark-cohort depth needs a boost.
+- [ ] **EventTag hygiene** — column still stores full slotter-metadata; `primaryTag` extractor already exists for a clean 24/7-loop tag (AC4). Wire the wake-reader to `primaryTag` in Task 7 if needed.
 
 ## Inherited constraints from engine.38 (do not re-litigate — carry forward)
 
@@ -162,3 +164,4 @@ Status: Active 874 / pending 37 / Retired 8 / deceased 3. LifeHistory populated 
 
 - 2026-06-30 — Initial draft (S277). Lever 1 of citizen-event work; baseline captured from live C100 tally. Lever 2 + design taxonomy pending.
 - 2026-06-30 — Task 2 DONE (research-build, S277). Atmospheric invariant defined; occupation pool is the only mode-collision (guard to ENGINE-only); sports pool checked safe; legibility path (primaryTag) already exists. Task 3 narrowed to a one-pool guard. Lever 2 still open (Mike's directive).
+- 2026-06-30 — Tasks 3–5 DONE (engine-sheet, S277). `generateCitizensEvents.js`: occupation pool guarded ENGINE-only; mode gate removed (all active T1–4 eligible); deceased excluded; volume → random 1..`ATMOSPHERIC_MAX_EVENTS`(=4) per citizen with hard within-cycle dedup; `recordPulse_` once-per-citizen. Syntax-clean (`node -c`). Measure-twice: all non-Active citizens are ENGINE (gate-open is resurrection-safe). HELD: N stays 4 until Task 6 perf gate; pending/Retired exclusion + Lever 2 await Mike; functional verify (Tasks 6–7) needs a cycle run (clasp). Advisor flagged volume≠depth — pool-deepening still open.

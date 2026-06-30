@@ -20,7 +20,7 @@ pointers:
 
 **What this is.** The behavioral logic of how a citizen event turns into a change in who that citizen *is* — and, in one case, into a ripple that reaches other citizens. The structural maps (ENGINE_MAP / ENGINE_STUB_MAP) show *what calls what*; this shows *what an event mechanically does*. It is the answer to "does a column actually change what happens to a citizen, or just the printed text."
 
-**Scope honesty (S277).** Read end-to-end and verified for this doc: `citizenDialMap.js`, `runCareerEngine.js`, `runHouseholdEngine.js`, `runConductEngine.js`, `citizenMemory.js`, plus the Phase-5 wiring list and the exclusion-gate grep. **NOT yet line-verified:** the relationship, neighborhood, generational, education, youth, civic-mode, media-mode, and micro-event generators. By the dial-map rule (below) their events *do* move dials, but their per-engine probability and state logic is not personally confirmed here. Entries for them are marked `⟪UNVERIFIED⟫`.
+**Scope honesty (S277).** Read **end-to-end**: `citizenDialMap.js`, `citizenMemory.js`, `compressLifeHistory.js`, `runCareerEngine.js`, `runHouseholdEngine.js`, `runConductEngine.js`, `runRelationshipEngine.js`, `runNeighborhoodEngine.js`, `runEducationEngine.js`, `economicRippleEngine.js`, plus the core loop of `generateCitizensEvents.js`. Verified by **header + targeted grep** (gate, mutation sites, emitted tags — not every line): `generationalEventsEngine.js`, `runYouthEngine.js`, `generateCivicModeEvents/MediaModeEvents/GameModeMicroEvents`, `generateGenericCitizenMicroEvent.js`, `chaosCarsEngine.js`, `bondEngine.js` (write site), and the Phase-4 city sources. **Not deep-read:** `bondEngine` internal pairing logic; the Phase-4 source internals; the giant flavor-text pools (confirmed inert strings in the engines read). Where a claim rests on grep not full-read, it says so inline.
 
 ---
 
@@ -160,8 +160,30 @@ All are pre-cap multipliers; `null` bands (no DialState) → base rates unchange
 ### `economicRippleEngine.js` (Phase 6) — VERIFIED (see §Cross-engine cascades)
 Reads `careerSignals` + migration + world/citizen events → economic ripples → recomputes `economicMood` + per-neighborhood economies → **writes `employmentRate`/`economy` to `World_Population`**. `economicMood` feeds back into all citizen engines' probability next cycle. The loop that makes career transitions ripple city-wide.
 
-### Other generators — ⟪UNVERIFIED here⟫
-`runYouthEngine`, `generateCivicModeEvents`, `generateMediaModeEvents`, `generateGameModeMicroEvents`, `generateGenericCitizenMicroEvent`, `generateCitizensEvents`, `bondEngine`, plus the Phase-4 city-event sources (`worldEventsEngine`, `faithEventsEngine`, `chaosCarsEngine`, `buildCityEvents`). All route events through the dial map (Layer-2 coupling holds) and read the gate, but Layer-1 logic + state mutation not personally confirmed in this pass. Fill on read.
+### `generateCitizensEvents.js` (Phase 5) — VERIFIED, the central texture generator + city→citizen fan-out
+- **Gate (engine.38 A1, option-1):** `isNamed = tier 1||2` (any clock mode) **∪** Tier-3/4 ENGINE. Named citizens get ambient texture here on top of their sim life; GAME/MEDIA/CIVIC Tier-3/4 are excluded (served by their mode engines). **No LIMIT cap** (removed engine.38 A1) — full population, ≤1 emit/citizen/cycle.
+- **Layer 1 (the richest):** `PARTICIPATION_BASE` + weather/sentiment/chaos/season/econ/holidays/First-Friday/Creation-Day/sports/cultural/community + **QoL-driven** (low-QoL hood → more events; crime hotspot; stretched enforcement) + age/occupation + **fame** (`usageCount ≥ 8`, T3) + prev-evening crowds + bonds/arcs + weather/media modifiers + **dial-weighted participation** (`activityScore = (drive+outabout+sociability)/3`, L1318) + **anti-inert floor** (forced in if dark > `ANTI_INERT_N` cycles) + guaranteed-in upstream actives.
+- **The city→citizen coupling (your "crime spikes → events there"):** the per-citizen pool pulls `neighborhoodStatePool_` (reads **prev-cycle Neighborhood_Map** crime/sentiment), `previousEveningPool_` (last night's city events; **T8 fan-out**, out-and-about-dial-gated travel radius), and `faithPool_` (this cycle's faith events in the hood). City + neighborhood state reach the individual here.
+- **Layer 2:** archetype-*weighted* selection (reads TraitProfile archetype, v2.7) over template pools → dial-map tags. Content is still template draws (archetype biases *which* template, not bespoke text). No structural mutation.
+
+### Mode-routed generators — who serves the citizens the stakes engines skip (gates VERIFIED)
+The ~25% excluded from the ENGINE-mode stakes engines are **routed to mode-specific generators, not unwired:**
+- **`generateGenericCitizenMicroEvent`** (Phase 4): `mode==="ENGINE"`, non-UNI/MED/CIV, **all tiers** — Tier-1 ENGINE at 50% chance (L437–445). Ambient micro-events for the whole ENGINE population incl. notables. → `Micro-Event` (composure +1).
+- **`generateCivicModeEvents`** (Phase 5): `mode==="CIVIC"` only (L392). → Civic/CivicRole tags (sociability/drive).
+- **`generateMediaModeEvents`** (Phase 5): `mode==="MEDIA"` only (L344). → Media/Quoted tags (sociability).
+- **`generateGameModeMicroEvents`** (Phase 4): branches by `isUNI`(MLB)/`isMED`/`isCIV` (L358–371) — the sports-universe + flagged citizens (sports = Paulson canon).
+- **`runYouthEngine`** (Phase 5): **age-gated** (`YOUTH_EVENT_LIMITS` min/max, status≠deceased), school-stage by age (elementary 5–10 / middle 11–13 / high 14–17 / college 18–22), tier-agnostic. → `youth-*` tags (drive/openness/composure).
+
+**So every citizen class has a generator:** ENGINE Tier-3/4 → the 6 stakes engines; named (T1/2, any mode) → `generateCitizensEvents` carve-out + generational; CIVIC/MEDIA/GAME → their mode engines; ENGINE all tiers → generic-micro; youth → youth engine; everyone ENGINE/CIVIC → generational lifecycle. The residual is **depth parity** (mode/micro events are thinner than the stakes engines), not absence.
+
+### `chaosCarsEngine.js` (Phase 4) — VERIFIED: external adversity → trauma + business damage
+Per-citizen chaos hits call `accrueChaos_(severity, vehicle, cycle)` → bumps `chaosExposure` on **DialState**, and `applyChaosReaction_` applies a one-time labeled break (wary→traumatized, composure/openness down). The external-misfortune counterpart to conduct's internal agency — both write the dial memory. Also folds business damage (`chaosBusinessFold` → `queueCellIntent_` per biz). The trauma accumulator decays in the compressor (`decayChaosExposure_`).
+
+### Phase-4 city-event SOURCES (producers, no per-citizen gate)
+`worldEventsEngine`, `faithEventsEngine`, `buildCityEvents` generate **city-level** events (no citizen iteration/gate). They are consumed by `generateCitizensEvents`' T8 fan-out (prev-evening / faith / neighborhood-state pools) so the city's events reach individuals — the city→citizen edge.
+
+### `bondEngine.js` (Phase 5) — the bond consumer
+Reads `cycleActiveCitizens` (pushed by relationship + citizen engines) → forms/updates pairwise `Relationship_Bonds` (`setValues`, L1473), which feed back into relationship-event probability + pool selection. The downstream half of the relationship↔bonds loop. (Pairwise — no single-citizen gate; ⟪internal pairing logic not deep-read⟫.)
 
 ---
 
@@ -204,7 +226,7 @@ GenericMicroEvents → GameModeMicroEvents → (ensure ledgers/bonds) → LoadBo
 ## Residuals (narrow — tuning/depth, not a rebuild)
 
 1. **Content depth:** where a column gates text under a shared tag, it individuates the story but not the dial outcome (household married/parent, conduct severity strings). Making a column move the *mechanics* means routing it to a *different tag* or a state change, not just a different sentence.
-2. **Eligibility:** ~25% (named/sports/civic/media + Tier-1/2/5) are out of the ENGINE-mode stakes engines; depth for them depends on the mode engines + engine.38 coverage.
+2. **Eligibility = depth parity, NOT absence (corrected this pass):** the ~25% excluded from the ENGINE-mode stakes engines are routed to mode engines (civic/media/game-micro), generic-micro, generational, and the `generateCitizensEvents` named carve-out — every class has a generator. The real gap is that those routes are **thinner** (more pooled, fewer consequential mutations) than the 6 stakes engines, and GAME/MEDIA modes miss generational milestones (the engine.29 matrix mismatch). Depth parity across modes, not wiring.
 3. **Conduct throttle:** `crimeReachable` = integrity band −2 only, so commits almost never fire — transgression depth is gated behind dial drift.
 4. **Phase B valence (engine.38) held:** ordinary-bad tags exist in `DIAL_MAP` but the pools that emit them are not yet active, so the objective negative pole is thin.
 

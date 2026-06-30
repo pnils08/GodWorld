@@ -144,10 +144,11 @@ Status: Active 874 / pending 37 / Retired 8 / deceased 3. LifeHistory populated 
 
 ## Open questions
 
-- [~] **N (max events/citizen/cycle)** — coded as `ATMOSPHERIC_MAX_EVENTS=4` (conservative). Task 6 perf gate tunes toward Mike's 6–8 after a clean full-cycle run. Not blocking; a one-line const bump.
+- [x] **N (max events/citizen/cycle)** — `ATMOSPHERIC_MAX_EVENTS=4`. Mike confirmed S277: "4 is a good start since there are other engines still." Holds at 4; revisit only if depth/coverage demands.
 - [x] **Atmospheric-vs-canon taxonomy** — Task 2 done (occupation pool ENGINE-only; all else safe).
-- [ ] **Lever 2 (Mike's "2.")** — second directive STILL not given. Placeholder; fill when provided.
-- [ ] **pending/Retired status (NEW, S277 build):** every non-Active citizen is ENGINE (pending 37 / Retired 8 / deceased 3). Deceased now excluded. **pending** is flagged as Status-*drift* (not a clean lifecycle state) yet currently draws events; **Retired** are alive. Mike to decide whether pending and/or Retired should also be excluded from the atmospheric layer.
+- [x] **Lever 2** — NONE. Mike S277: the "2." was a stray digit after "1", not a second directive. Closed.
+- [x] **Retired status** — Mike S277: retired citizens still get events, but retirement changes what they get → excluded from the occupation work-texture pool, keep the rest of the atmospheric core. Done. (Retirement-*flavored* leisure content = the depth step, deferred.)
+- [ ] **pending status** — 37 ENGINE T4, flagged as Status-*drift* (not a clean lifecycle state), currently drawing events. Not yet ruled on by Mike — left eligible.
 - [ ] **Depth ≠ volume (advisor, S277):** Tasks 3–5 raised *coverage + volume* from the **same ~25 pools** — more draws = more repetition of existing content, NOT deeper content. The pool-deepening step Mike named ("this wasn't the deepen-the-pool step yet") is still open and is now *more* pressing.
 - [ ] **Volume scope** — coded uniform 1..N for all citizens (no higher floor for previously-dark cohorts). Revisit if dark-cohort depth needs a boost.
 - [ ] **EventTag hygiene** — column still stores full slotter-metadata; `primaryTag` extractor already exists for a clean 24/7-loop tag (AC4). Wire the wake-reader to `primaryTag` in Task 7 if needed.
@@ -164,4 +165,5 @@ Status: Active 874 / pending 37 / Retired 8 / deceased 3. LifeHistory populated 
 
 - 2026-06-30 — Initial draft (S277). Lever 1 of citizen-event work; baseline captured from live C100 tally. Lever 2 + design taxonomy pending.
 - 2026-06-30 — Task 2 DONE (research-build, S277). Atmospheric invariant defined; occupation pool is the only mode-collision (guard to ENGINE-only); sports pool checked safe; legibility path (primaryTag) already exists. Task 3 narrowed to a one-pool guard. Lever 2 still open (Mike's directive).
+- 2026-06-30 — Retired refinement (engine-sheet, S277). Occupation work-texture pool now also excludes `Status==="retired"` (Mike: retirement changes what they get) — retired keep the atmospheric core, lose work-shift events. Lever 2 confirmed NONE (stray digit). N=4 confirmed by Mike. Retirement-flavored leisure content deferred to the depth step.
 - 2026-06-30 — Tasks 3–5 DONE (engine-sheet, S277). `generateCitizensEvents.js`: occupation pool guarded ENGINE-only; mode gate removed (all active T1–4 eligible); deceased excluded; volume → random 1..`ATMOSPHERIC_MAX_EVENTS`(=4) per citizen with hard within-cycle dedup; `recordPulse_` once-per-citizen. Syntax-clean (`node -c`). Measure-twice: all non-Active citizens are ENGINE (gate-open is resurrection-safe). HELD: N stays 4 until Task 6 perf gate; pending/Retired exclusion + Lever 2 await Mike; functional verify (Tasks 6–7) needs a cycle run (clasp). Advisor flagged volume≠depth — pool-deepening still open.

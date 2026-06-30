@@ -1223,6 +1223,7 @@ function generateCitizensEvents_(ctx) {
 
     var birthYear = (iBirthYear >= 0) ? Number(row[iBirthYear] || 0) : 0;
     var occupation = (iOccupation >= 0) ? String(row[iOccupation] || "") : "";
+    var status = (iStatus >= 0) ? String(row[iStatus] || "").trim().toLowerCase() : "";
     var ageGroup = ageGroup_(birthYear);
     var usageCount = (iUsage >= 0) ? Number(row[iUsage]) || 0 : 0; // T3 — blank reads 0
 
@@ -1244,7 +1245,7 @@ function generateCitizensEvents_(ctx) {
     // latent inclusion of deceased ENGINE citizens.)
     var isNamed = (tier === 1 || tier === 2);
     if (!isNamed && (tier !== 3 && tier !== 4)) continue;
-    if (iStatus >= 0 && String(row[iStatus] || "").trim().toLowerCase() === "deceased") continue;
+    if (status === "deceased") continue;
 
     var mem = getMem(popId);
 
@@ -1474,11 +1475,15 @@ function generateCitizensEvents_(ctx) {
     }
 
     // engine.38 A1-cont (S277) Task 2 disposition: the occupation work-texture
-    // pool is canon-safe ONLY for ENGINE citizens, whose Occupation cell IS their
-    // canon job. For GAME/CIVIC/MEDIA citizens the role is owned by their mode
-    // engine (athlete/official/journalist) and Occupation may be a stale legacy
-    // value → a contradicting "work moment as a [stale job]" event. Guard it.
-    if (occupation && mode === "ENGINE") {
+    // pool is canon-safe ONLY for working ENGINE citizens, whose Occupation cell
+    // IS their canon job. For GAME/CIVIC/MEDIA citizens the role is owned by their
+    // mode engine (athlete/official/journalist) and Occupation may be a stale
+    // legacy value → a contradicting "work moment as a [stale job]" event.
+    // Retired citizens still draw the rest of the atmospheric core but NOT
+    // work-texture — being retired changes what they get (Mike, S277). Their
+    // Occupation cell holds the former job; a "busy day at work" event would
+    // contradict canon. (Retirement-flavored leisure content = the depth step.)
+    if (occupation && mode === "ENGINE" && status !== "retired") {
       var op = occupationPoolFor_(occupation);
       for (var opi = 0; opi < op.length; opi++) {
         pool.push(makeEntry(op[opi].text, mergeTags(op[opi].tags, calendarTags), op[opi].weight, false));

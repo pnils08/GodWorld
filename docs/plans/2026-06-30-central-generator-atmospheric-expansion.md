@@ -77,7 +77,19 @@ Status: Active 874 / pending 37 / Retired 8 / deceased 3. LifeHistory populated 
   2. Decide handling of the occupation/career-flavor pools for non-ENGINE citizens (drop vs neutralize to ambient).
   3. Confirm "fun concept" legibility target for the 24/7 loop.
 - **Verify:** written rule + per-pool disposition agreed with Mike before code change.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S277 — see §Task 2 findings below.
+
+#### Task 2 findings — invariant + disposition (DONE S277)
+
+**Invariant:** an atmospheric event may describe what a citizen *does/feels/observes* in a day, never imply a change to *what they are* (employer, residence, marital status, role, life/death) — those transitions are stakes-engine-owned (career/generational/migration/civic).
+
+**Occupation pool disposition — the only mode-collision in the file.** Read `occupationPoolFor_` (L1090) + its call site (L1461-1466): currently unconditional on mode, gated only on `if (occupation)`. For ENGINE-mode citizens, the `Occupation` column *is* their canon job — safe, stays. For GAME/CIVIC/MEDIA citizens, work/role identity is owned by their mode engine (athlete career / civic office / journalist), and `Occupation` is the legacy/generic field with no guarantee it's synced to their actual canon role — a civic official whose `Occupation` cell still reads a pre-office service job would draw a contradicting "had a work moment as a [stale job]" event. **Disposition: guard to ENGINE-only** — `if (occupation && mode === "ENGINE")` before the L1461 call. Task 3 implements this as the one pool restriction; no other pool needs a mode branch.
+
+**Sports pool checked, no guard needed.** `sportsSeasonPools` (L1175, called L1454-1459) is generalized city-fandom texture ("followed the late-stage run closely") — not team/role-specific, doesn't claim the citizen plays — safe for every citizen including GAME-mode.
+
+**Legibility (step 3):** the existing `primaryTag` extractor (L545-571) already derives a clean category (`Work`/`Sports`/`Weather`/etc.) separate from the full slotter-metadata tag string — a clean-tag path for the 24/7 loop already exists structurally. Whether the wake-reader consumes `primaryTag` vs the raw tag string is a Task 7/AC4 implementation question for engine-sheet, not a Task 2 blocker.
+
+**Net: Task 3 is now a one-pool guard, not a taxonomy rebuild.**
 
 ### Task 3: Gate the structural pools ENGINE-only; expose atmospheric core to all
 - **Files:** `phase05-citizens/generateCitizensEvents.js` — modify
@@ -149,3 +161,4 @@ Status: Active 874 / pending 37 / Retired 8 / deceased 3. LifeHistory populated 
 ## Changelog
 
 - 2026-06-30 — Initial draft (S277). Lever 1 of citizen-event work; baseline captured from live C100 tally. Lever 2 + design taxonomy pending.
+- 2026-06-30 — Task 2 DONE (research-build, S277). Atmospheric invariant defined; occupation pool is the only mode-collision (guard to ENGINE-only); sports pool checked safe; legibility path (primaryTag) already exists. Task 3 narrowed to a one-pool guard. Lever 2 still open (Mike's directive).

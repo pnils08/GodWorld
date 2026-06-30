@@ -212,6 +212,15 @@ These mutate structural SL columns (beyond LifeHistory) and feed cross-sheet sta
 - **Aggregates:** SL Income/WealthLevel → `Household_Ledger` (HouseholdWealth/Income/SavingsBalance).
 - **⚠ Full-read catch:** `trackWealthMobility_` + `trackHomeOwnership_` are **placeholder stubs** (`return {events:0}` / `{purchased:0}`) — the header advertises wealth-mobility events + home-ownership tracking as features, but neither is implemented. `WEALTH_GAP_WIDENING`/`DOWNWARD_MOBILITY`/`HOME_OWNERSHIP_ACHIEVED` hooks never fire.
 
+### `educationCareerEngine.js` (`processEducationCareer_`, Phase 5) — FULL-READ
+- **Writes SL:** `EducationLevel` (MED→graduate / UNI→bachelor / CIV→some-college / else age-based), `CareerStage` (student/entry/mid/senior/retired by age + advancement), `YearsInCareer`, `LastPromotionCycle`, `CareerMobility` (advancing/stagnant). Education affects *advancement speed* (bachelor 0.10 / graduate 0.15 mid→senior), **not income** (v14.2 removed the education→income override to kill the three-way conflict; `incomeAdjusted` always 0).
+- **Reads:** UNI/MED/CIV flags + LifeHistory + `Neighborhood_Demographics` (school quality). Story hooks: CAREER_STAGNATION (5%).
+- **Canon note (in-code, S247):** `checkSchoolQuality_`'s `SCHOOL_QUALITY_CRISIS`(<3) / `DROPOUT_WAVE`(<65%) hooks are **dormant by data design** — prosperity-calibrated values (≥7/≥85) keep them from firing; the code explicitly warns *not* to lower school values to make crises fire (re-introduces the S245 invented-struggle fidelity failure). Correct dormancy, not a bug.
+
+### `migrationTrackingEngine.js` (`processMigrationTracking_`, Phase 5) — FULL-READ
+- **Writes SL:** `DisplacementRisk` (0–10 from `Neighborhood_Map.DisplacementPressure` + `Household_Ledger` rent burden + no-college +2 + senior +1), `MigrationIntent` (staying/considering/planning by risk ≥5/≥8). Reads EducationLevel (written by educationCareer earlier in Phase 5 — ordering matters).
+- **⚠ Full-read catch:** `processMigrationEvents_` + `checkForDisplacedCitizens_` are **placeholders** — risk/intent are assessed but **no citizen is actually relocated**, and the `Migration_Events` sheet log is a TODO. Hooks FORCED_MIGRATION (≥9) / MASS_EXODUS (5+/hood) fire, but the structural move doesn't happen here (population-level migration is `applyDemographicDrift`/`applyMigrationDrift`, aggregate not per-citizen).
+
 ## Cross-engine cascades (VERIFIED)
 
 The coupling is not only event→dial; whole engines feed each other across sheets, closing loops.

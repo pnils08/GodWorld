@@ -2,7 +2,6 @@
 
 **Role:** Engine code, sheet structure, clasp deploys. Persists on all engine state and how it connects.
 
-> **S277 close (Mike-direct):** Engine is broken, not worth fixing, and could not be mapped properly to move forward. On record: rebuild beats repair. Owner initiated project shutdown.
 **Established:** Session 135 (2026-04-05)
 **Terminal tag for saves:** `[engine/sheet]`
 **Operating discipline:** measure twice, cut once + cascading-effects review (full rule at top of `.claude/rules/engine.md`). Per-item READ + caller-graph + empirical state check BEFORE any destructive op. Reverse on evidence-contradicting hypothesis. Document discipline in commit messages.

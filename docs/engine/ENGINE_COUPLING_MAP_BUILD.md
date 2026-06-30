@@ -21,10 +21,13 @@ Continuation notes for `docs/engine/ENGINE_COUPLING_MAP.md`. For the next sessio
 - Cross-engine cascades: career→`businessDeltas`→economicRipple→`World_Population`→citizen event probability; relationship→`cycleActiveCitizens`→bonds→`allianceBenefits`→back into event probability; generational death→inheritance→heir wealth.
 
 ## DONE (full-read + in the map)
-dialmap, citizenMemory, compressLifeHistory; runCareerEngine, runHouseholdEngine, runConductEngine, runRelationshipEngine, runNeighborhoodEngine, runEducationEngine, generationalEventsEngine, generateCitizensEvents, generateCivicModeEvents, generateMediaModeEvents, generateGameModeMicroEvents, generateGenericCitizenMicroEvent, runYouthEngine; worldEventsEngine, faithEventsEngine, buildCityEvents, chaosCarsEngine; economicRippleEngine, bondEngine; generationalWealthEngine, educationCareerEngine, migrationTrackingEngine, gentrificationEngine.
+dialmap, citizenMemory, compressLifeHistory; runCareerEngine, runHouseholdEngine, runConductEngine, runRelationshipEngine, runNeighborhoodEngine, runEducationEngine, generationalEventsEngine, generateCitizensEvents, generateCivicModeEvents, generateMediaModeEvents, generateGameModeMicroEvents, generateGenericCitizenMicroEvent, runYouthEngine; worldEventsEngine, faithEventsEngine, buildCityEvents, chaosCarsEngine; economicRippleEngine, bondEngine; generationalWealthEngine, educationCareerEngine, migrationTrackingEngine, gentrificationEngine; civicInitiativeEngine.
+
+## CROSS-FILE TODOs (open questions a single-file read can't answer — resolve when mapping the consumers)
+- **Initiative ripple consumer:** does ANY engine call `applyActiveInitiativeRipples_` / `getRippleEffectsForNeighborhood_` (defined in civicInitiativeEngine, zero in-file callers, header says "Phase 02 or 06")? If not, initiative ripples never decay/expire/reach neighborhoods — only the first-cycle immediate sentiment delta lands. Citizen-impact path (sentiment → event probability). Confirm when reading Phase 2 / Phase 6.
 
 ## NOT DONE (full-read needed)
-- Civic/vote: civicInitiativeEngine, runCivicElectionsv1, runCivicRoleEngine, updateCivicApprovalRatings, updateCivicLedgerFactions, generateMonthlyCivicSweep.
+- Civic/vote: runCivicElectionsv1, runCivicRoleEngine, updateCivicApprovalRatings, updateCivicLedgerFactions, generateMonthlyCivicSweep. *(civicInitiativeEngine DONE S277 — Sonnet-mapped + Mags full-read audit.)*
 - Intake/lifecycle: processIntakeV3, processAdvancementIntake, checkForPromotions, runAsUniversePipeline, applyNamedCitizenSpotlight, applyChaosDecay, seedRelationBondsv1, bondPersistence.
 - Persistence/ledger spine: initSimulationLedger, persistenceExecutor, commitSimulationLedger, writeIntents, v3NeighborhoodWriter (the pulse-fold target).
 - Phase 1 orchestrator (godWorldEngine2), Phase 2 world-state, Phase 3 population, Phase 6 analysis, Phase 7 evening-media, Phase 8 v3, Phase 9 digest (rest), Phase 10/11, lib/.

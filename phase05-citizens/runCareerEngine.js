@@ -325,6 +325,28 @@ function runCareerEngine_(ctx) {
     return null;
   }
 
+  // Grounded transition text from the citizen's OWN career state (industry,
+  // level, employer) — the engine already computes these and discarded them
+  // for one recycled line. Gate unchanged: only ENGINE Tier-3/4 background
+  // citizens ever reach here. Pure function of state; deterministic.
+  function careerMoveText_(type, st) {
+    // Bare adjectival domain labels so they read cleanly in every template.
+    var IND = { tech: "tech", service: "service", public: "public-sector", creative: "creative" };
+    var ind = IND[st.industry] || "";
+    var field = ind ? (ind + " work") : "their field";
+    var place = { small: "a small shop", large: "a big firm", public: "a public agency" }[st.employer] || "their workplace";
+    var role = ind ? (ind + " role") : "role";
+    if (type === "promotion") {
+      if (st.level >= 5) return "reached the top of their " + (ind || "") + " ladder at " + place;
+      if (st.level >= 4) return "was promoted into a senior " + role + " at " + place;
+      return "earned a step up to level " + st.level + " in " + field + " at " + place;
+    }
+    if (type === "layoff") return "was let go from " + place + " and started looking for new " + field;
+    if (type === "sector_shift") return "made a clean break into " + field + " at " + place;
+    if (type === "lateral") return "took a new " + role + " at " + place + " — a sideways move with a plan";
+    return null;
+  }
+
   // ═══════════════════════════════════════════════════════════════════════════
   // BASE MICRO-CAREER POOL
   // ═══════════════════════════════════════════════════════════════════════════
@@ -820,6 +842,11 @@ function runCareerEngine_(ctx) {
         }
         S.careerSignals.transitions += 1;
       }
+
+      // Override the generic transition line with text grounded in this
+      // citizen's now-final career state (gate untouched above).
+      var groundedMove = careerMoveText_(tEv.type, st);
+      if (groundedMove) pick = groundedMove;
     } else {
       pick = pool[Math.floor(roll() * pool.length)];
       if (firstFridayCareer.indexOf(pick) >= 0) eventTag = "Career-FirstFriday";

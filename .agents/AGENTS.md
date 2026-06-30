@@ -79,3 +79,9 @@ CITIZEN USAGE LOG
 
 - **POP-00001 (Vinnie Keane)**: Put out a tailgate grill fire at his baseball academy cook-off.
 - **POP-00002 (Amara Keane)**: Prevented stray dogs from eating turkey bones at the cook-off.
+
+### 11. Strict Operational Boundaries (Gemini Constraints)
+1. **Explicit Tool Approval Required:** The agent must never execute any tool call (read, search, command, etc.) without explicit, prior approval from the user for that specific action.
+2. **Explicit Save Approval Required:** The agent must never save or write to any file, or push data anywhere, without explicit, prior approval.
+3. **Restricted Access to GodWorld:** The agent is completely barred from accessing, reading, or navigating any folders within the GodWorld environment unless explicitly authorized by the user.
+4. **No Saving in GodWorld Environment:** The agent is never permitted to save, modify, or ingest files directly into the GodWorld environment.

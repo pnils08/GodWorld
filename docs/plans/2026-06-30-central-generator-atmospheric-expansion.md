@@ -68,7 +68,7 @@ Status: Active 874 / pending 37 / Retired 8 / deceased 3. LifeHistory populated 
   1. Full-read every pool/template source it assembles (base/seasonal/weather/chaos/sentiment/econ/holiday/firstFriday/creationDay/sports/occupation/fame/age/alliance/rivalry/mentorship/arc/continuity/prevEvening/nbhdState/faith).
   2. Classify each into **atmospheric-safe** (texture, no structural implication) vs **structural/role** (career/occupation transitions, role-specific, anything implying a life change another engine owns).
 - **Verify:** classification table written into this plan (or a sibling note); every pool labeled. No code change yet.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S277 — see §Task 1 findings. All pools atmospheric-safe; one guard (occupation pool); de-risked by the existing T1/T2 mode-citizen carve-out.
 
 ### Task 2: [research-build design seam] Define the atmospheric-safe rule + canon-safety taxonomy
 - **Files:** design note (research-build) → feeds this plan
@@ -117,6 +117,18 @@ Status: Active 874 / pending 37 / Retired 8 / deceased 3. LifeHistory populated 
 - **Status:** [ ] not started
 
 ---
+
+## Task 1 findings — pool classification (DONE S277, full-read `generateCitizensEvents.js` v2.8, 1830 lines)
+
+**Headline: this generator is already atmospheric-safe. The canon-breaking events Mike remembers are NOT emitted here.**
+
+- **No structural mutation.** The generator writes *only* col-O `LifeHistory` (L1709) + a `LifeHistory_Log` row (L1712–1722). It never touches `MaritalStatus`/`Status`/`EmployerBizId`/`Neighborhood`/role columns. So "mayor retired / moved out of town / took a new job" **cannot originate here** — those are `generationalEventsEngine` (retirement/death/wedding), `runCareerEngine` (job change), `migrationTrackingEngine` (displacement). This file is texture-only.
+- **All ~25 pools are observational atmosphere** — safe to extend to everyone:
+  - base/daily, seasonal, weather (weatherPool + weatherV35Pool_), chaos, sentiment, econ, QoL, patrol, prevEvening (incl. city-event fan-out), neighborhoodState (rent/retail/watchful/mood), faith, neighborhoodPools, holiday, firstFriday, creationDay, sports (generalized — no teams), age, alliance/rivalry/mentorship (bond-gated), arc (arc-gated), continuity, fame (recognition), template/tone-slotter. None imply a change to *what the citizen is*.
+- **The one canon-risk pool: `occupationPoolFor_` (L1090)** — keyed to the `Occupation` column, draws from 12 hardcoded service jobs (Barista/Server/Cook/… L609–622). For a MEDIA/CIVIC/GAME citizen whose canon role isn't one of those, it could emit mismatched work texture — but it **self-limits** (returns empty unless Occupation matches one of the 12). Guard in Task 3: skip the occupation pool (and the `Work`/`Sports` source tags) for non-ENGINE citizens, whose mode engine already owns their work/role beats.
+- **De-risk proof:** the named carve-out (L1230, `isNamed = tier 1||2`) **already feeds this exact atmospheric content to T1/T2 GAME/MEDIA/CIVIC citizens** — journalists, athletes, officials — at ~100% coverage today, with zero canon-break flags. Extending the same core to T3/T4 mode citizens is therefore **proven-safe by the existing path**, not a leap. Task 2 shrinks from "rebuild a taxonomy" to "add the occupation/Work-tag guard for non-ENGINE + confirm no other mode-specific collision."
+- **Gate to change (Task 4):** L1229–1232 — specifically `if (!isNamed && mode !== "ENGINE") continue;` (L1232) is the line excluding the 141 dark mode-T3/T4.
+- **Volume mechanic (Task 5):** the loop emits exactly ONE `pickWeighted_` per citizen (L1633 → L1705–1722). The ≤1/citizen ceiling is structural (one pass). Lever = wrap pick→render→emit→`remember` in a random 1..N loop; the existing anti-repeat filter (`mem.recentTexts`, L1619–1631) already dedups across draws, so multi-draw needs no new dedup. `recordPulse_` (L1728) would fire per emit — confirm pulse scaling in Task 6.
 
 ## Open questions
 

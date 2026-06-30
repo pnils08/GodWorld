@@ -242,6 +242,30 @@ These mutate structural SL columns (beyond LifeHistory) and feed cross-sheet sta
   - Stale comments: Logger says `v1.6` (L499; code is v1.9); `seedInitiativeTracker_` comment says "v1.1 schema" (L2190) but seeds v1.7 data.
   - Carve-outs (correct, not bugs): `manualRunVote` uses `Math.random` + `new Date()` (L2069/1991, operator path, no ctx.rng); `addSwingVoter2Columns`/`seedInitiativeTracker_` use `getActiveSpreadsheet` (setup). No cycle-path `new Date()`; `ctx.now` used throughout.
 
+### `runCivicElectionsv1.js` (`runCivicElections_`, Phase 5) — FULL-READ VERIFIED (Sonnet-mapped, S277)
+- **Gate:** fires only on `cycleOfYear===45` AND `godWorldYear % 2 === 0` (L53-70) — once per even God-world year; else `S.electionResults=null` + return. Seat group alternates by `godWorldYear % 4` (L104).
+- **Layer 1:** challenger pool from SL (Tier 2-4, active, non-CIV unless journalist, L172-210). Outcome (L291-378): `incumbentScore` base 50 ±incumbency/econMood/sentiment/scandal/variance, clamp 25-75, `rng()` roll decides. Margin buckets → narrative.
+- **Layer 2 (dials/structural):** no `citizenDialMap`, no dial touch. **Structural-civic:** mutates `Civic_Office_Ledger` office fields; **for an upset winner flips the SL row `CIV='y'` + `TierRole=<office>` (L467-484)** — the one citizen-row structural touch.
+- **Cross-sheet:** reads Civic_Office_Ledger (direct getDataRange) + ctx.ledger. Writes `Election_Log` via `queueAppendIntent_` (L412), Civic_Office_Ledger via `queueRangeIntent_` full rewrite (L454); SL CIV/TierRole via shared `ctx.ledger.rows` + dirty flag (Phase 42 §5.6, not per-cell intent).
+- **Citizen-impact path:** **winning an election promotes a citizen into the civic-mode event pool** — CIV='y'+TierRole feeds `generateCivicModeEvents` downstream (per engine.md ordering; consumer side not re-read). The vote→canon-role→generator-switch coupling.
+- **Catches:** **`new Date()` at L412** written as the Election_Log Timestamp value = real-world-clock residual ([[feedback_no-real-world-clock-in-sim]] — cycle/year used elsewhere in the same payload; flag for fix). District match is `seat.title.indexOf(cand.neighborhood)` substring (L256) — no real district↔hood join. Election_Log lazy-create direct = schema-setup carve-out (correct). No dead fns.
+
+### `runCivicRoleEngine.js` (`runCivicRoleEngine_`, Phase 5) — FULL-READ VERIFIED (Sonnet-mapped, S277)
+- **Gate:** iterates SL rows where `CIV==='y'` (L42-45); **hard cap `LIMIT=6` events/cycle** (L254) — small-sample observer, not full-pop.
+- **Layer 1:** branches by Status — retired/resigned/scandal → fixed note 100% (L278-289); active → soft civic note, base 0.015 + chaos/sentiment/econ/season/holiday/FF/CreationDay mods, cap 0.08 (L292-322). Text from generic + role-keyword (council/mayor/etc.) + neighborhood + holiday pools.
+- **Layer 2 (dials/structural):** **none** — no citizenDialMap, no status/role mutation. Explicit observer ("Preserves Maker authority. Never modifies status." L13). Pure narrative logger.
+- **Cross-sheet:** reads ctx.ledger + ctx.summary. Writes col-O LifeHistory (in-memory, dirty flag) + `LifeHistory_Log` via `queueAppendIntent_` (L423). No direct sheet writes.
+- **Citizen-impact path:** does NOT assign roles — narrates citizens already carrying CIV='y', reads (never writes) TierRole for flavor. Rides on role-assignment done upstream (elections/initiative).
+- **Catches:** no stubs/orphans, no wall-clock (`inWorldStamp_` L414), no NaN hazards (bounded). Footer holiday-ref table matches code (no drift). Soft gap: missing TierRole col silently skips role notes (graceful degrade).
+
+### `updateCivicApprovalRatings.js` (`updateCivicApprovalRatings_`, Phase 5, after civicInitiativeEngine) — FULL-READ VERIFIED (Sonnet-mapped, S277)
+- **Gate:** rows where Status active/recovering AND OfficeId `^COUNCIL`/`^MAYOR` (L150) — elected council+mayor only. Every cycle. Bails if no ctx.ss / no Civic_Office_Ledger / no Approval col.
+- **Layer 1:** Approval = three additive deltas (L137-285): (1) initiative performance in district × faction alignment (±1..4); (2) media-coverage compound from `S.editionDomainBalance.CIVIC.rating` (±1/2); (3) decay toward 50. Clamp 10-95.
+- **Layer 2 (dials/structural):** **none** — no citizenDialMap, no citizen-row touch. Pure macro-civic math on Civic_Office_Ledger (officials). Recall/vulnerable/popular triggers computed → ctx.summary only, no write.
+- **Cross-sheet:** reads Civic_Office_Ledger + Initiative_Tracker (read-only). Writes **only** Civic_Office_Ledger Approval via `queueCellIntent_` (L294, dryRun-guarded).
+- **Citizen-impact path:** indirect, neighborhood-grain — ripples `delta*0.003` into `S.approvalNeighborhoodEffects[hood].sentiment`/`.communityEngagement` (L300-322) per district hood → feeds neighborhood sentiment → **citizen-event probability** next cycle. No direct citizen touch.
+- **Catches:** **engine.md doc-drift** — exceptions list says this file writes "Civic_Office_Ledger + Initiative_Tracker" but Initiative_Tracker is **read-only** here (no write exists). Stale `v1.0` Logger strings vs v1.1 header. `currentApproval` NaN→hardcoded 65 (L144). `DISTRICT_HOODS` hardcoded 9-district map duplicated in-file (no canonical source). No wall-clock/Math.random/orphans.
+
 ## Cross-engine cascades (VERIFIED)
 
 The coupling is not only event→dial; whole engines feed each other across sheets, closing loops.

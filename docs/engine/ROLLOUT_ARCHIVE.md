@@ -1150,3 +1150,17 @@ Prior sweep passes: §S248, §S250, §S263, §S268 (latest before this). This is
 - **research.18** [research-build (author+validate) → engine-sheet (live write) — both DONE] — Tier-1 dial-essence backfill (Seam A of the citizen-loop closure, Mike S265, "the loop I'm trying to close"). **Close-note:** 13 of 21 Tier-1 read neutral "Drifter" (all dials 50) → below the `deviation≥60` wake gate → the richest characters (Vinnie/Benji/Varek) couldn't enter the 24/7 loop, because their essence was authored in voice-files but **never written into history**, so the seed (pure function of `LifeHistory_Archive`) correctly produced neutral from empty input. Mechanism = **complete-the-history, NOT shield-Tier-1** (engine.31 invariant preserved): author each citizen's canon as `LifeHistory_Archive` events replayed through the *same* map to their essence; the live `LifeHistory` column (wake journal material) stays untouched. **S266: authoring COMPLETE 43/43, 344/344 dial-targets** (`seedTier1Essence.js`); engine-sheet live-wrote all 43 via `seedTier1EssenceLive.js` — 38 in the wake loop, 5 thin-canon below-gate. **S267: 5-below-gate retune CLOSED — author nothing** (all 5 at `ESSENCE MATCH`; the deviation is the faithful output of a complete essence and the wake gate is emergent — vivid canon clears, faint doesn't; within-band padding would be gaming). Sarah POP-00595 + Rivas POP-00024 are integrity-coupling-limited → clear faithfully when engine.39 lands (re-run the seeder then); Ellis/Taveras/Arturo-Ramos genuinely faint, faithful as-is, no action ever. Finding: the map had no pure-integrity/warmth-temperament tag (integrity rode Reputation+sociability) → drove **engine.39** (`Principled`/`Warm` tags). **Open follow-on tracked separately as engine.39** (pure-integrity re-run, wip — built local S270, clasp+verify pending). Plan [[../plans/2026-06-21-tier1-dial-essence-backfill]]. Pattern: `feedback_measure-twice-cascading-effects` (S267 retune REVERSED the author-5-more instinct on the evidence that the wake gate is correctly emergent, not a bug to pad around).
 
 ---
+
+## S278 Archive Pass (2026-07-01, research-build) — post-S274 closures sweep
+
+1 `done-pending-archive` row sat unswept since S274 (4 sessions) — surfaced during a Mike-directed rollout staleness audit rather than the normal soft-close cadence.
+
+Cluster counts: governance 1.
+
+Prior sweep passes: §S248, §S250, §S263, §S268, §S274 (latest before this).
+
+### governance.* (1)
+
+- **governance.44** [research-build] — Cheap-agent isolation, soft tier (S274, Mike-direct). **Close-note:** Claude control plane (`.claude/**`, `CLAUDE.md`, `SESSION_CONTEXT.md`) made read-only to Gemini/Aider — `.aiderignore` covers Aider, `.githooks/pre-commit` default-denies control-plane commits unless a Claude session sets `CLAUDE_CTL=1` (catches Gemini too, by policy not kernel — `--no-verify`/direct-write bypass it). Cheap agents home-based in `.agents/`. `MODEL_HIERARCHY.md` destaled (Qwen removed) + registered in index.md. Hard tier (non-root user / sandbox) deferred — adopt only if soft tier proves leaky. Source: `docs/MODEL_HIERARCHY.md` §File Boundaries; `.aiderignore`; `.githooks/pre-commit`.
+
+---

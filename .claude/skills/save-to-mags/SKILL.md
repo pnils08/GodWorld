@@ -15,7 +15,7 @@ Save session knowledge to the `mags` Supermemory container.
 
 **This is Mags' brain.** Session summaries, corrections, decisions, editorial thinking, project state. Content that helps the next session start smarter.
 
-**Do NOT use for:** Published editions, rosters, canon content. Those go to `bay-tribune` via `/save-to-bay-tribune` or `node scripts/ingestEdition.js`. (`/super-save` writes to `super-memory` — the junk drawer — not bay-tribune. Don't confuse them.) See [[../../../docs/SUPERMEMORY|SUPERMEMORY]] §Search/save matrix for the full container map.
+**Do NOT use for:** Published editions, rosters, canon content. Those go to `bay-tribune` via `/save-to-bay-tribune` or `node scripts/ingestEdition.js`. (`/supermemory-save` writes to `super-memory` — the junk drawer — not bay-tribune. Don't confuse them.) See [[../../../docs/SUPERMEMORY|SUPERMEMORY]] §Search/save matrix for the full container map.
 
 ## Step 1: Format Content
 

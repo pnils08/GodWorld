@@ -74,6 +74,7 @@
       "Bash(curl *api.supermemory.ai*)"
     ]
   },
+  "enableAllProjectMcpServers": true,
   "hooks": {
     "SessionStart": [
       {
@@ -105,7 +106,12 @@
       }
     ]
   },
-  "enableAllProjectMcpServers": true,
+  "enabledPlugins": {
+    "ralph-loop@claude-plugins-official": true,
+    "hookify@claude-plugins-official": true,
+    "claude-code-setup@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true
+  },
   "autoMode": {
     "allow": [
       "Read, Edit, Write, Glob, Grep are safe for all project files",
@@ -129,11 +135,5 @@
       "bay-tribune Supermemory container is agent-facing canon — never write system internals to it",
       "Agent files (.claude/agents/) must never contain simulation/engine/builder references"
     ]
-  },
-  "enabledPlugins": {
-    "ralph-loop@claude-plugins-official": true,
-    "hookify@claude-plugins-official": true,
-    "claude-code-setup@claude-plugins-official": true,
-    "skill-creator@claude-plugins-official": true
   }
 }

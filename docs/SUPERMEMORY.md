@@ -425,7 +425,7 @@ File: `.claude/.supermemory-claude/config.json` (gitignored)
 
 `personalContainerTag` → `mags` (deliberate brain). `repoContainerTag` → `super-memory` (junk drawer). This means `/super-save` writes to `super-memory` by default, keeping `mags` clean. `/super-search --user` hits `mags`, `--repo` hits `super-memory`. Use `/save-to-mags` for deliberate brain saves. Use `/save-to-bay-tribune` for canon saves.
 
-**Plugin version: `claude-supermemory` v0.0.4** (upgraded from 0.0.2 S241, restart-applied + smoke-tested S242 — project-scope; cloud client, no local store to migrate). Old `0.0.2` cache retained for rollback. Upgrade detail: [[archive/plans/2026-05-28-claude-supermemory-v0-0-2-to-v0-0-4-upgrade]].
+**Plugin version: `supermemory` v0.0.9** (renamed from `claude-supermemory`, migrated S278 per official README migration path — marketplace refresh → install `supermemory@supermemory-plugins` → uninstall `claude-supermemory@supermemory-plugins --keep-data`; user-scope now, was project-scope; cloud client, config/API key untouched). Old `claude-supermemory` v0.0.4 cache retained on disk, not removed by uninstall.
 
 **Source attribution (new in 0.0.4):** the writer scripts (`add-memory.cjs`, `save-project-memory.cjs`) now stamp `sm_source: "claude-code"` metadata on every memory they write. This distinguishes plugin-written memories from records written by other paths (Mara's connector, the curl `/v4` API used for multi-tag `world-data` writes). Useful for provenance filtering; no action required — additive, doesn't change read/search behavior.
 
@@ -439,14 +439,14 @@ File: `.claude/.supermemory-claude/config.json` (gitignored)
 
 ### Skills
 
-**Alias-additive in 0.0.4 (confirmed S242):** v0.0.4 added kebab-renamed skills `/supermemory-save` + `/supermemory-search` **alongside** the originals `/super-save` + `/super-search` — all four skill dirs ship in the plugin. The old names still work; existing references across GodWorld skills/agents need no rewrite. The table below uses the canonical `/super-*` forms.
+**Renamed, not aliased, in 0.0.9 (S278 migration).** The `/super-save` + `/super-search` names are gone — 0.0.9 ships only `supermemory-save` + `supermemory-search` (no `super-*` skill dirs at all, unlike the 0.0.4 alias-additive state). Existing references to `/super-search` / `/super-save` across GodWorld skills need rewriting to `/supermemory-search` / `/supermemory-save`. The table below uses the current canonical forms.
 
 | Command | What it does | Container |
 |---------|-------------|-----------|
-| `/super-search --user "query"` | Search Mags' brain | `mags` |
-| `/super-search --repo "query"` | Search junk drawer | `super-memory` |
-| `/super-search --both "query"` | Search both | `mags` + `super-memory` |
-| `/super-save "content"` | Quick save (auto/conversation) | `super-memory` |
+| `/supermemory-search --user "query"` | Search Mags' brain | `mags` |
+| `/supermemory-search --repo "query"` | Search junk drawer | `super-memory` |
+| `/supermemory-search --both "query"` | Search both | `mags` + `super-memory` |
+| `/supermemory-save "content"` | Quick save (auto/conversation) | `super-memory` |
 | `/save-to-mags "content"` | **Deliberate save** — decisions, reasoning, editorial thinking | `mags` |
 | `/save-to-bay-tribune "content"` | Published canon — editions, rosters, game results ONLY | `bay-tribune` |
 
@@ -718,6 +718,7 @@ Counts reflect last `buildMaraReference.js` run; re-run if ledger has grown. ENG
 
 ## Changelog
 
+- 2026-07-01 — S278. **Plugin migrated `claude-supermemory` v0.0.4 → `supermemory` v0.0.9** (upstream rename, repo stayed `claude-supermemory`). Followed official README migration path: marketplace refresh, install `supermemory@supermemory-plugins`, uninstall old with `--keep-data`. Scope changed project→user. Config/API key/containers untouched — search verified working post-migration (initial zero-result was a query-pattern miss against broad `world-data` without the documented hybrid+threshold override, not a regression). §Plugin Config version line + §Skills table updated: `/super-search` + `/super-save` are gone in 0.0.9 (was alias-additive in 0.0.4, now hard rename) — canonical forms are `/supermemory-search` + `/supermemory-save`. Cross-reference in `save-to-mags/SKILL.md` updated to match.
 - 2026-05-22 — S221+. **Stop hook neutralized + 65 `session_turn` docs deleted from `mags`.** Surfaced when Mike noticed Supermemory had been auto-saving conversation turns as `session_turn` docs (~7K tokens each) and the server-side extraction was collapsing both speakers into Mags' first-person voice ("Margaret Corliss feels frustrated..." for content that was actually Mike venting). The journal scaffolding loaded those at boot as Mags' conscience — Mike's frustrations became her self-image. Two-part fix: (1) deleted all 65 polluted docs (count 65 → 0); (2) neutralized writer hook globally via `~/.supermemory-claude/settings.json` (`signalExtraction:true` + `signalKeywords:[]` → `formatSignalEntries` returns null → hook exits without writing). Verified mechanism by replicating `getSignalConfig` merge logic inline. SessionStart context-hook left active (decision deferred to optimization session). Filed `infrastructure.5` audit plan ([[plans/2026-05-22-supermemory-load-bearing-audit]]) for the broader load-bearing-vs-MD-substrate question — sibling to `governance.12` (User Profile leverage design) and `infrastructure.4` (writer-hook final disposition). §Plugin Config / Hooks, §User Profile Pipeline / Writer, §How It Works / Session End, §mags container all updated to reflect neutralized state.
 - 2026-04-30 — S190. Currency refresh. **§bay-tribune Contents** rewritten — last audit was S113 (E83-E89, ~31 docs); now reflects S189 Phase 1 audit (175 docs across editions E83-E92, supplementals C83-C92, dispatches, interviews, wiki entities, rosters, corrections). **§world-data Contents** rewritten — last edit was S131 first-ingest snapshot (26 docs); now reflects post-S183 unified ingest with per-domain `wd-*` tag scheme + S184 female-balance +150 (~843 docs total, 100% domain-tagged). **§mara Contents** + **§Reference File Generation** counts refreshed (Chicago 123→125, Business 51→53, Faith 16→17; citizen-roster flagged 509+ post-S184 with refresh note). **§Active Rebuilds (S189)** block added between §Scrub Procedure and §Memory Fence — pointers to bay-tribune unified ingest rebuild plan + SMFS comparison doc + HOLD status.
 - 2026-04-29 — S188. Added §Scrub Procedure documenting the S186 Perkins&Will → Atlas Bay scrub workflow (identify / confirm / wipe / re-ingest / verify), corrigendum pattern for audit records, wiki-layer immunity finding. Pairs with session-end SKILL.md drift fix (`/super-save` writes to `super-memory`, not `bay-tribune`).

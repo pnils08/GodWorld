@@ -604,6 +604,7 @@ function generateCitizensEvents_(ctx) {
     if (has("source:listening")) return "Personal";
     if (has("source:groove")) return "Micro-Event";
     if (has("source:civicNews")) return "Civic Perception";
+    if (has("source:retirement")) return "PostCareer";
     if (has("source:curiosity")) return "Lifestyle";
     if (has("source:communityLife")) return "Neighborhood";
     return "Daily";
@@ -1771,6 +1772,23 @@ function generateCitizensEvents_(ctx) {
       var op = occupationPoolFor_(occupation);
       for (var opi = 0; opi < op.length; opi++) {
         pool.push(makeEntry(op[opi].text, mergeTags(op[opi].tags, calendarTags), op[opi].weight, false));
+      }
+    }
+
+    // S280 item 7 (deferred from the S277 retired refinement — Mike: retirement
+    // changes what they get): retired citizens lost the work-shift pool; this is
+    // what replaced it. Route: PostCareer {family:4, openness:2} — the existing
+    // post-career state key, same scale as workers' Work {drive:4} texture.
+    if (status === "retired") {
+      var retiredPool = [
+        "took the long morning walk that used to be a commute",
+        "gave a whole afternoon to a hobby without once checking the clock",
+        "dispensed advice at the hardware store — unsolicited, graciously received",
+        "watched the morning rush from the good bench, coffee in hand, exempt",
+        "volunteered an hour and accidentally stayed three"
+      ];
+      for (var rpi = 0; rpi < retiredPool.length; rpi++) {
+        pool.push(makeEntry(retiredPool[rpi], mergeTags(["source:retirement"], calendarTags), 1.0, false));
       }
     }
 

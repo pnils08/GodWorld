@@ -161,9 +161,53 @@ Status: Active 874 / pending 37 / Retired 8 / deceased 3. LifeHistory populated 
 
 ---
 
+## Depth step — pool-deepening (opened S280, Mike-directed)
+
+**Rubric (Mike, S280):** dial folding is depth-indifferent (any event moves a dial), so depth is graded on two downstream consumers: (a) **story seeding** — event text tied to real engine output gives desk agents concrete hooks; (b) **24/7 loop reflection** — a citizen reading their own LifeHistory needs specifics to reflect on *themselves and the city*. The sweet spot is both at once.
+
+### Pool inventory (full-read S280, v2.8 in-tree)
+
+**Tier A — already at the sweet spot (pattern proven, needs siblings):**
+- `previousEveningPool_` — names actual city events (attend vs heard-about by outabout band), famous sightings, food/streaming trends, hotspots. Best content in the file.
+- `neighborhoodStatePool_` — gentrification/displacement/retail/crime/mood from real Neighborhood_Map values, hood named.
+- `faithPool_` — names the actual congregation + event type, same-cycle.
+- `weatherV35Pool_` — microclimate divergence naming the hood.
+- Tone-slotter templates — real contact name, real venue, citizen motifs, profile-derived tone.
+
+**Tier B — engine data in hand, text throws it away (highest-value fixes, no new wiring):**
+- `chaosPool` — holds the cycle's real chaos/world events, emits "reflected briefly on today's city happenings." Name the event. **First fix.**
+- `sentimentPool` / `econPool` — 2 vague lines each off real dynamics values; no driver named.
+- `qolPoolFor_` / `patrolPoolFor_` — real QoL index + patrol strategy, small banded pools.
+
+**Tier C — real gates, generic payoffs:**
+- alliance/rivalry/mentorship/arc pools — fire only on real bonds/arcs but never name the counterpart or the arc. Bond ledger has the names. "Traded words with [rival name]" seeds a story; "felt a flicker of tension" doesn't.
+- Static thin pools: baseDaily (6 lines, every citizen every cycle), seasonal (1/season), age (2/group), holiday (3/each), neighborhoodPools (3/hood), sports (3/phase).
+
+**Missing pools (city-reflection gaps):** initiative/council-vote texture (Initiative_Tracker never reaches citizen texture); Tribune-readership events (dial map already routes `E\d+` edition-citation tags → sociability:2 — dial side exists, no emitter); Baylight construction; named business open/close; retirement-flavored leisure (deferred here from the retired refinement).
+
+### Build order (proposed, pending Mike's go)
+
+1. Tier B: name what's already in hand — chaos first, then sentiment/econ drivers.
+2. Tier C bonds/arcs: put the real counterpart name + arc reference in the text.
+3. New engine-tied pools: civic/initiative texture, Tribune readership, Baylight.
+4. Widen static filler last (least valuable depth) + retirement leisure content.
+
+All additions stay inside the Task-2 atmospheric invariant (does/feels/observes — never what they are), composure-light per the engine.38 convergence constraint.
+
+### Open design question — shared event-content ledger (Mike, S280)
+
+Hardcoded pools mean deepening = editing many files; the mode engines are thin for exactly this reason. Proposal to evaluate: a sheet-tab content ledger (text, pool/category, weight, eligibility conditions) loaded once per cycle into ctx, drawn by **all** generators — centralizes depth, Mike-editable without deploys. Cost: +1 sheet read/cycle, tab-drift failure mode, schema design. Disposition: this session's deepening lands in code; the ledger is the candidate architecture for the **mode-engine depth-parity block** and wants a research-build design pass before build.
+
+### Outside-LLM idea intake (Mike, S280)
+
+Mike collected addition-ideas (not change-plan ideas) from a variety of LLMs. Each idea gets graded against the rubric above + the atmospheric invariant: **add / adapt / skip**, with a one-line reason. Findings land in this section when processed.
+
+---
+
 ## Changelog
 
 - 2026-06-30 — Initial draft (S277). Lever 1 of citizen-event work; baseline captured from live C100 tally. Lever 2 + design taxonomy pending.
 - 2026-06-30 — Task 2 DONE (research-build, S277). Atmospheric invariant defined; occupation pool is the only mode-collision (guard to ENGINE-only); sports pool checked safe; legibility path (primaryTag) already exists. Task 3 narrowed to a one-pool guard. Lever 2 still open (Mike's directive).
 - 2026-06-30 — Retired refinement (engine-sheet, S277). Occupation work-texture pool now also excludes `Status==="retired"` (Mike: retirement changes what they get) — retired keep the atmospheric core, lose work-shift events. Lever 2 confirmed NONE (stray digit). N=4 confirmed by Mike. Retirement-flavored leisure content deferred to the depth step.
 - 2026-06-30 — Tasks 3–5 DONE (engine-sheet, S277). `generateCitizensEvents.js`: occupation pool guarded ENGINE-only; mode gate removed (all active T1–4 eligible); deceased excluded; volume → random 1..`ATMOSPHERIC_MAX_EVENTS`(=4) per citizen with hard within-cycle dedup; `recordPulse_` once-per-citizen. Syntax-clean (`node -c`). Measure-twice: all non-Active citizens are ENGINE (gate-open is resurrection-safe). HELD: N stays 4 until Task 6 perf gate; pending/Retired exclusion + Lever 2 await Mike; functional verify (Tasks 6–7) needs a cycle run (clasp). Advisor flagged volume≠depth — pool-deepening still open.
+- 2026-07-01 — Depth step opened (engine-sheet, S280). Rubric defined (story seeding + 24/7-loop reflection); full pool inventory graded into tiers A/B/C + missing-pool list; build order proposed (Tier B name-what-you-hold first); shared event-content ledger logged as open design question (candidate architecture for the mode-engine depth-parity block, research-build seam); outside-LLM idea intake protocol set (grade add/adapt/skip against rubric + invariant).

@@ -224,7 +224,7 @@ Handoff slices — all builds are engine-sheet's (engine code and loop scripts b
 - **Files:** Simulation_Ledger (new column, manual measure-twice); `docs/SIMULATION_LEDGER.md`, `schemas/SCHEMA_HEADERS.md` (regen), `docs/engine/SHEETS_MANIFEST.md` — same commit
 - **Steps:** add column; document; regen headers (`node scripts/regenSchemaHeaders.js`); no code reads it yet.
 - **Verify:** regen diff shows the column; engine cycle unaffected (column unread).
-- **Status:** [ ] not started
+- **Status:** [x] done (S282, engine-sheet) — grid was exactly 49 wide, resize→50 required (the documented gotcha); header at AX1 read-back verified, AW intact, data cells blank; SCHEMA_HEADERS regen diff shows `| AX | MemoryRegisters |`; audit script clean at 50 cols / 922 rows. Bonus fix surfaced by the regen: `Reflection_Intake` H header was blank (writer+drain both positional) — `Affect` written. SIMULATION_LEDGER.md + SHEETS_MANIFEST.md updated same commit.
 
 ### Task 6: bias intents + fold (B1)
 - **Files:** `phase05-citizens/generateCitizensEvents.js` — bias-lite pool pushes `S.biasIntents`; `utilities/compressLifeHistory.js` — drain intents into `MemoryRegisters.biases` in the per-row RMW (reinforce/challenge/evict rules per Design B1)

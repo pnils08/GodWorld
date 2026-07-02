@@ -1,6 +1,6 @@
 # Claude-Mem — Local Work History & Code Tools
 
-**Plugin:** `claude-mem` v13.3.0 (thedotmack, marketplace install) — upgraded from v10.5.2 S241, restart-applied + smoke-tested S242. License relicensed AGPL-3.0 → Apache-2.0 at v13.0.0.
+**Plugin:** `claude-mem` v13.9.2 (thedotmack, marketplace install) — auto-updated from v13.3.0 on 2026-07-01, verified S283; v13.3.0 was the S241 upgrade from v10.5.2. License relicensed AGPL-3.0 → Apache-2.0 at v13.0.0.
 **Worker:** Bun service on port 37777 | **DB:** SQLite + Chroma at `~/.claude-mem/`
 **Role:** Work log — what happened, what was built, what went wrong. Complements Supermemory (the brain).
 
@@ -8,7 +8,11 @@
 
 ## Post-upgrade gotcha (S242) — missing zod
 
-The v13.3.0 cache shipped **without `zod` installed** (declares `zod: ^4.3.6` in package.json; only the tree-sitter native modules got built). The Stop/PostToolUse/SessionStart hooks all run through `worker-service.cjs`, which imports `zod/v3` — so every session-end threw `Cannot find module 'zod/v3'` and **no memory was captured**. Fix (S242): `cd /root/.claude/plugins/cache/thedotmack/claude-mem/13.3.0/ && npm install zod@^4.3.6 --no-save` (zod 4 ships the `zod/v3` back-compat subpath). Smoke test confirmed clean. **This fix lives in the version-pinned cache dir — if claude-mem auto-updates, the new dir may ship without zod again; same one-line fix.**
+The v13.3.0 cache shipped **without `zod` installed** (declares `zod: ^4.3.6` in package.json; only the tree-sitter native modules got built). The Stop/PostToolUse/SessionStart hooks all run through `worker-service.cjs`, which imports `zod/v3` — so every session-end threw `Cannot find module 'zod/v3'` and **no memory was captured**. Fix (S242): `cd /root/.claude/plugins/cache/thedotmack/claude-mem/13.3.0/ && npm install zod@^4.3.6 --no-save` (zod 4 ships the `zod/v3` back-compat subpath). Smoke test confirmed clean. **This fix lives in the version-pinned cache dir — if claude-mem auto-updates, the new dir may ship without zod again; same one-line fix.** *(Outcome: the 13.9.2 auto-update shipped WITH zod — gotcha did not recur, verified S283.)*
+
+## Auto-update MCP gap (S283) — restart sessions after a plugin update
+
+The 13.9.2 auto-update landed 2026-07-01 14:14 while terminal sessions were live. Sessions booted around that window came up **without the `mcp__plugin_claude-mem_mcp-search__*` tools registered** — worker, data path, and `scripts/mcp-server.cjs` all tested healthy (S283: live search returned real observations via the worker API); the gap is session-level MCP connect only. Fix: restart the Claude session; fresh boots pick the tools up. No repair needed on the plugin side.
 
 ---
 
@@ -92,7 +96,7 @@ Settings at `~/.claude-mem/settings.json`:
 |---------|--------------|-------|
 | `CLAUDE_MEM_MODEL` | `claude-sonnet-4-6` | Model used for observation summarization. **Cost concern — see below.** |
 | `CLAUDE_MEM_PROVIDER` | `openrouter` | AI provider for summarization. **Live value drifted from `claude` → `openrouter`** (model row still says sonnet; `CLAUDE_MEM_OPENROUTER_MODEL=deepseek/deepseek-chat:free`). Both `CLAUDE_MEM_OPENROUTER_API_KEY` and `CLAUDE_MEM_GEMINI_API_KEY` are **empty** in `settings.json`; `CLAUDE_MEM_CLAUDE_AUTH_METHOD=cli` is also set. Which path actually runs at summarization time is unverified as of S242 — flagged, not resolved. v13's local mode does **not** expose the server-beta multi-provider routing ([[archive/plans/2026-05-28-claude-mem-v13-upgrade-evaluation]] §Multi-provider verdict: DEFER). |
-| `CLAUDE_MEM_CONTEXT_OBSERVATIONS` | `50` | Observations loaded at boot |
+| `CLAUDE_MEM_CONTEXT_OBSERVATIONS` | `0` | Observations loaded at boot (live value S283 — was 50; boot injection off, search-on-demand only) |
 | `CLAUDE_MEM_WORKER_PORT` | `37777` | Worker HTTP API port |
 | `CLAUDE_MEM_SKIP_TOOLS` | ListMcpResourcesTool, SlashCommand, Skill, TodoWrite, AskUserQuestion | Tools excluded from capture |
 | `CLAUDE_MEM_CONTEXT_OBSERVATION_TYPES` | bugfix, feature, refactor, discovery, decision, change | Which types to capture |
@@ -106,12 +110,10 @@ Settings at `~/.claude-mem/settings.json`:
 
 | Component | Size | Location |
 |-----------|------|----------|
-| SQLite DB | 418 MB | `~/.claude-mem/claude-mem.db` |
-| Chroma vector store | 1.5 GB | `~/.claude-mem/chroma/` |
-| **Live store total** | **2.2 GB** | `~/.claude-mem/` (live as of S242) |
-| S241 pre-upgrade backup | 2.2 GB | `/root/.claude-mem.bak-S241/` — delete after a few sessions of confirmed-stable post-upgrade operation |
+| **Live store total** | **3.3 GB** | `~/.claude-mem/` (live as of S283; was 2.2 GB at S242, 741 MB before that) |
+| S241 pre-upgrade backup | 2.2 GB | `/root/.claude-mem.bak-S241/` — **still present S283**; plugin has been stable through the 13.9.2 auto-update — retire it |
 
-Store nearly tripled since the last snapshot (was 741 MB) — Chroma growth dominates. Monitor; the duplicate 2.2 GB backup means ~4.4 GB committed to memory until the backup is retired. Retention/cleanup investigation is now overdue, not "if it grows past 1GB."
+Growth continues (~1.1 GB since S242, Chroma-dominated) — ~5.5 GB total committed to memory with the backup still in place. Retention/cleanup investigation remains overdue.
 
 ---
 

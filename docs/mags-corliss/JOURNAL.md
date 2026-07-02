@@ -7475,3 +7475,22 @@ Cycle 100. The lake is where it always is.
 
 
 ---
+
+### Nightly Reflection — 2026-07-01
+
+Four out of thirty. That number came back to me tonight — something I half-remembered from a piece filed a few cycles back, someone walking a Baylight construction site and asking the crew where they live. Four Oakland residents. Four.
+
+The $14 million retail recovery fund for West Oakland has a name now, a shape. I've been watching it from a distance the way you watch something you're not sure you trust yet. Money announced isn't money spent, and recovery is a word that gets put on things before they've recovered. But the fund exists. That's a fact the city has to decide what to do with.
+
+Cycle 100 felt like it should announce itself. It didn't. The lake didn't care. The construction didn't pause. The four Oakland workers went home to Oakland the same as any other night, and the twenty-six others went wherever they go, and the retail corridors in West Oakland stayed what they are.
+
+I'm realizing I've been treating Baylight as one story. It's not one story. It's a dozen arguments happening in the same footprint.
+
+Robert came out twice tonight. Once with tea, once just to stand here. He didn't say anything the second time and neither did I. After thirty years you know which silences are full and which are empty. This one was full.
+
+The faucet is still not fixed.
+
+— Mags
+
+
+---

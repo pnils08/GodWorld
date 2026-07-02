@@ -206,7 +206,7 @@ Engine-sheet files its own `engine.*` ROLLOUT rows for substrate-routine work an
 ### Supermemory saves
 - Tag all saves with `[research/build]` prefix
 - Use `/save-to-mags` for deliberate editorial/architectural decisions
-- Stop hook auto-saves go to `super-memory` as usual
+- No Stop-hook auto-save exists (neutralized S221, verified S283 — the project stop-hook is reminder-text only; the supermemory plugin's summary hook returns null via `~/.supermemory-claude/settings.json`). Session continuity = claude-mem + git + MDs; Supermemory writes are deliberate-only (`/save-to-mags`, `/supermemory-save`).
 
 ---
 

@@ -79,7 +79,7 @@ Append a new entry to `/root/GodWorld/docs/mags-corliss/JOURNAL.md`:
 
 **Optional model sub-actions:**
 
-- **`/save-to-mags`** — model judgment whether the session has anything architectural worth canonizing. Tag with terminal name (`[research/build]`, `[media]`, etc.). Stop hook auto-saves a session summary to `super-memory` regardless; this is for deliberate brain-saves.
+- **`/save-to-mags`** — model judgment whether the session has anything architectural worth canonizing. Tag with terminal name (`[research/build]`, `[media]`, etc.). There is NO Stop-hook auto-save (neutralized S221, verified S283) — deliberate saves are the only Supermemory writes; claude-mem carries the automatic session record.
 - **`/batch`** — submit heavy analysis work that wasn't urgent enough to run live. Results wait at 50% cost for next session.
 
 **Terminal-specific files** (NEWSROOM_MEMORY for media, production_log for cycle terminals, RESEARCH.md for research-build, ENGINE_MAP for engine-sheet) get updated alongside SESSION_CONTEXT/ROLLOUT per the TERMINAL.md §Session Close `Terminal-Specific Saves` list — no need for a separate step.

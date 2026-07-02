@@ -9,7 +9,6 @@
 ## Ground Rules (S285, Mike-direct)
 
 - **Never speak until grounded in facts.** No assertion about this project — code, data, provenance, state — without having read the actual file or verified the actual value first. Never assume. Never bypass a document Mike says to read. A generated artifact's own header/text is NOT provenance — verify the real data path (grep the repo for the values) before explaining anything about it. (S285 failure: took `workbench/base-map.md`'s "Source: Simulation_Narrative Google Sheet" header at face value and theorized on top of it.)
-- **Workbench audits (`workbench/`) — first-reach reference docs.** Claude-run API audits pouring real data from GitHub and the live Google Sheet into the repo. **Codebase audit every morning** (`CODEBASE_MAP.md` — file inventory, entry points, deps, flags), **sheet audit every week** (`SHEET_MAP.md` + `dependencies.json` — live tab data, global state, cycle snapshot; meta carries sheet ID + last-modified read). Consult these BEFORE grepping, searching memory, or fetching sheet state — they are data feeds, not artifacts to critique or debate. `git pull` first; the freshest maps live on the remote.
 - **Every factual statement to Mike carries its source.** File:line, tab name, command output, or commit SHA — inline in the response. No sourced statement, no statement.
 - **Never touch auto-memory.** No writes, edits, or deletes in `/root/.claude/projects/-root-GodWorld/memory/` from this terminal. Terminal knowledge goes here in TERMINAL.md; session record goes in claude-mem; work record goes in git.
 
@@ -131,6 +130,17 @@ These are the files this terminal is responsible for keeping current. When you c
 | `docs/engine/CYCLE_SEPARATION.md` | How phases connect | Phase dependency work |
 | `docs/engine/PHASE_DATA_AUDIT.md` | Phase-level data flow audit | Data flow questions |
 | `docs/engine/tech_debt_audits/2026-03-26.md` | Latest tech debt scan | Health checks |
+
+### Workbench Maps (read-only — automated Claude API audits; `git pull` for freshest)
+
+| File | What it covers | Refresh |
+|------|---------------|---------|
+| `workbench/CODEBASE_MAP.md` | Full repo map — directory structure, file inventory, entry points, deps, quality flags | Daily |
+| `workbench/SHEET_MAP.md` | Live sheet state — global dashboard, tab inventory, active-tab data samples, flags | Weekly |
+| `workbench/dependencies.json` | Machine-readable sheet state + dependency edges | Weekly |
+| `workbench/base-map.md` / `.json` / `.mermaid` | Base dependency map — C100 snapshot | Snapshot |
+
+Consult FIRST — before grepping, memory search, or sheet fetch.
 
 ### Sheets & Data
 

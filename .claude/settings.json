@@ -44,7 +44,9 @@
       "Bash(node scripts/buildCitizenCards*)",
       "Bash(npx supermemory add*)",
       "Bash(npx supermemory ingest*)",
-      "Bash(curl *api.supermemory.ai*)"
+      "Bash(curl *api.supermemory.ai*)",
+      "Edit(.claude/terminals/**)",
+      "Write(.claude/terminals/**)"
     ]
   },
   "enableAllProjectMcpServers": true,

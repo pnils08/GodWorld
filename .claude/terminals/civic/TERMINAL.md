@@ -222,7 +222,7 @@ At session-close, Mike runs `/usage` and pastes the per-category breakdown (skil
 
 Use when the next civic session opens within minutes.
 
-**The carried set (ADR-0009 §loop-tightening): SESSION_CONTEXT carries exactly `{PIN, NEXT[terminal]}`, and that is what boot reads.** No STATUS paragraph, no Shipped block.
+**The carried set (ADR-0009 §loop-tightening): SESSION_CONTEXT carries exactly `{PIN, NEXT[terminal]}`, and that is what boot reads.** No STATUS paragraph, no Shipped block. **Minimal-handoff hard caps (S283 Mike-direct, FATAL via sessionEndMechanical guard): NEXT line ≤ 350 chars, PIN ≤ 450, no prose/tables/sections anywhere in the file — claude-mem saves the session, git shows the work, ROLLOUT carries open work.**
 
 1. **Cross-terminal git stack check.** `git log --oneline origin/main..HEAD` — expect empty.
 2. **Update the carried set in SESSION_CONTEXT.md** — the `**PIN:**` line (Session N→N+1, Day/Cycle/Edition as they changed) + your `**NEXT[civic]:**` line (one line: what next session opens with). Don't touch other terminals' NEXT lines.

@@ -65,14 +65,22 @@ function logLine(s) {
 function loadState() { try { return JSON.parse(fs.readFileSync(STATE_FILE, 'utf8')); } catch (e) { return { recent: [] }; } }
 function saveState(st) { try { fs.writeFileSync(STATE_FILE, JSON.stringify(st, null, 2)); } catch (e) {} }
 
-// most-recent LifeHistory tag -> magnitude of its dial nudge = "how big a delta is this citizen living".
+// LifeHistory tail -> magnitude of the biggest dial nudge = "how big a delta is this citizen living".
+// Scores every tail line, age-damped (mag × 0.8^age, last line = age 0), takes the max — a real
+// event 2-3 lines back must outrank the ambient filler that usually holds the last slot now that
+// atmospheric depth raised filler volume (S281 seams plan, Findings #3 / Task 1).
 function recentEventMagnitude(lifeTail) {
   const lines = String(lifeTail || '').split('\n').filter(Boolean);
-  const last = lines[lines.length - 1] || '';
-  const m = last.match(/\[([^\]]+)\]/);
-  if (!m) return 0;
-  const fx = dialMap.nudgesForEvent_(m[1].trim(), 1, last);
-  return Object.values(fx).reduce((s, v) => s + Math.abs(v), 0);
+  let best = 0;
+  for (let i = 0; i < lines.length; i++) {
+    const m = lines[i].match(/\[([^\]]+)\]/);
+    if (!m) continue;
+    const fx = dialMap.nudgesForEvent_(m[1].trim(), 1, lines[i]);
+    const mag = Object.values(fx).reduce((s, v) => s + Math.abs(v), 0);
+    const age = lines.length - 1 - i;
+    best = Math.max(best, mag * Math.pow(0.8, age));
+  }
+  return best;
 }
 
 // T1a' (research.19, S273 production finding) — canon-anchored self-state read-back, the

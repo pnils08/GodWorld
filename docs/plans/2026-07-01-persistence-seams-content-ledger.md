@@ -200,7 +200,7 @@ Handoff slices — all builds are engine-sheet's (engine code and loop scripts b
 - **Files:** `scripts/citizen-wake.js` — modify `recentEventMagnitude` (L69-76)
 - **Steps:** score all 5 tail lines via `dialMap.nudgesForEvent_`, take `max(mag × 0.8^lineAge)`; keep return shape.
 - **Verify:** `node scripts/citizen-wake.js --dry-run` → selection log shows non-last-line events winning where expected.
-- **Status:** [ ] not started
+- **Status:** [x] done (S282, engine-sheet) — synthetic harness (buried Divorce 8.32 vs old 1.00; last-line event unchanged; empty→0) + dry-run verified (POP-00286 selected on Wedding at age 2, eventMag=10.24)
 
 ### Task 2: recall state + scorer (B4 v1)
 - **Files:** `lib/resonanceRecall.js` — create; `scripts/citizen-wake.js` — modify `loadOwnPageReadback` (L251-262)

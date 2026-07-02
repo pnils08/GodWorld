@@ -287,6 +287,8 @@ async function loadOwnPageReadback(popId, recall) {
       .filter((c) => c.text);
     // latest milestone joins the candidate set (Design B4) — flat-mid affect, competes on context/staleness.
     if (recall && recall.milestone) candidates.push({ text: String(recall.milestone).trim().slice(0, PAGE_REFLECTION_CAP), meta: null, kind: 'milestone' });
+    // Task 4 — resolved tensions + unlived entries (pre-composed upstream), same flat-mid footing.
+    if (recall && recall.extraCandidates) candidates.push(...recall.extraCandidates);
     if (!candidates.length) return { block: '', keys: [] };
     // B4 v1 (seams Task 2): score context-match + staleness + affect, seeded tiebreak — not blind most-recent-3.
     const pick = resonance.selectMemories({
@@ -305,6 +307,7 @@ async function buildPool() {
   const find = (n) => h.findIndex((x) => String(x).toLowerCase() === n.toLowerCase());
   const iPop = find('POPID'), iName = find('Name'), iFirst = find('First'), iLast = find('Last');
   const iNh = find('Neighborhood'), iDial = find('DialState'), iOcc = find('Occupation'), iBirth = find('BirthYear'), iLife = find('LifeHistory');
+  const iMem = find('MemoryRegisters'); // AX, S282 — B3 unlived register feeds recall candidates (blank until the Task-8 fold lands)
   const pool = [];
   for (let i = 1; i < rows.length; i++) {
     const r = rows[i];
@@ -324,6 +327,7 @@ async function buildPool() {
       popId: String(r[iPop]).toUpperCase(), name, occ: iOcc >= 0 ? r[iOcc] : '', nh,
       age: (iBirth >= 0 && r[iBirth]) ? (2041 - Number(r[iBirth])) : '',
       cur, baseDials, life: lifeTail, eventMag: recentEventMagnitude(lifeTail),
+      memReg: iMem >= 0 ? String(r[iMem] || '') : '',
     });
   }
   return pool;
@@ -408,15 +412,18 @@ async function generateVoice(system, user) {
   const lifeArc = await loadLifeArc(c.popId);                 // T1a — canonical milestone arc from LifeHistory_Log
   const textureLine = loadNeighborhoodTexture(c.nh, cycle);   // T2 — this hood's frozen lived-particulars block
   const bondsLine = await loadBonds(c.popId);                 // relationships-with-texture — people the citizen has history with (canon bonds)
-  // T1c + B4 v1 — fenced own-page read-back, resonance-scored against today's perception (seams Task 2)
+  // B2 — tension state loads BEFORE recall: resolved tensions join the candidate set (Task 4)
+  const tensionState = loadTensionState();
+  const openTensions = openTensionsFor(tensionState, c.popId, cycle);
+  // T1c + B4 — fenced own-page read-back, resonance-scored against today's perception (seams Task 2).
+  // Task 4: resolved tensions (open ones render in their own block below — no double-join) and
+  // unlived entries (dormant until the Task-8 fold writes MemoryRegisters) compete as candidates.
   const pageRead = await loadOwnPageReadback(c.popId, {
     cycle, wake: WAKE, milestone: lifeArc,
     contextText: [textureLine, sportsLine, bondsLine, c.nh, c.occ, WAKE_FRAME[WAKE] || ''].filter(Boolean).join(' '),
+    extraCandidates: resonance.tensionCandidates(tensionState[c.popId]).concat(resonance.unlivedCandidates(c.memReg)),
   });
   const pageMemory = pageRead.block;
-  // B2 — open tensions carried between wakes, fenced like all recalled LLM prose (same discipline as pageMemory)
-  const tensionState = loadTensionState();
-  const openTensions = openTensionsFor(tensionState, c.popId, cycle);
   const tensionBlock = openTensions.length
     ? memoryFence.wrap(openTensions.map((t) => t.q).join('\n'), 'citizen-tension:' + c.popId)
     : '';

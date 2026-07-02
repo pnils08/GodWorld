@@ -218,7 +218,7 @@ Handoff slices — all builds are engine-sheet's (engine code and loop scripts b
 - **Files:** `lib/resonanceRecall.js` — modify
 - **Steps:** add open tensions (flat mid affectWeight) and unlived entries to the candidate set once B2/B3 exist.
 - **Verify:** dry-run prompt shows an open tension resurfacing.
-- **Status:** [ ] not started
+- **Status:** [x] done (S282, engine-sheet) — design reconciliation: OPEN tensions render only via B2's dedicated block (double-joining them as candidates would double-render; resolution detection depends on guaranteed visibility), so the candidate set gets **resolved** tensions (settled questions resurfacing when context rhymes) + unlived entries (wired now, dormant until Task 8 fills MemoryRegisters; vague-voice composition at read time per B3 rule, defensive parse). 9/9 harness (incl. corrupt-JSON, tag-phrase fallback, unlived winning a slot on context match) + dry-run: seeded resolved tension resurfaced in POP-00004's fenced memory block.
 
 ### Task 5: MemoryRegisters schema slice (B1+B3 substrate)
 - **Files:** Simulation_Ledger (new column, manual measure-twice); `docs/SIMULATION_LEDGER.md`, `schemas/SCHEMA_HEADERS.md` (regen), `docs/engine/SHEETS_MANIFEST.md` — same commit

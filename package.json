@@ -5,7 +5,8 @@
   "scripts": {
     "lint": "eslint . --ext .js --max-warnings 50",
     "lint:fix": "eslint . --ext .js --fix",
-    "test": "node scripts/run-tests.js"
+    "test": "node scripts/run-tests.js",
+    "postinstall": "bash .githooks/install-clasp-gate.sh"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.79.0",

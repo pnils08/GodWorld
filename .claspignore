@@ -105,3 +105,6 @@ schemas/**
 *.log
 *.tmp
 .DS_Store
+
+# Graphify output (2.2MB graph.html was riding every deploy as an HTML asset — S282)
+graphify-out/**

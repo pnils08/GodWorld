@@ -6,11 +6,12 @@
 **Terminal tag for saves:** `[engine/sheet]`
 **Operating discipline:** measure twice, cut once + cascading-effects review (full rule at top of `.claude/rules/engine.md`). Per-item READ + caller-graph + empirical state check BEFORE any destructive op. Reverse on evidence-contradicting hypothesis. Document discipline in commit messages.
 
-## Ground Rules (S285, Mike-direct)
+## Ground Rules
 
-- **Never speak until grounded in facts.** No assertion about this project — code, data, provenance, state — without having read the actual file or verified the actual value first. Never assume. Never bypass a document Mike says to read. A generated artifact's own header/text is NOT provenance — verify the real data path (grep the repo for the values) before explaining anything about it. (S285 failure: took `workbench/base-map.md`'s "Source: Simulation_Narrative Google Sheet" header at face value and theorized on top of it.)
-- **Every factual statement to Mike carries its source.** File:line, tab name, command output, or commit SHA — inline in the response. No sourced statement, no statement.
-- **Never touch auto-memory.** No writes, edits, or deletes in `/root/.claude/projects/-root-GodWorld/memory/` from this terminal. Terminal knowledge goes here in TERMINAL.md; session record goes in claude-mem; work record goes in git.
+- Never speak until grounded in facts. Read the file or verify the value first. Never assume. Never bypass a document Mike says to read. A generated artifact's own header is not provenance.
+- Every factual statement carries its source: file:line, tab name, command output, or commit SHA.
+- No auto-memory writes from this terminal. Terminal knowledge → this file. Session record → claude-mem. Work record → git.
+- This file holds static rules and tables only. No prose, no session notes.
 
 ---
 
@@ -131,7 +132,7 @@ These are the files this terminal is responsible for keeping current. When you c
 | `docs/engine/PHASE_DATA_AUDIT.md` | Phase-level data flow audit | Data flow questions |
 | `docs/engine/tech_debt_audits/2026-03-26.md` | Latest tech debt scan | Health checks |
 
-### Workbench Maps (read-only — automated Claude API audits; `git pull` for freshest)
+### Workbench Maps (read-only — automated audits)
 
 | File | What it covers | Refresh |
 |------|---------------|---------|
@@ -139,8 +140,6 @@ These are the files this terminal is responsible for keeping current. When you c
 | `workbench/SHEET_MAP.md` | Live sheet state — global dashboard, tab inventory, active-tab data samples, flags | Weekly |
 | `workbench/dependencies.json` | Machine-readable sheet state + dependency edges | Weekly |
 | `workbench/base-map.md` / `.json` / `.mermaid` | Base dependency map — C100 snapshot | Snapshot |
-
-Consult FIRST — before grepping, memory search, or sheet fetch.
 
 ### Sheets & Data
 

@@ -335,6 +335,7 @@ function compressLifeHistory_(ctx, options) {
     Logger.log('compressLifeHistory_: MemoryRegisters column absent — bias intents dropped this cycle.');
   }
   var biasApplied = 0, biasCitizens = 0;
+  var unlivedApplied = 0; // engine.38 B3 (S283) — branch events captured at fold
 
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
@@ -375,12 +376,21 @@ function compressLifeHistory_(ctx, options) {
     // Gap-based, so a citizen compressed every few cycles still decays at the right rate.
     decayChaosExposure_(c, cycle);
 
+    // engine.38 B1+B3 (S283): ONE parse of the register cell serves both the
+    // unlived capture (fold-time, below) and the bias drain; written back only
+    // when a fold actually changed it — blank cells stay blank, no churn.
+    var regs = (iMemoryRegisters >= 0 && (compressEligible || biasPending.length))
+      ? parseMemoryRegisters_(row[iMemoryRegisters]) : null;
+    var regsDirty = false;
+
     if (compressEligible) {
       // FOLD-ON-TRIM (the stateful spine): events LEAVING the raw-20 window accrete
       // into base + streak, each folded exactly once by construction (the window
       // physically removes them on trim). No watermark, no double-count. Inert tags
       // (Compressed / CareerState / edition citations) map to {} -> no movement.
-      foldAgedOutEntries_(c, entries, KEEP_RAW_ENTRIES);
+      // B3 rides the same walk: branch-tagged aged-out events -> regs.unlived.
+      var unlivedCaptured = foldAgedOutEntries_(c, entries, KEEP_RAW_ENTRIES, regs);
+      if (unlivedCaptured > 0) { unlivedApplied += unlivedCaptured; regsDirty = true; }
       zeroMood_(c); // aged-out events leave no lingering mood; base carries the permanent mark
     }
 
@@ -403,12 +413,13 @@ function compressLifeHistory_(ctx, options) {
     // Sentiment lives in MemoryRegisters.biases ONLY — it never touches `c`
     // (dials): opinion is not identity. Fold-once by construction: the tally
     // is drained exactly once per cycle and dies with ctx.summary.
-    if (biasPending.length) {
-      var regs = parseMemoryRegisters_(row[iMemoryRegisters]);
-      biasApplied += foldBiasIntents_(regs, biasPending, cycle);
-      row[iMemoryRegisters] = JSON.stringify(regs);
+    if (biasPending.length && regs) {
+      var biasN = foldBiasIntents_(regs, biasPending, cycle);
+      if (biasN > 0) { biasApplied += biasN; regsDirty = true; }
       biasCitizens++;
     }
+
+    if (regsDirty) row[iMemoryRegisters] = JSON.stringify(regs);
 
     if (compressEligible) {
       // derive the readable face from BASE (stable identity, no run-to-run flicker)
@@ -436,13 +447,15 @@ function compressLifeHistory_(ctx, options) {
     reflectionCitizens: reflectionCitizens,
     biasApplied: biasApplied,
     biasCitizens: biasCitizens,
+    unlivedApplied: unlivedApplied,
     version: COMPRESS_VERSION
   };
 
   ctx.summary = S;
   Logger.log('compressLifeHistory_ v' + COMPRESS_VERSION + ': Updated ' + updated + ', skipped ' + skipped +
     ', reflections ' + reflectionsMoved + '/' + reflectionCitizens + ' citizens' +
-    ', biases ' + biasApplied + '/' + biasCitizens + ' citizens');
+    ', biases ' + biasApplied + '/' + biasCitizens + ' citizens' +
+    ', unlived ' + unlivedApplied);
 }
 
 // ============================================================================
@@ -489,6 +502,29 @@ function parseHistoryLine_(line) {
       cycle: cycleNum,
       tag: standardMatch[2],
       text: standardMatch[3],
+      raw: line
+    };
+  }
+
+  // In-world stamps: "Y2C48 — [Tag] text" / "C100 — [Tag] text" / "C? — [Tag] text"
+  // — inWorldStamp_ (advanceSimulationCalendar.js) formats used by EVERY Phase 4/5
+  // LifeHistory writer since S264 ES-1. Without this branch these lines parsed as
+  // Untagged: fold tag-routing degraded to content-regex fallback, TopTags filled
+  // with Untagged, and the B3 unlived capture would never fire (S283 measure-twice
+  // find). Cycle comes from the stamp itself: absolute for "C100"; "Y2C48" converts
+  // via the calendar canon absolute = (year-1)*52 + cycleOfYear; "C?" -> null.
+  var inWorldMatch = line.match(/^(?:Y(\d+))?C(\d+|\?)\s*[—-]\s*\[([^\]]+)\]\s*(.*)$/);
+  if (inWorldMatch) {
+    var inWorldCycle = null;
+    if (inWorldMatch[2] !== '?') {
+      inWorldCycle = parseInt(inWorldMatch[2], 10);
+      if (inWorldMatch[1]) inWorldCycle = (parseInt(inWorldMatch[1], 10) - 1) * 52 + inWorldCycle;
+    }
+    return {
+      timestamp: null,
+      cycle: inWorldCycle,
+      tag: inWorldMatch[3],
+      text: inWorldMatch[4],
       raw: line
     };
   }
@@ -1045,17 +1081,40 @@ function foldBiasIntents_(regs, intents, cycle) {
 // Fold events LEAVING the raw window into base+streak. Mirrors the EXACT
 // oldEntries split trimLifeHistory_ uses (CareerState excluded + persisted), so
 // fold and trim always agree on what ages out — each aged-out event folds once.
-function foldAgedOutEntries_(c, entries, keepCount) {
+//
+// engine.38 B3 (seams Task 8, S283): the same walk captures branch-shaped events
+// into regs.unlived — paths not taken, persisted as the ACTUAL recorded event
+// ({tag, txt, cy}), never a counterfactual (the vague voice is composed at read
+// time — lib/resonanceRecall.unlivedCandidates). Capture rides the fold-once
+// trim path by construction: an event leaves the window exactly once. Cap 3,
+// oldest evicted (captures append chronologically — entries fold oldest-first).
+// regs is optional: null (column absent / caller predates B3) -> fold-only.
+// Returns the number of unlived entries captured (0 when regs is null).
+var UNLIVED_CAP = 3;
+var UNLIVED_TXT_MAX = 120;
+var UNLIVED_BRANCH_TAGS = { careershift: 1, relocation: 1, divorce: 1, retirement: 1, businessclose: 1, displacementmove: 1 };
+function foldAgedOutEntries_(c, entries, keepCount, regs) {
   var filtered = [];
   for (var k = 0; k < entries.length; k++) {
     if (entries[k].tag !== 'CareerState') filtered.push(entries[k]);
   }
-  if (filtered.length <= keepCount) return; // nothing ages out -> nothing folds
+  if (filtered.length <= keepCount) return 0; // nothing ages out -> nothing folds
   var oldCount = filtered.length - keepCount;
+  var captured = 0;
   for (var i = 0; i < oldCount; i++) {
     var e = filtered[i];
     applyEvent_(c, { label: e.tag, effects: nudgesForEvent_(e.tag, 1, e.text) }); // structural markers -> {} no-op
+    if (regs && UNLIVED_BRANCH_TAGS[String(e.tag || '').toLowerCase()]) {
+      regs.unlived.push({
+        tag: String(e.tag),
+        txt: String(e.text || '').slice(0, UNLIVED_TXT_MAX),
+        cy: (e.cycle != null ? e.cycle : 0)
+      });
+      while (regs.unlived.length > UNLIVED_CAP) regs.unlived.shift();
+      captured++;
+    }
   }
+  return captured;
 }
 
 // Map the 7 dial bands -> one of the readable archetypes the 6 readers expect.

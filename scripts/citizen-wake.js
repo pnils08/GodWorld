@@ -46,6 +46,9 @@ const ROTATION_MEMORY = 25;     // don't re-wake the last N citizens (force vari
 const RESIDENT_CAP = 3;         // real co-residents fed for grounding (names only, no metrics)
 const STATE_FILE = path.join(__dirname, '..', 'logs', 'citizen-wake-state.json');
 const LOG_FILE = path.join(__dirname, '..', 'logs', 'citizen-wake.log');
+const TENSION_FILE = path.join(__dirname, '..', 'logs', 'citizen-tension-state.json'); // B2 index — page is the durable surface, this skips a page search
+const TENSION_CAP = 3;            // open questions carried at once (oldest evicted)
+const TENSION_EXPIRY_CYCLES = 12; // unresolved tension fades — silent, no page line (matches archiver retain window)
 
 // Five distinct dayparts — one per cron fire (7:30/12:30/15:30/19:30/21:30).
 // Pre-T5 the 5 fires reused 3 frames (15:30->midday, 21:30->evening); afternoon
@@ -65,6 +68,22 @@ function logLine(s) {
 }
 function loadState() { try { return JSON.parse(fs.readFileSync(STATE_FILE, 'utf8')); } catch (e) { return { recent: [] }; } }
 function saveState(st) { try { fs.writeFileSync(STATE_FILE, JSON.stringify(st, null, 2)); } catch (e) {} }
+
+// ---- B2 tension register (seams Task 3) — loop-side only: no dial writes, no sheet writes,
+// no LifeHistory writes, never Reflection_Intake. State: { popId: [{q, cy, status}] }.
+function loadTensionState() { try { return JSON.parse(fs.readFileSync(TENSION_FILE, 'utf8')); } catch (e) { return {}; } }
+function saveTensionState(st) { try { fs.writeFileSync(TENSION_FILE, JSON.stringify(st, null, 2)); } catch (e) {} }
+// Open tensions for the prompt, with the silent-expiry pass (mutates state in memory;
+// persisted only when a live run saves — dry runs write nothing).
+function openTensionsFor(state, popId, cycle) {
+  const list = state[popId] || [];
+  if (cycle != null) {
+    for (let i = list.length - 1; i >= 0; i--) {
+      if (list[i].status === 'open' && (cycle - (Number(list[i].cy) || 0)) >= TENSION_EXPIRY_CYCLES) list.splice(i, 1);
+    }
+  }
+  return list.filter((t) => t.status === 'open').slice(-TENSION_CAP);
+}
 
 // LifeHistory tail -> magnitude of the biggest dial nudge = "how big a delta is this citizen living".
 // Scores every tail line, age-damped (mag × 0.8^age, last line = age 0), takes the max — a real
@@ -263,6 +282,7 @@ async function loadOwnPageReadback(popId, recall) {
     // recentPage_ (recency via documents-list+get), NOT readPage_ (v4 search silently misses docs — S272).
     const res = await page.recentPage_(popId, PAGE_CANDIDATE_N);
     const candidates = ((res && res.results) || [])
+      .filter((r) => String((r && r.metadata && r.metadata.type) || '') !== 'tension') // typed TENSION lines are not memories; they join candidates from state via Task 4, not as raw docs
       .map((r) => ({ text: String((r && r.content) || '').trim().slice(0, PAGE_REFLECTION_CAP), meta: (r && r.metadata) || null, kind: 'reflection' }))
       .filter((c) => c.text);
     // latest milestone joins the candidate set (Design B4) — flat-mid affect, competes on context/staleness.
@@ -333,7 +353,7 @@ async function coResidents(nh, selfPop) {
   return sl.residents.filter((rr) => String(rr.popId).toUpperCase() !== selfPop).slice(0, RESIDENT_CAP);
 }
 
-function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, pageMemory, cycle) {
+function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, pageMemory, cycle, tensionBlock) {
   const disp = dials.disposition(c.cur);
   const who = neighbors.length
     ? `\n\nPeople around you in ${c.nh}: ${neighbors.map((n) => `${n.name}${n.occupation ? ' (' + n.occupation + ')' : ''}`).join(', ')}.`
@@ -347,8 +367,10 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
   // T1c own-page memory — already fenced (memoryFence) by loadOwnPageReadback; appended as a distinct
   // tail so the fence block stays intact (mirrors lib/personaProvider.augment).
   const memory = pageMemory ? `\n\n---\n\nWhat's been on your mind lately, from your own private reflections:\n${pageMemory}` : '';
+  // B2 open tensions — unresolved questions carried between wakes; fenced upstream (main flow)
+  const tensions = tensionBlock ? `\n\nQuestions you've been sitting with, still unresolved:\n${tensionBlock}` : '';
   // immersion-ingredient order: continuity (T1a state + T1c own-memory) -> people (around you + history-with) -> world/A's (T1b) -> surroundings (T2)
-  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}\n\nReal things from your life recently:\n${c.life}${who}${bonds}${sports}${texture}${memory}`;
+  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}\n\nReal things from your life recently:\n${c.life}${who}${bonds}${sports}${texture}${memory}${tensions}`;
   // T5 — varied-provocation question bank. The fixed "small things on your mind"
   // prompt becomes a deterministically-seeded pick latching a real signal this
   // citizen perceives, so two citizens woken the same cycle are prompted
@@ -392,7 +414,13 @@ async function generateVoice(system, user) {
     contextText: [textureLine, sportsLine, bondsLine, c.nh, c.occ, WAKE_FRAME[WAKE] || ''].filter(Boolean).join(' '),
   });
   const pageMemory = pageRead.block;
-  const { system, user, disp, prov } = buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, pageMemory, cycle);
+  // B2 — open tensions carried between wakes, fenced like all recalled LLM prose (same discipline as pageMemory)
+  const tensionState = loadTensionState();
+  const openTensions = openTensionsFor(tensionState, c.popId, cycle);
+  const tensionBlock = openTensions.length
+    ? memoryFence.wrap(openTensions.map((t) => t.q).join('\n'), 'citizen-tension:' + c.popId)
+    : '';
+  const { system, user, disp, prov } = buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, pageMemory, cycle, tensionBlock);
 
   logLine(`woke ${c.popId} ${c.name} — ${c.occ || 'resident'}, ${c.nh}${c.age ? ', ' + c.age : ''} | eventMag=${c.eventMag} | ${disp} | provocation=${prov.id} route=${prov.route} wake=${WAKE}`);
   if (DRY) console.log('\n--- perception (system prompt) ---\n' + system + '\n----------------------------------');
@@ -401,17 +429,18 @@ async function generateVoice(system, user) {
   console.log('\n--- reflection ---\n' + reflection + '\n------------------');
 
   if (DRY) {
-    const tags = await classifier.classifyDualReflection_(reflection);
-    logLine(`[dry-run] would classify -> ${JSON.stringify(tags)}; no writes`);
+    const tags = await classifier.classifyTripleReflection_(reflection, openTensions.map((t) => t.q));
+    logLine(`[dry-run] would classify -> ${JSON.stringify(tags)}; no writes (incl. no tension-state write)`);
     process.exit(0);
   }
 
   // 1) classify FIRST (moved ahead of the page append, seams Task 2) so the affect tag rides the
   //    page doc's metadata — that is what resonanceRecall's affectWeight reads at future wakes.
+  //    Triple pass (seams Task 3): event | affect + nullable TENSION + RESOLVES vs the open list.
   //    Guarded: a classifier failure must never block the page append (same net effect as the old
   //    order, where a classify error only skipped intake).
   let cls = {};
-  try { cls = await classifier.classifyDualReflection_(reflection); } catch (e) { cls = { raw: 'classify threw: ' + e.message }; }
+  try { cls = await classifier.classifyTripleReflection_(reflection, openTensions.map((t) => t.q)); } catch (e) { cls = { raw: 'classify threw: ' + e.message }; }
 
   // 2) narrative store: ensure the page pointer (AW), append the reflection (ungated).
   const ptr = await page.ensurePagePointer_(c.popId);
@@ -423,7 +452,30 @@ async function generateVoice(system, user) {
   if (appended.error) { logLine('appendReflection_ ERROR: ' + appended.error); process.exit(1); }
   logLine(`page ${ptr.tag} (${ptr.created ? 'created' : 'existing'}) <- reflection doc ${appended.id || '?'}`);
 
-  // 3) persist the dual classified tags to Reflection_Intake (the cycle reads this when the gate opens).
+  // 3) B2 tension register (seams Task 3) — voice-memory only: page lines + local index, NEVER
+  //    Reflection_Intake (tensions don't drain into dials). Resolution first, then new capture —
+  //    both can fire on the same wake. Typed docs (metadata.type='tension', customId key suffix)
+  //    so they never collide with the reflection doc or leak into recall candidates.
+  const tlist = tensionState[c.popId] = tensionState[c.popId] || [];
+  if (cls.resolves != null && openTensions[cls.resolves]) {
+    const t = openTensions[cls.resolves]; // reference into tensionState — status flip persists on save
+    t.status = 'resolved'; t.resolvedCy = cycle;
+    await page.appendReflection_(c.popId, `TENSION-RESOLVED[c${cycle}]: ${t.q}`, { cycle, daypart: WAKE, key: 'tension-resolved', extra: { type: 'tension' } });
+    logLine(`tension RESOLVED <- "${t.q.slice(0, 80)}"`);
+  }
+  if (cls.tension && !tlist.some((t) => t.status === 'open' && t.q.toLowerCase() === cls.tension.toLowerCase())) {
+    const openNow = tlist.filter((t) => t.status === 'open');
+    if (openNow.length >= TENSION_CAP) { // evict oldest open (cap 3)
+      const oldest = openNow.reduce((a, b) => ((Number(a.cy) || 0) <= (Number(b.cy) || 0) ? a : b));
+      tlist.splice(tlist.indexOf(oldest), 1);
+    }
+    tlist.push({ q: cls.tension, cy: cycle, status: 'open' });
+    await page.appendReflection_(c.popId, `TENSION[c${cycle}]: ${cls.tension}`, { cycle, daypart: WAKE, key: 'tension', extra: { type: 'tension' } });
+    logLine(`tension OPENED <- "${cls.tension.slice(0, 80)}"`);
+  }
+  saveTensionState(tensionState); // also persists this wake's silent expiry pass
+
+  // 4) persist the dual classified tags to Reflection_Intake (the cycle reads this when the gate opens).
   //    Row: [ts, popId, cycle, WAKE, EVENT(col E), snippet, applied='no', AFFECT(col H)] — A-G stay
   //    positional (back-compat); affect is appended at H. composure-as-affect-only lives in the
   //    cycle's gated write-back (nudgesForReflection_), not here.
@@ -438,7 +490,7 @@ async function generateVoice(system, user) {
 
   // GATE: NO applyTaggedEvent_ here. Dial write-back is the gated cycle's job (Phase-1 audit).
 
-  // 4) record rotation + recall bookkeeping (staleness input for future wakes — live runs only)
+  // 5) record rotation + recall bookkeeping (staleness input for future wakes — live runs only)
   state.recent = [c.popId, ...(state.recent || [])].slice(0, ROTATION_MEMORY);
   saveState(state);
   resonance.markRecalled(c.popId, cycle, pageRead.keys);

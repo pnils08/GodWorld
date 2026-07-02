@@ -212,7 +212,7 @@ Handoff slices — all builds are engine-sheet's (engine code and loop scripts b
 - **Files:** `lib/reflectionClassifier.js` — modify (third nullable field); `scripts/citizen-wake.js` — page append + `logs/citizen-tension-state.json` read/write
 - **Steps:** extend dual prompt to triple; NONE-preserving; cap 3 open, 12-cycle expiry; resolution check against listed open tensions.
 - **Verify:** `--dry-run` shows TENSION extraction on a reflective wake and NONE on a flat one; no `Reflection_Intake` column change.
-- **Status:** [ ] not started
+- **Status:** [x] done (S282, engine-sheet) — `classifyTripleReflection_` (dual untouched for probes; parse never scans tension text for tags); dry-run showed extraction AND null AND a live resolves-hit vs a seeded open tension; 40/40 existing tests + 9/9 parse harness. Prompt-format defect caught by the null tripwire pre-commit (bare literal output line echoed verbatim — every line now carries a `<placeholder>`). Tension docs typed (`metadata.type='tension'`, customId key suffix) + filtered out of Task-2 recall candidates until Task 4 adds them from state.
 
 ### Task 4: tensions + unlived join recall candidates (B4×B2×B3)
 - **Files:** `lib/resonanceRecall.js` — modify

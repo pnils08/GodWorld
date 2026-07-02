@@ -85,7 +85,7 @@ New content lands ledger-native first: `baylight.construction` (canon-timeline c
 
 ## Design B1 — Asymmetric bias ledger
 
-**What it is.** Per-citizen opinions about people they may never have met — `target / sentiment / origin / reinforced / challenged`. The texture version (bias-lite pool, "formed an opinion about [T1 name]") shipped in the depth build; this makes the opinion *persist and evolve*.
+**What it is.** Per-citizen opinions about people they may never have met — `target / sentiment / origin / reinforced / challenged`. *(Correction, S283: the texture version — bias-lite pool — did NOT ship in the S280 depth build as this design assumed; the atmospheric plan's changelog shows depth items 1–4/5a/6 shipped, bias-lite neither shipped nor deferred. Task 6 therefore built the pool AND its intent hook together.)* This design makes the opinion *persist and evolve*.
 
 ### Storage: new SL column `MemoryRegisters` (shared with B3)
 
@@ -229,7 +229,7 @@ Handoff slices — all builds are engine-sheet's (engine code and loop scripts b
 ### Task 6: bias intents + fold (B1)
 - **Files:** `phase05-citizens/generateCitizensEvents.js` — bias-lite pool pushes `S.biasIntents`; `utilities/compressLifeHistory.js` — drain intents into `MemoryRegisters.biases` in the per-row RMW (reinforce/challenge/evict rules per Design B1)
 - **Verify:** dry-run compressor test (pattern of Test 9): synthetic intents → expected JSON; opposite-sign challenge moderates then flips.
-- **Status:** [ ] not started
+- **Status:** [x] done (S283, engine-sheet) — scope note: the bias-lite pool this task was to instrument had never shipped (see B1 correction above), so Task 6 built pool + hook together. Generator: `publicFigures` pre-scan (UsageCount≥8, cap 15, deceased excluded), per-citizen 15%-gated opinion entries (sign ±1 via ctx.rng, `source:bias` → Civic Perception {sociability:2}), intent push ONLY on actual draw (`biasTarget:`/`biasSign:` machine tags, `contactPopId:` pattern). Compressor: unconditional drain (reflection-drain shape — compress-skipped citizens keep intents), `parseMemoryRegisters_` defensive/additive, `foldBiasIntents_` (reinforce +0.5 capped |3|, challenge −1.0 w/ zero-reset + cross-flip, cap-5 lowest-|s|-oldest evict), column-absent inert. 25/25 `scripts/biasFold.test.js` + 49/49 existing dial tests. Dials never touched by sentiment (C4 asserts it).
 
 ### Task 7: bias readback in wake prompt (B1 read)
 - **Files:** `scripts/citizen-wake.js` — `buildVoicePrompts` gains bias lookup on perception-slice name match
@@ -285,3 +285,4 @@ None — both resolved 2026-07-01 (Mike, S281):
 
 - 2026-07-01 — Initial draft (S281, research-build). Substrate verified by three parallel code reads (compressor/memory, wake loop, slotter/ctx/determinism). Five designs specced; 12 handoff tasks; 5 findings logged.
 - 2026-07-01 — Open questions resolved (Mike, S281): one shared `MemoryRegisters` column (volume + writer-symmetry basis); bias targets v1 public-figures-only. Plan ACTIVE; indexed + ROLLOUT back-linked same commit. Builds are engine-sheet's, gated per §Interlock.
+- 2026-07-02 — Task 6 DONE (engine-sheet, S283). Measure-twice surfaced a false premise: Design B1's "texture version shipped in the depth build" claim was wrong (bias-lite pool never landed in S280 — changelog cross-check + code grep), so Task 6 built the pool and the intent hook together (Mike-approved scope). B1 §What-it-is corrected in place. `MemoryRegisters.biases` now has its live writer; `.unlived` awaits Task 8. Deploy: local-only, clasp push pending a clean window.

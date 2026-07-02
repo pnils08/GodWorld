@@ -116,6 +116,25 @@ function generateCitizensEvents_(ctx) {
     if (nbName) nameByPop[String(nbPop).trim().toUpperCase()] = nbName;
   }
 
+  // engine.38 B1 (S283): named public figures — the bias-lite pool's target
+  // universe (Design B1 v1: public figures only, Mike S281). Rides the same
+  // fame data as the T3 recognition seam (UsageCount >= 8; S255 audit put
+  // ~15 citizens at that bar). Ledger order, capped — deterministic. One
+  // pass over rows already in memory; no sheet read.
+  var PUBLIC_FIGURE_FAME_MIN = 8;
+  var PUBLIC_FIGURE_CAP = 15;
+  var publicFigures = [];
+  if (iUsage >= 0) {
+    for (var pfi = 0; pfi < rows.length && publicFigures.length < PUBLIC_FIGURE_CAP; pfi++) {
+      if ((Number(rows[pfi][iUsage]) || 0) < PUBLIC_FIGURE_FAME_MIN) continue;
+      var pfPop = rows[pfi][iPopID];
+      if (!pfPop) continue;
+      if (iStatus >= 0 && String(rows[pfi][iStatus] || "").trim().toLowerCase() === "deceased") continue;
+      var pfName = nameByPop[String(pfPop).trim().toUpperCase()];
+      if (pfName) publicFigures.push({ name: pfName, popId: String(pfPop).trim().toUpperCase() });
+    }
+  }
+
   // Prefer injected RNG, else seed, else Math.random
   var rng = (typeof ctx.rng === "function")
     ? ctx.rng
@@ -604,6 +623,7 @@ function generateCitizensEvents_(ctx) {
     if (has("source:listening")) return "Personal";
     if (has("source:groove")) return "Micro-Event";
     if (has("source:civicNews")) return "Civic Perception";
+    if (has("source:bias")) return "Civic Perception"; // engine.38 B1 — opinion-about-public-figure, same ambient civic key
     if (has("source:retirement")) return "PostCareer";
     if (has("source:curiosity")) return "Lifestyle";
     if (has("source:communityLife")) return "Neighborhood";
@@ -1811,6 +1831,29 @@ function generateCitizensEvents_(ctx) {
         pool.push(makeEntry(famePool[fmi], mergeTags(["source:fame"], calendarTags), 1.15, false));
       }
     }
+
+    // engine.38 B1 (S283): bias-lite opinion pool — the depth-build item-5
+    // pool that never shipped in S280, built here WITH its intent hook
+    // (seams Task 6). A citizen occasionally forms an opinion about a named
+    // public figure. The LINE is a normal ambient event (source:bias ->
+    // Civic Perception {sociability:2}); the OPINION rides machine tags ->
+    // S.biasIntents at emit time, drained into MemoryRegisters.biases by the
+    // Phase-9 compressor. Sentiment is bias-local — NEVER dials (B1 invariant).
+    // Sign + figure drawn per-citizen via ctx.rng: deterministic per cycle.
+    if (publicFigures.length && chanceHit(0.15)) {
+      var bFig = publicFigures[Math.floor(roll() * publicFigures.length)];
+      if (bFig && bFig.popId !== String(popId).trim().toUpperCase()) {
+        var bSign = chanceHit(0.5) ? 1 : -1;
+        var bTags = ["source:bias", "biasTarget:" + bFig.name, "biasSign:" + bSign];
+        if (bSign > 0) {
+          pool.push(makeEntry("heard " + bFig.name + "'s name come up at the counter and found themselves taking their side", mergeTags(bTags, calendarTags), 1.0, false));
+          pool.push(makeEntry("read the latest on " + bFig.name + " over coffee and decided they liked what they saw", mergeTags(bTags, calendarTags), 0.95, false));
+        } else {
+          pool.push(makeEntry("heard " + bFig.name + "'s name twice in one day and decided they didn't much care for them", mergeTags(bTags, calendarTags), 1.0, false));
+          pool.push(makeEntry("read one more story about " + bFig.name + " and quietly made up their mind", mergeTags(bTags, calendarTags), 0.95, false));
+        }
+      }
+    }
     var agp = agePoolFor_(ageGroup);
     for (var agi = 0; agi < agp.length; agi++) {
       pool.push(makeEntry(agp[agi].text, mergeTags(agp[agi].tags, calendarTags), agp[agi].weight, false));
@@ -2105,6 +2148,23 @@ function generateCitizensEvents_(ctx) {
     }
     if (hasArcTypeTag && activeArc) {
       pick += " [" + activeArc.type + " arc]";
+    }
+
+    // engine.38 B1 (S283): opinion DRAWN -> intent. Fires only when a bias
+    // line is actually selected as the citizen's event — pooled-but-not-drawn
+    // leaves no trace. S.biasIntents {popId: [{t,s,o}]} is a cycle-scoped
+    // tally (dies with ctx.summary); the Phase-9 compressor drains it into
+    // MemoryRegisters.biases same-cycle (Phase5 precedes Phase9, verified
+    // both entry points).
+    var biasTarget = "", biasSignVal = 0;
+    for (var bti = 0; bti < tags.length; bti++) {
+      if (tags[bti].indexOf("biasTarget:") === 0) biasTarget = tags[bti].slice(11);
+      else if (tags[bti].indexOf("biasSign:") === 0) biasSignVal = Number(tags[bti].slice(9)) || 0;
+    }
+    if (biasTarget && biasSignVal) {
+      if (!S.biasIntents) S.biasIntents = {};
+      if (!S.biasIntents[popId]) S.biasIntents[popId] = [];
+      S.biasIntents[popId].push({ t: biasTarget, s: biasSignVal, o: "source:bias|c" + cycle });
     }
 
     if (occupation) tags = mergeTags(tags, ["occupation:" + occupation]);

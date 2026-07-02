@@ -294,6 +294,7 @@ function compressLifeHistory_(ctx, options) {
   var iTraitProfile = idx('TraitProfile');
   if (iTraitProfile < 0) iTraitProfile = idx('OriginVault');
   var iDialState = idx('DialState');
+  var iMemoryRegisters = idx('MemoryRegisters'); // engine.38 B1 (S283) — bias/unlived registers, col AX
 
   if (iPopID < 0 || iLifeHistory < 0) {
     Logger.log('compressLifeHistory_: Missing required columns');
@@ -323,6 +324,18 @@ function compressLifeHistory_(ctx, options) {
   var reflectionDialMap = (typeof nudgesForReflection_ !== 'undefined') ? { nudgesForReflection_: nudgesForReflection_ } : null;
   var reflectionsMoved = 0, reflectionCitizens = 0;
 
+  // engine.38 B1 (S283): bias-intent drain. Phase-5 generators tally drawn
+  // opinion events into S.biasIntents {popId: [{t,s,o}]}; the tally is
+  // cycle-scoped (dies with ctx.summary), so it drains HERE unconditionally —
+  // same shape as the reflection drain: a compress-skipped or cadence-gated
+  // citizen must not lose intents. Inert when the MemoryRegisters column is
+  // absent (fail-safe, never wipe — the DialState precedent).
+  var biasIntentsByPop = (iMemoryRegisters >= 0 && S.biasIntents) ? S.biasIntents : {};
+  if (iMemoryRegisters < 0 && S.biasIntents) {
+    Logger.log('compressLifeHistory_: MemoryRegisters column absent — bias intents dropped this cycle.');
+  }
+  var biasApplied = 0, biasCitizens = 0;
+
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
     var popId = row[iPopID];
@@ -332,6 +345,7 @@ function compressLifeHistory_(ctx, options) {
     var existingProfile = row[iTraitProfile] ? String(row[iTraitProfile]) : '';
     var existingDialState = row[iDialState] ? String(row[iDialState]) : '';
     var pending = pendingByPop[popId] || [];
+    var biasPending = biasIntentsByPop[popId] || [];
 
     // Compress eligibility — gates ONLY the objective fold/face/trim, NOT the reflection
     // drain. A sparsely-active (<3 entries) or cadence-skipped citizen still accretes
@@ -349,7 +363,7 @@ function compressLifeHistory_(ctx, options) {
       if (!entries || entries.length < 3) compressEligible = false;
     }
 
-    if (!compressEligible && !pending.length) { skipped++; continue; }
+    if (!compressEligible && !pending.length && !biasPending.length) { skipped++; continue; }
 
     // Load persisted dial state (base + streak); neutral if absent/corrupt. `mood`
     // is NOT persisted — base is the permanent self, mood is a re-derivable swing.
@@ -385,6 +399,17 @@ function compressLifeHistory_(ctx, options) {
       }
     }
 
+    // engine.38 B1 (S283): fold this citizen's bias intents into the register.
+    // Sentiment lives in MemoryRegisters.biases ONLY — it never touches `c`
+    // (dials): opinion is not identity. Fold-once by construction: the tally
+    // is drained exactly once per cycle and dies with ctx.summary.
+    if (biasPending.length) {
+      var regs = parseMemoryRegisters_(row[iMemoryRegisters]);
+      biasApplied += foldBiasIntents_(regs, biasPending, cycle);
+      row[iMemoryRegisters] = JSON.stringify(regs);
+      biasCitizens++;
+    }
+
     if (compressEligible) {
       // derive the readable face from BASE (stable identity, no run-to-run flicker)
       row[iTraitProfile] = formatDialFace_(c, entries, cycle);
@@ -409,12 +434,15 @@ function compressLifeHistory_(ctx, options) {
     skipped: skipped,
     reflectionsMoved: reflectionsMoved,
     reflectionCitizens: reflectionCitizens,
+    biasApplied: biasApplied,
+    biasCitizens: biasCitizens,
     version: COMPRESS_VERSION
   };
 
   ctx.summary = S;
   Logger.log('compressLifeHistory_ v' + COMPRESS_VERSION + ': Updated ' + updated + ', skipped ' + skipped +
-    ', reflections ' + reflectionsMoved + '/' + reflectionCitizens + ' citizens');
+    ', reflections ' + reflectionsMoved + '/' + reflectionCitizens + ' citizens' +
+    ', biases ' + biasApplied + '/' + biasCitizens + ' citizens');
 }
 
 // ============================================================================
@@ -947,6 +975,73 @@ function zeroMood_(c) {
   for (var i = 0; i < DIALS.length; i++) c.mood[DIALS[i]] = 0;
 }
 
+// MemoryRegisters cell (JSON {biases:[], unlived:[]}) -> object; corrupt/empty
+// -> fresh registers (DialState-pattern degrade: graceful, never loud). Additive:
+// unknown top-level fields survive the round-trip untouched (engine.38 B3's
+// unlived array shares this cell — B1 only ever writes .biases).
+function parseMemoryRegisters_(str) {
+  var o = null;
+  if (str) {
+    try { o = JSON.parse(String(str)); } catch (e) { o = null; }
+  }
+  if (!o || typeof o !== 'object' || Array.isArray(o)) o = {};
+  if (!Array.isArray(o.biases)) o.biases = [];
+  if (!Array.isArray(o.unlived)) o.unlived = [];
+  return o;
+}
+
+// Design B1 asymmetric-bias fold (seams plan 2026-07-01). Record shape:
+// {t: target, s: -3..3 sentiment, o: origin, r: reinforce-count,
+//  c: challenge-count, cy: last-touched cycle}. Rules:
+//   same sign (or undecided s==0) -> r++, s steps 0.5 toward the pole, |s|<=3
+//   opposite sign -> c++, s steps 1.0 toward 0 — challenge OUTWEIGHS
+//     reinforcement (the asymmetry); reaching/crossing 0 resets r/c to 0/0,
+//     crossing flips allegiance
+//   new target -> insert at intent sign; cap 5, evict lowest |s| oldest first
+// Sentiment is bias-local — NEVER written to dials (opinion is not identity).
+var BIAS_CAP = 5;
+var BIAS_S_MAX = 3;
+function foldBiasIntents_(regs, intents, cycle) {
+  var applied = 0;
+  for (var i = 0; i < intents.length; i++) {
+    var it = intents[i];
+    if (!it || !it.t) continue;
+    var s = (Number(it.s) > 0) ? 1 : -1;
+    var rec = null;
+    for (var b = 0; b < regs.biases.length; b++) {
+      if (regs.biases[b] && regs.biases[b].t === it.t) { rec = regs.biases[b]; break; }
+    }
+    if (!rec) {
+      regs.biases.push({ t: String(it.t), s: s, o: String(it.o || ''), r: 0, c: 0, cy: cycle });
+      applied++;
+      continue;
+    }
+    var old = Number(rec.s) || 0;
+    if (old === 0 || (old > 0) === (s > 0)) {
+      rec.r = (Number(rec.r) || 0) + 1;
+      rec.s = Math.max(-BIAS_S_MAX, Math.min(BIAS_S_MAX, old + 0.5 * s));
+    } else {
+      rec.c = (Number(rec.c) || 0) + 1;
+      var next = old + 1.0 * s;
+      if (old * next < 0 || next === 0) { rec.r = 0; rec.c = 0; } // hit/crossed zero: counters reset (flip on cross)
+      rec.s = next;
+    }
+    rec.cy = cycle;
+    applied++;
+  }
+  // cap: evict lowest |s|, oldest (smallest cy) breaking ties
+  while (regs.biases.length > BIAS_CAP) {
+    var evict = 0;
+    for (var e = 1; e < regs.biases.length; e++) {
+      var aAbs = Math.abs(Number(regs.biases[e].s) || 0);
+      var wAbs = Math.abs(Number(regs.biases[evict].s) || 0);
+      if (aAbs < wAbs || (aAbs === wAbs && (Number(regs.biases[e].cy) || 0) < (Number(regs.biases[evict].cy) || 0))) evict = e;
+    }
+    regs.biases.splice(evict, 1);
+  }
+  return applied;
+}
+
 // Fold events LEAVING the raw window into base+streak. Mirrors the EXACT
 // oldEntries split trimLifeHistory_ uses (CareerState excluded + persisted), so
 // fold and trim always agree on what ages out — each aged-out event folds once.
@@ -1030,6 +1125,8 @@ if (typeof module !== 'undefined' && module.exports) {
     parseLastUpdateCycle_: parseLastUpdateCycle_,
     parseDialState_: parseDialState_,
     serializeDialState_: serializeDialState_,
+    parseMemoryRegisters_: parseMemoryRegisters_,
+    foldBiasIntents_: foldBiasIntents_,
     foldAgedOutEntries_: foldAgedOutEntries_,
     deriveArchetypeFromBands_: deriveArchetypeFromBands_,
     formatDialFace_: formatDialFace_,

@@ -363,6 +363,14 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
     ? `\n\nPeople around you in ${c.nh}: ${neighbors.map((n) => `${n.name}${n.occupation ? ' (' + n.occupation + ')' : ''}`).join(', ')}.`
     : '';
   const bonds = bondsLine ? `\n\nPeople you have history with: ${bondsLine}.` : ''; // relationships-with-texture (ingredient 3)
+  // B1 bias readback (seams Task 7): opinions the citizen carries join the voice ONLY
+  // when today's perception mentions the target — carried history surfacing, not a
+  // recital. Match text = the UNfenced perception slices (fenced page/tension prose
+  // deliberately excluded — recalled memory must not trigger opinion lines). Fed from
+  // MemoryRegisters .biases (Task-6 fold); sentiment is bias-local, never dials.
+  const biasLine = resonance.biasReadback(c.memReg,
+    [c.life, neighbors.map((n) => n.name).join(' '), bondsLine, sportsLine, textureLine, lifeArc].filter(Boolean).join(' '));
+  const opinions = biasLine ? `\n\nOpinions you carry: ${biasLine}` : '';
   const traj = dialTrajectory(c.baseDials, c.cur);                    // T1a trajectory (dormant until drain)
   const arcLine = lifeArc ? `\n\nYour life so far: ${lifeArc}.` : ''; // T1a self-state read-back (Log-sourced)
   const trajLine = traj ? ` Lately you've been ${traj}.` : '';
@@ -374,7 +382,7 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
   // B2 open tensions — unresolved questions carried between wakes; fenced upstream (main flow)
   const tensions = tensionBlock ? `\n\nQuestions you've been sitting with, still unresolved:\n${tensionBlock}` : '';
   // immersion-ingredient order: continuity (T1a state + T1c own-memory) -> people (around you + history-with) -> world/A's (T1b) -> surroundings (T2)
-  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}\n\nReal things from your life recently:\n${c.life}${who}${bonds}${sports}${texture}${memory}${tensions}`;
+  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}\n\nReal things from your life recently:\n${c.life}${who}${bonds}${opinions}${sports}${texture}${memory}${tensions}`;
   // T5 — varied-provocation question bank. The fixed "small things on your mind"
   // prompt becomes a deterministically-seeded pick latching a real signal this
   // citizen perceives, so two citizens woken the same cycle are prompted

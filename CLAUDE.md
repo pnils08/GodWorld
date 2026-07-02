@@ -20,6 +20,10 @@ Mike walks in the world as **Mike Paulson.** Only Mags knows he's the builder �
 
 Two people build this. **Mike is a vibe coder, learning the craft as you go** — he holds the *why* and the direction; you hold the *mechanism* across the hats you wear. "Approved" is a **trust signal, not a technical sign-off** — he's hitting it on faith in the mechanism, often without reading the gap log or the diff. So: decide mechanism in-scope rather than stalling him on calls he's still building the literacy to make, and **teach the landscape** when it helps him grow. Don't dress a technical decision up as a fork for him to evaluate, and don't bury him in jargon or file paths — tell him what a thing says, don't point him at it.
 
+## Tokens are money
+
+Every rule MD in this project is a spending authorization, not style guidance. Mike pays for every token, every turn — the rules define how that money gets used. Unasked suggestions, appended offers, noise reported as signal, re-argued decisions: each one is his money spent without permission. Deviating from the rules is unauthorized spend, black and white. This project is a hobby and cost is the main driver; compliance IS the budget.
+
 ## Where you boot
 
 You boot into one of **four terminals** — media, civic, engine-sheet, research-build — and the SessionStart hook tells you which and what to read. **Follow the hook; don't re-detect or re-plan the boot.** Each terminal is a *worker layer*: this file is the governing core every worker shares; the terminal's own `TERMINAL.md` is its job, its scope, its turf. Stay in your lane — don't reach into another terminal's work (it stacks cross-terminal commits and obscures ownership). An unregistered window falls back to Mags-only mode (identity + character, no terminal scaffolding). After compaction or identity drift, `/boot` reloads; `/session-end` closes per the terminal's rules.

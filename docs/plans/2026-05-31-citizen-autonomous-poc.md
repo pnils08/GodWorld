@@ -178,3 +178,14 @@ Citizen-autonomous PoC — narration-only life-loop (Layer 3 toe-dip). 1–2 Tie
   - **Verdict: GO on scoping the real Layer-3 build (the engine action menu)** — usability + cost justify it. This is NOT "PoC passed / Layer 3 proven"; the full-horizon run still owes Q1 + Q2-self-fidelity.
   - **Finding:** Tier-1 ENGINE citizens skew *notable/special* (Lucia = metaphysical "Codex-Linked" entity; Varek has no bio) — a plain everyday-worker test would draw from Tier-2/3.
 - 2026-05-31 (S249, research-build) — Initial spec. Mike-direct: plan the autonomous-citizen layer. Resolves the roadmap's interview-vs-life-loop seam toward the life-loop (Mike's words); folds in the S249 sports-awareness tweak as wake-piece #4. Advisor review caught two corrections folded in before filing: (a) the real research.9 blocker is Phase 40.2 *cattle refactor* (reporter restructure), not injection defense (40.6, done) — and it doesn't gate a reporterless loop; (b) wake-context needs a fifth piece, the citizen's own rolling memory, because the engine is frozen across the run and self-history is the only wake-to-wake change. Filed as `research.13`, status ready (unblocked). Building the PoC is a separate Mike go-ahead.
+
+---
+
+## Relocated ROLLOUT_PLAN row detail — 2026-07-02 (S286 pointer-collapse)
+
+Verbatim rows moved out of ROLLOUT_PLAN.md when it collapsed to pointer-only. This is the working detail for the open job(s); the rollout row is one line pointing here.
+
+### research.13
+
+| research.13 | Citizen-autonomous PoC — narration-only life-loop (Layer 3 toe-dip). 1–2 Tier-1 citizens wake on a timer (spacemolt-miner shape), read a five-piece sports-aware wake-context (own ledger row + neighborhoodSlice + world-summary slice + Oakland_Sports_Feed + own rolling memory), narrate one cycle of life to a throwaway file, sleep, repeat ~1hr. Analyze-only, zero ingest path; answers research.9's four questions (character-hold / canon-sync / token bill / usability) → go/no-go on the real Layer-3 build (engine action menu). **Unblocked** (40.2 gates the interview build research.9, not a reporterless loop; 40.6 injection-defense done). **BUILT S249, MECHANISM smoke-validated** (`scripts/citizenLifePoC.js`): 2 Tier-1 ENGINE citizens × 2 turns, c95. Smoke PROVED mechanism (5-piece assembly + memory threading + cost + isolation) + early strong read on usability (publishable texture) & cost (~2.77K tok/wake; 10×24/day ≈ 665K, tractable; prompt-caching cuts ~80%). **STILL UNTESTED:** Q1 horizon character-hold (2 turns can't show turn-3 drift) + Q2 self-fidelity (eval checked external canon only, not own-row honoring). **Verdict GO** on scoping the engine action menu — NOT "Layer 3 proven." Finding: Tier-1 ENGINE rows skew notable (Lucia Codex-Linked; Varek no bio) → everyday test = Tier-2/3. | needs-info | research-build | [[../plans/2026-05-31-citizen-autonomous-poc]]; sibling research.9 |
+

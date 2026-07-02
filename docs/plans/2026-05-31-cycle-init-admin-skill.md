@@ -142,3 +142,14 @@ Cycle-init "admin" skill + one-true-cycle-source — a single skill runs first e
 ## Changelog
 
 - 2026-05-31 — Initial draft (S248, engine-sheet authored at Mike's direction for research-build review). Surfaced during `pipeline.32` audit: the path-cascade uncovered (a) the log-opener conflict (build-world-summary runs before city-hall-prep, so city-hall-prep can't own "open"), and (b) Mike's directive to make the one production log the true prose-free cycle source with uniform packet scaffolding via an admin skill. Cycle order (city-hall post-engine) locked by Mike same session. `pipeline.32` proceeds as the interim path-swap tail; this plan is the consolidation it folds into.
+
+---
+
+## Relocated ROLLOUT_PLAN row detail — 2026-07-02 (S286 pointer-collapse)
+
+Verbatim rows moved out of ROLLOUT_PLAN.md when it collapsed to pointer-only. This is the working detail for the open job(s); the rollout row is one line pointing here.
+
+### pipeline.35
+
+| pipeline.35 | Cycle-init "admin" skill + one-true-cycle-source — a single skill runs first each cycle: opens the one prose-free `production_log_c{XX}.md`, creates a per-cycle folder, lays uniform packet/template scaffolds, reads carry-over + NEWSROOM_MEMORY standing conventions, runs the T0-ready packet build. Every cycle-active skill (civic + media incl. /dispatch /interview /write-supplemental /podcast) appends its named section to the one log; no separate `production_log_city_hall`/`_edition` files. Consolidates 4 existing deterministic packet scripts (`buildVoiceWorkspaces`/`buildDeskPackets`/`buildDecisionQueue`/`buildInitiativePackets`). Surfaced during the `pipeline.32` audit — uncovered the **log-opener conflict** (`/build-world-summary` is run-cycle Step 5, before `/city-hall-prep`, so city-hall-prep can't own "open"). **Cycle order LOCKED (Mike S248): city-hall stays post-engine** (reacts to fresh cycle-N world summary, feeds N+1 — pre-engine rejected as the stale-summary nonsense case). T0-availability constraint: admin skill preps uniform shells + carry-over + initiative packets (prior-cycle-fed); voice/desk packets fill when this-cycle inputs land (world summary, sift picks). **`pipeline.32` is the forward-compatible path-swap tail that ships interim** (city-hall-prep stays opener until this skill relieves it). Plan handed to research-build for design-review (4 open questions: skill seat / folder layout / NEWSROOM_MEMORY read-vs-write / governance.26 collision). | ready | research-build / engine-sheet | [[../plans/2026-05-31-cycle-init-admin-skill]]; absorbs [[../plans/2026-05-24-governance-14-edition-pipeline-rewrite]] convention; folds `pipeline.32` as execution tail. |
+

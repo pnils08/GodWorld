@@ -110,3 +110,18 @@ Autonomy roadmap (umbrella) — continuous sim + autonomous agents. Three sequen
 ## Changelog
 
 - 2026-05-31 (S248) — Initial draft. Mike S248 directive: write a plan.md following the template that serves as the umbrella for the autonomous concepts we're already working toward, referencing the MDs that have been tracking them, so we track this better. Consolidates threads previously scattered across: research.9 (inter-agent harness, S172), Emergence World eval (RESEARCH §S248), engine.5 + engine.29 (deterministic citizen continuity), city-for-bots pivot (S114 memory), ARCHITECTURE_VISION (Jarvis/persistent-sessions), GPU-gate memory, spacemolt-miner (in-repo existence proof). Filed as research.12. Two Mike corrections folded in: (a) the newsroom IS the simulation — reporters/voices are in-world characters, so "autonomous agents" spans Layer 2 (newsroom) + Layer 3 (inhabitants), different builds; (b) newsroom automation is greps + file access, not new tooling. NOT a build schedule — sequencing + gate-tracking only; each layer promotes on Mike's go-ahead.
+
+---
+
+## Relocated ROLLOUT_PLAN row detail — 2026-07-02 (S286 pointer-collapse)
+
+Verbatim rows moved out of ROLLOUT_PLAN.md when it collapsed to pointer-only. This is the working detail for the open job(s); the rollout row is one line pointing here.
+
+### research.9
+
+| research.9 | Inter-agent conversation harness — minimal MCP test, the **reporter-interviews-citizen** build (Phase 40.2 cattle-refactor dep — you don't drop a stateful pet reporter into a live loop). **Sub-thread of research.12 (Layer 3); sibling to research.13.** Stays blocked on 40.2; the reporterless life-loop (research.13) does NOT share this gate. | blocked | research-build | [[../plans/2026-05-31-autonomy-roadmap]] (umbrella); [[../RESEARCH]] §S172 |
+
+### research.12
+
+| research.12 | Autonomy roadmap (umbrella) — continuous sim + autonomous agents. Three sequenced layers: (1) engine-continuous citizen life (engine.5/.29, in flight, cheapest), (2) newsroom-autonomous (the 26 agents on loop + grep; reviewer-lanes-every-cycle gate), (3) citizen-autonomous (N live agent loops, spacemolt-miner shape; first step = research.13 narration-only PoC, NOT the harness; GPU + drift-amplification gate). Steering/tracking doc, not a build schedule — each layer promotes on Mike's go-ahead. Newsroom-is-also-sim + newsroom-automation-is-greps framing (Mike S248). Consolidates research.9 + Emergence World eval + city-for-bots + ARCHITECTURE_VISION + GPU-gate. | in-progress | research-build | [[../plans/2026-05-31-autonomy-roadmap]] |
+

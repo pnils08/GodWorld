@@ -450,3 +450,18 @@ C12 boot-conditioning residual — **OPEN: item (a) journal-cadence rewrite** (G
   5. **Two plan files drafted** in `docs/plans/`: `2026-05-22-sift-v2.md` (C2, pipeline.24 pointer) + `2026-05-22-engine-regulatory-friction.md` (C13, engine.20 pointer). Both registered in `docs/index.md` same commit.
   6. **`docs/index.md` updated** — c94-gap-log-triage entry tags flipped `active → complete` with Phase 2 close note; two new plan entries appended; ROLLOUT row governance.13 flipped `in-progress → done-pending-archive`. ROLLOUT_ARCHIVE sweep deferred to next session-end (research-build canonical sweep).
 - 2026-05-22 — **§3 C15 empirical correction (S225, post-engine-sheet dispatch).** Engine-sheet executed engine.21 (C15 → ROLLOUT pointer) and proved by decomposition of C94 `byline_shadow_log` that the cluster's "beat-domain weighting" half was a wrong diagnosis; real cause is upstream seed-domain mis-tagging at `applyStorySeeds.makeSeed`. Engine.21a candidate-pool filter shipped clean (`7bec4a8`); engine.21 closed `done-pending-archive`; **engine.23 NEW** filed (ready, engine-sheet) for the upstream cause. C15 narrative updated with the correction so future instances triaging similar "byline over-weights reporter X" symptoms check seed-domain tagging upstream first. Pattern: `feedback_measure-twice-cascading-effects` (engine-sheet reversed on evidence-contradicting hypothesis before shipping the wrong fix) + `feedback_filing-isnt-fixing` (engine.23 filed in-session from empirical work, not punted to future triage).
+
+---
+
+## Relocated ROLLOUT_PLAN row detail — 2026-07-02 (S286 pointer-collapse)
+
+Verbatim rows moved out of ROLLOUT_PLAN.md when it collapsed to pointer-only. This is the working detail for the open job(s); the rollout row is one line pointing here.
+
+### civic.13
+
+| civic.13 | City-hall engine-sheet reconciliation (engine-sheet half of civic.12). **CLOSED:** G-R1 tracker assembler + G-PREP5 D6 Crane roster (S246 ES-5/ES-6, governance.25 archive); G-PREP4 world_summary reconcile + G-PREP7 approval-delta (S249 `6fcc718`). **OPEN: G-PREP6** — KONO neighborhood profile (Neighborhood_Map row exists but no v3NeighborhoodWriter profile); blocked on civic.10b / engine.8 header-drift sweep. | blocked | engine-sheet | [[../plans/2026-05-22-c94-gap-log-triage]] §3 C9 + governance.25 (archive) + commit 6fcc718 |
+
+### governance.18
+
+| governance.18 | C12 boot-conditioning residual — **OPEN: item (a) journal-cadence rewrite** (G-EPD8 residual, media scope — journal write timing + content shape relative to boot conditioning; candidate write surfaces: session-end SKILL Step 1 or a static User Profile claim via `/save-to-profile`). Items (b) shipped-block visual demote + (c) boot-greeting sensory rewrite **DONE S238** — full closure detail in the plan §C12 Closure log. | in-progress | research-build | [[../plans/2026-05-22-c94-gap-log-triage]] §3 C12 + Closure log. Source gap: `output/edition_pipeline_doc_gaps_c94.md` §G-EPD8. |
+

@@ -563,3 +563,18 @@ Plugin gating per terminal — investigation: does Claude Code support per-termi
   - **Q8 (Is `mags` terminal distinct?)** — ✅ **ALREADY DEPRECATED S211** commit `ddfe6c0` ("Trim dead mags terminal"). `.claude/terminals/mags/` was removed; hook case branch dropped. Today typing `mags` as a tmux window name falls through to research-build steward fallback (Light persona, not Full Mags). Mike's mental model in this session referenced the pre-S211 state. Media terminal is the Full-persona home; mags terminal will not be rebuilt. WORKFLOWS.md + EDITION_PIPELINE.md + ADR-0004 + CLAUDE.md already document the S211 deprecation; no further documentation work needed.
 
   **Net result:** 2 questions resolved already-pre-audit (Q5/Q8); 4 questions filed for substantial execution (Q2/Q3/Q4/Q7 → governance.6); 1 question filed for investigation (Q6 → governance.7); 1 question filed for future build (Q1 → governance.5). governance.4 row closed `needs-info` → `done-pending-archive`.
+
+---
+
+## Relocated ROLLOUT_PLAN row detail — 2026-07-02 (S286 pointer-collapse)
+
+Verbatim rows moved out of ROLLOUT_PLAN.md when it collapsed to pointer-only. This is the working detail for the open job(s); the rollout row is one line pointing here.
+
+### governance.3
+
+| governance.3 | Mags-at-/root steward layer — future build when /root holds projects beyond GodWorld. Today /root is greenfield (no CLAUDE.md, no rules dir, no PERSISTENCE, no SESSION_CONTEXT). Spec gives no guidance on multi-project hierarchy; this is a GodWorld-internal architecture choice deferred until the constraint actually exists (more than one project under /root). | blocked | research-build | [[../plans/2026-05-09-boot-load-audit]] §6 + §8 Q1. Per Mike S216: "eventual build out, nothing that GodWorld needs to build... future issue not today." Revisit when GodWorld is no longer the only project under /root. |
+
+### governance.8
+
+| governance.8 | Plugin gating per terminal — investigation: does Claude Code support per-terminal plugin disable, or `ECC_DISABLED_HOOKS`-style env-var control (Affaan-m pattern)? ~13 plugins auto-load universally today; engine-sheet (Stripped) gets the same plugin tool definitions as mags/media (Full). If gating is possible, engine-sheet gains the most (skips plugin hooks irrelevant to its scope). | needs-info | research-build | [[../plans/2026-05-09-boot-load-audit]] §8 Q6 + §10 affaan-m pattern. Mike S216: "we would have to see if this is something that can happen — my understanding is those fire on every session." Investigation surface: `/root/.claude/settings.json` enabledPlugins behavior; Claude Code docs on hook config; possible env-var overrides. Output: feasibility note + recommendation (gate per-terminal / accept universal load / file claude-code-guide question). |
+

@@ -270,3 +270,14 @@ Phase 42 writer consolidation — §5.6 ctx.ledger + B2 + B5 + B5-audit-miss-3 +
 ## Changelog
 
 - 2026-04-28 — Initial draft (S184, research-build). Phase 1 inventory done same session — see [[engine/PHASE_42_INVENTORY]]. Real numbers used: 37 files (citizenFameTracker.js retired), 175 cycle-path direct writes (vs audit's 181 net). Frame: efficiency not correctness, per audit's S156 Path 1 closeout. Tiered scope with explicit B6 stop-point. dryRun + replay regimen as test harness (Phase 2.4 ships `scripts/phase42VerifyBatch.js`). 5 open questions queued for Phase 2 research-build session before engine-sheet pilot. Estimated 6–8 engine-sheet sessions for full B0–B7 close; B0–B6 ships ~58% of scope as the recommended stop point.
+
+---
+
+## Relocated ROLLOUT_PLAN row detail — 2026-07-02 (S286 pointer-collapse)
+
+Verbatim rows moved out of ROLLOUT_PLAN.md when it collapsed to pointer-only. This is the working detail for the open job(s); the rollout row is one line pointing here.
+
+### engine.2
+
+| engine.2 | Phase 42 writer consolidation — §5.6 ctx.ledger + B2 + B5 + B5-audit-miss-3 + B6 + B7-audit-miss-1 all CLOSED (S204–S237; detail in PHASE_42_PATTERNS + plan). **B7 per-file analysis S257 (counts corrected — ROLLOUT had transposed 9/14; §B7 table is authoritative):** (1) **`parseMediaRoomMarkdown.js` (9 sites) — RESOLVED → operator-fired carve-out, NO migration** (zero cycle-path callers, all UI-alert entry points; engine.md exceptions + §B7 table updated). (2) **`processAdvancementIntake.js` (14) + `mediaRoomIntake.js` (32) — genuine cycle-path migrations, BLOCKED** on a shared design hazard: both share their ctx-write-helpers with an operator path that has no Phase 10 commit (mediaRoomIntake `processMediaIntakeV2()` ctx=null; processAdvancementIntake `runAdvancementIntakeManual` commits ledger inline only) → migrating writers loses intents on the operator path. Resolution = split-helper or ctx-branch (NOT mechanical P4), + mediaRoomIntake retire-candidate check (empty intake tabs at cycle time). Both **clasp-gated → post-C98** (deploy-attribution: no stacking on un-smoke-tested engine.33). Build-local when the design is chosen. **S269→S270 RESOLVED:** `processAdvancementIntake.js` MIGRATED via `markUsageProcessed_` ctx-branch (cycle→`queueCellIntent_` atomic-at-Phase-10; operator→direct) — both commits on origin/main; **S270 deploy-readiness verified** (phase-position check: Phase5-Advancement < Phase10-ExecuteIntents, no silent-drop). `mediaRoomIntake.js` = FULL CARVE-OUT (Phase-11-after-executor, no migration possible). B7 is the last open Row 8 scope. **Row 8 closes after processAdvancementIntake clasp-deploys + smoke-tests live — deploy gated on the deliberate C100 window** (rides tier1EssenceEvents + 2 manual deletes). | in-progress | engine-sheet | [[../plans/2026-04-28-phase-42-writer-consolidation]]; [[PHASE_42_PATTERNS]] |
+

@@ -41,6 +41,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | pipeline.36 | /edition-print C96 friction | ready | engine-sheet / research-build | [[../../output/production_log_c96_print_gaps.md]] — detail in pointer (relocated 2026-07-02) |
 | pipeline.35 | Cycle-init "admin" skill + one-true-cycle-source | ready | research-build / engine-sheet | [[../plans/2026-05-31-cycle-init-admin-skill]] + [[../plans/2026-05-24-governance-14-edition-pipeline-rewrite]] — detail in pointer (relocated 2026-07-02) |
 | pipeline.39 | C99 gap handoffs — post-publish/print/run-cycle logs + canon drift + letters-gate bug | ready | research-build / engine-sheet / media | [[../../output/production_log_c99_post_publish_gaps.md]] + [[../../output/production_log_c99_print_gaps.md]] + [[../../output/production_log_run_cycle_c99_gaps.md]] + canon_drift_c99.json — filed 2026-07-02 |
+| pipeline.40 | Journal repurpose — inject at /sift, Mags appends post-sift; reformat for discord+commit authorship | ready | research-build (design) → media | Mike-direct S286 close — plan doc next session |
 
 ### engine.* — Engine code, ledger, schema
 
@@ -62,8 +63,9 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.27 | wd-card auto-invalidation hook | in-progress | engine-sheet | [[../plans/2026-05-26-engine-27-wd-card-auto-invalidation]] — detail in pointer (relocated 2026-07-02) |
 | engine.29 | Citizen lifecycle & fame system | parked | engine-sheet | [[../plans/2026-05-30-citizen-lifecycle-fame-system]] + [[ENGINE_REPAIR]] — detail in pointer (relocated 2026-07-02) |
 | engine.40 | Sports-stat intake | ready | research-build → engine-sheet | [[ENGINE_REPAIR]] — detail in pointer (relocated 2026-07-02) |
-| engine.41 | Engine-output → canon coverage | wip | engine-sheet | [[../plans/2026-06-24-engine-output-canon-coverage]] — detail in pointer (relocated 2026-07-02) |
-| engine.42 | Aider/DeepSeek autonomous-edit audit | done | engine-sheet | [[ENGINE_REPAIR]] — detail in pointer (relocated 2026-07-02) |
+| engine.41 | Engine-output → canon coverage | in-progress | engine-sheet | [[../plans/2026-06-24-engine-output-canon-coverage]] — detail in pointer (relocated 2026-07-02) |
+| engine.42 | Aider/DeepSeek autonomous-edit audit | done-pending-archive | engine-sheet | [[ENGINE_REPAIR]] — detail in pointer (relocated 2026-07-02) |
+| engine.43 | Voices/agents backfilled into dials + shift as citizen dials alter (sync contract) | ready | research-build (design) → engine-sheet | Mike-direct S286 close — plan doc next session |
 
 ### canon.* — World-fidelity layer
 
@@ -86,6 +88,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | infrastructure.3 | Reviewer lanes → Claude Managed Agents (Dreaming pilot, Anthropic preview-access gated) | needs-info | research-build | [[../ACTION_MANAGED_AGENTS]] |
 | infrastructure.4 | supermemory-claude plugin auto-saved session transcripts to `mags` as `session_turn` do… | in-progress | engine-sheet | [[../SUPERMEMORY]] + [[../adr/0008-speaker-attribution-for-auto-save-writers|ADR-0008]] — detail in pointer (relocated 2026-07-02) |
 | infrastructure.5 | Supermemory load-bearing audit | in-progress | research-build | [[../plans/2026-05-22-supermemory-load-bearing-audit]] + [[../adr/0008-speaker-attribution-for-auto-save-writers|ADR-0008]] — detail in pointer (relocated 2026-07-02) |
+| infrastructure.6 | Claude Cowork now local on Mike's laptop — map local-save access paths, integration options | needs-info | research-build | Mike-direct S286 close — scope next session |
 
 ### research.* — Papers, external tools, evaluations
 
@@ -110,12 +113,13 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | research.13 | Citizen-autonomous PoC | needs-info | research-build | [[../plans/2026-05-31-citizen-autonomous-poc]] — detail in pointer (relocated 2026-07-02) |
 | research.14 | Citizen-loop Phase 2 | in-progress | engine-sheet | [[../plans/2026-06-04-mags-citizen-loop]] — detail in pointer (relocated 2026-07-02) |
 | research.16 | Tier-1 character voice agents | in-progress | research-build + engine-sheet | [[../plans/2026-06-16-tier1-character-voice-agents]] — detail in pointer (relocated 2026-07-02) |
-| research.17 | Layered memory architecture | ready→handoff | research-build → engine-sheet | [[../research/2026-06-20-layered-memory-architecture]] + [[../plans/2026-06-20-layered-memory-phase1-injection-filter]] — detail in pointer (relocated 2026-07-02) |
+| research.17 | Layered memory architecture | ready | research-build → engine-sheet | [[../research/2026-06-20-layered-memory-architecture]] + [[../plans/2026-06-20-layered-memory-phase1-injection-filter]] — detail in pointer (relocated 2026-07-02) |
 | research.19 | Citizen perception & immersion access layer | in-progress | research-build → engine-sheet | [[../plans/2026-06-23-citizen-perception-immersion-layer]] — detail in pointer (relocated 2026-07-02) |
-| engine.39 | `citizenDialMap` pure-integrity | wip | engine-sheet | [[../plans/2026-06-21-tier1-dial-essence-backfill]] — detail in pointer (relocated 2026-07-02) |
+| engine.39 | `citizenDialMap` pure-integrity | in-progress | engine-sheet | [[../plans/2026-06-21-tier1-dial-essence-backfill]] — detail in pointer (relocated 2026-07-02) |
 | engine.38 | Living City — full-population coverage | in-progress | research-build → engine-sheet | [[../plans/2026-06-19-living-city-full-population-coverage]] + [[../plans/2026-06-30-central-generator-atmospheric-expansion]] — detail in pointer (relocated 2026-07-02) |
 | research.20 | Autonomous deep-dispatch | in-progress | research-build → engine-sheet | [[../adr/0012-autonomous-deep-dispatch-write-edition]] + [[../plans/2026-06-25-deep-dispatch-write-edition-build]] — detail in pointer (relocated 2026-07-02) |
 | research.21 | Citizen-signal story emergence | in-progress | research-build → engine-sheet | [[../plans/2026-06-26-citizen-signal-story-emergence]] + [[../plans/2026-06-29-citizen-signal-detector-build]] — detail in pointer (relocated 2026-07-02) |
+| research.22 | Can LLMs read citizen dials raw, or need a dial→essence filter layer? Evaluate + design | ready | research-build | Mike-direct S286 close — eval next session; see [[ENGINE_COUPLING_MAP]] |
 
 ### governance.* — Skills, MDs, ADRs, project hygiene
 
@@ -132,6 +136,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | governance.33 | C96 gap-log triage | in-progress | research-build / engine-sheet | [[../plans/2026-06-07-c96-gap-log-triage]] — detail in pointer (relocated 2026-07-02) |
 | governance.35 | REDUCED S260 by governance.36 §loop-tightening to the PIN-self-derive remnant | ready | engine-sheet (design: research-build DONE) | [[../plans/2026-06-14-session-context-mechanization]] — detail in pointer (relocated 2026-07-02) |
 | governance.36 | Boot doc architecture restructure | in-progress | research-build | [[../plans/2026-06-14-boot-doc-architecture-restructure]] + [[../plans/2026-05-09-boot-load-audit]] — detail in pointer (relocated 2026-07-02) |
+| governance.45 | Rebuild a proper MEMORY.md | ready | research-build | Mike-direct S286 close — audit + rebuild next session |
 
 ---
 

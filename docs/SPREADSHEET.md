@@ -33,7 +33,7 @@ These are read/written during every cycle run.
 | **World_Population** | 1 | ENGINE | ENGINE | Birth/death/migration totals |
 | **World_Drift_Report** | 1 | ENGINE | ENGINE | Demographic drift metrics |
 | **Cycle_Weather** | 12 | ENGINE, SCRIPT, DASHBOARD | ENGINE | Weather by cycle |
-| **Simulation_Ledger** | ~837 | ENGINE, SCRIPT, DASHBOARD | ENGINE | **The citizens.** 47 columns (A-AU; Gender in AU confirmed S146). All ClockModes. Max POPID POP-00951 (S184 +150 female balance, S185 -74 blank-row trim). |
+| **Simulation_Ledger** | 922 | ENGINE, SCRIPT, DASHBOARD | ENGINE | **The citizens.** 50 columns (A-AX; MemoryRegisters at AX S282, SMPageId AW S262, DialState AV S256, Gender AU). All ClockModes. Max POPID POP-01037 (S282 live). |
 | **LifeHistory_Log** | 3,223 | ENGINE, SCRIPT, DASHBOARD | ENGINE | Citizen life events. 7 columns. |
 | **Generic_Citizens** | 277 | ENGINE, SCRIPT | ENGINE | Emergence pipeline — Tier 4 citizen generation |
 | **Household_Ledger** | 529 | ENGINE | ENGINE | Household groupings, rent, ownership |

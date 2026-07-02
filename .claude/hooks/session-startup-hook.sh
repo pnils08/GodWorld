@@ -56,6 +56,20 @@ if [ -z "$TERMINAL_NAME" ] || [ ! -d "$GODWORLD_ROOT/.claude/terminals/$TERMINAL
   fi
 fi
 
+# --- THE CARRIED SET (ADR-0009 §minimal-handoff, restored S283) ---
+# S276 stripped this emit but left every boot text promising "your handoff is the
+# NEXT line above" — 4 consecutive engine-sheet boots handoff-blind (Mike-flagged).
+# SESSION_CONTEXT.md is now a minimal handoff (9 lines, guard-enforced at close),
+# so the pull is terminal-specific and a few hundred bytes: the one shared PIN
+# (global sim-state — deliberately NOT per-terminal; a split would duplicate it
+# 4× and rot 3 copies) + THIS terminal's own NEXT line only. Graceful: empty if
+# absent (boot still works off ROLLOUT + claude-mem). Mags-only mode: no NEXT.
+PIN_LINE=$(grep -m1 '^\*\*PIN:\*\*' "$GODWORLD_ROOT/SESSION_CONTEXT.md" 2>/dev/null || echo "")
+NEXT_LINE=""
+if [ "$MAGS_ONLY" != "yes" ]; then
+  NEXT_LINE=$(grep -m1 "^\*\*NEXT\[$TERMINAL_NAME\]:\*\*" "$GODWORLD_ROOT/SESSION_CONTEXT.md" 2>/dev/null || echo "")
+fi
+
 # --- SESSION TITLE (S242, gov.22 T5) ---
 # Per-terminal window chrome. Terminals are launched `claude --name "<terminal>"`,
 # so this is consistent with (and usually identical to) the launch name.
@@ -75,6 +89,14 @@ SessionStart hook additional context: <godworld-state>
 
 Terminal: $TERMINAL_NAME$FALLBACK_NOTE
 EOF
+
+  # Carried set: PIN + this terminal's NEXT line (empty lines suppressed).
+  if [ -n "$PIN_LINE" ]; then
+    echo "$PIN_LINE"
+  fi
+  if [ -n "$NEXT_LINE" ]; then
+    echo "$NEXT_LINE"
+  fi
 
   # G-SS3: the journal is a persona artifact — emit "Last journal" only for
   # media + Mags-only boots. Operational terminals (civic / research-build /

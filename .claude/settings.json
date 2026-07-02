@@ -46,11 +46,40 @@
       "Bash(npx supermemory ingest*)",
       "Bash(curl *api.supermemory.ai*)",
       "Edit(.claude/terminals/**)",
-      "Write(.claude/terminals/**)"
+      "Write(.claude/terminals/**)",
+      "Edit(CLAUDE.md)",
+      "Write(CLAUDE.md)",
+      "Edit(.claude/rules/**)",
+      "Write(.claude/rules/**)",
+      "Edit(.claude/settings.json)",
+      "Write(.claude/settings.json)",
+      "Edit(.claude/hooks/**)",
+      "Write(.claude/hooks/**)",
+      "Edit(.claude/agents/**)",
+      "Write(.claude/agents/**)"
     ]
   },
   "enableAllProjectMcpServers": true,
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node /root/GodWorld/scripts/rolloutPointerGuard.js",
+            "if": "Edit(docs/engine/ROLLOUT_PLAN.md)",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "node /root/GodWorld/scripts/rolloutPointerGuard.js",
+            "if": "Write(docs/engine/ROLLOUT_PLAN.md)",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
     "SessionStart": [
       {
         "hooks": [

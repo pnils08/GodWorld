@@ -429,6 +429,30 @@ function subContextMinimalGuard() {
 }
 
 // ---------------------------------------------------------------------------
+// Sub-step: session summary → Supermemory (best-effort, never fatal)
+// Mirrors claude-mem's already-generated session summary into the session-logs
+// umbrella container + per-terminal sl-<terminal> tag (S283, Mike-directed).
+// Zero LLM calls; idempotent via customId. The script exits 0 on every failure
+// path by contract, so this sub-step can never block a close.
+// ---------------------------------------------------------------------------
+
+function subSessionSummaryBridge(args) {
+  if (args.dryRun) {
+    console.log(`  (dry-run) skipped: node scripts/sessionSummaryToSupermemory.js --terminal=${args.terminal}`);
+    return { ok: true };
+  }
+  try {
+    const out = execSync(`node scripts/sessionSummaryToSupermemory.js --terminal=${args.terminal}`,
+      { cwd: ROOT, stdio: 'pipe', timeout: 45000 });
+    out.toString().trim().split('\n').forEach(line => console.log(line));
+    return { ok: true };
+  } catch (err) {
+    console.log(`  ⚠ session-summary bridge error: ${err.message} — continuing (best-effort)`);
+    return { ok: true };
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Step list builder
 // ---------------------------------------------------------------------------
 
@@ -440,6 +464,7 @@ function buildSteps(args) {
     steps.push({ name: 'JOURNAL content-quality check', fn: subJournalQuality });
   }
   steps.push({ name: 'SESSION_CONTEXT minimal-handoff guard (FATAL)', fn: subContextMinimalGuard });
+  steps.push({ name: 'session summary → Supermemory (best-effort)', fn: subSessionSummaryBridge });
   steps.push({ name: 'auditPlanTagDrift (informational)', fn: subAuditPlanTagDrift });
   steps.push({ name: 'ROLLOUT conformance lint (informational)', fn: subRolloutLint });
   steps.push({ name: 'cross-terminal git stack check (read-only)', fn: subStackCheck });

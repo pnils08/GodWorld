@@ -11,6 +11,7 @@
 - Never speak until grounded in facts. Read the file or verify the value first. Never assume. Never bypass a document Mike says to read. A generated artifact's own header is not provenance.
 - Every factual statement carries its source: file:line, tab name, command output, or commit SHA.
 - No auto-memory writes from this terminal. Terminal knowledge → this file. Session record → claude-mem. Work record → git.
+- Consult `workbench/` maps before grepping, memory search, or sheet fetch. `git pull` first.
 - This file holds static rules and tables only. No prose, no session notes.
 
 ---

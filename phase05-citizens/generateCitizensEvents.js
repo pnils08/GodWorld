@@ -97,6 +97,17 @@ function generateCitizensEvents_(ctx) {
     }
   }
 
+  // S280 depth-step: POPID -> display-name map so relationship/arc texture can
+  // name the actual counterpart (bonds store IDs only). One pass over rows
+  // already in memory; no sheet read.
+  var nameByPop = Object.create(null);
+  for (var nbi = 0; nbi < rows.length; nbi++) {
+    var nbPop = rows[nbi][iPopID];
+    if (!nbPop) continue;
+    var nbName = (((iFirst >= 0 ? rows[nbi][iFirst] : "") || "") + " " + ((iLast >= 0 ? rows[nbi][iLast] : "") || "")).trim();
+    if (nbName) nameByPop[String(nbPop).trim().toUpperCase()] = nbName;
+  }
+
   // Prefer injected RNG, else seed, else Math.random
   var rng = (typeof ctx.rng === "function")
     ? ctx.rng
@@ -1025,20 +1036,53 @@ function generateCitizensEvents_(ctx) {
   if (weather.type === "cold") weatherPool.push(makeEntry("bundled up against the cold", ["source:weatherPool", "weather:cold"], 1, false));
   if (weather.type === "wind") weatherPool.push(makeEntry("noted windy evening conditions", ["source:weatherPool", "weather:wind"], 1, false));
 
-  var chaosPool = (chaos.length > 0)
-    ? [
-        makeEntry("reflected briefly on today's city happenings", ["source:chaos"], 1, false),
-        makeEntry("felt a subtle shift in the city's tone", ["source:chaos"], 1, false)
-      ]
-    : [];
+  // S280 depth-step: name the actual world event instead of generic mush.
+  // S.worldEvents entries carry {description, severity, domain, neighborhood?}
+  // — the description IS the story hook. Em-dash/colon framing tolerates both
+  // prose descriptions (worldEventsEngine) and "CATEGORY — subtype (Hood)"
+  // forms (crisis buckets). Tags unchanged (source:chaos) so dial routing is
+  // identical. Cap 4 events so a chaotic week doesn't drown the pool.
+  var chaosPool = [];
+  for (var che = 0; che < chaos.length && che < 4; che++) {
+    var chEv = chaos[che];
+    var chDesc = (chEv && chEv.description) ? String(chEv.description).trim() : "";
+    if (!chDesc) continue;
+    var chTag = ["source:chaos", "chaos:" + (chEv.domain || "event")];
+    var chW = (chEv.severity === "high") ? 1.3 : (chEv.severity === "medium") ? 1.15 : 1.0;
+    chaosPool.push(makeEntry("caught the talk going around — " + chDesc, chTag, chW, false));
+    chaosPool.push(makeEntry("half-listened to radio chatter about it all day: " + chDesc, chTag, chW * 0.9, false));
+  }
+  if (chaos.length > 0 && !chaosPool.length) {
+    // events present but none carried a description — keep the old ambient line
+    chaosPool.push(makeEntry("felt a subtle shift in the city's tone", ["source:chaos"], 1, false));
+  }
 
+  // S280 depth-step: sentiment/econ moved from felt-abstractions to observable
+  // street detail (sensory-anchor style rule) — something a citizen can retell
+  // and a desk agent can hang a story on. Tags unchanged.
   var sentimentPool = [];
-  if (dynamics.sentiment >= 0.3) sentimentPool.push(makeEntry("felt uplifted by the city mood", ["source:sentiment", "sentiment:positive"], 1, false));
-  if (dynamics.sentiment <= -0.3) sentimentPool.push(makeEntry("felt unsettled by a low hum of tension", ["source:sentiment", "sentiment:negative"], 1, false));
+  if (dynamics.sentiment >= 0.3) {
+    sentimentPool.push(makeEntry("felt uplifted by the city mood", ["source:sentiment", "sentiment:positive"], 1, false));
+    sentimentPool.push(makeEntry("noticed strangers actually holding doors and making eye contact today", ["source:sentiment", "sentiment:positive"], 1, false));
+    sentimentPool.push(makeEntry("caught a busker's tune on the corner and hummed it the rest of the walk", ["source:sentiment", "sentiment:positive"], 0.95, false));
+  }
+  if (dynamics.sentiment <= -0.3) {
+    sentimentPool.push(makeEntry("felt unsettled by a low hum of tension", ["source:sentiment", "sentiment:negative"], 1, false));
+    sentimentPool.push(makeEntry("noticed sidewalk conversations dropping to murmurs as people passed", ["source:sentiment", "sentiment:negative"], 1, false));
+    sentimentPool.push(makeEntry("watched a shopkeeper pull the security gate down an hour early", ["source:sentiment", "sentiment:negative"], 0.95, false));
+  }
 
   var econPool = [];
-  if (econMood <= 35) econPool.push(makeEntry("noticed money stress showing up in small ways", ["source:economy", "econ:low"], 1, false));
-  if (econMood >= 65) econPool.push(makeEntry("sensed optimism about local opportunities", ["source:economy", "econ:high"], 1, false));
+  if (econMood <= 35) {
+    econPool.push(makeEntry("noticed money stress showing up in small ways", ["source:economy", "econ:low"], 1, false));
+    econPool.push(makeEntry("overheard someone at the counter counting out exact change, twice", ["source:economy", "econ:low"], 1, false));
+    econPool.push(makeEntry("clocked the tip jar sitting emptier than it used to", ["source:economy", "econ:low"], 0.95, false));
+  }
+  if (econMood >= 65) {
+    econPool.push(makeEntry("sensed optimism about local opportunities", ["source:economy", "econ:high"], 1, false));
+    econPool.push(makeEntry("spotted a fresh hiring sign taped up in a storefront window", ["source:economy", "econ:high"], 1, false));
+    econPool.push(makeEntry("heard two neighbors comparing new gigs over a fence", ["source:economy", "econ:high"], 0.95, false));
+  }
 
   var templatePool = [
     makeEntry("crossed paths with $CONTACT at $VENUE and left with a new question", ["source:neighborhood", "source:template"], 1.2, true),
@@ -1338,14 +1382,23 @@ function generateCitizensEvents_(ctx) {
     var hasRivalry = false;
     var hasAlliance = false;
     var hasMentorship = false;
+    // S280 depth-step: capture the actual counterpart so bond texture can name
+    // them (first bond of each type wins; bonds store POP IDs, nameByPop resolves).
+    var rivalName = "", allyName = "", mentorPartnerName = "";
+    var popIdNorm = String(popId || "").trim().toUpperCase();
 
     if (typeof getCitizenBonds_ === "function") {
       citizenBonds = getCitizenBonds_(ctx, popId) || [];
       for (var bi = 0; bi < citizenBonds.length; bi++) {
         var bb = citizenBonds[bi];
-        if (bb && bb.bondType === "rivalry") hasRivalry = true;
-        if (bb && bb.bondType === "alliance") hasAlliance = true;
-        if (bb && bb.bondType === "mentorship") hasMentorship = true;
+        if (!bb) continue;
+        var bbOtherId = (String(bb.citizenA || "").trim().toUpperCase() === popIdNorm)
+          ? String(bb.citizenB || "").trim().toUpperCase()
+          : String(bb.citizenA || "").trim().toUpperCase();
+        var bbOtherName = (bbOtherId && bbOtherId !== popIdNorm) ? (nameByPop[bbOtherId] || "") : "";
+        if (bb.bondType === "rivalry") { hasRivalry = true; if (!rivalName) rivalName = bbOtherName; }
+        if (bb.bondType === "alliance") { hasAlliance = true; if (!allyName) allyName = bbOtherName; }
+        if (bb.bondType === "mentorship") { hasMentorship = true; if (!mentorPartnerName) mentorPartnerName = bbOtherName; }
       }
     }
 
@@ -1425,6 +1478,16 @@ function generateCitizensEvents_(ctx) {
     var nbhdStatePool = neighborhoodStatePool_(neighborhood);
     for (var nsi = 0; nsi < nbhdStatePool.length; nsi++) {
       pool.push(makeEntry(nbhdStatePool[nsi].text, mergeTags(nbhdStatePool[nsi].tags, calendarTags), nbhdStatePool[nsi].weight, false));
+    }
+
+    // S280 depth-step: a world event in THIS citizen's hood lands up close —
+    // crisis-bucket events carry a neighborhood; the citywide chaosPool already
+    // covers the heard-about version, this is the saw-it version (heavier draw).
+    for (var lce = 0; lce < chaos.length; lce++) {
+      var lcEv = chaos[lce];
+      if (!lcEv || !lcEv.neighborhood || lcEv.neighborhood !== neighborhood || !lcEv.description) continue;
+      pool.push(makeEntry("saw it up close in " + neighborhood + " — " + String(lcEv.description).trim(),
+        mergeTags(["source:chaos", "chaos:local"], calendarTags), 1.35, false));
     }
 
     // engine.33 T9: faith fan-out (this cycle's faith events in THIS hood)
@@ -1514,22 +1577,45 @@ function generateCitizensEvents_(ctx) {
       pool.push(makeEntry(agp[agi].text, mergeTags(agp[agi].tags, calendarTags), agp[agi].weight, false));
     }
 
+    // S280 depth-step: bond texture names the actual counterpart when the
+    // ledger has a name ("traded words with Marcus Webb" seeds a story;
+    // "felt a flicker of tension" doesn't). Direction-neutral phrasing for
+    // mentorship (bond rows don't record who mentors whom). Generic pools
+    // remain the fallback. Tags unchanged — dial routing identical.
     if (hasAlliance && chanceHit(0.4)) {
-      for (var ali2 = 0; ali2 < alliancePool.length; ali2++) {
-        var alEntry = alliancePool[ali2];
-        pool.push(makeEntry(alEntry.text, mergeTags(alEntry.tags, calendarTags), 1.1, false));
+      if (allyName) {
+        pool.push(makeEntry("compared notes with " + allyName + " over coffee that went long", mergeTags(["relationship:alliance"], calendarTags), 1.15, false));
+        pool.push(makeEntry("got a heads-up text from " + allyName + " that saved some trouble", mergeTags(["relationship:alliance"], calendarTags), 1.1, false));
+        pool.push(makeEntry("caught " + allyName + "'s eye across the room and didn't need to say it", mergeTags(["relationship:alliance"], calendarTags), 1.05, false));
+      } else {
+        for (var ali2 = 0; ali2 < alliancePool.length; ali2++) {
+          var alEntry = alliancePool[ali2];
+          pool.push(makeEntry(alEntry.text, mergeTags(alEntry.tags, calendarTags), 1.1, false));
+        }
       }
     }
     if (hasRivalry && chanceHit(0.4)) {
-      for (var rvi2 = 0; rvi2 < rivalryPool.length; rvi2++) {
-        var rvEntry = rivalryPool[rvi2];
-        pool.push(makeEntry(rvEntry.text, mergeTags(rvEntry.tags, calendarTags), 1.15, false));
+      if (rivalName) {
+        pool.push(makeEntry("crossed paths with " + rivalName + " and kept it civil — barely", mergeTags(["relationship:rivalry"], calendarTags), 1.2, false));
+        pool.push(makeEntry("heard " + rivalName + "'s name come up and felt the old edge return", mergeTags(["relationship:rivalry"], calendarTags), 1.15, false));
+        pool.push(makeEntry("caught themselves measuring the week against " + rivalName + "'s", mergeTags(["relationship:rivalry"], calendarTags), 1.1, false));
+      } else {
+        for (var rvi2 = 0; rvi2 < rivalryPool.length; rvi2++) {
+          var rvEntry = rivalryPool[rvi2];
+          pool.push(makeEntry(rvEntry.text, mergeTags(rvEntry.tags, calendarTags), 1.15, false));
+        }
       }
     }
     if (hasMentorship && chanceHit(0.3)) {
-      for (var mti2 = 0; mti2 < mentorshipPool.length; mti2++) {
-        var mtEntry = mentorshipPool[mti2];
-        pool.push(makeEntry(mtEntry.text, mergeTags(mtEntry.tags, calendarTags), 1.05, false));
+      if (mentorPartnerName) {
+        pool.push(makeEntry("talked something through with " + mentorPartnerName + " and left clearer than they arrived", mergeTags(["relationship:mentorship"], calendarTags), 1.1, false));
+        pool.push(makeEntry("caught up with " + mentorPartnerName + " — the kind of conversation that lingers into the evening", mergeTags(["relationship:mentorship"], calendarTags), 1.05, false));
+        pool.push(makeEntry("jotted down something " + mentorPartnerName + " said before it could slip away", mergeTags(["relationship:mentorship"], calendarTags), 1.0, false));
+      } else {
+        for (var mti2 = 0; mti2 < mentorshipPool.length; mti2++) {
+          var mtEntry = mentorshipPool[mti2];
+          pool.push(makeEntry(mtEntry.text, mergeTags(mtEntry.tags, calendarTags), 1.05, false));
+        }
       }
     }
     if (activeArc && chanceHit(0.5)) {
@@ -1539,9 +1625,18 @@ function generateCitizensEvents_(ctx) {
       if (arcType) arcTagsExtra.push(arcType);
       if (arcPhase) arcTagsExtra.push(arcPhase);
 
+      // S280 depth-step: arcs carry a human summary at creation ("[Name]'s
+      // retirement leaves a void in leadership.") — surface it so the citizen
+      // reflects on the actual situation, not "unfolding events". Trailing
+      // period stripped so the framing reads clean. Generic pool = fallback.
+      var arcSummary = (activeArc.summary ? String(activeArc.summary).trim() : "").replace(/\.$/, "");
+      if (arcSummary) {
+        pool.push(makeEntry("kept circling back to it during the day — " + arcSummary, mergeTags(mergeTags(["arc:named"], arcTagsExtra), calendarTags), 1.25, false));
+        pool.push(makeEntry("weighed where they stand as it develops: " + arcSummary, mergeTags(mergeTags(["arc:named"], arcTagsExtra), calendarTags), 1.2, false));
+      }
       for (var ari2 = 0; ari2 < arcPool.length; ari2++) {
         var arEntry = arcPool[ari2];
-        pool.push(makeEntry(arEntry.text, mergeTags(mergeTags(arEntry.tags, arcTagsExtra), calendarTags), 1.2, false));
+        pool.push(makeEntry(arEntry.text, mergeTags(mergeTags(arEntry.tags, arcTagsExtra), calendarTags), arcSummary ? 1.0 : 1.2, false));
       }
     }
 

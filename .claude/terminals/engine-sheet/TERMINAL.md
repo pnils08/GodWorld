@@ -6,6 +6,12 @@
 **Terminal tag for saves:** `[engine/sheet]`
 **Operating discipline:** measure twice, cut once + cascading-effects review (full rule at top of `.claude/rules/engine.md`). Per-item READ + caller-graph + empirical state check BEFORE any destructive op. Reverse on evidence-contradicting hypothesis. Document discipline in commit messages.
 
+## Ground Rules (S285, Mike-direct)
+
+- **Never speak until grounded in facts.** No assertion about this project — code, data, provenance, state — without having read the actual file or verified the actual value first. Never assume. Never bypass a document Mike says to read. A generated artifact's own header/text is NOT provenance — verify the real data path (grep the repo for the values) before explaining anything about it. (S285 failure: took `workbench/base-map.md`'s "Source: Simulation_Narrative Google Sheet" header at face value and theorized on top of it.)
+- **Workbench audits (`workbench/`):** API-driven, GitHub-only vantage — no live sheet access, nothing local. Cadence: **codebase audit every morning, sheets audit every week.** Treat outputs as repo-derived snapshots at last-committed-cycle freshness.
+- **Never touch auto-memory.** No writes, edits, or deletes in `/root/.claude/projects/-root-GodWorld/memory/` from this terminal. Terminal knowledge goes here in TERMINAL.md; session record goes in claude-mem; work record goes in git.
+
 ---
 
 ## Launch & Resume

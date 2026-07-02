@@ -78,6 +78,18 @@
             "command": "node /root/GodWorld/scripts/rolloutPointerGuard.js",
             "if": "Write(docs/engine/ROLLOUT_PLAN.md)",
             "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "node /root/GodWorld/scripts/rolloutPointerGuard.js",
+            "if": "Edit(docs/plans/**)",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "node /root/GodWorld/scripts/rolloutPointerGuard.js",
+            "if": "Write(docs/plans/**)",
+            "timeout": 10
           }
         ]
       }

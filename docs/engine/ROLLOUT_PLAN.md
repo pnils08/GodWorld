@@ -88,7 +88,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | infrastructure.3 | Reviewer lanes → Claude Managed Agents (Dreaming pilot, Anthropic preview-access gated) | needs-info | research-build | [[../ACTION_MANAGED_AGENTS]] |
 | infrastructure.4 | supermemory-claude plugin auto-saved session transcripts to `mags` as `session_turn` do… | in-progress | engine-sheet | [[../SUPERMEMORY]] + [[../adr/0008-speaker-attribution-for-auto-save-writers|ADR-0008]] — detail in pointer (relocated 2026-07-02) |
 | infrastructure.5 | Supermemory load-bearing audit | in-progress | research-build | [[../plans/2026-05-22-supermemory-load-bearing-audit]] + [[../adr/0008-speaker-attribution-for-auto-save-writers|ADR-0008]] — detail in pointer (relocated 2026-07-02) |
-| infrastructure.6 | Claude Cowork now local on Mike's laptop — map local-save access paths, integration options | needs-info | research-build | Mike-direct S286 close — scope next session |
+| infrastructure.6 | Cowork mapped as autonomous/off-session helper alongside Gemini roster | done-pending-archive | research-build | [[../GEMINI_OFFLOAD]] governance.38 roster addition |
 
 ### research.* — Papers, external tools, evaluations
 
@@ -136,7 +136,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | governance.33 | C96 gap-log triage | in-progress | research-build / engine-sheet | [[../plans/2026-06-07-c96-gap-log-triage]] — detail in pointer (relocated 2026-07-02) |
 | governance.35 | REDUCED S260 by governance.36 §loop-tightening to the PIN-self-derive remnant | ready | engine-sheet (design: research-build DONE) | [[../plans/2026-06-14-session-context-mechanization]] — detail in pointer (relocated 2026-07-02) |
 | governance.36 | Boot doc architecture restructure | in-progress | research-build | [[../plans/2026-06-14-boot-doc-architecture-restructure]] + [[../plans/2026-05-09-boot-load-audit]] — detail in pointer (relocated 2026-07-02) |
-| governance.45 | Rebuild a proper MEMORY.md | ready | research-build | Mike-direct S286 close — audit + rebuild next session |
+| governance.45 | MEMORY.md rebuilt — 18 boot-loaded entries + 37-item pointer index, 13 dropped as stale/redundant | done-pending-archive | research-build | S288 rebuild — content lives directly in MEMORY.md, no longer pointer-only |
 
 ---
 

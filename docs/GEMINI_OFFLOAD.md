@@ -1,7 +1,7 @@
 ---
 title: Gemini Offload Triage
 created: 2026-05-28
-updated: 2026-06-16
+updated: 2026-07-02
 type: reference
 tags: [governance, infrastructure, token-budget, architecture, active]
 sources:
@@ -95,6 +95,7 @@ Combined recovery: ~25–30% per operational boot.
 - **Gemini CLI** (`gemini`, v0.42) — free, native Drive/Sheets read. The three paths above.
 - **OpenRouter** (`deepseek/deepseek-chat` via `lib/env` → `OPENROUTER_API_KEY`) — cheap LLM for narrow repeatable classification. `lib/reflectionClassifier.js` is the live precedent.
 - **Local Ollama** (`qwen2.5:3b`) — free, CPU, offline. Fallback for tiny classification when network/cost matters.
+- **Claude Cowork** (desktop agent, S286) — autonomous, off-session. Shares Mike's account-level connectors (Drive/Gmail/Calendar/Slack/GitHub-via-MCP) across every Claude client. Does NOT inherit this repo's project-scoped MCP servers (`godworld`, `claude-mem` Supermemory search) or `.claude/settings.json` gates — those are Claude Code-specific, not account connectors. Lane: autonomous audits/analysis, read-mostly. No autonomous writes to Sheets/Supermemory/repo — findings route back through a terminal session before anything canon-bearing is touched.
 
 **The load-bearing distinction (read before routing):** most "scripted jobs" need **no LLM at all** — they need a deterministic script plus the discipline to run it instead of doing it by hand in the premium seat. A cheap *model* is only warranted for genuine narrow classification (the band the reflection classifier occupies). Don't reach for Gemini/Ollama where a `grep` and a `wc -l` are the actual job.
 
@@ -104,6 +105,7 @@ Three bands, by judgment content:
 |------|-------|----------|------|
 | **Deterministic** | no LLM | Node/bash script | doc-audit claim-scan, ledger-count audits, grep/file sweeps, `/health` + determinism scans |
 | **Cheap-LLM** | narrow classify | OpenRouter / Ollama | reflection→tag classifier (**done** — DeepSeek) |
+| **Autonomous/off-session** | long-running audit, no live judgment call | Claude Cowork | off-session audits/analysis across Drive + local files — read-mostly, no canon writes |
 | **Judgment** | holistic eval | Opus (stays) | doc-audit content-drift verdict, session-close NEXT line (gov.37) |
 
 **Existing deterministic scripts — the backbone is already built; invoke, don't rebuild:**
@@ -125,7 +127,7 @@ Three bands, by judgment content:
 
 ## Pointers
 
-- ROLLOUT rows: `governance.21` (Gemini paths) + `governance.38` (full-roster job inventory) in [[engine/ROLLOUT_PLAN]]
+- ROLLOUT rows: `governance.21` (Gemini paths) + `governance.38` (full-roster job inventory) + `infrastructure.6` (Cowork addition, S286) in [[engine/ROLLOUT_PLAN]]
 - Plan: [[archive/plans/2026-05-28-gemini-offload-pattern]] — full task list + acceptance criteria
 - Companion boot-burn gap log: `output/production_log_session-startup_c95_gaps.md` (S241)
 - Canon scaffolding Gemini lacks: [[canon/CANON_RULES]] + [[canon/INSTITUTIONS]]

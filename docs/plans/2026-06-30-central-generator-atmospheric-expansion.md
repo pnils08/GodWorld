@@ -8,6 +8,8 @@ sources:
   - docs/engine/ENGINE_COUPLING_MAP.md §generateCitizensEvents (FULL-READ verified)
   - "Live baseline S277 (this session): scripts/auditSimulationLedger.js + LifeHistory_Log C100 tally"
   - "Mike directive S277 (2026-06-30): extend central generator to everyone, atmospheric-only, raise per-cycle volume"
+  - "Mike directive S280 (2026-07-01): depth step — story-seeding + 24/7-reflection rubric; outside-LLM addition-ideas intake"
+  - "Outside-LLM idea folder (Mike, read+graded S280): https://drive.google.com/drive/folders/13S8tW5-0nx4i-kQwsXfDqM-AjrpilWiQ (9 files: GPT×4, DeepSeek, Kimi, Grok×2, Gemini, + synthesis MD)"
 pointers:
   - "[[../engine/ROLLOUT_PLAN]] §engine.38 — parent rollout row (this is engine.38 Phase A continuation, NOT a new track)"
   - "[[2026-06-19-living-city-full-population-coverage]] — engine.38 plan (Phase A shipped; this finishes the mode-citizen + volume piece)"
@@ -185,12 +187,17 @@ Status: Active 874 / pending 37 / Retired 8 / deceased 3. LifeHistory populated 
 
 **Missing pools (city-reflection gaps):** initiative/council-vote texture (Initiative_Tracker never reaches citizen texture); Tribune-readership events (dial map already routes `E\d+` edition-citation tags → sociability:2 — dial side exists, no emitter); Baylight construction; named business open/close; retirement-flavored leisure (deferred here from the retired refinement).
 
-### Build order (proposed, pending Mike's go)
+### Build order (S280, outside-LLM adds folded in)
 
 1. Tier B: name what's already in hand — chaos first, then sentiment/econ drivers.
 2. Tier C bonds/arcs: put the real counterpart name + arc reference in the text.
-3. New engine-tied pools: civic/initiative texture, Tribune readership, Baylight.
-4. Widen static filler last (least valuable depth) + retirement leisure content.
+3. **Human-domain moments rebuild of baseDaily** (GPT add) — replace the 6 generic lines with domain pools every citizen can draw: Family / Home / Reflection / Curiosity / Community / **Identity** ("didn't recognize themselves in an old photograph"-class). Moments, not events: what the citizen will *remember* about the day.
+4. **Listening-texture pool** (Kimi add, anonymous form) — observed-stranger moments turned inward ("saw someone repairing a fence for an hour; wondered when they last finished anything"). No cross-citizen wiring; pure texture.
+5. New engine-tied pools: civic/initiative texture, Tribune readership (dial route `E\d+` exists, no emitter), Baylight construction, **bias-lite opinion texture about named public figures** (rides existing fame data — "formed an opinion about [T1 name]" class; no schema).
+6. **Groove/routine texture lines** (Gemini add, content only) — the gravity of autopilot ("realized the week had passed without a single thing worth retelling"). Composure-light.
+7. Widen remaining static filler last + retirement leisure content.
+
+**Style rule for all new content (sensory anchors, synthesis-doc add):** write pool text with a sensory grounding where natural — a smell, a sound, a texture. A style discipline, not a system.
 
 All additions stay inside the Task-2 atmospheric invariant (does/feels/observes — never what they are), composure-light per the engine.38 convergence constraint.
 
@@ -198,9 +205,32 @@ All additions stay inside the Task-2 atmospheric invariant (does/feels/observes 
 
 Hardcoded pools mean deepening = editing many files; the mode engines are thin for exactly this reason. Proposal to evaluate: a sheet-tab content ledger (text, pool/category, weight, eligibility conditions) loaded once per cycle into ctx, drawn by **all** generators — centralizes depth, Mike-editable without deploys. Cost: +1 sheet read/cycle, tab-drift failure mode, schema design. Disposition: this session's deepening lands in code; the ledger is the candidate architecture for the **mode-engine depth-parity block** and wants a research-build design pass before build.
 
-### Outside-LLM idea intake (Mike, S280)
+### Outside-LLM idea intake (Mike, S280) — GRADED
 
-Mike collected addition-ideas (not change-plan ideas) from a variety of LLMs. Each idea gets graded against the rubric above + the atmospheric invariant: **add / adapt / skip**, with a one-line reason. Findings land in this section when processed.
+**Resource (tagged):** Mike's Drive folder of outside-LLM addition-ideas — https://drive.google.com/drive/folders/13S8tW5-0nx4i-kQwsXfDqM-AjrpilWiQ — 9 files read S280: `Gpt630_.txt`/`_1`/`_2`/`_3`, `Deepseek630.txt`, `Kimi630.txt`, `Grok630_1.txt`/`_2.txt`, `Gemini_630_Additions.md`, + synthesis `GodWorld: Analysis and Strategic Recommendations.md`. Graded add/adapt/skip vs rubric + atmospheric invariant + dial-mechanism invariants.
+
+**ADD (folded into build order above):**
+| Idea | Source | Landing |
+|---|---|---|
+| Moments-over-events + human domains (Family/Home/Reflection/Curiosity/Community/Identity) | GPT `Gpt630_1.txt` | Build item 3 — baseDaily rebuild. Centerpiece of the folder. |
+| Listening layer → anonymous observed-stranger texture | Kimi `Kimi630.txt` | Build item 4. Tracked "listening debts" version deferred (needs persistence). |
+| Sensory anchors → style rule | synthesis doc §3 | Style rule above (demoted from system to discipline). |
+| Groove/routine texture | Gemini §6 | Build item 6, content only. Dial-locking mechanic skipped. |
+| Asymmetric bias → bias-lite opinion texture on named public figures | GPT `Gpt630_3.txt` / synthesis §1 | Build item 5. Full bias persistence → research-build seam below. |
+
+**ADAPT — research-build design seams (tagged research-build; NOT engine-sheet work; same design pass as the shared event-content ledger):**
+- **Asymmetric bias ledger** (GPT_3/synthesis §1) — per-citizen `biases` records (target/sentiment/origin/reinforced/challenged); history between citizens who never met. Schema + memory design.
+- **Tension register** (DeepSeek) — unresolved questions stored alongside memory, resurfaced in wakes; second-order reflection. Persistence design; texture-only version rides build item 3 (Reflection/Identity domains).
+- **Unlived-life register** (Kimi) — paths not taken that resurface when the current life rhymes. Caution logged: invented specifics = pseudo-canon; must derive from actual LifeHistory or stay vague.
+- **Resonance-weighted recall** (GPT_/_2) — weighted memory resurfacing for the 24/7 wake-reader (resonance × time-since-recall × dial affinity × context match). Loop-side, not generator-side.
+
+**SKIP (with reasons — Mike pre-flagged the dial one):**
+- **Identity crisis / forced dial shifts** (Grok_2, synthesis §2) — breaks the core dial invariant: `base` moves only via sustained streak-hardening (0.4/streak≥3); a dissonance-triggered forced shift is a second unearned write-path to identity. Mike's "pretty unrealistic" flag confirmed by mechanism read.
+- **Emotional-weather contagion** (Kimi) — parallel mood substrate + citizen-to-citizen contagion = the engine.38 convergence trap (volume/valence work exists to DIVERGE citizens); hood-sentiment pools already deliver the readable version.
+- **Memory reconsolidation with new dial effects** (GPT_2) — compressor folds each event exactly once by design; re-firing = double-count. Voice-level reinterpretation already free (loop reads old history through current dials).
+- **Engine of Forgetting / semantic phantoms** (Gemini §5) — already built: fold-on-trim IS episodic→semantic conversion. External validation, zero work.
+- **Becoming ledger** (Grok_1) — machine-synthesized self-concept prose competes with the earned-essence rule (engine.30 killed machine-written CitizenBio). The O→R→AT loop already carries this shape.
+- **Legacy/inheritance pipeline** (synthesis §4) — generationalEventsEngine owns lineage cascades; memory-fragment inheritance deferred with the other persistence seams.
 
 ---
 
@@ -211,3 +241,4 @@ Mike collected addition-ideas (not change-plan ideas) from a variety of LLMs. Ea
 - 2026-06-30 — Retired refinement (engine-sheet, S277). Occupation work-texture pool now also excludes `Status==="retired"` (Mike: retirement changes what they get) — retired keep the atmospheric core, lose work-shift events. Lever 2 confirmed NONE (stray digit). N=4 confirmed by Mike. Retirement-flavored leisure content deferred to the depth step.
 - 2026-06-30 — Tasks 3–5 DONE (engine-sheet, S277). `generateCitizensEvents.js`: occupation pool guarded ENGINE-only; mode gate removed (all active T1–4 eligible); deceased excluded; volume → random 1..`ATMOSPHERIC_MAX_EVENTS`(=4) per citizen with hard within-cycle dedup; `recordPulse_` once-per-citizen. Syntax-clean (`node -c`). Measure-twice: all non-Active citizens are ENGINE (gate-open is resurrection-safe). HELD: N stays 4 until Task 6 perf gate; pending/Retired exclusion + Lever 2 await Mike; functional verify (Tasks 6–7) needs a cycle run (clasp). Advisor flagged volume≠depth — pool-deepening still open.
 - 2026-07-01 — Depth step opened (engine-sheet, S280). Rubric defined (story seeding + 24/7-loop reflection); full pool inventory graded into tiers A/B/C + missing-pool list; build order proposed (Tier B name-what-you-hold first); shared event-content ledger logged as open design question (candidate architecture for the mode-engine depth-parity block, research-build seam); outside-LLM idea intake protocol set (grade add/adapt/skip against rubric + invariant).
+- 2026-07-01 — Outside-LLM intake GRADED + folded (engine-sheet, S280). 9 Drive files read (source-tagged in frontmatter). 5 adds folded into build order (GPT human-domain moments = centerpiece baseDaily rebuild; Kimi listening-texture anonymous form; sensory-anchor style rule; Gemini groove texture content-only; bias-lite opinion pool). 4 adapts logged as research-build seams (bias ledger, tension register, unlived-life register, resonance recall — same design pass as the content ledger). 6 skips with mechanism reasons — headline: forced dial shifts (Grok identity-crisis) rejected, confirms Mike's flag; breaks streak-hardening invariant. Gemini's "Engine of Forgetting" found to be already-built (fold-on-trim) — external validation.

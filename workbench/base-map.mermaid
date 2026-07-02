@@ -1,0 +1,178 @@
+---
+title: GODWORLD — Base Dependency Map (Cycle 100)
+---
+flowchart TD
+
+  WC["🔧 World_Config\n(Master Config)"]
+  EP["💰 Economic_Parameters\nEconomy: Stable"]
+  CP["📦 Cycle_Packet\nCycle #100 · high-signal"]
+  SC["📅 Simulation_Calendar\nSeason / Holidays"]
+  CW["🌤 Cycle_Weather\nOAK: Mild · CHI: Cold"]
+  SPCA["🏟 Sports_Calendar"]
+  DASH["🎛 DASHBOARD\nMission Control\nPop: 385,162 · Events: 9\n⚠️ shock-flag"]
+
+  subgraph OAKLAND["🏙 OAKLAND  (Sentiment +0.8 · Thriving)"]
+    NM["Neighborhood_Map"]
+    ND["Neighborhood_Demographics"]
+    CM["Crime_Metrics"]
+    TM["Transit_Metrics"]
+    BT["Bay_Tribune_Oakland"]
+    OSF["Oakland_Sports_Feed"]
+    AR["As_Roster"]
+  end
+
+  subgraph CHICAGO["🏙 CHICAGO  (Sentiment -0.2 · Troubled)"]
+    CF["Chicago_Feed"]
+    CSPO["Chicago_Sports_Feed"]
+    CC["Chicago_Citizens"]
+  end
+
+  subgraph WORLD["🌍 WORLD SYSTEMS"]
+    WP["World_Population\n385,162"]
+    WDR["World_Drift_Report"]
+    WEL["WorldEvents_V3_Ledger"]
+    WEL2["WorldEvents_Ledger"]
+  end
+
+  subgraph CITIZENS["👥 CITIZENS & SOCIAL"]
+    GC["Generic_Citizens"]
+    LHL["LifeHistory_Log"]
+    LHA["LifeHistory_Archive"]
+    HL["Household_Ledger"]
+    FR["Family_Relationships"]
+    RBL["Relationship_Bond_Ledger"]
+    RB["Relationship_Bonds"]
+    YE["Youth_Events"]
+    ER["Employment_Roster"]
+  end
+
+  subgraph CIVIC["🏛 CIVIC  (All zeros — dormant)"]
+    IT["Initiative_Tracker\nActive: 0"]
+    COL["Civic_Office_Ledger"]
+    CSR["Civic_Sweep_Report"]
+    EL["Election_Log"]
+  end
+
+  subgraph CULTURE["⛪ CULTURE · FAITH · BUSINESS"]
+    CUL["Cultural_Ledger"]
+    FO["Faith_Organizations"]
+    FL["Faith_Ledger"]
+    BL["Business_Ledger"]
+  end
+
+  subgraph CHAOS["⚡ CHAOS & EVENTS"]
+    CAR["Chaos_Cars"]
+    TTL["Texture_Trigger_Log"]
+    HCQ["Health_Cause_Queue"]
+    ADV["Advancement_Intake1"]
+  end
+
+  subgraph SPORTS["⚽ SPORTS"]
+    NBA["NBA_Game_Intake"]
+    MLB["MLB_Game_Intake"]
+  end
+
+  subgraph STORY["📖 STORY ENGINE"]
+    SSD["Story_Seed_Deck"]
+    SHD["Story_Hook_Deck"]
+    CYS["Cycle_Seeds"]
+    STI["Storyline_Intake"]
+    STT["Storyline_Tracker"]
+    ARC["Arc_Ledger"]
+    EAL["Event_Arc_Ledger"]
+    SSDA["Story_Seed_Deck_Archive"]
+  end
+
+  subgraph MEDIA["📰 MEDIA & NARRATIVE"]
+    NB["Narrative_Bridge"]
+    MB["Media_Briefing"]
+    MI["Media_Intake"]
+    PD["Press_Drafts"]
+    ML["Media_Ledger"]
+    RD["Riley_Digest"]
+    DT["Domain_Tracker"]
+    ECR["Edition_Coverage_Ratings"]
+    CMU["Citizen_Media_Usage"]
+    CUI["Citizen_Usage_Intake"]
+  end
+
+  subgraph ARCHIVE["🗄 ARCHIVE & LOGGING"]
+    SL["Simulation_Ledger"]
+    LI["Ledger_Index"]
+    EE["Engine_Errors"]
+    RI["Reflection_Intake"]
+  end
+
+  BONDS["🤝 BONDS\nRivalries: 0 · Alliances: 0"]
+
+  WC --> CP
+  WC --> EP
+  WC --> SC
+  EP --> DASH
+  CP --> DASH
+  SC --> DASH
+  SC --> SPCA
+  CW --> DASH
+  DASH --> NM
+  DASH --> CF
+  DASH --> WP
+  DASH --> SL
+  WP --> GC
+  WDR --> DASH
+  GC --> LHL
+  GC --> HL
+  GC --> ER
+  LHL --> LHA
+  HL --> FR
+  FR --> RB
+  RB --> RBL
+  ER --> BL
+  ER --> COL
+  IT --> CSR
+  EL --> COL
+  CAR --> TTL
+  CAR --> WEL
+  HCQ --> WEL
+  TTL --> SSD
+  WEL --> SSD
+  CUL --> SSD
+  ADV --> SSD
+  SSD --> CYS
+  SHD --> CYS
+  CYS --> STI
+  STI --> STT
+  STT --> ARC
+  ARC --> EAL
+  SSD --> SSDA
+  STT --> NB
+  DT --> NB
+  NB --> MB
+  MB --> PD
+  PD --> BT
+  PD --> RD
+  MI --> ML
+  ML --> ECR
+  BT --> CMU
+  CMU --> CUI
+  SPCA --> NBA
+  SPCA --> MLB
+  MLB --> OSF
+  NBA --> CSPO
+  OSF --> BT
+  SL --> LI
+  EE --> RI
+  RB --> BONDS
+
+  classDef config fill:#1a1a2e,color:#e0e0ff,stroke:#7b7bff
+  classDef dashboard fill:#16213e,color:#ffdd57,stroke:#ffdd57,stroke-width:2px
+  classDef citizen fill:#2d4a22,color:#b8f0a0,stroke:#b8f0a0
+  classDef story fill:#2b1f4a,color:#d8b4fe,stroke:#d8b4fe
+  classDef media fill:#1f3a3a,color:#7fffff,stroke:#7fffff
+  classDef archive fill:#1a1a1a,color:#aaaaaa,stroke:#aaaaaa
+
+  class WC,EP config
+  class DASH dashboard
+  class GC,LHL,LHA,HL,FR,RBL,RB,YE,ER citizen
+  class SSD,SHD,CYS,STI,STT,ARC,EAL,SSDA story
+  class NB,MB,MI,PD,ML,RD,DT,ECR,CMU,CUI media
+  class SL,LI,EE,RI archive

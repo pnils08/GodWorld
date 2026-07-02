@@ -75,6 +75,7 @@ function generateCitizensEvents_(ctx) {
   var iNumChildren = idx("NumChildren");
   var iWealth = idx("WealthLevel");
   var iDisplRisk = idx("DisplacementRisk");
+  var iMemReg = idx("MemoryRegisters"); // engine.38 B3 read (S283, seams Task 9) — unlived echo source
 
   if (iTier < 0 || iClock < 0 || iLife < 0 || iLastU < 0 || iPopID < 0) return;
 
@@ -632,6 +633,56 @@ function generateCitizensEvents_(ctx) {
 
   function normText_(s) {
     return String(s || "").toLowerCase().replace(/\s+/g, " ").trim();
+  }
+
+  // engine.38 B3 read (seams Task 9): unlived echo — a stored branch event
+  // resurfaces when the recent life RHYMES (tag-family match against the
+  // LifeHistory tail). Text composes VAGUELY at read time from the stored
+  // actual event (B3 derivation rule: nothing false is ever persisted or
+  // stated — "the job they didn't take", never an invented specific).
+  // Route: source:identity -> Personal (composure-light ambient, S280 key).
+  var UNLIVED_ECHO_TEXT = {
+    careershift: "caught themselves thinking about the job they didn't take",
+    relocation: "thought for a moment about the version of them that stayed",
+    displacementmove: "thought for a moment about the version of them that stayed",
+    divorce: "wondered briefly about the life that marriage might have been",
+    retirement: "missed the working years for a heartbeat, then let it go",
+    businessclose: "passed a shuttered storefront and thought of the business that didn't make it"
+  };
+  var UNLIVED_RHYME = {
+    careershift: ["career", "work", "promotion", "job", "postcareer"],
+    relocation: ["relocation", "move", "housing", "displacement", "neighborhood"],
+    displacementmove: ["relocation", "move", "housing", "displacement", "economy"],
+    divorce: ["divorce", "wedding", "marriage", "anniversary"],
+    retirement: ["retirement", "postcareer", "work"],
+    businessclose: ["business"]
+  };
+  function unlivedEchoEntry_(memRegStr, lifeStr) {
+    if (!memRegStr) return null;
+    var reg = null;
+    try { reg = JSON.parse(String(memRegStr)); } catch (e) { return null; }
+    if (!reg || !Array.isArray(reg.unlived) || !reg.unlived.length) return null;
+    var tail = String(lifeStr || "").split("\n").filter(function(l) { return l; }).slice(-5).join("\n");
+    if (!tail) return null;
+    var tailTags = [];
+    var reTag = /\[([^\]]+)\]/g;
+    var mtag;
+    while ((mtag = reTag.exec(tail)) !== null) tailTags.push(String(mtag[1]).toLowerCase());
+    if (!tailTags.length) return null;
+    for (var ui = 0; ui < reg.unlived.length; ui++) {
+      var key = String((reg.unlived[ui] && reg.unlived[ui].tag) || "").toLowerCase();
+      var fam = UNLIVED_RHYME[key];
+      if (!fam) continue;
+      for (var fi = 0; fi < fam.length; fi++) {
+        for (var ti = 0; ti < tailTags.length; ti++) {
+          if (tailTags[ti].indexOf(fam[fi]) >= 0) {
+            return makeEntry(UNLIVED_ECHO_TEXT[key] || "let a thought of a path not taken drift through, then set it down",
+              ["source:identity", "unlived:echo"], 0.9, false);
+          }
+        }
+      }
+    }
+    return null;
   }
 
   function pickWeighted_(arr) {
@@ -1853,6 +1904,15 @@ function generateCitizensEvents_(ctx) {
           pool.push(makeEntry("read one more story about " + bFig.name + " and quietly made up their mind", mergeTags(bTags, calendarTags), 0.95, false));
         }
       }
+    }
+
+    // engine.38 B3 read (seams Task 9): unlived echo joins the pool when the
+    // recent life rhymes with a stored branch. chanceHit(0.3) keeps it rare —
+    // and the rng draw is data-gated (only citizens with a non-blank register
+    // reach it), so pre-fill cycles are byte-identical to pre-Task-9 replays.
+    if (iMemReg >= 0 && row[iMemReg] && chanceHit(0.3)) {
+      var echoEntry = unlivedEchoEntry_(String(row[iMemReg]), row[iLife] ? String(row[iLife]) : "");
+      if (echoEntry) pool.push(makeEntry(echoEntry.text, mergeTags(echoEntry.tags, calendarTags), echoEntry.weight, false));
     }
     var agp = agePoolFor_(ageGroup);
     for (var agi = 0; agi < agp.length; agi++) {

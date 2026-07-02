@@ -67,6 +67,14 @@ function generateCitizensEvents_(ctx) {
   var iType = idx("Type");
   var iUsage = idx("UsageCount"); // engine.32 T3 — fame seam (SL appearance counter)
   var iStatus = idx("Status"); // engine.38 A1-cont (S277) — deceased-exclusion guard
+  // S280 column-conditioned depth (Mike-direct): the ledger's family/household/
+  // means columns ARE the levers — texture conditions on the citizen's actual
+  // row, not on blanket-neutral phrasing. All optional (idx -1 tolerated).
+  var iHousehold = idx("HouseholdId");
+  var iMarital = idx("MaritalStatus");
+  var iNumChildren = idx("NumChildren");
+  var iWealth = idx("WealthLevel");
+  var iDisplRisk = idx("DisplacementRisk");
 
   if (iTier < 0 || iClock < 0 || iLife < 0 || iLastU < 0 || iPopID < 0) return;
 
@@ -587,6 +595,14 @@ function generateCitizensEvents_(ctx) {
     if (has("source:sports")) return "Sports";
     if (has("source:occupation")) return "Work";
     if (has("source:continuity")) return "Continuity";
+    // S280 depth-step: human-domain moments route to EXISTING ambient-scale
+    // dial keys (no new vocab). familyLife falls through to Daily {c2,f1} —
+    // already the family-tinted ambient.
+    if (has("source:homeLife")) return "Background";
+    if (has("source:reflection")) return "Personal";
+    if (has("source:identity")) return "Personal";
+    if (has("source:curiosity")) return "Lifestyle";
+    if (has("source:communityLife")) return "Neighborhood";
     return "Daily";
   }
 
@@ -1010,17 +1026,90 @@ function generateCitizensEvents_(ctx) {
   // =========================================================================
   // BASE POOLS
   // =========================================================================
-  var baseDailyTexts = [
-    "had a quiet moment at home",
-    "completed a small personal task",
-    "spent time unwinding in the evening",
-    "checked in with a relative",
-    "handled routine daily responsibilities",
-    "took a moment of rest"
-  ];
+  // S280 depth-step (build item 3): baseDaily rebuilt as HUMAN-DOMAIN moment
+  // pools (GPT intake add — "moments over events"). Most of life isn't
+  // promotions and weddings; it's noticing, remembering, choosing, wondering.
+  // Every citizen draws these regardless of mode/tier. Rules applied:
+  // - atmospheric invariant: does/feels/observes — never a structural change
+  // - canon guard: NO lines asserting family structure (children/spouse) —
+  //   the ledger doesn't guarantee them; relatives/calls/photos phrasing only
+  // - sensory-anchor style rule: a smell, a sound, a texture where natural
+  // - dial routing via EXISTING ambient-scale keys only (engine.33 precedent,
+  //   no new vocab): familyLife->Daily{c2,f1}, homeLife->Background{c2},
+  //   reflection+identity->Personal{o2}, curiosity->Lifestyle{o3},
+  //   communityLife->Neighborhood{s3} — composure-light, so a homebody and a
+  //   wanderer stop drawing identical dial pushes from a quiet week.
+  // - weight 0.9 so engine-tied pools (chaos/prevEvening/nbhdState) keep a
+  //   slight edge in the draw; these are the floor of a life, not the news.
+  var DOMAIN_MOMENTS = {
+    "source:familyLife": [
+      "checked in with a relative",
+      "found a forgotten photograph tucked in a book and sat with it a while",
+      "cooked an old family recipe from memory, mostly getting it right",
+      "played a relative's voicemail twice before saving it again",
+      "spent the evening sorting a box of things that used to be someone's",
+      "wrote half a letter to family, then decided to call instead",
+      "retold an old family story and caught a detail they'd never noticed",
+      "smelled something on the stove next door that belonged to childhood"
+    ],
+    "source:homeLife": [
+      "had a quiet moment at home",
+      "finally fixed the thing that had been broken for months",
+      "reorganized a closet and found something thought lost",
+      "couldn't sleep for the wind rattling the window frame",
+      "brought home a new plant and picked its spot carefully",
+      "lent a neighbor a tool and got a story back with it",
+      "rearranged the front room and kept walking in to look at it",
+      "unpacked a box that had stayed sealed since the last move"
+    ],
+    "source:reflection": [
+      "thought about an old friend on the walk home",
+      "wondered if a decision from years back had been the right one",
+      "re-read an old journal page and didn't recognize the handwriting mood",
+      "couldn't shake a strange dream through the morning coffee",
+      "remembered a teacher who'd said one thing that stuck",
+      "felt unexpectedly nostalgic at the smell of rain on warm pavement",
+      "realized the week had passed without a single thing worth retelling",
+      "caught themselves narrating the day as if telling it to someone gone"
+    ],
+    "source:curiosity": [
+      "read about something unfamiliar and kept pulling the thread",
+      "tried a new recipe that mostly worked",
+      "walked a different street home just to see it",
+      "spent too long in a bookstore aisle they'd never stopped at",
+      "learned a useless, wonderful fact and told two people",
+      "started a small project with no deadline and no reason",
+      "listened to a style of music they'd always skipped, twice",
+      "looked up how something works and came away more amazed, not less"
+    ],
+    "source:communityLife": [
+      "helped someone carry groceries up the block",
+      "talked with a stranger long enough to learn a name",
+      "recognized a face from years ago across the street",
+      "attended a small local gathering and stayed later than planned",
+      "noticed a familiar face missing from the morning routine",
+      "traded produce over a fence and came out ahead",
+      "held the door and got a whole conversation for it",
+      "waved at the regulars on the usual route, all present and accounted for"
+    ],
+    "source:identity": [
+      "realized they're becoming more like an older relative — and didn't mind",
+      "didn't recognize themselves in an old photograph at first glance",
+      "felt quietly proud of how they handled something small",
+      "wondered when exactly they became the adult in the room",
+      "noticed younger people asking them for advice now",
+      "caught their reflection in a shop window and stood a little straighter",
+      "said no to something and felt the shape of who they are in it",
+      "kept a small promise to themselves nobody else knew about"
+    ]
+  };
   var baseDaily = [];
-  for (var bdi = 0; bdi < baseDailyTexts.length; bdi++) {
-    baseDaily.push(makeEntry(baseDailyTexts[bdi], ["source:daily"], 1, false));
+  for (var dmKey in DOMAIN_MOMENTS) {
+    if (!DOMAIN_MOMENTS.hasOwnProperty(dmKey)) continue;
+    var dmLines = DOMAIN_MOMENTS[dmKey];
+    for (var dmi = 0; dmi < dmLines.length; dmi++) {
+      baseDaily.push(makeEntry(dmLines[dmi], [dmKey], 0.9, false));
+    }
   }
 
   var seasonal = [];
@@ -1036,24 +1125,87 @@ function generateCitizensEvents_(ctx) {
   if (weather.type === "cold") weatherPool.push(makeEntry("bundled up against the cold", ["source:weatherPool", "weather:cold"], 1, false));
   if (weather.type === "wind") weatherPool.push(makeEntry("noted windy evening conditions", ["source:weatherPool", "weather:wind"], 1, false));
 
-  // S280 depth-step: name the actual world event instead of generic mush.
-  // S.worldEvents entries carry {description, severity, domain, neighborhood?}
-  // — the description IS the story hook. Em-dash/colon framing tolerates both
-  // prose descriptions (worldEventsEngine) and "CATEGORY — subtype (Hood)"
-  // forms (crisis buckets). Tags unchanged (source:chaos) so dial routing is
-  // identical. Cap 4 events so a chaotic week doesn't drown the pool.
+  // S280 depth-step (Mike-direct refinement): a citizen event is the REACTION
+  // to a city event, not a bulletin that it happened. The city layer already
+  // logs the event; what belongs in a life is what it felt like from inside
+  // one. Domain/subtype keywords route to lived texture. Rules: housing-neutral
+  // phrasing (HousingType lives in Household_Ledger, unread here — design seam);
+  // grain "heard" = citywide talk, "lived" = same-hood experience (drawn in the
+  // per-citizen loop below). Tags unchanged (source:chaos → Daily fold).
+  function chaosReaction_(ev, grain) {
+    var hay = (String(ev.domain || "") + " " + String(ev.subtype || "") + " " +
+               String(ev.description || "")).toLowerCase();
+    if (/power|electric|outage|blackout|flicker|transformer/.test(hay)) {
+      return (grain === "lived")
+        ? ["sat out the flickering lights swapping stories by phone-light",
+           "reset every blinking clock in the place, again"]
+        : ["heard half the block had been comparing notes on the stuttering lights"];
+    }
+    if (/\b(transit|bus|bart|congestion|road|traffic|parking|airport|pothole)\b/.test(hay)) {
+      return (grain === "lived")
+        ? ["gave up on the ride and walked the last stretch home",
+           "left early to beat the snarl and hit it anyway"]
+        : ["heard the commute horror stories secondhand and felt lucky, this once"];
+    }
+    if (/flood|storm|rain|water|atmospheric/.test(hay)) {
+      return (grain === "lived")
+        ? ["moved everything up off the floor, just in case",
+           "listened to the gutters work all night and checked them at dawn"]
+        : ["heard the low spots flooded again and made a mental map"];
+    }
+    if (/health|clinic|illness|respiratory|flu|heat|dehydration|cooling|foodborne|allergy/.test(hay)) {
+      return (grain === "lived")
+        ? ["noticed the pharmacy line stretching out the door and kept their distance",
+           "checked on an older neighbor with a knock and a wave"]
+        : ["washed hands a beat longer after the health talk going around"];
+    }
+    if (/safety|patrol|incident|disturbance|crime/.test(hay)) {
+      return (grain === "lived")
+        ? ["double-checked the locks without quite deciding why",
+           "took the longer, better-lit way home"]
+        : ["heard the safety talk and walked a little faster after dark"];
+    }
+    if (/environment|air quality|smoke|grit|debris|wind/.test(hay)) {
+      return (grain === "lived")
+        ? ["smelled smoke on the wind and checked the sky twice",
+           "wiped a film of grit off the sill and shut the window early"]
+        : ["noticed more masks out after the air-quality talk"];
+    }
+    if (/econom|closure|layoff|hiring|budget|revenue|service cut/.test(hay)) {
+      return (grain === "lived")
+        ? ["walked past the papered-over window where the lunch spot used to be",
+           "overheard shift-cut talk in the checkout line and did quiet math"]
+        : ["felt the money talk creep into every third conversation"];
+    }
+    if (/inflow|outflow|migration|civic/.test(hay)) {
+      return (grain === "lived")
+        ? ["counted more moving trucks on the block than usual",
+           "saw a new name go up on a mailbox and an old one come down"]
+        : ["heard the block was turning over faster than it used to"];
+    }
+    // Fallback: worldEventsEngine texture descriptions are already citizen-scale
+    // ("transformer hiccup", "3-block flicker") — light reaction wrapper.
+    var desc = String(ev.description || "").trim();
+    if (desc) {
+      return (grain === "lived")
+        ? ["swapped stories with a neighbor about the " + desc.toLowerCase()]
+        : ["caught the talk going around about the " + desc.toLowerCase()];
+    }
+    return [];
+  }
+
   var chaosPool = [];
   for (var che = 0; che < chaos.length && che < 4; che++) {
     var chEv = chaos[che];
-    var chDesc = (chEv && chEv.description) ? String(chEv.description).trim() : "";
-    if (!chDesc) continue;
+    if (!chEv) continue;
+    var chLines = chaosReaction_(chEv, "heard");
     var chTag = ["source:chaos", "chaos:" + (chEv.domain || "event")];
     var chW = (chEv.severity === "high") ? 1.3 : (chEv.severity === "medium") ? 1.15 : 1.0;
-    chaosPool.push(makeEntry("caught the talk going around — " + chDesc, chTag, chW, false));
-    chaosPool.push(makeEntry("half-listened to radio chatter about it all day: " + chDesc, chTag, chW * 0.9, false));
+    for (var chl = 0; chl < chLines.length; chl++) {
+      chaosPool.push(makeEntry(chLines[chl], chTag, chW, false));
+    }
   }
   if (chaos.length > 0 && !chaosPool.length) {
-    // events present but none carried a description — keep the old ambient line
     chaosPool.push(makeEntry("felt a subtle shift in the city's tone", ["source:chaos"], 1, false));
   }
 
@@ -1480,14 +1632,32 @@ function generateCitizensEvents_(ctx) {
       pool.push(makeEntry(nbhdStatePool[nsi].text, mergeTags(nbhdStatePool[nsi].tags, calendarTags), nbhdStatePool[nsi].weight, false));
     }
 
-    // S280 depth-step: a world event in THIS citizen's hood lands up close —
-    // crisis-bucket events carry a neighborhood; the citywide chaosPool already
-    // covers the heard-about version, this is the saw-it version (heavier draw).
+    // S280 depth-step (Mike-direct): a world event in THIS citizen's hood is
+    // LIVED, not heard about — and a household lives it TOGETHER. Household
+    // members drawing the shared line get the SAME text (variant picked by a
+    // deterministic hash of HouseholdId + event index, not rng), so the storm
+    // becomes one memory the family holds in common — story-seedable from
+    // any member, reflectable from each member's own angle in the 24/7 loop.
     for (var lce = 0; lce < chaos.length; lce++) {
       var lcEv = chaos[lce];
-      if (!lcEv || !lcEv.neighborhood || lcEv.neighborhood !== neighborhood || !lcEv.description) continue;
-      pool.push(makeEntry("saw it up close in " + neighborhood + " — " + String(lcEv.description).trim(),
-        mergeTags(["source:chaos", "chaos:local"], calendarTags), 1.35, false));
+      if (!lcEv || !lcEv.neighborhood || lcEv.neighborhood !== neighborhood) continue;
+      var lcLines = chaosReaction_(lcEv, "lived");
+      for (var lcl = 0; lcl < lcLines.length; lcl++) {
+        pool.push(makeEntry(lcLines[lcl], mergeTags(["source:chaos", "chaos:local"], calendarTags), 1.35, false));
+      }
+      var hhId = (iHousehold >= 0) ? String(row[iHousehold] || "").trim() : "";
+      if (hhId) {
+        var hhHandle = String(lcEv.subtype || lcEv.domain || "commotion").toLowerCase();
+        var hhVariants = [
+          "rode it out together at home when the " + hhHandle + " hit the block",
+          "the whole household traded theories over dinner about the " + hhHandle,
+          "checked on each other by text until the " + hhHandle + " passed"
+        ];
+        var hhHash = lce;
+        for (var hhc = 0; hhc < hhId.length; hhc++) hhHash = (hhHash + hhId.charCodeAt(hhc)) % 997;
+        pool.push(makeEntry(hhVariants[hhHash % hhVariants.length],
+          mergeTags(["source:chaos", "chaos:local", "chaos:household"], calendarTags), 1.5, false));
+      }
     }
 
     // engine.33 T9: faith fan-out (this cycle's faith events in THIS hood)
@@ -1575,6 +1745,47 @@ function generateCitizensEvents_(ctx) {
     var agp = agePoolFor_(ageGroup);
     for (var agi = 0; agi < agp.length; agi++) {
       pool.push(makeEntry(agp[agi].text, mergeTags(agp[agi].tags, calendarTags), agp[agi].weight, false));
+    }
+
+    // S280 column-conditioned depth (Mike-direct): family texture gated on the
+    // citizen's ACTUAL columns — the guard is conditioning, not avoidance. A
+    // citizen with children on the ledger gets kid moments; Married/Widowed/
+    // Divorced each read in their own register. source:familyLife → Daily fold
+    // {composure:2, family:1}, same ambient scale as the domain pools.
+    var maritalLc = (iMarital >= 0) ? String(row[iMarital] || "").trim().toLowerCase() : "";
+    var kidCount = (iNumChildren >= 0) ? (Number(row[iNumChildren]) || 0) : 0;
+    if (kidCount > 0) {
+      pool.push(makeEntry("one of the kids asked a question at dinner that stopped the room", mergeTags(["source:familyLife", "family:kids"], calendarTags), 1.0, false));
+      pool.push(makeEntry("found a school drawing folded in a jacket pocket and kept it", mergeTags(["source:familyLife", "family:kids"], calendarTags), 1.0, false));
+      pool.push(makeEntry("negotiated bedtime like a seasoned diplomat, and lost gracefully", mergeTags(["source:familyLife", "family:kids"], calendarTags), 0.95, false));
+    }
+    if (maritalLc === "married") {
+      pool.push(makeEntry("split the last of the coffee and the morning's plans with their partner", mergeTags(["source:familyLife", "family:partner"], calendarTags), 1.0, false));
+      pool.push(makeEntry("caught their partner humming the song they'd had stuck all day", mergeTags(["source:familyLife", "family:partner"], calendarTags), 0.95, false));
+    } else if (maritalLc === "widowed") {
+      pool.push(makeEntry("set two cups out by habit and let the second one stay", mergeTags(["source:familyLife", "family:widowed"], calendarTags), 1.0, false));
+      pool.push(makeEntry("told a story their late partner used to tell, and told it right", mergeTags(["source:familyLife", "family:widowed"], calendarTags), 0.95, false));
+    } else if (maritalLc === "divorced") {
+      pool.push(makeEntry("handled a logistics call with an ex — civil, brief, done", mergeTags(["source:familyLife", "family:divorced"], calendarTags), 0.9, false));
+    }
+
+    // S280 column-conditioned depth: money texture aimed by actual means, not
+    // citywide mood alone. WealthLevel 0-10; DisplacementRisk 0-10 (≥7 = the
+    // migrationTrackingEngine's own high-risk gate). Composure-light: the TEXT
+    // carries the strain, the negative-valence dial supply stays gated on
+    // engine.38 B3 (source:economy → Daily fold, unchanged).
+    var wealthLvl = (iWealth >= 0 && row[iWealth] !== "" && row[iWealth] != null) ? Number(row[iWealth]) : null;
+    if (wealthLvl !== null && wealthLvl <= 3) {
+      pool.push(makeEntry("did the math twice at the register and put one thing back", mergeTags(["source:economy", "econ:tight"], calendarTags), 1.05, false));
+      pool.push(makeEntry("moved a bill to next month and tried not to think about it", mergeTags(["source:economy", "econ:tight"], calendarTags), 1.0, false));
+    } else if (wealthLvl !== null && wealthLvl >= 8) {
+      pool.push(makeEntry("quietly covered the table's coffee and waved off the thanks", mergeTags(["source:economy", "econ:comfortable"], calendarTags), 0.95, false));
+      pool.push(makeEntry("spent an hour moving money around to work a little harder", mergeTags(["source:economy", "econ:comfortable"], calendarTags), 0.9, false));
+    }
+    var displRisk = (iDisplRisk >= 0) ? (Number(row[iDisplRisk]) || 0) : 0;
+    if (displRisk >= 7) {
+      pool.push(makeEntry("did rent math on the back of an envelope and sat back hard", mergeTags(["source:economy", "econ:displacement"], calendarTags), 1.15, false));
+      pool.push(makeEntry("noticed the listing price on a place like theirs and read it twice", mergeTags(["source:economy", "econ:displacement"], calendarTags), 1.1, false));
     }
 
     // S280 depth-step: bond texture names the actual counterpart when the

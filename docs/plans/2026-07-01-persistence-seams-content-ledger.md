@@ -206,7 +206,7 @@ Handoff slices — all builds are engine-sheet's (engine code and loop scripts b
 - **Files:** `lib/resonanceRecall.js` — create; `scripts/citizen-wake.js` — modify `loadOwnPageReadback` (L251-262)
 - **Steps:** implement 3-term scorer + seeded tiebreak; candidate set = last 15 page reflections + latest milestone; recall bookkeeping read/write `logs/citizen-recall-state.json`.
 - **Verify:** `--dry-run` on a shaped citizen → prompt memory block ≠ blind most-recent-3; state file updates.
-- **Status:** [ ] not started
+- **Status:** [x] done (S282, engine-sheet) — unit harness (scorer terms + determinism + post-recall reshuffle) + dry-run on POP-00004 (scored fenced block renders; recall state untouched on dry). Also: classify moved before page append + affect/event now ride page-doc metadata (affectWeight input; pre-existing docs score flat-mid); `recentPage_` returns metadata. Live-write smoke = next cron fire.
 
 ### Task 3: TENSION classifier field (B2)
 - **Files:** `lib/reflectionClassifier.js` — modify (third nullable field); `scripts/citizen-wake.js` — page append + `logs/citizen-tension-state.json` read/write

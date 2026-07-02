@@ -29,6 +29,7 @@ const dialMap = require('/root/GodWorld/utilities/citizenDialMap');
 const page = require('/root/GodWorld/lib/citizenPage');
 const memoryFence = require('/root/GodWorld/lib/memoryFence');
 const classifier = require('/root/GodWorld/lib/reflectionClassifier');
+const resonance = require('/root/GodWorld/lib/resonanceRecall'); // B4 v1 — scored memory selection (seams Task 2)
 const { createSlicer } = require('/root/GodWorld/lib/neighborhoodSlice');
 const getCurrentCycle = require('/root/GodWorld/lib/getCurrentCycle');
 const { selectProvocation } = require('/root/GodWorld/lib/provocationBank'); // T5 varied-provocation bank
@@ -254,19 +255,28 @@ async function loadBonds(popId) {
 // §Fence contract) so the model treats it as background data, never instructions. Bounded (last-N +
 // per-reflection truncation) for tokens only. Non-deterministic recall is fine: wake-side/input-only,
 // frozen into the persisted tag; the cycle never re-runs the wake. Fails open (no page / API down -> '').
-const PAGE_READBACK_N = 3;        // most RECENT reflections (most pages hold 1-2 today)
+const PAGE_READBACK_N = 3;        // memories fed to the prompt (cap unchanged from blind-recency era)
+const PAGE_CANDIDATE_N = 15;      // reflections pulled as recall CANDIDATES (B4 v1 — scored, not blind)
 const PAGE_REFLECTION_CAP = 320;  // per-reflection char cap (token bound)
-async function loadOwnPageReadback(popId) {
+async function loadOwnPageReadback(popId, recall) {
   try {
     // recentPage_ (recency via documents-list+get), NOT readPage_ (v4 search silently misses docs — S272).
-    const res = await page.recentPage_(popId, PAGE_READBACK_N);
-    if (!res || !res.results || !res.results.length) return '';
-    const prose = res.results
-      .map((r) => String((r && r.content) || '').trim().slice(0, PAGE_REFLECTION_CAP))
-      .filter(Boolean).join('\n\n');
-    if (!prose.trim()) return '';
-    return memoryFence.wrap(prose, 'citizen-page:' + popId); // fenced — recalled prose never enters raw
-  } catch (e) { return ''; }
+    const res = await page.recentPage_(popId, PAGE_CANDIDATE_N);
+    const candidates = ((res && res.results) || [])
+      .map((r) => ({ text: String((r && r.content) || '').trim().slice(0, PAGE_REFLECTION_CAP), meta: (r && r.metadata) || null, kind: 'reflection' }))
+      .filter((c) => c.text);
+    // latest milestone joins the candidate set (Design B4) — flat-mid affect, competes on context/staleness.
+    if (recall && recall.milestone) candidates.push({ text: String(recall.milestone).trim().slice(0, PAGE_REFLECTION_CAP), meta: null, kind: 'milestone' });
+    if (!candidates.length) return { block: '', keys: [] };
+    // B4 v1 (seams Task 2): score context-match + staleness + affect, seeded tiebreak — not blind most-recent-3.
+    const pick = resonance.selectMemories({
+      popId, cycle: recall && recall.cycle, wake: recall && recall.wake,
+      candidates, contextText: (recall && recall.contextText) || '', cap: PAGE_READBACK_N,
+    });
+    const prose = pick.selected.map((c) => c.text).join('\n\n');
+    if (!prose.trim()) return { block: '', keys: [] };
+    return { block: memoryFence.wrap(prose, 'citizen-page:' + popId), keys: pick.keys }; // fenced — recalled prose never enters raw
+  } catch (e) { return { block: '', keys: [] }; }
 }
 
 async function buildPool() {
@@ -376,7 +386,12 @@ async function generateVoice(system, user) {
   const lifeArc = await loadLifeArc(c.popId);                 // T1a — canonical milestone arc from LifeHistory_Log
   const textureLine = loadNeighborhoodTexture(c.nh, cycle);   // T2 — this hood's frozen lived-particulars block
   const bondsLine = await loadBonds(c.popId);                 // relationships-with-texture — people the citizen has history with (canon bonds)
-  const pageMemory = await loadOwnPageReadback(c.popId);      // T1c — fenced own-page prose read-back (most recent reflections)
+  // T1c + B4 v1 — fenced own-page read-back, resonance-scored against today's perception (seams Task 2)
+  const pageRead = await loadOwnPageReadback(c.popId, {
+    cycle, wake: WAKE, milestone: lifeArc,
+    contextText: [textureLine, sportsLine, bondsLine, c.nh, c.occ, WAKE_FRAME[WAKE] || ''].filter(Boolean).join(' '),
+  });
+  const pageMemory = pageRead.block;
   const { system, user, disp, prov } = buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, pageMemory, cycle);
 
   logLine(`woke ${c.popId} ${c.name} — ${c.occ || 'resident'}, ${c.nh}${c.age ? ', ' + c.age : ''} | eventMag=${c.eventMag} | ${disp} | provocation=${prov.id} route=${prov.route} wake=${WAKE}`);
@@ -391,18 +406,27 @@ async function generateVoice(system, user) {
     process.exit(0);
   }
 
-  // 1) narrative store: ensure the page pointer (AW), append the reflection (ungated).
+  // 1) classify FIRST (moved ahead of the page append, seams Task 2) so the affect tag rides the
+  //    page doc's metadata — that is what resonanceRecall's affectWeight reads at future wakes.
+  //    Guarded: a classifier failure must never block the page append (same net effect as the old
+  //    order, where a classify error only skipped intake).
+  let cls = {};
+  try { cls = await classifier.classifyDualReflection_(reflection); } catch (e) { cls = { raw: 'classify threw: ' + e.message }; }
+
+  // 2) narrative store: ensure the page pointer (AW), append the reflection (ungated).
   const ptr = await page.ensurePagePointer_(c.popId);
   if (ptr.error) { logLine('ensurePagePointer_ ERROR: ' + ptr.error); process.exit(1); }
-  const appended = await page.appendReflection_(c.popId, reflection, { cycle, daypart: WAKE });
+  const appended = await page.appendReflection_(c.popId, reflection, {
+    cycle, daypart: WAKE,
+    extra: { affect: cls.affect || null, event: cls.event || null }, // recall affectWeight input (B4)
+  });
   if (appended.error) { logLine('appendReflection_ ERROR: ' + appended.error); process.exit(1); }
   logLine(`page ${ptr.tag} (${ptr.created ? 'created' : 'existing'}) <- reflection doc ${appended.id || '?'}`);
 
-  // 2) persist the dual classified tags to Reflection_Intake (the cycle reads this when the gate opens).
+  // 3) persist the dual classified tags to Reflection_Intake (the cycle reads this when the gate opens).
   //    Row: [ts, popId, cycle, WAKE, EVENT(col E), snippet, applied='no', AFFECT(col H)] — A-G stay
   //    positional (back-compat); affect is appended at H. composure-as-affect-only lives in the
   //    cycle's gated write-back (nudgesForReflection_), not here.
-  const cls = await classifier.classifyDualReflection_(reflection);
   if (cls.event || cls.affect) {
     await sheets.appendRows('Reflection_Intake', [[
       new Date().toISOString(), c.popId, cycle, WAKE, cls.event || '', reflection.slice(0, 180).replace(/\n/g, ' '), 'no', cls.affect || '',
@@ -414,7 +438,8 @@ async function generateVoice(system, user) {
 
   // GATE: NO applyTaggedEvent_ here. Dial write-back is the gated cycle's job (Phase-1 audit).
 
-  // 3) record rotation
+  // 4) record rotation + recall bookkeeping (staleness input for future wakes — live runs only)
   state.recent = [c.popId, ...(state.recent || [])].slice(0, ROTATION_MEMORY);
   saveState(state);
+  resonance.markRecalled(c.popId, cycle, pageRead.keys);
 })().catch((e) => { logLine('FATAL ' + e.message); process.exit(1); });

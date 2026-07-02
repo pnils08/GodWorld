@@ -601,6 +601,9 @@ function generateCitizensEvents_(ctx) {
     if (has("source:homeLife")) return "Background";
     if (has("source:reflection")) return "Personal";
     if (has("source:identity")) return "Personal";
+    if (has("source:listening")) return "Personal";
+    if (has("source:groove")) return "Micro-Event";
+    if (has("source:civicNews")) return "Civic Perception";
     if (has("source:curiosity")) return "Lifestyle";
     if (has("source:communityLife")) return "Neighborhood";
     return "Daily";
@@ -1101,6 +1104,29 @@ function generateCitizensEvents_(ctx) {
       "caught their reflection in a shop window and stood a little straighter",
       "said no to something and felt the shape of who they are in it",
       "kept a small promise to themselves nobody else knew about"
+    ],
+    // S280 build item 4 (Kimi intake add, anonymous form): being half-witness
+    // to a stranger's life, turned inward. No cross-citizen wiring — the
+    // stranger stays anonymous; the reflection is the citizen's own.
+    "source:listening": [
+      "watched someone repair a fence for an hour and wondered when they last finished anything",
+      "overheard a goodbye at the corner that sounded permanent, and carried it a block",
+      "saw a stranger laugh at their phone and invented the joke all the way home",
+      "watched an old man feed pigeons like a ritual and wondered what theirs was",
+      "heard a kid explain something to a parent with total authority and grinned",
+      "saw someone running for the bus make it, and felt weirdly invested",
+      "watched a couple argue quietly over groceries and rooted for them anyway",
+      "caught a stranger humming their song and felt briefly, wrongly, known"
+    ],
+    // S280 build item 6 (Gemini intake add, content only): the gravity of
+    // routine — autopilot noticed from inside. The dial-locking mechanic was
+    // skipped; these are just the texture of a groove.
+    "source:groove": [
+      "drove the whole way home without remembering a single turn",
+      "realized the same seven meals had rotated for a month, and shrugged",
+      "answered 'how's it going' the exact same way for the fifth time this week",
+      "noticed the calendar squares all look alike lately, and couldn't decide if that's peace",
+      "caught the coffee order coming out of their mouth before deciding to order it"
     ]
   };
   var baseDaily = [];
@@ -1234,6 +1260,31 @@ function generateCitizensEvents_(ctx) {
     econPool.push(makeEntry("sensed optimism about local opportunities", ["source:economy", "econ:high"], 1, false));
     econPool.push(makeEntry("spotted a fresh hiring sign taped up in a storefront window", ["source:economy", "econ:high"], 1, false));
     econPool.push(makeEntry("heard two neighbors comparing new gigs over a fence", ["source:economy", "econ:high"], 0.95, false));
+  }
+
+  // S280 build item 5a: initiative outcomes reach kitchen tables. Phase order
+  // verified at both entry points: Phase5-Initiatives runs BEFORE
+  // Phase5-CitizenEvents, so S.initiativeEvents {id, name, type, outcome,
+  // voteCount, cycle} is same-cycle fresh. Reaction grain (Mike S280): the
+  // citizen reacts to the news, never restates the bulletin. Cap 3 so a busy
+  // council week doesn't drown the pool. Route: Civic Perception {sociability:2}.
+  var civicNewsPool = [];
+  var initEvs = S.initiativeEvents || [];
+  for (var ive = 0; ive < initEvs.length && civicNewsPool.length < 6; ive++) {
+    var iEv = initEvs[ive];
+    var iName = (iEv && iEv.name) ? String(iEv.name).trim() : "";
+    if (!iName) continue;
+    var iOut = String(iEv.outcome || "").toLowerCase();
+    var iTags = ["source:civicNews", "civic:" + (iOut || "update")];
+    if (iOut === "passed" || iOut === "approved") {
+      civicNewsPool.push(makeEntry("caught the news that " + iName + " passed and talked it over at the counter", iTags, 1.1, false));
+      civicNewsPool.push(makeEntry("overheard neighbors already planning around " + iName, iTags, 1.0, false));
+    } else if (iOut === "failed" || iOut === "denied" || iOut === "vetoed" || iOut === "rejected") {
+      civicNewsPool.push(makeEntry("heard " + iName + " went down at council and had opinions about it", iTags, 1.1, false));
+      civicNewsPool.push(makeEntry("listened to two takes on why " + iName + " failed and agreed with neither", iTags, 1.0, false));
+    } else if (iOut) {
+      civicNewsPool.push(makeEntry("caught a stray update on " + iName + " and filed it away", iTags, 0.95, false));
+    }
   }
 
   var templatePool = [
@@ -1382,7 +1433,7 @@ function generateCitizensEvents_(ctx) {
     "late-season": ["watched the late-season race unfold", "felt the late-season intensity", "followed standings closely"]
   };
 
-  var basePoolRaw = baseDaily.concat(seasonal, weatherPool, chaosPool, sentimentPool, econPool);
+  var basePoolRaw = baseDaily.concat(seasonal, weatherPool, chaosPool, sentimentPool, econPool, civicNewsPool);
   var basePool = [];
   for (var bpi = 0; bpi < basePoolRaw.length; bpi++) {
     var ee = basePoolRaw[bpi];

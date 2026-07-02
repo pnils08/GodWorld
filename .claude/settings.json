@@ -56,7 +56,9 @@
       "Edit(.claude/hooks/**)",
       "Write(.claude/hooks/**)",
       "Edit(.claude/agents/**)",
-      "Write(.claude/agents/**)"
+      "Write(.claude/agents/**)",
+      "Edit(SESSION_CONTEXT.md)",
+      "Write(SESSION_CONTEXT.md)"
     ]
   },
   "enableAllProjectMcpServers": true,

@@ -62,7 +62,21 @@ pointers:
 | H | `Grain` | `heard` / `lived` / empty — reaction-grain rule (S280) |
 | I | `Active` | `yes`/`no` — kill switch without row deletion |
 
-**Conditions micro-DSL.** `;`-joined AND terms, `field op value`. Whitelisted fields only, mapping 1:1 to the S280 column gates already in code (`generateCitizensEvents.js:1824-1858`): `wealth<=3`, `married`, `children>0`, `displacement>=7`, `hood=Temescal`, `season=summer`, `retired`, `ageband=elder`. Unknown field or unparseable term ⇒ row skipped and counted (fail-closed — a typo must not widen eligibility). Parser is one small function; no eval.
+**Conditions micro-DSL.** `;`-joined AND terms, `field op value`. Whitelisted fields only, mapping 1:1 to the S280 column gates already in code (S289 correction: gates live at `generateCitizensEvents.js:~1924-1960`, not 1824-1858): `wealth<=3`, `married`, `children>0`, `displacement>=7`, `hood=Temescal`, `season=summer`, `retired`, `ageband=senior`. Unknown field or unparseable term ⇒ row skipped and counted (fail-closed — a typo must not widen eligibility). Parser is one small function; no eval.
+
+**DSL field-resolver table (S289 — vocab locked to code enums, not prose).** Fields resolve from three scopes; the evaluator needs all three:
+| Field | Resolves from | Values |
+|---|---|---|
+| `wealth` | citizen row `iWealth` | number 1-10 |
+| `married` | citizen row marital (lc) | flag |
+| `children` | citizen row children count | number |
+| `retired` | citizen row status | flag |
+| `ageband` | `ageGroup_(birthYear)` | `youth`/`youngAdult`/`adult`/`senior` — **NOT `elder`**; fail-closed parsing means a wrong enum silently kills the row |
+| `hood` | citizen row neighborhood | exact tab-name match |
+| `season` / calendar | cycle ctx | engine season vocab |
+| `displacement` | neighborhood state (`st.displacementPressure`) | number — NOT a row field |
+
+Conditions parse **once at load** into predicate objects (Task 10 loader), never re-parsed per-citizen per-draw across 900+ rows.
 
 ### Loading
 
@@ -72,10 +86,19 @@ pointers:
 
 Extends `renderTemplate_` (`generateCitizensEvents.js:687-695`): for each `$SLOT` token in a line's text, weighted-draw an eligible fragment from `S.contentLedger.fragments[SLOT]` (conditions checked against the same citizen row fields), substitute via the proven `split("$"+k).join(v)` mechanism, then capitalize first letter + add terminal period. All draws through `ctx.rng` — no `Math.random`, replay-identical per cycle.
 
+- **Unfillable slot ⇒ drop the whole line + count (S289).** If a line's `$SLOT` has zero eligible fragments (all fail conditions, or slot pool empty), the line is skipped entirely — never emit raw `$SENSORY` into LifeHistory text. Same fail-closed family as the DSL rule.
 - **Grammar safety** is structural, not checked: a slot defines a grammatical role; every fragment registered under that slot must fit it (authoring rule in the tab, enforced by the lowercase/no-punctuation convention + human read of `skipped` counts). No NLP validation pass.
 - **Slot values already available in code** (`$VENUE`, `$CONTACT`, `$INSTITUTION`) keep their code-side resolvers (bonds, localEntities); the ledger adds *content* slots, it does not re-plumb the entity slots.
-- **Dedup:** within-cycle per-citizen rendered-line hash (extends the S277 hard dedup). Cross-cycle repetition control: reuse the HouseholdId char-hash trick — offset the weighted draw by `(popIdHash + cycle) % poolSize` so consecutive cycles walk different regions of the pool deterministically. This also replaces the broken cross-cycle template cooldown (Findings #5) if applied to the tone-slotter.
+- **Dedup:** within-cycle per-citizen rendered-line hash (extends the S277 hard dedup). ~~Cross-cycle pool-walk offset~~ **deferred to v2 (S289):** `(popIdHash + cycle) % poolSize` offsets an *index*, but `pickWeighted_` walks cumulative weights — no index exists to offset, and rotating the array before a weighted draw changes nothing. v1 keeps plain weighted draw + within-cycle dedup; if cross-cycle repetition reads bad in practice, v2 specs a concrete mechanism (rotate-then-uniform-pick, weights forfeited for offset pools). Findings #5 (inert template cooldown) stays open, not superseded.
 - **Determinism caveat (accepted, documented):** replay fidelity becomes seed × ledger-content — editing the tab between a cycle and its replay changes output. Same property the Neighborhood_Map already has; note it in `SHEETS_MANIFEST`.
+
+### Pool injection — the draw-site bridge (S289 critique: was missing entirely)
+
+The loader and composer alone leave ledger content with **no consumer**: the generator builds one per-citizen `pool` array by pushing entries from ~20 gated hardcoded blocks; nothing in the original Tasks 10-12 wired `S.contentLedger.lines[poolKey]` into that assembly — Task 12's verify could not pass as written. The bridge (Task 11 scope):
+
+1. **Injection block** in the per-citizen pool assembly: for each poolKey, eval the row's (pre-parsed) conditions against the citizen/hood/cycle scopes; eligible `line` entries push into `pool` via `makeEntry` alongside the hardcoded blocks. Composer resolves `$SLOT`s only if the drawn entry came from the ledger.
+2. **Routing is fail-closed on `source:` tag (S289).** Routing goes through `primaryFromTags()` (`generateCitizensEvents.js:589-632`), which switches on known `source:` tags — an unrecognized source falls through to `Daily` silently. Rule: every ledger line row MUST carry a recognized `source:` tag from the code's whitelist as its first tag; loader skips + counts rows whose source tag isn't recognized. New sources (e.g. `source:baylight`) require an explicit `primaryFromTags` branch in the same commit that seeds the pool.
+3. **Collision rule — additive-only v1 (S289).** A ledger poolKey never replaces or suppresses a hardcoded pool; ledger entries only add. Migration of a hardcoded pool = delete the hardcoded block in a code commit, an explicit later step — never implicit shadowing.
 
 ### Disposition
 
@@ -247,13 +270,14 @@ Handoff slices — all builds are engine-sheet's (engine code and loop scripts b
 - **Status:** [x] done (S283, engine-sheet) — rhyme = tag-family match between the stored branch and the LifeHistory 5-line tail (per-branch substring families, e.g. CareerShift ↔ Work/Promotion/job/postcareer). Echo text is a per-tag vague line (mirrors `resonanceRecall.UNLIVED_PHRASE` register) — stored specifics never leak (harness asserts it). Route `source:identity` → Personal; weight 0.9; `chanceHit(0.3)` gate is data-gated (rng draw only on non-blank register, so pre-fill cycles replay byte-identical). 8/8 `scripts/unlivedEcho.test.js` — full-generator end-to-end (fame-test loader pattern): rhyme→drawn, no-rhyme→structural silence, blank/corrupt/non-branch/empty registers silent, [Personal] routing confirmed. Observed rate 6/1000 citizen-cycles — rare by design. Full regression green (fame 12, dial 49, biasFold 25, unlivedFold 23, biasReadback 18).
 
 ### Task 10: Event_Content_Ledger tab + loader (A)
-- **Files:** new tab (manual, measure-twice); `phase02-world-state/loadEventContentLedger.js` — create; `godWorldEngine2.js` — one `safePhaseCall_` line; SCHEMA/SHEETS_MANIFEST same commit
+- **Files:** new tab (manual, measure-twice); `phase02-world-state/loadEventContentLedger.js` — create; `godWorldEngine2.js` — **two** `safePhaseCall_` sites (S289: production ~L225 + cycle-phases ~L1568 — every phase registration in this engine comes in pairs); SCHEMA/SHEETS_MANIFEST same commit
+- **Steps addendum (S289):** conditions compile to predicates at load; unknown field/enum/source-tag ⇒ row skipped + counted.
 - **Verify:** cycle with empty tab = no-op; seeded rows appear in `S.contentLedger` counts.
 - **Status:** [ ] not started
 
-### Task 11: fragment composer (A)
-- **Files:** `phase05-citizens/generateCitizensEvents.js` — `composeContentLine_` + conditions parser + rendered-line dedup + pool-walk offset
-- **Verify:** fixed seed → identical output across two runs; conditions typo → row skipped + counted.
+### Task 11: fragment composer + pool injection (A)
+- **Files:** `phase05-citizens/generateCitizensEvents.js` — `composeContentLine_` + **pool-injection block** (§Pool injection: per-citizen conditions eval, fail-closed source routing, additive-only) + rendered-line dedup (pool-walk offset deferred to v2 per S289)
+- **Verify:** fixed seed → identical output across two runs; conditions typo → row skipped + counted; unfillable slot → line dropped, no raw `$SLOT` in output; ledger-sourced line lands in LifeHistory with correct primary routing.
 - **Status:** [ ] not started
 
 ### Task 12: first ledger-native pools (A payoff)
@@ -289,3 +313,4 @@ None — both resolved 2026-07-01 (Mike, S281):
 - 2026-07-02 — Task 7 DONE (engine-sheet, S283). B1 read path closed: seeded-bias dry-run on POP-00269 rendered the opinions block in the wake prompt; test cell cleared after. B1 is now end-to-end in code (pool → intents → fold → readback); the engine half (Tasks 6 generator+compressor) still queues for the clasp window — wake-side readback is loop-side and live immediately (reads blank registers as silence until the fold deploys and populates them). Next open: Task 8 (unlived capture at fold).
 - 2026-07-02 — Task 8 DONE (engine-sheet, S283) + in-world-stamp parser repair shipped as its prerequisite (measure-twice find: `Y2C48/C100/C?` stamped lines — i.e. every Phase-4/5 event since S264 — parsed as Untagged in the compressor; fold tag-routing was silently degraded live and the B3 whitelist would have fired on nothing). Mike direction folded in: "no real world clocks" — writer audit confirmed all engine LifeHistory writers already stamp in-world; datetime lines in citizen histories are pre-S264 residue the parser still reads. B3 write path closed; `.unlived` fills once the clasp window deploys Tasks 6+8 and cycles trim branch events. Remaining: Task 9 (unlived echo line, generator-side read) + Tasks 10–12 (Design A content ledger).
 - 2026-07-02 — Task 9 DONE (engine-sheet, S283). **All B-seams (B1–B4) now closed end-to-end in code** — Tasks 1–9 complete in three chained sessions (S282 Tasks 1–5, S283 Tasks 6–9). Engine-side stack awaiting one clean clasp window: Task 6 (bias pool+intents+fold), Task 8 (unlived capture + stamp-parser repair), Task 9 (unlived echo). Loop-side (Tasks 2/3/4/7) already live at cron wakes. Remaining in plan: Design A content ledger (Tasks 10–12) — wants its own session per §Interlock.
+- 2026-07-02 — S289 pre-build critique of Design A folded into body: §Pool injection added (draw-site bridge was missing), fail-closed source routing, DSL resolver table + enum fix, unfillable-slot rule, offset deferred to v2, Task 10 = two safePhaseCall_ sites.

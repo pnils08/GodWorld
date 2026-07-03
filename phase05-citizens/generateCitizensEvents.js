@@ -697,6 +697,95 @@ function generateCitizensEvents_(ctx) {
     return arr[arr.length - 1];
   }
 
+  // ===========================================================================
+  // engine.38 Design A (seams Task 11): Event_Content_Ledger composer + gates.
+  // Loader (phase02 loadEventContentLedger_) compiled Conditions to predicate
+  // terms and validated source tags; this side EVALUATES per citizen and
+  // composes drawn lines. Fail-closed throughout (S289): missing data narrows
+  // eligibility, a line whose fragment slots can't fill for this citizen never
+  // enters the pool, and raw $SLOT text can never reach LifeHistory.
+  // ===========================================================================
+  var CONTENT_ENTITY_SLOTS = { VENUE: 1, INSTITUTION: 1, CONTACT: 1 }; // resolved code-side, not from fragments
+
+  function contentSlotTokens_(text) {
+    var out = [], re = /\$([A-Z_]+)/g, m;
+    while ((m = re.exec(String(text))) !== null) { if (out.indexOf(m[1]) < 0) out.push(m[1]); }
+    return out;
+  }
+
+  function evalContentConditions_(terms, scopes) {
+    if (!terms || !terms.length) return true;
+    for (var i = 0; i < terms.length; i++) {
+      var t = terms[i];
+      if (t.op === "flag") { if (!scopes[t.f]) return false; continue; }
+      var actual = scopes[t.f];
+      if (actual === null || actual === undefined || actual === "") return false; // missing data narrows, never widens
+      if (typeof t.v === "number") {
+        var av = Number(actual);
+        if (isNaN(av)) return false;
+        if (t.op === "<=") { if (!(av <= t.v)) return false; }
+        else if (t.op === ">=") { if (!(av >= t.v)) return false; }
+        else if (t.op === "<") { if (!(av < t.v)) return false; }
+        else if (t.op === ">") { if (!(av > t.v)) return false; }
+        else if (t.op === "=") { if (av !== t.v) return false; }
+        else if (t.op === "!=") { if (av === t.v) return false; }
+        else return false;
+      } else {
+        var as = String(actual).toLowerCase(), vs = String(t.v).toLowerCase();
+        if (t.op === "=") { if (as !== vs) return false; }
+        else if (t.op === "!=") { if (as === vs) return false; }
+        else return false;
+      }
+    }
+    return true;
+  }
+
+  // Injection-time guarantee: every fragment slot in this line has >=1
+  // fragment eligible for THIS citizen. Entity slots skip the check (always
+  // resolvable code-side). Slot list cached on the entry (load-once shape).
+  function contentSlotsFillable_(le, ledger, scopes) {
+    if (!le.slots) le.slots = contentSlotTokens_(le.text);
+    for (var si = 0; si < le.slots.length; si++) {
+      var slot = le.slots[si];
+      if (CONTENT_ENTITY_SLOTS[slot]) continue;
+      var frags = ledger.fragments[slot];
+      if (!frags || !frags.length) return false;
+      var any = false;
+      for (var fi = 0; fi < frags.length; fi++) {
+        if (evalContentConditions_(frags[fi].conditions, scopes)) { any = true; break; }
+      }
+      if (!any) return false;
+    }
+    return true;
+  }
+
+  // Compose a DRAWN ledger line: weighted-draw an eligible fragment per
+  // content slot (ctx.rng via roll(), replay-identical); entity slots resolve
+  // from the caller (the ledger adds content slots, it does not re-plumb
+  // entity slots — plan §Composer). Returns null if any token can't fill —
+  // caller drops the emit (belt-and-suspenders under the injection check).
+  function composeContentLine_(entry, ledger, entityValues, scopes) {
+    var text = entry.text;
+    var slots = entry.slots || contentSlotTokens_(text);
+    for (var si = 0; si < slots.length; si++) {
+      var slot = slots[si];
+      var value = "";
+      if (CONTENT_ENTITY_SLOTS[slot]) {
+        value = entityValues[slot] || "";
+      } else {
+        var eligible = [];
+        var frags = ledger.fragments[slot] || [];
+        for (var fi = 0; fi < frags.length; fi++) {
+          if (evalContentConditions_(frags[fi].conditions, scopes)) eligible.push(frags[fi]);
+        }
+        if (eligible.length) value = pickWeighted_(eligible).text;
+      }
+      if (!value) return null;
+      text = text.split("$" + slot).join(value);
+    }
+    return text.replace(/\s+/g, " ").trim();
+  }
+
   // =========================================================================
   // v2.5: LOCAL ENTITIES / VENUES
   // =========================================================================
@@ -2050,6 +2139,41 @@ function generateCitizensEvents_(ctx) {
       }
     }
 
+    // engine.38 Design A (seams Task 11): content-ledger pool injection —
+    // ADDITIVE-ONLY (S289 collision rule: a poolKey never replaces or
+    // suppresses a hardcoded pool). Data-gated: empty ledger pushes nothing
+    // and consumes no rng, so pre-content cycles replay byte-identical.
+    // Eligibility = compiled Conditions vs this citizen's scopes; lines whose
+    // fragment slots have zero eligible fragments for this citizen never
+    // enter the pool (no raw $SLOT can reach LifeHistory).
+    var contentLedger = S.contentLedger;
+    if (contentLedger && contentLedger.lineCount) {
+      var condScopes = {
+        wealth: wealthLvl,
+        children: kidCount,
+        married: maritalLc === "married",
+        retired: status === "retired",
+        ageband: ageGroup,
+        hood: neighborhood,
+        season: season,
+        displacement: displRisk
+      };
+      for (var clk in contentLedger.lines) {
+        if (!contentLedger.lines.hasOwnProperty(clk)) continue;
+        var clLines = contentLedger.lines[clk];
+        for (var cli = 0; cli < clLines.length; cli++) {
+          var clEntry = clLines[cli];
+          if (!evalContentConditions_(clEntry.conditions, condScopes)) continue;
+          if (!contentSlotsFillable_(clEntry, contentLedger, condScopes)) continue;
+          var clTags = clEntry.grain ? mergeTags(clEntry.tags, ["grain:" + clEntry.grain]) : clEntry.tags;
+          var clPooled = makeEntry(clEntry.text, mergeTags(clTags, calendarTags), clEntry.weight, false);
+          clPooled.ledgerLine = clEntry;      // draw-time compose hook
+          clPooled.ledgerScopes = condScopes; // fragment eligibility at compose
+          pool.push(clPooled);
+        }
+      }
+    }
+
     if (pool.length === 0) continue;
 
     // v2.7: Apply archetype weights to pool entries
@@ -2166,6 +2290,35 @@ function generateCitizensEvents_(ctx) {
       contact = pickContactFromBonds_(citizenBonds);
     }
 
+    // engine.38 Design A (seams Task 11): drawn ledger line — fill fragment
+    // slots (weighted, ctx.rng) + entity slots (code-side resolvers mirroring
+    // the template-fallback branch). Composer matches pool house style
+    // (lowercase clause, no terminal punctuation — S289 build note: the plan's
+    // capitalize+period rule assumed standalone sentences; existing pool lines
+    // are clauses, so ledger lines follow the same convention). Null compose =
+    // drop this emit slot, never raw $SLOT into LifeHistory.
+    if (entry.ledgerLine) {
+      var clVenue = "", clUsedContact = false;
+      var clSlots = entry.ledgerLine.slots || [];
+      for (var cls = 0; cls < clSlots.length; cls++) {
+        if (clSlots[cls] === "VENUE") clVenue = pickVenue_(neighborhood) || (mem && mem.lastVenue) || "a familiar corner";
+        else if (clSlots[cls] === "CONTACT") clUsedContact = true;
+      }
+      var composedText = composeContentLine_(entry.ledgerLine, S.contentLedger, {
+        VENUE: clVenue,
+        INSTITUTION: pickInstitution_(neighborhood) || "a local office",
+        CONTACT: contact.name || "someone familiar"
+      }, entry.ledgerScopes);
+      if (composedText === null) continue; // unfillable at draw — drop the emit slot
+      // Rendered-line hard dedup (plan §Composer): the pool filter compares
+      // SKELETON text, but cycleSeen stores RENDERED text — same skeleton +
+      // same fragment draw would otherwise slip the within-cycle block.
+      if (cycleSeen.indexOf(normText_(composedText)) >= 0) continue;
+      pick = composedText;
+      if (clVenue) { chosenVenue = clVenue; tags = mergeTags(tags, ["venue:local"]); }
+      if (clUsedContact && contact && contact.popId) tags = mergeTags(tags, ["contactPopId:" + contact.popId]);
+    }
+
     if (entry.template) {
       // v2.7: Use tone-aware template slotter if cooldown allows
       if (canUseTemplate_(popId) && traitProfile) {
@@ -2189,7 +2342,10 @@ function generateCitizensEvents_(ctx) {
       }
       if (contact && contact.popId) tags = mergeTags(tags, ["contactPopId:" + contact.popId]);
       if (chosenVenue) tags = mergeTags(tags, ["venue:local"]);
-    } else if (neighborhood && chanceHit(0.12)) {
+    } else if (neighborhood && !chosenVenue && chanceHit(0.12)) {
+      // !chosenVenue: a ledger line that filled $VENUE already carries its
+      // venue — don't append a second one. "" for every other non-template
+      // line, so pre-ledger rng sequence is unchanged (Task 11).
       chosenVenue = pickVenue_(neighborhood);
       if (chosenVenue) {
         pick = pick + " near " + chosenVenue;

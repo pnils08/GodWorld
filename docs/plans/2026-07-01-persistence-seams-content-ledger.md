@@ -74,7 +74,7 @@ pointers:
 | `ageband` | `ageGroup_(birthYear)` | `youth`/`youngAdult`/`adult`/`senior` — **NOT `elder`**; fail-closed parsing means a wrong enum silently kills the row |
 | `hood` | citizen row neighborhood | exact tab-name match |
 | `season` / calendar | cycle ctx | engine season vocab |
-| `displacement` | neighborhood state (`st.displacementPressure`) | number — NOT a row field |
+| `displacement` | citizen row `DisplacementRisk` (S289 build correction: the code's own S280 gate reads the row column at ≥7, not hood-state — implemented to match) | number 0-10 |
 
 Conditions parse **once at load** into predicate objects (Task 10 loader), never re-parsed per-citizen per-draw across 900+ rows.
 
@@ -278,7 +278,7 @@ Handoff slices — all builds are engine-sheet's (engine code and loop scripts b
 ### Task 11: fragment composer + pool injection (A)
 - **Files:** `phase05-citizens/generateCitizensEvents.js` — `composeContentLine_` + **pool-injection block** (§Pool injection: per-citizen conditions eval, fail-closed source routing, additive-only) + rendered-line dedup (pool-walk offset deferred to v2 per S289)
 - **Verify:** fixed seed → identical output across two runs; conditions typo → row skipped + counted; unfillable slot → line dropped, no raw `$SLOT` in output; ledger-sourced line lands in LifeHistory with correct primary routing.
-- **Status:** [ ] not started
+- **Status:** [x] done (S289, engine-sheet) — injection block at end of per-citizen pool assembly (all gate vars in scope; data-gated: empty ledger = zero pushes, zero rng, byte-identical replay); slot-fillability checked at injection so unfillable lines never pool; composer fills fragment slots via `pickWeighted_` + entity slots code-side (VENUE/INSTITUTION/CONTACT mirror the template-fallback resolvers; `!chosenVenue` guard stops double-venue). Two build notes: (1) composer matches pool house style — lowercase clause, no capitalize/period (plan rule assumed standalone sentences; existing pools are clauses); (2) rendered-line dedup added at compose because the S277 filter compares skeleton text while `cycleSeen` stores rendered. 12/12 `scripts/contentLedgerCompose.test.js` (full loader→generator pipeline) + full regression green (loader 14, dial 49, biasFold 25, unlivedFold 23, biasReadback 18, unlivedEcho 8, fame 12, chaosCars 14).
 
 ### Task 12: first ledger-native pools (A payoff)
 - **Files:** Event_Content_Ledger rows (content authoring): `baylight.construction`, then `tribune.readership` once its headline feed exists
@@ -314,3 +314,4 @@ None — both resolved 2026-07-01 (Mike, S281):
 - 2026-07-02 — Task 8 DONE (engine-sheet, S283) + in-world-stamp parser repair shipped as its prerequisite (measure-twice find: `Y2C48/C100/C?` stamped lines — i.e. every Phase-4/5 event since S264 — parsed as Untagged in the compressor; fold tag-routing was silently degraded live and the B3 whitelist would have fired on nothing). Mike direction folded in: "no real world clocks" — writer audit confirmed all engine LifeHistory writers already stamp in-world; datetime lines in citizen histories are pre-S264 residue the parser still reads. B3 write path closed; `.unlived` fills once the clasp window deploys Tasks 6+8 and cycles trim branch events. Remaining: Task 9 (unlived echo line, generator-side read) + Tasks 10–12 (Design A content ledger).
 - 2026-07-02 — Task 9 DONE (engine-sheet, S283). **All B-seams (B1–B4) now closed end-to-end in code** — Tasks 1–9 complete in three chained sessions (S282 Tasks 1–5, S283 Tasks 6–9). Engine-side stack awaiting one clean clasp window: Task 6 (bias pool+intents+fold), Task 8 (unlived capture + stamp-parser repair), Task 9 (unlived echo). Loop-side (Tasks 2/3/4/7) already live at cron wakes. Remaining in plan: Design A content ledger (Tasks 10–12) — wants its own session per §Interlock.
 - 2026-07-02 — S289 pre-build critique of Design A folded into body: §Pool injection added (draw-site bridge was missing), fail-closed source routing, DSL resolver table + enum fix, unfillable-slot rule, offset deferred to v2, Task 10 = two safePhaseCall_ sites.
+- 2026-07-02 — Tasks 10+11 DONE (engine-sheet, S289): tab live + loader + injection + composer, 26 new tests + full regression green. Design A engine-side complete in code, clasp pending. Remaining: Task 12 (seed first pools — after the deploy window smokes).

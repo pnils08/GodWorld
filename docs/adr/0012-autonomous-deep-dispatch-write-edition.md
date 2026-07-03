@@ -74,3 +74,24 @@ Adopt **autonomous deep-dispatch** for the `/write-edition` stage. Upstream stru
 - **Phase 2 — research-build + media.** Charge-brief template; dispatch-inversion harness (one-desk-deep + bounded source-search, capped); floor recalibration (Rhea verify-specifics + bug-is-event, drop the suppress-reflex); the lived-experience-anchor charge line.
 - **Phase 3 — pilot.** Run on a live cycle (C101+, against the richer chaos-cars + deeper packets substrate); measure depth + cost vs the parallel baseline.
 - **Gate.** Cost measurement (Phase 3) before full-edition rollout. Depth is proven; the bill is not.
+
+## Addendum (S289, Mike-direct) — deep-dispatch becomes the default path; cost-gate superseded
+
+**Decision.** Stop running all desks in parallel. Deep-dispatch (this ADR's mechanism) becomes how editions run, not a build-alongside pilot compared against a preserved baseline. **This supersedes the Rollout section's cost-gate clause** ("cost measurement before full-edition rollout") — Mike is trading the pre-measured-cost gate for wall-clock/focus reasons: the current all-desks-parallel run takes over a day before anything is reviewable, and that latency is the problem being solved, not token cost. Phase 3's cost + depth measurement still has value and should still run, but it no longer blocks the switch — it's now a post-hoc read, not a precondition.
+
+**What doesn't change.** Both LOCKED forks hold exactly as built: the orchestrator (the deep-dispatch skill / Mags) spawns the ≤3 bounded source-search subagents and reconciles their returns; the desk agent never gets Agent-spawn capability — it receives the charge + reconciled sourcing and picks its own subject, angle, and prose from there (SKILL.md Step 2–4, verbatim). "Orchestrate" is that mechanical scaffolding, not editorial direction — Mags does not pick the angle or write the piece.
+
+**How the model operates now (clarifies, does not add new mechanisms beyond the skill already built):**
+
+1. **Sift assigns all potential storylines, not one pick per desk.** Each storyline carries a format tag — feature article, interview, or dispatch — drawn from the existing autonomous capabilities, all run inside the same orchestrator-spawns/desk-writes structure. **Supplementals stay outside this run** as a separate artifact; other skills remain independently usable outside deep-dispatch.
+2. **Write-gate, not a publish-gate.** A storyline is only written if it clears a "why this story" test at assignment time. Storylines that don't clear it are **not written**, but the assignment itself still saves to that journalist's file/corpus — visible and queryable later even though unused this cycle. (This is the self-knowledge substrate Phase 1 Task 1+2 already targets; the write-gate is what makes an unwritten-but-visible assignment a real state, not just an idea.)
+3. **Desks run staggered, not all-at-once.** The all-desks-parallel shape existed because it looked good, not because it was correct. Staggering lets Mike consume output incrementally (civic today, sports tomorrow) and lets each desk focus fully on its own slice instead of nine pieces landing simultaneously. Mike's stated pain — a full run currently blocks over a day before anything is reviewable — is addressed by getting the first desk's output reviewable same-day, not by claiming the staggered model reduces total across-desk completion time; that total is unmeasured and Phase 3 should still record it.
+4. **Combine at cycle's end.** Desk output collects into a packet at publish; the strongest piece takes front page. Resolves D1 (below) with an explicit selection step Mike makes at combine-time.
+
+**Real build items this creates (not yet done):**
+
+- **Sift's write-edition front half needs reconciling.** `/sift` v2.0 Step 6 locks ONE slate variant before any writing happens (hard-stop-on-reject cadence cap). The all-storylines + format-assignment + write-gate model above needs sift to emit a ranked, format-tagged assignment set that deep-dispatch consumes per desk, rather than a single pre-write-locked slate. This is a real skill-logic change, not a rename — flagged as the concrete build item, not yet scoped into tasks.
+- **Phase 1 substrate is still the blocking dependency**, unchanged from the original ADR: per-desk corpus store + `byline`/`desk` ingest tags (engine-sheet's build, still unstarted per the build plan). Without it the harness still runs, but the self-knowledge/visible-assignment benefit in point 2 above doesn't land.
+- **D3 (pilot scope) resolves to full-edition-by-default**, not the subset-first recommendation in the original plan — consistent with "stop running all desks in parallel" as the decision, not a staged pilot.
+
+Sources: this session's design conversation (S289, research-build); [[../plans/2026-06-25-deep-dispatch-write-edition-build]] status log carries the same update.

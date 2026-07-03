@@ -86,9 +86,9 @@ Build order: **substrate (engine-sheet) → harness + floor (research-build desi
 
 ## Open decisions (resolve at execution; named now)
 
-- **D1 — the post-monolith "edition" artifact.** Storage flips per-desk; the published edition `.txt` + bay-tribune ingest are monolithic (format contract). **Recommend:** desks write per-desk (stored + searchable per-desk), then collected into the edition envelope at publish — keep the format contract + ingest, gain per-desk storage. Confirm at build.
+- **D1 — RESOLVED (S289).** Desks write per-desk (stored + searchable per-desk); collected into the edition envelope at publish; the strongest piece takes front page. Selection at combine-time is Mike's call.
 - **D2 — source-search subagent cap.** Default 3 (proofs used 3); tunable per desk; over-spawn guard.
-- **D3 — pilot scope.** Subset (2–3 desks deep + rest template — cheaper, partial comparison) vs full edition (true comparison, ~4× cost for one cycle). **Recommend** subset for the first pilot.
+- **D3 — RESOLVED (S289): full-edition-by-default, not subset-pilot.** Superseded by the ADR-0012 addendum — Mike is stopping all-desks-parallel outright, not staging a subset pilot first. The original subset recommendation assumed a cost-gated comparison against a preserved baseline; that gate is superseded (see addendum).
 - **D4 — world-summary reconciliation priority.** Surface `engine_anomalies` `cover-as-story` items in `buildWorldSummary.js`. NOT a deep-dispatch prereq (deep desk reaches `engine_anomalies` directly). File as a **parallel engine-sheet fix** benefiting the legacy path + sift-orientation + city-hall. Independent priority.
 
 ## Status log
@@ -103,6 +103,17 @@ Tasks 3–6 shipped as design artifacts (Phase 2 is RB-builds-media-executes; no
 - **Task 6 — floor recalibration:** **refined against Rhea's actual scope.** Rhea is sourcing-only and already verifies specifics in `vote-civic-verification` (check 2); the C100 suppress-reflex was NOT Rhea's — it happened at sift→civic-voice→edition. So: **bug-is-event** (cover-the-anomaly, translate-don't-suppress) → `docs/media/story_evaluation.md` §Anomalies Are Events (selection-side) + the charge PROJECT block (write-side); **don't-strangle-reach** → `.claude/agents/rhea-morgan/RULES.md` §Deep-Dispatch Calibration (verify-side: reach/real-entity-comps/interpretation are not sourcing failures; verify the freely-reached specifics harder). No blunt edit to a wrong file.
 
 Registered same commit (index.md ×2, ROLLOUT state flip to Phase 2 DONE). **Phase 1 (engine-sheet) still UNSTARTED — it blocks the Phase 3 pilot, flagged to engine-sheet for parallel build.** Phase 3 pilot is media, gated on Phase 1.
+
+### S289 — deep-dispatch promoted to default path; cost-gate superseded (Mike-direct, research-build)
+
+Mike's build directive: stop running all desks in parallel — the current run takes over a day before anything is reviewable, and that's the problem being solved. Full addendum in [[../adr/0012-autonomous-deep-dispatch-write-edition]]; summary here:
+
+- **Cost-gate (original Rollout section) superseded**, not deleted from record — Phase 3 cost/depth measurement still runs, but no longer blocks the switch. Wall-clock/focus/pacing is the driver Mike named, not token cost.
+- **D1 resolved:** per-desk write → combine into envelope at publish → strongest piece takes front page.
+- **D3 resolved:** full-edition-by-default, not a subset pilot.
+- **Operating model clarified** (uses the existing skill mechanics, adds no new spawn capability): sift assigns all potential storylines with a per-storyline format tag (feature/interview/dispatch — supplementals stay outside this run); a storyline is written only if it clears a why-this-story test at assignment (write-gate, not a publish-gate) — unwritten assignments still save to the journalist's file/corpus; desks run staggered, tied together by the production log and the spine Mags sets; both LOCKED forks (orchestrator spawns / desk only writes) hold unchanged.
+- **New build item surfaced:** `/sift` v2.0 Step 6's single-slate-lock-before-writing (hard-stop-on-reject cadence cap) needs reconciling against the all-storylines + format-tag + write-gate model — sift needs to emit a ranked, format-tagged assignment set per desk instead of one locked slate. Not yet scoped into tasks; flagged here as the concrete next design item.
+- **Still blocking:** Phase 1 substrate (engine-sheet, unstarted) — the harness runs without it, but the visible-unwritten-assignment / self-knowledge benefit doesn't land until per-desk storage + byline/desk tags exist.
 
 ### research.20 — status (drained from ROLLOUT, 2026-06-26 / S274)
 

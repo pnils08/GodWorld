@@ -15,7 +15,7 @@ pointers:
 
 # Sheet-Walk Audit Triage (engine.44)
 
-**What this is:** Mike walked the tabs by hand (2026-07-03, right after the S289 seams/content-ledger deploy) and produced 36 findings. This doc holds the verbatim list + the working classification. Triage protocol: verify each item against SHEETS_MANIFEST/graphify/code BEFORE fixing (several "any readers?" questions have deterministic answers; several "dead?" tabs are already documented dead in SPREADSHEET.md). Fix-classes batch together; don't retire anything without the measure-twice caller graph.
+**What this is:** Mike walked the tabs by hand (2026-07-03, right after the S289 seams/content-ledger deploy) and produced 36 findings. **Walked against the SANDBOX copy** (SANDBOX_0702, which carries 3 rehearsal cycles + the S289 test fixture) — structural findings (wiring, dead columns, wall clocks) transfer to live, but verify each on LIVE before fixing; row-level observations could be rehearsal artifacts. This doc holds the verbatim list + the working classification. Triage protocol: verify each item against SHEETS_MANIFEST/graphify/code BEFORE fixing (several "any readers?" questions have deterministic answers; several "dead?" tabs are already documented dead in SPREADSHEET.md). Fix-classes batch together; don't retire anything without the measure-twice caller graph.
 
 ## Verbatim list (Mike, 2026-07-03)
 

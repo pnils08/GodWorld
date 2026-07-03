@@ -273,7 +273,7 @@ Handoff slices — all builds are engine-sheet's (engine code and loop scripts b
 - **Files:** new tab (manual, measure-twice); `phase02-world-state/loadEventContentLedger.js` — create; `godWorldEngine2.js` — **two** `safePhaseCall_` sites (S289: production ~L225 + cycle-phases ~L1568 — every phase registration in this engine comes in pairs); SCHEMA/SHEETS_MANIFEST same commit
 - **Steps addendum (S289):** conditions compile to predicates at load; unknown field/enum/source-tag ⇒ row skipped + counted.
 - **Verify:** cycle with empty tab = no-op; seeded rows appear in `S.contentLedger` counts.
-- **Status:** [ ] not started
+- **Status:** [x] done (S289, engine-sheet) — tab created + header read-back verified (9 cols, existence-checked first); loader mirrors loadNeighborhoodState_ with fail-closed row rules (source whitelist mirrors primaryFromTags, DSL compiled to predicates at load); both safePhaseCall_ sites registered (L226/L1570); 14/14 `scripts/contentLedgerLoader.test.js`; SCHEMA_HEADERS regen (62 tabs) + SHEETS_MANIFEST S289 drift block + SPREADSHEET.md row, same commit. Cycle no-op verify rides the next live run (tab is empty).
 
 ### Task 11: fragment composer + pool injection (A)
 - **Files:** `phase05-citizens/generateCitizensEvents.js` — `composeContentLine_` + **pool-injection block** (§Pool injection: per-citizen conditions eval, fail-closed source routing, additive-only) + rendered-line dedup (pool-walk offset deferred to v2 per S289)

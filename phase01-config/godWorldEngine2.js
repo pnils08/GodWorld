@@ -223,6 +223,7 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase2-Weather', function() { applyWeatherModel_(ctx); });
   safePhaseCall_(ctx, 'Phase2-CityDynamics', function() { applyCityDynamics_(ctx); });
   safePhaseCall_(ctx, 'Phase2-NeighborhoodState', function() { loadNeighborhoodState_(ctx); });  // engine.33 — inbound loop (prev cycle's Neighborhood_Map)
+  safePhaseCall_(ctx, 'Phase2-ContentLedger', function() { loadEventContentLedger_(ctx); });  // engine.38 Design A — sheet-resident event content (missing tab = no-op)
   safePhaseCall_(ctx, 'Phase2-Transit', function() { updateTransitMetrics_Phase2_(ctx); });
 
   // ═══════════════════════════════════════════════════════════
@@ -1566,6 +1567,7 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase2-Weather', function() { applyWeatherModel_(ctx); });
   safePhaseCall_(ctx, 'Phase2-CityDynamics', function() { applyCityDynamics_(ctx); });
   safePhaseCall_(ctx, 'Phase2-NeighborhoodState', function() { loadNeighborhoodState_(ctx); });  // engine.33 — inbound loop (prev cycle's Neighborhood_Map)
+  safePhaseCall_(ctx, 'Phase2-ContentLedger', function() { loadEventContentLedger_(ctx); });  // engine.38 Design A — sheet-resident event content (missing tab = no-op)
   safePhaseCall_(ctx, 'Phase2-Transit', function() { updateTransitMetrics_Phase2_(ctx); });
 
   // ═══════════════════════════════════════════════════════════

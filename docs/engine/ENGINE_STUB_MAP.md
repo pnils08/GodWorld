@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-06-29 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-07-03 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -242,6 +242,13 @@
 - **getSimSeason_(month)**
 
 - **getSeasonFromCycle_(cycleOfYear)**
+
+### loadEventContentLedger.js
+- **parseContentConditions_(raw)**
+
+- **loadEventContentLedger_(ctx)**
+  Writes: S.contentLedger
+  Sheets: Event_Content_Ledger
 
 ### loadNeighborhoodState.js
 - **loadNeighborhoodState_(ctx)**
@@ -928,9 +935,8 @@
 
 ### generateCitizensEvents.js
 - **generateCitizensEvents_(ctx)**
-  Reads: S.cityDynamics, S.cycleId, S.economicMood, S.faithEvents, S.holiday, S.holidayPriority, S.initiativeEvents, S.isCreationDay, S.isFirstFriday, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.simYear, S.simulationYear, S.sportsSeason, S.weather, S.worldEvents
+  Reads: S.cityDynamics, S.contentLedger, S.cycleId, S.economicMood, S.faithEvents, S.holiday, S.holidayPriority, S.initiativeEvents, S.isCreationDay, S.isFirstFriday, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.simYear, S.simulationYear, S.sportsSeason, S.weather, S.worldEvents
   Writes: S.biasIntents, S.citizenEventMemory, S.crimeMetrics, S.cycleActiveCitizens, S.eventsGenerated, S.localEntities, S.templateCooldowns
-  Ledger cols read (S283): UsageCount (publicFigures pre-scan), MemoryRegisters (unlived echo)
   Config: ctx.config.cycleCount, ctx.config.rngSeed
   Sheets: LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
@@ -2404,16 +2410,12 @@
 
 - **decayChaosExposure_(c, currentCycle)**
 
-### citizenNames.js
-_No top-level function declarations found (helper/constants file)._
-
 ### compressLifeHistory.js
 - **readPendingReflections_(ctx)**
 
 - **compressLifeHistory_(ctx, options)**
   Reads: S.absoluteCycle, S.biasIntents, S.cycleId
   Writes: S.lifeHistoryCompression
-  Ledger cols written (S283): MemoryRegisters (bias drain + unlived capture, dirty-gated)
 
 - **parseLifeHistoryEntries_(historyStr)**
 
@@ -2459,11 +2461,11 @@ _No top-level function declarations found (helper/constants file)._
 
 - **zeroMood_(c)**
 
-- **foldAgedOutEntries_(c, entries, keepCount, regs)** — S283: optional regs captures branch-tag events → regs.unlived (B3)
+- **parseMemoryRegisters_(str)**
 
-- **parseMemoryRegisters_(str)** — S283 (B1/B3)
+- **foldBiasIntents_(regs, intents, cycle)**
 
-- **foldBiasIntents_(regs, intents, cycle)** — S283 (B1)
+- **foldAgedOutEntries_(c, entries, keepCount, regs)**
 
 - **deriveArchetypeFromBands_(c)**
 
@@ -2949,4 +2951,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 172
-**Functions mapped:** 1011
+**Functions mapped:** 1015

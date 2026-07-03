@@ -66,6 +66,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.41 | Engine-output → canon coverage | in-progress | engine-sheet | [[../plans/2026-06-24-engine-output-canon-coverage]] — detail in pointer (relocated 2026-07-02) |
 | engine.42 | Aider/DeepSeek autonomous-edit audit | done-pending-archive | engine-sheet | [[ENGINE_REPAIR]] — detail in pointer (relocated 2026-07-02) |
 | engine.43 | Voices/agents backfilled into dials + shift as citizen dials alter (sync contract) | ready | research-build (design) → engine-sheet | Mike-direct S286 close — plan doc next session |
+| engine.44 | Sheet-walk audit triage — 36 findings, 5 fix-classes | ready | engine-sheet | [[../plans/2026-07-03-sheet-walk-audit-triage]] (Mike-direct 2026-07-03) |
 
 ### canon.* — World-fidelity layer
 

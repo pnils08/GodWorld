@@ -283,7 +283,12 @@ Handoff slices — all builds are engine-sheet's (engine code and loop scripts b
 ### Task 12: first ledger-native pools (A payoff)
 - **Files:** Event_Content_Ledger rows (content authoring): `baylight.construction`, then `tribune.readership` once its headline feed exists
 - **Verify:** cycle run emits Baylight texture lines only for eligible hoods/conditions.
-- **Status:** [ ] not started
+- **Authoring rules (S289 sandbox rehearsal — learned from real output):**
+  1. **Weights are house-scale (0.9–1.3).** Weights compete against the ~50-entry hardcoded per-citizen pool; a weight-60 test row became 36% of the entire city's day (823/2,282 events). One skeleton ≈ one hardcoded entry's presence at weight ~1.0.
+  2. **First tag must be a whitelisted `source:`** (`loadEventContentLedger.js` CONTENT_LEDGER_SOURCE_WHITELIST). A `source:economy` fixture row was correctly rejected — economy has no primaryFromTags branch. New pool sources (e.g. `source:baylight`) need the primaryFromTags branch + whitelist entry in the same commit.
+  3. **Skipped rows log to the execution log** (`[ContentLedger] N row(s) skipped fail-closed`) — check it after seeding.
+  4. Conditions verify against draw-time state: WealthLevel re-derives AFTER CitizenEvents each cycle (Phase5 L294 vs L298), so a post-cycle audit can show gate "misses" that were correct at draw time.
+- **Status:** [ ] not started — rehearsed S289 on sandbox with test fixture (composer + gates + entity slots proven live); real content authoring still open
 
 ---
 
@@ -315,3 +320,4 @@ None — both resolved 2026-07-01 (Mike, S281):
 - 2026-07-02 — Task 9 DONE (engine-sheet, S283). **All B-seams (B1–B4) now closed end-to-end in code** — Tasks 1–9 complete in three chained sessions (S282 Tasks 1–5, S283 Tasks 6–9). Engine-side stack awaiting one clean clasp window: Task 6 (bias pool+intents+fold), Task 8 (unlived capture + stamp-parser repair), Task 9 (unlived echo). Loop-side (Tasks 2/3/4/7) already live at cron wakes. Remaining in plan: Design A content ledger (Tasks 10–12) — wants its own session per §Interlock.
 - 2026-07-02 — S289 pre-build critique of Design A folded into body: §Pool injection added (draw-site bridge was missing), fail-closed source routing, DSL resolver table + enum fix, unfillable-slot rule, offset deferred to v2, Task 10 = two safePhaseCall_ sites.
 - 2026-07-02 — Tasks 10+11 DONE (engine-sheet, S289): tab live + loader + injection + composer, 26 new tests + full regression green. Design A engine-side complete in code, clasp pending. Remaining: Task 12 (seed first pools — after the deploy window smokes).
+- 2026-07-03 — Sandbox rehearsal (S289): window on sandbox copy; composer proven live, gates exact, fail-closed held. Fixes: skeleton dedup + skipped-row log (95c854c8); aim-guard (2e0e746f). Task 12 authoring rules added to task body.

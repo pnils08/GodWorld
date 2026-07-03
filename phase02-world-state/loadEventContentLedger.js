@@ -190,4 +190,14 @@ function loadEventContentLedger_(ctx) {
 
   S.contentLedger.lineCount = loadedLines;
   S.contentLedger.fragmentCount = loadedFragments;
+
+  // Fail-closed rejections are silent by design in the pools; make them loud
+  // in the execution log so an authoring mistake (bad source tag, bad enum)
+  // is visible the cycle it lands, not sessions later (S289 rehearsal: a
+  // source:economy fixture row was skipped exactly as designed — and nothing
+  // said so anywhere).
+  if (S.contentLedger.skipped > 0) {
+    Logger.log('[ContentLedger] ' + S.contentLedger.skipped + ' row(s) skipped fail-closed; ' +
+      loadedLines + ' lines / ' + loadedFragments + ' fragments loaded.');
+  }
 }

@@ -2431,6 +2431,11 @@ function generateCitizensEvents_(ctx) {
 
     remember(popId, primaryTag, pick, chosenVenue, neighborhood, contact && contact.name, tags);
     cycleSeen.push(normText_(pick));
+    // Ledger lines: also block the SKELETON within-cycle (S289 C102 rehearsal:
+    // 201 citizens drew the same skeleton twice with different fragments —
+    // the pool filter compares skeleton text, so rendered-only dedup can't
+    // stop a re-draw). One skeleton per citizen per cycle.
+    if (entry.ledgerLine) cycleSeen.push(normText_(entry.ledgerLine.text));
     S.eventsGenerated = (S.eventsGenerated || 0) + 1;
     emittedAny = true;
     } // end 1..N atmospheric emit loop

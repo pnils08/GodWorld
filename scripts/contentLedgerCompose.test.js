@@ -150,6 +150,22 @@ console.log('═══ Composition + fail-closed rules (300 citizen-cycles)');
     }
   }
   assert('composed ledger lines were drawn in trials', composedSeen > 0, `composed=${composedSeen}`);
+  // S289 C102 rehearsal fix: same skeleton must never emit twice for one
+  // citizen in one cycle, even when weight dominance makes re-draws likely.
+  {
+    let skeletonRepeats = 0;
+    for (let s = 1; s <= 60; s++) {
+      const rows = [makeRow('POP-D0', { wealth: 2, hood: 'Temescal' })];
+      const ctx = makeCtx(rows, mulberry32(s * 31337), FIXTURE);
+      generateCitizensEvents_(ctx);
+      const lines = emittedLines(ctx)[0].split('\n');
+      const hits = lines.filter(l => l.indexOf('counted the register twice') >= 0).length
+        + 0; // skeleton-1 occurrences for this citizen this cycle
+      const hits2 = lines.filter(l => l.indexOf('lingered at') >= 0).length;
+      if (hits > 1 || hits2 > 1) skeletonRepeats++;
+    }
+    assert('same skeleton never emits twice per citizen per cycle', skeletonRepeats === 0, `repeats=${skeletonRepeats}`);
+  }
   assert('NO raw $TOKEN ever reaches LifeHistory', rawToken === 0, `raw=${rawToken}`);
   assert('wealth<=3 line never lands on wealth=9 citizen', tightOnRich === 0, `hits=${tightOnRich}`);
   assert('hood-gated fragment never renders outside Temescal', temescalFragElsewhere === 0, `hits=${temescalFragElsewhere}`);

@@ -17,6 +17,8 @@
 const fs = require('fs');
 const path = require('path');
 
+global.Logger = { log() {} }; // Apps Script Logger shim (loader logs skipped counts)
+
 // Load the ES5 engine file into this scope.
 const src = fs.readFileSync(path.join(__dirname, '..', 'phase02-world-state', 'loadEventContentLedger.js'), 'utf8');
 eval(src);

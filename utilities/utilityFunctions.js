@@ -197,7 +197,33 @@ function getSimSpreadsheetId_() {
 /**
  * Opens the simulation spreadsheet using configured ID.
  * Use this instead of hardcoding SpreadsheetApp.openById(...).
+ *
+ * AIM-GUARD (S289): a copied bound script inherits this code but NOT its aim —
+ * script properties don't copy, so an unaimed sheet-copy falls back to the
+ * hardcoded LIVE id and writes production from what looks like a sandbox
+ * (the C101 misfire, 2026-07-02). If this script is bound to a sheet that is
+ * not the write target, refuse to open:
+ *   - sandbox copy aimed at itself (SIM_SSID = own id)  -> passes
+ *   - live sheet, no property                            -> passes (self-aim)
+ *   - unaimed copy (defaults to live)                    -> BLOCKED
+ *   - deliberate cross-write                             -> set ALLOW_CROSS_TARGET=1
+ * Contexts where the binding can't be determined (no container, Properties
+ * unavailable) do not block — the guard protects the known-dangerous state,
+ * it doesn't gamble on unknown ones.
  */
 function openSimSpreadsheet_() {
-  return SpreadsheetApp.openById(getSimSpreadsheetId_());
+  var targetId = getSimSpreadsheetId_();
+  var container = null;
+  try { container = SpreadsheetApp.getActiveSpreadsheet(); } catch (e) { container = null; }
+  if (container && container.getId && container.getId() !== targetId) {
+    var allow = null;
+    try { allow = PropertiesService.getScriptProperties().getProperty('ALLOW_CROSS_TARGET'); } catch (e2) { allow = '1'; }
+    if (allow !== '1') {
+      throw new Error('AIM-GUARD: this script is bound to sheet ' + container.getId() +
+        ' but is aimed at ' + targetId + '. Nothing was written. If this is a sandbox copy, ' +
+        'set Script Property SIM_SSID to THIS sheet\'s id. For a deliberate cross-sheet run, ' +
+        'set ALLOW_CROSS_TARGET=1.');
+    }
+  }
+  return SpreadsheetApp.openById(targetId);
 }

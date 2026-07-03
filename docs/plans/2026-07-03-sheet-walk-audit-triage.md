@@ -76,6 +76,26 @@ pointers:
 - Engine_Errors rebuild "properly" (spec what proper means first)
 - Bay_Tribune_Oakland as canonical roster: already wired that way in engine.35 Phase 2 (bayTribuneRoster.js) — confirm nothing else reads a stale roster.
 
+## Class 2 answers — reader-audit sweep (S290, verified against code)
+
+Method: grep every tab across `phase*/ lib/ scripts/ utilities/ .claude/skills/ .claude/agents/`, classify each hit read vs write, discard maintenance-only hits (auditSheetHeaders, cycleRollback, contract tests, sheetNames, ensure* schema helpers). Reader answers are code-level and transfer to live regardless of sandbox provenance; row-level observations still need live verify.
+
+| Tab | Writers (cycle-path) | Readers (real consumers) | Verdict |
+|---|---|---|---|
+| Economic_Parameters | **none** | **none** — zero code references anywhere; docs only | **Fully orphaned.** 198 rows of income/tax reference data no code ever reads. Retire or wire (Class 4/5 decision) |
+| Youth_Events | `runYouthEngine_` Phase 5 (wired both entry points, writes via `batchRecordYouthEvents_`) | **none** — read helpers `getRecentYouthEvents_`/`getYouthEventsForCitizen_` exist in `utilities/youthActivities.js` but have zero callers | **Write-only archive.** Engine logs youth events; nothing consumes them. Wire the existing read helpers or accept as archive |
+| Media_Briefing | `mediaRoomBriefingGenerator` Phase 7 | `compileHandoff` (operator menu tool, zero cycle-path callers) + `cycleExportAutomation` (operator export) | **Legacy-reader only.** Both consumers are operator-fired handoff tools; `buildWorldSummary.js` does NOT read it. Candidate for retire-or-fold decision |
+| Cycle_Packet | `buildCyclePacket` Phase 10 | `buildDeskPackets` evening-context (live dispatch path), `post-cycle-review`, `compileHandoff` (operator) | **Live.** Mike's "older media handoff" instinct half-right — compileHandoff is legacy, but desk packets read it today |
+| Media_Ledger | `recordMediaLedger` Phase 10, `mediaRoomIntake` Phase 11 | `buildDeskPackets` evening-context (live), `buildMediaPacket` | **Live.** Column C "Journalist" semantics = Class 3 detail item |
+| Story_Seed_Deck | `saveV3Seeds`/`applyStorySeeds` | `buildDeskPackets`, `/sift`, `/dispatch`, `citizen-signal-detector`, `priorityEngine`, `bylineEngine`, `routePatternSeeds` | **Live, heavily read.** Complaint is seed *quality* → routes to engine.35 Phase 5 + research.21 (already classified Class 5) |
+| Story_Hook_Deck | `v3StoryHookWriter` Phase 8 | `buildDeskPackets`, `post-cycle-review`, `/run-cycle` | **Live**, thinner than seeds |
+| Event_Arc_Ledger | `v3LedgerWriter` Phase 8, `processArcLifeCyclev1` | `v3preLoader` (cross-cycle arc persistence — load-bearing), `citizenContextBuilder` (crises citizens lived through), `updateStorylineStatusv1.2`, `buildDeskPackets` | **Not dead — it's the arc-persistence mechanism.** "Most columns unused" = Class 3 detail |
+| WorldEvents_V3_Ledger | `recordWorldEventsv3_` Phase 10 (writes `ctx.summary.worldEvents` only) | engine-auditor detectors (cascade/math/completeness), `queryLedger`, `buildDeskPackets`, `buildCivicVoicePackets`, `/engine-review` | **Live.** "Truly all events?" = no — only what lands in `ctx.summary.worldEvents` is recorded; that's the half-wired feel. Merge-vs-archive with old WorldEvents_Ledger stays Class 4 |
+| Neighborhood_Demographics | `updateNeighborhoodDemographics` Phase 3 | `educationCareerEngine` (school quality), `civicInitiativeEngine`, `buildNeighborhoodCards`, `buildDeskPackets`, `buildCivicVoicePackets`, `buildInitiativePackets` | **Live and load-bearing.** Detail gaps = Class 3 |
+
+Net: 2 tabs with zero real readers (Economic_Parameters, Youth_Events), 1 legacy-reader-only (Media_Briefing), 7 live. No retirements executed — Class 4 measure-twice still applies before any deletion.
+
 ## Changelog
 
 - 2026-07-03 — Filed (S289 close, engine-sheet). Verbatim intake from Mike's sheet-walk; classification unverified; triage protocol = verify-then-fix per class. ROLLOUT row engine.44 opened same commit.
+- 2026-07-03 — Class 2 reader-audit sweep complete (S290, engine-sheet). All 10 "any readers?" questions answered from code; table added above.

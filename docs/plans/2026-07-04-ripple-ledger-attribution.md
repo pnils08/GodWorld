@@ -77,7 +77,7 @@ only after sandbox verification per task.
   3. Instrument the sites that already hold full attribution in ctx at compute time — zero new detection: initiative ripples (`applyNeighborhoodRipple_`, trace C2), approval `reasons[]` (trace C5), economic ripples (`createRipple_`, trace E1), sports `totalSentiment` + per-hood effects (trace S1/S3), gentrification/migration story hooks (trace E4), citywide sentiment contributors in `applyCityDynamics` fold.
   4. No consumer changes this task. Ledger rows are write-only until Task 4/6.
 - **Verify:** dry-run cycle writes ledger rows for every instrumented site; row count and content spot-checked against the same cycle's ctx (log-based); zero engine errors.
-- **Status:** [ ] not started
+- **Status:** [x] **verified on sandbox** (S292): C104 organic run (sports + approval rows, tab lazy-created, 0 errors) + C105 seeded run (all six causeTypes: initiative vote → 8-cycle safety ripple, PLAYOFF_SPENDING economic-event dur 3, edition-coverage boost +0.0285, gentrification transformation/crisis, MASS_EXODUS 13 residents). Dedup guard added after C104 log showed runEconomicRippleEngine_ double-runs per cycle (87a093dc). **Production clasp push pending** — held behind C101 smoke per one-in-flight rule. Open item: C105 approval rows = 0 (hypothesis: new passed initiative +1 offset decay everywhere; confirm via C105 log or C106). Note: GENTRIFICATION_ACCELERATING hook lags its trigger one cycle by pre-existing design (phase commits via intent at Phase 10 after Phase-5 hooks read).
 
 ### Task 2 — Serialize ripple state across cycles (behavior change — gated deploy)
 
@@ -141,9 +141,8 @@ applies to any domain before its writers are instrumented.
 
 ## Open questions
 
-- [ ] **Ledger medium:** sheet tab (queryable in-cycle + by service account; recommended) vs
-  per-cycle JSON (cheaper writes). Recommend tab + the assembler exports JSON per cycle anyway.
-  Settle at Task 1 step 1.
+- [x] **Ledger medium:** settled S292 — sheet tab (`Ripple_Ledger`, lazy-created via
+  queueEnsureTabIntent_); assembler exports JSON per cycle at Task 4.
 - [ ] **Slice desk list v1:** civic/business/sports/culture/letters, or start with civic+letters
   (highest attribution value) and grow? Mike call at Task 4.
 - [ ] **Crime-worlds canon (3d):** which representation is canonical is a design one-pager before
@@ -154,3 +153,8 @@ applies to any domain before its writers are instrumented.
 - 2026-07-04 — Drafted (S291, engine-sheet) from the five-domain ripple attribution trace +
   Mike's R1–R5. Raw traces filed in `docs/research/ripple-traces/` with TEMPLATE for the
   remaining domains (trace-first rule, acceptance criterion 6).
+- 2026-07-04 — **Task 1 built + sandbox-verified (S292).** utilities/rippleLedger.js
+  (recordRipple_/recordHookRipple_, Chaos_Cars model) + six-site instrumentation, commits
+  4cda513c/87a093dc. Sandbox bound-script deploy route established (clasp push from temp dir
+  to sandbox Script ID — production untouched). Sandbox C104 organic + C105 seeded runs green;
+  acceptance criterion 1 met on sandbox. Production push held behind C101 smoke.

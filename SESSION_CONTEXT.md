@@ -4,6 +4,6 @@
 
 **NEXT[media]:** C101 edition when engine runs it (watch first chaos-cars cycle); Jax column WNBA→NBA fix owed before Gemini ingest.
 **NEXT[civic]:** `node scripts/buildInitiativePackets.js` each cycle (civic.14).
-**NEXT[engine-sheet]:** resume engine.44 at docs/plans/2026-07-03-sheet-walk-audit-triage.md changelog; C101 smoke pending (claude-mem: S290 wall-clock removal).
+**NEXT[engine-sheet]:** engine.45 T1 Ripple_Ledger build vs Sandbox C103 (plan: docs/plans/2026-07-04-ripple-ledger-attribution.md; Supermemory anchor 4cdknkK9X7cpk8rq7QKFWM); engine.44 still open; C101 smoke pending.
 **NEXT[jarvis]:** Aider = propose-not-deploy behind `npm test` (S274 audit closed).
 **NEXT[research-build]:** pipe.40 (journal fix) — scope TBD with Mike, no files touched. research.22 + engine.43 not started. Deep-dispatch D1 owed (research.20).

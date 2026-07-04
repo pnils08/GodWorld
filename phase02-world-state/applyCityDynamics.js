@@ -1318,6 +1318,21 @@ function applyCityDynamics_(ctx) {
       ', publicSpaces ' + (cityEffects.publicSpaces || 0).toFixed(3) +
       ', engagement ' + (cityEffects.communityEngagement || 0).toFixed(3) +
       ', cultural ' + (cityEffects.culturalActivity || 0).toFixed(3));
+
+    // engine.45 T1: persist the edition-coverage contribution to the citywide fold —
+    // previously folded as anonymous deltas (trace, citywide contributors).
+    if (typeof recordRipple_ === 'function') {
+      recordRipple_(ctx, {
+        causeType: 'edition-coverage',
+        causeId: 'editionNeighborhoodEffects.city',
+        causeDetail: JSON.stringify(cityEffects),
+        effectType: 'traffic/retail/nightlife/publicSpaces/communityEngagement/culturalActivity',
+        targetScope: 'citywide',
+        magnitude: cityEffects.traffic || 0,
+        duration: 1,
+        sourceEngine: 'applyCityDynamics'
+      });
+    }
   }
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -1334,6 +1349,21 @@ function applyCityDynamics_(ctx) {
     finalCity.sentiment += sentimentBoost;
     Logger.log('applyCityDynamics_ v3.2: Edition coverage sentiment boost applied — ' +
       sentimentBoost.toFixed(4));
+
+    // engine.45 T1: persist the citywide sentiment contributor with its cause — this is
+    // the boost the WHY layer previously mis-attributed to sports (trace S gap 3 / G-RC5).
+    if (typeof recordRipple_ === 'function') {
+      recordRipple_(ctx, {
+        causeType: 'edition-coverage',
+        causeId: 'editionSentimentBoost',
+        causeDetail: 'prior-cycle coverage ratings × sentimentWeight × 0.015, clamped ±0.20',
+        effectType: 'sentiment',
+        targetScope: 'citywide',
+        magnitude: sentimentBoost,
+        duration: 1,
+        sourceEngine: 'applyCityDynamics'
+      });
+    }
   }
 
   finalCity.traffic = clampMult(finalCity.traffic);

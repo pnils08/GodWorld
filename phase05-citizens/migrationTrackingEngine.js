@@ -428,7 +428,7 @@ function generateMigrationHooks_(ctx, cycle) {
     // FORCED_MIGRATION (individual at severe risk)
     if (displRisk >= 9 && migIntent === MIGRATION_INTENT.PLANNING) {
       ctx.summary.storyHooks = ctx.summary.storyHooks || [];
-      ctx.summary.storyHooks.push({
+      var forcedHook = {
         hookType: 'FORCED_MIGRATION',
         severity: 7,
         description: first + ' ' + last + ' at severe displacement risk in ' + neighborhood + ' (risk: ' + displRisk + '/10)',
@@ -436,7 +436,10 @@ function generateMigrationHooks_(ctx, cycle) {
         popid: popid,
         neighborhood: neighborhood,
         displacementRisk: displRisk
-      });
+      };
+      ctx.summary.storyHooks.push(forcedHook);
+      // engine.45 T1: hooks carried cause-in-description but never reached a sheet (trace E4)
+      if (typeof recordHookRipple_ === 'function') recordHookRipple_(ctx, 'migration', forcedHook, 'migrationTrackingEngine');
       alerts++;
     }
   }
@@ -446,14 +449,16 @@ function generateMigrationHooks_(ctx, cycle) {
     var count = displacementByNeighborhood[hood];
     if (count >= 5) {
       ctx.summary.storyHooks = ctx.summary.storyHooks || [];
-      ctx.summary.storyHooks.push({
+      var exodusHook = {
         hookType: 'MASS_EXODUS',
         severity: 8,
         description: hood + ' mass displacement risk: ' + count + ' residents planning to leave',
         cycleGenerated: cycle,
         neighborhood: hood,
         atRiskCount: count
-      });
+      };
+      ctx.summary.storyHooks.push(exodusHook);
+      if (typeof recordHookRipple_ === 'function') recordHookRipple_(ctx, 'migration', exodusHook, 'migrationTrackingEngine');
       alerts++;
     }
   }

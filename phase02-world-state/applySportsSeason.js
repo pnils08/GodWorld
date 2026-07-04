@@ -285,6 +285,42 @@ function applySportsFeedTriggers_(ctx) {
   S.sportsEventTriggers = allTriggers;
   S.sportsNeighborhoodEffects = neighborhoodEffects;
 
+  // engine.45 T1: persist sports attribution — the sentiment scalar was a dead write and
+  // per-hood effects merged into anonymous numbers (trace S1/S3, gaps 1/2/4).
+  if (typeof recordRipple_ === 'function') {
+    if (totalSentiment !== 0) {
+      var trigParts = [];
+      for (var tpi = 0; tpi < allTriggers.length; tpi++) {
+        var tg = allTriggers[tpi];
+        trigParts.push((tg.team || '?') + (tg.streak ? ' ' + tg.streak : '') + (tg.trigger ? ' [' + tg.trigger + ']' : ''));
+      }
+      recordRipple_(ctx, {
+        causeType: 'sports',
+        causeId: 'Oakland_Sports_Feed',
+        causeDetail: trigParts.join('; '),
+        effectType: 'sentiment',
+        targetScope: 'citywide',
+        magnitude: Math.round(totalSentiment * 1000) / 1000,
+        duration: 1,
+        sourceEngine: 'applySportsSeason.applySportsFeedTriggers_'
+      });
+    }
+    for (var rnh in neighborhoodEffects) {
+      recordRipple_(ctx, {
+        causeType: 'sports',
+        causeId: 'Oakland_Sports_Feed',
+        causeDetail: JSON.stringify(neighborhoodEffects[rnh]),
+        effectType: 'traffic/retail/nightlife/communityEngagement',
+        targetScope: 'neighborhood',
+        targetIds: [rnh],
+        neighborhood: rnh,
+        magnitude: (neighborhoodEffects[rnh] && neighborhoodEffects[rnh].traffic) || 0,
+        duration: 1,
+        sourceEngine: 'applySportsSeason.applySportsFeedTriggers_'
+      });
+    }
+  }
+
   // Apply sentiment to city mood if significant
   if (totalSentiment !== 0) {
     S.sentiment = (S.sentiment || 0) + totalSentiment;

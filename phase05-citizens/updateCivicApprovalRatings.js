@@ -319,6 +319,23 @@ function updateCivicApprovalRatings_(ctx) {
       S.approvalNeighborhoodEffects[rHood].sentiment += ripple;
       S.approvalNeighborhoodEffects[rHood].communityEngagement += ripple * 0.5;
     }
+
+    // engine.45 T1: persist approval delta + its reasons[] — the sheet stores only the
+    // clamped number; the causing initiatives were ctx-transient (trace C5/G3).
+    if (!isDryRun && typeof recordRipple_ === 'function') {
+      recordRipple_(ctx, {
+        causeType: 'approval-shift',
+        causeId: ch.officeId || ch.holder,
+        causeDetail: (ch.reasons || []).join('; '),
+        effectType: 'approval/district-sentiment',
+        targetScope: 'neighborhood',
+        targetIds: dHoods,
+        neighborhood: ch.district || '',
+        magnitude: ch.delta,
+        duration: 1,
+        sourceEngine: 'updateCivicApprovalRatings'
+      });
+    }
   }
 
   // ═══════════════════════════════════════════════════════════════════════════

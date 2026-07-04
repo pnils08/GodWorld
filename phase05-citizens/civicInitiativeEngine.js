@@ -1609,6 +1609,25 @@ function applyNeighborhoodRipple_(ctx, initiativeName, direction, affectedNeighb
 
   S.initiativeRipples.push(ripple);
 
+  // engine.45 T1: persist the fully-attributed ripple record — was compute-and-evaporate
+  // (trace C2/G1: S.initiativeRipples has no sheet backing, never reloaded).
+  if (typeof recordRipple_ === 'function') {
+    recordRipple_(ctx, {
+      causeType: 'initiative',
+      causeId: initiativeName,
+      causeDetail: rippleType + ' (' + direction + '); effects: ' + JSON.stringify(effects),
+      effectType: Object.keys(effects).join('/'),
+      targetScope: (affectedNeighborhoods && affectedNeighborhoods.length) ? 'neighborhood' : 'citywide',
+      targetIds: affectedNeighborhoods || [],
+      neighborhood: (affectedNeighborhoods && affectedNeighborhoods[0]) || '',
+      magnitude: rippleStrength,
+      duration: rippleDuration,
+      remainingStrength: rippleStrength,
+      cycle: cycle,
+      sourceEngine: 'civicInitiativeEngine.applyNeighborhoodRipple_'
+    });
+  }
+
   // ═══════════════════════════════════════════════════════════════════════════
   // IMMEDIATE EFFECTS (first cycle impact)
   // ═══════════════════════════════════════════════════════════════════════════

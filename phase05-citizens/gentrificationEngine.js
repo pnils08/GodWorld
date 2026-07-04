@@ -285,7 +285,7 @@ function generateGentrificationHooks_(ss, ctx, cycle) {
     // GENTRIFICATION_ACCELERATING
     if (genPhase === GENTRIFICATION_PHASES.ACCELERATING) {
       ctx.summary.storyHooks = ctx.summary.storyHooks || [];
-      ctx.summary.storyHooks.push({
+      var accelHook = {
         hookType: 'GENTRIFICATION_ACCELERATING',
         severity: 8,
         description: neighborhood + ' gentrification accelerating: rent up ' + Math.round(rentChange) + '% in 5 years, displacement pressure at ' + displPressure + '/10',
@@ -294,14 +294,17 @@ function generateGentrificationHooks_(ss, ctx, cycle) {
         rentChange: rentChange,
         incomeChange: incomeChange,
         displacementPressure: displPressure
-      });
+      };
+      ctx.summary.storyHooks.push(accelHook);
+      // engine.45 T1: hooks carried cause-in-description but never reached a sheet (trace E4)
+      if (typeof recordHookRipple_ === 'function') recordHookRipple_(ctx, 'gentrification', accelHook, 'gentrificationEngine');
       alerts++;
     }
 
     // GENTRIFICATION_EARLY (first signs)
     if (genPhase === GENTRIFICATION_PHASES.EARLY && (incomeChange > 15 || rentChange > 20)) {
       ctx.summary.storyHooks = ctx.summary.storyHooks || [];
-      ctx.summary.storyHooks.push({
+      var earlyHook = {
         hookType: 'GENTRIFICATION_EARLY',
         severity: 5,
         description: neighborhood + ' showing early gentrification signs: income +' + Math.round(incomeChange) + '%, rent +' + Math.round(rentChange) + '%',
@@ -309,35 +312,41 @@ function generateGentrificationHooks_(ss, ctx, cycle) {
         neighborhood: neighborhood,
         rentChange: rentChange,
         incomeChange: incomeChange
-      });
+      };
+      ctx.summary.storyHooks.push(earlyHook);
+      if (typeof recordHookRipple_ === 'function') recordHookRipple_(ctx, 'gentrification', earlyHook, 'gentrificationEngine');
       alerts++;
     }
 
     // NEIGHBORHOOD_TRANSFORMATION (rapid demographic shift)
     if (demoShift >= 8) {
       ctx.summary.storyHooks = ctx.summary.storyHooks || [];
-      ctx.summary.storyHooks.push({
+      var shiftHook = {
         hookType: 'NEIGHBORHOOD_TRANSFORMATION',
         severity: 6,
         description: neighborhood + ' demographics shifting rapidly (shift index: ' + demoShift + '/10)',
         cycleGenerated: cycle,
         neighborhood: neighborhood,
         demoShiftIndex: demoShift
-      });
+      };
+      ctx.summary.storyHooks.push(shiftHook);
+      if (typeof recordHookRipple_ === 'function') recordHookRipple_(ctx, 'gentrification', shiftHook, 'gentrificationEngine');
       alerts++;
     }
 
     // DISPLACEMENT_CRISIS (severe pressure)
     if (displPressure >= 8) {
       ctx.summary.storyHooks = ctx.summary.storyHooks || [];
-      ctx.summary.storyHooks.push({
+      var crisisHook = {
         hookType: 'DISPLACEMENT_CRISIS',
         severity: 9,
         description: neighborhood + ' displacement crisis: pressure at ' + displPressure + '/10',
         cycleGenerated: cycle,
         neighborhood: neighborhood,
         displacementPressure: displPressure
-      });
+      };
+      ctx.summary.storyHooks.push(crisisHook);
+      if (typeof recordHookRipple_ === 'function') recordHookRipple_(ctx, 'gentrification', crisisHook, 'gentrificationEngine');
       alerts++;
     }
   }

@@ -175,7 +175,30 @@ function runEconomicRippleEngine_(ctx) {
   
   // 4. Process active ripples
   processActiveRipples_(ctx, currentCycle);
-  
+
+  // 4b. engine.45 T1: persist attribution rows for ripples born this cycle — the ripple
+  // object (type/impact/hood/source/duration) evaporated at cycle end (trace E1).
+  if (typeof recordRipple_ === 'function') {
+    for (var rli = 0; rli < S.economicRipples.length; rli++) {
+      var rlr = S.economicRipples[rli];
+      if (!rlr || rlr.startCycle !== currentCycle) continue;
+      recordRipple_(ctx, {
+        causeType: 'economic-event',
+        causeId: rlr.id,
+        causeDetail: rlr.source || '',
+        effectType: 'sector-impact:' + ((rlr.sectors || []).join('/')),
+        targetScope: rlr.primaryNeighborhood ? 'neighborhood' : 'citywide',
+        targetIds: rlr.primaryNeighborhood ? [rlr.primaryNeighborhood] : (rlr.neighborhoods || []),
+        neighborhood: rlr.primaryNeighborhood || '',
+        magnitude: rlr.impact,
+        duration: rlr.endCycle - rlr.startCycle,
+        remainingStrength: rlr.currentStrength,
+        cycle: currentCycle,
+        sourceEngine: 'economicRippleEngine'
+      });
+    }
+  }
+
   // 5. Calculate economic mood (with migration impact)
   calculateEconomicMood_(ctx);
   

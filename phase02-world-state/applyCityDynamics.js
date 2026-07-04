@@ -1336,6 +1336,23 @@ function applyCityDynamics_(ctx) {
   }
 
   // ─────────────────────────────────────────────────────────────────────────
+  // SPORTS SENTIMENT BOOST (engine.45 T3a)
+  // ─────────────────────────────────────────────────────────────────────────
+  // applySportsFeedTriggers_ computes S.sportsSentimentBoost from the sports
+  // feed (record + streak + season multiplier, clamped ±0.10 per team). Before
+  // T3a the scalar landed on the dead S.sentiment and never reached
+  // finalCity.sentiment — sports never actually moved the persisted city mood
+  // (trace S1, gaps 1/2). Same fold as editionSentimentBoost below. The
+  // Ripple_Ledger attribution row is written at the compute site in
+  // applySportsFeedTriggers_ (team/streak causeDetail) — no second row here.
+  var sportsBoost = Number(S.sportsSentimentBoost || 0);
+  if (sportsBoost !== 0) {
+    finalCity.sentiment += sportsBoost;
+    Logger.log('applyCityDynamics_ engine.45 T3a: Sports sentiment boost applied — ' +
+      sportsBoost.toFixed(4));
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
   // EDITION COVERAGE SENTIMENT BOOST (v3.2, S216 engine.13)
   // ─────────────────────────────────────────────────────────────────────────
   // applyEditionCoverageEffects_ computes S.editionSentimentBoost from the

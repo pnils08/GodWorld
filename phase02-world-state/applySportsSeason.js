@@ -321,9 +321,10 @@ function applySportsFeedTriggers_(ctx) {
     }
   }
 
-  // Apply sentiment to city mood if significant
+  // engine.45 T3a: dead S.sentiment write deleted — the scalar had no consumer.
+  // S.sportsSentimentBoost now folds into finalCity.sentiment in
+  // applyCityDynamics_ (Phase2-CityDynamics runs after Phase2-SportsFeed).
   if (totalSentiment !== 0) {
-    S.sentiment = (S.sentiment || 0) + totalSentiment;
     Logger.log('applySportsFeedTriggers_ v3.0: Total sentiment adjustment: ' + totalSentiment.toFixed(3));
   }
 

@@ -350,9 +350,9 @@ function applyEditionCoverageEffects_(ctx) {
     compoundApplied: voiceSentiment !== 0 && domainBalance['CIVIC'] !== undefined
   };
 
-  // Apply sentiment to city mood
+  // engine.45 T3a: dead S.sentiment write deleted (pre-S216 leftover — the real
+  // fold is S.editionSentimentBoost → finalCity.sentiment in applyCityDynamics_).
   if (totalSentiment !== 0) {
-    S.sentiment = (S.sentiment || 0) + totalSentiment;
     Logger.log('applyEditionCoverageEffects_ v2.1: Sentiment adjustment: ' + totalSentiment.toFixed(4));
   }
 

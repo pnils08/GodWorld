@@ -140,8 +140,9 @@ seeded, C108 clean, PLAYOFF_SPENDING 9.6 → 6.4 exact).
   - **3b Crime→dynamics inputs (trace K1):** populate `S.crimeSpikes`/`S.crimeByNeighborhood` from prev-cycle Crime_Metrics (Phase-2 position means prev-cycle is the honest input; document that grain) or move the crime branch to Phase 3+ — settle by caller-graph in-task.
   - **3c Crime event/headline generators (trace K2):** wire `generateCrimeEvents_`/`getCrimeStorySignals_` into the cycle path with ledger attribution, or retire them explicitly — decision on live data volume (don't let dead pools sit ambiguous).
   - **3d Hood-grain crime (trace K3/G4):** reconcile the two crime worlds so a hood's Crime_Metrics spike reaches that hood's citizens as a local signal, not a citywide average. Scope-bound: the reconciliation design (which representation is canonical) is a one-pager inside this task before code.
+  - **3e Initiative-implementation hollow engine (found S294 during 3a caller-graph):** `applyInitiativeImplementationEffects_` is wired (Phase2-InitiativeEffects, godWorldEngine2.js:222/1566) but ALL outputs are dead — sentiment scalar wrote dead `S.sentiment`, `S.initiativeNeighborhoodEffects` + `S.initiativeImplementationTriggers` have zero readers. Measure-twice in-task: fold-vs-retire decision (may overlap civicInitiativeEngine's Phase-5 ripples).
 - **Verify:** per-item before/after cycle comparison; 3a acceptance criterion 3.
-- **Status:** [ ] not started
+- **Status:** [~] **3a built S294, sandbox verify pending** — `S.sportsSentimentBoost` folds into `finalCity.sentiment` (applyCityDynamics.js, before clamps; ordering verified Phase2-SportsFeed :219 → CityDynamics :224 both entry points); dead `S.sentiment +=` deleted in applySportsSeason.js AND applyEditionCoverageEffects.js (same dead-write class, pre-S216 leftover; sole `S.sentiment` reader is a mediaRoomBriefingGenerator.js:228 fallback behind always-set `dynamics.sentiment`). No new ledger row at the fold — T1's compute-site row in applySportsFeedTriggers_ is the attribution. 3b/3c/3d not started.
 
 ### Task 4 — Per-desk slice assembler (Node, post-cycle — additive)
 

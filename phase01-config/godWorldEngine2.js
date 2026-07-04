@@ -1243,7 +1243,7 @@ function writeDigest_(ctx) {
 
   var row = [
     // A – Timestamp
-    ctx.now,
+    inWorldStamp_(ctx), // S290 in-world (engine.44)
 
     // B – Cycle
     S.cycleId,

@@ -467,7 +467,7 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
   var initialLastHoliday = holiday !== "none" ? holiday : "";
 
   var newRow = [
-    new Date(),               // 0  Timestamp
+    inWorldStamp_(ctx),      // 0  Timestamp (S290 in-world)
     culId,                    // 1  CUL-ID
     name,                     // 2  Name
     roleType,                 // 3  RoleType

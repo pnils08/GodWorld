@@ -410,7 +410,7 @@ function runCivicElections_(ctx) {
     // S229 engine.2 §3.5 — P1 mechanical migration. Cycle-path append
     // routed via writeIntents; Phase 10 commits to Election_Log tab.
     queueAppendIntent_(ctx, 'Election_Log', [
-      new Date(),
+      inWorldStamp_(ctx), // S290 in-world
       cycle,
       godWorldYear,
       seat.officeId,

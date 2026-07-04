@@ -236,7 +236,7 @@ function recordWorldEventsv3_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
 
   var rows = [];
-  var now = new Date();
+  var now = inWorldStamp_(ctx); // S290 in-world, not wall-clock (engine.44)
 
   for (var i = 0; i < events.length; i++) {
     var ev = events[i];

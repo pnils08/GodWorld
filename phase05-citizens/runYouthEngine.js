@@ -75,8 +75,7 @@ function runYouthEngine_(ctx) {
   }
 
   // Get calendar context
-  var now = ctx.now || new Date();
-  var month = now.getMonth() + 1;
+  var month = Number(S.simMonth) || 1; // S290 sim month, not wall-clock month (engine.44)
   var season = S.season || 'spring';
 
   // v1.1: Get crimeMetrics context for QoL awareness
@@ -440,7 +439,7 @@ function generateSchoolWideEvents_(ctx, month, rng) {
     for (var h = 0; h < highSchools.length; h++) {
       if (rng() < 0.5) {
         events.push({
-          youthName: 'Class of ' + (new Date().getFullYear()),
+          youthName: 'Class of ' + (ctx.summary.simYear || 'Y?'),
           youthId: 'SCHOOL-' + highSchools[h].name.replace(/\s/g, '-'),
           age: 18,
           eventType: 'coming_of_age',

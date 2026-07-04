@@ -689,7 +689,7 @@ function parseContinuityNotes_(ss, section) {
     }
   }
 
-  var now = new Date();
+  var now = 'C' + cycle; // S290 in-world, not wall-clock (engine.44)
   for (var q = 0; q < quotes.length; q++) {
     logSheet.appendRow([
       now,                                          // A: Timestamp

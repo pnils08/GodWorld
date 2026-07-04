@@ -165,7 +165,7 @@ function createChaosArcs_(ctx) {
     var title = 'Chaos: ' + String(ev.vehicleType).replace(/_/g, ' ') + ' / ' + String(ev.diceOutcome).replace(/_/g, ' ');
     var desc = (ev.narrativeSeed || title) + ' (' + ev.targetId + ', source: chaos_cars)';
     var row = [
-      new Date(),       // 0  Timestamp
+      inWorldStamp_(ctx), // 0  Timestamp (S290 in-world)
       cycle,            // 1  CycleAdded
       'chaos_cascade',  // 2  StorylineType
       desc,             // 3  Description

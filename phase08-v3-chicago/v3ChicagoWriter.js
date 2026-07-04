@@ -65,7 +65,7 @@ function saveV3Chicago_(ctx) {
   // PULL CONTEXT DATA
   // ═══════════════════════════════════════════════════════════
   var S = ctx.summary || {};
-  var now = ctx.now || new Date();
+  var now = inWorldStamp_(ctx); // S290 in-world, not wall-clock (engine.44)
 
   // Cycle-based time (from GodWorld Calendar)
   var absoluteCycle = S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0;

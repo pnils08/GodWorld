@@ -105,7 +105,7 @@ function generateMonthlyDriftReport(ssOverride) {
   // APPEND ROW - ORIGINAL COLUMN ORDER
   // ═══════════════════════════════════════════════════════════════════════════
   driftSheet.appendRow([
-    new Date(),         // A  Timestamp
+    'C' + (get('cycle') || '?'), // A  Timestamp (S290 in-world)
     total,              // B  totalPopulation
     ill,                // C  illnessRate
     emp,                // D  employmentRate

@@ -95,8 +95,8 @@ function markUsageProcessed_(ctx, usageSheet, row1, col1, value) {
 
 function processAdvancementIntake_(ctx) {
   var ss = ctx ? ctx.ss : openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
-  var now = ctx ? ctx.now : new Date();
   var cycle = ctx ? (ctx.summary.cycleId || ctx.config.cycleCount || 0) : getCurrentCycleFromConfig_(ss);
+  var now = 'C' + cycle; // S290 in-world, not wall-clock (engine.44)
   
   var results = {
     usageProcessed: 0,

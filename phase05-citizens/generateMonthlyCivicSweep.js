@@ -149,7 +149,7 @@ function generateMonthlyCivicSweep(ssOverride) {
   // APPEND ROW - ORIGINAL COLUMN ORDER
   // ═══════════════════════════════════════════════════════════════════════════
   sweep.appendRow([
-    new Date(),                              // A  Timestamp
+    'C' + (get('cycle') || '?'),             // A  Timestamp (S290 in-world)
     civicRoster.slice(0, 10).join(', '),     // B  CivicRoster
     civicCount,                              // C  CivicCount
     scandals,                                // D  Scandals

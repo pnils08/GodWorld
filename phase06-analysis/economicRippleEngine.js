@@ -182,6 +182,10 @@ function runEconomicRippleEngine_(ctx) {
     for (var rli = 0; rli < S.economicRipples.length; rli++) {
       var rlr = S.economicRipples[rli];
       if (!rlr || rlr.startCycle !== currentCycle) continue;
+      // runEconomicRippleEngine_ runs twice per cycle (Phase 6 + v3Integration, C104 log);
+      // flag prevents duplicate ledger rows on the second pass.
+      if (rlr._ledgered) continue;
+      rlr._ledgered = true;
       recordRipple_(ctx, {
         causeType: 'economic-event',
         causeId: rlr.id,

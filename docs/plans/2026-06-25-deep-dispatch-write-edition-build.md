@@ -88,7 +88,7 @@ Build order: **substrate (engine-sheet) → harness + floor (research-build desi
 
 - **D1 — RESOLVED (S289).** Desks write per-desk (stored + searchable per-desk); collected into the edition envelope at publish; the strongest piece takes front page. Selection at combine-time is Mike's call.
 - **D2 — source-search subagent cap.** Default 3 (proofs used 3); tunable per desk; over-spawn guard.
-- **D3 — RESOLVED (S289): full-edition-by-default, not subset-pilot.** Superseded by the ADR-0012 addendum — Mike is stopping all-desks-parallel outright, not staging a subset pilot first. The original subset recommendation assumed a cost-gated comparison against a preserved baseline; that gate is superseded (see addendum).
+- **D3 — RESOLVED (S289): build-and-test side fork, cutover gated on process-completeness.** An earlier same-session pass at this row said "full-edition-by-default" — corrected. The new fork (working name `/sift-dispatch`, see [[2026-07-03-sift-deep-dispatch-reconcile]]) builds and tests alongside the live `/sift` → `/write-edition` all-desks-parallel path, which stays untouched and keeps publishing. Cutover happens once the fork proves it puts out complete desk editions end-to-end, not on a fixed cycle. The original subset-first instinct was closer to right than the immediate-full-edition reading this row first carried.
 - **D4 — world-summary reconciliation priority.** Surface `engine_anomalies` `cover-as-story` items in `buildWorldSummary.js`. NOT a deep-dispatch prereq (deep desk reaches `engine_anomalies` directly). File as a **parallel engine-sheet fix** benefiting the legacy path + sift-orientation + city-hall. Independent priority.
 
 ## Status log
@@ -104,15 +104,16 @@ Tasks 3–6 shipped as design artifacts (Phase 2 is RB-builds-media-executes; no
 
 Registered same commit (index.md ×2, ROLLOUT state flip to Phase 2 DONE). **Phase 1 (engine-sheet) still UNSTARTED — it blocks the Phase 3 pilot, flagged to engine-sheet for parallel build.** Phase 3 pilot is media, gated on Phase 1.
 
-### S289 — deep-dispatch promoted to default path; cost-gate superseded (Mike-direct, research-build)
+### S289 — deep-dispatch is where editions are headed; built as a side fork off sift, not a default-path flip (Mike-direct, research-build)
 
-Mike's build directive: stop running all desks in parallel — the current run takes over a day before anything is reviewable, and that's the problem being solved. Full addendum in [[../adr/0012-autonomous-deep-dispatch-write-edition]]; summary here:
+Mike's build directive: stop running all desks in parallel is the direction, but this cycle's actual build is a **side skill forking off `/sift`** — the existing `/sift` → `/write-edition` all-desks-parallel path stays untouched and keeps publishing editions while the new fork is built and tested. Full addendum in [[../adr/0012-autonomous-deep-dispatch-write-edition]] (corrected same-session — an earlier pass at this addendum said deep-dispatch supersedes the cost-gate and becomes default now; that overstated it). Summary here:
 
-- **Cost-gate (original Rollout section) superseded**, not deleted from record — Phase 3 cost/depth measurement still runs, but no longer blocks the switch. Wall-clock/focus/pacing is the driver Mike named, not token cost.
+- **Cutover gate is process-completeness, not cost.** Phase 3 cost/depth measurement still rides along, but the actual gate is: the new fork has to be able to put out complete desk editions end-to-end before anything takes over.
 - **D1 resolved:** per-desk write → combine into envelope at publish → strongest piece takes front page.
-- **D3 resolved:** full-edition-by-default, not a subset pilot.
-- **Operating model clarified** (uses the existing skill mechanics, adds no new spawn capability): sift assigns all potential storylines with a per-storyline format tag (feature/interview/dispatch — supplementals stay outside this run); a storyline is written only if it clears a why-this-story test at assignment (write-gate, not a publish-gate) — unwritten assignments still save to the journalist's file/corpus; desks run staggered, tied together by the production log and the spine Mags sets; both LOCKED forks (orchestrator spawns / desk only writes) hold unchanged.
-- **New build item surfaced:** `/sift` v2.0 Step 6's single-slate-lock-before-writing (hard-stop-on-reject cadence cap) needs reconciling against the all-storylines + format-tag + write-gate model — sift needs to emit a ranked, format-tagged assignment set per desk instead of one locked slate. Not yet scoped into tasks; flagged here as the concrete next design item.
+- **D3 resolved:** build-and-test side fork; existing pipeline stays live; cutover gated on the fork proving out, not a fixed cycle.
+- **Operating model** for the new fork (uses the existing deep-dispatch skill mechanics, adds no new spawn capability): a new side skill — working name `/sift-dispatch` — forks off sift's inputs and assigns all potential storylines with a per-storyline format tag (feature/interview/dispatch — supplementals stay outside this run); a storyline is written only if it clears a why-this-story test at assignment (write-gate, not a publish-gate) — unwritten assignments still save to the journalist's file/corpus; desks run staggered within the new fork; both LOCKED forks (orchestrator spawns / desk only writes) hold unchanged. `/sift` itself is NOT edited.
+- **Testing has value before cutover:** the S272 concept proofs (Hal's sports piece, Carmen's civic piece) prove test output from this shape can be canon-worthy on its own, not just a pass/fail signal.
+- **New build item scoped:** [[2026-07-03-sift-deep-dispatch-reconcile]] — the new side-skill plan (scope changed mid-session from "edit `/sift` in place" to "new skill, sift untouched").
 - **Still blocking:** Phase 1 substrate (engine-sheet, unstarted) — the harness runs without it, but the visible-unwritten-assignment / self-knowledge benefit doesn't land until per-desk storage + byline/desk tags exist.
 
 ### research.20 — status (drained from ROLLOUT, 2026-06-26 / S274)

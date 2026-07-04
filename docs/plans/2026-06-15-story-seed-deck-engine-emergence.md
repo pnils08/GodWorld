@@ -264,6 +264,7 @@ the engine says "here are the real stories this cycle, with everything a desk ne
 
 ## Cross-references
 
+- **[[../research/2026-07-04-ripple-attribution-trace]]** — S291 five-domain trace extending this plan's thesis to ripple attribution. Two findings bear directly on this plan: the sports→sentiment chain is a dead write (`applySportsSeason.js:290` — nothing reads `S.sentiment`), so the Phase 3 WHY layer's citywide sports anchor mis-attributes (same class as G-RC5); fix is re-pointing the WHY layer at persisted attribution once the ripple ledger exists.
 - **ENGINE_REPAIR Row 28** — crisis-arc rebuild; same effort, fold here.
 - **engine.33 / [[../archive/plans/2026-06-10-engine33-neighborhood-citizen-loop]]** — `lib/neighborhoodSlice` is the who+numbers source.
 - **`generateBaselineBriefs.js`** — the existing emergence surface to converge with (not duplicate).

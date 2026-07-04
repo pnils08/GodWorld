@@ -88,7 +88,15 @@ only after sandbox verification per task.
   3. Update `RemainingStrength` on the corresponding Ripple_Ledger rows each cycle (or append a decay row — decide by write cost).
   4. **Blast-radius note:** ripples applying for their full 4–20 cycle durations is a real economy/sentiment behavior change. Simulate against C99/C100 snapshots before deploy; deploy alone in a clean window; smoke = ripple carried across one live cycle with sane magnitudes.
 - **Verify:** acceptance criterion 2; `economicMood` trajectory across two cycles shows decayed carryover, magnitudes within historical bands.
-- **Status:** [ ] not started
+- **Status:** [x] **verified on sandbox** (S293): C106 first cycle on T2 code (boundary cycle — C105's
+  pre-T2 snapshot had nothing to carry; expected). C107 seeded (sports playoffs feed + INIT-T107 vote +
+  edition ratings) birthed PLAYOFF_SPENDING_107 (dur 3) + Temescal Night Market initiative ripple
+  (economic, dur 15). C108 clean run: `restoreCarriedRipples_: carried 1 economic + 1 initiative`,
+  carryover rows landed — PLAYOFF_SPENDING RemainingStrength 6.4 (= 9.6 × 2/3, exact), initiative 0.95
+  (= 1 × (1 − 0.8/15)), `prevMigration=3` (migration→mood loop alive first time), mood 50→50.14,
+  0 engine errors, snapshot 4854 bytes. Node round-trip test (28 asserts) drives the real decay code:
+  `phase09-digest/finalizeCycleState.test.js`. **Production clasp push pending** — rides with T1
+  behind C101 smoke, single deploy window.
 
 ### Task 3 — Dead/hollow coupling repairs (independent, bounded items — each its own deploy)
 
@@ -158,3 +166,11 @@ applies to any domain before its writers are instrumented.
   4cda513c/87a093dc. Sandbox bound-script deploy route established (clasp push from temp dir
   to sandbox Script ID — production untouched). Sandbox C104 organic + C105 seeded runs green;
   acceptance criterion 1 met on sandbox. Production push held behind C101 smoke.
+- 2026-07-04 — **Task 2 built + sandbox-verified (S293), commit cf1c2997.** Serializer canon
+  settled: finalizeCycleState_ + savePreviousCycleState_ (PropertiesService), not
+  applyShockMonitor. Snapshot carries compacted active ripples (12+12 cap, explicit field copy
+  strips per-cycle ledger guards) + migrationDrift/factors; restoreCarriedRipples_ seeds the
+  live arrays at Phase1-PrevCycleState. Ledger decay tracking decided as append-only
+  'carryover' rows (join key CauseId) over cell-update. Acceptance criterion 2 met on sandbox
+  C106→C108 (see Task 2 status). C105 approval-rows=0 open item resolved by observation:
+  C106/C107 both wrote 6 approval rows — C105 zero was the net-zero offset hypothesis, closed.

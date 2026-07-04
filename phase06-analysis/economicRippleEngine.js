@@ -178,19 +178,33 @@ function runEconomicRippleEngine_(ctx) {
 
   // 4b. engine.45 T1: persist attribution rows for ripples born this cycle — the ripple
   // object (type/impact/hood/source/duration) evaporated at cycle end (trace E1).
+  // engine.45 T2: ripples restored from the cycle snapshot (startCycle < currentCycle)
+  // get a 'carryover' row instead, so the ledger shows decayed-but-alive state each
+  // cycle a ripple persists. Join key back to the birth row is CauseId.
   if (typeof recordRipple_ === 'function') {
     for (var rli = 0; rli < S.economicRipples.length; rli++) {
       var rlr = S.economicRipples[rli];
-      if (!rlr || rlr.startCycle !== currentCycle) continue;
-      // runEconomicRippleEngine_ runs twice per cycle (Phase 6 + v3Integration, C104 log);
-      // flag prevents duplicate ledger rows on the second pass.
-      if (rlr._ledgered) continue;
-      rlr._ledgered = true;
+      if (!rlr) continue;
+      var isCarried = rlr.startCycle < currentCycle;
+      // runEconomicRippleEngine_ runs twice per cycle (Phase 6 + v3Integration, C104 log).
+      // Birth guard is a boolean (object dies if never carried); carryover guard is
+      // cycle-valued so it re-arms each cycle the ripple survives.
+      if (isCarried) {
+        if (rlr._carryLedgered === currentCycle) continue;
+        rlr._carryLedgered = currentCycle;
+      } else {
+        if (rlr._ledgered) continue;
+        rlr._ledgered = true;
+      }
       recordRipple_(ctx, {
         causeType: 'economic-event',
         causeId: rlr.id,
-        causeDetail: rlr.source || '',
-        effectType: 'sector-impact:' + ((rlr.sectors || []).join('/')),
+        causeDetail: isCarried
+          ? ('carryover: cycle ' + (currentCycle - rlr.startCycle) + ' of ' + (rlr.endCycle - rlr.startCycle))
+          : (rlr.source || ''),
+        effectType: isCarried
+          ? 'carryover'
+          : ('sector-impact:' + ((rlr.sectors || []).join('/'))),
         targetScope: rlr.primaryNeighborhood ? 'neighborhood' : 'citywide',
         targetIds: rlr.primaryNeighborhood ? [rlr.primaryNeighborhood] : (rlr.neighborhoods || []),
         neighborhood: rlr.primaryNeighborhood || '',
@@ -966,3 +980,10 @@ function generateEconomicSummary_(ctx) {
  *
  * ============================================================================
  */
+// Dual-use module guard for the Node round-trip test (claspignored *.test.js).
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    createRipple_: createRipple_,
+    processActiveRipples_: processActiveRipples_
+  };
+}

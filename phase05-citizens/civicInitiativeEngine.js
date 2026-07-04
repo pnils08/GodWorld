@@ -1693,6 +1693,30 @@ function applyActiveInitiativeRipples_(ctx) {
     var decayFactor = 1.0 - (cyclesActive / ripple.duration) * 0.8;
     if (decayFactor < 0.2) decayFactor = 0.2;
 
+    // engine.45 T2: carried ripples (restored from the cycle snapshot) get a
+    // 'carryover' ledger row each surviving cycle — decayed-but-alive state,
+    // joined to the birth row by CauseId (initiativeName). Cycle-valued guard
+    // re-arms across cycles and dedups any same-execution rerun.
+    if (cyclesActive > 0 && typeof recordRipple_ === 'function' &&
+        ripple._carryLedgered !== cycle) {
+      ripple._carryLedgered = cycle;
+      var baseStrength = (typeof ripple.strength === 'number') ? ripple.strength : 1;
+      recordRipple_(ctx, {
+        causeType: 'initiative',
+        causeId: ripple.initiativeName,
+        causeDetail: 'carryover: cycle ' + cyclesActive + ' of ' + ripple.duration,
+        effectType: 'carryover',
+        targetScope: (ripple.affectedNeighborhoods && ripple.affectedNeighborhoods.length) ? 'neighborhood' : 'citywide',
+        targetIds: ripple.affectedNeighborhoods || [],
+        neighborhood: (ripple.affectedNeighborhoods && ripple.affectedNeighborhoods[0]) || '',
+        magnitude: baseStrength,
+        duration: ripple.duration,
+        remainingStrength: Math.round(baseStrength * decayFactor * 100) / 100,
+        cycle: cycle,
+        sourceEngine: 'civicInitiativeEngine.applyActiveInitiativeRipples_'
+      });
+    }
+
     // Apply effects to city dynamics
     var dynamics = S.cityDynamics || {};
     var effects = ripple.effects || {};
@@ -2669,3 +2693,9 @@ function generateOverrideStoryHook_(ctx, name, overrideResult, mayorName) {
  *
  * ============================================================================
  */
+// Dual-use module guard for the Node round-trip test (claspignored *.test.js).
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    applyActiveInitiativeRipples_: applyActiveInitiativeRipples_
+  };
+}

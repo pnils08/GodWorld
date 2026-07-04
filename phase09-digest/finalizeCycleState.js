@@ -97,6 +97,17 @@ function finalizeCycleState_(ctx) {
     domainPresence: S.domainPresence || null,
     dominantDomain: S.dominantDomain || null,
 
+    // v1.5 (engine.45 T2): active ripples survive the cycle boundary — the decay/
+    // expiry code in processActiveRipples_/applyActiveInitiativeRipples_ was
+    // unreachable because these arrays died with ctx every cycle (traces E1/E2/C2).
+    economicRipples: compactEconomicRipples_(S.economicRipples, cycle),
+    initiativeRipples: compactInitiativeRipples_(S.initiativeRipples, cycle),
+
+    // v1.5 (engine.45 T2): migration→mood loop — economicRippleEngine reads
+    // previousCycleState.migrationDrift, which was never serialized (always 0).
+    migrationDrift: (typeof S.migrationDrift === 'number') ? S.migrationDrift : 0,
+    migrationDriftFactors: (S.migrationDriftFactors || []).slice(0, 5),
+
   };
 
   // This is what downstream scripts read next cycle
@@ -297,6 +308,123 @@ function compactNeighborhoodDynamics_(nd) {
     };
   }
   return compact;
+}
+
+
+/**
+ * ============================================================================
+ * v1.5 (engine.45 T2): RIPPLE COMPACTORS
+ * ============================================================================
+ *
+ * Bounded accumulators — active-only, strongest-first, hard caps — so the
+ * PropertiesService payload stays well under the 9KB per-property limit
+ * (pre-T2 snapshot ~400-800 bytes; worst case with both caps hit ~5KB).
+ * Explicit field copy also strips transient flags (_ledgered, _carryLedgered)
+ * so per-cycle ledger dedup guards reset naturally at the boundary.
+ */
+
+var SNAPSHOT_ECON_RIPPLE_CAP = 12;
+var SNAPSHOT_INIT_RIPPLE_CAP = 12;
+
+/**
+ * Trim active economic ripples for carry-forward. Keeps every field the
+ * next-cycle consumers read: processActiveRipples_ (startCycle/endCycle/impact/
+ * currentStrength), calculateNeighborhoodEconomies_ (neighborhoods/
+ * primaryNeighborhood/currentStrength), applyMigrationDrift (impact sign),
+ * createRipple_ dedup (id), T1 ledger loop (id/source/sectors).
+ */
+function compactEconomicRipples_(ripples, cycle) {
+  if (!Array.isArray(ripples)) return [];
+  var active = [];
+  for (var i = 0; i < ripples.length; i++) {
+    var r = ripples[i];
+    if (!r || typeof r.endCycle !== 'number') continue;
+    if (r.endCycle <= cycle) continue;
+    active.push(r);
+  }
+  active.sort(function(a, b) {
+    return Math.abs(b.currentStrength || 0) - Math.abs(a.currentStrength || 0);
+  });
+  if (active.length > SNAPSHOT_ECON_RIPPLE_CAP) {
+    if (typeof Logger !== 'undefined') {
+      Logger.log('compactEconomicRipples_: capped ' + active.length + ' → ' +
+        SNAPSHOT_ECON_RIPPLE_CAP + ' (weakest dropped)');
+    }
+    active = active.slice(0, SNAPSHOT_ECON_RIPPLE_CAP);
+  }
+  var out = [];
+  for (var j = 0; j < active.length; j++) {
+    var a = active[j];
+    out.push({
+      id: a.id,
+      type: a.type,
+      impact: a.impact,
+      sectors: a.sectors || [],
+      neighborhoods: a.neighborhoods || [],
+      primaryNeighborhood: a.primaryNeighborhood || '',
+      startCycle: a.startCycle,
+      endCycle: a.endCycle,
+      currentStrength: a.currentStrength,
+      source: String(a.source || 'System').slice(0, 80)
+    });
+  }
+  return out;
+}
+
+/**
+ * Trim active initiative ripples for carry-forward. Keeps every field
+ * applyActiveInitiativeRipples_ reads (status/startCycle/endCycle/duration/
+ * effects/initiativeName/rippleType/affectedNeighborhoods) plus direction/
+ * strength for carryover ledger magnitude.
+ */
+function compactInitiativeRipples_(ripples, cycle) {
+  if (!Array.isArray(ripples)) return [];
+  var active = [];
+  for (var i = 0; i < ripples.length; i++) {
+    var r = ripples[i];
+    if (!r || typeof r.endCycle !== 'number') continue;
+    if (r.endCycle <= cycle) continue;
+    if (r.status === 'expired' || r.status === 'completed') continue;
+    active.push(r);
+  }
+  active.sort(function(a, b) {
+    return Math.abs(b.strength || 0) - Math.abs(a.strength || 0);
+  });
+  if (active.length > SNAPSHOT_INIT_RIPPLE_CAP) {
+    if (typeof Logger !== 'undefined') {
+      Logger.log('compactInitiativeRipples_: capped ' + active.length + ' → ' +
+        SNAPSHOT_INIT_RIPPLE_CAP + ' (weakest dropped)');
+    }
+    active = active.slice(0, SNAPSHOT_INIT_RIPPLE_CAP);
+  }
+  var out = [];
+  for (var j = 0; j < active.length; j++) {
+    var a = active[j];
+    out.push({
+      initiativeName: a.initiativeName,
+      rippleType: a.rippleType,
+      direction: a.direction,
+      strength: a.strength,
+      effects: a.effects || {},
+      affectedNeighborhoods: a.affectedNeighborhoods || [],
+      startCycle: a.startCycle,
+      duration: a.duration,
+      endCycle: a.endCycle,
+      status: 'active'
+    });
+  }
+  return out;
+}
+
+// Dual-use module guard for the Node round-trip test (claspignored *.test.js).
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    finalizeCycleState_: finalizeCycleState_,
+    compactEconomicRipples_: compactEconomicRipples_,
+    compactInitiativeRipples_: compactInitiativeRipples_,
+    SNAPSHOT_ECON_RIPPLE_CAP: SNAPSHOT_ECON_RIPPLE_CAP,
+    SNAPSHOT_INIT_RIPPLE_CAP: SNAPSHOT_INIT_RIPPLE_CAP
+  };
 }
 
 

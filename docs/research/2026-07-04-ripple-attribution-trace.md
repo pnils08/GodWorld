@@ -8,6 +8,8 @@ sources:
   - "Mike S291 (2026-07-04) — 'the engine is the world and holds all the truth … it's backwards to ask an LLM to find that over the source that contains it. The seeds are the top priority. Every story ever covered is covering the event and a reaction in the moment; none cover the ripple effect of who's affected and how — the real story of the city.'"
   - "Five parallel read-only code traces (S291, engine-sheet): civic initiatives, crime/chaos, economy, sports, citizen-event persistence. Each grounded in ENGINE_TRUTH_MAP + ENGINE_COUPLING_MAP + ENGINE_STUB_MAP, then verified against code. All file:line citations below come from those traces."
 pointers:
+  - "[[ripple-traces/TEMPLATE|docs/research/ripple-traces/]] — the raw per-domain traces this synthesizes, preserved verbatim (economy, sports, civic-initiatives, crime-chaos, citizen-event-persistence) + the TEMPLATE for tracing the remaining domains"
+  - "[[../plans/2026-07-04-ripple-ledger-attribution]] — the plan this research produced (engine.45)"
   - "[[../plans/2026-06-15-story-seed-deck-engine-emergence]] — engine.35, the substrate this extends (built Phases 0–3, Phase 5 spec'd/gated)"
   - "[[../plans/2026-07-03-sift-deep-dispatch-reconcile]] — the consumption-side sibling (research-build); this work is the producer side that feeds it"
   - "[[../engine/ENGINE_COUPLING_MAP]] — behavioral map; §M6 correction below updates its L242 TODO"

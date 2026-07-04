@@ -35,6 +35,12 @@ sift-dispatch fork later — that consumption seam is theirs, the producer side 
 behavior. One unverified change in flight at a time; nothing new rides a cycle that is itself a
 smoke test (C101 is already carrying the S289 window smoke — engine.45 code does NOT ride C101).
 
+**Test base (Mike S291):** the **Sandbox Simulation Ledger** — current with all deploys, sitting
+at **C103**. Build and test engine.45 there: Task 1 instrumentation dry-runs, Task 2 ripple-
+carryover simulation, Task 3 before/after comparisons, and Task 4/5 slice generation all run
+against sandbox cycles before anything touches the production spreadsheet. Production deploys
+only after sandbox verification per task.
+
 **Acceptance criteria:**
 1. After an instrumented cycle, `Ripple_Ledger` rows let a reader reconstruct "cause X →
    effect Y on targets Z, magnitude M, duration D" for every instrumented domain — no ctx

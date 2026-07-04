@@ -41,6 +41,41 @@ carryover simulation, Task 3 before/after comparisons, and Task 4/5 slice genera
 against sandbox cycles before anything touches the production spreadsheet. Production deploys
 only after sandbox verification per task.
 
+**Sandbox identity + deploy route (explicit — this sheet, nothing else):**
+- Spreadsheet: `SANDBOX_Simulation_Narrative_SANDBOX_0702`, ID
+  `1syShVWfudY0eCC9rnR7AWZ8-b-fs5RpJW2bhn6nZtzs`. Bound Apps Script ID
+  `1bT3o5r6adZhSv20pa0ijoHv_HdeEbONtBT2bsw_8U-sHbWgyJz94ueIW`.
+- Deploy: copy repo to a temp dir, drop a `.clasp.json` with the sandbox Script ID +
+  the project `.claspignore`, `npx clasp push -f`. Production `.clasp.json` at repo
+  root is never touched. Cycle runs are Mike-fired from the sheet; execution logs come
+  back as Drive links.
+- All reads/writes from this terminal go through the service account
+  (`lib/sheets.js`) with the env override: `GODWORLD_SHEET_ID=<sandbox ID> node …`.
+  Without the override, lib/sheets.js resolves to PRODUCTION — check the ID before
+  any write.
+
+**Dummy data is required to truly test — organic cycles prove nothing here (S293 C106).**
+The engine's event pathways are gated on operator-entered state by design: the sports feed's
+`SeasonType` column tells the engine the season (Mike's manual entries are the season
+authority — the engine's sports output is atmospheric); votes fire only when a tracker row
+schedules them; edition effects need prior-cycle ratings. A clean cycle with no seeds births
+zero ripples (C106: `ripples=0`) and therefore exercises none of the attribution or carryover
+machinery. Every verification cycle needs a seeded birth cycle in front of it.
+
+**Seed method (proven C105/C107):** append rows via `lib/sheets.js appendRows()` under the
+sandbox env override, tag every row `(SANDBOX TEST)`, read back after writing. Shapes:
+
+| Tab | Seed shape | Births |
+|---|---|---|
+| `Oakland_Sports_Feed` | row at target cycle, `SeasonType=playoffs`, `EventType=game-result`, streak/mood/neighborhood filled (copy a C105/C107 row) | sports sentiment + hood effect rows; `S.sportsSeason='playoffs'` → `PLAYOFF_SPENDING_<N>` (dur 3) |
+| `Initiative_Tracker` | row `Type=vote`, `Status=pending-vote`, `VoteCycle=<target cycle>`, AffectedNeighborhoods + PolicyDomain set (28 cols — copy INIT-T105/T107) | council vote fires at that cycle; passage births a multi-cycle initiative ripple (safety=8, economic=15 cycles) |
+| `Edition_Coverage_Ratings` | rows at cycle **N−1**, `Processed=FALSE` | edition-coverage sentiment + neighborhood effects at cycle N |
+| gentrification / migration | no seed — West Oakland `Neighborhood_Map` state persists and fires hooks every cycle | gentrification + MASS_EXODUS rows |
+
+Multi-cycle verification pattern: seed cycle N (births) → run N → run **N+1 clean** →
+carryover rows in Ripple_Ledger with decayed `RemainingStrength` are the proof (T2: C107
+seeded, C108 clean, PLAYOFF_SPENDING 9.6 → 6.4 exact).
+
 **Acceptance criteria:**
 1. After an instrumented cycle, `Ripple_Ledger` rows let a reader reconstruct "cause X →
    effect Y on targets Z, magnitude M, duration D" for every instrumented domain — no ctx

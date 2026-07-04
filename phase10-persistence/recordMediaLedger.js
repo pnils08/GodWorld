@@ -57,7 +57,7 @@ function recordMediaLedger_(ctx) {
 
   // Build all rows
   var rows = [];
-  var now = new Date();
+  var now = inWorldStamp_(ctx); // S290 in-world, not wall-clock (engine.44)
 
   for (var e = 0; e < entries.length; e++) {
     var entry = entries[e];

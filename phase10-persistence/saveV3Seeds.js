@@ -91,7 +91,7 @@ function saveV3Seeds_(ctx) {
 
   var S = ctx.summary;
   var cycle = ctx.config.cycleCount || S.cycleId;
-  var now = ctx.now || new Date();
+  var now = inWorldStamp_(ctx); // S290 in-world, not wall-clock (engine.44)
 
   // Build rows
   var rows = [];

@@ -63,7 +63,7 @@ function saveV3ArcsToLedger_(ctx) {
 
   var S = ctx.summary;
   var cycle = ctx.config.cycleCount || S.cycleId;
-  var now = ctx.now || new Date();
+  var now = inWorldStamp_(ctx); // S290 in-world, not wall-clock (engine.44)
 
   // v3.2: Get current calendar context
   var holiday = S.holiday || 'none';

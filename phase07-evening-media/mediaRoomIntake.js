@@ -188,7 +188,8 @@ function getCurrentCalendarContext_(ctx) {
     isFirstFriday: false,
     isCreationDay: false,
     sportsSeason: 'off-season',
-    month: 0
+    month: 0,
+    simYear: 0
   };
 
   try {
@@ -201,7 +202,8 @@ function getCurrentCalendarContext_(ctx) {
       isFirstFriday: !!S.isFirstFriday,
       isCreationDay: !!S.isCreationDay,
       sportsSeason: S.sportsSeason || defaults.sportsSeason,
-      month: Number(S.simMonth || S.month) || defaults.month
+      month: Number(S.simMonth || S.month) || defaults.month,
+      simYear: Number(S.simYear) || defaults.simYear
     };
 
   } catch (e) {
@@ -383,7 +385,7 @@ function processStorylineIntake_(ss, cycle, cal) {
 
   // --- Add new storylines ---
   if (newStorylines.length > 0) {
-    var now = new Date();
+    var now = 'C' + cycle; // S290 in-world, not wall-clock (engine.44)
     var rows = [];
     for (var j = 0; j < newStorylines.length; j++) {
       var s = newStorylines[j];
@@ -451,7 +453,7 @@ function processCitizenUsageIntake_(ss, cycle, cal) {
 
   // Write to Citizen_Media_Usage (v2.1: 12 columns with calendar)
   var usageSheet = ensureCitizenMediaUsage_(ss);
-  var now = new Date();
+  var now = 'C' + cycle; // S290 in-world, not wall-clock (engine.44)
 
   var rows = [];
   for (var j = 0; j < usages.length; j++) {
@@ -848,7 +850,7 @@ function logCulturalMention_(ss, cycle, journalist, entityName, cal) {
   cal = cal || { season: '', holiday: 'none', holidayPriority: 'none', isFirstFriday: false, isCreationDay: false, sportsSeason: 'off-season', month: 0 };
 
   mediaSheet.appendRow([
-    new Date(), cycle, journalist, entityName,
+    'C' + cycle, cycle, journalist, entityName,
     entityData.fameCategory || '', entityData.domain || '',
     entityData.fameScore || '', entityData.trend || '',
     entityData.spread || '', entityData.tier || '',
@@ -1342,8 +1344,8 @@ function processQuotedCitizens_(ss, entries, ledgerData, cycle, cal, results) {
     // Calculate birth year from age if provided
     var birthYear = '';
     if (citizen.age) {
-      var currentYear = cal && cal.month ? new Date().getFullYear() : 2026;
-      birthYear = currentYear - parseInt(citizen.age, 10);
+      // S290: age anchors to sim year (age = simYear - birthYear); unknown sim year -> blank, never the real-world clock
+      birthYear = cal && cal.simYear ? cal.simYear - parseInt(citizen.age, 10) : '';
     }
 
     if (exists) {
@@ -1367,7 +1369,7 @@ function processQuotedCitizens_(ss, entries, ledgerData, cycle, cal, results) {
       // Log quote to LifeHistory_Log
       if (logSheet && citizen.context) {
         logSheet.appendRow([
-          new Date(),               // A: Timestamp
+          'C' + cycle,             // A: Timestamp (S290 in-world)
           exists.popId,             // B: POPID
           '',                       // C: Name (deprecated)
           'Quoted',                 // D: EventTag
@@ -1406,7 +1408,7 @@ function processQuotedCitizens_(ss, entries, ledgerData, cycle, cal, results) {
       // Log quote to LifeHistory_Log (new citizen, no POPID yet)
       if (logSheet && citizen.context) {
         logSheet.appendRow([
-          new Date(),
+          'C' + cycle,
           '',                       // No POPID yet
           '',                       // Name (deprecated)
           'Quoted',

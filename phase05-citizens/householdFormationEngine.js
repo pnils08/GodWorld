@@ -365,8 +365,8 @@ function formNewHouseholds_(ctx, citizens, existingHouseholds, cycle, rng) {
       formedCycle: cycle,
       dissolvedCycle: '',
       status: 'active',
-      createdAt: new Date(),
-      lastUpdated: new Date()
+      createdAt: inWorldStamp_(ctx), // S290 in-world, not wall-clock
+      lastUpdated: inWorldStamp_(ctx)
     };
 
     // Append to Household_Ledger (own tracking sheet — stays direct)

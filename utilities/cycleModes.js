@@ -217,7 +217,7 @@ function saveCycleSeed_(ctx) {
   var row = [
     cycleId,
     seed,
-    ctx.now || new Date(),
+    inWorldStamp_(ctx), // S290 in-world, not wall-clock
     S.weather ? S.weather.type : '',
     S.holiday || 'none',
     S.worldEvents ? S.worldEvents.length : 0,

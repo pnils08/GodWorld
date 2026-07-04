@@ -537,7 +537,7 @@ function seedToRow(s, cycle, now) {
 
 async function applyToDeck(result, opts) {
   const { cycle, seeds } = result;
-  const now = new Date();
+  const now = 'C' + cycle; // S290 in-world, not wall-clock (engine.44)
   const data = await getRawSheetData(DECK_SHEET);
   const header = data[0] || [];
   const iCycle = header.indexOf('Cycle');

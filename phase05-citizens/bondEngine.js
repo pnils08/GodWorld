@@ -1424,7 +1424,7 @@ function saveV3BondsToLedger_(ctx) {
   var sheet = ensureSheet_(ss, 'Relationship_Bond_Ledger', headers);
 
   var cycle = ctx.config.cycleCount || ctx.summary.cycleId || 0;
-  var now = ctx.now || new Date();
+  var now = inWorldStamp_(ctx); // S290 in-world, not wall-clock (engine.44)
 
   // v2.2: Calendar context
   var cal = ctx.bondCalendarContext || {};

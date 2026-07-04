@@ -89,7 +89,7 @@ function saveV3Domains_(ctx) {
   // Pull context data
   var S = ctx.summary || {};
   var cycle = ctx.config.cycleCount || S.cycleId || 0;
-  var now = ctx.now || new Date();
+  var now = inWorldStamp_(ctx); // S290 in-world, not wall-clock (engine.44)
 
   // v3.3: Calendar context
   var holiday = S.holiday || 'none';

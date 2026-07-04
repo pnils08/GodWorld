@@ -98,7 +98,7 @@ function recordCycleWeather_(ctx) {
     alerts.join(', '),                          // Alerts
     tracking.currentStreak || 1,                // Streak
     tracking.streakType || weather.type,        // StreakType
-    ctx.now || new Date()                       // Timestamp (native Date for Sheets)
+    inWorldStamp_(ctx)                       // Timestamp (native Date for Sheets)
   ];
 
   // Queue append intent

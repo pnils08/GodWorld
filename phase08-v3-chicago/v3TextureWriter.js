@@ -49,7 +49,7 @@ function saveV3Textures_(ctx) {
   var sheet = ensureSheet_(ss, 'Texture_Trigger_Log', headers);
 
   var cycle = (ctx.config && ctx.config.cycleCount) || (ctx.summary && ctx.summary.cycleId) || 0;
-  var now = ctx.now || new Date();
+  var now = inWorldStamp_(ctx); // S290 in-world, not wall-clock (engine.44)
 
   // Intensity normalization helper
   function normalizeIntensity(x) {

@@ -795,7 +795,7 @@ function loadCulturalEntities_(cache) {
 function buildHandoffHeader_(cycle) {
   var lines = [];
   lines.push('CYCLE HANDOFF — CYCLE ' + cycle);
-  lines.push('Compiled: ' + new Date().toISOString());
+  lines.push('Compiled: C' + cycle); // S290 in-world
   lines.push('Generator: compileHandoff v1.0');
   lines.push('');
   return lines.join('\n');
@@ -1803,7 +1803,7 @@ function writeHandoffSheet_(ss, cycle, handoffText) {
 
   var startRow = Math.max(sheet.getLastRow() + 1, 2);
   sheet.getRange(startRow, 1, 1, 3).setValues([
-    [new Date(), cycle, "'" + handoffText]
+    ['C' + cycle, cycle, "'" + handoffText]
   ]);
 
   Logger.log('writeHandoffSheet_: Written to row ' + startRow);

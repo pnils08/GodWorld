@@ -144,7 +144,7 @@ function saveV3NeighborhoodMap_(ctx) {
   var cycle = (ctx.config && typeof ctx.config.cycleCount !== 'undefined')
     ? ctx.config.cycleCount
     : (S.cycleId || 0);
-  var now = ctx.now || new Date();
+  var now = inWorldStamp_(ctx); // S290 in-world, not wall-clock (engine.44)
 
   // Calendar context
   var holiday = S.holiday || 'none';

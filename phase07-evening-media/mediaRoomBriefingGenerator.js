@@ -131,7 +131,7 @@ function generateMediaBriefing_(ctx) {
   
   briefing.push('================================================================================');
   briefing.push('MEDIA ROOM BRIEFING — CYCLE ' + cycle);
-  briefing.push('Generated: ' + new Date().toLocaleString());
+  briefing.push('Generated: ' + inWorldStamp_(ctx)); // S290 in-world
   // v2.1: Calendar header
   if (cal.holiday !== 'none') {
     briefing.push('🎉 HOLIDAY: ' + cal.holiday + ' (' + cal.holidayPriority + ' priority)');
@@ -855,7 +855,7 @@ function generateMediaBriefing_(ctx) {
     }
     
     // v2.1.1 FIX: Prefix with ' to prevent #ERROR from = signs
-    sheet.appendRow([new Date(), cycle, cal.holiday, cal.holidayPriority, cal.sportsSeason, civic.electionWindow, "'" + output]);
+    sheet.appendRow([inWorldStamp_(ctx), cycle, cal.holiday, cal.holidayPriority, cal.sportsSeason, civic.electionWindow, "'" + output]);
     Logger.log('generateMediaBriefing_ v2.5: Briefing generated for Cycle ' + cycle + ' | Holiday: ' + cal.holiday + ' | Election: ' + civic.electionWindow);
     
   } catch (e) {

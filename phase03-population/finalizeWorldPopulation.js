@@ -201,7 +201,7 @@ function finalizeWorldPopulation_(ctx) {
   // -------------------------------------------------------------------------
   
   if (idx('timestamp') >= 0) {
-    queueCellIntent_(ctx, 'World_Population', dataRow, idx('timestamp') + 1, ctx.now || new Date(), 'finalize: timestamp', 'world');
+    queueCellIntent_(ctx, 'World_Population', dataRow, idx('timestamp') + 1, inWorldStamp_(ctx), 'finalize: timestamp', 'world');
   }
 
   Logger.log('finalizeWorldPopulation_ v1.3: Queued intents for Cycle ' + (S.cycleId || 'unknown') +

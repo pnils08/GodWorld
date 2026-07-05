@@ -68,6 +68,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.44 | Sheet-walk audit triage — 36 findings, 5 fix-classes | ready | engine-sheet | [[../plans/2026-07-03-sheet-walk-audit-triage]] (Mike-direct 2026-07-03) |
 | engine.45 | Ripple ledger + per-desk slices — persist cause→effect, hand desks the truth | ready | engine-sheet | [[../plans/2026-07-04-ripple-ledger-attribution]] (Mike-direct 2026-07-04; trace base: docs/research/ripple-traces/) |
 | engine.46 | Deep-dispatch Phase 1 substrate — reactivate per-desk corpus storage + byline/desk ingest tags; blocks the research.20 Phase 3 pilot | ready | engine-sheet | [[../plans/2026-06-25-deep-dispatch-write-edition-build]] §Phase 1 (Tasks 1-2) |
+| engine.47 | Game-night connection design — one game traced through 10 hops (citizens/households/bars/neighborhoods/carry), gaps close in 4 existing engines | draft — awaiting Mike approval (S296 moratorium gate) | engine-sheet | [[../plans/2026-07-05-game-night-connection-design]] |
 
 ### canon.* — World-fidelity layer
 

@@ -28,18 +28,19 @@
 var SEED_DECK_HEADERS = [
   'Cycle',          // A  engine cycle
   'SeedID',         // B  deterministic id
-  'Class',          // C  major | texture (promotion rule, sign-aware)
-  'Domain',         // D  CIVIC / ECONOMIC / SAFETY / SPORTS / COMMUNITY / GENERAL
-  'Neighborhood',   // E  where (or Citywide)
-  'What',           // F  the event, engine's real numbers
-  'Why',            // G  the cause the engine applied when it computed the effect
-  'Citizens',       // H  exact POPIDs + names the engine touched
-  'CitizenEvents',  // I  those citizens' actual event lines from this cycle
-  'Businesses',     // J  exact business entities affected
-  'OtherEntities',  // K  cultural events / shows / famous people / venues
-  'Magnitude',      // L  size, signed
-  'Trend',          // M  single-cycle / carrying + strength remaining
-  'CycleStamp'      // N  in-world Y{n}C{m} stamp
+  'Desk',           // C  v4.1 — which desk's packet this row is (letters desk also reads any row with Citizens)
+  'Class',          // D  major | texture (promotion rule, sign-aware)
+  'Domain',         // E  CIVIC / ECONOMIC / SAFETY / SPORTS / COMMUNITY / GENERAL
+  'Neighborhood',   // F  where (or Citywide)
+  'What',           // G  the event, engine's real numbers
+  'Why',            // H  the cause the engine applied when it computed the effect
+  'Citizens',       // I  exact POPIDs + names the engine touched
+  'CitizenEvents',  // J  those citizens' actual event lines from this cycle
+  'Businesses',     // K  exact business entities affected
+  'OtherEntities',  // L  cultural events / shows / famous people / venues
+  'Magnitude',      // M  size, signed
+  'Trend',          // N  single-cycle / carrying + strength remaining
+  'CycleStamp'      // O  in-world Y{n}C{m} stamp
 ];
 
 /**
@@ -56,7 +57,8 @@ function migrateSeedDeckV4_(ss) {
     if (!sheet) return; // fresh spreadsheet — ensureSheet_ creates v4 directly
     if (sheet.getLastRow() < 1 || sheet.getLastColumn() < 1) return;
     var first = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-    if (String(first[0]) === 'Cycle' && String(first[2]) === 'Class') return; // already v4
+    if (String(first[0]) === 'Cycle' && String(first[2]) === 'Desk') return; // already v4.1
+    // v4.0 (no Desk col) and v3.x both park; v4.1 re-creates with current headers.
     var base = 'Story_Seed_Deck_v3_legacy';
     var name = base;
     var n = 2;
@@ -94,18 +96,19 @@ function saveV3Seeds_(ctx) {
     rows.push([
       cycle,                    // A  Cycle
       s.seedId || '',           // B  SeedID
-      s.seedClass || 'texture', // C  Class
-      s.domain || 'GENERAL',    // D  Domain
-      s.neighborhood || '',     // E  Neighborhood
-      s.what || '',             // F  What
-      s.why || '',              // G  Why
-      s.citizens || '',         // H  Citizens
-      s.citizenEvents || '',    // I  CitizenEvents
-      s.businesses || '',       // J  Businesses
-      s.otherEntities || '',    // K  OtherEntities
-      (s.magnitude === undefined || s.magnitude === null) ? '' : s.magnitude, // L  Magnitude
-      s.trend || '',            // M  Trend
-      stamp                     // N  CycleStamp
+      s.desk || 'civic',        // C  Desk (v4.1)
+      s.seedClass || 'texture', // D  Class
+      s.domain || 'GENERAL',    // E  Domain
+      s.neighborhood || '',     // F  Neighborhood
+      s.what || '',             // G  What
+      s.why || '',              // H  Why
+      s.citizens || '',         // I  Citizens
+      s.citizenEvents || '',    // J  CitizenEvents
+      s.businesses || '',       // K  Businesses
+      s.otherEntities || '',    // L  OtherEntities
+      (s.magnitude === undefined || s.magnitude === null) ? '' : s.magnitude, // M  Magnitude
+      s.trend || '',            // N  Trend
+      stamp                     // O  CycleStamp
     ]);
   }
 

@@ -38,6 +38,18 @@ var CONTRACT_SEED_DOMAIN = {
   'crime': 'SAFETY'
 };
 
+// Desk routing (T4 purpose, in-sheet): which desk's packet this row belongs to.
+// Letters desk additionally reads ANY row with a non-empty Citizens column —
+// its writers are the named citizens, no separate slice needed.
+var CONTRACT_SEED_DESK = {
+  'CIVIC': 'civic',
+  'SAFETY': 'civic',
+  'ECONOMIC': 'business',
+  'SPORTS': 'sports',
+  'COMMUNITY': 'culture',
+  'GENERAL': 'civic'
+};
+
 function contractSeedHash_(input) {
   // Deterministic short id — same shape as computeShortHash_ but self-contained
   // so the Node test doesn't need the engine core loaded.
@@ -238,10 +250,12 @@ function buildContractSeeds_(ctx) {
     var isMajor = contractSeedIsMajor_(totalMag, group.length);
     if (isMajor) majorCount++; else textureCount++;
 
+    var seedDomain = CONTRACT_SEED_DOMAIN[lead.causeType] || 'GENERAL';
     seeds.push({
       seedId: contractSeedHash_(cycle + '|' + order[k] + '|' + lead.causeId),
       cycle: cycle,
-      domain: CONTRACT_SEED_DOMAIN[lead.causeType] || 'GENERAL',
+      desk: CONTRACT_SEED_DESK[seedDomain] || 'civic',
+      domain: seedDomain,
       neighborhood: lead.neighborhood || 'Citywide',
       what: (lead.effectType || lead.causeType) +
             (totalMag ? ' ' + (totalMag > 0 ? '+' : '') + (Math.round(totalMag * 100) / 100) : '') +

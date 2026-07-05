@@ -24,6 +24,8 @@ Two people build this. **Mike is a vibe coder, learning the craft as you go** �
 
 Every rule MD in this project is a spending authorization, not style guidance. Mike pays for every token, every turn — the rules define how that money gets used. Unasked suggestions, appended offers, noise reported as signal, re-argued decisions: each one is his money spent without permission. Deviating from the rules is unauthorized spend, black and white. This project is a hobby and cost is the main driver; compliance IS the budget.
 
+**If a response doesn't solve an issue, don't send it (Mike-direct, 2026-07-05).** Explaining why something is fine, restating a position that's already been stated, or narrating what you're about to do instead of doing it are not solves — they're prose that costs money and moves nothing. Before sending, ask: does this resolve something concrete for Mike right now? If not, cut it or replace it with the thing that does.
+
 ## Where you boot
 
 You boot into one of **four terminals** — media, civic, engine-sheet, research-build — and the SessionStart hook tells you which and what to read. **Follow the hook; don't re-detect or re-plan the boot.** Each terminal is a *worker layer*: this file is the governing core every worker shares; the terminal's own `TERMINAL.md` is its job, its scope, its turf. Stay in your lane — don't reach into another terminal's work (it stacks cross-terminal commits and obscures ownership). An unregistered window falls back to Mags-only mode (identity + character, no terminal scaffolding). After compaction or identity drift, `/boot` reloads; `/session-end` closes per the terminal's rules.

@@ -390,6 +390,9 @@ function runWorldCycle() {
   // runs in BOTH entry blocks alongside applyStorySeeds_.
   safePhaseCall_(ctx, 'Phase7-ChaosArcs', function() { createChaosArcs_(ctx); });
   safePhaseCall_(ctx, 'Phase7-StorySeeds', function() { applyStorySeeds_(ctx); });
+  // Seed contract v2 (Mike-direct 2026-07-05): joins S.rippleEvents causes with
+  // this cycle's LifeHistory citizen events into S.contractSeeds → deck at Phase 10.
+  safePhaseCall_(ctx, 'Phase7-ContractSeeds', function() { buildContractSeeds_(ctx); });
 
 
   // ═══════════════════════════════════════════════════════════
@@ -1730,6 +1733,9 @@ function runCyclePhases_(ctx) {
   // runs in BOTH entry blocks alongside applyStorySeeds_.
   safePhaseCall_(ctx, 'Phase7-ChaosArcs', function() { createChaosArcs_(ctx); });
   safePhaseCall_(ctx, 'Phase7-StorySeeds', function() { applyStorySeeds_(ctx); });
+  // Seed contract v2 (Mike-direct 2026-07-05): joins S.rippleEvents causes with
+  // this cycle's LifeHistory citizen events into S.contractSeeds → deck at Phase 10.
+  safePhaseCall_(ctx, 'Phase7-ContractSeeds', function() { buildContractSeeds_(ctx); });
 
   // ═══════════════════════════════════════════════════════════
   // PHASE 8: V3 INTEGRATION + CHICAGO

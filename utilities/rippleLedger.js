@@ -73,6 +73,23 @@ function recordRipple_(ctx, e) {
     ];
     queueAppendIntent_(ctx, RIPPLE_LEDGER_TAB, row, 'ripple attribution row', 'ripple');
     ctx._rippleRowsQueued = (ctx._rippleRowsQueued || 0) + 1;
+    // In-ctx accumulation for same-cycle consumers — the Phase-7 contract-seed
+    // builder joins these against this cycle's citizen events (seed contract v2).
+    if (!S.rippleEvents) S.rippleEvents = [];
+    S.rippleEvents.push({
+      cycle: cycle,
+      causeType: e.causeType || '',
+      causeId: e.causeId || '',
+      causeDetail: detail,
+      effectType: e.effectType || '',
+      targetScope: e.targetScope || '',
+      targetIds: ids.slice(0, RIPPLE_TARGET_IDS_CAP),
+      neighborhood: e.neighborhood || '',
+      magnitude: (e.magnitude === undefined || e.magnitude === null) ? 0 : e.magnitude,
+      duration: (e.duration === undefined || e.duration === null) ? 1 : e.duration,
+      remainingStrength: (e.remainingStrength === undefined || e.remainingStrength === null) ? '' : e.remainingStrength,
+      sourceEngine: e.sourceEngine || ''
+    });
     return true;
   } catch (err) {
     try { if (typeof Logger !== 'undefined') Logger.log('recordRipple_ dropped: ' + err); } catch (ignored) {}

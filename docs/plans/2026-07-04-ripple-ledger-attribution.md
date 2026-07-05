@@ -150,7 +150,14 @@ seeded, C108 clean, PLAYOFF_SPENDING 9.6 → 6.4 exact).
 - **Verify:** per-item before/after cycle comparison; 3a acceptance criterion 3.
 - **Status:** [~] **3a verified on sandbox (S294, C109–C111)** — `S.sportsSentimentBoost` folds into `finalCity.sentiment` (applyCityDynamics.js, before clamps; ordering verified Phase2-SportsFeed :219 → CityDynamics :224 both entry points); dead `S.sentiment +=` deleted in applySportsSeason.js AND applyEditionCoverageEffects.js (same dead-write class, pre-S216 leftover; sole `S.sentiment` reader is a mediaRoomBriefingGenerator.js:228 fallback behind always-set `dynamics.sentiment`). No new ledger row at the fold — T1's compute-site row in applySportsFeedTriggers_ is the attribution. Evidence: fold log 0.110→0.1100 on C109/C110/C111, ledger sports row mag 0.11, all 21 hoods' NM Sentiment up off C108 baseline. Acceptance criterion 3 (sports half) met. Note: fold repeats each cycle while the feed's last row stays playoffs — feed is the season authority by design. T2 clean-stack regression check C111 PASSED post-incident: carried 2 econ + 1 init; PLAYOFF_SPENDING_110 rem 5.33 = 8×2/3 exact; Fruitvale Mercado rem 0.95 exact. **Production push rides with T1+T2 behind C101 smoke.** 3b/3c/3d not started.
 
-### Task 4 — Per-desk slice assembler (Node, post-cycle — additive)
+> **2026-07-05 (S296, Mike-direct): Tasks 4–6 DEAD.** Mike rejected this plan's consumption
+> layer as not his design: sheets are the world, no JSON carries logic, and entities attach at
+> generation time — no post-hoc joins. The corrected contract lives in
+> [[2026-06-15-story-seed-deck-engine-emergence]] §"2026-07-05 — Corrected row contract."
+> T1–T3b code survives only as substrate: the ledger tab as audit trail, the T2 carry as the
+> cross-cycle state feeding Why/Trend in seed rows. This plan takes no further tasks.
+
+### Task 4 — Per-desk slice assembler (Node, post-cycle — additive) — DEAD (superseded 2026-07-05)
 
 - **Files:** `scripts/engine-auditor/buildDeskSlices.js` — create; `output/desk_slices_c{N}/{civic,business,culture,sports,letters}.json`
 - **Steps:**

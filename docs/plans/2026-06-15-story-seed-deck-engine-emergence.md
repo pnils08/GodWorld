@@ -271,6 +271,69 @@ the engine says "here are the real stories this cycle, with everything a desk ne
 - **C97 plan [[2026-06-13-c97-gap-log-triage]] ES-4 step 1** — this supersedes its mechanical "cap recycled" framing with the full emergence design; ES-4 step 1's gate becomes Phase 1 here.
 - **engine.34** — ledger-as-representative-sample; D3 (ingest reject-not-auto-mint) is adjacent but a different surface (ingest, not seed generation).
 
+## 2026-07-05 — Corrected row contract (Mike-direct, S296) — SUPERSEDES the JSON chain
+
+Mike's contract, stated 2026-07-05 after rejecting the engine.45 desk-slice framing:
+
+> The desk packet doesn't tell agents what to write anymore. It says: here's what happened and
+> to whom — search canon to support and write an article. Save token burn: don't let the agent
+> search for citizens raw or leave ambiguity that creates a new citizen. Provide the exact
+> citizens, neighborhoods, businesses affected by the story seed (aka engine event). There are
+> 20+ engines, 15–20 neighborhoods, businesses, famous people, evening events, popular TV shows.
+> The current seeds are trash compared to what happens in these 11 phases.
+
+### Standing rules (all Mike-direct, 2026-07-05)
+
+1. **Sheets are the world. No JSON carries logic.** The Phase-0 CONSUME chain
+   (`engine_audit → baseline_briefs → deck`) is superseded as the seed path — the deck is
+   written by the engine **in-cycle from live state**, not enriched post-cycle from JSON
+   artifacts. `routePatternSeeds.js` and the baseline_briefs join stop being the seed path.
+2. **A seed = an engine event.** One row per salient engine event, written at the moment the
+   engine computes/generates it (queued like every write, lands at the Phase-10 executor).
+3. **Entities attach at generation time.** The engine names the exact citizens (POPID + name +
+   their event lines), neighborhoods, businesses, cultural entities (evening events, TV shows),
+   famous people it touched — at the moment it touches them. No post-hoc finder, no residence
+   inference, no ambiguity that invites minting a new citizen.
+4. **The row directs nothing.** VoiceGuidance / SuggestedAngle / SuggestedJournalist /
+   byline-scoring JSON / priority-components JSON / MatchConfidence / PacketRef — deleted.
+   Journalists are agents with dials; the row hands them the event and the people, they search
+   canon and write.
+5. **Column test:** a desk agent can write the article from the row + canon lookups alone.
+   Any column that doesn't serve that test doesn't exist.
+
+### Row contract v2 (replaces the 20-column deck)
+
+| Column | Content |
+|---|---|
+| Cycle | engine cycle |
+| SeedID | stable id |
+| Domain | SAFETY / ECONOMIC / COMMUNITY / … |
+| Neighborhood(s) | where |
+| What | the event, with the engine's real numbers |
+| Why | the cause the engine applied when it computed the effect |
+| Citizens | exact POPIDs + names the engine touched |
+| CitizenEvents | those citizens' actual event lines from this cycle |
+| Businesses | exact business entities affected |
+| OtherEntities | cultural events / shows / famous people / venues involved |
+| Magnitude | size, signed |
+| Trend | direction + streak (from cross-cycle carry) |
+
+### Build phases (v2 — replaces Phases 4/5 sequencing below)
+
+- **V2-1 Entity-emission inventory.** Walk the 20+ engines across the 11 phases; table which
+  engine emits which entity types (citizen / business / cultural / famous / venue /
+  neighborhood). The truth catalog the writers draw from.
+- **V2-2 Contract freeze.** Fix the column set against the inventory; Story_Seed_Deck schema
+  migration; Story_Hook_Deck fold-or-retire decision.
+- **V2-3 In-cycle seed writers.** Every salient engine event emits a contract row with its
+  entities attached at generation.
+- **V2-4 Sandbox verify.** Seeded cycles on the real sandbox; acceptance = open the sheet,
+  every row passes the column test. Verification is reading the sheet, never a status line.
+
+**Carry-over from engine.45:** the ripple cross-cycle carry (T2) survives solely so Why/Trend
+can say "second cycle running / fading." engine.45 Tasks 4–6 (JSON desk-slice layer + JSON
+WHY re-point) are DEAD — superseded by this contract.
+
 ## Status log
 
 ### engine.35 — status (drained from ROLLOUT, 2026-06-26 / S274)
@@ -279,6 +342,12 @@ the engine says "here are the real stories this cycle, with everything a desk ne
 
 ## Changelog
 
+- 2026-07-05 — **Corrected row contract (Mike-direct, S296).** Added §"2026-07-05 — Corrected
+  row contract" after Mike rejected the engine.45 desk-slice framing as not his design. Sheets
+  are the world / no JSON carries logic; seed = engine event; entities attach at generation
+  time; row directs nothing (voice/angle/byline columns die); column test governs the schema.
+  Supersedes the Phase-0 CONSUME chain as the seed path and kills engine.45 T4–T6. Build
+  restarts at V2-1 (entity-emission inventory).
 - 2026-06-15 — Drafted (S259, engine-sheet) from Mike's S259 framing (deck = engine's pre-computed, attributed, desk-ready story surface to cut edition token burn). Grounded in the live C97 deck distribution + the existing `engine_audit`/`tribuneFraming`/`neighborhoodSlice`/`baseline_briefs` infrastructure. Folds Row 28; supersedes C97 ES-4 step 1's framing. No code yet — design pass per Mike "requires genuine creativity."
 - 2026-06-15 — Added the division-of-labor split (Mike S259 follow-up): engine EMERGES (fresh what/why/who), Supermemory MAINTAINS (published articles + grades = continuity). Reframed move A — the `storyline-followup` recycling is the engine wrongly holding continuity that belongs to Supermemory; gating it removes a responsibility, not just noise. Continuity = a Supermemory lookup at edition time, not an engine-maintained seed stream.
 - 2026-06-15 — **Phase 0 done (S259).** Mapped the three surfaces + how sift reads each. Key finding: `baseline_briefs` is already a projection of `engine_audit` patterns AND already carries the desk-ready packet (`neighborhoodState` + `neighborhoodResidents` from `lib/neighborhoodSlice`). Decision: **CONSUME (layered `engine_audit → baseline_briefs → deck → sift`), not merge** — the deck stops re-deriving emergence, keeps priority/byline/calendar, drops recycling, references the brief packet. Packet largely exists → Phase 4 shrinks to a join. Seed-packet schema defined. ROLLOUT engine.35 → phase-0-done.

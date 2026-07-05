@@ -273,6 +273,27 @@ the engine says "here are the real stories this cycle, with everything a desk ne
 
 ## 2026-07-05 — Corrected row contract (Mike-direct, S296) — SUPERSEDES the JSON chain
 
+### Mike's words — verbatim record (2026-07-05, filed at his direction, unedited)
+
+> "Correct the new desk packet doesn't tell agents what to write anymore , it says here's what
+> happened and to whom, search canon to support and write an article , so the idea is to save
+> token burn , dot let the agent search for cictzens raw or leave ambiguous for creating a new
+> citizen, provide the exact citizens , neighborhoods , businesses effected by the story seed
+> (aka engine event) there are over 20+ engines, 15-20 neighborhoods , businesss , famous
+> people , evening events , popular tv shows , etc , the current seeds is trash compared to
+> what I built and what happens in this 11 phases"
+
+> "the engine has the truth and it show it nowhere"
+
+> "What does a json do when the sheets are the world . No json is part of this or should carry
+> any logic"
+
+> "Run a cycle to completing is a fail if the engine isn't out outing the data, 114 cycles
+> completed cause that's the goal , not one produced the world yet"
+
+These four statements are the project's governing text. Everything below is interpretation of
+them; where interpretation and the verbatim record conflict, the record wins.
+
 Mike's contract, stated 2026-07-05 after rejecting the engine.45 desk-slice framing:
 
 > The desk packet doesn't tell agents what to write anymore. It says: here's what happened and

@@ -1167,6 +1167,32 @@ Prior sweep passes: §S248, §S250, §S263, §S268, §S274 (latest before this).
 
 ---
 
+## S295 Archive Pass (2026-07-05, research-build) — post-S291 closures sweep
+
+4 `done-pending-archive` rows accumulated since the §S278 pass and were never swept (S291–S294 soft closes chained without one). Bookkeeping sweep run alongside the C100 gap-log triage (governance.46).
+
+Cluster counts: engine 1 / infrastructure 1 / research 1 / governance 1.
+
+Prior sweep passes: §S248, §S250, §S263, §S268, §S274, §S278 (latest before this).
+
+### engine.* (1)
+
+- **engine.42** [engine-sheet] — Aider/DeepSeek autonomous-edit audit (S274, Mike-direct). **Close-note:** VERDICT REVERTED (net-negative). 10 commits audited baseline-vs-HEAD in an isolated worktree; broke 4 previously-passing tests via an undeclared `ctx` reference in `citizenMemory.js applyEvent_` — a hard cycle crash on any `source:chaos` event if deployed. Never pushed/clasp-deployed, so C101 was never at risk. Reverted via inverse diff (`fc6768f7`); Aider HEAD preserved at tag `aider-experiment-S274` for salvage. Valuable half (chaos-trauma mechanic) salvaged + reapplied ctx-fixed (`9c04b442`, additive/inert-until-wired) — wiring into `generateCitizensEvents.js` now unblocked, tracked separately. Aider reconfigured propose-not-deploy + `AIDER_PLAN.md` task-queue. Source: `docs/engine/ENGINE_REPAIR.md` §engine.42; commit range `b637f4bd..0d2870a5`.
+
+### infrastructure.* (1)
+
+- **infrastructure.6** [research-build] — Cowork mapped as autonomous/off-session helper alongside Gemini roster (governance.38 roster addition). **Close-note:** Added to `docs/GEMINI_OFFLOAD.md` as a standing offload option alongside the existing Gemini roster. No code shipped — a documentation/roster addition. Source: `docs/GEMINI_OFFLOAD.md`.
+
+### research.* (1)
+
+- **research.22** [research-build] — Can LLMs read citizen dials raw, or need a dial→essence filter layer? (Mike-direct S286 close). **Close-note:** VERDICT `adopt` — the existing `lib/citizenDials.js:disposition()` filter is confirmed as the standing answer; no new filter built. Convention was grep-clean but convention-enforced, not code-enforced — follow-on note added to `ENGINE_COUPLING_MAP.md`/`citizenDialMap.js` header stating no LLM-facing surface reads `DialState` directly, always through `disposition()` (or a future sibling filter for a different register need, e.g. third-person reporter observation vs first-person wake reflection). Cited as design justification for Track A of engine.43 (voice-dial sync). Source: `docs/research/2026-07-04-dial-essence-filter-layer.md`.
+
+### governance.* (1)
+
+- **governance.45** [research-build] — MEMORY.md rebuilt (S288). **Close-note:** Rebuilt to 18 boot-loaded entries + a 37-item pointer index; 13 stale/redundant entries dropped. Content now lives directly in MEMORY.md rather than pointer-only, after the prior pointer-only version proved unfollowed at boot. Source: MEMORY.md itself (no separate doc).
+
+---
+
 ## S286 pointer-collapse (2026-07-02) — sections moved out of ROLLOUT_PLAN.md
 
 ## Migration Complete (S212)

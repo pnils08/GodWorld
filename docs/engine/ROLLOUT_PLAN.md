@@ -64,7 +64,6 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.29 | Citizen lifecycle & fame system | parked | engine-sheet | [[../plans/2026-05-30-citizen-lifecycle-fame-system]] + [[ENGINE_REPAIR]] — detail in pointer (relocated 2026-07-02) |
 | engine.40 | Sports-stat intake | ready | research-build → engine-sheet | [[ENGINE_REPAIR]] — detail in pointer (relocated 2026-07-02) |
 | engine.41 | Engine-output → canon coverage | in-progress | engine-sheet | [[../plans/2026-06-24-engine-output-canon-coverage]] — detail in pointer (relocated 2026-07-02) |
-| engine.42 | Aider/DeepSeek autonomous-edit audit | done-pending-archive | engine-sheet | [[ENGINE_REPAIR]] — detail in pointer (relocated 2026-07-02) |
 | engine.43 | Voices/agents backfilled into dials + shift as citizen dials alter (sync contract) | ready | research-build (design done) → engine-sheet | [[../adr/0014-citizen-self-authorship-live-drift]] + [[../plans/2026-07-04-voice-dial-sync-contract-build]] |
 | engine.44 | Sheet-walk audit triage — 36 findings, 5 fix-classes | ready | engine-sheet | [[../plans/2026-07-03-sheet-walk-audit-triage]] (Mike-direct 2026-07-03) |
 | engine.45 | Ripple ledger + per-desk slices — persist cause→effect, hand desks the truth | ready | engine-sheet | [[../plans/2026-07-04-ripple-ledger-attribution]] (Mike-direct 2026-07-04; trace base: docs/research/ripple-traces/) |
@@ -91,7 +90,6 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | infrastructure.3 | Reviewer lanes → Claude Managed Agents (Dreaming pilot, Anthropic preview-access gated) | needs-info | research-build | [[../ACTION_MANAGED_AGENTS]] |
 | infrastructure.4 | supermemory-claude plugin auto-saved session transcripts to `mags` as `session_turn` do… | in-progress | engine-sheet | [[../SUPERMEMORY]] + [[../adr/0008-speaker-attribution-for-auto-save-writers|ADR-0008]] — detail in pointer (relocated 2026-07-02) |
 | infrastructure.5 | Supermemory load-bearing audit | in-progress | research-build | [[../plans/2026-05-22-supermemory-load-bearing-audit]] + [[../adr/0008-speaker-attribution-for-auto-save-writers|ADR-0008]] — detail in pointer (relocated 2026-07-02) |
-| infrastructure.6 | Cowork mapped as autonomous/off-session helper alongside Gemini roster | done-pending-archive | research-build | [[../GEMINI_OFFLOAD]] governance.38 roster addition |
 
 ### research.* — Papers, external tools, evaluations
 
@@ -122,7 +120,6 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.38 | Living City — full-population coverage | in-progress | research-build → engine-sheet | [[../plans/2026-06-19-living-city-full-population-coverage]] + [[../plans/2026-06-30-central-generator-atmospheric-expansion]] + [[../plans/2026-07-01-persistence-seams-content-ledger]] |
 | research.20 | Autonomous deep-dispatch | in-progress | research-build → engine-sheet | [[../adr/0012-autonomous-deep-dispatch-write-edition]] + [[../plans/2026-06-25-deep-dispatch-write-edition-build]] — detail in pointer (relocated 2026-07-02) |
 | research.21 | Citizen-signal story emergence | in-progress | research-build → engine-sheet | [[../plans/2026-06-26-citizen-signal-story-emergence]] + [[../plans/2026-06-29-citizen-signal-detector-build]] — detail in pointer (relocated 2026-07-02) |
-| research.22 | Can LLMs read citizen dials raw, or need a dial→essence filter layer? Evaluate + design | done-pending-archive | research-build | [[../research/2026-07-04-dial-essence-filter-layer]] |
 
 ### governance.* — Skills, MDs, ADRs, project hygiene
 
@@ -139,7 +136,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | governance.33 | C96 gap-log triage | in-progress | research-build / engine-sheet | [[../plans/2026-06-07-c96-gap-log-triage]] — detail in pointer (relocated 2026-07-02) |
 | governance.35 | REDUCED S260 by governance.36 §loop-tightening to the PIN-self-derive remnant | ready | engine-sheet (design: research-build DONE) | [[../plans/2026-06-14-session-context-mechanization]] — detail in pointer (relocated 2026-07-02) |
 | governance.36 | Boot doc architecture restructure | in-progress | research-build | [[../plans/2026-06-14-boot-doc-architecture-restructure]] + [[../plans/2026-05-09-boot-load-audit]] — detail in pointer (relocated 2026-07-02) |
-| governance.45 | MEMORY.md rebuilt — 18 boot-loaded entries + 37-item pointer index, 13 dropped as stale/redundant | done-pending-archive | research-build | S288 rebuild — content lives directly in MEMORY.md, no longer pointer-only |
+| governance.46 | C100 gap-log triage — 3 logs / ~50 entries → 13 themes → 6 new phases (1 RB + 5 ES) + 6 folds into existing rows | in-progress | research-build / engine-sheet | [[../plans/2026-07-05-c100-gap-log-triage]] |
 
 ---
 

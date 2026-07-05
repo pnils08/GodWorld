@@ -152,9 +152,13 @@ function contractSeedPickEvent_(citizen, causeType) {
 }
 
 /**
- * Pick up to max citizens for a seed: exact targets first, then hood citizens
- * ranked (cause-relevant event > not yet used by another seed > order). Marks
- * picks in usedPop so consecutive seeds in the same hood name different people.
+ * EXACT citizens only (Mike-direct, seed contract v2): a seed names a citizen
+ * ONLY when the engine's own effect targeted that citizen (targetScope
+ * 'citizen' with POPIDs). There is NO neighborhood fallback — attaching
+ * bystanders by address is the exact ambiguity the contract bans. An empty
+ * Citizens column is honest output: it flags the SOURCE ENGINE as one that
+ * fires neighborhood-scope without naming who it hit (the per-engine fix list
+ * lives with the citizen-conditioning work, not in this joiner).
  */
 function contractSeedPickCitizens_(index, targetPops, hood, causeType, usedPop, max) {
   var picked = [];
@@ -162,25 +166,6 @@ function contractSeedPickCitizens_(index, targetPops, hood, causeType, usedPop, 
   for (var i = 0; i < targetPops.length && picked.length < max; i++) {
     var c = index.byPop[targetPops[i]];
     if (c && !seen[c.popId]) { seen[c.popId] = true; picked.push(c); }
-  }
-  if (!picked.length && hood) {
-    var pool = index.hoodCitizens[contractSeedNormHood_(hood)] || [];
-    var hint = CONTRACT_SEED_EVENT_HINTS[causeType];
-    var scored = [];
-    for (var j = 0; j < pool.length; j++) {
-      var cand = pool[j];
-      var relevant = false;
-      if (hint) {
-        for (var k = 0; k < cand.events.length; k++) {
-          if (hint.test(cand.events[k].tag) || hint.test(cand.events[k].text)) { relevant = true; break; }
-        }
-      }
-      scored.push({ c: cand, score: (relevant ? 2 : 0) + (usedPop[cand.popId] ? 0 : 1), order: j });
-    }
-    scored.sort(function (a, b) { return b.score - a.score || a.order - b.order; });
-    for (var m = 0; m < scored.length && picked.length < max; m++) {
-      if (!seen[scored[m].c.popId]) { seen[scored[m].c.popId] = true; picked.push(scored[m].c); }
-    }
   }
   for (var p = 0; p < picked.length; p++) usedPop[picked[p].popId] = true;
   return picked;

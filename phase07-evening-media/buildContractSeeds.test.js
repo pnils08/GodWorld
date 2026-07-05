@@ -61,7 +61,8 @@ var LH_HEADER = ['Timestamp', 'POPID', 'Name', 'EventTag', 'EventText', 'Neighbo
   assert('1i trend carries strength', seeds[0].trend.indexOf('4.20 strength left') >= 0);
 })();
 
-// §2 No exact targets → this-cycle citizens from the same neighborhood (engine-generated, never invented)
+// §2 No exact targets → Citizens column stays EMPTY (Mike-direct: exact citizens
+// only; bystander-by-address attachment is the banned ambiguity)
 (function () {
   var rows = [
     LH_HEADER,
@@ -81,7 +82,7 @@ var LH_HEADER = ['Timestamp', 'POPID', 'Name', 'EventTag', 'EventText', 'Neighbo
   };
   b.buildContractSeeds_(ctx);
   var s = ctx.summary.contractSeeds[0];
-  assert('2a hood citizens attached', s.citizens.indexOf('POP-00100') >= 0 && s.citizens.indexOf('POP-00101') >= 0);
+  assert('2a no bystanders — citizens empty when engine named none', s.citizens === '' && s.citizenEvents === '');
   assert('2b texture below thresholds', s.seedClass === 'texture');
   assert('2c domain civic', s.domain === 'CIVIC');
 })();

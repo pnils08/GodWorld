@@ -1100,13 +1100,29 @@ function generateCitizensEvents_(ctx) {
     var st = (S.neighborhoodState && neighborhood) ? S.neighborhoodState[neighborhood] : null;
     if (!st) return pool;
 
+    // Experience lens (Mike-direct S296): a tracked citizen represents ~440
+    // residents QUALITATIVELY — when their hood is under real pressure, their
+    // day should usually be shaped by it. These weights scale WITH the
+    // pressure intensity instead of sitting at ambient-noise level (the
+    // pre-S296 flat ~1.1 made crisis lines statistically invisible against
+    // dozens of ambient entries — West Oakland watered plants through a
+    // displacement crisis, C115/C116). Counts stay at city scale; only the
+    // lived texture concentrates. Cap 6.0 so ambient life never fully stops.
+    function pw(base, intensity01) {
+      var w = base * (1 + 4 * Math.max(0, Math.min(1, intensity01)));
+      return Math.min(6, w);
+    }
+
     // Gentrification — rent pressure reaches kitchen-table conversation
     var gPhase = (st.gentrificationPhase || '').toLowerCase();
+    var dp10 = (st.displacementPressure || 0) / 10; // /10 scale → 0-1
     if (gPhase === 'accelerating' || gPhase === 'advanced') {
       pool.push(makeEntry("overheard another conversation about rents going up in " + neighborhood,
-        ["source:nbhdState", "state:gentrification"], 1.15, false));
+        ["source:nbhdState", "state:gentrification"], pw(1.15, dp10), false));
       pool.push(makeEntry("noticed a longtime neighbor packing up to move out",
-        ["source:nbhdState", "state:gentrification"], 1.1, false));
+        ["source:nbhdState", "state:gentrification"], pw(1.1, dp10), false));
+      pool.push(makeEntry("found a rent-increase notice taped to a neighbor's door",
+        ["source:nbhdState", "state:gentrification"], pw(1.0, dp10), false));
     } else if (gPhase === 'early') {
       pool.push(makeEntry("noticed new faces and new prices around " + neighborhood,
         ["source:nbhdState", "state:gentrification"], 1.05, false));
@@ -1116,9 +1132,23 @@ function generateCitizensEvents_(ctx) {
     // gentrificationEngine's own "accelerating" gate
     if ((st.displacementPressure || 0) >= 6) {
       pool.push(makeEntry("stopped by a tenants' meeting about staying in " + neighborhood,
-        ["source:nbhdState", "state:community"], 1.15, false));
+        ["source:nbhdState", "state:community"], pw(1.15, dp10), false));
       pool.push(makeEntry("signed a neighbor's petition about housing in the area",
-        ["source:nbhdState", "state:community"], 1.05, false));
+        ["source:nbhdState", "state:community"], pw(1.05, dp10), false));
+    }
+
+    // Live crime carry (engine.45 T3b, prev-cycle Crime_Metrics spikes for
+    // THIS hood) — sharper than the stale crimeIndex snapshot below; a spike
+    // on the block reshapes the day at spike-proportional weight.
+    var carry = (S.crimeByNeighborhood && S.crimeByNeighborhood[neighborhood]) || 0;
+    if (carry >= 1) {
+      var ci = Math.min(1, carry / 3);
+      pool.push(makeEntry("took a different route home after the recent break-ins around " + neighborhood,
+        ["source:nbhdState", "state:watchful"], pw(1.1, ci), false));
+      pool.push(makeEntry("counted the register twice before closing up, just in case",
+        ["source:nbhdState", "state:watchful"], pw(1.0, ci), false));
+      pool.push(makeEntry("swapped stories with a neighbor about what got taken up the block",
+        ["source:nbhdState", "state:watchful"], pw(1.0, ci), false));
     }
 
     // Retail vitality — street life or papered storefronts

@@ -108,6 +108,12 @@ function finalizeCycleState_(ctx) {
     migrationDrift: (typeof S.migrationDrift === 'number') ? S.migrationDrift : 0,
     migrationDriftFactors: (S.migrationDriftFactors || []).slice(0, 5),
 
+    // v1.6 (engine.45 T3b): crime spikes for next cycle's city dynamics — the
+    // crime branch inputs (S.crimeSpikes/S.crimeByNeighborhood) had no writer
+    // (trace K gap G1); Phase-2 position means prev-cycle is the honest grain.
+    // Same channel as migrationDrift. Increase-shifts only, responseTime excluded.
+    crimeSpikes: compactCrimeSpikes_(S.crimeMetrics),
+
   };
 
   // This is what downstream scripts read next cycle
@@ -327,6 +333,41 @@ var SNAPSHOT_ECON_RIPPLE_CAP = 12;
 var SNAPSHOT_INIT_RIPPLE_CAP = 12;
 
 /**
+ * engine.45 T3b: compact this cycle's crime increase-shifts for carry-forward.
+ * Next cycle's applyCityDynamics_ derives both consumer shapes from this one
+ * list: crimeSpikes (array → citywide rolling-average count) and
+ * crimeByNeighborhood (per-hood counts → cluster ripple thresholds 1/2/3).
+ * responseTime shifts and decreases are not spikes — excluded. Capped at 12
+ * (bounded accumulator; snapshot shares the 9KB PropertiesService limit).
+ */
+function compactCrimeSpikes_(crimeMetrics) {
+  var shifts = (crimeMetrics && Array.isArray(crimeMetrics.shifts)) ? crimeMetrics.shifts : [];
+  var out = [];
+  for (var i = 0; i < shifts.length; i++) {
+    var s = shifts[i];
+    if (!s || s.direction !== 'increase') continue;
+    if (s.metric !== 'propertyCrime' && s.metric !== 'violentCrime') continue;
+    out.push({
+      neighborhood: s.neighborhood,
+      metric: s.metric,
+      magnitude: s.magnitude,
+      newValue: s.newValue
+    });
+  }
+  out.sort(function(a, b) { return (b.magnitude || 0) - (a.magnitude || 0); });
+  if (out.length > 12) {
+    if (typeof Logger !== 'undefined') {
+      Logger.log('compactCrimeSpikes_: capped ' + out.length + ' → 12 (weakest dropped)');
+    }
+    out = out.slice(0, 12);
+  }
+  if (out.length && typeof Logger !== 'undefined') {
+    Logger.log('compactCrimeSpikes_: carrying ' + out.length + ' crime spike(s) to next cycle');
+  }
+  return out;
+}
+
+/**
  * Trim active economic ripples for carry-forward. Keeps every field the
  * next-cycle consumers read: processActiveRipples_ (startCycle/endCycle/impact/
  * currentStrength), calculateNeighborhoodEconomies_ (neighborhoods/
@@ -422,6 +463,7 @@ if (typeof module !== 'undefined' && module.exports) {
     finalizeCycleState_: finalizeCycleState_,
     compactEconomicRipples_: compactEconomicRipples_,
     compactInitiativeRipples_: compactInitiativeRipples_,
+    compactCrimeSpikes_: compactCrimeSpikes_,
     SNAPSHOT_ECON_RIPPLE_CAP: SNAPSHOT_ECON_RIPPLE_CAP,
     SNAPSHOT_INIT_RIPPLE_CAP: SNAPSHOT_INIT_RIPPLE_CAP
   };

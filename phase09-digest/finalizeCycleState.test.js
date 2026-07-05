@@ -178,6 +178,38 @@ function initRipple(overrides) {
   assert('C108: PLAYOFF_SPENDING expired at endCycle', S4.economicRipples.length === 0);
 })();
 
+// ── 6. compactCrimeSpikes_ (engine.45 T3b): filter + cap ────────────────────
+(function () {
+  console.log('6. compactCrimeSpikes_ (T3b crime carry)');
+  var shifts = [
+    { neighborhood: 'West Oakland', metric: 'propertyCrime', direction: 'increase', magnitude: 7, newValue: 62 },
+    { neighborhood: 'West Oakland', metric: 'violentCrime', direction: 'increase', magnitude: 5, newValue: 55 },
+    { neighborhood: 'Rockridge', metric: 'propertyCrime', direction: 'decrease', magnitude: 9, newValue: 30 },
+    { neighborhood: 'Downtown', metric: 'responseTime', direction: 'slower', magnitude: 2, newValue: 11 },
+    null
+  ];
+  var out = fcs.compactCrimeSpikes_({ shifts: shifts });
+  assert('keeps only crime increases', out.length === 2);
+  assert('sorted by magnitude', out[0].magnitude === 7 && out[1].magnitude === 5);
+  assert('excludes decreases + responseTime',
+    !out.some(function (s) { return s.neighborhood === 'Rockridge' || s.metric === 'responseTime'; }));
+  assert('empty on missing crimeMetrics', fcs.compactCrimeSpikes_(null).length === 0);
+
+  var many = { shifts: [] };
+  for (var i = 0; i < 20; i++) {
+    many.shifts.push({ neighborhood: 'H' + i, metric: 'propertyCrime', direction: 'increase', magnitude: i, newValue: 50 + i });
+  }
+  var capped = fcs.compactCrimeSpikes_(many);
+  assert('caps at 12 keeping strongest', capped.length === 12 && capped[0].magnitude === 19);
+
+  // Snapshot carries the compacted spikes (same channel as migrationDrift).
+  var ctx = { now: 'test-now', summary: { cycleId: 106, crimeMetrics: { shifts: shifts } } };
+  fcs.finalizeCycleState_(ctx);
+  var snap = JSON.parse(JSON.stringify(ctx.summary.previousCycleState));
+  assert('snapshot.crimeSpikes round-trips', Array.isArray(snap.crimeSpikes) && snap.crimeSpikes.length === 2 &&
+    snap.crimeSpikes[0].neighborhood === 'West Oakland');
+})();
+
 // ── 5. Restore must not clobber live in-memory state (back-to-back runs) ───
 (function () {
   console.log('5. restore no-clobber guard');

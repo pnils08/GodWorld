@@ -101,11 +101,27 @@ function applyCityDynamics_(ctx) {
   var worldEvents = S.worldEvents || [];
   var storySeeds = S.storySeeds || [];
   var eventsGenerated = Number(S.eventsGenerated || 0);
-  var crimeSpikes = S.crimeSpikes || S.crimeEvents || [];
+  // engine.45 T3b: crime inputs had no writer anywhere (trace K gap G1) — the
+  // crime branches below ran on zero every cycle. Source is now the previous
+  // cycle's Crime_Metrics increase-shifts, carried via the T2 snapshot
+  // (finalizeCycleState compactCrimeSpikes_). Prev-cycle is the honest grain:
+  // this runs at Phase 2, updateCrimeMetrics computes at Phase 3. The direct
+  // S.crimeSpikes/S.crimeByNeighborhood reads stay first so a future same-cycle
+  // writer would win over the carried state.
+  var prevCrimeSpikes = (S.previousCycleState && Array.isArray(S.previousCycleState.crimeSpikes))
+    ? S.previousCycleState.crimeSpikes : [];
+  var crimeSpikes = S.crimeSpikes || S.crimeEvents || prevCrimeSpikes;
   var mediaCoverage = S.mediaCoverage || S.mediaCount || 0;
 
   // Crime by neighborhood (for ripple effects)
-  var crimeByNeighborhood = S.crimeByNeighborhood || {};
+  var crimeByNeighborhood = S.crimeByNeighborhood;
+  if (!crimeByNeighborhood || Object.keys(crimeByNeighborhood).length === 0) {
+    crimeByNeighborhood = {};
+    for (var pci = 0; pci < prevCrimeSpikes.length; pci++) {
+      var pcHood = prevCrimeSpikes[pci] && prevCrimeSpikes[pci].neighborhood;
+      if (pcHood) crimeByNeighborhood[pcHood] = (crimeByNeighborhood[pcHood] || 0) + 1;
+    }
+  }
 
   // ─────────────────────────────────────────────────────────────────────────
   // HELPERS (ES5)
@@ -875,6 +891,32 @@ function applyCityDynamics_(ctx) {
     } else if (localCrime >= 1) {
       m.nightlife *= 0.97;
       m.sentiment -= 0.04;
+    }
+
+    // engine.45 T3b: persist the crime→dynamics fold with its cause — first
+    // time this branch fires on real inputs (was hollow, trace K gap G1).
+    if (localCrime >= 1) {
+      Logger.log('applyCityDynamics_ engine.45 T3b: Crime ripple fired — cluster ' +
+        clusterName + ', ' + localCrime + ' prev-cycle spike(s)');
+      if (typeof recordRipple_ === 'function') {
+        var spikeHoods = CLUSTERS[clusterName] ? CLUSTERS[clusterName].hoods.filter(function(h) {
+          return crimeByNeighborhood[h];
+        }) : [];
+        recordRipple_(ctx, {
+          causeType: 'crime',
+          causeId: 'Crime_Metrics.shifts.prev-cycle',
+          causeDetail: JSON.stringify(prevCrimeSpikes.filter(function(sp) {
+            return spikeHoods.indexOf(sp.neighborhood) !== -1;
+          })),
+          effectType: 'nightlife/tourism/publicSpaces/sentiment',
+          targetScope: 'neighborhood',
+          targetIds: spikeHoods,
+          neighborhood: spikeHoods.join('|'),
+          magnitude: localCrime,
+          duration: 1,
+          sourceEngine: 'applyCityDynamics.applyCrimeRipple_'
+        });
+      }
     }
   }
 

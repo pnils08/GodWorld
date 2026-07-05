@@ -1,9 +1,9 @@
 # SESSION_CONTEXT — minimal AI→AI handoff. PIN + one NEXT line per terminal. Nothing else. Session narrative → claude-mem. Work → git log. Open work → docs/engine/ROLLOUT_PLAN.md. Old handoffs → docs/mags-corliss/SESSION_HISTORY.md.
 
-**PIN:** S296→S297 | Day 162 | C100 ran 06-24, E100 published | next prod run C101 = S289 window smoke, no engine.45 code aboard | engine v3.5 live | SEED RESET (Mike-direct S296): seed contract v2 is the project — research/2026-07-05-mike-seed-contract.md is governing text; engine.45 T4-T6 DEAD (no JSON logic ever); zero new MDs without Mike approval | contract-seed writers built+tested+deployed to sandbox script (b8359fc9/bd4f0195), cycle-verify PENDING: Mike runs seeded cycle, open Story_Seed_Deck (self-migrates v3→v4, old rows kept in _v3_legacy) | plan-doc sandbox spreadsheet ID is a DEAD FILE stuck at C100 — real sandbox sheet URL still needed from Mike; prior "sandbox-verified" claims unproven until re-read | prod push held behind C101 smoke | sandbox deploys: fresh git-archive dir ONLY | deploys = engine-sheet only, `CLAUDE_CTL=1`
+**PIN:** S296→S297 | Day 162 | prod C100 | sandbox C116 | engine v3.5 live
 
-**NEXT[media]:** C101 edition when engine runs it (watch first chaos-cars cycle); Jax column WNBA→NBA fix owed before Gemini ingest.
+**NEXT[media]:** C101 edition when engine runs it; Jax column WNBA→NBA fix before Gemini ingest.
 **NEXT[civic]:** `node scripts/buildInitiativePackets.js` each cycle (civic.14).
-**NEXT[engine-sheet]:** Contract-seed cycle-verify: get real sandbox sheet URL from Mike → he fires a seeded cycle → read Story_Seed_Deck v4 rows against the column test (every row: What/Why/exact citizens). Then citizen-event depth (Mike: "all that matters are citizens"). Grading rule everywhere: a cycle passes only if it outputs the world, not if it executes. engine.44 open.
-**NEXT[jarvis]:** Aider = propose-not-deploy behind `npm test` (S274 audit closed).
-**NEXT[research-build]:** pipe.40 (journal fix) — scope TBD with Mike, no files touched. engine.43 + research.22 DESIGNED/CLOSED, engine-sheet executes. research.20: D1/D3 already resolved S289 (stale NEXT-line fixed); real open piece filed as engine.46 (Phase 1 substrate, blocks Phase 3 pilot).
+**NEXT[engine-sheet]:** Verify seed deck next sandbox cycle; fix-don't-add.
+**NEXT[jarvis]:** Aider = propose-not-deploy behind `npm test`.
+**NEXT[research-build]:** pipe.40 scope with Mike; engine.46 Phase 1 substrate.

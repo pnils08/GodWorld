@@ -46,6 +46,7 @@ Eight bipolar dials, 0–100, centered 50: **drive, sociability, warmth, opennes
 - `mood` **decays** 0.8/cycle back toward `base`.
 - A **sustained same-direction run** (streak ≥ 3) **hardens** 0.4 of the swing permanently into `base` — the only way a person actually changes.
 - Consumers read the **band** (`BAND_CUTS [20,40,60,80]` → 5 bands; `BAND_MULT [0.5,0.75,1.0,1.25,1.5]`), not the raw value — so 73 and 78 behave identically, and a run of events drifts a citizen across a band over time.
+- **The same discipline holds for LLM-facing surfaces (research.22, S291):** no skill or agent reads `DialState` directly — the only path is `lib/citizenDials.js:disposition()`, a pure filter to prose (verified: zero `DialState` references anywhere in `.claude/skills/` or `.claude/agents/`). Raw dial floats never enter a prompt, same as they never drive engine logic directly. Detail: [[../research/2026-07-04-dial-essence-filter-layer]].
 
 ### Compressor mechanics — the fold (VERIFIED `compressLifeHistory.js`, Phase 9)
 

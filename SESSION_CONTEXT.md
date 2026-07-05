@@ -6,4 +6,4 @@
 **NEXT[civic]:** `node scripts/buildInitiativePackets.js` each cycle (civic.14).
 **NEXT[engine-sheet]:** engine.45 T3 (dead-coupling repairs, bounded singles) or T4 (desk slices — sandbox has 3 cycles of ledger rows). T1+T2 prod push after C101 smoke. C105 approval-rows=0 resolved (C106/C107 wrote 6 rows each). engine.44 still open.
 **NEXT[jarvis]:** Aider = propose-not-deploy behind `npm test` (S274 audit closed).
-**NEXT[research-build]:** pipe.40 (journal fix) — scope TBD with Mike, no files touched. research.22 + engine.43 not started. Deep-dispatch D1 owed (research.20).
+**NEXT[research-build]:** pipe.40 (journal fix) — scope TBD with Mike, no files touched. engine.43 + research.22 DESIGNED/CLOSED, engine-sheet executes. research.20: D1/D3 already resolved S289 (stale NEXT-line fixed); real open piece filed as engine.46 (Phase 1 substrate, blocks Phase 3 pilot).

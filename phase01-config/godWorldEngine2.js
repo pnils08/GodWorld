@@ -259,6 +259,9 @@ function runWorldCycle() {
   // safePhaseCall_(ctx, 'Phase5-GenericCitizens', function() { generateGenericCitizens_(ctx); });
   safePhaseCall_(ctx, 'Phase5-GenericMicroEvents', function() { generateGenericCitizenMicroEvents_(ctx); });
   safePhaseCall_(ctx, 'Phase5-GameModeMicroEvents', function() { generateGameModeMicroEvents_(ctx); });
+  // S296 going-home spec: Mike's game session (feed namesUsed) reaches the
+  // named players' own rows. Fires only on cycles with feed entries.
+  safePhaseCall_(ctx, 'Phase5-GameNightMoments', function() { applyGameNightMoments_(ctx); });
 
   safePhaseCall_(ctx, 'Phase5-EnsureEventsLedger', function() { ensureWorldEventsLedger_(ctx); });
   safePhaseCall_(ctx, 'Phase5-EnsureMediaLedger', function() { ensureMediaLedger_(ctx); });
@@ -1606,6 +1609,9 @@ function runCyclePhases_(ctx) {
   // safePhaseCall_(ctx, 'Phase5-GenericCitizens', function() { generateGenericCitizens_(ctx); });
   safePhaseCall_(ctx, 'Phase5-GenericMicroEvents', function() { generateGenericCitizenMicroEvents_(ctx); });
   safePhaseCall_(ctx, 'Phase5-GameModeMicroEvents', function() { generateGameModeMicroEvents_(ctx); });
+  // S296 going-home spec: Mike's game session (feed namesUsed) reaches the
+  // named players' own rows. Fires only on cycles with feed entries.
+  safePhaseCall_(ctx, 'Phase5-GameNightMoments', function() { applyGameNightMoments_(ctx); });
 
   safePhaseCall_(ctx, 'Phase5-EnsureEventsLedger', function() { ensureWorldEventsLedger_(ctx); });
   safePhaseCall_(ctx, 'Phase5-EnsureMediaLedger', function() { ensureMediaLedger_(ctx); });

@@ -42,6 +42,32 @@ var SEED_DECK_HEADERS = [
   'CycleStamp'      // N  in-world Y{n}C{m} stamp
 ];
 
+/**
+ * One-time v3→v4 deck migration (schema-setup carve-out, Phase 42 §1.1 class —
+ * fires at most once per spreadsheet lifetime). The v3 deck keeps ALL rows
+ * under a legacy name; ensureSheet_ then creates the fresh v4 tab. Idempotent:
+ * a tab already carrying v4 headers is left untouched. Fail-soft: on any
+ * error the migration is skipped and rows append misaligned rather than the
+ * cycle throwing — the verify step reads the deck either way.
+ */
+function migrateSeedDeckV4_(ss) {
+  try {
+    var sheet = ss.getSheetByName('Story_Seed_Deck');
+    if (!sheet) return; // fresh spreadsheet — ensureSheet_ creates v4 directly
+    if (sheet.getLastRow() < 1 || sheet.getLastColumn() < 1) return;
+    var first = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+    if (String(first[0]) === 'Cycle' && String(first[2]) === 'Class') return; // already v4
+    var base = 'Story_Seed_Deck_v3_legacy';
+    var name = base;
+    var n = 2;
+    while (ss.getSheetByName(name)) { name = base + '_' + n; n++; }
+    sheet.setName(name);
+    if (typeof Logger !== 'undefined') Logger.log('migrateSeedDeckV4_: v3 deck parked as ' + name + ' (' + sheet.getLastRow() + ' rows kept)');
+  } catch (err) {
+    try { if (typeof Logger !== 'undefined') Logger.log('migrateSeedDeckV4_ skipped: ' + err); } catch (ignored) {}
+  }
+}
+
 function saveV3Seeds_(ctx) {
   var ss = ctx.ss;
   var S = ctx.summary;
@@ -56,6 +82,7 @@ function saveV3Seeds_(ctx) {
     initializePersistContext_(ctx);
   }
 
+  migrateSeedDeckV4_(ss);
   ensureSheet_(ss, 'Story_Seed_Deck', SEED_DECK_HEADERS);
 
   var cycle = ctx.config.cycleCount || S.cycleId;

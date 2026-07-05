@@ -211,9 +211,12 @@ function buildContractSeeds_(ctx) {
   S.contractSeeds = seeds;
   try {
     if (typeof Logger !== 'undefined') {
+      var containerId = '';
+      try { containerId = (ctx.ss && typeof ctx.ss.getId === 'function') ? ctx.ss.getId() : ''; } catch (ig2) {}
       Logger.log('buildContractSeeds_: ' + seeds.length + ' seeds (' + majorCount +
         ' major / ' + textureCount + ' texture) from ' + ripples.length +
-        ' ripples + ' + events.length + ' citizen events, cycle ' + cycle);
+        ' ripples + ' + events.length + ' citizen events, cycle ' + cycle +
+        (containerId ? ' | container=' + containerId : ''));
     }
   } catch (ignored) {}
 }

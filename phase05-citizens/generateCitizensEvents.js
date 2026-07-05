@@ -1443,6 +1443,51 @@ function generateCitizensEvents_(ctx) {
     sentimentPool.push(makeEntry("watched a shopkeeper pull the security gate down an hour early", ["source:sentiment", "sentiment:negative"], 0.95, false));
   }
 
+  // engine.47 Hop 4 (S297): the town watched the game. ATTACHED signal — a
+  // real Oakland_Sports_Feed row from a played game (S.sportsFeedEntries,
+  // Phase 2), so it earns experience-weighting per the S296 rule (only
+  // ATTACHED signals do; ambient "city mood" above stays flat and anonymous).
+  // These lines NAME the game night. No game this cycle → empty pool, silence.
+  var gameNightPool = [];
+  var gnGame = null;
+  var gnFeed = S.sportsFeedEntries || [];
+  for (var gnf = 0; gnf < gnFeed.length; gnf++) {
+    if (String(gnFeed[gnf].eventType || '').toLowerCase().indexOf('game') >= 0) { gnGame = gnFeed[gnf]; break; }
+  }
+  if (gnGame) {
+    var gnBucket = (typeof gameNightBucket_ === 'function') ? gameNightBucket_(gnGame) : 'neutral';
+    var gnTags = ["source:sports", "gameNight", "streak:" + (gnGame.streak || '-')];
+    // Weight scales with the boost the game actually put on the city
+    // (T3a: sportsSentimentBoost, verified 0.11 for a win). Cap 4 — game
+    // night concentrates the town's texture, never erases the rest of life.
+    var gnI = Math.min(1, Math.abs(Number(S.sportsSentimentBoost || 0)) / 0.15);
+    var gnW = Math.min(4, 1.1 * (1 + 3 * gnI));
+    var gnTexts = {
+      win: [
+        "watched the ninth from a packed bar and walked home in a crowd that didn't want to disperse",
+        "heard the block erupt through an open window when the final out landed",
+        "caught the recap at the counter this morning and stayed for the second retelling"
+      ],
+      winStreak: [
+        "heard strangers at the bus stop talking streak numbers like family business",
+        "wore the cap to work and got three nods before the first coffee",
+        "watched the kids on the corner re-enact the play twice, arguing the call both times"
+      ],
+      loss: [
+        "watched the bar go quiet by the eighth and settle the tab early",
+        "turned the game off before the end and told nobody",
+        "avoided the score all morning and got told anyway, twice"
+      ],
+      neutral: [
+        "kept the game on low while cooking, half an ear on the count",
+        "checked the score once at a red light and put the phone away"
+      ]
+    }[gnBucket] || [];
+    for (var gnt = 0; gnt < gnTexts.length; gnt++) {
+      gameNightPool.push(makeEntry(gnTexts[gnt], gnTags, gnW, false));
+    }
+  }
+
   var econPool = [];
   if (econMood <= 35) {
     econPool.push(makeEntry("noticed money stress showing up in small ways", ["source:economy", "econ:low"], 1, false));
@@ -1651,6 +1696,7 @@ function generateCitizensEvents_(ctx) {
   // MAIN CITIZEN LOOP
   // =========================================================================
   var logRows = [];
+  var gameNightDrawn = []; // engine.47 Hop 4: POPIDs whose day the game shaped
   for (var r = 0; r < rows.length; r++) {
     // engine.38 A1: LIMIT=25 cap removed — full-population coverage. Runaway is
     // structurally bounded: one emit max per citizen per cycle (<= rows.length).
@@ -1949,6 +1995,12 @@ function generateCitizensEvents_(ctx) {
       for (var si = 0; si < sTexts.length; si++) {
         pool.push(makeEntry(sTexts[si], mergeTags(["source:sports"], calendarTags), 1.05, false));
       }
+    }
+
+    // engine.47 Hop 4: tonight's actual game reaches the block — pool built
+    // once above (gated on a real feed entry), drawn per-citizen here.
+    for (var gnp = 0; gnp < gameNightPool.length; gnp++) {
+      pool.push(makeEntry(gameNightPool[gnp].text, mergeTags(gameNightPool[gnp].tags, calendarTags), gameNightPool[gnp].weight, false));
     }
 
     // engine.38 A1-cont (S277) Task 2 disposition: the occupation work-texture
@@ -2461,6 +2513,9 @@ function generateCitizensEvents_(ctx) {
     // holds the metric grain at exactly today's rate.
     if (ev === 0 && typeof recordPulse_ === 'function') recordPulse_(S, neighborhood, primaryTag, tags, pick);
 
+    // engine.47 Hop 4: attribution — this citizen actually drew tonight's game.
+    if (tags.indexOf("gameNight") >= 0) gameNightDrawn.push(String(popId));
+
     remember(popId, primaryTag, pick, chosenVenue, neighborhood, contact && contact.name, tags);
     cycleSeen.push(normText_(pick));
     // Ledger lines: also block the SKELETON within-cycle (S289 C102 rehearsal:
@@ -2486,6 +2541,24 @@ function generateCitizensEvents_(ctx) {
   if (lifeLog && logRows.length) {
     var startRow = lifeLog.getLastRow() + 1;
     lifeLog.getRange(startRow, 1, logRows.length, logRows[0].length).setValues(logRows);
+  }
+
+  // engine.47 Hop 4: one Ripple row — the game reached these citizens' days.
+  // Same call shape as applyGameNightMoments_ (S296, shipped tested).
+  if (gameNightDrawn.length && gnGame && typeof recordRipple_ === 'function') {
+    recordRipple_(ctx, {
+      causeType: 'sports',
+      causeId: 'Oakland_Sports_Feed.gameNight',
+      causeDetail: 'The town watched — game night shaped ' + gameNightDrawn.length + ' citizen day(s)' +
+        (gnGame.streak ? ' (streak ' + gnGame.streak + ')' : ''),
+      effectType: 'game-night-texture',
+      targetScope: 'citizen',
+      targetIds: gameNightDrawn,
+      neighborhood: '',
+      magnitude: gameNightDrawn.length,
+      duration: 1,
+      sourceEngine: 'generateCitizensEvents_'
+    });
   }
 
   S.cycleActiveCitizens = Object.keys(activeSetObj);

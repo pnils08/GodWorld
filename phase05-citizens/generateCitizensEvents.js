@@ -1113,28 +1113,30 @@ function generateCitizensEvents_(ctx) {
       return Math.min(6, w);
     }
 
-    // Gentrification — rent pressure reaches kitchen-table conversation
+    // Gentrification — flat ambient weight ONLY (Mike-direct S296): the
+    // gentrification/displacement scalars are a STUCK EMITTER attached to no
+    // sim mechanics (identical output C115/C116, migration Events: 0 — nobody
+    // pays rent, nobody actually moves). Pressure-proportional weighting here
+    // would claim ~14k residents live a permanent crisis off a dead dial.
+    // These lines stay ambient until a real gentrification system exists;
+    // only ATTACHED signals (crime carry below) earn experience-weighting.
     var gPhase = (st.gentrificationPhase || '').toLowerCase();
-    var dp10 = (st.displacementPressure || 0) / 10; // /10 scale → 0-1
     if (gPhase === 'accelerating' || gPhase === 'advanced') {
       pool.push(makeEntry("overheard another conversation about rents going up in " + neighborhood,
-        ["source:nbhdState", "state:gentrification"], pw(1.15, dp10), false));
+        ["source:nbhdState", "state:gentrification"], 1.15, false));
       pool.push(makeEntry("noticed a longtime neighbor packing up to move out",
-        ["source:nbhdState", "state:gentrification"], pw(1.1, dp10), false));
-      pool.push(makeEntry("found a rent-increase notice taped to a neighbor's door",
-        ["source:nbhdState", "state:gentrification"], pw(1.0, dp10), false));
+        ["source:nbhdState", "state:gentrification"], 1.1, false));
     } else if (gPhase === 'early') {
       pool.push(makeEntry("noticed new faces and new prices around " + neighborhood,
         ["source:nbhdState", "state:gentrification"], 1.05, false));
     }
 
-    // Displacement pressure (/10) — community organizes; ≥6 is the
-    // gentrificationEngine's own "accelerating" gate
+    // Displacement pressure (/10) — same stuck-emitter rule: flat weight
     if ((st.displacementPressure || 0) >= 6) {
       pool.push(makeEntry("stopped by a tenants' meeting about staying in " + neighborhood,
-        ["source:nbhdState", "state:community"], pw(1.15, dp10), false));
+        ["source:nbhdState", "state:community"], 1.15, false));
       pool.push(makeEntry("signed a neighbor's petition about housing in the area",
-        ["source:nbhdState", "state:community"], pw(1.05, dp10), false));
+        ["source:nbhdState", "state:community"], 1.05, false));
     }
 
     // Live crime carry (engine.45 T3b, prev-cycle Crime_Metrics spikes for

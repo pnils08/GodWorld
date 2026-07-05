@@ -106,6 +106,86 @@ function contractSeedNormHood_(name) {
   return String(name || '').toLowerCase().replace(/[^a-z]/g, '');
 }
 
+// Cause family → what a thematically-relevant citizen event looks like.
+// Used to PREFER matching citizens/events; generic hood events remain the fallback.
+var CONTRACT_SEED_EVENT_HINTS = {
+  'crime': /crime|theft|break-?in|incident|police|patrol|safe|robber|vandal|siren/i,
+  'initiative': /council|initiative|program|civic|vote|clinic|transit|fund|meeting/i,
+  'sports': /game|playoff|team|stadium|ballpark|fan|score|inning/i,
+  'economic-event': /work|job|shift|business|market|shop|hire|wage|customer|vendor/i,
+  'gentrification': /rent|landlord|lease|moving|displac|evict|housing|develop/i,
+  'migration': /moving|leave|leaving|goodbye|arriv|relocat|farewell/i,
+  'edition-coverage': /read|paper|article|news|tribune|coverage/i
+};
+
+/** One citizen object per POPID: {popId, name, events:[{tag,text,hood}]} */
+function contractSeedCitizenIndex_(events) {
+  var byPop = {};
+  var hoodCitizens = {}; // hoodKey → [citizen] unique, insertion order
+  for (var i = 0; i < events.length; i++) {
+    var ev = events[i];
+    if (!ev.popId) continue;
+    var c = byPop[ev.popId];
+    if (!c) {
+      c = byPop[ev.popId] = { popId: ev.popId, name: ev.name, events: [] };
+      var hk = contractSeedNormHood_(ev.hood);
+      if (hk) {
+        if (!hoodCitizens[hk]) hoodCitizens[hk] = [];
+        hoodCitizens[hk].push(c);
+      }
+    }
+    c.events.push(ev);
+  }
+  return { byPop: byPop, hoodCitizens: hoodCitizens };
+}
+
+/** The citizen's single most cause-relevant event line. */
+function contractSeedPickEvent_(citizen, causeType) {
+  var hint = CONTRACT_SEED_EVENT_HINTS[causeType];
+  if (hint) {
+    for (var i = 0; i < citizen.events.length; i++) {
+      var ev = citizen.events[i];
+      if (hint.test(ev.tag) || hint.test(ev.text)) return ev;
+    }
+  }
+  return citizen.events[0];
+}
+
+/**
+ * Pick up to max citizens for a seed: exact targets first, then hood citizens
+ * ranked (cause-relevant event > not yet used by another seed > order). Marks
+ * picks in usedPop so consecutive seeds in the same hood name different people.
+ */
+function contractSeedPickCitizens_(index, targetPops, hood, causeType, usedPop, max) {
+  var picked = [];
+  var seen = {};
+  for (var i = 0; i < targetPops.length && picked.length < max; i++) {
+    var c = index.byPop[targetPops[i]];
+    if (c && !seen[c.popId]) { seen[c.popId] = true; picked.push(c); }
+  }
+  if (!picked.length && hood) {
+    var pool = index.hoodCitizens[contractSeedNormHood_(hood)] || [];
+    var hint = CONTRACT_SEED_EVENT_HINTS[causeType];
+    var scored = [];
+    for (var j = 0; j < pool.length; j++) {
+      var cand = pool[j];
+      var relevant = false;
+      if (hint) {
+        for (var k = 0; k < cand.events.length; k++) {
+          if (hint.test(cand.events[k].tag) || hint.test(cand.events[k].text)) { relevant = true; break; }
+        }
+      }
+      scored.push({ c: cand, score: (relevant ? 2 : 0) + (usedPop[cand.popId] ? 0 : 1), order: j });
+    }
+    scored.sort(function (a, b) { return b.score - a.score || a.order - b.order; });
+    for (var m = 0; m < scored.length && picked.length < max; m++) {
+      if (!seen[scored[m].c.popId]) { seen[scored[m].c.popId] = true; picked.push(scored[m].c); }
+    }
+  }
+  for (var p = 0; p < picked.length; p++) usedPop[picked[p].popId] = true;
+  return picked;
+}
+
 /**
  * Phase-7 entry. Joins S.rippleEvents (causes) with this cycle's LifeHistory
  * events (people) into S.contractSeeds. Clusters same-family causes per T5.
@@ -116,21 +196,9 @@ function buildContractSeeds_(ctx) {
   var ripples = S.rippleEvents || [];
   var events = contractSeedCycleEvents_(ctx, cycle);
 
-  // Index citizen events: by POPID and by neighborhood.
-  var byPop = {};
-  var byHood = {};
-  for (var i = 0; i < events.length; i++) {
-    var ev = events[i];
-    if (ev.popId) {
-      if (!byPop[ev.popId]) byPop[ev.popId] = [];
-      byPop[ev.popId].push(ev);
-    }
-    var hk = contractSeedNormHood_(ev.hood);
-    if (hk) {
-      if (!byHood[hk]) byHood[hk] = [];
-      byHood[hk].push(ev);
-    }
-  }
+  // Index citizen events: one citizen object per POPID, hood pools for fallback.
+  var index = contractSeedCitizenIndex_(events);
+  var usedPop = {}; // cross-seed spread — same hood's seeds name different people
 
   // Cluster ripples by causeType + neighborhood (T5 family grouping).
   var clusters = {};
@@ -151,8 +219,7 @@ function buildContractSeeds_(ctx) {
     var lead = group[0];
     var totalMag = 0;
     var causeLines = [];
-    var citizenSet = {};
-    var picked = [];
+    var targetPops = [];
     var businesses = [];
     var otherEntities = [];
 
@@ -165,9 +232,8 @@ function buildContractSeeds_(ctx) {
       var tids = rp.targetIds || [];
       for (var t = 0; t < tids.length; t++) {
         var tid = String(tids[t]);
-        if (rp.targetScope === 'citizen' && byPop[tid] && !citizenSet[tid]) {
-          citizenSet[tid] = true;
-          picked = picked.concat(byPop[tid]);
+        if (rp.targetScope === 'citizen' && targetPops.indexOf(tid) < 0) {
+          targetPops.push(tid);
         } else if (rp.targetScope === 'business' && businesses.indexOf(tid) < 0) {
           businesses.push(tid);
         } else if (rp.targetScope !== 'citizen' && rp.targetScope !== 'business' &&
@@ -178,13 +244,11 @@ function buildContractSeeds_(ctx) {
       }
     }
 
-    // No exact-target citizens → the engine's own events in that neighborhood
-    // this cycle are the participants (still engine-generated, never inferred
-    // from residence alone — these citizens HAD events here this cycle).
-    if (!picked.length && lead.neighborhood) {
-      picked = (byHood[contractSeedNormHood_(lead.neighborhood)] || []).slice(0, CONTRACT_SEED_MAX_CITIZENS);
-    }
-    if (picked.length > CONTRACT_SEED_MAX_CITIZENS) picked = picked.slice(0, CONTRACT_SEED_MAX_CITIZENS);
+    // Exact-target citizens first; else the engine's own events in that
+    // neighborhood this cycle (cause-relevant events preferred, citizens not
+    // already named by another seed preferred — never invented).
+    var picked = contractSeedPickCitizens_(
+      index, targetPops, lead.neighborhood, lead.causeType, usedPop, CONTRACT_SEED_MAX_CITIZENS);
 
     var isMajor = contractSeedIsMajor_(totalMag, group.length);
     if (isMajor) majorCount++; else textureCount++;
@@ -199,7 +263,10 @@ function buildContractSeeds_(ctx) {
             (group.length > 1 ? ' (' + group.length + ' related effects this cycle)' : ''),
       why: causeLines.join(' | '),
       citizens: picked.map(function (p) { return p.popId + ' ' + p.name; }).join('; '),
-      citizenEvents: picked.map(function (p) { return p.text; }).join(' | '),
+      citizenEvents: picked.map(function (p) {
+        var ev = contractSeedPickEvent_(p, lead.causeType);
+        return p.name + ' — ' + ev.text;
+      }).join(' | '),
       businesses: businesses.join('; '),
       otherEntities: otherEntities.join('; '),
       magnitude: Math.round(totalMag * 100) / 100,

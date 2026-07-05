@@ -905,9 +905,15 @@ function applyCityDynamics_(ctx) {
         recordRipple_(ctx, {
           causeType: 'crime',
           causeId: 'Crime_Metrics.shifts.prev-cycle',
-          causeDetail: JSON.stringify(prevCrimeSpikes.filter(function(sp) {
+          // Prose, not JSON — this line lands in the seed row's Why column,
+          // which is world-facing text (seed contract v2, no JSON in the world).
+          causeDetail: prevCrimeSpikes.filter(function(sp) {
             return spikeHoods.indexOf(sp.neighborhood) !== -1;
-          })),
+          }).map(function(sp) {
+            var metric = String(sp.metric || 'crime').replace(/([A-Z])/g, ' $1').toLowerCase();
+            return sp.neighborhood + ' ' + metric.trim() + ' +' + sp.magnitude +
+              (sp.newValue !== undefined ? ' (now ' + sp.newValue + ')' : '');
+          }).join('; ') || 'prev-cycle crime spike carry',
           effectType: 'nightlife/tourism/publicSpaces/sentiment',
           targetScope: 'neighborhood',
           targetIds: spikeHoods,
@@ -1367,7 +1373,11 @@ function applyCityDynamics_(ctx) {
       recordRipple_(ctx, {
         causeType: 'edition-coverage',
         causeId: 'editionNeighborhoodEffects.city',
-        causeDetail: JSON.stringify(cityEffects),
+        // Prose, not JSON — world-facing Why text (seed contract v2).
+        causeDetail: 'Edition coverage lifted the city: ' + Object.keys(cityEffects).map(function(k) {
+          var v = Number(cityEffects[k]) || 0;
+          return k + ' ' + (v >= 0 ? '+' : '') + (Math.round(v * 1000) / 1000);
+        }).join(', '),
         effectType: 'traffic/retail/nightlife/publicSpaces/communityEngagement/culturalActivity',
         targetScope: 'citywide',
         magnitude: cityEffects.traffic || 0,

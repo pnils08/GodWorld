@@ -49,6 +49,12 @@ only after sandbox verification per task.
   the project `.claspignore`, `npx clasp push -f`. Production `.clasp.json` at repo
   root is never touched. Cycle runs are Mike-fired from the sheet; execution logs come
   back as Drive links.
+- **Fresh copy every time — NEVER reuse a prior session's deploy dir (S294 incident).**
+  `clasp push -f` pushes the whole tree; a stale dir silently downgrades every file
+  that changed since it was made. S294 reused the S292-era dir + copied only the T3a
+  files → C109 ran without T2 aboard (no restore, no ripple serialization; C109
+  snapshot lost its ripples). Build the dir with `git archive HEAD | tar -x` and
+  diff-check the session's critical files against the repo before pushing.
 - All reads/writes from this terminal go through the service account
   (`lib/sheets.js`) with the env override: `GODWORLD_SHEET_ID=<sandbox ID> node …`.
   Without the override, lib/sheets.js resolves to PRODUCTION — check the ID before
@@ -142,7 +148,7 @@ seeded, C108 clean, PLAYOFF_SPENDING 9.6 → 6.4 exact).
   - **3d Hood-grain crime (trace K3/G4):** reconcile the two crime worlds so a hood's Crime_Metrics spike reaches that hood's citizens as a local signal, not a citywide average. Scope-bound: the reconciliation design (which representation is canonical) is a one-pager inside this task before code.
   - **3e Initiative-implementation hollow engine (found S294 during 3a caller-graph):** `applyInitiativeImplementationEffects_` is wired (Phase2-InitiativeEffects, godWorldEngine2.js:222/1566) but ALL outputs are dead — sentiment scalar wrote dead `S.sentiment`, `S.initiativeNeighborhoodEffects` + `S.initiativeImplementationTriggers` have zero readers. Measure-twice in-task: fold-vs-retire decision (may overlap civicInitiativeEngine's Phase-5 ripples).
 - **Verify:** per-item before/after cycle comparison; 3a acceptance criterion 3.
-- **Status:** [~] **3a built S294, sandbox verify pending** — `S.sportsSentimentBoost` folds into `finalCity.sentiment` (applyCityDynamics.js, before clamps; ordering verified Phase2-SportsFeed :219 → CityDynamics :224 both entry points); dead `S.sentiment +=` deleted in applySportsSeason.js AND applyEditionCoverageEffects.js (same dead-write class, pre-S216 leftover; sole `S.sentiment` reader is a mediaRoomBriefingGenerator.js:228 fallback behind always-set `dynamics.sentiment`). No new ledger row at the fold — T1's compute-site row in applySportsFeedTriggers_ is the attribution. 3b/3c/3d not started.
+- **Status:** [~] **3a built S294, fold verified on sandbox C109, clean-stack re-verify staged at C110/C111** — `S.sportsSentimentBoost` folds into `finalCity.sentiment` (applyCityDynamics.js, before clamps; ordering verified Phase2-SportsFeed :219 → CityDynamics :224 both entry points); dead `S.sentiment +=` deleted in applySportsSeason.js AND applyEditionCoverageEffects.js (same dead-write class, pre-S216 leftover; sole `S.sentiment` reader is a mediaRoomBriefingGenerator.js:228 fallback behind always-set `dynamics.sentiment`). No new ledger row at the fold — T1's compute-site row in applySportsFeedTriggers_ is the attribution. C109 evidence: sports computed 0.110 → fold log `Sports sentiment boost applied — 0.1100` → ledger sports row magnitude 0.11, all 21 hoods' NM Sentiment up off C108 baseline. Caveat: C109 ran a mixed deploy (T2 absent — see changelog S294 incident), so C110 (seeded: sports W14/W5 + INIT-T110 vote) + C111 (clean) re-verify T3a and T2 together on a HEAD-parity push. 3b/3c/3d not started.
 
 ### Task 4 — Per-desk slice assembler (Node, post-cycle — additive)
 
@@ -210,3 +216,14 @@ applies to any domain before its writers are instrumented.
   'carryover' rows (join key CauseId) over cell-update. Acceptance criterion 2 met on sandbox
   C106→C108 (see Task 2 status). C105 approval-rows=0 open item resolved by observation:
   C106/C107 both wrote 6 approval rows — C105 zero was the net-zero offset hypothesis, closed.
+- 2026-07-04 — **Task 3a built + deploy-downgrade incident (S294), commit b5dadb67.** Sports fold
+  live; dead `S.sentiment` writes deleted (3 writers found, only a dead fallback reader). New 3e
+  filed: `applyInitiativeImplementationEffects_` is a hollow engine (all outputs unread). Incident:
+  S294 reused the S292-era sandbox deploy dir → C109 ran WITHOUT T2 (no `restoreCarriedRipples_`
+  log; C107-born ripples not carried; C109 snapshot saved ripple-less, so PLAYOFF_SPENDING_109 is
+  lost — sandbox-only, acceptable). Diagnosis chain: C109 log silent on restore → C108 log confirmed
+  save-side ran → snapshot byte arithmetic suggested C108 snapshot had ripples → file diff between
+  deploy dir and repo HEAD confirmed 4 stale T2 files. NOT an engine bug; T2 code unchanged. Fix:
+  fresh `git archive HEAD` deploy dir, 167 files pushed, 5 critical files diff-verified SAME.
+  Re-verification staged: C110 seeded (sports + INIT-T110 Fruitvale Mercado vote), C111 to run clean
+  — expect fold line at C110 (T3a) and carryover rows at C111 (T2 regression check).

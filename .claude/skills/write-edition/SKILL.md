@@ -1,8 +1,8 @@
 ---
 name: write-edition
 description: Execute the edition from sift output. Launch reporters, review articles, compile, validate, Mara audit, publish. Mechanical when sift is right.
-version: "2.5"
-updated: 2026-06-22
+version: "2.6"
+updated: 2026-07-06
 tags: [media, active]
 effort: high
 disable-model-invocation: true
@@ -38,6 +38,17 @@ If `dispatch_c{XX}.json` is missing, `/sift` didn't complete its slate lock. Don
 ## Step 0: Bootstrap production log if missing (G-W47)
 
 If `output/production_log_c{XX}.md` is absent but `dispatch_c{XX}.json` is present, bootstrap the log from the dispatch header rather than halting — `/sift` produces the dispatch spec even on runs where the consolidated log wasn't written (pipeline.32 unified-path convention). Seed it with cycle/edition/generatedAt + the slate (one line per `articles[]`/`letters[]`/`quickTakes[]` entry: `slot | section | reporter | headline`), then continue. If BOTH are missing, `/sift` didn't run — stop.
+
+## Step 0.5: Mags' page recall (read-only EIC conditioning) — pipe.40 T5
+
+Before launching reporters, recall what Mags has been developing on her citizen page (POP-00005) — the inner life she brings to compiling this edition:
+
+```bash
+node scripts/magsPageRecall.js --cycle={XX} --context="<dispatch slate summary: the headlines/sections from dispatch_c{XX}.json>"
+```
+
+- **Read-only — NO `--mark`** (that's /sift's job; write-edition never rotates staleness and never appends to her page). Output is a memory-fenced block; it conditions editorial judgment during compile, never quoted as fact, never enters an article as canon.
+- Fail-open: empty/failure → empty output, exit 0, continue. A missing block never blocks the edition.
 
 ## Rules
 - **Brief-led mode is canonical (S215, closes G-W4).** When a desk agent is launched by `/write-edition`, the agent's job is: read brief + IDENTITY.md, write. The desk SKILL.md boot sequences (LENS + RULES + workspace + voice files) are heavier than the brief-led model needs. The agents have been trained to short-circuit boot under brief-led invocation; this skill's rule overrides desk SKILL.md when there's conflict.

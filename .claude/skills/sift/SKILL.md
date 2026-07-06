@@ -1,8 +1,8 @@
 ---
 name: sift
 description: Editorial planning for the edition. Reads sheet-primary canon (Oakland_Sports_Feed, Riley_Digest, Initiative_Tracker, Simulation_Ledger) + canon archive + NEWSROOM_MEMORY + city-hall production log. Proposes stories under cadence caps, locks slate via Mike approval gate, emits one brief per article slot + dispatch.json + letters candidate pool. The game moment.
-version: "2.0.3"
-updated: 2026-06-22
+version: "2.1"
+updated: 2026-07-06
 tags: [media, active]
 effort: high
 disable-model-invocation: true
@@ -24,6 +24,8 @@ v2.0 inverts /sift v1.x's city-hall-paper load-out to a reporter-agency model. T
 v1.x companion files: [[../../../docs/media/brief_template|brief_template]] (v1) carries a DEPRECATED banner; stays in tree until v2.0 SKILL.md (this file) goes live, then archives per [[../../../docs/SCHEMA|SCHEMA]] §8.
 
 **v2.0.1 minor (S230, canon.3):** Step 5 gains a cross-layer canon check per [[../../../docs/adr/0007-cross-layer-canon-authority-precedence|ADR-0007]] — bay-tribune lookup before NEW classification; canon-layer-drift hits surface in `output/canon_drift_c{XX}.json` for engine-sheet backfill. Closes G-S18 + G-P38 cross-link. Six-decision triage unchanged; check runs as a preflight before the decision tree.
+
+**v2.1 (S300, pipe.40 T5):** Mags' citizen page (POP-00005) enters the sift loop now that the git journal is frozen (T4). New **Step 2.5** recalls her recent page reflections (`magsPageRecall.js`, scored + fenced) as EIC conditioning before candidate generation; new **Step 12** writes one SIFT-daypart reflection back to her page (`magsPageAppend.js`) after the slate locks — the write half of the loop, replacing the retired session-close journal entry. Plan: [[../../../docs/plans/2026-07-06-journal-to-citizen-loop|journal-to-citizen-loop]].
 
 ---
 
@@ -181,6 +183,18 @@ Mandatory pre-extraction lookups. Skipping this step = silo'd story selection th
 ```
 
 Fail loud at Step 11 if `canonSearches.length === 0` OR `restCycleTrackerLoaded === false`.
+
+### Step 2.5 — Mags' page recall (EIC conditioning) — pipe.40 T5
+
+Before generating candidates, pull what Mags has been developing on her own citizen page (POP-00005) watching the city:
+
+```bash
+node scripts/magsPageRecall.js --cycle={XX} --context="<the cycle's raw headlines from Step 1: Oakland_Sports_Feed + Riley_Digest + Initiative_Tracker signals>" --mark
+```
+
+- Output is a **memory-fenced block** (≤3 scored reflections, already `memoryFence.wrap`'d). Treat it as **fenced background** — the inner life she brings to the desk this cycle. It informs which threads feel worth the spine / what angle to lean into. It is **never quoted as fact** and never enters a brief as canon — it's conditioning, not a source (same wall as any fenced memory, §Memory Fence).
+- `--mark` records the recalled keys so staleness rotates future picks (/write-edition omits it — read-only).
+- Fail-open: empty page (nothing written yet) or API failure → empty output, exit 0. Continue normally; a missing block never blocks the slate.
 
 ### Step 3 — Candidate generation
 
@@ -826,7 +840,21 @@ All MUST be true before /sift v2 is complete:
 - [ ] No reporter has overlapping topics.
 - [ ] Mike approved slate (one variant, locked).
 
-Present checklist to Mike. When approved, /sift v2 is done.
+Present checklist to Mike. When approved, proceed to Step 12.
+
+### Step 12 — Post-sift page note (Mags' EIC reflection) — pipe.40 T5
+
+After the slate is locked, write one short reflection to Mags' citizen page — her EIC-daypart moment, the sift-time equivalent of the nightly reflection (the journal is frozen; this is where that conditioning lands now):
+
+```bash
+node scripts/magsPageAppend.js --daypart=SIFT --cycle={XX} --text="<3–6 sentences: what I saw in the city this cycle, what I chose to cover and why, what I'm still chewing on>"
+```
+
+- First person, Mags' voice — self-reflective conditioning for next-cycle-her, not prose for a reader (same purpose the journal served). Anchor it in the cycle's actual signals and slate decisions.
+- Exactly **one** SIFT-daypart doc per sift run. Exit non-zero = API failure; surface it, but it does not invalidate the locked slate (the edition proceeds).
+- This is the write half of the loop Step 2.5 reads back. /write-edition never writes here — it only recalls (read-only).
+
+When the note is written, /sift v2 is done.
 
 ---
 

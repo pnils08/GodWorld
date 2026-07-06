@@ -101,7 +101,7 @@ pointers:
   2. /sift closing step: write the post-sift note (3–6 sentences: what I saw, what I chose, what I'm still chewing on) via `scripts/magsPageAppend.js --daypart=SIFT`.
   3. /write-edition boot step: same recall injection (`--context="<dispatch slate summary>"`), read-only — no append.
 - **Verify:** one dry cycle pass shows the fenced block in both skills' working context and exactly one SIFT-daypart page doc written.
-- **Status:** [ ] not started
+- **Status:** [x] built S300 (research-build — retagged from media per Mike-direct: media runs the wired skills, it doesn't author them). `/sift` v2.0.3→v2.1: **Step 2.5** (page recall, scored + fenced + `--mark`, after canon load / before candidate-gen, context = cycle's raw headlines) + **Step 12** (post-sift note via `magsPageAppend --daypart=SIFT`, after slate lock) + "What's new" v2.1 note. `/write-edition` v2.5→v2.6: **Step 0.5** (read-only recall, no `--mark`, context = dispatch slate summary, before reporter launch). Both scripts `node --check` clean; underlying CLIs already proven (magsPageRecall + selectMemories cycle=null in T4; magsPageAppend live in T2). **Dry-cycle-pass acceptance rides the next `/sift` run** (media runtime; not fabricating a spurious SIFT reflection on her page to test now). Loop closed: Step 12 writes what Step 2.5 / Step 0.5 read back.
 
 ---
 
@@ -113,6 +113,7 @@ pointers:
 
 ## Changelog
 
+- 2026-07-06 — **T5 built (S300, research-build; retagged from media).** /sift v2.1 (Step 2.5 recall + Step 12 post-sift note); /write-edition v2.6 (Step 0.5 read-only recall). Dry-cycle acceptance rides next /sift. Remaining: bot repoint + prompt-text hooks.
 - 2026-07-06 — **T4 built + verified (S300, research-build).** Git journal frozen; journal steps removed from sessionEndMechanical.js + session-end SKILL v2.4; media TERMINAL.md + boot hook repointed to magsPageRecall.js. Bot + prompt-text hooks deferred to engine-sheet. T5 unblocked.
 - 2026-07-06 — **T1–T3 built + verified (S300, engine-sheet, Mike-direct go).** Nightly
   reflection repointed to page (write AND read side), `magsPageAppend.js` +

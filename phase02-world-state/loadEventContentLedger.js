@@ -46,7 +46,13 @@ var CONTENT_LEDGER_SOURCE_WHITELIST = {
   'source:continuity': 1, 'source:homeLife': 1, 'source:reflection': 1,
   'source:identity': 1, 'source:listening': 1, 'source:groove': 1,
   'source:civicNews': 1, 'source:bias': 1, 'source:retirement': 1,
-  'source:curiosity': 1, 'source:communityLife': 1
+  'source:curiosity': 1, 'source:communityLife': 1,
+  // Live engine sources whose Daily fold is BY DESIGN (primaryFromTags
+  // fall-through is the deliberate ambient route for these — see the S280
+  // depth-step comment there). Whitelisted S298 so authored rows can extend
+  // these pools; typos still fail closed by matching neither block.
+  'source:economy': 1, 'source:chaos': 1, 'source:sentiment': 1,
+  'source:season': 1, 'source:age': 1, 'source:familyLife': 1
 };
 
 // Conditions micro-DSL (S289 resolver table — vocab locked to code enums).

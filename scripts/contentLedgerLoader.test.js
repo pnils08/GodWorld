@@ -126,5 +126,21 @@ function check(name, cond) {
   check('3 AND terms compiled', c.length === 3 && c[0].op === '<=' && c[1].op === 'flag' && c[2].f === 'season');
 }
 
+
+// 7. S298 whitelist extension — deliberate Daily-fold sources load; typo still rejected
+{
+  const ctx = mockCtx([
+    HDR,
+    ['line', 'econ.pool', '', 'ran the numbers again', '', 'wealth<=3', 'source:economy', '', ''],
+    ['line', 'chaos.pool', '', 'checked the gutters at dawn', '', '', 'source:chaos', '', ''],
+    ['line', 'x.pool', '', 'typo source', '', '', 'source:econmy', '', '']
+  ]);
+  loadEventContentLedger_(ctx);
+  const L = ctx.summary.contentLedger;
+  check('economy line loads (S298)', (L.lines['econ.pool'] || []).length === 1);
+  check('chaos line loads (S298)', (L.lines['chaos.pool'] || []).length === 1);
+  check('typo source still fails closed', L.skipped === 1 && !L.lines['x.pool']);
+}
+
 console.log('\n' + pass + '/' + (pass + fail) + ' passed');
 process.exit(fail ? 1 : 0);

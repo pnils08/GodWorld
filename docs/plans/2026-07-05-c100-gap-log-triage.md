@@ -47,7 +47,7 @@ Three gap logs from the S271 C100 production run (post-publish, edition-print, r
 - **What:** `gradeEdition.js` scores `10 − criticals×2 − warnings×0.75` — zero errata scores A regardless of whether the edition covered the cycle's real events with the characters that matter. Rhea (0.91)/cycle-review (0.97) are checklist-pass lanes that always clear; only Mara (0.833, prose critique) tracked reality on C100, and even she under-scored her own text ("a third reverted to C96 machinery pattern" got a B+).
 - **Steps:** Add an "aliveness / actual-events-covered" dimension to `docs/media/story_evaluation.md` (selection-side, Mara-style qualitative check, not another checklist gate) that can pull a clean-but-dead edition's grade down. Document that Rhea/cycle-review are necessary-not-sufficient (process/checklist lanes) and Mara is the reality-check lane — the Final Arbiter weighting (0.5/0.3/0.2 per REVIEWER_LANE_SCHEMA) already leans Rhea-heavy; flag whether that weighting needs revisiting once the new dimension exists (open question below, not blocking this phase).
 - **Verify:** `grep -n "aliveness\|actual-events-covered" docs/media/story_evaluation.md` returns the new criterion.
-- **Status:** [ ] not started
+- **Status:** [x] done S298 — §Aliveness added (top-3-events check, B-cap for clean-but-dead, lane roles documented, Arbiter re-weighting left as the Mike-gated open question)
 
 ---
 

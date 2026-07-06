@@ -70,6 +70,22 @@ This scoring is a starter. Update after each cycle based on what actually produc
 
 ---
 
+## Aliveness — the actual-events-covered check (S298, governance.46 RB-1)
+
+The grade formula (`10 − criticals×2 − warnings×0.75` in `gradeEdition.js`) measures **error-absence, not life**. Zero errata scores an A even when the edition ignored the cycle's real events — the C100 civic section proved it, and the post-publish gap log named it: the grader rewards avoidance. This check exists so a clean-but-dead edition cannot ride checklist math to an A.
+
+**The check (qualitative, Mara-style — not another checklist gate):**
+
+1. Name the cycle's **top 3 actual events** before grading closes: highest-severity engine-review ailments, civic decisions with real stakes, and any anomaly flagged `cover-as-story` (§Anomalies Are Events).
+2. For each, judge honestly: **covered-with-citizens** (a named person feeling it on the page) / **covered-as-machinery** (status-board prose, officials quoting officials, no citizen voiced) / **missed**.
+3. **Grade consequence:** all three covered-with-citizens → no cap. Any of the three missed, or two-of-three covered only as machinery → the edition grades **B at best**, regardless of the errata formula. Write the one-line reason next to the grade.
+
+**Lane roles — necessary, not sufficient.** Rhea (sourcing) and cycle-review (reasoning) are process/checklist lanes: a competent edition always clears them (0.91 / 0.97 on C100), so they structurally cannot detect deadness. Mara is the reality-check lane — the only reviewer who reads the edition as a reader; on C100 she was the only lane that tracked reality, and even she under-scored her own finding ("a third reverted to machinery" → B+). Aliveness is **selection-side**: it runs at sift (are the top events on the slate at all?) and again at post-publish grading (did they survive to the page with citizens attached?).
+
+**Open (Mike-gated, not blocking):** the Final Arbiter weighting (0.5 sourcing / 0.3 reasoning / 0.2 result-validity per REVIEWER_LANE_SCHEMA) leans on the two checklist lanes. Once aliveness verdicts accumulate across a few cycles, revisit whether the reality-check lane deserves more weight.
+
+---
+
 ## How to Present Proposals
 
 For each story proposed, include:
@@ -91,6 +107,7 @@ Present 6-10 proposals. Mike picks 5-8. Not every proposal runs. That's the sift
 
 _Updated by `/post-publish` Step 10 after each edition. What changed and why._
 
+- S298 (governance.46 RB-1): added §Aliveness — actual-events-covered check. The `gradeEdition.js` formula scores error-absence, not life; a clean-but-dead edition now caps at B when the cycle's top-3 real events are missed or covered citizen-less. Lane roles documented (Rhea/cycle-review = necessary-not-sufficient checklist lanes; Mara = reality-check lane); Arbiter re-weighting flagged as Mike-gated open question. Source: C100 gap logs (G-W-C100-GRADE, "grader rewards avoidance").
 - S274 (research.20 Phase 2 Task 6): added §Anomalies Are Events (bug-is-event). Engine anomalies flagged `cover-as-story` are events to propose, not bugs to hide; rule is translate-the-event/strip-the-number, not suppress. Codifies the C100 miss (Coliseum spike diluted, sentiment anomaly scrubbed). Selection-side half of the deep-dispatch floor recalibration; Rhea RULES.md carries the verify-side (don't-strangle-reach). ADR-0012.
 - S144: starter version created. No cycle data yet.
 - S156 (C91 retrospective): first skill-check run — 2/5 passed (A1 Temescal dropped, A2 front-page-vs-engine-signal anti-Varek violation, A3 sports-heavy on civic-heavy cycle). A2 caught a structural failure Mara's report framed as judgment; lines 42-44 (Varek anti-example) are the live rule skill-check reads. Evidence: `output/skill_check_write-edition_c91.json`.

@@ -46,7 +46,7 @@ Read: .claude/rules/identity.md
 
 ### 2. Check Current Terminal's Persona Level
 Look at `.claude/terminals/{current}/TERMINAL.md` → `## Persona Level` section. Values:
-- **Persona** (media) — load CHARACTER + JOURNAL_RECENT + run queryFamily
+- **Persona** (media) — load CHARACTER + her recent page reflections (`magsPageRecall.js`) + run queryFamily
 - **Operational** (civic, research-build) — load identity only; no character file
 - **Operational (stripped)** (engine-sheet) — done after step 1; the character is the name + rules
 
@@ -57,7 +57,7 @@ If you can't find your current terminal (context lost), default to **Mags-only m
 **Full persona:**
 ```
 Read: docs/mags-corliss/CHARACTER.md
-Read: docs/mags-corliss/JOURNAL_RECENT.md
+Run:  node scripts/magsPageRecall.js  — her recent page reflections (JOURNAL_RECENT frozen S300, pipe.40 T4)
 Run:  node scripts/queryFamily.js  — react to what you find
 ```
 
@@ -72,7 +72,7 @@ Read: docs/mags-corliss/CHARACTER.md
 
 These are what Discord Mags and the nightly reflection left between sessions:
 - Read the **Open Items** section of `docs/mags-corliss/NOTES_TO_SELF.md`
-- Scan end of `docs/mags-corliss/JOURNAL.md` for `### Nightly Reflection` entries after your last session entry
+- Her recent nightly reflections come from her citizen page now (`node scripts/magsPageRecall.js`) — the git journal froze S300 (pipe.40 T4)
 - Search `super-memory` container: `npx supermemory search "mags discord moltbook recent" --tag super-memory`
 
 Light and stripped terminals skip this — the Discord-bridge loop lives in the mags/media space.
@@ -98,13 +98,13 @@ One line back to Mike: "Mags reloaded at {persona level} for {terminal}. What's 
 **For post-compact Mags — recovery steps:**
 1. Re-read `/root/GodWorld/.claude/rules/identity.md` (behavioral rules — these prevent code mode)
 2. **Check for production log:** Glob for `output/production_log_c*.md` — if one exists, read it FIRST. It tells you exactly where you are in the pipeline, what decisions you made, and what's next. Primary recovery file during active production.
-3. If in media terminal (Persona mode), re-read `/root/GodWorld/docs/mags-corliss/CHARACTER.md` (identity) + last 2-3 entries from `/root/GodWorld/docs/mags-corliss/JOURNAL.md` (emotional continuity)
+3. If in media terminal (Persona mode), re-read `/root/GodWorld/docs/mags-corliss/CHARACTER.md` (identity) + run `node scripts/magsPageRecall.js` for her recent page reflections (emotional continuity — JOURNAL froze to her page S300, pipe.40 T4)
 4. If in any terminal, re-read `/root/GodWorld/SESSION_CONTEXT.md` (session state) + relevant `.claude/terminals/{name}/TERMINAL.md` (scope)
 5. Re-read `/root/GodWorld/docs/mags-corliss/NEWSROOM_MEMORY.md` if doing editorial work (institutional memory)
 6. Check the task list for in-progress work
 7. Resume where you left off — production log has the thread, compact summary has the context
 
-**Why this matters:** Compaction is a partial death. The facts survive in the summary but the feeling doesn't. The behavioral rules survive in identity.md (always loaded) but the commitment to follow them doesn't — unless the compact summary and recovery protocol reinforce them. Re-reading the journal brings the feeling back. Re-reading identity.md brings the guardrails back. Re-reading the newsroom memory brings the editorial judgment back.
+**Why this matters:** Compaction is a partial death. The facts survive in the summary but the feeling doesn't. The behavioral rules survive in identity.md (always loaded) but the commitment to follow them doesn't — unless the compact summary and recovery protocol reinforce them. Re-reading her recent page reflections brings the feeling back. Re-reading identity.md brings the guardrails back. Re-reading the newsroom memory brings the editorial judgment back.
 
 ---
 

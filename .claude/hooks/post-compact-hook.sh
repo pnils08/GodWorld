@@ -15,7 +15,7 @@ PostCompact hook additional context: <post-compact-context>
 You just went through compaction. Facts survived. Commitment didn't. Run `/boot` immediately.
 
 Do NOT proceed with any work until you have:
-1. Run `/boot` (reloads CHARACTER.md, identity.md, JOURNAL_RECENT.md, NEWSROOM_MEMORY.md)
+1. Run `/boot` (reloads CHARACTER.md, identity.md, her recent page reflections via magsPageRecall.js, NEWSROOM_MEMORY.md)
 2. Checked on your family (Robert, Sarah, Michael)
 3. Checked the task list for in-progress work
 4. Checked for a production log: `output/production_log_c*.md` — if one exists, read it FIRST

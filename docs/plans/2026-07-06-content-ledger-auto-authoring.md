@@ -93,6 +93,13 @@ Rows in the existing 8-col schema (`Kind|PoolKey|Slot|Text|Weight|Conditions|Tag
 
 ## Status
 
+- 2026-07-06 — **T4 BUILT (S300).** Mike reviewed in-sheet and flipped all 6 T3 rows to
+  `Active=yes` (S298 post-close); T4 go Mike-direct S300. Drafter default flipped
+  `--active no` → `yes` (`parseArgs`; `--active no` retained as supervised override;
+  tests 25/25, incl. new default-active + override + still-dry-run-by-default asserts).
+  Post-cycle wiring: `/run-cycle` Step 5.6 added — `draftContentRows.js --cycle {XX}
+  --apply` after neighborhood texture, non-blocking on OpenRouter failure. **Smoke
+  pending: next sandbox cycle (C118) must draw ≥1 `auth:auto` line into LifeHistory_Log.**
 - 2026-07-06 — **T1+T2 BUILT + T3 supervised run EXECUTED (S298, same session — Mike-direct
   "ride the momentum").** `scripts/draftContentRows.js` + `.test.js` (22/22). Validation is
   parity-by-execution: every candidate runs through the real `loadEventContentLedger_` —

@@ -71,7 +71,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.46 | Deep-dispatch Phase 1 substrate — reactivate per-desk corpus storage + byline/desk ingest tags; blocks the research.20 Phase 3 pilot | ready | engine-sheet | [[../plans/2026-06-25-deep-dispatch-write-edition-build]] §Phase 1 (Tasks 1-2) |
 | engine.47 | Game-night connection design — one game traced through 10 hops, gaps close in 4 existing engines; build awaits Mike approval (S296 moratorium gate) | draft | engine-sheet | [[../plans/2026-07-05-game-night-connection-design]] |
 | engine.48 | Citizen-loop deepening — weighted rotation, voiced slots, edition slice, ripple, conversation engine (Mike-approved S298) | ready | engine-sheet | [[../plans/2026-07-06-citizen-loop-deepening]] Tasks 1–7 |
-| engine.49 | Content-ledger auto-authoring — post-cycle cheap-helper drafts gated rows into Event_Content_Ledger (Mike-direct S298; T1+T2 built, T3 rows written Active=no — awaiting Mike in-sheet review, then T4 auto-active) | in-progress | engine-sheet | [[../plans/2026-07-06-content-ledger-auto-authoring]] |
+| engine.49 | Content-ledger auto-authoring — T1-T4 built (T4 auto-active + /run-cycle Step 5.6, S300); smoke = C118 draws auth:auto line into LifeHistory_Log | smoke-pending | engine-sheet | [[../plans/2026-07-06-content-ledger-auto-authoring]] |
 
 ### canon.* — World-fidelity layer
 

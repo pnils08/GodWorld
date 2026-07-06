@@ -54,6 +54,20 @@ Reads the same Riley_Digest + Neighborhood_Map sources as Step 5 (structured, no
 
 **Gate:** File exists on disk.
 
+### Step 5.6: Content-ledger drafter (engine.49 T4)
+
+Draft condition-gated Event_Content_Ledger rows from what this cycle actually produced (Story_Seed_Deck seeds, Neighborhood_Map pressures, Cycle_Seeds weather/holiday). Cheap-helper LLM (OpenRouter deepseek default), never premium tokens.
+
+```bash
+node scripts/draftContentRows.js --cycle {XX} --apply
+```
+
+Validation is parity-by-execution — every candidate runs through the real `loadEventContentLedger_`, so a row the loader would skip is never written. Caps 10/3/2 + dedup + `auth:auto` provenance; rows land `Active=yes` (T4 auto-active — the fail-closed loader is the standing guard, `Active=no` in-sheet is Mike's kill switch). Script prints a draft report (written / invalid / dup / capped) and readback-verifies the append. If OpenRouter is unreachable it exits 1 with `ERR` — treat as non-blocking for the rest of the chain (the cycle already ran; pools just don't grow this cycle). Don't retry-loop; note the miss in the Step 6 gap log.
+
+Plan: `docs/plans/2026-07-06-content-ledger-auto-authoring.md` (engine.49).
+
+**Gate:** Draft report printed; on `--apply`, script exits 0 with rows verified (0 written is a valid outcome on a quiet cycle).
+
 ### Step 6: Gap Log Close (engine-sheet)
 
 Run the mechanical baseline audit and append judgment-layer entries.

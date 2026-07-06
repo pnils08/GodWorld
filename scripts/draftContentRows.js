@@ -22,8 +22,9 @@
  * Usage:
  *   node scripts/draftContentRows.js --cycle 117 [--apply] [--backend stub]
  *        [--active no] [--sheet-id <id>]
- *   Default: dry-run (prints, writes nothing), --active no (T3 supervised —
- *   rows land dark until flipped), sheet from GODWORLD_SHEET_ID.
+ *   Default: dry-run (prints, writes nothing), --active yes (T4 auto-active —
+ *   fail-closed loader + caps + dedup + prune are the standing guards; pass
+ *   --active no for a supervised T3-style run), sheet from GODWORLD_SHEET_ID.
  *
  * Caps (logged, never silent): 10 rows/cycle, 3/PoolKey, 2 fragments/slot.
  * Dedup: normalized text vs existing tab rows + within batch.
@@ -47,7 +48,7 @@ const HDR = ['Kind', 'PoolKey', 'Slot', 'Text', 'Weight', 'Conditions', 'Tags', 
 const MODEL = process.env.DRAFTER_MODEL || 'deepseek/deepseek-chat';
 
 function parseArgs(argv) {
-  const a = { apply: false, backend: 'openrouter', active: 'no', cycle: null, sheetId: process.env.GODWORLD_SHEET_ID };
+  const a = { apply: false, backend: 'openrouter', active: 'yes', cycle: null, sheetId: process.env.GODWORLD_SHEET_ID };
   for (let i = 2; i < argv.length; i++) {
     if (argv[i] === '--apply') a.apply = true;
     else if (argv[i] === '--cycle') a.cycle = Number(argv[++i]);

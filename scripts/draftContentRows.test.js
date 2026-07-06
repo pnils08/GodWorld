@@ -96,5 +96,13 @@ for (const [c, expected] of FIXTURES) {
   check('no hood gate passes', d.hoodGateValid('wealth<=3', hoods) === true);
 }
 
+// 6. T4 auto-active: default Active=yes, --active no still overrides
+{
+  const base = ['node', 'draftContentRows.js', '--cycle', '118', '--sheet-id', 'test-sheet'];
+  check('default active=yes (T4)', d.parseArgs(base).active === 'yes');
+  check('--active no override holds', d.parseArgs(base.concat(['--active', 'no'])).active === 'no');
+  check('default is still dry-run', d.parseArgs(base).apply === false);
+}
+
 console.log(`\n${pass}/${pass + fail} passed`);
 process.exit(fail ? 1 : 0);

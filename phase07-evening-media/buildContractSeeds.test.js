@@ -61,8 +61,9 @@ var LH_HEADER = ['Timestamp', 'POPID', 'Name', 'EventTag', 'EventText', 'Neighbo
   assert('1i trend carries strength', seeds[0].trend.indexOf('4.20 strength left') >= 0);
 })();
 
-// §2 No exact targets → Citizens column stays EMPTY (Mike-direct: exact citizens
-// only; bystander-by-address attachment is the banned ambiguity)
+// §2 No exact targets → Grade 1 neighborhood draw fills Citizens (Mike-direct
+// 2026-07-06, supersedes exact-only: the citizen doesn't need the event to
+// testify — the voice speaks from their own LifeHistory)
 (function () {
   var rows = [
     LH_HEADER,
@@ -82,9 +83,52 @@ var LH_HEADER = ['Timestamp', 'POPID', 'Name', 'EventTag', 'EventText', 'Neighbo
   };
   b.buildContractSeeds_(ctx);
   var s = ctx.summary.contractSeeds[0];
-  assert('2a no bystanders — citizens empty when engine named none', s.citizens === '' && s.citizenEvents === '');
-  assert('2b texture below thresholds', s.seedClass === 'texture');
-  assert('2c domain civic', s.domain === 'CIVIC');
+  assert('2a hood draw fills citizens when engine named none', s.citizens.indexOf('POP-00100 Amina Pilgrim') >= 0 && s.citizens.indexOf('POP-00101 Tunde Silk') >= 0);
+  assert('2b drawn citizens carry their own event lines', s.citizenEvents.indexOf('stoop sale') >= 0 && s.citizenEvents.indexOf('kid to school') >= 0);
+  assert('2c texture below thresholds', s.seedClass === 'texture');
+  assert('2d domain civic', s.domain === 'CIVIC');
+})();
+
+// §2.1 Exact targets lead, hood draw fills behind (never displaces), capped at
+// CONTRACT_SEED_FILL_N; citywide seed draws across hoods; ctx.rng → deterministic
+(function () {
+  var rows = [
+    LH_HEADER,
+    ['t', 'POP-00201', 'Ada Lin', 'Crime|Local', 'Reported a break-in', 'Temescal', 95],
+    ['t', 'POP-00202', 'Bo Reyes', 'Community', 'Swept the stoop', 'Temescal', 95],
+    ['t', 'POP-00203', 'Cy Okafor', 'Family', 'Sunday dinner', 'Temescal', 95],
+    ['t', 'POP-00204', 'Dee Marsh', 'Career', 'Opened the shop late', 'Temescal', 95],
+    ['t', 'POP-00205', 'Ely Tran', 'Community', 'Watered the median', 'Temescal', 95],
+    ['t', 'POP-00206', 'Fay Osei', 'Community', 'Lake walk', 'Lake Merritt', 95]
+  ];
+  function lcg(seed) {
+    var st = seed;
+    return function () { st = (st * 1664525 + 1013904223) % 4294967296; return st / 4294967296; };
+  }
+  function build(rngSeed) {
+    var ctx = {
+      ss: fakeSS(rows),
+      rng: lcg(rngSeed),
+      summary: {
+        cycleId: 95,
+        rippleEvents: [
+          { cycle: 95, causeType: 'crime', causeId: 'TEM', causeDetail: 'Property crime +4', effectType: 'crime-cluster', targetScope: 'citizen', targetIds: ['POP-00201'], neighborhood: 'Temescal', magnitude: 4, duration: 1 },
+          { cycle: 95, causeType: 'sports', causeId: 'STREAK', causeDetail: 'A\'s W14', effectType: 'sentiment', targetScope: 'citywide', targetIds: [], neighborhood: '', magnitude: 0.11, duration: 1 }
+        ]
+      }
+    };
+    b.buildContractSeeds_(ctx);
+    return ctx.summary.contractSeeds;
+  }
+  var seeds = build(7);
+  var tem = seeds[0], city = seeds[1];
+  assert('2.1a exact target leads', tem.citizens.indexOf('POP-00201 Ada Lin') === 0);
+  assert('2.1b filled to CONTRACT_SEED_FILL_N', tem.citizens.split(';').length === 4);
+  assert('2.1c fill stays in hood', tem.citizens.indexOf('Fay Osei') < 0);
+  assert('2.1d citywide seed draws across hoods', city.citizens.split(';').length === 4 && city.citizens !== '');
+  assert('2.1e same rng seed → identical picks', JSON.stringify(build(7)) === JSON.stringify(seeds));
+  var again = build(9);
+  assert('2.1f exact target survives any seed', again[0].citizens.indexOf('POP-00201 Ada Lin') === 0);
 })();
 
 // §3 Cluster promotion: 3 same-family causes in one hood merge into ONE major seed

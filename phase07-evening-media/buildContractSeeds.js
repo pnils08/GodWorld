@@ -28,6 +28,7 @@ var CONTRACT_SEED_MAJOR_MAG = 3;      // |magnitude| at/above → major (crime s
 var CONTRACT_SEED_MAJOR_MAG_FRAC = 0.05; // fractional magnitudes (sentiment 0-1 scale)
 var CONTRACT_SEED_CLUSTER_N = 3;      // same cause family + hood family count → merged major
 var CONTRACT_SEED_MAX_CITIZENS = 6;   // exact-participant cap per seed row
+var CONTRACT_SEED_FILL_N = 4;         // Grade 1: fill Citizens to this count via neighborhood draw
 var CONTRACT_SEED_DOMAIN = {
   'initiative': 'CIVIC',
   'economic-event': 'ECONOMIC',
@@ -164,21 +165,49 @@ function contractSeedPickEvent_(citizen, causeType) {
 }
 
 /**
- * EXACT citizens only (Mike-direct, seed contract v2): a seed names a citizen
- * ONLY when the engine's own effect targeted that citizen (targetScope
- * 'citizen' with POPIDs). There is NO neighborhood fallback — attaching
- * bystanders by address is the exact ambiguity the contract bans. An empty
- * Citizens column is honest output: it flags the SOURCE ENGINE as one that
- * fires neighborhood-scope without naming who it hit (the per-engine fix list
- * lives with the citizen-conditioning work, not in this joiner).
+ * Exact targets first, then a neighborhood draw (Grade 1 — Mike-direct
+ * 2026-07-06, supersedes the earlier exact-only rule): a citizen does NOT
+ * need to have received the event to testify — attach POPIDs from the seed's
+ * neighborhood and the voice speaks from that citizen's own LifeHistory. The
+ * event is disposable; the testimony is the asset. Exact engine targets
+ * (targetScope 'citizen') still lead and are never displaced; the draw only
+ * fills behind them up to CONTRACT_SEED_FILL_N (cap CONTRACT_SEED_MAX_CITIZENS).
+ * Citywide / unknown-hood seeds draw across all citizens with events this
+ * cycle. Draw order: unused-by-other-seeds first (cross-seed spread), via
+ * ctx.rng when provided (deterministic replay), insertion order otherwise.
+ * Exposure weighting is Grade 2; participation events are Grade 3 — see
+ * docs/research/2026-07-06-city-citizen-seam-audit.md.
  */
-function contractSeedPickCitizens_(index, targetPops, hood, causeType, usedPop, max) {
+function contractSeedPickCitizens_(index, targetPops, hood, causeType, usedPop, max, roll) {
   var picked = [];
   var seen = {};
   for (var i = 0; i < targetPops.length && picked.length < max; i++) {
     var c = index.byPop[targetPops[i]];
     if (c && !seen[c.popId]) { seen[c.popId] = true; picked.push(c); }
   }
+
+  if (picked.length < CONTRACT_SEED_FILL_N) {
+    var hk = contractSeedNormHood_(hood);
+    var pool = (hk && hk !== 'citywide' && index.hoodCitizens[hk]) ? index.hoodCitizens[hk] : null;
+    if (!pool) {
+      pool = [];
+      for (var pid in index.byPop) pool.push(index.byPop[pid]);
+    }
+    var unused = [];
+    var reused = [];
+    for (var u = 0; u < pool.length; u++) {
+      if (seen[pool[u].popId]) continue;
+      (usedPop[pool[u].popId] ? reused : unused).push(pool[u]);
+    }
+    var candidates = unused.concat(reused);
+    while (picked.length < CONTRACT_SEED_FILL_N && candidates.length) {
+      var at = (typeof roll === 'function') ? Math.floor(roll() * candidates.length) : 0;
+      var drawn = candidates.splice(at, 1)[0];
+      seen[drawn.popId] = true;
+      picked.push(drawn);
+    }
+  }
+
   for (var p = 0; p < picked.length; p++) usedPop[picked[p].popId] = true;
   return picked;
 }
@@ -245,7 +274,8 @@ function buildContractSeeds_(ctx) {
     // neighborhood this cycle (cause-relevant events preferred, citizens not
     // already named by another seed preferred — never invented).
     var picked = contractSeedPickCitizens_(
-      index, targetPops, lead.neighborhood, lead.causeType, usedPop, CONTRACT_SEED_MAX_CITIZENS);
+      index, targetPops, lead.neighborhood, lead.causeType, usedPop, CONTRACT_SEED_MAX_CITIZENS,
+      (typeof ctx.rng === 'function') ? ctx.rng : null);
 
     var isMajor = contractSeedIsMajor_(totalMag, group.length);
     if (isMajor) majorCount++; else textureCount++;

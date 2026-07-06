@@ -53,7 +53,7 @@ effort: high
 | `docs/engine/CYCLE_SEPARATION.md` | S113 architecture notes still relevant given subsequent phases? |
 | `docs/engine/phase19_agent_personas.md` | Three administrative-agent personas (City Clerk + others) — match current `.claude/agents/` directories? |
 | `docs/engine/PHASE_24_PLAN.md` | Citizen life engine plan — status updated? Sub-items reflect current progress? |
-| `docs/engine/PHASE_33_PLAN.md` | Riley integration — 12 of 19 remaining per S152; verify count + status. |
+| `docs/engine/PHASE_33_PLAN.md` | RETIRED S299 — frozen for trail; no staleness check. Live remainder is ROLLOUT engine.50. |
 | `docs/engine/PHASE_38_PLAN.md` | Engine auditor — sub-phases 38.1-38.8 status accurate? Measurement loop (38.5) DONE S156? |
 | `docs/engine/PHASE_39_PLAN.md` | Reviewer chain — 39.1-39.10 all DONE S148? |
 | `docs/engine/PHASE_40_PLAN.md` | 5 of 6 done (40.1, 40.3, 40.4, 40.5, 40.6); only 40.2 remains? |

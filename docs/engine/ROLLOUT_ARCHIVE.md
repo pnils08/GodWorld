@@ -1167,6 +1167,16 @@ Prior sweep passes: §S248, §S250, §S263, §S268, §S274 (latest before this).
 
 ---
 
+## S299 Archive Pass (2026-07-06, research-build) — research.1 Riley-integration retirement
+
+Single-row close (Mike-approved S299). Not a `done-pending-archive` sweep — a deliberate retirement after a legacy-value review of `riley/` against the current stack.
+
+### research.* (1)
+
+- **research.1** [research-build] — Phase 33 Riley integration (was "12 of 19 subitems remaining"). **Close-note:** RETIRED S299 after side-by-side review of the Riley legacy federation (34 Apps Script projects, `riley/RILEY_PLAN.md`) against the current stack. Verdict: nothing further ports. The Sifter (9 fixed aggregate-stat prompts) is superseded by `/sift` and is philosophically inverted vs. universal protagonism (aggregates, not entities); the Feed loop's publication→canon feedback idea was rebuilt better (edition readback, coverage effects, citizen usage logs); sports headline push superseded by sports desk + engine.40; the headline "generator" is a string template (`"Breaking: " + topic`) — the clever part was `mirror-auto`'s resumable Drive crawler, an Apps Script time-limit workaround we don't need server-side. Subitem disposition: 33.16 remainder DONE by other routes (`buildBusinessCards.js` / `buildNeighborhoodCards.js` / `buildFaithCards.js` / `buildCulturalCards.js` / `buildInitiativeCards.js` + `wdCardsDaemon.js`); 33.14/33.15 superseded (restricted desk-agent tools; MCP lookup layer); 33.8/33.9/33.10/33.11 dead by later governance or already-absorbed; 33.13 Sandcastle evaluated S156, no build trigger fired; 33.6 never built, city-clerk agent covers the need; 33.12 EIC-sheet ideas + 33.19 stay parked in the plan file as reference (old intake scripts remain EIC source material per standing note); **33.17 trait profiles rehomed to engine.50** (the one live remainder). `riley/` stays on disk as archive. Source: `docs/engine/PHASE_33_PLAN.md` (status flipped RETIRED) + `riley/RILEY_PLAN.md`.
+
+---
+
 ## S295 Archive Pass (2026-07-05, research-build) — post-S291 closures sweep
 
 4 `done-pending-archive` rows accumulated since the §S278 pass and were never swept (S291–S294 soft closes chained without one). Bookkeeping sweep run alongside the C100 gap-log triage (governance.46).

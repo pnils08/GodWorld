@@ -1,9 +1,9 @@
 ---
 title: Phase 33 Implementation Plan — Riley Integration & Hardening
 created: 2026-04-16
-updated: 2026-04-16
-type: plan
-tags: [infrastructure, architecture, active]
+updated: 2026-07-06
+type: archive
+tags: [infrastructure, architecture, archived]
 sources:
   - "S132 Riley audit — docs/RESEARCH.md"
   - "riley/RILEY_PLAN.md — Riley ecosystem inventory, active triggers, what to keep/replace"
@@ -19,7 +19,7 @@ pointers:
 
 # Phase 33 Implementation Plan — Riley Integration & Hardening
 
-**Status:** IN PROGRESS. 7 of 19 subitems DONE (S133 + S134 + S137b). 12 remaining, tracked below.
+**Status:** RETIRED S299 (2026-07-06, Mike-approved). Riley legacy review complete — nothing further ports (close-note in [[engine/ROLLOUT_ARCHIVE]] §S299). The one live remainder, 33.17 trait profiles, rehomed to ROLLOUT row **engine.50**. 33.12 EIC-sheet ideas + 33.19 physical details stay parked here as reference. Subitem text below is frozen for trail.
 
 ---
 
@@ -134,3 +134,4 @@ Reporters invent physical details per article — a limp, a raspy voice, a nervo
 ## Changelog
 
 - 2026-04-16 — Extracted from [[engine/ROLLOUT_PLAN]] §Phase 33 (S152). Content preserved verbatim; frontmatter + structure added. Completed subitems compressed to pointer list.
+- 2026-07-06 — RETIRED (S299, Mike-approved). research.1 closed to ROLLOUT_ARCHIVE §S299 after legacy-value review of `riley/`. 33.16 remainder found done by other routes (entity-card scripts + daemon); 33.14/33.15 superseded; 33.8–33.11 dead by later governance; 33.13 evaluated S156 with no build trigger; 33.6 covered by city-clerk agent; 33.17 → engine.50; 33.12 + 33.19 parked here as reference.

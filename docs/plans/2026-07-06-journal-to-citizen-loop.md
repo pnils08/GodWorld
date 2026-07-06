@@ -49,7 +49,7 @@ pointers:
   2. Keep the Discord post + logs untouched. Keep `--dry-run` printing the reflection with a "would append to page" banner.
   3. Delete the now-dead `JOURNAL_FILE` / `JOURNAL_RECENT_FILE` constants + rotation helper.
 - **Verify:** live sandbox run → new page doc under `cp-POP-00005`; `git status` shows JOURNAL files untouched.
-- **Status:** [ ] not started
+- **Status:** [x] built S300 (engine-sheet). Persistence repointed (`appendToPage` w/ date `key` — cycle-collision guard: customId is (cycle,daypart) and prod cycles sit for days, so two nightlies same cycle would silently collide; date key makes idempotency per-night). Also repointed the *read*: `mags.loadRecentReflections` reads frozen JOURNAL.md, so "Earlier reflections" now comes from her page (`loadPageTail`, fenced per citizenPage consumer contract, fail-open). Dry-run verified end-to-end (10 searches, reflection composed, page banner, 0 writes). **Live-write acceptance = tonight's cron run.**
 
 ### Task 2: Page-append CLI for skill-side writes *(engine-sheet)*
 
@@ -58,7 +58,7 @@ pointers:
 - **Steps:**
   1. `node scripts/magsPageAppend.js --daypart=SIFT --cycle=N --text="..."` (or `--stdin`) → `ensurePagePointer_('POP-00005')` + `appendReflection_` with the given daypart. Exit non-zero on API failure so the calling skill sees it.
 - **Verify:** one test append lands on the page with correct metadata; second run with same text creates a distinct doc (reflections are entries, not upserts).
-- **Status:** [ ] not started
+- **Status:** [x] built S300 (engine-sheet). `--key` flag added beyond spec (customId disambiguation when several docs share cycle+daypart). Verified live: test append landed with correct metadata (type=reflection, daypart, cycle, customId), AW pointer written to ledger (`cp-POP-00005`), test doc deleted after — her page starts clean.
 
 ### Task 3: Scored page-recall CLI for EIC injection *(engine-sheet)*
 
@@ -68,7 +68,7 @@ pointers:
   1. `node scripts/magsPageRecall.js --cycle=N --context="<free text>"` → `recentPage_('POP-00005', 15)` candidates → `resonanceRecall.selectMemories({ popId:'POP-00005', cycle, contextText, cap:3 })` → print `memoryFence.wrap(...)` block to stdout (empty output when no page docs — fail-open, same as the wake).
   2. Mirror the wake's candidate filtering (skip `type='tension'` docs; 320-char per-reflection cap).
 - **Verify:** run against her live page → ≤3 fenced reflections; empty page → empty stdout, exit 0.
-- **Status:** [ ] not started
+- **Status:** [x] built S300 (engine-sheet). Wake-parity (recentPage_ not v4 search, tension filter, 320-char cap, cap 3). `--mark` flag added beyond spec: default read-only; /sift passes `--mark` so staleness rotates picks, /write-edition omits it (plan Task 5 note for media). Verified both branches live: empty page → empty stdout exit 0; populated page → 1 fenced block.
 
 ### Task 4: Freeze the git journal + retire journal close-steps *(research-build)*
 
@@ -107,4 +107,11 @@ pointers:
 
 ## Changelog
 
+- 2026-07-06 — **T1–T3 built + verified (S300, engine-sheet, Mike-direct go).** Nightly
+  reflection repointed to page (write AND read side), `magsPageAppend.js` +
+  `magsPageRecall.js` shipped. T1 live-write acceptance rides tonight's cron. T4
+  (research-build journal freeze) now unblocked; T5 (media skill wiring) can consume the
+  CLIs. Known follow-up for T4: `scripts/mags-discord-bot.js:162` also reads
+  `loadRecentReflections` (frozen journal) — the bot's boot conditioning needs the same
+  page repoint, flagged for research-build.
 - 2026-07-06 — Initial draft (S298, research-build). Mike-direct scoping: journal = Mags' citizen loop; media-only injection at EIC moments; git exits the loop. Supersedes S249 journal-is-media-only with journal-is-page-only.

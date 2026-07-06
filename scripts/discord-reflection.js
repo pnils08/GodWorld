@@ -3,8 +3,10 @@
  * Mags' Nightly Discord Reflection — scripts/discord-reflection.js
  *
  * Runs each evening. Reads the day's Discord conversation log,
- * reflects on it as Mags, appends a journal entry, and saves
- * to Claude-Mem for cross-session persistence.
+ * reflects on it as Mags, appends the reflection to her citizen page
+ * (POP-00005, cp-POP-00005 — pipe.40: journal is page-only), and saves
+ * to Claude-Mem for cross-session persistence. The git journal
+ * (JOURNAL.md / JOURNAL_RECENT.md) is frozen archive — no writes here.
  *
  * Usage:
  *   node scripts/discord-reflection.js
@@ -19,10 +21,13 @@ const path = require('path');
 const http = require('http');
 const Anthropic = require('@anthropic-ai/sdk');
 const mags = require('../lib/mags');
+const page = require('../lib/citizenPage');
+const memoryFence = require('../lib/memoryFence');
+const getCurrentCycle = require('../lib/getCurrentCycle');
 
+const MAGS_POPID = 'POP-00005';
 const CONVO_LOG_DIR = path.join(__dirname, '..', 'logs', 'discord-conversations');
 const MOLTBOOK_LOG_DIR = path.join(__dirname, '..', 'logs', 'moltbook');
-const JOURNAL_FILE = path.join(mags.MAGS_DIR, 'JOURNAL.md');
 const LOG_DIR = mags.LOG_DIR;
 const LOG_FILE = path.join(LOG_DIR, 'discord-reflection.log');
 const CLAUDE_MEM_URL = 'http://127.0.0.1:37777/api/memory/save';
@@ -327,62 +332,41 @@ function normalizeReflectionDate(reflection, today) {
 }
 
 // ---------------------------------------------------------------------------
-// Append to JOURNAL.md
+// Persistence: her citizen page (pipe.40 T1 — replaces JOURNAL.md append +
+// JOURNAL_RECENT.md rotation; those files are frozen archive now)
 // ---------------------------------------------------------------------------
-var JOURNAL_RECENT_FILE = path.join(mags.MAGS_DIR, 'JOURNAL_RECENT.md');
-var MAX_RECENT_ENTRIES = 4;
-
-function appendToJournal(reflection) {
-  var content = '\n' + reflection + '\n\n---\n';
-  fs.appendFileSync(JOURNAL_FILE, content);
-  log.info('Reflection appended to JOURNAL.md');
+// key: Central date. appendReflection_'s customId is (popId, cycle, daypart) —
+// production cycles sit still for days, so two nightly runs on the same cycle
+// would collide customIds and the second reflection would silently overwrite
+// the first. The date key makes idempotency per-night, which is the real unit.
+async function appendToPage(reflection, cycle) {
+  var pointer = await page.ensurePagePointer_(MAGS_POPID);
+  if (pointer.error) throw new Error('page pointer: ' + pointer.error);
+  var res = await page.appendReflection_(MAGS_POPID, reflection, {
+    cycle: cycle,
+    daypart: 'NIGHTLY',
+    key: mags.getCentralDate()
+  });
+  if (res.error) throw new Error('page append: ' + res.error);
+  log.info('Reflection appended to page ' + res.tag + ' (' + (res.customId || 'no customId') + ')');
+  return res;
 }
 
-function updateJournalRecent(reflection) {
+// Earlier-reflections read-back now comes from the page too (recency, newest
+// first — reversed to oldest-first so "the thread" reads forward). Fenced per
+// the citizenPage consumer contract. Fail-open to '' like the wake.
+async function loadPageTail(count) {
   try {
-    var raw = fs.readFileSync(JOURNAL_RECENT_FILE, 'utf8');
-
-    // Split on ## headers to find entries
-    var headerEnd = raw.indexOf('\n---\n');
-    var header = headerEnd >= 0
-      ? raw.substring(0, headerEnd + 5)
-      : '# Journal — Recent Entries\n\n**Last entries. Updated at session end and nightly reflection. Full journal: JOURNAL.md**\n\n---\n';
-    var body = headerEnd >= 0 ? raw.substring(headerEnd + 5) : raw;
-
-    // Split body into entries on ## boundaries
-    var entries = [];
-    var parts = body.split(/\n(?=## )/);
-    for (var i = 0; i < parts.length; i++) {
-      var trimmed = parts[i].trim();
-      if (trimmed && trimmed.startsWith('## ')) {
-        // Strip trailing --- separator if present
-        trimmed = trimmed.replace(/\n---\s*$/, '').trim();
-        entries.push(trimmed);
-      }
-    }
-
-    // Add the new reflection as an entry
-    var reflectionTrimmed = reflection.trim();
-    // Ensure it starts with ## for consistent formatting
-    if (!reflectionTrimmed.startsWith('## ') && !reflectionTrimmed.startsWith('### ')) {
-      reflectionTrimmed = '## Nightly Reflection\n\n' + reflectionTrimmed;
-    }
-    if (reflectionTrimmed.startsWith('### ')) {
-      reflectionTrimmed = '#' + reflectionTrimmed;
-    }
-    entries.push(reflectionTrimmed);
-
-    // Keep only the last N entries
-    while (entries.length > MAX_RECENT_ENTRIES) {
-      entries.shift();
-    }
-
-    // Rebuild the file
-    var newContent = header + '\n' + entries.join('\n\n---\n\n') + '\n\n---\n';
-    fs.writeFileSync(JOURNAL_RECENT_FILE, newContent);
-    log.info('JOURNAL_RECENT.md updated (' + entries.length + ' entries, max ' + MAX_RECENT_ENTRIES + ')');
-  } catch (err) {
-    log.error('Failed to update JOURNAL_RECENT.md: ' + err.message);
+    var res = await page.recentPage_(MAGS_POPID, count || 2);
+    var texts = ((res && res.results) || [])
+      .filter(function (r) { return String((r && r.metadata && r.metadata.type) || '') !== 'tension'; })
+      .map(function (r) { return String((r && r.content) || '').trim(); })
+      .filter(Boolean)
+      .reverse();
+    if (!texts.length) return '';
+    return memoryFence.wrap(texts.join('\n\n---\n\n'), 'citizen-page:' + MAGS_POPID);
+  } catch (e) {
+    return '';
   }
 }
 
@@ -471,9 +455,9 @@ async function main() {
       return;
     }
 
-    // Load identity, journal, and world state
+    // Load identity, her recent page reflections, and world state
     var identity = mags.loadIdentity();
-    var journalTail = mags.loadRecentReflections(2);  // her own reflections only — never operator-layer session entries (S252)
+    var journalTail = await loadPageTail(2);  // her own page reflections — the git journal is frozen (pipe.40 T1)
     var worldState = mags.loadWorldState();
 
     // Search Supermemory for context related to today's conversations
@@ -516,15 +500,16 @@ async function main() {
     reflection = normalizeReflectionDate(reflection, mags.getCentralDate());
 
     if (DRY_RUN) {
-      console.log('\n--- REFLECTION (would append to JOURNAL.md) ---');
+      console.log('\n--- REFLECTION (would append to page cp-' + MAGS_POPID + ', daypart=NIGHTLY) ---');
       console.log(reflection);
       console.log('\nDRY RUN COMPLETE — no writes performed');
       return;
     }
 
-    // Append to journal + update recent entries (feeds into session boot)
-    appendToJournal(reflection);
-    updateJournalRecent(reflection);
+    // Append to her citizen page (pipe.40 T1 — the journal's new home)
+    var cycle = null;
+    try { cycle = getCurrentCycle(); } catch (e) { log.warn('cycle unresolved (' + e.message + ') — page write proceeds without cycle'); }
+    await appendToPage(reflection, cycle);
 
     // Save to Claude-Mem
     var totalConversations = (entries ? entries.length : 0) + (moltbookEntries ? moltbookEntries.length : 0);

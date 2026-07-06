@@ -71,7 +71,8 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.46 | Deep-dispatch Phase 1 substrate — reactivate per-desk corpus storage + byline/desk ingest tags; blocks the research.20 Phase 3 pilot | ready | engine-sheet | [[../plans/2026-06-25-deep-dispatch-write-edition-build]] §Phase 1 (Tasks 1-2) |
 | engine.47 | Game-night connection design — one game traced through 10 hops, gaps close in 4 existing engines; build awaits Mike approval (S296 moratorium gate) | draft | engine-sheet | [[../plans/2026-07-05-game-night-connection-design]] |
 | engine.48 | Citizen-loop deepening — weighted rotation, voiced slots, edition slice, ripple, conversation engine (Mike-approved S298) | ready | engine-sheet | [[../plans/2026-07-06-citizen-loop-deepening]] Tasks 1–7 |
-| engine.49 | Content-ledger auto-authoring — T1-T4 built (T4 auto-active + /run-cycle Step 5.6, S300); smoke = C118 draws auth:auto line into LifeHistory_Log | smoke-pending | engine-sheet | [[../plans/2026-07-06-content-ledger-auto-authoring]] |
+| engine.49 | Content-ledger auto-authoring — T1-T4 built; C118 smoke PASS (38 auth:auto draws in LifeHistory); first auto-active run wrote 7 rows verified | done-pending-archive | engine-sheet | [[../plans/2026-07-06-content-ledger-auto-authoring]] |
+| engine.50 | Citizen trait profiles — ~343 citizens missing TraitProfile; generate Archetype/Tone/Motifs/Traits from LifeHistory + engine data (rehomed from Phase 33 §33.17 at research.1 retirement, S299) | ready | engine-sheet | [[PHASE_33_PLAN]] §33.17 |
 
 ### canon.* — World-fidelity layer
 
@@ -99,7 +100,6 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| research.1 | Phase 33 Riley integration (12 of 19 subitems remaining) | in-progress | research-build | [[PHASE_33_PLAN]] |
 | research.2 | Memento CBR case-bank (Phase 1 ready; Phase 2 blocked on ≥500 tuples + droplet headroom) | blocked | research-build | [[../plans/2026-04-21-memento-cbr-case-bank]] |
 | research.3 | Document processing pipeline evaluation (Qianfan-OCR for civic-doc ingest) | needs-info | research-build | inline-eval (trigger: civic pipeline needs real-world doc input) |
 | research.4 | Desk agents migration off Claude → DeepSeek (research/watch — cost/limits trigger) | needs-info | research-build | [[../MIGRATION_OFF_CLAUDE]] |

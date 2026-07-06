@@ -98,8 +98,15 @@ Rows in the existing 8-col schema (`Kind|PoolKey|Slot|Text|Weight|Conditions|Tag
   `--active no` → `yes` (`parseArgs`; `--active no` retained as supervised override;
   tests 25/25, incl. new default-active + override + still-dry-run-by-default asserts).
   Post-cycle wiring: `/run-cycle` Step 5.6 added — `draftContentRows.js --cycle {XX}
-  --apply` after neighborhood texture, non-blocking on OpenRouter failure. **Smoke
-  pending: next sandbox cycle (C118) must draw ≥1 `auth:auto` line into LifeHistory_Log.**
+  --apply` after neighborhood texture, non-blocking on OpenRouter failure. **Smoke PASS
+  (C118, same day):** 38 `auth:auto` draws into LifeHistory_Log — A's-streak line drew 14×,
+  Fruitvale line 1×, MOOD fragment 23× (filled into other lines); `auth:auto` provenance
+  rides into EventTag so machine lines stay sweepable downstream. 3 of 6 rows didn't draw
+  (gated/weighted pool behavior, not failures). First **auto-active live run** executed
+  post-C118 on the sandbox: 8 drafted → 1 invalid (dead `hood=D7` gate, caught again) →
+  7 written `Active=yes` + readback-verified. engine.49 CLOSED pending archive sweep.
+  Sandbox identity + vetting protocol recorded in [[../reference/DEPLOY]] §Sandbox
+  (Mike-direct: all upgrades vet on sandbox before a new live cycle).
 - 2026-07-06 — **T1+T2 BUILT + T3 supervised run EXECUTED (S298, same session — Mike-direct
   "ride the momentum").** `scripts/draftContentRows.js` + `.test.js` (22/22). Validation is
   parity-by-execution: every candidate runs through the real `loadEventContentLedger_` —

@@ -93,6 +93,15 @@ Rows in the existing 8-col schema (`Kind|PoolKey|Slot|Text|Weight|Conditions|Tag
 
 ## Status
 
+- 2026-07-06 — **T1+T2 BUILT + T3 supervised run EXECUTED (S298, same session — Mike-direct
+  "ride the momentum").** `scripts/draftContentRows.js` + `.test.js` (22/22). Validation is
+  parity-by-execution: every candidate runs through the real `loadEventContentLedger_` —
+  the validator IS the loader, drift impossible. Added beyond spec: dead-hood-gate check
+  (a `hood=D7` district gate parses fine but matches no citizen — rejected pre-write;
+  caught a real model output on the first live run). Backends: openrouter (deepseek
+  default, `DRAFTER_MODEL` env) + deterministic `--stub`. Live C117 supervised run on the
+  sandbox: 7 drafted → 1 invalid (dead hood gate) → **6 written `Active=no` + verified**
+  (4 lines, 2 fragments; all `auth:auto`-tagged; Active header added at I1). **NEXT: T3
+  review — Mike flips survivors to `yes` in-sheet; then T4 auto-active + post-cycle wiring.**
 - 2026-07-06 — Drafted (S298, engine-sheet, Mike-direct "go spec it"). Whitelist
-  pre-req shipped + sandbox-deployed same session (4abf4b52). Build (T1) awaits Mike's
-  go on the engine.49 row.
+  pre-req shipped + sandbox-deployed same session (4abf4b52).

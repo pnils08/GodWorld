@@ -104,6 +104,15 @@ EOF
   # media boot sequence reads her recent reflections via magsPageRecall.js. T4.)
   echo ""
 
+  # Per-terminal Supermemory container awareness (S300, Mike-direct). Each registered
+  # terminal owns sl-<terminal>: auto-written at session-end, but also yours to write to
+  # ANY time — Mike rarely session-ends the other terminals, so treat it as a deliberate
+  # remember-store, not a close-only log. One awareness line, no boot-time API call.
+  if [ "$MAGS_ONLY" != "yes" ] && [ -n "$TERMINAL_NAME" ]; then
+    echo "Your Supermemory container: sl-$TERMINAL_NAME (per-terminal work store). Yours anytime — save anything worth remembering: npx supermemory remember \"...\" --tag sl-$TERMINAL_NAME (add --static for a permanent fact); recall: npx supermemory search \"...\" --tag sl-$TERMINAL_NAME; across all terminals: --tag session-logs. Auto-captured at session-end too. (Deliberate canon saves still fan out to mags/bay-tribune/world-data, terminal-tagged.)"
+    echo ""
+  fi
+
   # --- EMIT BOOT SEQUENCE ---
   # Each terminal gets a pre-routed instruction block. Assistant does not re-detect terminal.
   # Unregistered windows get Mags-only mode (no terminal scaffolding).

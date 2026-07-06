@@ -386,48 +386,9 @@ function subPm2Restart(args) {
 }
 
 // ---------------------------------------------------------------------------
-// Sub-step: SESSION_CONTEXT minimal-handoff guard (FATAL on violation)
-// SESSION_CONTEXT is a minimal AI→AI handoff (Mike-direct, S283): one `#` header
-// line, one **PIN:** line, one **NEXT[terminal]:** line per terminal. Nothing
-// else — no prose sections, no tables, no shipped/status narrative (claude-mem
-// saves the session; git history shows the work; ROLLOUT_PLAN carries open work).
-// ---------------------------------------------------------------------------
-
-const NEXT_LINE_MAX_CHARS = 350;
-const PIN_LINE_MAX_CHARS = 450;
-
-function subContextMinimalGuard() {
-  try {
-    const lines = fs.readFileSync(SESSION_CONTEXT_PATH, 'utf8').split('\n');
-    const problems = [];
-    lines.forEach((raw, i) => {
-      const line = raw.trim();
-      if (line === '') return;
-      const n = i + 1;
-      if (/^# /.test(line)) return; // single header line allowed
-      if (/^\*\*PIN:\*\*/.test(line)) {
-        if (line.length > PIN_LINE_MAX_CHARS) problems.push(`L${n}: PIN line ${line.length} chars (max ${PIN_LINE_MAX_CHARS}) — trim; detail belongs in ROLLOUT/claude-mem`);
-        return;
-      }
-      if (/^\*\*NEXT\[[a-z-]+\]:\*\*/.test(line)) {
-        if (line.length > NEXT_LINE_MAX_CHARS) problems.push(`L${n}: NEXT line ${line.length} chars (max ${NEXT_LINE_MAX_CHARS}) — one line: where the work is + next move; detail → ROLLOUT/claude-mem`);
-        return;
-      }
-      problems.push(`L${n}: disallowed content ("${line.slice(0, 60)}…") — only header/PIN/NEXT lines belong here`);
-    });
-    if (problems.length === 0) {
-      console.log('  ✓ SESSION_CONTEXT is minimal (header + PIN + NEXT lines only)');
-      return { ok: true };
-    }
-    problems.forEach(p => console.log(`  ✗ ${p}`));
-    console.log('  ✗ SESSION_CONTEXT minimal-handoff contract violated — fix before close.');
-    return { ok: false };
-  } catch (err) {
-    console.log(`  ✗ minimal-handoff guard error: ${err.message}`);
-    return { ok: false };
-  }
-}
-
+// (SESSION_CONTEXT minimal-handoff guard REMOVED — Mike-direct S298. The
+// FATAL length/shape caps on PIN/NEXT lines are retired; SESSION_CONTEXT
+// content is model judgment again.)
 // ---------------------------------------------------------------------------
 // Sub-step: session summary → Supermemory (best-effort, never fatal)
 // Mirrors claude-mem's already-generated session summary into the session-logs
@@ -463,7 +424,6 @@ function buildSteps(args) {
     steps.push({ name: 'rotateJournalRecent', fn: subRotateJournalRecent });
     steps.push({ name: 'JOURNAL content-quality check', fn: subJournalQuality });
   }
-  steps.push({ name: 'SESSION_CONTEXT minimal-handoff guard (FATAL)', fn: subContextMinimalGuard });
   steps.push({ name: 'session summary → Supermemory (best-effort)', fn: subSessionSummaryBridge });
   steps.push({ name: 'auditPlanTagDrift (informational)', fn: subAuditPlanTagDrift });
   steps.push({ name: 'ROLLOUT conformance lint (informational)', fn: subRolloutLint });

@@ -89,7 +89,7 @@ pointers:
 
   **Transition gap (flag to Mike, not a blocker):** the 3 real reflections frozen in JOURNAL_RECENT do NOT carry to the page; the page accretes from tonight's cron forward, so media boots thin on reflection-conditioning until it fills. Inherent to the migration. One-time backfill of those reflections onto her page is available if Mike wants continuity preserved.
 
-  **Deferred as pipe.40 follow-up (NOT built — research-build builds; Mike-direct S300: media orchestrates, it doesn't author skills/code):** (1) `scripts/mags-discord-bot.js:162` still calls `mags.loadRecentReflections(2)` (reads frozen JOURNAL.md via `lib/mags.js`) — repoint needs `buildMagsSystemPrompt` (sync) → async page read (`recentPage_`), a real refactor rippling to every call site. Degrades gracefully meanwhile (frozen JOURNAL.md still readable → stale-but-real reflections, no crash). (2) Prompt-text-only hooks that still mention journaling as an activity — `stop-hook.sh` ("write a journal entry"), `pre-compact-hook.sh`, `skill-suggest.sh` — cosmetic wrong-instruction text, no frozen-file *read*; low-priority cleanup.
+  **Follow-up — BUILT S300 (research-build; Mike "proceed"):** (1) `scripts/mags-discord-bot.js` repointed — `buildMagsSystemPrompt` made async, `mags.loadRecentReflections(2)` (frozen JOURNAL.md) → new local `loadPageReflections(2)` (`citizenPage.recentPage_(POP-00005)`, tension-filtered, fenced, fail-open, mirrors discord-reflection loadPageTail). Seam: `getSystemPrompt` async (`await provider.buildSystemPrompt()` — works for sync citizen providers too); both callers await (L488 message path; L731 forEach warms cache fire-and-forget, `sessions.set` stays synchronous so routing is intact). Shared `lib/mags.loadRecentReflections` left untouched (bot was its last live caller). node --check clean; `citizenPage.recentPage_` + `memoryFence.wrap` exports confirmed. (2) Prompt-text hooks updated — `stop-hook.sh` (session-end reminder rewritten to PIN+NEXT+ROLLOUT, journal retired), `pre-compact-hook.sh` (Chat constraint → NOTES_TO_SELF), `skill-suggest.sh` (session-end + boot descriptions). All hooks `bash -n` clean.
 
 ### Task 5: EIC injection + post-sift note wiring *(research-build builds; media runs the wired skills)*
 
@@ -113,6 +113,7 @@ pointers:
 
 ## Changelog
 
+- 2026-07-06 — **Follow-up built → pipe.40 fully built (S300).** discord-bot repointed to her page (async builder + getSystemPrompt, loadPageReflections); prompt-text hooks (stop/pre-compact/skill-suggest) updated. Last live frozen-journal reader closed. Acceptance rides next /sift + tonight's cron.
 - 2026-07-06 — **T5 built (S300, research-build; retagged from media).** /sift v2.1 (Step 2.5 recall + Step 12 post-sift note); /write-edition v2.6 (Step 0.5 read-only recall). Dry-cycle acceptance rides next /sift. Remaining: bot repoint + prompt-text hooks.
 - 2026-07-06 — **T4 built + verified (S300, research-build).** Git journal frozen; journal steps removed from sessionEndMechanical.js + session-end SKILL v2.4; media TERMINAL.md + boot hook repointed to magsPageRecall.js. Bot + prompt-text hooks deferred to engine-sheet. T5 unblocked.
 - 2026-07-06 — **T1–T3 built + verified (S300, engine-sheet, Mike-direct go).** Nightly

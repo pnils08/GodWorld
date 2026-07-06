@@ -41,7 +41,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | pipeline.36 | /edition-print C96 friction | ready | engine-sheet / research-build | [[../../output/production_log_c96_print_gaps.md]] — detail in pointer (relocated 2026-07-02) |
 | pipeline.35 | Cycle-init "admin" skill + one-true-cycle-source | ready | research-build / engine-sheet | [[../plans/2026-05-31-cycle-init-admin-skill]] + [[../plans/2026-05-24-governance-14-edition-pipeline-rewrite]] — detail in pointer (relocated 2026-07-02) |
 | pipeline.39 | C99 gap handoffs — post-publish/print/run-cycle logs + canon drift + letters-gate bug | ready | research-build / engine-sheet / media | [[../../output/production_log_c99_post_publish_gaps.md]] + [[../../output/production_log_c99_print_gaps.md]] + [[../../output/production_log_run_cycle_c99_gaps.md]] + canon_drift_c99.json — filed 2026-07-02 |
-| pipeline.40 | Journal → citizen-loop — T1–5 built S300 (page CLIs + git-journal freeze + /sift+/write-edition recall/note wiring); remaining: discord-bot repoint + prompt-text hooks | in-progress | research-build | [[../plans/2026-07-06-journal-to-citizen-loop]] |
+| pipeline.40 | Journal → citizen-loop — FULLY BUILT S300 (freeze + CLIs + /sift+/write-edition wiring + discord-bot repoint + hooks); acceptance rides next /sift + tonight's cron | done-pending-archive | research-build | [[../plans/2026-07-06-journal-to-citizen-loop]] |
 | pipeline.41 | Tensions → /sift story seeds — /sift reads the open tension register as door-knock candidates (subjective material, never publishable as fact) | ready | media | [[../plans/2026-07-06-citizen-loop-deepening]] §Task 8 |
 
 ### engine.* — Engine code, ledger, schema

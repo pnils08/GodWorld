@@ -87,7 +87,7 @@ case "$WORKFLOW" in
     ;;
   "Chat")
     CONSTRAINTS="- No agenda. Just talking.
-- Journal if something meaningful happens."
+- Note anything meaningful to NOTES_TO_SELF (journal froze S300 — reflections land on her page via /sift)."
     ;;
   *)
     CONSTRAINTS="- Workflow not detected. Ask Mike what we're working on."

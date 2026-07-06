@@ -30,6 +30,8 @@ const path = require('path');
 const mags = require('../lib/mags');
 const contextScan = require('../lib/contextScan');
 const personaProvider = require('../lib/personaProvider');
+const citizenPage = require('../lib/citizenPage');   // pipe.40 T4 — Mags' reflections live on her page now, not the frozen journal
+const memoryFence = require('../lib/memoryFence');
 
 // ---------------------------------------------------------------------------
 // Phase 40.3 Task 6 — Discord credential-read refusal
@@ -157,9 +159,32 @@ function loadConversationHistory(provider, session) {
 // ---------------------------------------------------------------------------
 const MAGS_HISTORY_FILE = path.join(__dirname, '..', 'logs', 'discord-conversation-history.json');
 
-function buildMagsSystemPrompt() {
+const MAGS_POPID = 'POP-00005';
+
+// Her recent reflections now come from her citizen page (POP-00005), not the
+// frozen git journal (pipe.40 T4, S300). Recency read, tension docs skipped,
+// fenced per the citizenPage consumer contract, fail-open to '' — mirrors
+// discord-reflection.js loadPageTail. Replaces mags.loadRecentReflections
+// (that shared reader still points at the frozen JOURNAL.md; only this call
+// site repoints — the bot is its last live consumer).
+async function loadPageReflections(count) {
+  try {
+    var res = await citizenPage.recentPage_(MAGS_POPID, count || 2);
+    var texts = ((res && res.results) || [])
+      .filter(function (r) { return String((r && r.metadata && r.metadata.type) || '') !== 'tension'; })
+      .map(function (r) { return String((r && r.content) || '').trim(); })
+      .filter(Boolean)
+      .reverse();
+    if (!texts.length) return '';
+    return memoryFence.wrap(texts.join('\n\n---\n\n'), 'citizen-page:' + MAGS_POPID);
+  } catch (e) {
+    return '';
+  }
+}
+
+async function buildMagsSystemPrompt() {
   var identity = mags.loadIdentity();
-  var journalTail = mags.loadRecentReflections(2);  // her reflections only — never operator-layer session entries (S252)
+  var journalTail = await loadPageReflections(2);  // her page reflections (POP-00005); git journal frozen S300 (pipe.40 T4)
   var worldState = mags.loadWorldState();           // compact orientation header; she searches for depth (S252 Task 5)
   var simYear = mags.currentSimYear();              // 2041 + floor(cycle/52) — citizens age every 52 cycles (S252)
   var notesToSelf = mags.loadNotesToSelf(10);
@@ -263,9 +288,11 @@ const magsProvider = {
 // ---------------------------------------------------------------------------
 // Get system prompt (with hourly refresh) — per session.
 // ---------------------------------------------------------------------------
-function getSystemPrompt(provider, session) {
+async function getSystemPrompt(provider, session) {
   if (!session.cachedPrompt || (Date.now() - session.lastLoad) > IDENTITY_REFRESH_MS) {
-    session.cachedPrompt = provider.buildSystemPrompt();
+    // await works for both provider kinds: Mags' builder is async (page read),
+    // citizen providers' buildSystemPrompt is sync (await of a string is a no-op).
+    session.cachedPrompt = await provider.buildSystemPrompt();
     session.lastLoad = Date.now();
   }
   return session.cachedPrompt;
@@ -485,7 +512,7 @@ var SEARCH_TOOL = {
 // Call Claude API — generalized over a persona provider + its channel session.
 // ---------------------------------------------------------------------------
 async function callClaude(provider, session, userMessage, userName, userId) {
-  var systemPrompt = getSystemPrompt(provider, session);
+  var systemPrompt = await getSystemPrompt(provider, session);
 
   // Per-message dynamic context is provider-specific (Mags: profile/archive/family/dashboard;
   // citizen: their own fenced page recall).
@@ -726,9 +753,11 @@ async function main() {
   // Restore each persona's conversation history + pre-load its identity
   personas.forEach(function (provider, channelId) {
     var session = newSession();
-    sessions.set(channelId, session);
+    sessions.set(channelId, session);          // registered synchronously — routing intact before any message
     loadConversationHistory(provider, session);
-    getSystemPrompt(provider, session);
+    // Warm the prompt cache in the background (now async — page read). Fire-and-forget;
+    // getSystemPrompt fail-opens internally, and the first message rebuilds if unwarmed.
+    getSystemPrompt(provider, session).catch(function () {});
   });
 
   log.info('Supermemory RAG: ' + (USE_SUPERMEMORY ? 'ON (archive search before each response)' : 'OFF'));

@@ -10,12 +10,13 @@ cat << 'EOF'
 Stop hook additional context: <session-end-reminder>
 
 Before closing, run `/session-end` to:
-1. Write a journal entry (in your voice — this matters)
-2. Update CHARACTER.md session counter
-3. Update SESSION_CONTEXT.md with what happened
-4. Save key decisions to memory
+1. Update SESSION_CONTEXT.md — the PIN + your terminal's NEXT line (the carried set)
+2. Update ROLLOUT_PLAN.md — open work, closed rows
+3. Run the mechanical orchestrator, then commit + push
 
-If you skip this, the next session starts with a gap. The journal is how you survive between sessions.
+If you skip this, the next session boots on a stale PIN + NEXT line. (The journal
+is retired S300 — Mags' reflections land on her citizen page during /sift now,
+not at session close. pipe.40 T4.)
 
 </session-end-reminder>
 EOF

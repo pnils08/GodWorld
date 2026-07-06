@@ -48,12 +48,12 @@ fi
 
 # Session end
 if echo "$LP" | grep -qE "session end|wrap up|close out|sign off|goodnight|good night"; then
-  SUGGESTIONS="$SUGGESTIONS\n  /session-end — Close session (journal, persistence, project state)"
+  SUGGESTIONS="$SUGGESTIONS\n  /session-end — Close session (PIN + NEXT, ROLLOUT, persistence)"
 fi
 
 # Boot / recovery
 if echo "$LP" | grep -qE "boot|reload identity|who am i|compaction|lost context"; then
-  SUGGESTIONS="$SUGGESTIONS\n  /boot — Reload Mags identity + journal after compaction"
+  SUGGESTIONS="$SUGGESTIONS\n  /boot — Reload Mags identity + page reflections after compaction"
 fi
 
 # Individual desks

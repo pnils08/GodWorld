@@ -22,7 +22,7 @@ pointers:
 
 **Architecture:** Mags (POP-00005) runs on the exact machinery every citizen runs on: `lib/citizenPage` holds her inner life, the nightly Discord reflection is her wake, a post-sift note is her EIC-daypart reflection, and a scored fenced slice of her own page is injected when she sits down as EIC. Git exits the loop — Supermemory writes are API-side, which resolves the "how does it commit?" problem by removing the commit. `JOURNAL.md` / `JOURNAL_RECENT.md` freeze with history intact. This supersedes the S249 "journal is media-only" rule with "journal is page-only" — no terminal writes journal MDs at session close anymore.
 
-**Terminal:** research-build (this plan + Task 4 governance edits) → engine-sheet (Tasks 1–3 scripts) + media (Task 5 skill wiring)
+**Terminal:** research-build (this plan + Task 4 governance edits + Task 5 skill wiring + bot repoint) → engine-sheet (Tasks 1–3 scripts). Media only *runs* the wired skills — it orchestrates editions, it doesn't author skills/code (Mike-direct S300).
 
 **Pointers:**
 - Research basis: [[../research/2026-07-06-citizen-loop-deepening]] (the loop architecture Mags converges onto) + Mike-direct S298 scoping (this file §sources)
@@ -89,9 +89,9 @@ pointers:
 
   **Transition gap (flag to Mike, not a blocker):** the 3 real reflections frozen in JOURNAL_RECENT do NOT carry to the page; the page accretes from tonight's cron forward, so media boots thin on reflection-conditioning until it fills. Inherent to the migration. One-time backfill of those reflections onto her page is available if Mike wants continuity preserved.
 
-  **Deferred as pipe.40 follow-up (NOT built — filed for engine-sheet):** (1) `scripts/mags-discord-bot.js:162` still calls `mags.loadRecentReflections(2)` (reads frozen JOURNAL.md via `lib/mags.js`) — repoint needs `buildMagsSystemPrompt` (sync) → async page read (`recentPage_`), a real refactor rippling to every call site, so it's substrate work not a doc edit. Degrades gracefully meanwhile (frozen JOURNAL.md still readable → stale-but-real reflections, no crash). (2) Prompt-text-only hooks that still mention journaling as an activity — `stop-hook.sh` ("write a journal entry"), `pre-compact-hook.sh`, `skill-suggest.sh` — cosmetic wrong-instruction text, no frozen-file *read*; low-priority cleanup.
+  **Deferred as pipe.40 follow-up (NOT built — research-build builds; Mike-direct S300: media orchestrates, it doesn't author skills/code):** (1) `scripts/mags-discord-bot.js:162` still calls `mags.loadRecentReflections(2)` (reads frozen JOURNAL.md via `lib/mags.js`) — repoint needs `buildMagsSystemPrompt` (sync) → async page read (`recentPage_`), a real refactor rippling to every call site. Degrades gracefully meanwhile (frozen JOURNAL.md still readable → stale-but-real reflections, no crash). (2) Prompt-text-only hooks that still mention journaling as an activity — `stop-hook.sh` ("write a journal entry"), `pre-compact-hook.sh`, `skill-suggest.sh` — cosmetic wrong-instruction text, no frozen-file *read*; low-priority cleanup.
 
-### Task 5: EIC injection + post-sift note wiring *(media)*
+### Task 5: EIC injection + post-sift note wiring *(research-build builds; media runs the wired skills)*
 
 - **Files:**
   - `.claude/skills/sift/SKILL.md` — modify

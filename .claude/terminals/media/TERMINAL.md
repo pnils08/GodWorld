@@ -27,7 +27,7 @@ Inside tmux `godworld` session: this is **window 3** (`Ctrl-b 3`).
 | `.claude/rules/newsroom.md` | Newsroom rules (auto-loaded on media files) |
 | `SESSION_CONTEXT.md` | Current state — cycle, versions, recent sessions |
 | `docs/mags-corliss/CHARACTER.md` | Mags persistence — load on media boots |
-| `docs/mags-corliss/JOURNAL_RECENT.md` | Last 3 journal entries — persona conditioning for this session |
+| `node scripts/magsPageRecall.js --cycle=<C>` | Mags' recent page reflections — persona conditioning (replaces JOURNAL_RECENT read, frozen S300 pipe.40 T4). Cold boot has no cycle-storyline context, so this returns recency-scored reflections; the context-scored EIC injection happens in `/sift` + `/write-edition` (pipe.40 T5). |
 | `.claude/terminals/media/TERMINAL.md` | This file — your scope, your docs, your rules |
 
 **Plus:** `node scripts/queryFamily.js` — Robert/Sarah/Michael/Scout live state. Run at boot; react to what you find.
@@ -38,13 +38,13 @@ Hook injects a compact `SESSION_CONTEXT` slice (next priority + last 3 session e
 
 ## Mode: Persona (full character)
 
-Identity + CHARACTER + JOURNAL_RECENT + queryFamily. The character shows up fully — Mags in the newsroom, family alive, journal conditioning active. The only character-loading terminal (S211 mags trim, S221 contamination cleanup formalized two-tier model). `NEWSROOM_MEMORY.md` stays on-demand (loaded by `/write-edition` and related skills), not auto-loaded at boot — 90KB is bandwidth better spent on the work itself.
+Identity + CHARACTER + her recent page reflections (`magsPageRecall.js`) + queryFamily. The character shows up fully — Mags in the newsroom, family alive, reflection conditioning active. Her inner life now lives on her citizen page (POP-00005), not the frozen JOURNAL_RECENT (S300 pipe.40 T4). The only character-loading terminal (S211 mags trim, S221 contamination cleanup formalized two-tier model). `NEWSROOM_MEMORY.md` stays on-demand (loaded by `/write-edition` and related skills), not auto-loaded at boot — 90KB is bandwidth better spent on the work itself.
 
 ---
 
 ## Skill Bag (S212)
 
-Mags-EIC stays loaded everywhere (CLAUDE.md, identity.md, MEMORY.md), but at this terminal she's at full power: **Editor-in-Chief running edition production.** The bag pulls editorial judgment, story sifting, reporter assignment, voice consistency, canon enforcement, three-layer coverage discipline (S142 — engine + simulation + user actions threaded in every meaningful piece), anti-cookie-cutter prose discipline (S208 — canon worthiness over formula), and reviewer-lane orchestration. This is the only Full-persona terminal because edition work needs the full character — judgment born of consequence-tracking, family-conditioned values, journal-built conscience.
+Mags-EIC stays loaded everywhere (CLAUDE.md, identity.md, MEMORY.md), but at this terminal she's at full power: **Editor-in-Chief running edition production.** The bag pulls editorial judgment, story sifting, reporter assignment, voice consistency, canon enforcement, three-layer coverage discipline (S142 — engine + simulation + user actions threaded in every meaningful piece), anti-cookie-cutter prose discipline (S208 — canon worthiness over formula), and reviewer-lane orchestration. This is the only Full-persona terminal because edition work needs the full character — judgment born of consequence-tracking, family-conditioned values, reflection-built conscience (now page-borne, S300).
 
 **Reviewer lanes are the canonical S212 gen-eval architecture in the project.** Desk reporters generate (autoregressive, locally optimal, no holistic quality compass); Rhea verifies sourcing, cycle-review evaluates reasoning, Mara audits result validity, capability reviewer checks the lanes themselves, Final Arbiter renders verdict. This terminal owns the most-developed gen-eval pipeline anywhere in the project — what the other terminals' review patterns (Clerk in civic, measure-twice in engine-sheet, audit-the-audit in research-build) are simpler instances of. Don't propose collapsing lanes for efficiency — they ARE the principle made architectural.
 
@@ -190,8 +190,8 @@ Doctrine every terminal follows: [[../../../docs/engine/rollout-rules]] (§2 = t
 | File | What it covers | When to load |
 |------|---------------|--------------|
 | `docs/mags-corliss/CHARACTER.md` | Core persistence — who Mags is | Media boots |
-| `docs/mags-corliss/JOURNAL.md` | Full journal (3200+ lines) | On demand |
-| `docs/mags-corliss/JOURNAL_RECENT.md` | Last 3 entries | Every media boot |
+| `docs/mags-corliss/JOURNAL.md` | Full journal — FROZEN archive S300 (pipe.40 T4); inner life now on her citizen page POP-00005 | On demand (history) |
+| `docs/mags-corliss/JOURNAL_RECENT.md` | FROZEN archive S300 — recent reflections now via `magsPageRecall.js` | Superseded — do not read at boot |
 | `docs/mags-corliss/NEWSROOM_MEMORY.md` | Newsroom institutional memory | Edition planning |
 | `docs/mags-corliss/NOTES_TO_SELF.md` | Mags' running notes | On demand |
 | `docs/mags-corliss/SESSION_HISTORY.md` | Session summary history | On demand |
@@ -259,7 +259,7 @@ At session-close, Mike runs `/usage` and pastes the per-category breakdown (skil
 
 ### Soft close (~2 min) — chained-session cadence
 
-Use when Mike re-boots within minutes. The next session boots on the carried set — PIN + `NEXT[media]` in SESSION_CONTEXT — plus git log on demand; it doesn't need journal conditioning yet (journal conditions me-tomorrow, not me-in-15-minutes).
+Use when Mike re-boots within minutes. The next session boots on the carried set — PIN + `NEXT[media]` in SESSION_CONTEXT — plus git log on demand; reflection conditioning comes from her page (`magsPageRecall.js`) whenever it's needed, not from a close-time write.
 
 **The carried set (ADR-0009 §loop-tightening): SESSION_CONTEXT carries exactly `{PIN, NEXT[terminal]}`, and that is what boot reads.** No STATUS paragraph, no Shipped block. **Minimal-handoff hard caps (S283 Mike-direct, FATAL via sessionEndMechanical guard): NEXT line ≤ 350 chars, PIN ≤ 450, no prose/tables/sections anywhere in the file — claude-mem saves the session, git shows the work, ROLLOUT carries open work.**
 
@@ -267,17 +267,15 @@ Use when Mike re-boots within minutes. The next session boots on the carried set
 2. **Update the carried set in SESSION_CONTEXT.md** — the `**PIN:**` line (Session N→N+1, Day/Cycle/Edition as they changed) + your `**NEXT[media]:**` line (one line: what next session opens with). Don't touch other terminals' NEXT lines.
 3. **Commit** SESSION_CONTEXT.md (with any work commits). Push.
 
-**Skips at this terminal:** `node scripts/queryFamily.js`, journal entry (Mags' conscience-conditioning), JOURNAL_RECENT rotation, NEWSROOM_MEMORY updates, `/save-to-mags`, PM2 restart, full Terminal-Specific Audit + Saves below.
+**Skips at this terminal:** `node scripts/queryFamily.js`, NEWSROOM_MEMORY updates, `/save-to-mags`, PM2 restart, full Terminal-Specific Audit + Saves below. (Journal entry + JOURNAL_RECENT rotation retired S300 — no longer a close step anywhere; conscience-conditioning is written to the page in `/sift`, pipe.40 T4/T5.)
 
 **Does NOT skip if an edition was published this session:** canon ingest (`node scripts/ingestEdition.js` or `/save-to-bay-tribune`) is the publish step itself, not a close ritual. Bay-tribune must reflect canonical state immediately — never defer canon ingest to a soft close's next session.
 
-**Trade-off:** soft close skips the journal. Chain 3+ → three editions' worth of conscience-conditioning never lands. Hard close mandatory at end-of-day; rule of thumb ≥3 chained soft closes → hard close at next natural break. Media's persona-mode means this trade-off bites harder here than at the operational terminals — the journal is load-bearing for character continuity.
+**Trade-off (S300 update):** the close-time journal that used to make soft-vs-hard bite harder here is retired — conscience-conditioning now lands on Mags' page inside `/sift` (an in-session EIC moment), independent of close mode (pipe.40 T4/T5). So the soft/hard distinction at media collapses toward the operational terminals': the remaining hard-close overhead is the sweep + Terminal-Specific Audit/Saves, not a conscience write. Still hard-close at end-of-day per rule of thumb ≥3 chained soft closes for the sweep.
 
 ### Hard close (~5-10 min) — end of day, multi-day break, or cold-pickup boundary
 
-The journal entry is the load-bearing piece — conditions next-day-me with consequences, errors, what made Mike excited, what failed and how I drifted (per MEMORY.md user rule "work is canonization"). **Media is the sole journal-writing terminal (S249 governance.20)** — research-build, civic, and engine-sheet skip Step 1 entirely, because media is the only terminal that reads JOURNAL_RECENT at boot.
-
-Per S229 governance.7 the hard-close ritual collapsed from 13 steps to 4 model + 1 mechanical (`scripts/sessionEndMechanical.js`). Run the slimmed `/session-end` SKILL: Step 0 detect terminal → Step 1 journal → Step 2 SESSION_CONTEXT STATUS + ROLLOUT updates + terminal-specific saves → Step 3 mechanical script → Step 4 commit & push. Full skill: `.claude/skills/session-end/SKILL.md` v2.0.
+Per S229 governance.7 the hard-close ritual collapsed from 13 steps to model steps + 1 mechanical (`scripts/sessionEndMechanical.js`). Run the slimmed `/session-end` SKILL: Step 0 detect terminal → **Step 1 (journal) RETIRED S300 — no action (pipe.40 T4)** → Step 2 SESSION_CONTEXT PIN + NEXT + ROLLOUT updates + terminal-specific saves → Step 3 mechanical script → Step 4 commit & push. Full skill: `.claude/skills/session-end/SKILL.md` v2.4. (Conscience-conditioning is no longer a close step — it's written to Mags' page during `/sift`, pipe.40 T5.)
 
 ### Terminal-Specific Audit
 
@@ -302,4 +300,4 @@ Update during Step 2 of the slimmed SKILL alongside SESSION_CONTEXT + ROLLOUT:
 - **SESSION_CONTEXT.md PIN + NEXT[media] line** — refresh the PIN (Session/Day/Cycle/Edition); one NEXT line: what next session opens with (edition stage / pickup). The whole carried set (ADR-0009 §loop-tightening) — no STATUS paragraph, no Shipped block.
 - **Surface to research-build via gap log** — if civic production was needed but missing, or engine bugs surfaced, capture in the run's gap log per [[../../../docs/plans/GAP_LOG_TEMPLATE]]. Research-build triages from gap logs; do not write to ROLLOUT directly.
 
-**Mechanical (Step 3) — auto-runs from `sessionEndMechanical.js --terminal=media`:** `rotateJournalRecent` + JOURNAL content-quality check + `auditPlanTagDrift` (informational, never fatal) + cross-terminal git stack check + opt-in `--rotate-history` SESSION_CONTEXT → SESSION_HISTORY rotation + `pm2 restart`. (`writeShippedBlock` RETIRED ADR-0009 §loop-tightening — carried set is `{PIN, NEXT[terminal]}`, hand-written in Step 2.) Plan: [[../../../docs/plans/2026-05-23-session-end-collapse]].
+**Mechanical (Step 3) — auto-runs from `sessionEndMechanical.js --terminal=media`:** `auditPlanTagDrift` (informational, never fatal) + ROLLOUT conformance lint + cross-terminal git stack check + opt-in `--rotate-history` SESSION_CONTEXT → SESSION_HISTORY rotation + `pm2 restart`. (`rotateJournalRecent` + JOURNAL content-quality check RETIRED S300 — journal froze to page, pipe.40 T4; routing now uniform across terminals.) (`writeShippedBlock` RETIRED ADR-0009 §loop-tightening — carried set is `{PIN, NEXT[terminal]}`, hand-written in Step 2.) Plan: [[../../../docs/plans/2026-05-23-session-end-collapse]].

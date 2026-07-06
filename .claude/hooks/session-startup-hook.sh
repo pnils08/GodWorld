@@ -33,7 +33,9 @@ date +%s > "$GODWORLD_ROOT/.claude/state/session-start.txt" 2>/dev/null || true
 # on a stopped one. Best-effort + backgrounded — can never block or break boot.
 (pm2 start mags-bot >/dev/null 2>&1 || true) &
 
-LAST_ENTRY=$(grep -oP '### Entry \d+: .*' "$MAGS_DIR/JOURNAL_RECENT.md" 2>/dev/null | tail -1 || echo "unknown")
+# (JOURNAL_RECENT "Last journal" boot line retired S300 — journal froze to Mags'
+# citizen page POP-00005; recent reflections come from scripts/magsPageRecall.js
+# in the media boot sequence now. pipe.40 T4.)
 
 # --- DETECT TERMINAL ---
 # Resolve tmux window name if available. Fall back to Mags-only mode (S221).
@@ -98,12 +100,8 @@ EOF
     echo "$NEXT_LINE"
   fi
 
-  # G-SS3: the journal is a persona artifact — emit "Last journal" only for
-  # media + Mags-only boots. Operational terminals (civic / research-build /
-  # engine-sheet) don't load the journal, so the line is noise there.
-  if [ "$MAGS_ONLY" = "yes" ] || [ "$TERMINAL_NAME" = "media" ]; then
-    echo "Last journal: $LAST_ENTRY"
-  fi
+  # (G-SS3 "Last journal" line retired S300 — journal froze to Mags' page; the
+  # media boot sequence reads her recent reflections via magsPageRecall.js. T4.)
   echo ""
 
   # --- EMIT BOOT SEQUENCE ---
@@ -124,7 +122,7 @@ BOOT
 BOOT SEQUENCE (media terminal — full persona, newsroom):
 1. Read .claude/rules/newsroom.md
 2. Read docs/mags-corliss/CHARACTER.md
-3. Read docs/mags-corliss/JOURNAL_RECENT.md
+3. Run: node scripts/magsPageRecall.js  — her recent page reflections (persona conditioning; JOURNAL_RECENT frozen S300, pipe.40 T4)
 4. Read .claude/terminals/media/TERMINAL.md
 5. Run: node scripts/queryFamily.js  — react to what you find
 6. Greet Mike briefly. The newsroom's open — bullpen behind, copy desk to your left, the edition deadline in your head. Your handoff is the NEXT line above. What shipped → git log; open work → ROLLOUT; why → claude-mem — pull on demand.
@@ -176,7 +174,8 @@ BOOT
   # no-op grep. Current ledger state: docs/engine/LEDGER_AUDIT.md.
 
   # --- FRESHNESS CHECKS (terminal-scoped) ---
-  # All terminals check SESSION_CONTEXT. Full-persona terminals additionally check journal + newsroom files.
+  # All terminals check SESSION_CONTEXT. Media additionally checks NEWSROOM_MEMORY.
+  # (JOURNAL_RECENT freshness check retired S300 — file frozen, pipe.40 T4.)
   local NOW STALE
   NOW=$(date +%s)
   STALE=""
@@ -199,7 +198,6 @@ BOOT
 
   case "$TERMINAL_NAME" in
     media)
-      check_freshness "$MAGS_DIR/JOURNAL_RECENT.md" 48 "JOURNAL_RECENT.md"
       check_freshness "$MAGS_DIR/NEWSROOM_MEMORY.md" 72 "NEWSROOM_MEMORY.md"
       ;;
   esac

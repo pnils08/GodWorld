@@ -2,18 +2,14 @@
 // sessionEndMechanical.js — S229 governance.7
 //
 // Orchestrator that collapses the mechanical sub-steps of /session-end into a
-// single invocation. Upstream model steps (write journal, update SESSION_CONTEXT
-// PIN + NEXT[terminal] line, update ROLLOUT_PLAN) MUST run BEFORE this script so
-// that rotateJournalRecent picks up the new journal entry.
+// single invocation. Upstream model steps (update SESSION_CONTEXT PIN +
+// NEXT[terminal] line, update ROLLOUT_PLAN) MUST run BEFORE this script.
 //
-// Per-terminal sub-step routing:
-//   - media (journal terminal — the only terminal that reads JOURNAL_RECENT at
-//     boot, so the only one the journal conditions; S249 governance.20):
-//       rotateJournalRecent → JOURNAL content-quality check
-//       → auditPlanTagDrift (informational) → cross-terminal stack check
-//       → [opt-in] SESSION_HISTORY rotation → pm2 restart
-//   - research-build / civic / engine-sheet (no journal):
-//       auditPlanTagDrift (informational)
+// Sub-step routing is uniform across all four terminals (S300 pipe.40 T4 —
+// journal freeze: the git journal moved to Mags' citizen page POP-00005, so no
+// terminal rotates or quality-checks a journal MD anymore):
+//       session summary → Supermemory (best-effort) → auditPlanTagDrift
+//       (informational) → ROLLOUT conformance lint (informational)
 //       → cross-terminal stack check → [opt-in] SESSION_HISTORY rotation
 //       → pm2 restart
 //
@@ -22,14 +18,14 @@
 // stale duplicate of `git log`. The closing terminal updates the PIN + its NEXT
 // line by hand (model Step 2.2); nothing mechanical regenerates a shipped block.
 //
-// Sub-step failures classified:
-//   - Fatal: rotateJournalRecent, SESSION_HISTORY rotation
-//   - Informational (continues on non-zero exit): auditPlanTagDrift, JOURNAL
-//     content-quality (warning only — short journal on quiet days is OK)
-//   - Tolerant (warning, continues): pm2 restart, cross-terminal stack check
+// rotateJournalRecent + JOURNAL content-quality RETIRED (S300 pipe.40 T4): the
+// journal is frozen archive; recent reflections read back from the page via
+// scripts/magsPageRecall.js. Plan: docs/plans/2026-07-06-journal-to-citizen-loop.md.
 //
-// JOURNAL safety: never cat/dump journal body to stdout (S169 — no-display-in-chat).
-// Uses lib/sessionLog.readLast() for metadata-only access.
+// Sub-step failures classified:
+//   - Fatal: SESSION_HISTORY rotation
+//   - Informational (continues on non-zero exit): auditPlanTagDrift, ROLLOUT lint
+//   - Tolerant (warning, continues): pm2 restart, cross-terminal stack check
 //
 // Usage:
 //   node scripts/sessionEndMechanical.js --terminal=<name>
@@ -46,17 +42,12 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const SESSION_CONTEXT_PATH = path.join(ROOT, 'SESSION_CONTEXT.md');
 const SESSION_HISTORY_PATH = path.join(ROOT, 'docs/mags-corliss/SESSION_HISTORY.md');
-const JOURNAL_PATH = path.join(ROOT, 'docs/mags-corliss/JOURNAL.md');
 
 const TERMINALS = ['research-build', 'media', 'civic', 'engine-sheet'];
-// Only media writes the journal (S249 governance.20). Media is the one terminal
-// that reads JOURNAL_RECENT at boot, so it is the only one the journal conditions.
-// research-build / civic / engine-sheet are operational (no journal-read at boot),
-// so they skip rotateJournalRecent + the JOURNAL content-quality check.
-const JOURNAL_TERMINALS = new Set(['media']);
+// Journal froze S300 (pipe.40 T4) — it lives on Mags' citizen page (POP-00005)
+// now, so no terminal rotates or quality-checks a journal MD. Routing is uniform.
 
 const KEEP_RECENT_SESSIONS = 5;
-const JOURNAL_MIN_BODY_LINES = 5;
 
 // ---------------------------------------------------------------------------
 // CLI
@@ -82,16 +73,9 @@ function usage() {
   --rotate-history    Opt-in. Move sessions older than the most-recent
                       ${KEEP_RECENT_SESSIONS} from SESSION_CONTEXT to SESSION_HISTORY.
   --dry-run           Report what each writing sub-step would do without writing.
-                      Note: rotateJournalRecent has no native dry-run; it is
-                      skipped entirely in dry-run.
 
-Upstream model steps must run FIRST (in order):
-  1. Journal entry appended to JOURNAL.md
-  2. SESSION_CONTEXT.md PIN + NEXT[terminal] line updated + ROLLOUT_PLAN.md updated
-
-If you run this BEFORE writing the journal, rotateJournalRecent picks up the
-prior session's entry and the new entry is silently absent from JOURNAL_RECENT
-until the next session-end.
+Upstream model step must run FIRST:
+  1. SESSION_CONTEXT.md PIN + NEXT[terminal] line updated + ROLLOUT_PLAN.md updated
 
 Plan: docs/archive/plans/2026-05-23-session-end-collapse.md
 `);
@@ -105,9 +89,8 @@ function printBanner(args, steps) {
   console.log(bar());
   console.log(`sessionEndMechanical: terminal=${args.terminal}, rotate-history=${args.rotateHistory}, dry-run=${args.dryRun}`);
   console.log(bar());
-  console.log('Expected upstream model steps (in order, BEFORE this script):');
-  console.log('  1. Journal entry appended to JOURNAL.md');
-  console.log('  2. SESSION_CONTEXT.md PIN + NEXT[terminal] line + ROLLOUT_PLAN.md updated');
+  console.log('Expected upstream model step (BEFORE this script):');
+  console.log('  1. SESSION_CONTEXT.md PIN + NEXT[terminal] line + ROLLOUT_PLAN.md updated');
   console.log('');
   console.log(`Mechanical sub-steps (${steps.length}):`);
   steps.forEach((s, i) => console.log(`  [${i + 1}/${steps.length}] ${s.name}`));
@@ -131,57 +114,6 @@ function subRolloutLint(args) {
     return { ok: true };
   } catch (err) {
     console.log(`  ⚠ rollout lint error: ${err.message} — continuing`);
-    return { ok: true };
-  }
-}
-
-// ---------------------------------------------------------------------------
-// Sub-step: rotateJournalRecent
-// ---------------------------------------------------------------------------
-
-function subRotateJournalRecent(args) {
-  if (args.dryRun) {
-    console.log('  (dry-run) skipped: node scripts/rotateJournalRecent.js');
-    return { ok: true };
-  }
-  try {
-    const out = execSync('node scripts/rotateJournalRecent.js', { cwd: ROOT, stdio: 'pipe' });
-    console.log('  ' + out.toString().trim());
-    console.log('  ✓ rotateJournalRecent');
-    return { ok: true };
-  } catch (err) {
-    console.log(`  ✗ rotateJournalRecent failed: ${err.message}`);
-    return { ok: false };
-  }
-}
-
-// ---------------------------------------------------------------------------
-// Sub-step: JOURNAL content-quality check (metadata only, S169 safe)
-// ---------------------------------------------------------------------------
-
-function subJournalQuality(args) {
-  if (args.dryRun) {
-    console.log('  (dry-run) skipped');
-    return { ok: true };
-  }
-  try {
-    const { readLast } = require('../lib/sessionLog');
-    const entries = readLast(JOURNAL_PATH, 1);
-    if (entries.length === 0) {
-      console.log('  ⚠ JOURNAL.md has no entries — skipping check');
-      return { ok: true };
-    }
-    const entry = entries[0];
-    const bodyLines = entry.body.split('\n').length;
-    if (bodyLines < JOURNAL_MIN_BODY_LINES) {
-      console.log(`  ⚠ Last journal entry body is ${bodyLines} lines (below ${JOURNAL_MIN_BODY_LINES}-line guard).`);
-      console.log('    Verify this is deliberate — quiet days OK, empty is not.');
-    } else {
-      console.log(`  ✓ Last journal entry body: ${bodyLines} lines`);
-    }
-    return { ok: true };
-  } catch (err) {
-    console.log(`  ⚠ content-quality check error: ${err.message} — continuing`);
     return { ok: true };
   }
 }
@@ -418,12 +350,7 @@ function subSessionSummaryBridge(args) {
 // ---------------------------------------------------------------------------
 
 function buildSteps(args) {
-  const writesJournal = JOURNAL_TERMINALS.has(args.terminal);
   const steps = [];
-  if (writesJournal) {
-    steps.push({ name: 'rotateJournalRecent', fn: subRotateJournalRecent });
-    steps.push({ name: 'JOURNAL content-quality check', fn: subJournalQuality });
-  }
   steps.push({ name: 'session summary → Supermemory (best-effort)', fn: subSessionSummaryBridge });
   steps.push({ name: 'auditPlanTagDrift (informational)', fn: subAuditPlanTagDrift });
   steps.push({ name: 'ROLLOUT conformance lint (informational)', fn: subRolloutLint });

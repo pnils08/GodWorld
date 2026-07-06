@@ -83,7 +83,9 @@ pointers:
   2. Session-end: media closes like every operational terminal — no journal entry, no rotation, no quality check.
   3. Media boot conditioning: replace the JOURNAL_RECENT read with `node scripts/magsPageRecall.js` output (media TERMINAL.md boot list + hook if it names JOURNAL_RECENT).
 - **Verify:** acceptance criterion 4 dry-run; grep media TERMINAL.md for `JOURNAL` → only frozen-pointer references remain.
-- **Status:** [ ] not started
+- **Status:** [x] built S300 (research-build). Freeze headers on JOURNAL.md + JOURNAL_RECENT.md (pre-existing 2026-07-05 nightly reflections committed first as final entries — commit 6281f914 — so the freeze commit adds only the header, criterion 5). `sessionEndMechanical.js`: `JOURNAL_TERMINALS` + `subRotateJournalRecent` + `subJournalQuality` removed, routing now uniform; docstring/usage/banner/failure-classification trued up. `session-end/SKILL.md` v2.3→v2.4: Step 1 retired in place (numbering preserved so other terminals' "Step 2/3/4" refs stay valid), Step 3 wrap-list + failure semantics + Failure Modes table + changelog updated. `media/TERMINAL.md`: boot read + Mode + owned-docs + full Session Close section repointed page-ward. **`session-startup-hook.sh` (beyond plan's 5 files — the actual boot reader):** media boot step 3 `Read JOURNAL_RECENT.md` → `Run magsPageRecall.js`; "Last journal" boot line + JOURNAL_RECENT freshness check retired. Verified: media dry-run shows 0 journal steps (criterion 4); grep of edited files shows only frozen-context refs; hook `bash -n` clean; `magsPageRecall.js` cold-boot (no --cycle) exits 0 fail-open. **T1 first live-write still rides tonight's cron** (her page is empty until then, so boot recall returns empty — expected).
+
+  **Deferred as pipe.40 follow-up (NOT built — filed for engine-sheet):** (1) `scripts/mags-discord-bot.js:162` still calls `mags.loadRecentReflections(2)` (reads frozen JOURNAL.md via `lib/mags.js`) — repoint needs `buildMagsSystemPrompt` (sync) → async page read (`recentPage_`), a real refactor rippling to every call site, so it's substrate work not a doc edit. Degrades gracefully meanwhile (frozen JOURNAL.md still readable → stale-but-real reflections, no crash). (2) Prompt-text hooks that still reference journaling as a live activity — `stop-hook.sh` ("write a journal entry"), `pre-compact-hook.sh`, `post-compact-hook.sh` (/boot "reloads JOURNAL_RECENT"), `skill-suggest.sh` — cosmetic wrong-instruction text, coherent "repoint remaining journal consumers" cleanup.
 
 ### Task 5: EIC injection + post-sift note wiring *(media)*
 
@@ -107,6 +109,7 @@ pointers:
 
 ## Changelog
 
+- 2026-07-06 — **T4 built + verified (S300, research-build).** Git journal frozen; journal steps removed from sessionEndMechanical.js + session-end SKILL v2.4; media TERMINAL.md + boot hook repointed to magsPageRecall.js. Bot + prompt-text hooks deferred to engine-sheet. T5 unblocked.
 - 2026-07-06 — **T1–T3 built + verified (S300, engine-sheet, Mike-direct go).** Nightly
   reflection repointed to page (write AND read side), `magsPageAppend.js` +
   `magsPageRecall.js` shipped. T1 live-write acceptance rides tonight's cron. T4

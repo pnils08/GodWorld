@@ -48,13 +48,14 @@ pointers:
 
 **Verdict:** `adopt` — three lanes: (1) amend engine.43 (three fixes fold into the existing not-yet-built plan — free); (2) wake coverage + selection fix (rotation memory / weighted sampling / voiced-slot guarantee); (3) edition read-back slice, cross-citizen ripple, and the conversation engine as the new-depth lane. Tension→/sift seam files as a small media-terminal row.
 
-**Ignited plans:** [[../plans/2026-07-04-voice-dial-sync-contract-build]] (amendments, S298) — further plan(s) to follow per lane.
+**Ignited plans:** [[../plans/2026-07-04-voice-dial-sync-contract-build]] (amendments, S298) + [[../plans/2026-07-06-citizen-loop-deepening]] (lanes 2+3 — coverage, edition slice, ripple, conversation engine, sift seam; engine.48 + pipeline.41).
 
 ---
 
 ## Applications (living)
 
 - 2026-07-06 — engine.43 plan amendments (Tasks 4/5 Triple classifier + flush durability + classifier scope) sourced from this audit.
+- 2026-07-06 — [[../plans/2026-07-06-citizen-loop-deepening]] drafted from lanes 2+3; conversation engine upgraded feasibility→build (Mike-direct S298); filed as engine.48 + pipeline.41.
 
 ---
 

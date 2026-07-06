@@ -1,12 +1,13 @@
 ---
 title: Voice-Dial Sync Contract Build Plan
 created: 2026-07-04
-updated: 2026-07-04
+updated: 2026-07-06
 type: plan
 tags: [citizens, dials, citizen-loop, voice-agents, engine, draft]
 sources:
   - docs/adr/0014-citizen-self-authorship-live-drift.md — the decision this plan executes
   - docs/research/2026-07-04-voice-dial-sync-contract.md — the audit + evidence base
+  - docs/research/2026-07-06-citizen-loop-deepening.md — S298 pressure-test that produced the Task 4/5 amendments
   - docs/engine/ROLLOUT_PLAN.md — engine.43 row
 pointers:
   - "[[../engine/ROLLOUT_PLAN]] — engine.43"
@@ -36,6 +37,8 @@ pointers:
 4. One `/interview` transcript produces exactly one `Reflection_Intake` row per citizen interviewed, `daypart='INTERVIEW'`, `applied='no'`.
 5. The next `compressLifeHistory_` cycle drains both new-daypart rows into `DialState.base` exactly as it already drains `WAKE` rows — no drain-code change required, verified by the existing `compressLifeHistory.dial.test.js` suite still passing untouched.
 6. No conversational prose (Discord message text or interview Q&A prose) is written to a citizen's Supermemory narrative page as a result of this plan — `lib/personaProvider.js`'s page-write path stays exactly as scoped today.
+7. **Tension continuity across surfaces (S298):** a tension opened at a wake and then resolved in a Discord conversation flips to `resolved` in `logs/citizen-tension-state.json`, and the citizen's next wake does not carry it as open. Symmetric for interview-resolved tensions.
+8. **Restart durability (S298):** a Discord conversation interrupted by `pm2 restart` before its idle flush still produces its single `Reflection_Intake` row after the bot reboots — zero loss, zero duplicates.
 
 ---
 
@@ -83,11 +86,11 @@ pointers:
   - `lib/personaProvider.js` — modify (`persistResponse` function, currently a no-op at line 173)
   - `scripts/mags-discord-bot.js` — modify (per-channel session-idle tracking, near the existing `persistResponse` call at line 822)
 - **Steps:**
-  1. Accumulate a citizen-voice channel's exchanges in the existing per-channel history structure (already tracked for chat continuity) rather than dispatching per message.
-  2. On a channel-idle flush trigger (recommend: 30 minutes of no new message on that channel — mirrors the wake loop's own coarse, infrequent cadence rather than inventing a new constant class), classify the accumulated exchange as one unit via `lib/reflectionClassifier.js:classifyDualReflection_`.
-  3. Append one row to `Reflection_Intake`: `[ts, popId, cycle, 'DISCORD', cls.event, snippet, 'no', cls.affect]` — same shape as `citizen-wake.js:498`, `daypart='DISCORD'` in place of `WAKE`.
+  1. Accumulate a citizen-voice channel's exchanges in the existing per-channel history structure (already tracked for chat continuity) rather than dispatching per message — AND mirror the pending buffer to disk per channel (`logs/discord-voice-buffer-<channelId>.json`, rewritten on each exchange). **Durability amendment (S298):** the in-memory buffer alone is lossy — session-close runs `pm2 restart` routinely, which would silently drop an unflushed conversation. On bot boot, flush any stale on-disk buffer whose last-message timestamp is older than the idle timeout (covers restart AND crash).
+  2. On a channel-idle flush trigger (recommend: 30 minutes of no new message on that channel — mirrors the wake loop's own coarse, infrequent cadence rather than inventing a new constant class), classify **only the citizen's own replies** (the human side stays in chat history for context but never enters the classifier input — S298 amendment, matching Task 5's answers-only scope; the other party's words must not color the citizen's dial nudge) as one unit via `lib/reflectionClassifier.js:classifyTripleReflection_`, passing the citizen's open tensions from `logs/citizen-tension-state.json`. **Triple, not Dual (S298 amendment):** wakes already open/resolve tensions via Triple; Dual here would let a tension resolved in conversation stay falsely open at the next wake. Apply tension open/resolve results to the shared tension state + typed page lines, mirroring `citizen-wake.js` step 3 exactly (cap 3, same eviction, `type='tension'` doc metadata).
+  3. Append one row to `Reflection_Intake`: `[ts, popId, cycle, 'DISCORD', cls.event, snippet, 'no', cls.affect]` — same shape as `citizen-wake.js:498`, `daypart='DISCORD'` in place of `WAKE`. Delete the on-disk buffer after a successful flush.
   4. Confirm no change to `persistResponse`'s page-write behavior — it still never writes conversational prose to the Supermemory citizen page (ADR-0014 explicitly keeps this boundary).
-- **Verify:** simulate one conversation (several messages, then a synthetic idle gap) in sandbox; confirm exactly one `Reflection_Intake` row appended, `applied='no'`, and zero writes to the citizen's Supermemory page.
+- **Verify:** simulate one conversation (several messages, then a synthetic idle gap) in sandbox; confirm exactly one `Reflection_Intake` row appended, `applied='no'`, and zero writes to the citizen's Supermemory page. Kill the bot mid-conversation, restart it, advance past the idle timeout → the buffered conversation still flushes (one row, no loss, no duplicate).
 - **Status:** [ ] not started
 
 ### Task 5: Interview-transcript ingest
@@ -95,7 +98,7 @@ pointers:
 - **Files:**
   - `.claude/skills/interview/SKILL.md` — modify (add a post-transcript step, same slot pattern as the existing citizen-card-refresh substep)
 - **Steps:**
-  1. After transcript finalization, for each citizen-voice agent interviewed, classify that citizen's own answers (not the reporter's questions) via `classifyDualReflection_`.
+  1. After transcript finalization, for each citizen-voice agent interviewed, classify that citizen's own answers (not the reporter's questions) via `classifyTripleReflection_`, passing that citizen's open tensions from `logs/citizen-tension-state.json`; apply tension open/resolve to the shared state + typed page lines, same mirror of `citizen-wake.js` step 3 as Task 4 (**Triple, not Dual — S298 amendment**, so an interview can open or resolve the same tensions wakes carry).
   2. Append one `Reflection_Intake` row per citizen interviewed: `daypart='INTERVIEW'`, same schema as Task 4.
   3. Gate this substep in the `/post-publish` verification matrix the same way the existing interview substeps are gated (per `.claude/skills/post-publish/SKILL.md`'s matrix pattern).
 - **Verify:** run one interview offline; confirm one `Reflection_Intake` row per citizen-voice subject, `applied='no'`, no duplicate rows on a second dry-run of the same transcript (idempotency check, same class as the existing `applied` guard).
@@ -123,3 +126,4 @@ pointers:
 ## Changelog
 
 - 2026-07-04 — Initial draft (S291, research-build). Executes ADR-0014. Both tracks scoped against already-live infra (`citizenDials.disposition()`, `classifyDualReflection_`, `Reflection_Intake`, the S277 drain) — no new subsystem, only new callers into existing ones.
+- 2026-07-06 — S298 pressure-test amendments per [[../research/2026-07-06-citizen-loop-deepening]]: Tasks 4/5 Dual→Triple + shared tension state; Task 4 disk-persisted buffer + boot-time stale-flush; Task 4 classifier scoped to citizen replies only. Criteria 7–8 added.

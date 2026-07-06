@@ -1,0 +1,143 @@
+---
+title: Citizen-Loop Deepening Plan
+created: 2026-07-06
+updated: 2026-07-06
+type: plan
+tags: [citizens, citizen-loop, voice-agents, engine, media, active]
+sources:
+  - docs/research/2026-07-06-citizen-loop-deepening.md — the S298 audit this plan executes
+  - docs/engine/ROLLOUT_PLAN.md — engine.48 + pipeline.41 rows
+  - scripts/citizen-wake.js — the loop all wake-side tasks modify (read end-to-end S298)
+pointers:
+  - "[[../engine/ROLLOUT_PLAN]] — parent rollout"
+  - "[[2026-07-04-voice-dial-sync-contract-build]] — sibling engine.43 plan (amended S298, same research basis)"
+  - "[[SCHEMA]] — doc conventions"
+  - "[[index]] — add entry in same commit"
+---
+
+# Citizen-Loop Deepening Plan
+
+**Goal:** The wake loop reaches the whole shaped pool instead of a 55-citizen orbit, citizens perceive the Bay Tribune and each other, and bonded citizens can hold an actual conversation that both of them carry afterward.
+
+**Architecture:** Four additions to the existing loop, no new subsystem class. Selection gets seeded-weighted sampling + reserved voiced-citizen slots (same `hash53_` determinism as the provocation bank). Perception gains two slices: the published edition (canon→subjective, safe direction) and a cross-citizen ripple register (grounded in `Reflection_Intake` tags + `Relationship_Bonds`). The conversation engine is a bounded two-persona exchange script reusing the wake's perception assembly, writing only to pages + the gated intake — the same canon exit every surface uses. One media-terminal task lets `/sift` mine the tension register for story seeds.
+
+**Terminal:** research-build (this plan) → engine-sheet (Tasks 1–7) + media (Task 8)
+
+**Pointers:**
+- Research basis: [[../research/2026-07-06-citizen-loop-deepening]] (all measurements: 55/212 orbit, disposition monotony, voiced starvation, Discord half-wiring)
+- Related plan: [[2026-07-04-voice-dial-sync-contract-build]] (engine.43 — Discord/interview write-back; independent, no ordering dependency)
+- Seeded-RNG pattern to reuse: `lib/provocationBank.js:_hash53` (cyrb53, no Math.random — perception stays seeded)
+- Edition source of truth: `editions/cycle_pulse_edition_{cycle}.txt`, NAMES INDEX rows shaped `POP-XXXXX | Name | context line` (verified against c100)
+
+**Acceptance criteria:**
+1. 30 consecutive sandbox wakes produce ≥20 distinct citizens (baseline behavior: ~12 — measured orbit S298).
+2. Each of the 4 voiced citizens present in the shaped pool wakes at least once per 20 wakes; the log line marks `slot=voiced`.
+3. A citizen named in the latest edition's NAMES INDEX perceives "the Tribune wrote about you" + their context line; a citizen whose neighborhood is covered perceives the hood-tier line; an uncovered citizen perceives nothing (empty slice, no filler).
+4. Wake A naming a bonded citizen B writes one ripple entry; B's next wake renders the crossed-paths line once; the entry is consumed (a second B wake shows nothing).
+5. One conversation run produces: a bounded transcript printed, each citizen's own lines appended to their own page (`daypart='CONVO'`), exactly one `Reflection_Intake` row per participant (`applied='no'`), zero LifeHistory/dial/ledger writes, and `compressLifeHistory.dial.test.js` passing untouched.
+6. `/sift` output includes a story-seed candidates section listing open tensions (popId + question + cycle opened) when the register is non-empty.
+
+---
+
+## Tasks
+
+### Task 1: Seeded-weighted selection + wider rotation memory
+
+- **Files:**
+  - `scripts/citizen-wake.js` — modify (`ROTATION_MEMORY`, `selectCitizen`)
+- **Steps:**
+  1. Raise `ROTATION_MEMORY` from 25 to 100 (pool is 212; 100 forces reach past the orbit while still allowing re-wakes within ~3 weeks at 5/day).
+  2. Replace the deterministic `sort(...)[0]` pick in `selectCitizen` with a seeded weighted draw: weight each candidate `w = 1 + eventMag * 2 + deviation(cur) / 50`, draw via cumulative-weight walk using `require('../lib/provocationBank')._hash53('select:' + cycle + ':' + WAKE, 0x5eed)` mod total-weight. Same (cycle, wake) → same pick; high-delta citizens stay favored but mid-pool citizens get real probability mass.
+  3. Keep `--pop` override and the everyone-recently-woken pool-reset exactly as they are.
+- **Verify:** `node scripts/citizen-wake.js --dry-run --cycle=101 --wake=morning` run twice → identical pick (determinism); across `--wake=morning|midday|afternoon|evening|night` on one cycle → ≥3 distinct citizens.
+- **Status:** [ ] not started
+
+### Task 2: Reserved voiced-citizen wake slot
+
+- **Files:**
+  - `scripts/citizen-wake.js` — modify (`selectCitizen`)
+- **Steps:**
+  1. Enumerate voiced POPIDs by reading `POP ID:` out of each `.claude/agents/citizen-voice-*/IDENTITY.md` (identical enumeration to engine.43 Task 1 — agent-count-agnostic).
+  2. Before the weighted draw: if `_hash53('voiced:' + cycle + ':' + WAKE, 0x5eed) % 5 === 0`, pick the least-recently-woken voiced citizen that passes the existing pool filters (shaped floor + lived history); if none qualifies, fall through to the normal draw and log why.
+  3. Extend the `woke ...` log line with `slot=voiced|rotation` so coverage is grep-able.
+- **Verify:** sandbox loop over 25 (cycle, wake) pairs → ~5 voiced slots hit, round-robin across the eligible voiced citizens; ineligible voiced citizens logged, never crash.
+- **Status:** [ ] not started
+
+### Task 3: Edition read-back slice — the flywheel
+
+- **Files:**
+  - `scripts/citizen-wake.js` — modify (new `loadEditionSlice`, wired into `buildVoicePrompts`)
+- **Steps:**
+  1. New function `loadEditionSlice(popId, name, nh)`: find the highest-cycle `editions/cycle_pulse_edition_*.txt` whose cycle ≤ current cycle (fs glob + numeric sort; graceful `''` if none).
+  2. **Named tier:** parse the NAMES INDEX section (rows `POP-XXXXX | Name | context`); on POPID match return `The Tribune wrote about you this week: <context line>.` (cap 200 chars).
+  3. **Neighborhood tier** (only when not named): scan article body for the citizen's neighborhood name (word-boundary, case-insensitive); on hit return `The Tribune ran a piece touching <nh> this week.` No hit → `''` — no filler, same omit-rule as `loadNeighborhoodTexture`.
+  4. Wire into `buildVoicePrompts` as its own block `\n\nIn the paper: ...`, placed after the sports line (world-larger-than-self group).
+- **Verify:** `--dry-run --pop=POP-00034` (Mayor Santana, named in c100 NAMES INDEX) → named-tier line in the printed system prompt; a Rockridge non-named citizen with Rockridge coverage → hood line; a citizen in an uncovered hood → no `In the paper` block.
+- **Status:** [ ] not started
+
+### Task 4: Cross-citizen ripple register
+
+- **Files:**
+  - `scripts/citizen-wake.js` — modify (write side after classification, read side in perception assembly)
+- **Steps:**
+  1. Write side (live runs, after step 4 intake persist): for each bond fed to this wake (`loadBonds` already resolves name + POPID), if the reflection text contains the bonded citizen's first or full name (word-boundary match), upsert `{to: bondPopId, from: c.popId, fromName: c.name, affect: cls.affect || '', cy: cycle}` into `logs/citizen-ripple-state.json` keyed `from->to` (one live entry per pair; overwrite refreshes it).
+  2. Read side (perception assembly): entries with `to === woken POPID` and age < 12 cycles render one line — `You crossed paths with <fromName> recently; they seemed <affect lowercased or 'preoccupied'>.` — appended after the bonds block. Consume (delete) rendered entries on live runs; dry runs leave state untouched (same discipline as tension state).
+  3. Expiry: silent drop of entries older than 12 cycles at load, mirroring `TENSION_EXPIRY_CYCLES`.
+- **Verify:** sandbox: force-wake A (`--pop`) with a reflection naming bonded B (seed via test intake), confirm state entry; force-wake B → line renders, entry consumed; second B wake → absent.
+- **Status:** [ ] not started
+
+### Task 5: Extract shared perception assembly to `lib/wakePerception.js`
+
+- **Files:**
+  - `lib/wakePerception.js` — create (extraction only, zero behavior change)
+  - `scripts/citizen-wake.js` — modify (require the lib, delete the moved bodies)
+- **Steps:**
+  1. Move the pure perception functions — `buildPool`, `recentEventMagnitude`, `loadLifeArc`, `loadSportsSlice`, `loadNeighborhoodTexture`, `loadBonds`, `loadOwnPageReadback`, `dialTrajectory`, `coResidents`, plus Task 3's `loadEditionSlice` and the constants they carry — into `lib/wakePerception.js`, exported by name. No logic edits; `citizen-wake.js` requires and destructures.
+  2. Keep wake-only concerns (rotation state, tension state, prompt framing, cron entry, provocation call) in `citizen-wake.js`.
+- **Verify:** `node scripts/citizen-wake.js --dry-run` before/after extraction → byte-identical system prompt for the same forced `--pop`/`--cycle`/`--wake`; `grep -c "function buildPool" scripts/citizen-wake.js` → 0.
+- **Status:** [ ] not started
+
+### Task 6: Conversation engine — `scripts/citizen-conversation.js`
+
+- **Files:**
+  - `scripts/citizen-conversation.js` — create
+- **Steps:**
+  1. CLI: `node scripts/citizen-conversation.js [--dry-run] [--popA=... --popB=...] [--cycle=N]`. Without explicit pops: scan `logs/citizen-ripple-state.json` for the freshest un-consumed entry whose pair holds an active `Relationship_Bonds` row; no eligible pair → clean exit 0 ("no conversation today"). Cadence cap: `logs/citizen-conversation-state.json` stores last-run date; max 1 live conversation per day.
+  2. Build each side's system prompt from `lib/wakePerception.js` (Task 5) — same slices as a wake — plus a conversation frame: `You are talking with <other name>, <bond phrase from loadBonds>. Speak as yourself, plainly, 2-4 sentences per turn.` If a ripple entry triggered the run, the initiator's frame carries it: `You've been thinking about <name> lately.`
+  3. Dialogue: 3 turns per side, alternating DeepSeek calls (same model/params as `generateVoice`), each side receiving the running transcript as alternating user/assistant messages from its own point of view.
+  4. Live writes per participant, wake-parity: append their OWN lines to their OWN page (`daypart='CONVO'`, via `lib/citizenPage.appendReflection_`); classify their own lines via `classifyTripleReflection_` with their open tensions; apply tension open/resolve to `logs/citizen-tension-state.json` + typed page lines (mirror `citizen-wake.js` step 3); append one `Reflection_Intake` row (`daypart='CONVO'`, `applied='no'`). Consume the triggering ripple entry.
+  5. Canon guard, stated in the file header like the wake's PHASE-1 GATE: page + intake + local state ONLY — never LifeHistory, never dials, never ledger writes.
+- **Verify:** `--dry-run --popA=POP-00001 --popB=POP-00210` prints both system prompts + full transcript, writes nothing; live sandbox run → 2 page docs, 2 intake rows, ripple consumed, cadence stamp written; `compressLifeHistory.dial.test.js` untouched passes.
+- **Status:** [ ] not started
+
+### Task 7: Conversation cron wiring
+
+- **Files:**
+  - PM2/cron config (wherever `citizen-wake.js`'s five daily fires live) — modify
+- **Steps:**
+  1. Add one daily fire for `scripts/citizen-conversation.js` at 17:00 (between the afternoon and evening wakes — a conversation lands before the evening reflection can reference it).
+  2. No-op days cost one scan and exit 0 — confirm the cron treats exit 0 silently.
+- **Verify:** cron/PM2 list shows the entry; forced run on an empty ripple state logs "no conversation today" and exits 0.
+- **Status:** [ ] not started
+
+### Task 8: Tensions → /sift story seeds *(media terminal)*
+
+- **Files:**
+  - `.claude/skills/sift/SKILL.md` — modify
+- **Steps:**
+  1. Add a sourcing step: read `logs/citizen-tension-state.json`; for each OPEN tension, emit a story-seed candidate line — `popId | citizen question ("...") | opened c<N>` — into the sift working set, flagged `source=tension-register`.
+  2. Scope note in the skill text: tensions are SUBJECTIVE material — a reporter can knock on the door (interview/dispatch), but the tension text itself is never publishable as fact (subjective→canon wall).
+- **Verify:** dry `/sift` pass on a non-empty register lists the candidates section; empty register → section absent.
+- **Status:** [ ] not started
+
+---
+
+## Open questions
+
+- [ ] Task 6 turn count (3/side) and Task 7 cadence (1/day) are starting values — engine-sheet tunes at smoke-test against DeepSeek cost per conversation; not blockers.
+
+---
+
+## Changelog
+
+- 2026-07-06 — Initial draft (S298, research-build). Executes [[../research/2026-07-06-citizen-loop-deepening]] lanes 2+3; conversation engine upgraded from feasibility to build per Mike-direct S298.

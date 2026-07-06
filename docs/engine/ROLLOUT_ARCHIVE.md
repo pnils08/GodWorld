@@ -1259,3 +1259,8 @@ Per-entry migration of all open work into the §Open Work — by group structure
 ### governance.44 — closed row swept 2026-07-02 (S286)
 
 | governance.44 | **Cheap-agent isolation — soft tier (S274, Mike-direct).** Claude control plane (`.claude/**`, `CLAUDE.md`, `SESSION_CONTEXT.md`) made read-only to Gemini/Aider so an autonomous low-cost agent can't corrupt the orchestration layer. `.aiderignore` contains Aider; `.githooks/pre-commit` default-denies control-plane commits unless a Claude session sets `CLAUDE_CTL=1` (catches Gemini too, by policy not kernel — `--no-verify`/direct-write bypass it). Cheap agents home-based in `.agents/`. MODEL_HIERARCHY.md destaled (Qwen removed) + registered in index.md. **Hard tier (non-root user / sandbox) deferred** — adopt if soft proves leaky. | done-pending-archive | research-build | docs/MODEL_HIERARCHY.md §File Boundaries; .aiderignore; .githooks/pre-commit |
+
+
+### engine.49 — closed row swept 2026-07-06 (S300)
+
+| engine.49 | **Content-ledger auto-authoring (Mike-direct S298, closed S300).** Post-cycle cheap-helper (OpenRouter deepseek) drafts condition-gated Event_Content_Ledger rows from what the cycle produced; validation = parity-by-execution through the real loader (zero dead rows by construction); caps/dedup/auth:auto provenance. T1-T4 shipped S298-S300: drafter + 25 tests, supervised run, auto-active default, /run-cycle Step 5.6 wiring. C118 smoke PASS: 38 auth:auto draws into LifeHistory_Log; first auto-active run wrote 7 rows verified. | done | engine-sheet | [[../plans/2026-07-06-content-ledger-auto-authoring]] |

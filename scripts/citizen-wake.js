@@ -25,13 +25,15 @@ const fs = require('fs');
 const path = require('path');
 const sheets = require('/root/GodWorld/lib/sheets');
 const dials = require('/root/GodWorld/lib/citizenDials');
-const dialMap = require('/root/GodWorld/utilities/citizenDialMap');
 const page = require('/root/GodWorld/lib/citizenPage');
 const memoryFence = require('/root/GodWorld/lib/memoryFence');
 const classifier = require('/root/GodWorld/lib/reflectionClassifier');
 const resonance = require('/root/GodWorld/lib/resonanceRecall'); // B4 v1 — scored memory selection (seams Task 2)
-const { createSlicer } = require('/root/GodWorld/lib/neighborhoodSlice');
 const getCurrentCycle = require('/root/GodWorld/lib/getCurrentCycle');
+// Task 5 (citizen-loop-deepening, S300): perception assembly extracted to lib/wakePerception —
+// shared with scripts/citizenVoice.js (edition voicing) + the Task-6 conversation engine.
+const { buildPool, coResidents, loadLifeArc, loadSportsSlice, loadNeighborhoodTexture,
+  loadBonds, loadOwnPageReadback, dialTrajectory } = require('/root/GodWorld/lib/wakePerception');
 const { selectProvocation } = require('/root/GodWorld/lib/provocationBank'); // T5 varied-provocation bank
 
 const ARGV = process.argv.slice(2);
@@ -40,10 +42,7 @@ const arg = (k, d) => { const m = ARGV.find((a) => a.startsWith(`--${k}=`)); ret
 const WAKE = (arg('wake', 'evening') || 'evening').toLowerCase();
 const FORCE_POP = arg('pop', null);
 
-const SHAPED_MIN = 60;          // deviation floor — only strongly-shaped citizens have a distinct voice
-const LIFE_MIN_CHARS = 25;      // must have real lived events to ground on (anti-confabulation)
 const ROTATION_MEMORY = 25;     // don't re-wake the last N citizens (force variety)
-const RESIDENT_CAP = 3;         // real co-residents fed for grounding (names only, no metrics)
 const STATE_FILE = path.join(__dirname, '..', 'logs', 'citizen-wake-state.json');
 const LOG_FILE = path.join(__dirname, '..', 'logs', 'citizen-wake.log');
 const TENSION_FILE = path.join(__dirname, '..', 'logs', 'citizen-tension-state.json'); // B2 index — page is the durable surface, this skips a page search
@@ -85,254 +84,6 @@ function openTensionsFor(state, popId, cycle) {
   return list.filter((t) => t.status === 'open').slice(-TENSION_CAP);
 }
 
-// LifeHistory tail -> magnitude of the biggest dial nudge = "how big a delta is this citizen living".
-// Scores every tail line, age-damped (mag × 0.8^age, last line = age 0), takes the max — a real
-// event 2-3 lines back must outrank the ambient filler that usually holds the last slot now that
-// atmospheric depth raised filler volume (S281 seams plan, Findings #3 / Task 1).
-function recentEventMagnitude(lifeTail) {
-  const lines = String(lifeTail || '').split('\n').filter(Boolean);
-  let best = 0;
-  for (let i = 0; i < lines.length; i++) {
-    const m = lines[i].match(/\[([^\]]+)\]/);
-    if (!m) continue;
-    const fx = dialMap.nudgesForEvent_(m[1].trim(), 1, lines[i]);
-    const mag = Object.values(fx).reduce((s, v) => s + Math.abs(v), 0);
-    const age = lines.length - 1 - i;
-    best = Math.max(best, mag * Math.pow(0.8, age));
-  }
-  return best;
-}
-
-// T1a' (research.19, S273 production finding) — canon-anchored self-state read-back, the
-// amnesia fix: a citizen perceives a genuine life MILESTONE, not just the recent tail. Sourced
-// from LifeHistory_Log (canonical append-only per-citizen history), NOT generated reflection prose
-// — no fabrication to re-inject (the AP-reframe: "shady Greg"-class invention lives in the prose
-// page, deliberately never read back).
-//
-// WHY a named milestone and NOT a count (S273): the original loadLifeArc emitted an aggregate
-// ("6 advancement events") that never surfaced in 15 post-upgrade reflections — no person thinks
-// in counts (self-axis twin of T2's "retail -4%" problem). And 94% of ARC rows are Advancement/
-// Promotion whose EventText is engine BOOKKEEPING ("Updated to Tier 3. 29 West Oakland Server...")
-// — rendering it leaks engine vocab, worse than the count. So: render the latest PERSON-READABLE
-// life-event milestone's own description; if none, OMIT (no count fallback — the count IS the bug).
-// Live reach is thin (~1.9% of the wake pool have a clean milestone — weddings/retirements are rare,
-// and the engine doesn't yet write person-readable Advancement text); the honest line beats a leaky
-// one. Closing the amnesia hole at scale is the UPSTREAM lane (cleaner ARC descriptions at the
-// engine-write site + engine.38 B3 milestone supply), tracked separately — not this wake-side task.
-const MILESTONE_TAGS = /^(Wedding|Birth|Retirement|Graduation|Stabilized)$/i; // Death omitted: incoherent for a living reflector
-const BOOKKEEPING_PREFIX = /^(Updated to Tier|Added to Simulation_Ledger|Emerged into Tier|Neighborhood council|Local civic|Development civic)/i;
-async function loadLifeArc(popId) {
-  try {
-    const rows = await sheets.getRawSheetData('LifeHistory_Log');
-    if (!rows || rows.length < 2) return '';
-    const h = rows[0];
-    const iPop = h.findIndex((x) => String(x).toLowerCase() === 'popid');
-    const iTag = h.findIndex((x) => String(x).toLowerCase() === 'eventtag');
-    const iText = h.findIndex((x) => String(x).toLowerCase() === 'eventtext');
-    const iCyc = h.findIndex((x) => String(x).toLowerCase() === 'cycle');
-    if (iPop < 0 || iTag < 0 || iText < 0) return '';
-    let best = null; // latest (highest cycle) clean milestone
-    for (let i = 1; i < rows.length; i++) {
-      if (String(rows[i][iPop]).toUpperCase() !== popId) continue;
-      if (!MILESTONE_TAGS.test(String(rows[i][iTag] || '').trim())) continue;
-      const text = String(rows[i][iText] || '').trim();
-      if (text.length < 8 || BOOKKEEPING_PREFIX.test(text)) continue; // sanitize: drop engine-bookkeeping text
-      const cyc = iCyc >= 0 ? (Number(rows[i][iCyc]) || 0) : i;
-      if (!best || cyc >= best.cyc) best = { text, cyc };
-    }
-    return best ? best.text : '';
-  } catch (e) { return ''; }
-}
-
-// T1a — dial TRAJECTORY: how their temperament has moved (current vs back-dated base). DORMANT today —
-// currentDials reads base+mood and live DialState carries no mood/streak until the reflection
-// write-back drain deploys, so current==base and this returns ''. Forward-compatible: it surfaces a
-// shift line ONLY when real movement exists; it never fabricates one (canon-anchored).
-function dialTrajectory(baseDials, cur) {
-  if (!baseDials || !cur) return '';
-  const shifts = [];
-  for (const d of dials.DIALS) {
-    const b = baseDials[d], c = cur[d];
-    if (b == null || c == null || Math.abs(c - b) < 8) continue; // below noticeable
-    const band = dials.bandIdx(c);
-    if (band >= 0) shifts.push(dials.POLES[d][band]);
-  }
-  return shifts.slice(0, 2).join('; ');
-}
-
-// T1b (research.19) — world-larger-than-self: the A's as any Oaklander would know them. Canonical feed
-// (Paulson's domain), narrative NOT metrics (no FanSentiment aggregate in voice — lived-particulars
-// guardrail). Spot-checked canon-clean S270 (NamesUsed = GodWorld A's roster, fictionalized opponents).
-async function loadSportsSlice() {
-  try {
-    const rows = await sheets.getRawSheetData('Oakland_Sports_Feed');
-    if (!rows || rows.length < 2) return '';
-    const h = rows[0];
-    const col = (n) => h.findIndex((x) => String(x).toLowerCase() === n.toLowerCase());
-    const iCycle = col('Cycle'), iNotes = col('Notes'), iRec = col('Team Record'), iStreak = col('Streak'), iTeam = col('TeamsUsed');
-    let maxC = -1; for (let i = 1; i < rows.length; i++) { const cN = Number(rows[i][iCycle]) || 0; if (cN > maxC) maxC = cN; }
-    // A's only — the team every Oaklander follows; the Oaks-expansion rows carry no record ('-') and
-    // would conflate two franchises under one "The A's are…" framing. Real game record lives on A's rows.
-    const latest = rows.slice(1).filter((r) => Number(r[iCycle]) === maxC
-      && /a's/i.test(String(r[iTeam] || '')) && String(r[iNotes] || '').trim());
-    if (!latest.length) return '';
-    latest.sort((a, b) => String(b[iNotes]).length - String(a[iNotes]).length); // richest note
-    const r = latest[0];
-    const validRec = iRec >= 0 && /\d+-\d+/.test(String(r[iRec] || ''));
-    const rec = validRec ? `The A's are ${String(r[iRec]).trim()}` : "The A's";
-    const streak = validRec && iStreak >= 0 && r[iStreak] ? ` (${String(r[iStreak]).trim()})` : '';
-    return `${rec}${streak}. ${String(r[iNotes]).trim().slice(0, 220)}`;
-  } catch (e) { return ''; }
-}
-
-// T2 (research.19) — immediate world: the lived texture of the citizen's own neighborhood
-// this cycle, what a resident would NOTICE walking around. Reads the shared frozen artifact
-// (output/neighborhood_texture_c{XX}.md, built by scripts/buildNeighborhoodTexture.js after
-// the world-summary, before the wake) and returns THIS hood's block. Lived-particulars, never
-// aggregates (the digest already stripped metrics + ran a canon sweep). Graceful: '' if the
-// artifact or the hood block is absent — exactly like loadSportsSlice. Frozen artifact => every
-// wake in the cycle reads the identical block (determinism holds; perception is input-side).
-function loadNeighborhoodTexture(nh, cycle) {
-  try {
-    if (!nh || !cycle) return '';
-    const p = path.join(__dirname, '..', 'output', `neighborhood_texture_c${cycle}.md`);
-    const md = fs.readFileSync(p, 'utf8');
-    const parts = md.split(/^###\s+/m);
-    for (const part of parts.slice(1)) {
-      const nl = part.indexOf('\n');
-      if (nl < 0) continue;
-      if (part.slice(0, nl).trim().toLowerCase() !== String(nh).trim().toLowerCase()) continue;
-      const body = part.slice(nl + 1).split(/\n###\s/)[0].trim().replace(/\s+/g, ' ').trim();
-      if (/^a quiet week/i.test(body)) return ''; // no engine signal -> nothing to perceive, omit the line
-      return body;
-    }
-    return '';
-  } catch (e) { return ''; }
-}
-
-// research.19 relationships-with-texture (immersion ingredient 3 — task # TBD by research-build;
-// NOT "T1c", which is the prose-page read-back) — the people a citizen
-// has HISTORY with, not just 3 names off the block. Reads Relationship_Bonds (live active bonds,
-// canon engine state) for the woken citizen, resolves the other party's name from the ledger, and
-// renders bond-type + warmth as plain relationship texture ("a close friend", "someone you know
-// through work"). Canon-anchored — names from the ledger, bond types from the bond engine; no
-// invention. Cross-neighborhood by design (relationships reach beyond the block, unlike co-residents).
-const BOND_PHRASE = {
-  family: (close) => (close ? 'close family' : 'family'),
-  friendship: (close) => (close ? 'a close friend' : 'a friend'),
-  professional: () => 'someone you know through work',
-  alliance: (close) => (close ? 'someone you count on' : 'an ally'),
-  rivalry: () => 'someone you butt heads with',
-};
-async function loadBonds(popId) {
-  try {
-    const [bonds, led] = await Promise.all([
-      sheets.getRawSheetData('Relationship_Bonds'),
-      sheets.getRawSheetData('Simulation_Ledger'),
-    ]);
-    if (!bonds || bonds.length < 2 || !led || led.length < 2) return '';
-    const bh = bonds[0];
-    const iA = bh.indexOf('CitizenA'), iB = bh.indexOf('CitizenB'), iT = bh.indexOf('BondType'), iI = bh.indexOf('Intensity'), iS = bh.indexOf('Status');
-    if (iA < 0 || iB < 0) return '';
-    const lh = led[0];
-    const lp = lh.findIndex((x) => String(x).toLowerCase() === 'popid');
-    const ln = lh.findIndex((x) => String(x).toLowerCase() === 'name');
-    const lf = lh.findIndex((x) => String(x).toLowerCase() === 'first');
-    const ll = lh.findIndex((x) => String(x).toLowerCase() === 'last');
-    const nameOf = {};
-    for (let i = 1; i < led.length; i++) {
-      const k = String(led[i][lp]).toUpperCase();
-      nameOf[k] = (ln >= 0 && led[i][ln]) ? led[i][ln] : [led[i][lf], led[i][ll]].filter(Boolean).join(' ');
-    }
-    const mine = [];
-    for (let i = 1; i < bonds.length; i++) {
-      const r = bonds[i];
-      if (String(r[iS] || '').toLowerCase() !== 'active') continue;
-      const a = String(r[iA]).toUpperCase(), b = String(r[iB]).toUpperCase();
-      if (a !== popId && b !== popId) continue;
-      const other = a === popId ? b : a;
-      const name = nameOf[other];
-      if (!name) continue; // unresolved POPID -> skip (anti-confabulation: never invent a name)
-      const intensity = Number(r[iI]) || 0;
-      const fn = BOND_PHRASE[String(r[iT] || '').toLowerCase()];
-      const phrase = fn ? fn(intensity >= 5) : (intensity >= 5 ? 'someone close to you' : 'someone you know');
-      mine.push({ name, phrase, intensity });
-    }
-    if (!mine.length) return '';
-    mine.sort((x, y) => y.intensity - x.intensity); // closest first
-    return mine.slice(0, 3).map((m) => `${m.name}, ${m.phrase}`).join('; ');
-  } catch (e) { return ''; }
-}
-
-// T1c (research.19) — bounded own-page prose READ-BACK. The amnesia fix's other half: the wake has
-// always APPENDED each reflection to the citizen's private page (page.appendReflection_) and NEVER
-// read it back (CV-1) — a citizen accreted a remembered self and woke amnesiac of it. Read the few
-// most-relevant recent reflections back so they continue from their own inner life. UNGATED by design
-// (Mike S273, overturns the AP-2 gate): the page is SUBJECTIVE memory; self-read-back never crosses
-// the subjective->canon publication wall, so "shady Greg"-class invention is continuity, not
-// contamination. **MANDATORY fence** — recalled prose is wrapped by lib/memoryFence (citizenPage
-// §Fence contract) so the model treats it as background data, never instructions. Bounded (last-N +
-// per-reflection truncation) for tokens only. Non-deterministic recall is fine: wake-side/input-only,
-// frozen into the persisted tag; the cycle never re-runs the wake. Fails open (no page / API down -> '').
-const PAGE_READBACK_N = 3;        // memories fed to the prompt (cap unchanged from blind-recency era)
-const PAGE_CANDIDATE_N = 15;      // reflections pulled as recall CANDIDATES (B4 v1 — scored, not blind)
-const PAGE_REFLECTION_CAP = 320;  // per-reflection char cap (token bound)
-async function loadOwnPageReadback(popId, recall) {
-  try {
-    // recentPage_ (recency via documents-list+get), NOT readPage_ (v4 search silently misses docs — S272).
-    const res = await page.recentPage_(popId, PAGE_CANDIDATE_N);
-    const candidates = ((res && res.results) || [])
-      .filter((r) => String((r && r.metadata && r.metadata.type) || '') !== 'tension') // typed TENSION lines are not memories; they join candidates from state via Task 4, not as raw docs
-      .map((r) => ({ text: String((r && r.content) || '').trim().slice(0, PAGE_REFLECTION_CAP), meta: (r && r.metadata) || null, kind: 'reflection' }))
-      .filter((c) => c.text);
-    // latest milestone joins the candidate set (Design B4) — flat-mid affect, competes on context/staleness.
-    if (recall && recall.milestone) candidates.push({ text: String(recall.milestone).trim().slice(0, PAGE_REFLECTION_CAP), meta: null, kind: 'milestone' });
-    // Task 4 — resolved tensions + unlived entries (pre-composed upstream), same flat-mid footing.
-    if (recall && recall.extraCandidates) candidates.push(...recall.extraCandidates);
-    if (!candidates.length) return { block: '', keys: [] };
-    // B4 v1 (seams Task 2): score context-match + staleness + affect, seeded tiebreak — not blind most-recent-3.
-    const pick = resonance.selectMemories({
-      popId, cycle: recall && recall.cycle, wake: recall && recall.wake,
-      candidates, contextText: (recall && recall.contextText) || '', cap: PAGE_READBACK_N,
-    });
-    const prose = pick.selected.map((c) => c.text).join('\n\n');
-    if (!prose.trim()) return { block: '', keys: [] };
-    return { block: memoryFence.wrap(prose, 'citizen-page:' + popId), keys: pick.keys }; // fenced — recalled prose never enters raw
-  } catch (e) { return { block: '', keys: [] }; }
-}
-
-async function buildPool() {
-  const rows = await sheets.getRawSheetData('Simulation_Ledger');
-  const h = rows[0];
-  const find = (n) => h.findIndex((x) => String(x).toLowerCase() === n.toLowerCase());
-  const iPop = find('POPID'), iName = find('Name'), iFirst = find('First'), iLast = find('Last');
-  const iNh = find('Neighborhood'), iDial = find('DialState'), iOcc = find('Occupation'), iBirth = find('BirthYear'), iLife = find('LifeHistory');
-  const iMem = find('MemoryRegisters'); // AX, S282 — B3 unlived register feeds recall candidates (blank until the Task-8 fold lands)
-  const pool = [];
-  for (let i = 1; i < rows.length; i++) {
-    const r = rows[i];
-    const dj = r[iDial];
-    if (!dj || String(dj).trim().length < 5) continue;
-    const cur = dials.currentDials(dj);
-    if (!cur || dials.deviation(cur) < SHAPED_MIN) continue;
-    let baseDials = null; try { const dp = JSON.parse(dj); baseDials = (dp && dp.base) || null; } catch (e) {} // T1a trajectory anchor
-    const life = iLife >= 0 ? String(r[iLife] || '').trim() : '';
-    if (life.length < LIFE_MIN_CHARS) continue;
-    const name = (iName >= 0 && r[iName]) ? r[iName] : [r[iFirst], r[iLast]].filter(Boolean).join(' ');
-    const nh = iNh >= 0 ? r[iNh] : '';
-    if (!name || !nh) continue;
-    if (/corliss/i.test(`${name} ${r[iFirst] || ''} ${r[iLast] || ''}`)) continue; // Mags is the anchor, not in rotation
-    const lifeTail = life.split('\n').filter(Boolean).slice(-5).join('\n');
-    pool.push({
-      popId: String(r[iPop]).toUpperCase(), name, occ: iOcc >= 0 ? r[iOcc] : '', nh,
-      age: (iBirth >= 0 && r[iBirth]) ? (2041 - Number(r[iBirth])) : '',
-      cur, baseDials, life: lifeTail, eventMag: recentEventMagnitude(lifeTail),
-      memReg: iMem >= 0 ? String(r[iMem] || '') : '',
-    });
-  }
-  return pool;
-}
-
 // event-magnitude-weighted, deterministic: highest live delta first, excluding the recently-woken.
 function selectCitizen(pool, state) {
   if (FORCE_POP) {
@@ -345,16 +96,6 @@ function selectCitizen(pool, state) {
   if (!candidates.length) candidates = pool; // everyone woken recently -> reset the cycle
   candidates.sort((a, b) => (b.eventMag - a.eventMag) || dials.deviation(b.cur) - dials.deviation(a.cur));
   return candidates[0];
-}
-
-async function coResidents(nh, selfPop) {
-  const ledgerObjs = await sheets.getSheetAsObjects('Simulation_Ledger');
-  const mapObjs = await sheets.getSheetAsObjects('Neighborhood_Map').catch(() => []);
-  const slicer = createSlicer({ ledger: ledgerObjs, neighborhoodMap: mapObjs, residentCap: RESIDENT_CAP + 4 });
-  const sl = slicer.slice(nh);
-  if (!sl || !sl.residents) return [];
-  // names ONLY (grounding / anti-confabulation) — NO metrics (no-engine-aggregates-in-voice rule)
-  return sl.residents.filter((rr) => String(rr.popId).toUpperCase() !== selfPop).slice(0, RESIDENT_CAP);
 }
 
 function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, pageMemory, cycle, tensionBlock) {

@@ -21,7 +21,7 @@ pointers:
 
 **Architecture:** Four additions to the existing loop, no new subsystem class. Selection gets seeded-weighted sampling + reserved voiced-citizen slots (same `hash53_` determinism as the provocation bank). Perception gains two slices: the published edition (canon→subjective, safe direction) and a cross-citizen ripple register (grounded in `Reflection_Intake` tags + `Relationship_Bonds`). The conversation engine is a bounded two-persona exchange script reusing the wake's perception assembly, writing only to pages + the gated intake — the same canon exit every surface uses. One media-terminal task lets `/sift` mine the tension register for story seeds.
 
-**Terminal:** research-build (this plan) → engine-sheet (Tasks 1–7) + media (Task 8)
+**Terminal:** research-build (this plan) → engine-sheet (Tasks 1–7, 9) + media (Task 8 + Task 9 skill wiring)
 
 **Pointers:**
 - Research basis: [[../research/2026-07-06-citizen-loop-deepening]] (all measurements: 55/212 orbit, disposition monotony, voiced starvation, Discord half-wiring)
@@ -95,7 +95,7 @@ pointers:
   1. Move the pure perception functions — `buildPool`, `recentEventMagnitude`, `loadLifeArc`, `loadSportsSlice`, `loadNeighborhoodTexture`, `loadBonds`, `loadOwnPageReadback`, `dialTrajectory`, `coResidents`, plus Task 3's `loadEditionSlice` and the constants they carry — into `lib/wakePerception.js`, exported by name. No logic edits; `citizen-wake.js` requires and destructures.
   2. Keep wake-only concerns (rotation state, tension state, prompt framing, cron entry, provocation call) in `citizen-wake.js`.
 - **Verify:** `node scripts/citizen-wake.js --dry-run` before/after extraction → byte-identical system prompt for the same forced `--pop`/`--cycle`/`--wake`; `grep -c "function buildPool" scripts/citizen-wake.js` → 0.
-- **Status:** [ ] not started
+- **Status:** [x] built S300 (engine-sheet). Both verifies pass (prompt diff byte-identical on (c100, morning); buildPool grep → 0; wake 512→253 lines). One addition beyond spec: `buildPool(opts)` takes `{shapedMin, lifeMinChars}` overrides (defaults = wake constants, zero behavior change) so edition voicing can reach below the shaped floor.
 
 ### Task 6: Conversation engine — `scripts/citizen-conversation.js`
 
@@ -130,6 +130,22 @@ pointers:
 - **Verify:** dry `/sift` pass on a non-empty register lists the candidates section; empty register → section absent.
 - **Status:** [ ] not started
 
+### Task 9: Edition voicing offload — `scripts/citizenVoice.js` *(engine-sheet; Mike-direct S300)*
+
+Added S300, Mike-direct: "when citizens get used, we use OpenRouter to ask them instead of
+the letters skill's one LLM voicing them all — they voice themselves cheaper on OpenRouter."
+The first edition-run offload agent, and the assembly Task 6's conversations reuse.
+
+- **Files:**
+  - `scripts/citizenVoice.js` — create (thin consumer of Task 5's `lib/wakePerception`)
+- **Steps:**
+  1. CLI: `--pop=POP-XXXXX --ask="..."` (or `--stdin`) `[--cycle=N] [--dry-run] [--json] [--max-tokens]`. Assemble the wake-parity system prompt (dials→disposition, LifeHistory tail, co-residents, bonds, sports, texture, fenced page memory); user prompt = the desk's ask (sanitized via memoryFence) + a plain-speech guard. DeepSeek call, same model/params family as `generateVoice`.
+  2. Voicing floor: `buildPool({shapedMin:0, lifeMinChars:0})` — an edition-named citizen speaks even at mild deviation; no DialState at all → exit 2 (caller falls back to desk-voiced).
+  3. **Canon guard:** READ-ONLY — no page docs, no intake, no dials/LifeHistory, no state, no markRecalled. A voiced line becomes canon only via edition publication (existing wall).
+- **Media handoff (letters/interview skills call this per citizen — media terminal wires it, same split as Task 8):** desk builds the ask from the story context, calls once per citizen, formats the returned text.
+- **Verify:** dry-run prints wake-parity prompts; live call returns in-voice text grounded in the citizen's real bonds/texture; `--pop` with no dials exits 2.
+- **Status:** [x] built S300 (engine-sheet). Verified: dry-run assembly correct (POP-00022 — dials, life tail, co-residents, bond, texture all present); live DeepSeek letter grounded in his actual bond + hood texture; media wiring open (handoff above).
+
 ---
 
 ## Open questions
@@ -140,4 +156,10 @@ pointers:
 
 ## Changelog
 
+- 2026-07-06 — **Task 5 + Task 9 built (S300, engine-sheet, Mike-direct).** Perception assembly
+  extracted to `lib/wakePerception.js` (byte-identical verify; wake 512→253 lines);
+  `scripts/citizenVoice.js` shipped — first edition-run offload agent: per-citizen OpenRouter
+  voicing from wake-parity perception, read-only canon guard. Task 6 conversations now have
+  their assembly. Media wiring of the voice CLI into letters/interview skills = open handoff
+  (Task 9 note). Tasks 1–4, 6–7 unstarted.
 - 2026-07-06 — Initial draft (S298, research-build). Executes [[../research/2026-07-06-citizen-loop-deepening]] lanes 2+3; conversation engine upgraded from feasibility to build per Mike-direct S298.

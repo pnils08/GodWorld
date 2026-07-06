@@ -70,7 +70,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.45 | Ripple ledger + per-desk slices — persist cause→effect, hand desks the truth | ready | engine-sheet | [[../plans/2026-07-04-ripple-ledger-attribution]] (Mike-direct 2026-07-04; trace base: docs/research/ripple-traces/) |
 | engine.46 | Deep-dispatch Phase 1 substrate — reactivate per-desk corpus storage + byline/desk ingest tags; blocks the research.20 Phase 3 pilot | ready | engine-sheet | [[../plans/2026-06-25-deep-dispatch-write-edition-build]] §Phase 1 (Tasks 1-2) |
 | engine.47 | Game-night connection design — one game traced through 10 hops, gaps close in 4 existing engines; build awaits Mike approval (S296 moratorium gate) | draft | engine-sheet | [[../plans/2026-07-05-game-night-connection-design]] |
-| engine.48 | Citizen-loop deepening — weighted rotation, voiced slots, edition slice, ripple, conversation engine (Mike-approved S298) | ready | engine-sheet | [[../plans/2026-07-06-citizen-loop-deepening]] Tasks 1–7 |
+| engine.48 | Citizen-loop deepening — T5 wakePerception lib + T9 citizenVoice offload CLI built S300; T1–4, 6–7 open; T9 media wiring open | in-progress | engine-sheet + media | [[../plans/2026-07-06-citizen-loop-deepening]] |
 | engine.49 | Content-ledger auto-authoring — T1-T4 built; C118 smoke PASS (38 auth:auto draws in LifeHistory); first auto-active run wrote 7 rows verified | done-pending-archive | engine-sheet | [[../plans/2026-07-06-content-ledger-auto-authoring]] |
 | engine.50 | Citizen trait profiles — ~343 citizens missing TraitProfile; generate Archetype/Tone/Motifs/Traits from LifeHistory + engine data (rehomed from Phase 33 §33.17 at research.1 retirement, S299) | ready | engine-sheet | [[PHASE_33_PLAN]] §33.17 |
 

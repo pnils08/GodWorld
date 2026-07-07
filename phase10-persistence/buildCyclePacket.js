@@ -475,7 +475,10 @@ function buildCyclePacket_(ctx) {
     }
 
     lines.push('EveningSafety: ' + (S.eveningSafety || 'normal'));
-    lines.push('EveningTraffic: ' + round2(S.eveningTraffic || 0));
+    // G-EC34: eveningTraffic is CATEGORICAL (light|moderate|heavy|gridlock,
+    // cityEveningSystems L208-213) — round2() on the string rendered NaN in
+    // every packet. Render as-is, same shape as EveningSafety above.
+    lines.push('EveningTraffic: ' + (S.eveningTraffic || 'light'));
     lines.push('');
   }
 

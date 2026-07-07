@@ -68,6 +68,16 @@ Plan: `docs/plans/2026-07-06-content-ledger-auto-authoring.md` (engine.49).
 
 **Gate:** Draft report printed; on `--apply`, script exits 0 with rows verified (0 written is a valid outcome on a quiet cycle).
 
+### Step 5.7: Initiative packets refresh (G-PREP1)
+
+Refresh the derived initiative JSON from the live sheet so downstream skills never read stale phases (C100: `initiative_tracker.json` carried past-cycle nextActionCycle values while the live sheet had moved on).
+
+```bash
+node scripts/buildInitiativePackets.js {XX}
+```
+
+**Gate:** `output/initiative_tracker.json` regenerated this run (mtime is this session).
+
 ### Step 6: Gap Log Close (engine-sheet)
 
 Run the mechanical baseline audit and append judgment-layer entries.
@@ -75,6 +85,8 @@ Run the mechanical baseline audit and append judgment-layer entries.
 ```bash
 node scripts/engineCycleAudit.js {XX} --write
 ```
+
+**Run-order dependency (G-EC1):** this step reads `engine_audit_c{XX}.json` from Step 4 — the script now aborts with a clear message (no gap log written) if the file is missing, instead of filing a false-HIGH `audit-input` finding. If it aborts, run Step 4 first.
 
 Writes `output/production_log_c{XX}_run_cycle_gaps.md` with `[mechanical]`-tagged entries across 5 detector classes (`writeback-drift`, `math-anomaly`, `cross-cycle-debt`, `determinism-break`, `header-drift`). 4 V2-runtime classes (`phase-skip`, `cohort-collision`, `phase-ordering`, `silent-fail`) appended as stubs — they need an engine-run-log ingest path that doesn't exist yet.
 

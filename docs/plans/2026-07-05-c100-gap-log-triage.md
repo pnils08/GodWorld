@@ -92,7 +92,14 @@ Three gap logs from the S271 C100 production run (post-publish, edition-print, r
   - G-EC34: trace the `EveningTraffic` NaN leak (likely phase02 cityDynamics or phase08 fold aggregate); guard the operand.
   - G-EC1: document/enforce the run-order dependency (`/engine-review` must complete before `/engineCycleAudit` reads `engine_audit_c{XX}.json`) so this doesn't fire as a false HIGH every time the audit runs first.
 - **Verify:** each fix verified independently per its own one-line check above; no single verify command covers the batch.
-- **Status:** [ ] not started
+- **Status:** [~] 5 of 7 done S301 (engine-sheet):
+  - G-EC34 DONE — NaN was buildCyclePacket.js:478 running round2() on the CATEGORICAL eveningTraffic string (light|moderate|heavy|gridlock); renders as-is now. Apps Script — rides the next clasp batch (sandbox-pending with Class 3).
+  - G-P-C100-4 DONE (bounded half) — 'Travis Cole' -> POP-00533 'Travis Coles' spelling-drift alias in ingestPlayerTrueSource resolver (tested). The other 7 unresolveds have NO ledger row at all (verified vs 49 GAME baseball rows) — minting them is a sports-layer roster call (Paulson/As_Roster), stays popIdUnresolved by design.
+  - G-R2 DONE — applyTrackerUpdates trims MilestoneNotes over 200c deterministically (sentence-boundary cut, else word-boundary + ellipsis) + warning with original length; contract tests 17/17.
+  - G-PREP1 DONE — buildInitiativePackets wired into /run-cycle as Step 5.7 (verified: initiative_tracker.json regenerated from live sheet, stale C100 phases cleared).
+  - G-EC1 DONE — engineCycleAudit aborts loud (exit 1, no gap log) when engine_audit_c{XX}.json missing, instead of filing a false-HIGH audit-input finding; dependency documented at /run-cycle Step 6. Verified on missing-c101.
+  - G-S1 ANSWERED, fix in research-build lane — SeedText is NOT hashed (live deck col H is readable text); sift read the SeedID column (opaque ids like e69b7a47) as its signal column. One-line column fix in /sift SKILL = media/research-build skill edit.
+  - G-PR-C100-5 OPEN — needs Mike's call: do letters get per-letter ### sub-headline rendering in the PDF?
 
 ---
 

@@ -209,13 +209,25 @@ async function loadLedger() {
   return map;
 }
 
+// ES-5 (G-P-C100-4): spelling-drift aliases — TrueSource filename → ledger name.
+// Only add entries verified against a live ledger row. The other 7 chronic
+// unresolveds (Bautista/Robertson/Ka/Devine + prospects Lopez/Cabrera/Ma) have
+// NO ledger row at all — minting them is a sports-layer roster call (Paulson),
+// not an alias fix; they stay in popIdUnresolved by design until rostered.
+const NAME_ALIASES = {
+  'travis cole': 'Travis Coles', // POP-00533, Starting Pitcher Oakland A's
+};
+
 async function resolvePopIdByName(playerName) {
   const ledger = await loadLedger();
   const tokens = playerName.replace(/_/g, ' ').split(/\s+/).filter(Boolean);
   if (tokens.length < 2) return null;
   const first = tokens[0];
   const last = tokens[tokens.length - 1];
-  return ledger.get(normalizeNameKey(first + ' ' + last)) || null;
+  const direct = ledger.get(normalizeNameKey(first + ' ' + last));
+  if (direct) return direct;
+  const alias = NAME_ALIASES[normalizeNameKey(playerName.replace(/_/g, ' '))];
+  return alias ? (ledger.get(normalizeNameKey(alias)) || null) : null;
 }
 
 // ---------------------------------------------------------------------------

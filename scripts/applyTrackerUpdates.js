@@ -111,8 +111,25 @@ function normalizeTrackerWrite(trackerUpdates, currentRow, cycle) {
   }
 
   // Plain writeback fields (MilestoneNotes / NextScheduledAction).
+  // G-R2 (S301): MilestoneNotes carries a ≤~200-char one-sentence cap
+  // (trackerOwner contract §26) the project agents chronically overrun
+  // (C100: OARI ~1624c) — the operator was hand-trimming every cycle.
+  // Deterministic trim: cut at the last sentence end within the cap when one
+  // exists, else at a word boundary + ellipsis; warn with the original length.
+  const MILESTONE_NOTES_CAP = 200;
   ['MilestoneNotes', 'NextScheduledAction'].forEach((field) => {
-    if (tu[field] !== undefined) setField(field, tu[field]);
+    if (tu[field] === undefined) return;
+    let val = tu[field];
+    if (field === 'MilestoneNotes' && typeof val === 'string' && val.length > MILESTONE_NOTES_CAP) {
+      const window = val.slice(0, MILESTONE_NOTES_CAP);
+      const sentenceEnd = Math.max(window.lastIndexOf('. '), window.lastIndexOf('! '), window.lastIndexOf('? '));
+      const trimmed = sentenceEnd > 40
+        ? window.slice(0, sentenceEnd + 1)
+        : window.slice(0, window.lastIndexOf(' ') > 40 ? window.lastIndexOf(' ') : MILESTONE_NOTES_CAP).trimEnd() + '…';
+      warnings.push(`MilestoneNotes over cap (${val.length}c > ${MILESTONE_NOTES_CAP}c) → trimmed to ${trimmed.length}c.`);
+      val = trimmed;
+    }
+    setField(field, val);
   });
   // NextActionCycle — validate it's a forward cycle int; a garbage/stale emitted
   // value (e.g. "99abc", or a cycle already past) falls back to cycle+1 rather

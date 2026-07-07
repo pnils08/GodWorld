@@ -45,6 +45,16 @@ function main() {
     process.exit(1);
   }
 
+  // G-EC1 (S301): a MISSING audit JSON is a run-order mistake, not an engine
+  // defect — fail loud with the dependency instead of writing a false-HIGH
+  // gap finding every time the audit runs before /engine-review. A present-
+  // but-corrupt file still lands the HIGH finding via the catch below.
+  const auditPath = path.join(ROOT, 'output', `engine_audit_c${cycle}.json`);
+  if (!fs.existsSync(auditPath)) {
+    console.error(`engine_audit_c${cycle}.json not found — /engine-review must run before /engineCycleAudit (run-cycle chain Step 4 before Step 6). Aborting; no gap log written.`);
+    process.exit(1);
+  }
+
   const findings = [];
   let auditJson = null;
 

@@ -537,6 +537,18 @@ function ensureBondEngineData_(ctx) {
       ctx._bondActivePool.push(resolvedName);
     }
   }
+
+  // Deterministic shuffle (ctx.rng) — the detectNewBonds_ pair loop starts at
+  // index 0 and the per-cycle cap is 2-4, so an unshuffled pool hands every
+  // cycle's whole bond budget to the same first citizen (C122: all 6 bonds
+  // were Brianna Lee's). Fisher-Yates spreads formation across the pool.
+  var shuffleRng = safeRand_(ctx);
+  for (var sh = ctx._bondActivePool.length - 1; sh > 0; sh--) {
+    var sj = Math.floor(shuffleRng() * (sh + 1));
+    var tmp = ctx._bondActivePool[sh];
+    ctx._bondActivePool[sh] = ctx._bondActivePool[sj];
+    ctx._bondActivePool[sj] = tmp;
+  }
   diagnostics.bondPool = ctx._bondActivePool.length;
 
   // ─────────────────────────────────────────────────────────────

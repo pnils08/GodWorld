@@ -1,7 +1,7 @@
 ---
 name: sift
 description: Editorial planning for the edition. Reads sheet-primary canon (Oakland_Sports_Feed, Riley_Digest, Initiative_Tracker, Simulation_Ledger) + canon archive + NEWSROOM_MEMORY + city-hall production log. Proposes stories under cadence caps, locks slate via Mike approval gate, emits one brief per article slot + dispatch.json + letters candidate pool. The game moment.
-version: "2.1"
+version: "2.2"
 updated: 2026-07-06
 tags: [media, active]
 effort: high
@@ -26,6 +26,8 @@ v1.x companion files: [[../../../docs/media/brief_template|brief_template]] (v1)
 **v2.0.1 minor (S230, canon.3):** Step 5 gains a cross-layer canon check per [[../../../docs/adr/0007-cross-layer-canon-authority-precedence|ADR-0007]] — bay-tribune lookup before NEW classification; canon-layer-drift hits surface in `output/canon_drift_c{XX}.json` for engine-sheet backfill. Closes G-S18 + G-P38 cross-link. Six-decision triage unchanged; check runs as a preflight before the decision tree.
 
 **v2.1 (S300, pipe.40 T5):** Mags' citizen page (POP-00005) enters the sift loop now that the git journal is frozen (T4). New **Step 2.5** recalls her recent page reflections (`magsPageRecall.js`, scored + fenced) as EIC conditioning before candidate generation; new **Step 12** writes one SIFT-daypart reflection back to her page (`magsPageAppend.js`) after the slate locks — the write half of the loop, replacing the retired session-close journal entry. Plan: [[../../../docs/plans/2026-07-06-journal-to-citizen-loop|journal-to-citizen-loop]].
+
+**v2.2 (S301):** Step 6 T4.1 `Story_Seed_Deck` reads converted from positional (fixed cols M-R + hardcoded col-1 `Cycle` filter) to **header-name resolution**, matching `validatePriorityEngine.js` / `checkBylineCadence.js`. Forced by the engine-sheet v4 deck migration (contract-seed schema — `Cycle` moved to col 0, columns renamed `SeedText`→`What` etc.), which silently breaks positional reads. Dual-schema: event-text column resolves `What` (v4) OR `SeedText` (legacy), so `/sift` works on either side of the prod cutover. Priority appends (`PriorityScore` etc.) resolved by name, absent-tolerant (still shadow until Engine-A lands — this is robustness, not ranking activation). **Not folded in (flagged):** the v4 deck now carries rich content (`What/Why/Citizens/CitizenEvents/Businesses`) that candidate-gen could consume — separate opportunity, not this fix.
 
 ---
 
@@ -395,12 +397,19 @@ This is the slate-locking step. Enforce caps, apply Engine A priority data, rend
 | Other sections | ≤ 2-3 articles | CULTURE / BUSINESS / OPINION |
 | INIT rotation | ≤ 3 INITs per edition | Per cycle, avoid stale initiative re-coverage |
 
-**Engine A priority data (T4.1):** Read `Story_Seed_Deck` cols M-R for the current cycle. **The cycle value lives in column index 1 (header `Cycle`), with the header on row 0 — filter rows on col 1, NOT col 0 (RB-4, C99 G-S1).** A col-0 filter returns 0 matches despite a full deck (C99: 48 real rows, all missed). For each proposal:
+**Engine A priority data (T4.1):** Read `Story_Seed_Deck` for the current cycle. **Resolve every column by its header name from row 0 — NEVER by fixed column letters or a hardcoded index.** The deck migrated to a v4 schema (S301, engine-sheet) that reordered and renamed columns; the old positional reads ("cols M-R", "filter on col 1") silently break under it. Read the header row, find each column's index by its name, use that. This matches how `scripts/validatePriorityEngine.js` and `scripts/checkBylineCadence.js` already read the deck. **Dual-schema by design:** prod may still be on the legacy deck while sandbox is on v4 — resolve by name so the same reads work before, during, and after the migration cutover, whatever cycle it lands.
 
-1. Match seed by `sourceSignal` text against deck rows.
-2. Pull `priorityScore` (col M), `consequenceFloor` (col N), `bylineCandidate` (col P), `bylineConfidence` (col Q), `priorityComponents` (col O), `bylineRationale` (col R).
-3. Tag `[FLOOR]` if `consequenceFloor === TRUE`.
+- **Cycle filter:** find the `Cycle` column by header name and filter rows where it equals the current cycle. (`Cycle` moved from index 1 → index 0 in v4; by-name resolution handles both. A hardcoded col-0/col-1 filter false-returns 0 rows despite a full deck — the C99 G-S1 / RB-4 bug, now structurally impossible.)
+- **Event-text column (for matching):** header `What` (v4) OR `SeedText` (legacy) — whichever the header row carries.
+
+For each proposal:
+
+1. Match seed by `sourceSignal` text against the event-text column (`What` / `SeedText`).
+2. Pull the Engine-A priority fields **by header name** (not column letter): `PriorityScore`, `ConsequenceFloor`, `PriorityComponents`, `BylineCandidate`, `BylineConfidence`, `BylineRationale`. These are **shadow appends — not live until Engine-A ships (engine.7 Phase-6 cutover / T2.7 schema add).** When a header is absent, treat as no priority data for that proposal (do not fail).
+3. Tag `[FLOOR]` if `ConsequenceFloor === TRUE`.
 4. Compute effective priority as MAX across matched seeds.
+
+**Engine-silent is the expected default right now.** Until Engine-A is live, matched seeds carry content but no `PriorityScore`, so proposals render `[engine: silent]` and the `[priority …]` suffix is absent (Step T5.2). That is correct behavior — this fix makes `/sift` robust to the deck schema; it does not by itself activate priority ranking (that rides Engine-A landing, a separate track).
 
 **Floor semantics:** `[FLOOR]` proposals can be re-ordered within the floored band, NOT suppressed below non-floored. Floor fires under HIGH severity AND one of: `coverageState.lastRating ≤ -1` (uncovered crisis, any domain) OR domain ∈ {HEALTH, SAFETY, CIVIC} AND arc active ≥ 2 cycles. See `docs/concepts/routing-rationale.md`.
 

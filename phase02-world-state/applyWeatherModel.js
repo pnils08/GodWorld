@@ -557,18 +557,28 @@ function applyWeatherModel_(ctx) {
    * PART 7: Weather tracking & streaks (keep old behavior; add fields)
    * ───────────────────────────────────────────────────────────────────────── */
   if (!S.weatherTracking) {
+    // engine.44 Class 3: seed streak state from the prior cycle's snapshot
+    // (finalizeCycleState v1.7 carry) so streak-gated alerts can accumulate.
+    // Cold start (no snapshot) keeps the original fresh-init behavior.
+    // streakType seeds from the PRIOR cycle's type: the increment below then
+    // extends the streak on a match or resets it to 1 on a weather change.
+    var prevWT = (S.previousCycleState && S.previousCycleState.weatherTracking) || null;
+    // seasonFirsts only survives within the same season — the in-function
+    // reset (S.previousSeason check below) can't see across the cycle
+    // boundary, so the season gate lives here, against the snapshot's season.
+    var prevSeason = (S.previousCycleState && S.previousCycleState.season) || '';
     S.weatherTracking = {
       currentType: type,
-      currentStreak: 0,
-      streakType: normalizeWeatherType_(type),
+      currentStreak: prevWT ? (prevWT.currentStreak || 0) : 0,
+      streakType: prevWT && prevWT.streakType ? prevWT.streakType : normalizeWeatherType_(type),
       temperature: temp,
       humidity: S.weather.humidity,
       windSpeed: S.weather.windSpeed,
-      seasonFirsts: {},
+      seasonFirsts: (prevWT && prevWT.seasonFirsts && prevSeason === season) ? prevWT.seasonFirsts : {},
       history: [],
       activeAlerts: [],
-      consecutiveUncomfortableDays: 0,
-      consecutiveComfortableDays: 0
+      consecutiveUncomfortableDays: prevWT ? (prevWT.consecutiveUncomfortableDays || 0) : 0,
+      consecutiveComfortableDays: prevWT ? (prevWT.consecutiveComfortableDays || 0) : 0
     };
   }
 

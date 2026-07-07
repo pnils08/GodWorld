@@ -114,6 +114,15 @@ function finalizeCycleState_(ctx) {
     // Same channel as migrationDrift. Increase-shifts only, responseTime excluded.
     crimeSpikes: compactCrimeSpikes_(S.crimeMetrics),
 
+    // v1.7 (engine.44 Class 3): weather streak state survives the cycle
+    // boundary — applyWeatherModel's streak-gated alerts (heat_wave ≥6,
+    // prolonged_rain ≥4, cold_snap ≥5, fog_advisory ≥3) and comfort-streak
+    // mood effects (≥3) were unreachable because S.weatherTracking was reborn
+    // every cycle, pinning currentStreak at 1. Same failure class as the v1.5
+    // ripple carry. Cycle_Weather cols E (Advisory) / H (Alerts) never filled
+    // as a result. ~150 bytes.
+    weatherTracking: compactWeatherTracking_(S.weatherTracking),
+
   };
 
   // This is what downstream scripts read next cycle
@@ -124,6 +133,23 @@ function finalizeCycleState_(ctx) {
 
   S.cycleFinalizedAt = ctx.now || new Date();
   ctx.summary = S;
+}
+
+
+/**
+ * Compact weatherTracking to the streak fields applyWeatherModel_ re-seeds
+ * from next cycle (v1.7, engine.44 Class 3). history[] deliberately excluded —
+ * per-cycle rebuild, would bloat the 9KB PropertiesService budget.
+ */
+function compactWeatherTracking_(t) {
+  if (!t) return null;
+  return {
+    currentStreak: t.currentStreak || 0,
+    streakType: t.streakType || '',
+    consecutiveUncomfortableDays: t.consecutiveUncomfortableDays || 0,
+    consecutiveComfortableDays: t.consecutiveComfortableDays || 0,
+    seasonFirsts: t.seasonFirsts || {}
+  };
 }
 
 
@@ -464,6 +490,7 @@ if (typeof module !== 'undefined' && module.exports) {
     compactEconomicRipples_: compactEconomicRipples_,
     compactInitiativeRipples_: compactInitiativeRipples_,
     compactCrimeSpikes_: compactCrimeSpikes_,
+    compactWeatherTracking_: compactWeatherTracking_,
     SNAPSHOT_ECON_RIPPLE_CAP: SNAPSHOT_ECON_RIPPLE_CAP,
     SNAPSHOT_INIT_RIPPLE_CAP: SNAPSHOT_INIT_RIPPLE_CAP
   };

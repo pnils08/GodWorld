@@ -1,9 +1,18 @@
 /**
  * ============================================================================
- * registerCulturalEntity_ v2.5 (Phase 42 §B6 — writeIntents migration)
+ * registerCulturalEntity_ v2.6 (engine.44 Class 3 — UniverseLinks POPID)
  * ============================================================================
  *
  * Automatically classifies and registers cultural entities with calendar awareness.
+ *
+ * v2.6 — engine.44 Class 3 (UniverseLinks was written '' since landing):
+ * - UniverseLinks (col H) now carries the entity's Simulation_Ledger POPID —
+ *   the cross-reference buildCulturalCards.js has always read from H.
+ * - resolveLedgerPopId_ resolves by exact "First Last" match against the
+ *   shared ctx.ledger (Phase 42 §5.6); no unique match → '' (generic pool
+ *   celebrities stay blank by design). Ambiguous duplicate names → ''.
+ * - CREATE branch writes it positionally (index 7); UPDATE branch backfills
+ *   only when the committed cell is empty.
  *
  * v2.5 — Phase 42 §B6 mechanical scope (1 file / 9 sites):
  * - All sheet writes routed through writeIntents
@@ -292,6 +301,11 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
   var iFameScore = col('FameScore');
   var iLastHoliday = col('LastSeenHoliday');
   var iCalendarContext = col('CalendarContext');
+  var iUniverse = col('UniverseLinks');
+
+  // v2.6: POPID cross-ref for UniverseLinks (col H) — resolved once per call,
+  // used by both the CREATE row and the UPDATE empty-cell backfill below.
+  var popId = resolveLedgerPopId_(ctx, name);
 
   // Build calendar context string (v2.2) — hoisted, referenced from both
   // first-call and registry-hit branches below.
@@ -396,6 +410,12 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
         queueCellIntent_(ctx, 'Cultural_Ledger', rowNum, iNeighborhood + 1, validNeighborhood, 'registerCulturalEntity_: Neighborhood', 'media');
       }
 
+      // UniverseLinks POPID backfill (v2.6) — only when the committed cell is
+      // empty; never overwrites an existing cross-ref.
+      if (iUniverse >= 0 && popId && !data[i][iUniverse]) {
+        queueCellIntent_(ctx, 'Cultural_Ledger', rowNum, iUniverse + 1, popId, 'registerCulturalEntity_: UniverseLinks', 'media');
+      }
+
       // Calendar columns update (v2.2)
       var lastHolidayValue = "";
       if (iLastHoliday >= 0 && holiday !== "none") {
@@ -474,7 +494,7 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
     fam.cat,                  // 4  FameCategory
     fam.dom,                  // 5  CulturalDomain
     "Active",                 // 6  Status
-    "",                       // 7  UniverseLinks
+    popId,                    // 7  UniverseLinks (v2.6: SL POPID cross-ref, '' when unresolved)
     cycle,                    // 8  FirstSeenCycle
     cycle,                    // 9  LastSeenCycle           (mutable on repeat)
     1,                        // 10 MediaCount              (mutable on repeat)
@@ -523,6 +543,37 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
   ctx.summary = S;
 
   return culId;
+}
+
+
+/**
+ * resolveLedgerPopId_ v1.0 (engine.44 Class 3)
+ *
+ * Exact "First Last" match against the shared ctx.ledger (Phase 42 §5.6).
+ * Returns the POPID for a unique match, '' on miss or ambiguity — generic
+ * pool celebrities (ACTORS/MUSICIANS in buildEveningFamous) have no ledger
+ * row and correctly stay blank. Name→POPID map cached per-run on
+ * ctx._popIdByName; duplicate full names are cached as '' so an ambiguous
+ * match can never attribute the wrong citizen.
+ */
+function resolveLedgerPopId_(ctx, name) {
+  if (!ctx || !ctx.ledger || !ctx.ledger.rows || !name) return '';
+  if (!ctx._popIdByName) {
+    var h = ctx.ledger.headers;
+    var iPop = h.indexOf('POPID');
+    var iFirst = h.indexOf('First');
+    var iLast = h.indexOf('Last');
+    if (iPop < 0 || iFirst < 0 || iLast < 0) return '';
+    var map = {};
+    var rows = ctx.ledger.rows;
+    for (var i = 0; i < rows.length; i++) {
+      var full = (String(rows[i][iFirst] || '') + ' ' + String(rows[i][iLast] || '')).trim();
+      if (!full) continue;
+      map[full] = map.hasOwnProperty(full) ? '' : String(rows[i][iPop] || '');
+    }
+    ctx._popIdByName = map;
+  }
+  return ctx._popIdByName[String(name).trim()] || '';
 }
 
 
@@ -588,3 +639,10 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
  *
  * ============================================================================
  */
+
+// Dual-use module guard for Node-side tests (claspignored *.test.js).
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    resolveLedgerPopId_: resolveLedgerPopId_
+  };
+}

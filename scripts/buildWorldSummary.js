@@ -348,6 +348,37 @@ function emitWorldEvents(rileyCurr) {
   return lines;
 }
 
+// ES-3 (governance.46 T5): Chaos_Cars fired live from C100 (engine.11) but no
+// read-side consumer ingested it — world summary, sift inputs, and anomaly
+// greps all returned zero for "chaos". Engine-numbers table per the sift
+// orientation contract (no narrative content).
+function emitChaosCars(chaosAll, cycle) {
+  const rows = (chaosAll || []).filter(r => String(r.CycleId) === String(cycle));
+  const lines = [`## Chaos Events (Chaos_Cars, cycle ${cycle} — ${rows.length} total)`, ''];
+
+  if (rows.length === 0) {
+    lines.push('_(no chaos-car events recorded for this cycle)_');
+    lines.push('');
+    return lines;
+  }
+
+  lines.push('| Vehicle | Outcome | Target | Metric | Magnitude | Floor fired |');
+  lines.push('|---|---|---|---|---|---|');
+  for (const r of rows) {
+    const target = `${r.TargetScope || '?'} ${r.TargetId || ''}`.trim() + (r.TargetTier ? ` (T${r.TargetTier})` : '');
+    lines.push(`| ${r.VehicleType || '?'} | ${r.DiceOutcome || '?'} | ${target} | ${r.PrimaryMetric || '—'} | ${r.MetricMagnitude || '—'} | ${r.ConsequenceFloorFired || 'FALSE'} |`);
+  }
+  lines.push('');
+
+  const seeds = rows.filter(r => (r.ChaosNarrativeSeed || '').trim());
+  if (seeds.length) {
+    lines.push('**Narrative seeds:**');
+    for (const r of seeds) lines.push(`- ${r.VehicleType} → ${r.TargetId}: ${r.ChaosNarrativeSeed}`);
+    lines.push('');
+  }
+  return lines;
+}
+
 function emitThreeCycleTrends(currRow, prev1Row, prev2Row) {
   const cycle = currRow.Cycle;
   const lines = [`## Three-Cycle Trends (C${cycle - 2}–C${cycle})`, ''];
@@ -575,14 +606,17 @@ async function buildWorldSummary(cycle) {
     civicOfficesAll,
     neighborhoodsAll,
     worldPopAll,
-    calendarAll
+    calendarAll,
+    chaosAll
   ] = await Promise.all([
     sheets.getSheetAsObjects('Riley_Digest'),
     sheets.getSheetAsObjects('Oakland_Sports_Feed'),
     sheets.getSheetAsObjects('Civic_Office_Ledger'),
     sheets.getSheetAsObjects('Neighborhood_Map'),
     sheets.getSheetAsObjects('World_Population'),
-    sheets.getSheetData('Simulation_Calendar')
+    sheets.getSheetData('Simulation_Calendar'),
+    // ES-3: tolerate copies/sandboxes without the Chaos_Cars tab
+    sheets.getSheetAsObjects('Chaos_Cars').catch(() => [])
   ]);
 
   const rileyCurr = rileyAll.find(r => String(r.Cycle) === String(cycle));
@@ -611,6 +645,7 @@ async function buildWorldSummary(cycle) {
   out.push(...emitSports(sportsAll, cycle));
   out.push(...emitEveningTexture(rileyCurr));
   out.push(...emitWorldEvents(rileyCurr));
+  out.push(...emitChaosCars(chaosAll, cycle));
   out.push(...emitThreeCycleTrends(rileyCurr, rileyPrev1, rileyPrev2));
   out.push(...emitEngineReviewFindings(cycle, auditJson));
   out.push(...emitApprovalRatings(approvalRows, priorApprovals));

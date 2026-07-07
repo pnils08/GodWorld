@@ -73,7 +73,7 @@ Three gap logs from the S271 C100 production run (post-publish, edition-print, r
 - **Source gaps:** post-publish structural finding ("Chaos-cars orphaned")
 - **Steps:** `Chaos_Cars` holds 6 live C100 events (engine.11 fired correctly) but `buildWorldSummary.js` + sift inputs never ingest it — grep of engine_audit/world_summary/sift/anomalies for "chaos" returns zero. Wire `Chaos_Cars` into `buildWorldSummary.js` output and sift's input set.
 - **Verify:** `grep -i chaos output/world_summary_c<XX>.md` returns a hit on a cycle with live Chaos_Cars rows.
-- **Status:** [ ] not started
+- **Status:** [x] done S301 (writer side) — emitChaosCars section in buildWorldSummary (engine-numbers table + narrative seeds, sift orientation contract; tab-missing tolerated for copies); C100 dry-run renders all 6 events. REMAINDER for research-build: adding Chaos_Cars to /sift's sheet-primary read list is a skill edit in their lane
 
 ### Phase ES-4: Strip real-world date stamps from generated docs (Theme T6, HIGH)
 - **Source gaps:** G-R1 (systemic half — engine.44 Class 1 already closed the sheet-CELL half of this; this phase is the DOC-GENERATION half, still open)

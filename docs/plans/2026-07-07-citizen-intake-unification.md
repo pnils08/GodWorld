@@ -86,6 +86,17 @@ pointers:
 - **Verify:** dry-run flags on each script show Intake-row output; zero `ledger.rows.push`/append in the three files. AC-4.
 - **Status:** [ ] not started
 
+### Task 8: Post-publish intake extraction (research-build)
+- **Terminal:** research-build (Mike-direct S302 — apparatus/skill work, not substrate)
+- **Files:** `.claude/skills/post-publish/SKILL.md` — modify; extraction script (reuse/extend `scripts/ingestPublishedEntities.js` — do NOT create a parallel new script)
+- **Steps:**
+  1. Post-publish step: run extraction against the edition `.txt`/`.md` (the pre-PDF build — all articles share the same format, so the parse is deterministic: NAMES INDEX, letter footers, byline blocks).
+  2. Extracted citizens/edits emit **Intake tab rows** (lean 9-col shape) instead of any direct ledger writes — new names with story-established fields + Notes provenance ("Edition C{XX}"), existing names as bump/edit rows.
+  3. Ambiguous extractions ride the same `IntakeStatus=review` lane; the skill surfaces review rows in its close-out summary.
+- **Verify:** run against the latest published edition on sandbox; Intake rows appear; next engine cycle mints/updates; zero direct SL writes from the media lane.
+- **Depends on:** T1–T6 shipped + T7 clean.
+- **Status:** [ ] not started
+
 ### Task 7: Sandbox verification cycle
 - **Steps:**
   1. Stage the three AC shapes on sandbox `Intake`; Mike fires the cycle.
@@ -98,3 +109,5 @@ pointers:
 ## Changelog
 
 - 2026-07-07 — Plan created (S302), ignited from research §12.7 after Mike flagged the shipped matcher/pool fixes as short-sighted without a working intake front door.
+- 2026-07-07 — T1 amended (Mike-direct): lean 9-col operator schema replaces 21-col first cut; tab created on sandbox (had not existed). T1–T3 shipped 6d385ac4.
+- 2026-07-07 — Task 8 added (Mike-direct): research-build wires intake extraction into /post-publish against the pre-PDF .txt/.md; gated on T7 clean.

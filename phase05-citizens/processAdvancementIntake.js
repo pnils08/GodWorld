@@ -238,6 +238,36 @@ function splitUsageName_(rawName) {
 }
 
 /**
+ * engine.51 T5: find an income for a role by scanning all category salary
+ * pools (built by buildIntakeSalaryPools_ in godWorldEngine2.js). Exact
+ * role match then contains-match; null when unknown — caller leaves income
+ * untouched rather than inventing.
+ */
+function rederiveIncomeForRole_(pools, role, rng) {
+  var g = String(role || '').toLowerCase();
+  if (!g) return null;
+  var pick = null;
+  for (var cat in pools) {
+    var pool = pools[cat];
+    for (var i = 0; i < pool.length; i++) {
+      if (pool[i].role.toLowerCase() === g) { pick = pool[i]; break; }
+    }
+    if (pick) break;
+  }
+  if (!pick) {
+    for (var cat2 in pools) {
+      var pool2 = pools[cat2];
+      for (var j = 0; j < pool2.length; j++) {
+        if (pool2[j].role.toLowerCase().indexOf(g) !== -1 || g.indexOf(pool2[j].role.toLowerCase()) !== -1) { pick = pool2[j]; break; }
+      }
+      if (pick) break;
+    }
+  }
+  if (!pick) return null;
+  return Math.round((pick.min + rng() * Math.max(0, pick.max - pick.min)) / 100) * 100;
+}
+
+/**
  * Build normalized-fullname -> [row indices] map. Keys with >1 row are
  * normalization collisions; callers treat them as ambiguous and skip.
  */
@@ -494,7 +524,13 @@ function processAdvancementRows_(ctx, now, cycle) {
   }
   
   var rowsToClear = [];
-  
+
+  // engine.51 T4/T5 (S302): normalized-name index replaces the exact
+  // lowercase scan (honorific/accent/apostrophe variants were minting
+  // duplicates); salary pools loaded once for role-change income re-derive.
+  var advNameIndex = buildNameIndex_(ledgerRows, lFirst, lLast, null, 0);
+  var advSalaryPools = (typeof buildIntakeSalaryPools_ === 'function') ? buildIntakeSalaryPools_(ctx) : null;
+
   for (var i = 1; i < intakeData.length; i++) {
     var row = intakeData[i];
     var first = iFirst >= 0 ? String(row[iFirst] || '').trim() : '';
@@ -513,25 +549,38 @@ function processAdvancementRows_(ctx, now, cycle) {
     var clockMode = iClockMode >= 0 ? (row[iClockMode] || 'ENGINE') : 'ENGINE';
     var notes = iNotes >= 0 ? (row[iNotes] || '') : '';
     
-    var existingRow = -1;
-    for (var lr = 0; lr < ledgerRows.length; lr++) {
-      var eFirst = String(ledgerRows[lr][lFirst] || '').trim().toLowerCase();
-      var eLast = String(ledgerRows[lr][lLast] || '').trim().toLowerCase();
-      if (eFirst === first.toLowerCase() && eLast === last.toLowerCase()) {
-        existingRow = lr;
-        break;
-      }
+    var advKey = normalizeCitizenName_(first) + ' ' + normalizeCitizenName_(last);
+    var advHits = advNameIndex[advKey] || [];
+    if (advHits.length > 1) {
+      Logger.log('processAdvancementRows_: ambiguous name "' + first + ' ' + last + '" matches ' + advHits.length + ' ledger rows — row skipped, resolve manually');
+      rowsToClear.push(i + 1);
+      continue;
     }
+    var existingRow = advHits.length === 1 ? advHits[0] : -1;
 
     if (existingRow >= 0) {
       if (lTier >= 0) ledgerRows[existingRow][lTier] = tier;
-      if (lRoleType >= 0 && roleType) ledgerRows[existingRow][lRoleType] = roleType;
+      var roleChanged = false;
+      if (lRoleType >= 0 && roleType && String(ledgerRows[existingRow][lRoleType]).trim() !== roleType) {
+        ledgerRows[existingRow][lRoleType] = roleType;
+        roleChanged = true;
+      } else if (lRoleType >= 0 && roleType) {
+        ledgerRows[existingRow][lRoleType] = roleType;
+      }
+      // T5: role change re-derives Income from the salary pools (retirement /
+      // career-change case). Scans all categories for the role; no match →
+      // income untouched (never invent — sports salaries stay roster-owned).
+      var lIncome = findColByName_(ledgerHeaders, 'Income');
+      if (roleChanged && lIncome >= 0 && advSalaryPools && typeof ctx.rng === 'function') {
+        var newIncome = rederiveIncomeForRole_(advSalaryPools, roleType, ctx.rng);
+        if (newIncome !== null) ledgerRows[existingRow][lIncome] = newIncome;
+      }
       if (lLastUpdated >= 0) ledgerRows[existingRow][lLastUpdated] = now;
       ctx.ledger.dirty = true;
       var popId = lPopId >= 0 ? ledgerRows[existingRow][lPopId] : '';
       if (logSheet) {
         logSheet.appendRow([now, popId, (first + ' ' + last).trim(), 'Advancement',
-          'Updated to Tier ' + tier + '. ' + notes, '', cycle]);
+          'Updated to Tier ' + tier + (roleChanged ? '; RoleType -> ' + roleType : '') + '. ' + notes, '', cycle]);
       }
     } else {
       maxPop++;
@@ -580,6 +629,7 @@ function processAdvancementRows_(ctx, now, cycle) {
       // Phase 42 §5.6 (impl #18): push new row to ctx.ledger.rows; Phase 10
       // consolidated commit auto-extends the sheet — no separate append intent.
       ledgerRows.push(newRow);
+      advNameIndex[advKey] = [ledgerRows.length - 1]; // same-batch repeats route to bump/edit
       ctx.ledger.dirty = true;
       if (logSheet) {
         logSheet.appendRow([now, newPopId, (first + ' ' + last).trim(), 'Promotion',

@@ -1136,6 +1136,8 @@
 
 - **splitUsageName_(rawName)**
 
+- **rederiveIncomeForRole_(pools, role, rng)**
+
 - **buildNameIndex_(rows, firstCol, lastCol, filterFn, startRow)**
 
 - **processMediaUsage_(ctx, now, cycle)**
@@ -1143,6 +1145,7 @@
 
 - **processAdvancementRows_(ctx, now, cycle)**
   Sheets: Advancement_Intake, Advancement_Intake1, Generic_Citizens, LifeHistory_Log
+  RNG: ctx.rng / safeRand_(ctx)
 
 - **processIntakeRows_(ss, now, cycle)**
   Sheets: Intake
@@ -1763,6 +1766,8 @@
 - **parseCitizenEntry_(entry, section, team)**
 
 - **citizenExistsInLedger_(ledgerData, firstName, lastName)**
+
+- **appendLeanIntakeRow_(intakeSheet, f)**
 
 - **splitName_(fullName)**
 
@@ -3056,4 +3061,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 178
-**Functions mapped:** 1050
+**Functions mapped:** 1052

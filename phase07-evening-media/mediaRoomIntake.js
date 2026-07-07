@@ -569,6 +569,7 @@ function routeCitizenUsageToIntake_(ctx, ss, cycle, cal) {
     var nameParts = splitName_(citizenName);
     var exists = citizenExistsInLedger_(ledgerData, nameParts.first, nameParts.last);
 
+    var landed = false;
     if (exists) {
       // Existing citizen → Advancement_Intake1
       if (advSheet) {
@@ -585,35 +586,28 @@ function routeCitizenUsageToIntake_(ctx, ss, cycle, cal) {
           'Media usage C' + cycle + ' (' + usageType + '): ' + context // J: Notes
         ]);
         results.existingCitizens++;
+        landed = true;
       }
     } else {
-      // New citizen → Intake
+      // New citizen → Intake (engine.51 lean shape; processor derives the rest)
       if (intakeSheet) {
-        intakeSheet.appendRow([
-          nameParts.first,          // A: First
-          '',                       // B: Middle
-          nameParts.last,           // C: Last
-          '',                       // D: OriginGame
-          'no',                     // E: UNI
-          'no',                     // F: MED
-          'no',                     // G: CIV
-          'ENGINE',                 // H: ClockMode
-          4,                        // I: Tier (default for media-introduced)
-          '',                       // J: RoleType (S184 — empty so Path B fires at promotion in processAdvancementIntake.js)
-          'Active',                 // K: Status
-          '',                       // L: BirthYear
-          'Oakland',                // M: OriginCity
-          'Introduced via Media Room C' + cycle + '. ' + context, // N: LifeHistory
-          '',                       // O: OriginVault
-          ''                        // P: Neighborhood
-        ]);
+        appendLeanIntakeRow_(intakeSheet, {
+          first: nameParts.first,
+          last: nameParts.last,
+          notes: 'Introduced via Media Room C' + cycle + '. ' + context
+        });
         results.newCitizens++;
+        landed = true;
       }
     }
 
-    // Mark as routed
-    usageSheet.getRange(i + 1, routedCol + 1).setValue('Y');
-    results.routed++;
+    // S302 data-loss guard: only mark Routed when the row actually landed —
+    // the old unconditional mark discarded every new-citizen mention while
+    // the Intake tab didn't exist (research §12.7 / engine.51 discovery).
+    if (landed) {
+      usageSheet.getRange(i + 1, routedCol + 1).setValue('Y');
+      results.routed++;
+    }
   }
 
   Logger.log('routeCitizenUsageToIntake_: Routed ' + results.routed +
@@ -1230,12 +1224,15 @@ function citizenExistsInLedger_(ledgerData, firstName, lastName) {
 
   if (firstCol < 0 || lastCol < 0) return null;
 
-  var normFirst = normalizeIdentity_(firstName);
-  var normLast = normalizeIdentity_(lastName);
+  // S302 engine.51 T4: shared normalized matcher (accent/apostrophe/case-safe,
+  // from processAdvancementIntake.js) replaces normalizeIdentity_ here so the
+  // router and the intake processor agree on who already exists.
+  var normFirst = normalizeCitizenName_(firstName);
+  var normLast = normalizeCitizenName_(lastName);
 
   for (var r = 1; r < ledgerData.length; r++) {
-    var f = normalizeIdentity_(ledgerData[r][firstCol]);
-    var l = normalizeIdentity_(ledgerData[r][lastCol]);
+    var f = normalizeCitizenName_(ledgerData[r][firstCol]);
+    var l = normalizeCitizenName_(ledgerData[r][lastCol]);
     if (f === normFirst && l === normLast) {
       return {
         row: r,
@@ -1247,6 +1244,19 @@ function citizenExistsInLedger_(ledgerData, firstName, lastName) {
   return null;
 }
 
+
+/**
+ * engine.51 T4 (S302): single writer for the lean 9-col Intake schema —
+ * First | Last | Age | Neighborhood | RoleType | Category | Family | Notes | IntakeStatus.
+ * processIntake_ v3 derives everything else (salary, BirthYear, education,
+ * tier); IntakeStatus left blank so the processor picks the row up.
+ */
+function appendLeanIntakeRow_(intakeSheet, f) {
+  intakeSheet.appendRow([
+    f.first || '', f.last || '', f.age || '', f.neighborhood || '',
+    f.roleType || '', f.category || '', f.family || '', f.notes || '', ''
+  ]);
+}
 
 /**
  * Split full name into first and last.
@@ -1296,26 +1306,16 @@ function processCategoryEntries_(ss, entries, category, ledgerData, cycle, cal, 
         results.existingCitizens++;
       }
     } else {
-      // Send to Intake for new citizen creation
+      // Send to Intake for new citizen creation (engine.51 lean shape).
+      // Tier now earns via usage (processor mints T4) — the old hardcoded T3 is gone.
       if (intakeSheet) {
-        intakeSheet.appendRow([
-          nameParts.first,          // A: First
-          '',                       // B: Middle
-          nameParts.last,           // C: Last
-          citizen.team || '',       // D: OriginGame
-          category === 'UNI' ? 'yes' : 'no', // E: UNI (y/n)
-          category === 'MED' ? 'yes' : 'no', // F: MED (y/n)
-          category === 'CIV' ? 'yes' : 'no', // G: CIV (y/n)
-          'ENGINE',                 // H: ClockMode
-          3,                        // I: Tier
-          citizen.role || '',       // J: RoleType (S184 — empty so Path B fires at promotion)
-          'Active',                 // K: Status
-          '',                       // L: BirthYear
-          'Oakland',                // M: OriginCity
-          'Introduced via Media Room C' + cycle + '. ' + (citizen.role || ''), // N: LifeHistory
-          '',                       // O: OriginVault
-          ''                        // P: Neighborhood
-        ]);
+        appendLeanIntakeRow_(intakeSheet, {
+          first: nameParts.first,
+          last: nameParts.last,
+          roleType: citizen.role || '',
+          category: citizen.team ? 'sports' : (category === 'CIV' ? 'civic' : (category === 'MED' ? 'media' : '')),
+          notes: 'Media Room C' + cycle + ' (' + category + '): ' + (citizen.role || citizen.team || '')
+        });
         results.newCitizens++;
       }
     }
@@ -1340,13 +1340,6 @@ function processQuotedCitizens_(ss, entries, ledgerData, cycle, cal, results) {
     var citizen = entries[i];
     var nameParts = splitName_(citizen.name);
     var exists = citizenExistsInLedger_(ledgerData, nameParts.first, nameParts.last);
-
-    // Calculate birth year from age if provided
-    var birthYear = '';
-    if (citizen.age) {
-      // S290: age anchors to sim year (age = simYear - birthYear); unknown sim year -> blank, never the real-world clock
-      birthYear = cal && cal.simYear ? cal.simYear - parseInt(citizen.age, 10) : '';
-    }
 
     if (exists) {
       // Send to Advancement_Intake with quote context
@@ -1382,26 +1375,17 @@ function processQuotedCitizens_(ss, entries, ledgerData, cycle, cal, results) {
         results.quotesLogged++;
       }
     } else {
-      // Send to Intake for new citizen creation
+      // Send to Intake for new citizen creation (engine.51 lean shape —
+      // Age passes through; processIntake_ anchors BirthYear itself)
       if (intakeSheet) {
-        intakeSheet.appendRow([
-          nameParts.first,
-          '',
-          nameParts.last,
-          '',                       // OriginGame
-          'no',                     // UNI
-          'no',                     // MED
-          'no',                     // CIV
-          'ENGINE',
-          4,                        // Tier 4 for quoted citizens
-          citizen.occupation || '',  // S184 — empty so Path B fires at promotion
-          'Active',
-          birthYear,
-          'Oakland',
-          'First quoted in Media Room C' + cycle + ': ' + citizen.context,
-          '',
-          citizen.neighborhood || ''
-        ]);
+        appendLeanIntakeRow_(intakeSheet, {
+          first: nameParts.first,
+          last: nameParts.last,
+          age: citizen.age || '',
+          neighborhood: citizen.neighborhood || '',
+          roleType: citizen.occupation || '',
+          notes: 'First quoted in Media Room C' + cycle + ': ' + citizen.context
+        });
         results.newCitizens++;
       }
 

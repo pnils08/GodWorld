@@ -79,8 +79,17 @@ Col-O (per-citizen) is bounded: `compressLifeHistory_` folds into DialState then
 ### 13. Election_Log — candidates EXIST, campaign arc doesn't
 `runCivicElectionsv1.js` builds a challenger pool from Tier 2-3 civic-adjacent citizens (`:145-195`), generates named challengers per seat (`:242-287`), resolves via IncumbentAdvantage+econ+sentiment. No multi-cycle campaign (polling/debates/fundraising). → Mike's call: single-cycle named-challenger model may be enough; campaign arc is an optional depth build.
 
-### 14. Riley_Digest / Cycle_Packet / Media_Briefing / Edition_Coverage_Ratings / Reflection_Intake
-(Lane-5 findings — appended on completion of the media-pipeline investigation, same day.)
+### 14. Riley_Digest — WIRED (write path coherent; schema drifted behind S301 engines)
+Single canonical writer `writeDigest_` (`godWorldEngine2.js:1241`, Phase 10 `queueAppendIntent_` L1344); Phase 8 `applyCycleWeight_` is signal-only — the S237 double-write/previous-cycle-corruption refactor is clean end-to-end. Readers: applyPatternDetection, buildWorldSummary, buildNeighborhoodTexture, buildDeskPackets, detectRepeatingEvents. **Gap (Mike's actual question):** the 28-col schema is frozen at the cityDynamics/evening-media era — bond engine, Cultural POPID, and weather streak-state do NOT surface in the digest row (only the current-cycle weather snapshot, col V). Recent deploys write their own ledgers but the digest never learned about them. → adopt: digest schema refresh rides the WorldEvents-pool upgrade or its own small row.
+
+### 15. Cycle_Packet + Media_Briefing — both WIRED
+Cycle_Packet: written `buildCyclePacket.js:42` (Phase 10), read by `compileHandoff.js:226` + `buildDeskPackets.js:1206` (regex-scrape, noted "lossy" — desks prefer Riley_Digest; secondary text feed but live). Media_Briefing: written `mediaRoomBriefingGenerator.js:102` (Phase 10, documented direct-write carve-out), read by `compileHandoff.js:188` + cycleExportAutomation. No action needed. Note: Media_Briefing's SportsSeason column now receives the sentinel "off-season" post-S302 gate; repoint to `S.sportsFeedSeasonType` if the feed's own label is wanted there.
+
+### 16. Edition_Coverage_Ratings — WIRED, loop closed, split-cadence
+IN: `scripts/rateEditionCoverage.js` via `/post-publish` (manual skill step). OUT: `applyEditionCoverageEffects_` (Phase 2, `godWorldEngine2.js:221`) applies sentiment deltas + story-seed triggers with Processed-flag once-only guard; triggers consumed at `applyStorySeeds.js:1489`. Working as designed — only fails silently if `/post-publish` is skipped (applier no-ops). Watch item, not a defect.
+
+### 17. Reflection_Intake — WIRED end-to-end, but dial write-back is a MANUAL lever
+Writer: 24/7 citizen-wake cron (`scripts/citizen-wake.js:239`) — classified event+affect tags land with `applied=no`. Dial feed: `scripts/drainReflectionBacklog.js` (dry-run default, `--commit` to apply, flips `applied=yes`). Tally: `citizen-signal-detector.js`. **Gap:** reflections pile up unapplied until someone runs the drain — the engine-feedback step is not automated. → Mike's call: schedule the drain (cron `--commit`) or keep it a deliberate lever.
 
 ---
 
@@ -108,3 +117,4 @@ Col-O (per-citizen) is bounded: `compressLifeHistory_` folds into DialState then
 ## Changelog
 
 - 2026-07-07 — Initial extraction (S302). Lanes 1-4 complete; lane 5 (media pipeline) pending at first write.
+- 2026-07-07 — Lane 5 appended (§14-17): Riley_Digest schema drift, Cycle_Packet/Media_Briefing wired, ECR loop closed split-cadence, Reflection_Intake manual drain. Sports gate (§2) SHIPPED same session — commit 4979eb6f, sandbox-deployed + byte-verified.

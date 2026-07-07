@@ -290,12 +290,20 @@ function runWorldCycle() {
 
   // eventArcEngine_ removed from Phase 5 — arcs load at Phase 8 preload,
   // so this was always a no-op. Arc processing happens via v3Integration.
-  safePhaseCall_(ctx, 'Phase5-Bonds', function() { runBondEngine_(ctx); });
 
   safePhaseCall_(ctx, 'Phase5-Intake', function() { processIntake_(ctx); });
   safePhaseCall_(ctx, 'Phase5-NamedCitizens', function() { updateNamedCitizens_(ctx); });
   safePhaseCall_(ctx, 'Phase5-CitizenEvents', function() { generateCitizensEvents_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Promotions', function() { checkForPromotions_(ctx); });
+
+  // ENGINE_REPAIR Row 33 (S301): Bonds moved AFTER CitizenEvents+Promotions —
+  // its active-citizen pool builds from S.citizenEvents, which is published by
+  // generateCitizensEvents_ above. At the old slot (before every producer) the
+  // pool was empty every cycle and detectNewBonds_ never landed a bond.
+  // Bond-output consumers all run Phase 6+ (computeRecurringCitizens, briefing
+  // generator, storyHook) or read the LoadBonds snapshot (runRelationshipEngine,
+  // unchanged, still earlier) — caller-graph clean for this move.
+  safePhaseCall_(ctx, 'Phase5-Bonds', function() { runBondEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Advancement', function() { processAdvancementIntake_(ctx); });
   safePhaseCall_(ctx, 'Phase5-HouseholdFormation', function() { processHouseholdFormation_(ctx); });
   safePhaseCall_(ctx, 'Phase5-GenerationalWealth', function() { processGenerationalWealth_(ctx); });
@@ -1640,12 +1648,20 @@ function runCyclePhases_(ctx) {
 
   // eventArcEngine_ removed from Phase 5 — arcs load at Phase 8 preload,
   // so this was always a no-op. Arc processing happens via v3Integration.
-  safePhaseCall_(ctx, 'Phase5-Bonds', function() { runBondEngine_(ctx); });
 
   safePhaseCall_(ctx, 'Phase5-Intake', function() { processIntake_(ctx); });
   safePhaseCall_(ctx, 'Phase5-NamedCitizens', function() { updateNamedCitizens_(ctx); });
   safePhaseCall_(ctx, 'Phase5-CitizenEvents', function() { generateCitizensEvents_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Promotions', function() { checkForPromotions_(ctx); });
+
+  // ENGINE_REPAIR Row 33 (S301): Bonds moved AFTER CitizenEvents+Promotions —
+  // its active-citizen pool builds from S.citizenEvents, which is published by
+  // generateCitizensEvents_ above. At the old slot (before every producer) the
+  // pool was empty every cycle and detectNewBonds_ never landed a bond.
+  // Bond-output consumers all run Phase 6+ (computeRecurringCitizens, briefing
+  // generator, storyHook) or read the LoadBonds snapshot (runRelationshipEngine,
+  // unchanged, still earlier) — caller-graph clean for this move.
+  safePhaseCall_(ctx, 'Phase5-Bonds', function() { runBondEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Advancement', function() { processAdvancementIntake_(ctx); });
   safePhaseCall_(ctx, 'Phase5-HouseholdFormation', function() { processHouseholdFormation_(ctx); });
   safePhaseCall_(ctx, 'Phase5-GenerationalWealth', function() { processGenerationalWealth_(ctx); });

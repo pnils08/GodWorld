@@ -16,10 +16,20 @@
  * - Each ctx-receiving function initializes rng fallback: ctx.rng || Math.random
  * - generateBondId_ now accepts ctx parameter for deterministic ID generation
  *
+ * v2.6 (ENGINE_REPAIR Row 33, S301):
+ * - Lookups renamed to ctx._bondNameLookup / ctx._bondIdToName — the old
+ *   ctx.citizenLookup name COLLIDED with the canonical popId-keyed lookup
+ *   built by generateCitizensEvents_ (this engine's name-keyed shape, built
+ *   first at Phase5-Bonds, made the events engine skip its build → blank
+ *   LifeHistory_Log names + broken popId consumers in Phase 7).
+ * - Runs AFTER Phase5-Promotions now (godWorldEngine2 reorder) so the
+ *   S.citizenEvents pool published by generateCitizensEvents_ exists —
+ *   detectNewBonds_ had never landed a bond (pool empty since landing).
+ *
  * v2.5 Fixes:
  * - Added Simulation_Ledger fallback when Citizen_Directory doesn't exist
- * - New ctx.citizenIdToName map for ID-to-name resolution
- * - Ensures citizenLookup is populated even without Citizen_Directory sheet
+ * - New ctx._bondIdToName map for ID-to-name resolution
+ * - Ensures the name lookup is populated even without Citizen_Directory sheet
  *
  * v2.4 Fixes:
  * - Citizen name/id resolver: handles id-based sources correctly
@@ -207,13 +217,13 @@ function resolveCitizenName_(ctx, raw) {
   if (!s) return '';
 
   // If it's already a valid name key in citizenLookup, use it
-  if (ctx.citizenLookup && ctx.citizenLookup[s]) {
+  if (ctx._bondNameLookup && ctx._bondNameLookup[s]) {
     return s;
   }
 
   // If we have an id-to-name map, try that
-  if (ctx.citizenIdToName && ctx.citizenIdToName[s]) {
-    return ctx.citizenIdToName[s];
+  if (ctx._bondIdToName && ctx._bondIdToName[s]) {
+    return ctx._bondIdToName[s];
   }
 
   // Fallback: return as-is (may not resolve in lookup, but at least tracked)
@@ -407,9 +417,9 @@ function ensureBondEngineData_(ctx) {
   // ─────────────────────────────────────────────────────────────
   // POPULATE citizenLookup
   // ─────────────────────────────────────────────────────────────
-  if (!ctx.citizenLookup || Object.keys(ctx.citizenLookup).length === 0) {
-    ctx.citizenLookup = {};
-    ctx.citizenIdToName = {};  // v2.5: ID-to-name lookup
+  if (!ctx._bondNameLookup || Object.keys(ctx._bondNameLookup).length === 0) {
+    ctx._bondNameLookup = {};
+    ctx._bondIdToName = {};  // v2.5: ID-to-name lookup
 
     // Try to load from Citizen_Directory sheet
     try {
@@ -434,7 +444,7 @@ function ensureBondEngineData_(ctx) {
           var name = nameIdx >= 0 ? row[nameIdx] : '';
           if (!name) continue;
 
-          ctx.citizenLookup[name] = {
+          ctx._bondNameLookup[name] = {
             Name: name,
             Neighborhood: nhIdx >= 0 ? row[nhIdx] : '',
             TierRole: tierIdx >= 0 ? row[tierIdx] : '',
@@ -454,7 +464,7 @@ function ensureBondEngineData_(ctx) {
     // v2.5: Fallback to Simulation_Ledger if no citizens loaded.
     // Phase 42 §5.6: read from shared ctx.ledger so any mid-cycle mutations
     // by phase04/phase05 writers are visible.
-    if (Object.keys(ctx.citizenLookup).length === 0 && ctx.ledger) {
+    if (Object.keys(ctx._bondNameLookup).length === 0 && ctx.ledger) {
       try {
         var ledgerRows = ctx.ledger.rows;
         if (ledgerRows.length > 0) {
@@ -482,7 +492,7 @@ function ensureBondEngineData_(ctx) {
 
               var popId = lPopId >= 0 ? (lrow[lPopId] || '').toString().trim() : '';
 
-              ctx.citizenLookup[fullName] = {
+              ctx._bondNameLookup[fullName] = {
                 Name: fullName,
                 Neighborhood: lNH >= 0 ? (lrow[lNH] || '').toString().trim() : '',
                 TierRole: lTier >= 0 ? (lrow[lTier] || '').toString().trim() : '',
@@ -494,7 +504,7 @@ function ensureBondEngineData_(ctx) {
 
               // v2.5: Build ID-to-name map
               if (popId) {
-                ctx.citizenIdToName[popId] = fullName;
+                ctx._bondIdToName[popId] = fullName;
               }
             }
             diagnostics.sources.push('Simulation_Ledger');
@@ -505,7 +515,7 @@ function ensureBondEngineData_(ctx) {
     }
   }
 
-  diagnostics.citizenLookup = Object.keys(ctx.citizenLookup).length;
+  diagnostics.citizenLookup = Object.keys(ctx._bondNameLookup).length;
 
   // ─────────────────────────────────────────────────────────────
   // LOG DIAGNOSTICS
@@ -739,7 +749,7 @@ function detectNewBonds_(ctx) {
     return newBonds;
   }
 
-  var citizenData = ctx.citizenLookup || {};
+  var citizenData = ctx._bondNameLookup || {};
 
   // v2.4: Use ctx.neighborhoodList instead of global
   var neighborhoodList = ctx.neighborhoodList || [];
@@ -1538,7 +1548,7 @@ function diagnoseBondEngine() {
  *
  * v2.5 FIXES:
  * - Simulation_Ledger fallback for citizenLookup when Citizen_Directory missing
- * - ctx.citizenIdToName map for POPID→Name resolution
+ * - ctx._bondIdToName map for POPID→Name resolution
  *
  * v2.4 FIXES:
  * - Citizen name/id resolver handles mixed sources

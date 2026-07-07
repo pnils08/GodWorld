@@ -2517,6 +2517,20 @@ function generateCitizensEvents_(ctx) {
     if (tags.indexOf("gameNight") >= 0) gameNightDrawn.push(String(popId));
 
     remember(popId, primaryTag, pick, chosenVenue, neighborhood, contact && contact.name, tags);
+
+    // ENGINE_REPAIR Row 33 (S301): publish this cycle's event citizens.
+    // Phase5-Bonds (moved after this engine) builds its active-citizen pool
+    // from S.citizenEvents — which had NO producer anywhere, so bond
+    // detection exited on an empty pool every cycle since landing.
+    S.citizenEvents = S.citizenEvents || [];
+    S.citizenEvents.push({
+      popId: String(popId),
+      citizenName: citizenName_(popId),
+      text: pick,
+      tag: primaryTag,
+      neighborhood: neighborhood || ''
+    });
+
     cycleSeen.push(normText_(pick));
     // Ledger lines: also block the SKELETON within-cycle (S289 C102 rehearsal:
     // 201 citizens drew the same skeleton twice with different fragments —

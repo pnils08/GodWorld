@@ -2036,7 +2036,12 @@ async function main() {
 
   // ── Filter to current cycle where applicable ──
   var seeds = filterByCycle(seedsRaw, CYCLE).filter(function(s) {
-    return parseInt(s.Priority || '1') > 1;  // Drop Priority 1 filler seeds
+    // Contract v4 rows (saveV3Seeds v4 / buildContractSeeds, S299-S301) carry
+    // What/Why/Desk instead of SeedText/Priority — no filler concept, keep all.
+    // Without this branch the old Priority>1 filter dropped EVERY contract row
+    // (no Priority column → parseInt('1')>1 false).
+    if (s.What !== undefined && s.Desk !== undefined) return true;
+    return parseInt(s.Priority || '1') > 1;  // Drop Priority 1 filler seeds (legacy schema)
   });
   var hooks = filterByCycle(hooksRaw, CYCLE);
   var events = filterByCycle(eventsRaw, CYCLE);
@@ -2376,6 +2381,9 @@ async function main() {
     // Filter seeds by domain
     var deskSeeds = desk.domains.indexOf('ALL') !== -1 ? seeds :
       seeds.filter(function(s) {
+        // Contract v4 rows carry their own desk routing in-sheet (T4 purpose)
+        // — the row says which desk it belongs to; no domain inference needed.
+        if (s.Desk !== undefined && s.What !== undefined) return s.Desk === deskId;
         var targetDesks = getDesksForDomain(s.Domain, s.SeedText);
         return targetDesks.indexOf(deskId) !== -1;
       });
@@ -2527,6 +2535,27 @@ async function main() {
         };
       }),
       seeds: deskSeeds.map(function(s) {
+        // Contract v4 seed → packet shape. The contract row directs nothing
+        // (no voice/angle/byline by design) — it says what happened, to whom,
+        // and why; the desk searches canon and writes. Class major/texture
+        // maps onto the numeric priority scale so downstream sorts hold.
+        if (s.What !== undefined && s.Desk !== undefined) {
+          return {
+            seedType: 'contract-' + (s.Class || 'texture'),
+            domain: s.Domain, neighborhood: s.Neighborhood,
+            priority: (s.Class === 'major') ? 5 : 2,
+            text: s.What,
+            why: s.Why || '',
+            citizens: s.Citizens || '',
+            citizenEvents: s.CitizenEvents || '',
+            businesses: s.Businesses || '',
+            otherEntities: s.OtherEntities || '',
+            magnitude: (s.Magnitude === '' || s.Magnitude === undefined) ? null : s.Magnitude,
+            trend: s.Trend || '',
+            priorityScore: s.priorityScore || 0,
+            autoPriority: s.priority || false
+          };
+        }
         return {
           seedType: s.SeedType, domain: s.Domain, neighborhood: s.Neighborhood,
           priority: parseInt(s.Priority || '1'), text: s.SeedText,

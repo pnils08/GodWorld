@@ -182,7 +182,7 @@ The edition's 9-reporter constraint is a CYCLE-PULSE concern, not a supplemental
 - Editorial latitude is unchanged — Mags can override the Engine B candidate per the "design stories first, then match reporters" principle above
 - "Develop the bench" rule still applies; Engine B's format-fit table actively biases toward the supplemental archetype (Hal/Simon/Sharon/Mags = 4-fit), which aligns with the bench-development goal
 
-**Lookup:** if running supplemental against a specific seed, read `Story_Seed_Deck.BylineCandidate` (col P) for that seed; otherwise fall through to the existing "design first, match second" workflow.
+**Lookup:** if running supplemental against a specific seed, read the deck's `BylineCandidate` value for that seed — **resolve the column by header name from row 0, never by a fixed letter** (the v4 deck migration reordered/renamed columns; positional reads silently break — same fix as `/sift` v2.2). `BylineCandidate` is a shadow Engine-B append: absent until Engine-A/B ships, so when the header is missing, fall through to the existing "design first, match second" workflow (that fallback is the default state right now).
 
 ### 1c. Plan the Coverage
 

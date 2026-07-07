@@ -43,6 +43,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | pipeline.39 | C99 gap handoffs — post-publish/print/run-cycle logs + canon drift + letters-gate bug | ready | research-build / engine-sheet / media | [[../../output/production_log_c99_post_publish_gaps.md]] + [[../../output/production_log_c99_print_gaps.md]] + [[../../output/production_log_run_cycle_c99_gaps.md]] + canon_drift_c99.json — filed 2026-07-02 |
 | pipeline.40 | Journal → citizen-loop — FULLY BUILT S300 (freeze + CLIs + /sift+/write-edition wiring + discord-bot repoint + hooks); acceptance rides next /sift + tonight's cron | done-pending-archive | research-build | [[../plans/2026-07-06-journal-to-citizen-loop]] |
 | pipeline.41 | Tensions → /sift story seeds — /sift reads the open tension register as door-knock candidates (subjective material, never publishable as fact) | ready | media | [[../plans/2026-07-06-citizen-loop-deepening]] §Task 8 |
+| pipeline.42 | /sift candidate-gen could consume v4 deck content (What/Why/Citizens/CitizenEvents/Businesses) — Step 3 reads only feeds today | ready | research-build | flagged S301, sift SKILL §What's-new v2.2 (git 4060fe7f) |
 
 ### engine.* — Engine code, ledger, schema
 

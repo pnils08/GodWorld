@@ -66,7 +66,7 @@ Match the reporter to the scene's emotional register. Dispatches develop the ben
 
 ### Engine B scene-fit signal (T4.4)
 
-Engine B (`utilities/bylineEngine.js`) emits `bylineRationale.components.format` per seed (Story_Seed_Deck col R, JSON-serialized). The `format` axis ranks bylines against the inferred seed format type — `dispatch` is one of the four. **Canonical dispatch pool (format-fit 4) per `bylineEngine.FORMAT_FIT.dispatch`:**
+Engine B (`utilities/bylineEngine.js`) emits `bylineRationale.components.format` per seed in the deck's `BylineRationale` column (JSON-serialized). **Resolve that column by header name from row 0 — never by a fixed letter** (the v4 deck migration reordered/renamed columns; positional reads silently break — same fix as `/sift` v2.2). The `format` axis ranks bylines against the inferred seed format type — `dispatch` is one of the four. **Canonical dispatch pool (format-fit 4) per `bylineEngine.FORMAT_FIT.dispatch`:**
 
 - **DJ Hartley** — scene + photo, "empty spaces, waiting infrastructure"
 - **Maria Keen** — neighborhood texture, lived-in
@@ -77,7 +77,7 @@ Tier-2 dispatch fits (format-fit 3): Talia Finch (Chicago neighborhood texture),
 
 **Scene-fit override behavior:**
 
-- When the dispatch originates from a Story_Seed_Deck seed, **read `bylineRationale.components.format`** (col R parsed JSON) for the matched seed. If format-fit ≥ 3 for a journalist, that journalist is engine-validated for the dispatch format.
+- When the dispatch originates from a Story_Seed_Deck seed, **read `bylineRationale.components.format`** from the `BylineRationale` column (resolved by header name, parsed JSON) for the matched seed. If format-fit ≥ 3 for a journalist, that journalist is engine-validated for the dispatch format. `BylineRationale` is a shadow Engine-B append — absent until Engine-A/B ships; when the header is missing, skip the format-fit gate and use the editorial reporter-selection table below (the default state right now).
 - The reporter selection table above remains the editorial guide for *scene fit* (which reporter matches the scene's emotional register). Engine B's format-axis is a *type fit* signal — different question.
 - **Override rule:** Mike picks the reporter for scene fit; engine's format-fit ≥ 3 is the validation gate. If the picked reporter has format-fit < 3 (e.g., Carmen Delaine on a music dispatch — format-fit 1 default), surface a one-line note: `[engine: format-fit 1 — outside canonical dispatch pool]`. Mike can proceed regardless; the note is auditable transparency, not a block.
 - **No engine data?** When the dispatch has no source seed (free-running scene piece), skip the format-fit check entirely. Reporter selection guide is the only signal.

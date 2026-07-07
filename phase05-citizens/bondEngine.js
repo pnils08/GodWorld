@@ -518,15 +518,38 @@ function ensureBondEngineData_(ctx) {
   diagnostics.citizenLookup = Object.keys(ctx._bondNameLookup).length;
 
   // ─────────────────────────────────────────────────────────────
+  // v2.6 (Row 33 C121 follow-up): NORMALIZE THE POOL TO NAMES.
+  // Producers publish S.cycleActiveCitizens as POPIDs
+  // (generateCitizensEvents_ L235, runRelationshipEngine L583), but every
+  // pair-metadata lookup in detectNewBonds_ is name-keyed — at C121 the
+  // pool held 866 POPIDs, citizenData[popId] missed for all of them, and
+  // 0 bonds formed from 374k pairs. Resolve into a bond-local pool
+  // (never mutate the shared array — popId consumers read it downstream);
+  // require lookup membership so unresolvable entries drop here, visibly.
+  // ─────────────────────────────────────────────────────────────
+  var rawPool = ctx.summary.cycleActiveCitizens || [];
+  var seenPool = {};
+  ctx._bondActivePool = [];
+  for (var bp = 0; bp < rawPool.length; bp++) {
+    var resolvedName = resolveCitizenName_(ctx, rawPool[bp]);
+    if (resolvedName && ctx._bondNameLookup[resolvedName] && !seenPool[resolvedName]) {
+      seenPool[resolvedName] = true;
+      ctx._bondActivePool.push(resolvedName);
+    }
+  }
+  diagnostics.bondPool = ctx._bondActivePool.length;
+
+  // ─────────────────────────────────────────────────────────────
   // LOG DIAGNOSTICS
   // ─────────────────────────────────────────────────────────────
-  Logger.log('ensureBondEngineData_ v2.4: ' +
+  Logger.log('ensureBondEngineData_ v2.6: ' +
     'activeCitizens=' + diagnostics.cycleActiveCitizens +
+    ', bondPool=' + diagnostics.bondPool +
     ', citizenLookup=' + diagnostics.citizenLookup +
     ', sources=[' + diagnostics.sources.join(', ') + ']');
 
-  // Need at least 2 active citizens to form bonds
-  return diagnostics.cycleActiveCitizens >= 2;
+  // Need at least 2 resolvable citizens to form bonds
+  return diagnostics.bondPool >= 2;
 }
 
 
@@ -562,7 +585,10 @@ function updateExistingBonds_(ctx) {
   var isFirstFriday = cal.isFirstFriday || false;
   var isCreationDay = cal.isCreationDay || false;
 
-  var activeCitizensArray = S.cycleActiveCitizens || [];
+  // v2.6 (Row 33): bond rows store NAMES — membership must test the resolved
+  // bond-local pool, not the POPID-shaped shared array (misses were silently
+  // disabling activity-based intensity updates).
+  var activeCitizensArray = ctx._bondActivePool || S.cycleActiveCitizens || [];
   var activeCitizens = {};
   for (var i = 0; i < activeCitizensArray.length; i++) {
     activeCitizens[activeCitizensArray[i]] = true;
@@ -743,7 +769,9 @@ function detectNewBonds_(ctx) {
   var currentCycle = S.cycleId || ctx.config.cycleCount || 0;
   var newBonds = [];
 
-  var activeCitizens = S.cycleActiveCitizens || [];
+  // v2.6 (Row 33): read the name-resolved bond-local pool — the shared array
+  // carries POPIDs, which miss every name-keyed metadata lookup below.
+  var activeCitizens = ctx._bondActivePool || S.cycleActiveCitizens || [];
   if (activeCitizens.length < 2) {
     Logger.log('detectNewBonds_: Less than 2 active citizens, skipping');
     return newBonds;

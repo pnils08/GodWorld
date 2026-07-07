@@ -138,22 +138,61 @@ function extractArticles(sectionText, desk) {
   const articles = [];
   let currentArticle = null;
 
+  // ES-2 (G-P-C100-2): letters carry no bylines — each letter runs from its
+  // ### heading to its signature line ("— Name, Neighborhood"; em-dash in the
+  // current format, -- in older editions, age segment optional). The old
+  // byline-driven loop never opened an article, so letters always returned [].
+  if (desk === 'letters') {
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim();
+      const headMatch = line.match(/^###\s+(.+)$/);
+      if (headMatch) {
+        if (currentArticle) {
+          currentArticle.text = lines.slice(currentArticle.startIdx, i).join('\n').trim();
+          articles.push(currentArticle);
+        }
+        currentArticle = { reporter: '', title: headMatch[1].trim(), desk, startIdx: i };
+        continue;
+      }
+      const sigMatch = line.match(/^(?:--|—)\s+(.+)$/);
+      if (sigMatch && currentArticle) {
+        currentArticle.reporter = sigMatch[1].trim();
+        currentArticle.text = lines.slice(currentArticle.startIdx, i + 1).join('\n').trim();
+        articles.push(currentArticle);
+        currentArticle = null;
+      }
+    }
+    if (currentArticle) {
+      currentArticle.text = lines.slice(currentArticle.startIdx).join('\n').trim();
+      articles.push(currentArticle);
+    }
+    return articles;
+  }
+
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i].trim();
 
-    // Detect bylines
-    const bylineMatch = line.match(/^By\s+(.+?)\s*\|/);
+    // Detect bylines. Two shapes (ES-2): "By Name | Desk" (reporters) and the
+    // pipe-less institutional "By Bay Tribune Civic" — the latter anchored to
+    // the exact "Bay Tribune" prefix so prose sentences starting with "By "
+    // can't false-match.
+    const bylineMatch = line.match(/^By\s+(.+?)\s*\|/) || line.match(/^By\s+(Bay Tribune\s+[\w ]+)$/);
     if (bylineMatch) {
       if (currentArticle) {
         currentArticle.text = lines.slice(currentArticle.startIdx, i - 1).join('\n').trim();
         articles.push(currentArticle);
       }
-      // Look back for title
+      // Look back for title — **Title** (older editions) or ### Title (current)
       let title = '';
       for (let j = i - 1; j >= Math.max(0, i - 3); j--) {
         const prev = lines[j].trim();
         if (prev.startsWith('**') && prev.endsWith('**')) {
           title = prev.replace(/\*\*/g, '');
+          break;
+        }
+        const headPrev = prev.match(/^###\s+(.+)$/);
+        if (headPrev) {
+          title = headPrev[1].trim();
           break;
         }
       }
@@ -163,18 +202,6 @@ function extractArticles(sectionText, desk) {
         desk,
         startIdx: i - (title ? 2 : 0) // Include title line
       };
-    }
-
-    // Detect letter signatures for letters desk
-    if (desk === 'letters') {
-      const letterMatch = line.match(/^--\s+(.+?),\s*\d+,\s*.+$/);
-      if (letterMatch) {
-        if (currentArticle) {
-          currentArticle.text = lines.slice(currentArticle.startIdx, i + 1).join('\n').trim();
-          articles.push(currentArticle);
-          currentArticle = null;
-        }
-      }
     }
   }
 

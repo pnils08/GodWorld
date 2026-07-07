@@ -384,8 +384,12 @@ async function main() {
     }
 
     try {
-      await addDocument(section.title, section.content, section.tags, metaExtras);
-      console.log('[OK] ' + section.title + ' (' + section.content.length + ' chars)');
+      var resp = await addDocument(section.title, section.content, section.tags, metaExtras);
+      // ES-1 (G-P-C100-1): surface the returned doc id on its own line so
+      // autonomous callers can capture it (mirrors ingestPlayerTrueSource).
+      var docId = '';
+      try { docId = (JSON.parse(resp.body) || {}).id || ''; } catch (e) { /* non-JSON body */ }
+      console.log('[OK] ' + section.title + ' (' + section.content.length + ' chars)' + (docId ? ' doc ' + docId : ''));
       success++;
     } catch (err) {
       console.error('[FAIL] ' + section.title + ' — ' + err.message);

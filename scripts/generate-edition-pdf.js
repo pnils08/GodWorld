@@ -843,9 +843,21 @@ async function main() {
     if (renderedImgs === expectedImgs) {
       console.log('Photo parity: OK (' + renderedImgs + ' <img> = ' + expectedImgs + ' manifest placements)');
     } else {
+      // ES-1 (G-PR-C100-3): name the orphaned placement(s), not just the count.
+      // Class 1 orphans: manifest section matches no parsed section (normalization
+      // or naming drift). Anything left after that is a matched-section drop
+      // (photo file missing / base64 load failure) — say which class it is.
+      var parsedSectionNorms = parsed.sections.map(function(s) { return normalizeSectionId(s.name); });
+      var orphans = manifest.photos.filter(function(p) {
+        return !p.section || parsedSectionNorms.indexOf(normalizeSectionId(p.section)) === -1;
+      });
+      var detail = orphans.length
+        ? 'Orphaned placement(s) with no matching rendered section: ' + orphans.map(function(p) {
+            return (p.file || '(no file)') + ' [section: ' + (p.section || 'none') + ']';
+          }).join(', ') + '.'
+        : 'All manifest sections matched a rendered section — drop is inside a matched section (missing photo file or base64 load failure); check output/photos/<slug>/ for the files listed in the manifest.';
       console.error('[PHOTO PARITY MISMATCH] rendered ' + renderedImgs + ' <img> but manifest has ' +
-                    expectedImgs + ' live placement(s) — one or more photos were dropped at render. ' +
-                    'Check findPhotosForSection coverage + per-section assignment.');
+                    expectedImgs + ' live placement(s). ' + detail);
     }
   }
 

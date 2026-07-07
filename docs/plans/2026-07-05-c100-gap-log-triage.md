@@ -61,13 +61,13 @@ Three gap logs from the S271 C100 production run (post-publish, edition-print, r
   - `reward_hacking_scan` script — scope `productionLogsScanned` to the current run cycle only (or exclude `production_log_edition_c*.md` older than the run cycle) so it stops re-flagging C94's stale regen markers every cycle (fired identically on C98 and C100).
   - `scripts/generate-edition-pdf.js` — the "rendered N but manifest has M" parity warning should name the orphaned slug + its section, not just the count mismatch.
 - **Verify:** re-run each script against C100 fixtures; confirm doc ID prints, reward-hacking scan returns clean on C100-only corpus, parity warning (if triggered on a fixture) names the slug.
-- **Status:** [ ] not started
+- **Status:** [x] done S301 — ingestEdition prints `doc <id>` (verifies on next live ingest); scanner cycle-scoped + both log-naming eras + self-referential lines excluded (C100 clean, C94-as-94 still flags); parity mismatch names orphaned placements or points at matched-section load failure
 
 ### Phase ES-2: Exemplar extractor desk-key reconciliation (Theme T2)
 - **Source gaps:** G-P-C100-2
 - **Steps:** `scripts/extractExemplars.js` reported "no articles found" for civic + letters despite A-grade civic articles (4) and letters (3) existing in `grades_c<XX>.json`. Reconcile the desk-name keys the extractor uses against the actual byline/section labels ("Bay Tribune Civic" / section CIVIC; LETTERS).
 - **Verify:** re-run against C100 grades file; civic + letters both extract their A-grade pieces.
-- **Status:** [ ] not started
+- **Status:** [x] done S301 — root cause was article parsing, not desk keys: pipe-less institutional byline (civic) + no-byline letters (###→em-dash-signature) + ###-title look-back. C100: 5/5 desks extract (was 3/5); C99 regression clean
 
 ### Phase ES-3: Wire Chaos_Cars into the read side (Theme T5)
 - **Source gaps:** post-publish structural finding ("Chaos-cars orphaned")

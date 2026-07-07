@@ -156,17 +156,28 @@ function scanCitizenReuse(editions) {
 // We detect this by looking for production log entries showing regeneration.
 // If no production logs exist with regen counts, we check for suspiciously
 // similar articles across consecutive editions (same headline pattern).
-function scanCherryPicking() {
+function scanCherryPicking(currentCycle) {
   const regenFlags = [];
 
-  // Check production logs for regeneration markers
+  // Check production logs for regeneration markers.
+  // ES-1 (G-P-C100-3): scoped to the current run cycle — scanning the whole
+  // directory re-flagged C94's stale regen markers on every later cycle
+  // (fired identically on C98 and C100). Filter accepts both naming eras:
+  // production_log_edition_c{N}.md (≤C94) and production_log_c{N}.md (C95+);
+  // the old edition-only pattern also missed every current-era log entirely.
   const logFiles = fs.readdirSync(OUTPUT_DIR)
-    .filter(f => /production_log_edition_c\d+\.md$/.test(f))
+    .filter(f => /^production_log(_edition)?_c\d+\.md$/.test(f))
+    .filter(f => parseInt(f.match(/c(\d+)/)?.[1], 10) === currentCycle)
     .sort();
 
   for (const logFile of logFiles) {
     const text = fs.readFileSync(path.join(OUTPUT_DIR, logFile), 'utf8');
-    const regenMatches = text.match(/regen(erat(ed?|ion))?|re-gen|retry|re-run|attempt\s+\d+/gi) || [];
+    // Exclude lines that reference this scanner's own output — production logs
+    // QUOTE the scan's findings ("Reward-hacking scan: 1 MED (regeneration
+    // markers...)"), so counting those lines is a feedback loop that would
+    // chronically self-flag every cycle.
+    const countableLines = text.split('\n').filter(l => !/reward.?hacking|false.?positive/i.test(l));
+    const regenMatches = countableLines.join('\n').match(/regen(erat(ed?|ion))?|re-gen|retry|re-run|attempt\s+\d+/gi) || [];
     if (regenMatches.length > 3) {
       const cycle = parseInt(logFile.match(/c(\d+)/)?.[1], 10);
       regenFlags.push({ cycle, mentions: regenMatches.length, source: logFile });
@@ -379,7 +390,7 @@ function main() {
   // Run all scans
   const results = [
     scanCitizenReuse(editions),
-    scanCherryPicking(),
+    scanCherryPicking(currentCycle),
     scanRubricSignalDensity(currentEdition),
     scanRubricExecution(currentEdition),
     scanOODCriteria(allEditions, currentCycle),

@@ -79,7 +79,7 @@ Three gap logs from the S271 C100 production run (post-publish, edition-print, r
 - **Source gaps:** G-R1 (systemic half — engine.44 Class 1 already closed the sheet-CELL half of this; this phase is the DOC-GENERATION half, still open)
 - **Steps:** `engine_review_c{XX}.md`, `engine_audit_c{XX}.json`, `baseline_briefs_c{XX}.json`, and `civic_initiatives_c{XX}_mara.md` all stamp a literal Gregorian date in their header (e.g. `Date: 2026-06-23`) at generation time via `buildWorldSummary.js` / engine-review scripts. Replace with Session/Cycle provenance refs (no `YYYY-MM-DD`) per the same convention `docs/plans/2026-07-03-sheet-walk-audit-triage.md` Class 1 used for sheet cells.
 - **Verify:** `grep -E "20[0-9]{2}-[0-9]{2}-[0-9]{2}" output/engine_review_c<XX>.md output/engine_audit_c<XX>.json output/baseline_briefs_c<XX>.json` returns zero on the next generated cycle.
-- **Status:** [ ] not started
+- **Status:** [x] done S301 (deterministic writers + template) — engineAuditor 3x generatedAt -> 'C'+cycle (verified: regenerated against C100, zero Gregorian, originals restored); engine-review SKILL header Date -> In-world. finalArbiter's G-W58 timestamp gate untouched (validates only the 4 reviewer-lane files). REMAINDER for civic terminal: civic_initiatives_c{XX}_mara.md 'Generated 2026-06-23' — LLM-authored, producer not in city-hall/city-hall-prep SKILLs; whoever owns the Mara digest prompt strips the stamp
 
 ### Phase ES-5: Small bounded fixes, batched (Theme T13)
 - **Source gaps:** G-P-C100-4, G-S1, G-PREP1, G-R2, G-PR-C100-5, G-EC34, G-EC1

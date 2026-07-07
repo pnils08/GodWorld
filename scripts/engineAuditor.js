@@ -242,7 +242,7 @@ async function runEngineAudit(ctx) {
 
   const auditOutput = {
     cycle,
-    generatedAt: new Date().toISOString(),
+    generatedAt: 'C' + cycle,  // ES-4 (G-R1): cycle provenance, no real-world clock in sim-facing docs
     detectorVersions,
     previousCycle: cycle - 1,
     patterns,
@@ -260,7 +260,7 @@ async function runEngineAudit(ctx) {
 
   const anomaliesOutput = {
     cycle,
-    generatedAt: new Date().toISOString(),
+    generatedAt: 'C' + cycle,  // ES-4 (G-R1): cycle provenance, no real-world clock in sim-facing docs
     detectorVersion: anomalyDetector.version || DETECTOR_VERSION,
     anomalies,
     summary: {
@@ -274,7 +274,7 @@ async function runEngineAudit(ctx) {
 
   const briefsOutput = {
     cycle,
-    generatedAt: new Date().toISOString(),
+    generatedAt: 'C' + cycle,  // ES-4 (G-R1): cycle provenance, no real-world clock in sim-facing docs
     generatorVersion: baselineBriefs.version || DETECTOR_VERSION,
     briefs,
     summary: {

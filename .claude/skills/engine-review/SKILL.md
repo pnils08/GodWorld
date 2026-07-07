@@ -125,7 +125,7 @@ Write to `output/engine_review_c{XX}.md`:
 ```
 # Engine Review — Cycle {XX}
 
-**Cycle:** {XX} | **Date:** {timestamp}
+**Cycle:** {XX} | **In-world:** Y{n}C{m}
 **Auditor version:** {from JSON detectorVersions.engineAuditor}
 **Source files:**
 - `output/engine_audit_c{XX}.json` — {N} patterns

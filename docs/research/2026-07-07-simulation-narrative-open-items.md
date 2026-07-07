@@ -110,7 +110,7 @@ Writer: 24/7 citizen-wake cron (`scripts/citizen-wake.js:239`), tags land `appli
 
 **adopt** (multiple bounded fixes + two new-system plans). Routing: sports gate, byline wire, business pool, UsageCount fuzzy feeder = small engine fixes; Oakland Hospital + unified citizen intake = plan docs; arc spawner + Narrative_Bridge + campaign arc + WorldEvents pool refresh = Mike decisions; ripple readers already tracked in engine.45.
 
-**Ignited plans:** none yet — ROLLOUT rows + plans follow Mike's pick from the disposition table (S302).
+**Ignited plans:** [[../plans/2026-07-07-citizen-intake-unification]] (engine.51, from §12.7 — Mike-direct S302). Shipped direct from this doc same session: sports gate (§2, commit 4979eb6f), UsageCount normalized matcher (§12, 565bba06), Business_Ledger live pools (§10, 9d8748a4).
 
 ---
 

@@ -1022,103 +1022,286 @@ function processIntake_(ctx) {
   var idxL = function(name) { return ledgerHeader.indexOf(name); };
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // STAGE 1: Validate and stage all rows in memory
+  // STAGE 1 (engine.51 v3, S302): lean intake schema — First | Last | Age |
+  // Neighborhood | RoleType | Category | Family | Notes | IntakeStatus.
+  // Operator/story supplies what the story established; code derives the rest
+  // (category salary from Economic_Parameters, BirthYear, neighborhood,
+  // education). Existing names bump UsageCount + apply non-blank edits —
+  // never mint duplicates. Ambiguity → IntakeStatus=review, never guess.
   // ═══════════════════════════════════════════════════════════════════════════
-  var stagedRows = [];
-  var rowsToClear = [];
-  var nextPopNum = getMaxPopId_(ledgerVals) + 1;
+  var iF = idxI('First'), iLa = idxI('Last'), iAge = idxI('Age'),
+      iNbhd = idxI('Neighborhood'), iRole = idxI('RoleType'),
+      iCat = idxI('Category'), iFam = idxI('Family'),
+      iNotes = idxI('Notes'), iStat = idxI('IntakeStatus');
+  if (iF < 0 || iLa < 0 || iStat < 0) {
+    Logger.log('processIntake_ v3: Intake tab is not on the lean engine.51 schema (needs First/Last/IntakeStatus) — skipping');
+    return;
+  }
 
-  // Track names we're adding in this batch to prevent intra-batch duplicates
-  var batchNames = new Set();
+  var S = ctx.summary || (ctx.summary = {});
+  var cycle = S.cycleId || S.cycle || 0;
+  var rng = ctx.rng;
+  if (typeof rng !== 'function') throw new Error('processIntake_ v3: ctx.rng required');
+
+  var econPools = buildIntakeSalaryPools_(ctx);
+  var lFirstCol = idxL('First'), lLastCol = idxL('Last');
+  var nameIndex = buildNameIndex_(ctx.ledger.rows, lFirstCol, lLastCol, null, 0);
+  var logSheet = ctx.ss.getSheetByName('LifeHistory_Log');
+  var stamp = (typeof inWorldStamp_ === 'function') ? inWorldStamp_(ctx) : ('C' + cycle);
+
+  var nextPopNum = getMaxPopId_(ledgerVals) + 1;
+  var statusWrites = [];   // [row1, text] — audit trail; rows are never cleared
+  var minted = 0, updated = 0;
 
   for (var r = 1; r < intakeVals.length; r++) {
     var row = intakeVals[r];
 
-    var first = (row[idxI('First')] || '').toString().trim();
-    var last = (row[idxI('Last')] || '').toString().trim();
+    var first = (row[iF] || '').toString().trim();
+    var last = (row[iLa] || '').toString().trim();
     if (!first && !last) continue;
+    if ((row[iStat] || '').toString().trim()) continue; // already minted/updated/review
 
-    // Check against existing ledger (normalized)
-    if (existsInLedger_(ledgerVals, first, last)) {
-      rowsToClear.push(r + 1); // Still clear duplicate intake rows
+    if (!first || !last) {
+      statusWrites.push([r + 1, 'review — needs both First and Last']);
+      continue;
+    }
+    // Honorific-as-first-name is the POP-01021 mint vector ("Dr." + "Keane") —
+    // unidentifiable, route to review (Row 30 discipline; RE shared from
+    // processAdvancementIntake.js).
+    if (typeof USAGE_HONORIFIC_RE !== 'undefined' && USAGE_HONORIFIC_RE.test(first)) {
+      statusWrites.push([r + 1, 'review — "' + first + '" is an honorific, not a first name']);
       continue;
     }
 
-    // Check against names already staged in this batch
-    var normKey = normalizeIdentity_(first) + '|' + normalizeIdentity_(last);
-    if (batchNames.has(normKey)) {
-      rowsToClear.push(r + 1); // Duplicate within batch
+    var age = Number(row[iAge]) || 0;
+    var nbhd = iNbhd >= 0 ? (row[iNbhd] || '').toString().trim() : '';
+    var givenRole = iRole >= 0 ? (row[iRole] || '').toString().trim() : '';
+    var rawCat = iCat >= 0 ? (row[iCat] || '').toString().trim() : '';
+    var family = iFam >= 0 ? (row[iFam] || '').toString().trim() : '';
+    var notes = iNotes >= 0 ? (row[iNotes] || '').toString().trim() : '';
+
+    var category = normalizeIntakeCategory_(rawCat);
+    if (category === null) {
+      statusWrites.push([r + 1, 'review — unknown category "' + rawCat + '"']);
       continue;
     }
-    batchNames.add(normKey);
 
-    // Build the new ledger row
-    var middle = (row[idxI('Middle')] || '').toString().trim();
-    var originGame = (row[idxI('OriginGame')] || '').toString().trim();
-    var uni = (row[idxI('UNI (y/n)')] || '').toString().trim();
-    var med = (row[idxI('MED (y/n)')] || '').toString().trim();
-    var civ = (row[idxI('CIV (y/n)')] || '').toString().trim();
-    var clock = (row[idxI('ClockMode')] || 'ENGINE').toString().trim();
-    var tier = row[idxI('Tier')] || '';
-    var roleType = row[idxI('RoleType')] || '';
-    var status = row[idxI('Status')] || 'Active';
-    var birthYear = row[idxI('BirthYear')] || '';
-    var originCity = row[idxI('OriginCity')] || '';
-    var lifeHist = row[idxI('LifeHistory')] || '';
-    var vault = row[idxI('OriginVault')] || '';
-    var neighborhood = row[idxI('Neighborhood')] || '';
+    var normKey = normalizeCitizenName_(first) + ' ' + normalizeCitizenName_(last);
+    var hits = nameIndex[normKey] || [];
+
+    if (hits.length > 1) {
+      statusWrites.push([r + 1, 'review — name matches ' + hits.length + ' existing citizens']);
+      continue;
+    }
+
+    if (hits.length === 1) {
+      // EXISTING CITIZEN — bump usage, apply non-blank fields as edits
+      var lr = hits[0];
+      var lRow = ctx.ledger.rows[lr];
+      var popIdE = idxL('POPID') >= 0 ? lRow[idxL('POPID')] : '';
+      var edits = [];
+      if (idxL('UsageCount') >= 0) {
+        lRow[idxL('UsageCount')] = (Number(lRow[idxL('UsageCount')]) || 0) + 1;
+      }
+      if (nbhd && idxL('Neighborhood') >= 0 && String(lRow[idxL('Neighborhood')]).trim() !== nbhd) {
+        edits.push('Neighborhood: ' + String(lRow[idxL('Neighborhood')]).trim() + ' -> ' + nbhd);
+        lRow[idxL('Neighborhood')] = nbhd;
+      }
+      if (givenRole && idxL('RoleType') >= 0 && String(lRow[idxL('RoleType')]).trim() !== givenRole) {
+        edits.push('RoleType: ' + String(lRow[idxL('RoleType')]).trim() + ' -> ' + givenRole);
+        lRow[idxL('RoleType')] = givenRole;
+        // Role change re-derives income (retirement / career-change case)
+        var redraw = drawIntakeProfile_(econPools, category || 'service', givenRole, rng);
+        if (redraw && idxL('Income') >= 0) {
+          edits.push('Income -> ' + redraw.income);
+          lRow[idxL('Income')] = redraw.income;
+        }
+      }
+      if (age > 0 && idxL('BirthYear') >= 0) {
+        var by = 2041 - age; // Age = 2041 − BirthYear anchor convention
+        if (Number(lRow[idxL('BirthYear')]) !== by) {
+          edits.push('BirthYear: ' + lRow[idxL('BirthYear')] + ' -> ' + by);
+          lRow[idxL('BirthYear')] = by;
+        }
+      }
+      if (idxL('LastUpdated') >= 0) lRow[idxL('LastUpdated')] = ctx.now;
+      ctx.ledger.dirty = true;
+      if (edits.length && logSheet) {
+        logSheet.appendRow([stamp, popIdE, first + ' ' + last, 'IntakeEdit',
+          'Story-driven update: ' + edits.join('; ') + (notes ? ' — ' + notes : ''), nbhd, cycle]);
+      }
+      statusWrites.push([r + 1, 'updated ' + popIdE + (edits.length ? ' (' + edits.join('; ') + ')' : ' (usage+1)')]);
+      updated++;
+      continue;
+    }
+
+    // (No separate intra-batch dup check: a minted citizen is added to
+    // nameIndex immediately, so a same-name row later in the batch routes
+    // through the existing-citizen bump+edit branch — Mike's repeat-mention
+    // semantics.)
+
+    // NEW CITIZEN — derive everything the story didn't establish
+    if (!category) {
+      // Mike's spec: missing category dice-rolls among the three broad ones
+      category = ['blue-collar', 'white-collar', 'service'][Math.floor(rng() * 3)];
+    }
+    var draw = drawIntakeProfile_(econPools, category, givenRole, rng);
+    if (!draw) {
+      statusWrites.push([r + 1, 'review — no salary source for category "' + category + '" (sports/roster intakes carry their own salary)']);
+      continue;
+    }
+    var birthYear = age > 0 ? (2041 - age) : (2041 - (22 + Math.floor(rng() * 44))); // adult band 22-65
+    if (!nbhd) nbhd = INTAKE_NEIGHBORHOODS[Math.floor(rng() * INTAKE_NEIGHBORHOODS.length)];
 
     var popId = 'POP-' + padStart_(nextPopNum++, 5, '0');
-
     var newRow = new Array(ledgerHeader.length).fill('');
 
     if (idxL('POPID') >= 0) newRow[idxL('POPID')] = popId;
     if (idxL('First') >= 0) newRow[idxL('First')] = first;
-    if (idxL('Middle') >= 0) newRow[idxL('Middle')] = middle;
     if (idxL('Last') >= 0) newRow[idxL('Last')] = last;
-    if (idxL('OriginGame') >= 0) newRow[idxL('OriginGame')] = originGame;
-    if (idxL('UNI (y/n)') >= 0) newRow[idxL('UNI (y/n)')] = uni;
-    if (idxL('MED (y/n)') >= 0) newRow[idxL('MED (y/n)')] = med;
-    if (idxL('CIV (y/n)') >= 0) newRow[idxL('CIV (y/n)')] = civ;
-    if (idxL('ClockMode') >= 0) newRow[idxL('ClockMode')] = clock;
-    if (idxL('Tier') >= 0) newRow[idxL('Tier')] = tier;
-    if (idxL('RoleType') >= 0) newRow[idxL('RoleType')] = roleType;
-    if (idxL('Status') >= 0) newRow[idxL('Status')] = status;
+    if (idxL('ClockMode') >= 0) newRow[idxL('ClockMode')] = 'ENGINE';
+    if (idxL('Tier') >= 0) newRow[idxL('Tier')] = 4;
+    if (idxL('RoleType') >= 0) newRow[idxL('RoleType')] = draw.role;
+    if (idxL('Income') >= 0) newRow[idxL('Income')] = draw.income;
+    if (idxL('EducationLevel') >= 0) newRow[idxL('EducationLevel')] = draw.education;
+    if (idxL('Status') >= 0) newRow[idxL('Status')] = 'Active';
     if (idxL('BirthYear') >= 0) newRow[idxL('BirthYear')] = birthYear;
-    if (idxL('OriginCity') >= 0) newRow[idxL('OriginCity')] = originCity;
-    if (idxL('LifeHistory') >= 0) newRow[idxL('LifeHistory')] = lifeHist;
-    if (idxL('OriginVault') >= 0) newRow[idxL('OriginVault')] = vault;
-    if (idxL('Neighborhood') >= 0) newRow[idxL('Neighborhood')] = neighborhood;
+    if (idxL('OriginCity') >= 0) newRow[idxL('OriginCity')] = 'Oakland';
+    if (idxL('LifeHistory') >= 0) newRow[idxL('LifeHistory')] =
+      'Introduced via intake C' + cycle + (notes ? '. ' + notes : '') + (family ? ' Family: ' + family + '.' : '');
+    if (idxL('Neighborhood') >= 0) newRow[idxL('Neighborhood')] = nbhd;
     if (idxL('CreatedAt') >= 0) newRow[idxL('CreatedAt')] = ctx.now;
     if (idxL('LastUpdated') >= 0) newRow[idxL('LastUpdated')] = ctx.now;
     if (idxL('UsageCount') >= 0) newRow[idxL('UsageCount')] = 0;
 
-    stagedRows.push(newRow);
-    rowsToClear.push(r + 1);
-  }
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // STAGE 2: Phase 42 §5.6 — push staged rows to ctx.ledger.rows; Phase 10
-  // consolidated commit auto-extends the sheet (impl shape #18).
-  // Direct ledger.getRange(getLastRow()+1, ...).setValues removed: under
-  // §5.6 it would clobber later push-writers (checkForPromotions,
-  // processAdvancementIntake) when Phase 10 commits the unified array.
-  // ═══════════════════════════════════════════════════════════════════════════
-  if (stagedRows.length > 0) {
-    for (var s = 0; s < stagedRows.length; s++) {
-      ctx.ledger.rows.push(stagedRows[s]);
-    }
+    ctx.ledger.rows.push(newRow);
+    nameIndex[normKey] = [ctx.ledger.rows.length - 1]; // later batch rows see this citizen
     ctx.ledger.dirty = true;
-    ctx.summary.intakeProcessed += stagedRows.length;
+    statusWrites.push([r + 1, 'minted ' + popId + ' (' + draw.role + ', ' + category + ', ' + nbhd + ')']);
+    minted++;
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // STAGE 3: Clear processed intake rows (after successful write)
+  // STAGE 2 (engine.51): IntakeStatus write-back — audit trail replaces the
+  // old clearContent wipe. Direct write to the operator-source Intake tab is
+  // the same transactional carve-out class as the old stage-then-clear
+  // (engine.md Phase-1 exception (c)); rows push to ctx.ledger per §5.6.
   // ═══════════════════════════════════════════════════════════════════════════
-  rowsToClear.sort(function(a, b) { return b - a; });
-  for (var i = 0; i < rowsToClear.length; i++) {
-    intake.getRange(rowsToClear[i], 1, 1, intake.getLastColumn()).clearContent();
+  for (var w = 0; w < statusWrites.length; w++) {
+    intake.getRange(statusWrites[w][0], iStat + 1).setValue(statusWrites[w][1]);
   }
+  ctx.summary.intakeProcessed = (ctx.summary.intakeProcessed || 0) + minted;
+  if (minted || updated || statusWrites.length) {
+    Logger.log('processIntake_ v3: minted ' + minted + ', updated ' + updated +
+      ', flagged ' + (statusWrites.length - minted - updated) + ' for review');
+  }
+}
+
+/**
+ * engine.51 helpers — intake category → Economic_Parameters salary pools.
+ */
+var INTAKE_NEIGHBORHOODS = [
+  "Temescal", "Downtown", "Fruitvale", "Lake Merritt",
+  "West Oakland", "Laurel", "Rockridge", "Jack London",
+  "Uptown", "KONO", "Chinatown", "Piedmont Ave"
+];
+
+var INTAKE_CATEGORY_ECON_MAP = {
+  'blue-collar':  ['Port & Labor', 'Construction & Baylight', 'Trades', 'Transit & Infrastructure'],
+  'white-collar': ['Professional', 'Tech & Innovation', 'Healthcare', 'Education'],
+  'service':      ['Small Business', 'Food & Culture'],
+  'faith':        ['Faith & Community'],
+  'civic':        ['Government & Civic'],
+  'media':        ['Creative & Arts'],
+  'sports':       []  // roster feeds carry their own salaries → review, never invent
+};
+
+var INTAKE_CATEGORY_EDUCATION = {
+  'blue-collar':  ['hs-diploma', 'hs-diploma', 'College'],
+  'white-collar': ['bachelors', 'bachelors', 'masters'],
+  'service':      ['hs-diploma', 'College', 'associates'],
+  'faith':        ['bachelors', 'masters'],
+  'civic':        ['bachelors', 'masters'],
+  'media':        ['bachelors', 'College']
+};
+
+/** Blank → '' (dice-roll downstream); recognized synonym → canonical; unknown → null (review). */
+function normalizeIntakeCategory_(raw) {
+  var c = String(raw || '').toLowerCase().replace(/[^a-z]/g, '');
+  if (!c) return '';
+  if (c === 'bluecollar' || c === 'blue') return 'blue-collar';
+  if (c === 'whitecollar' || c === 'white') return 'white-collar';
+  if (c === 'service') return 'service';
+  if (c === 'faith') return 'faith';
+  if (c === 'civic') return 'civic';
+  if (c === 'media') return 'media';
+  if (c === 'sports') return 'sports';
+  return null;
+}
+
+/** Read Economic_Parameters once; return intake-category → [{role, min, max}] pools. */
+function buildIntakeSalaryPools_(ctx) {
+  var pools = {};
+  for (var k in INTAKE_CATEGORY_ECON_MAP) pools[k] = [];
+  try {
+    var sheet = ctx.ss.getSheetByName('Economic_Parameters');
+    if (!sheet) return pools;
+    var data = sheet.getDataRange().getValues();
+    if (data.length < 2) return pools;
+    var h = data[0];
+    var iRole = -1, iCatE = -1, iMin = -1, iMax = -1;
+    for (var c = 0; c < h.length; c++) {
+      var hd = String(h[c]).trim();
+      if (hd === 'Role') iRole = c;
+      if (hd === 'Category') iCatE = c;
+      if (hd === 'IncomeMin') iMin = c;
+      if (hd === 'IncomeMax') iMax = c;
+    }
+    if (iRole < 0 || iCatE < 0 || iMin < 0 || iMax < 0) return pools;
+    for (var r = 1; r < data.length; r++) {
+      var role = String(data[r][iRole] || '').trim();
+      var econCat = String(data[r][iCatE] || '').trim();
+      if (!role || !econCat) continue;
+      var entry = { role: role, min: Number(data[r][iMin]) || 0, max: Number(data[r][iMax]) || 0 };
+      for (var ic in INTAKE_CATEGORY_ECON_MAP) {
+        if (INTAKE_CATEGORY_ECON_MAP[ic].indexOf(econCat) !== -1) pools[ic].push(entry);
+      }
+    }
+  } catch (e) {
+    Logger.log('buildIntakeSalaryPools_: ' + e.message);
+  }
+  return pools;
+}
+
+/**
+ * Draw {role, income, education} for a category. Given role: match an
+ * Economic_Parameters row (exact-then-contains) for its income band; no
+ * match keeps the story's role and draws income from the category pool.
+ * Empty pool (sports) → null → caller routes to review.
+ */
+function drawIntakeProfile_(pools, category, givenRole, rng) {
+  var pool = pools[category];
+  if (!pool || !pool.length) return null;
+  var pick = null;
+  if (givenRole) {
+    var g = givenRole.toLowerCase();
+    for (var i = 0; i < pool.length; i++) {
+      if (pool[i].role.toLowerCase() === g) { pick = pool[i]; break; }
+    }
+    if (!pick) {
+      for (var j = 0; j < pool.length; j++) {
+        if (pool[j].role.toLowerCase().indexOf(g) !== -1 || g.indexOf(pool[j].role.toLowerCase()) !== -1) { pick = pool[j]; break; }
+      }
+    }
+  }
+  if (!pick) pick = pool[Math.floor(rng() * pool.length)];
+  var income = Math.round((pick.min + rng() * Math.max(0, pick.max - pick.min)) / 100) * 100;
+  var eduPool = INTAKE_CATEGORY_EDUCATION[category] || ['hs-diploma'];
+  return {
+    role: givenRole || pick.role,
+    income: income,
+    education: eduPool[Math.floor(rng() * eduPool.length)]
+  };
 }
 
 /**

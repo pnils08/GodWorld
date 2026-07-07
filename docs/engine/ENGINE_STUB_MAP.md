@@ -49,8 +49,17 @@
 - **padStart_(str, targetLength, padChar)**
 
 - **processIntake_(ctx)**
+  Reads: S.cycle, S.cycleId
   Writes: S.intakeProcessed
-  Sheets: Intake
+  Sheets: Intake, LifeHistory_Log
+  RNG: ctx.rng / safeRand_(ctx)
+
+- **normalizeIntakeCategory_(raw)**
+
+- **buildIntakeSalaryPools_(ctx)**
+  Sheets: Economic_Parameters
+
+- **drawIntakeProfile_(pools, category, givenRole, rng)**
 
 - **getMaxPopId_(ledgerValues)**
 
@@ -3047,4 +3056,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 178
-**Functions mapped:** 1047
+**Functions mapped:** 1050

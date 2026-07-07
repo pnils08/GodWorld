@@ -204,6 +204,55 @@ function isEmergenceUsage_(usageType) {
   return true;
 }
 
+/**
+ * S302 UsageCount feeder fix — name normalization + honorific handling.
+ * Ported from scripts/ingestPublishedEntities.js (normalizeFullName +
+ * HONORIFIC_RE, G-P-C97-1 / ENGINE_REPAIR Row 30 semantics). The old exact
+ * case-insensitive First+Last match silently dropped "Dr. Vinnie Keane",
+ * "O'Neil"/"ONeil", accent variants — starving tier promotion.
+ */
+var USAGE_HONORIFIC_RE = /^(?:dr|rev|revd|fr|prof|professor|mr|mrs|ms|mx|bishop|rabbi|imam|pastor|deacon|sister|father|mother|elder|hon|sen|rep|gov|mayor|councilmember|councilman|councilwoman|capt|lt|sgt|ofc|det|chief)\.?$/i;
+
+function normalizeCitizenName_(name) {
+  return String(name || '')
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/**
+ * Split a raw usage-row name into {first, last}. Strips ONE leading honorific
+ * when a real first+last remain ("Dr. Vinnie Keane" -> Vinnie/Keane).
+ * Returns null when the name is not safely identifiable:
+ * honorific+surname only ("Dr. Keane" — Row 30 mint-vector class) or a
+ * single bare token. Null = skip, never guess.
+ */
+function splitUsageName_(rawName) {
+  var parts = String(rawName || '').trim().split(/\s+/);
+  if (parts.length >= 3 && USAGE_HONORIFIC_RE.test(parts[0])) parts = parts.slice(1);
+  if (parts.length < 2) return null;
+  if (USAGE_HONORIFIC_RE.test(parts[0])) return null; // honorific+surname — ambiguous
+  return { first: parts[0], last: parts.slice(1).join(' ') };
+}
+
+/**
+ * Build normalized-fullname -> [row indices] map. Keys with >1 row are
+ * normalization collisions; callers treat them as ambiguous and skip.
+ */
+function buildNameIndex_(rows, firstCol, lastCol, filterFn, startRow) {
+  var index = {};
+  for (var r = startRow || 0; r < rows.length; r++) {
+    if (filterFn && !filterFn(rows[r])) continue;
+    var key = normalizeCitizenName_(rows[r][firstCol]) + ' ' + normalizeCitizenName_(rows[r][lastCol]);
+    if (key === ' ') continue;
+    if (!index[key]) index[key] = [];
+    index[key].push(r);
+  }
+  return index;
+}
+
 function processMediaUsage_(ctx, now, cycle) {
   var ss = ctx.ss;
   var results = { processed: 0, skipped: 0, promotionsTriggered: 0 };
@@ -248,36 +297,47 @@ function processMediaUsage_(ctx, now, cycle) {
   var genericUpdates = {};
   var ledgerUpdates = {};
   var logSheet = ss.getSheetByName('LifeHistory_Log');
-  
+
+  // S302: normalized-name indexes built once (O(rows)), replacing the exact
+  // case-insensitive linear scans that dropped honorific/punctuation/accent
+  // variants. Keys with >1 row are ambiguous — skipped, never guessed.
+  var ledgerIndex = (lFirstCol >= 0 && lLastCol >= 0)
+    ? buildNameIndex_(ledgerRows, lFirstCol, lLastCol, null, 0)   // ctx.ledger.rows is body-only
+    : {};
+  var genericIndex = (genericData.length > 1 && gFirstCol >= 0 && gLastCol >= 0)
+    ? buildNameIndex_(genericData, gFirstCol, gLastCol, function(r) {
+        if (gStatusCol >= 0 && String(r[gStatusCol] || '') !== 'Active') return false;
+        return true;
+      }, 1)                                                       // genericData[0] is the header row
+    : {};
+
   for (var i = 1; i < usageData.length; i++) {
     var row = usageData[i];
     var citizenName = row[nameCol] ? String(row[nameCol]).trim() : '';
     var usageType = usageTypeCol >= 0 ? String(row[usageTypeCol] || '').trim() : '';
     var context = contextCol >= 0 ? String(row[contextCol] || '').trim() : '';
     var alreadyProcessed = processedCol >= 0 && row[processedCol] === 'Y';
-    
+
     if (!citizenName || alreadyProcessed) continue;
-    
+
     var countsForEmergence = isEmergenceUsage_(usageType);
-    
+
     if (!countsForEmergence) {
       markUsageProcessed_(ctx, usageSheet, i + 1, processedCol + 1, 'Y');
       results.skipped++;
       continue;
     }
-    
-    var nameParts = citizenName.split(' ');
-    var first = nameParts[0] || '';
-    var last = nameParts.slice(1).join(' ') || '';
-    var found = false;
-    
-    if (lFirstCol >= 0 && lLastCol >= 0) {
-      for (var lr = 0; lr < ledgerRows.length; lr++) {
-        var lFirst = String(ledgerRows[lr][lFirstCol] || '').trim();
-        var lLast = String(ledgerRows[lr][lLastCol] || '').trim();
 
-        if (lFirst.toLowerCase() === first.toLowerCase() &&
-            lLast.toLowerCase() === last.toLowerCase()) {
+    var split = splitUsageName_(citizenName);
+    var found = false;
+
+    if (split) {
+      var usageKey = normalizeCitizenName_(split.first) + ' ' + normalizeCitizenName_(split.last);
+      var ledgerHits = ledgerIndex[usageKey] || [];
+
+      if (ledgerHits.length === 1) {
+        var lr = ledgerHits[0];
+        {
           found = true;
 
           var currentUsage = ledgerUpdates[lr] ? ledgerUpdates[lr].usageCount :
@@ -300,34 +360,32 @@ function processMediaUsage_(ctx, now, cycle) {
             results.promotionsTriggered++;
           }
           
-          ledgerUpdates[lr] = { 
-            usageCount: newUsage, tier: newTier, name: lFirst + ' ' + lLast,
+          ledgerUpdates[lr] = {
+            usageCount: newUsage, tier: newTier,
+            name: String(ledgerRows[lr][lFirstCol] || '').trim() + ' ' + String(ledgerRows[lr][lLastCol] || '').trim(),
             popId: popId, oldTier: currentTier, usageType: usageType, context: context
           };
-          break;
         }
+      } else if (ledgerHits.length > 1) {
+        // Normalization collision — two+ ledger citizens share this name.
+        // Ambiguous: skip, never guess (Row 30 discipline).
+        Logger.log('processMediaUsage_: ambiguous name "' + citizenName + '" matches ' + ledgerHits.length + ' ledger rows — skipped');
       }
-    }
-    
-    if (!found && genericSheet && gFirstCol >= 0 && gLastCol >= 0) {
-      for (var gr = 1; gr < genericData.length; gr++) {
-        var gFirst = String(genericData[gr][gFirstCol] || '').trim();
-        var gLast = String(genericData[gr][gLastCol] || '').trim();
-        var gStatus = gStatusCol >= 0 ? String(genericData[gr][gStatusCol] || '') : 'Active';
-        
-        if (gStatus !== 'Active') continue;
-        
-        if (gFirst.toLowerCase() === first.toLowerCase() && 
-            gLast.toLowerCase() === last.toLowerCase()) {
+
+      if (!found) {
+        var genericHits = genericIndex[usageKey] || [];
+        if (genericHits.length === 1) {
+          var gr = genericHits[0];
           found = true;
           var currentEmergence = genericUpdates[gr] !== undefined ? genericUpdates[gr] :
                                 (gEmergenceCol >= 0 ? (Number(genericData[gr][gEmergenceCol]) || 0) : 0);
           genericUpdates[gr] = currentEmergence + 1;
-          break;
+        } else if (genericHits.length > 1) {
+          Logger.log('processMediaUsage_: ambiguous name "' + citizenName + '" matches ' + genericHits.length + ' Generic_Citizens rows — skipped');
         }
       }
     }
-    
+
     markUsageProcessed_(ctx, usageSheet, i + 1, processedCol + 1, 'Y');
     if (found) {
       results.processed++;

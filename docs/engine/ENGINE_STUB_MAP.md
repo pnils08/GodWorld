@@ -1123,6 +1123,12 @@
 
 - **isEmergenceUsage_(usageType)**
 
+- **normalizeCitizenName_(name)**
+
+- **splitUsageName_(rawName)**
+
+- **buildNameIndex_(rows, firstCol, lastCol, filterFn, startRow)**
+
 - **processMediaUsage_(ctx, now, cycle)**
   Sheets: Citizen_Media_Usage, Generic_Citizens, LifeHistory_Log
 
@@ -3040,4 +3046,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 178
-**Functions mapped:** 1044
+**Functions mapped:** 1047

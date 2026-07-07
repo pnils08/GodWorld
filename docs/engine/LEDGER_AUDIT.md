@@ -11,6 +11,10 @@ This is the single tracking document for the Simulation_Ledger overhaul. All aud
 
 ---
 
+## S301 drift note (2026-07-06) — EducationLevel coherence repair
+
+Mike-direct coherence audit (POPID/RoleType/Income/EducationLevel, DeepSeek batch over 910 extant citizens): **78 EducationLevel cells written, read-back verified.** (a) 52 credential upgrades — licensure-required roles carried migration-default education (whole DA's office + attorneys at hs-diploma → doctorate; midwives/psychotherapists/NPs → masters; nurses → bachelors; plumber/HVAC → trade-cert). Upgrades only, 13 conscious skips (AI Safety Researchers stay self-taught — prosperity canon; School Psychologist was a false flag). (b) 26 blank EducationLevel rows (POP-00791–00801, POP-00958–00973, POP-01019) filled role-aware. Open from same audit: athlete-income cluster (~40 GAME rows at generic $32-48k) WAITING on Mike's salary canon; blue-collar high-income cluster accepted as prosperity canon. Full report + disposition: `output/citizen_coherence_audit.json`. Headline table below is S250-era (903 rows; live is 913+) — full refresh pending next hard close.
+
 ## Current State — S250 headline refresh (2026-06-01) over S234 structural baseline
 
 **Verifier:** `scripts/auditSimulationLedger.js` (run from engine-sheet to refresh). *Headline counts (rows/extant/POPID/tier/status) re-verified S250; structural rows carry from S234.*

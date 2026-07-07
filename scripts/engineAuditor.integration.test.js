@@ -132,8 +132,10 @@ function buildFixtureCtx() {
     const a = result.auditOutput;
     assert('auditOutput.cycle === 93', a.cycle === 93);
     assert('auditOutput.previousCycle === 92', a.previousCycle === 92);
-    assert('auditOutput.generatedAt is ISO string',
-      typeof a.generatedAt === 'string' && /^\d{4}-\d{2}-\d{2}T/.test(a.generatedAt));
+    // ES-4 (G-R1): generatedAt is cycle provenance ('C'+cycle), not a
+    // real-world ISO timestamp — no Gregorian dates in sim-facing docs.
+    assert('auditOutput.generatedAt is cycle provenance',
+      a.generatedAt === 'C93');
     assert('auditOutput.patterns is array', Array.isArray(a.patterns));
     assert('auditOutput.summary is object',
       a.summary && typeof a.summary === 'object');

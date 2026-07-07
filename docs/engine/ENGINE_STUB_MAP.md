@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-07-06 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-07-07 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -32,7 +32,7 @@
 - **safePhaseCall_(ctx, phaseName, fn)**
 
 - **runWorldCycle()**
-  Reads: S.auditIssues, S.cityEvents, S.contractSeeds, S.engineErrorCount, S.eveningSports, S.mediaIntake, S.nightlife, S.nightlifeVolume, S.rippleEvents
+  Reads: S.auditIssues, S.citizenEvents, S.cityEvents, S.contractSeeds, S.engineErrorCount, S.eveningSports, S.mediaIntake, S.nightlife, S.nightlifeVolume, S.rippleEvents
   Writes: S.faithStorySignals, S.transitStorySignals, S.validationReport
 
 - **loadConfig_(ctx)**
@@ -71,7 +71,7 @@
 - **replayCycle(cycleId)**
 
 - **runCyclePhases_(ctx)**
-  Reads: S.cityEvents, S.contractSeeds, S.eveningSports, S.nightlife, S.nightlifeVolume, S.rippleEvents
+  Reads: S.citizenEvents, S.cityEvents, S.contractSeeds, S.eveningSports, S.nightlife, S.nightlifeVolume, S.rippleEvents
   Writes: S.faithStorySignals, S.transitStorySignals, S.validationReport
 
 ### initSimulationLedger.js
@@ -173,7 +173,7 @@
 
 ### applyWeatherModel.js
 - **applyWeatherModel_(ctx)**
-  Reads: S.absoluteCycle, S.cycleId, S.cycleOfYear, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.simMonth
+  Reads: S.absoluteCycle, S.cycleId, S.cycleOfYear, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.previousCycleState, S.season, S.simMonth
   Writes: S.neighborhoodWeather, S.previousSeason, S.weather, S.weatherEventPools, S.weatherEvents, S.weatherFrontTracking, S.weatherMood, S.weatherSummary, S.weatherTracking
   Config: ctx.config.cycleCount, ctx.config.rngSeed
   RNG: ctx.rng / safeRand_(ctx)
@@ -644,6 +644,7 @@
   Reads: S.citizenEvents, S.eventArcs, S.storySeeds, S.worldEvents
   Writes: S.cycleActiveCitizens
   Sheets: Citizen_Directory
+  RNG: ctx.rng / safeRand_(ctx)
 
 - **findColIndex_(headers, possibleNames)**
 
@@ -951,7 +952,7 @@
 ### generateCitizensEvents.js
 - **generateCitizensEvents_(ctx)**
   Reads: S.cityDynamics, S.contentLedger, S.crimeByNeighborhood, S.cycleId, S.economicMood, S.faithEvents, S.holiday, S.holidayPriority, S.initiativeEvents, S.isCreationDay, S.isFirstFriday, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.simYear, S.simulationYear, S.sportsFeedEntries, S.sportsSeason, S.sportsSentimentBoost, S.weather, S.worldEvents
-  Writes: S.biasIntents, S.citizenEventMemory, S.crimeMetrics, S.cycleActiveCitizens, S.eventsGenerated, S.localEntities, S.templateCooldowns
+  Writes: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.crimeMetrics, S.cycleActiveCitizens, S.eventsGenerated, S.localEntities, S.templateCooldowns
   Config: ctx.config.cycleCount, ctx.config.rngSeed
   Sheets: LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
@@ -1571,6 +1572,9 @@
   Config: ctx.config.cycleCount
   RNG: ctx.rng / safeRand_(ctx)
 
+- **resolveLedgerPopId_(ctx, name)**
+  Reads: S.culturalRegistry
+
 ### domainTracker.js
 - **domainTracker_(ctx)**
   Reads: S.cityDynamics, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.previousCycleState, S.sportsSeason, S.weather, S.worldEvents
@@ -2016,9 +2020,11 @@
 
 ### finalizeCycleState.js
 - **finalizeCycleState_(ctx)**
-  Reads: S.activeCooldowns, S.cityDynamics, S.civicLoad, S.civicLoadScore, S.crimeByNeighborhood, S.crimeMetrics, S.crimeSpikes, S.cycle, S.cycleId, S.cycleWeight, S.cycleWeightScore, S.domainPresence, S.dominantDomain, S.economicRipples, S.holiday, S.holidayPriority, S.initiativeRipples, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.migrationDriftFactors, S.neighborhoodDynamics, S.overloadScore, S.patternFlag, S.recoveryLevel, S.season, S.shockFlag, S.shockStartCycle, S.sportsSeason, S.weather, S.worldEvents
+  Reads: S.activeCooldowns, S.cityDynamics, S.civicLoad, S.civicLoadScore, S.crimeByNeighborhood, S.crimeMetrics, S.crimeSpikes, S.cycle, S.cycleId, S.cycleWeight, S.cycleWeightScore, S.domainPresence, S.dominantDomain, S.economicRipples, S.holiday, S.holidayPriority, S.initiativeRipples, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.migrationDriftFactors, S.neighborhoodDynamics, S.overloadScore, S.patternFlag, S.recoveryLevel, S.season, S.shockFlag, S.shockStartCycle, S.sportsSeason, S.weather, S.weatherTracking, S.worldEvents
   Writes: S.cycleFinalState, S.cycleFinalizedAt, S.economicMood, S.eventsGenerated, S.migrationDrift, S.previousCycleState
   Config: ctx.config.cycleCount
+
+- **compactWeatherTracking_(t)**
 
 - **compactMediaEffects_(mediaEffects)**
 
@@ -3033,4 +3039,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 178
-**Functions mapped:** 1042
+**Functions mapped:** 1044

@@ -67,7 +67,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.40 | Sports-stat intake | ready | research-build → engine-sheet | [[ENGINE_REPAIR]] — detail in pointer (relocated 2026-07-02) |
 | engine.41 | Engine-output → canon coverage | in-progress | engine-sheet | [[../plans/2026-06-24-engine-output-canon-coverage]] — detail in pointer (relocated 2026-07-02) |
 | engine.43 | Voices/agents sync contract — amended S298 (Triple classifier, flush durability, scope) | ready | research-build → engine-sheet | [[../adr/0014-citizen-self-authorship-live-drift]] + [[../plans/2026-07-04-voice-dial-sync-contract-build]] |
-| engine.44 | Sheet-walk audit triage — 36 findings, 5 fix-classes | ready | engine-sheet | [[../plans/2026-07-03-sheet-walk-audit-triage]] (Mike-direct 2026-07-03) |
+| engine.44 | Sheet-walk audit triage — 36 findings, 5 fix-classes; C1+C2 done S290, C3 done S301 (weather carry, Cultural POPID, bonds→Row 33 closed, edu re-seed); C4 dead-tabs + C5 feature-asks open | in-progress | engine-sheet | [[../plans/2026-07-03-sheet-walk-audit-triage]] (Mike-direct 2026-07-03) |
 | engine.45 | Ripple ledger + per-desk slices — persist cause→effect, hand desks the truth | ready | engine-sheet | [[../plans/2026-07-04-ripple-ledger-attribution]] (Mike-direct 2026-07-04; trace base: docs/research/ripple-traces/) |
 | engine.46 | Deep-dispatch Phase 1 substrate — reactivate per-desk corpus storage + byline/desk ingest tags; blocks the research.20 Phase 3 pilot | ready | engine-sheet | [[../plans/2026-06-25-deep-dispatch-write-edition-build]] §Phase 1 (Tasks 1-2) |
 | engine.47 | Game-night connection design — one game traced through 10 hops, gaps close in 4 existing engines; build awaits Mike approval (S296 moratorium gate) | needs-info | engine-sheet | [[../plans/2026-07-05-game-night-connection-design]] |
@@ -140,7 +140,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | governance.33 | C96 gap-log triage | in-progress | research-build / engine-sheet | [[../plans/2026-06-07-c96-gap-log-triage]] — detail in pointer (relocated 2026-07-02) |
 | governance.35 | REDUCED S260 by governance.36 §loop-tightening to the PIN-self-derive remnant | ready | engine-sheet (design: research-build DONE) | [[../plans/2026-06-14-session-context-mechanization]] — detail in pointer (relocated 2026-07-02) |
 | governance.36 | Boot doc architecture restructure | in-progress | research-build | [[../plans/2026-06-14-boot-doc-architecture-restructure]] + [[../plans/2026-05-09-boot-load-audit]] — detail in pointer (relocated 2026-07-02) |
-| governance.46 | C100 gap-log triage — 3 logs / ~50 entries → 13 themes → 6 new phases (1 RB + 5 ES) + 6 folds into existing rows | in-progress | research-build / engine-sheet | [[../plans/2026-07-05-c100-gap-log-triage]] |
+| governance.46 | C100 gap-log triage — all 6 phases done (RB-1 S298, ES-1..5 S301); remainders: G-PR-C100-5 (Mike call), Mara-digest stamp (civic), /sift chaos read (research-build) | done-pending-archive | research-build / engine-sheet | [[../plans/2026-07-05-c100-gap-log-triage]] |
 
 ---
 

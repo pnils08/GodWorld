@@ -5,6 +5,13 @@
  * Bridges top Cultural_Ledger celebrities to Simulation_Ledger with POP-IDs.
  * Backfills UniverseLinks column on Cultural_Ledger.
  *
+ * engine.51 carve-out (S302): BULK INTEGRATION tool, not story intake — the
+ * direct SL append is deliberate (Tier 2, ClockMode LIFE, TraitProfile,
+ * same-run POPID backfill into Cultural_Ledger that intake's next-cycle mint
+ * cannot provide). Story-driven citizen adds go through the Intake tab
+ * (docs/plans/2026-07-07-citizen-intake-unification.md); do not copy this
+ * append pattern for new feeders.
+ *
  * Threshold: FameScore >= 65 AND CityTier in (Iconic, National)
  * Iconic → Tier 2, National → Tier 3
  *

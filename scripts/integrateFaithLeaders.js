@@ -5,6 +5,13 @@
  * Adds faith organization leaders to Simulation_Ledger as Tier 2 citizens.
  * Backfills LeaderPOPID column on Faith_Organizations.
  *
+ * engine.51 carve-out (S302): BULK INTEGRATION tool, not story intake — the
+ * direct SL append is deliberate (Tier 2, ClockMode LIFE, TraitProfile,
+ * same-run LeaderPOPID backfill that intake's next-cycle mint cannot
+ * provide). Story-driven citizen adds go through the Intake tab
+ * (docs/plans/2026-07-07-citizen-intake-unification.md); do not copy this
+ * append pattern for new feeders.
+ *
  * Usage:
  *   node scripts/integrateFaithLeaders.js --dry-run   # Preview
  *   node scripts/integrateFaithLeaders.js              # Apply

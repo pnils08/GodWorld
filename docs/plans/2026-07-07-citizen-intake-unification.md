@@ -31,7 +31,7 @@ pointers:
 1. An `Intake` row with only First+Last+Category ("blue-collar") produces, next cycle, a complete SL row: POPID, RoleType + Income drawn from Economic_Parameters for that category, BirthYear/age, Neighborhood, EducationLevel — zero blank causal columns.
 2. An intake row naming an existing citizen (including "Dr. Vinnie Keane", "ViNNei Keane", accent/apostrophe variants) bumps UsageCount and applies any non-blank fields as edits — no duplicate row minted.
 3. An unidentifiable name (honorific+surname only, or a normalization collision) lands in a review state visible on the intake tab — never silently minted, never silently dropped.
-4. `integrateAthletes.js` / `integrateCelebrities.js` / `integrateFaithLeaders.js` emit Intake rows instead of appending to Simulation_Ledger directly.
+4. Story lanes (media room routing, post-publish extraction T8) are the exclusive Intake feeders; bulk-integration scripts carry documented carve-out headers (amended S302 — T6 reversed on evidence).
 5. A full sandbox cycle runs clean with intake rows of all three shapes (new-minimal, existing-edit, ambiguous) staged.
 
 ---
@@ -78,13 +78,11 @@ pointers:
 - **Verify:** staged edit row on sandbox changes RoleType + Income + logs LifeHistory. AC-2.
 - **Status:** [ ] not started
 
-### Task 6: Node adders emit intake rows
-- **Files:** `scripts/integrateAthletes.js`, `scripts/integrateCelebrities.js`, `scripts/integrateFaithLeaders.js` — modify
-- **Steps:**
-  1. Replace SL append blocks with `Intake` tab appends carrying whatever fields the script knows (Category=sports/media/faith respectively).
-  2. `seedYouthBalance.js` / `ingestFemaleCitizensBalance.js` stay direct (bulk demographic seeding, not story intake) — document the carve-out in each header.
-- **Verify:** dry-run flags on each script show Intake-row output; zero `ledger.rows.push`/append in the three files. AC-4.
-- **Status:** [ ] not started
+### Task 6: Node adders — carve-out documented (REVERSED from convert, S302)
+- **Files:** `scripts/integrateCelebrities.js`, `scripts/integrateFaithLeaders.js` — header notes
+- **Finding:** measure-twice reversed the convert plan. `integrateAthletes.js` never appends (cell-updater on matched rows). The other two are one-shot BULK INTEGRATIONS: Tier-2/LIFE-clock mints with TraitProfile + same-run POPID backfill into Cultural_Ledger / Faith_Organizations — intake's next-cycle mint cannot provide the synchronous POPID, and the lean shape would drop their curated fields. Same carve-out class as seedYouthBalance/ingestFemaleCitizensBalance.
+- **Steps:** carve-out headers added to both scripts pointing at this plan; AC-4 amended: story lanes (media room ✓ T4, post-publish → T8) are the exclusive Intake feeders; bulk integrations stay direct by documented exception.
+- **Status:** [x] done S302 (as reversed)
 
 ### Task 8: Post-publish intake extraction (research-build)
 - **Terminal:** research-build (Mike-direct S302 — apparatus/skill work, not substrate)
@@ -111,3 +109,4 @@ pointers:
 - 2026-07-07 — Plan created (S302), ignited from research §12.7 after Mike flagged the shipped matcher/pool fixes as short-sighted without a working intake front door.
 - 2026-07-07 — T1 amended (Mike-direct): lean 9-col operator schema replaces 21-col first cut; tab created on sandbox (had not existed). T1–T3 shipped 6d385ac4.
 - 2026-07-07 — Task 8 added (Mike-direct): research-build wires intake extraction into /post-publish against the pre-PDF .txt/.md; gated on T7 clean.
+- 2026-07-07 — T4+T5 shipped 595c4665 (lean router, shared matcher, routed data-loss guard, income re-derive). T6 REVERSED: integrate scripts are bulk-integration carve-outs, headers documented; AC-4 amended. T7 test rows staged on sandbox.

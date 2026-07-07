@@ -88,8 +88,14 @@ Cycle_Packet: written `buildCyclePacket.js:42` (Phase 10), read by `compileHando
 ### 16. Edition_Coverage_Ratings — WIRED, loop closed, split-cadence
 IN: `scripts/rateEditionCoverage.js` via `/post-publish` (manual skill step). OUT: `applyEditionCoverageEffects_` (Phase 2, `godWorldEngine2.js:221`) applies sentiment deltas + story-seed triggers with Processed-flag once-only guard; triggers consumed at `applyStorySeeds.js:1489`. Working as designed — only fails silently if `/post-publish` is skipped (applier no-ops). Watch item, not a defect.
 
-### 17. Reflection_Intake — WIRED end-to-end, but dial write-back is a MANUAL lever
-Writer: 24/7 citizen-wake cron (`scripts/citizen-wake.js:239`) — classified event+affect tags land with `applied=no`. Dial feed: `scripts/drainReflectionBacklog.js` (dry-run default, `--commit` to apply, flips `applied=yes`). Tally: `citizen-signal-detector.js`. **Gap:** reflections pile up unapplied until someone runs the drain — the engine-feedback step is not automated. → Mike's call: schedule the drain (cron `--commit`) or keep it a deliberate lever.
+### 17. Reflection_Intake — WIRED, auto-drained in-engine (correction over first write)
+Writer: 24/7 citizen-wake cron (`scripts/citizen-wake.js:239`), tags land `applied=no`. **Dial feed is AUTOMATIC**: `compressLifeHistory_` Phase 9 (`utilities/compressLifeHistory.js:83-99/:397-402`, S269) drains unprocessed rows into DialState every cycle and flips `applied=yes` (C123 log confirms it fired). `drainReflectionBacklog.js` is a backlog catch-up lever sharing the same applied-flag mutex — no double-count. **Real gap:** no writer turns a reflection into a LifeHistory_Log row — the dial moves but the lived event vanishes from the citizen's narrative record (`citizen-wake.js:72` explicitly writes no LifeHistory). → adopt: reflection→LifeHistory bridge is a bounded build.
+
+### 18. Cycle_Packet redundancy + second-pass finds (C123 log evidence)
+- **Facts are serialized twice:** Riley_Digest (structured, preferred by buildDeskPackets/buildWorldSummary) and Cycle_Packet (3-col text blob, read only by `compileHandoff.js:226` which does NOT read Riley_Digest). Media_Briefing earns its place as the ideas/pitch layer. → consolidation candidate: repoint compileHandoff at Riley_Digest, retire Cycle_Packet (Mike decision).
+- **Bonds landing confirmed:** C123 wrote 311 bonds (`runBondEngine_ v2.4` → `saveV3BondsToLedger_`) — the engine-origin bond lane is live; digest still can't see it (§14).
+- **Two Gregorian leaks (no-real-world-clock violations):** `citizen-wake.js:240` stamps `new Date().toISOString()` into Reflection_Intake col A (Node cron, no ctx — needs cycleRef source); NBA "record" field in the sports feed renders as a JS Date (`Wed Feb 04 2026...`) — Sheets auto-converted a "2-4"-style record cell to a date; fix is column formatting/plain-text, sheet-side.
+- **Sports gate verified empirically on C123:** zero invented playoff/championship atmosphere in WorldEvents_V3/World_Drift; only sports texture is prev-evening carry of Mike's real feed StoryAngles (legitimate lane).
 
 ---
 
@@ -118,3 +124,4 @@ Writer: 24/7 citizen-wake cron (`scripts/citizen-wake.js:239`) — classified ev
 
 - 2026-07-07 — Initial extraction (S302). Lanes 1-4 complete; lane 5 (media pipeline) pending at first write.
 - 2026-07-07 — Lane 5 appended (§14-17): Riley_Digest schema drift, Cycle_Packet/Media_Briefing wired, ECR loop closed split-cadence, Reflection_Intake manual drain. Sports gate (§2) SHIPPED same session — commit 4979eb6f, sandbox-deployed + byte-verified.
+- 2026-07-07 — Second-pass corrections (§17 rewritten, §18 added): reflection dial-drain is automatic in-engine (S269), real gap is reflection→LifeHistory; Cycle_Packet redundancy verdict; 311 bonds landed C123; two Gregorian leaks; sports gate verified empirically on sandbox C123.

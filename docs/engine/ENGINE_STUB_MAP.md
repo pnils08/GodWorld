@@ -126,12 +126,12 @@
 ### applySeasonWeights.js
 - **applySeasonalWeights_(ctx)**
   Reads: S.cycleOfYear, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.isWeekend, S.mediaEffects, S.season, S.sportsSeason, S.weatherMood
-  Writes: S.creationDayActive, S.seasonal
+  Writes: S.creationDayActive, S.seasonal, S.sportsAtmosphereEnabled
 
 ### applySportsSeason.js
 - **applySportsSeason_(ctx)**
   Reads: S.cycle, S.cycleId
-  Writes: S.activeSports, S.sportsFeedEntries, S.sportsSeason, S.sportsSeasonChicago, S.sportsSeasonOakland, S.sportsSource
+  Writes: S.activeSports, S.sportsAtmosphereEnabled, S.sportsFeedEntries, S.sportsFeedSeasonType, S.sportsSeason, S.sportsSeasonChicago, S.sportsSeasonOakland, S.sportsSource
   Config: ctx.config.sportsStateOakland, ctx.config.sportsState_Oakland
 
 - **readOaklandFeedEntries_(ctx, currentCycle)**
@@ -169,7 +169,8 @@
 - **parseFranchiseStability_(val)**
 
 - **findColumnIndex_(headers, possibleNames)**
-  Reads: S.sportsSeason
+  Reads: S.sportsFeedEntries, S.sportsFeedSeasonType, S.sportsSeason
+  Writes: S.sportsAtmosphereEnabled
 
 ### applyWeatherModel.js
 - **applyWeatherModel_(ctx)**
@@ -214,7 +215,7 @@
 ### calendarChaosWeights.js
 - **applyChaosCategoryWeights_(ctx)**
   Reads: S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.weatherMood
-  Writes: S.chaosCategoryMap, S.chaosCategoryWeights
+  Writes: S.chaosCategoryMap, S.chaosCategoryWeights, S.sportsAtmosphereEnabled
 
 ### calendarStorySeeds.js
 - **applySeasonalStorySeeds_(ctx)**
@@ -302,14 +303,14 @@
 ### applyDemographicDrift.js
 - **applyDemographicDrift_(ctx)**
   Reads: S.cityDynamics, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
-  Writes: S.demographicDrift
+  Writes: S.demographicDrift, S.sportsAtmosphereEnabled
   Sheets: World_Population
   RNG: ctx.rng / safeRand_(ctx)
 
 ### deriveDemographicDrift.js
 - **deriveDemographicDrift_(ctx)**
   Reads: S.cityDynamics, S.civicLoad, S.civicLoadScore, S.economicMood, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.nightlifeVolume, S.sportsSeason, S.storyHooks, S.textureTriggers, S.weatherMood, S.worldEvents
-  Writes: S.demographicDrift, S.demographicDriftFactors, S.demographicDriftSummary, S.shockFlag
+  Writes: S.demographicDrift, S.demographicDriftFactors, S.demographicDriftSummary, S.shockFlag, S.sportsAtmosphereEnabled
 
 ### finalizeWorldPopulation.js
 - **finalizeWorldPopulation_(ctx)**
@@ -387,7 +388,7 @@
 ### updateNeighborhoodDemographics.js
 - **updateNeighborhoodDemographics_(ctx)**
   Reads: S.cycleId, S.demographicDrift, S.demographicDriftFactors, S.holiday, S.isCreationDay, S.isFirstFriday, S.sportsSeason
-  Writes: S.demographicShifts, S.demographicShiftsCount, S.neighborhoodDemographics
+  Writes: S.demographicShifts, S.demographicShiftsCount, S.neighborhoodDemographics, S.sportsAtmosphereEnabled
   Config: ctx.config.cycleCount
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -399,7 +400,7 @@
 ### buildCityEvents.js
 - **buildCityEvents_(ctx)**
   Reads: S.cityDynamics, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
-  Writes: S.cityEventDetails, S.cityEvents, S.cityEventsCalendarContext
+  Writes: S.cityEventDetails, S.cityEvents, S.cityEventsCalendarContext, S.sportsAtmosphereEnabled
   Config: ctx.config.cycleCount, ctx.config.rngSeed
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -516,7 +517,7 @@
 
 - **generateGameModeMicroEvents_(ctx)**
   Reads: S.cityDynamics, S.cycleId, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.sportsSeason, S.weather, S.worldEvents
-  Writes: S.eventsGenerated, S.gameModeMicroEventDetails, S.gameModeMicroEvents
+  Writes: S.eventsGenerated, S.gameModeMicroEventDetails, S.gameModeMicroEvents, S.sportsAtmosphereEnabled
   Config: ctx.config.cycleCount, ctx.config.rngSeed
   Sheets: LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
@@ -524,7 +525,7 @@
 ### generateGenericCitizenMicroEvent.js
 - **generateGenericCitizenMicroEvents_(ctx)**
   Reads: S.cityDynamics, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.neighborhoodWeather, S.previousEvening, S.season, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
-  Writes: S.eventsGenerated, S.microEvents
+  Writes: S.eventsGenerated, S.microEvents, S.sportsAtmosphereEnabled
   Config: ctx.config.cycleCount, ctx.config.rngSeed
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -1187,7 +1188,7 @@
 ### runEducationEngine.js
 - **runEducationEngine_(ctx)**
   Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.simYear, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
-  Writes: S.educationEvents, S.eventsGenerated
+  Writes: S.educationEvents, S.eventsGenerated, S.sportsAtmosphereEnabled
   Config: ctx.config.cycleCount
   Sheets: LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)

@@ -70,7 +70,9 @@ function buildCityEvents_(ctx) {
   var holidayPriority = S.holidayPriority || "none";
   var isFirstFriday = !!S.isFirstFriday;
   var isCreationDay = !!S.isCreationDay;
-  var sportsSeason = S.sportsSeason || "off-season";
+  // Sports atmosphere only when Maker-declared (S302 gate); "" matches no
+  // event branch and suppresses the sportsSeason calendar tag (L82 truthy check).
+  var sportsSeason = (S.sportsAtmosphereEnabled === true) ? (S.sportsSeason || "off-season") : "";
 
   // Build calendar tags for traceability
   var calendarTags = (function() {

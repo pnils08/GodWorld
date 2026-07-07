@@ -70,7 +70,7 @@ function updateNeighborhoodDemographics_(ctx) {
   var holiday = S.holiday || 'none';
   var isFirstFriday = S.isFirstFriday || false;
   var isCreationDay = S.isCreationDay || false;
-  var sportsSeason = S.sportsSeason || 'off-season';
+  var sportsSeason = (S.sportsAtmosphereEnabled === true) ? (S.sportsSeason || 'off-season') : ''; // S302 gate
 
   // ═══════════════════════════════════════════════════════════════════════════
   // APPLY DRIFT TO NEIGHBORHOODS

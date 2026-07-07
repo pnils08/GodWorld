@@ -72,7 +72,10 @@ function generateGenericCitizenMicroEvents_(ctx) {
   var holidayPriority = S.holidayPriority || "none";
   var isFirstFriday = !!S.isFirstFriday;
   var isCreationDay = !!S.isCreationDay;
-  var sportsSeason = S.sportsSeason || "off-season";
+  // Sports atmosphere only when Maker-declared (S.sportsAtmosphereEnabled,
+  // set by applySportsSeason_ on config-override). Feed SeasonType alone must
+  // not synthesize playoff/championship citizen texture (S302).
+  var sportsSeason = (S.sportsAtmosphereEnabled === true) ? (S.sportsSeason || "off-season") : "off-season";
 
   var eventCount = 0;
   var EVENT_LIMIT = 25; // CATCH-UP: was 12, temporarily raised. Revert after ~5 cycles.

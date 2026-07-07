@@ -30,7 +30,7 @@ function applyChaosCategoryWeights_(ctx) {
   var season = S.season;
   var holiday = S.holiday || "none";
   var holidayPriority = S.holidayPriority || "none";
-  var sports = S.sportsSeason;
+  var sports = (S.sportsAtmosphereEnabled === true) ? S.sportsSeason : ""; // S302 gate (runs Phase 7, flag set at Phase2-SportsSeason)
   var econMood = S.economicMood || 50;
   var weatherMood = S.weatherMood || {};
   var isFirstFriday = S.isFirstFriday || false;

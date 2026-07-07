@@ -64,7 +64,9 @@ function deriveDemographicDrift_(ctx) {
   var holidayPriority = S.holidayPriority || 'none';
   var isFirstFriday = S.isFirstFriday || false;
   var isCreationDay = S.isCreationDay || false;
-  var sportsSeason = S.sportsSeason || 'off-season';
+  // S302 gate: no invented "Sports fans surge" drift-reason strings unless
+  // Maker declared the sports state via World_Config.
+  var sportsSeason = (S.sportsAtmosphereEnabled === true) ? (S.sportsSeason || 'off-season') : '';
 
   // Derived signals
   var culturePulse = hooks + arcs;

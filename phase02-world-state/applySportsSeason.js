@@ -36,6 +36,12 @@ function applySportsSeason_(ctx) {
     S.sportsSeasonOakland = oaklandOverride;
     S.sportsSeasonChicago = "";
     S.sportsSource = "config-override";
+    // Maker-declared state is the ONLY source that licenses invented sports
+    // atmosphere (watch parties, playoff texture, drift nudges). Feed-driven
+    // SeasonType must not — feed rows are Mike's game logs, not a license to
+    // synthesize city-wide sports mood (S302 C122 "playoffs" contamination).
+    S.sportsAtmosphereEnabled = true;
+    S.sportsFeedSeasonType = "";
     S.sportsFeedEntries = [];
 
     S.activeSports = buildActiveSportsFromOverride_(oaklandOverride);
@@ -56,20 +62,35 @@ function applySportsSeason_(ctx) {
   S.sportsFeedEntries = entries;
 
   if (entries.length > 0) {
-    // SeasonType from last entry (most recent row wins)
+    // S302 SOURCE GATE: feed SeasonType is Mike's game-log metadata, NOT a
+    // license for the engine to synthesize sports atmosphere. ~40 downstream
+    // files branch on S.sportsSeason (playoffs/championship texture, weights,
+    // drift nudges) — exposing the raw feed value here is what produced the
+    // C122 "playoffs" contamination. Sentinel "off-season" makes every such
+    // branch inert; "unknown" would NOT (a dozen `!== "off-season"` sites
+    // treat unknown as in-season). Raw value preserved on sportsFeedSeasonType
+    // for consumers that want the feed's own label (briefings, metadata).
+    // Real sports content still flows: S.sportsFeedEntries (StoryAngle etc.)
+    // + applySportsFeedTriggers_ (reads the feed sheet directly).
     var lastEntry = entries[entries.length - 1];
-    S.sportsSeason = lastEntry.seasonType || "unknown";
+    S.sportsFeedSeasonType = lastEntry.seasonType || "unknown";
+    S.sportsSeason = "off-season";
     S.sportsSeasonOakland = S.sportsSeason;
     S.activeSports = deriveActiveSportsFromFeed_(entries);
     S.sportsSource = "oakland-feed";
+    S.sportsAtmosphereEnabled = false;
 
     Logger.log("applySportsSeason_ v3.0: " + entries.length + " feed entries for cycle " + currentCycle);
     Logger.log("  Season: " + S.sportsSeason + ", Active: " + S.activeSports.join(", "));
   } else {
-    S.sportsSeason = "unknown";
-    S.sportsSeasonOakland = "unknown";
+    // S302: sentinel "off-season" here too — the old "unknown" value tripped
+    // every `!== "off-season"` branch downstream (latent leak on empty feeds).
+    S.sportsSeason = "off-season";
+    S.sportsSeasonOakland = "off-season";
+    S.sportsFeedSeasonType = "unknown";
     S.activeSports = [];
     S.sportsSource = "oakland-feed-empty";
+    S.sportsAtmosphereEnabled = false;
 
     Logger.log("applySportsSeason_ v3.0: No feed entries for cycle " + currentCycle);
   }
@@ -702,15 +723,15 @@ function findColumnIndex_(headers, possibleNames) {
  * SPORTS STATE VALUES
  * ============================================================================
  *
- * S.sportsSeason values (from Oakland_Sports_Feed SeasonType or World_Config):
- * - off-season       : No games
- * - spring-training  : Practice games, roster cuts
- * - early-season     : First stretch of regular season
- * - mid-season       : Core regular season
- * - late-season      : End of regular season
- * - playoffs         : Postseason active
- * - championship     : Finals / World Series
- * - unknown          : No feed entries for this cycle
+ * S.sportsSeason values (S302 semantics):
+ * - From World_Config override (sportsState_Oakland) ONLY: spring-training /
+ *   early-season / mid-season / late-season / playoffs / championship /
+ *   off-season — Maker-declared canon, licenses sports atmosphere
+ *   (S.sportsAtmosphereEnabled = true).
+ * - Feed mode / empty feed: ALWAYS "off-season" (sentinel — keeps ~40
+ *   downstream playoff/championship/!== off-season branches inert).
+ *   The feed's own SeasonType label lives on S.sportsFeedSeasonType.
+ *   Real game content flows via S.sportsFeedEntries + applySportsFeedTriggers_.
  *
  * TeamsUsed values (Oakland_Sports_Feed):
  * - A's              : Oakland A's baseball

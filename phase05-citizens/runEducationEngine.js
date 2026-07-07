@@ -74,7 +74,7 @@ function runEducationEngine_(ctx) {
   var dynamics = S.cityDynamics || {
     sentiment: 0, culturalActivity: 1, communityEngagement: 1
   };
-  var sports = S.sportsSeason;
+  var sports = (S.sportsAtmosphereEnabled === true) ? S.sportsSeason : ""; // S302 gate
   var econMood = S.economicMood || 50;
   var cycle = S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0;
 

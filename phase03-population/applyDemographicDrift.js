@@ -74,7 +74,9 @@ function applyDemographicDrift_(ctx) {
   var holidayPriority = S.holidayPriority || "none";
   var isFirstFriday = S.isFirstFriday || false;
   var isCreationDay = S.isCreationDay || false;
-  var sportsSeason = S.sportsSeason || "off-season";
+  // S302 gate: feed SeasonType must not nudge employment/econ in
+  // World_Population — Maker config-override only.
+  var sportsSeason = (S.sportsAtmosphereEnabled === true) ? (S.sportsSeason || "off-season") : "";
 
   // Track changes for summary
   var changes = [];

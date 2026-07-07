@@ -85,7 +85,10 @@ function generateGameModeMicroEvents_(ctx) {
   var holidayPriority = S.holidayPriority || "none";
   var isFirstFriday = !!S.isFirstFriday;
   var isCreationDay = !!S.isCreationDay;
-  var sportsSeason = S.sportsSeason || "off-season";
+  // Sports atmosphere only when Maker-declared (S302 gate). Neutral is "" —
+  // must not match ANY season pool here, including offseasonPool (inventing
+  // "slower offseason pace" texture is as wrong as inventing playoff fever).
+  var sportsSeason = (S.sportsAtmosphereEnabled === true) ? (S.sportsSeason || "off-season") : "";
 
   var calendarTags = (function() {
     var t = [];

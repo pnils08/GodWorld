@@ -131,18 +131,61 @@ function runCareerEngine_(ctx) {
   var INDUSTRIES = ["tech", "service", "public", "creative"];
   var EMPLOYERS = ["small", "large", "public"];
 
-  // v2.4: BIZ-ID pools for employer resolution on transitions
-  // Mapped from actual Business_Ledger sectors to Career Engine abstract industries
-  // NOTE: Update these pools when new businesses are added to Business_Ledger
-  var INDUSTRY_BIZ_POOL = {
+  // S302: BIZ-ID pools now built LIVE from Business_Ledger each cycle —
+  // the old hardcoded pool (~27 IDs) silently excluded every business added
+  // since v2.4 (ledger is at 70; research doc §10). Freeform Sector labels
+  // classify by keyword into the 4 abstract industries. Fallback to the
+  // frozen v2.4 pool only if the ledger read fails outright.
+  var FALLBACK_INDUSTRY_BIZ_POOL = {
     tech:     ["BIZ-00001", "BIZ-00008", "BIZ-00009", "BIZ-00010", "BIZ-00011", "BIZ-00030"],
     service:  ["BIZ-00012", "BIZ-00015", "BIZ-00025", "BIZ-00026", "BIZ-00033", "BIZ-00043", "BIZ-00044", "BIZ-00045"],
     public:   ["BIZ-00013", "BIZ-00014", "BIZ-00016", "BIZ-00017", "BIZ-00019", "BIZ-00023", "BIZ-00024", "BIZ-00032"],
     creative: ["BIZ-00018", "BIZ-00028", "BIZ-00038", "BIZ-00039", "BIZ-00036"]
   };
 
+  function classifySectorToIndustry_(sector) {
+    var s = String(sector || '').toLowerCase();
+    if (/tech|software|cloud|\bai\b|analytics|platform|agent|biotech|intelligence|coworking|venture/.test(s)) return 'tech';
+    if (/media|journal|gallery|entertainment|nightlife|music|design|architect|arts/.test(s)) return 'creative';
+    if (/public|municipal|government|transit|utilit|civic|education|healthcare|legal|judicial|safety|\bport\b|logistic|faith|community|housing|social/.test(s)) return 'public';
+    return 'service'; // restaurants, retail, bars, construction, real estate, sports venues
+  }
+
+  var INDUSTRY_BIZ_POOL = (function buildLivePools_() {
+    try {
+      var bizSheet = ctx.ss ? ctx.ss.getSheetByName('Business_Ledger') : null;
+      if (!bizSheet) throw new Error('Business_Ledger not found');
+      var bizData = bizSheet.getDataRange().getValues();
+      if (bizData.length < 2) throw new Error('Business_Ledger empty');
+      var bh = bizData[0];
+      var bIdCol = -1, bSectorCol = -1;
+      for (var bc = 0; bc < bh.length; bc++) {
+        var h = String(bh[bc]).trim();
+        if (h === 'BIZ_ID') bIdCol = bc;
+        if (h === 'Sector') bSectorCol = bc;
+      }
+      if (bIdCol < 0 || bSectorCol < 0) throw new Error('BIZ_ID/Sector column missing');
+      var pools = { tech: [], service: [], public: [], creative: [] };
+      for (var br = 1; br < bizData.length; br++) {
+        var bizId = String(bizData[br][bIdCol] || '').trim();
+        if (!bizId) continue;
+        pools[classifySectorToIndustry_(bizData[br][bSectorCol])].push(bizId);
+      }
+      // A live pool can legitimately be thin; only an all-empty result is a failure.
+      if (!pools.tech.length && !pools.service.length && !pools.public.length && !pools.creative.length) {
+        throw new Error('all pools empty');
+      }
+      return pools;
+    } catch (e) {
+      Logger.log('runCareerEngine: live Business_Ledger pool build failed (' + e.message + ') — using frozen v2.4 fallback');
+      return FALLBACK_INDUSTRY_BIZ_POOL;
+    }
+  })();
+
   function resolveNewBizId_(industry) {
-    var pool = INDUSTRY_BIZ_POOL[industry] || INDUSTRY_BIZ_POOL["service"];
+    var pool = INDUSTRY_BIZ_POOL[industry];
+    if (!pool || !pool.length) pool = INDUSTRY_BIZ_POOL["service"];
+    if (!pool || !pool.length) pool = FALLBACK_INDUSTRY_BIZ_POOL["service"];
     return pool[Math.floor(roll() * pool.length)];
   }
 

@@ -1167,6 +1167,7 @@
   Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.weather, S.weatherMood, S.worldEvents
   Writes: S.careerEvents, S.careerSignals, S.eventsGenerated
   Config: ctx.config.cycleCount, ctx.config.rngSeed
+  Sheets: Business_Ledger
   RNG: ctx.rng / safeRand_(ctx)
 
 ### runCivicElectionsv1.js

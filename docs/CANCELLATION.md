@@ -1,5 +1,7 @@
 # GodWorld — Cancellation Plan
 
+**Last refreshed:** 2026-07-08 (Cycle 101). Live state at refresh: ~913 citizens in Simulation_Ledger, 90+ editions published to Drive/GitHub, engine running on Apps Script against the prod sheet. This doc is the runbook to wind it down — reading it changes nothing; you execute each step yourself.
+
 ## Monthly Costs
 
 | Service | Cost | Cancel Where |
@@ -15,9 +17,11 @@
 
 | Service | Cancel Where | Notes |
 |---------|-------------|-------|
-| Discord bot | discord.com/developers → delete app | Or just stop PM2 process |
+| **Apps Script engine** | script.google.com → GodWorld project → delete, OR delete the cycle trigger | The live simulation engine. Bound to the prod sheet; runs cycles via a time/manual trigger. Stops the moment you stop triggering it — nothing bills. Separate from Riley triggers below. |
+| Google Sheets (prod + sandbox) | Delete files manually | Prod = `Simulation_Narrative`; a separate sandbox sheet also exists. Free tier, nothing to cancel — they just sit there. |
+| Discord bot | discord.com/developers → delete app | Or just stop the PM2 process |
 | Moltbook | moltbook.com | Deactivate if needed |
-| Google Drive / Sheets | Delete files manually | Free tier, nothing to cancel |
+| Google Drive | Delete files manually | Editions, PDFs, Mara audits. Free tier, nothing to cancel |
 | GitHub repo (pnils08/GodWorld) | github.com → repo settings → delete | Or leave it, free forever |
 | Riley Apps Script triggers | script.google.com → My Triggers → delete all | Free, but running on timers |
 | Google service account | console.cloud.google.com | Free tier |
@@ -44,9 +48,10 @@
 - together.ai → account settings → delete API key or close account
 - Only charges on usage — if nothing is running, cost is zero
 
-### Step 5: Riley Triggers (free but running)
+### Step 5: Stop the engine + Riley triggers (free but running)
 - script.google.com/home → My Triggers
-- Delete all triggers to stop CoreSync, PressPulse, heartbeats, integrity logger
+- Delete the GodWorld cycle trigger (stops the simulation engine from advancing)
+- Delete Riley triggers to stop CoreSync, PressPulse, heartbeats, integrity logger
 - These run every few hours on your Google account and will keep running until you stop them
 
 ## What's Permanent
@@ -54,17 +59,19 @@
 | Action | What you lose | Reversible? |
 |--------|--------------|-------------|
 | Destroy DO droplet | Server, dashboard, Discord bot, claude-mem, local files | No |
-| Delete Supermemory account | 90 editions of canon, world-data, session memory | No |
+| Delete Supermemory account | 90+ editions of canon, world-data, session memory | No |
 | Delete GitHub repo | All code, all commit history, all session work | No |
 | Cancel Anthropic | CLI access, scheduled agents | Yes — re-subscribe anytime |
 | Delete Drive files | Sheets, editions on Drive, Riley backups | No |
+| Delete the prod/sandbox Sheets | The ledger — 913 citizens, all cycle state | No |
+| Delete Apps Script project | The engine deploy target | Yes — code is in the GitHub repo; re-push with clasp |
 | Delete Riley triggers | Automated scripts stop | Yes — re-enable anytime |
 
 ## What to Back Up Before Destroying
 
 If you want to keep anything:
-- **GitHub repo** — already backed up (it's on GitHub). Leave it.
-- **Google Sheets** — Simulation_Ledger, Bay Tribune, all Riley sheets stay on your Google account for free
+- **GitHub repo** — already backed up (it's on GitHub). Leave it. All engine code lives here, including the not-yet-deployed work.
+- **Google Sheets** — Simulation_Ledger, Bay Tribune, all Riley sheets stay on your Google account for free. The ledger is the world; if you keep one thing, keep this.
 - **Google Drive files** — editions, PDFs, Mara audits stay on Drive for free
 - **Supermemory data** — no export tool. Once cancelled and deleted, the canon is gone. The editions exist as .txt files on Drive and GitHub though.
 
@@ -73,7 +80,8 @@ If you want to keep anything:
 If you want to pause, not delete:
 1. Cancel Anthropic ($100) — biggest cost, immediate savings
 2. Cancel Supermemory ($9)
-3. Keep DO droplet running ($12-24) if you might come back — or destroy it
-4. Everything on Google is free — leave it
+3. Delete the cycle trigger so the engine stops advancing (free, but stops churn)
+4. Keep DO droplet running ($12-24) if you might come back — or destroy it
+5. Everything on Google is free — leave it
 
-That cuts you to $0-24/mo instead of $121-133.
+That cuts you to $0-24/mo instead of $121-133. Nothing on Google or GitHub is deleted, so the world is fully recoverable if you come back.

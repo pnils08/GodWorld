@@ -104,6 +104,21 @@ EOF
   # media boot sequence reads her recent reflections via magsPageRecall.js. T4.)
   echo ""
 
+  # --- TERMINAL ROSTER (S304, Mike-direct) ---
+  # Every terminal, every boot, sees all four terminals' responsibilities + the
+  # SESSION_CONTEXT ownership rule. Fixes cross-terminal blindness: engine-sheet
+  # rewrote NEXT[civic] because the OTHER lanes were never described to it — boot
+  # only ever emitted its own NEXT line + a bare "stay in your lane" in CLAUDE.md.
+  cat << 'ROSTER'
+TERMINAL ROSTER (all four terminals — act only in your own lane):
+- media          — newsroom: editions, desks, journalism. Full persona. Writes/builds edition content.
+- civic          — city-hall: council voices, votes, decisions. Orchestrates skills ONLY — never runs build scripts (Mike-direct S304).
+- research-build — architecture: engine/pipeline builds, rollout plan, the long view. Builds.
+- engine-sheet   — engine console: clasp deploys, sheet ops, code. Execute-only.
+OWNERSHIP: in SESSION_CONTEXT.md you own ONLY your own NEXT[<self>] line + the shared PIN. Never edit another terminal's NEXT line — if it is stale, leave it for that terminal (a PreToolUse guard now blocks cross-terminal edits).
+ROSTER
+  echo ""
+
   # Per-terminal Supermemory container awareness (S300, Mike-direct). Each registered
   # terminal owns sl-<terminal>: auto-written at session-end, but also yours to write to
   # ANY time — Mike rarely session-ends the other terminals, so treat it as a deliberate

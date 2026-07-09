@@ -29,7 +29,24 @@
       "mcp__claude_ai_Google_Drive__list_recent_files",
       "mcp__claude_ai_Google_Drive__read_file_content",
       "mcp__claude_ai_Google_Drive__download_file_content",
-      "mcp__claude_ai_Google_Drive__search_files"
+      "mcp__claude_ai_Google_Drive__search_files",
+      "mcp__claude_ai_Google_Drive__create_file",
+      "mcp__claude_ai_Google_Drive__copy_file",
+      "Read(//root/GodWorld/**)",
+      "Edit(//root/GodWorld/**)",
+      "Write(//root/GodWorld/**)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(node scripts/buildDeskPackets*)",
+      "Bash(node scripts/buildWorldSummary*)",
+      "Bash(node scripts/buildInitiativePackets*)",
+      "Bash(node scripts/queryLedger*)",
+      "Bash(node scripts/queryFamily*)",
+      "Bash(node scripts/magsPageRecall*)"
     ],
     "deny": [
       "Bash(git push --force *)",
@@ -59,7 +76,6 @@
       "Write(**/.env*)"
     ],
     "ask": [
-      "Bash(git push *)",
       "Bash(git merge *)",
       "Bash(git rebase *)",
       "Bash(clasp *)",
@@ -78,8 +94,6 @@
       "Write(CLAUDE.md)",
       "Edit(.claude/rules/**)",
       "Write(.claude/rules/**)",
-      "Edit(.claude/settings.json)",
-      "Write(.claude/settings.json)",
       "Edit(.claude/hooks/**)",
       "Write(.claude/hooks/**)",
       "Edit(.claude/agents/**)",
@@ -116,6 +130,18 @@
             "type": "command",
             "command": "node /root/GodWorld/scripts/rolloutPointerGuard.js",
             "if": "Write(docs/plans/**)",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "bash /root/GodWorld/.claude/hooks/session-context-ownership-guard.sh",
+            "if": "Edit(SESSION_CONTEXT.md)",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "bash /root/GodWorld/.claude/hooks/session-context-ownership-guard.sh",
+            "if": "Write(SESSION_CONTEXT.md)",
             "timeout": 10
           }
         ]

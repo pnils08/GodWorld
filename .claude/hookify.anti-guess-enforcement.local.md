@@ -1,6 +1,6 @@
 ---
 name: anti-guess-enforcement
-enabled: true
+enabled: false
 event: prompt
 conditions:
   - field: user_prompt

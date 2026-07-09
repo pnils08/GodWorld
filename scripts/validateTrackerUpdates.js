@@ -50,6 +50,14 @@ function hasTrackerWork(tu) {
   return tu && typeof tu === 'object' && Object.keys(tu).length > 0;
 }
 
+// Mirror of applyTrackerUpdates WRITEBACK_FIELDS — the only columns that reach
+// the sheet. Keep in sync (S304 G-INIT1).
+const WRITEBACK_FIELDS = ['ImplementationPhase', 'MilestoneNotes', 'NextScheduledAction', 'NextActionCycle', 'VoteCycle'];
+
+function hasWritableField(tu) {
+  return WRITEBACK_FIELDS.some(f => tu && tu[f] != null && String(tu[f]).trim() !== '');
+}
+
 // Core: validate a list of normalized records. Each record:
 //   { source, shape:'object'|'flat-array-element', initiativeId, trackerUpdates }
 // Returns { violations[], warnings[], stamps[] } (each entry { source, code, detail }).
@@ -72,6 +80,15 @@ function validateRecords(records) {
         detail: 'trackerUpdates present but no resolvable InitiativeID (trackerUpdates.initiative / InitiativeID / relatedInitiatives) — the write would be dropped' });
     }
 
+    // G-INIT1 — nested-fields schema drift (C100 INIT-001 signature): agent
+    // wrapped its payload in trackerUpdates.fields{} with free-form names.
+    // assembleDecisions reads only flat canonical keys, so the entire update
+    // silently evaporates → HARD.
+    if (tu.fields && typeof tu.fields === 'object') {
+      violations.push({ source: src, code: 'nested-fields-schema',
+        detail: 'trackerUpdates wraps its payload in a nested "fields" object — the pipeline reads only flat canonical keys (' + WRITEBACK_FIELDS.join(', ') + '); the update would be silently dropped. Flatten to the RULES.md schema.' });
+    }
+
     // ImplementationPhase canonicalization
     if (tu.ImplementationPhase != null && String(tu.ImplementationPhase).trim() !== '') {
       const res = C.canonicalizePhase(tu.ImplementationPhase);
@@ -92,6 +109,26 @@ function validateRecords(records) {
       }
     }
   }
+
+  // G-INIT1 — initiative-dark (per-initiative aggregate): the initiative has
+  // tracker-bearing statements this cycle, but NONE carries a writable field,
+  // so it receives no tracker write at all and silently sits on stale data
+  // (C100: INIT-001 stuck on C99 while every other initiative advanced).
+  // Per-statement zero-writable is fine (advisory/secondary voices); the HARD
+  // condition is the whole initiative going dark. Empirical grain check:
+  // C97-C99 post-conformance cycles produce zero hits; C100 flags exactly
+  // INIT-001.
+  const byInitiative = {};
+  for (const rec of records) {
+    if (!rec.initiativeId || !hasTrackerWork(rec.trackerUpdates)) continue;
+    (byInitiative[rec.initiativeId] = byInitiative[rec.initiativeId] || []).push(rec);
+  }
+  for (const [initId, recs] of Object.entries(byInitiative)) {
+    if (recs.some(r => hasWritableField(r.trackerUpdates))) continue;
+    violations.push({ source: recs.map(r => r.source).join(' + '), code: 'initiative-dark',
+      detail: `${initId}: ${recs.length} trackerUpdates-bearing record(s) but zero writable fields (${WRITEBACK_FIELDS.join(', ')}) across all of them — the initiative would receive NO tracker write this cycle and go dark on stale data` });
+  }
+
   return { violations, warnings, stamps };
 }
 

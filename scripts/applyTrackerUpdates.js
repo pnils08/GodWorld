@@ -348,6 +348,26 @@ function summarizeSchemaAudit(audit) {
 async function main() {
   console.log(`\n=== applyTrackerUpdates.js — Cycle ${CYCLE} ${APPLY ? '(LIVE WRITE)' : '(DRY RUN)'} ===\n`);
 
+  // S304 G-INIT1 — structural pre-write validation. The S265 validator was
+  // never wired into any run path, so C100's stabilization-fund schema drift
+  // (nested trackerUpdates.fields{}) sailed through and INIT-001 went dark on
+  // C99 data. Running it here makes the gate unskippable for every tracker
+  // write; --skip-validator is the explicit operator override.
+  if (!process.argv.includes('--skip-validator')) {
+    const validator = require('./validateTrackerUpdates');
+    const vres = validator.validateCycle(CYCLE);
+    if (vres.violations.length > 0) {
+      console.error(`VALIDATION FAILED — ${vres.violations.length} HARD violation(s) for cycle ${CYCLE}:`);
+      vres.violations.forEach(v => console.error(`  ✗ [${v.code}] ${v.source}\n      ${v.detail}`));
+      console.error('\nResolve the agent output (or rerun with --skip-validator to override) before writing the tracker.');
+      process.exit(1);
+    }
+    if (vres.warnings.length > 0) {
+      vres.warnings.forEach(w => console.log(`  ! [${w.code}] ${w.source} — ${w.detail}`));
+      console.log('');
+    }
+  }
+
   // S215 civic.9b — voice schema audit. Surface collisions + deprecation
   // pre-flight; non-blocking during the C94-C95 transition.
   const audit = auditVoiceStatementSchema(CYCLE);

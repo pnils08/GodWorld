@@ -60,10 +60,35 @@ ok(r6.violations.length === 0 && r6.warnings.length === 0 && r6.stamps.length ==
 
 // G-R3 shape: bare InitiativeID only (no phase, no notes) — not a hard block here
 // (the gate defaults MilestoneNotes); attribution present so no violation.
+// G-R3 amended by G-INIT1 (S304): a bare-InitiativeID record is correctly
+// attributed (no missing-attribution violation), but if it is the initiative's
+// ONLY tracker-bearing record the gate skips the write entirely ("No changes
+// needed") and the initiative goes dark — that is now a HARD initiative-dark.
 var r7 = validateRecords([
   { source: 'voice:oari#s1', shape: 'object', initiativeId: 'INIT-002', trackerUpdates: { InitiativeID: 'INIT-002' } },
 ]);
-ok(r7.violations.length === 0, 'G-R3: bare-InitiativeID record is attributed → no hard violation (gate defaults notes)');
+ok(!has(r7.violations, 'missing-initiative-attribution'), 'G-R3: bare-InitiativeID record is attributed → no missing-attribution violation');
+ok(has(r7.violations, 'initiative-dark'), 'G-INIT1: bare-InitiativeID as the initiative\'s only record → initiative-dark HARD');
+
+console.log('=== G-INIT1 (C100 INIT-001 dark-initiative cases) ===');
+
+// Nested-fields schema drift (exact C100 Webb signature) → HARD
+var r8 = validateRecords([
+  { source: 'voice:stabilization_fund#SF-C100-001', shape: 'object', initiativeId: 'INIT-001',
+    trackerUpdates: { initiative: 'INIT-001', fields: { ImplementationPhase: 'Active — Disbursement', StatusNote: 'pace held' } } },
+]);
+ok(has(r8.violations, 'nested-fields-schema'), 'G-INIT1: nested trackerUpdates.fields{} → HARD (payload would silently drop)');
+ok(has(r8.violations, 'initiative-dark'), 'G-INIT1: nested-fields statement as only record → initiative also flagged dark');
+
+// Advisory statement with zero writable fields is fine when ANOTHER statement
+// for the same initiative carries writable fields → no dark flag.
+var r9 = validateRecords([
+  { source: 'voice:opp_faction#s1', shape: 'object', initiativeId: 'INIT-002', trackerUpdates: { initiative: 'INIT-002' } },
+  { source: 'voice:oari#s1', shape: 'object', initiativeId: 'INIT-002',
+    trackerUpdates: { initiative: 'INIT-002', ImplementationPhase: 'dispatch-live', MilestoneNotes: 'C100: live' } },
+]);
+ok(!has(r9.violations, 'initiative-dark'), 'G-INIT1: advisory zero-writable stmt + owner stmt with fields → NOT dark');
+ok(r9.violations.length === 0, 'G-INIT1: mixed advisory/owner set is fully clean');
 
 // Integration regression (S265 review HIGH fix): a project-file voice statement
 // with NO explicit initiative must resolve via the pipeline's attributeInitiative

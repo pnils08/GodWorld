@@ -784,11 +784,31 @@ async function main() {
     ]
   });
 
+  // engine.43 T4 — session-boundary flush of citizen-voice conversation buffers.
+  // Each flushVoiceBuffer() checks its own 30-min idle boundary; the sweep just ticks it.
+  // Boot sweep covers buffers stranded by a pm2 restart or crash mid-conversation.
+  function sweepVoiceBuffers(where) {
+    personas.forEach(function (provider) {
+      if (typeof provider.flushVoiceBuffer !== 'function') return; // Mags provider has no buffer
+      provider.flushVoiceBuffer(false).then(function (res) {
+        if (res && res.flushed) {
+          log.info('[' + provider.label + '] voice buffer flushed (' + where + '): event=' +
+            (res.event || '-') + ' affect=' + (res.affect || '-') + (res.offVocab ? ' (off-vocab, no intake row)' : ''));
+        }
+      }).catch(function (err) {
+        log.error('[' + provider.label + '] voice buffer flush failed (' + where + '): ' + err.message);
+      });
+    });
+  }
+  var VOICE_FLUSH_SWEEP_MS = 5 * 60 * 1000;
+  setInterval(function () { sweepVoiceBuffers('idle-sweep'); }, VOICE_FLUSH_SWEEP_MS);
+
   client.once(Events.ClientReady, function(readyClient) {
     log.info('Logged in as ' + readyClient.user.tag);
     log.info('Guilds: ' + readyClient.guilds.cache.size);
     log.info('Watching ' + personas.size + ' channel(s): ' +
       Array.from(personas.entries()).map(function (e) { return e[1].label + '@' + e[0]; }).join(', '));
+    sweepVoiceBuffers('boot'); // stale-buffer flush after restart/crash (S298 durability amendment)
   });
 
   client.on(Events.MessageCreate, async function(message) {

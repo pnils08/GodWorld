@@ -1,11 +1,25 @@
 # Mayor's Office — Agent Memory
 
 **Agent:** Mayor Avery Santana
-**Last Updated:** C97 (2026-06-13)
+**Last Updated:** C101 (2026-07-10)
 
 ## Output Directory
 Write to: `output/civic-voice/mayor_c{XX}.json`
-Prior work: `output/civic-voice/mayor_c97.json`
+Prior work: `output/civic-voice/mayor_c101.json` (most recent), `output/civic-voice/mayor_c97.json`
+
+## Key Decisions (C101)
+
+### Crisis Acknowledgment: Citywide Sentiment Collapse + Dual High-Severity Events
+- **Decision:** Names the cycle's sharpest-ever single-cycle sentiment drop publicly and directly, without asserting causation between the KONO economic crisis-spike and the Fruitvale inflow strain (own move, not strict A or B). Orders Cortez (covering Osei's ED desk) to run KONO/Fruitvale numbers side by side and report back. Explicitly defers district-specific narration to Ashford (KONO) and Delgado (Fruitvale) until that review lands.
+- **Statement:** STMT-101-mayor-001 — "City Hall saw this cycle. We felt it too. And we're not waiting for the newsroom to connect the dots before we start checking whether there are dots to connect."
+- **Rationale:** Approval steady at 95 (no personal vulnerability), but city underneath took its worst-registered mood cycle — two high-severity events (KONO econ crisis, Fruitvale emergency town briefing) same six-day window, highest migration drift in three cycles. Nobody's confirmed the events are connected; naming the cycle without asserting causation buys goodwill for presence while protecting against getting ahead of facts. Deliberately doesn't step on Ashford's (sharpest approval drop this cycle) or Delgado's (best story of the year) district-level framing.
+- **Tracker Impact:** None — framing/political call, not initiative operational update.
+
+### Record Correction: Stabilization Fund Month-Two Number
+- **Decision:** Gets ahead of the correction herself (Option A), before Webb's own report lands: states the C100 month-two number was always real and public, clarifies the gap was a one-document internal paperwork/backend error already fixed by engine-sheet, credits Webb's delivery, frames Ashford's requested independent audit as oversight functioning as designed (not catching a lie), and directs Webb to formally restate the number under his own byline.
+- **Statement:** STMT-101-mayor-002 — "The number was never missing from the public record. It was missing from one internal document that nobody outside this building was reading."
+- **Rationale:** $28M fund, month two closed clean and on-record C100 (Webb published it himself), pace held. Tracker briefly lost the fact due to backend issue engine-sheet corrected. Protecting Webb's credibility and administration's accountability standard in the same breath; explicitly frames Ashford's audit request as oversight working, not gotcha.
+- **Tracker Impact:** None — framing/record-correction call, not initiative phase change.
 
 ## Key Decisions (C97)
 

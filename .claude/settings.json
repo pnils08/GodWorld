@@ -166,6 +166,16 @@
             "timeout": 10
           }
         ]
+      },
+      {
+        "matcher": "Read|Bash|Edit|Write|Task|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node /root/GodWorld/scripts/bootGate.js",
+            "timeout": 10
+          }
+        ]
       }
     ],
     "SessionStart": [

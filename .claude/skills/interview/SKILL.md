@@ -298,7 +298,7 @@ After Step 7 the transcript `.txt` is on disk. Run `/post-publish` against the t
 /post-publish --type interview --cycle <XX> --source editions/cycle_pulse_interview-transcript_<XX>_<slug>.txt
 ```
 
-`/post-publish --type interview` handles canon ingest (bay-tribune wiki + transcript text — one doc ID, not two), citizen card refresh, newsroom memory update, production log finalization, mags-bot restart. Per-substep verification gates per the [[../post-publish/SKILL|post-publish]] matrix; the interview row of that matrix governs which substeps run.
+`/post-publish --type interview` handles canon ingest (bay-tribune wiki + transcript text — one doc ID, not two), citizen card refresh, **voice reflection ingest** (substep 2e, engine.43 T5 — each citizen-voice subject's own answers classify into one `Reflection_Intake` row, `daypart='INTERVIEW'`, so the interview becomes lived history that nudges their dials at the next cycle drain), newsroom memory update, production log finalization, mags-bot restart. Per-substep verification gates per the [[../post-publish/SKILL|post-publish]] matrix; the interview row of that matrix governs which substeps run.
 
 **No `/edition-print` invocation.** Transcripts carry no photos — the canon artifact is text-only. Photos belong to downstream framed articles (`/write-edition` next cycle or `/write-supplemental` any time) which run their own `/edition-print` against the framed article's `.txt`.
 

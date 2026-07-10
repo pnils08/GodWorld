@@ -42,6 +42,7 @@ Flags:
 | 1b text ingest | ✓ | ✓ (transcript only — see §Step 1) | ✓ | ✓ |
 | 2a citizen cards | ✓ | ✓ | ✓ | ✓ |
 | 2a-cul cultural cards | — | ✓ (when CUL-IDs present) | ✓ (when CUL-IDs present) | ✓ (when CUL-IDs present) |
+| 2e voice reflection ingest | — | ✓ (citizen-voice subjects only) | — | — |
 | 2b new businesses | ✓ | ✓ | ✓ | ✓ |
 | 2d truesource sweep | ✓ | — | ✓ | — |
 | 2c world summary | ✓ | — | — | — |
@@ -148,6 +149,22 @@ node scripts/buildCulturalCards.js --apply --cul <CUL-ID>
 Skipped for `--type edition` by default — edition NAMES INDEX entries are typically Sim_Ledger citizens with established cards. If a future edition surfaces CUL-only entries, the substep activates the same way (matrix flip + run).
 
 **Verification gate:** for each CUL-ID in source NAMES INDEX, `lookup_cultural(name)` returns a card with `last_appeared` reflecting this cycle. If no CUL-IDs in NAMES INDEX, substep skipped with stdout "0 cultural-only entries — substep N/A this artifact." Plan reference: [[../../../docs/plans/2026-04-30-dispatch-gap-followups]] Task E6 (closes the Brody Kale unrefreshed gap from S188).
+
+**2e. Voice reflection ingest** (`--type interview` — only when an interview subject is a citizen-voice agent, i.e. their POPID appears in a `.claude/agents/citizen-voice-*/IDENTITY.md`)
+
+engine.43 T5: an interview becomes real lived history for a voiced citizen — their answers drain into the same `Reflection_Intake` pipeline the 24/7 wake loop writes, so the next cycle's drain nudges their dials and their tension register carries across surfaces (a tension opened at a wake can resolve in an interview, and vice versa).
+
+For each citizen-voice subject:
+1. Extract that citizen's OWN answers from the transcript (never the reporter's questions, never another subject's words — S298: the other party's words must not color the dial nudge) into a scratch file, answers only, in order.
+2. Drain (dry-run first, then live):
+```bash
+node -e "require('/root/GodWorld/lib/env');require('/root/GodWorld/lib/personaProvider').drainConversationReflection_('<POPID>', require('fs').readFileSync('<answers-file>','utf8'), 'INTERVIEW', {dryRun:true}).then(r=>console.log(JSON.stringify(r)))"
+# inspect event/affect/tension, then re-run without {dryRun:true}
+```
+
+One `Reflection_Intake` row per citizen interviewed (`daypart='INTERVIEW'`, `applied='no'`, gated — the cycle drain picks it up like any WAKE row). Tension open/resolve mirrors wake step 3 (cap 3, typed page lines). Re-running the same transcript is a no-op (`duplicate: true` — snippet-matched idempotency guard). Skipped with "0 citizen-voice subjects — substep N/A" when no subject is a voiced agent.
+
+**Verification gate:** live run returns `{"drained":true,...}` per citizen-voice subject (or `duplicate:true` on re-run); no page-prose writes beyond typed tension lines (ADR-0014 — conversational prose never lands on the Supermemory citizen page).
 
 **2b. New businesses**
 Flagged here for visibility; actual writes happen in Step 5 via `ingestPublishedEntities.js` (which reads BUSINESSES NAMED and appends new entries to Business_Ledger).

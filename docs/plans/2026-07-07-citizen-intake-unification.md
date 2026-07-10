@@ -93,7 +93,7 @@ pointers:
   3. Ambiguous extractions ride the same `IntakeStatus=review` lane; the skill surfaces review rows in its close-out summary.
 - **Verify:** run against the latest published edition on sandbox; Intake rows appear; next engine cycle mints/updates; zero direct SL writes from the media lane.
 - **Depends on:** T1–T6 shipped + T7 clean.
-- **Status:** [ ] not started
+- **Status:** [x] built S305 (research-build). `ingestPublishedEntities.js` citizen path redirected SL-append → lean Intake rows (genuinely-NEW citizens only, First/Last/Notes; POPID/demographics minted by engine); `appendCitizens`/`NEW_CITIZEN_DEFAULTS`/`citizenDerivation` removed (SL-write path deleted structurally). `/post-publish` Step 5 + 5-bis retargeted. Dry-run verified: E100 (0 SL writes) + synthetic mint-branch (fabricated name → correct lean row). **AC-4/step-2 amendment (measure-twice reversal):** existing citizens are NOT emitted as bump rows — the cycle-path `processMediaUsage_` already bumps their `UsageCount` off the same media paste the edition is compiled from, so re-emitting would double-count fame. Existing-citizen bump stays owned upstream. **Consequence:** new-citizen POPIDs + wd-cards lag one cycle (engine-assigned at mint) — re-opens G-P32 same-session closure, accepted tradeoff. Live sandbox `--apply` rides Mike's T7 cycle-fire (sandbox only — prod gated on C101 smoke window).
 
 ### Task 7: Sandbox verification cycle
 - **Steps:**
@@ -110,3 +110,4 @@ pointers:
 - 2026-07-07 — T1 amended (Mike-direct): lean 9-col operator schema replaces 21-col first cut; tab created on sandbox (had not existed). T1–T3 shipped 6d385ac4.
 - 2026-07-07 — Task 8 added (Mike-direct): research-build wires intake extraction into /post-publish against the pre-PDF .txt/.md; gated on T7 clean.
 - 2026-07-07 — T4+T5 shipped 595c4665 (lean router, shared matcher, routed data-loss guard, income re-derive). T6 REVERSED: integrate scripts are bulk-integration carve-outs, headers documented; AC-4 amended. T7 test rows staged on sandbox.
+- 2026-07-10 — T8 built (research-build, S305): ingest citizen path → lean Intake rows; /post-publish Step 5 + 5-bis retargeted; dry-run verified on E100 (0 SL writes). New-citizen card one-cycle lag = accepted tradeoff. Detail in Task 8 §Status.

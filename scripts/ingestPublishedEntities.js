@@ -4,20 +4,24 @@
  * [engine/sheet] — S180 build, ROLLOUT_PLAN "BUILD: Standing intake"
  *
  * Reads NAMES INDEX + BUSINESSES NAMED sections from a published .txt
- * (edition / interview / supplemental / dispatch / interview-transcript)
- * and writes new entities to the canonical engine sheets:
- *   - Simulation_Ledger (citizens) — only entities not already present
- *   - Business_Ledger (businesses) — only entities not already present
+ * (edition / interview / supplemental / dispatch / interview-transcript).
  *
- * Existing citizens and businesses are NEVER modified; mismatches are logged
- * for editorial review, not silently overwritten. Citizens stay where they
- * are — Simulation_Ledger is canon.
+ * CITIZENS (engine.51 T8, S305): the media lane no longer writes
+ * Simulation_Ledger directly. Genuinely-NEW extracted citizens emit lean 9-col
+ * rows (First/Last/Notes only) to the `Intake` tab; the engine's processIntake_
+ * mints them — POPID, demographics, income — deterministically next cycle.
+ * Consequence: new-citizen POPIDs + wd-cards now lag one cycle (assigned at
+ * engine mint, not at extraction).
+ *   - EXISTING citizens are NOT emitted: their UsageCount is already bumped by
+ *     the cycle-path processMediaUsage_ (phase05) off the same media paste the
+ *     edition is compiled from; re-emitting here would double-count fame.
+ *   - canon-drift (bay-tribune-known, SL-missing) stays deferred to
+ *     engine-sheet backfill per ADR-0007 — NOT routed to Intake.
+ *   - ambiguous / phantom / cultural-only stay logged, not written.
  *
- * New citizens land with Status=`pending`, Tier=4, ClockMode=ENGINE, and
- * blank demographic columns. The engine fills the missing columns next
- * cycle (a future maintenance script will sweep `Status=pending` rows
- * and complete demographics from canon sources). New businesses land with
- * cols A–D filled, E–I blank.
+ * BUSINESSES: unchanged — new entries append to Business_Ledger (cols A–D
+ * filled, E–I blank). Not a citizen path, so outside the "zero SL writes"
+ * invariant.
  *
  * Closes the /post-publish Step 5 "NOT WIRED" gap.
  *
@@ -50,20 +54,13 @@ require('/root/GodWorld/lib/env');
 const fs = require('fs');
 const path = require('path');
 const { google } = require('googleapis');
-const citizenDerivation = require('../lib/citizenDerivation');  // S184 (Phase 4.1.c) — intake-side derivation library
 const formatContract = require('./emitFormatContractSections');  // S197 BUNDLE-A — CITIZEN USAGE LOG fallback
 
 const ALLOWED_TYPES = ['edition', 'interview', 'supplemental', 'dispatch', 'interview-transcript'];
 
-// New-citizen defaults (col → value). Cols absent from this map ship blank.
-const NEW_CITIZEN_DEFAULTS = {
-  'UNI (y/n)': 'no',
-  'MED (y/n)': 'no',
-  'CIV (y/n)': 'no',
-  'ClockMode': 'ENGINE',
-  'Tier': '4',
-  'Status': 'pending',
-};
+// engine.51 T8 (S305): the SL-append path (appendCitizens + NEW_CITIZEN_DEFAULTS
+// + the citizenDerivation demographic draw) was removed. Citizens now emit lean
+// Intake rows and the engine does all completion. See appendIntakeRows below.
 
 // ---------------------------------------------------------------------------
 // T11 canon.3 / ADR-0007 §POPID aliasing — cross-layer canonical resolution.
@@ -661,8 +658,9 @@ async function resolveCitizens(parsed, sheetsClient, sheetId) {
     }
   }
 
-  // S184 (Phase 4.1.c) — pass raw rows through so appendCitizens can build a
-  // ledgerFreq snapshot without a second sheet fetch.
+  // headers/rows/maxPopNum retained for backward compat + the console POPID
+  // hint; the citizen write path (engine.51 T8) no longer consumes them —
+  // the engine assigns POPIDs at mint.
   return { headers, matched, phantom, ambiguous, candidates, culturalOnly, maxPopNum, rows };
 }
 
@@ -728,91 +726,74 @@ async function resolveBusinesses(parsed, sheetsClient, sheetId) {
 // ---------------------------------------------------------------------------
 // Append rows + verify
 // ---------------------------------------------------------------------------
-async function appendCitizens(candidates, headers, maxPopNum, sheetsClient, sheetId, ledgerRows) {
-  if (candidates.length === 0) return [];
+// engine.51 T8 (S305): assemble lean Intake rows for genuinely-NEW citizens only.
+// Emits First/Last/Notes — Age/Neighborhood/RoleType/Category/Family/IntakeStatus
+// stay blank so the engine (processIntake_) does all deterministic completion +
+// POPID mint next cycle.
+//
+// Existing citizens are deliberately NOT emitted as bump rows: the cycle-path
+// media-usage engine (`processMediaUsage_`, phase05 processAdvancementIntake.js)
+// already bumps SL.UsageCount for citizens named in the media room via
+// Citizen_Media_Usage, using the same S302 normalized matcher. The published
+// edition is compiled from that same paste, so re-emitting existing names here
+// would double-count UsageCount and inflate fame. Existing-citizen usage stays
+// owned upstream; T8's job is the new-citizen mint front door.
+function buildIntakeRows(newCandidates, type, cycle) {
+  const label = type === 'edition' ? 'Edition' : type;
+  const provenance = label + ' C' + cycle;
+  const rows = [];
 
-  const now = new Date().toISOString();
-  const rowsToAppend = [];
-  const popIds = [];
-
-  // S184 (Phase 4.1.c) — build ledgerFreq snapshot once per ingest call for
-  // neighborhood-aware RoleType + EducationLevel draws. ledgerRows is the
-  // full sheet (header at row 0) passed through from resolveCitizens.
-  const ledgerFreq = ledgerRows && ledgerRows.length > 0
-    ? citizenDerivation.buildLedgerFreqSnapshot(headers, ledgerRows, { includesHeader: true })
-    : { byNeighborhood: {}, citywide: { roleTypes: {}, educationByAge: {} } };
-
-  for (let i = 0; i < candidates.length; i++) {
-    const c = candidates[i];
-    const popNum = maxPopNum + 1 + i;
-    const popId = 'POP-' + String(popNum).padStart(5, '0');
-    popIds.push(popId);
-
-    // S184 (Phase 4.1.c) — derive 8 demographic + lifecycle fields per candidate.
-    // Pre-T1 NAMES INDEX entries lack BirthYear / Neighborhood; defaults: age 38,
-    // neighborhood drawn by frequency-weighted citywide distribution.
-    //
-    // S232 canon.3 follow-up — letter-footer prose signals (c.signalAge / c.signalNeighborhood
-    // / c.signalGender / c.signalRole) populated by enrichCandidateWithProseSignals
-    // override the heuristic defaults below. Signals fire when E*.txt carries
-    // canonical footer rows like "— Keisha Morris, 51, West Oakland, counselor"
-    // or pronoun-weighted prose ≥2 male/female words near the name.
-    const seed = c.first + '|' + (c.last || '') + '|' + popId;
-    const birthYear = c.birthYear
-      ? parseInt(c.birthYear, 10)
-      : (c.signalAge ? 2041 - c.signalAge : 2003);
-    const age = 2041 - (Number.isFinite(birthYear) && birthYear > 1900 ? birthYear : 2003);
-    const effectiveNeighborhood = c.neighborhood || c.signalNeighborhood || '';
-    const profile = citizenDerivation.deriveCitizenProfile(seed, age, effectiveNeighborhood, ledgerFreq);
-
-    // Build row aligned with headers
-    const row = headers.map(h => {
-      if (h === 'POPID') return popId;
-      if (h === 'First') return c.first;
-      if (h === 'Middle') return c.middle || '';
-      if (h === 'Last') return c.last;
-      if (h === 'CreatedAt') return now;
-      if (h === 'Last Updated') return now;
-      if (h === 'BirthYear') return birthYear;
-      if (h === 'Neighborhood') return effectiveNeighborhood || profile._neighborhood;
-      if (h === 'RoleType') return c.signalRole || profile.RoleType;
-      if (h === 'EducationLevel') return profile.EducationLevel;
-      if (h === 'Gender') return c.signalGender || profile.Gender;
-      if (h === 'YearsInCareer') return profile.YearsInCareer;
-      if (h === 'DebtLevel') return profile.DebtLevel;
-      if (h === 'NetWorth') return profile.NetWorth;
-      if (h === 'MaritalStatus') return profile.MaritalStatus;
-      if (h === 'NumChildren') return profile.NumChildren;
-      if (NEW_CITIZEN_DEFAULTS[h] !== undefined) return NEW_CITIZEN_DEFAULTS[h];
-      return '';
-    });
-    rowsToAppend.push(row);
+  for (const c of newCandidates) {
+    // Story-established signals ride in Notes as provenance (never causal
+    // columns) so the operator/engine can see what the edition established.
+    const footer = [];
+    if (c.signalAge) footer.push('age ' + c.signalAge);
+    if (c.signalNeighborhood) footer.push(c.signalNeighborhood);
+    if (c.signalRole) footer.push(c.signalRole);
+    let notes = provenance + (c.description ? ': ' + c.description : '');
+    if (footer.length) notes += ' [footer: ' + footer.join(', ') + ']';
+    rows.push({ kind: 'new', first: c.first, last: c.last, notes: notes });
   }
+
+  return rows;
+}
+
+// ---------------------------------------------------------------------------
+// Append lean Intake rows + verify by readback
+// ---------------------------------------------------------------------------
+async function appendIntakeRows(intakeRows, sheetsClient, sheetId) {
+  if (intakeRows.length === 0) return [];
+
+  // Lean 9-col Intake schema: First | Last | Age | Neighborhood | RoleType |
+  // Category | Family | Notes | IntakeStatus. T8 fills First/Last/Notes only.
+  const values = intakeRows.map(r => [
+    r.first || '', r.last || '', '', '', '', '', '', r.notes || '', '',
+  ]);
 
   await sheetsClient.spreadsheets.values.append({
     spreadsheetId: sheetId,
-    range: 'Simulation_Ledger!A1',
+    range: 'Intake!A1',
     valueInputOption: 'RAW',
     insertDataOption: 'INSERT_ROWS',
-    requestBody: { values: rowsToAppend },
+    requestBody: { values: values },
   });
 
-  // Verify by readback
+  // Verify by readback of the tail (First/Last).
   const verifyRes = await sheetsClient.spreadsheets.values.get({
     spreadsheetId: sheetId,
-    range: 'Simulation_Ledger!A1:D',
+    range: 'Intake!A1:B',
   });
   const allRows = verifyRes.data.values || [];
-  const lastRows = allRows.slice(-candidates.length);
+  const lastRows = allRows.slice(-intakeRows.length);
   const verified = [];
-  for (let i = 0; i < candidates.length; i++) {
+  for (let i = 0; i < intakeRows.length; i++) {
     const row = lastRows[i] || [];
     verified.push({
-      popId: row[0] || '',
-      first: row[1] || '',
-      last: row[3] || '',
-      expected: popIds[i],
-      ok: row[0] === popIds[i],
+      kind: intakeRows[i].kind,
+      first: row[0] || '',
+      last: row[1] || '',
+      expectedFirst: intakeRows[i].first,
+      ok: (row[0] || '') === (intakeRows[i].first || '') && (row[1] || '') === (intakeRows[i].last || ''),
     });
   }
   return verified;
@@ -1103,8 +1084,8 @@ async function main() {
   }
 
   console.log('CITIZENS:');
-  console.log('  matched:    ' + citizenResolution.matched.length);
-  console.log('  candidates: ' + canonNewCitizens.length + ' (new — would append)');
+  console.log('  matched:    ' + citizenResolution.matched.length + ' (existing — usage owned by processMediaUsage_, not re-emitted)');
+  console.log('  candidates: ' + canonNewCitizens.length + ' (new — mint via Intake)');
   if (canonDriftCitizens.length > 0) {
     console.log('  canon-drift:' + String(canonDriftCitizens.length).padStart(2) + ' (bay-tribune-known; NOT appended — see canon_drift_c' + cycle + '.json)');
   }
@@ -1122,10 +1103,9 @@ async function main() {
 
   // Detail dump (helpful for dry-run inspection)
   if (canonNewCitizens.length > 0) {
-    console.log('Citizen candidates (would append):');
-    canonNewCitizens.forEach((c, i) => {
-      const popNum = citizenResolution.maxPopNum + 1 + i;
-      console.log('  ' + 'POP-' + String(popNum).padStart(5, '0') + '  ' + c.first + ' ' + c.last + (c.description ? ' — ' + c.description.slice(0, 60) : ''));
+    console.log('Citizen candidates (mint via Intake next cycle — POPID assigned by engine):');
+    canonNewCitizens.forEach((c) => {
+      console.log('  ' + c.first + ' ' + c.last + (c.description ? ' — ' + c.description.slice(0, 60) : ''));
       const signals = [];
       if (c.signalAge) signals.push('age=' + c.signalAge);
       if (c.signalNeighborhood) signals.push('hood=' + c.signalNeighborhood);
@@ -1165,18 +1145,27 @@ async function main() {
     console.log('');
   }
 
+  // engine.51 T8 — assemble lean Intake rows for genuinely-NEW citizens only
+  // (mint next cycle). Existing matches are NOT emitted — their UsageCount is
+  // already bumped by the cycle-path processMediaUsage_ (double-count guard).
+  // canonDrift/ambiguous/phantom/cultural are logged only. Built for dry-run + apply.
+  const intakeRows = buildIntakeRows(canonNewCitizens, type, cycle);
+  const intakeNew = intakeRows.length;
+  console.log('INTAKE ROWS (→ Intake tab; engine mints next cycle):');
+  console.log('  mint (new):   ' + intakeNew);
+  console.log('  (existing citizens: usage bumped upstream by processMediaUsage_, not re-emitted here)');
+  console.log('');
+
   // Write phase
-  let citizenAppended = [];
+  let intakeAppended = [];
   let businessAppended = [];
   if (apply) {
-    console.log('--apply: writing to live sheets');
-    // T7: append only canonNewCitizens; canonDriftCitizens are deferred to
-    // engine-sheet backfill via the canon_drift_c<cycle>.json report.
-    citizenAppended = await appendCitizens(canonNewCitizens, citizenResolution.headers, citizenResolution.maxPopNum, sheetsClient, sheetId, citizenResolution.rows);
+    console.log('--apply: writing Intake rows + Business_Ledger (no direct Simulation_Ledger writes)');
+    intakeAppended = await appendIntakeRows(intakeRows, sheetsClient, sheetId);
     businessAppended = await appendBusinesses(bizResolution.candidates, bizResolution.maxBizNum, sheetsClient, sheetId);
 
-    const allOk = citizenAppended.every(r => r.ok) && businessAppended.every(r => r.ok);
-    console.log('  citizen rows verified: ' + citizenAppended.filter(r => r.ok).length + '/' + citizenAppended.length);
+    const allOk = intakeAppended.every(r => r.ok) && businessAppended.every(r => r.ok);
+    console.log('  intake rows verified:   ' + intakeAppended.filter(r => r.ok).length + '/' + intakeAppended.length);
     console.log('  business rows verified: ' + businessAppended.filter(r => r.ok).length + '/' + businessAppended.length);
     if (!allOk) {
       console.error('[WARN] Some appended rows did not verify on read-back. Inspect output JSON.');
@@ -1200,16 +1189,18 @@ async function main() {
     citizens: {
       parsed: parsedCitizens.length,
       matched: citizenResolution.matched,
-      candidates: canonNewCitizens.map((c, i) => ({
-        ...c,
-        proposedPopId: 'POP-' + String(citizenResolution.maxPopNum + 1 + i).padStart(5, '0'),
-      })),
+      candidates: canonNewCitizens,   // POPID assigned by engine at mint, not here
       canonDrift: canonDriftCitizens,
       malformed: malformedCitizens,
       ambiguous: citizenResolution.ambiguous,
       phantom: citizenResolution.phantom,
       culturalOnly: citizenResolution.culturalOnly,
-      appended: citizenAppended,
+      // engine.51 T8 — media lane writes Intake, not Simulation_Ledger. `appended`
+      // kept empty so /post-publish Step 5-bis (reads appended[].popid) self-skips.
+      appended: [],
+      intakeRows: intakeRows,        // planned lean rows (inspectable in dry-run)
+      intakeVerified: intakeAppended, // readback verification (populated on --apply)
+      intakeSummary: { mint: intakeNew },
     },
     businesses: {
       parsed: parsedBusinesses.length,

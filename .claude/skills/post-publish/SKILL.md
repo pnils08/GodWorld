@@ -213,13 +213,13 @@ For non-edition types: gated on the C93 observation outcome (plan T8). Default b
 node scripts/ingestPublishedEntities.js editions/cycle_pulse_<type>_<cycle>_<slug>.txt --type <type> --cycle <XX> --apply
 ```
 
-Reads NAMES INDEX + BUSINESSES NAMED sections from the published `.txt` and appends genuinely new entities to canonical engine sheets:
-- **Simulation_Ledger** — new citizens land with `Status=pending`, `Tier=4`, `ClockMode=ENGINE`, blank demographics. Engine fills demographic columns next cycle. Existing citizens are NEVER modified — name drifts logged as warnings, not overwrites.
-- **Business_Ledger** — new businesses land with cols A–D populated, E–I blank for engine fill.
+Reads NAMES INDEX + BUSINESSES NAMED sections from the published `.txt` and emits entities to canonical engine sheets:
+- **Intake tab (citizens, engine.51 T8)** — genuinely-NEW extracted citizens emit lean 9-col `Intake` rows (First/Last/Notes only), NOT direct Simulation_Ledger writes; the engine's `processIntake_` mints them (POPID + demographics + income) deterministically next cycle. **Existing citizens are NOT emitted** — their `UsageCount` is already bumped by the cycle-path `processMediaUsage_` off the same media paste the edition is compiled from, so re-emitting here would double-count fame. Canon-drift (bay-tribune-known, SL-missing) stays deferred to engine-sheet backfill per [[../../../docs/adr/0007-cross-layer-canon-authority-precedence|ADR-0007]] — not routed to Intake. **Consequence:** new-citizen POPIDs + wd-cards lag one cycle (POPID assigned at engine mint, not at extraction). Existing-citizen card refresh (Step 2a) is unaffected.
+- **Business_Ledger** — new businesses land direct with cols A–D populated, E–I blank for engine fill (not a citizen path; outside the "zero SL writes" invariant).
 
 Handles two NAMES INDEX formats: T1 strict (`POP-NNNNN | Name | Role`) and pre-T1 freeform (`Name — Description`). Plus a CITIZEN USAGE LOG fallback (S197 BUNDLE-A): when NAMES INDEX is absent (pre-S197 editions, or any cycle that skipped /write-edition Step 3a inject), the script derives entity rows from the rich-prose CITIZEN USAGE LOG so backfill replay still lands the canonical sheets correctly. BUSINESSES NAMED also fallback-resolves from CITIZEN USAGE LOG `(NEW CANON)` sub-sections; absent strict section + no fallback returns 0 gracefully.
 
-Default mode is `--dry-run`; pass `--apply` to write. Output: `output/intake_published_entities_c<XX>_<slug>.json` with full resolution detail (matched / candidates / ambiguous / phantom / appended).
+Default mode is `--dry-run`; pass `--apply` to write. Output: `output/intake_published_entities_c<XX>_<slug>.json` with full resolution detail (matched / candidates / canon-drift / ambiguous / phantom) plus `intakeRows` (planned lean rows, inspectable in dry-run) and `intakeVerified` (readback, populated on `--apply`).
 
 **Verification gate (defense-in-depth, S189 dispatch gap E8 + S197 BUNDLE-A `--strict`):** after `ingestPublishedEntities.js` finishes, cross-check its parsed entity count against the source `.txt` directly:
 
@@ -234,16 +234,18 @@ Where `<N>` = the **parser's total parsed-row count** that `ingestPublishedEntit
 **Why the count-match gate exists (S189 dispatch gap E8):** S188 KONO Second Song dispatch run had ingestEditionWiki.js + ingestPublishedEntities.js both silently return 0 entities despite valid POP-00537 + CUL-905CBDE8 NAMES INDEX rows (false "pure-atmosphere artifact" success). Engine-sheet's E1+E2 fixed the parsers; this gate prevents future parser regressions from re-introducing silent data loss. Plan reference: [[../../../docs/plans/2026-04-30-dispatch-gap-followups]] Task E8.
 
 **Combined gate:**
-1. `output/intake_published_entities_c<XX>_<slug>.json` written; if `--apply`, `appended` arrays show all rows verified-by-readback (`ok: true`).
+1. `output/intake_published_entities_c<XX>_<slug>.json` written; if `--apply`, `intakeVerified` rows show all verified-by-readback (`ok: true`). `appended` is intentionally empty — the media lane no longer writes Simulation_Ledger (engine.51 T8).
 2. `verifyNamesIndexParse.js --expected <N> --strict` exits 0 (source NAMES INDEX present AND row count matches parser-reported count).
 
 If gate 2 fails with "NAMES INDEX section absent": run `node scripts/emitFormatContractSections.js <source> --inject` to derive the strict sections from CITIZEN USAGE LOG, then re-run /post-publish Step 5. If gate 2 fails with "mismatch": investigate the parser regression before continuing — silent zero-entity ingest poisons bay-tribune retrieval.
 
 ### Step 5-bis: Build wd-cards for newly-appended POPIDs (all types, when Step 5 appended new citizens)
 
-**Purpose:** closes G-P32 one-cycle card lag per [[../../../docs/adr/0007-cross-layer-canon-authority-precedence|ADR-0007]] §How to Apply. Step 2a's `buildCitizenCards.js` ran BEFORE Step 5 appended new POPIDs; without this substep, newly-published citizens have NO wd-card until next cycle's Step 2a runs — Mara's audit can't look them up, /sift Step 4 enrichment returns empty, future-cycle continuity checks miss them.
+**engine.51 T8 note (S305):** under Intake-tab routing, Step 5 no longer appends new POPIDs — new citizens are minted by the engine's `processIntake_` NEXT cycle, so `appended` is now **always empty** for the media citizen lane and this substep always self-skips. New-citizen wd-cards therefore build one cycle later (at the next cycle's Step 2a, after the engine mint). This re-opens the one-cycle card lag that G-P32 previously closed same-session — an accepted, unavoidable tradeoff of the deterministic intake front door (POPIDs are engine-assigned, not extraction-assigned). Existing-citizen cards are refreshed normally in Step 2a. The substep is retained for the (non-citizen) edge case where `appended` is ever non-empty.
 
-Reads Step 5 output JSON (`output/intake_published_entities_c<XX>_<slug>.json`) for `appended[].popid`. If `appended` is empty, substep is skipped with stdout "0 new POPIDs — Step 5-bis N/A this artifact."
+**Original purpose (pre-T8):** closes G-P32 one-cycle card lag per [[../../../docs/adr/0007-cross-layer-canon-authority-precedence|ADR-0007]] §How to Apply. Step 2a's `buildCitizenCards.js` ran BEFORE Step 5 appended new POPIDs; without this substep, newly-published citizens had NO wd-card until next cycle's Step 2a runs.
+
+Reads Step 5 output JSON (`output/intake_published_entities_c<XX>_<slug>.json`) for `appended[].popid`. If `appended` is empty, substep is skipped with stdout "0 new POPIDs — Step 5-bis N/A this artifact." (Post-T8: this is the normal path.)
 
 If `appended` has 1+ POPIDs:
 

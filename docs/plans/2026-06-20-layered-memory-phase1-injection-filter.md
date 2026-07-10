@@ -19,6 +19,8 @@ pointers:
 
 # Layered Memory Phase 1 — Injection Filter Plan
 
+**DEAD — superseded S306 (Mike-direct, 2026-07-10). Do not execute.** Built on a misread of the E98 source; current direction is [[../research/2026-06-20-layered-memory-architecture]] §S306 regrounding (storyline-spine memory, no civic/admin tracking or filtering apparatus).
+
 **Goal:** Stop high-administrative-value / low-narrative-value data (cost figures, call/permit/application counts, committee vote tallies, authorization chains, implementation schedules, fund metrics) from being elevated into the edition page or cycle context — by a **category-level salience rule**, non-destructively (the data stays whole and query-only). Done = the C98 OARI cost-figure class routes to supplemental/query, not the main page.
 
 **Architecture:** A category-level **Archive-domain rule** added at the two cycle-injection enforcement points. No per-item tags in Phase 1 — the rule keys on data *domain*, not a stored tier. (1) `/sift` triage gains a salience criterion that defaults admin-mechanics domains to `defer-to-supplemental` / `suppress` unless bound to a Story-tier outcome — sift already owns the verbs (`sift_triage_vocabulary.md`); it lacks the rule. (2) `buildWorldSummary.js` keeps admin figures in the query-only `engine_audit` JSON rather than foregrounding them in the cycle summary. Both points are **designed and built in research-build** — the sift rubric is a skill/contract-doc rule change (a build), not execution; media merely *runs* the updated `/sift`.

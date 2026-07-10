@@ -19,6 +19,8 @@ pointers:
 
 # Layered Memory Phase 2 — Lineage Origin-Stamp + Retrospective Promotion Plan
 
+**DEAD — superseded S306 (Mike-direct, 2026-07-10). Do not execute — including §Build Handoff below.** Built on a misread of the E98 source (the safety caveat inflated into the feature); current direction is [[../research/2026-06-20-layered-memory-architecture]] §S306 regrounding (storyline-spine memory, no civic/admin tracking).
+
 **Goal:** Build the substrate that lets an Archive-tier memory promote to Story/Permanent **only when it later spawns a major character or event** — the unsolved core of the OpenAI-E98 layered-memory adoption. "Done" for *this design session* = the **origin-stamp schema** locked (the irreversible piece) + the promotion-sweep **designed against real major-event shapes** with its build gated. No code this session — design + schema + gates.
 
 **Architecture:** Two mechanisms over one new primitive.

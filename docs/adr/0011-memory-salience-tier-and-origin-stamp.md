@@ -18,7 +18,7 @@ pointers:
 
 # ADR-0011: Memory salience tier as metadata + lineage origin-stamp in the maintenance layer
 
-**Status:** Accepted
+**Status:** DEAD — superseded S306 (Mike-direct, 2026-07-10). This ADR built on a misread of the E98 source file (inflated the safety caveat into the feature). Do not execute. Current direction: [[../research/2026-06-20-layered-memory-architecture]] §S306 regrounding — storyline-spine memory, no civic/admin tracking.
 **Date:** 2026-06-20 (S265)
 **Deciders:** Mags Corliss (research-build steward), Mike (proceed-on-Phase-2 go-ahead)
 

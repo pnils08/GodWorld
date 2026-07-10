@@ -54,7 +54,7 @@ pointers:
   3. Compute the disposition phrase via `lib/citizenDials.js:disposition(currentDials(json))`.
   4. Write one cache file per citizen: `output/voice-disposition-cache/<POPID>.md` — plain text, the phrase plus a `Refreshed: c<cycle>` stamp.
 - **Verify:** `node scripts/refreshVoiceDispositionCache.js --dry-run` → prints the phrase for all 4 POPIDs; spot-check POP-00001 against `node -e "console.log(require('./lib/citizenDials').disposition(...))"` on the same live JSON — strings match exactly.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S306
 
 ### Task 2: Wire cache refresh to the cycle
 
@@ -65,7 +65,7 @@ pointers:
   1. Add a `--live` flag that actually writes the cache files (Task 1 built dry-run only).
   2. Hook the live refresh to run once per engine cycle close (alongside or immediately after the existing Phase-10 commit), so the cache is never more than one cycle stale.
 - **Verify:** trigger one cycle close in sandbox; confirm all 4 cache files' `Refreshed:` stamp advances to the new cycle number.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S306
 
 ### Task 3: Point citizen-voice agent boot at the live cache
 
@@ -78,7 +78,7 @@ pointers:
   1. Add a boot step (after IDENTITY.md read): "Read `output/voice-disposition-cache/<your POPID>.md` — this is your CURRENT disposition, more current than the disposition list in IDENTITY.md. If it's missing, fall back to IDENTITY.md's authored disposition (fail-open, same pattern as `augment()` in `lib/personaProvider.js`)."
   2. Add one sentence clarifying scope: the cache only ever supersedes the "Your disposition" section; `ESTABLISHED CANON` in IDENTITY.md is never superseded by anything.
 - **Verify:** manual read-through of all 4 updated `SKILL.md` files; confirm the added step names the fail-open fallback and the canon-section carve-out explicitly.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S306
 
 ### Task 4: Session-boundary batching for Discord ingest
 
@@ -91,7 +91,7 @@ pointers:
   3. Append one row to `Reflection_Intake`: `[ts, popId, cycle, 'DISCORD', cls.event, snippet, 'no', cls.affect]` — same shape as `citizen-wake.js:498`, `daypart='DISCORD'` in place of `WAKE`. Delete the on-disk buffer after a successful flush.
   4. Confirm no change to `persistResponse`'s page-write behavior — it still never writes conversational prose to the Supermemory citizen page (ADR-0014 explicitly keeps this boundary).
 - **Verify:** simulate one conversation (several messages, then a synthetic idle gap) in sandbox; confirm exactly one `Reflection_Intake` row appended, `applied='no'`, and zero writes to the citizen's Supermemory page. Kill the bot mid-conversation, restart it, advance past the idle timeout → the buffered conversation still flushes (one row, no loss, no duplicate).
-- **Status:** [ ] not started
+- **Status:** [x] DONE S306
 
 ### Task 5: Interview-transcript ingest
 
@@ -102,7 +102,7 @@ pointers:
   2. Append one `Reflection_Intake` row per citizen interviewed: `daypart='INTERVIEW'`, same schema as Task 4.
   3. Gate this substep in the `/post-publish` verification matrix the same way the existing interview substeps are gated (per `.claude/skills/post-publish/SKILL.md`'s matrix pattern).
 - **Verify:** run one interview offline; confirm one `Reflection_Intake` row per citizen-voice subject, `applied='no'`, no duplicate rows on a second dry-run of the same transcript (idempotency check, same class as the existing `applied` guard).
-- **Status:** [ ] not started
+- **Status:** [x] DONE S306
 
 ### Task 6: Retire the superseded base-lock language
 
@@ -113,17 +113,25 @@ pointers:
   1. In the tier1-character-voice-agents plan, mark the base-lock line (§180-ish, "authored base is LOCKED... needs engine-sheet base-lock mechanism") as **superseded by ADR-0014** — do not delete the historical record, annotate it.
   2. Update the `engine.43` ROLLOUT_PLAN.md row to point at this plan doc + ADR-0014 instead of the bare Mike-direct-S286 pointer.
 - **Verify:** `grep -n "base-lock\|LOCKED" docs/plans/2026-06-16-tier1-character-voice-agents.md` → the only hits are annotated as superseded, none read as a live instruction.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S306
 
 ---
 
 ## Open questions
 
-- [ ] Exact idle-timeout constant for Task 4's session-boundary flush (proposed: 30 min) — engine-sheet can tune at smoke-test time against real Discord usage patterns; not a blocker to starting the build.
+- [x] Exact idle-timeout constant for Task 4's session-boundary flush — shipped at the proposed 30 min (`IDLE_FLUSH_MS`, lib/personaProvider.js); tune against real Discord usage at smoke.
 
 ---
 
+## Build notes (S306, engine-sheet)
+
+- T2 wired as run-cycle **Step 5.55** (skill step, not cron — cycle close is skill-orchestrated, and DialState only changes at cycle close, so a cron refresh would re-read identical data between cycles).
+- T5 factored a shared `drainConversationReflection_(popId, text, daypart, opts)` core in `lib/personaProvider.js` — Discord (`flushVoiceBuffer`) and INTERVIEW (post-publish substep 2e via `node -e`) both call it. INTERVIEW adds a snippet-matched idempotency guard (same-transcript re-run → `duplicate:true`, no row) and a `dryRun` mode.
+- Acceptance: 1–2 live-verified (phrase parity exact vs direct `disposition()` call; IDENTITY.md untouched). 3–4 and 7–8 mechanism-verified with stubbed writers — a live test row would drain into real dials, so first real Discord session + first interview post-publish are the runtime smoke. 5 verified: `compressLifeHistory.dial.test.js` 49/49, drain code untouched. 6 verified: page-write path unchanged (typed tension lines only).
+- **Carry-forward:** `output/desk-packets/base_context.json` cycle reads 100 vs prod C101 — shared `getCurrentCycle` staleness (wake loop stamps the same value); refreshes when the C102 pipeline runs `buildDeskPackets`.
+
 ## Changelog
 
+- 2026-07-10 — BUILT S306 (engine-sheet): Tasks 1–6 shipped + verified; §Build notes above carries the detail. Runtime smoke pending (first real Discord session + interview).
 - 2026-07-04 — Initial draft (S291, research-build). Executes ADR-0014. Both tracks scoped against already-live infra (`citizenDials.disposition()`, `classifyDualReflection_`, `Reflection_Intake`, the S277 drain) — no new subsystem, only new callers into existing ones.
 - 2026-07-06 — S298 pressure-test amendments per [[../research/2026-07-06-citizen-loop-deepening]]: Tasks 4/5 Dual→Triple + shared tension state; Task 4 disk-persisted buffer + boot-time stale-flush; Task 4 classifier scoped to citizen replies only. Criteria 7–8 added.

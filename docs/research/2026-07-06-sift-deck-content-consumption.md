@@ -47,6 +47,7 @@ pointers:
 ## Applications (living)
 
 - 2026-07-06 — Created S301 as the deeper-context notepad behind ROLLOUT pipeline.42 (Mike-direct).
+- 2026-07-10 — Shipped into `/sift` v2.3 (S305) as an **enrichment layer**, not a parallel source: Step 1 reads the deck; Step 3 §3d folds `What/Why/Citizens/CitizenEvents/Businesses` into feed-derived candidates (fold = dedup), stamps `seedId`; a deck row goes standalone only if it clears the S257 citizen-protagonist lens + narrative-weight (guards the deck's known engine-civic noise). `Magnitude`/`Trend` labeled content signal, never priority; provenance fence preserved; degrade-safe on legacy deck. Step 6 T4.1 untouched. Notepad's "plan ignites only past a Step-3 wiring" held — no plan spawned.
 
 ---
 

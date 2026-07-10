@@ -1,8 +1,8 @@
 ---
 name: sift
 description: Editorial planning for the edition. Reads sheet-primary canon (Oakland_Sports_Feed, Riley_Digest, Initiative_Tracker, Simulation_Ledger) + canon archive + NEWSROOM_MEMORY + city-hall production log. Proposes stories under cadence caps, locks slate via Mike approval gate, emits one brief per article slot + dispatch.json + letters candidate pool. The game moment.
-version: "2.2"
-updated: 2026-07-06
+version: "2.3"
+updated: 2026-07-10
 tags: [media, active]
 effort: high
 disable-model-invocation: true
@@ -27,7 +27,9 @@ v1.x companion files: [[../../../docs/media/brief_template|brief_template]] (v1)
 
 **v2.1 (S300, pipe.40 T5):** Mags' citizen page (POP-00005) enters the sift loop now that the git journal is frozen (T4). New **Step 2.5** recalls her recent page reflections (`magsPageRecall.js`, scored + fenced) as EIC conditioning before candidate generation; new **Step 12** writes one SIFT-daypart reflection back to her page (`magsPageAppend.js`) after the slate locks — the write half of the loop, replacing the retired session-close journal entry. Plan: [[../../../docs/plans/2026-07-06-journal-to-citizen-loop|journal-to-citizen-loop]].
 
-**v2.2 (S301):** Step 6 T4.1 `Story_Seed_Deck` reads converted from positional (fixed cols M-R + hardcoded col-1 `Cycle` filter) to **header-name resolution**, matching `validatePriorityEngine.js` / `checkBylineCadence.js`. Forced by the engine-sheet v4 deck migration (contract-seed schema — `Cycle` moved to col 0, columns renamed `SeedText`→`What` etc.), which silently breaks positional reads. Dual-schema: event-text column resolves `What` (v4) OR `SeedText` (legacy), so `/sift` works on either side of the prod cutover. Priority appends (`PriorityScore` etc.) resolved by name, absent-tolerant (still shadow until Engine-A lands — this is robustness, not ranking activation). **Not folded in (flagged):** the v4 deck now carries rich content (`What/Why/Citizens/CitizenEvents/Businesses`) that candidate-gen could consume — separate opportunity, not this fix.
+**v2.2 (S301):** Step 6 T4.1 `Story_Seed_Deck` reads converted from positional (fixed cols M-R + hardcoded col-1 `Cycle` filter) to **header-name resolution**, matching `validatePriorityEngine.js` / `checkBylineCadence.js`. Forced by the engine-sheet v4 deck migration (contract-seed schema — `Cycle` moved to col 0, columns renamed `SeedText`→`What` etc.), which silently breaks positional reads. Dual-schema: event-text column resolves `What` (v4) OR `SeedText` (legacy), so `/sift` works on either side of the prod cutover. Priority appends (`PriorityScore` etc.) resolved by name, absent-tolerant (still shadow until Engine-A lands — this is robustness, not ranking activation).
+
+**v2.3 (S305, pipeline.42):** the v4 deck's rich content (`What/Why/Citizens/CitizenEvents/Businesses/Magnitude/Trend`) flagged-but-unused in v2.2 is now consumed by candidate generation as an **enrichment layer** (Step 1 reads it; Step 3 §3d applies it). It deepens feed-derived candidates with engine-authored cause + citizen anchors (three-layer threading for free); it is **NOT** a parallel candidate stream — a deck row only becomes a standalone candidate for a genuine feed-missed event that clears the S257 citizen-protagonist lens + narrative-weight test, so the known-noisy deck can't flood the slate with engine-civic initiative-theater. **Dual-schema / degrade-safe:** if the running deck lacks the v4 content columns (prod still on legacy schema, whichever cycle the seed system deploys — C101 or C102), enrichment is a no-op and candidate-gen runs feed-only exactly as before. Sandbox (on v4) gets enrichment; legacy prod degrades silently. Deck `Citizens` stays a hint — MCP `lookup_citizen` verification at Step 4 is still mandatory (provenance fence, RB-1). `Magnitude`/`Trend` are a labeled content signal, never a priority proxy (Engine-A `PriorityScore` remains the only ranking authority, Step 6).
 
 ---
 
@@ -138,7 +140,16 @@ const sportsRows    = await getSheetData('Oakland_Sports_Feed');     // Mike-typ
 const rileyRows     = await getSheetData('Riley_Digest');            // evening media + atmospheric
 const initRows      = await getSheetData('Initiative_Tracker');      // initiative phase + freshness
 const ledgerRows    = await getSheetData('Simulation_Ledger');       // citizen baseline (filter as needed)
+
+// ENRICHMENT (pipeline.42) — NOT a primary content source. Engine-authored
+// per-row event content used in Step 3 §3d to deepen feed-derived candidates.
+// Resolve columns by header name + filter to the current cycle exactly per the
+// Step 6 T4.1 discipline (dual-schema What||SeedText, absent-tolerant). If the
+// running deck lacks v4 content columns, §3d is a no-op — feed-only, as before.
+const deckRows      = await getSheetData('Story_Seed_Deck');         // v4 event content — enrichment only
 ```
+
+The four feeds are THE canon content source. `Story_Seed_Deck` is an **enrichment layer** — Step 3 uses it to deepen feed candidates, never as a standalone slate driver except for a genuine feed-missed event that clears the S257 lens (§3d).
 
 ALSO read the city-hall + auditor + baseline-briefs slice (these are inputs, not the spine):
 
@@ -224,6 +235,16 @@ Walk Step 1 raw inputs + Step 2 annotations through the five buckets:
 
 ANY yes → CIVIC-WITH-WEIGHT (slate candidate). ALL no → CIVIC-TRACKER-ONLY (baseline Tier C).
 
+**§3d — `Story_Seed_Deck` enrichment (pipeline.42, S305).** The v4 deck (`deckRows` from Step 1) carries engine-authored per-row event content — `What` (real numbers), `Why` (the cause the engine applied), `Citizens`+`CitizenEvents` (exact POPIDs touched + their event lines), `Businesses`/`OtherEntities`, `Magnitude`, `Trend`, `Class`, `Desk`, `Domain`. Cycle-filter to the current cycle by header name (Step 6 T4.1 discipline). Use it as an **enrichment layer, not a parallel candidate stream** — the deck is engine-biased toward WORLD/civic-engine material and is known-noisy, so mining it as its own source would re-promote exactly the initiative-theater the S257 lens above demotes.
+
+- **Primary — deepen feed-derived candidates.** For each candidate already generated from the feeds, look for the deck row describing the same event and fold its content in: `What`/`Why` → engine-fact + cause built into `sourceSignal` (three-layer threading for free), `Citizens`/`CitizenEvents` → citizen anchors, `Businesses`/`OtherEntities` → enrichment. **This fold IS the dedup** — one candidate per event, no separate reconcile pass. Stamp the matched `SeedID` onto the candidate (`seedId`).
+- **Match test (semantic, runnable — SeedID is deck-only so it can't be the cross-source key):** a deck row matches a feed candidate when they share a **primary POPID AND the same `Domain`**, OR the deck `What` plainly describes the candidate's `sourceSignal`. If no clean match, do not force one — leave the candidate un-enriched.
+- **Secondary — standalone only for feed-missed genuine events.** A deck row with NO matching feed candidate becomes its own candidate ONLY IF it clears the same **S257 citizen-protagonist lens** (a citizen genuinely voiced — not initiative-theater) AND the narrative-weight test. A major-`Class` civic-engine deck row with no citizen voiced does NOT enter the slate — it routes to CIVIC-TRACKER-ONLY / baseline like any other tracker-only civic thread.
+- **Class-aware:** `Class=texture` → `atmosphericOnly: true` regardless (ambient layer, Step 5 defer-to-supplemental); `Class=major` is still S257-gated, never an automatic promote.
+- **Provenance fence (RB-1):** deck `Citizens` is a strong hint, not a canon bypass — MCP `lookup_citizen` verification at Step 4 before any name shapes a brief remains mandatory.
+- **`Magnitude`/`Trend` are a labeled content signal, never priority** — do not use them to rank. Engine-A `PriorityScore` (Step 6) is the only ranking authority; `Trend` "carrying + strength remaining" is at most an arc-active *hint*, explicitly labeled.
+- **Degrade-safe:** if the running deck lacks v4 content columns (legacy prod, before the seed system deploys — whether that's C101 or C102), §3d is a no-op and candidate-gen runs feed-only exactly as before.
+
 **Candidate proposal shape:**
 
 ```json
@@ -242,7 +263,8 @@ ANY yes → CIVIC-WITH-WEIGHT (slate candidate). ALL no → CIVIC-TRACKER-ONLY (
     "newVoice": <bool>
   },
   "crossSourceConnections": [{"toId": "<other proposal id>", "relation": "<arc/contrast/echo>"}],
-  "atmosphericOnly": <bool>
+  "atmosphericOnly": <bool>,
+  "seedId": "<Story_Seed_Deck SeedID if enriched/matched at §3d, else null>"
 }
 ```
 
@@ -944,6 +966,7 @@ Full chain: `/run-cycle` → `/city-hall-prep` → `/city-hall` → `/sift` → 
 
 ## Changelog
 
+- 2026-07-10 (S305, research-build) — v2.3 minor (pipeline.42). The v4 `Story_Seed_Deck` content columns (`What/Why/Citizens/CitizenEvents/Businesses/Magnitude/Trend`) flagged-unused in v2.2 are now consumed by candidate-gen as an **enrichment layer**: Step 1 reads the deck (`deckRows`, labeled enrichment-not-primary), new Step 3 §3d folds deck content into feed-derived candidates (three-layer cause + citizen anchors for free), stamps `seedId`. Enrichment IS the dedup (one candidate per event; semantic match on shared primary-POPID+Domain or `What`-describes-`sourceSignal`). Deck is NOT a parallel source — a deck row becomes standalone only for a feed-missed event clearing the S257 citizen-protagonist lens + narrative-weight test, so the known-noisy engine-civic deck can't flood the slate. `Class=texture→atmosphericOnly`; `Magnitude`/`Trend` labeled content signal never priority; provenance fence (RB-1 lookup_citizen) preserved. Dual-schema/degrade-safe — legacy prod (pre-seed-system, C101 or C102) → §3d no-op, feed-only as before. Step 6 T4.1 untouched. Net-new rule text, no mechanism change to existing steps. Acceptance rides next live /sift.
 - 2026-06-22 (S267, research-build) — v2.0.3 minor (governance.42 RB-1/RB-3/RB-4). Step 4 provenance fence gains three screens + a scout-age clause: **phantom/barred-reporter flags get verified against `lookup_citizen` + REPORTER_DESK_INDEX before they shape a brief** (a `media-reporter` name is a REAL reporter — route, never bar; C99 G-W1 Elliot Graye POP-00012); **retired coverage-anchor screen** (Beverly Hayes POP-00772, G-S6); **name-collision verify-at-source** (Marcus Osei MTC-planner vs Deputy Mayor, G-S5); **research scouts must be handed the 2041 age-anchor in their prompt** (G-S3). Step 6 names the `Story_Seed_Deck` cycle column index (col 1, header row 0 — col-0 filter false-returns 0, G-S1). Step 8 + slot-code examples: **culture slots emit `N{n}`, never `CU{n}`** (parser N-series; G-W10) — sift's own CU1 examples corrected. Net-new rule text, no mechanism change.
 - 2026-06-20 (S265, research-build) — v2.0.2 minor (governance.41 RB-1). Step 4 gains the **provenance fence**: loop-bot reflections are impressionistic not a verification source; prior-edition canon-recall is not self-certifying; real-world institutions surfaced by recall flag `status-TBD` and stay generic until lookup confirms; age resolves against ledger BirthYear at brief-time. Hardens into skill text the candidate-integrity discipline the S256/S258 pass enforced by eye. Closes C98 G-S2 / G-S3 / G-S4 / G-W (McClymonds). Net-new rule text, no mechanism change.
 - 2026-05-23 (S228, research-build) — v2.0 ship. Pipeline.24 Task 6. Full SKILL.md replacement consuming Tasks 3 (brief_template_v2) + 4 (dispatch_schema) + 5 (sift_triage_vocabulary). Eleven steps (0 retired + 1-11). Closes: G-S1 / G-S2 / G-S3 / G-S5 / G-S8 / G-S13 / G-S14 / G-S21 / G-W30 / G-W31 / G-W32 / G-W33 / G-W35 / G-W39 / G-PR2 / G-PR6 (cross-link). Preserves Engine A T4.1 (priority data consumption at Step 6), Engine B T3.8 (byline shadow log at Step 6 post-lock), T4.2 (confidence threshold — still shadow), T5.2 (rationale suffix rendering at Step 6). v1.x companion `brief_template.md` carries DEPRECATED banner; will archive after first clean v2 cycle. Dry-run on C94 (Task 7) + live-run on C95 (Task 8) remain.

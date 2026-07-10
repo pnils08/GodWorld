@@ -1,7 +1,7 @@
 # GodWorld Spreadsheet Environment
 
 **Sheet ID:** `GODWORLD_SHEET_ID` in `/root/.config/godworld/.env` (relocated S156 Phase 40.3)
-**Service account:** `maravance@godworld-486407.iam.gserviceaccount.com` (read/write, CANNOT create new sheets)
+**Service account:** `maravance@godworld-486407.iam.gserviceaccount.com` (read/write; CAN add tabs via batchUpdate addSheet — verified S305 Intake creation; cannot create new spreadsheet files)
 **Total tabs:** ~65 total (53 visible in SCHEMA_HEADERS + 6 hidden/archived + utility tabs) | **Active:** ~45 | **Hidden (S139):** 6 | **Utility:** ~8
 
 **Canonical column map:** `schemas/SCHEMA_HEADERS.md` — auto-generated row/col counts and A/B/C header list for every visible tab (53 as of 2026-04-15 refresh). Refresh via Apps Script `exportAndPushToGitHub` in `utilities/exportSchemaHeaders.js`. Ground truth when this doc's tab descriptions drift. *(Phase 41.6 backlink, S156.)*
@@ -74,6 +74,7 @@ Read/written by Node.js scripts during edition production.
 
 | Tab | Rows | Read By | Write By | Purpose |
 |-----|------|---------|----------|---------|
+| **Intake** | 1 | ENGINE | MIKE, ENGINE | Lean engine.51 citizen front door (First/Last/Age/Neighborhood/RoleType/Category/Family/Notes/IntakeStatus) — created on prod S305; processed by `processIntake_` Phase 5, fed by `mediaRoomIntake.js` |
 | **Media_Intake** | 222 | SCRIPT | SCRIPT | Citizen intake from editions |
 | **Storyline_Intake** | 346 | SCRIPT | SCRIPT | Storyline intake from editions |
 | **Citizen_Usage_Intake** | 852 | SCRIPT | SCRIPT | Citizen usage tracking with POPID |
@@ -156,7 +157,7 @@ These tab names appear in the GAS engine code but have no matching tab on the sp
 
 | Ghost Tab | Where Referenced | Likely Reality |
 |-----------|-----------------|---------------|
-| **Intake** | `editionIntake.js` (old) | **FIXED S106.** Now writes to `Citizen_Usage_Intake`. |
+| **Intake** | `editionIntake.js` (old) | **FIXED S106** (old writer rerouted to `Citizen_Usage_Intake`). **No longer a ghost — tab created on prod S305** for the engine.51 `processIntake_` front door. |
 | **Advancement_Intake** / **Advancement_Intake1** | `editionIntake.js` (old), `processAdvancementIntake.js` | **FIXED S106.** Now writes to `Citizen_Usage_Intake`. `processAdvancementIntake.js` still references old name — separate fix. |
 | **Business_Intake** | `editionIntake.js` (old) | **FIXED S106.** Now writes to `Storyline_Intake`. |
 | **Sports_Feed** | `applySportsSeason.js` | Renamed to `Oakland_Sports_Feed`. Code updated S89 but old name may linger. |

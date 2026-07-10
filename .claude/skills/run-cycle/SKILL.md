@@ -54,6 +54,18 @@ Reads the same Riley_Digest + Neighborhood_Map sources as Step 5 (structured, no
 
 **Gate:** File exists on disk.
 
+### Step 5.55: Voice disposition cache refresh (engine.43 T2)
+
+Refresh the live disposition cache the citizen-voice agents boot from — one file per voiced citizen, derived from post-cycle `DialState` via the same `citizenDials.disposition()` call the wake loop uses. **Wake/interview/Discord-input only — never supersedes IDENTITY.md ESTABLISHED CANON.**
+
+```bash
+node scripts/refreshVoiceDispositionCache.js --live {XX}
+```
+
+Output: `output/voice-disposition-cache/<POPID>.md` (phrase + `Refreshed: c{XX}` stamp). Agent-count-agnostic — picks up any `.claude/agents/citizen-voice-*/IDENTITY.md`. Voice agents fail open to their authored IDENTITY.md disposition if a cache file is missing.
+
+**Gate:** All cache files' `Refreshed:` stamp shows c{XX}.
+
 ### Step 5.6: Content-ledger drafter (engine.49 T4)
 
 Draft condition-gated Event_Content_Ledger rows from what this cycle actually produced (Story_Seed_Deck seeds, Neighborhood_Map pressures, Cycle_Seeds weather/holiday). Cheap-helper LLM (OpenRouter deepseek default), never premium tokens.

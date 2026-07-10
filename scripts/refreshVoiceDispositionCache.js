@@ -13,9 +13,14 @@
  * IDENTITY.md is never touched — ESTABLISHED CANON stays authored.
  *
  * Usage:
- *   node scripts/refreshVoiceDispositionCache.js --dry-run   # print, no writes
+ *   node scripts/refreshVoiceDispositionCache.js --dry-run       # print, no writes
+ *   node scripts/refreshVoiceDispositionCache.js --live {cycle}  # write cache files
  *
- * Plan: docs/plans/2026-07-04-voice-dial-sync-contract-build.md Task 1
+ * Wired as run-cycle Step 5.7 — refreshed once per cycle close, alongside
+ * buildNeighborhoodTexture (the other per-cycle wake-input artifact). DialState
+ * only changes at cycle close, so more frequent refresh would re-read identical data.
+ *
+ * Plan: docs/plans/2026-07-04-voice-dial-sync-contract-build.md Tasks 1-2
  */
 
 require('/root/GodWorld/lib/env');
@@ -23,6 +28,7 @@ const fs = require('fs');
 const path = require('path');
 const sheets = require('/root/GodWorld/lib/sheets');
 const dials = require('/root/GodWorld/lib/citizenDials');
+const getCurrentCycle = require('/root/GodWorld/lib/getCurrentCycle');
 
 const ROOT = path.resolve(__dirname, '..');
 const AGENTS_DIR = path.join(ROOT, '.claude/agents');
@@ -44,7 +50,9 @@ function voicedPopIds() {
 }
 
 async function main() {
-  const dryRun = process.argv.includes('--dry-run');
+  const live = process.argv.includes('--live');
+  const dryRun = !live;
+  const cycle = live ? getCurrentCycle() : null; // argv number or base_context.json; throws if neither
 
   const voiced = voicedPopIds();
   if (!voiced.length) throw new Error('no citizen-voice-* agents with a POP ID line found');
@@ -72,9 +80,13 @@ async function main() {
     const phrase = dials.disposition(cur);
     console.log(`${v.popId} (${v.agent}): ${phrase}`);
     if (dryRun) continue;
-    // live write mode lands in Task 2
-    throw new Error('live write mode not built yet — run with --dry-run (Task 2 adds --live)');
+    fs.mkdirSync(CACHE_DIR, { recursive: true });
+    fs.writeFileSync(
+      path.join(CACHE_DIR, `${v.popId}.md`),
+      `${phrase}\n\nRefreshed: c${cycle}\n`
+    );
   }
+  if (!dryRun) console.log(`cache written: ${CACHE_DIR} (Refreshed: c${cycle})`);
 }
 
 main().catch((e) => { console.error(e.message || e); process.exit(1); });

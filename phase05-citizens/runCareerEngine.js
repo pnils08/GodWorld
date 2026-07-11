@@ -69,6 +69,8 @@ function runCareerEngine_(ctx) {
   var iEconKey = idx('EconomicProfileKey');
   var iEmployerBizId = idx('EmployerBizId'); // v2.4: employer tracking
   var iDialState = idx('DialState'); // engine.32 T5 — Drive dial -> career-event frequency
+  var iStatus = idx('Status'); // engine.52 C1 — hospital status gates career activity
+  var iStatusStart = idx('StatusStartCycle'); // engine.52 C1 — admission cycle for income-hit timing
 
   if (iPopID < 0 || iTier < 0 || iClock < 0 || iLife < 0 || iLastUpd < 0) return;
 
@@ -688,6 +690,31 @@ function runCareerEngine_(ctx) {
 
     // v2.3: Load/init career state from LifeHistory
     var existing = row[iLife] ? row[iLife].toString() : "";
+
+    // engine.52 C1 — hospital status gates career activity. Hospitalized or
+    // critical: no career rolls at all this cycle; a stay >= 2 cycles takes a
+    // one-time income hit (guarded by an [IncomeHit A{admitCycle}] marker so
+    // it applies once per admission).
+    var healthStatus = iStatus >= 0 ? String(row[iStatus] || "active").toLowerCase().trim() : "active";
+    if (healthStatus === "hospitalized" || healthStatus === "critical") {
+      var admitC = iStatusStart >= 0 ? (Number(row[iStatusStart]) || 0) : 0;
+      var hitMarker = "[IncomeHit A" + admitC + "]";
+      var hospIncome = iIncome >= 0 ? (Number(row[iIncome]) || 0) : 0;
+      var hospEconOk = iEconKey >= 0 && row[iEconKey] &&
+        String(row[iEconKey]).trim() !== "" && String(row[iEconKey]).trim() !== "SPORTS_OVERRIDE";
+      if (admitC > 0 && (cycle - admitC) >= 2 && hospIncome > 0 && hospEconOk &&
+          existing.indexOf(hitMarker) < 0) {
+        row[iIncome] = Math.round(hospIncome * (0.92 + roll() * 0.05)); // -3% to -8%
+        var hitText = "Extended hospital stay cut into earnings";
+        var hitLine = inWorldStamp_(ctx) + " — [Career-Health] " + hitText + " " + hitMarker;
+        row[iLife] = existing ? (existing + "\n" + hitLine) : hitLine;
+        row[iLastUpd] = ctx.now;
+        logRows.push([ctx.now, row[iPopID], '', "Career-Health", hitText, '', cycle]);
+        rows[r] = row;
+      }
+      continue;
+    }
+
     var st = parseCareerStateFromLife_(existing);
     if (!st.industry) st.industry = pickInitialIndustry_(tierRole);
     if (!st.employer) st.employer = pickEmployerType_(st.industry);
@@ -783,7 +810,9 @@ function runCareerEngine_(ctx) {
     if (chanceHit(0.25)) pool = pool.concat(trainingPool);
 
     // v2.3: maybe transition
-    var tEv = maybeTransition_(st, {
+    // engine.52 C1 — recovering citizens keep career texture but skip job
+    // transitions (no promotion/layoff/shift while easing back in).
+    var tEv = (healthStatus === "recovering") ? null : maybeTransition_(st, {
       econMood: econMood,
       season: season,
       holiday: holiday,

@@ -75,6 +75,10 @@ function buildCyclePacket_(ctx) {
   // Get civic context
   var civic = getCivicContextForPacket_(ctx.ss, S.absoluteCycle || S.cycleId || 0, cal);
 
+  // engine.52 B2 — persist hospital admissions/discharges collected in Phase 4
+  // and compute the census before packet lines are built.
+  var hospital = persistHospitalLedger_(ctx);
+
   var lines = [];
 
   // ═══════════════════════════════════════════════════════════
@@ -180,6 +184,13 @@ function buildCyclePacket_(ctx) {
   lines.push('IllnessRate: ' + round2(pop.illnessRate || 0));
   lines.push('EmploymentRate: ' + round2(pop.employmentRate || 0));
   lines.push('Economy: ' + (pop.economy || 'stable'));
+  if (hospital) {
+    lines.push('Hospital: ' + hospital.open + ' in care (' +
+      'admits ' + hospital.admitsThisCycle +
+      ', discharges ' + hospital.dischargesThisCycle +
+      ', deaths ' + hospital.deathsThisCycle +
+      ', load ' + Math.round(hospital.load * 100) + '%)');
+  }
   lines.push('');
 
   // ═══════════════════════════════════════════════════════════
@@ -765,6 +776,104 @@ function buildCyclePacket_(ctx) {
     ' | Election: ' + civic.electionWindow);
 
   ctx.summary.cyclePacket = packet;
+}
+
+
+// ═══════════════════════════════════════════════════════════
+// HOSPITAL LEDGER (engine.52 B2)
+// ═══════════════════════════════════════════════════════════
+
+var HOSPITAL_CAPACITY = 40; // beds — placeholder scaled to ~900 sampled citizens (plan Open Q)
+
+var HOSPITAL_OPEN_STATES = ['hospitalized', 'critical', 'serious-condition', 'injured', 'recovering'];
+
+/**
+ * Persist ctx.summary.hospitalEvents (Phase 4) into the Hospital_Ledger tab,
+ * close discharged/deceased rows, and return the census. Direct writes match
+ * this file's Phase-10 pattern. Lazy-creates the tab only when the first
+ * event arrives (Phase 42 §1.1 schema-setup carve-out).
+ */
+function persistHospitalLedger_(ctx) {
+  var S = ctx.summary || {};
+  var events = S.hospitalEvents || [];
+  var cycle = S.absoluteCycle || S.cycleId || 0;
+
+  var sheet = ctx.ss.getSheetByName('Hospital_Ledger');
+  if (!sheet && events.length === 0) return null; // nothing to create, nothing to count
+
+  var HEADERS = ['AdmissionId', 'POPID', 'Name', 'Neighborhood', 'Cause',
+                 'AdmitCycle', 'StatusNow', 'LastTransitionCycle',
+                 'DischargeCycle', 'Outcome', 'CyclesInCare'];
+  if (!sheet) {
+    sheet = ctx.ss.insertSheet('Hospital_Ledger');
+    sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);
+    sheet.setFrozenRows(1);
+  }
+
+  var data = sheet.getDataRange().getValues();
+
+  // Index open rows (DischargeCycle empty) by POPID — sheet row = index + 1.
+  var openByPopId = {};
+  for (var r = 1; r < data.length; r++) {
+    if (data[r][8] === '' || data[r][8] === null) {
+      openByPopId[String(data[r][1])] = r;
+    }
+  }
+
+  var admits = 0, discharges = 0, deaths = 0;
+
+  for (var e = 0; e < events.length; e++) {
+    var ev = events[e];
+    var key = String(ev.popId);
+    var openRow = openByPopId.hasOwnProperty(key) ? openByPopId[key] : -1;
+
+    if (HOSPITAL_OPEN_STATES.indexOf(ev.to) >= 0) {
+      if (openRow >= 0) {
+        // Transition inside care — update status + stamp, backfill cause.
+        sheet.getRange(openRow + 1, 7, 1, 2).setValues([[ev.to, ev.cycle]]);
+        if (ev.cause && !data[openRow][4]) sheet.getRange(openRow + 1, 5).setValue(ev.cause);
+        data[openRow][6] = ev.to;
+      } else {
+        // New admission. (A lifecycle transition with no open row — citizen
+        // hospitalized before this ledger existed — admits at event cycle.)
+        var newRow = ['H-C' + ev.cycle + '-' + key, ev.popId, ev.name || '',
+                      ev.neighborhood || '', ev.cause || '', ev.cycle, ev.to,
+                      ev.cycle, '', '', ''];
+        sheet.appendRow(newRow);
+        openByPopId[key] = data.length;
+        data.push(newRow);
+        admits++;
+      }
+    } else if (ev.to === 'active' || ev.to === 'deceased') {
+      if (openRow >= 0) {
+        var admitCycle = Number(data[openRow][5]) || ev.cycle;
+        var outcome = (ev.to === 'deceased') ? 'deceased' : 'recovered';
+        sheet.getRange(openRow + 1, 7, 1, 5).setValues([[
+          ev.to, ev.cycle, ev.cycle, outcome, Math.max(0, ev.cycle - admitCycle)
+        ]]);
+        data[openRow][8] = ev.cycle;
+        delete openByPopId[key];
+        if (ev.to === 'deceased') deaths++; else discharges++;
+      }
+    }
+  }
+
+  var open = 0;
+  for (var k in openByPopId) if (openByPopId.hasOwnProperty(k)) open++;
+
+  var census = {
+    open: open,
+    admitsThisCycle: admits,
+    dischargesThisCycle: discharges,
+    deathsThisCycle: deaths,
+    load: open / HOSPITAL_CAPACITY
+  };
+  ctx.summary.hospitalCensus = census;
+
+  Logger.log('persistHospitalLedger_ (engine.52): cycle ' + cycle + ' | open ' + open +
+    ' | admits ' + admits + ' | discharges ' + discharges + ' | deaths ' + deaths);
+
+  return census;
 }
 
 

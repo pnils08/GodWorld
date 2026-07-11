@@ -1139,7 +1139,7 @@ pointers:
 ## Simulation_Ledger
 
 - **Rows:** 914
-- **Columns:** 50
+- **Columns:** 52
 
 | Col | Header |
 |-----|--------|
@@ -1193,6 +1193,8 @@ pointers:
 | AV | DialState |
 | AW | SMPageId |
 | AX | MemoryRegisters |
+| AY | StatusStartCycle |
+| AZ | HealthCause |
 
 ---
 

@@ -55,6 +55,7 @@ function runHouseholdEngine_(ctx) {
   var iDialState = idx('DialState'); // engine.32 T5 — Family dial -> home-event frequency
   var iMarital = idx('MaritalStatus');     // engine.32 T4 — circumstance-gated family pools
   var iNumChildren = idx('NumChildren');   // engine.32 T4
+  var iStatus = idx('Status');             // engine.52 C2 — hospital-strain circumstance pool
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WORLD CONTEXT
@@ -376,6 +377,17 @@ function runHouseholdEngine_(ctx) {
     "packed school lunches for the morning rush"
   ];
 
+  // engine.52 C2 — hospital-strain pool: when the citizen is hospitalized or
+  // critical, their home life IS the hospital. The pool replaces the normal
+  // draw below (single draw = max 1 strain line per household per cycle).
+  // Tag stays Household -> family dial; no new tags minted.
+  var hospitalStrainPool = [
+    "the family kept vigil at the hospital",
+    "the household juggled shifts to cover the hospital stay",
+    "neighbors dropped off meals while the household held things together",
+    "the family traded hospital visits between work and school runs"
+  ];
+
   // ═══════════════════════════════════════════════════════════════════════════
   // HEALTH TEXTURE (engine.32 T4) — first ambient Health-category output
   // outside the generational lifecycle. Reuses existing DIAL_MAP vocab:
@@ -511,6 +523,13 @@ function runHouseholdEngine_(ctx) {
     var numKids = iNumChildren >= 0 ? Number(row[iNumChildren]) || 0 : 0;
     if (numKids > 0) {
       for (var ki = 0; ki < parentPool.length; ki++) { citizenPool.push(parentPool[ki]); }
+    }
+
+    // engine.52 C2 — hospitalized/critical citizens draw ONLY strain lines:
+    // the household's cycle revolves around the hospital, not First Friday.
+    var hStatus = iStatus >= 0 ? (row[iStatus] || "").toString().toLowerCase().trim() : "";
+    if (hStatus === "hospitalized" || hStatus === "critical") {
+      citizenPool = hospitalStrainPool.slice();
     }
 
     // ═══════════════════════════════════════════════════════════════════════

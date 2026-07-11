@@ -261,16 +261,13 @@ function runGenerationalEngine_(ctx) {
     var statusDuration = statusStartCycle > 0 ? (cycle - statusStartCycle) : 0;
 
     if (status === "deceased" || status === "inactive") continue;
-    if (mode !== "ENGINE" && mode !== "CIVIC") continue;
 
     var age = birthYear ? (simYear - birthYear) : 0;
     var name = ((row[iFirst] || "") + " " + (row[iLast] || "")).trim();
 
-    // engine.32 T5 — prime the per-ctx dial-band cache from the row (phase04
-    // runs before citizenLookup exists); check*_ fns read it via (ctx, popId).
-    getCitizenDialBands_(ctx, popId, iDialState >= 0 ? (row[iDialState] || "") : "");
-
-    // HEALTH STATUS LIFECYCLE
+    // HEALTH STATUS LIFECYCLE — runs for ALL modes (engine.52 A1): a citizen
+    // in hospital transitions every cycle regardless of clock mode; the mode
+    // gate below only guards new-milestone generation.
     if (status === "hospitalized" || status === "critical" || status === "recovering" ||
         status === "injured" || status === "serious-condition") {
       var healthResult = processHealthLifecycle_(
@@ -280,6 +277,14 @@ function runGenerationalEngine_(ctx) {
 
       if (healthResult) {
         row[iStatus] = healthResult.newStatus;
+
+        // engine.52 B1 — every health-status transition lands in ctx.summary
+        // for the Phase 10 Hospital_Ledger persist. No sheet writes here.
+        ctx.summary.hospitalEvents = ctx.summary.hospitalEvents || [];
+        ctx.summary.hospitalEvents.push({
+          popId: popId, name: name, neighborhood: neighborhood,
+          cause: healthCause, from: status, to: healthResult.newStatus, cycle: cycle
+        });
 
         if (healthResult.newStatus !== status) {
           if (iStatusStart >= 0) {
@@ -310,6 +315,14 @@ function runGenerationalEngine_(ctx) {
 
       continue;
     }
+
+    // Mode gate — new milestones only fire for ENGINE/CIVIC citizens
+    // (health lifecycle above deliberately runs before this, engine.52 A1).
+    if (mode !== "ENGINE" && mode !== "CIVIC") continue;
+
+    // engine.32 T5 — prime the per-ctx dial-band cache from the row (phase04
+    // runs before citizenLookup exists); check*_ fns read it via (ctx, popId).
+    getCitizenDialBands_(ctx, popId, iDialState >= 0 ? (row[iDialState] || "") : "");
 
     // REGULAR MILESTONE CHECKS (active citizens)
 
@@ -402,9 +415,28 @@ function runGenerationalEngine_(ctx) {
         ctx, row, iLife, iLastU, healthResult2, name, popId, neighborhood, cycle, calendarContext
       ));
 
+      var admitStatus = null;
       if (healthResult2.severity === "severe") {
-        row[iStatus] = "hospitalized";
+        // Severe events enter the state machine; HealthCause stays blank for
+        // the Health_Cause_Queue operator loop to fill (engine.52 A3).
+        admitStatus = "hospitalized";
+      } else if (healthResult2.severity === "moderate" && chance_(ctx, 0.3)) {
+        // engine.52 A3 — a slice of moderate events also becomes a tracked
+        // condition: injuries skew young, serious conditions skew old.
+        admitStatus = (age >= 60 || chance_(ctx, 0.35)) ? "serious-condition" : "injured";
+      }
+
+      if (admitStatus) {
+        row[iStatus] = admitStatus;
         if (iStatusStart >= 0) row[iStatusStart] = cycle;
+
+        // engine.52 B1 — new admissions land in ctx.summary alongside
+        // lifecycle transitions for the Phase 10 Hospital_Ledger persist.
+        ctx.summary.hospitalEvents = ctx.summary.hospitalEvents || [];
+        ctx.summary.hospitalEvents.push({
+          popId: popId, name: name, neighborhood: neighborhood,
+          cause: "", from: "active", to: admitStatus, cycle: cycle
+        });
       }
 
       updatedRows[r] = true;
@@ -855,16 +887,27 @@ function checkHealthEvent_(ctx, popId, age, lifeHistory, cal) {
   if (STRESS_HOLIDAYS.indexOf(cal.holiday) >= 0) c *= 1.4;
   if (cal.month === 1) c *= 1.3;
 
+  // engine.52 A2 — incidence couples to the city illness rate (Phase 3 drift,
+  // 5% baseline / 15% cap). At baseline this is a no-op; at cap it triples.
+  var illness = (ctx.summary && ctx.summary.demographicDrift &&
+                 ctx.summary.demographicDrift.illnessRate) || 0.05;
+  c *= (illness / 0.05);
+
   var healthMatches = lifeHistory.match(/\[Health\]/g);
   var healthCount = healthMatches ? healthMatches.length : 0;
   if (healthCount >= 3) return null;
 
   if (!chance_(ctx, c)) return null;
 
+  // engine.52 A2 — an epidemic doesn't just mean more colds: at elevated
+  // city illness the severity distribution shifts toward severe/moderate.
+  var severeCut = illness >= 0.08 ? 0.08 : 0.05;
+  var moderateCut = illness >= 0.08 ? 0.28 : 0.20;
+
   var severity = "minor";
   var sr = rand_(ctx);
-  if (sr < 0.05) severity = "severe";
-  else if (sr < 0.20) severity = "moderate";
+  if (sr < severeCut) severity = "severe";
+  else if (sr < moderateCut) severity = "moderate";
 
   var descriptions;
   if (severity === "severe") {

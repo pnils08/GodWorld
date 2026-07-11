@@ -105,7 +105,7 @@ pointers:
 
 - **Sift-time quote fetching** — asks are built at write time from locked briefs; fetching at sift would voice citizens for articles that die in the slate. Revisit only if write-time latency actually hurts.
 - **Voiced pull-quotes for civic officials via civic-office agents** — officials with DialState ride this path as citizens; their *institutional* statements stay with the civic voice agents (different speech register, city-hall's domain).
-- **A `[Press]` LifeHistory line at drain time** ("spoke to the Tribune") — would make quote-giving visible to future perception assembly. Real idea, engine-side, needs its own look at drain mechanics; not part of this wiring.
+- **A `[Press]` LifeHistory line — REJECTED S312 (Mike + code-confirm), do not build.** It would double-hit dials: the intake row already accretes into DialState at the cycle drain (`compressLifeHistory.js` `accreteReflectionsIntoBase_`, marked `applied='yes'`), and a LifeHistory line would fold into base a second time when it ages out of the raw-20 window (`foldAgedOutEntries_`). Memory already carries without it — the PRESS page doc is a resonance-scored recall candidate at future wakes (`loadOwnPageReadback`). Page + intake is the complete write set.
 
 ## Open questions
 

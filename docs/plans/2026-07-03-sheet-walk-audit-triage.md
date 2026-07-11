@@ -105,10 +105,40 @@ Net: 2 tabs with zero real readers (Economic_Parameters, Youth_Events), 1 legacy
 | Riley_Digest F (Issues) | Not a defect. F = `S.auditIssues`: phase errors captured by `safePhaseCall_` + crisis-bucket lines from `generateCrisisBuckets`. Empty = clean cycles. | **CLOSED** — semantics documented here. |
 | Neighborhood_Demographics H–L | 5 education columns 0/17 empty. Seeded once pre-S247, blanked every cycle by the Phase-3 writer clobber (fixed S247), never re-seeded. Reader defaults (quality=5, grad=75) masked it; SCHOOL_QUALITY_CRISIS / DROPOUT_WAVE hooks unreachable; cards showed blanks. | **FIXED S301** — re-ran `addEducationCareerColumns.js` (13 neighborhoods with per-hood data) + neutral defaults for 4 unmatched (Glenview, Dimond, Ivy Hill, San Antonio). Read-back: 85/85 cells filled. Fruitvale/West Oakland now sit below the crisis threshold (quality 3) → hooks can fire. |
 
+## Class 4 verdicts — dead-or-retire audit (S311, measure-twice per tab: code caller-graph + live tab state)
+
+| Tab | Evidence | Verdict |
+|---|---|---|
+| Narrative_Bridge | Live tab header-only (1 non-empty row); ZERO code writers to the tab; `scripts/buildNarrativeBridge.js` writes `output/` locally and has ZERO callers (matches S288 workbench orphan flag) | **RETIRE** — tab + orphan script |
+| Ledger_Index | 46 rows of hand-maintained tab-purpose tracking ("Active/Ledger/Purpose/..."); zero code references anywhere; superseded by `docs/SPREADSHEET.md` + `SHEETS_MANIFEST.md` | **RETIRE** |
+| Economic_Parameters | Zero code references (C2 sweep confirmed); full local copy verified: `data/economic_parameters.json` 198 entries = 198 sheet rows | **RETIRE** — data preserved locally |
+| Family_Relationships | LIVE writers: `generationalWealthEngine.js` L497-505 + `householdFormationEngine.js` (own-tracking sheets, engine.md exempt class) | **KEEP** — "mostly-in-SL" note is about data overlap, not dead code |
+| Media_Intake | Read by `mediaRoomIntake.js` L222/646 (`processMediaIntake_`, cycle-path Phase 11) + written by operator-fired `parseMediaRoomMarkdown.js` | **KEEP** — live intake substrate |
+| Storyline_Intake | Read/ensured by `mediaRoomIntake.js` (Phase 11) + `editionIntake.js`/`processEditionIntake.js`/`editionIntakeV3.js` (current ingest path) | **KEEP** |
+| Event_Arc_Ledger | C2 sweep: `v3preLoader` cross-cycle arc persistence is load-bearing | **KEEP** (already answered) |
+| WorldEvents_Ledger vs V3 merge | Old ledger has LIVE readers V3 can't serve: `updateTransitMetrics.js` (Phase 2 reads prev-cycle events — V3 records only `ctx.summary.worldEvents` at Phase 10) + `worldEventsEngine.js` v2.7 cross-cycle dedup | **NO MERGE** — both stay; they serve different reads |
+| Cycle_Seeds | LIVE: `utilities/cycleModes.js` (cycle-path ensure+write) + `scripts/draftContentRows.js` (run-cycle Step 5.6, engine.49 T4) | **KEEP** |
+| Youth_Events (from C2) | Write-only archive; read helpers exist with zero callers; engine.4 already blocked on engine.5 youth population | **KEEP** — rides engine.4/engine.5, no new decision |
+| Media_Briefing (from C2) | Legacy-reader-only (operator handoff tools) | **HOLD** — retire-or-fold is a media-terminal call, not engine-sheet's |
+
+**Retire execution gate:** tab deletion is irreversible bulk deletion — awaiting Mike's plain-language confirm on the 3-tab retire list (Narrative_Bridge, Ledger_Index, Economic_Parameters + orphan `buildNarrativeBridge.js`). Docs marked pending-retire meanwhile.
+
+## Class 5 dispositions (S311 — design asks routed, none built; new engines stay Mike-gated per S296 FIX-don't-ADD)
+
+- AdvancementIntake1 ingest wiring → rides the existing `processAdvancementIntake` retire-monitor (engine.md rules); reconcile there, no new row.
+- Health_Cause_Queue "Oakland_Hospital" engine → routes to **engine.52** (plan [[2026-07-11-oakland-hospital]], filed S311 research-build) — this C5 ask is its origin, closed here.
+- Story_Seed_Deck citizen feed → already routed: engine.35 Phase 5 + research.21 detector (gated on T5) + G-RC5.
+- Texture_Trigger_Log depth uplift → design ask, queue behind engine.38 atmospheric work (same content class).
+- As_Roster wiring + traded-player plan → Paulson's sports domain; coordinate, don't build unilaterally. Related: engine.40 (sports-stat intake) carries the structured-store design.
+- Edition_Coverage_Ratings effect-strength review → analysis task, fits a future /engine-review deep-dive, no substrate change.
+- Engine_Errors "proper" rebuild → needs a spec of "proper" first (what queries should it answer?); no build until specced.
+- Bay_Tribune_Oakland canonical roster → **ANSWERED S311, one exception found:** engine.35 Phase 2 (`bayTribuneRoster.js`) reads the tab, but `buildDeskPackets.js` L127 still reads hand-maintained `schemas/bay_tribune_roster.json` (version 2.0, not generated from the tab, last touched pre-S259). Reconciliation candidate: either regen the JSON from the tab or point desk packets at `bayTribuneRoster.js`. Filed here; small bounded follow-up.
+
 ## Changelog
 
 - 2026-07-03 — Filed (S289 close, engine-sheet). Verbatim intake from Mike's sheet-walk; classification unverified; triage protocol = verify-then-fix per class. ROLLOUT row engine.44 opened same commit.
 - 2026-07-03 — Class 2 reader-audit sweep complete (S290, engine-sheet). All 10 "any readers?" questions answered from code; table added above.
 - 2026-07-03 — Class 1 COMPLETE (S290, engine-sheet). Writers: 16 flipped to cycle stamps (commit 48cf7c71, deployed + byte-verified live). Data: 17,928 Gregorian cells rewritten to 'C'+cycle across 21 columns/20 tabs, read-back verified zero remaining per column (one-shot script, session scratchpad; anchors: row's own Cycle col; Household_Ledger→FormedCycle, Cultural_Ledger→LastSeenCycle). Bonus fix: mediaRoomIntake quoted-citizen birthYear was real-world-year anchored (2026) vs simYear convention (2041) — now cal.simYear or blank. Handoff_Output tab doesn't exist on live — nothing to clean.
 - 2026-07-06 — Class 3 verified, 3 of 5 fixed (S301): weather-streak carry + Cultural_Ledger POPID (code, sandbox pending) + education re-seed (live); findings table above.
+- 2026-07-11 — Class 4 + 5 closed analysis-side (S311): 3 retire verdicts (Mike-confirm gated), 8 keep/hold, C5 asks routed; verdict tables above.
 - 2026-07-03 — Class 1 correction (S290 late): first pass used a curated tab list — WRONG approach; Mike caught misses live (World_Population lowercase header, Riley_Digest, WorldEvents_Ledger, Transit_Metrics). Second pass: 12 more writers flipped + deployed (acc40a81, byte-verified), full-enumeration backfill rewrote 6,715 more cells across 12 tabs, read-back zero remaining. Total: 24,643 cells, 28 writers. Deferred (no cycle column, need per-tab design, NOT silently skipped): Simulation_Ledger LifeHistory(783)/CreatedAt(8)/LastUpdated(886) — dates embedded in narrative text, cell-replace would destroy content; Initiative_Tracker.LastUpdated(6); Civic_Sweep_Report.Timestamp(9). Sports GameDate cols excluded — Paulson's layer, real dates by design.

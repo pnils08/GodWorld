@@ -99,6 +99,11 @@ pointers:
 
 ### Task 6: Conversation engine — `scripts/citizen-conversation.js`
 
+> **AMENDED S312 — build lands in [[2026-07-11-agent-exchange-engine]] instead.** The spec below
+> is adopted verbatim as that engine's conversation format (its Task 1); the file ships as
+> `scripts/citizen-exchange.js` (same single-file authorization) with interview + debate formats
+> beside it. Task 7's cron likewise moves there (its Task 5). Do not build this task standalone.
+
 - **Files:**
   - `scripts/citizen-conversation.js` — create
 - **Steps:**
@@ -156,6 +161,9 @@ The first edition-run offload agent, and the assembly Task 6's conversations reu
 
 ## Changelog
 
+- 2026-07-11 — **Tasks 6+7 amended (S312, research-build, Mike-direct B+C design).** Conversation
+  engine + cron generalized into the three-format exchange engine before first build —
+  spec adopted verbatim as format 1 in [[2026-07-11-agent-exchange-engine]] (engine.53).
 - 2026-07-06 — **Task 5 + Task 9 built (S300, engine-sheet, Mike-direct).** Perception assembly
   extracted to `lib/wakePerception.js` (byte-identical verify; wake 512→253 lines);
   `scripts/citizenVoice.js` shipped — first edition-run offload agent: per-citizen OpenRouter

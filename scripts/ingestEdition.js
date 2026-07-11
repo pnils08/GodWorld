@@ -244,6 +244,36 @@ function splitEdition(content, cycle, type) {
 }
 
 // ---------------------------------------------------------------------------
+// engine.46 Phase 1 Task 2 — per-chunk byline/desk extraction so bay-tribune
+// queries can filter on who wrote it and which desk it ran under (the
+// "what I've said" self-knowledge axis). Published byline forms:
+//   `By <Name> | Bay Tribune <Desk>`  and  `By Bay Tribune <Desk>` (desk-only).
+// ---------------------------------------------------------------------------
+function extractBylineMeta(text) {
+  var bylines = [];
+  var desks = [];
+  var re = /^By\s+([^|\n]+?)(?:\s*\|\s*([^\n]+))?$/gm;
+  var m;
+  while ((m = re.exec(text)) !== null) {
+    var name = (m[1] || '').trim();
+    var after = (m[2] || '').trim();
+    var desk = '';
+    var dm = after.match(/Bay Tribune\s+([A-Za-z ]+)/i);
+    if (dm) desk = dm[1].trim().toLowerCase().replace(/\s+(section|desk)$/, '');
+    if (!desk) {
+      var dm2 = name.match(/^Bay Tribune\s+([A-Za-z ]+)$/i);
+      if (dm2) { desk = dm2[1].trim().toLowerCase(); name = ''; }
+    }
+    if (name && name.toLowerCase().indexOf('bay tribune') !== 0 && bylines.indexOf(name) < 0) bylines.push(name);
+    if (desk && desks.indexOf(desk) < 0) desks.push(desk);
+  }
+  var out = {};
+  if (bylines.length) out.byline = bylines.join(', ');
+  if (desks.length) out.desk = desks.join(', ');
+  return out;
+}
+
+// ---------------------------------------------------------------------------
 // POST a document to Supermemory
 // ---------------------------------------------------------------------------
 function addDocument(title, content, extraTags, metaExtras) {
@@ -384,7 +414,9 @@ async function main() {
     }
 
     try {
-      var resp = await addDocument(section.title, section.content, section.tags, metaExtras);
+      // engine.46 T2: per-chunk byline/desk ride along with the run-level extras.
+      var resp = await addDocument(section.title, section.content, section.tags,
+        Object.assign({}, metaExtras, extractBylineMeta(section.content)));
       // ES-1 (G-P-C100-1): surface the returned doc id on its own line so
       // autonomous callers can capture it (mirrors ingestPlayerTrueSource).
       var docId = '';

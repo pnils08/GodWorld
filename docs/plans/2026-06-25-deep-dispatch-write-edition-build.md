@@ -45,11 +45,13 @@ Build order: **substrate (engine-sheet) → harness + floor (research-build desi
 ### Task 1: Per-desk corpus storage (live)
 - **What:** Reactivate `output/desks/{desk}/articles/` as the live per-desk article store, written each run (dead since c90 — scaffolding exists).
 - **Verify:** after a run, each desk's pieces land in its own store.
+- **Status:** [x] **DONE S311** — `fileDeskArticles()` added to `scripts/postRunFiling.js` (runs first on every check, all run types): mirrors `output/reporters/<r>/articles/c{XX}_*.md` into `output/desks/{desk}/articles/<reporter>__<file>.md`. Desk resolves from the article's own byline (piped + desk-only forms, `Section`/`Desk` suffixes stripped, freelance/accountability/metro→civic aliases) with roster-JSON fallback for byline-less first-person features. Verified on C98 (5/5 filed) + C100 (5/5 across civic/culture/sports/business). Idempotent, never guesses — unresolvable desks logged + skipped.
 
 ### Task 2: Byline + desk ingest tags
 - **What:** Add `byline` + `desk` to the metadata maps in `scripts/ingestEdition.js` + `scripts/ingestEditionWiki.js` (today: `cycle`/`type`/`citizen`, no byline/desk).
 - **Verify:** a bay-tribune query filtered on byline returns that reporter's pieces — the "what I've said" / self-knowledge capability.
 - **Note:** Task 1 + Task 2 = the dual-axis-growth substrate. Apply *canonize meaning, not metrics* to WHAT gets ingested — story-level records (finding, blind-spot, who-to-watch), not stat dumps.
+- **Status:** [x] **DONE S311** — `ingestEdition.js`: per-chunk `extractBylineMeta()` merges `byline` + `desk` into each chunk's metadata (tested on c100 text: 6 bylines, 4 desks extracted clean). `ingestEditionWiki.js`: citizen-appearance records gain `reporters` metadata. **Bonus defect fixed:** wiki `addMemory()` accepted metadata and silently DROPPED it — the v4 payload never included the field, so recordType/citizen/cycle/sections never reached Supermemory since the endpoint switch; now sent per-item (official SDK sends metadata first-class; non-2xx rejects loudly so a shape mismatch can't fail silent). Live retrieval verify (byline-filtered bay-tribune query) rides the next edition ingest — C101, media's approval-gated run. Sibling `ingestCivicWiki.js` has the same dropped-metadata shape — flagged, not touched (no metadata maps to carry yet).
 
 *(World-summary ↔ engine_anomalies reconciliation is deliberately NOT in Phase 1 — see D4. The deep desk reaches `engine_anomalies` directly, so it does not gate this build.)*
 

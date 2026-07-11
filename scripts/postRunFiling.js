@@ -174,6 +174,79 @@ function readFlag(name) {
 const ALLOWED_TYPES = ['edition', 'dispatch', 'interview', 'supplemental'];
 
 // ─── Main ──────────────────────────────────────────────────
+// ---------------------------------------------------------------------------
+// engine.46 Phase 1 Task 1 — per-desk article store (dual-axis growth substrate).
+// Mirrors this cycle's per-reporter articles (output/reporters/<r>/articles/
+// c<cycle>_*.md) into output/desks/{desk}/articles/ so each desk owns a
+// growing corpus of its own published work — the "what my desk has said"
+// self-knowledge axis. Dead since c90; the per-reporter store stayed live.
+// Desk resolves from the article's own byline line; files with no resolvable
+// desk are logged and skipped, never guessed. Idempotent — same source always
+// lands on the same destination name (reporter-prefixed to avoid collisions).
+// ---------------------------------------------------------------------------
+const DESK_ALIASES = { 'civic affairs': 'civic', 'metro': 'civic', 'accountability': 'civic', 'freelance': 'civic' };
+
+function resolveDeskFromArticle(text) {
+  // `By <Name> | Bay Tribune <Desk>[, Edition N]` (piped form)
+  let m = text.match(/By\s+[^|\n]*\|\s*Bay Tribune\s+([A-Za-z ]+)/);
+  // `By Bay Tribune <Desk>` (desk-only byline, e.g. civic round-ups)
+  if (!m) m = text.match(/By\s+Bay Tribune\s+([A-Za-z ]+)/);
+  if (!m) return null;
+  // Strip decorative suffixes: 'Business Section' / 'Sports Desk' → business/sports
+  const desk = m[1].trim().toLowerCase().replace(/\s+(section|desk)$/, '');
+  return DESK_ALIASES[desk] || desk;
+}
+
+// Fallback for byline-less pieces (first-person features): reporter dir name →
+// desk via the roster JSON. Names normalize to dir style (maria-keen ↔ Maria Keen).
+let _rosterDeskMap = null;
+function rosterDeskFor(reporterDirName) {
+  if (!_rosterDeskMap) {
+    _rosterDeskMap = {};
+    try {
+      const roster = JSON.parse(fs.readFileSync(path.join(ROOT, 'schemas/bay_tribune_roster.json'), 'utf8'));
+      for (const [deskKey, desk] of Object.entries(roster.desks || {})) {
+        for (const rep of (desk.reporters || [])) {
+          if (rep && rep.name) {
+            _rosterDeskMap[rep.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')] =
+              DESK_ALIASES[deskKey] || deskKey;
+          }
+        }
+      }
+    } catch (e) { /* roster unreadable — fallback disabled, byline-only */ }
+  }
+  return _rosterDeskMap[reporterDirName] || null;
+}
+
+function fileDeskArticles(cycle) {
+  const reportersDir = path.join(ROOT, 'output/reporters');
+  const desksDir = path.join(ROOT, 'output/desks');
+  if (!fs.existsSync(reportersDir) || !fs.existsSync(desksDir)) return;
+  const validDesks = fs.readdirSync(desksDir, { withFileTypes: true })
+    .filter(e => e.isDirectory()).map(e => e.name);
+  let filed = 0, skipped = 0;
+  for (const rep of fs.readdirSync(reportersDir, { withFileTypes: true })) {
+    if (!rep.isDirectory()) continue;
+    const artDir = path.join(reportersDir, rep.name, 'articles');
+    if (!fs.existsSync(artDir)) continue;
+    for (const f of fs.readdirSync(artDir)) {
+      if (!f.startsWith(`c${cycle}_`) || !f.endsWith('.md')) continue;
+      const src = path.join(artDir, f);
+      const desk = resolveDeskFromArticle(fs.readFileSync(src, 'utf8')) || rosterDeskFor(rep.name);
+      if (!desk || !validDesks.includes(desk)) {
+        console.log(`  [DESK-FILE] SKIP ${rep.name}/${f} — ${desk ? `desk '${desk}' has no store under output/desks/` : 'desk not resolvable from byline'}`);
+        skipped++;
+        continue;
+      }
+      const destDir = path.join(desksDir, desk, 'articles');
+      fs.mkdirSync(destDir, { recursive: true });
+      fs.copyFileSync(src, path.join(destDir, `${rep.name}__${f}`));
+      filed++;
+    }
+  }
+  console.log(`  [DESK-FILE] ${filed} article(s) filed to per-desk stores${skipped ? `, ${skipped} skipped` : ''}`);
+}
+
 function main() {
   const args = process.argv.slice(2).filter(a => !a.startsWith('--'));
   const autoUpload = process.argv.includes('--upload');
@@ -236,6 +309,10 @@ Output:
     : `${typeFlag[0].toUpperCase() + typeFlag.slice(1)} C${cycle} / ${slugFlag}`;
   console.log(`\nPOST-RUN FILING CHECK — ${runLabel}`);
   console.log('═'.repeat(50));
+
+  // engine.46 T1 — file this run's articles into per-desk stores first, so the
+  // corpus grows on every run type that produces reporter articles.
+  fileDeskArticles(cycle);
 
   const results = [];
   let missing = 0;

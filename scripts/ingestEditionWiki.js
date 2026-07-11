@@ -421,6 +421,14 @@ for (var ci = 0; ci < citizenNames.length; ci++) {
     memText += ' [CROSS-SECTION: appeared in ' + uniqueSections.length + ' different sections]';
   }
 
+  // engine.46 T2: byline axis — unique reporters who wrote this citizen's pieces,
+  // so a bay-tribune query can filter appearances by who covered them.
+  var uniqueReporters = [];
+  for (var ur = 0; ur < cData.articles.length; ur++) {
+    var rName = (cData.articles[ur].reporter || '').trim();
+    if (rName && uniqueReporters.indexOf(rName) < 0) uniqueReporters.push(rName);
+  }
+
   memories.push({
     content: contentTagPrefix + memText,
     metadata: {
@@ -429,6 +437,7 @@ for (var ci = 0; ci < citizenNames.length; ci++) {
       citizen: cName,
       cycle: cycle,
       sections: uniqueSections.join(','),
+      reporters: uniqueReporters.join(','),
       crossSection: uniqueSections.length >= 2
     }
   });
@@ -559,8 +568,15 @@ if (contradictions.length > 0 || newCitizens.length > 0) {
 
 function addMemory(content, metadata) {
   return new Promise(function(resolve, reject) {
+    // engine.46 T2 fix: metadata was accepted here and silently DROPPED — the
+    // payload never included it, so recordType/citizen/cycle/sections (and now
+    // reporters) never reached the API. The official SDK sends metadata as a
+    // first-class field on add; mirrored per-item on the batch form. Non-2xx
+    // still rejects loudly, so a shape mismatch cannot fail silent.
+    var item = { content: content };
+    if (metadata) item.metadata = metadata;
     var payload = JSON.stringify({
-      memories: [{ content: content }],
+      memories: [item],
       containerTag: CONTAINER_TAG
     });
 

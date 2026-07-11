@@ -2709,6 +2709,13 @@ async function main() {
   // Write base context
   var baseFile = path.join(OUTPUT_DIR, 'base_context.json');
   writeAndScanPacket(baseFile, JSON.stringify({
+    // Env tag: which sheet this context was built from. Readers compare
+    // against their own GODWORLD_SHEET_ID to catch a sandbox run clobbering
+    // the prod file (S306 mags-bot incident).
+    source: {
+      sheetId: process.env.GODWORLD_SHEET_ID || null,
+      generatedAt: new Date().toISOString()
+    },
     baseContext: baseContext,
     canon: canon,
     householdStats: {

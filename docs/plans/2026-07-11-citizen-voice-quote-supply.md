@@ -56,7 +56,7 @@ pointers:
   2. `--dry-run` + `--record` → print what would be written, write nothing (wake discipline).
   3. Amend engine.48 Task 9's canon-guard line: read-only is the *default*, `--record` is the sanctioned write mode (Mike-direct S312, this plan) — same page+intake-only wall as the wake.
 - **Verify:** live sandbox call with `--record` → 1 page doc + 1 intake row + quote returned; without flag → zero writes (byte-identical to S300 behavior); dial test passes.
-- **Status:** [ ] not started
+- **Status:** [x] shipped S312 (engine-sheet) — verified live: PRESS doc `5RhhxJi6mPLrLkJSxs2zV7` on cp-POP-00134 + 1 sandbox intake row (`applied=no`, prod untouched); dial test 49/49; dry-run/read-only paths regression-checked. Step 3 amendment pre-existed in engine.48 plan L151 (added at filing) — no edit needed.
 
 ### Task 2: Batch mode *(engine-sheet)*
 
@@ -66,7 +66,7 @@ pointers:
   1. Add `--batch=path.json` (array of `{pop, ask, record}`) → runs calls sequentially, emits a JSON array to stdout: `{pop, name, quote, disp, recorded, fallback: null | 'no-dials' | 'call-failed: <msg>'}`. One citizen's failure never kills the batch — it lands as a `fallback` entry.
   2. Log per-call + total token usage to stderr (acceptance 6).
 - **Verify:** batch of 3 (one valid, one no-DialState pop, one bogus pop) → 3 entries, 1 quote + 2 fallbacks, exit 0.
-- **Status:** [ ] not started
+- **Status:** [x] shipped S312 (engine-sheet) — verified live exactly per spec: POP-00134 quoted (grounded, in-character), POP-01023 + POP-99999 → `no-dials` fallbacks, exit 0; per-call + batch token totals on stderr (344 prompt / 260 completion for the one call — pennies confirmed).
 
 ### Task 3: `/write-edition` quote-supply pre-pass *(research-build)*
 
@@ -117,3 +117,4 @@ pointers:
 
 - 2026-07-11 — Initial draft (S312, research-build). Mike-direct: priority citizen-usage avenue + record-at-speak-time (page + gated intake; dials stay behind the cycle drain). Closes the S296 curation diagnosis.
 - 2026-07-11 — Tasks 3–5 skill wiring shipped (S313): `write-edition` v2.7 (Step 0.7 pre-pass + prompt block + gate flips) + `post-publish` v1.11 (2e dedup). Detail in task Status lines. Open: engine-sheet T1–2, then live verify.
+- 2026-07-11 — T1–T2 shipped + live-verified (S312, engine-sheet): `--record` + `--batch` on citizenVoice.js. All 5 tasks built; remaining acceptance (2/4/5 — desk verbatim use, letters, post-publish dedup) rides the first live edition (C101 /write-edition).

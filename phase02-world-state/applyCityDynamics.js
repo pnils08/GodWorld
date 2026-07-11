@@ -1413,6 +1413,25 @@ function applyCityDynamics_(ctx) {
   // this scalar — pre-S216, the coverage→sentiment chain was a dead write.
   // Now the boost flows into finalCity.sentiment, then to per-neighborhood
   // Sentiment via v3NeighborhoodWriter's base+mod+variance formula.
+  // ─────────────────────────────────────────────────────────────────────────
+  // INITIATIVE IMPLEMENTATION SENTIMENT BOOST (engine.45 T3e)
+  // ─────────────────────────────────────────────────────────────────────────
+  // applyInitiativeImplementationEffects_ (Phase 2, runs before this at both
+  // entry points) computes sentimentBoost from Initiative_Tracker
+  // ImplementationPhase rows — the column voice agents set at city-hall —
+  // clamped ±0.15. Pre-T3e the scalar landed on the dead S.sentiment, so
+  // city-hall implementation state never moved the persisted city mood.
+  // Ripple_Ledger attribution rows are written per-initiative at the compute
+  // site (initiative/phase/domain causeDetail) — no second row here, same
+  // convention as the sports fold above.
+  var initImplBoost = Number((S.initiativeImplementationEffects &&
+    S.initiativeImplementationEffects.sentimentBoost) || 0);
+  if (initImplBoost !== 0) {
+    finalCity.sentiment += initImplBoost;
+    Logger.log('applyCityDynamics_ engine.45 T3e: Initiative implementation sentiment applied — ' +
+      initImplBoost.toFixed(4));
+  }
+
   var sentimentBoost = Number(S.editionSentimentBoost || 0);
   if (sentimentBoost !== 0) {
     finalCity.sentiment += sentimentBoost;

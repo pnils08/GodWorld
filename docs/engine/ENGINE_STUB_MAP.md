@@ -103,7 +103,7 @@
 
 ### applyCityDynamics.js
 - **applyCityDynamics_(ctx)**
-  Reads: S.absoluteCycle, S.cityCapacity, S.crimeByNeighborhood, S.crimeEvents, S.crimeSpikes, S.cycleId, S.editionNeighborhoodEffects, S.editionSentimentBoost, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.manualDynamicsInputs, S.mediaCount, S.mediaCoverage, S.neighborhoodEconomies, S.neighborhoodWeather, S.previousCycleState, S.season, S.sentiment, S.shockFlag, S.sportsSeason, S.sportsSentimentBoost, S.storySeeds, S.weather, S.worldEvents
+  Reads: S.absoluteCycle, S.cityCapacity, S.crimeByNeighborhood, S.crimeEvents, S.crimeSpikes, S.cycleId, S.editionNeighborhoodEffects, S.editionSentimentBoost, S.eventsGenerated, S.holiday, S.holidayPriority, S.initiativeImplementationEffects, S.isCreationDay, S.isFirstFriday, S.manualDynamicsInputs, S.mediaCount, S.mediaCoverage, S.neighborhoodEconomies, S.neighborhoodWeather, S.previousCycleState, S.season, S.sentiment, S.shockFlag, S.sportsSeason, S.sportsSentimentBoost, S.storySeeds, S.weather, S.worldEvents
   Writes: S.activityObservations, S.cityDynamics, S.cityDynamicsCapacity, S.cityDynamicsLag, S.clusterDefinitions, S.clusterDynamics, S.neighborhoodDemographics, S.neighborhoodDynamics, S.previousCityDynamics, S.previousClusterDynamics, S.previousNeighborhoodDynamics, S.resetDynamicsMomentum, S.storySeedSignals
   Config: ctx.config.cityCapacity, ctx.config.cycleCount, ctx.config.manualDynamicsInputs
 
@@ -127,7 +127,8 @@
   Writes: S.civicVoiceSentiment
 
 - **applyInitiativeImplementationEffects_(ctx)**
-  Writes: S.initiativeImplementationEffects, S.initiativeImplementationTriggers, S.initiativeNeighborhoodEffects, S.sentiment
+  Reads: S.initiativeImplementationTriggers
+  Writes: S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.sentiment
   Sheets: Initiative_Tracker
 
 - **findImplCol_(headers, possibleNames)**

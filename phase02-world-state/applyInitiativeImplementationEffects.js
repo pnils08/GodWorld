@@ -1,8 +1,12 @@
 /**
  * ============================================================================
- * applyInitiativeImplementationEffects_ v1.0 (ES5)
+ * applyInitiativeImplementationEffects_ v1.1 (ES5)
  * ============================================================================
  * [engine/sheet] — Phase 27 civic feedback loop
+ *
+ * v1.1 (S311, engine.45 T3e): outputs made real — per-initiative Ripple_Ledger
+ * rows at compute site; sentimentBoost folded into finalCity.sentiment by
+ * applyCityDynamics; dead S.sentiment write + unread triggers publish removed.
  *
  * Reads ImplementationPhase from Initiative_Tracker and applies ongoing
  * domain-specific effects to AffectedNeighborhoods. Voice agents set
@@ -277,6 +281,26 @@ function applyInitiativeImplementationEffects_(ctx) {
 
     processed++;
 
+    // engine.45 T3e: persist the implementation-phase contribution at the compute
+    // site — the voice-agent-set ImplementationPhase is the cause, the tracker's
+    // AffectedNeighborhoods are the targets. One row per initiative per cycle
+    // (this is an ongoing per-cycle effect, duration 1, same grain as the folds).
+    if (typeof recordRipple_ === 'function') {
+      recordRipple_(ctx, {
+        causeType: 'initiative-implementation',
+        causeId: name,
+        causeDetail: name + ' is ' + phase + ' — ongoing ' + domain +
+          ' effects in ' + hoods.join(', '),
+        effectType: Object.keys(effects).join('/'),
+        targetScope: 'neighborhood',
+        targetIds: hoods,
+        neighborhood: hoods.length === 1 ? hoods[0] : '',
+        magnitude: intensity,
+        duration: 1,
+        sourceEngine: 'applyInitiativeImplementationEffects'
+      });
+    }
+
     Logger.log('  ' + name + ': ' + phase + ' (' + domain + ') → intensity ' +
       intensity.toFixed(2) + ' → ' + hoods.join(', '));
   }
@@ -311,14 +335,16 @@ function applyInitiativeImplementationEffects_(ctx) {
     }
   }
 
-  // Add initiative triggers to story hooks
-  if (!S.initiativeImplementationTriggers) S.initiativeImplementationTriggers = [];
-  S.initiativeImplementationTriggers = S.initiativeImplementationTriggers.concat(triggers);
-
-  // Apply sentiment
-  if (totalSentiment !== 0) {
-    S.sentiment = (S.sentiment || 0) + totalSentiment;
-  }
+  // engine.45 T3e: the S.initiativeImplementationTriggers publish is gone — it had
+  // zero readers since landing; the story path is contract seeds built from the
+  // per-initiative Ripple_Ledger rows written above. Local `triggers` feeds the
+  // count in the summary stats + log line only.
+  // The dead `S.sentiment +=` write is gone too (same class S294 deleted in
+  // applySportsSeason/applyEditionCoverageEffects): sentimentBoost now reaches
+  // finalCity.sentiment via the applyCityDynamics T3e fold.
+  // NOTE: S.initiativeNeighborhoodEffects (merged above) still has no per-hood
+  // consumer — same open seam as per-hood editionNeighborhoodEffects; filed in
+  // the engine.45 plan as the per-hood fold follow-up. Kept published for it.
 
   Logger.log('applyInitiativeImplementationEffects_ v1.0: ' + processed + ' initiatives → ' +
     'sentiment ' + totalSentiment.toFixed(4) + ', ' +

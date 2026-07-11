@@ -1,0 +1,9 @@
+{
+  "profile": "default",
+  "notebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
+  "notebookName": "GodWorld",
+  "driveDest": "edition",
+  "audioFormat": "deep_dive",
+  "shards": [{ "range": [1, 999], "id": "417e2d29-4167-420f-a9cc-76fb6b2b7de2" }],
+  "current": "417e2d29-4167-420f-a9cc-76fb6b2b7de2"
+}

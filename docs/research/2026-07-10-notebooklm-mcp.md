@@ -56,7 +56,7 @@ pointers:
 
 *APPEND a dated line each time grep surfaces this file for a new corner of the sim.*
 
-- (none yet)
+- 2026-07-11 — Bridge live (S310): auth via manual cookie paste, Mike's existing "GodWorld" notebook adopted as the target (he'd already populated it — no backfill), first grounded canon query answered with 19 citations. `nlm notebook query` + `notebooklm` MCP now a standing published-canon Q&A surface.
 
 ---
 

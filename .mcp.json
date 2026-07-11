@@ -4,6 +4,10 @@
       "command": "python3",
       "args": ["scripts/godworld-mcp.py"],
       "cwd": "/root/GodWorld"
+    },
+    "notebooklm": {
+      "command": "/root/GodWorld/.venv/nlm/bin/notebooklm-mcp",
+      "args": []
     }
   }
 }

@@ -89,11 +89,18 @@ async function main() {
   // 1. Source add
   const add = nlm(['source', 'add', config.notebookId, '--file', args.file, '--title', title, '--wait']);
   if (!add.ok) degrade('source add failed: ' + add.out.slice(0, 300));
-  console.log('Source added: ' + title);
+  const idMatch = add.out.match(/Source ID: (\S+)/);
+  const sourceId = idMatch ? idMatch[1] : null;
+  console.log('Source added: ' + title + (sourceId ? ' (' + sourceId + ')' : ''));
 
   // 2. Audio overview (editions only — quota is scarce, /post-publish passes --audio for --type edition)
   if (args.audio) {
-    const create = nlm(['audio', 'create', config.notebookId, '--format', config.audioFormat || 'deep_dive', '--confirm']);
+    // Scope to the just-added source — the notebook holds the whole archive; an
+    // unscoped overview would podcast ALL editions, not this cycle's.
+    const audioArgs = ['audio', 'create', config.notebookId, '--format', config.audioFormat || 'deep_dive', '--confirm'];
+    if (sourceId) audioArgs.push('--source-ids', sourceId);
+    audioArgs.push('--focus', 'Edition C' + args.cycle);
+    const create = nlm(audioArgs);
     if (!create.ok) {
       console.log('NOTEBOOKLM AUDIO SKIPPED (non-blocking): create failed: ' + create.out.slice(0, 300));
     } else {

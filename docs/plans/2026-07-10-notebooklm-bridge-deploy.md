@@ -55,7 +55,7 @@ pointers:
   2. Run `nlm login` with the chosen Google account (Open Q1). If it requires a display: fallback = run login on a machine with a screen and copy the profile/cookie store to this box (their named-profiles feature); document the exact fallback used inline here.
   3. Note the cookie-refresh horizon (their docs: 2–4 weeks) and the re-auth command in this plan's changelog for the ops record.
 - **Verify:** `nlm notebook list` → returns (empty list is fine, no auth error)
-- **Status:** [~] in progress S310 — manual-cookie path confirmed (`nlm login --manual -f /root/.nlm/cookies.txt`, raw `cookie:` header string from DevTools); waiting on Mike's cookie paste
+- **Status:** [x] done S310 — Mike's cookie paste (Chromebook DevTools) → /root/.nlm/cookies.txt → `nlm login --manual -f`; profile at /root/.notebooklm-mcp-cli/profiles/default; `nlm notebook list` returns 3 notebooks
 
 ### Phase 2 — Notebook layout + backfill
 
@@ -66,7 +66,7 @@ pointers:
   1. Create one notebook via `nlm notebook create`: `Bay Tribune — Editions`. Mike's Gemini Pro plan carries NotebookLM Pro limits (~300 sources/notebook — Q3 resolved S310), so the 53-artifact archive plus years of forward cycles fit in one notebook. Verify the live cap during task; the config keeps a shard array so splitting later is a config change, not a code change.
   2. Write `config/notebooklm.json`: `{ "profile": "...", "shards": [{"range": [1,999], "id": "..."}], "current": "<id>" }`.
 - **Verify:** `nlm notebook list` shows the notebook; config JSON parses (`node -e "JSON.parse(...)"`)
-- **Status:** [ ] not started
+- **Status:** [x] done S310 — EXISTING notebook adopted instead of new: Mike already maintains "GodWorld" (417e2d29-4167-420f-a9cc-76fb6b2b7de2, 49 sources, Pro account). config/notebooklm.json written. GodWorld_Oakland (a82990bc, 35 src) left untouched
 
 ### Task 4: Backfill the archive
 
@@ -76,7 +76,7 @@ pointers:
   2. Log per-file result; re-run is idempotent-safe only if we check `nlm source list` first — do the check.
   3. **No audio backfill** — even Pro's ~20 audio overviews/day makes a 53-artifact backfill a multi-day grind for audio Mike already heard; audio is forward-only from the next publish.
 - **Verify:** `nlm source list` → count is 53
-- **Status:** [ ] not started
+- **Status:** [x] SKIPPED S310 (Mike-direct: "bay tribune already populated nothing to back fill") — his GodWorld notebook already carries the edition corpus (49 sources); no server-side backfill
 
 ### Task 5: Grounded-ask smoke test
 
@@ -84,7 +84,7 @@ pointers:
   1. `nlm ask "What happened with the West Oakland Stabilization Fund?"` against the notebook.
   2. Confirm the answer carries citations pointing at edition sources, and spot-check one citation against the actual edition text.
 - **Verify:** cited answer; citation matches real edition content
-- **Status:** [ ] not started
+- **Status:** [x] done S310 — Stabilization Fund question answered with 19 citations across 8 sources; spot-checked cited text matches real edition prose ($4.2M/47 approved/342 applicants, Webb, Osei→Okoro transfer). Acceptance criterion 1 PASS
 
 ### Phase 3 — /post-publish integration
 
@@ -96,7 +96,7 @@ pointers:
   2. **Graceful degrade:** any `nlm` failure (auth expiry, rate limit, UI change) → print `NOTEBOOKLM PUSH FAILED (non-blocking): <reason>` and `process.exit(0)`. The pipeline never blocks on this bridge.
   3. Shard-full handling: if source-add fails on capacity, log instruction to create next shard + update config — don't auto-create.
 - **Verify:** run against the latest published edition file → source visible in `nlm source list`; then rename the cookie store and re-run → warning + exit 0
-- **Status:** [~] built S310 — degrade path verified (exit 0, warning); live-path verify pending auth
+- **Status:** [x] done S310 — live add path verified (test source added+deleted); source-ID parse added; audio now scoped `--source-ids <new>` + `--focus` (unscoped would podcast the whole archive). Audio/delivery live-fire on next edition publish
 
 ### Task 7: /post-publish step wiring
 
@@ -135,7 +135,7 @@ pointers:
   1. Register the jacob-bd MCP server in `.mcp.json` (stdio, pointed at the venv binary) so interactive Mags sessions can `ask_question` directly; pipeline keeps using the CLI.
   2. Add one line to the citizen-retrieval tool map (memory `feedback_citizen-retrieval-tool-by-question.md`): "published-edition questions with citations → `nlm ask` / NotebookLM MCP — reader-side reference only, sheets remain canon authority (ADR-0007)."
 - **Verify:** fresh session lists the MCP tools; a test `ask_question` returns a cited answer
-- **Status:** [ ] not started
+- **Status:** [x] done S310 — `notebooklm` stdio server registered in .mcp.json (venv notebooklm-mcp binary, verified launches); retrieval-tool memory updated with the published-edition-Q&A lane + ADR-0007 boundary + re-auth recipe
 
 ### Task 11: Close the loop
 
@@ -159,4 +159,5 @@ pointers:
 ## Changelog
 
 - 2026-07-10 — Initial draft (S310). Research basis locked same day; jacob-bd adopted over PleasePrompto (S307 candidate) and roomi-fields per landscape table. Draft pending Mike's answers on Q1–Q3.
+- 2026-07-11 — Auth live (manual cookie), existing GodWorld notebook adopted (no backfill, Mike-direct), grounded-ask smoke test PASS with citations, wrapper live-verified + audio source-scoping fix, MCP registered. Remaining: Tasks 8/9 live-fire + acceptance 2 on next edition publish; Task 11 close-out after.
 - 2026-07-10 — All three Qs resolved same session (his account / both drops / Gemini Pro). Tasks 1, 7 done; 6, 8, 9 built pending live verify; Task 2 waiting on cookie paste. Status draft → active.

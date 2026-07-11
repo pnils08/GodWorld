@@ -108,7 +108,7 @@ Maintained for reference by scripts and Mara audits.
 | **Chicago_Citizens** | 123 | SCRIPT | ENGINE | Bulls players + Chicago city citizens |
 | **Business_Ledger** | 51 | ENGINE, SCRIPT, DASHBOARD | SCRIPT | 51 businesses with sectors, employees |
 | **Faith_Organizations** | 16 | SCRIPT, DASHBOARD | SCRIPT | 16 faith orgs with leaders |
-| **Economic_Parameters** | 198 | — | SCRIPT | 198 role economic profiles (local copy at `data/economic_parameters.json`) |
+| **Economic_Parameters** | 198 | ENGINE (engine.51 intake salary pools, `godWorldEngine2.js` L1242+, S305) | SCRIPT | 198 role economic profiles (local copy at `data/economic_parameters.json`). Was "no readers" pre-S305; nearly retired S311 on that stale verdict — final pre-delete grep reversed it. |
 
 ---
 
@@ -147,7 +147,7 @@ Not simulation data. Google Apps Script infrastructure and debugging.
 | **GitHub_Templates** | ERROR | Broken — can't read |
 | **Engine_Index** | ERROR | Old engine index — broken |
 | **Engine_Index2** | 134 | Engine debugging/indexing |
-| **Ledger_Index** | 45 | Ledger debugging/indexing |
+| **Ledger_Index** | ~~45~~ | **DELETED S311** (engine.44 C4, Mike-confirmed) — old manual tab tracker, zero code refs; snapshot at `docs/archive/tab-snapshots/S311-retired-tabs.json`. Narrative_Bridge deleted same pass (header-only, never listed here). |
 
 ---
 

@@ -1,0 +1,426 @@
+{
+ "deletedAt": "S311 2026-07-11",
+ "reason": "engine.44 C4 retire — zero code refs, Mike-confirmed",
+ "Ledger_Index": [
+  [
+   "Active",
+   "Ledger",
+   "Purpose",
+   "Cycle_Packet",
+   "Project_Document",
+   "Feeder ",
+   "Engine_Notes"
+  ],
+  [
+   "yes",
+   "Citizen_Media_Usage",
+   "Who's been used recently (prevents overuse)",
+   "YES",
+   "no",
+   "no",
+   "✓ Clear - prevents same citizens appearing in every article"
+  ],
+  [
+   "yes",
+   "Continuity_Loop",
+   "What to remember",
+   "YES",
+   "no",
+   "no",
+   "✓ Clear - persistent narrative memory for Media Room"
+  ],
+  [
+   "yes",
+   "Press_Drafts",
+   "Story summaries ready for expansion",
+   "YES",
+   "no",
+   "no",
+   "✓ Clear - staging area for Media Room to expand into full articles"
+  ],
+  [
+   "yes",
+   "Cycle_Packet",
+   "Raw engine output — weather, sentiment, arcs, Chicago snapshot",
+   "YES",
+   "no",
+   "no",
+   "✓ Clear - the full cycle data bundle"
+  ],
+  [
+   "yes",
+   "WorldEvents_V3_Ledger",
+   "City texture events (low severity background)",
+   "YES",
+   "no",
+   "no",
+   "✓ Clear - detailed background events with calendar context"
+  ],
+  [
+   "yes",
+   "WorldEvents_Ledger",
+   "City texture events (low severity background)",
+   "YES",
+   "no",
+   "no",
+   "✓ Clear - v2.5 base version of above"
+  ],
+  [
+   "yes",
+   "NBA_Game_Intake",
+   "manual intake ledger for NBA news feed",
+   "YES",
+   "no",
+   "no",
+   "✓ Clear - your Bulls game data entry point"
+  ],
+  [
+   "yes",
+   "MLB_Game_Intake",
+   "manual intake ledger for MLB news feed",
+   "YES",
+   "no",
+   "no"
+  ],
+  [
+   "yes",
+   "Media_Briefing",
+   "Formatted guidance for newsroom — reporter assignments, story seeds, civic status",
+   "YES",
+   "no",
+   "no",
+   "✓ Clear - the bridge document to Media Room"
+  ],
+  [
+   "yes",
+   "Storyline_Tracker",
+   "Active Storlines and Status",
+   "YES",
+   "no",
+   "no",
+   "✓ Clear - tracks what stories are in progress"
+  ],
+  [
+   "yes",
+   "Story_Hook_Deck",
+   "Additional Narrative Hooks",
+   "YES",
+   "no",
+   "no",
+   "✓ Clear - engine-generated story opportunities"
+  ],
+  [
+   "yes",
+   "Story_Seed_Deck",
+   "Prioritized Story Seeds from engine",
+   "YES",
+   "no",
+   "no",
+   "✓ Clear - ranked story possibilities"
+  ],
+  [
+   "yes",
+   "Chicago_Feed",
+   "Bulls/Chicago Satellite",
+   "YES",
+   "no",
+   "no",
+   "✓ Clear - Chicago city data parallel to Oakland"
+  ],
+  [
+   "yes",
+   "Arc_Ledger",
+   "Active narrative arcs with phase/tension",
+   "YES",
+   "no",
+   "no",
+   "✓ Clear - current arcs for Media Room reference"
+  ],
+  [
+   "yes",
+   "MediaRoom_Paste",
+   "raw article table for manual intake",
+   "no",
+   "no",
+   "no",
+   "✓ Clear - where you paste Media Room output"
+  ],
+  [
+   "yes",
+   "Storyline_Intake",
+   "Summarizes into Storyline_Tracker",
+   "no",
+   "no",
+   "YES",
+   "✓ Clear - feeder for storyline updates"
+  ],
+  [
+   "yes",
+   "Citizen_Usage_Intake",
+   "Processed into Citizen_Media_Usage",
+   "no",
+   "no",
+   "YES",
+   "✓ Clear - feeder for usage tracking"
+  ],
+  [
+   "yes",
+   "Continuity_Intake",
+   "Summarizes into Continuity_Loop",
+   "no",
+   "no",
+   "YES",
+   "✓ Clear - feeder for memory updates"
+  ],
+  [
+   "yes",
+   "Media_Intake",
+   "Log of their own articles — they wrote it",
+   "no",
+   "YES",
+   "no",
+   "✓ Clear - record of published Media Room articles"
+  ],
+  [
+   "yes",
+   "Dashboard",
+   "Snapshot",
+   "no",
+   "no",
+   "no",
+   "✓ Clear - visual summary for Maker"
+  ],
+  [
+   "yes",
+   "Sports_Feed",
+   "Values fees \"Dashboard\"",
+   "no",
+   "no",
+   "no",
+   "✓ Clear - sports data for dashboard display"
+  ],
+  [
+   "yes",
+   "Riley_Digest",
+   "Engine summary — feeds Media_Briefing",
+   "no",
+   "no",
+   "YES",
+   "✓ Clear - condensed cycle summary"
+  ],
+  [
+   "yes",
+   "Civic_Office_Ledger",
+   "Elected/appointed officials, factions, status",
+   "no",
+   "YES",
+   "no",
+   "✓ Clear - civic roster with terms/factions"
+  ],
+  [
+   "yes",
+   "Initiative_Tracker",
+   "Mara Civic project tracker",
+   "no",
+   "no",
+   "no"
+  ],
+  [
+   "yes",
+   "Intake",
+   "intake \"NEW\" citizens",
+   "no",
+   "no",
+   "no",
+   "✓ Clear - entry point for brand new citizens"
+  ],
+  [
+   "yes",
+   "Advancement_Intake",
+   "intake to \"EXISTING\" citizens (emergence counts, life changes)",
+   "no",
+   "no",
+   "no",
+   "✓ Clear - updates to existing citizens"
+  ],
+  [
+   "yes",
+   "Simulation_Ledger",
+   "Oakland citizens",
+   "no",
+   "YES",
+   "no",
+   "✓ Clear - core citizen registry"
+  ],
+  [
+   "yes",
+   "LifeHistory_Log",
+   "Oakland citizens microevents log",
+   "no",
+   "no",
+   "YES",
+   "✓ Clear - citizen event history"
+  ],
+  [
+   "yes",
+   "Generic_Citizens",
+   "Oakland citizens - generic",
+   "no",
+   "YES",
+   "no",
+   "✓ Clear - background citizen pool for promotions"
+  ],
+  [
+   "yes",
+   "Relationship_Bonds",
+   "Citizen connections — feeds LifeHistory",
+   "no",
+   "no",
+   "YES",
+   "✓ Clear - bonds between citizens"
+  ],
+  [
+   "yes",
+   "Cultural_Ledger",
+   "Oakland famous citizens",
+   "no",
+   "YES",
+   "no",
+   "✓ Clear - notable/celebrity citizens"
+  ],
+  [
+   "yes",
+   "Chicago_Citizens",
+   "Chicago Citizens",
+   "no",
+   "YES",
+   "no",
+   "✓ Clear - Chicago population parallel to Oakland"
+  ],
+  [
+   "yes",
+   "Neighborhood_Map",
+   "District definitions",
+   "no",
+   "no",
+   "YES",
+   "✓ Clear - 12 Oakland neighborhoods with attributes"
+  ],
+  [
+   "yes",
+   "Domain_Tracker",
+   "Domain activity by cycle — feeds pattern detection",
+   "no",
+   "no",
+   "YES",
+   "✓ Clear - tracks which domains are active"
+  ],
+  [
+   "yes",
+   "Event_Arc_Ledger",
+   "Arc lifecycle — feeds Arc_Ledger",
+   "no",
+   "no",
+   "YES",
+   "✓ Clear - full arc history, Arc_Ledger is current snapshot"
+  ],
+  [
+   "yes",
+   "Texture_Trigger_Log",
+   "Texture events — feeds WorldEvents",
+   "no",
+   "no",
+   "YES",
+   "✓ Clear - raw texture events before processing"
+  ],
+  [
+   "yes",
+   "Sports_Calendar",
+   "Sports schedule",
+   "no",
+   "no",
+   "YES",
+   "✓ Clear - game dates/seasons"
+  ],
+  [
+   "yes",
+   "Simulation_Calendar",
+   "World calendar",
+   "no",
+   "no",
+   "YES",
+   "✓ Clear - GodWorld time with holidays"
+  ],
+  [
+   "yes",
+   "Civic_Sweep_Report",
+   "Civic load data — feeds Media_Briefing",
+   "no",
+   "no",
+   "YES",
+   "✓ Clear - monthly civic status summary"
+  ],
+  [
+   "yes",
+   "World_Drift_Report",
+   "Migration data — feeds Riley_Digest",
+   "no",
+   "no",
+   "YES",
+   "✓ Clear - population movement tracking"
+  ],
+  [
+   "yes",
+   "World_Population",
+   "Population totals — feeds Dashboard",
+   "no",
+   "no",
+   "YES",
+   "✓ Clear - city-level population stats"
+  ],
+  [
+   "yes",
+   "World_Config",
+   "Engine parameters",
+   "no",
+   "no",
+   "YES",
+   "✓ Clear - core engine settings"
+  ],
+  [
+   "yes",
+   "Engine_Index2",
+   "list all App Scripts .gs files writing to ledgers",
+   "no",
+   "YES",
+   "no",
+   "✓ Clear - script inventory"
+  ],
+  [
+   "yes",
+   "Ledger_Index",
+   "detail and describe ledgers in Simulation_Narrative google sheet enviroment",
+   "no",
+   "YES",
+   "no",
+   "✓ Clear - this document"
+  ],
+  [
+   "yes",
+   "Health_Cause_Queue"
+  ]
+ ],
+ "Narrative_Bridge": [
+  [
+   "Cycle",
+   "Cycle_Theme",
+   "City_Tone",
+   "Lead_Synthesis",
+   "Causal_Link",
+   "Neighborhood_Focus",
+   "Key_Players",
+   "Stage_Direction",
+   "Data_Anchors"
+  ]
+ ]
+}

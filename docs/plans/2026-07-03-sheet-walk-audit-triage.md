@@ -109,9 +109,9 @@ Net: 2 tabs with zero real readers (Economic_Parameters, Youth_Events), 1 legacy
 
 | Tab | Evidence | Verdict |
 |---|---|---|
-| Narrative_Bridge | Live tab header-only (1 non-empty row); ZERO code writers to the tab; `scripts/buildNarrativeBridge.js` writes `output/` locally and has ZERO callers (matches S288 workbench orphan flag) | **RETIRE** — tab + orphan script |
-| Ledger_Index | 46 rows of hand-maintained tab-purpose tracking ("Active/Ledger/Purpose/..."); zero code references anywhere; superseded by `docs/SPREADSHEET.md` + `SHEETS_MANIFEST.md` | **RETIRE** |
-| Economic_Parameters | Zero code references (C2 sweep confirmed); full local copy verified: `data/economic_parameters.json` 198 entries = 198 sheet rows | **RETIRE** — data preserved locally |
+| Narrative_Bridge | Live tab header-only (1 non-empty row); ZERO code writers to the tab; `scripts/buildNarrativeBridge.js` writes `output/` locally and has ZERO callers (matches S288 workbench orphan flag) | **RETIRED S311** — tab deleted (Mike-confirmed), orphan script `git rm`'d, snapshot at `docs/archive/tab-snapshots/S311-retired-tabs.json` |
+| Ledger_Index | 46 rows of hand-maintained tab-purpose tracking ("Active/Ledger/Purpose/..."); zero code references anywhere; superseded by `docs/SPREADSHEET.md` + `SHEETS_MANIFEST.md` | **RETIRED S311** — tab deleted (Mike-confirmed), 46 rows snapshotted same file |
+| Economic_Parameters | ~~Zero code references (C2 sweep)~~ **REVERSED at the delete gate S311:** the S290 C2 sweep was stale by execution time — engine.51 intake helpers (`godWorldEngine2.js` L1242+, built S305) read the sheet for intake-category salary pools. Final pre-delete re-grep caught it. | **KEEP — LIVE** (engine.51 reader). Audit lesson: a reader-sweep verdict must be re-run at execution time, not trusted across sessions — same class as PHASE_42_PATTERNS A7 |
 | Family_Relationships | LIVE writers: `generationalWealthEngine.js` L497-505 + `householdFormationEngine.js` (own-tracking sheets, engine.md exempt class) | **KEEP** — "mostly-in-SL" note is about data overlap, not dead code |
 | Media_Intake | Read by `mediaRoomIntake.js` L222/646 (`processMediaIntake_`, cycle-path Phase 11) + written by operator-fired `parseMediaRoomMarkdown.js` | **KEEP** — live intake substrate |
 | Storyline_Intake | Read/ensured by `mediaRoomIntake.js` (Phase 11) + `editionIntake.js`/`processEditionIntake.js`/`editionIntakeV3.js` (current ingest path) | **KEEP** |

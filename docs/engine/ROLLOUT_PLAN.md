@@ -125,7 +125,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.38 | Living City — full-population coverage | in-progress | research-build → engine-sheet | [[../plans/2026-06-19-living-city-full-population-coverage]] + [[../plans/2026-06-30-central-generator-atmospheric-expansion]] + [[../plans/2026-07-01-persistence-seams-content-ledger]] |
 | research.20 | Autonomous deep-dispatch | in-progress | research-build → engine-sheet | [[../adr/0012-autonomous-deep-dispatch-write-edition]] + [[../plans/2026-06-25-deep-dispatch-write-edition-build]] — detail in pointer (relocated 2026-07-02) |
 | research.21 | Citizen-signal story emergence | in-progress | research-build → engine-sheet | [[../plans/2026-06-26-citizen-signal-story-emergence]] + [[../plans/2026-06-29-citizen-signal-detector-build]] — detail in pointer (relocated 2026-07-02) |
-| research.23 | NotebookLM bridge — edition auto-ingest + audio delivery + grounded published-canon Q&A (jacob-bd/notebooklm-mcp-cli adopted, S310) | ready | research-build → media | [[../plans/2026-07-10-notebooklm-bridge-deploy]] + [[../research/2026-07-10-notebooklm-mcp]] |
+| research.23 | NotebookLM bridge — edition auto-ingest + audio delivery + grounded published-canon Q&A (jacob-bd/notebooklm-mcp-cli adopted, S310; LIVE — Q&A proven, audio live-fires next publish) | in-progress | research-build → media | [[../plans/2026-07-10-notebooklm-bridge-deploy]] + [[../research/2026-07-10-notebooklm-mcp]] |
 
 ### governance.* — Skills, MDs, ADRs, project hygiene
 

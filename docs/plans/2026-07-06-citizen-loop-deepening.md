@@ -152,6 +152,62 @@ The first edition-run offload agent, and the assembly Task 6's conversations reu
 - **Verify:** dry-run prints wake-parity prompts; live call returns in-voice text grounded in the citizen's real bonds/texture; `--pop` with no dials exits 2.
 - **Status:** [x] built S300 (engine-sheet). Verified: dry-run assembly correct (POP-00022 — dials, life tail, co-residents, bond, texture all present); live DeepSeek letter grounded in his actual bond + hood texture; media wiring open (handoff above).
 
+### Task 10: Card-anchor slice — the wake reads the wd-card *(engine-sheet; added S312)*
+
+S312 finding (Mike-direct): cron-Vinnie's prompt carried temperament but not the facts of his
+life — no farewell season, no wife, no gala. The facts already live in his wd-citizen card
+(compiled by `scripts/buildCitizenCards.js`, kept fresh by `wdCardsDaemon` + /post-publish
+rebuilds, derived-never-authored per ADR-0007) — the wake just never reads it.
+
+- **Files:**
+  - `lib/wakePerception.js` — modify (new `loadCardAnchor(popId)`)
+  - `scripts/citizen-wake.js` — modify (wire into `buildVoicePrompts` as a `Who you are:` block)
+- **Steps:**
+  1. `loadCardAnchor(popId)`: fetch the citizen's wd-citizens docs by `metadata.popid` (Supermemory API, same auth as `buildCitizenCards.js`); deterministic template-distill — bio line + 2–3 newest appearance lines + fame line + marital line, cap ~600 chars, NO LLM in the distill. Graceful `''` on miss/timeout (wake never blocks on the card).
+  2. Fence it (`memoryFence.wrap`, tag `citizen-card:<popId>`) and place it first in the system prompt — identity anchor precedes perception. Anchor lines are canon; they never compete with page recall.
+  3. Dry-run flag prints the block; cache per-run only (no state file).
+- **Verify:** `--dry-run --pop=POP-00001` → prompt opens with farewell-season/rings/academy facts from the live card; a thin-card citizen degrades to no block, no crash.
+- **Status:** [ ] not started
+
+### Task 11: Voiced speech-texture slice *(engine-sheet; added S312)*
+
+- **Files:**
+  - `lib/wakePerception.js` — modify (new `loadVoiceTexture(popId)`)
+- **Steps:**
+  1. For citizens with a `.claude/agents/citizen-voice-*/IDENTITY.md` whose `POP ID:` matches (same enumeration as Task 2): extract ONLY the speech/voice section (cadence, verbal habits, motifs — no biography, no dial claims; those flow via card + dials so the authored file can't fight live drift, ADR-0014).
+  2. Append to the system prompt as `How you talk:` (~300 chars cap). Non-voiced citizens: no block.
+- **Verify:** Vinnie's dry-run carries his cadence lines; a non-voiced citizen's prompt is unchanged byte-identical.
+- **Status:** [ ] not started
+
+### Task 12: Salience-weighted life tail *(engine-sheet; added S312)*
+
+S312 finding: Vinnie's "recently" block was five atmospheric dailies ("unwinding in the
+evening", "noticed more masks") — milestone events get evicted by texture volume, then
+reflections ground on mush and the page's center of gravity drifts generic (the flattening
+loop). Sibling of the S281 persistence-seams Task-1 finding.
+
+- **Files:**
+  - `lib/wakePerception.js` — modify (the LifeHistory tail selection feeding `c.life`)
+- **Steps:**
+  1. Split the recent window by tag class: milestone/high-salience tags (Wedding/Birth/Death/Health/Promotion/Retirement/Conduct + edition citations) vs texture tags (Daily/PrevEvening/atmospheric). Tail = up to 3 newest milestones (any age within the raw window) + 2 newest texture lines, newest-first — a wedding never loses its slot to a mask-count.
+  2. Tag classes from [[../engine/TAG_REGISTRY]] — don't hand-list beyond what it defines.
+- **Verify:** a citizen with a milestone 8 entries back + 7 newer dailies → milestone present in the dry-run prompt; all-texture citizens unchanged.
+- **Status:** [ ] not started
+
+### Task 13: Spousal bond visibility — data gap *(engine-sheet; added S312)*
+
+S312 finding: POP-00001 is `MaritalStatus=married` (Amara Keane = POP-00002, married) but
+`Relationship_Bonds` holds ZERO rows for him — `loadBonds` correctly renders nothing. The
+marriage exists only in the marital column, invisible to the wake, conversations, and voicing.
+
+- **Files:**
+  - `Relationship_Bonds` sheet + `scripts/` (audit query first — measure-twice)
+- **Steps:**
+  1. Audit: count married/partnered SL citizens with no `Relationship_Bonds` row linking the pair (match spouse by shared last name + household/ParentIds-ChildrenIds where present; ambiguous pairs listed, not auto-linked).
+  2. Backfill unambiguous spousal bonds (`BondType='marriage'`, `Origin='S312 marital backfill'`, current cycle) via `lib/sheets` direct write with read-back verify. Ambiguous list → Mike.
+- **Verify:** post-backfill `--dry-run --pop=POP-00001` renders Amara in "People you have history with"; audit re-run reports 0 unambiguous gaps.
+- **Status:** [ ] not started
+
 ---
 
 ## Open questions
@@ -162,6 +218,7 @@ The first edition-run offload agent, and the assembly Task 6's conversations reu
 
 ## Changelog
 
+- 2026-07-11 — **Tasks 10–13 added (S312, research-build, Mike-direct anti-flattening).** Card-anchor slice + voiced speech-texture + salience-weighted tail + spousal bond backfill; findings documented in each task's header note.
 - 2026-07-11 — **Tasks 6+7 amended (S312, research-build, Mike-direct B+C design).** Conversation
   engine + cron generalized into the three-format exchange engine before first build —
   spec adopted verbatim as format 1 in [[2026-07-11-agent-exchange-engine]] (engine.53).

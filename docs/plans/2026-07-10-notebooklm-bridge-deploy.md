@@ -3,7 +3,7 @@ title: NotebookLM Bridge Deploy Plan
 created: 2026-07-10
 updated: 2026-07-10
 type: plan
-tags: [media, infrastructure, draft]
+tags: [media, infrastructure, active]
 sources:
   - docs/research/2026-07-10-notebooklm-mcp.md — research basis (3-repo landscape, verdict adopt)
   - https://github.com/jacob-bd/notebooklm-mcp-cli — adopted client (v0.8.5, MIT)
@@ -45,7 +45,7 @@ pointers:
   1. `python3 -m venv /root/GodWorld/.venv/nlm && /root/GodWorld/.venv/nlm/bin/pip install notebooklm-mcp-cli`
   2. Symlink or alias `nlm` for pipeline use: reference full path `/root/GodWorld/.venv/nlm/bin/nlm` in all scripts.
 - **Verify:** `/root/GodWorld/.venv/nlm/bin/nlm --version` → prints version ≥0.8.5
-- **Status:** [ ] not started
+- **Status:** [x] done S310 — v0.8.5 in .venv/nlm/
 
 ### Task 2: Auth on a headless box
 
@@ -55,7 +55,7 @@ pointers:
   2. Run `nlm login` with the chosen Google account (Open Q1). If it requires a display: fallback = run login on a machine with a screen and copy the profile/cookie store to this box (their named-profiles feature); document the exact fallback used inline here.
   3. Note the cookie-refresh horizon (their docs: 2–4 weeks) and the re-auth command in this plan's changelog for the ops record.
 - **Verify:** `nlm notebook list` → returns (empty list is fine, no auth error)
-- **Status:** [ ] not started
+- **Status:** [~] in progress S310 — manual-cookie path confirmed (`nlm login --manual -f /root/.nlm/cookies.txt`, raw `cookie:` header string from DevTools); waiting on Mike's cookie paste
 
 ### Phase 2 — Notebook layout + backfill
 
@@ -96,7 +96,7 @@ pointers:
   2. **Graceful degrade:** any `nlm` failure (auth expiry, rate limit, UI change) → print `NOTEBOOKLM PUSH FAILED (non-blocking): <reason>` and `process.exit(0)`. The pipeline never blocks on this bridge.
   3. Shard-full handling: if source-add fails on capacity, log instruction to create next shard + update config — don't auto-create.
 - **Verify:** run against the latest published edition file → source visible in `nlm source list`; then rename the cookie store and re-run → warning + exit 0
-- **Status:** [ ] not started
+- **Status:** [~] built S310 — degrade path verified (exit 0, warning); live-path verify pending auth
 
 ### Task 7: /post-publish step wiring
 
@@ -106,7 +106,7 @@ pointers:
   2. Mark it parallel-OK (independent of the citizen/grade chain) and non-blocking by contract (Task 6 degrade rule).
   3. Add the production-log line item for Step 12's checklist.
 - **Verify:** skill lint passes (`/reload-skills` clean); dry-read of the step by a fresh session is unambiguous
-- **Status:** [ ] not started
+- **Status:** [x] done S310 — SKILL.md v1.10: Step 1c + matrix row + Parallel-OK grouping
 
 ### Task 8: Audio delivery to Mike
 
@@ -115,7 +115,7 @@ pointers:
   1. After download, deliver per Open Q2's answer: Drive upload (existing Drive lib used by edition-print pipeline) and/or Discord post (existing bot reply path with file attachment).
   2. Include cycle + edition title in the delivery message.
 - **Verify:** audio file lands at the drop point on a real run
-- **Status:** [ ] not started
+- **Status:** [~] built S310 — both drops in wrapper (Drive via saveToDrive.js + Discord webhook, attach <8MB else link); live verify pending auth
 
 ### Phase 4 — Maximize: summary capture + canon Q&A surface
 
@@ -126,7 +126,7 @@ pointers:
   1. After source-add on edition runs, `nlm ask "Summarize edition C<NN> — lead stories, key citizens, decisions"` against the current shard; save to `output/nlm_summary_c<NN>.md`. (Mike-direct S310: NotebookLM chat writes the best edition summaries — capture them as artifacts instead of losing them in his browser.)
   2. Same degrade rule: failure warns, never blocks.
 - **Verify:** summary file exists after a push run, content is a real summary with edition specifics
-- **Status:** [ ] not started
+- **Status:** [~] built S310 — in wrapper (`nlm notebook query` → output/nlm_summary_c<NN>.md); live verify pending auth
 
 ### Task 10: Q&A surface for Mags + agents
 
@@ -150,8 +150,8 @@ pointers:
 
 ## Open questions
 
-- [ ] **Q1 — Google account (blocks Task 2):** Recommend **Mike's own account** — the whole point is the notebooks appear in the NotebookLM UI he already uses; a dedicated account would hide them. Hazard accepted: unofficial automation on the main account (roomi-fields advises a burner). Mike call.
-- [ ] **Q2 — Audio drop point (blocks Task 8):** Drive folder vs Discord ping vs both. Mike call.
+- [x] **Q1 — RESOLVED S310:** Mike's own account (Mike-direct "use my account"). Hazard accepted knowingly.
+- [x] **Q2 — RESOLVED S310:** both drops (Mike-direct) — Drive upload + Discord webhook.
 - [x] **Q3 — RESOLVED S310:** Mike has Gemini Pro (Google AI Pro), which carries NotebookLM Pro limits (~300 sources/notebook, ~20 audio/day, ~500 asks/day). Single-notebook layout adopted (Task 3); quota headroom is comfortable at per-cycle cadence.
 
 ---
@@ -159,3 +159,4 @@ pointers:
 ## Changelog
 
 - 2026-07-10 — Initial draft (S310). Research basis locked same day; jacob-bd adopted over PleasePrompto (S307 candidate) and roomi-fields per landscape table. Draft pending Mike's answers on Q1–Q3.
+- 2026-07-10 — All three Qs resolved same session (his account / both drops / Gemini Pro). Tasks 1, 7 done; 6, 8, 9 built pending live verify; Task 2 waiting on cookie paste. Status draft → active.

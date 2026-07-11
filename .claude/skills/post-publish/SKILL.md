@@ -1,8 +1,8 @@
 ---
 name: post-publish
 description: Close the feedback loop. Canonize to Supermemory, update world-data, write ratings to sheets, grade reporters, update criteria files, update newsroom memory. Type-aware — edition, interview, supplemental, dispatch all converge here.
-version: "1.9"
-updated: 2026-06-22
+version: "1.10"
+updated: 2026-07-10
 tags: [media, active]
 effort: high
 disable-model-invocation: true
@@ -40,6 +40,7 @@ Flags:
 | 0 staleness gate | — | — | — | — | (RETIRED S225 — see §Step 0 below)
 | 1a wiki ingest | ✓ | ✓ | ✓ | ✓ |
 | 1b text ingest | ✓ | ✓ (transcript only — see §Step 1) | ✓ | ✓ |
+| 1c NotebookLM push | ✓ (with `--audio`) | ✓ (source only) | ✓ (source only) | ✓ (source only) |
 | 2a citizen cards | ✓ | ✓ | ✓ | ✓ |
 | 2a-cul cultural cards | — | ✓ (when CUL-IDs present) | ✓ (when CUL-IDs present) | ✓ (when CUL-IDs present) |
 | 2e voice reflection ingest | — | ✓ (citizen-voice subjects only) | — | — |
@@ -79,7 +80,7 @@ Several substeps are independent and can run concurrently to compress wall time.
 
 | Group | Substeps | Constraint |
 |-------|----------|-----------|
-| **Parallel-OK** | 2a citizen cards, 2c world summary, 4 coverage ratings | No interdependency. Each writes a different surface (world-data citizens, world-data summary, sheets). Run concurrently. |
+| **Parallel-OK** | 2a citizen cards, 2c world summary, 4 coverage ratings, 1c NotebookLM push | No interdependency. Each writes a different surface (world-data citizens, world-data summary, sheets, NotebookLM). Run concurrently. 1c's audio wait (~2-6 min) hides entirely inside 2a's 30-40 min wall time. |
 | **Sequential after parallel group** | Step 5 (citizen+business intake) | Depends on Step 2a completion via the verification gate (NAMES INDEX presence + parsed count). |
 | **Sequential after Step 5** | Step 5-bis (wd-card rebuild for newly-appended POPIDs) | Depends on Step 5 output JSON for `appended[].popid` range. Closes G-P32 one-cycle card lag per [[../../../docs/adr/0007-cross-layer-canon-authority-precedence|ADR-0007]]. |
 | **Sequential after Step 5-bis** | Steps 6 (grade), 7 (grade history), 8 (exemplars) | Depend on Step 5's intake JSON for entity attribution; Step 5-bis must complete first so newly-appended citizens have wd-cards for grade lookups. |
@@ -122,6 +123,21 @@ For `--type interview` (post /interview v2.0, S233 pipeline.30): the `<source>` 
 **Verification gate:** bay-tribune doc ID returned (single ID — for interview, the transcript `.txt` is the canonical artifact, no companion article exists post /interview v2.0). Fail if the API call returns no ID or an error string.
 
 **Note:** Podcast runs AFTER post-publish as a separate creative process. Podcast handles its own bay-tribune ingest.
+
+**1c. NotebookLM push — Mike's ingest surface (S310, research.23)**
+
+```bash
+node scripts/notebooklmPush.js --file <source> --cycle <XX> --audio   # edition
+node scripts/notebooklmPush.js --file <source> --cycle <XX>           # interview/supplemental/dispatch (source only — audio quota is scarce, editions get it)
+```
+
+Pushes the artifact into the Bay Tribune notebook (Mike's actual reading/listening path). Edition runs additionally generate the audio overview, deliver it to Drive + Discord (both drops, Mike-direct S310), and capture the notebook's own summary to `output/nlm_summary_c<XX>.md`.
+
+**NON-BLOCKING BY CONTRACT:** the script exits 0 on every runtime failure (auth expiry — NotebookLM cookies rot every 2–4 weeks; rate limits; internal-API drift) and prints `NOTEBOOKLM ... (non-blocking):` warnings. A warning here never halts /post-publish — log it in the production log and continue. If auth expired: Mike refreshes the cookie string (DevTools → notebooklm.google.com → copy `cookie:` header value → `/root/.nlm/cookies.txt`), then `nlm login --manual -f /root/.nlm/cookies.txt`.
+
+**Verification gate:** stdout ends with `NotebookLM push complete` OR a `(non-blocking)` warning — both pass. Anything else (non-zero exit) is a real script defect, not a bridge failure.
+
+Parallel-OK: independent of the citizen/grade chain — run alongside Step 2a.
 
 ### Step 2: World-Data Updates — City State
 
@@ -461,6 +477,7 @@ Per-type checklist applicability follows the matrix in §Usage. Edition runs all
 - [ ] Staleness gate clean OR rebuild done before Step 1 (`node scripts/checkPostPublishStaleness.js --cycle <XX>`)
 - [ ] Wiki ingest complete (entity count)
 - [ ] Text ingested (one doc ID; for interview type, the transcript `.txt` is the canonical artifact — single ingest post /interview v2.0)
+- [ ] NotebookLM pushed (`complete` or `(non-blocking)` warning logged; audio + summary on edition runs)
 - [ ] Citizen cards refreshed
 - [ ] Cultural cards refreshed (non-edition + CUL-IDs in NAMES INDEX)
 - [ ] World summary ingested (edition only)
@@ -540,6 +557,7 @@ After `/write-edition` (edition path) or after `/interview`, `/dispatch`, `/writ
 
 ## Changelog
 
+- 2026-07-10 — v1.10 (S310, research-build). research.23 Task 7 — **Step 1c NotebookLM push added** (all types; `--audio` on edition only). Matrix row + step block + Parallel-OK grouping updated. Non-blocking by contract: `scripts/notebooklmPush.js` exits 0 on runtime bridge failures (auth rot / rate limits / API drift); verification gate accepts `complete` OR `(non-blocking)` warning. Plan: [[../../docs/plans/2026-07-10-notebooklm-bridge-deploy]].
 - 2026-06-22 — v1.9 (S267, research-build). governance.42 RB-6. **Step 5b verification gate path fix:** the base_context.json cycle field is **nested** — gate now checks `jq '.baseContext.cycle'`, not the top-level `jq '.cycle'` (which returns `null` and false-alarms; verified live — top-level keys are `baseContext`/`bondStats`/`canon`/`householdStats`). Closes G-P-C99-1. **Step 2a Time Budget bump:** `~10+ min` → `~30-40 min`, with the `--apply` batch-pause cadence (60s every 200 writes) noted as the reason wall time scales with ledger size (C99 ran ~36 min). Closes G-P-C99-2a. Doc-text only, no code change.
 - 2026-04-17 — Initial 13-step skill (S156, post-publish formalized).
 - 2026-04-26 — v1.1 (S180, research-build). Type-aware: `--type {edition|interview|supplemental|dispatch}` flag added. Per-type substep matrix encodes default skips; `--skip-<name>` required only for matrix-✓ opt-outs. Verification gate declared on every substep. Coverage ratings (Step 4) explicitly C93-gated for non-edition. Convergence point for the unified non-edition publishing pipeline (plan [[plans/2026-04-26-non-edition-publishing-pipeline]] T3).

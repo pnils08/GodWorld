@@ -115,6 +115,8 @@ Citizen cards built (Tier 1–2 done, Tier 3–4 in progress) via `scripts/build
 
 343 of 685 citizens have no TraitProfile. Build a script that generates Archetype/Tone/Motifs/Traits from LifeHistory events and engine data. Tags are literary instructions — bounded personality earned from simulation, not assigned. Same philosophy as bounded traits on agents but tag-based instead of numeric.
 
+**CLOSED S311 (engine.50) — premise stale, no build needed.** The engine.31 dial system delivered this by another road: TraitProfile (col R) became the derived face of DialState (col AV), backfilled via `backdateCitizenDials.js` at the S256 deploy and lazily maintained by the Phase-9 compressor fold. Live count S311: **911 of 913 citizens have TraitProfile** (Archetype + trait mods + 8 dials + conduct + top tags — richer than this subitem specced). The 2 gaps (POP-01023 Adash, POP-01024 AJ — GAME-clock mints, June 2026) are **by design**: `compressLifeHistory.js` requires ≥3 LifeHistory entries before folding a face (sparse-activity guard, S269 finding 2); they carry 1 and 2 entries and self-heal at 3+. 33.19 physical details is now unblocked on its 33.17 dependency.
+
 ### 33.18 Clean stale world-data memories — BUILD (engine-sheet terminal)
 
 S131 document ingest created fragmented memories. Replace with Memories API records. Remove old fragments after new memories are confirmed searchable.

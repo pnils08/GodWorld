@@ -90,6 +90,16 @@ node scripts/buildInitiativePackets.js {XX}
 
 **Gate:** `output/initiative_tracker.json` regenerated this run (mtime is this session).
 
+### Step 5.8: Desk packets + base_context refresh (S311)
+
+Rebuild `output/desk-packets/base_context.json` + the 9 desk packets at cycle time. Before S311 this only fired at post-publish Step 5b, so every cycle-run left base_context stale (Discord bot's `lib/mags.js loadWorldState()` reported the prior cycle, and /write-edition desks read prior-cycle packets) until the next edition published. Same gap-shape G-PREP1 closed for initiative packets at Step 5.7.
+
+```bash
+node scripts/buildDeskPackets.js {XX}
+```
+
+**Gate:** `jq '.baseContext.cycle' output/desk-packets/base_context.json` matches `{XX}` — the field is **nested**; top-level `.cycle` returns `null` and false-alarms (G-P-C99-1). Post-publish Step 5b stays — it re-refreshes after publication so edition-coverage data lands; the script is idempotent.
+
 ### Step 6: Gap Log Close (engine-sheet)
 
 Run the mechanical baseline audit and append judgment-layer entries.
@@ -129,9 +139,7 @@ These run as separate skills (may be same or different sessions):
 
 The following scripts were part of the old inline pipeline. Not called by this skill but preserved for future use:
 
-- `scripts/buildDeskPackets.js` — per-desk JSON packets from cycle packet
 - `scripts/buildDeskFolders.js` — per-desk workspace folders
-- `scripts/buildInitiativePackets.js` — per-initiative JSON packets
 - `scripts/buildInitiativeWorkspaces.js` — per-initiative workspace folders
 - `scripts/buildVoiceWorkspaces.js` — per-voice-agent workspace folders
 - `scripts/buildDecisionQueue.js` — pending decisions for voice agents

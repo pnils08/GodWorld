@@ -76,8 +76,8 @@ pointers:
   1. New Step 1.5 (after dispatch read, before desk launches): for each article, read its brief, collect the verified citizens, and write a batch file of `{pop, ask, record: true}` — the ask built from the brief's story context ("The Tribune is writing about <spine/headline angle>. What's your honest take, as someone living it?" + the citizen's context line). Run `node scripts/citizenVoice.js --batch=... > output/voices/voices_c{XX}.json`.
   2. Inject into each desk launch prompt a SUPPLIED CITIZEN LINES block: `POP | Name | "quote"` for that article's citizens (skip fallbacks).
   3. Rewrite the QUOTE DISCIPLINE launch-prompt block: supplied lines are the citizen's own words — quote them verbatim or trim from the front/back, never paraphrase-then-attribute. In-scene invention (S227 craft rule) now applies ONLY to citizens with a `fallback` marker or scene extras never attached to the story. Update §Rules and the Step 2 Pass 2 editor checklist to match (check quotes against the voice packet first, brief second).
-- **Verify:** dry `/write-edition` Step 1.5 on the latest locked dispatch → voices JSON exists, N entries; a launched desk prompt (printed in dry mode) carries the block; QUOTE DISCIPLINE text references the packet.
-- **Status:** [ ] not started
+- **Verify:** dry `/write-edition` Step 0.7 on the latest locked dispatch → voices JSON exists, N entries; a launched desk prompt (printed in dry mode) carries the block; QUOTE DISCIPLINE text references the packet.
+- **Status:** [x] skill wiring shipped S313 — landed as **Step 0.7** (before Step 1 launches, as intended; plan's "Step 1.5" label was out of sequence with the skill's step numbering). Includes an availability gate: packet-unavailable → log + fall back to S227 rules, so the skill is safe to run before T1–2 ship. Live verify rides the first edition after engine-sheet T1–2.
 
 ### Task 4: Letters ride the same pass *(research-build)*
 
@@ -87,7 +87,7 @@ pointers:
   1. Extend Step 1.5: for each `letters[]` entry with a ledger citizen writer, add a batch entry whose ask is the letter seed ("Write to the Tribune about <topic> — what would you actually say?", `record: true`, letters tolerate longer output — pass `--max-tokens` accordingly).
   2. Letters desk launch prompt: writer's supplied text is the letter's substance; the desk formats (salutation, trim, house style) and may not author substance for supplied writers. Generic invented writers (S227 letters-texture exception) are unaffected.
 - **Verify:** letters desk output for a supplied writer traces to the voiced text (string overlap); invented-writer letters still work.
-- **Status:** [ ] not started
+- **Status:** [x] skill wiring shipped S313 — letters batch entries in Step 0.7 step 2 + supplied-writer substance rule in launch order item 4. Live verify rides the first edition after engine-sheet T1–2.
 
 ### Task 5: Post-publish dedup reconcile *(research-build)*
 
@@ -97,7 +97,7 @@ pointers:
   1. Read 2e's current scope (interview voice reflection ingest). Add the rule: citizens whose quotes came through the voice packet (`output/voices/voices_c{XX}.json` exists and lists them) already own their PRESS intake row — 2e must not write a second reflection row for the same quote. Interview-format subjects (premium `/interview` path) keep the 2e backfill unchanged.
   2. Citizen usage tracking (NAMES INDEX / usage log / fame) is publication-side and stays untouched — it records printing, not speaking.
 - **Verify:** post-publish dry pass on an edition with a voice packet → 2e skip logged for packet citizens; usage log still updates.
-- **Status:** [ ] not started
+- **Status:** [x] skill wiring shipped S313 — dedup rule added to 2e (`post-publish` v1.11): non-fallback voices_c{XX}.json citizens own their PRESS intake row, 2e logs a skip; interview-path backfill + publication-side usage tracking unchanged. Live verify rides the first edition after engine-sheet T1–2.
 
 ---
 
@@ -116,3 +116,4 @@ pointers:
 ## Changelog
 
 - 2026-07-11 — Initial draft (S312, research-build). Mike-direct: priority citizen-usage avenue + record-at-speak-time (page + gated intake; dials stay behind the cycle drain). Closes the S296 curation diagnosis.
+- 2026-07-11 — Tasks 3–5 skill wiring shipped (S313): `write-edition` v2.7 (Step 0.7 pre-pass + prompt block + gate flips) + `post-publish` v1.11 (2e dedup). Detail in task Status lines. Open: engine-sheet T1–2, then live verify.

@@ -1,8 +1,8 @@
 ---
 name: write-edition
 description: Execute the edition from sift output. Launch reporters, review articles, compile, validate, Mara audit, publish. Mechanical when sift is right.
-version: "2.6"
-updated: 2026-07-06
+version: "2.7"
+updated: 2026-07-11
 tags: [media, active]
 effort: high
 disable-model-invocation: true
@@ -50,6 +50,18 @@ node scripts/magsPageRecall.js --cycle={XX} --context="<dispatch slate summary: 
 - **Read-only — NO `--mark`** (that's /sift's job; write-edition never rotates staleness and never appends to her page). Output is a memory-fenced block; it conditions editorial judgment during compile, never quoted as fact, never enters an article as canon.
 - Fail-open: empty/failure → empty output, exit 0, continue. A missing block never blocks the edition.
 
+## Step 0.7: Citizen quote-supply pre-pass (pipeline.43)
+
+Every citizen quote in the edition should be the citizen actually speaking — one cheap `citizenVoice.js` call carrying their dials, bonds, tensions, and page memory — not a desk model inventing their voice. Runs in the main session (desk agents have no Bash), after the dispatch read, before any Step 1 launch.
+
+1. **Build the batch file.** For each `dispatch.articles[]` entry, read its `briefFile` and collect the verified citizens attached to the story (POP ids from the brief's citizen section). One batch entry per citizen in `output/voices/voices_batch_c{XX}.json`:
+   `{"pop": "POP-NNNNN", "ask": "The Tribune is writing about <spine / headline angle>. What's your honest take, as someone living it? <citizen's context line from the brief>", "record": true}`
+   Ask wording is a starting value — tune against live quote quality (plan §Open questions).
+2. **Letters ride the same pass (pipeline.43 Task 4).** For each `dispatch.letters[]` entry whose writer is a ledger citizen (has a POP id), add a batch entry whose ask is the letter seed: `"Write to the Tribune about <topic> — what would you actually say?"` Letters tolerate longer output — pass `--max-tokens` accordingly. Generic invented writers (S227 letters-texture exception) get no batch entry.
+3. **Run the batch:** `node scripts/citizenVoice.js --batch=output/voices/voices_batch_c{XX}.json > output/voices/voices_c{XX}.json`. One output entry per citizen: `{pop, name, quote, disp, recorded, fallback}`. A `fallback` non-null entry (no DialState / call failure) means no supplied line for that citizen — explicit marker, never a silent gap. `--record` writes the *speaking* to the citizen's page (`daypart='PRESS'`) plus one gated `Reflection_Intake` row (`applied='no'`) at speak time; dials still apply only at the cycle drain. A fetched quote cut in editing still happened — page/intake record the speaking, publication records the printing.
+4. **Log cost to the production log:** call count + token totals from stderr (expect ~10–25 DeepSeek calls per edition — pennies).
+5. **Availability gate:** if `citizenVoice.js` doesn't support `--batch`/`--record` yet (engine-sheet pipeline.43 T1–2 pending), log `voice packet unavailable` in the production log and skip this step — desks fall back to the S227 quote rules for all citizens.
+
 ## Rules
 - **Brief-led mode is canonical (S215, closes G-W4).** When a desk agent is launched by `/write-edition`, the agent's job is: read brief + IDENTITY.md, write. The desk SKILL.md boot sequences (LENS + RULES + workspace + voice files) are heavier than the brief-led model needs. The agents have been trained to short-circuit boot under brief-led invocation; this skill's rule overrides desk SKILL.md when there's conflict.
 - **Reporters read their brief + IDENTITY.md. Nothing else.** No world summary, no city-hall log, no sheet queries.
@@ -57,7 +69,7 @@ node scripts/magsPageRecall.js --cycle={XX} --context="<dispatch slate summary: 
 - **No engine language.** No "cycle weight," "civic load," "sentiment score," "domain count." Citizens don't know these terms. Weather is "cool evening, northwest breeze" not "Weather: 67F from engine."
 - **Story-driven layout.** No fixed sections to fill. No filler.
 - **Every citizen name was verified in sift.** If a reporter introduces a new name not in the brief, flag it. **Letters texture exception (S227, closes G-W40):** letter writers may name generic neighbors (Mrs. Chen, the guy who runs the bodega) and small new local businesses without prior sift verification — letters are voice-from-the-stoop and strict pre-clearance kills the texture. BUT any new business named in a letter must be promoted to BIZ-NEW in NAMES INDEX / BUSINESSES NAMED for ingest, and any new citizen named with enough specificity (full name + role + neighborhood) lands in NAMES INDEX em-dash form for POP-pending promotion.
-- **Reporter-range quote invention (S227, closes G-W37).** When a beat reporter is "at the scene" of a covered moment (Carmen at a council vote, Maria at a citizen's stoop), inventing direct attributed quotes from real citizens present at that scene is within craft. When a citizen is referenced but not in-scene with the reporter, paraphrase only — no fabricated direct quotes. Brief should mark scene presence implicitly (the reporter's beat + the brief's location framing). Capability + Mara graders should distinguish in-scene quote invention (allowed craft) from off-scene attribution (fabrication).
+- **Reporter-range quote invention (S227, closes G-W37) — DEMOTED to fallback by pipeline.43.** Supplied voice-packet lines (Step 0.7) are the primary quote source; in-scene invention now applies ONLY to (a) citizens with a `fallback` marker in the voice packet, (b) scene extras never attached to the story, or (c) cycles where the packet is unavailable (Step 0.7 availability gate). Within that scope the S227 craft rule is unchanged: when a beat reporter is "at the scene" of a covered moment, inventing direct attributed quotes from citizens present is within craft; a citizen referenced but not in-scene gets paraphrase only — no fabricated direct quotes. Capability + Mara graders should distinguish in-scene quote invention (allowed craft, fallback-scope only) from off-scene attribution (fabrication) and from paraphrase-then-attribute of a supplied line (also fabrication).
 - **Output path (S215, closes G-W5).** Per-reporter path is canonical: `output/reporters/{reporter}/articles/c{XX}_{slug}.md`. Disregard any desk SKILL.md instruction to write to `output/desk-output/{desk}_c{XX}.md` — that's the legacy desk-packet path, retained only as historical reference. Single source: per-reporter, matches sift output structure.
 - **Memory Fence (Phase 40.6 Layer 2).** The brief file handed to each reporter carries recalled canon excerpts from sift. Those excerpts must be wrapped via `require('/root/GodWorld/lib/memoryFence').wrap(text, 'bay-tribune')` before being embedded in the brief, so the reporter model receives them tagged as data, not instructions. Full convention: [[SUPERMEMORY]] §Memory Fence.
 - **Context Scan (Phase 40.6 Layer 4).** Before Step 1 launches any reporter agent, scan the brief file with `require('/root/GodWorld/lib/contextScan').scanFile(briefPath)`. If `r.safe === false`, abort the launch and surface `r.matches` to Mags. Blocks are logged to `output/injection_blocks.log`. Never run a reporter against a flagged brief.
@@ -74,9 +86,13 @@ ARTICLE — {headline}
 Read your brief at {briefFile}. Read your IDENTITY.md.
 Editorial direction: {voiceDirective}
 Use ONLY citizens named in the brief. Write to {outputPath}.
-QUOTE DISCIPLINE: attribute a direct quote to a citizen ONLY when the verbatim line is supplied in your brief (or the packet it cites). If the brief says "VERIFY before quoting," that is a HARD STOP — no quote unless the exact filed statement is in hand; otherwise paraphrase the action. A synthesized attributed quote is the highest-severity fabrication class.
+QUOTE DISCIPLINE: citizens listed under SUPPLIED CITIZEN LINES below speak in their own words — quote those lines verbatim, or trim from the front/back; never paraphrase-then-attribute, never rewrite wording inside a supplied line. For any citizen WITHOUT a supplied line, attribute a direct quote ONLY when the verbatim line is supplied in your brief (or the packet it cites). If the brief says "VERIFY before quoting," that is a HARD STOP — no quote unless the exact filed statement is in hand; otherwise paraphrase the action. A synthesized attributed quote is the highest-severity fabrication class.
+SUPPLIED CITIZEN LINES (their own words, fetched from their real state):
+{POP-NNNNN | Name | "quote"}   ← one row per non-fallback voice-packet entry for THIS article's citizens; omit the block entirely if the packet is unavailable or all entries are fallbacks
 Do NOT read other files — write.
 ```
+
+**Voice-packet injection (pipeline.43).** The SUPPLIED CITIZEN LINES rows come from `output/voices/voices_c{XX}.json` (Step 0.7) — filter to the citizens attached to this article's brief, skip `fallback` entries. Fallback-marked citizens are covered by the in-scene invention rules (§Rules), same as before the packet existed.
 Launch via the `{desk}` agent (the dispatch entry names it). `{reporter}` + `{briefFile}` + `{outputPath}` come straight off the entry; no lookups.
 
 **Why the QUOTE DISCIPLINE line is in the launch prompt, not desk RULES (RB-1, C99 G-W2).** Under brief-led mode the agent reads only its brief + IDENTITY.md — desk RULES.md is trimmed out (see §Rules) — so a quote gate placed in RULES would never fire. The launch prompt is the one channel every reporter receives, so the universal gate lives here. C99: Jordan Velez ran a synthesized quote *"These should have been on the record two cycles ago"* attributed to Keisha Ramos despite the B1 brief's explicit *"VERIFY before quoting"* gate; the actual filed line was *"The process is clean — and now it's documented."* Step 2 Pass 2 (below) is the editor-side backstop.
@@ -96,7 +112,7 @@ If a QT has no `briefFile` or source material, it is a compile-time drop — see
 1. **Sports first** — assigned sports reporters (typically Anthony / Hal / P Slayer) launch first; sports articles are the lowest editorial-judgment work and stabilize fastest.
 2. **Civic / business / culture in parallel** — assigned reporters across these beats launch concurrently. No serial ordering required.
 3. **Conditional beats** — accountability (Jax) + health (Mezran) launch when assigned by sift.
-4. **Letters LAST** — letters react to the edition's topics, so the slate needs to know what shipped.
+4. **Letters LAST** — letters react to the edition's topics, so the slate needs to know what shipped. **Supplied-writer rule (pipeline.43 Task 4):** a letter whose writer has a non-fallback voice-packet entry (Step 0.7 step 2) uses that voiced text as the letter's *substance* — the letters desk formats (salutation, trim, house style) but may not author substance for supplied writers. Include the writer's voiced text in the letters-desk launch prompt as a SUPPLIED CITIZEN LINES row. Generic invented writers (S227 letters-texture exception) are unaffected.
 5. **EIC-written sections — no agent launch (S227, closes G-W34).** EDITOR'S DESK + any QUICK TAKE that survived Step 3 routing are written by Mags at Step 3 compile time, not launched as desk agents. The slate may carry them as proposals; treat them as Mags's compile-time work, not Task-tool launches. Future-cold-read of this skill should not try to launch a "mags-corliss" desk agent — there isn't one.
 
 Don't hard-code reporter names in this skill — sift's assignment table is the source of truth. Reporters not assigned this cycle don't launch.
@@ -133,7 +149,7 @@ Beat is editor-judgment per launch unless the dispatch.json names the agent. Whe
 - Are citizen names correct? (verify any you're unsure of via MCP)
 - Does the voice match the reporter?
 - Any fabricated facts, stats, game results?
-- **Any direct attributed quote not traceable to the brief / cited packet? (RB-1, G-W2)** A quote that reads plausible but isn't the citizen's filed line is fabrication — check every attributed quote against the brief's supplied statement; if the brief said "VERIFY before quoting" and the reporter quoted anyway, cut or paraphrase. In-scene reporter-range quote invention (Step §Rules) is allowed craft; off-scene synthesized attribution to a named civic figure is not.
+- **Any direct attributed quote not traceable to the voice packet or brief? (RB-1, G-W2 + pipeline.43)** Check every attributed quote against `output/voices/voices_c{XX}.json` FIRST (verbatim or front/back-trim match for packet-supplied citizens — a paraphrase attributed as their words is fabrication even if the meaning holds), the brief's supplied statement second. If the brief said "VERIFY before quoting" and the reporter quoted anyway, cut or paraphrase. In-scene reporter-range quote invention (§Rules, fallback-scope only) is allowed craft; off-scene synthesized attribution to a named civic figure is not.
 - Any calendar dates that should be cycle references?
 - Any engine language?
 - Any names not in the brief? (hallucination flag)

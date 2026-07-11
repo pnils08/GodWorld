@@ -1,8 +1,8 @@
 ---
 name: post-publish
 description: Close the feedback loop. Canonize to Supermemory, update world-data, write ratings to sheets, grade reporters, update criteria files, update newsroom memory. Type-aware — edition, interview, supplemental, dispatch all converge here.
-version: "1.10"
-updated: 2026-07-10
+version: "1.11"
+updated: 2026-07-11
 tags: [media, active]
 effort: high
 disable-model-invocation: true
@@ -179,6 +179,8 @@ node -e "require('/root/GodWorld/lib/env');require('/root/GodWorld/lib/personaPr
 ```
 
 One `Reflection_Intake` row per citizen interviewed (`daypart='INTERVIEW'`, `applied='no'`, gated — the cycle drain picks it up like any WAKE row). Tension open/resolve mirrors wake step 3 (cap 3, typed page lines). Re-running the same transcript is a no-op (`duplicate: true` — snippet-matched idempotency guard). Skipped with "0 citizen-voice subjects — substep N/A" when no subject is a voiced agent.
+
+**Voice-packet dedup (pipeline.43 Task 5).** Citizens whose published quotes came through the `/write-edition` quote-supply pre-pass already own their intake row — `citizenVoice.js --record` wrote the page doc (`daypart='PRESS'`) + gated `Reflection_Intake` row at speak time. If `output/voices/voices_c{XX}.json` exists and lists the citizen (non-fallback entry), 2e must NOT write a second reflection row for the same quote — log `2e skip: quote-supplied via voice packet` per citizen. Interview-format subjects (premium `/interview` path) keep the 2e backfill unchanged. Citizen usage tracking (NAMES INDEX / usage log / fame) is publication-side and stays untouched — it records printing, not speaking.
 
 **Verification gate:** live run returns `{"drained":true,...}` per citizen-voice subject (or `duplicate:true` on re-run); no page-prose writes beyond typed tension lines (ADR-0014 — conversational prose never lands on the Supermemory citizen page).
 

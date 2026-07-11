@@ -44,7 +44,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | pipeline.40 | Journal → citizen-loop — FULLY BUILT S300 (freeze + CLIs + /sift+/write-edition wiring + discord-bot repoint + hooks); acceptance rides next /sift + tonight's cron | done-pending-archive | research-build | [[../plans/2026-07-06-journal-to-citizen-loop]] |
 | pipeline.41 | Tensions → /sift story seeds — /sift reads the open tension register as door-knock candidates (subjective material, never publishable as fact) | ready | media | [[../plans/2026-07-06-citizen-loop-deepening]] §Task 8 |
 | pipeline.42 | /sift v2.3 deck-enrichment layer — acceptance CONFIRMED S309 live /sift on C101 | done-pending-archive | research-build | [[../research/2026-07-06-sift-deck-content-consumption]] |
-| pipeline.43 | Citizen voice quote supply — every quote a cheap citizenVoice call, record-at-speak-time (PRIORITY citizen-usage avenue, Mike-direct S312) | ready | engine-sheet (T1–2) + research-build (T3–5) | [[../plans/2026-07-11-citizen-voice-quote-supply]] |
+| pipeline.43 | Citizen voice quote supply (PRIORITY, Mike-direct S312) — T3–5 skill wiring shipped S313; open: T1–2 script + live verify | in-progress | engine-sheet (T1–2) | [[../plans/2026-07-11-citizen-voice-quote-supply]] |
 
 ### engine.* — Engine code, ledger, schema
 

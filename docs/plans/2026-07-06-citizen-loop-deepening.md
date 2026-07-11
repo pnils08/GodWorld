@@ -148,6 +148,7 @@ The first edition-run offload agent, and the assembly Task 6's conversations reu
   2. Voicing floor: `buildPool({shapedMin:0, lifeMinChars:0})` — an edition-named citizen speaks even at mild deviation; no DialState at all → exit 2 (caller falls back to desk-voiced).
   3. **Canon guard:** READ-ONLY — no page docs, no intake, no dials/LifeHistory, no state, no markRecalled. A voiced line becomes canon only via edition publication (existing wall).
 - **Media handoff (letters/interview skills call this per citizen — media terminal wires it, same split as Task 8):** desk builds the ask from the story context, calls once per citizen, formats the returned text.
+- **AMENDED S312 — handoff executes via [[2026-07-11-citizen-voice-quote-supply]] (pipeline.43, Mike-direct priority avenue).** That plan wires the /write-edition quote-supply pre-pass + letters, and its Task 1 amends the canon guard above: READ-ONLY becomes the *default*; a new opt-in `--record` flag runs the wake write block (page `daypart='PRESS'` + gated `Reflection_Intake`) so the citizen records the speaking at quote time. Dials stay behind the cycle drain.
 - **Verify:** dry-run prints wake-parity prompts; live call returns in-voice text grounded in the citizen's real bonds/texture; `--pop` with no dials exits 2.
 - **Status:** [x] built S300 (engine-sheet). Verified: dry-run assembly correct (POP-00022 — dials, life tail, co-residents, bond, texture all present); live DeepSeek letter grounded in his actual bond + hood texture; media wiring open (handoff above).
 

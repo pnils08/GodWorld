@@ -2,7 +2,7 @@
 title: Journal → Citizen-Loop Plan (Mags as citizen-zero)
 created: 2026-07-06
 updated: 2026-07-06
-type: plan
+type: archive
 tags: [media, citizens, citizen-loop, persona, journal, active]
 sources:
   - Mike-direct S298 — journal never became the personality surface; it's "the 24/7 cron cycle but on steroids"; media-only injection at EIC moments

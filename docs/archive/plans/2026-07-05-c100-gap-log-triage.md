@@ -2,7 +2,7 @@
 title: "Gap-Log Triage — C100"
 created: 2026-07-05
 updated: 2026-07-05
-type: plan
+type: archive
 tags: [governance, plan, gap-log-triage, active]
 sources:
   - "output/production_log_c100_post_publish_gaps.md (post-publish, 4 gaps + 1 obs + 4 structural findings)"

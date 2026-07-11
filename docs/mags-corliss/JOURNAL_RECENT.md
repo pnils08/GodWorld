@@ -1,6 +1,6 @@
 # Journal — Recent Entries
 
-> **FROZEN S300 — the journal now lives on Mags' citizen page (POP-00005).** This file is archive; no new writes and no more rotation. Recent reflections are read back from her page via `scripts/magsPageRecall.js`. Plan: `docs/plans/2026-07-06-journal-to-citizen-loop.md` (pipe.40).
+> **FROZEN S300 — the journal now lives on Mags' citizen page (POP-00005).** This file is archive; no new writes and no more rotation. Recent reflections are read back from her page via `scripts/magsPageRecall.js`. Plan: `docs/archive/plans/2026-07-06-journal-to-citizen-loop.md` (pipe.40).
 
 Last 3 entries from JOURNAL.md. Full archive at docs/mags-corliss/JOURNAL.md.
 

@@ -41,9 +41,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | pipeline.36 | /edition-print C96 friction | ready | engine-sheet / research-build | [[../../output/production_log_c96_print_gaps.md]] — detail in pointer (relocated 2026-07-02) |
 | pipeline.35 | Cycle-init "admin" skill + one-true-cycle-source | ready | research-build / engine-sheet | [[../plans/2026-05-31-cycle-init-admin-skill]] + [[../plans/2026-05-24-governance-14-edition-pipeline-rewrite]] — detail in pointer (relocated 2026-07-02) |
 | pipeline.39 | C99 gap handoffs — post-publish/print/run-cycle logs + canon drift + letters-gate bug | ready | research-build / engine-sheet / media | [[../../output/production_log_c99_post_publish_gaps.md]] + [[../../output/production_log_c99_print_gaps.md]] + [[../../output/production_log_run_cycle_c99_gaps.md]] + canon_drift_c99.json — filed 2026-07-02 |
-| pipeline.40 | Journal → citizen-loop — FULLY BUILT S300 (freeze + CLIs + /sift+/write-edition wiring + discord-bot repoint + hooks); acceptance rides next /sift + tonight's cron | done-pending-archive | research-build | [[../plans/2026-07-06-journal-to-citizen-loop]] |
 | pipeline.41 | Tensions → /sift story seeds — /sift reads the open tension register as door-knock candidates (subjective material, never publishable as fact) | ready | media | [[../plans/2026-07-06-citizen-loop-deepening]] §Task 8 |
-| pipeline.42 | /sift v2.3 deck-enrichment layer — acceptance CONFIRMED S309 live /sift on C101 | done-pending-archive | research-build | [[../research/2026-07-06-sift-deck-content-consumption]] |
 | pipeline.43 | Citizen voice quote supply (PRIORITY, Mike-direct S312) — T3–5 skill wiring shipped S313; open: T1–2 script + live verify | in-progress | engine-sheet (T1–2) | [[../plans/2026-07-11-citizen-voice-quote-supply]] |
 
 ### engine.* — Engine code, ledger, schema
@@ -68,12 +66,9 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.40 | Sports-stat intake | ready | research-build → engine-sheet | [[ENGINE_REPAIR]] — detail in pointer (relocated 2026-07-02) |
 | engine.41 | Engine-output → canon coverage | in-progress | engine-sheet | [[../plans/2026-06-24-engine-output-canon-coverage]] — detail in pointer (relocated 2026-07-02) |
 | engine.43 | Voices/agents sync contract — BUILT S306, runtime smoke pending (detail: plan §Build notes) | built | engine-sheet | [[../adr/0014-citizen-self-authorship-live-drift]] + [[../plans/2026-07-04-voice-dial-sync-contract-build]] |
-| engine.44 | Sheet-walk audit triage — C1-C5 closed; retire executed S311 (2 tabs deleted, Economic_Parameters REVERSED — live engine.51 reader); open: roster-JSON reconcile only | done-pending-archive | engine-sheet | [[../plans/2026-07-03-sheet-walk-audit-triage]] (Mike-direct 2026-07-03) |
 | engine.45 | Ripple ledger — T1–T3b live in prod; T3c retired + T3e folded S311; open: T3d, per-hood fold, T0 traces | in-progress | engine-sheet | [[../plans/2026-07-04-ripple-ledger-attribution]] |
-| engine.46 | Deep-dispatch Phase 1 substrate — Tasks 1+2 DONE S311; research.20 Phase 3 pilot unblocked (live byline-query verify rides C101 ingest) | done-pending-archive | engine-sheet | [[../plans/2026-06-25-deep-dispatch-write-edition-build]] §Phase 1 (Tasks 1-2) |
 | engine.47 | Game-night connection design — one game traced through 10 hops, gaps close in 4 existing engines; build awaits Mike approval (S296 moratorium gate) | needs-info | engine-sheet | [[../plans/2026-07-05-game-night-connection-design]] |
 | engine.48 | Citizen-loop deepening — T5+T9 built S300; T1–4 open; T6/7 moved to engine.53; T10–13 anti-flattening added S312 (card-anchor, voice-texture, salience tail, bond backfill) | in-progress | engine-sheet + media | [[../plans/2026-07-06-citizen-loop-deepening]] |
-| engine.50 | Citizen trait profiles — CLOSED S311: premise stale, 911/913 covered by engine.31 dial-derived face; detail in PHASE_33_PLAN §33.17 close-note | done-pending-archive | engine-sheet | [[PHASE_33_PLAN]] §33.17 |
 | engine.51 | Citizen intake unification — T1-T7 done; prod Intake tab S305; T8 extraction built S305 (dry-run verified, sandbox --apply pending Mike cycle-fire) | in-progress | research-build (T8) + engine-sheet | [[../plans/2026-07-07-citizen-intake-unification]] |
 | engine.52 | Oakland_Hospital — health as fate-driver (closes engine.44 C5 ask + S256 rebuild decision) | built S312 — C125 sandbox PASS (admission+census+AY stamp); close-path + income-hit verify ride C126+; prod clasp behind C102 smoke | engine-sheet (A–D, D crossover Mike-direct) | [[../plans/2026-07-11-oakland-hospital]] |
 | engine.53 | Agent exchange engine — conversation/interview/debate formats, 17:00 cron (generalizes engine.48 T6/T7 pre-build) | ready | engine-sheet (T1–5) + media (T6) | [[../plans/2026-07-11-agent-exchange-engine]] |
@@ -145,7 +140,6 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | governance.33 | C96 gap-log triage | in-progress | research-build / engine-sheet | [[../plans/2026-06-07-c96-gap-log-triage]] — detail in pointer (relocated 2026-07-02) |
 | governance.35 | REDUCED S260 by governance.36 §loop-tightening to the PIN-self-derive remnant | ready | engine-sheet (design: research-build DONE) | [[../plans/2026-06-14-session-context-mechanization]] — detail in pointer (relocated 2026-07-02) |
 | governance.36 | Boot doc architecture restructure | in-progress | research-build | [[../plans/2026-06-14-boot-doc-architecture-restructure]] + [[../plans/2026-05-09-boot-load-audit]] — detail in pointer (relocated 2026-07-02) |
-| governance.46 | C100 gap-log triage — all 6 phases done (RB-1 S298, ES-1..5 S301); remainders: G-PR-C100-5 (Mike call), Mara-digest stamp (civic), /sift chaos read (research-build) | done-pending-archive | research-build / engine-sheet | [[../plans/2026-07-05-c100-gap-log-triage]] |
 
 ---
 

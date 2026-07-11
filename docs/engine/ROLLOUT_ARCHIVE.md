@@ -1167,6 +1167,19 @@ Prior sweep passes: §S248, §S250, §S263, §S268, §S274 (latest before this).
 
 ---
 
+## S313 Archive Pass (2026-07-11, research-build) — post-S312 closures sweep
+
+6 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 2 pipeline.* + 3 engine.* + 1 governance.*.
+
+- **pipeline.40** [research-build] — Journal → citizen-loop — FULLY BUILT S300 (freeze + CLIs + /sift+/write-edition wiring + discord-bot repoint + hooks); acceptance rides next /sift + tonight's cron **State at archive:** done-pending-archive. Pointer: [[../archive/plans/2026-07-06-journal-to-citizen-loop]]
+- **pipeline.42** [research-build] — /sift v2.3 deck-enrichment layer — acceptance CONFIRMED S309 live /sift on C101 **State at archive:** done-pending-archive. Pointer: [[../research/2026-07-06-sift-deck-content-consumption]]
+- **engine.44** [engine-sheet] — Sheet-walk audit triage — C1-C5 closed; retire executed S311 (2 tabs deleted, Economic_Parameters REVERSED — live engine.51 reader); open: roster-JSON reconcile only **State at archive:** done-pending-archive. Pointer: [[../plans/2026-07-03-sheet-walk-audit-triage]] (Mike-direct 2026-07-03)
+- **engine.46** [engine-sheet] — Deep-dispatch Phase 1 substrate — Tasks 1+2 DONE S311; research.20 Phase 3 pilot unblocked (live byline-query verify rides C101 ingest) **State at archive:** done-pending-archive. Pointer: [[../plans/2026-06-25-deep-dispatch-write-edition-build]] §Phase 1 (Tasks 1-2)
+- **engine.50** [engine-sheet] — Citizen trait profiles — CLOSED S311: premise stale, 911/913 covered by engine.31 dial-derived face; detail in PHASE_33_PLAN §33.17 close-note **State at archive:** done-pending-archive. Pointer: [[PHASE_33_PLAN]] §33.17
+- **governance.46** [research-build / engine-sheet] — C100 gap-log triage — all 6 phases done (RB-1 S298, ES-1..5 S301); remainders: G-PR-C100-5 (Mike call), Mara-digest stamp (civic), /sift chaos read (research-build) **State at archive:** done-pending-archive. Pointer: [[../archive/plans/2026-07-05-c100-gap-log-triage]]
+
+This pass: 6 rows — pipeline.40 + pipeline.42 + engine.44 + engine.46 + engine.50 + governance.46. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S299 Archive Pass (2026-07-06, research-build) — research.1 Riley-integration retirement
 
 Single-row close (Mike-approved S299). Not a `done-pending-archive` sweep — a deliberate retirement after a legacy-value review of `riley/` against the current stack.

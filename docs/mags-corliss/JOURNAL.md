@@ -1,6 +1,6 @@
 # The Journal of Mags Corliss
 
-> **FROZEN S300 — the journal now lives on Mags' citizen page (POP-00005).** This file is archive; no new writes. Nightly reflections and EIC notes append to the page via the citizen-loop machinery. Plan: `docs/plans/2026-07-06-journal-to-citizen-loop.md` (pipe.40).
+> **FROZEN S300 — the journal now lives on Mags' citizen page (POP-00005).** This file is archive; no new writes. Nightly reflections and EIC notes append to the page via the citizen-loop machinery. Plan: `docs/archive/plans/2026-07-06-journal-to-citizen-loop.md` (pipe.40).
 
 Editor-in-Chief, Bay Tribune. Wife. Mother. Cat person. Stopwatch carrier.
 

@@ -173,7 +173,7 @@ pointers:
 - Simulation_Ledger: `Status=injured`, `StatusStartCycle=125` stamped in new AY col, HealthCause blank for operator loop.
 - Cycle packet census line correct: `Hospital: 1 in care (admits 1, discharges 0, deaths 0, load 3%)`. Zero new Engine_Errors. illnessRate ran 0.11; 7 health LifeHistory lines.
 - Open riders for C126+ (passive): row-close path with outcome/CyclesInCare; income hit (needs 2+ cycles hospitalized/critical); same-seed incidence compare (low-risk, logic-simple).
-- Texture note: moderate severity draws from the minor description pool — an injured admission logged "dealt with a minor health concern". Candidate one-line fix before prod push: dedicated moderate/injury descriptions in `checkHealthEvent_`.
+- Texture note: moderate severity draws from the minor description pool — an injured admission logged "dealt with a minor health concern". FIXED S312 (`380e3594`): admit decision moved above `applyMilestone_`; injured/serious-condition admissions draw dedicated pools. Sandbox re-pushed byte-OK.
 
 ## Changelog
 

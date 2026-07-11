@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-07-07 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-07-11 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -360,12 +360,6 @@
 - **calculateCityWideFromMap_(metricsMap)**
 
 - **calculateCityWideCategoriesFromMap_(metricsMap)**
-
-- **generateCrimeEvents_(ctx)**
-  RNG: ctx.rng / safeRand_(ctx)
-
-- **getCrimeStorySignals_(ctx)**
-  Reads: S.crimeMetrics
 
 - **derivePatrolStrategy_(ctx, S)**
   Reads: S.patrolStrategy
@@ -3061,4 +3055,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 178
-**Functions mapped:** 1052
+**Functions mapped:** 1050

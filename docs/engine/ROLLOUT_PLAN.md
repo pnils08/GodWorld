@@ -74,6 +74,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.48 | Citizen-loop deepening — T5 wakePerception lib + T9 citizenVoice offload CLI built S300; T1–4, 6–7 open; T9 media wiring open | in-progress | engine-sheet + media | [[../plans/2026-07-06-citizen-loop-deepening]] |
 | engine.50 | Citizen trait profiles — ~343 citizens missing TraitProfile; generate Archetype/Tone/Motifs/Traits from LifeHistory + engine data (rehomed from Phase 33 §33.17 at research.1 retirement, S299) | ready | engine-sheet | [[PHASE_33_PLAN]] §33.17 |
 | engine.51 | Citizen intake unification — T1-T7 done; prod Intake tab S305; T8 extraction built S305 (dry-run verified, sandbox --apply pending Mike cycle-fire) | in-progress | research-build (T8) + engine-sheet | [[../plans/2026-07-07-citizen-intake-unification]] |
+| engine.52 | Oakland_Hospital — health as fate-driver (closes engine.44 C5 ask + S256 rebuild decision) | ready | engine-sheet (A–C) + research-build (D) | [[../plans/2026-07-11-oakland-hospital]] |
 
 ### canon.* — World-fidelity layer
 

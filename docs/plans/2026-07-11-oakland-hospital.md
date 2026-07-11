@@ -134,7 +134,7 @@ pointers:
   1. Read `Hospital_Ledger` open + recently-closed rows (last 3 cycles) alongside the existing sheet reads.
   2. Emit a `hospital` block in the civic + culture desk packets: census counts, load state (normal <60% / strained 60–90% / crisis >90% of capacity), and the linked citizen rows (POPID, name, neighborhood, cause, cycles in care). This replaces the fabricated crisis-arc feed with measured signal + real protagonists — the S256 rebuild decision. Leave `arcs = []` as-is; do not resurrect the arc system.
 - **Verify:** `node scripts/buildDeskPackets.js` against sandbox → packet JSON contains `hospital` block with ≥1 linked citizen when the ledger has open rows.
-- **Status:** [ ] not started (research-build)
+- **Status:** [x] built S312 (engine-sheet, Mike-direct crossover) — verify vs live rows pending first admission
 
 ### Task D2: World summary census line
 
@@ -143,7 +143,7 @@ pointers:
 - **Steps:**
   1. Append hospital census to the existing illness-rate line: `| Hospital: N in care (load%)` read from Cycle_Packet census fields.
 - **Verify:** `node scripts/buildWorldSummary.js` → line renders with census when packet carries it, degrades cleanly (no crash) when absent.
-- **Status:** [ ] not started (research-build)
+- **Status:** [x] built S312 (engine-sheet, Mike-direct crossover) — verify vs live rows pending first admission
 
 ---
 

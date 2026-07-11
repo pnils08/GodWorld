@@ -167,7 +167,7 @@ function emitHeader(cycle, rileyCurr, calendar) {
   return lines;
 }
 
-function emitCityState(rileyCurr, worldPop, neighborhoodsC, prevRileyCount) {
+function emitCityState(rileyCurr, worldPop, neighborhoodsC, prevRileyCount, hospitalCensus) {
   const nightlife = parseJsonField(rileyCurr.NightLife, {});
   const worldEvents = parseJsonField(rileyCurr.WorldEvents, []);
   const domainCounts = {};
@@ -190,7 +190,7 @@ function emitCityState(rileyCurr, worldPop, neighborhoodsC, prevRileyCount) {
   const lines = [
     '## City State',
     '',
-    `- **Population:** ${fmtPopulation(worldPop.totalPopulation)} | Illness rate ${fmtNum(Number(worldPop.illnessRate) * 100, 1)}% | Employment ${fmtNum(Number(worldPop.employmentRate) * 100, 1)}% | Economy ${worldPop.economy || '—'}`,
+    `- **Population:** ${fmtPopulation(worldPop.totalPopulation)} | Illness rate ${fmtNum(Number(worldPop.illnessRate) * 100, 1)}% | Employment ${fmtNum(Number(worldPop.employmentRate) * 100, 1)}% | Economy ${worldPop.economy || '—'}${hospitalCensus ? ` | Hospital: ${hospitalCensus.inCare} in care (${hospitalCensus.loadPct}% load)` : ''}`,
     `- **Migration:** ${worldPop.migration || '—'} (MigrationDrift ${rileyCurr.MigrationDrift || '—'} this cycle)`,
     `- **Events generated:** ${rileyCurr.EventsGenerated || '—'}${eventsDelta} | **Citizens aged:** ${rileyCurr.CitizensAged || '—'} | **Intake processed:** ${rileyCurr.IntakeProcessed || '0'}`,
     `- **Story seed count:** ${rileyCurr.StorySeedCount || '—'}${seedDelta}`,
@@ -607,7 +607,8 @@ async function buildWorldSummary(cycle) {
     neighborhoodsAll,
     worldPopAll,
     calendarAll,
-    chaosAll
+    chaosAll,
+    hospitalAll
   ] = await Promise.all([
     sheets.getSheetAsObjects('Riley_Digest'),
     sheets.getSheetAsObjects('Oakland_Sports_Feed'),
@@ -616,7 +617,9 @@ async function buildWorldSummary(cycle) {
     sheets.getSheetAsObjects('World_Population'),
     sheets.getSheetData('Simulation_Calendar'),
     // ES-3: tolerate copies/sandboxes without the Chaos_Cars tab
-    sheets.getSheetAsObjects('Chaos_Cars').catch(() => [])
+    sheets.getSheetAsObjects('Chaos_Cars').catch(() => []),
+    // engine.52 D2: Hospital_Ledger is lazy-created — tolerate absence
+    sheets.getSheetAsObjects('Hospital_Ledger').catch(() => [])
   ]);
 
   const rileyCurr = rileyAll.find(r => String(r.Cycle) === String(cycle));
@@ -637,10 +640,17 @@ async function buildWorldSummary(cycle) {
   // Build sections
   const out = [];
   out.push(...emitHeader(cycle, rileyCurr, calendarAll.slice(1)));
+  // engine.52 D2 — hospital census from open Hospital_Ledger rows (capacity 40,
+  // matches persistHospitalLedger_); null when the tab is absent or empty.
+  const hospitalOpen = hospitalAll.filter(r => r.POPID && String(r.DischargeCycle ?? '').trim() === '');
+  const hospitalCensus = hospitalAll.length
+    ? { inCare: hospitalOpen.length, loadPct: Math.round((hospitalOpen.length / 40) * 100) }
+    : null;
+
   out.push(...emitCityState(rileyCurr, worldPopCurr, neighborhoodsC, {
     storySeedCount: rileyPrev1?.StorySeedCount ?? null,
     eventsGenerated: rileyPrev1?.EventsGenerated ?? null
-  }));
+  }, hospitalCensus));
   out.push(...emitCivicDecisions(cycle));
   out.push(...emitSports(sportsAll, cycle));
   out.push(...emitEveningTexture(rileyCurr));

@@ -1982,6 +1982,49 @@ function parseWinPctFromRecord(record) {
 
 // ─── MAIN ──────────────────────────────────────────────────
 
+// engine.52 D1 — hospital census block from Hospital_Ledger rows.
+// Open rows (no DischargeCycle) are the current census; rows closed within
+// the last 3 cycles surface as recent outcomes. Returns null when the tab
+// is absent/empty so packets degrade cleanly pre-first-admission.
+function buildHospitalBlock(rows, cycle) {
+  var valid = (rows || []).filter(function(r) { return r.POPID; });
+  if (!valid.length) return null;
+
+  var CAPACITY = 40; // matches persistHospitalLedger_ (buildCyclePacket.js)
+
+  function rowOut(r) {
+    var admit = parseInt(r.AdmitCycle);
+    var inCare = (r.CyclesInCare !== '' && r.CyclesInCare !== undefined && r.CyclesInCare !== null)
+      ? Number(r.CyclesInCare)
+      : (isNaN(admit) ? 0 : Math.max(0, cycle - admit));
+    return {
+      popId: r.POPID, name: r.Name || '', neighborhood: r.Neighborhood || '',
+      cause: r.Cause || '', status: r.StatusNow || '',
+      admitCycle: r.AdmitCycle, cyclesInCare: inCare, outcome: r.Outcome || ''
+    };
+  }
+
+  var open = valid.filter(function(r) {
+    return String(r.DischargeCycle === undefined || r.DischargeCycle === null ? '' : r.DischargeCycle).trim() === '';
+  });
+  var recentClosed = valid.filter(function(r) {
+    var dc = parseInt(r.DischargeCycle);
+    return !isNaN(dc) && (cycle - dc) >= 0 && (cycle - dc) <= 3;
+  });
+
+  var load = open.length / CAPACITY;
+  return {
+    census: {
+      inCare: open.length,
+      capacity: CAPACITY,
+      load: Math.round(load * 100) / 100,
+      loadState: load > 0.9 ? 'crisis' : (load >= 0.6 ? 'strained' : 'normal')
+    },
+    inCare: open.map(rowOut),
+    recentOutcomes: recentClosed.map(rowOut)
+  };
+}
+
 async function main() {
   console.log('=== buildDeskPackets v1.8 (Auto Archive Context) ===');
   console.log('Cycle:', CYCLE);
@@ -2006,7 +2049,7 @@ async function main() {
     storylineRaw, packetRaw, historyRaw,
     householdRaw, bondsRaw, worldPopRaw, simCalRaw,
     neighborhoodMapRaw, businessLedgerRaw, mediaLedgerRaw,
-    rileyRaw
+    rileyRaw, hospitalRaw
   ] = await Promise.all([
     safeGet('Story_Seed_Deck'),
     safeGet('Story_Hook_Deck'),
@@ -2029,7 +2072,8 @@ async function main() {
     safeGet('Neighborhood_Map'),
     safeGet('Business_Ledger'),
     safeGet('Media_Ledger'),
-    safeGet('Riley_Digest')
+    safeGet('Riley_Digest'),
+    safeGet('Hospital_Ledger') // engine.52 D1 — lazy-created tab, safeGet degrades to []
   ]);
 
   console.log('Sheets pulled in ' + (Date.now() - startTime) + 'ms');
@@ -2079,6 +2123,15 @@ async function main() {
   // Neighborhood_Map sentiment/crime + citizen linkage) as a deliberate post-C97
   // build. RESTORE = delete the next line once the connected generator ships.
   arcs = [];
+
+  // engine.52 D1 — the connected rebuild the S256 note above ordered, first
+  // half: hospital census measured from Hospital_Ledger (engine-written, real
+  // admissions with real protagonists), not fabricated crisis buckets. Emitted
+  // to civic + culture packets below. Arc system stays retired.
+  var hospitalBlock = buildHospitalBlock(allToObjects(hospitalRaw), CYCLE);
+  console.log('  Hospital block:', hospitalBlock
+    ? (hospitalBlock.census.inCare + ' in care, ' + hospitalBlock.recentOutcomes.length + ' recent outcomes')
+    : 'none (no Hospital_Ledger rows)');
 
   // Civic and initiatives (filter empty rows — sheet has 1000 rows, ~35 filled)
   var civicOfficers = allToObjects(civicRaw).filter(function(o) { return o.Title; });
@@ -2591,6 +2644,9 @@ async function main() {
           involvedCitizens: citizens
         };
       }),
+      // engine.52 D1 — measured hospital census with linked citizen rows,
+      // civic + culture desks only (the S256 connected-signal rebuild).
+      hospital: (deskId === 'civic' || deskId === 'culture') ? hospitalBlock : null,
       storylines: deskStorylines.map(function(s) {
         return {
           type: s.StorylineType || '', description: s.Description || '',

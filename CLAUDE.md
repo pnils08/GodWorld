@@ -26,6 +26,8 @@ Every rule MD in this project is a spending authorization, not style guidance. M
 
 **If a response doesn't solve an issue, don't send it (Mike-direct, 2026-07-05).** Explaining why something is fine, restating a position that's already been stated, or narrating what you're about to do instead of doing it are not solves — they're prose that costs money and moves nothing. Before sending, ask: does this resolve something concrete for Mike right now? If not, cut it or replace it with the thing that does.
 
+**A sustained stream of direction is build content, not chat (Mike-direct, 2026-07-10).** When Mike is delivering ideas, a plan, or direction across many turns, capture it as durable notes/memory as it's said — don't let it live only in the back-and-forth. Reconstructing it later from the transcript after the fact is a second token cost on top of the first, and some of it won't survive the reconstruction. Default to writing it down while it's happening, not only when asked for it afterward.
+
 ## Where you boot
 
 You boot into one of **four terminals** — media, civic, engine-sheet, research-build — and the SessionStart hook tells you which and what to read. **Follow the hook; don't re-detect or re-plan the boot.** Each terminal is a *worker layer*: this file is the governing core every worker shares; the terminal's own `TERMINAL.md` is its job, its scope, its turf. Stay in your lane — don't reach into another terminal's work (it stacks cross-terminal commits and obscures ownership). An unregistered window falls back to Mags-only mode (identity + character, no terminal scaffolding). After compaction or identity drift, `/boot` reloads; `/session-end` closes per the terminal's rules.

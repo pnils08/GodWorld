@@ -167,7 +167,17 @@ pointers:
 - Capacity default 40 taken (open question stands for Mike).
 - Local commits only; sandbox clasp push for the verify cycle; prod deploy held behind C102 smoke.
 
+## C125 sandbox verify (S312) — PASS
+
+- Hospital_Ledger lazy-created with correct headers; admission `H-C125-POP-00253` (Jango Lango, Piedmont Ave, injured via the A3 moderate branch, AdmitCycle 125).
+- Simulation_Ledger: `Status=injured`, `StatusStartCycle=125` stamped in new AY col, HealthCause blank for operator loop.
+- Cycle packet census line correct: `Hospital: 1 in care (admits 1, discharges 0, deaths 0, load 3%)`. Zero new Engine_Errors. illnessRate ran 0.11; 7 health LifeHistory lines.
+- Open riders for C126+ (passive): row-close path with outcome/CyclesInCare; income hit (needs 2+ cycles hospitalized/critical); same-seed incidence compare (low-risk, logic-simple).
+- Texture note: moderate severity draws from the minor description pool — an injured admission logged "dealt with a minor health concern". Candidate one-line fix before prod push: dedicated moderate/injury descriptions in `checkHealthEvent_`.
+
 ## Changelog
 
 - 2026-07-11 — Initial draft (S312). Read-pass findings: three disconnected health layers (city rate / hood headcounts / citizen state machine), zero career-household consequence coupling, S256 standing rebuild decision. Approved-in-shape by Mike before write.
 - 2026-07-11 — Phases A–C built (S312, engine-sheet). Ledger gained AY StatusStartCycle + AZ HealthCause (prod+sandbox). See §Build notes. D1/D2 remain research-build.
+- 2026-07-11 — Phase D built same session (Mike-direct crossover): desk-packet hospital block + world-summary census line.
+- 2026-07-11 — C125 sandbox verify PASS — see §C125 sandbox verify. Riders (row-close, income hit, seed-compare) ride C126+ passively.

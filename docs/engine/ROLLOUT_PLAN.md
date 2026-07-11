@@ -43,7 +43,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | pipeline.39 | C99 gap handoffs — post-publish/print/run-cycle logs + canon drift + letters-gate bug | ready | research-build / engine-sheet / media | [[../../output/production_log_c99_post_publish_gaps.md]] + [[../../output/production_log_c99_print_gaps.md]] + [[../../output/production_log_run_cycle_c99_gaps.md]] + canon_drift_c99.json — filed 2026-07-02 |
 | pipeline.40 | Journal → citizen-loop — FULLY BUILT S300 (freeze + CLIs + /sift+/write-edition wiring + discord-bot repoint + hooks); acceptance rides next /sift + tonight's cron | done-pending-archive | research-build | [[../plans/2026-07-06-journal-to-citizen-loop]] |
 | pipeline.41 | Tensions → /sift story seeds — /sift reads the open tension register as door-knock candidates (subjective material, never publishable as fact) | ready | media | [[../plans/2026-07-06-citizen-loop-deepening]] §Task 8 |
-| pipeline.42 | /sift v2.3 deck-enrichment layer built S305 (Step 1 read + Step 3 §3d fold, S257-subordinated, degrade-safe); acceptance rides next live /sift | done-pending-archive | research-build | [[../research/2026-07-06-sift-deck-content-consumption]] |
+| pipeline.42 | /sift v2.3 deck-enrichment layer — acceptance CONFIRMED S309 live /sift on C101 | done-pending-archive | research-build | [[../research/2026-07-06-sift-deck-content-consumption]] |
 
 ### engine.* — Engine code, ledger, schema
 

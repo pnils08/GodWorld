@@ -48,7 +48,7 @@ pointers:
 
 **Verdict:** `adopt` — the use-case is confirmed real (it's Mike's standing ingest path) and at least two viable clients exist. Repo pick pending: Mike has repos to walk through S310; on today's evidence jacob-bd/notebooklm-mcp-cli is the front-runner (internal-API mechanism, most active, CLI scriptable straight from `/post-publish` without holding an MCP session open). PleasePrompto (the S307-queued repo) is the fallback if we want MCP-native + Node-only.
 
-**Ignited plans:** none yet — plan follows the S310 repo walk + Mike's pick.
+**Ignited plans:** [[../plans/2026-07-10-notebooklm-bridge-deploy]] (research.23) — Mike confirmed same session: those three repos were the walk; jacob-bd adopted; build-our-own rejected.
 
 ---
 

@@ -411,10 +411,6 @@ function runGenerationalEngine_(ctx) {
 
     var healthResult2 = checkHealthEvent_(ctx, popId, age, lifeHistory, calendarContext);
     if (healthResult2) {
-      ctx.summary.generationalEvents.push(applyMilestone_(
-        ctx, row, iLife, iLastU, healthResult2, name, popId, neighborhood, cycle, calendarContext
-      ));
-
       var admitStatus = null;
       if (healthResult2.severity === "severe") {
         // Severe events enter the state machine; HealthCause stays blank for
@@ -425,6 +421,27 @@ function runGenerationalEngine_(ctx) {
         // condition: injuries skew young, serious conditions skew old.
         admitStatus = (age >= 60 || chance_(ctx, 0.35)) ? "serious-condition" : "injured";
       }
+
+      // engine.52 C125 texture fix — a tracked admission's log line must match
+      // its status; moderate otherwise draws from the minor pool ("dealt with
+      // a minor health concern" on an injured citizen).
+      if (admitStatus === "injured") {
+        healthResult2.description = pick_(ctx, [
+          "was injured and is recovering under medical care",
+          "suffered an injury that required medical attention",
+          "was hurt in an accident and is being treated"
+        ]);
+      } else if (admitStatus === "serious-condition") {
+        healthResult2.description = pick_(ctx, [
+          "was diagnosed with a serious medical condition",
+          "is under medical care for a serious condition",
+          "was placed under care after a worrying diagnosis"
+        ]);
+      }
+
+      ctx.summary.generationalEvents.push(applyMilestone_(
+        ctx, row, iLife, iLastU, healthResult2, name, popId, neighborhood, cycle, calendarContext
+      ));
 
       if (admitStatus) {
         row[iStatus] = admitStatus;

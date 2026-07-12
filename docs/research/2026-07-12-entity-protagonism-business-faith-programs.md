@@ -34,7 +34,7 @@ pointers:
 
 **Verdict:** `adopt` — design work for research-build; ROLLOUT row research.24 carries state. Plan should sequence: Community_Programs ledger (smallest, unblocks OtherEntities depth) → faith ripples (one call site) → business events (design of layoff/expansion generation) → Riley lifestyle fold.
 
-**Ignited plans:** none yet — research.24 is `ready` for research-build to ignite.
+**Ignited plans:** [[../plans/2026-07-12-entity-protagonism]] (S314 — all four tracks + Community_Programs ledger, execution engine-sheet).
 
 ---
 

@@ -108,13 +108,13 @@ function assembleHoodSources(hood, slicer, worldEvents, venues, cityEventsByHood
   const grounding = [];
   const s = slicer.slice(hood);
   if (s && s.state) {
-    if (s.state.displacementPressure && s.state.displacementPressure !== 'none') {
-      grounding.push(`displacement pressure: ${s.state.displacementPressure}`);
+    if (s.state.housingPressure && s.state.housingPressure !== 'none') {
+      grounding.push(`housing pressure: ${s.state.housingPressure}`);
     }
     const band = incomeBand(s.state.medianIncome);
     if (band) grounding.push(`economic texture: ${band}`);
-    if (s.state.gentrificationPhase && s.state.gentrificationPhase !== 'none') {
-      grounding.push(`change underway: ${s.state.gentrificationPhase}`);
+    if (s.state.trajectory && s.state.trajectory !== 'none' && s.state.trajectory !== 'steady') {
+      grounding.push(`neighborhood trajectory: ${s.state.trajectory}`);
     }
   }
   return { hood, sources, grounding, hasSignal: sources.length > 0 };

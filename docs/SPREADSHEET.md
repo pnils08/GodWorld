@@ -40,7 +40,7 @@ These are read/written during every cycle run.
 | **Family_Relationships** | 2 | ENGINE | ENGINE | Parent-child links (mostly in SL ParentIds/ChildrenIds) |
 | **Relationship_Bonds** | 211 | ENGINE | ENGINE | Active alliance/rivalry/mentorship bonds |
 | **Relationship_Bond_Ledger** | 2,424 | ENGINE | ENGINE | Full bond history |
-| **Neighborhood_Map** | 17 | ENGINE, SCRIPT | ENGINE, SCRIPT | 17 Oakland neighborhoods with economics |
+| **Neighborhood_Map** | 21 | ENGINE, SCRIPT | ENGINE, SCRIPT | 21 neighborhoods, 23 cols (S315: trajectory block replaced gentrification block — NeighborhoodTrajectory/HousingPressure/TrajectoryStartCycle/TrajectoryMomentum; Y/Z/AA real-world-study cols deleted) |
 | **Event_Content_Ledger** | 0 | ENGINE | HAND | Operator-authored event content (S289 seams Task 10): `line` pool rows + `fragment` slot fillers, 9 cols A-I. Read by loadEventContentLedger_ Phase 2 → S.contentLedger; empty tab = no-op fallback to hardcoded pools |
 | **Neighborhood_Demographics** | 17 | ENGINE, SCRIPT, DASHBOARD | ENGINE | Per-neighborhood population/income/age |
 | **Crime_Metrics** | 17 | ENGINE, SCRIPT, DASHBOARD | ENGINE | QoL index, patrol, hotspots per neighborhood |

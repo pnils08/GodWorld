@@ -333,8 +333,8 @@ function buildNeighborhoodContext(nhoodData, crimeData, neighborhoods) {
       sentiment: parseNum(n.Sentiment),
       medianIncome: n.MedianIncome || '',
       medianRent: n.MedianRent || '',
-      gentrificationPhase: n.GentrificationPhase || '',
-      displacementPressure: n.DisplacementPressure || '',
+      trajectory: n.NeighborhoodTrajectory || '',
+      housingPressure: n.HousingPressure || '',
       crimeIndex: parseNum(n.CrimeIndex),
       retailVitality: parseNum(n.RetailVitality),
       // Demographics

@@ -30,9 +30,9 @@
  *
  * Source columns:
  *   Neighborhood_Map: Cycle, Neighborhood, NoiseIndex, CrimeIndex,
- *     RetailVitality, EventAttractiveness, Sentiment, GentrificationPhase,
- *     DisplacementPressure, MedianIncome, MedianRent, WhitePopulationPct,
- *     HighEducationPct, MigrationFlow
+ *     RetailVitality, EventAttractiveness, Sentiment, NeighborhoodTrajectory,
+ *     HousingPressure, TrajectoryMomentum, MedianIncome, MedianRent,
+ *     MigrationFlow
  *   Neighborhood_Demographics: Neighborhood, Students, Adults, Seniors,
  *     Unemployed, Sick, SchoolQualityIndex, GraduationRate
  *   Business_Ledger: BIZ_ID, Name, Sector, Neighborhood, Employee_Count
@@ -436,7 +436,7 @@ function buildCard(nbh, demo, businesses, citizens, appearances) {
   // Identity line
   var idParts = [];
   if (nbh.district) idParts.push('District: ' + nbh.district);
-  if (nbh.gentrificationPhase) idParts.push('Phase: ' + nbh.gentrificationPhase);
+  if (nbh.trajectory) idParts.push('Trajectory: ' + nbh.trajectory);
   if (demo && demo.population) idParts.push('Population: ~' + fmtThousands(demo.population));
   if (nbh.medianIncome) idParts.push('Median income: ' + fmtMoney(nbh.medianIncome));
   if (nbh.medianRent) idParts.push('Median rent: ' + fmtMoney(nbh.medianRent));
@@ -448,13 +448,11 @@ function buildCard(nbh, demo, businesses, citizens, appearances) {
   if (nbh.crimeIndex != null) stateParts.push('Crime index: ' + nbh.crimeIndex);
   if (nbh.retailVitality != null) stateParts.push('Retail vitality: ' + nbh.retailVitality);
   if (nbh.eventAttractiveness != null) stateParts.push('Event draw: ' + nbh.eventAttractiveness);
-  if (nbh.displacementPressure) stateParts.push('Displacement pressure: ' + nbh.displacementPressure);
+  if (nbh.housingPressure) stateParts.push('Housing pressure: ' + nbh.housingPressure);
   if (stateParts.length) lines.push(stateParts.join(' | '));
 
   // Demographic line
   var demoParts = [];
-  if (nbh.whitePopulationPct) demoParts.push('White pop: ' + nbh.whitePopulationPct + '%');
-  if (nbh.highEducationPct) demoParts.push('Higher ed: ' + nbh.highEducationPct + '%');
   if (demo && demo.unemployed != null) demoParts.push('Unemployed: ' + demo.unemployed);
   if (nbh.migrationFlow) demoParts.push('Migration flow: ' + nbh.migrationFlow);
   if (demoParts.length) lines.push(demoParts.join(' | '));
@@ -527,12 +525,10 @@ async function main() {
     retail: indexHeader(headers, 'RetailVitality'),
     event: indexHeader(headers, 'EventAttractiveness'),
     sentiment: indexHeader(headers, 'Sentiment'),
-    gentrificationPhase: indexHeader(headers, 'GentrificationPhase'),
-    displacementPressure: indexHeader(headers, 'DisplacementPressure'),
+    trajectory: indexHeader(headers, 'NeighborhoodTrajectory'),
+    housingPressure: indexHeader(headers, 'HousingPressure'),
     medianIncome: indexHeader(headers, 'MedianIncome'),
     medianRent: indexHeader(headers, 'MedianRent'),
-    whitePop: indexHeader(headers, 'WhitePopulationPct'),
-    highEd: indexHeader(headers, 'HighEducationPct'),
     migrationFlow: indexHeader(headers, 'MigrationFlow')
   };
   if (idx.nbh < 0) {
@@ -558,12 +554,10 @@ async function main() {
       retailVitality: parseNum(r[idx.retail]),
       eventAttractiveness: parseNum(r[idx.event]),
       sentiment: parseNum(r[idx.sentiment]),
-      gentrificationPhase: clean(r[idx.gentrificationPhase]),
-      displacementPressure: clean(r[idx.displacementPressure]),
+      trajectory: clean(r[idx.trajectory]),
+      housingPressure: clean(r[idx.housingPressure]),
       medianIncome: parseNum(r[idx.medianIncome]),
       medianRent: parseNum(r[idx.medianRent]),
-      whitePopulationPct: clean(r[idx.whitePop]),
-      highEducationPct: clean(r[idx.highEd]),
       migrationFlow: clean(r[idx.migrationFlow])
     };
   }

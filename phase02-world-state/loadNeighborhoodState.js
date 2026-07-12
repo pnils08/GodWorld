@@ -11,7 +11,7 @@
  *
  * S.neighborhoodState[hood] = {
  *   sentiment, crimeIndex, retailVitality, eventAttractiveness,   // fast cols (citizen-movable)
- *   gentrificationPhase, displacementPressure, medianRent,        // slow cols (engine-owned)
+ *   trajectory, trajectoryMomentum, housingPressure, medianRent,  // slow cols (engine-owned, S315 trajectory block)
  *   migrationFlow
  * }
  *
@@ -39,8 +39,9 @@ function loadNeighborhoodState_(ctx) {
   var iRetail = idx('RetailVitality');
   var iAttract = idx('EventAttractiveness');
   var iSent = idx('Sentiment');
-  var iGent = idx('GentrificationPhase');
-  var iDisp = idx('DisplacementPressure');
+  var iTraj = idx('NeighborhoodTrajectory');
+  var iMom = idx('TrajectoryMomentum');
+  var iPress = idx('HousingPressure');
   var iRent = idx('MedianRent');
   var iFlow = idx('MigrationFlow');
 
@@ -75,8 +76,9 @@ function loadNeighborhoodState_(ctx) {
       crimeIndex: num(row, iCrime),
       retailVitality: num(row, iRetail),
       eventAttractiveness: num(row, iAttract),
-      gentrificationPhase: iGent >= 0 ? (row[iGent] || '').toString().trim() : '',
-      displacementPressure: num(row, iDisp),
+      trajectory: iTraj >= 0 ? (row[iTraj] || '').toString().trim() : '',
+      trajectoryMomentum: num(row, iMom),
+      housingPressure: num(row, iPress),
       medianRent: num(row, iRent),
       migrationFlow: num(row, iFlow)
     };

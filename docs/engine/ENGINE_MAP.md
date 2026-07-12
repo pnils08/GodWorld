@@ -154,7 +154,7 @@
 | 5-HouseholdFormation | `processHouseholdFormation_()` | phase05-citizens/householdFormationEngine.js | Marriage, household creation |
 | 5-GenerationalWealth | `processGenerationalWealth_()` | phase05-citizens/generationalWealthEngine.js | Wealth accumulation, inheritance |
 | 5-EducationCareer | `processEducationCareer_()` | phase05-citizens/educationCareerEngine.js | Education-career link |
-| 5-Gentrification | `processGentrification_()` | phase05-citizens/gentrificationEngine.js | Displacement risk, neighborhood change |
+| 5-Trajectory | `processNeighborhoodTrajectory_()` | phase05-citizens/neighborhoodTrajectoryEngine.js | Neighborhood trajectory (decay/steady/growth), housing pressure, rent/income drift (S315, was gentrificationEngine) |
 | 5-MigrationTracking | `processMigrationTracking_()` | phase05-citizens/migrationTrackingEngine.js | Migration intent, movement |
 
 ---

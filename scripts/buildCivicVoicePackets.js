@@ -395,8 +395,8 @@ async function main() {
       demographicMarker: nm.DemographicMarker,
       medianIncome: nm.MedianIncome,
       medianRent: nm.MedianRent,
-      gentrificationPhase: nm.GentrificationPhase,
-      displacementPressure: nm.DisplacementPressure,
+      trajectory: nm.NeighborhoodTrajectory,
+      housingPressure: nm.HousingPressure,
       // Demographics
       students: parseNum(demo.Students),
       adults: parseNum(demo.Adults),

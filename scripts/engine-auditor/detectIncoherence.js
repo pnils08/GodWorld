@@ -18,7 +18,7 @@ const DOMAIN_METRIC = {
   crime: 'CrimeIndex',
   safety: 'CrimeIndex',
   transit: 'Sentiment',
-  housing: 'DisplacementPressure',
+  housing: 'HousingPressure',
   economic: 'RetailVitality',
   retail: 'RetailVitality',
 };

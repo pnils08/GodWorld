@@ -1091,9 +1091,9 @@ function generateCitizensEvents_(ctx) {
   // Neighborhood_Map via Phase2-NeighborhoodState loader — one-cycle lag).
   // Thresholds sized from live ranges measured S256 cycle 96: crimeIndex 0-1,
   // retailVitality 6.6-15.1, sentiment 0.55-0.66 (pulse fold cap ±0.15 makes
-  // both mood branches reachable through the loop). Gentrification /
-  // displacement branches dormant until gentrificationEngine populates the
-  // slow cols (phase vocab: early/accelerating/advanced; pressure /10 scale).
+  // both mood branches reachable through the loop). Trajectory / housing
+  // branches live off the S315 trajectory block (neighborhoodTrajectoryEngine;
+  // vocab: decay/steady/growth; momentum + pressure /10 scales).
   // =========================================================================
   function neighborhoodStatePool_(neighborhood) {
     var pool = [];
@@ -1113,30 +1113,33 @@ function generateCitizensEvents_(ctx) {
       return Math.min(6, w);
     }
 
-    // Gentrification — flat ambient weight ONLY (Mike-direct S296): the
-    // gentrification/displacement scalars are a STUCK EMITTER attached to no
-    // sim mechanics (identical output C115/C116, migration Events: 0 — nobody
-    // pays rent, nobody actually moves). Pressure-proportional weighting here
-    // would claim ~14k residents live a permanent crisis off a dead dial.
-    // These lines stay ambient until a real gentrification system exists;
-    // only ATTACHED signals (crime carry below) earn experience-weighting.
-    var gPhase = (st.gentrificationPhase || '').toLowerCase();
-    if (gPhase === 'accelerating' || gPhase === 'advanced') {
-      pool.push(makeEntry("overheard another conversation about rents going up in " + neighborhood,
-        ["source:nbhdState", "state:gentrification"], 1.15, false));
-      pool.push(makeEntry("noticed a longtime neighbor packing up to move out",
-        ["source:nbhdState", "state:gentrification"], 1.1, false));
-    } else if (gPhase === 'early') {
-      pool.push(makeEntry("noticed new faces and new prices around " + neighborhood,
-        ["source:nbhdState", "state:gentrification"], 1.05, false));
+    // Neighborhood trajectory (S315: neighborhoodTrajectoryEngine replaces the
+    // gentrification stuck-emitter; the dial is now attached to live mechanics
+    // — city-relative texture signals, momentum, housing pressure — so the
+    // S296 flat-weight-only rule lifts and these earn experience-weighting
+    // like the crime carry.)
+    var traj = (st.trajectory || '').toLowerCase();
+    var tMom = Number(st.trajectoryMomentum);
+    var mi = isNaN(tMom) ? 0 : Math.abs(tMom - 5) / 5; // distance from neutral → intensity 0..1
+    if (traj === 'growth') {
+      pool.push(makeEntry("noticed another new spot opening up in " + neighborhood,
+        ["source:nbhdState", "state:trajectory-up"], pw(1.1, mi), false));
+      pool.push(makeEntry("caught themselves bragging a little about the neighborhood lately",
+        ["source:nbhdState", "state:trajectory-up"], pw(1.0, mi), false));
+    } else if (traj === 'decay') {
+      pool.push(makeEntry("walked past a storefront that never reopened in " + neighborhood,
+        ["source:nbhdState", "state:trajectory-down"], pw(1.1, mi), false));
+      pool.push(makeEntry("heard a neighbor wondering out loud where the block's energy went",
+        ["source:nbhdState", "state:trajectory-down"], pw(1.0, mi), false));
     }
 
-    // Displacement pressure (/10) — same stuck-emitter rule: flat weight
-    if ((st.displacementPressure || 0) >= 6) {
-      pool.push(makeEntry("stopped by a tenants' meeting about staying in " + neighborhood,
-        ["source:nbhdState", "state:community"], 1.15, false));
-      pool.push(makeEntry("signed a neighbor's petition about housing in the area",
-        ["source:nbhdState", "state:community"], 1.05, false));
+    // Housing pressure (/10) — prosperity strain: hot blocks price people tight
+    var hp = Number(st.housingPressure) || 0;
+    if (hp >= 6) {
+      pool.push(makeEntry("compared rent notes with a neighbor over the fence in " + neighborhood,
+        ["source:nbhdState", "state:housing"], pw(1.1, hp / 10), false));
+      pool.push(makeEntry("ran the numbers on staying put another year",
+        ["source:nbhdState", "state:housing"], pw(1.0, hp / 10), false));
     }
 
     // Live crime carry (engine.45 T3b, prev-cycle Crime_Metrics spikes for

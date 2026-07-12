@@ -18,7 +18,7 @@
  *   C2  pulse + texture — over a 250-cycle accumulation on a static divergent
  *       4-hood city, the pulse populates from real emitted events, and the
  *       hood-conditioned pools land ONLY where their state says they should:
- *       faith fan-out + heavy-rain + fog/cool-pocket + displacement texture
+ *       faith fan-out + heavy-rain + fog/cool-pocket + housing-strain texture
  *       in Fruitvale, warm-pocket + high-retail texture in Rockridge.
  *   C3  fold — paired same-seed writer runs (with pulse vs without) differ
  *       per metric by <= the PULSE_FOLD cap, in the pulse's direction, and
@@ -119,18 +119,26 @@ function memSS(sheets) {
 }
 
 // --- the divergent 4-hood city ---
-const LOADER_HEADERS = ['Cycle', 'Neighborhood', 'CrimeIndex', 'RetailVitality',
-  'EventAttractiveness', 'Sentiment', 'GentrificationPhase', 'DisplacementPressure',
-  'MedianRent', 'MigrationFlow'];
-// Fruitvale: high crime, low sentiment, accelerating gentrification, high
-// displacement, weak retail. Rockridge: quiet, happy, strong retail.
+// Schema-true header (S315 trajectory block) — the writer's positional-write
+// guard verifies cols 1-15 against the real texture layout, so the fixture
+// must carry it. Loader reads by name.
+const LOADER_HEADERS = ['Timestamp', 'Cycle', 'Neighborhood', 'NightlifeProfile', 'NoiseIndex',
+  'CrimeIndex', 'RetailVitality', 'EventAttractiveness', 'Sentiment', 'DemographicMarker',
+  'Holiday', 'HolidayPriority', 'FirstFriday', 'CreationDay', 'SportsSeason',
+  'MigrationFlow', 'NeighborhoodTrajectory', 'HousingPressure', 'TrajectoryStartCycle',
+  'MedianIncome', 'MedianRent', 'TrajectoryMomentum', 'District'];
+// Fruitvale: high crime, low sentiment, decay trajectory, high housing
+// pressure, weak retail. Rockridge: quiet, happy, strong retail (growth).
 function seedLoaderMapData() {
+  const row = (hood, crime, retail, evt, sent, traj, mom, press, income, rent, flow) =>
+    ['t0', 94, hood, 1, 5, crime, retail, evt, sent, 'zone', 'none', 'none', false, false,
+      'off-season', flow, traj, press, 90, income, rent, mom, ''];
   return [
     LOADER_HEADERS.slice(),
-    [94, 'Fruitvale', 2, 7, 30, 0.15, 'accelerating', 7, 2400, -10],
-    [94, 'Rockridge', 0, 14, 45, 0.75, '', 1, 3800, 5],
-    [94, 'West Oakland', 1, 9, 25, 0.5, 'early', 4, 2100, 0],
-    [94, 'Temescal', 0.5, 12, 50, 0.6, '', 3, 3200, 3]
+    row('Fruitvale', 2, 7, 30, 0.15, 'decay', 2, 7, 60000, 2400, -10),
+    row('Rockridge', 0, 14, 45, 0.75, 'growth', 8, 1, 114000, 3800, 5),
+    row('West Oakland', 1, 9, 25, 0.5, '', 5, 4, 81000, 2100, 0),
+    row('Temescal', 0.5, 12, 50, 0.6, '', 5, 3, 74000, 3200, 3)
   ];
 }
 
@@ -209,8 +217,8 @@ console.log('═══ C1 — T5 loader hydrates S.neighborhoodState from Neighb
   const st = ctx.summary.neighborhoodState;
   assert('C1a 4 hoods loaded', ctx.summary.neighborhoodStateCount === 4, String(ctx.summary.neighborhoodStateCount));
   assert('C1b Fruitvale fields at hood grain',
-    st['Fruitvale'] && st['Fruitvale'].crimeIndex === 2 && st['Fruitvale'].gentrificationPhase === 'accelerating' &&
-    st['Fruitvale'].displacementPressure === 7 && st['Fruitvale'].sentiment === 0.15,
+    st['Fruitvale'] && st['Fruitvale'].crimeIndex === 2 && st['Fruitvale'].trajectory === 'decay' &&
+    st['Fruitvale'].housingPressure === 7 && st['Fruitvale'].trajectoryMomentum === 2 && st['Fruitvale'].sentiment === 0.15,
     JSON.stringify(st['Fruitvale']));
   assert('C1c Rockridge fields at hood grain',
     st['Rockridge'] && st['Rockridge'].retailVitality === 14 && st['Rockridge'].sentiment === 0.75 && st['Rockridge'].crimeIndex === 0,
@@ -272,9 +280,9 @@ rngImpl = mulberry32(2026);
   assert('C2f warm-pocket divergence lines ONLY in Rockridge (+4F)',
     warmHits.length === 1 && warmHits[0] === 'Rockridge', warmHits.join(',') || 'none');
 
-  // T6 neighborhood-state texture — displacement in Fruitvale, retail in Rockridge
-  const dispHits = [...new Set(inHoods("tenants' meeting").concat(inHoods('rents going up in')))];
-  assert('C2g displacement/gentrification texture ONLY in Fruitvale (disp 7, accelerating)',
+  // T6 neighborhood-state texture — decay/housing strain in Fruitvale, retail in Rockridge
+  const dispHits = [...new Set(inHoods('compared rent notes').concat(inHoods('never reopened in')))];
+  assert('C2g decay/housing-pressure texture ONLY in Fruitvale (pressure 7, decay)',
     dispHits.length === 1 && dispHits[0] === 'Fruitvale', dispHits.join(',') || 'none');
   const retailHits = [...new Set(inHoods('new shop that just opened').concat(inHoods('busy weekend market')))];
   assert('C2h high-retail texture ONLY in Rockridge (retail 14 >= 13)',

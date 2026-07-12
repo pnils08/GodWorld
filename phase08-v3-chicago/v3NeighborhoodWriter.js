@@ -36,6 +36,12 @@ var NEIGHBORHOOD_MAP_HEADERS = [
   'District'
 ];
 
+// S315: the writer owns only the first 15 columns positionally (texture block
+// A–O). Everything past SportsSeason on the live sheet belongs to other engines
+// (MigrationFlow: Phase 6; trajectory block: Phase 5) and must never be hit by
+// a positional write. District is written by live-header lookup instead.
+var TEXTURE_COL_COUNT = 15;
+
 var NMAP_NEIGHBORHOODS = [
   'Downtown', 'Temescal', 'Laurel', 'West Oakland', 'Fruitvale', 'Jack London',
   'Rockridge', 'Adams Point', 'Grand Lake', 'Piedmont Ave', 'Chinatown',
@@ -303,6 +309,7 @@ function saveV3NeighborhoodMap_(ctx) {
 
   // Build batch rows
   var out = [];
+  var districtOut = []; // S315: single-column District payload, written by header lookup
 
   for (var i = 0; i < NMAP_NEIGHBORHOODS.length; i++) {
     var name = NMAP_NEIGHBORHOODS[i];
@@ -357,19 +364,41 @@ function saveV3NeighborhoodMap_(ctx) {
 
     // S215 civic.10b — District resolved from canon map; blank for unmapped.
     var district = NEIGHBORHOOD_DISTRICT_MAP[name] || '';
+    districtOut.push([district]);
 
     out.push([
       now, cycle, name,
       nightlife, noise, crime,
       retail, eventAttract, sent,
       demoLabel,
-      holiday, holidayPriority, isFirstFriday, isCreationDay, sportsSeason,
-      district
+      holiday, holidayPriority, isFirstFriday, isCreationDay, sportsSeason
     ]);
   }
 
-  // Write rows 2:N in one call
-  sheet.getRange(2, 1, out.length, NEIGHBORHOOD_MAP_HEADERS.length).setValues(out);
+  // S315 clobber fix: the live sheet carries extra columns between SportsSeason
+  // (col 15) and District — a positional 16-wide write landed District codes in
+  // whatever occupies live col 16 (MigrationFlow) and wiped Phase-6 output every
+  // cycle. Texture block writes at fixed width 15 behind a fail-loud header
+  // guard; District resolves its live column by header lookup.
+  var liveHeader = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  for (var g = 0; g < TEXTURE_COL_COUNT; g++) {
+    if (String(liveHeader[g]) !== NEIGHBORHOOD_MAP_HEADERS[g]) {
+      throw new Error('saveV3NeighborhoodMap_: live header mismatch at col ' + (g + 1) +
+        ' — expected "' + NEIGHBORHOOD_MAP_HEADERS[g] + '", found "' + liveHeader[g] + '". Refusing positional write.');
+    }
+  }
+
+  // Write texture rows 2:N (cols A–O only)
+  sheet.getRange(2, 1, out.length, TEXTURE_COL_COUNT).setValues(out);
+
+  // District — live column resolved by header, never positional
+  var liveDistrictCol = -1;
+  for (var dc = 0; dc < liveHeader.length; dc++) {
+    if (String(liveHeader[dc]) === 'District') { liveDistrictCol = dc; break; }
+  }
+  if (liveDistrictCol >= 0) {
+    sheet.getRange(2, liveDistrictCol + 1, districtOut.length, 1).setValues(districtOut);
+  }
 
   Logger.log('saveV3NeighborhoodMap_ v3.6: Updated ' + out.length + ' neighborhoods | Cycle ' + cycle + ' | Holiday: ' + holiday);
 }

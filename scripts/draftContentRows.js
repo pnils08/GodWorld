@@ -97,8 +97,8 @@ async function gatherFacts(api, sheetId, cycle) {
       .filter(r => r[idx('Neighborhood')])
       .map(r => ({
         name: r[idx('Neighborhood')],
-        displacement: Number(r[idx('DisplacementPressure')]) || 0,
-        gentriPhase: r[idx('GentrificationPhase')] || ''
+        displacement: Number(r[idx('HousingPressure')]) || 0,
+        gentriPhase: r[idx('NeighborhoodTrajectory')] || ''
       }));
   }
 

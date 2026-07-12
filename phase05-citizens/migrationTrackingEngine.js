@@ -31,7 +31,7 @@
  * Integration:
  * - Reads Simulation_Ledger via ctx.ledger
  * - Reads Household_Ledger for rent burden data (own tracking, direct)
- * - Reads Neighborhood_Map for gentrification/crime/displacement pressure
+ * - Reads Neighborhood_Map for housing pressure (S315 trajectory block)
  *   (own tracking, direct)
  * - Writes displacement risk and migration intent to ctx.ledger.rows;
  *   Phase 10 commits in single consolidated intent
@@ -158,7 +158,7 @@ function assessDisplacementRisk_(ctx, cycle) {
 
   if (iDisplRisk < 0) return { assessed: 0, highRisk: 0 };
 
-  // Load neighborhood displacement pressure (Neighborhood_Map — direct read)
+  // Load neighborhood housing pressure (Neighborhood_Map — direct read)
   var neighborhoodPressure = buildNeighborhoodPressureMap_(ss);
 
   // Load household rent burden (Household_Ledger — direct read; if Week 1 deployed)
@@ -236,7 +236,7 @@ function buildNeighborhoodPressureMap_(ss) {
 
   var idx = function(n) { return header.indexOf(n); };
   var iNeighborhood = idx('Neighborhood');
-  var iDisplPressure = idx('DisplacementPressure');
+  var iDisplPressure = idx('HousingPressure');
 
   if (iDisplPressure < 0) return {};
 

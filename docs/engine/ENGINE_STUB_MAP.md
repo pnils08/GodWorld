@@ -1036,19 +1036,17 @@
 
 - **trackHomeOwnership_(ss, ctx, cycle)**
 
-### gentrificationEngine.js
-- **processGentrification_(ctx)**
+### neighborhoodTrajectoryEngine.js (S315, was gentrificationEngine.js)
+- **processNeighborhoodTrajectory_(ctx)**
   Reads: S.cycleId
   Config: ctx.config.cycleCount
 
-- **updateGentrificationPhases_(ctx, cycle)**
-  Sheets: Neighborhood_Map
+- **updateNeighborhoodTrajectories_(ctx, cycle)**
+  Writes: S.neighborhoodTrajectory
+  Sheets: Neighborhood_Map (reads texture + MigrationFlow; queueCellIntent_ writes NeighborhoodTrajectory/TrajectoryMomentum/TrajectoryStartCycle/HousingPressure/MedianRent/MedianIncome)
 
-- **detectGentrificationPhase_(incomeChange, rentChange, whiteChange, highEdPct, displPressure)**
-
-- **generateGentrificationHooks_(ss, ctx, cycle)**
-  Writes: S.storyHooks
-  Sheets: Neighborhood_Map
+- **emitTrajectoryHooks_(ctx, cycle, neighborhood, prevTrajectory, trajectory, momentum, pressure)**
+  Writes: S.storyHooks (NEIGHBORHOOD_RISING/COOLING/BOOM, HOUSING_PRESSURE_HIGH → Ripple_Ledger)
 
 ### householdFormationEngine.js
 - **processHouseholdFormation_(ctx)**

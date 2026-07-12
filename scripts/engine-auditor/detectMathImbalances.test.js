@@ -205,11 +205,11 @@ console.log('\nTest 8: G-EC22/G-EC23 — mitigatorState semantic field on decay 
     snapshot: {
       Neighborhood_Map: [
         // 3-signal decay (severe)
-        { Neighborhood: 'West Oakland', Sentiment: -0.10, RetailVitality: 2.0, CrimeIndex: 8, DisplacementPressure: 0.1 },
+        { Neighborhood: 'West Oakland', Sentiment: -0.10, RetailVitality: 2.0, CrimeIndex: 8, HousingPressure: 0.1 },
         // 2-signal minor decay
-        { Neighborhood: 'Chinatown', Sentiment: 0.0, RetailVitality: 5.93, CrimeIndex: 3, DisplacementPressure: 0 },
+        { Neighborhood: 'Chinatown', Sentiment: 0.0, RetailVitality: 5.93, CrimeIndex: 3, HousingPressure: 0 },
         // 2+ signal decay WITH mitigator
-        { Neighborhood: 'Temescal', Sentiment: -0.10, RetailVitality: 2.0, CrimeIndex: 5, DisplacementPressure: 0 },
+        { Neighborhood: 'Temescal', Sentiment: -0.10, RetailVitality: 2.0, CrimeIndex: 5, HousingPressure: 0 },
       ],
       Initiative_Tracker: [
         { InitiativeID: 'INIT-H', Status: 'passed', ImplementationPhase: 'disbursement-active', AffectedNeighborhoods: 'Temescal' },
@@ -219,9 +219,9 @@ console.log('\nTest 8: G-EC22/G-EC23 — mitigatorState semantic field on decay 
     },
     prior: [makeAudit(92, {
       Neighborhood_Map: [
-        { Neighborhood: 'West Oakland', Sentiment: 0.05, RetailVitality: 4.5, CrimeIndex: 4, DisplacementPressure: 0 },
-        { Neighborhood: 'Chinatown',    Sentiment: 0.02, RetailVitality: 6.56, CrimeIndex: 3, DisplacementPressure: 0 },
-        { Neighborhood: 'Temescal',     Sentiment: 0.05, RetailVitality: 4.5, CrimeIndex: 4, DisplacementPressure: 0 },
+        { Neighborhood: 'West Oakland', Sentiment: 0.05, RetailVitality: 4.5, CrimeIndex: 4, HousingPressure: 0 },
+        { Neighborhood: 'Chinatown',    Sentiment: 0.02, RetailVitality: 6.56, CrimeIndex: 3, HousingPressure: 0 },
+        { Neighborhood: 'Temescal',     Sentiment: 0.05, RetailVitality: 4.5, CrimeIndex: 4, HousingPressure: 0 },
       ],
     })],
   };

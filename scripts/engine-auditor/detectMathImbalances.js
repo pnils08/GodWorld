@@ -2,7 +2,7 @@
  * detectMathImbalances — three sub-checks:
  *   (a) decay-without-offset: a neighborhood metric WORSENING cycle-over-cycle
  *       (Sentiment dropping, RetailVitality dropping, CrimeIndex rising,
- *       DisplacementPressure rising) with no matching initiative active in
+ *       HousingPressure rising) with no matching initiative active in
  *       that neighborhood. Severity scales with whether any policy mitigator
  *       is active per-neighborhood.
  *   (b) production-without-consumption: WorldEvents_V3_Ledger events in a
@@ -42,7 +42,7 @@ const VERSION = '1.2.0';
 const SENTIMENT_DECAY = -0.02;       // Sentiment dropped by more than 0.02
 const RETAIL_DECAY = -0.5;           // RetailVitality dropped by more than 0.5
 const CRIME_RISE = 2;                // CrimeIndex rose by 2 or more (integer count)
-const DISPLACEMENT_RISE = 0.05;      // DisplacementPressure rose by 0.05 or more
+const HOUSING_PRESSURE_RISE = 0.05;      // HousingPressure rose by 0.05 or more
 
 function num(v) {
   if (v == null || v === '') return null;
@@ -91,13 +91,13 @@ function detect(ctx) {
       const dSent = (num(n.Sentiment) ?? 0) - (num(prev.Sentiment) ?? 0);
       const dRetail = (num(n.RetailVitality) ?? 0) - (num(prev.RetailVitality) ?? 0);
       const dCrime = (num(n.CrimeIndex) ?? 0) - (num(prev.CrimeIndex) ?? 0);
-      const dDisp = (num(n.DisplacementPressure) ?? 0) - (num(prev.DisplacementPressure) ?? 0);
+      const dDisp = (num(n.HousingPressure) ?? 0) - (num(prev.HousingPressure) ?? 0);
 
       const decaySignals = [];
       if (dSent <= SENTIMENT_DECAY) decaySignals.push(`Sentiment ${dSent.toFixed(3)}`);
       if (dRetail <= RETAIL_DECAY) decaySignals.push(`RetailVitality ${dRetail.toFixed(2)}`);
       if (dCrime >= CRIME_RISE) decaySignals.push(`CrimeIndex +${dCrime}`);
-      if (dDisp >= DISPLACEMENT_RISE) decaySignals.push(`DisplacementPressure +${dDisp.toFixed(3)}`);
+      if (dDisp >= HOUSING_PRESSURE_RISE) decaySignals.push(`HousingPressure +${dDisp.toFixed(3)}`);
 
       if (decaySignals.length < 2) continue;
 

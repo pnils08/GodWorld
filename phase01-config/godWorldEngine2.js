@@ -308,7 +308,7 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase5-HouseholdFormation', function() { processHouseholdFormation_(ctx); });
   safePhaseCall_(ctx, 'Phase5-GenerationalWealth', function() { processGenerationalWealth_(ctx); });
   safePhaseCall_(ctx, 'Phase5-EducationCareer', function() { processEducationCareer_(ctx); });
-  safePhaseCall_(ctx, 'Phase5-Gentrification', function() { processGentrification_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-Trajectory', function() { processNeighborhoodTrajectory_(ctx); });
   safePhaseCall_(ctx, 'Phase5-MigrationTracking', function() { processMigrationTracking_(ctx); });
 
   // ═══════════════════════════════════════════════════════════
@@ -1854,7 +1854,7 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase5-HouseholdFormation', function() { processHouseholdFormation_(ctx); });
   safePhaseCall_(ctx, 'Phase5-GenerationalWealth', function() { processGenerationalWealth_(ctx); });
   safePhaseCall_(ctx, 'Phase5-EducationCareer', function() { processEducationCareer_(ctx); });
-  safePhaseCall_(ctx, 'Phase5-Gentrification', function() { processGentrification_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-Trajectory', function() { processNeighborhoodTrajectory_(ctx); });
   safePhaseCall_(ctx, 'Phase5-MigrationTracking', function() { processMigrationTracking_(ctx); });
 
   // ═══════════════════════════════════════════════════════════

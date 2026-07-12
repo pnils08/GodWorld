@@ -309,7 +309,7 @@ Texture pieces may have empty strings on the unused layer (e.g., pure atmospheri
 
 **Neighborhood state (S245 — when the piece is set in a neighborhood):**
 - The baseline brief (`output/baseline_briefs_c{XX}.json`) carries `neighborhoodState` (crime / retail / sentiment with cycle-over-cycle deltas, median income + rent, displacement pressure, gentrification phase) and `neighborhoodResidents` (bounded, notable-first), built from `lib/neighborhoodSlice`. Carry these into the enriched candidate. If a slot has no matching baseline brief, call `get_neighborhood_state(neighborhood)` for the same figures.
-- **The engine is the source of truth for what a neighborhood is.** A condition it did not report — displacement, blight, decline, struggle, recovery — does not exist for that neighborhood this cycle. Ground the simulation layer in the figures; do not narrate against them. (This is data-fidelity, not a tone rule: the C95 West Oakland "displacement" front page was written against a literally-empty `DisplacementPressure` field.)
+- **The engine is the source of truth for what a neighborhood is.** A condition it did not report — displacement, blight, decline, struggle, recovery — does not exist for that neighborhood this cycle. Ground the simulation layer in the figures; do not narrate against them. (This is data-fidelity, not a tone rule: the C95 West Oakland "displacement" front page was written against a literally-empty `HousingPressure` field (pre-S315: `DisplacementPressure`).)
 
 **Enriched candidate shape (additions to Step 3 candidate):**
 

@@ -50,11 +50,18 @@
 // CONSTANTS
 // ════════════════════════════════════════════════════════════════════════════
 
+// NODES ARE PERMANENT (S257 + S313, Mike-direct). The Simulation_Ledger is a
+// representative sample (~1 node : 438 sim-people) — an individual node leaving
+// asserts hundreds left, which the engine can never justify. So the intent
+// ladder deliberately TOPS OUT at planning-to-leave: migration produces texture
+// and pressure, never departures. The former 'left' exit state was an unwired
+// constant (zero writers, verified S313) and is removed so no future session
+// "completes" the state machine. Do NOT add an exit state without Mike's
+// explicit go. Plan: docs/plans/2026-06-14-ledger-representative-sample-migration-removal.md
 var MIGRATION_INTENT = {
   STAYING: 'staying',
   CONSIDERING: 'considering',
-  PLANNING: 'planning-to-leave',
-  LEFT: 'left'
+  PLANNING: 'planning-to-leave'
 };
 
 var MIGRATION_REASONS = {

@@ -87,6 +87,7 @@ exposition. Update status as work moves. Source findings: S148 audit
 
 ## Log
 
+- 2026-07-11 S312 — Row 33 FOLLOW-ON defect found+fixed same session (`2d7aabc4`): the 6 landed bonds carried NAMES in CitizenA/B (bondEngine name-keyed internally; every POPID-keyed consumer blind to them). Data repaired prod+sandbox (0 name rows remain); `normalizeBondCitizenId_` POPID-canonicalizes at makeBond_ + the persist replace-write; dual-shape membership map keeps the v2.6 intensity fix alive; buildDeskPackets name-filter fixed (was matching ONLY the 6 broken rows). Sandbox byte-OK; prod rides C102-smoke batch.
 (Brief one-line entries when a row changes status. Date + session + item # + what moved.)
 
 - 2026-07-06 S301 — Row 33 OPENED `todo` (engine-sheet). bondEngine detectNewBonds_ starved by empty citizen pool since landing; diagnosis complete, fix is a design call (producer + phase reorder). Surfaced via engine.44 Class 3.

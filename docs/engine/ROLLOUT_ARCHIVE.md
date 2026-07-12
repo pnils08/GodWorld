@@ -1167,6 +1167,14 @@ Prior sweep passes: §S248, §S250, §S263, §S268, §S274 (latest before this).
 
 ---
 
+## S312 Archive Pass (2026-07-12, research-build) — post-S311 closures sweep
+
+1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 engine.*.
+
+- **engine.52** [engine-sheet (A–D, D crossover Mike-direct)] — Oakland_Hospital — health as fate-driver (closes engine.44 C5 ask + S256 rebuild decision) — C125+C126 sandbox PASS full loop (admit→recover→row-close); prod clasp rides C102-smoke batch; income-hit rider passive **State at archive:** done-pending-archive. Pointer: [[../plans/2026-07-11-oakland-hospital]]
+
+This pass: 1 rows — engine.52. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S313 Archive Pass (2026-07-11, research-build) — post-S312 closures sweep
 
 6 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 2 pipeline.* + 3 engine.* + 1 governance.*.

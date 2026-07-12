@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-07-11 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-07-12 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -547,7 +547,7 @@
 
 - **runGenerationalEngine_(ctx)**
   Reads: S.cycleId, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.month, S.season, S.simYear, S.sportsSeason
-  Writes: S.generationalEvents
+  Writes: S.generationalEvents, S.hospitalEvents
   Config: ctx.config.cycleCount
 
 - **processHealthLifecycle_(ctx, popId, name, currentStatus, duration, age, tier, cause, neighborhood, cycle, cal)**
@@ -567,6 +567,7 @@
 - **checkDeath_(ctx, popId, age, lifeHistory, tier, cal)**
 
 - **checkHealthEvent_(ctx, popId, age, lifeHistory, cal)**
+  Reads: S.demographicDrift
 
 - **triggerBirthCascade_(ctx, parentId, parentName, neighborhood, cycle, cal)**
   Writes: S.pendingCascades
@@ -718,6 +719,8 @@
 - **loadRelationshipBonds_(ctx)**
   Writes: S.relationshipBonds
   Sheets: Relationship_Bonds
+
+- **normalizeBondCitizenId_(ctx, val)**
 
 - **saveRelationshipBonds_(ctx)**
   Reads: S.cycleId, S.relationshipBonds
@@ -2078,8 +2081,13 @@
 
 ### buildCyclePacket.js
 - **buildCyclePacket_(ctx)**
-  Reads: S.absoluteCycle, S.bondSummary, S.chicagoFeed, S.cityDynamics, S.cityEventDetails, S.civicLoad, S.civicLoadFactors, S.civicLoadScore, S.compressedLine, S.creationDayAnniversary, S.crimeMetrics, S.crowdHotspots, S.crowdMap, S.cycleId, S.cycleInMonth, S.cycleOfYear, S.cycleRef, S.cycleSummary, S.cycleWeight, S.cycleWeightReason, S.demographicShifts, S.domainPresence, S.dominantDomain, S.economicSummary, S.eveningFood, S.eveningSafety, S.eveningTraffic, S.eventArcs, S.generationalEvents, S.generationalSummary, S.godWorldYear, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaSummary, S.migrationBrief, S.migrationDrift, S.month, S.namedSpotlights, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodMigration, S.nightlife, S.patternFlag, S.season, S.shockDuration, S.shockFlag, S.shockReasons, S.shockScore, S.simMonth, S.storyHooks, S.textureTriggers, S.transitMetrics, S.weather, S.weatherSummary, S.worldEvents, S.worldPopulation
+  Reads: S.absoluteCycle, S.bondSummary, S.chicagoFeed, S.cityDynamics, S.cityEventDetails, S.civicLoad, S.civicLoadFactors, S.civicLoadScore, S.compressedLine, S.creationDayAnniversary, S.crimeMetrics, S.crowdHotspots, S.crowdMap, S.cycleId, S.cycleInMonth, S.cycleOfYear, S.cycleRef, S.cycleSummary, S.cycleWeight, S.cycleWeightReason, S.demographicShifts, S.domainPresence, S.dominantDomain, S.economicSummary, S.eveningFood, S.eveningSafety, S.eveningTraffic, S.eventArcs, S.generationalEvents, S.generationalSummary, S.godWorldYear, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.hospitalEvents, S.isCreationDay, S.isFirstFriday, S.mediaSummary, S.migrationBrief, S.migrationDrift, S.month, S.namedSpotlights, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodMigration, S.nightlife, S.patternFlag, S.season, S.shockDuration, S.shockFlag, S.shockReasons, S.shockScore, S.simMonth, S.storyHooks, S.textureTriggers, S.transitMetrics, S.weather, S.weatherSummary, S.worldEvents, S.worldPopulation
   Writes: S.cyclePacket
+
+- **persistHospitalLedger_(ctx)**
+  Reads: S.absoluteCycle, S.cycleId, S.hospitalEvents
+  Writes: S.hospitalCensus
+  Sheets: Hospital_Ledger
 
 - **getCivicContextForPacket_(ss, cycle, cal)**
   Sheets: Civic_Office_Ledger, Election_Log
@@ -3056,4 +3064,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 178
-**Functions mapped:** 1050
+**Functions mapped:** 1052

@@ -175,6 +175,31 @@ function runFaithEventsEngine_(ctx) {
     }
   }
 
+  // T3 (research.24, S313): faith events emit ripples so the org reaches the
+  // seed deck as PROTAGONIST (exact OtherEntities lead via the non-enum scope
+  // branch in buildContractSeeds_), not just backdrop. Post-cap loop → ≤5
+  // ripples/cycle. Magnitudes sit under the major threshold (0.05) → texture
+  // seeds by default; a crisis-response cluster of 3+ merges major via the
+  // existing same-family cluster rule, which is correct.
+  if (typeof recordRipple_ === 'function') {
+    for (var rf = 0; rf < events.length; rf++) {
+      var rev = events[rf];
+      if (!rev || !rev.neighborhood) continue;
+      recordRipple_(ctx, {
+        causeType: 'faith-event',
+        causeId: rev.organization,
+        causeDetail: rev.description || '',
+        effectType: rev.eventType,
+        targetScope: 'faith',
+        targetIds: [rev.organization],
+        neighborhood: rev.neighborhood,
+        magnitude: rev.eventType === 'crisis_response' ? 0.02 : 0.01,
+        duration: 1,
+        sourceEngine: 'faithEventsEngine'
+      });
+    }
+  }
+
   // Store in summary for Phase 6 analysis
   S.faithEvents = {
     generated: events.length,

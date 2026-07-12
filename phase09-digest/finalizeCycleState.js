@@ -211,7 +211,8 @@ function snapshotEveningForCarryForward_(ctx) {
   for (var i = 0; i < Math.min(sightings.length, 3); i++) {
     var s = sightings[i];
     if (s && s.name) {
-      snapshot.famousNames.push(s.name + (s.neighborhood ? ' in ' + s.neighborhood : ''));
+      // T5 (research.24): venue rides the carry-forward line when present
+      snapshot.famousNames.push(s.name + (s.venue && s.venue.name ? ' at ' + s.venue.name : '') + (s.neighborhood ? ' in ' + s.neighborhood : ''));
     }
   }
 
@@ -432,7 +433,11 @@ function compactEconomicRipples_(ripples, cycle) {
       startCycle: a.startCycle,
       endCycle: a.endCycle,
       currentStrength: a.currentStrength,
-      source: String(a.source || 'System').slice(0, 80)
+      source: String(a.source || 'System').slice(0, 80),
+      // T4 (research.24, S313): business-threaded ripples keep their scope
+      // across the cycle boundary — carryover ledger rows stay business-scoped.
+      bizId: a.bizId || '',
+      bizName: a.bizName || ''
     });
   }
   return out;

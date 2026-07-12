@@ -412,6 +412,33 @@ function buildEveningFamous_(ctx) {
   // ASSIGN NEIGHBORHOODS (v2.2 - calendar-aware)
   // ═══════════════════════════════════════════════════════════════════════════
 
+  // T5 (research.24, S313): fail-soft hood-keyed Business_Ledger read — each
+  // sighting can name a real venue in its neighborhood, and the venue gets a
+  // business-scoped ripple so it reaches the seed deck as exact protagonist.
+  // Same three-col pattern as contractSeedBackdropIndex_; empty on any failure.
+  var venuesByHood = {};
+  try {
+    var vbs = ctx.ss && typeof ctx.ss.getSheetByName === 'function' ? ctx.ss.getSheetByName('Business_Ledger') : null;
+    if (vbs && vbs.getLastRow() > 1) {
+      var vv = vbs.getDataRange().getValues();
+      var vh = vv[0];
+      var iVid = vh.indexOf('BIZ_ID');
+      var iVname = vh.indexOf('Name');
+      var iVhood = vh.indexOf('Neighborhood');
+      if (iVid >= 0 && iVname >= 0 && iVhood >= 0) {
+        for (var vr = 1; vr < vv.length; vr++) {
+          var vhood = String(vv[vr][iVhood] || '').trim();
+          var vname = String(vv[vr][iVname] || '').trim();
+          if (!vhood || !vname) continue;
+          if (!venuesByHood[vhood]) venuesByHood[vhood] = [];
+          venuesByHood[vhood].push({ bizId: String(vv[vr][iVid] || ''), name: vname });
+        }
+      }
+    }
+  } catch (venueErr) {
+    try { Logger.log('buildEveningFamous_ venue read failed (fail-soft): ' + venueErr); } catch (ig) {}
+  }
+
   var famousWithLocations = [];
   for (var j = 0; j < selected.length; j++) {
     var ent = selected[j];
@@ -449,6 +476,29 @@ function buildEveningFamous_(ctx) {
     if (ent.role === "A's player") {
       if (ent.traitProfile) sighting.traitProfile = ent.traitProfile;
       if (ent.tier) sighting.tier = ent.tier;
+    }
+
+    // T5 (research.24): name a real venue in the sighting's hood + emit a
+    // business-scoped ripple. 2-4 sightings/cycle -> bounded volume; Phase 7
+    // runs before Phase7-ContractSeeds and the Phase-10 executor (compliant).
+    var hoodVenues = venuesByHood[neighborhood];
+    if (hoodVenues && hoodVenues.length) {
+      var venue = hoodVenues[Math.floor(rng() * hoodVenues.length)];
+      sighting.venue = { bizId: venue.bizId, name: venue.name };
+      if (typeof recordRipple_ === 'function') {
+        recordRipple_(ctx, {
+          causeType: 'lifestyle-sighting',
+          causeId: ent.name,
+          causeDetail: ent.name + ' spotted at ' + venue.name,
+          effectType: 'sighting',
+          targetScope: 'business',
+          targetIds: [venue.bizId],
+          neighborhood: neighborhood,
+          magnitude: 0.01,
+          duration: 1,
+          sourceEngine: 'buildEveningFamous'
+        });
+      }
     }
 
     famousWithLocations.push(sighting);

@@ -304,6 +304,40 @@ var LH_HEADER = ['Timestamp', 'POPID', 'Name', 'EventTag', 'EventText', 'Neighbo
   delete global.suggestStoryAngle_;
 })();
 
+// §10 T2 (research.24): Community_Programs join the OtherEntities backdrop pool
+(function () {
+  var PRG_HEADER = ['Program_ID', 'Name', 'Founder_POPID', 'Neighborhood', 'Type', 'Founded_Cycle', 'Status'];
+  var PRG_ROWS = [
+    PRG_HEADER,
+    ['PRG-002', 'Vinnie Keane West Oakland Baseball Academy', 'POP-00001', 'West Oakland', 'youth-sports', 101, 'active'],
+    ['PRG-009', 'Retired Program', 'POP-00003', 'West Oakland', 'youth-sports', 90, 'retired']
+  ];
+  function lcg(seed) {
+    var st = seed;
+    return function () { st = (st * 1664525 + 1013904223) % 4294967296; return st / 4294967296; };
+  }
+  function build(rngSeed, extra) {
+    var ctx = {
+      ss: fakeSS([LH_HEADER], Object.assign({ Community_Programs: PRG_ROWS }, extra || {})),
+      rng: lcg(rngSeed),
+      summary: {
+        cycleId: 98,
+        rippleEvents: [{ cycle: 98, causeType: 'crime', causeId: 'WO', causeDetail: 'Petty theft +2', effectType: 'crime-cluster', targetScope: 'neighborhood', targetIds: [], neighborhood: 'West Oakland', magnitude: 2, duration: 1 }]
+      }
+    };
+    b.buildContractSeeds_(ctx);
+    return ctx.summary.contractSeeds;
+  }
+  var s10 = build(7)[0];
+  assert('10a program fills OtherEntities when no faith competes', s10.otherEntities === 'Vinnie Keane West Oakland Baseball Academy (program)');
+  assert('10b inactive program excluded', s10.otherEntities.indexOf('Retired Program') < 0);
+  assert('10c same rng seed → identical seeds', JSON.stringify(build(7)) === JSON.stringify([s10]));
+  // faith + program share one pool + one fill slot
+  var FAITH_ROWS = [FAITH_HEADER, ['West Oakland AME Chapel', 'AME', 'West Oakland', 1932, 210, 'Rev. Long', 'steady', 'Active']];
+  var withFaith = build(7, { Faith_Organizations: FAITH_ROWS })[0];
+  assert('10d one OtherEntities slot total (faith+program pool)', withFaith.otherEntities.split(';').length === 1 && /\((faith|program)\)/.test(withFaith.otherEntities));
+})();
+
 // §7 Zero ripples → zero seeds, no throw
 (function () {
   var ctx = { ss: fakeSS([LH_HEADER]), summary: { cycleId: 95 } };

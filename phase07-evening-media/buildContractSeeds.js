@@ -38,7 +38,9 @@ var CONTRACT_SEED_DOMAIN = {
   'gentrification': 'COMMUNITY',
   'migration': 'COMMUNITY',
   'sports': 'SPORTS',
-  'crime': 'SAFETY'
+  'crime': 'SAFETY',
+  'faith-event': 'COMMUNITY',        // T3 (research.24) — faithEventsEngine ripples
+  'lifestyle-sighting': 'COMMUNITY'  // T5 (research.24) — buildEveningFamous venue ripples
 };
 
 // Desk routing (T4 purpose, in-sheet): which desk's packet this row belongs to.
@@ -250,7 +252,7 @@ function contractSeedJournalist_(domain) {
  * discipline as contractSeedCycleEvents_ — a missing tab never blocks the seed.
  */
 function contractSeedBackdropIndex_(ctx) {
-  var idx = { bizByHood: {}, bizById: {}, faithByHood: {} };
+  var idx = { bizByHood: {}, bizById: {}, faithByHood: {}, programsByHood: {} };
   if (!ctx || !ctx.ss || typeof ctx.ss.getSheetByName !== 'function') return idx;
   try {
     var bs = ctx.ss.getSheetByName('Business_Ledger');
@@ -294,13 +296,39 @@ function contractSeedBackdropIndex_(ctx) {
           var fhk = contractSeedNormHood_(fv[f][iFhood]);
           if (fhk) {
             if (!idx.faithByHood[fhk]) idx.faithByHood[fhk] = [];
-            idx.faithByHood[fhk].push({ key: org, name: org });
+            idx.faithByHood[fhk].push({ key: org, name: org, kind: 'faith' });
           }
         }
       }
     }
   } catch (e2) {
     try { if (typeof Logger !== 'undefined') Logger.log('contractSeedBackdropIndex_ Faith_Organizations read failed: ' + e2); } catch (ig2) {}
+  }
+  try {
+    // T2 (research.24): Community_Programs — canon programs (galas, youth
+    // leagues, academies) join the OtherEntities backdrop pool beside faith.
+    var psh = ctx.ss.getSheetByName('Community_Programs');
+    if (psh && psh.getLastRow() > 1) {
+      var pv = psh.getDataRange().getValues();
+      var ph = pv[0];
+      var iPname = ph.indexOf('Name');
+      var iPhood = ph.indexOf('Neighborhood');
+      var iPstatus = ph.indexOf('Status');
+      if (iPname >= 0 && iPhood >= 0) {
+        for (var p = 1; p < pv.length; p++) {
+          var pname = String(pv[p][iPname] || '');
+          if (!pname) continue;
+          if (iPstatus >= 0 && String(pv[p][iPstatus] || '').toLowerCase() !== 'active') continue;
+          var phk = contractSeedNormHood_(pv[p][iPhood]);
+          if (phk) {
+            if (!idx.programsByHood[phk]) idx.programsByHood[phk] = [];
+            idx.programsByHood[phk].push({ key: pname, name: pname, kind: 'program' });
+          }
+        }
+      }
+    }
+  } catch (e3) {
+    try { if (typeof Logger !== 'undefined') Logger.log('contractSeedBackdropIndex_ Community_Programs read failed: ' + e3); } catch (ig3) {}
   }
   return idx;
 }
@@ -350,7 +378,7 @@ function buildContractSeeds_(ctx) {
   // S313 backdrop entities: businesses + faith orgs keyed by neighborhood.
   var backdrop = contractSeedBackdropIndex_(ctx);
   var usedBiz = {};   // cross-seed spread, same as usedPop
-  var usedFaith = {};
+  var usedOther = {}; // shared across faith + programs (one OtherEntities pool)
 
   // Cluster ripples by causeType + neighborhood (T5 family grouping).
   var clusters = {};
@@ -440,11 +468,12 @@ function buildContractSeeds_(ctx) {
     var seenOtherKeys = {};
     for (var xo = 0; xo < otherEntities.length; xo++) seenOtherKeys[otherEntities[xo]] = true;
     if (isRealHood) {
-      var faithFill = contractSeedBackdropDraw_(
-        backdrop.faithByHood[hoodKey], seenOtherKeys, usedFaith,
+      var otherPool = (backdrop.faithByHood[hoodKey] || []).concat(backdrop.programsByHood[hoodKey] || []);
+      var otherFill = contractSeedBackdropDraw_(
+        otherPool, seenOtherKeys, usedOther,
         CONTRACT_SEED_FILL_OTHER - otherLabels.length, rollFn);
-      for (var df = 0; df < faithFill.length; df++) {
-        otherLabels.push(faithFill[df].name + ' (faith)');
+      for (var df = 0; df < otherFill.length; df++) {
+        otherLabels.push(otherFill[df].name + ' (' + (otherFill[df].kind || 'faith') + ')');
       }
     }
 

@@ -50,7 +50,7 @@ pointers:
   3. Append 3 rows (`PRG-001`..`PRG-003`): Vinnie Keane Gala (type `gala`), Vinnie Keane Firehouse Baseball Academy (West Oakland, type `youth-sports`), Mark Aitken Youth Baseball League (type `youth-sports`). Founded_Cycle: the cycle canon first named them if findable via `search_articles`, else current cycle. Status `active`.
   4. Read the tab back and confirm all values landed.
 - **Verify:** re-read via `lib/sheets.js` → 3 rows, no blanks in Program_ID/Name/Status
-- **Status:** [ ] not started
+- **Status:** [x] done S313 — tab live, 3 rows verified read-back (academy=West Oakland/Firehouse 29 canon; gala + Aitken league hood blank, canon names parks not a neighborhood; Founded_Cycle 101 fallback, no cycle in canon)
 
 ### Task 2: Programs backdrop pool in buildContractSeeds.js
 
@@ -62,7 +62,7 @@ pointers:
   2. In `buildContractSeeds_`, merge the OtherEntities draw pool: `(faithByHood[hoodKey] || []).concat(programsByHood[hoodKey] || [])`, one shared `usedFaith`-style used-map (rename to `usedOther`). Labels: `name + ' (faith)'` / `name + ' (program)'`. `CONTRACT_SEED_FILL_OTHER` stays 1.
   3. Tests: new §9 — program in seed's hood fills OtherEntities when no faith org competes; inactive program excluded; determinism (two same-seed runs identical); missing tab never throws.
 - **Verify:** `node phase07-evening-media/buildContractSeeds.test.js` → all pass, zero regressions in §1–§8
-- **Status:** [ ] not started
+- **Status:** [x] done S313 — landed as test §10 (§9 was taken same-session by the journalist pre-match asserts); usedFaith renamed usedOther, shared faith+program pool, labels `(faith)`/`(program)`. ALL PASS
 
 ### Task 3: Faith events emit ripples (faithEventsEngine.js)
 
@@ -88,7 +88,7 @@ pointers:
      Magnitudes sit under `CONTRACT_SEED_MAJOR_MAG_FRAC` (0.05) → texture seeds by default; a crisis-response cluster of 3+ merges major via the existing cluster rule, which is correct.
   2. `buildContractSeeds.js`: add `'faith-event': 'COMMUNITY'` to `CONTRACT_SEED_DOMAIN` (routes to culture desk via `CONTRACT_SEED_DESK`). The `'faith'` scope lands in OtherEntities via the existing non-enum branch — no other deck change.
 - **Verify:** `node phase07-evening-media/buildContractSeeds.test.js` still passes; sandbox cycle → Ripple_Ledger rows with `SourceEngine=faithEventsEngine`, seed rows with the org leading OtherEntities
-- **Status:** [ ] not started
+- **Status:** [x] built S313 — code + constant landed, suite passes; sandbox-cycle verify rides the C102-window run (acceptance 1/2)
 
 ### Task 4: Business-scoped ripples (economicRippleEngine.js)
 
@@ -99,7 +99,7 @@ pointers:
   2. Ledger loop (the `recordRipple_` block after `processActiveRipples_`): when `rlr.bizId` is set, emit `targetScope: 'business'`, `targetIds: [rlr.bizId]` instead of the neighborhood/citywide fallback — birth AND carryover rows (bizId survives on the ripple object across the T2 snapshot serializer; verify the serializer round-trips unknown fields, `phase09`/snapshot writer — if it whitelists fields, add bizId/bizName to the whitelist).
   3. Deck consumes with zero changes: `'business'` scope → Businesses col, BIZ_ID name-resolved via `bizById`.
 - **Verify:** sandbox cycle with a businessDeltas-emitting career cycle → Ripple_Ledger row `TargetScope=business, TargetIds=BIZ-xxx`; seed Businesses col shows `BIZ-xxx Name` as exact lead
-- **Status:** [ ] not started
+- **Status:** [x] built S313 — bizId/bizName threaded (birth + carryover); serializer check CONFIRMED the whitelist trap: compactEconomicRipples_ whitelists fields, bizId/bizName added to it. Sandbox verify rides the C102-window run
 
 ### Task 5: Lifestyle sightings name a venue + emit business ripple (buildEveningFamous.js)
 
@@ -114,7 +114,7 @@ pointers:
   3. `finalizeCycleState.js` L214 `famousNames` push: include venue when present (`s.name + ' at ' + s.venue.name + (s.neighborhood ? ' in ' + s.neighborhood : '')`).
   4. `buildContractSeeds.js`: add `'lifestyle-sighting': 'COMMUNITY'` to `CONTRACT_SEED_DOMAIN`.
 - **Verify:** sandbox cycle → sighting text names a real Business_Ledger venue; Ripple_Ledger `SourceEngine=buildEveningFamous` row; seed Businesses col carries the venue as exact lead
-- **Status:** [ ] not started
+- **Status:** [x] built S313 — venue draw + ripple in buildEveningFamous (fail-soft ledger read, engine rng); venue on CULTURAL INDEX per-sighting line + famousNames carry-forward; names-only mediaIntake path deliberately untouched. Sandbox verify rides the C102-window run
 
 ### Task 6 (Phase 2, gated): Youth events reference programs (generationalEventsEngine.js)
 
@@ -151,3 +151,4 @@ T1 → T2 (ledger before its consumer) → T3 → T4 → T5 → T6 gated separat
 ## Changelog
 
 - 2026-07-12 — Initial draft (S314, research-build). Research basis research.24; all file/line claims verified against live source this session.
+- 2026-07-12 — T1–T5 executed (S313, engine-sheet). T1 tab live + verified; T2–T5 built, all tests pass (§10 program pool + zero regressions), syntax-checked. Acceptance 1/2 (sandbox Ripple_Ledger/deck rows) rides the C102-window sandbox run; T6 stays gated. Rides the queued prod clasp batch.

@@ -205,8 +205,10 @@ function runEconomicRippleEngine_(ctx) {
         effectType: isCarried
           ? 'carryover'
           : ('sector-impact:' + ((rlr.sectors || []).join('/'))),
-        targetScope: rlr.primaryNeighborhood ? 'neighborhood' : 'citywide',
-        targetIds: rlr.primaryNeighborhood ? [rlr.primaryNeighborhood] : (rlr.neighborhoods || []),
+        // T4 (research.24): business-threaded ripples ledger business-scoped —
+        // birth AND carryover rows (bizId rides the ripple + snapshot compactor).
+        targetScope: rlr.bizId ? 'business' : (rlr.primaryNeighborhood ? 'neighborhood' : 'citywide'),
+        targetIds: rlr.bizId ? [rlr.bizId] : (rlr.primaryNeighborhood ? [rlr.primaryNeighborhood] : (rlr.neighborhoods || [])),
         neighborhood: rlr.primaryNeighborhood || '',
         magnitude: rlr.impact,
         duration: rlr.endCycle - rlr.startCycle,
@@ -313,13 +315,20 @@ function detectCareerRipples_(ctx, currentCycle) {
     var hood = mapToCanonicalNeighborhood_(biz.neighborhood);
     if (!hood) continue;
     var net = (delta.gained || 0) - (delta.lost || 0);
+    // T4 (research.24, S313): thread the BIZ_ID onto the ripple so the ledger
+    // row is business-scoped and the seed deck gets the business as exact
+    // protagonist (name-resolved via bizById). createRipple_ returns null on
+    // same-cycle dedup (id = TYPE_cycle) — first qualifying business wins,
+    // existing semantics unchanged.
     if (delta.lost >= 2 && net < 0) {
-      createRipple_(S, 'BUSINESS_CONTRACTION', currentCycle,
+      var rcon = createRipple_(S, 'BUSINESS_CONTRACTION', currentCycle,
         { description: (biz.name || bizId) + ' lost ' + delta.lost + ' employees' }, hood, cal);
+      if (rcon) { rcon.bizId = bizId; rcon.bizName = biz.name || bizId; }
     }
     if (delta.gained >= 2 && net > 0) {
-      createRipple_(S, 'BUSINESS_EXPANSION', currentCycle,
+      var rexp = createRipple_(S, 'BUSINESS_EXPANSION', currentCycle,
         { description: (biz.name || bizId) + ' added ' + delta.gained + ' employees' }, hood, cal);
+      if (rexp) { rexp.bizId = bizId; rexp.bizName = biz.name || bizId; }
     }
   }
 }

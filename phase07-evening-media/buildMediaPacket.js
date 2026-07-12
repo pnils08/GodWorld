@@ -383,7 +383,8 @@ function buildMediaPacket_(ctx) {
   if (sightings.length > 0) {
     for (var pi = 0; pi < sightings.length; pi++) {
       var p = sightings[pi];
-      pkt.push('  - ' + p.name + ' (' + (p.role || 'celebrity') + ')' + (p.neighborhood ? ' @ ' + p.neighborhood : ''));
+      // T5 (research.24): venue rides the per-sighting line when present
+      pkt.push('  - ' + p.name + ' (' + (p.role || 'celebrity') + ')' + (p.venue && p.venue.name ? ' at ' + p.venue.name : '') + (p.neighborhood ? ' @ ' + p.neighborhood : ''));
     }
   } else if (s.famousPeople && s.famousPeople.length > 0) {
     for (var pj = 0; pj < s.famousPeople.length; pj++) {

@@ -71,7 +71,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.48 | Citizen-loop deepening — T5+T9 built S300; T1–4 open; T6/7 moved to engine.53; T10–13 anti-flattening added S312 (card-anchor, voice-texture, salience tail, bond backfill) | in-progress | engine-sheet + media | [[../plans/2026-07-06-citizen-loop-deepening]] |
 | engine.51 | Citizen intake unification — T1-T7 done; prod Intake tab S305; T8 extraction built S305 (dry-run verified, sandbox --apply pending Mike cycle-fire) | in-progress | research-build (T8) + engine-sheet | [[../plans/2026-07-07-citizen-intake-unification]] |
 | engine.52 | Oakland_Hospital — health as fate-driver (closes engine.44 C5 ask + S256 rebuild decision) | done-pending-archive — C125+C126 sandbox PASS full loop (admit→recover→row-close); prod clasp rides C102-smoke batch; income-hit rider passive | engine-sheet (A–D, D crossover Mike-direct) | [[../plans/2026-07-11-oakland-hospital]] |
-| engine.53 | Agent exchange engine — conversation/interview/debate formats, 17:00 cron (generalizes engine.48 T6/T7 pre-build) | ready | engine-sheet (T1–5) + media (T6) | [[../plans/2026-07-11-agent-exchange-engine]] |
+| engine.53 | Agent exchange engine — T1–5 SHIPPED S312 (3 formats live-verified, 17:00 cron wired; conversations idle until engine.48 T4 ripple writer); open: T6 /sift sourcing | in-progress | media (T6) | [[../plans/2026-07-11-agent-exchange-engine]] |
 
 ### canon.* — World-fidelity layer
 

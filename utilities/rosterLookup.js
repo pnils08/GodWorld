@@ -1031,6 +1031,9 @@ if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     loadRoster_: loadRoster_,
     getRoster_: getRoster_,
-    getVoiceGuidance_: (typeof getVoiceGuidance_ !== 'undefined') ? getVoiceGuidance_ : undefined
+    getVoiceGuidance_: (typeof getVoiceGuidance_ !== 'undefined') ? getVoiceGuidance_ : undefined,
+    // engine.53 — exchange engine's interview format matches citizen->journalist in Node
+    matchCitizenToJournalist_: matchCitizenToJournalist_,
+    getThemeKeywordsForDomain_: getThemeKeywordsForDomain_
   };
 }

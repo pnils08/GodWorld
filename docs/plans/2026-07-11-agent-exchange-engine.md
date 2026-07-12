@@ -57,7 +57,7 @@ pointers:
   2. Core: `assembleParticipant(popId)` — wake-parity perception via `lib/wakePerception.js` (dials→disposition, life tail, bonds, texture, fenced page memory); `runExchange(participants, frames, turnsPerSide)` — alternating DeepSeek calls, each side seeing the running transcript as alternating user/assistant messages from its own POV; per-participant post-processing lifted from `citizen-wake.js` steps 1–4 (classify own lines → page append with format daypart → tension open/resolve → one intake row).
   3. Conversation format: implement engine.48 §Task 6 steps 1–5 exactly (ripple-state scan for freshest un-consumed bonded pair, conversation frame with bond phrase, 3 turns/side, ripple consumption, cadence stamp in `logs/citizen-exchange-state.json`).
 - **Verify:** engine.48 Task 6's verify block verbatim (dry-run prints, live sandbox writes, dial test passes) with the new filename.
-- **Status:** [ ] not started
+- **Status:** [x] shipped S312 (engine-sheet) — live-verified on sandbox intake: router→conversation on ripple fixture, 2 page docs (cp-POP-00642/cp-POP-01017) + 2 CONVO intake rows, ripple consumed, cadence stamped, artifact written; dial test 49/49; prod intake untouched.
 
 ### Task 2: Interview format *(engine-sheet)*
 
@@ -69,7 +69,7 @@ pointers:
   3. Structure: 2 questions, citizen answers each (2 turns/side); citizen writes per core post-processing with `daypart='INTERVIEW'` (matches the `/post-publish` 2e daypart already in use).
   4. Transcript artifact: `output/exchanges/exchange_c{N}_{date}_interview.md` — header (participants, trigger, cycle) + turns. No sim-facing Gregorian dates inside the body (format `Y<n>C<m>` per the no-real-world-clock rule; the filename date is operator-facing, matching production-log convention).
 - **Verify:** `--dry-run --format=interview` → journalist questions reference the citizen's actual edition context line; live sandbox run → artifact file + citizen page doc + 1 intake row, journalist has no writes.
-- **Status:** [ ] not started
+- **Status:** [x] shipped S312 (engine-sheet) — dry-verified: journalist matched via matchCitizenToJournalist_ (now exported for Node), questions referenced the citizen's actual NAMES INDEX context + neighborhood; live write path shared with the conversation run (journalist structurally excluded from recordParticipant).
 
 ### Task 3: Debate format *(engine-sheet)*
 
@@ -81,7 +81,7 @@ pointers:
   3. Stance seeding: each system prompt gets one stance line — officials from faction + approval posture (`Civic_Office_Ledger`), citizens from their own tension text or dial disposition. Stances must differ; if all sides converge, log + skip (a debate without disagreement is a panel — not worth the tokens).
   4. Structure: 2 rounds × each participant (4–6 turns total), opening positions then responses. Per-participant post-processing with `daypart='DEBATE'`; transcript artifact as Task 2 step 4 with `_debate.md` suffix.
 - **Verify:** `--dry-run --format=debate` on a sandbox initiative → distinct stance lines visible in each printed system prompt; live run → artifact + per-participant page/intake writes.
-- **Status:** [ ] not started
+- **Status:** [x] shipped S312 (engine-sheet) — dry-verified via tension-overlap fallback (no initiative near vote at test time): distinct stance lines per prompt, participants address each other by name (frame fix), bounded transcript; initiative branch reads VoteCycle/factions from live tabs.
 
 ### Task 4: Trigger router + cadence *(engine-sheet)*
 
@@ -92,7 +92,7 @@ pointers:
   2. Cadence: `logs/citizen-exchange-state.json` carries `lastRunDate` (max 1 live exchange/day — engine.48 Task 6 cadence adopted engine-wide) + `interviewed[]` POPIDs per edition + `debated[]` initiative IDs.
   3. Dry runs never touch state (wake-loop discipline).
 - **Verify:** forced state fixtures for each branch → router picks the expected format; all-empty state → exit 0; second live run same day → "already ran today", exit 0.
-- **Status:** [ ] not started
+- **Status:** [x] shipped S312 (engine-sheet) — verified: expired ripple correctly aged out (25>12), fresh ripple routed to conversation, all-empty triggers → "no exchange today" exit 0, second live run same day → "already ran today" exit 0; dry runs never touch state.
 
 ### Task 5: Cron wiring *(engine-sheet)*
 
@@ -101,7 +101,7 @@ pointers:
 - **Steps:**
   1. Add: `0 17 * * * /usr/bin/node /root/GodWorld/scripts/citizen-exchange.js >> /root/GodWorld/logs/citizen-exchange.log 2>&1` — between the 15:30 afternoon and 19:30 evening wakes, so a participant's evening wake can reference the exchange (their page already carries it). Supersedes engine.48 Task 7.
 - **Verify:** `crontab -l` shows the entry; forced empty-trigger run via cron exits 0 silently.
-- **Status:** [ ] not started
+- **Status:** [x] shipped S312 (engine-sheet) — crontab entry at 17:00 between afternoon/evening wakes; empty-trigger and already-ran paths both exit 0 silently.
 
 ### Task 6: /sift reads exchange transcripts *(media terminal)*
 
@@ -130,3 +130,4 @@ pointers:
 ## Changelog
 
 - 2026-07-11 — Initial draft (S312). Generalizes engine.48 Task 6/7 (conversation engine + cron) into a three-format exchange engine before first build; engine.48 plan carries the amendment note. Approved-in-shape by Mike before write ("push on the B and C" → proceed).
+- 2026-07-11 — T1–T5 shipped + verified (S312, engine-sheet): `scripts/citizen-exchange.js` (3 formats, router, cadence, 17:00 cron); rosterLookup Node exports + wakePerception `archetype` field added. Open: T6 (/sift sourcing, media). Router note: conversations idle until engine.48 T4 ships the ripple writer; interviews need an edition within 2 cycles.

@@ -206,8 +206,8 @@
 | Step | Function | File | Purpose |
 |------|----------|------|---------|
 | 8-CycleWeight | `applyCycleWeightForLatestCycle_()` | phase09-digest/applyCycleWeightForLatestCycle.js | Signal scoring (low/medium/high) |
-| 8-V3Preload | `v3PreloadContext_()` | phase08-v3-chicago/v3preLoader.js | Load arc/domain/neighborhood state from ledgers. **LOADS** `S.eventArcs` |
-| 8-ArcLifecycle | `processArcLifecycle_()` | phase06-analysis/processArcLifeCyclev1.js | Advance arc phases (early→rising→peak→decline→resolved). **Moved from Phase 6 S116.** S199: arcLifecycleEngine.js (the 4-arg shadowed version) deleted as confirmed-dead per ENGINE_MAP.md line 279. |
+| 8-V3Preload | `v3PreloadContext_()` | phase08-v3-chicago/v3preLoader.js | Load domain/neighborhood state from ledgers. `loadActiveArcsFromLedger_` **DISABLED S313** — `S.eventArcs` no longer re-ingested (in-cycle crisis-bucket arcs only) |
+| ~~8-ArcLifecycle~~ | ~~`processArcLifecycle_()`~~ | phase06-analysis/processArcLifeCyclev1.js | **DISABLED S313 (Mike-direct)** — arc loop retired: stories are seeded, never re-ingested. Zombie loop (spawner off-path since S185; 36 arcs stuck at peak C82–C101). Call sites commented, retained for reversibility. Was: advance arc phases. |
 | 8-StorylineStatus | `updateStorylineStatus_()` | phase06-analysis/updateStorylineStatusv1.2.js | Track storyline health. **Moved from Phase 6 S116** | **⚠ AUDIT:** Writes `ctx.summary.storylineUpdates` — nothing reads it. |
 | 8-StorylineHealth | `monitorStorylineHealth_()` | phase06-analysis/hookLifecycleEngine.js | Monitor storyline decay. **Moved from Phase 6 S116** |
 | 8-V3Integration | `v3Integration_()` | phase08-v3-chicago/v3Integration.js | V3 module orchestrator (arcs, domains, textures, hooks) |
@@ -237,7 +237,7 @@
 | 10-RecordEvents25 | `recordWorldEvents25_()` | phase10-persistence/recordWorldEventsv25.js | Archive events (v2.5 format) |
 | 10-RecordEventsV3 | `recordWorldEventsv3_()` | phase10-persistence/recordWorldEventsv3.js | Archive events (v3 format) |
 | 10-NeighborhoodMap | `saveV3NeighborhoodMap_()` | phase08-v3-chicago/v3NeighborhoodWriter.js | Persist neighborhood state |
-| 10-Arcs | `saveV3ArcsToLedger_()` | phase08-v3-chicago/v3LedgerWriter.js | Persist arc state to Event_Arc_Ledger |
+| ~~10-Arcs~~ | ~~`saveV3ArcsToLedger_()`~~ | phase08-v3-chicago/v3LedgerWriter.js | **DISABLED S313** — Event_Arc_Ledger frozen at 653 rows as historical data. See 8-ArcLifecycle note. |
 | 10-Bonds | `saveRelationshipBonds_()` | phase05-citizens/bondPersistence.js | Persist bonds to sheet |
 | 10-BondLedger | `saveV3BondsToLedger_()` | phase08-v3-chicago/v3LedgerWriter.js | Persist bonds (v3 format) |
 | 10-Domains | `saveV3Domains_()` | phase08-v3-chicago/v3DomainWriter.js | Persist domain state |

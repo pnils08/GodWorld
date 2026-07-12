@@ -126,13 +126,18 @@ function v3PreloadContext_(ctx) {
   if (!S.civicLoadFactors) S.civicLoadFactors = [];
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // v3.4: LOAD ACTIVE ARCS FROM LEDGER (cross-cycle persistence)
-  // ═══════════════════════════════════════════════════════════════════════════
-  // Without this, eventArcs started empty every cycle. The arc engine would
-  // return immediately (no arcs to advance), and generateNewArcs_ had no
-  // awareness of existing arcs. Arcs were written to the ledger but never
-  // read back — making them single-cycle instead of multi-cycle.
-  loadActiveArcsFromLedger_(ctx);
+  // v3.4: LOAD ACTIVE ARCS FROM LEDGER — DISABLED S313 (Mike-direct), retained
+  // for reversibility. Doctrine: stories are SEEDED outward; the engine never
+  // re-ingests stories. The arc loop was a zombie: spawner off-path since S185
+  // (max CycleCreated=81), lifecycle state (cols T-AF) never persisted so the
+  // 36 surviving arcs could never advance past 'peak' — they re-injected as
+  // stale context + re-appended 36 rows/cycle for 20 cycles (C82-C101).
+  // Event_Arc_Ledger frozen as historical data at 653 rows. In-cycle arc
+  // creation (generateCrisisBuckets) remains — same-cycle texture only.
+  // Companion disables: Phase8-ArcLifecycle + Phase10-Arcs call sites in
+  // godWorldEngine2.js. High-level storyline tracking, if ever rebuilt, lives
+  // in a different sheet environment (Mike ruling S313).
+  // loadActiveArcsFromLedger_(ctx);
 
   // No resets
   // No overwrites

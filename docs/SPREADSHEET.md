@@ -52,7 +52,7 @@ These are read/written during every cycle run.
 | **Civic_Sweep_Report** | 8 | ENGINE | ENGINE | Civic sweep results |
 | **WorldEvents_Ledger** | 239 | ENGINE, SCRIPT | ENGINE | Legacy world events |
 | **WorldEvents_V3_Ledger** | 183 | ENGINE, SCRIPT | ENGINE | V3 world events |
-| **Event_Arc_Ledger** | 148 | ENGINE, SCRIPT, DASHBOARD | ENGINE | Multi-cycle story arcs |
+| **Event_Arc_Ledger** | 653 | SCRIPT, DASHBOARD | — (frozen) | **FROZEN S313 (Mike-direct)** — arc loop retired (loader + lifecycle + writer disabled; stories are seeded, never re-ingested). Historical data C70–C101; cols T–AF were the deleted v1 arc engine's, never written since. |
 | **Cultural_Ledger** | 33 | ENGINE, SCRIPT, DASHBOARD | ENGINE | Cultural figures, fame scores |
 | **Texture_Trigger_Log** | 295 | ENGINE | ENGINE | Neighborhood texture triggers |
 | **Story_Seed_Deck** | 1,346 | ENGINE, SCRIPT | ENGINE | Story seeds for media |

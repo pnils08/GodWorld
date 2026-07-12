@@ -420,8 +420,11 @@ function runWorldCycle() {
   // ═══════════════════════════════════════════════════════════
   safePhaseCall_(ctx, 'Phase8-CycleWeightSignal', function() { applyCycleWeight_(ctx); });
   safePhaseCall_(ctx, 'Phase8-V3Preload', function() { v3PreloadContext_(ctx); });
-  // Arc lifecycle runs here — after v3PreloadContext_ loads eventArcs into ctx.summary
-  safePhaseCall_(ctx, 'Phase8-ArcLifecycle', function() { processArcLifecycle_(ctx); });
+  // Arc loop DISABLED S313 (Mike-direct): stories are seeded, never re-ingested.
+  // Zombie loop — spawner off-path since S185, 36 arcs stuck at peak re-injecting
+  // C82-C101. Companion disables: loadActiveArcsFromLedger_ (v3preLoader) +
+  // Phase10-Arcs below. Retained for reversibility.
+  // safePhaseCall_(ctx, 'Phase8-ArcLifecycle', function() { processArcLifecycle_(ctx); });
   safePhaseCall_(ctx, 'Phase8-StorylineStatus', function() { updateStorylineStatus_(ctx); });
   safePhaseCall_(ctx, 'Phase8-StorylineHealth', function() { monitorStorylineHealth_(ctx); });
   safePhaseCall_(ctx, 'Phase8-V3Integration', function() { v3Integration_(ctx); });
@@ -459,7 +462,9 @@ function runWorldCycle() {
   // fresh swings (generator Phase 4) + prior residual (PropertiesService).
   safePhaseCall_(ctx, 'Phase10-ChaosNbhdResolve', function() { resolveChaosNeighborhoodFold_(ctx); });
   safePhaseCall_(ctx, 'Phase10-NeighborhoodMap', function() { saveV3NeighborhoodMap_(ctx); });
-  safePhaseCall_(ctx, 'Phase10-Arcs', function() { saveV3ArcsToLedger_(ctx); });
+  // Arc writer DISABLED S313 (Mike-direct) — Event_Arc_Ledger frozen at 653 rows
+  // as historical data. See Phase8-ArcLifecycle disable note.
+  // safePhaseCall_(ctx, 'Phase10-Arcs', function() { saveV3ArcsToLedger_(ctx); });
   safePhaseCall_(ctx, 'Phase10-Bonds', function() { saveRelationshipBonds_(ctx); });
   safePhaseCall_(ctx, 'Phase10-BondLedger', function() { saveV3BondsToLedger_(ctx); });
   safePhaseCall_(ctx, 'Phase10-Domains', function() { saveV3Domains_(ctx); });
@@ -1956,8 +1961,11 @@ function runCyclePhases_(ctx) {
   // ═══════════════════════════════════════════════════════════
   safePhaseCall_(ctx, 'Phase8-CycleWeightSignal', function() { applyCycleWeight_(ctx); });
   safePhaseCall_(ctx, 'Phase8-V3Preload', function() { v3PreloadContext_(ctx); });
-  // Arc lifecycle runs here — after v3PreloadContext_ loads eventArcs into ctx.summary
-  safePhaseCall_(ctx, 'Phase8-ArcLifecycle', function() { processArcLifecycle_(ctx); });
+  // Arc loop DISABLED S313 (Mike-direct): stories are seeded, never re-ingested.
+  // Zombie loop — spawner off-path since S185, 36 arcs stuck at peak re-injecting
+  // C82-C101. Companion disables: loadActiveArcsFromLedger_ (v3preLoader) +
+  // Phase10-Arcs below. Retained for reversibility.
+  // safePhaseCall_(ctx, 'Phase8-ArcLifecycle', function() { processArcLifecycle_(ctx); });
   safePhaseCall_(ctx, 'Phase8-StorylineStatus', function() { updateStorylineStatus_(ctx); });
   safePhaseCall_(ctx, 'Phase8-StorylineHealth', function() { monitorStorylineHealth_(ctx); });
   safePhaseCall_(ctx, 'Phase8-V3Integration', function() { v3Integration_(ctx); });
@@ -1983,7 +1991,9 @@ function runCyclePhases_(ctx) {
   // fresh swings (generator Phase 4) + prior residual (PropertiesService).
   safePhaseCall_(ctx, 'Phase10-ChaosNbhdResolve', function() { resolveChaosNeighborhoodFold_(ctx); });
   safePhaseCall_(ctx, 'Phase10-NeighborhoodMap', function() { saveV3NeighborhoodMap_(ctx); });
-  safePhaseCall_(ctx, 'Phase10-Arcs', function() { saveV3ArcsToLedger_(ctx); });
+  // Arc writer DISABLED S313 (Mike-direct) — Event_Arc_Ledger frozen at 653 rows
+  // as historical data. See Phase8-ArcLifecycle disable note.
+  // safePhaseCall_(ctx, 'Phase10-Arcs', function() { saveV3ArcsToLedger_(ctx); });
   safePhaseCall_(ctx, 'Phase10-Bonds', function() { saveRelationshipBonds_(ctx); });
   safePhaseCall_(ctx, 'Phase10-BondLedger', function() { saveV3BondsToLedger_(ctx); });
   safePhaseCall_(ctx, 'Phase10-Domains', function() { saveV3Domains_(ctx); });

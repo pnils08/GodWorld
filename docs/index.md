@@ -71,7 +71,8 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 - **[[CANCELLATION]]** — monthly costs and cancellation paths for every paid service. *(reference, infrastructure, active)*
 
 ### Pipeline & memory
-- **[[EDITION_PIPELINE]]** — Pipeline v2 skills map (S134 + S165). 5 terminals, 9 reporters, alternate-start publication formats (dispatch, interview, supplemental) all converging on shared publish handoff. *(reference, media, active)*
+- **[[EDITION_PIPELINE]]** — Pipeline v2 skills map (S134 + S165). 5 terminals, 9 reporters, alternate-start publication formats (dispatch, interview, supplemental) all converging on shared publish handoff. **FROZEN S313 (pipeline.44)** — kept runnable, no new investment; the fork is the flagship. *(reference, media, frozen)*
+- **[[EDITION_PIPELINE_DEEP_DISPATCH]]** — the fork path (pipeline.44, S313 Mike-direct FLAGSHIP). /desk-slice → /deep-dispatch → /desk-review → /post-publish; per-desk artifacts, decoupled review, locked rules, path conventions. Design basis: [[research/2026-07-11-desk-slice-fork]]. *(reference, media, fork, active)*
 - **[[EDITION_PIPELINE_v1_archive]]** — pre-S134 pipeline reference. *(archive, media, archived)*
 - **[[WORLD_MEMORY]]** — world memory project status: archive ingest, desk historical context. *(plan, media, active)*
 

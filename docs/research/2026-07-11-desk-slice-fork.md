@@ -14,6 +14,7 @@ sources:
 pointers:
   - "[[../engine/ROLLOUT_PLAN]] — pending-state home (pipeline.44)"
   - "[[index]] — registered same commit"
+  - "[[../EDITION_PIPELINE_DEEP_DISPATCH]] — the fork's pipeline map (sibling of the frozen EDITION_PIPELINE)"
   - "[[../plans/2026-07-11-agent-exchange-engine]] — engine.53, the cron growth path for quotes"
 ---
 

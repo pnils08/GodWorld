@@ -1,5 +1,7 @@
 # Edition Production Pipeline v2
 
+> **FROZEN S313 (pipeline.44, Mike-direct).** This path stays runnable and publishes until the fork proves itself, but receives no new investment. The flagship path is [[EDITION_PIPELINE_DEEP_DISPATCH]] — /desk-slice → /deep-dispatch → /desk-review. Design basis: [[research/2026-07-11-desk-slice-fork]].
+
 **Redesigned S133. S144 added sift/post-publish/reviewer chain. S148 shipped Phase 39 reviewer lanes + Final Arbiter. S165 added dispatch/interview alternate starts (mags terminal trimmed S211 — research-build is apparatus steward; S221 reversed the steward-fallback fallback path so unregistered windows fall to Mags-only mode). S170 refresh to match shipped skills. S189 added cultural-only `CUL-` ID enumeration to NAMES INDEX + CITIZEN USAGE LOG format spec. S206 routing-foundation: Engine A (priorityEngine.js) + Engine B (bylineEngine.js) emit `priorityScore` + `consequenceFloor` + `bylineCandidate` + `bylineConfidence` + `bylineRationale` per seed at applyStorySeeds.js v3.12 → Story_Seed_Deck cols M-R; consumer skills sift/write-supplemental/dispatch/interview wired per Phase 4. See [[plans/2026-05-07-engine-routing-foundation]] + [[concepts/routing-rationale]].** Skills are the source of truth. This doc is the map. When they disagree, the skills win.
 
 ---

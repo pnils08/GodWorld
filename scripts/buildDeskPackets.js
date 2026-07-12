@@ -1101,8 +1101,10 @@ function filterHouseholdsForDesk(households, deskNeighborhoods, deskDomains) {
 function filterBondsForDesk(bonds, deskCitizenNames, deskNeighborhoods, deskDomains) {
   if (deskDomains.indexOf('ALL') !== -1) return bonds;
   return bonds.filter(function(b) {
-    var citizenMatch = deskCitizenNames.indexOf(b.CitizenA) !== -1 ||
-                       deskCitizenNames.indexOf(b.CitizenB) !== -1;
+    // S312 — CitizenA/B are POPIDs (canonical); resolved display names ride
+    // CitizenAName/BName. Match either so legacy name rows keep working.
+    var citizenMatch = deskCitizenNames.indexOf(b.CitizenAName || b.CitizenA) !== -1 ||
+                       deskCitizenNames.indexOf(b.CitizenBName || b.CitizenB) !== -1;
     var hoodMatch = deskNeighborhoods.indexOf(b.Neighborhood) !== -1;
     return citizenMatch || hoodMatch;
   });
@@ -2144,6 +2146,18 @@ async function main() {
   simLedger.forEach(function(c) {
     var name = ((c.First || '') + ' ' + (c.Last || '')).trim();
     if (name) simLedgerByName[name] = c;
+  });
+
+  // S312 bond-key repair — Relationship_Bonds is POPID-keyed (canonical); resolve
+  // display names onto each bond so the name-based desk filter below still matches.
+  var nameByPopId = {};
+  simLedger.forEach(function(c) {
+    var nm = ((c.First || '') + ' ' + (c.Last || '')).trim();
+    if (c.POPID && nm) nameByPopId[String(c.POPID).toUpperCase()] = nm;
+  });
+  activeBonds.forEach(function(b) {
+    b.CitizenAName = nameByPopId[String(b.CitizenA || '').toUpperCase()] || String(b.CitizenA || '');
+    b.CitizenBName = nameByPopId[String(b.CitizenB || '').toUpperCase()] || String(b.CitizenB || '');
   });
   // S205 Path B: genericCitizens var dropped — was only console.log'd, never used.
   var chicagoCitizens = allToObjects(chicagoRaw);

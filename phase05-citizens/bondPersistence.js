@@ -200,6 +200,33 @@ function loadRelationshipBonds_(ctx) {
  *
  * v2.3: Uses queueReplaceIntent_ for V3 write-intents model.
  */
+// S312 bond-key repair — POPID is the canonical CitizenA/B key (loadBonds, exchange engine,
+// getCombinedEventBoost_, storyHook all match POPIDs; name rows were invisible to every one
+// of them). bondEngine's internals stay name-keyed (v2.4 design); this translates at the
+// boundary: unique First+Last -> POPID via shared ctx.ledger. Ambiguous/unknown names pass
+// through unchanged (never guess a citizen).
+function normalizeBondCitizenId_(ctx, val) {
+  var s = String(val || '').trim();
+  if (!s || /^POP-\d{5}$/i.test(s)) return s.toUpperCase() || s;
+  if (!ctx || !ctx.ledger || !ctx.ledger.headers) return s;
+  if (!ctx._bondNameToPop) {
+    var h = ctx.ledger.headers;
+    var iPop = h.indexOf('POPID'), iF = h.indexOf('First'), iL = h.indexOf('Last');
+    var map = {};
+    if (iPop >= 0 && iF >= 0 && iL >= 0) {
+      for (var i = 0; i < ctx.ledger.rows.length; i++) {
+        var r = ctx.ledger.rows[i];
+        var nm = String((r[iF] || '') + ' ' + (r[iL] || '')).trim().toLowerCase();
+        if (!nm) continue;
+        map[nm] = map.hasOwnProperty(nm) ? 'DUP' : String(r[iPop]).toUpperCase();
+      }
+    }
+    ctx._bondNameToPop = map;
+  }
+  var hit = ctx._bondNameToPop[s.toLowerCase()];
+  return (hit && hit !== 'DUP') ? hit : s;
+}
+
 function saveRelationshipBonds_(ctx) {
   var S = ctx.summary || {};
   var ss = ctx.ss;
@@ -241,8 +268,8 @@ function saveRelationshipBonds_(ctx) {
     var bond = bonds[i];
     allRows.push([
       bond.bondId || '',
-      bond.citizenA || '',
-      bond.citizenB || '',
+      normalizeBondCitizenId_(ctx, bond.citizenA), // S312 — POPID-canonical at the write boundary
+      normalizeBondCitizenId_(ctx, bond.citizenB),
       bond.bondType || 'unknown',
       bond.intensity || 0,
       bond.status || 'active',

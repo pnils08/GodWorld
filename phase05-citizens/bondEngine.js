@@ -604,6 +604,11 @@ function updateExistingBonds_(ctx) {
   var activeCitizens = {};
   for (var i = 0; i < activeCitizensArray.length; i++) {
     activeCitizens[activeCitizensArray[i]] = true;
+    // S312 bond-key repair — bond rows are POPID-canonical now (normalizeBondCitizenId_
+    // at makeBond_ + the persist boundary); key the membership map under BOTH shapes so
+    // activity-based intensity updates keep firing (the exact miss Row 33 fixed).
+    var poolPop = normalizeBondCitizenId_(ctx, activeCitizensArray[i]);
+    if (poolPop && poolPop !== activeCitizensArray[i]) activeCitizens[poolPop] = true;
   }
 
   // v2.4: Use ctx.neighborhoodList instead of global
@@ -1250,8 +1255,11 @@ function makeBond_(citizenA, citizenB, bondType, origin, domainTag, neighborhood
   var bond = {
     bondId: generateBondId_(ctx),
     cycleCreated: cycle,
-    citizenA: citizenA,
-    citizenB: citizenB,
+    // S312 bond-key repair — POPID-canonical at creation (unique-name resolve via
+    // shared ctx.ledger; unresolvable names pass through). Keeps getBondKey_ dedup
+    // aligned with the POPID-keyed rows loaded from the sheet.
+    citizenA: normalizeBondCitizenId_(ctx, citizenA),
+    citizenB: normalizeBondCitizenId_(ctx, citizenB),
     bondType: bondType,
     intensity: intensity,
     origin: origin,

@@ -40,7 +40,18 @@ pointers:
 - **Storylines:** no register build — research.17 stays parked. Mags assembles slice storyline context from world summary + city-hall at sift time.
 - **Skill-build method is forensic-first:** the S272 tests ran with no sift skill — the desks got "less format" and it worked. Task 1 studies what they were given, where they veered too much, and what about the structure allowed the failure; the new charge format is built from that evidence, not theory.
 
-**Extraction — what's usable:** *(Task 1 fills this section — per-finding: structure element → veer/hold observed → charge-format rule.)*
+**Extraction — what's usable (Task 1 forensics, S313):** Per finding: *what the test desk was given → what held or veered → rule for the fork's charge/slice format.* Subjects: `output/desk-test/sports_c100_deep_hal.md` (Tier-1/A, permanent canon) + `civic_c100_deep_carmen.md` (best civic ever, #2 overall), charges per RESEARCH.md §S272 + [[../media/examples/charge_brief_c100_civic_exemplar]].
+
+- **Pointers-not-data → HELD, and is *why* the buried story was found** → slice carries pointers + attached citizens, never figures. Carmen's charge contained zero numbers; she read `engine_anomalies` raw, where the spike was still a spike — the dilution the old pipeline suffers happens in its summarize-each-stage chain, and the charge skips the chain. LOCKED #1 confirmed by both tests.
+- **bug-is-event line in PROJECT → HELD — stopped the suppression reflex before it started** → the fork's charge keeps the PROJECT block verbatim-class ("cover it, don't scrub it; translate the event, strip the number"). Carmen covered the sentiment anomaly as "aggregate measurement that doesn't disaggregate" — zero system language — instead of scrubbing it as an artifact like the live pipeline did.
+- **BEAT lane-definition sentence → HELD — produced the lane differentiation the external reviewer flagged unprompted** → every slice names the desk's lane in one sentence ("your lane is the governance gap... no sports or culture voice holds it"). This is the moat line; it's also the fork's subject-collision control when multiple desks share an event (Hal and Carmen both wrote the Celebration — different lanes, zero overlap).
+- **Minimal structure → HELD — concept proved with almost no scaffolding** → do NOT rebuild the packet inside the slice. Slice = territory + storylines + attached citizens + journalist + pointers; treatment is entirely the desk's. Sports ran on a charge + 3 bounded Explore agents and beat both shipped E100 pieces.
+- **Bounded source-search (3 subagents) → sufficient at that cap** → keep a hard per-desk cap in the deep-dispatch skill; over-spawn stays a named risk (RESEARCH.md:1146).
+- **Freshness as charge-prose → VEERED — the one real error** → OARI scope error (pilot-districts claim vs citywide-since-~C97 reality) traced to a stale subagent return the writer never reconciled against the contradicting signal already in her own material. Rule: reconcile moves from charge-prose to a **structural orchestrator step** — before the write, contradictory source returns are reconciled against world_summary/MCP (detector-framer split: deterministic where possible), with Rhea's specific-fact lane as backstop. Charge keeps the HARD-STOP line as writer-side belt.
+- **Lived-experience anchor → VEERED (all-analysis, "relentless") — and the fork solves it structurally** → the S272 craft gap (charge invited nothing human; Carmen quotes no resident) is closed by machinery that didn't exist then: the slice's attached citizens + pipeline.43 `citizenVoice --batch --record` supply real voiced lines. Charge line flips from "invite one anchor" to "your slice citizens have spoken — their supplied lines are in hand; use at least one."
+- **NEW veer class (unflagged in S272): invented reporting interactions** → Carmen wrote "The Mayor's office did not respond to questions" — an interaction that never occurred; a claimed reporting act is fabrication even when no fact is asserted. Rule for the fork: a desk may claim an ask only if the ask was real (civic voice agent or citizenVoice call — both exist now); otherwise state the absence plainly ("no public statement addresses X"), never as a performed query.
+- **Over-strict audit causes flatness (the Rickey Henderson lesson)** → the decoupled review flow inherits ADR-0012's recalibrated floor: catch modern-Oakland civic invention + specific-fact errors; never police journalistic range, real-entity sports comps, or angle/reach.
+- **One-desk-deep finds seams parallel desks walk past** → Hal's fused thesis ("whose dynasty is this") existed in C100's data but the shipped edition split it across two reporters who each walked past it. The slice should hand a desk its *whole* territory for the cycle, not pre-split angles.
 
 **Not applicable / hazard:**
 - Don't chase the current edition setup — the fork is not a v2 of `/write-edition`; reusing its compile/format contract is explicitly out of scope until the cycle-close-combine discussion happens.
@@ -57,7 +68,7 @@ pointers:
 
 ### Task 1: S272 forensic pass *(research-build)*
 Read the two proof artifacts (`output/desk-test/*.md`), the RESEARCH.md §S272 entry, and the charges the test desks were given. Document: what each desk received, where output veered (the civic OARI-scope error, all-analysis cadence, anything else), and which structural element allowed each veer. Findings land in §Extraction above as charge-format rules.
-**Status:** [ ] not started
+**Status:** [x] done S313 — 10 findings in §Extraction (4 held-rules, 3 veer-rules incl. one NEW veer class: invented reporting interactions; 3 structural rules for slice/floor shape)
 
 ### Task 2: New-sift skill — desk-slice prep *(research-build)*
 New SKILL.md (name TBD at build — working name `/desk-slice`). Steps: read `world_summary_c{XX}` + the unified production log's city-hall section → Mags picks stories → write one slice file per desk (top storylines, context lines, attached citizens with POP ids, assigned journalist). Slice format spec defined in this task, informed by Task 1. Cheap by design — curation only.
@@ -96,3 +107,4 @@ Run the fork on a live cycle (civic + sports first — the proof desks). Measure
 ## Changelog
 
 - 2026-07-11 — Initial capture (S313, research-build). Design grilled with Mike same session (3 rounds); one-doc research→plan ruling recorded; Tasks 1–6 filed; §Extraction awaits Task 1 forensics.
+- 2026-07-11 — Task 1 forensics done (S313, same session): 10 charge-format rules in §Extraction from the S272 artifacts + reconstructed charges; new veer class found (invented reporting interactions); lived-anchor gap resolved structurally by pipeline.43 machinery.

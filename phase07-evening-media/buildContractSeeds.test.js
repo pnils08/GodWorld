@@ -14,18 +14,25 @@ function assert(name, cond) {
   else { console.error('  FAIL ' + name); failures++; }
 }
 
-// Fake LifeHistory_Log sheet: header + this-cycle + other-cycle rows.
-function fakeSS(rows) {
+// Fake spreadsheet. Original single-arg form serves LifeHistory_Log only;
+// optional second arg maps extra sheet names → rows (S313 backdrop tests).
+function fakeSS(rows, extraSheets) {
+  var tabs = { LifeHistory_Log: rows };
+  if (extraSheets) for (var k in extraSheets) tabs[k] = extraSheets[k];
   return {
     getSheetByName: function (name) {
-      if (name !== 'LifeHistory_Log') return null;
+      var data = tabs[name];
+      if (!data) return null;
       return {
-        getLastRow: function () { return rows.length; },
-        getDataRange: function () { return { getValues: function () { return rows; } }; }
+        getLastRow: function () { return data.length; },
+        getDataRange: function () { return { getValues: function () { return data; } }; }
       };
     }
   };
 }
+
+var BIZ_HEADER = ['BIZ_ID', 'Name', 'Sector', 'Neighborhood', 'Employee_Count'];
+var FAITH_HEADER = ['Organization', 'FaithTradition', 'Neighborhood', 'Founded', 'Congregation', 'Leader', 'Character', 'ActiveStatus'];
 
 var LH_HEADER = ['Timestamp', 'POPID', 'Name', 'EventTag', 'EventText', 'Neighborhood', 'Cycle'];
 
@@ -200,6 +207,68 @@ var LH_HEADER = ['Timestamp', 'POPID', 'Name', 'EventTag', 'EventText', 'Neighbo
   assert('6a seed built without sheet', s.why.indexOf('Playoff mood') >= 0);
   assert('6b citywide labeled', s.neighborhood === 'Citywide');
   assert('6c fractional major threshold', s.seedClass === 'major');
+})();
+
+// §8 S313 backdrop fill: neighborhood businesses + faith orgs attach behind exacts
+(function () {
+  var BIZ_ROWS = [
+    BIZ_HEADER,
+    ['BIZ-00001', 'La Placita Market', 'Retail', 'Fruitvale', 8],
+    ['BIZ-00002', 'Fruitvale Mercado', 'Retail', 'Fruitvale', 12],
+    ['BIZ-00003', 'Dimond Bakehouse', 'Food', 'Fruitvale', 5],
+    ['BIZ-00004', 'Temescal Alley Barbers', 'Service', 'Temescal', 3]
+  ];
+  var FAITH_ROWS = [
+    FAITH_HEADER,
+    ['St. Esperanza Parish', 'Catholic', 'Fruitvale', 1921, 400, 'Fr. Ruiz', 'steady', 'Active'],
+    ['Gurdwara Singh Sabha Fruitvale', 'Sikh', 'Fruitvale', 1978, 250, 'Granthi Singh', 'steady', 'Inactive'],
+    ['Telegraph Presbyterian Fellowship', 'Presbyterian', 'Downtown', 1902, 180, 'Rev. Cho', 'steady', 'Active']
+  ];
+  function lcg(seed) {
+    var st = seed;
+    return function () { st = (st * 1664525 + 1013904223) % 4294967296; return st / 4294967296; };
+  }
+  function build(rngSeed, ripples) {
+    var ctx = {
+      ss: fakeSS([LH_HEADER], { Business_Ledger: BIZ_ROWS, Faith_Organizations: FAITH_ROWS }),
+      rng: lcg(rngSeed),
+      summary: { cycleId: 96, rippleEvents: ripples }
+    };
+    b.buildContractSeeds_(ctx);
+    return ctx.summary.contractSeeds;
+  }
+  var hoodRipple = [{ cycle: 96, causeType: 'gentrification', causeId: 'FV', causeDetail: 'Rent pressure +0.2', effectType: 'rent', targetScope: 'neighborhood', targetIds: [], neighborhood: 'Fruitvale', magnitude: 0.2, duration: 1 }];
+  var s8 = build(7, hoodRipple)[0];
+  assert('8a fills to CONTRACT_SEED_FILL_BIZ', s8.businesses.split(';').length === 2);
+  assert('8b drawn businesses carry id + name', /BIZ-0000\d [A-Z]/.test(s8.businesses));
+  assert('8c fill stays in hood', s8.businesses.indexOf('Temescal Alley Barbers') < 0);
+  assert('8d faith org attached with suffix', s8.otherEntities.indexOf('(faith)') > 0);
+  assert('8e active-only faith', s8.otherEntities.indexOf('Gurdwara') < 0 && s8.otherEntities.indexOf('St. Esperanza Parish') >= 0);
+  assert('8f faith stays in hood', s8.otherEntities.indexOf('Telegraph') < 0);
+  assert('8g same rng seed → identical picks', JSON.stringify(build(7, hoodRipple)) === JSON.stringify([s8]));
+
+  // Exact business target leads, name-resolved, draw fills behind to the cap
+  var exactRipple = [{ cycle: 96, causeType: 'economic-event', causeId: 'MERC', causeDetail: 'Mercado expansion', effectType: 'business-boost', targetScope: 'business', targetIds: ['BIZ-00002'], neighborhood: 'Fruitvale', magnitude: 1, duration: 1 }];
+  var s8x = build(3, exactRipple)[0];
+  assert('8h exact leads name-resolved', s8x.businesses.indexOf('BIZ-00002 Fruitvale Mercado') === 0);
+  assert('8i exact not duplicated by draw', s8x.businesses.split('BIZ-00002').length === 2);
+
+  // Citywide seed: no backdrop draw
+  var cityRipple = [{ cycle: 96, causeType: 'sports', causeId: 'W14', causeDetail: 'A\'s streak', effectType: 'sentiment', targetScope: 'citywide', targetIds: [], neighborhood: '', magnitude: 0.11, duration: 1 }];
+  var s8c = build(5, cityRipple)[0];
+  assert('8j citywide gets no backdrop', s8c.businesses === '' && s8c.otherEntities === '');
+
+  // Cross-seed rotation: two Fruitvale seeds of different cause families name
+  // different businesses while the pool lasts (usedBiz spread, same as citizens)
+  var twoRipples = [
+    hoodRipple[0],
+    { cycle: 96, causeType: 'crime', causeId: 'FV2', causeDetail: 'Petty theft +2', effectType: 'crime-cluster', targetScope: 'neighborhood', targetIds: [], neighborhood: 'Fruitvale', magnitude: 2, duration: 1 }
+  ];
+  var pair = build(11, twoRipples);
+  var first = pair[0].businesses.split('; ');
+  var second = pair[1].businesses.split('; ');
+  var overlap = first.filter(function (x) { return second.indexOf(x) >= 0; });
+  assert('8k cross-seed spread (3-biz pool, 2+2 draw → ≤1 reuse)', overlap.length <= 1);
 })();
 
 // §7 Zero ripples → zero seeds, no throw

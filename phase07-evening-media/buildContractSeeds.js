@@ -29,6 +29,8 @@ var CONTRACT_SEED_MAJOR_MAG_FRAC = 0.05; // fractional magnitudes (sentiment 0-1
 var CONTRACT_SEED_CLUSTER_N = 3;      // same cause family + hood family count → merged major
 var CONTRACT_SEED_MAX_CITIZENS = 6;   // exact-participant cap per seed row
 var CONTRACT_SEED_FILL_N = 4;         // Grade 1: fill Citizens to this count via neighborhood draw
+var CONTRACT_SEED_FILL_BIZ = 2;       // S313: fill Businesses to this count via neighborhood draw
+var CONTRACT_SEED_FILL_OTHER = 1;     // S313: fill OtherEntities to this count via neighborhood draw
 var CONTRACT_SEED_DOMAIN = {
   'initiative': 'CIVIC',
   'economic-event': 'ECONOMIC',
@@ -213,6 +215,97 @@ function contractSeedPickCitizens_(index, targetPops, hood, causeType, usedPop, 
 }
 
 /**
+ * Backdrop entity index (S313, Mike-direct): Business_Ledger + Faith_Organizations
+ * keyed by neighborhood, so a neighborhood seed can attach the entities that are
+ * ALSO in that neighborhood — backdrop available to the story, canon built through
+ * usage (same Grade-1 move as the citizen draw). Fail-soft per sheet, same
+ * discipline as contractSeedCycleEvents_ — a missing tab never blocks the seed.
+ */
+function contractSeedBackdropIndex_(ctx) {
+  var idx = { bizByHood: {}, bizById: {}, faithByHood: {} };
+  if (!ctx || !ctx.ss || typeof ctx.ss.getSheetByName !== 'function') return idx;
+  try {
+    var bs = ctx.ss.getSheetByName('Business_Ledger');
+    if (bs && bs.getLastRow() > 1) {
+      var bv = bs.getDataRange().getValues();
+      var bh = bv[0];
+      var iBid = bh.indexOf('BIZ_ID');
+      var iBname = bh.indexOf('Name');
+      var iBhood = bh.indexOf('Neighborhood');
+      if (iBid >= 0 && iBname >= 0 && iBhood >= 0) {
+        for (var r = 1; r < bv.length; r++) {
+          var bid = String(bv[r][iBid] || '');
+          var bname = String(bv[r][iBname] || '');
+          if (!bid && !bname) continue;
+          var biz = { key: bid || bname, id: bid, name: bname };
+          if (bid) idx.bizById[bid] = biz;
+          var bhk = contractSeedNormHood_(bv[r][iBhood]);
+          if (bhk) {
+            if (!idx.bizByHood[bhk]) idx.bizByHood[bhk] = [];
+            idx.bizByHood[bhk].push(biz);
+          }
+        }
+      }
+    }
+  } catch (e1) {
+    try { if (typeof Logger !== 'undefined') Logger.log('contractSeedBackdropIndex_ Business_Ledger read failed: ' + e1); } catch (ig1) {}
+  }
+  try {
+    var fsh = ctx.ss.getSheetByName('Faith_Organizations');
+    if (fsh && fsh.getLastRow() > 1) {
+      var fv = fsh.getDataRange().getValues();
+      var fh = fv[0];
+      var iOrg = fh.indexOf('Organization');
+      var iFhood = fh.indexOf('Neighborhood');
+      var iStatus = fh.indexOf('ActiveStatus');
+      if (iOrg >= 0 && iFhood >= 0) {
+        for (var f = 1; f < fv.length; f++) {
+          var org = String(fv[f][iOrg] || '');
+          if (!org) continue;
+          if (iStatus >= 0 && /inactive|closed|defunct/i.test(String(fv[f][iStatus] || ''))) continue;
+          var fhk = contractSeedNormHood_(fv[f][iFhood]);
+          if (fhk) {
+            if (!idx.faithByHood[fhk]) idx.faithByHood[fhk] = [];
+            idx.faithByHood[fhk].push({ key: org, name: org });
+          }
+        }
+      }
+    }
+  } catch (e2) {
+    try { if (typeof Logger !== 'undefined') Logger.log('contractSeedBackdropIndex_ Faith_Organizations read failed: ' + e2); } catch (ig2) {}
+  }
+  return idx;
+}
+
+/**
+ * Backdrop draw (S313): fill behind exact targets from the seed's neighborhood
+ * pool, up to fillN entries. Real-neighborhood pools only — the caller passes no
+ * pool for citywide seeds (an arbitrary citywide business has no story
+ * connection; citizens differ because they carry their own event lines).
+ * Unused-by-other-seeds first (cross-seed spread), ctx.rng when provided
+ * (deterministic replay), insertion order otherwise. Never displaces exacts.
+ */
+function contractSeedBackdropDraw_(pool, excludeKeys, used, fillN, roll) {
+  var out = [];
+  if (!pool || !pool.length || fillN <= 0) return out;
+  var unused = [];
+  var reused = [];
+  for (var i = 0; i < pool.length; i++) {
+    var p = pool[i];
+    if (excludeKeys[p.key]) continue;
+    (used[p.key] ? reused : unused).push(p);
+  }
+  var candidates = unused.concat(reused);
+  while (out.length < fillN && candidates.length) {
+    var at = (typeof roll === 'function') ? Math.floor(roll() * candidates.length) : 0;
+    var drawn = candidates.splice(at, 1)[0];
+    used[drawn.key] = true;
+    out.push(drawn);
+  }
+  return out;
+}
+
+/**
  * Phase-7 entry. Joins S.rippleEvents (causes) with this cycle's LifeHistory
  * events (people) into S.contractSeeds. Clusters same-family causes per T5.
  */
@@ -225,6 +318,11 @@ function buildContractSeeds_(ctx) {
   // Index citizen events: one citizen object per POPID, hood pools for fallback.
   var index = contractSeedCitizenIndex_(events);
   var usedPop = {}; // cross-seed spread — same hood's seeds name different people
+
+  // S313 backdrop entities: businesses + faith orgs keyed by neighborhood.
+  var backdrop = contractSeedBackdropIndex_(ctx);
+  var usedBiz = {};   // cross-seed spread, same as usedPop
+  var usedFaith = {};
 
   // Cluster ripples by causeType + neighborhood (T5 family grouping).
   var clusters = {};
@@ -280,6 +378,48 @@ function buildContractSeeds_(ctx) {
     var isMajor = contractSeedIsMajor_(totalMag, group.length);
     if (isMajor) majorCount++; else textureCount++;
 
+    // S313 backdrop fill — same Grade-1 move as citizens: the entities that are
+    // ALSO in the seed's neighborhood attach as backdrop the story can use.
+    // Exact ripple targets lead (name-resolved via Business_Ledger when known,
+    // passed through verbatim otherwise) and are never displaced; the draw only
+    // fills behind them. Citywide / unknown-hood seeds get no backdrop draw.
+    var hoodKey = contractSeedNormHood_(lead.neighborhood || '');
+    var isRealHood = hoodKey && hoodKey !== 'citywide';
+    var rollFn = (typeof ctx.rng === 'function') ? ctx.rng : null;
+
+    var bizLabels = [];
+    var seenBizKeys = {};
+    for (var xb = 0; xb < businesses.length; xb++) {
+      var exactBiz = backdrop.bizById[businesses[xb]];
+      seenBizKeys[businesses[xb]] = true;
+      if (exactBiz) {
+        seenBizKeys[exactBiz.key] = true;
+        bizLabels.push((exactBiz.id ? exactBiz.id + ' ' : '') + exactBiz.name);
+      } else {
+        bizLabels.push(businesses[xb]);
+      }
+    }
+    if (isRealHood) {
+      var bizFill = contractSeedBackdropDraw_(
+        backdrop.bizByHood[hoodKey], seenBizKeys, usedBiz,
+        CONTRACT_SEED_FILL_BIZ - bizLabels.length, rollFn);
+      for (var db = 0; db < bizFill.length; db++) {
+        bizLabels.push((bizFill[db].id ? bizFill[db].id + ' ' : '') + bizFill[db].name);
+      }
+    }
+
+    var otherLabels = otherEntities.slice(); // exact non-biz scopes pass through
+    var seenOtherKeys = {};
+    for (var xo = 0; xo < otherEntities.length; xo++) seenOtherKeys[otherEntities[xo]] = true;
+    if (isRealHood) {
+      var faithFill = contractSeedBackdropDraw_(
+        backdrop.faithByHood[hoodKey], seenOtherKeys, usedFaith,
+        CONTRACT_SEED_FILL_OTHER - otherLabels.length, rollFn);
+      for (var df = 0; df < faithFill.length; df++) {
+        otherLabels.push(faithFill[df].name + ' (faith)');
+      }
+    }
+
     var seedDomain = CONTRACT_SEED_DOMAIN[lead.causeType] || 'GENERAL';
     seeds.push({
       seedId: contractSeedHash_(cycle + '|' + order[k] + '|' + lead.causeId),
@@ -296,8 +436,8 @@ function buildContractSeeds_(ctx) {
         var ev = contractSeedPickEvent_(p, lead.causeType);
         return p.name + ' — ' + ev.text;
       }).join(' | '),
-      businesses: businesses.join('; '),
-      otherEntities: otherEntities.join('; '),
+      businesses: bizLabels.join('; '),
+      otherEntities: otherLabels.join('; '),
       magnitude: Math.round(totalMag * 100) / 100,
       trend: contractSeedTrend_(lead),
       seedClass: isMajor ? 'major' : 'texture'

@@ -33,7 +33,8 @@ const getCurrentCycle = require('/root/GodWorld/lib/getCurrentCycle');
 // Task 5 (citizen-loop-deepening, S300): perception assembly extracted to lib/wakePerception —
 // shared with scripts/citizenVoice.js (edition voicing) + the Task-6 conversation engine.
 const { buildPool, coResidents, loadLifeArc, loadSportsSlice, loadNeighborhoodTexture,
-  loadBonds, loadOwnPageReadback, dialTrajectory } = require('/root/GodWorld/lib/wakePerception');
+  loadBonds, loadOwnPageReadback, dialTrajectory,
+  loadCardAnchor, loadVoiceTexture } = require('/root/GodWorld/lib/wakePerception'); // engine.48 T10 + T11
 const { selectProvocation, _hash53 } = require('/root/GodWorld/lib/provocationBank'); // T5 varied-provocation bank; _hash53 seeds T1 draw + T2 slot
 
 const ARGV = process.argv.slice(2);
@@ -184,7 +185,7 @@ function selectCitizen(pool, state, cycle) {
   return { c: candidates[0], slot: 'rotation' };
 }
 
-function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, pageMemory, cycle, tensionBlock, editionLine, rippleLine) {
+function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, pageMemory, cycle, tensionBlock, editionLine, rippleLine, cardBlock, voiceLine) {
   const disp = dials.disposition(c.cur);
   const who = neighbors.length
     ? `\n\nPeople around you in ${c.nh}: ${neighbors.map((n) => `${n.name}${n.occupation ? ' (' + n.occupation + ')' : ''}`).join(', ')}.`
@@ -211,7 +212,11 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
   // B2 open tensions — unresolved questions carried between wakes; fenced upstream (main flow)
   const tensions = tensionBlock ? `\n\nQuestions you've been sitting with, still unresolved:\n${tensionBlock}` : '';
   // immersion-ingredient order: continuity (T1a state + T1c own-memory) -> people (around you + history-with) -> world/A's (T1b) -> surroundings (T2)
-  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}\n\nReal things from your life recently:\n${c.life}${who}${bonds}${ripple}${opinions}${sports}${paper}${texture}${memory}${tensions}`;
+  // engine.48 T10 — card anchor FIRST: identity precedes perception. Fenced upstream; canon
+  // facts never compete with page recall. T11 — authored speech texture rides beside it.
+  const anchor = cardBlock ? `\n\nWho you are:\n${cardBlock}` : '';
+  const talk = voiceLine ? `\n\nHow you talk: ${voiceLine}` : '';
+  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}${anchor}${talk}\n\nReal things from your life recently:\n${c.life}${who}${bonds}${ripple}${opinions}${sports}${paper}${texture}${memory}${tensions}`;
   // T5 — varied-provocation question bank. The fixed "small things on your mind"
   // prompt becomes a deterministically-seeded pick latching a real signal this
   // citizen perceives, so two citizens woken the same cycle are prompted
@@ -255,6 +260,11 @@ async function generateVoice(system, user) {
   const bondPairs = bondsRes.pairs;
   // engine.48 T3 — the paper closes the loop into perception (named tier > hood tier > omit)
   const editionLine = loadEditionSlice(c.popId, c.name, c.nh, cycle);
+  // engine.48 T10 — card anchor (facts of the life, fenced; '' degrades gracefully)
+  const cardRaw = await loadCardAnchor(c.popId);
+  const cardBlock = cardRaw ? memoryFence.wrap(cardRaw, 'citizen-card:' + c.popId) : '';
+  // engine.48 T11 — authored speech texture for voiced citizens ('' for everyone else)
+  const voiceLine = loadVoiceTexture(c.popId);
   // engine.48 T4 read side — ripples aimed at this citizen render one line, then consume (live only)
   const rippleState = loadRippleState();
   expireRipples(rippleState, cycle);
@@ -281,7 +291,7 @@ async function generateVoice(system, user) {
   const tensionBlock = openTensions.length
     ? memoryFence.wrap(openTensions.map((t) => t.q).join('\n'), 'citizen-tension:' + c.popId)
     : '';
-  const { system, user, disp, prov } = buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, pageMemory, cycle, tensionBlock, editionLine, rippleLine);
+  const { system, user, disp, prov } = buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, pageMemory, cycle, tensionBlock, editionLine, rippleLine, cardBlock, voiceLine);
 
   logLine(`woke ${c.popId} ${c.name} — ${c.occ || 'resident'}, ${c.nh}${c.age ? ', ' + c.age : ''} | eventMag=${c.eventMag} | ${disp} | provocation=${prov.id} route=${prov.route} wake=${WAKE} slot=${picked.slot}`);
   if (DRY) console.log('\n--- perception (system prompt) ---\n' + system + '\n----------------------------------');

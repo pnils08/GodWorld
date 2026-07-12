@@ -167,7 +167,7 @@ rebuilds, derived-never-authored per ADR-0007) — the wake just never reads it.
   2. Fence it (`memoryFence.wrap`, tag `citizen-card:<popId>`) and place it first in the system prompt — identity anchor precedes perception. Anchor lines are canon; they never compete with page recall.
   3. Dry-run flag prints the block; cache per-run only (no state file).
 - **Verify:** `--dry-run --pop=POP-00001` → prompt opens with farewell-season/rings/academy facts from the live card; a thin-card citizen degrades to no block, no crash.
-- **Status:** [ ] not started
+- **Status:** [x] shipped S312 — loadCardAnchor (list→GET route per S272 v4-search-miss finding), deterministic distill (Bio/Life/Fame + 3 appearance lines, cap 600), fenced `citizen-card:<pop>`, placed before perception. Verified: Vinnie's prompt opens with farewell-season/436-homers/rings/academy facts; miss degrades to no block.
 
 ### Task 11: Voiced speech-texture slice *(engine-sheet; added S312)*
 
@@ -177,7 +177,7 @@ rebuilds, derived-never-authored per ADR-0007) — the wake just never reads it.
   1. For citizens with a `.claude/agents/citizen-voice-*/IDENTITY.md` whose `POP ID:` matches (same enumeration as Task 2): extract ONLY the speech/voice section (cadence, verbal habits, motifs — no biography, no dial claims; those flow via card + dials so the authored file can't fight live drift, ADR-0014).
   2. Append to the system prompt as `How you talk:` (~300 chars cap). Non-voiced citizens: no block.
 - **Verify:** Vinnie's dry-run carries his cadence lines; a non-voiced citizen's prompt is unchanged byte-identical.
-- **Status:** [ ] not started
+- **Status:** [x] shipped S312 — loadVoiceTexture extracts '## Your Voice' bolded leads + tone range only (no biography/dial claims, ADR-0014), 300-char cap, 'How you talk:' block. Verified: Vinnie carries cadence; non-voiced citizen has zero block.
 
 ### Task 12: Salience-weighted life tail *(engine-sheet; added S312)*
 
@@ -192,7 +192,7 @@ loop). Sibling of the S281 persistence-seams Task-1 finding.
   1. Split the recent window by tag class: milestone/high-salience tags (Wedding/Birth/Death/Health/Promotion/Retirement/Conduct + edition citations) vs texture tags (Daily/PrevEvening/atmospheric). Tail = up to 3 newest milestones (any age within the raw window) + 2 newest texture lines, newest-first — a wedding never loses its slot to a mask-count.
   2. Tag classes from [[../engine/TAG_REGISTRY]] — don't hand-list beyond what it defines.
 - **Verify:** a citizen with a milestone 8 entries back + 7 newer dailies → milestone present in the dry-run prompt; all-texture citizens unchanged.
-- **Status:** [ ] not started
+- **Status:** [x] shipped S312 — tail = up to 3 newest SALIENT_TAG lines (TAG_REGISTRY life-stage/health/conduct/advancement/E{n}) + texture fill to 5, chronological. Verified: wedding survives 7 newer dailies; all-texture citizens unchanged at 5 lines.
 
 ### Task 13: Spousal bond visibility — data gap *(engine-sheet; added S312)*
 
@@ -206,9 +206,16 @@ marriage exists only in the marital column, invisible to the wake, conversations
   1. Audit: count married/partnered SL citizens with no `Relationship_Bonds` row linking the pair (match spouse by shared last name + household/ParentIds-ChildrenIds where present; ambiguous pairs listed, not auto-linked).
   2. Backfill unambiguous spousal bonds (`BondType='marriage'`, `Origin='S312 marital backfill'`, current cycle) via `lib/sheets` direct write with read-back verify. Ambiguous list → Mike.
 - **Verify:** post-backfill `--dry-run --pop=POP-00001` renders Amara in "People you have history with"; audit re-run reports 0 unambiguous gaps.
-- **Status:** [ ] not started
+- **Status:** [x] shipped S312 (scoped down on evidence) — audit showed surname+marital matching CANNOT distinguish spouse from sibling/parent (Zaniya Adams matched to 2 men; Cabrera 49↔24 likely mother-daughter; only 1 of 16 'clean' pairs had household corroboration). Backfilled ONLY the 2 externally-corroborated pairs: POP-00001↔POP-00002 (IDENTITY canon) + POP-00005↔POP-00594 (same HouseholdId + canon), BondType='romantic' (engine wedding-path vocab; plan's 'marriage' kept as BOND_PHRASE alias), read-back verified; Vinnie's wake now renders 'Amara Keane, your partner in life'. Remaining 14 speculative pairs + 28 ambiguous → §T13 handoff below, Mike's call. Side-finding: Relationship_Bonds is MIXED-KEYED (some rows carry names not POPIDs — invisible to the wake); separate row candidate.
 
 ---
+
+
+## T13 handoff — speculative spousal pairs (Mike's call, do NOT auto-link)
+
+Mutual sole-match, age-gap ≤25, not parent-child — but NO household corroboration, so each is equally plausible as sibling/cousin/parent-child (ParentIds too sparse to trust):
+POP-00027↔POP-00104 Rodriguez | POP-00064↔POP-00518 West | POP-00066↔POP-00310 Carter | POP-00151↔POP-00954 Han | POP-00281↔POP-00942 Adams | POP-00469↔POP-00876 Carmichael | POP-00531↔POP-00815 Nair | POP-00634↔POP-00938 Reed | POP-00807↔POP-00857 Choi | POP-00823↔POP-00867 Wu | POP-00847↔POP-00891 Cabrera | POP-00852↔POP-00896 Morales | POP-00872↔POP-00921 Doan | POP-00877↔POP-00892 Zhou | POP-00918↔POP-00933 Abebe
+Plus 28 ambiguous (multi-candidate / non-mutual) and 355 married citizens with no same-name candidate (off-sample spouses per S248 doctrine — correct as-is).
 
 ## Open questions
 

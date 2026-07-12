@@ -43,7 +43,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | pipeline.39 | C99 gap handoffs — post-publish/print/run-cycle logs + canon drift + letters-gate bug | ready | research-build / engine-sheet / media | [[../../output/production_log_c99_post_publish_gaps.md]] + [[../../output/production_log_c99_print_gaps.md]] + [[../../output/production_log_run_cycle_c99_gaps.md]] + canon_drift_c99.json — filed 2026-07-02 |
 | pipeline.41 | Tensions → /sift story seeds — /sift reads the open tension register as door-knock candidates (subjective material, never publishable as fact) | ready | media | [[../plans/2026-07-06-citizen-loop-deepening]] §Task 8 |
 | pipeline.43 | Citizen voice quote supply (PRIORITY, Mike-direct S312) — ALL T1–5 built (T1–2 live-verified S312); acceptance rides first live edition (C101 /write-edition) | in-progress | media (live verify) | [[../plans/2026-07-11-citizen-voice-quote-supply]] |
-| pipeline.44 | Desk-slice fork — new sift (per-desk slices) + deep-dispatch skills, review decoupled, old path frozen (FLAGSHIP, Mike-direct S313) | ready | research-build (T1–4) + engine-sheet (T5) + media (T6) | [[../research/2026-07-11-desk-slice-fork]] — one-doc research+plan |
+| pipeline.44 | Desk-slice fork (FLAGSHIP, Mike-direct S313) — T1–T3 done S313; open: T4 review-flow, T5 post-publish fit, T6 pilot | in-progress | research-build (T4) + engine-sheet (T5) + media (T6) | [[../research/2026-07-11-desk-slice-fork]] |
 
 ### engine.* — Engine code, ledger, schema
 

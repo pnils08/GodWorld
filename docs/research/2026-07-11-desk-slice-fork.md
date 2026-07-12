@@ -72,11 +72,11 @@ Read the two proof artifacts (`output/desk-test/*.md`), the RESEARCH.md §S272 e
 
 ### Task 2: New-sift skill — desk-slice prep *(research-build)*
 New SKILL.md (name TBD at build — working name `/desk-slice`). Steps: read `world_summary_c{XX}` + the unified production log's city-hall section → Mags picks stories → write one slice file per desk (top storylines, context lines, attached citizens with POP ids, assigned journalist). Slice format spec defined in this task, informed by Task 1. Cheap by design — curation only.
-**Status:** [ ] not started
+**Status:** [x] built S313 — `.claude/skills/desk-slice/SKILL.md` v1.0 (Mike-approved name). Slice format fixed (LANE / STORYLINES+CITIZENS / POINTERS / CARRY); hard rules: no figures, no prescribed angles, MCP-verified POP ids, every cover-as-story anomaly placed; Mags page recall/append kept (EIC moment moves here on the fork lane).
 
 ### Task 3: New deep-dispatch skill — one desk deep *(research-build)*
 New SKILL.md. Charge assembly from slice + `charge_brief_template` (amended per Task 1), one-desk-deep with bounded source-search cap, propose→cheap-OK gate, pipeline.43 quote batch call, artifacts to per-desk output paths with byline/desk ingest tags (engine.46 substrate). Production run ends at artifacts-on-disk.
-**Status:** [ ] not started
+**Status:** [x] built S313 — NOT a new file: `/deep-dispatch` v0.1 already existed (research.20 Phase 2, edition-coupled pilot harness); rewritten in place to v2.0 per FIX-don't-ADD. Fork changes: slices in (not sift slate), propose→OK gate, supplied voices (pipeline.43), REAL-ASKS-ONLY, decoupled ending (no hand-back to /write-edition compile). Carried unchanged: two LOCKED forks, ≤3-search cap, reconcile pass, serialize-under-quota. v0.1 in git history.
 
 ### Task 4: Decoupled review-flow skill *(research-build)*
 New SKILL.md (or amended `/capability-review` chain): Mags EIC read + existing reviewer lanes over a desk's artifacts (~2 at a time), verdict → publish handoff. Same lanes, new decoupled cadence.
@@ -108,3 +108,4 @@ Run the fork on a live cycle (civic + sports first — the proof desks). Measure
 
 - 2026-07-11 — Initial capture (S313, research-build). Design grilled with Mike same session (3 rounds); one-doc research→plan ruling recorded; Tasks 1–6 filed; §Extraction awaits Task 1 forensics.
 - 2026-07-11 — Task 1 forensics done (S313, same session): 10 charge-format rules in §Extraction from the S272 artifacts + reconstructed charges; new veer class found (invented reporting interactions); lived-anchor gap resolved structurally by pipeline.43 machinery.
+- 2026-07-11 — Tasks 2+3 built (S313, same session): `/desk-slice` v1.0 new; `/deep-dispatch` rewritten v0.1→v2.0 in place (FIX-don't-ADD — edition-coupled harness already existed). Open: T4 review-flow skill (needs name + green-light), T5 post-publish fit, T6 pilot.

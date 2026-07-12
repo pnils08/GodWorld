@@ -23,6 +23,13 @@ const sheets = require('../lib/sheets');
 const fs = require('fs');
 
 const DRY_RUN = process.argv.includes('--dry-run');
+// S313: --fill-blanks-only — write ONLY citizens whose EmployerBizId is
+// currently blank, and never write the literal 'UNMATCHED' (leave blank —
+// the career engine treats '' as no-employer; 'UNMATCHED' would pollute
+// businessDeltas keys). Protects career-engine-maintained employer state
+// (hires/layoffs since Phase 14.4) from being clobbered by re-resolution.
+// Roster rebuild + new-business append are unaffected by the flag.
+const FILL_BLANKS_ONLY = process.argv.includes('--fill-blanks-only');
 
 async function main() {
   console.log(DRY_RUN ? '=== DRY RUN ===' : '=== LIVE RUN ===');
@@ -337,13 +344,23 @@ async function main() {
   var empCol = colLetter2(iEmployerBizId);
 
   var batchUpdates = [];
+  var skippedExisting = 0, skippedUnmatched = 0;
   for (var w = 0; w < results.length; w++) {
     var res = results[w];
+    if (FILL_BLANKS_ONLY) {
+      var existing = employerColExists ? String(rows[res.rowIndex][iEmployerBizId] || '').trim() : '';
+      if (existing) { skippedExisting++; continue; }
+      if (res.bizId === 'UNMATCHED') { skippedUnmatched++; continue; }
+    }
     var rowNum = res.rowIndex + 2; // +1 header, +1 for 1-based
     batchUpdates.push({
       range: 'Simulation_Ledger!' + empCol + rowNum,
       values: [[res.bizId]]
     });
+  }
+  if (FILL_BLANKS_ONLY) {
+    console.log('  --fill-blanks-only: writing ' + batchUpdates.length + ' blank cells; kept ' +
+      skippedExisting + ' existing values; left ' + skippedUnmatched + ' UNMATCHED blank');
   }
 
   // Write in chunks of 500

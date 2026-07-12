@@ -128,7 +128,7 @@ Deliberately last and separately gated — touches generational events; research
   2. Cut: where youth-facing event text is drawn, if `Community_Programs` has an `active` row in the citizen's neighborhood, a `ctx.rng` share of youth events names it ("joined the <program> season", "volunteered at <program>"). Reuse one hood-keyed read; no new file.
   3. Emit no ripple here in v1 — the citizen event already reaches the deck through the citizen path; the program gains canon through the named mention. Revisit after C-observation.
 - **Verify:** sandbox cycle with a youth event in West Oakland → event text can name the Keane academy; determinism holds
-- **Status:** [ ] not started
+- **Status:** [x] built S313 — PLAN CORRECTION: youth event text lives in `runYouthEngine.js` (phase05), NOT generationalEventsEngine (zero youth refs — coupling-map "youth → youth engine" routing confirmed by full-read). Cut landed there: hood-keyed active-program read in `runYouthEngine_`, 25% ctx.rng roll in `generateYouthEventForCitizen_` sets coherent type+text together (sports/civic_participation/achievement templates), `program` field rides the event. Harness-verified: text names the Keane academy, determinism holds, no-program hoods + missing-arg safe. Sandbox verify rides the C102-window run
 
 ---
 
@@ -151,4 +151,5 @@ T1 → T2 (ledger before its consumer) → T3 → T4 → T5 → T6 gated separat
 ## Changelog
 
 - 2026-07-12 — Initial draft (S314, research-build). Research basis research.24; all file/line claims verified against live source this session.
+- 2026-07-12 — T6 executed (S313, engine-sheet) after coupling-map + full-read gate: target file corrected generationalEventsEngine → runYouthEngine.js (plan's assumption reversed on evidence). All six tasks now built; sandbox acceptance rides the C102-window run.
 - 2026-07-12 — T1–T5 executed (S313, engine-sheet). T1 tab live + verified; T2–T5 built, all tests pass (§10 program pool + zero regressions), syntax-checked. Acceptance 1/2 (sandbox Ripple_Ledger/deck rows) rides the C102-window sandbox run; T6 stays gated. Rides the queued prod clasp batch.

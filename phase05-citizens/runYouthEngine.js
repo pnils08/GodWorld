@@ -96,6 +96,34 @@ function runYouthEngine_(ctx) {
     demographics = getNeighborhoodDemographics_(ss);
   }
 
+  // T6 (research.24, S313): Community_Programs hood-keyed read (active-only,
+  // fail-soft — same pattern as contractSeedBackdropIndex_). A ctx.rng share
+  // of youth events in a program's neighborhood names the program, so canon
+  // programs (Keane academy et al.) accrete life through youth events.
+  var programsByHood = {};
+  try {
+    var pSheet = ss && typeof ss.getSheetByName === 'function' ? ss.getSheetByName('Community_Programs') : null;
+    if (pSheet && pSheet.getLastRow() > 1) {
+      var pVals = pSheet.getDataRange().getValues();
+      var pHead = pVals[0];
+      var ipName = pHead.indexOf('Name');
+      var ipHood = pHead.indexOf('Neighborhood');
+      var ipStatus = pHead.indexOf('Status');
+      if (ipName >= 0 && ipHood >= 0) {
+        for (var pr = 1; pr < pVals.length; pr++) {
+          var prName = String(pVals[pr][ipName] || '').trim();
+          var prHood = String(pVals[pr][ipHood] || '').trim();
+          if (!prName || !prHood) continue;
+          if (ipStatus >= 0 && String(pVals[pr][ipStatus] || '').toLowerCase() !== 'active') continue;
+          if (!programsByHood[prHood]) programsByHood[prHood] = [];
+          programsByHood[prHood].push(prName);
+        }
+      }
+    }
+  } catch (progErr) {
+    try { Logger.log('runYouthEngine_ Community_Programs read failed (fail-soft): ' + progErr); } catch (ig) {}
+  }
+
   // Get named citizens who are youth (Phase 42 §5.6: pass ctx for ctx.ledger access)
   var namedYouth = getNamedYouth_(ctx);
 
@@ -150,7 +178,7 @@ function runYouthEngine_(ctx) {
     if (rng() < prob) {
       // v1.1: Pass QoL context to event generator
       var qolContext = { qol: nhQoL, isHotspot: isHotspot };
-      var event = generateYouthEventForCitizen_(youth, month, rng, qolContext);
+      var event = generateYouthEventForCitizen_(youth, month, rng, qolContext, programsByHood);
       if (event) {
         // v1.1: Tag event with QoL context
         event.qolContext = qolContext;
@@ -355,8 +383,9 @@ function getNamedYouth_(ctx) {
  * @param {Object} qolContext - v1.1: { qol, isHotspot }
  * @return {Object|null}
  */
-function generateYouthEventForCitizen_(youth, month, rng, qolContext) {
+function generateYouthEventForCitizen_(youth, month, rng, qolContext, programsByHood) {
   qolContext = qolContext || { qol: 0.5, isHotspot: false };
+  programsByHood = programsByHood || {};
 
   // Get school assignment
   var school = null;
@@ -396,6 +425,25 @@ function generateYouthEventForCitizen_(youth, month, rng, qolContext) {
     }
   }
 
+  // T6 (research.24, S313): a ctx.rng share of youth events in a neighborhood
+  // with an active Community_Program names the program — type + text set
+  // together so the event stays coherent (dial tags derive from eventType).
+  // Runs AFTER the QoL override so program events compose with, not under, it.
+  var programName = '';
+  var hoodPrograms = programsByHood[youth.neighborhood];
+  if (hoodPrograms && hoodPrograms.length && rng() < 0.25) {
+    programName = hoodPrograms[Math.floor(rng() * hoodPrograms.length)];
+    var programTemplates = [
+      { text: 'joined the ' + programName + ' season', type: 'sports' },
+      { text: 'trained weekends at ' + programName, type: 'sports' },
+      { text: 'volunteered at ' + programName, type: 'civic_participation' },
+      { text: 'was recognized at ' + programName, type: 'achievement' }
+    ];
+    var pt = programTemplates[Math.floor(rng() * programTemplates.length)];
+    eventType = pt.type;
+    description = pt.text;
+  }
+
   // Generate outcome
   var outcome = 'participated';
   if (typeof generateYouthOutcome_ === 'function') {
@@ -412,7 +460,8 @@ function generateYouthEventForCitizen_(youth, month, rng, qolContext) {
     neighborhood: youth.neighborhood,
     outcome: outcome,
     status: 'occurred',
-    source: youth.source
+    source: youth.source,
+    program: programName
   };
 }
 

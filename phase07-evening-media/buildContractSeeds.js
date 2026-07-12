@@ -214,6 +214,34 @@ function contractSeedPickCitizens_(index, targetPops, hood, causeType, usedPop, 
   return picked;
 }
 
+// S313 journalist pre-match (Mike-direct): harvested from the retired hook
+// deck's roster matching (storyHook.js makeHook -> rosterLookup). Deterministic
+// roster work the engine does for free — a token-saving HINT for /sift, never
+// direction (amends the v2 "row directs nothing" clause by Mike's ruling:
+// suggestions ride the row; Mags still assigns). Domain -> signal map is the
+// hook engine's domain fallback, restricted to contract-seed domains.
+var CONTRACT_SEED_SIGNAL = {
+  'CIVIC': 'civic',
+  'ECONOMIC': 'business',
+  'SAFETY': 'crime',
+  'SPORTS': 'sports',
+  'COMMUNITY': 'community',
+  'GENERAL': 'human_interest'
+};
+
+/** Roster pre-match for a seed domain. Fail-soft null when the rosterLookup
+ *  globals are absent (Node tests) or matching throws — seed ships without. */
+function contractSeedJournalist_(domain) {
+  try {
+    if (typeof getThemeKeywordsForDomain_ !== 'function' ||
+        typeof suggestStoryAngle_ !== 'function') return null;
+    var themes = getThemeKeywordsForDomain_(domain, 'signal');
+    return suggestStoryAngle_(themes, CONTRACT_SEED_SIGNAL[domain] || 'human_interest');
+  } catch (e) {
+    return null;
+  }
+}
+
 /**
  * Backdrop entity index (S313, Mike-direct): Business_Ledger + Faith_Organizations
  * keyed by neighborhood, so a neighborhood seed can attach the entities that are
@@ -421,6 +449,7 @@ function buildContractSeeds_(ctx) {
     }
 
     var seedDomain = CONTRACT_SEED_DOMAIN[lead.causeType] || 'GENERAL';
+    var match = contractSeedJournalist_(seedDomain); // S313 pre-match, fail-soft
     seeds.push({
       seedId: contractSeedHash_(cycle + '|' + order[k] + '|' + lead.causeId),
       cycle: cycle,
@@ -440,7 +469,10 @@ function buildContractSeeds_(ctx) {
       otherEntities: otherLabels.join('; '),
       magnitude: Math.round(totalMag * 100) / 100,
       trend: contractSeedTrend_(lead),
-      seedClass: isMajor ? 'major' : 'texture'
+      seedClass: isMajor ? 'major' : 'texture',
+      suggestedJournalist: match && match.journalist ? match.journalist : '',
+      suggestedAngle: match && match.angle ? match.angle : '',
+      matchConfidence: match && match.confidence ? match.confidence : ''
     });
   }
 

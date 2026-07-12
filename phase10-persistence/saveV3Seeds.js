@@ -11,6 +11,12 @@
  * generation. The row directs NOTHING — the v3.x voice/angle/byline/priority
  * columns are gone. Sheets are the world; no JSON logic anywhere in the path.
  *
+ * v4.2 amendment (S313, Mike-direct): SuggestedJournalist / SuggestedAngle /
+ * MatchConfidence (P-R) ride the row as HINTS — deterministic roster pre-match
+ * harvested from the retired Story_Hook_Deck path, token-saving input to /sift.
+ * Not direction: Mags still assigns. The "directs nothing" clause stands for
+ * everything else (no priority, no byline commitment, no voice text).
+ *
  * Input: S.contractSeeds — built at Phase 7 by buildContractSeeds.js from
  * S.rippleEvents (causes, accumulated at compute sites) joined with this
  * cycle's LifeHistory_Log citizen events (people, engine-generated).
@@ -40,7 +46,10 @@ var SEED_DECK_HEADERS = [
   'OtherEntities',  // L  cultural events / shows / famous people / venues
   'Magnitude',      // M  size, signed
   'Trend',          // N  single-cycle / carrying + strength remaining
-  'CycleStamp'      // O  in-world Y{n}C{m} stamp
+  'CycleStamp',     // O  in-world Y{n}C{m} stamp
+  'SuggestedJournalist', // P  v4.2 (S313) — roster pre-match, HINT not direction
+  'SuggestedAngle',      // Q  v4.2 — from rosterLookup suggestStoryAngle_
+  'MatchConfidence'      // R  v4.2 — none/low/medium/high
 ];
 
 /**
@@ -57,7 +66,16 @@ function migrateSeedDeckV4_(ss) {
     if (!sheet) return; // fresh spreadsheet — ensureSheet_ creates v4 directly
     if (sheet.getLastRow() < 1 || sheet.getLastColumn() < 1) return;
     var first = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-    if (String(first[0]) === 'Cycle' && String(first[2]) === 'Desk') return; // already v4.1
+    if (String(first[0]) === 'Cycle' && String(first[2]) === 'Desk') {
+      // v4.2 (S313): extend an existing v4.1 tab in place — additive header
+      // append (P/Q/R journalist pre-match), no re-park. Sift reads by header
+      // name (v2.2), so append-only extension is consumer-safe.
+      if (first.indexOf('SuggestedJournalist') < 0) {
+        sheet.getRange(1, 16, 1, 3).setValues([['SuggestedJournalist', 'SuggestedAngle', 'MatchConfidence']]);
+        if (typeof Logger !== 'undefined') Logger.log('migrateSeedDeckV4_: v4.1 -> v4.2 headers extended (P/Q/R)');
+      }
+      return;
+    }
     // v4.0 (no Desk col) and v3.x both park; v4.1 re-creates with current headers.
     var base = 'Story_Seed_Deck_v3_legacy';
     var name = base;
@@ -108,7 +126,10 @@ function saveV3Seeds_(ctx) {
       s.otherEntities || '',    // L  OtherEntities
       (s.magnitude === undefined || s.magnitude === null) ? '' : s.magnitude, // M  Magnitude
       s.trend || '',            // N  Trend
-      stamp                     // O  CycleStamp
+      stamp,                    // O  CycleStamp
+      s.suggestedJournalist || '', // P  SuggestedJournalist (v4.2 S313)
+      s.suggestedAngle || '',      // Q  SuggestedAngle (v4.2)
+      s.matchConfidence || ''      // R  MatchConfidence (v4.2)
     ]);
   }
 

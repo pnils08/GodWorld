@@ -31,6 +31,8 @@ pointers:
 - `Class` (major|texture) → promote vs atmospheric-overlay → Step 5 six-decision triage (texture ≈ `atmosphericOnly`)
 - `Desk` → desk-routing hint (contract rows carry their own desk, the T4 purpose)
 
+- **S313 addendum — Story_Hook_Deck harvest (Mike-direct).** The retired-arc-era hook deck computes per-hook desk routing, journalist pre-match, angle, voice guidance, themes, and confidence via deterministic rosterLookup calls (`storyHook.js makeHook` -> `getThemeKeywordsForDomain_` + `suggestStoryAngle_`) — "the sift job for free." First slice shipped S313: `SuggestedJournalist`/`SuggestedAngle`/`MatchConfidence` now ride every v4 seed row (deck v4.2, cols P-R, HINTS not direction). REMAINING to evaluate when pipeline.42 is picked up: SuggestedDesks cross-check vs the Desk col, VoiceGuidance carry, theme keywords as sift-searchable content, and whether hook-type->signal mapping enriches candidate buckets. Story_Hook_Deck writer stays LIVE pending this evaluation (Mike: "a lot of good stuff on this deck").
+
 **Not applicable / hazard:**
 - **Dedup is mandatory.** Deck rows overlap feed signals — without a merge key a story gets proposed twice (once from the feed, once from the deck). Reconcile by SeedID / event identity before ranking.
 - **Provenance fence still applies (RB-1).** Deck `Citizens` is engine-authored and strong, but MCP `lookup_citizen` verification before a name shapes a brief is non-negotiable — the deck is a hint layer, not a canon bypass.

@@ -271,6 +271,39 @@ var LH_HEADER = ['Timestamp', 'POPID', 'Name', 'EventTag', 'EventText', 'Neighbo
   assert('8k cross-seed spread (3-biz pool, 2+2 draw → ≤1 reuse)', overlap.length <= 1);
 })();
 
+// §9 S313 journalist pre-match: rosterLookup globals present → hint fields ride
+// the seed; absent (default Node state) → empty fields, no throw (fail-soft)
+(function () {
+  var ripple = [{ cycle: 97, causeType: 'crime', causeId: 'DT', causeDetail: 'Theft +3', effectType: 'crime-cluster', targetScope: 'neighborhood', targetIds: [], neighborhood: 'Downtown', magnitude: 3, duration: 1 }];
+  function build() {
+    var ctx = { ss: fakeSS([LH_HEADER]), summary: { cycleId: 97, rippleEvents: ripple } };
+    b.buildContractSeeds_(ctx);
+    return ctx.summary.contractSeeds[0];
+  }
+  // Absent globals (plain Node) → empty hint fields
+  var bare = build();
+  assert('9a no globals → empty journalist', bare.suggestedJournalist === '');
+  assert('9b no globals → empty confidence', bare.matchConfidence === '');
+
+  // Stubbed rosterLookup globals → fields populated from the match
+  global.getThemeKeywordsForDomain_ = function (domain, hookType) { return ['crime', 'safety']; };
+  global.suggestStoryAngle_ = function (themes, signal) {
+    return { journalist: 'Dana Okafor', angle: 'street-level impact', voiceGuidance: 'x', confidence: signal === 'crime' ? 'high' : 'low' };
+  };
+  var matched = build();
+  assert('9c journalist rides seed', matched.suggestedJournalist === 'Dana Okafor');
+  assert('9d angle rides seed', matched.suggestedAngle === 'street-level impact');
+  assert('9e SAFETY domain maps to crime signal', matched.matchConfidence === 'high');
+
+  // Throwing matcher → fail-soft empty, seed still ships
+  global.suggestStoryAngle_ = function () { throw new Error('roster unavailable'); };
+  var soft = build();
+  assert('9f matcher throw → fail-soft empty', soft.suggestedJournalist === '' && soft.why.indexOf('Theft') >= 0);
+
+  delete global.getThemeKeywordsForDomain_;
+  delete global.suggestStoryAngle_;
+})();
+
 // §7 Zero ripples → zero seeds, no throw
 (function () {
   var ctx = { ss: fakeSS([LH_HEADER]), summary: { cycleId: 95 } };

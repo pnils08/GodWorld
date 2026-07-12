@@ -119,13 +119,44 @@ OWNERSHIP: in SESSION_CONTEXT.md you own ONLY your own NEXT[<self>] line + the s
 ROSTER
   echo ""
 
-  # Per-terminal Supermemory container awareness (S300, Mike-direct). Each registered
-  # terminal owns sl-<terminal>: auto-written at session-end, but also yours to write to
-  # ANY time — Mike rarely session-ends the other terminals, so treat it as a deliberate
-  # remember-store, not a close-only log. One awareness line, no boot-time API call.
+  # Per-terminal Supermemory container awareness (S300, Mike-direct; reframed S313,
+  # Mike-direct). Each registered terminal owns sl-<terminal>. Usage model (S313):
+  # DURABLE TERMINAL FACTS first — claude-mem already owns narrative what-happened,
+  # so save the facts a future boot needs (`--static` for permanent ones), not a
+  # second session log. Searches cost fractions of a penny on the flat $9/mo plan —
+  # far cheaper than the model re-deriving a fact from disk. Session-end auto-bridge
+  # still runs (searchable record), but it is the backstop, not the point.
   if [ "$MAGS_ONLY" != "yes" ] && [ -n "$TERMINAL_NAME" ]; then
-    echo "Your Supermemory container: sl-$TERMINAL_NAME (per-terminal work store). Yours anytime — save anything worth remembering: npx supermemory remember \"...\" --tag sl-$TERMINAL_NAME (add --static for a permanent fact); recall: npx supermemory search \"...\" --tag sl-$TERMINAL_NAME; across all terminals: --tag session-logs. Auto-captured at session-end too. (Deliberate canon saves still fan out to mags/bay-tribune/world-data, terminal-tagged.)"
+    echo "Your Supermemory container: sl-$TERMINAL_NAME (durable terminal memory — facts a future boot needs, not a claude-mem duplicate). Save anytime: npx supermemory remember \"...\" --tag sl-$TERMINAL_NAME (--static for a permanent fact); recall anytime: npx supermemory search \"...\" --tag sl-$TERMINAL_NAME — searches are near-free, prefer them over re-deriving facts from disk. Across all terminals: --tag session-logs. (Deliberate canon saves still fan out to mags/bay-tribune/world-data, terminal-tagged.)"
     echo ""
+
+    # S313 boot recall (Mike-approved): ONE targeted search of sl-<terminal>, keyed to
+    # the NEXT line, so durable terminal memory actually gets withdrawn at boot instead
+    # of write-only accumulating. Fail-open: timeout/empty/parse-error -> no block, boot
+    # continues. Hits are background conditioning — model must verify against live state.
+    if [ -n "$NEXT_LINE" ]; then
+      SL_QUERY=$(printf '%s' "$NEXT_LINE" | sed 's/^\*\*NEXT\[[^]]*\]:\*\*[[:space:]]*//' | cut -c1-300)
+      SL_HITS=$(timeout 15 npx supermemory search "$SL_QUERY" --tag "sl-$TERMINAL_NAME" --json 2>/dev/null | node -e '
+        let d = "";
+        process.stdin.on("data", c => d += c);
+        process.stdin.on("end", () => {
+          try {
+            const rs = (JSON.parse(d).results || [])
+              .filter(r => (r.similarity || 0) >= 0.6 && (r.memory || r.chunk))
+              .slice(0, 3);
+            for (const r of rs) {
+              const date = (r.metadata && (r.metadata.date || r.metadata.sessionPin)) || "";
+              const text = String(r.memory || r.chunk).replace(/\s+/g, " ").slice(0, 300);
+              console.log("- " + (date ? "[" + date + "] " : "") + text);
+            }
+          } catch (e) { /* fail-open */ }
+        });' 2>/dev/null)
+      if [ -n "$SL_HITS" ]; then
+        echo "Recalled from sl-$TERMINAL_NAME (keyed to your NEXT line — background memory, dated; verify against live state before acting on it):"
+        echo "$SL_HITS"
+        echo ""
+      fi
+    fi
   fi
 
   # --- EMIT BOOT SEQUENCE ---

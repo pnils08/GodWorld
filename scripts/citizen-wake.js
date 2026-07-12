@@ -34,7 +34,7 @@ const getCurrentCycle = require('/root/GodWorld/lib/getCurrentCycle');
 // shared with scripts/citizenVoice.js (edition voicing) + the Task-6 conversation engine.
 const { buildPool, coResidents, loadLifeArc, loadSportsSlice, loadNeighborhoodTexture,
   loadBonds, loadOwnPageReadback, dialTrajectory } = require('/root/GodWorld/lib/wakePerception');
-const { selectProvocation } = require('/root/GodWorld/lib/provocationBank'); // T5 varied-provocation bank
+const { selectProvocation, _hash53 } = require('/root/GodWorld/lib/provocationBank'); // T5 varied-provocation bank; _hash53 seeds T1 draw + T2 slot
 
 const ARGV = process.argv.slice(2);
 const DRY = ARGV.includes('--dry-run');
@@ -42,10 +42,12 @@ const arg = (k, d) => { const m = ARGV.find((a) => a.startsWith(`--${k}=`)); ret
 const WAKE = (arg('wake', 'evening') || 'evening').toLowerCase();
 const FORCE_POP = arg('pop', null);
 
-const ROTATION_MEMORY = 25;     // don't re-wake the last N citizens (force variety)
+const ROTATION_MEMORY = 100;    // don't re-wake the last N citizens (engine.48 T1: 25 -> 100 — reach past the orbit; re-wakes still possible within ~3 weeks at 5/day)
 const STATE_FILE = path.join(__dirname, '..', 'logs', 'citizen-wake-state.json');
 const LOG_FILE = path.join(__dirname, '..', 'logs', 'citizen-wake.log');
 const TENSION_FILE = path.join(__dirname, '..', 'logs', 'citizen-tension-state.json'); // B2 index — page is the durable surface, this skips a page search
+const RIPPLE_FILE = path.join(__dirname, '..', 'logs', 'citizen-ripple-state.json'); // engine.48 T4 — cross-citizen ripple register, keyed "from->to"
+const RIPPLE_EXPIRY_CYCLES = 12; // mirrors TENSION_EXPIRY_CYCLES; read by citizen-exchange.js too
 const TENSION_CAP = 3;            // open questions carried at once (oldest evicted)
 const TENSION_EXPIRY_CYCLES = 12; // unresolved tension fades — silent, no page line (matches archiver retain window)
 
@@ -84,21 +86,105 @@ function openTensionsFor(state, popId, cycle) {
   return list.filter((t) => t.status === 'open').slice(-TENSION_CAP);
 }
 
-// event-magnitude-weighted, deterministic: highest live delta first, excluding the recently-woken.
-function selectCitizen(pool, state) {
-  if (FORCE_POP) {
-    const forced = pool.find((p) => p.popId === FORCE_POP.toUpperCase());
-    if (forced) return forced;
-    logLine(`--pop ${FORCE_POP} not in shaped pool; falling back to rotation`);
+// ---- engine.48 T4 ripple register — cross-citizen awareness: naming a bonded citizen in a
+// reflection leaves a trace THEY perceive at their next wake. Local state only, same
+// discipline as tensions (dry runs never touch it; silent expiry at load).
+function loadRippleState() { try { return JSON.parse(fs.readFileSync(RIPPLE_FILE, 'utf8')); } catch (e) { return {}; } }
+function saveRippleState(st) { try { fs.writeFileSync(RIPPLE_FILE, JSON.stringify(st, null, 2)); } catch (e) {} }
+function expireRipples(st, cycle) {
+  if (cycle == null) return;
+  for (const k of Object.keys(st)) {
+    if ((cycle - (Number(st[k] && st[k].cy) || 0)) >= RIPPLE_EXPIRY_CYCLES) delete st[k];
   }
-  const recent = new Set(state.recent || []);
-  let candidates = pool.filter((p) => !recent.has(p.popId));
-  if (!candidates.length) candidates = pool; // everyone woken recently -> reset the cycle
-  candidates.sort((a, b) => (b.eventMag - a.eventMag) || dials.deviation(b.cur) - dials.deviation(a.cur));
-  return candidates[0];
 }
 
-function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, pageMemory, cycle, tensionBlock) {
+// engine.48 T3 — edition read-back: the paper closes the loop back into the woken citizen's
+// perception. Named tier (NAMES INDEX row) beats neighborhood tier; no hit -> '' (no filler,
+// same omit-rule as loadNeighborhoodTexture).
+function loadEditionSlice(popId, name, nh, cycle) {
+  try {
+    const dir = path.join(__dirname, '..', 'editions');
+    let best = null;
+    for (const f of fs.readdirSync(dir).filter((x) => /^cycle_pulse_edition_(\d+)\.txt$/.test(x))) {
+      const n = Number(f.match(/_(\d+)\.txt$/)[1]);
+      if (cycle != null && n > cycle) continue; // no reading next week's paper
+      if (!best || n > best.n) best = { n, f };
+    }
+    if (!best) return '';
+    const txt = fs.readFileSync(path.join(dir, best.f), 'utf8');
+    const idx = txt.indexOf('NAMES INDEX');
+    if (idx >= 0) {
+      for (const line of txt.slice(idx).split('\n')) {
+        const m = line.match(/^(POP-\d{5})\s*\|\s*([^|]+)\|\s*(.+)$/);
+        if (m && m[1].toUpperCase() === popId) {
+          return `The Tribune wrote about you this week: ${m[3].trim()}.`.slice(0, 200);
+        }
+      }
+    }
+    const body = idx >= 0 ? txt.slice(0, idx) : txt;
+    if (nh && new RegExp(`\\b${String(nh).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i').test(body)) {
+      return `The Tribune ran a piece touching ${nh} this week.`;
+    }
+    return '';
+  } catch (e) { return ''; }
+}
+
+// engine.48 T2 — voiced POPIDs from the authored voice agents, agent-count-agnostic
+// (same enumeration as engine.43 Task 1: first POP- after "POP ID:" per IDENTITY.md).
+function voicedPopIds() {
+  const out = [];
+  try {
+    const dir = path.join(__dirname, '..', '.claude', 'agents');
+    for (const d of fs.readdirSync(dir).filter((x) => x.startsWith('citizen-voice-'))) {
+      try {
+        const md = fs.readFileSync(path.join(dir, d, 'IDENTITY.md'), 'utf8');
+        const m = md.match(/POP ID:\*{0,2}\s*(POP-\d{5})/);
+        if (m) out.push(m[1].toUpperCase());
+      } catch (e) {}
+    }
+  } catch (e) {}
+  return out;
+}
+
+// engine.48 T1 — seeded WEIGHTED draw replaces the deterministic sort[0] pick: high-delta
+// citizens stay favored but mid-pool citizens get real probability mass. Same (cycle, wake)
+// -> same pick. T2 — a seeded 1-in-5 slot goes to the least-recently-woken voiced citizen
+// that passes the same pool filters, so authored voices keep cycling into the loop.
+function selectCitizen(pool, state, cycle) {
+  if (FORCE_POP) {
+    const forced = pool.find((p) => p.popId === FORCE_POP.toUpperCase());
+    if (forced) return { c: forced, slot: 'forced' };
+    logLine(`--pop ${FORCE_POP} not in shaped pool; falling back to rotation`);
+  }
+  const recentList = state.recent || [];
+  const recent = new Set(recentList);
+
+  // T2 voiced slot — before the weighted draw
+  if (_hash53('voiced:' + cycle + ':' + WAKE, 0x5eed) % 5 === 0) {
+    const voiced = voicedPopIds().map((id) => pool.find((p) => p.popId === id)).filter(Boolean);
+    if (voiced.length) {
+      // least-recently-woken first: recent is most-recent-first, so absent beats present
+      // and a deeper index beats a shallower one.
+      const oldness = (p) => { const i = recentList.indexOf(p.popId); return i < 0 ? Number.MAX_SAFE_INTEGER : i; };
+      voiced.sort((a, b) => oldness(b) - oldness(a));
+      return { c: voiced[0], slot: 'voiced' };
+    }
+    logLine('voiced slot fired but no voiced citizen passes the pool filters; falling through to rotation');
+  }
+
+  let candidates = pool.filter((p) => !recent.has(p.popId));
+  if (!candidates.length) candidates = pool; // everyone woken recently -> reset the cycle
+  const weights = candidates.map((p) => 1 + p.eventMag * 2 + dials.deviation(p.cur) / 50);
+  const total = weights.reduce((s, w) => s + w, 0);
+  let x = (_hash53('select:' + cycle + ':' + WAKE, 0x5eed) % Math.max(1, Math.floor(total * 1000))) / 1000;
+  for (let i = 0; i < candidates.length; i++) {
+    if (x < weights[i]) return { c: candidates[i], slot: 'rotation' };
+    x -= weights[i];
+  }
+  return { c: candidates[0], slot: 'rotation' };
+}
+
+function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, pageMemory, cycle, tensionBlock, editionLine, rippleLine) {
   const disp = dials.disposition(c.cur);
   const who = neighbors.length
     ? `\n\nPeople around you in ${c.nh}: ${neighbors.map((n) => `${n.name}${n.occupation ? ' (' + n.occupation + ')' : ''}`).join(', ')}.`
@@ -116,6 +202,8 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
   const arcLine = lifeArc ? `\n\nYour life so far: ${lifeArc}.` : ''; // T1a self-state read-back (Log-sourced)
   const trajLine = traj ? ` Lately you've been ${traj}.` : '';
   const sports = sportsLine ? `\n\nAround Oakland: ${sportsLine}` : ''; // T1b world-larger-than-self
+  const paper = editionLine ? `\n\nIn the paper: ${editionLine}` : ''; // engine.48 T3 — the edition flywheel (world-larger-than-self group)
+  const ripple = rippleLine ? `\n\n${rippleLine}` : ''; // engine.48 T4 — a bonded citizen thought about you recently
   const texture = textureLine ? `\n\nAround your neighborhood: ${textureLine}` : ''; // T2 immediate world
   // T1c own-page memory — already fenced (memoryFence) by loadOwnPageReadback; appended as a distinct
   // tail so the fence block stays intact (mirrors lib/personaProvider.augment).
@@ -123,7 +211,7 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
   // B2 open tensions — unresolved questions carried between wakes; fenced upstream (main flow)
   const tensions = tensionBlock ? `\n\nQuestions you've been sitting with, still unresolved:\n${tensionBlock}` : '';
   // immersion-ingredient order: continuity (T1a state + T1c own-memory) -> people (around you + history-with) -> world/A's (T1b) -> surroundings (T2)
-  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}\n\nReal things from your life recently:\n${c.life}${who}${bonds}${opinions}${sports}${texture}${memory}${tensions}`;
+  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}\n\nReal things from your life recently:\n${c.life}${who}${bonds}${ripple}${opinions}${sports}${paper}${texture}${memory}${tensions}`;
   // T5 — varied-provocation question bank. The fixed "small things on your mind"
   // prompt becomes a deterministically-seeded pick latching a real signal this
   // citizen perceives, so two citizens woken the same cycle are prompted
@@ -155,12 +243,29 @@ async function generateVoice(system, user) {
   if (!pool.length) { logLine('empty pool — nothing to wake'); process.exit(0); }
 
   const state = loadState();
-  const c = selectCitizen(pool, state);
+  const picked = selectCitizen(pool, state, cycle);
+  const c = picked.c;
   const neighbors = await coResidents(c.nh, c.popId);
   const sportsLine = await loadSportsSlice();                 // T1b — one feed read, shared across the wake
   const lifeArc = await loadLifeArc(c.popId);                 // T1a — canonical milestone arc from LifeHistory_Log
   const textureLine = loadNeighborhoodTexture(c.nh, cycle);   // T2 — this hood's frozen lived-particulars block
-  const bondsLine = await loadBonds(c.popId);                 // relationships-with-texture — people the citizen has history with (canon bonds)
+  // engine.48 T4 write side needs bond POPIDs too — {pairs} keeps the prompt line identical.
+  const bondsRes = await loadBonds(c.popId, { pairs: true }); // relationships-with-texture — people the citizen has history with (canon bonds)
+  const bondsLine = bondsRes.line;
+  const bondPairs = bondsRes.pairs;
+  // engine.48 T3 — the paper closes the loop into perception (named tier > hood tier > omit)
+  const editionLine = loadEditionSlice(c.popId, c.name, c.nh, cycle);
+  // engine.48 T4 read side — ripples aimed at this citizen render one line, then consume (live only)
+  const rippleState = loadRippleState();
+  expireRipples(rippleState, cycle);
+  let rippleLine = '';
+  const rippleKeysHit = [];
+  for (const [k, e] of Object.entries(rippleState)) {
+    if (!e || String(e.to || '').toUpperCase() !== c.popId) continue;
+    rippleLine = `You crossed paths with ${e.fromName || 'someone you know'} recently; they seemed ${String(e.affect || '').toLowerCase() || 'preoccupied'}.`;
+    rippleKeysHit.push(k);
+    break; // one line max — texture, not a feed
+  }
   // B2 — tension state loads BEFORE recall: resolved tensions join the candidate set (Task 4)
   const tensionState = loadTensionState();
   const openTensions = openTensionsFor(tensionState, c.popId, cycle);
@@ -176,9 +281,9 @@ async function generateVoice(system, user) {
   const tensionBlock = openTensions.length
     ? memoryFence.wrap(openTensions.map((t) => t.q).join('\n'), 'citizen-tension:' + c.popId)
     : '';
-  const { system, user, disp, prov } = buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, pageMemory, cycle, tensionBlock);
+  const { system, user, disp, prov } = buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, pageMemory, cycle, tensionBlock, editionLine, rippleLine);
 
-  logLine(`woke ${c.popId} ${c.name} — ${c.occ || 'resident'}, ${c.nh}${c.age ? ', ' + c.age : ''} | eventMag=${c.eventMag} | ${disp} | provocation=${prov.id} route=${prov.route} wake=${WAKE}`);
+  logLine(`woke ${c.popId} ${c.name} — ${c.occ || 'resident'}, ${c.nh}${c.age ? ', ' + c.age : ''} | eventMag=${c.eventMag} | ${disp} | provocation=${prov.id} route=${prov.route} wake=${WAKE} slot=${picked.slot}`);
   if (DRY) console.log('\n--- perception (system prompt) ---\n' + system + '\n----------------------------------');
   if (DRY) console.log('\n--- provocation (user prompt, T5) ---\n' + user + '\n----------------------------------');
   const reflection = await generateVoice(system, user);
@@ -245,6 +350,21 @@ async function generateVoice(system, user) {
   }
 
   // GATE: NO applyTaggedEvent_ here. Dial write-back is the gated cycle's job (Phase-1 audit).
+
+  // 4b) engine.48 T4 ripple register — live runs only. Write side: naming a bonded citizen in
+  // the reflection leaves a trace they perceive at their next wake (one live entry per pair,
+  // overwrite refreshes). Read side consumption: the rendered entry is spent.
+  for (const bp of bondPairs) {
+    const first = String(bp.name || '').split(/\s+/)[0];
+    const hitFull = bp.name && new RegExp(`\\b${bp.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i').test(reflection);
+    const hitFirst = first && first.length >= 3 && new RegExp(`\\b${first.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i').test(reflection);
+    if (hitFull || hitFirst) {
+      rippleState[`${c.popId}->${bp.pop}`] = { to: bp.pop, from: c.popId, fromName: c.name, affect: cls.affect || '', cy: cycle };
+      logLine(`ripple <- ${c.popId} named ${bp.name} (${bp.pop})`);
+    }
+  }
+  for (const k of rippleKeysHit) { delete rippleState[k]; logLine(`ripple consumed: ${k}`); }
+  saveRippleState(rippleState); // also persists this wake's silent expiry pass
 
   // 5) record rotation + recall bookkeeping (staleness input for future wakes — live runs only)
   state.recent = [c.popId, ...(state.recent || [])].slice(0, ROTATION_MEMORY);

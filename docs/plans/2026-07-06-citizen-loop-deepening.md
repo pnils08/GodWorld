@@ -50,7 +50,7 @@ pointers:
   2. Replace the deterministic `sort(...)[0]` pick in `selectCitizen` with a seeded weighted draw: weight each candidate `w = 1 + eventMag * 2 + deviation(cur) / 50`, draw via cumulative-weight walk using `require('../lib/provocationBank')._hash53('select:' + cycle + ':' + WAKE, 0x5eed)` mod total-weight. Same (cycle, wake) → same pick; high-delta citizens stay favored but mid-pool citizens get real probability mass.
   3. Keep `--pop` override and the everyone-recently-woken pool-reset exactly as they are.
 - **Verify:** `node scripts/citizen-wake.js --dry-run --cycle=101 --wake=morning` run twice → identical pick (determinism); across `--wake=morning|midday|afternoon|evening|night` on one cycle → ≥3 distinct citizens.
-- **Status:** [ ] not started
+- **Status:** [x] shipped S312 — verified: same (cycle,wake) → identical pick; 3 distinct citizens across 5 wakes at c101; --pop + pool-reset untouched.
 
 ### Task 2: Reserved voiced-citizen wake slot
 
@@ -61,7 +61,7 @@ pointers:
   2. Before the weighted draw: if `_hash53('voiced:' + cycle + ':' + WAKE, 0x5eed) % 5 === 0`, pick the least-recently-woken voiced citizen that passes the existing pool filters (shaped floor + lived history); if none qualifies, fall through to the normal draw and log why.
   3. Extend the `woke ...` log line with `slot=voiced|rotation` so coverage is grep-able.
 - **Verify:** sandbox loop over 25 (cycle, wake) pairs → ~5 voiced slots hit, round-robin across the eligible voiced citizens; ineligible voiced citizens logged, never crash.
-- **Status:** [ ] not started
+- **Status:** [x] shipped S312 — verified: voiced slot fired ~1-in-5 (seeded), round-robin confirmed (Benji-in-recent → Deacon picked), slot=voiced|rotation|forced in wake log.
 
 ### Task 3: Edition read-back slice — the flywheel
 
@@ -73,7 +73,7 @@ pointers:
   3. **Neighborhood tier** (only when not named): scan article body for the citizen's neighborhood name (word-boundary, case-insensitive); on hit return `The Tribune ran a piece touching <nh> this week.` No hit → `''` — no filler, same omit-rule as `loadNeighborhoodTexture`.
   4. Wire into `buildVoicePrompts` as its own block `\n\nIn the paper: ...`, placed after the sports line (world-larger-than-self group).
 - **Verify:** `--dry-run --pop=POP-00034` (Mayor Santana, named in c100 NAMES INDEX) → named-tier line in the printed system prompt; a Rockridge non-named citizen with Rockridge coverage → hood line; a citizen in an uncovered hood → no `In the paper` block.
-- **Status:** [ ] not started
+- **Status:** [x] shipped S312 — verified: POP-00034 named-tier line from c100 NAMES INDEX; Benji self-row named-tier; Chinatown citizen correctly omitted (0 mentions); hood tier reads body-only slice.
 
 ### Task 4: Cross-citizen ripple register
 
@@ -84,7 +84,7 @@ pointers:
   2. Read side (perception assembly): entries with `to === woken POPID` and age < 12 cycles render one line — `You crossed paths with <fromName> recently; they seemed <affect lowercased or 'preoccupied'>.` — appended after the bonds block. Consume (delete) rendered entries on live runs; dry runs leave state untouched (same discipline as tension state).
   3. Expiry: silent drop of entries older than 12 cycles at load, mirroring `TENSION_EXPIRY_CYCLES`.
 - **Verify:** sandbox: force-wake A (`--pop`) with a reflection naming bonded B (seed via test intake), confirm state entry; force-wake B → line renders, entry consumed; second B wake → absent.
-- **Status:** [ ] not started
+- **Status:** [x] shipped S312 — verified: read side renders + consumes live (POP-00001→POP-00018 trace, state emptied), dry runs leave state untouched, 12-cycle expiry at load; write side (bond-name match → upsert) fires organically, grep cron log for "ripple <-". Activates engine.53 conversations.
 
 ### Task 5: Extract shared perception assembly to `lib/wakePerception.js`
 

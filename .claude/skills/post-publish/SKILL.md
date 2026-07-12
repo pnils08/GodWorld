@@ -1,7 +1,7 @@
 ---
 name: post-publish
 description: Close the feedback loop. Canonize to Supermemory, update world-data, write ratings to sheets, grade reporters, update criteria files, update newsroom memory. Type-aware — edition, interview, supplemental, dispatch all converge here.
-version: "1.11"
+version: "1.12"
 updated: 2026-07-11
 tags: [media, active]
 effort: high
@@ -217,7 +217,21 @@ source ~/.bashrc && curl -s -X POST "https://api.supermemory.ai/v3/documents" \
 ```
 World summary is per-cycle, not per-artifact. Non-edition types skip this without flag. Tag pair `["world-data", "wd-summary"]` (S184) — the broad `world-data` tag keeps existing `search_world` queries working; the `wd-summary` tag enables filtered retrieval (find me only the summaries, not the entity cards). See [[../../../docs/SUPERMEMORY|SUPERMEMORY]] §Search/save matrix.
 
-**Verification gate:** doc ID returned.
+Then ingest the one-line snapshot as its own memory (v1.12 / S313). `buildWorldSummary.js` v1.2.0 emits a stable `Snapshot: Cycle {XX} | Pop … | Illness … | …` line in the summary header; grep extracts it deterministically — do NOT compose the snapshot by hand:
+
+```bash
+source ~/.bashrc && curl -s -X POST "https://api.supermemory.ai/v3/documents" \
+  -H "Authorization: Bearer $SUPERMEMORY_CC_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d "$(jq -n \
+    --arg content "$(grep -m1 '^Snapshot: Cycle ' output/world_summary_c{XX}.md)" \
+    --arg cycle "<XX>" \
+    '{content: $content, containerTags: ["world-data", "wd-snapshot"], metadata: {type: "cycle_snapshot", cycle: $cycle}}')"
+```
+
+One compact memory per cycle — the cheap "where are we now" anchor for the Discord bot, citizen-loop, and agents that don't need a full summary chunk (Sonnet-agent Supermemory advice, S313). Tag `wd-snapshot` keeps it out of `wd-summary` filtered retrieval; the broad `world-data` tag keeps `search_world` working. Skip (with a production-log note) if the grep returns empty — that means the summary predates writer v1.2.0.
+
+**Verification gate:** doc ID returned for both POSTs (summary + snapshot; snapshot gate waived only on the pre-v1.2.0 grep-empty skip).
 
 ### Step 3: Civic Wiki — Per-Official Records (`--type edition` only)
 
@@ -559,6 +573,8 @@ After `/write-edition` (edition path) or after `/interview`, `/dispatch`, `/writ
 
 ## Changelog
 
+- 2026-07-11 — v1.12 (S313, engine-sheet). **Step 2c snapshot ingest added:** second POST per edition cycle — the `Snapshot: Cycle {XX} | …` one-liner grep-extracted from `world_summary_c{XX}.md` (writer v1.2.0 emits it), tagged `["world-data","wd-snapshot"]`, metadata `type: cycle_snapshot`. Cheap "where are we now" anchor per Sonnet-agent Supermemory advice (Drive file, S313). Grep-empty (pre-v1.2.0 summary) skips with production-log note.
+- 2026-07-11 — v1.11 (S312, engine-sheet). pipeline.43 Task 5 — **Step 2e voice-packet dedup:** citizens whose quotes came through the `/write-edition` quote-supply pre-pass (`output/voices/voices_c{XX}.json`, non-fallback) already own their `Reflection_Intake` row from `citizenVoice.js --record`; 2e must not write a second reflection row. Commit `cba2cfad`. (Changelog entry backfilled at v1.12 — frontmatter was bumped without one.)
 - 2026-07-10 — v1.10 (S310, research-build). research.23 Task 7 — **Step 1c NotebookLM push added** (all types; `--audio` on edition only). Matrix row + step block + Parallel-OK grouping updated. Non-blocking by contract: `scripts/notebooklmPush.js` exits 0 on runtime bridge failures (auth rot / rate limits / API drift); verification gate accepts `complete` OR `(non-blocking)` warning. Plan: [[../../docs/plans/2026-07-10-notebooklm-bridge-deploy]].
 - 2026-06-22 — v1.9 (S267, research-build). governance.42 RB-6. **Step 5b verification gate path fix:** the base_context.json cycle field is **nested** — gate now checks `jq '.baseContext.cycle'`, not the top-level `jq '.cycle'` (which returns `null` and false-alarms; verified live — top-level keys are `baseContext`/`bondStats`/`canon`/`householdStats`). Closes G-P-C99-1. **Step 2a Time Budget bump:** `~10+ min` → `~30-40 min`, with the `--apply` batch-pause cadence (60s every 200 writes) noted as the reason wall time scales with ledger size (C99 ran ~36 min). Closes G-P-C99-2a. Doc-text only, no code change.
 - 2026-04-17 — Initial 13-step skill (S156, post-publish formalized).

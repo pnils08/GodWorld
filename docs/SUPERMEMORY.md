@@ -93,6 +93,7 @@ The simulation's current state. Structured data from the engine, searchable by p
 | `wd-initiative` | 6 | One per initiative — INIT-ID, state, phase, neighborhoods, milestones |
 | `wd-player-truesource` | 27 | One per player — A's + Bulls + opponents |
 | `wd-summary` | per cycle | Per-cycle world summary (tag added S184) |
+| `wd-snapshot` | per cycle | One-line world-state snapshot (`Snapshot: Cycle {XX} \| Pop … \| Illness …`) — cheap "where are we now" anchor, grep-extracted from the world summary by `/post-publish` Step 2c (S313) |
 | **Total** | **~843** | 100% domain-tagged, 0 orphans |
 
 Per-domain MCP retrieval tools (M1-M4 shipped S183) handle the `mode='hybrid'` + `threshold=0.3` override automatically — see §Search/save matrix below. Wipe primitive: per-domain card writers handle ID-content-scoped DELETE before re-write (e.g., `buildCitizenCards.js --apply` wipes by POPID then re-ingests).
@@ -203,6 +204,7 @@ Per-citizen accreting reflection memory for the citizen-loop (plan `2026-06-04-m
 | Articles by topic | dashboard API | MCP `search_articles(query)` | `curl localhost:3001/api/search/articles?q=topic` | |
 | Coverage ratings for cycle | sheets via dashboard | MCP `get_domain_ratings(cycle)` | read Edition_Coverage_Ratings sheet | |
 | World summary by cycle | `world-data` + `wd-summary` | none yet (use CLI) | `npx supermemory search "cycle N summary" --tag wd-summary` | tag added S184; future MCP tool candidate `get_world_summary(cycle)` |
+| World-state one-liner ("where are we now") | `world-data` + `wd-snapshot` | none yet (use CLI) | `npx supermemory search "cycle N snapshot" --tag wd-snapshot --mode hybrid --threshold 0.3` | tag added S313; one compact memory per cycle — prefer over `wd-summary` when a full chunk is overkill |
 | Mags' deliberate brain | `mags` | plugin only | `super-search --user "query"` (or `--both` for mags + super-memory) | conversation context, decisions, reasoning |
 | Junk drawer / auto-saves | `super-memory` | plugin only | `super-search --repo "query"` | session-end auto-saves, `/super-save` output |
 
@@ -220,6 +222,7 @@ Per-citizen accreting reflection memory for the citizen-loop (plan `2026-06-04-m
 | Initiative card | `world-data` + `wd-initiative` | `node scripts/buildInitiativeCards.js --apply` | — | INIT-ID-content-scoped wipe |
 | Player truesource | `world-data` + `wd-player-truesource` | `node scripts/ingestPlayerTrueSource.js --apply` | — | truesource-header-scoped wipe |
 | World summary (per-cycle) | `world-data` + `wd-summary` | post-publish skill via API | `curl /v3/documents -d '{"containerTags":["world-data","wd-summary"]...}'` | tag pair added S184 |
+| World-state snapshot one-liner (per-cycle) | `world-data` + `wd-snapshot` | post-publish Step 2c via API | `curl /v3/documents -d '{"containerTags":["world-data","wd-snapshot"]...}'` | S313 — content is the `Snapshot: Cycle {XX} \| …` line grep-extracted from `world_summary_c{XX}.md` (writer v1.2.0); never hand-composed |
 | Quick conversation note | `super-memory` | skill `/super-save` | plugin handles | junk drawer; not for canon or deliberate decisions |
 | Session auto-save | `super-memory` | Stop hook (automatic) | — | runs on session end |
 

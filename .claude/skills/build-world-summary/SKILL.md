@@ -61,6 +61,7 @@ Disk:
 Single Markdown file with these sections (codified in `scripts/buildWorldSummary.js` section emitters):
 
 1. Header (cycle / season / weather / cycle weight / civic load / pattern + shock flags)
+1b. Snapshot line (v1.2.0, S313) — single `Snapshot: Cycle {XX} | Pop … | Illness … | …` line after the header divider; `/post-publish` Step 2c grep-extracts it into a standalone `wd-snapshot` Supermemory memory
 2. City State (population / employment / economy / sentiment / domain counts / neighborhood table)
 3. Civic Decisions (pointer to the `## /city-hall` section of `output/production_log_c{XX}.md`)
 4. Sports (per-row `StoryAngle` verbatim from `Oakland_Sports_Feed`)

@@ -64,7 +64,7 @@ console.log('Test 1: module exports + version');
     'round2', 'fmtSentiment', 'fmtNum', 'parseJsonField',
     'formatWeatherLine', 'sortNeighborhoods', 'filterApprovalRows',
     'classifyDelta',
-    'emitHeader', 'emitCityState', 'emitCivicDecisions',
+    'emitHeader', 'emitSnapshotLine', 'emitCityState', 'emitCivicDecisions',
     'emitSports', 'emitEveningTexture', 'emitWorldEvents',
     'emitThreeCycleTrends', 'emitEngineReviewFindings',
     'emitApprovalRatings', 'emitFooter'
@@ -91,6 +91,38 @@ console.log('\nTest 2: numeric formatters');
 
   assertEqual('fmtNum(1.0, 2) → "1.00"', helper.fmtNum(1.0, 2), '1.00');
   assertEqual('fmtNum(undefined) → "—"', helper.fmtNum(undefined), '—');
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// Test 2b: emitSnapshotLine (S313 — wd-snapshot one-liner)
+// ────────────────────────────────────────────────────────────────────────────
+console.log('\nTest 2b: emitSnapshotLine');
+{
+  const rileyCurr = {
+    CitySentiment: 0.8, CycleWeight: 'high-signal', PatternFlag: 'stability-streak',
+    ShockFlag: 'shock-flag', CivicLoad: 'minor-variance'
+  };
+  const worldPop = { totalPopulation: 385162, illnessRate: '0.096', employmentRate: '0.898' };
+
+  const line = helper.emitSnapshotLine(100, rileyCurr, worldPop, { inCare: 3, loadPct: 8 });
+  assert('snapshot is single line', typeof line === 'string' && !line.includes('\n'));
+  assert('snapshot has stable prefix', line.startsWith('Snapshot: Cycle 100 | '));
+  assertIncludes('snapshot pop', line, 'Pop 385,162');
+  assertIncludes('snapshot illness', line, 'Illness 9.6%');
+  assertIncludes('snapshot employment', line, 'Employment 89.8%');
+  assertIncludes('snapshot sentiment', line, 'Sentiment +0.8');
+  assertIncludes('snapshot weight', line, 'Weight high-signal');
+  assertIncludes('snapshot pattern', line, 'Pattern stability-streak');
+  assertIncludes('snapshot shock', line, 'Shock shock-flag');
+  assertIncludes('snapshot load', line, 'Load minor-variance');
+  assertIncludes('snapshot hospital', line, 'Hospital 3 in care (8% load)');
+
+  const noHosp = helper.emitSnapshotLine(101, rileyCurr, worldPop, null);
+  assertExcludes('no hospital segment when census null', noHosp, 'Hospital');
+
+  const sparse = helper.emitSnapshotLine(102, {}, {}, null);
+  assertIncludes('sparse riley fields em-dash', sparse, 'Weight —');
+  assert('sparse still single line', !sparse.includes('\n'));
 }
 
 // ────────────────────────────────────────────────────────────────────────────

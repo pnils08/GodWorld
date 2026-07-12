@@ -42,7 +42,7 @@ const path = require('path');
 const sheets = require('/root/GodWorld/lib/sheets');
 
 const REPO_ROOT = path.resolve(__dirname, '..');
-const SCRIPT_VERSION = '1.1.0';
+const SCRIPT_VERSION = '1.2.0';
 
 // ============================================================================
 // PURE HELPERS (testable without sheet access)
@@ -165,6 +165,27 @@ function emitHeader(cycle, rileyCurr, calendar) {
     ''
   ];
   return lines;
+}
+
+// One-line world-state snapshot (S313). Stable `Snapshot:` prefix — /post-publish
+// Step 2c greps this line out and ingests it as a standalone wd-snapshot memory
+// (cheap "where are we now" anchor; full doc chunks stay under wd-summary).
+function emitSnapshotLine(cycle, rileyCurr, worldPop, hospitalCensus) {
+  const parts = [
+    `Snapshot: Cycle ${cycle}`,
+    `Pop ${fmtPopulation(worldPop.totalPopulation)}`,
+    `Illness ${fmtNum(Number(worldPop.illnessRate) * 100, 1)}%`,
+    `Employment ${fmtNum(Number(worldPop.employmentRate) * 100, 1)}%`,
+    `Sentiment ${fmtSentiment(rileyCurr.CitySentiment)}`,
+    `Weight ${rileyCurr.CycleWeight || '—'}`,
+    `Pattern ${rileyCurr.PatternFlag || '—'}`,
+    `Shock ${rileyCurr.ShockFlag || '—'}`,
+    `Load ${rileyCurr.CivicLoad || '—'}`
+  ];
+  if (hospitalCensus) {
+    parts.push(`Hospital ${hospitalCensus.inCare} in care (${hospitalCensus.loadPct}% load)`);
+  }
+  return parts.join(' | ');
 }
 
 function emitCityState(rileyCurr, worldPop, neighborhoodsC, prevRileyCount, hospitalCensus) {
@@ -647,6 +668,7 @@ async function buildWorldSummary(cycle) {
     ? { inCare: hospitalOpen.length, loadPct: Math.round((hospitalOpen.length / 40) * 100) }
     : null;
 
+  out.push(emitSnapshotLine(cycle, rileyCurr, worldPopCurr, hospitalCensus), '');
   out.push(...emitCityState(rileyCurr, worldPopCurr, neighborhoodsC, {
     storySeedCount: rileyPrev1?.StorySeedCount ?? null,
     eventsGenerated: rileyPrev1?.EventsGenerated ?? null
@@ -711,6 +733,7 @@ module.exports = {
   approvalDeltaCell,
   // Section emitters exported for testing
   emitHeader,
+  emitSnapshotLine,
   emitCityState,
   emitCivicDecisions,
   emitSports,

@@ -80,7 +80,7 @@ New SKILL.md. Charge assembly from slice + `charge_brief_template` (amended per 
 
 ### Task 4: Decoupled review-flow skill *(research-build)*
 New SKILL.md (or amended `/capability-review` chain): Mags EIC read + existing reviewer lanes over a desk's artifacts (~2 at a time), verdict → publish handoff. Same lanes, new decoupled cadence.
-**Status:** [ ] not started
+**Status:** [x] built S313 — `.claude/skills/desk-review/SKILL.md` v1.0 (Mike-approved name). Pass A EIC read (quotes-vs-packet first, REAL-ASKS trace, recalibrated fact checks) → Pass B Rhea + lanes on decoupled cadence → Pass C verdict + dispatch-contract packaging (format footers = the wiki-query gain) → USER APPROVAL GATE unchanged → `/post-publish --type dispatch` (existing matrix already covers it).
 
 ### Task 5: Post-publish fit *(engine-sheet + research-build)*
 Verify `/post-publish` handles per-desk artifacts as-is (it handles all formats today); apply the supermemory-inject fix (current process wrong per Mike S313 — scope at build); confirm engine.46 byline/desk tags cover fork artifacts.
@@ -109,3 +109,4 @@ Run the fork on a live cycle (civic + sports first — the proof desks). Measure
 - 2026-07-11 — Initial capture (S313, research-build). Design grilled with Mike same session (3 rounds); one-doc research→plan ruling recorded; Tasks 1–6 filed; §Extraction awaits Task 1 forensics.
 - 2026-07-11 — Task 1 forensics done (S313, same session): 10 charge-format rules in §Extraction from the S272 artifacts + reconstructed charges; new veer class found (invented reporting interactions); lived-anchor gap resolved structurally by pipeline.43 machinery.
 - 2026-07-11 — Tasks 2+3 built (S313, same session): `/desk-slice` v1.0 new; `/deep-dispatch` rewritten v0.1→v2.0 in place (FIX-don't-ADD — edition-coupled harness already existed). Open: T4 review-flow skill (needs name + green-light), T5 post-publish fit, T6 pilot.
+- 2026-07-11 — Task 4 built (S313, same session): `/desk-review` v1.0. Research-build lane complete (T1–T4); open: T5 (engine-sheet), T6 (media pilot).

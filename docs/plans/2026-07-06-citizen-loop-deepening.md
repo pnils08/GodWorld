@@ -211,11 +211,27 @@ marriage exists only in the marital column, invisible to the wake, conversations
 ---
 
 
-## T13 handoff — speculative spousal pairs (Mike's call, do NOT auto-link)
+## T13 handoff — RESOLVED (Mike-direct S312): do NOT link the speculative pairs
 
-Mutual sole-match, age-gap ≤25, not parent-child — but NO household corroboration, so each is equally plausible as sibling/cousin/parent-child (ParentIds too sparse to trust):
-POP-00027↔POP-00104 Rodriguez | POP-00064↔POP-00518 West | POP-00066↔POP-00310 Carter | POP-00151↔POP-00954 Han | POP-00281↔POP-00942 Adams | POP-00469↔POP-00876 Carmichael | POP-00531↔POP-00815 Nair | POP-00634↔POP-00938 Reed | POP-00807↔POP-00857 Choi | POP-00823↔POP-00867 Wu | POP-00847↔POP-00891 Cabrera | POP-00852↔POP-00896 Morales | POP-00872↔POP-00921 Doan | POP-00877↔POP-00892 Zhou | POP-00918↔POP-00933 Abebe
-Plus 28 ambiguous (multi-candidate / non-mutual) and 355 married citizens with no same-name candidate (off-sample spouses per S248 doctrine — correct as-is).
+**Ruling:** the ledger is the TRACKED sample (Tier 1–4, ~1:448 of a ~300k city); spouses and
+kids are usually Tier-5 off-sample by design. A married ledger citizen with no on-ledger
+spouse is CORRECT, not a gap. Same-surname married pairs are coincidence (siblings, cousins,
+parent-child) unless canon says otherwise. The 14 speculative pairs below are retired —
+listed for the record only. On-ledger couples exist only when canon documents both sides
+(Vinnie↔Amara, Mags↔Robert — the two S312 backfills stand).
+
+**Mechanism note (verified in code):** the engine already enforces this. `checkWedding_`
+(0.2–0.4%/cycle, 1–2 weddings/cycle cap) marries citizens to an IMPLICIT Tier-5 spouse —
+`MaritalStatus` flips, no bond row. A tracked-couple bond forms only when a romantic bond
+already exists between two ledger citizens (`spouseId` path), and none do outside the two
+canon backfills — so tracked citizens will not chain-marry each other over time.
+
+Retired list (record only): Rodriguez POP-00027/00104 | West POP-00064/00518 | Carter
+POP-00066/00310 | Han POP-00151/00954 | Adams POP-00281/00942 | Carmichael POP-00469/00876 |
+Nair POP-00531/00815 | Reed POP-00634/00938 | Choi POP-00807/00857 | Wu POP-00823/00867 |
+Cabrera POP-00847/00891 | Morales POP-00852/00896 | Doan POP-00872/00921 | Zhou
+POP-00877/00892 | Abebe POP-00918/00933. The 355 married citizens with no same-name
+candidate have Tier-5 spouses — correct as-is.
 
 ## Open questions
 

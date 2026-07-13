@@ -78,7 +78,9 @@ async function getRange(api, sheetId, range) {
 async function gatherFacts(api, sheetId, cycle) {
   const facts = { cycle, seeds: [], hoods: [], weather: '', holiday: '' };
 
-  const deck = await getRange(api, sheetId, 'Story_Seed_Deck!A1:O200');
+  // Unbounded row range: the deck is append-only (291+ rows by C132) — a fixed
+  // A1:O200 window silently dropped every seed past row 200 (S317 defect).
+  const deck = await getRange(api, sheetId, 'Story_Seed_Deck!A1:O');
   if (deck.length > 1) {
     const h = deck[0], idx = n => h.indexOf(n);
     facts.seeds = deck.slice(1)

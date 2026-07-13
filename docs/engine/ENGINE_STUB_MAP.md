@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-07-12 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-07-13 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -1036,18 +1036,6 @@
 
 - **trackHomeOwnership_(ss, ctx, cycle)**
 
-### neighborhoodTrajectoryEngine.js (S315, was gentrificationEngine.js)
-- **processNeighborhoodTrajectory_(ctx)**
-  Reads: S.cycleId
-  Config: ctx.config.cycleCount
-
-- **updateNeighborhoodTrajectories_(ctx, cycle)**
-  Writes: S.neighborhoodTrajectory
-  Sheets: Neighborhood_Map (reads texture + MigrationFlow; queueCellIntent_ writes NeighborhoodTrajectory/TrajectoryMomentum/TrajectoryStartCycle/HousingPressure/MedianRent/MedianIncome)
-
-- **emitTrajectoryHooks_(ctx, cycle, neighborhood, prevTrajectory, trajectory, momentum, pressure)**
-  Writes: S.storyHooks (NEIGHBORHOOD_RISING/COOLING/BOOM, HOUSING_PRESSURE_HIGH → Ripple_Ledger)
-
 ### householdFormationEngine.js
 - **processHouseholdFormation_(ctx)**
   Writes: S.householdFormation, S.storyHooks
@@ -1103,10 +1091,36 @@
 - **updateMigrationIntent_(ctx, cycle)**
 
 - **processMigrationEvents_(ctx, cycle)**
+  RNG: ctx.rng / safeRand_(ctx)
+
+- **buildRelocationHoodState_(ctx)**
+  Reads: S.neighborhoodTrajectory
+  Sheets: Neighborhood_Map
+
+- **scoreHoodFit_(unitIncome, hood)**
+
+- **processRelocations_(ctx, cycle)**
+  Writes: S.storyHooks
+  RNG: ctx.rng / safeRand_(ctx)
+
+- **updateHouseholdLedgerMove_(ctx, householdId, destHood, destRent)**
+  Sheets: Household_Ledger
 
 - **checkForDisplacedCitizens_(ctx, cycle)**
 
 - **generateMigrationHooks_(ctx, cycle)**
+  Writes: S.storyHooks
+
+### neighborhoodTrajectoryEngine.js
+- **processNeighborhoodTrajectory_(ctx)**
+  Reads: S.cycleId
+  Config: ctx.config.cycleCount
+
+- **updateNeighborhoodTrajectories_(ctx, cycle)**
+  Writes: S.neighborhoodTrajectory
+  Sheets: Neighborhood_Map
+
+- **emitTrajectoryHooks_(ctx, cycle, neighborhood, prevTrajectory, trajectory, momentum, pressure)**
   Writes: S.storyHooks
 
 ### processAdvancementIntake.js
@@ -1241,6 +1255,7 @@
 - **runYouthEngine_(ctx)**
   Reads: S.absoluteCycle, S.crimeMetrics, S.season, S.simMonth
   Writes: S.youthEvents
+  Sheets: Community_Programs
   RNG: ctx.rng / safeRand_(ctx)
 
 - **getGenericYouth_(ss)**
@@ -1248,7 +1263,8 @@
 
 - **getNamedYouth_(ctx)**
 
-- **generateYouthEventForCitizen_(youth, month, rng, qolContext)**
+- **generateYouthEventForCitizen_(youth, month, rng, qolContext, programsByHood)**
+  RNG: ctx.rng / safeRand_(ctx)
 
 - **generateSchoolWideEvents_(ctx, month, rng)**
   Reads: S.simYear
@@ -1528,6 +1544,14 @@
   RNG: ctx.rng / safeRand_(ctx)
 
 - **contractSeedPickCitizens_(index, targetPops, hood, causeType, usedPop, max, roll)**
+
+- **contractSeedJournalist_(domain)**
+
+- **contractSeedBackdropIndex_(ctx)**
+  Sheets: Business_Ledger, Community_Programs, Faith_Organizations
+  RNG: ctx.rng / safeRand_(ctx)
+
+- **contractSeedBackdropDraw_(pool, excludeKeys, used, fillN, roll)**
   Reads: S.contractSeeds, S.rippleEvents
 
 - **buildContractSeeds_(ctx)**
@@ -1539,7 +1563,7 @@
 ### buildContractSeeds.test.js
 - **assert(name, cond)**
 
-- **fakeSS(rows)**
+- **fakeSS(rows, extraSheets)**
   Reads: S.contractSeeds
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -1548,6 +1572,7 @@
   Reads: S.cityDynamics, S.cycleId, S.economicMood, S.eveningSports, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
   Writes: S.famousPeople, S.famousSightings, S.famousSightingsContext
   Config: ctx.config.cycleCount
+  Sheets: Business_Ledger
   RNG: ctx.rng / safeRand_(ctx)
 
 ### buildEveningFood.js
@@ -3062,4 +3087,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 178
-**Functions mapped:** 1052
+**Functions mapped:** 1058

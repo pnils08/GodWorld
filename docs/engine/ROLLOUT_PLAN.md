@@ -114,7 +114,8 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.34 | Ledger is a representative sample | parked | engine-sheet | [[../plans/2026-06-14-ledger-representative-sample-migration-removal]] — detail in pointer (relocated 2026-07-02) |
 | engine.35 | Story_Seed_Deck → engine-emergent, attributed, desk-ready story surface | in-progress | engine-sheet | [[../plans/2026-06-15-story-seed-deck-engine-emergence]] — detail in pointer (relocated 2026-07-02) |
 | engine.36 | Isolated staging environment | parked | engine-sheet | [[ENGINE_REPAIR]] — detail in pointer (relocated 2026-07-02) |
-| engine.54 | Neighborhood trajectory system (gentrification block repurposed) + v3 writer clobber fix | built — sandbox cycle test pending, prod clasp held behind C102 gate | engine-sheet | S315 commit + [[ENGINE_COUPLING_MAP]] §neighborhoodTrajectoryEngine |
+| engine.54 | Neighborhood trajectory system (gentrification block repurposed) + v3 writer clobber fix | built — sandbox-verified C127+C128 (S316), prod clasp held behind C102 gate | engine-sheet | S315 commit + [[ENGINE_COUPLING_MAP]] §neighborhoodTrajectoryEngine |
+| engine.55 | Intra-city relocation — households sort toward economically-fitting neighborhoods (AN–AP live) | built — 28/28 tests, sandbox cycle test pending, rides the held prod clasp batch | engine-sheet | [[../plans/2026-07-12-engine55-intra-city-relocation]] |
 | research.13 | Citizen-autonomous PoC | needs-info | research-build | [[../plans/2026-05-31-citizen-autonomous-poc]] — detail in pointer (relocated 2026-07-02) |
 | research.14 | Citizen-loop Phase 2 | in-progress | engine-sheet | [[../plans/2026-06-04-mags-citizen-loop]] — detail in pointer (relocated 2026-07-02) |
 | research.16 | Tier-1 character voice agents | in-progress | research-build + engine-sheet | [[../plans/2026-06-16-tier1-character-voice-agents]] — detail in pointer (relocated 2026-07-02) |

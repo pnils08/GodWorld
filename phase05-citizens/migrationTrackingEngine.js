@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * MIGRATION TRACKING ENGINE v1.1
+ * MIGRATION TRACKING ENGINE v1.2
  * ============================================================================
  *
  * Tracks individual migration decisions, displacement risk, and migration events.
@@ -9,9 +9,15 @@
  *
  * Features:
  * - Displacement risk assessment (0-10 scale)
- * - Migration intent tracking (staying → considering → planning-to-leave → left)
+ * - Migration intent tracking (staying → considering → planning-to-leave)
  * - Migration reason detection (job, family, cost, crime, opportunity, displaced)
- * - Migration event logging (moved-in, moved-out, moved-within, returned)
+ * - Intra-city relocation (v1.2 / engine.55 S316): the intent ladder resolves
+ *   as moved-within — whole households sort toward economically-fitting
+ *   neighborhoods (pressure lane sorts down, misfit lane sorts up), scored
+ *   against same-cycle trajectory state (rent/income/pressure/trajectory)
+ *   from Phase5-Trajectory. Fills AN-AQ (MigrationReason / Destination /
+ *   MigratedCycle) which were dead since Week 4. Nodes stay permanent —
+ *   every move is inside the canonical Neighborhood_Map node set.
  * - Push/pull factor analysis
  *
  * v1.1 Phase 42 §5.6 alignment (S200):
@@ -42,6 +48,7 @@
  * - FORCED_MIGRATION (severity 7): Citizen displaced by rent/eviction
  * - MASS_EXODUS (severity 8): 5+ citizens leave same neighborhood in one cycle
  * - RETURN_MIGRATION (severity 4): Citizen returns to Oakland after leaving
+ * - CITIZEN_RELOCATED (severity 5): unit completed an intra-city move (engine.55)
  *
  * ============================================================================
  */
@@ -88,6 +95,22 @@ var RISK_WEIGHTS = {
   NO_COLLEGE: 2,              // No bachelor degree
   SENIOR: 1,                  // Age >65
   RENT_INCREASE_SEVERE: 5     // Rent increase >20% in 1 year
+};
+
+// engine.55 — intra-city relocation (S316). Resolves the intent ladder WITHIN
+// the permanent-nodes rule: planning-to-leave -> moved-within, never an exit.
+// Citizens spawn into random neighborhoods at ingest; this is the slow-burn
+// sorter that moves them (whole household as one unit) toward neighborhoods
+// their economic life actually fits, using the same-cycle trajectory state
+// exported by Phase5-Trajectory (ctx.summary.neighborhoodTrajectory).
+var RELOCATION = {
+  MAX_UNITS_PER_CYCLE: 2,     // hard cap — moves are rare, qualitative (1:438 sample)
+  PRESSURE_MOVE_CHANCE: 0.35, // per-cycle roll for planning-to-leave units
+  MISFIT_MOVE_CHANCE: 0.15,   // per-cycle roll for economic-misfit units (slower burn)
+  MISFIT_INCOME_RATIO: 2.5,   // unit income >= 2.5x hood median income = under-housed
+  MAX_BURDEN: 0.40,           // never move where rent > 40% of monthly income
+  TARGET_BURDEN: 0.30,        // affordability scoring peak (rent = 30% of monthly income)
+  MIN_SCORE_GAIN: 1.5         // destination must beat current hood by this margin
 };
 
 
@@ -265,14 +288,30 @@ function buildHouseholdRentBurdenMap_(ss) {
     var idx = function(n) { return header.indexOf(n); };
     var iHouseholdId = idx('HouseholdId');
     var iRentBurden = idx('RentBurdenPct');
+    // engine.55 fix: live Household_Ledger has no RentBurdenPct column — the
+    // burden signal was silently zero since Week 4. Fall back to computing it
+    // from MonthlyRent + HouseholdIncome, which the sheet does carry.
+    var iRent = idx('MonthlyRent');
+    var iIncome = idx('HouseholdIncome');
+    var iStatus = idx('Status');
 
-    if (iHouseholdId < 0 || iRentBurden < 0) return {};
+    if (iHouseholdId < 0) return {};
+    if (iRentBurden < 0 && (iRent < 0 || iIncome < 0)) return {};
 
     var map = {};
     for (var r = 0; r < rows.length; r++) {
       var row = rows[r];
       var householdId = row[iHouseholdId];
-      var rentBurden = Number(row[iRentBurden]) || 0;
+      if (!householdId) continue;
+      if (iStatus >= 0 && String(row[iStatus]).toLowerCase() === 'dissolved') continue;
+      var rentBurden = 0;
+      if (iRentBurden >= 0) {
+        rentBurden = Number(row[iRentBurden]) || 0;
+      } else {
+        var mRent = Number(row[iRent]) || 0;
+        var hhIncome = Number(row[iIncome]) || 0;
+        if (mRent > 0 && hhIncome > 0) rentBurden = Math.round((mRent * 12 / hhIncome) * 100);
+      }
       map[householdId] = rentBurden;
     }
 
@@ -342,20 +381,255 @@ function updateMigrationIntent_(ctx, cycle) {
 // ════════════════════════════════════════════════════════════════════════════
 
 function processMigrationEvents_(ctx, cycle) {
-  // For now, this is a placeholder
-  // Future enhancement: Process actual migration events from other systems
-  // (career changes, household dissolution, crime events, etc.)
-
+  // engine.55 (S316): the placeholder is now the intra-city relocation engine.
   var results = {
     events: 0,
     displaced: 0
   };
+
+  // Execute intra-city moves (moved-within — nodes permanent, no exits)
+  var moves = processRelocations_(ctx, cycle);
+  results.events = moves.moved;
 
   // Check for citizens with very high displacement risk
   var displaced = checkForDisplacedCitizens_(ctx, cycle);
   results.displaced = displaced.count;
 
   return results;
+}
+
+
+// ════════════════════════════════════════════════════════════════════════════
+// INTRA-CITY RELOCATION (engine.55, S316)
+// ════════════════════════════════════════════════════════════════════════════
+//
+// Two eligibility lanes, one shared per-cycle cap:
+//   PRESSURE lane — intent 'planning-to-leave' (risk >= 8): priced-out units
+//     sort DOWN toward affordable neighborhoods.
+//   MISFIT lane — unit income >= MISFIT_INCOME_RATIO x current hood median:
+//     under-housed units sort UP. This corrects random neighborhood assignment
+//     at ingest without needing displacement pressure.
+// A unit = a household (all SL rows sharing HouseholdId move together, and the
+// Household_Ledger row re-prices to the destination median rent) or a single
+// citizen with no HouseholdId. Destination scoring is deterministic; only the
+// move-roll consumes ctx.rng.
+
+function buildRelocationHoodState_(ctx) {
+  // Prefer the same-cycle export from Phase5-Trajectory (runs immediately
+  // before this engine; its sheet intents don't commit until Phase 10).
+  var S = ctx.summary || {};
+  var out = {};
+  var fromSummary = S.neighborhoodTrajectory || null;
+  if (fromSummary) {
+    for (var hood in fromSummary) {
+      var t = fromSummary[hood];
+      if (t && t.rent !== null && t.rent > 0 && t.income !== null && t.income > 0) {
+        out[hood] = { trajectory: t.trajectory, pressure: t.pressure, rent: t.rent, income: t.income };
+      }
+    }
+    return out;
+  }
+  // Fallback (manual/operator runs without Phase5-Trajectory): last-committed
+  // Neighborhood_Map state, direct read (own-tracking sheet, documented exception).
+  var sheet = ctx.ss.getSheetByName('Neighborhood_Map');
+  if (!sheet) return out;
+  var values = sheet.getDataRange().getValues();
+  if (values.length < 2) return out;
+  var header = values[0];
+  var idx = function(n) { return header.indexOf(n); };
+  var iHood = idx('Neighborhood'), iTraj = idx('NeighborhoodTrajectory'),
+      iPress = idx('HousingPressure'), iRent = idx('MedianRent'), iIncome = idx('MedianIncome');
+  if (iHood < 0 || iRent < 0 || iIncome < 0) return out;
+  for (var r = 1; r < values.length; r++) {
+    var row = values[r];
+    var rent = Number(row[iRent]) || 0, income = Number(row[iIncome]) || 0;
+    if (!row[iHood] || rent <= 0 || income <= 0) continue;
+    out[row[iHood]] = {
+      trajectory: String(row[iTraj] || 'steady').toLowerCase(),
+      pressure: iPress >= 0 ? (Number(row[iPress]) || 0) : 0,
+      rent: rent,
+      income: income
+    };
+  }
+  return out;
+}
+
+function scoreHoodFit_(unitIncome, hood) {
+  // Deterministic fit score for a unit in a neighborhood. Higher = better fit.
+  var monthly = unitIncome / 12;
+  if (monthly <= 0) return null;
+  var burden = hood.rent / monthly;
+  var score = 0;
+  // Affordability: peak at TARGET_BURDEN, falls off both directions
+  score += Math.max(0, 4 - Math.abs(burden - RELOCATION.TARGET_BURDEN) * 20);
+  // Trajectory: growth pulls, decay repels
+  if (hood.trajectory === 'growth') score += 1.5;
+  else if (hood.trajectory === 'decay') score -= 2;
+  // Don't move into the same pressure trap
+  score -= hood.pressure / 4;
+  // Class alignment: income proximity to hood median
+  score += Math.max(0, 3 - Math.abs(unitIncome - hood.income) / 25000);
+  return { score: score, burden: burden };
+}
+
+function processRelocations_(ctx, cycle) {
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  if (!rows.length) return { moved: 0 };
+
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : function() {
+    throw new Error('processRelocations_: ctx.rng required (no Math.random fallback)');
+  };
+
+  var hoods = buildRelocationHoodState_(ctx);
+  var hoodNames = Object.keys(hoods).sort(); // sorted — deterministic iteration
+  if (hoodNames.length < 2) return { moved: 0 };
+
+  var idx = function(n) { return header.indexOf(n); };
+  var iPOPID = idx('POPID'), iFirst = idx('First'), iLast = idx('Last'),
+      iStatus = idx('Status'), iNeighborhood = idx('Neighborhood'),
+      iIncome = idx('Income'), iHouseholdId = idx('HouseholdId'),
+      iDisplRisk = idx('DisplacementRisk'), iMigIntent = idx('MigrationIntent'),
+      iMigReason = idx('MigrationReason'), iMigDest = idx('MigrationDestination'),
+      iMigCycle = idx('MigratedCycle');
+  if (iNeighborhood < 0 || iIncome < 0 || iMigIntent < 0) return { moved: 0 };
+
+  // ── Build move units: household groups + solo citizens, in row order ──────
+  var units = [];       // { key, rowIdxs[], hood, income, planning, maxRisk }
+  var byHousehold = {}; // householdId -> unit
+  for (var r = 0; r < rows.length; r++) {
+    var row = rows[r];
+    if (String(row[iStatus] || 'active').toLowerCase() === 'deceased') continue;
+    var hood = row[iNeighborhood] || '';
+    if (!hoods[hood]) continue; // no canonical hood state -> not movable
+    var hhId = iHouseholdId >= 0 ? (row[iHouseholdId] || '') : '';
+    var income = Number(row[iIncome]) || 0;
+    var planning = String(row[iMigIntent] || '').toLowerCase() === MIGRATION_INTENT.PLANNING;
+    var risk = iDisplRisk >= 0 ? (Number(row[iDisplRisk]) || 0) : 0;
+    if (hhId) {
+      var u = byHousehold[hhId];
+      if (!u) {
+        u = { key: hhId, rowIdxs: [], hood: hood, income: 0, planning: false, maxRisk: 0 };
+        byHousehold[hhId] = u;
+        units.push(u);
+      }
+      if (u.hood !== hood) continue; // split household across hoods — leave alone
+      u.rowIdxs.push(r);
+      u.income += income; // unit income = summed member income
+      u.planning = u.planning || planning;
+      u.maxRisk = Math.max(u.maxRisk, risk);
+    } else {
+      units.push({ key: 'POP:' + (row[iPOPID] || r), rowIdxs: [r], hood: hood,
+                   income: income, planning: planning, maxRisk: risk });
+    }
+  }
+
+  // ── Eligibility + roll + cap ──────────────────────────────────────────────
+  var moved = 0;
+  for (var u2 = 0; u2 < units.length && moved < RELOCATION.MAX_UNITS_PER_CYCLE; u2++) {
+    var unit = units[u2];
+    if (unit.income <= 0 || !unit.rowIdxs.length) continue;
+
+    var current = hoods[unit.hood];
+    var misfit = unit.income >= current.income * RELOCATION.MISFIT_INCOME_RATIO;
+    var lane = unit.planning ? 'pressure' : (misfit ? 'misfit' : null);
+    if (!lane) continue;
+
+    var chance = lane === 'pressure' ? RELOCATION.PRESSURE_MOVE_CHANCE : RELOCATION.MISFIT_MOVE_CHANCE;
+    if (rng() >= chance) continue;
+
+    // ── Destination: best deterministic fit, must clear current by margin ──
+    var currentFit = scoreHoodFit_(unit.income, current);
+    if (!currentFit) continue;
+    var best = null, bestName = '';
+    for (var h = 0; h < hoodNames.length; h++) {
+      var name = hoodNames[h];
+      if (name === unit.hood) continue;
+      var fit = scoreHoodFit_(unit.income, hoods[name]);
+      if (!fit || fit.burden > RELOCATION.MAX_BURDEN) continue;
+      if (!best || fit.score > best.score) { best = fit; bestName = name; }
+    }
+    if (!best || best.score < currentFit.score + RELOCATION.MIN_SCORE_GAIN) continue;
+
+    // ── Reason (enum) + narrative phrase ──────────────────────────────────
+    var reason, phrase;
+    if (unit.maxRisk >= 9) {
+      reason = MIGRATION_REASONS.DISPLACED;
+      phrase = 'displaced from ' + unit.hood + ' (risk ' + unit.maxRisk + '/10)';
+    } else if (lane === 'pressure') {
+      reason = MIGRATION_REASONS.COST;
+      phrase = 'priced out of ' + unit.hood;
+    } else {
+      reason = MIGRATION_REASONS.OPPORTUNITY;
+      phrase = 'moving up from ' + unit.hood;
+    }
+
+    // ── Execute: mutate every member row in ctx.ledger (Phase 10 commits) ──
+    for (var m = 0; m < unit.rowIdxs.length; m++) {
+      var mRow = rows[unit.rowIdxs[m]];
+      mRow[iNeighborhood] = bestName;
+      mRow[iMigIntent] = MIGRATION_INTENT.STAYING;
+      if (iMigReason >= 0) mRow[iMigReason] = reason;
+      if (iMigDest >= 0) mRow[iMigDest] = bestName;
+      if (iMigCycle >= 0) mRow[iMigCycle] = cycle;
+    }
+    ctx.ledger.dirty = true;
+
+    // Household_Ledger: move + re-price (own-tracking sheet, documented exception)
+    if (unit.key.indexOf('POP:') !== 0) {
+      updateHouseholdLedgerMove_(ctx, unit.key, bestName, hoods[bestName].rent);
+    }
+
+    // ── Hook: the newsroom sees every move with its why ────────────────────
+    var headRow = rows[unit.rowIdxs[0]];
+    var who = ((headRow[iFirst] || '') + ' ' + (headRow[iLast] || '')).trim() || unit.key;
+    if (unit.rowIdxs.length > 1) who = 'The ' + (headRow[iLast] || who) + ' household (' + unit.rowIdxs.length + ')';
+    ctx.summary.storyHooks = ctx.summary.storyHooks || [];
+    var moveHook = {
+      hookType: 'CITIZEN_RELOCATED',
+      severity: 5,
+      description: who + ' moved from ' + unit.hood + ' to ' + bestName + ' — ' + phrase,
+      cycleGenerated: cycle,
+      popid: headRow[iPOPID],
+      neighborhood: bestName,
+      fromNeighborhood: unit.hood,
+      reason: reason,
+      eventType: EVENT_TYPES.MOVED_WITHIN
+    };
+    ctx.summary.storyHooks.push(moveHook);
+    if (typeof recordHookRipple_ === 'function') recordHookRipple_(ctx, 'migration', moveHook, 'migrationTrackingEngine');
+
+    moved++;
+  }
+
+  if (moved > 0) Logger.log('processRelocations_: ' + moved + ' unit(s) relocated');
+  return { moved: moved };
+}
+
+function updateHouseholdLedgerMove_(ctx, householdId, destHood, destRent) {
+  // Direct write to own-tracking sheet — documented exception class
+  // (engine.md Phase 5 citizen life engines: migrationTrackingEngine).
+  try {
+    var sheet = ctx.ss.getSheetByName('Household_Ledger');
+    if (!sheet) return;
+    var values = sheet.getDataRange().getValues();
+    if (values.length < 2) return;
+    var header = values[0];
+    var idx = function(n) { return header.indexOf(n); };
+    var iHH = idx('HouseholdId'), iHood = idx('Neighborhood'),
+        iRent = idx('MonthlyRent'), iStatus = idx('Status'), iUpdated = idx('LastUpdated');
+    if (iHH < 0) return;
+    for (var r = 1; r < values.length; r++) {
+      if (values[r][iHH] !== householdId) continue;
+      if (iStatus >= 0 && String(values[r][iStatus]).toLowerCase() === 'dissolved') continue;
+      if (iHood >= 0) sheet.getRange(r + 1, iHood + 1).setValue(destHood);
+      if (iRent >= 0 && destRent > 0) sheet.getRange(r + 1, iRent + 1).setValue(destRent);
+      if (iUpdated >= 0 && ctx.now) sheet.getRange(r + 1, iUpdated + 1).setValue(ctx.now);
+      return;
+    }
+  } catch (err) {
+    Logger.log('updateHouseholdLedgerMove_: ' + err);
+  }
 }
 
 function checkForDisplacedCitizens_(ctx, cycle) {

@@ -201,14 +201,19 @@ Every column is a data point in someone's life. This maps who writes each column
 
 ### Migration (AL–AQ)
 
+engine.55 (S316): AN–AP went live with intra-city relocation — the intent
+ladder resolves as moved-within (whole household units sort toward
+economically-fitting neighborhoods, max 2 units/cycle). Nodes permanent:
+Neighborhood only ever changes to another canonical Neighborhood_Map node.
+
 | Col | # | Header | Valid Values | Writers | Readers |
 |-----|---|--------|-------------|---------|---------|
-| AL | 38 | DisplacementRisk | Numeric risk score | migrationTrackingEngine | buildCivicVoicePackets, buildInitiativePackets |
-| AM | 39 | MigrationIntent | Boolean flag | migrationTrackingEngine | buildCivicVoicePackets, buildInitiativePackets |
-| AN | 40 | MigrationReason | Text | migrationTrackingEngine | — |
-| AO | 41 | MigrationDestination | Location text | migrationTrackingEngine | — |
-| AP | 42 | MigratedCycle | Cycle number | migrationTrackingEngine | — |
-| AQ | 43 | ReturnedCycle | Cycle number | migrationTrackingEngine | — |
+| AL | 38 | DisplacementRisk | 0–10 risk score | migrationTrackingEngine | buildCivicVoicePackets, buildInitiativePackets, generateCitizensEvents |
+| AM | 39 | MigrationIntent | staying / considering / planning-to-leave | migrationTrackingEngine | buildCivicVoicePackets, buildInitiativePackets |
+| AN | 40 | MigrationReason | job / family / cost / crime / opportunity / displaced | migrationTrackingEngine (relocation, engine.55) | — |
+| AO | 41 | MigrationDestination | Canonical neighborhood name | migrationTrackingEngine (relocation, engine.55) | — |
+| AP | 42 | MigratedCycle | Cycle number of last intra-city move | migrationTrackingEngine (relocation, engine.55) | — |
+| AQ | 43 | ReturnedCycle | Cycle number (legacy — no writer since exit states removed S313) | — | — |
 
 ### Economic Links (AR–AT)
 

@@ -215,28 +215,35 @@ function updateNeighborhoodTrajectories_(ctx, cycle) {
     }
 
     // ── Rent/income drift: trajectory makes these living columns ────────────
-    if (iRent >= 0 && row[iRent] !== '' && !isNaN(Number(row[iRent]))) {
+    // rentNow/incomeNow carry the post-drift values into the summary payload so
+    // same-cycle consumers (Phase5-MigrationTracking relocation scoring) see
+    // this cycle's numbers — the queued cell intents don't commit until Phase 10.
+    var rentNow = (iRent >= 0 && row[iRent] !== '' && !isNaN(Number(row[iRent]))) ? Number(row[iRent]) : null;
+    if (rentNow !== null) {
       var rentFactor = 0;
       if (trajectory === TRAJECTORY_STATES.GROWTH) rentFactor = TRAJECTORY_DRIFT.RENT_GROWTH;
       else if (trajectory === TRAJECTORY_STATES.DECAY) rentFactor = TRAJECTORY_DRIFT.RENT_DECAY;
       if (pressure >= 8) rentFactor += TRAJECTORY_DRIFT.RENT_PRESSURE_KICKER;
       if (rentFactor !== 0) {
-        var newRent = Math.round(Number(row[iRent]) * (1 + rentFactor));
-        if (newRent !== Number(row[iRent])) {
+        var newRent = Math.round(rentNow * (1 + rentFactor));
+        if (newRent !== rentNow) {
           queueCellIntent_(ctx, 'Neighborhood_Map', sheetRow, iRent + 1, newRent,
             'trajectory rent drift', 'civic');
+          rentNow = newRent;
         }
       }
     }
-    if (iIncome >= 0 && row[iIncome] !== '' && !isNaN(Number(row[iIncome]))) {
+    var incomeNow = (iIncome >= 0 && row[iIncome] !== '' && !isNaN(Number(row[iIncome]))) ? Number(row[iIncome]) : null;
+    if (incomeNow !== null) {
       var incFactor = 0;
       if (trajectory === TRAJECTORY_STATES.GROWTH) incFactor = TRAJECTORY_DRIFT.INCOME_GROWTH;
       else if (trajectory === TRAJECTORY_STATES.DECAY) incFactor = TRAJECTORY_DRIFT.INCOME_DECAY;
       if (incFactor !== 0) {
-        var newIncome = Math.round(Number(row[iIncome]) * (1 + incFactor));
-        if (newIncome !== Number(row[iIncome])) {
+        var newIncome = Math.round(incomeNow * (1 + incFactor));
+        if (newIncome !== incomeNow) {
           queueCellIntent_(ctx, 'Neighborhood_Map', sheetRow, iIncome + 1, newIncome,
             'trajectory income drift', 'civic');
+          incomeNow = newIncome;
         }
       }
     }
@@ -245,7 +252,9 @@ function updateNeighborhoodTrajectories_(ctx, cycle) {
       trajectory: trajectory,
       score: score,
       momentum: momentum,
-      pressure: pressure
+      pressure: pressure,
+      rent: rentNow,      // post-drift, this cycle (engine.55 relocation scoring)
+      income: incomeNow   // post-drift, this cycle
     };
 
     // ── Story hooks ─────────────────────────────────────────────────────────

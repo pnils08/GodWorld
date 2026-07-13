@@ -53,6 +53,13 @@ sandbox is the intended target for anything unverified.
   Script ID + the project `.claspignore`, `CLAUDE_CTL=1 npx clasp push -f`. The production
   `.clasp.json` at repo root is never touched. (Route defined in
   [[../plans/2026-07-04-ripple-ledger-attribution]] §Sandbox identity.)
+  **⚠️ `.clasp.json` is GIT-TRACKED with the PRODUCTION script ID** — any repo-copy step
+  (`git archive | tar -x`, `cp -r`, `rsync`) lands the production ID in the staging dir.
+  Writing the sandbox `.clasp.json` must be the LAST step before push, and every sandbox
+  push is preceded by verifying the staged file carries the sandbox ID
+  (`grep 1bT3o5r6 .clasp.json`). S316 incident: a re-extract over an existing staging dir
+  silently restored the production ID and one sandbox-intended push landed on the
+  production script.
 - **Node scripts against the sandbox:** `GODWORLD_SHEET_ID` in the env points at
   **production** — always pass the sandbox explicitly, e.g.
   `node scripts/draftContentRows.js --cycle {XX} --apply --sheet-id 1syShVWfudY0eCC9rnR7AWZ8-b-fs5RpJW2bhn6nZtzs`

@@ -6,8 +6,11 @@
  * scripts/engine32MultiCycle.test.js) and asserts:
  *
  *   A1  trajectory summary payload carries same-cycle rent/income (post-drift)
- *   A2  rent-burden fallback — Household_Ledger without RentBurdenPct still
- *       yields burden from MonthlyRent + HouseholdIncome (risk moves)
+ *   A2  rent-burden signal — burden computed from MonthlyRent + income
+ *       (RentBurdenPct never existed in the live sheet)
+ *   A2b owners exempt from rent burden (S316 C129 fix)
+ *   A2c live member income sum beats stale HouseholdIncome (S316 C129 fix)
+ *   A10 MASS_EXODUS counts planning intent, not raw risk>=7 (S316 C129 fix)
  *   A3  pressure lane — planning household moves as one unit toward an
  *       affordable hood: every member row re-hooded, AN-AQ stamped
  *       (reason/destination/cycle), intent resets to staying, and the
@@ -168,6 +171,56 @@ console.log('A2 rent-burden fallback (no RentBurdenPct column)');
   const riskB = slB[0][col('DisplacementRisk')];
   assert('burdened household risk > identical no-household risk', riskA === riskB + 5,
     `withHH ${riskA} vs without ${riskB}`);
+}
+
+// ═══ A2b: owners pay no rent burden ══════════════════════════════════════════
+console.log('A2b owner household exempt from rent burden');
+{
+  rippleCalls = []; cellIntents = [];
+  const hh = [['HH-T2', 'POP-3', 'family', '["POP-3"]', 'Middleton', 'owned', 2600, 0, 40000, 100, '', 'active', '', '']];
+  const sl = [citizen('POP-3', 'Own', 'Er', 'Middleton', 40000, { hh: 'HH-T2', edu: 'bachelors' })];
+  const ctx = buildCtx(sl, hh, () => 0.99);
+  runBoth(ctx);
+  assert('owner gets zero burden risk', sl[0][col('DisplacementRisk')] === 0,
+    String(sl[0][col('DisplacementRisk')]));
+}
+
+// ═══ A2c: stale ledger income ignored when live member income exists ═════════
+console.log('A2c live member income beats stale HouseholdIncome');
+{
+  rippleCalls = []; cellIntents = [];
+  // Ledger says 50k (formation-seeded), member actually earns 192k.
+  // Rent 4204 rented: stale burden 101% (+5 risk); live burden 26% (0).
+  const hh = [['HH-T3', 'POP-4', 'single', '["POP-4"]', 'Middleton', 'rented', 4204, 0, 50000, 100, '', 'active', '', '']];
+  const sl = [citizen('POP-4', 'Ste', 'Phan', 'Middleton', 192245, { hh: 'HH-T3', edu: 'masters' })];
+  const ctx = buildCtx(sl, hh, () => 0.99);
+  runBoth(ctx);
+  assert('high earner not flagged off stale ledger income', sl[0][col('DisplacementRisk')] === 0,
+    String(sl[0][col('DisplacementRisk')]));
+}
+
+// ═══ A10: MASS_EXODUS counts planning intent, not raw risk ═══════════════════
+console.log('A10 MASS_EXODUS threshold on planning intent');
+{
+  rippleCalls = []; cellIntents = [];
+  // 5 renters in Middleton at burden>50% + no-college + senior = risk 8 ->
+  // planning. 5 more without senior = risk 7 -> considering (must NOT count).
+  const hh = [], sl = [];
+  for (let i = 0; i < 10; i++) {
+    const hhId = 'HH-E' + i;
+    hh.push([hhId, 'POP-8' + i, 'single', '[]', 'Middleton', 'rented', 2600, 0, 40000, 100, '', 'active', '', '']);
+    sl.push(citizen('POP-8' + i, 'Ex', 'Od' + i, 'Middleton', 40000,
+      { hh: hhId, edu: 'hs-diploma', birthYear: i < 5 ? 1970 : 2000 }));
+  }
+  const ctx = buildCtx(sl, hh, () => 0.99); // no relocation rolls pass
+  runBoth(ctx);
+  const planning = sl.filter(r => r[col('MigrationIntent')] === 'planning-to-leave').length;
+  assert('exactly 5 planning (seniors)', planning === 5, String(planning));
+  const exodus = ctx.summary.storyHooks.filter(h => h.hookType === 'MASS_EXODUS');
+  assert('one MASS_EXODUS for Middleton', exodus.length === 1 && exodus[0].neighborhood === 'Middleton',
+    JSON.stringify(exodus.map(h => h.neighborhood)));
+  assert('exodus count = planning count, not risk>=7 count', exodus[0].atRiskCount === 5,
+    String(exodus[0].atRiskCount));
 }
 
 // ═══ A3: pressure lane — household moves as a unit ═══════════════════════════

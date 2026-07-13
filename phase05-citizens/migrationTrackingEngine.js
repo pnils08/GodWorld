@@ -184,10 +184,26 @@ function assessDisplacementRisk_(ctx, cycle) {
   // Load neighborhood housing pressure (Neighborhood_Map — direct read)
   var neighborhoodPressure = buildNeighborhoodPressureMap_(ss);
 
-  // Load household rent burden (Household_Ledger — direct read; if Week 1 deployed)
-  var householdRentBurden = {};
+  // Load household housing facts (Household_Ledger — direct read; if Week 1 deployed)
+  var householdHousing = {};
   if (iHouseholdId >= 0) {
-    householdRentBurden = buildHouseholdRentBurdenMap_(ss);
+    householdHousing = buildHouseholdHousingMap_(ss);
+  }
+
+  // S316 fix: Household_Ledger.HouseholdIncome is seeded at formation and goes
+  // stale (C129 audit: 123/276 active households under half their members'
+  // live SL income sum — a 192k earner got "priced out" off a 50k ledger
+  // value). Burden uses the LIVE member income sum; ledger income is fallback.
+  var iIncome = idx('Income');
+  var liveIncomeByHH = {};
+  if (iHouseholdId >= 0 && iIncome >= 0) {
+    for (var li = 0; li < simRows.length; li++) {
+      var liRow = simRows[li];
+      if ((liRow[iStatus] || 'active').toString().toLowerCase() === 'deceased') continue;
+      var liHH = liRow[iHouseholdId];
+      if (!liHH) continue;
+      liveIncomeByHH[liHH] = (liveIncomeByHH[liHH] || 0) + (Number(liRow[iIncome]) || 0);
+    }
   }
 
   var assessed = 0;
@@ -212,11 +228,18 @@ function assessDisplacementRisk_(ctx, cycle) {
     var pressure = neighborhoodPressure[neighborhood] || 0;
     risk += Math.floor(pressure / 2); // Pressure 8 → +4 risk
 
-    // Rent burden (if household data available)
-    if (householdId && householdRentBurden[householdId]) {
-      var rentBurden = householdRentBurden[householdId];
-      if (rentBurden > 50) risk += RISK_WEIGHTS.RENT_BURDEN_HIGH;
-      if (rentBurden > 30) risk += 1;
+    // Rent burden — renters only (S316 fix: owners were getting +5 risk off
+    // a housing cost they don't pay as rent), live member income sum first
+    if (householdId && householdHousing[householdId]) {
+      var hInfo = householdHousing[householdId];
+      if (hInfo.housingType !== 'owned' && hInfo.rent > 0) {
+        var annualIncome = liveIncomeByHH[householdId] || hInfo.ledgerIncome || 0;
+        if (annualIncome > 0) {
+          var rentBurden = Math.round((hInfo.rent * 12 / annualIncome) * 100);
+          if (rentBurden > 50) risk += RISK_WEIGHTS.RENT_BURDEN_HIGH;
+          if (rentBurden > 30) risk += 1;
+        }
+      }
     }
 
     // Education (no college = higher risk)
@@ -274,7 +297,12 @@ function buildNeighborhoodPressureMap_(ss) {
   return map;
 }
 
-function buildHouseholdRentBurdenMap_(ss) {
+function buildHouseholdHousingMap_(ss) {
+  // engine.55 (S316): raw housing facts per household. The caller computes
+  // burden against LIVE member income (Household_Ledger.HouseholdIncome is
+  // formation-seeded and stale — kept only as fallback). The original
+  // RentBurdenPct read was dead — that column never existed in the live sheet,
+  // so the burden signal was silently zero since Week 4.
   var sheet = ss.getSheetByName('Household_Ledger');
   if (!sheet) return {};
 
@@ -287,16 +315,12 @@ function buildHouseholdRentBurdenMap_(ss) {
 
     var idx = function(n) { return header.indexOf(n); };
     var iHouseholdId = idx('HouseholdId');
-    var iRentBurden = idx('RentBurdenPct');
-    // engine.55 fix: live Household_Ledger has no RentBurdenPct column — the
-    // burden signal was silently zero since Week 4. Fall back to computing it
-    // from MonthlyRent + HouseholdIncome, which the sheet does carry.
     var iRent = idx('MonthlyRent');
     var iIncome = idx('HouseholdIncome');
+    var iType = idx('HousingType');
     var iStatus = idx('Status');
 
-    if (iHouseholdId < 0) return {};
-    if (iRentBurden < 0 && (iRent < 0 || iIncome < 0)) return {};
+    if (iHouseholdId < 0 || iRent < 0) return {};
 
     var map = {};
     for (var r = 0; r < rows.length; r++) {
@@ -304,15 +328,11 @@ function buildHouseholdRentBurdenMap_(ss) {
       var householdId = row[iHouseholdId];
       if (!householdId) continue;
       if (iStatus >= 0 && String(row[iStatus]).toLowerCase() === 'dissolved') continue;
-      var rentBurden = 0;
-      if (iRentBurden >= 0) {
-        rentBurden = Number(row[iRentBurden]) || 0;
-      } else {
-        var mRent = Number(row[iRent]) || 0;
-        var hhIncome = Number(row[iIncome]) || 0;
-        if (mRent > 0 && hhIncome > 0) rentBurden = Math.round((mRent * 12 / hhIncome) * 100);
-      }
-      map[householdId] = rentBurden;
+      map[householdId] = {
+        rent: Number(row[iRent]) || 0,
+        housingType: iType >= 0 ? String(row[iType] || '').toLowerCase() : '',
+        ledgerIncome: iIncome >= 0 ? (Number(row[iIncome]) || 0) : 0
+      };
     }
 
     return map;
@@ -701,8 +721,11 @@ function generateMigrationHooks_(ctx, cycle) {
     var displRisk = Number(row[iDisplRisk]) || 0;
     var migIntent = (row[iMigIntent] || 'staying').toString().toLowerCase();
 
-    // Track displacement by neighborhood
-    if (displRisk >= 7) {
+    // Track displacement by neighborhood — count actual planning intent
+    // (S316 fix: risk>=7 counting fired 12 hoods/cycle once the rent-burden
+    // signal went live, and mislabeled at-risk as planning; the hook text
+    // says "planning to leave", so count exactly that)
+    if (migIntent === MIGRATION_INTENT.PLANNING) {
       displacementByNeighborhood[neighborhood] = (displacementByNeighborhood[neighborhood] || 0) + 1;
     }
 

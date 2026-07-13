@@ -99,6 +99,12 @@ var MIN_INCOME_COUPLE_HOUSEHOLD = 40000;  // $40k combined
 var RENT_BURDEN_WARNING = 0.40;  // 40% of income
 var RENT_BURDEN_CRISIS = 0.50;   // 50% of income
 
+// S316 savings wiring — reserves (HouseholdSavings) absorb burden stress when
+// they cover this many months of housing cost. Same value declared in
+// migrationTrackingEngine.js for the displacement-risk buffer; legal var
+// redeclaration in the flat Apps Script namespace, keep the two aligned.
+var SAVINGS_BUFFER_MONTHS = 12;
+
 // Age ranges
 var YOUNG_ADULT_MIN_AGE = 22;
 var YOUNG_ADULT_MAX_AGE = 28;
@@ -315,6 +321,7 @@ function loadHouseholds_(ss) {
       monthlyRent: parseFloat(row[headers.indexOf('MonthlyRent')] || 0),
       housingCost: parseFloat(row[headers.indexOf('HousingCost')] || 0),
       householdIncome: parseFloat(row[headers.indexOf('HouseholdIncome')] || 0),
+      householdSavings: headers.indexOf('HouseholdSavings') >= 0 ? parseFloat(row[headers.indexOf('HouseholdSavings')] || 0) : 0,
       formedCycle: row[headers.indexOf('FormedCycle')] || '',
       status: row[headers.indexOf('Status')] || 'active'
     };
@@ -775,6 +782,11 @@ function detectHouseholdStress_(ss, households) {
                       household.monthlyRent : household.housingCost;
     var annualCost = monthlyCost * 12;
     var rentBurden = annualCost / household.householdIncome;
+
+    // S316 savings wiring: reserves absorb the crisis — a household holding
+    // SAVINGS_BUFFER_MONTHS of housing cost doesn't collapse from a burden
+    // spike. Keep the constant aligned with migrationTrackingEngine's.
+    if (monthlyCost > 0 && (household.householdSavings || 0) >= monthlyCost * SAVINGS_BUFFER_MONTHS) continue;
 
     if (rentBurden >= RENT_BURDEN_WARNING) {
       stressed.push({

@@ -87,6 +87,11 @@ var EVENT_TYPES = {
   RETURNED: 'returned'
 };
 
+// S316 savings wiring: months of rent a household must hold in reserve for
+// HouseholdSavings to absorb rent-burden risk (same constant class as the
+// stress check in householdFormationEngine — keep the two aligned).
+var SAVINGS_BUFFER_MONTHS = 12;
+
 // Displacement risk weights
 var RISK_WEIGHTS = {
   RENT_BURDEN_HIGH: 4,        // Rent >50% income
@@ -229,12 +234,15 @@ function assessDisplacementRisk_(ctx, cycle) {
     risk += Math.floor(pressure / 2); // Pressure 8 → +4 risk
 
     // Rent burden — renters only (S316 fix: owners were getting +5 risk off
-    // a housing cost they don't pay as rent), live member income sum first
+    // a housing cost they don't pay as rent), live member income sum first.
+    // Savings buffer (S316 wiring): a household holding SAVINGS_BUFFER_MONTHS
+    // of rent in reserve doesn't take burden risk — reserves absorb the spike.
     if (householdId && householdHousing[householdId]) {
       var hInfo = householdHousing[householdId];
       if (hInfo.housingType !== 'owned' && hInfo.rent > 0) {
+        var buffered = hInfo.savings >= hInfo.rent * SAVINGS_BUFFER_MONTHS;
         var annualIncome = liveIncomeByHH[householdId] || hInfo.ledgerIncome || 0;
-        if (annualIncome > 0) {
+        if (!buffered && annualIncome > 0) {
           var rentBurden = Math.round((hInfo.rent * 12 / annualIncome) * 100);
           if (rentBurden > 50) risk += RISK_WEIGHTS.RENT_BURDEN_HIGH;
           if (rentBurden > 30) risk += 1;
@@ -319,6 +327,7 @@ function buildHouseholdHousingMap_(ss) {
     var iIncome = idx('HouseholdIncome');
     var iType = idx('HousingType');
     var iStatus = idx('Status');
+    var iSavings = idx('HouseholdSavings');
 
     if (iHouseholdId < 0 || iRent < 0) return {};
 
@@ -331,7 +340,8 @@ function buildHouseholdHousingMap_(ss) {
       map[householdId] = {
         rent: Number(row[iRent]) || 0,
         housingType: iType >= 0 ? String(row[iType] || '').toLowerCase() : '',
-        ledgerIncome: iIncome >= 0 ? (Number(row[iIncome]) || 0) : 0
+        ledgerIncome: iIncome >= 0 ? (Number(row[iIncome]) || 0) : 0,
+        savings: iSavings >= 0 ? (Number(row[iSavings]) || 0) : 0
       };
     }
 

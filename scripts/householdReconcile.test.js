@@ -201,6 +201,20 @@ console.log('H6 real dissolution');
   assert('citizen SL HouseholdId released', sl[0][sli('HouseholdId')] === '', sl[0][sli('HouseholdId')]);
 }
 
+// ═══ H6b: savings buffer prevents dissolution (S316 wiring) ══════════════════
+console.log('H6b savings buffer prevents dissolution');
+{
+  // Same crisis as H6 (75% burden, dissolve roll passes) but the member holds
+  // NetWorth -> HouseholdSavings covers 12+ months of rent -> no collapse.
+  const sl = [cit('POP-21', 'Sa', 'Ved', 'Fruitvale', 40000, { hh: 'HH-C2', marital: 'single', birthYear: 1970, netWorth: 2500 * 13 })];
+  const hh = [hhRow('HH-C2', 'POP-21', 'single', ['POP-21'], 'Fruitvale', 2500, 40000, 'active')];
+  const ctx = buildCtx(sl, hh, () => 0.05);
+  processHouseholdFormation_(ctx);
+  const row = hhFind(ctx, 'HH-C2');
+  assert('reserved household survives the crisis roll', row[hhi('Status')] === 'active', row[hhi('Status')]);
+  assert('citizen keeps their home', sl[0][sli('HouseholdId')] === 'HH-C2', sl[0][sli('HouseholdId')]);
+}
+
 // ═══ H7: inheritance household-first ═════════════════════════════════════════
 console.log('H7 inheritance household-first');
 {

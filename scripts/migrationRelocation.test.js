@@ -199,6 +199,36 @@ console.log('A2c live member income beats stale HouseholdIncome');
     String(sl[0][col('DisplacementRisk')]));
 }
 
+// ═══ A2d: savings buffer absorbs rent-burden risk (S316 wiring) ══════════════
+console.log('A2d savings buffer suppresses burden risk');
+{
+  rippleCalls = []; cellIntents = [];
+  // Same burdened renter twice: no savings vs 12+ months rent banked.
+  const HH2 = HH_HEADER.concat(['HouseholdSavings']);
+  const mkHH = (id, pop, savings) => {
+    const r = ['' + id, pop, 'single', JSON.stringify([pop]), 'Middleton', 'rented', 2600, 0, 40000, 100, '', 'active', '', ''];
+    r.push(savings);
+    return r;
+  };
+  const slA = [citizen('POP-5', 'No', 'Buffer', 'Middleton', 40000, { hh: 'HH-B1', edu: 'masters' })];
+  const slB = [citizen('POP-6', 'Fat', 'Buffer', 'Middleton', 40000, { hh: 'HH-B2', edu: 'masters' })];
+  const mk = (sl, hhRow) => {
+    const sheets = {
+      Neighborhood_Map: mockSheet(nmValues()),
+      Household_Ledger: mockSheet([HH2.slice(), hhRow])
+    };
+    return { ss: mockSS(sheets), ledger: { headers: SL_HEADER.slice(), rows: sl, dirty: false },
+      summary: { cycleId: 200, storyHooks: [] }, config: { cycleCount: 200 }, rng: () => 0.99, now: 'x', _sheets: sheets };
+  };
+  const ctxA = mk(slA, mkHH('HH-B1', 'POP-5', 0));
+  const ctxB = mk(slB, mkHH('HH-B2', 'POP-6', 2600 * 12));
+  runBoth(ctxA); runBoth(ctxB);
+  const riskNoSavings = slA[0][col('DisplacementRisk')];
+  const riskBuffered = slB[0][col('DisplacementRisk')];
+  assert('unbuffered renter carries burden risk', riskNoSavings === 5, String(riskNoSavings));
+  assert('12-month reserve absorbs it', riskBuffered === 0, String(riskBuffered));
+}
+
 // ═══ A10: MASS_EXODUS counts planning intent, not raw risk ═══════════════════
 console.log('A10 MASS_EXODUS threshold on planning intent');
 {

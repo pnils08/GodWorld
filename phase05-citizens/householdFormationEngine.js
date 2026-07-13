@@ -1,7 +1,22 @@
 /**
  * ============================================================================
- * HOUSEHOLD FORMATION ENGINE v1.2
+ * HOUSEHOLD FORMATION ENGINE v1.3
  * ============================================================================
+ *
+ * v1.3 engine.56 (S316) — the ledger becomes true:
+ * - reconcileHouseholds_ runs every cycle: SL HouseholdId is the membership
+ *   truth source. Spouse-merge (married/partnered, same Last+hood, exactly-2
+ *   groups, absorb single/unassigned side), adopt intake-authored households
+ *   the ledger never had (HH-KEANE class), rebuild Members, repair
+ *   Head/Neighborhood/Type, un-dissolve rows citizens still live in,
+ *   dissolve rows nobody lives in. Deterministic, no rng.
+ * - updateHouseholdIncomes_ double-parse bug fixed: real member-income sums
+ *   had NEVER executed — every household carried the flat formation
+ *   estimates (50000/85000/95000). Now also writes HouseholdSavings
+ *   (sum member NetWorth; column ensured at header, schema-setup carve-out).
+ * - dissolveStressedHouseholds_ is real: members' SL HouseholdId clears and
+ *   the row's Members empties (was pure bookkeeping — 272 "dissolved" rows
+ *   still had citizens living in them at the C129 audit).
  *
  * v1.2 Phase 42 §5.6 alignment (S200):
  * - Simulation_Ledger reads/writes route through shared ctx.ledger
@@ -149,6 +164,16 @@ function processHouseholdFormation_(ctx) {
     // Load existing households
     var households = loadHouseholds_(ss);
 
+    // engine.56 (S316): reconcile the ledger against SL truth BEFORE any
+    // formation/income math — spouse-merge, adopt missing households
+    // (HH-KEANE class), rebuild Members, repair status/neighborhood.
+    var reconcile = reconcileHouseholds_(ctx, cycle);
+    results.reconciled = reconcile;
+    if (reconcile.rowsCreated || reconcile.merged || reconcile.membersRebuilt ||
+        reconcile.undissolved || reconcile.emptied) {
+      households = loadHouseholds_(ss); // reload post-repair
+    }
+
     // Form new households
     var newHouseholds = formNewHouseholds_(ctx, citizens, households, cycle, rng);
     results.householdsFormed = newHouseholds.length;
@@ -173,7 +198,7 @@ function processHouseholdFormation_(ctx) {
     results.rentBurdenCrisis = stressedHouseholds.filter(h => h.rentBurden >= RENT_BURDEN_CRISIS).length;
 
     // Dissolve stressed households
-    var dissolved = dissolveStressedHouseholds_(ss, stressedHouseholds, cycle, rng);
+    var dissolved = dissolveStressedHouseholds_(ctx, stressedHouseholds, cycle, rng);
     results.householdsDissolved = dissolved.length;
 
     // Generate story hooks
@@ -306,6 +331,203 @@ function loadHouseholds_(ss) {
 // parseJSON_ helper deleted S199 (Phase B.4 collision dedup) — identical impl
 // lives in phase07-evening-media/storylineWeavingEngine.js, resolved via flat
 // namespace. Internal callers in this file use the global def.
+
+
+// ════════════════════════════════════════════════════════════════════════════
+// HOUSEHOLD RECONCILE (engine.56, S316)
+// ════════════════════════════════════════════════════════════════════════════
+//
+// The Household_Ledger drifted into fiction: 272 households marked dissolved
+// with citizens still living in them, intake-authored households (HH-KEANE)
+// with no ledger row at all, married couples split across auto-minted single
+// households, and 498/529 incomes stuck on formation-seed estimates. SL
+// HouseholdId is the membership truth source; this pass makes the ledger
+// agree with it every cycle.
+//
+// Order: spouse-merge (mutates SL HouseholdId via ctx.ledger) -> rebuild
+// member map -> repair every ledger row (Members/Head/Neighborhood/Type/
+// Status) -> create rows for SL households the ledger has never seen.
+// Deterministic — no rng anywhere in this pass.
+
+var AUTO_HH_ID = /^HH-\d{4}-\d{3}$/; // formation-minted IDs (HH-<cycle>-<n>)
+
+function reconcileHouseholds_(ctx, cycle) {
+  var ss = ctx.ss;
+  var out = { merged: 0, rowsCreated: 0, membersRebuilt: 0, undissolved: 0, emptied: 0 };
+  var sheet = ss.getSheetByName('Household_Ledger');
+  if (!sheet) return out;
+
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  var idx = function(n) { return header.indexOf(n); };
+  var iPOPID = idx('POPID'), iLast = idx('Last'), iStatus = idx('Status'),
+      iNeighborhood = idx('Neighborhood'), iHH = idx('HouseholdId'),
+      iMarital = idx('MaritalStatus');
+  if (iPOPID < 0 || iHH < 0) return out;
+
+  var alive = function(row) {
+    return String(row[iStatus] || 'active').toLowerCase() !== 'deceased';
+  };
+
+  // ── 1. Spouse-merge: married/partnered pairs sharing Last name + hood but
+  //      split across households. Conservative: exactly-2-candidate groups
+  //      only, and only absorb a single-member-or-unassigned side into the
+  //      other. Ambiguity (3+ same-name married in one hood) → skip.
+  var memberCount = {};
+  for (var c = 0; c < rows.length; c++) {
+    if (!alive(rows[c])) continue;
+    var h0 = rows[c][iHH];
+    if (h0) memberCount[h0] = (memberCount[h0] || 0) + 1;
+  }
+  var pairGroups = {};
+  if (iLast >= 0 && iMarital >= 0 && iNeighborhood >= 0) {
+    for (var p = 0; p < rows.length; p++) {
+      var pr = rows[p];
+      if (!alive(pr)) continue;
+      var ms = String(pr[iMarital] || '').toLowerCase();
+      if (ms !== 'married' && ms !== 'partnered') continue;
+      var last = String(pr[iLast] || '').trim();
+      var hood = String(pr[iNeighborhood] || '').trim();
+      if (!last || !hood) continue;
+      var key = last + '||' + hood;
+      (pairGroups[key] = pairGroups[key] || []).push(p);
+    }
+  }
+  var groupKeys = Object.keys(pairGroups).sort(); // deterministic order
+  for (var g = 0; g < groupKeys.length; g++) {
+    var grp = pairGroups[groupKeys[g]];
+    if (grp.length !== 2) continue; // 1 = nothing to merge; 3+ = ambiguous
+    var a = rows[grp[0]], b = rows[grp[1]];
+    var hhA = a[iHH] || '', hhB = b[iHH] || '';
+    if (hhA === hhB && hhA) continue; // already together
+    // Pick target: prefer the non-auto (authored) ID; then the larger
+    // household; then lexicographically smaller ID. The other side must be
+    // absorbable (unassigned or single-member).
+    var pick = null; // [targetHH, absorbRowIdx]
+    var candidates = [
+      { target: hhA, absorbIdx: grp[1], absorbHH: hhB },
+      { target: hhB, absorbIdx: grp[0], absorbHH: hhA }
+    ].filter(function(o) {
+      if (!o.target) return false;
+      return !o.absorbHH || (memberCount[o.absorbHH] || 0) <= 1;
+    });
+    if (!candidates.length) continue; // both sides multi-member — leave alone
+    candidates.sort(function(x, y) {
+      var xa = AUTO_HH_ID.test(x.target) ? 1 : 0, ya = AUTO_HH_ID.test(y.target) ? 1 : 0;
+      if (xa !== ya) return xa - ya;                                   // authored first
+      var xm = memberCount[y.target] || 0, ym = memberCount[x.target] || 0;
+      if (xm !== ym) return xm - ym;                                   // larger first
+      return x.target < y.target ? -1 : 1;                             // stable
+    });
+    pick = candidates[0];
+    var absorbRow = rows[pick.absorbIdx];
+    var oldHH = absorbRow[iHH];
+    absorbRow[iHH] = pick.target;
+    ctx.ledger.dirty = true;
+    memberCount[pick.target] = (memberCount[pick.target] || 0) + 1;
+    if (oldHH) memberCount[oldHH] = Math.max(0, (memberCount[oldHH] || 1) - 1);
+    out.merged++;
+  }
+
+  // ── 2. Live member map (post-merge), deceased excluded ────────────────────
+  var membersByHH = {};
+  var citizenByPOPID = {};
+  for (var m = 0; m < rows.length; m++) {
+    var mr = rows[m];
+    citizenByPOPID[mr[iPOPID]] = mr;
+    if (!alive(mr)) continue;
+    var mh = mr[iHH];
+    if (!mh) continue;
+    (membersByHH[mh] = membersByHH[mh] || []).push(mr[iPOPID]);
+  }
+  Object.keys(membersByHH).forEach(function(k) { membersByHH[k].sort(); });
+
+  // ── 3. Repair existing ledger rows (single batched write) ────────────────
+  var data = sheet.getDataRange().getValues();
+  if (data.length < 1) return out;
+  var lh = data[0];
+  var li = function(n) { return lh.indexOf(n); };
+  var lHH = li('HouseholdId'), lHead = li('HeadOfHousehold'), lType = li('HouseholdType'),
+      lMembers = li('Members'), lHood = li('Neighborhood'), lStatus = li('Status'),
+      lDissolved = li('DissolvedCycle'), lUpdated = li('LastUpdated');
+  if (lHH < 0 || lMembers < 0) return out;
+
+  var seenHH = {};
+  var changed = false;
+  for (var r = 1; r < data.length; r++) {
+    var lrow = data[r];
+    var hid = lrow[lHH];
+    if (!hid) continue;
+    seenHH[hid] = true;
+    var actual = membersByHH[hid] || [];
+    var recordedJson = JSON.stringify(actual);
+    var rowChanged = false;
+
+    if (String(lrow[lMembers]) !== recordedJson) {
+      lrow[lMembers] = recordedJson; rowChanged = true; out.membersRebuilt++;
+    }
+    if (actual.length > 0) {
+      // Head must be a member; keep if so, else first (sorted) member
+      var head = lrow[lHead];
+      if (actual.indexOf(head) < 0) { lrow[lHead] = actual[0]; head = actual[0]; rowChanged = true; }
+      // Neighborhood follows the head's real one
+      var headRow = citizenByPOPID[head];
+      var realHood = headRow && iNeighborhood >= 0 ? (headRow[iNeighborhood] || '') : '';
+      if (realHood && lHood >= 0 && lrow[lHood] !== realHood) { lrow[lHood] = realHood; rowChanged = true; }
+      // Type from live composition
+      if (lType >= 0) {
+        var newType = actual.length === 1 ? 'single' : (actual.length === 2 ? 'couple' : 'family');
+        if (lrow[lType] !== newType) { lrow[lType] = newType; rowChanged = true; }
+      }
+      // Citizens live here — it is not dissolved (the 272-row rot)
+      if (lStatus >= 0 && String(lrow[lStatus]).toLowerCase() === 'dissolved') {
+        lrow[lStatus] = 'active';
+        if (lDissolved >= 0) lrow[lDissolved] = '';
+        rowChanged = true; out.undissolved++;
+      }
+    } else {
+      // Nobody lives here — it is not active
+      if (lStatus >= 0 && String(lrow[lStatus]).toLowerCase() === 'active') {
+        lrow[lStatus] = 'dissolved';
+        if (lDissolved >= 0 && !lrow[lDissolved]) lrow[lDissolved] = cycle;
+        rowChanged = true; out.emptied++;
+      }
+    }
+    if (rowChanged && lUpdated >= 0 && ctx.now) lrow[lUpdated] = ctx.now;
+    if (rowChanged) changed = true;
+  }
+  if (changed) {
+    sheet.getRange(1, 1, data.length, lh.length).setValues(data);
+  }
+
+  // ── 4. Adopt SL households the ledger has never seen (HH-KEANE class) ────
+  var missing = Object.keys(membersByHH).filter(function(h) { return !seenHH[h]; }).sort();
+  for (var n = 0; n < missing.length; n++) {
+    var nid = missing[n];
+    var mem = membersByHH[nid];
+    var headP = citizenByPOPID[mem[0]];
+    var hood2 = headP && iNeighborhood >= 0 ? (headP[iNeighborhood] || '') : '';
+    var newRow = [];
+    for (var col = 0; col < lh.length; col++) newRow.push('');
+    newRow[lHH] = nid;
+    if (lHead >= 0) newRow[lHead] = mem[0];
+    if (lType >= 0) newRow[lType] = mem.length === 1 ? 'single' : (mem.length === 2 ? 'couple' : 'family');
+    newRow[lMembers] = JSON.stringify(mem);
+    if (lHood >= 0) newRow[lHood] = hood2;
+    if (li('HousingType') >= 0) newRow[li('HousingType')] = 'rented';
+    if (li('MonthlyRent') >= 0) newRow[li('MonthlyRent')] = estimateRent_(hood2);
+    if (li('HousingCost') >= 0) newRow[li('HousingCost')] = 0;
+    if (li('HouseholdIncome') >= 0) newRow[li('HouseholdIncome')] = 0; // income pass fills
+    if (li('FormedCycle') >= 0) newRow[li('FormedCycle')] = cycle;
+    if (lStatus >= 0) newRow[lStatus] = 'active';
+    if (li('CreatedAt') >= 0) newRow[li('CreatedAt')] = (typeof inWorldStamp_ === 'function') ? inWorldStamp_(ctx) : (ctx.now || '');
+    if (lUpdated >= 0) newRow[lUpdated] = ctx.now || '';
+    sheet.appendRow(newRow);
+    out.rowsCreated++;
+  }
+
+  return out;
+}
 
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -461,58 +683,61 @@ function processDivorces_(ss, citizens, households, cycle) {
 // ════════════════════════════════════════════════════════════════════════════
 
 function updateHouseholdIncomes_(ctx, households, citizens) {
+  // engine.56 (S316) rewrite. The original re-JSON.parsed a members value
+  // loadHouseholds_ had ALREADY parsed into an array — that throw hit on
+  // every household since Week 1, and the catch silently wrote the flat
+  // formation estimates (single=50000 / couple=85000 / family=95000).
+  // 498/529 households carried those estimates as "income" at the C129
+  // audit; the real-income path below had never executed. Also writes
+  // HouseholdSavings (sum of member NetWorth) — the column is ensured at
+  // the header if absent (schema-setup carve-out, fires once).
   var ss = ctx.ss;
   var sheet = ss.getSheetByName('Household_Ledger');
   if (!sheet) return;
 
   var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
   var incomeCol = headers.indexOf('HouseholdIncome') + 1;
-
   if (incomeCol === 0) return;
 
-  // Build income lookup from ctx.ledger (Phase 42 §5.6 — sees in-memory
-  // Income mutations from cohort-A run*Engine writers earlier in Phase 5).
-  var citizenIncomes = buildCitizenIncomeLookup_(ctx);
+  var savingsCol = headers.indexOf('HouseholdSavings') + 1;
+  if (savingsCol === 0) {
+    savingsCol = headers.length + 1;
+    sheet.getRange(1, savingsCol).setValue('HouseholdSavings');
+  }
+
+  var citizenMoney = buildCitizenMoneyLookup_(ctx);
+  if (!citizenMoney) return;
+
+  // Batched write: one column vector each, aligned to sheet rows 2..lastRow.
+  var lastRow = sheet.getLastRow();
+  if (lastRow < 2) return;
+  var incomeVec = sheet.getRange(2, incomeCol, lastRow - 1, 1).getValues();
+  var savingsVec = sheet.getRange(2, savingsCol, lastRow - 1, 1).getValues();
 
   for (var i = 0; i < households.length; i++) {
     var household = households[i];
-    var totalIncome = 0;
-
-    // Sum income of all members from real data
-    if (citizenIncomes && household.members) {
-      try {
-        var members = JSON.parse(household.members);
-        for (var m = 0; m < members.length; m++) {
-          totalIncome += citizenIncomes[members[m]] || 0;
-        }
-      } catch (e) {
-        // If Income column doesn't exist yet, fall back to estimates
-        if (household.householdType === HOUSEHOLD_TYPES.SINGLE) {
-          totalIncome = 50000;
-        } else if (household.householdType === HOUSEHOLD_TYPES.COUPLE) {
-          totalIncome = 85000;
-        } else if (household.householdType === HOUSEHOLD_TYPES.FAMILY) {
-          totalIncome = 95000;
-        }
-      }
-    } else {
-      // Fallback estimates if no income data available
-      if (household.householdType === HOUSEHOLD_TYPES.SINGLE) {
-        totalIncome = 50000;
-      } else if (household.householdType === HOUSEHOLD_TYPES.COUPLE) {
-        totalIncome = 85000;
-      } else if (household.householdType === HOUSEHOLD_TYPES.FAMILY) {
-        totalIncome = 95000;
-      }
+    var members = Array.isArray(household.members) ? household.members : [];
+    var totalIncome = 0, totalSavings = 0;
+    for (var m = 0; m < members.length; m++) {
+      var money = citizenMoney[members[m]];
+      if (!money) continue;
+      totalIncome += money.income;
+      totalSavings += money.netWorth;
     }
-
-    // Update sheet
-    sheet.getRange(household.rowIndex, incomeCol).setValue(totalIncome);
+    var vecIdx = household.rowIndex - 2;
+    if (vecIdx >= 0 && vecIdx < incomeVec.length) {
+      incomeVec[vecIdx][0] = totalIncome;
+      savingsVec[vecIdx][0] = totalSavings;
+    }
     household.householdIncome = totalIncome;
+    household.householdSavings = totalSavings;
   }
+
+  sheet.getRange(2, incomeCol, lastRow - 1, 1).setValues(incomeVec);
+  sheet.getRange(2, savingsCol, lastRow - 1, 1).setValues(savingsVec);
 }
 
-function buildCitizenIncomeLookup_(ctx) {
+function buildCitizenMoneyLookup_(ctx) {
   // Phase 42 §5.6: read from shared ctx.ledger; cohort-A income mutations
   // (runCareerEngine, runEducationEngine etc.) live in ctx.ledger.rows by
   // the time this runs in Phase 5.
@@ -522,14 +747,16 @@ function buildCitizenIncomeLookup_(ctx) {
 
   var popIdCol = header.indexOf('POPID');
   var incomeCol = header.indexOf('Income');
+  var netWorthCol = header.indexOf('NetWorth');
 
   if (popIdCol < 0 || incomeCol < 0) return null;
 
   var lookup = {};
   for (var r = 0; r < rows.length; r++) {
-    var popId = rows[r][popIdCol];
-    var income = Number(rows[r][incomeCol]) || 0;
-    lookup[popId] = income;
+    lookup[rows[r][popIdCol]] = {
+      income: Number(rows[r][incomeCol]) || 0,
+      netWorth: netWorthCol >= 0 ? (Number(rows[r][netWorthCol]) || 0) : 0
+    };
   }
 
   return lookup;
@@ -561,28 +788,52 @@ function detectHouseholdStress_(ss, households) {
   return stressed;
 }
 
-function dissolveStressedHouseholds_(ss, stressedHouseholds, cycle, rng) {
+function dissolveStressedHouseholds_(ctx, stressedHouseholds, cycle, rng) {
   if (typeof rng !== 'function') throw new Error('householdFormationEngine.dissolveStressedHouseholds_: rng parameter required (Phase 40.3 Path 1)');
+  var ss = ctx.ss;
   var dissolved = [];
 
-  // Only dissolve households in crisis with random chance
+  // engine.56 (S316): dissolution is now REAL — members' SL HouseholdId is
+  // cleared (via ctx.ledger, Phase 10 commits) and the row's Members empties.
+  // Before this, "dissolved" was pure bookkeeping: citizens stayed assigned,
+  // and 272 such rows had rotted in the ledger by the C129 audit (the
+  // reconcile pass would also have resurrected them next cycle).
+  var lHeader = ctx.ledger.headers;
+  var lHHCol = lHeader.indexOf('HouseholdId');
+
   for (var i = 0; i < stressedHouseholds.length; i++) {
     var stressed = stressedHouseholds[i];
 
     if (stressed.severity === 'crisis' && rng() < 0.10) {  // 10% chance
       dissolved.push(stressed.household);
 
-      // Mark household as dissolved
       var sheet = ss.getSheetByName('Household_Ledger');
       var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
       var statusCol = headers.indexOf('Status') + 1;
       var dissolvedCol = headers.indexOf('DissolvedCycle') + 1;
+      var membersCol = headers.indexOf('Members') + 1;
 
       if (statusCol > 0) {
         sheet.getRange(stressed.household.rowIndex, statusCol).setValue('dissolved');
       }
       if (dissolvedCol > 0) {
         sheet.getRange(stressed.household.rowIndex, dissolvedCol).setValue(cycle);
+      }
+      if (membersCol > 0) {
+        sheet.getRange(stressed.household.rowIndex, membersCol).setValue('[]');
+      }
+
+      // Release the citizens — they become unhoused-of-record until the
+      // formation engine re-homes them (young singles) or intake reassigns
+      var mem = Array.isArray(stressed.household.members) ? stressed.household.members : [];
+      if (lHHCol >= 0 && mem.length) {
+        for (var r = 0; r < ctx.ledger.rows.length; r++) {
+          var popId = ctx.ledger.rows[r][lHeader.indexOf('POPID')];
+          if (mem.indexOf(popId) >= 0 && ctx.ledger.rows[r][lHHCol] === stressed.household.householdId) {
+            ctx.ledger.rows[r][lHHCol] = '';
+            ctx.ledger.dirty = true;
+          }
+        }
       }
     }
   }

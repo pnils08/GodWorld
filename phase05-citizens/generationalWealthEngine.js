@@ -380,16 +380,37 @@ function processInheritance_(ctx, cycle) {
     var deceasedWealth = getCitizenWealth_(ctx, deceasedId);
     if (deceasedWealth.netWorth <= 0) continue;
 
-    // Find children/heirs
-    var heirs = findHeirs_(ctx, deceasedId);
-    if (heirs.length === 0) continue;
+    // engine.56 (S316): estate resolves HOUSEHOLD-FIRST. Before this, heirs
+    // were children-only (ParentIds — near-empty column, 3 citizens) and any
+    // estate without children silently vanished: spouses inherited nothing.
+    // Now: household survivors and outside children split 50/50; either group
+    // alone takes all. Children living with the deceased ARE household
+    // survivors (counted once). Only a citizen who dies with neither leaves
+    // an unresolved estate (unchanged skip — rare, and a story in itself).
+    var children = findHeirs_(ctx, deceasedId);
+    var householdSurvivors = findHouseholdSurvivors_(ctx, deceasedId);
+    var childrenOutside = [];
+    for (var ch = 0; ch < children.length; ch++) {
+      if (householdSurvivors.indexOf(children[ch]) < 0) childrenOutside.push(children[ch]);
+    }
+    if (householdSurvivors.length === 0 && childrenOutside.length === 0) continue;
 
     // Calculate inheritance (80% of net worth, 20% "lost" to taxes/fees)
     var totalInheritance = Math.round(deceasedWealth.netWorth * 0.8);
-    var perHeir = Math.round(totalInheritance / heirs.length);
+    var heirCount = householdSurvivors.length + childrenOutside.length;
 
-    // Distribute to heirs
-    distributeInheritance_(ctx, heirs, perHeir, deceasedId, cycle);
+    if (householdSurvivors.length && childrenOutside.length) {
+      distributeInheritance_(ctx, householdSurvivors,
+        Math.round(totalInheritance * 0.5 / householdSurvivors.length), deceasedId, cycle);
+      distributeInheritance_(ctx, childrenOutside,
+        Math.round(totalInheritance * 0.5 / childrenOutside.length), deceasedId, cycle);
+    } else if (householdSurvivors.length) {
+      distributeInheritance_(ctx, householdSurvivors,
+        Math.round(totalInheritance / householdSurvivors.length), deceasedId, cycle);
+    } else {
+      distributeInheritance_(ctx, childrenOutside,
+        Math.round(totalInheritance / childrenOutside.length), deceasedId, cycle);
+    }
 
     // Generate story hook if significant
     if (totalInheritance > 50000) {
@@ -397,7 +418,7 @@ function processInheritance_(ctx, cycle) {
       ctx.summary.storyHooks.push({
         hookType: 'GENERATIONAL_WEALTH_TRANSFER',
         severity: totalInheritance > 200000 ? 7 : 5,
-        description: 'Inheritance of $' + totalInheritance.toLocaleString() + ' distributed to ' + heirs.length + ' heirs',
+        description: 'Inheritance of $' + totalInheritance.toLocaleString() + ' distributed to ' + heirCount + ' heirs',
         cycleGenerated: cycle,
         deceasedId: deceasedId,
         totalAmount: totalInheritance
@@ -464,6 +485,37 @@ function findHeirs_(ctx, deceasedId) {
   }
 
   return heirs;
+}
+
+function findHouseholdSurvivors_(ctx, deceasedId) {
+  // engine.56 (S316): living citizens sharing the deceased's HouseholdId.
+  // Reads ctx.ledger (Phase 42 §5.6) — sees same-cycle household repairs
+  // from Phase5-HouseholdFormation's reconcile pass.
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  if (!rows.length) return [];
+
+  var idx = function(n) { return header.indexOf(n); };
+  var iPOPID = idx('POPID');
+  var iStatus = idx('Status');
+  var iHH = idx('HouseholdId');
+  if (iHH < 0) return [];
+
+  var deceasedHH = '';
+  for (var d = 0; d < rows.length; d++) {
+    if (rows[d][iPOPID] === deceasedId) { deceasedHH = rows[d][iHH] || ''; break; }
+  }
+  if (!deceasedHH) return [];
+
+  var survivors = [];
+  for (var r = 0; r < rows.length; r++) {
+    var row = rows[r];
+    if (row[iPOPID] === deceasedId) continue;
+    if ((row[iStatus] || 'active').toString().toLowerCase() === 'deceased') continue;
+    if (row[iHH] === deceasedHH) survivors.push(row[iPOPID]);
+  }
+  survivors.sort();
+  return survivors;
 }
 
 function distributeInheritance_(ctx, heirs, amountPerHeir, deceasedId, cycle) {

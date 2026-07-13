@@ -1024,6 +1024,8 @@
 
 - **findHeirs_(ctx, deceasedId)**
 
+- **findHouseholdSurvivors_(ctx, deceasedId)**
+
 - **distributeInheritance_(ctx, heirs, amountPerHeir, deceasedId, cycle)**
 
 - **recordInheritanceInFamily_(ctx, heirs, amount, deceasedId, cycle)**
@@ -1048,6 +1050,9 @@
 - **loadHouseholds_(ss)**
   Sheets: Household_Ledger
 
+- **reconcileHouseholds_(ctx, cycle)**
+  Sheets: Household_Ledger
+
 - **formNewHouseholds_(ctx, citizens, existingHouseholds, cycle, rng)**
   Sheets: Household_Ledger
 
@@ -1062,11 +1067,11 @@
 - **updateHouseholdIncomes_(ctx, households, citizens)**
   Sheets: Household_Ledger
 
-- **buildCitizenIncomeLookup_(ctx)**
+- **buildCitizenMoneyLookup_(ctx)**
 
 - **detectHouseholdStress_(ss, households)**
 
-- **dissolveStressedHouseholds_(ss, stressedHouseholds, cycle, rng)**
+- **dissolveStressedHouseholds_(ctx, stressedHouseholds, cycle, rng)**
   Sheets: Household_Ledger
 
 - **generateHouseholdFormedHook_(household)**
@@ -1085,7 +1090,7 @@
 - **buildNeighborhoodPressureMap_(ss)**
   Sheets: Neighborhood_Map
 
-- **buildHouseholdRentBurdenMap_(ss)**
+- **buildHouseholdHousingMap_(ss)**
   Sheets: Household_Ledger
 
 - **updateMigrationIntent_(ctx, cycle)**
@@ -3087,4 +3092,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 178
-**Functions mapped:** 1058
+**Functions mapped:** 1060

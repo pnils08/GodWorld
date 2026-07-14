@@ -147,6 +147,10 @@ function processEducationCareer_(ctx) {
   var schoolResults = checkSchoolQuality_(ss, ctx, cycle);
   results.schoolAlerts = schoolResults.alerts;
 
+  // Step 6 (engine.57 P4): a kid's SchoolQuality follows the household's
+  // neighborhood — the family's address is a causal input on the child.
+  results.schoolQualitySet = updateMinorSchoolQuality_(ss, ctx, cycle);
+
   Logger.log(
     'processEducationCareer_ v2.1: Complete. ' +
     'Education: ' + results.educationUpdated + ', ' +
@@ -416,6 +420,46 @@ function detectCareerMobility_(ctx, cycle, rng) {
 // function still runs as a guard: if a real value ever dropped below the gates it would
 // surface, but in canon it should not. The columns feed POSITIVE display downstream
 // (buildNeighborhoodCards/MCP, buildInitiativePackets, buildCivicVoicePackets).
+function updateMinorSchoolQuality_(ss, ctx, cycle) {
+  // engine.57 P4: minors (< 18) in a household get SchoolQuality stamped from
+  // their neighborhood's SchoolQualityIndex. ctx.ledger mutation; Phase 10
+  // commits. Adults and household-less rows untouched.
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  if (!rows.length) return 0;
+  var idx = function(n) { return header.indexOf(n); };
+  var iBirth = idx('BirthYear'), iHood = idx('Neighborhood'),
+      iHH = idx('HouseholdId'), iSQ = idx('SchoolQuality'), iStatus = idx('Status');
+  if (iSQ < 0 || iBirth < 0 || iHood < 0) return 0;
+
+  var demoSheet = ss.getSheetByName('Neighborhood_Demographics');
+  if (!demoSheet) return 0;
+  var demo = demoSheet.getDataRange().getValues();
+  var dh = demo[0];
+  var dHood = dh.indexOf('Neighborhood'), dQ = dh.indexOf('SchoolQualityIndex');
+  if (dHood < 0 || dQ < 0) return 0;
+  var qualityByHood = {};
+  for (var d = 1; d < demo.length; d++) qualityByHood[demo[d][dHood]] = Number(demo[d][dQ]) || 5;
+
+  var simYear = 2040 + Math.floor(((ctx && ctx.summary && ctx.summary.cycleId) || cycle || 0) / 52);
+  var set = 0;
+  for (var r = 0; r < rows.length; r++) {
+    var row = rows[r];
+    var status = (row[iStatus] || 'active').toString().toLowerCase();
+    if (status === 'deceased' || status === 'inactive') continue;
+    var by = Number(row[iBirth]) || 0;
+    if (by <= 0) continue;
+    var age = simYear - by;
+    if (age >= 18) continue;
+    if (iHH >= 0 && !String(row[iHH] || '').trim()) continue; // household kids only
+    var q = qualityByHood[row[iHood]];
+    if (q === undefined) continue;
+    if (Number(row[iSQ]) !== q) { row[iSQ] = q; set++; }
+  }
+  if (set > 0) ctx.ledger.dirty = true;
+  return set;
+}
+
 function checkSchoolQuality_(ss, ctx, cycle) {
   var sheet = ss.getSheetByName('Neighborhood_Demographics');
   if (!sheet) return { alerts: 0 };

@@ -205,6 +205,7 @@ function runGenerationalEngine_(ctx) {
   var iMarital = idx("MaritalStatus");
   var iNumChildren = idx("NumChildren");
   var iDialState = idx("DialState"); // engine.32 T5 — dial-biased milestone odds
+  var iHouseholdId = idx("HouseholdId"); // engine.57 P4 — household drives fates
 
   // LifeHistory_Log handle removed S204 B2 — appends route through queueAppendIntent_.
   var cycle = (ctx.summary && ctx.summary.cycleId) || (ctx.config && ctx.config.cycleCount) || 0;
@@ -337,8 +338,11 @@ function runGenerationalEngine_(ctx) {
       }
     }
 
+    // engine.57 P4: household presence is a causal input on family fates
+    var hasHousehold = iHouseholdId >= 0 && String(row[iHouseholdId] || "").trim() !== "";
+
     if (counts.weddings < limits.weddings && birthYear) {
-      var weddingResult = checkWedding_(ctx, popId, age, lifeHistory, calendarContext);
+      var weddingResult = checkWedding_(ctx, popId, age, lifeHistory, calendarContext, hasHousehold);
       if (weddingResult) {
         ctx.summary.generationalEvents.push(applyMilestone_(
           ctx, row, iLife, iLastU, weddingResult, name, popId, neighborhood, cycle, calendarContext
@@ -357,7 +361,7 @@ function runGenerationalEngine_(ctx) {
     }
 
     if (counts.births < limits.births && birthYear) {
-      var birthResult = checkBirth_(ctx, popId, age, lifeHistory, calendarContext);
+      var birthResult = checkBirth_(ctx, popId, age, lifeHistory, calendarContext, hasHousehold);
       if (birthResult) {
         ctx.summary.generationalEvents.push(applyMilestone_(
           ctx, row, iLife, iLastU, birthResult, name, popId, neighborhood, cycle, calendarContext
@@ -717,11 +721,15 @@ function checkGraduation_(ctx, popId, age, lifeHistory, tier, cal) {
   return { type: MILESTONE_TYPES.GRADUATION, description: pick_(ctx, types), tag: "Graduation", season: cal.season };
 }
 
-function checkWedding_(ctx, popId, age, lifeHistory, cal) {
+// engine.57 P4 dials (Mike adjusts): household presence raises family odds
+var HOUSEHOLD_MARRIAGE_BOOST = 1.5;
+
+function checkWedding_(ctx, popId, age, lifeHistory, cal, hasHousehold) {
   if (lifeHistory.indexOf("[Wedding]") >= 0 && lifeHistory.indexOf("[Divorce]") < 0) return null;
   if (age < AGE_RANGES.WEDDING.min || age > AGE_RANGES.WEDDING.max) return null;
 
   var c = 0.002;
+  if (hasHousehold) c *= HOUSEHOLD_MARRIAGE_BOOST; // engine.57 P4
   if (age >= 28 && age <= 35) c = 0.004;
   if (age > 40) c = 0.001;
 
@@ -774,7 +782,9 @@ function checkWedding_(ctx, popId, age, lifeHistory, cal) {
   };
 }
 
-function checkBirth_(ctx, popId, age, lifeHistory, cal) {
+function checkBirth_(ctx, popId, age, lifeHistory, cal, hasHousehold) {
+  // engine.57 P4 (Mike verbatim): "no kid is born unless there is a household"
+  if (!hasHousehold) return null;
   if (age < AGE_RANGES.BIRTH.min || age > AGE_RANGES.BIRTH.max) return null;
   if (lifeHistory.indexOf("[Wedding]") < 0) return null;
 

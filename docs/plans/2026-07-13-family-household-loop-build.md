@@ -78,6 +78,12 @@ pointers:
 - Single clasp deploy (DEPLOY.md guard), Mike fires the cycle
 - Verification against the sheet: no single-person households; married T3-4 household income includes the generic salary; a T1-2 spouse exists as a full row; a wedding shows on both rows and formed a household; a birth is a linked citizen inside a household; the register reads with names; zero under-16 income; life-event hooks visible in Story_Hook_Deck
 
+## Queued (Mike-direct, 2026-07-14) — kids backfill, after P6
+
+Minors on the ledger who share no surname with, and have no ParentIds pointing at, anyone in a household: they get a household with **two generic salaries** (both parents off-camera), with the same drip backfill from the Generic_Citizens pool as spouses got. Generic_Citizens is the preferred way to add citizens — the generator can be turned back on to refill the pool when it runs low (current pool skews 227M/40F; regenerate balanced).
+
+Register format ruling: **Child1..Child5 stays** (positional, birth-order, name-in-cell carries sex).
+
 ## Open dials — Mike locks at phase start
 
 - Generic spouse salary rate (flat? banded by neighborhood?) — Phase 2

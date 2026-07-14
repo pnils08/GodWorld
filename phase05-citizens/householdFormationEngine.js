@@ -105,6 +105,11 @@ var RENT_BURDEN_CRISIS = 0.50;   // 50% of income
 // redeclaration in the flat Apps Script namespace, keep the two aligned.
 var SAVINGS_BUFFER_MONTHS = 12;
 
+// engine.57 P2 (S318): a married household whose spouse is off-camera (couple
+// row, one tracked member) still earns the spouse's income. DIAL — Mike sets;
+// flat by design so it's legible and adjustable in one place.
+var GENERIC_SPOUSE_SALARY = 48000;
+
 // Age ranges
 var YOUNG_ADULT_MIN_AGE = 22;
 var YOUNG_ADULT_MAX_AGE = 28;
@@ -181,8 +186,12 @@ function processHouseholdFormation_(ctx) {
     }
 
     // Form new households
-    var newHouseholds = formNewHouseholds_(ctx, citizens, households, cycle, rng);
-    results.householdsFormed = newHouseholds.length;
+    // engine.57 P2 (S318): DISABLED — Mike's model: no household has one
+    // person; households form ONLY at marriage (or single-parent events).
+    // formNewHouseholds_ minted single-person households (15%/cycle, cap 3).
+    // Marriage-driven formation lands in engine.57 P5. Function retained.
+    var newHouseholds = [];
+    results.householdsFormed = 0;
 
     // Process births
     var births = generateBirths_(ss, citizens, households, cycle);
@@ -730,6 +739,10 @@ function updateHouseholdIncomes_(ctx, households, citizens) {
       if (!money) continue;
       totalIncome += money.income;
       totalSavings += money.netWorth;
+    }
+    // engine.57 P2: off-camera spouse earns too (couple row, 1 tracked member)
+    if (household.householdType === HOUSEHOLD_TYPES.COUPLE && members.length === 1) {
+      totalIncome += GENERIC_SPOUSE_SALARY;
     }
     var vecIdx = household.rowIndex - 2;
     if (vecIdx >= 0 && vecIdx < incomeVec.length) {

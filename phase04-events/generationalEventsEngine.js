@@ -341,24 +341,11 @@ function runGenerationalEngine_(ctx) {
     // engine.57 P4: household presence is a causal input on family fates
     var hasHousehold = iHouseholdId >= 0 && String(row[iHouseholdId] || "").trim() !== "";
 
-    if (counts.weddings < limits.weddings && birthYear) {
-      var weddingResult = checkWedding_(ctx, popId, age, lifeHistory, calendarContext, hasHousehold);
-      if (weddingResult) {
-        ctx.summary.generationalEvents.push(applyMilestone_(
-          ctx, row, iLife, iLastU, weddingResult, name, popId, neighborhood, cycle, calendarContext
-        ));
-        // S248 Track 1: a wedding flips MaritalStatus (lowercase enum, matches
-        // live SL: married/single/divorced/partnered/widowed). The off-sample
-        // spouse stays implicit (S248 seam = births/partners off-sample);
-        // tracked-couple binding still routes through createGenerationalBond_.
-        if (iMarital >= 0) row[iMarital] = "married";
-        if (weddingResult.spouseId) {
-          createGenerationalBond_(ctx, popId, weddingResult.spouseId, "romantic", "wedding", "", neighborhood, "Married partners");
-        }
-        updatedRows[r] = true;
-        counts.weddings++;
-      }
-    }
+    // engine.57 P5 (Mike-direct): "marriage comes from bonds not events."
+    // The dice-wedding path is RETIRED — checkWedding_ married citizens to
+    // nobody (0 romantic bonds ever existed to name a spouse). Weddings now
+    // fire in bondEngine when a grown romance crosses MARRIAGE_THRESHOLD.
+    // checkWedding_ retained below for reference, no caller.
 
     if (counts.births < limits.births && birthYear) {
       var birthResult = checkBirth_(ctx, popId, age, lifeHistory, calendarContext, hasHousehold);

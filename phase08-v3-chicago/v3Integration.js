@@ -90,8 +90,10 @@ function v3Integration_(ctx) {
     'textureTriggerEngine_': typeof textureTriggerEngine_ === 'function' ? textureTriggerEngine_ : null,
     'chicagoSatelliteEngine_': typeof chicagoSatelliteEngine_ === 'function' ? chicagoSatelliteEngine_ : null,
     'economicRippleEngine_': typeof economicRippleEngine_ === 'function' ? economicRippleEngine_ : null,
-    'mediaFeedbackEngine_': typeof mediaFeedbackEngine_ === 'function' ? mediaFeedbackEngine_ : null,
-    'bondEngine_': typeof bondEngine_ === 'function' ? bondEngine_ : null
+    'mediaFeedbackEngine_': typeof mediaFeedbackEngine_ === 'function' ? mediaFeedbackEngine_ : null
+    // engine.57 P5: bondEngine_ REMOVED — it already runs at Phase5-Bonds
+    // (godWorldEngine2 L306/L1852); this second run re-rolled bond detection
+    // with empty sources every cycle (the S318 audit's double-run).
   };
 
   // Helper for safe function calls (no eval - uses registry lookup)
@@ -136,8 +138,8 @@ function v3Integration_(ctx) {
   // 7. Media feedback loop (v3.4: now has wrapper)
   if (safeCall('mediaFeedbackEngine_')) modulesRan.push('mediaFeedbackEngine');
 
-  // 8. Bond engine (citizen relationships) (v3.4: now has wrapper)
-  if (safeCall('bondEngine_')) modulesRan.push('bondEngine');
+  // 8. Bond engine — engine.57 P5: no longer runs here (double-run fix).
+  // Phase5-Bonds is the single run; see godWorldEngine2.
 
   // 9. Generate new arcs
   var newArcs = [];

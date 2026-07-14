@@ -311,6 +311,13 @@ function runBondEngine_(ctx) {
     }
   }
 
+  // Step 3.5 (engine.57 P5): romance, marriage, and triangle-born hate.
+  // Physics only — no caps, no quotas. What matures, marries; what collides,
+  // feuds. Weddings live HERE now (Mike: "marriage comes from bonds not
+  // events"); the generationalEventsEngine dice path is retired.
+  processRomanceAndMarriage_(ctx);
+  detectTriangleRivalries_(ctx);
+
   // Step 4: Check for confrontation triggers
   var confrontations = checkConfrontationTriggers_(ctx);
   ctx.summary.pendingConfrontations = confrontations;
@@ -1409,6 +1416,217 @@ function resolveRivalry_(ctx, bondId, outcome) {
   }
 
   bond.lastUpdate = currentCycle;
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// engine.57 P5 — ROMANCE, MARRIAGE, TRIANGLE HATE (physics, no quotas)
+// ════════════════════════════════════════════════════════════════════════════
+
+// Dials — the world's biology, not its script. No output caps anywhere.
+var ROMANCE_THRESHOLD = 7;    // friendship held this high can turn romantic
+var ROMANCE_CHANCE = 0.10;    // per-cycle chance once conditions hold
+var MARRIAGE_THRESHOLD = 8;   // a romance grown this strong marries
+var TRIANGLE_BIRTH_INTENSITY = 5; // rivals born from a shared love start here
+
+function bondInWorldStamp_(cycle) {
+  var y = Math.floor((cycle - 1) / 52) + 1;
+  var c = ((cycle - 1) % 52) + 1;
+  return 'Y' + y + 'C' + c;
+}
+
+function appendBondLifeLine_(ctx, ledgerIdx, popId, tag, text, cycle) {
+  // ctx.ledger mutation (Phase 42 §5.6) — the citizen REMEMBERS the event;
+  // wakes and interviews read LifeHistory, so this is what makes a bond real.
+  var header = ctx.ledger.headers;
+  var iLife = header.indexOf('LifeHistory');
+  if (iLife < 0) return;
+  var row = ctx.ledger.rows[ledgerIdx];
+  if (!row) return;
+  var line = bondInWorldStamp_(cycle) + ' — [' + tag + '] ' + text;
+  row[iLife] = (row[iLife] ? row[iLife] + '\n' : '') + line;
+  ctx.ledger.dirty = true;
+}
+
+function buildBondLedgerIndex_(ctx) {
+  // POPID -> {idx, marital, gender, birthYear, householdId, income, name, hood}
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  var idx = function(n) { return header.indexOf(n); };
+  var iPop = idx('POPID'), iFirst = idx('First'), iLast = idx('Last'),
+      iMar = idx('MaritalStatus'), iGen = idx('Gender'), iBirth = idx('BirthYear'),
+      iHH = idx('HouseholdId'), iInc = idx('Income'), iHood = idx('Neighborhood'),
+      iStatus = idx('Status');
+  if (iPop < 0) return null;
+  var map = {};
+  for (var r = 0; r < rows.length; r++) {
+    var row = rows[r];
+    var status = (row[iStatus] || 'active').toString().toLowerCase();
+    if (status !== 'active') continue;
+    map[row[iPop]] = {
+      idx: r,
+      name: ((row[iFirst] || '') + ' ' + (row[iLast] || '')).trim(),
+      marital: (row[iMar] || '').toString().toLowerCase().trim(),
+      gender: iGen >= 0 ? (row[iGen] || '').toString().toLowerCase().trim() : '',
+      birthYear: iBirth >= 0 ? (Number(row[iBirth]) || 0) : 0,
+      householdId: iHH >= 0 ? String(row[iHH] || '').trim() : '',
+      income: iInc >= 0 ? (Number(row[iInc]) || 0) : 0,
+      hood: iHood >= 0 ? (row[iHood] || '') : ''
+    };
+  }
+  return map;
+}
+
+function processRomanceAndMarriage_(ctx) {
+  if (!ctx.ledger || !ctx.ledger.rows || !ctx.ledger.rows.length) return;
+  var rng = safeRand_(ctx);
+  var cycle = ctx.summary.cycleId || ctx.config.cycleCount || 0;
+  var simYear = 2040 + Math.floor(cycle / 52);
+  var ageMin = (typeof AGE_RANGES !== 'undefined' && AGE_RANGES.WEDDING) ? AGE_RANGES.WEDDING.min : 20;
+  var ageMax = (typeof AGE_RANGES !== 'undefined' && AGE_RANGES.WEDDING) ? AGE_RANGES.WEDDING.max : 65;
+  var people = buildBondLedgerIndex_(ctx);
+  if (!people) return;
+  var bonds = ctx.summary.relationshipBonds || [];
+
+  for (var b = 0; b < bonds.length; b++) {
+    var bond = bonds[b];
+    if (!bond || bond.status !== BOND_STATUS.ACTIVE) continue;
+    var A = people[bond.citizenA], B = people[bond.citizenB];
+    if (!A || !B) continue;
+
+    var bothSingle = A.marital === 'single' && B.marital === 'single';
+    var ageA = A.birthYear > 0 ? simYear - A.birthYear : 0;
+    var ageB = B.birthYear > 0 ? simYear - B.birthYear : 0;
+    var ageOk = ageA >= ageMin && ageA <= ageMax && ageB >= ageMin && ageB <= ageMax;
+    var oppositeSex = A.gender && B.gender && A.gender !== B.gender;
+
+    // ── Friendship deepens into romance (the only door into courtship) ──
+    if (bond.bondType === BOND_TYPES.FRIENDSHIP &&
+        Number(bond.intensity) >= ROMANCE_THRESHOLD &&
+        bothSingle && ageOk && oppositeSex &&
+        rng() < ROMANCE_CHANCE) {
+      bond.bondType = BOND_TYPES.ROMANTIC;
+      bond.notes = 'Grew from friendship (C' + cycle + ')';
+      bond.lastUpdate = cycle;
+      appendBondLifeLine_(ctx, A.idx, 'Bond', 'something shifted with ' + B.name + ' — more than friends now', cycle);
+      appendBondLifeLine_(ctx, B.idx, 'Bond', 'something shifted with ' + A.name + ' — more than friends now', cycle);
+      ctx.summary.storyHooks = ctx.summary.storyHooks || [];
+      ctx.summary.storyHooks.push({
+        hookType: 'ROMANCE_BEGUN', severity: 3, priority: 3,
+        description: A.name + ' and ' + B.name + ' — a friendship in ' + (bond.neighborhood || A.hood) + ' has turned into something more',
+        cycleGenerated: cycle, neighborhood: bond.neighborhood || A.hood,
+        domain: 'COMMUNITY', text: A.name + ' and ' + B.name + ' — a friendship turned into something more'
+      });
+      Logger.log('P5 romance: ' + bond.citizenA + ' <-> ' + bond.citizenB);
+      continue; // romance and marriage never happen the same cycle
+    }
+
+    // ── A grown romance marries. Period. (No caps — what matures, marries.)
+    if (bond.bondType === BOND_TYPES.ROMANTIC &&
+        Number(bond.intensity) >= MARRIAGE_THRESHOLD &&
+        bothSingle && ageOk) {
+      marryCitizens_(ctx, bond, A, B, cycle);
+    }
+  }
+}
+
+function marryCitizens_(ctx, bond, A, B, cycle) {
+  var header = ctx.ledger.headers;
+  var idx = function(n) { return header.indexOf(n); };
+  var iMar = idx('MaritalStatus'), iSp = idx('SpouseId'), iHH = idx('HouseholdId');
+
+  // Both rows: married + SpouseId (name beside ID — the sheet reads human)
+  if (iMar >= 0) {
+    ctx.ledger.rows[A.idx][iMar] = 'married';
+    ctx.ledger.rows[B.idx][iMar] = 'married';
+  }
+  if (iSp >= 0) { // column exists on sandbox; prod no-ops until rollout rename
+    ctx.ledger.rows[A.idx][iSp] = bond.citizenB + ' ' + B.name;
+    ctx.ledger.rows[B.idx][iSp] = bond.citizenA + ' ' + A.name;
+  }
+
+  // Marriage FORMS the household (Mike's model) — header-resolved append so
+  // the row lands right on both the 13-col sandbox and any older schema.
+  var hhId = 'HH-' + String(cycle).padStart(4, '0') + '-M' + String(Math.floor(safeRand_(ctx)() * 900) + 100);
+  var ss = ctx.ss;
+  var sheet = ss.getSheetByName('Household_Ledger');
+  if (sheet) {
+    var hHead = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+    var vals = {
+      HouseholdId: hhId, HeadOfHousehold: bond.citizenA, HouseholdType: 'couple',
+      Members: JSON.stringify([bond.citizenA, bond.citizenB]),
+      Neighborhood: A.hood, HousingType: 'rented',
+      MonthlyRent: (typeof estimateRent_ === 'function') ? estimateRent_(A.hood) : 1700,
+      HousingCost: 0, HouseholdIncome: A.income + B.income,
+      FormedCycle: cycle, DissolvedCycle: '', Status: 'active', HouseholdSavings: 0
+    };
+    var newRow = [];
+    for (var h = 0; h < hHead.length; h++) newRow.push(vals.hasOwnProperty(hHead[h]) ? vals[hHead[h]] : '');
+    sheet.appendRow(newRow);
+  }
+  if (iHH >= 0) {
+    ctx.ledger.rows[A.idx][iHH] = hhId;
+    ctx.ledger.rows[B.idx][iHH] = hhId;
+  }
+
+  // Family register row (Mike's format, names beside IDs)
+  var reg = ss.getSheetByName('Family_Relationships');
+  if (reg) {
+    var husband = A.gender === 'male' ? (bond.citizenA + ' ' + A.name) : (bond.citizenB + ' ' + B.name);
+    var wife = A.gender === 'male' ? (bond.citizenB + ' ' + B.name) : (bond.citizenA + ' ' + A.name);
+    reg.appendRow([hhId, husband, wife, 'married', cycle, 'active', '', '', '', '', '']);
+  }
+
+  // Memory + tag ([Wedding] keeps every legacy remarriage check honest)
+  appendBondLifeLine_(ctx, A.idx, 'Wedding', 'married ' + B.name + '; a household begins in ' + A.hood, cycle);
+  appendBondLifeLine_(ctx, B.idx, 'Wedding', 'married ' + A.name + '; a household begins in ' + A.hood, cycle);
+
+  bond.notes = 'Married C' + cycle;
+  bond.lastUpdate = cycle;
+
+  ctx.summary.storyHooks = ctx.summary.storyHooks || [];
+  ctx.summary.storyHooks.push({
+    hookType: 'CITIZEN_MARRIED', severity: 5, priority: 4,
+    description: A.name + ' and ' + B.name + ' married in ' + A.hood + ' — a new household forms',
+    cycleGenerated: cycle, neighborhood: A.hood,
+    domain: 'COMMUNITY', text: A.name + ' and ' + B.name + ' married in ' + A.hood
+  });
+  Logger.log('P5 MARRIAGE: ' + bond.citizenA + ' + ' + bond.citizenB + ' -> ' + hhId);
+}
+
+function detectTriangleRivalries_(ctx) {
+  // Two romances converging on one citizen breed a rivalry between the two
+  // others — hate born from collision, not dice. (Broader hate sources —
+  // envy, displacement grievance — are design-listed, not yet built.)
+  var bonds = ctx.summary.relationshipBonds || [];
+  var cycle = ctx.summary.cycleId || ctx.config.cycleCount || 0;
+  var people = buildBondLedgerIndex_(ctx);
+  if (!people) return;
+  var romByCitizen = {};
+  for (var b = 0; b < bonds.length; b++) {
+    var bond = bonds[b];
+    if (!bond || bond.bondType !== BOND_TYPES.ROMANTIC || bond.status !== BOND_STATUS.ACTIVE) continue;
+    (romByCitizen[bond.citizenA] = romByCitizen[bond.citizenA] || []).push(bond.citizenB);
+    (romByCitizen[bond.citizenB] = romByCitizen[bond.citizenB] || []).push(bond.citizenA);
+  }
+  for (var popId in romByCitizen) {
+    var suitors = romByCitizen[popId];
+    if (suitors.length < 2) continue;
+    for (var i = 0; i < suitors.length - 1; i++) {
+      for (var j = i + 1; j < suitors.length; j++) {
+        if (bondExists_(ctx, suitors[i], suitors[j])) continue;
+        var nb = createBond_(ctx, suitors[i], suitors[j], BOND_TYPES.RIVALRY,
+          'romantic_triangle', '', (people[popId] || {}).hood || '',
+          'Both drawn to ' + ((people[popId] || {}).name || popId));
+        if (nb) {
+          nb.intensity = TRIANGLE_BIRTH_INTENSITY;
+          var si = people[suitors[i]], sj = people[suitors[j]];
+          if (si) appendBondLifeLine_(ctx, si.idx, 'Bond', 'there is someone else circling ' + ((people[popId] || {}).name || 'them') + ' — and it stings', cycle);
+          if (sj) appendBondLifeLine_(ctx, sj.idx, 'Bond', 'there is someone else circling ' + ((people[popId] || {}).name || 'them') + ' — and it stings', cycle);
+          Logger.log('P5 triangle rivalry: ' + suitors[i] + ' <-> ' + suitors[j] + ' over ' + popId);
+        }
+      }
+    }
+  }
 }
 
 function createBond_(ctx, citizenA, citizenB, bondType, origin, domainTag, neighborhood, notes) {

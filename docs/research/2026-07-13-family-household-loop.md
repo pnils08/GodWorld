@@ -62,13 +62,7 @@ Mike's constraints (2026-07-13):
 - Existing canon: some spouses are off-ledger/untracked → an untracked spouse needs a **generic salary** for household physics.
 - Lifecycle-wake gap: a married citizen with no spouse in the data has nothing to talk about — the spouse needs at least an **identity** (name), not just a number.
 
-**Proposed rule — OFF-LEDGER SPOUSE (OLS), status: proposed, awaiting Mike:**
-1. Every married citizen whose spouse is not a POP row gets a persistent off-ledger spouse record, generated ONCE and stored (never re-rolled): spouse name + generic income.
-2. Generic income banded off the citizen's own economic profile/neighborhood (formula set at build time; deterministic via ctx.rng).
-3. The off-ledger spouse counts in household physics: household income = citizen income + spouse generic income; household type = couple.
-4. The off-ledger spouse is visible identity: named in Family_Relationships (Husband/Wife cell), on the citizen's SL row (Spouse column, e.g. `OL: Renata Vasquez`), and in wake/interview context — the citizen can talk about their wife by name.
-5. Off-ledger spouses are NOT citizens: no POP row, no events, no protagonism. Promotion path exists — if a storyline needs the spouse on-stage, they get promoted to a full citizen row (existing advancement-intake pattern), keeping their OLS name/income.
-6. The OLS class does not grow from new weddings (D1 pairs are both on-ledger); it covers the legacy ~367 + any future canon-declared off-screen marriages.
+**REJECTED (Mike, 2026-07-13): "Off-Ledger Spouse" — name + generic salary without a citizen row.** Rejected same session it was proposed. The rule for the legacy marrieds is still OPEN — Mike defines it; do not re-propose ghost-spouse variants.
 
 ## 4. Mechanical fix queue (not forks — execute once design is set)
 

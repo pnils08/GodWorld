@@ -1502,6 +1502,22 @@ function storyHookEngine_(ctx) {
   // Sort by priority descending
   deduped.sort(function(a, b) { return b.priority - a.priority; });
 
+  // S318 engine.57 P1: MERGE with the citizen-life hooks Phase 5 pushed
+  // (CITIZEN_RELOCATED, wealth, education, trajectory). This assignment used
+  // to REPLACE ctx.summary.storyHooks, silently discarding every one of them
+  // before saveV3Hooks_ wrote the deck — the newsroom never saw a move.
+  // Phase-5 hooks use description/severity; normalize to text/priority so
+  // the deck writer (saveV3Hooks_ maps h.text, h.priority) can render them.
+  var carried = ctx.summary.storyHooks || [];
+  for (var ci = 0; ci < carried.length; ci++) {
+    var ch = carried[ci];
+    if (!ch) continue;
+    if (!ch.text && ch.description) ch.text = ch.description;
+    if (!ch.priority && ch.severity) ch.priority = ch.severity;
+    if (!ch.domain && ch.hookType) ch.domain = ch.hookType;
+    deduped.push(ch);
+  }
+
   ctx.summary.storyHooks = deduped;
 }
 

@@ -21,6 +21,11 @@ const econ = require('../lib/economicLookup');
 const fs = require('fs');
 
 const DRY_RUN = process.argv.includes('--dry-run');
+// S318 age gate: minors (< 16) never get profile income. Sim year is
+// 2040 + floor(cycle/52) (engine convention); pass --sim-year=YYYY to match
+// the current cycle. Default 2042 = C104-C155 window.
+const simYearArg = process.argv.find(a => a.startsWith('--sim-year='));
+const SIM_YEAR = simYearArg ? parseInt(simYearArg.split('=')[1], 10) : 2042;
 
 // Seeded RNG for deterministic results
 const RNG_SEED = 20410801; // Oakland 2041, Cycle 84 (August 1)
@@ -74,6 +79,7 @@ async function main() {
   const iWealthLevel = col('WealthLevel');
   const iSavingsRate = col('SavingsRate');
   const iNetWorth = col('NetWorth');
+  const iBirthYear = col('BirthYear');
 
   if (iPopId < 0 || iRoleType < 0 || iStatus < 0 || iIncome < 0) {
     console.error('ERROR: Missing required columns');
@@ -94,6 +100,7 @@ async function main() {
     sportsSkipped: 0,
     unmapped: [],
     inactiveSkipped: 0,
+    minorsSkipped: 0,
     byNeighborhood: {},
     byCategory: {},
     incomes: []
@@ -121,6 +128,15 @@ async function main() {
     // Skip citizens without a role
     if (!roleType) {
       results.unmapped.push({ popId: popId, name: name, reason: 'no RoleType' });
+      continue;
+    }
+
+    // S318 age gate: minors never receive profile income (floor 16).
+    // Missing BirthYear = adult, matching the engine's fallback.
+    const birthYear = iBirthYear >= 0 ? (parseInt(row[iBirthYear], 10) || 0) : 0;
+    const age = birthYear > 0 ? (SIM_YEAR - birthYear) : 30;
+    if (age < 16) {
+      results.minorsSkipped++;
       continue;
     }
 
@@ -202,6 +218,7 @@ async function main() {
   console.log('Citizens updated:', results.updated);
   console.log('Sports overrides skipped:', results.sportsSkipped);
   console.log('Inactive/deceased skipped:', results.inactiveSkipped);
+  console.log('Minors (< 16) skipped:', results.minorsSkipped);
   if (results.unmapped.length > 0) {
     console.log('UNMAPPED (' + results.unmapped.length + '):');
     results.unmapped.forEach(function(u) {

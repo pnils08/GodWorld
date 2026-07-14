@@ -270,9 +270,12 @@ function updateCareerProgression_(ctx, cycle, rng) {
     var lastPromotion = iLastPromotion >= 0 ? (Number(row[iLastPromotion]) || 0) : 0;
     var lifeHistory = iLife >= 0 ? (row[iLife] || '').toString() : '';
 
-    // Update years in career
-    yearsInCareer += 0.5; // ~6 months per cycle
-    row[iYearsInCareer] = Math.round(yearsInCareer * 10) / 10;
+    // Update years in career — only working-age adults accrue (S318 age
+    // gate; students banked career years for cycles, e.g. age 10 with 36y).
+    if (age >= 22) {
+      yearsInCareer += 0.5; // ~6 months per cycle
+      row[iYearsInCareer] = Math.round(yearsInCareer * 10) / 10;
+    }
 
     // Check for career stage advancement
     if (age < 22) {

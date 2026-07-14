@@ -189,11 +189,15 @@ function calculateCitizenIncomes_(ctx) {
   var iStatus = idx('Status');
   var iTier = idx('Tier');
   var iEconKey = idx('EconomicProfileKey');
+  var iBirthYear = idx('BirthYear');
 
   if (iIncome < 0 || iLife < 0) return { updated: 0 };
 
   // v14.2: Deterministic RNG (fixes Math.random bug from v1.0)
   var rng = safeRand_(ctx);
+
+  var cycle = (ctx.summary && ctx.summary.cycleId) || (ctx.config && ctx.config.cycleCount) || 0;
+  var simYear = 2040 + Math.floor(cycle / 52);
 
   var updated = 0;
 
@@ -201,6 +205,18 @@ function calculateCitizenIncomes_(ctx) {
     var row = rows[r];
     var status = (row[iStatus] || 'active').toString().toLowerCase();
     if (status === 'deceased' || status === 'inactive') continue;
+
+    // Minors earn nothing (S318 age gate, floor 16). Missing BirthYear is
+    // treated as adult — same fallback the career engine uses.
+    var birthYear = iBirthYear >= 0 ? (Number(row[iBirthYear]) || 0) : 0;
+    var age = birthYear > 0 ? (simYear - birthYear) : 30;
+    if (age < 16) {
+      if (Number(row[iIncome]) !== 0) {
+        row[iIncome] = 0;
+        updated++;
+      }
+      continue;
+    }
 
     // v14.2: Skip citizens with economic profiles — income already set by
     // applyEconomicProfiles.js seeding script and adjusted by Career Engine

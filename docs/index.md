@@ -77,6 +77,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 - **[[WORLD_MEMORY]]** — world memory project status: archive ingest, desk historical context. *(plan, media, active)*
 
 ### Data & ledgers
+- **[[SIM_DOCTRINE]]** — what makes GodWorld a sim, not a data system: no output caps, physics only, world allowed to hurt (Mike-direct S318). Consult before designing any mechanic. *(doctrine, engine, active)*
 - **[[SIMULATION_LEDGER]]** — 675 citizens, 46 columns, structure and column map. *(reference, citizens, active)*
 - **[[SPREADSHEET]]** — Google Sheets environment, 65 tabs, service account scope. *(reference, infrastructure, active)*
 

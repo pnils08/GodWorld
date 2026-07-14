@@ -21,6 +21,7 @@ These are your **memory** of the engine and the ledger. Reach for them reflexive
 | Ledger columns, what writes a column, letters past Z, citizen-data fields | `docs/SIMULATION_LEDGER.md` + `docs/SCHEMA.md` |
 | Which script reads/writes which tab | `docs/engine/SHEETS_MANIFEST.md` |
 | Known defects / open repair rows | `docs/engine/ENGINE_REPAIR.md` *(already Always-Load)* |
+| Designing ANY engine mechanic — what makes it a sim, not a data system | `docs/SIM_DOCTRINE.md` *(Mike-direct S318 — no output caps, physics only, world allowed to hurt; consult BEFORE design)* |
 | What connects to what (dependency trace) | `graphify query "..."` (persistent graph) |
 
 **Load on demand, not at boot** — `ENGINE_STUB_MAP` is ~86KB; auto-loading it every session is pure boot-burn (the dominant token lever — auto-memory `feedback_token-burn-hierarchy`). The point is reflexive *use*, not always-resident.

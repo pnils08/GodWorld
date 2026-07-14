@@ -206,6 +206,7 @@ function runGenerationalEngine_(ctx) {
   var iNumChildren = idx("NumChildren");
   var iDialState = idx("DialState"); // engine.32 T5 — dial-biased milestone odds
   var iHouseholdId = idx("HouseholdId"); // engine.57 P4 — household drives fates
+  var iGenderCol = idx("Gender"); // engine.57 P6 — births need parent sex + child sex
 
   // LifeHistory_Log handle removed S204 B2 — appends route through queueAppendIntent_.
   var cycle = (ctx.summary && ctx.summary.cycleId) || (ctx.config && ctx.config.cycleCount) || 0;
@@ -348,18 +349,45 @@ function runGenerationalEngine_(ctx) {
     // checkWedding_ retained below for reference, no caller.
 
     if (counts.births < limits.births && birthYear) {
-      var birthResult = checkBirth_(ctx, popId, age, lifeHistory, calendarContext, hasHousehold);
+      var maritalNow = iMarital >= 0 ? (row[iMarital] || "").toString().toLowerCase().trim() : "";
+      var birthResult = checkBirth_(ctx, popId, age, lifeHistory, calendarContext, hasHousehold, maritalNow);
       if (birthResult) {
         ctx.summary.generationalEvents.push(applyMilestone_(
           ctx, row, iLife, iLastU, birthResult, name, popId, neighborhood, cycle, calendarContext
         ));
-        // S248 Track 1 (seam = OFF-SAMPLE births, Mike S248): a birth increments
-        // the parent's NumChildren only. NO tracked infant row is created — the
-        // child lives Tier-5 until a published story names it (model point 4).
+        // engine.57 P6 (reverses S248, Mike-direct S318): a birth creates a
+        // REAL citizen row — age 0, income 0, in the parents' household.
         if (iNumChildren >= 0) row[iNumChildren] = (Number(row[iNumChildren]) || 0) + 1;
+        createChildRow_(ctx, r, cycle);
         triggerBirthCascade_(ctx, popId, name, neighborhood, cycle, calendarContext);
         updatedRows[r] = true;
         counts.births++;
+      }
+    }
+
+    // engine.57 P6 — single motherhood: rare, a true slice of a population
+    // (Mike-direct). An unmarried woman without a household: a birth both
+    // creates the child AND forms her family household. Physics-rare, no cap.
+    if (counts.births < limits.births && birthYear && !hasHousehold &&
+        iGenderCol >= 0 && (row[iGenderCol] || "").toString().toLowerCase() === "female") {
+      var mar2 = iMarital >= 0 ? (row[iMarital] || "").toString().toLowerCase().trim() : "";
+      if (mar2 === "single" && age >= AGE_RANGES.BIRTH.min && age <= AGE_RANGES.BIRTH.max) {
+        var smDials = getCitizenDialBands_(ctx, popId);
+        var smChance = 0.0005 * (smDials ? smDials.familyFreq : 1);
+        if (chance_(ctx, smChance)) {
+          var smHH = formSingleParentHousehold_(ctx, r, cycle);
+          if (smHH) {
+            if (iNumChildren >= 0) row[iNumChildren] = (Number(row[iNumChildren]) || 0) + 1;
+            createChildRow_(ctx, r, cycle);
+            ctx.summary.generationalEvents.push(applyMilestone_(
+              ctx, row, iLife, iLastU,
+              { type: "birth", description: "welcomed a child, beginning a family of her own", tag: "Birth", season: calendarContext.season },
+              name, popId, neighborhood, cycle, calendarContext
+            ));
+            updatedRows[r] = true;
+            counts.births++;
+          }
+        }
       }
     }
 
@@ -769,11 +797,13 @@ function checkWedding_(ctx, popId, age, lifeHistory, cal, hasHousehold) {
   };
 }
 
-function checkBirth_(ctx, popId, age, lifeHistory, cal, hasHousehold) {
+function checkBirth_(ctx, popId, age, lifeHistory, cal, hasHousehold, marital) {
   // engine.57 P4 (Mike verbatim): "no kid is born unless there is a household"
   if (!hasHousehold) return null;
   if (age < AGE_RANGES.BIRTH.min || age > AGE_RANGES.BIRTH.max) return null;
-  if (lifeHistory.indexOf("[Wedding]") < 0) return null;
+  // engine.57 P6: the LEDGER is the truth (D5) — married per MaritalStatus,
+  // not a [Wedding] text scan (legacy/backfilled couples carry no tag).
+  if (marital !== "married") return null;
 
   var childMatches = lifeHistory.match(/\[Birth\]/g);
   var childCount = childMatches ? childMatches.length : 0;
@@ -806,6 +836,184 @@ function checkBirth_(ctx, popId, age, lifeHistory, cal, hasHousehold) {
     childNumber: childCount + 1,
     season: cal.season
   };
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// engine.57 P6 — BIRTHS CREATE PEOPLE (reverses S248, Mike-direct S318)
+// ════════════════════════════════════════════════════════════════════════════
+
+var CHILD_FIRST_NAMES = {
+  male: ["Marcus", "Diego", "Elijah", "Theo", "Ravi", "Jonah", "Malik", "Owen", "Mateo", "Amir", "Felix", "Dante"],
+  female: ["Amara", "Sofia", "Nia", "Iris", "Priya", "Rosa", "Maya", "Elena", "Zora", "Lucia", "Willa", "Sana"]
+};
+
+function createChildRow_(ctx, parentRowIdx, cycle) {
+  // New citizen per the proven pattern (processAdvancementIntake impl #18):
+  // push into ctx.ledger.rows; Phase 10 consolidated commit auto-extends.
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  var idx = function(n) { return header.indexOf(n); };
+  var parent = rows[parentRowIdx];
+  var iPop = idx("POPID");
+  if (iPop < 0) return null;
+
+  // next POPID — cache the max scan once per cycle, count pushes after
+  if (!ctx._maxPopN) {
+    var maxN = 0;
+    for (var r = 0; r < rows.length; r++) {
+      var m = /^POP-(\d+)$/.exec(rows[r][iPop] || "");
+      if (m && +m[1] > maxN) maxN = +m[1];
+    }
+    ctx._maxPopN = maxN;
+  }
+  ctx._maxPopN++;
+  var childId = "POP-" + String(ctx._maxPopN).padStart(5, "0");
+
+  var rng = ctx._rng || function() { return 0.5; };
+  var sex = rng() < 0.5 ? "male" : "female";
+  var pool = CHILD_FIRST_NAMES[sex];
+  var firstName = pool[Math.floor(rng() * pool.length)];
+  var lastName = idx("Last") >= 0 ? (parent[idx("Last")] || "") : "";
+  var simYear = 2040 + Math.floor(cycle / 52);
+  var hood = idx("Neighborhood") >= 0 ? parent[idx("Neighborhood")] : "";
+  var hhId = idx("HouseholdId") >= 0 ? String(parent[idx("HouseholdId")] || "").trim() : "";
+  var parentId = parent[iPop];
+  var parentName = ((idx("First") >= 0 ? parent[idx("First")] : "") + " " + lastName).trim();
+
+  // second parent = spouse if linked (SpouseId cell is "POPID Name")
+  var spouseCell = idx("SpouseId") >= 0 ? String(parent[idx("SpouseId")] || "").trim() : "";
+  var spouseId = spouseCell ? (spouseCell.split(" ")[0] || "") : "";
+
+  var newRow = new Array(header.length).fill("");
+  var set = function(col, val) { var i = idx(col); if (i >= 0) newRow[i] = val; };
+  set("POPID", childId);
+  set("First", firstName);
+  set("Last", lastName);
+  set("Tier", 4);
+  set("RoleType", "student");
+  set("ClockMode", "ENGINE");
+  set("Status", "Active");
+  set("BirthYear", simYear);
+  set("OrginCity", "Oakland");
+  set("Neighborhood", hood);
+  set("HouseholdId", hhId);
+  set("MaritalStatus", "single");
+  set("Gender", sex);
+  set("Income", 0);
+  set("NumChildren", 0);
+  set("EducationLevel", "Pre-K");
+  set("ParentIds", JSON.stringify(spouseId ? [parentId, spouseId] : [parentId]));
+  set("LifeHistory", "Y" + (Math.floor((cycle - 1) / 52) + 1) + "C" + (((cycle - 1) % 52) + 1) +
+    " — [Birth] born to " + (parentName || parentId) + " in " + hood);
+  rows.push(newRow);
+  ctx.ledger.dirty = true;
+
+  // both parents' ChildrenIds gain the child
+  var iChildren = idx("ChildrenIds");
+  var addChild = function(pRow) {
+    if (iChildren < 0 || !pRow) return;
+    var list = [];
+    try { list = JSON.parse(pRow[iChildren] || "[]"); } catch (e) {}
+    if (!Array.isArray(list)) list = [];
+    list.push(childId);
+    pRow[iChildren] = JSON.stringify(list);
+  };
+  addChild(parent);
+  if (spouseId) {
+    for (var s = 0; s < rows.length; s++) {
+      if (rows[s][iPop] === spouseId) {
+        addChild(rows[s]);
+        var iNC = idx("NumChildren");
+        if (iNC >= 0) rows[s][iNC] = (Number(rows[s][iNC]) || 0) + 1;
+        break;
+      }
+    }
+  }
+
+  // household Members + type -> family; register Child slot (own-tracking
+  // sheets — direct writes, same carve-out class as the rest of the engine)
+  if (hhId && ctx.ss) {
+    try {
+      var hSheet = ctx.ss.getSheetByName("Household_Ledger");
+      if (hSheet) {
+        var hv = hSheet.getDataRange().getValues();
+        var hh0 = hv[0];
+        var cId = hh0.indexOf("HouseholdId"), cMem = hh0.indexOf("Members"), cType = hh0.indexOf("HouseholdType");
+        for (var hr = 1; hr < hv.length; hr++) {
+          if (hv[hr][cId] !== hhId) continue;
+          var mem = [];
+          try { mem = JSON.parse(hv[hr][cMem] || "[]"); } catch (e) {}
+          if (!Array.isArray(mem)) mem = [];
+          mem.push(childId);
+          hSheet.getRange(hr + 1, cMem + 1).setValue(JSON.stringify(mem));
+          if (cType >= 0) hSheet.getRange(hr + 1, cType + 1).setValue("family");
+          break;
+        }
+      }
+      var reg = ctx.ss.getSheetByName("Family_Relationships");
+      if (reg) {
+        var rv = reg.getDataRange().getValues();
+        var r0 = rv[0];
+        var rHH = r0.indexOf("HouseholdID") >= 0 ? r0.indexOf("HouseholdID") : r0.indexOf("HouseholdId");
+        var childCols = [];
+        for (var rc = 0; rc < r0.length; rc++) if (/^Child\d+$/i.test(String(r0[rc]))) childCols.push(rc);
+        for (var rr = 1; rr < rv.length; rr++) {
+          if (rv[rr][rHH] !== hhId) continue;
+          for (var cc = 0; cc < childCols.length; cc++) {
+            if (!String(rv[rr][childCols[cc]] || "").trim()) {
+              reg.getRange(rr + 1, childCols[cc] + 1).setValue(childId + " " + firstName + " " + lastName);
+              break;
+            }
+          }
+          break;
+        }
+      }
+    } catch (e) {
+      Logger.log("createChildRow_ sheet-side: " + e);
+    }
+  }
+
+  Logger.log("P6 BIRTH: " + childId + " " + firstName + " " + lastName + " -> " + (hhId || "no-household"));
+  return childId;
+}
+
+function formSingleParentHousehold_(ctx, motherRowIdx, cycle) {
+  // Marriage isn't the only door — a single mother forms a true household
+  // (rare; the doctrine's "true slice"). Returns the new household id.
+  var header = ctx.ledger.headers;
+  var row = ctx.ledger.rows[motherRowIdx];
+  var idx = function(n) { return header.indexOf(n); };
+  var iHH = idx("HouseholdId");
+  if (iHH < 0 || !ctx.ss) return null;
+  var hood = idx("Neighborhood") >= 0 ? row[idx("Neighborhood")] : "";
+  var income = idx("Income") >= 0 ? (Number(row[idx("Income")]) || 0) : 0;
+  var popId = row[idx("POPID")];
+  var name = ((idx("First") >= 0 ? row[idx("First")] : "") + " " + (idx("Last") >= 0 ? row[idx("Last")] : "")).trim();
+  var hhId = "HH-" + String(cycle).padStart(4, "0") + "-F" + String(Math.floor((ctx._rng ? ctx._rng() : 0.5) * 900) + 100);
+  try {
+    var sheet = ctx.ss.getSheetByName("Household_Ledger");
+    if (!sheet) return null;
+    var hHead = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+    var vals = {
+      HouseholdId: hhId, HeadOfHousehold: popId, HouseholdType: "family",
+      Members: JSON.stringify([popId]), Neighborhood: hood, HousingType: "rented",
+      MonthlyRent: (typeof estimateRent_ === "function") ? estimateRent_(hood) : 1700,
+      HousingCost: 0, HouseholdIncome: income, FormedCycle: cycle,
+      DissolvedCycle: "", Status: "active", HouseholdSavings: 0
+    };
+    var newRow = [];
+    for (var h = 0; h < hHead.length; h++) newRow.push(vals.hasOwnProperty(hHead[h]) ? vals[hHead[h]] : "");
+    sheet.appendRow(newRow);
+    var reg = ctx.ss.getSheetByName("Family_Relationships");
+    if (reg) reg.appendRow([hhId, "", popId + " " + name, "single-parent", cycle, "active", "", "", "", "", ""]);
+  } catch (e) {
+    Logger.log("formSingleParentHousehold_: " + e);
+    return null;
+  }
+  row[iHH] = hhId;
+  ctx.ledger.dirty = true;
+  Logger.log("P6 SINGLE-PARENT HOUSEHOLD: " + hhId + " for " + popId);
+  return hhId;
 }
 
 function checkPromotion_(ctx, popId, age, lifeHistory, tier, tierRole, cal) {

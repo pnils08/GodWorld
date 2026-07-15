@@ -8,13 +8,19 @@
 //   Generic_Citizens (same promotion shape as engine57_spouse_backfill bucket C):
 //   real SL rows, kid's surname, married to each other, register row, GC → Promoted.
 // Dry-run by default; --apply executes. All writes resolved by header name.
-process.env.GODWORLD_SHEET_ID = '1wmZTGqIbYL7eVYCplq3iCb2oOGDZ0Inq-pWCtnD1lzc'; // SANDBOX
+// S319 go-live: explicit --sheet-id required — no default target, ever.
+const sheetIdArg = process.argv.find(a => a.startsWith('--sheet-id='));
+const SHEET_ID = sheetIdArg ? sheetIdArg.split('=')[1]
+  : (process.argv.includes('--sheet-id') ? process.argv[process.argv.indexOf('--sheet-id') + 1] : null);
+if (!SHEET_ID) { console.error('--sheet-id required'); process.exit(1); }
+process.env.GODWORLD_SHEET_ID = SHEET_ID;
 const sheets = require('/root/GodWorld/lib/sheets.js');
 
 const APPLY = process.argv.includes('--apply');
 const dripArg = process.argv.indexOf('--drip');
 const DRIP_N = dripArg >= 0 ? (Number(process.argv[dripArg + 1]) || 1) : 0;
-const CYCLE = 103;
+const cycleArg = process.argv.indexOf('--cycle');
+const CYCLE = cycleArg >= 0 ? (Number(process.argv[cycleArg + 1]) || 101) : 101;
 const AGE_ANCHOR = 2041;
 const GENERIC_PARENT_SALARY = 48000; // same rate as engine's GENERIC_SPOUSE_SALARY
 const inWorldStamp = 'Y' + (Math.floor(CYCLE / 52) + 1) + 'C' + (CYCLE % 52);

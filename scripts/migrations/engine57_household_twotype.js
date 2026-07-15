@@ -1,7 +1,12 @@
 // engine.57 Phase 2 migration — SANDBOX ONLY. Two-type Household_Ledger.
 // Dry-run by default; --apply executes. Every write resolved by HEADER NAME
 // at runtime, printed before executing (S318 dry-echo guard).
-process.env.GODWORLD_SHEET_ID = '1wmZTGqIbYL7eVYCplq3iCb2oOGDZ0Inq-pWCtnD1lzc'; // SANDBOX
+// S319 go-live: explicit --sheet-id required — no default target, ever.
+const sheetIdArg = process.argv.find(a => a.startsWith('--sheet-id='));
+const SHEET_ID = sheetIdArg ? sheetIdArg.split('=')[1]
+  : (process.argv.includes('--sheet-id') ? process.argv[process.argv.indexOf('--sheet-id') + 1] : null);
+if (!SHEET_ID) { console.error('--sheet-id required'); process.exit(1); }
+process.env.GODWORLD_SHEET_ID = SHEET_ID;
 const sheets = require('/root/GodWorld/lib/sheets.js');
 
 const APPLY = process.argv.includes('--apply');

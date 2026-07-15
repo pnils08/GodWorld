@@ -221,9 +221,19 @@ function calculateCitizenIncomes_(ctx) {
     // v14.2: Skip citizens with economic profiles — income already set by
     // applyEconomicProfiles.js seeding script and adjusted by Career Engine
     // transitions. Only recalculate for unseeded citizens (fallback path).
+    // S319: SPORTS_OVERRIDE skips too — the sports layer owns athlete pay
+    // (seeder writes income:null for it; career engine never touches it).
+    // The old exclusion re-rolled 90 athlete salaries every cycle.
     var econKey = iEconKey >= 0 ? (row[iEconKey] || '').toString().trim() : '';
-    if (econKey !== '' && econKey !== 'SPORTS_OVERRIDE') {
+    if (econKey !== '') {
       continue; // Income managed externally
+    }
+
+    // S319: fallback FILLS, never re-rolls — an unseeded citizen with a
+    // nonzero Income keeps it. The old per-cycle recalc overwrote 258
+    // unseeded citizens (incl. manual salary backfills) on every run.
+    if ((Number(row[iIncome]) || 0) > 0) {
+      continue;
     }
 
     // Fallback: unseeded citizens use legacy band logic

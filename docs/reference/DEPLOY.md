@@ -59,14 +59,21 @@ sandbox is the intended target for anything unverified.
    Script copies with it — automatically bound to the copy).
 2. **Mike:** open the copy → Extensions → Apps Script → Project Settings → copy the
    **Script ID** to the terminal.
-3. **Isolation is by construction** — verified S318: the engine contains zero
+3. **Mike (REQUIRED — every new copy):** same Project Settings page → **Script
+   Properties** → Add script property: `SIM_SSID` = the copy's own spreadsheet ID.
+   Script Properties do NOT copy with the spreadsheet; without this the script
+   falls back to the hardcoded LIVE id (`DEFAULT_SIM_SSID`,
+   `utilities/utilityFunctions.js:182`) and the AIM-GUARD blocks every run.
+   (S319 incident: SANDBOX 0714's first C102 fire died on exactly this — step was
+   missing from the S318 protocol.)
+4. **Isolation is by construction** — verified S318: the engine contains zero
    `openById` calls; the bound script only ever touches its own container. No
    wrapper needed. (Node scripts are the only cross-container access and take
    explicit sheet IDs — never rely on env default when targeting a sandbox.)
-4. **Terminal:** update THIS section (new IDs, retire the old ones), then clasp
+5. **Terminal:** update THIS section (new IDs, retire the old ones), then clasp
    push via the temp-dir route below, then replay any pending data migrations
    against the new sheet ID (dry-run → apply → read-back verify).
-5. Triggers do NOT copy — sandbox cycles are Mike-fired from the sheet, which is
+6. Triggers do NOT copy — sandbox cycles are Mike-fired from the sheet, which is
    the intended mode.
 - **Sandbox clasp deploy:** copy repo to a temp dir, drop a `.clasp.json` with the sandbox
   Script ID + the project `.claspignore`, `CLAUDE_CTL=1 npx clasp push -f`. The production

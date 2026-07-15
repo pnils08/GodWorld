@@ -116,8 +116,8 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.36 | Isolated staging environment | parked | engine-sheet | [[ENGINE_REPAIR]] — detail in pointer (relocated 2026-07-02) |
 | engine.54 | Neighborhood trajectory system (gentrification block repurposed) + v3 writer clobber fix | built — sandbox-verified C127+C128 (S316), prod clasp held behind C102 gate | engine-sheet | S315 commit + [[ENGINE_COUPLING_MAP]] §neighborhoodTrajectoryEngine |
 | engine.55 | Intra-city relocation — households sort toward economically-fitting neighborhoods (AN–AP live) | built — sandbox-verified C129–C131 incl. two fix rounds | engine-sheet | [[../plans/2026-07-12-engine55-intra-city-relocation]] |
-| engine.56 | Household_Ledger true-ledger repair — reconcile, live income, HouseholdSavings, real dissolution, household-first inheritance | built — 23/23 gate, sandbox cycle test pending | engine-sheet | [[ENGINE_REPAIR]] §engine.56 — detail in pointer |
-| engine.57 | Family/household loop — Mike's household model | P1-P6 built S318 (c2ed7e59); P7 = deploy + C134 test | engine-sheet | [[../plans/2026-07-13-family-household-loop-build]] |
+| engine.56 | Household_Ledger true-ledger repair — reconcile, live income, HouseholdSavings, real dissolution, household-first inheritance | LIVE S319 (rode engine.57 go-live; cycle-proven) | engine-sheet | [[ENGINE_REPAIR]] §engine.56 — detail in pointer |
+| engine.57 | Family/household loop — Mike's household model | LIVE S319 — go-live executed, cycle-proven on 0714+0715; live C102 fire pending Mike | engine-sheet | [[../plans/2026-07-13-family-household-loop-build]] |
 | research.13 | Citizen-autonomous PoC | needs-info | research-build | [[../plans/2026-05-31-citizen-autonomous-poc]] — detail in pointer (relocated 2026-07-02) |
 | research.14 | Citizen-loop Phase 2 | in-progress | engine-sheet | [[../plans/2026-06-04-mags-citizen-loop]] — detail in pointer (relocated 2026-07-02) |
 | research.16 | Tier-1 character voice agents | in-progress | research-build + engine-sheet | [[../plans/2026-06-16-tier1-character-voice-agents]] — detail in pointer (relocated 2026-07-02) |

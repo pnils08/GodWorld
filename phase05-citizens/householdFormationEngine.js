@@ -785,6 +785,24 @@ function updateHouseholdIncomes_(ctx, households, citizens) {
     if (household.householdType === HOUSEHOLD_TYPES.COUPLE && members.length === 1) {
       totalIncome += GENERIC_SPOUSE_SALARY;
     }
+    // engine.57 P8 (S319): family households with off-camera parents earn too.
+    //   all tracked members minors (orphan backfill) → two generic salaries
+    //   an adult member married to an untracked spouse → one generic salary
+    if (household.householdType === HOUSEHOLD_TYPES.FAMILY) {
+      var famAdults = 0, offCamSpouse = false;
+      for (var fa = 0; fa < members.length; fa++) {
+        var famMoney = citizenMoney[members[fa]];
+        if (!famMoney) continue;
+        if (famMoney.adult) {
+          famAdults++;
+          if (famMoney.married && (!famMoney.spousePop || members.indexOf(famMoney.spousePop) < 0)) {
+            offCamSpouse = true;
+          }
+        }
+      }
+      if (famAdults === 0) totalIncome += 2 * GENERIC_SPOUSE_SALARY;
+      else if (offCamSpouse) totalIncome += GENERIC_SPOUSE_SALARY;
+    }
     var vecIdx = household.rowIndex - 2;
     if (vecIdx >= 0 && vecIdx < incomeVec.length) {
       incomeVec[vecIdx][0] = totalIncome;
@@ -809,14 +827,28 @@ function buildCitizenMoneyLookup_(ctx) {
   var popIdCol = header.indexOf('POPID');
   var incomeCol = header.indexOf('Income');
   var netWorthCol = header.indexOf('NetWorth');
+  var birthYearCol = header.indexOf('BirthYear');
+  var maritalCol = header.indexOf('MaritalStatus');
+  var spouseCol = header.indexOf('SpouseId');
 
   if (popIdCol < 0 || incomeCol < 0) return null;
 
+  // S319 P8: adult/marital/spouse flags so updateHouseholdIncomes_ can price
+  // off-camera parents. Missing BirthYear = adult (age-gate fallback).
+  var cycle = (ctx.summary && ctx.summary.cycleId) || (ctx.config && ctx.config.cycleCount) || 0;
+  var simYear = 2040 + Math.floor(cycle / 52);
+
   var lookup = {};
   for (var r = 0; r < rows.length; r++) {
+    var by = birthYearCol >= 0 ? (Number(rows[r][birthYearCol]) || 0) : 0;
+    var ms = maritalCol >= 0 ? String(rows[r][maritalCol] || '').toLowerCase() : '';
+    var sp = spouseCol >= 0 ? String(rows[r][spouseCol] || '').trim() : '';
     lookup[rows[r][popIdCol]] = {
       income: Number(rows[r][incomeCol]) || 0,
-      netWorth: netWorthCol >= 0 ? (Number(rows[r][netWorthCol]) || 0) : 0
+      netWorth: netWorthCol >= 0 ? (Number(rows[r][netWorthCol]) || 0) : 0,
+      adult: by > 0 ? (simYear - by) >= 16 : true,
+      married: ms === 'married' || ms === 'partnered',
+      spousePop: sp ? sp.split(' ')[0] : ''
     };
   }
 

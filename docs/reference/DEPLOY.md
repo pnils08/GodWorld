@@ -45,11 +45,14 @@ Cloud Shell sometimes clears installed packages. If clasp fails, run `npm instal
 accidentally deploys to live, Mike can cycle live back via its version history — but the
 sandbox is the intended target for anything unverified.
 
-**CURRENT sandbox: `SANDBOX 0714`** (stood up S318 2026-07-14, live copy at C101 → first test cycle C102)
-- Spreadsheet ID `1wmZTGqIbYL7eVYCplq3iCb2oOGDZ0Inq-pWCtnD1lzc`
-  URL: https://docs.google.com/spreadsheets/d/1wmZTGqIbYL7eVYCplq3iCb2oOGDZ0Inq-pWCtnD1lzc/edit
-- Bound Apps Script ID: `1h523JicgvHOXoD-lTBCZxFyxybYnvMApgJDqHIfVH6jLq2SKcpL6hIiX`
-- Sheet deltas vs live: col P renamed CreatedAt → `SpouseId` (exact case — code reads it by name)
+**CURRENT sandbox: `SANDBOX 0715`** (stood up S319 2026-07-15, live copy post-go-live — engine.57 + S319 fixes in data AND code; zero sheet deltas vs live. Purpose: savings + debt effects on money)
+- Spreadsheet ID `1HgJPjcS4t6a5CGSOgDuQoRr8tTTc1OQfGfSS1wuuxgA`
+  URL: https://docs.google.com/spreadsheets/d/1HgJPjcS4t6a5CGSOgDuQoRr8tTTc1OQfGfSS1wuuxgA/edit
+- Bound Apps Script ID: `18cODsLhYWoRojEoqinlqXxntFFjjrCdW38ca8ZWmyhuVkhwRGqYGJ7Kn`
+- SIM_SSID Script Property = the Spreadsheet ID above (protocol step 3)
+
+**RETIRED: `SANDBOX 0714`** (S319 — served C102-C104 engine.57 proving run; superseded by post-go-live copy)
+- Spreadsheet `1wmZTGqIbYL7eVYCplq3iCb2oOGDZ0Inq-pWCtnD1lzc` / script `1h523JicgvHOXoD-lTBCZxFyxybYnvMApgJDqHIfVH6jLq2SKcpL6hIiX`
 
 **RETIRED: `SANDBOX_0702`** (S318 — broken col-Q incident C134; do not deploy or write)
 - Spreadsheet `1syShVWfudY0eCC9rnR7AWZ8-b-fs5RpJW2bhn6nZtzs` / script `1bT3o5r6adZhSv20pa0ijoHv_HdeEbONtBT2bsw_8U-sHbWgyJz94ueIW`

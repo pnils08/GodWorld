@@ -297,8 +297,11 @@ function loadCitizens_(ctx) {
       childrenIds: parseJSON(row[iChildrenIds], [])
     };
 
-    // Only process active citizens
-    if (citizen.status === 'active') {
+    // Only process active citizens. S319: case-insensitive — the ledger
+    // stores 'Active' (capital), so the === 'active' check matched ZERO
+    // rows since Week 1 and the citizens.length===0 gate silently no-oped
+    // this whole engine every cycle (reconcile included).
+    if (String(citizen.status).toLowerCase() === 'active') {
       citizens.push(citizen);
     }
   }
@@ -378,8 +381,9 @@ function reconcileHouseholds_(ctx, cycle) {
   var idx = function(n) { return header.indexOf(n); };
   var iPOPID = idx('POPID'), iLast = idx('Last'), iStatus = idx('Status'),
       iNeighborhood = idx('Neighborhood'), iHH = idx('HouseholdId'),
-      iMarital = idx('MaritalStatus');
+      iMarital = idx('MaritalStatus'), iBirthYear = idx('BirthYear');
   if (iPOPID < 0 || iHH < 0) return out;
+  var simYear = 2040 + Math.floor(cycle / 52);
 
   var alive = function(row) {
     return String(row[iStatus] || 'active').toLowerCase() !== 'deceased';
@@ -490,9 +494,29 @@ function reconcileHouseholds_(ctx, cycle) {
       var headRow = citizenByPOPID[head];
       var realHood = headRow && iNeighborhood >= 0 ? (headRow[iNeighborhood] || '') : '';
       if (realHood && lHood >= 0 && lrow[lHood] !== realHood) { lrow[lHood] = realHood; rowChanged = true; }
-      // Type from live composition
+      // Type from live composition — engine.57 two-type model (S319 fix; the
+      // engine.56 count-only rule retyped off-camera-spouse couples 'single'):
+      //   any minor member          → family (kids define a family household)
+      //   2+ members                → couple
+      //   1 member, head married    → couple (off-camera generic spouse, P2)
+      //   1 member, head unmarried  → single (shouldn't exist post-migration;
+      //                               typed visibly, NOT auto-dissolved)
       if (lType >= 0) {
-        var newType = actual.length === 1 ? 'single' : (actual.length === 2 ? 'couple' : 'family');
+        var hasMinor = false;
+        for (var am = 0; am < actual.length; am++) {
+          var amRow = citizenByPOPID[actual[am]];
+          var amBY = amRow && iBirthYear >= 0 ? (Number(amRow[iBirthYear]) || 0) : 0;
+          if (amBY > 0 && (simYear - amBY) < 16) { hasMinor = true; break; }
+        }
+        var newType;
+        if (hasMinor) {
+          newType = 'family';
+        } else if (actual.length >= 2) {
+          newType = 'couple';
+        } else {
+          var headMar = headRow && iMarital >= 0 ? String(headRow[iMarital] || '').toLowerCase() : '';
+          newType = (headMar === 'married' || headMar === 'partnered') ? 'couple' : 'single';
+        }
         if (lrow[lType] !== newType) { lrow[lType] = newType; rowChanged = true; }
       }
       // Citizens live here — it is not dissolved (the 272-row rot)
@@ -527,7 +551,24 @@ function reconcileHouseholds_(ctx, cycle) {
     for (var col = 0; col < lh.length; col++) newRow.push('');
     newRow[lHH] = nid;
     if (lHead >= 0) newRow[lHead] = mem[0];
-    if (lType >= 0) newRow[lType] = mem.length === 1 ? 'single' : (mem.length === 2 ? 'couple' : 'family');
+    if (lType >= 0) {
+      // Same two-type rule as step 3 (S319): minor member → family;
+      // 2+ → couple; solo married head → couple (off-camera spouse).
+      var adoptMinor = false;
+      for (var an = 0; an < mem.length; an++) {
+        var anRow = citizenByPOPID[mem[an]];
+        var anBY = anRow && iBirthYear >= 0 ? (Number(anRow[iBirthYear]) || 0) : 0;
+        if (anBY > 0 && (simYear - anBY) < 16) { adoptMinor = true; break; }
+      }
+      if (adoptMinor) {
+        newRow[lType] = 'family';
+      } else if (mem.length >= 2) {
+        newRow[lType] = 'couple';
+      } else {
+        var adoptMar = headP && iMarital >= 0 ? String(headP[iMarital] || '').toLowerCase() : '';
+        newRow[lType] = (adoptMar === 'married' || adoptMar === 'partnered') ? 'couple' : 'single';
+      }
+    }
     newRow[lMembers] = JSON.stringify(mem);
     if (lHood >= 0) newRow[lHood] = hood2;
     if (li('HousingType') >= 0) newRow[li('HousingType')] = 'rented';

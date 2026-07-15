@@ -48,7 +48,7 @@ sandbox is the intended target for anything unverified.
 **CURRENT sandbox: `SANDBOX 0714`** (stood up S318 2026-07-14, live copy at C101 → first test cycle C102)
 - Spreadsheet ID `1wmZTGqIbYL7eVYCplq3iCb2oOGDZ0Inq-pWCtnD1lzc`
   URL: https://docs.google.com/spreadsheets/d/1wmZTGqIbYL7eVYCplq3iCb2oOGDZ0Inq-pWCtnD1lzc/edit
-- Bound Apps Script ID: PENDING (Mike: Extensions → Apps Script → Project Settings → Script ID)
+- Bound Apps Script ID: `1h523JicgvHOXoD-lTBCZxFyxybYnvMApgJDqHIfVH6jLq2SKcpL6hIiX`
 - Sheet deltas vs live: col P renamed CreatedAt → `SpouseId` (exact case — code reads it by name)
 
 **RETIRED: `SANDBOX_0702`** (S318 — broken col-Q incident C134; do not deploy or write)

@@ -2223,9 +2223,14 @@ function generateCitizensEvents_(ctx) {
       var gcT1 = "swapped stories with " + gcPick.name + " while the line at the corner store crawled";
       var gcT2 = "got roped into helping " + gcPick.name + " haul something heavy up a flight of stairs";
       var gcT3 = "kept running into " + gcPick.name + " this week — the neighborhood kind of coincidence";
-      pool.push(makeEntry(gcT1, mergeTags(["relationship:acquaintance"], calendarTags), 1.1, false));
-      pool.push(makeEntry(gcT2, mergeTags(["relationship:acquaintance"], calendarTags), 1.05, false));
-      pool.push(makeEntry(gcT3, mergeTags(["relationship:acquaintance"], calendarTags), 1.0, false));
+      // Weight 12/11/10 (not ~1): the 6% roll above already decided this
+      // week crosses a GC name — at base weights the 3 lines drowned in a
+      // 40+ entry pool (~8% pick => a tick every ~8 cycles, lottery never
+      // draws; C102 sandbox verify S320). At 12+11+10 vs ~40 base mass the
+      // offered lines win ~45% of picks => ~1 tick/cycle world-wide.
+      pool.push(makeEntry(gcT1, mergeTags(["relationship:acquaintance"], calendarTags), 12, false));
+      pool.push(makeEntry(gcT2, mergeTags(["relationship:acquaintance"], calendarTags), 11, false));
+      pool.push(makeEntry(gcT3, mergeTags(["relationship:acquaintance"], calendarTags), 10, false));
       gcPendingByText[gcT1] = gcPick;
       gcPendingByText[gcT2] = gcPick;
       gcPendingByText[gcT3] = gcPick;

@@ -843,8 +843,13 @@ function buildCitizenMoneyLookup_(ctx) {
     var by = birthYearCol >= 0 ? (Number(rows[r][birthYearCol]) || 0) : 0;
     var ms = maritalCol >= 0 ? String(rows[r][maritalCol] || '').toLowerCase() : '';
     var sp = spouseCol >= 0 ? String(rows[r][spouseCol] || '').trim() : '';
+    // S320: minors earn nothing — enforce here too, not just in the wealth
+    // engine's zero pass (which runs AFTER household sums; a stale minor
+    // salary on-sheet inflated family HouseholdIncome for one cycle —
+    // 0716 first-fire artifact, kids carried S313 script-backfilled pay)
+    var isMinor = by > 0 && (simYear - by) < 18;
     lookup[rows[r][popIdCol]] = {
-      income: Number(rows[r][incomeCol]) || 0,
+      income: isMinor ? 0 : (Number(rows[r][incomeCol]) || 0),
       netWorth: netWorthCol >= 0 ? (Number(rows[r][netWorthCol]) || 0) : 0,
       adult: by > 0 ? (simYear - by) >= 18 : true, // 18+ = adult (S320 kid-age ruling)
       married: ms === 'married' || ms === 'partnered',

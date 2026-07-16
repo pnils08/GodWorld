@@ -193,6 +193,13 @@ function deriveEducationLevels_(ctx, rng) {
     var status = (row[iStatus] || 'active').toString().toLowerCase();
     if (status === 'deceased') continue;
 
+    // S320 (Mike-direct): FILL-only, never re-roll — this loop overwrote every
+    // citizen's EducationLevel with fresh RNG every cycle (a grad one cycle
+    // could roll dropout the next). Same doctrine as the S319 income fix:
+    // blanks get derived once; set values are identity, owned by real events
+    // (graduation, promotion derivation, birth Pre-K).
+    if (String(row[iEducation] || '').trim() !== '') continue;
+
     var uni = iUNI >= 0 ? row[iUNI].toString().toLowerCase() : 'no';
     var med = iMED >= 0 ? row[iMED].toString().toLowerCase() : 'no';
     var civ = iCIV >= 0 ? row[iCIV].toString().toLowerCase() : 'no';
@@ -217,9 +224,12 @@ function deriveEducationLevels_(ctx, rng) {
       eduLevel = rng() < 0.8 ? EDUCATION_LEVELS.HS_DIPLOMA : EDUCATION_LEVELS.HS_DROPOUT;
     } else {
       // Adults: 85% HS diploma, 10% some college, 5% dropout
-      var r = rng();
-      if (r < 0.05) eduLevel = EDUCATION_LEVELS.HS_DROPOUT;
-      else if (r < 0.15) eduLevel = EDUCATION_LEVELS.SOME_COLLEGE;
+      // S320: was `var r = rng()` — SHADOWED THE LOOP COUNTER; the first
+      // plain adult reset r to a 0-1 float and every later index was
+      // undefined, so only a prefix of the ledger ever processed per cycle.
+      var eduRoll = rng();
+      if (eduRoll < 0.05) eduLevel = EDUCATION_LEVELS.HS_DROPOUT;
+      else if (eduRoll < 0.15) eduLevel = EDUCATION_LEVELS.SOME_COLLEGE;
       else eduLevel = EDUCATION_LEVELS.HS_DIPLOMA;
     }
 

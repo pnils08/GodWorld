@@ -580,7 +580,12 @@ function processAdvancementRows_(ctx, now, cycle) {
       // career-change case). Scans all categories for the role; no match →
       // income untouched (never invent — sports salaries stay roster-owned).
       var lIncome = findColByName_(ledgerHeaders, 'Income');
-      if (roleChanged && lIncome >= 0 && advSalaryPools && typeof ctx.rng === 'function') {
+      // S320: minors earn nothing — role-change income re-derive was the one
+      // ungated assigner left (a minor advanced through intake got adult pay)
+      var advBYCol = findColByName_(ledgerHeaders, 'BirthYear');
+      var advBY = advBYCol >= 0 ? (Number(ledgerRows[existingRow][advBYCol]) || 0) : 0;
+      var advIsMinor = advBY > 0 && ((2040 + Math.floor(cycle / 52)) - advBY) < 18;
+      if (roleChanged && !advIsMinor && lIncome >= 0 && advSalaryPools && typeof ctx.rng === 'function') {
         var newIncome = rederiveIncomeForRole_(advSalaryPools, roleType, ctx.rng);
         if (newIncome !== null) ledgerRows[existingRow][lIncome] = newIncome;
       }

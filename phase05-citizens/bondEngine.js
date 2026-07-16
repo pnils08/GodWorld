@@ -652,7 +652,10 @@ function updateExistingBonds_(ctx) {
         // engine.59 (S320): friendship had NO growth path — the romance
         // pipeline starved at the root (live max 5.6 vs threshold 7).
         // Warm citizens deepen faster (TraitProfile — Mike's dials).
-        intensity += FRIENDSHIP_GROWTH * bondWarmthFactor_(ctx, bond.citizenA, bond.citizenB);
+        var wf59 = bondWarmthFactor_(ctx, bond.citizenA, bond.citizenB);
+        ctx._bondGrowth59 = (ctx._bondGrowth59 || 0) + 1;
+        if (ctx._bondGrowth59 <= 3) Logger.log('engine.59 diag: friendship growth ' + bond.citizenA + '<->' + bond.citizenB + ' factor ' + wf59.toFixed(3));
+        intensity += FRIENDSHIP_GROWTH * wf59;
       } else if (bond.bondType === BOND_TYPES.ROMANTIC) {
         intensity += ROMANTIC_GROWTH_ACTIVE;
       }
@@ -1476,17 +1479,37 @@ function appendBondLifeLine_(ctx, ledgerIdx, popId, tag, text, cycle) {
 function bondTraitOf_(ctx, popId, trait) {
   if (!ctx._bondTraits) {
     ctx._bondTraits = {};
-    var header = ctx.ledger.headers;
-    var iPop = header.indexOf('POPID'), iTP = header.indexOf('TraitProfile');
-    if (iPop >= 0 && iTP >= 0) {
-      for (var r = 0; r < ctx.ledger.rows.length; r++) {
-        var tp = String(ctx.ledger.rows[r][iTP] || '');
-        if (tp) ctx._bondTraits[ctx.ledger.rows[r][iPop]] = tp;
+    ctx._bondTraitStats = { hits: 0, misses: 0 };
+    var header = ctx.ledger ? ctx.ledger.headers : null;
+    if (header) {
+      var iPop = -1, iTP = -1, iF = -1, iL = -1;
+      for (var hh = 0; hh < header.length; hh++) {
+        var hn = String(header[hh] || '').trim();
+        if (hn === 'POPID') iPop = hh;
+        else if (hn === 'TraitProfile') iTP = hh;
+        else if (hn === 'First') iF = hh;
+        else if (hn === 'Last') iL = hh;
       }
+      if (iPop >= 0 && iTP >= 0) {
+        for (var r = 0; r < ctx.ledger.rows.length; r++) {
+          var tp = String(ctx.ledger.rows[r][iTP] || '');
+          if (!tp) continue;
+          // dual-key (S312 pattern): POPID + lowercase full name — bond rows
+          // are POPID-canonical but defensive against any name-shaped stragglers
+          ctx._bondTraits[String(ctx.ledger.rows[r][iPop]).trim().toUpperCase()] = tp;
+          if (iF >= 0 && iL >= 0) {
+            var nmKey = (String(ctx.ledger.rows[r][iF] || '').trim() + ' ' + String(ctx.ledger.rows[r][iL] || '').trim()).trim().toLowerCase();
+            if (nmKey) ctx._bondTraits[nmKey] = tp;
+          }
+        }
+      }
+      Logger.log('engine.59 diag: trait map built, ' + Object.keys(ctx._bondTraits).length + ' keys');
     }
   }
-  var s = ctx._bondTraits[popId];
-  if (!s) return 50; // neutral when unprofiled
+  var key = String(popId || '').trim();
+  var s = ctx._bondTraits[key.toUpperCase()] || ctx._bondTraits[key.toLowerCase()];
+  if (!s) { ctx._bondTraitStats.misses++; return 50; } // neutral when unprofiled
+  ctx._bondTraitStats.hits++;
   var m = s.match(new RegExp(trait + ':(\\d+)'));
   return m ? Number(m[1]) : 50;
 }

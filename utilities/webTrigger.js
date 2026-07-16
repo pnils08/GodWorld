@@ -41,6 +41,8 @@ function doGet(e) {
           runWorldCycle();
           out.ok = true;
           out.ranMs = Date.now() - t0;
+          // engine.59 diag-emit: the fire response carries the bond engine's why
+          if (typeof ENGINE59_DIAG !== 'undefined' && ENGINE59_DIAG) out.diag59 = ENGINE59_DIAG;
         } finally {
           lock.releaseLock();
         }

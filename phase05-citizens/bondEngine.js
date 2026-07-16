@@ -592,6 +592,10 @@ function findColIndex_(headers, possibleNames) {
 // BOND UPDATES
 // ============================================================
 
+// engine.59 diag-emit: one global the web trigger returns in its JSON —
+// the fire response carries the why (clasp logs unavailable, no GCP project)
+var ENGINE59_DIAG = null;
+
 function updateExistingBonds_(ctx) {
   var rng = safeRand_(ctx);
   var S = ctx.summary || {};
@@ -609,6 +613,14 @@ function updateExistingBonds_(ctx) {
   // bond-local pool, not the POPID-shaped shared array (misses were silently
   // disabling activity-based intensity updates).
   var activeCitizensArray = ctx._bondActivePool || S.cycleActiveCitizens || [];
+  ENGINE59_DIAG = {
+    cycle: currentCycle,
+    poolSize: activeCitizensArray.length,
+    poolSample: activeCitizensArray.slice(0, 3),
+    bonds: bonds.length,
+    friendGrowths: 0,
+    factors: []
+  };
   var activeCitizens = {};
   for (var i = 0; i < activeCitizensArray.length; i++) {
     activeCitizens[activeCitizensArray[i]] = true;
@@ -653,8 +665,8 @@ function updateExistingBonds_(ctx) {
         // pipeline starved at the root (live max 5.6 vs threshold 7).
         // Warm citizens deepen faster (TraitProfile — Mike's dials).
         var wf59 = bondWarmthFactor_(ctx, bond.citizenA, bond.citizenB);
-        ctx._bondGrowth59 = (ctx._bondGrowth59 || 0) + 1;
-        if (ctx._bondGrowth59 <= 3) Logger.log('engine.59 diag: friendship growth ' + bond.citizenA + '<->' + bond.citizenB + ' factor ' + wf59.toFixed(3));
+        ENGINE59_DIAG.friendGrowths++;
+        if (ENGINE59_DIAG.factors.length < 5) ENGINE59_DIAG.factors.push(bond.citizenA + 'x' + bond.citizenB + ':' + wf59.toFixed(3));
         intensity += FRIENDSHIP_GROWTH * wf59;
       } else if (bond.bondType === BOND_TYPES.ROMANTIC) {
         intensity += ROMANTIC_GROWTH_ACTIVE;

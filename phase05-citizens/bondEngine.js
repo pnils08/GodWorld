@@ -83,7 +83,14 @@ var BOND_TYPES = {
   PROFESSIONAL: 'professional',
   NEIGHBOR: 'neighbor',
   FESTIVAL: 'festival',      // v2.2: Festival connection
-  SPORTS_RIVAL: 'sports_rival' // v2.2: Sports rivalry
+  SPORTS_RIVAL: 'sports_rival', // v2.2: Sports rivalry
+  // engine.59 (S320): these types existed as sheet literals (174 friendship /
+  // 72 family rows) but never as enum keys — so P5's romance flip compared
+  // bondType === undefined and could NEVER fire. Third latent P5 bug found
+  // by the autonomous fire loop (after threshold-unreachable and the
+  // LifeHistory arg shift).
+  FRIENDSHIP: 'friendship',
+  FAMILY: 'family'
 };
 
 var BOND_ORIGINS = {
@@ -630,6 +637,16 @@ function updateExistingBonds_(ctx) {
     var poolPop = normalizeBondCitizenId_(ctx, activeCitizensArray[i]);
     if (poolPop && poolPop !== activeCitizensArray[i]) activeCitizens[poolPop] = true;
   }
+  // engine.59 diag-emit: expose the gate — map shape vs bond-key shape vs enum
+  ENGINE59_DIAG.mapKeys = Object.keys(activeCitizens).length;
+  ENGINE59_DIAG.mapSample = Object.keys(activeCitizens).slice(0, 4);
+  ENGINE59_DIAG.gatePass = 0;
+  var e59fb = [];
+  for (var e59i = 0; e59i < bonds.length && e59fb.length < 3; e59i++) {
+    if (bonds[e59i] && bonds[e59i].bondType === BOND_TYPES.FRIENDSHIP) e59fb.push(bonds[e59i].citizenA + '>' + bonds[e59i].status);
+  }
+  ENGINE59_DIAG.friendBondSample = e59fb;
+  ENGINE59_DIAG.enumFriendship = BOND_TYPES.FRIENDSHIP;
 
   // v2.4: Use ctx.neighborhoodList instead of global
   var neighborhoodList = ctx.neighborhoodList || [];
@@ -650,6 +667,7 @@ function updateExistingBonds_(ctx) {
     var bActive = activeCitizens[bond.citizenB] || false;
 
     if (aActive && bActive) {
+      ENGINE59_DIAG.gatePass++;
       if (bond.bondType === BOND_TYPES.RIVALRY || bond.bondType === BOND_TYPES.TENSION) {
         intensity += 1.5;
       } else if (bond.bondType === BOND_TYPES.ALLIANCE) {

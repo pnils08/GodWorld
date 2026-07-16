@@ -1686,9 +1686,59 @@ function marryCitizens_(ctx, bond, A, B, cycle) {
     ctx.ledger.rows[B.idx][iSp] = bond.citizenA + ' ' + A.name;
   }
 
-  // Marriage FORMS the household (Mike's model) — header-resolved append so
-  // the row lands right on both the 13-col sandbox and any older schema.
-  var hhId = 'HH-' + String(cycle).padStart(4, '0') + '-M' + String(Math.floor(safeRand_(ctx)() * 900) + 100);
+  // engine.59 fix (S320, Jessup C108): if either partner already heads a
+  // household with OTHER members (their kids), the marriage JOINS that
+  // household — forming a fresh couple household abandoned Arjun (12) alone
+  // in the family home while dad moved out. Spouse moves in; the P8 two-type
+  // rule retypes it 'family' on the next pass; new spouse becomes a second
+  // parent to resident minors (same convention as the S320 spouse drip).
+  var joinTarget = null, joiner = null;
+  var hhSheet0 = ctx.ss.getSheetByName('Household_Ledger');
+  if (hhSheet0) {
+    var hv = hhSheet0.getDataRange().getValues();
+    var hj = function(n) { return hv[0].indexOf(n); };
+    var findHH = function(hid) {
+      if (!hid) return null;
+      for (var q = 1; q < hv.length; q++) {
+        if (String(hv[q][hj('HouseholdId')]) === hid && String(hv[q][hj('Status')] || '').toLowerCase() === 'active') {
+          var mem0 = []; try { mem0 = JSON.parse(hv[q][hj('Members')] || '[]'); } catch (e0) {}
+          return { row: q + 1, members: mem0 };
+        }
+      }
+      return null;
+    };
+    var aHH = findHH(A.householdId), bHH = findHH(B.householdId);
+    if (aHH && aHH.members.length > 1) { joinTarget = { hid: A.householdId, info: aHH }; joiner = B; }
+    else if (bHH && bHH.members.length > 1) { joinTarget = { hid: B.householdId, info: bHH }; joiner = A; }
+  }
+  if (joinTarget) {
+    var jm = joinTarget.info.members;
+    var joinerId = (joiner === A) ? bond.citizenA : bond.citizenB;
+    if (jm.indexOf(joinerId) < 0) jm.push(joinerId);
+    hhSheet0.getRange(joinTarget.info.row, hv[0].indexOf('Members') + 1).setValue(JSON.stringify(jm));
+    var iHH0 = idx('HouseholdId');
+    if (iHH0 >= 0) ctx.ledger.rows[joiner.idx][iHH0] = joinTarget.hid;
+    // resident minors gain the new spouse as second parent (drip convention)
+    var iPar0 = idx('ParentIds'), iBirth0 = idx('BirthYear');
+    if (iPar0 >= 0) {
+      var cyc0 = ctx.summary.cycleId || ctx.config.cycleCount || 0;
+      var simY0 = 2040 + Math.floor(cyc0 / 52);
+      for (var mri = 0; mri < ctx.ledger.rows.length; mri++) {
+        var mrow = ctx.ledger.rows[mri];
+        if (String(mrow[iHH0] || '').trim() !== joinTarget.hid) continue;
+        var mby = iBirth0 >= 0 ? (Number(mrow[iBirth0]) || 0) : 0;
+        if (!(mby > 0 && (simY0 - mby) < 18)) continue;
+        var mpar = []; try { mpar = JSON.parse(mrow[iPar0] || '[]'); } catch (e1) {}
+        if (!Array.isArray(mpar)) mpar = [];
+        if (mpar.indexOf(joinerId) < 0) { mpar.push(joinerId); mrow[iPar0] = JSON.stringify(mpar); ctx.ledger.dirty = true; }
+      }
+    }
+  }
+  // Marriage FORMS the household (Mike's model) when neither partner brings
+  // one with other members — header-resolved append so the row lands right
+  // on both the 13-col sandbox and any older schema.
+  var hhId = joinTarget ? joinTarget.hid
+    : 'HH-' + String(cycle).padStart(4, '0') + '-M' + String(Math.floor(safeRand_(ctx)() * 900) + 100);
   // engine.59 (S320, Mike-ruled): T1×T1 / T1×T2 = super couple. The stamp is
   // the dynasty seed — pay, fame, and household consumers land with their
   // owning stages (money/fame); here it's the flag + the moment.
@@ -1696,7 +1746,7 @@ function marryCitizens_(ctx, bond, A, B, cycle) {
     Math.min(A.tier, B.tier) === 1 && Math.max(A.tier, B.tier) <= 2;
   var ss = ctx.ss;
   var sheet = ss.getSheetByName('Household_Ledger');
-  if (sheet) {
+  if (sheet && !joinTarget) { // join path updated the existing row above
     var hHead = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
     if (superCouple && hHead.indexOf('SuperCouple') < 0) {
       // schema-setup carve-out — fires once per spreadsheet lifetime

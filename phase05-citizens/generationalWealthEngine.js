@@ -206,11 +206,12 @@ function calculateCitizenIncomes_(ctx) {
     var status = (row[iStatus] || 'active').toString().toLowerCase();
     if (status === 'deceased' || status === 'inactive') continue;
 
-    // Minors earn nothing (S318 age gate, floor 16). Missing BirthYear is
-    // treated as adult — same fallback the career engine uses.
+    // Minors earn nothing (S318 age gate; floor raised 16→18 by S320
+    // kid-age ruling). Missing BirthYear is treated as adult — same
+    // fallback the career engine uses.
     var birthYear = iBirthYear >= 0 ? (Number(row[iBirthYear]) || 0) : 0;
     var age = birthYear > 0 ? (simYear - birthYear) : 30;
-    if (age < 16) {
+    if (age < 18) {
       if (Number(row[iIncome]) !== 0) {
         row[iIncome] = 0;
         updated++;

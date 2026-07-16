@@ -168,7 +168,7 @@ function runConductEngine_(ctx) {
     if (tier !== 3 && tier !== 4) continue;
     if (isUNI || isMED || isCIV) continue;
     var birthYear = Number(row[iBirthYear] || 0);
-    if (birthYear > 0 && (simYear - birthYear) < 16) continue;
+    if (birthYear > 0 && (simYear - birthYear) < 18) continue; // <18 = minor (S320 kid-age ruling)
 
     // Dial bands REQUIRED — the moral test is R-biased by definition, and
     // this keeps the engine inert until DialState deploys (copy-track).

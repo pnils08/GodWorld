@@ -1,4 +1,5 @@
 // engine.57 P8 migration — SANDBOX ONLY. Kids backfill (plan §Queued, Mike-approved S319).
+// Age line: <18 = minor (S320 kid-age ruling, Mike-confirmed; was <16 at S319 run).
 // Minors with no household-with-adult:
 //   1. ParentIds → parent's household: join it.
 //   2. Surname + neighborhood adult match (unambiguous): join that household.
@@ -65,10 +66,10 @@ const RENT = { 'West Oakland': 1400, 'Fruitvale': 1500, 'Downtown': 2100, 'Uptow
     if (!alive(r)) return;
     const hid = (r[iHH] || '').trim(); if (!hid) return;
     (membersByHH[hid] = membersByHH[hid] || []).push(r[iPop]);
-    if (ageOf(r) >= 16) (adultsByHH[hid] = adultsByHH[hid] || []).push(r[iPop]);
+    if (ageOf(r) >= 18) (adultsByHH[hid] = adultsByHH[hid] || []).push(r[iPop]); // 18+ = adult (S320 kid-age ruling)
   });
 
-  const minors = rows.filter(r => alive(r) && (Number(r[iBirth]) || 0) > 0 && ageOf(r) < 16);
+  const minors = rows.filter(r => alive(r) && (Number(r[iBirth]) || 0) > 0 && ageOf(r) < 18);
   const joins = [], creates = [], dripTargets = [];
   for (const m of minors) {
     const hid = (m[iHH] || '').trim();
@@ -87,7 +88,7 @@ const RENT = { 'West Oakland': 1400, 'Fruitvale': 1500, 'Downtown': 2100, 'Uptow
     if (!target) {
       const cands = new Set();
       rows.forEach(r => {
-        if (!alive(r) || ageOf(r) < 16) return;
+        if (!alive(r) || ageOf(r) < 18) return;
         if (String(r[iL] || '').trim() !== String(m[iL] || '').trim()) return;
         if (String(r[iNbhd] || '').trim() !== String(m[iNbhd] || '').trim()) return;
         const rh = (r[iHH] || '').trim();
@@ -96,7 +97,7 @@ const RENT = { 'West Oakland': 1400, 'Fruitvale': 1500, 'Downtown': 2100, 'Uptow
       if (cands.size === 1) {
         target = [...cands][0]; via = 'surname+nbhd';
         // link parentage to the matched adult (ledger is truth — D5)
-        const adult = rows.find(r => alive(r) && ageOf(r) >= 16 &&
+        const adult = rows.find(r => alive(r) && ageOf(r) >= 18 &&
           (r[iHH] || '').trim() === target &&
           String(r[iL] || '').trim() === String(m[iL] || '').trim());
         if (adult) via += ':' + adult[iPop];
@@ -106,7 +107,7 @@ const RENT = { 'West Oakland': 1400, 'Fruitvale': 1500, 'Downtown': 2100, 'Uptow
     else creates.push({ kid: m });
   }
 
-  console.log(`minors<16: ${minors.length} | join existing: ${joins.length} | create orphan household: ${creates.length} | existing orphan households (drip targets): ${dripTargets.length}`);
+  console.log(`minors<18: ${minors.length} | join existing: ${joins.length} | create orphan household: ${creates.length} | existing orphan households (drip targets): ${dripTargets.length}`);
   joins.forEach(j => console.log(`  JOIN   ${j.kid[iPop]} ${j.kid[iF]} ${j.kid[iL]} -> ${j.target} (${j.via})`));
   creates.forEach(c => console.log(`  CREATE ${c.kid[iPop]} ${c.kid[iF]} ${c.kid[iL]} (${c.kid[iNbhd] || 'no-nbhd'}) -> new family HH, income ${2 * GENERIC_PARENT_SALARY}`));
   dripTargets.forEach(d => console.log(`  DRIP-TARGET ${d.kid[iPop]} ${d.kid[iF]} ${d.kid[iL]} in ${d.hid}`));
@@ -248,6 +249,6 @@ const RENT = { 'West Oakland': 1400, 'Fruitvale': 1500, 'Downtown': 2100, 'Uptow
 
   // read-back verify
   const sl2 = await sheets.getRawSheetData('Simulation_Ledger');
-  const bad = sl2.slice(1).filter(r => alive(r) && (Number(r[iBirth]) || 0) > 0 && (AGE_ANCHOR - Number(r[iBirth])) < 16 && !(r[iHH] || '').trim());
+  const bad = sl2.slice(1).filter(r => alive(r) && (Number(r[iBirth]) || 0) > 0 && (AGE_ANCHOR - Number(r[iBirth])) < 18 && !(r[iHH] || '').trim());
   console.log('read-back: minors with no household =', bad.length, bad.length === 0 ? '(CLEAN)' : bad.map(r => r[iPop]).join(','));
 })().catch(e => { console.error(e.stack); process.exit(1); });

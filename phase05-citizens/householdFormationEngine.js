@@ -506,7 +506,7 @@ function reconcileHouseholds_(ctx, cycle) {
         for (var am = 0; am < actual.length; am++) {
           var amRow = citizenByPOPID[actual[am]];
           var amBY = amRow && iBirthYear >= 0 ? (Number(amRow[iBirthYear]) || 0) : 0;
-          if (amBY > 0 && (simYear - amBY) < 16) { hasMinor = true; break; }
+          if (amBY > 0 && (simYear - amBY) < 18) { hasMinor = true; break; } // <18 = minor (S320 kid-age ruling)
         }
         var newType;
         if (hasMinor) {
@@ -558,7 +558,7 @@ function reconcileHouseholds_(ctx, cycle) {
       for (var an = 0; an < mem.length; an++) {
         var anRow = citizenByPOPID[mem[an]];
         var anBY = anRow && iBirthYear >= 0 ? (Number(anRow[iBirthYear]) || 0) : 0;
-        if (anBY > 0 && (simYear - anBY) < 16) { adoptMinor = true; break; }
+        if (anBY > 0 && (simYear - anBY) < 18) { adoptMinor = true; break; } // <18 = minor (S320 kid-age ruling)
       }
       if (adoptMinor) {
         newRow[lType] = 'family';
@@ -846,7 +846,7 @@ function buildCitizenMoneyLookup_(ctx) {
     lookup[rows[r][popIdCol]] = {
       income: Number(rows[r][incomeCol]) || 0,
       netWorth: netWorthCol >= 0 ? (Number(rows[r][netWorthCol]) || 0) : 0,
-      adult: by > 0 ? (simYear - by) >= 16 : true,
+      adult: by > 0 ? (simYear - by) >= 18 : true, // 18+ = adult (S320 kid-age ruling)
       married: ms === 'married' || ms === 'partnered',
       spousePop: sp ? sp.split(' ')[0] : ''
     };

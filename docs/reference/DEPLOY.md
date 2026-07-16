@@ -45,11 +45,14 @@ Cloud Shell sometimes clears installed packages. If clasp fails, run `npm instal
 accidentally deploys to live, Mike can cycle live back via its version history — but the
 sandbox is the intended target for anything unverified.
 
-**CURRENT sandbox: `SANDBOX 0716`** (stood up S320 2026-07-16 via Drive-MCP copy of current live — full S320 stack in data AND code: kid-age <18, GC gen v2.8, engine.58 GC-as-entry. Purpose: prove live-current code, then bonds+GC / debt-savings-inheritance / banking / heritage stage)
-- Spreadsheet ID `13Ri5mujcno19KGp4yF19ojQ8-TIVeATRWrxcfBnJJPw`
-  URL: https://docs.google.com/spreadsheets/d/13Ri5mujcno19KGp4yF19ojQ8-TIVeATRWrxcfBnJJPw/edit
-- Bound Apps Script ID: `1fS4u4UWbH-FArX0CjFyetB37fcwHRLVkGQy5g9Z7enf5XsdOLze-lT1T`
+**CURRENT sandbox: `SANDBOX 0716b`** (stood up S320 2026-07-16 via Drive-MCP copy of live post-kill-list — full S320 stack + backfill kill-list in data AND code; live data trued (47 minor salaries zeroed, POP-00744 education). Purpose: bonds+GC / debt-savings-inheritance / banking / heritage build stage)
+- Spreadsheet ID `1reNGLnvimH5vmMs2opPylA1QRpNDKwiVRiN8aYXeAVU`
+  URL: https://docs.google.com/spreadsheets/d/1reNGLnvimH5vmMs2opPylA1QRpNDKwiVRiN8aYXeAVU/edit
+- Bound Apps Script ID: pending (Mike: Project Settings when first code deploy needed)
 - **SIM_SSID Script Property = the Spreadsheet ID above — Mike must set this before the first fire (protocol step 3; the 0714 incident step)**
+
+**RETIRED: `SANDBOX 0716`** (S320 — proved engine.58 across 2 cycles + kill-list fixes: 48/48 family HH incomes true, 0 minor salaries, EducationLevel stable, full-ledger education fill)
+- Spreadsheet `13Ri5mujcno19KGp4yF19ojQ8-TIVeATRWrxcfBnJJPw` / script `1fS4u4UWbH-FArX0CjFyetB37fcwHRLVkGQy5g9Z7enf5XsdOLze-lT1T`
 
 **RETIRED: `SANDBOX 0715`** (S320 — served engine.58 proving run C102/Y2C52 + Y3C1: 21 emergence ticks, Isaac Green lottery promotion end-to-end; superseded by post-S320-live copy)
 - Spreadsheet `1HgJPjcS4t6a5CGSOgDuQoRr8tTTc1OQfGfSS1wuuxgA` / script `18cODsLhYWoRojEoqinlqXxntFFjjrCdW38ca8ZWmyhuVkhwRGqYGJ7Kn`

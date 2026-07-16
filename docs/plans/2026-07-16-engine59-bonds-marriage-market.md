@@ -70,17 +70,51 @@ roster citizen still active. You enter the world knowing the people who
 talked about you; the bond engine grows or decays it from there — which
 also means a lottery winner can walk the normal romance path immediately.
 
-## Dials (Mike locks before build)
+### T5 — Bonds × the dials (TraitProfile — Mike-ruled S320)
+Vocabulary: **"dials" = the TraitProfile system** — the essence/voice column
+the 24/7 citizen cron wakes and article pulls read. Everything here must
+reach it: build → events → dials → autonomous life. Two seams:
+1. **Traits shape bonds:** TraitProfile is parseable
+   (`Archetype:…|sociability:60|warmth:74|family:68|…`) — bond formation
+   and growth weight by trait affinity: high `sociability` bonds more, high
+   `warmth` grows friendship faster, high `family` courts/marries faster.
+   Deterministic reads, ctx.rng rolls.
+2. **Bonds reach the cron life:** every bond event already writes a
+   LifeHistory line (`appendBondLifeLine_`) — verified the wake loop reads
+   LifeHistory, so wakes are bond-aware by construction. Build check:
+   romance/wedding/rivalry lines carry tags the reflection classifier can
+   route into tension open/resolve, so a bond can move a citizen's dials.
 
-| Dial | Proposed | Meaning |
+### SuperCouple — the full "math in their favor" (Mike-ruled S320)
+Beyond the stamp: pay, fame, AND household hit their events and outcomes —
+multi-engine, not just money. Hooks the stamp feeds (each built in its
+owning stage): career engine (raise odds), UsageCount/fame paths (coverage
+gravity), household events (positive weighting), kids' outcomes at 18.
+engine.59 ships the stamp + the LifeHistory/story-hook moment; consumers
+land with the money/fame stages.
+
+## Tuning constants (grounded against live, S320 — these are NOT Mike's "dials")
+
+Grounding run (live, 930 rows): market = 131 singles aged 20–65
+(T1 6M/1F, T2 6M/3F, T3 24M/10F, T4 30M/51F — female surplus at T4, male
+surplus above); 162 active friendships, intensity range 1–5.6, median ~3.5;
+2 romantic bonds, both hand-seeded canon couples; GC pool 209M/29F active.
+
+**THE grounded finding: ROMANCE_THRESHOLD 7 is unreachable — max organic
+friendship intensity is 5.6. The organic romance pipeline has never fired.**
+
+| Constant | Grounded value | Basis |
 |---|---|---|
-| TIER_ROMANCE factor | (tA+tB)/8 | T1×T1 0.25× … T4×T4 1.0× |
-| Fitness clamp | 0.6–1.4 | spread between worst/best positioned |
-| GC_MARRY_CHANCE | 0.02/cycle | base lottery odds per drought single |
-| GC_DROUGHT | 10 cycles | single-streak before the lottery opens |
-| POOL_REF | 60 | scarcity denominator (matches gen floor) |
-| Namer roster cap | 5 | bonds seeded at promotion |
-| SuperCouple stamp | T1×T1, T1×T2 | the dynasty-seed flag |
+| ROMANCE_THRESHOLD | **7 → 5.5** | top of the real distribution — only the strongest few friendships qualify at any time (slow, not never). Verify the 5.6 ceiling cause at build (growth/decay math) |
+| ROMANCE_CHANCE | 0.10 (keep) | with ~2-5 eligible pairs and tier+fitness scaling → expect ≈1 romance per 3-6 cycles world-wide |
+| TIER_ROMANCE factor | (tA+tB)/8 | T1×T1 0.25× — compounds with 6M/1F T1 singles: super couples years apart |
+| MARRIAGE_THRESHOLD | 8 (keep) | courtship = several cycles of romantic growth from 5.5 |
+| Fitness clamp | 0.6–1.4 | education trued S320; DebtLevel/SavingsRate mapped at build |
+| GC_MARRY_CHANCE | 0.02/cycle | drought singles: 66 single males vs 29 GC females (scarce), 64 single females vs 209 GC males (abundant) — scarcity factor makes the two doors asymmetric, as ruled |
+| GC_DROUGHT | 10 cycles | ~1 sim-quarter single before the lottery opens |
+| POOL_REF | 60 | matches the generator's F-floor |
+| Namer roster cap | 5 | bounded EmergenceContext |
+| SuperCouple stamp | T1×T1, T1×T2 | dynasty seed |
 
 ## Verification (0716b, one cycle + targeted checks)
 

@@ -144,6 +144,11 @@ function processGenerationalWealth_(ctx) {
   var wealthResults = calculateCitizenWealth_(ctx);
   results.wealthUpdated = wealthResults.updated;
 
+  // Step 2.5 (engine.60 S320): the money loop — savings accrue into NetWorth,
+  // debt moves both ways, threshold moments reach LifeHistory + hooks.
+  var loopResults = processMoneyLoop_(ctx, cycle);
+  results.moneyLoop = loopResults;
+
   // Step 3: Process inheritance for recent deaths
   var inheritanceResults = processInheritance_(ctx, cycle);
   results.inheritanceProcessed = inheritanceResults.processed;
@@ -172,6 +177,118 @@ function processGenerationalWealth_(ctx) {
   return results;
 }
 
+
+// ════════════════════════════════════════════════════════════════════════════
+// engine.60 (S320) — THE MONEY LOOP
+// Savings accrual finally READS SavingsRate (it had zero readers since it was
+// written); NetWorth grows from lived income, not only inheritance; DebtLevel
+// moves both ways instead of staying a birthmark; threshold moments write
+// LifeHistory + story hooks so the cron life feels its ledger. Mike-direct:
+// education → better savings; SuperCouple households get their first "math
+// in their favor"; once married the household drives events → dials → kids.
+// ════════════════════════════════════════════════════════════════════════════
+var DEBT_DRAG = 40;            // per level per cycle — level 6 bleeds ~12.5k/yr
+var DEBT_PAYDOWN_CYCLES = 6;   // surplus cadence to shed a level
+var DEBT_PAYOFF_COST = 800;    // × level, paid from NetWorth
+var EDU_SAVINGS_FACTOR = { doctorate: 1.2, masters: 1.2, bachelors: 1.1 };
+var SUPERCOUPLE_SAVINGS_FACTOR = 1.2;
+var NETWORTH_MILESTONE = 100000;
+
+function processMoneyLoop_(ctx, cycle) {
+  var results = { accrued: 0, debtUp: 0, debtDown: 0, lines: 0 };
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  if (!rows.length) return results;
+  var idx = function(n) { return header.indexOf(n); };
+  var iInc = idx('Income'), iNW = idx('NetWorth'),
+      iSav = idx('SavingsRate'), iDebt = idx('DebtLevel'), iEdu = idx('EducationLevel'),
+      iHH = idx('HouseholdId'), iBirth = idx('BirthYear'), iStatus = idx('Status'),
+      iLife = idx('LifeHistory');
+  if (iInc < 0 || iNW < 0 || iSav < 0) return results;
+  var simYear = 2040 + Math.floor(cycle / 52);
+  var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
+
+  // Household money state: crisis + SuperCouple, one read
+  var hhState = {};
+  var hhSheet = ctx.ss.getSheetByName('Household_Ledger');
+  if (hhSheet) {
+    var hv = hhSheet.getDataRange().getValues();
+    var hj = function(n) { return hv[0].indexOf(n); };
+    var cId = hj('HouseholdId'), cInc = hj('HouseholdIncome'), cRent = hj('MonthlyRent'),
+        cSav = hj('HouseholdSavings'), cSuper = hj('SuperCouple'), cStat = hj('Status');
+    for (var q = 1; q < hv.length; q++) {
+      if (String(hv[q][cStat] || '').toLowerCase() !== 'active') continue;
+      var hInc = Number(hv[q][cInc]) || 0;
+      var rentA = (Number(hv[q][cRent]) || 0) * 12;
+      hhState[String(hv[q][cId])] = {
+        crisis: hInc > 0 && rentA / hInc >= 0.5 &&
+                (Number(hv[q][cSav]) || 0) < (Number(hv[q][cRent]) || 0) * 12,
+        superCouple: cSuper >= 0 && String(hv[q][cSuper] || '').toLowerCase() === 'yes'
+      };
+    }
+  }
+
+  for (var r = 0; r < rows.length; r++) {
+    var row = rows[r];
+    if (String(row[iStatus] || 'active').toLowerCase() !== 'active') continue;
+    var by = iBirth >= 0 ? (Number(row[iBirth]) || 0) : 0;
+    if (by > 0 && (simYear - by) < 18) continue; // minors hold no money loop
+
+    var income = Number(row[iInc]) || 0;
+    var rate = Number(row[iSav]) || 0;
+    var debt = iDebt >= 0 ? (Number(row[iDebt]) || 0) : 0;
+    var nw = Number(row[iNW]) || 0;
+    var hh = hhState[String(row[iHH] || '').trim()] || { crisis: false, superCouple: false };
+    var eduF = EDU_SAVINGS_FACTOR[String(row[iEdu] || '').toLowerCase()] || 1.0;
+    var superF = hh.superCouple ? SUPERCOUPLE_SAVINGS_FACTOR : 1.0;
+
+    var accrual = Math.round((income / 52) * rate * eduF * superF) - (debt * DEBT_DRAG);
+    var nwNew = Math.max(0, nw + accrual);
+    var line = null;
+    var debtBefore = debt;
+
+    // debt accrues in a crisis household (borrowing to stay housed)
+    if (hh.crisis && income > 0 && iDebt >= 0 && debt < 6) {
+      debt++;
+      if (debt === 5) line = '[Money] the debts crossed a line this week — sleep comes harder now';
+      else line = '[Money] borrowed against tomorrow to keep the ' + 'household afloat';
+    }
+    // debt pays down on sustained surplus (stateless cadence: row-offset mod)
+    else if (debt > 0 && accrual > 0 && ((cycle + r) % DEBT_PAYDOWN_CYCLES === 0)) {
+      debt--;
+      nwNew = Math.max(0, nwNew - DEBT_PAYOFF_COST * debtBefore);
+      if (debt === 0 && debtBefore >= 3) line = '[Money] the last debt cleared — the ledger finally reads clean';
+    }
+    // milestone: first crossing of 100k lived wealth
+    if (!line && nw < NETWORTH_MILESTONE && nwNew >= NETWORTH_MILESTONE &&
+        String(row[iLife] || '').indexOf('crossed six figures') < 0) {
+      line = '[Money] savings crossed six figures — years of steady weeks did that';
+    }
+
+    if (nwNew !== nw) { row[iNW] = nwNew; results.accrued++; }
+    if (iDebt >= 0 && debt !== debtBefore) {
+      row[iDebt] = debt;
+      if (debt > debtBefore) results.debtUp++; else results.debtDown++;
+    }
+    if (line && iLife >= 0) {
+      row[iLife] = (row[iLife] ? row[iLife] + '\n' : '') + stamp + ' — ' + line;
+      results.lines++;
+      if (line.indexOf('crossed a line') >= 0 || line.indexOf('six figures') >= 0) {
+        ctx.summary.storyHooks = ctx.summary.storyHooks || [];
+        ctx.summary.storyHooks.push({
+          hookType: line.indexOf('six figures') >= 0 ? 'MONEY_MILESTONE' : 'DEBT_CRISIS',
+          severity: 3, priority: 3,
+          description: ((row[idx('First')] || '') + ' ' + (row[idx('Last')] || '')).trim() + ' — ' + line.replace('[Money] ', ''),
+          cycleGenerated: cycle, neighborhood: row[idx('Neighborhood')] || '',
+          domain: 'COMMUNITY', text: line.replace('[Money] ', '')
+        });
+      }
+    }
+  }
+  if (results.accrued || results.debtUp || results.debtDown) ctx.ledger.dirty = true;
+  Logger.log('processMoneyLoop_ engine.60: accrued ' + results.accrued + ', debt +' + results.debtUp + '/-' + results.debtDown + ', lines ' + results.lines);
+  return results;
+}
 
 // ════════════════════════════════════════════════════════════════════════════
 // INCOME CALCULATION
@@ -646,7 +763,6 @@ function updateHouseholdWealth_(ctx) {
   var iHouseholdId = hidx('HouseholdId');
   var iHouseholdWealth = hidx('HouseholdWealth');
   var iHouseholdIncome = hidx('HouseholdIncome');
-  var iSavingsBalance = hidx('SavingsBalance');
 
   var iCitizenHousehold = cidx('HouseholdId');
   var iIncome = cidx('Income');
@@ -684,11 +800,9 @@ function updateHouseholdWealth_(ctx) {
       // Update household wealth (average)
       household[iHouseholdWealth] = Math.round(totalWealth / memberCount);
 
-      // Update savings balance (estimated)
-      if (iSavingsBalance >= 0) {
-        var avgSavingsRate = 0.05;
-        household[iSavingsBalance] = Math.round(totalIncome * avgSavingsRate);
-      }
+      // engine.60 (S320): SavingsBalance write RETIRED — zero readers ever,
+      // and it name-collided with HouseholdSavings (householdFormationEngine,
+      // which HAS a reader: the rent-crisis buffer). One concept, one column.
 
       updated++;
     }

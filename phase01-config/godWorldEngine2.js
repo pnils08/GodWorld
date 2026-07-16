@@ -251,12 +251,11 @@ function runWorldCycle() {
   // ═══════════════════════════════════════════════════════════
   // PHASE 5: CITIZENS + RELATIONSHIPS
   // ═══════════════════════════════════════════════════════════
-  // S205: Phase5-GenericCitizens DISABLED — Path B no-grow legacy. Generator writes to
-  // Generic_Citizens (10 cols, no Gender col) with flat age distribution 18-75 and
-  // ungendered name picks; live tab is ~83% male from pre-v2.6 grandfathered clusters.
-  // Architecture decision S205: SL is single source of truth (836 active, Tier 1-5 +
-  // Gender col AU); GC retained as no-grow legacy. Future SL-Tier-5 generator TBD.
-  // safePhaseCall_(ctx, 'Phase5-GenericCitizens', function() { generateGenericCitizens_(ctx); });
+  // S320: Phase5-GenericCitizens REACTIVATED (was S205-disabled). GC is the
+  // Tier-5 feeder pool for spouse-drip + engine-lottery promotion (Mike-direct
+  // S320). Generator v2.8 fixed the S205 defects: writes Sex, sex-tagged name
+  // pools, pool-floor gate (F60/M40, max 8/cycle) preserves no-grow when fed.
+  safePhaseCall_(ctx, 'Phase5-GenericCitizens', function() { generateGenericCitizens_(ctx); });
   safePhaseCall_(ctx, 'Phase5-GenericMicroEvents', function() { generateGenericCitizenMicroEvents_(ctx); });
   safePhaseCall_(ctx, 'Phase5-GameModeMicroEvents', function() { generateGameModeMicroEvents_(ctx); });
   // S296 going-home spec: Mike's game session (feed namesUsed) reaches the
@@ -1797,12 +1796,11 @@ function runCyclePhases_(ctx) {
   // ═══════════════════════════════════════════════════════════
   // PHASE 5: CITIZENS + RELATIONSHIPS
   // ═══════════════════════════════════════════════════════════
-  // S205: Phase5-GenericCitizens DISABLED — Path B no-grow legacy. Generator writes to
-  // Generic_Citizens (10 cols, no Gender col) with flat age distribution 18-75 and
-  // ungendered name picks; live tab is ~83% male from pre-v2.6 grandfathered clusters.
-  // Architecture decision S205: SL is single source of truth (836 active, Tier 1-5 +
-  // Gender col AU); GC retained as no-grow legacy. Future SL-Tier-5 generator TBD.
-  // safePhaseCall_(ctx, 'Phase5-GenericCitizens', function() { generateGenericCitizens_(ctx); });
+  // S320: Phase5-GenericCitizens REACTIVATED (was S205-disabled). GC is the
+  // Tier-5 feeder pool for spouse-drip + engine-lottery promotion (Mike-direct
+  // S320). Generator v2.8 fixed the S205 defects: writes Sex, sex-tagged name
+  // pools, pool-floor gate (F60/M40, max 8/cycle) preserves no-grow when fed.
+  safePhaseCall_(ctx, 'Phase5-GenericCitizens', function() { generateGenericCitizens_(ctx); });
   safePhaseCall_(ctx, 'Phase5-GenericMicroEvents', function() { generateGenericCitizenMicroEvents_(ctx); });
   safePhaseCall_(ctx, 'Phase5-GameModeMicroEvents', function() { generateGameModeMicroEvents_(ctx); });
   // S296 going-home spec: Mike's game session (feed namesUsed) reaches the

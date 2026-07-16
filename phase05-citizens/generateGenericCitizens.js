@@ -5,6 +5,16 @@
  *
  * World-aware background citizen generation with GodWorld Calendar integration.
  *
+ * v2.8 Changes from v2.7 (S320 — Mike-direct, GC as Tier-5 feeder):
+ * - Sex-tagged name pools + Sex column write (column added S318; generator
+ *   never wrote it — the S205 disable's core defect)
+ * - Pool-floor gate: grows only when a sex-side is below floor (F 60 / M 40,
+ *   max 8/cycle) — S205 no-grow preserved when the pool is fed. Floors skew
+ *   female: sports imports are all-male, spouse drip consumes females.
+ * - World-broad name additions (~52 first, 29 last) — Oakland is the world
+ *   for sim purposes; pools read like a world population, not a city subset
+ * - Reactivated at both godWorldEngine2 call sites (disabled S205→S320)
+ *
  * v2.7 Changes from v2.6 (S184 — ENGINE_REPAIR Row 5):
  * - Pool expansion: 62 → 186 first names, 53 → 144 last names (26,784 combos)
  * - Per-name caps in getUniqueName: max 3 per first name, max 4 per last name
@@ -64,6 +74,7 @@ function generateGenericCitizens_(ctx) {
   var iStatus = idx('Status');
   var iEmergedCycle = idx('EmergedCycle');
   var iLifeHistory = idx('LifeHistory');
+  var iSex = idx('Sex'); // v2.8 (S320) — column added S318; generator now writes it
 
   // v2.4: Required header guard for duplicate checking
   if (iFirst < 0 || iLast < 0) {
@@ -222,43 +233,88 @@ function generateGenericCitizens_(ctx) {
   if (baseCount < 0) baseCount = 0;
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // NAME POOLS (v2.7: 186 first × 144 last = 26,784 combos)
+  // v2.8 (S320): POOL-FLOOR GATE — the pool only grows when a sex-side is
+  // below floor (GC = Tier-5 feeder / waiting room; S205 no-grow preserved
+  // otherwise). Floors skew female (Mike-ruled S320): the sports layer
+  // imports are all-male and the spouse drip consumes females hardest —
+  // live pool had drifted to 209M/29F. The world-aware churn count above
+  // survives as fill pacing; the floor is the authorizer.
   // ═══════════════════════════════════════════════════════════════════════════
-  var firstNames = [
-    // v2.6 base (62) — preserved
-    "Carlos", "Mina", "Andre", "Jordan", "Brianna", "Sofia", "Tariq", "Elena", "Marcus",
-    "Kaila", "Tobias", "Lorenzo", "Ariana", "Xavier", "Lila", "Darius", "Ramon", "Ivy",
-    "Maya", "Jamal", "Priya", "Diego", "Aaliyah", "Oscar", "Jasmine", "Terrell", "Camila",
-    "Wei", "Mei", "Jun", "Yuki", "Kenji", "Anh", "Linh", "Tran", "Esperanza", "Guadalupe",
-    "Destiny", "Isaiah", "Natasha", "DeShawn", "Monique", "Tyrell", "Alicia", "Malik",
-    "Vanessa", "Cedric", "Leticia", "Dwayne", "Gabriela", "Kwame", "Nina", "Rashid",
-    "Bianca", "Trevon", "Imani", "Hector", "Sakura", "Javier", "Miriam", "Kofi", "Lucia",
-    // v2.7 additions — Latino feminine
-    "Adriana", "Catalina", "Daniela", "Elisa", "Fernanda", "Graciela", "Itzel", "Liliana",
-    "Manuela", "Noelia", "Paloma", "Rosalinda", "Teresa", "Valentina", "Ximena", "Yolanda",
-    // v2.7 additions — Latino masculine
-    "Adrian", "Alejandro", "Cesar", "Dante", "Eduardo", "Emilio", "Felipe", "Gustavo",
-    "Ignacio", "Jorge", "Mateo", "Nestor", "Rafael", "Salvador", "Tomas", "Vicente",
-    // v2.7 additions — Black feminine
+  var FEMALE_FLOOR = 60, MALE_FLOOR = 40, MAX_PER_CYCLE = 8;
+  var activeF = 0, activeM = 0;
+  for (var pr = 1; pr < genericValues.length; pr++) {
+    if (norm(genericValues[pr][iStatus]) !== 'active') continue;
+    var psx = iSex >= 0 ? norm(genericValues[pr][iSex]) : '';
+    if (psx === 'female') activeF++;
+    else if (psx === 'male') activeM++;
+  }
+  var deficitF = Math.max(0, FEMALE_FLOOR - activeF);
+  var deficitM = Math.max(0, MALE_FLOOR - activeM);
+  if (deficitF + deficitM === 0) {
+    S.genericCitizensDistribution = { skipped: 'pool-at-floor', activeFemale: activeF, activeMale: activeM };
+    return;
+  }
+  var fillCount = Math.min(MAX_PER_CYCLE, deficitF + deficitM, Math.max(baseCount, 3));
+  var sexQueue = [];
+  for (var q = 0; q < fillCount; q++) {
+    sexQueue.push(q < deficitF ? 'female' : 'male'); // scarce side fills first
+  }
+  baseCount = sexQueue.length;
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // NAME POOLS (v2.8 S320: sex-tagged + world-broad — Oakland is the world for
+  // sim purposes (Mike: "the mayor of this sim is the president"); pools read
+  // like a whole world's population, not a city-flavored subset. Sex-first
+  // pick drives the Sex column the spouse drip requires.)
+  // ═══════════════════════════════════════════════════════════════════════════
+  var femaleFirstNames = [
+    // v2.6/v2.7 pool, classified (unisex assigned by dominant usage)
+    "Mina", "Brianna", "Sofia", "Elena", "Kaila", "Ariana", "Lila", "Ivy", "Maya",
+    "Priya", "Aaliyah", "Jasmine", "Camila", "Mei", "Yuki", "Anh", "Linh",
+    "Esperanza", "Guadalupe", "Destiny", "Natasha", "Monique", "Alicia", "Vanessa",
+    "Leticia", "Gabriela", "Nina", "Bianca", "Imani", "Sakura", "Miriam", "Lucia",
+    "Adriana", "Catalina", "Daniela", "Elisa", "Fernanda", "Graciela", "Itzel",
+    "Liliana", "Manuela", "Noelia", "Paloma", "Rosalinda", "Teresa", "Valentina",
+    "Ximena", "Yolanda",
     "Asha", "Brielle", "Deja", "Ebony", "Janelle", "Latoya", "Nia", "Octavia",
     "Rashida", "Tamika", "Zora",
-    // v2.7 additions — Black masculine
-    "Antoine", "Bryce", "Carlton", "Devonte", "Ezra", "Jalen", "Kendrick", "Marquise",
-    "Omari", "Rasheed", "Theo", "Tyrese",
-    // v2.7 additions — East/Southeast Asian
-    "Aiko", "Akira", "Daichi", "Eiji", "Hana", "Hiroshi", "Hyejin", "Kazuki",
-    "Long", "Mai", "Minh", "Phuong", "Reiko", "Ren", "Satoshi", "Sora", "Thi", "Wen",
-    // v2.7 additions — South Asian
-    "Aarav", "Aditya", "Anika", "Arjun", "Deepa", "Esha", "Ishaan", "Kavya",
-    "Mira", "Neel", "Pooja", "Ravi", "Roshan", "Shreya", "Tara", "Vikram",
-    // v2.7 additions — Middle Eastern / North African
-    "Amira", "Farid", "Layla", "Nasir", "Omar", "Rania", "Soraya", "Yusuf", "Zara",
-    // v2.7 additions — African (West/East)
-    "Adaeze", "Chidi", "Folake", "Mansa", "Nala", "Themba",
-    // v2.7 additions — Anglo / mixed
-    "Audrey", "Beatrix", "Clara", "Dahlia", "Eleanor", "Felix", "Iris", "Julian",
-    "Kira", "Lena", "Margot", "Nora", "Owen", "Penelope", "Quinn", "Reed", "Sage",
-    "Una", "Violet", "Wren"
+    "Aiko", "Hana", "Hyejin", "Mai", "Phuong", "Reiko", "Sora", "Thi",
+    "Anika", "Deepa", "Esha", "Kavya", "Mira", "Pooja", "Shreya", "Tara",
+    "Amira", "Layla", "Rania", "Soraya", "Zara",
+    "Adaeze", "Folake", "Nala",
+    "Audrey", "Beatrix", "Clara", "Dahlia", "Eleanor", "Iris", "Kira", "Lena",
+    "Margot", "Nora", "Penelope", "Quinn", "Sage", "Una", "Violet", "Wren",
+    // v2.8 additions (S320) — world-broad: European/Slavic/Nordic, Lusophone,
+    // Pacific, Celtic, MENA, Horn/West African
+    "Ingrid", "Astrid", "Freya", "Katarina", "Milena", "Anastasia", "Zofia",
+    "Irina", "Beatriz", "Marisol", "Yara", "Leilani", "Moana", "Talia", "Noor",
+    "Saoirse", "Aoife", "Giulia", "Chiara", "Amelie", "Colette", "Zainab",
+    "Fatima", "Halima", "Ines", "Petra"
+  ];
+
+  var maleFirstNames = [
+    // v2.6/v2.7 pool, classified (unisex assigned by dominant usage)
+    "Carlos", "Andre", "Jordan", "Tariq", "Marcus", "Tobias", "Lorenzo", "Xavier",
+    "Darius", "Ramon", "Jamal", "Diego", "Oscar", "Terrell", "Wei", "Jun", "Kenji",
+    "Tran", "Isaiah", "DeShawn", "Tyrell", "Malik", "Cedric", "Dwayne", "Kwame",
+    "Rashid", "Trevon", "Hector", "Javier", "Kofi",
+    "Adrian", "Alejandro", "Cesar", "Dante", "Eduardo", "Emilio", "Felipe",
+    "Gustavo", "Ignacio", "Jorge", "Mateo", "Nestor", "Rafael", "Salvador",
+    "Tomas", "Vicente",
+    "Antoine", "Bryce", "Carlton", "Devonte", "Ezra", "Jalen", "Kendrick",
+    "Marquise", "Omari", "Rasheed", "Theo", "Tyrese",
+    "Akira", "Daichi", "Eiji", "Hiroshi", "Kazuki", "Long", "Minh", "Ren",
+    "Satoshi", "Wen",
+    "Aarav", "Aditya", "Arjun", "Ishaan", "Neel", "Ravi", "Roshan", "Vikram",
+    "Farid", "Nasir", "Omar", "Yusuf",
+    "Chidi", "Mansa", "Themba",
+    "Felix", "Julian", "Owen", "Reed",
+    // v2.8 additions (S320) — world-broad: European/Slavic/Nordic, Lusophone,
+    // Pacific, Celtic, MENA, Horn/West African
+    "Bjorn", "Soren", "Nikolai", "Dmitri", "Stefan", "Lukas", "Matthias",
+    "Henrik", "Joao", "Thiago", "Rodrigo", "Keanu", "Tevita", "Liam", "Declan",
+    "Alessandro", "Luca", "Etienne", "Olivier", "Amadou", "Ibrahim", "Musa",
+    "Idris", "Emeka", "Kelechi", "Rohan"
   ];
 
   var lastNames = [
@@ -288,7 +344,13 @@ function generateGenericCitizens_(ctx) {
     "Carmichael", "Crawford", "Donovan", "Faulkner", "Holcomb", "Kessler", "Lockhart",
     "McAllister", "Norwood", "Oakley", "Quinlan", "Stafford", "Underwood", "Vance",
     // v2.7 additions — African (West/East)
-    "Abebe", "Adeyemi", "Bello", "Diop", "Fofana", "Gebre", "Mensah", "Owusu", "Tadesse"
+    "Abebe", "Adeyemi", "Bello", "Diop", "Fofana", "Gebre", "Mensah", "Owusu", "Tadesse",
+    // v2.8 additions (S320) — world-broad: Nordic/Slavic/European, Lusophone/
+    // Italian/French, Celtic, Pacific, MENA/Horn
+    "Andersson", "Lindqvist", "Kowalski", "Novak", "Ivanov", "Petrov", "Silva",
+    "Oliveira", "Ferreira", "Costa", "Rossi", "Ricci", "Moreau", "Dubois",
+    "Laurent", "Schmidt", "Weber", "Novotny", "Popescu", "O'Connell", "Gallagher",
+    "Kahale", "Fetu", "Ali", "Hassan", "Osman", "Rahimi", "Haddad", "Nasser"
   ];
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -378,10 +440,11 @@ function generateGenericCitizens_(ctx) {
   var LAST_NAME_CAP = 4;
 
   // v2.7: Get unique name with hash set + per-name cap tracking
-  function getUniqueName(maxAttempts) {
+  // v2.8 (S320): sex-first pick — first name drawn from the sex-tagged pool
+  function getUniqueName(maxAttempts, sex) {
     var attempts = 0;
     while (attempts < maxAttempts) {
-      var f = randItem(firstNames);
+      var f = randItem(sex === 'female' ? femaleFirstNames : maleFirstNames);
       var l = randItem(lastNames);
       var fKey = norm(f);
       var lKey = norm(l);
@@ -528,7 +591,8 @@ function generateGenericCitizens_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   for (var i = 0; i < baseCount; i++) {
 
-    var nameResult = getUniqueName(50);
+    var sex = sexQueue[i]; // v2.8 (S320): sex decided first, name follows
+    var nameResult = getUniqueName(50, sex);
     if (!nameResult) continue;
 
     var first = nameResult.first;
@@ -560,6 +624,7 @@ function generateGenericCitizens_(ctx) {
     if (iEmergenceCount >= 0) newRow[iEmergenceCount] = 0;
     if (iStatus >= 0) newRow[iStatus] = 'Active';
     if (iEmergedCycle >= 0) newRow[iEmergedCycle] = "Cycle " + cycle;
+    if (iSex >= 0) newRow[iSex] = sex; // v2.8 (S320)
 
     // ═══════════════════════════════════════════════════════════════════════
     // WORLD + CALENDAR AWARE LIFEHISTORY (v2.2)

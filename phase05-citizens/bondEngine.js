@@ -1461,7 +1461,11 @@ function bondInWorldStamp_(cycle) {
   return 'Y' + y + 'C' + c;
 }
 
-function appendBondLifeLine_(ctx, ledgerIdx, popId, tag, text, cycle) {
+// engine.59 fix (S320): signature had an unused popId param while every
+// caller passes 5 args — tag/text/cycle each shifted one slot, so EVERY bond
+// LifeHistory line printed mangled ('YNaNCNaN — [married X...] 104'). Latent
+// since P5 shipped; surfaced by the first wedding ever fired (Hill, C104).
+function appendBondLifeLine_(ctx, ledgerIdx, tag, text, cycle) {
   // ctx.ledger mutation (Phase 42 §5.6) — the citizen REMEMBERS the event;
   // wakes and interviews read LifeHistory, so this is what makes a bond real.
   var header = ctx.ledger.headers;

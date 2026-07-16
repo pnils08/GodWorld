@@ -2642,7 +2642,14 @@ function generateCitizensEvents_(ctx) {
         // note (intake context) + the last 5 'Named in' entries.
         var parts = (gw.entry.ctx0 ? gw.entry.ctx0.split('; ') : []).concat(gw.contexts);
         var origin = parts.filter(function(p) { return p.indexOf('Named in ') !== 0; });
-        var namers = parts.filter(function(p) { return p.indexOf('Named in ') === 0; }).slice(-5);
+        // dedupe by namer NAME (repeat encounters tick the count but list once)
+        var seenNamer = {};
+        var namers = parts.filter(function(p) {
+          var nm = (p.match(/Named in (.+?)'s week/) || [])[1];
+          if (!nm || seenNamer[nm]) return false;
+          seenNamer[nm] = true;
+          return true;
+        }).slice(-5);
         var roster = origin.slice(0, 1).concat(namers).join('; ').slice(0, 400);
         gcSurfaceSheet.getRange(gw.entry.sheetRow, gsC + 1).setValue(roster);
       }

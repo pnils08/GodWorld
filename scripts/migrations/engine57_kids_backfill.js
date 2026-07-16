@@ -1,5 +1,13 @@
 // engine.57 P8 migration — SANDBOX ONLY. Kids backfill (plan §Queued, Mike-approved S319).
 // Age line: <18 = minor (S320 kid-age ruling, Mike-confirmed; was <16 at S319 run).
+// S320 additions (Mike-ruled): LINK pass — minor with empty ParentIds whose own
+//   household holds a same-surname adult gets that adult as parent (ParentIds/
+//   ChildrenIds/NumChildren both directions); parent's blank MaritalStatus →
+//   married. SPOUSE DRIP — linked married/partnered parents with no SpouseId
+//   get a GC spouse promoted (counts against --drip N budget): opposite sex,
+//   age ±8, nbhd pref, kid's surname, second parent on the kids' rows, register
+//   row. Income-neutral: real 48k replaces the P8 off-camera 48k. Singles stay
+//   single (bond-engine subjects, Mike-ruled S320).
 // Minors with no household-with-adult:
 //   1. ParentIds → parent's household: join it.
 //   2. Surname + neighborhood adult match (unambiguous): join that household.
@@ -70,10 +78,22 @@ const RENT = { 'West Oakland': 1400, 'Fruitvale': 1500, 'Downtown': 2100, 'Uptow
   });
 
   const minors = rows.filter(r => alive(r) && (Number(r[iBirth]) || 0) > 0 && ageOf(r) < 18);
-  const joins = [], creates = [], dripTargets = [];
+  const joins = [], creates = [], dripTargets = [], linkTargets = [];
   for (const m of minors) {
     const hid = (m[iHH] || '').trim();
-    if (hid && (adultsByHH[hid] || []).length > 0) continue; // covered
+    if (hid && (adultsByHH[hid] || []).length > 0) {
+      // covered — but S320 link pass: empty ParentIds + same-surname adult
+      // in own household = that adult is the parent (Mike-ruled).
+      let kp = []; try { kp = JSON.parse(m[iPar] || '[]'); } catch (e) {}
+      if (!Array.isArray(kp) || kp.length === 0) {
+        const adult = rows.find(r => alive(r) && ageOf(r) >= 18 &&
+          (r[iHH] || '').trim() === hid &&
+          String(r[iL] || '').trim() === String(m[iL] || '').trim());
+        if (adult) linkTargets.push({ kid: m, adult });
+        else console.log(`  NO-LINK ${m[iPop]} ${m[iF]} ${m[iL]} — covered hh, no same-surname adult`);
+      }
+      continue;
+    }
     if (hid && activeHH[hid]) { dripTargets.push({ kid: m, hid }); continue; } // orphan household exists
 
     // 1. ParentIds → a parent with a household
@@ -107,7 +127,7 @@ const RENT = { 'West Oakland': 1400, 'Fruitvale': 1500, 'Downtown': 2100, 'Uptow
     else creates.push({ kid: m });
   }
 
-  console.log(`minors<18: ${minors.length} | join existing: ${joins.length} | create orphan household: ${creates.length} | existing orphan households (drip targets): ${dripTargets.length}`);
+  console.log(`minors<18: ${minors.length} | join existing: ${joins.length} | create orphan household: ${creates.length} | existing orphan households (drip targets): ${dripTargets.length} | link targets: ${linkTargets.length}`);
   joins.forEach(j => console.log(`  JOIN   ${j.kid[iPop]} ${j.kid[iF]} ${j.kid[iL]} -> ${j.target} (${j.via})`));
   creates.forEach(c => console.log(`  CREATE ${c.kid[iPop]} ${c.kid[iF]} ${c.kid[iL]} (${c.kid[iNbhd] || 'no-nbhd'}) -> new family HH, income ${2 * GENERIC_PARENT_SALARY}`));
   dripTargets.forEach(d => console.log(`  DRIP-TARGET ${d.kid[iPop]} ${d.kid[iF]} ${d.kid[iL]} in ${d.hid}`));
@@ -152,6 +172,31 @@ const RENT = { 'West Oakland': 1400, 'Fruitvale': 1500, 'Downtown': 2100, 'Uptow
     updates.push({ range: `Simulation_Ledger!${L(iHH)}${kr.sheetRow}`, values: [[hid]] });
     dripTargets.push({ kid: c.kid, hid, pending: true }); // eligible for drip once created
   }
+
+  // ── S320 link pass: same-surname in-household parent, both directions ──
+  const byAdult = {};
+  linkTargets.forEach(t => {
+    (byAdult[t.adult[iPop]] = byAdult[t.adult[iPop]] || { adult: t.adult, kids: [] }).kids.push(t.kid);
+  });
+  const spouseDripPool = [];
+  for (const id of Object.keys(byAdult)) {
+    const { adult, kids } = byAdult[id];
+    const ar = rowByPop[id];
+    let ach = []; try { ach = JSON.parse(adult[iCh] || '[]'); } catch (e) {}
+    if (!Array.isArray(ach)) ach = [];
+    kids.forEach(k => { if (!ach.includes(k[iPop])) ach.push(k[iPop]); });
+    kids.forEach(k => updates.push({ range: `Simulation_Ledger!${L(iPar)}${rowByPop[k[iPop]].sheetRow}`, values: [[JSON.stringify([id])]] }));
+    if (iCh >= 0) updates.push({ range: `Simulation_Ledger!${L(iCh)}${ar.sheetRow}`, values: [[JSON.stringify(ach)]] });
+    if (iNum >= 0) updates.push({ range: `Simulation_Ledger!${L(iNum)}${ar.sheetRow}`, values: [[ach.length]] });
+    let mar = String(adult[iMar] || '').trim().toLowerCase();
+    const marry = !mar; // blank MaritalStatus → married (S320 Mike ruling)
+    if (marry) { mar = 'married'; updates.push({ range: `Simulation_Ledger!${L(iMar)}${ar.sheetRow}`, values: [['married']] }); }
+    if ((mar === 'married' || mar === 'partnered') && !(adult[iSp] || '').trim()) {
+      spouseDripPool.push({ adult, kids, mar });
+    }
+    console.log(`  LINK ${kids.map(k => k[iPop]).join('+')} -> parent ${id} ${adult[iF]} ${adult[iL]} (${mar}${marry ? ' MARRY:was-blank' : ''})`);
+  }
+  console.log(`  link pass: ${Object.keys(byAdult).length} parents | spouse-drip eligible: ${spouseDripPool.length}`);
 
   // ── drip: promote both parents for up to N orphan families ──
   const newSLRows = [], regRows = [], genUpdates = [];
@@ -236,6 +281,65 @@ const RENT = { 'West Oakland': 1400, 'Fruitvale': 1500, 'Downtown': 2100, 'Uptow
       console.log(`  DRIP ${t.hid}: ${dadId} ${dadName} + ${momId} ${momName} <- parents of ${kidNames.join('; ')}`);
       dripped++;
     }
+
+    // ── S320 spouse drip: one GC spouse per linked married/partnered parent ──
+    for (const t of spouseDripPool) {
+      if (dripped >= DRIP_N) break;
+      const { adult, kids, mar } = t;
+      const pGen = String(adult[iGen] || '').trim().toLowerCase();
+      const want = pGen === 'male' ? 'female' : pGen === 'female' ? 'male' : null;
+      if (!want) { console.log(`  SPOUSE-DRIP ${adult[iPop]}: SKIP — no Gender on parent row`); continue; }
+      const pAge = ageOf(adult);
+      const oldestKid = Math.max(...kids.map(k => ageOf(k)));
+      const nbhd = adult[iNbhd] || 'West Oakland';
+      const cand = pool.filter(p => !p.used && p.sex === want &&
+        Math.abs(p.age - pAge) <= 8 && p.age - oldestKid >= 18);
+      cand.sort((x, y) => {
+        const xs = (x.nbhd === nbhd ? 0 : 1), ys = (y.nbhd === nbhd ? 0 : 1);
+        if (xs !== ys) return xs - ys;
+        return Math.abs(x.age - pAge) - Math.abs(y.age - pAge);
+      });
+      const pick = cand[0];
+      if (!pick) { console.log(`  SPOUSE-DRIP ${adult[iPop]}: NO CANDIDATES (${want}, age ${pAge}±8)`); continue; }
+      pick.used = true;
+      const spId = 'POP-' + String(++maxN).padStart(5, '0');
+      const last = String(adult[iL] || '').trim();
+      const spName = `${pick.first} ${last}`;
+      const parentName = `${adult[iF]} ${last}`;
+      const kidIds = kids.map(k => k[iPop]);
+      const kidNames = kids.map(k => `${k[iPop]} ${k[iF]} ${k[iL]}`);
+      const hid2 = (adult[iHH] || '').trim();
+      const row = new Array(sh.length).fill('');
+      const set = (i, v) => { if (i >= 0) row[i] = v; };
+      set(iPop, spId); set(iF, pick.first); set(iL, last); set(iTier, 3);
+      set(iRole, pick.occ || 'Service worker'); set(iClock, 'ENGINE'); set(iStatus, 'Active');
+      set(iBirth, AGE_ANCHOR - pick.age); set(iCity, 'Oakland'); set(iNbhd, nbhd);
+      set(iMar, mar); set(iInc, GENERIC_PARENT_SALARY); set(iGen, pick.sex);
+      set(iSp, adult[iPop] + ' ' + parentName); set(iHH, hid2);
+      if (iCh >= 0) set(iCh, JSON.stringify(kidIds));
+      if (iNum >= 0) set(iNum, kidIds.length);
+      set(iLife, `${inWorldStamp} — [Family] The record catches up: at home in ${nbhd} with ${parentName}, raising ${kidIds.length === 1 ? 'a child' : kidIds.length + ' children'}.`);
+      newSLRows.push(row);
+      genUpdates.push({ range: `Generic_Citizens!${L(gStat)}${pick.k + 1}`, values: [['Promoted']] });
+      const ar = rowByPop[adult[iPop]];
+      updates.push({ range: `Simulation_Ledger!${L(iSp)}${ar.sheetRow}`, values: [[spId + ' ' + spName]] });
+      // kids gain the second parent (overwrites the link-pass single-parent
+      // write later in the same ordered batch — final value wins)
+      kids.forEach(k => updates.push({ range: `Simulation_Ledger!${L(iPar)}${rowByPop[k[iPop]].sheetRow}`, values: [[JSON.stringify([adult[iPop], spId])]] }));
+      if (hhRowOf[hid2] && activeHH[hid2]) {
+        const hr = hhRowOf[hid2];
+        let mem = []; try { mem = JSON.parse(activeHH[hid2][cMem] || '[]'); } catch (e) {}
+        if (!mem.includes(spId)) mem.push(spId);
+        updates.push({ range: `Household_Ledger!${L(cMem)}${hr}`, values: [[JSON.stringify(mem)]] });
+      }
+      const reg = new Array(11).fill('');
+      reg[0] = hid2; reg[1] = adult[iPop] + ' ' + parentName; reg[2] = spId + ' ' + spName;
+      reg[3] = mar; reg[4] = CYCLE; reg[5] = 'active';
+      kidNames.slice(0, 5).forEach((kn, x) => { reg[6 + x] = kn; });
+      regRows.push(reg);
+      console.log(`  SPOUSE-DRIP ${hid2}: ${spId} ${spName} <- spouse of ${adult[iPop]} ${parentName}, second parent of ${kidNames.join('; ')}`);
+      dripped++;
+    }
   }
 
   console.log(`\nWrites: ${updates.length} cells, ${newHHRows.length} new households, ${newSLRows.length} promoted parents, ${regRows.length} register rows, ${genUpdates.length} GC marks`);
@@ -251,4 +355,10 @@ const RENT = { 'West Oakland': 1400, 'Fruitvale': 1500, 'Downtown': 2100, 'Uptow
   const sl2 = await sheets.getRawSheetData('Simulation_Ledger');
   const bad = sl2.slice(1).filter(r => alive(r) && (Number(r[iBirth]) || 0) > 0 && (AGE_ANCHOR - Number(r[iBirth])) < 18 && !(r[iHH] || '').trim());
   console.log('read-back: minors with no household =', bad.length, bad.length === 0 ? '(CLEAN)' : bad.map(r => r[iPop]).join(','));
+  const bad2 = sl2.slice(1).filter(r => {
+    if (!alive(r) || (Number(r[iBirth]) || 0) <= 0 || (AGE_ANCHOR - Number(r[iBirth])) >= 18) return false;
+    let p = []; try { p = JSON.parse(r[iPar] || '[]'); } catch (e) {}
+    return !Array.isArray(p) || p.length === 0;
+  });
+  console.log('read-back: minors with no ParentIds =', bad2.length, bad2.length === 0 ? '(CLEAN)' : bad2.map(r => r[iPop]).join(','));
 })().catch(e => { console.error(e.stack); process.exit(1); });

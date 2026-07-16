@@ -120,6 +120,15 @@ function processAdvancementIntake_(ctx) {
   results.usageSkipped = usageResults.skipped;
   results.promotionsTriggered = usageResults.promotionsTriggered;
 
+  // engine.58 (S320): emergence-promotion checkpoint — GC citizens whose
+  // EmergenceCount reached the threshold win the lottery: queued as
+  // Advancement_Intake1 rows here, promoted to full SL rows by
+  // processAdvancementRows_ immediately below (same cycle). Single checkpoint
+  // catches every count source: media usage (above), intake re-mentions
+  // (Phase 1), event surfacing (generateCitizensEvents).
+  var emergenceResults = checkEmergencePromotions_(ss, cycle);
+  results.emergencePromotionsQueued = emergenceResults.queued;
+
   var advResults = processAdvancementRows_(ctx, now, cycle);
   results.advancementsProcessed = advResults.processed;
 
@@ -666,6 +675,86 @@ function processIntakeRows_(ss, now, cycle) {
     var last = iLast >= 0 ? String(intakeData[i][iLast] || '').trim() : '';
     if (first || last) results.processed++;
   }
+  return results;
+}
+
+// engine.58 (S320): the lottery threshold — a GC citizen whose name has come
+// back this many times (media usage, intake, event surfacing) earns a full
+// Simulation_Ledger row. Mike-ruled S320: 3. One well-seeded engine event can
+// print 3 articles in a cycle (media agents chase a story), so single-cycle
+// promotion is by design.
+var GC_EMERGENCE_PROMOTION_THRESHOLD = 3;
+
+/**
+ * engine.58 (S320): scan Generic_Citizens for Active rows at/over the
+ * emergence threshold and queue them as Advancement_Intake1 rows.
+ * processAdvancementRows_ (runs right after) promotes them to full SL rows
+ * with derived demographics and marks the GC row 'Emerged'. GC facts
+ * (BirthYear, Neighborhood, Occupation) ride along so promotion preserves
+ * them instead of re-deriving; the two optional columns are ensured on the
+ * intake sheet (S184 processor already reads them when present —
+ * schema-setup carve-out, fires once per sheet lifetime).
+ * Self-healing: if a queued row fails to process, the GC row stays Active
+ * at threshold and re-queues next cycle; an already-promoted citizen routes
+ * to the update path, never a duplicate mint.
+ */
+function checkEmergencePromotions_(ss, cycle) {
+  var results = { queued: 0 };
+  var genericSheet = ss.getSheetByName('Generic_Citizens');
+  if (!genericSheet) return results;
+  var data = genericSheet.getDataRange().getValues();
+  if (data.length < 2) return results;
+  var h = data[0];
+  var gF = findColByName_(h, 'First'), gL = findColByName_(h, 'Last'),
+      gE = findColByName_(h, 'EmergenceCount'), gS = findColByName_(h, 'Status'),
+      gB = findColByName_(h, 'BirthYear'), gN = findColByName_(h, 'Neighborhood'),
+      gO = findColByName_(h, 'Occupation'), gA = findColByName_(h, 'Age');
+  if (gF < 0 || gL < 0 || gE < 0) return results;
+
+  var advSheet = ss.getSheetByName('Advancement_Intake1');
+  if (!advSheet) advSheet = ss.getSheetByName('Advancement_Intake');
+  if (!advSheet) {
+    advSheet = ss.insertSheet('Advancement_Intake1');
+    advSheet.appendRow(['First', 'Middle', 'Last', 'RoleType', 'Tier', 'ClockMode', 'CIV', 'MED', 'UNI', 'Notes']);
+  }
+  var advHeaders = advSheet.getRange(1, 1, 1, advSheet.getLastColumn()).getValues()[0];
+  var ensureCols = ['BirthYear', 'Neighborhood'];
+  for (var e = 0; e < ensureCols.length; e++) {
+    if (findColByName_(advHeaders, ensureCols[e]) < 0) {
+      advSheet.getRange(1, advHeaders.length + 1).setValue(ensureCols[e]);
+      advHeaders.push(ensureCols[e]);
+    }
+  }
+  var aF = findColByName_(advHeaders, 'First'), aM = findColByName_(advHeaders, 'Middle'),
+      aL = findColByName_(advHeaders, 'Last'), aR = findColByName_(advHeaders, 'RoleType'),
+      aT = findColByName_(advHeaders, 'Tier'), aC = findColByName_(advHeaders, 'ClockMode'),
+      aNo = findColByName_(advHeaders, 'Notes'), aBY = findColByName_(advHeaders, 'BirthYear'),
+      aNB = findColByName_(advHeaders, 'Neighborhood');
+
+  for (var r = 1; r < data.length; r++) {
+    if (gS >= 0 && String(data[r][gS] || '').toLowerCase() !== 'active') continue;
+    var count = Number(data[r][gE]) || 0;
+    if (count < GC_EMERGENCE_PROMOTION_THRESHOLD) continue;
+    var first = String(data[r][gF] || '').trim();
+    var last = String(data[r][gL] || '').trim();
+    if (!first || !last) continue;
+    var birthYear = gB >= 0 ? (Number(data[r][gB]) || 0) : 0;
+    if (!birthYear && gA >= 0 && Number(data[r][gA]) > 0) birthYear = 2041 - Number(data[r][gA]);
+
+    var out = new Array(advHeaders.length).fill('');
+    if (aF >= 0) out[aF] = first;
+    if (aM >= 0) out[aM] = '';
+    if (aL >= 0) out[aL] = last;
+    if (aR >= 0) out[aR] = gO >= 0 ? String(data[r][gO] || '').trim() : '';
+    if (aT >= 0) out[aT] = 4; // lottery entry is Tier 4 — climbs via UsageCount like everyone
+    if (aC >= 0) out[aC] = 'ENGINE';
+    if (aNo >= 0) out[aNo] = 'GC emergence promotion — EmergenceCount ' + count + ', C' + cycle + ' (engine.58 lottery)';
+    if (aBY >= 0 && birthYear) out[aBY] = birthYear;
+    if (aNB >= 0) out[aNB] = gN >= 0 ? String(data[r][gN] || '').trim() : '';
+    advSheet.appendRow(out);
+    results.queued++;
+  }
+  if (results.queued) Logger.log('checkEmergencePromotions_: queued ' + results.queued + ' GC lottery promotions');
   return results;
 }
 

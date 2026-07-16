@@ -1018,9 +1018,8 @@ function processIntake_(ctx) {
 
   var intakeHeader = intakeVals[0];
   var ledgerHeader = ctx.ledger.headers;
-  // Composite for existsInLedger_ + getMaxPopId_ helper compatibility
-  // (they iterate from r=1 skipping header).
-  var ledgerVals = [ledgerHeader].concat(ctx.ledger.rows);
+  // (ledgerVals composite removed engine.58 — getMaxPopId_ was only needed by
+  // the direct-SL-mint path, which now routes to Generic_Citizens instead.)
 
   var idxI = function(name) { return intakeHeader.indexOf(name); };
   var idxL = function(name) { return ledgerHeader.indexOf(name); };
@@ -1053,7 +1052,23 @@ function processIntake_(ctx) {
   var logSheet = ctx.ss.getSheetByName('LifeHistory_Log');
   var stamp = (typeof inWorldStamp_ === 'function') ? inWorldStamp_(ctx) : ('C' + cycle);
 
-  var nextPopNum = getMaxPopId_(ledgerVals) + 1;
+  // engine.58 (S320): GC-as-entry — unknown names route to Generic_Citizens
+  // (Tier-5 waiting room), never direct SL mint (Mike-ruled: "there should be
+  // a reason we are tracking you"). Known GC names tick EmergenceCount instead
+  // of duplicating; SL row is earned at EmergenceCount 3 (Phase 5 checkpoint).
+  var gcSheet = ctx.ss.getSheetByName('Generic_Citizens');
+  var gcVals = gcSheet ? gcSheet.getDataRange().getValues() : [['First', 'Last']];
+  var gcHeader = gcVals[0];
+  var idxG = function(name) { return gcHeader.indexOf(name); };
+  var gEmerCol = idxG('EmergenceCount');
+  var gcIndex = {};   // normKey -> GC sheet row (1-based); -1 = queued this batch
+  var gcCounts = {};  // GC sheet row -> pending EmergenceCount value
+  for (var gg = 1; gg < gcVals.length; gg++) {
+    var gKey = normalizeCitizenName_((gcVals[gg][idxG('First')] || '').toString()) + ' ' +
+               normalizeCitizenName_((gcVals[gg][idxG('Last')] || '').toString());
+    if (gKey.trim()) gcIndex[gKey] = gg + 1;
+  }
+
   var statusWrites = [];   // [row1, text] — audit trail; rows are never cleared
   var minted = 0, updated = 0;
 
@@ -1154,35 +1169,51 @@ function processIntake_(ctx) {
       statusWrites.push([r + 1, 'review — no salary source for category "' + category + '" (sports/roster intakes carry their own salary)']);
       continue;
     }
+    // engine.58 (S320): name already in the GC waiting room → emergence tick,
+    // never a duplicate row. Promotion to SL happens at the Phase 5 checkpoint
+    // (EmergenceCount >= 3).
+    var gcRow = gcIndex[normKey];
+    if (gcRow) {
+      if (gcRow < 0) {
+        statusWrites.push([r + 1, 'GC row queued earlier this batch — no double-mint']);
+        continue;
+      }
+      var curCount = gcCounts[gcRow] !== undefined ? gcCounts[gcRow]
+        : (Number(gcVals[gcRow - 1][gEmerCol]) || 0);
+      gcCounts[gcRow] = curCount + 1;
+      statusWrites.push([r + 1, 'GC emergence +1 (count ' + gcCounts[gcRow] + ') — earns SL row at 3']);
+      continue;
+    }
+
+    // engine.58 (S320): unknown name → Generic_Citizens row, NOT an SL mint.
+    // Profile draw survives for Occupation; income/education are derived at
+    // promotion time by processAdvancementRows_.
     var birthYear = age > 0 ? (2041 - age) : (2041 - (22 + Math.floor(rng() * 44))); // adult band 22-65
     if (!nbhd) nbhd = INTAKE_NEIGHBORHOODS[Math.floor(rng() * INTAKE_NEIGHBORHOODS.length)];
 
-    var popId = 'POP-' + padStart_(nextPopNum++, 5, '0');
-    var newRow = new Array(ledgerHeader.length).fill('');
-
-    if (idxL('POPID') >= 0) newRow[idxL('POPID')] = popId;
-    if (idxL('First') >= 0) newRow[idxL('First')] = first;
-    if (idxL('Last') >= 0) newRow[idxL('Last')] = last;
-    if (idxL('ClockMode') >= 0) newRow[idxL('ClockMode')] = 'ENGINE';
-    if (idxL('Tier') >= 0) newRow[idxL('Tier')] = 4;
-    if (idxL('RoleType') >= 0) newRow[idxL('RoleType')] = draw.role;
-    if (idxL('Income') >= 0) newRow[idxL('Income')] = draw.income;
-    if (idxL('EducationLevel') >= 0) newRow[idxL('EducationLevel')] = draw.education;
-    if (idxL('Status') >= 0) newRow[idxL('Status')] = 'Active';
-    if (idxL('BirthYear') >= 0) newRow[idxL('BirthYear')] = birthYear;
-    if (idxL('OriginCity') >= 0) newRow[idxL('OriginCity')] = 'Oakland';
-    if (idxL('LifeHistory') >= 0) newRow[idxL('LifeHistory')] =
-      'Introduced via intake C' + cycle + (notes ? '. ' + notes : '') + (family ? ' Family: ' + family + '.' : '');
-    if (idxL('Neighborhood') >= 0) newRow[idxL('Neighborhood')] = nbhd;
-    if (idxL('CreatedAt') >= 0) newRow[idxL('CreatedAt')] = ctx.now;
-    if (idxL('LastUpdated') >= 0) newRow[idxL('LastUpdated')] = ctx.now;
-    if (idxL('UsageCount') >= 0) newRow[idxL('UsageCount')] = 0;
-
-    ctx.ledger.rows.push(newRow);
-    nameIndex[normKey] = [ctx.ledger.rows.length - 1]; // later batch rows see this citizen
-    ctx.ledger.dirty = true;
-    statusWrites.push([r + 1, 'minted ' + popId + ' (' + draw.role + ', ' + category + ', ' + nbhd + ')']);
+    var gcNew = new Array(gcHeader.length).fill('');
+    var setG = function(name, val) { var gi2 = idxG(name); if (gi2 >= 0) gcNew[gi2] = val; };
+    setG('First', first);
+    setG('Last', last);
+    setG('Age', age > 0 ? age : (2041 - birthYear));
+    setG('BirthYear', birthYear);
+    setG('Neighborhood', nbhd);
+    setG('Occupation', draw.role);
+    setG('EmergenceCount', 1);
+    setG('EmergedCycle', 'Cycle ' + cycle);
+    setG('EmergenceContext', ('Intake C' + cycle + (notes ? ': ' + notes : '') + (family ? ' Family: ' + family + '.' : '')).slice(0, 250));
+    setG('Status', 'Active');
+    setG('Sex', (typeof inferSexFromFirstName_ === 'function') ? inferSexFromFirstName_(first) : '');
+    queueAppendIntent_(ctx, 'Generic_Citizens', gcNew, 'engine.58 intake->GC entry', 'population', 50);
+    gcIndex[normKey] = -1; // later batch rows with this name skip to the guard above
+    statusWrites.push([r + 1, 'routed to GC (Tier-5): ' + draw.role + ', ' + category + ', ' + nbhd + ' — earns SL row at EmergenceCount 3']);
     minted++;
+  }
+
+  // engine.58: queue accumulated GC emergence ticks (one intent per row —
+  // intra-batch re-mentions accumulate locally so intents never race).
+  for (var gRowKey in gcCounts) {
+    queueCellIntent_(ctx, 'Generic_Citizens', Number(gRowKey), gEmerCol + 1, gcCounts[gRowKey], 'engine.58 intake GC emergence', 'population', 50);
   }
 
   // ═══════════════════════════════════════════════════════════════════════════

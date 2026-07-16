@@ -52,6 +52,84 @@
  * ============================================================================
  */
 
+// ═══════════════════════════════════════════════════════════════════════════
+// v2.9 (S320 engine.58): name pools at file scope — shared with processIntake_
+// (sex inference for GC-routed intake names). Apps Script top-level var =
+// global across the project.
+// ═══════════════════════════════════════════════════════════════════════════
+var GC_FEMALE_FIRST_NAMES = null; // populated on first generator run (below)
+var GC_MALE_FIRST_NAMES = null;
+
+function gcInitNamePools_() {
+  GC_FEMALE_FIRST_NAMES = [
+    // v2.6/v2.7 pool, classified (unisex assigned by dominant usage)
+    "Mina", "Brianna", "Sofia", "Elena", "Kaila", "Ariana", "Lila", "Ivy", "Maya",
+    "Priya", "Aaliyah", "Jasmine", "Camila", "Mei", "Yuki", "Anh", "Linh",
+    "Esperanza", "Guadalupe", "Destiny", "Natasha", "Monique", "Alicia", "Vanessa",
+    "Leticia", "Gabriela", "Nina", "Bianca", "Imani", "Sakura", "Miriam", "Lucia",
+    "Adriana", "Catalina", "Daniela", "Elisa", "Fernanda", "Graciela", "Itzel",
+    "Liliana", "Manuela", "Noelia", "Paloma", "Rosalinda", "Teresa", "Valentina",
+    "Ximena", "Yolanda",
+    "Asha", "Brielle", "Deja", "Ebony", "Janelle", "Latoya", "Nia", "Octavia",
+    "Rashida", "Tamika", "Zora",
+    "Aiko", "Hana", "Hyejin", "Mai", "Phuong", "Reiko", "Sora", "Thi",
+    "Anika", "Deepa", "Esha", "Kavya", "Mira", "Pooja", "Shreya", "Tara",
+    "Amira", "Layla", "Rania", "Soraya", "Zara",
+    "Adaeze", "Folake", "Nala",
+    "Audrey", "Beatrix", "Clara", "Dahlia", "Eleanor", "Iris", "Kira", "Lena",
+    "Margot", "Nora", "Penelope", "Quinn", "Sage", "Una", "Violet", "Wren",
+    // v2.8 additions (S320) — world-broad: European/Slavic/Nordic, Lusophone,
+    // Pacific, Celtic, MENA, Horn/West African
+    "Ingrid", "Astrid", "Freya", "Katarina", "Milena", "Anastasia", "Zofia",
+    "Irina", "Beatriz", "Marisol", "Yara", "Leilani", "Moana", "Talia", "Noor",
+    "Saoirse", "Aoife", "Giulia", "Chiara", "Amelie", "Colette", "Zainab",
+    "Fatima", "Halima", "Ines", "Petra"
+  ];
+
+  GC_MALE_FIRST_NAMES = [
+    // v2.6/v2.7 pool, classified (unisex assigned by dominant usage)
+    "Carlos", "Andre", "Jordan", "Tariq", "Marcus", "Tobias", "Lorenzo", "Xavier",
+    "Darius", "Ramon", "Jamal", "Diego", "Oscar", "Terrell", "Wei", "Jun", "Kenji",
+    "Tran", "Isaiah", "DeShawn", "Tyrell", "Malik", "Cedric", "Dwayne", "Kwame",
+    "Rashid", "Trevon", "Hector", "Javier", "Kofi",
+    "Adrian", "Alejandro", "Cesar", "Dante", "Eduardo", "Emilio", "Felipe",
+    "Gustavo", "Ignacio", "Jorge", "Mateo", "Nestor", "Rafael", "Salvador",
+    "Tomas", "Vicente",
+    "Antoine", "Bryce", "Carlton", "Devonte", "Ezra", "Jalen", "Kendrick",
+    "Marquise", "Omari", "Rasheed", "Theo", "Tyrese",
+    "Akira", "Daichi", "Eiji", "Hiroshi", "Kazuki", "Long", "Minh", "Ren",
+    "Satoshi", "Wen",
+    "Aarav", "Aditya", "Arjun", "Ishaan", "Neel", "Ravi", "Roshan", "Vikram",
+    "Farid", "Nasir", "Omar", "Yusuf",
+    "Chidi", "Mansa", "Themba",
+    "Felix", "Julian", "Owen", "Reed",
+    // v2.8 additions (S320) — world-broad: European/Slavic/Nordic, Lusophone,
+    // Pacific, Celtic, MENA, Horn/West African
+    "Bjorn", "Soren", "Nikolai", "Dmitri", "Stefan", "Lukas", "Matthias",
+    "Henrik", "Joao", "Thiago", "Rodrigo", "Keanu", "Tevita", "Liam", "Declan",
+    "Alessandro", "Luca", "Etienne", "Olivier", "Amadou", "Ibrahim", "Musa",
+    "Idris", "Emeka", "Kelechi", "Rohan"
+  ];
+}
+
+/**
+ * Infer sex from a first name via the sex-tagged generator pools.
+ * Returns 'female' | 'male' | '' (unknown — name not in either pool).
+ * Used by processIntake_ when routing unknown names to Generic_Citizens.
+ */
+function inferSexFromFirstName_(first) {
+  if (!GC_FEMALE_FIRST_NAMES) gcInitNamePools_();
+  var f = String(first || '').trim().toLowerCase();
+  if (!f) return '';
+  for (var i = 0; i < GC_FEMALE_FIRST_NAMES.length; i++) {
+    if (GC_FEMALE_FIRST_NAMES[i].toLowerCase() === f) return 'female';
+  }
+  for (var j = 0; j < GC_MALE_FIRST_NAMES.length; j++) {
+    if (GC_MALE_FIRST_NAMES[j].toLowerCase() === f) return 'male';
+  }
+  return '';
+}
+
 function generateGenericCitizens_(ctx) {
 
   var ss = ctx.ss;
@@ -267,55 +345,9 @@ function generateGenericCitizens_(ctx) {
   // like a whole world's population, not a city-flavored subset. Sex-first
   // pick drives the Sex column the spouse drip requires.)
   // ═══════════════════════════════════════════════════════════════════════════
-  var femaleFirstNames = [
-    // v2.6/v2.7 pool, classified (unisex assigned by dominant usage)
-    "Mina", "Brianna", "Sofia", "Elena", "Kaila", "Ariana", "Lila", "Ivy", "Maya",
-    "Priya", "Aaliyah", "Jasmine", "Camila", "Mei", "Yuki", "Anh", "Linh",
-    "Esperanza", "Guadalupe", "Destiny", "Natasha", "Monique", "Alicia", "Vanessa",
-    "Leticia", "Gabriela", "Nina", "Bianca", "Imani", "Sakura", "Miriam", "Lucia",
-    "Adriana", "Catalina", "Daniela", "Elisa", "Fernanda", "Graciela", "Itzel",
-    "Liliana", "Manuela", "Noelia", "Paloma", "Rosalinda", "Teresa", "Valentina",
-    "Ximena", "Yolanda",
-    "Asha", "Brielle", "Deja", "Ebony", "Janelle", "Latoya", "Nia", "Octavia",
-    "Rashida", "Tamika", "Zora",
-    "Aiko", "Hana", "Hyejin", "Mai", "Phuong", "Reiko", "Sora", "Thi",
-    "Anika", "Deepa", "Esha", "Kavya", "Mira", "Pooja", "Shreya", "Tara",
-    "Amira", "Layla", "Rania", "Soraya", "Zara",
-    "Adaeze", "Folake", "Nala",
-    "Audrey", "Beatrix", "Clara", "Dahlia", "Eleanor", "Iris", "Kira", "Lena",
-    "Margot", "Nora", "Penelope", "Quinn", "Sage", "Una", "Violet", "Wren",
-    // v2.8 additions (S320) — world-broad: European/Slavic/Nordic, Lusophone,
-    // Pacific, Celtic, MENA, Horn/West African
-    "Ingrid", "Astrid", "Freya", "Katarina", "Milena", "Anastasia", "Zofia",
-    "Irina", "Beatriz", "Marisol", "Yara", "Leilani", "Moana", "Talia", "Noor",
-    "Saoirse", "Aoife", "Giulia", "Chiara", "Amelie", "Colette", "Zainab",
-    "Fatima", "Halima", "Ines", "Petra"
-  ];
-
-  var maleFirstNames = [
-    // v2.6/v2.7 pool, classified (unisex assigned by dominant usage)
-    "Carlos", "Andre", "Jordan", "Tariq", "Marcus", "Tobias", "Lorenzo", "Xavier",
-    "Darius", "Ramon", "Jamal", "Diego", "Oscar", "Terrell", "Wei", "Jun", "Kenji",
-    "Tran", "Isaiah", "DeShawn", "Tyrell", "Malik", "Cedric", "Dwayne", "Kwame",
-    "Rashid", "Trevon", "Hector", "Javier", "Kofi",
-    "Adrian", "Alejandro", "Cesar", "Dante", "Eduardo", "Emilio", "Felipe",
-    "Gustavo", "Ignacio", "Jorge", "Mateo", "Nestor", "Rafael", "Salvador",
-    "Tomas", "Vicente",
-    "Antoine", "Bryce", "Carlton", "Devonte", "Ezra", "Jalen", "Kendrick",
-    "Marquise", "Omari", "Rasheed", "Theo", "Tyrese",
-    "Akira", "Daichi", "Eiji", "Hiroshi", "Kazuki", "Long", "Minh", "Ren",
-    "Satoshi", "Wen",
-    "Aarav", "Aditya", "Arjun", "Ishaan", "Neel", "Ravi", "Roshan", "Vikram",
-    "Farid", "Nasir", "Omar", "Yusuf",
-    "Chidi", "Mansa", "Themba",
-    "Felix", "Julian", "Owen", "Reed",
-    // v2.8 additions (S320) — world-broad: European/Slavic/Nordic, Lusophone,
-    // Pacific, Celtic, MENA, Horn/West African
-    "Bjorn", "Soren", "Nikolai", "Dmitri", "Stefan", "Lukas", "Matthias",
-    "Henrik", "Joao", "Thiago", "Rodrigo", "Keanu", "Tevita", "Liam", "Declan",
-    "Alessandro", "Luca", "Etienne", "Olivier", "Amadou", "Ibrahim", "Musa",
-    "Idris", "Emeka", "Kelechi", "Rohan"
-  ];
+  if (!GC_FEMALE_FIRST_NAMES) gcInitNamePools_(); // v2.9: pools at file scope
+  var femaleFirstNames = GC_FEMALE_FIRST_NAMES;
+  var maleFirstNames = GC_MALE_FIRST_NAMES;
 
   var lastNames = [
     // v2.6 base (53) — preserved

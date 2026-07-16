@@ -1700,6 +1700,38 @@ function generateCitizensEvents_(ctx) {
   // =========================================================================
   var logRows = [];
   var gameNightDrawn = []; // engine.47 Hop 4: POPIDs whose day the game shaped
+
+  // engine.58 (S320): GC surfacing — load the Tier-5 waiting room once; a
+  // small chance per T3/T4 ENGINE event names a GC citizen as an acquaintance.
+  // A picked line ticks that GC's EmergenceCount (batched write at the end)
+  // toward the promotion threshold (3). The seed rate is the lottery dial.
+  var GC_SURFACE_CHANCE = 0.06;
+  var gcSurfacePool = [];   // {name, nbhd, sheetRow, count}
+  var gsE = -1, gsC = -1;
+  var gcSurfaceSheet = ctx.ss.getSheetByName('Generic_Citizens');
+  if (gcSurfaceSheet) {
+    var gcSurfVals = gcSurfaceSheet.getDataRange().getValues();
+    var gcSurfHead = gcSurfVals[0];
+    var gsF = gcSurfHead.indexOf('First'), gsL = gcSurfHead.indexOf('Last'),
+        gsN = gcSurfHead.indexOf('Neighborhood'), gsS = gcSurfHead.indexOf('Status');
+    gsE = gcSurfHead.indexOf('EmergenceCount');
+    gsC = gcSurfHead.indexOf('EmergenceContext');
+    if (gsF >= 0 && gsL >= 0 && gsE >= 0) {
+      for (var gsi = 1; gsi < gcSurfVals.length; gsi++) {
+        if (gsS >= 0 && String(gcSurfVals[gsi][gsS] || '').toLowerCase() !== 'active') continue;
+        var gsName = (String(gcSurfVals[gsi][gsF] || '').trim() + ' ' + String(gcSurfVals[gsi][gsL] || '').trim()).trim();
+        if (gsName.indexOf(' ') < 0) continue; // needs first+last
+        gcSurfacePool.push({
+          name: gsName,
+          nbhd: gsN >= 0 ? String(gcSurfVals[gsi][gsN] || '').trim() : '',
+          sheetRow: gsi + 1,
+          count: Number(gcSurfVals[gsi][gsE]) || 0
+        });
+      }
+    }
+  }
+  var gcPendingByText = {};  // event text -> gcSurfacePool entry
+  var gcIncrements = {};     // sheetRow -> {entry, add, context}
   for (var r = 0; r < rows.length; r++) {
     // engine.38 A1: LIMIT=25 cap removed — full-population coverage. Runaway is
     // structurally bounded: one emit max per citizen per cycle (<= rows.length).
@@ -2177,6 +2209,27 @@ function generateCitizensEvents_(ctx) {
         }
       }
     }
+    // engine.58 (S320): GC surfacing — the lottery ticket. A T3/T4 ENGINE
+    // citizen's week sometimes crosses a Tier-5 name from the waiting room
+    // (neighborhood-preferring pick). The named line seeds a story a desk can
+    // chase; a pick ticks that GC's EmergenceCount toward promotion.
+    if (!isNamed && mode === "ENGINE" && gcSurfacePool.length && chanceHit(GC_SURFACE_CHANCE)) {
+      var gcLocal = [];
+      for (var gci = 0; gci < gcSurfacePool.length; gci++) {
+        if (neighborhood && gcSurfacePool[gci].nbhd === neighborhood) gcLocal.push(gcSurfacePool[gci]);
+      }
+      var gcFrom = gcLocal.length ? gcLocal : gcSurfacePool;
+      var gcPick = gcFrom[Math.floor(rng() * gcFrom.length)];
+      var gcT1 = "swapped stories with " + gcPick.name + " while the line at the corner store crawled";
+      var gcT2 = "got roped into helping " + gcPick.name + " haul something heavy up a flight of stairs";
+      var gcT3 = "kept running into " + gcPick.name + " this week — the neighborhood kind of coincidence";
+      pool.push(makeEntry(gcT1, mergeTags(["relationship:acquaintance"], calendarTags), 1.1, false));
+      pool.push(makeEntry(gcT2, mergeTags(["relationship:acquaintance"], calendarTags), 1.05, false));
+      pool.push(makeEntry(gcT3, mergeTags(["relationship:acquaintance"], calendarTags), 1.0, false));
+      gcPendingByText[gcT1] = gcPick;
+      gcPendingByText[gcT2] = gcPick;
+      gcPendingByText[gcT3] = gcPick;
+    }
     if (activeArc && chanceHit(0.5)) {
       var arcType = activeArc.type ? ("arcType:" + activeArc.type) : null;
       var arcPhase = activeArc.phase ? ("arcPhase:" + activeArc.phase) : null;
@@ -2490,6 +2543,15 @@ function generateCitizensEvents_(ctx) {
     var existing = row[iLife] ? row[iLife].toString() : "";
     var line = stamp + " — [" + primaryTag + "] " + pick;
 
+    // engine.58 (S320): a picked GC-surfacing line ticks that GC's emergence
+    // count — the mention happened in a real citizen's week.
+    if (gcPendingByText[pick]) {
+      var gcHit = gcPendingByText[pick];
+      if (!gcIncrements[gcHit.sheetRow]) gcIncrements[gcHit.sheetRow] = { entry: gcHit, add: 0, context: '' };
+      gcIncrements[gcHit.sheetRow].add += 1;
+      gcIncrements[gcHit.sheetRow].context = ('Named in ' + ((row[iFirst] || '') + ' ' + (row[iLast] || '')).trim() + "'s week, " + stamp).slice(0, 250);
+    }
+
     row[iLife] = existing ? existing + "\n" + line : line;
     row[iLastU] = ctx.now;
 
@@ -2558,6 +2620,20 @@ function generateCitizensEvents_(ctx) {
   if (lifeLog && logRows.length) {
     var startRow = lifeLog.getLastRow() + 1;
     lifeLog.getRange(startRow, 1, logRows.length, logRows[0].length).setValues(logRows);
+  }
+
+  // engine.58 (S320): batched GC emergence writes — one write per surfaced GC
+  // row (this file is a documented Phase-5 direct writer, engine.md SL-writers
+  // class). Promotion at threshold happens at the Phase-5 advancement
+  // checkpoint (checkEmergencePromotions_), not here.
+  if (gcSurfaceSheet && gsE >= 0) {
+    for (var gwKey in gcIncrements) {
+      var gw = gcIncrements[gwKey];
+      gcSurfaceSheet.getRange(gw.entry.sheetRow, gsE + 1).setValue(gw.entry.count + gw.add);
+      if (gsC >= 0 && gw.context) {
+        gcSurfaceSheet.getRange(gw.entry.sheetRow, gsC + 1).setValue(gw.context);
+      }
+    }
   }
 
   // engine.47 Hop 4: one Ripple row — the game reached these citizens' days.

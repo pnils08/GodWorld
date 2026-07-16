@@ -543,6 +543,23 @@ function routeCitizenUsageToIntake_(ctx, ss, cycle, cal) {
     ledgerData = ledger ? ledger.getDataRange().getValues() : [];
   }
 
+  // engine.58 (S320): GC-aware routing — a name already in the Generic_Citizens
+  // waiting room must NOT route to Intake as "new": processMediaUsage_ already
+  // ticks its EmergenceCount from this same usage row, and an Intake route
+  // would double-count the mention (and pre-S320 it direct-minted a duplicate
+  // SL citizen — the double-entry bug).
+  var gcNames = {};
+  var gcTab = ss.getSheetByName('Generic_Citizens');
+  if (gcTab) {
+    var gcData = gcTab.getDataRange().getValues();
+    var gcF = gcData[0].indexOf('First'), gcL = gcData[0].indexOf('Last');
+    for (var gj = 1; gj < gcData.length; gj++) {
+      var gnk = String(gcData[gj][gcF] || '').trim().toLowerCase() + ' ' +
+                String(gcData[gj][gcL] || '').trim().toLowerCase();
+      if (gnk.trim()) gcNames[gnk] = true;
+    }
+  }
+
   // Get target sheets
   var intakeSheet = ss.getSheetByName('Intake');
   var advSheet = ss.getSheetByName('Advancement_Intake1');
@@ -588,8 +605,14 @@ function routeCitizenUsageToIntake_(ctx, ss, cycle, cal) {
         results.existingCitizens++;
         landed = true;
       }
+    } else if (gcNames[nameParts.first.toLowerCase() + ' ' + nameParts.last.toLowerCase()]) {
+      // engine.58: GC citizen — emergence already counted by processMediaUsage_
+      // from this usage row; no Intake route, no duplicate. Mark routed.
+      results.gcSkipped = (results.gcSkipped || 0) + 1;
+      landed = true;
     } else {
-      // New citizen → Intake (engine.51 lean shape; processor derives the rest)
+      // New citizen → Intake (engine.51 lean shape; processor routes to GC —
+      // engine.58: Intake no longer direct-mints SL rows)
       if (intakeSheet) {
         appendLeanIntakeRow_(intakeSheet, {
           first: nameParts.first,

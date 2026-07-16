@@ -30,7 +30,9 @@
  * - Chaos, Sentiment, Economic Mood
  * - City Dynamics integration
  *
- * Produces higher-quality Tier-3 background citizens.
+ * Produces Tier-4 background citizens (entry tier aligned S320 engine.58 —
+ * Mike-ruled "2 paths to becoming tier 4": lottery entries start at T4 and
+ * climb via UsageCount like everyone else; was Tier-3 entry pre-S320).
  *
  * ============================================================================
  */
@@ -369,7 +371,7 @@ function checkForPromotions_(ctx) {
     var chance = promotionChance(0.20, row);
     if (rng() > chance) continue;
 
-    // === Promote to Tier-3 ===
+    // === Promote to Tier-4 (S320: lottery entry tier — climbs via UsageCount) ===
     var first = row[gFirst] || "";
     var last = row[gLast] || "";
     var age = Number(row[gAge] || 30);
@@ -401,7 +403,7 @@ function checkForPromotions_(ctx) {
     if (iMED >= 0) newRow[iMED] = "no";
     if (iCIV >= 0) newRow[iCIV] = "no";
     if (iClock >= 0) newRow[iClock] = "ENGINE";
-    if (iTier >= 0) newRow[iTier] = 3;
+    if (iTier >= 0) newRow[iTier] = 4; // S320: entry at T4, was 3
     if (iRoleType >= 0) newRow[iRoleType] = occ;
     if (iStatus >= 0) newRow[iStatus] = "Active";
     if (iBirthYear >= 0) newRow[iBirthYear] = birthYear;
@@ -479,7 +481,7 @@ function checkForPromotions_(ctx) {
     }
 
     if (iLife >= 0) {
-      newRow[iLife] = "Promoted from Tier-4 to Tier-3 in Cycle " + cycle + ". Settled in " + neigh + ". " + context;
+      newRow[iLife] = "The record catches up: name kept surfacing until Cycle " + cycle + " made it official. Settled in " + neigh + ". " + context;
     }
     if (iCreatedAt >= 0) newRow[iCreatedAt] = ctx.now;
     if (iLastUpdated >= 0) newRow[iLastUpdated] = ctx.now;
@@ -502,7 +504,7 @@ function checkForPromotions_(ctx) {
         popId,
         (first + ' ' + last).trim(),
         "Promotion",
-        "Emerged into Tier-3 in " + neigh,
+        "Emerged into Tier-4 in " + neigh,
         neigh,
         cycle
       ]);

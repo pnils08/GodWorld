@@ -132,6 +132,13 @@ function processAdvancementIntake_(ctx) {
   var advResults = processAdvancementRows_(ctx, now, cycle);
   results.advancementsProcessed = advResults.processed;
 
+  // engine.59 (S320): namers → bonds. A promoted GC enters the world knowing
+  // the citizens who kept naming them — friendship bonds seeded from the
+  // EmergenceContext roster. Bonds land in ctx.summary.relationshipBonds
+  // (loaded Phase5-LoadBonds, saved Phase10-Bonds — order verified).
+  var bondSeedResults = seedEmergenceBonds_(ctx, cycle);
+  results.emergenceBondsSeeded = bondSeedResults.seeded;
+
   var intakeResults = processIntakeRows_(ss, now, cycle);
   results.intakeProcessed = intakeResults.processed;
   
@@ -760,6 +767,66 @@ function checkEmergencePromotions_(ss, cycle) {
     results.queued++;
   }
   if (results.queued) Logger.log('checkEmergencePromotions_: queued ' + results.queued + ' GC lottery promotions');
+  return results;
+}
+
+/**
+ * engine.59 (S320): seed friendship bonds between freshly-promoted GC
+ * citizens and their namer roster. Idempotent: seeded rows get a
+ * '[bonds-seeded]' marker appended to EmergenceContext. Runs every cycle;
+ * only Emerged rows with an unseeded 'Named in' roster do work.
+ */
+function seedEmergenceBonds_(ctx, cycle) {
+  var results = { seeded: 0 };
+  if (!ctx || !ctx.ledger || typeof makeBond_ !== 'function') return results;
+  if (!ctx.summary || !Array.isArray(ctx.summary.relationshipBonds)) return results;
+  var genericSheet = ctx.ss.getSheetByName('Generic_Citizens');
+  if (!genericSheet) return results;
+  var data = genericSheet.getDataRange().getValues();
+  if (data.length < 2) return results;
+  var h = data[0];
+  var gF = findColByName_(h, 'First'), gL = findColByName_(h, 'Last'),
+      gS = findColByName_(h, 'Status'), gC = findColByName_(h, 'EmergenceContext');
+  if (gF < 0 || gL < 0 || gS < 0 || gC < 0) return results;
+
+  // name -> {popId, idx, hood} from the shared ledger
+  var header = ctx.ledger.headers;
+  var iPop = header.indexOf('POPID'), iFirst = header.indexOf('First'),
+      iLast = header.indexOf('Last'), iHood = header.indexOf('Neighborhood'),
+      iStatus = header.indexOf('Status');
+  var byName = {};
+  for (var r = 0; r < ctx.ledger.rows.length; r++) {
+    var row = ctx.ledger.rows[r];
+    if (String(row[iStatus] || '').toLowerCase() !== 'active') continue;
+    var nm = (String(row[iFirst] || '').trim() + ' ' + String(row[iLast] || '').trim()).trim().toLowerCase();
+    if (nm) byName[nm] = { popId: row[iPop], idx: r, hood: iHood >= 0 ? (row[iHood] || '') : '' };
+  }
+
+  for (var g = 1; g < data.length; g++) {
+    if (String(data[g][gS] || '') !== 'Emerged') continue;
+    var context = String(data[g][gC] || '');
+    if (context.indexOf('Named in ') < 0 || context.indexOf('[bonds-seeded]') >= 0) continue;
+    var promoted = byName[(String(data[g][gF] || '').trim() + ' ' + String(data[g][gL] || '').trim()).toLowerCase()];
+    if (!promoted) continue; // SL row not landed yet — retries next cycle
+
+    var seen = {};
+    var m, re = /Named in (.+?)'s week/g;
+    var seededHere = 0;
+    while ((m = re.exec(context)) !== null) {
+      var namer = byName[String(m[1]).trim().toLowerCase()];
+      if (!namer || namer.popId === promoted.popId || seen[namer.popId]) continue;
+      seen[namer.popId] = true;
+      ctx.summary.relationshipBonds.push(makeBond_(promoted.popId, namer.popId,
+        BOND_TYPES.FRIENDSHIP, 'emergence', 'COMMUNITY', namer.hood || promoted.hood,
+        3, cycle, 'Knew them before the record did (engine.59 C' + cycle + ')', ctx));
+      seededHere++;
+      results.seeded++;
+    }
+    if (seededHere > 0) {
+      genericSheet.getRange(g + 1, gC + 1).setValue((context + ' [bonds-seeded]').slice(0, 450));
+      Logger.log('seedEmergenceBonds_: ' + promoted.popId + ' enters with ' + seededHere + ' friendship bond(s)');
+    }
+  }
   return results;
 }
 

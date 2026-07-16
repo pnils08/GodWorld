@@ -316,6 +316,7 @@ function runBondEngine_(ctx) {
   // feuds. Weddings live HERE now (Mike: "marriage comes from bonds not
   // events"); the generationalEventsEngine dice path is retired.
   processRomanceAndMarriage_(ctx);
+  processGCMarriageLottery_(ctx); // engine.59 — the lottery door
   detectTriangleRivalries_(ctx);
 
   // Step 4: Check for confrontation triggers
@@ -647,7 +648,20 @@ function updateExistingBonds_(ctx) {
         intensity += 0.3;
       } else if (bond.bondType === BOND_TYPES.SPORTS_RIVAL) {
         intensity += 1.0;
+      } else if (bond.bondType === BOND_TYPES.FRIENDSHIP) {
+        // engine.59 (S320): friendship had NO growth path — the romance
+        // pipeline starved at the root (live max 5.6 vs threshold 7).
+        // Warm citizens deepen faster (TraitProfile — Mike's dials).
+        intensity += FRIENDSHIP_GROWTH * bondWarmthFactor_(ctx, bond.citizenA, bond.citizenB);
+      } else if (bond.bondType === BOND_TYPES.ROMANTIC) {
+        intensity += ROMANTIC_GROWTH_ACTIVE;
       }
+    }
+
+    // engine.59: courting couples see each other whether or not the event
+    // engine drew them this cycle — courtship is its own gravity.
+    if (bond.bondType === BOND_TYPES.ROMANTIC && !(aActive && bActive)) {
+      intensity += ROMANTIC_GROWTH_BASE;
     }
 
     if (S.cycleWeight === 'high-signal' && bond.bondType === BOND_TYPES.RIVALRY) {
@@ -1422,11 +1436,21 @@ function resolveRivalry_(ctx, bondId, outcome) {
 // engine.57 P5 — ROMANCE, MARRIAGE, TRIANGLE HATE (physics, no quotas)
 // ════════════════════════════════════════════════════════════════════════════
 
-// Dials — the world's biology, not its script. No output caps anywhere.
-var ROMANCE_THRESHOLD = 7;    // friendship held this high can turn romantic
-var ROMANCE_CHANCE = 0.10;    // per-cycle chance once conditions hold
+// Tuning constants — the world's biology, not its script. No output caps.
+// (Mike's "dials" = the TraitProfile system; these are engine constants.)
+// engine.59 S320 grounding: live friendship intensities ran 1-5.6 and the
+// old threshold 7 was UNREACHABLE — friendship had no growth path at all.
+// The organic romance pipeline had never fired once.
+var ROMANCE_THRESHOLD = 5.5;  // top of the real distribution — slow, not never
+var ROMANCE_CHANCE = 0.10;    // per-cycle base once conditions hold (× tier × fitness × family trait)
 var MARRIAGE_THRESHOLD = 8;   // a romance grown this strong marries
 var TRIANGLE_BIRTH_INTENSITY = 5; // rivals born from a shared love start here
+var FRIENDSHIP_GROWTH = 0.4;  // engine.59: per-cycle when both co-active (× warmth trait)
+var ROMANTIC_GROWTH_BASE = 0.3;   // engine.59: courting couples see each other regardless
+var ROMANTIC_GROWTH_ACTIVE = 0.6; // engine.59: extra when both co-active
+var GC_MARRY_CHANCE = 0.02;   // engine.59: lottery base per no-prospects single per cycle
+var GC_POOL_REF = 60;         // engine.59: scarcity denominator (matches gen F-floor)
+var GC_SPOUSE_INCOME = 48000; // engine.59: same rate as off-camera spouse pricing
 
 function bondInWorldStamp_(cycle) {
   var y = Math.floor((cycle - 1) / 52) + 1;
@@ -1447,15 +1471,63 @@ function appendBondLifeLine_(ctx, ledgerIdx, popId, tag, text, cycle) {
   ctx.ledger.dirty = true;
 }
 
+// engine.59 (S320): TraitProfile parse — Mike's dials reaching bond physics.
+// Format: Archetype:Striver|Mods:...|drive:79|sociability:60|warmth:74|...
+function bondTraitOf_(ctx, popId, trait) {
+  if (!ctx._bondTraits) {
+    ctx._bondTraits = {};
+    var header = ctx.ledger.headers;
+    var iPop = header.indexOf('POPID'), iTP = header.indexOf('TraitProfile');
+    if (iPop >= 0 && iTP >= 0) {
+      for (var r = 0; r < ctx.ledger.rows.length; r++) {
+        var tp = String(ctx.ledger.rows[r][iTP] || '');
+        if (tp) ctx._bondTraits[ctx.ledger.rows[r][iPop]] = tp;
+      }
+    }
+  }
+  var s = ctx._bondTraits[popId];
+  if (!s) return 50; // neutral when unprofiled
+  var m = s.match(new RegExp(trait + ':(\\d+)'));
+  return m ? Number(m[1]) : 50;
+}
+
+// Pair warmth: 0.75x (cold pair) .. 1.25x (warm pair)
+function bondWarmthFactor_(ctx, popA, popB) {
+  var avg = (bondTraitOf_(ctx, popA, 'warmth') + bondTraitOf_(ctx, popB, 'warmth')) / 2;
+  return 0.75 + (avg / 200);
+}
+
+// Pair family-mindedness: same band — courts and marries faster
+function bondFamilyFactor_(ctx, popA, popB) {
+  var avg = (bondTraitOf_(ctx, popA, 'family') + bondTraitOf_(ctx, popB, 'family')) / 2;
+  return 0.75 + (avg / 200);
+}
+
+// engine.59 (S320): suitor fitness — education, savings, debt as courtship
+// physics (Mike: "who gets a wife"). Clamp 0.6-1.4; nobody excluded, only paced.
+function bondFitnessOf_(person) {
+  var f = 1.0;
+  var edu = String(person.edu || '').toLowerCase();
+  if (edu === 'masters' || edu === 'doctorate') f += 0.15;
+  else if (edu === 'bachelors') f += 0.08;
+  if (person.savings >= 0.10) f += 0.10;
+  else if (person.savings >= 0.05) f += 0.05;
+  if (person.debt >= 5) f -= 0.15;
+  else if (person.debt >= 3) f -= 0.05;
+  return Math.max(0.6, Math.min(1.4, f));
+}
+
 function buildBondLedgerIndex_(ctx) {
-  // POPID -> {idx, marital, gender, birthYear, householdId, income, name, hood}
+  // POPID -> {idx, marital, gender, birthYear, householdId, income, name, hood,
+  //           tier, edu, debt, savings} (engine.59 fields for the marriage market)
   var header = ctx.ledger.headers;
   var rows = ctx.ledger.rows;
   var idx = function(n) { return header.indexOf(n); };
   var iPop = idx('POPID'), iFirst = idx('First'), iLast = idx('Last'),
       iMar = idx('MaritalStatus'), iGen = idx('Gender'), iBirth = idx('BirthYear'),
       iHH = idx('HouseholdId'), iInc = idx('Income'), iHood = idx('Neighborhood'),
-      iStatus = idx('Status');
+      iStatus = idx('Status'), iTier = idx('Tier'), iEdu = idx('EducationLevel'),
+      iDebt = idx('DebtLevel'), iSav = idx('SavingsRate');
   if (iPop < 0) return null;
   var map = {};
   for (var r = 0; r < rows.length; r++) {
@@ -1470,7 +1542,11 @@ function buildBondLedgerIndex_(ctx) {
       birthYear: iBirth >= 0 ? (Number(row[iBirth]) || 0) : 0,
       householdId: iHH >= 0 ? String(row[iHH] || '').trim() : '',
       income: iInc >= 0 ? (Number(row[iInc]) || 0) : 0,
-      hood: iHood >= 0 ? (row[iHood] || '') : ''
+      hood: iHood >= 0 ? (row[iHood] || '') : '',
+      tier: iTier >= 0 ? (Number(row[iTier]) || 4) : 4,
+      edu: iEdu >= 0 ? String(row[iEdu] || '').trim() : '',
+      debt: iDebt >= 0 ? (Number(row[iDebt]) || 0) : 0,
+      savings: iSav >= 0 ? (Number(row[iSav]) || 0) : 0
     };
   }
   return map;
@@ -1500,10 +1576,17 @@ function processRomanceAndMarriage_(ctx) {
     var oppositeSex = A.gender && B.gender && A.gender !== B.gender;
 
     // ── Friendship deepens into romance (the only door into courtship) ──
+    // engine.59 (S320, Mike-ruled): the flip chance carries the market —
+    //   tierFactor: social orbit — T1×T1 rarest (0.25×), T4×T4 full speed;
+    //     compounds with T1 scarcity (6M/1F singles) → super couples are rare
+    //   fitness: education/savings/debt pace who courts (avg of the pair)
+    //   family trait: family-minded citizens court harder (Mike's dials)
+    var tierFactor = (A.tier + B.tier) / 8;
+    var pairFitness = (bondFitnessOf_(A) + bondFitnessOf_(B)) / 2;
     if (bond.bondType === BOND_TYPES.FRIENDSHIP &&
         Number(bond.intensity) >= ROMANCE_THRESHOLD &&
         bothSingle && ageOk && oppositeSex &&
-        rng() < ROMANCE_CHANCE) {
+        rng() < ROMANCE_CHANCE * tierFactor * pairFitness * bondFamilyFactor_(ctx, bond.citizenA, bond.citizenB)) {
       bond.bondType = BOND_TYPES.ROMANTIC;
       bond.notes = 'Grew from friendship (C' + cycle + ')';
       bond.lastUpdate = cycle;
@@ -1516,7 +1599,9 @@ function processRomanceAndMarriage_(ctx) {
         cycleGenerated: cycle, neighborhood: bond.neighborhood || A.hood,
         domain: 'COMMUNITY', text: A.name + ' and ' + B.name + ' — a friendship turned into something more'
       });
-      Logger.log('P5 romance: ' + bond.citizenA + ' <-> ' + bond.citizenB);
+      Logger.log('P5 romance: ' + bond.citizenA + ' <-> ' + bond.citizenB +
+        ' (tier ' + A.tier + 'x' + B.tier + ' factor ' + tierFactor.toFixed(2) +
+        ', fitness ' + pairFitness.toFixed(2) + ')');
       continue; // romance and marriage never happen the same cycle
     }
 
@@ -1547,17 +1632,28 @@ function marryCitizens_(ctx, bond, A, B, cycle) {
   // Marriage FORMS the household (Mike's model) — header-resolved append so
   // the row lands right on both the 13-col sandbox and any older schema.
   var hhId = 'HH-' + String(cycle).padStart(4, '0') + '-M' + String(Math.floor(safeRand_(ctx)() * 900) + 100);
+  // engine.59 (S320, Mike-ruled): T1×T1 / T1×T2 = super couple. The stamp is
+  // the dynasty seed — pay, fame, and household consumers land with their
+  // owning stages (money/fame); here it's the flag + the moment.
+  var superCouple = (A.tier && B.tier) &&
+    Math.min(A.tier, B.tier) === 1 && Math.max(A.tier, B.tier) <= 2;
   var ss = ctx.ss;
   var sheet = ss.getSheetByName('Household_Ledger');
   if (sheet) {
     var hHead = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+    if (superCouple && hHead.indexOf('SuperCouple') < 0) {
+      // schema-setup carve-out — fires once per spreadsheet lifetime
+      sheet.getRange(1, hHead.length + 1).setValue('SuperCouple');
+      hHead.push('SuperCouple');
+    }
     var vals = {
       HouseholdId: hhId, HeadOfHousehold: bond.citizenA, HouseholdType: 'couple',
       Members: JSON.stringify([bond.citizenA, bond.citizenB]),
       Neighborhood: A.hood, HousingType: 'rented',
       MonthlyRent: (typeof estimateRent_ === 'function') ? estimateRent_(A.hood) : 1700,
       HousingCost: 0, HouseholdIncome: A.income + B.income,
-      FormedCycle: cycle, DissolvedCycle: '', Status: 'active', HouseholdSavings: 0
+      FormedCycle: cycle, DissolvedCycle: '', Status: 'active', HouseholdSavings: 0,
+      SuperCouple: superCouple ? 'yes' : ''
     };
     var newRow = [];
     for (var h = 0; h < hHead.length; h++) newRow.push(vals.hasOwnProperty(hHead[h]) ? vals[hHead[h]] : '');
@@ -1585,12 +1681,140 @@ function marryCitizens_(ctx, bond, A, B, cycle) {
 
   ctx.summary.storyHooks = ctx.summary.storyHooks || [];
   ctx.summary.storyHooks.push({
-    hookType: 'CITIZEN_MARRIED', severity: 5, priority: 4,
-    description: A.name + ' and ' + B.name + ' married in ' + A.hood + ' — a new household forms',
+    hookType: superCouple ? 'SUPER_COUPLE_MARRIED' : 'CITIZEN_MARRIED',
+    severity: superCouple ? 7 : 5, priority: superCouple ? 5 : 4,
+    description: superCouple
+      ? A.name + ' and ' + B.name + ' married in ' + A.hood + ' — two of the city\'s biggest names, one household. Oakland notices.'
+      : A.name + ' and ' + B.name + ' married in ' + A.hood + ' — a new household forms',
     cycleGenerated: cycle, neighborhood: A.hood,
     domain: 'COMMUNITY', text: A.name + ' and ' + B.name + ' married in ' + A.hood
   });
-  Logger.log('P5 MARRIAGE: ' + bond.citizenA + ' + ' + bond.citizenB + ' -> ' + hhId);
+  Logger.log('P5 MARRIAGE: ' + bond.citizenA + ' + ' + bond.citizenB + ' -> ' + hhId + (superCouple ? ' [SUPER COUPLE]' : ''));
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// engine.59 (S320, Mike-ruled) — GC MARRIAGE LOTTERY
+// A single adult with no romantic prospects rolls per cycle against the
+// Tier-5 waiting room: GC_MARRY_CHANCE × fitness × scarcity × family trait.
+// Scarcity IS the lottery (29F vs 66 single men on live at design time);
+// the female-first generator floor is the refill valve. Winner promotes a
+// GC spouse (Tier 4 — "2 paths to becoming tier 4") and marries through
+// the same marryCitizens_ every organic wedding uses.
+// ════════════════════════════════════════════════════════════════════════════
+function processGCMarriageLottery_(ctx) {
+  if (!ctx.ledger || !ctx.ledger.rows || !ctx.ledger.rows.length) return;
+  var rng = safeRand_(ctx);
+  var cycle = ctx.summary.cycleId || ctx.config.cycleCount || 0;
+  var simYear = 2040 + Math.floor(cycle / 52);
+  var ageMin = (typeof AGE_RANGES !== 'undefined' && AGE_RANGES.WEDDING) ? AGE_RANGES.WEDDING.min : 20;
+  var ageMax = (typeof AGE_RANGES !== 'undefined' && AGE_RANGES.WEDDING) ? AGE_RANGES.WEDDING.max : 65;
+  var people = buildBondLedgerIndex_(ctx);
+  if (!people) return;
+  var bonds = ctx.summary.relationshipBonds || [];
+
+  // Prospects map: anyone with an active romantic bond, or a friendship
+  // close to the romance line, is NOT in the lottery — they have a life
+  // brewing (the no-prospects proxy for the courtship drought).
+  var hasProspects = {};
+  for (var b = 0; b < bonds.length; b++) {
+    var bd = bonds[b];
+    if (!bd || bd.status !== BOND_STATUS.ACTIVE) continue;
+    if (bd.bondType === BOND_TYPES.ROMANTIC ||
+        (bd.bondType === BOND_TYPES.FRIENDSHIP && Number(bd.intensity) >= ROMANCE_THRESHOLD - 1)) {
+      hasProspects[bd.citizenA] = true;
+      hasProspects[bd.citizenB] = true;
+    }
+  }
+
+  // GC pool by sex (Active only, needs Sex + adult age)
+  var gcSheet = ctx.ss.getSheetByName('Generic_Citizens');
+  if (!gcSheet) return;
+  var gcVals = gcSheet.getDataRange().getValues();
+  var gh = gcVals[0];
+  var gI = function(n) { return gh.indexOf(n); };
+  var gF = gI('First'), gL = gI('Last'), gSex = gI('Sex'), gStat = gI('Status'),
+      gAge = gI('Age'), gBirth = gI('BirthYear'), gNbhd = gI('Neighborhood'), gOcc = gI('Occupation');
+  if (gF < 0 || gSex < 0 || gStat < 0) return;
+  var pool = { male: [], female: [] };
+  for (var g = 1; g < gcVals.length; g++) {
+    var gr = gcVals[g];
+    if (String(gr[gStat] || '').toLowerCase() !== 'active') continue;
+    var sx = String(gr[gSex] || '').toLowerCase();
+    if (sx !== 'male' && sx !== 'female') continue;
+    var ga = Number(gr[gAge]) || (Number(gr[gBirth]) ? simYear - Number(gr[gBirth]) : 0);
+    if (ga < ageMin || ga > ageMax) continue;
+    pool[sx].push({ sheetRow: g + 1, first: gr[gF], last: gr[gL], age: ga,
+      nbhd: gNbhd >= 0 ? String(gr[gNbhd] || '').trim() : '', occ: gOcc >= 0 ? gr[gOcc] : '' });
+  }
+
+  // next POPID, counted once
+  var header = ctx.ledger.headers;
+  var iPop = header.indexOf('POPID');
+  var maxN = 0;
+  for (var r0 = 0; r0 < ctx.ledger.rows.length; r0++) {
+    var mm = /^POP-(\d+)$/.exec(ctx.ledger.rows[r0][iPop] || '');
+    if (mm && +mm[1] > maxN) maxN = +mm[1];
+  }
+
+  var idxCol = function(n) { return header.indexOf(n); };
+  for (var pid in people) {
+    var P = people[pid];
+    if (P.marital !== 'single' || hasProspects[pid]) continue;
+    var pAge = P.birthYear > 0 ? simYear - P.birthYear : 0;
+    if (pAge < ageMin || pAge > ageMax) continue;
+    if (!P.gender || (P.gender !== 'male' && P.gender !== 'female')) continue;
+    var wantSex = P.gender === 'male' ? 'female' : 'male';
+    var avail = pool[wantSex];
+    if (!avail.length) continue;
+    var scarcity = Math.min(1, avail.length / GC_POOL_REF);
+    var chance = GC_MARRY_CHANCE * bondFitnessOf_(P) * scarcity *
+      (0.75 + bondTraitOf_(ctx, pid, 'family') / 200);
+    if (rng() >= chance) continue;
+
+    // ── Winner: pick the spouse (age ±8 pref, nbhd pref) ──
+    var cands = avail.filter(function(c) { return Math.abs(c.age - pAge) <= 8; });
+    if (!cands.length) cands = avail;
+    cands.sort(function(x, y) {
+      var xs = (x.nbhd === P.hood ? 0 : 1), ys = (y.nbhd === P.hood ? 0 : 1);
+      if (xs !== ys) return xs - ys;
+      return Math.abs(x.age - pAge) - Math.abs(y.age - pAge);
+    });
+    var pick = cands[0];
+    avail.splice(avail.indexOf(pick), 1);
+
+    // Full SL row — Tier 4 entry (Mike: "2 paths to becoming tier 4"),
+    // spouse takes the citizen's surname (S319/S320 drip convention).
+    var spId = 'POP-' + String(++maxN).padStart(5, '0');
+    var last = P.name.split(' ').slice(-1)[0] || '';
+    var spName = pick.first + ' ' + last;
+    var newRow = new Array(header.length).fill('');
+    var setC = function(n, v) { var i2 = idxCol(n); if (i2 >= 0) newRow[i2] = v; };
+    setC('POPID', spId); setC('First', pick.first); setC('Last', last);
+    setC('Tier', 4); setC('RoleType', pick.occ || 'Service worker');
+    setC('ClockMode', 'ENGINE'); setC('Status', 'Active');
+    setC('BirthYear', simYear - pick.age); setC('OrginCity', 'Oakland');
+    setC('Neighborhood', P.hood); setC('MaritalStatus', 'single'); // marryCitizens_ flips it
+    setC('Income', GC_SPOUSE_INCOME); setC('Gender', wantSex);
+    setC('UsageCount', 0);
+    setC('LifeHistory', bondInWorldStamp_(cycle) + ' — [Family] The record catches up: met ' + P.name + ' in ' + P.hood + ', and stayed.');
+    ctx.ledger.rows.push(newRow);
+    ctx.ledger.dirty = true;
+    gcSheet.getRange(pick.sheetRow, gStat + 1).setValue('Promoted');
+
+    // Marry through the front door — bond first, then the same wedding
+    // machinery every organic marriage uses (household, register, hooks).
+    var B = {
+      idx: ctx.ledger.rows.length - 1, name: spName, marital: 'single',
+      gender: wantSex, birthYear: simYear - pick.age, householdId: '',
+      income: GC_SPOUSE_INCOME, hood: P.hood, tier: 4, edu: '', debt: 0, savings: 0
+    };
+    var lotteryBond = makeBond_(pid, spId, BOND_TYPES.ROMANTIC, 'gc-lottery', 'COMMUNITY',
+      P.hood, MARRIAGE_THRESHOLD, cycle, 'Met outside the record (engine.59 lottery C' + cycle + ')', ctx);
+    bonds.push(lotteryBond);
+    ctx.summary.relationshipBonds = bonds;
+    marryCitizens_(ctx, lotteryBond, P, B, cycle);
+    Logger.log('engine.59 GC LOTTERY: ' + pid + ' (' + P.name + ') married ' + spId + ' (' + spName + ') — pool ' + wantSex + ' now ' + avail.length);
+  }
 }
 
 function detectTriangleRivalries_(ctx) {

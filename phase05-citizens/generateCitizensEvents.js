@@ -1725,7 +1725,8 @@ function generateCitizensEvents_(ctx) {
           name: gsName,
           nbhd: gsN >= 0 ? String(gcSurfVals[gsi][gsN] || '').trim() : '',
           sheetRow: gsi + 1,
-          count: Number(gcSurfVals[gsi][gsE]) || 0
+          count: Number(gcSurfVals[gsi][gsE]) || 0,
+          ctx0: gsC >= 0 ? String(gcSurfVals[gsi][gsC] || '').trim() : '' // engine.59: roster base
         });
       }
     }
@@ -2552,9 +2553,10 @@ function generateCitizensEvents_(ctx) {
     // count — the mention happened in a real citizen's week.
     if (gcPendingByText[pick]) {
       var gcHit = gcPendingByText[pick];
-      if (!gcIncrements[gcHit.sheetRow]) gcIncrements[gcHit.sheetRow] = { entry: gcHit, add: 0, context: '' };
+      if (!gcIncrements[gcHit.sheetRow]) gcIncrements[gcHit.sheetRow] = { entry: gcHit, add: 0, contexts: [] };
       gcIncrements[gcHit.sheetRow].add += 1;
-      gcIncrements[gcHit.sheetRow].context = ('Named in ' + ((row[iFirst] || '') + ' ' + (row[iLast] || '')).trim() + "'s week, " + stamp).slice(0, 250);
+      // engine.59: namer ROSTER, not last-writer — promotion seeds bonds from it
+      gcIncrements[gcHit.sheetRow].contexts.push("Named in " + ((row[iFirst] || '') + ' ' + (row[iLast] || '')).trim() + "'s week, " + stamp);
     }
 
     row[iLife] = existing ? existing + "\n" + line : line;
@@ -2635,8 +2637,14 @@ function generateCitizensEvents_(ctx) {
     for (var gwKey in gcIncrements) {
       var gw = gcIncrements[gwKey];
       gcSurfaceSheet.getRange(gw.entry.sheetRow, gsE + 1).setValue(gw.entry.count + gw.add);
-      if (gsC >= 0 && gw.context) {
-        gcSurfaceSheet.getRange(gw.entry.sheetRow, gsC + 1).setValue(gw.context);
+      if (gsC >= 0 && gw.contexts.length) {
+        // engine.59: accumulate the namer roster — keep any non-namer origin
+        // note (intake context) + the last 5 'Named in' entries.
+        var parts = (gw.entry.ctx0 ? gw.entry.ctx0.split('; ') : []).concat(gw.contexts);
+        var origin = parts.filter(function(p) { return p.indexOf('Named in ') !== 0; });
+        var namers = parts.filter(function(p) { return p.indexOf('Named in ') === 0; }).slice(-5);
+        var roster = origin.slice(0, 1).concat(namers).join('; ').slice(0, 400);
+        gcSurfaceSheet.getRange(gw.entry.sheetRow, gsC + 1).setValue(roster);
       }
     }
   }

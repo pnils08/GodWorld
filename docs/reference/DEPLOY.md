@@ -48,7 +48,7 @@ sandbox is the intended target for anything unverified.
 **CURRENT sandbox: `SANDBOX 0716b`** (stood up S320 2026-07-16 via Drive-MCP copy of live post-kill-list — full S320 stack + backfill kill-list in data AND code; live data trued (47 minor salaries zeroed, POP-00744 education). Purpose: bonds+GC / debt-savings-inheritance / banking / heritage build stage)
 - Spreadsheet ID `1reNGLnvimH5vmMs2opPylA1QRpNDKwiVRiN8aYXeAVU`
   URL: https://docs.google.com/spreadsheets/d/1reNGLnvimH5vmMs2opPylA1QRpNDKwiVRiN8aYXeAVU/edit
-- Bound Apps Script ID: pending (Mike: Project Settings when first code deploy needed)
+- Bound Apps Script ID: `1iA6aG5bk_KOC3QeAu_9P8blRMG7lbrRrL0t3hVmyNwl4-TuJbSQrFjSa`
 - **SIM_SSID Script Property = the Spreadsheet ID above — Mike must set this before the first fire (protocol step 3; the 0714 incident step)**
 
 **RETIRED: `SANDBOX 0716`** (S320 — proved engine.58 across 2 cycles + kill-list fixes: 48/48 family HH incomes true, 0 minor salaries, EducationLevel stable, full-ledger education fill)

@@ -258,6 +258,7 @@ Added S321 to §Column Reference — previously described only in the header pro
 | AX | 50 | MemoryRegisters | JSON `{"biases":[...],"unlived":[...]}` (S282) | Phase-9 compressor fold only (`foldBiasIntents_`, `foldAgedOutEntries_`) | compressLifeHistory, resonanceRecall | **CAUSAL** — `compressLifeHistory.js:382-383` folds biases into DialState base dials; `resonanceRecall.js:115-116` recall candidates |
 | AY | 51 | StatusStartCycle | Cycle number (engine.52, S312) | processHealthLifecycle_ | processHealthLifecycle_ | **CAUSAL** — `generationalEventsEngine.js:261-277` health status duration → transition odds |
 | AZ | 52 | HealthCause | Text (Health_Cause_Queue operator loop, S312) | Health_Cause_Queue operator loop | processHealthLifecycle_ | **CAUSAL** — `processHealthLifecycle_` transition probabilities by cause |
+| BA | 53 | LineageId | LIN-##### (engine.63, S322 — family-line key; names display, numbers track) | heritage_seed.js (T1) + `updateHeritage_` (kids inherit, surname-taking spouses join, married pairs found) | `updateHeritage_` membership/aggregates | **CAUSAL** — Heritage_Ledger scoring → tier ascension → family business founding, Cultural_Ledger dynasty rows, [Heritage] LifeHistory + hooks |
 
 ---
 

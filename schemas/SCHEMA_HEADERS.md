@@ -484,7 +484,7 @@ pointers:
 
 ## Engine_Errors
 
-- **Rows:** 546
+- **Rows:** 564
 - **Columns:** 10
 
 | Col | Header |
@@ -664,9 +664,34 @@ pointers:
 
 ---
 
+## Heritage_Ledger
+
+- **Rows:** 194
+- **Columns:** 15
+
+| Col | Header |
+|-----|--------|
+| A | LineageId |
+| B | FamilyName |
+| C | FounderPopId |
+| D | FoundedCycle |
+| E | Generations |
+| F | LivingMembers |
+| G | MembersList |
+| H | HeritageScore |
+| I | HeritageTier |
+| J | TotalNetWorth |
+| K | HomesOwned |
+| L | BusinessesOwned |
+| M | CivicMembers |
+| N | FameMembers |
+| O | LastUpdated |
+
+---
+
 ## Household_Ledger
 
-- **Rows:** 537
+- **Rows:** 584
 - **Columns:** 12
 
 | Col | Header |
@@ -895,7 +920,7 @@ pointers:
 
 ## Neighborhood_Demographics
 
-- **Rows:** 18
+- **Rows:** 22
 - **Columns:** 12
 
 | Col | Header |
@@ -1010,7 +1035,7 @@ pointers:
 
 ## Reflection_Intake
 
-- **Rows:** 145
+- **Rows:** 147
 - **Columns:** 8
 
 | Col | Header |
@@ -1161,8 +1186,8 @@ pointers:
 
 ## Simulation_Ledger
 
-- **Rows:** 931
-- **Columns:** 52
+- **Rows:** 938
+- **Columns:** 53
 
 | Col | Header |
 |-----|--------|
@@ -1218,6 +1243,7 @@ pointers:
 | AX | MemoryRegisters |
 | AY | StatusStartCycle |
 | AZ | HealthCause |
+| BA | LineageId |
 
 ---
 

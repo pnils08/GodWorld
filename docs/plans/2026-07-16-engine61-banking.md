@@ -46,11 +46,12 @@ DEBT_DRAG and PAYOFF_COST. Savers win more in high-rate weeks; debt bleeds
 harder.
 
 ### T3 — Neighborhood credit
-`creditF(hood) = clamp(0.75, 1.25)` from `S.neighborhoodState`:
-`1 + (momentum−5)×0.04 − max(0, pressure−7)×0.03`. Rising hood → cheaper
-paydown (PAYOFF_COST × creditF where <1 favors); pressured hood → crisis
-digs deeper (crisis-borrow rolls +2 levels with p = (creditF>1 ?
-(creditF−1)×2 : 0)). Where you live touches your ledger.
+`creditF(hood) = clamp(0.75, 1.25)` from `S.neighborhoodState`, as a COST
+factor: `1 − (momentum−5)×0.04 + max(0, pressure−7)×0.03` (sign fixed at
+build time S321 — the design draft had it inverted). Rising hood → creditF
+< 1 → cheaper paydown (PAYOFF_COST × creditF); pressured hood → creditF > 1
+→ costlier paydown, and crisis-borrow digs a second level with
+p = (creditF−1)×2. Where you live touches your ledger.
 
 ### T4 — Shocks
 Inside the money-loop row pass (shares the 1-money-line/citizen/cycle

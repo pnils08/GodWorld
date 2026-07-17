@@ -43,6 +43,8 @@ function doGet(e) {
           out.ranMs = Date.now() - t0;
           // engine.59 diag-emit: the fire response carries the bond engine's why
           if (typeof ENGINE59_DIAG !== 'undefined' && ENGINE59_DIAG) out.diag59 = ENGINE59_DIAG;
+          // engine.61 diag-emit: the rate walk's why (persistence is invisible from outside)
+          if (typeof ENGINE61_DIAG !== 'undefined' && ENGINE61_DIAG) out.diag61 = ENGINE61_DIAG;
         } finally {
           lock.releaseLock();
         }

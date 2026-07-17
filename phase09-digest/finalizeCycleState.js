@@ -108,6 +108,11 @@ function finalizeCycleState_(ctx) {
     migrationDrift: (typeof S.migrationDrift === 'number') ? S.migrationDrift : 0,
     migrationDriftFactors: (S.migrationDriftFactors || []).slice(0, 5),
 
+    // v1.8 (engine.61 T1): the bank rate survives the cycle boundary — the
+    // walk needs its prior position or it resets to the mean every cycle.
+    // ~15 bytes; same carry class as migrationDrift/weatherTracking.
+    bankRate: (typeof S.bankRate === 'number') ? S.bankRate : null,
+
     // v1.6 (engine.45 T3b): crime spikes for next cycle's city dynamics — the
     // crime branch inputs (S.crimeSpikes/S.crimeByNeighborhood) had no writer
     // (trace K gap G1); Phase-2 position means prev-cycle is the honest grain.

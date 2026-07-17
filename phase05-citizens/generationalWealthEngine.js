@@ -140,12 +140,22 @@ function processGenerationalWealth_(ctx) {
   var incomeResults = calculateCitizenIncomes_(ctx);
   results.incomeUpdated = incomeResults.updated;
 
+  // engine.61 T5 (S321): capture WealthLevel before Step 2 recomputes it —
+  // the diff is what mobility tracking reads at Step 5.
+  var prevWealthLevels = captureWealthLevels_(ctx);
+
   // Step 2: Calculate wealth levels from income + assets
   var wealthResults = calculateCitizenWealth_(ctx);
   results.wealthUpdated = wealthResults.updated;
 
+  // Step 2.4 (engine.61 T1, S321): the bank rate walks — mean-reverting,
+  // nudged by last cycle's economic mood, carried in the cycle-state snapshot.
+  results.bankRate = processBankRate_(ctx, cycle);
+
   // Step 2.5 (engine.60 S320): the money loop — savings accrue into NetWorth,
   // debt moves both ways, threshold moments reach LifeHistory + hooks.
+  // engine.61 (S321): now weathered — rate scales yield/drag, neighborhood
+  // credit shapes borrowing, honest shocks land inside the same pass.
   var loopResults = processMoneyLoop_(ctx, cycle);
   results.moneyLoop = loopResults;
 
@@ -158,7 +168,8 @@ function processGenerationalWealth_(ctx) {
   results.householdsUpdated = householdResults.updated;
 
   // Step 5: Track wealth mobility (upward/downward)
-  var mobilityResults = trackWealthMobility_(ss, ctx, cycle);
+  // engine.61 T5 (S321): real after a lifetime as a v1.0 placeholder.
+  var mobilityResults = trackWealthMobility_(ctx, cycle, prevWealthLevels);
   results.mobilityDetected = mobilityResults.events;
 
   // Step 6: Home ownership opportunities
@@ -194,8 +205,74 @@ var EDU_SAVINGS_FACTOR = { doctorate: 1.2, masters: 1.2, bachelors: 1.1 };
 var SUPERCOUPLE_SAVINGS_FACTOR = 1.2;
 var NETWORTH_MILESTONE = 100000;
 
+// ════════════════════════════════════════════════════════════════════════════
+// engine.61 (S321) — BANKING, THE FLUCTUATION LAYER
+// The money loop shipped with frozen physics; banking makes them weather.
+// A city bank rate walks (mean-reverting, mood-nudged, genuine jitter) and
+// scales savings yield + debt drag; neighborhood credit shapes how deep a
+// crisis digs and what a paydown costs; honest dice hand citizens ruinous
+// weeks and windfalls nobody softens. Bounds are physics, not output caps.
+// Rate persists via PREV_CYCLE_STATE_JSON (finalizeCycleState v1.8).
+// ════════════════════════════════════════════════════════════════════════════
+var BANK_RATE_MEAN = 5.0;
+var BANK_RATE_MIN = 2.0, BANK_RATE_MAX = 10.0;   // physical bounds
+var BANK_RATE_REVERSION = 0.1;                    // ~10 cycles to walk home
+var BANK_RATE_MOOD_NUDGE = 0.3;                   // booming city ≈ +0.15/cycle
+var BANK_RATE_JITTER = 0.4;                       // the dice speak
+var SHOCK_EXPENSE_P = 0.004;                      // ~once per ~5yr per citizen
+var SHOCK_WINDFALL_P = 0.002;
+
+// engine.61 diag-emit (same channel as ENGINE59_DIAG): the fire response
+// carries the rate walk's why — persistence is otherwise invisible from
+// outside (Script Properties + Logger only).
+var ENGINE61_DIAG = null;
+
+function processBankRate_(ctx, cycle) {
+  var S = ctx.summary || (ctx.summary = {});
+  var prev = S.previousCycleState || {};
+  var rate = (typeof prev.bankRate === 'number') ? prev.bankRate : BANK_RATE_MEAN;
+  var mood = (typeof prev.econMood === 'number') ? prev.econMood : 50;
+  var rng = safeRand_(ctx);
+  var nudge = ((mood - 50) / 100) * BANK_RATE_MOOD_NUDGE;
+  var jitter = (rng() * 2 - 1) * BANK_RATE_JITTER;
+  rate = rate + BANK_RATE_REVERSION * (BANK_RATE_MEAN - rate) + nudge + jitter;
+  rate = Math.max(BANK_RATE_MIN, Math.min(BANK_RATE_MAX, Math.round(rate * 100) / 100));
+  S.bankRate = rate;
+  S.bankRateDesc = rate >= 7.5 ? 'tight' : rate >= 6 ? 'firming' :
+                   rate > 4 ? 'steady' : rate > 2.5 ? 'easy' : 'loose';
+  // DIAG-EMIT: the walk's inputs at the decision point.
+  ENGINE61_DIAG = {
+    rate: rate, desc: S.bankRateDesc,
+    prevRate: (typeof prev.bankRate === 'number') ? prev.bankRate : null,
+    mood: mood, nudge: Math.round(nudge * 100) / 100, jitter: Math.round(jitter * 100) / 100
+  };
+  Logger.log('ENGINE61_RATE: ' + rate + ' (' + S.bankRateDesc + ') prev=' +
+    (prev.bankRate !== undefined ? prev.bankRate : 'none') + ' mood=' + mood +
+    ' nudge=' + Math.round(nudge * 100) / 100 + ' jitter=' + Math.round(jitter * 100) / 100);
+  return rate;
+}
+
+// Neighborhood credit as a COST factor: <1 in a rising hood (cheap paydown),
+// >1 in a pressured one (costly paydown, deeper crisis digs). Reads the
+// Phase-2 S.neighborhoodState load — one-cycle lag by design, zero new reads.
+function creditFactorFor_(nbState, hood) {
+  var st = nbState[String(hood || '').trim()];
+  if (!st) return 1.0;
+  var mom = (typeof st.trajectoryMomentum === 'number') ? st.trajectoryMomentum : 5;
+  var press = (typeof st.housingPressure === 'number') ? st.housingPressure : 5;
+  var f = 1 - (mom - 5) * 0.04 + Math.max(0, press - 7) * 0.03;
+  return Math.max(0.75, Math.min(1.25, f));
+}
+
 function processMoneyLoop_(ctx, cycle) {
-  var results = { accrued: 0, debtUp: 0, debtDown: 0, lines: 0 };
+  var results = { accrued: 0, debtUp: 0, debtDown: 0, lines: 0, expense: 0, windfall: 0, deepDigs: 0 };
+  // engine.61 T2 (S321): the rate reaches the loop. Factors normalize to 1.0
+  // at the mean, so neutral weather reproduces the engine.60 proven baseline.
+  var bankRate = (typeof ctx.summary.bankRate === 'number') ? ctx.summary.bankRate : BANK_RATE_MEAN;
+  var yieldF = 0.6 + 0.08 * bankRate;   // savers win more in high-rate weeks
+  var dragF = 0.5 + 0.1 * bankRate;     // debt bleeds harder in them too
+  var nbState = ctx.summary.neighborhoodState || {};
+  var rng = safeRand_(ctx);  // engine.61: deep-digs + shocks roll genuine dice
   var header = ctx.ledger.headers;
   var rows = ctx.ledger.rows;
   if (!rows.length) return results;
@@ -203,7 +280,7 @@ function processMoneyLoop_(ctx, cycle) {
   var iInc = idx('Income'), iNW = idx('NetWorth'),
       iSav = idx('SavingsRate'), iDebt = idx('DebtLevel'), iEdu = idx('EducationLevel'),
       iHH = idx('HouseholdId'), iBirth = idx('BirthYear'), iStatus = idx('Status'),
-      iLife = idx('LifeHistory');
+      iLife = idx('LifeHistory'), iHood = idx('Neighborhood');
   if (iInc < 0 || iNW < 0 || iSav < 0) return results;
   var simYear = 2040 + Math.floor(cycle / 52);
   var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
@@ -242,7 +319,10 @@ function processMoneyLoop_(ctx, cycle) {
     var eduF = EDU_SAVINGS_FACTOR[String(row[iEdu] || '').toLowerCase()] || 1.0;
     var superF = hh.superCouple ? SUPERCOUPLE_SAVINGS_FACTOR : 1.0;
 
-    var accrual = Math.round((income / 52) * rate * eduF * superF) - (debt * DEBT_DRAG);
+    // engine.61 T2/T3: yield and drag ride the rate; credit rides the hood.
+    var creditF = creditFactorFor_(nbState, iHood >= 0 ? row[iHood] : '');
+    var accrual = Math.round((income / 52) * rate * eduF * superF * yieldF) -
+                  Math.round(debt * DEBT_DRAG * dragF);
     var nwNew = Math.max(0, nw + accrual);
     var line = null;
     var debtBefore = debt;
@@ -250,15 +330,44 @@ function processMoneyLoop_(ctx, cycle) {
     // debt accrues in a crisis household (borrowing to stay housed)
     if (hh.crisis && income > 0 && iDebt >= 0 && debt < 6) {
       debt++;
-      if (debt === 5) line = '[Money] the debts crossed a line this week — sleep comes harder now';
+      // engine.61 T3: in a tight-credit hood the same crisis digs deeper —
+      // bad terms compound. p scales with how far creditF sits above 1.
+      if (creditF > 1 && debt < 6 && rng() < (creditF - 1) * 2) {
+        debt++;
+        results.deepDigs++;
+      }
+      if (debt >= 5) line = '[Money] the debts crossed a line this week — sleep comes harder now';
       else line = '[Money] borrowed against tomorrow to keep the ' + 'household afloat';
     }
     // debt pays down on sustained surplus (stateless cadence: row-offset mod)
     else if (debt > 0 && accrual > 0 && ((cycle + r) % DEBT_PAYDOWN_CYCLES === 0)) {
       debt--;
-      nwNew = Math.max(0, nwNew - DEBT_PAYOFF_COST * debtBefore);
+      // engine.61 T2/T3: payoff cost scales with the rate AND the hood's credit.
+      nwNew = Math.max(0, nwNew - Math.round(DEBT_PAYOFF_COST * debtBefore * dragF * creditF));
       if (debt === 0 && debtBefore >= 3) line = '[Money] the last debt cleared — the ledger finally reads clean';
     }
+
+    // engine.61 T4: honest dice — the week can hit, or hand you something.
+    // One roll decides; probabilities are the physics, no caps on outcomes.
+    var shockRoll = rng();
+    if (shockRoll < SHOCK_EXPENSE_P) {
+      var hit = Math.round((1500 + rng() * 6500) / 100) * 100;
+      results.expense++;
+      if (nwNew >= hit) {
+        nwNew -= hit;
+        if (!line) line = '[Money] an unplanned $' + hit + ' week — savings took the hit';
+      } else {
+        nwNew = 0;
+        if (iDebt >= 0 && debt < 6) debt++;
+        if (!line) line = '[Money] the bad week cost more than the savings could hold — borrowed to cover it';
+      }
+    } else if (shockRoll < SHOCK_EXPENSE_P + SHOCK_WINDFALL_P) {
+      var gift = Math.round((2000 + rng() * 13000) / 100) * 100;
+      nwNew += gift;
+      results.windfall++;
+      if (!line) line = '[Money] a windfall landed — $' + gift + ', banked';
+    }
+
     // milestone: first crossing of 100k lived wealth
     if (!line && nw < NETWORTH_MILESTONE && nwNew >= NETWORTH_MILESTONE &&
         String(row[iLife] || '').indexOf('crossed six figures') < 0) {
@@ -273,10 +382,12 @@ function processMoneyLoop_(ctx, cycle) {
     if (line && iLife >= 0) {
       row[iLife] = (row[iLife] ? row[iLife] + '\n' : '') + stamp + ' — ' + line;
       results.lines++;
-      if (line.indexOf('crossed a line') >= 0 || line.indexOf('six figures') >= 0) {
+      if (line.indexOf('crossed a line') >= 0 || line.indexOf('six figures') >= 0 ||
+          line.indexOf('cost more than the savings') >= 0) {
         ctx.summary.storyHooks = ctx.summary.storyHooks || [];
         ctx.summary.storyHooks.push({
-          hookType: line.indexOf('six figures') >= 0 ? 'MONEY_MILESTONE' : 'DEBT_CRISIS',
+          hookType: line.indexOf('six figures') >= 0 ? 'MONEY_MILESTONE' :
+                    line.indexOf('cost more than the savings') >= 0 ? 'MONEY_SHOCK' : 'DEBT_CRISIS',
           severity: 3, priority: 3,
           description: ((row[idx('First')] || '') + ' ' + (row[idx('Last')] || '')).trim() + ' — ' + line.replace('[Money] ', ''),
           cycleGenerated: cycle, neighborhood: row[idx('Neighborhood')] || '',
@@ -286,7 +397,13 @@ function processMoneyLoop_(ctx, cycle) {
     }
   }
   if (results.accrued || results.debtUp || results.debtDown) ctx.ledger.dirty = true;
-  Logger.log('processMoneyLoop_ engine.60: accrued ' + results.accrued + ', debt +' + results.debtUp + '/-' + results.debtDown + ', lines ' + results.lines);
+  if (ENGINE61_DIAG) ENGINE61_DIAG.loop = {
+    accrued: results.accrued, debtUp: results.debtUp, debtDown: results.debtDown,
+    deepDigs: results.deepDigs, expense: results.expense, windfall: results.windfall
+  };
+  Logger.log('processMoneyLoop_ engine.61: rate ' + bankRate + ', accrued ' + results.accrued +
+    ', debt +' + results.debtUp + '/-' + results.debtDown + ' (deep ' + results.deepDigs + ')' +
+    ', shocks ' + results.expense + 'x/' + results.windfall + 'w, lines ' + results.lines);
   return results;
 }
 
@@ -817,13 +934,73 @@ function updateHouseholdWealth_(ctx) {
 
 
 // ════════════════════════════════════════════════════════════════════════════
-// WEALTH MOBILITY TRACKING
+// WEALTH MOBILITY TRACKING — REAL as of engine.61 T5 (S321).
+// Placeholder since v1.0; the call site at Step 5 waited years for a body.
+// Diffs the WealthLevel captured before Step 2's recompute against the new
+// value: a move of 2+ rungs in one cycle is a life moment, not noise.
 // ════════════════════════════════════════════════════════════════════════════
 
-function trackWealthMobility_(ss, ctx, cycle) {
-  // Would track changes in wealth level over time
-  // For v1.0, this is a placeholder
-  return { events: 0 };
+function captureWealthLevels_(ctx) {
+  var header = ctx.ledger.headers, rows = ctx.ledger.rows;
+  var iPop = header.indexOf('POPID'), iWL = header.indexOf('WealthLevel');
+  var map = {};
+  if (iPop < 0 || iWL < 0) return map;
+  for (var r = 0; r < rows.length; r++) {
+    if (rows[r] && rows[r][iPop]) map[String(rows[r][iPop]).trim()] = Number(rows[r][iWL]) || 0;
+  }
+  return map;
+}
+
+function trackWealthMobility_(ctx, cycle, prevLevels) {
+  var results = { events: 0, up: 0, down: 0 };
+  var header = ctx.ledger.headers, rows = ctx.ledger.rows;
+  var idx = function(n) { return header.indexOf(n); };
+  var iPop = idx('POPID'), iWL = idx('WealthLevel'), iStatus = idx('Status'),
+      iBirth = idx('BirthYear'), iLife = idx('LifeHistory');
+  if (iPop < 0 || iWL < 0 || iLife < 0 || !prevLevels) return results;
+
+  var simYear = 2040 + Math.floor(cycle / 52);
+  var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
+
+  for (var r = 0; r < rows.length; r++) {
+    var row = rows[r];
+    if (!row || !Array.isArray(row)) continue;
+    if (String(row[iStatus] || 'active').toLowerCase() !== 'active') continue;
+    var by = iBirth >= 0 ? (Number(row[iBirth]) || 0) : 0;
+    if (by > 0 && (simYear - by) < 18) continue; // minors: no mobility arc yet
+    var prev = prevLevels[String(row[iPop]).trim()];
+    // prev >= 2 gate: a first WealthLevel (settlement kids, fresh promotions
+    // from GC) is an entry, not mobility — the arc needs a standing to move from.
+    if (typeof prev !== 'number' || prev < 2) continue;
+    var now = Number(row[iWL]) || 0;
+    var delta = now - prev;
+    if (delta < 2 && delta > -2) continue;
+
+    results.events++;
+    if (delta > 0) results.up++; else results.down++;
+    var life = String(row[iLife] || '');
+    // engine.60 display bound holds: one [Money] line per citizen per cycle.
+    if (life.indexOf(stamp + ' — [Money]') >= 0) continue;
+    var line = delta > 0 ?
+      '[Money] moved up in the world — the ledger says so' :
+      '[Money] the ground gave a little — ' + Math.abs(delta) + ' rungs down in one season';
+    row[iLife] = (life ? life + '\n' : '') + stamp + ' — ' + line;
+    ctx.summary.storyHooks = ctx.summary.storyHooks || [];
+    ctx.summary.storyHooks.push({
+      hookType: 'WEALTH_MOBILITY',
+      severity: 4, priority: 3,
+      description: ((row[idx('First')] || '') + ' ' + (row[idx('Last')] || '')).trim() +
+        ' — ' + line.replace('[Money] ', '') + ' (' + prev + '→' + now + ')',
+      cycleGenerated: cycle, neighborhood: row[idx('Neighborhood')] || '',
+      domain: 'COMMUNITY', text: line.replace('[Money] ', '')
+    });
+  }
+
+  if (results.events > 0) ctx.ledger.dirty = true;
+  if (ENGINE61_DIAG) ENGINE61_DIAG.mobility = { events: results.events, up: results.up, down: results.down };
+  Logger.log('trackWealthMobility_ engine.61 T5: ' + results.events +
+    ' moves (' + results.up + ' up / ' + results.down + ' down)');
+  return results;
 }
 
 

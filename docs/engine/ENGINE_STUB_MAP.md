@@ -1062,9 +1062,18 @@
   Reads: S.cycleId
   Config: ctx.config.cycleCount
 
+- **processBankRate_(ctx, cycle)**
+  Reads: S.neighborhoodState, S.previousCycleState
+  Writes: S.bankRate, S.bankRateDesc
+  RNG: ctx.rng / safeRand_(ctx)
+
+- **creditFactorFor_(nbState, hood)**
+
 - **processMoneyLoop_(ctx, cycle)**
-  Writes: S.storyHooks
+  Reads: S.neighborhoodState
+  Writes: S.bankRate, S.storyHooks
   Sheets: Household_Ledger
+  RNG: ctx.rng / safeRand_(ctx)
 
 - **calculateCitizenIncomes_(ctx)**
   Reads: S.cycleId
@@ -1097,7 +1106,10 @@
 - **updateHouseholdWealth_(ctx)**
   Sheets: Household_Ledger
 
-- **trackWealthMobility_(ss, ctx, cycle)**
+- **captureWealthLevels_(ctx)**
+
+- **trackWealthMobility_(ctx, cycle, prevLevels)**
+  Writes: S.storyHooks
 
 - **trackHomeOwnership_(ss, ctx, cycle)**
 
@@ -2141,7 +2153,7 @@
 ### finalizeCycleState.js
 - **finalizeCycleState_(ctx)**
   Reads: S.activeCooldowns, S.cityDynamics, S.civicLoad, S.civicLoadScore, S.crimeByNeighborhood, S.crimeMetrics, S.crimeSpikes, S.cycle, S.cycleId, S.cycleWeight, S.cycleWeightScore, S.domainPresence, S.dominantDomain, S.economicRipples, S.holiday, S.holidayPriority, S.initiativeRipples, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.migrationDriftFactors, S.neighborhoodDynamics, S.overloadScore, S.patternFlag, S.recoveryLevel, S.season, S.shockFlag, S.shockStartCycle, S.sportsSeason, S.weather, S.weatherTracking, S.worldEvents
-  Writes: S.cycleFinalState, S.cycleFinalizedAt, S.economicMood, S.eventsGenerated, S.migrationDrift, S.previousCycleState
+  Writes: S.bankRate, S.cycleFinalState, S.cycleFinalizedAt, S.economicMood, S.eventsGenerated, S.migrationDrift, S.previousCycleState
   Config: ctx.config.cycleCount
 
 - **compactWeatherTracking_(t)**
@@ -3167,4 +3179,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 179
-**Functions mapped:** 1082
+**Functions mapped:** 1085

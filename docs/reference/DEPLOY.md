@@ -45,7 +45,12 @@ Cloud Shell sometimes clears installed packages. If clasp fails, run `npm instal
 accidentally deploys to live, Mike can cycle live back via its version history — but the
 sandbox is the intended target for anything unverified.
 
-**CURRENT sandbox: `SANDBOX 0716b`** (stood up S320 2026-07-16 via Drive-MCP copy of live post-kill-list — full S320 stack + backfill kill-list in data AND code; live data trued (47 minor salaries zeroed, POP-00744 education). Purpose: bonds+GC / debt-savings-inheritance / banking / heritage build stage)
+**CURRENT sandbox: `SANDBOX 0716c` — THE LIVE BENCH (S321 2026-07-17).** Copy of live post-S321-deploy (engine.60+.61+gap-wires+MaidenName). This bench runs the CANONICAL cycles (live never fires — sandboxes run, live receives deploys): canon C102+C103 ran here S321, verified healthy. Spouse drip rides its fires (2-3/fire, 33/36 remain). Purpose: canonical run + heritage/home-purchase build stage.
+- Spreadsheet ID `1erYtwSm8s6TczRTiLFbUQ302viC_MmVULWScITKRues`
+- Bound Apps Script ID: `12W_j60_flC3rr6KyiWrRiU8AcpRY-GDbvGmuNbD-NmR059NFnJTHCwOv`
+- Web-app deployment `AKfycby_tEkajmWmiK738ovnqG3H5OFcGq_oekQRBQBtV18v06ANf5MV51dby7dPhXTLntzkGw`; SIM_SSID + CYCLE_TRIGGER_TOKEN set (token in sl-engine-sheet). **WARNING: any valid-token GET fires a FULL cycle — there is no ping mode.**
+
+**RETIRED: `SANDBOX 0716b`** (S321 — served engine.59/.60/.61 proving fires C102-C119: marriage market, money loop, T4 settlement, banking, gap wires; superseded by post-S321-deploy copy)
 - Spreadsheet ID `1reNGLnvimH5vmMs2opPylA1QRpNDKwiVRiN8aYXeAVU`
   URL: https://docs.google.com/spreadsheets/d/1reNGLnvimH5vmMs2opPylA1QRpNDKwiVRiN8aYXeAVU/edit
 - Bound Apps Script ID: `1iA6aG5bk_KOC3QeAu_9P8blRMG7lbrRrL0t3hVmyNwl4-TuJbSQrFjSa`

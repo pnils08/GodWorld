@@ -830,6 +830,14 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 <!-- ARCHIVE-PASS ORDERING CONVENTION (G-SE4, added S248). Foundational Phase sections + named passes through this S227 anchor are CHRONOLOGICAL top→bottom (oldest first). The post-S227 sweep-pass region below is NEWEST-FIRST going forward: insert a new "## S<NN> Archive Pass" block immediately below this comment (above the current first post-S227 pass), so the most recent pass sits nearest this anchor. The existing post-S227 region is NOT cleanly sorted (S230/S238/S236/S235/S234/S233 as of S248) — do NOT re-sort it; just insert new passes here at the top of the run. Each pass header records its own session + a "This pass: N rows" line. -->
 
+## S321 Archive Pass (2026-07-17)
+
+This pass: 2 rows (engine.60, engine.61 — the money stage, designed→proven→LIVE in two sessions).
+
+- **engine.60** [engine-sheet] — Money loop: savings accrual (first-ever SavingsRate reader), living debt (crisis accrual / surplus paydown), 18th-birthday settlement (household-weighted career-entry draw riding ParentIds — inheritance of opportunity), money→dials threshold moments. T1-T3/T5 built S320, T4 S321 (a90ce599); adjacent fix: career-advancement edu boost never fired (bachelor/bachelors spelling). Proven 0716b fires C111-C114 (8-kid cohort settled exactly once, predictions held); LIVE S321 (29c47d20); canon-verified 0716c C102/C103 (871 NetWorths accruing, 2 settlements). **State at archive:** done-pending-archive. Pointer: [[../plans/2026-07-16-engine60-money-loop]].
+- **engine.61** [engine-sheet] — Banking, the fluctuation layer: bank rate mean-reverting walk (persisted via PREV_CYCLE_STATE_JSON, mood-nudged, diag61 on fire response), rate-scaled yield/drag (1.0 at mean preserves engine.60 baseline), neighborhood credit from S.neighborhoodState, honest expense/windfall shocks, trackWealthMobility_ real after a lifetime as v1.0 stub. Same-session audit-gap closures rode along: CareerMobility wired (stagnant→1.25x transition rolls), migration trio wired (settled-in verdict at +10 cycles), Middle reborn as MaidenName (heritage survives marriage). Proven 0716b C115-C119 (rate chain 5.39→5.71→5.85 exact, rate recovered algebraically from NW deltas); LIVE S321 (29c47d20, 6bbed839, 0df4dcc2). Watch: diag61 chain + MaidenName on next GC wedding. **State at archive:** done-pending-archive. Pointer: [[../plans/2026-07-16-engine61-banking]].
+
+
 
 ### pipeline.* (16)
 

@@ -96,5 +96,5 @@ Bounded: one money line per citizen per cycle max.
 - Money hooks appear in Story_Hook_Deck; no citizen gets >1 money line/cycle
 
 ## Out of scope
-Banking/fluctuation layer (engine.61: rates, shocks, neighborhood credit),
+Banking/fluctuation layer ([[2026-07-16-engine61-banking]] — approved S321),
 home purchase path (stub stays), heritage scoring (consumes this + names).

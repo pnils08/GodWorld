@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-07-13 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-07-17 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -51,7 +51,7 @@
 - **processIntake_(ctx)**
   Reads: S.cycle, S.cycleId
   Writes: S.intakeProcessed
-  Sheets: Intake, LifeHistory_Log
+  Sheets: Generic_Citizens, Intake, LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
 
 - **normalizeIntakeCategory_(raw)**
@@ -556,9 +556,15 @@
 
 - **checkGraduation_(ctx, popId, age, lifeHistory, tier, cal)**
 
-- **checkWedding_(ctx, popId, age, lifeHistory, cal)**
+- **checkWedding_(ctx, popId, age, lifeHistory, cal, hasHousehold)**
 
-- **checkBirth_(ctx, popId, age, lifeHistory, cal)**
+- **checkBirth_(ctx, popId, age, lifeHistory, cal, hasHousehold, marital)**
+
+- **createChildRow_(ctx, parentRowIdx, cycle)**
+  Sheets: Family_Relationships, Household_Ledger
+
+- **formSingleParentHousehold_(ctx, motherRowIdx, cycle)**
+  Sheets: Family_Relationships, Household_Ledger
 
 - **checkPromotion_(ctx, popId, age, lifeHistory, tier, tierRole, cal)**
 
@@ -694,6 +700,44 @@
   Reads: S.eventArcs
 
 - **resolveRivalry_(ctx, bondId, outcome)**
+  Reads: S.cycleId, S.relationshipBonds
+  Config: ctx.config.cycleCount
+
+- **bondInWorldStamp_(cycle)**
+
+- **appendBondLifeLine_(ctx, ledgerIdx, tag, text, cycle)**
+
+- **bondTraitOf_(ctx, popId, trait)**
+
+- **bondWarmthFactor_(ctx, popA, popB)**
+
+- **bondFamilyFactor_(ctx, popA, popB)**
+
+- **bondFitnessOf_(person)**
+
+- **buildBondLedgerIndex_(ctx)**
+
+- **processRomanceAndMarriage_(ctx)**
+  Reads: S.cycleId, S.relationshipBonds
+  Writes: S.storyHooks
+  Config: ctx.config.cycleCount
+  RNG: ctx.rng / safeRand_(ctx)
+
+- **marryCitizens_(ctx, bond, A, B, cycle)**
+  Reads: S.cycleId
+  Writes: S.storyHooks
+  Config: ctx.config.cycleCount
+  Sheets: Family_Relationships, Household_Ledger
+  RNG: ctx.rng / safeRand_(ctx)
+
+- **processGCMarriageLottery_(ctx)**
+  Reads: S.cycleId
+  Writes: S.relationshipBonds
+  Config: ctx.config.cycleCount
+  Sheets: Generic_Citizens
+  RNG: ctx.rng / safeRand_(ctx)
+
+- **detectTriangleRivalries_(ctx)**
   Reads: S.cycleId, S.relationshipBonds
   Config: ctx.config.cycleCount
 
@@ -930,6 +974,15 @@
 - **detectCareerMobility_(ctx, cycle, rng)**
   Writes: S.storyHooks
 
+- **updateMinorSchoolQuality_(ss, ctx, cycle)**
+  Reads: S.cycleId
+  Sheets: Neighborhood_Demographics
+
+- **eduRank_(v)**
+
+- **settleAdulthood_(ctx, cycle, rng)**
+  Sheets: Household_Ledger
+
 - **checkSchoolQuality_(ss, ctx, cycle)**
   Writes: S.storyHooks
   Sheets: Neighborhood_Demographics
@@ -962,7 +1015,7 @@
   Reads: S.cityDynamics, S.contentLedger, S.crimeByNeighborhood, S.cycleId, S.economicMood, S.faithEvents, S.holiday, S.holidayPriority, S.initiativeEvents, S.isCreationDay, S.isFirstFriday, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.simYear, S.simulationYear, S.sportsFeedEntries, S.sportsSeason, S.sportsSentimentBoost, S.weather, S.worldEvents
   Writes: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.crimeMetrics, S.cycleActiveCitizens, S.eventsGenerated, S.localEntities, S.templateCooldowns
   Config: ctx.config.cycleCount, ctx.config.rngSeed
-  Sheets: LifeHistory_Log
+  Sheets: Generic_Citizens, LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
 
 ### generateCivicModeEvents.js
@@ -979,6 +1032,10 @@
   Sheets: Civic_Office_Ledger
 
 ### generateGenericCitizens.js
+- **gcInitNamePools_()**
+
+- **inferSexFromFirstName_(first)**
+
 - **generateGenericCitizens_(ctx)**
   Reads: S.cityDynamics, S.cycleId, S.economicMood, S.holiday, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventsGenerated, S.genericCitizensDistribution, S.genericCitizensGenerated, S.newGenericCitizens
@@ -1005,7 +1062,13 @@
   Reads: S.cycleId
   Config: ctx.config.cycleCount
 
+- **processMoneyLoop_(ctx, cycle)**
+  Writes: S.storyHooks
+  Sheets: Household_Ledger
+
 - **calculateCitizenIncomes_(ctx)**
+  Reads: S.cycleId
+  Config: ctx.config.cycleCount
   RNG: ctx.rng / safeRand_(ctx)
 
 - **extractIncomeBand_(lifeHistory)**
@@ -1068,6 +1131,8 @@
   Sheets: Household_Ledger
 
 - **buildCitizenMoneyLookup_(ctx)**
+  Reads: S.cycleId
+  Config: ctx.config.cycleCount
 
 - **detectHouseholdStress_(ss, households)**
 
@@ -1134,7 +1199,7 @@
 - **markUsageProcessed_(ctx, usageSheet, row1, col1, value)**
 
 - **processAdvancementIntake_(ctx)**
-  Reads: S.cycleId
+  Reads: S.cycleId, S.relationshipBonds
   Config: ctx.config.cycleCount
 
 - **runAdvancementIntakeManual()**
@@ -1164,6 +1229,13 @@
 
 - **processIntakeRows_(ss, now, cycle)**
   Sheets: Intake
+
+- **checkEmergencePromotions_(ss, cycle)**
+  Sheets: Advancement_Intake, Advancement_Intake1, Generic_Citizens
+
+- **seedEmergenceBonds_(ctx, cycle)**
+  Writes: S.relationshipBonds
+  Sheets: Generic_Citizens
 
 - **markAsEmergedInGeneric_(ss, genericSheet, first, last, cycle)**
   Sheets: Generic_Citizens
@@ -1750,7 +1822,7 @@
   Sheets: Citizen_Usage_Intake
 
 - **routeCitizenUsageToIntake_(ctx, ss, cycle, cal)**
-  Sheets: Advancement_Intake, Advancement_Intake1, Citizen_Media_Usage, Intake, Simulation_Ledger
+  Sheets: Advancement_Intake, Advancement_Intake1, Citizen_Media_Usage, Generic_Citizens, Intake, Simulation_Ledger
 
 - **processContinuityIntake_(ss, cycle, cal)**
 
@@ -3035,6 +3107,9 @@ _No top-level function declarations found (helper/constants file)._
 - **v3Random_(ctx)**
   RNG: ctx.rng / safeRand_(ctx)
 
+### webTrigger.js
+- **doGet(e)**
+
 ### writeIntents.js
 - **initializePersistContext_(ctx)**
 
@@ -3091,5 +3166,5 @@ _No top-level function declarations found (helper/constants file)._
 
 ---
 
-**Files scanned:** 178
-**Functions mapped:** 1060
+**Files scanned:** 179
+**Functions mapped:** 1082

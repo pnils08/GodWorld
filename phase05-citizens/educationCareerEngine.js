@@ -151,6 +151,10 @@ function processEducationCareer_(ctx) {
   // neighborhood — the family's address is a causal input on the child.
   results.schoolQualitySet = updateMinorSchoolQuality_(ss, ctx, cycle);
 
+  // Step 7 (engine.60 T4, S321): the 18th-birthday settlement — career-entry
+  // draw weighted by household standing. The generational transfer moment.
+  results.adulthood = settleAdulthood_(ctx, cycle, rng);
+
   Logger.log(
     'processEducationCareer_ v2.1: Complete. ' +
     'Education: ' + results.educationUpdated + ', ' +
@@ -309,9 +313,13 @@ function updateCareerProgression_(ctx, cycle, rng) {
         }
       } else if (careerStage === CAREER_STAGES.MID && cyclesSincePromotion >= ADVANCEMENT_CYCLES.MID_TO_SENIOR) {
         // Mid → Senior (requires education)
+        // S321 (engine.60 T4 adjacent fix): was exact-match 'bachelor' /
+        // 'graduate' — the live ledger holds 'bachelors'/'masters'/'doctorate',
+        // so the education boost silently never fired. eduRank_ accepts both.
         var advanceChance = 0.05;
-        if (education === 'bachelor') advanceChance = 0.10;
-        if (education === 'graduate') advanceChance = 0.15;
+        var advRank = eduRank_(education);
+        if (advRank === 1) advanceChance = 0.10;
+        if (advRank === 2) advanceChance = 0.15;
 
         if (yearsInCareer >= 10 && rng() < advanceChance) {
           row[iCareerStage] = CAREER_STAGES.SENIOR;
@@ -468,6 +476,148 @@ function updateMinorSchoolQuality_(ss, ctx, cycle) {
   }
   if (set > 0) ctx.ledger.dirty = true;
   return set;
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// engine.60 T4 (S321) — THE 18TH-BIRTHDAY SETTLEMENT
+// On a citizen's age crossing 18 (BirthYear-computed, fires once via the
+// [Adulthood] LifeHistory marker): career-entry quality draw weighted by
+// household standing — HouseholdIncome band + SchoolQuality (engine.57 P4
+// stamp) + best parent EducationLevel (ParentIds, JSON array). Seeds
+// RoleType / Income / EducationLevel as rich-start / solid-start /
+// rough-start. Mike-direct: "better career-engine outcomes for their kids
+// at 18" — inheritance of opportunity. Jitter is upward-only (prosperity
+// canon: the floor can rise, the draw never punishes below the score).
+// ════════════════════════════════════════════════════════════════════════════
+
+var ADULT_START_BANDS = {
+  rich: {
+    edu: 'bachelors',
+    incomeMin: 55000, incomeMax: 72000,
+    roles: ['Biotech Lab Assistant', 'Junior Accountant', 'Civic Program Assistant',
+            'Research Assistant', 'Paralegal', 'Smart Grid Trainee'],
+    line: 'stepped into adult life with the wind at their back'
+  },
+  solid: {
+    edu: 'some-college',
+    incomeMin: 38000, incomeMax: 52000,
+    roles: ['Apprentice Electrician', 'Nurse Aide', 'Office Assistant',
+            'Bank Teller', 'Solar Installer', 'Carpenter Apprentice'],
+    line: 'stepped into adult life steady, first paycheck in hand'
+  },
+  rough: {
+    edu: 'hs-diploma',
+    incomeMin: 28000, incomeMax: 36000,
+    roles: ['Line Cook', 'Server', 'Barista', 'Retail Clerk',
+            'Security Guard', 'Construction Laborer'],
+    line: 'started from scratch and knows it'
+  }
+};
+
+// Education rank shared by the settlement draw and career advancement.
+// Accepts both live-ledger spellings (bachelors/masters/doctorate) and the
+// engine constants (bachelor/graduate) — the ledger predominantly holds the
+// plural forms, so exact-match checks silently never fire on live data.
+function eduRank_(v) {
+  v = String(v || '').toLowerCase();
+  if (v.indexOf('doctorate') >= 0 || v.indexOf('masters') >= 0 || v === 'graduate') return 2;
+  if (v.indexOf('bachelor') >= 0) return 1;
+  return 0;
+}
+
+function settleAdulthood_(ctx, cycle, rng) {
+  var results = { settled: 0, rich: 0, solid: 0, rough: 0 };
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  if (!rows.length) return results;
+  var idx = function(n) { return header.indexOf(n); };
+  var iPop = idx('POPID'), iBirth = idx('BirthYear'), iLife = idx('LifeHistory'),
+      iStatus = idx('Status'), iHH = idx('HouseholdId'), iSQ = idx('SchoolQuality'),
+      iParents = idx('ParentIds'), iEdu = idx('EducationLevel'), iRole = idx('RoleType'),
+      iInc = idx('Income'), iEcon = idx('EconomicProfileKey');
+  if (iBirth < 0 || iLife < 0 || iEdu < 0 || iRole < 0 || iInc < 0) return results;
+
+  var simYear = 2040 + Math.floor(cycle / 52);
+  var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
+
+  // Household income map — one read, same source the money loop uses.
+  var hhIncome = {};
+  var hhSheet = ctx.ss.getSheetByName('Household_Ledger');
+  if (hhSheet) {
+    var hv = hhSheet.getDataRange().getValues();
+    var hId = hv[0].indexOf('HouseholdId'), hInc = hv[0].indexOf('HouseholdIncome'),
+        hStat = hv[0].indexOf('Status');
+    for (var q = 1; q < hv.length; q++) {
+      if (String(hv[q][hStat] || '').toLowerCase() !== 'active') continue;
+      hhIncome[String(hv[q][hId])] = Number(hv[q][hInc]) || 0;
+    }
+  }
+
+  // POPID → row lookup for the parent-education leg of the draw.
+  var rowByPop = {};
+  if (iPop >= 0 && iParents >= 0) {
+    for (var p = 0; p < rows.length; p++) {
+      if (rows[p] && rows[p][iPop]) rowByPop[String(rows[p][iPop]).trim()] = rows[p];
+    }
+  }
+
+  var diag = 0;
+  for (var r = 0; r < rows.length; r++) {
+    var row = rows[r];
+    if (!row || !Array.isArray(row)) continue;
+    if (String(row[iStatus] || 'active').toLowerCase() !== 'active') continue;
+    var by = Number(row[iBirth]) || 0;
+    if (by <= 0 || (simYear - by) !== 18) continue;
+    var life = String(row[iLife] || '');
+    if (life.indexOf('[Adulthood]') >= 0) continue; // fires exactly once
+    // Seeded/sports rows are managed externally — the settlement is for
+    // kids the sim raised, not citizens the seeder or sports layer owns.
+    if (iEcon >= 0 && String(row[iEcon] || '').trim() !== '') continue;
+
+    // The draw: household income band + school quality + best parent edu,
+    // plus upward-only jitter. Bands per plan §T4: rich ≥140k HH / rough <60k.
+    var score = 0;
+    var hhInc = hhIncome[String(row[iHH] || '').trim()] || 0;
+    if (hhInc >= 140000) score += 2; else if (hhInc >= 60000) score += 1;
+    var sq = iSQ >= 0 ? (Number(row[iSQ]) || 0) : 0;
+    if (sq >= 8) score += 2; else if (sq >= 6) score += 1;
+    var parentRank = 0;
+    if (iParents >= 0 && row[iParents]) {
+      var pids = [];
+      try { pids = JSON.parse(String(row[iParents])); } catch (e) { pids = []; }
+      for (var k = 0; k < pids.length; k++) {
+        var pRow = rowByPop[String(pids[k]).trim()];
+        if (pRow) parentRank = Math.max(parentRank, eduRank_(pRow[iEdu]));
+      }
+    }
+    score += parentRank;
+    var total = score + rng() * 1.5;
+    var band = total >= 5 ? 'rich' : (total >= 2 ? 'solid' : 'rough');
+    var b = ADULT_START_BANDS[band];
+
+    row[iEdu] = (band === 'rough' && rng() < 0.15) ? 'hs-dropout' : b.edu;
+    row[iRole] = b.roles[Math.floor(rng() * b.roles.length)];
+    row[iInc] = Math.round((b.incomeMin + rng() * (b.incomeMax - b.incomeMin)) / 100) * 100;
+    row[iLife] = (life ? life + '\n' : '') +
+      stamp + ' — [Adulthood] ' + b.line + ' — ' + row[iRole];
+
+    results.settled++;
+    results[band]++;
+    // DIAG-EMIT (S320 Mike-blessed): log the computed draw at the decision
+    // point for the first few settlements so the execution log carries the why.
+    if (diag < 5) {
+      Logger.log('ENGINE60_T4: ' + (iPop >= 0 ? row[iPop] : 'row' + r) +
+        ' hhInc=' + hhInc + ' sq=' + sq + ' parentRank=' + parentRank +
+        ' total=' + Math.round(total * 100) / 100 + ' -> ' + band +
+        ' (' + row[iRole] + ' @ ' + row[iInc] + ')');
+      diag++;
+    }
+  }
+
+  if (results.settled > 0) ctx.ledger.dirty = true;
+  Logger.log('settleAdulthood_ engine.60 T4: settled ' + results.settled +
+    ' (rich ' + results.rich + ' / solid ' + results.solid + ' / rough ' + results.rough + ')');
+  return results;
 }
 
 function checkSchoolQuality_(ss, ctx, cycle) {

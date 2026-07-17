@@ -1173,6 +1173,10 @@
 - **updateMigrationIntent_(ctx, cycle)**
 
 - **processMigrationEvents_(ctx, cycle)**
+  Reads: S.neighborhoodState
+
+- **processSettledInCheck_(ctx, cycle)**
+  Reads: S.neighborhoodState
   RNG: ctx.rng / safeRand_(ctx)
 
 - **buildRelocationHoodState_(ctx)**
@@ -3179,4 +3183,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 179
-**Functions mapped:** 1085
+**Functions mapped:** 1086

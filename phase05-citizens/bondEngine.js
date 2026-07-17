@@ -1897,6 +1897,11 @@ function processGCMarriageLottery_(ctx) {
     var newRow = new Array(header.length).fill('');
     var setC = function(n, v) { var i2 = idxCol(n); if (i2 >= 0) newRow[i2] = v; };
     setC('POPID', spId); setC('First', pick.first); setC('Last', last);
+    // engine.61 (S321, Mike-direct): the spouse takes the household surname,
+    // but the birth-line survives — MaidenName (col C, repurposed from the
+    // dead Middle column) keeps their GC family name for heritage scoring.
+    // setC guards -1, so this no-ops gracefully until the header rename lands.
+    setC('MaidenName', pick.last || '');
     setC('Tier', 4); setC('RoleType', pick.occ || 'Service worker');
     setC('ClockMode', 'ENGINE'); setC('Status', 'Active');
     setC('BirthYear', simYear - pick.age); setC('OrginCity', 'Oakland');

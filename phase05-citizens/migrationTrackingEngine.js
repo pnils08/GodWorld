@@ -421,11 +421,75 @@ function processMigrationEvents_(ctx, cycle) {
   var moves = processRelocations_(ctx, cycle);
   results.events = moves.moved;
 
+  // engine.61 wire (S321): the settled-in check — MigrationReason/Destination/
+  // MigratedCycle get their first readers.
+  results.settledIn = processSettledInCheck_(ctx, cycle);
+
   // Check for citizens with very high displacement risk
   var displaced = checkForDisplacedCitizens_(ctx, cycle);
   results.displaced = displaced.count;
 
   return results;
+}
+
+
+// ════════════════════════════════════════════════════════════════════════════
+// engine.61 wire (S321) — THE SETTLED-IN CHECK
+// AN-AP were written on every relocation (engine.55) and never read: the move
+// happened, the why evaporated. Ten cycles after MigratedCycle, look at the
+// neighborhood the citizen actually landed in (S.neighborhoodState, one-cycle
+// lag) and write the verdict their cron-wake should know: did the move work?
+// Fires exactly once — only at the exact cycle offset. Reads all three columns.
+// ════════════════════════════════════════════════════════════════════════════
+var SETTLED_IN_CYCLES = 10;
+
+function processSettledInCheck_(ctx, cycle) {
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  var idx = function(n) { return header.indexOf(n); };
+  var iMigCycle = idx('MigratedCycle'), iMigReason = idx('MigrationReason'),
+      iMigDest = idx('MigrationDestination'), iHood = idx('Neighborhood'),
+      iLife = idx('LifeHistory'), iStatus = idx('Status');
+  if (iMigCycle < 0 || iLife < 0) return 0;
+  var nbState = (ctx.summary && ctx.summary.neighborhoodState) || {};
+  var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
+
+  var checked = 0;
+  for (var r = 0; r < rows.length; r++) {
+    var row = rows[r];
+    if (!row || !Array.isArray(row)) continue;
+    if (String(row[iStatus] || 'active').toLowerCase() !== 'active') continue;
+    var migCycle = Number(row[iMigCycle]) || 0;
+    if (migCycle <= 0 || (cycle - migCycle) !== SETTLED_IN_CYCLES) continue;
+
+    var hood = String(row[iHood] || '').trim();
+    var dest = iMigDest >= 0 ? String(row[iMigDest] || '').trim() : '';
+    // moved again since, or drifted off the recorded destination — no verdict
+    if (dest && hood && dest !== hood) continue;
+    var st = nbState[hood];
+    if (!st) continue;
+
+    var reason = iMigReason >= 0 ? String(row[iMigReason] || '').toLowerCase() : '';
+    var press = (typeof st.housingPressure === 'number') ? st.housingPressure : 5;
+    var traj = String(st.trajectory || '').toLowerCase();
+    // The verdict is physics, not sentiment: a cost-driven move judged on
+    // pressure where they landed; an opportunity move judged on trajectory.
+    var worked;
+    if (reason.indexOf('cost') >= 0 || reason.indexOf('displaced') >= 0) {
+      worked = press < 7;
+    } else {
+      worked = traj.indexOf('declin') < 0;
+    }
+    var line = worked ?
+      '[Home] ten weeks in ' + hood + ' — the move worked' :
+      '[Home] ten weeks in ' + hood + ' — same problems, new address';
+    row[iLife] = (row[iLife] ? row[iLife] + '\n' : '') + stamp + ' — ' + line;
+    checked++;
+  }
+
+  if (checked > 0) ctx.ledger.dirty = true;
+  if (checked > 0) Logger.log('processSettledInCheck_ engine.61: ' + checked + ' verdict(s)');
+  return checked;
 }
 
 

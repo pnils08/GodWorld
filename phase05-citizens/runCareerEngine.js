@@ -69,6 +69,7 @@ function runCareerEngine_(ctx) {
   var iEconKey = idx('EconomicProfileKey');
   var iEmployerBizId = idx('EmployerBizId'); // v2.4: employer tracking
   var iDialState = idx('DialState'); // engine.32 T5 — Drive dial -> career-event frequency
+  var iCareerMobility = idx('CareerMobility'); // engine.61 wire (S321) — first reader ever
   var iStatus = idx('Status'); // engine.52 C1 — hospital status gates career activity
   var iStatusStart = idx('StatusStartCycle'); // engine.52 C1 — admission cycle for income-hit timing
 
@@ -357,10 +358,14 @@ function runCareerEngine_(ctx) {
     var layoffChance = 0.004 + (Math.max(0, -pressure) * 0.03) + (chaosP * 0.01);
     layoffChance = clamp(layoffChance, 0, 0.07);
 
-    var shiftChance = 0.004 + (Math.max(0, -pressure) * 0.018) + (roll() * 0.004);
+    // engine.61 (S321): stagnation pushes citizens toward the door — shift and
+    // lateral odds scale with mobilityF (stagnant 1.25x / declining 1.4x),
+    // applied before the clamp so the physics ceilings hold.
+    var mobF = context.mobilityF || 1;
+    var shiftChance = (0.004 + (Math.max(0, -pressure) * 0.018) + (roll() * 0.004)) * mobF;
     shiftChance = clamp(shiftChance, 0, 0.05);
 
-    var lateralChance = 0.006 + (Math.max(0, pressure) * 0.012);
+    var lateralChance = (0.006 + (Math.max(0, pressure) * 0.012)) * mobF;
     lateralChance = clamp(lateralChance, 0, 0.05);
 
     if (chanceHit(layoffChance)) return { type: "layoff", text: "faced an unexpected work disruption and started looking for new options" };
@@ -812,13 +817,24 @@ function runCareerEngine_(ctx) {
     // v2.3: maybe transition
     // engine.52 C1 — recovering citizens keep career texture but skip job
     // transitions (no promotion/layoff/shift while easing back in).
+    // engine.61 wire (S321): CareerMobility gets its first reader — a citizen
+    // the education engine marked stagnant looks for a way out (shift/lateral
+    // odds up). One-cycle lag by phase order (education engine runs after this
+    // one). 'declining' branch covers the enum's third state if it ever fires.
+    var mobilityF = 1.0;
+    if (iCareerMobility >= 0) {
+      var mob = String(row[iCareerMobility] || '').toLowerCase();
+      if (mob === 'stagnant') mobilityF = 1.25;
+      else if (mob === 'declining') mobilityF = 1.4;
+    }
     var tEv = (healthStatus === "recovering") ? null : maybeTransition_(st, {
       econMood: econMood,
       season: season,
       holiday: holiday,
       chaos: chaos,
       weather: weather,
-      careerFreq: dialBands ? dialBands.careerFreq : 1 // engine.32 T5
+      careerFreq: dialBands ? dialBands.careerFreq : 1, // engine.32 T5
+      mobilityF: mobilityF // engine.61 — stagnation pressure on transition rolls
     });
 
     // Choose drift output

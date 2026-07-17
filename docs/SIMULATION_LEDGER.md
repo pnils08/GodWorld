@@ -129,17 +129,16 @@ Tribune journalist events:
 
 | Verdict | Count | Columns |
 |---|---|---|
-| CAUSAL | 39 | A, E–M, O, R, S, T–Y, Z–AI, AK, AL, AM, AR, AS, AU, AV, AX, AY, AZ |
-| RECORD-by-design | 7 | B, D, N, P, Q, AT, AW |
-| RECORD-gap | 4 | AJ, AN, AO, AP |
-| DEAD | 2 | C, AQ |
+| CAUSAL | 43 | A, E–M, O, R, S, T–Y, Z–AK, AL, AM, AN, AO, AP, AR, AS, AU, AV, AX, AY, AZ |
+| RECORD-by-design | 8 | B, C, D, N, P, Q, AT, AW |
+| DEAD | 1 | AQ |
 | **Total** | **52** | |
 
-**Gaps and dead wires:**
-- **Middle (C)** — DEAD. `citizenContextBuilder.js:253` assigns it but never uses it; zero cycle-path readers anywhere.
-- **CareerMobility (AJ)** — RECORD-gap. Computed and written every cycle (`educationCareerEngine.js:413`); zero readers anywhere.
-- **MigrationReason (AN)**, **MigrationDestination (AO)**, **MigratedCycle (AP)** — RECORD-gap. Written on relocation (`migrationTrackingEngine.js:602-604`, engine.55); never read.
-- **ReturnedCycle (AQ)** — DEAD. No cycle-path writer or reader (legacy — no writer since exit states removed S313).
+**S321 gap closures (same session as the audit — all four gaps wired, cycle-proven 0716b):**
+- **MaidenName (C)** — was `Middle ` (DEAD, 3 stray values preserved into CitizenBio). Repurposed S321 Mike-direct: GC-spouse promotion (`bondEngine.js` `setC('MaidenName', pick.last)`) keeps the spouse's birth surname so heritage survives marriage. RECORD-by-design until heritage scoring consumes it. Header renamed on sandbox; live rename rides the engine.60/61 push window (SCHEMA_HEADERS regen then).
+- **CareerMobility (AJ)** — CAUSAL. First reader: `runCareerEngine.js` `maybeTransition_` — stagnant citizens roll shift/lateral at 1.25× (declining 1.4×), applied before the physics clamps. One-cycle lag by phase order.
+- **MigrationReason/Destination/MigratedCycle (AN–AP)** — CAUSAL. First reader: `processSettledInCheck_` (`migrationTrackingEngine.js`) — 10 cycles after a move, the verdict line ("the move worked" / "same problems, new address") is decided by reason-appropriate physics (cost moves judged on landing-hood housingPressure, opportunity moves on trajectory). Proven C119: Eric Taveras, exactly the predicted citizen.
+- **ReturnedCycle (AQ)** — still DEAD. No cycle-path writer or reader (legacy — no writer since exit states removed S313). Kill candidate at next schema cleanup (explicit-go).
 
 **Correction to the raw audit:** the A–O auditor block classified LifeHistory (O) as RECORD ("never parsed to gate behavior") — that's wrong. `educationCareerEngine.js` `settleAdulthood_` gates the fire-once 18th-birthday settlement on `indexOf('[Adulthood]')`; `generationalWealthEngine.js` `processMoneyLoop_` checks for `'crossed six figures'` as a once-only milestone; `deriveEducationLevels_` checks `indexOf('Graduation')`; `calculateCitizenIncomes_` extracts an income band via `extractIncomeBand_`. Reclassified CAUSAL here and in §Column Reference below.
 
@@ -157,7 +156,7 @@ Every column is a data point in someone's life. This maps who writes each column
 |-----|---|--------|-------------|---------|---------|--------------|
 | A | 1 | POPID | `POP-00001` format. Unique. Never reuse. | processIntakeV3, integration scripts | Universal key — everything reads this | **CAUSAL** — `generateGameModeMicroEvents.js:502` `getCitizenDialBands_` lookup |
 | B | 2 | First | Text | processIntakeV3, integration scripts | All event generators, buildDeskPackets, display | RECORD-by-design (display) |
-| C | 3 | Middle | Text (rarely populated) | — | — | **DEAD** — `citizenContextBuilder.js:253` assigns but never uses; zero cycle-path readers |
+| C | 3 | MaidenName | Birth surname (repurposed S321; was `Middle `) | bondEngine GC-spouse promotion (`setC('MaidenName', pick.last)`) | heritage scoring (future) | **RECORD-by-design** — keeps the birth-line after marriage; sandbox header renamed S321, live rename at push window |
 | D | 4 | Last | Text | processIntakeV3, integration scripts | All event generators, buildDeskPackets, display | RECORD-by-design (display) |
 | E | 5 | OriginGame | Text (source game/integration) | Integration scripts | — | **CAUSAL** — `generateGameModeMicroEvents.js:363` MLB check routes event pool |
 
@@ -220,7 +219,7 @@ Every column is a data point in someone's life. This maps who writes each column
 | AG | 33 | SchoolQuality | Numeric rating | educationCareerEngine | — | **CAUSAL** — `settleAdulthood_` career-entry draw (sq>=8 +2, >=6 +1); stamped on minors from Neighborhood_Demographics |
 | AH | 34 | CareerStage | entry / mid / senior / retired | educationCareerEngine | queryFamily | **CAUSAL** — advancement state machine gates |
 | AI | 35 | YearsInCareer | Integer | educationCareerEngine | — | **CAUSAL** — tenure gates (>=5 entry→mid, >=10 mid→senior) |
-| AJ | 36 | CareerMobility | Numeric score | educationCareerEngine | — | **RECORD-gap** — written every cycle (`educationCareerEngine.js:413`), ZERO readers anywhere |
+| AJ | 36 | CareerMobility | advancing / stagnant / declining | educationCareerEngine | runCareerEngine `maybeTransition_` (S321 wire) | **CAUSAL** — stagnant 1.25× / declining 1.4× on shift/lateral transition rolls |
 | AK | 37 | LastPromotionCycle | Cycle number (integer) | educationCareerEngine | — | **CAUSAL** — cyclesSincePromotion gates all advancement + stagnation (>=40) |
 
 ### Migration (AL–AQ)
@@ -234,9 +233,9 @@ Neighborhood only ever changes to another canonical Neighborhood_Map node.
 |-----|---|--------|-------------|---------|---------|--------------|
 | AL | 38 | DisplacementRisk | 0–10 risk score | migrationTrackingEngine | buildCivicVoicePackets, buildInitiativePackets, generateCitizensEvents | **CAUSAL** — `migrationTrackingEngine.js:381` >=8 planning-to-leave, >=5 considering |
 | AM | 39 | MigrationIntent | staying / considering / planning-to-leave | migrationTrackingEngine | buildCivicVoicePackets, buildInitiativePackets | **CAUSAL** — `:537` relocation lane eligibility |
-| AN | 40 | MigrationReason | job / family / cost / crime / opportunity / displaced | migrationTrackingEngine (relocation, engine.55) | — | **RECORD-gap** — written `:602`, no readers |
-| AO | 41 | MigrationDestination | Canonical neighborhood name | migrationTrackingEngine (relocation, engine.55) | — | **RECORD-gap** — written `:603`, no readers |
-| AP | 42 | MigratedCycle | Cycle number of last intra-city move | migrationTrackingEngine (relocation, engine.55) | — | **RECORD-gap** — written `:604`, no readers |
+| AN | 40 | MigrationReason | job / family / cost / crime / opportunity / displaced | migrationTrackingEngine (relocation, engine.55) | `processSettledInCheck_` (S321 wire) | **CAUSAL** — picks the settled-in verdict physics (cost→pressure test, opportunity→trajectory test) |
+| AO | 41 | MigrationDestination | Canonical neighborhood name | migrationTrackingEngine (relocation, engine.55) | `processSettledInCheck_` (S321 wire) | **CAUSAL** — verdict skipped if the citizen drifted off the recorded destination |
+| AP | 42 | MigratedCycle | Cycle number of last intra-city move | migrationTrackingEngine (relocation, engine.55) | `processSettledInCheck_` (S321 wire) | **CAUSAL** — fires the once-only verdict at +10 cycles |
 | AQ | 43 | ReturnedCycle | Cycle number (legacy — no writer since exit states removed S313) | — | — | **DEAD** — no cycle-path writer or reader |
 
 ### Economic Links (AR–AT)

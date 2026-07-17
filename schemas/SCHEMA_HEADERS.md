@@ -108,8 +108,8 @@ pointers:
 | C | Sector |
 | D | Neighborhood |
 | E | Employee_Count |
-| F |  Avg_Salary  |
-| G |  Annual_Revenue  |
+| F | Avg_Salary |
+| G | Annual_Revenue |
 | H | Growth_Rate |
 | I | Key_Personnel |
 
@@ -484,7 +484,7 @@ pointers:
 
 ## Engine_Errors
 
-- **Rows:** 545
+- **Rows:** 546
 - **Columns:** 10
 
 | Col | Header |
@@ -1192,9 +1192,9 @@ pointers:
 | X | ParentIds |
 | Y | ChildrenIds |
 | Z | WealthLevel |
-| AA |  Income  |
-| AB |  InheritanceReceived  |
-| AC |  NetWorth  |
+| AA | Income |
+| AB | InheritanceReceived |
+| AC | NetWorth |
 | AD | SavingsRate |
 | AE | DebtLevel |
 | AF | EducationLevel |

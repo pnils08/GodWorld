@@ -135,7 +135,7 @@ Tribune journalist events:
 | **Total** | **52** | |
 
 **S321 gap closures (same session as the audit — all four gaps wired, cycle-proven 0716b):**
-- **MaidenName (C)** — was `Middle ` (DEAD, 3 stray values preserved into CitizenBio). Repurposed S321 Mike-direct: GC-spouse promotion (`bondEngine.js` `setC('MaidenName', pick.last)`) keeps the spouse's birth surname so heritage survives marriage. RECORD-by-design until heritage scoring consumes it. Header renamed on sandbox; live rename rides the engine.60/61 push window (SCHEMA_HEADERS regen then).
+- **MaidenName (C)** — was `Middle ` (DEAD, 3 stray values preserved into CitizenBio). Repurposed S321 Mike-direct: GC-spouse promotion (`bondEngine.js` `setC('MaidenName', pick.last)`) keeps the spouse's birth surname so heritage survives marriage. RECORD-by-design until heritage scoring consumes it. Header renamed on sandbox AND live (S321 deploy window); SCHEMA_HEADERS regen'd from live same window.
 - **CareerMobility (AJ)** — CAUSAL. First reader: `runCareerEngine.js` `maybeTransition_` — stagnant citizens roll shift/lateral at 1.25× (declining 1.4×), applied before the physics clamps. One-cycle lag by phase order.
 - **MigrationReason/Destination/MigratedCycle (AN–AP)** — CAUSAL. First reader: `processSettledInCheck_` (`migrationTrackingEngine.js`) — 10 cycles after a move, the verdict line ("the move worked" / "same problems, new address") is decided by reason-appropriate physics (cost moves judged on landing-hood housingPressure, opportunity moves on trajectory). Proven C119: Eric Taveras, exactly the predicted citizen.
 - **ReturnedCycle (AQ)** — still DEAD. No cycle-path writer or reader (legacy — no writer since exit states removed S313). Kill candidate at next schema cleanup (explicit-go).
@@ -156,7 +156,7 @@ Every column is a data point in someone's life. This maps who writes each column
 |-----|---|--------|-------------|---------|---------|--------------|
 | A | 1 | POPID | `POP-00001` format. Unique. Never reuse. | processIntakeV3, integration scripts | Universal key — everything reads this | **CAUSAL** — `generateGameModeMicroEvents.js:502` `getCitizenDialBands_` lookup |
 | B | 2 | First | Text | processIntakeV3, integration scripts | All event generators, buildDeskPackets, display | RECORD-by-design (display) |
-| C | 3 | MaidenName | Birth surname (repurposed S321; was `Middle `) | bondEngine GC-spouse promotion (`setC('MaidenName', pick.last)`) | heritage scoring (future) | **RECORD-by-design** — keeps the birth-line after marriage; sandbox header renamed S321, live rename at push window |
+| C | 3 | MaidenName | Birth surname (repurposed S321; was `Middle `) | bondEngine GC-spouse promotion (`setC('MaidenName', pick.last)`) | heritage scoring (future) | **RECORD-by-design** — keeps the birth-line after marriage; header renamed both sheets S321 |
 | D | 4 | Last | Text | processIntakeV3, integration scripts | All event generators, buildDeskPackets, display | RECORD-by-design (display) |
 | E | 5 | OriginGame | Text (source game/integration) | Integration scripts | — | **CAUSAL** — `generateGameModeMicroEvents.js:363` MLB check routes event pool |
 
@@ -184,7 +184,7 @@ Every column is a data point in someone's life. This maps who writes each column
 | Col | # | Header | Valid Values | Writers | Readers | S321 Verdict |
 |-----|---|--------|-------------|---------|---------|--------------|
 | O | 15 | LifeHistory | Long text — accumulated life events | All event generators (append each cycle), compressLifeHistory | buildDeskPackets, queryLedger, citizenContextBuilder, enrichCitizenProfiles | **CAUSAL** (S321 corrects the raw A–O auditor's RECORD call — see §Column Wiring) — `educationCareerEngine.js` `settleAdulthood_` gates the fire-once 18th-birthday settlement on `indexOf('[Adulthood]')`; `generationalWealthEngine.js` `processMoneyLoop_` checks `'crossed six figures'` once-only milestone; `deriveEducationLevels_` checks `indexOf('Graduation')`; `calculateCitizenIncomes_` extracts income band via `extractIncomeBand_` |
-| P | 16 | CreatedAt | ISO timestamp | processIntakeV3 | — | RECORD-by-design (timestamp) |
+| P | 16 | SpouseId | 'POP-NNNNN First Last' (ID + name) | bondEngine `marryCitizens_` (both spouses) | spouse-drip tooling | **RECORD** (S321 regen caught live rename CreatedAt→SpouseId — the `marryCitizens_` 'prod no-ops until rollout rename' guard is now live-active; full verdict next audit) |
 | Q | 17 | Last Updated | ISO timestamp | Engine orchestrator | — | RECORD-by-design (timestamp) |
 | R | 18 | TraitProfile | `Archetype:X\|Mods:a,b\|social:0.7\|...\|V:1.5\|Updated:cNN` | compressLifeHistory v1.5 (Phase 9), integrateAthletes | generateCitizensEvents v2.8 (archetype weights, tone, motifs), buildDeskPackets (voice cards) | **CAUSAL** — `generateCitizensEvents.js:371-407` archetype weights event pools 1.3-1.4x; `storyHook.js:1214` persona match; derived from DialState by `compressLifeHistory.js:426` |
 | S | 19 | UsageCount | Integer | processIntakeV3, processAdvancementIntake | — | **CAUSAL** — `generateCitizensEvents.js:130` + `:2083` — UsageCount >= 8 gates PUBLIC_FIGURE_CAP + fame-recognition events |

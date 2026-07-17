@@ -980,8 +980,14 @@
 
 - **eduRank_(v)**
 
-- **settleAdulthood_(ctx, cycle, rng)**
-  Sheets: Household_Ledger
+- **classifySettleSector_(sector)** *(engine.62 — sync with classifySectorToIndustry_ in runCareerEngine_)*
+
+- **buildSettleBizPool_(ctx)** *(engine.62 — lazy live pool; null on read failure)*
+  Sheets: Business_Ledger
+
+- **settleAdulthood_(ctx, cycle, rng)** *(engine.62: also writes EconomicProfileKey + EmployerBizId, registers hire in S.careerSignals.businessDeltas)*
+  Reads: S.careerSignals
+  Sheets: Household_Ledger, Business_Ledger (via buildSettleBizPool_)
 
 - **checkSchoolQuality_(ss, ctx, cycle)**
   Writes: S.storyHooks

@@ -514,6 +514,68 @@ var ADULT_START_BANDS = {
   }
 };
 
+// engine.62 (S322): settlement employer wire.
+// EconomicProfileKey: canonical economic_parameters.json role where one exists,
+// else the RoleType itself — either way non-empty, which is the gate that stops
+// generationalWealthEngine.calculateCitizenIncomes_ from re-deriving a settled
+// 18-year-old's income on later cycles (same contract applyEconomicProfiles.js
+// seeds) and lets runCareerEngine adjust income on transitions.
+var SETTLE_ECON_KEYS = {
+  'Biotech Lab Assistant':   'Medical Lab Technician',
+  'Junior Accountant':       'Accountant / CPA',
+  'Civic Program Assistant': 'City Council Aide',
+  'Research Assistant':      'Medical Lab Technician',
+  'Paralegal':               'Municipal Court Clerk',
+  'Smart Grid Trainee':      'Smart Grid Technician',
+  'Apprentice Electrician':  'Electrician',
+  'Nurse Aide':              'Home Health Aide'
+};
+
+// Industry bucket per settlement role — drives the employer draw. Default 'service'.
+var SETTLE_INDUSTRY = {
+  'Biotech Lab Assistant': 'tech', 'Research Assistant': 'tech',
+  'Civic Program Assistant': 'public', 'Paralegal': 'public',
+  'Smart Grid Trainee': 'public', 'Nurse Aide': 'public'
+};
+
+// Sector → industry classifier. MUST stay in sync with classifySectorToIndustry_
+// inside runCareerEngine_ (function-scoped there, so not callable from this file).
+function classifySettleSector_(sector) {
+  var s = String(sector || '').toLowerCase();
+  if (/tech|software|cloud|\bai\b|analytics|platform|agent|biotech|intelligence|coworking|venture/.test(s)) return 'tech';
+  if (/media|journal|gallery|entertainment|nightlife|music|design|architect|arts/.test(s)) return 'creative';
+  if (/public|municipal|government|transit|utilit|civic|education|healthcare|legal|judicial|safety|\bport\b|logistic|faith|community|housing|social/.test(s)) return 'public';
+  return 'service';
+}
+
+// Live Business_Ledger pool by industry — same shape runCareerEngine builds.
+// Returns null on read failure; caller then skips the employer write (blank
+// EmployerBizId is the pre-wire status quo, never a thrown cycle).
+function buildSettleBizPool_(ctx) {
+  try {
+    var bizSheet = ctx.ss ? ctx.ss.getSheetByName('Business_Ledger') : null;
+    if (!bizSheet) return null;
+    var bizData = bizSheet.getDataRange().getValues();
+    if (bizData.length < 2) return null;
+    var bh = bizData[0], bId = -1, bSector = -1;
+    for (var c = 0; c < bh.length; c++) {
+      var h = String(bh[c]).trim();
+      if (h === 'BIZ_ID') bId = c;
+      if (h === 'Sector') bSector = c;
+    }
+    if (bId < 0 || bSector < 0) return null;
+    var pools = { tech: [], service: [], public: [], creative: [] };
+    for (var r = 1; r < bizData.length; r++) {
+      var id = String(bizData[r][bId] || '').trim();
+      if (id) pools[classifySettleSector_(bizData[r][bSector])].push(id);
+    }
+    return pools;
+  } catch (e) {
+    Logger.log('buildSettleBizPool_: Business_Ledger read failed (' + e.message + ') — settlement employer skipped');
+    return null;
+  }
+}
+
 // Education rank shared by the settlement draw and career advancement.
 // Accepts both live-ledger spellings (bachelors/masters/doctorate) and the
 // engine constants (bachelor/graduate) — the ledger predominantly holds the
@@ -534,7 +596,7 @@ function settleAdulthood_(ctx, cycle, rng) {
   var iPop = idx('POPID'), iBirth = idx('BirthYear'), iLife = idx('LifeHistory'),
       iStatus = idx('Status'), iHH = idx('HouseholdId'), iSQ = idx('SchoolQuality'),
       iParents = idx('ParentIds'), iEdu = idx('EducationLevel'), iRole = idx('RoleType'),
-      iInc = idx('Income'), iEcon = idx('EconomicProfileKey');
+      iInc = idx('Income'), iEcon = idx('EconomicProfileKey'), iEmployer = idx('EmployerBizId');
   if (iBirth < 0 || iLife < 0 || iEdu < 0 || iRole < 0 || iInc < 0) return results;
 
   var simYear = 2040 + Math.floor(cycle / 52);
@@ -562,6 +624,7 @@ function settleAdulthood_(ctx, cycle, rng) {
   }
 
   var diag = 0;
+  var bizPool; // engine.62: lazy — Business_Ledger read only on cycles that settle someone
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
     if (!row || !Array.isArray(row)) continue;
@@ -598,6 +661,32 @@ function settleAdulthood_(ctx, cycle, rng) {
     row[iEdu] = (band === 'rough' && rng() < 0.15) ? 'hs-dropout' : b.edu;
     row[iRole] = b.roles[Math.floor(rng() * b.roles.length)];
     row[iInc] = Math.round((b.incomeMin + rng() * (b.incomeMax - b.incomeMin)) / 100) * 100;
+
+    // engine.62 (S322): employer wire — first job gets an econ key + employer.
+    // Without the key, calculateCitizenIncomes_ re-derives this income next
+    // cycle (no "managed externally" signal); without the employer, the
+    // citizen works nowhere and the business rosters never see the hire.
+    if (iEcon >= 0) row[iEcon] = SETTLE_ECON_KEYS[row[iRole]] || row[iRole];
+    var settledBiz = '';
+    if (iEmployer >= 0) {
+      if (bizPool === undefined) bizPool = buildSettleBizPool_(ctx);
+      if (bizPool) {
+        var ind = SETTLE_INDUSTRY[row[iRole]] || 'service';
+        var pool = (bizPool[ind] && bizPool[ind].length) ? bizPool[ind] : bizPool.service;
+        if (pool && pool.length) {
+          settledBiz = pool[Math.floor(rng() * pool.length)];
+          row[iEmployer] = settledBiz;
+          // Register the hire so Phase-6 ripples see it (career engine owns
+          // the structure; it ran earlier in Phase 5, so it exists by now).
+          var cs = ctx.summary && ctx.summary.careerSignals;
+          if (cs && cs.businessDeltas) {
+            if (!cs.businessDeltas[settledBiz]) cs.businessDeltas[settledBiz] = { gained: 0, lost: 0 };
+            cs.businessDeltas[settledBiz].gained += 1;
+          }
+        }
+      }
+    }
+
     row[iLife] = (life ? life + '\n' : '') +
       stamp + ' — [Adulthood] ' + b.line + ' — ' + row[iRole];
 
@@ -609,7 +698,9 @@ function settleAdulthood_(ctx, cycle, rng) {
       Logger.log('ENGINE60_T4: ' + (iPop >= 0 ? row[iPop] : 'row' + r) +
         ' hhInc=' + hhInc + ' sq=' + sq + ' parentRank=' + parentRank +
         ' total=' + Math.round(total * 100) / 100 + ' -> ' + band +
-        ' (' + row[iRole] + ' @ ' + row[iInc] + ')');
+        ' (' + row[iRole] + ' @ ' + row[iInc] +
+        ' key=' + (iEcon >= 0 ? row[iEcon] : 'n/a') +
+        ' biz=' + (settledBiz || 'none') + ')');
       diag++;
     }
   }

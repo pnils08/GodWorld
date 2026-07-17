@@ -24,6 +24,7 @@ const SHEET_ID = sheetIdArg ? sheetIdArg.split('=')[1]
 if (!SHEET_ID) { console.error('--sheet-id required'); process.exit(1); }
 process.env.GODWORLD_SHEET_ID = SHEET_ID;
 const sheets = require('/root/GodWorld/lib/sheets.js');
+const cd = require('/root/GodWorld/lib/citizenDerivation.js'); // S322 — mint with derived profile, not blanks
 
 const APPLY = process.argv.includes('--apply');
 const dripArg = process.argv.indexOf('--drip');
@@ -267,6 +268,20 @@ const RENT = { 'West Oakland': 1400, 'Fruitvale': 1500, 'Downtown': 2100, 'Uptow
         set(iRole, pick.occ || 'Service worker'); set(iClock, 'ENGINE'); set(iStatus, 'Active');
         set(iBirth, AGE_ANCHOR - pick.age); set(iCity, 'Oakland'); set(iNbhd, kidNbhd);
         set(iMar, 'married'); set(iInc, GENERIC_PARENT_SALARY); set(iGen, pick.sex);
+        // S322: birth surname survives the promotion (engine.61 convention) —
+        // both parents take the kid's surname, GC family name goes to MaidenName.
+        if (pick.last && String(pick.last).trim() !== last) set(iMaiden, String(pick.last).trim());
+        // S322: derived economic profile (C104 exposed drip mints landing with
+        // no Debt/Stage/Years/Edu/NetWorth — per-fire truing drift class).
+        const dSeed = `${pick.first}|${last}|${id}`;
+        const dRetired = pick.age >= 65;
+        let dYears = cd.deriveYearsInCareer(dSeed, pick.age, dRetired ? 'retired' : '');
+        if (dYears > Math.max(0, pick.age - 18)) dYears = Math.max(0, pick.age - 18);
+        set(si('YearsInCareer'), dYears);
+        set(si('CareerStage'), dRetired ? 'retired' : (dYears >= 5 ? 'mid-career' : 'entry-level'));
+        set(si('EducationLevel'), cd.deriveEducationLevel(dSeed, kidNbhd, pick.age, null));
+        set(si('DebtLevel'), cd.deriveDebtLevel(dSeed, pick.age, GENERIC_PARENT_SALARY));
+        set(si('NetWorth'), cd.deriveNetWorth(dSeed, pick.age, GENERIC_PARENT_SALARY, dRetired ? 'retired' : ''));
         set(iSp, spId + ' ' + spName); set(iHH, t.hid);
         if (iCh >= 0) set(iCh, JSON.stringify(kids));
         if (iNum >= 0) set(iNum, kids.length);

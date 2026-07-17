@@ -1908,6 +1908,19 @@ function processGCMarriageLottery_(ctx) {
     setC('Neighborhood', P.hood); setC('MaritalStatus', 'single'); // marryCitizens_ flips it
     setC('Income', GC_SPOUSE_INCOME); setC('Gender', wantSex);
     setC('UsageCount', 0);
+    // engine.62b (S322): mint with a derived economic profile, not blanks —
+    // C104 exposed lottery mints landing with no Debt/Stage/Years/Edu/NetWorth
+    // (per-fire truing drift). Same utilities/citizenDerivation.js algorithms
+    // the intake promotion path uses; seed convention First|Last|POPID.
+    var dSeed = pick.first + '|' + last + '|' + spId;
+    var dRetired = pick.age >= 65;
+    var dYears = deriveYearsInCareer_(dSeed, pick.age, dRetired ? 'retired' : '');
+    if (dYears > Math.max(0, pick.age - 18)) dYears = Math.max(0, pick.age - 18);
+    setC('YearsInCareer', dYears);
+    setC('CareerStage', dRetired ? 'retired' : (dYears >= 5 ? 'mid-career' : 'entry-level'));
+    setC('EducationLevel', deriveEducationLevel_(dSeed, P.hood, pick.age, null));
+    setC('DebtLevel', deriveDebtLevel_(dSeed, pick.age, GC_SPOUSE_INCOME));
+    setC('NetWorth', deriveNetWorth_(dSeed, pick.age, GC_SPOUSE_INCOME, dRetired ? 'retired' : ''));
     setC('LifeHistory', bondInWorldStamp_(cycle) + ' — [Family] The record catches up: met ' + P.name + ' in ' + P.hood + ', and stayed.');
     ctx.ledger.rows.push(newRow);
     ctx.ledger.dirty = true;

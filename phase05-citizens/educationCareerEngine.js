@@ -290,8 +290,12 @@ function updateCareerProgression_(ctx, cycle, rng) {
 
     // Update years in career — only working-age adults accrue (S318 age
     // gate; students banked career years for cycles, e.g. age 10 with 36y).
-    if (age >= 22) {
-      yearsInCareer += 0.5; // ~6 months per cycle
+    // engine.62b (S322): +0.5 every 26 cycles = +1 career-year per sim-year
+    // (calendar runs 52 cycles/year). The old unconditional +0.5/cycle paid
+    // ~26 career-years per sim-year — the machine behind the age-impossible
+    // YearsInCareer fossils (112 trued S322; one C104 fire minted 10 more).
+    if (age >= 22 && cycle > 0 && cycle % 26 === 0) {
+      yearsInCareer += 0.5;
       row[iYearsInCareer] = Math.round(yearsInCareer * 10) / 10;
     }
 

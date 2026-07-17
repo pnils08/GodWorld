@@ -46,7 +46,8 @@ const RENT = { 'West Oakland': 1400, 'Fruitvale': 1500, 'Downtown': 2100, 'Uptow
         iBirth = si('BirthYear'), iCity = si('OrginCity'), iNbhd = si('Neighborhood'),
         iMar = si('MaritalStatus'), iInc = si('Income'), iGen = si('Gender'),
         iSp = si('SpouseId'), iLife = si('LifeHistory'), iHH = si('HouseholdId'),
-        iPar = si('ParentIds'), iCh = si('ChildrenIds'), iNum = si('NumChildren');
+        iPar = si('ParentIds'), iCh = si('ChildrenIds'), iNum = si('NumChildren'),
+        iMaiden = si('MaidenName'); // S321 — birth surname survives the promotion
   [iPop, iL, iBirth, iHH, iPar, iSp].forEach(x => { if (x < 0) throw new Error('SL column missing'); });
 
   const hh = await sheets.getRawSheetData('Household_Ledger');
@@ -198,6 +199,25 @@ const RENT = { 'West Oakland': 1400, 'Fruitvale': 1500, 'Downtown': 2100, 'Uptow
   }
   console.log(`  link pass: ${Object.keys(byAdult).length} parents | spouse-drip eligible: ${spouseDripPool.length}`);
 
+  // S321: re-derive the pool from ALREADY-linked parents. S320 ran the link
+  // pass and counted 35 eligible — but the pool was only built from same-run
+  // links, so every later run reported 0 while the families sat in the data.
+  // Ledger is truth: married/partnered + ChildrenIds non-empty + no SpouseId.
+  const inPool = new Set(spouseDripPool.map(t => String(t.adult[iPop])));
+  for (const r of rows) {
+    if (!alive(r) || ageOf(r) < 18) continue;
+    if (inPool.has(String(r[iPop]))) continue;
+    const mar2 = String(r[iMar] || '').trim().toLowerCase();
+    if (mar2 !== 'married' && mar2 !== 'partnered') continue;
+    if (String(r[iSp] || '').trim()) continue;
+    let ch = []; try { ch = JSON.parse(r[iCh] || '[]'); } catch (e) { ch = []; }
+    if (!Array.isArray(ch) || !ch.length) continue;
+    const kids = ch.map(p => rowByPop[String(p).split(' ')[0]]).filter(Boolean).map(x => x.r);
+    if (!kids.length) continue;
+    spouseDripPool.push({ adult: r, kids, mar: mar2 });
+  }
+  console.log(`  re-derived (already-linked parents): ${spouseDripPool.length} total eligible`);
+
   // ── drip: promote both parents for up to N orphan families ──
   const newSLRows = [], regRows = [], genUpdates = [];
   let dripped = 0;
@@ -212,7 +232,7 @@ const RENT = { 'West Oakland': 1400, 'Fruitvale': 1500, 'Downtown': 2100, 'Uptow
       if (String(r[gStat]).toLowerCase() !== 'active') return;
       const sx = (r[gSex] || '').toLowerCase(); if (sx !== 'male' && sx !== 'female') return;
       const a = Number(r[gAge]) || (Number(r[gBirth]) ? AGE_ANCHOR - Number(r[gBirth]) : 0);
-      pool.push({ k, first: r[gF], sex: sx, age: a, nbhd: r[gNbhd], occ: r[gOcc], used: false });
+      pool.push({ k, first: r[gF], last: r[gL], sex: sx, age: a, nbhd: r[gNbhd], occ: r[gOcc], used: false });
     });
     let maxN = 0;
     rows.forEach(r => { const x = /^POP-(\d+)$/.exec(r[iPop] || ''); if (x && +x[1] > maxN) maxN = +x[1]; });
@@ -315,6 +335,7 @@ const RENT = { 'West Oakland': 1400, 'Fruitvale': 1500, 'Downtown': 2100, 'Uptow
       set(iRole, pick.occ || 'Service worker'); set(iClock, 'ENGINE'); set(iStatus, 'Active');
       set(iBirth, AGE_ANCHOR - pick.age); set(iCity, 'Oakland'); set(iNbhd, nbhd);
       set(iMar, mar); set(iInc, GENERIC_PARENT_SALARY); set(iGen, pick.sex);
+      set(iMaiden, String(pick.last || '').trim()); // S321 heritage: GC family name kept
       set(iSp, adult[iPop] + ' ' + parentName); set(iHH, hid2);
       if (iCh >= 0) set(iCh, JSON.stringify(kidIds));
       if (iNum >= 0) set(iNum, kidIds.length);

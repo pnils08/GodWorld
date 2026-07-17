@@ -1119,6 +1119,15 @@
 
 - **trackHomeOwnership_(ss, ctx, cycle)**
 
+- **heritageTierFor_(score)** *(engine.63 — Founding/Established/Prominent/Dynasty at 0/50/150/350)*
+
+- **heritageRank_(tierName)** *(engine.63)*
+
+- **updateHeritage_(ss, ctx, cycle)** *(engine.63 S322 — family lines: kids inherit LineageId, surname-taking spouses join, line-less married pairs found; per-cycle score accrual from NW/generations/civic/fame/biz/homes; tier promotions write [Heritage] LifeHistory lines + Prominent/Dynasty story hooks)*
+  Reads: S.cycleId
+  Writes: S.heritage, S.storyHooks
+  Sheets: Heritage_Ledger (own tracking sheet, full-table rewrite)
+
 ### householdFormationEngine.js
 - **processHouseholdFormation_(ctx)**
   Writes: S.householdFormation, S.storyHooks

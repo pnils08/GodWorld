@@ -176,6 +176,10 @@ function processGenerationalWealth_(ctx) {
   var homeResults = trackHomeOwnership_(ss, ctx, cycle);
   results.homesPurchased = homeResults.purchased;
 
+  // Step 7 (engine.63 S322): heritage — family lines join/found/score/ascend.
+  var heritageResults = updateHeritage_(ss, ctx, cycle);
+  results.heritage = heritageResults;
+
   Logger.log(
     'processGenerationalWealth_ v2.1: Complete. ' +
     'Income: ' + results.incomeUpdated + ', ' +
@@ -1012,4 +1016,270 @@ function trackHomeOwnership_(ss, ctx, cycle) {
   // Would track home purchases based on wealth + savings
   // For v1.0, this is a placeholder
   return { purchased: 0 };
+}
+
+
+// ════════════════════════════════════════════════════════════════════════════
+// engine.63 (S322) — HERITAGE: FAMILY LINES
+// Names display, NUMBERS track (Mike-direct S322). Heritage_Ledger holds one
+// row per family line keyed LIN-##### — the id survives marriages, moves, and
+// household dissolutions (Household_Ledger rows die with DissolvedCycle; a
+// line does not). Membership grows through lived events only: kids inherit a
+// parent's line, a spouse joins the line whose surname they took (MaidenName
+// keeps their birth line), a married line-less pair founds a new line. Score
+// is PHYSICS — accrued each cycle from real ledger state (wealth, generations,
+// civic roles, fame, businesses, homes); tiers promote at thresholds; which
+// lines become dynasties EMERGES, never assigned. Seed: heritage_seed.js (T1).
+// Heritage_Ledger is this engine's own tracking sheet (Phase 5 Tier-5 class);
+// full-table rewrite is safe — no later phase reads it within the cycle.
+// ════════════════════════════════════════════════════════════════════════════
+
+var HERITAGE_TIERS = [
+  { name: 'Founding', min: 0 },
+  { name: 'Established', min: 50 },
+  { name: 'Prominent', min: 150 },
+  { name: 'Dynasty', min: 350 }
+];
+
+function heritageTierFor_(score) {
+  var t = HERITAGE_TIERS[0].name;
+  for (var i = 0; i < HERITAGE_TIERS.length; i++) {
+    if (score >= HERITAGE_TIERS[i].min) t = HERITAGE_TIERS[i].name;
+  }
+  return t;
+}
+
+function heritageRank_(tierName) {
+  for (var i = 0; i < HERITAGE_TIERS.length; i++) {
+    if (HERITAGE_TIERS[i].name === tierName) return i;
+  }
+  return 0;
+}
+
+function updateHeritage_(ss, ctx, cycle) {
+  var results = { lines: 0, joined: 0, founded: 0, promoted: 0 };
+  var hlSheet = ss.getSheetByName('Heritage_Ledger');
+  if (!hlSheet) return results; // T1 seed hasn't run on this spreadsheet — quiet no-op
+
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  var idx = function(n) { return header.indexOf(n); };
+  var iPop = idx('POPID'), iLast = idx('Last'), iLin = idx('LineageId'),
+      iStatus = idx('Status'), iSpouse = idx('SpouseId'), iParents = idx('ParentIds'),
+      iChildren = idx('ChildrenIds'), iNW = idx('NetWorth'), iCiv = idx('CIV (y/n)'),
+      iUsage = idx('UsageCount'), iBirth = idx('BirthYear'), iLife = idx('LifeHistory');
+  if (iPop < 0 || iLin < 0) return results;
+
+  var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
+  var popIdOf = function(v) { var m = String(v || '').match(/POP-\d+/); return m ? m[0] : null; };
+
+  var rowByPop = {};
+  for (var r0 = 0; r0 < rows.length; r0++) {
+    if (rows[r0] && rows[r0][iPop]) rowByPop[String(rows[r0][iPop]).trim()] = rows[r0];
+  }
+
+  // ── Heritage_Ledger snapshot ──
+  var hv = hlSheet.getDataRange().getValues();
+  var hh = hv[0];
+  var hIdx = function(n) { return hh.indexOf(n); };
+  var hLin = hIdx('LineageId'), hName = hIdx('FamilyName'), hFounder = hIdx('FounderPopId'),
+      hFounded = hIdx('FoundedCycle'), hGen = hIdx('Generations'), hLiving = hIdx('LivingMembers'),
+      hMem = hIdx('MembersList'), hScore = hIdx('HeritageScore'), hTier = hIdx('HeritageTier'),
+      hNW = hIdx('TotalNetWorth'), hHomes = hIdx('HomesOwned'), hBiz = hIdx('BusinessesOwned'),
+      hCiv = hIdx('CivicMembers'), hFame = hIdx('FameMembers'), hUpd = hIdx('LastUpdated');
+
+  var lines = {}; // linId -> {row array from hv}
+  var maxLin = 0;
+  for (var r1 = 1; r1 < hv.length; r1++) {
+    var lid = String(hv[r1][hLin] || '').trim();
+    if (!lid) continue;
+    lines[lid] = hv[r1];
+    var lm = /^LIN-(\d+)$/.exec(lid);
+    if (lm && +lm[1] > maxLin) maxLin = +lm[1];
+  }
+
+  // ── membership growth: lived events, never re-derivation ──
+  for (var r2 = 0; r2 < rows.length; r2++) {
+    var row = rows[r2];
+    if (!row || !row[iPop]) continue;
+    if (String(row[iStatus] || 'active').toLowerCase() === 'deceased') continue;
+    if (String(row[iLin] || '').trim()) continue;
+
+    // Kid inherits: any parent already in a line.
+    var joined = false;
+    var pids = [];
+    try { pids = JSON.parse(String(row[iParents] || '[]')); } catch (e) { pids = []; }
+    for (var k = 0; k < pids.length && !joined; k++) {
+      var pr = rowByPop[popIdOf(pids[k])];
+      if (pr && String(pr[iLin] || '').trim() && lines[String(pr[iLin]).trim()]) {
+        row[iLin] = String(pr[iLin]).trim();
+        joined = true;
+      }
+    }
+    // Spouse joins the line whose surname they took (name follows the house;
+    // their MaidenName keeps the birth line for later chains).
+    if (!joined) {
+      var sp = rowByPop[popIdOf(row[iSpouse])];
+      if (sp && String(sp[iLin] || '').trim() && lines[String(sp[iLin]).trim()] &&
+          String(sp[iLast] || '').trim() === String(row[iLast] || '').trim()) {
+        row[iLin] = String(sp[iLin]).trim();
+        joined = true;
+      }
+    }
+    if (joined) { results.joined++; ctx.ledger.dirty = true; }
+  }
+
+  // ── founding: a married line-less pair with a shared surname founds a line ──
+  for (var r3 = 0; r3 < rows.length; r3++) {
+    var fRow = rows[r3];
+    if (!fRow || !fRow[iPop]) continue;
+    if (String(fRow[iStatus] || 'active').toLowerCase() === 'deceased') continue;
+    if (String(fRow[iLin] || '').trim()) continue;
+    var fSp = rowByPop[popIdOf(fRow[iSpouse])];
+    if (!fSp || String(fSp[iLin] || '').trim()) continue;
+    if (String(fSp[iStatus] || 'active').toLowerCase() === 'deceased') continue;
+    var surname = String(fRow[iLast] || '').trim();
+    if (!surname || surname !== String(fSp[iLast] || '').trim()) continue;
+
+    var newLin = 'LIN-' + String(++maxLin).padStart(5, '0');
+    var aBirth = Number(fRow[iBirth]) || 9999, bBirth = Number(fSp[iBirth]) || 9999;
+    var founder = (aBirth < bBirth || (aBirth === bBirth && String(fRow[iPop]) < String(fSp[iPop]))) ?
+      String(fRow[iPop]).trim() : String(fSp[iPop]).trim();
+    fRow[iLin] = newLin;
+    fSp[iLin] = newLin;
+    ctx.ledger.dirty = true;
+    var newHl = new Array(hh.length).fill('');
+    newHl[hLin] = newLin; newHl[hName] = surname; newHl[hFounder] = founder;
+    newHl[hFounded] = cycle; newHl[hGen] = 1; newHl[hScore] = 0;
+    newHl[hTier] = 'Founding'; newHl[hBiz] = '[]'; newHl[hUpd] = cycle;
+    lines[newLin] = newHl;
+    results.founded++;
+  }
+
+  // ── aggregates + score accrual + tier promotion ──
+  var membersByLine = {};
+  for (var r4 = 0; r4 < rows.length; r4++) {
+    var mRow = rows[r4];
+    if (!mRow || !mRow[iPop]) continue;
+    var ml = String(mRow[iLin] || '').trim();
+    if (ml && lines[ml]) (membersByLine[ml] = membersByLine[ml] || []).push(mRow);
+  }
+
+  var outRows = [];
+  for (var linId in lines) {
+    if (!lines.hasOwnProperty(linId)) continue;
+    var hl = lines[linId];
+    var members = membersByLine[linId] || [];
+    var living = 0, totalNW = 0, civ = 0, fame = 0;
+    var memberIds = [];
+    var memberSet = {};
+    for (var m2 = 0; m2 < members.length; m2++) {
+      var mr = members[m2];
+      var mid = String(mr[iPop]).trim();
+      memberIds.push(mid);
+      memberSet[mid] = true;
+      if (String(mr[iStatus] || 'active').toLowerCase() === 'deceased') continue;
+      living++;
+      totalNW += Number(String(mr[iNW]).replace(/[$,\s]/g, '')) || 0;
+      if (String(mr[iCiv] || '').toLowerCase() === 'yes') civ++;
+      if ((Number(mr[iUsage]) || 0) >= 5) fame++;
+    }
+    // Generations: longest parent->child chain inside the line.
+    var genMemo = {};
+    var genDepth = function(pid, seen) {
+      if (genMemo[pid] !== undefined) return genMemo[pid];
+      if (seen[pid]) return 1;
+      seen[pid] = true;
+      var kids = [];
+      try { kids = JSON.parse(String((rowByPop[pid] || [])[iChildren] || '[]')); } catch (e) { kids = []; }
+      var best = 0;
+      for (var g = 0; g < kids.length; g++) {
+        var kid = popIdOf(kids[g]);
+        if (kid && memberSet[kid]) best = Math.max(best, genDepth(kid, seen));
+      }
+      delete seen[pid];
+      genMemo[pid] = 1 + best;
+      return genMemo[pid];
+    };
+    var generations = 1;
+    for (var m3 = 0; m3 < memberIds.length; m3++) {
+      generations = Math.max(generations, genDepth(memberIds[m3], {}));
+    }
+
+    var homes = Number(hl[hHomes]) || 0; // written by home-purchase (T4); carried until then
+    var bizList = [];
+    try { bizList = JSON.parse(String(hl[hBiz] || '[]')); } catch (e) { bizList = []; }
+
+    // Score accrual — physics per cycle, no caps on the total (SIM_DOCTRINE):
+    // wealth compounds (capped per-cycle contribution, not per-line total),
+    // depth of the line, civic presence, fame, owned assets.
+    var pts = Math.min(4, totalNW / 500000) +
+      Math.max(0, generations - 1) +
+      Math.min(3, civ) + Math.min(3, fame) +
+      (bizList.length * 2) + homes;
+    var score = (Number(hl[hScore]) || 0) + Math.round(pts * 10) / 10;
+    var oldTier = String(hl[hTier] || 'Founding');
+    var newTier = heritageTierFor_(score);
+
+    hl[hName] = hl[hName] || '';
+    hl[hGen] = generations;
+    hl[hLiving] = living;
+    hl[hMem] = JSON.stringify(memberIds.sort());
+    hl[hScore] = Math.round(score * 10) / 10;
+    hl[hTier] = newTier;
+    hl[hNW] = totalNW;
+    hl[hCiv] = civ;
+    hl[hFame] = fame;
+    hl[hUpd] = cycle;
+
+    // Promotion is an event the family lives — one line per living member,
+    // once per promotion (tier changes are rare by construction).
+    if (heritageRank_(newTier) > heritageRank_(oldTier)) {
+      results.promoted++;
+      var famName = String(hl[hName] || linId);
+      var promoLine = newTier === 'Dynasty' ?
+        '[Heritage] the ' + famName + ' name now belongs to Oakland itself — a dynasty by any measure' :
+        newTier === 'Prominent' ?
+        '[Heritage] doors open when the ' + famName + ' name is spoken — the line is prominent now' :
+        '[Heritage] the ' + famName + ' line has roots deep enough to notice — established';
+      for (var m4 = 0; m4 < members.length; m4++) {
+        var pRow = members[m4];
+        if (String(pRow[iStatus] || 'active').toLowerCase() === 'deceased') continue;
+        var lifeStr = String(pRow[iLife] || '');
+        if (lifeStr.indexOf(stamp + ' — [Heritage]') >= 0) continue;
+        pRow[iLife] = (lifeStr ? lifeStr + '\n' : '') + stamp + ' — ' + promoLine;
+      }
+      ctx.ledger.dirty = true;
+      if (heritageRank_(newTier) >= 2) { // Prominent+ reaches the newsroom
+        ctx.summary.storyHooks = ctx.summary.storyHooks || [];
+        ctx.summary.storyHooks.push({
+          hookType: newTier === 'Dynasty' ? 'HERITAGE_DYNASTY' : 'HERITAGE_PROMINENT',
+          severity: newTier === 'Dynasty' ? 5 : 4,
+          priority: newTier === 'Dynasty' ? 5 : 4,
+          description: 'The ' + String(hl[hName]) + ' family line (' + linId + ') reached ' + newTier +
+            ' — ' + living + ' living members across ' + generations + ' generations, $' + totalNW + ' held',
+          cycleGenerated: cycle, neighborhood: '', domain: 'COMMUNITY',
+          text: 'The ' + String(hl[hName]) + ' line reached ' + newTier
+        });
+      }
+    }
+    outRows.push(hl);
+    results.lines++;
+  }
+
+  // Deterministic order: by LIN id. Full-table rewrite (own tracking sheet).
+  outRows.sort(function(a, b) { return String(a[hLin]) < String(b[hLin]) ? -1 : 1; });
+  if (outRows.length) {
+    hlSheet.getRange(2, 1, outRows.length, hh.length).setValues(outRows);
+  }
+
+  // Evening engines / phase-8 consumers read the cycle's heritage signal here.
+  ctx.summary.heritage = {
+    lines: results.lines, joined: results.joined,
+    founded: results.founded, promoted: results.promoted
+  };
+
+  Logger.log('updateHeritage_ engine.63: lines ' + results.lines + ', joined ' + results.joined +
+    ', founded ' + results.founded + ', promoted ' + results.promoted);
+  return results;
 }

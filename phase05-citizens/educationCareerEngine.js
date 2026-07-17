@@ -666,6 +666,20 @@ function settleAdulthood_(ctx, cycle, rng) {
     row[iRole] = b.roles[Math.floor(rng() * b.roles.length)];
     row[iInc] = Math.round((b.incomeMin + rng() * (b.incomeMax - b.incomeMin)) / 100) * 100;
 
+    // engine.62b (S322): a settled 18-year-old starts adult money life —
+    // young-adult DebtLevel + starter NetWorth + years 0 + entry stage
+    // (C105 cohort landed with blanks; the truing detector flags them every
+    // New Year otherwise). Derivation lib, seed First|Last|POPID.
+    var sSeed = (iPop >= 0 ? String(row[iPop]) : 'row' + r);
+    sSeed = String(row[idx('First')] || '') + '|' + String(row[idx('Last')] || '') + '|' + sSeed;
+    var iDebt2 = idx('DebtLevel'), iNW2 = idx('NetWorth'), iYears2 = idx('YearsInCareer'), iStage2 = idx('CareerStage');
+    if (iDebt2 >= 0) row[iDebt2] = deriveDebtLevel_(sSeed, 18, row[iInc]);
+    if (iNW2 >= 0) row[iNW2] = deriveNetWorth_(sSeed, 18, row[iInc], '');
+    if (iYears2 >= 0) row[iYears2] = 0;
+    // 'student' matches the <22 stamp updateCareerProgression_ re-applies every
+    // cycle — writing 'entry-level' here would just flip-flop against it.
+    if (iStage2 >= 0) row[iStage2] = 'student';
+
     // engine.62 (S322): employer wire — first job gets an econ key + employer.
     // Without the key, calculateCitizenIncomes_ re-derives this income next
     // cycle (no "managed externally" signal); without the employer, the

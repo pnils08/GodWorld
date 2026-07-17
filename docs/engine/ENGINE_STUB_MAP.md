@@ -827,7 +827,7 @@
   Sheets: Relationship_Bonds
 
 ### checkForPromotions.js
-- **checkForPromotions_(ctx)**
+- **checkForPromotions_(ctx)** *(engine.62b: mints now carry a full derived profile — Income/Gender/Debt/Stage/Years/Edu/NetWorth via utilities/citizenDerivation; MaritalStatus 'single' by design)*
   Reads: S.cityDynamics, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.simYear, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventsGenerated, S.promotions, S.promotionsCount
   Config: ctx.config.cycleCount
@@ -985,7 +985,7 @@
 - **buildSettleBizPool_(ctx)** *(engine.62 — lazy live pool; null on read failure)*
   Sheets: Business_Ledger
 
-- **settleAdulthood_(ctx, cycle, rng)** *(engine.62: also writes EconomicProfileKey + EmployerBizId, registers hire in S.careerSignals.businessDeltas)*
+- **settleAdulthood_(ctx, cycle, rng)** *(engine.62: also writes EconomicProfileKey + EmployerBizId + DebtLevel + NetWorth + YearsInCareer(0) + CareerStage(student), registers hire in S.careerSignals.businessDeltas)*
   Reads: S.careerSignals
   Sheets: Household_Ledger, Business_Ledger (via buildSettleBizPool_)
 
@@ -1220,7 +1220,7 @@
 
 - **markUsageProcessed_(ctx, usageSheet, row1, col1, value)**
 
-- **processAdvancementIntake_(ctx)**
+- **processAdvancementIntake_(ctx)** *(engine.62b: promotion rows now also write CareerStage — lib enum mapped to engine enum; age from live sim-year, was hardcoded 2041)*
   Reads: S.cycleId, S.relationshipBonds
   Config: ctx.config.cycleCount
 

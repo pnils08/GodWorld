@@ -351,6 +351,19 @@ const RENT = { 'West Oakland': 1400, 'Fruitvale': 1500, 'Downtown': 2100, 'Uptow
       set(iBirth, AGE_ANCHOR - pick.age); set(iCity, 'Oakland'); set(iNbhd, nbhd);
       set(iMar, mar); set(iInc, GENERIC_PARENT_SALARY); set(iGen, pick.sex);
       set(iMaiden, String(pick.last || '').trim()); // S321 heritage: GC family name kept
+      // S322: derived economic profile — this second mint path had the same
+      // blank-profile gap as mk() (C105: POP-01059/60/61).
+      {
+        const dSeed = `${pick.first}|${last}|${spId}`;
+        const dRetired = pick.age >= 65;
+        let dYears = cd.deriveYearsInCareer(dSeed, pick.age, dRetired ? 'retired' : '');
+        if (dYears > Math.max(0, pick.age - 18)) dYears = Math.max(0, pick.age - 18);
+        set(si('YearsInCareer'), dYears);
+        set(si('CareerStage'), dRetired ? 'retired' : (dYears >= 5 ? 'mid-career' : 'entry-level'));
+        set(si('EducationLevel'), cd.deriveEducationLevel(dSeed, nbhd, pick.age, null));
+        set(si('DebtLevel'), cd.deriveDebtLevel(dSeed, pick.age, GENERIC_PARENT_SALARY));
+        set(si('NetWorth'), cd.deriveNetWorth(dSeed, pick.age, GENERIC_PARENT_SALARY, dRetired ? 'retired' : ''));
+      }
       set(iSp, adult[iPop] + ' ' + parentName); set(iHH, hid2);
       if (iCh >= 0) set(iCh, JSON.stringify(kidIds));
       if (iNum >= 0) set(iNum, kidIds.length);

@@ -72,6 +72,7 @@ function checkForPromotions_(ctx) {
   var gOcc = idxG("Occupation");
   var gEmer = idxG("EmergenceCount");
   var gStat = idxG("Status");
+  var gSex = idxG("Sex"); // engine.62b (S322) — carry GC sex through promotion
   // v2.3: Optional columns for emergence tracking
   var gEmergedCycle = idxG("EmergedCycle");
   var gEmergenceContext = idxG("EmergenceContext");
@@ -411,6 +412,29 @@ function checkForPromotions_(ctx) {
     if (iNeighborhood >= 0) {
       newRow[iNeighborhood] = neigh;
     }
+
+    // engine.62b (S322): derived economic profile at emergence — this path
+    // minted name+role+tier only; Income/Gender/Debt/Stage/Years/Edu/NetWorth
+    // landed blank (C105: POP-01057/01058). Same utilities/citizenDerivation
+    // algorithms the intake path uses; seed convention First|Last|POPID.
+    // MaritalStatus is 'single' by design, never derived-married — a married
+    // status without a SpouseId row would be a phantom marriage; the marriage
+    // market weds them organically (blank marital never enters the pool).
+    var dSeed = first + '|' + last + '|' + popId;
+    var dRetired = age >= 65;
+    var dIncome = lookupIncome_(occ);
+    var dYears = deriveYearsInCareer_(dSeed, age, dRetired ? 'retired' : '');
+    if (dYears > Math.max(0, age - 18)) dYears = Math.max(0, age - 18);
+    var setL = function(n, v) { var i9 = idxL(n); if (i9 >= 0) newRow[i9] = v; };
+    setL('Income', dIncome);
+    setL('YearsInCareer', dYears);
+    setL('CareerStage', age < 22 ? 'student' : (dRetired ? 'retired' : (dYears >= 5 ? 'mid-career' : 'entry-level')));
+    setL('EducationLevel', deriveEducationLevel_(dSeed, neigh, age, null));
+    setL('DebtLevel', deriveDebtLevel_(dSeed, age, dIncome));
+    setL('NetWorth', deriveNetWorth_(dSeed, age, dIncome, dRetired ? 'retired' : ''));
+    setL('MaritalStatus', 'single');
+    var gcSex = gSex >= 0 ? String(row[gSex] || '').toLowerCase() : '';
+    setL('Gender', (gcSex === 'male' || gcSex === 'female') ? gcSex : deriveGender_(dSeed, neigh));
 
     // ═══════════════════════════════════════════════════════════════════════
     // WORLD-AWARE LIFEHISTORY CONTEXT (v2.2)

@@ -617,7 +617,9 @@ function processAdvancementRows_(ctx, now, cycle) {
       var seed = first + '|' + last + '|' + newPopId;
       var rawBirthYear = (iBirthYear >= 0) ? Number(row[iBirthYear]) : NaN;
       var birthYear = (!isNaN(rawBirthYear) && rawBirthYear > 1900) ? rawBirthYear : 2003;
-      var age = 2041 - birthYear;
+      // S322: live sim-year (engine convention 2040 + cycle/52) — was hardcoded
+      // 2041, understating age by 1/year as the sim advances.
+      var age = (2040 + Math.floor(cycle / 52)) - birthYear;
       var rawNbhd = (iNeighborhood >= 0) ? String(row[iNeighborhood] || '').trim() : '';
       var profile = deriveCitizenProfile_(seed, age, rawNbhd, ledgerFreq, {
         roleTypeOverride: rawRole || null  // honor explicit intake RoleType if set
@@ -647,6 +649,14 @@ function processAdvancementRows_(ctx, now, cycle) {
       if (lNetWorth >= 0) newRow[lNetWorth] = profile.NetWorth;
       if (lMaritalStatus >= 0) newRow[lMaritalStatus] = profile.MaritalStatus;
       if (lNumChildren >= 0) newRow[lNumChildren] = profile.NumChildren;
+      // engine.62b (S322): CareerStage — the derivation lib predates the SL
+      // column (added S321) and only computes it inline; map its enum to the
+      // engine's (C106: POP-01062 landed stage-blank via this path).
+      var lCareerStage = findColByName_(ledgerHeaders, 'CareerStage');
+      if (lCareerStage >= 0) {
+        var stMap = { early: 'entry-level', mid: 'mid-career', senior: 'senior', retired: 'retired' };
+        newRow[lCareerStage] = age < 22 ? 'student' : (stMap[profile._careerStage] || 'entry-level');
+      }
       // Phase 42 §5.6 (impl #18): push new row to ctx.ledger.rows; Phase 10
       // consolidated commit auto-extends the sheet — no separate append intent.
       ledgerRows.push(newRow);

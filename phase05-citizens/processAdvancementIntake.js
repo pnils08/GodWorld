@@ -984,50 +984,48 @@ function checkFamilyMatchPromotions_(ctx, cycle, slots) {
 
   var claimed = {}; // targetPop claimed this cycle — one realization per citizen per cycle
 
+  // engine.66c (S324, Mike-direct — THE LOTTERY, his words): "a lottery grabs
+  // 2 and do they match or not." Each remaining cap slot spins two reels —
+  // ONE random GC citizen, ONE random open family slot — and tests THAT pair.
+  // No scanning the city for a home for the drawn citizen. Match = the rare
+  // chance of moments aligning (same hood, right sex, right age) and the
+  // moment lands. No match = nothing happens, and that is the normal cycle.
+  // Founded heritage lines pull the family reel slightly harder (the earned
+  // edge — becoming a heritage ledger is the game).
   for (var s = 0; s < slots; s++) {
-    if (!candidates.length) break;
+    if (!candidates.length || !openSlots.length) break;
 
+    // Reel 1: the citizen
     var pickIdx = Math.floor(rng() * candidates.length);
     var gRow = gData[candidates[pickIdx]];
     var candSex = gX >= 0 ? String(gRow[gX] || '').trim().toLowerCase() : '';
     var candBY = gB >= 0 ? (Number(gRow[gB]) || 0) : 0;
     if (!candBY && gA >= 0 && Number(gRow[gA]) > 0) candBY = 2041 - Number(gRow[gA]);
-    if (!candBY) { results.whiffs++; continue; } // ageless row can never match
-
-    // engine.66b: STRICT fit — same neighborhood required (blank on either
-    // side never guesses), sex required where the slot knows it, age in band.
     var candHood0 = gN >= 0 ? String(gRow[gN] || '').trim() : '';
-    var matches = [];
+
+    // Reel 2: the family slot (heritage-tier weighted draw)
+    var totW = 0, sw = [];
     for (var m = 0; m < openSlots.length; m++) {
-      var slot = openSlots[m];
-      if (claimed[slot.targetPop]) continue;
-      if (!candHood0 || !slot.hood || candHood0 !== slot.hood) continue;
-      if (slot.expectSex && candSex !== slot.expectSex) continue; // blank candSex never guesses
-      if (candBY < slot.byMin || candBY > slot.byMax) continue;
-      matches.push(slot);
+      var wt = 1 + ((openSlots[m].hTier && typeof heritageRank_ === 'function') ? heritageRank_(openSlots[m].hTier) + 1 : 0);
+      sw.push(wt); totW += wt;
     }
-    if (!matches.length) {
-      results.whiffs++;
-      Logger.log('checkFamilyMatchPromotions_: ' + String(gRow[gF]) + ' ' + String(gRow[gL]) +
-        ' drew the roll but fits no open family slot — whiff (C' + cycle + ')');
-      continue;
+    var sRoll = rng() * totW, won = openSlots[0];
+    for (var v = 0; v < openSlots.length; v++) {
+      sRoll -= sw[v];
+      if (sRoll <= 0) { won = openSlots[v]; break; }
     }
 
-    // Weighted pick: base 1, +1 same neighborhood, founded lines pull
-    // tier-scaled (Founding +1 … Dynasty +4).
-    var candHood = gN >= 0 ? String(gRow[gN] || '').trim() : '';
-    var total = 0, weights = [];
-    for (var w = 0; w < matches.length; w++) {
-      var wt = 1;
-      if (candHood && matches[w].hood && candHood === matches[w].hood) wt += 1;
-      if (matches[w].hTier && typeof heritageRank_ === 'function') wt += heritageRank_(matches[w].hTier) + 1;
-      weights.push(wt);
-      total += wt;
-    }
-    var roll = rng() * total, won = matches[0];
-    for (var v = 0; v < matches.length; v++) {
-      roll -= weights[v];
-      if (roll <= 0) { won = matches[v]; break; }
+    // Do the two reels line up? Every check is a real-world fact — no dial.
+    var aligned = candBY > 0 && !claimed[won.targetPop] &&
+      candHood0 && won.hood && candHood0 === won.hood &&
+      (!won.expectSex || candSex === won.expectSex) &&
+      candBY >= won.byMin && candBY <= won.byMax;
+    if (!aligned) {
+      results.whiffs++;
+      Logger.log('checkFamilyMatchPromotions_: reels did not align — ' +
+        String(gRow[gF]) + ' ' + String(gRow[gL]) + ' vs ' + won.type + ' slot of ' +
+        won.targetPop + ' (C' + cycle + ')');
+      continue;
     }
 
     var out = new Array(advHeaders.length).fill('');

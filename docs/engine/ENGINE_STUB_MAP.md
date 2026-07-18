@@ -717,7 +717,7 @@
 
 - **buildBondLedgerIndex_(ctx)**
 
-- **processRomanceAndMarriage_(ctx)**
+- **processRomanceAndMarriage_(ctx)** *(engine.66b S324: the ONLY marriage road. Romance growth 0.02 base / 0.05 co-active per cycle — the 2.5-point climb to MARRIAGE_THRESHOLD takes ~1.5-2.5 years of maintained courtship; was 0.3/0.6 = weeks. No timer, no cap — what matures marries)*
   Reads: S.cycleId, S.relationshipBonds
   Writes: S.storyHooks
   Config: ctx.config.cycleCount
@@ -730,7 +730,7 @@
   Sheets: Family_Relationships, Household_Ledger
   RNG: ctx.rng / safeRand_(ctx)
 
-- **processGCMarriageLottery_(ctx)**
+- **processGCMarriageLottery_(ctx)** *(DISABLED engine.66b S324, Mike-direct: chance-roll spouse handout = forced marriage, no bond behind it — 20 weddings in 13 bench cycles. Call site commented out, function retained for reversibility. Marriage is bonds-only)*
   Reads: S.cycleId
   Writes: S.relationshipBonds
   Config: ctx.config.cycleCount
@@ -1274,7 +1274,7 @@
 - **checkEmergencePromotions_(ss, cycle, maxQueue)** *(engine.66: shared drip cap — queues at most maxQueue (DRIP_CAP_PER_CYCLE=2); deferred citizens self-heal at threshold next cycle)*
   Sheets: Advancement_Intake, Advancement_Intake1, Generic_Citizens
 
-- **checkFamilyMatchPromotions_(ctx, cycle, slots)** *(engine.66 S324: family-match drip door — per-slot DRIP_SLOT_P=0.20 roll picks ONE random Active GC citizen; matches against open family slots from ctx.ledger (spouse: married+no SpouseId, sex-opposite, BY±10; parent: minor with <2 ParentIds, parent-aged 18-45 older; child: NumChildren>linked kids); no match = whiff. Weighted slot pick: +1 same hood, +heritageRank_+1 founded lines. Winner queued to Advancement_Intake1 under family surname with MatchPopId/MatchType/MaidenName. Skips manual runs (no ctx.rng). Dry-run on live: ~0.4 promotions/cycle, 65% cycles zero)*
+- **checkFamilyMatchPromotions_(ctx, cycle, slots)** *(engine.66 S324, tightened .66b: family-match drip door. Each remaining cap slot draws ONE random Active GC citizen — NO probability dial (nothing is free) — who lands only on a STRICT fit vs open family slots from ctx.ledger: same neighborhood REQUIRED, sex required where known, age in band (spouse: married+no SpouseId, BY±10; parent: minor with <2 ParentIds, 18-45 older; child: NumChildren>linked kids). No fit = nothing lands; zero cycles normal. Among fits: heritageRank_+1 weighting (founded lines pull louder). Winner queued to Advancement_Intake1 under family surname with MatchPopId/MatchType/MaidenName. Skips manual runs (no ctx.rng))*
   Reads: ctx.ledger.headers/rows
   Sheets: Generic_Citizens, Advancement_Intake, Advancement_Intake1
   RNG: safeRand_(ctx)

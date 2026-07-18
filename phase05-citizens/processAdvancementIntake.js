@@ -756,11 +756,13 @@ var GC_EMERGENCE_PROMOTION_THRESHOLD = 3;
 
 // engine.66 (S324): ONE drip system, 2 per cycle, period (Mike-pinned S324;
 // S322 drip rule — all GC→SL doors share it). Emergence promotions are
-// earned and fill first; family-match rolls take whatever slots remain.
+// earned (real media only, engine.66b) and fill first; family-match draws
+// take whatever slots remain.
+// engine.66b (S324, Mike-direct — NOTHING IS FREE): no probability dial.
+// Each remaining slot draws ONE random Active GC citizen; they land only on
+// a STRICT fit — same neighborhood REQUIRED, right sex, right age. If the
+// world didn't produce a fitting person, nothing lands. Zero is normal.
 var DRIP_CAP_PER_CYCLE = 2;
-// Per-slot chance the family-match lottery even rolls this cycle. Rarity is
-// the design (bonds-rare): expected family drips ≈ P × match-hit-rate.
-var DRIP_SLOT_P = 0.20;
 var DRIP_SPOUSE_AGE_BAND = 10;  // |candidate BY − partner BY| ≤ band
 var DRIP_PARENT_AGE_MIN = 18;   // parent is 18-45 years older than the kid
 var DRIP_PARENT_AGE_MAX = 45;
@@ -984,7 +986,6 @@ function checkFamilyMatchPromotions_(ctx, cycle, slots) {
 
   for (var s = 0; s < slots; s++) {
     if (!candidates.length) break;
-    if (rng() >= DRIP_SLOT_P) continue; // slot stays quiet this cycle
 
     var pickIdx = Math.floor(rng() * candidates.length);
     var gRow = gData[candidates[pickIdx]];
@@ -993,10 +994,14 @@ function checkFamilyMatchPromotions_(ctx, cycle, slots) {
     if (!candBY && gA >= 0 && Number(gRow[gA]) > 0) candBY = 2041 - Number(gRow[gA]);
     if (!candBY) { results.whiffs++; continue; } // ageless row can never match
 
+    // engine.66b: STRICT fit — same neighborhood required (blank on either
+    // side never guesses), sex required where the slot knows it, age in band.
+    var candHood0 = gN >= 0 ? String(gRow[gN] || '').trim() : '';
     var matches = [];
     for (var m = 0; m < openSlots.length; m++) {
       var slot = openSlots[m];
       if (claimed[slot.targetPop]) continue;
+      if (!candHood0 || !slot.hood || candHood0 !== slot.hood) continue;
       if (slot.expectSex && candSex !== slot.expectSex) continue; // blank candSex never guesses
       if (candBY < slot.byMin || candBY > slot.byMax) continue;
       matches.push(slot);

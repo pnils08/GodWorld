@@ -109,6 +109,7 @@ Maintained for reference by scripts and Mara audits.
 | **Business_Ledger** | 51 | ENGINE, SCRIPT, DASHBOARD | SCRIPT | 51 businesses with sectors, employees |
 | **Faith_Organizations** | 16 | SCRIPT, DASHBOARD | SCRIPT | 16 faith orgs with leaders |
 | **Economic_Parameters** | 198 | ENGINE (engine.51 intake salary pools, `godWorldEngine2.js` L1242+, S305) | SCRIPT | 198 role economic profiles (local copy at `data/economic_parameters.json`). Was "no readers" pre-S305; nearly retired S311 on that stale verdict — final pre-delete grep reversed it. |
+| **Event_Wiring_Ledger** | 39 | MIKE (grid-health view) | SCRIPT (regen on matrix change) | Rendered view of the engine.67 generator conditioning matrix — one row per event generator, gate status per citizen dimension (Age/Status/Wealth/Household/Heritage). Source of truth: `docs/plans/2026-07-18-event-pools-design.md`; regenerate tab same-commit when matrix changes. NEW S325. |
 
 ---
 

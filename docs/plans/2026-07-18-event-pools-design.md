@@ -1,6 +1,6 @@
 # Event Pools — Citizens' Lives Dictate What Fires (engine.67)
 
-**Status:** DESIGN (S325) — matrix complete, rulings partially taken, no code yet
+**Status:** DESIGN COMPLETE (S325) — matrix done, ALL rulings taken, build not started
 **Owner:** engine-sheet | **ROLLOUT:** engine.67 | **Parent:** [[../engine/ROLLOUT_PLAN]]
 **Sources:** 38-file generator audit, S325 (4-agent sweep, records in Appendix A–D)
 **Related:** [[2026-07-01-persistence-seams-content-ledger]] (ECL build), [[../SIM_DOCTRINE]] (rules 9–12), [[2026-07-13-family-household-loop-build]] (engine.57)
@@ -14,15 +14,11 @@ The citizen row + household + heritage line is the **antenna**. The grid (event 
 ## Rulings taken (Mike, S325)
 
 1. **Impossible content = HARD GATE.** A 6-year-old doing rent math is impossible, not improbable. Merely-unlikely content is down-weighted, not gated.
-2. **Matrix is an MD** (this doc) — and a sheet-ledger rendering is under consideration (§7).
+2. **Matrix is an MD** (this doc) + **sheet wiring-ledger GO** — `Event_Wiring_Ledger` tab created S325, 38 rows, rendered view of this matrix (repo MD = source of truth; regen tab on matrix change, same-commit rule).
 3. Cheap-model agents for grunt work (sweep executed this way).
-
-## Rulings pending
-
-- Family simultaneous events — scope (quiet shared moments only, or shared crises that ripple through the household's cycle?)
-- Heritage ↔ city events — direction (city events name/host heritage families; heritage milestones spawn city events; both?)
-- Sheet wiring-ledger — go/no-go + tab name (§7)
-- Status-leak repairs fold into this build (recommended) vs pre-fixed separately
+4. **Family simultaneous events: BOTH** quiet shared moments AND shared crises/celebrations that ripple — **skewed to rarity** (household lottery fires seldom; a shared crisis is a season-defining event, not weekly texture).
+5. **Heritage ↔ city events: BOTH directions** — city events name/host heritage families AND heritage milestones spawn city events.
+6. **Status-leak repairs fold into the gate build** (no separate pre-fix pass) — one gate ships once, closes deceased-in-chaos-cars, retiree-promotions, and the rest at the same choke point.
 
 ---
 
@@ -101,17 +97,17 @@ Age bands split `youth(0-22)` into **child ≤12 / teen 13-17 / youth 18-22** �
 1. Extend `CONTENT_LEDGER_DSL_FIELDS` (loader L60-69): `lifestate` (enum from gate), `band` (5-band enum), `occupation` (str), `tier` (num), `heritage` (enum). Extend `condScopes` at the consumer (generateCitizensEvents L2301) in the same commit. Fail-closed grammar unchanged — typo narrows, never widens (S289).
 2. Then content preload: authored banks per lifestate×occupation×wealth band via `scripts/draftContentRows.js`, cheap-model authoring, Mike activates rows (Active column stays the kill switch).
 
-## 5. Design — family simultaneity (ruling pending)
+## 5. Design — family simultaneity (RULED: both, skewed to rarity)
 
-Generalize the chaos-local household shared-line mechanism (generateCitizensEvents L1978-90, deterministic HouseholdId hash): a per-cycle **household event lottery** — small % of households draw one shared moment, same text all members, each member's LifeHistory gets it from their own angle. Scope options for Mike: (a) quiet shared moments only; (b) plus shared crises/celebrations that ripple (job loss → whole household's cycle). Cost: one new pool + hash-variant pattern already proven.
+Generalize the chaos-local household shared-line mechanism (generateCitizensEvents L1978-90, deterministic HouseholdId hash): a per-cycle **household event lottery** — rare draw, same text all members, each member's LifeHistory gets it from their own angle. Two tiers per Mike's ruling: **quiet shared moments** (the common face of rare — dinner-table, weekend outing) and **shared crises/celebrations that ripple** (job loss, windfall, milestone — rarer still, season-defining, feeds storyHooks). Rarity is the design constraint: this is 1:443 qualitative sampling, not weekly texture. Cost: one new pool + hash-variant pattern already proven.
 
-## 6. Design — heritage ↔ city events (ruling pending)
+## 6. Design — heritage ↔ city events (RULED: both directions)
 
-Heritage_Ledger reaches: births (odds), drip (slot weight), 18th-birthday draw, SchoolQuality. It does NOT reach buildCityEvents/worldEventsEngine. Options: (a) city events name/host heritage families (buildCityEvents draws from Heritage_Ledger lines for event naming — "the Keane block party"); (b) heritage milestones (founding, Dynasty promotion) spawn city events; (c) both. Mechanism either way: lagged `heritageTierByPop_` read in phase04 (engine.65 pattern already proven).
+Heritage_Ledger reaches: births (odds), drip (slot weight), 18th-birthday draw, SchoolQuality. It does NOT reach buildCityEvents/worldEventsEngine. Build both lanes: **(a)** city events name/host heritage families — buildCityEvents draws from Heritage_Ledger lines for event naming/hosting ("the Keane block party"), tier-weighted so Established+ lines surface more; **(b)** heritage milestones (founding, Prominent/Dynasty promotion, heritage business opening) spawn city events the following cycle. Mechanism both lanes: lagged `heritageTierByPop_` read in phase04 (engine.65 pattern already proven).
 
-## 7. Sheet wiring-ledger (Mike question, S325 — recommendation)
+## 7. Sheet wiring-ledger (RULED: GO — SHIPPED S325)
 
-**Yes, but as a rendered view, not a second truth.** Two copies hand-maintained = guaranteed drift. Model: this MD (repo) is the source; a small push writes an `Event_Wiring_Ledger` tab — one row per generator, columns Generator | Class | Emits | Age | Status | Wealth | Household | Heritage | Volume | Verdict — regenerated whenever the matrix changes (same-commit rule, engine.md discipline). Mike gets the grid view in the sheets where he lives; the repo keeps the audit trail. Needs Mike's go: new tab + the push mechanism (direct lib/sheets.js write; no new standing script required for v1).
+Rendered view, not a second truth: this MD (repo) is the source; `Event_Wiring_Ledger` tab (created S325, 38 rows: Generator | Class | Phase | AgeGate | StatusGate | WealthGate | HouseholdGate | HeritageGate | Volume | Verdict | AuditSession) is the grid view in the sheets. Regenerate the tab whenever the matrix changes — same-commit rule, engine.md discipline. As the build closes gaps, NO cells flip to YES and the grid lights up. Push mechanism: direct lib/sheets.js write (one-off scratchpad script v1; mechanize only if churn warrants).
 
 ## 8. Not yet audited (loose ends acknowledged)
 

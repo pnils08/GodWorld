@@ -62,6 +62,7 @@ function runRelationshipEngine_(ctx) {
   var iLast = idx('Last');
   var iNeighborhood = idx('Neighborhood');
   var iDialState = idx('DialState'); // engine.32 T5 — Sociability dial -> social-event frequency
+  var iStatus = idx('Status'); // engine.67 step 3 (S325) — gone citizens don't socialize
 
   // ═══════════════════════════════════════════════════════════════════════════
   // PULL GODWORLD STATE
@@ -365,6 +366,15 @@ function runRelationshipEngine_(ctx) {
     if (tier !== 3 && tier !== 4) continue;
     if (mode !== "ENGINE") continue;
     if (isUNI || isMED || isCIV) continue;
+    // engine.67 step 3 (S325 matrix): this engine had NO Status filter, and it
+    // feeds S.cycleActiveCitizens — bondEngine's formation pool — so deceased/
+    // traded citizens could keep socializing AND keep forming bonds. The gone
+    // draw no social drift and never enter the bond pool. (Hospitalized stay:
+    // people visit; bondEngine handles its own romance gates.)
+    if (iStatus >= 0) {
+      var relStatus = (row[iStatus] || "").toString().trim().toLowerCase();
+      if (relStatus === "deceased" || relStatus === "inactive" || relStatus === "traded" || relStatus === "pending") continue;
+    }
 
     // ═══════════════════════════════════════════════════════════════════════
     // DRIFT PROBABILITY

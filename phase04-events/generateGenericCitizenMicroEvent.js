@@ -43,6 +43,7 @@ function generateGenericCitizenMicroEvents_(ctx) {
   var iLastUpd = idx("LastUpdated");
   var iNeighborhood = idx("Neighborhood");
   var iDialState = idx("DialState"); // engine.32 T5 — dial-biased event frequency
+  var iStatus = idx("Status"); // engine.67 step 3 (S325) — the gone draw no texture
 
   if (iPopID < 0 || iTier < 0 || iClock < 0 || iLife < 0) return;
 
@@ -440,6 +441,13 @@ function generateGenericCitizenMicroEvents_(ctx) {
     if (mode !== "ENGINE") continue;
     if (isUNIFlag || isMEDFlag || isCIVFlag) continue;
     if (!popId) continue;
+    // engine.67 step 3 (S325 matrix): this generator had NO Status check — a
+    // deceased citizen whose ClockMode stayed ENGINE could keep drawing daily
+    // texture. Deceased/inactive/traded/pending draw nothing.
+    if (iStatus >= 0) {
+      var stLc = (row[iStatus] || "").toString().trim().toLowerCase();
+      if (stLc === "deceased" || stLc === "inactive" || stLc === "traded" || stLc === "pending") continue;
+    }
 
     // v2.5: Tiered probability — tier 1-2 get micro-events at lower rate
     // Tier 1-2: named characters, lower chance (they get events from other engines)

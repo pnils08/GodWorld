@@ -558,7 +558,7 @@
 
 - **checkWedding_(ctx, popId, age, lifeHistory, cal, hasHousehold)**
 
-- **checkBirth_(ctx, popId, age, lifeHistory, cal, hasHousehold, marital)**
+- **checkBirth_(ctx, popId, age, lifeHistory, cal, hasHousehold, marital)** *(engine.65: heritage line members roll x1.15-1.6 birth odds via ctx._heritageTierByPop — last-cycle Heritage_Ledger read at engine init)*
 
 - **createChildRow_(ctx, parentRowIdx, cycle)**
   Sheets: Family_Relationships, Household_Ledger
@@ -974,8 +974,8 @@
 - **detectCareerMobility_(ctx, cycle, rng)**
   Writes: S.storyHooks
 
-- **updateMinorSchoolQuality_(ss, ctx, cycle)**
-  Reads: S.cycleId
+- **updateMinorSchoolQuality_(ss, ctx, cycle)** *(engine.65: kids in Established+ heritage lines read +1 over the hood index, cap 10 — via S.heritage.lineByPop, same-cycle)*
+  Reads: S.cycleId, S.heritage.lineByPop
   Sheets: Neighborhood_Demographics
 
 - **eduRank_(v)**
@@ -1117,7 +1117,26 @@
 - **trackWealthMobility_(ctx, cycle, prevLevels)**
   Writes: S.storyHooks
 
-- **trackHomeOwnership_(ss, ctx, cycle)**
+- **trackHomeOwnership_(ss, ctx, cycle)** *(engine.65 T2 S323 — real: renting household buys when combined living NetWorth >= 35% of price (rent x 12 x 22), 6%/cycle roll; 20% down leaves member NW proportionally, rented -> owned, MonthlyRent becomes mortgage; [Home] LifeHistory + HOME_PURCHASE hook)*
+  Writes: S.homesPurchasedByLine, S.storyHooks
+  Sheets: Household_Ledger (own tracking sheet, per-cell on purchase)
+  RNG: safeRand_(ctx)
+
+- **heritageTierFor_(score)** *(engine.65 — Founding/Established/Prominent/Dynasty at 0/50/150/350)*
+
+- **heritageRank_(tierName)** *(engine.65)*
+
+- **heritageTierByPop_(ss)** *(engine.65 — popId -> tier map from Heritage_Ledger MembersList; shared by inheritance pass + phase-4 birth boost)*
+
+- **heritageHash8_(s)** *(engine.65 — deterministic 8-hex CUL-id fragment)*
+
+- **ensureHeritageSchema_(ss, ctx)** *(engine.65 — one-time arm: SL LineageId col + Heritage_Ledger tab; §1.1 schema-setup carve-out; system live next cycle)*
+
+- **updateHeritage_(ss, ctx, cycle)** *(engine.65 S323 — Rockafellas: lines FOUNDED by threshold doors only (A: 3+ living on-camera Family_Relationships members + combined NW >= \$1M; B: solo NW >= \$350M); kids inherit LineageId, surname-taking spouses join; score accrues from NW/generations/civic/fame/biz/homes; tier unlocks = odds modifiers — Established+ business roll (p .15/.25/.40, max 1/2/3) stakes 20% of wealthiest member's NW via queueAppendIntent_(Business_Ledger); Dynasty -> Cultural_Ledger institution; promotions write [Heritage] lines + hooks)*
+  Reads: S.cycleId, S.homesPurchasedByLine
+  Writes: S.heritage (incl. lineByPop for same-cycle phase-5 consumers), S.storyHooks
+  Sheets: Heritage_Ledger (own tracking sheet, full-table rewrite), Family_Relationships (read)
+  RNG: safeRand_(ctx)
 
 ### householdFormationEngine.js
 - **processHouseholdFormation_(ctx)**

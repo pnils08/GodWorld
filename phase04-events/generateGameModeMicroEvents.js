@@ -486,7 +486,8 @@ function generateGameModeMicroEvents_(ctx) {
     var tier = Number(row[iTier] || 4);
 
     if (mode !== "GAME") continue;
-    if (status === "inactive" || status === "deceased" || status === "retired") continue;
+    if (status === "inactive" || status === "deceased" || status === "retired" ||
+        status === "traded" || status === "pending") continue; // engine.64c: no game-mode texture for gone players
     if (!first || first === last) continue;
     if (!popId) continue;
 

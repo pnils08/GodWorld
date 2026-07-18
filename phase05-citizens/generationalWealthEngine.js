@@ -1024,10 +1024,124 @@ function trackWealthMobility_(ctx, cycle, prevLevels) {
 // HOME OWNERSHIP
 // ════════════════════════════════════════════════════════════════════════════
 
+// ════════════════════════════════════════════════════════════════════════════
+// engine.65 T2 (S323) — HOME PURCHASE, REAL AT LAST
+// A renting household whose lived savings can carry a house buys one — by
+// physics and dice, never by quota. Price grows from the household's own rent
+// (rent reflects the neighborhood, so hood pricing rides in automatically):
+//   price = MonthlyRent x 12 x PRICE_TO_RENT
+//   eligible when combined living-member NetWorth >= 35% of price
+//   (20% down + reserves), then a genuine roll decides the week they act.
+// On purchase: down payment leaves member NetWorth proportionally, the
+// household flips rented -> owned, MonthlyRent becomes the mortgage payment
+// (burden physics keep working — a mortgage can still crush a bad year), and
+// every living member lives the [Home] line. Line members report the purchase
+// to heritage via S.homesPurchasedByLine (Step 7 accrues it into HomesOwned).
+// Household_Ledger writes are direct — own-tracking sheet, Phase 5 class.
+// ════════════════════════════════════════════════════════════════════════════
+var HOME_PRICE_TO_RENT = 22;      // annual-rent multiple -> price
+var HOME_ELIGIBLE_NW = 0.35;      // of price: 20% down + reserves
+var HOME_DOWN = 0.20;             // of price paid at closing
+var HOME_MORTGAGE_MONTHLY = 0.8 * 0.07 / 12; // financed share x rate / 12
+var HOME_BUY_P = 0.06;            // per-cycle roll for an eligible household
+
 function trackHomeOwnership_(ss, ctx, cycle) {
-  // Would track home purchases based on wealth + savings
-  // For v1.0, this is a placeholder
-  return { purchased: 0 };
+  var results = { purchased: 0 };
+  var hhSheet = ss.getSheetByName('Household_Ledger');
+  if (!hhSheet || !ctx.ledger) return results;
+
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  var idx = function(n) { return header.indexOf(n); };
+  var iPop = idx('POPID'), iNW = idx('NetWorth'), iStatus = idx('Status'),
+      iLife = idx('LifeHistory'), iLin = idx('LineageId'), iFirst = idx('First'),
+      iLast = idx('Last');
+  if (iPop < 0 || iNW < 0) return results;
+
+  var rowByPop = {};
+  for (var r0 = 0; r0 < rows.length; r0++) {
+    if (rows[r0] && rows[r0][iPop]) rowByPop[String(rows[r0][iPop]).trim()] = rows[r0];
+  }
+
+  var hv = hhSheet.getDataRange().getValues();
+  var hh = hv[0];
+  var hj = function(n) { return hh.indexOf(n); };
+  var cId = hj('HouseholdId'), cMem = hj('Members'), cHood = hj('Neighborhood'),
+      cType = hj('HousingType'), cRent = hj('MonthlyRent'), cCost = hj('HousingCost'),
+      cStat = hj('Status');
+  if (cId < 0 || cMem < 0 || cType < 0 || cRent < 0) return results;
+
+  var rng = safeRand_(ctx);
+  var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
+  var homesByLine = {};
+
+  for (var q = 1; q < hv.length; q++) {
+    if (cStat >= 0 && String(hv[q][cStat] || '').toLowerCase() !== 'active') continue;
+    if (String(hv[q][cType] || '').toLowerCase() !== 'rented') continue;
+    var rent = Number(hv[q][cRent]) || 0;
+    if (rent <= 0) continue;
+
+    var memIds = [];
+    try { memIds = JSON.parse(String(hv[q][cMem] || '[]')); } catch (e) { memIds = []; }
+    var members = [];
+    var combinedNW = 0;
+    for (var m = 0; m < memIds.length; m++) {
+      var mRow = rowByPop[String(memIds[m]).trim()];
+      if (!mRow) continue;
+      if (String(mRow[iStatus] || 'active').toLowerCase() === 'deceased') continue;
+      members.push(mRow);
+      combinedNW += Number(String(mRow[iNW]).replace(/[$,\s]/g, '')) || 0;
+    }
+    if (!members.length) continue;
+
+    var price = Math.round(rent * 12 * HOME_PRICE_TO_RENT);
+    if (combinedNW < price * HOME_ELIGIBLE_NW) continue; // can't carry it yet
+    if (rng() >= HOME_BUY_P) continue;                    // not this week
+
+    // ── the purchase ──
+    var down = Math.round(price * HOME_DOWN);
+    for (var m2 = 0; m2 < members.length; m2++) {
+      var mNW = Number(String(members[m2][iNW]).replace(/[$,\s]/g, '')) || 0;
+      var share = combinedNW > 0 ? mNW / combinedNW : 1 / members.length;
+      members[m2][iNW] = Math.max(0, mNW - Math.round(down * share));
+      if (iLife >= 0) {
+        var lifeH = String(members[m2][iLife] || '');
+        if (lifeH.indexOf(stamp + ' — [Home]') < 0) {
+          members[m2][iLife] = (lifeH ? lifeH + '\n' : '') + stamp +
+            ' — [Home] bought the place in ' + String(hv[q][cHood] || 'the neighborhood') +
+            ' — keys in hand, rent checks done';
+        }
+      }
+      if (iLin >= 0) {
+        var mLin = String(members[m2][iLin] || '').trim();
+        if (mLin) homesByLine[mLin] = (homesByLine[mLin] || 0) + 1;
+      }
+    }
+    ctx.ledger.dirty = true;
+    var mortgage = Math.round(price * HOME_MORTGAGE_MONTHLY);
+    hhSheet.getRange(q + 1, cType + 1).setValue('owned');
+    hhSheet.getRange(q + 1, cRent + 1).setValue(mortgage);
+    if (cCost >= 0) hhSheet.getRange(q + 1, cCost + 1).setValue(price);
+
+    ctx.summary.storyHooks = ctx.summary.storyHooks || [];
+    ctx.summary.storyHooks.push({
+      hookType: 'HOME_PURCHASE', severity: 3, priority: 3,
+      description: ((members[0][iFirst] || '') + ' ' + (members[0][iLast] || '')).trim() +
+        (members.length > 1 ? ' and family' : '') + ' bought a home in ' +
+        String(hv[q][cHood] || 'Oakland') + ' — $' + price + ', $' + down + ' down',
+      cycleGenerated: cycle, neighborhood: String(hv[q][cHood] || ''), domain: 'COMMUNITY',
+      text: 'A family bought their home in ' + String(hv[q][cHood] || 'Oakland')
+    });
+    results.purchased++;
+  }
+
+  // Step 7 (updateHeritage_) folds these into each line's HomesOwned.
+  ctx.summary.homesPurchasedByLine = homesByLine;
+
+  if (results.purchased) {
+    Logger.log('trackHomeOwnership_ engine.65 T2: ' + results.purchased + ' purchases');
+  }
+  return results;
 }
 
 
@@ -1411,7 +1525,11 @@ function updateHeritage_(ss, ctx, cycle) {
       generations = Math.max(generations, genDepth(memberIds[m3], {}));
     }
 
-    var homes = Number(hl[hHomes]) || 0; // written by home-purchase (future tier); carried until then
+    // engine.65 T2: HomesOwned accrues from this cycle's purchases (Step 6
+    // publishes S.homesPurchasedByLine before Step 7 runs).
+    var homes = (Number(hl[hHomes]) || 0) +
+      ((ctx.summary.homesPurchasedByLine && ctx.summary.homesPurchasedByLine[linId]) || 0);
+    hl[hHomes] = homes;
     var bizList = [];
     try { bizList = JSON.parse(String(hl[hBiz] || '[]')); } catch (e) { bizList = []; }
 

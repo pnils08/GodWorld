@@ -130,7 +130,9 @@ function generateCitizensEvents_(ctx) {
       if ((Number(rows[pfi][iUsage]) || 0) < PUBLIC_FIGURE_FAME_MIN) continue;
       var pfPop = rows[pfi][iPopID];
       if (!pfPop) continue;
-      if (iStatus >= 0 && String(rows[pfi][iStatus] || "").trim().toLowerCase() === "deceased") continue;
+      var pfStatus = iStatus >= 0 ? String(rows[pfi][iStatus] || "").trim().toLowerCase() : "";
+      // engine.64c (S323): traded/pending are off-camera — no public-figure slots.
+      if (pfStatus === "deceased" || pfStatus === "traded" || pfStatus === "pending") continue;
       var pfName = nameByPop[String(pfPop).trim().toUpperCase()];
       if (pfName) publicFigures.push({ name: pfName, popId: String(pfPop).trim().toUpperCase() });
     }
@@ -1767,7 +1769,9 @@ function generateCitizensEvents_(ctx) {
     // latent inclusion of deceased ENGINE citizens.)
     var isNamed = (tier === 1 || tier === 2);
     if (!isNamed && (tier !== 3 && tier !== 4)) continue;
-    if (status === "deceased") continue;
+    // engine.64c (S323, Mike ruling S322): traded/pending draw no daily-life
+    // texture — traded left the city, pending never arrived. Retired stay.
+    if (status === "deceased" || status === "traded" || status === "pending") continue;
 
     var mem = getMem(popId);
 

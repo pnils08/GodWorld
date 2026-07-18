@@ -498,7 +498,8 @@ function ensureBondEngineData_(ctx) {
             for (var lr = 0; lr < ledgerRows.length; lr++) {
               var lrow = ledgerRows[lr];
               var status = lStatus >= 0 ? String(lrow[lStatus] || '').toLowerCase() : 'active';
-              if (status === 'deceased' || status === 'retired' || status === 'inactive') continue;
+              if (status === 'deceased' || status === 'retired' || status === 'inactive' ||
+                  status === 'traded' || status === 'pending') continue; // engine.64c: traded/pending form no bonds
 
               var first = lFirst >= 0 ? (lrow[lFirst] || '').toString().trim() : '';
               var last = lLast >= 0 ? (lrow[lLast] || '').toString().trim() : '';

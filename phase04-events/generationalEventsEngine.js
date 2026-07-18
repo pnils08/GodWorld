@@ -269,7 +269,10 @@ function runGenerationalEngine_(ctx) {
     var healthCause = iHealthCause >= 0 ? (row[iHealthCause] || "") : "";
     var statusDuration = statusStartCycle > 0 ? (cycle - statusStartCycle) : 0;
 
-    if (status === "deceased" || status === "inactive") continue;
+    // engine.64c (S323, Mike ruling S322): Traded left the city, pending never
+    // arrived — neither draws life events. Retired stay (they live here).
+    if (status === "deceased" || status === "inactive" ||
+        status === "traded" || status === "pending") continue;
 
     var age = birthYear ? (simYear - birthYear) : 0;
     var name = ((row[iFirst] || "") + " " + (row[iLast] || "")).trim();

@@ -701,6 +701,9 @@ function runCareerEngine_(ctx) {
     // one-time income hit (guarded by an [IncomeHit A{admitCycle}] marker so
     // it applies once per admission).
     var healthStatus = iStatus >= 0 ? String(row[iStatus] || "active").toLowerCase().trim() : "active";
+    // engine.64c (S323): traded/pending hold no Oakland career — no rolls.
+    if (healthStatus === "traded" || healthStatus === "pending" ||
+        healthStatus === "deceased") continue;
     if (healthStatus === "hospitalized" || healthStatus === "critical") {
       var admitC = iStatusStart >= 0 ? (Number(row[iStatusStart]) || 0) : 0;
       var hitMarker = "[IncomeHit A" + admitC + "]";

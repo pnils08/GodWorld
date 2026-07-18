@@ -306,7 +306,33 @@ function formCriteriaHouseholds_(ctx, households, cycle) {
   }
 
   var simYear = 2040 + Math.floor(cycle / 52);
-  var citizens = loadCitizens_(ctx); // active only
+
+  // Mike-ruled S322 status set — SCOPED TO FORMATION ONLY (the engine's main
+  // loadCitizens_ stays Active-only so births/marriages/divorces are
+  // unchanged): Retired/Recovering residents form households (retired A's
+  // with families live here); Traded = departed Oakland, never forms (and is
+  // slated to lose ALL events unless flipped back to Active — separate
+  // iteration); pending = awaiting Mike's verification, waits.
+  var FORMS_STATUS = { active: true, retired: true, recovering: true };
+  var iFirstC = idx('First'), iLastC = idx('Last'), iStatusC = idx('Status'),
+      iBirthC = idx('BirthYear'), iNbhdC = idx('Neighborhood'),
+      iMarC = idx('MaritalStatus'), iParC = idx('ParentIds'), iChC = idx('ChildrenIds');
+  var parseArr = function(v) { try { var a = JSON.parse(String(v || '[]')); return Array.isArray(a) ? a : []; } catch (e) { return []; } };
+  var citizens = [];
+  for (var cr = 0; cr < rows.length; cr++) {
+    var crow = rows[cr];
+    if (!crow || !crow[iPop]) continue;
+    if (!FORMS_STATUS[String(crow[iStatusC] || 'active').toLowerCase()]) continue;
+    citizens.push({
+      ledgerIndex: cr,
+      popId: crow[iPop] || '',
+      birthYear: crow[iBirthC] || 2000,
+      neighborhood: iNbhdC >= 0 ? (crow[iNbhdC] || '') : '',
+      maritalStatus: iMarC >= 0 ? (crow[iMarC] || 'single') : 'single',
+      parentIds: parseArr(iParC >= 0 ? crow[iParC] : '[]'),
+      childrenIds: parseArr(iChC >= 0 ? crow[iChC] : '[]')
+    });
+  }
   var byPop = {};
   for (var b = 0; b < citizens.length; b++) byPop[String(citizens[b].popId).trim()] = citizens[b];
   var popIdOf = function(v) { var mm = String(v || '').match(/POP-\d+/); return mm ? mm[0] : ''; };

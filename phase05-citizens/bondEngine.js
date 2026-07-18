@@ -692,15 +692,21 @@ function updateExistingBonds_(ctx) {
         ENGINE59_DIAG.friendGrowths++;
         if (ENGINE59_DIAG.factors.length < 5) ENGINE59_DIAG.factors.push(bond.citizenA + 'x' + bond.citizenB + ':' + wf59.toFixed(3));
         intensity += FRIENDSHIP_GROWTH * wf59;
-      } else if (bond.bondType === BOND_TYPES.ROMANTIC) {
-        intensity += ROMANTIC_GROWTH_ACTIVE;
       }
     }
 
-    // engine.59: courting couples see each other whether or not the event
-    // engine drew them this cycle — courtship is its own gravity.
-    if (bond.bondType === BOND_TYPES.ROMANTIC && !(aActive && bActive)) {
-      intensity += ROMANTIC_GROWTH_BASE;
+    // engine.66e (S324, Mike-direct): romance moves by CHANCE, not schedule.
+    // Most weeks nothing moves. Some weeks a real step. Rarely, a week that
+    // changes everything. A lucky streak CAN marry a couple in months; a cold
+    // one never gets there; most land in years. The dice speak — no flat
+    // rate, no timeline everyone is forced to walk. Shared life (both drawn
+    // into the world this cycle) makes steps likelier — courtship is fed.
+    if (bond.bondType === BOND_TYPES.ROMANTIC) {
+      var rr = rng();
+      var stepP = (aActive && bActive) ? 0.20 : 0.10;
+      if (rr < 0.02) intensity += 1.0;              // the week that changes everything
+      else if (rr < 0.02 + stepP) intensity += 0.25; // a real step
+      // else: an ordinary week — nothing moves
     }
 
     if (S.cycleWeight === 'high-signal' && bond.bondType === BOND_TYPES.RIVALRY) {
@@ -1485,13 +1491,10 @@ var ROMANCE_CHANCE = 0.10;    // per-cycle base once conditions hold (× tier ×
 var MARRIAGE_THRESHOLD = 8;   // a romance grown this strong marries
 var TRIANGLE_BIRTH_INTENSITY = 5; // rivals born from a shared love start here
 var FRIENDSHIP_GROWTH = 0.4;  // engine.59: per-cycle when both co-active (× warmth trait)
-// engine.66b (S324, Mike-direct): romance grows at LIFE SPEED — cycles are
-// weeks, and the old 0.3/0.6 rates married couples in a month. At 0.02/0.05
-// the 2.5-point climb from romance to marriage takes ~1.5-2.5 years of
-// sustained courtship. Marriage is hard because life is slow — the physics
-// is the gate, no timer, no roll, no cap. What matures still marries. Period.
-var ROMANTIC_GROWTH_BASE = 0.02;   // courting couples see each other regardless
-var ROMANTIC_GROWTH_ACTIVE = 0.05; // extra when both co-active
+// engine.66e (S324, Mike-direct): romance growth is a per-cycle CHANCE draw,
+// not a rate — see the ROMANTIC block in updateBondIntensities. The old flat
+// constants (0.3/0.6 = weeks to marry; then 0.02/0.05 = a forced uniform
+// slog) are both dead: chance decides, everything can happen, most doesn't.
 var GC_MARRY_CHANCE = 0.02;   // engine.59: lottery base per no-prospects single per cycle
 var GC_POOL_REF = 60;         // engine.59: scarcity denominator (matches gen F-floor)
 var GC_SPOUSE_INCOME = 48000; // engine.59: same rate as off-camera spouse pricing

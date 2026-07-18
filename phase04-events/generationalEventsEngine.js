@@ -230,6 +230,13 @@ function runGenerationalEngine_(ctx) {
 
   ctx.summary.generationalEvents = [];
 
+  // engine.65 (S323): heritage tier unlock — members of a heritage line carry
+  // better birth odds (an on-camera family compounds). Phase 4 runs before
+  // Phase 5 updates the ledger, so this reads LAST cycle's Heritage_Ledger —
+  // durable tier state, which is the correct read. One sheet read per cycle.
+  ctx._heritageTierByPop = (typeof heritageTierByPop_ === 'function' && ctx.ss) ?
+    heritageTierByPop_(ctx.ss) : {};
+
   var limits = getSeasonalLimits_(calendarContext);
 
   var counts = {
@@ -819,6 +826,14 @@ function checkBirth_(ctx, popId, age, lifeHistory, cal, hasHousehold, marital) {
   // engine.32 T5 — Family dial biases birth odds (0.5..1.5; null -> base rate)
   var dialBands = getCitizenDialBands_(ctx, popId);
   if (dialBands) c *= dialBands.familyFreq;
+
+  // engine.65 (S323) — heritage tier unlock: a line member's odds of children
+  // scale with the line's standing (Founding 1.15x .. Dynasty 1.6x). Odds
+  // modifier only — the dice still speak (SIM_DOCTRINE rule 2).
+  var hTier = ctx._heritageTierByPop && ctx._heritageTierByPop[popId];
+  if (hTier && typeof HERITAGE_BIRTH_MULT !== 'undefined' && HERITAGE_BIRTH_MULT[hTier]) {
+    c *= HERITAGE_BIRTH_MULT[hTier];
+  }
 
   if (c < 0.0005) c = 0.0005;
   if (!chance_(ctx, c)) return null;

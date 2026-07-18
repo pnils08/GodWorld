@@ -464,6 +464,12 @@ function updateMinorSchoolQuality_(ss, ctx, cycle) {
   for (var d = 1; d < demo.length; d++) qualityByHood[demo[d][dHood]] = Number(demo[d][dQ]) || 5;
 
   var simYear = 2040 + Math.floor(((ctx && ctx.summary && ctx.summary.cycleId) || cycle || 0) / 52);
+  // engine.65 (S323): heritage tier unlock — a kid in an Established+ line
+  // reads one notch above the neighborhood index (the parents' life buying
+  // the children's start). Same-cycle signal: generationalWealthEngine runs
+  // before this engine in Phase 5 and publishes S.heritage.lineByPop.
+  var lineByPop = (ctx && ctx.summary && ctx.summary.heritage && ctx.summary.heritage.lineByPop) || {};
+  var iPopSQ = idx('POPID');
   var set = 0;
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
@@ -476,6 +482,8 @@ function updateMinorSchoolQuality_(ss, ctx, cycle) {
     if (iHH >= 0 && !String(row[iHH] || '').trim()) continue; // household kids only
     var q = qualityByHood[row[iHood]];
     if (q === undefined) continue;
+    var hLine = iPopSQ >= 0 ? lineByPop[String(row[iPopSQ] || '').trim()] : null;
+    if (hLine && heritageRank_(hLine.tier) >= 1) q = Math.min(10, q + 1);
     if (Number(row[iSQ]) !== q) { row[iSQ] = q; set++; }
   }
   if (set > 0) ctx.ledger.dirty = true;

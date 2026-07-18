@@ -1,7 +1,13 @@
 /**
  * ============================================================================
- * Citizens Events Engine v2.8 (Previous evening carry-forward)
+ * Citizens Events Engine v2.9 (engine.67 life-state gate)
  * ============================================================================
+ *
+ * v2.9 (S325, engine.67): life-state hard gate — deriveLifeState_ per citizen
+ * (citizenContextBuilder.js), pool filtered via isEventEligible_ before draw.
+ * Impossible content gated (Mike ruling): no work/money/nightlife for kids,
+ * no retirement texture for the working. child/teen split out of youth band
+ * with their own age pools.
  *
  * Backward compatible:
  * - LifeHistory line remains: "[PrimaryTag] text"
@@ -1594,6 +1600,22 @@ function generateCitizensEvents_(ctx) {
   }
 
   function agePoolFor_(ageGroup) {
+    // engine.67 (S325): child/teen split out of the old 0-22 "youth" band —
+    // a Pre-K kid and a 21-year-old no longer share a life. Bands arrive from
+    // lifeState.band when the gate helper is deployed; 4-band ageGroup_ values
+    // still resolve for callers that pass them.
+    if (ageGroup === "child") {
+      return [
+        makeEntry("turned the walk home from school into an expedition", ["source:age", "ageGroup:child"], 1.05, false),
+        makeEntry("built something out of nothing on the living-room floor and defended it fiercely", ["source:age", "ageGroup:child"], 1.0, false)
+      ];
+    }
+    if (ageGroup === "teen") {
+      return [
+        makeEntry("rewrote a text three times before sending it", ["source:age", "ageGroup:teen"], 1.05, false),
+        makeEntry("stayed out until the exact minute of curfew, not one minute past", ["source:age", "ageGroup:teen"], 1.0, false)
+      ];
+    }
     if (ageGroup === "youth") {
       return [
         makeEntry("connected with friends over something small but intense", ["source:age", "ageGroup:youth"], 1.05, false),
@@ -1779,6 +1801,20 @@ function generateCitizensEvents_(ctx) {
     var traitProfile = getCitizenTraitProfile_(popId);
     var archetype = (traitProfile && traitProfile.archetype) ? traitProfile.archetype : 'Drifter';
     var archetypeWeights = getArchetypeWeights_(archetype);
+
+    // engine.67 (S325): life-state — the citizen's row decides what CAN fire
+    // at them. Derived once per citizen, pure (no rng, no sheet reads); feeds
+    // the hard gate at pool-filter time and the child/teen age pools below.
+    var lifeState = (typeof deriveLifeState_ === 'function') ? deriveLifeState_({
+      birthYear: birthYear,
+      simYear: simYear,
+      status: status,
+      occupation: occupation,
+      roleType: (iTierRole >= 0 ? String(row[iTierRole] || "") : ""),
+      maritalStatus: (iMarital >= 0 ? String(row[iMarital] || "") : ""),
+      numChildren: (iNumChildren >= 0 ? row[iNumChildren] : 0),
+      wealthLevel: (iWealth >= 0 ? row[iWealth] : null)
+    }) : null;
 
     // v2.6: Get neighborhood-level context
     var nhContext = getNeighborhoodContext_(neighborhood);
@@ -2127,7 +2163,7 @@ function generateCitizensEvents_(ctx) {
       var echoEntry = unlivedEchoEntry_(String(row[iMemReg]), row[iLife] ? String(row[iLife]) : "");
       if (echoEntry) pool.push(makeEntry(echoEntry.text, mergeTags(echoEntry.tags, calendarTags), echoEntry.weight, false));
     }
-    var agp = agePoolFor_(ageGroup);
+    var agp = agePoolFor_(lifeState ? lifeState.band : ageGroup); // engine.67: child/teen draw their own lives
     for (var agi = 0; agi < agp.length; agi++) {
       pool.push(makeEntry(agp[agi].text, mergeTags(agp[agi].tags, calendarTags), agp[agi].weight, false));
     }
@@ -2322,6 +2358,21 @@ function generateCitizensEvents_(ctx) {
           pool.push(clPooled);
         }
       }
+    }
+
+    // engine.67 (S325, Mike ruling): impossible content is HARD-GATED. The
+    // assembled pool is filtered against the citizen's life-state before any
+    // draw — a child never sees work/money/nightlife entries, a non-retiree
+    // never sees retirement texture. Classification rides existing source:*
+    // tags (eventClassFromTags_); unknown classes stay universal, so this
+    // gate only ever NARROWS, never invents eligibility. No rng consumed.
+    if (lifeState && typeof isEventEligible_ === 'function') {
+      var gatedPool = [];
+      for (var gfi = 0; gfi < pool.length; gfi++) {
+        var gEntry = pool[gfi];
+        if (isEventEligible_(lifeState, eventClassFromTags_(gEntry.tags || []))) gatedPool.push(gEntry);
+      }
+      pool = gatedPool;
     }
 
     if (pool.length === 0) continue;

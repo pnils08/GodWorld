@@ -40,6 +40,99 @@ var SIM_YEAR = 2041;
 
 
 // ════════════════════════════════════════════════════════════════════════════
+// LIFE-STATE GATE (engine.67, S325) — the shared eligibility layer
+// ════════════════════════════════════════════════════════════════════════════
+// The citizen's row is the antenna: what CAN fire at them derives from who
+// they are. Pure functions — no sheet reads, no rng, callable per-citizen in
+// generator hot loops. Design + gate table: docs/plans/2026-07-18-event-pools-design.md.
+// Mike ruling S325: IMPOSSIBLE content is HARD-GATED (a 6-year-old doing rent
+// math is impossible, not improbable); merely-unlikely is down-weighted by the
+// existing dial/archetype systems, not gated here.
+
+/**
+ * Derive a citizen's life-state from row fields the caller already has.
+ * All fields optional — unknowns degrade to adult/universal (never throw).
+ * @param {Object} f {birthYear, simYear, status, occupation, roleType,
+ *                    maritalStatus, numChildren, wealthLevel}
+ * @returns {Object} {age, band, isMinor, working, statusNorm, married, hasKids, wealthBand}
+ */
+function deriveLifeState_(f) {
+  f = f || {};
+  var simYear = Number(f.simYear) || SIM_YEAR;
+  var by = Number(f.birthYear) || 0;
+  var age = (by > 1900 && by < 2100) ? (simYear - by) : null; // unknown age -> adult defaults
+  var band;
+  if (age === null) band = "adult";
+  else if (age <= 12) band = "child";
+  else if (age <= 17) band = "teen";
+  else if (age <= 22) band = "youth";
+  else if (age <= 35) band = "youngAdult";
+  else if (age <= 64) band = "adult";
+  else band = "senior";
+  var statusNorm = String(f.status || "").trim().toLowerCase();
+  var roleLc = String(f.roleType || "").trim().toLowerCase();
+  var occ = String(f.occupation || "").trim();
+  var working;
+  if (statusNorm === "retired") working = "retired";
+  else if (band === "child" || band === "teen" || roleLc === "student" || occ.toLowerCase() === "student") working = "student";
+  else if (occ) working = "working";
+  else working = "none";
+  var maritalLc = String(f.maritalStatus || "").trim().toLowerCase();
+  var wl = (f.wealthLevel === "" || f.wealthLevel === null || f.wealthLevel === undefined) ? null : Number(f.wealthLevel);
+  return {
+    age: age,
+    band: band,
+    isMinor: (age !== null && age < 18),
+    working: working,
+    statusNorm: statusNorm,
+    married: (maritalLc === "married" || maritalLc === "partnered"),
+    hasKids: (Number(f.numChildren) || 0) > 0,
+    wealthBand: (wl === null || isNaN(wl)) ? "unknown" : (wl <= 3 ? "tight" : (wl >= 8 ? "comfortable" : "mid"))
+  };
+}
+
+/**
+ * Classify an event by its tags into a gateable class.
+ * Covers the source:* vocabulary shared by generators + Event_Content_Ledger.
+ * Unknown tags -> "universal" (never gated) — fail-open on class, fail-closed
+ * happens in the gate table only for classes we positively identify.
+ */
+function eventClassFromTags_(tags) {
+  if (!tags || !tags.length) return "universal";
+  for (var i = 0; i < tags.length; i++) {
+    var t = String(tags[i] || "");
+    if (t === "source:occupation") return "work";
+    if (t === "source:economy") return "money";
+    if (t === "source:retirement") return "retirement";
+    if (t === "source:bias" || t.indexOf("biasTarget:") === 0) return "opinion";
+    if (t === "source:prevEvening" || t === "evening:cityEventAttend") return "eveningOut";
+    if (t.indexOf("relationship:romance") === 0) return "romance";
+  }
+  return "universal";
+}
+
+/**
+ * HARD gate: can this life-state live this event class at all?
+ * Impossible -> false (dropped from the pool). Everything else -> true.
+ */
+function isEventEligible_(ls, cls) {
+  if (!ls) return true;
+  // The dead, traded-away, and never-arrived live nothing (callers also gate).
+  if (ls.statusNorm === "deceased" || ls.statusNorm === "traded" || ls.statusNorm === "pending") return false;
+  switch (cls) {
+    case "work":       return ls.working === "working";                 // no work moments for kids/students/retired
+    case "money":      return !ls.isMinor;                              // register math, bills, rent — adults only
+    case "romance":    return !ls.isMinor;                              // bondEngine holds the tighter 20-65 band
+    case "opinion":    return ls.band !== "child";                      // public-figure opinions: teen+
+    case "eveningOut": return ls.band !== "child";                      // last-night buzz/crowds: teen+
+    case "retirement": return ls.statusNorm === "retired";
+    case "school":     return ls.working === "student";
+    default:           return true;                                     // universal — weather, family, neighborhood, play
+  }
+}
+
+
+// ════════════════════════════════════════════════════════════════════════════
 // MAIN FUNCTION
 // ════════════════════════════════════════════════════════════════════════════
 

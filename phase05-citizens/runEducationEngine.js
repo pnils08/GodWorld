@@ -58,6 +58,7 @@ function runEducationEngine_(ctx) {
   var iLastUpd = idx('LastUpdated');
   var iNeighborhood = idx('Neighborhood');
   var iDialState = idx('DialState'); // engine.32 T5 — Openness dial -> learning-event frequency
+  var iStatus = idx('Status'); // engine.67 step 4 (S325) — engine had NO status read; the gone drew education events
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WORLD CONTEXT
@@ -343,6 +344,13 @@ function runEducationEngine_(ctx) {
     var isMED = (row[iMED] || "").toString().toLowerCase().startsWith("y");
     var isCIV = (row[iCIV] || "").toString().toLowerCase().startsWith("y");
     if (isUNI || isMED || isCIV) continue;
+    // engine.67 step 4 (S325): gone-status gate — deceased/inactive/traded/
+    // pending draw no learning texture. Hospitalized stay (reading from a bed
+    // is possible; impossible-bar ruling gates only the impossible).
+    if (iStatus >= 0) {
+      var eduStatus = (row[iStatus] || "").toString().trim().toLowerCase();
+      if (eduStatus === "deceased" || eduStatus === "inactive" || eduStatus === "traded" || eduStatus === "pending") continue;
+    }
 
     var birthYear = Number(row[iBirth] || 0);
     if (!birthYear) continue;

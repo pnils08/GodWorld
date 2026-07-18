@@ -72,6 +72,8 @@ function runCareerEngine_(ctx) {
   var iCareerMobility = idx('CareerMobility'); // engine.61 wire (S321) — first reader ever
   var iStatus = idx('Status'); // engine.52 C1 — hospital status gates career activity
   var iStatusStart = idx('StatusStartCycle'); // engine.52 C1 — admission cycle for income-hit timing
+  var iBirthYear = idx('BirthYear'); // engine.67 step 4 (S325) — no careers for minors
+  var iCareerStage = idx('CareerStage'); // engine.67 step 4 — first reader; 'retired' set at 65 by educationCareerEngine was never consumed
 
   if (iPopID < 0 || iTier < 0 || iClock < 0 || iLife < 0 || iLastUpd < 0) return;
 
@@ -693,6 +695,16 @@ function runCareerEngine_(ctx) {
     if (tier !== 3 && tier !== 4) continue;
     if (isUNI || isMED || isCIV) continue;
 
+    // engine.67 step 4 (S325 matrix): this engine had NO age gate (no BirthYear
+    // read existed) and never consumed CareerStage — a child could draw a
+    // promotion and a retiree could keep transitioning. Minors have no careers;
+    // the retired are done (impossible-bar ruling, both hard gates).
+    if (iBirthYear >= 0) {
+      var cby = Number(row[iBirthYear]) || 0;
+      if (cby > 1900 && cby < 2100 && (2041 - cby) < 18) continue;
+    }
+    if (iCareerStage >= 0 && String(row[iCareerStage] || "").trim().toLowerCase() === "retired") continue;
+
     // v2.3: Load/init career state from LifeHistory
     var existing = row[iLife] ? row[iLife].toString() : "";
 
@@ -702,8 +714,10 @@ function runCareerEngine_(ctx) {
     // it applies once per admission).
     var healthStatus = iStatus >= 0 ? String(row[iStatus] || "active").toLowerCase().trim() : "active";
     // engine.64c (S323): traded/pending hold no Oakland career — no rolls.
+    // engine.67 step 4 (S325): Status=retired joins the skip — same gate as
+    // CareerStage=retired above (either signal ends the career path).
     if (healthStatus === "traded" || healthStatus === "pending" ||
-        healthStatus === "deceased") continue;
+        healthStatus === "deceased" || healthStatus === "retired") continue;
     if (healthStatus === "hospitalized" || healthStatus === "critical") {
       var admitC = iStatusStart >= 0 ? (Number(row[iStatusStart]) || 0) : 0;
       var hitMarker = "[IncomeHit A" + admitC + "]";

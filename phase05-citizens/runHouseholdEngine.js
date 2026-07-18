@@ -449,6 +449,13 @@ function runHouseholdEngine_(ctx) {
     if (mode !== "ENGINE") continue;
     if (tier !== 3 && tier !== 4) continue;
     if (isUNI || isMED || isCIV) continue;
+    // engine.67 step 4 (S325): gone-status gate — the eligibility loop had no
+    // Status exclusion at all (Status only selected the hospital pool below).
+    // Hospitalized/critical stay: their hospital-strain pool IS the design.
+    if (iStatus >= 0) {
+      var hhGateStatus = (row[iStatus] || "").toString().trim().toLowerCase();
+      if (hhGateStatus === "deceased" || hhGateStatus === "inactive" || hhGateStatus === "traded" || hhGateStatus === "pending") continue;
+    }
 
     // ═══════════════════════════════════════════════════════════════════════
     // PROBABILITY

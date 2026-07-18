@@ -75,6 +75,7 @@ function runNeighborhoodEngine_(ctx) {
   var iLast = idx('Last');
   var iBirthYear = idx('BirthYear');
   var iDialState = idx('DialState'); // engine.32 T5 — Out-and-About dial -> neighborhood-event frequency
+  var iStatus = idx('Status'); // engine.67 step 4 (S325) — engine had NO status read; the gone drew neighborhood drift
 
   // ═══════════════════════════════════════════════════════════════════════════
   // OAKLAND NEIGHBORHOODS (12 total - v2.2)
@@ -359,6 +360,12 @@ function runNeighborhoodEngine_(ctx) {
     if (tier !== 3 && tier !== 4) continue;
     if (mode !== 'ENGINE') continue;
     if (isUNI || isMED || isCIV) continue;
+    // engine.67 step 4 (S325): gone-status gate — deceased/inactive/traded/
+    // pending walk no blocks.
+    if (iStatus >= 0) {
+      var nbStatus = (row[iStatus] || '').toString().trim().toLowerCase();
+      if (nbStatus === 'deceased' || nbStatus === 'inactive' || nbStatus === 'traded' || nbStatus === 'pending') continue;
+    }
 
     // ═══════════════════════════════════════════════════════════════════════
     // NEIGHBORHOOD ASSIGNMENT IF MISSING (v2.3 - demographic aware)

@@ -426,12 +426,21 @@ function checkForPromotions_(ctx) {
     var dYears = deriveYearsInCareer_(dSeed, age, dRetired ? 'retired' : '');
     if (dYears > Math.max(0, age - 18)) dYears = Math.max(0, age - 18);
     var setL = function(n, v) { var i9 = idxL(n); if (i9 >= 0) newRow[i9] = v; };
+    // engine.67 step 4 (S325 matrix): minor guard — this path had none, so a
+    // child-age GC row promoted with a full adult economic profile. Minors
+    // emerge as students with zero economics (S320 minor-income convention,
+    // same as processAdvancementIntake's advIsMinor gate and newborn seeding).
+    if (age < 18) {
+      dIncome = 0;
+      dYears = 0;
+      if (iRoleType >= 0) newRow[iRoleType] = 'student';
+    }
     setL('Income', dIncome);
     setL('YearsInCareer', dYears);
     setL('CareerStage', age < 22 ? 'student' : (dRetired ? 'retired' : (dYears >= 5 ? 'mid-career' : 'entry-level')));
     setL('EducationLevel', deriveEducationLevel_(dSeed, neigh, age, null));
-    setL('DebtLevel', deriveDebtLevel_(dSeed, age, dIncome));
-    setL('NetWorth', deriveNetWorth_(dSeed, age, dIncome, dRetired ? 'retired' : ''));
+    setL('DebtLevel', age < 18 ? 0 : deriveDebtLevel_(dSeed, age, dIncome));
+    setL('NetWorth', age < 18 ? 0 : deriveNetWorth_(dSeed, age, dIncome, dRetired ? 'retired' : ''));
     setL('MaritalStatus', 'single');
     var gcSex = gSex >= 0 ? String(row[gSex] || '').toLowerCase() : '';
     setL('Gender', (gcSex === 'male' || gcSex === 'female') ? gcSex : deriveGender_(dSeed, neigh));

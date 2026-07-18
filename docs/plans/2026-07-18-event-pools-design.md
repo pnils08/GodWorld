@@ -109,6 +109,19 @@ Heritage_Ledger reaches: births (odds), drip (slot weight), 18th-birthday draw, 
 
 Rendered view, not a second truth: this MD (repo) is the source; `Event_Wiring_Ledger` tab (created S325, 38 rows: Generator | Class | Phase | AgeGate | StatusGate | WealthGate | HouseholdGate | HeritageGate | Volume | Verdict | AuditSession) is the grid view in the sheets. Regenerate the tab whenever the matrix changes — same-commit rule, engine.md discipline. As the build closes gaps, NO cells flip to YES and the grid lights up. Push mechanism: direct lib/sheets.js write (one-off scratchpad script v1; mechanize only if churn warrants).
 
+## 7b. Chaos vehicles as crisis igniters (Mike-direct, S325 mid-build — verified against config)
+
+> "The point of these chaos cars is to create events that shake up the daily repetition and create a crisis — each likely has a generator to attach to: OARI truck with civic initiatives, ambulance with hospital, cop car with crime. This variety all lands in LifeHistory that folds into the citizen TraitProfile dials, so when a citizen cron wakes, its Events is now its voice."
+
+**Verified state (utilities/chaosCarsConfig.js):** the fleet is 10 vehicles — cop_car, fire_engine, **ambulance (exists)**, oari_van, building_inspector, garbage_truck, mail_truck, ice_cream_truck, street_sweeper, pge_truck. The LifeHistory→dials→wake-voice loop Mike describes **already works**: citizen hits write `[dialTag]` LifeHistory lines + DialState chaos accrual (engine.42 trauma accumulator), compressor folds them into TraitProfile, wake-loop reads the result.
+
+**The gap — tags name the domain but never enter it:**
+- ambulance `workplace_accident` writes tag `Hospitalized` but does NOT set `Status=hospitalized` — the citizen never enters the hospital lifecycle (no recovery arc, no career-engine income hit, no health-cause chain)
+- cop_car `arrested` writes `Transgression-Serious` but never touches the conduct/crime consequence path
+- oari_van has `coverageContribution: true` (initiative-coverage seam, partial) but no Initiative_Tracker handoff
+
+**Queued as build step 8 — chaos→domain coupling:** high-severity chaos outcomes hand off into their domain engines (ambulance severity-high → real Status transition into the health lifecycle; arrest → conduct consequence; OARI → initiative coverage), so a chaos event isn't just remembered — it CHANGES the citizen's running life-state, and the life-state gate then shapes everything that fires after. Crisis becomes causal, not decorative.
+
 ## 8. Not yet audited (loose ends acknowledged)
 
 civicInitiativeEngine (initiative→citizen seam is via civicNewsPool, captured), gentrificationEngine + economicRippleEngine (neighborhood-state inputs, not citizen-event generators), storylineWeavingEngine/storylineHealthEngine (phase06-07 narrative layer), hospital/health flow beyond generationalEventsEngine's lifecycle (engine.52 surface). These are input-side or narrative-side; sweep them before declaring the grid loose-end-free.

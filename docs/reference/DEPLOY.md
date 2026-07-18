@@ -45,12 +45,16 @@ Cloud Shell sometimes clears installed packages. If clasp fails, run `npm instal
 accidentally deploys to live, Mike can cycle live back via its version history — but the
 sandbox is the intended target for anything unverified.
 
-**CURRENT sandbox: `SANDBOX 0716c` — THE LIVE BENCH (S321 2026-07-17).** Copy of live post-S321-deploy (engine.60+.61+gap-wires+MaidenName). This bench runs the CANONICAL cycles (live never fires — sandboxes run, live receives deploys): canon C102+C103 ran here S321, verified healthy. Spouse drip rides its fires (2-3/fire, 33/36 remain). Purpose: canonical run + heritage/home-purchase build stage.
+**CURRENT sandbox: `SANDBOX 0717` — GROUNDHOG BENCH (S322 2026-07-17).** Copy of live as restored to canon C101 (post-S322 rollback; prod code engine.57-.62b + .64/.64b). Groundhog protocol: re-fire C102 on this bench until the code proves clean, then live carries the proven code and **Mike fires the canonical cycle on LIVE from the sheet** (supersedes the 0716c-era "live never fires" model). C102 proven clean here across 3 runs (engine.64/.64b: 93 households formed, Traded/pending excluded, 0 errors/dupes).
+- Spreadsheet ID `1ZP9kiwjXngDNqOtnRby9jGxFZnSahpP3T9SLnJoTwS8`
+- Bound Apps Script ID: `1e9xNz0f13kRjk0XP0lUNwAsAOnLYI-uaLJTkJN5L2O43Mqv1q6g3UckT`
+- Web-app deployment `AKfycbzlOhkYsWwP7wbyNAkaiHZqzwktwJc3THRKUnG8AAQhaRXDjpVHp9_mxGFqbuWf-TLC` @1; SIM_SSID + CYCLE_TRIGGER_TOKEN set (token in sl-engine-sheet). Staging dir `deploy0717`. **WARNING: any valid-token GET fires a FULL cycle — there is no ping mode.**
+
+**RETIRED: `SANDBOX 0716c` — CONTAMINATED, NEVER TOUCH (S322).** Its S321 "canon" C102+C103 are VOID — heritage/marriage contamination; live was restored to canon C101 (2026-07-17 12:30 backup) and the heritage/marriage code fully reverted (442d1ca8).
 - Spreadsheet ID `1erYtwSm8s6TczRTiLFbUQ302viC_MmVULWScITKRues`
 - Bound Apps Script ID: `12W_j60_flC3rr6KyiWrRiU8AcpRY-GDbvGmuNbD-NmR059NFnJTHCwOv`
-- Web-app deployment `AKfycby_tEkajmWmiK738ovnqG3H5OFcGq_oekQRBQBtV18v06ANf5MV51dby7dPhXTLntzkGw`; SIM_SSID + CYCLE_TRIGGER_TOKEN set (token in sl-engine-sheet). **WARNING: any valid-token GET fires a FULL cycle — there is no ping mode.**
 
-**RETIRED: `SANDBOX 0716b`** (S321 — served engine.59/.60/.61 proving fires C102-C119: marriage market, money loop, T4 settlement, banking, gap wires; superseded by post-S321-deploy copy)
+**RETIRED: `SANDBOX 0716b` — CONTAMINATED, NEVER TOUCH (S322)** (S321 — served engine.59/.60/.61 proving fires C102-C119; retired with 0716c, same contamination class)
 - Spreadsheet ID `1reNGLnvimH5vmMs2opPylA1QRpNDKwiVRiN8aYXeAVU`
   URL: https://docs.google.com/spreadsheets/d/1reNGLnvimH5vmMs2opPylA1QRpNDKwiVRiN8aYXeAVU/edit
 - Bound Apps Script ID: `1iA6aG5bk_KOC3QeAu_9P8blRMG7lbrRrL0t3hVmyNwl4-TuJbSQrFjSa`

@@ -113,6 +113,11 @@ function impactsForScope_(vehicle, scope, outcomeName) {
 // ── target pickers (T3.3 / T3.4 / T3.5) ──────────────────────────────────────
 
 // T3.3 — uniform-random citizen from the shared ledger (no tier protection, §S205).
+// engine.67 step 2 (S325): eligibility filter — chaos can only hit citizens who
+// are actually IN the city. Deceased/inactive/traded/pending are unreachable
+// (the S325 conditioning matrix caught deceased rows as pickable). Being hit by
+// street chaos is possible at any age, so no age gate here — status only.
+// Filter consumes no rng; the pick stays one draw over the eligible set.
 function pickCitizenTarget_(rng, ctx) {
   if (!ctx.ledger || !ctx.ledger.rows || ctx.ledger.rows.length === 0) return null;
   var header = ctx.ledger.headers;
@@ -120,7 +125,17 @@ function pickCitizenTarget_(rng, ctx) {
   var iPop = header.indexOf('POPID');
   var iTier = header.indexOf('Tier');
   var iNb = header.indexOf('Neighborhood');
-  var r = Math.floor(rng() * rows.length);
+  var iStatus = header.indexOf('Status');
+  var eligible = [];
+  for (var ei = 0; ei < rows.length; ei++) {
+    if (iStatus >= 0) {
+      var st = String(rows[ei][iStatus] || '').trim().toLowerCase();
+      if (st === 'deceased' || st === 'inactive' || st === 'traded' || st === 'pending') continue;
+    }
+    eligible.push(ei);
+  }
+  if (!eligible.length) return null;
+  var r = eligible[Math.floor(rng() * eligible.length)];
   var row = rows[r];
   var tierRaw = iTier >= 0 ? row[iTier] : null;
   var tierNum = parseInt(String(tierRaw).replace(/[^0-9]/g, ''), 10);

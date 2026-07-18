@@ -995,6 +995,12 @@ function checkFamilyMatchPromotions_(ctx, cycle, slots) {
   for (var s = 0; s < slots; s++) {
     if (!candidates.length || !openSlots.length) break;
 
+    // engine.66f (S324, Mike-verbatim): "random events occurred — events
+    // guaranteed to happen 20% of the time." The lottery EVENT fires 20% of
+    // cycles per slot; when it fires, the reels spin; when they align, the
+    // advancement lands instantly. Mike's number, not a tuning dial.
+    if (rng() >= 0.20) continue;
+
     // Reel 1: the citizen
     var pickIdx = Math.floor(rng() * candidates.length);
     var gRow = gData[candidates[pickIdx]];

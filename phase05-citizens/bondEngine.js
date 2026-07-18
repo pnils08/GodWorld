@@ -329,6 +329,7 @@ function runBondEngine_(ctx) {
   // comes ONLY from processRomanceAndMarriage_ (established + sustained
   // bonds). Function retained for reversibility (Path B no-grow pattern).
   // processGCMarriageLottery_(ctx); // engine.59 — the lottery door
+  processGCCourtship_(ctx); // engine.66f — courtship with the waiting room (bond-grown, nothing instant)
   detectTriangleRivalries_(ctx);
 
   // Step 4: Check for confrontation triggers
@@ -1812,6 +1813,153 @@ function marryCitizens_(ctx, bond, A, B, cycle) {
     domain: 'COMMUNITY', text: A.name + ' and ' + B.name + ' married in ' + A.hood
   });
   Logger.log('P5 MARRIAGE: ' + bond.citizenA + ' + ' + bond.citizenB + ' -> ' + hhId + (superCouple ? ' [SUPER COUPLE]' : ''));
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// engine.66f (S324, Mike-approved) — COURTSHIP WITH THE WAITING ROOM
+// "Bonds can happen between on camera citizens and off camera as well" — but
+// nothing is free. 20% of cycles the event fires (Mike's number): one
+// no-prospects single and one GC citizen are grabbed — match or not (same
+// hood, right sex, age band). Aligned = a ROMANCE BEGINS, nothing more. The
+// bond then lives like any other: chance growth, years usually, maybe never.
+// Only a matured bond marries — and THAT wedding is the moment the GC
+// citizen earns their Simulation_Ledger row: the Tier-5 dream landing
+// through love, a major advancement for both. Weddings are uncapped (what
+// matures marries); the courtship start mints nothing.
+// ════════════════════════════════════════════════════════════════════════════
+function processGCCourtship_(ctx) {
+  if (!ctx.ledger || !ctx.ledger.rows || !ctx.ledger.rows.length) return;
+  var rng = safeRand_(ctx);
+  var cycle = ctx.summary.cycleId || ctx.config.cycleCount || 0;
+  var simYear = 2040 + Math.floor(cycle / 52);
+  var bonds = ctx.summary.relationshipBonds || [];
+  var gcSheet = ctx.ss.getSheetByName('Generic_Citizens');
+  if (!gcSheet) return;
+  var gcVals = gcSheet.getDataRange().getValues();
+  var gh = gcVals[0];
+  var gI = function(n) { return gh.indexOf(n); };
+  var gF = gI('First'), gL = gI('Last'), gSex = gI('Sex'), gStat = gI('Status'),
+      gAge = gI('Age'), gBirth = gI('BirthYear'), gNbhd = gI('Neighborhood'), gOcc = gI('Occupation');
+  if (gF < 0 || gL < 0 || gSex < 0 || gStat < 0) return;
+  var people = buildBondLedgerIndex_(ctx);
+  if (!people) return;
+  var header = ctx.ledger.headers;
+  var idxCol = function(n) { return header.indexOf(n); };
+
+  // ── 1. Matured courtships marry — the dream lands, the row is earned ──
+  for (var b = 0; b < bonds.length; b++) {
+    var bd = bonds[b];
+    if (!bd || bd.status !== BOND_STATUS.ACTIVE) continue;
+    if (bd.bondType !== BOND_TYPES.ROMANTIC) continue;
+    if (String(bd.citizenB || '').indexOf('GC:') !== 0) continue;
+    if (Number(bd.intensity) < MARRIAGE_THRESHOLD) continue;
+    var P = people[bd.citizenA];
+    if (!P || P.marital !== 'single') continue;
+    var gcName = String(bd.citizenB).slice(3);
+    var found = -1;
+    for (var g0 = 1; g0 < gcVals.length; g0++) {
+      var nm0 = (String(gcVals[g0][gF] || '').trim() + ' ' + String(gcVals[g0][gL] || '').trim()).trim();
+      if (nm0 === gcName) { found = g0; break; }
+    }
+    if (found < 0) continue;
+    var gRowM = gcVals[found];
+    var gAgeM = Number(gRowM[gAge]) || (Number(gRowM[gBirth]) ? simYear - Number(gRowM[gBirth]) : 35);
+
+    var maxN = 0;
+    for (var r0 = 0; r0 < ctx.ledger.rows.length; r0++) {
+      var mm = /^POP-(\d+)$/.exec(ctx.ledger.rows[r0][idxCol('POPID')] || '');
+      if (mm && +mm[1] > maxN) maxN = +mm[1];
+    }
+    var spId = 'POP-' + String(++maxN).padStart(5, '0');
+    var last = P.name.split(' ').slice(-1)[0] || '';
+    var spFirst = String(gRowM[gF]).trim();
+    var spName = spFirst + ' ' + last;
+    var newRow = new Array(header.length).fill('');
+    var setC = function(n, v) { var i2 = idxCol(n); if (i2 >= 0) newRow[i2] = v; };
+    setC('POPID', spId); setC('First', spFirst); setC('Last', last);
+    setC('MaidenName', String(gRowM[gL] || '').trim());
+    setC('Tier', 4); setC('RoleType', (gOcc >= 0 && gRowM[gOcc]) || 'Service worker');
+    setC('ClockMode', 'ENGINE'); setC('Status', 'Active');
+    setC('BirthYear', simYear - gAgeM); setC('OrginCity', 'Oakland');
+    setC('Neighborhood', P.hood); setC('MaritalStatus', 'single'); // marryCitizens_ flips it
+    setC('Income', GC_SPOUSE_INCOME); setC('Gender', String(gRowM[gSex]).toLowerCase());
+    setC('UsageCount', 0);
+    var dSeed = spFirst + '|' + last + '|' + spId;
+    var dRetired = gAgeM >= 65;
+    var dYears = deriveYearsInCareer_(dSeed, gAgeM, dRetired ? 'retired' : '');
+    if (dYears > Math.max(0, gAgeM - 18)) dYears = Math.max(0, gAgeM - 18);
+    setC('YearsInCareer', dYears);
+    setC('CareerStage', dRetired ? 'retired' : (dYears >= 5 ? 'mid-career' : 'entry-level'));
+    setC('EducationLevel', deriveEducationLevel_(dSeed, P.hood, gAgeM, null));
+    setC('DebtLevel', deriveDebtLevel_(dSeed, gAgeM, GC_SPOUSE_INCOME));
+    setC('NetWorth', deriveNetWorth_(dSeed, gAgeM, GC_SPOUSE_INCOME, dRetired ? 'retired' : ''));
+    setC('LifeHistory', bondInWorldStamp_(cycle) + ' — [Family] Years in the making — the record finally sees them, beside ' + P.name);
+    ctx.ledger.rows.push(newRow);
+    ctx.ledger.dirty = true;
+    gcSheet.getRange(found + 1, gStat + 1).setValue('Promoted');
+
+    var B = {
+      idx: ctx.ledger.rows.length - 1, name: spName, marital: 'single',
+      gender: String(gRowM[gSex]).toLowerCase(), birthYear: simYear - gAgeM, householdId: '',
+      income: GC_SPOUSE_INCOME, hood: P.hood, tier: 4, edu: '', debt: 0, savings: 0
+    };
+    bd.citizenB = spId; // the bond now holds a real citizen
+    bd.notes = String(bd.notes || '') + ' [record caught up C' + cycle + ']';
+    marryCitizens_(ctx, bd, P, B, cycle);
+    Logger.log('processGCCourtship_: matured — ' + bd.citizenA + ' married ' + spId + ' (' + spName + ')');
+  }
+
+  // ── 2. 20% of cycles, a courtship event fires: grab one single, one GC ──
+  if (rng() >= 0.20) return;
+  var hasProspects = {};
+  for (var b2 = 0; b2 < bonds.length; b2++) {
+    var x = bonds[b2];
+    if (!x || x.status !== BOND_STATUS.ACTIVE) continue;
+    if (x.bondType === BOND_TYPES.ROMANTIC) { hasProspects[x.citizenA] = true; hasProspects[x.citizenB] = true; }
+  }
+  var singles = [];
+  for (var pid in people) {
+    var S1 = people[pid];
+    if (S1.marital !== 'single' || hasProspects[pid]) continue;
+    var age1 = S1.birthYear > 0 ? simYear - S1.birthYear : 0;
+    if (age1 < 20 || age1 > 65) continue;
+    if (S1.gender !== 'male' && S1.gender !== 'female') continue;
+    singles.push(pid);
+  }
+  var gcPool = [];
+  for (var g2 = 1; g2 < gcVals.length; g2++) {
+    if (String(gcVals[g2][gStat] || '').toLowerCase() !== 'active') continue;
+    var sx2 = String(gcVals[g2][gSex] || '').toLowerCase();
+    if (sx2 !== 'male' && sx2 !== 'female') continue;
+    gcPool.push(g2);
+  }
+  if (!singles.length || !gcPool.length) return;
+
+  var pid2 = singles[Math.floor(rng() * singles.length)];
+  var P2 = people[pid2];
+  var gRow2i = gcPool[Math.floor(rng() * gcPool.length)];
+  var gRow2 = gcVals[gRow2i];
+  var gAge2 = Number(gRow2[gAge]) || (Number(gRow2[gBirth]) ? simYear - Number(gRow2[gBirth]) : 0);
+  var pAge2 = P2.birthYear > 0 ? simYear - P2.birthYear : 0;
+  var gHood2 = gNbhd >= 0 ? String(gRow2[gNbhd] || '').trim() : '';
+  var wantSex2 = P2.gender === 'male' ? 'female' : 'male';
+  var gcFull = (String(gRow2[gF] || '').trim() + ' ' + String(gRow2[gL] || '').trim()).trim();
+
+  var aligned = gAge2 > 0 && pAge2 > 0 && Math.abs(gAge2 - pAge2) <= 10 &&
+    String(gRow2[gSex] || '').toLowerCase() === wantSex2 &&
+    gHood2 && P2.hood && gHood2 === P2.hood;
+  if (!aligned) {
+    Logger.log('processGCCourtship_: reels did not align — ' + pid2 + ' vs ' + gcFull + ' (C' + cycle + ')');
+    return;
+  }
+
+  // A romance begins. Nothing minted, nothing given — the record waits.
+  ctx.summary.relationshipBonds.push(makeBond_(pid2, 'GC:' + gcFull,
+    BOND_TYPES.ROMANTIC, 'gc-courtship', 'COMMUNITY', P2.hood,
+    5.5, cycle, 'Met by chance in ' + P2.hood + ' (C' + cycle + ') — partner off-camera, the record waits', ctx));
+  gcSheet.getRange(gRow2i + 1, gStat + 1).setValue('Courting');
+  appendBondLifeLine_(ctx, P2.idx, 'Bond', 'met ' + gcFull + ' — something starting', cycle);
+  Logger.log('processGCCourtship_: courtship begins — ' + pid2 + ' + ' + gcFull + ' in ' + P2.hood);
 }
 
 // ════════════════════════════════════════════════════════════════════════════

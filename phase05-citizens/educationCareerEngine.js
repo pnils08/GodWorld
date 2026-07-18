@@ -637,6 +637,7 @@ function settleAdulthood_(ctx, cycle, rng) {
 
   var diag = 0;
   var bizPool; // engine.62: lazy — Business_Ledger read only on cycles that settle someone
+  var heritageByPop = null; // engine.66: lazy — Heritage_Ledger read only on cycles that settle someone
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
     if (!row || !Array.isArray(row)) continue;
@@ -666,6 +667,19 @@ function settleAdulthood_(ctx, cycle, rng) {
       }
     }
     score += parentRank;
+    // engine.66 (S324, Mike-direct): the family-network perk — a settling
+    // 18-year-old on a founded heritage line draws with the line's weight
+    // behind them. Not a handout: a score bump into the same dice, tier-scaled
+    // (Founding/Established +1, Prominent/Dynasty +2). The better band IS the
+    // "first good job" — roles and income follow the draw, physics intact.
+    var hTier = null;
+    if (iPop >= 0) {
+      if (heritageByPop === null) {
+        heritageByPop = (typeof heritageTierByPop_ === 'function') ? heritageTierByPop_(ctx.ss) : {};
+      }
+      hTier = heritageByPop[String(row[iPop]).trim()] || null;
+      if (hTier) score += (hTier === 'Prominent' || hTier === 'Dynasty') ? 2 : 1;
+    }
     var total = score + rng() * 1.5;
     var band = total >= 5 ? 'rich' : (total >= 2 ? 'solid' : 'rough');
     var b = ADULT_START_BANDS[band];
@@ -723,6 +737,7 @@ function settleAdulthood_(ctx, cycle, rng) {
     if (diag < 5) {
       Logger.log('ENGINE60_T4: ' + (iPop >= 0 ? row[iPop] : 'row' + r) +
         ' hhInc=' + hhInc + ' sq=' + sq + ' parentRank=' + parentRank +
+        (hTier ? ' heritage=' + hTier : '') +
         ' total=' + Math.round(total * 100) / 100 + ' -> ' + band +
         ' (' + row[iRole] + ' @ ' + row[iInc] +
         ' key=' + (iEcon >= 0 ? row[iEcon] : 'n/a') +

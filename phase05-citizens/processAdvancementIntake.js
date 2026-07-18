@@ -1,15 +1,27 @@
 /**
  * ============================================================================
- * processAdvancementIntake v1.4
+ * processAdvancementIntake v1.5
  * ============================================================================
- * 
+ *
+ * v1.5 CHANGES (engine.66, S324):
+ * - Family-match drip door: checkFamilyMatchPromotions_ — GC citizens can win
+ *   the lottery INTO an open family slot on the ledger (off-camera spouse,
+ *   missing parent, uncounted kid). GC is the only door into the ledger;
+ *   a family gets realized only when the generator happened to mint someone
+ *   who fits (SIM_DOCTRINE rules 2, 5, 6).
+ * - Shared drip cap: ALL GC→SL promotions (emergence + family match) share
+ *   DRIP_CAP_PER_CYCLE = 2 (Mike-pinned S324, S322 drip rule). Emergence is
+ *   earned (deterministic, fills first); family matches roll for the rest.
+ * - processAdvancementRows_ wires family links post-mint (SpouseId/ParentIds/
+ *   ChildrenIds both ways, surname + MaidenName, household join).
+ *
  * v1.4 CHANGES:
  * - REMOVED logToDigest_ - main engine writeDigest_() handles Riley_Digest
  * - Prevents partial/misformatted rows when cycle crashes mid-execution
- * 
+ *
  * v1.3 CHANGES:
  * - Renamed findCol_ to findColByName_ to avoid collision
- * 
+ *
  * ============================================================================
  */
 
@@ -126,8 +138,15 @@ function processAdvancementIntake_(ctx) {
   // processAdvancementRows_ immediately below (same cycle). Single checkpoint
   // catches every count source: media usage (above), intake re-mentions
   // (Phase 1), event surfacing (generateCitizensEvents).
-  var emergenceResults = checkEmergencePromotions_(ss, cycle);
+  var emergenceResults = checkEmergencePromotions_(ss, cycle, DRIP_CAP_PER_CYCLE);
   results.emergencePromotionsQueued = emergenceResults.queued;
+
+  // engine.66 (S324): family-match drip door — rolls only for the cap slots
+  // emergence didn't take this cycle. Most cycles this is 0-2 rolls at
+  // DRIP_SLOT_P each; most rolls whiff (no match) — rarity is structural.
+  var familyResults = checkFamilyMatchPromotions_(ctx, cycle,
+    DRIP_CAP_PER_CYCLE - emergenceResults.queued);
+  results.familyMatchesQueued = familyResults.queued;
 
   var advResults = processAdvancementRows_(ctx, now, cycle);
   results.advancementsProcessed = advResults.processed;
@@ -504,6 +523,11 @@ function processAdvancementRows_(ctx, now, cycle) {
   // schema but present if upstream writer adds them.
   var iBirthYear = findColByName_(intakeHeaders, 'BirthYear');
   var iNeighborhood = findColByName_(intakeHeaders, 'Neighborhood');
+  // engine.66 (S324) — family-match drip columns (present only after the
+  // family door first ensures them; -1 on older intake sheets is fine).
+  var iMatchPop = findColByName_(intakeHeaders, 'MatchPopId');
+  var iMatchType = findColByName_(intakeHeaders, 'MatchType');
+  var iMaiden = findColByName_(intakeHeaders, 'MaidenName');
 
   var lPopId = findColByName_(ledgerHeaders, 'POPID');
   var lFirst = findColByName_(ledgerHeaders, 'First');
@@ -565,6 +589,11 @@ function processAdvancementRows_(ctx, now, cycle) {
     var clockMode = iClockMode >= 0 ? (row[iClockMode] || 'ENGINE') : 'ENGINE';
     var notes = iNotes >= 0 ? (row[iNotes] || '') : '';
     
+    // engine.66 — family-match payload (blank on non-drip rows)
+    var matchPop = iMatchPop >= 0 ? String(row[iMatchPop] || '').trim() : '';
+    var matchType = iMatchType >= 0 ? String(row[iMatchType] || '').trim() : '';
+    var maiden = iMaiden >= 0 ? String(row[iMaiden] || '').trim() : '';
+
     var advKey = normalizeCitizenName_(first) + ' ' + normalizeCitizenName_(last);
     var advHits = advNameIndex[advKey] || [];
     if (advHits.length > 1) {
@@ -573,6 +602,16 @@ function processAdvancementRows_(ctx, now, cycle) {
       continue;
     }
     var existingRow = advHits.length === 1 ? advHits[0] : -1;
+
+    // engine.66 — a family-drip row must mint a NEW citizen; a name collision
+    // with an existing ledger row means the wiring would land on the wrong
+    // person. Skip and release the slot (GC row stays Active, re-drawable).
+    if (matchPop && existingRow >= 0) {
+      Logger.log('processAdvancementRows_: family-drip "' + first + ' ' + last +
+        '" collides with existing ledger citizen — row skipped, slot released');
+      rowsToClear.push(i + 1);
+      continue;
+    }
 
     if (existingRow >= 0) {
       if (lTier >= 0) ledgerRows[existingRow][lTier] = tier;
@@ -657,6 +696,9 @@ function processAdvancementRows_(ctx, now, cycle) {
         var stMap = { early: 'entry-level', mid: 'mid-career', senior: 'senior', retired: 'retired' };
         newRow[lCareerStage] = age < 22 ? 'student' : (stMap[profile._careerStage] || 'entry-level');
       }
+      // engine.66 — the name they carried before taking the family surname
+      var lMaiden = findColByName_(ledgerHeaders, 'MaidenName');
+      if (lMaiden >= 0 && maiden) newRow[lMaiden] = maiden;
       // Phase 42 §5.6 (impl #18): push new row to ctx.ledger.rows; Phase 10
       // consolidated commit auto-extends the sheet — no separate append intent.
       ledgerRows.push(newRow);
@@ -666,7 +708,12 @@ function processAdvancementRows_(ctx, now, cycle) {
         logSheet.appendRow([now, newPopId, (first + ' ' + last).trim(), 'Promotion',
           'Added to Simulation_Ledger as Tier ' + tier + '. ' + notes, '', cycle]);
       }
-      markAsEmergedInGeneric_(ss, genericSheet, first, last, cycle);
+      // engine.66 — family-drip rows queued under the FAMILY surname; the GC
+      // row still carries the birth name, so mark it Emerged by that.
+      markAsEmergedInGeneric_(ss, genericSheet, first, maiden || last, cycle);
+      if (matchPop && matchType) {
+        wireFamilyMatch_(ctx, ledgerRows.length - 1, newPopId, matchPop, matchType, now, cycle, logSheet);
+      }
     }
     
     rowsToClear.push(i + 1);
@@ -707,6 +754,17 @@ function processIntakeRows_(ss, now, cycle) {
 // promotion is by design.
 var GC_EMERGENCE_PROMOTION_THRESHOLD = 3;
 
+// engine.66 (S324): ONE drip system, 2 per cycle, period (Mike-pinned S324;
+// S322 drip rule — all GC→SL doors share it). Emergence promotions are
+// earned and fill first; family-match rolls take whatever slots remain.
+var DRIP_CAP_PER_CYCLE = 2;
+// Per-slot chance the family-match lottery even rolls this cycle. Rarity is
+// the design (bonds-rare): expected family drips ≈ P × match-hit-rate.
+var DRIP_SLOT_P = 0.20;
+var DRIP_SPOUSE_AGE_BAND = 10;  // |candidate BY − partner BY| ≤ band
+var DRIP_PARENT_AGE_MIN = 18;   // parent is 18-45 years older than the kid
+var DRIP_PARENT_AGE_MAX = 45;
+
 /**
  * engine.58 (S320): scan Generic_Citizens for Active rows at/over the
  * emergence threshold and queue them as Advancement_Intake1 rows.
@@ -720,8 +778,13 @@ var GC_EMERGENCE_PROMOTION_THRESHOLD = 3;
  * at threshold and re-queues next cycle; an already-promoted citizen routes
  * to the update path, never a duplicate mint.
  */
-function checkEmergencePromotions_(ss, cycle) {
+function checkEmergencePromotions_(ss, cycle, maxQueue) {
   var results = { queued: 0 };
+  // engine.66: shared drip cap — deferred citizens stay Active at threshold
+  // and re-queue next cycle (the self-healing property below already covers
+  // exactly this). Undefined maxQueue (legacy caller) = uncapped.
+  var cap = (typeof maxQueue === 'number') ? maxQueue : Infinity;
+  if (cap <= 0) return results;
   var genericSheet = ss.getSheetByName('Generic_Citizens');
   if (!genericSheet) return results;
   var data = genericSheet.getDataRange().getValues();
@@ -754,6 +817,7 @@ function checkEmergencePromotions_(ss, cycle) {
       aNB = findColByName_(advHeaders, 'Neighborhood');
 
   for (var r = 1; r < data.length; r++) {
+    if (results.queued >= cap) break; // engine.66 shared drip cap
     if (gS >= 0 && String(data[r][gS] || '').toLowerCase() !== 'active') continue;
     var count = Number(data[r][gE]) || 0;
     if (count < GC_EMERGENCE_PROMOTION_THRESHOLD) continue;
@@ -778,6 +842,324 @@ function checkEmergencePromotions_(ss, cycle) {
   }
   if (results.queued) Logger.log('checkEmergencePromotions_: queued ' + results.queued + ' GC lottery promotions');
   return results;
+}
+
+/**
+ * engine.66 (S324): the family-match drip door — the second door out of
+ * Generic_Citizens. Supply-side draw (Mike-approved S324): each open cap slot
+ * rolls DRIP_SLOT_P; a firing slot picks ONE random GC citizen and asks
+ * whether the dice happened to mint someone who fits an open family slot on
+ * the ledger — an off-camera spouse (married, no SpouseId), a missing parent
+ * (minor with <2 ParentIds), an uncounted kid (NumChildren > linked kids).
+ * No match = whiff, nothing promotes — rarity is structural, never quota'd.
+ * Match criteria (Mike-approved S324): sex-compatible, age within band,
+ * same-neighborhood weighted up not required; winner takes the family
+ * surname (GC surname preserved as MaidenName). Founded heritage lines pull
+ * louder, tier-scaled (heritageRank_ weight). Winners queue to
+ * Advancement_Intake1 with MatchPopId/MatchType/MaidenName riding along;
+ * processAdvancementRows_ mints them and wireFamilyMatch_ wires the links.
+ */
+function checkFamilyMatchPromotions_(ctx, cycle, slots) {
+  var results = { queued: 0, whiffs: 0 };
+  if (!slots || slots <= 0) return results;
+  if (!ctx || !ctx.ledger || typeof safeRand_ !== 'function') return results;
+  // The lottery is a cycle event — manual admin runs (runAdvancementIntakeManual)
+  // carry no ctx.rng/rngSeed and must not fire it (safeRand_ would throw).
+  if (typeof ctx.rng !== 'function' &&
+      !(ctx.config && typeof ctx.config.rngSeed === 'number')) return results;
+  var rng = safeRand_(ctx);
+  var ss = ctx.ss;
+
+  var genericSheet = ss.getSheetByName('Generic_Citizens');
+  if (!genericSheet) return results;
+  var gData = genericSheet.getDataRange().getValues();
+  if (gData.length < 2) return results;
+  var gh = gData[0];
+  var gF = findColByName_(gh, 'First'), gL = findColByName_(gh, 'Last'),
+      gB = findColByName_(gh, 'BirthYear'), gA = findColByName_(gh, 'Age'),
+      gN = findColByName_(gh, 'Neighborhood'), gO = findColByName_(gh, 'Occupation'),
+      gS = findColByName_(gh, 'Status'), gX = findColByName_(gh, 'Sex');
+  if (gF < 0 || gL < 0) return results;
+
+  var candidates = []; // indices into gData
+  for (var g = 1; g < gData.length; g++) {
+    if (gS >= 0 && String(gData[g][gS] || '').toLowerCase() !== 'active') continue;
+    if (!String(gData[g][gF] || '').trim() || !String(gData[g][gL] || '').trim()) continue;
+    candidates.push(g);
+  }
+  if (!candidates.length) return results;
+
+  // ── Open family slots from the shared ledger ──
+  var h = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  var idx = function(n) { return h.indexOf(n); };
+  var iPop = idx('POPID'), iLast = idx('Last'),
+      iStatus = idx('Status'), iGender = idx('Gender'), iBY = idx('BirthYear'),
+      iMarital = idx('MaritalStatus'), iSpouse = idx('SpouseId'),
+      iParents = idx('ParentIds'), iChildren = idx('ChildrenIds'),
+      iNumKids = idx('NumChildren'), iHood = idx('Neighborhood');
+  if (iPop < 0 || iLast < 0 || iStatus < 0 || iBY < 0) return results;
+
+  var simYear = 2040 + Math.floor(cycle / 52);
+  var popCount = function(v) { return (String(v || '').match(/POP-\d+/g) || []).length; };
+  var rowByPop = {};
+  for (var p = 0; p < rows.length; p++) {
+    if (rows[p] && rows[p][iPop]) rowByPop[String(rows[p][iPop]).trim()] = rows[p];
+  }
+  var heritageByPop = (typeof heritageTierByPop_ === 'function') ? heritageTierByPop_(ss) : {};
+
+  var openSlots = [];
+  for (var r = 0; r < rows.length; r++) {
+    var row = rows[r];
+    if (!row || String(row[iStatus] || '').toLowerCase() !== 'active') continue;
+    var by = Number(row[iBY]) || 0;
+    if (!by) continue;
+    var popId = String(row[iPop] || '').trim();
+    var hood = iHood >= 0 ? String(row[iHood] || '').trim() : '';
+    var gender = iGender >= 0 ? String(row[iGender] || '').trim().toLowerCase() : '';
+    var surname = String(row[iLast] || '').trim();
+    if (!popId || !surname) continue;
+    var hTier = heritageByPop[popId] || null;
+
+    // SPOUSE slot — married/partnered, spouse off-camera
+    if (iMarital >= 0 && iSpouse >= 0 &&
+        /married|partner/i.test(String(row[iMarital] || '')) &&
+        !String(row[iSpouse] || '').trim()) {
+      openSlots.push({
+        type: 'spouse', targetPop: popId, surname: surname, hood: hood, hTier: hTier,
+        expectSex: gender === 'female' ? 'male' : (gender === 'male' ? 'female' : ''),
+        byMin: by - DRIP_SPOUSE_AGE_BAND, byMax: by + DRIP_SPOUSE_AGE_BAND
+      });
+    }
+    // PARENT slot — minor with fewer than 2 on-camera parents
+    if (iParents >= 0 && (simYear - by) < 18 && popCount(row[iParents]) < 2) {
+      var expectParentSex = '';
+      var pids = String(row[iParents] || '').match(/POP-\d+/g) || [];
+      if (pids.length === 1 && iGender >= 0) {
+        var pRow = rowByPop[pids[0]];
+        var pg = pRow ? String(pRow[iGender] || '').trim().toLowerCase() : '';
+        expectParentSex = pg === 'female' ? 'male' : (pg === 'male' ? 'female' : '');
+      }
+      openSlots.push({
+        type: 'parent', targetPop: popId, surname: surname, hood: hood, hTier: hTier,
+        expectSex: expectParentSex,
+        byMin: by - DRIP_PARENT_AGE_MAX, byMax: by - DRIP_PARENT_AGE_MIN
+      });
+    }
+    // CHILD slot — NumChildren claims more kids than are linked on-camera
+    if (iNumKids >= 0 && iChildren >= 0 &&
+        (Number(row[iNumKids]) || 0) > popCount(row[iChildren])) {
+      openSlots.push({
+        type: 'child', targetPop: popId, surname: surname, hood: hood, hTier: hTier,
+        expectSex: '',
+        byMin: by + DRIP_PARENT_AGE_MIN, byMax: by + DRIP_PARENT_AGE_MAX
+      });
+    }
+  }
+  if (!openSlots.length) return results;
+
+  // ── Intake sheet + extra columns the family door rides on ──
+  var advSheet = ss.getSheetByName('Advancement_Intake1');
+  if (!advSheet) advSheet = ss.getSheetByName('Advancement_Intake');
+  if (!advSheet) {
+    advSheet = ss.insertSheet('Advancement_Intake1');
+    advSheet.appendRow(['First', 'Middle', 'Last', 'RoleType', 'Tier', 'ClockMode', 'CIV', 'MED', 'UNI', 'Notes']);
+  }
+  var advHeaders = advSheet.getRange(1, 1, 1, advSheet.getLastColumn()).getValues()[0];
+  var ensureCols = ['BirthYear', 'Neighborhood', 'MatchPopId', 'MatchType', 'MaidenName'];
+  for (var e = 0; e < ensureCols.length; e++) {
+    if (findColByName_(advHeaders, ensureCols[e]) < 0) {
+      advSheet.getRange(1, advHeaders.length + 1).setValue(ensureCols[e]);
+      advHeaders.push(ensureCols[e]);
+    }
+  }
+  var aF = findColByName_(advHeaders, 'First'), aL = findColByName_(advHeaders, 'Last'),
+      aR = findColByName_(advHeaders, 'RoleType'), aT = findColByName_(advHeaders, 'Tier'),
+      aC = findColByName_(advHeaders, 'ClockMode'), aNo = findColByName_(advHeaders, 'Notes'),
+      aBY = findColByName_(advHeaders, 'BirthYear'), aNB = findColByName_(advHeaders, 'Neighborhood'),
+      aMP = findColByName_(advHeaders, 'MatchPopId'), aMT = findColByName_(advHeaders, 'MatchType'),
+      aMN = findColByName_(advHeaders, 'MaidenName');
+
+  var claimed = {}; // targetPop claimed this cycle — one realization per citizen per cycle
+
+  for (var s = 0; s < slots; s++) {
+    if (!candidates.length) break;
+    if (rng() >= DRIP_SLOT_P) continue; // slot stays quiet this cycle
+
+    var pickIdx = Math.floor(rng() * candidates.length);
+    var gRow = gData[candidates[pickIdx]];
+    var candSex = gX >= 0 ? String(gRow[gX] || '').trim().toLowerCase() : '';
+    var candBY = gB >= 0 ? (Number(gRow[gB]) || 0) : 0;
+    if (!candBY && gA >= 0 && Number(gRow[gA]) > 0) candBY = 2041 - Number(gRow[gA]);
+    if (!candBY) { results.whiffs++; continue; } // ageless row can never match
+
+    var matches = [];
+    for (var m = 0; m < openSlots.length; m++) {
+      var slot = openSlots[m];
+      if (claimed[slot.targetPop]) continue;
+      if (slot.expectSex && candSex !== slot.expectSex) continue; // blank candSex never guesses
+      if (candBY < slot.byMin || candBY > slot.byMax) continue;
+      matches.push(slot);
+    }
+    if (!matches.length) {
+      results.whiffs++;
+      Logger.log('checkFamilyMatchPromotions_: ' + String(gRow[gF]) + ' ' + String(gRow[gL]) +
+        ' drew the roll but fits no open family slot — whiff (C' + cycle + ')');
+      continue;
+    }
+
+    // Weighted pick: base 1, +1 same neighborhood, founded lines pull
+    // tier-scaled (Founding +1 … Dynasty +4).
+    var candHood = gN >= 0 ? String(gRow[gN] || '').trim() : '';
+    var total = 0, weights = [];
+    for (var w = 0; w < matches.length; w++) {
+      var wt = 1;
+      if (candHood && matches[w].hood && candHood === matches[w].hood) wt += 1;
+      if (matches[w].hTier && typeof heritageRank_ === 'function') wt += heritageRank_(matches[w].hTier) + 1;
+      weights.push(wt);
+      total += wt;
+    }
+    var roll = rng() * total, won = matches[0];
+    for (var v = 0; v < matches.length; v++) {
+      roll -= weights[v];
+      if (roll <= 0) { won = matches[v]; break; }
+    }
+
+    var out = new Array(advHeaders.length).fill('');
+    if (aF >= 0) out[aF] = String(gRow[gF]).trim();
+    if (aL >= 0) out[aL] = won.surname; // takes the family name at mint
+    if (aR >= 0) out[aR] = gO >= 0 ? String(gRow[gO] || '').trim() : '';
+    if (aT >= 0) out[aT] = 4;
+    if (aC >= 0) out[aC] = 'ENGINE';
+    if (aNo >= 0) out[aNo] = 'Family-match drip — ' + won.type + ' of ' + won.targetPop +
+      ', C' + cycle + ' (engine.66 lottery)';
+    if (aBY >= 0) out[aBY] = candBY;
+    if (aNB >= 0 && won.hood) out[aNB] = won.hood; // they join the household's neighborhood
+    if (aMP >= 0) out[aMP] = won.targetPop;
+    if (aMT >= 0) out[aMT] = won.type;
+    if (aMN >= 0) out[aMN] = String(gRow[gL]).trim(); // the name they carried before
+    advSheet.appendRow(out);
+
+    claimed[won.targetPop] = true;
+    candidates.splice(pickIdx, 1);
+    results.queued++;
+    Logger.log('checkFamilyMatchPromotions_: ' + String(gRow[gF]) + ' ' + String(gRow[gL]) +
+      ' won the family lottery — ' + won.type + ' of ' + won.targetPop + ' (C' + cycle + ')');
+  }
+  return results;
+}
+
+/**
+ * engine.66 (S324): wire the family links after a family-drip mint. The new
+ * citizen already carries the family surname (queued that way); this connects
+ * the rows — SpouseId/ParentIds/ChildrenIds both ways, household +
+ * neighborhood join, a LifeHistory line on BOTH lives, and a story hook.
+ * LineageId is deliberately NOT set here — heritage membership grows through
+ * updateHeritage_'s own join rules (spouse joins the line whose surname they
+ * took), keeping one owner for line membership (SIM_DOCTRINE rule 7).
+ */
+function wireFamilyMatch_(ctx, newIdx, newPopId, targetPopId, matchType, now, cycle, logSheet) {
+  var h = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  var idx = function(n) { return h.indexOf(n); };
+  var iPop = idx('POPID'), iFirst = idx('First'), iLast = idx('Last'),
+      iSpouse = idx('SpouseId'), iMarital = idx('MaritalStatus'),
+      iParents = idx('ParentIds'), iChildren = idx('ChildrenIds'),
+      iNumKids = idx('NumChildren'), iHH = idx('HouseholdId'),
+      iHood = idx('Neighborhood'), iLife = idx('LifeHistory');
+  var newRow = rows[newIdx];
+  var target = null;
+  for (var r = 0; r < rows.length; r++) {
+    if (rows[r] && String(rows[r][iPop] || '').trim() === targetPopId) { target = rows[r]; break; }
+  }
+  if (!target || !newRow) {
+    Logger.log('wireFamilyMatch_: target ' + targetPopId + ' not found — links skipped');
+    return;
+  }
+  var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
+  var newName = (String(newRow[iFirst] || '') + ' ' + String(newRow[iLast] || '')).trim();
+  var targetName = (String(target[iFirst] || '') + ' ' + String(target[iLast] || '')).trim();
+  var appendPop = function(v, pop) {
+    var arr = String(v || '').match(/POP-\d+/g) || [];
+    if (arr.indexOf(pop) < 0) arr.push(pop);
+    return JSON.stringify(arr);
+  };
+  var desc = '';
+
+  if (matchType === 'spouse') {
+    if (iSpouse >= 0) { target[iSpouse] = newPopId; newRow[iSpouse] = targetPopId; }
+    if (iMarital >= 0) newRow[iMarital] = String(target[iMarital] || 'married');
+    // Kids are shared: mirror the family's kid state instead of the mint
+    // profile's random NumChildren (which would open phantom child slots).
+    if (iNumKids >= 0) newRow[iNumKids] = Number(target[iNumKids]) || 0;
+    if (iChildren >= 0) newRow[iChildren] = String(target[iChildren] || '');
+    desc = 'married to ' + targetName;
+  } else if (matchType === 'parent') {
+    var priorParents = iParents >= 0 ? (String(target[iParents] || '').match(/POP-\d+/g) || []) : [];
+    if (iParents >= 0) target[iParents] = appendPop(target[iParents], newPopId);
+    if (iChildren >= 0) newRow[iChildren] = appendPop('', targetPopId);
+    if (iNumKids >= 0 && !(Number(newRow[iNumKids]) >= 1)) newRow[iNumKids] = 1;
+    desc = 'parent of ' + targetName;
+    // If the kid's single on-camera parent is married with their spouse
+    // off-camera, the arriving parent IS that spouse — one off-camera human
+    // held both roles. Realize the marriage in the same stroke.
+    if (priorParents.length === 1 && iSpouse >= 0 && iMarital >= 0) {
+      var coParent = null;
+      for (var c = 0; c < rows.length; c++) {
+        if (rows[c] && String(rows[c][iPop] || '').trim() === priorParents[0]) { coParent = rows[c]; break; }
+      }
+      if (coParent && /married|partner/i.test(String(coParent[iMarital] || '')) &&
+          !String(coParent[iSpouse] || '').trim()) {
+        coParent[iSpouse] = newPopId;
+        newRow[iSpouse] = String(coParent[iPop]);
+        newRow[iMarital] = String(coParent[iMarital]);
+        desc = 'parent of ' + targetName + ', married to ' +
+          (String(coParent[iFirst] || '') + ' ' + String(coParent[iLast] || '')).trim();
+      }
+    }
+  } else if (matchType === 'child') {
+    if (iChildren >= 0) target[iChildren] = appendPop(target[iChildren], newPopId);
+    if (iParents >= 0) {
+      var parents = [targetPopId];
+      var sp = iSpouse >= 0 ? String(target[iSpouse] || '').match(/POP-\d+/) : null;
+      if (sp) parents.push(sp[0]);
+      newRow[iParents] = JSON.stringify(parents);
+    }
+    desc = 'child of ' + targetName;
+  } else {
+    Logger.log('wireFamilyMatch_: unknown matchType "' + matchType + '" — links skipped');
+    return;
+  }
+
+  // They join the family's household and neighborhood
+  if (iHH >= 0 && target[iHH]) newRow[iHH] = target[iHH];
+  if (iHood >= 0 && target[iHood]) newRow[iHood] = target[iHood];
+
+  // Both lives record it
+  if (iLife >= 0) {
+    var line = stamp + ' — [Family] Came on-camera — ' + desc + ' (drip lottery)';
+    newRow[iLife] = (String(newRow[iLife] || '') ? String(newRow[iLife]) + '\n' : '') + line;
+    var roleWord = matchType === 'spouse' ? 'Spouse' : (matchType === 'parent' ? 'Parent' : 'Child');
+    var tLine = stamp + ' — [Family] ' + roleWord + ' realized on-camera: ' + newName + ' (' + newPopId + ')';
+    target[iLife] = (String(target[iLife] || '') ? String(target[iLife]) + '\n' : '') + tLine;
+  }
+  ctx.ledger.dirty = true;
+
+  if (logSheet) {
+    logSheet.appendRow([now, newPopId, newName, 'Family',
+      'Won the family lottery — ' + desc + ' (engine.66)', '', cycle]);
+  }
+  if (ctx.summary) {
+    ctx.summary.storyHooks = ctx.summary.storyHooks || [];
+    ctx.summary.storyHooks.push({
+      hookType: 'FAMILY_REALIZED', severity: 3, priority: 3,
+      description: newName + ' came on-camera — ' + desc,
+      cycleGenerated: cycle, neighborhood: iHood >= 0 ? String(newRow[iHood] || '') : '',
+      domain: 'COMMUNITY',
+      text: targetName + "'s " + matchType + ' ' + newName + ' enters the record (drip lottery C' + cycle + ')'
+    });
+  }
+  Logger.log('wireFamilyMatch_: ' + newPopId + ' ' + desc + ' — links wired');
 }
 
 /**

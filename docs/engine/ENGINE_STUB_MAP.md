@@ -985,7 +985,7 @@
 - **buildSettleBizPool_(ctx)** *(engine.62 — lazy live pool; null on read failure)*
   Sheets: Business_Ledger
 
-- **settleAdulthood_(ctx, cycle, rng)** *(engine.62: also writes EconomicProfileKey + EmployerBizId + DebtLevel + NetWorth + YearsInCareer(0) + CareerStage(student), registers hire in S.careerSignals.businessDeltas)*
+- **settleAdulthood_(ctx, cycle, rng)** *(engine.62: also writes EconomicProfileKey + EmployerBizId + DebtLevel + NetWorth + YearsInCareer(0) + CareerStage(student), registers hire in S.careerSignals.businessDeltas; engine.66 S324: family-network perk — settling 18-year-old on a founded heritage line gets draw-score bump, Founding/Established +1, Prominent/Dynasty +2, via lazy heritageTierByPop_ read)*
   Reads: S.careerSignals
   Sheets: Household_Ledger, Business_Ledger (via buildSettleBizPool_)
 
@@ -1264,15 +1264,24 @@
 - **processMediaUsage_(ctx, now, cycle)**
   Sheets: Citizen_Media_Usage, Generic_Citizens, LifeHistory_Log
 
-- **processAdvancementRows_(ctx, now, cycle)**
+- **processAdvancementRows_(ctx, now, cycle)** *(engine.66: reads MatchPopId/MatchType/MaidenName intake cols; family-drip rows mint under the family surname + MaidenName, then wireFamilyMatch_ links; drip×existing-name collision skips + releases the slot; markAsEmergedInGeneric_ called with maiden||last)*
   Sheets: Advancement_Intake, Advancement_Intake1, Generic_Citizens, LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
 
 - **processIntakeRows_(ss, now, cycle)**
   Sheets: Intake
 
-- **checkEmergencePromotions_(ss, cycle)**
+- **checkEmergencePromotions_(ss, cycle, maxQueue)** *(engine.66: shared drip cap — queues at most maxQueue (DRIP_CAP_PER_CYCLE=2); deferred citizens self-heal at threshold next cycle)*
   Sheets: Advancement_Intake, Advancement_Intake1, Generic_Citizens
+
+- **checkFamilyMatchPromotions_(ctx, cycle, slots)** *(engine.66 S324: family-match drip door — per-slot DRIP_SLOT_P=0.20 roll picks ONE random Active GC citizen; matches against open family slots from ctx.ledger (spouse: married+no SpouseId, sex-opposite, BY±10; parent: minor with <2 ParentIds, parent-aged 18-45 older; child: NumChildren>linked kids); no match = whiff. Weighted slot pick: +1 same hood, +heritageRank_+1 founded lines. Winner queued to Advancement_Intake1 under family surname with MatchPopId/MatchType/MaidenName. Skips manual runs (no ctx.rng). Dry-run on live: ~0.4 promotions/cycle, 65% cycles zero)*
+  Reads: ctx.ledger.headers/rows
+  Sheets: Generic_Citizens, Advancement_Intake, Advancement_Intake1
+  RNG: safeRand_(ctx)
+
+- **wireFamilyMatch_(ctx, newIdx, newPopId, targetPopId, matchType, now, cycle, logSheet)** *(engine.66: post-mint family links — spouse: SpouseId both ways + shared kid state; parent: ParentIds/ChildrenIds + realizes the marriage when the kid's single on-camera parent is married-no-SpouseId; child: ChildrenIds/ParentIds incl. on-camera spouse. Household+Neighborhood join, LifeHistory line on BOTH rows, LifeHistory_Log 'Family' row, FAMILY_REALIZED story hook. LineageId deliberately NOT set — updateHeritage_ owns line membership)*
+  Writes: ctx.ledger rows (dirty), S.storyHooks
+  Sheets: LifeHistory_Log
 
 - **seedEmergenceBonds_(ctx, cycle)**
   Writes: S.relationshipBonds

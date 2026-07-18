@@ -87,10 +87,12 @@ is a forced marriage (20 weddings in 13 weeks — deleted the door). Nothing
 about marriage ever has to happen; it is an outcome of chance, multiple
 things lining up.
 
-## 12. Fame is real coverage only. (S324)
-The engine naming a citizen in its own texture line is not fame — the engine
-talking to itself counts for nothing. Only real media usage ticks
-EmergenceCount toward the ledger.
+## 12. GC citizens live, and living is the road. (S324, corrected same night)
+A Tier-5 named in an on-camera citizen's week is LIVING their off-camera
+life — those crossings tick EmergenceCount, and three namings land the dream
+(engine.58, Mike-ruled S320). Real media counts the same. Cutting the
+crossings off froze every GC dream and killed the pool — that correction is
+the proof: their liveliness is the system, never noise.
 
 ## The test
 Before shipping any mechanic, one question, Mike's phrasing: **does this make

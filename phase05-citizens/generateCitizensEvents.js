@@ -2640,11 +2640,11 @@ function generateCitizensEvents_(ctx) {
   if (gcSurfaceSheet && gsE >= 0) {
     for (var gwKey in gcIncrements) {
       var gw = gcIncrements[gwKey];
-      // engine.66b (S324, Mike-direct): texture events are NOT fame — the
-      // engine naming a citizen in a throwaway line no longer ticks
-      // EmergenceCount (only real media usage counts, via processMediaUsage_).
-      // The prose line + the namer roster below stay: the encounter happened,
-      // it just doesn't count toward a ledger row.
+      // engine.66d (S324 CORRECTION): the tick is RESTORED. A GC citizen
+      // named in an on-camera citizen's week is LIVING — these crossings are
+      // the Tier-5 road to the ledger (engine.58, Mike-ruled S320: 3 namings
+      // = a row). The S324 removal froze every GC dream; that was wrong.
+      gcSurfaceSheet.getRange(gw.entry.sheetRow, gsE + 1).setValue(gw.entry.count + gw.add);
       if (gsC >= 0 && gw.contexts.length) {
         // engine.59: accumulate the namer roster — keep any non-namer origin
         // note (intake context) + the last 5 'Named in' entries.

@@ -323,7 +323,12 @@ function runBondEngine_(ctx) {
   // feuds. Weddings live HERE now (Mike: "marriage comes from bonds not
   // events"); the generationalEventsEngine dice path is retired.
   processRomanceAndMarriage_(ctx);
-  processGCMarriageLottery_(ctx); // engine.59 — the lottery door
+  // engine.66b (S324, Mike-direct): GC marriage lottery DISABLED — a chance
+  // roll that hands a single citizen a random Tier-5 body is a forced
+  // marriage; no bond established it, nothing maintained it. Marriage now
+  // comes ONLY from processRomanceAndMarriage_ (established + sustained
+  // bonds). Function retained for reversibility (Path B no-grow pattern).
+  // processGCMarriageLottery_(ctx); // engine.59 — the lottery door
   detectTriangleRivalries_(ctx);
 
   // Step 4: Check for confrontation triggers
@@ -1480,8 +1485,13 @@ var ROMANCE_CHANCE = 0.10;    // per-cycle base once conditions hold (× tier ×
 var MARRIAGE_THRESHOLD = 8;   // a romance grown this strong marries
 var TRIANGLE_BIRTH_INTENSITY = 5; // rivals born from a shared love start here
 var FRIENDSHIP_GROWTH = 0.4;  // engine.59: per-cycle when both co-active (× warmth trait)
-var ROMANTIC_GROWTH_BASE = 0.3;   // engine.59: courting couples see each other regardless
-var ROMANTIC_GROWTH_ACTIVE = 0.6; // engine.59: extra when both co-active
+// engine.66b (S324, Mike-direct): romance grows at LIFE SPEED — cycles are
+// weeks, and the old 0.3/0.6 rates married couples in a month. At 0.02/0.05
+// the 2.5-point climb from romance to marriage takes ~1.5-2.5 years of
+// sustained courtship. Marriage is hard because life is slow — the physics
+// is the gate, no timer, no roll, no cap. What matures still marries. Period.
+var ROMANTIC_GROWTH_BASE = 0.02;   // courting couples see each other regardless
+var ROMANTIC_GROWTH_ACTIVE = 0.05; // extra when both co-active
 var GC_MARRY_CHANCE = 0.02;   // engine.59: lottery base per no-prospects single per cycle
 var GC_POOL_REF = 60;         // engine.59: scarcity denominator (matches gen F-floor)
 var GC_SPOUSE_INCOME = 48000; // engine.59: same rate as off-camera spouse pricing
@@ -1663,7 +1673,8 @@ function processRomanceAndMarriage_(ctx) {
       continue; // romance and marriage never happen the same cycle
     }
 
-    // ── A grown romance marries. Period. (No caps — what matures, marries.)
+    // ── A grown romance marries. Period. (No caps — what matures, marries.
+    // engine.66b: the years live in the growth rate, not in a timer here.)
     if (bond.bondType === BOND_TYPES.ROMANTIC &&
         Number(bond.intensity) >= MARRIAGE_THRESHOLD &&
         bothSingle && ageOk) {

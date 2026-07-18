@@ -2640,7 +2640,11 @@ function generateCitizensEvents_(ctx) {
   if (gcSurfaceSheet && gsE >= 0) {
     for (var gwKey in gcIncrements) {
       var gw = gcIncrements[gwKey];
-      gcSurfaceSheet.getRange(gw.entry.sheetRow, gsE + 1).setValue(gw.entry.count + gw.add);
+      // engine.66b (S324, Mike-direct): texture events are NOT fame — the
+      // engine naming a citizen in a throwaway line no longer ticks
+      // EmergenceCount (only real media usage counts, via processMediaUsage_).
+      // The prose line + the namer roster below stay: the encounter happened,
+      // it just doesn't count toward a ledger row.
       if (gsC >= 0 && gw.contexts.length) {
         // engine.59: accumulate the namer roster — keep any non-namer origin
         // note (intake context) + the last 5 'Named in' entries.

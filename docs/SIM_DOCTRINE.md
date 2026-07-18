@@ -1,7 +1,7 @@
 ---
 title: Sim Doctrine — what makes GodWorld a sim, not a data system
 created: 2026-07-14
-updated: 2026-07-14
+updated: 2026-07-18
 type: doctrine
 tags: [doctrine, engine, canon, always-consult]
 pointers:
@@ -64,6 +64,33 @@ that flips a life state with no cause behind it is the old broken pattern.
 A wrong-looking number that fired and surfaced is an event citizens lived
 (existing doctrine, extended): a feud, a flood, a collapse produced by honest
 physics is never rolled back for being unpleasant.
+
+## 9. GC citizens are protagonists in waiting. (S324)
+Tier 5 lives off-camera, living a life, dreaming of making the
+Simulation_Ledger. They arrive AS THEMSELVES or not at all. Grabbing one as
+a body to backfill a row kills a citizen — backfilling for no reason
+destroys the whole sim. GC is a waiting room of dreamers, never inventory.
+
+## 10. The lottery grabs two — they match or they don't. (S324)
+"How is it a lottery if it's looking at every citizen? A lottery grabs 2 and
+do they match or not." One random citizen, one random opening in the world —
+the rare chance of moments aligning: right neighborhood, right age, right
+sex. No scanning for a fit, no probability dials, no priorities, no timers.
+Zero is the normal cycle. At most 2 land per cycle, period, all doors
+combined. Becoming a heritage ledger is the game; this is how the game is
+entertainment — chance, not force.
+
+## 11. Marriage is years of a maintained bond. Nothing else. (S324)
+A bond establishes, is maintained, matures — then it marries, uncapped.
+Getting married and a family is HARD. Any roll that hands a citizen a spouse
+is a forced marriage (20 weddings in 13 weeks — deleted the door). Nothing
+about marriage ever has to happen; it is an outcome of chance, multiple
+things lining up.
+
+## 12. Fame is real coverage only. (S324)
+The engine naming a citizen in its own texture line is not fame — the engine
+talking to itself counts for nothing. Only real media usage ticks
+EmergenceCount toward the ledger.
 
 ## The test
 Before shipping any mechanic, one question, Mike's phrasing: **does this make

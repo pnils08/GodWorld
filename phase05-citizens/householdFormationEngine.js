@@ -191,7 +191,12 @@ function processHouseholdFormation_(ctx) {
     // formNewHouseholds_ minted single-person households (15%/cycle, cap 3).
     // Marriage-driven formation lands in engine.57 P5. Function retained.
     var newHouseholds = [];
-    results.householdsFormed = 0;
+    // engine.64 (S322, Mike-direct): criteria formation — a citizen line
+    // becomes a household the cycle the record already says family. Computed,
+    // never backfilled; no hooks/LifeHistory (record-keeping, not an event).
+    var criteriaForm = formCriteriaHouseholds_(ctx, households, cycle);
+    results.householdsFormed = criteriaForm.formed;
+    results.householdsAdopted = criteriaForm.adopted;
 
     // Process births
     var births = generateBirths_(ss, citizens, households, cycle);
@@ -256,6 +261,118 @@ function processHouseholdFormation_(ctx) {
 // ════════════════════════════════════════════════════════════════════════════
 // DATA LOADING
 // ════════════════════════════════════════════════════════════════════════════
+
+// engine.64 (S322, Mike-direct): off-camera family members earn generically —
+// same rate as the engine's off-camera spouse pricing (GC_SPOUSE_INCOME).
+var GENERIC_OFFCAM_INCOME = 48000;
+
+/**
+ * engine.64 (S322, Mike-direct) — criteria household formation.
+ *
+ * A citizen line becomes a household the cycle the record already says
+ * family: MaritalStatus=married, OR adult with on-ledger kids, OR minor with
+ * no parents. The household is COMPUTED — off-camera members contribute
+ * GENERIC_OFFCAM_INCOME (married-no-spouse-on-camera: +1 generic; parentless
+ * minor: +2 generics). No one is minted or backfilled — the drip lottery is
+ * the only door on-camera, and a lottery win later upgrades the household's
+ * real dynamics.
+ *
+ * Household-as-truth guards (Mike-direct):
+ *  - If the citizen already appears in an ACTIVE household's Members, ADOPT
+ *    that household onto their SL row (repair the pointer). Never form a twin.
+ *  - Existing Household_Ledger rows are never modified or deleted here —
+ *    this function only appends new rows and fills blank SL HouseholdIds.
+ *  - Bond-engine weddings already form/join households completely (verified
+ *    S322): anything they made is truth this function routes around.
+ */
+function formCriteriaHouseholds_(ctx, households, cycle) {
+  var out = { formed: 0, adopted: 0 };
+  var headers = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  var idx = function(n) { return headers.indexOf(n); };
+  var iHH = idx('HouseholdId'), iInc = idx('Income'), iPop = idx('POPID');
+  if (iHH < 0 || iPop < 0) return out;
+
+  var sheet = ctx.ss.getSheetByName('Household_Ledger');
+  if (!sheet) return out;
+  var hHead = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+
+  // Truth index: citizen -> the ACTIVE household whose Members already list them.
+  var memberOf = {};
+  for (var h = 0; h < households.length; h++) {
+    for (var m = 0; m < households[h].members.length; m++) {
+      memberOf[String(households[h].members[m]).trim()] = households[h].householdId;
+    }
+  }
+
+  var simYear = 2040 + Math.floor(cycle / 52);
+  var citizens = loadCitizens_(ctx); // active only
+  var byPop = {};
+  for (var b = 0; b < citizens.length; b++) byPop[String(citizens[b].popId).trim()] = citizens[b];
+  var popIdOf = function(v) { var mm = String(v || '').match(/POP-\d+/); return mm ? mm[0] : ''; };
+  var liveHH = function(cz) { return String(rows[cz.ledgerIndex][iHH] || '').trim(); };
+  var seq = 0;
+
+  for (var i = 0; i < citizens.length; i++) {
+    var cz = citizens[i];
+    if (liveHH(cz)) continue; // live check — a kid housed earlier this pass skips
+
+    var pop = String(cz.popId).trim();
+    if (memberOf[pop]) { // guard 1: household truth wins — adopt, don't form
+      rows[cz.ledgerIndex][iHH] = memberOf[pop];
+      ctx.ledger.dirty = true;
+      out.adopted++;
+      continue;
+    }
+
+    var age = simYear - (Number(cz.birthYear) || 0);
+    var married = String(cz.maritalStatus).toLowerCase() === 'married';
+    var onKids = [];
+    var rawKids = cz.childrenIds || [];
+    for (var k = 0; k < rawKids.length; k++) {
+      var kid = byPop[popIdOf(rawKids[k])];
+      if (kid && !liveHH(kid)) onKids.push(String(kid.popId).trim());
+    }
+    var orphanMinor = age < 18 && !(cz.parentIds || []).length;
+    if (!married && !(age >= 18 && onKids.length) && !orphanMinor) continue;
+
+    var ownInc = iInc >= 0 ? (Number(String(rows[cz.ledgerIndex][iInc]).replace(/[$,\s]/g, '')) || 0) : 0;
+    var members = [pop];
+    var income = ownInc;
+    var type = 'couple';
+    if (married) income += GENERIC_OFFCAM_INCOME;           // off-camera spouse
+    if (age >= 18 && onKids.length) {
+      type = 'family';
+      for (var k2 = 0; k2 < onKids.length; k2++) members.push(onKids[k2]);
+    }
+    if (orphanMinor) { type = 'family'; income = ownInc + GENERIC_OFFCAM_INCOME * 2; } // both parents off-camera
+
+    var hhId = 'HH-' + String(cycle).padStart(4, '0') + '-F' + String(++seq).padStart(3, '0');
+    var vals = {
+      HouseholdId: hhId, HeadOfHousehold: pop, HouseholdType: type,
+      Members: JSON.stringify(members), Neighborhood: cz.neighborhood || 'Downtown',
+      HousingType: 'rented',
+      MonthlyRent: (typeof estimateRent_ === 'function') ? estimateRent_(cz.neighborhood) : 1700,
+      HouseholdIncome: income, FormedCycle: cycle, Status: 'active'
+    };
+    var rowOut = new Array(hHead.length).fill('');
+    for (var c = 0; c < hHead.length; c++) {
+      if (vals[hHead[c]] !== undefined) rowOut[c] = vals[hHead[c]];
+    }
+    sheet.appendRow(rowOut); // append-only — existing rows never touched
+    for (var m2 = 0; m2 < members.length; m2++) {
+      var mc = byPop[members[m2]];
+      if (mc && !liveHH(mc)) rows[mc.ledgerIndex][iHH] = hhId;
+    }
+    ctx.ledger.dirty = true;
+    out.formed++;
+  }
+
+  if (out.formed || out.adopted) {
+    Logger.log('formCriteriaHouseholds_ engine.64: formed ' + out.formed + ', adopted ' + out.adopted);
+  }
+  return out;
+}
 
 function loadCitizens_(ctx) {
   // Phase 42 §5.6: read from shared ctx.ledger; rowIndex maps to sheet row

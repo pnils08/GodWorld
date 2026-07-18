@@ -1112,11 +1112,15 @@ function trackHomeOwnership_(ss, ctx, cycle) {
             ' — keys in hand, rent checks done';
         }
       }
-      if (iLin >= 0) {
-        var mLin = String(members[m2][iLin] || '').trim();
-        if (mLin) homesByLine[mLin] = (homesByLine[mLin] || 0) + 1;
-      }
     }
+    // One house = one home per line, however many members share it.
+    var linesInHouse = {};
+    for (var m3 = 0; m3 < members.length; m3++) {
+      if (iLin < 0) break;
+      var mLin = String(members[m3][iLin] || '').trim();
+      if (mLin) linesInHouse[mLin] = true;
+    }
+    for (var lKey in linesInHouse) homesByLine[lKey] = (homesByLine[lKey] || 0) + 1;
     ctx.ledger.dirty = true;
     var mortgage = Math.round(price * HOME_MORTGAGE_MONTHLY);
     hhSheet.getRange(q + 1, cType + 1).setValue('owned');

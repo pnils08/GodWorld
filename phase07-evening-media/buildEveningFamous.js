@@ -39,6 +39,7 @@
  */
 
 function buildEveningFamous_(ctx) {
+  decayCulturalFame_(ctx); // engine.68 — quiet fame fades before tonight's sightings register
 
   // Defensive guard
   if (!ctx || !ctx.summary) {
@@ -224,6 +225,32 @@ function buildEveningFamous_(ctx) {
             homeNeighborhood: pNeigh,
             traitProfile: pTrait
           });
+        }
+
+        // engine.68 (S325, Mike doctrine: fame is its own attention — another
+        // level of event promotion). The city SEES its own famous: any SL
+        // citizen at the cultural fame bar (FameScore >= 25 via UniverseLinks,
+        // lagged cached read) joins the sighting pool alongside the athletes.
+        if (typeof culturalStatusByPop_ === 'function') {
+          var _iPop68 = slH.indexOf('POPID');
+          var famousByPop = culturalStatusByPop_(ctx);
+          for (var f68 = 0; f68 < slRows.length; f68++) {
+            var fr68 = slRows[f68];
+            var fPop68 = _iPop68 >= 0 ? String(fr68[_iPop68] || '').trim().toUpperCase() : '';
+            var cs68 = fPop68 && famousByPop[fPop68];
+            if (!cs68) continue;
+            var fStat68 = (fr68[_iStatus] || '').toString().trim().toLowerCase();
+            if (fStat68 !== 'active') continue;
+            var fName68 = ((fr68[_iFirst] || '') + ' ' + (fr68[_iLast] || '')).toString().trim();
+            if (!fName68 || fName68.indexOf(' ') < 0) continue;
+            REAL_PLAYERS.push({
+              name: fName68,
+              role: cs68.category || 'local figure',
+              tier: Number(fr68[_iTier] || 4),
+              homeNeighborhood: (_iNeigh >= 0) ? (fr68[_iNeigh] || '').toString() : '',
+              traitProfile: (_iTrait >= 0) ? (fr68[_iTrait] || '').toString() : ''
+            });
+          }
         }
   }
 

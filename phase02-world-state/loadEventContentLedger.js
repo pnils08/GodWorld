@@ -74,7 +74,12 @@ var CONTENT_LEDGER_DSL_FIELDS = {
   band:         { kind: 'enum', values: { child: 1, teen: 1, youth: 1, youngAdult: 1, adult: 1, senior: 1 } },
   occupation:   { kind: 'str' },     // citizen row Occupation (exact match, case-insensitive at eval)
   tier:         { kind: 'num' },     // citizen row Tier
-  heritage:     { kind: 'enum', values: { none: 1, founding: 1, established: 1, prominent: 1, dynasty: 1 } }
+  heritage:     { kind: 'enum', values: { none: 1, founding: 1, established: 1, prominent: 1, dynasty: 1 } },
+  // engine.68 (S325): fame joins the authoring surface — the library can aim
+  // content at the culturally known (fame = Cultural_Ledger FameScore via
+  // UniverseLinks; 0 below the 25 bar). culdomain: Arts/Sports/Community etc.
+  fame:         { kind: 'num' },
+  culdomain:    { kind: 'str' }
 };
 
 /**

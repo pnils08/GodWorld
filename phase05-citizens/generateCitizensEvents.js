@@ -2218,13 +2218,15 @@ function generateCitizensEvents_(ctx) {
 
     // engine.32 T3 — fame seam: citizens with repeated edition appearances
     // (UsageCount = SL appearance counter, written by mediaRoomIntake) draw
-    // public-recognition events. Threshold 8 ≈ the top ~10 ENGINE T3-4
-    // citizens live (S255 audit: 96/904 nonzero, 15 at 8+). Tag routes to
-    // 'Reputation' (Social, slot-eligible; DIAL_MAP integrity+3/sociability+2)
-    // — coverage → fame → recognition → Reputation memory closes the loop.
-    // Forward-compatible with engine.29: decay/ascension change how
-    // UsageCount evolves, not what it means here.
-    if (usageCount >= 8) {
+    // public-recognition events. engine.68 (S325): Cultural_Ledger joins —
+    // a citizen at the fame bar (FameScore >= 25 via UniverseLinks) draws
+    // recognition too, and the WEIGHT scales with how famous they are
+    // (fame is its own attention — Mike doctrine). Lagged read, cached map.
+    var culturalStatus = (typeof culturalStatusByPop_ === 'function')
+      ? (culturalStatusByPop_(ctx)[String(popId).trim().toUpperCase()] || null) : null;
+    var culturalFame = culturalStatus ? culturalStatus.fameScore : 0;
+    if (usageCount >= 8 || culturalFame >= 25) {
+      var fameWeight = culturalFame >= 60 ? 1.35 : (culturalFame >= 40 ? 1.25 : 1.15);
       var famePool = [
         "got recognized by a stranger who'd read about them in the Tribune",
         "fielded questions at the corner store about the story they'd appeared in",
@@ -2232,7 +2234,7 @@ function generateCitizensEvents_(ctx) {
         "overheard their own name in a conversation outside the cafe"
       ];
       for (var fmi = 0; fmi < famePool.length; fmi++) {
-        pool.push(makeEntry(famePool[fmi], mergeTags(["source:fame"], calendarTags), 1.15, false));
+        pool.push(makeEntry(famePool[fmi], mergeTags(["source:fame"], calendarTags), fameWeight, false));
       }
     }
 
@@ -2454,7 +2456,10 @@ function generateCitizensEvents_(ctx) {
         band: lifeState ? lifeState.band : ageGroup,
         occupation: occupation,
         tier: tier,
-        heritage: (ctx._heritageTierByPop && ctx._heritageTierByPop[String(popId).trim().toUpperCase()]) || "none"
+        heritage: (ctx._heritageTierByPop && ctx._heritageTierByPop[String(popId).trim().toUpperCase()]) || "none",
+        // engine.68: fame joins the authoring surface (0 below the 25 bar)
+        fame: culturalFame,
+        culdomain: culturalStatus ? culturalStatus.domain : ""
       };
       for (var clk in contentLedger.lines) {
         if (!contentLedger.lines.hasOwnProperty(clk)) continue;
@@ -2703,6 +2708,19 @@ function generateCitizensEvents_(ctx) {
     if (tags.indexOf("source:faith") >= 0) {
       if (!S.faithExposures) S.faithExposures = [];
       S.faithExposures.push({ popId: String(popId), hood: neighborhood });
+    }
+
+    // engine.68 (S325, Mike doctrine: fame is its own attention). A famous
+    // citizen's lived week seeds MEDIA attention — a FAME_WATCH hook the
+    // newsroom sees, scaled by how famous (25->6%, 40+->10% per active week).
+    // Once per citizen per cycle (ev===0), only on weeks they actually lived.
+    if (ev === 0 && culturalFame >= 25 && chanceHit(Math.min(0.10, culturalFame / 400))) {
+      if (!S.storyHooks) S.storyHooks = [];
+      S.storyHooks.push({
+        hookType: 'FAME_WATCH', severity: 3, priority: 3,
+        description: (((row[iFirst] || '') + ' ' + (row[iLast] || '')).trim()) + ' — the city is watching: ' + pick,
+        cycleGenerated: cycle, neighborhood: neighborhood, domain: 'CULTURE', text: pick
+      });
     }
 
     if (occupation) tags = mergeTags(tags, ["occupation:" + occupation]);

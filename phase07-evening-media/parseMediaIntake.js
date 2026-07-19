@@ -1,4 +1,10 @@
 /**
+ * ⚠️ DEAD CODE (S325 engine.68 audit — flagged, retained for reversibility):
+ * parseMediaIntake_ has ZERO callers anywhere in the repo — no safePhaseCall_,
+ * no menu wrapper, nothing. Its registerCulturalEntity_ call has never fired,
+ * and it passes a stale 6th `cal` arg the current signature ignores. If you
+ * rewire this, check phase order vs the Phase-10 intent executor first.
+ *
  * ============================================================================
  * parseMediaIntake_ v2.3
  * ============================================================================

@@ -51,6 +51,84 @@
  * ============================================================================
  */
 
+// ═══════════════════════════════════════════════════════════════════════════
+// engine.68 (S325, Mike-approved): CULTURAL STATUS BY POPID — the read half
+// of the antenna. UniverseLinks POPIDs have been written on the cycle path
+// since engine.44 with ZERO cycle readers; this map is the first. One sheet
+// read per cycle, cached on ctx (heritage-read pattern, engine.65). Only
+// entities at the fame bar (FameScore >= 25, Mike ruling) enter the map —
+// below the bar the antenna stays dark.
+// ═══════════════════════════════════════════════════════════════════════════
+var CULTURAL_FAME_BAR = 25;
+var CULTURAL_FAME_QUIET_CYCLES = 10;
+
+// engine.68 (S325, Mike-approved): FAME FADES. Quiet fame drifts down —
+// nothing is free (doctrine): fame earned by real namings must be maintained
+// by them. A row unseen for CULTURAL_FAME_QUIET_CYCLES loses 1 FameScore per
+// cycle (floor 0); any fresh registration writes LastSeenCycle and stops the
+// slide. Cell intents (runs Phase 7, before the executor). One tab read —
+// piggybacks the cycle's registration snapshot cost.
+function decayCulturalFame_(ctx) {
+  var S = ctx.summary || {};
+  var cycle = S.cycleId || (ctx.config && ctx.config.cycleCount) || 0;
+  if (!cycle) return;
+  try {
+    var sheet = ctx.ss ? ctx.ss.getSheetByName('Cultural_Ledger') : null;
+    if (!sheet || sheet.getLastRow() < 2) return;
+    var v = sheet.getDataRange().getValues();
+    var h = v[0];
+    var iFame = h.indexOf('FameScore'), iLast = h.indexOf('LastSeenCycle');
+    if (iFame < 0 || iLast < 0) return;
+    var decayed = 0;
+    for (var r = 1; r < v.length; r++) {
+      var fame = Number(v[r][iFame]) || 0;
+      if (fame <= 0) continue;
+      var last = Number(String(v[r][iLast] || '').replace(/[^0-9]/g, '')) || 0;
+      if (!last || (cycle - last) <= CULTURAL_FAME_QUIET_CYCLES) continue;
+      queueCellIntent_(ctx, 'Cultural_Ledger', r + 1, iFame + 1, fame - 1,
+        'engine.68 fame decay (quiet since C' + last + ')', 'culture');
+      decayed++;
+    }
+    if (decayed) Logger.log('decayCulturalFame_: ' + decayed + ' entities fading');
+  } catch (eDF) {
+    Logger.log('decayCulturalFame_: ' + eDF.message);
+  }
+}
+
+function culturalStatusByPop_(ctx) {
+  if (ctx._culturalByPop) return ctx._culturalByPop;
+  var map = {};
+  ctx._culturalByPop = map;
+  try {
+    var sheet = ctx.ss ? ctx.ss.getSheetByName('Cultural_Ledger') : null;
+    if (!sheet || sheet.getLastRow() < 2) return map;
+    var v = sheet.getDataRange().getValues();
+    var h = v[0];
+    var iPop = h.indexOf('UniverseLinks'), iFame = h.indexOf('FameScore'),
+        iDom = h.indexOf('CulturalDomain'), iCat = h.indexOf('FameCategory'),
+        iTier = h.indexOf('CityTier'), iLast = h.indexOf('LastSeenCycle');
+    if (iPop < 0 || iFame < 0) return map;
+    for (var r = 1; r < v.length; r++) {
+      var pop = String(v[r][iPop] || '').trim().toUpperCase();
+      if (!pop || pop.indexOf('POP-') !== 0) continue;
+      var fame = Number(v[r][iFame]) || 0;
+      if (fame < CULTURAL_FAME_BAR) continue;
+      // multiple rows can link one citizen (dual writers) — highest fame wins
+      if (map[pop] && map[pop].fameScore >= fame) continue;
+      map[pop] = {
+        fameScore: fame,
+        domain: String(v[r][iDom >= 0 ? iDom : 0] || ''),
+        category: String(v[r][iCat >= 0 ? iCat : 0] || ''),
+        cityTier: String(v[r][iTier >= 0 ? iTier : 0] || ''),
+        lastSeenCycle: Number(String(v[r][iLast >= 0 ? iLast : 0] || '').replace(/[^0-9]/g, '')) || 0
+      };
+    }
+  } catch (eCS) {
+    Logger.log('culturalStatusByPop_: read failed — ' + eCS.message);
+  }
+  return map;
+}
+
 function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborhood) {
 
   // Defensive guard

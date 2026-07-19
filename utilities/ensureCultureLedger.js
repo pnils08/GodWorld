@@ -31,7 +31,13 @@ function ensureCulturalLedger_(ctx) {
       "FirstRefSource",   // N
       "MediaSpread",      // O (# of unique journalists)
       "CityTier",         // P
-      "Neighborhood"      // Q (Oakland neighborhood)
+      "Neighborhood",     // Q (Oakland neighborhood)
+      // engine.68 (S325 audit): the live writer (culturalLedger.js v2.6) writes
+      // 20 columns — this create-helper was 3 short, so a from-scratch recreate
+      // would silently drop the calendar columns (idx -1 guards no-op).
+      "FirstSeenHoliday", // R
+      "LastSeenHoliday",  // S
+      "CalendarContext"   // T
     ]);
 
     // Freeze header row

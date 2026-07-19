@@ -61,6 +61,18 @@ function saveV3ArcsToLedger_(ctx) {
   // Ensure sheet exists with headers
   var sheet = ensureSheet_(ss, 'Event_Arc_Ledger', ARC_LEDGER_HEADERS);
 
+  // engine.67 (S325): schema-armed InvolvedCitizens column. The live sheet
+  // carries legacy T-AF columns beyond this writer's A-S append (their only
+  // writer, updateArcLedger_, is off the cycle path) — so the arc's people
+  // land at the REAL header index, padded past the legacy block. This append
+  // is the live arc persistence ("last row per arcId wins" — v3preLoader).
+  var arcHdrRow = sheet.getRange(1, 1, 1, Math.max(sheet.getLastColumn(), 1)).getValues()[0];
+  var icCol = arcHdrRow.indexOf('InvolvedCitizens');
+  if (icCol < 0) {
+    icCol = arcHdrRow.length;
+    sheet.getRange(1, icCol + 1).setValue('InvolvedCitizens');
+  }
+
   var S = ctx.summary;
   var cycle = ctx.config.cycleCount || S.cycleId;
   var now = inWorldStamp_(ctx); // S290 in-world, not wall-clock (engine.44)
@@ -90,7 +102,7 @@ function saveV3ArcsToLedger_(ctx) {
     var citizenCount = (arc.involvedCitizens || []).length;
     var arcAge = cycle - (arc.cycleCreated || cycle);
 
-    rows.push([
+    var arcRow = [
       now,                              // A  Timestamp
       cycle,                            // B  Cycle
       arc.arcId || '',                  // C  ArcId
@@ -110,7 +122,11 @@ function saveV3ArcsToLedger_(ctx) {
       isCreationDay,                    // Q  CreationDay (v3.2)
       sportsSeason,                     // R  SportsSeason (v3.2)
       arc.calendarTrigger || ''         // S  CalendarTrigger (v3.2)
-    ]);
+    ];
+    // engine.67: pad past legacy T-AF, then the arc's people as JSON
+    while (arcRow.length < icCol) arcRow.push('');
+    arcRow.push(JSON.stringify(arc.involvedCitizens || []));
+    rows.push(arcRow);
   }
 
   // Queue batch append intent

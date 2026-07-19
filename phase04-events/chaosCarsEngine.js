@@ -77,7 +77,11 @@ var CHAOS_OUTCOME_GATES = {
   workplace_accident:  function (ls) { return ls.working === 'working'; },
   arrested:            function (ls) { return !ls.isMinor; },
   ticket:              function (ls) { return ls.age === null || ls.age >= 16; },
-  pulled_over_warning: function (ls) { return ls.age === null || ls.age >= 16; }
+  pulled_over_warning: function (ls) { return ls.age === null || ls.age >= 16; },
+  // S325 acceptance catch: C102-104 fresh-bench run put a substance
+  // intervention on a 4-year-old. OARI treats adults; de-escalation teen+.
+  substance_intervention: function (ls) { return !ls.isMinor; },
+  deescalated:            function (ls) { return ls.age === null || ls.age >= 13; }
 };
 
 function rollOutcome_(rng, vehicle, scope, target) {

@@ -69,12 +69,27 @@ function pickVehicle_(rng, configs) {
 // have no dial to move (writeCitizenEvent_ requires a tag). Non-citizen scopes use the
 // full pool (the tag is simply unused). Returns null if a citizen scope has no tagged
 // outcome (caller skips the event with a friction note).
-function rollOutcome_(rng, vehicle, scope) {
+// engine.67 step 8 (S325): outcome-level life-state gates — what can happen to
+// a citizen depends on who they are (impossible-bar ruling). A student draws
+// no workplace accident; a child is never arrested or ticketed. Unlisted
+// outcomes stay universal (being NEAR chaos is possible at any age).
+var CHAOS_OUTCOME_GATES = {
+  workplace_accident:  function (ls) { return ls.working === 'working'; },
+  arrested:            function (ls) { return !ls.isMinor; },
+  ticket:              function (ls) { return ls.age === null || ls.age >= 16; },
+  pulled_over_warning: function (ls) { return ls.age === null || ls.age >= 16; }
+};
+
+function rollOutcome_(rng, vehicle, scope, target) {
   var pool = vehicle.textureOutcomes;
   if (scope === 'citizen') {
     pool = [];
+    var tls = target && target.lifeState;
     for (var i = 0; i < vehicle.textureOutcomes.length; i++) {
-      if (vehicle.textureOutcomes[i].lifeHistoryTag) pool.push(vehicle.textureOutcomes[i]);
+      var oc = vehicle.textureOutcomes[i];
+      if (!oc.lifeHistoryTag) continue;
+      if (tls && CHAOS_OUTCOME_GATES[oc.outcome] && !CHAOS_OUTCOME_GATES[oc.outcome](tls)) continue; // engine.67 step 8
+      pool.push(oc);
     }
     if (!pool.length) return null;
   }
@@ -137,13 +152,27 @@ function pickCitizenTarget_(rng, ctx) {
   if (!eligible.length) return null;
   var r = eligible[Math.floor(rng() * eligible.length)];
   var row = rows[r];
+  // engine.67 step 8: carry the target's life-state so the outcome roll can
+  // gate what can happen TO them (deriveLifeState_ — citizenContextBuilder).
+  var tgtLifeState = null;
+  if (typeof deriveLifeState_ === 'function') {
+    var iBY8 = header.indexOf('BirthYear'), iRT8 = header.indexOf('RoleType');
+    tgtLifeState = deriveLifeState_({
+      birthYear: iBY8 >= 0 ? row[iBY8] : 0,
+      simYear: (ctx.summary && ctx.summary.simYear) || 2041,
+      status: iStatus >= 0 ? row[iStatus] : '',
+      occupation: iRT8 >= 0 ? row[iRT8] : '',
+      roleType: iRT8 >= 0 ? row[iRT8] : ''
+    });
+  }
   var tierRaw = iTier >= 0 ? row[iTier] : null;
   var tierNum = parseInt(String(tierRaw).replace(/[^0-9]/g, ''), 10);
   return {
     rowIndex: r,
     popId: iPop >= 0 ? row[iPop] : '',
     tier: isNaN(tierNum) ? null : tierNum,
-    neighborhood: iNb >= 0 ? (row[iNb] || '') : ''
+    neighborhood: iNb >= 0 ? (row[iNb] || '') : '',
+    lifeState: tgtLifeState // engine.67 step 8
   };
 }
 
@@ -275,6 +304,52 @@ function writeCitizenEvent_(ctx, target, vehicle, outcome, cycle, text) {
     if (reaction) chaosReactionTag = '|' + reaction.tags[0];  // chaos:wary | chaos:trauma
     row[iDialState] = serializeDialState_(dc);
     rows[target.rowIndex] = row;
+  }
+
+  // engine.67 step 8 (S325, Mike doctrine: chaos vehicles are crisis IGNITERS —
+  // "each has a generator to attach to"). High-severity medical outcomes enter
+  // the REAL health lifecycle: Status flips, and generationalEventsEngine's
+  // health transitions, runCareerEngine's income hit, and runHouseholdEngine's
+  // hospital-strain pool all take over next phases — the crisis changes the
+  // citizen's running life-state instead of just being remembered. Guard:
+  // only active/recovering/blank transition (a retiree keeps 'retired' —
+  // overwriting it would resurrect their career at discharge; they keep the
+  // texture line only). Arrest + OARI interventions surface as storyHooks.
+  var iStatusW = ctx.ledger.headers.indexOf('Status');
+  var iStatusStartW = ctx.ledger.headers.indexOf('StatusStartCycle');
+  var iHealthCauseW = ctx.ledger.headers.indexOf('HealthCause');
+  var curStatusW = iStatusW >= 0 ? String(row[iStatusW] || '').trim().toLowerCase() : '';
+  var newStatusW = '';
+  if (vehicle.name === 'ambulance' && outcome.outcome === 'medical_emergency') newStatusW = 'critical';
+  else if (vehicle.name === 'ambulance' && outcome.outcome === 'workplace_accident') newStatusW = 'hospitalized';
+  var S8 = ctx.summary || (ctx.summary = {});
+  if (!S8.storyHooks) S8.storyHooks = [];
+  var hookName8 = ((iFirst >= 0 ? row[iFirst] : '') + ' ' + (iLast >= 0 ? row[iLast] : '')).toString().trim();
+  var hookHood8 = iNb >= 0 ? (row[iNb] || '') : (target.neighborhood || '');
+  if (newStatusW && iStatusW >= 0 && (curStatusW === '' || curStatusW === 'active' || curStatusW === 'recovering')) {
+    row[iStatusW] = newStatusW;
+    if (iStatusStartW >= 0) row[iStatusStartW] = cycle;
+    if (iHealthCauseW >= 0 && !row[iHealthCauseW]) row[iHealthCauseW] = 'chaos:' + vehicle.name + ':' + outcome.outcome;
+    rows[target.rowIndex] = row;
+    S8.storyHooks.push({
+      hookType: 'CITIZEN_HOSPITALIZED', severity: 6, priority: 5,
+      description: hookName8 + ' — ' + text,
+      cycleGenerated: cycle, neighborhood: hookHood8, domain: 'HEALTH', text: text
+    });
+  }
+  if (outcome.outcome === 'arrested') {
+    S8.storyHooks.push({
+      hookType: 'CITIZEN_ARRESTED', severity: 6, priority: 5,
+      description: hookName8 + ' — ' + text,
+      cycleGenerated: cycle, neighborhood: hookHood8, domain: 'SAFETY', text: text
+    });
+  }
+  if (vehicle.name === 'oari_van' && (outcome.outcome === 'deescalated' || outcome.outcome === 'substance_intervention')) {
+    S8.storyHooks.push({
+      hookType: 'OARI_INTERVENTION', severity: 5, priority: 4,
+      description: hookName8 + ' — ' + text,
+      cycleGenerated: cycle, neighborhood: hookHood8, domain: 'CIVIC', text: text
+    });
   }
 
   // LifeHistory_Log archive row — live 7-col schema. EventTag = "{DialTag}|chaos_cars|{vehicle}"
@@ -443,7 +518,7 @@ function runChaosCarsEngine_(ctx) {
     var target = pickTargetByScope_(rng, ctx, scope);
     if (!target) { friction.push('event ' + i + ': empty target pool for scope ' + scope + ' (vehicle ' + vehicle.name + ')'); continue; }
 
-    var outcome = rollOutcome_(rng, vehicle, scope);
+    var outcome = rollOutcome_(rng, vehicle, scope, target); // engine.67 step 8: target-aware
     if (!outcome) { friction.push('event ' + i + ': ' + vehicle.name + ' has no citizen-taggable outcome for scope ' + scope); continue; }
     var impacts = impactsForScope_(vehicle, scope, outcome.outcome);
 

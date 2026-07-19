@@ -276,7 +276,10 @@ function getGenericYouth_(ss) {
       citizenName = (first + ' ' + last).trim();
     }
 
-    if (age >= YOUTH_EVENT_LIMITS.MIN_AGE && age <= YOUTH_EVENT_LIMITS.MAX_AGE && status !== 'deceased') {
+    // engine.67 step 4 (S325, caught live on bench C109): gate was deceased-only —
+    // a pending citizen drew youth-civic_participation. The gone draw nothing.
+    if (age >= YOUTH_EVENT_LIMITS.MIN_AGE && age <= YOUTH_EVENT_LIMITS.MAX_AGE &&
+        status !== 'deceased' && status !== 'inactive' && status !== 'traded' && status !== 'pending') {
       result.push({
         id: citizenId,
         name: citizenName,
@@ -355,7 +358,10 @@ function getNamedYouth_(ctx) {
       citizenName = (first + ' ' + last).trim();
     }
 
-    if (age >= YOUTH_EVENT_LIMITS.MIN_AGE && age <= YOUTH_EVENT_LIMITS.MAX_AGE && status !== 'deceased') {
+    // engine.67 step 4 (S325, caught live on bench C109): gate was deceased-only —
+    // a pending citizen drew youth-civic_participation. The gone draw nothing.
+    if (age >= YOUTH_EVENT_LIMITS.MIN_AGE && age <= YOUTH_EVENT_LIMITS.MAX_AGE &&
+        status !== 'deceased' && status !== 'inactive' && status !== 'traded' && status !== 'pending') {
       result.push({
         id: citizenId,
         name: citizenName,

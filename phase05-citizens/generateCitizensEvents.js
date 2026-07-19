@@ -68,7 +68,14 @@ function generateCitizensEvents_(ctx) {
 
   // v2.5: Optional attributes (no schema requirement)
   var iBirthYear = idx("BirthYear");
+  // engine.67 step 5b (S325 root-cause): the ledger has NO "Occupation" column —
+  // the job column is RoleType. idx("Occupation") returned -1 since the column
+  // rename, so occupation = "" for every citizen: the work-texture pool NEVER
+  // fired (bench C102-C111 confirmed adult work events = 0) and lifeState.working
+  // derived 'none' for every worker. RoleType is the canon job for ENGINE
+  // citizens (the occupation pool is already ENGINE-only-gated downstream).
   var iOccupation = idx("Occupation");
+  if (iOccupation < 0) iOccupation = idx("RoleType");
   var iTierRole = idx("TierRole");
   var iType = idx("Type");
   var iUsage = idx("UsageCount"); // engine.32 T3 — fame seam (SL appearance counter)

@@ -580,6 +580,56 @@ function buildCityEvents_(ctx) {
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
+  // engine.67 step 7 (S325, Mike ruling: BOTH lanes) — HERITAGE REACHES THE
+  // CITY CALENDAR. Lane A: established family lines become tier-weighted
+  // hosting candidates in the normal weighted pool — dice decide, never
+  // forced. Lane B: a line founded LAST cycle throws its founding celebration
+  // (heavy weight, still sampled — the city usually shows up, physics not
+  // quota). Read timing: this runs at Phase7-CityEvents, AFTER Phase 5 wrote
+  // Heritage_Ledger — same-cycle state; the ===1 delta means the celebration
+  // lands the cycle AFTER the founding (media covers the founding first).
+  // Hood = founder's current neighborhood via shared ctx.ledger.
+  // Missing tab / no lines => zero pool entries, zero rng consumed.
+  // ═══════════════════════════════════════════════════════════════════════════
+  var herSheet = ctx.ss ? ctx.ss.getSheetByName('Heritage_Ledger') : null;
+  if (herSheet && herSheet.getLastRow() > 1) {
+    var herVals = herSheet.getDataRange().getValues();
+    var herHdr = herVals[0];
+    var herFam = herHdr.indexOf('FamilyName'), herTier = herHdr.indexOf('HeritageTier'),
+        herFC = herHdr.indexOf('FoundedCycle'), herFP = herHdr.indexOf('FounderPopId');
+    var herCycle = S.cycleId || (ctx.config && ctx.config.cycleCount) || 0;
+    var herHoodByPop = Object.create(null);
+    if (ctx.ledger && ctx.ledger.rows && ctx.ledger.headers) {
+      var herLPop = ctx.ledger.headers.indexOf('POPID');
+      var herLNb = ctx.ledger.headers.indexOf('Neighborhood');
+      if (herLPop >= 0 && herLNb >= 0) {
+        for (var herRi = 0; herRi < ctx.ledger.rows.length; herRi++) {
+          var herP = ctx.ledger.rows[herRi][herLPop];
+          if (herP) herHoodByPop[String(herP).trim().toUpperCase()] = ctx.ledger.rows[herRi][herLNb] || "";
+        }
+      }
+    }
+    var HER_HOST_WEIGHT = { "Founding": 0.35, "Established": 0.7, "Prominent": 1.0, "Dynasty": 1.4 };
+    if (herFam >= 0 && herTier >= 0) {
+      for (var herR = 1; herR < herVals.length; herR++) {
+        var herName = String(herVals[herR][herFam] || "").trim();
+        var herT = String(herVals[herR][herTier] || "").trim();
+        if (!herName || !herT) continue;
+        var herHood = herFP >= 0 ? (herHoodByPop[String(herVals[herR][herFP] || "").trim().toUpperCase()] || "") : "";
+        // Lane B — the founding celebration, the cycle after the founding
+        var herFounded = herFC >= 0 ? (Number(herVals[herR][herFC]) || 0) : 0;
+        if (herFounded > 0 && (herCycle - herFounded) === 1) {
+          addEvents_([{ name: "The " + herName + " Line Founding Celebration", neighborhood: herHood }],
+            3.0, ["heritage", "heritage:founding"]);
+        }
+        // Lane A — the name carries: tier-weighted hosting candidate
+        addEvents_([{ name: "The " + herName + " Family Block Party", neighborhood: herHood }],
+          HER_HOST_WEIGHT[herT] || 0.35, ["heritage", "heritage:hosting"]);
+      }
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
   // FINAL POOL ARRAY
   // ═══════════════════════════════════════════════════════════════════════════
   var poolKeys = Object.keys(poolByName);

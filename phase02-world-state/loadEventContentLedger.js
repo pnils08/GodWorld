@@ -65,7 +65,16 @@ var CONTENT_LEDGER_DSL_FIELDS = {
   retired:      { kind: 'flag' },    // citizen row status == 'retired'
   ageband:      { kind: 'enum', values: { youth: 1, youngAdult: 1, adult: 1, senior: 1 } },
   hood:         { kind: 'str' },     // citizen row neighborhood (exact match)
-  season:       { kind: 'str' }      // cycle ctx season
+  season:       { kind: 'str' },     // cycle ctx season
+  // engine.67 step 5 (S325): life-state vocabulary — authors aim content at who
+  // a citizen IS. Values mirror deriveLifeState_ (citizenContextBuilder.js).
+  // ageband stays for back-compat; band is the finer 6-band split (child/teen
+  // finally addressable). Eval is case-insensitive; enum keys are canonical.
+  lifestate:    { kind: 'enum', values: { student: 1, working: 1, retired: 1, none: 1 } },
+  band:         { kind: 'enum', values: { child: 1, teen: 1, youth: 1, youngAdult: 1, adult: 1, senior: 1 } },
+  occupation:   { kind: 'str' },     // citizen row Occupation (exact match, case-insensitive at eval)
+  tier:         { kind: 'num' },     // citizen row Tier
+  heritage:     { kind: 'enum', values: { none: 1, founding: 1, established: 1, prominent: 1, dynasty: 1 } }
 };
 
 /**

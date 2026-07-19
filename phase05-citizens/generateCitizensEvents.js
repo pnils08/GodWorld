@@ -2342,7 +2342,15 @@ function generateCitizensEvents_(ctx) {
         ageband: ageGroup,
         hood: neighborhood,
         season: season,
-        displacement: displRisk
+        displacement: displRisk,
+        // engine.67 step 5 (S325): life-state scopes — the ECL library can now
+        // aim at who a citizen is. heritage rides Phase-4's cached lagged read
+        // (generationalEventsEngine ctx._heritageTierByPop, engine.65 pattern).
+        lifestate: lifeState ? lifeState.working : "none",
+        band: lifeState ? lifeState.band : ageGroup,
+        occupation: occupation,
+        tier: tier,
+        heritage: (ctx._heritageTierByPop && ctx._heritageTierByPop[String(popId).trim().toUpperCase()]) || "none"
       };
       for (var clk in contentLedger.lines) {
         if (!contentLedger.lines.hasOwnProperty(clk)) continue;

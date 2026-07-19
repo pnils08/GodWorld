@@ -142,5 +142,26 @@ function check(name, cond) {
   check('typo source still fails closed', L.skipped === 1 && !L.lines['x.pool']);
 }
 
+
+// 8. engine.67 step 5 (S325) — life-state vocabulary: lifestate/band/occupation/tier/heritage
+{
+  const ctx = mockCtx([
+    HDR,
+    ['line', 'work.pool', '', 'a shift moment for the working', '', 'lifestate=working; occupation=Line cook', 'source:occupation', '', ''],
+    ['line', 'kid.pool', '', 'a recess victory', '', 'band=child', 'source:age', '', ''],
+    ['line', 'her.pool', '', 'the family name opens a door', '', 'heritage!=none; tier<=2', 'source:familyLife', '', ''],
+    ['line', 'bad1.pool', '', 'bad lifestate value', '', 'lifestate=goofing', 'source:age', '', ''],
+    ['line', 'bad2.pool', '', 'bad band value', '', 'band=toddler', 'source:age', '', '']
+  ]);
+  loadEventContentLedger_(ctx);
+  const L = ctx.summary.contentLedger;
+  check('lifestate+occupation line loads', (L.lines['work.pool'] || []).length === 1);
+  check('band=child line loads', (L.lines['kid.pool'] || []).length === 1);
+  check('heritage+tier line loads', (L.lines['her.pool'] || []).length === 1);
+  check('unknown lifestate value fails closed', !L.lines['bad1.pool']);
+  check('unknown band value fails closed', !L.lines['bad2.pool']);
+  check('bad rows counted as skipped', L.skipped === 2);
+}
+
 console.log('\n' + pass + '/' + (pass + fail) + ' passed');
 process.exit(fail ? 1 : 0);

@@ -1764,6 +1764,103 @@ function generateCitizensEvents_(ctx) {
   }
   var gcPendingByText = {};  // event text -> gcSurfacePool entry
   var gcIncrements = {};     // sheetRow -> {entry, add, context}
+  // ===========================================================================
+  // engine.67 step 6 (S325, Mike ruling: BOTH tiers, skewed to rarity):
+  // HOUSEHOLD EVENT LOTTERY — families live moments TOGETHER. Generalizes the
+  // S280 chaos-local shared-line pattern: a drawn household writes the SAME
+  // line to every present member, one memory the family holds in common.
+  // Two tiers: quiet shared moments (the common face of rare) and crises/
+  // celebrations that ripple (season-defining; feeds storyHooks). Dice only,
+  // no caps, no quotas — SIM_DOCTRINE physics. ~1 in 80 households a cycle
+  // quiet, ~1 in 400 crisis: a handful of families a week, not wallpaper.
+  // ===========================================================================
+  var HH_QUIET_CHANCE = 0.012;
+  var HH_CRISIS_CHANCE = 0.0025;
+  var HH_QUIET_POOL = [
+    "the whole household ended up in the kitchen at once and nobody left for an hour",
+    "a board game came off the shelf and old rivalries resumed where they'd paused",
+    "everyone's week landed on the table over one long dinner",
+    "a movie nobody picked first became the one they all quoted for days",
+    "the household spent a whole morning on the stoop watching the street go by",
+    "leftovers night turned into everyone cooking their one specialty at once",
+    "an old photo album surfaced and the evening went where it wanted",
+    "a walk that started as errands turned into the long way home together"
+  ];
+  var HH_CRISIS_POOL = [
+    "a burst pipe at dawn had the whole household hauling buckets and laughing about it by dark|crisis",
+    "a health scare pulled everyone home early — it passed, but the house held its breath together|crisis",
+    "the landlord's notice on the door put the whole household around the table with the numbers|crisis",
+    "a kitchen fire scorched one wall and rearranged everyone's week — nobody hurt, nothing the same|crisis",
+    "word of a windfall reached the house and the whole household argued joyfully about what it meant|celebration",
+    "an anniversary dinner grew past the table until half the block seemed to be in the kitchen|celebration",
+    "a relative's surprise visit turned an ordinary week into the one they'd all retell|celebration",
+    "good news landed for one of them and the whole house wore it for days|celebration"
+  ];
+  if (iHousehold >= 0) {
+    var hhMembers = Object.create(null); // HouseholdId -> [rowIndex]
+    for (var hbi = 0; hbi < rows.length; hbi++) {
+      var hbId = String(rows[hbi][iHousehold] || "").trim();
+      if (!hbId || !rows[hbi][iPopID]) continue;
+      var hbSt = iStatus >= 0 ? String(rows[hbi][iStatus] || "").trim().toLowerCase() : "";
+      if (hbSt === "deceased" || hbSt === "traded" || hbSt === "pending" || hbSt === "inactive") continue;
+      (hhMembers[hbId] = hhMembers[hbId] || []).push(hbi);
+    }
+    var hhLogBatch = [];
+    for (var hhKey in hhMembers) {
+      var hhIdx = hhMembers[hhKey];
+      if (hhIdx.length < 2) continue; // a shared moment needs more than one present
+      var hhRoll = roll();
+      var hhIsCrisis = hhRoll < HH_CRISIS_CHANCE;
+      if (!hhIsCrisis && hhRoll >= HH_QUIET_CHANCE + HH_CRISIS_CHANCE) continue;
+      // deterministic variant by household id (S280 chaos-household pattern) —
+      // the family's identity, not the dice, picks which moment is theirs.
+      var hhHash = 0;
+      for (var hhc = 0; hhc < hhKey.length; hhc++) hhHash = (hhHash + hhKey.charCodeAt(hhc)) % 997;
+      var hhRaw = hhIsCrisis ? HH_CRISIS_POOL[hhHash % HH_CRISIS_POOL.length] : HH_QUIET_POOL[hhHash % HH_QUIET_POOL.length];
+      var hhParts = hhRaw.split("|");
+      var hhText = hhParts[0];
+      var hhKind = hhParts[1] || "quiet";
+      var hhTagStr = hhIsCrisis
+        ? "Daily|source:familyLife|family:household|household:" + hhKind
+        : "Daily|source:familyLife|family:household|household:quiet";
+      var hhStamp = inWorldStamp_(ctx);
+      var hhLine = hhStamp + " — [Daily] " + hhText;
+      var hhHoodAny = "";
+      for (var hmi = 0; hmi < hhIdx.length; hmi++) {
+        var hmRow = rows[hhIdx[hmi]];
+        var hmExisting = hmRow[iLife] ? String(hmRow[iLife]) : "";
+        hmRow[iLife] = hmExisting ? hmExisting + "\n" + hhLine : hhLine;
+        hmRow[iLastU] = ctx.now;
+        rows[hhIdx[hmi]] = hmRow;
+        var hmPop = String(hmRow[iPopID]);
+        var hmHood = iNeighborhood >= 0 ? (hmRow[iNeighborhood] || "") : "";
+        if (!hhHoodAny && hmHood) hhHoodAny = hmHood;
+        hhLogBatch.push([ctx.now, hmPop,
+          (((hmRow[iFirst] || "") + " " + (hmRow[iLast] || ""))).trim(),
+          hhTagStr, hhText, hmHood, cycle]);
+        // shared moment = a lived week — union into the active set (bond/anti-inert seams)
+        if (!activeSetObj[hmPop]) { activeSetObj[hmPop] = true; }
+      }
+      ctx.ledger.dirty = true;
+      if (hhIsCrisis) {
+        if (!S.storyHooks) S.storyHooks = [];
+        S.storyHooks.push({
+          hookType: hhKind === "celebration" ? "FAMILY_CELEBRATION" : "FAMILY_CRISIS",
+          severity: 5, priority: 4,
+          description: "Household " + hhKey + " — " + hhText,
+          cycleGenerated: cycle, neighborhood: hhHoodAny,
+          domain: "COMMUNITY", text: hhText
+        });
+      }
+    }
+    if (lifeLog && hhLogBatch.length) {
+      var hhStart = lifeLog.getLastRow() + 1;
+      lifeLog.getRange(hhStart, 1, hhLogBatch.length, hhLogBatch[0].length).setValues(hhLogBatch);
+    }
+    S.cycleActiveCitizens = Object.keys(activeSetObj);
+    S.householdMoments = hhLogBatch.length; // diag: member-lines written this cycle
+  }
+
   for (var r = 0; r < rows.length; r++) {
     // engine.38 A1: LIMIT=25 cap removed — full-population coverage. Runaway is
     // structurally bounded: one emit max per citizen per cycle (<= rows.length).

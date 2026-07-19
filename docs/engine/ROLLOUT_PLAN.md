@@ -120,7 +120,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.57 | Family/household loop — Mike's household model — LIVE S319, cycle-proven 0714+0715, canon-verified C102/C103 | done-pending-archive | engine-sheet | [[../plans/2026-07-13-family-household-loop-build]] |
 | engine.58 | GC-as-entry — intake→Tier-5 waiting room, lottery at EmergenceCount 3, event surfacing — LIVE S320, cycle-proven (Isaac Green end-to-end) | done-pending-archive | engine-sheet | detail in commits 06b0b5ad/c8e73961 + claude-mem S320 |
 | engine.59 | Bonds × GC marriage market — tier gravity, suitor fitness, GC lottery door — LIVE S320, 8-fire proof, 2 lottery weddings | done-pending-archive | engine-sheet | [[../plans/2026-07-16-engine59-bonds-marriage-market]] |
-| engine.67 | Event pools — citizens' lives dictate what fires: 38-file conditioning matrix DONE S325, life-state hard gate + ECL vocabulary + family simultaneity + heritage-city wiring | design | engine-sheet | [[../plans/2026-07-18-event-pools-design]] |
+| engine.67 | Event pools — steps 1-8 LIVE S325, acceptance-proven C102-C106; OPEN: live C102 verify + step 9 bonds design + §8 sweeps | in-progress | engine-sheet | [[../plans/2026-07-18-event-pools-design]] |
 | research.13 | Citizen-autonomous PoC | needs-info | research-build | [[../plans/2026-05-31-citizen-autonomous-poc]] — detail in pointer (relocated 2026-07-02) |
 | research.14 | Citizen-loop Phase 2 | in-progress | engine-sheet | [[../plans/2026-06-04-mags-citizen-loop]] — detail in pointer (relocated 2026-07-02) |
 | research.16 | Tier-1 character voice agents | in-progress | research-build + engine-sheet | [[../plans/2026-06-16-tier1-character-voice-agents]] — detail in pointer (relocated 2026-07-02) |

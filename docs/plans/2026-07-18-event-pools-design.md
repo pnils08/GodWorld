@@ -92,10 +92,11 @@ Age bands split `youth(0-22)` into **child ≤12 / teen 13-17 / youth 18-22** �
 
 **Adoption order** (volume-first): 1) generateCitizensEvents (pool filter before draw, L1926 assembly) 2) chaosCarsEngine (eligible-pick filter) 3) GC micro-events 4) runRelationshipEngine (filter + fixes bondEngine's inherited feed) 5) mode engines 6) career (age + retired read) 7) education/household/neighborhood status checks 8) checkForPromotions minor guard. Each adoption = one commit, groundhog-proven before next.
 
-## 4. Design — ECL deepening (vocabulary first, then content)
+## 4. Design — ECL deepening (SHIPPED S325 steps 5a/5b)
 
-1. Extend `CONTENT_LEDGER_DSL_FIELDS` (loader L60-69): `lifestate` (enum from gate), `band` (5-band enum), `occupation` (str), `tier` (num), `heritage` (enum). Extend `condScopes` at the consumer (generateCitizensEvents L2301) in the same commit. Fail-closed grammar unchanged — typo narrows, never widens (S289).
-2. Then content preload: authored banks per lifestate×occupation×wealth band via `scripts/draftContentRows.js`, cheap-model authoring, Mike activates rows (Active column stays the kill switch).
+1. **DONE (5a, d1d28693):** DSL +5 fields — `lifestate`, `band` (6-band, child/teen addressable), `occupation`, `tier`, `heritage`; condScopes extended same commit; loader suite 17→23 green. Heritage scope rides Phase-4's cached lagged read.
+2. **DONE (5b, 2865dfe9 — root-cause find):** the ledger has NO `Occupation` column (job = `RoleType`); `idx("Occupation")` was −1 since the rename, so the hardcoded work pool NEVER fired for anyone and `lifeState.working` starved. RoleType fallback wired — bench work texture went 0 → 19 events/cycle.
+3. **DONE (library preload):** 135 rows authored (75 occupation-specific work moments across the top-25 real ledger jobs, 15 child, 15 teen, 10 retirement-depth, 12 wealth-band incl. the missing 4-7 middle, 8 heritage), every row validated through the real loader (parity-by-execution, 0 skipped), tagged `auth:library-s325`. **Bench: active, proven C112-C113 — 80 library lines fired, 0 condition mismatches. Live: preloaded Active=no — Mike's kill switch; activate per-row or in blocks to turn the library on.**
 
 ## 5. Design — family simultaneity (RULED: both, skewed to rarity)
 

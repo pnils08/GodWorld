@@ -59,7 +59,7 @@ Legend: ✅ real gate · ⚠️ partial · ❌ absent. "Wealth" = does WealthLev
 
 worldEventsEngine, buildCityEvents, eventArcEngine (involvedCitizens never populated), faithEventsEngine (org-level; known gap: never attaches POPIDs), textureTriggers (**no consumer found — verify**), cityEveningSystems, buildNightLife, buildEveningFood, buildEveningMedia, buildEveningFamous (REAL_PLAYERS pool occupationally safe), sportsStreaming, applyChaosDecay, applyNamedCitizenSpotlight (event-driven re-ranker, adds no gate), citizenContextBuilder (**unwired, 0 callers**).
 
-City→citizen seam: evening builders → `finalizeCycleState.snapshotEveningForCarryForward_` → `S.previousEvening` → generateCitizensEvents `previousEveningPool_` — **no age/wealth gate at the consuming end** (any-age citizen draws nightlife-buzz texture). Dead carry-forward fields: `foodTrend`, `famousNames` (persisted, never consumed).
+City→citizen seam: evening builders → `finalizeCycleState.snapshotEveningForCarryForward_` → `S.previousEvening` → generateCitizensEvents `previousEveningPool_` — **no age/wealth gate at the consuming end** (any-age citizen draws nightlife-buzz texture). ~~Dead carry-forward fields: foodTrend, famousNames~~ **CORRECTED S325: both ARE consumed** — generateCitizensEvents previousEveningPool_ draws them (foodTrend L1040, famousNames L1046); a famousNames line fired live on bench C113 ('overheard someone saw Claire Ashford at OakHouse'). The sweep agent's dead-field claim was wrong; bench observation beats static analysis.
 
 ## 2. Structural findings
 

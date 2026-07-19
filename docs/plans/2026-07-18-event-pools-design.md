@@ -137,11 +137,13 @@ Rendered view, not a second truth: this MD (repo) is the source; `Event_Wiring_L
 
 ## 8. Final sweep — DONE S325 (agent audit, all remaining surfaces)
 
+**Next wiring target (Mike-direct S325): Cultural_Ledger** — audit its writers/readers (citizenFameTracker, culturalLedger v2.5 intents, registerCulturalEntity_ sightings, Dynasty rows from generationalWealthEngine) and wire cultural entities into the citizen antenna the way heritage was: who a citizen is culturally should shape what fires at them. Design pass first, engine.68 row.
+
 **Clean (world-state only, no citizen surface):** civicInitiativeEngine (officeholder status guards present; fallback path checks fewer statuses — minor, low blast radius), neighborhoodTrajectoryEngine (= renamed gentrificationEngine), economicRippleEngine, storylineHealthEngine, processArcLifeCycle, updateStorylineStatus, applyMigrationDrift.
 
 **Findings:**
 1. **storylineWeavingEngine assigns dramatic roles to free-text citizen names with ZERO status/age checks** — a deceased/traded name in `Storyline_Tracker.RelatedCitizens` keeps its protagonist/antagonist role indefinitely. Parked: follow-up row when storyline layer is next touched.
-2. **`involvedCitizens` is dead data everywhere** — every eventArcs writer hardcodes `[]`; every consumer defensively falls back. Candidates: populate from generational/chaos writers, or remove the field. Parked.
+2. **`involvedCitizens` — WIRED S325 (b8e5bb42 + 95e8d5b6):** generational writers populate subject + household at all 3 arc-creation sites; same-cycle consumers (bond arc-proximity, relationship arc boosts, spotlight) now receive real citizens. Cross-cycle persistence (v3LedgerWriter header-located append + preLoader parse) shipped but INERT by design — the S313 Mike ruling disabled the whole arc save/reload loop ('stories are seeded, never re-ingested'; 36 zombie arcs C82-C101). If that loop ever rewires, the people ride along day one.
 3. **textureTriggers is NOT dead** (corrects §1's earlier note) — two live consumers: Texture_Trigger_Log writer + applyStorySeeds story-seed conversion (engine.41).
 4. **Faith→citizen bridge exists** via generateCitizensEvents faithPool_ neighborhood fan-out (engine.33 T9) — which is exactly the exposure channel step 9b's faith joins ride.
 5. **Chaos→hospital handoff verified mechanically sound** — health lifecycle gates purely on Status strings that chaos writes exactly; **caught + fixed same-session:** chaos HealthCause was a machine tag that would leak verbatim into death prose and permanently exclude the citizen from the Media-Room cause queue → now writes human prose ('a workplace accident' / 'a sudden medical emergency').

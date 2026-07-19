@@ -584,7 +584,7 @@ function buildCityEvents_(ctx) {
   // CITY CALENDAR. Lane A: established family lines become tier-weighted
   // hosting candidates in the normal weighted pool — dice decide, never
   // forced. Lane B: a line founded LAST cycle throws its founding celebration
-  // (heavy weight, still sampled — the city usually shows up, physics not
+  // (weight 6 — usually surfaces, still dice — the city usually shows up, physics not
   // quota). Read timing: this runs at Phase7-CityEvents, AFTER Phase 5 wrote
   // Heritage_Ledger — same-cycle state; the ===1 delta means the celebration
   // lands the cycle AFTER the founding (media covers the founding first).
@@ -620,7 +620,7 @@ function buildCityEvents_(ctx) {
         var herFounded = herFC >= 0 ? (Number(herVals[herR][herFC]) || 0) : 0;
         if (herFounded > 0 && (herCycle - herFounded) === 1) {
           addEvents_([{ name: "The " + herName + " Line Founding Celebration", neighborhood: herHood }],
-            3.0, ["heritage", "heritage:founding"]);
+            6.0, ["heritage", "heritage:founding"]);
         }
         // Lane A — the name carries: tier-weighted hosting candidate
         addEvents_([{ name: "The " + herName + " Family Block Party", neighborhood: herHood }],

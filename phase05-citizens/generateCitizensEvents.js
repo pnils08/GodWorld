@@ -2696,6 +2696,15 @@ function generateCitizensEvents_(ctx) {
       S.biasIntents[popId].push({ t: biasTarget, s: biasSignVal, o: "source:bias|c" + cycle });
     }
 
+    // engine.67 step 9b (S325): faith exposure — a DRAWN faith line is lived
+    // exposure; bondEngine's processFaithJoins_ rolls the join dice same
+    // cycle (Phase5-Bonds runs after Phase5-CitizenEvents). Repeated exposure
+    // IS the growth path — no counter, no storage, just more dice.
+    if (tags.indexOf("source:faith") >= 0) {
+      if (!S.faithExposures) S.faithExposures = [];
+      S.faithExposures.push({ popId: String(popId), hood: neighborhood });
+    }
+
     if (occupation) tags = mergeTags(tags, ["occupation:" + occupation]);
     if (ageGroup) tags = mergeTags(tags, ["ageGroup:" + ageGroup]);
     if (neighborhood) tags = mergeTags(tags, ["neighborhood:" + neighborhood]);

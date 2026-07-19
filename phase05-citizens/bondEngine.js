@@ -330,6 +330,7 @@ function runBondEngine_(ctx) {
   // bonds). Function retained for reversibility (Path B no-grow pattern).
   // processGCMarriageLottery_(ctx); // engine.59 — the lottery door
   processGCCourtship_(ctx); // engine.66f — courtship with the waiting room (bond-grown, nothing instant)
+  processFaithJoins_(ctx); // engine.67 step 9b — faith grows through lived exposure, chooses a ledger
   detectTriangleRivalries_(ctx);
 
   // Step 4: Check for confrontation triggers
@@ -922,6 +923,97 @@ function bondCompatibility_(dataA, dataB, ctx) {
     score += Math.max(0, Math.min(2, (wf - 0.75) * 4));
   }
   return score;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// engine.67 step 9b (S325, Mike-approved): FAITH GROWS AND CHOOSES A LEDGER.
+// Membership lives on Faith_Organizations.MembersList (the heritage pattern —
+// no Simulation_Ledger column). Exposure = a DRAWN source:faith texture line
+// (S.faithExposures, pushed by generateCitizensEvents at emit, same cycle).
+// Each exposure rolls the join dice — repeated exposure IS the growth
+// counter, probabilistically, with zero storage. Joining picks a congregation
+// in the citizen's own hood; one congregation at a time; rare drift-away
+// keeps it a choice, not a tattoo. Dice only, never forced.
+// ═══════════════════════════════════════════════════════════════════════════
+var FAITH_JOIN_CHANCE = 0.08;
+var FAITH_DRIFT_CHANCE = 0.003;
+
+function processFaithJoins_(ctx) {
+  var S = ctx.summary || {};
+  var rng = safeRand_(ctx);
+  var cycle = S.cycleId || (ctx.config && ctx.config.cycleCount) || 0;
+  var faithSheet = ctx.ss ? ctx.ss.getSheetByName('Faith_Organizations') : null;
+  if (!faithSheet) return;
+  var fv = faithSheet.getDataRange().getValues();
+  if (fv.length < 2) return;
+  var fh = fv[0];
+  var fOrg = fh.indexOf('Organization'), fHood = fh.indexOf('Neighborhood'),
+      fActive = fh.indexOf('ActiveStatus'), fMem = fh.indexOf('MembersList');
+  if (fOrg < 0 || fHood < 0) return;
+  if (fMem < 0) { // schema-armed: add the membership column once, live next cycle-write
+    fMem = fh.length;
+    faithSheet.getRange(1, fMem + 1).setValue('MembersList');
+    for (var fvr = 1; fvr < fv.length; fvr++) fv[fvr][fMem] = '';
+  }
+  var memberOf = {}; var lists = {};
+  for (var fr = 1; fr < fv.length; fr++) {
+    var fl = [];
+    try { fl = JSON.parse(String(fv[fr][fMem] || '[]')); } catch (ePf) { fl = []; }
+    lists[fr] = fl;
+    for (var fm = 0; fm < fl.length; fm++) memberOf[String(fl[fm])] = fr;
+  }
+  var idxByPop = {};
+  if (ctx.ledger && ctx.ledger.rows) {
+    var fPop = ctx.ledger.headers.indexOf('POPID');
+    if (fPop >= 0) for (var flr = 0; flr < ctx.ledger.rows.length; flr++) {
+      var fp = ctx.ledger.rows[flr][fPop];
+      if (fp) idxByPop[String(fp).trim().toUpperCase()] = flr;
+    }
+  }
+  var dirtyOrgRows = {}; var joins = 0, drifts = 0;
+  var exposures = S.faithExposures || [];
+  for (var fe = 0; fe < exposures.length; fe++) {
+    var ex = exposures[fe];
+    if (!ex || !ex.popId || memberOf[ex.popId]) continue;
+    if (rng() >= FAITH_JOIN_CHANCE) continue;
+    var cands = [];
+    for (var fcr = 1; fcr < fv.length; fcr++) {
+      var actLc = fActive >= 0 ? String(fv[fcr][fActive] || '').toLowerCase() : 'active';
+      if (actLc && actLc.indexOf('active') < 0) continue;
+      if (String(fv[fcr][fHood] || '').trim() === String(ex.hood || '').trim()) cands.push(fcr);
+    }
+    if (!cands.length) continue; // no congregation on their side of town — not this season
+    var pickRow = cands[Math.floor(rng() * cands.length)];
+    lists[pickRow].push(ex.popId);
+    memberOf[ex.popId] = pickRow;
+    dirtyOrgRows[pickRow] = true;
+    joins++;
+    var joinIdx = idxByPop[String(ex.popId).trim().toUpperCase()];
+    if (joinIdx !== undefined) {
+      appendBondLifeLine_(ctx, joinIdx, 'Faith', 'joined the congregation at ' + fv[pickRow][fOrg], cycle);
+    }
+  }
+  for (var fdr = 1; fdr < fv.length; fdr++) {
+    var dList = lists[fdr];
+    for (var fdm = dList.length - 1; fdm >= 0; fdm--) {
+      if (rng() < FAITH_DRIFT_CHANCE) {
+        var gonePop = dList[fdm];
+        dList.splice(fdm, 1);
+        delete memberOf[gonePop];
+        dirtyOrgRows[fdr] = true;
+        drifts++;
+        var goneIdx = idxByPop[String(gonePop).trim().toUpperCase()];
+        if (goneIdx !== undefined) {
+          appendBondLifeLine_(ctx, goneIdx, 'Faith', 'drifted from the congregation at ' + fv[fdr][fOrg] + ', quietly', cycle);
+        }
+      }
+    }
+  }
+  for (var wOr in dirtyOrgRows) {
+    faithSheet.getRange(Number(wOr) + 1, fMem + 1).setValue(JSON.stringify(lists[wOr]));
+  }
+  if (joins || drifts) Logger.log('processFaithJoins_: ' + joins + ' joined, ' + drifts + ' drifted');
+  S.faithJoins = joins;
 }
 
 function detectNewBonds_(ctx) {

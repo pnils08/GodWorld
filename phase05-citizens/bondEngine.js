@@ -537,6 +537,24 @@ function ensureBondEngineData_(ctx) {
     }
   }
 
+  // engine.67 step 9: BirthYear enrichment — the compatibility score's age
+  // terms need it, and neither lookup path carried it (Citizen_Directory has
+  // no BirthYear column; the SL fallback didn't read it). One pass over the
+  // shared ledger fills it in by name for both paths; misses stay 0 and the
+  // score's unknown-age branch handles them.
+  if (ctx.ledger && ctx.ledger.rows && ctx.ledger.headers) {
+    var eFirst = ctx.ledger.headers.indexOf('First');
+    var eLast = ctx.ledger.headers.indexOf('Last');
+    var eBY = ctx.ledger.headers.indexOf('BirthYear');
+    if (eFirst >= 0 && eLast >= 0 && eBY >= 0) {
+      for (var er = 0; er < ctx.ledger.rows.length; er++) {
+        var eName = ((ctx.ledger.rows[er][eFirst] || '') + ' ' + (ctx.ledger.rows[er][eLast] || '')).toString().trim();
+        var eEntry = eName && ctx._bondNameLookup[eName];
+        if (eEntry && !eEntry.BirthYear) eEntry.BirthYear = Number(ctx.ledger.rows[er][eBY]) || 0;
+      }
+    }
+  }
+
   diagnostics.citizenLookup = Object.keys(ctx._bondNameLookup).length;
 
   // ─────────────────────────────────────────────────────────────
@@ -847,6 +865,65 @@ function updateExistingBonds_(ctx) {
 // NEW BOND DETECTION
 // ============================================================
 
+// ═══════════════════════════════════════════════════════════════════════════
+// engine.67 step 9 (S325, Mike-approved): COMPATIBILITY PHYSICS.
+// "Citizens have to have enough in common to have a chance at romance, a
+// minimum to get along, and a threshold to clear to like each other at all.
+// More exposure to people in similar jobs or neighborhoods." Score 0-10:
+// hood +3, job family +2, age within 10y +2 (20y +1), same life-stage +1,
+// trait warmth +0-2. Thresholds: <3 never bond; 3-5 get-along lane (and
+// where enemies breed — friction from proximity without alignment); >=6
+// friendship lane + romance becomes possible. Dice above every threshold.
+// ═══════════════════════════════════════════════════════════════════════════
+var BOND_JOB_FAMILIES = [
+  { key: 'trades',    re: /(plumb|electric|mechanic|elevator|construct|carpent|weld|paint|roof|labor)/i },
+  { key: 'food',      re: /(cook|chef|barista|server|bartend|dishwash|baker|restaur|food)/i },
+  { key: 'care',      re: /(nurse|health|therap|midwife|doctor|medic|caregiv|aide|counsel|social work)/i },
+  { key: 'civic',     re: /(city|civic|council|inspect|program|organiz|union|nonprofit|advocat|teacher|librar|public)/i },
+  { key: 'arts',      re: /(artist|theater|music|writer|design|photo|gallery|poet|danc|creativ|bookstore)/i },
+  { key: 'sports',    re: /(coach|athlet|player|pitcher|catcher|infield|outfield|\/ the oaks|\/ oaks)/i },
+  { key: 'retail',    re: /(retail|clerk|shop|store|cashier|merchan)/i },
+  { key: 'transport', re: /(driver|taxi|transit|bart|mover|courier|deliver)/i }
+];
+
+function bondJobFamily_(role) {
+  var r = String(role || '');
+  if (!r) return '';
+  for (var i = 0; i < BOND_JOB_FAMILIES.length; i++) {
+    if (BOND_JOB_FAMILIES[i].re.test(r)) return BOND_JOB_FAMILIES[i].key;
+  }
+  return '';
+}
+
+function bondCompatibility_(dataA, dataB, ctx) {
+  var score = 0;
+  var nhA = String(dataA.Neighborhood || ''), nhB = String(dataB.Neighborhood || '');
+  if (nhA && nhA === nhB) score += 3;
+  var fa = bondJobFamily_(dataA.Occupation || dataA.TierRole);
+  var fb = bondJobFamily_(dataB.Occupation || dataB.TierRole);
+  if (fa && fa === fb) score += 2;
+  var byA = Number(dataA.BirthYear) || 0, byB = Number(dataB.BirthYear) || 0;
+  if (byA > 1900 && byB > 1900) {
+    var ageGap = Math.abs(byA - byB);
+    if (ageGap <= 10) score += 2;
+    else if (ageGap <= 20) score += 1;
+    // same life-stage: both working-age or both senior (coarse, sim-anchor read)
+    var simY = (ctx && ctx.summary && ctx.summary.simYear) || 2041;
+    var aA = simY - byA, aB = simY - byB;
+    if ((aA >= 23 && aA <= 64 && aB >= 23 && aB <= 64) || (aA >= 65 && aB >= 65)) score += 1;
+  } else {
+    score += 1; // unknown ages: mild benefit of the doubt, never a hard bar
+  }
+  // trait warmth (existing dial face): bondWarmthFactor_(ctx, popA, popB)
+  // returns 0.75-1.25 -> mapped to 0-2 score points. Name/popId both resolve
+  // through bondTraitOf_'s own lookup; a miss reads as neutral warmth.
+  if (typeof bondWarmthFactor_ === 'function' && ctx) {
+    var wf = bondWarmthFactor_(ctx, dataA.Name || '', dataB.Name || '');
+    score += Math.max(0, Math.min(2, (wf - 0.75) * 4));
+  }
+  return score;
+}
+
 function detectNewBonds_(ctx) {
   var rng = safeRand_(ctx);
   var S = ctx.summary || {};
@@ -899,6 +976,15 @@ function detectNewBonds_(ctx) {
 
       var dataA = citizenData[citizenA] || {};
       var dataB = citizenData[citizenB] || {};
+
+      // engine.67 step 9: the like-at-all threshold. Below 3 this pair never
+      // bonds — no common ground, no shared world. Score stashed by pair key
+      // so the romance flip can read it later without recomputing per cycle.
+      var compat = bondCompatibility_(dataA, dataB, ctx);
+      if (!ctx._bondCompatByKey) ctx._bondCompatByKey = {};
+      ctx._bondCompatByKey[key] = compat;
+      if (compat < 3) continue;
+      var frictionLane = compat < 6; // 3-5: get along, and where enemies breed
 
       var sharedDomains = [];
       if ((dataA.UNI || '').toLowerCase().startsWith('y') && (dataB.UNI || '').toLowerCase().startsWith('y')) sharedDomains.push('UNI');
@@ -1041,8 +1127,33 @@ function detectNewBonds_(ctx) {
         continue;
       }
 
-      // Same neighborhood = neighbor bond (reduced chance if calendar bonds took priority)
-      if (sameNeighborhood && rng() < 0.2) {
+      // engine.67 step 9 (Mike-approved routing): the friction lane. Exposed
+      // pairs with little in common (compat 3-5, same block or same trade)
+      // are where enemies breed — proximity without alignment. High-compat
+      // pairs rarely turn rival; mismatched neighbors often do.
+      var sameJobFamily = (function () {
+        var fA = bondJobFamily_(dataA.Occupation || dataA.TierRole);
+        return fA && fA === bondJobFamily_(dataB.Occupation || dataB.TierRole);
+      })();
+      if (frictionLane && (sameNeighborhood || sameJobFamily) && rng() < 0.15) {
+        newBonds.push(makeBond_(
+          citizenA, citizenB,
+          BOND_TYPES.TENSION,
+          BOND_ORIGINS.NEIGHBORHOOD,
+          sameJobFamily ? 'WORK' : 'COMMUNITY',
+          sameNeighborhood ? nhA : '',
+          4,
+          currentCycle,
+          'Close quarters, little common ground.',
+          ctx
+        ));
+        bondsCreated++;
+        continue;
+      }
+
+      // Same neighborhood = neighbor bond. engine.67 step 9: the friendship
+      // lane leans in — high-compat neighbors connect half again as often.
+      if (sameNeighborhood && rng() < (frictionLane ? 0.2 : 0.3)) {
         newBonds.push(makeBond_(
           citizenA, citizenB,
           BOND_TYPES.NEIGHBOR,
@@ -1052,6 +1163,23 @@ function detectNewBonds_(ctx) {
           3,
           currentCycle,
           'Neighbors in ' + nhA + '.',
+          ctx
+        ));
+        bondsCreated++;
+        continue;
+      }
+
+      // engine.67 step 9: same trade, high compat — friendship through the work
+      if (!frictionLane && sameJobFamily && rng() < 0.2) {
+        newBonds.push(makeBond_(
+          citizenA, citizenB,
+          BOND_TYPES.FRIENDSHIP,
+          BOND_ORIGINS.CAREER_OVERLAP,
+          'WORK',
+          sameNeighborhood ? nhA : '',
+          3,
+          currentCycle,
+          'Same trade, same wavelength.',
           ctx
         ));
         bondsCreated++;
@@ -1655,8 +1783,22 @@ function processRomanceAndMarriage_(ctx) {
     //   family trait: family-minded citizens court harder (Mike's dials)
     var tierFactor = (A.tier + B.tier) / 8;
     var pairFitness = (bondFitnessOf_(A) + bondFitnessOf_(B)) / 2;
+    // engine.67 step 9 (Mike-approved): romance needs enough in common — the
+    // compatibility score must clear 6 ("a chance at romance"). Read from the
+    // formation-time stash when this pair scored this cycle; else recompute
+    // from the name lookup. A pair with no data scores through the unknown-age
+    // path — never a hard bar on missing metadata, always a bar on mismatch.
+    var romCompat;
+    var romKey = (typeof getBondKey_ === 'function') ? getBondKey_(bond.citizenA, bond.citizenB) : '';
+    if (ctx._bondCompatByKey && romKey && ctx._bondCompatByKey[romKey] !== undefined) {
+      romCompat = ctx._bondCompatByKey[romKey];
+    } else {
+      var romLk = ctx._bondNameLookup || {};
+      romCompat = bondCompatibility_(romLk[bond.citizenA] || {}, romLk[bond.citizenB] || {}, ctx);
+    }
     if (bond.bondType === BOND_TYPES.FRIENDSHIP &&
         Number(bond.intensity) >= ROMANCE_THRESHOLD &&
+        romCompat >= 6 &&
         bothSingle && ageOk && oppositeSex &&
         rng() < ROMANCE_CHANCE * tierFactor * pairFitness * bondFamilyFactor_(ctx, bond.citizenA, bond.citizenB)) {
       bond.bondType = BOND_TYPES.ROMANTIC;

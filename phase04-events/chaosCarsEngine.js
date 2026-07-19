@@ -333,7 +333,13 @@ function writeCitizenEvent_(ctx, target, vehicle, outcome, cycle, text) {
   if (newStatusW && iStatusW >= 0 && (curStatusW === '' || curStatusW === 'active' || curStatusW === 'recovering')) {
     row[iStatusW] = newStatusW;
     if (iStatusStartW >= 0) row[iStatusStartW] = cycle;
-    if (iHealthCauseW >= 0 && !row[iHealthCauseW]) row[iHealthCauseW] = 'chaos:' + vehicle.name + ':' + outcome.outcome;
+    // S325 sweep catch: HealthCause feeds citizen-facing death prose verbatim
+    // ("complications from <cause>") and a non-empty value excludes the citizen
+    // from the Media-Room cause queue — so write HUMAN prose, not the machine
+    // tag. Provenance stays in the LifeHistory line + chaos_cars source row.
+    if (iHealthCauseW >= 0 && !row[iHealthCauseW]) {
+      row[iHealthCauseW] = (outcome.outcome === 'workplace_accident') ? 'a workplace accident' : 'a sudden medical emergency';
+    }
     rows[target.rowIndex] = row;
     S8.storyHooks.push({
       hookType: 'CITIZEN_HOSPITALIZED', severity: 6, priority: 5,

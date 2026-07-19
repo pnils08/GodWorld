@@ -137,6 +137,19 @@ Rendered view, not a second truth: this MD (repo) is the source; `Event_Wiring_L
 
 ## 8. Final sweep — DONE S325 (agent audit, all remaining surfaces)
 
+## 9. engine.68 — Cultural_Ledger joins the antenna (Mike-approved S325)
+
+> Mike, verbatim: "Fame is its own attention and seeds more media attention and another level of event promotion."
+
+Audit (agent, S325): POPID linkage (UniverseLinks) IS written on the cycle path since engine.44 but has ZERO cycle-path readers — fame conditions nothing. Fame is monotonic (no decay, Status permanently Active). Two writers with non-reconciling ID schemes (sightings + Dynasty). culturalFigure lookup built-but-unwired (name-match, wrong shape for cycle use). Dead: parseMediaIntake_ (zero callers). Dormant: ensureCultureLedger 17-col stale header.
+
+Rulings (Mike, S325): plan approved in full; threshold FameScore >= 25 (the existing handoff cutoff); decay approved (quiet fame fades, namings refresh); hygiene folded in; fame COMPOUNDS — famous citizens' events seed media attention (watch-hooks) and event promotion (evening sightings, recognition scaling).
+
+Build shape:
+- 68a: culturalStatusByPop_ cached per-cycle map (heritage-read pattern); ECL condition fields `fame` (num) + `culdomain` (str); condScopes supply; recognition pool scales with FameScore (>=25 activates, weight by band; UsageCount>=8 path retained).
+- 68b: compounding — high-fame citizens' drawn events roll a FAME_WATCH storyHook (media attention seed, scaled by fame); evening famous-sightings REAL pool widens from MLB-only to any SL citizen with cultural FameScore >= 25 (the city sees its own famous).
+- 68c: decay (LastSeenCycle > 10 cycles stale -> FameScore -1/cycle, floor 0) + hygiene (20-col create header; Dynasty writer name-dedup; parseMediaIntake_ dead-flagged, not deleted).
+
 **Next wiring target (Mike-direct S325): Cultural_Ledger** — audit its writers/readers (citizenFameTracker, culturalLedger v2.5 intents, registerCulturalEntity_ sightings, Dynasty rows from generationalWealthEngine) and wire cultural entities into the citizen antenna the way heritage was: who a citizen is culturally should shape what fires at them. Design pass first, engine.68 row.
 
 **Clean (world-state only, no citizen surface):** civicInitiativeEngine (officeholder status guards present; fallback path checks fewer statuses — minor, low blast radius), neighborhoodTrajectoryEngine (= renamed gentrificationEngine), economicRippleEngine, storylineHealthEngine, processArcLifeCycle, updateStorylineStatus, applyMigrationDrift.

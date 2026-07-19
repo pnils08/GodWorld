@@ -30,22 +30,22 @@ Legend: ✅ real gate · ⚠️ partial · ❌ absent. "Wealth" = does WealthLev
 
 | # | Generator | Age | Status | Wealth | Household | Heritage | Verdict |
 |---|---|---|---|---|---|---|---|
-| 1 | chaosCarsEngine | ❌ | ❌ deceased/traded pickable | ❌ | ❌ | ❌ | Worst offender — uniform-random over whole ledger |
-| 2 | generateCitizensEvents | ⚠️ 2 lines/band | ✅ | ⚠️ 2 add-only lines | ⚠️ chaos-local shared line | ❌ | Additive pools, zero exclusion — kid-gets-adult-content bug lives here |
-| 3 | generateGenericCitizenMicroEvent | ❌ | ❌ ClockMode only | ❌ | ❌ | ❌ | Same pool 5yo↔70yo |
+| 1 | chaosCarsEngine | n/a by design (chaos hits any age — S325 ruling) | ✅ **S325 step 2** | ❌ | ❌ | ❌ | Gone-status unpickable; proven C105/C106 |
+| 2 | generateCitizensEvents | ✅ **S325 step 1 — life-state hard gate v2.9** | ✅ | ⚠️ 2 add-only lines | ⚠️ chaos-local shared line | ❌ | Pool filtered before draw; child/teen bands live; proven C103-C111 |
+| 3 | generateGenericCitizenMicroEvent | ⚠️ content is universal-class | ✅ **S325 step 3** | ❌ | ❌ | ❌ | Gone draw no texture |
 | 4 | generateGameModeMicroEvents | ❌ | ✅ | ❌ | ❌ | ❌ | Role-gated pools only |
-| 5 | generateCivicModeEvents | ❌ | ⚠️ health penalty | ❌ | ❌ | ❌ | Role-gated only |
-| 6 | generateMediaModeEvents | ❌ | ⚠️ health penalty | ❌ | ❌ | ❌ | Role-gated only |
-| 7 | runRelationshipEngine | ❌ none | ❌ **none** | ❌ | ❌ | ❌ | Feeds cycleActiveCitizens → bondEngine pool unfiltered |
-| 8 | runCareerEngine | ❌ **no BirthYear in file** | ✅ good | ❌ | ❌ | ❌ | CareerStage='retired' never read — retirees can promote |
-| 9 | runEducationEngine | ⚠️ ≥15, no ceiling | ❌ none | ❌ | ❌ | ❌ | Deceased draw education events |
-| 10 | runHouseholdEngine | ❌ | ❌ | ❌ | ✅ **circumstance pools** | ❌ | The in-codebase good pattern (partnered/parent pools gated on columns) |
-| 11 | runNeighborhoodEngine | ❌ | ❌ | ❌ | ❌ | ❌ | Age only weights hood assignment |
-| 12 | runYouthEngine | ✅ 5–22 | ⚠️ deceased only | ❌ | ❌ | ❌ | Good gate, thin status |
+| 5 | generateCivicModeEvents | ❌ role-verified | ✅ **S325 step 4** (+traded/pending) | ❌ | ❌ | ❌ | Role-gated |
+| 6 | generateMediaModeEvents | ❌ role-verified | ✅ **S325 step 4** (+traded/pending) | ❌ | ❌ | ❌ | Role-gated |
+| 7 | runRelationshipEngine | ❌ (bonds world-wide per §7c) | ✅ **S325 step 3** | ❌ | ❌ | ❌ | bondEngine feed clean — gone don't socialize |
+| 8 | runCareerEngine | ✅ **S325 step 4 — 18+** | ✅ (+retired) | ❌ | ❌ | ❌ | First CareerStage consumer — retirees done |
+| 9 | runEducationEngine | ⚠️ ≥15, no ceiling (lifelong learning OK) | ✅ **S325 step 4** | ❌ | ❌ | ❌ | Gone draw nothing; hospitalized read from bed |
+| 10 | runHouseholdEngine | ❌ | ✅ **S325 step 4** | ❌ | ✅ **circumstance pools** | ❌ | Hospital-strain pool stays by design |
+| 11 | runNeighborhoodEngine | ❌ | ✅ **S325 step 4** | ❌ | ❌ | ❌ | Gone walk no blocks |
+| 12 | runYouthEngine | ✅ 5–22 | ✅ **S325 step 4b** (bench-caught) | ❌ | ❌ | ❌ | C109 caught pending youth; gated |
 | 13 | runConductEngine | ✅ **18+ (S320 ruling precedent)** | ⚠️ | ❌ | ❌ | ❌ | The gate precedent — one file, never propagated |
 | 14 | generationalEventsEngine | ✅ best-in-class | ✅ | ❌ | ✅ births | ✅ birth odds | Newborns hardcoded T4/Income-0 regardless of parent |
 | 15 | bondEngine | ⚠️ romance 20–65; general bonds ❌ | ✅ at lookup | ⚠️ fitness | ✅ marriage | ❌ | Inherits #7's unfiltered feed |
-| 16 | checkForPromotions | ❌ **no minor guard** | ✅ | ❌ | ❌ | ❌ | Child-age GC promotes w/ adult income derivation |
+| 16 | checkForPromotions | ✅ **S325 step 4 — minor guard** | ✅ | ❌ | ❌ | ❌ | Child GC emerges as student, zero economics (S320 convention) |
 | 17 | processAdvancementIntake | ✅ family-match age-band+hood+sex | ✅ | ❌ | ✅ | ✅ slot weighting | **Best gate in system — the model** |
 | 18 | applyGameNightMoments | n/a feed-driven | ✅ active only | ❌ | ❌ | ❌ | Direct LifeHistory_Log write — verify exception status |
 | 19 | runAsUniversePipeline | structurally safe (UNI+retired) | ✅ | ❌ | ❌ | ❌ | Fine |

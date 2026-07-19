@@ -1215,6 +1215,33 @@ function triggerPromotionCascade_(ctx, promotedId, result, cycle) {
   }
 }
 
+// engine.67 final wire (S325, Mike-approved): arcs know their people.
+// Subject + household members — a power-vacuum/inheritance arc is really
+// about the survivors; consumers (bond arc-proximity, relationship arc
+// boosts, media feedback, spotlight) already read involvedCitizens
+// defensively and have waited dark since the field shipped empty.
+function arcInvolvedCitizens_(ctx, subjectPopId) {
+  var out = subjectPopId ? [String(subjectPopId)] : [];
+  if (!ctx.ledger || !ctx.ledger.rows || !subjectPopId) return out;
+  var h = ctx.ledger.headers;
+  var iPop = h.indexOf('POPID'), iHH = h.indexOf('HouseholdId');
+  if (iPop < 0 || iHH < 0) return out;
+  var subjHH = '';
+  for (var r = 0; r < ctx.ledger.rows.length; r++) {
+    if (String(ctx.ledger.rows[r][iPop]) === String(subjectPopId)) {
+      subjHH = String(ctx.ledger.rows[r][iHH] || '').trim();
+      break;
+    }
+  }
+  if (!subjHH) return out;
+  for (var m = 0; m < ctx.ledger.rows.length; m++) {
+    var mp = String(ctx.ledger.rows[m][iPop] || '');
+    if (!mp || mp === String(subjectPopId)) continue;
+    if (String(ctx.ledger.rows[m][iHH] || '').trim() === subjHH) out.push(mp);
+  }
+  return out;
+}
+
 function triggerRetirementCascade_(ctx, retiredId, name, tierRole, neighborhood, cycle, cal) {
   var arcs = ctx.summary.eventArcs || [];
   var hasVacuumArc = false;
@@ -1236,7 +1263,7 @@ function triggerRetirementCascade_(ctx, retiredId, name, tierRole, neighborhood,
       neighborhood: arcNeighborhood,
       domainTag: tierRole || "CAREER",
       summary: name + "'s retirement leaves a void in leadership.",
-      involvedCitizens: [],
+      involvedCitizens: arcInvolvedCitizens_(ctx, retiredId), // engine.67: the arc knows its people
       cycleCreated: cycle,
       cycleResolved: null,
       season: cal.season
@@ -1289,7 +1316,7 @@ function triggerDeathCascade_(ctx, deceasedId, name, tier, tierRole, neighborhoo
       neighborhood: arcNeighborhood,
       domainTag: tierRole || "LEADERSHIP",
       summary: name + "'s death creates a significant void.",
-      involvedCitizens: [],
+      involvedCitizens: arcInvolvedCitizens_(ctx, deceasedId), // engine.67: subject + survivors
       cycleCreated: cycle,
       cycleResolved: null,
       season: cal.season
@@ -1306,7 +1333,7 @@ function triggerDeathCascade_(ctx, deceasedId, name, tier, tierRole, neighborhoo
       neighborhood: arcNeighborhood,
       domainTag: "FAMILY",
       summary: "Questions arise about " + name + "'s legacy and estate.",
-      involvedCitizens: [],
+      involvedCitizens: arcInvolvedCitizens_(ctx, deceasedId), // engine.67: the estate is the family's story
       cycleCreated: cycle,
       cycleResolved: null,
       season: cal.season

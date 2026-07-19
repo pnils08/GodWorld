@@ -638,7 +638,17 @@ function updateArcLedger_(ss, arcs, cycle) {
   
   var data = sheet.getDataRange().getValues();
   var headers = data[0];
-  
+
+  // engine.67 final wire (S325): persist involvedCitizens so arcs keep their
+  // people across the cycle boundary (v3preLoader reads it back). Schema-armed:
+  // header appended once if absent; the positional A-S append in v3LedgerWriter
+  // stays untouched — this header-mapped updater fills the column each cycle.
+  var iInvolved = headers.indexOf('InvolvedCitizens');
+  if (iInvolved < 0) {
+    iInvolved = headers.length;
+    sheet.getRange(1, iInvolved + 1).setValue('InvolvedCitizens');
+  }
+
   var cols = {
     arcId: headers.indexOf('ArcId'),
     phase: headers.indexOf('Phase'),
@@ -648,7 +658,8 @@ function updateArcLedger_(ss, arcs, cycle) {
     resolutionType: headers.indexOf('ResolutionType'),
     resolutionCycle: headers.indexOf('ResolutionCycle'),
     resolutionReason: headers.indexOf('ResolutionReason'),
-    makerHold: headers.indexOf('MakerHold')
+    makerHold: headers.indexOf('MakerHold'),
+    involvedCitizens: iInvolved
   };
   
   var arcLookup = {};
@@ -680,7 +691,13 @@ function updateArcLedger_(ss, arcs, cycle) {
     if (cols.prevPhase >= 0 && arc.prevPhase) {
       sheet.getRange(rowNum, cols.prevPhase + 1).setValue(arc.prevPhase);
     }
-    
+
+    // engine.67: the arc's people ride the ledger (only when non-empty — a
+    // populated list never gets blanked by a later cycle's in-memory copy)
+    if (cols.involvedCitizens >= 0 && arc.involvedCitizens && arc.involvedCitizens.length) {
+      sheet.getRange(rowNum, cols.involvedCitizens + 1).setValue(JSON.stringify(arc.involvedCitizens));
+    }
+
     if (arc.phase === 'resolved') {
       if (cols.resolutionType >= 0) {
         sheet.getRange(rowNum, cols.resolutionType + 1).setValue(arc.resolutionType || 'resolved-natural');

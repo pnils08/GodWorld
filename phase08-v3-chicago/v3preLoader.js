@@ -181,6 +181,7 @@ function loadActiveArcsFromLedger_(ctx) {
 
   var arcIdCol = colMap['ArcId'];
   var typeCol = colMap['Type'];
+  var involvedCol = (colMap['InvolvedCitizens'] !== undefined) ? colMap['InvolvedCitizens'] : -1; // engine.67
   var phaseCol = colMap['Phase'];
   var tensionCol = colMap['Tension'];
   var neighborhoodCol = colMap['Neighborhood'];
@@ -210,7 +211,11 @@ function loadActiveArcsFromLedger_(ctx) {
       neighborhood: neighborhoodCol !== undefined ? String(row[neighborhoodCol] || '').trim() : '',
       domainTag: domainCol !== undefined ? String(row[domainCol] || '').trim() : '',
       summary: summaryCol !== undefined ? String(row[summaryCol] || '').trim() : '',
-      involvedCitizens: [],
+      involvedCitizens: (function () { // engine.67: read the arc's people back
+        var ic = (typeof involvedCol !== 'undefined' && involvedCol >= 0) ? row[involvedCol] : '';
+        if (!ic) return [];
+        try { var p = JSON.parse(String(ic)); return Array.isArray(p) ? p : []; } catch (eIC) { return []; }
+      })(),
       cycleCreated: cycleCreatedCol !== undefined ? (Number(row[cycleCreatedCol]) || 0) : 0,
       cycleResolved: (cycleResolvedCol !== undefined && row[cycleResolvedCol]) ? Number(row[cycleResolvedCol]) : null,
       calendarTrigger: calTriggerCol !== undefined ? String(row[calTriggerCol] || '').trim() : ''

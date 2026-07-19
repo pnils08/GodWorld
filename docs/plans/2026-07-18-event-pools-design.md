@@ -129,11 +129,23 @@ Rendered view, not a second truth: this MD (repo) is the source; `Event_Wiring_L
 
 **Verified vs current bondEngine:** the pool is fed by `S.cycleActiveCitizens`, which runRelationshipEngine populates from **Tier-3/4 ENGINE citizens only** — so Tier-1/2 named citizens mostly enter only via other engines' actives, and Tier-5 GCs only through the separate GC-courtship door. Not world-wide yet. Compatibility physics partially exist for ROMANCE (bondFitnessOf_: education/savings/debt; bondFamilyFactor_ trait dial; T1×T1 rarity), and exposure affinity partially exists (same-neighborhood neighbor bonds, shared UNI/MED/CIV domain tension/rivalry). What does NOT exist: any compatibility floor for non-romantic bonds ("minimum to get along," "threshold to like each other at all"), cross-tier general pool, job-similarity exposure, and faith entirely — no Faith column on any citizen, zero faith references in bondEngine, no faith-affiliation ledger membership.
 
-**Step 9 design shape (design session before build, per complexity caveat):** one shared compatibility score (job-family + neighborhood + age-proximity + trait warmth), three thresholds (acquaint / friend / romance-chance), dice above every threshold — never forced, no quotas (SIM_DOCTRINE rules 9-12 hold). Faith: a citizen Faith affiliation that can GROW through faith-org exposure events and join a Faith_Organizations congregation (the faith ledger choice). Complexity valve: if the score gets heavy, collapse to neighborhood+job buckets as the exposure proxy.
+**Step 9 SHIPPED S325 (Mike approved all four rulings — rivalry route, faith-on-org-ledger, T5-via-doors, dials tunable on bench):**
+- **9a (8aa35dcf):** `bondCompatibility_` 0-10 (hood +3, 8 keyword job families +2, age ≤10y +2/≤20y +1, life-stage +1, trait warmth 0-2). Thresholds: <3 never bond; 3-5 get-along lane AND where enemies breed (proximity-friction TENSION branch — same block/trade + low compat); ≥6 friendship lane (neighbor 0.2→0.3, same-trade FRIENDSHIP branch) + romance flip requires compat ≥6 on top of all existing physics. Unknown metadata never hard-bars. BirthYear enrichment added to the bond name-lookup.
+- **9b (a167d3d4):** faith — membership on `Faith_Organizations.MembersList` (heritage pattern, schema-armed column). Drawn `source:faith` texture = exposure → `S.faithExposures` → `processFaithJoins_` rolls 8% per exposure; congregation picked in the citizen's own hood; one at a time; 0.3%/member/cycle drift-away. `[Faith]` LifeHistory lines both directions.
+- **Bench proof (C107-C109 post-acceptance bench):** first congregation member joined (POP-00664 → Lakeshore UU Fellowship), both compat lanes formed bonds, bond volume unchanged (342→348), 0 errors. LIVE-pushed with the stack.
+- **T5 doors ruling:** GCs bond via existing doors (crossings/courtship/promotion-seeds) — no full-pool scan; no code change needed.
 
-## 8. Not yet audited (loose ends acknowledged)
+## 8. Final sweep — DONE S325 (agent audit, all remaining surfaces)
 
-civicInitiativeEngine (initiative→citizen seam is via civicNewsPool, captured), gentrificationEngine + economicRippleEngine (neighborhood-state inputs, not citizen-event generators), storylineWeavingEngine/storylineHealthEngine (phase06-07 narrative layer), hospital/health flow beyond generationalEventsEngine's lifecycle (engine.52 surface). These are input-side or narrative-side; sweep them before declaring the grid loose-end-free.
+**Clean (world-state only, no citizen surface):** civicInitiativeEngine (officeholder status guards present; fallback path checks fewer statuses — minor, low blast radius), neighborhoodTrajectoryEngine (= renamed gentrificationEngine), economicRippleEngine, storylineHealthEngine, processArcLifeCycle, updateStorylineStatus, applyMigrationDrift.
+
+**Findings:**
+1. **storylineWeavingEngine assigns dramatic roles to free-text citizen names with ZERO status/age checks** — a deceased/traded name in `Storyline_Tracker.RelatedCitizens` keeps its protagonist/antagonist role indefinitely. Parked: follow-up row when storyline layer is next touched.
+2. **`involvedCitizens` is dead data everywhere** — every eventArcs writer hardcodes `[]`; every consumer defensively falls back. Candidates: populate from generational/chaos writers, or remove the field. Parked.
+3. **textureTriggers is NOT dead** (corrects §1's earlier note) — two live consumers: Texture_Trigger_Log writer + applyStorySeeds story-seed conversion (engine.41).
+4. **Faith→citizen bridge exists** via generateCitizensEvents faithPool_ neighborhood fan-out (engine.33 T9) — which is exactly the exposure channel step 9b's faith joins ride.
+5. **Chaos→hospital handoff verified mechanically sound** — health lifecycle gates purely on Status strings that chaos writes exactly; **caught + fixed same-session:** chaos HealthCause was a machine tag that would leak verbatim into death prose and permanently exclude the citizen from the Media-Room cause queue → now writes human prose ('a workplace accident' / 'a sudden medical emergency').
+6. healthCauseIntake has no traded/pending guard on queue inclusion — minor, parked.
 
 ---
 

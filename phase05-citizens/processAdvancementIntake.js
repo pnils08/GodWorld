@@ -132,6 +132,9 @@ function processAdvancementIntake_(ctx) {
   results.usageSkipped = usageResults.skipped;
   results.promotionsTriggered = usageResults.promotionsTriggered;
 
+  // engine.69 (S325, Mike-approved): attention fades, earned tiers follow.
+  decayMediaAttention_(ctx, cycle);
+
   // engine.58 (S320): emergence-promotion checkpoint — GC citizens whose
   // EmergenceCount reached the threshold win the lottery: queued as
   // Advancement_Intake1 rows here, promoted to full SL rows by
@@ -752,6 +755,115 @@ function processIntakeRows_(ss, now, cycle) {
 // Simulation_Ledger row. Mike-ruled S320: 3. One well-seeded engine event can
 // print 3 articles in a cycle (media agents chase a story), so single-cycle
 // promotion is by design.
+// ═══════════════════════════════════════════════════════════════════════════
+// engine.69 (S325, Mike-approved rules 1-3): TIER DECAY — the fame ladder
+// runs both ways, but ONLY for rungs that were climbed.
+//   1. UsageCount decays like cultural FameScore: quiet (no naming in
+//      Citizen_Media_Usage for ATTENTION_QUIET_CYCLES) -> -1/cycle, floor 0.
+//   2. Tier demotes ONE step only when the CURRENT tier was ladder-earned —
+//      the bump left an "Updated to Tier N" Advancement row in
+//      LifeHistory_Log — and UsageCount has fallen below that tier's bar
+//      (T1:9 / T2:6 / T3:3). Stepwise: next cycle re-checks the next rung;
+//      it stops naturally at the seeded tier (no marker = authored = held).
+//   3. Exempt: Tier 1 (protected class) and non-ENGINE modes (GAME/CIVIC/
+//      MEDIA tiers are the role, not the coverage).
+// Nothing Mike authored ever erodes; only attention-earned rungs give way.
+// ═══════════════════════════════════════════════════════════════════════════
+var ATTENTION_QUIET_CYCLES = 10;
+var TIER_BAR = { 1: 9, 2: 6, 3: 3 };
+
+function decayMediaAttention_(ctx, cycle) {
+  if (!ctx || !ctx.ledger || !cycle) return;
+  var h = ctx.ledger.headers;
+  var iPop = h.indexOf('POPID'), iTier = h.indexOf('Tier'), iClock = h.indexOf('ClockMode'),
+      iUse = h.indexOf('UsageCount'), iStat = h.indexOf('Status'),
+      iFirst = h.indexOf('First'), iLast = h.indexOf('Last'), iLife = h.indexOf('LifeHistory'),
+      iLastU = h.indexOf('LastUpdated');
+  if (iPop < 0 || iUse < 0) return;
+
+  // last-named cycle per citizen name (Citizen_Media_Usage carries Cycle + name)
+  var lastNamedByName = {};
+  try {
+    var us = ctx.ss.getSheetByName('Citizen_Media_Usage');
+    if (us && us.getLastRow() > 1) {
+      var uv = us.getDataRange().getValues();
+      var uh = uv[0], iUCyc = uh.indexOf('Cycle'), iUName = uh.indexOf('CitizenName');
+      if (iUCyc >= 0 && iUName >= 0) {
+        for (var ur = 1; ur < uv.length; ur++) {
+          var un = String(uv[ur][iUName] || '').trim().toLowerCase();
+          var uc = Number(String(uv[ur][iUCyc] || '').replace(/[^0-9]/g, '')) || 0;
+          if (un && uc && (!(un in lastNamedByName) || uc > lastNamedByName[un])) lastNamedByName[un] = uc;
+        }
+      }
+    }
+  } catch (eU) { Logger.log('decayMediaAttention_: usage read failed — ' + eU.message); }
+
+  // earned-tier markers per POPID from LifeHistory_Log Advancement rows
+  var earnedTiersByPop = {};
+  try {
+    var ll = ctx.ss.getSheetByName('LifeHistory_Log');
+    if (ll && ll.getLastRow() > 1) {
+      var lv = ll.getDataRange().getValues();
+      var lhh = lv[0], iLPop9 = lhh.indexOf('POPID');
+      if (iLPop9 >= 0) {
+        for (var lr = 1; lr < lv.length; lr++) {
+          var lTxt = String(lv[lr][4] || '');
+          var m9 = lTxt.match(/Updated to Tier (\d)/);
+          if (!m9) continue;
+          var lp9 = String(lv[lr][iLPop9] || '').trim().toUpperCase();
+          if (!lp9) continue;
+          (earnedTiersByPop[lp9] = earnedTiersByPop[lp9] || {})[Number(m9[1])] = true;
+        }
+      }
+    }
+  } catch (eL) { Logger.log('decayMediaAttention_: log read failed — ' + eL.message); }
+
+  var decays = 0, demotions = 0;
+  for (var r = 0; r < ctx.ledger.rows.length; r++) {
+    var row = ctx.ledger.rows[r];
+    var use = Number(row[iUse]) || 0;
+    if (use <= 0) continue;
+    var st9 = iStat >= 0 ? String(row[iStat] || '').trim().toLowerCase() : '';
+    if (st9 === 'deceased' || st9 === 'traded' || st9 === 'pending' || st9 === 'inactive') continue;
+    var nm9 = ((iFirst >= 0 ? row[iFirst] : '') + ' ' + (iLast >= 0 ? row[iLast] : '')).toString().trim().toLowerCase();
+    var lastNamed = lastNamedByName[nm9] || 0;
+    if (lastNamed && (cycle - lastNamed) <= ATTENTION_QUIET_CYCLES) continue;
+    if (!lastNamed) continue; // never named on record — UsageCount predates the usage tab; leave history alone
+
+    // rule 1: attention fades
+    row[iUse] = use - 1;
+    ctx.ledger.rows[r] = row;
+    ctx.ledger.dirty = true;
+    decays++;
+
+    // rules 2+3: earned rungs give way
+    var tier9 = Number(row[iTier]) || 4;
+    var mode9 = iClock >= 0 ? String(row[iClock] || 'ENGINE').trim().toUpperCase() : 'ENGINE';
+    if (tier9 <= 1 || tier9 >= 4 || mode9 !== 'ENGINE') continue;
+    var pop9 = String(row[iPop] || '').trim().toUpperCase();
+    var earned = earnedTiersByPop[pop9] || {};
+    var bar = TIER_BAR[tier9] || 99;
+    if (earned[tier9] && (use - 1) < bar) {
+      row[iTier] = tier9 + 1;
+      if (iLife >= 0) {
+        var demLine = 'C' + cycle + " — [Media] The spotlight moved on — back to Tier " + (tier9 + 1) + ' life, quieter and no less lived';
+        row[iLife] = (row[iLife] ? row[iLife] + '\n' : '') + demLine;
+      }
+      if (iLastU >= 0) row[iLastU] = 'C' + cycle;
+      ctx.ledger.rows[r] = row;
+      demotions++;
+      if (typeof queueAppendIntent_ === 'function') {
+        queueAppendIntent_(ctx, 'LifeHistory_Log',
+          ['C' + cycle, row[iPop], ((iFirst >= 0 ? row[iFirst] : '') + ' ' + (iLast >= 0 ? row[iLast] : '')).toString().trim(),
+           'Media|tier-decay', 'The spotlight moved on — Tier ' + tier9 + ' -> ' + (tier9 + 1) + ' (attention faded)',
+           '', cycle], 'engine.69 tier decay', 'citizens', 100);
+      }
+    }
+  }
+  if (decays || demotions) Logger.log('decayMediaAttention_: ' + decays + ' attention decays, ' + demotions + ' tier demotions');
+  if (ctx.summary) ctx.summary.tierDecay = { decays: decays, demotions: demotions };
+}
+
 var GC_EMERGENCE_PROMOTION_THRESHOLD = 3;
 
 // engine.66 (S324): ONE drip system, 2 per cycle, period (Mike-pinned S324;

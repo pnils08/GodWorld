@@ -650,18 +650,65 @@ function countYouthEventsByLevel_(events) {
  * @param {Object} ctx
  * @param {Array} events
  */
+// engine.69b (S325, Mike ruling): YOUTH EVENTS MOLD CHILDREN. This engine
+// wrote log rows only — school years never reached col-O LifeHistory, so the
+// compressor never folded them and a child's dials were untouched by their
+// own growing up. Now every youth event lands on the citizen row with a
+// DIAL_MAP-routable tag: school pushes drive/openness, sports pushes
+// out-and-about, community pushes sociability/warmth — the kid the events
+// describe becomes the adult the dials remember.
+var YOUTH_DIAL_TAG = {
+  academic: 'Education',
+  graduation: 'Graduation',
+  coming_of_age: 'Graduation',
+  sports: 'Team',
+  arts: 'Cultural',
+  clubs: 'Community',
+  community_support: 'Community',
+  civic_participation: 'Civic',
+  resilience: 'Stabilized',
+  safety_awareness: 'Neighborhood'
+};
+
 function recordYouthLifeHistory_(ctx, events) {
   var cycle = (ctx.summary && ctx.summary.absoluteCycle) || 0;
   var timestamp = inWorldStamp_(ctx);
 
+  // popId -> ledger row index for the col-O write (shared ctx.ledger, §5.6)
+  var rowByPop = {};
+  var iLifeY = -1, iLastUY = -1;
+  if (ctx.ledger && ctx.ledger.rows) {
+    var yh = ctx.ledger.headers;
+    var iPopY = yh.indexOf('POPID');
+    iLifeY = yh.indexOf('LifeHistory');
+    iLastUY = yh.indexOf('LastUpdated');
+    if (iPopY >= 0) for (var yr = 0; yr < ctx.ledger.rows.length; yr++) {
+      var yp = ctx.ledger.rows[yr][iPopY];
+      if (yp) rowByPop[String(yp).trim().toUpperCase()] = yr;
+    }
+  }
+
   for (var i = 0; i < events.length; i++) {
     var e = events[i];
+    var dialTag = YOUTH_DIAL_TAG[e.eventType] || 'Education';
+
+    // col-O: the child LIVES it — compressor folds it into dials next Phase 9
+    var yIdx = rowByPop[String(e.youthId || '').trim().toUpperCase()];
+    if (yIdx !== undefined && iLifeY >= 0) {
+      var yRow = ctx.ledger.rows[yIdx];
+      var yLine = timestamp + ' — [' + dialTag + '] ' + e.description + ' (' + e.outcome + ')';
+      yRow[iLifeY] = (yRow[iLifeY] ? yRow[iLifeY] + '\n' : '') + yLine;
+      if (iLastUY >= 0) yRow[iLastUY] = timestamp;
+      ctx.ledger.rows[yIdx] = yRow;
+      ctx.ledger.dirty = true;
+    }
+
     if (typeof queueAppendIntent_ === 'function') {
       queueAppendIntent_(ctx, 'LifeHistory_Log', [
         timestamp,
         e.youthId,
         e.youthName,
-        'youth-' + e.eventType,
+        dialTag + '|youth-' + e.eventType,
         e.description + ' (' + e.outcome + ')',
         e.neighborhood,
         cycle

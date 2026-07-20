@@ -63,43 +63,16 @@ NOTE: Edition 87 was retracted. E87 letters_c87.md was fully rewritten with new 
 - Jose Walker (64, Uptown, nurse aide) — First Friday arts revival lighting the neighborhood
 - Ernesto Quintero (50, West Oakland, A's DH) — 18-1 A's streak, city permission to hope
 
-## C93 Letters
-- Gloria Hutchins (68, West Oakland, retired school bus driver) — RETURNING, Stabilization Fund + grief witnessing
-- Roberto Iglesias (56, Fruitvale, restaurant owner) — NEW, Transit Hub vote structural gap, clarity needed
-- Diane Foster (58, Temescal, occupational therapist) — NEW, Health Center community design workshop
-- Thomas Webb (62, Lake Merritt, retired city planner) — NEW, Oakland Oaks naming throwback memory
-
-## C94 Letters
-- Keisha Morris (51, West Oakland, counselor) — NEW, Stab Fund cleared but neighborhood still stuck
-- Miguel Santos (54, Fruitvale, restaurant owner) — NEW, Transit Hub Phase II + Mam-language access, Carmen Solis push
-- David Okonkwo (62, Lake Merritt, retired insurance adjuster) — NEW, A's team chemistry (Reyna two-homer night)
-
-## C95 Letters
-(No letters-desk output recorded for C95)
-
-## C96 Letters
-- Sahana (34, District 7/KONO, no occupation) — NEW, KONO blackout silence witness
-- Lingo Kim (71, Temescal, hair stylist) — NEW, retirement + Health Center landing
-- Patrick Hill (32, Laurel, line cook) — NEW, promotion, first emergence, city reactivation
-- Shawn Neighbor (43, Fruitvale, construction laborer) — NEW, Baylight Phase II site lead promotion, women-in-trades
-
-## C97 Letters (REBUILD — locked pool, canon violations scrapped)
-- Reggie Soto (47, Fruitvale, Auto Body Shop Owner) — NEW, Fruitvale Transit Hub groundbreaking + local-hire/apprenticeship reaching Fruitvale residents
-- Eleanor Rivera (45, West Oakland, BART Station Manager) — NEW, West Oakland safety + apprenticeship bill to council floor vote
-- Lena Okafor (39, Fruitvale, Daycare Director) — NEW, Día de los Muertos + First Friday festival season, families gathering
-
-## C98 Letters
-- Lila Leap (47, West Oakland) — NEW, Stabilization Fund stalled disbursements
-- Ezekiel Campbell (37, Adams Point) — NEW, Apprenticeship Pipeline council 9-0 vote
-- Clarence Moody (72, Dimond) — NEW, post-Día de los Muertos neighborhood calm + safety
-
-## C99 Letters
-(No letters-desk output recorded for C99)
-
-## C100 Letters
-- Kevin Nelson (48, Temescal, line cook) — NEW, sous chef promotion on Creation Day, working-kitchen voice
-- Arnie Carter (72, Fruitvale, retired legal-aid worker) — NEW, 51-year arc closure, Baylight through grandchildren
-- Maria Conteras (41, East Oakland, high school teacher) — NEW, teaching next-generation futures at the Baylight site
+## Published Letters (C93–C101)
+- **C93** — Hutchins (returning), Iglesias (Transit Hub), Foster (Health Center), Webb (Oakland Oaks) — see c93_letters.md
+- **C94** — Morris (Stab Fund), M. Santos (Transit Hub Phase II), Okonkwo (A's chemistry) — see c94_letters.md
+- **C95** — (No letters output)
+- **C96** — Sahana (KONO blackout), Kim (retirement), Hill (promotion), Neighbor (Baylight site lead) — see c96_letters.md
+- **C97** — Reggie Soto (Transit Hub groundbreaking), Rivera (West Oakland safety), Okafor (Día de los Muertos) — see c97_letters.md (rebuild)
+- **C98** — Leap (Stab Fund), Campbell (Apprenticeship vote), Moody (post-Día calm) — see c98_letters.md
+- **C99** — (No letters output)
+- **C100** — Nelson (promotion), Carter (arc closure), Conteras (teaching futures) — see c100_letters.md
+- **C101** — Reggie Soto (returning, Transit Hub CBA), Elijah Roberts (new, Apprenticeship reality), Illy Jile (new, retirement) — see c101_letters.md
 
 ## Rest Cycle Tracking
 - Beverly Hayes: used E85, E86 — REST expired
@@ -141,7 +114,7 @@ NOTE: Edition 87 was retracted. E87 letters_c87.md was fully rewritten with new 
 - Lingo Kim: used C96 — REST through C98 (expires C99)
 - Patrick Hill: used C96 — REST through C98 (expires C99)
 - Shawn Neighbor: used C96 — REST through C98 (expires C99)
-- Reggie Soto: used C97 — REST through C99 (expires C100)
+- Reggie Soto: used C97, C101 — REST through C103 (expires C104)
 - Eleanor Rivera: used C97 — REST through C99 (expires C100)
 - Lena Okafor: used C97 — REST through C99 (expires C100)
 - Lila Leap: used C98 — REST through C100 (expires C101)
@@ -150,6 +123,8 @@ NOTE: Edition 87 was retracted. E87 letters_c87.md was fully rewritten with new 
 - Kevin Nelson: used C100 — REST through C102 (expires C103)
 - Arnie Carter: used C100 — REST through C102 (expires C103)
 - Maria Conteras: used C100 — REST through C102 (expires C103)
+- Elijah Roberts: used C101 — REST through C103 (expires C104)
+- Illy Jile: used C101 — REST through C103 (expires C104)
 
 ## IMPORTANT: Briefing vs. Rest Cycle Conflicts
 If a briefing recommends a returning citizen who is on mandatory rest, create a new citizen instead. The rest cycle rule overrides briefing suggestions. When Edition 87 was retracted and rewritten, all previously used E87 citizens remained on rest regardless — new citizens were created for the rewrite.

@@ -387,6 +387,18 @@ taste calls on how loud the new physics speaks in the paper.
 engine structure, not a full read — the build session reads each emission site end-to-end before
 placing the block, and each engine ships as its own bounded commit with a groundhog bench fire.
 
+**BUILD STATUS (S326, Mike go 2026-07-20):** 5 of 6 table rows SHIPPED as bounded commits —
+chaos (be41618a), fame ×2 sites, bond wedding + faith-join aggregate, youth school-wide, consumer
+domain map (desk map already covered via domains). Existing suites clean: chaosCarsCitizenDial
+14/14, chaosTrauma 26/26, citizensEventsFame 12/12, buildContractSeeds ALL PASS, collision audit 0.
+**REVERSAL (measure-twice, per the flagged risk):** the `household-event` row is WITHDRAWN — full
+read proved `runHouseholdEngine` is a narrative flavor engine (texture lines, max 6/cycle, no
+discrete formation/dissolution/crisis events). Household formation happens at `marryCitizens_`
+(already rippled as `bond-event`); the S325 "household lottery" IS the GC marriage lottery routing
+through the same commit point; hospital-strain lines are texture riding crises that already ripple
+from the chaos emitter — a household emitter would double-count. Net: 7 emitter sites across 5
+files, 0 new files. Groundhog bench fire next; live clasp deploy after the proven fire.
+
 ## Status log
 
 ### V2-4 sandbox verify — PASSED C117 (2026-07-06, S298)

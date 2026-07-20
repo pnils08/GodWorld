@@ -193,6 +193,26 @@ function runYouthEngine_(ctx) {
   var schoolEvents = generateSchoolWideEvents_(ctx, month, rng);
   for (var s = 0; s < schoolEvents.length; s++) {
     events.push(schoolEvents[s]);
+    // V2-5 (S326): a school-wide event (graduation / homecoming / season
+    // kickoff) enters the story surface as hood texture (0.02). The school is
+    // the entity; the seed builder's Grade-1 fill attaches the hood's own
+    // citizens at seed time. Individual dial-molding events stay silent —
+    // the sim's private life (Mike-approved spec).
+    if (typeof recordRipple_ === 'function') {
+      var sev = schoolEvents[s];
+      recordRipple_(ctx, {
+        causeType: 'youth-event',
+        causeId: sev.school || sev.youthId || '',
+        causeDetail: sev.description || '',
+        effectType: sev.eventType || 'school_event',
+        targetScope: 'school',
+        targetIds: [sev.school || sev.youthId || ''],
+        neighborhood: sev.neighborhood || '',
+        magnitude: 0.02,
+        duration: 1,
+        sourceEngine: 'runYouthEngine'
+      });
+    }
   }
 
   // Record events

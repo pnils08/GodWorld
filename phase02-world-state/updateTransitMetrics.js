@@ -83,6 +83,12 @@ function updateTransitMetrics_Phase2_(ctx) {
   // Get context factors (set by Phase 1 calendar)
   var weather = S.weather || {};
   var weatherType = weather.type || 'clear';
+  // engine.70 T-1 (S327): the 'storm' branches in calculateStationMetrics_
+  // (-0.15 on-time) and calculateTrafficModLocal_ (x1.3) were DEAD since
+  // landing — S.weather.type's enum never contains 'storm' (the weather model
+  // maps a STORM front to type 'rain'). Storms registered as drizzle. Key the
+  // real signal off frontState so both branches fire as authored.
+  if (weather.frontState === 'STORM') weatherType = 'storm';
   var season = S.season || 'spring';
   var holiday = S.holiday || '';
   var dayType = (holiday && holiday !== 'none') ? 'holiday' : (rng() < TRANSIT_FACTORS.WEEKEND_PROBABILITY ? 'weekend' : 'weekday');
@@ -152,6 +158,89 @@ function updateTransitMetrics_Phase2_(ctx) {
     },
     alerts: generateTransitAlerts_(stationMetrics, corridorMetrics, context)
   };
+
+  // ── engine.70 T-1 (S327): salient transit events ─────────────────────────
+  // The dashboard becomes a lived system: bad-day states detected from this
+  // run's own computation, written to S.transitState (Phase-4/5 citizen
+  // coupling reads it) + Ripple_Ledger (causeType transit-event → CIVIC desk).
+  // Bars against real distribution (with the storm-key fix above): on-time
+  // < 0.72 ≈ STORM-front days only (~0.8/yr, rain days sit ~0.80); breakdown
+  // roll 1.5%/cycle (~0.8/yr) is the no-weather "BART broke down" morning.
+  // Consecutive-cycle dedup via previousCycleState.transitDisrupted
+  // (finalizeCycleState v1.9) — a 3-cycle storm is one disruption story.
+  var avgOT = S.transitMetrics.avgOnTime;
+  var avgTR = S.transitMetrics.avgTraffic;
+  var prevDisrupted = !!(S.previousCycleState && S.previousCycleState.transitDisrupted);
+  var breakdownRoll = rng() < 0.015;
+  var disruptedNow = (avgOT < 0.72) || breakdownRoll;
+  var disruptionCause = breakdownRoll ? 'equipment breakdown' :
+    (weatherType === 'storm' ? 'storm conditions' : 'system strain');
+
+  // worst 3 stations name the affected hoods (entities attached at generation)
+  var otSorted = stationMetrics.slice().sort(function(a, b) {
+    return a.onTimePerformance - b.onTimePerformance;
+  });
+  var affectedHoods = [];
+  for (var ah = 0; ah < Math.min(3, otSorted.length); ah++) {
+    var ahStation = null;
+    for (var ahs = 0; ahs < OAKLAND_BART_STATIONS.length; ahs++) {
+      if (OAKLAND_BART_STATIONS[ahs].station === otSorted[ah].station) { ahStation = OAKLAND_BART_STATIONS[ahs]; break; }
+    }
+    if (ahStation && affectedHoods.indexOf(ahStation.neighborhood) < 0) affectedHoods.push(ahStation.neighborhood);
+  }
+
+  var gridlockNow = avgTR >= 78 && (majorEvents > 0 || gameDay);
+  var worstCorridor = '';
+  var worstTraffic = 0;
+  for (var wc = 0; wc < corridorMetrics.length; wc++) {
+    if (corridorMetrics[wc].trafficIndex > worstTraffic) {
+      worstTraffic = corridorMetrics[wc].trafficIndex;
+      worstCorridor = corridorMetrics[wc].corridor;
+    }
+  }
+
+  S.transitState = {
+    disruption: disruptedNow && !prevDisrupted,
+    disruptionOngoing: disruptedNow,
+    disruptionCause: disruptedNow ? disruptionCause : '',
+    gridlock: gridlockNow,
+    affectedHoods: disruptedNow ? affectedHoods : [],
+    onTime: avgOT,
+    traffic: avgTR
+  };
+
+  if (S.transitState.disruption && typeof recordRipple_ === 'function') {
+    recordRipple_(ctx, {
+      causeType: 'transit-event',
+      causeId: 'transit-disruption-c' + cycle,
+      causeDetail: 'Service disruption — ' + disruptionCause + ': on-time fell to ' +
+        Math.round(avgOT * 100) + '%, worst around ' + affectedHoods.join(', '),
+      effectType: 'service-disruption',
+      targetScope: 'neighborhood',
+      targetIds: affectedHoods,
+      neighborhood: affectedHoods[0] || '',
+      magnitude: 0.05,
+      duration: 1,
+      sourceEngine: 'updateTransitMetrics'
+    });
+  }
+  if (gridlockNow && typeof recordRipple_ === 'function') {
+    recordRipple_(ctx, {
+      causeType: 'transit-event',
+      causeId: 'gridlock-c' + cycle,
+      causeDetail: 'Gridlock day — traffic index ' + Math.round(avgTR) +
+        ', worst on ' + worstCorridor +
+        (gameDay ? ' with game-day crowds' : majorEvents > 0 ? ' with ' + majorEvents + ' major event(s) in town' : ''),
+      effectType: 'gridlock',
+      targetScope: 'citywide',
+      targetIds: [],
+      neighborhood: '',
+      magnitude: 0.02,
+      duration: 1,
+      sourceEngine: 'updateTransitMetrics'
+    });
+  }
+  // ── end engine.70 T-1 ────────────────────────────────────────────────────
 
   return allMetrics;
 }

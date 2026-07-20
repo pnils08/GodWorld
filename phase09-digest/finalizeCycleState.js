@@ -138,6 +138,11 @@ function finalizeCycleState_(ctx) {
     // Same failure class as the v1.7 weatherTracking carry. ~120 bytes.
     weatherFrontTracking: compactFrontTracking_(S.weatherFrontTracking),
 
+    // v1.9 (engine.70 T-1): one boolean — updateTransitMetrics' salience pass
+    // dedupes consecutive disruption cycles against it (a 3-cycle storm is one
+    // disruption story, not three).
+    transitDisrupted: !!(S.transitState && S.transitState.disruptionOngoing),
+
   };
 
   // This is what downstream scripts read next cycle

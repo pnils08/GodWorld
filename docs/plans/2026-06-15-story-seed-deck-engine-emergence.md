@@ -355,6 +355,38 @@ Mike's contract, stated 2026-07-05 after rejecting the engine.45 desk-slice fram
 can say "second cycle running / fading." engine.45 Tasks 4–6 (JSON desk-slice layer + JSON
 WHY re-point) are DEAD — superseded by this contract.
 
+## 2026-07-20 — V2-5 design: ripple emission for the S325 physics (S326, DESIGN — awaiting Mike go)
+
+**Gap (Row 28's "consuming layer" framing, grounded S326):** `buildContractSeeds_` builds seeds
+exclusively from `S.rippleEvents`. The engine.67-69 physics emit none — verified zero
+`recordRipple_` calls in `chaosCarsEngine`, `runHouseholdEngine`, `bondEngine`, `runYouthEngine`,
+and the fame loop (the only `generateCitizensEvents` ripples are sports/game-night). The S325
+nervous system is invisible to the story surface.
+
+**Fix shape (FIX-don't-ADD):** one bounded `recordRipple_` block per engine, inside the existing
+file, modeled on the faithEventsEngine reference instance (L184-201). No new files; no schema
+change (Ripple_Ledger + seed contract already carry everything). Per-class spec:
+
+| Engine | causeType | Emits when (salience) | targetIds / hood at hand | Magnitude | Domain |
+|---|---|---|---|---|---|
+| chaosCarsEngine | `chaos-event` | outcome has domain consequence: hospitalized / arrested / workplace_accident / substance_intervention. Tickets/warnings stay silent (texture already rides citizen events) | target POPID + target's hood, at rollOutcome | 0.05 (solo-major — a hospitalization IS a story) | SAFETY |
+| runHouseholdEngine | `household-event` | formation / dissolution / crisis / lottery win — not routine upkeep | member POPIDs + household hood | crisis 0.05; formation/lottery 0.02 | COMMUNITY |
+| bondEngine | `faith-join` | MembersList join (engine.67 9b) | joiner POPIDs, org as causeId, org hood | 0.01 texture (≥3 same-org cluster merges major via existing rule — congregation-surge story) | COMMUNITY |
+| bondEngine | `bond-event` | marriage / divorce / breakup only | both POPIDs + shared hood | 0.05 | COMMUNITY |
+| runYouthEngine | `youth-event` | school-wide events only (`generateSchoolWideEvents_`); individual dial-molding stays the sim's private life | affected youth POPIDs + school hood | 0.02 | COMMUNITY |
+| fame loop (generateCitizensEvents FAME_WATCH + tier decay site) | `fame-event` | citizen crosses the fame bar (FAME_WATCH fire) or takes first tier demotion | POPID + citizen hood | 0.05 | COMMUNITY |
+
+Plus the two consumer-map adds in `buildContractSeeds.js`: `CONTRACT_SEED_DOMAIN` entries for the
+five new causeTypes (per table) and matching `CONTRACT_SEED_DESK` rows mirroring their domain family.
+
+**Open design calls (Mike):** (a) youth individual events silent vs school-wide-only as specced;
+(b) chaos ticket/warning silence; (c) magnitude calibration (0.05 solo-major bar) — all three are
+taste calls on how loud the new physics speaks in the paper.
+
+**Build-time verify (measure-twice):** the household + bond event inventories were specced from
+engine structure, not a full read — the build session reads each emission site end-to-end before
+placing the block, and each engine ships as its own bounded commit with a groundhog bench fire.
+
 ## Status log
 
 ### V2-4 sandbox verify — PASSED C117 (2026-07-06, S298)

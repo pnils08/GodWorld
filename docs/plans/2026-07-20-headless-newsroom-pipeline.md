@@ -21,6 +21,8 @@ pointers:
 
 **Architecture:** A standalone node orchestrator, fired by cron after a cycle completes, chains pieces that mostly already exist: load current world state (`world_summary_c{N}.md`, sim-clock) → Mags slate/`/sift` → per-desk **writer crons** (`cron-desk-writer.js`, model per desk) → optional `source-search` verified retrieval → **headless Rhea** canon/fact gate → assemble → `/post-publish` → ingest. The NEW build is three things: (1) the **orchestrator** that chains them headless, (2) **Rhea running headless** as a hard gate (the "fix #2" the run-1 experiment flagged), (3) a **per-run scorecard** so quality is measured, not vibed. It replaces interactive terminal-driven edition production with scheduled workers; the interactive path stays runnable.
 
+**Execution surfaces (S325 decision):** work splits across two headless surfaces, and the cron picks the right one per stage. **Writing → raw-API node cron** (`cron-desk-writer.js`) — cheap, provider-swappable, composition from injected state, no heavy tools. **Verification/gating + retrieval (Rhea, source-search) → Claude Code headless** (`claude -p` / Agent SDK) — needs robust tool use + GodWorld MCP + the reviewer-lane scaffolding, which raw-API loops do poorly. The cron is only the orchestrator; it fires each stage on its correct surface.
+
 **Terminal:** research-build (design + orchestrator/harness scripts — apparatus). Handoffs: **engine-sheet** owns cron wiring + world-state artifacts; **media** owns desk voices + Rhea content (unchanged — the workers *load* them); **civic** owns city-hall agents (unchanged). Per the media/civic-never-build rule, all script/orchestrator building is research-build/engine-sheet; media/civic content files are loaded, not rebuilt.
 
 **Pointers:**
@@ -53,13 +55,14 @@ The provable increment: one desk produces a **scored, canon-gated** headless dra
 - **Verify:** `node scripts/cron-desk-writer.js --desk sports` → a `*.scorecard.json` exists with all 7 fields populated.
 - **Status:** [x] DONE (S325). Built + verified (DeepSeek run emitted all 7 fields, `apiCostUsd` computed). **Finding:** the self-score is lenient — DeepSeek graded itself "0 hallucinations / factsCorrect:true" despite its "78 OVR" leak. Self-score is a cheap signal only; the authoritative fact/canon check is Task 2 (independent headless Rhea).
 
-#### Task 2: Headless Rhea canon/fact gate
-- **Files:** `scripts/cron-rhea-gate.js` — create (needs Mike approval — new script)
+#### Task 2: Headless Rhea canon/fact gate  *(CLI surface, not raw-API — S325 decision)*
+**Surface decision (Mike Q, S325):** Rhea runs at the **Claude Code headless** level (`claude -p` / Agent SDK), NOT as a raw-API node cron like the writer. Rationale: canon verification is tool-heavy (Read/Grep + GodWorld MCP `lookup_citizen`/`search_canon`); raw-API tool loops rabbit-hole (the writer burned 617k tokens) and can't reach MCP. Claude Code's harness does tools+MCP reliably. Precedent: `source-search` (S326) is exactly this — a Claude Code subagent doing verified work headlessly. Aligns with the standing "reviewers-first for external execution infra" rule. (Fully Claude-Code-independent raw-API Rhea = a later, bigger canon-lookup port; deferred.)
+- **Files:** `scripts/cron-rhea-gate.sh` (or a small node wrapper) — create (needs Mike approval — new file). Wraps a `claude -p` headless invocation of the existing `.claude/agents/rhea-morgan` agent.
 - **Steps:**
-  1. Same harness shape as `cron-desk-writer.js`: load `.claude/agents/rhea-morgan` SKILL/RULES as system prompt + `docs/canon/CANON_RULES.md` + the draft + `world_summary_c{N}.md`; give read/glob/grep tools.
-  2. Return strict JSON `{ pass: bool, flags: [{claim, issue, severity}] }` — flags every claim not supported by world state + immersion leaks (engine/game language).
+  1. Orchestrator invokes Claude Code headless (`claude -p`) pointing the `rhea-morgan` agent at the draft + `world_summary_c{N}.md` + `docs/canon/CANON_RULES.md`, with its normal tools + MCP.
+  2. Rhea returns strict JSON `{ pass: bool, flags: [{claim, issue, severity}] }` — flags every claim not grounded in world state/canon + immersion leaks (engine/game language, e.g. "78 OVR").
   3. Save `output/cron-compare/<desk>_c<cycle>_<slug>.rhea.json`.
-- **Verify:** run it on `output/cron-compare/sports_c101_deepseek-deepseek-chat.md` → flags the "78 OVR" game-stat leak and the invented fan name.
+- **Verify:** run it on `output/cron-compare/sports_c101_deepseek-deepseek-chat.md` → flags the "78 OVR" game-stat leak and the invented fan name (which the writer's self-score missed).
 - **Status:** [ ] not started
 
 #### Task 3: Per-desk model routing config

@@ -34,6 +34,7 @@
 require('/root/GodWorld/lib/env');
 const fs = require('fs');
 const path = require('path');
+const https = require('https');
 const { execFileSync } = require('child_process');
 const Anthropic = require('@anthropic-ai/sdk');
 const mags = require('../lib/mags');
@@ -49,9 +50,11 @@ function arg(flag, def) {
   return i !== -1 && process.argv[i + 1] ? process.argv[i + 1] : def;
 }
 const DESK = arg('--desk', 'sports');
-const MODEL = arg('--model', 'claude-sonnet-5');   // desk runs `model: sonnet` → current Sonnet
+const PROVIDER = arg('--provider', 'anthropic');   // 'anthropic' (Claude Code parity) | 'openrouter' (cheap-model sweep, research.25 Thread B)
+const MODEL = arg('--model', PROVIDER === 'openrouter' ? 'deepseek/deepseek-chat' : 'claude-sonnet-5');
+const MODEL_SLUG = MODEL.replace(/[^a-z0-9]+/gi, '-').toLowerCase();
 const MAX_TURNS = parseInt(arg('--max-turns', '15'), 10);
-const MAX_TOKENS = parseInt(arg('--max-tokens', '8000'), 10);
+const MAX_TOKENS = parseInt(arg('--max-tokens', '16000'), 10);   // a full multi-article section > 8k (S325: 8k truncated Sonnet mid-Article-2)
 const DRY_RUN = process.argv.includes('--dry-run');
 
 const AGENT_DIR = path.join(ROOT, '.claude', 'agents', DESK + '-desk');
@@ -131,7 +134,7 @@ function toolWriteFile(input) {
   // FORCE into the compare sandbox regardless of the path the model asks for
   // (its SKILL boot step 9 tells it to write output/desk-output/... — we redirect).
   const base = path.basename(input.path || (DESK + '_section.md'));
-  const stamped = base.replace(/\.md$/, '') + '_cron.md';
+  const stamped = base.replace(/\.md$/, '') + '_' + MODEL_SLUG + '.md';
   const dest = path.join(COMPARE_DIR, stamped);
   if (DRY_RUN) {
     log.info('[dry-run] would write ' + (input.content || '').length + ' chars → ' + path.relative(ROOT, dest));
@@ -174,6 +177,43 @@ function callModel(client, system, messages) {
   return client.messages.create({ model: MODEL, max_tokens: MAX_TOKENS, system, messages, tools: TOOLS });
 }
 
+// OpenRouter (OpenAI-compatible) — compose-only path for the cheap-model sweep
+// (research.25 Thread B). No tool loop: full world state is injected into the
+// prompt, and OpenAI-format tool-calling differs from Anthropic's — for a
+// creative-WRITING comparison, compose-from-injected-state is the fair unit.
+function callOpenRouter(system, userContent) {
+  return new Promise((resolve, reject) => {
+    const payload = JSON.stringify({
+      model: MODEL, max_tokens: MAX_TOKENS,
+      messages: [{ role: 'system', content: system }, { role: 'user', content: userContent }]
+    });
+    const req = https.request({
+      hostname: 'openrouter.ai', path: '/api/v1/chat/completions', method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(payload),
+        'Authorization': 'Bearer ' + process.env.OPENROUTER_API_KEY,
+        'HTTP-Referer': 'https://godworld.local',
+        'X-Title': 'GodWorld headless desk-writer test'
+      }
+    }, (res) => {
+      let data = '';
+      res.on('data', c => (data += c));
+      res.on('end', () => {
+        try {
+          const j = JSON.parse(data);
+          if (j.error) return reject(new Error('OpenRouter: ' + (j.error.message || JSON.stringify(j.error))));
+          const text = (j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || '';
+          const u = j.usage || {};
+          resolve({ text, usageIn: u.prompt_tokens || 0, usageOut: u.completion_tokens || 0 });
+        } catch (e) { reject(new Error('OpenRouter parse: ' + e.message + ' | ' + data.slice(0, 300))); }
+      });
+    });
+    req.on('error', reject);
+    req.write(payload); req.end();
+  });
+}
+
 // ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
@@ -185,7 +225,11 @@ async function main() {
 
   if (!fs.existsSync(SKILL_PATH)) throw new Error('no SKILL.md for desk "' + DESK + '" at ' + SKILL_PATH);
   const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) throw new Error('ANTHROPIC_API_KEY not set');
+  if (PROVIDER === 'openrouter') {
+    if (!process.env.OPENROUTER_API_KEY) throw new Error('OPENROUTER_API_KEY not set');
+  } else if (!apiKey) {
+    throw new Error('ANTHROPIC_API_KEY not set');
+  }
 
   const cycle = detectCycle();
   const skill = fs.readFileSync(SKILL_PATH, 'utf8');
@@ -223,46 +267,63 @@ async function main() {
     'have a limited number of research turns before you must write, so do not re-search the same source.\n\n' +
     worldState;
 
-  const client = new Anthropic({ apiKey });
-  const messages = [{ role: 'user', content: kickoff }];
   let usageIn = 0, usageOut = 0, turns = 0;
-  const findings = [];
-  const EXPLORE_TURNS = Math.min(MAX_TURNS, 7);   // bounded research, then forced compose
 
-  // PHASE 1 — EXPLORE (tools on, bounded). Mirrors discord-reflection.js: agency
-  // to look around, but capped so it can't rabbit-hole (a single agentic loop
-  // burned 617k tokens re-grepping player-index.json and never wrote — S325).
-  for (turns = 1; turns <= EXPLORE_TURNS; turns++) {
-    const resp = await callModel(client, system, messages);
-    if (resp.usage) { usageIn += resp.usage.input_tokens || 0; usageOut += resp.usage.output_tokens || 0; }
-    const toolUses = (resp.content || []).filter(b => b.type === 'tool_use');
-    if (resp.stop_reason === 'tool_use' && toolUses.length) {
-      messages.push({ role: 'assistant', content: resp.content });
-      messages.push({ role: 'user', content: toolUses.map(tu => {
-        const result = runTool(tu);
-        log.info('explore turn ' + turns + ' · ' + tu.name + '(' + JSON.stringify(tu.input).slice(0, 100) + ')');
-        findings.push('— ' + tu.name + ' ' + JSON.stringify(tu.input).slice(0, 80) + ' —\n' + cap(result, 2000));
-        return { type: 'tool_result', tool_use_id: tu.id, content: result };
-      }) });
-      continue;
+  if (PROVIDER === 'openrouter') {
+    // COMPOSE-ONLY on the full injected world state (Thread B cheap-model sweep).
+    // No tool loop: full state is already in the prompt, and OpenAI-format tool
+    // calling differs from Anthropic's — for a creative-WRITING comparison, the
+    // fair unit is compose-from-injected-state, holding inputs constant.
+    log.info('compose-only via OpenRouter (' + MODEL + ') on full injected world state...');
+    const composeUser = kickoff +
+      '\n\nNow WRITE the full ' + DESK + ' section for cycle ' + cycle + ' — the complete, publish-ready ' +
+      'markdown, built ONLY from the events/names/records in the world state above. Output ONLY the section.';
+    const r = await callOpenRouter(system, composeUser);
+    usageIn += r.usageIn; usageOut += r.usageOut; turns = 1;
+    if (r.text.trim()) toolWriteFile({ path: DESK + '_c' + cycle + '.md', content: r.text });
+    else log.warn('OpenRouter returned empty.');
+  } else {
+    // ANTHROPIC two-phase (Claude Code parity): bounded explore → forced compose.
+    const client = new Anthropic({ apiKey });
+    const messages = [{ role: 'user', content: kickoff }];
+    const findings = [];
+    const EXPLORE_TURNS = Math.min(MAX_TURNS, 7);   // bounded research, then forced compose
+
+    // PHASE 1 — EXPLORE (tools on, bounded). Mirrors discord-reflection.js: agency
+    // to look around, but capped so it can't rabbit-hole (a single agentic loop
+    // burned 617k tokens re-grepping player-index.json and never wrote — S325).
+    for (turns = 1; turns <= EXPLORE_TURNS; turns++) {
+      const resp = await callModel(client, system, messages);
+      if (resp.usage) { usageIn += resp.usage.input_tokens || 0; usageOut += resp.usage.output_tokens || 0; }
+      const toolUses = (resp.content || []).filter(b => b.type === 'tool_use');
+      if (resp.stop_reason === 'tool_use' && toolUses.length) {
+        messages.push({ role: 'assistant', content: resp.content });
+        messages.push({ role: 'user', content: toolUses.map(tu => {
+          const result = runTool(tu);
+          log.info('explore turn ' + turns + ' · ' + tu.name + '(' + JSON.stringify(tu.input).slice(0, 100) + ')');
+          findings.push('— ' + tu.name + ' ' + JSON.stringify(tu.input).slice(0, 80) + ' —\n' + cap(result, 2000));
+          return { type: 'tool_result', tool_use_id: tu.id, content: result };
+        }) });
+        continue;
+      }
+      break;  // model stopped researching on its own
     }
-    break;  // model stopped researching on its own
-  }
 
-  // PHASE 2 — COMPOSE (no tools) — GUARANTEES a section, composed from a capped
-  // findings digest rather than the full accumulated history (the cost cap).
-  log.info('compose after ' + findings.length + ' research call(s)...');
-  const digest = findings.join('\n\n').slice(0, 12000) || '(little gathered — write from world state + your knowledge)';
-  const fin = await client.messages.create({
-    model: MODEL, max_tokens: MAX_TOKENS, system,
-    messages: [{ role: 'user', content: kickoff +
-      '\n\n## What you gathered while researching\n\n' + digest +
-      '\n\nNow WRITE the full ' + DESK + ' section for cycle ' + cycle + ' as your reply — the complete, ' +
-      'publish-ready markdown. Output ONLY the section.' }]
-  });
-  if (fin.usage) { usageIn += fin.usage.input_tokens || 0; usageOut += fin.usage.output_tokens || 0; }
-  const finalText = (fin.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n');
-  if (finalText.trim()) toolWriteFile({ path: DESK + '_c' + cycle + '.md', content: finalText });
+    // PHASE 2 — COMPOSE (no tools) — GUARANTEES a section, composed from a capped
+    // findings digest rather than the full accumulated history (the cost cap).
+    log.info('compose after ' + findings.length + ' research call(s)...');
+    const digest = findings.join('\n\n').slice(0, 12000) || '(little gathered — write from world state + your knowledge)';
+    const fin = await client.messages.create({
+      model: MODEL, max_tokens: MAX_TOKENS, system,
+      messages: [{ role: 'user', content: kickoff +
+        '\n\n## What you gathered while researching\n\n' + digest +
+        '\n\nNow WRITE the full ' + DESK + ' section for cycle ' + cycle + ' as your reply — the complete, ' +
+        'publish-ready markdown. Output ONLY the section.' }]
+    });
+    if (fin.usage) { usageIn += fin.usage.input_tokens || 0; usageOut += fin.usage.output_tokens || 0; }
+    const finalText = (fin.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n');
+    if (finalText.trim()) toolWriteFile({ path: DESK + '_c' + cycle + '.md', content: finalText });
+  }
 
   const durationMs = Date.now() - startTime;
   const wrote = savedFiles.length > 0;

@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-07-17 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-07-20 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -272,8 +272,8 @@
 
 ### updateTransitMetrics.js
 - **updateTransitMetrics_Phase2_(ctx)**
-  Reads: S.absoluteCycle, S.holiday, S.season, S.weather
-  Writes: S.transitMetrics
+  Reads: S.absoluteCycle, S.holiday, S.previousCycleState, S.season, S.weather
+  Writes: S.transitMetrics, S.transitState
   RNG: ctx.rng / safeRand_(ctx)
 
 - **calculateStationMetrics_(station, context, demographics, rng)**
@@ -406,6 +406,7 @@
   Reads: S.cityDynamics, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
   Writes: S.cityEventDetails, S.cityEvents, S.cityEventsCalendarContext, S.sportsAtmosphereEnabled
   Config: ctx.config.cycleCount, ctx.config.rngSeed
+  Sheets: Heritage_Ledger
   RNG: ctx.rng / safeRand_(ctx)
 
 ### chaosCarsEngine.js
@@ -419,13 +420,14 @@
 
 - **pickVehicle_(rng, configs)**
 
-- **rollOutcome_(rng, vehicle, scope)**
+- **rollOutcome_(rng, vehicle, scope, target)**
 
 - **sampleMagnitude_(rng, impact)**
 
 - **impactsForScope_(vehicle, scope, outcomeName)**
 
 - **pickCitizenTarget_(rng, ctx)**
+  Reads: S.simYear
 
 - **loadBusinessRows_(ctx)**
   Sheets: Business_Ledger
@@ -458,7 +460,7 @@
 - **pickTargetByScope_(rng, ctx, scope)**
 
 - **runChaosCarsEngine_(ctx)**
-  Reads: S.absoluteCycle, S.cycle, S.cycleId
+  Reads: S.absoluteCycle, S.cycle, S.cycleId, S.weatherEvents
   Writes: S.chaosCarsEvents, S.tier1ChaosEvents
   Config: ctx.config.cycleCount
   RNG: ctx.rng / safeRand_(ctx)
@@ -546,8 +548,8 @@
 - **pick_(ctx, arr)**
 
 - **runGenerationalEngine_(ctx)**
-  Reads: S.cycleId, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.month, S.season, S.simYear, S.sportsSeason
-  Writes: S.generationalEvents, S.hospitalEvents
+  Reads: S.cycleId, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.month, S.season, S.simYear, S.sportsSeason, S.weatherEvents
+  Writes: S.generationalEvents, S.hospitalEvents, S.storyHooks
   Config: ctx.config.cycleCount
 
 - **processHealthLifecycle_(ctx, popId, name, currentStatus, duration, age, tier, cause, neighborhood, cycle, cal)**
@@ -558,7 +560,7 @@
 
 - **checkWedding_(ctx, popId, age, lifeHistory, cal, hasHousehold)**
 
-- **checkBirth_(ctx, popId, age, lifeHistory, cal, hasHousehold, marital)** *(engine.65: heritage line members roll x1.15-1.6 birth odds via ctx._heritageTierByPop — last-cycle Heritage_Ledger read at engine init)*
+- **checkBirth_(ctx, popId, age, lifeHistory, cal, hasHousehold, marital)**
 
 - **createChildRow_(ctx, parentRowIdx, cycle)**
   Sheets: Family_Relationships, Household_Ledger
@@ -580,6 +582,8 @@
 
 - **triggerPromotionCascade_(ctx, promotedId, result, cycle)**
   Reads: S.relationshipBonds
+
+- **arcInvolvedCitizens_(ctx, subjectPopId)**
 
 - **triggerRetirementCascade_(ctx, retiredId, name, tierRole, neighborhood, cycle, cal)**
   Writes: S.eventArcs
@@ -666,6 +670,18 @@
   Config: ctx.config.cycleCount
   RNG: ctx.rng / safeRand_(ctx)
 
+- **bondJobFamily_(role)**
+
+- **bondCompatibility_(dataA, dataB, ctx)**
+  Reads: S.faithExposures, S.simYear
+
+- **processFaithJoins_(ctx)**
+  Reads: S.cycleId, S.faithExposures
+  Writes: S._faithJoinRipple, S.faithJoins
+  Config: ctx.config.cycleCount
+  Sheets: Faith_Organizations
+  RNG: ctx.rng / safeRand_(ctx)
+
 - **detectNewBonds_(ctx)**
   Reads: S.cycleActiveCitizens, S.cycleId
   Config: ctx.config.cycleCount
@@ -717,7 +733,7 @@
 
 - **buildBondLedgerIndex_(ctx)**
 
-- **processRomanceAndMarriage_(ctx)** *(engine.66b S324: the ONLY marriage road. Romance growth 0.02 base / 0.05 co-active per cycle — the 2.5-point climb to MARRIAGE_THRESHOLD takes ~1.5-2.5 years of maintained courtship; was 0.3/0.6 = weeks. No timer, no cap — what matures marries)*
+- **processRomanceAndMarriage_(ctx)**
   Reads: S.cycleId, S.relationshipBonds
   Writes: S.storyHooks
   Config: ctx.config.cycleCount
@@ -730,7 +746,14 @@
   Sheets: Family_Relationships, Household_Ledger
   RNG: ctx.rng / safeRand_(ctx)
 
-- **processGCMarriageLottery_(ctx)** *(DISABLED engine.66b S324, Mike-direct: chance-roll spouse handout = forced marriage, no bond behind it — 20 weddings in 13 bench cycles. Call site commented out, function retained for reversibility. Marriage is bonds-only)*
+- **processGCCourtship_(ctx)**
+  Reads: S.cycleId
+  Writes: S.relationshipBonds
+  Config: ctx.config.cycleCount
+  Sheets: Generic_Citizens
+  RNG: ctx.rng / safeRand_(ctx)
+
+- **processGCMarriageLottery_(ctx)**
   Reads: S.cycleId
   Writes: S.relationshipBonds
   Config: ctx.config.cycleCount
@@ -827,7 +850,7 @@
   Sheets: Relationship_Bonds
 
 ### checkForPromotions.js
-- **checkForPromotions_(ctx)** *(engine.62b: mints now carry a full derived profile — Income/Gender/Debt/Stage/Years/Edu/NetWorth via utilities/citizenDerivation; MaritalStatus 'single' by design)*
+- **checkForPromotions_(ctx)**
   Reads: S.cityDynamics, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.simYear, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventsGenerated, S.promotions, S.promotionsCount
   Config: ctx.config.cycleCount
@@ -835,6 +858,12 @@
   RNG: ctx.rng / safeRand_(ctx)
 
 ### citizenContextBuilder.js
+- **deriveLifeState_(f)**
+
+- **eventClassFromTags_(tags)**
+
+- **isEventEligible_(ls, cls)**
+
 - **buildCitizenContext(identifier, cache)**
 
 - **getWorldState_(ss)**
@@ -974,20 +1003,20 @@
 - **detectCareerMobility_(ctx, cycle, rng)**
   Writes: S.storyHooks
 
-- **updateMinorSchoolQuality_(ss, ctx, cycle)** *(engine.65: kids in Established+ heritage lines read +1 over the hood index, cap 10 — via S.heritage.lineByPop, same-cycle)*
-  Reads: S.cycleId, S.heritage.lineByPop
+- **updateMinorSchoolQuality_(ss, ctx, cycle)**
+  Reads: S.cycleId, S.heritage
   Sheets: Neighborhood_Demographics
+
+- **classifySettleSector_(sector)**
+
+- **buildSettleBizPool_(ctx)**
+  Sheets: Business_Ledger
 
 - **eduRank_(v)**
 
-- **classifySettleSector_(sector)** *(engine.62 — sync with classifySectorToIndustry_ in runCareerEngine_)*
-
-- **buildSettleBizPool_(ctx)** *(engine.62 — lazy live pool; null on read failure)*
-  Sheets: Business_Ledger
-
-- **settleAdulthood_(ctx, cycle, rng)** *(engine.62: also writes EconomicProfileKey + EmployerBizId + DebtLevel + NetWorth + YearsInCareer(0) + CareerStage(student), registers hire in S.careerSignals.businessDeltas; engine.66 S324: family-network perk — settling 18-year-old on a founded heritage line gets draw-score bump, Founding/Established +1, Prominent/Dynasty +2, via lazy heritageTierByPop_ read)*
+- **settleAdulthood_(ctx, cycle, rng)**
   Reads: S.careerSignals
-  Sheets: Household_Ledger, Business_Ledger (via buildSettleBizPool_)
+  Sheets: Household_Ledger
 
 - **checkSchoolQuality_(ss, ctx, cycle)**
   Writes: S.storyHooks
@@ -1018,8 +1047,8 @@
 
 ### generateCitizensEvents.js
 - **generateCitizensEvents_(ctx)**
-  Reads: S.cityDynamics, S.contentLedger, S.crimeByNeighborhood, S.cycleId, S.economicMood, S.faithEvents, S.holiday, S.holidayPriority, S.initiativeEvents, S.isCreationDay, S.isFirstFriday, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.simYear, S.simulationYear, S.sportsFeedEntries, S.sportsSeason, S.sportsSentimentBoost, S.weather, S.worldEvents
-  Writes: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.crimeMetrics, S.cycleActiveCitizens, S.eventsGenerated, S.localEntities, S.templateCooldowns
+  Reads: S.cityDynamics, S.contentLedger, S.crimeByNeighborhood, S.cycleId, S.economicMood, S.faithEvents, S.holiday, S.holidayPriority, S.initiativeEvents, S.isCreationDay, S.isFirstFriday, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.simYear, S.simulationYear, S.sportsFeedEntries, S.sportsSeason, S.sportsSentimentBoost, S.transitState, S.weather, S.worldEvents
+  Writes: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.crimeMetrics, S.cycleActiveCitizens, S.eventsGenerated, S.faithExposures, S.householdMoments, S.localEntities, S.storyHooks, S.templateCooldowns
   Config: ctx.config.cycleCount, ctx.config.rngSeed
   Sheets: Generic_Citizens, LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
@@ -1115,28 +1144,31 @@
 - **captureWealthLevels_(ctx)**
 
 - **trackWealthMobility_(ctx, cycle, prevLevels)**
+  Reads: S.homesPurchasedByLine
   Writes: S.storyHooks
 
-- **trackHomeOwnership_(ss, ctx, cycle)** *(engine.65 T2 S323 — real: renting household buys when combined living NetWorth >= 35% of price (rent x 12 x 22), 6%/cycle roll; 20% down leaves member NW proportionally, rented -> owned, MonthlyRent becomes mortgage; [Home] LifeHistory + HOME_PURCHASE hook)*
+- **trackHomeOwnership_(ss, ctx, cycle)**
   Writes: S.homesPurchasedByLine, S.storyHooks
-  Sheets: Household_Ledger (own tracking sheet, per-cell on purchase)
-  RNG: safeRand_(ctx)
+  Sheets: Household_Ledger
+  RNG: ctx.rng / safeRand_(ctx)
 
-- **heritageTierFor_(score)** *(engine.65 — Founding/Established/Prominent/Dynasty at 0/50/150/350)*
+- **heritageTierFor_(score)**
 
-- **heritageRank_(tierName)** *(engine.65)*
+- **heritageRank_(tierName)**
 
-- **heritageTierByPop_(ss)** *(engine.65 — popId -> tier map from Heritage_Ledger MembersList; shared by inheritance pass + phase-4 birth boost)*
+- **heritageTierByPop_(ss)**
+  Sheets: Heritage_Ledger
 
-- **heritageHash8_(s)** *(engine.65 — deterministic 8-hex CUL-id fragment)*
+- **heritageHash8_(s)**
 
-- **ensureHeritageSchema_(ss, ctx)** *(engine.65 — one-time arm: SL LineageId col + Heritage_Ledger tab; §1.1 schema-setup carve-out; system live next cycle)*
+- **ensureHeritageSchema_(ss, ctx)**
+  Sheets: Heritage_Ledger, Simulation_Ledger
 
-- **updateHeritage_(ss, ctx, cycle)** *(engine.65 S323 — Rockafellas: lines FOUNDED by threshold doors only (A: 3+ living on-camera Family_Relationships members + combined NW >= \$1M; B: solo NW >= \$350M); kids inherit LineageId, surname-taking spouses join; score accrues from NW/generations/civic/fame/biz/homes; tier unlocks = odds modifiers — Established+ business roll (p .15/.25/.40, max 1/2/3) stakes 20% of wealthiest member's NW via queueAppendIntent_(Business_Ledger); Dynasty -> Cultural_Ledger institution; promotions write [Heritage] lines + hooks)*
-  Reads: S.cycleId, S.homesPurchasedByLine
-  Writes: S.heritage (incl. lineByPop for same-cycle phase-5 consumers), S.storyHooks
-  Sheets: Heritage_Ledger (own tracking sheet, full-table rewrite), Family_Relationships (read)
-  RNG: safeRand_(ctx)
+- **updateHeritage_(ss, ctx, cycle)**
+  Reads: S.homesPurchasedByLine
+  Writes: S.heritage, S.storyHooks
+  Sheets: Business_Ledger, Family_Relationships, Heritage_Ledger
+  RNG: ctx.rng / safeRand_(ctx)
 
 ### householdFormationEngine.js
 - **processHouseholdFormation_(ctx)**
@@ -1144,6 +1176,9 @@
   Config: ctx.config.cycleCount
   Sheets: Family_Relationships, Household_Ledger
   RNG: ctx.rng / safeRand_(ctx)
+
+- **formCriteriaHouseholds_(ctx, households, cycle)**
+  Sheets: Household_Ledger
 
 - **loadCitizens_(ctx)**
 
@@ -1239,7 +1274,7 @@
 
 - **markUsageProcessed_(ctx, usageSheet, row1, col1, value)**
 
-- **processAdvancementIntake_(ctx)** *(engine.62b: promotion rows now also write CareerStage — lib enum mapped to engine enum; age from live sim-year, was hardcoded 2041)*
+- **processAdvancementIntake_(ctx)**
   Reads: S.cycleId, S.relationshipBonds
   Config: ctx.config.cycleCount
 
@@ -1264,24 +1299,27 @@
 - **processMediaUsage_(ctx, now, cycle)**
   Sheets: Citizen_Media_Usage, Generic_Citizens, LifeHistory_Log
 
-- **processAdvancementRows_(ctx, now, cycle)** *(engine.66: reads MatchPopId/MatchType/MaidenName intake cols; family-drip rows mint under the family surname + MaidenName, then wireFamilyMatch_ links; drip×existing-name collision skips + releases the slot; markAsEmergedInGeneric_ called with maiden||last)*
+- **processAdvancementRows_(ctx, now, cycle)**
   Sheets: Advancement_Intake, Advancement_Intake1, Generic_Citizens, LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
 
 - **processIntakeRows_(ss, now, cycle)**
   Sheets: Intake
 
-- **checkEmergencePromotions_(ss, cycle, maxQueue)** *(engine.66: shared drip cap — queues at most maxQueue (DRIP_CAP_PER_CYCLE=2); deferred citizens self-heal at threshold next cycle)*
+- **decayMediaAttention_(ctx, cycle)**
+  Writes: S.tierDecay
+  Sheets: Citizen_Media_Usage, LifeHistory_Log
+
+- **checkEmergencePromotions_(ss, cycle, maxQueue)**
   Sheets: Advancement_Intake, Advancement_Intake1, Generic_Citizens
 
-- **checkFamilyMatchPromotions_(ctx, cycle, slots)** *(engine.66 S324, tightened .66b: family-match drip door. Each remaining cap slot draws ONE random Active GC citizen — NO probability dial (nothing is free) — who lands only on a STRICT fit vs open family slots from ctx.ledger: same neighborhood REQUIRED, sex required where known, age in band (spouse: married+no SpouseId, BY±10; parent: minor with <2 ParentIds, 18-45 older; child: NumChildren>linked kids). No fit = nothing lands; zero cycles normal. Among fits: heritageRank_+1 weighting (founded lines pull louder). Winner queued to Advancement_Intake1 under family surname with MatchPopId/MatchType/MaidenName. Skips manual runs (no ctx.rng))*
-  Reads: ctx.ledger.headers/rows
-  Sheets: Generic_Citizens, Advancement_Intake, Advancement_Intake1
-  RNG: safeRand_(ctx)
+- **checkFamilyMatchPromotions_(ctx, cycle, slots)**
+  Config: ctx.config.rngSeed
+  Sheets: Advancement_Intake, Advancement_Intake1, Generic_Citizens
+  RNG: ctx.rng / safeRand_(ctx)
 
-- **wireFamilyMatch_(ctx, newIdx, newPopId, targetPopId, matchType, now, cycle, logSheet)** *(engine.66: post-mint family links — spouse: SpouseId both ways + shared kid state; parent: ParentIds/ChildrenIds + realizes the marriage when the kid's single on-camera parent is married-no-SpouseId; child: ChildrenIds/ParentIds incl. on-camera spouse. Household+Neighborhood join, LifeHistory line on BOTH rows, LifeHistory_Log 'Family' row, FAMILY_REALIZED story hook. LineageId deliberately NOT set — updateHeritage_ owns line membership)*
-  Writes: ctx.ledger rows (dirty), S.storyHooks
-  Sheets: LifeHistory_Log
+- **wireFamilyMatch_(ctx, newIdx, newPopId, targetPopId, matchType, now, cycle, logSheet)**
+  Writes: S.storyHooks
 
 - **seedEmergenceBonds_(ctx, cycle)**
   Writes: S.relationshipBonds
@@ -1734,6 +1772,14 @@
   Sheets: World_Population
 
 ### culturalLedger.js
+- **decayCulturalFame_(ctx)**
+  Reads: S.cycleId
+  Config: ctx.config.cycleCount
+  Sheets: Cultural_Ledger
+
+- **culturalStatusByPop_(ctx)**
+  Sheets: Cultural_Ledger
+
 - **registerCulturalEntity_(ctx, name, roleType, journalistName, neighborhood)**
   Reads: S.cityDynamics, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.sportsSeason
   Writes: S.culturalEntityCreates, S.culturalEntityUpdates, S.culturalRegistry
@@ -2190,11 +2236,13 @@
 
 ### finalizeCycleState.js
 - **finalizeCycleState_(ctx)**
-  Reads: S.activeCooldowns, S.cityDynamics, S.civicLoad, S.civicLoadScore, S.crimeByNeighborhood, S.crimeMetrics, S.crimeSpikes, S.cycle, S.cycleId, S.cycleWeight, S.cycleWeightScore, S.domainPresence, S.dominantDomain, S.economicRipples, S.holiday, S.holidayPriority, S.initiativeRipples, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.migrationDriftFactors, S.neighborhoodDynamics, S.overloadScore, S.patternFlag, S.recoveryLevel, S.season, S.shockFlag, S.shockStartCycle, S.sportsSeason, S.weather, S.weatherTracking, S.worldEvents
+  Reads: S.activeCooldowns, S.cityDynamics, S.civicLoad, S.civicLoadScore, S.crimeByNeighborhood, S.crimeMetrics, S.crimeSpikes, S.cycle, S.cycleId, S.cycleWeight, S.cycleWeightScore, S.domainPresence, S.dominantDomain, S.economicRipples, S.holiday, S.holidayPriority, S.initiativeRipples, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.migrationDriftFactors, S.neighborhoodDynamics, S.overloadScore, S.patternFlag, S.recoveryLevel, S.season, S.shockFlag, S.shockStartCycle, S.sportsSeason, S.transitState, S.weather, S.weatherFrontTracking, S.weatherTracking, S.worldEvents
   Writes: S.bankRate, S.cycleFinalState, S.cycleFinalizedAt, S.economicMood, S.eventsGenerated, S.migrationDrift, S.previousCycleState
   Config: ctx.config.cycleCount
 
 - **compactWeatherTracking_(t)**
+
+- **compactFrontTracking_(ft)**
 
 - **compactMediaEffects_(mediaEffects)**
 
@@ -3217,4 +3265,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 179
-**Functions mapped:** 1086
+**Functions mapped:** 1109

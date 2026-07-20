@@ -119,3 +119,19 @@ picking bars; a bar set from training-data intuition will fire never or always.
   strong-RAIN "atmospheric river" tier — STORM-front-only fires 0.19/yr), flood run≥3 ∧
   cum-precip≥2.2 (0.78/yr), heat-wave hot-streak≥4 ∧ temp≥78°F fired-flag (0.14/yr,
   Summer-dominant, temp floor kills 55°F winter false fires). ≈2 majors/yr total = call (b).
+- 2026-07-20 — **engine.70 COMPLETE (S327).** W-3: texture pools (storm/flood/heat lines ride the
+  existing getWeatherEvent_ draw + hood pools); heat hospitalizes 1-2 seniors 70+ via a bounded
+  pre-loop block in generationalEventsEngine (chaos step-8 class — Status flip into the real
+  health lifecycle, retiree guard, HealthCause prose, citizen-scope ripple w/ POPID);
+  storm/flood dent 1-3 exposed-hood businesses through the existing chaosBusinessFold (pre-flush
+  block in chaosCarsEngine, Annual_Revenue [-8,-20], chaos family). T-1: measure-twice find —
+  transit's storm branches (−0.15 on-time, ×1.3 traffic) were DEAD since landing
+  (S.weather.type never holds 'storm'); fixed via frontState key. Salience: service-disruption
+  (on-time<0.72 ∨ 1.5% breakdown, ~1.6/yr, consecutive-cycle dedup via snapshot flag) +
+  gridlock-day (traffic≥78 ∧ events/game-day, 0.02 texture). T-2: working citizens draw commute
+  lines (30% affected hoods / 12% else, double life-state gated). Consumer map: weather-event→
+  SAFETY, transit-event→CIVIC. Acceptance: 1000-yr Node bench through real compactors (1975
+  events = 1975 well-formed ripples); SANDBOX 0717 fired C112+C113 clean (0 errors, weather
+  streak carry visible 10→11, salience condition-gated as designed). Production pushed S327;
+  canonical proof = Mike's C102 live fire. Commits: 7fffc251 (W-1/2), 01539049 (W-3),
+  904aa1d5 (T-1), 770eea3c (T-2), fff05f96 (consumer map).

@@ -126,6 +126,8 @@ Read all 10 inputs above. For each:
 
 **Canon.** Run `search_canon` per active initiative to find what the Tribune has published — promises made, citizen reactions, coverage tone.
 
+**Delegate multi-file digs to `source-search` (S326, Mike-direct).** Exact MCP lookups stay direct. But cross-file verification work — reconciling a stale digest against tracker + production logs, tracing an initiative arc across prior-cycle summaries, resolving two sources that disagree on scope/phase — spawns the `source-search` agent (Haiku-pinned retrieval-only; Sonnet-parity, 0 fabrications on the C100 eval, which was itself a civic-arc dig on the OARI-miss cycle). It flags digest staleness (a c{XX} file whose "Latest" is c{XX-1} data) and reports conflicts both-ways with citations — read its ruling before packet content rides on the fact.
+
 Log tracker state, approval ratings, and key findings in the production log.
 
 **Council Roster Reconciliation (BUNDLE-PREP-A, S246 — closes the class that produced G-PREP1).** The MCP `get_council_member` call above returns each district's live faction from truesource; that signal is wasted unless it's reconciled against this skill's static roster. The Chen D8 mis-routing (a stale "S195 correction" that flipped her CRC→OPP in the skill text + 8 agent roster tables while truesource kept her CRC) survived multiple cycles precisely because nobody compared the two. Run the reconciliation every prep:

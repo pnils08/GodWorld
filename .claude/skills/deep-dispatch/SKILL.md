@@ -63,7 +63,7 @@ Mags checks territory fit + collision with the cycle's other desk runs — not t
 
 ## Step 3 — Spawn bounded source-search subagents (orchestrator)
 
-Spawn **≤3** `Explore` agents scoped to the **picked storyline**, each a distinct angle so they don't collide:
+Spawn **≤3** `source-search` agents (S326 — the Haiku-pinned retrieval agent; proven Sonnet-parity + 0 fabrications on the C100 eval, ~3-4x cheaper per hop; falls back to `Explore` only if the catalog lacks it) scoped to the **picked storyline**, each a distinct angle so they don't collide:
 
 - **Sports:** (a) truesource/season for the player(s) in play; (b) prior canon / the arc; (c) this cycle's events + roster state.
 - **Civic:** (a) `engine_anomalies` raw + neighborhoodState per-district; (b) the cycle's locked civic decisions + vote math; (c) prior coverage / initiative arc.
@@ -74,6 +74,8 @@ Each subagent returns **sourcing as text** — what it found, each claim traced 
 **Serialize under quota pressure (S231 G-S2).** If quota is tight, spawn one, await, then the next — a heavy parallel dispatch can be session-limit-killed (signature: `<total_tokens>0</total_tokens>` + ~500ms + session-limit string). Do not write the sourcing yourself from the EIC seat; surface the infra gap and stop.
 
 ## Step 4 — Reconcile (orchestrator — the structural freshness guard)
+
+May be delegated to one `source-search` agent in reconcile mode (S326): hand it the conflicting returns + the ground-truth pointers; it declares the hard stop, rules, and cites. The orchestrator still owns the outcome — read the ruling before passing anything to the writer.
 
 Before the writer sees anything:
 

@@ -992,6 +992,33 @@ function processFaithJoins_(ctx) {
     if (joinIdx !== undefined) {
       appendBondLifeLine_(ctx, joinIdx, 'Faith', 'joined the congregation at ' + fv[pickRow][fOrg], cycle);
     }
+    // V2-5 (S326): collect per-org for the aggregate ripple below.
+    if (!S._faithJoinRipple) S._faithJoinRipple = {};
+    if (!S._faithJoinRipple[pickRow]) S._faithJoinRipple[pickRow] = [];
+    S._faithJoinRipple[pickRow].push(String(ex.popId));
+  }
+  // V2-5 (S326): faith joins enter the story surface — one texture ripple
+  // (0.01) per org that gained members this cycle, joiners attached. A ≥3
+  // same-family cluster merges major via the existing seed cluster rule
+  // (congregation-surge story). Quiet drifts stay silent.
+  if (typeof recordRipple_ === 'function' && S._faithJoinRipple) {
+    for (var frOrg in S._faithJoinRipple) {
+      if (!S._faithJoinRipple.hasOwnProperty(frOrg)) continue;
+      var joinedPops = S._faithJoinRipple[frOrg];
+      recordRipple_(ctx, {
+        causeType: 'faith-join',
+        causeId: String(fv[frOrg][fOrg] || ''),
+        causeDetail: joinedPops.length + ' citizen(s) joined the congregation at ' + fv[frOrg][fOrg],
+        effectType: 'congregation-growth',
+        targetScope: 'citizen',
+        targetIds: joinedPops,
+        neighborhood: String(fv[frOrg][fHood] || ''),
+        magnitude: 0.01,
+        duration: 1,
+        sourceEngine: 'bondEngine'
+      });
+    }
+    delete S._faithJoinRipple;
   }
   for (var fdr = 1; fdr < fv.length; fdr++) {
     var dList = lists[fdr];
@@ -2046,6 +2073,23 @@ function marryCitizens_(ctx, bond, A, B, cycle) {
     cycleGenerated: cycle, neighborhood: A.hood,
     domain: 'COMMUNITY', text: A.name + ' and ' + B.name + ' married in ' + A.hood
   });
+  // V2-5 (S326): a wedding enters the story surface (0.05 solo-major). Single
+  // commit point — organic, GC-courtship, and lottery weddings all land here.
+  if (typeof recordRipple_ === 'function') {
+    recordRipple_(ctx, {
+      causeType: 'bond-event',
+      causeId: hhId,
+      causeDetail: A.name + ' and ' + B.name + ' married in ' + A.hood +
+        (superCouple ? ' — two of the city\'s biggest names, one household' : ' — a new household forms'),
+      effectType: 'marriage',
+      targetScope: 'citizen',
+      targetIds: [bond.citizenA, bond.citizenB],
+      neighborhood: A.hood || '',
+      magnitude: 0.05,
+      duration: 1,
+      sourceEngine: 'bondEngine'
+    });
+  }
   Logger.log('P5 MARRIAGE: ' + bond.citizenA + ' + ' + bond.citizenB + ' -> ' + hhId + (superCouple ? ' [SUPER COUPLE]' : ''));
 }
 

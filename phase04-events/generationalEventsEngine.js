@@ -252,6 +252,96 @@ function runGenerationalEngine_(ctx) {
 
   var updatedRows = {};
 
+  // ── engine.70 W-3 (S327): heat-wave health entry ─────────────────────────
+  // A salient heat_wave (applyWeatherModel PART 13, Phase 2) hospitalizes 1-2
+  // vulnerable citizens — Mike taste-call (a): RARE, a hospitalization stays a
+  // real story. Chaos-igniter class (chaosCarsEngine engine.67 step 8): the
+  // crisis enters the REAL health lifecycle — Status flips here, and this same
+  // engine's processHealthLifecycle_ takes over from next cycle. Guards match
+  // the chaos block: only ''/active/recovering flip (a retiree keeps 'retired'
+  // — overwriting it would resurrect their career at discharge; retirees live
+  // the heat through the texture pools instead). Victims: seniors 70+, hottest
+  // hoods preferred, drawn via engine rng (deterministic).
+  var heatEv = null;
+  var wEvts = (ctx.summary && ctx.summary.weatherEvents) || [];
+  for (var whe = 0; whe < wEvts.length; whe++) {
+    if (wEvts[whe].type === 'heat_wave' && wEvts[whe].salient) { heatEv = wEvts[whe]; break; }
+  }
+  if (heatEv && iStatus >= 0 && iBirthYear >= 0) {
+    var heatHoodSet = {};
+    for (var hhs = 0; hhs < (heatEv.hoods || []).length; hhs++) heatHoodSet[heatEv.hoods[hhs]] = true;
+    var heatCands = [], heatCandsHood = [];
+    for (var hr = 0; hr < rows.length; hr++) {
+      var hRow = rows[hr];
+      var hStatus = String(hRow[iStatus] || '').trim().toLowerCase();
+      if (hStatus !== '' && hStatus !== 'active' && hStatus !== 'recovering') continue;
+      var hBirth = Number(hRow[iBirthYear]);
+      if (!hBirth || (simYear - hBirth) < 70) continue;
+      heatCands.push(hr);
+      if (iNeighborhood >= 0 && heatHoodSet[hRow[iNeighborhood]]) heatCandsHood.push(hr);
+    }
+    var heatPool = heatCandsHood.length ? heatCandsHood : heatCands;
+    var heatHits = Math.min(heatPool.length, 1 + (chance_(ctx, 0.35) ? 1 : 0));
+    for (var hv = 0; hv < heatHits; hv++) {
+      var pickIdx = Math.floor(rand_(ctx) * heatPool.length);
+      var vr = heatPool.splice(pickIdx, 1)[0];
+      var vRow = rows[vr];
+      var vPop = vRow[iPopID];
+      var vName = ((vRow[iFirst] || '') + ' ' + (vRow[iLast] || '')).toString().trim();
+      var vHood = iNeighborhood >= 0 ? (vRow[iNeighborhood] || '') : '';
+      var vAge = simYear - Number(vRow[iBirthYear]);
+      vRow[iStatus] = 'hospitalized';
+      if (iStatusStart >= 0) vRow[iStatusStart] = cycle;
+      // Human prose, never the machine tag — HealthCause feeds death prose
+      // verbatim and a non-empty value skips the operator cause queue (the
+      // cause here is known). Same rule as the chaos S325 sweep catch.
+      if (iHealthCause >= 0 && !vRow[iHealthCause]) {
+        vRow[iHealthCause] = 'heat exhaustion during the heat wave';
+      }
+      ctx.summary.generationalEvents.push(applyMilestone_(
+        ctx, vRow, iLife, iLastU,
+        { type: 'health', tag: 'Hospitalized',
+          description: 'was hospitalized with heat exhaustion, ' + vAge +
+            ', as the heat wave gripped ' + (vHood || 'the city') },
+        vName, vPop, vHood, cycle, calendarContext
+      ));
+      ctx.summary.hospitalEvents = ctx.summary.hospitalEvents || [];
+      ctx.summary.hospitalEvents.push({
+        popId: vPop, name: vName, neighborhood: vHood,
+        cause: 'heat exhaustion during the heat wave',
+        from: 'active', to: 'hospitalized', cycle: cycle
+      });
+      if (!ctx.summary.storyHooks) ctx.summary.storyHooks = [];
+      ctx.summary.storyHooks.push({
+        hookType: 'CITIZEN_HOSPITALIZED', severity: 6, priority: 5,
+        description: vName + ' (' + vAge + ') — hospitalized with heat exhaustion in ' + (vHood || 'Oakland'),
+        cycleGenerated: cycle, neighborhood: vHood, domain: 'HEALTH',
+        text: 'was hospitalized with heat exhaustion during the heat wave'
+      });
+      // Coupled hit rides the story surface with the POPID attached — on top
+      // of the hood-scope heat-wave ripple the model emitted at Phase 2.
+      if (typeof recordRipple_ === 'function') {
+        recordRipple_(ctx, {
+          causeType: 'weather-event',
+          causeId: 'heat-wave-c' + cycle,
+          causeDetail: vName + ' (' + vAge + ') hospitalized with heat exhaustion in ' + (vHood || 'Oakland'),
+          effectType: 'heat-wave-health',
+          targetScope: 'citizen',
+          targetIds: [String(vPop)],
+          neighborhood: vHood,
+          magnitude: 0.05,
+          duration: 1,
+          sourceEngine: 'generationalEventsEngine'
+        });
+      }
+      rows[vr] = vRow;
+      updatedRows[vr] = true;
+      counts.deteriorations++;
+    }
+    if (heatHits > 0) ctx.ledger.dirty = true;
+  }
+  // ── end engine.70 W-3 heat block ─────────────────────────────────────────
+
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
 

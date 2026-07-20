@@ -612,6 +612,63 @@ function runChaosCarsEngine_(ctx) {
     }
   }
 
+  // ── engine.70 W-3 (S327): salient weather hits businesses ────────────────
+  // A storm/flood cycle (applyWeatherModel PART 13, Phase 2) dents 1-3
+  // businesses in the event's exposed hoods through the SAME fold this engine
+  // flushes below — weather rides the chaos business plumbing instead of
+  // growing its own (accumulate → one cell intent per biz/col → decay via
+  // applyChaosDecay_, all existing). Magnitude [8,20] down, inside the chaos
+  // Annual_Revenue family ([3,25] across vehicles). One business-scope ripple
+  // per event carries the named businesses to the story surface.
+  var wxEvts = (ctx.summary && ctx.summary.weatherEvents) || [];
+  for (var wxi = 0; wxi < wxEvts.length; wxi++) {
+    var wxEv = wxEvts[wxi];
+    if (!wxEv.salient || (wxEv.type !== 'storm' && wxEv.type !== 'flood_conditions')) continue;
+    var wxBiz = loadBusinessRows_(ctx);
+    if (!wxBiz || !wxBiz.rows.length) break;
+    var wxHoodSet = {};
+    for (var wxh = 0; wxh < (wxEv.hoods || []).length; wxh++) wxHoodSet[wxEv.hoods[wxh]] = true;
+    var wxCands = [];
+    for (var wxr = 0; wxr < wxBiz.rows.length; wxr++) {
+      var wxHood = wxBiz.iNb >= 0 ? wxBiz.rows[wxr][wxBiz.iNb] : '';
+      if (wxHoodSet[wxHood]) wxCands.push(wxr);
+    }
+    if (!wxCands.length) continue;
+    var wxHits = Math.min(wxCands.length, 1 + Math.floor(ctx.rng() * 3)); // 1-3
+    var wxHitNames = [];
+    for (var wxk = 0; wxk < wxHits; wxk++) {
+      var wxPick = Math.floor(ctx.rng() * wxCands.length);
+      var wxRowIdx = wxCands.splice(wxPick, 1)[0];
+      var wxTarget = {
+        rowIndex: wxRowIdx,
+        sheetRow: wxRowIdx + 2,
+        bizId: wxBiz.rows[wxRowIdx][wxBiz.iId],
+        neighborhood: wxBiz.iNb >= 0 ? wxBiz.rows[wxRowIdx][wxBiz.iNb] : ''
+      };
+      var wxMag = -(8 + Math.round(ctx.rng() * 12)); // [-8,-20]
+      accumulateBusinessEvent_(ctx, wxTarget,
+        [{ column: 'Annual_Revenue' }], { 'Annual_Revenue': wxMag });
+      wxHitNames.push(String(wxTarget.bizId));
+    }
+    if (wxHitNames.length && typeof recordRipple_ === 'function') {
+      recordRipple_(ctx, {
+        causeType: 'weather-event',
+        causeId: wxEv.type === 'storm' ? 'storm-c' + cycle : 'flood-c' + cycle,
+        causeDetail: (wxEv.type === 'storm' ? 'Storm' : 'Flood conditions') +
+          ' cut into business along ' + (wxEv.hoods || []).join(', ') +
+          ' — ' + wxHitNames.length + ' storefront(s) took the hit',
+        effectType: wxEv.type === 'storm' ? 'storm-business' : 'flood-business',
+        targetScope: 'business',
+        targetIds: wxHitNames,
+        neighborhood: (wxEv.hoods && wxEv.hoods[0]) || '',
+        magnitude: 0.05,
+        duration: 1,
+        sourceEngine: 'chaosCarsEngine.weatherBusinessFold'
+      });
+    }
+  }
+  // ── end engine.70 W-3 business block ─────────────────────────────────────
+
   var bizWrites = flushBusinessFold_(ctx);
 
   // T6.4 — friction log (ADR-0003). Empty file = clean run.

@@ -1124,6 +1124,22 @@ function applyWeatherModel_(ctx) {
       precipitationIntensity: precip.intensity, windSpeed: wind.speed,
       magnitude: WEATHER_SALIENCE.MAJOR_MAGNITUDE
     });
+    // W-3 texture: citizens live the storm through the existing pool draw
+    // (getWeatherEvent_ special @25%/citizen; hood pools @25% for the exposed).
+    S.weatherEventPools.special.push(
+      'boarded up ahead of the storm',
+      'lost power for part of the night',
+      'cleared a downed branch from the sidewalk',
+      'checked on a neighbor as the storm rolled through'
+    );
+    for (var sxh = 0; sxh < WEATHER_STORM_EXPOSED_HOODS.length; sxh++) {
+      var sHood = WEATHER_STORM_EXPOSED_HOODS[sxh];
+      if (!S.weatherEventPools.neighborhood[sHood]) S.weatherEventPools.neighborhood[sHood] = [];
+      S.weatherEventPools.neighborhood[sHood].push(
+        'saw crews working storm damage in ' + sHood,
+        'braced through the worst of the storm in ' + sHood
+      );
+    }
     if (typeof recordRipple_ === 'function') {
       recordRipple_(ctx, {
         causeType: 'weather-event',
@@ -1155,6 +1171,21 @@ function applyWeatherModel_(ctx) {
       wetRunLen: frontT.wetRunLen, wetRunPrecip: frontT.wetRunPrecip,
       magnitude: WEATHER_SALIENCE.MAJOR_MAGNITUDE
     });
+    // W-3 texture: flood lines for the pool draw + low-lying hood pools
+    S.weatherEventPools.special.push(
+      'moved what they could off the ground floor',
+      'waded past a flooded intersection',
+      'watched the storm drains give up',
+      "helped sandbag a neighbor's doorway"
+    );
+    for (var fxh = 0; fxh < WEATHER_FLOOD_PRONE_HOODS.length; fxh++) {
+      var fHood = WEATHER_FLOOD_PRONE_HOODS[fxh];
+      if (!S.weatherEventPools.neighborhood[fHood]) S.weatherEventPools.neighborhood[fHood] = [];
+      S.weatherEventPools.neighborhood[fHood].push(
+        'detoured around standing water in ' + fHood,
+        'watched ' + fHood + ' streets take on water'
+      );
+    }
     if (typeof recordRipple_ === 'function') {
       recordRipple_(ctx, {
         causeType: 'weather-event',
@@ -1192,6 +1223,13 @@ function applyWeatherModel_(ctx) {
       detail: heatDetail, streak: tracking.currentStreak, temp: Math.round(temp),
       magnitude: WEATHER_SALIENCE.MAJOR_MAGNITUDE
     });
+    // W-3 texture: salient-heat lines (PART 11's heat pool waits for the
+    // streak-6 mood alert; the salient event at 4 gets its own)
+    S.weatherEventPools.special.push(
+      'checked on an elderly neighbor during the heat',
+      'gave up on sleep in the heat',
+      'looked for anywhere with air conditioning'
+    );
     if (typeof recordRipple_ === 'function') {
       recordRipple_(ctx, {
         causeType: 'weather-event',

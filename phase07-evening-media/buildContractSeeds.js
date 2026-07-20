@@ -46,7 +46,10 @@ var CONTRACT_SEED_DOMAIN = {
   'fame-event': 'COMMUNITY',         // FAME_WATCH rise + engine.69 tier decay
   'bond-event': 'COMMUNITY',         // weddings (all three paths via marryCitizens_)
   'faith-join': 'COMMUNITY',         // bondEngine congregation growth (per-org aggregate)
-  'youth-event': 'COMMUNITY'         // school-wide events (graduation/homecoming/kickoff)
+  'youth-event': 'COMMUNITY',        // school-wide events (graduation/homecoming/kickoff)
+  // engine.70 (S327) — weather and transit enter the story surface:
+  'weather-event': 'SAFETY',         // storm/flood/heat-wave + coupled citizen/business hits
+  'transit-event': 'CIVIC'           // service-disruption / gridlock-day
 };
 
 // Desk routing (T4 purpose, in-sheet): which desk's packet this row belongs to.

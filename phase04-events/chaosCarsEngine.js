@@ -23,6 +23,17 @@
 var CHAOS_MIN_EVENTS = 3;
 var CHAOS_MAX_EVENTS = 15;
 
+// V2-5 (S326) — the consequence class: citizen-scope outcomes that enter the
+// story surface via recordRipple_ (Ripple_Ledger + S.rippleEvents → contract
+// seeds). Tickets/warnings/texture stay silent — they already ride the
+// citizen-event stream and are not stories on their own.
+var CHAOS_RIPPLE_OUTCOMES = {
+  medical_emergency: true,
+  workplace_accident: true,
+  arrested: true,
+  substance_intervention: true
+};
+
 // ── primitives ──────────────────────────────────────────────────────────────
 
 // 8-char id from the deterministic rng (NEVER Math.random / Utilities.getUuid — both
@@ -579,6 +590,26 @@ function runChaosCarsEngine_(ctx) {
     if (typeof writeChaosCarsRow_ === 'function') writeChaosCarsRow_(ctx, payload);
     ctx.summary.chaosCarsEvents.push(payload);
     if (consequenceFloorFired) ctx.summary.tier1ChaosEvents.push(payload);
+
+    // V2-5 (S326): consequence-class chaos hit → story surface. Solo-major
+    // magnitude (0.05) — a hospitalization or arrest IS a story. Event-level,
+    // not conditional on the status flip (a retiree's medical emergency is
+    // still the neighborhood's news even though their Status stays 'retired').
+    if (scope === 'citizen' && CHAOS_RIPPLE_OUTCOMES[outcome.outcome] &&
+        typeof recordRipple_ === 'function') {
+      recordRipple_(ctx, {
+        causeType: 'chaos-event',
+        causeId: payload.eventId,
+        causeDetail: text,
+        effectType: outcome.outcome,
+        targetScope: 'citizen',
+        targetIds: [target.popId],
+        neighborhood: target.neighborhood || '',
+        magnitude: 0.05,
+        duration: 1,
+        sourceEngine: 'chaosCarsEngine'
+      });
+    }
   }
 
   var bizWrites = flushBusinessFold_(ctx);

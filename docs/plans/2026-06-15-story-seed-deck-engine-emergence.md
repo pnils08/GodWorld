@@ -417,6 +417,26 @@ an edition.
 
 ## Changelog
 
+- 2026-07-20 — **G-RC5 CLOSED; Phase 5 SUPERSEDED-purpose-delivered (S327, engine-sheet audit).**
+  G-RC5 disposition, three legs: (1) the code fix shipped S265 (`85553ea8` decay-pole router —
+  sign-aware `collapseImprovements`/`synthCitywide` + mean-reversion WHY anchor;
+  `routePatternSeeds.decay.test.js` re-run S327: 11/11 PASS); (2) the S289-queued sandbox
+  rehearsal is MOOT — Mike's S296 standing rule 1 retired `routePatternSeeds.js` as the seed
+  path (zero skill/ops callers remain); (3) the live producer (`buildContractSeeds_`, in-cycle,
+  ripple-native) is sign-aware by construction — Why = the ledger row's actual causeDetail,
+  sign rides Magnitude. The mis-attribution class cannot recur on the live path.
+  Phase 5 disposition: the S261 spec (deck-row-first → PacketRef → retire sift triple-read) is
+  superseded by three later Mike rulings — S296 contract v2 deleted PacketRef and the 20-col
+  mechanics; S305 pipeline.42 shipped the actual consumption architecture (sift v2.3 reads the
+  v4 deck at Step 1, applies What/Why/Citizens/CitizenEvents as an ENRICHMENT layer at §3d;
+  Mike ruled the deck must NOT drive the slate — the inverse of 5b's deck-primary design);
+  S313 froze the edition path. Phase 5's purpose (deck consumed without re-derivation) is
+  delivered in the S305 form. No 5a/5b work remains.
+  **Engine.35's sole live remainder = the folded ENGINE_REPAIR Row 28 crisis rebuild** (connected
+  per-hood story signal off real metrics + chaos-cars input). Its S270 gate has cleared (chaos
+  observed live C100–C101 + bench C108–C113); no design doc exists yet; Row 28 is flagged an
+  ultracode design-panel candidate — design start awaits Mike's go (new plan MD + panel are
+  both his calls).
 - 2026-07-05 — **Corrected row contract (Mike-direct, S296).** Added §"2026-07-05 — Corrected
   row contract" after Mike rejected the engine.45 desk-slice framing as not his design. Sheets
   are the world / no JSON carries logic; seed = engine event; entities attach at generation

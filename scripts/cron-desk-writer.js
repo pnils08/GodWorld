@@ -57,6 +57,18 @@ const MAX_TURNS = parseInt(arg('--max-turns', '15'), 10);
 const MAX_TOKENS = parseInt(arg('--max-tokens', '16000'), 10);   // a full multi-article section > 8k (S325: 8k truncated Sonnet mid-Article-2)
 const DRY_RUN = process.argv.includes('--dry-run');
 
+// Approx USD per 1M tokens [input, output] — for the scorecard's apiCostUsd (estimate).
+const RATES = {
+  'claude-sonnet-5': [3, 15],
+  'claude-opus-4-8': [15, 75],
+  'deepseek/deepseek-chat': [0.14, 0.28],
+  _default: [3, 15]
+};
+function costUsd(model, tin, tout) {
+  const r = RATES[model] || RATES._default;
+  return +(((tin / 1e6) * r[0]) + ((tout / 1e6) * r[1])).toFixed(4);
+}
+
 const AGENT_DIR = path.join(ROOT, '.claude', 'agents', DESK + '-desk');
 const SKILL_PATH = path.join(AGENT_DIR, 'SKILL.md');
 
@@ -214,6 +226,35 @@ function callOpenRouter(system, userContent) {
   });
 }
 
+// Per-run scorecard scoring pass (Feedback1.txt, S325). A lightweight self-score
+// (voice / facts / hallucinations / word-count) — NOT the authoritative canon
+// gate (that's the separate headless-Rhea step). Uses the run's own provider.
+async function scoreDraft(draftText, worldState) {
+  const sys = 'You are a strict newsroom copy-desk scorer. Return ONLY JSON, no prose.';
+  const user = 'World state (ground truth for this cycle):\n\n' + String(worldState).slice(0, 30000) +
+    '\n\n---\n\nDraft to score:\n\n' + String(draftText).slice(0, 30000) +
+    '\n\nReturn strict JSON only:\n' +
+    '{"reporterVoice":true|false,"factsCorrect":true|false,' +
+    '"hallucinations":[{"claim":"...","why":"..."}],"wordCount":<int>,"notes":"<short>"}\n' +
+    'reporterVoice = stayed in a distinct reporter voice. factsCorrect = every stated fact traces to the world ' +
+    'state above. hallucinations = names/numbers/events NOT present in the world state (include engine/game-stat ' +
+    'leaks like "OVR"). Be strict.';
+  let usageIn = 0, usageOut = 0, raw = '';
+  if (PROVIDER === 'openrouter') {
+    const r = await callOpenRouter(sys, user);
+    raw = r.text; usageIn = r.usageIn; usageOut = r.usageOut;
+  } else {
+    const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+    const resp = await client.messages.create({ model: MODEL, max_tokens: 1500, system: sys, messages: [{ role: 'user', content: user }] });
+    raw = (resp.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
+    if (resp.usage) { usageIn = resp.usage.input_tokens || 0; usageOut = resp.usage.output_tokens || 0; }
+  }
+  let json;
+  try { const m = raw.match(/\{[\s\S]*\}/); json = JSON.parse(m ? m[0] : raw); }
+  catch (_) { json = { parseError: true, raw: raw.slice(0, 400) }; }
+  return { json, usageIn, usageOut };
+}
+
 // ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
@@ -325,9 +366,40 @@ async function main() {
     if (finalText.trim()) toolWriteFile({ path: DESK + '_c' + cycle + '.md', content: finalText });
   }
 
-  const durationMs = Date.now() - startTime;
   const wrote = savedFiles.length > 0;
   if (!wrote) log.warn('no section produced — compose returned empty.');
+
+  // Scorecard (Task 1, plan 2026-07-20-headless-newsroom-pipeline). Lightweight
+  // self-score of the produced draft — the measurement instrument Feedback1.txt
+  // recommends. NOT the authoritative canon gate (that's the headless-Rhea step).
+  let scorecard = null;
+  if (wrote && !DRY_RUN) {
+    try {
+      const draftText = fs.readFileSync(savedFiles[0], 'utf8');
+      log.info('scoring the draft...');
+      const s = await scoreDraft(draftText, worldState);
+      usageIn += s.usageIn; usageOut += s.usageOut;
+      scorecard = {
+        desk: DESK, cycle, provider: PROVIDER, model: MODEL,
+        reporterVoice: s.json.reporterVoice ?? null,
+        factsCorrect: s.json.factsCorrect ?? null,
+        hallucinationCount: Array.isArray(s.json.hallucinations) ? s.json.hallucinations.length : null,
+        hallucinations: s.json.hallucinations || [],
+        wordCount: s.json.wordCount ?? null,
+        humanEdits: null,               // Low|Medium|High — filled by a human reviewer
+        runtimeSec: Math.round((Date.now() - startTime) / 1000),
+        apiCostUsd: costUsd(MODEL, usageIn, usageOut),
+        usageInputTokens: usageIn, usageOutputTokens: usageOut,
+        notes: s.json.notes || (s.json.parseError ? 'score parse failed' : ''),
+        ranAt: new Date().toISOString()
+      };
+      const scPath = path.join(COMPARE_DIR, DESK + '_c' + cycle + '_' + MODEL_SLUG + '.scorecard.json');
+      fs.writeFileSync(scPath, JSON.stringify(scorecard, null, 2));
+      log.info('scorecard → ' + path.relative(ROOT, scPath));
+    } catch (e) { log.warn('scoring failed: ' + e.message); }
+  }
+
+  const durationMs = Date.now() - startTime;
 
   // Run-meta for the A/B comparison (tokens = the v2 cost baseline)
   const meta = {
@@ -345,6 +417,7 @@ async function main() {
   console.log('\n--- run summary ---');
   console.log(JSON.stringify(meta, null, 2));
   console.log('\ntokens: ' + usageIn + ' in / ' + usageOut + ' out · ' + turns + ' turn(s) · ' + durationMs + 'ms');
+  if (scorecard) console.log('\nscorecard:\n' + JSON.stringify(scorecard, null, 2));
   if (wrote) {
     console.log('compare: diff ' + meta.compareAgainst + '  ↔  ' + meta.savedFiles[0]);
   }

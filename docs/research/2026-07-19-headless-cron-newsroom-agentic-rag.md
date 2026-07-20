@@ -55,7 +55,7 @@ pointers:
 - **Thread A adopt-trigger:** Mike re-opens the edition path for unattended/automated running (reverses the S313 freeze + no-run posture). Then it ignites a plan whose bulk is *porting the guardrails* into a standalone orchestrator, with the cron as the trivial part.
 - **Thread B adopt-trigger:** a cheap-model retrieval eval — pick ONE narrow retrieval subtask (query-router or chunk-grader), test whether Haiku/DeepSeek/Gemini does it reliably on real GodWorld queries. If yes, it graduates to a plan; if the cheap model can't, take-nothing.
 
-**Ignited plans:** Thread B adopt-trigger fired and passed S326 — `source-search` agent shipped (see Applications). **Thread A adopt-trigger now FIRING (S325):** Mike is directing the full headless pipeline build (engine → city-hall agenda → multi-cycle city-hall cron → Mags sift → writer crons → Rhea gate → publish → ingest), which re-opens the automation posture the S313 freeze had held. Next artifact = a build plan (Mike-gated) at `docs/plans/`.
+**Ignited plans:** Thread B adopt-trigger fired and passed S326 — `source-search` agent shipped (see Applications). **Thread A adopt-trigger now FIRING (S325):** Mike is directing the full headless pipeline build (engine → city-hall agenda → multi-cycle city-hall cron → Mags sift → writer crons → Rhea gate → publish → ingest), which re-opens the automation posture the S313 freeze had held. Next artifact = a build plan (Mike-gated) at `docs/plans/`. **PLAN WRITTEN S325 (Mike-approved):** [[../plans/2026-07-20-headless-newsroom-pipeline]].
 
 ---
 

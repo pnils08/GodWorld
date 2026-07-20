@@ -858,6 +858,24 @@ function decayMediaAttention_(ctx, cycle) {
            'Media|tier-decay', 'The spotlight moved on — Tier ' + tier9 + ' -> ' + (tier9 + 1) + ' (attention faded)',
            '', cycle], 'engine.69 tier decay', 'citizens', 100);
       }
+      // V2-5 (S326): the fall from the ladder enters the story surface —
+      // "where are they now" is a story the same way the rise was (0.05).
+      if (typeof recordRipple_ === 'function') {
+        var iNb9 = h.indexOf('Neighborhood');
+        recordRipple_(ctx, {
+          causeType: 'fame-event',
+          causeId: pop9,
+          causeDetail: ((iFirst >= 0 ? row[iFirst] : '') + ' ' + (iLast >= 0 ? row[iLast] : '')).toString().trim() +
+            ' — the spotlight moved on: Tier ' + tier9 + ' -> ' + (tier9 + 1),
+          effectType: 'tier-decay',
+          targetScope: 'citizen',
+          targetIds: [pop9],
+          neighborhood: iNb9 >= 0 ? String(row[iNb9] || '') : '',
+          magnitude: 0.05,
+          duration: 1,
+          sourceEngine: 'processAdvancementIntake'
+        });
+      }
     }
   }
   if (decays || demotions) Logger.log('decayMediaAttention_: ' + decays + ' attention decays, ' + demotions + ' tier demotions');

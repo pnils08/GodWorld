@@ -2721,6 +2721,22 @@ function generateCitizensEvents_(ctx) {
         description: (((row[iFirst] || '') + ' ' + (row[iLast] || '')).trim()) + ' — the city is watching: ' + pick,
         cycleGenerated: cycle, neighborhood: neighborhood, domain: 'CULTURE', text: pick
       });
+      // V2-5 (S326): a FAME_WATCH fire enters the story surface — a citizen
+      // the city is watching IS a story (solo-major 0.05).
+      if (typeof recordRipple_ === 'function') {
+        recordRipple_(ctx, {
+          causeType: 'fame-event',
+          causeId: String(popId),
+          causeDetail: (((row[iFirst] || '') + ' ' + (row[iLast] || '')).trim()) + ' — the city is watching: ' + pick,
+          effectType: 'fame-rise',
+          targetScope: 'citizen',
+          targetIds: [String(popId)],
+          neighborhood: neighborhood || '',
+          magnitude: 0.05,
+          duration: 1,
+          sourceEngine: 'generateCitizensEvents'
+        });
+      }
     }
 
     if (occupation) tags = mergeTags(tags, ["occupation:" + occupation]);

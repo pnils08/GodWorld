@@ -57,3 +57,7 @@ __pycache__/
 .aider*
 !.aiderignore
 !.aider.conf.yml
+
+# Headless desk-writer A/B test output (research.25 Thread A) — fabricated test
+# sections; never let them enter the repo as canon.
+output/cron-compare/

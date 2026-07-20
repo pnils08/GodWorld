@@ -60,10 +60,11 @@ pointers:
 
 ## Applications (living)
 
-- (none yet)
+- 2026-07-19 (S325) — **Thread A first empirical run.** Built `scripts/cron-desk-writer.js` — a headless desk writer (raw Anthropic API + two-phase explore→compose tool loop, writes sandboxed to `output/cron-compare/`). Ran it on the c101 sports desk (Sonnet, same SKILL, same 4 tools). **Result: high-quality prose, catastrophic canon fidelity** — three distinct voices + three-layer threading, but it *confabulated the entire lead story* (invented closer "Robby Fenn" bullpen crisis), invented the GM ("Priya Devan" vs canon **Paulson**) and manager ("Dave Torres" vs canon **Deacon Seymour**), and ignored the real c101 events (Davis's return + HR tear, Buford Park→Yankees trade, Richards platoon, Reds sweep). Two causes: (1) harness read-cap truncated `world_summary_c101.md` before the sports events → writer never saw the real story; (2) no post-write canon reviewer (the terminal runs Rhea; the cron runs nothing). **Empirically confirms this file's core thesis — the cron is easy, porting the guardrails is the real work.** Fix (1) applied (inject full world state + forbid invention); fix (2) — a Rhea-equivalent canon gate — is the architectural lift a real headless newsroom needs. Cost signal: the raw tool loop is token-hungry (one section = 240k–620k input tokens depending on rabbit-holing); bounded explore + compose-from-digest is required to keep it sane.
 
 ---
 
 ## Changelog
 
 - 2026-07-19 — Initial extraction (S325). Two coupled Mike-shared inputs captured together: the Bay Awakening Drive doc (headless cron newsroom) + agentic RAG (the retrieval layer its world-state node implies). Verdict `watch` with two distinct triggers; cheap-model gate recorded as Thread B's viability condition per Mike-direct.
+- 2026-07-19 — Thread A first test (Mike-direct S325): built + ran `scripts/cron-desk-writer.js`; empirical finding recorded in Applications (quality prose, canon confabulation without full state + a reviewer lane). Also proved the anti-staleness rule — crons read the sim-clock artifact (`world_summary_c{NN}`, written every cycle) not the edition-clock artifacts (desk workspace/`base_context`, frozen while editions paused).

@@ -128,6 +128,16 @@ function finalizeCycleState_(ctx) {
     // as a result. ~150 bytes.
     weatherTracking: compactWeatherTracking_(S.weatherTracking),
 
+    // v1.9 (engine.70 W-1): the Markov front chain survives the cycle
+    // boundary — applyWeatherModel_'s multi-day fronts (the whole point of
+    // v3.5) were reborn every cycle because weatherFrontTracking was never
+    // serialized: frontStreak pinned at ~1, frontStrength reset to 0.55
+    // baseline, STORM/HEAT fronts couldn't build. Bench-proven (400-yr Node
+    // harness): heat_wave alert unreachable (max hot streak 2 vs bar 6),
+    // major storms 0.24/yr. With carry: storms ~1.1/yr, heat streaks build.
+    // Same failure class as the v1.7 weatherTracking carry. ~120 bytes.
+    weatherFrontTracking: compactFrontTracking_(S.weatherFrontTracking),
+
   };
 
   // This is what downstream scripts read next cycle
@@ -154,6 +164,30 @@ function compactWeatherTracking_(t) {
     consecutiveUncomfortableDays: t.consecutiveUncomfortableDays || 0,
     consecutiveComfortableDays: t.consecutiveComfortableDays || 0,
     seasonFirsts: t.seasonFirsts || {}
+  };
+}
+
+
+/**
+ * Compact weatherFrontTracking to the fields applyWeatherModel_ re-seeds from
+ * next cycle (v1.9, engine.70 W-1). history[] deliberately excluded — per-cycle
+ * rebuild, same budget rule as compactWeatherTracking_. The wetRun* fields are
+ * the engine.70 salience-pass accumulators (storm/flood once-per-front-run
+ * dedup + cumulative precip) — they live on the carried object so a wet front
+ * spanning cycles can't double-fire its event.
+ */
+function compactFrontTracking_(ft) {
+  if (!ft) return null;
+  return {
+    frontState: ft.frontState || 'CLEAR',
+    frontStreak: ft.frontStreak || 1,
+    frontStrength: ft.frontStrength || 0.55,
+    lastTransitionCycle: ft.lastTransitionCycle || 0,
+    wetRunLen: ft.wetRunLen || 0,
+    wetRunPrecip: ft.wetRunPrecip || 0,
+    wetRunStormFired: !!ft.wetRunStormFired,
+    wetRunFloodFired: !!ft.wetRunFloodFired,
+    heatEventFired: !!ft.heatEventFired
   };
 }
 
@@ -501,6 +535,7 @@ if (typeof module !== 'undefined' && module.exports) {
     compactInitiativeRipples_: compactInitiativeRipples_,
     compactCrimeSpikes_: compactCrimeSpikes_,
     compactWeatherTracking_: compactWeatherTracking_,
+    compactFrontTracking_: compactFrontTracking_,
     SNAPSHOT_ECON_RIPPLE_CAP: SNAPSHOT_ECON_RIPPLE_CAP,
     SNAPSHOT_INIT_RIPPLE_CAP: SNAPSHOT_INIT_RIPPLE_CAP
   };

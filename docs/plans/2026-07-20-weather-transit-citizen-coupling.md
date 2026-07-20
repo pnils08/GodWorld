@@ -98,13 +98,24 @@ desk).
 OUTPUT DISTRIBUTION at build time — read several cycles of live S.weather/transit values before
 picking bars; a bar set from training-data intuition will fire never or always.
 
-## Open design calls (Mike, at build)
+## Design calls — ANSWERED (Mike, S327)
 
-(a) heat-wave health coupling aggressiveness — how often does weather actually hospitalize;
-(b) storm frequency bar — how rare is a major weather story (roughly seasonal vs monthly);
-(c) whether fog-day is worth a ripple at all or stays pure texture.
+(a) heat-wave health coupling: **rare — 1-2 vulnerable citizens max per event**;
+(b) storm frequency: **seasonal — a few majors per sim year, each one remembered**;
+(c) fog-day: **pure texture, no ripple** — the fog row is dropped from the event table.
 
 ## Changelog
 
 - 2026-07-20 — Drafted (S326, engine-sheet) from Mike's direction; grounded in full-file reads of
   both engines + the V2-5 shipped pattern. Build queued behind fresh-session boot (S327).
+- 2026-07-20 — W-1 SHIPPED (S327). Calibration bench exposed a prerequisite defect:
+  `weatherFrontTracking` was never carried across cycles (absent from finalizeCycleState
+  snapshot), so multi-day fronts re-rolled every cycle — heat_wave alert empirically
+  unreachable (max hot streak 2 vs bar 6 over 400 bench years), majors 0.24/yr. Fix = v1.9
+  front carry (same class as v1.7 weatherTracking carry). **W-2 collapses into W-1**: the
+  spec's PropertiesService step is unnecessary — previousCycleState already persists via
+  PropertiesService; heat streak + flood accumulator ride the carried objects. Bars set
+  against 1000-yr bench WITH carry: storm p≥0.60 ∧ wind≥20 once/wet-run (1.06/yr, includes
+  strong-RAIN "atmospheric river" tier — STORM-front-only fires 0.19/yr), flood run≥3 ∧
+  cum-precip≥2.2 (0.78/yr), heat-wave hot-streak≥4 ∧ temp≥78°F fired-flag (0.14/yr,
+  Summer-dominant, temp floor kills 55°F winter false fires). ≈2 majors/yr total = call (b).

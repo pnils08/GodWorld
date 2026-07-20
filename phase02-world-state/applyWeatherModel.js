@@ -132,6 +132,33 @@ var FRONT_MEDIA_NAMES = {
   }
 };
 
+/* ───────────────────────────────────────────────────────────────────────────
+ * engine.70 W-1: salience bars — calibrated against the model's real output
+ * distribution (1000-yr Node bench with front carry live, S327). Rates:
+ * storm ~1.1/yr, flood ~0.8/yr, heat-wave ~0.16/yr — Mike's "a few majors per
+ * sim year, each one remembered" (seasonal bar, S327 taste-call). Storm bar
+ * deliberately includes strong-RAIN fronts (the model's own "atmospheric
+ * river" tier); STORM-front-only would fire 0.19/yr. Fog stays pure texture —
+ * no salient event, no ripple (Mike, S327).
+ * ─────────────────────────────────────────────────────────────────────────── */
+var WEATHER_SALIENCE = {
+  STORM_PRECIP_MIN: 0.60,   // per-cycle precipitationIntensity
+  STORM_WIND_MIN: 20,       // per-cycle windSpeed mph
+  FLOOD_RUN_MIN: 3,         // consecutive wet (RAIN/STORM) cycles
+  FLOOD_CUM_PRECIP_MIN: 2.2, // cumulative intensity across the wet run
+  HEAT_STREAK_EVENT: 4,     // hot-streak length that arms the salient event
+                            // (mood alert stays at 6 — untouched)
+  HEAT_TEMP_MIN: 78,        // °F floor — a winter HEAT front at 55°F is not a
+                            // heat wave (bench: 4/1000yr winter false fires)
+  MAJOR_MAGNITUDE: 0.05     // ripple magnitude, V2-5 major class
+};
+
+// Exposure sets (profile-tagged at build per the engine.70 spec): which hoods
+// a hood-scope weather ripple names. Flood = low-lying/waterfront; storm =
+// waterfront + exposed hills.
+var WEATHER_FLOOD_PRONE_HOODS = ['Jack London', 'West Oakland', 'Fruitvale', 'Chinatown'];
+var WEATHER_STORM_EXPOSED_HOODS = ['Jack London', 'West Oakland', 'Rockridge', 'Lake Merritt'];
+
 // ═══════════════════════════════════════════════════════════════════════════
 // MAIN ENGINE FUNCTION
 // ═══════════════════════════════════════════════════════════════════════════
@@ -202,21 +229,43 @@ function applyWeatherModel_(ctx) {
 
   /* ─────────────────────────────────────────────────────────────────────────
    * PART 0: Front tracking init
+   * engine.70 W-1: seed from the prior cycle's snapshot (finalizeCycleState
+   * v1.9 carry) so the Markov chain actually persists across cycles — without
+   * this, fronts re-rolled from the seasonal init every cycle and multi-day
+   * fronts (STORM building, HEAT streaks) never formed. Same pattern as the
+   * engine.44 Class 3 weatherTracking seed in PART 7. Cold start (no snapshot)
+   * keeps the original fresh-init behavior.
    * ───────────────────────────────────────────────────────────────────────── */
   if (!S.weatherFrontTracking) {
-    var initFront = 'CLEAR';
-    if (season === 'Winter') initFront = (rng() < 0.45) ? 'OVERCAST' : 'RAIN';
-    if (season === 'Spring') initFront = (rng() < 0.50) ? 'OVERCAST' : 'CLEAR';
-    if (season === 'Summer') initFront = (rng() < 0.35) ? 'MARINE' : 'CLEAR';
-    if (season === 'Fall') initFront = (rng() < 0.45) ? 'OVERCAST' : 'CLEAR';
+    var prevFT = (S.previousCycleState && S.previousCycleState.weatherFrontTracking) || null;
+    if (prevFT && prevFT.frontState) {
+      S.weatherFrontTracking = {
+        frontState: prevFT.frontState,
+        frontStreak: prevFT.frontStreak || 1,
+        frontStrength: prevFT.frontStrength || 0.55,
+        lastTransitionCycle: prevFT.lastTransitionCycle || currentCycle,
+        history: [],
+        wetRunLen: prevFT.wetRunLen || 0,
+        wetRunPrecip: prevFT.wetRunPrecip || 0,
+        wetRunStormFired: !!prevFT.wetRunStormFired,
+        wetRunFloodFired: !!prevFT.wetRunFloodFired,
+        heatEventFired: !!prevFT.heatEventFired
+      };
+    } else {
+      var initFront = 'CLEAR';
+      if (season === 'Winter') initFront = (rng() < 0.45) ? 'OVERCAST' : 'RAIN';
+      if (season === 'Spring') initFront = (rng() < 0.50) ? 'OVERCAST' : 'CLEAR';
+      if (season === 'Summer') initFront = (rng() < 0.35) ? 'MARINE' : 'CLEAR';
+      if (season === 'Fall') initFront = (rng() < 0.45) ? 'OVERCAST' : 'CLEAR';
 
-    S.weatherFrontTracking = {
-      frontState: initFront,
-      frontStreak: 1,
-      frontStrength: 0.55,
-      lastTransitionCycle: currentCycle,
-      history: []
-    };
+      S.weatherFrontTracking = {
+        frontState: initFront,
+        frontStreak: 1,
+        frontStrength: 0.55,
+        lastTransitionCycle: currentCycle,
+        history: []
+      };
+    }
   }
 
   var frontT = S.weatherFrontTracking;
@@ -1036,6 +1085,134 @@ function applyWeatherModel_(ctx) {
     windDirection: wind.direction,
     visibility: visibility
   };
+
+  /* ─────────────────────────────────────────────────────────────────────────
+   * PART 13: Salient weather events (engine.70 W-1)
+   * Reads the model's own outputs and emits discrete events with entities
+   * attached at generation: S.weatherEvents entries (salient:true) + one
+   * Ripple_Ledger row per event (causeType 'weather-event' → SAFETY desk).
+   * Once-per-front-run dedup lives on frontT (carried across cycles by
+   * finalizeCycleState v1.9), so a storm spanning the cycle boundary can't
+   * fire twice. Citizen/business coupling consumes these in Phase 4/5 (W-3).
+   * ───────────────────────────────────────────────────────────────────────── */
+  var isWetFront = (frontState === 'RAIN' || frontState === 'STORM');
+  if (isWetFront) {
+    frontT.wetRunLen = (frontT.wetRunLen || 0) + 1;
+    frontT.wetRunPrecip = Math.round(((frontT.wetRunPrecip || 0) + precip.intensity) * 100) / 100;
+  } else {
+    frontT.wetRunLen = 0;
+    frontT.wetRunPrecip = 0;
+    frontT.wetRunStormFired = false;
+    frontT.wetRunFloodFired = false;
+  }
+
+  var frontName = getFrontMediaName_(null, frontState, frontT.frontStrength);
+
+  // storm — high precip + wind, once per wet front run
+  if (isWetFront && !frontT.wetRunStormFired &&
+      precip.intensity >= WEATHER_SALIENCE.STORM_PRECIP_MIN &&
+      wind.speed >= WEATHER_SALIENCE.STORM_WIND_MIN) {
+    frontT.wetRunStormFired = true;
+    var stormDetail = frontName.charAt(0).toUpperCase() + frontName.slice(1) +
+      ' hit the city: precipitation intensity ' + Math.round(precip.intensity * 100) / 100 +
+      ', winds ' + wind.speed + ' mph ' + wind.direction + ', ' + Math.round(temp) + '°F' +
+      ' — worst along ' + WEATHER_STORM_EXPOSED_HOODS.join(', ');
+    S.weatherEvents.push({
+      type: 'storm', salient: true, cycle: currentCycle,
+      hoods: WEATHER_STORM_EXPOSED_HOODS.slice(),
+      detail: stormDetail, frontState: frontState,
+      precipitationIntensity: precip.intensity, windSpeed: wind.speed,
+      magnitude: WEATHER_SALIENCE.MAJOR_MAGNITUDE
+    });
+    if (typeof recordRipple_ === 'function') {
+      recordRipple_(ctx, {
+        causeType: 'weather-event',
+        causeId: 'storm-c' + currentCycle,
+        causeDetail: stormDetail,
+        effectType: 'storm',
+        targetScope: 'neighborhood',
+        targetIds: WEATHER_STORM_EXPOSED_HOODS.slice(),
+        neighborhood: WEATHER_STORM_EXPOSED_HOODS[0],
+        magnitude: WEATHER_SALIENCE.MAJOR_MAGNITUDE,
+        duration: 1,
+        sourceEngine: 'applyWeatherModel'
+      });
+    }
+  }
+
+  // flood-conditions — sustained wet run with heavy cumulative precip
+  if (isWetFront && !frontT.wetRunFloodFired &&
+      frontT.wetRunLen >= WEATHER_SALIENCE.FLOOD_RUN_MIN &&
+      frontT.wetRunPrecip >= WEATHER_SALIENCE.FLOOD_CUM_PRECIP_MIN) {
+    frontT.wetRunFloodFired = true;
+    var floodDetail = 'Flood conditions after ' + frontT.wetRunLen +
+      ' straight cycles of rain (cumulative intensity ' + frontT.wetRunPrecip +
+      ') — low-lying blocks in ' + WEATHER_FLOOD_PRONE_HOODS.join(', ') + ' taking water';
+    S.weatherEvents.push({
+      type: 'flood_conditions', salient: true, cycle: currentCycle,
+      hoods: WEATHER_FLOOD_PRONE_HOODS.slice(),
+      detail: floodDetail, frontState: frontState,
+      wetRunLen: frontT.wetRunLen, wetRunPrecip: frontT.wetRunPrecip,
+      magnitude: WEATHER_SALIENCE.MAJOR_MAGNITUDE
+    });
+    if (typeof recordRipple_ === 'function') {
+      recordRipple_(ctx, {
+        causeType: 'weather-event',
+        causeId: 'flood-c' + currentCycle,
+        causeDetail: floodDetail,
+        effectType: 'flood',
+        targetScope: 'neighborhood',
+        targetIds: WEATHER_FLOOD_PRONE_HOODS.slice(),
+        neighborhood: WEATHER_FLOOD_PRONE_HOODS[0],
+        magnitude: WEATHER_SALIENCE.MAJOR_MAGNITUDE,
+        duration: 1,
+        sourceEngine: 'applyWeatherModel'
+      });
+    }
+  }
+
+  // heat-wave — hot streak at/past the salience bar AND real heat (temp floor).
+  // Fired-flag on frontT (carried) so one streak fires exactly once even when
+  // the temp floor delays it past the crossing cycle; flag resets when the
+  // streak breaks. weatherTracking.currentStreak carries via engine.44 Class 3.
+  // Hood scope from this cycle's computed hotspots; citywide when none.
+  if (tracking.streakType !== 'hot') frontT.heatEventFired = false;
+  if (tracking.streakType === 'hot' && !frontT.heatEventFired &&
+      tracking.currentStreak >= WEATHER_SALIENCE.HEAT_STREAK_EVENT &&
+      temp >= WEATHER_SALIENCE.HEAT_TEMP_MIN) {
+    frontT.heatEventFired = true;
+    var heatHoods = (S.weatherSummary.hotspots || []).slice(0, 6);
+    var heatScope = heatHoods.length ? 'neighborhood' : 'citywide';
+    var heatDetail = 'Heat wave: ' + tracking.currentStreak +
+      ' straight hot cycles, ' + Math.round(temp) + '°F' +
+      (heatHoods.length ? ' — hottest in ' + heatHoods.join(', ') : ' citywide');
+    S.weatherEvents.push({
+      type: 'heat_wave', salient: true, cycle: currentCycle,
+      hoods: heatHoods,
+      detail: heatDetail, streak: tracking.currentStreak, temp: Math.round(temp),
+      magnitude: WEATHER_SALIENCE.MAJOR_MAGNITUDE
+    });
+    if (typeof recordRipple_ === 'function') {
+      recordRipple_(ctx, {
+        causeType: 'weather-event',
+        causeId: 'heat-wave-c' + currentCycle,
+        causeDetail: heatDetail,
+        effectType: 'heat-wave',
+        targetScope: heatScope,
+        targetIds: heatHoods,
+        neighborhood: heatHoods[0] || '',
+        magnitude: WEATHER_SALIENCE.MAJOR_MAGNITUDE,
+        duration: 1,
+        sourceEngine: 'applyWeatherModel'
+      });
+    }
+  }
+
+  // refresh specialEvents so the summary carries the salient types too
+  S.weatherSummary.specialEvents = [];
+  for (var sseIdx = 0; sseIdx < S.weatherEvents.length; sseIdx++) {
+    S.weatherSummary.specialEvents.push(S.weatherEvents[sseIdx].type);
+  }
 
   ctx.summary = S;
 }

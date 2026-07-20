@@ -2424,6 +2424,22 @@ function generateCitizensEvents_(ctx) {
       }
     }
 
+    // engine.70 T-2 (S327): on a transit-disruption cycle, working citizens
+    // can draw a commute line — life-state gated up front (a child doesn't
+    // commute; the engine.67 hard gate below re-checks via source:occupation's
+    // work class). Affected hoods draw harder. No status flips — transit
+    // inconveniences, it doesn't hospitalize.
+    if (S.transitState && S.transitState.disruptionOngoing &&
+        lifeState && lifeState.working === 'working' &&
+        chanceHit((S.transitState.affectedHoods || []).indexOf(neighborhood) >= 0 ? 0.30 : 0.12)) {
+      pool.push(makeEntry(pickOne([
+        "lost an hour of the morning to the transit shutdown",
+        "waited out the delays with everyone else on the platform",
+        "gave up on the train and found another way in to work",
+        "was late to a shift when the line went down"
+      ]), mergeTags(["source:occupation", "transit:disruption"], calendarTags), 1.15, false));
+    }
+
     if (typeof getMediaInfluencedEvent_ === "function" && chanceHit(0.2)) {
       var mediaEvent = getMediaInfluencedEvent_(ctx);
       if (mediaEvent && mediaEvent.text) {

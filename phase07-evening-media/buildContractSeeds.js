@@ -40,7 +40,13 @@ var CONTRACT_SEED_DOMAIN = {
   'sports': 'SPORTS',
   'crime': 'SAFETY',
   'faith-event': 'COMMUNITY',        // T3 (research.24) — faithEventsEngine ripples
-  'lifestyle-sighting': 'COMMUNITY'  // T5 (research.24) — buildEveningFamous venue ripples
+  'lifestyle-sighting': 'COMMUNITY', // T5 (research.24) — buildEveningFamous venue ripples
+  // V2-5 (S326) — the S325 physics enter the story surface:
+  'chaos-event': 'SAFETY',           // chaosCarsEngine consequence-class citizen hits
+  'fame-event': 'COMMUNITY',         // FAME_WATCH rise + engine.69 tier decay
+  'bond-event': 'COMMUNITY',         // weddings (all three paths via marryCitizens_)
+  'faith-join': 'COMMUNITY',         // bondEngine congregation growth (per-org aggregate)
+  'youth-event': 'COMMUNITY'         // school-wide events (graduation/homecoming/kickoff)
 };
 
 // Desk routing (T4 purpose, in-sheet): which desk's packet this row belongs to.

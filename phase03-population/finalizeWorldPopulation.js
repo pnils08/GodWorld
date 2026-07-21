@@ -160,28 +160,33 @@ function finalizeWorldPopulation_(ctx) {
   // CITY DYNAMICS
   // -------------------------------------------------------------------------
 
+  // engine.72 G-EC59: numeric dynamics preserved through 0 — `x || ''` erased
+  // legitimate zeros (sentiment 0 → blank cell → ledger-completeness gap at
+  // C102). Missing/non-numeric still writes '' (blank = honest "no source").
+  function numOrBlank_(v) { return (v !== null && v !== undefined && isFinite(Number(v)) && v !== '') ? Number(v) : ''; }
+
   if (idx('trafficLoad') >= 0) {
-    queueCellIntent_(ctx, 'World_Population', dataRow, idx('trafficLoad') + 1, D.traffic || '', 'finalize: trafficLoad', 'world');
+    queueCellIntent_(ctx, 'World_Population', dataRow, idx('trafficLoad') + 1, numOrBlank_(D.traffic), 'finalize: trafficLoad', 'world');
   }
 
   if (idx('retailLoad') >= 0) {
-    queueCellIntent_(ctx, 'World_Population', dataRow, idx('retailLoad') + 1, D.retail || '', 'finalize: retailLoad', 'world');
+    queueCellIntent_(ctx, 'World_Population', dataRow, idx('retailLoad') + 1, numOrBlank_(D.retail), 'finalize: retailLoad', 'world');
   }
 
   if (idx('tourismLoad') >= 0) {
-    queueCellIntent_(ctx, 'World_Population', dataRow, idx('tourismLoad') + 1, D.tourism || '', 'finalize: tourismLoad', 'world');
+    queueCellIntent_(ctx, 'World_Population', dataRow, idx('tourismLoad') + 1, numOrBlank_(D.tourism), 'finalize: tourismLoad', 'world');
   }
 
   if (idx('nightlifeLoad') >= 0) {
-    queueCellIntent_(ctx, 'World_Population', dataRow, idx('nightlifeLoad') + 1, D.nightlife || '', 'finalize: nightlifeLoad', 'world');
+    queueCellIntent_(ctx, 'World_Population', dataRow, idx('nightlifeLoad') + 1, numOrBlank_(D.nightlife), 'finalize: nightlifeLoad', 'world');
   }
 
   if (idx('publicSpacesLoad') >= 0) {
-    queueCellIntent_(ctx, 'World_Population', dataRow, idx('publicSpacesLoad') + 1, D.publicSpaces || '', 'finalize: publicSpacesLoad', 'world');
+    queueCellIntent_(ctx, 'World_Population', dataRow, idx('publicSpacesLoad') + 1, numOrBlank_(D.publicSpaces), 'finalize: publicSpacesLoad', 'world');
   }
 
   if (idx('sentiment') >= 0) {
-    queueCellIntent_(ctx, 'World_Population', dataRow, idx('sentiment') + 1, D.sentiment || '', 'finalize: sentiment', 'world');
+    queueCellIntent_(ctx, 'World_Population', dataRow, idx('sentiment') + 1, numOrBlank_(D.sentiment), 'finalize: sentiment', 'world');
   }
 
   // -------------------------------------------------------------------------

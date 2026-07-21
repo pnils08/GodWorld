@@ -990,6 +990,8 @@
   Writes: S.storyHooks
 
 ### educationCareerEngine.js
+- **careerStageClass_(v)**
+
 - **processEducationCareer_(ctx)**
   Reads: S.cycleId
   Config: ctx.config.cycleCount
@@ -997,6 +999,8 @@
 
 - **deriveEducationLevels_(ctx, rng)**
   Reads: S.cycleId
+
+- **stampPromotion_(ctx, row, iLife, iLastU, iPop, iFirst, iLast, iNb, iOcc, verb, years, cycle)**
 
 - **updateCareerProgression_(ctx, cycle, rng)**
 
@@ -3269,4 +3273,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 179
-**Functions mapped:** 1112
+**Functions mapped:** 1114

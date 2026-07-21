@@ -49,9 +49,12 @@ sandbox is the intended target for anything unverified.
 - Spreadsheet ID `1SHlquj9iLCK129SQEcXcvFCNkuGMgwLItDPj_ERiofI`
 - Bound Apps Script ID: `1ntl6YwpLt-KwIX7HWCU-swMk-cGQ8aZR0aKNh5qUjz93m4OPUVhIB5nV`
 - Code pushed at S328 (HEAD 8ab5a591, temp-dir route, sandbox `.clasp.json` ID grep-verified). Service-account read access verified from Node.
-- **SIM_SSID Script Property = `1SHlquj9iLCK129SQEcXcvFCNkuGMgwLItDPj_ERiofI` — Mike must set before the first fire (protocol step 3; the 0714 incident step).** CYCLE_TRIGGER_TOKEN not set — no web-app deployment yet; cycles are Mike-fired from the sheet (HEAD code, no pin). If a web-app groundhog trigger is wanted later, create a deployment and re-note the S325 pin gotcha here.
+- SIM_SSID Script Property set (Mike, S328).
+- **Groundhog workflow (Mike-direct S328):** the trigger token exists so the TERMINAL runs the proving loop itself — push to bench → bump deployment → fire via web-app GET → verify → deploy proven code to live. Mike then reverts the sandbox to live-equivalent state for the next build, knowing the codebase is current and tested.
+- Web-app deployment `AKfycbztm3ZXPO-V43KICxyFGJKS63jkZQJqATBotcuynuL9yl4lty3kaaO1YpYW4WUIMStq` @1 (S328 initial: HEAD 8ab5a591). Fire: GET `https://script.google.com/macros/s/AKfycbztm3ZXPO…/exec?token=<CYCLE_TRIGGER_TOKEN>`. **WARNING: any valid-token GET fires a FULL cycle — no ping mode.**
+- **CYCLE_TRIGGER_TOKEN: Mike copies the property value from 0717's Script Properties into 0720's** (properties don't copy with the sheet; same token as 0717/0716c lineage).
 - Staging dir `sandbox-0720` (recreated per-session in scratchpad via `git archive HEAD`).
-- **⚠️ If a web-app deployment is added: `clasp push` alone does NOT change what the web-app fires (S325 incident)** — the deployment serves a PINNED version; bump it after every push (`npx clasp deploy --deploymentId … --description "<change>"`).
+- **⚠️ `clasp push` alone does NOT change what the web-app fires (S325 incident)** — the deployment serves a PINNED version; bump after every push: `CLAUDE_CTL=1 npx clasp deploy --deploymentId AKfycbztm3… --description "<change>"`.
 
 **RETIRED: `SANDBOX 0717` — GROUNDHOG BENCH (S322→S327; retired S328, superseded by post-C102 live copy).** Served the C102 groundhog era: engine.64/.64b proving (93 households, 0 errors), engine.70/71 + Row-24 proving fires C112–C117, bench closed at abs C117 @31. Live C102 (2026-07-20) is the canonical continuation; this bench's state predates it.
 - Spreadsheet ID `1ZP9kiwjXngDNqOtnRby9jGxFZnSahpP3T9SLnJoTwS8`

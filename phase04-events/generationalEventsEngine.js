@@ -442,6 +442,26 @@ function runGenerationalEngine_(ctx) {
     // engine.57 P4: household presence is a causal input on family fates
     var hasHousehold = iHouseholdId >= 0 && String(row[iHouseholdId] || "").trim() !== "";
 
+    // engine.74 (S328, Mike-direct): household TYPE joins the causal inputs.
+    // Lazy one-read map HouseholdId -> type, cached on ctx for the cycle.
+    if (!ctx._hhTypeById74) {
+      ctx._hhTypeById74 = {};
+      try {
+        var hhS74 = ctx.ss.getSheetByName("Household_Ledger");
+        if (hhS74) {
+          var hv74 = hhS74.getDataRange().getValues();
+          var h074 = hv74[0];
+          var cId74 = h074.indexOf("HouseholdId"), cTy74 = h074.indexOf("HouseholdType"), cSt74 = h074.indexOf("Status");
+          for (var hz = 1; hz < hv74.length; hz++) {
+            if (String(hv74[hz][cSt74] || "").toLowerCase() !== "dissolved" && hv74[hz][cId74]) {
+              ctx._hhTypeById74[String(hv74[hz][cId74]).trim()] = String(hv74[hz][cTy74] || "").toLowerCase();
+            }
+          }
+        }
+      } catch (e74) { Logger.log("hhTypeById74: " + e74); }
+    }
+    var hhType74 = hasHousehold ? (ctx._hhTypeById74[String(row[iHouseholdId]).trim()] || "") : "";
+
     // engine.57 P5 (Mike-direct): "marriage comes from bonds not events."
     // The dice-wedding path is RETIRED — checkWedding_ married citizens to
     // nobody (0 romantic bonds ever existed to name a spouse). Weddings now
@@ -450,7 +470,7 @@ function runGenerationalEngine_(ctx) {
 
     if (counts.births < limits.births && birthYear) {
       var maritalNow = iMarital >= 0 ? (row[iMarital] || "").toString().toLowerCase().trim() : "";
-      var birthResult = checkBirth_(ctx, popId, age, lifeHistory, calendarContext, hasHousehold, maritalNow);
+      var birthResult = checkBirth_(ctx, popId, age, lifeHistory, calendarContext, hasHousehold, maritalNow, hhType74);
       if (birthResult) {
         ctx.summary.generationalEvents.push(applyMilestone_(
           ctx, row, iLife, iLastU, birthResult, name, popId, neighborhood, cycle, calendarContext
@@ -468,14 +488,20 @@ function runGenerationalEngine_(ctx) {
     // engine.57 P6 — single motherhood: rare, a true slice of a population
     // (Mike-direct). An unmarried woman without a household: a birth both
     // creates the child AND forms her family household. Physics-rare, no cap.
-    if (counts.births < limits.births && birthYear && !hasHousehold &&
+    // engine.74 (S328, Mike-direct): an ESTABLISHED solo woman (engine.73
+    // solo household) is also eligible — at 2x the rare base (stability
+    // supports the choice; still ~0.1%/cycle). Her child joins her existing
+    // household (createChildRow_ inherits HouseholdId + updates members;
+    // the P8 reconciler retypes it 'family' on composition).
+    var soloEstablished74 = hasHousehold && hhType74 === "solo";
+    if (counts.births < limits.births && birthYear && (!hasHousehold || soloEstablished74) &&
         iGenderCol >= 0 && (row[iGenderCol] || "").toString().toLowerCase() === "female") {
       var mar2 = iMarital >= 0 ? (row[iMarital] || "").toString().toLowerCase().trim() : "";
       if (mar2 === "single" && age >= AGE_RANGES.BIRTH.min && age <= AGE_RANGES.BIRTH.max) {
         var smDials = getCitizenDialBands_(ctx, popId);
-        var smChance = 0.0005 * (smDials ? smDials.familyFreq : 1);
+        var smChance = 0.0005 * (smDials ? smDials.familyFreq : 1) * (soloEstablished74 ? 2 : 1);
         if (chance_(ctx, smChance)) {
-          var smHH = formSingleParentHousehold_(ctx, r, cycle);
+          var smHH = soloEstablished74 ? String(row[iHouseholdId]).trim() : formSingleParentHousehold_(ctx, r, cycle);
           if (smHH) {
             if (iNumChildren >= 0) row[iNumChildren] = (Number(row[iNumChildren]) || 0) + 1;
             createChildRow_(ctx, r, cycle);
@@ -905,7 +931,7 @@ function checkWedding_(ctx, popId, age, lifeHistory, cal, hasHousehold) {
   };
 }
 
-function checkBirth_(ctx, popId, age, lifeHistory, cal, hasHousehold, marital) {
+function checkBirth_(ctx, popId, age, lifeHistory, cal, hasHousehold, marital, hhType) {
   // engine.57 P4 (Mike verbatim): "no kid is born unless there is a household"
   if (!hasHousehold) return null;
   if (age < AGE_RANGES.BIRTH.min || age > AGE_RANGES.BIRTH.max) return null;
@@ -920,6 +946,11 @@ function checkBirth_(ctx, popId, age, lifeHistory, cal, hasHousehold, marital) {
   var c = 0.003 - (childCount * 0.001);
   if (age >= 28 && age <= 35) c += 0.002;
   if (age > 38) c -= 0.001;
+
+  // engine.74 (S328, Mike-direct): kids thrive in 2-parent households —
+  // a family-type household (children already home) leans against the
+  // child-count decay. Sibling continuity, odds only; the dice still speak.
+  if (hhType === "family") c *= 1.25;
 
   if (cal.month === 9) c *= 2.0;
   if (cal.month >= 7 && cal.month <= 10) c *= 1.3;

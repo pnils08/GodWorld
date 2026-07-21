@@ -724,6 +724,18 @@ function updateExistingBonds_(ctx) {
     if (bond.bondType === BOND_TYPES.ROMANTIC) {
       var rr = rng();
       var stepP = (aActive && bActive) ? 0.20 : 0.10;
+      // engine.74 (S328, Mike-direct): the household ledger is a causal input
+      // on family fates — an established home (either partner holds a
+      // household, incl. engine.73 solo establishment) makes courtship steps
+      // likelier. Boosts the step chance only; the rare big week stays dice.
+      if (typeof buildBondLedgerIndex_ === 'function') {
+        ctx._bondLedgerIdx74 = ctx._bondLedgerIdx74 || buildBondLedgerIndex_(ctx) || {};
+        var lkA = ctx._bondLedgerIdx74[String(bond.citizenA || '').trim().toUpperCase()];
+        var lkB = ctx._bondLedgerIdx74[String(bond.citizenB || '').trim().toUpperCase()];
+        if ((lkA && lkA.householdId) || (lkB && lkB.householdId)) {
+          stepP = Math.min(0.5, stepP * HOUSEHOLD_COURTSHIP_BOOST);
+        }
+      }
       if (rr < 0.02) intensity += 1.0;              // the week that changes everything
       else if (rr < 0.02 + stepP) intensity += 0.25; // a real step
       // else: an ordinary week — nothing moves
@@ -1737,6 +1749,9 @@ function resolveRivalry_(ctx, bondId, outcome) {
 var ROMANCE_THRESHOLD = 5.5;  // top of the real distribution — slow, not never
 var ROMANCE_CHANCE = 0.10;    // per-cycle base once conditions hold (× tier × fitness × family trait)
 var MARRIAGE_THRESHOLD = 8;   // a romance grown this strong marries
+var HOUSEHOLD_COURTSHIP_BOOST = 1.5; // engine.74 (S328, Mike-direct): an established
+                                     // home feeds courtship — either partner holding
+                                     // a household boosts the romance step chance
 var TRIANGLE_BIRTH_INTENSITY = 5; // rivals born from a shared love start here
 var FRIENDSHIP_GROWTH = 0.4;  // engine.59: per-cycle when both co-active (× warmth trait)
 // engine.66e (S324, Mike-direct): romance growth is a per-cycle CHANCE draw,

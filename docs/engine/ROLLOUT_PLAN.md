@@ -72,6 +72,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.48 | Citizen-loop deepening — engine-sheet lane COMPLETE S312 (T1–5, T9–13); open: T8 /sift tension seeds (media) + T13 speculative-pairs call (Mike, see plan §T13 handoff) | in-progress | media + Mike (T13 list) | [[../plans/2026-07-06-citizen-loop-deepening]] |
 | engine.51 | Citizen intake unification — T1-T7 done; prod Intake tab S305; T8 extraction built S305 (dry-run verified, sandbox --apply pending Mike cycle-fire) | in-progress | research-build (T8) + engine-sheet | [[../plans/2026-07-07-citizen-intake-unification]] |
 | engine.53 | Agent exchange engine — T1–5 SHIPPED S312 (3 formats live-verified, 17:00 cron wired; conversations idle until engine.48 T4 ripple writer); open: T6 /sift sourcing | in-progress | media (T6) | [[../plans/2026-07-11-agent-exchange-engine]] |
+| engine.72 | RUN-CYCLE C102 GAP LOG — S328 (engine-sheet), 47 mechanical + 12 judgment, 10 HIGH; leads G-EC52 income explosion / G-EC55 arc no-run / G-EC56 crime-surface split | ready | engine-sheet | `output/production_log_run_cycle_c102_gaps.md` + `output/engine_anomalies_c102_followup.md` |
 
 ### canon.* — World-fidelity layer
 

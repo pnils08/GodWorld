@@ -45,11 +45,18 @@ Cloud Shell sometimes clears installed packages. If clasp fails, run `npm instal
 accidentally deploys to live, Mike can cycle live back via its version history — but the
 sandbox is the intended target for anything unverified.
 
-**CURRENT sandbox: `SANDBOX 0717` — GROUNDHOG BENCH (S322 2026-07-17).** Copy of live as restored to canon C101 (post-S322 rollback; prod code engine.57-.62b + .64/.64b). Groundhog protocol: re-fire C102 on this bench until the code proves clean, then live carries the proven code and **Mike fires the canonical cycle on LIVE from the sheet** (supersedes the 0716c-era "live never fires" model). C102 proven clean here across 3 runs (engine.64/.64b: 93 households formed, Traded/pending excluded, 0 errors/dupes).
+**CURRENT sandbox: `SANDBOX 0720` (S328 2026-07-20).** Copy of live at post-C102 canonical state (prod code engine.57-.71 incl. weather/transit/crisis coupling; C102 fired live by Mike, verify PASS). Purpose: vet the next engine wave (Row 24 career-unfreeze prod window, engine.72 triage fixes) before live carries it. Sheet name `SANDBOX_0720_Simulation_Narrative` (71 tabs).
+- Spreadsheet ID `1SHlquj9iLCK129SQEcXcvFCNkuGMgwLItDPj_ERiofI`
+- Bound Apps Script ID: `1ntl6YwpLt-KwIX7HWCU-swMk-cGQ8aZR0aKNh5qUjz93m4OPUVhIB5nV`
+- Code pushed at S328 (HEAD 8ab5a591, temp-dir route, sandbox `.clasp.json` ID grep-verified). Service-account read access verified from Node.
+- **SIM_SSID Script Property = `1SHlquj9iLCK129SQEcXcvFCNkuGMgwLItDPj_ERiofI` — Mike must set before the first fire (protocol step 3; the 0714 incident step).** CYCLE_TRIGGER_TOKEN not set — no web-app deployment yet; cycles are Mike-fired from the sheet (HEAD code, no pin). If a web-app groundhog trigger is wanted later, create a deployment and re-note the S325 pin gotcha here.
+- Staging dir `sandbox-0720` (recreated per-session in scratchpad via `git archive HEAD`).
+- **⚠️ If a web-app deployment is added: `clasp push` alone does NOT change what the web-app fires (S325 incident)** — the deployment serves a PINNED version; bump it after every push (`npx clasp deploy --deploymentId … --description "<change>"`).
+
+**RETIRED: `SANDBOX 0717` — GROUNDHOG BENCH (S322→S327; retired S328, superseded by post-C102 live copy).** Served the C102 groundhog era: engine.64/.64b proving (93 households, 0 errors), engine.70/71 + Row-24 proving fires C112–C117, bench closed at abs C117 @31. Live C102 (2026-07-20) is the canonical continuation; this bench's state predates it.
 - Spreadsheet ID `1ZP9kiwjXngDNqOtnRby9jGxFZnSahpP3T9SLnJoTwS8`
 - Bound Apps Script ID: `1e9xNz0f13kRjk0XP0lUNwAsAOnLYI-uaLJTkJN5L2O43Mqv1q6g3UckT`
-- Web-app deployment `AKfycbzlOhkYsWwP7wbyNAkaiHZqzwktwJc3THRKUnG8AAQhaRXDjpVHp9_mxGFqbuWf-TLC` @31 (S327; bench at abs C117 after the engine.70/71 + Row-24 proving fires C112–C117). SIM_SSID + CYCLE_TRIGGER_TOKEN set (token in sl-engine-sheet, shared with 0716c). Staging dir `deploy0717` (recreated per-session in scratchpad via `git archive HEAD`). **WARNING: any valid-token GET fires a FULL cycle — there is no ping mode.**
-- **⚠️ `clasp push` alone does NOT change what the web-app fires (S325 incident).** The web-app deployment serves a PINNED version, not HEAD — after every sandbox push, bump the deployment or the groundhog fires the OLD code: `npx clasp deploy --deploymentId AKfycbzlOh… --description "<change>"`. S325: first C102 fire ran S324 code because the push wasn't followed by a deploy; verify caught it (gate silently absent), redeploy @11 fixed it.
+- Web-app deployment `AKfycbzlOhkYsWwP7wbyNAkaiHZqzwktwJc3THRKUnG8AAQhaRXDjpVHp9_mxGFqbuWf-TLC` @31; SIM_SSID + CYCLE_TRIGGER_TOKEN set (token in sl-engine-sheet). **WARNING: any valid-token GET still fires a FULL cycle on this retired bench.**
 
 **RETIRED: `SANDBOX 0716c` — CONTAMINATED, NEVER TOUCH (S322).** Its S321 "canon" C102+C103 are VOID — heritage/marriage contamination; live was restored to canon C101 (2026-07-17 12:30 backup) and the heritage/marriage code fully reverted (442d1ca8).
 - Spreadsheet ID `1erYtwSm8s6TczRTiLFbUQ302viC_MmVULWScITKRues`

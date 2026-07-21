@@ -847,6 +847,18 @@ function recordInheritanceInFamily_(ctx, heirs, amount, deceasedId, cycle) {
   var iInheritance = idx('InheritanceAmount');
   var iCycle = idx('InheritanceCycle');
 
+  // S328 header-drift triage (G-EC14-17): these columns come from a
+  // Family_Relationships schema that never existed on the live sheet (real
+  // format: Husband/Wife/Child1-5, Mike's). The parent-child match below can
+  // never fire — but the unconditional setValues at the bottom rewrote the
+  // whole registry as a no-op on every inheritance. Return early instead of
+  // pretending. If registry-side inheritance recording is ever wanted, the
+  // schema needs Mike-format columns first.
+  if (iCitizen1 < 0 || iCitizen2 < 0 || iInheritance < 0) {
+    Logger.log('recordInheritanceInFamily_: registry lacks inheritance columns (expected legacy schema) — skipping');
+    return;
+  }
+
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
     var c1 = row[iCitizen1];

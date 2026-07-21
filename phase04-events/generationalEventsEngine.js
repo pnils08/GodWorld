@@ -491,17 +491,25 @@ function runGenerationalEngine_(ctx) {
       }
     }
 
-    if (counts.promotions < limits.promotions && birthYear) {
-      var promoResult = checkPromotion_(ctx, popId, age, lifeHistory, tier, tierRole, calendarContext);
-      if (promoResult) {
-        ctx.summary.generationalEvents.push(applyMilestone_(
-          ctx, row, iLife, iLastU, promoResult, name, popId, neighborhood, cycle, calendarContext
-        ));
-        triggerPromotionCascade_(ctx, popId, promoResult, cycle);
-        updatedRows[r] = true;
-        counts.promotions++;
-      }
-    }
+    // ENGINE_REPAIR Row 24 (c) — RETIRED S327: the phase04 promotion dice
+    // rolled a [Promotion] LifeHistory tag with NO structural effect (the
+    // "vacuum event" — CareerStage/Income never moved; phase05 owns those and
+    // would clobber any write from here). Real promotions now stamp their own
+    // narrative in the owning engine (educationCareerEngine
+    // updateCareerProgression_ → stampPromotion_) at the moment CareerStage
+    // actually advances. checkPromotion_/triggerPromotionCascade_ retained
+    // uncalled for reversibility.
+    // if (counts.promotions < limits.promotions && birthYear) {
+    //   var promoResult = checkPromotion_(ctx, popId, age, lifeHistory, tier, tierRole, calendarContext);
+    //   if (promoResult) {
+    //     ctx.summary.generationalEvents.push(applyMilestone_(
+    //       ctx, row, iLife, iLastU, promoResult, name, popId, neighborhood, cycle, calendarContext
+    //     ));
+    //     triggerPromotionCascade_(ctx, popId, promoResult, cycle);
+    //     updatedRows[r] = true;
+    //     counts.promotions++;
+    //   }
+    // }
 
     if (counts.retirements < limits.retirements && birthYear && civFlag.charAt(0) !== "y") {
       var retireResult = checkRetirement_(ctx, popId, age, lifeHistory, tier, calendarContext);

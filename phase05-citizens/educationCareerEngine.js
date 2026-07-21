@@ -69,6 +69,24 @@ var EDUCATION_LEVELS = {
 };
 
 // Career stages
+// ENGINE_REPAIR Row 24 (S327): the live CareerStage vocab drifted across
+// generations of writers — S327 live quant: entry-level 88 / entry 3 / early 6
+// / early-career 1, mid-career 228 / mid 64, senior 219, retired 252,
+// student 62, blank 7. Exact-string comparisons froze advancement for every
+// non-canonical row (ENTRY→MID never fired for 10, MID→SENIOR missed 64).
+// Class-normalize on READ (runYouthEngine case-fold pattern, non-destructive);
+// advancement WRITES the canonical string, so vocabulary heals forward as
+// citizens advance — no bulk rewrite.
+function careerStageClass_(v) {
+  var s = String(v || '').trim().toLowerCase();
+  if (s === 'entry' || s === 'entry-level' || s === 'early' || s === 'early-career') return 'ENTRY';
+  if (s === 'mid' || s === 'mid-career') return 'MID';
+  if (s === 'senior') return 'SENIOR';
+  if (s === 'student') return 'STUDENT';
+  if (s === 'retired') return 'RETIRED';
+  return 'MID'; // blank/unknown keeps the existing default-to-MID behavior
+}
+
 var CAREER_STAGES = {
   STUDENT: 'student',
   ENTRY: 'entry-level',
@@ -249,6 +267,39 @@ function deriveEducationLevels_(ctx, rng) {
 }
 
 
+/**
+ * Row 24 (b) — real advancement gets its narrative from the OWNING engine.
+ * Pre-S327 the structural CareerStage change was silent while phase04 rolled
+ * hollow [Promotion] dice with no structural effect — the two never met.
+ * Person-readable EventText (Row 32 lesson: what changed in the life, not
+ * tier bookkeeping); 'Promotion' is a real DIAL_MAP tag (drive +8,
+ * composure +2). LifeHistory_Log rides queueAppendIntent_ (Phase-5 SL-writer
+ * log class); guarded so a missing column never blocks the advancement.
+ */
+function stampPromotion_(ctx, row, iLife, iLastU, iPop, iFirst, iLast, iNb, iOcc, verb, years, cycle) {
+  try {
+    var name = ((iFirst >= 0 ? row[iFirst] : '') + ' ' + (iLast >= 0 ? row[iLast] : '')).toString().trim();
+    var occ = iOcc >= 0 ? String(row[iOcc] || '').trim() : '';
+    var text = verb + ' after ' + Math.round(years) + ' years' +
+      (occ ? ' as ' + (/^[aeiou]/i.test(occ) ? 'an ' : 'a ') + occ : '') + '.';
+    var stamp = (typeof inWorldStamp_ === 'function') ? inWorldStamp_(ctx) : ('C' + cycle);
+    if (iLife >= 0) {
+      var line = stamp + ' — [Promotion] ' + text;
+      var existing = row[iLife] ? row[iLife].toString() : '';
+      row[iLife] = existing ? existing + '\n' + line : line;
+    }
+    if (iLastU >= 0) row[iLastU] = stamp;
+    if (typeof queueAppendIntent_ === 'function') {
+      queueAppendIntent_(ctx, 'LifeHistory_Log',
+        [stamp, (iPop >= 0 ? row[iPop] : ''), name, 'Promotion', text,
+         (iNb >= 0 ? (row[iNb] || '') : ''), cycle],
+        'career promotion', 'citizens');
+    }
+  } catch (e) {
+    if (typeof Logger !== 'undefined') Logger.log('stampPromotion_ soft-fail: ' + e);
+  }
+}
+
 // ════════════════════════════════════════════════════════════════════════════
 // CAREER PROGRESSION
 // ════════════════════════════════════════════════════════════════════════════
@@ -267,6 +318,13 @@ function updateCareerProgression_(ctx, cycle, rng) {
   var iStatus = idx('Status');
   var iLastPromotion = idx('LastPromotionCycle');
   var iLife = idx('LifeHistory');
+  // Row 24 (b): the OWNING engine stamps the promotion narrative
+  var iPop24 = idx('POPID');
+  var iFirst24 = idx('First');
+  var iLast24 = idx('Last');
+  var iNb24 = idx('Neighborhood');
+  var iOcc24 = idx('Occupation');
+  var iLastU24 = idx('LastUpdated');
 
   if (iCareerStage < 0 || iYearsInCareer < 0) return { advanced: 0, stagnant: 0 };
 
@@ -305,17 +363,20 @@ function updateCareerProgression_(ctx, cycle, rng) {
     } else if (age >= 65) {
       row[iCareerStage] = CAREER_STAGES.RETIRED;
     } else {
-      // Check if eligible for advancement
+      // Check if eligible for advancement — class-normalized (Row 24 a)
       var cyclesSincePromotion = cycle - lastPromotion;
+      var stageClass = careerStageClass_(careerStage);
 
-      if (careerStage === CAREER_STAGES.ENTRY && cyclesSincePromotion >= ADVANCEMENT_CYCLES.ENTRY_TO_MID) {
+      if (stageClass === 'ENTRY' && cyclesSincePromotion >= ADVANCEMENT_CYCLES.ENTRY_TO_MID) {
         // Entry → Mid
         if (yearsInCareer >= 5 && rng() < 0.15) {
           row[iCareerStage] = CAREER_STAGES.MID;
           row[iLastPromotion] = cycle;
+          stampPromotion_(ctx, row, iLife, iLastU24, iPop24, iFirst24, iLast24, iNb24, iOcc24,
+            'stepped up into mid-career', yearsInCareer, cycle);
           advanced++;
         }
-      } else if (careerStage === CAREER_STAGES.MID && cyclesSincePromotion >= ADVANCEMENT_CYCLES.MID_TO_SENIOR) {
+      } else if (stageClass === 'MID' && cyclesSincePromotion >= ADVANCEMENT_CYCLES.MID_TO_SENIOR) {
         // Mid → Senior (requires education)
         // S321 (engine.60 T4 adjacent fix): was exact-match 'bachelor' /
         // 'graduate' — the live ledger holds 'bachelors'/'masters'/'doctorate',
@@ -328,12 +389,14 @@ function updateCareerProgression_(ctx, cycle, rng) {
         if (yearsInCareer >= 10 && rng() < advanceChance) {
           row[iCareerStage] = CAREER_STAGES.SENIOR;
           row[iLastPromotion] = cycle;
+          stampPromotion_(ctx, row, iLife, iLastU24, iPop24, iFirst24, iLast24, iNb24, iOcc24,
+            'was promoted into a senior role', yearsInCareer, cycle);
           advanced++;
         }
       }
 
-      // Detect stagnation
-      if (cyclesSincePromotion >= ADVANCEMENT_CYCLES.STAGNATION && careerStage !== CAREER_STAGES.SENIOR) {
+      // Detect stagnation — class-normalized (Row 24 a)
+      if (cyclesSincePromotion >= ADVANCEMENT_CYCLES.STAGNATION && stageClass !== 'SENIOR') {
         stagnant++;
       }
     }

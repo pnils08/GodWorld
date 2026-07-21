@@ -185,18 +185,10 @@ function saveV3NeighborhoodMap_(ctx) {
     return parts.join(' ').toString().toLowerCase();
   }
 
-  // Crime count: SAFETY domain + keyword hits
-  var baseCrimeCount = 0;
-  for (var we = 0; we < worldEvents.length; we++) {
-    var ev = worldEvents[we];
-    var domain = (ev.domain || '').toString().toLowerCase();
-    var text = eventText(ev);
-    if (domain === 'safety') baseCrimeCount++;
-    if (text.indexOf('theft') >= 0 || text.indexOf('break-in') >= 0 ||
-        text.indexOf('pursuit') >= 0 || text.indexOf('assault') >= 0) {
-      baseCrimeCount++;
-    }
-  }
+  // engine.72 G-EC56: SAFETY-event crime counting RETIRED — CrimeIndex now
+  // derives from Crime_Metrics per-hood physics (see the crime derivation in
+  // the row loop). Crime_Metrics already ingests chaos/safety events as
+  // factors, so event pressure reaches CrimeIndex through the real engine.
 
   // Event attractiveness: culture/community/holiday/festival + story seeds/hooks
   var baseEventAttract = 0;
@@ -327,7 +319,23 @@ function saveV3NeighborhoodMap_(ctx) {
 
     var nightlife = round2(baseNightlife * effectiveNightlifeMod * (1 + variance()));
     var noise = round2(Math.max(0, baseNoise * effectiveNoiseMod + (variance() * 2)));
-    var crime = Math.max(0, Math.round(baseCrimeCount * profile.crimeMod + (rng() < 0.3 ? 1 : 0)));
+    // engine.72 G-EC56: CrimeIndex derives from Crime_Metrics per-hood physics
+    // (city-average ≈ 1.0; consumer thresholds preserved — migration ≥1.5
+    // outflow / ≤0.8 inflow, conduct 0.6×/2 blend). The old base was a
+    // SAFETY-event-count proxy (× crimeMod + random +1) that read ~0 for 100
+    // cycles because nothing was domain-classed SAFETY, then jumped to 2-3
+    // citywide when engine.70/71 emitted the first SAFETY events while real
+    // crime FELL 3-4σ. Hoods absent from Crime_Metrics (Brooklyn, Eastlake,
+    // Ivy Hill, San Antonio, Baylight District) fall back to city average ×
+    // the frozen profile crimeMod for hood flavor. Pulse/chaos folds below
+    // stay additive — citizens shade the hood.
+    var cmByHood = (S.crimeMetrics && S.crimeMetrics.byNeighborhood) || {};
+    var cmCity = (S.crimeMetrics && S.crimeMetrics.cityWide) || {};
+    var cityCrimeAvg = ((Number(cmCity.avgPropertyCrime) || 50) + (Number(cmCity.avgViolentCrime) || 50)) / 2;
+    var hoodCm = cmByHood[name];
+    var crime = hoodCm
+      ? round2(Math.max(0, ((Number(hoodCm.propertyCrimeIndex) || 50) + (Number(hoodCm.violentCrimeIndex) || 50)) / 2 / 50))
+      : round2(Math.max(0, cityCrimeAvg / 50 * (profile.crimeMod || 1)));
     var retail = round2(Math.max(0, baseRetail * profile.retailMod * (1 + variance())));
     var eventAttract = Math.max(0, Math.round(baseEventAttract * effectiveEventMod));
     // G-EC33 fix: per-hood base from the per-hood dynamics track (input-driven,

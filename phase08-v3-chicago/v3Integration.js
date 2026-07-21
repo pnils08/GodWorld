@@ -84,7 +84,12 @@ function v3Integration_(ctx) {
 
   // Function registry - maps names to actual functions (replaces eval for security)
   var V3_FUNCTIONS = {
-    'eventArcEngine_': typeof eventArcEngine_ === 'function' ? eventArcEngine_ : null,
+    // engine.72 G-EC55: eventArcEngine_ slot REMOVED — arc loop retired S313
+    // (Mike-direct, b6897a08: stories are seeded, never re-ingested).
+    // generateNewArcs_ was deleted in that commit; eventArcEngine_ only
+    // updated arcs that no longer generate, so it no-oped every cycle and
+    // made the module count lie ("7/8"). Same disable pattern as the
+    // engine.57 P5 bondEngine_ removal below. File retained for reversibility.
     'domainTracker_': typeof domainTracker_ === 'function' ? domainTracker_ : null,
     'storyHookEngine_': typeof storyHookEngine_ === 'function' ? storyHookEngine_ : null,
     'textureTriggerEngine_': typeof textureTriggerEngine_ === 'function' ? textureTriggerEngine_ : null,
@@ -117,8 +122,7 @@ function v3Integration_(ctx) {
   // V3 MODULE EXECUTION ORDER
   // ═══════════════════════════════════════════════════════════════════════════
 
-  // 1. Update existing arcs (phase + tension)
-  if (safeCall('eventArcEngine_')) modulesRan.push('eventArcEngine');
+  // 1. Arc update — RETIRED S313 (engine.72 G-EC55: slot removed, see registry note)
 
   // 2. Domain mapping
   if (safeCall('domainTracker_')) modulesRan.push('domainTracker');
@@ -141,20 +145,11 @@ function v3Integration_(ctx) {
   // 8. Bond engine — engine.57 P5: no longer runs here (double-run fix).
   // Phase5-Bonds is the single run; see godWorldEngine2.
 
-  // 9. Generate new arcs
-  var newArcs = [];
-  try {
-    if (typeof generateNewArcs_ === 'function') {
-      newArcs = generateNewArcs_(ctx) || [];
-      modulesRan.push('generateNewArcs');
-    }
-  } catch (e) {
-    Logger.log('v3Integration: generateNewArcs_ error: ' + e.message);
-  }
-
-  // 10. Merge new arcs in-memory (no writes)
+  // 9-10. New-arc generation + merge — RETIRED S313 (generateNewArcs_ deleted
+  // in b6897a08; the typeof guard here silently skipped forever — engine.72
+  // G-EC55). S.eventArcs stays initialized: 27 downstream readers expect the
+  // array and run correctly at length 0.
   if (!S.eventArcs) S.eventArcs = [];
-  S.eventArcs = S.eventArcs.concat(newArcs);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // v3.4: INTEGRATION STATUS
@@ -176,7 +171,7 @@ function v3Integration_(ctx) {
   var rippleCount = S.economicRipples ? S.economicRipples.length : 0;
   var bondCount = S.relationshipBonds ? S.relationshipBonds.length : 0;
 
-  Logger.log('v3Integration v3.4: Complete | Modules: ' + modulesRan.length + '/8 | Arcs: ' + arcCount + ' | Textures: ' + textureCount + ' | Domains: ' + domainCount + ' | Ripples: ' + rippleCount + ' | Bonds: ' + bondCount);
+  Logger.log('v3Integration v3.4: Complete | Modules: ' + modulesRan.length + '/' + Object.keys(V3_FUNCTIONS).length + ' | Arcs: ' + arcCount + ' | Textures: ' + textureCount + ' | Domains: ' + domainCount + ' | Ripples: ' + rippleCount + ' | Bonds: ' + bondCount);
 
   ctx.summary = S;
 }

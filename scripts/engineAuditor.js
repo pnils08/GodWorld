@@ -73,7 +73,9 @@ const SHEETS_TO_READ = [
   'Crime_Metrics',
   'Transit_Metrics',
   'Edition_Coverage_Ratings',
-  'Event_Arc_Ledger',
+  // Event_Arc_Ledger REMOVED (engine.72 G-EC55): arc loop retired S313
+  // (Ripple_Ledger is the successor surface) — expecting rows here filed a
+  // false MED ledger-completeness gap every cycle.
   'Storyline_Tracker',
   'Simulation_Ledger',
   'LifeHistory_Log',  // S184 (Row 6): citizen life events for baseline-brief subject attribution

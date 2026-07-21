@@ -63,7 +63,9 @@ const LEDGER_CONFIG = [
   },
   { sheet: 'WorldEvents_V3_Ledger', cycleColumn: 'Cycle', zeroRowSeverity: 'medium', requiredColumns: [] },
   { sheet: 'WorldEvents_Ledger', cycleColumn: 'Cycle', zeroRowSeverity: 'medium', requiredColumns: [] },
-  { sheet: 'Event_Arc_Ledger', cycleColumn: 'Cycle', zeroRowSeverity: 'medium', requiredColumns: [] },
+  // Event_Arc_Ledger REMOVED (engine.72 G-EC55): arc loop retired S313,
+  // Ripple_Ledger is the successor — zero rows here is the ruled state,
+  // not a gap.
   { sheet: 'Texture_Trigger_Log', cycleColumn: 'Cycle', zeroRowSeverity: 'medium', requiredColumns: [] },
   { sheet: 'Transit_Metrics', cycleColumn: 'Cycle', zeroRowSeverity: 'medium', requiredColumns: [] },
 ];

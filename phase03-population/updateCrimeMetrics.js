@@ -268,6 +268,10 @@ function updateCrimeMetrics_Phase3_(ctx) {
   S.crimeMetrics = {
     updated: true,
     cycle: cycle,
+    // engine.72 G-EC56: per-hood real metrics exposed so Phase 8's
+    // Neighborhood_Map.CrimeIndex derives from crime PHYSICS, not the
+    // SAFETY-event-count proxy. Keys = NEIGHBORHOOD_CRIME_PROFILES hoods.
+    byNeighborhood: newMetrics,
     cityWide: cityWide,
     shifts: shifts,
     factors: {

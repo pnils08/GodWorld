@@ -45,6 +45,10 @@ Cloud Shell sometimes clears installed packages. If clasp fails, run `npm instal
 accidentally deploys to live, Mike can cycle live back via its version history — but the
 sandbox is the intended target for anything unverified.
 
+**Bench proof IS the gate (Mike-direct S328):** nothing is gated on a live run — the synced
+bench is the same state as live, so the bench fire + sheet verify is the smoke. Live runs
+clear whenever Mike fires them; they confirm, they don't gate.
+
 **CURRENT sandbox: `SANDBOX 0720` (S328 2026-07-20).** Copy of live at post-C102 canonical state (prod code engine.57-.71 incl. weather/transit/crisis coupling; C102 fired live by Mike, verify PASS). Purpose: vet the next engine wave (Row 24 career-unfreeze prod window, engine.72 triage fixes) before live carries it. Sheet name `SANDBOX_0720_Simulation_Narrative` (71 tabs).
 - Spreadsheet ID `1SHlquj9iLCK129SQEcXcvFCNkuGMgwLItDPj_ERiofI`
 - Bound Apps Script ID: `1ntl6YwpLt-KwIX7HWCU-swMk-cGQ8aZR0aKNh5qUjz93m4OPUVhIB5nV`

@@ -52,10 +52,16 @@
 var CRISIS_DETECT = {
   SENTIMENT_Z: -1.5, SENTIMENT_ABS: 0.15,
   RETAIL_Z: -1.5, RETAIL_ABS: 5.0,
-  CRIME_ABS: 0.75, CRIME_SPIKES_MIN: 2,
+  // Groundhog C114 correction: absolute-only bars mass-fired on the bench
+  // (crime 0.93-1.0 on five hoods; HousingPressure runs a ~0-10 scale there,
+  // not the 0-1 the first bar assumed). Every stock channel is now
+  // relative-AND-absolute — a hood only counts as exceptional when it stands
+  // out from the city AND clears a floor. When half the city is at 1.0,
+  // no hood is exceptional (city-wide pressure is a different story class).
+  CRIME_Z: 1.5, CRIME_ABS: 0.75, CRIME_SPIKES_MIN: 2,
   HOSPITAL_CLUSTER_MIN: 2,
-  MIGRATION_OUT_MIN: -30,      // defensive; column 0-filled live
-  HOUSING_PRESSURE_MIN: 0.7,   // defensive; column 0-filled live
+  MIGRATION_OUT_MIN: -30,      // defensive; column 0-filled on prod
+  HOUSING_Z: 1.5,              // defensive; z-relative (scale differs bench vs prod)
   ONSET_CHANNELS: 2,
   RESOLVED_RIPPLE: 0.02, ONSET_RIPPLE: 0.05
 };
@@ -72,12 +78,14 @@ function generateCrisisBuckets_(ctx) {
   // ── channel state per hood ────────────────────────────────────────────────
   var nbState = S.neighborhoodState || {};
   var hoods = [];
-  var sentVals = [], retailVals = [];
+  var sentVals = [], retailVals = [], crimeVals = [], hpVals = [];
   for (var h in nbState) {
     if (!nbState.hasOwnProperty(h)) continue;
     hoods.push(h);
     sentVals.push(Number(nbState[h].sentiment) || 0);
     retailVals.push(Number(nbState[h].retailVitality) || 0);
+    crimeVals.push(Number(nbState[h].crimeIndex) || 0);
+    hpVals.push(Number(nbState[h].housingPressure) || 0);
   }
   if (!hoods.length) {
     Logger.log('generateCrisisBuckets_ v3.0: no neighborhoodState — detector idle this cycle');
@@ -93,6 +101,8 @@ function generateCrisisBuckets_(ctx) {
   }
   var sentStat = meanSd_(sentVals);
   var retailStat = meanSd_(retailVals);
+  var crimeStat = meanSd_(crimeVals);
+  var hpStat = meanSd_(hpVals);
 
   // carried crime spikes per hood (engine.45 T3b snapshot channel)
   var spikesByHood = {};
@@ -142,8 +152,10 @@ function generateCrisisBuckets_(ctx) {
       active.push('retail vitality ' + retail.toFixed(1) + ' (city ' + retailStat.mean.toFixed(1) + ')');
     }
     var crime = Number(st.crimeIndex) || 0;
-    if (crime >= CRISIS_DETECT.CRIME_ABS || (spikesByHood[hood] || 0) >= CRISIS_DETECT.CRIME_SPIKES_MIN) {
-      active.push('crime ' + (crime >= CRISIS_DETECT.CRIME_ABS ? 'index ' + crime.toFixed(2) : (spikesByHood[hood] || 0) + ' spikes last cycle'));
+    var crimeZ = (crime - crimeStat.mean) / crimeStat.sd;
+    var crimeExceptional = crime >= CRISIS_DETECT.CRIME_ABS && crimeZ >= CRISIS_DETECT.CRIME_Z;
+    if (crimeExceptional || (spikesByHood[hood] || 0) >= CRISIS_DETECT.CRIME_SPIKES_MIN) {
+      active.push('crime ' + (crimeExceptional ? 'index ' + crime.toFixed(2) + ' (city ' + crimeStat.mean.toFixed(2) + ')' : (spikesByHood[hood] || 0) + ' spikes last cycle'));
     }
     if ((hospByHood[hood] || 0) >= CRISIS_DETECT.HOSPITAL_CLUSTER_MIN) {
       active.push((hospByHood[hood]) + ' hospitalizations last cycle');
@@ -158,7 +170,10 @@ function generateCrisisBuckets_(ctx) {
     var migFlow = Number(st.migrationFlow) || 0;
     if (migFlow <= CRISIS_DETECT.MIGRATION_OUT_MIN) active.push('migration outflow ' + migFlow);
     var hp = Number(st.housingPressure) || 0;
-    if (hp >= CRISIS_DETECT.HOUSING_PRESSURE_MIN) active.push('housing pressure ' + hp.toFixed(2));
+    var hpZ = (hp - hpStat.mean) / hpStat.sd;
+    if (hp > 0 && hpZ >= CRISIS_DETECT.HOUSING_Z) {
+      active.push('housing pressure ' + hp.toFixed(2) + ' (city ' + hpStat.mean.toFixed(2) + ')');
+    }
     return { count: active.length, evidence: active, citizens: citizens };
   }
 

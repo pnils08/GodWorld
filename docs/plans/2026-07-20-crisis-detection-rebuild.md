@@ -116,3 +116,15 @@ with the bench. Existing 9 S.eventArcs consumers unchanged.
   HEALTH arc with POPIDs attached; Event_Arc_Ledger audit rows 32-col exact. Ripples:
   crisis-onset/peak 0.05, crisis-resolved 0.02. Consumer map: crisis-event→SAFETY.
   Regression: collisions 0, chaosCars 30/30, rippleLedger, finalizeCycleState all PASS.
+- 2026-07-20 — **CR-5 DONE; engine.71 SHIPPED (S327).** Groundhog 0717: C114 fire caught two
+  bar-scale errors the Node bench couldn't (HousingPressure ~0-10 on bench vs 0-filled prod →
+  0.7 bar fired every hood; bench crime 0.93-1.0 on five hoods → absolute-only bar marked half
+  the city) → 5 onsets one cycle. Fix 6e0e4051: crime + housing relative-AND-absolute (z≥1.5 +
+  floor) — when half the city is at 1.0, no hood is exceptional. Re-fired: C115 zero new
+  onsets, carried arcs declined silently; C116 three arcs RESOLVED (ledger rows + 0.02
+  ripples, "conditions back within city range"), two persisted honestly (San Antonio/Lake
+  Merritt crime genuinely exceptional under z) — full lifecycle onset→decline→resolved proven
+  live, 0 errors across 3 fires. Production pushed (deploy @30 bench; prod script 169-file
+  push). Rarity vs the 2-4/yr target: bars now self-calibrating; observe across coming canon
+  cycles and tune per the observed-live-shape rule. Commits: b21f01f0 (CR-1), a06dace9
+  (CR-2/3/4), 6e0e4051 (bars). Canonical smoke rides Mike's next live fire.

@@ -112,8 +112,35 @@ function updateNeighborhoodDemographics_(ctx) {
     // ─────────────────────────────────────────────────────────────────────────
     // ILLNESS EFFECTS
     // ─────────────────────────────────────────────────────────────────────────
-    // Apply illness rate to neighborhood population
-    var expectedSick = Math.round(totalPop * illnessRate);
+    // engine.71 CR-1 (S327): the citywide rate is the honest BACKGROUND (a
+    // downscaled world stat), but pre-CR-1 it was smeared uniformly — Sick sat
+    // at 94-96 in every hood, so the sheet could never say WHICH hood was
+    // sick (the Row 28 flat-writer defect). Per-hood modulation now comes
+    // from REAL same-cycle causes only (doctrine rule 2 — causes, then
+    // numbers; no invented variance): engine.70 salient weather events (a
+    // heat wave or flood makes its hoods sicker that cycle) + chronic QoL
+    // (Phase3-Crime runs before this at both entry points). Clamped [0.75,
+    // 1.5] — a physics bound on modulation, not a cap on events.
+    var hoodIllnessMod = 1.0;
+    var wEvts71 = S.weatherEvents || [];
+    for (var we71 = 0; we71 < wEvts71.length; we71++) {
+      var ev71 = wEvts71[we71];
+      if (!ev71.salient || !ev71.hoods) continue;
+      if (ev71.hoods.indexOf(neighborhood) < 0) continue;
+      if (ev71.type === 'heat_wave') hoodIllnessMod += 0.25;
+      else if (ev71.type === 'flood_conditions') hoodIllnessMod += 0.15;
+    }
+    var nbQoL71 = S.crimeMetrics && S.crimeMetrics.neighborhoodBreakdown &&
+      S.crimeMetrics.neighborhoodBreakdown[neighborhood];
+    if (nbQoL71 && nbQoL71.qualityOfLifeIndex !== undefined) {
+      var qol71 = Number(nbQoL71.qualityOfLifeIndex);
+      if (qol71 > 1) qol71 = qol71 / 100; // metrics layer is 5-95 scale
+      if (qol71 <= 0.35) hoodIllnessMod += 0.10;
+      else if (qol71 >= 0.65) hoodIllnessMod -= 0.10;
+    }
+    hoodIllnessMod = Math.max(0.75, Math.min(1.5, hoodIllnessMod));
+
+    var expectedSick = Math.round(totalPop * illnessRate * hoodIllnessMod);
     var sickDelta = expectedSick - demo.sick;
 
     // Gradual adjustment (don't swing wildly)

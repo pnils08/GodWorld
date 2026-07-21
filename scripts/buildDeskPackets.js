@@ -2148,17 +2148,6 @@ async function main() {
     if (name) simLedgerByName[name] = c;
   });
 
-  // S312 bond-key repair — Relationship_Bonds is POPID-keyed (canonical); resolve
-  // display names onto each bond so the name-based desk filter below still matches.
-  var nameByPopId = {};
-  simLedger.forEach(function(c) {
-    var nm = ((c.First || '') + ' ' + (c.Last || '')).trim();
-    if (c.POPID && nm) nameByPopId[String(c.POPID).toUpperCase()] = nm;
-  });
-  activeBonds.forEach(function(b) {
-    b.CitizenAName = nameByPopId[String(b.CitizenA || '').toUpperCase()] || String(b.CitizenA || '');
-    b.CitizenBName = nameByPopId[String(b.CitizenB || '').toUpperCase()] || String(b.CitizenB || '');
-  });
   // S205 Path B: genericCitizens var dropped — was only console.log'd, never used.
   var chicagoCitizens = allToObjects(chicagoRaw);
 
@@ -2204,6 +2193,21 @@ async function main() {
     var status = (b.Status || '').toLowerCase();
     var intensity = parseFloat(b.Intensity || 0);
     return status !== 'dissolved' && status !== 'broken' && intensity >= 3;
+  });
+
+  // S312 bond-key repair — Relationship_Bonds is POPID-keyed (canonical); resolve
+  // display names onto each bond so the name-based desk filter below still matches.
+  // S328: moved below the activeBonds definition — original placement ran the
+  // forEach before `var activeBonds` (hoisted undefined → TypeError, base_context
+  // frozen at C101 since S312).
+  var nameByPopId = {};
+  simLedger.forEach(function(c) {
+    var nm = ((c.First || '') + ' ' + (c.Last || '')).trim();
+    if (c.POPID && nm) nameByPopId[String(c.POPID).toUpperCase()] = nm;
+  });
+  activeBonds.forEach(function(b) {
+    b.CitizenAName = nameByPopId[String(b.CitizenA || '').toUpperCase()] || String(b.CitizenA || '');
+    b.CitizenBName = nameByPopId[String(b.CitizenB || '').toUpperCase()] || String(b.CitizenB || '');
   });
 
   // Neighborhood Map: economic data per neighborhood

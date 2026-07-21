@@ -143,6 +143,15 @@ function finalizeCycleState_(ctx) {
     // disruption story, not three).
     transitDisrupted: !!(S.transitState && S.transitState.disruptionOngoing),
 
+    // v1.9 (engine.71 CR-2/3): crisis arcs live across cycles on this carry
+    // (weatherFrontTracking pattern — the detector re-evaluates channel state
+    // each cycle; mean-reversion IS the recovery physics). hospitalEvents
+    // carry one cycle so the detector's hospital-cluster channel has the
+    // prev-cycle grain (Hospital_Ledger is lazy-created — absent until the
+    // first admission — so the tab can't be the reliable read).
+    crisisArcs: compactCrisisArcs_(S.crisisArcsActive),
+    hospitalEvents: compactHospitalEvents_(S.hospitalEvents),
+
   };
 
   // This is what downstream scripts read next cycle
@@ -196,6 +205,53 @@ function compactFrontTracking_(ft) {
   };
 }
 
+
+/**
+ * Compact active crisis arcs for carry-forward (v1.9, engine.71). Resolved
+ * arcs never carry; citizens capped 6 (bounded accumulator); evidence prose
+ * excluded — the detector rebuilds it from live channels each cycle.
+ */
+var SNAPSHOT_CRISIS_ARC_CAP = 8;
+
+function compactCrisisArcs_(arcs) {
+  if (!Array.isArray(arcs)) return [];
+  var out = [];
+  for (var i = 0; i < arcs.length && out.length < SNAPSHOT_CRISIS_ARC_CAP; i++) {
+    var a = arcs[i];
+    if (!a || a.phase === 'resolved') continue;
+    out.push({
+      arcId: a.arcId,
+      type: a.type,
+      phase: a.phase,
+      tension: a.tension,
+      neighborhood: a.neighborhood,
+      domainTag: a.domainTag,
+      domain: a.domain,
+      summary: String(a.summary || '').slice(0, 160),
+      citizens: (a.citizens || []).slice(0, 6),
+      consecutiveBad: a.consecutiveBad || 1,
+      cycleCreated: a.cycleCreated,
+      phaseStartCycle: a.phaseStartCycle || a.cycleCreated,
+      source: a.source || 'DETECTED'
+    });
+  }
+  return out;
+}
+
+/**
+ * Compact this cycle's hospital admissions for the detector's prev-cycle
+ * cluster channel (v1.9, engine.71). popId + neighborhood only; capped 12.
+ */
+function compactHospitalEvents_(events) {
+  if (!Array.isArray(events)) return [];
+  var out = [];
+  for (var i = 0; i < events.length && out.length < 12; i++) {
+    var e = events[i];
+    if (!e || !e.neighborhood) continue;
+    out.push({ popId: e.popId || '', neighborhood: e.neighborhood });
+  }
+  return out;
+}
 
 /**
  * Compact mediaEffects to only the fields needed for next cycle's
@@ -541,6 +597,8 @@ if (typeof module !== 'undefined' && module.exports) {
     compactCrimeSpikes_: compactCrimeSpikes_,
     compactWeatherTracking_: compactWeatherTracking_,
     compactFrontTracking_: compactFrontTracking_,
+    compactCrisisArcs_: compactCrisisArcs_,
+    compactHospitalEvents_: compactHospitalEvents_,
     SNAPSHOT_ECON_RIPPLE_CAP: SNAPSHOT_ECON_RIPPLE_CAP,
     SNAPSHOT_INIT_RIPPLE_CAP: SNAPSHOT_INIT_RIPPLE_CAP
   };

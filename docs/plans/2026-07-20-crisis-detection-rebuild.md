@@ -96,3 +96,23 @@ with the bench. Existing 9 S.eventArcs consumers unchanged.
 
 - 2026-07-20 — Drafted + approved (S327, Mike "Proceed"; rarity ≈2–4/yr + buckets-first scope
   on recommended settings). Grounded in 3-agent live maps (machinery/consumers/sheet state).
+- 2026-07-20 — **CR-1 SHIPPED with a measure-twice reversal** (b21f01f0): live SL carries ZERO
+  sick-status rows at C101 (848 active / 48 traded / 23 pending / 7 retired / 4 deceased) — at
+  1:443 grain sick statuses are transient clusters, not a stock, so "derive Sick from SL rows"
+  would emit zeros. Reshaped: citywide rate stays the background; per-hood modulation from real
+  same-cycle causes only (engine.70 heat +0.25 / flood +0.15 on their hoods, QoL low +0.10 /
+  high −0.10, clamp [0.75,1.5]). Detector's health channel moved to event-driven clusters.
+- 2026-07-20 — **CR-2/3/4 SHIPPED as one rewrite** (generateCrisisBuckets v3.0 — CR-4 merged:
+  two crisis sources of truth in one file, even briefly, is the FIX-don't-ADD anti-pattern).
+  Dice, subtype pools, cooldowns, MAX_NEW cap all deleted. Channels + empirical bars in the
+  file header (self-calibrating z vs city + absolute floors; live C101 stats: sentiment μ.36
+  σ.10, retail μ8.4 σ2.2, crime bimodal 0–1; MigrationFlow/HousingPressure 0-filled live →
+  defensive channels that arm when their writers populate). Hospital_Ledger tab ABSENT live
+  (lazy-create, zero admissions yet) → hospital channel reads prev-cycle hospitalEvents via
+  new finalizeCycleState v1.9 carry (compactCrisisArcs_ cap 8 + compactHospitalEvents_ cap 12).
+  Lifecycle bench (Node, real compactors): quiet cycle 0 onsets; storm+transit convergence →
+  West Oakland INFRASTRUCTURE onset (1-channel Jack London correctly quiet); 3-bad-cycle
+  ladder early→rising→peak then decline→resolved on recovery, carry empties; heat+hospital →
+  HEALTH arc with POPIDs attached; Event_Arc_Ledger audit rows 32-col exact. Ripples:
+  crisis-onset/peak 0.05, crisis-resolved 0.02. Consumer map: crisis-event→SAFETY.
+  Regression: collisions 0, chaosCars 30/30, rippleLedger, finalizeCycleState all PASS.

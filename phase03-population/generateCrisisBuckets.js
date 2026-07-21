@@ -1,610 +1,328 @@
 /**
  * ============================================================================
- * generateCrisisBuckets_ v2.8
+ * generateCrisisBuckets_ v3.0 — CRISIS DETECTION (engine.71, S327)
  * ============================================================================
  *
- * Adds:
- * - Real cooldown system (no sheet schema changes)
- * - Shock-aware throttling (uses S.shockFlag from applyShockMonitor_)
- * - Canon-friendly sports weighting (override-only for playoffs/championship)
+ * DETECTION REPLACES INVENTION (ENGINE_REPAIR Row 28). v2.8 read ONE citywide
+ * illnessRate, dice-picked a neighborhood, pool-picked a subtype label —
+ * invented specificity with zero citizen attribution, feeding 9 in-cycle
+ * S.eventArcs consumers. v3.0 inverts it: a crisis is a state a hood is
+ * already in, detected when >=2 INDEPENDENT real channels go bad in the same
+ * neighborhood. Citizens/businesses attach at detection from the channel
+ * sources. Dice, subtype pools, cooldown throttles, and the MAX_NEW cap are
+ * all deleted (SIM_DOCTRINE rule 1 — no hands on the output; rule 2 — causes,
+ * then dice; rule 3 — the world is allowed to hurt).
  *
- * Keeps:
- * - Your arc spawn behavior (v2.6)
- * - Your event output format (S.worldEvents push)
+ * CHANNELS (per hood, per cycle):
+ *   sentiment   S.neighborhoodState (prev-cycle Neighborhood_Map, engine.33) —
+ *               z <= -1.5 vs city AND absolute <= 0.15  [live: mean .36 sd .10]
+ *   retail      same source — z <= -1.5 AND absolute <= 5.0 [mean 8.4 sd 2.2]
+ *   crime       crimeIndex >= 0.75 (bimodal 0-1 live) OR >=2 carried
+ *               crimeSpikes in hood (previousCycleState, engine.45 T3b)
+ *   hospital    >=2 prev-cycle hospitalEvents in hood (carried via
+ *               finalizeCycleState v1.9 — Hospital_Ledger tab is lazy-created
+ *               and absent until the first admission, so the carry is the
+ *               reliable grain)
+ *   weather     engine.70 salient storm/flood/heat hits this hood (same cycle,
+ *               Phase 2)
+ *   transit     engine.70 service-disruption touching this hood (same cycle)
+ *   migration/  neighborhoodState migrationFlow <= -bar / housingPressure >=
+ *   housing     bar — DEFENSIVE ONLY: both columns are 0-filled live today;
+ *               the channels arm themselves when their writers populate.
  *
+ * LIFECYCLE (mean-reversion physics, no age counters): arcs carry across
+ * cycles on previousCycleState.crisisArcs (weatherFrontTracking pattern —
+ * NOT the retired v3preLoader ledger load and its L236 clobber class).
+ * >=2 channels active -> persists/escalates (early -> rising -> peak by
+ * consecutive bad cycles); 1 -> tension bleeds; 0 -> decline -> resolved.
+ * Zero crises is a normal cycle; three hoods at once is allowed.
+ *
+ * OUTPUT CONTRACTS PRESERVED: S.eventArcs arc shape (9 consumers untouched),
+ * S.worldEvents event shape, S.auditIssues line. Event_Arc_Ledger gets audit
+ * rows at onset/peak/resolved via intents. recordRipple_ causeType
+ * 'crisis-event' at onset (0.05) + resolution (0.02).
+ *
+ * Bars are empirical (live C101 distributions above) and deliberately
+ * conservative; first tuning pass rides observed live cycles (Mike rarity
+ * target ~2-4 hood-crises per sim year).
+ * Plan: docs/plans/2026-07-20-crisis-detection-rebuild.md
  * ============================================================================
  */
 
+var CRISIS_DETECT = {
+  SENTIMENT_Z: -1.5, SENTIMENT_ABS: 0.15,
+  RETAIL_Z: -1.5, RETAIL_ABS: 5.0,
+  CRIME_ABS: 0.75, CRIME_SPIKES_MIN: 2,
+  HOSPITAL_CLUSTER_MIN: 2,
+  MIGRATION_OUT_MIN: -30,      // defensive; column 0-filled live
+  HOUSING_PRESSURE_MIN: 0.7,   // defensive; column 0-filled live
+  ONSET_CHANNELS: 2,
+  RESOLVED_RIPPLE: 0.02, ONSET_RIPPLE: 0.05
+};
+
 function generateCrisisBuckets_(ctx) {
-
-  var rng = safeRand_(ctx);
-
-  var ss = ctx.ss;
-  var popSheet = ss.getSheetByName('World_Population');
-  if (!popSheet) return;
-
-  var values = popSheet.getDataRange().getValues();
-  if (values.length < 2) return;
-
-  var header = values[0];
-  var row = values[1];
-  var idx = function(name) { return header.indexOf(name); };
-
-  var illness = Number(row[idx('illnessRate')] || 0.05);
-  var emp = Number(row[idx('employmentRate')] || 0.91);
-  var mig = Number(row[idx('migration')] || 0);
-  var economy = (row[idx('economy')] || "stable").toString().trim();
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // WORLD STATE
-  // ═══════════════════════════════════════════════════════════════════════════
-  var S = ctx.summary || {};
-  ctx.summary = S;
-
-  var season = S.season;
-  var weather = S.weather || { type: "clear", impact: 1 };
-  var weatherMood = S.weatherMood || {};
-  var econMood = S.economicMood || 50;
-  var chaosCount = (S.worldEvents || []).length;
-
-  var cycle = S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0;
-
-  var dynamics = S.cityDynamics || { sentiment: 0, culturalActivity: 1, communityEngagement: 1 };
-
-  // Calendar context
-  var holiday = S.holiday || "none";
-  var holidayPriority = S.holidayPriority || "none";
-  var isFirstFriday = S.isFirstFriday || false;
-  var isCreationDay = S.isCreationDay || false;
-
-  // Sports canon handling
-  var sportsSeason = (S.sportsSeason || "off-season").toString();
-  var sportsSource = (S.sportsSource || "").toString();
-  var sportsIsOverride = (sportsSource === "config-override");
-
-  function getSportsPhaseSimple() {
-    var m = S.simMonth || 1;
-    if (m === 3) return "spring-training";
-    if (m >= 4 && m <= 10) return "in-season";
-    return "off-season";
-  }
-  var sportsPhase = sportsIsOverride ? sportsSeason : getSportsPhaseSimple();
-
-  // Shock state (from applyShockMonitor_)
-  var shockFlag = (S.shockFlag || "none").toString();
-  var shockActive = (shockFlag === "shock-flag");
-  var shockFading = (shockFlag === "shock-fading");
-  var shockChronic = (shockFlag === "shock-chronic");
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // COOLDOWN STORAGE (summary only; no sheet schema impact)
-  // ═══════════════════════════════════════════════════════════════════════════
-  S.crisisCooldown = S.crisisCooldown || {};   // key: "CATEGORY|NEIGHBORHOOD" => untilCycle
-  S.crisisLastSeen = S.crisisLastSeen || {};   // key: "CATEGORY|SUBTYPE" => lastCycle
-
-  function inCooldown(category, neighborhood, subtype) {
-    var k1 = category + "|" + (neighborhood || "");
-    var until = Number(S.crisisCooldown[k1] || 0);
-    if (until && cycle < until) return true;
-
-    var k2 = category + "|" + (subtype || "");
-    var last = Number(S.crisisLastSeen[k2] || 0);
-    // subtype cooldown (prevents repeating "Air Quality Alert" every cycle)
-    if (last && (cycle - last) < 2) return true;
-
-    return false;
-  }
-
-  function setCooldown(category, neighborhood, subtype, base) {
-    // base = cooldown length in cycles
-    var k1 = category + "|" + (neighborhood || "");
-    var k2 = category + "|" + (subtype || "");
-
-    var len = base;
-
-    // During active shock, you want fewer *new* unique crises
-    if (shockActive) len += 1;
-    if (shockChronic) len += 0; // chronic is "new normal", don't over-throttle
-    if (isCreationDay) len += 1; // calm day → don't spam
-
-    S.crisisCooldown[k1] = cycle + len;
-    S.crisisLastSeen[k2] = cycle;
-  }
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // v2.6: EXISTING ARC CHECK (prevent duplicates)
-  // ═══════════════════════════════════════════════════════════════════════════
-  var existingArcs = S.eventArcs || [];
-
-  function hasActiveArc(category, neighborhood) {
-    for (var i = 0; i < existingArcs.length; i++) {
-      var arc = existingArcs[i];
-      if (!arc || arc.phase === 'resolved') continue;
-      if (arc.domainTag === category || arc.domain === category) {
-        if (!neighborhood || arc.neighborhood === neighborhood) return true;
-      }
-    }
-    return false;
-  }
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // OAKLAND NEIGHBORHOODS (12)
-  // ═══════════════════════════════════════════════════════════════════════════
-  var neighborhoods = [
-    "Temescal", "Downtown", "Fruitvale", "Lake Merritt",
-    "West Oakland", "Laurel", "Rockridge", "Jack London",
-    "Uptown", "KONO", "Chinatown", "Piedmont Ave"
-  ];
-
-  var neighborhoodWeights = {
-    'Temescal': 0.9,
-    'Downtown': 1.3,
-    'Fruitvale': 1.0,
-    'Lake Merritt': 0.8,
-    'West Oakland': 1.2,
-    'Laurel': 0.7,
-    'Rockridge': 0.5,
-    'Jack London': 1.0,
-    'Uptown': 1.1,
-    'KONO': 0.8,
-    'Chinatown': 0.9,
-    'Piedmont Ave': 0.4
-  };
+  var S = ctx.summary || (ctx.summary = {});
+  var cycle = S.absoluteCycle || S.cycleId || (ctx.config && ctx.config.cycleCount) || 0;
+  var prev = S.previousCycleState || {};
 
   if (!S.auditIssues) S.auditIssues = [];
+  S.eventArcs = S.eventArcs || [];
+  S.worldEvents = S.worldEvents || [];
 
-  var crises = [];
+  // ── channel state per hood ────────────────────────────────────────────────
+  var nbState = S.neighborhoodState || {};
+  var hoods = [];
+  var sentVals = [], retailVals = [];
+  for (var h in nbState) {
+    if (!nbState.hasOwnProperty(h)) continue;
+    hoods.push(h);
+    sentVals.push(Number(nbState[h].sentiment) || 0);
+    retailVals.push(Number(nbState[h].retailVitality) || 0);
+  }
+  if (!hoods.length) {
+    Logger.log('generateCrisisBuckets_ v3.0: no neighborhoodState — detector idle this cycle');
+    return;
+  }
+  function meanSd_(a) {
+    var m = 0, i;
+    for (i = 0; i < a.length; i++) m += a[i];
+    m /= a.length;
+    var v = 0;
+    for (i = 0; i < a.length; i++) v += (a[i] - m) * (a[i] - m);
+    return { mean: m, sd: Math.sqrt(v / a.length) || 1e-9 };
+  }
+  var sentStat = meanSd_(sentVals);
+  var retailStat = meanSd_(retailVals);
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // Crisis volume cap (shock-aware)
-  // - Active shock: fewer NEW crises (realism), but severity can bias upward
-  // - Normal: allow more variety
-  // ═══════════════════════════════════════════════════════════════════════════
-  var MAX_NEW = 3;
-  if (shockActive) MAX_NEW = 2;
-  else if (shockFading) MAX_NEW = 2;
-  else if (shockChronic) MAX_NEW = 2;
+  // carried crime spikes per hood (engine.45 T3b snapshot channel)
+  var spikesByHood = {};
+  var cs = prev.crimeSpikes || [];
+  for (var ci = 0; ci < cs.length; ci++) {
+    var csh = cs[ci] && cs[ci].neighborhood;
+    if (csh) spikesByHood[csh] = (spikesByHood[csh] || 0) + 1;
+  }
+  // carried hospital events per hood (engine.71 snapshot channel)
+  var hospByHood = {}, hospPopsByHood = {};
+  var he = prev.hospitalEvents || [];
+  for (var hi = 0; hi < he.length; hi++) {
+    var heh = he[hi] && he[hi].neighborhood;
+    if (!heh) continue;
+    hospByHood[heh] = (hospByHood[heh] || 0) + 1;
+    if (!hospPopsByHood[heh]) hospPopsByHood[heh] = [];
+    if (he[hi].popId) hospPopsByHood[heh].push(String(he[hi].popId));
+  }
+  // engine.70 same-cycle events
+  var weatherHitByHood = {}, weatherTypeByHood = {};
+  var wev = S.weatherEvents || [];
+  for (var wi = 0; wi < wev.length; wi++) {
+    if (!wev[wi].salient || !wev[wi].hoods) continue;
+    for (var wh = 0; wh < wev[wi].hoods.length; wh++) {
+      weatherHitByHood[wev[wi].hoods[wh]] = true;
+      weatherTypeByHood[wev[wi].hoods[wh]] = wev[wi].type;
+    }
+  }
+  var transitHoods = {};
+  if (S.transitState && S.transitState.disruptionOngoing) {
+    var th = S.transitState.affectedHoods || [];
+    for (var ti = 0; ti < th.length; ti++) transitHoods[th[ti]] = true;
+  }
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // HELPER: PICK WEIGHTED NEIGHBORHOOD
-  // ═══════════════════════════════════════════════════════════════════════════
-  function pickNeighborhood(categoryWeightAdjust) {
-    var weights = {};
-    for (var k in neighborhoodWeights) weights[k] = neighborhoodWeights[k];
+  // evaluate channels for one hood → { count, evidence[], citizens[] }
+  function evalChannels_(hood) {
+    var st = nbState[hood] || {};
+    var active = [], citizens = [];
+    var sent = Number(st.sentiment) || 0;
+    var sentZ = (sent - sentStat.mean) / sentStat.sd;
+    if (sentZ <= CRISIS_DETECT.SENTIMENT_Z && sent <= CRISIS_DETECT.SENTIMENT_ABS) {
+      active.push('sentiment ' + sent.toFixed(2) + ' (city ' + sentStat.mean.toFixed(2) + ')');
+    }
+    var retail = Number(st.retailVitality) || 0;
+    var retailZ = (retail - retailStat.mean) / retailStat.sd;
+    if (retailZ <= CRISIS_DETECT.RETAIL_Z && retail <= CRISIS_DETECT.RETAIL_ABS) {
+      active.push('retail vitality ' + retail.toFixed(1) + ' (city ' + retailStat.mean.toFixed(1) + ')');
+    }
+    var crime = Number(st.crimeIndex) || 0;
+    if (crime >= CRISIS_DETECT.CRIME_ABS || (spikesByHood[hood] || 0) >= CRISIS_DETECT.CRIME_SPIKES_MIN) {
+      active.push('crime ' + (crime >= CRISIS_DETECT.CRIME_ABS ? 'index ' + crime.toFixed(2) : (spikesByHood[hood] || 0) + ' spikes last cycle'));
+    }
+    if ((hospByHood[hood] || 0) >= CRISIS_DETECT.HOSPITAL_CLUSTER_MIN) {
+      active.push((hospByHood[hood]) + ' hospitalizations last cycle');
+      citizens = citizens.concat(hospPopsByHood[hood] || []);
+    }
+    if (weatherHitByHood[hood]) {
+      active.push(String(weatherTypeByHood[hood]).replace(/_/g, ' ') + ' hit');
+    }
+    if (transitHoods[hood]) {
+      active.push('transit disruption');
+    }
+    var migFlow = Number(st.migrationFlow) || 0;
+    if (migFlow <= CRISIS_DETECT.MIGRATION_OUT_MIN) active.push('migration outflow ' + migFlow);
+    var hp = Number(st.housingPressure) || 0;
+    if (hp >= CRISIS_DETECT.HOUSING_PRESSURE_MIN) active.push('housing pressure ' + hp.toFixed(2));
+    return { count: active.length, evidence: active, citizens: citizens };
+  }
 
-    if (categoryWeightAdjust) {
-      for (var n in categoryWeightAdjust) {
-        weights[n] = (weights[n] || 1.0) + categoryWeightAdjust[n];
+  // domain for the desk: dominant evidence class
+  function domainFor_(evidence) {
+    var joined = evidence.join('|');
+    if (joined.indexOf('hospitalizations') >= 0 || joined.indexOf('heat wave') >= 0) return 'HEALTH';
+    if (joined.indexOf('crime') >= 0) return 'SAFETY';
+    if (joined.indexOf('storm') >= 0 || joined.indexOf('flood') >= 0 || joined.indexOf('transit') >= 0) return 'INFRASTRUCTURE';
+    if (joined.indexOf('retail') >= 0) return 'ECONOMIC';
+    return 'CIVIC';
+  }
+
+  function ledgerRow_(arc, note) {
+    // Event_Arc_Ledger audit row — matches the live 32-col header (fossil tab,
+    // C70-81 rows untouched per doctrine rule 8). Blanks for retired cols.
+    return [
+      rippleStamp_(), cycle, arc.arcId, arc.type, arc.phase, arc.tension,
+      arc.neighborhood, arc.domainTag, arc.summary, (arc.citizens || []).length,
+      arc.cycleCreated, arc.cycleResolved || '', '', S.holiday || 'none',
+      S.holidayPriority || 'none', !!S.isFirstFriday, !!S.isCreationDay,
+      S.sportsSeason || '', note || '', '', arc.phase === 'resolved' ? 'natural' : '',
+      arc.phase === 'resolved' ? cycle : '', arc.prevPhase || '', '', arc.phaseStartCycle || '',
+      '', '', '', '', '', note || '', ''
+    ];
+  }
+  function rippleStamp_() {
+    return (typeof inWorldStamp_ === 'function') ? inWorldStamp_(ctx) : (S.cycleRef || '');
+  }
+  function emitRipple_(arc, effectType, magnitude, detail) {
+    if (typeof recordRipple_ !== 'function') return;
+    recordRipple_(ctx, {
+      causeType: 'crisis-event',
+      causeId: arc.arcId,
+      causeDetail: detail,
+      effectType: effectType,
+      targetScope: 'neighborhood',
+      targetIds: [arc.neighborhood],
+      neighborhood: arc.neighborhood,
+      magnitude: magnitude,
+      duration: 1,
+      sourceEngine: 'generateCrisisBuckets'
+    });
+  }
+
+  // ── lifecycle: re-evaluate carried arcs ───────────────────────────────────
+  var carried = prev.crisisArcs || [];
+  var liveArcs = [];
+  var carriedHoods = {};
+  for (var ai = 0; ai < carried.length; ai++) {
+    var arc = carried[ai];
+    if (!arc || !arc.neighborhood) continue;
+    carriedHoods[arc.neighborhood] = true;
+    var ch = evalChannels_(arc.neighborhood);
+    arc.prevPhase = arc.phase;
+    if (ch.count >= CRISIS_DETECT.ONSET_CHANNELS) {
+      arc.consecutiveBad = (arc.consecutiveBad || 1) + 1;
+      arc.tension = Math.min(10, 2 * ch.count + arc.consecutiveBad);
+      var newPhase = arc.consecutiveBad >= 3 ? 'peak' : (arc.consecutiveBad === 2 ? 'rising' : 'early');
+      if (newPhase !== arc.phase) {
+        arc.phaseStartCycle = cycle;
+        if (newPhase === 'peak') {
+          emitRipple_(arc, 'crisis-peak', CRISIS_DETECT.ONSET_RIPPLE,
+            arc.neighborhood + ' crisis at peak (' + arc.consecutiveBad + ' straight bad cycles): ' + ch.evidence.join('; '));
+          queueAppendIntent_(ctx, 'Event_Arc_Ledger', ledgerRow_(arc, 'peak'), 'crisis arc peak', 'events');
+        }
+      }
+      arc.phase = newPhase;
+      arc.summary = arc.neighborhood + ' under strain: ' + ch.evidence.join('; ');
+      arc.citizens = ch.citizens.length ? ch.citizens : (arc.citizens || []);
+    } else if (ch.count === 1) {
+      arc.tension = Math.round(arc.tension * 0.7 * 100) / 100;
+      if (arc.tension < 3) { arc.phase = 'decline'; arc.phaseStartCycle = cycle; }
+      arc.summary = arc.neighborhood + ' still strained: ' + ch.evidence.join('; ');
+    } else {
+      arc.tension = Math.round(arc.tension * 0.5 * 100) / 100;
+      if (arc.phase === 'decline') {
+        arc.phase = 'resolved';
+        arc.cycleResolved = cycle;
+        arc.summary = arc.neighborhood + ' crisis eased — conditions back within city range';
+        emitRipple_(arc, 'crisis-resolved', CRISIS_DETECT.RESOLVED_RIPPLE, arc.summary);
+        queueAppendIntent_(ctx, 'Event_Arc_Ledger', ledgerRow_(arc, 'resolved'), 'crisis arc resolved', 'events');
+      } else {
+        arc.phase = 'decline';
+        arc.phaseStartCycle = cycle;
+        arc.summary = arc.neighborhood + ' recovering — pressure lifting';
       }
     }
-
-    if (isFirstFriday) {
-      weights['Uptown'] = (weights['Uptown'] || 1.0) + 0.3;
-      weights['KONO'] = (weights['KONO'] || 1.0) + 0.2;
-    }
-
-    if (holiday === "LunarNewYear") weights['Chinatown'] = (weights['Chinatown'] || 1.0) + 0.4;
-    if (holiday === "CincoDeMayo" || holiday === "DiaDeMuertos") weights['Fruitvale'] = (weights['Fruitvale'] || 1.0) + 0.3;
-
-    // Sports crowd weighting:
-    // - Only big boosts for championship if override
-    // - Otherwise mild in-season Downtown/Jack London congestion baseline
-    if (sportsIsOverride && (sportsSeason === "championship" || holiday === "OpeningDay")) {
-      weights['Jack London'] = (weights['Jack London'] || 1.0) + 0.4;
-      weights['Downtown'] = (weights['Downtown'] || 1.0) + 0.3;
-    } else if (!sportsIsOverride && sportsPhase === "in-season") {
-      weights['Jack London'] = (weights['Jack London'] || 1.0) + 0.15;
-      weights['Downtown'] = (weights['Downtown'] || 1.0) + 0.10;
-    }
-
-    var pool = [];
-    for (var i = 0; i < neighborhoods.length; i++) {
-      var nh = neighborhoods[i];
-      var w = Math.max(weights[nh] || 1.0, 0.1);
-      for (var j = 0; j < Math.round(w * 10); j++) pool.push(nh);
-    }
-    return pool[Math.floor(rng() * pool.length)];
+    S.eventArcs.push(arc);
+    if (arc.phase !== 'resolved') liveArcs.push(arc);
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // v2.6: HELPER - SPAWN ARC FROM CRISIS
-  // ═══════════════════════════════════════════════════════════════════════════
-  function getResolutionConditions_(category) {
-    var conditions = {
-      'HEALTH': { naturalResolution: 'illnessRate drops below 0.05', timeToResolve: '3-6 cycles', accelerators: ['improved weather','holiday end','treatment rollout'] },
-      'ECONOMIC': { naturalResolution: 'economicMood rises above 50', timeToResolve: '4-8 cycles', accelerators: ['new investment','holiday shopping','championship boost'] },
-      'CIVIC': { naturalResolution: 'migration stabilizes within ±50', timeToResolve: '5-10 cycles', accelerators: ['housing availability','job growth','community programs'] },
-      'INFRASTRUCTURE': { naturalResolution: 'weather.impact drops below 1.2', timeToResolve: '2-4 cycles', accelerators: ['weather improvement','repair completion','holiday end'] },
-      'SAFETY': { naturalResolution: 'sentiment rises above -0.2', timeToResolve: '3-5 cycles', accelerators: ['community engagement','event conclusion','patrols'] },
-      'ENVIRONMENT': { naturalResolution: 'weather normalizes', timeToResolve: '2-5 cycles', accelerators: ['rain','temperature drop','cleanup efforts'] }
-    };
-    return conditions[category] || { naturalResolution: 'conditions improve', timeToResolve: '4-8 cycles', accelerators: [] };
-  }
+  // ── detection: new onsets ─────────────────────────────────────────────────
+  for (var hj = 0; hj < hoods.length; hj++) {
+    var hood = hoods[hj];
+    if (carriedHoods[hood]) continue; // one arc per hood; persistence handles it
+    var chk = evalChannels_(hood);
+    if (chk.count < CRISIS_DETECT.ONSET_CHANNELS) continue;
 
-  function spawnCrisisArc(crisis, arcType) {
-    if (hasActiveArc(crisis.category, crisis.location)) return null;
-
-    var baseTension = crisis.severity === 'high' ? 6 : crisis.severity === 'medium' ? 4 : 2;
-
-    var arc = {
-      arcId: 'CRISIS-' + cycle + '-' + rng().toString(36).substr(2, 6).toUpperCase(),
-      type: arcType,
+    var domain = domainFor_(chk.evidence);
+    var severity = chk.count >= 4 ? 'high' : chk.count === 3 ? 'medium' : 'low';
+    var newArc = {
+      arcId: 'CRISIS-' + cycle + '-' + hood.replace(/\s+/g, '').toUpperCase().slice(0, 8),
+      type: 'crisis',
       phase: 'early',
-      tension: baseTension,
+      tension: Math.min(10, 2 * chk.count + 1),
       age: 0,
-      neighborhood: crisis.location,
-      domainTag: crisis.category,
-      domain: crisis.category,
-      summary: crisis.category + ' crisis: ' + crisis.subtype + ' in ' + crisis.location,
-      subtype: crisis.subtype,
+      neighborhood: hood,
+      domainTag: domain,
+      domain: domain,
+      summary: hood + ' under strain: ' + chk.evidence.join('; '),
+      subtype: chk.evidence[0],
+      citizens: chk.citizens,
+      consecutiveBad: 1,
       cycleCreated: cycle,
       cycleResolved: null,
-      source: 'BUCKET',
-      resolutionConditions: getResolutionConditions_(crisis.category),
-      holidayContext: holiday !== 'none' ? holiday : null,
-      seasonContext: season
+      phaseStartCycle: cycle,
+      source: 'DETECTED',
+      resolutionConditions: getResolutionConditions_(domain),
+      holidayContext: (S.holiday && S.holiday !== 'none') ? S.holiday : null,
+      seasonContext: S.season
     };
-
-    S.eventArcs = S.eventArcs || [];
-    S.eventArcs.push(arc);
-    return arc;
-  }
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // GLOBAL CALENDAR MODIFIERS (plus shock throttle)
-  // ═══════════════════════════════════════════════════════════════════════════
-  var calendarMod = 1.0;
-
-  var peacefulHolidays = ["Thanksgiving", "Holiday", "Easter", "MothersDay", "FathersDay"];
-  if (peacefulHolidays.indexOf(holiday) >= 0) calendarMod *= 0.7;
-
-  var civicRestHolidays = ["MLKDay", "PresidentsDay", "MemorialDay", "LaborDay", "VeteransDay"];
-  if (civicRestHolidays.indexOf(holiday) >= 0) calendarMod *= 0.8;
-
-  if (isFirstFriday) calendarMod *= 0.75;
-  if (isCreationDay) calendarMod *= 0.7;
-
-  if ((dynamics.communityEngagement || 1) >= 1.4) calendarMod *= 0.85;
-  if ((dynamics.culturalActivity || 1) >= 1.4) calendarMod *= 0.9;
-
-  // Shock throttle: reduce *new* crisis roll frequency (but let severity bias do the "big feeling")
-  if (shockActive) calendarMod *= 0.75;
-  else if (shockFading) calendarMod *= 0.85;
-
-  // Helper: bias severity upward during active shock (instead of volume spam)
-  function pickSeverity(baseHighMetric) {
-    // baseHighMetric is something like illness rate or weather.impact
-    if (shockActive && rng() < 0.35) return 'high';
-    if (baseHighMetric && baseHighMetric > 0) {
-      // leave the caller's logic to decide; this is just a small nudge
-      if (shockFading && rng() < 0.15) return 'high';
-    }
-    return null; // caller decides
-  }
-
-  // Helper: add crisis with cooldown checks
-  function tryAddCrisis(category, subtype, severity, location, cooldownLen, arcRuleFn) {
-    if (crises.length >= MAX_NEW) return;
-
-    if (inCooldown(category, location, subtype)) return;
-    if (hasActiveArc(category, location)) {
-      // If an arc already exists here, we avoid adding another "bucket" crisis spam.
-      // The arc lifecycle should represent persistence.
-      return;
-    }
-
-    var crisis = { category: category, subtype: subtype, severity: severity, location: location };
-    crises.push(crisis);
-
-    setCooldown(category, location, subtype, cooldownLen);
-
-    if (typeof arcRuleFn === "function") arcRuleFn(crisis);
-  }
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // HEALTH
-  // ═══════════════════════════════════════════════════════════════════════════
-  var healthChance = 0.02;
-  if (illness >= 0.06) healthChance += 0.06;
-  if (illness >= 0.07) healthChance += 0.08;
-  if (illness >= 0.085) healthChance += 0.10;
-
-  if (season === "Winter") healthChance += 0.08;
-  if (weather.type === "fog" || weather.type === "rain") healthChance += 0.04;
-  if (weatherMood.comfortIndex && weatherMood.comfortIndex < 0.3) healthChance += 0.03;
-
-  // If chaos exists, reduce *new* health "bucket" reporting slightly (keeps signal clean)
-  if (chaosCount > 0) healthChance *= 0.85;
-
-  var gatheringHolidays = ["Thanksgiving", "Holiday", "NewYearsEve", "Independence", "OpeningDay"];
-  if (gatheringHolidays.indexOf(holiday) >= 0) healthChance += 0.05;
-
-  if (season === "Winter" && (holiday === "Holiday" || holiday === "NewYear")) healthChance += 0.04;
-
-  healthChance *= calendarMod;
-  if (healthChance > 0.40) healthChance = 0.40;
-
-  if (rng() < healthChance) {
-    var pool;
-    if (season === "Winter") {
-      pool = ["Respiratory Advisory", "Clinic Overcapacity", "Transit Illness Watch", "Flu Season Strain"];
-    } else if (weather.type === "hot" || (weatherMood.conflictPotential && weatherMood.conflictPotential > 0.3)) {
-      pool = ["Heat Exhaustion Calls", "Cooling Center Demand", "Dehydration Advisory"];
-    } else if (gatheringHolidays.indexOf(holiday) >= 0) {
-      pool = ["Post-Gathering Illness Uptick", "Clinic Busy Period", "Seasonal Illness Watch"];
-    } else {
-      pool = ["Foodborne Advisory", "Seasonal Allergy Spike", "Air Quality Notice"];
-    }
-
-    var subtype = pool[Math.floor(rng() * pool.length)];
-    var forced = pickSeverity(illness);
-    var severity = forced || (illness >= 0.085 ? 'high' : (rng() < 0.5 ? 'low' : 'medium'));
-
-    var loc = pickNeighborhood(null);
-
-    tryAddCrisis("HEALTH", subtype, severity, loc, 3, function(c) {
-      // Spawn arc for high severity or critical illness
-      if (c.severity === 'high' || illness >= 0.08) spawnCrisisArc(c, 'health-crisis');
-    });
-  }
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // EMPLOYMENT
-  // ═══════════════════════════════════════════════════════════════════════════
-  var empChance = 0;
-  if (emp < 0.88) empChance = 0.55;
-  if (econMood <= 35) empChance += 0.15;
-
-  var retailHolidays = ["Holiday", "BlackFriday"];
-  if (retailHolidays.indexOf(holiday) >= 0) empChance *= 0.6;
-
-  if (holiday === "NewYear" && economy !== "strong") empChance += 0.1;
-
-  empChance *= calendarMod;
-
-  if (empChance > 0 && rng() < empChance) {
-    var subtype2 = (emp < 0.84) ? "Layoff Pressure" : "Hiring Slowdown";
-    var forced2 = pickSeverity(1);
-    var severity2 = forced2 || (emp < 0.84 ? 'high' : 'medium');
-    var loc2 = pickNeighborhood({ 'Downtown': 0.3, 'West Oakland': 0.2 });
-
-    tryAddCrisis("ECONOMIC", subtype2, severity2, loc2, 4, function(c) {
-      if (c.severity === 'high') spawnCrisisArc(c, 'economic-crisis');
-    });
-  }
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // MIGRATION
-  // ═══════════════════════════════════════════════════════════════════════════
-  var migChance = 0;
-  if (Math.abs(mig) > 120) migChance = 0.55;
-
-  var travelHolidays = ["Thanksgiving", "Holiday", "MemorialDay", "LaborDay", "Independence"];
-  if (travelHolidays.indexOf(holiday) >= 0) migChance += 0.1;
-
-  migChance *= calendarMod;
-
-  if (migChance > 0 && rng() < migChance) {
-    var subtype3 = (mig > 0) ? "Inflow Strain" : "Outflow Drift";
-    var forced3 = pickSeverity(Math.abs(mig) / 300);
-    var severity3 = forced3 || (Math.abs(mig) > 300 ? 'high' : 'low');
-    var loc3 = pickNeighborhood(null);
-
-    tryAddCrisis("CIVIC", subtype3, severity3, loc3, 4, function(c) {
-      if (Math.abs(mig) > 250) spawnCrisisArc(c, 'demographic');
-    });
-  }
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // ECONOMY
-  // ═══════════════════════════════════════════════════════════════════════════
-  var econCrisisChance = 0;
-  if (economy === "weak" || economy === "struggling") econCrisisChance = 0.5;
-  if (econMood <= 30) econCrisisChance += 0.2;
-
-  // only championship boost reduction if override (canon)
-  if (sportsIsOverride && sportsSeason === "championship") econCrisisChance *= 0.7;
-
-  if (holiday === "NewYear" || holiday === "Holiday") {
-    if (economy !== "strong") econCrisisChance += 0.1;
-  }
-
-  econCrisisChance *= calendarMod;
-
-  if (econCrisisChance > 0 && rng() < econCrisisChance) {
-    var econPool = ["Budget Tightening", "Business Closures", "Revenue Shortfall", "Service Cuts"];
-    var subtype4 = econPool[Math.floor(rng() * econPool.length)];
-    var forced4 = pickSeverity(1);
-    var severity4 = forced4 || (econMood <= 30 ? 'high' : 'medium');
-    var loc4 = pickNeighborhood({ 'Downtown': 0.3 });
-
-    tryAddCrisis("ECONOMIC", subtype4, severity4, loc4, 5, function(c) {
-      if (c.severity === 'high' || econMood <= 25) spawnCrisisArc(c, 'economic-crisis');
-    });
-  }
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // INFRASTRUCTURE
-  // ═══════════════════════════════════════════════════════════════════════════
-  var infraChance = 0;
-  if (weather.impact >= 1.3) infraChance = 0.35;
-
-  if (travelHolidays.indexOf(holiday) >= 0) infraChance += 0.1;
-
-  // sports crowd infra only big when override; otherwise mild in-season bump
-  if (sportsIsOverride && (sportsSeason === "championship" || holiday === "OpeningDay")) infraChance += 0.08;
-  else if (!sportsIsOverride && sportsPhase === "in-season") infraChance += 0.03;
-
-  infraChance *= calendarMod;
-
-  if (infraChance > 0 && rng() < infraChance) {
-    var infraPool;
-    if (travelHolidays.indexOf(holiday) >= 0) {
-      infraPool = ["Transit Overcrowding", "Airport Delays", "Road Congestion", "Parking Shortage"];
-    } else if (sportsIsOverride && (sportsSeason === "championship" || holiday === "OpeningDay")) {
-      infraPool = ["Stadium Area Congestion", "Transit Surge", "Parking Overflow"];
-    } else {
-      infraPool = ["Transit Delays", "Road Hazards", "Power Fluctuations", "Flood Watch"];
-    }
-
-    var subtype5 = infraPool[Math.floor(rng() * infraPool.length)];
-    var forced5 = pickSeverity(weather.impact);
-    var severity5 = forced5 || (weather.impact >= 1.4 ? 'high' : 'medium');
-    var loc5 = pickNeighborhood({ 'Downtown': 0.2, 'Jack London': 0.2 });
-
-    tryAddCrisis("INFRASTRUCTURE", subtype5, severity5, loc5, 3, function(c) {
-      if (weather.impact >= 1.5) spawnCrisisArc(c, 'crisis');
-    });
-  }
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // SAFETY
-  // ═══════════════════════════════════════════════════════════════════════════
-  var safetyChance = 0;
-  if ((dynamics.sentiment || 0) <= -0.3) safetyChance = 0.30;
-
-  var crowdHolidays = ["Independence", "NewYearsEve", "Halloween", "OpeningDay", "OaklandPride"];
-  if (crowdHolidays.indexOf(holiday) >= 0) safetyChance += 0.1;
-
-  if (sportsIsOverride) {
-    if (sportsSeason === "championship") safetyChance += 0.12;
-    else if (sportsSeason === "playoffs" || sportsSeason === "post-season") safetyChance += 0.06;
-  } else {
-    if (sportsPhase === "in-season") safetyChance += 0.03;
-  }
-
-  var fireworksHolidays = ["Independence", "NewYearsEve"];
-  if (fireworksHolidays.indexOf(holiday) >= 0) safetyChance += 0.08;
-
-  if (isFirstFriday) safetyChance += 0.05;
-
-  safetyChance *= calendarMod;
-
-  if (safetyChance > 0 && rng() < safetyChance) {
-    var safetyPool;
-    if (crowdHolidays.indexOf(holiday) >= 0 || (sportsIsOverride && sportsSeason === "championship")) {
-      safetyPool = ["Crowd Control Issue", "Public Disturbance", "Celebratory Incident"];
-    } else if (fireworksHolidays.indexOf(holiday) >= 0) {
-      safetyPool = ["Fireworks Complaint", "Noise Disturbance", "Fire Hazard Report"];
-    } else {
-      safetyPool = ["Public Disturbance", "Property Incident", "Community Tension"];
-    }
-
-    var subtype6 = safetyPool[Math.floor(rng() * safetyPool.length)];
-    var forced6 = pickSeverity(1);
-    var severity6 = forced6 || ((dynamics.sentiment || 0) <= -0.4 ? 'high' : 'medium');
-    var loc6 = pickNeighborhood(
-      crowdHolidays.indexOf(holiday) >= 0 ? { 'Downtown': 0.4, 'Jack London': 0.3, 'Lake Merritt': 0.2 } : null
-    );
-
-    tryAddCrisis("SAFETY", subtype6, severity6, loc6, 3, function(c) {
-      if (c.severity === 'high' || (dynamics.sentiment || 0) <= -0.5) spawnCrisisArc(c, 'pattern-wave');
-    });
-  }
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // ENVIRONMENT
-  // ═══════════════════════════════════════════════════════════════════════════
-  var envChance = 0;
-  if (weather.type === "hot") envChance = 0.25;
-  if (weather.impact >= 1.4) envChance += 0.15;
-
-  if (fireworksHolidays.indexOf(holiday) >= 0) envChance += 0.15;
-
-  if (crowdHolidays.indexOf(holiday) >= 0 || (sportsIsOverride && sportsSeason === "championship")) envChance += 0.08;
-
-  envChance *= calendarMod;
-
-  if (envChance > 0 && rng() < envChance) {
-    var envPool;
-    if (fireworksHolidays.indexOf(holiday) >= 0) {
-      envPool = ["Air Quality Alert", "Noise Pollution Report", "Debris Cleanup Needed"];
-    } else if (weather.type === "hot") {
-      envPool = ["Heat Advisory", "Fire Risk Warning", "Drought Strain"];
-    } else {
-      envPool = ["Environmental Complaint", "Waste Management Strain", "Green Space Pressure"];
-    }
-
-    var subtype7 = envPool[Math.floor(rng() * envPool.length)];
-    var forced7 = pickSeverity(weather.impact);
-    var severity7 = forced7 || (weather.impact >= 1.4 ? 'high' : 'medium');
-    var loc7 = pickNeighborhood(null);
-
-    tryAddCrisis("ENVIRONMENT", subtype7, severity7, loc7, 3, function(c) {
-      if (weather.impact >= 1.6) spawnCrisisArc(c, 'crisis');
-    });
-  }
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // OUTPUT (unchanged format)
-  // ═══════════════════════════════════════════════════════════════════════════
-  for (var c = 0; c < crises.length; c++) {
-    var crisis = crises[c];
-
-    S.auditIssues.push(crisis.category + ' – ' + crisis.subtype + ' – ' + crisis.location + ' – ' + crisis.severity);
-
-    S.worldEvents = S.worldEvents || [];
-
-    var event = {
+    S.eventArcs.push(newArc);
+    liveArcs.push(newArc);
+
+    S.auditIssues.push(domain + ' – detected crisis – ' + hood + ' – ' + severity);
+    S.worldEvents.push({
       cycle: cycle,
-      domain: crisis.category,
-      subdomain: crisis.subtype,
-      neighborhood: crisis.location,
-      severity: crisis.severity,
-      description: crisis.category + ' — ' + crisis.subtype + ' (' + crisis.location + ')',
-      impactScore: crisis.severity === 'high' ? 50 : crisis.severity === 'medium' ? 30 : 15,
-      source: 'BUCKET',
+      domain: domain,
+      subdomain: 'neighborhood-crisis',
+      neighborhood: hood,
+      severity: severity,
+      description: newArc.summary,
+      impactScore: severity === 'high' ? 50 : severity === 'medium' ? 30 : 15,
+      source: 'DETECTED',
       timestamp: ctx.now
-    };
-
-    if (holiday !== "none") event.holidayContext = holiday;
-    if (isFirstFriday) event.firstFriday = true;
-
-    // sports context (canon-friendly)
-    event.sportsPhase = sportsPhase;
-    if (sportsIsOverride && sportsSeason !== "off-season") event.sportsSeason = sportsSeason;
-
-    S.worldEvents.push(event);
+    });
     S.eventsGenerated = (S.eventsGenerated || 0) + 1;
+
+    emitRipple_(newArc, 'crisis-onset', CRISIS_DETECT.ONSET_RIPPLE, newArc.summary +
+      (chk.citizens.length ? ' — ' + chk.citizens.join(', ') + ' among the affected' : ''));
+    queueAppendIntent_(ctx, 'Event_Arc_Ledger', ledgerRow_(newArc, 'onset'), 'crisis arc onset', 'events');
   }
 
-  // Log arc spawns (same behavior as v2.6)
-  var newArcs = (S.eventArcs || []).filter(function(a) {
-    return a && a.cycleCreated === cycle && a.source === 'BUCKET';
-  });
-  if (newArcs.length > 0) {
-    Logger.log('generateCrisisBuckets_ v2.8: Spawned ' + newArcs.length + ' crisis arcs');
-  }
+  // carry surface for finalizeCycleState (compactCrisisArcs_ v1.9)
+  S.crisisArcsActive = liveArcs;
 
+  Logger.log('generateCrisisBuckets_ v3.0: ' + liveArcs.length + ' active crisis arc(s)' +
+    (carried.length ? ' (' + carried.length + ' carried in)' : '') + ' | cycle ' + cycle);
   ctx.summary = S;
 }
 
-
 /**
- * ============================================================================
- * CRISIS BUCKETS v2.8 REFERENCE
- * ============================================================================
- *
- * NEW IN v2.7:
- * - Cooldown system: S.crisisCooldown, S.crisisLastSeen (no schema changes)
- * - Shock-aware: reads S.shockFlag, throttles volume, biases severity
- * - Canon-safe sports: only big effects with sportsIsOverride
- * - MAX_NEW cap: 2-3 crises per cycle based on shock state
- *
- * CALL ORDER:
- * 1. generateCrisisBuckets_ (creates events/arcs)
- * 2. applyShockMonitor_ (detects shock from this cycle's events)
- *
- * ARC SPAWNING CONDITIONS (unchanged from v2.6):
- * | Category | Condition | Arc Type |
- * |----------|-----------|----------|
- * | HEALTH | severity=high OR illness>=0.08 | health-crisis |
- * | ECONOMIC (emp) | severity=high | economic-crisis |
- * | ECONOMIC (econ) | severity=high OR mood<=25 | economic-crisis |
- * | CIVIC (mig) | |migration|>250 | demographic |
- * | INFRASTRUCTURE | weather.impact>=1.5 | crisis |
- * | SAFETY | severity=high OR sentiment<=-0.5 | pattern-wave |
- * | ENVIRONMENT | weather.impact>=1.6 | crisis |
- *
- * ============================================================================
+ * Resolution-condition prose per domain (v2.6 shape, retained — consumers
+ * render it in neighborhood packets).
  */
+function getResolutionConditions_(category) {
+  var conditions = {
+    'HEALTH': { naturalResolution: 'hospitalization cluster clears', timeToResolve: '3-6 cycles', accelerators: ['improved weather', 'treatment rollout'] },
+    'ECONOMIC': { naturalResolution: 'retail vitality returns to city range', timeToResolve: '4-8 cycles', accelerators: ['new investment', 'holiday shopping'] },
+    'CIVIC': { naturalResolution: 'conditions return to city range', timeToResolve: '5-10 cycles', accelerators: ['housing availability', 'community programs'] },
+    'INFRASTRUCTURE': { naturalResolution: 'weather/transit normalize', timeToResolve: '2-4 cycles', accelerators: ['weather improvement', 'repair completion'] },
+    'SAFETY': { naturalResolution: 'crime pressure subsides', timeToResolve: '3-5 cycles', accelerators: ['community engagement', 'patrols'] },
+    'ENVIRONMENT': { naturalResolution: 'weather normalizes', timeToResolve: '2-5 cycles', accelerators: ['rain', 'cleanup efforts'] }
+  };
+  return conditions[category] || { naturalResolution: 'conditions improve', timeToResolve: '4-8 cycles', accelerators: [] };
+}

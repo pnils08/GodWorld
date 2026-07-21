@@ -49,7 +49,9 @@ var CONTRACT_SEED_DOMAIN = {
   'youth-event': 'COMMUNITY',        // school-wide events (graduation/homecoming/kickoff)
   // engine.70 (S327) — weather and transit enter the story surface:
   'weather-event': 'SAFETY',         // storm/flood/heat-wave + coupled citizen/business hits
-  'transit-event': 'CIVIC'           // service-disruption / gridlock-day
+  'transit-event': 'CIVIC',          // service-disruption / gridlock-day
+  // engine.71 (S327) — detected neighborhood crises (onset/peak/resolved):
+  'crisis-event': 'SAFETY'
 };
 
 // Desk routing (T4 purpose, in-sheet): which desk's packet this row belongs to.

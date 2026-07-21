@@ -142,7 +142,23 @@ function seedRelationshipBonds_(ctx) {
   
   var bonds = [];
   var bondSet = {};  // Track to avoid duplicates
-  
+
+  // engine.72 G-EC54 (Mags ruling, Mike-delegated S328): bonds are a DURABLE
+  // GRAPH, not per-cycle weather. Preload the dedup set with every bond
+  // loadRelationshipBonds_ already restored, so seeding only ever TOPS UP
+  // pairs that don't exist — it never re-rolls a citizen's people. Before
+  // this, any cycle under the 500 threshold rebuilt the whole graph and the
+  // store step below clobbered the loaded set (~70% of relationships lasted
+  // one cycle, C101→C102 overlap 89/338).
+  var existingBonds = ctx.summary.relationshipBonds || [];
+  for (var eb = 0; eb < existingBonds.length; eb++) {
+    var ex = existingBonds[eb];
+    var exA = String(ex.citizenA || '').trim().toUpperCase();
+    var exB = String(ex.citizenB || '').trim().toUpperCase();
+    if (exA && exB) bondSet[makeBondKey_(exA, exB)] = true;
+  }
+  Logger.log('seedRelationshipBonds_: Preserving ' + existingBonds.length + ' existing bonds (durable graph)');
+
   // ═══════════════════════════════════════════════════════════════════════════
   // PHASE 1: FAMILY BONDS (from household groupings)
   // ═══════════════════════════════════════════════════════════════════════════
@@ -345,9 +361,11 @@ function seedRelationshipBonds_(ctx) {
       });
     }
 
-    // Populate ctx.summary.relationshipBonds so saveRelationshipBonds_ writes them
-    ctx.summary.relationshipBonds = persistBonds;
-    Logger.log('seedRelationshipBonds_: Stored ' + persistBonds.length + ' bonds in ctx.summary.relationshipBonds');
+    // engine.72 G-EC54: APPEND to the loaded durable graph — never replace.
+    // saveRelationshipBonds_ writes the merged set.
+    ctx.summary.relationshipBonds = (ctx.summary.relationshipBonds || []).concat(persistBonds);
+    Logger.log('seedRelationshipBonds_: Merged ' + persistBonds.length + ' new seed bonds into ' +
+      existingBonds.length + ' existing — total ' + ctx.summary.relationshipBonds.length);
   }
 
   // Store summary in context

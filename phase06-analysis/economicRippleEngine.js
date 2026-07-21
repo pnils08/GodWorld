@@ -336,8 +336,10 @@ function detectCareerRipples_(ctx, currentCycle) {
 
 // v2.5: Map Business_Ledger neighborhood names to Ripple Engine canonical names
 function mapToCanonicalNeighborhood_(blNeighborhood) {
+  // S328: East Oakland promoted to its own slot (Mike-direct — represented,
+  // not folded into Fruitvale).
   var canonical = ['Downtown', 'Jack London', 'Rockridge', 'Temescal', 'Fruitvale',
-    'Lake Merritt', 'West Oakland', 'Laurel', 'Chinatown', 'Grand Lake'];
+    'Lake Merritt', 'West Oakland', 'Laurel', 'Chinatown', 'Grand Lake', 'East Oakland'];
   var n = (blNeighborhood || '').trim();
   for (var i = 0; i < canonical.length; i++) {
     if (n === canonical[i] || n.indexOf(canonical[i]) >= 0) return canonical[i];
@@ -345,7 +347,6 @@ function mapToCanonicalNeighborhood_(blNeighborhood) {
   if (n === 'Old Oakland' || n === 'Uptown' || n === 'KONO') return 'Downtown';
   if (n === 'Brooklyn Basin' || n === 'Baylight District' || n === 'Coliseum') return 'Jack London';
   if (n === 'Piedmont Avenue') return 'Rockridge';
-  if (n === 'East Oakland') return 'Fruitvale';
   if (n === 'City-wide') return 'Downtown';
   return null;
 }

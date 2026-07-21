@@ -442,6 +442,14 @@ function processFeedSheet_(sheet, currentCycle) {
   for (var teamName in teamState) {
     var state = teamState[teamName];
 
+    // engine.75 (S328, Mike-direct): only teams with a row in the CURRENT
+    // cycle speak. The carry-forward state map never aged teams out, so
+    // "NBA" (legacy label, last row C92, pre-Oaks branding — one row with a
+    // date string in the record column) kept injecting sentiment at its
+    // stale playoffs x2 multiplier and firing phantom breaking-news
+    // triggers every cycle for 10+ cycles.
+    if (currentCycle > 0 && state.cycle !== currentCycle) continue;
+
     // 1. Base sentiment from win percentage (-0.03 to +0.03)
     var baseSentiment = 0;
     var winPct = parseWinPercentage_(state.record);

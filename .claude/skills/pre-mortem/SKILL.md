@@ -120,8 +120,8 @@ Scan all engine files for neighborhood string literals. **GodWorld neighborhoods
 **Citizen layer (Simulation_Ledger) — canon-12.** Where citizens live. Source-of-truth canonical:
 `Temescal, Downtown, Fruitvale, Lake Merritt, West Oakland, Laurel, Rockridge, Jack London, Uptown, KONO, Chinatown, Piedmont Ave`
 
-**World-state layer (Neighborhood_Map sheet) — 17 fine-grained children.** Demographic / wealth / festival / migration tracking buckets:
-`Adams Point, Brooklyn, Chinatown, Dimond, Downtown, Eastlake, Fruitvale, Glenview, Grand Lake, Ivy Hill, Jack London, Laurel, Piedmont Ave, Rockridge, San Antonio, Temescal, West Oakland`
+**World-state layer (Neighborhood_Map sheet) — 22 hoods (S328).** Demographic / wealth / festival / migration tracking buckets (canonical source: `lib/canonNeighborhoods.js` MAP_NEIGHBORHOODS):
+`Adams Point, Baylight District, Brooklyn, Chinatown, Dimond, Downtown, East Oakland, Eastlake, Fruitvale, Glenview, Grand Lake, Ivy Hill, Jack London, KONO, Lake Merritt, Laurel, Piedmont Ave, Rockridge, San Antonio, Temescal, Uptown, West Oakland`
 
 The two layers are connected by parent-child mapping (encoded inline at `phase05-citizens/checkForPromotions.js:190-209`):
 - Lake Merritt ← Adams Point, Grand Lake, Lakeshore, Eastlake
@@ -138,7 +138,7 @@ The two layers are connected by parent-child mapping (encoded inline at `phase05
 
 NOT warnings: `Eastlake`, `San Antonio`, `Glenview`, `Ivy Hill`, `Adams Point`, `Brooklyn`, `Dimond`, `Grand Lake` (all valid world-state children); `KONO`, `Lake Merritt`, `Uptown` (all valid canon-parents).
 
-WARNINGS: anything outside both lists, e.g. `Coliseum District` (transit area, not a neighborhood), `Elmhurst`, `Jingletown`, `East Oakland` (legacy stray — not a row in Neighborhood_Map), `HH-KEANE` (household ID leaked into Neighborhood column).
+WARNINGS: anything outside both lists, e.g. `Coliseum District` (transit area, not a neighborhood), `Elmhurst`, `Jingletown`, `HH-KEANE` (household ID leaked into Neighborhood column). (`East Oakland` canonized S328 — Mike-direct: legit Oakland land mass, no longer a stray.)
 
 ### 6. Write-Intent Target Validation (MANUAL — script does NOT check this)
 Scan Phase 10 persistence files for write-intent processing. Check that every target sheet name referenced in write-intent handlers matches an actual sheet. A write-intent targeting a non-existent sheet is a silent failure — the data just disappears.

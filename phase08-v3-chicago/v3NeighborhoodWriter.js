@@ -54,7 +54,13 @@ var NMAP_NEIGHBORHOODS = [
   // already live but Neighborhood_Map had no row (live set-difference: Lake Merritt 98,
   // Uptown 89 residents) + Baylight District (INIT-006 $2.1B Coliseum redevelopment;
   // forward-looking row, low residents now, grows as the build completes). Mike-approved.
-  'Lake Merritt', 'Uptown', 'Baylight District'
+  'Lake Merritt', 'Uptown', 'Baylight District',
+  // S328 (Mike-direct): East Oakland is legit Oakland land mass — represent it.
+  // Half the engine already spoke it (crime profiles, OARI + Youth Apprenticeship
+  // affected hoods, civic approvals, a faith org) while the map excluded it as a
+  // "legacy stray." Canonized instead of fought — the training data keeps
+  // producing it because it's real geography.
+  'East Oakland'
 ];
 
 // engine.33 pulse fold constants — citizen events accumulated at emit time
@@ -283,7 +289,12 @@ function saveV3NeighborhoodMap_(ctx) {
     'Uptown': { nightlifeMod: 1.25, noiseMod: 1.2, crimeMod: 1.0, retailMod: 1.2, eventMod: 1.25, sentimentMod: 0.02 },
     // Baylight District — under-construction remediation zone: quiet retail/nightlife now,
     // construction noise, investment optimism in sentiment. Profile rises as the build completes.
-    'Baylight District': { nightlifeMod: 0.5, noiseMod: 1.3, crimeMod: 0.9, retailMod: 0.5, eventMod: 0.6, sentimentMod: 0.04 }
+    'Baylight District': { nightlifeMod: 0.5, noiseMod: 1.3, crimeMod: 0.9, retailMod: 0.5, eventMod: 0.6, sentimentMod: 0.04 },
+    // S328 (Mike-direct) — East Oakland: the broad east flatlands. Working-class,
+    // wide geography, OARI + Youth Apprenticeship ground; crime profile already
+    // existed in ensureCrimeMetrics so the physics-derived CrimeIndex has real
+    // per-hood data from cycle one.
+    'East Oakland': { nightlifeMod: 0.8, noiseMod: 1.0, crimeMod: 1.2, retailMod: 0.8, eventMod: 0.8, sentimentMod: -0.03 }
   };
 
   // Holiday / calendar neighborhood boosts

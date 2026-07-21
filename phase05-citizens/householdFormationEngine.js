@@ -266,6 +266,18 @@ function processHouseholdFormation_(ctx) {
 // same rate as the engine's off-camera spouse pricing (GC_SPOUSE_INCOME).
 var GENERIC_OFFCAM_INCOME = 48000;
 
+// engine.73 (S328, Mike-direct): solo establishment. Household = 2+ group by
+// doctrine; the one exception is an ESTABLISHED single — Tier <=3 AND income
+// >= the floor — who rolls a per-cycle chance to form a household of one
+// (type 'solo'). This is an event in a life (coverable), not a stamp, and it
+// unlocks the household-only physics (home purchase, savings, relocation).
+// Gate sized S328: 67 of 358 unhoused true-singles eligible (~19%); at 10%
+// chance that's a ~6-7/cycle trickle. Solo households do NOT register in
+// Family_Relationships (that ledger is families with on-camera members).
+var SOLO_TIER_MAX = 3;
+var SOLO_INCOME_FLOOR = 85000;
+var SOLO_ESTABLISH_CHANCE = 0.10;
+
 /**
  * engine.64 (S322, Mike-direct) — criteria household formation.
  *
@@ -286,7 +298,8 @@ var GENERIC_OFFCAM_INCOME = 48000;
  *    S322): anything they made is truth this function routes around.
  */
 function formCriteriaHouseholds_(ctx, households, cycle) {
-  var out = { formed: 0, adopted: 0 };
+  var out = { formed: 0, adopted: 0, solo: 0 };
+  var rng = safeRand_(ctx); // engine.73: solo establishment dice
   var headers = ctx.ledger.headers;
   var rows = ctx.ledger.rows;
   var idx = function(n) { return headers.indexOf(n); };
@@ -316,7 +329,8 @@ function formCriteriaHouseholds_(ctx, households, cycle) {
   var FORMS_STATUS = { active: true, retired: true, recovering: true };
   var iFirstC = idx('First'), iLastC = idx('Last'), iStatusC = idx('Status'),
       iBirthC = idx('BirthYear'), iNbhdC = idx('Neighborhood'),
-      iMarC = idx('MaritalStatus'), iParC = idx('ParentIds'), iChC = idx('ChildrenIds');
+      iMarC = idx('MaritalStatus'), iParC = idx('ParentIds'), iChC = idx('ChildrenIds'),
+      iTierC = idx('Tier'), iGenC = idx('Gender'); // engine.73: solo gate + registry format
   var parseArr = function(v) { try { var a = JSON.parse(String(v || '[]')); return Array.isArray(a) ? a : []; } catch (e) { return []; } };
   var citizens = [];
   for (var cr = 0; cr < rows.length; cr++) {
@@ -326,6 +340,9 @@ function formCriteriaHouseholds_(ctx, households, cycle) {
     citizens.push({
       ledgerIndex: cr,
       popId: crow[iPop] || '',
+      name: ((iFirstC >= 0 ? crow[iFirstC] || '' : '') + ' ' + (iLastC >= 0 ? crow[iLastC] || '' : '')).trim(),
+      gender: iGenC >= 0 ? String(crow[iGenC] || '').toLowerCase() : '',
+      tier: iTierC >= 0 ? (Number(crow[iTierC]) || 4) : 4,
       birthYear: crow[iBirthC] || 2000,
       neighborhood: iNbhdC >= 0 ? (crow[iNbhdC] || '') : '',
       maritalStatus: iMarC >= 0 ? (crow[iMarC] || 'single') : 'single',
@@ -360,9 +377,32 @@ function formCriteriaHouseholds_(ctx, households, cycle) {
       if (kid && !liveHH(kid)) onKids.push(String(kid.popId).trim());
     }
     var orphanMinor = age < 18 && !(cz.parentIds || []).length;
-    if (!married && !(age >= 18 && onKids.length) && !orphanMinor) continue;
-
     var ownInc = iInc >= 0 ? (Number(String(rows[cz.ledgerIndex][iInc]).replace(/[$,\s]/g, '')) || 0) : 0;
+
+    if (!married && !(age >= 18 && onKids.length) && !orphanMinor) {
+      // engine.73 solo establishment — the one non-group door, gated + diced.
+      if (age >= 18 && cz.tier <= SOLO_TIER_MAX && ownInc >= SOLO_INCOME_FLOOR &&
+          rng() < SOLO_ESTABLISH_CHANCE) {
+        var soloId = 'HH-' + String(cycle).padStart(4, '0') + '-F' + String(++seq).padStart(3, '0');
+        var soloVals = {
+          HouseholdId: soloId, HeadOfHousehold: pop, HouseholdType: 'solo',
+          Members: JSON.stringify([pop]), Neighborhood: cz.neighborhood || 'Downtown',
+          HousingType: 'rented',
+          MonthlyRent: (typeof estimateRent_ === 'function') ? estimateRent_(cz.neighborhood) : 1700,
+          HouseholdIncome: ownInc, FormedCycle: cycle, Status: 'active'
+        };
+        var soloRow = new Array(hHead.length).fill('');
+        for (var sc = 0; sc < hHead.length; sc++) {
+          if (soloVals[hHead[sc]] !== undefined) soloRow[sc] = soloVals[hHead[sc]];
+        }
+        sheet.appendRow(soloRow);
+        rows[cz.ledgerIndex][iHH] = soloId;
+        ctx.ledger.dirty = true;
+        out.solo = (out.solo || 0) + 1;
+      }
+      continue;
+    }
+
     var members = [pop];
     var income = ownInc;
     var type = 'couple';
@@ -390,12 +430,34 @@ function formCriteriaHouseholds_(ctx, households, cycle) {
       var mc = byPop[members[m2]];
       if (mc && !liveHH(mc)) rows[mc.ledgerIndex][iHH] = hhId;
     }
+
+    // engine.73 register hook: criteria formations with on-camera family now
+    // land in Family_Relationships (Mike's format — names beside IDs). Before
+    // this, only live bondEngine weddings / single-parent formations / births
+    // registered; bulk criteria households never did (88/103 family-linked
+    // citizens were missing from the registry, S328 measure).
+    var regSheet = ctx.ss.getSheetByName('Family_Relationships');
+    if (regSheet) {
+      var headLabel = pop + (cz.name ? ' ' + cz.name : '');
+      var husband = cz.gender === 'male' ? headLabel : '';
+      var wife = cz.gender === 'female' ? headLabel : '';
+      if (!husband && !wife) { husband = headLabel; } // unknown gender — head goes in col B
+      var relType = married ? 'married' : 'single-parent';
+      var childCells = ['', '', '', '', ''];
+      for (var ck = 0; ck < onKids.length && ck < 5; ck++) {
+        var kidC = byPop[onKids[ck]];
+        childCells[ck] = onKids[ck] + (kidC && kidC.name ? ' ' + kidC.name : '');
+      }
+      regSheet.appendRow([hhId, husband, wife, relType, cycle, 'active',
+        childCells[0], childCells[1], childCells[2], childCells[3], childCells[4]]);
+    }
+
     ctx.ledger.dirty = true;
     out.formed++;
   }
 
-  if (out.formed || out.adopted) {
-    Logger.log('formCriteriaHouseholds_ engine.64: formed ' + out.formed + ', adopted ' + out.adopted);
+  if (out.formed || out.adopted || out.solo) {
+    Logger.log('formCriteriaHouseholds_ engine.64: formed ' + out.formed + ', adopted ' + out.adopted + ', solo ' + (out.solo || 0));
   }
   return out;
 }
@@ -524,7 +586,8 @@ function reconcileHouseholds_(ctx, cycle) {
   var idx = function(n) { return header.indexOf(n); };
   var iPOPID = idx('POPID'), iLast = idx('Last'), iStatus = idx('Status'),
       iNeighborhood = idx('Neighborhood'), iHH = idx('HouseholdId'),
-      iMarital = idx('MaritalStatus'), iBirthYear = idx('BirthYear');
+      iMarital = idx('MaritalStatus'), iBirthYear = idx('BirthYear'),
+      iTierRec = idx('Tier'), iIncomeRec = idx('Income'); // engine.73: solo typing
   if (iPOPID < 0 || iHH < 0) return out;
   var simYear = 2040 + Math.floor(cycle / 52);
 
@@ -658,7 +721,17 @@ function reconcileHouseholds_(ctx, cycle) {
           newType = 'couple';
         } else {
           var headMar = headRow && iMarital >= 0 ? String(headRow[iMarital] || '').toLowerCase() : '';
-          newType = (headMar === 'married' || headMar === 'partnered') ? 'couple' : 'single';
+          if (headMar === 'married' || headMar === 'partnered') {
+            newType = 'couple';
+          } else {
+            // engine.73: an established single (Tier <= SOLO_TIER_MAX, income
+            // >= SOLO_INCOME_FLOOR) legitimately holds a household of one —
+            // type 'solo'. Below the gate stays 'single' (visible debt,
+            // NOT auto-dissolved), unchanged from engine.57.
+            var recTier = headRow && iTierRec >= 0 ? (Number(headRow[iTierRec]) || 4) : 4;
+            var recInc = headRow && iIncomeRec >= 0 ? (Number(String(headRow[iIncomeRec]).replace(/[$,\s]/g, '')) || 0) : 0;
+            newType = (recTier <= SOLO_TIER_MAX && recInc >= SOLO_INCOME_FLOOR) ? 'solo' : 'single';
+          }
         }
         if (lrow[lType] !== newType) { lrow[lType] = newType; rowChanged = true; }
       }

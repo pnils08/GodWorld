@@ -50,11 +50,25 @@ sandbox is the intended target for anything unverified.
 - Bound Apps Script ID: `1ntl6YwpLt-KwIX7HWCU-swMk-cGQ8aZR0aKNh5qUjz93m4OPUVhIB5nV`
 - Code pushed at S328 (HEAD 8ab5a591, temp-dir route, sandbox `.clasp.json` ID grep-verified). Service-account read access verified from Node.
 - SIM_SSID Script Property set (Mike, S328).
-- **Groundhog workflow (Mike-direct S328):** the trigger token exists so the TERMINAL runs the proving loop itself — push to bench → bump deployment → fire via web-app GET → verify → deploy proven code to live. Mike then reverts the sandbox to live-equivalent state for the next build, knowing the codebase is current and tested.
-- Web-app deployment `AKfycbztm3ZXPO-V43KICxyFGJKS63jkZQJqATBotcuynuL9yl4lty3kaaO1YpYW4WUIMStq` @1 (S328 initial: HEAD 8ab5a591). Fire: GET `https://script.google.com/macros/s/AKfycbztm3ZXPO…/exec?token=<CYCLE_TRIGGER_TOKEN>`. **WARNING: any valid-token GET fires a FULL cycle — no ping mode.**
-- **CYCLE_TRIGGER_TOKEN: Mike copies the property value from 0717's Script Properties into 0720's** (properties don't copy with the sheet; same token as 0717/0716c lineage).
+- Web-app deployment `AKfycbztm3ZXPO-V43KICxyFGJKS63jkZQJqATBotcuynuL9yl4lty3kaaO1YpYW4WUIMStq` @1 (S328 initial: HEAD 8ab5a591). CYCLE_TRIGGER_TOKEN set (Mike, S328 — 0717/0716c lineage value; properties don't copy with the sheet).
 - Staging dir `sandbox-0720` (recreated per-session in scratchpad via `git archive HEAD`).
-- **⚠️ `clasp push` alone does NOT change what the web-app fires (S325 incident)** — the deployment serves a PINNED version; bump after every push: `CLAUDE_CTL=1 npx clasp deploy --deploymentId AKfycbztm3… --description "<change>"`.
+- S328 proving fires C103–C105 (Row 24 release 25→17→13 promotions, crisis detection C104, faith-join, 0 errors ×3).
+
+### Groundhog proving loop (Mike-direct S328 — how engine waves ship)
+
+The trigger token exists so the TERMINAL runs the proving loop itself, no Mike in the loop until the live fire:
+
+1. **Build** on main, commit as-you-go.
+2. **Push to bench** via the temp-dir route (sandbox `.clasp.json` written LAST, ID grep-verified — S316 gotcha).
+3. **Bump the deployment** — `CLAUDE_CTL=1 npx clasp deploy --deploymentId AKfycbztm3… --description "<change>"`. **⚠️ `clasp push` alone does NOT change what the web-app fires (S325 incident)** — the deployment serves a PINNED version.
+4. **Fire:** GET `https://script.google.com/macros/s/<deploymentId>/exec?token=<CYCLE_TRIGGER_TOKEN>`. Returns `{ok, ranMs, diag…}` JSON. **WARNING: any valid-token GET fires a FULL cycle — no ping mode.** Ask Mike for the Apps Script execution log when the JSON isn't enough.
+5. **Verify** against the sandbox sheet via service account (explicit sheet ID — env default points at PROD). Run as many groundhog cycles as the change needs; repeat 2–5 until clean.
+6. **Deploy proven code to live** (repo-root `CLAUDE_CTL=1 npx clasp push`, /deploy pre-flight).
+7. **Mike reverts the sandbox to live-equivalent state** for the next build wave, knowing the codebase is current and tested.
+
+**Sheet writes are a different animal (Mike-direct S328): anything not in CODE does not carry over.** A `clasp push` to live carries code only. Schema changes, new tabs, column adds, data migrations, backfills — anything written to the SANDBOX SHEET during proving — must be **replayed against the live sheet explicitly** (dry-run → apply → read-back verify, per protocol step 5). Track every bench-side sheet write during a wave and replay it at the live deploy, or live runs new code against old schema. Self-arming schema code (ensure*Schema_ patterns) re-arms itself on live's first fire and needs no replay — everything else does.
+
+**PropertiesService is per-script (S328 finding):** prev-cycle state (PREV_EVENING_JSON etc.) does not copy with the sheet. A fresh bench's FIRST fire is a cold start — carry-dependent channels (hospital→crisis detection, streak-gated weather alerts, prevRate) only prove from the SECOND bench fire on. Don't read a quiet first fire as a failed channel.
 
 **RETIRED: `SANDBOX 0717` — GROUNDHOG BENCH (S322→S327; retired S328, superseded by post-C102 live copy).** Served the C102 groundhog era: engine.64/.64b proving (93 households, 0 errors), engine.70/71 + Row-24 proving fires C112–C117, bench closed at abs C117 @31. Live C102 (2026-07-20) is the canonical continuation; this bench's state predates it.
 - Spreadsheet ID `1ZP9kiwjXngDNqOtnRby9jGxFZnSahpP3T9SLnJoTwS8`

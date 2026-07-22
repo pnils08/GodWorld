@@ -66,6 +66,16 @@ Output: `output/voice-disposition-cache/<POPID>.md` (phrase + `Refreshed: c{XX}`
 
 **Gate:** All cache files' `Refreshed:` stamp shows c{XX}.
 
+### Step 5.57: World-state fold (engine.76 W3)
+
+Fold the cycle's cron-consumer inputs into the single artifact the 24/7 loops read — `output/world_state.json`. Deterministic assembler, no LLM: live Riley_Digest orientation + base_context canon (staleness-flagged) + Step 5.5 hood blocks + Step 5.55 dispositions + pointers to the deep artifacts. Consumers: mags-discord-bot / discord-reflection (`lib/mags.loadWorldState`), citizen-wake + citizen-exchange (`lib/wakePerception.loadNeighborhoodTexture`), cron-desk-writer fallback path. All consumers fail back to the pre-W3 per-file reads if the fold is absent or cycle-mismatched.
+
+```bash
+node scripts/buildWorldState.js {XX}
+```
+
+**Gate:** Script prints `wrote .../world_state.json` with cycle {XX} + hood/disposition counts.
+
 ### Step 5.6: Content-ledger drafter (engine.49 T4)
 
 Draft condition-gated Event_Content_Ledger rows from what this cycle actually produced (Story_Seed_Deck seeds, Neighborhood_Map pressures, Cycle_Seeds weather/holiday). Cheap-helper LLM (OpenRouter deepseek default), never premium tokens.

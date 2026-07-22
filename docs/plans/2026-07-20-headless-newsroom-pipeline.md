@@ -1,7 +1,7 @@
 ---
 title: Headless Newsroom + City-Hall Pipeline Plan
 created: 2026-07-20
-updated: 2026-07-20
+updated: 2026-07-22
 type: plan
 tags: [architecture, media, civic, infrastructure, active]
 sources:
@@ -81,11 +81,43 @@ The provable increment: one desk produces a **scored, canon-gated** headless dra
 - **Verify:** one invocation yields a draft + scorecard + rhea verdict, routed to `published/` or `flagged/`.
 - **Status:** [x] DONE (S325). `scripts/cron-desk-run.js` chains writer → gate → route + a combined `.run.json`. Verified: business desk → DeepSeek write ($0.003) → **Haiku gate** ($0.145) → routed to `flagged/` (3 high-severity invented numeric claims). **Bonus — Haiku-gate cost test passed:** ~5× cheaper than Sonnet ($0.145 vs $0.76) and still caught fabrications the writer self-score missed. Phase 1 COMPLETE (Tasks 1–4).
 
-### Phase 2.0 — angle assignment (NEXT staged build, Mike-direct S325)  *(research-build; the daily rhythm's first step)*
-A daily assignment pass over the **31-name journalist roster + beat map**: read the open storylines (civic/sports/culture/…), assign angles to reporters so N reporters don't all write the same one, and hand each reporter its angle. Reporters may **take the assigned angle or generate their own**. Depends on: **byline deep-fix (31-name roster + beat map)** + **PoolKey policy** — both research-build/W5 (`.claude/agents/REPORTER_DESK_INDEX.md` is the current roster). Feeds Phase 2 (the reporter wakes carry an assigned angle into `cron-desk-run.js`). Build after Phase 1 is tied up.
+### Design note — what the cron hands a reporter: four layers (S330, Mike-direct)
+
+The S325 "angle-assignment stage" premise is **superseded**. The C101 cron test settled it empirically: `cron-desk-writer.js` handed DeepSeek the *whole* `world_summary_c101.md` with **no angle**, and it found four real stories unassisted (Abraham GM hire, Richards trade, Keane gala, Clark call-up). **The reporter does not need an angle handed to it — it finds one.** It failed on two other things (invented quote-sources Marcus Wong / Carlos Nuñez / Lupe Hernandez; raw `Mood`/`FanSentiment` leaks). So the engine's job is NOT to pick the story — it's to do the free, deterministic work that makes the reporter's find *correct and distributed*. This is the locked charge-brief rule (ADR-0012): **engine assists WHO writes and WHAT-happened-in-the-beat; never WHAT-to-say.** Four layers:
+
+| # | Layer | Who does it | Cost | Home |
+|---|---|---|---|---|
+| 1 | **WHO writes** — byline candidate + rotation so the same name doesn't write everything | Engine (this Phase 2.0) | Free | W5 half 2, research-build design → engine-sheet build |
+| 2 | **WHAT's in your beat** — per-desk signal partition; pointers so e.g. the culture desk *knows the hot restaurant exists* instead of self-filtering the 40k blob | Engine | Free | W5 half 1, engine.76 (engine-sheet, in-progress) |
+| 3 | **The angle / the take** — found from the layer-2 pointers + `source-search` depth + the reporter's life experience | Reporter, desk-side | The paid LLM | locked charge rule; proven in the C101 test |
+| 4 | **Real quotes** — reporter interviews the actual affected citizen crons instead of inventing sources | Engine (`citizenVoice.js --batch`) | ~pennies | **pipeline.43, already built**; needs headless wiring (Phase 2) |
+
+Anti-hallucination is two lines of defense: **layer 4 prevents** invented sources (real quotes supplied up front), the **Rhea gate catches** whatever slips. The S325 "PoolKey policy" dependency is **dropped** — PoolKey is a content-ledger/event-pool namespace, unrelated to byline/angle, and appears nowhere in W5 as defined S329.
+
+### Phase 2.0 — byline WHO-assist spec (layer 1)  *(research-build designs → engine-sheet builds; W5 half 2)*
+
+The WHO-assist: un-silence byline Engine B so every story gets a beat-matched byline candidate distributed across the **full** roster and weighted so over-used names get suppressed and the dark bylines get work. Stories/angles stay desk-side (layers 2–3). **This is a design/spec deliverable — engine-sheet edits the substrate; research-build writes no new script here.**
+
+**What's already done (don't rebuild):**
+- **Reader fix — engine.78c (S329):** `/sift` byline shadow-log now reads `SuggestedJournalist` (v4.2 deck) with `BylineCandidate` legacy fallback. The C101 `8/8 engine_silent` was this reader bug (sift read only the legacy column, absent on the v4.2 deck) — fixed. So the candidate now *surfaces*; this phase makes it *good*.
+- **Cadence math — `utilities/bylineEngine.js` `cadenceMultiplier_`:** the suppression curve already exists (knee `CADENCE_CAP_KNEE=0.20` → cap `CADENCE_CAP_RATIO=0.25` → floor `CADENCE_CAP_FLOOR=0.3`). It is **starved, not unbuilt** — the caller passes `cadence: null`, so it returns 1.0 and suppresses nothing.
+
+**The two real fixes (engine-sheet build against these seams):**
+- **A — Roster expansion.** `phase07-evening-media/applyStorySeeds.js:369` builds `bylineState.roster` from `rosterLookup.js`, which carries only the ~19 reporters mapped in `.claude/agents/REPORTER_DESK_INDEX.md`. The ~14 never-routed **Bay_Tribune_Oakland** staff (the canonical POPID-linked roster, ~29 rows) have no scorable `{themes, desk}` entry, so they can never win. Fix: source the roster from the **Bay_Tribune_Oakland** tab (POPID-linked), giving every staffer a beat/theme profile (beats from `REPORTER_DESK_INDEX` + voice files; new staffers need a beat assigned). Bind exact column headers against the live tab at build (engine-sheet owns it).
+- **B — Cadence activation.** Populate `state.cadence` (per-byline usage counts) from `byline_shadow_log_c{N}.json` history — `finalAssignment` counts across recent cycles — and pass it + `totalSeeds` into `scoreAllBylines_`. The existing multiplier then suppresses over-routed bylines automatically. No new math; wire the input.
+
+**Output contract (unchanged surface):** Engine B writes `SuggestedJournalist` / `MatchConfidence` per seed on the deck (already the v4.2 contract); the shadow log records `engineCandidate` + `outcome` (`agree`/`override`/`engine_silent`). Angles are never written by the engine.
+
+**Acceptance:**
+1. A cycle's `byline_shadow_log_c{N}.json` shows `engineCandidate` populated on matched seeds — `engine_silent` is the exception, not the rule (regression flag if mostly-silent).
+2. Candidates span the full Bay_Tribune_Oakland roster — at least some of the previously-dark ~14 staff appear over a few cycles.
+3. No single byline exceeds the cadence cap (`checkBylineCadence.js` passes) once `state.cadence` is fed.
+4. Zero angle/story content emitted by the engine — WHO only.
 
 ### Phase 2 — daily writer-wakes → canon accrual (M–F)  *(research-build + engine-sheet; split to sub-plan)*
-The continuous half. A per-wake cron (reuse the citizen-wake schedule) that, for each active journalist: pick an open storyline/angle in the beat (via `source-search`), write 1+ articles (Task 4 chain per article, model per `desk-model-map`), Rhea-gate each, and **ingest passing articles to canon** (the article becomes world state; flagged → `flagged/`). Runs M–F. Acceptance: over a week, N civic storylines yield N+ canon-ingested, gated articles from multiple angles, no human prompt.
+The continuous half. A per-wake cron (reuse the citizen-wake schedule) that, for each active journalist: consume the **layer-2 per-desk signal partition** (the beat's pointers for the cycle — so the reporter knows what happened in its lane without self-filtering the whole world_summary), find an angle in the beat (via `source-search`), write 1+ articles (Task 4 chain per article, byline per the Phase 2.0 WHO-assist, model per `desk-model-map`), Rhea-gate each, and **ingest passing articles to canon** (the article becomes world state; flagged → `flagged/`). Runs M–F. Acceptance: over a week, N civic storylines yield N+ canon-ingested, gated articles from multiple angles, no human prompt.
+
+**Layer-4 wiring — real quotes in the headless path (Mike-direct S330).** The C101 test invented sources (Marcus Wong et al.) *only* because `cron-desk-writer.js` is a raw compose-from-injected-state call and never runs the **pipeline.43 citizen-quote pre-pass** that interactive `/write-edition` already runs at Step 0.7. Fix: before the desk writer composes, run `node scripts/citizenVoice.js --batch=<asks>.json` (built + live-verified S312) for the story's affected citizens — real POPID-linked citizen crons speak from their own dials/bonds/tensions/page memory, ~pennies per call, recording a `daypart='PRESS'` page doc + gated intake row per [[2026-07-11-citizen-voice-quote-supply]]. Inject the returned verbatim lines into the writer prompt as supplied citizen lines; in-scene invention demotes to fallback (citizens with no DialState / scene extras). This is the *prevention* layer; the Rhea gate stays as the *catch* backstop. Design: port `/write-edition` Step 0.7 into the cron path — no new quote machinery, the mechanism exists.
 
 ### Phase 2b — Saturday edition compile  *(research-build; sub-plan)*
 The curatorial half. A Saturday cron where **Mags compiles**: `/sift`-style curation over the week's canon-ingested articles → pick the top stories → assemble edition → `/post-publish`. The edition is a curation of what already hit canon, not a fresh generation. Acceptance: one Saturday run produces an edition from the week's accrued canon articles.
@@ -104,10 +136,12 @@ Aggregate scorecards across the accrued articles to answer Feedback1.txt's per-d
 - [ ] **Publish target under the re-opening freeze** (blocks Phase 2): does the headless edition publish live, or to a review holding area? The S313 freeze is only now re-opening via Mike's direction — proposed default is holding-area until the scorecard shows edit-not-rewrite quality.
 - [ ] **Which desks are "voice-critical" vs "routine"** (blocks Task 3): Feedback1.txt names Hal Richmond/Mags/investigative/editorial as Sonnet; confirm the full split with Mike.
 - [ ] **Canon-ingest mechanism** (blocks Phase 2): how does a gated article "hit canon" — which store (Supermemory/canon container? a canon articles ledger? the sim ledger?) and in what form (full text? claims? a storyline update?), so Mags' Saturday compile and future reporters can retrieve it. Needs a design pass.
-- [x] **Angle assignment** — RESOLVED (Mike-direct S325): a dedicated **assignment stage** assigns the 31-name journalist roster (per beat map) to angles from the open storylines; each reporter then **uses its assigned angle OR generates its own**. This is the next staged build after Phase 1 is tied up → see Phase 2.0. Depends on the **byline deep-fix (31-name roster + beat map)** and **PoolKey policy** — both research-build/W5. Current roster: `.claude/agents/REPORTER_DESK_INDEX.md`.
+- [x] **Angle assignment** — RE-RESOLVED (Mike-direct S330, supersedes the S325 answer): there is **no angle-assignment stage**. The C101 cron test proved the reporter finds its own angle from injected state, and the locked charge rule (ADR-0012, engine.76/W5) fixes "engine assists WHO + WHAT-happened, never WHAT-to-say." The engine's structure is layers 1 (byline WHO — Phase 2.0) + 2 (per-desk signal partition WHAT — W5 half 1); the angle stays desk-side (layer 3). The S325 "PoolKey policy" dependency is **dropped** (content-ledger concept, not in W5). See the Design note above Phase 2.0.
+- [x] **Citizen-quote hallucination fix** — RESOLVED (Mike-direct S330): reporters interview real citizen crons (`citizenVoice.js --batch`, pipeline.43 — built) instead of inventing sources. Gap is headless wiring only — see Phase 2 layer-4 wiring.
 
 ---
 
 ## Changelog
 
 - 2026-07-20 — Initial draft (S325). Research basis [[../research/2026-07-19-headless-cron-newsroom-agentic-rag]]; ignited by Mike's full-pipeline direction + Feedback1.txt validation. Phase 1 concrete (scorecard building this session); Phases 2–4 outlined to split into sub-plans when picked up.
+- 2026-07-22 — Phase 2.0 designed + triaged (S330). Angle-assigner reframed → four-layer model; Phase 2.0 = byline WHO-assist spec; PoolKey dropped as stale; Phase 2 gained layer-4 citizen-quote pre-pass. No new files.

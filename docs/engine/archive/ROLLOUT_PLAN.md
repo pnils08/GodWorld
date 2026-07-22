@@ -135,6 +135,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | research.21 | Citizen-signal story emergence | in-progress | research-build → engine-sheet | [[../plans/2026-06-26-citizen-signal-story-emergence]] + [[../plans/2026-06-29-citizen-signal-detector-build]] — detail in pointer (relocated 2026-07-02) |
 | research.23 | NotebookLM bridge — edition auto-ingest + audio delivery + grounded published-canon Q&A (jacob-bd/notebooklm-mcp-cli adopted, S310; LIVE — Q&A proven, audio live-fires next publish) | in-progress | research-build → media | [[../plans/2026-07-10-notebooklm-bridge-deploy]] + [[../research/2026-07-10-notebooklm-mcp]] |
 | research.24 | Entity protagonism — business/faith event gen, Riley lifestyle → seed backdrop, Community_Programs ledger | in-progress (T1–T6 built S313; sandbox verify rides C102 smoke) | engine-sheet | [[../plans/2026-07-12-entity-protagonism]] |
+| research.25 | Headless newsroom pipeline — M–F writer-wakes + Sat compile | Phase 1 DONE (writer/gate/route+scorecard); Phase 2.0 DONE (byline WHO-assist 4-layer design) → engine-sheet builds W5 half 2 (roster expansion + cadence activation) | research-build → engine-sheet | [[../plans/2026-07-20-headless-newsroom-pipeline]] |
 
 ### governance.* — Skills, MDs, ADRs, project hygiene
 

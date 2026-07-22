@@ -34,7 +34,7 @@ pointers:
 **Acceptance criteria** (the 4 Feedback1.txt milestones + the scorecard):
 1. A cron reliably wakes the writer for a completed cycle with no human prompt.
 2. The writer retrieves the correct current world state and stays in reporter voice.
-3. Each draft passes a **headless Rhea** canon/fact gate; fabrications and immersion leaks (e.g. the DeepSeek "78 OVR") are flagged and withheld, not published.
+3. Each draft passes a **headless Rhea** canon/fact gate; fabrications and **engine-metric** leaks (per `newsroom.md`: tension score, civic load, raw dials, system language — NOT sports-game stats like OVR, which are canon) are flagged and withheld, not published.
 4. Every run emits a **scorecard**: reporter-voice ✓/✗, facts-from-world-state ✓/✗, human-edits Low/Med/High, word-count ✓/✗, hallucination count, runtime s, API $.
 5. Over N runs the output is **edit-not-rewrite** quality (scorecard human-edits trends Low/Med).
 
@@ -53,16 +53,16 @@ The provable increment: one desk produces a **scored, canon-gated** headless dra
   2. Merge with the run-meta already emitted (turns, `usageInputTokens/OutputTokens`, `durationMs`) + a computed `apiCostUsd` (per-model rate table) into `output/cron-compare/<desk>_c<cycle>_<slug>.scorecard.json`.
   3. Print the scorecard to stdout at end of run.
 - **Verify:** `node scripts/cron-desk-writer.js --desk sports` → a `*.scorecard.json` exists with all 7 fields populated.
-- **Status:** [x] DONE (S325). Built + verified (DeepSeek run emitted all 7 fields, `apiCostUsd` computed). **Finding:** the self-score is lenient — DeepSeek graded itself "0 hallucinations / factsCorrect:true" despite its "78 OVR" leak. Self-score is a cheap signal only; the authoritative fact/canon check is Task 2 (independent headless Rhea).
+- **Status:** [x] DONE (S325). Built + verified (DeepSeek run emitted all 7 fields, `apiCostUsd` computed). **Finding:** a writer grading its OWN draft can't be the authoritative fact-check on principle — self-score is a cheap dashboard signal only; the authoritative canon/fact check must be the independent headless Rhea (Task 2). *(NOTE S325: an earlier version of this finding cited a DeepSeek "78 OVR leak" as proof — that was wrong; OVR is real sim data, not a leak. The principled point stands; the OVR evidence is retracted.)*
 
 #### Task 2: Headless Rhea canon/fact gate  *(CLI surface, not raw-API — S325 decision)*
 **Surface decision (Mike Q, S325):** Rhea runs at the **Claude Code headless** level (`claude -p` / Agent SDK), NOT as a raw-API node cron like the writer. Rationale: canon verification is tool-heavy (Read/Grep + GodWorld MCP `lookup_citizen`/`search_canon`); raw-API tool loops rabbit-hole (the writer burned 617k tokens) and can't reach MCP. Claude Code's harness does tools+MCP reliably. Precedent: `source-search` (S326) is exactly this — a Claude Code subagent doing verified work headlessly. Aligns with the standing "reviewers-first for external execution infra" rule. (Fully Claude-Code-independent raw-API Rhea = a later, bigger canon-lookup port; deferred.)
 - **Files:** `scripts/cron-rhea-gate.sh` (or a small node wrapper) — create (needs Mike approval — new file). Wraps a `claude -p` headless invocation of the existing `.claude/agents/rhea-morgan` agent.
 - **Steps:**
   1. Orchestrator invokes Claude Code headless (`claude -p`) pointing the `rhea-morgan` agent at the draft + `world_summary_c{N}.md` + `docs/canon/CANON_RULES.md`, with its normal tools + MCP.
-  2. Rhea returns strict JSON `{ pass: bool, flags: [{claim, issue, severity}] }` — flags every claim not grounded in world state/canon + immersion leaks (engine/game language, e.g. "78 OVR").
+  2. Rhea returns strict JSON `{ pass: bool, flags: [{claim, issue, severity}] }` — flags every claim not grounded in world state/canon + **engine-metric** leaks (tension score, civic load, raw dials, system language per `newsroom.md`). Does NOT flag legitimate sports-game stats (OVR/overall ratings, records — canon).
   3. Save `output/cron-compare/<desk>_c<cycle>_<slug>.rhea.json`.
-- **Verify:** run it on `output/cron-compare/sports_c101_deepseek-deepseek-chat.md` → flags the "78 OVR" game-stat leak and the invented fan name (which the writer's self-score missed).
+- **Verify:** run it on a draft with a *known* canon violation (e.g. a wrong GM or a genuine engine-metric leak) → Rhea flags it; run it on the accurate c101 sports draft → passes. (Do NOT use "OVR"/"Amara" as violations — both are canon.)
 - **Status:** [ ] not started
 
 #### Task 3: Per-desk model routing config

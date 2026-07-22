@@ -237,8 +237,9 @@ async function scoreDraft(draftText, worldState) {
     '{"reporterVoice":true|false,"factsCorrect":true|false,' +
     '"hallucinations":[{"claim":"...","why":"..."}],"wordCount":<int>,"notes":"<short>"}\n' +
     'reporterVoice = stayed in a distinct reporter voice. factsCorrect = every stated fact traces to the world ' +
-    'state above. hallucinations = names/numbers/events NOT present in the world state (include engine/game-stat ' +
-    'leaks like "OVR"). Be strict.';
+    'state above. hallucinations = names/numbers/events NOT present in the world state, plus ENGINE-metric leaks ' +
+    '("tension score", "civic load", raw dial values, system language). Do NOT flag legitimate sports-game stats ' +
+    '(OVR/overall ratings, avg/HR/RBI, records) — those are canon. Be strict.';
   let usageIn = 0, usageOut = 0, raw = '';
   if (PROVIDER === 'openrouter') {
     const r = await callOpenRouter(sys, user);

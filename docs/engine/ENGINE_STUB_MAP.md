@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-07-21 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-07-22 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -266,6 +266,8 @@
 ### loadEventContentLedger.js
 - **parseContentConditions_(raw)**
 
+- **contentLedgerHashStep_(h, s)**
+
 - **loadEventContentLedger_(ctx)**
   Writes: S.contentLedger
   Sheets: Event_Content_Ledger
@@ -410,7 +412,7 @@
 
 ### buildCityEvents.js
 - **buildCityEvents_(ctx)**
-  Reads: S.cityDynamics, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.cityDynamics, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.storySeeds, S.weather, S.weatherMood, S.worldEvents
   Writes: S.cityEventDetails, S.cityEvents, S.cityEventsCalendarContext, S.sportsAtmosphereEnabled
   Config: ctx.config.cycleCount, ctx.config.rngSeed
   Sheets: Heritage_Ledger
@@ -563,6 +565,7 @@
   Reads: S.cycleId, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.month, S.season, S.simYear, S.sportsSeason, S.weatherEvents
   Writes: S.generationalEvents, S.hospitalEvents, S.storyHooks
   Config: ctx.config.cycleCount
+  Sheets: Household_Ledger
 
 - **processHealthLifecycle_(ctx, popId, name, currentStatus, duration, age, tier, cause, neighborhood, cycle, cal)**
 
@@ -572,7 +575,7 @@
 
 - **checkWedding_(ctx, popId, age, lifeHistory, cal, hasHousehold)**
 
-- **checkBirth_(ctx, popId, age, lifeHistory, cal, hasHousehold, marital)**
+- **checkBirth_(ctx, popId, age, lifeHistory, cal, hasHousehold, marital, hhType)**
 
 - **createChildRow_(ctx, parentRowIdx, cycle)**
   Sheets: Family_Relationships, Household_Ledger
@@ -1069,10 +1072,10 @@
 
 ### generateCitizensEvents.js
 - **generateCitizensEvents_(ctx)**
-  Reads: S.cityDynamics, S.contentLedger, S.crimeByNeighborhood, S.cycleId, S.economicMood, S.faithEvents, S.holiday, S.holidayPriority, S.initiativeEvents, S.isCreationDay, S.isFirstFriday, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.simYear, S.simulationYear, S.sportsFeedEntries, S.sportsSeason, S.sportsSentimentBoost, S.transitState, S.weather, S.worldEvents
+  Reads: S.cityDynamics, S.contentLedger, S.crimeByNeighborhood, S.cycle, S.cycleId, S.economicMood, S.faithEvents, S.holiday, S.holidayPriority, S.initiativeEvents, S.isCreationDay, S.isFirstFriday, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.simYear, S.simulationYear, S.sportsFeedEntries, S.sportsSeason, S.sportsSentimentBoost, S.transitState, S.weather, S.worldEvents
   Writes: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.crimeMetrics, S.cycleActiveCitizens, S.eventsGenerated, S.faithExposures, S.householdMoments, S.localEntities, S.storyHooks, S.templateCooldowns
   Config: ctx.config.cycleCount, ctx.config.rngSeed
-  Sheets: Generic_Citizens, LifeHistory_Log
+  Sheets: Content_Telemetry, Generic_Citizens, LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
 
 ### generateCivicModeEvents.js
@@ -1200,7 +1203,8 @@
   RNG: ctx.rng / safeRand_(ctx)
 
 - **formCriteriaHouseholds_(ctx, households, cycle)**
-  Sheets: Household_Ledger
+  Sheets: Family_Relationships, Household_Ledger
+  RNG: ctx.rng / safeRand_(ctx)
 
 - **loadCitizens_(ctx)**
 
@@ -1740,7 +1744,10 @@
 
 - **contractSeedPickCitizens_(index, targetPops, hood, causeType, usedPop, max, roll)**
 
-- **contractSeedJournalist_(domain)**
+- **contractSeedJournalist_(domain, usageCounts, excludeNames)**
+
+- **contractSeedUsageTally_(ctx, cycle)**
+  Sheets: Story_Seed_Deck
 
 - **contractSeedBackdropIndex_(ctx)**
   Sheets: Business_Ledger, Community_Programs, Faith_Organizations
@@ -2221,7 +2228,7 @@
 - **pulseFoldDelta_(pulse, key)**
 
 - **saveV3NeighborhoodMap_(ctx)**
-  Reads: S.chaosNeighborhoodFold, S.cityDynamics, S.cycleId, S.demographicDrift, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.migrationDrift, S.neighborhoodDynamics, S.neighborhoodPulse, S.sportsSeason, S.storyHooks, S.storySeeds, S.v3Arcs, S.weather, S.worldEvents
+  Reads: S.chaosNeighborhoodFold, S.cityDynamics, S.crimeMetrics, S.cycleId, S.demographicDrift, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.migrationDrift, S.neighborhoodDynamics, S.neighborhoodPulse, S.sportsSeason, S.storyHooks, S.storySeeds, S.v3Arcs, S.weather, S.worldEvents
   Config: ctx.config.cycleCount
   Sheets: Neighborhood_Map
   RNG: ctx.rng / safeRand_(ctx)
@@ -3160,7 +3167,9 @@
 
 - **getThemeKeywordsForDomain_(domain, hookType)**
 
-- **suggestStoryAngle_(eventThemes, signalType)**
+- **bylineEligible_(name)**
+
+- **suggestStoryAngle_(eventThemes, signalType, usageCounts, excludeNames)**
 
 - **matchCitizenToJournalist_(citizenArchetype, neighborhoodContext, storyDomain)**
 
@@ -3317,4 +3326,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 179
-**Functions mapped:** 1114
+**Functions mapped:** 1117

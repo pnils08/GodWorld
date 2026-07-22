@@ -830,6 +830,21 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 <!-- ARCHIVE-PASS ORDERING CONVENTION (G-SE4, added S248). Foundational Phase sections + named passes through this S227 anchor are CHRONOLOGICAL top→bottom (oldest first). The post-S227 sweep-pass region below is NEWEST-FIRST going forward: insert a new "## S<NN> Archive Pass" block immediately below this comment (above the current first post-S227 pass), so the most recent pass sits nearest this anchor. The existing post-S227 region is NOT cleanly sorted (S230/S238/S236/S235/S234/S233 as of S248) — do NOT re-sort it; just insert new passes here at the top of the run. Each pass header records its own session + a "This pass: N rows" line. -->
 
+## S331 Archive Pass (2026-07-22, research-build) — post-S330 closures sweep
+
+8 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 8 engine.*.
+
+- **engine.54** [engine-sheet] — Neighborhood trajectory system (gentrification block repurposed) + v3 writer clobber fix — sandbox-verified C127+C128 S316, LIVE via S321 full-repo deploy, canon-verified C102/C103 **State at archive:** done-pending-archive. Pointer: S315 commit + [[ENGINE_COUPLING_MAP]] §neighborhoodTrajectoryEngine
+- **engine.55** [engine-sheet] — Intra-city relocation — households sort toward economically-fitting neighborhoods (AN–AP live, wired to settled-in check S321) — sandbox-verified C129–C131, LIVE S321 **State at archive:** done-pending-archive. Pointer: [[../plans/2026-07-12-engine55-intra-city-relocation]]
+- **engine.56** [engine-sheet] — Household_Ledger true-ledger repair — reconcile, live income, HouseholdSavings, real dissolution, household-first inheritance — LIVE S319, cycle-proven **State at archive:** done-pending-archive. Pointer: [[ENGINE_REPAIR]] §engine.56 — detail in pointer
+- **engine.57** [engine-sheet] — Family/household loop — Mike's household model — LIVE S319, cycle-proven 0714+0715, canon-verified C102/C103 **State at archive:** done-pending-archive. Pointer: [[../plans/2026-07-13-family-household-loop-build]]
+- **engine.58** [engine-sheet] — GC-as-entry — intake→Tier-5 waiting room, lottery at EmergenceCount 3, event surfacing — LIVE S320, cycle-proven (Isaac Green end-to-end) **State at archive:** done-pending-archive. Pointer: detail in commits 06b0b5ad/c8e73961 + claude-mem S320
+- **engine.59** [engine-sheet] — Bonds × GC marriage market — tier gravity, suitor fitness, GC lottery door — LIVE S320, 8-fire proof, 2 lottery weddings **State at archive:** done-pending-archive. Pointer: [[../plans/2026-07-16-engine59-bonds-marriage-market]]
+- **engine.68** [engine-sheet] — Cultural_Ledger antenna — fame bar 25, recognition scaling, FAME_WATCH hooks, sightings widened, decay — LIVE S325, bench-proven C114-C116 (decay tick observed) **State at archive:** done-pending-archive. Pointer: [[../plans/2026-07-18-event-pools-design]] §9
+- **engine.69** [engine-sheet] — Tier decay (earned rungs only, T1/authored exempt) + youth events mold dials (25/25 col-O landings, 10 attention-decays observed C107) — LIVE S325 **State at archive:** done-pending-archive. Pointer: [[../plans/2026-07-18-event-pools-design]] §9 + ENGINE_REPAIR Row 25
+
+This pass: 8 rows — engine.54 + engine.55 + engine.56 + engine.57 + engine.58 + engine.59 + engine.68 + engine.69. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S321 Archive Pass (2026-07-17)
 
 This pass: 2 rows (engine.60, engine.61 — the money stage, designed→proven→LIVE in two sessions).

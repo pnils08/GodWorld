@@ -1,8 +1,8 @@
 {
-  "generated": "2026-07-21",
+  "generated": "2026-07-22",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 179,
-  "functionsMapped": 1114,
+  "functionsMapped": 1117,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -787,6 +787,7 @@
         "phase02-world-state/applySportsSeason.js::applySportsSeason_",
         "phase04-events/chaosCarsEngine.js::runChaosCarsEngine_",
         "phase05-citizens/applyChaosDecay.js::applyChaosDecay_",
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase06-analysis/applyShockMonitor.js::applyShockMonitor_",
         "phase07-evening-media/buildContractSeeds.js::buildContractSeeds_",
         "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_",
@@ -1392,6 +1393,7 @@
         "phase01-config/godWorldEngine2.js::writeDigest_",
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
         "phase03-population/updateCrimeMetrics.js::updateCrimeMetrics_Phase3_",
+        "phase04-events/buildCityEvents.js::buildCityEvents_",
         "phase05-citizens/bondEngine.js::ensureBondEngineData_",
         "phase07-evening-media/applyStorySeeds.js::renderStorySeedsForUI_",
         "phase07-evening-media/mediaRoomBriefingGenerator.js::generateMediaBriefing_",
@@ -2205,6 +2207,7 @@
         "phase05-citizens/runConductEngine.js::runConductEngine_",
         "phase05-citizens/runYouthEngine.js::runYouthEngine_",
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
+        "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_",
         "utilities/exportCycleArtifacts.js::buildCycleContextPack_"
@@ -3717,7 +3720,8 @@
     },
     "Generic_Citizens": {
       "writers": [
-        "phase01-config/godWorldEngine2.js::processIntake_"
+        "phase01-config/godWorldEngine2.js::processIntake_",
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
       ],
       "readers": [
         "phase01-config/godWorldEngine2.js::processIntake_",
@@ -3762,6 +3766,7 @@
         "phase04-events/generateGameModeMicroEvents.js::generateGameModeMicroEvents_",
         "phase04-events/generationalEventsEngine.js::applyMilestone_",
         "phase05-citizens/educationCareerEngine.js::stampPromotion_",
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase05-citizens/processAdvancementIntake.js::decayMediaAttention_",
         "phase05-citizens/runCivicRoleEngine.js::runCivicRoleEngine_",
         "phase05-citizens/runConductEngine.js::runConductEngine_",
@@ -3976,23 +3981,9 @@
         "phase07-evening-media/buildEveningFamous.js::buildEveningFamous_"
       ]
     },
-    "Family_Relationships": {
-      "writers": [
-        "phase04-events/generationalEventsEngine.js::formSingleParentHousehold_",
-        "phase05-citizens/bondEngine.js::marryCitizens_",
-        "phase05-citizens/generationalWealthEngine.js::updateHeritage_"
-      ],
-      "readers": [
-        "phase04-events/generationalEventsEngine.js::createChildRow_",
-        "phase04-events/generationalEventsEngine.js::formSingleParentHousehold_",
-        "phase05-citizens/bondEngine.js::marryCitizens_",
-        "phase05-citizens/generationalWealthEngine.js::recordInheritanceInFamily_",
-        "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
-        "phase05-citizens/householdFormationEngine.js::processHouseholdFormation_"
-      ]
-    },
     "Household_Ledger": {
       "writers": [
+        "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
         "phase05-citizens/bondEngine.js::marryCitizens_",
         "phase05-citizens/householdFormationEngine.js::dissolveStressedHouseholds_",
         "phase05-citizens/householdFormationEngine.js::updateHouseholdIncomes_"
@@ -4000,6 +3991,7 @@
       "readers": [
         "phase04-events/generationalEventsEngine.js::createChildRow_",
         "phase04-events/generationalEventsEngine.js::formSingleParentHousehold_",
+        "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
         "phase05-citizens/bondEngine.js::marryCitizens_",
         "phase05-citizens/educationCareerEngine.js::settleAdulthood_",
         "phase05-citizens/generationalWealthEngine.js::processMoneyLoop_",
@@ -4014,6 +4006,22 @@
         "phase05-citizens/householdFormationEngine.js::updateHouseholdIncomes_",
         "phase05-citizens/migrationTrackingEngine.js::buildHouseholdHousingMap_",
         "phase05-citizens/migrationTrackingEngine.js::updateHouseholdLedgerMove_"
+      ]
+    },
+    "Family_Relationships": {
+      "writers": [
+        "phase04-events/generationalEventsEngine.js::formSingleParentHousehold_",
+        "phase05-citizens/bondEngine.js::marryCitizens_",
+        "phase05-citizens/generationalWealthEngine.js::updateHeritage_"
+      ],
+      "readers": [
+        "phase04-events/generationalEventsEngine.js::createChildRow_",
+        "phase04-events/generationalEventsEngine.js::formSingleParentHousehold_",
+        "phase05-citizens/bondEngine.js::marryCitizens_",
+        "phase05-citizens/generationalWealthEngine.js::recordInheritanceInFamily_",
+        "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
+        "phase05-citizens/householdFormationEngine.js::formCriteriaHouseholds_",
+        "phase05-citizens/householdFormationEngine.js::processHouseholdFormation_"
       ]
     },
     "Chaos_Cars": {
@@ -4140,6 +4148,14 @@
         "phase05-citizens/generateChicagoCitizensv1.js::generateChicagoCitizens_"
       ]
     },
+    "Content_Telemetry": {
+      "writers": [
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
+      ],
+      "readers": [
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
+      ]
+    },
     "Civic_Sweep_Report": {
       "writers": [],
       "readers": [
@@ -4217,6 +4233,16 @@
         "phase07-evening-media/storylineWeavingEngine.js::createChaosArcs_",
         "phase07-evening-media/storylineWeavingEngine.js::loadActiveStorylinesForWeaving_",
         "phase07-evening-media/storylineWeavingEngine.js::updateCrossStorylineLinks_"
+      ]
+    },
+    "Story_Seed_Deck": {
+      "writers": [],
+      "readers": [
+        "phase07-evening-media/buildContractSeeds.js::contractSeedUsageTally_",
+        "phase10-persistence/saveV3Seeds.js::migrateSeedDeckV4_",
+        "phase10-persistence/saveV3Seeds.js::saveV3Seeds_",
+        "utilities/cycleRollback.js::previewRollbackToCycle78",
+        "utilities/cycleRollback.js::rollbackToCycle78"
       ]
     },
     "Media_Briefing": {
@@ -4319,15 +4345,6 @@
         "utilities/cycleRollback.js::previewRollbackToCycle78",
         "utilities/cycleRollback.js::rollbackToCycle78",
         "utilities/ensureWorldEventsV3Ledger.js::ensureWorldEventsV3Ledger_"
-      ]
-    },
-    "Story_Seed_Deck": {
-      "writers": [],
-      "readers": [
-        "phase10-persistence/saveV3Seeds.js::migrateSeedDeckV4_",
-        "phase10-persistence/saveV3Seeds.js::saveV3Seeds_",
-        "utilities/cycleRollback.js::previewRollbackToCycle78",
-        "utilities/cycleRollback.js::rollbackToCycle78"
       ]
     },
     "Continuity_Intake": {

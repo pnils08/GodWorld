@@ -124,9 +124,20 @@ function parseContentConditions_(raw) {
   return terms;
 }
 
+// S329 (Grok review item 6): djb2 step over loaded-row identity strings —
+// deterministic content fingerprint, 32-bit, cheap in the load loop.
+function contentLedgerHashStep_(h, s) {
+  s = String(s);
+  for (var i = 0; i < s.length; i++) {
+    h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
+  }
+  return h;
+}
+
 function loadEventContentLedger_(ctx) {
   var S = ctx.summary || (ctx.summary = {});
-  S.contentLedger = { lines: {}, fragments: {}, skipped: 0 };
+  S.contentLedger = { lines: {}, fragments: {}, skipped: 0, contentHash: '' };
+  var contentHash = 5381;
 
   var sheet = ctx.ss.getSheetByName('Event_Content_Ledger');
   if (!sheet) return;
@@ -198,18 +209,24 @@ function loadEventContentLedger_(ctx) {
       if (!tags.length || !CONTENT_LEDGER_SOURCE_WHITELIST[tags[0]]) { S.contentLedger.skipped++; continue; }
       if (!S.contentLedger.lines[poolKey]) S.contentLedger.lines[poolKey] = [];
       S.contentLedger.lines[poolKey].push(entry);
+      contentHash = contentLedgerHashStep_(contentHash, kind + '|' + poolKey + '|' + text);
       loadedLines++;
     } else {
       var slot = cell(row, iSlot);
       if (!slot) { S.contentLedger.skipped++; continue; }
       if (!S.contentLedger.fragments[slot]) S.contentLedger.fragments[slot] = [];
       S.contentLedger.fragments[slot].push(entry);
+      contentHash = contentLedgerHashStep_(contentHash, 'fragment|' + slot + '|' + text);
       loadedFragments++;
     }
   }
 
   S.contentLedger.lineCount = loadedLines;
   S.contentLedger.fragmentCount = loadedFragments;
+  // S329 (Grok review item 6): content hash — replay/audit honesty under
+  // auto-active drafting. Same cycle N with a different ledger head is now
+  // detectable: the hash rides the Content_Telemetry row Phase 5 appends.
+  S.contentLedger.contentHash = contentHash.toString(16);
 
   // Fail-closed rejections are silent by design in the pools; make them loud
   // in the execution log so an authoring mistake (bad source tag, bad enum)

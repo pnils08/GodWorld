@@ -52,6 +52,16 @@ function generateCitizensEvents_(ctx) {
   if (!ctx.ledger) {
     throw new Error('generateCitizensEvents_: ctx.ledger not initialized');
   }
+
+  // S329 (Grok review item 1): content-ledger row telemetry — the missing
+  // feedback arrow (LifeHistory draws -> drafter/prune). Per-cycle, closure-
+  // scoped; persisted as one Content_Telemetry row at function end. rowKey =
+  // poolKey + '#' + text head (stable across row reorders). fragUse also
+  // powers the per-cycle fragment soft cap (review item 5).
+  var eclTelemetry = { eligible: {}, draws: {}, composeNull: {}, fragUse: {} };
+  function eclRowKey_(poolKey, text) {
+    return poolKey + '#' + String(text).slice(0, 40);
+  }
   var header = ctx.ledger.headers;
   var rows = ctx.ledger.rows;
   if (!rows.length) return;
@@ -793,7 +803,25 @@ function generateCitizensEvents_(ctx) {
         for (var fi = 0; fi < frags.length; fi++) {
           if (evalContentConditions_(frags[fi].conditions, scopes)) eligible.push(frags[fi]);
         }
-        if (eligible.length) value = pickWeighted_(eligible).text;
+        // S329 (Grok review item 5): per-cycle fragment soft cap — the same
+        // MOOD clause was stamping many citizens per cycle (smoke: 23x). Prefer
+        // fragments used < 6 times this cycle; if every eligible fragment is
+        // capped, fall back to the full set (a cap must narrow variety, never
+        // compose-null a line fragments could legally fill).
+        if (eligible.length > 1) {
+          var underCap = [];
+          for (var uc = 0; uc < eligible.length; uc++) {
+            var fk = slot + '#' + String(eligible[uc].text).slice(0, 40);
+            if ((eclTelemetry.fragUse[fk] || 0) < 6) underCap.push(eligible[uc]);
+          }
+          if (underCap.length) eligible = underCap;
+        }
+        if (eligible.length) {
+          var fragPick = pickWeighted_(eligible);
+          value = fragPick.text;
+          var fpk = slot + '#' + String(fragPick.text).slice(0, 40);
+          eclTelemetry.fragUse[fpk] = (eclTelemetry.fragUse[fpk] || 0) + 1;
+        }
       }
       if (!value) return null;
       text = text.split("$" + slot).join(value);
@@ -2488,6 +2516,8 @@ function generateCitizensEvents_(ctx) {
           var clPooled = makeEntry(clEntry.text, mergeTags(clTags, calendarTags), clEntry.weight, false);
           clPooled.ledgerLine = clEntry;      // draw-time compose hook
           clPooled.ledgerScopes = condScopes; // fragment eligibility at compose
+          clPooled.eclKey = eclRowKey_(clk, clEntry.text); // S329 telemetry identity
+          eclTelemetry.eligible[clPooled.eclKey] = (eclTelemetry.eligible[clPooled.eclKey] || 0) + 1;
           pool.push(clPooled);
         }
       }
@@ -2643,12 +2673,18 @@ function generateCitizensEvents_(ctx) {
         INSTITUTION: pickInstitution_(neighborhood) || "a local office",
         CONTACT: contact.name || "someone familiar"
       }, entry.ledgerScopes);
-      if (composedText === null) continue; // unfillable at draw — drop the emit slot
+      if (composedText === null) {
+        if (entry.eclKey) eclTelemetry.composeNull[entry.eclKey] = (eclTelemetry.composeNull[entry.eclKey] || 0) + 1;
+        continue; // unfillable at draw — drop the emit slot
+      }
       // Rendered-line hard dedup (plan §Composer): the pool filter compares
       // SKELETON text, but cycleSeen stores RENDERED text — same skeleton +
       // same fragment draw would otherwise slip the within-cycle block.
       if (cycleSeen.indexOf(normText_(composedText)) >= 0) continue;
       pick = composedText;
+      // S329 telemetry: a draw is counted only once it survives compose AND
+      // the rendered dedup — i.e. it actually reaches LifeHistory.
+      if (entry.eclKey) eclTelemetry.draws[entry.eclKey] = (eclTelemetry.draws[entry.eclKey] || 0) + 1;
       if (clVenue) { chosenVenue = clVenue; tags = mergeTags(tags, ["venue:local"]); }
       if (clUsedContact && contact && contact.popId) tags = mergeTags(tags, ["contactPopId:" + contact.popId]);
     }
@@ -2902,6 +2938,33 @@ function generateCitizensEvents_(ctx) {
       duration: 1,
       sourceEngine: 'generateCitizensEvents_'
     });
+  }
+
+  // S329 (Grok review items 1+6): persist the cycle's content-ledger telemetry
+  // — one row per cycle, writeIntents-compliant (Phase 5 pre-executor, same
+  // pattern as recordRipple_). This is the inhale the review found missing:
+  // draftContentRows reads this tab to prune dead auto rows and steer drafting
+  // toward under-drawing pools. JSON cells capped defensively under the sheet
+  // cell limit.
+  if (S.contentLedger && S.contentLedger.lineCount &&
+      typeof queueEnsureTabIntent_ === 'function' && typeof queueAppendIntent_ === 'function') {
+    var eclCap = function (obj) {
+      var j = JSON.stringify(obj);
+      return j.length > 45000 ? j.slice(0, 45000) : j;
+    };
+    queueEnsureTabIntent_(ctx, 'Content_Telemetry',
+      ['Cycle', 'LineCount', 'FragmentCount', 'Skipped', 'ContentHash', 'EligibleJSON', 'DrawsJSON', 'ComposeNullJSON'],
+      'content-ledger telemetry lazy tab create', 'content-telemetry');
+    queueAppendIntent_(ctx, 'Content_Telemetry', [
+      S.cycleId || S.cycle || 0,
+      S.contentLedger.lineCount,
+      S.contentLedger.fragmentCount,
+      S.contentLedger.skipped,
+      S.contentLedger.contentHash || '',
+      eclCap(eclTelemetry.eligible),
+      eclCap(eclTelemetry.draws),
+      eclCap(eclTelemetry.composeNull)
+    ], 'content-ledger telemetry row', 'content-telemetry');
   }
 
   S.cycleActiveCitizens = Object.keys(activeSetObj);

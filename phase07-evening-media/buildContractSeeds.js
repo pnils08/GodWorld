@@ -41,6 +41,7 @@ var CONTRACT_SEED_DOMAIN = {
   'crime': 'SAFETY',
   'faith-event': 'COMMUNITY',        // T3 (research.24) — faithEventsEngine ripples
   'lifestyle-sighting': 'COMMUNITY', // T5 (research.24) — buildEveningFamous venue ripples
+  'city-event': 'COMMUNITY',         // S329 R1 — buildCityEvents evening/festival ripples
   // V2-5 (S326) — the S325 physics enter the story surface:
   'chaos-event': 'SAFETY',           // chaosCarsEngine consequence-class citizen hits
   'fame-event': 'COMMUNITY',         // FAME_WATCH rise + engine.69 tier decay
@@ -143,7 +144,8 @@ var CONTRACT_SEED_EVENT_HINTS = {
   'economic-event': /work|job|shift|business|market|shop|hire|wage|customer|vendor/i,
   'gentrification': /rent|landlord|lease|moving|displac|evict|housing|develop/i,
   'migration': /moving|leave|leaving|goodbye|arriv|relocat|farewell/i,
-  'edition-coverage': /read|paper|article|news|tribune|coverage/i
+  'edition-coverage': /read|paper|article|news|tribune|coverage/i,
+  'city-event': /festival|market|night|concert|gallery|music|walk|series|fair|parade|celebrat/i
 };
 
 /** One citizen object per POPID: {popId, name, events:[{tag,text,hood}]} */

@@ -443,6 +443,15 @@ function buildEveningFamous_(ctx) {
   // sighting can name a real venue in its neighborhood, and the venue gets a
   // business-scoped ripple so it reaches the seed deck as exact protagonist.
   // Same three-col pattern as contractSeedBackdropIndex_; empty on any failure.
+  // S329 R1: index + lookup keyed on normalized hood — the raw-string key
+  // missed 'Piedmont Ave' (ledger says 'Piedmont Avenue') and any case/space
+  // variant, which is a big part of why only 2 lifestyle-sighting ripples
+  // landed across c100-c102 against 2-4 sightings/cycle.
+  function normHood_(h) {
+    var n = String(h || '').trim().toLowerCase();
+    if (n === 'piedmont ave') n = 'piedmont avenue';
+    return n;
+  }
   var venuesByHood = {};
   try {
     var vbs = ctx.ss && typeof ctx.ss.getSheetByName === 'function' ? ctx.ss.getSheetByName('Business_Ledger') : null;
@@ -454,7 +463,7 @@ function buildEveningFamous_(ctx) {
       var iVhood = vh.indexOf('Neighborhood');
       if (iVid >= 0 && iVname >= 0 && iVhood >= 0) {
         for (var vr = 1; vr < vv.length; vr++) {
-          var vhood = String(vv[vr][iVhood] || '').trim();
+          var vhood = normHood_(vv[vr][iVhood]);
           var vname = String(vv[vr][iVname] || '').trim();
           if (!vhood || !vname) continue;
           if (!venuesByHood[vhood]) venuesByHood[vhood] = [];
@@ -508,11 +517,15 @@ function buildEveningFamous_(ctx) {
     // T5 (research.24): name a real venue in the sighting's hood + emit a
     // business-scoped ripple. 2-4 sightings/cycle -> bounded volume; Phase 7
     // runs before Phase7-ContractSeeds and the Phase-10 executor (compliant).
-    var hoodVenues = venuesByHood[neighborhood];
-    if (hoodVenues && hoodVenues.length) {
-      var venue = hoodVenues[Math.floor(rng() * hoodVenues.length)];
-      sighting.venue = { bizId: venue.bizId, name: venue.name };
-      if (typeof recordRipple_ === 'function') {
+    // S329 R1: a sighting with no venue match still ripples neighborhood-scoped
+    // — the sighting is the story-worthy event, the venue is garnish. Without
+    // this, hoods with no Business_Ledger venues (Laurel, Grand Lake) never
+    // reached the seed deck at all.
+    var hoodVenues = venuesByHood[normHood_(neighborhood)];
+    if (typeof recordRipple_ === 'function') {
+      if (hoodVenues && hoodVenues.length) {
+        var venue = hoodVenues[Math.floor(rng() * hoodVenues.length)];
+        sighting.venue = { bizId: venue.bizId, name: venue.name };
         recordRipple_(ctx, {
           causeType: 'lifestyle-sighting',
           causeId: ent.name,
@@ -520,6 +533,19 @@ function buildEveningFamous_(ctx) {
           effectType: 'sighting',
           targetScope: 'business',
           targetIds: [venue.bizId],
+          neighborhood: neighborhood,
+          magnitude: 0.01,
+          duration: 1,
+          sourceEngine: 'buildEveningFamous'
+        });
+      } else {
+        recordRipple_(ctx, {
+          causeType: 'lifestyle-sighting',
+          causeId: ent.name,
+          causeDetail: ent.name + ' spotted around ' + neighborhood,
+          effectType: 'sighting',
+          targetScope: 'neighborhood',
+          targetIds: [],
           neighborhood: neighborhood,
           magnitude: 0.01,
           duration: 1,

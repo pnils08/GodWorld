@@ -1594,14 +1594,13 @@ function applyStorySeeds_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // engine.41 (S271) — Riley evening layer: story-worthy fields -> seeds (Wire 3b)
   // ═══════════════════════════════════════════════════════════════════════════
-  // Phase7-CityEvents/Famous/EveningMedia all run BEFORE Phase7-StorySeeds (verified,
-  // godWorldEngine2 both entry blocks L374-391 / L1715-1730), so S.cityEvents /
-  // S.famousPeople / S.eveningMedia are populated here. The ambient layer rides
-  // eveningContext (Wire 3a, desk-side read of Riley_Digest); these are the
-  // story-shaped fields that belong in the seed deck. Faithful restatement of real
-  // named events/trends only — no fabricated angle (arc-generator discipline). Famous
-  // people get ONE consolidated seed (not per-name): avoids noise + sports-name
-  // mis-routing to CULTURE. Plan: docs/plans/2026-06-24-engine-output-canon-coverage.md
+  // ⚠ DECK-DEAD since saveV3Seeds v4.0 (S296): S.storySeeds no longer reaches
+  // Story_Seed_Deck — it feeds only the UI renderer + Riley_Digest StorySeedCount.
+  // The deck path for the evening layer is now ripples -> buildContractSeeds
+  // (lifestyle-sighting + city-event causeTypes, S329 R1). Do not extend this
+  // block expecting deck coverage. Original Wire 3b rationale: faithful
+  // restatement of real named events/trends only — no fabricated angle.
+  // Plan: docs/plans/2026-06-24-engine-output-canon-coverage.md
   var cityEvents = S.cityEvents || [];
   for (var cei = 0; cei < cityEvents.length && cei < 6; cei++) {
     if (!cityEvents[cei]) continue;

@@ -736,6 +736,30 @@ function buildCityEvents_(ctx) {
     eventCount: selected.length
   };
 
+  // S329 R1: each selected city event ripples neighborhood-scoped so the
+  // contract path (buildContractSeeds) can carry it to the seed deck — before
+  // this, evening events existed only in Riley_Digest columns and the deck-dead
+  // S.storySeeds wire (retired saveV3Seeds v4.0), so night markets / festivals
+  // never reached a desk. Bounded by the existing selection cap.
+  if (typeof recordRipple_ === 'function') {
+    for (var ri = 0; ri < selected.length; ri++) {
+      var rev = selected[ri];
+      if (!rev || !rev.name) continue;
+      recordRipple_(ctx, {
+        causeType: 'city-event',
+        causeId: rev.name,
+        causeDetail: rev.name + (rev.neighborhood ? ' (' + rev.neighborhood + ')' : ''),
+        effectType: 'city-event',
+        targetScope: 'neighborhood',
+        targetIds: [],
+        neighborhood: rev.neighborhood || 'Citywide',
+        magnitude: 0.02,
+        duration: 1,
+        sourceEngine: 'buildCityEvents'
+      });
+    }
+  }
+
   ctx.summary = S;
 }
 

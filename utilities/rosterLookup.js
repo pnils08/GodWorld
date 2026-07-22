@@ -30,6 +30,47 @@
  *
  * @returns {Object} Full roster object
  */
+// ─────────────────────────────────────────────────────────────────────────────
+// ROSTER_POPIDS — canonical join to the Bay_Tribune_Oakland tab (S331 Phase 2.0).
+// Keyed by roster name; value is the staffer's ledger POPID. Tab display-name
+// variants noted where they differ from roster keys (tab is First+Last; roster
+// keys are byline names). Chicago pair (Selena Grant, Talia Finch) is
+// deliberately absent — Chicago bureau staff are not on the Oakland tab.
+// ─────────────────────────────────────────────────────────────────────────────
+var ROSTER_POPIDS = {
+  'Mags Corliss':         'POP-00005',
+  'Hal Richmond':         'POP-00007',
+  'P Slayer':             'POP-00008',
+  'Lena Carrow':          'POP-00009',
+  'Dana Reeve':           'POP-00010',
+  'Carmen Delaine':       'POP-00011',
+  'Elliot Graye':         'POP-00012',
+  'Maria Keen':           'POP-00013',
+  'Tanya Cruz':           'POP-00014',
+  'DJ Hartley':           'POP-00015',  // tab: DeShawn Hartley
+  'Simon Leary':          'POP-00016',
+  'Anthony':              'POP-00017',  // tab: Anthony Raines
+  'MintConditionOakTown': 'POP-00056',  // tab: Mint Condition
+  'Sgt. Rachel Torres':   'POP-00057',
+  'Ariana Reyes':         'POP-00133',
+  'Jordan Velez':         'POP-00153',
+  'Dr. Lila Mezran':      'POP-00154',
+  'Trevor Shimizu':       'POP-00155',
+  'Angela Reyes':         'POP-00156',
+  'Noah Tan':             'POP-00157',
+  'Kai Marston':          'POP-00158',
+  'Sharon Okafor':        'POP-00159',
+  'Mason Ortega':         'POP-00160',
+  'Farrah Del Rio':       'POP-00161',
+  'Reed Thompson':        'POP-00162',
+  'Celeste Tran':         'POP-00164',
+  'Arman Gutiérrez':      'POP-00165',  // tab: Arman Gutierrez (no accent)
+  'Elliot Marbury':       'POP-00166',
+  'Luis Navarro':         'POP-00636',
+  'Jax Caldera':          'POP-00799',
+  'Rhea Morgan':          'POP-00800'
+};
+
 function loadRoster_() {
   // In production, this could read from:
   // - PropertiesService.getScriptProperties().getProperty('ROSTER_JSON')
@@ -70,7 +111,8 @@ function loadRoster_() {
         background: "Started as a team social media intern, now runs the Tribune's real-time game coverage."
       },
       "DJ Hartley": {
-        desk: "sports", role: "Senior Photographer", tone: "Observant, minimal commentary, lets images speak",
+        desk: "sports", role: "Senior Photographer", bylineIneligible: true,  // S331: photo desk shoots, doesn't write (G-S14 class)
+        tone: "Observant, minimal commentary, lets images speak",
         openingStyle: "Scene setting with time/place - 'October 23rd. Morning. Coliseum visiting clubhouse.'",
         themes: ["Empty spaces", "Waiting infrastructure", "Light through tunnels", "The morning after"],
         samplePhrases: ["The chair is empty because the season is over, but it's not packed away yet. It's waiting.", "That's the thing about infrastructure in defeat—it doesn't know it's done.", "Light. Quiet. Routine."],
@@ -203,7 +245,8 @@ function loadRoster_() {
         background: "Former social media analyst who reads streaming data like tea leaves."
       },
       "Arman Gutiérrez": {
-        desk: "photography", role: "Photo Assistant", tone: "Observant, minimal commentary",
+        desk: "photography", role: "Photo Assistant", bylineIneligible: true,  // S331: photo desk shoots, doesn't write (G-S14 class)
+        tone: "Observant, minimal commentary",
         openingStyle: "Brief caption style - location and light",
         themes: ["Environmental portraits", "City texture", "Warm light", "People in context"],
         background: "Local photography student apprenticing under DJ Hartley."
@@ -215,7 +258,38 @@ function loadRoster_() {
         samplePhrases: ["The dynasty years built glory; these days build gratitude", "Renewal here isn't about starting fresh; it's about refusing to fade", "These are the days that keep us — the quiet ones"],
         background: "Longtime Tribune veteran who rose from copy desk to the top chair."
       },
-      "Rhea Morgan": { desk: "editorial", role: "Copy Chief", tone: "Invisible precision", background: "Twenty-three years ensuring Tribune articles say what they mean." }
+      "Rhea Morgan": { desk: "editorial", role: "Copy Chief", tone: "Invisible precision", background: "Twenty-three years ensuring Tribune articles say what they mean." },
+      "Lena Carrow": {
+        desk: "metro", role: "Field Reporter", tone: "Immediate, concrete, boots-on-pavement",
+        openingStyle: "Arrival at the scene - what's visible, who's standing where",
+        themes: ["Incident", "Street level", "First on scene", "Neighborhood texture"],
+        background: "Youngest field hire at the Tribune; covers whatever the city throws at her that day."
+      },
+      "Dana Reeve": {
+        desk: "metro", role: "Lead Journalist", tone: "Authoritative, synthesizing, citywide frame",
+        openingStyle: "The city-scale claim first, then the evidence beneath it",
+        themes: ["System", "Civic weight", "The citywide picture", "Second-day clarity"],
+        background: "Veteran generalist; takes the stories too big for any one desk."
+      },
+      "Elliot Graye": {
+        desk: "culture", role: "Ethics & Faith Journalist", tone: "Measured, pastoral, morally serious",
+        openingStyle: "A quiet scene inside a congregation or a kitchen-table dilemma",
+        themes: ["Faith", "Congregations", "Family covenant", "Moral questions", "Quiet devotion"],
+        background: "Former seminarian; covers what Oakland believes and what it forgives."
+      },
+      "Ariana Reyes": {
+        desk: "sports", role: "Data Analyst", tone: "Sharp, model-literate, skeptical of easy narratives",
+        openingStyle: "A number that contradicts the story everyone is telling",
+        themes: ["Pulse of the numbers", "Legacy metrics", "Model vs eye test", "Season rhythm"],
+        background: "Gridiron Analytics alum; brings win-probability rigor to the A's beat."
+      },
+      "Jax Caldera": {
+        desk: "freelance", role: "Freelance Accountability Writer", bylineIneligible: true,
+        tone: "Adversarial, precise, sparing",
+        openingStyle: "The documented contradiction, stated flatly",
+        themes: ["Accountability", "Verified gap", "Paper trails", "Silence as evidence"],
+        background: "Freelancer the Tribune deploys only when a verified gap or contradiction warrants pressure. Editorially deployed, never auto-rotated."
+      }
     },
 
     // Signal type -> primary journalist mapping
@@ -260,23 +334,25 @@ function loadRoster_() {
       "rumor_verified": "Reed Thompson",
       "rumor_chaotic": "MintConditionOakTown",
       "social_trends": "Celeste Tran",
-      "human_interest": "Mags Corliss",
-      "feature": "Mags Corliss",
+      "human_interest": "Dana Reeve",  // S331: was Mags Corliss — EIC is byline-ineligible, the fallback silently blanked (bench C110: GENERAL 13/13 blank); Dana is the citywide generalist
+      "feature": "Dana Reeve",         // S331: same — eligible generalist default
+
       "community": "Sharon Okafor",
       "lifestyle": "Sharon Okafor"
     },
 
     // Desk -> array of journalist names
     desks: {
-      "sports": ["Anthony", "P Slayer", "Hal Richmond", "Tanya Cruz", "DJ Hartley", "Simon Leary", "Elliot Marbury"],
+      "sports": ["Anthony", "P Slayer", "Hal Richmond", "Tanya Cruz", "DJ Hartley", "Simon Leary", "Elliot Marbury", "Ariana Reyes"],
       "chicago": ["Selena Grant", "Talia Finch"],
-      "metro": ["Dr. Lila Mezran", "Luis Navarro", "Carmen Delaine", "Trevor Shimizu", "Sgt. Rachel Torres"],
-      "culture": ["Maria Keen", "Sharon Okafor", "Kai Marston", "Mason Ortega", "Angela Reyes", "Noah Tan"],
+      "metro": ["Dr. Lila Mezran", "Luis Navarro", "Carmen Delaine", "Trevor Shimizu", "Sgt. Rachel Torres", "Lena Carrow", "Dana Reeve"],
+      "culture": ["Maria Keen", "Sharon Okafor", "Kai Marston", "Mason Ortega", "Angela Reyes", "Noah Tan", "Elliot Graye"],
       "business": ["Jordan Velez"],
       "opinion": ["Farrah Del Rio", "P Slayer"],
       "wire": ["Reed Thompson", "MintConditionOakTown", "Celeste Tran"],
       "photography": ["DJ Hartley", "Arman Gutiérrez"],
-      "editorial": ["Mags Corliss", "Rhea Morgan", "Luis Navarro"]
+      "editorial": ["Mags Corliss", "Rhea Morgan", "Luis Navarro"],
+      "freelance": ["Jax Caldera"]
     }
   };
 }
@@ -291,6 +367,13 @@ var _rosterCache = null;
 function getRoster_() {
   if (!_rosterCache) {
     _rosterCache = loadRoster_();
+    // S331 Phase 2.0: stamp canonical POPIDs from the Bay_Tribune_Oakland join
+    // map so every roster entry is ledger-linked (drift-checkable vs the tab).
+    for (var name in _rosterCache.journalists) {
+      if (ROSTER_POPIDS[name]) {
+        _rosterCache.journalists[name].popId = ROSTER_POPIDS[name];
+      }
+    }
   }
   return _rosterCache;
 }
@@ -745,6 +828,7 @@ function getThemeKeywordsForDomain_(domain, hookType) {
     'CULTURE': ['canvas', 'energy', 'sound', 'texture'],
     'COMMUNITY': ['faith', 'family', 'neighborhood', 'rhythm'],
     'BUSINESS': ['economic', 'labor', 'stability'],
+    'ECONOMIC': ['economic', 'labor', 'stability'],  // S331: alias of BUSINESS — contract seeds emit ECONOMIC (buildContractSeeds CONTRACT_SEED_SIGNAL); without this the domain scored ['general'] and always fell to the signal fallback. bylineEngine.DOMAIN_KEYWORDS already carries this alias.
     'INFRASTRUCTURE': ['micro-failures', 'tolerance', 'maintenance', 'system'],
     'WEATHER': ['meteorologically', 'forecast', 'data', 'experience'],
     'GENERAL': ['stability', 'quiet', 'texture']
@@ -783,7 +867,27 @@ function getThemeKeywordsForDomain_(domain, hookType) {
  * suggestStoryAngle_(["Legacy", "Memory"], "sports_history")
  * // → { journalist: "Hal Richmond", angle: "historical reflection", voiceGuidance: "...", confidence: "high" }
  */
-function suggestStoryAngle_(eventThemes, signalType, usageCounts) {
+/** S331 Phase 2.0: single byline-eligibility gate for every suggestion path.
+ *  Editorial desk (EIC, copy chief) — composes/edits, never bylined (S329
+ *  C104 proof). Chicago desk — bureau is canonically dead in-sim. Per-entry
+ *  bylineIneligible flag — photo staff (G-S14 class) + editorially-deployed
+ *  freelancers (Jax Caldera). Applied to BOTH the theme-scoring loop and the
+ *  signal fallbacks: pre-S331 the fallback leaked Mags Corliss on
+ *  human_interest/feature signals past the 78c editorial skip. */
+function bylineEligible_(name) {
+  var roster = getRoster_();
+  var j = roster.journalists[name];
+  if (!j) return false;
+  if (j.desk === 'editorial' || j.desk === 'chicago') return false;
+  if (j.bylineIneligible) return false;
+  return true;
+}
+
+function suggestStoryAngle_(eventThemes, signalType, usageCounts, excludeNames) {
+  // excludeNames (S331 engine.80c, optional): map name -> truthy. Names the
+  // caller has ruled out entirely this seed (e.g. at the in-cycle hint cap in
+  // buildContractSeeds). Excluded from the theme loop AND both signal
+  // fallbacks, so the next-best candidate surfaces instead of a forced blank.
   // usageCounts (S329 engine.78c, optional): map journalistName -> recent-use
   // count (caller-built, e.g. last-3-cycles SuggestedJournalist tally). Each
   // recent use subtracts 2 from that journalist's theme score, so a fixed
@@ -801,7 +905,7 @@ function suggestStoryAngle_(eventThemes, signalType, usageCounts) {
     // Fall back to signal-based assignment
     if (signalType) {
       var bySignal = getJournalistBySignal_(signalType);
-      if (bySignal) {
+      if (bySignal && bylineEligible_(bySignal) && !(excludeNames && excludeNames[bySignal])) {
         result.journalist = bySignal;
         result.angle = 'signal-matched coverage';
         result.voiceGuidance = getVoiceGuidance_(bySignal, 'feature') || '';
@@ -839,10 +943,11 @@ function suggestStoryAngle_(eventThemes, signalType, usageCounts) {
   for (var i = 0; i < names.length; i++) {
     var name = names[i];
     var journalist = roster.journalists[name];
-    // S329 engine.78c: editorial desk (EIC, copy chief) never gets a byline
-    // suggestion — bench C104 proof: with beat writers usage-penalized, Mags
-    // Corliss won 12 COMMUNITY seeds.
-    if (journalist.desk === 'editorial') continue;
+    // S331 Phase 2.0: full eligibility gate (supersedes the S329 editorial-only
+    // skip — see bylineEligible_ for the exclusion classes).
+    if (!bylineEligible_(name)) continue;
+    // S331 engine.80c: caller-ruled-out names (in-cycle hint cap) skip scoring.
+    if (excludeNames && excludeNames[name]) continue;
     var journoThemes = journalist.themes || [];
 
     var score = 0;
@@ -899,7 +1004,9 @@ function suggestStoryAngle_(eventThemes, signalType, usageCounts) {
     // re-elected the same name 13x after the penalty knocked out the theme
     // path). Blank is legal — the deck column is a HINT, not direction.
     var bySignalFallback = getJournalistBySignal_(signalType);
-    if (bySignalFallback && !(usageCounts && usageCounts[bySignalFallback] >= 6)) {
+    if (bySignalFallback && bylineEligible_(bySignalFallback) &&
+        !(excludeNames && excludeNames[bySignalFallback]) &&
+        !(usageCounts && usageCounts[bySignalFallback] >= 6)) {
       result.journalist = bySignalFallback;
       result.angle = matchedAngle;
       result.voiceGuidance = getVoiceGuidance_(bySignalFallback, 'feature') || '';
@@ -1061,6 +1168,9 @@ if (typeof module !== 'undefined' && module.exports) {
     getVoiceGuidance_: (typeof getVoiceGuidance_ !== 'undefined') ? getVoiceGuidance_ : undefined,
     // engine.53 — exchange engine's interview format matches citizen->journalist in Node
     matchCitizenToJournalist_: matchCitizenToJournalist_,
-    getThemeKeywordsForDomain_: getThemeKeywordsForDomain_
+    getThemeKeywordsForDomain_: getThemeKeywordsForDomain_,
+    // S331 Phase 2.0 — eligibility gate + POPID join surface
+    bylineEligible_: bylineEligible_,
+    ROSTER_POPIDS: ROSTER_POPIDS
   };
 }

@@ -248,12 +248,12 @@ var CONTRACT_SEED_SIGNAL = {
  *  globals are absent (Node tests) or matching throws — seed ships without.
  *  usageCounts (S329 engine.78c): recent-use tally passed to suggestStoryAngle_
  *  so a fixed domain vocabulary rotates instead of electing the same winner. */
-function contractSeedJournalist_(domain, usageCounts) {
+function contractSeedJournalist_(domain, usageCounts, excludeNames) {
   try {
     if (typeof getThemeKeywordsForDomain_ !== 'function' ||
         typeof suggestStoryAngle_ !== 'function') return null;
     var themes = getThemeKeywordsForDomain_(domain, 'signal');
-    return suggestStoryAngle_(themes, CONTRACT_SEED_SIGNAL[domain] || 'human_interest', usageCounts || null);
+    return suggestStoryAngle_(themes, CONTRACT_SEED_SIGNAL[domain] || 'human_interest', usageCounts || null, excludeNames || null);
   } catch (e) {
     return null;
   }
@@ -429,6 +429,8 @@ function buildContractSeeds_(ctx) {
   // cycles, then increment in-cycle so multiple same-domain seeds this cycle
   // also spread across the roster instead of stacking on one name.
   var journoTally = contractSeedUsageTally_(ctx, cycle);
+  var hintWins = {};   // S331: in-cycle SuggestedJournalist emissions per name
+  var hintTotal = 0;   // S331: total non-blank hints emitted this cycle
 
   // Cluster ripples by causeType + neighborhood (T5 family grouping).
   var clusters = {};
@@ -528,9 +530,26 @@ function buildContractSeeds_(ctx) {
     }
 
     var seedDomain = CONTRACT_SEED_DOMAIN[lead.causeType] || 'GENERAL';
-    var match = contractSeedJournalist_(seedDomain, journoTally); // S313 pre-match, fail-soft; S329 rotation
+    // S331 engine.80b/c: in-cycle hint cap — one name may take at most 25% of
+    // this cycle's seeds (floor 2; denominator = seeds built so far, matching
+    // checkBylineCadence's %-of-cycle metric). The 78c penalty cap (max -4)
+    // prevents lockout but cannot suppress a raw theme-score lead > 4: bench
+    // C110 fired 21 COMMUNITY seeds and Maria Keen (raw 8, capped to 4) took
+    // 20/40 = 50%. Capped names are EXCLUDED from scoring (79c) rather than
+    // blanked after the fact (80b bench C111: discard-not-exclude starved
+    // COMMUNITY to 13/16 blank while Sharon Okafor sat eligible behind the
+    // capped winner). Next-best / signal fallback surfaces; blank only when
+    // nobody eligible clears the floor — the deck column is a HINT.
+    var hintCapN = Math.max(2, Math.floor((seeds.length + 1) * 0.25)); // floor, not ceil — ceil let a name land 10/39 = 25.6%, a hair over checkBylineCadence's strict 25% (bench C112)
+    var cappedNames = {};
+    for (var hn in hintWins) {
+      if (hintWins[hn] >= hintCapN) cappedNames[hn] = true;
+    }
+    var match = contractSeedJournalist_(seedDomain, journoTally, cappedNames); // S313 pre-match, fail-soft; S329 rotation
     if (match && match.journalist) {
       journoTally[match.journalist] = (journoTally[match.journalist] || 0) + 1;
+      hintWins[match.journalist] = (hintWins[match.journalist] || 0) + 1;
+      hintTotal += 1;
     }
     seeds.push({
       seedId: contractSeedHash_(cycle + '|' + order[k] + '|' + lead.causeId),

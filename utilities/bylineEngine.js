@@ -404,7 +404,8 @@ var BYLINE_INELIGIBLE_ROLES = {
   'Editor-in-Chief': true,
   'Senior Photographer': true,
   'Photo Assistant': true,
-  'Copy Chief': true
+  'Copy Chief': true,
+  'Freelance Accountability Writer': true  // S331: Jax Caldera — editorially deployed, never auto-rotated (mirrors rosterLookup bylineIneligible)
 };
 
 function filterRosterForByline_(roster) {

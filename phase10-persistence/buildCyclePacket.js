@@ -766,7 +766,14 @@ function buildCyclePacket_(ctx) {
   for (var li = 0; li < lines.length; li++) {
     var mSec = String(lines[li]).match(/^--- ([A-Z ]+?)(?: \(.*)?\s*---$/);
     if (mSec) keeping = KEEP_SECTIONS.indexOf(mSec[1].trim()) >= 0;
-    else if (/^=== /.test(String(lines[li]))) keeping = true; // header/footer lines
+    else if (/^=== /.test(String(lines[li]))) {
+      // Terminal '--- END ---' marker before the footer: buildEveningContext's
+      // section regexes look ahead for '\n---'; pre-trim the last kept section
+      // was never terminal, post-trim it can be (bench C103 caught CRIME
+      // SNAPSHOT unparseable when TRANSIT was quiet).
+      if (/^=== END PACKET/.test(String(lines[li]))) filtered.push('--- END ---');
+      keeping = true;
+    }
     if (keeping) filtered.push(lines[li]);
   }
   lines = filtered;

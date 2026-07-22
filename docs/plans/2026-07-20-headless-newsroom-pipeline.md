@@ -17,11 +17,13 @@ pointers:
 
 # Headless Newsroom + City-Hall Pipeline Plan
 
-**Goal:** A cron-orchestrated run that turns a completed engine cycle into a canon-gated, scored, published edition (and city-hall record) with **no human or Claude Code in the loop** — where model choice per desk is a config line, not an architecture change.
+**Goal:** A continuous headless newsroom — journalists + city-hall voices go to work **M–F** (each wake finds an angle and writes gated articles that ingest to canon daily), and **Mags compiles the week's top stories into a Saturday edition** — with **no human or Claude Code in the loop**, where model choice per desk is a config line, not an architecture change.
 
 **Architecture:** A standalone node orchestrator, fired by cron after a cycle completes, chains pieces that mostly already exist: load current world state (`world_summary_c{N}.md`, sim-clock) → Mags slate/`/sift` → per-desk **writer crons** (`cron-desk-writer.js`, model per desk) → optional `source-search` verified retrieval → **headless Rhea** canon/fact gate → assemble → `/post-publish` → ingest. The NEW build is three things: (1) the **orchestrator** that chains them headless, (2) **Rhea running headless** as a hard gate (the "fix #2" the run-1 experiment flagged), (3) a **per-run scorecard** so quality is measured, not vibed. It replaces interactive terminal-driven edition production with scheduled workers; the interactive path stays runnable.
 
 **Execution surfaces (S325 decision):** work splits across two headless surfaces, and the cron picks the right one per stage. **Writing → raw-API node cron** (`cron-desk-writer.js`) — cheap, provider-swappable, composition from injected state, no heavy tools. **Verification/gating + retrieval (Rhea, source-search) → Claude Code headless** (`claude -p` / Agent SDK) — needs robust tool use + GodWorld MCP + the reviewer-lane scaffolding, which raw-API loops do poorly. The cron is only the orchestrator; it fires each stage on its correct surface.
+
+**Cadence — continuous newsroom, weekly edition (S325 refinement, Mike-direct):** NOT one monolithic edition per cycle. Instead: **M–F, per-wake, each journalist and city-hall voice goes to work** — wakes, uses `source-search` to find an angle in its beat, and writes one or more articles. Each article passes the Rhea gate and **ingests to canon as it's written** (stories become the world daily). Multiple reporters × multiple wakes cover a storyline from several angles across the week (civic's N storylines → N+ articles over M–F). **Saturday: Mags compiles** — curates the week's canon stories into the edition (a curation of what already happened, not a fresh generation). This decouples *writing* (continuous, distributed, cheap-per-article) from *edition assembly* (weekly, curatorial), and reuses the existing citizen-wake cron infra (5 wakes/day) as the journalist/voice wakes. Real-time cadence (M–F/Sat crons); sim-time content (whatever cycles occur that week). The journalists/voices are citizens with jobs — fits the give-the-citizens-a-life doctrine.
 
 **Terminal:** research-build (design + orchestrator/harness scripts — apparatus). Handoffs: **engine-sheet** owns cron wiring + world-state artifacts; **media** owns desk voices + Rhea content (unchanged — the workers *load* them); **civic** owns city-hall agents (unchanged). Per the media/civic-never-build rule, all script/orchestrator building is research-build/engine-sheet; media/civic content files are loaded, not rebuilt.
 
@@ -79,14 +81,17 @@ The provable increment: one desk produces a **scored, canon-gated** headless dra
 - **Verify:** one invocation yields a draft + scorecard + rhea verdict, routed to `published/` or `flagged/`.
 - **Status:** [ ] not started
 
-### Phase 2 — orchestrator / full edition  *(research-build + engine-sheet; split to sub-plan when picked up)*
-Mags slate (`/sift` headless) → fan-out ALL desks (per `desk-model-map`) → per-draft Rhea gate → assemble edition → `/post-publish` → ingest. A single cron entry. Acceptance: one cron run produces a full gated edition from a completed cycle.
+### Phase 2 — daily writer-wakes → canon accrual (M–F)  *(research-build + engine-sheet; split to sub-plan)*
+The continuous half. A per-wake cron (reuse the citizen-wake schedule) that, for each active journalist: pick an open storyline/angle in the beat (via `source-search`), write 1+ articles (Task 4 chain per article, model per `desk-model-map`), Rhea-gate each, and **ingest passing articles to canon** (the article becomes world state; flagged → `flagged/`). Runs M–F. Acceptance: over a week, N civic storylines yield N+ canon-ingested, gated articles from multiple angles, no human prompt.
 
-### Phase 3 — city-hall headless  *(civic content, research-build infra; sub-plan)*
-Multi-cycle city-hall cron: agenda prep → council voices → votes → feed the sift. Mirrors the writer-worker shape on civic agents.
+### Phase 2b — Saturday edition compile  *(research-build; sub-plan)*
+The curatorial half. A Saturday cron where **Mags compiles**: `/sift`-style curation over the week's canon-ingested articles → pick the top stories → assemble edition → `/post-publish`. The edition is a curation of what already hit canon, not a fresh generation. Acceptance: one Saturday run produces an edition from the week's accrued canon articles.
 
-### Phase 4 — 100-run scorecard eval  *(sub-plan)*
-Aggregate scorecards across editions to answer Feedback1.txt's question per desk: is DeepSeek "90% as good for 20% of the cost," or does Sonnet earn its premium here?
+### Phase 3 — city-hall headless (daily)  *(civic content, research-build infra; sub-plan)*
+Same continuous model on the civic side: city-hall voices/agents wake M–F, work the active civic storylines (agenda → positions → votes as they occur), articles ingest to canon and feed Mags' Saturday compile. Mirrors the writer-worker shape on civic agents.
+
+### Phase 4 — scorecard eval + cost tuning  *(sub-plan)*
+Aggregate scorecards across the accrued articles to answer Feedback1.txt's per-desk question (is DeepSeek "90% for 20%?"). Includes the Haiku-vs-Sonnet Rhea-gate cost test (gate is $0.76/run on Sonnet; source-search proved Haiku parity for verified work).
 
 ---
 
@@ -95,6 +100,8 @@ Aggregate scorecards across editions to answer Feedback1.txt's question per desk
 - [ ] **Rhea-flag disposition** (blocks Task 4 final behavior): a flagged draft → auto-reject + regenerate, or route to a human-edit queue? Default proposed: `flagged/` staging for human review first, no auto-regenerate until trust is established.
 - [ ] **Publish target under the re-opening freeze** (blocks Phase 2): does the headless edition publish live, or to a review holding area? The S313 freeze is only now re-opening via Mike's direction — proposed default is holding-area until the scorecard shows edit-not-rewrite quality.
 - [ ] **Which desks are "voice-critical" vs "routine"** (blocks Task 3): Feedback1.txt names Hal Richmond/Mags/investigative/editorial as Sonnet; confirm the full split with Mike.
+- [ ] **Canon-ingest mechanism** (blocks Phase 2): how does a gated article "hit canon" — which store (Supermemory/canon container? a canon articles ledger? the sim ledger?) and in what form (full text? claims? a storyline update?), so Mags' Saturday compile and future reporters can retrieve it. Needs a design pass.
+- [ ] **Angle assignment** (blocks Phase 2): does each journalist self-pick an angle from open storylines via `source-search`, or does a lightweight Mags/editor-wake assign the day's angles first (avoids 3 reporters writing the same angle)? Proposed: a cheap daily assignment pass, then reporters write their assigned angles.
 
 ---
 

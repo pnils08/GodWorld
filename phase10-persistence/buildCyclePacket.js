@@ -754,6 +754,23 @@ function buildCyclePacket_(ctx) {
   // ═══════════════════════════════════════════════════════════
   lines.push('=== END PACKET ===');
 
+  // ── S328 W2b (compile-layer rebuild, Mike-approved): emit ONLY the sections
+  // the one PacketText consumer (buildDeskPackets buildEveningContext) parses.
+  // The other ~22 sections duplicated world_summary/desk-packet state for no
+  // reader — pure noise in the tab and in every LLM search that grepped it.
+  // Emitter blocks above are untouched (reversible: edit KEEP list to restore).
+  var KEEP_SECTIONS = ['CALENDAR', 'CITY DYNAMICS', 'MEDIA CLIMATE', 'WEATHER MOOD',
+    'EVENING CITY', 'CRIME SNAPSHOT', 'TRANSIT'];
+  var filtered = [];
+  var keeping = true;
+  for (var li = 0; li < lines.length; li++) {
+    var mSec = String(lines[li]).match(/^--- ([A-Z ]+?)(?: \(.*)?\s*---$/);
+    if (mSec) keeping = KEEP_SECTIONS.indexOf(mSec[1].trim()) >= 0;
+    else if (/^=== /.test(String(lines[li]))) keeping = true; // header/footer lines
+    if (keeping) filtered.push(lines[li]);
+  }
+  lines = filtered;
+
   var packet = lines.join('\n');
 
   // ═══════════════════════════════════════════════════════════

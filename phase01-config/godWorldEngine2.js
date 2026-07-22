@@ -475,7 +475,11 @@ function runWorldCycle() {
   // safePhaseCall_(ctx, 'Phase10-Chicago', function() { saveV3Chicago_(ctx); });
 
   safePhaseCall_(ctx, 'Phase10-CyclePacket', function() { buildCyclePacket_(ctx); });
-  safePhaseCall_(ctx, 'Phase10-MediaBriefing', function() { generateMediaBriefing_(ctx); });
+  // safePhaseCall_(ctx, 'Phase10-MediaBriefing', function() { generateMediaBriefing_(ctx); });
+  // ^ DISABLED S328 W2a (compile-layer rebuild, Mike-approved): Media_Briefing had
+  //   ZERO readers in the current pipeline (only its own writer + retired exporters)
+  //   while writing 50-60k-char cells every cycle. Retained for reversibility —
+  //   same disable pattern as Phase8-ChicagoCitizens (S229).
 
   // Media Ledger - records cultural entity media mentions (uses ctx.summary.mediaIntake from buildMediaPacket_)
   safePhaseCall_(ctx, 'Phase10-MediaLedger', function() { recordMediaLedger_(ctx); });
@@ -2032,7 +2036,11 @@ function runCyclePhases_(ctx) {
   // S229 DISABLED — sister of Phase8-ChicagoCitizens disable above (cycle-phases path).
   // safePhaseCall_(ctx, 'Phase10-Chicago', function() { saveV3Chicago_(ctx); });
   safePhaseCall_(ctx, 'Phase10-CyclePacket', function() { buildCyclePacket_(ctx); });
-  safePhaseCall_(ctx, 'Phase10-MediaBriefing', function() { generateMediaBriefing_(ctx); });
+  // safePhaseCall_(ctx, 'Phase10-MediaBriefing', function() { generateMediaBriefing_(ctx); });
+  // ^ DISABLED S328 W2a (compile-layer rebuild, Mike-approved): Media_Briefing had
+  //   ZERO readers in the current pipeline (only its own writer + retired exporters)
+  //   while writing 50-60k-char cells every cycle. Retained for reversibility —
+  //   same disable pattern as Phase8-ChicagoCitizens (S229).
   safePhaseCall_(ctx, 'Phase10-MediaLedger', function() { recordMediaLedger_(ctx); });
   safePhaseCall_(ctx, 'Phase10-CycleSeed', function() { saveCycleSeed_(ctx); });
 

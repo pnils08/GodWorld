@@ -66,6 +66,16 @@ Output: `output/voice-disposition-cache/<POPID>.md` (phrase + `Refreshed: c{XX}`
 
 **Gate:** All cache files' `Refreshed:` stamp shows c{XX}.
 
+### Step 5.56: Ledger snapshot refresh (S329)
+
+Refresh the disk snapshot that backs every search channel's "most authoritative" shelf (`lib/mags.searchDisk` rank-0 + MCP `search_everything`). Moved here from city-hall-prep Step 1.5 (S329): the refresh must ride the cycle path, not a downstream pipeline — the C101 run logged "refreshed" while the file sat 10 days stale, which is how Discord personas stopped seeing the Richards trade.
+
+```bash
+node scripts/dumpLedger.js {XX} --quiet
+```
+
+**Gate:** `output/simulation_ledger_snapshot.meta.json` read back shows `"cycle": {XX}` and current `generatedAt`. Never report this step done from the command exit alone.
+
 ### Step 5.57: World-state fold (engine.76 W3)
 
 Fold the cycle's cron-consumer inputs into the single artifact the 24/7 loops read — `output/world_state.json`. Deterministic assembler, no LLM: live Riley_Digest orientation + base_context canon (staleness-flagged) + Step 5.5 hood blocks + Step 5.55 dispositions + pointers to the deep artifacts. Consumers: mags-discord-bot / discord-reflection (`lib/mags.loadWorldState`), citizen-wake + citizen-exchange (`lib/wakePerception.loadNeighborhoodTexture`), cron-desk-writer fallback path. All consumers fail back to the pre-W3 per-file reads if the fold is absent or cycle-mismatched.

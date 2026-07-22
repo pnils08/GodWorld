@@ -177,15 +177,11 @@ Runs at Step 1, before Step 2 builds topic assignments. The auto-investigation p
 
 If none of those fire, Step 1 completes silently with one-line "no anomalies — proceeding to Step 2" log entry. Operator escalates to Mike's review only on actual anomaly.
 
-### Step 1.5: Snapshot the ledger to disk (S252)
+### Step 1.5: Verify the ledger snapshot is fresh (S252, reworked S329)
 
-Refresh the local Simulation_Ledger snapshot that backs `search_everything`'s disk shelf. The federated MCP tool (`scripts/godworld-mcp.py`) greps disk for any bare name; this dump is what lets it return a citizen's **live** ledger row instead of a stale Supermemory card. Runs here because city-hall-prep is post-engine — the ledger is at its freshest.
+The snapshot refresh now runs on the cycle path (run-cycle Step 5.56) — this step **verifies** it instead of writing it. Read `output/simulation_ledger_snapshot.meta.json` and check `"cycle"` equals {XX}. If it matches, log the actual meta line (cycle + rowCount + generatedAt). If it does NOT match, run `node scripts/dumpLedger.js {XX} --quiet`, then **read the meta back** and log what it says.
 
-```bash
-node scripts/dumpLedger.js {XX} --quiet
-```
-
-Writes `output/simulation_ledger_snapshot.jsonl` (one citizen per line, full row, stable filename — overwrites each cycle so grep never surfaces a prior-cycle row) + `.meta.json` (cycle, count, timestamp). Aborts without overwriting if the ledger reads empty. Non-blocking: if it fails, note it in the production log and proceed — `search_everything` degrades to the Supermemory card, it doesn't break.
+Never log this step as "refreshed" from a command exit or a remembered count — the C101 run (S329 finding) logged "913-row snapshot refreshed" while the file sat untouched since Jul 10, and every Discord persona went blind to ten days of canon. The log line for this step must be a quote of the freshly-read meta, nothing else.
 
 ### Step 2: Topic Assignments
 

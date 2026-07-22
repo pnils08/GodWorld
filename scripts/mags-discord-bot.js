@@ -494,15 +494,11 @@ function searchDashboard(query) {
 // ---------------------------------------------------------------------------
 var SEARCH_TOOL = {
   name: 'search_world',
-  description: 'Search Oakland from the city records on disk — citizens, businesses, ' +
-    'neighborhoods, published editions, canon history. Use this whenever you need a ' +
-    'specific fact about your world that you do not already have in front of you. ' +
-    'Query a name, neighborhood, business, or topic. Returns ranked excerpts from the ' +
-    'live city data.',
+  description: 'Search Oakland from the city records on disk. VERY IMPORTANT: This is a strict AND keyword search. Every word you type MUST be in the document or it will be excluded. KEEP QUERIES EXTREMELY SHORT (2-3 words max). Do NOT use conversational words or filler (e.g. do not use "details", "contract", "news"). If looking for a trade, just search "Martin Richards trade". Returns ranked excerpts from the live city data.',
   input_schema: {
     type: 'object',
     properties: {
-      query: { type: 'string', description: 'name, neighborhood, business, or topic to look up' }
+      query: { type: 'string', description: '2-3 essential keywords only (e.g., "Martin Richards trade"). Do NOT add filler words.' }
     },
     required: ['query']
   }

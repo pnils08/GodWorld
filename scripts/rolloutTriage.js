@@ -51,7 +51,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const ROLLOUT_PATH = path.join(__dirname, '..', 'docs', 'engine', 'ROLLOUT_PLAN.md');
+const ROLLOUT_PATH = path.join(__dirname, '..', 'docs', 'engine', 'archive', 'ROLLOUT_PLAN.md');
 const OUTPUT_DIR = path.join(__dirname, '..', 'output');
 const STALE_THRESHOLD = 2;
 

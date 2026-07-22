@@ -29,7 +29,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
-const ROLLOUT = path.join(ROOT, 'docs', 'engine', 'ROLLOUT_PLAN.md');
+const ROLLOUT = path.join(ROOT, 'docs', 'engine', 'archive', 'ROLLOUT_PLAN.md');
 const RESEARCH_DIR = path.join(ROOT, 'docs', 'research');
 const RESEARCH_SKIP = new Set(['TEMPLATE.md', 'index.md']);
 

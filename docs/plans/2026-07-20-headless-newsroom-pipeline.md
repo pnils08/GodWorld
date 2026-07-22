@@ -73,13 +73,16 @@ The provable increment: one desk produces a **scored, canon-gated** headless dra
   1. Map `desk → {provider, model}` per Feedback1.txt routing: voice-critical desks (sports lead, Mags, editorial, investigative) → `anthropic/claude-sonnet-5`; routine desks (business, culture, letters, standings/notebook) → `openrouter/deepseek-chat`.
   2. `cron-desk-writer.js` reads this map keyed by `--desk` (CLI `--provider/--model` still override).
 - **Verify:** `node scripts/cron-desk-writer.js --desk business` → runs on DeepSeek per the map without an explicit `--provider`.
-- **Status:** [ ] not started
+- **Status:** [x] DONE (S325). `scripts/desk-model-map.json` built; `cron-desk-writer.js` reads it keyed by `--desk` (CLI overrides win). Verified: business → DeepSeek automatically.
 
 #### Task 4: Chain one desk end-to-end
 - **Files:** `scripts/cron-desk-run.js` — create
 - **Steps:** write (Task 1 harness) → Rhea gate (Task 2) → if `pass`, save to a `published/` staging dir; else save to `flagged/` with the Rhea flags. Emit the combined scorecard.
 - **Verify:** one invocation yields a draft + scorecard + rhea verdict, routed to `published/` or `flagged/`.
-- **Status:** [ ] not started
+- **Status:** [x] DONE (S325). `scripts/cron-desk-run.js` chains writer → gate → route + a combined `.run.json`. Verified: business desk → DeepSeek write ($0.003) → **Haiku gate** ($0.145) → routed to `flagged/` (3 high-severity invented numeric claims). **Bonus — Haiku-gate cost test passed:** ~5× cheaper than Sonnet ($0.145 vs $0.76) and still caught fabrications the writer self-score missed. Phase 1 COMPLETE (Tasks 1–4).
+
+### Phase 2.0 — angle assignment (NEXT staged build, Mike-direct S325)  *(research-build; the daily rhythm's first step)*
+A daily assignment pass over the **31-name journalist roster + beat map**: read the open storylines (civic/sports/culture/…), assign angles to reporters so N reporters don't all write the same one, and hand each reporter its angle. Reporters may **take the assigned angle or generate their own**. Depends on: **byline deep-fix (31-name roster + beat map)** + **PoolKey policy** — both research-build/W5 (`.claude/agents/REPORTER_DESK_INDEX.md` is the current roster). Feeds Phase 2 (the reporter wakes carry an assigned angle into `cron-desk-run.js`). Build after Phase 1 is tied up.
 
 ### Phase 2 — daily writer-wakes → canon accrual (M–F)  *(research-build + engine-sheet; split to sub-plan)*
 The continuous half. A per-wake cron (reuse the citizen-wake schedule) that, for each active journalist: pick an open storyline/angle in the beat (via `source-search`), write 1+ articles (Task 4 chain per article, model per `desk-model-map`), Rhea-gate each, and **ingest passing articles to canon** (the article becomes world state; flagged → `flagged/`). Runs M–F. Acceptance: over a week, N civic storylines yield N+ canon-ingested, gated articles from multiple angles, no human prompt.
@@ -101,7 +104,7 @@ Aggregate scorecards across the accrued articles to answer Feedback1.txt's per-d
 - [ ] **Publish target under the re-opening freeze** (blocks Phase 2): does the headless edition publish live, or to a review holding area? The S313 freeze is only now re-opening via Mike's direction — proposed default is holding-area until the scorecard shows edit-not-rewrite quality.
 - [ ] **Which desks are "voice-critical" vs "routine"** (blocks Task 3): Feedback1.txt names Hal Richmond/Mags/investigative/editorial as Sonnet; confirm the full split with Mike.
 - [ ] **Canon-ingest mechanism** (blocks Phase 2): how does a gated article "hit canon" — which store (Supermemory/canon container? a canon articles ledger? the sim ledger?) and in what form (full text? claims? a storyline update?), so Mags' Saturday compile and future reporters can retrieve it. Needs a design pass.
-- [ ] **Angle assignment** (blocks Phase 2): does each journalist self-pick an angle from open storylines via `source-search`, or does a lightweight Mags/editor-wake assign the day's angles first (avoids 3 reporters writing the same angle)? Proposed: a cheap daily assignment pass, then reporters write their assigned angles.
+- [x] **Angle assignment** — RESOLVED (Mike-direct S325): a dedicated **assignment stage** assigns the 31-name journalist roster (per beat map) to angles from the open storylines; each reporter then **uses its assigned angle OR generates its own**. This is the next staged build after Phase 1 is tied up → see Phase 2.0. Depends on the **byline deep-fix (31-name roster + beat map)** and **PoolKey policy** — both research-build/W5. Current roster: `.claude/agents/REPORTER_DESK_INDEX.md`.
 
 ---
 

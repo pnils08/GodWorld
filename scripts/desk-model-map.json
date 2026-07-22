@@ -1,0 +1,11 @@
+{
+  "_comment": "Per-desk model routing (research.25 / plan 2026-07-20-headless-newsroom-pipeline, Task 3). cron-desk-writer.js reads this keyed by --desk when --provider/--model are not given on the CLI. Voice-critical desks -> Sonnet; routine desks -> DeepSeek (per Feedback1.txt). The exact split is an open question (confirm with Mike).",
+  "sports":     { "provider": "anthropic",  "model": "claude-sonnet-5" },
+  "civic":      { "provider": "anthropic",  "model": "claude-sonnet-5" },
+  "chicago":    { "provider": "anthropic",  "model": "claude-sonnet-5" },
+  "business":   { "provider": "openrouter", "model": "deepseek/deepseek-chat" },
+  "culture":    { "provider": "openrouter", "model": "deepseek/deepseek-chat" },
+  "letters":    { "provider": "openrouter", "model": "deepseek/deepseek-chat" },
+  "podcast":    { "provider": "openrouter", "model": "deepseek/deepseek-chat" },
+  "_default":   { "provider": "openrouter", "model": "deepseek/deepseek-chat" }
+}

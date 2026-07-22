@@ -50,8 +50,18 @@ function arg(flag, def) {
   return i !== -1 && process.argv[i + 1] ? process.argv[i + 1] : def;
 }
 const DESK = arg('--desk', 'sports');
-const PROVIDER = arg('--provider', 'anthropic');   // 'anthropic' (Claude Code parity) | 'openrouter' (cheap-model sweep, research.25 Thread B)
-const MODEL = arg('--model', PROVIDER === 'openrouter' ? 'deepseek/deepseek-chat' : 'claude-sonnet-5');
+// Per-desk routing (Task 3): if --provider/--model not on the CLI, read scripts/desk-model-map.json.
+function loadDeskRoute(desk) {
+  try {
+    const m = JSON.parse(fs.readFileSync(path.join(__dirname, 'desk-model-map.json'), 'utf8'));
+    return m[desk] || m._default || null;
+  } catch (_) { return null; }
+}
+const PROVIDER_FLAG = arg('--provider', null);
+const MODEL_FLAG = arg('--model', null);
+const DESK_ROUTE = (!PROVIDER_FLAG || !MODEL_FLAG) ? loadDeskRoute(DESK) : null;
+const PROVIDER = PROVIDER_FLAG || (DESK_ROUTE && DESK_ROUTE.provider) || 'anthropic';   // 'anthropic' | 'openrouter'
+const MODEL = MODEL_FLAG || (DESK_ROUTE && DESK_ROUTE.model) || (PROVIDER === 'openrouter' ? 'deepseek/deepseek-chat' : 'claude-sonnet-5');
 const MODEL_SLUG = MODEL.replace(/[^a-z0-9]+/gi, '-').toLowerCase();
 const MAX_TURNS = parseInt(arg('--max-turns', '15'), 10);
 const MAX_TOKENS = parseInt(arg('--max-tokens', '16000'), 10);   // a full multi-article section > 8k (S325: 8k truncated Sonnet mid-Article-2)

@@ -5,19 +5,19 @@ updated: 2026-05-07
 type: plan
 tags: [engine, architecture, active]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md §"IDEAS: Arc engine grafts + typed municipal-vehicle character system + micro-event overlap detection" (S190 entry, line 107) — Pattern C source
+  - docs/engine/archive/ROLLOUT_PLAN.md §"IDEAS: Arc engine grafts + typed municipal-vehicle character system + micro-event overlap detection" (S190 entry, line 107) — Pattern C source
   - output/drive-files/GodWorld_Escalation_Engine_v1.0.txt (DeepSeek v1, rejected as-is — patterns kept)
   - output/drive-files/Micro_Event_Generator_v2.0.txt (DeepSeek v2, rejected as-is — flavor-set quality kept)
   - docs/plans/2026-05-07-engine-routing-foundation.md (consequenceFloor integration target — Phase 5 cascade)
   - docs/adr/0003-skills-as-shared-infrastructure.md (friction-log pattern this plan follows)
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout; replaces line 107 Pattern C entry with pointer to this plan"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout; replaces line 107 Pattern C entry with pointer to this plan"
   - "[[plans/2026-05-07-engine-routing-foundation]] — sibling plan; chaos_cars Tier-1 cascade triggers Engine A's consequenceFloor flag"
   - "[[plans/2026-06-04-mags-citizen-loop]] §The seam to Chaos-Cars — chaos-cars supplies the OBJECTIVE adversity (negative LifeHistory/neighborhood events); the citizen-loop is the SUBJECTIVE reaction. Join at the citizen's perception slice. Two decay systems must compose consciously (S262)."
   - "[[adr/0003-skills-as-shared-infrastructure]] — friction-log pattern applies to /chaos-dryrun + future chaos-related skills"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — register in same commit"
-  - "[[engine/CHAOS_CARS_DEPLOY]] — C99-gated deploy runbook (S265); execute when the gate clears"
+  - "[[engine/archive/CHAOS_CARS_DEPLOY]] — C99-gated deploy runbook (S265); execute when the gate clears"
 ---
 
 # Chaos Cars Engine Plan

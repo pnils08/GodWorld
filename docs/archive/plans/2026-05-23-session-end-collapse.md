@@ -5,7 +5,7 @@ updated: 2026-05-23
 type: plan
 tags: [infrastructure, governance, complete]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md §governance.7
+  - docs/engine/archive/ROLLOUT_PLAN.md §governance.7
   - .claude/skills/session-end/SKILL.md v1.2 (current 13-step shape)
   - .claude/terminals/research-build/TERMINAL.md §Session Close (S226 soft-close pattern, canonical)
   - .claude/terminals/engine-sheet/TERMINAL.md §Session Close (stripped-persona variant)
@@ -270,11 +270,11 @@ The model-quality `<one-line summary>` heading style used by existing SESSION_HI
 
 - **Files:**
   - `docs/index.md` — add plan entry
-  - `docs/engine/ROLLOUT_PLAN.md` — flip governance.7 ready → done-pending-archive with closure details
+  - `docs/engine/archive/ROLLOUT_PLAN.md` — flip governance.7 ready → done-pending-archive with closure details
 - **Steps:**
   1. `docs/index.md` under `docs/plans/`: `- **[[archive/plans/2026-05-23-session-end-collapse]]** — /session-end ritual collapse plan (governance.7). 4 model + 1 mechanical. *(plan, infrastructure, active)*`
-  2. `docs/engine/ROLLOUT_PLAN.md` governance.7 row: state `ready` → `done-pending-archive`; pointer block to `[[../archive/plans/2026-05-23-session-end-collapse]]`; closure summary inline (commits + acceptance evidence + v1.0 ship vs deferred items).
-- **Verify:** `grep -n "governance.7" docs/engine/ROLLOUT_PLAN.md` shows the done-pending-archive row.
+  2. `docs/engine/archive/ROLLOUT_PLAN.md` governance.7 row: state `ready` → `done-pending-archive`; pointer block to `[[../archive/plans/2026-05-23-session-end-collapse]]`; closure summary inline (commits + acceptance evidence + v1.0 ship vs deferred items).
+- **Verify:** `grep -n "governance.7" docs/engine/archive/ROLLOUT_PLAN.md` shows the done-pending-archive row.
 - **Status:** [ ] not started
 
 ### Task 7: Commit skill rewrite + TERMINAL updates + plan registration + ROLLOUT flip (commit 2)
@@ -286,7 +286,7 @@ The model-quality `<one-line summary>` heading style used by existing SESSION_HI
   - `.claude/terminals/civic/TERMINAL.md`
   - `.claude/terminals/engine-sheet/TERMINAL.md`
   - `docs/index.md`
-  - `docs/engine/ROLLOUT_PLAN.md`
+  - `docs/engine/archive/ROLLOUT_PLAN.md`
 - **Steps:**
   1. Cross-terminal git stack check.
   2. Stage path-specifically.

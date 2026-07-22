@@ -10,10 +10,10 @@ sources:
   - schemas/SCHEMA_HEADERS.md (live regen output, S199-onward refresh cadence)
   - .claude/rules/engine.md (Phase 10 + 38 documented direct-write exceptions — the writer set this detector covers)
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout"
   - "[[archive/plans/2026-05-03-run-cycle-gap-log-surface]] — engineCycleAudit.js parent (this is the V2 detector slot)"
-  - "[[engine/LEDGER_HEAT_MAP]] — sibling tracker for column-level health (S202 audit pass surfaced this gap class)"
-  - "[[engine/ENGINE_REPAIR]] — cross-session defect log; this detector finds new ENGINE_REPAIR rows"
+  - "[[engine/archive/LEDGER_HEAT_MAP]] — sibling tracker for column-level health (S202 audit pass surfaced this gap class)"
+  - "[[engine/archive/ENGINE_REPAIR]] — cross-session defect log; this detector finds new ENGINE_REPAIR rows"
 ---
 
 # Writer-vs-Header Schema Alignment Detector Plan

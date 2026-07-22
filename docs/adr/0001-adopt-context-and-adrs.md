@@ -11,7 +11,7 @@ sources:
 pointers:
   - "../../CONTEXT.md — the artifact this ADR adopts"
   - "[[index]] — doc catalog"
-  - "[[engine/ROLLOUT_PLAN]] — referenced for migration follow-up"
+  - "[[engine/archive/ROLLOUT_PLAN]] — referenced for migration follow-up"
   - "[[SCHEMA]] — file/format conventions this ADR complements"
 ---
 

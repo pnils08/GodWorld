@@ -5,7 +5,7 @@ updated: 2026-07-12
 type: plan
 tags: [engine, citizens, migration, done]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md engine.55
+  - docs/engine/archive/ROLLOUT_PLAN.md engine.55
   - docs/plans/2026-06-14-ledger-representative-sample-migration-removal.md (nodes-permanent rule)
   - S315 engine.54 commit 66f3c7e8 (trajectory substrate this builds on)
 pointers:

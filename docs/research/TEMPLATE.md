@@ -8,7 +8,7 @@ sources:
   - docs/plans/2026-06-01-doc-loop-consolidation.md — the plan that locked this shape (S250)
   - docs/plans/TEMPLATE.md — sibling plan template; same self-contained discipline
   - docs/SCHEMA.md §3 (frontmatter), §7 (folder map), §12 (changelog)
-  - docs/engine/ROLLOUT_PLAN.md §Convention — State labels (S204) + Watch List
+  - docs/engine/archive/ROLLOUT_PLAN.md §Convention — State labels (S204) + Watch List
 pointers:
   - "[[../engine/ROLLOUT_PLAN]] — pending-state lives here, NOT in a research file"
   - "[[../plans/TEMPLATE]] — sibling: research is the standing library, a plan is the project that checks it out"

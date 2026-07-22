@@ -25,7 +25,7 @@ The contract: a gap log is the canonical inventory of sub-issues from **one skil
 **Why this shape exists (S212):** per ADR-0004, civic + media are the generator terminals in our gen-eval architecture. Per S212, generation has no holistic quality compass; evaluation does. Gap logs are the evaluation pass made architectural at the skill layer — the model that ran the skill captures friction the skill couldn't catch while running.
 
 Other terminals have different sidecar shapes:
-- **engine-sheet** — `docs/engine/ENGINE_REPAIR.md` (tactical-defects tracker, row-shaped, single-file with row-template inline)
+- **engine-sheet** — `docs/engine/archive/ENGINE_REPAIR.md` (tactical-defects tracker, row-shaped, single-file with row-template inline)
 - **research-build** — research notes / plans / ADRs (different shape; different discipline; no per-cycle sidecar)
 
 ---
@@ -56,7 +56,7 @@ sources:
   - ".claude/skills/<skill>/SKILL.md"
   - "output/production_log_<...>_c<XX>.md (parent production log)"
 pointers:
-  - "[[../../docs/engine/ROLLOUT_PLAN]] — parent ROLLOUT entry (<group>.<n>)"
+  - "[[../../docs/engine/archive/ROLLOUT_PLAN]] — parent ROLLOUT entry (<group>.<n>)"
   - "[[../../docs/plans/GAP_LOG_TEMPLATE]] — this template"
 ---
 

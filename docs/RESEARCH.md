@@ -12,7 +12,7 @@ Don't duplicate — read these when you need to understand a system layer:
 
 | System | Doc | Summary |
 |--------|-----|---------|
-| Simulation engine | `docs/engine/ENGINE_MAP.md` | 11-phase deterministic engine, ~170 .js files (clasp deploys subset), Google Apps Script |
+| Simulation engine | `docs/engine/archive/ENGINE_MAP.md` | 11-phase deterministic engine, ~170 .js files (clasp deploys subset), Google Apps Script |
 | Citizen data | `docs/SIMULATION_LEDGER.md` | ~837 rows post-S185 trim, 47 columns A-AU, 4 ClockModes (ENGINE/GAME/CIVIC/MEDIA) |
 | Spreadsheet | `docs/SPREADSHEET.md` | 53+ visible tabs (see schemas/SCHEMA_HEADERS.md for authoritative count), data flow, dead tabs |
 | Newsroom | `docs/EDITION_PIPELINE.md` | Pipeline v2 (S134, enhanced through S165): 5 terminals, 9 steps, 9 individual reporters, story-driven layout, alternate-start formats (dispatch/interview/supplemental) |
@@ -621,7 +621,7 @@ This is the difference between "Marcus Webb reviewed the Stabilization Fund appl
 
 ## Ready for Rollout — RETIRED (S250)
 
-This lane was pending-state living inside a research doc — the anti-pattern the S250 doc-loop consolidation kills. **Pending-state now lives only in [[engine/ROLLOUT_PLAN]]**, routed by a research file's verdict (`adopt` → a `ready` row; `watch` → the Watch List with a trigger; `take-nothing` → no row). It was empty at retirement, so nothing moved. See [[research/TEMPLATE]] §"verdict, never state".
+This lane was pending-state living inside a research doc — the anti-pattern the S250 doc-loop consolidation kills. **Pending-state now lives only in [[engine/archive/ROLLOUT_PLAN]]**, routed by a research file's verdict (`adopt` → a `ready` row; `watch` → the Watch List with a trigger; `take-nothing` → no row). It was empty at retirement, so nothing moved. See [[research/TEMPLATE]] §"verdict, never state".
 
 ---
 
@@ -2030,7 +2030,7 @@ The `Task` tool today spawns Claude subagents that each produce one reply and ex
 
 **Rollout:** LOW pointer in Infrastructure. Test before build; build after Phase 39 + Phase 40 close and persistent-process infra decision is made.
 
-**Status:** Research-landscape entry. Rollout LOW pointer present in [[engine/ROLLOUT_PLAN]] Infrastructure section. Solo adoptability check completed S172 — not adoptable, path (a) build-our-own locked as leading direction. No plan file (deferred until preconditions close and harness design needs operationalizing). Interim Task-tool PoC viable without plan file.
+**Status:** Research-landscape entry. Rollout LOW pointer present in [[engine/archive/ROLLOUT_PLAN]] Infrastructure section. Solo adoptability check completed S172 — not adoptable, path (a) build-our-own locked as leading direction. No plan file (deferred until preconditions close and harness design needs operationalizing). Interim Task-tool PoC viable without plan file.
 
 ---
 
@@ -2187,7 +2187,7 @@ None of the direct API callers in the repo today use tools OR extended thinking.
 
 **The hard requirement:** an automatically-scoreable metric (`r ∈ [0,1]`) + a labeled held-out validation split. No automatic scorer → the gate can't fire → the method does not exist. The paper *assumes the scorer is already solved* and only optimizes on top of it.
 
-**Corrected fit-finding (supersedes my first-pass read):** I initially said GodWorld's subjective half (edition-writing, "graded subjectively by a reviewer") is NOT a fit because it lacks a closed-form score. **That was wrong — the scorer already exists.** `scripts/finalArbiter.js` computes `weightedScore = 0.5·reasoning + 0.3·sourcing + 0.2·resultValidity` (capability-gated), emitting a number **in [0,1]** every cycle — real values: C95 0.836, C92 0.898, C91 0.857. The reviewer chain (Rhea / cycle-review / Mara, all scripted JSON with 0.0–1.0 `process`/`outcome` fields) IS the automated subjective-quality grader SkillOpt says editorial pipelines lack. We built it ~100 cycles ago and called it the reviewer lanes ([[engine/REVIEWER_LANE_SCHEMA]]). **Mara is the 0.2 Result-Validity lane** — already reduced to a number; she runs on claude.ai with a human shuttling output, and `mcp__claude_ai_Mara__*` connectors exist → the shuttle is the only manual hop, an MCP call from closing (Mike S248: "my manual layer is Mara… that could be automated").
+**Corrected fit-finding (supersedes my first-pass read):** I initially said GodWorld's subjective half (edition-writing, "graded subjectively by a reviewer") is NOT a fit because it lacks a closed-form score. **That was wrong — the scorer already exists.** `scripts/finalArbiter.js` computes `weightedScore = 0.5·reasoning + 0.3·sourcing + 0.2·resultValidity` (capability-gated), emitting a number **in [0,1]** every cycle — real values: C95 0.836, C92 0.898, C91 0.857. The reviewer chain (Rhea / cycle-review / Mara, all scripted JSON with 0.0–1.0 `process`/`outcome` fields) IS the automated subjective-quality grader SkillOpt says editorial pipelines lack. We built it ~100 cycles ago and called it the reviewer lanes ([[engine/archive/REVIEWER_LANE_SCHEMA]]). **Mara is the 0.2 Result-Validity lane** — already reduced to a number; she runs on claude.ai with a human shuttling output, and `mcp__claude_ai_Mara__*` connectors exist → the shuttle is the only manual hop, an MCP call from closing (Mike S248: "my manual layer is Mara… that could be automated").
 
 **The real gap (2 of 4 pieces present):** HAVE — scorer (`finalArbiter.js`) + the skill docs to optimize. NEED — (a) a held-out validation set of graded cycles, (b) the optimizer-rollout harness. That's the distance between "we score editions" and "editions self-improve." Real work, not from zero.
 

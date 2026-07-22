@@ -19,7 +19,7 @@ archived**, and updated when the traced code changes materially.
 
 ## How to run a trace
 
-1. **Ground first, code second.** Read the relevant sections of `docs/engine/ENGINE_TRUTH_MAP.md`
+1. **Ground first, code second.** Read the relevant sections of `docs/engine/archive/ENGINE_TRUTH_MAP.md`
    (per-file behavior + breakage), `docs/engine/ENGINE_COUPLING_MAP.md` (event→dial→ripple mechanics),
    `docs/engine/ENGINE_STUB_MAP.md` (ctx reads/writes). Then read the actual files — the maps index
    the code, they don't replace it.

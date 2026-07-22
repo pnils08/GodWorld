@@ -10,7 +10,7 @@ sources:
   - output/production_log_edition_c92.md (replacement source)
   - SESSION_CONTEXT.md S180 entry (this session, problem surfaced)
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout"
   - "[[DISCORD]] — bot architecture doc to update"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — add entry in same commit"

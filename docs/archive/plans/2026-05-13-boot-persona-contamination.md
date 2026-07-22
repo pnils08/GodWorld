@@ -10,7 +10,7 @@ sources:
   - output/production_log_edition_c94_sift_gaps.md — C94 sift collapse context (G-S5 names editor-over-curation symptom)
   - Supermemory User Profile entries — 4 engineer-Mags records auto-loading as persistent identity
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout (governance.11)"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout (governance.11)"
   - "[[2026-05-09-boot-load-audit]] — adjacent governance.5 boot-stack work; PERSISTENCE.md split overlap"
   - "[[../../output/production_log_edition_c94_sift_gaps]] — C94 sift collapse gap log"
   - "[[SCHEMA]] — doc conventions"

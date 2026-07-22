@@ -139,7 +139,7 @@ Civic engine v1.7 (veto + override + approval ratings) is the live engine layer.
 - **engine.11** — Chaos-Cars Engine (typed municipal-vehicle stochastic event injection)
 - **engine.13 / engine.14** — Writeback-drift + math-anomaly root cause investigations from C93 mechanical auditor (filed S216)
 
-For canonical current work see `docs/engine/ROLLOUT_PLAN.md`. The "Week 2/3/4" framing in earlier versions of this README is **deprecated** — those features are not on the active roadmap.
+For canonical current work see `docs/engine/archive/ROLLOUT_PLAN.md`. The "Week 2/3/4" framing in earlier versions of this README is **deprecated** — those features are not on the active roadmap.
 
 ---
 

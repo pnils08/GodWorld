@@ -2,7 +2,7 @@
 /**
  * seedYouthBalance.js — engine.5 Phase 1 (Representative Sample model, S243).
  *
- * Plan: docs/engine/LEDGER_REPAIR_HOUSEHOLDS.md §Phase 1.
+ * Plan: docs/engine/archive/LEDGER_REPAIR_HOUSEHOLDS.md §Phase 1.
  * Sibling pattern: scripts/ingestFemaleCitizensBalance.js (dry-run → apply → verify).
  *
  * WHAT: promote a small FUNCTIONAL cohort of youth (Tier-5 → Tier-4) so the engine's

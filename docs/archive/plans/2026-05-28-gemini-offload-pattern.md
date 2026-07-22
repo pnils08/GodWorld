@@ -11,7 +11,7 @@ sources:
   - "docs/canon/CANON_RULES.md + docs/canon/INSTITUTIONS.md (canon-fidelity scaffolding Gemini does not have)"
   - "MEMORY.md — Mara Vance canon authority + reviewer-lane architecture (gen-eval discipline Gemini does not run)"
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout (governance.21)"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout (governance.21)"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — register in same commit"
   - "[[../output/production_log_session-startup_c95_gaps]] — companion: Claude-side per-boot recovery (G-SS1, G-SS7, G-SS8 are the highest-leverage near-term wins; promote separately)"
@@ -79,7 +79,7 @@ Project Knowledge: *"Voice hardening occurs within the first 50 Moltbook posts."
   1. Copy frontmatter shape from a sibling top-level doc (`docs/STACK.md` or `docs/OPERATIONS.md` — short, reference-shape, not a plan).
   2. Body lifts the **The triage** section above verbatim (Three offload paths / No-go zone / Early-canon-voice caveat / Routing rule one-liner).
   3. Add a §Companion work section pointing at `output/production_log_session-startup_c95_gaps.md` — the Claude-side per-boot recovery (G-SS1 / G-SS7 / G-SS8 are the highest-leverage near-term wins). Boot-burn fixes promote separately (gap log → their own ROLLOUT row if + when promoted); this doc cross-links, doesn't co-own.
-  4. Add a §Pointers section linking back to `[[engine/ROLLOUT_PLAN]]` (governance.21), this plan file, `[[canon/CANON_RULES]]`, `[[canon/INSTITUTIONS]]`, `[[index]]`.
+  4. Add a §Pointers section linking back to `[[engine/archive/ROLLOUT_PLAN]]` (governance.21), this plan file, `[[canon/CANON_RULES]]`, `[[canon/INSTITUTIONS]]`, `[[index]]`.
 - **Verify:** `wc -l docs/GEMINI_OFFLOAD.md` → ≥80 lines and ≤160 lines (concise reference doc, not a treatise). `grep -c '^##' docs/GEMINI_OFFLOAD.md` → ≥4 (Three paths / No-go / Caveat / Routing rule, plus Companion + Pointers).
 - **Status:** [ ] not started
 
@@ -109,15 +109,15 @@ Project Knowledge: *"Voice hardening occurs within the first 50 Moltbook posts."
 ### Task 4: File ROLLOUT_PLAN row governance.21
 
 - **Files:**
-  - `docs/engine/ROLLOUT_PLAN.md` — modify
+  - `docs/engine/archive/ROLLOUT_PLAN.md` — modify
 - **Steps:**
-  1. Open `docs/engine/ROLLOUT_PLAN.md`, locate the `### governance.* — Skills, MDs, ADRs, project hygiene` group.
+  1. Open `docs/engine/archive/ROLLOUT_PLAN.md`, locate the `### governance.* — Skills, MDs, ADRs, project hygiene` group.
   2. Append a new row after the last governance entry (currently governance.20):
      ```
      | governance.21 | Gemini offload pattern — document the triage for moving Google-environment-native work (Apps Script side panel, Sheets formula sidebar, Drive Docs for tier-4 content) to Gemini; canon-bearing work + reviewer lanes + EIC seat + architecture stay Claude. Source: S241 token-burn conversation. Companion to the S241 boot-burn gap log (Claude-side per-boot recovery via G-SS1 identity.md split + G-SS7 MEMORY.md overflow trim + G-SS8 skill ↔ hook duplication guard). 3 small tasks: create `docs/GEMINI_OFFLOAD.md` / add §Apps Script Side-Panel Workflow to engine-sheet TERMINAL.md / index + ROLLOUT registration. | ready | research-build | [[../archive/plans/2026-05-28-gemini-offload-pattern]] |
      ```
   3. Do not touch existing rows.
-- **Verify:** `grep -c 'governance.21' docs/engine/ROLLOUT_PLAN.md` → 1.
+- **Verify:** `grep -c 'governance.21' docs/engine/archive/ROLLOUT_PLAN.md` → 1.
 - **Status:** [x] DONE 2026-05-28 (S241) — governance.21 row shipped at initial filing commit `94e7c17`.
 
 ---

@@ -5,7 +5,7 @@ updated: 2026-06-20
 type: plan
 tags: [architecture, media, engine, memory, token-budget, active]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md — research.17 row
+  - docs/engine/archive/ROLLOUT_PLAN.md — research.17 row
   - "[[../research/2026-06-20-layered-memory-architecture]] — verdict adopt; this is the Phase-1 ignited plan"
   - "output/production_log_run_cycle_c98_gaps.md §G-R3 + §G-W architecture-input — the E98 OARI leak this fixes"
 pointers:

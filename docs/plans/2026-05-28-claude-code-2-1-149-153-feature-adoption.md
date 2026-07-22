@@ -10,7 +10,7 @@ sources:
   - "S241 conversation prior turn — token-burn diagnostic motivation"
   - "output/production_log_session-startup_c95_gaps.md (S241 boot-burn gap log — companion empirical context)"
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout (governance.22)"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout (governance.22)"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — register in same commit"
   - "[[archive/plans/2026-05-28-gemini-offload-pattern]] — sibling S241 plan, governance.21 — different lever on the same token-budget concern"

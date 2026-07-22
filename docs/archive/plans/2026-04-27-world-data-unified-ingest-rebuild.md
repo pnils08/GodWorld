@@ -5,16 +5,16 @@ updated: 2026-04-28
 type: plan
 tags: [architecture, infrastructure, complete]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md §Data & Pipeline ("PROJECT: world-data unified ingest rebuild" — line 89)
+  - docs/engine/archive/ROLLOUT_PLAN.md §Data & Pipeline ("PROJECT: world-data unified ingest rebuild" — line 89)
   - Supermemory mags doc tteVpQCh95zr2ZWofpe5cY (S181 narrative + decision rationale)
   - docs/SUPERMEMORY.md §How to search + §Aggregate Memories + §API Quick Reference
   - scripts/buildCitizenCards.js (post-S181 — canonical writer pattern)
   - scripts/godworld-mcp.py (current MCP query surfaces)
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout, §Data & Pipeline"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout, §Data & Pipeline"
   - "[[SCHEMA]] — doc conventions"
   - "[[SUPERMEMORY]] — container model + API quirks (singular vs plural tag fields, async indexing)"
-  - "[[engine/ENGINE_REPAIR]] — Row 2 (closed S181) is the citizen-layer prequel"
+  - "[[engine/archive/ENGINE_REPAIR]] — Row 2 (closed S181) is the citizen-layer prequel"
   - "[[index]] — register in same commit"
 ---
 

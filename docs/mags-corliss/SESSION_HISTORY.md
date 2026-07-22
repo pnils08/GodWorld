@@ -109,7 +109,7 @@ The block below — Sessions 179 down to 132 — was rotated out of `SESSION_CON
 - **T1 schema landed in [[EDITION_PIPELINE]] §Published `.txt` Format Contract** via `/grill-me` 11-question discovery round. Keystone decisions: uniform `.txt` shape across all four types (edition / interview / supplemental / dispatch); Bay Tribune masthead pattern; `Y<n>C<m>` math replaces month names (cycle 92 = Y2C40 — kills real-world calendar alignment that conflicts with sports-time); five structural sections (HEADER / BODY / NAMES INDEX / CITIZEN USAGE LOG / BUSINESSES NAMED / ARTICLE TABLE) with sections-after-body rule (S172 metadata-leak constraint encoded as format law); slug = canonical retrieval token, immutable post-publish, replicated across filename + masthead + sift queries + MCP search_canon + Mara + packets + production log + bay-tribune metadata.
 - **NEW ROLLOUT engine-sheet item:** "BUILD: Standing intake — published artifact → engine sheets for citizens + businesses" — closes the existing /post-publish Step 5 "not wired" gap. New script `scripts/ingestPublishedEntities.js` reads NAMES INDEX + BUSINESSES NAMED sections from any published `.txt` and writes to Simulation_Ledger + Business_Ledger sheets. Editorial implication encoded as format law: naming a citizen or business in published canon promotes that entity to engine canon. MEDIUM-HIGH.
 - **Architecture + grill outcomes saved:** Supermemory `mags` doc `bm8sccZCRzdCsX6VWAZ2iS` — full WHY behind every format-contract decision, embedded inline in plan frontmatter + ROLLOUT_PLAN entry. Future T2–T5 work fetches one curl call to ground judgment calls.
-- **Files touched:** `.claude/skills/interview/SKILL.md` (Step 8 rewrite, v1.1), `.claude/skills/save-to-bay-tribune/SKILL.md` (type list extended, v1.1), `docs/engine/ROLLOUT_PLAN.md` (4 entries updated + new standing-intake item), `docs/EDITION_PIPELINE.md` (schema section added, line ~51), `docs/plans/2026-04-26-non-edition-publishing-pipeline.md` (new — 10 tasks, T1 DONE-S179), `docs/index.md` (plan registered).
+- **Files touched:** `.claude/skills/interview/SKILL.md` (Step 8 rewrite, v1.1), `.claude/skills/save-to-bay-tribune/SKILL.md` (type list extended, v1.1), `docs/engine/archive/ROLLOUT_PLAN.md` (4 entries updated + new standing-intake item), `docs/EDITION_PIPELINE.md` (schema section added, line ~51), `docs/plans/2026-04-26-non-edition-publishing-pipeline.md` (new — 10 tasks, T1 DONE-S179), `docs/index.md` (plan registered).
 - **Two Supermemory `mags` docs saved:** `STp1kmHrR4yGTqX6YHdThP` (Perkins&Will scrub plan) + `bm8sccZCRzdCsX6VWAZ2iS` (S179 architecture + grill outcomes). Both retrievable via curl, IDs embedded in ROLLOUT_PLAN entries for future-session lookup.
 - **Next session pickup:** T2–T5 in research-build (skill `.md` edits — compile-to-`.txt` step in authoring skills, `/post-publish` restructure, `/edition-print` flag, call-site updates). T6–T9 + standing-intake item in engine-sheet (parallel surface). T10 media validation last.
 - **Commits:** none yet — research-build stack pending review with engine-sheet's local commits per coordination protocol.
@@ -127,7 +127,7 @@ The block below — Sessions 179 down to 132 — was rotated out of `SESSION_CON
 - **Four-file per-agent structure.** IDENTITY (existing) + LENS.md (NEW — vantage point: where the agent sits, what reaches their desk, what they walk through, what drives voice) + RULES.md (existing + Canon Fidelity section) + SKILL.md (existing + canon files in boot sequence). Per-agent template + reviewer variant in CANON_RULES.md appendix.
 - **Wave A converted (8 agents):** dj-hartley (full rebuild from 1 to 4 files), civic-office-mayor, civic-desk (per-reporter trap notes for Carmen/Luis/Trevor/Torres/Mezran), civic-project-health-center (Bobby's Kaiser line swapped), business-desk, civic-office-baylight-authority (heaviest contractor trap surface), civic-office-district-attorney (LENS shorter by design — silence-as-default office), civic-project-transit-hub (Elena's Fremont High + Fruitvale Elementary swapped; Unity Council canonical history kept).
 - **Pilot tests passed strongly.** Mayor + DJ both read canon files at boot, identified deliberate traps, escalated via CONTINUITY NOTE rather than fabricating, maintained voice while applying fidelity rules.
-- **Files created/updated:** docs/canon/CANON_RULES.md (new, ~210 lines), docs/canon/INSTITUTIONS.md (new, ~165 lines), docs/archive/plans/2026-04-25-canon-fidelity-rollout.md (new, ~370 lines, full state for next session), docs/index.md (registered), docs/engine/ROLLOUT_PLAN.md (Other Ready Work entry pointing to plan), 8 agent folders (LENS.md created, RULES + SKILL appended/updated, surgical IDENTITY edits where tier-2 contamination found).
+- **Files created/updated:** docs/canon/CANON_RULES.md (new, ~210 lines), docs/canon/INSTITUTIONS.md (new, ~165 lines), docs/archive/plans/2026-04-25-canon-fidelity-rollout.md (new, ~370 lines, full state for next session), docs/index.md (registered), docs/engine/archive/ROLLOUT_PLAN.md (Other Ready Work entry pointing to plan), 8 agent folders (LENS.md created, RULES + SKILL appended/updated, surgical IDENTITY edits where tier-2 contamination found).
 - **Framework reasoning saved:** Supermemory mags doc `XJi6whXEyPehdN6oDS97hQ` — captures the WHY (three-tier rationale, LENS load-bearing argument, per-agent trap pattern, asymmetric IDENTITY contamination rule, DA-lens scaling lesson, pilot test pattern). Doc ID embedded inline in plan frontmatter, CANON_RULES frontmatter, ROLLOUT_PLAN entry, and this SESSION_CONTEXT entry. Future retrieval: one curl call.
 - **Wave B remaining (12 generators):** chicago-desk, culture-desk, letters-desk, podcast-desk, sports-desk, freelance-firebrand, civic-office-crc-faction, civic-office-ind-swing, civic-office-opp-faction, civic-office-police-chief, civic-project-oari, civic-project-stabilization-fund. **Reviewer rebuild remaining (5):** rhea-morgan, city-clerk, engine-validator, final-arbiter, mags-corliss (special — see plan §Open Questions).
 - **dj-hartley subagent registration** needs next-session boot to verify subagent_type=dj-hartley resolves correctly.
@@ -401,7 +401,7 @@ Mike's framing: "I fell for AI and learned a costly lesson. My romance idea for 
 
 ## Current Work
 
-See `docs/engine/ROLLOUT_PLAN.md` — the single source for all project work status (active, pending, completed, deferred).
+See `docs/engine/archive/ROLLOUT_PLAN.md` — the single source for all project work status (active, pending, completed, deferred).
 
 ---
 
@@ -1271,7 +1271,7 @@ All documented in `BRANCH_HANDOFF.md` (826 lines, now merged to main):
 
 ### Session 30 (2026-02-16)
 - **Full sheet environment audit** — audited all ~53 Google Sheets ledgers against engine code. Verified write-intents documentation, corrected Riley_Digest from Continuity_Loop consumer to standalone, upgraded buildDeskPackets.js to v1.3 (households, bonds, economic context).
-- **Ledger Heat Map created** — `docs/engine/LEDGER_HEAT_MAP.md`, the living reference for sheet bloat risk. Every sheet rated GREEN/YELLOW/RED with growth projections to C281. Dead column inventory (40 verified across 7 sheets). Calendar column waste pattern documented.
+- **Ledger Heat Map created** — `docs/engine/archive/LEDGER_HEAT_MAP.md`, the living reference for sheet bloat risk. Every sheet rated GREEN/YELLOW/RED with growth projections to C281. Dead column inventory (40 verified across 7 sheets). Calendar column waste pattern documented.
 - **Phase A calendar cleanup executed** — 5 persistence writers updated to stop writing dead calendar columns. saveV3Seeds.js v3.4, v3StoryHookWriter.js v3.4, v3TextureWriter.js v3.5, recordWorldEventsv3.js v3.4, pressDraftWriter.js v1.4. Two dead query functions removed (getDraftsByHoliday_, getDraftsBySportsSeason_).
 - **Critical correction**: Simulation_Ledger columns (Middle, ClockMode, OrginCity, UsageCount, LastUpdated) were NOT dead — ClockMode is read by 8+ Phase 5 engines. Phase B cancelled.
 - Day 8 of persistence. Infrastructure work — cutting the fat so the city can keep growing.
@@ -1465,7 +1465,7 @@ All documented in `BRANCH_HANDOFF.md` (826 lines, now merged to main):
 
 ### Session 55 (2026-02-22) — Rollout Plan Build + Deployment
 
-- **Created `docs/engine/ROLLOUT_PLAN.md`** — standalone document with 4 phases, 10 buildable items, watch list.
+- **Created `docs/engine/archive/ROLLOUT_PLAN.md`** — standalone document with 4 phases, 10 buildable items, watch list.
 - **Phase 1 COMPLETE:** Parallel desk agents (`run_in_background: true`), pre-commit code check hook (Math.random, sheet writes, engine language), automated Rhea retry loop (VERDICT gates, desk-level error attribution, max 2 rounds).
 - **Phase 2.1 COMPLETE:** Letters + business desks switched to Haiku model. Pending voice quality check on next edition.
 - **Phase 2.2 DEFERRED:** Desk packet query interface — not needed until population hits 800-900.

@@ -9,7 +9,7 @@ sources:
   - "S242 claude-code-guide verification of disallowed-tools granularity + tool names"
   - "S241 Explore-agent first-pass categorization (corrected here — invented tool names dropped)"
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout (governance.22 T2 + the follow-up edit row)"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout (governance.22 T2 + the follow-up edit row)"
   - "[[2026-05-28-claude-code-2-1-149-153-feature-adoption]] — gov.22 plan; this is the T2 §Task 2 deliverable"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — registered same commit"
@@ -133,7 +133,7 @@ The signal scan flagged Write/Edit on a few READONLY skills — worth a human gl
 
 - This doc registered in `docs/index.md`; back-linked from the gov.22 ROLLOUT row + the gov.22 plan §Task 2.
 - Matrix covers all 48 skills; every proposed string uses only canonical tool names + valid `Bash()` patterns (no invented identifiers).
-- `git status` shows only this doc + `docs/index.md` + `docs/engine/ROLLOUT_PLAN.md` changed — zero `.claude/skills/**/SKILL.md` touched.
+- `git status` shows only this doc + `docs/index.md` + `docs/engine/archive/ROLLOUT_PLAN.md` changed — zero `.claude/skills/**/SKILL.md` touched.
 
 ## Changelog
 

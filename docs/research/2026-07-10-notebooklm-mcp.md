@@ -8,7 +8,7 @@ sources:
   - https://github.com/PleasePrompto/notebooklm-mcp — queued S307 (SESSION_CONTEXT NEXT line)
   - https://github.com/jacob-bd/notebooklm-mcp-cli
   - https://github.com/roomi-fields/notebooklm-mcp
-  - docs/engine/ROLLOUT_ARCHIVE.md §Phase 12.6 — S67 NotebookLM findings + Podcastfy pivot
+  - docs/engine/archive/ROLLOUT_ARCHIVE.md §Phase 12.6 — S67 NotebookLM findings + Podcastfy pivot
   - docs/plans/BACKLOG.md §Phase 30 — "own the voice Mike already listens to"
   - docs/mags-corliss/JOURNAL.md (S67 entry, ~line 3156) — Mike listens to every edition via NotebookLM
 pointers:

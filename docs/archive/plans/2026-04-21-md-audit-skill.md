@@ -9,7 +9,7 @@ sources:
   - .claude/skills/doc-audit/SKILL.md (adjacent skill — content staleness, not existence staleness)
   - MEMORY.md — S156 "No isolated MDs" rule (this plan operationalizes it as a scheduled check)
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout"
   - "[[SCHEMA]] — doc conventions, frontmatter, stability signals"
   - "[[index]] — register in same commit"
   - "[[RESEARCH]] §S170 Autogenesis — origin framing"
@@ -144,7 +144,7 @@ pointers:
 - [ ] **90-day threshold — right starting point?** Session cadence is ~2-3/week, so 90 days ≈ 30 sessions elapsed without touching a doc. If the first run produces zero orphan-candidates at 90 days, tighten to 60. If it produces >50, the signal is too noisy and we need a tighter "active reference" definition in Task 1.1.
 - [ ] **Exclude `docs/plans/`?** Plan files are dated by filename and age fast by design. If plans aren't excluded, old plan files will surface for archival — which may actually be what we want (completed plans should archive). Lean: do not exclude. Old completed plans archiving is a feature, not a bug.
 - [ ] **What counts as "active edit" — 30 days or tighter?** Shorter window = more aggressive flagging. Start at 30; revisit after first run.
-- [ ] **Skill registration — where?** `docs/index.md` has no `.claude/skills/` section. Options: (a) add a new section to index, (b) rely on CLAUDE.md's skill mentions + harness auto-discovery, (c) register in `docs/engine/ROLLOUT_PLAN.md` Other Ready Work entry only. Lean: (b) — skills aren't docs; harness discovers them. Just add a one-liner to CLAUDE.md §Engine Health Commands.
+- [ ] **Skill registration — where?** `docs/index.md` has no `.claude/skills/` section. Options: (a) add a new section to index, (b) rely on CLAUDE.md's skill mentions + harness auto-discovery, (c) register in `docs/engine/archive/ROLLOUT_PLAN.md` Other Ready Work entry only. Lean: (b) — skills aren't docs; harness discovers them. Just add a one-liner to CLAUDE.md §Engine Health Commands.
 
 ---
 

@@ -94,7 +94,7 @@ fi
 #  deterministic script = zero model tokens, per governance.38)
 # =====================================================
 case "$FILE_PATH" in
-  */docs/engine/ROLLOUT_PLAN.md)
+  */docs/engine/archive/ROLLOUT_PLAN.md)
     PROOT="${CLAUDE_PROJECT_ROOT:-/root/GodWorld}"
     LINT=$(node "$PROOT/scripts/docLoopStatus.js" --lint 2>/dev/null)
     if echo "$LINT" | grep -q 'non-conforming'; then

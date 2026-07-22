@@ -28,7 +28,7 @@ pointers:
 
 ## Context
 
-`docs/engine/ROLLOUT_PLAN.md` is canonical for project work (S207 enforcement after the SESSION_CONTEXT trim landed). But the doc has drifted across ~50 sessions of accumulation:
+`docs/engine/archive/ROLLOUT_PLAN.md` is canonical for project work (S207 enforcement after the SESSION_CONTEXT trim landed). But the doc has drifted across ~50 sessions of accumulation:
 
 - **Numbered phases (33, 38, 39, 40, 41, 42) carry no semantic meaning to a reader.** Future-instance has to grep into plan files or archive entries to figure out what "Phase 38" was about. The numbers were sequential by introduction date, not by type-of-work.
 - **Entry descriptions are inline narrative.** Many entries are 1-3KB of context, reasoning, history, sub-states embedded in the ROLLOUT row itself. S147 (MEMORY.md, 2026-04-15) explicitly says "rollout uses pointers, not inline notes — every rollout item is a pointer (file path, supermemory tag, claude-mem ID, PHASE_X_PLAN). No inline research, no pattern exposition. Forces every session to read real context before acting." Rule has been consistently violated.
@@ -54,7 +54,7 @@ Seven type-of-work groups. Each entry coded as `<group>.<n>`:
 | Group | Scope | Typical pointer destinations |
 |-------|-------|------------------------------|
 | **pipeline** | Edition production end-to-end (sift / write-edition / post-publish / dispatch / interview / supplemental / print / photos) | `[[plans/...]]`, `[[output/production_log_..._gaps]]`, `[[media/...]]` |
-| **engine** | Engine code, ledger, schema, tech debt, engine-sheet repair | `[[plans/...]]`, `[[engine/PHASE_42_PATTERNS]]`, `[[engine/ENGINE_REPAIR]]` rows |
+| **engine** | Engine code, ledger, schema, tech debt, engine-sheet repair | `[[plans/...]]`, `[[engine/archive/PHASE_42_PATTERNS]]`, `[[engine/archive/ENGINE_REPAIR]]` rows |
 | **canon** | World-fidelity layer, citizens, voices, real-name blocklists, contamination scrub | `[[canon/CANON_RULES]]`, `[[canon/INSTITUTIONS]]`, `[[POST_MORTEM_C92_CONTAMINATION]]` |
 | **civic** | City-hall, voice agents, council canon, civic-process gap-logs, governance simulation | `[[plans/...]]`, `[[output/production_log_city_hall_..._gaps]]`, `[[mara-vance/...]]` |
 | **infrastructure** | Supermemory, Discord, dashboard, MCP, claude-mem, services, ingest pipelines | `[[STACK]]`, `[[SUPERMEMORY]]`, `[[plans/...]]` |
@@ -198,7 +198,7 @@ ADR-0004 (skill-bag naming) and ADR-0005 (this) share a discovery-wiring pattern
 5. Set terminal — **builder terminals only**: `engine-sheet` (code / sheets / scripts) or `research-build` (skill / RULES / docs / ADRs / triage). Slash-separated for cross-builder work. Never `media` or `civic` — those are generator spaces and don't receive routed work (see §Part 3 routing flow).
 6. **Identify or create the pointer doc:**
    - For designed work: create or link `[[plans/YYYY-MM-DD-topic]]` — **copy `[[plans/TEMPLATE]]` for shape; register in `[[index]]` same commit per S147 inbound-link rule**
-   - For in-flight observations from heavy-skill runs (civic + media generator terminals): link the gap log `[[output/production_log_..._gaps]]` — **new gap logs follow `[[plans/GAP_LOG_TEMPLATE]]` per S212 protocol; engine-sheet uses `[[engine/ENGINE_REPAIR]]` rows for its tactical-defects sidecar (different shape)**
+   - For in-flight observations from heavy-skill runs (civic + media generator terminals): link the gap log `[[output/production_log_..._gaps]]` — **new gap logs follow `[[plans/GAP_LOG_TEMPLATE]]` per S212 protocol; engine-sheet uses `[[engine/archive/ENGINE_REPAIR]]` rows for its tactical-defects sidecar (different shape)**
    - For evaluations: append to `[[RESEARCH]] §section` or create `[[research/topic]]`
    - For decisions: write or link an ADR (next ADR number, follow ADR-0001/0004/0005 shape)
    - For engine work: link to existing parent (PHASE_X_PATTERNS, ENGINE_REPAIR row)

@@ -6,7 +6,7 @@ type: reference
 tags: [canon, fourth-wall, fidelity, active]
 sources:
   - docs/POST_MORTEM_C92_CONTAMINATION.md (the failure that motivated this file; assessment was tier-blind, see §Why This Exists)
-  - docs/engine/ROLLOUT_PLAN.md (S172 halt response)
+  - docs/engine/archive/ROLLOUT_PLAN.md (S172 halt response)
   - .claude/rules/newsroom.md (existing newsroom rules — supplemented, not replaced)
   - S174 three-tier reframe (this file — Mike's distinction: geographic-public vs branded-private vs individual)
   - "Supermemory mags doc XJi6whXEyPehdN6oDS97hQ — S174 framework reasoning (why three-tier beats binary, why LENS is load-bearing, asymmetric IDENTITY contamination rule). Retrieve: curl -s 'https://api.supermemory.ai/v3/documents/XJi6whXEyPehdN6oDS97hQ' -H 'Authorization: Bearer $SUPERMEMORY_CC_API_KEY'"

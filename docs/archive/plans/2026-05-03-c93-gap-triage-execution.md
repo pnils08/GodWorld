@@ -11,9 +11,9 @@ sources:
   - output/production_log_edition_c93_write_gaps.md (25 entries, S195)
   - output/production_log_edition_c93_post_publish_gaps.md (25 entries, S195)
   - output/production_log_edition_c93_print_gaps.md (20 entries, S196)
-  - docs/engine/ROLLOUT_PLAN.md §Edition Post-Publish
+  - docs/engine/archive/ROLLOUT_PLAN.md §Edition Post-Publish
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout; gap-log entries already filed under §Edition Post-Publish"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout; gap-log entries already filed under §Edition Post-Publish"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — registered in same commit"
   - "[[plans/TEMPLATE]] — shape this follows"
@@ -190,7 +190,7 @@ Group ~25 engine-sheet gaps into 8 clean bundles. Each bundle = one ROLLOUT entr
 ### Task 3.1: BUNDLE-A — Format contract enforcement
 
 - **Files:**
-  - `docs/engine/ROLLOUT_PLAN.md` — modify
+  - `docs/engine/archive/ROLLOUT_PLAN.md` — modify
 - **Bundle:** G-W19 (compile template ↔ parser format), G-P6, G-P8, G-P9 (NAMES INDEX / BUSINESSES NAMED missing → silent intake drops)
 - **Status:** [x] DONE S197 — engine-sheet shipped end-to-end. `scripts/emitFormatContractSections.js` (NEW, ~530 LOC) parses CITIZEN USAGE LOG and emits strict NAMES INDEX (POP-/CUL-/FAITH- prefixes) + BUSINESSES NAMED, idempotent `--inject` mode. `/write-edition` Step 3a wires the helper. `ingestPublishedEntities.js` adds CUL fallback when NAMES INDEX absent (backfill replay path). `verifyNamesIndexParse.js` adds `--strict` flag — fail-loud on missing-section, plus CUL fallback count for diagnostic. `/post-publish` Step 5 invokes with `--strict`. C93 fixture dry-run: 3 new citizens (Vivienne Torres / Diane Foster / Thomas Webb) + Atlas Bay Architects + Greater Hope Pentecostal Church all surface — 5/5 acceptance. Note: bundle spec listed `rateEditionCoverage.js` but it parses article bodies (not NAMES INDEX); left untouched. Surfaced 1 unrelated downstream bug in `resolveCitizens` (Calvin Reeves Sr. → "Calvin Sr." — last-name suffix tokenization); flagged for separate gap, outside BUNDLE-A scope.
 

@@ -5,13 +5,13 @@ updated: 2026-07-01
 type: plan
 tags: [engine, citizen-loop, active]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md §engine.38 (research-build design-pass tag, S280)
+  - docs/engine/archive/ROLLOUT_PLAN.md §engine.38 (research-build design-pass tag, S280)
   - docs/plans/2026-06-30-central-generator-atmospheric-expansion.md §Depth step (seam specs, Mike direction S280)
   - docs/plans/2026-06-04-mags-citizen-loop.md (research.14 — wake loop, salience deferral)
   - utilities/compressLifeHistory.js, utilities/citizenMemory.js, utilities/citizenDialMap.js (substrate reads, S281)
   - scripts/citizen-wake.js, phase05-citizens/generateCitizensEvents.js, phase01-config/godWorldEngine2.js (substrate reads, S281)
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout (engine.38 depth step)"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout (engine.38 depth step)"
   - "[[2026-06-30-central-generator-atmospheric-expansion]] — sibling plan; depth build order lives there"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — add entry in same commit"

@@ -5,12 +5,12 @@ updated: 2026-04-16
 type: plan
 tags: [architecture, infrastructure, security, complete]
 sources:
-  - docs/engine/PHASE_40_PLAN.md §40.3
+  - docs/engine/archive/PHASE_40_PLAN.md §40.3
   - docs/research/papers/paper3.pdf — "The security boundary" (Anthropic Engineering, April 2026)
   - docs/mags-corliss/JOURNAL.md Entry 123 — memory-poisoning pressure test
   - docs/FOUR_COMPONENT_MAP.md §7 — seam: tools ↔ environment
 pointers:
-  - "[[engine/PHASE_40_PLAN]] — parent phase doc (§40.3)"
+  - "[[engine/archive/PHASE_40_PLAN]] — parent phase doc (§40.3)"
   - "[[FOUR_COMPONENT_MAP]] — the tools ↔ environment seam this plan hardens"
   - "[[reference/DISASTER_RECOVERY]] — recovery path for credential loss (existing doc)"
   - "[[archive/plans/2026-04-16-phase-40-6-injection-defense]] — sister defense layer"

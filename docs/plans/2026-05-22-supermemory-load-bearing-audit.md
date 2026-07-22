@@ -5,14 +5,14 @@ updated: 2026-05-22
 type: plan
 tags: [infrastructure, memory, supermemory, active]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md §infrastructure.4 (writer-hook disable, engine-sheet — partially closed S221+)
-  - docs/engine/ROLLOUT_PLAN.md §governance.12 (pipeline doc + leverage design, research-build)
+  - docs/engine/archive/ROLLOUT_PLAN.md §infrastructure.4 (writer-hook disable, engine-sheet — partially closed S221+)
+  - docs/engine/archive/ROLLOUT_PLAN.md §governance.12 (pipeline doc + leverage design, research-build)
   - docs/archive/plans/2026-05-13-supermemory-profile-leverage.md (sibling plan — leverage design)
   - docs/SUPERMEMORY.md (parent reference)
   - Mike framing 2026-05-22: "We are using MDs for personas and rules, etc... your memory and persistence is getting really good so I'm open to improvements and setting aside a session to optimize supermemory as its main purpose is AI memory"
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — infrastructure.5 row (parent)"
-  - "[[engine/ROLLOUT_PLAN]] — infrastructure.4 (paired — writer-hook fix; this plan informs scope)"
+  - "[[engine/archive/ROLLOUT_PLAN]] — infrastructure.5 row (parent)"
+  - "[[engine/archive/ROLLOUT_PLAN]] — infrastructure.4 (paired — writer-hook fix; this plan informs scope)"
   - "[[archive/plans/2026-05-13-supermemory-profile-leverage]] — sibling plan (governance.12)"
   - "[[SUPERMEMORY]] — canonical reference; audit findings update this doc"
   - "[[index]] — register in same commit"
@@ -137,7 +137,7 @@ pointers:
 
 #### Task 4.2: ROLLOUT updates
 
-- **Files:** `docs/engine/ROLLOUT_PLAN.md` (modify).
+- **Files:** `docs/engine/archive/ROLLOUT_PLAN.md` (modify).
 - **Steps:** Close `infrastructure.5` (this plan). Update `infrastructure.4` close-note with the resolved writer-hook decision. Cross-link to `governance.12` if leverage design overlaps with audit verdict.
 - **Verify:** rows updated; archive sweep next session-end.
 - **Status:** [ ] not started

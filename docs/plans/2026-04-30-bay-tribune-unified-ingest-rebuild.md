@@ -5,7 +5,7 @@ updated: 2026-04-30
 type: plan
 tags: [architecture, infrastructure, active]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md §Edition Post-Publish ("NEW: Bay-tribune unified ingest rebuild")
+  - docs/engine/archive/ROLLOUT_PLAN.md §Edition Post-Publish ("NEW: Bay-tribune unified ingest rebuild")
   - docs/archive/plans/2026-04-27-world-data-unified-ingest-rebuild.md (sibling — wd-rebuild, complete S183, the canonical pattern)
   - docs/SUPERMEMORY.md §How to search + §Scrub Procedure (S186) + §API Quick Reference
   - scripts/ingestEdition.js (current writer — chunked .txt, /v3/documents, single bay-tribune tag)
@@ -15,7 +15,7 @@ sources:
   - editions/cycle_pulse_dispatch_92_kono_second_song.txt (canonical fixture for non-edition runs)
   - Mags doc reference S185 Perkins scrub: WL8kvoxQgmcvxSPW3Ph47n (motivation — current chunked storage has no targeted-replacement primitive)
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout, §Edition Post-Publish entry"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout, §Edition Post-Publish entry"
   - "[[archive/plans/2026-04-27-world-data-unified-ingest-rebuild]] — sibling plan, the canonical pattern this one mirrors"
   - "[[SUPERMEMORY]] — container model + API quirks + scrub procedure"
   - "[[SCHEMA]] — doc conventions"

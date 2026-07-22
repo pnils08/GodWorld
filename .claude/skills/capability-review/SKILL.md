@@ -144,7 +144,7 @@ Step 3.5 in `/write-edition`. Order: pre-flight → engine-review → build-worl
 
 ## Why this exists
 
-Per `docs/engine/PHASE_39_PLAN.md` §1, current verification asks "did the agent do its job correctly?" but no reviewer asks "was this the right job?" — capability verification. The Varek anti-example (E91 led with NBA expansion while Temescal ran four cycles uncovered) is the structural failure this catches at Step 3.5 instead of accepting after publish.
+Per `docs/engine/archive/PHASE_39_PLAN.md` §1, current verification asks "did the agent do its job correctly?" but no reviewer asks "was this the right job?" — capability verification. The Varek anti-example (E91 led with NBA expansion while Temescal ran four cycles uncovered) is the structural failure this catches at Step 3.5 instead of accepting after publish.
 
 ## Two assertions are deferred
 

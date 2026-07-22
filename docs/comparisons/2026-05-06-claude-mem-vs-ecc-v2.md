@@ -8,11 +8,11 @@ sources:
   - https://github.com/affaan-m/everything-claude-code/tree/main/skills/continuous-learning-v2 (MIT — ECC source)
   - /root/.claude-mem/claude-mem.db (live schema snapshot S204)
   - /root/.claude/plugins/cache/thedotmack/claude-mem/10.5.2 (live install)
-  - docs/engine/ROLLOUT_PLAN.md §Infrastructure D4 entry (S187)
+  - docs/engine/archive/ROLLOUT_PLAN.md §Infrastructure D4 entry (S187)
 pointers:
   - "[[CLAUDE-MEM]] — claude-mem architecture reference"
   - "[[archive/plans/skill-eval-framework]] — destination for the borrow-able primitives, not claude-mem"
-  - "[[engine/ROLLOUT_PLAN]] — D4 entry being closed by this comparison"
+  - "[[engine/archive/ROLLOUT_PLAN]] — D4 entry being closed by this comparison"
   - "[[comparisons/README]] — folder purpose"
 ---
 

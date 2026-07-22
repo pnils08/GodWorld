@@ -81,7 +81,7 @@ pointers:
 - **Steps:**
   1. Add `effectsFiringPositively(initiative)` predicate: true when measured-effects are above effect-threshold AND remedy is firing.
   2. Override phase-tenure clock when `effectsFiringPositively` — advance phase regardless of clock.
-  3. Document the override in `docs/engine/ENGINE_REPAIR.md` with Pattern: regulatory-friction-removal.
+  3. Document the override in `docs/engine/archive/ENGINE_REPAIR.md` with Pattern: regulatory-friction-removal.
 - **Verify:** Unit test: initiative with cyclesInState=2 + effects firing → advance; initiative with cyclesInState=2 + effects-not-firing → stay.
 - **Status:** [x] CLOSED S249 (ROLLOUT engine.20b, commit pending). **Reframed: the `effectsFiringPositively` engine predicate was never built — engine.20a T1 (S227) proved phase tenure is voice-emergent, not engine-coded.** Implemented instead as a `## Phase-Advance Discipline` section in all 5 project/baylight RULES.md: the owning agent proposes the next `ImplementationPhase` descriptor when its current phase's defining deliverable materially lands AND effects are positive/cascade-directed (the agent's packet-assessable judgment), emitting top-level `trackerOwner: "INIT-XXX"` + `trackerUpdates{ImplementationPhase,...}`. The auditor's positive-remedy verdict (`detectStuckInitiatives` v1.3, Task 4) is the parallel verification signal, not a wired input. Hold-with-reason path documented (unchanged phase + MilestoneNotes). Spawned `engine.20e` (applyTrackerUpdates VALID_OWNERS audit reconciliation vs the trackerOwner contract).
 

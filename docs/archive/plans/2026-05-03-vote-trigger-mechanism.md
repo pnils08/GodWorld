@@ -8,7 +8,7 @@ sources:
   - output/production_log_city_hall_c93_run_gaps.md G-R11 (vote-that-didn't-trigger)
   - phase05-citizens/civicInitiativeEngine.js (existing 9-seat vote resolver, lines 130-460)
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout"
   - "[[archive/plans/2026-05-03-c93-gap-triage-execution]] — Wave 4 parent"
   - "[[SCHEMA]] — doc conventions"
 ---

@@ -6,7 +6,7 @@ type: plan
 tags: [citizens, citizen-loop, voice-agents, engine, media, active]
 sources:
   - docs/research/2026-07-06-citizen-loop-deepening.md — the S298 audit this plan executes
-  - docs/engine/ROLLOUT_PLAN.md — engine.48 + pipeline.41 rows
+  - docs/engine/archive/ROLLOUT_PLAN.md — engine.48 + pipeline.41 rows
   - scripts/citizen-wake.js — the loop all wake-side tasks modify (read end-to-end S298)
 pointers:
   - "[[../engine/ROLLOUT_PLAN]] — parent rollout"

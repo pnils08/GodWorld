@@ -9,7 +9,7 @@ sources:
   - .claude/agents/*-desk/ — desk-agent catalog
   - "[[../skills/write-edition/SKILL]] §Step 1 — consumer of this index"
 pointers:
-  - "[[../../docs/engine/ROLLOUT_PLAN]] pipeline.16 — entry that filed this index"
+  - "[[../../docs/engine/archive/ROLLOUT_PLAN]] pipeline.16 — entry that filed this index"
   - "[[../../output/production_log_edition_c93_write_gaps.md]] §G-W2/W3/W9/W11 — gaps this closes"
 ---
 

@@ -9,7 +9,7 @@ sources:
   - "docs/canon/CANON_RULES.md + docs/canon/INSTITUTIONS.md (canon-fidelity scaffolding Gemini does not have)"
   - "Mike S241 Gemini PDFs — HCAI/Baylight cross-canon mashup as no-canon-scaffolding evidence"
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — governance.21 (parent rollout row)"
+  - "[[engine/archive/ROLLOUT_PLAN]] — governance.21 (parent rollout row)"
   - "[[archive/plans/2026-05-28-gemini-offload-pattern]] — governance.21 plan (architecture + acceptance + task list)"
   - "[[canon/CANON_RULES]] — canon-fidelity tier system Gemini does not run"
   - "[[canon/INSTITUTIONS]] — institutional canon substitutes Gemini does not see"
@@ -127,7 +127,7 @@ Three bands, by judgment content:
 
 ## Pointers
 
-- ROLLOUT rows: `governance.21` (Gemini paths) + `governance.38` (full-roster job inventory) + `infrastructure.6` (Cowork addition, S286) in [[engine/ROLLOUT_PLAN]]
+- ROLLOUT rows: `governance.21` (Gemini paths) + `governance.38` (full-roster job inventory) + `infrastructure.6` (Cowork addition, S286) in [[engine/archive/ROLLOUT_PLAN]]
 - Plan: [[archive/plans/2026-05-28-gemini-offload-pattern]] — full task list + acceptance criteria
 - Companion boot-burn gap log: `output/production_log_session-startup_c95_gaps.md` (S241)
 - Canon scaffolding Gemini lacks: [[canon/CANON_RULES]] + [[canon/INSTITUTIONS]]

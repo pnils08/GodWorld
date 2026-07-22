@@ -5,12 +5,12 @@ updated: 2026-04-17
 type: reference
 tags: [architecture, infrastructure, active]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md (Phase 41.1)
+  - docs/engine/archive/ROLLOUT_PLAN.md (Phase 41.1)
   - Hermes Agent llm-wiki skill (S145 research)
   - Karpathy skills repo (S145 research)
 pointers:
   - "[[index]] — companion catalog of all docs"
-  - "[[engine/ROLLOUT_PLAN]] — Phase 41 source"
+  - "[[engine/archive/ROLLOUT_PLAN]] — Phase 41 source"
   - "MEMORY.md — persistent-memory layer index (separate system)"
 ---
 
@@ -42,7 +42,7 @@ The principle: **retrieval, not recall.** When the project knows where things li
 Rules:
 - No spaces. No hyphens unless replacing hyphens that appear in the conceptual name (e.g. `mags-corliss/` for the persona).
 - Extension is always `.md`.
-- Don't repeat the folder in the filename. `docs/engine/ENGINE_MAP.md` is fine; `docs/engine/engine_engine_map.md` is not.
+- Don't repeat the folder in the filename. `docs/engine/archive/ENGINE_MAP.md` is fine; `docs/engine/engine_engine_map.md` is not.
 - Personal/persona files live in their own subfolder (`docs/mags-corliss/`, `docs/mara-vance/`) — names inside follow the same casing rules.
 
 ---
@@ -126,7 +126,7 @@ A doc usually carries 2–4 tags. One status, one or two domains, optionally a t
 Inside `docs/`, link to other docs with **double brackets**:
 
 ```markdown
-See [[engine/ROLLOUT_PLAN]] for the active build plan.
+See [[engine/archive/ROLLOUT_PLAN]] for the active build plan.
 The principle is documented in [[PRODUCT_VISION]] §3.
 ```
 
@@ -219,7 +219,7 @@ Archive doesn't mean delete. It means "frozen, kept for trail."
 Codify what we learned in S145: store pointers inline at every reference. Never expect future sessions to reconstruct.
 
 **What to embed:**
-- Local file paths (`docs/engine/ROLLOUT_PLAN.md`)
+- Local file paths (`docs/engine/archive/ROLLOUT_PLAN.md`)
 - Drive file IDs (`1QoV1eWy28lYbPa2vtkuOqp1wIZcvxtJS`)
 - Supermemory doc IDs (`n5cBYS3vVN5DKrddnNp7K8`)
 - Phase tags (`Phase 41.1`)

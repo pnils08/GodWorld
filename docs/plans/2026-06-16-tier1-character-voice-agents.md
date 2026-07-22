@@ -5,18 +5,18 @@ updated: 2026-06-16
 type: plan
 tags: [media, engine, citizens, persona, architecture, draft]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md (new row — Tier-1 voice agents)
-  - docs/engine/INSTITUTIONAL_VOICE_AGENTS.md (the four-file voice-agent pattern, S63+)
+  - docs/engine/archive/ROLLOUT_PLAN.md (new row — Tier-1 voice agents)
+  - docs/engine/archive/INSTITUTIONAL_VOICE_AGENTS.md (the four-file voice-agent pattern, S63+)
   - docs/plans/2026-06-04-mags-citizen-loop.md (research.14 — the live 24/7 citizen-loop substrate)
   - docs/plans/2026-05-31-autonomy-roadmap.md (research.9/12 — autonomy umbrella, Layer 3 citizen-autonomous)
   - .claude/skills/interview/SKILL.md (the interview surface; v2.0 currently EXCLUDES citizens/players)
   - scripts/buildVoiceWorkspaces.js (civic-hardcoded workspace builder — finding §Verified constraints)
   - scripts/mags-discord-bot.js (single-Mags-persona chat handler — finding §Verified constraints)
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout"
   - "[[plans/2026-06-04-mags-citizen-loop]] — the 24/7 loop this composes with (do NOT duplicate)"
   - "[[plans/2026-05-31-autonomy-roadmap]] — umbrella; this is a Layer-3 instance, named-character flavor"
-  - "[[engine/INSTITUTIONAL_VOICE_AGENTS]] — the four-file persona pattern reused here"
+  - "[[engine/archive/INSTITUTIONAL_VOICE_AGENTS]] — the four-file persona pattern reused here"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — add entry in same commit"
 ---
@@ -36,7 +36,7 @@ pointers:
 **Pointers:**
 - The 24/7 substrate this composes with: [[plans/2026-06-04-mags-citizen-loop]] §"Phase 2 — BUILD STATE SYNTHESIS". Do NOT build a parallel life-cycle loop.
 - Umbrella: [[plans/2026-05-31-autonomy-roadmap]] §"Layer 3 — Citizen-autonomous". This plan is the *named-character, hand-authored-depth* flavor of Layer 3 (vs. the dials-only 437-citizen rotation).
-- The reusable persona pattern: [[engine/INSTITUTIONAL_VOICE_AGENTS]] (four-file architecture, `scripts/buildVoiceWorkspaces.js` builder).
+- The reusable persona pattern: [[engine/archive/INSTITUTIONAL_VOICE_AGENTS]] (four-file architecture, `scripts/buildVoiceWorkspaces.js` builder).
 - Proprietary-element context: MEMORY.md `user_mags-bleed-proprietary-element` — the hand-authored depth bleeding into voice is the proprietary thing; these four are "Mags-tier," not rotation-tier.
 
 **Acceptance criteria (whole plan — proven on Deacon, then replicated):**
@@ -63,7 +63,7 @@ These were checked against current code, not assumed:
 ### Task 0.1: Decide the persona-core class + namespace
 - **Files:** this plan (record decision); `.claude/agents/` (new namespace dir)
 - **Steps:**
-  1. Adopt the four-file pattern (IDENTITY / LENS / RULES / SKILL) from [[engine/INSTITUTIONAL_VOICE_AGENTS]], **reshaped for an individual person** (not an institution reacting to civic events). IDENTITY = who they are (canon biography + disposition); LENS = canon-tier framework ([[canon/CANON_RULES]] three-tier); RULES = voice/behavior guardrails; SKILL = what the agent does when invoked (answer in-voice, grounded, no fabrication).
+  1. Adopt the four-file pattern (IDENTITY / LENS / RULES / SKILL) from [[engine/archive/INSTITUTIONAL_VOICE_AGENTS]], **reshaped for an individual person** (not an institution reacting to civic events). IDENTITY = who they are (canon biography + disposition); LENS = canon-tier framework ([[canon/CANON_RULES]] three-tier); RULES = voice/behavior guardrails; SKILL = what the agent does when invoked (answer in-voice, grounded, no fabrication).
   2. Pick the namespace. Proposed: `.claude/agents/citizen-voice-<name>/` (broader than "sports" — Varek is business/ownership; future Tier-1 citizens can join). **Open question for Mike — namespace name.**
 - **Verify:** decision recorded in plan; namespace dir chosen.
 - **Status:** [x] DONE (S264) — namespace `citizen-voice-*` adopted (Mike ✓); `.claude/agents/citizen-voice-deacon-seymour/` created. Four-file shape reshaped from the civic-institution pattern → individual-in-conversation (IDENTITY = canon bio+disposition+voice; LENS = perception+Tier-1; RULES = voice/canon/invention + per-surface behavior; SKILL = boot + 3-surface dispatch).

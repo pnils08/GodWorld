@@ -26,7 +26,7 @@ During editorial read of Edition 92, Mike identified that the sim's prose contai
 - Filesystem paths leaked into published PDF (`output/civic-voice/*.json` in EVIDENCE block of Jordan's Stab Fund article)
 
 ### Container impact (see [[SUPERMEMORY]])
-- **bay-tribune:** 30+ docs across E83–E92 editions + C83–C89 supplementals. E92 wiki-ingest ran. Raw edition ingest for E92 held (see [[engine/ROLLOUT_PLAN]] Edition Production HOLD entry).
+- **bay-tribune:** 30+ docs across E83–E92 editions + C83–C89 supplementals. E92 wiki-ingest ran. Raw edition ingest for E92 held (see [[engine/archive/ROLLOUT_PLAN]] Edition Production HOLD entry).
 - **world-data:** 449+ citizen cards built from bay-tribune via `buildCitizenCards.js`; likely carries embedded contaminated context.
 - **super-memory:** session auto-saves since S122, including session 172 drift.
 - **Filesystem:** `editions/`, `output/reporters/`, production logs, [[mags-corliss/NEWSROOM_MEMORY]], [[mags-corliss/JOURNAL]].

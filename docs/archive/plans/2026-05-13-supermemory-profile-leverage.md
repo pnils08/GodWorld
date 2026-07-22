@@ -10,8 +10,8 @@ sources:
   - .claude/plugins/marketplaces/supermemory-plugins/plugin/scripts/context-hook.cjs — reader (injects profile at boot)
   - docs/SUPERMEMORY.md — current docs (partial coverage of the pipeline)
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — governance.12 row"
-  - "[[engine/ROLLOUT_PLAN]] — infrastructure.4 (paired — writer-hook fix, engine-sheet)"
+  - "[[engine/archive/ROLLOUT_PLAN]] — governance.12 row"
+  - "[[engine/archive/ROLLOUT_PLAN]] — infrastructure.4 (paired — writer-hook fix, engine-sheet)"
   - "[[SUPERMEMORY]] — parent spec to be expanded"
   - "[[archive/plans/2026-05-13-boot-persona-contamination]] — S221 cleanup that surfaced the pipeline; Task 1 caveat documents what this plan addresses"
 ---

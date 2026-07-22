@@ -40,7 +40,7 @@ Repo files cross all sessions because they're on disk:
 
 - `CLAUDE.md` — identity, boot logic, rules
 - `docs/WORKFLOWS.md` — per-workflow files, commands, rules, risks
-- `docs/engine/ROLLOUT_PLAN.md` — build queue
+- `docs/engine/archive/ROLLOUT_PLAN.md` — build queue
 - `docs/RESEARCH.md` — findings log
 - `docs/SUPERMEMORY.md` — container architecture
 - All architecture docs

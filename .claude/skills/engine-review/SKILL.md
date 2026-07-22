@@ -195,4 +195,4 @@ Step 4 in the run-cycle chain. After pre-flight, pre-mortem, and cycle execution
 
 **Second pass (after Phase 38.2 + 38.3 + 38.4, this rewrite):** even the framing logic mostly moves into structured fields. The auditor now writes `mitigatorState`, `remedyPath`, and `tribuneFraming` per pattern — which is what the skill was previously synthesizing by hand. The skill's remaining job: translate structured engine fields into Tribune voice, surface front-page candidates, and gate anomalies. Most assertions about "what to write" come from `tribuneFraming.threeLayerCoverage` directly.
 
-Determinism in code, judgment in the skill — and the judgment surface keeps shrinking as the auditor learns. Sources: `docs/engine/PHASE_38_PLAN.md` §6 (first rewrite) and §16.5 (this rewrite).
+Determinism in code, judgment in the skill — and the judgment surface keeps shrinking as the auditor learns. Sources: `docs/engine/archive/PHASE_38_PLAN.md` §6 (first rewrite) and §16.5 (this rewrite).

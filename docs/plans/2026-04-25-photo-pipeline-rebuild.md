@@ -5,14 +5,14 @@ updated: 2026-06-29
 type: plan
 tags: [media, research, active]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md §Edition Production (REBUILD entry, S170 + S172 confirmation)
+  - docs/engine/archive/ROLLOUT_PLAN.md §Edition Production (REBUILD entry, S170 + S172 confirmation)
   - docs/EDITION_PIPELINE.md §Post-Edition Add-Ons §/edition-print
   - .claude/skills/edition-print/SKILL.md §Step 1 (current note + "Phase 21.3 future state")
   - .claude/agents/dj-hartley/* (IDENTITY + LENS + RULES + SKILL — canon-fidelity Wave A pilot S174; S175 rollout-complete)
   - S170 Mike feedback (C92 photos) — "the photos should literally capture my world..." / "zero creativity and drags down the publication"
   - "Supermemory mags doc hzvGaG7nh7A8nszmLzzAtF — S176 context save, photo pipeline rebuild plan reasoning. Retrieve: curl -s 'https://api.supermemory.ai/v3/documents/hzvGaG7nh7A8nszmLzzAtF' -H 'Authorization: Bearer $SUPERMEMORY_CC_API_KEY'"
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout"
   - "[[EDITION_PIPELINE]] — pipeline map"
   - "[[archive/plans/2026-04-25-canon-fidelity-rollout]] — DJ four-file structure source (S174/S175)"
   - "[[SCHEMA]] — doc conventions"
@@ -28,7 +28,7 @@ pointers:
 **Terminal:** research-build (builds + executes the photo pipeline). Per S188 scope correction, photo pipeline rebuild is research-build owned — media doesn't build.
 
 **Pointers:**
-- Parent rollout entry: [[engine/ROLLOUT_PLAN]] §Edition Production → REBUILD: Photo pipeline (HIGH)
+- Parent rollout entry: [[engine/archive/ROLLOUT_PLAN]] §Edition Production → REBUILD: Photo pipeline (HIGH)
 - Pipeline map: [[EDITION_PIPELINE]] §Post-Edition Add-Ons
 - DJ agent files (LOCKED — see Guardrail): `.claude/agents/dj-hartley/{IDENTITY,LENS,RULES,SKILL}.md`
 - Canon-fidelity rollout (DJ source): [[archive/plans/2026-04-25-canon-fidelity-rollout]]

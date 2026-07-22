@@ -4,14 +4,14 @@
  * Premise (pre-wire couples among existing tracked citizens to satisfy the married
  * flag) was corrected by Mike S243: the ~858 tracked citizens are a representative
  * SAMPLE of ~375,985 Oaklanders — spouses are off-sample, pairing them is make-believe.
- * See docs/engine/LEDGER_REPAIR_HOUSEHOLDS.md §"The premise correction (S243)".
+ * See docs/engine/archive/LEDGER_REPAIR_HOUSEHOLDS.md §"The premise correction (S243)".
  * This file's value was proving the gender imbalance (232M/180F) that exposed the wrong
  * premise. Will be removed once engine.5 Phase 1–2 land.
  *
  * pairMarriedCitizens.js — Stage 1 of engine.5 households build.
  *
  * Assigns shared HouseholdId to married/partnered couples + reconciles surnames.
- * Plan: docs/engine/LEDGER_REPAIR_HOUSEHOLDS.md (Stage 1). Sibling pattern:
+ * Plan: docs/engine/archive/LEDGER_REPAIR_HOUSEHOLDS.md (Stage 1). Sibling pattern:
  * scripts/ingestFemaleCitizensBalance.js (dry-run → apply → verify gates).
  *
  * DECISIONS (S243, Mike + advisor-reviewed — see plan + commit body):

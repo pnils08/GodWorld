@@ -131,4 +131,4 @@ const planText = fs.readFileSync(planPath, 'utf8');
 fs.writeFileSync(planPath, insertStatusBlock(planText));   // relocate FIRST (lossless)
 rolloutLines[rowIdx] = newRow;
 fs.writeFileSync(ROLLOUT, rolloutLines.join('\n'));         // then slim the row
-console.log(`\nAPPLIED. Verify: git diff ${path.relative(ROOT, planPath)} docs/engine/ROLLOUT_PLAN.md && node scripts/docLoopStatus.js --lint`);
+console.log(`\nAPPLIED. Verify: git diff ${path.relative(ROOT, planPath)} docs/engine/archive/ROLLOUT_PLAN.md && node scripts/docLoopStatus.js --lint`);

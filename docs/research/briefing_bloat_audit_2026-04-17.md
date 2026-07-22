@@ -5,13 +5,13 @@ updated: 2026-04-17
 type: reference
 tags: [media, research, audit, active]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md §Edition Production (orphan items) — audit task flagged PARTIAL S144
+  - docs/engine/archive/ROLLOUT_PLAN.md §Edition Production (orphan items) — audit task flagged PARTIAL S144
   - output/desks/{desk}/current/ — live c91 briefing bundles (6 desks)
   - output/desk-briefings/{desk}_archive_c{89,90,91}.md — archive-context trend
   - editions/cycle_pulse_edition_91.txt — c91 edition text used for utilization scoring
   - docs/drive-files/Googlepaper.pdf — Mezzalira "agent briefing context bloat" reference
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — the audit line this report closes"
+  - "[[engine/archive/ROLLOUT_PLAN]] — the audit line this report closes"
   - "[[archive/plans/2026-04-17-briefing-bundle-trim]] — the phase plan this audit spawned (recs 1/2/3/7)"
   - "[[EDITION_PIPELINE]] — pipeline v2 briefing structure"
   - "[[plans/BACKLOG]] §Phase 26.2 — briefing evolution phase this report feeds"

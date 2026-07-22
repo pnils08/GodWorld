@@ -5,14 +5,14 @@ updated: 2026-05-07
 type: plan
 tags: [engine, media, architecture, active]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md §"WIRE: /sift consume engine pre-routes from Story_Seed_Deck" (S201, line 100)
+  - docs/engine/archive/ROLLOUT_PLAN.md §"WIRE: /sift consume engine pre-routes from Story_Seed_Deck" (S201, line 100)
   - docs/EDITION_PIPELINE.md (master chain + sequence-by-design)
   - utilities/rosterLookup.js v2.2 (current matcher — suggestStoryAngle_)
   - phase07-evening-media/applyStorySeeds.js v3.10 (current seed builder)
-  - docs/engine/ROLLOUT_ARCHIVE.md S201 entry (header drift fix `a05e5f6` — top-3 distribution: Simon Leary 838 / Maria Keen 160 / Luis Navarro 38)
+  - docs/engine/archive/ROLLOUT_ARCHIVE.md S201 entry (header drift fix `a05e5f6` — top-3 distribution: Simon Leary 838 / Maria Keen 160 / Luis Navarro 38)
   - SESSION_CONTEXT.md priority #5 (S202 hold reason)
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout, replaces line 100 inline entry with pointer to this plan"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout, replaces line 100 inline entry with pointer to this plan"
   - "[[EDITION_PIPELINE]] — master chain; this plan extends Phase 7 inside /run-cycle"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — add entry in same commit"

@@ -6,11 +6,11 @@ type: plan
 tags: [architecture, governance, draft]
 sources:
   - S250 research-build conversation (Mike) — fresh-start v2.0 decision + drain-down migration + by-terminal grouping
-  - docs/engine/ROLLOUT_PLAN.md — the legacy junk box being retired
+  - docs/engine/archive/ROLLOUT_PLAN.md — the legacy junk box being retired
   - docs/adr/0005-rollout-plan-structure.md — current structure (the how-to logic moves here / to rollout-rules.md)
   - scripts/docLoopStatus.js + scripts/rolloutSweep.js — the maintenance layer v2.0 hands off to (built S250)
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — legacy rollout (drains + retires)"
+  - "[[engine/archive/ROLLOUT_PLAN]] — legacy rollout (drains + retires)"
   - "[[plans/TEMPLATE]] — plan shape"
   - "[[index]] — register in same commit"
 ---
@@ -24,7 +24,7 @@ pointers:
 **Terminal:** research-build (apparatus). The wall-decomposition touches rows owned by all terminals — research-build runs the pass but flags engine-sheet/media/civic live rows for their owners rather than guessing their open state.
 
 **Pointers:**
-- Legacy source: `docs/engine/ROLLOUT_PLAN.md` (304→294 lines as of S250; ~15 wall rows + ~110 lines how-to)
+- Legacy source: `docs/engine/archive/ROLLOUT_PLAN.md` (304→294 lines as of S250; ~15 wall rows + ~110 lines how-to)
 - Maintenance layer: `scripts/docLoopStatus.js` (validator/detector), `scripts/rolloutSweep.js` (sweep)
 - Proof-of-pattern: governance.18 decomposition (S250, commit `0822d6f`) — one wall → clean row + detail relocated to its plan
 
@@ -47,10 +47,10 @@ pointers:
 ### Phase 1 — structure (no content migration yet)
 
 #### Task 1: Evict the how-to logic
-- **Files:** `docs/engine/rollout-rules.md` (create); `docs/index.md` (register)
+- **Files:** `docs/engine/archive/rollout-rules.md` (create); `docs/index.md` (register)
 - **Steps:** Move the legacy rollout's §The Spine + §Convention State labels + §Group taxonomy + §How to add work + §How to close work into `rollout-rules.md`. Legacy rollout keeps a 2-line header pointer to it.
 - **Verify:** legacy rollout no longer contains how-to sections; rollout-rules.md registered.
-- **Status:** [x] DONE S251 — `docs/engine/rollout-rules.md` created as full operating doctrine (not just the evicted sections): four-role pipeline (research/plan/rollout/archive) + the gap-log-is-research keystone (skill terminals don't blind-log on rollout) + clean-tracker discipline + state labels + group taxonomy + how-to-add/close + filing + archiving/sweep-code. State labels, taxonomy, how-to-add, how-to-close evicted from ROLLOUT_PLAN; replaced with §Rules & conventions pointer header. **§The Spine relocated to ROLLOUT_ARCHIVE** (completed roadmap — a rules doc shouldn't carry it; deviates from the literal Task-1 instruction but serves "rollout stays clean / archive completed"). Registered in index.md. O2 resolved (below). **Pending Mike review before Cut 2** (the four terminal-MD wirings — always-loaded files).
+- **Status:** [x] DONE S251 — `docs/engine/archive/rollout-rules.md` created as full operating doctrine (not just the evicted sections): four-role pipeline (research/plan/rollout/archive) + the gap-log-is-research keystone (skill terminals don't blind-log on rollout) + clean-tracker discipline + state labels + group taxonomy + how-to-add/close + filing + archiving/sweep-code. State labels, taxonomy, how-to-add, how-to-close evicted from ROLLOUT_PLAN; replaced with §Rules & conventions pointer header. **§The Spine relocated to ROLLOUT_ARCHIVE** (completed roadmap — a rules doc shouldn't carry it; deviates from the literal Task-1 instruction but serves "rollout stays clean / archive completed"). Registered in index.md. O2 resolved (below). **Pending Mike review before Cut 2** (the four terminal-MD wirings — always-loaded files).
 
 #### Task 2: Create the v2.0 shell (after D1 confirmed)
 - **Files:** `docs/engine/ROLLOUT_V2.md` + `docs/engine/ROLLOUT_ARCHIVE_V2.md` (create); `docs/index.md`

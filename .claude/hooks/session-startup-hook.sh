@@ -226,7 +226,7 @@ BOOT
   # whenever LEDGER_REPAIR.md's head still carried "DO NOT re-analyze" framing.
   # That framing was reworded to plain HISTORICAL status (same commit), so the
   # note had nothing left to clarify — block removed rather than left as a dead
-  # no-op grep. Current ledger state: docs/engine/LEDGER_AUDIT.md.
+  # no-op grep. Current ledger state: docs/engine/archive/LEDGER_AUDIT.md.
 
   # --- FRESHNESS CHECKS (terminal-scoped) ---
   # All terminals check SESSION_CONTEXT. Media additionally checks NEWSROOM_MEMORY.

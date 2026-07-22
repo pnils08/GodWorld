@@ -5,12 +5,12 @@ updated: 2026-04-28
 type: plan
 tags: [media, civic, infrastructure, complete]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md §Data & Pipeline ("ALIGN: Skills need supermemory rules aligned for search and save" — added S182, unblocked S183)
+  - docs/engine/archive/ROLLOUT_PLAN.md §Data & Pipeline ("ALIGN: Skills need supermemory rules aligned for search and save" — added S182, unblocked S183)
   - docs/archive/plans/2026-04-27-world-data-unified-ingest-rebuild.md (parent project — DONE S183)
   - docs/SUPERMEMORY.md (reference doc to be enriched)
   - scripts/godworld-mcp.py (post-M1-M4 — 14 MCP tools live)
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout, §Data & Pipeline ALIGN item"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout, §Data & Pipeline ALIGN item"
   - "[[archive/plans/2026-04-27-world-data-unified-ingest-rebuild]] — predecessor that landed the writers + tags"
   - "[[SUPERMEMORY]] — canonical reference; matrix lands in new §Search/save matrix section"
   - "[[SCHEMA]] — doc conventions"

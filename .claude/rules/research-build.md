@@ -48,7 +48,7 @@ If a doc would be isolated (no natural parent), question whether it should exist
 
 ## Rollout discipline
 
-`docs/engine/ROLLOUT_PLAN.md` is canonical for open/closed work across the project. Research-build owns it — every architectural decision lands as a rollout entry tagged for the executing terminal. Per S147: rollout entries are pointers, not inline notes. Each item points to a file path / supermemory tag / claude-mem ID / phase plan — no inline research, no pattern exposition. Forces every session to read real context before acting.
+`docs/engine/archive/ROLLOUT_PLAN.md` is canonical for open/closed work across the project. Research-build owns it — every architectural decision lands as a rollout entry tagged for the executing terminal. Per S147: rollout entries are pointers, not inline notes. Each item points to a file path / supermemory tag / claude-mem ID / phase plan — no inline research, no pattern exposition. Forces every session to read real context before acting.
 
 When closing a rollout entry: move to `ROLLOUT_ARCHIVE.md` with full details (commit hashes, what shipped, what was learned). Don't delete inline.
 

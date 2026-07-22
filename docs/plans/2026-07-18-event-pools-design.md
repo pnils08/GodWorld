@@ -434,10 +434,17 @@ EMITS: LifeHistory + LifeHistory_Log for UNI citizens: retirement transition lin
 GAPS: structurally safe (UNI+retired gate). No wealth gate; content is soft lifestyle flavor.
 
 FILE: phase02-world-state/loadEventContentLedger.js  [THE AUTHORING SURFACE]
-ENTRY: loadEventContentLedger_ (L226/L1802, Phase2)
-EMITS: S.contentLedger {lines[poolKey], fragments[slot], skipped, counts}. Read-only. Fallback: empty -> hardcoded pools, byte-identical replay.
-SCHEMA: Kind (line|fragment), PoolKey, Slot, Text, Weight (def 1), Conditions (DSL), Tags (first tag MUST be in 27-source whitelist, fail-closed), Grain, Active ('no' = kill switch).
-CONDITION DSL (L60-69, parse L77-111): fields = wealth(num), children(num), displacement(num), married(flag), retired(flag), ageband(enum: youth|youngAdult|adult|senior ONLY), hood(str), season(str). Grammar: ';'-joined AND terms; ops <=,>=,<,>,=,!= (num); =,!= (enum/str); bare name for flags. Unknown field/op/value -> row skipped (fail-closed, typo narrows never widens, S289).
-SOURCE WHITELIST (27): qol media weather fame prevEvening nbhdState faith neighborhood firstFriday creationDay holiday sports occupation continuity homeLife reflection identity listening groove civicNews bias retirement curiosity communityLife economy chaos sentiment season age familyLife.
+ENTRY: loadEventContentLedger_ (Phase2; safePhaseCall_ both entry points)
+EMITS: S.contentLedger {lines[poolKey], fragments[slot], skipped, lineCount, fragmentCount}. Read-only at cycle time. Fallback: empty/missing tab -> hardcoded pools, byte-identical replay.
+WRITERS: HAND + post-cycle `scripts/draftContentRows.js` (engine.49; `auth:auto` tag; caps/dedup; validates by running the real loader).
+SCHEMA (9 cols A–I): Kind (line|fragment), PoolKey, Slot, Text, Weight (def 1), Conditions (DSL), Tags (line: first tag MUST be in source whitelist, fail-closed), Grain, Active ('no' = kill switch, silent skip).
+CONDITION DSL (`CONTENT_LEDGER_DSL_FIELDS` + `parseContentConditions_`): grammar = ';'-joined AND terms; ops <=,>=,<,>,=,!= (num); =,!= (enum/str); bare name for flags. Unknown field/op/value -> whole row skipped (fail-closed, typo narrows never widens, S289). Eval scopes built per citizen in generateCitizensEvents_ (not re-parsed).
+  Fields (live):
+  - num: wealth, children, displacement, tier, fame
+  - flag: married, retired
+  - enum: ageband (youth|youngAdult|adult|senior — back-compat 4-band), band (child|teen|youth|youngAdult|adult|senior — engine.67 6-band), lifestate (student|working|retired|none — maps lifeState.working), heritage (none|founding|established|prominent|dynasty)
+  - str: hood, season, occupation, culdomain
+  Author note: `displacement` evals citizen-row DisplacementRisk (S289), not Neighborhood_Map pressure. Prefer `band=` over `ageband=` for child/teen targeting.
+SOURCE WHITELIST (27 `source:*` tags): qol media weather fame prevEvening nbhdState faith neighborhood firstFriday creationDay holiday sports occupation continuity homeLife reflection identity listening groove civicNews bias retirement curiosity communityLife economy chaos sentiment season age familyLife.
 SKIP RULES: blank row silent; Active=no silent; bad Kind / empty Text / unparseable Conditions / line w/o PoolKey / first-tag-not-whitelisted / fragment w/o Slot = counted skips, aggregate-logged.
-LIFE-STATE GAPS: ageband enum locked to 4 bands, youth = 0-22 no child floor — authors CANNOT target/exclude children; no occupation/tier/heritage/life-state fields in DSL. Extension point = CONTENT_LEDGER_DSL_FIELDS + evalContentConditions_ condScopes in generateCitizensEvents (L2301).
+LIFE-STATE: engine.67/68 closed the old gaps — band/lifestate/occupation/tier/heritage/fame/culdomain are in the DSL; Phase 5 also hard-gates impossible class×life-state via isEventEligible_ after pool assembly. Remaining depth (not gaps): no trajectory/delta conditions; PoolKey is additive-only (does not suppress hardcoded blocks); see docs/reviews/2026-07-22-event-content-ledger-grok-depth.md.

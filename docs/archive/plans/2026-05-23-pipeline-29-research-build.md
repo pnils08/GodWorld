@@ -5,7 +5,7 @@ updated: 2026-05-23
 type: plan
 tags: [media, canon, photo-pipeline, complete]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md §pipeline.29
+  - docs/engine/archive/ROLLOUT_PLAN.md §pipeline.29
   - docs/plans/2026-05-22-c94-gap-log-triage.md §3 C8
   - output/production_log_edition_c94_print_gaps.md (G-PR3, G-PR4, G-PR5, G-PR8, G-PR9, G-PR10)
   - .claude/agents/dj-hartley/{IDENTITY,LENS,RULES,SKILL}.md
@@ -189,11 +189,11 @@ Until the operator visually confirms, Step 6 is incomplete on generator metrics 
 
 - **Files:**
   - `docs/index.md` — add plan entry
-  - `docs/engine/ROLLOUT_PLAN.md` — flip pipeline.29 research-build slice to done-pending-archive; engine-sheet half explicit
+  - `docs/engine/archive/ROLLOUT_PLAN.md` — flip pipeline.29 research-build slice to done-pending-archive; engine-sheet half explicit
 - **Steps:**
   1. `docs/index.md` under `docs/plans/`: add entry for this plan with one-line summary.
-  2. `docs/engine/ROLLOUT_PLAN.md` pipeline.29 row: state stays `ready` overall, but research-build slice CLOSED inline with closure details (G-PR3 / G-PR4 / G-PR5 / G-PR8a / G-PR8b / G-PR8c / G-PR9 / G-PR10 sub-deliverables + commit hashes). Engine-sheet slice (G-PR2 djDirect fallback / G-PR6 PDF section normalization / G-PR7 article-table parser / G-PR8e rateEditionCoverage + buildCitizenCards Beverly flag / G-PR11 saveToDrive supersede) listed as outstanding for engine-sheet. If engine-sheet slice is large enough, file as new `engine.NN` row; otherwise keep co-row.
-- **Verify:** `grep -n "pipeline.29" docs/engine/ROLLOUT_PLAN.md` shows updated row.
+  2. `docs/engine/archive/ROLLOUT_PLAN.md` pipeline.29 row: state stays `ready` overall, but research-build slice CLOSED inline with closure details (G-PR3 / G-PR4 / G-PR5 / G-PR8a / G-PR8b / G-PR8c / G-PR9 / G-PR10 sub-deliverables + commit hashes). Engine-sheet slice (G-PR2 djDirect fallback / G-PR6 PDF section normalization / G-PR7 article-table parser / G-PR8e rateEditionCoverage + buildCitizenCards Beverly flag / G-PR11 saveToDrive supersede) listed as outstanding for engine-sheet. If engine-sheet slice is large enough, file as new `engine.NN` row; otherwise keep co-row.
+- **Verify:** `grep -n "pipeline.29" docs/engine/archive/ROLLOUT_PLAN.md` shows updated row.
 - **Status:** [ ] not started
 
 ### Task 8: Commit + push (2 commits)

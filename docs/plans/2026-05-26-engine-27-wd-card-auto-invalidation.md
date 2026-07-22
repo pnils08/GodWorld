@@ -5,7 +5,7 @@ updated: 2026-05-26
 type: plan
 tags: [engine, substrate, automation, ready]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md §engine.27 (filed S236 from canon.3 T12+T13 close)
+  - docs/engine/archive/ROLLOUT_PLAN.md §engine.27 (filed S236 from canon.3 T12+T13 close)
   - docs/SUPERMEMORY.md §wd-* (consumer canon — 7 projections, ~966 cards)
   - docs/adr/0007-cross-layer-canon-authority-precedence.md §Rule 3 (wd-cards as derived projection)
   - docs/archive/plans/2026-05-24-canon-3-cross-layer-citizen-drift.md §T12+§T13 (empirical wd-projection-lag findings)

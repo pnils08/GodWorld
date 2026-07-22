@@ -5,7 +5,7 @@ updated: 2026-05-23
 type: plan
 tags: [civic, skill-text, agent-rules, active]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md §civic.12
+  - docs/engine/archive/ROLLOUT_PLAN.md §civic.12
   - docs/plans/2026-05-22-c94-gap-log-triage.md §3 C9
   - output/production_log_city_hall_c94_run_gaps.md (G-R1, G-R2, G-R3, G-R4, G-R5)
   - output/production_log_city_hall_c94_gaps.md (G-PREP1, G-PREP3, G-PREP5, G-PREP7, G-PREP8)
@@ -215,11 +215,11 @@ hit the budget without producing the artifact.
 
 - **Files:**
   - `docs/index.md` — add plan entry
-  - `docs/engine/ROLLOUT_PLAN.md` — civic.12 row partial-close with research-build sub-deliverable closure inline + deferred items named explicitly
+  - `docs/engine/archive/ROLLOUT_PLAN.md` — civic.12 row partial-close with research-build sub-deliverable closure inline + deferred items named explicitly
 - **Steps:**
   1. `docs/index.md` plan registration.
   2. ROLLOUT civic.12: research-build slice CLOSED inline; deferred items (G-R1 cross-terminal, G-R4 investigation, G-PREP1 design-rethink) listed with reasons. State stays `in-progress` (engine-sheet half + deferred research-build items still open) OR split into separate rows if cleaner.
-- **Verify:** `grep -n "civic.12" docs/engine/ROLLOUT_PLAN.md` shows updated row.
+- **Verify:** `grep -n "civic.12" docs/engine/archive/ROLLOUT_PLAN.md` shows updated row.
 - **Status:** [ ] not started
 
 ### Task 6: Commit + push

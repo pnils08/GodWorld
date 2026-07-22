@@ -5,13 +5,13 @@ updated: 2026-04-26
 type: plan
 tags: [media, infrastructure, active]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md §Edition Post-Publish — "NON-EDITION PUBLISHING PIPELINE: bundled script-shape gaps"
+  - docs/engine/archive/ROLLOUT_PLAN.md §Edition Post-Publish — "NON-EDITION PUBLISHING PIPELINE: bundled script-shape gaps"
   - S178 first /interview run findings (Mayor Santana on OARI, C92)
   - .claude/skills/interview/SKILL.md S179 Step 8 rewrite (DONE)
   - editions/cycle_pulse_edition_92.txt — masthead + section pattern reference
   - "Supermemory mags doc bm8sccZCRzdCsX6VWAZ2iS — full S179 architecture + grill outcomes (the WHY behind every decision in this plan; fetch when judgment-call context needed)"
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout"
   - "[[EDITION_PIPELINE]] — workflow doc the .txt schema extends"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — added in same commit"
@@ -30,7 +30,7 @@ pointers:
 
 **Pointers:**
 - Prior work: S179 `/interview` Step 8 rewrite to `/save-to-bay-tribune` direct (`.claude/skills/interview/SKILL.md` v1.1)
-- C93 observation task gating T8: `docs/engine/ROLLOUT_PLAN.md` §Edition Post-Publish — "C93 OBSERVATION TASK"
+- C93 observation task gating T8: `docs/engine/archive/ROLLOUT_PLAN.md` §Edition Post-Publish — "C93 OBSERVATION TASK"
 - Format reference: `editions/cycle_pulse_edition_92.txt:1-7` (masthead pattern)
 - Affected scripts: `scripts/ingestEdition.js`, `scripts/ingestEditionWiki.js`, `scripts/rateEditionCoverage.js`, `scripts/generate-edition-photos.js`, `scripts/photoQA.js`, `scripts/generate-edition-pdf.js`, `scripts/saveToDrive.js`
 - Affected skills: `.claude/skills/post-publish/SKILL.md`, `.claude/skills/edition-print/SKILL.md`, `.claude/skills/interview/SKILL.md`, `.claude/skills/dispatch/SKILL.md`, `.claude/skills/write-supplemental/SKILL.md`

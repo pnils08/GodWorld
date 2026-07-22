@@ -9,10 +9,10 @@ sources:
   - docs/SCHEMA.md §3 (frontmatter), §7 (folder map), §12 (changelog)
   - docs/plans/TEMPLATE.md — sibling plan template; research template mirrors its discipline
   - docs/adr/0005-rollout-plan-structure.md — group taxonomy + filing protocol
-  - docs/engine/ROLLOUT_PLAN.md §Convention — State labels (S204) + Watch List lane
+  - docs/engine/archive/ROLLOUT_PLAN.md §Convention — State labels (S204) + Watch List lane
   - docs/RESEARCH.md — the legacy learning log being frozen
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout; pending-state lives here, not in research files"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout; pending-state lives here, not in research files"
   - "[[SCHEMA]] — doc conventions the new template follows"
   - "[[plans/TEMPLATE]] — sibling artifact; research is the standing library, plan is the project"
   - "[[index]] — register every new file in the same commit"
@@ -101,7 +101,7 @@ Boot-burn note (advisor): `docs/index.md` is a research-build boot read; "resear
   - `docs/index.md` — modify (add `research/TEMPLATE` + one-line pointer to the sub-catalog + this plan under `docs/plans/`)
   - `.claude/terminals/research-build/TERMINAL.md` — modify (add `docs/research/TEMPLATE.md` to the Research table)
   - `docs/SCHEMA.md` — modify (§7 folder map: note `docs/research/` uses `TEMPLATE.md` + a sub-index — the parent-spec back-link for the template)
-  - `docs/engine/ROLLOUT_PLAN.md` — modify (add `governance.*` row pointing to this plan)
+  - `docs/engine/archive/ROLLOUT_PLAN.md` — modify (add `governance.*` row pointing to this plan)
 - **Steps:**
   1. Create `docs/research/index.md` with a catalog header + the headroom row.
   2. Top-level index.md: register `research/TEMPLATE` + the sub-catalog pointer + this plan.

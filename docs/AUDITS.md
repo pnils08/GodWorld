@@ -10,7 +10,7 @@ sources:
   - .claude/skills/md-audit/SKILL.md
   - .claude/skills/doc-audit/SKILL.md
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — open work; this file is for *standing* maintenance jobs"
+  - "[[engine/archive/ROLLOUT_PLAN]] — open work; this file is for *standing* maintenance jobs"
   - "[[index]] — registers each audit skill's plan file"
 ---
 

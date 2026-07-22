@@ -19,7 +19,7 @@
  * grader-only assertions are deferred until the Anthropic API key is
  * wired (status flagged in assertions.json.graderOnlyAssertions).
  *
- * Plan: docs/engine/PHASE_39_PLAN.md
+ * Plan: docs/engine/archive/PHASE_39_PLAN.md
  *
  * Usage:
  *   node scripts/capabilityReviewer.js          # auto-detect cycle
@@ -96,7 +96,7 @@ function loadAssertions() {
 // dependencies (grader key missing, sheet read timeout) are uncontrollable —
 // they reflect environment, not editorial performance. Everything else is
 // controllable: the edition did not meet the assertion and the newsroom can fix it.
-// See docs/engine/REVIEWER_LANE_SCHEMA.md for the full classification rubric.
+// See docs/engine/archive/REVIEWER_LANE_SCHEMA.md for the full classification rubric.
 const UNCONTROLLABLE_DETECTOR_VERSIONS = new Set(['load-error', 'runtime-error']);
 
 function classifyFailure(result) {

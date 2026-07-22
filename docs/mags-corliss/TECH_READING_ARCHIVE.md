@@ -156,7 +156,7 @@ Source: DigitalOcean ICYMI AI newsletter.
 
 **Also noted:** GPT-5.3-Codex on DigitalOcean (our cloud provider). Gemini 3.1 Pro with record benchmarks. Qwen3.5 unified vision-language. GLM-5 at 744B params. DeepGen 1.0 multimodal at only 5B.
 
-### All buildable items moved to `docs/engine/ROLLOUT_PLAN.md`:
+### All buildable items moved to `docs/engine/archive/ROLLOUT_PLAN.md`:
 - 7.8 Install Official Plugins, 7.9 Remote Control, 7.10 Cloud Sessions
 - 7.6 updated (podcast test for agent teams), 12.10 Slack Integration
 - Watch List: Desktop (Linux), Agent Teams stability, Fast Mode, Checkpointing
@@ -165,7 +165,7 @@ Source: DigitalOcean ICYMI AI newsletter.
 
 ## 2026-02-21 — S55 Tech Reading (continued from S50)
 - Session 55 research covered: agent orchestration, adversarial review loops, parallel subagent best practices, pre-commit hooks, agentic journalism, Claude Code changelog (2.1.45-2.1.50).
-- All buildable items moved to `docs/engine/ROLLOUT_PLAN.md`.
+- All buildable items moved to `docs/engine/archive/ROLLOUT_PLAN.md`.
 
 ---
 
@@ -235,7 +235,7 @@ Source: DigitalOcean ICYMI AI newsletter.
 - 9B params, 262K context window. Free local use on all platforms.
 - **GodWorld relevance:** Full-edition review or ledger analysis locally. Candidate for lighter agents (Lori, Rhea fast-pass, letters desk). Quality vs Claude needs testing.
 
-### All buildable items moved to `docs/engine/ROLLOUT_PLAN.md`:
+### All buildable items moved to `docs/engine/archive/ROLLOUT_PLAN.md`:
 - Phase 9.1 updated (Docker AI model services)
 - Phase 20 (Public Tribune — WordPress)
 - Phase 21 (Local Model Pipeline — Llama/Qwen path)
@@ -341,7 +341,7 @@ Mike proposed a feedback system where every agent — journalists, voice agents,
 
 See Phase 26 in ROLLOUT_PLAN.md for implementation plan.
 
-### All buildable items moved to `docs/engine/ROLLOUT_PLAN.md`:
+### All buildable items moved to `docs/engine/archive/ROLLOUT_PLAN.md`:
 - Phase 26 (Agent Grading System — Skin in the Game)
 - Phase 6.5 (Discovery Skill — `/grill-me` pattern)
 - Watch List: Effort levels per agent, security threat model skill, Anthropic skills guide examples pattern
@@ -453,7 +453,7 @@ Top feed posts are all identity/authenticity/memory themes. clawdbottom dominati
 
 `moltbook-heartbeat.js` request timeout bumped from 15s to 45s. The API is functional but slow — 15s was causing cascading failures during dashboard checks.
 
-### All buildable items moved to `docs/engine/ROLLOUT_PLAN.md`:
+### All buildable items moved to `docs/engine/archive/ROLLOUT_PLAN.md`:
 - Next Session Priorities: PostCompact hook, effort levels test, SDK bump, Node.js security patch, heartbeat timeout fix
 - Watch List: Together AI voice agents, Mamba-3, Discord modal components, Vertex AI in GAS
 

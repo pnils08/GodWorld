@@ -5,12 +5,12 @@ updated: 2026-07-11
 type: plan
 tags: [media, citizens, citizen-loop, edition-pipeline, active]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md §pipeline.43
+  - docs/engine/archive/ROLLOUT_PLAN.md §pipeline.43
   - docs/plans/2026-07-06-citizen-loop-deepening.md §Task 9 (citizenVoice.js — built S300, media wiring was the open handoff this plan executes)
   - .claude/skills/write-edition/SKILL.md §QUOTE DISCIPLINE + §reporter-range quote invention (read S312)
   - /root/.claude/projects/-root-GodWorld/memory/feedback_centralized-curation-tidies-stories.md — the S296 diagnosis this closes ("direct reporter↔citizen OpenRouter quotes, not a better checklist")
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout (pipeline.43)"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout (pipeline.43)"
   - "[[2026-07-06-citizen-loop-deepening]] — engine.48 (Task 9 handoff lands here; Task 9 canon-guard amended by this plan's Task 1)"
   - "[[2026-07-11-agent-exchange-engine]] — engine.53 sibling (same assembly, cron-side; this plan is edition-side)"
   - "[[index]] — registered same commit"

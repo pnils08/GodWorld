@@ -10,13 +10,13 @@ sources:
   - "S241 conversation — Mike: 'pull all useful tools onto the rollout for future session builds'"
   - "S241 stale-URL scan: 5 project files reference console.supermemory.ai (migrated March 5 to app.supermemory.ai)"
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout (governance.24)"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout (governance.24)"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — register in same commit"
   - "[[../SUPERMEMORY]] — primary Supermemory reference doc; carries stale URL + needs post-upgrade refresh"
   - "[[../STACK]] — stale URL reference"
   - "[[../RESEARCH]] — stale URL reference"
-  - "[[engine/ROLLOUT_PLAN]] — itself carries a stale URL reference (one of the 5)"
+  - "[[engine/archive/ROLLOUT_PLAN]] — itself carries a stale URL reference (one of the 5)"
   - "scripts/migrateSupermemory.js — stale URL reference (script, not doc)"
   - "[[2026-05-28-claude-mem-v13-upgrade-evaluation]] — sibling S241 plan, governance.23 — same plugin-upgrade triage pattern"
 ---
@@ -54,7 +54,7 @@ pointers:
 - Post-v0.0.4 commits: May 25 source-attribution re-application (likely fix-forward).
 
 **Pre-v0.0.2 historical changes since installed (Feb 9):**
-- March 5 — `console.supermemory.ai` → `app.supermemory.ai` URL migration. **Independent of plugin upgrade** — the URL is server-side. **5 project files carry the stale URL:** `docs/RESEARCH.md`, `docs/SUPERMEMORY.md`, `docs/STACK.md`, `docs/engine/ROLLOUT_PLAN.md`, `scripts/migrateSupermemory.js`. Likely 301-redirects, but doc hygiene.
+- March 5 — `console.supermemory.ai` → `app.supermemory.ai` URL migration. **Independent of plugin upgrade** — the URL is server-side. **5 project files carry the stale URL:** `docs/RESEARCH.md`, `docs/SUPERMEMORY.md`, `docs/STACK.md`, `docs/engine/archive/ROLLOUT_PLAN.md`, `scripts/migrateSupermemory.js`. Likely 301-redirects, but doc hygiene.
 
 **No major architecture changes** — unlike claude-mem v13.x (server-beta runtime, multi-provider), claude-supermemory v0.0.4 is incremental.
 
@@ -136,8 +136,8 @@ pointers:
   - `docs/SUPERMEMORY.md:688` — table entry labels console as "Admin — org management, billing, API keys".
   - `docs/SUPERMEMORY.md:727` — S177 changelog entry historical reference.
   - `docs/RESEARCH.md:94` — "Available at console.supermemory.ai" — scoped API key creation admin context.
-  - `docs/engine/ROLLOUT_PLAN.md:202` — governance.24 row (this plan's parent — text claims "5 stale files," will be corrected).
-  - `docs/engine/ROLLOUT_PLAN.md:288` — S177 changelog entry historical reference.
+  - `docs/engine/archive/ROLLOUT_PLAN.md:202` — governance.24 row (this plan's parent — text claims "5 stale files," will be corrected).
+  - `docs/engine/archive/ROLLOUT_PLAN.md:288` — S177 changelog entry historical reference.
   - `scripts/migrateSupermemory.js:234` — distinguishes "app.supermemory.ai (browse) / console.supermemory.ai (admin)" — already correct.
 - **Lesson:** verification before action caught a measure-twice violation. The survey assumed "console URL deprecated" from a one-line commit message without confirming. WebFetch verification flipped the verdict. Pattern: `feedback_measure-twice-cascading-effects`.
 - **What stays open:** governance.24 row text needs correction (claims "5 stale URL references" — that's wrong; will be amended in the same commit that ships this plan update).

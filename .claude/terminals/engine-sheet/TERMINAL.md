@@ -38,7 +38,7 @@ These files define the project, your rules, and current state. Read at every boo
 | `.claude/rules/identity.md` | Non-negotiable behavioral rules (auto-loaded) |
 | `.claude/rules/engine.md` | Engine code rules — ctx.rng, write-intents, cascade deps + measure-twice discipline at top (auto-loaded on engine files) |
 | `SESSION_CONTEXT.md` | **On-demand (ADR-0009, S248)** — NOT auto-read at boot. The hook emits the PIN + your `NEXT[engine-sheet]` line in `<godworld-state>`; pull the file only when continuing prior work. |
-| `docs/engine/ENGINE_REPAIR.md` | Tactical defects tracker — open rows tell you what's broken (highest-touch doc this terminal) |
+| `docs/engine/archive/ENGINE_REPAIR.md` | Tactical defects tracker — open rows tell you what's broken (highest-touch doc this terminal) |
 | `.claude/terminals/engine-sheet/TERMINAL.md` | This file — your scope, your docs, your rules |
 
 **Why ENGINE_REPAIR over README at boot (S201 self-audit):** README is project-scoped generic; ENGINE_REPAIR rows enumerate the exact defects this terminal closes. Boot reading it primes the open-work mental model immediately. README stays available on demand for orientation work.
@@ -104,14 +104,14 @@ This terminal primarily files into:
 - `engine.*` — engine code, ledger, schema, tech debt, engine-sheet repair
 - `governance.*` (occasional) — engine-spec docs, schema specs, helper-script specs
 
-**The doc-work doctrine every terminal follows is [[../../../docs/engine/rollout-rules]]** — four roles (research / plan / rollout / archive), templates + save paths (§2), how to add/close (§4–§5), archiving + sweep code (§6). Read it before adding or closing a ROLLOUT row. Description content lives in the pointer doc:
+**The doc-work doctrine every terminal follows is [[../../../docs/engine/archive/rollout-rules]]** — four roles (research / plan / rollout / archive), templates + save paths (§2), how to add/close (§4–§5), archiving + sweep code (§6). Read it before adding or closing a ROLLOUT row. Description content lives in the pointer doc:
 - Designed work → copy [[../../../docs/plans/TEMPLATE]] to `docs/plans/YYYY-MM-DD-<topic>.md`
-- Engine work → existing parent spec ([[../../../docs/engine/PHASE_42_PATTERNS]], [[../../../docs/engine/ENGINE_REPAIR]] row)
+- Engine work → existing parent spec ([[../../../docs/engine/archive/PHASE_42_PATTERNS]], [[../../../docs/engine/archive/ENGINE_REPAIR]] row)
 - In-flight observations → engine gap logs (`output/production_log_..._gaps.md`)
 
-When work completes: set state `done-pending-archive`; session-end sweep moves the row to [[../../../docs/engine/ROLLOUT_ARCHIVE]] (engine-sheet sweeps `engine.*` rows it owns). Closed plans move to `docs/archive/plans/` (rollout-rules §6).
+When work completes: set state `done-pending-archive`; session-end sweep moves the row to [[../../../docs/engine/archive/ROLLOUT_ARCHIVE]] (engine-sheet sweeps `engine.*` rows it owns). Closed plans move to `docs/archive/plans/` (rollout-rules §6).
 
-Rationale: [[../../../docs/adr/0005-rollout-plan-structure]]; operating rules: [[../../../docs/engine/rollout-rules]].
+Rationale: [[../../../docs/adr/0005-rollout-plan-structure]]; operating rules: [[../../../docs/engine/archive/rollout-rules]].
 
 ---
 
@@ -123,14 +123,14 @@ These are the files this terminal is responsible for keeping current. When you c
 
 | File | What it covers | When to load |
 |------|---------------|--------------|
-| `docs/engine/ENGINE_MAP.md` | Every engine function in execution order | Any engine work |
+| `docs/engine/archive/ENGINE_MAP.md` | Every engine function in execution order | Any engine work |
 | `docs/engine/ENGINE_STUB_MAP.md` | Condensed function reference — ctx reads/writes per function | Quick lookup |
-| `docs/engine/ROLLOUT_PLAN.md` | All project work, terminal handoff tags | Planning, status checks |
-| `docs/engine/ENGINE_REPAIR.md` | Tactical tracker for known engine/sim defects (S148 audit) | Picking up repair work |
-| `docs/engine/ROLLOUT_ARCHIVE.md` | Completed phase details | When asked about past work |
+| `docs/engine/archive/ROLLOUT_PLAN.md` | All project work, terminal handoff tags | Planning, status checks |
+| `docs/engine/archive/ENGINE_REPAIR.md` | Tactical tracker for known engine/sim defects (S148 audit) | Picking up repair work |
+| `docs/engine/archive/ROLLOUT_ARCHIVE.md` | Completed phase details | When asked about past work |
 | `docs/reference/V3_ARCHITECTURE.md` | Full V3 technical spec — ctx, write-intents, phases | Deep engine work |
-| `docs/engine/CYCLE_SEPARATION.md` | How phases connect | Phase dependency work |
-| `docs/engine/PHASE_DATA_AUDIT.md` | Phase-level data flow audit | Data flow questions |
+| `docs/engine/archive/CYCLE_SEPARATION.md` | How phases connect | Phase dependency work |
+| `docs/engine/archive/PHASE_DATA_AUDIT.md` | Phase-level data flow audit | Data flow questions |
 | `docs/engine/tech_debt_audits/2026-03-26.md` | Latest tech debt scan | Health checks |
 
 ### Workbench Maps (read-only — automated audits)
@@ -149,9 +149,9 @@ These are the files this terminal is responsible for keeping current. When you c
 | `docs/SPREADSHEET.md` | 65-tab audit, active/dead tabs, gotchas | Any sheet work |
 | `docs/SIMULATION_LEDGER.md` | 675 citizens, 46 columns (A-AT), column reference | Citizen data work |
 | `docs/engine/SHEETS_MANIFEST.md` | Which scripts read/write which tabs | Tracing data flow |
-| `docs/engine/LEDGER_AUDIT.md` | Ledger integrity findings | Data quality work |
-| `docs/engine/LEDGER_REPAIR.md` | Past repair work | Before attempting repairs |
-| `docs/engine/LEDGER_HEAT_MAP.md` | Column usage frequency | Optimization, cleanup |
+| `docs/engine/archive/LEDGER_AUDIT.md` | Ledger integrity findings | Data quality work |
+| `docs/engine/archive/LEDGER_REPAIR.md` | Past repair work | Before attempting repairs |
+| `docs/engine/archive/LEDGER_HEAT_MAP.md` | Column usage frequency | Optimization, cleanup |
 
 ### Pipeline & Deployment
 
@@ -160,16 +160,16 @@ These are the files this terminal is responsible for keeping current. When you c
 | `docs/EDITION_PIPELINE.md` | Pipeline v2 skills map (S134) | Pipeline work |
 | `docs/reference/DEPLOY.md` | Clasp push process | Deploying |
 | `docs/OPERATIONS.md` | Operational procedures | Maintenance |
-| `docs/engine/INTAKE_REDESIGN.md` | Intake system redesign spec | Intake work |
-| `docs/engine/INTAKE_REDESIGN_PLAN.md` | Intake plan (30% complete) | Intake work |
+| `docs/engine/archive/INTAKE_REDESIGN.md` | Intake system redesign spec | Intake work |
+| `docs/engine/archive/INTAKE_REDESIGN_PLAN.md` | Intake plan (30% complete) | Intake work |
 
 ### Civic Engine
 
 | File | What it covers | When to load |
 |------|---------------|--------------|
-| `docs/engine/INSTITUTIONAL_VOICE_AGENTS.md` | Voice agent architecture | Civic phase work |
-| `docs/engine/phase19_agent_personas.md` | Agent persona definitions | Agent config work |
-| `docs/engine/PHASE_24_PLAN.md` | Citizen Life Engine plan | Life event work |
+| `docs/engine/archive/INSTITUTIONAL_VOICE_AGENTS.md` | Voice agent architecture | Civic phase work |
+| `docs/engine/archive/phase19_agent_personas.md` | Agent persona definitions | Agent config work |
+| `docs/engine/archive/PHASE_24_PLAN.md` | Citizen Life Engine plan | Life event work |
 | `docs/mara-vance/CIVIC_GOVERNANCE_MASTER_REFERENCE.md` | Council, factions, governance rules | Civic logic |
 | `docs/mara-vance/CIVIC_ELECTION_ENGINE.md` | Election engine spec | Election logic |
 | `docs/mara-vance/INITIATIVE_TRACKER_VOTER_LOGIC.md` | Vote logic | Initiative work |
@@ -318,12 +318,12 @@ The stripped-persona framing applies to hard close. Per S229 governance.7, the s
 
 | File | Check |
 |------|-------|
-| `docs/engine/ENGINE_MAP.md` | Updated if functions were added, removed, or renamed? |
+| `docs/engine/archive/ENGINE_MAP.md` | Updated if functions were added, removed, or renamed? |
 | `docs/engine/ENGINE_STUB_MAP.md` | Regenerated if function signatures changed? (`/stub-engine`) |
-| `docs/engine/ENGINE_REPAIR.md` | Rows opened/closed this session reflected in tracker with status + session + evidence + fix-pointer? |
-| `docs/engine/ROLLOUT_PLAN.md` | Phase statuses updated? Completed items archived? Stale-pointer triage flagged? |
-| `docs/engine/LEDGER_AUDIT.md` | Drift section refreshed if live state changed (Status enum, schema, headcount)? |
-| `docs/engine/LEDGER_HEAT_MAP.md` | Heat rankings + bloat-risk sections refreshed if sheet sizes/schemas changed? |
+| `docs/engine/archive/ENGINE_REPAIR.md` | Rows opened/closed this session reflected in tracker with status + session + evidence + fix-pointer? |
+| `docs/engine/archive/ROLLOUT_PLAN.md` | Phase statuses updated? Completed items archived? Stale-pointer triage flagged? |
+| `docs/engine/archive/LEDGER_AUDIT.md` | Drift section refreshed if live state changed (Status enum, schema, headcount)? |
+| `docs/engine/archive/LEDGER_HEAT_MAP.md` | Heat rankings + bloat-risk sections refreshed if sheet sizes/schemas changed? |
 | `docs/engine/LEDGER_REPAIR_*.md` family | Family member added/updated this session? |
 | `schemas/SCHEMA_HEADERS.md` | Regenerated if any sheet schema changed? (`node scripts/regenSchemaHeaders.js`) |
 | `SESSION_CONTEXT.md` | Engine version bumped if code deployed? Session entry tagged `[engine/sheet]`? S201 watch list items closed? |

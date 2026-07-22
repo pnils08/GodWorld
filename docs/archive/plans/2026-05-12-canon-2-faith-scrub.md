@@ -5,7 +5,7 @@ updated: 2026-05-12
 type: plan
 tags: [canon, infrastructure, complete]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md §canon.2
+  - docs/engine/archive/ROLLOUT_PLAN.md §canon.2
   - docs/canon/CANON_RULES.md §Tier 3 (always-block, real individuals) + §Faith & Community write-up history
   - docs/canon/INSTITUTIONS.md §Faith & Community (S195 always-block rule, partial substitutes)
   - docs/media/REAL_NAMES_BLOCKLIST.md §Faith Organizations & Clergy
@@ -13,7 +13,7 @@ sources:
   - SESSION_CONTEXT.md S217 (canon emergency surface, Mara AUDIT_TEMPLATE Tier-3 sub-check shipped)
   - GodWorld MCP lookup_citizen("Robert Jaston") — POP-00758, West Oakland Senior Pastor, BIZ-00028 employer
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout, canon.2 row points here"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout, canon.2 row points here"
   - "[[canon/CANON_RULES]] — three-tier framework, §Faith write-up"
   - "[[canon/INSTITUTIONS]] — substitution table lives here after P1"
   - "[[../media/REAL_NAMES_BLOCKLIST]] — blocklist source-of-truth for the canon filter"

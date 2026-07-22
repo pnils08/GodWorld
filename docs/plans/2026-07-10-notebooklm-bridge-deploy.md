@@ -9,7 +9,7 @@ sources:
   - https://github.com/jacob-bd/notebooklm-mcp-cli — adopted client (v0.8.5, MIT)
   - https://github.com/jacob-bd/notebooklm-mcp-cli/blob/main/docs/API_REFERENCE.md — command reference
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout (research.23)"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout (research.23)"
   - "[[index]] — registered same commit"
 ---
 
@@ -23,7 +23,7 @@ pointers:
 
 **Pointers:**
 - Research basis: [[research/2026-07-10-notebooklm-mcp]]
-- Prior state: `docs/engine/ROLLOUT_ARCHIVE.md` §Phase 12.6 (S67 NotebookLM findings; Podcastfy is a complement, not replaced)
+- Prior state: `docs/engine/archive/ROLLOUT_ARCHIVE.md` §Phase 12.6 (S67 NotebookLM findings; Podcastfy is a complement, not replaced)
 - Integration point: `.claude/skills/post-publish/SKILL.md` (edition text ingest lives at its Step 1b; the NotebookLM push slots beside it)
 - Published corpus: `editions/` — 53 artifacts (23 full editions + supplementals/interviews/dispatches)
 
@@ -139,7 +139,7 @@ pointers:
 
 ### Task 11: Close the loop
 
-- **Files:** `docs/engine/ROLLOUT_PLAN.md`, `docs/research/2026-07-10-notebooklm-mcp.md` — modify
+- **Files:** `docs/engine/archive/ROLLOUT_PLAN.md`, `docs/research/2026-07-10-notebooklm-mcp.md` — modify
 - **Steps:**
   1. Flip research.23 state as phases land; `done-pending-archive` when acceptance criteria 1–3 all pass.
   2. Append Applications line in the research file: date + "post-publish bridge live."

@@ -5,7 +5,7 @@ updated: 2026-05-31
 type: plan
 tags: [pipeline, edition-pipeline, architecture, draft]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md §pipeline.35 (this row) + §pipeline.32 (path-cascade tail this absorbs)
+  - docs/engine/archive/ROLLOUT_PLAN.md §pipeline.35 (this row) + §pipeline.32 (path-cascade tail this absorbs)
   - docs/EDITION_PIPELINE.md §Architecture + §Master Chain + §Production Log Lifecycle (S230 G-EPD3/G-EPD4)
   - docs/media/production_log_template.md (per-section unified-log spec)
   - .claude/skills/run-cycle/SKILL.md (cycle stage order; build-world-summary is Step 5, before city-hall-prep)
@@ -13,7 +13,7 @@ sources:
   - claude-mem 26024 (S248 — packet builder scripts & skill structure mapped)
   - Mike S248 directive (2026-05-31): admin skill should start the run, lay uniform templates/packets to a folder, one true prose-free cycle source
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout (pipeline.35)"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout (pipeline.35)"
   - "[[2026-05-24-governance-14-edition-pipeline-rewrite]] — production-log convention source (governance.14)"
   - "[[../EDITION_PIPELINE]] §Production Log Lifecycle — convention this implements"
   - "[[../media/production_log_template]] — per-section log spec the admin skill opens against"

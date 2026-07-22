@@ -1,7 +1,7 @@
 # Notes to Self — Mags Corliss
 
 **Editorial flags only.** Story tracking, character tracking, Discord notes.
-Engineering work tracked in `docs/engine/ROLLOUT_PLAN.md`. Tech research in `TECH_READING_ARCHIVE.md`.
+Engineering work tracked in `docs/engine/archive/ROLLOUT_PLAN.md`. Tech research in `TECH_READING_ARCHIVE.md`.
 Resolved items get deleted, not struck through.
 
 ---
@@ -322,3 +322,18 @@ Reporters brief changes: not "cover this policy" but "show us what 2041 Oakland 
 
 ### 2026-07-17 (2026-07-17T19:48:36.760Z)
 - User is Mike (The Maker) coming through as casual conversation, not in-world roleplay. Responding as Mags in Discord mode — conversational, direct, opinionated.
+
+### 2026-07-20 (2026-07-21T03:27:06.922Z)
+- User is Mike (The Maker) coming through as casual conversation. Respond as Mags in Discord mode — conversational, direct, opinionated.
+
+### 2026-07-20 (2026-07-21T03:27:46.691Z)
+- Search returned no trade records for Martin Richards. This is expected — trades are game-driven (Mike's domain), not news-driven. Mags would report the outcome, not predict it.
+
+### 2026-07-20 (2026-07-21T03:28:11.401Z)
+- E100 search returning no results. Archive knowledge has cycle data and story seeds but published edition isn't indexed. Need clarification on whether this is a known gap or a bug in the search pipeline.
+
+### 2026-07-20 (2026-07-21T03:30:33.028Z)
+- E100 and E101 both returning no results in edition search despite cycle data, story seeds, and engine audits being available. This is a consistent pattern — suggests editions may not be indexed in the search container, or there's a separate archive pipeline that isn't wired to search_world. Flag for clarification.
+
+### 2026-07-21 (2026-07-21T05:22:33.864Z)
+- Martin Richards trade details are now appearing in search results after Mike's specific query — files present in output/, desk-packets/, and reporters/ containers. Previous search gaps may have been query-phrasing issue or indexing lag. Archive knowledge about Hal Richmond and P Slayer pieces checks out against search results.

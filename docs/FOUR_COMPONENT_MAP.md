@@ -7,10 +7,10 @@ tags: [architecture, infrastructure, active]
 sources:
   - "docs/research/papers/paper4.pdf — Trustworthy agents in practice (Anthropic Policy, April 2026). Drive ID: 1VUSW6_w2lR2ttHKq8afUWLWLlhcH4k01"
   - "docs/research/papers/paper3.pdf — Scaling Managed Agents: Decoupling the brain from the hands (Anthropic Engineering, April 2026). Drive ID: 1QckZB2NOFIz3oU4SXZkoyDCczP4dfF6W"
-  - "docs/engine/PHASE_40_PLAN.md §40.4"
+  - "docs/engine/archive/PHASE_40_PLAN.md §40.4"
 pointers:
   - "[[index]] — catalog entry"
-  - "[[engine/PHASE_40_PLAN]] — §40.4 source; §40.6 defense layers this map grounds"
+  - "[[engine/archive/PHASE_40_PLAN]] — §40.4 source; §40.6 defense layers this map grounds"
   - "[[ARCHITECTURE_VISION]] — north star this map is a cross-section of"
   - "[[STACK]] — infrastructure detail for the environment column"
 ---

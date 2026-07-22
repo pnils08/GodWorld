@@ -5,12 +5,12 @@ updated: 2026-06-14
 type: plan
 tags: [infrastructure, architecture, draft]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md §governance.26 (parent — on-demand log redesign, Tasks 2 + 6)
+  - docs/engine/archive/ROLLOUT_PLAN.md §governance.26 (parent — on-demand log redesign, Tasks 2 + 6)
   - docs/plans/2026-05-29-session-context-on-demand.md (sibling — the on-demand flip this completes)
   - .claude/hooks/session-startup-hook.sh lines 33-35 (the drift vector)
   - scripts/writeShippedBlock.js (existing partial-automation precedent)
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout; governance.26 + new pointer row"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout; governance.26 + new pointer row"
   - "[[plans/2026-05-29-session-context-on-demand]] — sibling on-demand redesign"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — registered same commit"
@@ -29,7 +29,7 @@ pointers:
 **Pointers:**
 - Prior work: `scripts/writeShippedBlock.js` (already splices the `## Shipped Last Session` block + commits SESSION_CONTEXT — the precedent pattern to extend)
 - Related plan: [[plans/2026-05-29-session-context-on-demand]] (Tasks 2 + 6 are this work)
-- Parent rollout: [[engine/ROLLOUT_PLAN]] §governance.26 (S258 fold) + new pointer row
+- Parent rollout: [[engine/archive/ROLLOUT_PLAN]] §governance.26 (S258 fold) + new pointer row
 - Drift evidence: boot showed `Cycle 96` while live cycle was C97 (S258); §Recent Sessions in SESSION_CONTEXT stale at S221 (37 sessions) — proof the manual sections rot
 
 **Field disposition (the contract):**

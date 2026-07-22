@@ -105,8 +105,8 @@ node scripts/buildVoiceWorkspaces.js [cycle]         # voice agent workspaces + 
 
 **Files loaded:**
 - `SESSION_CONTEXT.md` — engine versions, tools, cascade dependencies
-- `docs/engine/ROLLOUT_PLAN.md` — single source for all project work
-- `docs/engine/ENGINE_MAP.md` — every function in execution order
+- `docs/engine/archive/ROLLOUT_PLAN.md` — single source for all project work
+- `docs/engine/archive/ENGINE_MAP.md` — every function in execution order
 
 **Key commands:**
 ```bash
@@ -134,9 +134,9 @@ node scripts/queryLedger.js   # Query live ledger data
 
 **Files loaded:**
 - `SESSION_CONTEXT.md` — engine context
-- `docs/engine/LEDGER_REPAIR.md` — recovery history, column reference
-- `docs/engine/LEDGER_AUDIT.md` — audit history, decisions
-- `docs/engine/ENGINE_MAP.md` — function reference
+- `docs/engine/archive/LEDGER_REPAIR.md` — recovery history, column reference
+- `docs/engine/archive/LEDGER_AUDIT.md` — audit history, decisions
+- `docs/engine/archive/ENGINE_MAP.md` — function reference
 
 **Key commands:**
 ```bash
@@ -169,8 +169,8 @@ node scripts/buildMaraReference.js       # Regenerate reference files
 
 **Files loaded:**
 - `SESSION_CONTEXT.md` — engine versions
-- `docs/engine/ROLLOUT_PLAN.md` — what's pending
-- `docs/engine/ENGINE_MAP.md` — function reference
+- `docs/engine/archive/ROLLOUT_PLAN.md` — what's pending
+- `docs/engine/archive/ENGINE_MAP.md` — function reference
 - Then run `/pre-mortem` before the cycle
 
 **Key commands:**

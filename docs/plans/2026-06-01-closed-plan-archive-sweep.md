@@ -6,7 +6,7 @@ type: plan
 tags: [governance, architecture, draft]
 sources:
   - S251 research-build conversation (Mike) — "add the 69 sweep to the plans"
-  - docs/engine/rollout-rules.md §6 — closed plans → docs/archive/plans/ convention (established S251)
+  - docs/engine/archive/rollout-rules.md §6 — closed plans → docs/archive/plans/ convention (established S251)
 pointers:
   - "[[../engine/rollout-rules]] — §6 establishes the archive path + link-repoint rule"
   - "[[../engine/ROLLOUT_ARCHIVE]] — cross-reference: a plan whose rollout row is archived is a move candidate"

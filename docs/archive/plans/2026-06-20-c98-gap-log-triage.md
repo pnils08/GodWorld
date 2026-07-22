@@ -11,7 +11,7 @@ sources:
   - docs/plans/GAP_LOG_TRIAGE_PLAYBOOK.md (the 8-step method this executes)
   - docs/plans/2026-06-13-c97-gap-log-triage.md (governance.34 — prior cycle, structural template)
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout (governance.41 single pointer row)"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout (governance.41 single pointer row)"
   - "[[GAP_LOG_TRIAGE_PLAYBOOK]] — method"
   - "[[2026-06-01-initiative-tracker-contract]] — civic.14, where the trackerUpdates cluster folds"
   - "[[SCHEMA]] — doc conventions"
@@ -28,7 +28,7 @@ pointers:
 
 **Pointers:**
 - Prior cycle: [[2026-06-13-c97-gap-log-triage]] (governance.34)
-- Folds into: [[2026-06-01-initiative-tracker-contract]] (civic.14), [[engine/ENGINE_REPAIR]] / engine.8 / engine.35 / engine.29 / pipeline.13 / pipeline.37
+- Folds into: [[2026-06-01-initiative-tracker-contract]] (civic.14), [[engine/archive/ENGINE_REPAIR]] / engine.8 / engine.35 / engine.29 / pipeline.13 / pipeline.37
 - Strategic input split-out: `docs/research/2026-06-20-layered-memory-architecture.md` (research row, see §Strategic Input)
 
 **Acceptance criteria:**

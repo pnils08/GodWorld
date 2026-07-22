@@ -9,7 +9,7 @@ sources:
   - "Installed: /root/.claude/plugins/cache/thedotmack/claude-mem/10.5.2/package.json (3-major-version gap behind latest)"
   - "S241 conversation — Mike: 'pull all useful tools onto the rollout for future session builds, if something is crucial for us do it now'"
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout (governance.23)"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout (governance.23)"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — register in same commit"
   - "[[../CLAUDE-MEM]] — claude-mem usage reference doc; will need rewrite after upgrade lands"
@@ -129,8 +129,8 @@ Per skill body fetched from `https://github.com/thedotmack/claude-mem/blob/main/
 
 **Project mismatch:** GodWorld tracks defects in three filesystem surfaces, none of them GitHub Issues:
 - Gap logs → `output/production_log_*_gaps.md`
-- ENGINE_REPAIR → `docs/engine/ENGINE_REPAIR.md` rows
-- ROLLOUT → `docs/engine/ROLLOUT_PLAN.md` rows
+- ENGINE_REPAIR → `docs/engine/archive/ENGINE_REPAIR.md` rows
+- ROLLOUT → `docs/engine/archive/ROLLOUT_PLAN.md` rows
 
 Adapting would require either porting to GitHub Issues (breaks ADR-0005, massive migration, no value) or a brittle wrapper that fakes issue-shaped text from file rows. Neither pays back.
 

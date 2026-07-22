@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * verifyEngineMap.js — self-verification harness for docs/engine/ENGINE_TRUTH_MAP.md
+ * verifyEngineMap.js — self-verification harness for docs/engine/archive/ENGINE_TRUTH_MAP.md
  *
  * The TRUTH MAP is the behavioral map of the engine (what each file is FOR, what it
  * ACTUALLY does, who it reaches, its live status, where it breaks) — NOT the structural
@@ -19,7 +19,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
-const MAP = path.join(ROOT, 'docs/engine/ENGINE_TRUTH_MAP.md');
+const MAP = path.join(ROOT, 'docs/engine/archive/ENGINE_TRUTH_MAP.md');
 const DIRS = [
   'phase01-config', 'phase02-world-state', 'phase03-population', 'phase04-events',
   'phase05-citizens', 'phase06-analysis', 'phase07-evening-media', 'phase08-v3-chicago',

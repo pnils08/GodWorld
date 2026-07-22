@@ -7,10 +7,10 @@ tags: [citizens, citizen-loop, story-emergence, engine, plan, active]
 sources:
   - "[[2026-06-26-citizen-signal-story-emergence]] — research.21 thesis (the WHY); this is the executable HOW"
   - "[[../adr/0013-citizen-signal-emergent-story-source]] — the load-bearing decision this plan executes"
-  - docs/engine/ROLLOUT_PLAN.md — research.21 row
+  - docs/engine/archive/ROLLOUT_PLAN.md — research.21 row
   - "Live empirical query of Reflection_Intake, S274 (43 rows / 39 distinct / C97–C100) — the base-rate data that sets every threshold"
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout"
   - "[[2026-06-26-citizen-signal-story-emergence]] — research.21, the thesis + guardrails"
   - "[[../adr/0013-citizen-signal-emergent-story-source]] — ADR-0013"
   - "[[SCHEMA]] — doc conventions"

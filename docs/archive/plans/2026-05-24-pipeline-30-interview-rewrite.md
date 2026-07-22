@@ -5,7 +5,7 @@ updated: 2026-05-24
 type: plan
 tags: [media, pipeline, edition-pipeline, active]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md §pipeline.* (pipeline.30 row)
+  - docs/engine/archive/ROLLOUT_PLAN.md §pipeline.* (pipeline.30 row)
   - output/production_log_interview_c94_gaps.md (13 entries G-I1→G-I13, triage at bottom)
   - docs/mags-corliss/JOURNAL.md Entry 188
   - .claude/skills/interview/SKILL.md v1.3 (current shape)

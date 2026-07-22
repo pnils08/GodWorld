@@ -5,7 +5,7 @@ updated: 2026-07-12
 type: plan
 tags: [engine, seeds, entities, citizens, active]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md — research.24 row
+  - docs/engine/archive/ROLLOUT_PLAN.md — research.24 row
   - docs/research/2026-07-12-entity-protagonism-business-faith-programs.md (research basis)
 pointers:
   - "[[../engine/ROLLOUT_PLAN]] — parent rollout (research.24)"

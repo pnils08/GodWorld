@@ -8,7 +8,7 @@ sources:
   - output/dead-code-scan-2026-04-29.json (raw scan output)
 pointers:
   - "[[engine/tech_debt_audits/2026-04-15]] — prior tech debt audit"
-  - "[[engine/ROLLOUT_PLAN]] — entry pointing to this audit"
+  - "[[engine/archive/ROLLOUT_PLAN]] — entry pointing to this audit"
 ---
 
 # Dead-Code Detection Scan — 2026-04-29

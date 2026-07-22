@@ -7,13 +7,13 @@ tags: [engine, infrastructure, architecture, active]
 sources:
   - docs/engine/tech_debt_audits/2026-04-15.md (S146 audit)
   - docs/engine/tech_debt_audits/2026-04-15.md §Changelog 2026-04-17 (Path 1 closeout — efficiency framing)
-  - docs/engine/PHASE_42_INVENTORY.md (Phase 1 output, this session)
+  - docs/engine/archive/PHASE_42_INVENTORY.md (Phase 1 output, this session)
   - utilities/writeIntents.js (target API — 4 intent kinds + dryRun/replay)
   - phase10-persistence/persistenceExecutor.js (executor)
   - .claude/rules/engine.md (current exceptions list)
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout (ENGINE_REPAIR Row 8)"
-  - "[[engine/PHASE_42_INVENTORY]] — Phase 1 inventory consumed by this plan"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout (ENGINE_REPAIR Row 8)"
+  - "[[engine/archive/PHASE_42_INVENTORY]] — Phase 1 inventory consumed by this plan"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — registered in same commit"
 ---
@@ -32,7 +32,7 @@ This plan is Path 2. **No correctness defect is being fixed.** The work is archi
 
 ## Goal
 
-Migrate the cycle-path direct-writers surfaced in [[engine/PHASE_42_INVENTORY]] to the `ctx.writeIntents` pattern, route through `executePersistIntents_` in Phase 10, and reduce the `engine.md` exceptions list to genuine carve-outs (Phase 1 engine core + schema-setup utilities).
+Migrate the cycle-path direct-writers surfaced in [[engine/archive/PHASE_42_INVENTORY]] to the `ctx.writeIntents` pattern, route through `executePersistIntents_` in Phase 10, and reduce the `engine.md` exceptions list to genuine carve-outs (Phase 1 engine core + schema-setup utilities).
 
 **Scope (per Phase 1 inventory):**
 - 37 files in scope (citizenFameTracker.js retired S184)
@@ -76,13 +76,13 @@ Mike calls B6 vs B7 after dryRun + replay diffs from B5/B6 land. Default expecta
 - **Research-build owns Phases 1 + 2** (inventory + per-category decisions + verification regimen spec)
 - **Engine-sheet owns Phases 3 + 4 + 5** (pattern-lock pilot + bulk migration + verify + cull exceptions)
 
-Phase 1 DONE this session — see [[engine/PHASE_42_INVENTORY]]. Phase 2 (decisions) lands research-build before engine-sheet starts execution.
+Phase 1 DONE this session — see [[engine/archive/PHASE_42_INVENTORY]]. Phase 2 (decisions) lands research-build before engine-sheet starts execution.
 
 ---
 
 ## Phase 1 — Inventory (research-build) — DONE S184
 
-Output: [[engine/PHASE_42_INVENTORY]].
+Output: [[engine/archive/PHASE_42_INVENTORY]].
 
 Delivered:
 - Per-file table (D / I / L / CS / Lns) for all 37 files
@@ -97,7 +97,7 @@ Delivered:
 
 ## Phase 2 — Pattern lock + per-category decisions (research-build)
 
-Per-category decisions to lock before engine-sheet starts. Each is a deliverable in `docs/engine/PHASE_42_PATTERNS.md` (research-build writes this; engine-sheet reads it as the source of truth for migrations).
+Per-category decisions to lock before engine-sheet starts. Each is a deliverable in `docs/engine/archive/PHASE_42_PATTERNS.md` (research-build writes this; engine-sheet reads it as the source of truth for migrations).
 
 ### 2.1 — Schema-setup carve-out decision
 
@@ -269,7 +269,7 @@ Phase 42 writer consolidation — §5.6 ctx.ledger + B2 + B5 + B5-audit-miss-3 +
 
 ## Changelog
 
-- 2026-04-28 — Initial draft (S184, research-build). Phase 1 inventory done same session — see [[engine/PHASE_42_INVENTORY]]. Real numbers used: 37 files (citizenFameTracker.js retired), 175 cycle-path direct writes (vs audit's 181 net). Frame: efficiency not correctness, per audit's S156 Path 1 closeout. Tiered scope with explicit B6 stop-point. dryRun + replay regimen as test harness (Phase 2.4 ships `scripts/phase42VerifyBatch.js`). 5 open questions queued for Phase 2 research-build session before engine-sheet pilot. Estimated 6–8 engine-sheet sessions for full B0–B7 close; B0–B6 ships ~58% of scope as the recommended stop point.
+- 2026-04-28 — Initial draft (S184, research-build). Phase 1 inventory done same session — see [[engine/archive/PHASE_42_INVENTORY]]. Real numbers used: 37 files (citizenFameTracker.js retired), 175 cycle-path direct writes (vs audit's 181 net). Frame: efficiency not correctness, per audit's S156 Path 1 closeout. Tiered scope with explicit B6 stop-point. dryRun + replay regimen as test harness (Phase 2.4 ships `scripts/phase42VerifyBatch.js`). 5 open questions queued for Phase 2 research-build session before engine-sheet pilot. Estimated 6–8 engine-sheet sessions for full B0–B7 close; B0–B6 ships ~58% of scope as the recommended stop point.
 
 ---
 

@@ -193,7 +193,7 @@ The skill-text half of the engine-sheet canonicalization work — ships alongsid
   - `.claude/hooks/session-startup-hook.sh` — modify (persona/journal scoping).
   - `.claude/skills/session-end/SKILL.md` — modify (mags-on-demand + rotation).
   - `.claude/settings.json` or newsroom.md frontmatter — newsroom path-scope tighten.
-  - `docs/engine/LEDGER_REPAIR.md` — header de-`DO NOT` so hook stops emitting LEDGER NOTE.
+  - `docs/engine/archive/LEDGER_REPAIR.md` — header de-`DO NOT` so hook stops emitting LEDGER NOTE.
 - **Steps:**
   1. Split identity.md: identity-core (anti-guess, anti-loop, process gates, no-jargon, USER APPROVAL GATE — applies all terminals) promoted to always; identity-mags (you-are-Mags, journal, family, EIC) path-scoped to media + Mags-only. Update CLAUDE.md §Rules (G-SS1). **Mike-confirm split shape pre-execution — touches an always-loaded file.**
   2. MEMORY.md trim: move `**Why:**`/`**How to apply:**` bodies of the heavy User entries to `feedback_<slug>.md` topic files + one-line pointers; revise the S156 "rules inline only" rule to the file-with-pointer hybrid (G-SS7/G-SE2). **Mike-confirm S156 framing change.**

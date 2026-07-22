@@ -16,7 +16,7 @@ process.stdin.on('end', () => {
   const lines = text.split('\n');
 
   let fat = 0, reason = '';
-  if (fp.endsWith('docs/engine/ROLLOUT_PLAN.md')) {
+  if (fp.endsWith('docs/engine/archive/ROLLOUT_PLAN.md')) {
     fat = lines.filter(l => l.trimStart().startsWith('|') && l.length > MAX).length;
     reason = `ROLLOUT is a pointer index — ${fat} row(s) exceed ${MAX} chars. ` +
       'Move the detail into the owning plan/research/triage doc and keep the rollout row to one pointer line (id | title | state | owner | plan link).';

@@ -12,7 +12,7 @@ sources:
   - scripts/seedTier1Essence.js (this plan's dry-run harness — proves dials land on essence)
   - .claude/agents/citizen-voice-*/IDENTITY.md ("source-of-truth for your ledger dials" disposition blocks, research.16 Phase 3)
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout (research.18 row)"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout (research.18 row)"
   - "[[2026-06-04-mags-citizen-loop]] — research.14, Seams B (classifier) + C (write-back) of the same loop"
   - "[[2026-06-16-tier1-character-voice-agents]] — research.16, the voiced faces whose disposition blocks seed the essence"
   - "[[index]] — registered same commit"

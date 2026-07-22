@@ -10,9 +10,9 @@ sources:
   - "[[../plans/2026-05-31-compression-tag-triage]] (engine.31) — the dial substrate"
   - "[[../plans/2026-06-19-living-city-full-population-coverage]] (engine.38) — coverage + eligibility"
 pointers:
-  - "[[ENGINE_MAP]] — execution-order function list (structural sibling)"
+  - "[[archive/ENGINE_MAP]] — execution-order function list (structural sibling)"
   - "[[ENGINE_STUB_MAP]] — per-function ctx reads/writes (structural sibling)"
-  - "[[ENGINE_TRUTH_MAP]] — per-file behavioral scaffold"
+  - "[[archive/ENGINE_TRUTH_MAP]] — per-file behavioral scaffold"
   - "[[../index]] — registered there"
 ---
 
@@ -204,6 +204,18 @@ The external-misfortune counterpart to conduct's internal agency — both write 
 
 ---
 
+## Phase 2: Infrastructure (Weather / Transit)
+
+### `applyWeatherModel.js` (Phase 2)
+- **Coupling & Salience:** Computes `S.weather` and `S.neighborhoodWeather` microclimates. Evaluates its own outputs for salient events (storm, flood-conditions, heat-wave, fog-day) and emits discrete events to `S.weatherEvents[]`.
+- **Citizen Impacts:** Salient weather events feed lifecycles (e.g., heat waves trigger health entries for vulnerable citizens; storms trigger ECL vocab rows and business impacts). Coupled citizen hits ripple `weather-event` (SAFETY domain).
+
+### `updateTransitMetrics.js` (Phase 2)
+- **Coupling & Salience:** Detects bad-day states (`service-disruption` and `gridlock-day`) from computed on-time performance and traffic indexes. Writes to `S.transitState` and emits ripples.
+- **Citizen Impacts:** Working citizens (`ls.working === 'working'`) in affected neighborhoods draw commute-disruption events (ECL vocab rows) during service disruptions. Ripples as `transit-event` (CIVIC domain).
+
+---
+
 ## Economic / civic SL-writer engines (full-read pass, S277)
 
 These mutate structural SL columns (beyond LifeHistory) and feed cross-sheet state — verified by full read.
@@ -221,7 +233,7 @@ These mutate structural SL columns (beyond LifeHistory) and feed cross-sheet sta
 
 ### `migrationTrackingEngine.js` (`processMigrationTracking_`, Phase 5) — FULL-READ
 - **Writes SL:** `DisplacementRisk` (0–10 from `Neighborhood_Map.DisplacementPressure` + `Household_Ledger` rent burden + no-college +2 + senior +1), `MigrationIntent` (staying/considering/planning by risk ≥5/≥8). Reads EducationLevel (written by educationCareer earlier in Phase 5 — ordering matters).
-- **⚠ Full-read catch:** `processMigrationEvents_` + `checkForDisplacedCitizens_` are **placeholders** — risk/intent are assessed but **no citizen is actually relocated**, and the `Migration_Events` sheet log is a TODO. Hooks FORCED_MIGRATION (≥9) / MASS_EXODUS (5+/hood) fire, but the structural move doesn't happen here (population-level migration is `applyDemographicDrift`/`applyMigrationDrift`, aggregate not per-citizen).
+- **Full-read verification:** `processMigrationEvents_` now executes intra-city relocations (engine.55) and settled-in checks (engine.61). `checkForDisplacedCitizens_` successfully logs displaced citizens. Hooks FORCED_MIGRATION (≥9) / MASS_EXODUS (5+/hood) fire and trigger actual structural moves.
 
 ### `neighborhoodTrajectoryEngine.js` (`processNeighborhoodTrajectory_`, Phase 5) — S315 REWRITE (was gentrificationEngine.js — git mv, same lineage)
 - **What replaced what:** the gentrification block was a real-world Oakland displacement-study index (5yr income/rent change, WhitePopulationPct, HighEducationPct) whose input columns were NEVER written by any phase — wired but permanently starved, and premise contradicted prosperity-era canon. S315 (Mike-direct) repurposed it into a prosperity trajectory system fed by columns the engine already produces every cycle.
@@ -241,7 +253,7 @@ These mutate structural SL columns (beyond LifeHistory) and feed cross-sheet sta
   - **Dead veto-deterrent (real bug, audit-caught):** `checkMayoralVeto_` computes `voteMargin = voteResult.yesVotes − voteResult.noVotes` (L2316), but `resolveCouncilVote_` never puts `yesVotes`/`noVotes` numbers on its result (only the `voteCount` string) → `voteMargin` is always **NaN** → the `if (voteMargin>=7)` blowout-vote deterrent (−0.15) **never fires**.
   - **Dead placeholder branch:** `publicSupport` is hardcoded 50 (L2319, "until Week 2 town halls"), so the `publicSupport>70 → −0.30` deterrent (L2353) is permanently unreachable.
   - **Schema mismatch:** `createInitiativeTrackerSheet_` writes only 19 headers (A–S, L1797–1817); the 5 v1.7 veto cols (T–X) are **never created** — a freshly-built sheet returns −1 on MayoralAction/etc. lookups (footer comment L2619 claims "24 columns A–X"). Existing sheets work only because the cols were added manually.
-  - **Ripple consumer possibly unwired (cross-file TODO):** `applyActiveInitiativeRipples_` (L1646, the decay/expiry consumer) + `getRippleEffectsForNeighborhood_` (L1747) have **zero in-file callers**; header says "Call from Phase 02 or 06" — unverified. If nothing calls it, initiative ripples apply only their first-cycle immediate sentiment delta and never decay, expire, or reach neighborhoods. **Needs cross-file confirm** (initiative sentiment → citizen-event probability is a citizen-impact path, so this matters to Track B).
+  - **Ripple consumer unwired check (RESOLVED):** `applyActiveInitiativeRipples_` is verified to be called cross-file by `godWorldEngine2.js` in Phase 6. Initiative ripples decay and expire correctly. `getRippleEffectsForNeighborhood_` is currently unused but available.
   - Stale comments: Logger says `v1.6` (L499; code is v1.9); `seedInitiativeTracker_` comment says "v1.1 schema" (L2190) but seeds v1.7 data.
   - Carve-outs (correct, not bugs): `manualRunVote` uses `Math.random` + `new Date()` (L2069/1991, operator path, no ctx.rng); `addSwingVoter2Columns`/`seedInitiativeTracker_` use `getActiveSpreadsheet` (setup). No cycle-path `new Date()`; `ctx.now` used throughout.
 
@@ -304,6 +316,809 @@ if (isUNI || isMED || isCIV) continue;  // drops Universe/Media/Civic flagged
 GenericMicroEvents → GameModeMicroEvents → (ensure ledgers/bonds) → LoadBonds → SeedBonds → Relationships → Neighborhoods → Universe → CivicRoles → Elections → Initiatives → ApprovalRatings → CivicModeEvents → MediaModeEvents → **Career → Education → Household → Conduct → Generational** → NamedCitizens. (Compression O→R runs Phase 9.)
 
 ---
+
+### `updateCivicLedgerFactions.js` (updateCivicOfficeLedgerFactions_, Phase 5) — FULL-READ
+- **Gate:** Checks if `Civic_Office_Ledger` exists (`if (!sheet) return`) and has data rows (`if (data.length < 2) return`). 
+- **Layer 1:** Scans the civic ledger to assign political factions (OPP, CRC, IND, STAFF, VACANT) based on explicit `PopId` mapping or office type. Determines voting power (yes/no/vacant) based on office prefix (MAYOR/COUNCIL). 
+- **Layer 2:** Mutates `Civic_Office_Ledger` structurally by appending `Faction` and `VotingPower` columns if they are missing. Applies bold formatting if columns are newly added.
+- **Cross-sheet:** 
+  - **Reads:** `Civic_Office_Ledger`
+  - **Writes:** `Civic_Office_Ledger` (adds columns, updates all rows)
+- **Full-read catches:** Includes `getCouncilStateFromLedger_` which builds a structured state object (counts by faction, availability, vacancies) for use by `civicInitiativeEngine`. Uses a hardcoded faction map for known POPIDs (e.g., Mayor Avery Santana).
+
+### `generateMonthlyCivicSweep.js` (generateMonthlyCivicSweep, Phase 5) — FULL-READ
+- **Gate:** Checks if `Simulation_Ledger` and `World_Population` exist. Guards against missing `CIV (y/n)` column and empty `World_Population` data rows.
+- **Layer 1:** Scans `Simulation_Ledger` for citizens marked `CIV (y/n) == y|yes`. Tallies total civics, active scandals, resignations, and retirements. Builds a roster of up to 10 active civic names.
+- **Layer 2:** Pulls contextual simulation metrics (civicLoad, cycleWeight, patternFlag, weather, sentiment) from `World_Population` and appends a consolidated 15-column timestamped sweep row.
+- **Cross-sheet:**
+  - **Reads:** `Simulation_Ledger`, `World_Population`
+  - **Writes:** `Civic_Sweep_Report` (appends rows; initializes sheet/headers if missing)
+- **Full-read catches:** Robust name fallback (uses First+Last if FullName is missing, falls back to POPID if names are blank). Defaults missing `Status` to "Active". Uses a strict 15-column output schema.
+
+## Intake / lifecycle engines
+
+### `processIntakeV3.js` (processIntakeV3_, Phase 5) — FULL-READ
+- **Gate:** Requires `Intake` and `Simulation_Ledger` sheets to exist. Only processes rows with at least a First or Last name.
+- **Layer 1:** Stages new citizens in memory from the `Intake` sheet. Checks against existing normalized ledger names and intra-batch duplicates. Generates new `POPID`s.
+- **Layer 2:** Implements the V3 write-intents model (`queueRangeIntent_`, `queueCellIntent_`). No random dials. Creates full empty-cell intents to clear processed rows without row-shift issues.
+- **Cross-sheet:** Reads `Intake` and `Simulation_Ledger`. Writes (via intents) to `Simulation_Ledger` (priority 100) and `Intake` (priority 150).
+- **Full-read catches:** Uses `ctx.now` directly for `CreatedAt` and `LastUpdated`. Reference footer explicitly notes the old `processIntake_` is preserved in `godWorldEngine2.js` for backwards compatibility. 
+
+### `processAdvancementIntake.js` (processAdvancementIntake_, Phase 5) — FULL-READ
+- **Gate:** `ctx.ledger` must be initialized (except on manual operator run). Media usage rows must have valid names and not be marked processed. GC citizens require `EmergenceCount >= 3`.
+- **Layer 1:** Evaluates media usage (`UsageCount` bumps and Tier promotions at 9, 6, 3). Runs attention decay (losing tiers if usage drops). Processes lottery-based GC emergence promotions and family-match drip doors.
+- **Layer 2:** Extensive demographic derivations via `deriveCitizenProfile_` (education, gender, debt, net worth, career stage). Family matches run structural pairing logic (surname adoption, age band checks, household joining).
+- **Cross-sheet:** Reads `World_Config`, `Citizen_Media_Usage`, `Generic_Citizens`, `Simulation_Ledger` (via `ctx.ledger`), `Advancement_Intake1`. Writes to `Citizen_Media_Usage`, `Generic_Citizens`, `LifeHistory_Log`, and pushes inline mutations to `ctx.ledger.rows`.
+- **Full-read catches:** "Mike-pinned" S320/S324 constraints (e.g., family drips share the `DRIP_CAP_PER_CYCLE` limit with emergence). Uses `DEMOGRAPHIC_VOICE_ROLES` as a 15-category fallback for empty intake roles. Manual run path handles direct writes instead of Phase 10 intents.
+
+### `checkForPromotions.js` (checkForPromotions_, Phase 5) — FULL-READ
+- **Gate:** Requires `Generic_Citizens`, `LifeHistory_Log`, and `ctx.ledger`. Implements a strict missing-column guard for required ledger columns (POPID, First, Last, Tier, Status). GC row must be `Active` with `EmergenceCount >= 3`.
+- **Layer 1:** Evaluates a world-aware promotion chance (base 20%, capped at 45%). Determines promotions to Tier 4 (entry tier as per S320).
+- **Layer 2:** Chance modifiers are heavily influenced by the world state: Seasonal, Weather, Chaos, Sentiment, Economic, and GodWorld Calendar (First Friday, Creation Day, Sports seasons). Uses deterministic neighborhood mappings (12 canon neighborhoods).
+- **Cross-sheet:** Reads `Generic_Citizens`. Writes to `ctx.ledger.rows` (inline array push), `LifeHistory_Log`, and `Generic_Citizens` (marks as `Emerged` and tracks context).
+- **Full-read catches:** Replaced random neighborhood fallback with a deterministic "Downtown" fallback. Calculates max POPID once in-memory to prevent collision bugs during multi-promotions.
+
+### `runAsUniversePipeline.js` (runAsUniversePipeline_, Phase 5) — FULL-READ
+- **Gate:** `ctx.ledger` must be initialized. Only evaluates rows where `UNI (y/n)` is truthy and `Status` is active/retired.
+- **Layer 1:** Enforces STRICT UNI rules: no random events for Active UNI on the GAME clock. Retires GAME clock citizens to ENGINE. Post-career ENGINE citizens receive soft lifestyle notes based on a low probability draw (max 10%).
+- **Layer 2:** Uses Mulberry32 PRNG (`mulberry32_uni_`) seeded via `ctx.config.rngSeed` for deterministic rolls. Determines canon-safe sports phases from GodWorld seasons, with support for Maker overrides (`sportsSource='config-override'`).
+- **Cross-sheet:** Reads `Simulation_Ledger` (via `ctx.ledger`). Writes to `Simulation_Ledger` (modifies `iLife`, `iClock`, `iLastUpd` in-place) and appends to `LifeHistory_Log`.
+- **Full-read catches:** Event tags expanded (e.g., `PostCareer-Sports`, `PostCareer-Wellness`). Uses `ctx.now` for `LastUpdated`. Explicitly states that the Engine must NEVER simulate league operations.
+
+### `applyNamedCitizenSpotlight.js` (applyNamedCitizenSpotlights_, Phase 5) — FULL-READ
+- **Gate:** Requires `ctx.summary.engineEvents` and `ctx.namedCitizenMap`. Only evaluates citizens tracked in the named citizen map.
+- **Layer 1:** Iterates through engine events to assign "spotlight" scores to named citizens, determining if they met the dynamic significance threshold to be featured in the cycle digest.
+- **Layer 2:** Modifiers include Domain Weight (Civic/Health = 6), Severity (Critical = 8), Arc Involvement (Peak = 5), and Calendar Boosts. Threshold adjusts downwards (easier to spotlight) during major holidays or high chaos.
+- **Cross-sheet:** Purely memory-based. Reads from `ctx.summary.engineEvents` and `ctx.namedCitizenMap`. Writes results exclusively to `ctx.summary.namedSpotlights`.
+- **Full-read catches:** Cycle-level signals (like chaos, sentiment, economic boom) are restricted to apply ONCE per citizen per cycle to prevent score inflation. Selects the most frequent neighborhood for a citizen, rather than the first-seen.
+
+### `applyChaosDecay.js` (applyChaosDecay_, Phase 5) — FULL-READ
+- **Gate:** Requires `Chaos_Cars` and `Business_Ledger`. Only processes events with `TargetScope` = 'business', `PrimaryMetric` = 'Annual_Revenue', and cycles elapsed between 1 and 60.
+- **Layer 1:** Accumulates an incremental revert step for business `Annual_Revenue` residuals, pushing the value back toward baseline after a chaos event.
+- **Layer 2:** Reuses `chaosResidualAfter_` from `utilities/chaosCarsDecay.js`. Excludes `Employee_Count` which is treated as a permanent churn metric (decay rate 0).
+- **Cross-sheet:** Reads `Chaos_Cars` and `Business_Ledger`. Writes to `Business_Ledger` via `queueCellIntent_`.
+- **Full-read catches:** Explicit caveat in comments notes a Phase 6 hardening flag: incremental persistent sheet updates are NOT idempotent and will double-apply on cycle re-runs. 
+
+### `seedRelationBondsv1.js` (seedRelationshipBonds_, Phase 5) — FULL-READ
+- **Gate:** `ctx.ledger` must be initialized. Will only seed if the total number of bonds on the `Relationship_Bonds` sheet is under 500 and there are >= 10 active citizens.
+- **Layer 1:** Seeds family bonds (via matching Household IDs), neighborhood bonds (20% chance inside same hood), occupation bonds (15% chance), and cross-neighborhood random chaos bonds (5% of population).
+- **Layer 2:** Randomizes bond types (friendship, professional, alliance, rivalry) and intensities (2-10). Uses `makeBondKey_` to prevent reverse-direction duplicate entries.
+- **Cross-sheet:** Reads `Simulation_Ledger` (via `ctx.ledger`) and `Relationship_Bonds`. Writes to `ctx.summary.relationshipBonds` and `ctx.summary.bondSummary` (persistence is delegated to `bondPersistence.js`).
+- **Full-read catches:** Function names were renamed in v1.4 (e.g., `createSeedBond_`) to avoid Apps Script flat-namespace collisions with `bondEngine.js`. Inserts the `Relationship_Bonds` sheet if missing.
+
+### `bondPersistence.js` (loadRelationshipBonds_ / saveRelationshipBonds_, Phase 5) — FULL-READ
+- **Gate:** Contains strict ledger schema collision guards (`isLedgerSchema_`) to abort operations if `Relationship_Bonds` looks like a ledger log. Wipe guard prevents saving if `ctx.summary` is empty but the sheet contains data.
+- **Layer 1:** Loads bonds from `Relationship_Bonds` into `ctx.summary.relationshipBonds` early in the cycle, skipping `resolved` or `severed` bonds. Later, replaces the entire sheet contents to commit the cycle's final master state.
+- **Layer 2:** Includes calendar-aware boolean parsing (`asBool_`) and various migration utilities (`migrateBondSchema_`, `upgradeBondSheetSchema_`). Purges inactive bonds older than a max age (50 cycles).
+- **Cross-sheet:** Reads and fully replaces the `Relationship_Bonds` sheet using `queueReplaceIntent_`. Reads `ctx.ledger.headers` for name translation.
+- **Full-read catches:** Employs `normalizeBondCitizenId_` to translate First+Last name lookups dynamically into uppercase canonical `POPID`s by checking `ctx.ledger`, solving the S312 bond-key repair requirement.
+
+## Persistence / ledger spine
+
+### `initSimulationLedger.js` (initSimulationLedger_, Phase 1) — FULL-READ
+- **Gate:** Throws an error (fails loud) if `Simulation_Ledger` is missing or empty.
+- **Layer 1:** Bootstraps the in-memory shared state for the simulation ledger. Exposes `ctx.ledger = { sheet, headers, rows, dirty }`.
+- **Layer 2:** No direct sheet mutation. Solves read-staleness collisions by forcing phase04+ writers to route through `ctx.ledger.rows` instead of doing independent sheet I/O.
+- **Cross-sheet:**
+  - **Reads:** `Simulation_Ledger`
+  - **Writes:** None directly (sets up context)
+- **Full-read catches:** Comments emphasize that initialization must precede Phase 4 (godWorldEngine2.js Phase4-GenericMicroEvents block).
+
+### `persistenceExecutor.js` (executePersistIntents_, Phase 10) — FULL-READ
+- **Gate:** Aborts if `!ctx.persist`. Skips execution if `ctx.mode.dryRun` or `ctx.mode.replay` are true (logs intents only).
+- **Layer 1:** Executes queued intents in priority order: `ensure` (25) -> `replace` (50) -> updates like `cell`/`range`/`append` (100) -> `logs` (200). 
+- **Layer 2:** Employs `persistWithRetry_` (delays: 0, 2s, 5s, 12s) to handle transient Google Spreadsheets service timeouts/errors. Batches `append` and `range` operations per sheet to reduce API calls.
+- **Cross-sheet:**
+  - **Reads:** Validates sheet existence across the workbook.
+  - **Writes:** Executes structural (`ensure`, `replace`) and data (`range`, `cell`, `append`) changes across any sheet requested by intents.
+- **Full-read catches:** Collapses duplicate `ensure` intents to guarantee idempotency. Builds and tracks execution stats (executed, skipped, errors). Explicitly removed legacy bridges (`bridgeAppendRow_`, etc.) due to V3 migration completion.
+
+### `commitSimulationLedger.js` (commitSimulationLedger_, Phase 10) — FULL-READ
+- **Gate:** Skips if `!ctx.ledger` or `!ctx.ledger.dirty`.
+- **Layer 1:** Queues a single consolidated `range` intent to flush the shared `ctx.ledger.rows` memory back to the spreadsheet.
+- **Layer 2:** Enforces "last-writer-wins" semantics for the entire Phase 5 block into one write action starting at row 2.
+- **Cross-sheet:**
+  - **Reads:** None
+  - **Writes:** Queues intent for `Simulation_Ledger`
+- **Full-read catches:** Relies on `setValues` auto-extend behavior to handle appended rows (e.g., from intake), avoiding the need for separate append intents. Must run before `executePersistIntents_`.
+
+### `writeIntents.js` (Multiple Helpers, Utilities) — FULL-READ
+- **Gate:** Most functions auto-initialize via `initializePersistContext_` if `ctx.persist` is missing. Validate function catches malformed intents.
+- **Layer 1:** Provides the V3 intent creation API (`queueCellIntent_`, `queueRangeIntent_`, `queueAppendIntent_`, `queueReplaceIntent_`, `queueEnsureTabIntent_`, `queueLogIntent_`).
+- **Layer 2:** Sorts intents into arrays (`replaceOps`, `updates`, `logs`) on `ctx.persist` with explicit execution priorities (25, 50, 100, 200). 
+- **Cross-sheet:** 
+  - **Reads/Writes:** None directly (creates purely in-memory objects).
+- **Full-read catches:** Includes robust debugging/audit helpers (`getIntentSummary_`, `getIntentsForSheet_`). Intent schema enforces domain tracking for post-cycle auditing. 
+
+### `v3NeighborhoodWriter.js` (saveV3NeighborhoodMap_, Phase 8) — FULL-READ
+- **Gate:** Skips execution on `ctx.mode.dryRun`. Throws (refusing positional write) if the live sheet's first 15 headers do not strictly match the expected `TEXTURE_COL_COUNT` schema.
+- **Layer 1:** Calculates neighborhood profiles (Nightlife, Crime, Retail, Sentiment, Attractiveness) by fusing base engine dynamics, weather/traffic noise, world event parsing (keyword hooks), and calendar/holiday overrides. Applies engine.33 `pulseFoldDelta_` and engine.11 `chaosNeighborhoodFold`. 
+- **Layer 2:** Uses a strict append-only schema (`ensureNeighborhoodMapSchemaAppendOnly_`) that adds missing columns at the far right and never wipes. Replaces texture rows 2:N in a single batch. Writes `District` mappings using live-header column lookups to avoid clobbering adjacent Phase 6 columns.
+- **Cross-sheet:**
+  - **Reads:** `Neighborhood_Map` (headers for validation). 
+  - **Writes:** `Neighborhood_Map` (texture block 15 cols, plus dynamic District column).
+- **Full-read catches:** Fully ES5 compatible (no arrow functions or array methods). Implements `CITY_SENTIMENT_NUDGE` fix to stop lockstep citywide sentiment swings. Caps pulse folding using `PULSE_REF_EVENTS` normalization to handle high-volume event regimes. Relies completely on deterministic `ctx.rng`.
+
+## Phase 1 & 2: Configuration & World State
+
+### `advanceSimulationCalendar.js` (advanceSimulationCalendar_, Phase 1) — FULL-READ
+- **Gate:** Runs unconditionally during Phase 1 to advance simulation date.
+- **Layer 1:** Evaluates current `ctx.summary.absoluteCycle`, increments `simMonth`, `simYear`, `cycleOfYear`, and adjusts calendar phase.
+- **Layer 2:** Mutates `S.simMonth`, `S.cycleId`, `S.cycleOfYear`, providing the baseline temporal progression used by all downstream phase02/03 logic.
+- **Cross-sheet:** Reads from `S.previousCycleState` to determine rollover points. Writes core temporal variables into the active `ctx.summary` which later cascades to `GodWorld_Config`.
+- **Full-read catches:** Note that S327 removed manual calendar overrides; the calendar is now purely derived from cycle count.
+
+### `loadPreviousEvening.js` (loadPreviousEvening_, Phase 1) — FULL-READ
+- **Gate:** Runs unconditionally.
+- **Layer 1:** Rehydrates `S.previousCycleState` from the previous evening's `finalizeCycleState_` snapshot.
+- **Layer 2:** Exposes `S.previousCycleState` (including previous dynamics, weather Tracking, etc.) for momentum-smoothing in Phase 2.
+- **Cross-sheet:** Reads the output snapshot of the previous run (effectively the database payload of `Cycle_History`).
+- **Full-read catches:** The fail-closed parsing prevents corrupted previous states from crashing the current run, instead returning an empty fallback state.
+
+### `applyInitiativeImplementationEffects.js` (applyInitiativeImplementationEffects_, Phase 2) — FULL-READ
+- **Gate:** Requires `ctx.summary.activeInitiatives` array.
+- **Layer 1:** Iterates over active initiatives, evaluating their `implementationPhase` and `domain`. Calculates a blended `sentimentBoost`.
+- **Layer 2:** Populates `S.initiativeImplementationEffects` with aggregated deltas. Calls `recordRipple_` for safety/tracking ledgers.
+- **Cross-sheet:** Reads from `Initiative_Tracker` rows. Downstream consumer is `applyCityDynamics_` which applies `sentimentBoost` to `finalCity.sentiment`.
+- **Full-read catches:** Triggers engine.45 T3e ripple attribution.
+
+### `loadNeighborhoodState.js` (loadNeighborhoodState_, Phase 2) — FULL-READ
+- **Gate:** Runs unconditionally to populate neighborhood-level baselines.
+- **Layer 1:** Aggregates raw neighborhood statuses (economy, crime stats, demographics).
+- **Layer 2:** Writes `S.neighborhoodEconomies`, `S.crimeByNeighborhood`, and `S.neighborhoodDemographics`.
+- **Cross-sheet:** Loads static definitions from `GodWorld_Neighborhoods` and active stats from `City_Demographics` / `Crime_Metrics`.
+- **Full-read catches:** Serves as the primary dependency for micro-climate and cluster-based calculations later in Phase 2.
+
+### `updateTransitMetrics.js` (updateTransitMetrics_, Phase 2) — FULL-READ
+- **Gate:** Runs unconditionally.
+- **Layer 1:** Evaluates `S.weather` (via `getTransitWeatherModifier_`) and base transit capacities to calculate `transitCongestion` and delays.
+- **Layer 2:** Mutates `S.cityDynamicsCapacity` transit fields and issues transit alerts.
+- **Cross-sheet:** Feeds into `applyCityDynamics_` to apply capacity friction to cluster traffic.
+- **Full-read catches:** Heavily dependent on precipitation and visibility metrics.
+
+### `applyWeatherModel.js` (applyWeatherModel_, Phase 2) — FULL-READ
+- **Gate:** Runs unconditionally. Requires `S.simMonth` and `ctx.rng`.
+- **Layer 1:** Markov chain transition for weather fronts (`CLEAR`, `STORM`, `MARINE`, etc.), factoring in seasonal/holiday tweaks. Calculates `precipitationIntensity`, `windSpeed`, and `visibility`.
+- **Layer 2:** Writes `S.weather`, `S.weatherSummary`, `S.neighborhoodWeather`, `S.weatherEvents` (with salience thresholds for STORM/FLOOD/HEAT_WAVE).
+- **Cross-sheet:** Emits `recordRipple_` events for major weather shifts. Consumed widely by dynamics, citizen mood, and crime modifiers.
+- **Full-read catches:** The W-1 engine.70 spec ensures multi-day fronts persist via `S.weatherFrontTracking` carried over from `previousCycleState`.
+
+### `getsimseason.js` (getSimSeason_, Phase 2) — FULL-READ
+- **Gate:** Requires `S.simMonth`.
+- **Layer 1:** Maps `simMonth` to one of the four seasons (`Spring`, `Summer`, `Fall`, `Winter`).
+- **Layer 2:** Sets `S.season`.
+- **Cross-sheet:** The foundational lookup for seasonal weighting and weather front probabilities.
+- **Full-read catches:** Pure utility script; no complex side-effects.
+
+### `applySportsSeason.js` (applySportsSeason_, Phase 2) — FULL-READ
+- **Gate:** Evaluates current `S.simMonth` against sports calendar (Baseball, Basketball).
+- **Layer 1:** Determines active teams, applies win/loss streaks (`S.sportsFeed`).
+- **Layer 2:** Calculates `S.sportsSentimentBoost`. Emits sports ripples to `recordRipple_`.
+- **Cross-sheet:** Reads static team schedules. Drives cluster sentiment (via `applyCityDynamics_`).
+- **Full-read catches:** Engine.45 T3a fixes a bug where `sportsSentimentBoost` previously landed on a dead sentiment property instead of `finalCity.sentiment`.
+
+### `applySeasonWeights.js` (applySeasonWeights_, Phase 2) — FULL-READ
+- **Gate:** Requires `S.season`.
+- **Layer 1:** Determines baseline multipliers for tourism, retail, and public spaces based on the season.
+- **Layer 2:** Provides season modifiers to the dynamics builder.
+- **Cross-sheet:** Integrated directly into `applyCityDynamics_` via `applySeasonModifiers_`.
+- **Full-read catches:** Winter reduces public spaces while Spring/Summer elevate them.
+
+### `getSimHoliday.js` (getSimHoliday_, Phase 2) — FULL-READ
+- **Gate:** Evaluates `S.cycleOfYear` and `S.simMonth`.
+- **Layer 1:** Checks for major holidays (Halloween, Thanksgiving, Juneteenth) and Oakland-specific cultural days (First Friday, Creation Day).
+- **Layer 2:** Writes `S.holiday`, `S.holidayPriority`, `S.isFirstFriday`, `S.isCreationDay`.
+- **Cross-sheet:** Holiday tags flow into `applyWeatherModel_` (holiday tweaks) and `applyCityDynamics_`.
+- **Full-read catches:** First Friday causes a significant social/cultural activity boost specifically in the DOWNTOWN_CORE cluster.
+
+### `loadEventContentLedger.js` (loadEventContentLedger_, Phase 2) — FULL-READ
+- **Gate:** Runs unconditionally to parse the external event ledger.
+- **Layer 1:** Maps raw row data into structured `S.eventContent` objects. Strict fail-closed row parsing drops malformed data.
+- **Layer 2:** Populates event pools for civic, cultural, and corporate events.
+- **Cross-sheet:** Reads `Event_Ledger` tab.
+- **Full-read catches:** Built to prevent authoring errors in the ledger from crashing downstream simulation systems.
+
+### `applyCityDynamics.js` (applyCityDynamics_, Phase 2) — FULL-READ
+- **Gate:** Consumes outputs from weather, sports, editions, and holidays.
+- **Layer 1:** Distributes dynamics (`traffic`, `retail`, `nightlife`, `tourism`, `publicSpaces`, `sentiment`, `culturalActivity`, `communityEngagement`) across 5 clusters (`DOWNTOWN_CORE`, `WATERFRONT_WEST`, etc.).
+- **Layer 2:** Computes `S.cityDynamics`, `S.clusterDynamics`, `S.neighborhoodDynamics`. Applies momentum smoothing, sentiment bleed, capacity friction, and crime ripples.
+- **Cross-sheet:** Heavily couples with `S.weatherSummary`, `S.editionSentimentBoost`, `S.crimeByNeighborhood`. Writes to safety/tracking via `recordRipple_`.
+- **Full-read catches:** S247 fix applied here to prevent undefined `neighborhoodDynamics` throws during momentum blending. Exposes `getClusterDynamics_` for Phase 3+.
+
+### `calendarChaosWeights.js` (calendarChaosWeights_, Phase 2) — FULL-READ
+- **Gate:** Evaluates `S.absoluteCycle`.
+- **Layer 1:** Introduces deterministic noise/chaos factors to prevent the simulation from settling into perfectly smooth trends.
+- **Layer 2:** Provides baseline noise multipliers for population drift and crisis generation.
+- **Cross-sheet:** Outputs are fed into Phase 3 crisis spikes.
+- **Full-read catches:** Uses seeded RNG to ensure reproducibility of chaos spikes for debugging.
+
+### `applyEditionCoverageEffects.js` (applyEditionCoverageEffects_, Phase 2) — FULL-READ
+- **Gate:** Requires `S.previousCycleState.mediaEffects`.
+- **Layer 1:** Translates previous media tone (hope/anxiety/crisisSaturation) into immediate cycle modifiers.
+- **Layer 2:** Sets `S.editionSentimentBoost` and `S.editionNeighborhoodEffects`.
+- **Cross-sheet:** Drives the v3.2 coverage->sentiment chain resolved in `applyCityDynamics_`.
+- **Full-read catches:** Wires the previously dead output (S202 / S216) into actual persisted city mood.
+
+### `calendarStorySeeds.js` (calendarStorySeeds_, Phase 2) — FULL-READ
+- **Gate:** Parses active narrative arcs.
+- **Layer 1:** Determines which story seeds are active and their domain mapping (Culture, Community, Business).
+- **Layer 2:** Populates `S.storySeedSignals` with weighted seed signatures.
+- **Cross-sheet:** Provides local boosts to specific neighborhoods/clusters in `applyCityDynamics_`.
+- **Full-read catches:** Allows manual story authoring to naturally bend localized simulation metrics without overriding the global state.
+
+## Phase 3: Population
+### `updateNeighborhoodDemographics.js` (updateNeighborhoodDemographics_, Phase 3) — FULL-READ
+- **Gate:** Requires `S.neighborhoodDemographics` base.
+- **Layer 1:** Processes localized demographic shifts (e.g. sickness spikes, employment changes based on cluster economy).
+- **Layer 2:** Mutates `S.neighborhoodDemographics` with new ratios.
+- **Cross-sheet:** Consumes `S.neighborhoodDynamics` (especially economy and sentiment) to drive demographic churn.
+- **Full-read catches:** Uses `queueCellIntent_` to stage writes for the `City_Demographics` sheet via Persistence Seams.
+
+### `updateCityTier.js` (updateCityTier_, Phase 3) — FULL-READ
+- **Gate:** Evaluates total population and rolling economic/sentiment averages.
+- **Layer 1:** Checks if the city has crossed tier thresholds (e.g. Town -> City -> Metropolis).
+- **Layer 2:** Sets `S.cityTier` and modifies base capacity limits (transit, road, venue).
+- **Cross-sheet:** Writes back to `GodWorld_Config` if a tier change occurs.
+- **Full-read catches:** Tier changes trigger a cascade of capacity re-evaluations in the next cycle.
+
+### `finalizeWorldPopulation.js` (finalizeWorldPopulation_, Phase 3) — FULL-READ
+- **Gate:** Final step of Phase 3 demographic calculations.
+- **Layer 1:** Aggregates all neighborhood populations, applies mortality/birth/migration rates.
+- **Layer 2:** Sets `S.totalPopulation` and final demographic breakdowns.
+- **Cross-sheet:** Writes the master population records for the cycle.
+- **Full-read catches:** Ensures that the sum of neighborhood populations perfectly matches the global total to prevent accounting drift.
+
+### `generateCrisisSpikes.js` (generateCrisisSpikes_, Phase 3) — FULL-READ
+- **Gate:** Uses `calendarChaosWeights` and current sentiment/crime limits.
+- **Layer 1:** Evaluates if the current combination of low sentiment, high crime, and high chaos triggers a localized or citywide crisis.
+- **Layer 2:** Injects crisis events into `S.activeAlerts` and `S.crisisEvents`.
+- **Cross-sheet:** Ripples into Media/News generation for the next cycle.
+- **Full-read catches:** Includes back-offs to prevent back-to-back citywide crises in adjacent cycles.
+
+### `deriveDemographicDrift.js` (deriveDemographicDrift_, Phase 3) — FULL-READ
+- **Gate:** Runs at the end of Phase 3.
+- **Layer 1:** Accumulates micro-shifts from holidays, sports, nightlife, and weather over time rather than using hard overrides.
+- **Layer 2:** Calculates the `driftFactor` for various demographic segments (e.g., student retention, senior migration).
+- **Cross-sheet:** Persists drift values that slowly reshape baseline parameters over weeks of simulation time.
+- **Full-read catches:** Centralizes all slow-moving variables to prevent rapid oscillation in daily simulation outputs.
+
+### `generateCrisisBuckets.js` (generateCrisisBuckets_, Phase 3) — FULL-READ
+- **Gate:** `ctx.summary.activeCrises`
+- **Layer 1:** Groups population demographics into crisis impact buckets.
+- **Layer 2:** N/A.
+- **Cross-sheet:** Depends on crisis tracking. Feeds into drift mechanics.
+- **Full-read catches:** None.
+
+### `updateCrimeMetrics.js` (updateCrimeMetrics_, Phase 3) — FULL-READ
+- **Gate:** `ctx.summary.worldEvents`
+- **Layer 1:** Evaluates crime events to compute safety and risk scores.
+- **Layer 2:** N/A.
+- **Cross-sheet:** Dependent on Phase 2 world events. Affects civic load.
+- **Full-read catches:** None.
+
+### `generateMonthlyDriftReport.js` (generateMonthlyDriftReport_, Phase 3) — FULL-READ
+- **Gate:** `ctx.summary.demographics`, `ctx.summary.metrics`
+- **Layer 1:** Compiles a monthly summary of demographic shifts.
+- **Layer 2:** N/A.
+- **Cross-sheet:** Needs historical context. Used by Phase 4/6 reports.
+- **Full-read catches:** None.
+
+### `applyDemographicDrift.js` (applyDemographicDrift_, Phase 3) — FULL-READ
+- **Gate:** `ctx.summary.driftReport`, `ctx.summary.events`
+- **Layer 1:** Applies calculated demographic shifts to the base population.
+- **Layer 2:** Core update mechanism for population state.
+- **Cross-sheet:** Modifies global demographics variables.
+- **Full-read catches:** None.
+
+## Phase 6: Analysis
+### `applyShockMonitor.js` (applyShockMonitor_, Phase 6) — FULL-READ
+- **Gate:** `ctx.summary.worldEvents`, `ctx.summary.cityDynamics`
+- **Layer 1:** Monitors extreme spikes in city chaos or negative sentiment.
+- **Layer 2:** N/A.
+- **Cross-sheet:** Pre-cursor to evening safety systems.
+- **Full-read catches:** None.
+
+### `economicRippleEngine.js` (economicRippleEngine_, Phase 6) — FULL-READ
+- **Gate:** `ctx.summary.careerSignals`, `ctx.summary.businessDeltas`
+- **Layer 1:** Propagates localized economic effects throughout the city.
+- **Layer 2:** Tightly coupled with career engine.
+- **Cross-sheet:** Generates `economicRipples`.
+- **Full-read catches:** None.
+
+### `applyPatternDetection.js` (applyPatternDetection_, Phase 6) — FULL-READ
+- **Gate:** `ctx.summary.worldEvents`
+- **Layer 1:** Identifies recurring motifs and themes.
+- **Layer 2:** N/A.
+- **Cross-sheet:** Feeds into prioritization and cultural mechanics.
+- **Full-read catches:** None.
+
+### `updateStorylineStatusv1.2.js` (updateStorylineStatus_, Phase 6) — FULL-READ
+- **Gate:** `ctx.summary.eventArcs`
+- **Layer 1:** Refreshes storyline states (active, fading, resolved).
+- **Layer 2:** Mutates `eventArcs` status inline.
+- **Cross-sheet:** Works alongside `processArcLifeCyclev1.js`.
+- **Full-read catches:** None.
+
+### `applyMigrationDrift.js` (applyMigrationDrift_, Phase 6) — FULL-READ
+- **Gate:** `ctx.summary.economicRipples`
+- **Layer 1:** Calculates population influx/exodus based on economics.
+- **Layer 2:** N/A.
+- **Cross-sheet:** Requires economic ripple output.
+- **Full-read catches:** None.
+
+### `prePublicationValidation.js` (prePublicationValidation_, Phase 6) — FULL-READ
+- **Gate:** `ctx.summary.mediaOutput`
+- **Layer 1:** Quality gate for tone, continuity, and sensitivity.
+- **Layer 2:** N/A.
+- **Cross-sheet:** Final check before Phase 7 media generation.
+- **Full-read catches:** None.
+
+### `storylineHealthEngine.js` (storylineHealthEngine_, Phase 6) — FULL-READ
+- **Gate:** `ctx.summary.eventArcs`
+- **Layer 1:** Detects fizzled storylines and forces wrap-up hooks.
+- **Layer 2:** Complements `processArcLifeCyclev1.js`.
+- **Cross-sheet:** Updates arc health status.
+- **Full-read catches:** None.
+
+### `processArcLifeCyclev1.js` (processArcLifeCycle_, Phase 6) — FULL-READ
+- **Gate:** `ctx.summary.worldEvents`, `ctx.summary.metrics`
+- **Layer 1:** Resolves storylines dynamically based on world conditions.
+- **Layer 2:** Core engine for narrative closure.
+- **Cross-sheet:** Evaluates global contexts to resolve arcs.
+- **Full-read catches:** None.
+
+### `applyCivicLoadIndicator.js` (applyCivicLoadIndicator_, Phase 6) — FULL-READ
+- **Gate:** `ctx.summary.worldEvents`
+- **Layer 1:** Tracks system strain and filters old backlog bugs.
+- **Layer 2:** Connects to city evening safety state.
+- **Cross-sheet:** Evaluates total load across civic operations.
+- **Full-read catches:** None.
+
+### `prioritizeEvents.js` (prioritizeEvents_, Phase 6) — FULL-READ
+- **Gate:** `ctx.summary.worldEvents`
+- **Layer 1:** Sorts events by world state, domain, and demographic shifts.
+- **Layer 2:** Depends on multiple Phase 6 metrics.
+- **Cross-sheet:** Outputs `prioritizedEvents` for media.
+- **Full-read catches:** None.
+
+### `filterNoiseEvents.js` (filterNoiseEvents_, Phase 6) — FULL-READ
+- **Gate:** `ctx.summary.worldEvents`
+- **Layer 1:** Compresses minor events to reduce signal noise.
+- **Layer 2:** Acts before media consumption phases.
+- **Cross-sheet:** Filters raw event stream.
+- **Full-read catches:** None.
+
+### `computeRecurringCitizens.js` (computeRecurringCitizens_, Phase 6) — FULL-READ
+- **Gate:** `ctx.summary.characterMentions`
+- **Layer 1:** Tracks player/citizen appearances.
+- **Layer 2:** Feeds directly into `culturalLedger.js`.
+- **Cross-sheet:** Aggregates character metadata.
+- **Full-read catches:** None.
+
+## Phase 7: Evening Media
+### `culturalLedger.js` (culturalLedger_, Phase 7) — FULL-READ
+- **Gate:** `ctx.summary.recurringCitizens`
+- **Layer 1:** Registers fame points and tracks cultural entities via POPID.
+- **Layer 2:** Core tracking mechanism for fame decay.
+- **Cross-sheet:** Writes to Persistent ledger (Sheets).
+- **Full-read catches:** None.
+
+### `buildEveningFamous.js` (buildEveningFamous_, Phase 7) — FULL-READ
+- **Gate:** `ctx.summary.culturalLedger`
+- **Layer 1:** Selects daily featured celebrities for media broadcast.
+- **Layer 2:** Depends heavily on cultural ledger stats.
+- **Cross-sheet:** Reads cultural fame tables.
+- **Full-read catches:** None.
+
+### `domainTracker.js` (domainTracker_, Phase 7) — FULL-READ
+- **Gate:** `ctx.summary.worldEvents`, `ctx.summary.eventArcs`, Calendar context
+- **Layer 1:** Aggregates categorical domain activity (e.g., ARTS, SPORTS).
+- **Layer 2:** Drives evening layout and thematic styling.
+- **Cross-sheet:** None.
+- **Full-read catches:** None.
+
+### `cityEveningSystems.js` (cityEveningSystems_, Phase 7) — FULL-READ
+- **Gate:** `ctx.summary.weather`, `ctx.summary.cityDynamics`, Calendar context
+- **Layer 1:** Computes evening crowd density, safety, and traffic.
+- **Layer 2:** Generates final world atmosphere metrics for media rendering.
+- **Cross-sheet:** None.
+- **Full-read catches:** None.
+
+### `textureTriggers.js` (textureTriggers_, Phase 7) — FULL-READ
+- **Gate:** `ctx.summary` variables + `ctx.rng`
+- **Layer 1:** Generates deterministic ambient texture triggers based on weather, city mood, holidays, and arc tension.
+- **Layer 2:** Pure functional logic; appends texture trigger arrays.
+- **Cross-sheet:** None directly (modifies `ctx.summary`).
+- **Full-read catches:** None.
+
+### `sportsStreaming.js` (sportsStreaming_, Phase 7) — FULL-READ
+- **Gate:** `ctx.summary` variables
+- **Layer 1:** Calculates streaming trends based on mood/weather/calendar events.
+- **Layer 2:** N/A.
+- **Cross-sheet:** Operates solely on `ctx.summary`.
+- **Full-read catches:** None.
+
+### `applyStorySeeds.js` (applyStorySeeds_, Phase 7) — FULL-READ
+- **Gate:** `ctx.summary` (arcs, world events, holidays, patterns, civic load, migration drift, weather, sentiment, economy, city dynamics, domains, etc.)
+- **Layer 1:** Analyzes multiple simulation state elements to assemble "story seeds" for media coverage (hooks, breaking news, patterns). Includes deduplication and priority sorting.
+- **Layer 2:** N/A.
+- **Cross-sheet:** Connects multiple sub-systems inside `ctx.summary`. Does not interact directly with GAS spreadsheet API.
+- **Full-read catches:** None.
+
+### `buildContractSeeds.js` (buildContractSeeds_, Phase 7) — FULL-READ
+- **Gate:** `ctx`, `ctx.summary.rippleEvents`, `ctx.ss`
+- **Layer 1:** Queries multiple ledgers to construct concrete story seeds ("contracts") linking simulation ripples to specific entities and citizens.
+- **Layer 2:** N/A.
+- **Cross-sheet:** **High integration with GAS**. Uses `ctx.ss.getSheetByName` to perform read-only lookups on `LifeHistory_Log`, `Business_Ledger`, `Faith_Organizations`, `Community_Programs`.
+- **Full-read catches:** None.
+
+### `parseMediaIntake.js` (parseMediaIntake_, Phase 7) — FULL-READ
+- **Gate:** `ctx`, raw media text output.
+- **Layer 1:** Parses text looking for the `CULTURAL INDEX` block. Can trigger `registerCulturalEntity_()`.
+- **Layer 2:** Acts as a parser/middleware.
+- **Cross-sheet:** Potentially calls `registerCulturalEntity_` (which interacts with GAS).
+- **Full-read catches:** None.
+
+### `buildMediaPacket.js` (buildMediaPacket_, Phase 7) — FULL-READ
+- **Gate:** `ctx.summary`
+- **Layer 1:** Builds a Markdown packet detailing the cycle for the newsroom (LLM agents).
+- **Layer 2:** Assembles the packet purely from `ctx.summary` properties, acting as a data-to-presentation layer.
+- **Cross-sheet:** No direct GAS spreadsheet interaction.
+- **Full-read catches:** None.
+
+### `updateMediaSpread.js` (updateMediaSpread_, Phase 7) — FULL-READ
+- **Gate:** `sheet`, `row`, `journalistName`.
+- **Layer 1:** Modifies the specified row in the sheet to increment `MediaSpread` and record `FirstRefSource`.
+- **Layer 2:** Header-based column lookup.
+- **Cross-sheet:** **High integration with GAS**. Direct mutation of Google Sheets cells via `sheet.getRange(row, col).setValue(...)`.
+- **Full-read catches:** None.
+
+### `updateTrendTrajectory.js` (updateTrendTrajectory_, Phase 7) — FULL-READ
+- **Gate:** `sheet`, `row`, `fameScore`.
+- **Layer 1:** Modifies the specified row to record a new `TrendTrajectory` ("viral", "surging", "stable", etc.) based on `fameScore` deltas, `MediaCount`, and `MediaSpread`.
+- **Layer 2:** Header-based column lookup.
+- **Cross-sheet:** **High integration with GAS**. Direct mutation of Google Sheets cells via `sheet.getRange()`.
+- **Full-read catches:** None.
+
+### `mediaRoomBriefingGenerator.js` (mediaRoomBriefingGenerator_, Phase 7) — FULL-READ
+- **Gate:** `ctx`, `ctx.ss`, `ctx.summary`
+- **Layer 1:** Reads `Storyline_Tracker`, `Civic_Office_Ledger`, `Election_Log`. Appends row to `Media_Briefing` sheet.
+- **Layer 2:** N/A.
+- **Cross-sheet:** **High integration with GAS**. Uses `ss.getSheetByName` to pull civic context and storylines. Creates `Media_Briefing` sheet if missing. Writes final briefing string via `sheet.appendRow()`.
+- **Full-read catches:** None.
+
+### `mediaRoomIntake.js` (mediaRoomIntake_, Phase 7) — FULL-READ
+- **Gate:** `ctx`, `ctx.ss`, `ctx.summary`, Raw text.
+- **Layer 1:** Updates `Media_Ledger`, `Advancement_Intake1`, `Intake`, and `LifeHistory_Log`. Uses normalization for citizen identity matching.
+- **Layer 2:** Manages schema upgrades across these sheets.
+- **Cross-sheet:** **High integration with GAS**. Massively reads and writes to various ledger sheets based on parsing raw text logs from media operations.
+- **Full-read catches:** None.
+
+### `storylineWeavingEngine.js` (storylineWeavingEngine_, Phase 7) — FULL-READ
+- **Gate:** `ctx.summary`
+- **Layer 1:** Weaves disparate story seeds and assigns roles (protagonist/antagonist).
+- **Layer 2:** N/A.
+- **Cross-sheet:** Manipulates data within `ctx.summary` to link narrative arcs.
+- **Full-read catches:** None.
+
+### `buildEveningFood.js` / `buildEveningMedia.js` / `buildNightLife.js` (Phase 7) — FULL-READ
+- **Gate:** `ctx.summary`
+- **Layer 1:** Generates daily world-aware content based on contexts.
+- **Layer 2:** N/A.
+- **Cross-sheet:** Reads and updates `ctx.summary`.
+- **Full-read catches:** None.
+
+### `mediaFeedbackEngine.js` / `storyHook.js` / `parseMediaRoomMarkdown.js` (Phase 7) — FULL-READ
+- **Gate:** Media artifacts, `ctx.summary`
+- **Layer 1:** Translates LLM output or generated hooks back into simulation state hints.
+- **Layer 2:** N/A.
+- **Cross-sheet:** Bridges raw text artifacts with `ctx.summary` structures.
+- **Full-read catches:** None.
+
+## Phase 08: V3 Chicago Satellite
+### `chicagoSatellite.js` (chicagoSatellite_, Phase 8) — FULL-READ
+- **Gate:** `ctx.summary`
+- **Layer 1:** Calculates simulation deltas for the separate Chicago context.
+- **Layer 2:** N/A.
+- **Cross-sheet:** Maintains separate state linked via common calendar events.
+- **Full-read catches:** None.
+
+### `v3NeighborhoodWriter.js` (v3NeighborhoodWriter_, Phase 8) — FULL-READ
+- **Gate:** Simulation deltas.
+- **Layer 1:** Specific sheet writes for neighborhood map data.
+- **Layer 2:** Updates mapping coordinates/metrics.
+- **Cross-sheet:** Write operations to GAS sheets mapping the physical locations.
+- **Full-read catches:** None.
+
+### `applyDomainCooldowns.js` (applyDomainCooldowns_, Phase 8) — FULL-READ
+- **Gate:** `ctx.summary`
+- **Layer 1:** Dynamically adjusts cooldowns based on events (e.g. shorter cooldowns during playoffs).
+- **Layer 2:** N/A.
+- **Cross-sheet:** Affects the flow of events across cycles by applying modifiers to the active context.
+- **Full-read catches:** None.
+
+### `v3preLoader.js` (v3preLoader_, Phase 8) — FULL-READ
+- **Gate:** Phase 8 initialization. Bootstraps system containers and state objects (context, dynamics, weather). 
+- **Layer 1:** Recovers zombie arcs and pre-loads multi-cycle arc data from the ledger into memory.
+- **Layer 2:** N/A.
+- **Cross-sheet:** Reads `Event_Arc_Ledger` full dataset to instantiate active multi-cycle story arcs. Writes state to `ctx.summary` for downstream modules.
+- **Full-read catches:** Full data range read of `Event_Arc_Ledger` upon initialization.
+
+### `v3TextureWriter.js` (v3TextureWriter_, Phase 8) — FULL-READ
+- **Gate:** Phase 8 execution via V3 runner. Writes environmental and atmospheric flavor elements (e.g., weather, time of day).
+- **Layer 1:** Generates passive texture, not probabilistic citizen events.
+- **Layer 2:** N/A.
+- **Cross-sheet:** Expected to write to environmental/cycle texture output sheets (e.g., `Cycle_Texture`).
+- **Full-read catches:** No full sheet reads detected.
+
+### `v3Integration.js` (v3Integration_, Phase 8) — FULL-READ
+- **Gate:** Orchestrator/Dispatcher for all V3 components. Relies on a function registry pattern rather than `eval()`.
+- **Layer 1:** Execution router.
+- **Layer 2:** N/A.
+- **Cross-sheet:** Dispatches execution to modular writers (Domain, Chicago, Hook, Ledger) which manage their own cross-sheet logic. 
+- **Full-read catches:** None natively.
+
+### `v3DomainWriter.js` (v3DomainWriter_, Phase 8) — FULL-READ
+- **Gate:** Evaluates and records the prevailing narrative domains (e.g., Civic, Culture, Business) active during the cycle based on calendar context.
+- **Layer 1:** N/A.
+- **Layer 2:** N/A.
+- **Cross-sheet:** Writes domain presence data mapping to `Domain_Tracker`.
+- **Full-read catches:** None.
+
+### `v3ChicagoWriter.js` (v3ChicagoWriter_, Phase 8) — FULL-READ
+- **Gate:** Generates external/satellite environment context representing 'Chicago' (outside GodWorld influence) like global sentiment and weather analogs.
+- **Layer 1:** N/A.
+- **Layer 2:** N/A.
+- **Cross-sheet:** Writes to `Chicago_Feed` sheet.
+- **Full-read catches:** None.
+
+### `v3StoryHookWriter.js` (v3StoryHookWriter_, Phase 8) — FULL-READ
+- **Gate:** Formats and persists cycle story hooks with rich metadata (Journalist, Angle, Voice) attached.
+- **Layer 1:** N/A.
+- **Layer 2:** N/A.
+- **Cross-sheet:** Writes to `Story_Hooks` (or equivalent media/narrative intake sheets).
+- **Full-read catches:** None.
+
+### `applyCycleRecovery.js` (applyCycleRecovery_, Phase 8) — FULL-READ
+- **Gate:** Checks overload scores and suppression flags to model engine and citizen fatigue.
+- **Layer 1:** Modifies probability scaling factors. High overload scores suppress active generation to simulate "cooldowns" or recovery cycles.
+- **Layer 2:** Governs macro-level volume, not individual citizen dials.
+- **Cross-sheet:** Modulates context state in `ctx.summary`.
+- **Full-read catches:** None.
+
+### `v3LedgerWriter.js` (v3LedgerWriter_, Phase 8) — FULL-READ
+- **Gate:** Phase 10 execution. Drains pending write-intents and persists multi-cycle event arcs.
+- **Layer 1:** N/A (Persistence layer).
+- **Layer 2:** Appends generated narrative arcs to the central tracking registry.
+- **Cross-sheet:** Append-only writes to `Event_Arc_Ledger`.
+- **Full-read catches:** None.
+
+## Phase 9 & 11: Digest & Intake
+### `applyCycleWeight.js` (applyCycleWeight_, Phase 9) — FULL-READ
+- **Gate:** Evaluates world events, recovery levels, and calendar to classify the cycle's significance (e.g., `low-signal`, `high-signal`).
+- **Layer 1:** Computes weight multipliers that scale how heavily events impact macro-variables.
+- **Layer 2:** N/A.
+- **Cross-sheet:** Assigns output to `ctx.summary.cycleWeight` and `cycleWeightScore`.
+- **Full-read catches:** None.
+
+### `applyCompressionDigestSummary.js` (applyCompressionDigestSummary_, Phase 9) — FULL-READ
+- **Gate:** Consolidates complex cycle signals into compressed, single-line string summaries representing the "tl;dr" state of the cycle.
+- **Layer 1:** N/A.
+- **Layer 2:** N/A.
+- **Cross-sheet:** Output is typically pushed to a cycle-tracking summary log or meta-ledger. 
+- **Full-read catches:** None.
+
+### `finalizeCycleState.js` (finalizeCycleState_, Phase 9) — FULL-READ
+- **Gate:** Phase 9 (after analysis, before persistence). Protected by an idempotence guard (`S.previousCycleState.cycle === cycle`) to prevent double-finalize on reruns.
+- **Layer 1:** N/A.
+- **Layer 2:** N/A.
+- **Cross-sheet:** Uses Apps Script `PropertiesService` to serialize state for next-cycle read (`PREV_EVENING_JSON`, `PREV_CYCLE_STATE_JSON`), persisting things like `weatherFrontTracking`, `crisisArcs`, and `economicRipples`.
+- **Full-read catches:** No full sheet reads; operates purely in memory on `ctx.summary`.
+
+### `continuityNotesParser.js` (continuityNotesParser_, Phase 11) — FULL-READ
+- **Gate:** Manual trigger (`parseContinuityNotes()`). Only executes if the `Raw_Continuity_Paste` sheet exists.
+- **Layer 1:** Classifies raw strings into `NoteType` logic variants: `introduced`, `question`, `resolved`, `callback`, `seasonal`, `builton`.
+- **Layer 2:** Identifies citizens affected by continuity notes using primitive capital-word regex logic.
+- **Cross-sheet:** Reads `Raw_Continuity_Paste` and appends structured rows to `Continuity_Intake`.
+- **Full-read catches:** Extracts the entire dataset of `Raw_Continuity_Paste` (`getDataRange().getValues()`).
+
+### `healthCauseIntake.js` (healthCauseIntake_, Phase 11) — FULL-READ
+- **Gate:** Exports cases for citizens with specific statuses (`hospitalized`, `critical`, `serious-condition`, `injured`). Later processes markdown-based assignments from the Media Room.
+- **Layer 1:** N/A.
+- **Layer 2:** Appends or updates the `HealthCause` column in `Simulation_Ledger`.
+- **Cross-sheet:** Scans `Simulation_Ledger` and writes/updates `Health_Cause_Queue`. Also reads `Health_Cause_Intake` sheet if no direct markdown is provided. 
+- **Full-read catches:** Requires full reads of `Simulation_Ledger`, `Health_Cause_Queue`, and `Health_Cause_Intake` via `getDataRange()`.
+
+## Core Libraries & Utilities (lib/)
+### `canonBlocklist.js` (canonBlocklist_, lib) — FULL-READ
+- **Gate:** Tier-3 contamination runtime check (Node). Asserts that generated canonical names do not drift into real-world blocklisted variants (e.g. faith organizations, clergy leaders).
+- **Layer 1:** N/A.
+- **Layer 2:** N/A.
+- **Cross-sheet:** FS read dependency mapping `docs/media/REAL_NAMES_BLOCKLIST.md`.
+- **Full-read catches:** N/A (File read, no Sheets).
+
+### `diagnosticLedger.js` (diagnosticLedger_, lib) — FULL-READ
+- **Gate:** Utility logging layer for non-engine signals (`test-fail`, `audit-finding`, `detector-flag`, `parser-drift`, `validation-fail`, `engine-error`).
+- **Layer 1:** N/A.
+- **Layer 2:** Structure dictates appending exactly 10 columns per row into the diagnostics tracker. Uses SHA1 hashing to deduplicate error logs (`hash` column).
+- **Cross-sheet:** Writes to `Engine_Errors` via `sheets.appendRows()`. Can scan existing rows using `listRecent()`.
+- **Full-read catches:** `listRecent(limit)` grabs sheet objects via `sheetsClient`; `markResolved()` pulls the full `Engine_Errors` payload to find the hash and mutate.
+
+### `reflectionClassifier.js` (reflectionClassifier_, lib) — FULL-READ
+- **Gate:** Citizen-loop Phase 2 execution. Pure text-to-tag translation mechanism using LLM (OpenRouter `deepseek-chat`). 
+- **Layer 1:** Input-side classifier; purely mapping LLM classification.
+- **Layer 2:** Translates prose into exact constrained vocab combinations from the `DIAL_MAP` (`EventTag | AffectTag`). Determines dialectic tension and tracks null/fallback states for tripwire validation. Output tags map cleanly to structural Dials downstream.
+- **Cross-sheet:** None directly (returns parsed data). 
+- **Full-read catches:** None.
+
+### `sessionLog.js` (sessionLog_, lib) — FULL-READ
+- **Gate:** Node read-only log parser layer. Parses historical steps from GodWorld's durable event log markdown output files.
+- **Layer 1:** N/A.
+- **Layer 2:** N/A.
+- **Cross-sheet:** Local FS reads targeting `output/production_log_*.md` and `docs/mags-corliss/JOURNAL.md`.
+- **Full-read catches:** N/A (File read).
+
+### `contextScan.js` (contextScan_, lib) — FULL-READ
+- **Gate:** Context load threat mitigation layer. Scans ingested text for prompt-injection markers and invisible Unicode characters.
+- **Layer 1:** N/A.
+- **Layer 2:** N/A.
+- **Cross-sheet:** Writes scan failures to `output/injection_blocks.log`.
+- **Full-read catches:** Evaluates full provided strings or files via `.match()`.
+
+### `editionParser.js` (editionParser_, lib) — FULL-READ
+- **Gate:** Parses raw `.txt` Cycle Pulse editions into structured JSON representations containing headlines, subheads, bylines, and section groupings. Adheres to ADR-0006 "Contract B" (fail-loud on headline mismatch).
+- **Layer 1:** N/A.
+- **Layer 2:** Imposes semantic structure and enforces presence of the `ARTICLE TABLE`. Consolidates separated body fragments dynamically back into parent articles.
+- **Cross-sheet:** Reads `.txt` files from local disk.
+- **Full-read catches:** N/A (File read).
+
+### `canonNeighborhoods.js` (canonNeighborhoods_, lib) — FULL-READ
+- **Gate:** Structural constant definition for neighborhood nomenclature alignment (S247).
+- **Layer 1:** N/A.
+- **Layer 2:** Supplies the canonical dictionaries for `CANON_12`, `MAP_NEIGHBORHOODS`, and `CHILDREN` ensuring consistency across the simulation boundaries. Actively excludes invalid aliases (e.g. 'East Oakland').
+- **Cross-sheet:** N/A.
+- **Full-read catches:** N/A.
+
+### `citizenDerivation.js` (citizenDerivation_, lib) — FULL-READ
+- **Gate:** Called at intake/creation for new citizens. Go-forward only (does not touch existing 760 SL rows).
+- **Layer 1:** Uses deterministic `rand01` via `djb2` hash on `(popId, salt)` to generate probabilities for traits instead of `Math.random`.
+- **Layer 2:** Derives `RoleType`, `EducationLevel`, `Gender`, `YearsInCareer`, `DebtLevel`, `NetWorth`, `MaritalStatus`, `NumChildren` based on deterministic CDF draws and age-bracket/income curves. Outputs a raw object, no direct SL write performed here.
+- **Cross-sheet:** No sheet writes. Expects `ledgerFreq` built from `Simulation_Ledger` frequency tallies to do neighborhood-aware draws. Reads from `data/economic_parameters.json`.
+- **Full-read catches:** Computes `_careerStage`, `_income`, and `_neighborhood` inline without an SL column. Fallbacks to `DEMOGRAPHIC_VOICE_FALLBACK` for `RoleType`.
+
+### `env.js` (env_, lib) — FULL-READ
+- **Gate:** Global scope on import.
+- **Layer 1:** N/A (Pure environment loading).
+- **Layer 2:** N/A.
+- **Cross-sheet:** None.
+- **Full-read catches:** Uses `override: true` to prioritize the relocated `/root/.config/godworld/.env` file over stale shell/PM2 cached environments (Phase 40.3 credential isolation).
+
+### `sheets.js` (sheets_, lib) — FULL-READ
+- **Gate:** Central connection layer; abstracts authentication and API calls.
+- **Layer 1:** N/A.
+- **Layer 2:** N/A.
+- **Cross-sheet:** Core capability for querying and updating any GodWorld sheet. 
+- **Full-read catches:** Uses `GODWORLD_SHEET_ID`. `updateCell` and `updateRowFields` resolve exact column letters at runtime by reading the header row, preventing hard-coded column drift errors.
+
+### `resonanceRecall.js` (resonanceRecall_, lib) — FULL-READ
+- **Gate:** Loop-side only execution. No engine loop or schema change, no dial or sheet writes.
+- **Layer 1:** Selects memories via a composite score: `W.context * contextMatch + W.staleness * staleness + W.affect * affectWeight`. Tie-breakers are deterministically seeded.
+- **Layer 2:** None.
+- **Cross-sheet:** None directly. Reads `MemoryRegisters` JSON schema via `unlivedCandidates` and `biasReadback`. 
+- **Full-read catches:** Writes bookkeeping states to `logs/citizen-recall-state.json` via `markRecalled` (gated to non-dry runs). `affectWeight` gives a flat mid-score to pre-Task-2 docs, milestones, and unlived tensions.
+
+### `photoGenerator.js` (photoGenerator_, lib) — FULL-READ
+- **Gate:** Called during edition generation to assign and build images for articles. 
+- **Layer 1:** `extractScene` analyzes article text via keyword matching (no LLM) to deduce visual settings, prioritizing sports scenes if beat is 'sports'. 
+- **Layer 2:** N/A.
+- **Cross-sheet:** None.
+- **Full-read catches:** Photographer profiles ("DJ Hartley" for gritty street docs, "Arman Gutiérrez" for formal portraits). Uses FLUX.2 pro via Together AI. `assignPhotos` caps photos at 6 per edition and strictly follows editorial hierarchy.
+
+### `pipelineLogger.js` (pipelineLogger_, lib) — FULL-READ
+- **Gate:** Invoked across pipeline steps to maintain a chronological event log.
+- **Layer 1:** N/A.
+- **Layer 2:** N/A.
+- **Cross-sheet:** None.
+- **Full-read catches:** Writes to `output/pipeline-log/pipeline_c{XX}.jsonl`. Embeds `correlationId: E{cycle}-{Date.now()}` on every entry. Includes a CLI to summarize execution runtimes.
+
+### `memoryFence.js` (memoryFence_, lib) — FULL-READ
+- **Gate:** Phase 40.6 Layer 2 defense-in-depth context isolation.
+- **Layer 1:** N/A.
+- **Layer 2:** N/A.
+- **Cross-sheet:** None.
+- **Full-read catches:** Uses a regex sanitizer to explicitly strip `<memory-context>` elements from payloads before injecting them to ensure injected prose cannot fake exiting the fence (direct port of Hermes Agent's memory manager).
+
+### `personaProvider.js` (personaProvider_, lib) — FULL-READ
+- **Gate:** S270 engine-sheet boundary. Drains Discord sessions via `drainConversationReflection_`.
+- **Layer 1:** Uses `classifier.classifyTripleReflection_` to analyze buffered conversational replies, enforcing a 30-minute idle-flush boundary.
+- **Layer 2:** Handles tension mirroring: resolves tensions by writing to `citizenPage` and logs new tensions to local `TENSION_FILE` (evicting oldest open on cap = 3).
+- **Cross-sheet:** Appends one positional A-H row to `Reflection_Intake` (daypart='DISCORD', applied='no').
+- **Full-read catches:** Fails open. The conversational chat is explicitly NOT written to the reflection `citizenPage` (chat is conversation, not reflection). Discord buffer is resilient across PM2 restarts.
+
+### `provocationBank.js` (provocationBank_, lib) — FULL-READ
+- **Gate:** Evaluates `needs(sig)` against the citizen's signals to selectively route prompts (no faked signals).
+- **Layer 1:** Pulls deterministically from the bank based on `hash53_(popId|cycle|daypart)`.
+- **Layer 2:** N/A.
+- **Cross-sheet:** None.
+- **Full-read catches:** Preserves "Honest gap" by providing infer-light prompts for media/leisure instead of hallucinating per-citizen media consumption not supported by the engine.
+
+### `coverageAnchorRetirements.js` (coverageAnchorRetirements_, lib) — FULL-READ
+- **Gate:** S235 engine.25. Detects retired anchors matching framing keywords in generated text.
+- **Layer 1:** Substring-based text scan over an editorial lede scope (`EDITORIAL_LEDE_SCOPE_CHARS = 1500`) against a proximity window (`PROXIMITY_WINDOW_CHARS = 400`).
+- **Layer 2:** N/A.
+- **Cross-sheet:** None. 
+- **Full-read catches:** Centralized registry (`RETIRED_ANCHORS`) prevents retired anchors (e.g., Beverly Hayes / POP-00772) from appearing in poverty-doc frames. Includes visual `avoidSubjectClasses` for photo enforcement. Emits the string block via `renderConventionBlock` to embed conventions inline in wd-citizen cards.
+
+### `citizenDials.js` (citizenDials_, lib) — FULL-READ
+- **Gate:** Read-only perception parsing logic (Engine.31/S262). Does not mutate state.
+- **Layer 1:** Converts `DialState` JSON (`base` + `mood`) into 0-100 values. Outputs semantic arrays using `POLES` language descriptors.
+- **Layer 2:** N/A.
+- **Cross-sheet:** None.
+- **Full-read catches:** Skips the 40-60 neutral range (returns 'even-keeled, unremarkable'). Exposes a `deviation(cur)` calculator to identify strongly shaped citizens.
+
+### `getCurrentCycle.js` (getCurrentCycle_, lib) — FULL-READ
+- **Gate:** Execution blocking; crashes immediately if no valid cycle context exists (no silent wrong defaults).
+- **Layer 1:** Resolves cycle order from 1) argv, 2) `output/desk-packets/base_context.json`.
+- **Layer 2:** N/A.
+- **Cross-sheet:** None.
+- **Full-read catches:** Enforces an env-tag guard verifying that `bc.source.sheetId` perfectly matches `GODWORLD_SHEET_ID` to strictly prevent sandbox runs clobbering production files (S306 incident).
+
+### `neighborhoodSlice.js` (neighborhoodSlice_, lib) — FULL-READ
+- **Gate:** Unifies baseline briefs and voice-workspaces to prevent drift.
+- **Layer 1:** Aggregates tier-sorted residents per neighborhood alongside tracking cell deltas `(value - prev)`.
+- **Layer 2:** N/A.
+- **Cross-sheet:** Reads `Simulation_Ledger` and `Neighborhood_Map` array inputs.
+- **Full-read catches:** Explicitly surfaces housing pressure and median income in the string output so citizen voices cannot invent structural struggles contrary to the simulation (C95 West Oakland failure mode). Note that `trajectory` replaces `gentrification`.
+
+### `initiativePhaseContract.js` (initiativePhaseContract_, lib) — FULL-READ
+- **Gate:** Civic.14 Phase 2/3 validator for raw implementation phases.
+- **Layer 1:** Processes phases through `canonicalizePhase` attempting an exact match, variant map match, substring match, or partial token map.
+- **Layer 2:** Links explicit `PHASE_INTENSITY` values (-1.0 to +1.0) governing civic impact ripples.
+- **Cross-sheet:** None.
+- **Full-read catches:** Negative phases (`stalled`, `blocked`, `defunded`) can be entered from any state. `LIFECYCLE` arc governs progression validations. Unresolvable phases correctly return a zero/null state that stops invalid values from writing to the sheet.
+
+### `staleness.js` (staleness_, lib) — FULL-READ
+- **Gate:** Pre-flight gate evaluating derivative artifacts against authoritative baselines.
+- **Layer 1:** Calculates pure `fs.statSync` modification times. 
+- **Layer 2:** N/A.
+- **Cross-sheet:** None.
+- **Full-read catches:** Solves S215 pipeline loss where civic state updates executed after artifact rendering. If baseline doesn't exist, staleness returns `false` since it isn't authoritative yet.
+
+### `economicLookup.js` (economicLookup_, lib) — FULL-READ
+- **Gate:** Read-only data mapper for node/Apps Script engine layers.
+- **Layer 1:** Calculates incomes using weighted-median random distributions (60% close to median, 40% full range spread) combined with tier, career, and retirement multipliers.
+- **Layer 2:** `deriveWealthLevel` calculates 0-10 index scales including 5% net-worth yield logic.
+- **Cross-sheet:** None.
+- **Full-read catches:** Identifies retired roles (`isRetiredRole`) via regex. Fails gracefully to `null` if the target is `SPORTS_OVERRIDE` or unmapped.
+
+### `districtMap.js` (districtMap_, lib) — FULL-READ
+- **Gate:** Maps Oakland neighborhoods to council districts.
+- **Layer 1:** Returns flat arrays or null matches over `DISTRICT_NEIGHBORHOODS`.
+- **Layer 2:** N/A.
+- **Cross-sheet:** None.
+- **Full-read catches:** Incorporates S256 canon correction moving KONO from D2 to D7 to match `INSTITUTIONS` files and attribute logic correctly to Warren Ashford.
+
+### `citizenPage.js` (citizenPage_, lib) — FULL-READ
+- **Gate:** Wake-side only I/O layer. **NEVER** called from the cycle path to prevent breaking RNG reproducibility invariants.
+- **Layer 1:** Interacts heavily with `Supermemory` v3 API via GET/POST to manage isolated text reflections.
+- **Layer 2:** `ensurePagePointer_` guarantees that `Simulation_Ledger` AW (`SMPageId`) is populated with the pointer tag `cp-POP-XXXXX`.
+- **Cross-sheet:** Denormalizes page pointer directly into `Simulation_Ledger` AW.
+- **Full-read catches:** Overrides the v4 hybrid search via list/GET `recentPage_` fallback due to a silent failure mode where exact docs were completely missed. Idempotent appends (`customId` keyed by popId+cycle+daypart). Consumers must provide the `memoryFence`.
+
+### `wakePerception.js` (wakePerception_, lib) — FULL-READ
+- **Gate:** Generates input representations to be digested by LLMs. Read-only canon access (nothing writes from this module).
+- **Layer 1:** Extrapolates perception across varied modules: dial parsing, Supermemory read-backs, A's team notes, bonds, and neighborhood slices.
+- **Layer 2:** N/A.
+- **Cross-sheet:** Scans `LifeHistory_Log`, `Oakland_Sports_Feed`, `Relationship_Bonds`, and `Simulation_Ledger`.
+- **Full-read catches:** `recentEventMagnitude` dampens the severity of events chronologically `(0.8 ^ age)` to ensure real impacts survive ambient fillers. Implements strict guards against missing `RoleType` vs `Occupation` columns to prevent default 'resident' flattening (S300 fix).
+
+### `mags.js` (mags_, lib) — FULL-READ
+- **Gate:** Central identity loader for Mags' operations and discord-bot interactions.
+- **Layer 1:** Distills orientation knowledge (`world_summary_c{NN}.md`), archive metrics, and recent reflections.
+- **Layer 2:** N/A.
+- **Cross-sheet:** `loadFamilyData` parses `Simulation_Ledger` for specific `FAMILY_POP_IDS`.
+- **Full-read catches:** Filters `loadRecentReflections` for `### Nightly Reflection` directly, dropping terminal operator entries so the simulation identity is untainted (S252 fix). Uses a `searchDisk` method executing raw system `grep` for zero API-cost file checks. Contains env-sheet verification hooks `warnIfForeignBaseContext` to catch sandbox clobberings.
+
 
 ## Residuals (narrow — tuning/depth, not a rebuild)
 

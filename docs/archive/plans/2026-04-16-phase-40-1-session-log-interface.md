@@ -5,12 +5,12 @@ updated: 2026-04-17
 type: plan
 tags: [engine, architecture, complete]
 sources:
-  - docs/engine/PHASE_40_PLAN.md §40.1
+  - docs/engine/archive/PHASE_40_PLAN.md §40.1
   - docs/RESEARCH.md — paper 3 ("the session is not Claude's context window")
   - MEMORY.md — feedback_rollout-pointers-not-notes.md
 pointers:
-  - "[[engine/PHASE_40_PLAN]] — parent phase doc"
-  - "[[engine/ROLLOUT_PLAN]] — step 9 of the spine"
+  - "[[engine/archive/PHASE_40_PLAN]] — parent phase doc"
+  - "[[engine/archive/ROLLOUT_PLAN]] — step 9 of the spine"
   - "[[plans/TEMPLATE]] — shape this plan follows"
 ---
 
@@ -24,7 +24,7 @@ pointers:
 
 **Pointers:**
 - Prior work: the durable-log pattern itself is already in production — `output/production_log_edition_c91.md` and peers have ~6 months of structured step headings (`## Step 0: Session State`, `## Step 1: World Summary`, etc.).
-- Related plan: [[engine/PHASE_40_PLAN]] §40.2 (reporter-as-cattle refactor) depends on this. A crashed reporter resumes by calling `readSince(log, lastKnownTimestamp)`.
+- Related plan: [[engine/archive/PHASE_40_PLAN]] §40.2 (reporter-as-cattle refactor) depends on this. A crashed reporter resumes by calling `readSince(log, lastKnownTimestamp)`.
 - Research basis: `docs/RESEARCH.md` — paper 3 (Anthropic session-not-context framing). Specific quote: "the session is not Claude's context window."
 
 **Acceptance criteria:**
@@ -119,7 +119,7 @@ pointers:
 ### Task 8: Back-link from parent phase doc and register in index
 
 - **Files:**
-  - `docs/engine/PHASE_40_PLAN.md` — modify
+  - `docs/engine/archive/PHASE_40_PLAN.md` — modify
   - `docs/index.md` — modify
 - **Steps:**
   1. In PHASE_40_PLAN.md §40.1, append a line pointing to `[[archive/plans/2026-04-16-phase-40-1-session-log-interface]]` as the execution plan. Add a changelog entry dated today.
@@ -185,5 +185,5 @@ Grep across `scripts/` and `.claude/skills/` for `production_log_` and `JOURNAL.
 
 ## Changelog
 
-- 2026-04-16 — Initial draft (S156, research-build terminal). Scoped from [[engine/PHASE_40_PLAN]] §40.1. Deliberately narrow: one library, three readers, one migration proof. Task 1 inventory gates the rest — if no ad-hoc readers exist, the phase is premature and should be rescoped.
+- 2026-04-16 — Initial draft (S156, research-build terminal). Scoped from [[engine/archive/PHASE_40_PLAN]] §40.1. Deliberately narrow: one library, three readers, one migration proof. Task 1 inventory gates the rest — if no ad-hoc readers exist, the phase is premature and should be rescoped.
 - 2026-04-16 — Implemented (S156, engine-sheet terminal). All 7 active tasks done (Task 1 inventory was already complete in this plan; `readByTag` dropped per resolution above, so Task 5 skipped). `lib/sessionLog.js` ships `readLast` + `readSince`. 17/17 tests passing on synthetic + real production logs and JOURNAL.md. Session-end SKILL.md:107 migrated as proof. PHASE_40_PLAN.md and docs/index.md updated.

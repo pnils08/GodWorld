@@ -358,7 +358,7 @@ Voices govern. Projects hallucinate operational details within the political fra
 | Mara (Result Validity Lane, 0.2) | 39.5, external | Own Supermemory MCP (mara + bay-tribune + world-data) on claude.ai | Step 5 |
 | Final Arbiter | 39.7 | Reads the four lane JSONs | Step 5.5 |
 
-Lane schema contract: `docs/engine/REVIEWER_LANE_SCHEMA.md` — four fields (process / outcome / controllableFailures / uncontrollableFailures) every reviewer JSON must satisfy.
+Lane schema contract: `docs/engine/archive/REVIEWER_LANE_SCHEMA.md` — four fields (process / outcome / controllableFailures / uncontrollableFailures) every reviewer JSON must satisfy.
 
 ---
 

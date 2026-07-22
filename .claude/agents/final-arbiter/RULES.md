@@ -69,7 +69,7 @@ For every lane where `outcome = 0` OR the lane had any `controllableFailures`, O
 }
 ```
 
-**Controllable vs uncontrollable** (per `docs/engine/REVIEWER_LANE_SCHEMA.md`):
+**Controllable vs uncontrollable** (per `docs/engine/archive/REVIEWER_LANE_SCHEMA.md`):
 - `controllable = true` when the failing check appears in the lane's `controllableFailures` list.
 - `controllable = false` when it appears in `uncontrollableFailures` (environment blockers — sheet outage, API timeout, missing canon).
 

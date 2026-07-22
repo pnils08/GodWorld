@@ -11,7 +11,7 @@ sources:
   - editions/cycle_pulse_dispatch_92_kono_second_song.txt (canonical fixture)
   - output/pdfs/bay_tribune_dispatch_c92_kono_second_song.pdf (visual-review fixture)
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout (gap-log entry replaced by this plan)"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout (gap-log entry replaced by this plan)"
   - "[[plans/2026-04-26-non-edition-publishing-pipeline]] — sibling plan; this set is the engine-sheet starter file when that one promotes to active"
   - "[[EDITION_PIPELINE]] §Published `.txt` Format Contract — CUL-ID enumeration landed S189"
   - "../canon/CANON_RULES.md — canon-fidelity rule layer"

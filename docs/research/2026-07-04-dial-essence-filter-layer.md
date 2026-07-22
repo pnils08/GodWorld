@@ -10,7 +10,7 @@ sources:
   - utilities/citizenDialMap.js (`getCitizenDialBands_` — the engine-logic filter: bands + multipliers, never raw floats)
   - scripts/citizen-wake.js:361 (the one live LLM-facing call site: `dials.disposition(c.cur)`)
   - grep sweep S291: zero hits for `DialState` in any `.claude/skills/` or `.claude/agents/` file — no LLM-facing bypass exists
-  - docs/engine/ROLLOUT_PLAN.md:124 (research.22 row — Mike-direct S286 close)
+  - docs/engine/archive/ROLLOUT_PLAN.md:124 (research.22 row — Mike-direct S286 close)
 pointers:
   - "[[../engine/ROLLOUT_PLAN]] — research.22"
   - "[[index]] — register here, same commit"

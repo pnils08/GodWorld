@@ -49,8 +49,8 @@
 |------|---------|------|------------|-----------|
 | `CLAUDE.md` | Zero layer — identity refs, work file index, rules index, session lifecycle | Boot | Manual (rare) | All |
 | `SESSION_CONTEXT.md` | Tools, infrastructure, last 5 sessions (under 300 lines). Engine versions + cascade deps moved to DOCUMENTATION_LEDGER S144. | Startup | `/session-end` Step 4 | P, D, X |
-| `docs/engine/ROLLOUT_PLAN.md` | **Single source for all project work.** Next priorities, build phases, deferred items, watch list | On-Demand | `/session-end` Step 4 | P, D |
-| `docs/engine/ROLLOUT_ARCHIVE.md` | Completed phase details (moved from ROLLOUT_PLAN when done) | On-Demand | Manual (when phases complete) | P |
+| `docs/engine/archive/ROLLOUT_PLAN.md` | **Single source for all project work.** Next priorities, build phases, deferred items, watch list | On-Demand | `/session-end` Step 4 | P, D |
+| `docs/engine/archive/ROLLOUT_ARCHIVE.md` | Completed phase details (moved from ROLLOUT_PLAN when done) | On-Demand | Manual (when phases complete) | P |
 | `README.md` | Project structure, 11-phase engine, tech stack, quick start | On-Demand | Manual (rare) | P, D |
 | `docs/reference/V3_ARCHITECTURE.md` | Technical contract — ctx shape, write-intents spec, phase order | On-Demand | Manual (rare) | D |
 | `docs/reference/DEPLOY.md` | Deployment guide (clasp vs git) | On-Demand | Manual (rare) | D |
@@ -72,12 +72,15 @@
 
 | File | Purpose | Tier | Updated By | Workflows |
 |------|---------|------|------------|-----------|
-| `docs/engine/LEDGER_AUDIT.md` | Simulation_Ledger integrity — audit history, decisions, citizen tracking | On-Demand | Manual (during audits) | X |
-| `docs/engine/LEDGER_REPAIR.md` | Recovery history (S68-S94), post-recovery fixes (S99), process for future major sheet upgrades, full column reference (46 cols A–AT) | On-Demand | Manual (during maintenance) | X |
-| `docs/engine/LEDGER_HEAT_MAP.md` | Sheet bloat risk rankings, dead column inventory, archival strategy | On-Demand | Manual (during audits) | X |
-| `docs/engine/SHEETS_MANIFEST.md` | Sheet listing — all tabs in the Simulation_Narrative spreadsheet | On-Demand | Manual (rare) | D, X |
-| `docs/engine/INSTITUTIONAL_VOICE_AGENTS.md` | Architecture spec for civic voice agent system (Phase 10.1) | On-Demand | Manual (when agents change) | D, M |
-| `docs/engine/ENGINE_MAP.md` | Condensed stub reference — every exported function across 11 phases, ctx reads/writes, dependencies | On-Demand | `/stub-engine` skill | D |
+| `docs/engine/ENGINE_COUPLING_MAP.md` | **CORE TRUTH**: Maps every script, phase execution, and sheet dependency. | On-Demand | Manual | D, P, X |
+| `docs/engine/SIMULATION_LEDGER_COL_MAP.md` | **CORE TRUTH**: Comprehensive mapping of all Simulation_Ledger columns. | On-Demand | Manual | D, X |
+| `docs/engine/ENGINE_STUB_REVERSE.md` | **CORE TRUTH**: Token-efficient script function index. | On-Demand | Manual | D, P |
+| `docs/engine/CRON_PIPELINE_MAP.md` | **CORE TRUTH**: 24/7 Operations cron logic, pipeline dependencies, and LLM rate-limits. | On-Demand | Manual | D, P |
+| `docs/engine/GEOGRAPHY_CLUSTER_MAP.md` | **CORE TRUTH**: Neighborhood clusters, districts, and geographic ripple bleeding. | On-Demand | Manual | D, P |
+| `docs/engine/AGENT_TOPOLOGY_MAP.md` | **CORE TRUTH**: The LLM persona roster, governance boundaries, and data handoff. | On-Demand | Manual | D, M |
+| `docs/engine/SHEETS_MANIFEST.md` | Master registry of all Google Sheets in the ecosystem. | On-Demand | Manual | D, X |
+| `docs/engine/TAG_REGISTRY.md` | Dictionary of valid simulation tags and dial parameters. | On-Demand | Manual | D, X |
+| `docs/engine/EVENT_SYSTEM_MAP.md` | System map of how events ripple through the engine. | On-Demand | Manual | D, P |
 | `scripts/post-cycle-review.js` | Post-cycle review script for engine output analysis | On-Demand | Manual (after cycle runs) | D, X |
 | `docs/engine/DOCUMENTATION_LEDGER.md` | **This file.** Registry of all active docs | On-Demand | `/session-end` (when files change) | All |
 | `output/DISK_MAP.md` | Local disk map — directory structure, naming conventions, Drive destinations, retention policy | On-Demand | `/session-end` cleanup or manual | M, D, X |

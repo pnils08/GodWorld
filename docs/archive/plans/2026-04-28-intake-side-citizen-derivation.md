@@ -5,15 +5,15 @@ updated: 2026-04-28
 type: plan
 tags: [engine, citizens, architecture, done]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md §Open Work Items ("DESIGN: Lifecycle defaults..." line 66 + "DESIGN: RoleType preferred upon intake" line 67)
-  - docs/engine/ENGINE_REPAIR.md Row 4 (lifecycle defaults DONE S184) + Row 17 (RoleType sentinel DONE S184)
+  - docs/engine/archive/ROLLOUT_PLAN.md §Open Work Items ("DESIGN: Lifecycle defaults..." line 66 + "DESIGN: RoleType preferred upon intake" line 67)
+  - docs/engine/archive/ENGINE_REPAIR.md Row 4 (lifecycle defaults DONE S184) + Row 17 (RoleType sentinel DONE S184)
   - phase05-citizens/processAdvancementIntake.js (Path B fallback shipped S184)
   - phase07-evening-media/mediaRoomIntake.js (upstream writer with 'Citizen' literal)
   - scripts/backfillLifecycleDefaults.js (djb2 + CDF reference implementation)
   - data/economic_parameters.json (S69 — 198-entry profile pool)
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout"
-  - "[[engine/ENGINE_REPAIR]] — Rows 4 + 17 are the prequel"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout"
+  - "[[engine/archive/ENGINE_REPAIR]] — Rows 4 + 17 are the prequel"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — register in same commit"
 ---

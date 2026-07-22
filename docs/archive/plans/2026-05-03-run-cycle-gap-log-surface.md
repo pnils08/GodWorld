@@ -9,10 +9,10 @@ sources:
   - .claude/terminals/engine-sheet/TERMINAL.md (§Session Close rule loosened S198)
   - output/production_log_*c93_*gaps.md (the 6 existing gap logs from other skills)
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout"
   - "[[archive/plans/2026-05-03-c93-gap-triage-execution]] — Wave 4 parent"
   - "[[SCHEMA]] — doc conventions"
-  - "[[engine/ENGINE_REPAIR]] — companion tracker for engine defects across sessions (different shape — gap log captures cycle-run observations, ENGINE_REPAIR tracks cross-session defects)"
+  - "[[engine/archive/ENGINE_REPAIR]] — companion tracker for engine defects across sessions (different shape — gap log captures cycle-run observations, ENGINE_REPAIR tracks cross-session defects)"
 ---
 
 # /run-cycle Gap-Log Observation Surface Plan

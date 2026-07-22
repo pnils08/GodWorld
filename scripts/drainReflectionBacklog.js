@@ -23,7 +23,7 @@
  *   node scripts/drainReflectionBacklog.js            # dry-run (inspect)
  *   node scripts/drainReflectionBacklog.js --commit   # apply to the live sheet
  *
- * Registered: docs/engine/ROLLOUT_PLAN.md §research.14 (manual-lever pointer).
+ * Registered: docs/engine/archive/ROLLOUT_PLAN.md §research.14 (manual-lever pointer).
  */
 require("../lib/env");
 const { getRawSheetData, batchUpdate } = require("../lib/sheets.js");

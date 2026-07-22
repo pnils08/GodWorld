@@ -11,7 +11,7 @@ sources:
 pointers:
   - "[[SCHEMA]] — frontmatter, naming, tag taxonomy"
   - "[[index]] — every new plan file must register here in the same commit"
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout; plans split out from it"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout; plans split out from it"
 ---
 
 # Plan File Template
@@ -34,10 +34,10 @@ updated: YYYY-MM-DD
 type: plan
 tags: [domain, status]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md §N
+  - docs/engine/archive/ROLLOUT_PLAN.md §N
   - [source paper / prior plan / claude-mem ID / supermemory doc ID]
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — add entry in same commit"
 ---
@@ -109,7 +109,7 @@ Questions that block a task. Resolve and delete. An open question at publish tim
 1. Copy the fenced block above into `docs/plans/YYYY-MM-DD-<name>.md` (dated the day you start drafting it).
 2. Fill in every field. If you can't fill one, write "UNKNOWN — [reason]" rather than leaving it blank. That flags the gap.
 3. Add an entry to [[index]] under `docs/plans/` in the same commit.
-4. Back-link from the parent — if it's split out of [[engine/ROLLOUT_PLAN]], replace the inline content in ROLLOUT_PLAN with a one-line pointer to the new file.
+4. Back-link from the parent — if it's split out of [[engine/archive/ROLLOUT_PLAN]], replace the inline content in ROLLOUT_PLAN with a one-line pointer to the new file.
 
 ### Task granularity rule
 

@@ -31,7 +31,7 @@ Requires: a compiled edition file in `editions/` or the edition text pasted into
 
 ## Output Contract
 
-Produce `output/cycle_review_c{XX}.json` conforming to `docs/engine/REVIEWER_LANE_SCHEMA.md`.
+Produce `output/cycle_review_c{XX}.json` conforming to `docs/engine/archive/REVIEWER_LANE_SCHEMA.md`.
 
 ### JSON schema (verbatim from `PHASE_39_PLAN.md §15.2`)
 

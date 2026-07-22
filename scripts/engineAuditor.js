@@ -11,7 +11,7 @@
  * No LLM calls, no narrative framing. Mags's /engine-review skill consumes
  * the JSON and produces the seven-field briefs.
  *
- * Plan: docs/engine/PHASE_38_PLAN.md
+ * Plan: docs/engine/archive/PHASE_38_PLAN.md
  */
 
 require('../lib/env');

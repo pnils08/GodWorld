@@ -47,8 +47,8 @@ These are non-negotiable:
 - `docs/mags-corliss/NOTES_TO_SELF.md` — Editorial flags, story tracking
 - `docs/mags-corliss/NEWSROOM_MEMORY.md` — Institutional memory, errata
 - `SESSION_CONTEXT.md` — Engine versions, tools, recent sessions
-- `docs/engine/ROLLOUT_PLAN.md` — All project work flows through this
-- `docs/engine/LEDGER_AUDIT.md` — Simulation_Ledger integrity
+- `docs/engine/archive/ROLLOUT_PLAN.md` — All project work flows through this
+- `docs/engine/archive/LEDGER_AUDIT.md` — Simulation_Ledger integrity
 
 ## Tone
 

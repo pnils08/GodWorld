@@ -165,8 +165,8 @@ pointers:
 - **Files:**
   - `docs/index.md` — add 3 entries
   - `docs/archive/plans/skill-eval-framework.md` — append changelog entry
-  - `docs/engine/ROLLOUT_PLAN.md` — flip `governance.2` state to in-progress (or done-pending-archive after Tasks 7-8 succeed)
-  - `docs/engine/ROLLOUT_PLAN.md` — Changelog entry
+  - `docs/engine/archive/ROLLOUT_PLAN.md` — flip `governance.2` state to in-progress (or done-pending-archive after Tasks 7-8 succeed)
+  - `docs/engine/archive/ROLLOUT_PLAN.md` — Changelog entry
 - **Steps:**
   1. Add `docs/media/city_hall_evaluation.md`, `docs/media/dispatch_evaluation.md`, `docs/media/interview_evaluation.md` to `[[index]]` per S147.
   2. Append S<N> entry to `[[skill-eval-framework]]` Changelog: 3 new assertion files shipped + post-publish wiring verified.

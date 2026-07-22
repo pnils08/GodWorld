@@ -11,7 +11,7 @@ sources:
   - docs/plans/GAP_LOG_TRIAGE_PLAYBOOK.md (the 8-step method this executes)
   - docs/archive/plans/2026-06-20-c98-gap-log-triage.md (governance.41 — prior cycle, structural template)
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout (governance.42 single pointer row)"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout (governance.42 single pointer row)"
   - "[[GAP_LOG_TRIAGE_PLAYBOOK]] — method"
   - "[[2026-06-01-initiative-tracker-contract]] — civic.14, where the trackerUpdates cluster folds"
   - "[[SCHEMA]] — doc conventions"
@@ -30,7 +30,7 @@ pointers:
 
 **Pointers:**
 - Prior cycle: [[../archive/plans/2026-06-20-c98-gap-log-triage]] (governance.41)
-- Folds into: [[2026-06-01-initiative-tracker-contract]] (civic.14 Phases 2–3), [[engine/ENGINE_REPAIR]] / engine.8 / engine.29 / pipeline.13
+- Folds into: [[2026-06-01-initiative-tracker-contract]] (civic.14 Phases 2–3), [[engine/archive/ENGINE_REPAIR]] / engine.8 / engine.29 / pipeline.13
 
 **Acceptance criteria:**
 1. Every C99 gap appears exactly once in this plan — in a phase, a fold, the watch bucket, or out-of-scope. No orphans.

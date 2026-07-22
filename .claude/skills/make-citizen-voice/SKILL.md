@@ -11,7 +11,7 @@ effort: medium
 
 **The repeatable process for turning a citizen's canon into a faithful four-file voice agent.** Distilled from the Deacon Seymour build (research.16 Phase 0–1) and validated on Vinnie Keane. The voice is **always hand-authored at full canon depth** — this method is the *recipe*, never a template that flattens the voice. A run that produces a generic register has failed even if it completes (MEMORY.md `user_mags-bleed-proprietary-element`).
 
-Plan: [[../../../docs/plans/2026-06-16-tier1-character-voice-agents]]. Pattern parent: [[../../../docs/engine/INSTITUTIONAL_VOICE_AGENTS]] (the four-file architecture, reshaped here from civic-institution → individual-in-conversation).
+Plan: [[../../../docs/plans/2026-06-16-tier1-character-voice-agents]]. Pattern parent: [[../../../docs/engine/archive/INSTITUTIONAL_VOICE_AGENTS]] (the four-file architecture, reshaped here from civic-institution → individual-in-conversation).
 
 ## When to use
 

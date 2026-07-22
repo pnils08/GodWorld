@@ -4,6 +4,10 @@
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
+**Reverse index (field/sheet → functions):** [[ENGINE_STUB_REVERSE]] + `ENGINE_STUB_REVERSE.json`
+
+**Entrypoint:** [[COUPLING_INDEX]]
+
 **Convention:** `S.X` is an alias for `ctx.summary.X` used throughout the engine.
 
 ---
@@ -44,6 +48,7 @@
 - **updateWorldPopulation_(ctx)**
   Reads: S.cityDynamics, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.weather, S.worldEvents
   Writes: S.worldPopulation
+  Sheets: World_Population
   RNG: ctx.rng / safeRand_(ctx)
 
 - **padStart_(str, targetLength, padChar)**
@@ -285,6 +290,7 @@
 - **calculateTrafficModLocal_(context)**
 
 - **loadPreviousCycleEvents_(ctx, currentCycle)**
+  Sheets: WorldEvents_Ledger
 
 - **countMajorEvents_(worldEvents)**
 
@@ -332,6 +338,7 @@
   Reads: S.absoluteCycle, S.cycleId, S.cycleRef, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.neighborhoodState, S.previousCycleState, S.season, S.sportsSeason, S.transitState, S.weatherEvents
   Writes: S.auditIssues, S.crisisArcsActive, S.eventArcs, S.eventsGenerated, S.worldEvents
   Config: ctx.config.cycleCount
+  Sheets: Event_Arc_Ledger
 
 - **getResolutionConditions_(category)**
 
@@ -440,12 +447,14 @@
 - **pickNeighborhoodTarget_(rng, ctx)**
 
 - **writeCitizenEvent_(ctx, target, vehicle, outcome, cycle, text)**
+  Sheets: LifeHistory_Log
 
 - **accumulateBusinessEvent_(ctx, target, impacts, magnitudesByColumn)**
   Writes: S.chaosBusinessFold
 
 - **flushBusinessFold_(ctx)**
   Reads: S.chaosBusinessFold, S.chaosNeighborhoodFold, S.neighborhoodPulse
+  Sheets: Business_Ledger
 
 - **accumulateNeighborhoodFold_(ctx, hood, impacts, magnitudesByColumn)**
   Writes: S.chaosNeighborhoodFold
@@ -477,8 +486,10 @@
 - **rngFrom(seed)**
 
 - **makeCtx(seed)**
+  Sheets: Business_Ledger
 
 - **reset()**
+  Sheets: Business_Ledger, LifeHistory_Log, Neighborhood_Map
 
 ### eventArcEngine.js
 - **getCurrentCycle_(ctx)**
@@ -533,6 +544,7 @@
   Reads: S.cityDynamics, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.neighborhoodWeather, S.previousEvening, S.season, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventsGenerated, S.microEvents, S.sportsAtmosphereEnabled
   Config: ctx.config.cycleCount, ctx.config.rngSeed
+  Sheets: LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
 
 ### generationalEventsEngine.js
@@ -598,6 +610,7 @@
 
 - **applyMilestone_(ctx, row, iLife, iLastU, milestone, name, popId, neighborhood, cycle, cal)**
   Reads: S.generationalEvents
+  Sheets: LifeHistory_Log
 
 - **getOrdinal_(n)**
 
@@ -625,6 +638,7 @@
 - **assert(label, cond, detail)**
 
 - **ctxWith(cycle, cc, bl)**
+  Sheets: Business_Ledger
 
 ### applyGameNightMoments.js
 - **gameNightBucket_(entry)**
@@ -659,7 +673,7 @@
 - **ensureBondEngineData_(ctx)**
   Reads: S.citizenEvents, S.eventArcs, S.storySeeds, S.worldEvents
   Writes: S.cycleActiveCitizens
-  Sheets: Citizen_Directory
+  Sheets: Citizen_Directory, Simulation_Ledger
   RNG: ctx.rng / safeRand_(ctx)
 
 - **findColIndex_(headers, possibleNames)**
@@ -772,6 +786,7 @@
 - **saveV3BondsToLedger_(ctx)**
   Reads: S.cycleId, S.relationshipBonds
   Config: ctx.config.cycleCount
+  Sheets: Relationship_Bond_Ledger
 
 - **diagnoseBondEngine()**
   Sheets: Citizen_Directory, Relationship_Bonds
@@ -908,6 +923,7 @@
   Sheets: Simulation_Ledger
 
 - **diagnoseLedgerStructure()**
+  Sheets: Cultural_Ledger, Generic_Citizens, LifeHistory_Log, Relationship_Bonds, Simulation_Ledger, World_Population
 
 - **getCitizensForQuotes(neighborhood, count)**
   Sheets: Generic_Citizens
@@ -957,6 +973,7 @@
   Reads: S.activeRipples
 
 - **createInitiativeTrackerSheet_(ss)**
+  Sheets: Initiative_Tracker
 
 - **addSwingVoter2Columns()**
   Sheets: Initiative_Tracker
@@ -1001,6 +1018,7 @@
   Reads: S.cycleId
 
 - **stampPromotion_(ctx, row, iLife, iLastU, iPop, iFirst, iLast, iNb, iOcc, verb, years, cycle)**
+  Sheets: LifeHistory_Log
 
 - **updateCareerProgression_(ctx, cycle, rng)**
 
@@ -1171,7 +1189,7 @@
 - **updateHeritage_(ss, ctx, cycle)**
   Reads: S.homesPurchasedByLine
   Writes: S.heritage, S.storyHooks
-  Sheets: Business_Ledger, Family_Relationships, Heritage_Ledger
+  Sheets: Business_Ledger, Cultural_Ledger, Family_Relationships, Heritage_Ledger
   RNG: ctx.rng / safeRand_(ctx)
 
 ### householdFormationEngine.js
@@ -1277,6 +1295,7 @@
 - **pickDemographicVoiceRole_(seed)**
 
 - **markUsageProcessed_(ctx, usageSheet, row1, col1, value)**
+  Sheets: Citizen_Media_Usage
 
 - **processAdvancementIntake_(ctx)**
   Reads: S.cycleId, S.relationshipBonds
@@ -1358,7 +1377,7 @@
   Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.weather, S.weatherMood, S.worldEvents
   Writes: S.careerEvents, S.careerSignals, S.eventsGenerated
   Config: ctx.config.cycleCount, ctx.config.rngSeed
-  Sheets: Business_Ledger
+  Sheets: Business_Ledger, LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
 
 ### runCivicElectionsv1.js
@@ -1374,6 +1393,7 @@
   Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.weather, S.weatherMood, S.worldEvents
   Writes: S.civicRoleEvents, S.eventsGenerated
   Config: ctx.config.cycleCount
+  Sheets: LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
 
 ### runConductEngine.js
@@ -1381,6 +1401,7 @@
   Reads: S.absoluteCycle, S.crimeMetrics, S.cycleId, S.economicMood, S.neighborhoodState
   Writes: S.conductEvents, S.eventsGenerated
   Config: ctx.config.cycleCount
+  Sheets: LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
 
 ### runEducationEngine.js
@@ -1396,6 +1417,7 @@
   Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventsGenerated, S.householdEvents
   Config: ctx.config.cycleCount
+  Sheets: LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
 
 ### runNeighborhoodEngine.js
@@ -1403,12 +1425,14 @@
   Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventsGenerated, S.neighborhoodAssignments, S.neighborhoodDriftEvents
   Config: ctx.config.cycleCount
+  Sheets: LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
 
 ### runRelationshipEngine.js
 - **runRelationshipEngine_(ctx)**
   Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.season, S.weather, S.weatherEventPools, S.worldEvents
   Writes: S.cycleActiveCitizens, S.eventsGenerated
+  Sheets: LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
 
 - **getCitizenBonds_(ctx, citizenId)**
@@ -1450,6 +1474,7 @@
 
 - **recordYouthLifeHistory_(ctx, events)**
   Reads: S.absoluteCycle
+  Sheets: LifeHistory_Log
 
 - **getYouthStorySignals_(ctx)**
   Reads: S.youthEvents
@@ -1462,6 +1487,7 @@
   RNG: ctx.rng / safeRand_(ctx)
 
 - **createRelationshipBondsSheet_(ss)**
+  Sheets: Relationship_Bonds
 
 - **createSeedBond_(citizenA, citizenB, type, intensity, origin, cycle, rng)**
 
@@ -1788,6 +1814,7 @@
   Reads: S.cityDynamics, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.sportsSeason
   Writes: S.culturalEntityCreates, S.culturalEntityUpdates, S.culturalRegistry
   Config: ctx.config.cycleCount
+  Sheets: Cultural_Ledger
   RNG: ctx.rng / safeRand_(ctx)
 
 - **resolveLedgerPopId_(ctx, name)**
@@ -2042,6 +2069,7 @@
 - **createChaosArcs_(ctx)**
   Reads: S.tier1ChaosEvents
   Config: ctx.config.cycleCount
+  Sheets: Storyline_Tracker
 
 - **loadActiveStorylinesForWeaving_(ss)**
   Sheets: Storyline_Tracker
@@ -2160,6 +2188,7 @@
 - **saveV3Domains_(ctx)**
   Reads: S.cycleId, S.domainPresence, S.dominantDomain, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.sportsSeason
   Config: ctx.config.cycleCount
+  Sheets: Domain_Tracker
 
 - **deriveDomainPresenceV34_(ctx)**
   Reads: S.cityDynamics, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.sportsSeason, S.storyHooks, S.storySeeds, S.weather, S.worldEvents
@@ -2194,6 +2223,7 @@
 - **saveV3NeighborhoodMap_(ctx)**
   Reads: S.chaosNeighborhoodFold, S.cityDynamics, S.cycleId, S.demographicDrift, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.migrationDrift, S.neighborhoodDynamics, S.neighborhoodPulse, S.sportsSeason, S.storyHooks, S.storySeeds, S.v3Arcs, S.weather, S.worldEvents
   Config: ctx.config.cycleCount
+  Sheets: Neighborhood_Map
   RNG: ctx.rng / safeRand_(ctx)
 
 - **ensureNeighborhoodMapSchemaAppendOnly_(ss, sheetName, headers)**
@@ -2206,6 +2236,7 @@
 - **saveV3Hooks_(ctx)**
   Reads: S.cycleId, S.storyHooks
   Config: ctx.config.cycleCount
+  Sheets: Story_Hook_Deck
 
 ### v3TextureWriter.js
 - **saveV3Textures_(ctx)**
@@ -2325,10 +2356,12 @@
 - **extractCouncilMembers_(officers)**
 
 - **loadInitiatives_(cache)**
+  Sheets: Initiative_Tracker
 
 - **loadPlayerRosters_(cache)**
 
 - **loadRecentQuotes_(cache, cycle)**
+  Sheets: LifeHistory_Log
 
 - **loadCulturalEntities_(cache)**
 
@@ -2390,10 +2423,13 @@
 - **fullExportAndMirror()**
 
 - **exportRileyDigest()**
+  Sheets: Riley_Digest
 
 - **exportWorldPopulation()**
+  Sheets: World_Population
 
 - **exportSimulationLedger()**
+  Sheets: Simulation_Ledger
 
 - **exportContinuityLog()**
 
@@ -2402,6 +2438,7 @@
 - **sheetToText_(sheet)**
 
 - **formatMirrorEntry_(sheetName, cycle, sheet)**
+  Sheets: Riley_Digest, World_Population
 
 - **getOrCreateExportFolder_()**
 
@@ -2443,6 +2480,7 @@
 - **recordCycleWeather_(ctx)**
   Reads: S.absoluteCycle, S.cycleId, S.weather, S.weatherSummary, S.weatherTracking
   Config: ctx.config.cycleCount
+  Sheets: Cycle_Weather
 
 - **ensureCycleWeatherSheet_(ss)**
 
@@ -2492,6 +2530,7 @@
 - **saveV3Seeds_(ctx)**
   Reads: S.contractSeeds, S.cycleId
   Config: ctx.config.cycleCount
+  Sheets: Story_Seed_Deck
 
 ## Phase 11: Media Intake (`phase11-media-intake/`)
 
@@ -2802,6 +2841,7 @@
 - **saveCycleSeed_(ctx)**
   Reads: S.cycleId, S.holiday, S.weather, S.worldEvents, S.worldPopulation
   Config: ctx.config.cycleCount
+  Sheets: Cycle_Seeds
 
 - **loadCycleSeed_(ss, cycleId)**
   Sheets: Cycle_Seeds
@@ -2817,6 +2857,7 @@
 
 ### cycleRollback.js
 - **rollbackToCycle78()**
+  Sheets: Election_Log, Generic_Citizens, Initiative_Tracker, LifeHistory_Log, Neighborhood_Demographics, Relationship_Bonds, Riley_Digest, Story_Hook_Deck, Story_Seed_Deck, WorldEvents_Ledger, WorldEvents_V3_Ledger
 
 - **deleteRowsAfterCycle_(ss, sheetName, cycleColName, targetCycle)**
 
@@ -2830,6 +2871,7 @@
   Sheets: World_Config
 
 - **previewRollbackToCycle78()**
+  Sheets: Election_Log, Initiative_Tracker, LifeHistory_Log, Relationship_Bonds, Riley_Digest, Story_Hook_Deck, Story_Seed_Deck, WorldEvents_Ledger, WorldEvents_V3_Ledger
 
 - **countRowsAfterCycle_(ss, sheetName, cycleColName, targetCycle)**
 
@@ -2897,6 +2939,7 @@
 
 ### ensureNeighborhoodDemographics.js
 - **ensureNeighborhoodDemographicsSchema_(ss)**
+  Sheets: Neighborhood_Demographics
 
 - **getNeighborhoodDemographics_(ss)**
   Sheets: Neighborhood_Demographics
@@ -3070,6 +3113,7 @@
 ### rippleLedger.test.js
 - **assert(name, cond)**
   Reads: S.cycleId
+  Sheets: Ripple_Ledger
 
 ### rosterLookup.js
 - **loadRoster_()**

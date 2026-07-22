@@ -113,7 +113,7 @@ const STEM_MIN_LENGTH = 3;
 
 function basenameForms(bn) {
   // For 'foo.md' returns ['foo.md', 'foo'] — wiki convention strips extensions
-  // ('[[engine/LEDGER_REPAIR_HOUSEHOLDS]]' references LEDGER_REPAIR_HOUSEHOLDS.md).
+  // ('[[engine/archive/LEDGER_REPAIR_HOUSEHOLDS]]' references LEDGER_REPAIR_HOUSEHOLDS.md).
   // For dotfiles (.bashrc, .gitignore) returns just ['.bashrc'] — no separate stem.
   const parsed = path.parse(bn);
   if (parsed.ext === '' || !parsed.name || parsed.name.length < STEM_MIN_LENGTH) {

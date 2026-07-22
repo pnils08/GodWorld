@@ -190,13 +190,13 @@ pointers:
 ### Task 11: File follow-up ROLLOUT row + register plan + flip governance.14
 
 - **Files:**
-  - `docs/engine/ROLLOUT_PLAN.md` — modify (file new pipeline.32 row + flip governance.14 state)
+  - `docs/engine/archive/ROLLOUT_PLAN.md` — modify (file new pipeline.32 row + flip governance.14 state)
   - `docs/index.md` — modify (register governance.14 plan if not already done at T5)
 - **Steps:**
   1. File new ROLLOUT row in pipeline.* group: `pipeline.32` — Per-skill production-log path cascade execution (G-EPD3 implementation half). Scope: 5-7 skills (/city-hall-prep + /city-hall + /sift + /write-edition + /post-publish) read/write `output/production_log_c<XX>.md` unified path; current C94 reverted to per-terminal split (production_log_edition_c94.md + production_log_city_hall_c94_*.md both exist). Tag for engine-sheet/civic execution against the convention recorded by governance.14 / EDITION_PIPELINE.md §Production Log Lifecycle. State `ready`. Pointer: governance.14 plan + EDITION_PIPELINE.md §Production Log Lifecycle.
   2. Flip governance.14 row state `ready` → `done-pending-archive` with inline close notes citing T1-T10 deliverables + the pipeline.32 follow-up filed + the 2 Mike rulings applied + advisor scope-cuts honored (G-EPD8 dropped, per-skill cascade split).
   3. Register governance.14 plan + production_log_template.md in `docs/index.md` (if T5 didn't already cover both).
-- **Verify:** `grep -nE "^\| pipeline\.32 \|^\| governance\.14 \|" docs/engine/ROLLOUT_PLAN.md` → pipeline.32 row exists + governance.14 row state=done-pending-archive; `grep -n "governance-14-edition-pipeline-rewrite\|production_log_template" docs/index.md` → both registered.
+- **Verify:** `grep -nE "^\| pipeline\.32 \|^\| governance\.14 \|" docs/engine/archive/ROLLOUT_PLAN.md` → pipeline.32 row exists + governance.14 row state=done-pending-archive; `grep -n "governance-14-edition-pipeline-rewrite\|production_log_template" docs/index.md` → both registered.
 - **Status:** [x] DONE S230
 
 ---

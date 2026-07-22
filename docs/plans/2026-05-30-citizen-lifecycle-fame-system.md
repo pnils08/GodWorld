@@ -5,7 +5,7 @@ updated: 2026-05-30
 type: plan
 tags: [engine, citizens, ledger, fame, lifecycle, active]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md §engine.* (engine.5 expansion)
+  - docs/engine/archive/ROLLOUT_PLAN.md §engine.* (engine.5 expansion)
   - S248 Mike-direct design session (engine-sheet) — death-by-age, ClockMode authority, fame decay + ascension, Cultural_Ledger correction
   - "[[../engine/LEDGER_REPAIR_HOUSEHOLDS]] — Representative Sample model (1 tracked : 438 real); engine life-event simulation"
   - "[[../engine/ENGINE_REPAIR]] Row 23 (citizen lives frozen / simYear), Row 24 (career drift-freeze)"

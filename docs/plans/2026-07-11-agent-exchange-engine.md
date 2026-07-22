@@ -5,12 +5,12 @@ updated: 2026-07-11
 type: plan
 tags: [citizens, citizen-loop, voice-agents, engine, media, draft]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md §engine.53
+  - docs/engine/archive/ROLLOUT_PLAN.md §engine.53
   - docs/plans/2026-07-06-citizen-loop-deepening.md §Task 6 + §Task 7 (the spec this generalizes — S312 amendment)
   - scripts/citizen-wake.js (read end-to-end S312 — the write-discipline reference)
   - .claude/skills/interview/SKILL.md (session interview format; matchCitizenToJournalist_ pointer)
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout (engine.53)"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout (engine.53)"
   - "[[2026-07-06-citizen-loop-deepening]] — engine.48; its Task 6/7 build lands HERE instead (see amendment note there)"
   - "[[2026-07-04-voice-dial-sync-contract-build]] — engine.43 sibling (Reflection_Intake discipline)"
   - "[[index]] — registered same commit"

@@ -5,12 +5,12 @@ updated: 2026-07-11
 type: plan
 tags: [engine, citizens, health, draft]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md §engine.52
+  - docs/engine/archive/ROLLOUT_PLAN.md §engine.52
   - phase04-events/generationalEventsEngine.js (health state machine, read S312)
   - phase03-population/applyDemographicDrift.js (illnessRate drift, read S312)
   - scripts/buildDeskPackets.js §S256 arc-feed removal comment (~L2068) — Mike's standing rebuild decision
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout (engine.52)"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout (engine.52)"
   - "[[engine/ENGINE_COUPLING_MAP]] — health/composure dial couplings verified there"
   - "[[SIMULATION_LEDGER]] — Status / StatusStartCycle / HealthCause columns"
   - "[[index]] — registered same commit"
@@ -150,7 +150,7 @@ pointers:
 ## Parked (explicitly out of scope — do not fold in)
 
 - **Injury inflow from world events** (SAFETY/TRAFFIC city events injuring sampled citizens) — real coupling gap, separate row when this ships.
-- **Named hospital institution page / staff citizens** (doctors, nurses as Tier-3s) — publication-driven materialization per [[engine/LEDGER_REPAIR_HOUSEHOLDS]] model; earn it through coverage first.
+- **Named hospital institution page / staff citizens** (doctors, nurses as Tier-3s) — publication-driven materialization per [[engine/archive/LEDGER_REPAIR_HOUSEHOLDS]] model; earn it through coverage first.
 - **Neighborhood-level hospital load differentials** — one hospital citywide until census data suggests otherwise.
 
 ## Open questions

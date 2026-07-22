@@ -8,7 +8,7 @@ sources:
   - docs/adr/0014-citizen-self-authorship-live-drift.md — the decision this plan executes
   - docs/research/2026-07-04-voice-dial-sync-contract.md — the audit + evidence base
   - docs/research/2026-07-06-citizen-loop-deepening.md — S298 pressure-test that produced the Task 4/5 amendments
-  - docs/engine/ROLLOUT_PLAN.md — engine.43 row
+  - docs/engine/archive/ROLLOUT_PLAN.md — engine.43 row
 pointers:
   - "[[../engine/ROLLOUT_PLAN]] — engine.43"
   - "[[../adr/0014-citizen-self-authorship-live-drift]] — Research/decision basis"
@@ -108,7 +108,7 @@ pointers:
 
 - **Files:**
   - `docs/plans/2026-06-16-tier1-character-voice-agents.md` — modify (Phase 3 description + the `research.16` ROLLOUT-row mirror inside the file)
-  - `docs/engine/ROLLOUT_PLAN.md` — modify (engine.43 row: point to this plan + ADR-0014)
+  - `docs/engine/archive/ROLLOUT_PLAN.md` — modify (engine.43 row: point to this plan + ADR-0014)
 - **Steps:**
   1. In the tier1-character-voice-agents plan, mark the base-lock line (§180-ish, "authored base is LOCKED... needs engine-sheet base-lock mechanism") as **superseded by ADR-0014** — do not delete the historical record, annotate it.
   2. Update the `engine.43` ROLLOUT_PLAN.md row to point at this plan doc + ADR-0014 instead of the bare Mike-direct-S286 pointer.

@@ -11,7 +11,7 @@ sources:
 pointers:
   - "[[EDITION_PIPELINE]] — the FROZEN edition path (kept runnable, no new investment)"
   - "[[research/2026-07-11-desk-slice-fork]] — why every seam is shaped the way it is"
-  - "[[engine/ROLLOUT_PLAN]] — pipeline.44 state"
+  - "[[engine/archive/ROLLOUT_PLAN]] — pipeline.44 state"
   - "[[index]] — registered same commit"
 ---
 

@@ -6,13 +6,13 @@ type: plan
 tags: [media, infrastructure, active]
 sources:
   - docs/research/briefing_bloat_audit_2026-04-17.md — audit findings that motivate this work
-  - docs/engine/ROLLOUT_PLAN.md §Edition Production (orphan items) — bloat audit + versioning lines
+  - docs/engine/archive/ROLLOUT_PLAN.md §Edition Production (orphan items) — bloat audit + versioning lines
   - scripts/buildDeskPackets.js — packet builder, lines 2500-2590 assemble the packet object
   - scripts/buildDeskFolders.js — folder assembler, reads summary.json at line 408
   - .claude/skills/post-publish/SKILL.md — post-cycle skill, add-point for versioning hook
 pointers:
   - "[[research/briefing_bloat_audit_2026-04-17]] — the audit this plan addresses"
-  - "[[engine/ROLLOUT_PLAN]] — rollout items this closes"
+  - "[[engine/archive/ROLLOUT_PLAN]] — rollout items this closes"
   - "[[plans/TEMPLATE]] — shape"
   - "[[EDITION_PIPELINE]] — pipeline v2 context"
 ---

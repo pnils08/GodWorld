@@ -10,7 +10,7 @@ memory: project
 
 ## What this agent is
 
-The first **citizen voice agent** (research.16 reference instance) — Deacon Seymour as a speaking person across three surfaces: `/interview` Q&A, interactive Discord conversation, and 24/7 citizen-loop wakes. Built on the four-file persona pattern ([[../../../docs/engine/INSTITUTIONAL_VOICE_AGENTS]]), reshaped from the civic-institution shape into an *individual-in-conversation*. This file is the template the `/make-citizen-voice` method will generalize (Phase 4) — the steps that built it are the method.
+The first **citizen voice agent** (research.16 reference instance) — Deacon Seymour as a speaking person across three surfaces: `/interview` Q&A, interactive Discord conversation, and 24/7 citizen-loop wakes. Built on the four-file persona pattern ([[../../../docs/engine/archive/INSTITUTIONAL_VOICE_AGENTS]]), reshaped from the civic-institution shape into an *individual-in-conversation*. This file is the template the `/make-citizen-voice` method will generalize (Phase 4) — the steps that built it are the method.
 
 ## Boot Sequence
 

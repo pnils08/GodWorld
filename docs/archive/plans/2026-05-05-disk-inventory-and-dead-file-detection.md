@@ -12,7 +12,7 @@ sources:
   - .claude/skills/context-budget/SKILL.md — uses claude-batch MCP (precedent for batch invocation)
   - docs/archive/plans/2026-04-21-md-audit-skill.md — prior staleness-detector plan as shape reference
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — register in same commit"
   - "[[archive/plans/2026-04-21-md-audit-skill]] — sibling plan, narrower scope (docs/ only)"
@@ -164,7 +164,7 @@ pointers:
 
 - **Files:**
   - `docs/index.md` — modify
-  - `docs/engine/ROLLOUT_PLAN.md` — modify
+  - `docs/engine/archive/ROLLOUT_PLAN.md` — modify
 - **Steps:**
   1. Add an entry under `docs/plans/` listing this plan with a one-line summary + status tag.
   2. Add an entry to ROLLOUT priority list (or under the relevant Open Work Items subsection) pointing at this plan, tagged `(promoted: C<XX>, severity: MEDIUM)`.

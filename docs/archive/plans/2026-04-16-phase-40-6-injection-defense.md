@@ -5,14 +5,14 @@ updated: 2026-04-17
 type: plan
 tags: [engine, security, complete]
 sources:
-  - docs/engine/PHASE_40_PLAN.md §40.6
+  - docs/engine/archive/PHASE_40_PLAN.md §40.6
   - docs/RESEARCH.md — paper 4 ("Defending against attacks")
   - docs/mags-corliss/JOURNAL.md — Entry 123 (S144 memory-poisoning pressure test)
   - /tmp/hermes-agent/agent/memory_manager.py (lines 42-66 — memory fencing)
   - /tmp/hermes-agent/agent/prompt_builder.py (lines 35-85 — regex scan)
 pointers:
-  - "[[engine/PHASE_40_PLAN]] — parent phase doc §40.6"
-  - "[[engine/ROLLOUT_PLAN]] — step 9 of the spine"
+  - "[[engine/archive/PHASE_40_PLAN]] — parent phase doc §40.6"
+  - "[[engine/archive/ROLLOUT_PLAN]] — step 9 of the spine"
   - "[[archive/plans/2026-04-16-phase-40-1-session-log-interface]] — sibling step-9 plan"
   - "[[plans/TEMPLATE]] — shape"
 ---
@@ -166,12 +166,12 @@ pointers:
 ### Task 10: Back-link from parent phase doc and register in index
 
 - **Files:**
-  - `docs/engine/PHASE_40_PLAN.md` — modify ✓
+  - `docs/engine/archive/PHASE_40_PLAN.md` — modify ✓
   - `docs/index.md` — modify ✓
 - **Steps:**
   1. ✓ PHASE_40_PLAN §40.6 carries the execution-plan pointer; changelog line added dated 2026-04-16.
   2. ✓ `docs/index.md` carries the plan entry under `docs/plans/`.
-- **Verify:** `grep -c "phase-40-6-injection-defense" docs/engine/PHASE_40_PLAN.md docs/index.md` returns 2 and 1 respectively.
+- **Verify:** `grep -c "phase-40-6-injection-defense" docs/engine/archive/PHASE_40_PLAN.md docs/index.md` returns 2 and 1 respectively.
 - **Status:** [x] done — S156
 
 ---

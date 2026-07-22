@@ -5,7 +5,7 @@ updated: 2026-06-19
 type: plan
 tags: [engine, citizens, events, dials, opinion, draft]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md — engine.38 (this plan's row)
+  - docs/engine/archive/ROLLOUT_PLAN.md — engine.38 (this plan's row)
   - docs/plans/2026-05-31-life-event-generation.md — engine.32 (T8 fan-out, dial-band loop)
   - docs/plans/2026-06-04-mags-citizen-loop.md — research.14 (wake/opinion loop + the 9pm affect-fix)
   - phase05-citizens/generateCitizensEvents.js:148-157 — the LIMIT=25 / cycleActiveCitizens participation throttle (live)
@@ -13,7 +13,7 @@ sources:
   - phase04-events/buildCityEvents.js:607 — cityEvents count = rng()<0.3?2:1 (supply cap)
   - claude-mem 31652 (named citizens excluded from T8) / 31656 (C98 coverage measure)
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout (engine.38)"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout (engine.38)"
   - "[[plans/2026-05-31-life-event-generation]] — engine.32, the event/dial substrate this extends"
   - "[[plans/2026-06-04-mags-citizen-loop]] — research.14, the opinion loop + valence precondition"
   - "[[SCHEMA]] — doc conventions"

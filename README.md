@@ -126,8 +126,8 @@ GodWorld/
 | [PROJECT_GOALS.md](docs/reference/PROJECT_GOALS.md) | Core automation concept and architecture |
 | [GODWORLD_REFERENCE.md](docs/reference/GODWORLD_REFERENCE.md) | Complete system reference |
 | [V3_ARCHITECTURE.md](docs/reference/V3_ARCHITECTURE.md) | Technical design contract |
-| [ROLLOUT_PLAN.md](docs/engine/ROLLOUT_PLAN.md) | Single source for all project work — active, pending, deferred |
-| [ENGINE_MAP.md](docs/engine/ENGINE_MAP.md) | Every function across all 11 phases |
+| [ROLLOUT_PLAN.md](docs/engine/archive/ROLLOUT_PLAN.md) | Single source for all project work — active, pending, deferred |
+| [ENGINE_MAP.md](docs/engine/archive/ENGINE_MAP.md) | Every function across all 11 phases |
 | [MEDIA_ROOM_STYLE_GUIDE.md](docs/media/MEDIA_ROOM_STYLE_GUIDE.md) | Newsroom voice, Paulson canon, data rules, editorial chain |
 | [DESK_PACKET_PIPELINE.md](docs/media/DESK_PACKET_PIPELINE.md) | Edition pipeline: packets → workspaces → agents → compile → verify |
 | [DOCUMENTATION_LEDGER.md](docs/engine/DOCUMENTATION_LEDGER.md) | File registry — every active doc, its purpose, load tier |

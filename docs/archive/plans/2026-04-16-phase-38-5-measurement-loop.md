@@ -5,12 +5,12 @@ updated: 2026-04-17
 type: plan
 tags: [engine, complete]
 sources:
-  - docs/engine/PHASE_38_PLAN.md §8 (38.5 out-of-scope note) + §16.5 (downstream follow-ups)
-  - docs/engine/ROLLOUT_PLAN.md §Phase 38 item 38.5 — "Measurement loop. Each ailment flagged gets a 'check next cycle' entry with specific fields to watch."
+  - docs/engine/archive/PHASE_38_PLAN.md §8 (38.5 out-of-scope note) + §16.5 (downstream follow-ups)
+  - docs/engine/archive/ROLLOUT_PLAN.md §Phase 38 item 38.5 — "Measurement loop. Each ailment flagged gets a 'check next cycle' entry with specific fields to watch."
   - MEMORY.md — feedback_detector-framer-split.md (S146 pattern)
 pointers:
-  - "[[engine/PHASE_38_PLAN]] — parent phase doc (contains §§4, 14, 15, 16 enricher pattern this extends)"
-  - "[[engine/ROLLOUT_PLAN]] — old spine step 8; splitting out now"
+  - "[[engine/archive/PHASE_38_PLAN]] — parent phase doc (contains §§4, 14, 15, 16 enricher pattern this extends)"
+  - "[[engine/archive/ROLLOUT_PLAN]] — old spine step 8; splitting out now"
   - "[[archive/plans/2026-04-16-phase-38-6-skill-shrink]] — downstream skill edit that consumes this enricher's output"
   - "[[plans/TEMPLATE]] — shape this plan follows"
 ---
@@ -140,12 +140,12 @@ pointers:
 ### Task 9: Update PHASE_38_PLAN.md with 38.5 section
 
 - **Files:**
-  - `docs/engine/PHASE_38_PLAN.md` — modify
+  - `docs/engine/archive/PHASE_38_PLAN.md` — modify
 - **Steps:**
   1. Append a `## 18. Phase 38.5 — Measurement loop` section using the §14/§15/§16 shape. Cover goal, files, schema, logic, acceptance criteria, out-of-scope.
   2. Update the plan's top-of-file pointers frontmatter to add the 38.5 spine reference.
   3. Add a changelog line: `2026-04-16 — Appended §18 (Phase 38.5 measurement loop). Implemented S??? per [[archive/plans/2026-04-16-phase-38-5-measurement-loop]].`
-- **Verify:** `grep -c "Phase 38.5" docs/engine/PHASE_38_PLAN.md` returns ≥ 2 (one in TOC/header, one in new section).
+- **Verify:** `grep -c "Phase 38.5" docs/engine/archive/PHASE_38_PLAN.md` returns ≥ 2 (one in TOC/header, one in new section).
 - **Status:** [x] done — S156
 
 ---

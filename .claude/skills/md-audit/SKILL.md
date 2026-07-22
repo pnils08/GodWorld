@@ -25,7 +25,7 @@ Writes report to `output/md_audit_<YYYY-MM-DD>.md`.
 Walks `docs/` (excludes `docs/archive/`, `docs/drive-files/`, `docs/research/papers/`). For each `.md`:
 
 1. Git mtime via `git log -1 --format=%ct` — falls back to filesystem mtime if not in git.
-2. Counts inbound references across `docs/**/*.md`, `.claude/**/*.md`, `CLAUDE.md`, `MEMORY.md`, `CONTEXT.md`, `SESSION_CONTEXT.md`, `README.md`. Matches both wikilinks (`[[engine/ROLLOUT_PLAN]]`) and literal paths (`docs/engine/ROLLOUT_PLAN.md`).
+2. Counts inbound references across `docs/**/*.md`, `.claude/**/*.md`, `CLAUDE.md`, `MEMORY.md`, `CONTEXT.md`, `SESSION_CONTEXT.md`, `README.md`. Matches both wikilinks (`[[engine/archive/ROLLOUT_PLAN]]`) and literal paths (`docs/engine/archive/ROLLOUT_PLAN.md`).
 3. Marks referrers as "active" if they were touched in the last `--active-days` window (default 30).
 
 Then classifies each doc into one of five buckets (first-match-wins):

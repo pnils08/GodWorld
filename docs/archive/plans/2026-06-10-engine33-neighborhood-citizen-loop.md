@@ -5,7 +5,7 @@ updated: 2026-06-10
 type: plan
 tags: [engine, active]
 sources:
-  - docs/engine/ROLLOUT_PLAN.md — engine.33 row (S255 Mike-direct direction note)
+  - docs/engine/archive/ROLLOUT_PLAN.md — engine.33 row (S255 Mike-direct direction note)
   - S256 design-session inventory (this plan's §Inventory)
 pointers:
   - "[[../engine/ROLLOUT_PLAN]] — parent rollout (engine.33 row)"
@@ -158,7 +158,7 @@ pointers:
 
 - **Files:**
   - `docs/engine/ENGINE_STUB_MAP.md` — regen (`/stub-engine`) in the commit that adds/changes functions
-  - `docs/engine/ROLLOUT_PLAN.md` — engine.33 row → `done-pending-archive` at completion
+  - `docs/engine/archive/ROLLOUT_PLAN.md` — engine.33 row → `done-pending-archive` at completion
   - `.claude/terminals/engine-sheet/TERMINAL.md` §Current Engine State — note loop landing + deploy status
   - `docs/index.md` — this plan registered (done at plan commit)
 - **Steps:**

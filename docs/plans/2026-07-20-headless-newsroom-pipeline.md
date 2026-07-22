@@ -10,7 +10,7 @@ sources:
   - "scripts/cron-desk-writer.js — writer-worker prototype, proven c101 sports S325"
   - ".claude/agents/source-search/SKILL.md — retrieval layer (S326); .claude/agents/rhea-morgan — canon gate"
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — registered same commit"
 ---

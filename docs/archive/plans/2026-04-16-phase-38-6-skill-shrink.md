@@ -5,11 +5,11 @@ updated: 2026-04-17
 type: plan
 tags: [engine, media, complete]
 sources:
-  - docs/engine/PHASE_38_PLAN.md §6 (first-pass skill rewrite) and §16.5 (second-pass)
+  - docs/engine/archive/PHASE_38_PLAN.md §6 (first-pass skill rewrite) and §16.5 (second-pass)
   - .claude/skills/engine-review/SKILL.md Step 7 — current measurement check logic
   - MEMORY.md — feedback_detector-framer-split.md (S146 pattern — skill shrinks as detectors learn)
 pointers:
-  - "[[engine/PHASE_38_PLAN]] — parent phase doc"
+  - "[[engine/archive/PHASE_38_PLAN]] — parent phase doc"
   - "[[archive/plans/2026-04-16-phase-38-5-measurement-loop]] — enricher whose output this skill consumes"
   - "[[plans/TEMPLATE]] — shape this plan follows"
 ---
@@ -109,11 +109,11 @@ pointers:
 ### Task 7: Back-link from PHASE_38_PLAN.md
 
 - **Files:**
-  - `docs/engine/PHASE_38_PLAN.md` — modify
+  - `docs/engine/archive/PHASE_38_PLAN.md` — modify
 - **Steps:**
   1. In §16.5 "Pipeline impact downstream," append a line noting that the measurement-check portion of the skill-shrink work lives in this plan, with a [[archive/plans/2026-04-16-phase-38-6-skill-shrink]] pointer.
   2. Add a changelog line dated today.
-- **Verify:** Grep for the wikilink: `grep "phase-38-6-skill-shrink" docs/engine/PHASE_38_PLAN.md` returns 1+.
+- **Verify:** Grep for the wikilink: `grep "phase-38-6-skill-shrink" docs/engine/archive/PHASE_38_PLAN.md` returns 1+.
 - **Status:** [x] done S156
 
 ---

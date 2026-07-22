@@ -9,9 +9,9 @@ sources:
   - https://github.com/Agent-on-the-Fly/Memento
   - docs/RESEARCH.md §"S170 — Adaptive Thinking Doc + Scan Correction" (adjacent research, same session)
   - docs/research4_1.md (bounded-memory shelf this extends)
-  - docs/engine/PHASE_39_PLAN.md (reviewer chain producing the reward signal this plan captures)
+  - docs/engine/archive/PHASE_39_PLAN.md (reviewer chain producing the reward signal this plan captures)
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout (entry under Other Ready Work)"
+  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout (entry under Other Ready Work)"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — register in same commit"
   - "[[research4_1]] — bounded-memory research this plan operationalises"
@@ -27,7 +27,7 @@ pointers:
 **Terminal:** research-build (Phases 1 + 4 design/eval) · engine-sheet (Phase 2 + 4 build) · media (Phase 2 post-publish hook wiring)
 
 **Pointers:**
-- Prior work: `docs/research/papers/Memento_fine_tuning.pdf` (the paper), `docs/engine/PHASE_39_PLAN.md` (reviewer chain — source of reward signal)
+- Prior work: `docs/research/papers/Memento_fine_tuning.pdf` (the paper), `docs/engine/archive/PHASE_39_PLAN.md` (reviewer chain — source of reward signal)
 - Related plan: [[plans/BACKLOG]] §Phase 21 (local-model agents — potential Shape A full custom harness, out of scope here)
 - Research basis: arXiv:2508.16153v2 (Memento), `docs/research4_1.md` (bounded-memory shelf)
 

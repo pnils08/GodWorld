@@ -10,7 +10,7 @@ This is the single source of truth for every simulated person in the main ledger
 
 **S256 engine.31/.32 live deploy notes:** LifeHistory (col O) **cleared** for all 904 citizens — full history (4051 entries) archived to `LifeHistory_Archive` (rows 567–4617, schema Timestamp/POPID/Name/EventTag/EventText/Neighborhood/Cycle). DialState seeded via dampened back-date fold (`scripts/backdateCitizenDials.js`). Col O now accumulates fresh entries per cycle; live fold-on-trim compressor (engine.32) folds + archives on overflow. Citizen-card milestones read archive + O (`scripts/buildCitizenCards.js`).
 
-**Authoritative current-state pointer:** `docs/engine/LEDGER_AUDIT.md` — refreshed via `scripts/auditSimulationLedger.js` (engine-sheet's lane). Last refresh S234 (captures S232 canon.3 T9 backfill +22 rows + NEW pending-Status drift + lowercase 'active' regression). Headline counts in this doc are approximate; LEDGER_AUDIT is ground truth for tier/status/POPID-gap distributions.
+**Authoritative current-state pointer:** `docs/engine/archive/LEDGER_AUDIT.md` — refreshed via `scripts/auditSimulationLedger.js` (engine-sheet's lane). Last refresh S234 (captures S232 canon.3 T9 backfill +22 rows + NEW pending-Status drift + lowercase 'active' regression). Headline counts in this doc are approximate; LEDGER_AUDIT is ground truth for tier/status/POPID-gap distributions.
 
 Last audited: Session 250 (2026-06-01, real-time refresh via `auditSimulationLedger.js`) — total 903. Tier: T1 21 / T2 64 / T3 210 / T4 608 (T4 +45 vs S234 = the S243 youth seed). Status: 872 Active + 22 pending + 9 Retired (the S234 lowercase 'active' sentinel has since normalized to Active). Prior: S234 (858; S232 canon.3 T9 backfill POP-00958..00973 + 6 squatter realignments).
 
@@ -300,10 +300,10 @@ The UNI, MED, and CIV columns contain "Yes"/"yes"/"No"/"no"/"n" values. The engi
 
 | Doc | What it covers |
 |-----|---------------|
-| `docs/engine/LEDGER_AUDIT.md` | Full audit history (S68-S72), decisions, census details |
-| `docs/engine/LEDGER_REPAIR.md` | S92-S94 corruption recovery, 5-step plan, post-recovery fixes |
+| `docs/engine/archive/LEDGER_AUDIT.md` | Full audit history (S68-S72), decisions, census details |
+| `docs/engine/archive/LEDGER_REPAIR.md` | S92-S94 corruption recovery, 5-step plan, post-recovery fixes |
 | `docs/SPREADSHEET.md` | All 65 sheet tabs including SL context |
-| `docs/engine/ENGINE_MAP.md` | Every engine function in execution order |
+| `docs/engine/archive/ENGINE_MAP.md` | Every engine function in execution order |
 | `scripts/queryFamily.js` | Quick family check at boot |
 | `scripts/queryLedger.js` | 6 query types against SL + editions |
 | `scripts/buildMaraReference.js` | Generates citizen roster from SL for Mara |

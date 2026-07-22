@@ -2510,6 +2510,13 @@ function generateCitizensEvents_(ctx) {
         var clLines = contentLedger.lines[clk];
         for (var cli = 0; cli < clLines.length; cli++) {
           var clEntry = clLines[cli];
+          // S329 (fix-broken sweep): per-cycle ROW draw cap — first telemetry
+          // cycle showed one universal skeleton (baseDaily.rehearsal) drawing
+          // 359x while 135 eligible rows never drew. A row that has already
+          // drawn 40x this cycle stops entering later citizens' pools; the
+          // long tail gets the probability mass instead. Soft: hardcoded
+          // pools unaffected, cap generous vs ~700 active citizens.
+          if ((eclTelemetry.draws[eclRowKey_(clk, clEntry.text)] || 0) >= 40) continue;
           if (!evalContentConditions_(clEntry.conditions, condScopes)) continue;
           if (!contentSlotsFillable_(clEntry, contentLedger, condScopes)) continue;
           var clTags = clEntry.grain ? mergeTags(clEntry.tags, ["grain:" + clEntry.grain]) : clEntry.tags;

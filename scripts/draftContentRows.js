@@ -248,10 +248,15 @@ const norm = s => String(s || '').toLowerCase().replace(/[^a-z0-9 ]/g, '').repla
 
 // A hood= gate naming a non-neighborhood (council district, typo) parses fine
 // but can never match a citizen row — dead gating the loader can't catch.
-// Reject unless the value is a real Neighborhood_Map name.
+// Reject unless the value is a real Neighborhood_Map name. S329 (engine.78b
+// residual closed): also reject MULTIPLE ANDed hood= terms — each parses as a
+// valid term but a citizen has exactly one hood, so the conjunction can never
+// be true for anyone (first live OpenRouter run produced exactly this).
 function hoodGateValid(conditions, hoodNames) {
-  const m = String(conditions || '').match(/hood\s*(?:=|!=)\s*([^;]+)/);
-  if (!m) return true;
+  const all = String(conditions || '').match(/hood\s*(?:=|!=)\s*[^;]+/g);
+  if (!all) return true;
+  if (all.length > 1) return false;
+  const m = all[0].match(/hood\s*(?:=|!=)\s*([^;]+)/);
   return hoodNames.has(m[1].trim());
 }
 

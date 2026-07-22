@@ -23,7 +23,9 @@ const { getRawSheetData } = require('../lib/sheets');
 const SHEET = 'Story_Seed_Deck';
 const MIN_CYCLE = 89;
 const DOMINANCE_THRESHOLD = 0.5;
-const OUTPUT_PATH = path.join(__dirname, '..', 'output', 'routing_diagnosis_c93.md');
+// S329: was hardcoded routing_diagnosis_c93.md — now stamped with the latest
+// cycle actually present in the deck (resolved in main after the read).
+const outputPathFor = (cycle) => path.join(__dirname, '..', 'output', `routing_diagnosis_c${cycle}.md`);
 
 function tally(rows, keyFn) {
   const out = {};
@@ -61,8 +63,15 @@ async function main() {
     if (i < 0) throw new Error(`Missing header: ${name}`);
     return i;
   };
+  // S329: v4 deck renamed SeedType -> Class (major|texture). Resolve either
+  // header so the diagnostic runs on both sides of the migration instead of
+  // crashing on the live v4 deck (sift v2.2 dual-schema convention).
+  const idxEither = (...names) => {
+    for (const n of names) { const i = headers.indexOf(n); if (i >= 0) return i; }
+    throw new Error(`Missing header: tried ${names.join(' / ')}`);
+  };
   const cycleCol = idx('Cycle');
-  const seedTypeCol = idx('SeedType');
+  const seedTypeCol = idxEither('SeedType', 'Class');
   const domainCol = idx('Domain');
   const journalistCol = idx('SuggestedJournalist');
 
@@ -178,9 +187,10 @@ async function main() {
   lines.push(`Across ${cycles.length} cycle(s) (${cycles[0]}–${cycles[cycles.length - 1]}), top byline **${topByline}** drew ${topCount} of ${active.length} seeds (${topPct}%). ${domainRows.length} (domain, journalist) pair(s) clear the ${(DOMINANCE_THRESHOLD * 100).toFixed(0)}% dominance threshold; ${seedTypeRows.length} (seedType, journalist) pair(s) clear it.`);
   lines.push('');
 
-  fs.mkdirSync(path.dirname(OUTPUT_PATH), { recursive: true });
-  fs.writeFileSync(OUTPUT_PATH, lines.join('\n'));
-  console.log(`Wrote ${OUTPUT_PATH}`);
+  const outPath = outputPathFor(cycles.length ? cycles[cycles.length - 1] : 'latest');
+  fs.mkdirSync(path.dirname(outPath), { recursive: true });
+  fs.writeFileSync(outPath, lines.join('\n'));
+  console.log(`Wrote ${outPath}`);
   console.log(`Active rows: ${active.length}`);
   console.log(`Top byline: ${topByline} (${topCount}, ${topPct}%)`);
   console.log(`Domain dominance pairs: ${domainRows.length}`);

@@ -30,6 +30,14 @@
  * Dedup: normalized text vs existing tab rows + within batch.
  * Provenance: every written row carries auth:auto in Tags (sweepable).
  *
+ * engine.78b: pool-key universe extended to evening.* (evening.nightlife,
+ * evening.food, evening.cityEvent) — the ledger previously had zero evening
+ * pools, so evening variety was frozen in generateCitizensEvents.js hardcoded
+ * lists. Trigger: Neighborhood_Map NightlifeProfile (stub backend; same
+ * per-cycle field the displacement trigger already reads). Tags mirror the
+ * existing evening:* vocabulary and use source:prevEvening, already
+ * whitelisted in loadEventContentLedger.js — no loader change needed.
+ *
  * Plan: docs/plans/2026-07-06-content-ledger-auto-authoring.md (engine.49).
  */
 
@@ -100,7 +108,10 @@ async function gatherFacts(api, sheetId, cycle) {
       .map(r => ({
         name: r[idx('Neighborhood')],
         displacement: Number(r[idx('HousingPressure')]) || 0,
-        gentriPhase: r[idx('NeighborhoodTrajectory')] || ''
+        gentriPhase: r[idx('NeighborhoodTrajectory')] || '',
+        // engine.78b: per-hood evening signal, same tab/row as displacement —
+        // 0-1 scale, already computed every cycle (not derived from text).
+        nightlife: Number(r[idx('NightlifeProfile')]) || 0
       }));
   }
 
@@ -127,6 +138,26 @@ function draftStub(facts) {
         text: 'overheard another neighbor pricing a move off the block and changed the subject',
         weight: 1.1, conditions: 'hood=' + h.name + '; displacement>=6',
         tags: 'source:nbhdState,state:community', grain: ''
+      });
+    }
+    // engine.78b: evening pools — Event_Content_Ledger has zero evening.*
+    // rows; evening variety is otherwise frozen in generateCitizensEvents.js
+    // hardcoded lists. Trigger: Neighborhood_Map NightlifeProfile, the same
+    // measured per-cycle field this loop already reads displacement from —
+    // no new fetch, no text-keyword guessing. Tag mirrors the EXISTING
+    // evening:* vocabulary already live in generateCitizensEvents.js
+    // (evening:crowd/nightlife/vibe/food/cityEvent, etc.) rather than
+    // inventing new tag words; source:prevEvening is already whitelisted
+    // and already routes to the PrevEvening/dm.outabout dial.
+    if (h.nightlife >= 0.7) {
+      // NightlifeProfile decides WHICH hood gets drafted for, same role
+      // displacement plays above — it is not a DSL field, so the row's
+      // Conditions gate on hood alone (the loader has no nightlife term).
+      out.push({
+        kind: 'line', poolKey: 'evening.nightlife', slot: '',
+        text: 'let the ' + h.name + ' night crowd carry them a block further than they meant to go',
+        weight: 1.05, conditions: 'hood=' + h.name,
+        tags: 'source:prevEvening,evening:nightlife', grain: ''
       });
     }
   }
@@ -167,8 +198,9 @@ async function draftOpenRouter(facts) {
     'Rules:',
     '- kind=line REQUIRES poolKey and tags whose FIRST tag is one of: ' + sources,
     '- kind=fragment REQUIRES slot (e.g. MOOD, VENUE) and fills one $SLOT token.',
-    '- conditions grammar: ";"-joined AND terms. Fields: wealth,children,displacement (num, ops <=,>=,<,>,=,!=); married,retired (bare flag); ageband=youth|youngAdult|adult|senior; hood=<exact name>; season=<name>. Empty string = ungated.',
+    '- conditions grammar: ";"-joined AND terms (ALL must hold for one citizen). Fields: wealth,children,displacement (num, ops <=,>=,<,>,=,!=); married,retired (bare flag); ageband=youth|youngAdult|adult|senior; hood=<exact name>; season=<name>. Empty string = ungated. A citizen has exactly ONE hood — never AND multiple "hood=X" terms together (that can never be true for anyone); if a line fits several neighborhoods, draft it ungated or pick the single best-fit hood.',
     '- text: one lived-in sentence, lowercase start, no citizen names, no numbers from the facts, may use $VENUE/$MOOD tokens in lines.',
+    '- Evening/night-out texture (engine.78b): PoolKey may use the "evening.*" domain — evening.nightlife (bars/DJ/live music), evening.food (late food spots), evening.cityEvent (night markets, gallery walks, festivals). These use tags starting with "source:prevEvening" (the whitelisted evening source — do NOT use "source:evening", it is not whitelisted); optionally add a second tag evening:nightlife / evening:food / evening:cityEvent to match the vocabulary generateCitizensEvents.js already uses. Draft these ONLY for hoods where facts.hoods[].nightlife (0-1 scale) is high (roughly >=0.7) or facts show real evening/nightlife activity — gate with hood=<name>, do not invent a nightlife condition field (none exists).',
     '- Draft 6-10 rows grounded in THESE cycle facts (gate lines to the hoods/conditions the facts justify):',
     JSON.stringify(facts, null, 1),
     'Return ONLY the JSON array.'

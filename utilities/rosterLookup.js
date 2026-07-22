@@ -783,7 +783,13 @@ function getThemeKeywordsForDomain_(domain, hookType) {
  * suggestStoryAngle_(["Legacy", "Memory"], "sports_history")
  * // → { journalist: "Hal Richmond", angle: "historical reflection", voiceGuidance: "...", confidence: "high" }
  */
-function suggestStoryAngle_(eventThemes, signalType) {
+function suggestStoryAngle_(eventThemes, signalType, usageCounts) {
+  // usageCounts (S329 engine.78c, optional): map journalistName -> recent-use
+  // count (caller-built, e.g. last-3-cycles SuggestedJournalist tally). Each
+  // recent use subtracts 2 from that journalist's theme score, so a fixed
+  // domain->themes vocabulary stops electing the same argmax winner every
+  // cycle (the P-Slayer-on-every-SPORTS-seed magnet). Omitted -> behavior
+  // identical to pre-S329.
   var result = {
     journalist: null,
     angle: 'general coverage',
@@ -833,6 +839,10 @@ function suggestStoryAngle_(eventThemes, signalType) {
   for (var i = 0; i < names.length; i++) {
     var name = names[i];
     var journalist = roster.journalists[name];
+    // S329 engine.78c: editorial desk (EIC, copy chief) never gets a byline
+    // suggestion — bench C104 proof: with beat writers usage-penalized, Mags
+    // Corliss won 12 COMMUNITY seeds.
+    if (journalist.desk === 'editorial') continue;
     var journoThemes = journalist.themes || [];
 
     var score = 0;
@@ -858,7 +868,20 @@ function suggestStoryAngle_(eventThemes, signalType) {
       }
     }
 
-    if (score > bestScore) {
+    // S329 engine.78c: recent-use rotation penalty (see header comment).
+    // Capped at 2 counted uses (max -4): an uncapped raw tally (bench C105:
+    // 15/13/12 uses in-window) drives every eligible name permanently below
+    // the >=2 match floor — 35/35 suggestions blank. The cap makes heavy use
+    // a tiebreak-loser, not a lockout. Ties break toward the LEAST-used name
+    // (bench C106: cap alone let one capped name re-win every same-domain
+    // seed — first-in-roster-order tie-breaking is itself a magnet).
+    if (usageCounts && usageCounts[name]) {
+      score -= 2 * Math.min(usageCounts[name], 2);
+    }
+
+    var nameUse = (usageCounts && usageCounts[name]) || 0;
+    var bestUse = (usageCounts && bestMatch && usageCounts[bestMatch]) || 0;
+    if (score > bestScore || (score === bestScore && bestMatch && nameUse < bestUse)) {
       bestScore = score;
       bestMatch = name;
     }
@@ -870,9 +893,13 @@ function suggestStoryAngle_(eventThemes, signalType) {
     result.voiceGuidance = getVoiceGuidance_(bestMatch, 'feature') || '';
     result.confidence = bestScore >= 4 ? 'high' : 'medium';
   } else if (signalType) {
-    // Fall back to signal-based
+    // Fall back to signal-based. S329 engine.78c: the fallback is a single
+    // deterministic name, so when it's already heavily used this window,
+    // return no suggestion instead of re-stacking it (bench C104: fallback
+    // re-elected the same name 13x after the penalty knocked out the theme
+    // path). Blank is legal — the deck column is a HINT, not direction.
     var bySignalFallback = getJournalistBySignal_(signalType);
-    if (bySignalFallback) {
+    if (bySignalFallback && !(usageCounts && usageCounts[bySignalFallback] >= 6)) {
       result.journalist = bySignalFallback;
       result.angle = matchedAngle;
       result.voiceGuidance = getVoiceGuidance_(bySignalFallback, 'feature') || '';

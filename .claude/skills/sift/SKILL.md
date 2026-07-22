@@ -428,12 +428,12 @@ This is the slate-locking step. Enforce caps, apply Engine A priority data, rend
 
 For each proposal:
 
-1. Match seed by `sourceSignal` text against the event-text column (`What` / `SeedText`).
-2. Pull the Engine-A priority fields **by header name** (not column letter): `PriorityScore`, `ConsequenceFloor`, `PriorityComponents`, `BylineCandidate`, `BylineConfidence`, `BylineRationale`. These are **shadow appends — not live until Engine-A ships (engine.7 Phase-6 cutover / T2.7 schema add).** When a header is absent, treat as no priority data for that proposal (do not fail).
+1. Match seed — **citizens-first, text second (S329 engine.78c):** a seed matches when it shares a primary POPID with the proposal (`Citizens` column) AND the same `Domain`; OR a name in the seed's `Businesses`/`OtherEntities` is the proposal's subject; OR the seed's `Why` (cause prose) or event-text column plainly describes the proposal's `sourceSignal`. The v4 `What` is metric-shaped (`"sighting +0.01"`) and will rarely text-match — `Why` carries the prose (`"Vinnie Keane spotted at ..."`); do not conclude no-match from `What` alone. (C101: 7/8 proposals matched zero seeds under What-only matching.)
+2. Pull the byline pre-match fields **by header name** (not column letter): **`SuggestedJournalist`, `SuggestedAngle`, `MatchConfidence` — these are LIVE on the v4.2 deck (S313) and populated engine-side per seed.** Legacy fallback names if the header row predates v4.2: `BylineCandidate`, `BylineConfidence`, `BylineRationale`. (S329 engine.78c fix: sift previously read ONLY the legacy names, which don't exist on v4.2 → every entry logged `engine_silent` even on matched seeds — Engine B starved its own promotion gate.) Engine-A priority fields (`PriorityScore`, `ConsequenceFloor`, `PriorityComponents`) remain shadow — absent until Engine-A ships; when a header is absent, treat as no data for that field (do not fail).
 3. Tag `[FLOOR]` if `ConsequenceFloor === TRUE`.
 4. Compute effective priority as MAX across matched seeds.
 
-**Engine-silent is the expected default right now.** Until Engine-A is live, matched seeds carry content but no `PriorityScore`, so proposals render `[engine: silent]` and the `[priority …]` suffix is absent (Step T5.2). That is correct behavior — this fix makes `/sift` robust to the deck schema; it does not by itself activate priority ranking (that rides Engine-A landing, a separate track).
+**Priority-silent is still expected; byline-silent is not (S329).** Until Engine-A is live, matched seeds carry no `PriorityScore`, so the `[priority …]` suffix stays absent (Step T5.2) — correct. But `SuggestedJournalist` IS live on every v4.2 seed, so matched proposals should now carry an engine byline candidate in the shadow log; the byline shadow phase (T6.1 agree-rate promotion) only accumulates data when this populates.
 
 **Floor semantics:** `[FLOOR]` proposals can be re-ordered within the floored band, NOT suppressed below non-floored. Floor fires under HIGH severity AND one of: `coverageState.lastRating ≤ -1` (uncovered crisis, any domain) OR domain ∈ {HEALTH, SAFETY, CIVIC} AND arc active ≥ 2 cycles. See `docs/concepts/routing-rationale.md`.
 
@@ -608,7 +608,7 @@ After the slate locks, emit `output/byline_shadow_log_c{XX}.json` per the T3.8 s
 Outcome rules:
 - `agree` — engineCandidate matches finalAssignment.
 - `override` — engineCandidate populated but finalAssignment differs.
-- `engine_silent` — no matched seed or no BylineCandidate populated.
+- `engine_silent` — no matched seed or no `SuggestedJournalist` (v4.2) / `BylineCandidate` (legacy) populated. (S329: with the v4.2 header fix + citizens-first matching above, engine_silent should now be the exception, not 8/8 — a cycle that still logs mostly-silent means the matcher regressed, flag it.)
 
 **No auto-pre-fill** during shadow phase (S206 → T6.2 cutover). Engine candidates appear nowhere in Step 6 presentation. T6.1 reads logs across 3 cycles to compute per-band agree-rates; promotion to threshold-driven pre-fill gates on `high`-band agree-rate ≥ 85%.
 

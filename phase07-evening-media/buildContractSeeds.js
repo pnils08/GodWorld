@@ -245,16 +245,48 @@ var CONTRACT_SEED_SIGNAL = {
 };
 
 /** Roster pre-match for a seed domain. Fail-soft null when the rosterLookup
- *  globals are absent (Node tests) or matching throws — seed ships without. */
-function contractSeedJournalist_(domain) {
+ *  globals are absent (Node tests) or matching throws — seed ships without.
+ *  usageCounts (S329 engine.78c): recent-use tally passed to suggestStoryAngle_
+ *  so a fixed domain vocabulary rotates instead of electing the same winner. */
+function contractSeedJournalist_(domain, usageCounts) {
   try {
     if (typeof getThemeKeywordsForDomain_ !== 'function' ||
         typeof suggestStoryAngle_ !== 'function') return null;
     var themes = getThemeKeywordsForDomain_(domain, 'signal');
-    return suggestStoryAngle_(themes, CONTRACT_SEED_SIGNAL[domain] || 'human_interest');
+    return suggestStoryAngle_(themes, CONTRACT_SEED_SIGNAL[domain] || 'human_interest', usageCounts || null);
   } catch (e) {
     return null;
   }
+}
+
+/** S329 engine.78c: tally SuggestedJournalist over the deck's last 3 cycles so
+ *  the pre-match rotates bylines instead of re-electing the same argmax winner
+ *  (C101: P Slayer on every SPORTS metric seed). Header-name resolved (v4
+ *  discipline — never positional). Fail-soft {} on any error: suggestion
+ *  behavior degrades to pre-S329, never blocks the seed build. */
+function contractSeedUsageTally_(ctx, cycle) {
+  var tally = {};
+  try {
+    if (!ctx || !ctx.ss || typeof ctx.ss.getSheetByName !== 'function') return tally;
+    var sheet = ctx.ss.getSheetByName('Story_Seed_Deck');
+    if (!sheet || sheet.getLastRow() < 2) return tally;
+    var vals = sheet.getDataRange().getValues();
+    var head = vals[0];
+    var iCycle = head.indexOf('Cycle');
+    var iJourno = head.indexOf('SuggestedJournalist');
+    if (iCycle < 0 || iJourno < 0) return tally;
+    var floor = Number(cycle) - 3;
+    for (var r = 1; r < vals.length; r++) {
+      var c = Number(vals[r][iCycle]);
+      if (!c || c < floor) continue;
+      var name = String(vals[r][iJourno] || '').trim();
+      if (!name) continue;
+      tally[name] = (tally[name] || 0) + 1;
+    }
+  } catch (e) {
+    try { Logger.log('contractSeedUsageTally_ fail-soft: ' + e); } catch (ig) {}
+  }
+  return tally;
 }
 
 /**
@@ -393,6 +425,11 @@ function buildContractSeeds_(ctx) {
   var usedBiz = {};   // cross-seed spread, same as usedPop
   var usedOther = {}; // shared across faith + programs (one OtherEntities pool)
 
+  // S329 engine.78c: byline rotation — seed the tally from the deck's last 3
+  // cycles, then increment in-cycle so multiple same-domain seeds this cycle
+  // also spread across the roster instead of stacking on one name.
+  var journoTally = contractSeedUsageTally_(ctx, cycle);
+
   // Cluster ripples by causeType + neighborhood (T5 family grouping).
   var clusters = {};
   var order = [];
@@ -491,7 +528,10 @@ function buildContractSeeds_(ctx) {
     }
 
     var seedDomain = CONTRACT_SEED_DOMAIN[lead.causeType] || 'GENERAL';
-    var match = contractSeedJournalist_(seedDomain); // S313 pre-match, fail-soft
+    var match = contractSeedJournalist_(seedDomain, journoTally); // S313 pre-match, fail-soft; S329 rotation
+    if (match && match.journalist) {
+      journoTally[match.journalist] = (journoTally[match.journalist] || 0) + 1;
+    }
     seeds.push({
       seedId: contractSeedHash_(cycle + '|' + order[k] + '|' + lead.causeId),
       cycle: cycle,

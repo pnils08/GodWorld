@@ -28,6 +28,7 @@ const COMPARE = path.join(ROOT, 'output', 'cron-compare');
 const PUBLISHED = path.join(COMPARE, 'published');
 const FLAGGED = path.join(COMPARE, 'flagged');
 const STAGED = path.join(COMPARE, 'staged');   // Phase 2 probation wall (S332): M–F articles stage here, NOT canon-ingested
+const SAMPLES = path.join(COMPARE, 'samples'); // --no-gate ungated review samples (S332): never canon
 
 function arg(flag, def) {
   const i = process.argv.indexOf(flag);
@@ -35,6 +36,11 @@ function arg(flag, def) {
 }
 const DESK = arg('--desk', 'sports');
 const GATE_MODEL = arg('--gate-model', 'sonnet');   // authoritative gate; 'haiku' to cost-test
+// --no-gate (S332): skip the Rhea gate for SAMPLE generation only. The gate runs
+// on `claude -p` (Claude Code / subscription), so it cannot run while Mike's
+// subscription usage is depleted; the writer + quotes run on raw API keys. Ungated
+// output is NOT canon — it routes to samples/ marked ungated, for review only.
+const NO_GATE = process.argv.includes('--no-gate');
 
 const log = (...a) => console.log('[run]', new Date().toISOString(), ...a);
 
@@ -231,21 +237,36 @@ async function runWake() {
     '--state-file', path.relative(ROOT, stateFile)], { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
   if (!fs.existsSync(draftPath)) throw new Error('writer produced no draft at ' + path.relative(ROOT, draftPath));
 
-  // 4. LAYER 2 — gate (existing headless Rhea)
-  log('gating...');
-  try {
-    execFileSync('node', [path.join(ROOT, 'scripts', 'cron-rhea-gate.js'), '--draft', path.relative(ROOT, draftPath),
-      '--model', GATE_MODEL, '--cycle', cycle], { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
-  } catch (_) { /* gate exit 2/3 — verdict json still written */ }
-  const rhea = readJson(path.join(COMPARE, base + '.rhea.json'));
-  const pass = rhea && rhea.pass === true;
+  // 4. LAYER 2 — gate (existing headless Rhea). Skipped for --no-gate samples
+  // (gate needs the subscription; writer/quotes are API-only).
+  let rhea = null, pass = false;
+  if (NO_GATE) {
+    log('gate SKIPPED (--no-gate sample) — output is ungated, NOT canon');
+  } else {
+    log('gating...');
+    try {
+      execFileSync('node', [path.join(ROOT, 'scripts', 'cron-rhea-gate.js'), '--draft', path.relative(ROOT, draftPath),
+        '--model', GATE_MODEL, '--cycle', cycle], { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
+    } catch (_) { /* gate exit 2/3 — verdict json still written */ }
+    rhea = readJson(path.join(COMPARE, base + '.rhea.json'));
+    pass = rhea && rhea.pass === true;
+  }
 
-  // 5. LAYER 5 — THE WALL: stage (probation), never canon-ingest here
-  const destDir = pass ? STAGED : FLAGGED;
+  // 5. LAYER 5 — THE WALL: stage (probation), never canon-ingest here.
+  // --no-gate samples go to samples/ (ungated, review-only, never canon).
+  const destDir = NO_GATE ? SAMPLES : (pass ? STAGED : FLAGGED);
   fs.mkdirSync(destDir, { recursive: true });
-  const stagedName = pass ? base + '.staged.md' : draftName;
+  const stagedName = (NO_GATE || pass) ? base + (NO_GATE ? '.sample.md' : '.staged.md') : draftName;
   fs.copyFileSync(draftPath, path.join(destDir, stagedName));
-  if (pass) {
+  if (NO_GATE) {
+    fs.writeFileSync(path.join(SAMPLES, base + '.sample.json'), JSON.stringify({
+      status: 'ungated-sample', desk: DESK, cycle, byline: byline ? byline.name : null, bylinePopid: byline ? byline.popid : null,
+      article: path.relative(ROOT, path.join(SAMPLES, stagedName)),
+      quotesLanded: quotes.length,
+      note: 'UNGATED sample (--no-gate, S332): writer+quotes ran on raw API; the Rhea gate was skipped (needs subscription). NOT canon, review-only.',
+      builtAt: new Date().toISOString()
+    }, null, 2));
+  } else if (pass) {
     fs.writeFileSync(path.join(STAGED, base + '.staged.json'), JSON.stringify({
       status: 'staged', desk: DESK, cycle, byline: byline ? byline.name : null, bylinePopid: byline ? byline.popid : null,
       article: path.relative(ROOT, path.join(STAGED, stagedName)),
@@ -277,7 +298,7 @@ async function runWake() {
     mode: 'wake', desk: DESK, cycle, provider: route.provider, model: route.model, gateModel: GATE_MODEL,
     byline: byline ? { name: byline.name, popid: byline.popid, beatDomain: byline.beatDomain } : null,
     laneEntries: lane.length, quotesRequested: asks.length, quotesLanded: quotes.length,
-    disposition: pass ? 'staged' : 'flagged',
+    disposition: NO_GATE ? 'ungated-sample' : (pass ? 'staged' : 'flagged'),
     rheaPass: rhea ? rhea.pass : null, rheaFlagCount: rhea ? rhea.flagCount : null,
     article: path.relative(ROOT, path.join(destDir, stagedName)),
     selfRecord, ranAt: new Date().toISOString()

@@ -191,6 +191,14 @@ Reference run (one calibration sample, not the design's organizing case): `cron-
 ### Phase 3 — city-hall headless (daily)  *(civic content, research-build infra; sub-plan)*
 Same continuous model on the civic side: city-hall voices/agents wake M–F, work the active civic storylines (agenda → positions → votes as they occur), articles ingest to canon and feed Mags' Saturday compile. Mirrors the writer-worker shape on civic agents.
 
+**Early notes — voice-packets = what runs city hall (Mike-direct S332, capture before design):**
+- **voice-packets are the civic analog of `desk_signal`** — the packet that feeds each city-hall voice/agent (mayor, council, factions, project directors) its M–F wake material on the static cycle. Where `desk_signal` partitions the cycle by newsroom lane, a voice-packet partitions it by *office/agent*: which of this office's initiatives/votes/portfolio items are live, which reporter demands are outstanding against it (the friction loop), what its prior positions were.
+- **Source = Mara voice directives (Mike-direct).** What a voice-packet *carries* should be sourced from Mara's voice-directive structure — the civic governance rules Mara already encodes (`docs/mara-vance/*` — CIVIC_GOVERNANCE_MASTER_REFERENCE, INITIATIVE_TRACKER_VOTER_LOGIC, IN_WORLD_CHARACTER, etc.). Mara's directives define how a civic voice is supposed to speak/decide; the packet hands each office exactly the slice of that its live agenda needs.
+- **Precedent to build on: `scripts/buildMaraPacket.js` already exists** — it bundles the edition draft + Mara's AUDIT_HISTORY for her canon review (reader-not-engine framing). The voice-packet builder is the same *shape* (deterministic bundle of the right context for one agent), pointed at the civic agents instead of Mara-the-auditor.
+- **"Making Mara an Anthropic API call" (Mike-direct):** the civic voices should run as **raw Anthropic API calls** (same off-subscription surface as the desk writers), not `claude -p`, so city-hall M–F is cost-recoverable like the newsroom. Mara-as-API is the model for the whole civic voice layer.
+- **The friction loop is where this meets the newsroom** (north-star, already in the plan): a reporter's M–F accusation against an office becomes a voice-packet input that office must *answer* on its next wake — accusation → response → follow-up as a multi-wake arc. The sim pushes it (real unexecuted bond, real crisis), the newsroom pressures it, the office answers from its own real state.
+- **Open design (research-build):** voice-packet schema (per-office partition of the cycle); civic cost unit (Sonnet vs DeepSeek per voice); how the reporter-demand → office-answer handshake is recorded; whether city-hall output is "articles" (desks report on it) or "statements" (raw civic record). Deferred until the newsroom side proves.
+
 ### Phase 4 — scorecard eval + cost tuning  *(sub-plan)*
 Aggregate scorecards across the accrued articles to answer Feedback1.txt's per-desk question (is DeepSeek "90% for 20%?"). Includes the Haiku-vs-Sonnet Rhea-gate cost test (gate is $0.76/run on Sonnet; source-search proved Haiku parity for verified work).
 
@@ -206,6 +214,19 @@ Aggregate scorecards across the accrued articles to answer Feedback1.txt's per-d
 - [x] **Citizen-quote hallucination fix** — RESOLVED (Mike-direct S330): reporters interview real citizen crons (`citizenVoice.js --batch`, pipeline.43 — built) instead of inventing sources. Gap is headless wiring only — see Phase 2 layer-4 wiring.
 
 ---
+
+## What's left — go-live checklist (S332 session-end, engine-sheet)
+
+**Newsroom machinery (Phase 2):** BUILT + proven wired (commit 705f656b). The six-layer `cron-desk-run.js --wake` runs civic c102 end-to-end. Remaining before live M–F operation:
+1. **Quote adoption + byline-not-source** — the writer ignored injected quotes and used the byline as a source (canon violation). Prompt fixes applied (byline author-only, quotes as sole sources), NOT yet live-validated. **Prove on a cheap DeepSeek desk**, not civic-Sonnet, to keep iteration cost down. *(Ungated c102 samples generating in `output/cron-compare/samples/` for exactly this review — culture/business/civic, `--no-gate`.)*
+2. **Submission-budget mechanism** — the ~20–28 cleared-articles/week cap + no same-byline/same-storyline repeat across the static-cycle week. Not built; this is the cost-ceiling enforcement. Pairs with the schedule.
+3. **Journalist usage→tier→fame ledger** — NEW build (undesigned). Cleared article → usage count → citizen Tier up → fame. Article-content ingest exists; the journalist progression ledger does not.
+4. **THE GATE IS SUBSCRIPTION-LOCKED (critical finding S332).** `cron-rhea-gate.js` runs `claude -p` (Claude Code / Mike's subscription), NOT a raw API key — while the writer (Anthropic API) and quotes (OpenRouter) are off-subscription. So the "runs on recovered API tokens, not subscription" thesis holds for WRITING but **not for the GATE**. Since "cleared = canon" makes the gate mandatory, unattended off-subscription operation needs a **raw-API Rhea path** (the plan's deferred "bigger canon-lookup port"). Until then, downtime runs must use `--no-gate` (ungated samples, never canon) or wait for Mike's subscription. **This is the #1 blocker for true autonomous M–F.**
+5. **Schedule** — no `at` on the box; `crontab` available. The M–F daypart cron (reuse citizen-wake's 2-wake morning/night per the 5→2 change) fires `cron-desk-run.js --wake` per active desk. Turning on continuous autonomous operation is **Mike's go** (outward-facing/hard-to-reverse), gated on #4.
+
+**Cadence config (the numbers to bind):** budget **$20–40/mo** (subscription-token recovery, not new spend). Per-article measured: Sonnet-desk ≈ $1.17 (write $0.92 — the 223k-token explore phase is a trim target — + Haiku gate $0.22), DeepSeek-desk ≈ $0.25 (gate-dominated). ⇒ ~20–28 cleared articles/week, ~1/desk/day, all canon, all building journalists; edition curates the best ~8. Citizen wakes 5→2 (morning/night). Sample-generation surface: `cron-desk-run.js --wake --desk <d> --no-gate --cycle <N>` → `output/cron-compare/samples/`.
+
+**Civic side (Phase 3):** early notes captured above (voice-packets = Mara-directive-sourced per-office packets; Mara-as-Anthropic-API; friction loop). Undesigned; research-build lane.
 
 ## Changelog
 

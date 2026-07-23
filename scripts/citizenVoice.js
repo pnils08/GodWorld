@@ -98,7 +98,7 @@ async function generate(system, user, maxTokens) {
 /* Voice one citizen. Returns {popId,name,nh,occ,disposition,text,recorded}.
  * Throws {code:2} when unvoiceable (no dials / not in ledger) so single-call
  * mode keeps its exit-2 contract and batch mode maps it to a fallback. */
-async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry }) {
+async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preText }) {
   const c = pool.find((p) => p.popId === popId);
   if (!c) { const e = new Error(`${popId} not voiceable (no DialState / not in ledger / no name+hood)`); e.code = 2; throw e; }
 
@@ -136,7 +136,10 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry }) {
     return { popId: c.popId, name: c.name, nh: c.nh, occ: c.occ, disposition: disp, text: null, recorded: false };
   }
 
-  const text = await generate(system, user, maxTokens);
+  // preText (Phase 2 layer 5, reporter self-record): record a SUPPLIED line
+  // (e.g. "filed: <headline>") through the exact page+intake write-block, with
+  // NO DeepSeek generation — the author-side mirror of the quote pre-pass.
+  const text = preText != null ? String(preText) : await generate(system, user, maxTokens);
   if (!text) { const e = new Error('empty generation'); e.code = 3; throw e; }
 
   let recorded = false;
@@ -231,6 +234,23 @@ async function runBatch(batchPath, cycle) {
 
   const batchPath = arg('batch', null);
   if (batchPath) { await runBatch(batchPath, cycle); return; }
+
+  // --record-text (Phase 2 layer 5): record a supplied line for a POPID (author-
+  // side reporter acknowledgment) — same page+gated-intake wall, no generation.
+  const recordText = arg('record-text', null);
+  if (recordText != null) {
+    const rtPop = String(arg('pop', '') || '').toUpperCase();
+    if (!rtPop) { console.error('citizenVoice --record-text requires --pop=POP-XXXXX'); process.exit(1); }
+    const pool = await buildPool({ shapedMin: 0, lifeMinChars: 0 });
+    let r;
+    try {
+      r = await voiceOne(pool, rtPop, 'You filed a story for the Tribune: ' + recordText, {
+        cycle, maxTokens: 60, record: !DRY, dry: DRY, preText: recordText,
+      });
+    } catch (e) { console.error('citizenVoice record-text: ' + e.message); process.exit(e.code || 1); }
+    console.log(JSON.stringify({ popId: r.popId, name: r.name, recorded: r.recorded, text: r.text }, null, 2));
+    return;
+  }
 
   const popId = String(arg('pop', '') || '').toUpperCase();
   let ask = arg('ask', null);

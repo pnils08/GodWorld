@@ -27,6 +27,7 @@ const ROOT = path.join(__dirname, '..');
 const COMPARE = path.join(ROOT, 'output', 'cron-compare');
 const PUBLISHED = path.join(COMPARE, 'published');
 const FLAGGED = path.join(COMPARE, 'flagged');
+const STAGED = path.join(COMPARE, 'staged');   // Phase 2 probation wall (S332): M–F articles stage here, NOT canon-ingested
 
 function arg(flag, def) {
   const i = process.argv.indexOf(flag);
@@ -52,6 +53,239 @@ function deskRoute(desk) {
 }
 const slug = m => m.replace(/[^a-z0-9]+/gi, '-').toLowerCase();
 function readJson(p) { try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch (_) { return null; } }
+
+// ===========================================================================
+// PHASE 2 — daily writer-wake chain (--wake). Assembles the six layers over the
+// pieces proven in Phase 1 + W5. Additive: without --wake, main() below runs the
+// original Task-4 write→gate→route unchanged.
+// ===========================================================================
+
+// desk_signal lane → Bay_Tribune_Oakland beatDomain(s) for byline selection.
+// The civic lane spans the whole civic-affairs family of beats (buildBylineRoster
+// classifies RoleType into these), so rotation has real depth. sports is Paulson's
+// domain (excluded from the Tribune byline pool) and carries no popids anyway.
+const LANE_DOMAINS = {
+  civic:    ['CIVIC', 'HEALTH', 'SAFETY', 'INFRASTRUCTURE', 'EDUCATION', 'ENVIRONMENT'],
+  culture:  ['CULTURE', 'COMMUNITY'],
+  business: ['ECONOMIC', 'GENERAL'],
+  sports:   []
+};
+const QUOTE_CITIZEN_CAP = 4;   // per wake — keep the DeepSeek quote pre-pass cheap
+
+// Extract the citizenVoice --batch JSON array from stdout. The `[dotenv@…]`
+// startup banner also prints to stdout with inline brackets, so a greedy
+// /\[[\s\S]*\]/ grabs the banner and fails to parse. JSON.stringify(_,null,2)
+// puts the array's own `[` and `]` each on their own line — the banner never
+// does — so anchor on the bare-bracket lines.
+function parseBatchQuotes(out) {
+  const lines = String(out).split('\n');
+  let end = -1;
+  for (let i = lines.length - 1; i >= 0; i--) { if (lines[i].trim() === ']') { end = i; break; } }
+  let start = -1;
+  for (let i = end; i >= 0; i--) { if (lines[i].trim() === '[') { start = i; break; } }
+  if (start < 0 || end <= start) return [];
+  let parsed;
+  try { parsed = JSON.parse(lines.slice(start, end + 1).join('\n')); } catch (_) { return []; }
+  return (Array.isArray(parsed) ? parsed : []).filter(q => q.quote && !q.fallback);
+}
+
+// Least-used-wins rotation: tally finalAssignment bylines across recent shadow logs.
+function readBylineUsage() {
+  const usage = {};
+  let logs = [];
+  try {
+    logs = fs.readdirSync(path.join(ROOT, 'output'))
+      .filter(f => /^byline_shadow_log_c\d+\.json$/.test(f))
+      .sort().slice(-6);
+  } catch (_) {}
+  for (const f of logs) {
+    const j = readJson(path.join(ROOT, 'output', f));
+    const rows = Array.isArray(j) ? j : (j && Array.isArray(j.entries) ? j.entries : []);
+    for (const r of rows) {
+      const name = r && (r.finalAssignment || r.byline || r.assigned);
+      if (name) usage[name] = (usage[name] || 0) + 1;
+    }
+  }
+  return usage;
+}
+
+// Layer 1 — pick a beat-matched, eligible, POPID-linked byline, least-used first.
+async function resolveByline(desk, lane) {
+  const { buildBylineRoster } = require(path.join(ROOT, 'scripts', 'engine-auditor', 'bayTribuneRoster'));
+  const roster = await buildBylineRoster();
+  const domains = LANE_DOMAINS[desk] || [];
+  let pool = (roster.included || []).filter(j => j.popid && domains.includes(j.beatDomain));
+  if (!pool.length) pool = (roster.included || []).filter(j => j.popid && j.beatDomain === 'GENERAL');
+  if (!pool.length) return null;   // no eligible byline — caller handles fallback
+  const usage = readBylineUsage();
+  pool.sort((a, b) => (usage[a.name] || 0) - (usage[b.name] || 0) || a.name.localeCompare(b.name));
+  const pick = pool[0];
+  return { name: pick.name, popid: pick.popid, beatDomain: pick.beatDomain, usageCount: usage[pick.name] || 0 };
+}
+
+// Layer 4 — collect the lane's affected citizens (distinct POPIDs, capped) and
+// their reaction ask (keyed to the entry label). Returns the asks + the source map.
+function collectQuoteAsks(lane) {
+  const asks = [];
+  const seen = new Set();
+  for (const e of lane) {
+    for (const pop of (e.popids || [])) {
+      if (seen.has(pop) || asks.length >= QUOTE_CITIZEN_CAP) continue;
+      seen.add(pop);
+      asks.push({ pop, ask: 'The Tribune is looking into this in your part of Oakland: "' +
+        String(e.label || '').slice(0, 160) + '". Speak about how it touches your life.',
+        record: true, maxTokens: 200 });
+    }
+    if (asks.length >= QUOTE_CITIZEN_CAP) break;
+  }
+  return asks;
+}
+
+// Layer 3 — compose the injected state: byline note + lane pointers + real quotes.
+// This REPLACES the 40k world_summary blob as the writer's injected state.
+function buildLaneState(desk, cycle, lane, byline, quotes) {
+  const L = [];
+  L.push('## ' + desk.toUpperCase() + ' desk — your lane for cycle ' + cycle);
+  L.push('');
+  if (byline) {
+    // Author-only. Do NOT include the POPID here — a "Name (POP-…)" token reads to
+    // the writer as an allowed CITIZEN to name/quote, which invented a fake resident
+    // and tripped the canon gate (S332 c102). The byline is who WRITES, never a source.
+    L.push('BYLINE (the reporter writing this — write in their voice; NEVER name or quote them in the body): ' + byline.name);
+    L.push('');
+  }
+  L.push('This is your beat\'s signal for the cycle — POINTERS. Reach the raw material yourself');
+  L.push('(read the referenced files with your tools for depth). Do NOT invent events not named here.');
+  L.push('');
+  L.push('### Your storylines (desk_signal lane)');
+  for (const e of lane) {
+    const tags = [e.kind, e.hood].filter(Boolean).join(' · ');
+    L.push('- ' + (e.label || '(no label)') + (tags ? '  [' + tags + ']' : ''));
+    L.push('  ref: ' + e.ref);
+  }
+  L.push('');
+  if (quotes && quotes.length) {
+    L.push('### Citizen sources for this piece — these are REAL people, already interviewed');
+    L.push('Quote FROM these people, by name, when you need a resident voice. Do NOT invent other');
+    L.push('residents or attribute a quote to anyone not listed here. If you need no quote, use none —');
+    L.push('but never fabricate a source when these are provided.');
+    L.push('');
+    for (const q of quotes) {
+      L.push('- ' + q.name + ' (' + q.pop + '): "' + String(q.quote).replace(/\s+/g, ' ').trim() + '"');
+    }
+    L.push('');
+  } else {
+    L.push('### Citizen sources');
+    L.push('No pre-interviewed residents this wake. Do NOT invent named residents — write from the');
+    L.push('storyline facts and official record only; leave resident reaction as an open question.');
+    L.push('');
+  }
+  return L.join('\n');
+}
+
+async function runWake() {
+  const cycle = arg('--cycle', null) || detectCycle();
+  const signalPath = path.join(ROOT, 'output', 'desk_signal_c' + cycle + '.json');
+  const signal = readJson(signalPath);
+  if (!signal || !signal.lanes) throw new Error('no desk_signal at ' + path.relative(ROOT, signalPath) + ' — run buildWorldSummary first');
+
+  const lane = signal.lanes[DESK];
+  console.log('Daily Writer-Wake — ' + DESK + ' c' + cycle);
+  console.log('===================================');
+  if (!lane || !lane.length) {   // guarded skip, not a crash (chicago/letters have no lane)
+    console.log('[wake] no "' + DESK + '" lane in desk_signal — skipping (not an error).');
+    return;
+  }
+  const route = deskRoute(DESK);
+  const draftName = DESK + '_c' + cycle + '_' + slug(route.model) + '.md';
+  const draftPath = path.join(COMPARE, draftName);
+  const base = draftName.replace(/\.md$/, '');
+
+  // 1. LAYER 1 — byline
+  log('resolving byline...');
+  const byline = await resolveByline(DESK, lane);
+  log('byline: ' + (byline ? byline.name + ' (' + byline.popid + ', ' + byline.beatDomain + ', used ' + byline.usageCount + ')' : 'NONE — fallback, no self-record'));
+
+  // 2. LAYER 4 — citizen quote pre-pass (real POPID-linked voices, recorded PRESS)
+  const asks = collectQuoteAsks(lane);
+  let quotes = [];
+  if (asks.length) {
+    log('quote pre-pass: ' + asks.length + ' citizen(s)...');
+    const asksPath = path.join(COMPARE, base + '.asks.json');
+    fs.mkdirSync(COMPARE, { recursive: true });
+    fs.writeFileSync(asksPath, JSON.stringify(asks, null, 2));
+    try {
+      const out = execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
+        '--batch=' + asksPath, '--cycle=' + cycle], { cwd: ROOT, encoding: 'utf8', timeout: 600000 });
+      quotes = parseBatchQuotes(out);
+      log('quote parse: ' + quotes.length + ' usable of batch output');
+      log('quotes landed: ' + quotes.length + '/' + asks.length + (quotes.length ? ' (' + quotes.map(q => q.name).join(', ') + ')' : ''));
+    } catch (e) { log('quote pre-pass failed (non-fatal): ' + e.message); }
+  }
+
+  // 3. LAYER 3 — write on-lane (inject the lane + quotes, NOT the 40k blob)
+  const stateFile = path.join(COMPARE, base + '.state.md');
+  fs.writeFileSync(stateFile, buildLaneState(DESK, cycle, lane, byline, quotes));
+  log('writing on lane (' + fs.statSync(stateFile).size + ' B injected state)...');
+  execFileSync('node', [path.join(ROOT, 'scripts', 'cron-desk-writer.js'), '--desk', DESK,
+    '--state-file', path.relative(ROOT, stateFile)], { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
+  if (!fs.existsSync(draftPath)) throw new Error('writer produced no draft at ' + path.relative(ROOT, draftPath));
+
+  // 4. LAYER 2 — gate (existing headless Rhea)
+  log('gating...');
+  try {
+    execFileSync('node', [path.join(ROOT, 'scripts', 'cron-rhea-gate.js'), '--draft', path.relative(ROOT, draftPath),
+      '--model', GATE_MODEL, '--cycle', cycle], { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
+  } catch (_) { /* gate exit 2/3 — verdict json still written */ }
+  const rhea = readJson(path.join(COMPARE, base + '.rhea.json'));
+  const pass = rhea && rhea.pass === true;
+
+  // 5. LAYER 5 — THE WALL: stage (probation), never canon-ingest here
+  const destDir = pass ? STAGED : FLAGGED;
+  fs.mkdirSync(destDir, { recursive: true });
+  const stagedName = pass ? base + '.staged.md' : draftName;
+  fs.copyFileSync(draftPath, path.join(destDir, stagedName));
+  if (pass) {
+    fs.writeFileSync(path.join(STAGED, base + '.staged.json'), JSON.stringify({
+      status: 'staged', desk: DESK, cycle, byline: byline ? byline.name : null, bylinePopid: byline ? byline.popid : null,
+      article: path.relative(ROOT, path.join(STAGED, stagedName)),
+      note: 'M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.',
+      stagedAt: new Date().toISOString()
+    }, null, 2));
+  } else {
+    fs.writeFileSync(path.join(FLAGGED, base + '.flags.json'),
+      JSON.stringify({ draft: draftName, flags: (rhea && rhea.flags) || [], summary: (rhea && rhea.summary) || 'no rhea verdict' }, null, 2));
+  }
+
+  // 6. LAYER 5 — reporter records their own filing (page + gated intake, author-side)
+  let selfRecord = null;
+  if (byline && pass) {
+    const headline = (() => {
+      const first = fs.readFileSync(draftPath, 'utf8').split('\n').find(l => l.trim());
+      return String(first || '').replace(/^#+\s*/, '').replace(/[*_`]/g, '').slice(0, 100).trim() || (DESK + ' filing c' + cycle);
+    })();
+    log('reporter self-record: ' + byline.name + ' <- "' + headline + '"');
+    try {
+      const out = execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
+        '--pop=' + byline.popid, '--record-text=filed: ' + headline, '--cycle=' + cycle],
+        { cwd: ROOT, encoding: 'utf8', timeout: 300000 });
+      selfRecord = { recorded: true, out: out.trim().slice(-200) };
+    } catch (e) { selfRecord = { recorded: false, reason: e.status === 2 ? 'no-dials (fallback)' : e.message }; log('self-record fallback: ' + (selfRecord.reason)); }
+  }
+
+  const record = {
+    mode: 'wake', desk: DESK, cycle, provider: route.provider, model: route.model, gateModel: GATE_MODEL,
+    byline: byline ? { name: byline.name, popid: byline.popid, beatDomain: byline.beatDomain } : null,
+    laneEntries: lane.length, quotesRequested: asks.length, quotesLanded: quotes.length,
+    disposition: pass ? 'staged' : 'flagged',
+    rheaPass: rhea ? rhea.pass : null, rheaFlagCount: rhea ? rhea.flagCount : null,
+    article: path.relative(ROOT, path.join(destDir, stagedName)),
+    selfRecord, ranAt: new Date().toISOString()
+  };
+  fs.writeFileSync(path.join(COMPARE, base + '.wake.json'), JSON.stringify(record, null, 2));
+  console.log('\n=== wake disposition: ' + record.disposition.toUpperCase() + ' ===');
+  console.log(JSON.stringify(record, null, 2));
+}
 
 function main() {
   const cycle = arg('--cycle', null) || detectCycle();
@@ -111,5 +345,7 @@ function main() {
   console.log(JSON.stringify(record, null, 2));
 }
 
-try { main(); }
-catch (err) { console.error('[run] Fatal:', err.message); process.exit(1); }
+const WAKE = process.argv.includes('--wake');
+Promise.resolve()
+  .then(() => (WAKE ? runWake() : main()))
+  .catch(err => { console.error('[run] Fatal:', err.message); process.exit(1); });

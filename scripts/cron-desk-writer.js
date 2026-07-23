@@ -66,6 +66,16 @@ const MODEL_SLUG = MODEL.replace(/[^a-z0-9]+/gi, '-').toLowerCase();
 const MAX_TURNS = parseInt(arg('--max-turns', '15'), 10);
 const MAX_TOKENS = parseInt(arg('--max-tokens', '16000'), 10);   // a full multi-article section > 8k (S325: 8k truncated Sonnet mid-Article-2)
 const DRY_RUN = process.argv.includes('--dry-run');
+// Per-call ceiling (S332): a headless cron must never hang forever on a stalled
+// API response. An Anthropic call with no timeout froze a wake run mid-explore
+// (c102) with no recovery. Bounded + a couple retries → the run fails loud
+// instead of blocking the M–F pipeline. Tunable via --call-timeout (ms).
+const CALL_TIMEOUT_MS = parseInt(arg('--call-timeout', '180000'), 10);
+// Phase 2 layer-3 lane injection: when set, the orchestrator hands the desk its
+// desk_signal lane partition + supplied citizen quotes as the injected state,
+// instead of the full 40k world_summary blob (the firehose that made C101 desks
+// self-filter). Additive — absent = the proven full-summary path, unchanged.
+const STATE_FILE = arg('--state-file', null);
 
 // Approx USD per 1M tokens [input, output] — for the scorecard's apiCostUsd (estimate).
 const RATES = {
@@ -196,7 +206,8 @@ function runTool(tu) {
 // Model call (isolated so v2 can swap provider)
 // ---------------------------------------------------------------------------
 function callModel(client, system, messages) {
-  return client.messages.create({ model: MODEL, max_tokens: MAX_TOKENS, system, messages, tools: TOOLS });
+  return client.messages.create({ model: MODEL, max_tokens: MAX_TOKENS, system, messages, tools: TOOLS },
+    { timeout: CALL_TIMEOUT_MS, maxRetries: 2 });
 }
 
 // OpenRouter (OpenAI-compatible) — compose-only path for the cheap-model sweep
@@ -256,7 +267,8 @@ async function scoreDraft(draftText, worldState) {
     raw = r.text; usageIn = r.usageIn; usageOut = r.usageOut;
   } else {
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-    const resp = await client.messages.create({ model: MODEL, max_tokens: 1500, system: sys, messages: [{ role: 'user', content: user }] });
+    const resp = await client.messages.create({ model: MODEL, max_tokens: 1500, system: sys, messages: [{ role: 'user', content: user }] },
+      { timeout: CALL_TIMEOUT_MS, maxRetries: 2 });
     raw = (resp.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
     if (resp.usage) { usageIn = resp.usage.input_tokens || 0; usageOut = resp.usage.output_tokens || 0; }
   }
@@ -292,12 +304,31 @@ async function main() {
   // c101 run confabulated a whole fake bullpen crisis because the real sports events
   // (~line 112) were never in its context (S325). Freshest-wins, direct-inject.
   let worldState;
-  try {
-    worldState = '## Oakland — current world state (cycle ' + cycle + ')\n\n' +
-      cap(fs.readFileSync(path.join(ROOT, 'output', 'world_summary_c' + cycle + '.md'), 'utf8'), 40000);
-  } catch (_) {
-    worldState = mags.loadWorldState();
+  if (STATE_FILE) {
+    // Layer-3 lane injection. FAIL LOUD if unreadable — a missing state-file must
+    // NOT silently fall back to the 40k blob (that would mask a broken chain and
+    // "prove" a dead lane; S332 advisor trap).
+    worldState = fs.readFileSync(resolveInRepo(STATE_FILE), 'utf8');
+    log.info('lane state-file injected: ' + STATE_FILE + ' (' + worldState.length + ' chars) — full-summary blob bypassed');
+  } else {
+    try {
+      worldState = '## Oakland — current world state (cycle ' + cycle + ')\n\n' +
+        cap(fs.readFileSync(path.join(ROOT, 'output', 'world_summary_c' + cycle + '.md'), 'utf8'), 40000);
+    } catch (_) {
+      worldState = mags.loadWorldState();
+    }
   }
+
+  // Phase 2: when a lane state-file is injected, the reporter works from its OWN
+  // beat's signal (pointers + real quotes), not the full-summary firehose — and
+  // must NOT be told to read the whole world_summary (that reintroduces the blob
+  // the lane replaces). Pointers still let it read referenced files for depth.
+  const depthInstr = STATE_FILE
+    ? 'Your desk\'s LANE signal for this cycle is in the first message — the storylines in YOUR beat, with ' +
+      'pointers to the raw material and real citizen quotes to use. Work from your lane; you MAY read the ' +
+      'referenced files for depth, but do not pull in other desks\' material or invent events your lane does not name.'
+    : 'The current cycle and its world state are in the first message; read output/world_summary_c' + cycle +
+      '.md in full and use search_world for depth.';
 
   const system =
     'You are running HEADLESS as the ' + DESK + ' desk of The Cycle Pulse — the same agent that ' +
@@ -305,19 +336,23 @@ async function main() {
     'for your VOICE, your reporters, canon discipline, and section format — read your IDENTITY/LENS/RULES ' +
     'and the canon files.\n\n' +
     'CURRENT-CYCLE OVERRIDE: the edition pipeline is paused, so your desk workspace ' +
-    '(output/desks/' + DESK + '/current/) is STALE — do NOT take cycle facts from it. The current cycle and ' +
-    'its world state are in the first message; read output/world_summary_c' + cycle + '.md in full and use ' +
-    'search_world for depth. When your section is finished, call write_file with the full markdown. Do not ' +
+    '(output/desks/' + DESK + '/current/) is STALE — do NOT take cycle facts from it. ' + depthInstr +
+    ' When your section is finished, call write_file with the full markdown. Do not ' +
     'stop until you have written the section.\n\n' +
     '=== YOUR SKILL (.claude/agents/' + DESK + '-desk/SKILL.md) ===\n\n' + skill;
 
-  const kickoff =
-    'Current cycle: ' + cycle + '. Write the ' + DESK + ' section for THIS cycle. The current world state is ' +
-    'below — build your section from the EVENTS in it (do not invent events, players, or officials the state ' +
-    'does not name). Read your IDENTITY/LENS/RULES + canon files for voice and rules, and use search_world for ' +
-    'depth on names/history that appear in the state. Ignore the stale desk workspace. Research EFFICIENTLY — you ' +
-    'have a limited number of research turns before you must write, so do not re-search the same source.\n\n' +
-    worldState;
+  const kickoff = STATE_FILE
+    ? 'Current cycle: ' + cycle + '. Write the ' + DESK + ' section for THIS cycle from YOUR LANE below — ' +
+      'build only from the storylines it names and the citizen quotes it supplies; find your own angle. Do not ' +
+      'invent events, players, or officials the lane does not name. Use your reporters\' voices per your SKILL. ' +
+      'Ignore the stale desk workspace. Research EFFICIENTLY via the pointers — do not re-search the same source.\n\n' +
+      worldState
+    : 'Current cycle: ' + cycle + '. Write the ' + DESK + ' section for THIS cycle. The current world state is ' +
+      'below — build your section from the EVENTS in it (do not invent events, players, or officials the state ' +
+      'does not name). Read your IDENTITY/LENS/RULES + canon files for voice and rules, and use search_world for ' +
+      'depth on names/history that appear in the state. Ignore the stale desk workspace. Research EFFICIENTLY — you ' +
+      'have a limited number of research turns before you must write, so do not re-search the same source.\n\n' +
+      worldState;
 
   let usageIn = 0, usageOut = 0, turns = 0;
 
@@ -371,7 +406,7 @@ async function main() {
         '\n\n## What you gathered while researching\n\n' + digest +
         '\n\nNow WRITE the full ' + DESK + ' section for cycle ' + cycle + ' as your reply — the complete, ' +
         'publish-ready markdown. Output ONLY the section.' }]
-    });
+    }, { timeout: CALL_TIMEOUT_MS, maxRetries: 2 });
     if (fin.usage) { usageIn += fin.usage.input_tokens || 0; usageOut += fin.usage.output_tokens || 0; }
     const finalText = (fin.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n');
     if (finalText.trim()) toolWriteFile({ path: DESK + '_c' + cycle + '.md', content: finalText });

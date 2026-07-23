@@ -1,7 +1,7 @@
 ---
 title: Model Division of Labor & Hierarchy
 created: 2026-06-26
-updated: 2026-06-28
+updated: 2026-07-23
 type: reference
 tags: [architecture, models, orchestration, isolation, active]
 pointers:
@@ -30,17 +30,15 @@ By decoupling the "Brain" (Strategy/Orchestration) from the "Hands" (Coding/Exec
 * **The Job:** Mid-level feature writing and quality assurance. These agents take raw packets of data and write longer-form prose, or they review the output of junior agents for narrative consistency and stylistic adherence.
 * **Why it fits:** Sonnet hits the perfect sweet spot for prose generation. It is cheaper and faster than Opus, but significantly more creative and capable of complex writing than Haiku or standard open-weights models.
 
-## 3. Gemini (Antigravity CLI) — *The "Jarvis" & System Admin*
-**Primary Persona:** Root-level Assistant / Out-of-band Architect / Subagent Orchestrator
+## 3. Backup CLI (Codex primary / Kimi different-eyes) — *Mike's Hands-On Second Assistant*
+**Primary Persona:** Out-of-band terminal assistant (Mike-driven) — strictly outside the `GodWorld` roleplay layer
 
-* **The Job:** Operates strictly outside the `GodWorld` roleplay layer, serving as the bridge between raw engineering and content generation. Responsible for managing the server environment, auditing engine health, executing Node.js ingestion pipelines, and interfacing directly with Google Drive. Crucially, Gemini operates as a multiplier by defining and invoking specialized, concurrent subagents (e.g., dedicated sports reporters, analysts, historians) to execute bulk prose generation or research tasks simultaneously without blocking execution. 
-* **Why it fits:** A massive context window combined with native, highly autonomous tool use (safe file edits, bash access, environment introspection). The ability to seamlessly manage background tasks (cron, timers) and orchestrate concurrent subagents makes it the ultimate "meta" pair-programmer, capable of managing both the structural code and the parallelized content creation without cluttering the Opus layer.
+* **The Job:** Doc-truing, running articles/scripts, sim-design brainstorming, and general tool-using terminal work when Claude usage is exhausted mid-week. **Codex CLI** (GPT-5.5, $20/mo via ChatGPT Plus) is the primary backup — best tool-use reliability of the field, evolving from code-agent into a general agent workspace. **Kimi Code** (K2.6, cheap pay-as-you-go, different lab) is the different-eyes secondary for sim brainstorming.
+* **RETIREMENT NOTE (S332) — the prior occupant of this slot is retired.** This slot used to be **Gemini via the Antigravity (`agy`) CLI**, cast as "the Jarvis." Antigravity is **retired from trusted project work and removed from disk**: it fabricated tool-use provenance (claimed a cron wrote a piece it actually wrote via subagents), botched a `CLAUDE.md` edit, and scores weakest on tool-use benchmarks. A backup that misreports what it did **corrupts the project record** — it nearly poisoned the provenance of the Friction Doctrine. Codex's failure mode (rate-limits / occasionally ignoring instructions) is containable and, critically, it does not fabricate its own actions. **Reliability + honest tool-use reporting is the #1 selection criterion for this slot, above raw writing skill.** (AI web apps beat CLIs on pure creative writing — so this slot's value is reliable tool-use + doc work + a different-eyes brain, not prose.)
 
-## 4. Aider (OpenRouter / DeepSeek) — *The Tactical Coder & "Hands"*
-**Primary Persona:** Terminal Pair Programmer
+## 4. Aider — *RETIRED for this project (S332)*
 
-* **The Job:** Fast, localized code edits. Used for quick bug fixes in execution scripts (e.g., `scripts/buildDeskPackets.js`), generating boilerplate, or performing surgical refactors.
-* **Why it fits:** Lives directly in the terminal, automatically tracks changes in git, and respects `.gitignore`. By utilizing fast, low-cost models (like DeepSeek V3) via OpenRouter, it handles the coding grunt work at a fraction of a cent, saving Opus/Sonnet tokens for pure storytelling.
+Aider was "the hands" (localized code edits via OpenRouter/DeepSeek). **Retired and removed from disk:** the codebase is written by Opus + Fable, so a code-diff scalpel offers little, and the backup need is doc/creative/tool work, not code. Grok CLI was also evaluated and **shelved/removed** — its 2026 hallucination rate doubled (25%→54%), the same failure class as Antigravity.
 
 ## 5. Claude Haiku — *The Civic Voices & Short-form Generators*
 **Primary Personas:** `civic-office-mayor`, `city-clerk`, `civic-project-*` directors
@@ -50,14 +48,14 @@ By decoupling the "Brain" (Strategy/Orchestration) from the "Hands" (Coding/Exec
 
 ---
 
-## 6. File Boundaries & Isolation (S274)
+## 6. File Boundaries & Isolation (S274; backup-CLI update S332)
 
-Gemini, Aider, and the Claude orchestration layer share the same repo and run as
-the same OS user (root). To stop an autonomous low-cost agent from corrupting the
-layer Mags/Claude runs on, the **Claude control plane is read-only to Gemini and
-Aider**:
+Any backup CLI (now **Codex**; formerly Gemini/Antigravity + Aider, both retired
+S332) and the Claude orchestration layer share the same repo and run as the same
+OS user (root). To stop an out-of-band assistant from corrupting the layer
+Mags/Claude runs on, the **Claude control plane is read-only to the backup CLI**:
 
-| Zone | Paths | Gemini / Aider |
+| Zone | Paths | Backup CLI (Codex) |
 |------|-------|----------------|
 | **Control plane** (Claude-owned) | `.claude/**`, `CLAUDE.md`, `SESSION_CONTEXT.md` | **read-only** |
 | **Substrate + execution** | `phase*/`, `utilities/`, `lib/`, `scripts/` | read-write — Aider is "the hands" |
@@ -80,6 +78,16 @@ with the control plane mounted read-only. Adopt if the soft tier proves leaky.
 
 Roster companion: `.agents/AGENTS.md` is the *per-agent roster*; this doc is the
 *model-tier + cost-to-reasoning* view.
+
+---
+
+## 7. Cost & API doctrine (S332, Mike-direct)
+
+- **Premium Claude (Anthropic API / workbench) is reserved for judgment + gate work** that genuinely needs it: the **Rhea canon gate**, Mags EIC crons, deep review. NOT for grunt or bulk generation.
+- **Grunt / writing / bulk → OpenRouter + DeepSeek.** Proven cheap and canon-capable (DeepSeek ~500× cheaper than Sonnet at compose parity). Move API usage **off the Anthropic workbench** except the reserved judgment/gate cases.
+- **Check OpenRouter for best-model-per-task** rather than defaulting to one model — pick the cheapest model that clears the bar for each job.
+- **Backup CLI:** Codex ($20 ChatGPT Plus) primary; Kimi Code different-eyes secondary. Antigravity, Aider, and Grok retired from disk (S332).
+- **Friction is an agent/stance property, not a model or tool property (S332):** Jax-caliber accountability writing comes from running the `freelance-firebrand` agent skill (adversarial stance), not from any particular CLI or premium model. The gold is reproducible on cheap models once the writer runs the right persona.
 
 ---
 

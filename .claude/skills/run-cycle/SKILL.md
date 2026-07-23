@@ -38,7 +38,7 @@ Read world state from sheets. Identify ailments, improvements, incoherence. Prod
 **Gate:** File exists on disk.
 
 ### Step 5: /build-world-summary
-Read Riley_Digest (3 cycles), Sports Feed (3 cycles), civic production log (if exists), and engine review output. Produce factual world summary. Output: `output/world_summary_c{XX}.md`. Ingest to world-data Supermemory.
+Read Riley_Digest (3 cycles), Sports Feed (3 cycles), civic production log (if exists), and engine review output. Produce factual world summary. Output: `output/world_summary_c{XX}.md`. Ingest to world-data Supermemory. The writer also emits `output/desk_signal_c{XX}.json` (engine.76 W5 half 1) — per-desk signal partition, pointers only, consumed by `/desk-slice` and the headless writer-wakes.
 
 **Gate:** File exists on disk + ingest confirmed.
 

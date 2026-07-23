@@ -88,7 +88,7 @@ The S325 "angle-assignment stage" premise is **superseded**. The C101 cron test 
 | # | Layer | Who does it | Cost | Home |
 |---|---|---|---|---|
 | 1 | **WHO writes** — byline candidate + rotation so the same name doesn't write everything | Engine (this Phase 2.0) | Free | W5 half 2, research-build design → engine-sheet build |
-| 2 | **WHAT's in your beat** — per-desk signal partition; pointers so e.g. the culture desk *knows the hot restaurant exists* instead of self-filtering the 40k blob | Engine | Free | W5 half 1, engine.76 (engine-sheet, in-progress) |
+| 2 | **WHAT's in your beat** — per-desk signal partition; pointers so e.g. the culture desk *knows the hot restaurant exists* instead of self-filtering the 40k blob | Engine | Free | W5 half 1, engine.76 — **SHIPPED S332**: `output/desk_signal_c{XX}.json` via buildWorldSummary.js v2.1.0 sibling emit |
 | 3 | **The angle / the take** — found from the layer-2 pointers + `source-search` depth + the reporter's life experience | Reporter, desk-side | The paid LLM | locked charge rule; proven in the C101 test |
 | 4 | **Real quotes** — reporter interviews the actual affected citizen crons instead of inventing sources | Engine (`citizenVoice.js --batch`) | ~pennies | **pipeline.43, already built**; needs headless wiring (Phase 2) |
 

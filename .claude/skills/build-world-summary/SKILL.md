@@ -72,6 +72,8 @@ Single Markdown file with these sections (codified in `scripts/buildWorldSummary
 9. Approval Ratings (filtered to MAYOR-* + COUNCIL-D* rows, sorted by OfficeId)
 10. Footer (script version + source citation)
 
+Sibling artifact (v2.1.0, engine.76 W5 half 1): the same run also emits `output/desk_signal_c{XX}.json` — a per-desk signal partition (civic/sports/culture/business lanes, POINTERS ONLY, ripples routed by CauseType) under the same deterministic no-LLM contract. Consumed by `/desk-slice` and the headless writer-wakes.
+
 Section structure is owned by the script. If a section format needs changing, edit the emitter function in `scripts/buildWorldSummary.js` (and its test in `scripts/buildWorldSummary.test.js`) — do NOT edit prose in this skill or hand-edit the generated `.md`.
 
 ## Verification gate

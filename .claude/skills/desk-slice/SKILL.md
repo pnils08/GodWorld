@@ -44,6 +44,7 @@ Mags reads, in order:
 2. City-hall section — decisions, votes, voices (world summary lacks these).
 3. `output/engine_anomalies_c{XX}.json` — every `cover-as-story` item. **These are events citizens lived (bug-is-event); they must land in some desk's slice. Never scrub one as an artifact.**
 4. `Story_Seed_Deck` content rows + open tension register (`logs/citizen-tension-state.json`) — candidate texture; tensions are subjective seeds, never publishable as fact.
+5. `output/desk_signal_c{XX}.json` — the engine's pre-sorted per-desk lane index (pointers only; Mags still reads the sources above — the partition just tells her where each desk's signal lives). Fail-open: if absent, proceed with the reads above.
 
 Mags reads the content; the slices will pass **pointers**. The desk reaches the raw material itself — that gap is what kept the C100 spike a spike (Task 1 forensics, held-rule 1).
 

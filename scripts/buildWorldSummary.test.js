@@ -317,6 +317,218 @@ console.log('\nTest 11: emitApprovalRatings');
 }
 
 // ────────────────────────────────────────────────────────────────────────────
+// Test 11b: signalLabel + extractPopids (W5 desk-signal pure helpers)
+// ────────────────────────────────────────────────────────────────────────────
+console.log('\nTest 11b: signalLabel + extractPopids');
+{
+  for (const fn of ['signalLabel', 'extractPopids', 'rippleEntry', 'emitDeskSignal']) {
+    assert(`export ${fn} is function`, typeof helper[fn] === 'function');
+  }
+  assert('export RIPPLE_LANE_MAP is object', typeof helper.RIPPLE_LANE_MAP === 'object');
+  assert('export DESK_SIGNAL_VERSION is string', typeof helper.DESK_SIGNAL_VERSION === 'string');
+
+  assertEqual('joins with pipe', helper.signalLabel('a', 'b'), 'a | b');
+  assertEqual('collapses whitespace', helper.signalLabel('foo   bar\n baz'), 'foo bar baz');
+  assertEqual('drops null/undefined/empty/blank', helper.signalLabel(null, 'x', undefined, '', '  '), 'x');
+  assertEqual('all-empty → empty string', helper.signalLabel(null, '', undefined), '');
+  assertEqual('trims each bit', helper.signalLabel('  a  ', ' b '), 'a | b');
+
+  assertEqual('popids sorted from string', helper.extractPopids('POP-00123 hi POP-00045'), ['POP-00045', 'POP-00123']);
+  assertEqual('popids deduped', helper.extractPopids('POP-00001 and POP-00001'), ['POP-00001']);
+  assertEqual('popids from array source', helper.extractPopids(['POP-00002', 'x POP-00001']), ['POP-00001', 'POP-00002']);
+  assertEqual('popids across multiple sources', helper.extractPopids('POP-00010', ['POP-00002']), ['POP-00002', 'POP-00010']);
+  assertEqual('no match → empty', helper.extractPopids('nothing here', null, undefined), []);
+  assertEqual('short id not matched (needs 5 digits)', helper.extractPopids('POP-123'), []);
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// Test 11c: rippleEntry + RIPPLE_LANE_MAP routing table
+// ────────────────────────────────────────────────────────────────────────────
+console.log('\nTest 11c: rippleEntry + RIPPLE_LANE_MAP');
+{
+  const row = {
+    Cycle: '102',
+    CauseType: 'sports',
+    EffectType: 'MoodShift',
+    CauseDetail: 'Game win lifts POP-00001',
+    Neighborhood: ' Temescal ',
+    TargetIds: 'POP-00010;POP-00002'
+  };
+  const e = helper.rippleEntry(row, 102);
+  assertEqual('kind is ripple', e.kind, 'ripple');
+  assertEqual('causeType preserved', e.causeType, 'sports');
+  assertIncludes('ref points at Ripple_Ledger cycle', e.ref, 'Ripple_Ledger cycle 102');
+  assertIncludes('ref points at rendered What Moved section', e.ref, '"### sports"');
+  assertEqual('label = EffectType | CauseDetail verbatim', e.label, 'MoodShift | Game win lifts POP-00001');
+  assertEqual('hood trimmed', e.hood, 'Temescal');
+  assertEqual('popids from TargetIds + CauseDetail, sorted unique', e.popids, ['POP-00001', 'POP-00002', 'POP-00010']);
+  assertEqual('missing CauseType → untyped', helper.rippleEntry({}, 5).causeType, 'untyped');
+  assertEqual('no popids field when none found', helper.rippleEntry({ CauseType: 'migration' }, 5).popids, undefined);
+
+  const expected = {
+    'initiative-implementation': 'civic',
+    'approval-shift': 'civic',
+    'sports': 'sports',
+    'faith-event': 'culture',
+    'fame-event': 'culture',
+    'lifestyle-sighting': 'culture',
+    'trajectory': 'business',
+    'migration': 'business',
+    'edition-coverage': 'business'
+  };
+  assertEqual('RIPPLE_LANE_MAP has exactly the 9 live cause types', Object.keys(helper.RIPPLE_LANE_MAP).sort(), Object.keys(expected).sort());
+  for (const [k, lane] of Object.entries(expected)) {
+    assertEqual(`route ${k} → ${lane}`, helper.RIPPLE_LANE_MAP[k], lane);
+  }
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// Test 11d: emitDeskSignal — synthetic full-signal build
+// ────────────────────────────────────────────────────────────────────────────
+console.log('\nTest 11d: emitDeskSignal (synthetic data)');
+{
+  const data = {
+    auditJson: {
+      patterns: [{
+        type: 'stuck-initiative',
+        severity: 'high',
+        description: 'Initiative stuck in disbursement phase',
+        affectedEntities: { citizens: ['POP-00042'], neighborhoods: ['West Oakland'] },
+        evidence: { sheet: 'Initiative_Tracker', rows: [2] }
+      }],
+      snapshots: {
+        Initiative_Tracker: [
+          {
+            InitiativeID: 'INIT-001', Name: 'Test Fund', Status: 'passed',
+            ImplementationPhase: 'rollout', AffectedNeighborhoods: 'West Oakland',
+            NextScheduledAction: 'milestone review',
+            NextActionCycle: '105', VoteCycle: '', OverrideVoteCycle: ''
+          },
+          {
+            InitiativeID: 'INIT-002', Name: 'Old Measure', Status: 'implemented',
+            NextActionCycle: '90', VoteCycle: '85', OverrideVoteCycle: ''
+          }
+        ]
+      }
+    },
+    rippleAll: [
+      { Cycle: '100', CauseType: 'initiative-implementation', EffectType: 'CivicShift', CauseDetail: 'fund disbursed' },
+      { Cycle: '100', CauseType: 'sports', EffectType: 'MoodShift', CauseDetail: 'big win' },
+      { Cycle: '100', CauseType: 'faith-event', EffectType: 'Gathering', CauseDetail: 'vigil held' },
+      { Cycle: '100', CauseType: 'weather-drift', EffectType: 'FootTraffic', CauseDetail: 'UNMAPPED-MARKER row' },
+      { Cycle: '99', CauseType: 'sports', EffectType: 'PriorCycle', CauseDetail: 'PRIOR-CYCLE-MARKER excluded' }
+    ],
+    sportsAll: [
+      {
+        Cycle: '100', TeamsUsed: "A's", EventType: 'game-result', SeasonType: 'mid-season',
+        NamesUsed: 'Vinnie Keane',
+        StoryAngle: 'SECRET-ANGLE-TEXT that must never leak into the signal',
+        Stats: 'SECRET-STATS 3h/1hr'
+      },
+      { Cycle: '99', TeamsUsed: 'Bulls', EventType: 'PRIOR-SPORTS-MARKER' }
+    ],
+    neighborhoodsC: [],
+    rileyCurr: { WorldEvents: JSON.stringify([{ domain: 'CIVIC', neighborhood: 'KONO', severity: 'high' }]) }
+  };
+
+  const sig = helper.emitDeskSignal(100, data);
+  const flat = JSON.stringify(sig);
+
+  // Lane counts: civic = anomaly + 2 initiatives + 1 vote + civic-log + 1 ripple = 6;
+  // sports = 1 feed + 1 ripple = 2; culture = 1 hood + 4 fixed pointers + 1 ripple = 6;
+  // business = 1 unmapped ripple.
+  assertEqual('civic lane count', sig.lanes.civic.length, 6);
+  assertEqual('sports lane count', sig.lanes.sports.length, 2);
+  assertEqual('culture lane count', sig.lanes.culture.length, 6);
+  assertEqual('business lane count', sig.lanes.business.length, 1);
+  for (const lane of Object.keys(sig.lanes)) {
+    assertEqual(`meta.counts.${lane} matches lane length`, sig.meta.counts[lane], sig.lanes[lane].length);
+  }
+
+  const anomaly = sig.lanes.civic.find(e => e.kind === 'anomaly');
+  assert('anomaly entry present', Boolean(anomaly));
+  assertIncludes('anomaly ref → patterns[0] + evidence', anomaly.ref, 'engine_audit_c100.json patterns[0]; evidence: Initiative_Tracker row(s) 2');
+  assertEqual('anomaly popids', anomaly.popids, ['POP-00042']);
+  assertEqual('anomaly hood', anomaly.hood, 'West Oakland');
+
+  const votes = sig.lanes.civic.filter(e => e.kind === 'vote');
+  assertEqual('exactly one vote entry (INIT-002 all past-cycle)', votes.length, 1);
+  assertIncludes('vote label carries pending action pointer', votes[0].label, 'milestone review C105');
+  assertIncludes('vote label names the initiative', votes[0].label, 'Test Fund');
+
+  assert('civic-log entry present', sig.lanes.civic.some(e => e.kind === 'civic-log'));
+  assertIncludes('civic-log points at production log', flat, 'production_log_c100.md');
+
+  assertEqual('unmapped ripple lands in business', sig.lanes.business[0].causeType, 'weather-drift');
+  assertIncludes('unmapped ripple label verbatim', sig.lanes.business[0].label, 'UNMAPPED-MARKER');
+
+  assertExcludes('StoryAngle NEVER leaks (WHAT stays desk-side)', flat, 'SECRET-ANGLE-TEXT');
+  assertExcludes('Stats NEVER leak', flat, 'SECRET-STATS');
+  assertIncludes('sports feed label carries WHO', flat, 'Vinnie Keane');
+  assertExcludes('prior-cycle ripple excluded', flat, 'PRIOR-CYCLE-MARKER');
+  assertExcludes('prior-cycle sports row excluded', flat, 'PRIOR-SPORTS-MARKER');
+
+  const hood = sig.lanes.culture.find(e => e.kind === 'hood');
+  assertEqual('world-event hood entry', hood && hood.hood, 'KONO');
+  assertIncludes('meta.contract states pointers-only', sig.meta.contract, 'POINTERS ONLY');
+  assertEqual('meta.cycle', sig.meta.cycle, 100);
+
+  // Determinism: two builds identical modulo meta.builtAt
+  const sig2 = helper.emitDeskSignal(100, data);
+  sig.meta.builtAt = sig2.meta.builtAt = 'X';
+  assertEqual('deterministic modulo builtAt', JSON.stringify(sig), JSON.stringify(sig2));
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// Test 11e: emitDeskSignal — degraded inputs must never throw
+// ────────────────────────────────────────────────────────────────────────────
+console.log('\nTest 11e: emitDeskSignal (degraded inputs)');
+{
+  function trySignal(label, cycle, data) {
+    try { const r = helper.emitDeskSignal(cycle, data); assert(label, true); return r; }
+    catch (err) { assert(label, false, err.message); return null; }
+  }
+
+  // Spec-listed degraded shape: patterns missing, snapshots missing,
+  // WorldEvents null, rippleAll []
+  const d1 = trySignal('minimal degraded data does not throw', 101,
+    { auditJson: {}, rippleAll: [], sportsAll: [], neighborhoodsC: [], rileyCurr: { WorldEvents: null } });
+  if (d1) {
+    assert('note: missing Initiative_Tracker snapshot', d1.meta.notes.some(n => n.includes('no Initiative_Tracker snapshot')));
+    assert('note: no Ripple_Ledger rows', d1.meta.notes.some(n => n.includes('no Ripple_Ledger rows')));
+    assertEqual('civic lane = civic-log pointer only', d1.lanes.civic.map(e => e.kind), ['civic-log']);
+    assertEqual('sports lane empty', d1.meta.counts.sports, 0);
+  }
+
+  // patterns non-array + malformed WorldEvents JSON + rippleAll undefined
+  const d2 = trySignal('non-array patterns + malformed WorldEvents + undefined rippleAll', 101,
+    { auditJson: { patterns: 'nope' }, rippleAll: undefined, sportsAll: [], neighborhoodsC: [], rileyCurr: { WorldEvents: '{{not json' } });
+  if (d2) assertEqual('malformed inputs → civic-log only', d2.lanes.civic.length, 1);
+
+  // Initiative_Tracker snapshot present but not an array
+  trySignal('non-array Initiative_Tracker snapshot', 101,
+    { auditJson: { snapshots: { Initiative_Tracker: { bogus: true } } }, rippleAll: [], sportsAll: [], neighborhoodsC: [], rileyCurr: {} });
+
+  // WorldEvents valid JSON but not an array
+  trySignal('WorldEvents valid-JSON non-array', 101,
+    { auditJson: {}, rippleAll: [], sportsAll: [], neighborhoodsC: [], rileyCurr: { WorldEvents: '{"neighborhood":"KONO"}' } });
+
+  // WorldEvents array containing a null entry
+  const d5 = trySignal('WorldEvents array with null entry', 101,
+    { auditJson: {}, rippleAll: [], sportsAll: [], neighborhoodsC: [], rileyCurr: { WorldEvents: '[null,{"neighborhood":"KONO"}]' } });
+  if (d5) assert('null entry skipped, KONO hood still emitted', d5.lanes.culture.some(e => e.kind === 'hood' && e.hood === 'KONO'));
+
+  // CauseType colliding with Object.prototype keys must route to default lane,
+  // not resolve an inherited function as the lane name
+  const d6 = trySignal('prototype-key CauseType (toString)', 103,
+    { auditJson: {}, rippleAll: [{ Cycle: '103', CauseType: 'toString', EffectType: 'X', CauseDetail: 'proto probe' }], sportsAll: [], neighborhoodsC: [], rileyCurr: {} });
+  if (d6) assertEqual('proto-key CauseType lands in business', d6.lanes.business.length, 1);
+
+  // Fully empty data object
+  trySignal('empty data object does not throw', 104, {});
+}
+
+// ────────────────────────────────────────────────────────────────────────────
 // Test 12: integration — full build against live sheets (CANON_PRESENT skip)
 // ────────────────────────────────────────────────────────────────────────────
 const auditPath = path.join(__dirname, '..', 'output', 'engine_audit_c94.json');

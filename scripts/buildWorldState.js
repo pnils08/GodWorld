@@ -152,6 +152,7 @@ async function main() {
   const pointers = {};
   for (const [key, rel] of [
     ['worldSummary', `output/world_summary_c${cycle}.md`],
+    ['deskSignal', `output/desk_signal_c${cycle}.json`],
     ['neighborhoodTexture', `output/neighborhood_texture_c${cycle}.md`],
     ['engineAudit', `output/engine_audit_c${cycle}.json`],
     ['engineReview', `output/engine_review_c${cycle}.md`]

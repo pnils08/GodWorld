@@ -42,7 +42,7 @@ const path = require('path');
 const sheets = require('/root/GodWorld/lib/sheets');
 
 const REPO_ROOT = path.resolve(__dirname, '..');
-const SCRIPT_VERSION = '2.0.0';
+const SCRIPT_VERSION = '2.1.0';
 
 // ============================================================================
 // PURE HELPERS (testable without sheet access)
@@ -674,6 +674,219 @@ function emitApprovalRatings(approvalRows, prior) {
   return lines;
 }
 
+// ============================================================================
+// DESK SIGNAL PARTITION (engine.76 W5 half 1, Mike S329)
+// ============================================================================
+// Sorts the cycle's signal by desk lane as POINTERS ONLY — feeds /desk-slice
+// (fork path) and the research.25 Phase 2 daily writer-wakes. Locked charge
+// rule: pointers + verbatim labels, never pre-assembled data. Engine assists
+// WHO/WHERE-to-look, never WHAT — so sports entries carry teams/names but NOT
+// StoryAngle (the desk reads the angle itself at the pointer), and no entry
+// carries magnitudes or stats.
+//
+// Lane spec (ROLLOUT engine.76 row): civic=anomalies/votes/initiatives,
+// sports=feed/roster deltas, culture=hoods/faith, business=ripples. Ripples
+// route by CauseType (map below, verified against live c102 — 9 live types);
+// unmapped types default to business.
+//
+// Ordering is deterministic: fixed lane order, fixed kind order per lane,
+// source order (sheet appearance / patterns index) within kind.
+
+const RIPPLE_LANE_MAP = {
+  'initiative-implementation': 'civic',
+  'approval-shift': 'civic',
+  'sports': 'sports',
+  'faith-event': 'culture',
+  'fame-event': 'culture',
+  'lifestyle-sighting': 'culture',
+  'trajectory': 'business',
+  'migration': 'business',
+  'edition-coverage': 'business'
+};
+const RIPPLE_DEFAULT_LANE = 'business';
+const DESK_SIGNAL_VERSION = '1.0';
+
+// One-line label hygiene: single line, no table-breaking pipes doubled up.
+function signalLabel(...bits) {
+  return bits.filter(b => b !== null && b !== undefined && String(b).trim() !== '')
+    .map(b => String(b).replace(/\s+/g, ' ').trim())
+    .join(' | ');
+}
+
+function extractPopids(...sources) {
+  const ids = new Set();
+  for (const s of sources) {
+    if (!s) continue;
+    const text = Array.isArray(s) ? s.join(' ') : String(s);
+    for (const m of text.match(/POP-\d{5}/g) || []) ids.add(m);
+  }
+  return [...ids].sort();
+}
+
+function rippleEntry(r, cycle) {
+  const t = r.CauseType || 'untyped';
+  const e = {
+    kind: 'ripple',
+    causeType: t,
+    ref: `Ripple_Ledger cycle ${cycle} (CauseType ${t}); rendered: world_summary_c${cycle}.md "## What Moved" > "### ${t}"`,
+    label: signalLabel(r.EffectType, r.CauseDetail)
+  };
+  if (r.Neighborhood) e.hood = String(r.Neighborhood).trim();
+  const popids = extractPopids(r.TargetIds, r.CauseDetail);
+  if (popids.length) e.popids = popids;
+  return e;
+}
+
+// Pure: builds the desk-signal object from the same loaded cycle data the
+// summary emitters consume. No sheet reads of its own.
+function emitDeskSignal(cycle, data) {
+  // Degraded-input guards: never throw on missing pieces — emit what exists.
+  const { auditJson = {}, rippleAll, sportsAll = [], neighborhoodsC = [], rileyCurr = {} } = data;
+  const notes = [];
+  const lanes = { civic: [], sports: [], culture: [], business: [] };
+
+  // ── civic: anomalies (every audit pattern — bug-is-event: they must be
+  // reachable from some desk; /desk-slice curates cover-as-story placement) ──
+  const patterns = Array.isArray(auditJson.patterns) ? auditJson.patterns : [];
+  patterns.forEach((p, i) => {
+    const ev = p.evidence || {};
+    const entry = {
+      kind: 'anomaly',
+      ref: `output/engine_audit_c${cycle}.json patterns[${i}]`
+        + (ev.sheet ? `; evidence: ${ev.sheet} row(s) ${(ev.rows || []).join(',')}` : ''),
+      label: signalLabel(`${p.type || 'unknown-type'} (${p.severity || '—'})`, p.description)
+    };
+    const ae = p.affectedEntities || {};
+    const popids = extractPopids(ae.citizens);
+    if (popids.length) entry.popids = popids;
+    if (Array.isArray(ae.neighborhoods) && ae.neighborhoods.length) entry.hood = ae.neighborhoods.join(', ');
+    lanes.civic.push(entry);
+  });
+
+  // ── civic: initiatives + votes (audit snapshot — same-cycle, zero extra reads) ──
+  const snapIT = auditJson.snapshots && auditJson.snapshots.Initiative_Tracker;
+  const initiatives = Array.isArray(snapIT) ? snapIT : [];
+  if (!initiatives.length) notes.push('no Initiative_Tracker snapshot in engine_audit — initiative/vote entries omitted');
+  for (const it of initiatives) {
+    lanes.civic.push({
+      kind: 'initiative',
+      ref: `Initiative_Tracker (InitiativeID ${it.InitiativeID}); snapshot: engine_audit_c${cycle}.json snapshots.Initiative_Tracker`,
+      label: signalLabel(it.Name, `Status ${it.Status || '—'}`, it.ImplementationPhase ? `phase ${it.ImplementationPhase}` : null),
+      hood: it.AffectedNeighborhoods || undefined
+    });
+    // Upcoming action = vote signal. Cycle indices are pointers, not figures.
+    const nextCycle = parseInt(it.NextActionCycle, 10);
+    const voteCycle = parseInt(it.VoteCycle, 10);
+    const overrideCycle = parseInt(it.OverrideVoteCycle, 10);
+    const pending = [
+      Number.isFinite(nextCycle) && nextCycle >= cycle ? `${it.NextScheduledAction || 'next action'} C${nextCycle}` : null,
+      Number.isFinite(voteCycle) && voteCycle >= cycle ? `vote C${voteCycle}` : null,
+      Number.isFinite(overrideCycle) && overrideCycle >= cycle ? `override vote C${overrideCycle}` : null
+    ].filter(Boolean);
+    if (pending.length) {
+      lanes.civic.push({
+        kind: 'vote',
+        ref: `Initiative_Tracker (InitiativeID ${it.InitiativeID})`,
+        label: signalLabel(it.Name, pending.join('; '))
+      });
+    }
+  }
+
+  // ── civic: city-hall log pointer (section written AFTER this build) ──
+  lanes.civic.push({
+    kind: 'civic-log',
+    ref: `output/production_log_c${cycle}.md "## /city-hall"`,
+    label: 'Council decisions, votes, voices — written by /city-hall after this build; read at consume time'
+  });
+
+  // ── sports: feed rows, current cycle. NO StoryAngle — WHAT stays desk-side. ──
+  for (const r of sportsAll) {
+    if (String(r.Cycle) !== String(cycle)) continue;
+    lanes.sports.push({
+      kind: 'feed',
+      ref: `Oakland_Sports_Feed cycle ${cycle}; rendered: world_summary_c${cycle}.md "## Sports" C${cycle} (StoryAngle at the pointer)`,
+      label: signalLabel(r.TeamsUsed, r.EventType, r.SeasonType ? `(${r.SeasonType})` : null, r.NamesUsed)
+    });
+  }
+
+  // ── culture: hoods with world-event signal this cycle + texture index ──
+  // Texture file is produced at run-cycle Step 5.5, AFTER this Step 5 build —
+  // pointers name the promised path; /desk-slice and writer-wakes run later.
+  const texturePath = `output/neighborhood_texture_c${cycle}.md`;
+  if (!fs.existsSync(path.join(REPO_ROOT, texturePath))) {
+    notes.push(`${texturePath} not present at build time (produced at Step 5.5) — hood refs are forward pointers`);
+  }
+  const worldEvents = parseJsonField(rileyCurr.WorldEvents, []);
+  const evByHood = {};
+  for (const ev of Array.isArray(worldEvents) ? worldEvents : []) {
+    const h = ev && ev.neighborhood;
+    if (h) evByHood[h] = (evByHood[h] || 0) + 1;
+  }
+  for (const h of Object.keys(evByHood).sort()) {
+    lanes.culture.push({
+      kind: 'hood',
+      ref: `${texturePath} "### ${h}"; events: world_summary_c${cycle}.md "## World Events"`,
+      label: signalLabel(h, `${evByHood[h]} world event(s) this cycle`),
+      hood: h
+    });
+  }
+  lanes.culture.push({
+    kind: 'hood-index',
+    ref: `${texturePath}`,
+    label: `Per-hood texture blocks, all ${neighborhoodsC.length} neighborhoods (quiet hoods carry a quiet-week line)`
+  });
+  lanes.culture.push({
+    kind: 'evening',
+    ref: `output/world_summary_c${cycle}.md "## Evening Texture"`,
+    label: 'Named venues that moved — restaurants, fast food, nightlife spots, city events, media'
+  });
+  lanes.culture.push({
+    kind: 'milestones',
+    ref: `output/world_summary_c${cycle}.md "## Who Lived It"; source: LifeHistory_Log cycle ${cycle}`,
+    label: 'Citizen milestones with POPIDs — weddings, births, graduations, retirements, households formed'
+  });
+  lanes.culture.push({
+    kind: 'faith-registry',
+    ref: 'Faith_Organizations tab (LeaderPOPID-linked)',
+    label: 'Faith org registry — congregations, leaders, neighborhood, character'
+  });
+
+  // ── ripples: route by CauseType; unmapped → business (the row's default lane) ──
+  const cycleRipples = (rippleAll || []).filter(r => String(r.Cycle) === String(cycle));
+  for (const r of cycleRipples) {
+    // hasOwnProperty guard: a CauseType like "toString" must not resolve an
+    // inherited Object.prototype member as the lane name.
+    const lane = Object.prototype.hasOwnProperty.call(RIPPLE_LANE_MAP, r.CauseType)
+      ? RIPPLE_LANE_MAP[r.CauseType]
+      : RIPPLE_DEFAULT_LANE;
+    lanes[lane].push(rippleEntry(r, cycle));
+  }
+  if (!cycleRipples.length) notes.push('no Ripple_Ledger rows this cycle — ripple entries empty across lanes');
+
+  // Drop undefined optional fields for a clean artifact.
+  for (const lane of Object.keys(lanes)) {
+    lanes[lane] = lanes[lane].map(e => {
+      const clean = {};
+      for (const [k, v] of Object.entries(e)) if (v !== undefined) clean[k] = v;
+      return clean;
+    });
+  }
+
+  return {
+    meta: {
+      cycle,
+      script: `buildWorldSummary.js v${SCRIPT_VERSION} (deskSignal v${DESK_SIGNAL_VERSION})`,
+      builtAt: new Date().toISOString(),
+      laneRule: 'civic=anomalies/votes/initiatives, sports=feed, culture=hoods/faith, business=ripples-default; ripples route by CauseType (rippleLaneMap)',
+      rippleLaneMap: RIPPLE_LANE_MAP,
+      counts: Object.fromEntries(Object.entries(lanes).map(([k, v]) => [k, v.length])),
+      contract: 'POINTERS ONLY — labels are verbatim source strings (they may embed source-native deltas); no derived stats, no career numbers, no angles. The desk reaches the raw material itself.',
+      notes
+    },
+    lanes
+  };
+}
+
 function emitFooter(cycle) {
   return [
     '---',
@@ -686,7 +899,9 @@ function emitFooter(cycle) {
 // ORCHESTRATION
 // ============================================================================
 
-async function buildWorldSummary(cycle) {
+// Load everything the emitters (summary + desk signal) need, once. W5: split
+// out of buildWorldSummary so main() can feed both artifacts from one pull.
+async function loadCycleData(cycle) {
   if (!Number.isInteger(cycle) || cycle < 1) {
     throw new Error(`buildWorldSummary: cycle must be a positive integer, got ${cycle}`);
   }
@@ -743,6 +958,24 @@ async function buildWorldSummary(cycle) {
   const approvalRows = filterApprovalRows(civicOfficesAll);
   const priorApprovals = loadPriorApprovals(cycle);
 
+  return {
+    auditJson,
+    rileyCurr, rileyPrev1, rileyPrev2,
+    sportsAll, calendarAll, chaosAll, hospitalAll,
+    rippleAll, lhlAll, householdAll,
+    worldPopCurr, neighborhoodsC, approvalRows, priorApprovals
+  };
+}
+
+async function buildWorldSummary(cycle, preloaded) {
+  const data = preloaded || await loadCycleData(cycle);
+  const {
+    auditJson, rileyCurr, rileyPrev1, rileyPrev2,
+    sportsAll, calendarAll, chaosAll, hospitalAll,
+    rippleAll, lhlAll, householdAll,
+    worldPopCurr, neighborhoodsC, approvalRows, priorApprovals
+  } = data;
+
   // Build sections
   const out = [];
   out.push(...emitHeader(cycle, rileyCurr, calendarAll.slice(1)));
@@ -793,21 +1026,39 @@ async function main() {
     : path.join('output', `world_summary_c${cycle}.md`);
   const dryRun = args.includes('--dry-run');
 
-  const body = await buildWorldSummary(cycle);
+  const data = await loadCycleData(cycle);
+  const body = await buildWorldSummary(cycle, data);
+
+  // W5: desk-signal partition rides the same load — sibling artifact.
+  const deskSignal = emitDeskSignal(cycle, data);
+  const signalPath = path.join('output', `desk_signal_c${cycle}.json`);
+  const signalJson = JSON.stringify(deskSignal, null, 2) + '\n';
 
   if (dryRun) {
     process.stdout.write(body);
     console.error(`\n[dry-run] would write to ${outputPath}`);
+    console.error(`[dry-run] would write ${signalJson.length} bytes to ${signalPath} — lanes: ${JSON.stringify(deskSignal.meta.counts)}`);
   } else {
     const absOut = path.isAbsolute(outputPath) ? outputPath : path.join(REPO_ROOT, outputPath);
     fs.mkdirSync(path.dirname(absOut), { recursive: true });
     fs.writeFileSync(absOut, body);
     console.log(`Wrote ${body.length} bytes to ${outputPath}`);
+    fs.writeFileSync(path.join(REPO_ROOT, signalPath), signalJson);
+    console.log(`Wrote ${signalJson.length} bytes to ${signalPath} — lanes: ${JSON.stringify(deskSignal.meta.counts)}`
+      + (deskSignal.meta.notes.length ? `\nnotes:\n  - ${deskSignal.meta.notes.join('\n  - ')}` : ''));
   }
 }
 
 module.exports = {
   buildWorldSummary,
+  loadCycleData,
+  // W5 desk-signal partition (pure — testable without sheet access)
+  emitDeskSignal,
+  rippleEntry,
+  signalLabel,
+  extractPopids,
+  RIPPLE_LANE_MAP,
+  DESK_SIGNAL_VERSION,
   // Pure helpers exported for testing
   round2,
   fmtSentiment,

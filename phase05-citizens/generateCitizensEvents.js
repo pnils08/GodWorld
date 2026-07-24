@@ -47,6 +47,45 @@
 // canonical impl lives in phase07-evening-media/textureTriggers.js,
 // resolved via Apps Script flat namespace.
 
+/**
+ * Give each eligible Event_Content_Ledger PoolKey equal aggregate draw mass
+ * without changing the ledger's total mass against hardcoded events.
+ *
+ * Row weights still control selection WITHIN a PoolKey. Hardcoded entries have
+ * no eclPoolKey and are untouched. No RNG is consumed here.
+ */
+function balanceContentLedgerPoolWeights_(pool) {
+  var groups = {};
+  var keys = [];
+  var ledgerTotal = 0;
+
+  for (var i = 0; i < pool.length; i++) {
+    var entry = pool[i];
+    if (!entry.eclPoolKey) continue;
+    var weight = Math.max(0.001, Number(entry.weight || 1));
+    if (!groups[entry.eclPoolKey]) {
+      groups[entry.eclPoolKey] = { entries: [], total: 0 };
+      keys.push(entry.eclPoolKey);
+    }
+    groups[entry.eclPoolKey].entries.push(entry);
+    groups[entry.eclPoolKey].total += weight;
+    ledgerTotal += weight;
+  }
+
+  if (keys.length < 2 || ledgerTotal <= 0) return pool;
+
+  var bucketMass = ledgerTotal / keys.length;
+  for (var k = 0; k < keys.length; k++) {
+    var group = groups[keys[k]];
+    for (var j = 0; j < group.entries.length; j++) {
+      var row = group.entries[j];
+      var rowWeight = Math.max(0.001, Number(row.weight || 1));
+      row.weight = bucketMass * (rowWeight / group.total);
+    }
+  }
+  return pool;
+}
+
 function generateCitizensEvents_(ctx) {
   // Phase 42 §5.6: SL read/mutate via shared ctx.ledger; commit at Phase 10.
   if (!ctx.ledger) {
@@ -2524,6 +2563,7 @@ function generateCitizensEvents_(ctx) {
           clPooled.ledgerLine = clEntry;      // draw-time compose hook
           clPooled.ledgerScopes = condScopes; // fragment eligibility at compose
           clPooled.eclKey = eclRowKey_(clk, clEntry.text); // S329 telemetry identity
+          clPooled.eclPoolKey = clk;           // PoolKey mass-balancing identity
           eclTelemetry.eligible[clPooled.eclKey] = (eclTelemetry.eligible[clPooled.eclKey] || 0) + 1;
           pool.push(clPooled);
         }
@@ -2648,6 +2688,13 @@ function generateCitizensEvents_(ctx) {
       usePool = hardPool;
     }
     if (!usePool.length) break; // nothing fresh left to say this cycle
+
+    // PoolKey is a draw bucket, not just an authoring label. Preserve the
+    // ledger's total effective mass after trait/dial/continuity modifiers, but
+    // divide that mass evenly across the eligible ledger PoolKeys in this draw.
+    // This removes row-count dominance without changing hardcoded weights,
+    // event volume, gates, or RNG sequence.
+    balanceContentLedgerPoolWeights_(usePool);
 
     var entry = pickWeighted_(usePool);
     var pick = entry.text;

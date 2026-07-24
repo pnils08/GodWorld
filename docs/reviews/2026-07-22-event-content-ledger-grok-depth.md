@@ -1,10 +1,10 @@
 ---
 title: Event_Content_Ledger — Grok-depth review
 created: 2026-07-22
-updated: 2026-07-22
+updated: 2026-07-24
 type: review
 tags: [engine, content-ledger, citizens, review]
-status: doc-drift patched 2026-07-22 (SPREADSHEET / event-pools §D / CODEBASE_MAP / SHEETS_MANIFEST / ENGINE_STUB_REVERSE); depth backlog still awaiting Mike go
+status: PoolKey mass balancing built and locally validated 2026-07-24; sandbox proof pending; exclusive retirement, trajectory, and proving-ground work remains open
 sources:
   - phase02-world-state/loadEventContentLedger.js
   - phase05-citizens/generateCitizensEvents.js (composer + injection + life-state gate)
@@ -88,6 +88,14 @@ So “ledger-native first” content still competes as one more weighted entry a
 - optional **bucket weight** so `baylight.*` cannot be drowned by ambient Daily mass
 
 That is how you get “ledgers adapt” without a big-bang rewrite.
+
+**2026-07-24 implementation status:** Phase 5 now preserves the ledger's total
+effective draw mass while dividing that mass evenly across the eligible
+PoolKeys for each draw; row weights still rank lines within their PoolKey.
+Hardcoded entries, gates, event volume, and RNG calls are unchanged. Local
+contract/composer tests pass; sandbox telemetry proof is pending. This closes
+row-count dominance only—the `exclusive` hardcoded-block retirement policy
+remains open.
 
 ### B. The seam audit’s real gap is only half-closed
 
@@ -176,7 +184,7 @@ The missing feedback arrow is **LifeHistory draws → drafter / prune**. Right n
 
 1. **Telemetry + prune** — eligible/draw/null counts per row or poolKey; `Active=no` for auto rows dead 10+ cycles or never drawn N cycles.
 2. **Refresh ops docs** — `SPREADSHEET.md` row count + ENGINE+SCRIPT writers; regenerate event-pools DSL table from `CONTENT_LEDGER_DSL_FIELDS`.
-3. **PoolKey policy** — exclusive/migrate mode so ledger can retire hardcoded blocks pool-by-pool.
+3. **PoolKey policy** — mass balancing built/local-tested 2026-07-24; sandbox proof pending. Exclusive/migrate mode so ledger can retire hardcoded blocks pool-by-pool remains open.
 4. **Trajectory conditions** — displacement/mood/intent deltas so state→experience tracks change.
 5. **Fragment economy** — cycle draw caps + role discipline; reduce “same MOOD clause everywhere.”
 6. **Ledger snapshot / content hash** — replay and audit honesty under auto-active.

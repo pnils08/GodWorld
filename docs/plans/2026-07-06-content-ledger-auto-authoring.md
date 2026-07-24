@@ -107,7 +107,8 @@ Rows in the existing 8-col schema (`Kind|PoolKey|Slot|Text|Weight|Conditions|Tag
   12 civic tags were applied and independently verified, then an idempotence
   dry-run found zero remaining repairs. One unrelated malformed row 7 remains
   fail-closed. **NEXT:** sandbox Cycle telemetry proof (expected 236 lines /
-  1 skip); Phase 5 PoolKey mass-balancing remains proposal-only.
+  1 skip). Phase 5 PoolKey mass balancing was subsequently built and locally
+  validated; its sandbox deployment and comparative telemetry remain pending.
 - 2026-07-06 — **T4 BUILT (S300).** Mike reviewed in-sheet and flipped all 6 T3 rows to
   `Active=yes` (S298 post-close); T4 go Mike-direct S300. Drafter default flipped
   `--active no` → `yes` (`parseArgs`; `--active no` retained as supervised override;

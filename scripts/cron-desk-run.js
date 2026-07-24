@@ -140,7 +140,7 @@ function collectQuoteAsks(lane) {
       seen.add(pop);
       asks.push({ pop, ask: 'The Tribune is looking into this in your part of Oakland: "' +
         String(e.label || '').slice(0, 160) + '". Speak about how it touches your life.',
-        record: true, maxTokens: 200 });
+        record: !NO_GATE, maxTokens: 200 });   // S332: --no-gate SAMPLES never write citizen memory (was unconditional record:true — the layer-4 leak Codex caught)
     }
     if (asks.length >= QUOTE_CITIZEN_CAP) break;
   }

@@ -104,5 +104,93 @@ for (const [c, expected] of FIXTURES) {
   check('default is still dry-run', d.parseArgs(base).apply === false);
 }
 
+// 7. Optional target confirmation preserves the legacy post-cycle invocation
+{
+  const prior = process.env.GODWORLD_SHEET_ID;
+  process.env.GODWORLD_SHEET_ID = 'env-production-like-id';
+  const inherited = ['node', 'draftContentRows.js', '--cycle', '118', '--apply'];
+  const explicit = ['node', 'draftContentRows.js', '--cycle', '118', '--apply',
+    '--sheet-id', 'sandbox-id'];
+  const legacy = d.parseArgs(inherited);
+  const unconfirmed = d.parseArgs(explicit);
+  let mismatchRejected = false;
+  try {
+    d.parseArgs(explicit.concat(['--confirm-sheet-id', 'other-id']));
+  } catch (_) { mismatchRejected = true; }
+  const confirmed = d.parseArgs(explicit.concat(['--confirm-sheet-id', 'sandbox-id']));
+  check('legacy environment-target apply remains compatible',
+    legacy.apply && legacy.sheetId === 'env-production-like-id');
+  check('explicit unconfirmed apply remains compatible',
+    unconfirmed.apply && unconfirmed.sheetId === 'sandbox-id');
+  check('mismatched optional confirmation is rejected', mismatchRejected);
+  check('apply accepts matching explicit + confirmed sheet id',
+    confirmed.apply && confirmed.sheetIdExplicit && confirmed.confirmSheetId === confirmed.sheetId);
+  if (prior === undefined) delete process.env.GODWORLD_SHEET_ID;
+  else process.env.GODWORLD_SHEET_ID = prior;
+}
+
+// 8. Auto-author quality gate rejects summary prose, not lived action
+{
+  const flat = [
+    'the city buzzes with energy after the game',
+    'the project is bringing new life to the neighborhood',
+    'the initiative is making waves across town',
+    'the plan is sparking excitement on the block',
+    'residents talked about a brighter future',
+    'the opening brought a sense of pride and anticipation',
+    'Laurel feels alive after the win',
+    'Downtown is thriving',
+    'Fruitvale is on the rise',
+    'neighbors feel more connected than ever',
+    'new faces joined the vibrant mix'
+  ];
+  for (const text of flat) {
+    check(`quality rejects flat summary: ${text.slice(0, 28)}`,
+      !!d.qualityIssue({ kind: 'line', text }));
+  }
+  check('quality rejects terminal punctuation',
+    !!d.qualityIssue({ kind: 'line', text: 'waited for the late bus.' }));
+  check('quality accepts concrete lived-action clause',
+    d.qualityIssue({ kind: 'line', text: 'waited through two late buses before walking home' }) === '');
+  check('quality leaves fragments to slot validation',
+    d.qualityIssue({ kind: 'fragment', text: 'with rain caught in their sleeves.' }) === '');
+}
+
+// 9. Batch slot integrity: entity slots are code-side; content slots need data
+{
+  const existing = new Set(['MOOD']);
+  const batch = new Set(['SENSORY']);
+  check('existing content slot passes',
+    d.slotDependencyIssue({ kind: 'line', text: 'paused at $VENUE and $MOOD' }, existing, batch) === '');
+  check('same-batch fragment slot passes',
+    d.slotDependencyIssue({ kind: 'line', text: 'noticed $SENSORY on the walk' }, existing, batch) === '');
+  check('entity slots pass without ledger fragments',
+    d.slotDependencyIssue({ kind: 'line', text: 'met $CONTACT outside $INSTITUTION' }, existing, batch) === '');
+  check('unfillable content slot is rejected',
+    d.slotDependencyIssue({ kind: 'line', text: 'stared into $VOID' }, existing, batch).includes('VOID'));
+}
+
+// 10. Telemetry profile is deterministic and separates authoring from routing
+{
+  const existing = [
+    d.HDR,
+    ['line', 'thin.pool', '', 'one', 1, '', 'source:qol', '', 'yes'],
+    ['line', 'dead.pool', '', 'two', 1, '', 'source:qol', '', 'yes'],
+    ['fragment', '', 'MOOD', 'steady', 1, '', '', '', 'yes']
+  ];
+  const telemetry = [
+    ['Cycle', 'LineCount', 'FragmentCount', 'Skipped', 'ContentHash', 'EligibleJSON', 'DrawsJSON', 'ComposeNullJSON'],
+    [108, 2, 1, 0, 'abc', JSON.stringify({ 'dead.pool#two': 10, 'thin.pool#one': 10 }),
+      JSON.stringify({ 'thin.pool#one': 2 }), '{}']
+  ];
+  const a = d.buildLedgerProfile(existing, telemetry);
+  const b = d.buildLedgerProfile(existing, telemetry);
+  check('ledger profile deterministic', JSON.stringify(a) === JSON.stringify(b));
+  check('ledger profile finds thin pools', a.thinPools.includes('thin.pool'));
+  check('ledger profile finds fragment slots', a.fragmentSlots.MOOD === 1);
+  check('ledger profile marks eligible zero-draw pool', a.persistentNoDrawPools.includes('dead.pool'));
+  check('ledger profile records telemetry cycles', a.telemetryCycles[0] === 108);
+}
+
 console.log(`\n${pass}/${pass + fail} passed`);
 process.exit(fail ? 1 : 0);

@@ -1,7 +1,7 @@
 ---
 title: Event_Content_Ledger Auto-Authoring Plan
 created: 2026-07-06
-updated: 2026-07-06
+updated: 2026-07-24
 type: plan
 tags: [engine, citizens, content-ledger, offload, active]
 sources:
@@ -93,6 +93,21 @@ Rows in the existing 8-col schema (`Kind|PoolKey|Slot|Text|Weight|Conditions|Tag
 
 ## Status
 
+- 2026-07-24 — **DEPTH GUARDS + SANDBOX CIVIC-TAG REPAIR BUILT (Codex,
+  builder-approved).** `draftContentRows.js` now reads `Content_Telemetry` into
+  a bounded pool profile, prompts with the loader's complete condition DSL,
+  rejects generic city-summary prose and terminal sentence punctuation, and
+  checks accepted line/fragment batches for unfillable `$SLOT` dependencies.
+  Interactive runs support a second `--confirm-sheet-id`; the legacy
+  environment-targeted post-cycle apply remains compatible. New bounded repair
+  script changes only first-tag `source:civic` rows to canonical
+  `source:civicNews`, validates them through the real loader, and read-back
+  verifies column G. Local validation: drafter 52/52, repair 14/14, loader
+  23/23, composer 13/13. `SANDBOX_0720` dry-runs used the explicit Sheet ID;
+  12 civic tags were applied and independently verified, then an idempotence
+  dry-run found zero remaining repairs. One unrelated malformed row 7 remains
+  fail-closed. **NEXT:** sandbox Cycle telemetry proof (expected 236 lines /
+  1 skip); Phase 5 PoolKey mass-balancing remains proposal-only.
 - 2026-07-06 — **T4 BUILT (S300).** Mike reviewed in-sheet and flipped all 6 T3 rows to
   `Active=yes` (S298 post-close); T4 go Mike-direct S300. Drafter default flipped
   `--active no` → `yes` (`parseArgs`; `--active no` retained as supervised override;

@@ -21,10 +21,13 @@
  *
  * Usage:
  *   node scripts/draftContentRows.js --cycle 117 [--apply] [--backend stub]
- *        [--active no] [--sheet-id <id>]
+ *        [--active no] [--sheet-id <id>] [--confirm-sheet-id <id>]
  *   Default: dry-run (prints, writes nothing), --active yes (T4 auto-active —
  *   fail-closed loader + caps + dedup + prune are the standing guards; pass
  *   --active no for a supervised T3-style run), sheet from GODWORLD_SHEET_ID.
+ *   Interactive sandbox use should pass both IDs. The legacy post-cycle job
+ *   still uses GODWORLD_SHEET_ID, so confirmation is optional for backward
+ *   compatibility; when supplied it must match exactly.
  *
  * Caps (logged, never silent): 10 rows/cycle, 3/PoolKey, 2 fragments/slot.
  * Dedup: normalized text vs existing tab rows + within batch.
@@ -54,18 +57,46 @@ eval(fs.readFileSync(path.join(__dirname, '..', 'phase02-world-state', 'loadEven
 const MAX_ROWS = 10, MAX_PER_POOL = 3, MAX_PER_SLOT = 2;
 const HDR = ['Kind', 'PoolKey', 'Slot', 'Text', 'Weight', 'Conditions', 'Tags', 'Grain', 'Active'];
 const MODEL = process.env.DRAFTER_MODEL || 'deepseek/deepseek-chat';
+const ENTITY_SLOTS = new Set(['VENUE', 'INSTITUTION', 'CONTACT']);
+const FLAT_SUMMARY_PATTERNS = [
+  /\bbuzz(?:es|ing)? with energy\b/i,
+  /\bbringing new life\b/i,
+  /\bmaking waves\b/i,
+  /\bsparking excitement\b/i,
+  /\bbrighter future\b/i,
+  /\bsense of pride and anticipation\b/i,
+  /\bfeels alive\b/i,
+  /\bis thriving\b/i,
+  /\bon the rise\b/i,
+  /\bmore connected than ever\b/i,
+  /\bvibrant mix\b/i
+];
 
 function parseArgs(argv) {
-  const a = { apply: false, backend: 'openrouter', active: 'yes', cycle: null, sheetId: process.env.GODWORLD_SHEET_ID };
+  const a = {
+    apply: false,
+    backend: 'openrouter',
+    active: 'yes',
+    cycle: null,
+    sheetId: process.env.GODWORLD_SHEET_ID,
+    sheetIdExplicit: false,
+    confirmSheetId: null
+  };
   for (let i = 2; i < argv.length; i++) {
     if (argv[i] === '--apply') a.apply = true;
     else if (argv[i] === '--cycle') a.cycle = Number(argv[++i]);
     else if (argv[i] === '--backend') a.backend = argv[++i];
     else if (argv[i] === '--active') a.active = argv[++i];
-    else if (argv[i] === '--sheet-id') a.sheetId = argv[++i];
+    else if (argv[i] === '--sheet-id') {
+      a.sheetId = argv[++i];
+      a.sheetIdExplicit = true;
+    } else if (argv[i] === '--confirm-sheet-id') a.confirmSheetId = argv[++i];
   }
-  if (!a.cycle) { console.error('--cycle N required'); process.exit(1); }
-  if (!a.sheetId) { console.error('--sheet-id or GODWORLD_SHEET_ID required'); process.exit(1); }
+  if (!a.cycle) throw new Error('--cycle N required');
+  if (!a.sheetId) throw new Error('--sheet-id or GODWORLD_SHEET_ID required');
+  if (a.confirmSheetId && a.confirmSheetId !== a.sheetId) {
+    throw new Error('--confirm-sheet-id must match the resolved sheet id');
+  }
   return a;
 }
 
@@ -80,6 +111,92 @@ async function sheetsApi() {
 async function getRange(api, sheetId, range) {
   const r = await api.spreadsheets.values.get({ spreadsheetId: sheetId, range });
   return r.data.values || [];
+}
+
+async function getOptionalRange(api, sheetId, range) {
+  try {
+    return await getRange(api, sheetId, range);
+  } catch (err) {
+    const message = String((err && err.message) || '');
+    if (err && Number(err.code) === 400 &&
+        /unable to parse range|not found/i.test(message)) return [];
+    throw err;
+  }
+}
+
+function contentSlots(text) {
+  return [...String(text || '').matchAll(/\$([A-Z_]+)/g)].map(m => m[1]);
+}
+
+function qualityIssue(candidate) {
+  if (!candidate || candidate.kind !== 'line') return '';
+  const text = String(candidate.text || '').trim();
+  if (/[.!?]$/.test(text)) {
+    return 'ledger lines are clauses and must not end in punctuation';
+  }
+  if (FLAT_SUMMARY_PATTERNS.some(re => re.test(text))) {
+    return 'editorial-summary language instead of a lived citizen action';
+  }
+  return '';
+}
+
+function slotDependencyIssue(candidate, existingSlots, acceptedFragments) {
+  if (!candidate || candidate.kind !== 'line') return '';
+  const missing = contentSlots(candidate.text).filter(slot =>
+    !ENTITY_SLOTS.has(slot) &&
+    !existingSlots.has(slot) &&
+    !acceptedFragments.has(slot)
+  );
+  const unique = [...new Set(missing)];
+  return unique.length ? `unfillable slot(s): ${unique.join(',')}` : '';
+}
+
+function buildLedgerProfile(existing, telemetry) {
+  const hdr = existing[0] || [];
+  const iKind = hdr.indexOf('Kind');
+  const iPool = hdr.indexOf('PoolKey');
+  const iSlot = hdr.indexOf('Slot');
+  const iActive = hdr.indexOf('Active');
+  const poolCounts = {};
+  const slotCounts = {};
+
+  for (const row of existing.slice(1)) {
+    if (iActive >= 0 && String(row[iActive] || '').toLowerCase() === 'no') continue;
+    const kind = String(row[iKind] || '').toLowerCase();
+    if (kind === 'line') {
+      const pool = String(row[iPool] || '').trim();
+      if (pool) poolCounts[pool] = (poolCounts[pool] || 0) + 1;
+    } else if (kind === 'fragment') {
+      const slot = String(row[iSlot] || '').trim();
+      if (slot) slotCounts[slot] = (slotCounts[slot] || 0) + 1;
+    }
+  }
+
+  const eligibleByPool = {};
+  const drawsByPool = {};
+  const telemetryRows = telemetry.slice(1).filter(row => row && row[0] !== undefined && row[0] !== '');
+  for (const row of telemetryRows) {
+    let eligible = {}, draws = {};
+    try { eligible = JSON.parse(String(row[5] || '{}')); } catch (_) {}
+    try { draws = JSON.parse(String(row[6] || '{}')); } catch (_) {}
+    for (const [key, value] of Object.entries(eligible)) {
+      const pool = key.split('#')[0];
+      eligibleByPool[pool] = (eligibleByPool[pool] || 0) + Number(value || 0);
+    }
+    for (const [key, value] of Object.entries(draws)) {
+      const pool = key.split('#')[0];
+      drawsByPool[pool] = (drawsByPool[pool] || 0) + Number(value || 0);
+    }
+  }
+
+  return {
+    telemetryCycles: telemetryRows.map(row => row[0]),
+    thinPools: Object.keys(poolCounts).filter(pool => poolCounts[pool] <= 2).sort(),
+    fragmentSlots: slotCounts,
+    persistentNoDrawPools: Object.keys(eligibleByPool)
+      .filter(pool => eligibleByPool[pool] > 0 && !drawsByPool[pool])
+      .sort()
+  };
 }
 
 // ── Facts: what this cycle actually produced ────────────────────────────────
@@ -188,7 +305,7 @@ function draftStub(facts) {
   return out;
 }
 
-async function draftOpenRouter(facts) {
+async function draftOpenRouter(facts, ledgerProfile) {
   if (!process.env.OPENROUTER_API_KEY) throw new Error('OPENROUTER_API_KEY missing (lib/env)');
   const sources = Object.keys(CONTENT_LEDGER_SOURCE_WHITELIST).join(', ');
   const prompt = [
@@ -198,8 +315,9 @@ async function draftOpenRouter(facts) {
     'Rules:',
     '- kind=line REQUIRES poolKey and tags whose FIRST tag is one of: ' + sources,
     '- kind=fragment REQUIRES slot (e.g. MOOD, VENUE) and fills one $SLOT token.',
-    '- conditions grammar: ";"-joined AND terms (ALL must hold for one citizen). Fields: wealth,children,displacement (num, ops <=,>=,<,>,=,!=); married,retired (bare flag); ageband=youth|youngAdult|adult|senior; hood=<exact name>; season=<name>. Empty string = ungated. A citizen has exactly ONE hood — never AND multiple "hood=X" terms together (that can never be true for anyone); if a line fits several neighborhoods, draft it ungated or pick the single best-fit hood.',
-    '- text: one lived-in sentence, lowercase start, no citizen names, no numbers from the facts, may use $VENUE/$MOOD tokens in lines.',
+    '- conditions grammar: ";"-joined AND terms (ALL must hold for one citizen). Numeric fields: wealth, children, displacement, tier, fame (ops <=,>=,<,>,=,!=). Bare flags: married, retired. Enums: ageband=youth|youngAdult|adult|senior; band=child|teen|youth|youngAdult|adult|senior; lifestate=student|working|retired|none; heritage=none|founding|established|prominent|dynasty. Strings: hood, season, occupation, culdomain (only = or !=). Empty string = ungated. A citizen has exactly ONE hood — never AND multiple "hood=X" terms together; if a line fits several neighborhoods, draft it ungated or pick the single best-fit hood.',
+    '- text: one concrete action or observation experienced by one citizen; lowercase clause, no terminal punctuation, no citizen names, no numbers from the facts. Show physical detail, choice, inconvenience, labor, overheard speech, or consequence. Do not summarize how a neighborhood or the city feels. Never use booster language such as thriving, vibrant, hopeful, making waves, on the rise, or more connected than ever. Lines may use $VENUE/$MOOD tokens.',
+    '- Ledger profile: prefer a thin PoolKey only when the cycle facts support it. Do not add rows to persistentNoDrawPools; those need routing work, not more content. Existing fragment slots may be reused. ' + JSON.stringify(ledgerProfile || {}),
     '- Evening/night-out texture (engine.78b): PoolKey may use the "evening.*" domain — evening.nightlife (bars/DJ/live music), evening.food (late food spots), evening.cityEvent (night markets, gallery walks, festivals). These use tags starting with "source:prevEvening" (the whitelisted evening source — do NOT use "source:evening", it is not whitelisted); optionally add a second tag evening:nightlife / evening:food / evening:cityEvent to match the vocabulary generateCitizensEvents.js already uses. Draft these ONLY for hoods where facts.hoods[].nightlife (0-1 scale) is high (roughly >=0.7) or facts show real evening/nightlife activity — gate with hood=<name>, do not invent a nightlife condition field (none exists).',
     '- Draft 6-10 rows grounded in THESE cycle facts (gate lines to the hoods/conditions the facts justify):',
     JSON.stringify(facts, null, 1),
@@ -274,12 +392,23 @@ async function main() {
   const facts = await gatherFacts(api, args.sheetId, args.cycle);
   console.log(`facts: ${facts.seeds.length} seeds, ${facts.hoods.length} hoods, weather=${facts.weather || '-'}, holiday=${facts.holiday || '-'}`);
 
-  const existing = await getRange(api, args.sheetId, 'Event_Content_Ledger!A1:I500');
+  const existing = await getRange(api, args.sheetId, 'Event_Content_Ledger!A1:I');
+  const telemetry = await getOptionalRange(api, args.sheetId, 'Content_Telemetry!A1:H');
+  const ledgerProfile = buildLedgerProfile(existing, telemetry);
+  console.log(`ledger profile: ${ledgerProfile.thinPools.length} thin pools, ${Object.keys(ledgerProfile.fragmentSlots).length} fragment slots, ${ledgerProfile.persistentNoDrawPools.length} persistent no-draw pools, ${ledgerProfile.telemetryCycles.length} telemetry cycles`);
   const existingHdr = existing[0] || [];
   const iText = existingHdr.indexOf('Text');
+  const iKind = existingHdr.indexOf('Kind');
+  const iSlot = existingHdr.indexOf('Slot');
+  const iActive = existingHdr.indexOf('Active');
   const seenText = new Set(existing.slice(1).map(r => norm(r[iText])).filter(Boolean));
+  const existingSlots = new Set(existing.slice(1)
+    .filter(r => String(r[iKind] || '').toLowerCase() === 'fragment' &&
+      String(r[iActive] || '').toLowerCase() !== 'no')
+    .map(r => String(r[iSlot] || '').trim())
+    .filter(Boolean));
 
-  const candidates = args.backend === 'stub' ? draftStub(facts) : await draftOpenRouter(facts);
+  const candidates = args.backend === 'stub' ? draftStub(facts) : await draftOpenRouter(facts, ledgerProfile);
   console.log(`drafted: ${candidates.length} candidates`);
 
   const report = { written: [], invalid: [], dup: [], capped: [] };
@@ -290,6 +419,8 @@ async function main() {
     if (c.kind === 'line' && (perPool[c.poolKey] || 0) >= MAX_PER_POOL) { report.capped.push(c.text); continue; }
     if (c.kind === 'fragment' && (perSlot[c.slot] || 0) >= MAX_PER_SLOT) { report.capped.push(c.text); continue; }
     if (seenText.has(norm(c.text))) { report.dup.push(c.text); continue; }
+    const quality = qualityIssue(c);
+    if (quality) { report.invalid.push(c.text + ' [' + quality + ']'); continue; }
     c.tags = ensureAutoTag(c.tags);
     if (!hoodGateValid(c.conditions, hoodNames)) { report.invalid.push(c.text + ' [dead hood gate: ' + c.conditions + ']'); continue; }
     if (!loaderAccepts(c, args.active)) { report.invalid.push(c.text + ' [' + c.tags + ' | ' + c.conditions + ']'); continue; }
@@ -298,6 +429,18 @@ async function main() {
     else perSlot[c.slot] = (perSlot[c.slot] || 0) + 1;
     report.written.push(c);
   }
+
+  const acceptedFragments = new Set(report.written
+    .filter(c => c.kind === 'fragment')
+    .map(c => c.slot)
+    .filter(Boolean));
+  const slotSafe = [];
+  for (const c of report.written) {
+    const issue = slotDependencyIssue(c, existingSlots, acceptedFragments);
+    if (issue) report.invalid.push(c.text + ' [' + issue + ']');
+    else slotSafe.push(c);
+  }
+  report.written = slotSafe;
 
   console.log(`\nvalid: ${report.written.length} | invalid: ${report.invalid.length} | dup: ${report.dup.length} | capped: ${report.capped.length}`);
   report.invalid.forEach(t => console.log('  INVALID ' + t));
@@ -325,7 +468,7 @@ async function main() {
   }
 
   // Verify after write (engine rule): read back and confirm the rows landed.
-  const after = await getRange(api, args.sheetId, 'Event_Content_Ledger!A1:I500');
+  const after = await getRange(api, args.sheetId, 'Event_Content_Ledger!A1:I');
   const afterTexts = new Set(after.slice(1).map(r => norm(r[3])));
   const missing = report.written.filter(c => !afterTexts.has(norm(c.text)));
   if (missing.length) { console.error(`VERIFY FAILED — ${missing.length} rows not found after write`); process.exit(1); }
@@ -333,4 +476,18 @@ async function main() {
 }
 
 if (require.main === module) main().catch(e => { console.error('ERR', e.message); process.exit(1); });
-module.exports = { draftStub, loaderAccepts, ensureAutoTag, hoodGateValid, parseArgs, HDR, MAX_ROWS, MAX_PER_POOL, MAX_PER_SLOT };
+module.exports = {
+  draftStub,
+  loaderAccepts,
+  ensureAutoTag,
+  hoodGateValid,
+  parseArgs,
+  qualityIssue,
+  slotDependencyIssue,
+  buildLedgerProfile,
+  contentSlots,
+  HDR,
+  MAX_ROWS,
+  MAX_PER_POOL,
+  MAX_PER_SLOT
+};

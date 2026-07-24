@@ -1,8 +1,8 @@
 {
-  "_comment": "Per-desk model routing (research.25 / plan 2026-07-20-headless-newsroom-pipeline, Task 3). cron-desk-writer.js reads this keyed by --desk when --provider/--model are not given on the CLI. Voice-critical desks -> Sonnet; routine desks -> DeepSeek (per Feedback1.txt). The exact split is an open question (confirm with Mike).",
-  "sports":     { "provider": "anthropic",  "model": "claude-sonnet-5" },
-  "civic":      { "provider": "anthropic",  "model": "claude-sonnet-5" },
-  "chicago":    { "provider": "anthropic",  "model": "claude-sonnet-5" },
+  "_comment": "Per-desk model routing (research.25). ALL DESKS -> DeepSeek (Mike-direct S332): the C102 test showed DeepSeek produced canon-accurate, in-voice, 0-hallucination articles on all 4 desks (incl civic+sports) at ~$0.003 vs Sonnet's ~$1.50. Sonnet bought no quality; article voice is an agent-stance property, not a model one. Override per-run with --provider/--model if ever needed.",
+  "sports":     { "provider": "openrouter", "model": "deepseek/deepseek-chat" },
+  "civic":      { "provider": "openrouter", "model": "deepseek/deepseek-chat" },
+  "chicago":    { "provider": "openrouter", "model": "deepseek/deepseek-chat" },
   "business":   { "provider": "openrouter", "model": "deepseek/deepseek-chat" },
   "culture":    { "provider": "openrouter", "model": "deepseek/deepseek-chat" },
   "letters":    { "provider": "openrouter", "model": "deepseek/deepseek-chat" },

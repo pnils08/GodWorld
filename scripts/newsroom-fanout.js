@@ -1,0 +1,144 @@
+#!/usr/bin/env node
+/**
+ * Newsroom fan-out rotation — scripts/newsroom-fanout.js
+ *
+ * Phase 2.3 fan-out (Mike-direct 2026-07-25): the three-wake cadence runs as a
+ * daily ROTA, not one hardcoded desk. 5–7 articles/day (~25–35/wk) so nearly
+ * every Tribune byline journalist works ~once a week and sports + civic are
+ * weighted 2–3. Selection is least-recently-used within each desk's beat pool,
+ * computed from prior fanout-*.json files (self-contained history — no Sheets
+ * read for usage; the roster itself still comes from buildBylineRoster).
+ *
+ * The 06:15 angle wake builds today's file if missing; report/write consume it.
+ *
+ * Usage:
+ *   node scripts/newsroom-fanout.js [--date YYYY-MM-DD] [--force]
+ *   const { buildFanout, writeFanout, loadFanout } = require('./newsroom-fanout');
+ */
+
+require('/root/GodWorld/lib/env');
+const fs = require('fs');
+const path = require('path');
+
+const ROOT = path.join(__dirname, '..');
+const COMPARE = path.join(ROOT, 'output', 'cron-compare');
+
+// Daily desk quotas (sum = 6, inside Mike's 5–7/day). Sports + civic weighted
+// per the 2026-07-25 directive; culture/business fill out the page.
+const DAILY_QUOTAS = { civic: 2, sports: 2, culture: 1, business: 1 };
+
+// Mirrors LANE_DOMAINS in cron-desk-run.js (keep in sync). Sports has no SPORTS
+// beatDomain in the Tribune roster (Paulson is excluded), so it falls back to
+// the GENERAL pool — which sports therefore shares with business.
+const DESK_DOMAINS = {
+  civic:    ['CIVIC', 'HEALTH', 'SAFETY', 'INFRASTRUCTURE', 'EDUCATION', 'ENVIRONMENT'],
+  culture:  ['CULTURE', 'COMMUNITY'],
+  business: ['ECONOMIC', 'GENERAL'],
+  sports:   []
+};
+
+function arg(flag, def) {
+  const i = process.argv.indexOf(flag);
+  if (i !== -1 && process.argv[i + 1]) return process.argv[i + 1];
+  const eq = process.argv.find(a => a.startsWith(flag + '='));
+  return eq ? eq.slice(flag.length + 1) : def;
+}
+
+// popid -> persona slug (personas are roster citizens too; Jax = POP-00799)
+function loadPersonaReverse() {
+  const rev = {};
+  try {
+    const map = JSON.parse(fs.readFileSync(path.join(__dirname, 'persona-map.json'), 'utf8'));
+    for (const [slug, p] of Object.entries(map)) if (p && p.popid) rev[p.popid] = slug;
+  } catch (_) { /* no map -> no personas */ }
+  return rev;
+}
+
+// name -> {count, last} across prior fanout files (least-recently-used rotation)
+function usageHistory() {
+  const hist = {};
+  let files = [];
+  try {
+    files = fs.readdirSync(COMPARE).filter(f => /^fanout-\d{4}-\d{2}-\d{2}\.json$/.test(f)).sort();
+  } catch (_) {}
+  for (const f of files) {
+    let j; try { j = JSON.parse(fs.readFileSync(path.join(COMPARE, f), 'utf8')); } catch (_) { continue; }
+    const date = f.slice(7, 17);
+    for (const a of (j.assignments || [])) {
+      const h = hist[a.name] || { count: 0, last: null };
+      h.count++;
+      if (!h.last || date > h.last) h.last = date;
+      hist[a.name] = h;
+    }
+  }
+  return hist;
+}
+
+async function buildFanout(date) {
+  const { buildBylineRoster } = require(path.join(ROOT, 'scripts', 'engine-auditor', 'bayTribuneRoster'));
+  const roster = await buildBylineRoster();
+  const pool = (roster.included || []).filter(j => j.popid);
+  if (!pool.length) throw new Error('byline roster is empty — cannot fan out');
+  const hist = usageHistory();
+  const personaRev = loadPersonaReverse();
+  const assignments = [];
+  const shortfalls = [];
+  const usedToday = new Set();
+
+  for (const [desk, quota] of Object.entries(DAILY_QUOTAS)) {
+    const domains = DESK_DOMAINS[desk] || [];
+    let candidates = pool.filter(j => domains.includes(j.beatDomain));
+    if (!candidates.length) candidates = pool.filter(j => j.beatDomain === 'GENERAL');
+    candidates.sort((a, b) => {
+      const ha = hist[a.name], hb = hist[b.name];
+      const la = ha && ha.last ? ha.last : '0000-00-00';   // never-worked first
+      const lb = hb && hb.last ? hb.last : '0000-00-00';
+      return la.localeCompare(lb) || a.name.localeCompare(b.name);
+    });
+    let taken = 0;
+    for (const j of candidates) {
+      if (taken >= quota) break;
+      if (usedToday.has(j.name)) continue;   // GENERAL pool is shared (sports+business)
+      usedToday.add(j.name);
+      assignments.push({
+        desk, name: j.name, popid: j.popid, beatDomain: j.beatDomain,
+        persona: personaRev[j.popid] || null
+      });
+      taken++;
+    }
+    if (taken < quota) shortfalls.push({ desk, wanted: quota, got: taken });
+  }
+  return { date, quotas: DAILY_QUOTAS, assignments, shortfalls, builtAt: new Date().toISOString() };
+}
+
+function fanoutPath(date) { return path.join(COMPARE, 'fanout-' + date + '.json'); }
+
+function loadFanout(date) {
+  try { return JSON.parse(fs.readFileSync(fanoutPath(date), 'utf8')); } catch (_) { return null; }
+}
+
+async function writeFanout(date, force) {
+  const p = fanoutPath(date);
+  if (fs.existsSync(p) && !force) return JSON.parse(fs.readFileSync(p, 'utf8'));   // idempotent: today's file stands
+  const fanout = await buildFanout(date);
+  fs.mkdirSync(COMPARE, { recursive: true });
+  fs.writeFileSync(p, JSON.stringify(fanout, null, 2));
+  return fanout;
+}
+
+if (require.main === module) {
+  const date = arg('--date', new Date().toISOString().slice(0, 10));
+  const force = process.argv.includes('--force');
+  writeFanout(date, force)
+    .then(f => {
+      console.log('fanout ' + f.date + ' — ' + f.assignments.length + ' assignments' +
+        (f.shortfalls && f.shortfalls.length ? ' (SHORTFALL: ' + f.shortfalls.map(s => s.desk + ' ' + s.got + '/' + s.wanted).join(', ') + ')' : ''));
+      for (const a of f.assignments) {
+        console.log('  ' + a.desk.padEnd(9) + a.name.padEnd(18) + (a.popid || '-').padEnd(11) + a.beatDomain + (a.persona ? '  [persona: ' + a.persona + ']' : ''));
+      }
+      console.log('→ ' + path.relative(ROOT, fanoutPath(f.date)));
+    })
+    .catch(e => { console.error('fanout failed: ' + e.message); process.exit(1); });
+}
+
+module.exports = { buildFanout, writeFanout, loadFanout, usageHistory, DAILY_QUOTAS, DESK_DOMAINS };

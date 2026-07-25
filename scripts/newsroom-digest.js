@@ -41,10 +41,12 @@ const angles = recentJson(COMPARE, 'angle.json');
 const packets = recentJson(COMPARE, 'packet.json');
 const wakes = recentJson(COMPARE, 'wake.json').concat(recentJson(COMPARE, 'run.json'));
 
-// group by desk+cycle+persona stem
+// group by desk+cycle+reporter (persona slug, else fan-out reporter, else byline)
 const desks = {};
 for (const { json } of angles.concat(packets, wakes)) {
-  const key = (json.desk || '?') + ' c' + (json.cycle || '?') + (json.persona ? ' [' + json.persona + ']' : '');
+  const who = json.persona || (json.reporter && json.reporter.name) ||
+    (json.byline && json.byline.name) || null;
+  const key = (json.desk || '?') + ' c' + (json.cycle || '?') + (who ? ' [' + who + ']' : '');
   desks[key] = desks[key] || {};
   if (json.stage === 'angle') desks[key].angle = json;
   else if (json.stage === 'report') desks[key].packet = json;

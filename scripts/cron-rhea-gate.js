@@ -57,13 +57,22 @@ function detectCycle() {
   return 'current';
 }
 
-function buildPrompt(cycle, draftRel, worldRel) {
+function buildPrompt(cycle, draftRel, worldRel, nameCheck) {
+  const pre = nameCheck ? [
+    'DETERMINISTIC NAME PRE-CHECK (canon-name-check.js vs the simulation ledger snapshot, ' + nameCheck.canonNames + ' canon citizens):',
+    nameCheck.unverified.length
+      ? 'NOT FOUND in the ledger: ' + nameCheck.unverified.join('; ') + '. For each: if the draft uses it as a PERSON (official, source, citizen) and you cannot verify it in canon via tools, flag it HIGH-severity invented name. If it is a place, business, or common phrase, dismiss it.'
+      : 'Every person-name candidate in the draft resolved to a ledger citizen.',
+    nameCheck.verified.length ? 'Confirmed ledger citizens in the draft: ' + nameCheck.verified.join('; ') + '.' : '',
+    ''
+  ].join('\n') : '';
   return [
     'You are Rhea Morgan, the Cycle Pulse verification agent, running headless as a publish gate.',
     'First read your role and rules: .claude/agents/rhea-morgan/RULES.md and .claude/agents/rhea-morgan/IDENTITY.md.',
     'Ground truth for this cycle is the world state: ' + worldRel + ' (cycle ' + cycle + ').',
     'The draft to verify is: ' + draftRel + '.',
     '',
+    pre +
     'Cross-check EVERY named person, team, record, score, vote, trade, and roster fact in the draft against the ' +
     'world state and canon. Use Read/Grep, the dashboard API at http://localhost:3001, or the godworld MCP if available. ' +
     'Do NOT trust the draft\'s own EVIDENCE/sourcing blocks — verify independently.',
@@ -99,7 +108,16 @@ function main() {
   console.log('===================================');
   console.log('model=' + MODEL + ' cycle=' + cycle);
 
-  const prompt = buildPrompt(cycle, draftRel, worldRel);
+  // Deterministic canon name pre-check (2026-07-25, the "Marisol Garcia" class):
+  // invented officials/sources get handed to the gate as a must-verify list.
+  let nameCheck = null;
+  try {
+    nameCheck = require('./canon-name-check').checkText(fs.readFileSync(draftAbs, 'utf8'));
+    console.log('name pre-check: ' + nameCheck.verified.length + ' verified, ' +
+      nameCheck.unverified.length + ' not-in-ledger' + (nameCheck.unverified.length ? ' [' + nameCheck.unverified.join('; ') + ']' : ''));
+  } catch (e) { log.warn('name pre-check failed (non-fatal): ' + e.message); }
+
+  const prompt = buildPrompt(cycle, draftRel, worldRel, nameCheck);
   // --allowedTools whitelists read-only work (no Write/Edit); last so the variadic
   // list doesn't swallow other flags.
   const args = ['-p', prompt, '--output-format', 'json', '--model', MODEL,
@@ -135,6 +153,7 @@ function main() {
     flagCount: Array.isArray(verdict.flags) ? verdict.flags.length : null,
     highSeverityCount: Array.isArray(verdict.flags) ? verdict.flags.filter(f => (f.severity || '').toLowerCase() === 'high').length : null,
     summary: verdict.summary || '',
+    nameCheck: nameCheck ? { verified: nameCheck.verified, unverified: nameCheck.unverified } : null,
     apiCostUsd: envelope.total_cost_usd ?? null,
     durationMs,
     parseError: verdict.parseError || false,

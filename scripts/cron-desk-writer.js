@@ -89,8 +89,13 @@ function costUsd(model, tin, tout) {
   return +(((tin / 1e6) * r[0]) + ((tout / 1e6) * r[1])).toFixed(4);
 }
 
-const AGENT_DIR = path.join(ROOT, '.claude', 'agents', DESK + '-desk');
-const SKILL_PATH = path.join(AGENT_DIR, 'SKILL.md');
+const PERSONA = arg('--persona', null);   // e.g. freelance-firebrand — load an authored reporter's ADVERSARIAL stance (IDENTITY+LENS+RULES) instead of the desk roundup skill (S332 firebrand lane — teeth, not roundup)
+const AGENT_DIR = path.join(ROOT, '.claude', 'agents', PERSONA || (DESK + '-desk'));
+const SKILL_PATH = path.join(AGENT_DIR, PERSONA ? 'IDENTITY.md' : 'SKILL.md');
+// Output tag (2026-07-24, Mike-direct: samples must accumulate, not overwrite) —
+// persona runs get their own filenames so a desk's roundup sample and a firebrand
+// sample on the same cycle coexist for comparison.
+const OUT_SLUG = (PERSONA ? PERSONA + '_' : '') + MODEL_SLUG;
 
 const log = {
   info: (...a) => console.log('[INFO]', new Date().toISOString(), ...a),
@@ -166,7 +171,7 @@ function toolWriteFile(input) {
   // FORCE into the compare sandbox regardless of the path the model asks for
   // (its SKILL boot step 9 tells it to write output/desk-output/... — we redirect).
   const base = path.basename(input.path || (DESK + '_section.md'));
-  const stamped = base.replace(/\.md$/, '') + '_' + MODEL_SLUG + '.md';
+  const stamped = base.replace(/\.md$/, '') + '_' + OUT_SLUG + '.md';
   const dest = path.join(COMPARE_DIR, stamped);
   if (DRY_RUN) {
     log.info('[dry-run] would write ' + (input.content || '').length + ' chars → ' + path.relative(ROOT, dest));
@@ -296,7 +301,11 @@ async function main() {
   }
 
   const cycle = detectCycle();
-  const skill = fs.readFileSync(SKILL_PATH, 'utf8');
+  // Firebrand lane (S332): a persona loads the reporter's adversarial STANCE
+  // (IDENTITY+LENS+RULES) — the teeth — instead of the desk's roundup skill.
+  const skill = PERSONA
+    ? ['IDENTITY.md', 'LENS.md', 'RULES.md'].map(f => { try { return fs.readFileSync(path.join(AGENT_DIR, f), 'utf8'); } catch (_) { return ''; } }).filter(Boolean).join('\n\n---\n\n')
+    : fs.readFileSync(SKILL_PATH, 'utf8');
 
   // Feed the FULL current world summary (not loadWorldState's ~800-char orientation
   // head — that's built for the reflection cron, which searches for depth). A desk
@@ -439,7 +448,7 @@ async function main() {
         notes: s.json.notes || (s.json.parseError ? 'score parse failed' : ''),
         ranAt: new Date().toISOString()
       };
-      const scPath = path.join(COMPARE_DIR, DESK + '_c' + cycle + '_' + MODEL_SLUG + '.scorecard.json');
+      const scPath = path.join(COMPARE_DIR, DESK + '_c' + cycle + '_' + OUT_SLUG + '.scorecard.json');
       fs.writeFileSync(scPath, JSON.stringify(scorecard, null, 2));
       log.info('scorecard → ' + path.relative(ROOT, scPath));
     } catch (e) { log.warn('scoring failed: ' + e.message); }

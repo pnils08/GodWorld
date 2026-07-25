@@ -41,6 +41,11 @@ const GATE_MODEL = arg('--gate-model', 'sonnet');   // authoritative gate; 'haik
 // subscription usage is depleted; the writer + quotes run on raw API keys. Ungated
 // output is NOT canon — it routes to samples/ marked ungated, for review only.
 const NO_GATE = process.argv.includes('--no-gate');
+// --persona (S332 firebrand lane, plumbed 2026-07-24): run an authored reporter's
+// adversarial stance instead of the desk skill. Forwarded to cron-desk-writer.js;
+// also keys the draft/artifact filenames so persona runs never overwrite desk runs.
+const PERSONA = arg('--persona', null);
+const OUT_TAG = (PERSONA ? PERSONA + '_' : '');
 
 const log = (...a) => console.log('[run]', new Date().toISOString(), ...a);
 
@@ -203,7 +208,7 @@ async function runWake() {
     return;
   }
   const route = deskRoute(DESK);
-  const draftName = DESK + '_c' + cycle + '_' + slug(route.model) + '.md';
+  const draftName = DESK + '_c' + cycle + '_' + OUT_TAG + slug(route.model) + '.md';
   const draftPath = path.join(COMPARE, draftName);
   const base = draftName.replace(/\.md$/, '');
 
@@ -234,7 +239,8 @@ async function runWake() {
   fs.writeFileSync(stateFile, buildLaneState(DESK, cycle, lane, byline, quotes));
   log('writing on lane (' + fs.statSync(stateFile).size + ' B injected state)...');
   execFileSync('node', [path.join(ROOT, 'scripts', 'cron-desk-writer.js'), '--desk', DESK,
-    '--state-file', path.relative(ROOT, stateFile)], { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
+    '--state-file', path.relative(ROOT, stateFile),
+    ...(PERSONA ? ['--persona', PERSONA] : [])], { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
   if (!fs.existsSync(draftPath)) throw new Error('writer produced no draft at ' + path.relative(ROOT, draftPath));
 
   // 4. LAYER 2 — gate (existing headless Rhea). Skipped for --no-gate samples
@@ -296,6 +302,7 @@ async function runWake() {
 
   const record = {
     mode: 'wake', desk: DESK, cycle, provider: route.provider, model: route.model, gateModel: GATE_MODEL,
+    persona: PERSONA,
     byline: byline ? { name: byline.name, popid: byline.popid, beatDomain: byline.beatDomain } : null,
     laneEntries: lane.length, quotesRequested: asks.length, quotesLanded: quotes.length,
     disposition: NO_GATE ? 'ungated-sample' : (pass ? 'staged' : 'flagged'),
@@ -311,7 +318,7 @@ async function runWake() {
 function main() {
   const cycle = arg('--cycle', null) || detectCycle();
   const route = deskRoute(DESK);
-  const draftName = DESK + '_c' + cycle + '_' + slug(route.model) + '.md';
+  const draftName = DESK + '_c' + cycle + '_' + OUT_TAG + slug(route.model) + '.md';
   const draftPath = path.join(COMPARE, draftName);
   const base = draftName.replace(/\.md$/, '');
 
@@ -321,7 +328,8 @@ function main() {
 
   // 1. WRITE (model resolved from the desk-model-map inside the writer)
   log('writing...');
-  execFileSync('node', [path.join(__dirname, 'cron-desk-writer.js'), '--desk', DESK],
+  execFileSync('node', [path.join(__dirname, 'cron-desk-writer.js'), '--desk', DESK,
+    ...(PERSONA ? ['--persona', PERSONA] : [])],
     { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
   if (!fs.existsSync(draftPath)) throw new Error('writer produced no draft at ' + path.relative(ROOT, draftPath));
 

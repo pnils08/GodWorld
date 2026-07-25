@@ -1,7 +1,7 @@
 ---
 title: Headless Newsroom + City-Hall Pipeline Plan
 created: 2026-07-20
-updated: 2026-07-22
+updated: 2026-07-25
 type: plan
 tags: [architecture, media, civic, infrastructure, active]
 sources:
@@ -208,10 +208,30 @@ This **refines "those four desks wake daily" above**: they wake M–F on a *stat
 - **Sample-overwrite fix:** runWrite routing now uses `uniqueDest()` (suffixes `-HHMM` when the same-persona+model+cycle sample already exists) so a cadence re-run no longer clobbers an earlier sample. `runWake` routing was left as-is (non-cadence path).
 - **Caveats:** (a) one verification run of `--stage=report` omitted `--no-gate`, so a `record:true` self-record row + tension-state write fired (intake applied=no; minor, noted for honesty); (b) Jax's angle named "Marisol Garcia" as the official who should answer for Jack London — **unverified** whether she is a real canon official (Mayor is Avery Santana). This is a gate-class item: persona voices can hallucinate officials; Rhea's misrepresentation class or a name-check should catch it before compile.
 
+**Fan-out + gate backstop (2026-07-25, Mike-direct; BUILT + cron installed):**
+- **Marisol Garcia RESOLVED — hallucination confirmed by Mike** (not in the sim, not real-world Oakland). The Rhea cron was *instructed* to catch invented names, but instructions drift, so a deterministic backstop now feeds her: `scripts/canon-name-check.js` extracts person-name candidates from a draft and checks them against the ledger snapshot (930 citizens; whitespace-normalized — ledger has "Jax  Caldera" double-space rows) with neighborhood/place/prose stoplists. Verified on the firebrand sample: all 5 quoted citizens verified, **Marisol Garcia flagged not-in-ledger**; on the two flagged c102 drafts: real citizens verified, initiatives/orgs surface as must-verify. Wired into `cron-rhea-gate.js` — the gate prompt now opens with the NOT-FOUND list ("if used as a PERSON and unverifiable → HIGH-severity invented name; dismiss places/businesses/phrases") and the verdict JSON carries `nameCheck`.
+- **Rotation (`scripts/newsroom-fanout.js`):** Mike's spec — 5–7 articles/day (~25–35/wk), nearly every byline journalist ~1/wk, sports + civic weighted 2–3. Quotas `{civic:2, sports:2, culture:1, business:1}` (sum 6); least-recently-used within each desk's beat pool (history from prior `fanout-*.json` files); personas attached by popid reverse-lookup. Verified: day 1 = Reyes/Delaine (civic), Reeve/Richmond (sports), Tran (culture), Velez (business); day 2 rotates all-fresh except GENERAL-pool reuse (sports has no dedicated bylines — Paulson excluded — so sports+business share the 4 GENERAL bylines; that's roster reality, not a bug).
+- **`--fanout` on cron-desk-run.js:** one stage × today's whole rota; angle wake builds today's file if missing; per-assignment artifact stems (`civic_c102_angela-reyes_angle.json`) so two same-desk reporters never clobber each other; one failure never kills the rota (`fanout-<date>.<stage>.results.json`). Roster reporters (no persona) get the angle ask in their own voice via their POPID + reporter-voiced quote asks + their angle read injected at write. Live-verified: Angela Reyes angle wake, 1/1 ok (~$0.01).
+- **Cron installed (2026-07-25; backup `output/codex/crontab-backup-2026-07-25.txt`):** 06:00 digest → 06:15 angle → 13:15 report → 18:15 write+gate. Write runs **gated with `--gate-model haiku`** (6×/day on Sonnet ≈ $133/mo blows the $20–40 target; Haiku ≈ $27/mo; the Haiku-vs-Sonnet gate comparison stays open as Phase 4). The 06:00 Phase-1 sampler line is retired (commented, kept for reference). Gated writes route to staged/ (probation wall) — nothing to canon until the Saturday compile.
+- **runWake uniqueDest:** patched (Mike-direct: "we shouldn't leave broken systems in case they are used") — same rerun-never-clobbers semantics as runWrite.
+
 ### Phase 2b — Saturday edition compile = the publish gate  *(research-build; sub-plan)*
 **Probation week:** the only place a headless story becomes citable fact. A Saturday cron where **Mags compiles**: `/sift`-style curation over the week's **staged** articles → pick the top stories → assemble edition → `/post-publish` (existing **full** canon ingest: `ingestEditionWiki.js` + `ingestEdition.js` + world-data entity records + citizen cards). During probation this is the publish gate: M–F stages, Saturday publishes. **Post-graduation** (articles publish-on-write): the Saturday compile shifts to curating already-published canon into the edition — the same `/sift` → assemble → `/post-publish` shape, but over canon rather than staged drafts. Acceptance: one Saturday run produces a published, fully-ingested edition; during probation, staged-but-uncompiled drafts never entered canon.
 
 **Cadence (S332, Mike):** the street-level crons write **short** pieces (shorter than the CLI long-view), so the shape is **~5 days of daily articles → 1 compiled for the edition** — the compile curates *down* from many short street-level drafts, not up from a few long ones. Tune the compile ratio against how these actually land during the probation week.
+
+**Compile shape (Mike-direct 2026-07-25):** the fan-out produces ~25–35 staged/flagged articles per week; **Mags compiles a template edition of ~9** from the staged pool. A **rating system ranks candidates by "moves the sim"** (storyline advancement, initiative pressure, citizen impact — to be designed with the compile, not before). This compile is **the official edition and the only canon door at first**; with enough training/proof the daily gated articles graduate to direct-to-canon-on-write and the Saturday compile becomes curation of already-canon material (Phase 2 Step 5 graduation).
+
+**Future — the "day of work" cadence (Mike-direct 2026-07-25, capture before design):** the newsroom fan-out is the journalists' "day of work" locked. The same shape extends outward:
+- **Civic "day of work":** how city hall runs on crons — offices/project directors wake on their voice-packets, work the live agenda, answer outstanding reporter demands (Phase 3).
+- **Citizen wakes cadence:** AM = work reflection (M–F?); midday = a conversation with a neighbor or a ledger bond; night = reflection on the city. (Extends today's citizen-wake/citizen-exchange crons into a full daily rhythm.)
+- **Mags:** a Discord wake system + nightly journal — open question whether she needs her own wakes or is folded into the "day of work" (she compiles Saturday; does she reflect daily?).
+
+### Phase 2.4 — NotebookLM daily listening consumer
+
+`scripts/notebooklmDailyNews.js` is a read-side consumer of the probation output, not a publication path. It packages the latest `world_summary` with recent `staged/` and `samples/` Articles, excludes flagged Article bodies, and combines that pack with a cited continuity brief queried from the permanent published-Edition notebook. A separate working notebook receives one hashed bounded source per distinct input set and produces a written brief and source-scoped audio overview for Mike.
+
+This does not weaken the probation wall: staged and ungated Articles remain explicitly unverified, the permanent `GodWorld` notebook receives published material only, and every daily artifact is `NOT_CANON`. See [[2026-07-10-notebooklm-bridge-deploy]] Phase 5 for the source hierarchy, failure contract, and schedule gate.
 
 ### Phase 2.1 — Rhea gate scope (Mike-direct S332)
 Rhea's job is two flag classes, everything else the context supports **passes** — she polices the canon boundary, not the editorial voice:
@@ -270,3 +290,4 @@ Aggregate scorecards across the accrued articles to answer Feedback1.txt's per-d
 - 2026-07-22 — Phase 2 daily writer-wake wiring specced (S332). Assembly chain over live pieces; Step 5 staging wall (M–F stage, Sat publishes) resolves canon-ingest + contamination risk.
 - 2026-07-22 — Freeze retired + reporter-record added (S332). Staging reframed freeze→probation; graduate to publish-on-write on accuracy. Step 6 (layer 5): reporter acknowledges own article to wiki (page doc + intake); NO LifeHistory per S312 double-hit.
 - 2026-07-23 — Voice doctrine + Phase 2.1 Rhea gate scope (S332). Rhea flags 2 classes only: engine verbiage + data-output misrepresentation; context-supported content passes. Journalist-agnostic. Cadence ~5 short daily → 1 compiled.
+- 2026-07-25 — Added the bounded NotebookLM daily-listening consumer pointer (Phase 2.4). It reads probation output without publishing or ingesting it; the separate bridge plan owns source scoping, delivery, and scheduling.

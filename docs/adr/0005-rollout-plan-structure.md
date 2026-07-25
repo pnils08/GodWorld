@@ -55,7 +55,7 @@ Seven type-of-work groups. Each entry coded as `<group>.<n>`:
 |-------|-------|------------------------------|
 | **pipeline** | Edition production end-to-end (sift / write-edition / post-publish / dispatch / interview / supplemental / print / photos) | `[[plans/...]]`, `[[output/production_log_..._gaps]]`, `[[media/...]]` |
 | **engine** | Engine code, ledger, schema, tech debt, engine-sheet repair | `[[plans/...]]`, `[[engine/archive/PHASE_42_PATTERNS]]`, `[[engine/archive/ENGINE_REPAIR]]` rows |
-| **canon** | World-fidelity layer, citizens, voices, real-name blocklists, contamination scrub | `[[canon/CANON_RULES]]`, `[[canon/INSTITUTIONS]]`, `[[POST_MORTEM_C92_CONTAMINATION]]` |
+| **canon** | World-fidelity layer, citizens, voices, real-name blocklists, contamination scrub | `[[canon/CANON_RULES]]`, `[[canon/INSTITUTIONS]]` |
 | **civic** | City-hall, voice agents, council canon, civic-process gap-logs, governance simulation | `[[plans/...]]`, `[[output/production_log_city_hall_..._gaps]]`, `[[mara-vance/...]]` |
 | **infrastructure** | Supermemory, Discord, dashboard, MCP, claude-mem, services, ingest pipelines | `[[STACK]]`, `[[SUPERMEMORY]]`, `[[plans/...]]` |
 | **research** | Papers, external tools, evaluations, watch-list items | `[[RESEARCH]] §section`, `[[research/...]]`, `[[mags-corliss/TECH_READING_ARCHIVE]] §S<N>` |

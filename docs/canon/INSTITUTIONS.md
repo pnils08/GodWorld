@@ -5,12 +5,10 @@ updated: 2026-05-24
 type: reference
 tags: [canon, fourth-wall, institutions, active]
 sources:
-  - docs/POST_MORTEM_C92_CONTAMINATION.md (initial real-world entity flags; tier-blind, see CANON_RULES §Why This Exists)
-  - docs/canon/CANON_RULES.md (three-tier framework this roster organizes by)
+  - docs/canon/CANON_RULES.md (three-tier framework this roster organizes by; §Why This Exists carries the S172 entity-flag history)
   - S174 three-tier reframe (split entities into Tier 1 / Tier 2 / always-block)
 pointers:
   - "[[canon/CANON_RULES]] — the rules this roster supports"
-  - "[[POST_MORTEM_C92_CONTAMINATION]] — historical record; assessment was tier-blind"
   - "[[index]] — registered here"
 ---
 

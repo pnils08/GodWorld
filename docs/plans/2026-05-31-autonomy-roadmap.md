@@ -17,8 +17,7 @@ pointers:
   - "project_city-for-bots-pivot (memory, S114) — the product framing: AI bots inhabit a city, AI newsroom covers them; moat SpaceMolt lacks"
   - "project_gpu-is-go-live-gate (memory) — hardware is the scale threshold between manual and autonomous"
   - "[[plans/2026-05-30-citizen-lifecycle-fame-system]] (engine.29) + [[engine/archive/LEDGER_REPAIR_HOUSEHOLDS]] (engine.5) — deterministic continuous citizen life (the cheap substrate)"
-  - "[[POST_MORTEM_C92_CONTAMINATION]] — the drift event autonomy amplifies; canon-fidelity layer is the answer"
-  - "[[canon/CANON_RULES]] + [[canon/INSTITUTIONS]] — the scaffold that must hold harder as horizon grows"
+  - "[[canon/CANON_RULES]] + [[canon/INSTITUTIONS]] — the scaffold that must hold harder as horizon grows (§Why This Exists carries the S172 drift-event history)"
   - "[[archive/plans/2026-05-28-gemini-offload-pattern]] (governance.21) — adjacent token-budget lever, not part of autonomy"
   - "[[../RESEARCH]] §S248 — SkillOpt (Microsoft text-space skill optimizer) — the Layer-2 learning mechanism; scorer (finalArbiter.js) already exists, gap is held-out set + optimizer harness + rollout-cost ceiling"
 ---

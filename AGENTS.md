@@ -143,6 +143,12 @@ Do not modify other areas—including `phase*/`, `utilities/`, `lib/`,
 `dashboard/`, `editions/`, `schemas/`, configuration files, hooks, or service
 manifests—without explicit permission naming that scope.
 
+Note: `docs/MODEL_HIERARCHY.md` §6 lists substrate paths (`phase*/`,
+`utilities/`, `lib/`) as read-write for the backup CLI. This file is stricter
+and governs: those paths require explicit permission here regardless of what
+MODEL_HIERARCHY says. Reconciling the two documents is an open builder
+decision (audit F3, 2026-07-24).
+
 Within `docs/`, treat these as immutable source/history unless explicitly told
 otherwise:
 
@@ -384,6 +390,70 @@ retrievable as established fact.
 
 No artifact may cross into publication, Drive, Sheets, or canon ingestion without
 the applicable user approval and validation gates.
+
+## Live automation
+
+These jobs run autonomously on the droplet. Several write to Sheets,
+Supermemory, Discord, and paid model APIs on a schedule. Treat them as live
+production: do not edit their scripts, crontab entries, or PM2 processes
+without explicit approval, and expect their output directories and logs to
+change under you.
+
+### Crontab (verify with `crontab -l` before relying on this table)
+
+| Schedule | Script | What it does |
+|---|---|---|
+| daily 05:00 | `scripts/backup.sh` | Tars credentials/logs/memory to `backups/` (keeps 7), uploads to Drive |
+| daily 06:00 | `scripts/cron-desk-run.js --wake --no-gate --desk {civic,sports,culture,business}` | Headless newsroom sampler. `--no-gate` output lands in `output/cron-compare/samples/` — samples only, **never canon** |
+| 07:00 / 12:00 / 19:00 | `scripts/discord-reflection.js` | Mags reflection over Discord logs → citizen page + Supermemory + claude-mem (Anthropic API) |
+| 07:30 / 12:30 / 15:30 / 19:30 / 21:30 | `scripts/citizen-wake.js --wake=...` | Citizen-loop wake: Sheets + DeepSeek reflection → Supermemory page + gated `Reflection_Intake` row |
+| daily 17:00 | `scripts/citizen-exchange.js` | One agent-to-agent exchange per day → Supermemory + intake row; transcripts in `output/exchanges/` |
+| every 6h | `scripts/server-health-check.sh` | Disk/RAM/PM2/dashboard thresholds; Discord alert only on breach (silent when healthy) |
+| Wed 04:00 | `scripts/weekly-maintenance.sh` | Engine health audit; Discord alert on issues |
+| 1st of month 03:00 | `scripts/snapshot-droplet.sh` | DigitalOcean snapshot, keeps 1 |
+
+The crontab header comment mentioning a "Mags Daily Heartbeat" refers to
+`scripts/daily-reflection.js`, disabled since S187 — an orphan, not a live job.
+
+### PM2 processes (verify with `pm2 list`)
+
+- `godworld-dashboard` (online) — Express + React dashboard, port 3001.
+- `mags-bot` (online) — Discord bot; historically high restart count.
+- `wd-cards-daemon` (online) — world-data citizen-card builder.
+- `moltbook`, `spacemolt-miner` (stopped) — do not restart without approval.
+
+## Newsroom and agent landscape
+
+The agent layer lives in `.claude/agents/` (read-only control plane — this is
+orientation, not a license to edit). Ownership is split across terminals even
+though all agents share one directory:
+
+- **Media desks (media terminal):** civic, sports, culture, business, chicago,
+  letters, podcast desks; `dj-hartley` (photography); `freelance-firebrand`
+  (adversarial columnist). Most agents carry the four-file
+  IDENTITY/LENS/RULES/SKILL structure.
+- **Review lanes (media terminal):** `rhea-morgan` (Sourcing), `final-arbiter`,
+  `source-search` (agentic RAG), plus the deterministic capability reviewer in
+  `scripts/`.
+- **Citizen voices:** `citizen-voice-*` (canon citizens for interviews, Discord,
+  and the citizen loop).
+- **Civic voices (civic terminal):** `civic-office-*` (8 offices),
+  `civic-project-*` (4 project directors), `city-clerk`.
+- **Engine-side:** `engine-validator`.
+
+Three publication pipelines coexist (see Pipeline safety):
+
+1. **Compiled Edition path** (sift → write-edition → post-publish) — FROZEN
+   S313. Runnable, no new investment.
+2. **Deep-dispatch fork** (desk-slice → deep-dispatch → desk-review →
+   post-publish) — the FLAGSHIP (pipeline.44, S313).
+3. **Headless cron newsroom** (`scripts/cron-desk-run.js` →
+   `cron-desk-writer.js` → `cron-rhea-gate.js`) — in active build; see
+   `docs/plans/2026-07-20-headless-newsroom-pipeline.md`. Ungated output is
+   sample-only, never canon.
+
+`openclaw-skills/` at repo root is archived Cycle-78-era legacy (superseded by
+the `.claude/skills/` pipeline); do not implement from it.
 
 ## Operating posture
 

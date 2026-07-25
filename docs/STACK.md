@@ -2,7 +2,7 @@
 
 All services, URLs, credentials, and running processes. Keep this current.
 
-Last updated: Session 212, 2026-05-09 (S212: 47 skills, 27 agents, 4 terminals post-S211 mags-trim, 5 active Supermemory containers + legacy sm_project_godworld. S212 skill-bag naming across all 4 terminals + civic.md / research-build.md NEW path-scoped rules; ADRs 0001-0003.)
+Last updated: 2026-07-24 (Codex orientation audit: skill count 47→52, agent count 27→34 entries, Simulation_Ledger 47 cols A–AU→52 A–AZ / 922 rows S282; grouping lists below are partial as of their session stamps). Previous: Session 212, 2026-05-09 (S212: 47 skills, 27 agents, 4 terminals post-S211 mags-trim, 5 active Supermemory containers + legacy sm_project_godworld. S212 skill-bag naming across all 4 terminals + civic.md / research-build.md NEW path-scoped rules; ADRs 0001-0003.)
 
 ---
 
@@ -18,7 +18,7 @@ Last updated: Session 212, 2026-05-09 (S212: 47 skills, 27 agents, 4 terminals p
 
 | Service | URL | Purpose | Account |
 |---------|-----|---------|---------|
-| **Google Sheets — Main** | `GODWORLD_SHEET_ID` in `/root/.config/godworld/.env` | Simulation_Ledger (~837 rows post-S185 sheet-hygiene trim, 47 cols A-AU; 1,200+ total citizens across all ledgers — see schemas/SCHEMA_HEADERS.md for authoritative per-tab counts), all engine data sheets | Service account |
+| **Google Sheets — Main** | `GODWORLD_SHEET_ID` in `/root/.config/godworld/.env` | Simulation_Ledger (922 rows S282 live count, 52 cols A–AZ; 1,200+ total citizens across all ledgers — see schemas/SCHEMA_HEADERS.md for authoritative per-tab counts), all engine data sheets | Service account |
 | **Google Sheets — Comm Hub** | [Comm Hub](https://docs.google.com/spreadsheets/d/1LcgKRnq2S7lg53irurt6MkVB84OOMhOJ4Ig2nsb218s/edit) | Communication hub | Service account |
 | **Google Cloud** | console.cloud.google.com | Service account, Sheets API | `maravance@godworld-486407.iam.gserviceaccount.com` |
 | **Google Apps Script** | script.google.com | 11-phase engine — deployed via `clasp push` (162 files) | riley.steward.system@gmail.com |
@@ -110,7 +110,7 @@ Phase 40.3 isolation: all GodWorld credentials live OUTSIDE the repo working dir
 | **Thinking Summaries** | See reasoning in transcript (ctrl+o) | Enabled S120 |
 | **Channels** | MCP servers push inbound messages (Discord) | Enabled S120 — launch with `claude --channels` |
 
-## Skills (47 total, S212)
+## Skills (52 total, verified live 2026-07-24)
 
 All skill files conform to SCHEMA §11 as of Phase 41.4 S156 (required fields: name, description, version, updated, tags, effort). Full list in `.claude/skills/`. Groupings:
 
@@ -125,9 +125,9 @@ Misc: /visual-qa
 
 Pipeline v2 (S134): 9 reporters, story-driven layout, world summary as input, civic separated to own terminal. See `docs/EDITION_PIPELINE.md`.
 
-## Agents (27 total, S156)
+## Agents (34 entries, verified live 2026-07-24)
 
-Count verified live: `ls .claude/agents/ | wc -l` = 27. Full list in `.claude/agents/`. Groupings:
+Count verified live: `ls .claude/agents/ | wc -l` = 34 (31 agent dirs + 3 index files: REPORTER_DESK_INDEX.md, REPORTER_TRAIT_SYSTEM.md, TRAIT_SYSTEM.md). Full list in `.claude/agents/`. Groupings (partial, as of S156 — since added: citizen-voice-benji-dillon / deacon-seymour / elias-varek / vinnie-keane, dj-hartley, source-search, civic-office-okoro):
 
 Core: mags-corliss
 Desk reporters (7): business-desk, chicago-desk, civic-desk, culture-desk, letters-desk, podcast-desk, sports-desk

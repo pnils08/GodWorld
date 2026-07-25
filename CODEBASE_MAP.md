@@ -631,7 +631,7 @@ General-purpose utility scripts, distinct from `scripts/` (these run inside GAS 
 | `Media_Briefing` | Media room briefing (read by `compileHandoff` + export; no live sim consumers) — **⚠️ legacy-reader-only (engine.44 Class 2 audit)** |
 | `Economic_Parameters` | Economic parameter table — **⚠️ zero code references found (engine.44 Class 2 audit: orphan candidate)** |
 | `Youth_Events` | Youth event log — **⚠️ write-only; read helpers uncalled (engine.44 Class 2 audit: orphan candidate)** |
-| `Event_Content_Ledger` | **(S289 — NEW)** Author-controlled per-citizen event fragments with conditions DSL (9 columns: Source, Condition, Active, Fragment, VENUE, INSTITUTION, CONTACT, Weight, Tags) |
+| `Event_Content_Ledger` | **(S289 + engine.49)** Sheet-resident pool lines + fragments; fail-closed conditions DSL. 9 cols: Kind, PoolKey, Slot, Text, Weight, Conditions, Tags, Grain, Active. Read Phase 2 → S.contentLedger; written HAND + draftContentRows.js (`auth:auto`) |
 | `Engine_Errors` | Engine error log — retains `new Date()` for error-time (operational, allowed) |
 
 ---
@@ -808,7 +808,7 @@ Archive folders / Desk packets / Edition PDFs
 
 ### Content Ledger (S289)
 
-- New sheet tab: `Event_Content_Ledger` (9 columns: Source, Condition, Active, Fragment, VENUE, INSTITUTION, CONTACT, Weight, Tags)
+- Sheet tab: `Event_Content_Ledger` (9 columns: Kind, PoolKey, Slot, Text, Weight, Conditions, Tags, Grain, Active; entity slots $VENUE/$INSTITUTION/$CONTACT resolve code-side, not as columns)
 - Loader: `phase02-world-state/loadEventContentLedger.js` — fail-closed, by-header resolution, conditions DSL pre-compiled to predicates
 - Composer: pool-injection into `generateCitizensEvents.js` via additive merge
 - Source routing: must match `primaryFromTags` whitelist; unknown source falls to `Daily`

@@ -8,7 +8,7 @@
 #
 # Usage:
 #   ./scripts/snapshot-droplet.sh          # run manually
-#   crontab: 0 3 * * 0 /root/GodWorld/scripts/snapshot-droplet.sh
+#   crontab: 0 3 1 * * /root/GodWorld/scripts/snapshot-droplet.sh
 #
 # Requires: DIGITALOCEAN_TOKEN in .env
 # ============================================================================

@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 /**
- * Mags' Nightly Discord Reflection — scripts/discord-reflection.js
+ * Mags' Discord Reflection — scripts/discord-reflection.js
  *
- * Runs each evening. Reads the day's Discord conversation log,
+ * Runs 3x/day (cron 07:00 / 12:00 / 19:00, S252 24/7 wakes; formerly nightly).
+ * Reads the day's Discord conversation log,
  * reflects on it as Mags, appends the reflection to her citizen page
  * (POP-00005, cp-POP-00005 — pipe.40: journal is page-only), and saves
  * to Claude-Mem for cross-session persistence. The git journal

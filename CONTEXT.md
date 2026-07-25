@@ -1,7 +1,7 @@
 ---
 title: GodWorld CONTEXT
 created: 2026-04-29
-updated: 2026-05-01
+updated: 2026-07-24
 type: reference
 tags: [architecture, vocabulary, active]
 sources:
@@ -34,7 +34,7 @@ This is the **project's** vocabulary, not the world's. World canon (citizen name
 
 ### Time & cycles
 
-**Cycle** — One engine run. Triggers a sequence of phases (engine), an Edition (media), and a city-hall log (civic). Numbered C1, C2, … C92 (current). Maps to a unit of in-world time of variable duration. _Avoid_: "tick," "round," "iteration."
+**Cycle** — One engine run. Triggers a sequence of phases (engine), an Edition (media), and a city-hall log (civic). Numbered C1, C2, … C101 (current as of 2026-07-24). Maps to a unit of in-world time of variable duration. _Avoid_: "tick," "round," "iteration."
 
 **Edition** — Capitalized: the published .txt artifact at `editions/cycle_pulse_edition_<N>.txt`. One per Cycle. Lowercase "the cycle's publication" for the loose concept. _Avoid_: "issue," "post."
 
@@ -124,7 +124,7 @@ This is the **project's** vocabulary, not the world's. World canon (citizen name
 
 **Sheet / Tab / Row** — Google Sheets terminology. The engine's primary data store. Sheet = the spreadsheet, Tab = one named sheet inside it, Row = one record. _Avoid_: "table" (Sheets API doesn't use this term).
 
-**Simulation_Ledger** — Master citizen tab. ~837 rows currently, 46 columns A–AT. Subject of Phase 42 writer consolidation.
+**Simulation_Ledger** — Master citizen tab. 922 rows (S282 live count), 52 columns A–AZ. Subject of Phase 42 writer consolidation.
 
 **claude-mem** — The autodream + observation database. Distinct from Supermemory. Search via `mcp__plugin_claude-mem_mcp-search__search`.
 
@@ -233,5 +233,6 @@ Deeper definitions and full content for terms above:
 
 ## Changelog
 
+- 2026-07-24 — Codex orientation audit (builder-approved truing). Cycle anchor C92→C101; Simulation_Ledger row/column counts corrected to 922 rows / 52 columns A–AZ per `docs/SIMULATION_LEDGER.md` (ground truth).
 - 2026-05-01 — S190, research-build. Added §Architecture → Refactor lens subsection: 9 terms (Module, Interface, Implementation, Depth, Seam, Adapter, Leverage, Locality, Deletion test) adopted from Pocock's `improve-codebase-architecture` SKILL.md (MIT). Phase 42 §5.6 redesign serves as the canonical Deep-module example throughout. Used to reframe `docs/engine/PHASE_42_PATTERNS.md` opening (same session).
 - 2026-04-29 — Initial draft (S187, research-build). Pattern adapted from `mattpocock/skills` MIT-licensed CONTEXT.md. Term inventory drawn from canon-fidelity rollout, Phase 42, S186 scrub, terminal architecture, S183 world-data rebuild. Tier disambiguation (Citizen vs Canon) and Edition capitalization rule formalized in this commit.

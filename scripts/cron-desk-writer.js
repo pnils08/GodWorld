@@ -47,7 +47,9 @@ const COMPARE_DIR = path.join(ROOT, 'output', 'cron-compare');
 // ---------------------------------------------------------------------------
 function arg(flag, def) {
   const i = process.argv.indexOf(flag);
-  return i !== -1 && process.argv[i + 1] ? process.argv[i + 1] : def;
+  if (i !== -1 && process.argv[i + 1]) return process.argv[i + 1];
+  const eq = process.argv.find(a => a.startsWith(flag + '='));
+  return eq ? eq.slice(flag.length + 1) : def;
 }
 const DESK = arg('--desk', 'sports');
 // Per-desk routing (Task 3): if --provider/--model not on the CLI, read scripts/desk-model-map.json.

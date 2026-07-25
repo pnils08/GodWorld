@@ -16,6 +16,14 @@
  * Usage:
  *   node scripts/cron-desk-run.js --desk sports
  *   node scripts/cron-desk-run.js --desk business --gate-model haiku
+ *   node scripts/cron-desk-run.js --wake --desk civic [--no-gate] [--persona freelance-firebrand]
+ *
+ * Phase 2.3 three-wake cadence (2026-07-24) — one stage per cron call:
+ *   node scripts/cron-desk-run.js --stage=angle  --desk civic --persona freelance-firebrand
+ *   node scripts/cron-desk-run.js --stage=report --desk civic --persona freelance-firebrand
+ *   node scripts/cron-desk-run.js --stage=write  --desk civic --persona freelance-firebrand [--no-gate]
+ * Stages hand off via output/cron-compare/<stem>.angle.json / .packet.json;
+ * write requires both (no angle/packet, no filing on stale data).
  */
 
 require('/root/GodWorld/lib/env');
@@ -32,7 +40,9 @@ const SAMPLES = path.join(COMPARE, 'samples'); // --no-gate ungated review sampl
 
 function arg(flag, def) {
   const i = process.argv.indexOf(flag);
-  return i !== -1 && process.argv[i + 1] ? process.argv[i + 1] : def;
+  if (i !== -1 && process.argv[i + 1]) return process.argv[i + 1];
+  const eq = process.argv.find(a => a.startsWith(flag + '='));   // also accept --flag=value (2026-07-24: a missed parse silently ran the wrong mode)
+  return eq ? eq.slice(flag.length + 1) : def;
 }
 const DESK = arg('--desk', 'sports');
 const GATE_MODEL = arg('--gate-model', 'sonnet');   // authoritative gate; 'haiku' to cost-test
@@ -46,6 +56,21 @@ const NO_GATE = process.argv.includes('--no-gate');
 // also keys the draft/artifact filenames so persona runs never overwrite desk runs.
 const PERSONA = arg('--persona', null);
 const OUT_TAG = (PERSONA ? PERSONA + '_' : '');
+// --stage (Phase 2.3, 2026-07-24): run ONE stage of the three-wake cadence
+// (angle -> report -> write) instead of the full chain. Stages hand off via
+// output/cron-compare/<stem>.angle.json / .packet.json artifacts.
+const STAGE = arg('--stage', null);   // 'angle' | 'report' | 'write'
+
+// Persona registry (Phase 2.3): personas are real ledger citizens (Jax = POP-00799),
+// so a persona run's byline + author-side self-record come from this map, not the
+// desk roster. Fail-loud on an unmapped persona.
+function personaInfo() {
+  if (!PERSONA) return null;
+  const map = JSON.parse(fs.readFileSync(path.join(__dirname, 'persona-map.json'), 'utf8'));
+  const p = map[PERSONA];
+  if (!p) throw new Error('persona "' + PERSONA + '" not found in scripts/persona-map.json');
+  return p;
+}
 
 const log = (...a) => console.log('[run]', new Date().toISOString(), ...a);
 
@@ -136,15 +161,20 @@ async function resolveByline(desk, lane) {
 
 // Layer 4 — collect the lane's affected citizens (distinct POPIDs, capped) and
 // their reaction ask (keyed to the entry label). Returns the asks + the source map.
-function collectQuoteAsks(lane) {
+function collectQuoteAsks(lane, persona) {
   const asks = [];
   const seen = new Set();
   for (const e of lane) {
     for (const pop of (e.popids || [])) {
       if (seen.has(pop) || asks.length >= QUOTE_CITIZEN_CAP) continue;
       seen.add(pop);
-      asks.push({ pop, ask: 'The Tribune is looking into this in your part of Oakland: "' +
-        String(e.label || '').slice(0, 160) + '". Speak about how it touches your life.',
+      // Phase 2.3: voice the ask in the persona's register — the question's voice
+      // shapes the answer's friction (the Antigravity/Jax lesson, 2026-07-24).
+      const label = String(e.label || '').slice(0, 160);
+      const askText = persona
+        ? 'I\'m ' + persona.name + ' — Tribune. Something smells off about "' + label + '" and I\'m not letting it go. What have you seen with your own eyes?'
+        : 'The Tribune is looking into this in your part of Oakland: "' + label + '". Speak about how it touches your life.';
+      asks.push({ pop, ask: askText,
         record: !NO_GATE, maxTokens: 200 });   // S332: --no-gate SAMPLES never write citizen memory (was unconditional record:true — the layer-4 leak Codex caught)
     }
     if (asks.length >= QUOTE_CITIZEN_CAP) break;
@@ -154,8 +184,24 @@ function collectQuoteAsks(lane) {
 
 // Layer 3 — compose the injected state: byline note + lane pointers + real quotes.
 // This REPLACES the 40k world_summary blob as the writer's injected state.
-function buildLaneState(desk, cycle, lane, byline, quotes) {
+function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead) {
   const L = [];
+  if (persona) {
+    // Stance anchor (Phase 2.3, 2026-07-24 tuning fix): the injected lane is
+    // EVIDENCE, not assignments. Without this the desk framing dilutes the
+    // persona's adversarial stance back into roundup.
+    L.push('YOU ARE ' + persona.name.toUpperCase() + '. The material below is evidence, not assignments.');
+    L.push('Find the contradiction in it and write INTO it — name who must answer, and demand');
+    L.push('the answer. Never file the roundup. Anonymous scene texture you observed is yours');
+    L.push('(that\'s what you saw); named people come from the storyline record and the quoted');
+    L.push('citizens below.');
+    L.push('');
+    if (angleRead) {
+      L.push('### Your own read on this cycle (from your earlier wake — this IS the story, report it out)');
+      L.push(angleRead);
+      L.push('');
+    }
+  }
   L.push('## ' + desk.toUpperCase() + ' desk — your lane for cycle ' + cycle);
   L.push('');
   if (byline) {
@@ -194,6 +240,211 @@ function buildLaneState(desk, cycle, lane, byline, quotes) {
   return L.join('\n');
 }
 
+// ---------------------------------------------------------------------------
+// Phase 2.3 — three-wake cadence (angle -> report -> write), 2026-07-24
+// Each stage is a small, separately-inspectable artifact; cron fans them across
+// the day (06:00 / 13:00 / 18:00) and the morning digest reviews the results.
+// ---------------------------------------------------------------------------
+
+function loadLane(cycle) {
+  const signalPath = path.join(ROOT, 'output', 'desk_signal_c' + cycle + '.json');
+  const signal = readJson(signalPath);
+  if (!signal || !signal.lanes) throw new Error('no desk_signal at ' + path.relative(ROOT, signalPath) + ' — run buildWorldSummary first');
+  const lane = signal.lanes[DESK];
+  return (lane && lane.length) ? lane : null;
+}
+
+function stageStem(cycle) { return DESK + '_c' + cycle + '_' + OUT_TAG; }
+
+// Review copies accumulate (Mike-direct 2026-07-24): a same-cycle rerun must not
+// clobber the earlier sample/staged copy — suffix -HHMM when the name is taken.
+function uniqueDest(dir, name) {
+  const p = path.join(dir, name);
+  if (!fs.existsSync(p)) return p;
+  const stamp = new Date().toISOString().slice(11, 16).replace(':', '');
+  return path.join(dir, name.replace(/\.md$/, '-' + stamp + '.md'));
+}
+
+// WAKE 1 — ANGLE: the persona's own citizen voice reads the beat and says what
+// smells off (the Antigravity/Jax pattern: ask in the persona's lingo, get
+// friction leads back in its voice). Deterministic assembly — no extra LLM call.
+async function runAngle() {
+  const cycle = arg('--cycle', null) || detectCycle();
+  console.log('Wake 1 ANGLE — ' + DESK + ' c' + cycle + (PERSONA ? ' (' + PERSONA + ')' : ''));
+  console.log('===================================');
+  const lane = loadLane(cycle);
+  if (!lane) { console.log('[angle] no "' + DESK + '" lane in desk_signal — skipping (not an error).'); return; }
+  const persona = personaInfo();
+  const digest = lane.slice(0, 12).map(e => '- ' + (e.label || '(no label)') + (e.hood ? ' [' + e.hood + ']' : '')).join('\n');
+  let angleRead = null;
+  if (persona) {
+    const ask = 'You\'re ' + persona.name + ', between stories. This is the ' + DESK + ' beat\'s raw signal this cycle:\n' + digest +
+      '\n\nWhat\'s smelling off to you? Point at the ONE thing nobody\'s touching — and name who should answer for it.';
+    log('asking ' + persona.name + ' (' + persona.popid + ') what smells off...');
+    const out = execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
+      '--pop=' + persona.popid, '--ask=' + ask, '--cycle=' + cycle, '--json', '--max-tokens=320'],
+      { cwd: ROOT, encoding: 'utf8', timeout: 300000 });
+    const outTrim = out.trim();
+    const r = JSON.parse(outTrim.slice(outTrim.indexOf('{')));   // tolerate dotenv banner lines before the JSON
+    angleRead = { name: r.name, popid: r.popId, text: r.text };
+    log('angle read: "' + String(r.text).replace(/\s+/g, ' ').slice(0, 140) + '..."');
+  }
+  const anglePath = path.join(COMPARE, stageStem(cycle) + 'angle.json');
+  fs.mkdirSync(COMPARE, { recursive: true });
+  fs.writeFileSync(anglePath, JSON.stringify({
+    stage: 'angle', desk: DESK, cycle, persona: PERSONA,
+    angleRead,
+    lanePicks: lane.slice(0, 5).map(e => ({ label: e.label, kind: e.kind, hood: e.hood, ref: e.ref, popids: e.popids || [] })),
+    laneEntries: lane.length,
+    ranAt: new Date().toISOString()
+  }, null, 2));
+  console.log('angle → ' + path.relative(ROOT, anglePath));
+}
+
+// WAKE 2 — REPORT: persona-voiced questions to the affected citizens (batch
+// quote pass) → packet.json. Requires the angle artifact (stage discipline).
+async function runReport() {
+  const cycle = arg('--cycle', null) || detectCycle();
+  console.log('Wake 2 REPORT — ' + DESK + ' c' + cycle + (PERSONA ? ' (' + PERSONA + ')' : ''));
+  console.log('===================================');
+  const anglePath = path.join(COMPARE, stageStem(cycle) + 'angle.json');
+  if (!fs.existsSync(anglePath)) throw new Error('no angle artifact at ' + path.relative(ROOT, anglePath) + ' — run --stage=angle first');
+  const lane = loadLane(cycle);
+  if (!lane) { console.log('[report] no "' + DESK + '" lane in desk_signal — skipping (not an error).'); return; }
+  const persona = personaInfo();
+  const asks = collectQuoteAsks(lane, persona);
+  let quotes = [];
+  if (asks.length) {
+    log('quote pre-pass (persona-voiced): ' + asks.length + ' citizen(s)...');
+    const asksPath = path.join(COMPARE, stageStem(cycle) + 'asks.json');
+    fs.writeFileSync(asksPath, JSON.stringify(asks, null, 2));
+    try {
+      const out = execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
+        '--batch=' + asksPath, '--cycle=' + cycle], { cwd: ROOT, encoding: 'utf8', timeout: 600000 });
+      quotes = parseBatchQuotes(out);
+      log('quotes landed: ' + quotes.length + '/' + asks.length + (quotes.length ? ' (' + quotes.map(q => q.name).join(', ') + ')' : ''));
+    } catch (e) { log('quote pre-pass failed (non-fatal): ' + e.message); }
+  } else {
+    log('no candidate citizens in the lane this cycle — packet will be quoteless');
+  }
+  const packetPath = path.join(COMPARE, stageStem(cycle) + 'packet.json');
+  fs.writeFileSync(packetPath, JSON.stringify({
+    stage: 'report', desk: DESK, cycle, persona: PERSONA,
+    angle: path.relative(ROOT, anglePath),
+    quotesRequested: asks.length, quotesLanded: quotes.length, quotes,
+    ranAt: new Date().toISOString()
+  }, null, 2));
+  console.log('packet → ' + path.relative(ROOT, packetPath) + ' (' + quotes.length + ' quotes)');
+}
+
+// WAKE 3 — WRITE (+ gate + route + self-record): requires angle + packet
+// artifacts — no angle, no write (no filing on stale data).
+async function runWrite() {
+  const cycle = arg('--cycle', null) || detectCycle();
+  console.log('Wake 3 WRITE — ' + DESK + ' c' + cycle + (PERSONA ? ' (' + PERSONA + ')' : ''));
+  console.log('===================================');
+  const stem = stageStem(cycle);
+  const anglePath = path.join(COMPARE, stem + 'angle.json');
+  const packetPath = path.join(COMPARE, stem + 'packet.json');
+  if (!fs.existsSync(anglePath)) throw new Error('no angle artifact at ' + path.relative(ROOT, anglePath) + ' — run --stage=angle first');
+  if (!fs.existsSync(packetPath)) throw new Error('no packet artifact at ' + path.relative(ROOT, packetPath) + ' — run --stage=report first');
+  const lane = loadLane(cycle);
+  if (!lane) { console.log('[write] no "' + DESK + '" lane in desk_signal — skipping (not an error).'); return; }
+  const angle = readJson(anglePath);
+  const packet = readJson(packetPath);
+  const persona = personaInfo();
+  const route = deskRoute(DESK);
+  const draftName = stem + slug(route.model) + '.md';
+  const draftPath = path.join(COMPARE, draftName);
+  const base = draftName.replace(/\.md$/, '');
+
+  // byline: persona's own ledger identity when set, else the desk roster
+  const byline = persona
+    ? { name: persona.name, popid: persona.popid, beatDomain: persona.beatDomain }
+    : await resolveByline(DESK, lane);
+  log('byline: ' + (byline ? byline.name + ' (' + byline.popid + (persona ? ', persona' : ', ' + byline.beatDomain + ', used ' + byline.usageCount) + ')' : 'NONE — fallback, no self-record'));
+
+  const quotes = (packet && packet.quotes) || [];
+  const stateFile = path.join(COMPARE, base + '.state.md');
+  fs.writeFileSync(stateFile, buildLaneState(DESK, cycle, lane, byline, quotes, persona,
+    angle && angle.angleRead ? angle.angleRead.text : null));
+  log('writing on lane (' + fs.statSync(stateFile).size + ' B injected state' + (persona ? ' + stance anchor' : '') + ')...');
+  execFileSync('node', [path.join(ROOT, 'scripts', 'cron-desk-writer.js'), '--desk', DESK,
+    '--state-file', path.relative(ROOT, stateFile),
+    ...(PERSONA ? ['--persona', PERSONA] : [])], { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
+  if (!fs.existsSync(draftPath)) throw new Error('writer produced no draft at ' + path.relative(ROOT, draftPath));
+
+  // gate (skipped for --no-gate samples)
+  let rhea = null, pass = false;
+  if (NO_GATE) {
+    log('gate SKIPPED (--no-gate sample) — output is ungated, NOT canon');
+  } else {
+    log('gating...');
+    try {
+      execFileSync('node', [path.join(ROOT, 'scripts', 'cron-rhea-gate.js'), '--draft', path.relative(ROOT, draftPath),
+        '--model', GATE_MODEL, '--cycle', cycle], { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
+    } catch (_) { /* gate exit 2/3 — verdict json still written */ }
+    rhea = readJson(path.join(COMPARE, base + '.rhea.json'));
+    pass = rhea && rhea.pass === true;
+  }
+
+  // route (the wall — identical semantics to runWake)
+  const destDir = NO_GATE ? SAMPLES : (pass ? STAGED : FLAGGED);
+  fs.mkdirSync(destDir, { recursive: true });
+  const stagedName = (NO_GATE || pass) ? base + (NO_GATE ? '.sample.md' : '.staged.md') : draftName;
+  const destPath = uniqueDest(destDir, stagedName);
+  fs.copyFileSync(draftPath, destPath);
+  if (NO_GATE) {
+    fs.writeFileSync(path.join(SAMPLES, base + '.sample.json'), JSON.stringify({
+      status: 'ungated-sample', desk: DESK, cycle, persona: PERSONA, byline: byline ? byline.name : null, bylinePopid: byline ? byline.popid : null,
+      article: path.relative(ROOT, destPath),
+      quotesLanded: quotes.length,
+      note: 'UNGATED sample (--no-gate, S332): writer+quotes ran on raw API; the Rhea gate was skipped (needs subscription). NOT canon, review-only.',
+      builtAt: new Date().toISOString()
+    }, null, 2));
+  } else if (pass) {
+    fs.writeFileSync(path.join(STAGED, base + '.staged.json'), JSON.stringify({
+      status: 'staged', desk: DESK, cycle, persona: PERSONA, byline: byline ? byline.name : null, bylinePopid: byline ? byline.popid : null,
+      article: path.relative(ROOT, destPath),
+      note: 'M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.',
+      stagedAt: new Date().toISOString()
+    }, null, 2));
+  } else {
+    fs.writeFileSync(path.join(FLAGGED, base + '.flags.json'),
+      JSON.stringify({ draft: draftName, flags: (rhea && rhea.flags) || [], summary: (rhea && rhea.summary) || 'no rhea verdict' }, null, 2));
+  }
+
+  // reporter self-record (author-side; persona POPID when set)
+  let selfRecord = null;
+  if (byline && pass) {
+    const headline = (() => {
+      const first = fs.readFileSync(draftPath, 'utf8').split('\n').find(l => l.trim());
+      return String(first || '').replace(/^#+\s*/, '').replace(/[*_`]/g, '').slice(0, 100).trim() || (DESK + ' filing c' + cycle);
+    })();
+    log('reporter self-record: ' + byline.name + ' <- "' + headline + '"');
+    try {
+      const out = execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
+        '--pop=' + byline.popid, '--record-text=filed: ' + headline, '--cycle=' + cycle],
+        { cwd: ROOT, encoding: 'utf8', timeout: 300000 });
+      selfRecord = { recorded: true, out: out.trim().slice(-200) };
+    } catch (e) { selfRecord = { recorded: false, reason: e.status === 2 ? 'no-dials (fallback)' : e.message }; log('self-record fallback: ' + (selfRecord.reason)); }
+  }
+
+  const record = {
+    mode: 'wake-write', desk: DESK, cycle, provider: route.provider, model: route.model, gateModel: GATE_MODEL,
+    persona: PERSONA,
+    byline: byline ? { name: byline.name, popid: byline.popid, beatDomain: byline.beatDomain } : null,
+    laneEntries: lane.length, quotesLanded: quotes.length,
+    disposition: NO_GATE ? 'ungated-sample' : (pass ? 'staged' : 'flagged'),
+    rheaPass: rhea ? rhea.pass : null, rheaFlagCount: rhea ? rhea.flagCount : null,
+    article: path.relative(ROOT, destPath),
+    selfRecord, ranAt: new Date().toISOString()
+  };
+  fs.writeFileSync(path.join(COMPARE, base + '.wake.json'), JSON.stringify(record, null, 2));
+  console.log('\n=== write disposition: ' + record.disposition.toUpperCase() + ' ===');
+  console.log(JSON.stringify(record, null, 2));
+}
+
 async function runWake() {
   const cycle = arg('--cycle', null) || detectCycle();
   const signalPath = path.join(ROOT, 'output', 'desk_signal_c' + cycle + '.json');
@@ -212,13 +463,16 @@ async function runWake() {
   const draftPath = path.join(COMPARE, draftName);
   const base = draftName.replace(/\.md$/, '');
 
-  // 1. LAYER 1 — byline
+  // 1. LAYER 1 — byline (persona's own ledger identity when --persona is set)
   log('resolving byline...');
-  const byline = await resolveByline(DESK, lane);
-  log('byline: ' + (byline ? byline.name + ' (' + byline.popid + ', ' + byline.beatDomain + ', used ' + byline.usageCount + ')' : 'NONE — fallback, no self-record'));
+  const wakePersona = personaInfo();
+  const byline = wakePersona
+    ? { name: wakePersona.name, popid: wakePersona.popid, beatDomain: wakePersona.beatDomain }
+    : await resolveByline(DESK, lane);
+  log('byline: ' + (byline ? byline.name + ' (' + byline.popid + (wakePersona ? ', persona' : ', ' + byline.beatDomain + ', used ' + byline.usageCount) + ')' : 'NONE — fallback, no self-record'));
 
   // 2. LAYER 4 — citizen quote pre-pass (real POPID-linked voices, recorded PRESS)
-  const asks = collectQuoteAsks(lane);
+  const asks = collectQuoteAsks(lane, wakePersona);
   let quotes = [];
   if (asks.length) {
     log('quote pre-pass: ' + asks.length + ' citizen(s)...');
@@ -236,8 +490,8 @@ async function runWake() {
 
   // 3. LAYER 3 — write on-lane (inject the lane + quotes, NOT the 40k blob)
   const stateFile = path.join(COMPARE, base + '.state.md');
-  fs.writeFileSync(stateFile, buildLaneState(DESK, cycle, lane, byline, quotes));
-  log('writing on lane (' + fs.statSync(stateFile).size + ' B injected state)...');
+  fs.writeFileSync(stateFile, buildLaneState(DESK, cycle, lane, byline, quotes, wakePersona, null));
+  log('writing on lane (' + fs.statSync(stateFile).size + ' B injected state' + (wakePersona ? ' + stance anchor' : '') + ')...');
   execFileSync('node', [path.join(ROOT, 'scripts', 'cron-desk-writer.js'), '--desk', DESK,
     '--state-file', path.relative(ROOT, stateFile),
     ...(PERSONA ? ['--persona', PERSONA] : [])], { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
@@ -375,6 +629,13 @@ function main() {
 }
 
 const WAKE = process.argv.includes('--wake');
+if (STAGE && !['angle', 'report', 'write'].includes(STAGE)) {
+  console.error('[run] unknown --stage "' + STAGE + '" (want angle | report | write)');
+  process.exit(1);
+}
 Promise.resolve()
-  .then(() => (WAKE ? runWake() : main()))
+  .then(() => (STAGE === 'angle' ? runAngle()
+    : STAGE === 'report' ? runReport()
+    : STAGE === 'write' ? runWrite()
+    : (WAKE ? runWake() : main())))
   .catch(err => { console.error('[run] Fatal:', err.message); process.exit(1); });

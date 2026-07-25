@@ -1,0 +1,9 @@
+{
+  "_comment": "Phase 2.3 (2026-07-24): persona slug -> ledger identity. When cron-desk-run.js gets --persona, the byline + self-record come from HERE (not the desk-roster resolveByline). Personas are real citizens — Jax is POP-00799, Tier 2 — so author-side self-record accretes to their own dials/page.",
+  "freelance-firebrand": {
+    "name": "Jax Caldera",
+    "popid": "POP-00799",
+    "beatDomain": "ACCOUNTABILITY",
+    "note": "Tier-2 ledger citizen, Tribune-employed freelance accountability writer (Temescal/Longfellow). Blacklisted from alt-weeklies; writes short, hot, uncomfortable; lights the match and walks away."
+  }
+}

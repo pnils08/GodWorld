@@ -1,8 +1,8 @@
 ---
 name: deep-dispatch
 description: Fork-path desk writer (pipeline.44). One desk at a time, DEEP — charge assembled from the desk's slice, cheap propose→OK gate, bounded source-search with orchestrator reconcile, supplied citizen voices (pipeline.43), artifact to the desk's own corpus. Production ends at artifacts-on-disk; review is a separate decoupled flow. Run after /desk-slice.
-version: "2.0"
-updated: 2026-07-11
+version: "2.1"
+updated: 2026-07-26
 tags: [media, pipeline-44, fork, deep-dispatch, active]
 effort: medium
 argument-hint: "<desk> [cycle-number]"
@@ -69,6 +69,10 @@ Spawn **≤3** `source-search` agents (S326 — the Haiku-pinned retrieval agent
 - **Civic:** (a) `engine_anomalies` raw + neighborhoodState per-district; (b) the cycle's locked civic decisions + vote math; (c) prior coverage / initiative arc.
 - **Culture/other:** adapt — one raw-signal angle, one prior-coverage angle, one cycle-events angle.
 
+Exactly one seat may be `retrievalLane=prior-published-arc`: the existing "prior canon / arc" or "prior coverage / initiative arc" seat. Raw-signal, truesource, roster, cycle-event, anomaly, vote-math, and current-state seats must use `exact-current` or `cross-file-reconcile`.
+
+The prior-arc dispatch names the storyline and asks the agent to call `node scripts/notebooklmCanonSearch.js`. It must return source title, source ID, citation number, excerpt, and `reconcileVerdict`. For a citizen origin question, the orchestrator may explicitly authorize `--source-class canon-reference`; otherwise the default published scope holds.
+
 Each subagent returns **sourcing as text** — what it found, each claim traced to its source artifact/tab. They reach raw data at runtime via the tools the charge granted; the orchestrator does NOT pre-package data.
 
 **Serialize under quota pressure (S231 G-S2).** If quota is tight, spawn one, await, then the next — a heavy parallel dispatch can be session-limit-killed (signature: `<total_tokens>0</total_tokens>` + ~500ms + session-limit string). Do not write the sourcing yourself from the EIC seat; surface the infra gap and stop.
@@ -82,6 +86,8 @@ Before the writer sees anything:
 - Cross-check the ≤3 returns against each other. Where two disagree on a **specific fact** (vote count, program scope/districts, date, dollar figure), the **newer / primary source wins** — verify against `world_summary_c{XX}.md` or MCP (`lookup_initiative`, `search_world`) before it reaches the writer.
 - A contradicted **scope** claim is a HARD STOP — resolve now, not in the prose. (The exact C100 OARI miss: a stale return said OARI was a D1/D3/D5 pilot when INIT-002 was citywide since ~C97; the contradicting signal was in-hand and unreconciled.)
 - Hand the writer **reconciled** sourcing + a one-line note per resolved fact; log each reconcile to the run log. *(Structural because charge prose alone did not catch the S272 error; this step is why it can't recur silently.)*
+
+Record for every seat: `retrievalLane`, `resultStatus`, selected/used source IDs, citation count, and `reconcileVerdict`. Do not record the NotebookLM answer body. A prior-published claim that conflicts with current primary state loses and is logged `conflict-current-wins`.
 
 ## Step 5 — Voice the citizens (pipeline.43)
 

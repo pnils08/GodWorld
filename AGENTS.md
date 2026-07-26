@@ -405,7 +405,7 @@ change under you.
 |---|---|---|
 | daily 05:00 | `scripts/backup.sh` | Tars credentials/logs/memory to `backups/` (keeps 7), uploads to Drive |
 | daily 06:00 | `scripts/newsroom-digest.js` | Phase 2.3 morning digest of the last 36h of newsroom runs → `output/cron-compare/digest-YYYY-MM-DD.md` (review surface for Mike) |
-| daily 06:15 / 13:15 / 18:15 | `scripts/cron-desk-run.js --stage={angle,report,write} --fanout` | Phase 2.3 three-wake fan-out: 6 byline journalists/day on least-recently-used rotation (quotas civic 2, sports 2, culture 1, business 1). Angle builds today's rota; report gathers citizen quotes; write runs the Rhea gate (`--gate-model haiku`) → staged/flagged behind the probation wall, **never canon** until the Saturday compile |
+| daily 06:15 / 13:15 / 18:15 | `scripts/cron-desk-run.js --stage={angle,report,write} --fanout` | Phase 2.3 three-wake fan-out: 6 byline journalists/day on least-recently-used rotation (quotas civic 2, sports 2, culture 1, business 1). Angle builds today's rota; report gathers citizen quotes; write runs the Rhea gate (`--gate-backend api`, OpenRouter gemini-3.5-flash ~$0.06/run) → staged/flagged behind the probation wall, **never canon** until the Saturday compile |
 | 07:00 / 12:00 / 19:00 | `scripts/discord-reflection.js` | Mags reflection over Discord logs → citizen page + Supermemory + claude-mem (Anthropic API) |
 | 07:30 / 12:30 / 15:30 / 19:30 / 21:30 | `scripts/citizen-wake.js --wake=...` | Citizen-loop wake: Sheets + DeepSeek reflection → Supermemory page + gated `Reflection_Intake` row |
 | daily 17:00 | `scripts/citizen-exchange.js` | One agent-to-agent exchange per day → Supermemory + intake row; transcripts in `output/exchanges/` |

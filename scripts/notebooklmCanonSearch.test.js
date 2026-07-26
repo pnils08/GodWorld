@@ -2,11 +2,18 @@
 'use strict';
 
 const assert = require('assert');
+const fs = require('fs');
+const path = require('path');
 const {
   parseArgs,
   selectSourceIds,
   buildQueryArgs,
   validateQueryResponse,
+  hashQuestion,
+  resolveLogPath,
+  classifyResultStatus,
+  buildRetrievalRecord,
+  appendRetrievalLog,
   buildOutput,
 } = require('./notebooklmCanonSearch');
 
@@ -49,10 +56,13 @@ function testArgsAndCommand() {
     'NONCANON_TEST_PUBLISHED,NONCANON_TEST_REFERENCE',
     '--timeout',
     '90',
+    '--log-path',
+    'output/codex/NONCANON_TEST-retrieval.jsonl',
   ]);
   assert.strictEqual(args.question, 'NONCANON_TEST question');
   assert.strictEqual(args.sourceClass, 'all');
   assert.strictEqual(args.timeoutSeconds, 90);
+  assert.strictEqual(args.logPath, 'output/codex/NONCANON_TEST-retrieval.jsonl');
   assert.deepStrictEqual(args.sourceIds, [
     'NONCANON_TEST_PUBLISHED',
     'NONCANON_TEST_REFERENCE',
@@ -101,6 +111,94 @@ function testSourceSelectionFailsClosed() {
     () => selectSourceIds(policy, 'all', ['NONCANON_TEST_UNKNOWN']),
     /not approved/
   );
+}
+
+function testRetrievalStatusClassification() {
+  assert.strictEqual(
+    classifyResultStatus(new Error('policy mismatch'), 'not_run'),
+    'not_run'
+  );
+  assert.strictEqual(
+    classifyResultStatus(new Error('authentication required; login again'), 'query'),
+    'auth_failure'
+  );
+  assert.strictEqual(
+    classifyResultStatus(new Error('nlm notebook query returned invalid JSON'), 'query'),
+    'no_result'
+  );
+  assert.strictEqual(
+    classifyResultStatus(new Error('NotebookLM response has no answer'), 'response_validation'),
+    'no_result'
+  );
+  assert.strictEqual(
+    classifyResultStatus(new Error('NotebookLM response has an empty citation map'), 'response_validation'),
+    'citation_failure'
+  );
+}
+
+function testRetrievalLogIsMetadataOnly() {
+  const selectedSourceIds = ['NONCANON_TEST_PUBLISHED'];
+  const validated = validateQueryResponse(responseFixture(), selectedSourceIds, policyFixture());
+  const args = {
+    question: 'NONCANON_TEST private raw question',
+    sourceClass: 'published',
+  };
+  const record = buildRetrievalRecord({
+    args,
+    questionHint: '',
+    selectedSourceIds,
+    validated,
+    resultStatus: 'verified',
+    startedAt: 1000,
+    finishedAt: 1260,
+  });
+  assert.strictEqual(record.resultStatus, 'verified');
+  assert.strictEqual(record.reconcileVerdict, 'prior-only');
+  assert.strictEqual(record.citationCount, 1);
+  assert.strictEqual(record.durationMs, 260);
+  assert.deepStrictEqual(record.usedSourceIds, ['NONCANON_TEST_PUBLISHED']);
+  assert.strictEqual(record.questionHash, hashQuestion(args.question));
+
+  const serialized = JSON.stringify(record);
+  assert.ok(!serialized.includes(args.question));
+  assert.ok(!serialized.includes('NONCANON_TEST answer'));
+  assert.ok(!serialized.includes('NONCANON_TEST cited excerpt'));
+  assert.ok(!serialized.includes('NONCANON_TEST_CONVERSATION'));
+
+  const failed = buildRetrievalRecord({
+    args,
+    questionHint: '',
+    selectedSourceIds,
+    validated: null,
+    resultStatus: 'citation_failure',
+    startedAt: 1000,
+    finishedAt: 1300,
+  });
+  assert.strictEqual(failed.reconcileVerdict, 'no-result');
+  assert.strictEqual(failed.citationCount, 0);
+  assert.deepStrictEqual(failed.usedSourceIds, []);
+
+  assert.throws(
+    () => resolveLogPath('docs/NONCANON_TEST-retrieval.jsonl'),
+    /inside output/
+  );
+  assert.throws(
+    () => resolveLogPath('output/codex/NONCANON_TEST-retrieval.json'),
+    /\.jsonl extension/
+  );
+
+  const relativeLogPath =
+    'output/codex/NONCANON_TEST-notebooklm-retrieval-' + process.pid + '.jsonl';
+  const absoluteLogPath = resolveLogPath(relativeLogPath);
+  try {
+    appendRetrievalLog(relativeLogPath, record);
+    const lines = fs.readFileSync(absoluteLogPath, 'utf8').trim().split('\n');
+    assert.strictEqual(lines.length, 1);
+    assert.deepStrictEqual(JSON.parse(lines[0]), record);
+    assert.strictEqual(path.extname(absoluteLogPath), '.jsonl');
+  } finally {
+    if (fs.existsSync(absoluteLogPath)) fs.unlinkSync(absoluteLogPath);
+  }
 }
 
 function testValidResponseAndOutput() {
@@ -165,6 +263,8 @@ function testResponseFailures() {
 
 testArgsAndCommand();
 testSourceSelectionFailsClosed();
+testRetrievalStatusClassification();
+testRetrievalLogIsMetadataOnly();
 testValidResponseAndOutput();
 testResponseFailures();
 console.log('notebooklmCanonSearch tests: PASS');

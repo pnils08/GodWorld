@@ -30,12 +30,13 @@ it mutation tools, weakening current-state authority, or making mixed-source
 NotebookLM prose directly retrievable as canon.
 
 **Architecture:** Keep the existing retrieve→verify agentic-RAG loop as the
-authority boundary. A new read-only Node wrapper targets only the configured
-permanent notebook and only builder-approved source IDs; `source-search` invokes
-it only for prior published arcs, then verifies its citations against primary
-current state and the cited publication sources. Exact/current lookups remain
-GodWorld MCP or file reads. Headless use is a later consumer after the
-interactive path is measured.
+authority boundary. A Node wrapper that is externally read-only targets only
+the configured permanent notebook and only builder-approved source IDs; its sole
+local side effect is a metadata-only retrieval event under `output/`.
+`source-search` invokes it only for prior published arcs, then verifies its
+citations against primary current state and the cited publication sources.
+Exact/current lookups remain GodWorld MCP or file reads. Headless use is a later
+consumer after the interactive path is measured.
 
 **Terminal:** research-build
 
@@ -228,6 +229,8 @@ interactive path is measured.
 
 - **Files:**
   - `scripts/notebooklmCanonSearch.js` — modify
+  - `scripts/notebooklmCanonSearch.test.js` — modify
+  - `docs/reference/notebookLM-CLI.md` — update owning operator contract
   - protected consumer skills — Claude-owned changes from Task 5
   - `output/` run-log location selected by the owning pipeline — generated
 - **Steps:**
@@ -239,7 +242,18 @@ interactive path is measured.
      `verified`.
 - **Verify:** one interactive dry proof leaves a traceable retrieval record and
   no canon-facing artifact.
-- **Status:** [ ] not started
+- **Status:** [~] in-progress 2026-07-26 — Codex implementation and bounded live
+  proof complete. The wrapper emits metadata-only JSONL, constrains custom log
+  paths to `output/**/*.jsonl`, fails if logging fails, and distinguishes all
+  five approved `resultStatus` values. Synthetic tests pass. The live
+  Editions 98/100/101 proof used all 3 selected sources and returned 15
+  citations with 15 excerpts; the trace recorded the sandbox-denied first
+  attempt as `no_result` and the approved retry as `verified`, with no answer
+  body or canon-facing artifact. Awaiting Claude/research-build protected
+  corrections: `.claude/skills/deep-dispatch/SKILL.md` must use
+  `resultStatus=no_result`, while `.claude/agents/source-search/SKILL.md` must
+  describe the wrapper's metadata log as its sole permitted local write. Codex
+  did not modify the control plane.
 
 ### Task 7: Evaluate headless consumption after interactive proof
 
@@ -318,3 +332,7 @@ review work, not assumptions to resolve in this document.
 - 2026-07-26 — Corrected Task 5 ownership from media to research-build under the
   active rollout doctrine: skill/control-plane edits are apparatus work; media
   is a generator terminal and does not carry actionable rollout assignments.
+- 2026-07-26 — Built and live-proved Task 6 retrieval observability. Machine
+  `resultStatus` uses underscore tokens; hyphenated `no-result` remains only the
+  `reconcileVerdict`. Task stays in progress pending two protected
+  Claude/research-build wording corrections.

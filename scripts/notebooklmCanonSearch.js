@@ -13,6 +13,15 @@ const POLICY_PATH = path.join(__dirname, 'notebooklmCanonSources.json');
 const INVENTORY_PATH = path.join(ROOT, 'output', 'codex', 'notebooklm-source-inventory.json');
 const NLM = path.join(ROOT, '.venv', 'nlm', 'bin', 'nlm');
 const SOURCE_CLASSES = new Set(['published', 'canon-reference', 'all']);
+const RESULT_STATUSES = new Set([
+  'not_run',
+  'no_result',
+  'auth_failure',
+  'citation_failure',
+  'verified',
+]);
+const RETRIEVAL_LANE = 'prior-published-arc';
+const DEFAULT_LOG_PATH = path.join('output', 'retrieval', 'notebooklm-canon-search.jsonl');
 
 function parseArgs(argv) {
   const args = {
@@ -20,16 +29,24 @@ function parseArgs(argv) {
     sourceClass: 'published',
     sourceIds: null,
     timeoutSeconds: 180,
+    logPath: DEFAULT_LOG_PATH,
   };
   for (let index = 2; index < argv.length; index++) {
     const token = argv[index];
-    if (token === '--question' || token === '--source-ids' || token === '--source-class' || token === '--timeout') {
+    if (
+      token === '--question' ||
+      token === '--source-ids' ||
+      token === '--source-class' ||
+      token === '--timeout' ||
+      token === '--log-path'
+    ) {
       if (!argv[index + 1]) throw new Error(token + ' requires a value');
       const value = argv[++index];
       if (token === '--question') args.question = value;
       if (token === '--source-ids') args.sourceIds = value.split(',').map((id) => id.trim());
       if (token === '--source-class') args.sourceClass = value;
       if (token === '--timeout') args.timeoutSeconds = Number(value);
+      if (token === '--log-path') args.logPath = value;
     } else {
       throw new Error('unknown argument: ' + token);
     }
@@ -51,6 +68,18 @@ function parseArgs(argv) {
     throw new Error('--source-ids must contain one or more non-empty IDs');
   }
   return args;
+}
+
+function hashQuestion(question) {
+  const normalized = String(question || '').trim();
+  if (!normalized) return null;
+  return crypto.createHash('sha256').update(normalized).digest('hex');
+}
+
+function questionHintFromArgv(argv) {
+  const index = argv.indexOf('--question');
+  if (index < 0 || !argv[index + 1]) return '';
+  return String(argv[index + 1]).trim();
 }
 
 function readJson(filePath, label) {
@@ -231,6 +260,94 @@ function runQuery(queryArgs, timeoutSeconds) {
   }
 }
 
+function resolveLogPath(requestedPath) {
+  const value = String(requestedPath || '').trim();
+  if (!value) throw new Error('retrieval log path must not be empty');
+  const outputRoot = path.join(ROOT, 'output');
+  const resolved = path.resolve(ROOT, value);
+  const relative = path.relative(outputRoot, resolved);
+  if (!relative || relative.startsWith('..' + path.sep) || path.isAbsolute(relative)) {
+    throw new Error('retrieval log path must be a file inside output/');
+  }
+  if (path.extname(resolved) !== '.jsonl') {
+    throw new Error('retrieval log path must use the .jsonl extension');
+  }
+
+  let current = outputRoot;
+  for (const segment of relative.split(path.sep)) {
+    current = path.join(current, segment);
+    if (fs.existsSync(current) && fs.lstatSync(current).isSymbolicLink()) {
+      throw new Error('retrieval log path must not traverse a symbolic link');
+    }
+  }
+  return resolved;
+}
+
+function classifyResultStatus(error, stage) {
+  if (stage === 'not_run') return 'not_run';
+  const message = String(error && error.message || error || '');
+  if (
+    /(?:auth(?:entication|orization)?|unauthori[sz]ed|forbidden|log(?:ged)? in|sign in|cookie|csrf|credentials?|\b401\b|\b403\b)/i.test(message)
+  ) {
+    return 'auth_failure';
+  }
+  if (stage === 'query') return 'no_result';
+  if (
+    /(?:must be an object|has no answer|has no conversation ID)/i.test(message)
+  ) {
+    return 'no_result';
+  }
+  return 'citation_failure';
+}
+
+function buildRetrievalRecord({
+  args,
+  questionHint,
+  selectedSourceIds,
+  validated,
+  resultStatus,
+  startedAt,
+  finishedAt,
+}) {
+  if (!RESULT_STATUSES.has(resultStatus)) {
+    throw new Error('invalid retrieval result status: ' + resultStatus);
+  }
+  const question = args && args.question ? args.question : questionHint;
+  const selected = Array.isArray(selectedSourceIds) ? [...selectedSourceIds] : [];
+  const used = validated && Array.isArray(validated.sourcesUsed)
+    ? [...validated.sourcesUsed]
+    : [];
+  const citationCount = validated && validated.citationMap
+    ? Object.keys(validated.citationMap).length
+    : 0;
+  return {
+    schemaVersion: 1,
+    eventType: 'NOTEBOOKLM_CANON_SEARCH_RETRIEVAL',
+    occurredAt: new Date(startedAt).toISOString(),
+    lane: RETRIEVAL_LANE,
+    resultStatus,
+    questionHash: hashQuestion(question),
+    sourceClass: args ? args.sourceClass : null,
+    selectedSourceIds: selected,
+    usedSourceIds: used,
+    citationCount,
+    durationMs: Math.max(0, finishedAt - startedAt),
+    reconcileVerdict: resultStatus === 'verified' ? 'prior-only' : 'no-result',
+  };
+}
+
+function appendRetrievalLog(requestedPath, record) {
+  const resolved = resolveLogPath(requestedPath);
+  fs.mkdirSync(path.dirname(resolved), { recursive: true });
+  resolveLogPath(resolved);
+  fs.appendFileSync(resolved, JSON.stringify(record) + '\n', {
+    encoding: 'utf8',
+    flag: 'a',
+    mode: 0o600,
+  });
+  return resolved;
+}
+
 function buildOutput(args, config, policy, selectedSourceIds, validated) {
   return {
     schemaVersion: 1,
@@ -240,7 +357,7 @@ function buildOutput(args, config, policy, selectedSourceIds, validated) {
     notebookId: config.notebookId,
     sourceClass: args.sourceClass,
     selectedSourceIds,
-    questionHash: crypto.createHash('sha256').update(args.question).digest('hex'),
+    questionHash: hashQuestion(args.question),
     answer: validated.answer,
     conversationId: validated.conversationId,
     sourcesUsed: validated.sourcesUsed,
@@ -250,24 +367,67 @@ function buildOutput(args, config, policy, selectedSourceIds, validated) {
 }
 
 function main(argv) {
-  const args = parseArgs(argv);
-  const config = readJson(CONFIG_PATH, 'NotebookLM configuration');
-  const policy = readJson(POLICY_PATH, 'NotebookLM canon-source policy');
-  const inventory = readJson(INVENTORY_PATH, 'NotebookLM source inventory');
-  validatePolicy(inventory, policy);
-  if (!config.notebookId || config.notebookId !== policy.notebookId) {
-    throw new Error('configured notebook ID does not match canon-source policy');
+  const startedAt = Date.now();
+  const questionHint = questionHintFromArgv(argv);
+  let args = null;
+  let selectedSourceIds = [];
+  let validated = null;
+  let stage = 'not_run';
+  let logPath = DEFAULT_LOG_PATH;
+  let output = null;
+
+  try {
+    args = parseArgs(argv);
+    logPath = resolveLogPath(args.logPath);
+    const config = readJson(CONFIG_PATH, 'NotebookLM configuration');
+    const policy = readJson(POLICY_PATH, 'NotebookLM canon-source policy');
+    const inventory = readJson(INVENTORY_PATH, 'NotebookLM source inventory');
+    validatePolicy(inventory, policy);
+    if (!config.notebookId || config.notebookId !== policy.notebookId) {
+      throw new Error('configured notebook ID does not match canon-source policy');
+    }
+    selectedSourceIds = selectSourceIds(policy, args.sourceClass, args.sourceIds);
+    const queryArgs = buildQueryArgs(
+      config.notebookId,
+      args.question,
+      selectedSourceIds,
+      args.timeoutSeconds
+    );
+    stage = 'query';
+    const raw = runQuery(queryArgs, args.timeoutSeconds);
+    stage = 'response_validation';
+    validated = validateQueryResponse(raw, selectedSourceIds, policy);
+    output = buildOutput(args, config, policy, selectedSourceIds, validated);
+  } catch (error) {
+    const record = buildRetrievalRecord({
+      args,
+      questionHint,
+      selectedSourceIds,
+      validated: null,
+      resultStatus: classifyResultStatus(error, stage),
+      startedAt,
+      finishedAt: Date.now(),
+    });
+    try {
+      appendRetrievalLog(logPath, record);
+    } catch (logError) {
+      throw new Error(
+        error.message + '; retrieval observability log failed: ' + logError.message
+      );
+    }
+    throw error;
   }
-  const selectedSourceIds = selectSourceIds(policy, args.sourceClass, args.sourceIds);
-  const queryArgs = buildQueryArgs(
-    config.notebookId,
-    args.question,
+
+  appendRetrievalLog(logPath, buildRetrievalRecord({
+    args,
+    questionHint,
     selectedSourceIds,
-    args.timeoutSeconds
-  );
-  const raw = runQuery(queryArgs, args.timeoutSeconds);
-  const validated = validateQueryResponse(raw, selectedSourceIds, policy);
-  console.log(JSON.stringify(buildOutput(args, config, policy, selectedSourceIds, validated), null, 2));
+    validated,
+    resultStatus: 'verified',
+    startedAt,
+    finishedAt: Date.now(),
+  }));
+  console.log(JSON.stringify(output, null, 2));
 }
 
 if (require.main === module) {
@@ -286,5 +446,10 @@ module.exports = {
   buildQueryArgs,
   normalizeCitationMap,
   validateQueryResponse,
+  hashQuestion,
+  resolveLogPath,
+  classifyResultStatus,
+  buildRetrievalRecord,
+  appendRetrievalLog,
   buildOutput,
 };

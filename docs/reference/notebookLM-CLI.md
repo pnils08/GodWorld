@@ -1,19 +1,22 @@
 ---
 title: Gemini Notebook / NotebookLM CLI Operations
 created: 2026-07-25
-updated: 2026-07-25
+updated: 2026-07-26
 type: reference
 tags: [infrastructure, media, active]
 sources:
   - docs/plans/2026-07-10-notebooklm-bridge-deploy.md
+  - docs/plans/2026-07-25-notebooklm-source-search-wiring.md
   - docs/research/2026-07-10-notebooklm-mcp.md
   - config/notebooklm.json
+  - scripts/notebooklmCanonSearch.js
   - scripts/notebooklmPush.js
   - scripts/notebooklmDailyNews.js
   - .claude/skills/post-publish/SKILL.md (read-only control-plane consumer)
   - https://github.com/jacob-bd/gemini-notebook-mcp-cli
 pointers:
   - "[[../plans/2026-07-10-notebooklm-bridge-deploy]] — build history, proofs, and remaining acceptance gate"
+  - "[[../plans/2026-07-25-notebooklm-source-search-wiring]] — fail-closed source policy, wrapper, routing, and observability"
   - "[[../research/2026-07-10-notebooklm-mcp]] — adoption research and canon-authority decision"
   - "[[../EDITION_PIPELINE_DEEP_DISPATCH]] — flagship publication path that converges on post-publish"
   - "[[../OPERATIONS]] — general GodWorld operations"
@@ -56,11 +59,12 @@ NotebookLM should be invoked on demand for questions that benefit from
 cross-Edition reading. It does not belong in the boot sequence and should not
 replace cheap exact-row lookup.
 
-The existing `.claude/agents/source-search/SKILL.md` is currently a file-only
-retrieval agent. NotebookLM is registered in `.mcp.json`, but automatic routing
-from that protected agent to NotebookLM has **not** been added. Until a
-separately approved control-plane change does that, an orchestrator or operator
-must choose the NotebookLM lane explicitly.
+The protected `.claude/agents/source-search/SKILL.md` has a bounded
+`prior-published-arc` lane. That lane may call only
+`scripts/notebooklmCanonSearch.js`; exact-current and cross-file reconciliation
+remain on deterministic GodWorld sources. The wrapper is read-only toward
+NotebookLM, Sheets, publication artifacts, and canon. Its only local side effect
+is a metadata-only retrieval event under `output/`.
 
 ## Current installation
 
@@ -198,37 +202,67 @@ persistent browser profile for background recovery.
 
 ## Canon search
 
-### CLI query
+### Bounded query wrapper
 
-Read the permanent notebook ID from `config/notebooklm.json`, then run:
+Use the policy-enforcing wrapper from the repository root:
 
 ```bash
-/root/GodWorld/.venv/nlm/bin/nlm notebook query <permanent-notebook-id> "Using only the published sources in this notebook, trace <storyline>. Separate direct published fact from inference, identify conflicts or missing evidence, and cite the source title for every major claim." --json --timeout 180
+node scripts/notebooklmCanonSearch.js \
+  --question "Trace <storyline> across the selected published sources. Cite every factual claim." \
+  --source-ids <approved-id1,approved-id2>
 ```
 
-Useful query controls:
+The wrapper reads the permanent notebook ID from `config/notebooklm.json`,
+validates the complete source policy against the current inventory, and passes
+an explicit source-ID scope to `nlm notebook query`. It defaults to the reviewed
+published set. `--source-class canon-reference` is allowed only for a
+builder/orchestrator-authorized origin lookup; `--source-class all` requires an
+explicit mixed-class need.
+
+Useful wrapper controls:
 
 ```text
---source-ids <id1,id2>        Limit the answer to known sources
---conversation-id <id>       Ask a follow-up in the same conversation
---json                       Preserve sources_used, citations, and references
---timeout 180                Allow a complex cross-source answer to finish
+--source-ids <id1,id2>        Limit the answer to approved sources
+--source-class <class>        published (default), canon-reference, or all
+--timeout <30..180>           Bound the query duration
+--log-path <output/*.jsonl>   Select a pipeline-owned metadata log
 ```
 
 Queries persist in the notebook's web chat history. Treat that as an expected
-side effect.
+side effect. Do not call `nlm notebook query` directly for the routed
+source-search lane; doing so bypasses the reviewed source policy.
+
+### Retrieval observability
+
+Every wrapper attempt appends one event to
+`output/retrieval/notebooklm-canon-search.jsonl` unless the owning pipeline
+selects another `.jsonl` path inside `output/`. The record contains only:
+
+- lane and source class;
+- SHA-256 question hash, never the question;
+- selected and used source IDs;
+- citation count and duration;
+- machine `resultStatus`: `not_run`, `no_result`, `auth_failure`,
+  `citation_failure`, or `verified`;
+- `reconcileVerdict`: `prior-only` after wrapper verification or `no-result`
+  after failure. A consuming orchestrator records any later current-state
+  reconciliation separately.
+
+Answer text, excerpts, conversation ID, and raw error output are excluded.
+Failure to append the event is itself a non-zero wrapper failure.
 
 ### MCP query
 
-When the server is loaded, use `notebook_query` against the permanent notebook.
-Ask for the same fact/inference separation and source-title citations. Use
-`source_list` to resolve cited source IDs when needed.
+Direct `notebook_query` remains useful for operator diagnosis, but it is not the
+policy-enforced source-search lane and its prose must not enter a Brief or other
+canon-facing artifact. Routed published-canon research uses the wrapper.
 
 ### Verification contract
 
 A search return is complete only when:
 
-1. The answer is limited to the permanent published notebook.
+1. The answer is limited to the configured permanent notebook and the
+   explicitly approved source class and IDs.
 2. Direct fact and inference are separated.
 3. Every material claim has a citation.
 4. The cited source title and excerpt actually support the prose.
@@ -242,6 +276,12 @@ three sources, demonstrating the retrieval strength. It also attributed one
 quoted position to the wrong person while the cited excerpt named the correct
 person. The citations made the error easy to catch; this is why source
 verification is mandatory.
+
+The 2026-07-26 Task 6 proof selected only Editions 98, 100, and 101. All three
+were used; 15 citations had 15 matching excerpts. The local trace contained two
+metadata-only events: the sandbox-denied first attempt as `no_result` and the
+approved retry as `verified`. It contained no question, answer, excerpt,
+conversation ID, publication artifact, or canon write.
 
 ## Post-publish additions
 
@@ -439,3 +479,7 @@ delete the CLI-managed profile as part of a normal rollback.
   root compatibility patch, auth recovery, version hold and staged upgrade,
   permanent canon-search lane, post-publish additions, daily-news flow, live
   verification results, and remaining scheduled-run/source-retention gaps.
+- 2026-07-26 — Replaced the stale raw-query/file-only routing description with
+  the fail-closed canon-search wrapper and documented its metadata-only Task 6
+  retrieval log, controlled result statuses, path boundary, and bounded live
+  proof.

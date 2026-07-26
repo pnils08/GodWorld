@@ -10,7 +10,10 @@
 **Wiki layer:** [[SCHEMA]] (conventions) + [[index]] (catalog) — read at boot. (Phase 41.1 + 41.2, S146.)
 **Plan-file contract:** [[plans/TEMPLATE]] — every new plan copies this shape (S152). Also referenced from [[rollout-rules]] §4.
 **Phase backlog:** [[plans/BACKLOG]] — designs catalogued but not yet scheduled. Promote to its own plan file when a session picks one up.
-**Terminal owners:** `engine-sheet` / `media` / `civic` / `research-build`. Research-build owns this doc; engine-sheet executes engine code; media runs editions; civic runs city-hall.
+**Terminal owners:** `engine-sheet` / `research-build`. Research-build owns this
+doc; engine-sheet executes substrate work. Media and civic are generator
+terminals: they run skills and record findings in production gap logs, but never
+own rollout rows.
 
 ---
 
@@ -125,7 +128,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.38 | Living City — full-population coverage | in-progress | research-build → engine-sheet | [[../plans/2026-06-19-living-city-full-population-coverage]] + [[../plans/2026-06-30-central-generator-atmospheric-expansion]] + [[../plans/2026-07-01-persistence-seams-content-ledger]] |
 | research.20 | Autonomous deep-dispatch | in-progress | research-build → engine-sheet | [[../adr/0012-autonomous-deep-dispatch-write-edition]] + [[../plans/2026-06-25-deep-dispatch-write-edition-build]] — detail in pointer (relocated 2026-07-02) |
 | research.21 | Citizen-signal story emergence | in-progress | research-build → engine-sheet | [[../plans/2026-06-26-citizen-signal-story-emergence]] + [[../plans/2026-06-29-citizen-signal-detector-build]] — detail in pointer (relocated 2026-07-02) |
-| research.23 | NotebookLM bridge — edition auto-ingest + audio delivery + grounded published-canon Q&A (jacob-bd/notebooklm-mcp-cli adopted, S310; LIVE — Q&A proven, audio live-fires next publish) | in-progress | research-build → media | [[../plans/2026-07-10-notebooklm-bridge-deploy]] + [[../research/2026-07-10-notebooklm-mcp]] |
+| research.23 | NotebookLM bridge — apply Task 5 protected source-search routing | in-progress | research-build | [[../plans/2026-07-10-notebooklm-bridge-deploy]] + [[../plans/2026-07-25-notebooklm-source-search-wiring]] |
 | research.24 | Entity protagonism — business/faith event gen, Riley lifestyle → seed backdrop, Community_Programs ledger | in-progress (T1–T6 built S313; sandbox verify rides C102 smoke) | engine-sheet | [[../plans/2026-07-12-entity-protagonism]] |
 | engine.81 | Cycle-resolution unification (S332 incident): getCurrentCycle reads base_context.json; detectCycle reads freshest world_summary — they diverged (base_context stamped 103 from 2026-07-21 while world=102) so the citizen-loop logged c103 for 3 days. Unify all crons to ONE cycle source + add a staleness/ahead-of-reality guard so this can't silently sit wrong. Mags corrected base_context→102 as the stopgap | queued | engine-sheet | claude-mem S332 (base_context 103 incident) |
 | research.25 | Headless newsroom pipeline — M–F writer-wakes + Sat compile | Phase 1 DONE (writer/gate/route+scorecard); Phase 2.0 DONE incl. build (S331 engine.79a-d: 5 dark staffers + POPID join + eligibility gate + in-cycle hint cap; bench C110-C113 proven, live-deployed; NOTE stale-seam finding — live WHO-assist is buildContractSeeds/suggestStoryAngle_, Engine B v3 path never reaches the v4 deck) → next: Phase 2 daily writer-wakes (needs W5 half 1 signal partition) | research-build → engine-sheet | [[../plans/2026-07-20-headless-newsroom-pipeline]] |

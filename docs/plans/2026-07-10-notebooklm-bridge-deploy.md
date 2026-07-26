@@ -1,7 +1,7 @@
 ---
 title: NotebookLM Bridge Deploy Plan
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-25
 type: plan
 tags: [media, infrastructure, active]
 sources:
@@ -15,7 +15,7 @@ pointers:
 
 # NotebookLM Bridge Deploy Plan
 
-**Goal:** Every published edition lands in NotebookLM automatically — source added, audio overview generated and delivered to Mike — and the published archive becomes a grounded, citation-backed Q&A surface callable by Mags and agents.
+**Goal:** Every published Edition lands in NotebookLM automatically — source added, audio overview generated and delivered to Mike — and the published archive becomes a grounded, citation-backed Q&A surface callable by Mags and agents. A separate daily-news notebook turns the current Cycle's world summary and newsroom output into a source-grounded listening brief without promoting draft material into canon.
 
 **Architecture:** Adopt `jacob-bd/notebooklm-mcp-cli` (Python CLI `nlm` + MCP server; cookie-extract → internal-API mechanism — no DOM automation). A thin Node wrapper (`scripts/notebooklmPush.js`) shells out to `nlm` from `/post-publish` as a new step, with graceful-degrade on auth failure (warn + continue, never block the pipeline). The edition archive backfills into sharded notebooks (~50-source free-tier limit per notebook). Q&A (`nlm ask`) is a **reader-side reference over published canon** — sheets remain canon authority per ADR-0007; NotebookLM answers cite editions, they don't define world state.
 
@@ -115,7 +115,7 @@ pointers:
   1. After download, deliver per Open Q2's answer: Drive upload (existing Drive lib used by edition-print pipeline) and/or Discord post (existing bot reply path with file attachment).
   2. Include cycle + edition title in the delivery message.
 - **Verify:** audio file lands at the drop point on a real run
-- **Status:** [~] built S310 — both drops in wrapper (Drive via saveToDrive.js + Discord webhook, attach <8MB else link); live verify pending auth
+- **Status:** [x] live-verified C101 — `output/audio/nlm_overview_c101.m4a` uploaded to Drive and delivered through Discord; `output/photos/e101/nlm_push2.log` records both drops
 
 ### Phase 4 — Maximize: summary capture + canon Q&A surface
 
@@ -126,7 +126,7 @@ pointers:
   1. After source-add on edition runs, `nlm ask "Summarize edition C<NN> — lead stories, key citizens, decisions"` against the current shard; save to `output/nlm_summary_c<NN>.md`. (Mike-direct S310: NotebookLM chat writes the best edition summaries — capture them as artifacts instead of losing them in his browser.)
   2. Same degrade rule: failure warns, never blocks.
 - **Verify:** summary file exists after a push run, content is a real summary with edition specifics
-- **Status:** [~] built S310 — in wrapper (`nlm notebook query` → output/nlm_summary_c<NN>.md); live verify pending auth
+- **Status:** [x] live-verified C101 — `output/nlm_summary_c101.md` captured from the permanent notebook after the Edition source was added
 
 ### Task 10: Q&A surface for Mags + agents
 
@@ -146,6 +146,39 @@ pointers:
 - **Verify:** rollout row reflects reality
 - **Status:** [ ] not started
 
+### Phase 5 — Daily newsroom listening brief
+
+### Task 12: Bound the working source set
+
+- **Files:** `scripts/notebooklmDailyNews.js`, `config/notebooklm.json`
+- **Design:**
+  1. Keep `GodWorld` as the permanent, published-Edition reader. The daily job queries it for cited continuity but does not add sample or staged newsroom material to it.
+  2. Create a separate `GodWorld — Daily Newsroom` working notebook. Each run combines the current Cycle's `world_summary`, recent staged and ungated reports, and one NotebookLM-produced continuity brief derived from the published archive into one hashed, bounded source. An unchanged rerun reuses the source instead of consuming another source slot.
+  3. Scope the working-notebook query and audio overview to exactly that source ID. Flagged Article bodies are excluded. Staged and ungated reports are explicitly labeled unverified; the world summary and published history win conflicts.
+  4. Save a manifest, source pack, cited continuity response, written daily brief, and audio under `output/notebooklm/daily/c<N>/<hash>/`. Every artifact is marked `NOT_CANON`; none is an ingestion input.
+- **Failure contract:** auth expiry, quota, or internal-API change warns and exits zero. No Sheet, Edition, canon, or newsroom-gate writes occur.
+- **Status:** [x] live 2026-07-25 — working notebook created; archive retrieval, one bounded source upload, source-scoped written C102 brief, and long audio pass. The first audio completed just after the original 12-minute ceiling; it was recovered without regeneration, and the normal ceiling is now 15 minutes with Artifact-ID-specific polling.
+
+### Task 13: Daily Drive + Discord delivery
+
+- **Files:** `scripts/notebooklmPush.js`, `scripts/notebooklmDailyNews.js`, crontab after live verification
+- **Design:** reuse the proven audio delivery path with a Cycle-labeled message. Default window is 36 hours; default audio is a long deep-dive. Schedule target is 08:00 America/Chicago after one bounded live run proves notebook creation, exact source scoping, audio download, Drive upload, and Discord delivery.
+- **Operational gate:** do not install the crontab entry until Task 12's live test passes. A failed scheduled run may send a concise Discord warning but remains non-blocking.
+- **Status:** [x] live 2026-07-25 — 102 MB C102 audio downloaded, uploaded to Drive, and delivered to Discord. Daily 08:00 server-local crontab installed with log `logs/notebooklm-daily-news.log`.
+
+### Task 14: v1.2 natural-source tuning
+
+- **Files:** `scripts/notebooklmDailyNews.js`, `config/notebooklm.json`
+- **Design:** keep operational metadata, authority notes, hashes, prompts, and flagged-exclusion bookkeeping in local artifacts only. The source uploaded to NotebookLM reads as city material: current Cycle record, developing Bay Tribune reports, and published-history continuity. Use one light frame — “GodWorld Oakland, 2042 — a prosperous era buoyed by the A’s success, with civic and neighborhood pressures underneath” — for chat and Audio Overview focus. Let NotebookLM perform its native synthesis.
+- **Audio:** retain Deep Dive format but change length from long to short. Preserve v1; generate v1.2 as a new versioned source and artifact.
+- **Status:** [x] live 2026-07-25 — v1 preserved and v1.2 added as a second source. Clean-source leak scan passes; grounded chat summary generated; short Deep Dive delivered to Drive + Discord. Program length dropped from 53m01s / 102 MB to 5m24s / 3.9 MB.
+
+### Task 15: First scheduled-run hardening
+
+- **Evidence:** the first 08:00 run fired correctly but the saved profile was rejected at the working-notebook source list. No external source, chat, audio, Drive, or canon write occurred. The cookies had been refreshed less than five hours earlier, so this event does not match the documented 2–4 week horizon.
+- **Fix:** a completed same-hash run is now a local no-op before any NotebookLM call; `--force` is available for an intentional repeat. Existing manifests merge on every retry so an auth failure cannot erase prior source IDs, Artifact IDs, audio paths, or Drive links.
+- **Status:** [~] built and locally validated 2026-07-25 — next distinct-input scheduled run still needs live authentication proof
+
 ---
 
 ## Open questions
@@ -161,3 +194,7 @@ pointers:
 - 2026-07-10 — Initial draft (S310). Research basis locked same day; jacob-bd adopted over PleasePrompto (S307 candidate) and roomi-fields per landscape table. Draft pending Mike's answers on Q1–Q3.
 - 2026-07-11 — Auth live (manual cookie), existing GodWorld notebook adopted (no backfill, Mike-direct), grounded-ask smoke test PASS with citations, wrapper live-verified + audio source-scoping fix, MCP registered. Remaining: Tasks 8/9 live-fire + acceptance 2 on next edition publish; Task 11 close-out after.
 - 2026-07-10 — All three Qs resolved same session (his account / both drops / Gemini Pro). Tasks 1, 7 done; 6, 8, 9 built pending live verify; Task 2 waiting on cookie paste. Status draft → active.
+- 2026-07-25 — Reconciled C101 evidence: summary, audio, Drive, and Discord delivery were live-verified. Added Phase 5 daily-news architecture: permanent published archive remains clean; a separate working notebook receives one hashed current-Cycle source containing the source pack plus cited archive continuity, with exact source scoping and explicit non-canon classifications. Offline test and C102 dry run pass; live notebook creation and schedule await valid refreshed auth.
+- 2026-07-25 — Phase 5 live: created `GodWorld — Daily Newsroom`, passed cross-Cycle archive retrieval, uploaded one bounded C102 source, generated the written brief and 102 MB long audio, delivered by Drive + Discord, and installed the 08:00 server-local schedule. First-render recovery exposed two hardening needs now folded in: persist Artifact ID before polling and allow an explicit latest-audio recovery without regeneration; polling ceiling increased 12→15 minutes.
+- 2026-07-25 — v1.2 tuning from Mike's first-listen feedback: removed operational instructions from the uploaded source, reduced chat/audio customization to a natural GodWorld Oakland 2042 frame, versioned the source hash, and changed Deep Dive length long→short. v1 retained for comparison.
+- 2026-07-25 — First 08:00 schedule fired but auth was rejected before any external write. This was a <5h cookie lifetime, not the expected 2–4 week rotation. Same-hash completed runs now stop locally before auth; retry manifests preserve completed delivery metadata; `--force` enables intentional repetition.

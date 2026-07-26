@@ -143,10 +143,36 @@ async function main() {
   console.log('NotebookLM push complete for C' + args.cycle);
 }
 
-async function deliver(audioPath, cycle, config) {
+async function sendDiscordText(content) {
+  const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
+  if (!webhookUrl) {
+    console.log('NOTEBOOKLM DISCORD DROP SKIPPED (non-blocking): DISCORD_WEBHOOK_URL not set');
+    return false;
+  }
+  try {
+    const res = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content }),
+    });
+    if (!res.ok) throw new Error('webhook HTTP ' + res.status);
+    console.log('Discord drop done');
+    return true;
+  } catch (e) {
+    console.log('NOTEBOOKLM DISCORD DROP SKIPPED (non-blocking): ' + e.message);
+    return false;
+  }
+}
+
+async function deliver(audioPath, cycle, config, opts) {
+  const options = opts || {};
   // Drive drop
   let driveLink = null;
-  const up = spawnSync('node', [path.join(ROOT, 'scripts/saveToDrive.js'), audioPath, config.driveDest || 'edition'], {
+  const up = spawnSync('node', [
+    path.join(ROOT, 'scripts/saveToDrive.js'),
+    audioPath,
+    options.driveDest || config.driveDest || 'edition',
+  ], {
     encoding: 'utf-8',
     timeout: 300 * 1000,
   });
@@ -163,10 +189,11 @@ async function deliver(audioPath, cycle, config) {
   const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
   if (!webhookUrl) {
     console.log('NOTEBOOKLM DISCORD DROP SKIPPED (non-blocking): DISCORD_WEBHOOK_URL not set');
-    return;
+    return { driveLink };
   }
   try {
-    const content = '🎧 **Audio overview — Edition C' + cycle + '**' + (driveLink ? '\n' + driveLink : '');
+    const label = options.label || ('Audio overview — Edition C' + cycle);
+    const content = (options.content || ('🎧 **' + label + '**')) + (driveLink ? '\n' + driveLink : '');
     const size = fs.statSync(audioPath).size;
     if (size < DISCORD_ATTACH_CAP) {
       const form = new FormData();
@@ -186,6 +213,18 @@ async function deliver(audioPath, cycle, config) {
   } catch (e) {
     console.log('NOTEBOOKLM DISCORD DROP SKIPPED (non-blocking): ' + e.message);
   }
+  return { driveLink };
 }
 
-main().catch((e) => degrade('unexpected: ' + e.message));
+if (require.main === module) {
+  main().catch((e) => degrade('unexpected: ' + e.message));
+}
+
+module.exports = {
+  ROOT,
+  NLM,
+  nlm,
+  sleep,
+  deliver,
+  sendDiscordText,
+};

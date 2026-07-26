@@ -1,7 +1,7 @@
 ---
 title: GodWorld Documentation Index
 created: 2026-04-14
-updated: 2026-07-24
+updated: 2026-07-25
 type: reference
 tags: [architecture, infrastructure, active]
 sources:
@@ -210,6 +210,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 - **[[reference/DISASTER_RECOVERY]]** — rebuild procedure if the machine dies. *(reference, infrastructure, active)*
 - **[[reference/DRIVE_UPLOAD_GUIDE]]** — saving files to Google Drive. *(reference, infrastructure, active)*
 - **[[reference/GODWORLD_REFERENCE]]** — simulation reference for Mara and the Media Room. *(reference, civic, active)*
+- **[[reference/notebookLM-CLI]]** — Gemini Notebook / NotebookLM CLI operator guide: persistent Chrome auth, root compatibility patch, version hold/upgrade procedure, permanent published-canon search lane, post-publish additions, and daily newsroom listening brief. *(reference, infrastructure, media, active)*
 - **[[reference/PROJECT_GOALS]]** — original project goals. *(reference, architecture, active)*
 - **[[reference/V3_ARCHITECTURE]]** — engine v3 technical contract. *(reference, engine, active)*
 
@@ -218,6 +219,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 ## `docs/plans/` — in-flight plans not yet promoted
 
 - **[[plans/TEMPLATE]]** — plan file template. Every new plan copies this shape. Adapted from obra/superpowers writing-plans skill (S152). *(reference, architecture, active)*
+- **[[plans/2026-07-25-notebooklm-source-search-wiring]]** — research.23 child plan: fail-closed NotebookLM source policy, read-only published-arc query wrapper, Claude-owned `source-search` routing, retrieval observability, and later headless evaluation; Supermemory purity/config review is a separate-session prerequisite. *(plan, infrastructure, media, active)*
 - **[[plans/2026-07-12-entity-protagonism]]** — research.24, S314 (Mike-direct S313 direction). Protagonist half of entity protagonism: faith events + famous-sighting venues + careerSignals businessDeltas emit `recordRipple_` with business/faith scopes so entities lead seeds (backdrop half shipped S313); new `Community_Programs` tab (3 canon programs) joins the OtherEntities backdrop pool; gated Phase-2 youth-event tie-in. FIX-don't-ADD: 4 existing files, 1 new tab, zero new .js. All execution engine-sheet. *(plan, engine, seeds, entities, draft)*
 - **[[plans/2026-07-11-citizen-voice-quote-supply]]** — pipeline.43, S312 Mike-direct (**priority avenue for citizen usage**). Every edition citizen quote becomes a cheap `citizenVoice.js` call carrying the citizen's real dials/bonds/tensions/page memory, replacing premium-model voice invention: /write-edition Step 1.5 batch-fetches quotes per dispatch article into `output/voices/voices_c{XX}.json`, desks quote supplied lines verbatim (QUOTE DISCIPLINE flips from constraint to delivery mechanism), letters voiced per-writer, new `--record` flag writes page (`daypart='PRESS'`) + gated Reflection_Intake at speak time (dials at cycle drain), post-publish 2e dedup. Closes the S296 curation diagnosis; executes engine.48 T9's open media handoff. *(plan, media, citizens, citizen-loop, edition-pipeline, active)*
 - **[[plans/2026-07-11-agent-exchange-engine]]** — engine.53, S312 Mike-direct (B+C design pick: agents talking to agents + 24/7 cron interaction). Generalizes engine.48 Task 6/7 before first build: one `scripts/citizen-exchange.js` (the file T6 already authorized, renamed) with three formats over shared wake-parity assembly — conversation (T6 spec verbatim), street interview (journalist matcher + edition NAMES INDEX subjects), debate (initiative/tension topics, faction-seeded stances). Daily 17:00 cron, trigger-priority router, transcripts → `output/exchanges/` as /sift source candidates. Canon wall: pages + gated intake only. *(plan, citizens, citizen-loop, voice-agents, engine, media, draft)*
@@ -410,6 +412,8 @@ Small, dated decision records. Created only when a choice is (a) hard to reverse
 
 _(Newest first, per SCHEMA §12 — normalized 2026-07-24.)_
 
+- 2026-07-25 (Codex, Mike-direct) — Registered [[plans/2026-07-25-notebooklm-source-search-wiring]] under research.23 and started its fail-closed permanent-notebook source inventory. The plan keeps NotebookLM in the prior-published-arc lane, preserves current-state authority, and separates the Supermemory setup/corpus audit into its own session.
+- 2026-07-25 (Codex, Mike-direct) — Registered [[reference/notebookLM-CLI]] as the operational owner for Gemini Notebook / NotebookLM CLI setup, persistent authentication, root-Chrome compatibility, controlled upgrades, published-narrative canon search, post-publish additions, and the daily newsroom listening brief.
 - 2026-07-24 (Codex, Mike-direct) — [[MODEL_HIERARCHY]] updated to interim order: hierarchy TBD; Claude=lead, Codex+Kimi=backup CLIs, Antigravity/Gemini=grunt tier (S332 inversion superseded, kept as incident history; approval-gate discipline retained). Index entry rewritten to match.
 - 2026-07-24 (Codex, builder-approved orientation audit) — Registered `docs/reviews/` folder section (was an orphan: present on disk, absent from SCHEMA §7 tree and this index) with [[reviews/2026-07-22-event-content-ledger-grok-depth]]. Archive count "~30" → 32 (verified live). Changelog ordering normalized to newest-first (was mixed — 2026-05 block sat above 2026-07 entries). Full audit findings + fixes: `output/codex/audit-2026-07-24-agents-gap.md`; run registered in [[AUDITS]].
 - 2026-07-20 (S325, research-build) — Registered [[plans/2026-07-20-headless-newsroom-pipeline]] (Mike-direct: full cron-orchestrated headless newsroom + city-hall). Reuses cron-desk-writer.js (writer-worker), source-search (retrieval), rhea-morgan (canon gate); new build = orchestrator + headless Rhea + per-run scorecard. Phase 1 concrete (scorecard/gate/routing/chain), Phases 2–4 outlined. Research basis [[research/2026-07-19-headless-cron-newsroom-agentic-rag]].

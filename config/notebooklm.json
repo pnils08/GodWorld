@@ -2,8 +2,17 @@
   "profile": "default",
   "notebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
   "notebookName": "GodWorld",
+  "newsroomNotebookId": "53537b20-01a9-44c7-966c-1bdc5a491c1a",
+  "newsroomNotebookName": "GodWorld — Daily Newsroom",
   "driveDest": "edition",
   "audioFormat": "deep_dive",
+  "dailyNews": {
+    "hours": 36,
+    "audioFormat": "deep_dive",
+    "audioLength": "short",
+    "driveDest": "edition",
+    "pingTime": "08:00 America/Chicago"
+  },
   "shards": [{ "range": [1, 999], "id": "417e2d29-4167-420f-a9cc-76fb6b2b7de2" }],
   "current": "417e2d29-4167-420f-a9cc-76fb6b2b7de2"
 }

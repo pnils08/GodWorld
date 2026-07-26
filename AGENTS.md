@@ -171,6 +171,56 @@ A project `.codex/` directory is reserved for separately approved Codex
 configuration. Do not create or modify `.codex/config.toml`, hooks, skills, or
 state files without explicit approval.
 
+## Research, plan, rollout, and archive
+
+For durable research, non-trivial implementation, or cross-session work, follow
+the repository's canonical filing loop in
+`docs/engine/archive/rollout-rules.md`:
+
+```text
+research → plan → rollout → archive
+```
+
+Keep the layers distinct:
+
+- **Research** records findings, evaluated options, hazards, and a verdict. Copy
+  `docs/research/TEMPLATE.md` to
+  `docs/research/YYYY-MM-DD-<topic>.md`; register the instance in
+  `docs/research/index.md`, not the top-level documentation index. Research
+  carries `adopt`, `watch`, or `take-nothing`—never rollout state—and remains a
+  standing, grep-able source after application.
+- **Plan** is the self-contained executable specification. Copy
+  `docs/plans/TEMPLATE.md` to `docs/plans/YYYY-MM-DD-<topic>.md`; include exact
+  tasks, files, acceptance criteria, validation, terminal ownership, sources,
+  and pointers; register it in `docs/index.md`. An adopted research verdict
+  points forward to the plan, and the plan points back to its research basis.
+- **Rollout** is the clean open-work tracker at
+  `docs/engine/archive/ROLLOUT_PLAN.md`. Each row contains only an ID, one
+  actionable summary, lifecycle state, builder-terminal owner, and pointers to
+  the owning plan or plans. Do not place research prose, implementation detail,
+  handoff instructions, or raw issues in a rollout row.
+- **Archive** receives shipped plans and swept rollout rows according to
+  `rollout-rules.md`. Research files do not archive. This lifecycle description
+  does not authorize Codex to move or edit `docs/archive/**`; that still requires
+  explicit builder approval under this file's protected-history rule.
+
+Search for an existing research file, plan, and rollout row before creating a
+new one. Update the owning artifact rather than starting a parallel record.
+
+Use this loop proportionately. A narrow, fully specified, single-session task
+does not require new research, a plan, or a rollout row unless the builder asks
+for durable tracking. When the loop is used, the plan is the authoritative
+cross-session handoff payload and rollout is its discovery pointer;
+`output/codex/` may hold supporting diagnostics or proposed patches but must not
+be the only durable handoff.
+
+Under the active rollout doctrine, actionable rows are assigned only to the
+builder terminals: `research-build` for skills, rules, documentation, ADRs, and
+apparatus; `engine-sheet` for code, Sheets, schemas, and substrate. Media and
+civic are generator terminals: their run findings enter production gap logs and
+are promoted through research-build rather than assigned directly as rollout
+work.
+
 ## Change protocol
 
 For analysis, orientation, review, or diagnosis:
@@ -286,7 +336,7 @@ or command lines.
 
 Before creating or editing documentation, follow `docs/SCHEMA.md`.
 
-For every new active document:
+For every new active document other than a research instance:
 
 - use the prescribed filename and folder;
 - add required YAML frontmatter;
@@ -295,6 +345,9 @@ For every new active document:
 - use `[[wikilinks]]` for internal docs;
 - add the document to `docs/index.md` in the same approved change;
 - update the document's changelog when appropriate.
+
+For a new research instance, follow `docs/research/TEMPLATE.md` and register it
+in `docs/research/index.md` instead of `docs/index.md`.
 
 When renaming or moving a document:
 

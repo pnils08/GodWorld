@@ -1,0 +1,157 @@
+#!/usr/bin/env node
+
+const assert = require('assert');
+const {
+  parseArgs,
+  cycleFromName,
+  artifactStem,
+  stableHash,
+  mergeManifest,
+  isCompletedManifest,
+  buildSourcePack,
+  buildBoundedNewsSource,
+  parseJsonOutput,
+  queryAnswer,
+  renderResearchBrief,
+  findSourceId,
+  parseAddedSourceId,
+  parseCreatedArtifactId,
+  sourceTitle,
+  dailyPrompt,
+  SOURCE_VERSION,
+  CITY_FRAME,
+} = require('./notebooklmDailyNews');
+
+const syntheticInput = {
+  cycle: 999,
+  worldSummaryPath: 'output/world_summary_c999.md',
+  worldSummary: '# SYNTHETIC NON-CANON WORLD\n\nA visibly synthetic signal.',
+  reports: [{
+    classification: 'UNGATED_SAMPLE',
+    relativePath: 'output/cron-compare/samples/synthetic_c999.sample.md',
+    body: '# Synthetic headline\n\nA visibly synthetic, non-canon report.',
+  }],
+  flagged: [{
+    classification: 'FLAGGED_EXCLUSION',
+    cycle: 999,
+    relativePath: 'output/cron-compare/flagged/synthetic_c999.flags.json',
+    reasonCount: 1,
+  }],
+};
+
+{
+  const args = parseArgs([
+    'node', 'script',
+    '--cycle=999', '--hours', '12', '--dry-run', '--no-audio', '--no-deliver',
+  ]);
+  assert.deepStrictEqual(args, {
+    cycle: 999,
+    hours: 12,
+    audio: false,
+    deliver: false,
+    dryRun: true,
+  });
+}
+
+{
+  const args = parseArgs(['node', 'script', '--resume-latest-audio']);
+  assert.strictEqual(args.resumeLatestAudio, true);
+  assert.strictEqual(args.audio, true);
+  assert.strictEqual(args.deliver, true);
+}
+
+{
+  const args = parseArgs(['node', 'script', '--force']);
+  assert.strictEqual(args.force, true);
+}
+
+assert.strictEqual(cycleFromName('civic_c999_writer.sample.md'), 999);
+assert.strictEqual(cycleFromName('no-cycle.md'), null);
+assert.strictEqual(artifactStem('civic_c999_writer.sample.md'), 'civic_c999_writer');
+assert.strictEqual(artifactStem('civic_c999_writer.flags.json'), 'civic_c999_writer');
+assert.strictEqual(stableHash({ b: 2 }), stableHash({ b: 2 }));
+assert.deepStrictEqual(
+  mergeManifest({ sourceIds: ['kept'], generatedAt: 'old' }, { generatedAt: 'new' }),
+  { sourceIds: ['kept'], generatedAt: 'new' }
+);
+assert.strictEqual(isCompletedManifest({
+  sourceVersion: '1.2',
+  sourceIds: ['source'],
+  audioPath: 'output/synthetic-noncanon.m4a',
+  driveLink: 'https://example.invalid/synthetic',
+}), true);
+assert.strictEqual(isCompletedManifest({
+  sourceVersion: '1.2',
+  sourceIds: ['source'],
+}), false);
+
+{
+  const first = buildSourcePack(syntheticInput);
+  const second = buildSourcePack(syntheticInput);
+  assert.strictEqual(first.hash, second.hash, 'same inputs must produce an idempotent pack hash');
+  assert(first.text.includes('Authority order: current world summary first'));
+  assert(first.text.includes('UNGATED_SAMPLE'));
+  assert(first.text.includes('must not be presented as verified or published fact'));
+  assert(first.text.includes('1 gate finding(s)'));
+  assert(!first.text.includes('generatedAt'), 'wall-clock metadata must not perturb the source pack');
+}
+
+{
+  const source = buildBoundedNewsSource({
+    cycle: syntheticInput.cycle,
+    worldSummary: syntheticInput.worldSummary,
+    reports: syntheticInput.reports,
+    archiveAnswer: 'Synthetic published background.',
+  });
+  assert(source.includes(CITY_FRAME));
+  assert(source.includes('Developing report — early newsroom sample.'));
+  assert(source.includes('Synthetic published background.'));
+  assert(!source.includes('Artifact class:'));
+  assert(!source.includes('Canon status:'));
+  assert(!source.includes('Pack SHA-256:'));
+  assert(!source.includes('FLAGGED_EXCLUSION'));
+}
+
+{
+  const parsed = parseJsonOutput('{"answer":"Grounded answer","sources_used":[{"id":"s1"}]}', 'test');
+  assert.strictEqual(queryAnswer(parsed), 'Grounded answer');
+  assert.throws(() => parseJsonOutput('not-json', 'test'), /invalid JSON/);
+}
+
+{
+  const sources = [
+    { id: 'one', title: 'First' },
+    { source_id: 'two', name: 'Second' },
+  ];
+  assert.strictEqual(findSourceId(sources, 'Second'), 'two');
+  assert.strictEqual(findSourceId(sources, 'Missing'), null);
+  assert.strictEqual(parseAddedSourceId('Done\nSource ID: abc-123\n'), 'abc-123');
+  assert.throws(() => parseAddedSourceId('Done'), /without a Source ID/);
+  assert.strictEqual(parseCreatedArtifactId('Audio started\nArtifact ID: art-123\n'), 'art-123');
+  assert.throws(() => parseCreatedArtifactId('Audio started'), /without an Artifact ID/);
+}
+
+{
+  const title = sourceTitle('current source pack', 999, 'abcdef1234567890');
+  assert.strictEqual(title, 'GodWorld Daily C999 — current source pack — abcdef123456');
+  const prompt = dailyPrompt(999);
+  assert.strictEqual(SOURCE_VERSION, '1.2');
+  assert(prompt.includes(CITY_FRAME));
+  assert(prompt.includes('Give me today’s Cycle 999 city news'));
+}
+
+{
+  const brief = renderResearchBrief(999, {
+    answer: 'Synthetic continuity.',
+    sources_used: [{ id: 's1', title: 'Synthetic source' }],
+  }, {
+    archiveNotebookId: 'synthetic-notebook',
+    prompt: 'Synthetic prompt',
+  });
+  assert(brief.includes('Artifact class: NLM_RESEARCH_BRIEF'));
+  assert(brief.includes('Canon status: NOT CANON'));
+  assert(brief.includes('Synthetic continuity.'));
+  assert(brief.includes('"id": "s1"'));
+}
+
+console.log('notebooklmDailyNews tests: PASS');

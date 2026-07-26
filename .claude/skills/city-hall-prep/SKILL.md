@@ -1,7 +1,7 @@
 ---
 name: city-hall-prep
 description: Prepare all inputs for city-hall voice agents. Reads tracker, approvals, world summary, engine review, coverage ratings, previous log, canon, Mara directive. Writes pending decisions per voice.
-version: "1.10"
+version: "1.11"
 updated: 2026-07-26
 tags: [civic, active]
 effort: high
@@ -128,7 +128,7 @@ Read all 10 inputs above. For each:
 
 **Delegate multi-file digs to `source-search` (S326, Mike-direct).** Exact MCP lookups stay direct. But cross-file verification work — reconciling a stale digest against tracker + production logs, tracing an initiative arc across prior-cycle summaries, resolving two sources that disagree on scope/phase — spawns the `source-search` agent (Haiku-pinned retrieval-only; Sonnet-parity, 0 fabrications on the C100 eval, which was itself a civic-arc dig on the OARI-miss cycle). It flags digest staleness (a c{XX} file whose "Latest" is c{XX-1} data) and reports conflicts both-ways with citations — read its ruling before packet content rides on the fact.
 
-When the question requires a multi-Edition initiative arc rather than a single locator hit, dispatch `source-search` with `retrievalLane=prior-published-arc`. It may call only `node scripts/notebooklmCanonSearch.js` in default published scope. Current initiative phase, vote state, district scope, metrics, and office ownership still come from current disk/Sheet/MCP sources and win every conflict. Direct `search_canon` stays the first-hop publication locator; do not use Richmond Archive references for normal civic initiative research.
+When the question requires a multi-Edition initiative arc rather than a single locator hit, dispatch **`arc-search`** (not `source-search`) with `retrievalLane=prior-published-arc` — a wrapper-only seat with no file-reading tools, gated so `node scripts/notebooklmCanonSearch.js` in default published scope is the only command it can run (S334). Current initiative phase, vote state, district scope, metrics, and office ownership still come from current disk/Sheet/MCP sources and win every conflict. Direct `search_canon` stays the first-hop publication locator; do not use Richmond Archive references for normal civic initiative research.
 
 Log lane, selected/used source IDs, citation count, and reconcile verdict in the production log. Do not log the NotebookLM answer body.
 

@@ -1,7 +1,7 @@
 ---
 name: sift
 description: Editorial planning for the edition. Reads sheet-primary canon (Oakland_Sports_Feed, Riley_Digest, Initiative_Tracker, Simulation_Ledger) + canon archive + NEWSROOM_MEMORY + city-hall production log. Proposes stories under cadence caps, locks slate via Mike approval gate, emits one brief per article slot + dispatch.json + letters candidate pool. The game moment.
-version: "2.5"
+version: "2.6"
 updated: 2026-07-26
 tags: [media, active]
 effort: high
@@ -81,7 +81,7 @@ v2 separates **canon content sources** (Steps 1-2) from **structured inputs** (S
 
 **Delegate multi-file digs to `source-search` (S326, Mike-direct).** Single exact lookups stay direct (the MCP calls above). But when a candidate needs cross-file verification — trace a claim across world_summary + production logs + tracker snapshots, resolve a source conflict, or scout an arc across prior cycles — spawn the `source-search` agent (Haiku-pinned retrieval-only; Sonnet-parity, 0 fabrications on the C100 eval) instead of digging in the EIC seat or dispatching a generic scout. Its dispatch prompt must carry the age anchor (`age = 2041 − BirthYear`, never wall-clock — the C99 scout failure class) and name the files to start from. It reports conflicts both-ways instead of silently picking — read its ruling, don't re-derive it.
 
-Name the retrieval lane in every dispatch. Prior-cycle publication/storyline scouting uses `prior-published-arc` and the fail-closed `node scripts/notebooklmCanonSearch.js` wrapper. Exact MCP lookups remain direct; current multi-file verification uses `cross-file-reconcile`. NotebookLM output is prior-published evidence only and must be reconciled against current world/Sheet authority before entering a Brief.
+Name the retrieval lane in every dispatch. Prior-cycle publication/storyline scouting uses `prior-published-arc` and spawns **`arc-search`, not `source-search`** (S334) — a wrapper-only seat with no file-reading tools, gated to the fail-closed `node scripts/notebooklmCanonSearch.js` wrapper so it cannot read the edition artifacts directly. Exact MCP lookups remain direct; current multi-file verification uses `cross-file-reconcile`. NotebookLM output is prior-published evidence only and must be reconciled against current world/Sheet authority before entering a Brief.
 
 The Brief record logs lane, source IDs, citation count, and reconcile verdict. Fence only the verified excerpts that survive reconciliation; never fence and forward the raw NotebookLM answer as established fact.
 

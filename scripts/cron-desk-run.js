@@ -310,7 +310,12 @@ async function runAngle(assign) {
       '--pop=' + asker.popid, '--ask=' + ask, '--cycle=' + cycle, '--json', '--max-tokens=320'],
       { cwd: ROOT, encoding: 'utf8', timeout: 300000 });
     const outTrim = out.trim();
-    const r = JSON.parse(outTrim.slice(outTrim.indexOf('{')));   // tolerate dotenv banner lines before the JSON
+    // tolerate dotenv banner lines before the JSON — line-anchored: the rotating
+    // dotenv tip sometimes contains "{ debug: true }" mid-line, so first-'{' slicing
+    // randomly broke here ("Expected property name or '}' at position 2").
+    const jsonStart = outTrim.search(/^\{/m);
+    if (jsonStart === -1) throw new Error('citizenVoice --json returned no JSON envelope: ' + outTrim.slice(0, 200));
+    const r = JSON.parse(outTrim.slice(jsonStart));
     angleRead = { name: r.name, popid: r.popId, text: r.text };
     log('angle read: "' + String(r.text).replace(/\s+/g, ' ').slice(0, 140) + '..."');
   }

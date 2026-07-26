@@ -1,7 +1,7 @@
 ---
 title: Headless Newsroom + City-Hall Pipeline Plan
 created: 2026-07-20
-updated: 2026-07-25
+updated: 2026-07-26
 type: plan
 tags: [architecture, media, civic, infrastructure, active]
 sources:
@@ -282,6 +282,12 @@ Aggregate scorecards across the accrued articles to answer Feedback1.txt's per-d
 **Cadence config (the numbers to bind):** budget **$20–40/mo** (subscription-token recovery, not new spend). Per-article measured: Sonnet-desk ≈ $1.17 (write $0.92 — the 223k-token explore phase is a trim target — + Haiku gate $0.22), DeepSeek-desk ≈ $0.25 (gate-dominated). ⇒ ~20–28 cleared articles/week, ~1/desk/day, all canon, all building journalists; edition curates the best ~8. Citizen wakes 5→2 (morning/night). Sample-generation surface: `cron-desk-run.js --wake --desk <d> --no-gate --cycle <N>` → `output/cron-compare/samples/`.
 
 **Civic side (Phase 3):** early notes captured above (voice-packets = Mara-directive-sourced per-office packets; Mara-as-Anthropic-API; friction loop). Undesigned; research-build lane.
+
+## Status log
+
+### research.25 — status (drained from ROLLOUT, 2026-07-26 / S334)
+
+Phase 1 DONE (writer/gate/route+scorecard); Phase 2.0 DONE incl. build (S331 engine.79a-d: 5 dark staffers + POPID join + eligibility gate + in-cycle hint cap; bench C110-C113 proven, live-deployed; NOTE stale-seam finding — live WHO-assist is buildContractSeeds/suggestStoryAngle_, Engine B v3 path never reaches the v4 deck) → next: Phase 2 daily writer-wakes (needs W5 half 1 signal partition).
 
 ## Changelog
 

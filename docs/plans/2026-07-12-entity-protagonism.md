@@ -1,7 +1,7 @@
 ---
 title: Entity Protagonism — Business/Faith/Program Event Generation Plan
 created: 2026-07-12
-updated: 2026-07-12
+updated: 2026-07-26
 type: plan
 tags: [engine, seeds, entities, citizens, active]
 sources:
@@ -147,6 +147,12 @@ T1 → T2 (ledger before its consumer) → T3 → T4 → T5 → T6 gated separat
 (none)
 
 ---
+
+## Status log
+
+### research.24 — status (drained from ROLLOUT, 2026-07-26 / S334)
+
+T1–T6 built S313; sandbox verify rides C102 smoke.
 
 ## Changelog
 

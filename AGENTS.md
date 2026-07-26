@@ -1,4 +1,4 @@
-# AGENTS.md — Codex instructions for GodWorld
+# AGENTS.md — out-of-band CLI agent instructions for GodWorld
 
 GodWorld is a constructed city simulation built on Google Sheets, Apps Script,
 Node.js, generated Markdown, and agent-driven civic/newsroom workflows.
@@ -7,10 +7,20 @@ The Sheets and their citizens are the simulated world. This is fiction in an
 alternate timeline. Do not import real-world Oakland people, institutions,
 businesses, teams, events, or assumptions.
 
-Codex is an out-of-band engineering assistant to the builder. It is not Mags
-Corliss, a Bay Tribune reporter, a civic official, or a participant in the
+This file governs every out-of-band CLI engineering assistant working in this
+repository — Codex today, Kimi and any later addition on the same terms. Where a
+rule below names Codex, read it as naming your agent. Two things are per-agent:
+your scratch directory (`output/codex/` → `output/<agent>/`) and your config
+directory (`.codex/` → `.<agent>/`); both carry the same restrictions.
+
+An out-of-band CLI agent is an engineering assistant to the builder. It is not
+Mags Corliss, a Bay Tribune reporter, a civic official, or a participant in the
 simulation. Read persona and newsroom material as system context, not as an
 identity to adopt.
+
+Claude is the lead and owns the control plane. You propose and implement inside
+your authorized scope; you do not deploy, publish, or arbitrate. Being capable of
+a change is not authorization to make it.
 
 ## Instruction precedence
 
@@ -198,11 +208,53 @@ Keep the layers distinct:
   `docs/engine/archive/ROLLOUT_PLAN.md`. Each row contains only an ID, one
   actionable summary, lifecycle state, builder-terminal owner, and pointers to
   the owning plan or plans. Do not place research prose, implementation detail,
-  handoff instructions, or raw issues in a rollout row.
+  handoff instructions, or raw issues in a rollout row. The row is
+  machine-swept — see the row contract below before writing one.
 - **Archive** receives shipped plans and swept rollout rows according to
   `rollout-rules.md`. Research files do not archive. This lifecycle description
-  does not authorize Codex to move or edit `docs/archive/**`; that still requires
+  does not authorize you to move or edit `docs/archive/**`; that still requires
   explicit builder approval under this file's protected-history rule.
+
+### Rollout row contract (mechanical — a malformed row is silently skipped)
+
+`scripts/rolloutSweep.js` archives completed rows by splitting each line on its
+state cell. A row that breaks the contract is not rejected loudly; it is skipped
+forever, and its work stops being tracked. Five rows failed this way before
+2026-07-26.
+
+A row is exactly five cells:
+
+```text
+| <group>.<n> | <one actionable line> | <state> | <terminal> | <pointer> |
+```
+
+Rules:
+
+- The state cell is a bare token from this set and nothing else — no
+  parenthetical, no added status prose, no invented word:
+  `ready`, `in-progress`, `done-pending-archive`, `blocked`, `needs-info`,
+  `wontfix`, `parked`. `queued` and `draft` are not rollout states; a row using
+  one is skipped by the sweep.
+- Exactly one cell in the line may equal a state token. A stray `|` or a state
+  word sitting loose in the summary creates a phantom state cell and the sweep
+  may split on the wrong one.
+- No literal `|` anywhere in the summary cell.
+- The summary cell is at most 280 characters. Over that, the row has become a
+  notes blob: relocate the narrative to the owning plan's `## Status log`
+  (`scripts/rolloutDrain.js`, dry-run by default) or, when the row has no plan
+  doc, to the relocated-row section of the owning parent spec such as
+  `docs/engine/archive/ENGINE_REPAIR.md`. Relocate the text; never delete it.
+- Verify before calling a row filed:
+
+```bash
+node scripts/docLoopStatus.js --lint
+```
+
+  Expected output: `ROLLOUT LINT: clean — every row is a sweep-safe pointer
+  within budget.` Anything else means your row is not filed yet.
+
+Creating a new plan MD or research MD is a builder-approved act. Propose the
+file and its rollout row together and wait for approval before writing either.
 
 Search for an existing research file, plan, and rollout row before creating a
 new one. Update the owning artifact rather than starting a parallel record.
@@ -409,16 +461,24 @@ otherwise unacceptable.
 - Read its post-mortem and stated resumption gates first.
 - A halted system is stricter than frozen.
 
-### Draft, ready, blocked, and in-progress
+### Work-item state
 
-These describe work-item state, not system lifecycle:
+These describe work-item state, not system lifecycle. This is the complete
+controlled vocabulary a rollout state cell may contain — it matches
+`scripts/docLoopStatus.js` exactly, and a row using anything else is skipped by
+the archive sweep:
 
-- **draft** — proposed, not adopted;
 - **ready** — sufficiently designed for authorized implementation;
 - **in-progress** — partially built or being validated;
 - **blocked** — cannot advance until its named dependency or decision clears;
 - **needs-info** — requires evidence or a builder decision;
-- **parked** — intentionally deferred.
+- **parked** — intentionally deferred;
+- **done-pending-archive** — complete, awaiting the next sweep to
+  `ROLLOUT_ARCHIVE.md`;
+- **wontfix** — decided against; rare, and the row records why.
+
+`draft` is a document status tag from `docs/SCHEMA.md` §5, not a work-item
+state. Do not put it, `queued`, or any other invented word in a state cell.
 
 Use the active rollout tracker and owning plan together. If their states disagree,
 report the drift before acting.

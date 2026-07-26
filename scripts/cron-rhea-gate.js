@@ -301,12 +301,19 @@ async function main() {
     apiCost = envelope.total_cost_usd ?? null;
   }
 
+  // Fail-closed gate (S333 harden): never trust verdict.pass alone. An internally
+  // inconsistent verdict (pass:true alongside a high-severity flag) must BLOCK, and
+  // flags that didn't parse as an array count as unverified → block.
+  const flagsArr = Array.isArray(verdict.flags) ? verdict.flags : [];
+  const highSevCount = flagsArr.filter(f => (f.severity || '').toLowerCase() === 'high').length;
+  const gatePass = verdict.pass === true && Array.isArray(verdict.flags) && highSevCount === 0;
+
   const out = {
     draft: draftRel, cycle, backend: BACKEND, model: BACKEND === 'api' ? API_MODEL : MODEL,
-    pass: verdict.pass ?? null,
-    flags: Array.isArray(verdict.flags) ? verdict.flags : [],
+    pass: gatePass,
+    flags: flagsArr,
     flagCount: Array.isArray(verdict.flags) ? verdict.flags.length : null,
-    highSeverityCount: Array.isArray(verdict.flags) ? verdict.flags.filter(f => (f.severity || '').toLowerCase() === 'high').length : null,
+    highSeverityCount: Array.isArray(verdict.flags) ? highSevCount : null,
     summary: verdict.summary || '',
     nameCheck: nameCheck ? { verified: nameCheck.verified, unverified: nameCheck.unverified } : null,
     apiCostUsd: apiCost,

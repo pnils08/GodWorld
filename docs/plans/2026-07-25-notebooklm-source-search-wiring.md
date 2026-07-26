@@ -207,11 +207,22 @@ interactive path is measured.
      desk reporters.
 - **Verify:** Claude shows the protected diff and a synthetic dispatch returns
   the expected lane without writing publication artifacts.
-- **Status:** [~] Codex handoff ready 2026-07-25 — exact protected change and
-  validation contract written to
-  `output/codex/notebooklm-source-search-claude-handoff.md`. Awaiting
-  Claude/research-build protected diff and synthetic dispatch; Codex did not
-  modify the control plane.
+- **Status:** [x] done 2026-07-26 / S334 (commits 59fd32df + this one). Protected
+  diff applied to all four files per the handoff; tool list, model, maxTurns,
+  permissionMode untouched. Three validation scripts pass. Synthetic dispatch
+  proof: `output/notebooklm_lane_proof_s334.json`.
+  **Scope added beyond the handoff — an orchestrator-side return gate.** The
+  handoff's prose-only contract did not hold: run 1 used the wrapper but returned
+  no source IDs and a prose verdict; run 2 skipped the wrapper entirely and
+  grepped `output/pdfs/*.pdf`, escaping the reviewed source scope. `source-search`
+  holds Read/Glob/Grep on a cheap model, so the cheap path beats an instruction.
+  Two fixes: the lane text now suspends Rule 4 in-lane and names the wrapper as
+  the only retrieval mechanism; and `deep-dispatch` Step 4 / `sift` /
+  `city-hall-prep` each gate the return on three conditions (lane first line,
+  source ID + citation + excerpt per claim, bare verdict token), re-dispatching
+  once and logging `no-result` on a second failure. Run 3 passed all three, used
+  only the wrapper, and cited four source IDs all present in
+  `allowedPublishedSourceIds`.
 
 ### Task 6: Add retrieval observability
 

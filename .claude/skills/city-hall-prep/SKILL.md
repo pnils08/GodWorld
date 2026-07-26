@@ -1,7 +1,7 @@
 ---
 name: city-hall-prep
 description: Prepare all inputs for city-hall voice agents. Reads tracker, approvals, world summary, engine review, coverage ratings, previous log, canon, Mara directive. Writes pending decisions per voice.
-version: "1.9"
+version: "1.10"
 updated: 2026-07-26
 tags: [civic, active]
 effort: high
@@ -131,6 +131,8 @@ Read all 10 inputs above. For each:
 When the question requires a multi-Edition initiative arc rather than a single locator hit, dispatch `source-search` with `retrievalLane=prior-published-arc`. It may call only `node scripts/notebooklmCanonSearch.js` in default published scope. Current initiative phase, vote state, district scope, metrics, and office ownership still come from current disk/Sheet/MCP sources and win every conflict. Direct `search_canon` stays the first-hop publication locator; do not use Richmond Archive references for normal civic initiative research.
 
 Log lane, selected/used source IDs, citation count, and reconcile verdict in the production log. Do not log the NotebookLM answer body.
+
+**Gate the return before packet content rides on it (S334).** Admissible only if the first line is `retrievalLane: prior-published-arc`, every claim carries a NotebookLM source ID (uuid) + citation number + excerpt, and the last line is a bare `reconcileVerdict` token. A claim sourced to a file path instead of a source ID means the agent read the edition artifacts directly and escaped the reviewed source scope — re-dispatch once naming the violation, and on a second failure drop the seat's material and prep the packet without prior-arc sourcing. Never put a file-path return into a pending-decisions packet.
 
 Log tracker state, approval ratings, and key findings in the production log.
 

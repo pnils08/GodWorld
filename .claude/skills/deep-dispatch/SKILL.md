@@ -1,7 +1,7 @@
 ---
 name: deep-dispatch
 description: Fork-path desk writer (pipeline.44). One desk at a time, DEEP — charge assembled from the desk's slice, cheap propose→OK gate, bounded source-search with orchestrator reconcile, supplied citizen voices (pipeline.43), artifact to the desk's own corpus. Production ends at artifacts-on-disk; review is a separate decoupled flow. Run after /desk-slice.
-version: "2.1"
+version: "2.2"
 updated: 2026-07-26
 tags: [media, pipeline-44, fork, deep-dispatch, active]
 effort: medium
@@ -88,6 +88,14 @@ Before the writer sees anything:
 - Hand the writer **reconciled** sourcing + a one-line note per resolved fact; log each reconcile to the run log. *(Structural because charge prose alone did not catch the S272 error; this step is why it can't recur silently.)*
 
 Record for every seat: `retrievalLane`, `resultStatus`, selected/used source IDs, citation count, and `reconcileVerdict`. Do not record the NotebookLM answer body. A prior-published claim that conflicts with current primary state loses and is logged `conflict-current-wins`.
+
+**Prior-arc return gate (S334 — the agent drifts, so the orchestrator checks).** A `prior-published-arc` return is admissible only if all three hold:
+
+1. first line is `retrievalLane: prior-published-arc`;
+2. every prior-arc claim carries a NotebookLM **source ID (uuid)** + citation number + excerpt — a claim sourced to a file path (`output/pdfs/*.pdf`, an edition `.txt`, an archive file) means the agent read the artifacts directly and escaped the reviewed source scope;
+3. the last line is a bare `reconcileVerdict` token from the enum, with no prose after it.
+
+Fail any of the three → re-dispatch that seat ONCE, naming the specific violation. Fail twice → log the seat `resultStatus=no-result`, drop its material entirely, and continue the run without prior-arc sourcing. **Never launder a file-path return into the writer's sourcing** — it looks like a good return and is not. Two of two test dispatches failed this gate at wiring time; assume it fires.
 
 ## Step 5 — Voice the citizens (pipeline.43)
 

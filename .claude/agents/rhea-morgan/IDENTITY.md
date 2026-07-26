@@ -59,16 +59,23 @@ curl -s localhost:3001/api/initiatives                   # Initiative statuses, 
 
 **Supermemory** (canon history + world state):
 ```bash
-npx supermemory search "citizen name or topic" --tag bay-tribune    # Published canon — what's been written
-npx supermemory search "citizen name or topic" --tag world-data     # World state — broad city-data search
-# Domain-filtered (S183 wd-* tag scheme — narrower retrieval, faster):
+npx supermemory search "citizen name or topic" --tag bay-tribune    # Published canon — what's been written. CLEAN: S334 measured 10/10 canon hits (edition-ingest / drive-archive / civic-decision)
+# Domain-filtered wd-* tags (S183 scheme) — THESE are the world-state target, not the broad container:
 npx supermemory search "name" --tag wd-citizens --mode hybrid --threshold 0.3      # Citizen card only
 npx supermemory search "name" --tag wd-business --mode hybrid --threshold 0.3      # Business card only
 npx supermemory search "name" --tag wd-faith --mode hybrid --threshold 0.3         # Faith org card only
 npx supermemory search "name" --tag wd-cultural --mode hybrid --threshold 0.3      # Cultural figure card only
 npx supermemory search "name" --tag wd-neighborhood --mode hybrid --threshold 0.3  # Neighborhood card only
 ```
-Full container/tag/tool inventory: [[../../../docs/SUPERMEMORY|SUPERMEMORY]] §Search/save matrix. Note: short structured cards (wd-*) require `--mode hybrid --threshold 0.3` — defaults return zero hits (S183 M1-M4 finding).
+Full container/tag/tool inventory: [[../../../docs/SUPERMEMORY|SUPERMEMORY]] §Search/save matrix.
+
+**Container hygiene (S334 measured — read before you trust a return):**
+- `--tag world-data` returned **0 hits** on a real subject where `--tag wd-citizens` returned 10. Route world-state retrieval at the `wd-*` domain tags; the broad container silently returns nothing.
+- `--tag mags` is **contaminated** — same query that gave `bay-tribune` 10/10 canon gave `mags` 0/10: six "Nightly Discord Reflection" autonomous-script docs, one `session_save`, three with null metadata. Do not source canon from it. `--rerank` does not fix this (still 4 reflections in the top 6) and `--threshold 0.72` just starves the set (10 hits → 1). Judge each hit by `metadata.source` / `metadata.title`.
+- The old S183 M1-M4 caveat that `wd-*` cards need `--mode hybrid --threshold 0.3` because defaults return zero is **stale** — re-measured S334, `wd-citizens` returns 10 on defaults and on hybrid+0.3 alike. Keep hybrid as a widening tool, not a requirement.
+- ~68% of every payload is scaffolding (`rootMemoryId`, `temporalEventStartMs`/`EndMs`, `version`, `filepath`, 8-decimal similarity). Project it away before it reaches a packet: `| jq -r '.results[] | "- \(.memory)  [\(.metadata.title // "untitled")]"'`.
+
+Full measurement: [[../../../docs/research/2026-07-26-supermemory-retrieval-economics]].
 
 **Simulation_Ledger** (live citizen data):
 ```bash

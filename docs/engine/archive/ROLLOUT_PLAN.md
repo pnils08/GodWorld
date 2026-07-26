@@ -132,6 +132,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | research.24 | Entity protagonism — business/faith event gen, Riley lifestyle → seed backdrop, Community_Programs ledger | in-progress | engine-sheet | [[../plans/2026-07-12-entity-protagonism]] |
 | engine.81 | Cycle-resolution unification — unify every cron to ONE cycle source + add a staleness/ahead-of-reality guard (getCurrentCycle vs detectCycle diverged S332; base_context→102 stopgap applied) | ready | engine-sheet | [[ENGINE_REPAIR]] §engine.81 (relocated detail); claude-mem S332 |
 | research.25 | Headless newsroom pipeline — M–F writer-wakes + Sat compile; Phase 1 + Phase 2.0 done, next is Phase 2 daily writer-wakes (was gated on engine.76 W5 half 1, now shipped) | in-progress | research-build → engine-sheet | [[../plans/2026-07-20-headless-newsroom-pipeline]] |
+| research.26 | Data-analyst retrieval seat — question-scoped (not per-search) Supermemory seat attributed to Rhea Morgan's Data Analyst function; gated on resolving --filter metadata syntax | ready | research-build | [[../research/2026-07-26-supermemory-retrieval-economics]] |
 
 ### governance.* — Skills, MDs, ADRs, project hygiene
 

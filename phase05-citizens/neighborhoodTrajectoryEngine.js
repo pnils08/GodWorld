@@ -1,7 +1,16 @@
 /**
  * ============================================================================
- * NEIGHBORHOOD TRAJECTORY ENGINE v1.0
+ * NEIGHBORHOOD TRAJECTORY ENGINE v1.1
  * ============================================================================
+ *
+ * v1.1 (engine.45 T3 / 2026-07, neighborhood ripples wiring):
+ * - Wires the previously-dead per-hood initiative ripple query
+ *   (getRippleEffectsForNeighborhood_, trace C4) into trajectory detection.
+ *   Active civic initiatives now nudge the hood's composite score, momentum,
+ *   and housing pressure at hood grain, combined-capped at ±0.5 so no single
+ *   initiative can dominate. The applied net is exported per-hood as
+ *   S.neighborhoodTrajectory[hood].initiativeRipple for downstream
+ *   attribution. Deterministic — no rng, no new sheet columns.
  *
  * v1.0 (S315 / 2026-07-12, Mike-direct):
  * - Full repurpose of gentrificationEngine v1.1 (git mv, same file lineage).
@@ -174,6 +183,16 @@ function updateNeighborhoodTrajectories_(ctx, cycle) {
     if (flow >= 2) score += 1;
     else if (flow <= -2) score -= 1;
 
+    // ── v1.1: initiative ripple input (engine.45 T3, trace C4) ─────────────
+    // Active civic initiatives modulate this hood's trajectory inputs at hood
+    // grain. Combined net is capped at ±0.5 so a single initiative can't
+    // dominate; score influence maxes at ±1 on the −5..+5 composite.
+    var rippleFx = initiativeRippleEffectsForNeighborhood_(ctx, neighborhood);
+    var rippleNet = (rippleFx.sentiment || 0) + (rippleFx.community || 0) + (rippleFx.retail || 0);
+    if (rippleNet > 0.5) rippleNet = 0.5;
+    if (rippleNet < -0.5) rippleNet = -0.5;
+    score += rippleNet * 2;
+
     var trajectory = TRAJECTORY_STATES.STEADY;
     if (score >= TRAJECTORY_THRESHOLDS.GROWTH_MIN) trajectory = TRAJECTORY_STATES.GROWTH;
     else if (score <= TRAJECTORY_THRESHOLDS.DECAY_MAX) trajectory = TRAJECTORY_STATES.DECAY;
@@ -183,13 +202,15 @@ function updateNeighborhoodTrajectories_(ctx, cycle) {
     if (trajectory === TRAJECTORY_STATES.GROWTH) momentum += 1;
     else if (trajectory === TRAJECTORY_STATES.DECAY) momentum -= 1;
     else momentum += (momentum > 5 ? -1 : (momentum < 5 ? 1 : 0)); // steady decays toward neutral
-    momentum = Math.max(0, Math.min(10, momentum));
+    momentum += rippleNet; // v1.1: initiative ripples entrench/erode the trajectory (±0.5 max)
+    momentum = Math.round(Math.max(0, Math.min(10, momentum)) * 10) / 10;
 
     // ── Housing pressure: prosperity strain ─────────────────────────────────
     var pressure = prevPressure;
     if (trajectory === TRAJECTORY_STATES.GROWTH) pressure += (momentum >= 7 ? 1 : 0.5);
     else if (trajectory === TRAJECTORY_STATES.DECAY) pressure -= 1;
     else pressure -= 0.5;
+    pressure += rippleNet * 0.5; // v1.1: amenity ripples raise desirability pressure (±0.25 max)
     pressure = Math.round(Math.max(0, Math.min(10, pressure)) * 10) / 10;
 
     analyzed++;
@@ -254,7 +275,8 @@ function updateNeighborhoodTrajectories_(ctx, cycle) {
       momentum: momentum,
       pressure: pressure,
       rent: rentNow,      // post-drift, this cycle (engine.55 relocation scoring)
-      income: incomeNow   // post-drift, this cycle
+      income: incomeNow,  // post-drift, this cycle
+      initiativeRipple: rippleNet // v1.1: applied initiative ripple net (attribution)
     };
 
     // ── Story hooks ─────────────────────────────────────────────────────────
@@ -327,6 +349,82 @@ function emitTrajectoryHooks_(ctx, cycle, neighborhood, prevTrajectory, trajecto
   }
 
   return emitted;
+}
+
+
+// ════════════════════════════════════════════════════════════════════════════
+// INITIATIVE RIPPLE QUERY (v1.1 — engine.45 T3, trace C4)
+// ════════════════════════════════════════════════════════════════════════════
+
+/**
+ * Per-hood combined effects of active civic-initiative ripples.
+ *
+ * This is the Phase-5 wiring the ripple system was built for and never got:
+ * getRippleEffectsForNeighborhood_ (civicInitiativeEngine v1.5) had zero
+ * callers, so initiative effects only ever landed as city-wide scalars
+ * (trace C4/G2).
+ *
+ * Ordering note: Phase6-InitiativeRipple (applyActiveInitiativeRipples_) runs
+ * AFTER Phase5-Trajectory, so S.activeRipples is not yet populated when this
+ * engine runs. When S.activeRipples is absent, the active view is derived
+ * from carried S.initiativeRipples (restored cross-cycle by
+ * loadPreviousEvening / finalizeCycleState, engine.45 T2) using the SAME
+ * decay math as applyActiveInitiativeRipples_ (linear 1.0 → 0.2 over
+ * duration). When S.activeRipples IS populated (e.g. tests, manual runs),
+ * we delegate to getRippleEffectsForNeighborhood_ so behavior stays anchored
+ * to the civic engine's canonical query.
+ *
+ * Fail-soft, deterministic (no rng), returns zero-effects object on any gap.
+ *
+ * @param {Object} ctx - Engine context
+ * @param {string} neighborhood - Neighborhood name (Neighborhood_Map col A)
+ * @return {Object} {sentiment, community, retail} combined decayed effects
+ */
+function initiativeRippleEffectsForNeighborhood_(ctx, neighborhood) {
+  var zero = { sentiment: 0, community: 0, retail: 0 };
+  try {
+    var S = (ctx && ctx.summary) || {};
+
+    // Canonical path: civic engine's query over Phase-6-computed activeRipples.
+    if (S.activeRipples && S.activeRipples.length &&
+        typeof getRippleEffectsForNeighborhood_ === 'function') {
+      var fx = getRippleEffectsForNeighborhood_(ctx, neighborhood) || {};
+      return {
+        sentiment: fx.sentiment || 0,
+        community: fx.community || 0,
+        retail: fx.retail || 0
+      };
+    }
+
+    // Phase-5 fallback: derive the active view from carried initiativeRipples
+    // (mirrors applyActiveInitiativeRipples_ decay/expiry math).
+    var ripples = S.initiativeRipples || [];
+    if (!ripples.length) return zero;
+    var cycle = S.absoluteCycle || S.cycleId || 0;
+
+    var out = { sentiment: 0, community: 0, retail: 0 };
+    for (var i = 0; i < ripples.length; i++) {
+      var ripple = ripples[i];
+      if (!ripple || ripple.status === 'expired' || ripple.status === 'completed') continue;
+      if (cycle >= ripple.endCycle) continue;
+
+      var hoods = ripple.affectedNeighborhoods || [];
+      if (hoods.length > 0 && hoods.indexOf(neighborhood) < 0) continue;
+
+      var cyclesActive = cycle - ripple.startCycle;
+      var decay = 1.0 - (cyclesActive / ripple.duration) * 0.8;
+      if (decay < 0.2) decay = 0.2;
+
+      var effects = ripple.effects || {};
+      if (effects.sentiment_modifier) out.sentiment += effects.sentiment_modifier * decay;
+      if (effects.community_modifier) out.community += effects.community_modifier * decay;
+      if (effects.retail_modifier) out.retail += effects.retail_modifier * decay;
+    }
+    return out;
+  } catch (err) {
+    try { Logger.log('initiativeRippleEffectsForNeighborhood_ fail-soft: ' + err); } catch (ignored) {}
+    return zero;
+  }
 }
 
 

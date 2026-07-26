@@ -69,9 +69,9 @@ Spawn **≤3** `source-search` agents (S326 — the Haiku-pinned retrieval agent
 - **Civic:** (a) `engine_anomalies` raw + neighborhoodState per-district; (b) the cycle's locked civic decisions + vote math; (c) prior coverage / initiative arc.
 - **Culture/other:** adapt — one raw-signal angle, one prior-coverage angle, one cycle-events angle.
 
-Exactly one seat may be `retrievalLane=prior-published-arc`: the existing "prior canon / arc" or "prior coverage / initiative arc" seat. **That seat spawns `arc-search`, not `source-search`** (S334) — it is still one of the ≤3, not a fourth. `arc-search` holds no file-reading tools and a PreToolUse gate lets it run only the fail-closed NotebookLM wrapper, so it cannot drift onto the edition artifacts. Raw-signal, truesource, roster, cycle-event, anomaly, vote-math, and current-state seats stay on `source-search` with `exact-current` or `cross-file-reconcile`.
+Exactly one seat may be `retrievalLane=prior-published-arc`: the existing "prior canon / arc" or "prior coverage / initiative arc" seat. Raw-signal, truesource, roster, cycle-event, anomaly, vote-math, and current-state seats must use `exact-current` or `cross-file-reconcile`.
 
-The prior-arc dispatch names the storyline and the question. It must return source title, source ID, citation number, excerpt, and `reconcileVerdict`. For a citizen origin question, the orchestrator may explicitly authorize `--source-class canon-reference`; otherwise the default published scope holds.
+The prior-arc dispatch names the storyline and asks the agent to call `node scripts/notebooklmCanonSearch.js`. It must return source title, source ID, citation number, excerpt, and `reconcileVerdict`. For a citizen origin question, the orchestrator may explicitly authorize `--source-class canon-reference`; otherwise the default published scope holds. **The return gate in Step 4 is the enforcement** — the agent holds Read/Glob/Grep and has drifted off the wrapper in testing, so verify the return rather than trusting the lane.
 
 Each subagent returns **sourcing as text** — what it found, each claim traced to its source artifact/tab. They reach raw data at runtime via the tools the charge granted; the orchestrator does NOT pre-package data.
 

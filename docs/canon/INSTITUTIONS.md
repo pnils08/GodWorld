@@ -1,7 +1,7 @@
 ---
 title: Canon Institutions — Oakland-as-Simulated 2041
 created: 2026-04-25
-updated: 2026-05-24
+updated: 2026-07-26
 type: reference
 tags: [canon, fourth-wall, institutions, active]
 sources:
@@ -356,6 +356,25 @@ The bay-tribune Supermemory container + published editions are not retroactively
 | Elena Soria Dominguez | E93 only | Eloise Soria-Dominguez (POP-00791) | S230 ruling per canon.3 ADR-0007 — bay-tribune E93 published "Elena," wd-card + Sim_Ledger POP-00791 canonical "Eloise"; Mike call favors wd-card form. Reporters encountering "Elena" in E93 source briefings substitute to "Eloise Soria-Dominguez" with CONTINUITY NOTE. POP-00791 First/Last verified `Eloise` / `Soria-Dominguez` S233. |
 
 Specific per-edition citations populate as Mara audit logs and reader-side scans surface them; absence of a citation column entry means the map applies whenever the bay-tribune form is encountered.
+
+---
+
+## The Stack — Infrastructure That Runs The World (S334, Mike-direct)
+
+**These are Tier 1. Use the real names. They are in the world BY DESIGN, not by leak — do not file them as contamination and do not substitute them.**
+
+The reasoning, verbatim in substance from Mike: *the real world is exactly as you see it, our stack of real-world entities in the sim, that's by design — I pay for them to run the world, so they should mimic that in a sense.* The services that keep GodWorld running exist in-world as Oakland businesses doing the same job. They earn their place in the economy because they hold it in reality.
+
+| Entity | In-world role | BIZ_ID |
+|---|---|---|
+| DigitalOcean | Hosting / infrastructure | BIZ-00002 |
+| Discord | Communications platform | BIZ-00003 |
+| Moltbook | Social platform | BIZ-00004 |
+| Anthropic | AI research (an `EconomicProfileKey`, not yet a BIZ row) | — |
+
+**Civis Systems is the blanket for engine and sheet language.** Elias Varek's urban-intelligence firm (POP-00789) is the in-world thing that *is* the engine and the spreadsheets — the system that tracks the city. So when media output leaks "the engine," "the sheet," "the ledger," or system vocabulary, it is not a fourth-wall break to be scrubbed: it reads as Civis Systems, the firm that instruments Oakland and sells the city its own telemetry. Prefer translating a leak into Civis terms over deleting it. This does **not** license engine *metrics* in prose — tension scores, severity levels and raw decimals stay out per `.claude/rules/newsroom.md`; the blanket covers the vocabulary of a tracking system, not its dashboard readings.
+
+The general principle: a real-world entity that materially runs this project belongs in the world as itself. A real-world entity that merely *exists* out there (a hospital chain, a university, a brand a citizen might shop at) still routes through the Tier-1 / Tier-2 test above.
 
 ---
 

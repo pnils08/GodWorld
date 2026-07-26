@@ -4,7 +4,7 @@
 
 **Established:** Session 135 (2026-04-05)
 **Terminal tag for saves:** `[engine/sheet]`
-**Operating discipline:** measure twice, cut once + cascading-effects review (full rule at top of `.claude/rules/engine.md`). Per-item READ + caller-graph + empirical state check BEFORE any destructive op. Reverse on evidence-contradicting hypothesis. Document discipline in commit messages.
+**Operating discipline:** measure twice, cut once + cascading-effects review (full rule at top of `.claude/rules/engine.md`). Per-item READ + caller-graph + empirical state check BEFORE any destructive op. Reverse on evidence-contradicting hypothesis. Document discipline in commit messages. **Subagents run a tier down** — Fable lead → Sonnet (reasoning) / Haiku (grunt), never Fable subagents ([[../../../docs/MODEL_HIERARCHY]] §8; already standing at §S329 below). **Spirit:** this is a fun sim — the discipline saves Mike's money and keeps canon coherent, not because a mistake is catastrophic.
 
 ## Ground Rules
 

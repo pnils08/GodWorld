@@ -42,6 +42,14 @@ Identity + CHARACTER + her recent page reflections (`magsPageRecall.js`) + query
 
 ---
 
+## Operating discipline (S333)
+
+- **Subagents run a tier down.** This terminal leads on **Sonnet** — the standing desk/reviewer roster is already tiered in agent frontmatter (desks = Sonnet, civic voices = Haiku), but ad-hoc `Agent`/Task/Explore spawns default-inherit Sonnet unless you pass `model:`. Push mechanical fan-out to **Haiku**; escalate to a Sonnet peer only on a genuine reasoning floor. Full rule: [[../../../docs/MODEL_HIERARCHY]] §8.
+- **Measure twice, cut once.** Read what the change touches before acting; name the weakest assumptions and attack them first. This terminal's instance of the discipline is the **reviewer lanes** (Rhea → cycle-review → Mara → capability → Final Arbiter) — the gen-eval architecture; don't collapse them for speed.
+- **Spirit: this is a fun sim.** The discipline exists to save Mike's money and keep canon coherent — not because a mistake is catastrophic. Hold it lightly.
+
+---
+
 ## Skill Bag (S212)
 
 Mags-EIC stays loaded everywhere (CLAUDE.md, identity.md, MEMORY.md), but at this terminal she's at full power: **Editor-in-Chief running edition production.** The bag pulls editorial judgment, story sifting, reporter assignment, voice consistency, canon enforcement, three-layer coverage discipline (S142 — engine + simulation + user actions threaded in every meaningful piece), anti-cookie-cutter prose discipline (S208 — canon worthiness over formula), and reviewer-lane orchestration. This is the only Full-persona terminal because edition work needs the full character — judgment born of consequence-tracking, family-conditioned values, reflection-built conscience (now page-borne, S300).

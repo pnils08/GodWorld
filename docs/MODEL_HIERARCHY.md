@@ -24,6 +24,17 @@ The model hierarchy is **TBD** — under active reconsideration. Interim order p
 
 _History — S332 inversion (superseded):_ Mike-direct S332, after Claude/Mags (a) was wrong on Canon Tier, (b) shipped an underspecified starter instruction that cost a $1.82 misrun, (c) mis-attributed Fable's contamination to Codex, and (d) **deleted 21 real citizen-quote rows without approval** — while Codex caught Fable's `record:true` bug, caught its own wrong task, and used the correct terms — Codex was made lead and Claude the gated backup. Reversed to the interim order above on 2026-07-24. The S332 lesson stands regardless of ranking: **no destructive or state-changing action without explicit per-action approval** — "fix all this" is not blanket approval.
 
+### Live terminal → model map (2026-07-25, Mike-direct)
+
+Which Claude tier each terminal's lead session runs on. The lead holds orchestration + judgment; its subagents run a tier down (§8).
+
+| Terminal | Lead model | Cheaper subagent tiers |
+|----------|-----------|------------------------|
+| research-build | Opus 4.8 | Sonnet (reasoning) / Haiku (grunt) |
+| engine-sheet | Fable | Sonnet (reasoning) / Haiku (grunt) |
+| civic | Sonnet | Haiku (grunt) |
+| media | Sonnet | Haiku (grunt) |
+
 ## 1. Claude (Opus 4.8) — *THE LEAD (interim, Mike-direct 2026-07-24)*
 **Primary Personas:** Mags (Main Session), `/cycle-review`
 
@@ -98,6 +109,18 @@ Roster companion: `.agents/AGENTS.md` is the *per-agent roster*; this doc is the
 - **Check OpenRouter for best-model-per-task** rather than defaulting to one model — pick the cheapest model that clears the bar for each job.
 - **Backup CLIs:** Codex ($20 ChatGPT Plus) + Kimi Code (different-eyes secondary). **Antigravity/Gemini:** grunt-work tier (interim 2026-07-24) — non-canon bulk only, output always verified. Aider and Grok retired from disk (S332).
 - **Friction is an agent/stance property, not a model or tool property (S332):** Jax-caliber accountability writing comes from running the `freelance-firebrand` agent skill (adversarial stance), not from any particular CLI or premium model. The gold is reproducible on cheap models once the writer runs the right persona.
+
+---
+
+## 8. Subagent cost discipline (Mike-direct 2026-07-25)
+
+**A lead never fans out to its own tier.** Subagents inherit the parent session's model by default — so an Opus lead that spawns a `general-purpose`/`Explore`/Task agent silently gets an *Opus* subagent unless it overrides `model`. That default-inheritance is the leak this rule plugs: the lead holds the judgment, the fan-out runs a tier down.
+
+- **Opus lead (research-build):** subagents → Sonnet for reasoning, Haiku for grunt. Never spawn Opus subagents.
+- **Fable lead (engine-sheet):** subagents → Sonnet for reasoning, Haiku for grunt. Never spawn Fable subagents. (Already standing practice — engine-sheet TERMINAL.md §S329.)
+- **Sonnet lead (media, civic):** subagents → Haiku for grunt; the standing desk/voice roster already encodes this (desks = Sonnet, civic voices = Haiku, in agent frontmatter).
+- **Mechanism:** pass `model:` explicitly on every ad-hoc `Agent`/Task spawn. The named roster is already tiered in frontmatter; the gap is *ad-hoc* spawns silently defaulting to the expensive parent.
+- **The one caveat — capability floor beats cost.** Default down a tier; escalate a subagent back *up* only when the subtask has a genuine reasoning floor (adversarial verify of a subtle canon call, a hard code review). Hard-forbidding same-tier can force a task onto a model that flubs it and the lead redoes it — false economy. **Cheaper-by-default, not cheapest-always.**
 
 ---
 

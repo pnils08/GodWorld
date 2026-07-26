@@ -29,6 +29,7 @@
 require('/root/GodWorld/lib/env');
 const fs = require('fs');
 const path = require('path');
+const https = require('https');
 const { execFileSync } = require('child_process');
 
 const ROOT = path.join(__dirname, '..');
@@ -712,6 +713,28 @@ async function runFanoutStage() {
   console.log('\n=== fan-out ' + STAGE + ': ' + (results.length - failed.length) + '/' + results.length + ' ok' +
     (failed.length ? ' — FAILED: ' + failed.map(f => f.name).join(', ') : '') + ' ===');
   console.log('results → ' + path.relative(ROOT, rPath));
+  if (failed.length) await notifyFanoutFailures(date, failed, results.length);
+}
+
+// Failure ping (2026-07-26): a failed wake should reach Mike's phone, not wait
+// for a terminal boot to read the log. Webhook pattern per notify-paulson-interview.js.
+// Non-blocking: a dead webhook must never fail the wake itself.
+function notifyFanoutFailures(date, failed, total) {
+  return new Promise((resolve) => {
+    const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
+    if (!webhookUrl) { console.log('[fanout] failure ping skipped: DISCORD_WEBHOOK_URL not set'); return resolve(); }
+    const lines = ['**NEWSROOM WAKE FAILURES — ' + date + ' ' + STAGE + '** (' + failed.length + '/' + total + ')'];
+    for (const f of failed) lines.push('- ' + f.name + ' (' + f.desk + '): ' + String(f.error).slice(0, 140));
+    lines.push('log: `logs/newsroom-fanout.log` — recover: `cron-desk-run.js --stage=' + STAGE + ' --fanout --only "<name>"`');
+    const parsed = new URL(webhookUrl);
+    const payload = JSON.stringify({ content: lines.join('\n') });
+    const req = https.request({
+      hostname: parsed.hostname, path: parsed.pathname, method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(payload) }
+    }, (res) => { res.resume(); res.on('end', () => { console.log('[fanout] failure ping sent (' + res.statusCode + ')'); resolve(); }); });
+    req.on('error', (e) => { console.log('[fanout] failure ping failed (non-blocking): ' + e.message); resolve(); });
+    req.write(payload); req.end();
+  });
 }
 
 const WAKE = process.argv.includes('--wake');

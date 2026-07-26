@@ -255,7 +255,7 @@ Same continuous model on the civic side: city-hall voices/agents wake M–F, wor
 - **Open design (research-build):** voice-packet schema (per-office partition of the cycle); civic cost unit (Sonnet vs DeepSeek per voice); how the reporter-demand → office-answer handshake is recorded; whether city-hall output is "articles" (desks report on it) or "statements" (raw civic record). Deferred until the newsroom side proves.
 
 ### Phase 4 — scorecard eval + cost tuning  *(sub-plan)*
-Aggregate scorecards across the accrued articles to answer Feedback1.txt's per-desk question (is DeepSeek "90% for 20%?"). Includes the Haiku-vs-Sonnet Rhea-gate cost test (gate is $0.76/run on Sonnet; source-search proved Haiku parity for verified work).
+Aggregate scorecards across the accrued articles to answer Feedback1.txt's per-desk question (is DeepSeek "90% for 20%?"). ~~Haiku-vs-Sonnet Rhea-gate cost test~~ — SUPERSEDED 2026-07-25: the gate moved to `--backend=api` (gemini-3.5-flash, ~$0.06/run vs Sonnet $0.76); see the API-gate-backend note under Phase 2.3. Remaining cost question: flash-lite ($0.007/gate) vs flash verdict parity, worth one comparison batch once staged volume accrues.
 
 ---
 

@@ -50,19 +50,48 @@ function buildStoplist() {
 }
 
 // Canon person names from the ledger snapshot: full "Name" + "First Last".
-function loadCanonNames() {
-  const names = new Set();
+function loadRows() {
+  if (loadRows._cache) return loadRows._cache;
+  const rows = [];
   try {
     const lines = fs.readFileSync(LEDGER_SNAPSHOT, 'utf8').split('\n').filter(Boolean);
     for (const line of lines) {
-      let row; try { row = JSON.parse(line); } catch (_) { continue; }
-      // ledger has stray double-spaces ("Jax  Caldera") — normalize or exact match misses
-      if (row.Name) names.add(String(row.Name).replace(/\s+/g, ' ').trim());
-      const fl = [row.First, row.Last].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
-      if (fl) names.add(fl);
+      try { rows.push(JSON.parse(line)); } catch (_) { /* skip bad line */ }
     }
-  } catch (_) { /* missing snapshot -> empty canon set -> everything unverified (fail-loud to the gate) */ }
+  } catch (_) { /* missing snapshot -> empty (fail-loud to the gate) */ }
+  loadRows._cache = rows;
+  return rows;
+}
+
+function loadCanonNames() {
+  const names = new Set();
+  for (const row of loadRows()) {
+    // ledger has stray double-spaces ("Jax  Caldera") — normalize or exact match misses
+    if (row.Name) names.add(String(row.Name).replace(/\s+/g, ' ').trim());
+    const fl = [row.First, row.Last].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
+    if (fl) names.add(fl);
+  }
   return names;
+}
+
+// One-line ledger profiles for verified citizens (the "Calvin Turner, mechanic
+// for thirty years" class): bio claims contradicting these are misrepresentation.
+function profilesFor(names) {
+  const want = new Set((names || []).map(n => String(n).toLowerCase()));
+  const out = [];
+  for (const row of loadRows()) {
+    const full = String(row.Name || '').replace(/\s+/g, ' ').trim();
+    const fl = [row.First, row.Last].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
+    if (!want.has(full.toLowerCase()) && !want.has(fl.toLowerCase())) continue;
+    out.push(full + ' — ' + [
+      row.RoleType && 'role: ' + row.RoleType,
+      row.Neighborhood && 'neighborhood: ' + row.Neighborhood,
+      row.BirthYear && 'born: ' + row.BirthYear,
+      row.WealthLevel && 'wealth: ' + row.WealthLevel,
+      row.CareerStage && 'career: ' + row.CareerStage
+    ].filter(Boolean).join('; '));
+  }
+  return out;
 }
 
 const HONORIFIC = /^(?:Dr|Sgt|Det|Officer|Mayor|Chief|Councilmember|Councilwoman|Councilman|Ms|Mr|Mrs|Rev|Pastor|Coach|Sen|Rep|President)\.?\.?\s+/;
@@ -144,4 +173,4 @@ if (require.main === module) {
   process.exit(out.unverified.length ? 2 : 0);
 }
 
-module.exports = { checkText, extractCandidates, loadCanonNames, buildStoplist };
+module.exports = { checkText, extractCandidates, loadCanonNames, buildStoplist, profilesFor };

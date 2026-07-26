@@ -25,6 +25,7 @@
 require('/root/GodWorld/lib/env');
 const fs = require('fs');
 const path = require('path');
+const https = require('https');
 const { execFileSync } = require('child_process');
 
 const ROOT = path.join(__dirname, '..');
@@ -39,6 +40,14 @@ const DRAFT = arg('--draft', null);
 const MODEL = arg('--model', 'sonnet');          // authoritative gate → Sonnet (Haiku tunable later, per source-search precedent)
 const CYCLE_ARG = arg('--cycle', null);
 const TIMEOUT_MS = parseInt(arg('--timeout', '420000'), 10);
+// --backend=api (2026-07-25, Mike): run the gate as ONE raw OpenRouter call with
+// all context injected, instead of the claude -p tool harness. Viable because
+// the two heavy checks are now deterministic pre-checks (canon-name-check +
+// engine-verbiage scan below); the model only judges over injected ground
+// truth. S325 INDEPENDENCE RULE still applies: the gate model's family must
+// differ from the WRITER's (DeepSeek) — default gemini, NEVER deepseek.
+const BACKEND = arg('--backend', 'claude');      // 'claude' | 'api'
+const API_MODEL = arg('--api-model', 'google/gemini-3.5-flash');
 
 const log = {
   info: (...a) => console.log('[INFO]', new Date().toISOString(), ...a),
@@ -92,7 +101,121 @@ function buildPrompt(cycle, draftRel, worldRel, nameCheck) {
   ].join('\n');
 }
 
-function main() {
+// ---------------------------------------------------------------------------
+// API backend (--backend=api, 2026-07-25): one raw OpenRouter call, everything
+// injected. Viable because the tool-heavy checks are deterministic pre-checks.
+// ---------------------------------------------------------------------------
+
+// Phase 2.1 flag class (a), deterministic half: engine/system language that must
+// never reach prose. Scans the BODY only — PREWRITE/EVIDENCE are fenced metadata.
+const ENGINE_TOKENS = [
+  'construction-planning', 'active internal state', 'Ripple Ledger', 'impactScore',
+  'tension score', 'severity level', 'civic load', 'DialState', 'MemoryRegisters',
+  'DisplacementRisk', 'MigrationIntent', 'WealthLevel', 'CareerStage', 'EconomicProfileKey',
+  'EmployerBizId', 'SMPageId', 'desk_signal', 'world_summary', 'Initiative_Tracker',
+  'Neighborhood_Map', 'Reflection_Intake', 'Supermemory', 'claude-mem'
+];
+function scanEngineVerbiage(draftText) {
+  const body = String(draftText).replace(/```[\s\S]*?```/g, '');
+  const hits = [];
+  for (const t of ENGINE_TOKENS) {
+    const re = new RegExp(t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+    const m = body.match(re);
+    if (m) hits.push({ token: t, count: m.length });
+  }
+  const pops = body.match(/\bPOP-\d{5}\b/g);
+  if (pops) hits.push({ token: 'POPID literal (POP-XXXXX)', count: pops.length });
+  const decimals = body.match(/\b[-+]?\d+\.\d{2,}\b/g);
+  if (decimals) hits.push({ token: 'raw decimals [' + [...new Set(decimals)].slice(0, 5).join(', ') + ']', count: decimals.length });
+  return hits;
+}
+
+const API_RATES = { 'google/gemini-3.5-flash': [1.5, 9], 'google/gemini-3.5-flash-lite': [0.3, 2.5], _default: [1.5, 9] };
+
+function callOpenRouter(model, system, user) {
+  return new Promise((resolve, reject) => {
+    const payload = JSON.stringify({
+      // headroom for gemini-flash reasoning_tokens — at 2000 the model spent the
+      // whole budget reasoning and the verdict JSON truncated mid-string
+      model, max_tokens: 8000, temperature: 0,
+      messages: [{ role: 'system', content: system }, { role: 'user', content: user }]
+    });
+    const req = https.request({
+      hostname: 'openrouter.ai', path: '/api/v1/chat/completions', method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(payload),
+        'Authorization': 'Bearer ' + process.env.OPENROUTER_API_KEY,
+        'HTTP-Referer': 'https://godworld.local',
+        'X-Title': 'GodWorld headless rhea gate'
+      }
+    }, (res) => {
+      let data = '';
+      res.on('data', c => (data += c));
+      res.on('end', () => {
+        try {
+          const j = JSON.parse(data);
+          if (j.error) return reject(new Error('OpenRouter: ' + (j.error.message || JSON.stringify(j.error))));
+          const text = (j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || '';
+          const u = j.usage || {};
+          resolve({ text, usageIn: u.prompt_tokens || 0, usageOut: u.completion_tokens || 0 });
+        } catch (e) { reject(new Error('OpenRouter parse: ' + e.message + ' | ' + data.slice(0, 300))); }
+      });
+    });
+    req.on('error', reject);
+    req.write(payload); req.end();
+  });
+}
+
+function readAgentFile(rel) {
+  try { return fs.readFileSync(path.join(ROOT, rel), 'utf8'); } catch (_) { return ''; }
+}
+
+function buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profiles) {
+  const system = [
+    'You are Rhea Morgan, the Cycle Pulse verification agent, running headless as a publish gate.',
+    'Your role and rules follow — they govern your verdict.',
+    '',
+    '=== IDENTITY.md ===', readAgentFile('.claude/agents/rhea-morgan/IDENTITY.md'),
+    '=== RULES.md ===', readAgentFile('.claude/agents/rhea-morgan/RULES.md'),
+    '',
+    'Return ONLY a JSON object — no prose, no markdown fences:',
+    '{"pass": <true only if there are ZERO high-severity flags>, "flags": [{"claim":"...","issue":"...","severity":"low|med|high"}], "summary":"<one line>"}'
+  ].join('\n');
+  const user = [
+    'GROUND TRUTH for cycle ' + cycle + ' (the world state — claims are checked against THIS):',
+    worldText,
+    '',
+    '=== DETERMINISTIC PRE-CHECKS (already run against the ledger — trust these, they are not model output) ===',
+    '1. Canon name check (' + (nameCheck ? nameCheck.canonNames : '?') + ' ledger citizens):',
+    nameCheck && nameCheck.unverified.length
+      ? '   NOT IN LEDGER: ' + nameCheck.unverified.join('; ') + ' — if the draft uses any of these as a PERSON (official, source, citizen), flag HIGH-severity invented name. Dismiss places, businesses, common phrases.'
+      : '   every person-name candidate resolved to a ledger citizen' + (nameCheck && nameCheck.verified.length ? ' (' + nameCheck.verified.join('; ') + ')' : '') + '.',
+    '2. Engine-verbiage scan (article body):',
+    verbiage.length
+      ? '   HITS: ' + verbiage.map(v => v.token + ' ×' + v.count).join('; ') + ' — engine/system language in prose is a flag (rewrite to citizen-facing language). Legitimate sports-game stats (OVR, avg/HR/RBI/ERA, records, standings) are canon — dismiss those.'
+      : '   clean.',
+    '3. Ledger profiles of verified citizens named in the draft (bio ground truth — any age, occupation,' +
+    '   tenure, wealth, or neighborhood claim contradicting these is HIGH-severity misrepresentation):',
+    profiles.length ? profiles.map(p => '   - ' + p).join('\n') : '   (none)',
+    '',
+    '=== DRAFT TO VERIFY ===',
+    draftText,
+    '',
+    'Your job is TWO flag classes — you police the canon boundary, not the editorial voice:',
+    '(a) ENGINE VERBIAGE — system language, raw metric names, status enums, dial decimals leaking into prose.',
+    '(b) MISREPRESENTATION OF DATA OUTPUT — a claim that distorts or contradicts the ground truth above',
+    '    (a metric stated as falling when it rose; a count off from canon; a prior-cycle stat presented as current).',
+    'Plus the pre-check classes above (invented names used as people).',
+    'WHAT PASSES: anything the ground truth genuinely supports — allegations, cross-signal connections, a',
+    'reporter\'s inference from real data, anonymous scene texture the reporter observed, editorial voice.',
+    'Do not fact-check opinion; do not flatten voice.',
+    'Verify the load-bearing claims against the ground truth, then return the verdict JSON.'
+  ].join('\n');
+  return { system, user };
+}
+
+async function main() {
   if (!DRAFT) throw new Error('--draft <path> is required');
   const draftAbs = path.resolve(ROOT, DRAFT);
   if (!fs.existsSync(draftAbs)) throw new Error('draft not found: ' + draftAbs);
@@ -104,57 +227,89 @@ function main() {
   const worldRel = 'output/world_summary_c' + cycle + '.md';
   const draftRel = path.relative(ROOT, draftAbs);
 
+  // S325 independence rule, enforced: the gate model's family must differ from
+  // the WRITER's (writer model slug is the draft filename's last segment, e.g.
+  // deepseek-deepseek-chat). DeepSeek graded its own draft "0 hallucinations"
+  // with a 78 OVR leak in it — self-grading is banned, fail loud.
+  const writerSlug = path.basename(draftAbs, '.md').split('_').pop();
+  const writerFamily = (writerSlug || '').split('-')[0];
+  const gateFamily = BACKEND === 'api' ? API_MODEL.split('/')[0].toLowerCase() : 'claude';
+  if (writerFamily && writerFamily === gateFamily) {
+    throw new Error('S325 independence rule: gate family "' + gateFamily + '" matches the writer ("' +
+      writerSlug + '") — pick a different --api-model (or backend). Self-grading is banned.');
+  }
+
   console.log('Headless Rhea Gate — ' + draftRel);
   console.log('===================================');
-  console.log('model=' + MODEL + ' cycle=' + cycle);
+  console.log('backend=' + BACKEND + ' model=' + (BACKEND === 'api' ? API_MODEL : MODEL) + ' cycle=' + cycle);
 
   // Deterministic canon name pre-check (2026-07-25, the "Marisol Garcia" class):
   // invented officials/sources get handed to the gate as a must-verify list.
+  const draftText = fs.readFileSync(draftAbs, 'utf8');
   let nameCheck = null;
   try {
-    nameCheck = require('./canon-name-check').checkText(fs.readFileSync(draftAbs, 'utf8'));
+    nameCheck = require('./canon-name-check').checkText(draftText);
     console.log('name pre-check: ' + nameCheck.verified.length + ' verified, ' +
       nameCheck.unverified.length + ' not-in-ledger' + (nameCheck.unverified.length ? ' [' + nameCheck.unverified.join('; ') + ']' : ''));
   } catch (e) { log.warn('name pre-check failed (non-fatal): ' + e.message); }
 
-  const prompt = buildPrompt(cycle, draftRel, worldRel, nameCheck);
-  // --allowedTools whitelists read-only work (no Write/Edit); last so the variadic
-  // list doesn't swallow other flags.
-  const args = ['-p', prompt, '--output-format', 'json', '--model', MODEL,
-    '--allowedTools', 'Read', 'Glob', 'Grep', 'Bash'];
-
   const started = Date.now();
-  log.info('invoking claude -p (headless rhea)...');
-  let stdout;
-  try {
-    stdout = execFileSync(CLAUDE_BIN, args, { cwd: ROOT, encoding: 'utf8', timeout: TIMEOUT_MS, maxBuffer: 20 * 1024 * 1024 });
-  } catch (e) {
-    // execFileSync throws on non-zero exit / timeout; keep whatever stdout we got
-    stdout = (e.stdout && e.stdout.toString()) || '';
-    if (!stdout) throw new Error('claude -p failed: ' + (e.message || e));
-    log.warn('claude -p exited non-zero but produced stdout — parsing anyway.');
+  let verdict = null, apiCost = null, durationMs = 0;
+
+  if (BACKEND === 'api') {
+    // raw OpenRouter gate: deterministic pre-checks + injected ground truth, one call
+    const verbiage = scanEngineVerbiage(draftText);
+    console.log('verbiage scan: ' + (verbiage.length ? verbiage.map(v => v.token + ' ×' + v.count).join('; ') : 'clean'));
+    const worldText = fs.existsSync(path.join(ROOT, worldRel)) ? fs.readFileSync(path.join(ROOT, worldRel), 'utf8') : '(world summary missing: ' + worldRel + ')';
+    const profiles = nameCheck ? require('./canon-name-check').profilesFor(nameCheck.verified) : [];
+    const { system, user } = buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profiles);
+    log.info('calling ' + API_MODEL + ' via OpenRouter (no tools, injected context)...');
+    const r = await callOpenRouter(API_MODEL, system, user);
+    durationMs = Date.now() - started;
+    const rates = API_RATES[API_MODEL] || API_RATES._default;
+    apiCost = +(((r.usageIn / 1e6) * rates[0]) + ((r.usageOut / 1e6) * rates[1])).toFixed(4);
+    try { const m = r.text.match(/\{[\s\S]*\}/); verdict = JSON.parse(m ? m[0] : r.text); }
+    catch (_) { verdict = { pass: null, flags: [], summary: 'verdict parse failed', parseError: true, raw: r.text.slice(0, 600) };
+      log.warn('api verdict parse failed — raw head: ' + r.text.slice(0, 300).replace(/\s+/g, ' ')); }
+  } else {
+    const prompt = buildPrompt(cycle, draftRel, worldRel, nameCheck);
+    // --allowedTools whitelists read-only work (no Write/Edit); last so the variadic
+    // list doesn't swallow other flags.
+    const args = ['-p', prompt, '--output-format', 'json', '--model', MODEL,
+      '--allowedTools', 'Read', 'Glob', 'Grep', 'Bash'];
+
+    log.info('invoking claude -p (headless rhea)...');
+    let stdout;
+    try {
+      stdout = execFileSync(CLAUDE_BIN, args, { cwd: ROOT, encoding: 'utf8', timeout: TIMEOUT_MS, maxBuffer: 20 * 1024 * 1024 });
+    } catch (e) {
+      // execFileSync throws on non-zero exit / timeout; keep whatever stdout we got
+      stdout = (e.stdout && e.stdout.toString()) || '';
+      if (!stdout) throw new Error('claude -p failed: ' + (e.message || e));
+      log.warn('claude -p exited non-zero but produced stdout — parsing anyway.');
+    }
+    durationMs = Date.now() - started;
+
+    // Envelope from --output-format json: { result, is_error, total_cost_usd, usage, ... }
+    let envelope;
+    try { envelope = JSON.parse(stdout); }
+    catch (e) { throw new Error('could not parse claude envelope JSON: ' + e.message + ' | ' + stdout.slice(0, 400)); }
+
+    const resultText = typeof envelope.result === 'string' ? envelope.result : JSON.stringify(envelope.result || '');
+    try { const m = resultText.match(/\{[\s\S]*\}/); verdict = JSON.parse(m ? m[0] : resultText); }
+    catch (_) { verdict = { pass: null, flags: [], summary: 'verdict parse failed', parseError: true, raw: resultText.slice(0, 600) }; }
+    apiCost = envelope.total_cost_usd ?? null;
   }
-  const durationMs = Date.now() - started;
-
-  // Envelope from --output-format json: { result, is_error, total_cost_usd, usage, ... }
-  let envelope;
-  try { envelope = JSON.parse(stdout); }
-  catch (e) { throw new Error('could not parse claude envelope JSON: ' + e.message + ' | ' + stdout.slice(0, 400)); }
-
-  const resultText = typeof envelope.result === 'string' ? envelope.result : JSON.stringify(envelope.result || '');
-  let verdict;
-  try { const m = resultText.match(/\{[\s\S]*\}/); verdict = JSON.parse(m ? m[0] : resultText); }
-  catch (_) { verdict = { pass: null, flags: [], summary: 'verdict parse failed', parseError: true, raw: resultText.slice(0, 600) }; }
 
   const out = {
-    draft: draftRel, cycle, model: MODEL,
+    draft: draftRel, cycle, backend: BACKEND, model: BACKEND === 'api' ? API_MODEL : MODEL,
     pass: verdict.pass ?? null,
     flags: Array.isArray(verdict.flags) ? verdict.flags : [],
     flagCount: Array.isArray(verdict.flags) ? verdict.flags.length : null,
     highSeverityCount: Array.isArray(verdict.flags) ? verdict.flags.filter(f => (f.severity || '').toLowerCase() === 'high').length : null,
     summary: verdict.summary || '',
     nameCheck: nameCheck ? { verified: nameCheck.verified, unverified: nameCheck.unverified } : null,
-    apiCostUsd: envelope.total_cost_usd ?? null,
+    apiCostUsd: apiCost,
     durationMs,
     parseError: verdict.parseError || false,
     ranAt: new Date().toISOString()
@@ -173,5 +328,5 @@ function main() {
   process.exit(out.parseError ? 3 : (out.pass === true ? 0 : 2));
 }
 
-try { main(); }
-catch (err) { log.error('Fatal: ' + err.message); process.exit(1); }
+Promise.resolve().then(() => main())
+  .catch(err => { log.error('Fatal: ' + err.message); process.exit(1); });

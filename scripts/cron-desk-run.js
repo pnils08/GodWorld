@@ -46,6 +46,11 @@ function arg(flag, def) {
 }
 const DESK = arg('--desk', 'sports');
 const GATE_MODEL = arg('--gate-model', 'sonnet');   // authoritative gate; 'haiku' to cost-test
+// --gate-backend (2026-07-25): 'claude' (claude -p tool harness) or 'api' (raw
+// OpenRouter, deterministic pre-checks + injected context). API gate model must
+// be a different family than the writer — enforced fail-loud inside the gate.
+const GATE_BACKEND = arg('--gate-backend', 'claude');
+const GATE_API_MODEL = arg('--gate-api-model', 'google/gemini-3.5-flash');
 // --no-gate (S332): skip the Rhea gate for SAMPLE generation only. The gate runs
 // on `claude -p` (Claude Code / subscription), so it cannot run while Mike's
 // subscription usage is depleted; the writer + quotes run on raw API keys. Ungated
@@ -415,7 +420,7 @@ async function runWrite(assign) {
     log('gating...');
     try {
       execFileSync('node', [path.join(ROOT, 'scripts', 'cron-rhea-gate.js'), '--draft', path.relative(ROOT, draftPath),
-        '--model', GATE_MODEL, '--cycle', cycle], { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
+        '--model', GATE_MODEL, '--backend', GATE_BACKEND, '--api-model', GATE_API_MODEL, '--cycle', cycle], { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
     } catch (_) { /* gate exit 2/3 — verdict json still written */ }
     rhea = readJson(path.join(COMPARE, base + '.rhea.json'));
     pass = rhea && rhea.pass === true;
@@ -464,7 +469,7 @@ async function runWrite(assign) {
   }
 
   const record = {
-    mode: 'wake-write', desk, cycle, provider: route.provider, model: route.model, gateModel: GATE_MODEL,
+    mode: 'wake-write', desk, cycle, provider: route.provider, model: route.model, gateModel: GATE_BACKEND === 'api' ? GATE_API_MODEL : GATE_MODEL,
     persona: personaSlug,
     byline: byline ? { name: byline.name, popid: byline.popid, beatDomain: byline.beatDomain } : null,
     laneEntries: lane.length, quotesLanded: quotes.length,
@@ -539,7 +544,7 @@ async function runWake() {
     log('gating...');
     try {
       execFileSync('node', [path.join(ROOT, 'scripts', 'cron-rhea-gate.js'), '--draft', path.relative(ROOT, draftPath),
-        '--model', GATE_MODEL, '--cycle', cycle], { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
+        '--model', GATE_MODEL, '--backend', GATE_BACKEND, '--api-model', GATE_API_MODEL, '--cycle', cycle], { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
     } catch (_) { /* gate exit 2/3 — verdict json still written */ }
     rhea = readJson(path.join(COMPARE, base + '.rhea.json'));
     pass = rhea && rhea.pass === true;
@@ -589,7 +594,7 @@ async function runWake() {
   }
 
   const record = {
-    mode: 'wake', desk: DESK, cycle, provider: route.provider, model: route.model, gateModel: GATE_MODEL,
+    mode: 'wake', desk: DESK, cycle, provider: route.provider, model: route.model, gateModel: GATE_BACKEND === 'api' ? GATE_API_MODEL : GATE_MODEL,
     persona: PERSONA,
     byline: byline ? { name: byline.name, popid: byline.popid, beatDomain: byline.beatDomain } : null,
     laneEntries: lane.length, quotesRequested: asks.length, quotesLanded: quotes.length,
@@ -625,7 +630,7 @@ function main() {
   log('gating...');
   try {
     execFileSync('node', [path.join(__dirname, 'cron-rhea-gate.js'), '--draft', path.relative(ROOT, draftPath),
-      '--model', GATE_MODEL, '--cycle', cycle], { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
+      '--model', GATE_MODEL, '--backend', GATE_BACKEND, '--api-model', GATE_API_MODEL, '--cycle', cycle], { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
   } catch (_) { /* gate exits 2 (flagged) / 3 (parse) — verdict json is still written */ }
 
   const rhea = readJson(path.join(COMPARE, base + '.rhea.json'));
@@ -642,7 +647,7 @@ function main() {
   }
 
   const record = {
-    desk: DESK, cycle, provider: route.provider, model: route.model, gateModel: GATE_MODEL,
+    desk: DESK, cycle, provider: route.provider, model: route.model, gateModel: GATE_BACKEND === 'api' ? GATE_API_MODEL : GATE_MODEL,
     disposition: pass ? 'published' : 'flagged',
     rheaPass: rhea ? rhea.pass : null,
     rheaFlagCount: rhea ? rhea.flagCount : null,

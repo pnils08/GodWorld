@@ -206,7 +206,8 @@ Rhea's 7-point check: citizen names, vote positions, sports records, engine metr
 |------|------|-------|
 | Mags Corliss | Editor-in-Chief | Main session (compilation role) |
 | Luis Navarro | Managing Editor / Investigations | civic-desk agent |
-| Rhea Morgan | Data Analyst / Copy Chief | rhea-morgan agent |
+| Rhea Morgan | Copy Chief / Verification | rhea-morgan agent (publish gate — she verifies, she does not source) |
+| Elliot Marbury | Data Desk — citywide retrieval & verification | source-search agent |
 
 ### Civic/Metro Desk
 | Name | Role |
@@ -226,7 +227,6 @@ Rhea's 7-point check: citizen names, vote positions, sports records, engine metr
 | Tanya Cruz | Sideline Reporter |
 | DJ Hartley | Senior Photographer |
 | Simon Leary | Long View Columnist |
-| Elliot Marbury | Data Desk |
 
 ### Culture Desk
 | Name | Role |

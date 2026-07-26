@@ -52,6 +52,16 @@ const BEAT_RULES = [
   { match: /\bA's\b|sideline|gridiron|\bsports\b|fan columnist|statistical support|speculative internet/i,
                                               exclude: true,  reason: 'sports (Paulson domain)' },
 
+  // Data Desk (S334) — Marbury's citywide seat. Matched narrowly on "data desk",
+  // NOT /data analyst/, because Rhea Morgan is "Data Analyst / Copy Chief" and must
+  // stay excluded by the copy-chief masthead rule above (first match wins, and that
+  // rule sits earlier in this array — verify that ordering before editing either).
+  // Cross-beat by nature, so GENERAL domain with data-shaped themes rather than a
+  // single domain. Before S334 his RoleType read "…Statistical Support", which the
+  // sports exclusion above matched verbatim — that string, not the rosterLookup desk
+  // field, is why he was never routed in any cycle.
+  { match: /data desk/i,                      domain: 'GENERAL',        themes: ['data', 'analysis', 'records', 'trends', 'verification'] },
+
   { match: /civic affairs/i,                  domain: 'CIVIC',          themes: ['council', 'initiative', 'policy', 'city hall', 'vote'] },
   { match: /civic.*opinion|opinion.*civic/i,  domain: 'CIVIC',          themes: ['opinion', 'civic', 'accountability', 'editorial'] },
   { match: /investigation/i,                  domain: 'CIVIC',          themes: ['investigation', 'accountability', 'records', 'oversight'] },

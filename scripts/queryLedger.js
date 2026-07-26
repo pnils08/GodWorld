@@ -154,7 +154,11 @@ async function queryCitizen(search) {
     popId,
     name: fullName,
     tier: parseInt(citizen.Tier) || 4,
-    age: citizen.Age || null,
+    // Age is ALWAYS computed as 2041 - BirthYear. The Simulation_Ledger `Age`
+    // column is empty by design, so reading it returned null for every citizen
+    // (S334 — surfaced on POP-00166, applied to all). Never trust a pre-computed
+    // Age field; the 2041 anchor keeps every age in the project consistent.
+    age: citizen.BirthYear ? 2041 - parseInt(citizen.BirthYear) : null,
     neighborhood: citizen.Neighborhood || null,
     role: citizen.RoleType || null,
     status: citizen.Status || null,
@@ -294,7 +298,7 @@ async function queryNeighborhood(name) {
       name: `${r.First} ${r.Last}`,
       tier: parseInt(r.Tier) || 4,
       role: r.RoleType,
-      age: r.Age,
+      age: r.BirthYear ? 2041 - parseInt(r.BirthYear) : null,  // 2041 anchor; Age column is empty by design (S334)
       status: r.Status,
     }));
 

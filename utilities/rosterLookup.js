@@ -125,7 +125,7 @@ function loadRoster_() {
         samplePhrases: ["Quiet cycles reveal the city underneath the noise — the real one.", "Stability isn't glamorous, but it is foundational.", "The texture of quiet months"],
         background: "Philosophy minor who writes about sports like it's civic architecture."
       },
-      "Elliot Marbury": { desk: "sports", role: "Data Desk", tone: "Factual, monotone, essential for accuracy", background: "Sabermetrics, formerly ran minor-league data blog" },
+      "Elliot Marbury": { desk: "metro", role: "Data Desk", tone: "Factual, monotone, essential for accuracy", background: "Sabermetrics, formerly ran minor-league data blog. Promoted C102 from Anthony Raines statistical support to the Tribune's citywide Data Desk — the paper's retrieval and verification seat across every beat." },
       "Selena Grant": {
         desk: "chicago", role: "Bulls Beat Reporter", tone: "Professional, analytical, rising star energy",
         openingStyle: "Statistical hook or roster observation",
@@ -343,9 +343,9 @@ function loadRoster_() {
 
     // Desk -> array of journalist names
     desks: {
-      "sports": ["Anthony", "P Slayer", "Hal Richmond", "Tanya Cruz", "DJ Hartley", "Simon Leary", "Elliot Marbury", "Ariana Reyes"],
+      "sports": ["Anthony", "P Slayer", "Hal Richmond", "Tanya Cruz", "DJ Hartley", "Simon Leary", "Ariana Reyes"],
       "chicago": ["Selena Grant", "Talia Finch"],
-      "metro": ["Dr. Lila Mezran", "Luis Navarro", "Carmen Delaine", "Trevor Shimizu", "Sgt. Rachel Torres", "Lena Carrow", "Dana Reeve"],
+      "metro": ["Dr. Lila Mezran", "Luis Navarro", "Carmen Delaine", "Trevor Shimizu", "Sgt. Rachel Torres", "Lena Carrow", "Dana Reeve", "Elliot Marbury"],
       "culture": ["Maria Keen", "Sharon Okafor", "Kai Marston", "Mason Ortega", "Angela Reyes", "Noah Tan", "Elliot Graye"],
       "business": ["Jordan Velez"],
       "opinion": ["Farrah Del Rio", "P Slayer"],
@@ -442,7 +442,7 @@ function getJournalistBySignal_(signalType) {
  *
  * @example
  * getJournalistsByDesk_("sports")
- * // → ["Anthony", "P Slayer", "Hal Richmond", "Tanya Cruz", "DJ Hartley", "Simon Leary", "Elliot Marbury"]
+ * // → ["Anthony", "P Slayer", "Hal Richmond", "Tanya Cruz", "DJ Hartley", "Simon Leary", "Ariana Reyes"]
  */
 function getJournalistsByDesk_(deskName) {
   var roster = getRoster_();

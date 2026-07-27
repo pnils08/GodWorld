@@ -148,7 +148,7 @@ pointers:
   3. `Employee_Count` must be the REAL headcount for that kind of business, never a tracked count — see the S335 sizing rule in the research. A newly minted business has ZERO tracked citizens, so any positive figure is legal.
   4. Leave `Key_Personnel` blank. It is 84% blank across the sheet and nothing reads it yet.
 - **Verify:** mint a business in a dry-run and confirm all four economic columns arrive populated; re-scan `Business_Ledger` for blanks after the next real edition
-- **Status:** [ ] not started
+- **Status:** [x] DONE S336 (engine-sheet) — `economicSeedForSector()` in `ingestPublishedEntities.js`: 9 keyword classes + a small-neighborhood-business fallback (never blank), scales generalising Task 1's hand-filled shapes; `Growth_Rate` in the sheet's percent-integer convention (live range 0–40). Retail ordered before food so "Retail & Food" classifies by kind. `Employee_Count` is a real institutional headcount — a fresh mint has zero tracked citizens, so any positive figure is legal. `Key_Personnel` stays blank by design. Verified against real sheet sector strings; all 5 existing ingest test suites green (62 assertions) + exported for testability.
 
 ---
 

@@ -19,9 +19,16 @@
  *     engine-sheet backfill per ADR-0007 — NOT routed to Intake.
  *   - ambiguous / phantom / cultural-only stay logged, not written.
  *
- * BUSINESSES: unchanged — new entries append to Business_Ledger (cols A–D
- * filled, E–I blank). Not a citizen path, so outside the "zero SL writes"
- * invariant.
+ * BUSINESSES: new entries append to Business_Ledger economically ALIVE
+ * (S336, employment-living-system Task 8): cols A–D from the parse, E–H
+ * (Employee_Count, Avg_Salary, Annual_Revenue, Growth_Rate) seeded from a
+ * sector-median table so the mint can hire, fire, and be capacity-checked
+ * from birth. Employee_Count is a REAL institutional headcount (never a
+ * tracked count — a new mint has zero tracked citizens, so any positive
+ * figure is legal). Key_Personnel (I) stays blank — 84% blank sheet-wide,
+ * nothing reads it. Not a citizen path, so outside the "zero SL writes"
+ * invariant. Pre-S336 mints were born economically dead — the exact debt
+ * Task 1 paid down by hand on 23 rows.
  *
  * Closes the /post-publish Step 5 "NOT WIRED" gap.
  *
@@ -799,6 +806,29 @@ async function appendIntakeRows(intakeRows, sheetsClient, sheetId) {
   return verified;
 }
 
+// S336 (employment-living-system Task 8): sector-median economic seed so a
+// minted business is born alive. Classes and scales generalise Task 1's
+// hand-filled shapes (cafe ~11 staff/$720k, retail ~4/$380k, faith small-staff/
+// contributions, professional firm ~26/$6M+). Growth_Rate is the sheet's
+// percent-integer convention (live range 0-40, median 8). First keyword hit
+// wins; the fallback is a small neighborhood business, never a blank.
+const SECTOR_ECON_SEEDS = [
+  [/faith|church|temple|mosque|synagogue|congregation|ministry|parish/i, { emp: 8, sal: 52000, rev: 600000, growth: 2 }],
+  [/retail|shop|store|boutique|grocery/i, { emp: 4, sal: 42000, rev: 380000, growth: 2 }], // before food: "Retail & Food" is a shop, not a kitchen
+  [/cafe|coffee|bakery|restaurant|dining|diner|food|bar\b|pub|brewery|lounge|nightlife|club|market/i, { emp: 11, sal: 48000, rev: 720000, growth: 3 }],
+  [/clinic|health|medical|dental|care/i, { emp: 38, sal: 85000, rev: 4000000, growth: 3 }],
+  [/tech|software|systems|data|lab|research|analytics|platform/i, { emp: 45, sal: 120000, rev: 9000000, growth: 8 }],
+  [/architect|law|legal|consult|account|firm|agency|professional|insurance|finance/i, { emp: 26, sal: 95000, rev: 6200000, growth: 4 }],
+  [/construction|contractor|builder/i, { emp: 30, sal: 80000, rev: 8000000, growth: 5 }],
+  [/gallery|theater|theatre|studio|music|venue|arts|entertainment|media|journal/i, { emp: 9, sal: 55000, rev: 800000, growth: 3 }],
+  [/school|education|academy|tutoring/i, { emp: 15, sal: 62000, rev: 1200000, growth: 2 }]
+];
+function economicSeedForSector(sector) {
+  const s = String(sector || '');
+  for (const [re, seed] of SECTOR_ECON_SEEDS) if (re.test(s)) return seed;
+  return { emp: 6, sal: 45000, rev: 500000, growth: 2 }; // small neighborhood business
+}
+
 async function appendBusinesses(candidates, maxBizNum, sheetsClient, sheetId) {
   if (candidates.length === 0) return [];
 
@@ -811,7 +841,10 @@ async function appendBusinesses(candidates, maxBizNum, sheetsClient, sheetId) {
     const bizId = 'BIZ-' + String(bizNum).padStart(5, '0');
     bizIds.push(bizId);
     // Cols A-I: BIZ_ID, Name, Sector, Neighborhood, Employee_Count, Avg_Salary, Annual_Revenue, Growth_Rate, Key_Personnel
-    rowsToAppend.push([bizId, c.name, c.sector, c.neighborhood, '', '', '', '', '']);
+    // S336 Task 8: E-H seeded from the sector table — minted businesses are born
+    // economically alive. Key_Personnel stays blank by design.
+    const econ = economicSeedForSector(c.sector);
+    rowsToAppend.push([bizId, c.name, c.sector, c.neighborhood, econ.emp, econ.sal, econ.rev, econ.growth, '']);
   }
 
   await sheetsClient.spreadsheets.values.append({
@@ -1235,6 +1268,8 @@ module.exports = {
   isAbsenceSentinel: isAbsenceSentinel,
   // S257 G-P-C97-1 — honorific + last-name-anchored matcher (duplicate-mint guard)
   resolveCitizens: resolveCitizens,
+  // S336 Task 8 — sector-median economic seed (mint businesses born alive)
+  economicSeedForSector: economicSeedForSector,
   // S259 ENGINE_REPAIR Row 30 — malformed-name append backstop
   isMalformedCitizenName: isMalformedCitizenName
 };

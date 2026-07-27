@@ -1092,21 +1092,27 @@ function runCareerEngine_(ctx) {
 
   // Business Sector (free text) → SkillTags category. MUST stay in vocab-sync
   // with the SkillTags backfill (S336) — canonical 15-category strings only.
+  // Rule ORDER is load-bearing — audited against every live Sector string
+  // (S336 bench C103 fire caught 'Cloud Infrastructure'→Transit via the
+  // 'infrastructure' substring; the audit then caught 'Hospitality'→Healthcare
+  // via 'hospital', and 'Public Services'/'Housing & Social Services' falling
+  // to Small Business because 'services' outran the civic rule).
   function sectorCategory_(sector) {
     var s = String(sector || '').toLowerCase();
     if (/sports|stadium|franchise|athletic/.test(s)) return null; // FIRST: Paulson's domain — never route hires into sports orgs, whatever else matches
     if (/\bport\b|logistic|longshore/.test(s)) return 'Port & Labor'; // \b — 'Sports' contains 'port'
     if (/construction|contractor|builder|baylight/.test(s)) return 'Construction & Baylight';
-    if (/transit|transport|bus|bart|utilit|infrastructure/.test(s)) return 'Transit & Infrastructure';
-    if (/health|medical|clinic|hospital|care|biotech/.test(s)) return 'Healthcare';
+    if (/\bbiotech\b|\bhealth\b|healthcare|medical|clinic|\bhospital\b/.test(s)) return 'Healthcare'; // \bhospital\b — 'Hospitality' contains 'hospital'
+    if (/tech|software|cloud|\bai\b|analytics|platform|agent|intelligence|coworking|venture|research|data/.test(s)) return 'Tech & Innovation'; // before transit: 'Cloud Infrastructure' is tech; before civic: 'Civic Tech' is tech
+    if (/transit|transport|\bbus\b|bart|utilit|infrastructure/.test(s)) return 'Transit & Infrastructure';
     if (/education|school|academy|tutor/.test(s)) return 'Education';
-    if (/tech|software|cloud|\bai\b|analytics|platform|agent|intelligence|coworking|venture|research|data/.test(s)) return 'Tech & Innovation';
-    if (/retail|shop|store|boutique|grocery|coworking|services|real estate|hospitality/.test(s)) return 'Small Business';
+    if (/municipal|government|civic|public|housing|social service|workforce|safety|crisis/.test(s)) return 'Government & Civic'; // before small business: 'Public Services' is civic
+    if (/faith|church|temple|mosque|synagogue|congregation|ministry|community/.test(s)) return 'Faith & Community';
     if (/media|journal|gallery|entertainment|nightlife|music|design|architect|arts|theater|theatre|studio/.test(s)) return 'Creative & Arts';
     if (/legal|judicial|law|account|consult|insurance|finance|professional|capital/.test(s)) return 'Professional';
-    if (/municipal|government|civic|public|housing authority|safety|crisis/.test(s)) return 'Government & Civic';
-    if (/faith|church|temple|mosque|synagogue|congregation|ministry|community/.test(s)) return 'Faith & Community';
-    if (/restaurant|dining|cafe|coffee|bakery|food|bar\b|pub|brewery|lounge|club|market/.test(s)) return 'Food & Culture';
+    if (/retail/.test(s)) return 'Small Business'; // before food: 'Retail & Food' is a shop, not a kitchen (matches Task 8's seed table)
+    if (/restaurant|dining|cafe|coffee|bakery|food|bar\b|pub|brewery|lounge|club|market|hospitality/.test(s)) return 'Food & Culture';
+    if (/shop|store|boutique|grocery|services|real estate|development/.test(s)) return 'Small Business';
     return 'Small Business';
   }
 

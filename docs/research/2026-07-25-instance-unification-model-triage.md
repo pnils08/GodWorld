@@ -33,6 +33,17 @@ pointers:
 - **Cross-model harness reliability is unproven.** Do the 52 skills / hooks / godworld MCP actually drive on a non-Claude brain, or are they tuned to Claude's quirks? DeepSeek/Haiku showed compose parity for *writing* (S326), but full harness-driving is a bigger, untested surface.
 - **Control-plane security dissolves for base-URL instances.** A Kimi/DeepSeek-backed Claude Code session *is* a full Claude session with full control-plane access — the backup-CLI read-only isolation (MODEL_HIERARCHY §6) governs "the backup CLI," not a model wearing the harness. "Guest" (Gemini/Codex) needs pinning: own-CLI-contained-by-policy vs. base-URL-full-access.
 
+**Direction refined S335 (Mike-direct, verbatim substance).** The pivot's destination is now stated more concretely than the original capture had it:
+
+- **The project has moved away from heavy boots and forced prompts that make an instance fit a role.** Models are strong enough to handle complex work without being costumed into one. So the division axis is **model alignment to work type**, not terminal identity — terminals become triage of effort, not personas.
+- **Save sessions by WORK TYPE, not terminal.** "Sheet work is a saved session." A session becomes a work-type container that any terminal can pick up, rather than a terminal owning a lane.
+- **Reduce front-loaded boot further.** Boot cost buys less than it used to now that role-conditioning is not the point.
+- **Behaviour is more prompt than memory.** Ten months of evidence: MDs do not solve issues automatically. Hooks force behaviour; documents do not.
+- **Tool use is the management surface** — what the instance actually runs, not what it has read.
+- **Consolidate MDs that cover the same data.** 489 active MDs, and the corpus duplicates itself.
+
+**One sharpening, measured S335 — injection only works when it is specific and actionable.** The evidence cuts both ways on "behaviour is prompt not memory". The `UserPromptSubmit` hook injected a supermemory-recall reminder on every single turn of a ~40-turn session and produced approximately zero behaviour change; it asks the instance to *consider whether* to recall, which is a decision, not an instruction. By contrast the `SessionStart` `<godworld-state>` block — PIN, terminal roster, NEXT line — shaped behaviour every turn it mattered, because it delivers *specific facts* rather than a reminder to think about something. **So the rule is not "prompts beat memory"; it is "specific injected facts beat both generic prompts and passive documents."** A topic-inventory hook (paths only, grepped live) is the specific-fact shape. A "remember to check the docs" reminder is the shape that already demonstrably fails.
+
 **Verdict:** `watch`
 - **Adopt-trigger:** either (a) parallel-instance count / coordination pain actually justifies building a dispatch layer, OR (b) a cheap one-session proving-run confirms the harness (skills/hooks/MCP) drives on a non-Claude brain (Kimi or DeepSeek base-URL'd as a Mags-core session on a real task). Attack (b) first — it's the load-bearing unknown, provable for the cost of one session vs. a full teardown. Until then the four-terminal apparatus stays; the only piece extracted-now is the subagent-cost rule (§8) + the live model map.
 
@@ -42,6 +53,7 @@ pointers:
 
 ## Applications (living)
 
+- 2026-07-27 — S335 employment session supplied the cost evidence: 489 active MDs, 17 opened (3.5%), and the answer I needed (`Employment_Roster`: Citizen-to-Business mapping) sat on one line of SHEETS_MANIFEST across six documents, found by accident in hour three.
 - 2026-07-25 — carved the subagent-cost-discipline rule out of this direction and landed it live in MODEL_HIERARCHY §8 + the live terminal→model map; propagated to all four TERMINAL.md operating-discipline blocks.
 
 ---
@@ -49,3 +61,4 @@ pointers:
 ## Changelog
 
 - 2026-07-25 — Initial capture (S333). Mike-direct: park the full pivot as research (watch), extract only the subagent-cost rule + model map now.
+- 2026-07-27 — Direction refined (S335). Sessions by work type not terminal; reduce boot; behaviour is prompt not memory; consolidate duplicate MDs. Added the measured sharpening: injection works only when specific and actionable.

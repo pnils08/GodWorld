@@ -1041,7 +1041,9 @@
 
 - **settleAdulthood_(ctx, cycle, rng)**
   Reads: S.careerSignals
-  Sheets: Household_Ledger
+  Writes: S.careerSignals.businessDeltas (settlement hires)
+  Sheets: Household_Ledger, Business_Ledger (capacity-aware employer pool, v2.2 S336)
+  Note: v2.2 (S336 Task 5+7) — employer draw filters to businesses with room (stated > tracked + same-cycle reservations); no-opening case stamps "seeking work" on the [Adulthood] line; stamps SkillTags via settleSkillTag_
 
 - **checkSchoolQuality_(ss, ctx, cycle)**
   Writes: S.storyHooks
@@ -1327,8 +1329,9 @@
   Sheets: Citizen_Media_Usage, Generic_Citizens, LifeHistory_Log
 
 - **processAdvancementRows_(ctx, now, cycle)**
-  Sheets: Advancement_Intake, Advancement_Intake1, Generic_Citizens, LifeHistory_Log
+  Sheets: Advancement_Intake, Advancement_Intake1, Generic_Citizens, LifeHistory_Log, Business_Ledger (mint employer pool via buildMintBizPool_, S336 Task 5)
   RNG: ctx.rng / safeRand_(ctx)
+  Note: S336 Task 5+7 — minted citizens arrive with a capacity-checked EmployerBizId (intake-carried wins if room, else deterministic seed-hash draw, else "Seeking work" in LifeHistory) + SkillTags stamped via classifyMintSector_; hires register S.careerSignals.businessDeltas
 
 - **processIntakeRows_(ss, now, cycle)**
   Sheets: Intake
@@ -1379,10 +1382,11 @@
 ### runCareerEngine.js
 - **runCareerEngine_(ctx)**
   Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.weather, S.weatherMood, S.worldEvents
-  Writes: S.careerEvents, S.careerSignals, S.eventsGenerated
+  Writes: S.careerEvents, S.careerSignals (incl. .headcountWriteBack + .rehires, S336), S.eventsGenerated
   Config: ctx.config.cycleCount, ctx.config.rngSeed
-  Sheets: Business_Ledger, LifeHistory_Log
+  Sheets: Business_Ledger (READ for pools + WRITE Employee_Count via queueCellIntent_, v2.6 S336), LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
+  Note: v2.6+v2.7 (S336) tail steps, in order — matchUnemployedToOpenings_ (field-matched rehiring: SkillTags vs sectorCategory_, Growth_Rate-derived openings, cross-field rare + logged) then reconcileBusinessHeadcounts_ (businessDeltas move stated headcount; stated-below-tracked fires the difference as Career-Layoff life events, deterministic lowest-level-first)
 
 ### runCivicElectionsv1.js
 - **runCivicElections_(ctx)**

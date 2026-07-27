@@ -10,6 +10,15 @@
             "timeout": 5
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PROJECT_ROOT}/.claude/hooks/topic-inventory.sh\"",
+            "timeout": 10
+          }
+        ]
       }
     ],
     "SessionStart": [

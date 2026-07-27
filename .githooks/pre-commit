@@ -26,4 +26,28 @@ if [ -n "$staged" ] && [ "$CLAUDE_CTL" != "1" ]; then
   exit 1
 fi
 
+# ---------------------------------------------------------------------------
+# ROLLOUT conformance gate (S335)
+#
+# A non-conforming ROLLOUT row is SILENTLY SKIPPED by scripts/rolloutSweep.js —
+# it never archives, so the work stops being tracked without anyone noticing.
+# docLoopStatus already detects this, but --lint exits 0 by design (it surfaces,
+# it does not decide), so a chained `--lint && git commit` commits the bad row
+# anyway. That happened TWICE in S335. A validator that cannot stop the action is
+# not enforcement. This is the gate; --gate exits non-zero.
+# ---------------------------------------------------------------------------
+if git diff --cached --name-only | grep -q 'docs/engine/archive/ROLLOUT_PLAN\.md'; then
+  if ! lint_out="$(node scripts/docLoopStatus.js --gate 2>&1)"; then
+    echo "" >&2
+    echo "BLOCKED — ROLLOUT_PLAN.md has non-conforming rows (S335 gate):" >&2
+    echo "$lint_out" | sed 's/^/  /' >&2
+    echo "" >&2
+    echo "A malformed row never archives and its work stops being tracked." >&2
+    echo "Fix the row, or drain the narrative to its plan doc:" >&2
+    echo "  node scripts/rolloutDrain.js --id=<row> --title=\"...\" --state=<state>" >&2
+    echo "" >&2
+    exit 1
+  fi
+fi
+
 exit 0

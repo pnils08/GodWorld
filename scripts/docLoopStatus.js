@@ -19,9 +19,10 @@
 //   node scripts/docLoopStatus.js --next     # ready-by-terminal only
 //   node scripts/docLoopStatus.js --watch    # watch-verdict research only
 //   node scripts/docLoopStatus.js --json     # machine-readable, all three
-//   node scripts/docLoopStatus.js --lint     # flag rows that break the archive sweep
+//   node scripts/docLoopStatus.js --lint     # flag rows that break the archive sweep (exit 0)
+//   node scripts/docLoopStatus.js --gate     # same, but exit 1 on problems (pre-commit gate)
 //
-// Always exits 0 — it's a surfacing report, not a gate.
+// Exits 0 in every mode EXCEPT --gate (S335) — it's a surfacing report by default.
 
 'use strict';
 
@@ -109,11 +110,18 @@ function lintRollout() {
   return problems;
 }
 
-function runLint() {
+// --gate: identical output to --lint, but EXITS NON-ZERO on problems (S335).
+// Why a separate mode instead of changing --lint: sessionEndMechanical.js runs
+// `--lint` through execSync, which THROWS on non-zero exit and would land in its
+// catch branch — suppressing the very lint output that caught two bad rows in
+// S335. post-write-check.sh and rolloutDrain.js also assume exit 0. So --lint
+// stays a surfacing report and --gate is the enforcing one.
+function runLint(gate) {
   const problems = lintRollout();
   if (problems.length) {
     console.log(`ROLLOUT LINT: ${problems.length} non-conforming row(s) — state-cell breaks the sweep, or item cell over the ${ITEM_BUDGET}-char pointer budget:`);
     problems.forEach(p => console.log(p));
+    if (gate) process.exit(1);
   } else {
     console.log('ROLLOUT LINT: clean — every row is a sweep-safe pointer within budget.');
   }
@@ -173,7 +181,8 @@ function printSection(report, which) {
 
 function main() {
   const args = process.argv.slice(2);
-  if (args.includes('--lint')) { runLint(); return; }
+  if (args.includes('--gate')) { runLint(true); return; }
+  if (args.includes('--lint')) { runLint(false); return; }
   const report = buildReport();
   if (args.includes('--json')) {
     console.log(JSON.stringify(report, null, 2));

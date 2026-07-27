@@ -1066,7 +1066,7 @@ pointers:
 ## Simulation_Ledger
 
 - **Rows:** 931
-- **Columns:** 53
+- **Columns:** 54
 
 | Col | Header |
 |-----|--------|
@@ -1123,6 +1123,7 @@ pointers:
 | AY | StatusStartCycle |
 | AZ | HealthCause |
 | BA | LineageId |
+| BB | SkillTags |
 
 ---
 

@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Maps RoleType patterns to BIZ-IDs for employer linkage. Five-layer resolution: sports → parenthetical → keyword → selfEmployed → category.",
-    "version": "1.3",
+    "version": "1.4",
     "phase": "14.7",
     "layerOrder": [
       "sports",
@@ -395,6 +395,22 @@
     {
       "pattern": "Urban Planner",
       "bizId": "BIZ-00017"
+    },
+    {
+      "pattern": "Coach, Oakland A",
+      "bizId": "BIZ-00005"
+    },
+    {
+      "pattern": "Scout, Oakland A",
+      "bizId": "BIZ-00005"
+    },
+    {
+      "pattern": "Manager, Oakland A",
+      "bizId": "BIZ-00005"
+    },
+    {
+      "pattern": "A's Marketing",
+      "bizId": "BIZ-00005"
     }
   ],
   "selfEmployedPatterns": [

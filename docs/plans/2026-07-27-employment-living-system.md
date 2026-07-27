@@ -64,7 +64,7 @@ pointers:
   3. `Employee_Count` is the REAL headcount and must exceed the tracked count for that row.
   4. `BIZ-00077` Nino's sits in the Chicago layer — scale it like its siblings, do not treat it as Oakland.
 - **Verify:** re-scan → zero rows with a missing or non-numeric economic column
-- **Status:** [ ] not started
+- **Status:** [x] DONE S335 — all 23 filled, scaled to kind: 13 faith orgs (Cathedral of Christ the Light 30 staff / $3.1M contributions down to East Bay Meditation Center 4 / $210k), 8 venues and small businesses, 2 professional firms (Atlas Bay Architects 26 / $6.2M, Calderon-Nishi 34 / $8.9M). A 24th surfaced during verification: `BIZ-00074` Oakland Oaks still carried `Employee_Count` 7 — the fossilised tracked count — with no revenue or growth. Set to 185 staff / $61M / growth 14, banded with the A's and high because it is an expansion franchise; `Avg_Salary` left for the resolver to derive. **`Business_Ledger` is now 0 blanks across all four economic columns on all 99 rows.**
 
 ### Task 2: Restore true headcounts on the 11 violations — research-build
 
@@ -74,7 +74,7 @@ pointers:
   2. Set each to a real institutional headcount. AC Transit is a transit agency, Oakland Unified a school district — the stored figures are absurd on their face.
   3. **`BIZ-00030` is the exception: do NOT raise it.** Its violation means citizens are still parked there who do not belong. Task 3 drains it; raising the number would legitimise the bucket.
 - **Verify:** zero violations except `BIZ-00030`, which Task 3 closes
-- **Status:** [ ] not started
+- **Status:** [x] DONE S335 — all 10 restored: Anthropic 10→85, Oakmesh 3→45, Port of Oakland 28→1500, AC Transit 4→2100, Oakland Hospital 66→2400, Oakland Unified 24→5200, Baylight Construction 35→450, Fruitvale Clinic 1→38, W Oakland Community Center 44→95, Housing Authority 22→320. Every write guarded on tracked count; zero refusals. `BIZ-00030` deliberately untouched — the only remaining violation in the sheet (62 stated, 97 tracked) and Task 3's to close.
 
 ### Task 3: Drain the bucket and the tail — research-build
 

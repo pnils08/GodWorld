@@ -145,7 +145,7 @@ Practical consequence for every re-run: **`--fill-blanks-only`.** Fill what is e
   3. Add `parentheticalLookup` / `keywordRules` entries so future citizens naming these programs resolve to them.
   4. Cross-check the establishment names against [[../canon/INSTITUTIONS]] before writing — these become canon entities that agents may name in print.
 - **Verify:** each of the five resolves from a director's `RoleType`; no establishment has tracked employees exceeding its stated `Employee_Count`
-- **Status:** [ ] not started
+- **Status:** [x] DONE S334 — BIZ-00094 West Oakland Stabilization Fund / BIZ-00095 Oakland Alternative Response Initiative / BIZ-00096 Fruitvale Transit Hub Authority / BIZ-00097 Temescal Community Health Center / BIZ-00098 Oakland Youth Apprenticeship Pipeline appended to `Business_Ledger` (94 -> 99 rows), `Annual_Revenue` = the council-approved budget from `Initiative_Tracker`. Four directors repointed off blank/BIZ-00017: Webb POP-00790, Tran-Munoz POP-01021, Soria-Dominguez POP-00791, Chen-Ramirez POP-00792. BIZ-00098 has no tracked staff — the Pipeline has no named director in canon (Cortez was interim budget owner, not director), and inventing one was not on. 7 keyword rules added to `employer_mapping.json` (v1.2); dry-run keyword layer 170 -> 174, unmatched 287 -> 283. **Employee_Count figures are placeholders** — budget-plausible and safely above tracked, but Mike sets the real headcounts.
 
 ### Task 6: Media cohort
 

@@ -430,6 +430,7 @@ async function main() {
   }
 
   var bizUpdates = [];
+  var headcountViolations = []; // tracked > stated — the only illegal state (S334)
   for (var br = 0; br < updatedBizRows.length; br++) {
     var bizRow = updatedBizRows[br];
     var thisBizId = (bizRow[iBizIdCol] || '').toString().trim();
@@ -443,11 +444,26 @@ async function main() {
       var avgSal = empIncomeCount > 0 ? Math.round(empTotal / empIncomeCount) : 0;
       var rowN = br + 2;
 
+      // S334 (Mike-direct): Employee_Count is the business's ACTUAL headcount, not
+      // the tracked-citizen count. Simulation_Ledger tracks a ~1:443 sample, so
+      // DigitalOcean legitimately employs 800 with 3 tracked — that is allowed and
+      // must not be "corrected" to 3. This block used to overwrite the column with
+      // emps.length, which silently replaced real headcounts with sample counts and
+      // left the column meaning two different things depending on whether a row had
+      // any tracked citizens. It no longer writes.
+      //
+      // The ONE illegal state is tracked > stated: a business claiming 10 employees
+      // while 20 tracked citizens say they work there. Report it; a human decides
+      // whether the headcount is understated or the assignment is over-stuffed.
       if (iEmpCount >= 0) {
-        bizUpdates.push({
-          range: 'Business_Ledger!' + colL(iEmpCount) + rowN,
-          values: [[emps.length]]
-        });
+        var statedCount = parseInt(bizRow[iEmpCount], 10);
+        if (!isNaN(statedCount) && emps.length > statedCount) {
+          headcountViolations.push({
+            bizId: thisBizId,
+            stated: statedCount,
+            tracked: emps.length
+          });
+        }
       }
       if (iAvgSalary >= 0) {
         bizUpdates.push({
@@ -460,7 +476,18 @@ async function main() {
 
   if (bizUpdates.length > 0) {
     await sheets.batchUpdate(bizUpdates);
-    console.log('  Updated ' + (bizUpdates.length / 2) + ' businesses with employee counts and salaries');
+    console.log('  Updated Avg_Salary on ' + bizUpdates.length + ' businesses (Employee_Count left alone — S334)');
+  }
+
+  if (headcountViolations.length > 0) {
+    console.log('');
+    console.log('  !! HEADCOUNT VIOLATIONS — tracked citizens exceed the stated Employee_Count.');
+    console.log('     Either the headcount is understated or the assignment is over-stuffed. Not auto-fixed.');
+    headcountViolations.forEach(function(v) {
+      console.log('     ' + v.bizId + ': stated ' + v.stated + ', tracked ' + v.tracked);
+    });
+  } else {
+    console.log('  Headcount check: no business has more tracked citizens than stated employees.');
   }
 
   console.log('');

@@ -218,12 +218,19 @@ This is the authoritative record of Daily News listening experiments. Update
 one row after each materially different listen. Do not retry a rejected
 configuration unless new evidence is recorded here first.
 
+**Builder baseline decision (2026-07-27):** Daily News is in a good content and
+operational position. Further work is fine-tuning, not a notebook or pipeline
+redesign. Depth should improve naturally as the newsroom crons produce more
+eligible staged/sample Articles; do not manufacture extra framing or replace
+the working architecture to force novelty. Change one presentation axis at a
+time and judge it from a completed listen.
+
 | Version | Configuration | Listening result | Disposition / non-repeat guard |
 |---|---|---|---|
 | v1 | `long`; early bounded source with setup/authority material | 53m01s / 102 MB. Complete but far too long for the daily use case. | Rejected for Daily News. Do not return to `long` as the daily default. |
 | v1.2 | `short`; natural-source tuning; GodWorld Oakland 2042 frame | 5m24s / 3.9 MB. Useful as a quick hello and story preview, but too short for the desired depth. | Rejected as the daily default. Preserve `short` only as a possible future alert/preview format. |
 | v1.3 attempt | `medium` | Failed before rendering: the installed CLI accepts only `short`, `default`, or `long`. | Invalid configuration. Never retry `medium` unless the installed CLI's documented choices change. |
-| v1.3 | `default`; GodWorld Oakland 2042 frame | 19m16s / 37.2 MB. Content and depth were good, but the opening spent several minutes explaining GodWorld as a future civic simulation. | Keep `default` length. Reject the explanatory GodWorld/2042 setup frame. |
+| v1.3 | `default`; GodWorld Oakland 2042 frame | 19m16s / 37.2 MB. Overall report content was very good and should deepen as cron Articles accumulate; the defect was the opening spending several minutes explaining GodWorld as a future civic simulation. | Keep the content pipeline and `default` length. Reject only the explanatory GodWorld/2042 setup frame. |
 | v1.4 | `default`; “The Bay Tribune daily news for Oakland”; generator footer removed from the uploaded copy | Pending the next 08:00 scheduled listen. Goal: preserve v1.3 content/depth while beginning directly inside the city. | Current candidate. Judge opening immersion first, then depth and length; change one axis at a time. |
 
 Research basis and adoption history:
@@ -266,3 +273,8 @@ recovery: [[../reference/notebookLM-CLI]].
   non-repeat record for v1 through v1.4, with measured lengths, listening
   verdicts, rejected configurations, current candidate, and pointers back to
   the research basis and operator reference.
+- 2026-07-27 — Recorded Mike's baseline verdict: Daily News content is already
+  very good; expected depth growth should come from more eligible cron Articles,
+  while future changes stay narrow presentation fine-tuning. Kept v1.4's live
+  listening proof pending because the local artifact record still ends at
+  v1.3.

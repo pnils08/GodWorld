@@ -57,6 +57,11 @@ const GATE_API_MODEL = arg('--gate-api-model', 'google/gemini-3.5-flash');
 // subscription usage is depleted; the writer + quotes run on raw API keys. Ungated
 // output is NOT canon — it routes to samples/ marked ungated, for review only.
 const NO_GATE = process.argv.includes('--no-gate');
+// Submission budget (headless plan "What's left" #2, S339): hard weekly ceiling
+// on gate-cleared (staged) articles per cycle-week — the ~20–28/wk cost envelope.
+// At the cap a write wake exits BEFORE any writer spend. --no-gate samples are
+// exempt (they never stage). Override: --budget-cap N or NEWSROOM_WEEKLY_CAP env.
+const WEEKLY_CAP = parseInt(arg('--budget-cap', process.env.NEWSROOM_WEEKLY_CAP || '28'), 10);
 // --persona (S332 firebrand lane, plumbed 2026-07-24): run an authored reporter's
 // adversarial stance instead of the desk skill. Forwarded to cron-desk-writer.js;
 // also keys the draft/artifact filenames so persona runs never overwrite desk runs.
@@ -194,7 +199,9 @@ function readBylineUsage() {
 }
 
 // Layer 1 — pick a beat-matched, eligible, POPID-linked byline, least-used first.
-async function resolveByline(desk, lane) {
+// S339 soft no-repeat: bylines with no staged article this cycle-week come first;
+// when all have filed, degrades to least-staged + least-used (never drops the article).
+async function resolveByline(desk, lane, cycle) {
   const { buildBylineRoster } = require(path.join(ROOT, 'scripts', 'engine-auditor', 'bayTribuneRoster'));
   const roster = await buildBylineRoster();
   const domains = LANE_DOMAINS[desk] || [];
@@ -202,9 +209,26 @@ async function resolveByline(desk, lane) {
   if (!pool.length) pool = (roster.included || []).filter(j => j.popid && j.beatDomain === 'GENERAL');
   if (!pool.length) return null;   // no eligible byline — caller handles fallback
   const usage = readBylineUsage();
-  pool.sort((a, b) => (usage[a.name] || 0) - (usage[b.name] || 0) || a.name.localeCompare(b.name));
+  const stagedBy = require('./newsroom-fanout').stagedTally(cycle).byByline;
+  pool.sort((a, b) => (stagedBy[a.name] || 0) - (stagedBy[b.name] || 0)
+    || (usage[a.name] || 0) - (usage[b.name] || 0) || a.name.localeCompare(b.name));
   const pick = pool[0];
+  if (stagedBy[pick.name]) log('[budget] all ' + desk + ' bylines already filed c' + cycle + ' — soft fallback: ' + pick.name + ' repeats');
   return { name: pick.name, popid: pick.popid, beatDomain: pick.beatDomain, usageCount: usage[pick.name] || 0 };
+}
+
+// S339 budget gate — call at the top of any wake that can spend writer tokens.
+// Returns true when the wake should stop (cap reached). --no-gate samples never
+// stage, so they don't consume budget and aren't gated.
+function budgetReached(cycle) {
+  if (NO_GATE) return false;
+  const t = require('./newsroom-fanout').stagedTally(cycle);
+  if (t.total >= WEEKLY_CAP) {
+    console.log('[budget] weekly cap reached — ' + t.total + '/' + WEEKLY_CAP + ' staged for c' + cycle + '. Skipping wake, no writer spend.');
+    return true;
+  }
+  log('[budget] ' + t.total + '/' + WEEKLY_CAP + ' staged for c' + cycle);
+  return false;
 }
 
 // Layer 4 — collect the lane's affected citizens (distinct POPIDs, capped) and
@@ -448,6 +472,7 @@ async function runWrite(assign) {
   if (!fs.existsSync(packetPath)) throw new Error('no packet artifact at ' + path.relative(ROOT, packetPath) + ' — run --stage=report first');
   const lane = loadLane(cycle, desk);
   if (!lane) { console.log('[write] no "' + desk + '" lane in desk_signal — skipping (not an error).'); return; }
+  if (budgetReached(cycle)) return;   // S339 submission budget — exit before writer spend
   const angle = readJson(anglePath);
   const packet = readJson(packetPath);
   const persona = personaInfo(personaSlug);
@@ -462,7 +487,7 @@ async function runWrite(assign) {
     ? { name: persona.name, popid: persona.popid, beatDomain: persona.beatDomain }
     : assign
       ? { name: assign.name, popid: assign.popid, beatDomain: assign.beatDomain }
-      : await resolveByline(desk, lane);
+      : await resolveByline(desk, lane, cycle);
   log('byline: ' + (byline ? byline.name + ' (' + byline.popid + (persona ? ', persona' : (assign ? ', fanout ' + byline.beatDomain : ', ' + byline.beatDomain + ', used ' + byline.usageCount)) + ')' : 'NONE — fallback, no self-record'));
 
   const quotes = (packet && packet.quotes) || [];
@@ -570,6 +595,7 @@ async function runWake() {
     console.log('[wake] no "' + DESK + '" lane in desk_signal — skipping (not an error).');
     return;
   }
+  if (budgetReached(cycle)) return;   // S339 submission budget — exit before writer spend
   const route = deskRoute(DESK);
   const draftName = DESK + '_c' + cycle + '_' + OUT_TAG + slug(route.model) + '.md';
   const draftPath = path.join(COMPARE, draftName);
@@ -580,7 +606,7 @@ async function runWake() {
   const wakePersona = personaInfo();
   const byline = wakePersona
     ? { name: wakePersona.name, popid: wakePersona.popid, beatDomain: wakePersona.beatDomain }
-    : await resolveByline(DESK, lane);
+    : await resolveByline(DESK, lane, cycle);
   log('byline: ' + (byline ? byline.name + ' (' + byline.popid + (wakePersona ? ', persona' : ', ' + byline.beatDomain + ', used ' + byline.usageCount) + ')' : 'NONE — fallback, no self-record'));
 
   // 2. LAYER 4 — citizen quote pre-pass (real POPID-linked voices, recorded PRESS)

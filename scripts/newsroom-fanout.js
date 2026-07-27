@@ -74,12 +74,49 @@ function usageHistory() {
   return hist;
 }
 
+// Submission budget (headless plan "What's left" #2, S339): tally gate-cleared
+// articles for a cycle from staged/*.staged.json — the probation wall is the
+// source of truth for "cleared this cycle-week". Returns { total, byByline }.
+// `dir` override is for tests only.
+function stagedTally(cycle, dir) {
+  const stagedDir = dir || path.join(COMPARE, 'staged');
+  const out = { total: 0, byByline: {} };
+  let files = [];
+  try { files = fs.readdirSync(stagedDir).filter(f => f.endsWith('.staged.json')); } catch (_) { return out; }
+  for (const f of files) {
+    let j; try { j = JSON.parse(fs.readFileSync(path.join(stagedDir, f), 'utf8')); } catch (_) { continue; }
+    if (String(j.cycle) !== String(cycle)) continue;
+    out.total++;
+    if (j.byline) out.byByline[j.byline] = (out.byByline[j.byline] || 0) + 1;
+  }
+  return out;
+}
+
+// Rotation preference (S339 soft no-repeat, Mike-direct): a byline who already
+// cleared an article this cycle-week drops behind fresh bylines; ties break by
+// least-recently-worked, then name. SOFT by construction — when every candidate
+// has filed (heavy civic cycle: 12 weekly civic slots vs 9 civic bylines), the
+// sort degrades to least-staged + LRU instead of dropping the article.
+function bylinePreference(stagedBy, hist) {
+  return (a, b) => {
+    const sa = stagedBy[a.name] || 0, sb = stagedBy[b.name] || 0;
+    if (sa !== sb) return sa - sb;
+    const ha = hist[a.name], hb = hist[b.name];
+    const la = ha && ha.last ? ha.last : '0000-00-00';   // never-worked first
+    const lb = hb && hb.last ? hb.last : '0000-00-00';
+    return la.localeCompare(lb) || a.name.localeCompare(b.name);
+  };
+}
+
 async function buildFanout(date) {
   const { buildBylineRoster } = require(path.join(ROOT, 'scripts', 'engine-auditor', 'bayTribuneRoster'));
   const roster = await buildBylineRoster();
   const pool = (roster.included || []).filter(j => j.popid);
   if (!pool.length) throw new Error('byline roster is empty — cannot fan out');
   const hist = usageHistory();
+  const getCurrentCycle = require(path.join(ROOT, 'lib', 'getCurrentCycle'));
+  const cycle = getCurrentCycle({ soft: true, noArgv: true });
+  const stagedBy = cycle === null ? {} : stagedTally(cycle).byByline;
   const personaRev = loadPersonaReverse();
   const assignments = [];
   const shortfalls = [];
@@ -89,12 +126,7 @@ async function buildFanout(date) {
     const domains = DESK_DOMAINS[desk] || [];
     let candidates = pool.filter(j => domains.includes(j.beatDomain));
     if (!candidates.length) candidates = pool.filter(j => j.beatDomain === 'GENERAL');
-    candidates.sort((a, b) => {
-      const ha = hist[a.name], hb = hist[b.name];
-      const la = ha && ha.last ? ha.last : '0000-00-00';   // never-worked first
-      const lb = hb && hb.last ? hb.last : '0000-00-00';
-      return la.localeCompare(lb) || a.name.localeCompare(b.name);
-    });
+    candidates.sort(bylinePreference(stagedBy, hist));
     let taken = 0;
     for (const j of candidates) {
       if (taken >= quota) break;
@@ -141,4 +173,4 @@ if (require.main === module) {
     .catch(e => { console.error('fanout failed: ' + e.message); process.exit(1); });
 }
 
-module.exports = { buildFanout, writeFanout, loadFanout, usageHistory, DAILY_QUOTAS, DESK_DOMAINS };
+module.exports = { buildFanout, writeFanout, loadFanout, usageHistory, stagedTally, bylinePreference, DAILY_QUOTAS, DESK_DOMAINS };

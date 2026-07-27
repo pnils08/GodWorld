@@ -25,6 +25,9 @@
  *   node scripts/cron-desk-writer.js --desk sports
  *   node scripts/cron-desk-writer.js --desk sports --model claude-sonnet-5 --dry-run
  *   node scripts/cron-desk-writer.js --desk civic --artifact-tag task7-baseline
+ *   node scripts/cron-desk-writer.js --desk civic --artifact-tag task7-bound \
+ *     --state-file output/cron-compare/evaluations/task7-bound/treatment.state.md \
+ *     --brief-requirement-file output/cron-compare/evaluations/task7-bound/prior-arc-requirement.json
  *
  * Requires .env: ANTHROPIC_API_KEY
  *
@@ -39,6 +42,11 @@ const https = require('https');
 const { execFileSync } = require('child_process');
 const Anthropic = require('@anthropic-ai/sdk');
 const mags = require('../lib/mags');
+const { checkText: checkCanonNames } = require('./canon-name-check');
+const {
+  normalizePriorArcRequirement,
+  formatWriterRequirement,
+} = require('./priorArcRequirement');
 
 const ROOT = path.join(__dirname, '..');
 const COMPARE_DIR = path.join(ROOT, 'output', 'cron-compare');
@@ -79,6 +87,11 @@ const CALL_TIMEOUT_MS = parseInt(arg('--call-timeout', '180000'), 10);
 // instead of the full 40k world_summary blob (the firehose that made C101 desks
 // self-filter). Additive — absent = the proven full-summary path, unchanged.
 const STATE_FILE = arg('--state-file', null);
+// Evaluation-only composition binding. It is inert unless explicitly supplied
+// alongside an artifact tag and an injected lane state.
+const BRIEF_REQUIREMENT_FILE = arg('--brief-requirement-file', null);
+const STRICT_SOURCE_HYGIENE =
+  process.argv.includes('--strict-source-hygiene');
 
 // Approx USD per 1M tokens [input, output] — for the scorecard's apiCostUsd (estimate).
 const RATES = {
@@ -95,9 +108,10 @@ function costUsd(model, tin, tout) {
 const PERSONA = arg('--persona', null);   // e.g. freelance-firebrand — load an authored reporter's ADVERSARIAL stance (IDENTITY+LENS+RULES) instead of the desk roundup skill (S332 firebrand lane — teeth, not roundup)
 const AGENT_DIR = path.join(ROOT, '.claude', 'agents', PERSONA || (DESK + '-desk'));
 const SKILL_PATH = path.join(AGENT_DIR, PERSONA ? 'IDENTITY.md' : 'SKILL.md');
-// Evaluation-only filename namespace. Additive and inert unless explicitly set;
-// the normal cron never passes it. Keep the model slug LAST so the independent
-// Rhea gate can still infer the writer family from the draft filename.
+// Optional filename namespace. Roster fan-out uses the reporter slug so two
+// same-desk writers cannot overwrite each other; isolated evaluations use
+// their artifact tag for the same reason. Keep the model slug LAST so the
+// independent Rhea gate can still infer the writer family from the filename.
 function normalizeArtifactTag(value) {
   if (value == null || value === '') return null;
   const tag = String(value).trim();
@@ -109,12 +123,16 @@ function normalizeArtifactTag(value) {
 const ARTIFACT_TAG = normalizeArtifactTag(arg('--artifact-tag', null));
 // Output tag (2026-07-24, Mike-direct: samples must accumulate, not overwrite) —
 // persona runs get their own filenames so a desk's roundup sample and a firebrand
-// sample on the same cycle coexist for comparison. Evaluation tags sit before
-// the model slug to preserve the gate's writer-family parser.
-const OUT_SLUG =
-  (PERSONA ? PERSONA + '_' : '') +
-  (ARTIFACT_TAG ? ARTIFACT_TAG + '_' : '') +
-  MODEL_SLUG;
+// sample on the same cycle coexist for comparison. Reporter/evaluation tags sit
+// before the model slug to preserve the gate's writer-family parser.
+function buildOutputSlug(persona, artifactTag, modelSlug) {
+  return (
+    (persona ? persona + '_' : '') +
+    (artifactTag ? artifactTag + '_' : '') +
+    modelSlug
+  );
+}
+const OUT_SLUG = buildOutputSlug(PERSONA, ARTIFACT_TAG, MODEL_SLUG);
 
 const log = {
   info: (...a) => console.log('[INFO]', new Date().toISOString(), ...a),
@@ -151,6 +169,51 @@ function validGlob(pattern) {
 function cap(s, n) {
   s = String(s == null ? '' : s);
   return s.length > n ? s.slice(0, n) + '\n…[truncated ' + (s.length - n) + ' chars]' : s;
+}
+
+function loadEvaluationPriorArcRequirement(filePath) {
+  const abs = resolveInRepo(filePath);
+  const evaluationRoot = path.join(COMPARE_DIR, 'evaluations');
+  if (!abs.startsWith(evaluationRoot + path.sep)) {
+    throw new Error(
+      '--brief-requirement-file must be inside output/cron-compare/evaluations/'
+    );
+  }
+  if (!fs.existsSync(abs) || !fs.statSync(abs).isFile()) {
+    throw new Error('brief requirement not found: ' + filePath);
+  }
+  const raw = fs.readFileSync(abs, 'utf8');
+  if (raw.length > 5000) throw new Error('brief requirement exceeds 5000 characters');
+  try {
+    return normalizePriorArcRequirement(JSON.parse(raw));
+  } catch (error) {
+    throw new Error('invalid brief requirement: ' + error.message);
+  }
+}
+
+function formatStrictSourceHygiene(nameCheck) {
+  const verified = Array.isArray(nameCheck && nameCheck.verified)
+    ? nameCheck.verified
+    : [];
+  const unverified = Array.isArray(nameCheck && nameCheck.unverified)
+    ? nameCheck.unverified
+    : [];
+  return [
+    '=== STRICT SOURCE HYGIENE — EVALUATION OVERRIDE ===',
+    'This stricter rule overrides persona text that permits invented or anonymous sources.',
+    'Use only supplied, ledger-verified citizens as people or quote sources.',
+    'Verified people available in the injected state: ' +
+      (verified.length ? verified.join('; ') : '(none)'),
+    'These candidates are not ledger-verified as people: ' +
+      (unverified.length ? unverified.join('; ') : '(none)'),
+    'Do not use an unverified candidate as a person or official. It may appear ' +
+      'only as a place/organization when the lane explicitly identifies it as one.',
+    'Do not invent anonymous people, quotes, observations, counts, ages, jobs, ' +
+      'relationships, biographies, or scene events.',
+    'Do not put Anonymous/Unnamed descriptors in the Names Index. If no supplied ' +
+      'canon quote fits, use no quote rather than fabricating one.',
+    '=== END STRICT SOURCE HYGIENE ===',
+  ].join('\n');
 }
 
 // ---------------------------------------------------------------------------
@@ -308,6 +371,32 @@ async function main() {
   console.log('model=' + MODEL + ' maxTurns=' + MAX_TURNS + (DRY_RUN ? ' (DRY RUN)' : ''));
 
   if (!fs.existsSync(SKILL_PATH)) throw new Error('no SKILL.md for desk "' + DESK + '" at ' + SKILL_PATH);
+  if (BRIEF_REQUIREMENT_FILE && (!ARTIFACT_TAG || !STATE_FILE)) {
+    throw new Error(
+      '--brief-requirement-file requires --artifact-tag and --state-file'
+    );
+  }
+  if (STRICT_SOURCE_HYGIENE && (!ARTIFACT_TAG || !STATE_FILE)) {
+    throw new Error(
+      '--strict-source-hygiene requires --artifact-tag and --state-file'
+    );
+  }
+  const priorArcRequirement = BRIEF_REQUIREMENT_FILE
+    ? loadEvaluationPriorArcRequirement(BRIEF_REQUIREMENT_FILE)
+    : null;
+  const priorArcBrief = priorArcRequirement
+    ? formatWriterRequirement(priorArcRequirement)
+    : '';
+  const priorArcSystem = priorArcBrief
+    ? priorArcBrief + '\n\n'
+    : '';
+  const priorArcKickoff = priorArcBrief
+    ? priorArcBrief + '\n\n'
+    : '';
+  const priorArcFinal = priorArcBrief
+    ? ' Before output, enforce the mandatory Brief: use its prior-published fact ' +
+      'in the Article body and add the exact PRIOR_PUBLISHED Evidence entry.'
+    : '';
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (PROVIDER === 'openrouter') {
     if (!process.env.OPENROUTER_API_KEY) throw new Error('OPENROUTER_API_KEY not set');
@@ -342,6 +431,16 @@ async function main() {
       worldState = mags.loadWorldState();
     }
   }
+  const strictSourceBlock = STRICT_SOURCE_HYGIENE
+    ? formatStrictSourceHygiene(checkCanonNames(worldState))
+    : '';
+  const strictSourceKickoff = strictSourceBlock
+    ? strictSourceBlock + '\n\n'
+    : '';
+  const strictSourceFinal = strictSourceBlock
+    ? ' Enforce strict source hygiene: use only supplied canon people and quotes; ' +
+      'invent no anonymous source, profile, count, or scene event.'
+    : '';
 
   // Phase 2: when a lane state-file is injected, the reporter works from its OWN
   // beat's signal (pointers + real quotes), not the full-summary firehose — and
@@ -363,13 +462,17 @@ async function main() {
     '(output/desks/' + DESK + '/current/) is STALE — do NOT take cycle facts from it. ' + depthInstr +
     ' When your section is finished, call write_file with the full markdown. Do not ' +
     'stop until you have written the section.\n\n' +
-    '=== YOUR SKILL (.claude/agents/' + DESK + '-desk/SKILL.md) ===\n\n' + skill;
+    priorArcSystem +
+    '=== YOUR SKILL (.claude/agents/' + DESK + '-desk/SKILL.md) ===\n\n' + skill +
+    (strictSourceBlock ? '\n\n' + strictSourceBlock : '');
 
   const kickoff = STATE_FILE
     ? 'Current cycle: ' + cycle + '. Write the ' + DESK + ' section for THIS cycle from YOUR LANE below — ' +
       'build only from the storylines it names and the citizen quotes it supplies; find your own angle. Do not ' +
       'invent events, players, or officials the lane does not name. Use your reporters\' voices per your SKILL. ' +
       'Ignore the stale desk workspace. Research EFFICIENTLY via the pointers — do not re-search the same source.\n\n' +
+      priorArcKickoff +
+      strictSourceKickoff +
       worldState
     : 'Current cycle: ' + cycle + '. Write the ' + DESK + ' section for THIS cycle. The current world state is ' +
       'below — build your section from the EVENTS in it (do not invent events, players, or officials the state ' +
@@ -388,7 +491,8 @@ async function main() {
     log.info('compose-only via OpenRouter (' + MODEL + ') on full injected world state...');
     const composeUser = kickoff +
       '\n\nNow WRITE the full ' + DESK + ' section for cycle ' + cycle + ' — the complete, publish-ready ' +
-      'markdown, built ONLY from the events/names/records in the world state above. Output ONLY the section.';
+      'markdown, built ONLY from the events/names/records in the world state above.' +
+      priorArcFinal + strictSourceFinal + ' Output ONLY the section.';
     const r = await callOpenRouter(system, composeUser);
     usageIn += r.usageIn; usageOut += r.usageOut; turns = 1;
     if (r.text.trim()) toolWriteFile({ path: DESK + '_c' + cycle + '.md', content: r.text });
@@ -429,7 +533,8 @@ async function main() {
       messages: [{ role: 'user', content: kickoff +
         '\n\n## What you gathered while researching\n\n' + digest +
         '\n\nNow WRITE the full ' + DESK + ' section for cycle ' + cycle + ' as your reply — the complete, ' +
-        'publish-ready markdown. Output ONLY the section.' }]
+        'publish-ready markdown.' + priorArcFinal + strictSourceFinal +
+        ' Output ONLY the section.' }]
     }, { timeout: CALL_TIMEOUT_MS, maxRetries: 2 });
     if (fin.usage) { usageIn += fin.usage.input_tokens || 0; usageOut += fin.usage.output_tokens || 0; }
     const finalText = (fin.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n');
@@ -503,4 +608,6 @@ if (require.main === module) {
 
 module.exports = {
   normalizeArtifactTag,
+  buildOutputSlug,
+  formatStrictSourceHygiene,
 };

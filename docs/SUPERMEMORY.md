@@ -1,15 +1,72 @@
-# Supermemory — How Mags Remembers
+---
+title: Supermemory Operations and Retrieval
+created: 2026-03-20
+updated: 2026-07-27
+type: reference
+tags: [infrastructure, memory, supermemory, active]
+sources:
+  - Local `supermemory@supermemory-plugins` v0.0.12 package and hook manifest
+  - Live read-only organization metadata inventory, 2026-07-26
+  - Live read-only retrieval/filter proofs, 2026-07-26 and 2026-07-27
+  - docs/plans/2026-05-22-supermemory-load-bearing-audit.md
+  - docs/research/2026-07-26-supermemory-retrieval-economics.md
+pointers:
+  - "[[STACK]] — service and credential-location overview"
+  - "[[plans/2026-05-22-supermemory-load-bearing-audit]] — open load-bearing test-off"
+  - "[[plans/2026-07-25-notebooklm-source-search-wiring]] Task 8 — corpus and retrieval audit"
+  - "[[adr/0008-speaker-attribution-for-auto-save-writers]] — writer-side attribution invariant"
+---
 
-**Org:** P N ($9/mo, pnils08@gmail.com) | **Admin:** console.supermemory.ai | **Browse:** app.supermemory.ai
-**API base:** `https://api.supermemory.ai` | **Key:** `SUPERMEMORY_CC_API_KEY` in `.env` AND `.bashrc`
+# Supermemory — How GodWorld Uses It
 
-Legacy GodWorld org ($19/mo) is dead — 57k junk memories. Old API key (`sm_atk5...`) hits that org. Current key (`sm_AUt...`) hits PN. PM2 processes cache env at startup — always restart with `--update-env` after key changes.
+**Admin:** `console.supermemory.ai` | **Browse:** `app.supermemory.ai`
+**API base:** `https://api.supermemory.ai` | **Credential:** existing
+`SUPERMEMORY_CC_API_KEY` loader only. Never copy keys or key fragments into this
+document or a command line.
+
+The old GodWorld organization is retired and must not be queried. PM2 processes
+cache their environment; an explicitly approved credential rotation requires
+`--update-env` when the affected process is restarted.
+
+## Current truth snapshot — 2026-07-27
+
+- The active Claude plugin is the renamed `supermemory` v0.0.12 package. The
+  old `claude-supermemory` plugin entry is disabled.
+- Project configuration maps repository/project memory to `super-memory` and
+  retains `mags` as a legacy personal read lane. Neither mapping grants the
+  plugin automatic access to `bay-tribune` or `world-data`.
+- SessionStart context and reasoned recall are active. The Stop hook is loaded
+  but writes nothing: effective global settings are
+  `signalExtraction=true` and `signalKeywords=[]`.
+- Supermemory is a derived retrieval layer. Sheets remain authority for city
+  state; published Bay Tribune material is the paper-of-record. No Supermemory
+  container independently creates canon.
+- `bay-tribune` is useful but not a pure published corpus. Its
+  `drive-archive` slice contains both genuine publications and engineering,
+  directive, audit, and simulation-revealing documents. Published-canon
+  retrieval must filter provenance.
+- Broad `world-data` semantic search currently returns no useful hits for
+  measured queries. The data lives under the `wd-*` domain tags; consumers must
+  search those tags directly or fan out across them.
+- The older load-bearing audit completed its container dispositions and
+  speaker-attribution rule. Its `mags` + `super-memory` test-off and final
+  retirement verdict remain open.
 
 ---
 
-## The Containers (updated S264)
+## The Containers
 
-**Eight active + one legacy.** Active: `mags`, `bay-tribune`, `world-data`, `super-memory`, `mara`, `citizen-pages` (S262 — citizen-loop per-citizen narrative store), `session-logs` (S283 — per-terminal session work logs bridged from claude-mem; umbrella tag + `sl-<terminal>` specific, mirroring the citizen-pages pattern; **also a deliberate remember-store (S300, Mike-direct): any terminal can `npx supermemory remember/add --tag sl-<terminal>` ANY time, not only at session-end — Mike rarely session-ends the non-research-build terminals, so don't treat the close bridge as the only write path. Boot surfaces the container per terminal via the hook. Usage model reframed S313 (Mike-direct): DURABLE TERMINAL FACTS first, not a claude-mem duplicate — claude-mem owns narrative what-happened; sl-<t> holds the facts a future boot needs (`--static` for permanent ones). Searches are near-free on the flat plan — prefer them over model-side re-derivation. The startup hook now runs ONE boot recall per session: sl-<terminal> searched with the NEXT-line topic, top 3 dated hits ≥0.6 similarity injected as verify-against-live-state background (fail-open).**), `gemini` (S264 — the `agy` assistant's own session memory; agy **writes here only**, reads `mags`/`bay-tribune`/`world-data` for depth via `.gemini/search-all.sh`, never writes to them — write-isolation prevents the cross-container contamination that hit `mags`/`bay-tribune` in S156). Legacy: `sm_project_godworld` (57k junk memories on the old GodWorld org — never read, never written to, left in place until the old org is fully deprecated).
+**Eight conceptual active containers plus domain and per-entity tags.** The
+active container roles are `mags`, `bay-tribune`, `world-data`,
+`super-memory`, `mara`, `citizen-pages`, `session-logs`, and `gemini`.
+`wd-*`, `cp-POP-*`, and `sl-*` tags are queryable domain/entity slices, not
+additional canon authorities.
+
+The 2026-07-26 read-only inventory saw 4,306 organization documents. Primary
+tag counts were: `world-data` 1,509; `bay-tribune` 1,155; `mags` 785;
+`citizen-pages` 420; `super-memory` 191; `mara` 147; `session-logs` 37; and
+`gemini` 1. Counts describe stored documents, including extracted-memory
+records; they are not counts of unique published artifacts.
 
 ### `mags` — The Deliberate Brain
 
@@ -17,13 +74,18 @@ Mags' curated memory. Only intentional saves go here. This is how she carries fo
 
 **What goes in:** Editorial decisions, journal entries, things Mike and Mags discuss, EIC thinking, reasoning behind project decisions, the WHY behind the WHAT. Saves should capture context that claude-mem doesn't — the conversation, the trade-offs, the human reasoning.
 
-**What does NOT go in:** Session-end auto-saves, raw tool output, "Mags confirms X" narration, build status updates, grep results, git status. The old org had 57k junk memories from auto-capture. The mags container got polluted again with session-end narration that said "Mags confirms E89 publishes tonight" instead of distilling actual decisions. That's why auto-saves are being moved to `super-memory`.
+**What does NOT go in:** Session-end auto-saves, raw tool output, "Mags confirms
+X" narration, build status updates, grep results, or git status. Automatic
+capture was neutralized; it was not moved to another container.
 
 **S221+ cleanup (2026-05-22):** The Stop-hook writer had been quietly auto-saving every conversation turn as `session_turn` docs to this container — 65 docs accumulated. Supermemory's server-side extraction collapsed both speakers (Mike + Mags) into Mags' first-person voice ("Margaret Corliss feels...", "Mags is frustrated...") because the routing assumed the personal container's owner was speaking. Mike's frustrations became Mags' self-image; the journal scaffolding loaded them as her conscience. All 65 docs deleted; writer hook neutralized (see §Plugin Config / Hooks). Final decision on the hook's fate runs through `infrastructure.5` Pass 3 + `governance.12` leverage design.
 
-**Who reads:** Mags at session boot (automatic), Discord bot on every message, Moltbook heartbeat.
-**Who writes:** `/save-to-mags` only — manual, deliberate. Discord bot. Moltbook.
-**Plugin role:** `personalContainerTag` in config.
+**Who reads:** the plugin's legacy-personal context/recall lane and the Discord
+bot.
+**Who writes:** deliberate `/save-to-mags` operations and explicitly
+speaker-attributed Discord/reflection writers.
+**Plugin role:** `personalContainerTag` is a legacy read override in v0.0.12,
+not the repository write destination.
 
 **When to save:** At natural decision points — when Mike and Mags agree on a direction, when a plan is finalized, when something fails and the reason is understood, when editorial judgment is applied. Not at session end. Not automatically.
 
@@ -47,24 +109,26 @@ The published world. Oakland's living history through journalism.
 
 **What does NOT go in:** Architecture docs, engine bugs, session work, code decisions, anything that reveals the simulation is a simulation. Agents and the Discord bot read this container. If it contains "editionIntake.js is broken" or "GodWorld is a city simulation engine," the fourth wall breaks.
 
-**Who reads:** Mags at session boot (automatic), Discord bot (searches both `mags` + `bay-tribune`).
+**Who reads:** canon-search/source-search consumers, the Discord bot, and
+explicit CLI/MCP queries. It is not an automatic plugin boot container.
 **Who writes:** Edition ingest script (`node scripts/ingestEdition.js`), reference file pushes.
-**Plugin role:** `repoContainerTag` in config.
+**Plugin role:** none. `repoContainerTag` is `super-memory`.
 
 **How to use:** Search `bay-tribune` when you need current context about Oakland — what's been published about OARI, who was quoted in Fruitvale, what the A's roster looks like. Semantic search works: query "OARI dispatch" and get back all relevant chunks across editions.
 
-**Contents (last audited S189 — Phase 1 of bay-tribune unified ingest rebuild plan):**
+**Contents (metadata audit 2026-07-26):**
 
 | Category | Description |
 |---|---|
-| Editions E83-E92 | 10 cycle editions, chunked by Supermemory |
-| Supplementals C83-C92 | Per-cycle deep dives — civic, sports, business, education, demographics |
-| Dispatches | Standalone single-piece dispatches (C92 "KONO Second Song" canonized S188) |
-| Interview articles + transcripts | Council/mayor conversations (Mayor Santana C92 OARI canonized S178) |
-| Wiki entities | Per-citizen, per-storyline, per-business, per-cultural records via `ingestEditionWiki.js` |
-| Rosters + canon corrections | A's roster, legacy roster, post-publish corrigenda |
+| `edition-ingest` | 55 source documents; the clean published-first provenance lane |
+| `drive-archive` | 24 mixed records: some genuine publications/references, some non-publication material |
+| `mara-reference` | 1 reference record |
+| Extracted/direct memories | The balance of the 1,155 documents; many inherit useful memory text but incomplete list metadata |
 
-**Total per S189 Phase 1 audit:** 175 docs across the above categories. Disposition map for 22 unknown/published-other docs + 16-tag taxonomy in `[[plans/2026-04-30-bay-tribune-unified-ingest-rebuild]]`. Phase 2-7 ON HOLD pending SMFS pilot — see §Active Rebuilds.
+Do not delete by `drive-archive` tag: the slice is mixed. The Task 8 sample
+flagged 11 of 25 reviewed records for non-publication signals, while one sampled
+`drive-archive` record was a genuine Edition. Cleanup requires per-record
+adjudication.
 
 **Ingest after each edition:** `node scripts/ingestEdition.js <edition-file>`. Wiki ingest after publish: `node scripts/ingestEditionWiki.js`. Manual canon: `/save-to-bay-tribune`.
 
@@ -78,25 +142,32 @@ The simulation's current state. Structured data from the engine, searchable by p
 
 **What does NOT go in:** Articles, journalism, quotes, opinions — that's bay-tribune. Engine internals, code, debug info — that breaks the fourth wall.
 
-**Who reads:** Mags (direct API search for angle briefs), future desk agents (Phase 21.2). Mike on claude.ai via MCP.
-**Who writes:** Direct API ingest after each cycle run. Script: `buildWorldStatePacket.js` (Phase 32.2, not built yet — S131 test ingest was manual).
+**Who reads:** MCP domain lookups, explicit CLI/API searches, and agents that
+need current structured city state.
+**Who writes:** the per-domain card builders
+(`buildCitizenCards.js`, `buildBusinessCards.js`, `buildFaithCards.js`,
+`buildCulturalCards.js`, `buildNeighborhoodCards.js`,
+`buildInitiativeCards.js`, and `ingestPlayerTrueSource.js`) plus approved
+post-publish summary/snapshot ingestion.
 
 **Contents (post-S183 unified ingest + S184 female-balance +150):**
 
 | Tag | Count | Card type |
 |---|---|---|
-| `wd-citizens` | 836 | One per Simulation_Ledger row — POPID, name, age, neighborhood, role, tier, career, income, family, displacement risk |
-| `wd-business` | 52 | One per business — BIZID, name, sector, neighborhood, employees, revenue, key personnel |
+| `wd-citizens` | 926 | One per Simulation_Ledger row — POPID, name, age, neighborhood, role, tier, career, income, family, displacement risk |
+| `wd-business` | 253 | One per stored business-card document/version |
 | `wd-faith` | 16 | One per faith org — name, tradition, neighborhood, leader, congregation size |
-| `wd-cultural` | 39 | One per cultural figure — POPID/CUL-ID, fame category, domain, neighborhood |
+| `wd-cultural` | 102 | One per stored cultural-card document/version |
 | `wd-neighborhood` | 17 | One per neighborhood — gentrification, crime/noise/nightlife, sentiment, displacement, income/rent, demographics |
 | `wd-initiative` | 6 | One per initiative — INIT-ID, state, phase, neighborhoods, milestones |
-| `wd-player-truesource` | 27 | One per player — A's + Bulls + opponents |
-| `wd-summary` | per cycle | Per-cycle world summary (tag added S184) |
-| `wd-snapshot` | per cycle | One-line world-state snapshot (`Snapshot: Cycle {XX} \| Pop … \| Illness …`) — cheap "where are we now" anchor, grep-extracted from the world summary by `/post-publish` Step 2c (S313) |
-| **Total** | **~843** | 100% domain-tagged, 0 orphans |
+| `wd-player-truesource` | 180 | Stored player truesource documents/versions |
+| `wd-summary` | 9 | Per-cycle world summaries present in the audited organization |
+| **Total** | **1,509** | Every audited `world-data` record carried one of the listed `wd-*` domain tags |
 
-Per-domain MCP retrieval tools (M1-M4 shipped S183) handle the `mode='hybrid'` + `threshold=0.3` override automatically — see §Search/save matrix below. Wipe primitive: per-domain card writers handle ID-content-scoped DELETE before re-write (e.g., `buildCitizenCards.js --apply` wipes by POPID then re-ingests).
+Counts are stored-document counts, not guaranteed unique entity counts; versioned
+or repeated ingests explain why some exceed current ledger entity counts. A
+20-record newest/oldest sample found no publication, transcript, or directive
+signals. Per-domain writers retain their ID-scoped replacement rules.
 
 **How to search — keep queries simple and specific:**
 
@@ -118,28 +189,38 @@ POPIDs and BIZ_IDs are engine trackers — they don't search well semantically. 
 | `"electrician in Temescal with season tickets"` | Too specific across containers. Season tickets are in bay-tribune, not world-data |
 
 **The right workflow for complex lookups:**
-1. Search world-data with a simple query: `"electricians"` → find the one in Temescal
+1. Search the relevant domain tag with a simple query:
+   `wd-citizens` for `"electricians"` → find the one in Temescal
 2. Get the citizen name from the result
-3. Search bay-tribune with that name: `"Kevin Kim"` → find his quotes, appearances, story arcs
+3. Search published `bay-tribune` provenance with that name → find quotes,
+   appearances, and story arcs
 4. Combine both into an angle brief
 
-Two simple searches beat one complex query. World-data gives you who they ARE. Bay-tribune gives you what they've SAID and DONE.
+Two scoped searches beat one broad query. Domain-tagged world data gives who
+they are; published Tribune provenance gives what the paper has established.
 
 ---
 
-### `super-memory` — The Junk Drawer
+### `super-memory` — Project Memory / Legacy Junk Drawer
 
-Automatic captures and quick saves. May have useful conversation details. Searchable but not curated.
+The plugin's explicit repository/project memory lane. Its historical contents
+are mixed and should not be treated as canon or as a clean session ledger.
 
-**What goes in:** Session-end auto-saves (Stop hook), `/super-save` output, conversation details, codebase indexes, anything that doesn't warrant a deliberate `/save-to-mags`. Think of it as the "might be useful later" pile.
+**What goes in now:** explicit `/supermemory-save` project saves, plugin
+codebase indexing, and direct Moltbook heartbeat records. Automatic Stop-hook
+capture is neutralized and writes nothing.
 
-**What does NOT go in:** Nothing is forbidden — it's the junk drawer. But don't search it expecting clean answers. Search mags or bay-tribune first.
+**What does NOT go in:** canon, city-state cards, citizen reflections, or
+unattributed automatic conversation summaries.
 
-**Who reads:** Nobody automatically. Search manually when you need conversation context that claude-mem missed.
-**Who writes:** Stop hook (session-end auto-save), `/super-save`, codebase indexing.
-**Plugin role:** `repoContainerTag` in config — so `/super-save` writes here by default.
+**Who reads:** plugin SessionStart/reasoned-recall paths and explicit
+`/supermemory-search --repo` searches.
+**Who writes:** deliberate plugin saves/indexing and the direct Moltbook writer.
+**Plugin role:** `repoContainerTag`, the canonical plugin write destination.
 
-**Why this exists:** Session-end saves used to go to `mags` and polluted it with "Mags confirms X" narration. Moving auto-saves here keeps `mags` clean for deliberate knowledge while still preserving the conversation record somewhere searchable.
+The older audit found no unique reader that justified calling this container a
+load-bearing session record; its final retire/keep decision still depends on the
+`infrastructure.5` test-off session.
 
 ---
 
@@ -149,7 +230,10 @@ Automatic captures and quick saves. May have useful conversation details. Search
 **Who writes:** Mara (claude.ai), one-time reference file pushes from Claude Code
 **Purpose:** Persistent reference data for edition audits. Mara's knowledge sits above the simulation — she knows it's a simulation. Her container is hers.
 
-**Isolation:** NOT in the Claude Code plugin config. The plugin only sees `mags` and `bay-tribune`. Mags cannot read or write `mara`. Only direct API calls or Mara's own MCP connection touch this container.
+**Isolation:** NOT in the Claude Code plugin config. The plugin's configured
+read set is `super-memory` plus legacy `mags`; neither route grants access to
+`mara`. Only an explicit direct API consumer or Mara's own MCP connection
+touches this container.
 
 **Contents:**
 
@@ -183,30 +267,32 @@ Per-citizen accreting reflection memory for the citizen-loop (plan `2026-06-04-m
 
 ---
 
-## Search/save matrix (S184)
+## Search/save matrix
 
-**The at-a-glance reference for "I need X — what tool, what tag, what container?"** Skills and agents cite this matrix instead of duplicating Supermemory guidance inline. Updated 2026-04-28 (S184). Reflects post-S183 world-data tag scheme (`wd-citizens`, `wd-business`, `wd-faith`, `wd-cultural`, `wd-neighborhood`, `wd-initiative`, `wd-player-truesource`, `wd-summary`) + M1-M4 retrieval tools.
+**The at-a-glance reference for "I need X — what tool, what tag, what
+container?"** Updated 2026-07-27. Prefer the narrowest domain tag and require
+published provenance for canon searches.
 
 ### Read operations
 
 | Use case | Container/tag | Primary tool | CLI fallback | Notes |
 |---|---|---|---|---|
-| Citizen by name (profile + canon history) | `world-data` + `bay-tribune` | MCP `lookup_citizen(name)` | `npx supermemory search "name" --tag world-data` and `--tag bay-tribune` | MCP combines both calls into one response |
-| Business by name | `wd-business` | MCP `lookup_business(name)` | `npx supermemory search "name" --tag wd-business --mode hybrid --threshold 0.3` | 52 cards in container |
+| Citizen by name (profile + canon history) | `wd-citizens` + published `bay-tribune` | MCP `lookup_citizen(name)` | Search `wd-citizens`; use MCP `search_canon` for publication history | Avoid broad `world-data`; canon lane filters `source=edition-ingest` |
+| Business by name | `wd-business` | MCP `lookup_business(name)` | `npx supermemory search "name" --tag wd-business --mode hybrid --threshold 0.3` | Domain-scoped |
 | Faith org by name | `wd-faith` | MCP `lookup_faith_org(name)` | `npx supermemory search "name" --tag wd-faith --mode hybrid --threshold 0.3` | 16 cards |
-| Cultural figure by name | `wd-cultural` | MCP `lookup_cultural(name)` | `npx supermemory search "name" --tag wd-cultural --mode hybrid --threshold 0.3` | 39 cards. May coexist with a `wd-citizens` card for the same POPID — use `lookup_citizen` for citizen profile, `lookup_cultural` for fame/domain profile |
-| Neighborhood state card | `wd-neighborhood` | MCP `get_neighborhood_state(name)` | `npx supermemory search "name" --tag wd-neighborhood --mode hybrid --threshold 0.3` | 17 cards. Narrower than `get_neighborhood` (which queries broad world-data and mixes in unrelated mentions) |
-| Initiative by name (state + milestones) | `world-data` (broad) | MCP `lookup_initiative(name)` | `npx supermemory search "name initiative" --tag wd-initiative` | tool currently queries broad world-data; `wd-initiative` tag exists for direct CLI filtering |
-| Council member by district/name | `world-data` (broad) | MCP `get_council_member(district)` | `npx supermemory search "council district" --tag world-data` | |
+| Cultural figure by name | `wd-cultural` | MCP `lookup_cultural(name)` | `npx supermemory search "name" --tag wd-cultural --mode hybrid --threshold 0.3` | May coexist with a `wd-citizens` card for the same POPID |
+| Neighborhood state card | `wd-neighborhood` | MCP `get_neighborhood_state(name)` | `npx supermemory search "name" --tag wd-neighborhood --mode hybrid --threshold 0.3` | 17 cards; this is also the backing domain for `get_neighborhood` after the 2026-07-27 retrieval hardening |
+| Initiative by name (state + milestones) | local tracker, then `wd-initiative` | MCP `lookup_initiative(name)` | `npx supermemory search "name initiative" --tag wd-initiative` | Local tracker is authoritative; Supermemory is fallback |
+| Council member by district/name | local truesource, then `wd-citizens` | MCP `get_council_member(district)` | `npx supermemory search "council district" --tag wd-citizens` | Local truesource is authoritative |
 | A's roster | local file | MCP `get_roster("as")` | read `output/desk-packets/truesource_reference.json` | not Supermemory-backed |
-| Canon by topic (free text) | `bay-tribune` | MCP `search_canon(query)` | `npx supermemory search "topic" --tag bay-tribune` | published edition content |
-| World state by topic (free text) | `world-data` (broad) | MCP `search_world(query)` | `npx supermemory search "topic" --tag world-data` | for narrower domain queries use the `wd-<domain>` MCP tools above |
+| Canon by topic (free text) | `bay-tribune`, filtered | MCP `search_canon(query)` | `npx supermemory search "topic" --tag bay-tribune --mode hybrid --threshold 0.3 --filter '{"AND":[{"key":"source","value":"edition-ingest"}]}' --json` | Published-first lane; mixed archive references excluded |
+| World state by topic (free text) | fan-out across `wd-*` | MCP `search_world(query)` | Search the relevant `wd-<domain>` tag | Broad `world-data` measured empty |
 | Articles by topic | dashboard API | MCP `search_articles(query)` | `curl localhost:3001/api/search/articles?q=topic` | |
 | Coverage ratings for cycle | sheets via dashboard | MCP `get_domain_ratings(cycle)` | read Edition_Coverage_Ratings sheet | |
 | World summary by cycle | `world-data` + `wd-summary` | none yet (use CLI) | `npx supermemory search "cycle N summary" --tag wd-summary` | tag added S184; future MCP tool candidate `get_world_summary(cycle)` |
-| World-state one-liner ("where are we now") | `world-data` + `wd-snapshot` | none yet (use CLI) | `npx supermemory search "cycle N snapshot" --tag wd-snapshot --mode hybrid --threshold 0.3` | tag added S313; one compact memory per cycle — prefer over `wd-summary` when a full chunk is overkill |
-| Mags' deliberate brain | `mags` | plugin only | `super-search --user "query"` (or `--both` for mags + super-memory) | conversation context, decisions, reasoning |
-| Junk drawer / auto-saves | `super-memory` | plugin only | `super-search --repo "query"` | session-end auto-saves, `/super-save` output |
+| World-state one-liner ("where are we now") | planned `world-data` + `wd-snapshot` | none yet | — | Writer target added S313, but the live tag had 0 documents on 2026-07-27; it is omitted from MCP fan-out until populated |
+| Mags' deliberate brain | `mags` | plugin only | `/supermemory-search --user "query"` | deliberate context and reasoning |
+| Project memory | `super-memory` | plugin only | `/supermemory-search --repo "query"` | explicit saves/indexes; Stop auto-capture is off |
 
 ### Write operations
 
@@ -222,36 +308,48 @@ Per-citizen accreting reflection memory for the citizen-loop (plan `2026-06-04-m
 | Initiative card | `world-data` + `wd-initiative` | `node scripts/buildInitiativeCards.js --apply` | — | INIT-ID-content-scoped wipe |
 | Player truesource | `world-data` + `wd-player-truesource` | `node scripts/ingestPlayerTrueSource.js --apply` | — | truesource-header-scoped wipe |
 | World summary (per-cycle) | `world-data` + `wd-summary` | post-publish skill via API | `curl /v3/documents -d '{"containerTags":["world-data","wd-summary"]...}'` | tag pair added S184 |
-| World-state snapshot one-liner (per-cycle) | `world-data` + `wd-snapshot` | post-publish Step 2c via API | `curl /v3/documents -d '{"containerTags":["world-data","wd-snapshot"]...}'` | S313 — content is the `Snapshot: Cycle {XX} \| …` line grep-extracted from `world_summary_c{XX}.md` (writer v1.2.0); never hand-composed |
-| Quick conversation note | `super-memory` | skill `/super-save` | plugin handles | junk drawer; not for canon or deliberate decisions |
-| Session auto-save | `super-memory` | Stop hook (automatic) | — | runs on session end |
+| World-state snapshot one-liner (per-cycle) | planned `world-data` + `wd-snapshot` | post-publish Step 2c via API | — | Writer target exists, but no live documents were present on 2026-07-27; first approved write must be verified before this becomes a read lane |
+| Quick project note | `super-memory` | skill `/supermemory-save` | plugin handles | not canon and not a Mags identity save |
+| Session auto-save | none | disabled | — | Stop hook is loaded but effective keyword set is empty |
 
 ### Container quick reference
 
 | Container | Role | Primary readers | Primary writers |
 |---|---|---|---|
-| `mags` | Deliberate brain | Mags boot, Discord bot, Moltbook | `/save-to-mags`, Discord bot, Moltbook |
-| `bay-tribune` | Published canon | Mags boot, Discord bot, agents | `ingestEdition.js`, `/save-to-bay-tribune` |
-| `world-data` | City state — entity cards + per-cycle summaries | MCP tools (`lookup_*`, `search_world`, `get_*`) | per-domain writers (`build*Cards.js`, `ingestPlayerTrueSource.js`), post-publish |
-| `super-memory` | Junk drawer + auto-saves | manual `super-search --repo` | Stop hook, `/super-save` |
+| `mags` | Deliberate personal/editorial memory | plugin legacy-personal recall, Discord bot | `/save-to-mags`, attributed Discord/reflection writers |
+| `bay-tribune` | Mixed archive; filtered published lane is paper-of-record retrieval | source-search, Discord bot, agents | `ingestEdition.js`, approved publication ingest |
+| `world-data` | Derived city-state retrieval, partitioned by `wd-*` | MCP domain tools | per-domain writers, approved post-publish summary |
+| `super-memory` | Project memory with mixed historical contents | plugin repo recall | explicit plugin saves/indexing, Moltbook heartbeat |
 | `mara` | Mara's private | Mara only (claude.ai) | Mara only |
 | `citizen-pages` | Per-citizen narrative store (citizen-loop) | citizen-loop bot (wake), editions | `lib/citizenPage.js` (wake-side, direct API) |
+| `session-logs` | Durable terminal facts + session-summary mirror | terminal boot/search lanes | `sessionSummaryToSupermemory.js`, deliberate `sl-*` saves |
+| `gemini` | Isolated Gemini/agy memory | Gemini/agy | Gemini/agy only |
 
-### Retrieval mode override (S183 finding)
+### Retrieval mode and tag routing
 
-For short structured cards (entity cards under `wd-*` tags), default CLI search params (`mode='memories'`, `threshold=0.6`) return zero hits. **Use:** `--mode hybrid --threshold 0.3`.
+The S183 blanket statement that every short card requires
+`hybrid`/0.3 is no longer current. S334 remeasurement found `wd-citizens`
+returned results both with defaults and with `hybrid`/0.3. The live failure is
+the broad `world-data` tag, which returned zero on measured real queries while
+the corresponding `wd-*` tag returned data.
 
-Empirical (S183 M1-M4 commit `c77cb37`): Masjid Al-Islam `wd-faith` query returned 0 results with defaults vs similarity 0.72 with hybrid+0.3. The M1-M4 MCP tools handle this internally; CLI fallbacks must override explicitly.
+Current rule: **domain selection first**, then `hybrid`/0.3 when broader recall
+is useful. A low threshold cannot repair a query sent to the wrong tag.
 
 ---
 
-## User Profile Pipeline (S221 — third auto-memory layer)
+## User Profile Pipeline (historical incident and current guard)
 
-The plugin runs two paired hooks that together form the **identity-layer auto-memory loop** — the third auto-memory layer alongside claude-mem (what-happened) and autodream (claude-mem consolidation), and the only one that lands as **persistent identity at every boot**. Documented S221 after the engineer-Mags contamination case revealed the pipeline had been operating undocumented for months. Leverage design pending in `[[archive/plans/2026-05-13-supermemory-profile-leverage]]` (governance.12).
+The S221 incident came from an older plugin posture whose Stop writer fed
+conversation transcripts into the `mags` profile lane. That automatic
+identity-layer loop is **not active now**. The history remains here because it
+explains the capture guard and ADR-0008.
 
 ### Writer — Stop hook (`summary-hook.cjs`)
 
-**Neutralized 2026-05-22 (S221+).** Hook is loaded but returns null before writing — see §Plugin Config / Hooks for the mechanism + reversal. The description below reflects the hook's behavior when active, retained for the leverage design + future scope decision.
+**Neutralized 2026-05-22 (S221+), reverified on v0.0.12
+2026-07-27.** The hook is loaded but returns before writing. The description
+below is the historical S221 write shape, not current behavior.
 
 Fires **after every assistant turn** (Claude Code's Stop event — not just at session end). One doc per Claude Code session, identified by `customId = <session-UUID>`. Each turn **overwrites** the existing doc rather than appending a new one.
 
@@ -272,9 +370,14 @@ After the doc lands, Supermemory's profile system extracts memories from the doc
 
 The static/dynamic promotion rule is server-side and not directly visible in the plugin code. Empirically: heavy-signal third-person identity claims promote to static; transient observations stay dynamic.
 
-### Reader — SessionStart hook (`context-hook.cjs`)
+### Readers — SessionStart and reasoned recall
 
-At every boot, calls `/v4/profile` for both `mags` and `bay-tribune`. Returns `{ static: [...], dynamic: [...] }`. Injects them into the SessionStart context as a **Personal Memories** block — auto-loaded before the first user message, treated by the model as facts about the user/project.
+The v0.0.12 plugin reads its repository container (`super-memory`) and legacy
+personal lane (`mags`) according to the configured read set. SessionStart can
+inject profile context; UserPromptSubmit performs reasoned recall when the
+current message warrants it; PreToolUse approves the plugin's own recall/search
+operations. `bay-tribune` and `world-data` are explicit GodWorld retrieval
+lanes, not automatic plugin profile containers.
 
 ### Why this matters
 
@@ -313,12 +416,17 @@ Phase 2 of `[[archive/plans/2026-05-13-supermemory-profile-leverage]]` (governan
 
 ## How It Works in Practice
 
-### Session Boot (automatic)
-The plugin calls `/v4/profile` for both `mags` and `bay-tribune`. Returns static facts + recent dynamic memories. Injected into context before the first message. Full pipeline mechanics documented in §User Profile Pipeline.
+### Session Boot and prompt recall (automatic)
+The plugin can load profile context from `super-memory` plus the legacy `mags`
+read lane at SessionStart. Before later user prompts, reasoned recall decides
+whether a scoped memory search is useful. Treat recalled material as background
+to verify against repository and canon authorities.
 
 ### Terminal Tagging (S135)
 
-When saving to any container, prefix with the terminal name: `[research/build]`, `[engine/sheet]`, `[media]`, `[civic]`. This enables filtering saves by source terminal without fragmenting containers into per-terminal silos. The 5 containers stay organized by WHAT the data is — terminal tags track WHERE it came from.
+For deliberate terminal memory, use the terminal's `sl-<terminal>` tag and keep
+the fact attributable. Do not simulate terminal isolation by adding prose
+prefixes to canon or city-state containers.
 
 ### During a Session
 - **Need past context?** Search `mags`: "What happened with the ledger recovery?" "What did we decide about citizen routing?"
@@ -326,7 +434,9 @@ When saving to any container, prefix with the terminal name: `[research/build]`,
 - **Don't guess. Search.**
 
 ### Session End (automatic)
-~~The Stop hook saves a session summary to `mags`.~~ **Neutralized 2026-05-22** — see §Plugin Config / Hooks. Boot profile now pulls only from deliberate `/save-to-mags` entries, nightly Discord reflections, Moltbook records, and the static User Profile slice (pre-S221 canonical + S221 protective writes). Cross-session conversational recall during the neutralization window goes through claude-mem (build observations) + the journal (Mags' conscience scaffolding).
+The plugin Stop hook writes nothing. Claude-mem owns narrative work history;
+`sessionSummaryToSupermemory.js` may mirror an already-produced structured
+session summary into `session-logs` as a separate best-effort close step.
 
 ### After Publishing an Edition
 Run `node scripts/ingestEdition.js <edition-file>` to add the edition to `bay-tribune`. This is what makes the archive searchable.
@@ -374,7 +484,7 @@ npx supermemory search "TERM" --tag bay-tribune --json
 
 ---
 
-## Active Rebuilds (S189)
+## Blocked Rebuild (S189)
 
 **Bay-tribune unified ingest rebuild — plan drafted, Phase 2-7 ON HOLD.** Sibling to the S183 wd-rebuild that refactored world-data into per-domain `wd-*` tag scheme. Same shape applied to bay-tribune: 16-tag taxonomy (`bt-edition`, `bt-supplemental`, `bt-dispatch`, `bt-interview-article`, `bt-interview-transcript`, `bt-wiki-citizen`, `bt-wiki-storyline`, `bt-wiki-continuity`, `bt-wiki-cultural`, `bt-wiki-business`, `bt-roster`, `bt-game-result`, `bt-canon-correction`, `bt-archive-essay`, `bt-podcast-transcript`, `bt-legacy-roster` + parent `bay-tribune`), customId-as-slug discipline, DELETE-by-customId wipe primitive. Motivated by Perkins&Will scrub friction (S185-S186) — current chunked layer has no targeted-replacement primitive. After rebuild, scrub becomes `wipeBayTribuneByCustomId <slug-prefix>` + re-ingest.
 
@@ -426,9 +536,16 @@ File: `.claude/.supermemory-claude/config.json` (gitignored)
 }
 ```
 
-`personalContainerTag` → `mags` (deliberate brain). `repoContainerTag` → `super-memory` (junk drawer). This means `/super-save` writes to `super-memory` by default, keeping `mags` clean. `/super-search --user` hits `mags`, `--repo` hits `super-memory`. Use `/save-to-mags` for deliberate brain saves. Use `/save-to-bay-tribune` for canon saves.
+`repoContainerTag` → `super-memory`, the canonical plugin write destination.
+`personalContainerTag` → `mags`, retained as a legacy personal read lane. Use
+`/supermemory-save` for deliberate project memory, `/save-to-mags` for
+deliberate Mags/editorial memory, and the publication pipeline—not a generic
+memory skill—for Bay Tribune canon.
 
-**Plugin version: `supermemory` v0.0.9** (renamed from `claude-supermemory`, migrated S278 per official README migration path — marketplace refresh → install `supermemory@supermemory-plugins` → uninstall `claude-supermemory@supermemory-plugins --keep-data`; user-scope now, was project-scope; cloud client, config/API key untouched). Old `claude-supermemory` v0.0.4 cache retained on disk, not removed by uninstall.
+**Plugin version: `supermemory` v0.0.12.** The renamed plugin is active; the old
+`claude-supermemory` plugin entry is disabled. Upstream's unified
+repository-container behavior is available, while the explicit
+`repoContainerTag` override remains the canonical write destination.
 
 **Source attribution (new in 0.0.4):** the writer scripts (`add-memory.cjs`, `save-project-memory.cjs`) now stamp `sm_source: "claude-code"` metadata on every memory they write. This distinguishes plugin-written memories from records written by other paths (Mara's connector, the curl `/v4` API used for multi-tag `world-data` writes). Useful for provenance filtering; no action required — additive, doesn't change read/search behavior.
 
@@ -436,20 +553,23 @@ File: `.claude/.supermemory-claude/config.json` (gitignored)
 
 | Hook | When | Container |
 |------|------|-----------|
-| **SessionStart** | Every boot | Reads `mags` + `bay-tribune` profiles via `context-hook.cjs`. See §User Profile Pipeline. **Still active** — disposition deferred to `infrastructure.5` Pass 3. |
+| **SessionStart** | Every boot | Loads configured repository/profile context via `context-hook.cjs`; current read set includes `super-memory` and legacy `mags`, not `bay-tribune` |
+| **UserPromptSubmit** | Before user-turn handling | `recall-hook.cjs` performs reasoned recall only when useful |
+| **PreToolUse** | Before `Skill` or `Bash` recall/search | `recall-approve.cjs` handles plugin recall approval |
 | **Stop** | ~~**Every assistant turn**~~ — **NEUTRALIZED 2026-05-22 (S221+)** | Writer hook is loaded by Claude Code but exits silently every fire. Mechanism: `~/.supermemory-claude/settings.json` sets `signalExtraction:true` + `signalKeywords:[]` → `formatSignalEntries` finds zero matches → returns null → `summary-hook.cjs` returns without writing. Reverse: delete `~/.supermemory-claude/settings.json` or set `signalExtraction:false` to restore auto-save-every-turn behavior. Final disposition (full disable / extraction-filter rewrite / speaker-routed rebuild) decided by `infrastructure.5` Pass 3 verdict + `governance.12` leverage design. See §User Profile Pipeline. |
-| **PostToolUse** | NOT DEFINED IN UPSTREAM | Old plugin version had auto-capture; we ran a local `PostToolUse: []` override. S177 upgrade dropped the override — upstream removed the hook entirely, so no risk of re-pollution. Historical context preserved in S177 changelog. |
+| **PostToolUse** | Not defined | No active PostToolUse capture path |
 
 ### Skills
 
-**Renamed, not aliased, in 0.0.9 (S278 migration).** The `/super-save` + `/super-search` names are gone — 0.0.9 ships only `supermemory-save` + `supermemory-search` (no `super-*` skill dirs at all, unlike the 0.0.4 alias-additive state). Existing references to `/super-search` / `/super-save` across GodWorld skills need rewriting to `/supermemory-search` / `/supermemory-save`. The table below uses the current canonical forms.
+The current package exposes `supermemory-save` and `supermemory-search`.
+Historical `/super-save` and `/super-search` names are not current commands.
 
 | Command | What it does | Container |
 |---------|-------------|-----------|
 | `/supermemory-search --user "query"` | Search Mags' brain | `mags` |
-| `/supermemory-search --repo "query"` | Search junk drawer | `super-memory` |
+| `/supermemory-search --repo "query"` | Search project memory | `super-memory` |
 | `/supermemory-search --both "query"` | Search both | `mags` + `super-memory` |
-| `/supermemory-save "content"` | Quick save (auto/conversation) | `super-memory` |
+| `/supermemory-save "content"` | Deliberate project save | `super-memory` |
 | `/save-to-mags "content"` | **Deliberate save** — decisions, reasoning, editorial thinking | `mags` |
 | `/save-to-bay-tribune "content"` | Published canon — editions, rosters, game results ONLY | `bay-tribune` |
 
@@ -516,7 +636,7 @@ POST /v4/search
 
 **Both work but behave differently.** Use `/v4/search` for searching canon and world data. Use `/v3/search` when you need raw chunk content (e.g., for ingestion verification).
 
-### Aggregate Memories (verified S168)
+### Aggregate Memories (historical S168 experiment)
 
 `/v4/search` accepts `aggregate: true`. When set, the response's first result is a **synthesized record** stitched from multiple source memories, followed by the individual chunks. New fields on aggregated results: `isAggregated: true`, synthetic `id` (`aggregated_*`), `rootMemoryId: null`, `documents[]`, `chunks[]`.
 
@@ -531,70 +651,66 @@ POST /v4/search
 }
 ```
 
-**When to use:** Angle briefs, citizen lookups for sift/write-edition, any reporter context where coherent narrative beats raw chunk dumps. Reduces prompt size and cross-chunk contradiction risk.
-
-**When NOT to use:** Verification, debugging, anywhere you need source chunks independently. Use baseline search.
+The hardened GodWorld MCP does not use aggregation. A synthesized result can
+hide provenance conflicts and is unsuitable for canon verification. Treat this
+section as historical evidence of an API experiment, not current retrieval
+guidance.
 
 **Verified S168:** `world-data` query "Temescal gentrification" — baseline returned 3 disjoint memories (~0.71 sim); aggregate returned one synthesized record (0.95 sim) weaving Philly Rodriguez's income with Temescal's health-crisis designation. Source: `supermemory.ai/blog/solving-the-precision-recall-tradeoff-search-result-aggregation/`.
 
 ### Search — CLI (PRIMARY — use this)
 
 ```bash
-# Search any container — one command, clean JSON output
-npx supermemory search "Darius Clark" --tag bay-tribune
-npx supermemory search "Temescal" --tag world-data
-npx supermemory search "OARI dispatch" --tag bay-tribune
-npx supermemory search "bakery workers" --tag world-data
+# Published Bay Tribune only
+npx supermemory search "OARI dispatch" --tag bay-tribune \
+  --mode hybrid --threshold 0.3 \
+  --filter '{"AND":[{"key":"source","value":"edition-ingest"}]}' --json
+
+# Structured world state — choose a domain tag
+npx supermemory search "Darius Clark" --tag wd-citizens --json
+npx supermemory search "Temescal" --tag wd-neighborhood --json
+npx supermemory search "bakery workers" --tag wd-citizens --json
 
 # List all containers with doc/memory counts
 npx supermemory tags list
 
-# View documents in a container
-npx supermemory docs list --tag world-data
-
-# Ingest a file
-npx supermemory add --file editions/supplemental_civic_oari_c89.txt --tag bay-tribune
+# View document metadata in a container
+npx supermemory docs list --tag world-data --json
 
 # Account info
 npx supermemory whoami
 ```
 
-CLI is authenticated via project config at `.supermemory/config.json` (API key stored there, S131). Returns JSON — pipe to `jq` or Node for parsing.
+The CLI uses the existing environment credential loader. The project plugin
+config contains container mappings, not an API key. Do not source or print the
+credential to diagnose search.
 
-### Unified Cross-Container Search (bay-tribune + world-data)
+### Federated canon + world search
 
-Supermemory does NOT support multi-container search in one call. Each search requires exactly one `containerTag`. For angle briefs, run two searches in parallel and merge results by score.
+One search call accepts one container tag. GodWorld's MCP therefore fans out
+across the `wd-*` domain tags and queries `bay-tribune` separately with
+published provenance filtering.
 
 ```bash
-# Two CLI calls — pipe both to a merge script or run sequentially
-npx supermemory search "Darius Clark" --tag bay-tribune --json
-npx supermemory search "Darius Clark" --tag world-data --json
+# Published history
+npx supermemory search "Darius Clark" --tag bay-tribune \
+  --filter '{"AND":[{"key":"source","value":"edition-ingest"}]}' --json
+
+# Current structured identity
+npx supermemory search "Darius Clark" --tag wd-citizens --json
 ```
 
-**Or use the unified search function (Node.js — runs both in parallel):**
-
-```javascript
-// Two parallel searches, merged by similarity score, tagged by container.
-// aggregate:true on each call returns one synthesized record per container + source chunks.
-async function unifiedSearch(q, tags, { aggregate = true } = {}) {
-  var results = await Promise.all(tags.map(tag =>
-    search(q, tag, { aggregate }).then(r => (r.results || []).map(m => ({ ...m, container: tag })))
-  ));
-  return results.flat().sort((a, b) => (b.similarity || 0) - (a.similarity || 0));
-}
-var results = await unifiedSearch("Darius Clark", ["bay-tribune", "world-data"]);
-// Each container returns aggregated + chunk results; all sorted by similarity across containers.
-// See §Aggregate Memories for the /v4/search aggregate:true payload shape.
-```
-
-**Tested S131:** "Darius Clark" returns bay-tribune narrative (bakery worker, season tickets, Stabilization Fund quotes from E83-E89) interleaved with world-data structured profiles. Under 1 second for both calls combined. This is the core function for Phase 31 angle brief building.
+Use MCP `lookup_citizen` when the entity type is known and
+`search_everything` when it is not. Returned shelves remain labeled; do not
+merge similarity scores as though current state and publication history were
+the same authority.
 
 ### Search — Plugin Script (fallback for mags/super-memory)
 
 ```bash
-# Plugin script (searches mags or super-memory only — uses plugin containerTag config)
-node /root/.claude/plugins/marketplaces/supermemory-plugins/plugin/scripts/search-memory.cjs --user "query"   # mags
-node /root/.claude/plugins/marketplaces/supermemory-plugins/plugin/scripts/search-memory.cjs --repo "query"   # super-memory
+# Installed plugin script (searches configured personal/repository memory only)
+node /root/.claude/plugins/cache/supermemory-plugins/supermemory/0.0.12/scripts/search-memory.cjs --user "query"
+node /root/.claude/plugins/cache/supermemory-plugins/supermemory/0.0.12/scripts/search-memory.cjs --repo "query"
 ```
 
 ### Search — Direct API (when CLI or plugin won't work)
@@ -630,15 +746,15 @@ Note: ingest uses `containerTags` (plural). Search uses `containerTag` (singular
 
 ### World-Data Ingest — After Each Cycle Run
 
-Citizen registry is grouped by neighborhood (one doc per neighborhood). All other ledgers are one doc each. Total: ~26 documents, ~250KB.
+Current city-state ingestion uses per-domain card writers, not the old
+neighborhood-bundle prototype.
 
 ```bash
-# Manual ingest (S131 pattern — will be automated in Phase 32.2)
-node scripts/buildWorldStatePacket.js   # Not yet built — pull sheets, format, POST to /v3/documents
-
-# Current manual test files
-output/world-state-full.json            # 20 neighborhood citizen docs
-output/world-state-test.json            # 20 individual citizen test docs (can be cleaned)
+# Examples only — --apply is an external write and requires explicit approval
+node scripts/buildCitizenCards.js --apply
+node scripts/buildBusinessCards.js --apply
+node scripts/buildNeighborhoodCards.js --apply
+node scripts/ingestPlayerTrueSource.js --apply
 ```
 
 **Large docs take time to index.** Supermemory chunks and embeds each document asynchronously. Small docs (< 5KB) are searchable within seconds. Large docs (20KB+) may take 1-2 minutes. Verify indexing is complete before building angle briefs — run a test search after ingest.
@@ -666,14 +782,18 @@ Retrieval-only by default. Container selection via the userId argument. Compose 
 
 | Container | Claude Code plugin | Discord bot | Moltbook | Mara (claude.ai) | Mike (claude.ai) |
 |-----------|-------------------|-------------|----------|-------------------|------------------|
-| `mags` | Read (boot) + Write (`/save-to-mags`) | Read + Write | Read + Write | No access | No access |
-| `bay-tribune` | Read (boot) + Write (`/save-to-bay-tribune`) | Read | No access | No access | Read (MCP) + Write (supplementals) |
-| `world-data` | Read (direct API) + Write (cycle ingest) | No access | No access | No access | Read (MCP) |
-| `super-memory` | Read (`/super-search --repo`) + Write (Stop hook, `/super-save`) | No access | No access | No access | No access |
+| `mags` | Legacy-personal read; deliberate `/save-to-mags` write | Read + attributed write | No direct write verified in current audit | No access | No access |
+| `bay-tribune` | Explicit CLI/MCP only; not boot profile | Read | No access | No access | Read via grounded tools; publication writes remain gated |
+| `world-data` | Explicit CLI/MCP domain search; approved builders write | Tool consumer only where explicitly wired | No access | No access | Read (MCP) |
+| `super-memory` | Repository read/write; Stop capture disabled | No access | Direct heartbeat writes | No access | No access |
 | `mara` | **No access** | No access | No access | Read + Write | No access |
 | `citizen-pages` | No access (direct module/API only) | Read + Write (citizen-loop) | No access | No access | No access |
+| `session-logs` / `sl-*` | Terminal boot/search lanes | No access | No access | No access | No access |
+| `gemini` | No Claude plugin write | No access | No access | No access | Gemini/agy only |
 
-**`world-data` (NEW — S131):** Full Simulation_Ledger ingested as neighborhood-grouped citizen registry documents. 675 citizens across 20 neighborhood docs. Searchable by name, neighborhood, occupation, demographics. Ingested via direct API. See Phase 32 in ROLLOUT_PLAN.md.
+`world-data` is a derived natural-language index over Sheet-backed state. Search
+the `wd-*` domain tags; do not infer authority from a retrieved memory when the
+underlying Sheet/local structured export is available.
 
 **Hermes runtime integration (not adopted — pointer only).** Supermemory ships a native Hermes Agent memory provider: `pip install supermemory` + `hermes config set memory.provider supermemory`, container via `SUPERMEMORY_CONTAINER_TAG=hermes-{terminal}`. Matches the `$HERMES_HOME` profile-isolation pattern in [[plans/BACKLOG]] §S145. Daytona is the convergence point — `@daytona/sdk` installed, `scripts/sandcastlePoC.js` round-trip verified. Wire only if Phase 33.13 or 40.x picks Hermes as a reviewer/desk runtime.
 
@@ -721,6 +841,14 @@ Counts reflect last `buildMaraReference.js` run; re-run if ledger has grown. ENG
 
 ## Changelog
 
+- 2026-07-27 — Task 8 truth pass. Reconciled this reference with the active
+  `supermemory` v0.0.12 plugin, its four-hook posture, the neutralized Stop
+  writer, and the current `super-memory`/legacy-`mags` plugin routing. Replaced
+  stale five/six-container and broad-`world-data` guidance with the audited
+  eight conceptual roles, measured tag counts, `wd-*` domain routing, and
+  published-first `bay-tribune` provenance rules. Preserved the older
+  `mags` + `super-memory` test-off as open work rather than claiming a final
+  retirement verdict.
 - 2026-07-02 — S283 (later same session). **NEW `session-logs` container + claude-mem→Supermemory session bridge (Mike-directed).** `scripts/sessionSummaryToSupermemory.js` mirrors claude-mem's already-generated structured session summary (request/completed/learned/next_steps — zero new LLM calls) into `containerTags: ["session-logs", "sl-<terminal>"]` — umbrella+specific per the citizen-pages pattern, so each terminal's slice of work holds its own session context. Idempotent via `customId: session-log-<memory_session_id>` (re-runs upsert). Wired into `sessionEndMechanical.js` as a best-effort sub-step (never fatal — every failure path exits 0; a Supermemory outage cannot block a close). Live-fire verified: doc EXiSU7W5gJX1ug8Bgz8oiu, idempotency confirmed on second run. Safe where S221 auto-save wasn't: one distilled work log per session into a WORK container, not per-turn captures into the personal `mags` container. Known gap: sessions claude-mem didn't capture (e.g. the 13.9.2 plugin-update window) have no rows to mirror — script degrades to a skip line.
 - 2026-07-02 — S283. **Summary-hook live-fire test + routing verification (Mike-directed).** Fired the v0.0.9 plugin's Stop `summary-hook.cjs` manually against a live session transcript: exit 0, `{"continue":true}`, **no document written** — confirms the S221 neutralization (`~/.supermemory-claude/settings.json`, `signalKeywords:[]`) carries over into the renamed plugin. Deliberate-write routing verified proper: repo→`super-memory`, personal→`mags` (`.claude/.supermemory-claude/config.json`); the June-24 `sm_project_default`→mara mis-route was pre-config-landing, not live. **Disposition: summaries stay OFF** — consistent with the S283 division of record (claude-mem saves the session; git shows the work; ROLLOUT carries open work). Last-100-docs tag audit: bay-tribune 38 / mags 20 / super-memory 12 (Moltbook-bot logs) / citizen-pages balance — all pipelines writing to proper containers. Stale doctrine claims of a Stop-hook auto-save fixed in research-build TERMINAL.md + session-end SKILL; §mara isolation line corrected (plugin sees mags+super-memory, not bay-tribune).
 - 2026-07-01 — S278. **Plugin migrated `claude-supermemory` v0.0.4 → `supermemory` v0.0.9** (upstream rename, repo stayed `claude-supermemory`). Followed official README migration path: marketplace refresh, install `supermemory@supermemory-plugins`, uninstall old with `--keep-data`. Scope changed project→user. Config/API key/containers untouched — search verified working post-migration (initial zero-result was a query-pattern miss against broad `world-data` without the documented hybrid+threshold override, not a regression). §Plugin Config version line + §Skills table updated: `/super-search` + `/super-save` are gone in 0.0.9 (was alias-additive in 0.0.4, now hard rename) — canonical forms are `/supermemory-search` + `/supermemory-save`. Cross-reference in `save-to-mags/SKILL.md` updated to match.
@@ -768,4 +896,3 @@ Verbatim rows moved out of ROLLOUT_PLAN.md when it collapsed to pointer-only. Th
 ### infrastructure.4
 
 | infrastructure.4 | supermemory-claude plugin auto-saved session transcripts to `mags` as `session_turn` docs, contaminating the User Profile with engineer-frame identity claims. **Partial-close S221+:** writer hook neutralized globally (`~/.supermemory-claude/settings.json` signalKeywords:[] → no doc written); 65 polluted docs deleted (65→0). **Scope narrowed S235** (governance.12 close): server-side dynamic→static auto-promotion proven NOT to happen (11 days / dozens of boots / zero); with hook-disable + ADR-0008 writer-side invariant + /save-to-profile (governance.17), no rewrite or extraction-filter needed. **OPEN:** final disposition gated on infrastructure.5 Pass 3 (test-off session) — if the SessionStart reader is inert, row collapses to "leave neutralized, document, close." | in-progress | engine-sheet | inline-finding S220; [[../adr/0008-speaker-attribution-for-auto-save-writers|ADR-0008]]; sibling infrastructure.5 |
-

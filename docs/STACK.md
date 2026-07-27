@@ -2,7 +2,7 @@
 
 All services, URLs, credentials, and running processes. Keep this current.
 
-Last updated: 2026-07-24 (Codex orientation audit: skill count 47→52, agent count 27→34 entries, Simulation_Ledger 47 cols A–AU→52 A–AZ / 922 rows S282; grouping lists below are partial as of their session stamps). Previous: Session 212, 2026-05-09 (S212: 47 skills, 27 agents, 4 terminals post-S211 mags-trim, 5 active Supermemory containers + legacy sm_project_godworld. S212 skill-bag naming across all 4 terminals + civic.md / research-build.md NEW path-scoped rules; ADRs 0001-0003.)
+Last updated: 2026-07-27 (Moltbook reduced to one autonomous daily visit with one-consumption reflection handoff; SpaceMolt live PM2 entry removed and saved). Previous: 2026-07-24 Codex orientation audit.
 
 ---
 
@@ -38,8 +38,8 @@ Last updated: 2026-07-24 (Codex orientation audit: skill count 47→52, agent co
 | Service | URL | Purpose | Status |
 |---------|-----|---------|--------|
 | **Discord** | discord.com | Mags bot — community presence | **RUNNING** (pm2: `mags-bot` — name normalized S156 via Phase 40.3) |
-| **Moltbook** | [mags-corliss profile](https://www.moltbook.com/u/mags-corliss) | Social platform for AI agents — Mags reads feed, replies, posts. Activity saves to `mags` brain. | **CRON** (pm2: `moltbook` — stopped between scheduled runs, normal) |
-| **SpaceMolt Miner** | — | Daily SpaceMolt mining runs | **CRON** (pm2: `spacemolt-miner` — 3x daily, stopped between runs) |
+| **Moltbook** | [mags-corliss profile](https://www.moltbook.com/u/mags-corliss) | Tracked social-media business — one autonomous Mags visit/day; new actions enter her continuity through a deduplicated reflection handoff. | **CRON** (pm2: `moltbook` — 14:00 Central; stopped between runs, normal) |
+| **SpaceMolt Miner** | — | Preserved legacy script/logs; fixed-sequence miner retired after repeated no-fuel/no-ore runs. | **DISABLED** (live PM2 entry removed + saved 2026-07-27; ecosystem declaration remains dormant) |
 | **GodWorld Dashboard** | localhost:3001 | Express API (40 endpoints) + frontend — cycle data, citizen info. Basic auth (`DASHBOARD_USER`/`DASHBOARD_PASS` in `/root/.config/godworld/.env`) | **RUNNING** (pm2: `godworld-dashboard`) |
 
 ## Supermemory Architecture
@@ -82,7 +82,6 @@ All containers on P N org ($9/mo). GodWorld org ($19/mo) is legacy — canceling
 godworld-dashboard    online    port 3001, 40 API endpoints
 mags-bot              online    Discord presence, Haiku 4.5 model
 moltbook              cron      stopped between scheduled runs, normal
-spacemolt-miner       cron      3x daily, stopped between runs
 ```
 
 ## Credentials Locations
@@ -143,6 +142,8 @@ Media support: dj-hartley (edition-print art direction)
 
 - Agent: `mags-corliss` (ID: `25fb5dbf-045f-498f-acc3-ec3823d823d7`)
 - API key: in `~/.config/moltbook/credentials.json`
-- Status: `pending_claim` (verification code: `wave-U3DG`)
+- Status: active
 - Script: `scripts/moltbook-heartbeat.js` — reads feed, replies, upvotes, occasionally posts
-- Schedule: PM2 cron every 4 hours (see OPERATIONS.md §PM2 Processes)
+- Schedule: PM2 cron daily at 14:00 Central
+- Context: current Oakland orientation + Mags's recent citizen-page reflections; no operator journal
+- Reflection handoff: each new action batch is consumed once via `logs/moltbook/.reflection-cursor.json`

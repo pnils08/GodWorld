@@ -1,7 +1,7 @@
 ---
 title: NotebookLM Source-Search Wiring Plan
 created: 2026-07-25
-updated: 2026-07-26
+updated: 2026-07-27
 type: plan
 tags: [architecture, infrastructure, media, active]
 sources:
@@ -242,43 +242,113 @@ consumer after the interactive path is measured.
      `verified`.
 - **Verify:** one interactive dry proof leaves a traceable retrieval record and
   no canon-facing artifact.
-- **Status:** [~] in-progress 2026-07-26 — Codex implementation and bounded live
+- **Status:** [x] complete 2026-07-26 — Codex implementation and bounded live
   proof complete. The wrapper emits metadata-only JSONL, constrains custom log
   paths to `output/**/*.jsonl`, fails if logging fails, and distinguishes all
   five approved `resultStatus` values. Synthetic tests pass. The live
   Editions 98/100/101 proof used all 3 selected sources and returned 15
   citations with 15 excerpts; the trace recorded the sandbox-denied first
   attempt as `no_result` and the approved retry as `verified`, with no answer
-  body or canon-facing artifact. Awaiting Claude/research-build protected
-  corrections: `.claude/skills/deep-dispatch/SKILL.md` must use
-  `resultStatus=no_result`, while `.claude/agents/source-search/SKILL.md` must
-  describe the wrapper's metadata log as its sole permitted local write. Codex
-  did not modify the control plane.
+  body or canon-facing artifact. Under explicit builder override,
+  `.claude/skills/deep-dispatch/SKILL.md` now uses
+  `resultStatus=no_result`, and `.claude/agents/source-search/SKILL.md`
+  describes the wrapper's metadata log as its sole permitted local write.
 
 ### Task 7: Evaluate headless consumption after interactive proof
 
 - **Files:**
-  - `scripts/cron-desk-run.js` — inspect first; live automation modification
-    requires separate explicit approval
-  - `scripts/cron-desk-writer.js` — inspect first; live automation modification
-    requires separate explicit approval
-  - `docs/plans/2026-07-20-headless-newsroom-pipeline.md` — update only with its
-    owner's approval
+  - `scripts/cron-desk-run.js` — inspected; unchanged
+  - `scripts/cron-desk-writer.js` — opt-in evaluation artifact tag; default
+    production paths unchanged
+  - `scripts/cron-desk-writer.test.js` — artifact-tag boundary tests
+  - `scripts/notebooklmHeadlessEval.js` — fail-closed paired evaluation harness
+  - `scripts/notebooklmHeadlessEval.test.js` — harness contract tests
+  - `scripts/priorArcRequirement.js` — shared evaluation-only Brief/reviewer
+    requirement contract
+  - `scripts/priorArcRequirement.test.js` — requirement boundary tests
+  - `scripts/cron-rhea-gate.js` — opt-in verified historical evidence for the
+    independent treatment gate
+  - `docs/plans/2026-07-20-headless-newsroom-pipeline.md` — consumer verdict
+  - `output/cron-compare/evaluations/task7-jacklondon/manifest.json` —
+    generated `NOT_CANON` evaluation record
 - **Steps:**
   1. Measure whether a precomputed, verified prior-arc digest improves a staged
      Article versus the current disk-search lane.
   2. If adopted, place retrieval before composition in the orchestrator; do not
      give the writer direct NotebookLM access.
   3. Keep all output behind the existing probation and Rhea gates.
-- **Verify:** paired staged samples show attribution/canon results and cost; no
-  autonomous publication or ingestion is enabled.
-- **Status:** [ ] not started
+- **Verify:** paired gated samples show attribution/canon results and cost; no
+  autonomous publication or ingestion is enabled. A failed sample remains
+  unstaged.
+- **Status:** [x] evaluation complete — **append-only NOT ADOPTED; structured
+  binding DESIGN-PROVEN; prompt-only hygiene REJECTED; NOT SCHEDULED.** The bounded
+  run selected and used Editions 98–101, returned 20 citation/excerpt pairs,
+  and injected 18 verified excerpts. The harness discarded NotebookLM answer
+  prose and conversation ID. Baseline failed Rhea with 3 flags (2 high);
+  treatment failed with 2 flags (1 high), at $0.1162 total API cost. Manual
+  comparison found that the treatment used none of the prior Baylight, local
+  hiring, apprenticeship, or earlier Jack London arc supplied by retrieval, so
+  its lower flag count is not attributable to NotebookLM. Appending a 15.9k
+  excerpt packet to an 18.9k writer state created another context firehose.
+  Do not wire this shape into cron. The next evaluation used the corrected Task
+  6 source-search contract and a compact, source-search-verified claims digest
+  rather than raw excerpts. Both drafts remain `NOT_CANON`; neither was staged,
+  published, ingested, or written to citizen records.
+
+  **Compact follow-up — also NOT ADOPTED.** The corrected `source-search` lane
+  produced a 1,602-character digest with 3 excerpt-supported claims; its
+  wrapper query selected and used all four Editions. The paired baseline failed
+  Rhea with 2 flags (2 high), while treatment failed with 3 flags (2 high).
+  Treatment used none of the three supplied facts: Baylight's recusal delay,
+  31-of-86 apprenticeship placement, or the fourteen-corridor contraction.
+  The completed run cost $0.1342 for writers/gates plus $0.0756 reported for
+  source-search ($0.2098 total). Two earlier retrieval-only attempts stopped
+  before writer calls—one agent scope/length drift and one false-positive
+  validator match on legitimate `.pdf` NotebookLM source titles; their
+  envelope costs were not persisted. Compactness fixed the firehose but not the
+  composition interface. Any future evaluation must bind a selected verified
+  prior-arc claim into the Brief/PREWRITE contract instead of appending more
+  context. That is a separate design change, not approved cron wiring.
+
+  **Structured Brief-binding follow-up — DESIGN PROVEN, production blocked.**
+  The harness reused the already-verified compact digest without a new
+  NotebookLM or Claude retrieval call and bound claim 3 into the treatment
+  Brief: prior Tribune reporting placed Jack London's decline inside a
+  fourteen-corridor contraction. The treatment used the fact in its Article
+  body, added the required `PRIOR_PUBLISHED` Evidence entry with Edition title
+  and citation, did not leak the source UUID, and Rhea did not flag the
+  historical claim. Baseline failed with 5 flags (3 high); treatment failed
+  with 2 flags (2 high), at $0.1254 total writer/gate cost. Its remaining high
+  flags were unrelated to retrieval: the lane supplied invented official
+  Marisol Garcia, and the writer invented an age/profile for an anonymous
+  bartender. The composition hypothesis is therefore validated, but no
+  scheduled wiring is approved until the canonical Brief/PREWRITE schema owns
+  this field and the existing lane/name hygiene blockers are cleared.
+
+  **Strict source-hygiene follow-up — PROMPT-ONLY CONTROL REJECTED.** A
+  controlled pair reused the same verified digest and required claim on both
+  sides; no NotebookLM or `source-search` call ran. The only state differences
+  were deterministic reporter-angle redactions of `Marisol Garcia` and
+  `Produce Market`, plus the treatment-only strict source prompt. Both drafts
+  used and cited the required fourteen-corridor fact without leaking its UUID.
+  Baseline failed with 5 flags (4 high); treatment failed with 4 flags (3
+  high), at $0.1191 total writer/gate cost. The treatment removed the invented
+  official and anonymous bartender, but it misspelled Gregory Mims in Evidence
+  and placed both the canon West Oakland resident and Crisis Coffee in
+  Fruitvale. The supplied quotes carried text and POPIDs but not enough spatial
+  provenance to prevent that relocation. Prompt wording and name redaction
+  therefore do not clear the production blocker. The next viable design must
+  give composition a deterministic source roster containing verified person,
+  location, quote, and attribution tuples—or explicitly no source—and validate
+  that roster before a writer call. No additional paid retry is justified on
+  the current prompt-only shape.
 
 ### Task 8: Run a separate Supermemory setup and corpus-purity audit
 
 - **Files:**
-  - `docs/SUPERMEMORY.md` — read
-  - `scripts/godworld-mcp.py` — read
+  - `docs/SUPERMEMORY.md` — audit, then update operational truth
+  - `scripts/godworld-mcp.py` — audit, then harden retrieval
+  - `scripts/godworldMcpSearch.test.py` — offline retrieval contract tests
   - local Supermemory plugin v0.0.12 hooks/settings shape — read without
     credential contents
   - `https://github.com/supermemoryai/claude-supermemory` — upstream source
@@ -295,7 +365,58 @@ consumer after the interactive path is measured.
 - **Verify:** report distinguishes configuration drift, corpus contamination,
   search-quality defects, and optional upstream features, with no external
   writes.
-- **Status:** [ ] separate-session prerequisite
+- **Status:** [x] complete 2026-07-27 — folded into the existing
+  `infrastructure.5` audit rather than opening a competing tracker.
+
+  - **Configuration drift:** the active local plugin is the renamed
+    `supermemory` v0.0.12 package; the old `claude-supermemory` entry is
+    disabled. Reasoned recall and unified-repository reads are present.
+    GodWorld's explicit container overrides remain valid upstream behavior.
+    The Stop summary hook is installed but its effective capture path remains
+    neutralized by `signalExtraction=true` with an empty keyword set.
+    At audit time, `docs/SUPERMEMORY.md` still described parts of the older
+    capture/container posture. The bounded truth pass below corrected verified
+    operational facts while leaving the Phase 3 test-off and final retirement
+    verdict open in [[2026-05-22-supermemory-load-bearing-audit]].
+  - **Corpus purity:** the metadata inventory covered 4,306 organization
+    documents: 1,155 tagged `bay-tribune` and 1,509 tagged `world-data`.
+    `bay-tribune` contains 24 `drive-archive` documents. A conservative sample
+    of those 24 plus the known fourth-wall record flagged 11/25 for
+    non-publication signals, including architecture, QA, directives, audits,
+    agent/control-plane prose, and simulation-revealing material. One sampled
+    `drive-archive` item was a genuine Edition, so cleanup requires explicit
+    per-record adjudication rather than deleting by source tag. The
+    `world-data` inventory was fully partitioned across `wd-*` domain tags; a
+    newest/oldest 20-record sample found zero publication/transcript/directive
+    signals and 18 expected structured-card shapes. That supports, but does
+    not prove, whole-corpus purity.
+  - **Search defect:** `search_canon` is a thin default
+    `memories`/0.6/similarity/limit-5 call with no provenance filter,
+    recency, projection, or aggregation. The bounded audit query returned a
+    Mara directive first, an unpublished civic-decision memory second, and the
+    first published Edition result third. Correct Supermemory filter syntax is
+    an `AND`/`OR` wrapper; the live
+    `{"AND":[{"key":"source","value":"edition-ingest"}]}` proof returned 20/20
+    `edition-ingest` results.
+  - **Hardening follow-up implemented 2026-07-27:** `supermemory_search` now
+    accepts an `AND`/`OR` metadata filter and projects only useful text plus
+    compact provenance. `search_canon` and every existing Tribune fallback use
+    `source=edition-ingest`; mixed `drive-archive` records stay outside that
+    default lane. `search_world` fans out with a three-process bound across the
+    eight populated `wd-*` tags instead of querying the empty umbrella lane.
+    Citizen, initiative, neighborhood, and council fallbacks now use their
+    narrow domains. Five offline tests cover the filter command, provenance
+    projection, fail-loud JSON handling, recency ordering, and domain fan-out.
+    A live regression query returned 5/5 `edition-ingest` hits with no Mara
+    directive or mixed-archive record. A live world query reached all eight
+    populated domains in 17.8 seconds and kept their results source-labeled;
+    narrow entity tools remain preferred because low-threshold cross-domain
+    recall is intentionally noisy. The newer `wd-snapshot` writer target had
+    zero live records and was not added to the fan-out. No record was deleted,
+    retagged, reingested, or written.
+
+  This closes Task 8 only. It does not satisfy the older
+  `infrastructure.5` Phase 3 test-off session for `mags` and `super-memory`.
 
 ---
 
@@ -336,3 +457,28 @@ review work, not assumptions to resolve in this document.
   `resultStatus` uses underscore tokens; hyphenated `no-result` remains only the
   `reconcileVerdict`. Task stays in progress pending two protected
   Claude/research-build wording corrections.
+- 2026-07-26 — Applied the two protected Task 6 wording corrections under
+  explicit builder override. Task 6 is complete and its rollout pointer is
+  ready for the archive sweep.
+- 2026-07-26 — Completed the bounded Task 7 paired evaluation. Both samples
+  failed Rhea and remained `NOT_CANON`; the treatment ignored its 15.9k
+  verified excerpt packet, so raw-excerpt headless injection was not adopted.
+- 2026-07-26 — Completed the compact Task 7 follow-up through the corrected
+  `source-search` lane. The 1,602-character digest was valid, but the treatment
+  ignored all three prior-arc claims and also failed Rhea; compact append-only
+  injection was not adopted.
+- 2026-07-27 — Completed the structured Brief-binding follow-up. The treatment
+  used and cited its required prior-arc fact and Rhea accepted that historical
+  evidence, proving the composition seam; production remains blocked because
+  both samples still failed unrelated name/canon gates.
+- 2026-07-27 — Rejected prompt-only source hygiene after a controlled
+  retrieval-reuse pair. Deterministic angle redaction removed the known
+  invented official, but the treatment still relocated a canon person/business
+  and misspelled a name in Evidence; a spatially grounded source roster is
+  required before any production wiring.
+- 2026-07-27 — Completed the separate Task 8 Supermemory audit without writes.
+  The plugin is current at the adopted v0.0.12 posture, `world-data` sampling
+  found no narrative contamination, and `bay-tribune` contains mixed
+  `drive-archive` material. The live `search_canon` proof surfaced unpublished
+  material above Edition evidence; `AND`-wrapped metadata filtering was
+  verified as the deterministic first hardening step.

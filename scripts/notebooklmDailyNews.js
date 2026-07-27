@@ -33,7 +33,8 @@ const COMPARE_DIR = path.join(ROOT, 'output', 'cron-compare');
 const OUTPUT_DIR = path.join(ROOT, 'output', 'notebooklm', 'daily');
 const AUDIO_RETRY_INTERVAL_MS = 30 * 1000;
 const AUDIO_RETRY_MAX = 30;
-const SOURCE_VERSION = '1.2';
+const SOURCE_VERSION = '1.3';
+const DEFAULT_AUDIO_LENGTH = 'default';
 const CITY_FRAME = 'GodWorld Oakland, 2042 — a prosperous era buoyed by the A’s success, with civic and neighborhood pressures underneath.';
 
 function parseArgs(argv) {
@@ -390,6 +391,12 @@ function dailyPrompt(cycle) {
   return CITY_FRAME + ' Give me today’s Cycle ' + cycle + ' city news, the connections that matter, and what the Bay Tribune should watch next.';
 }
 
+function dailyAudioFocus(cycle, length = DEFAULT_AUDIO_LENGTH) {
+  const descriptor = length === 'default' ? 'standard-length' : length;
+  return CITY_FRAME + ' Present Cycle ' + cycle + ' as a ' + descriptor +
+    ' daily city-news podcast.';
+}
+
 async function downloadAudio(notebookId, artifactId, audioPath) {
   for (let i = 0; i < AUDIO_RETRY_MAX; i++) {
     await sleep(AUDIO_RETRY_INTERVAL_MS);
@@ -592,12 +599,13 @@ async function run(argv) {
 
   let audioPath = null;
   if (args.audio) {
+    const audioLength = dailyConfig.audioLength || DEFAULT_AUDIO_LENGTH;
     const create = nlm([
       'audio', 'create', config.newsroomNotebookId,
       '--format', dailyConfig.audioFormat || config.audioFormat || 'deep_dive',
-      '--length', dailyConfig.audioLength || 'short',
+      '--length', audioLength,
       '--source-ids', sourceIds.join(','),
-      '--focus', CITY_FRAME + ' Present Cycle ' + cycle + ' as a short daily city-news podcast.',
+      '--focus', dailyAudioFocus(cycle, audioLength),
       '--confirm',
     ]);
     if (!create.ok) throw new Error('daily audio create failed: ' + create.out.slice(0, 400));
@@ -672,7 +680,9 @@ module.exports = {
   sourceTitle,
   archivePrompt,
   dailyPrompt,
+  dailyAudioFocus,
   SOURCE_VERSION,
+  DEFAULT_AUDIO_LENGTH,
   CITY_FRAME,
   run,
 };

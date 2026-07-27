@@ -1,7 +1,7 @@
 ---
 title: Gemini Notebook / NotebookLM CLI Operations
 created: 2026-07-25
-updated: 2026-07-26
+updated: 2026-07-27
 type: reference
 tags: [infrastructure, media, active]
 sources:
@@ -10,6 +10,9 @@ sources:
   - docs/research/2026-07-10-notebooklm-mcp.md
   - config/notebooklm.json
   - scripts/notebooklmCanonSearch.js
+  - scripts/notebooklmHeadlessEval.js
+  - scripts/priorArcRequirement.js
+  - scripts/cron-rhea-gate.js
   - scripts/notebooklmPush.js
   - scripts/notebooklmDailyNews.js
   - .claude/skills/post-publish/SKILL.md (read-only control-plane consumer)
@@ -251,6 +254,62 @@ selects another `.jsonl` path inside `output/`. The record contains only:
 Answer text, excerpts, conversation ID, and raw error output are excluded.
 Failure to append the event is itself a non-zero wrapper failure.
 
+### Headless evaluation boundary
+
+`scripts/notebooklmHeadlessEval.js` is a measurement harness, not a production
+consumer. With no `--execute` flag it prints a fail-closed plan and makes no
+external calls or local writes. An explicitly approved `--execute` run performs
+one bounded canon-search query, creates isolated baseline/treatment drafts, and
+runs both through the existing Rhea API gate. Its artifacts are `NOT_CANON`;
+the harness never stages, publishes, ingests, or writes citizen records.
+
+The default `direct-excerpts` mode measures bounded raw-excerpt injection.
+`--retrieval-mode source-search-compact` instead invokes the protected
+`source-search` agent, requires its evaluation-local wrapper metadata, caps the
+return, validates every UUID/citation/excerpt, and only then permits writer
+calls. A NotebookLM source title such as `bay_tribune_e99.pdf` is valid when it
+appears with the approved source UUID; an actual path such as
+`output/pdfs/...` is a scope escape.
+
+Neither 2026-07-26 paired run justified headless adoption. The raw 15.9k packet
+and the later 1,602-character, 3-claim source-search digest were both ignored by
+their treatment writers; every baseline and treatment failed Rhea. Do not
+schedule this harness or either append-only injection shape. A future
+evaluation must bind one verified prior-arc claim into the Brief/PREWRITE
+contract rather than append more context.
+
+The 2026-07-27 binding evaluation validated that composition shape.
+`--reuse-evaluation <manifest>` reused the prior verified digest without
+another retrieval call, and `--bind-claim-index 3` created one validated
+`NOT_CANON` requirement shared by the treatment writer and Rhea. The writer
+used the required fourteen-corridor fact in the Article body and emitted its
+`PRIOR_PUBLISHED` Evidence entry; Rhea accepted the historical fact. Both
+drafts still failed unrelated name/canon checks, so this remains an evaluation
+contract rather than scheduled integration.
+
+A same-evidence hygiene pair then tested whether deterministic reporter-angle
+name redaction plus a strict source prompt cleared those unrelated failures. It
+did not. The treatment removed the known invented official and anonymous
+bartender, but still relocated a canon person and canon business and misspelled
+a name in Evidence. The lane's supplied quote text and POPIDs lacked enough
+spatial provenance to prevent that move. Both sides used the required
+prior-published fact. This confirms that NotebookLM retrieval and Brief binding
+are not the remaining blocker; production needs a deterministic source roster
+and output validation. Do not treat `--strict-source-hygiene` as a production
+safety gate.
+
+The underlying opt-in flags are evaluation-only:
+
+- writer: `--brief-requirement-file`, accepted only with `--artifact-tag`,
+  `--state-file`, and a file inside `output/cron-compare/evaluations/`;
+- writer: `--strict-source-hygiene`, accepted only with `--artifact-tag` and
+  `--state-file`; evaluation-only and empirically insufficient by itself;
+- Rhea: `--evidence-file`, accepted only from that same evaluation directory;
+- harness: `--reuse-evaluation` plus `--bind-claim-index`; its optional
+  `--strict-source-hygiene` requires both and changes only the treatment lane.
+
+Absent those flags, writer and gate prompts retain their existing behavior.
+
 ### MCP query
 
 Direct `notebook_query` remains useful for operator diagnosis, but it is not the
@@ -338,9 +397,29 @@ The daily job:
    developing reports, and published background.
 6. Adds or reuses that bounded source in the working daily notebook.
 7. Queries only that source for the written brief.
-8. Generates a `short` deep-dive audio overview scoped only to that source.
+8. Generates a `default`-length deep-dive audio overview scoped only to that
+   source.
 9. Delivers the audio through the configured Drive and Discord paths.
 10. Records a manifest and output under `output/notebooklm/daily/`.
+
+The 08:00 job is intentionally a next-morning brief. The cron newsroom's write
+wake is 18:15, so an eligible staged Article from that wake is about 13 hours
+45 minutes old when Daily News collects it—well inside the 36-hour window.
+The collector does not read raw writer drafts: only `.staged.md` and
+`.sample.md` bodies are eligible, and `.flags.json` records exclude the matching
+body.
+
+Daily variation is source-driven:
+
+- a new world summary changes the pack;
+- new staged/sample Articles enter after a successful write/gate route;
+- older Articles leave the rolling 36-hour window;
+- flagged-exclusion membership or finding counts change the pack.
+
+The source version, Cycle, paths, classifications, bodies, and flagged
+exclusions all participate in the pack hash. If none changes, the completed job
+no-ops instead of inventing novelty. Do not add random prompts or wall-clock
+news merely to force a different program.
 
 The live crontab entry is:
 
@@ -365,13 +444,27 @@ NotebookLM, Drive, Discord, or other external services.
 
 Operational status on 2026-07-25:
 
-- the v1.2 manual end-to-end run previously completed;
+- the v1.2 short manual end-to-end run previously completed;
 - the first scheduled run correctly degraded and sent a warning when the old
   authentication expired;
 - persistent browser login now succeeds;
 - `login --check`, notebook listing, and all auth-replay lanes pass;
 - the local daily-news test suite passes; and
 - the next distinct 08:00 scheduled run is the remaining post-reauth proof.
+
+As of 2026-07-27, v1.3 changes only the audio length from `short` to the CLI's
+supported `default` length and advances the source version so an
+already-completed v1.2 manifest cannot skip the first v1.3 run. The written
+brief, bounded source, 08:00 schedule, Drive delivery, and Discord delivery are
+unchanged. The originally attempted `medium` value failed before audio
+rendering because the installed CLI accepts only `short`, `default`, or `long`.
+
+**Upstream input incident and repair:** the 2026-07-26 fan-out write created six
+desk-only raw drafts while the orchestrator expected reporter-specific paths.
+It recorded `0/6` and promoted no Article. The 2026-07-27 repair forwards each
+non-persona reporter slug through the writer output namespace; deterministic
+filename tests pass. The next scheduled 18:15 write wake is the live proof.
+Daily News remains correct to ignore the orphaned raw drafts.
 
 The working notebook currently has two sources. The job deduplicates an
 unchanged bounded source by title/hash, but it does not yet implement source
@@ -483,3 +576,26 @@ delete the CLI-managed profile as part of a normal rollback.
   the fail-closed canon-search wrapper and documented its metadata-only Task 6
   retrieval log, controlled result statuses, path boundary, and bounded live
   proof.
+- 2026-07-26 — Documented the evaluation-only headless harness and the negative
+  Task 7 result. Raw verified-excerpt injection remains unscheduled and
+  unadopted.
+- 2026-07-26 — Added the fail-closed compact source-search evaluation mode and
+  recorded its negative result. Compact append-only injection also remains
+  unscheduled and unadopted.
+- 2026-07-27 — Added and proved the evaluation-only structured Brief/reviewer
+  binding. The historical claim was used and accepted, while production
+  scheduling remains blocked by unrelated name/canon failures.
+- 2026-07-27 — Documented the controlled strict-source-hygiene follow-up.
+  Prompt-only hygiene reduced but did not clear Rhea failures, so a
+  deterministic source roster remains required before production adoption.
+- 2026-07-27 — Corrected Daily News v1.3 to the CLI-supported `default` audio
+  length after the attempted `medium` value failed before rendering. The source
+  version remains v1.3 so its partial manifest can resume without duplicating
+  the bounded source. The resumed C102 run produced a 19m16s audio file and
+  completed Drive + Discord delivery; schedule is unchanged.
+- 2026-07-27 — Documented the 08:00/18:15 collection timing, source-driven
+  variation/no-op contract, and the live fan-out filename mismatch currently
+  preventing raw cron drafts from reaching the staged/sample input directories.
+- 2026-07-27 — Recorded the fan-out filename repair. Roster reporter and persona
+  output contracts pass offline; the next scheduled write wake is the live
+  staging proof.

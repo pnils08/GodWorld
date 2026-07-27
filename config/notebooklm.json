@@ -9,7 +9,7 @@
   "dailyNews": {
     "hours": 36,
     "audioFormat": "deep_dive",
-    "audioLength": "short",
+    "audioLength": "default",
     "driveDest": "edition",
     "pingTime": "08:00 America/Chicago"
   },

@@ -27,6 +27,10 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 const { execFileSync } = require('child_process');
+const {
+  normalizePriorArcRequirement,
+  formatReviewerEvidence,
+} = require('./priorArcRequirement');
 
 const ROOT = path.join(__dirname, '..');
 const COMPARE_DIR = path.join(ROOT, 'output', 'cron-compare');
@@ -48,6 +52,9 @@ const TIMEOUT_MS = parseInt(arg('--timeout', '420000'), 10);
 // differ from the WRITER's (DeepSeek) — default gemini, NEVER deepseek.
 const BACKEND = arg('--backend', 'claude');      // 'claude' | 'api'
 const API_MODEL = arg('--api-model', 'google/gemini-3.5-flash');
+// Evaluation-only verified historical evidence. Default gate behavior is
+// unchanged when absent.
+const EVIDENCE_FILE = arg('--evidence-file', null);
 
 const log = {
   info: (...a) => console.log('[INFO]', new Date().toISOString(), ...a),
@@ -63,7 +70,7 @@ function detectCycle() {
   return c === null ? 'current' : String(c);
 }
 
-function buildPrompt(cycle, draftRel, worldRel, nameCheck) {
+function buildPrompt(cycle, draftRel, worldRel, nameCheck, evidenceRel) {
   const pre = nameCheck ? [
     'DETERMINISTIC NAME PRE-CHECK (canon-name-check.js vs the simulation ledger snapshot, ' + nameCheck.canonNames + ' canon citizens):',
     nameCheck.unverified.length
@@ -76,6 +83,10 @@ function buildPrompt(cycle, draftRel, worldRel, nameCheck) {
     'You are Rhea Morgan, the Cycle Pulse verification agent, running headless as a publish gate.',
     'First read your role and rules: .claude/agents/rhea-morgan/RULES.md and .claude/agents/rhea-morgan/IDENTITY.md.',
     'Ground truth for this cycle is the world state: ' + worldRel + ' (cycle ' + cycle + ').',
+    ...(evidenceRel
+      ? ['Verified prior-published historical evidence is: ' + evidenceRel +
+        '. Current Cycle world state wins every conflict.']
+      : []),
     'The draft to verify is: ' + draftRel + '.',
     '',
     pre +
@@ -96,6 +107,31 @@ function buildPrompt(cycle, draftRel, worldRel, nameCheck) {
     'Return ONLY a JSON object — no prose, no markdown fences:',
     '{"pass": <true only if there are ZERO high-severity flags>, "flags": [{"claim":"...","issue":"...","severity":"low|med|high"}], "summary":"<one line>"}'
   ].join('\n');
+}
+
+function loadEvaluationPriorArcEvidence(filePath) {
+  if (!filePath) return null;
+  const abs = path.resolve(ROOT, filePath);
+  const evaluationRoot = path.join(COMPARE_DIR, 'evaluations');
+  if (!abs.startsWith(evaluationRoot + path.sep)) {
+    throw new Error(
+      '--evidence-file must be inside output/cron-compare/evaluations/'
+    );
+  }
+  if (!fs.existsSync(abs) || !fs.statSync(abs).isFile()) {
+    throw new Error('evidence file not found: ' + filePath);
+  }
+  const raw = fs.readFileSync(abs, 'utf8');
+  if (raw.length > 5000) throw new Error('evidence file exceeds 5000 characters');
+  try {
+    return {
+      requirement: normalizePriorArcRequirement(JSON.parse(raw)),
+      abs,
+      rel: path.relative(ROOT, abs),
+    };
+  } catch (error) {
+    throw new Error('invalid evidence file: ' + error.message);
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -223,6 +259,7 @@ async function main() {
   const cycle = CYCLE_ARG || draftCycle || detectCycle();
   const worldRel = 'output/world_summary_c' + cycle + '.md';
   const draftRel = path.relative(ROOT, draftAbs);
+  const priorArcEvidence = loadEvaluationPriorArcEvidence(EVIDENCE_FILE);
 
   // S325 independence rule, enforced: the gate model's family must differ from
   // the WRITER's (writer model slug is the draft filename's last segment, e.g.
@@ -257,7 +294,10 @@ async function main() {
     // raw OpenRouter gate: deterministic pre-checks + injected ground truth, one call
     const verbiage = scanEngineVerbiage(draftText);
     console.log('verbiage scan: ' + (verbiage.length ? verbiage.map(v => v.token + ' ×' + v.count).join('; ') : 'clean'));
-    const worldText = fs.existsSync(path.join(ROOT, worldRel)) ? fs.readFileSync(path.join(ROOT, worldRel), 'utf8') : '(world summary missing: ' + worldRel + ')';
+    let worldText = fs.existsSync(path.join(ROOT, worldRel)) ? fs.readFileSync(path.join(ROOT, worldRel), 'utf8') : '(world summary missing: ' + worldRel + ')';
+    if (priorArcEvidence) {
+      worldText += '\n\n' + formatReviewerEvidence(priorArcEvidence.requirement);
+    }
     const profiles = nameCheck ? require('./canon-name-check').profilesFor(nameCheck.verified) : [];
     const { system, user } = buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profiles);
     log.info('calling ' + API_MODEL + ' via OpenRouter (no tools, injected context)...');
@@ -269,7 +309,13 @@ async function main() {
     catch (_) { verdict = { pass: null, flags: [], summary: 'verdict parse failed', parseError: true, raw: r.text.slice(0, 600) };
       log.warn('api verdict parse failed — raw head: ' + r.text.slice(0, 300).replace(/\s+/g, ' ')); }
   } else {
-    const prompt = buildPrompt(cycle, draftRel, worldRel, nameCheck);
+    const prompt = buildPrompt(
+      cycle,
+      draftRel,
+      worldRel,
+      nameCheck,
+      priorArcEvidence ? priorArcEvidence.rel : null
+    );
     // --allowedTools whitelists read-only work (no Write/Edit); last so the variadic
     // list doesn't swallow other flags.
     const args = ['-p', prompt, '--output-format', 'json', '--model', MODEL,
@@ -318,6 +364,14 @@ async function main() {
     parseError: verdict.parseError || false,
     ranAt: new Date().toISOString()
   };
+  if (priorArcEvidence) {
+    out.priorArcEvidence = {
+      artifactClass: priorArcEvidence.requirement.artifactClass,
+      sourceId: priorArcEvidence.requirement.sourceId,
+      citationNumber: priorArcEvidence.requirement.citationNumber,
+      currentAuthorityWins: true,
+    };
+  }
 
   fs.mkdirSync(COMPARE_DIR, { recursive: true });
   const base = path.basename(draftAbs).replace(/\.md$/, '');

@@ -11,8 +11,12 @@
 |---------|--------|---------|--------|-------|
 | `godworld-dashboard` | `dashboard/server.js` | Express API + React frontend, port 3001 | ~50MB | Basic auth via `/root/.config/godworld/.env` |
 | `mags-bot` | `scripts/mags-discord-bot.js` | Mags presence in Discord #mags-morning | ~50MB | Haiku 4.5, searches mags+bay-tribune containers. Renamed from `mags-discord-bot` S156 via Phase 40.3 ecosystem.config.js rewrite. |
-| `moltbook` | `scripts/moltbook-heartbeat.js` | Moltbook social presence | ~35MB | Cron mode — shows "stopped" between runs, normal |
-| `spacemolt-miner` | `scripts/spacemolt-miner.js` | SpaceMolt daily mining runs | ~35MB | Cron mode — 3x daily, shows "stopped" between runs |
+| `moltbook` | `scripts/moltbook-heartbeat.js` | Mags's autonomous Moltbook social presence | ~35MB | Cron mode — daily 14:00 Central; shows "stopped" between runs, normal |
+
+**Disabled PM2 jobs:** `spacemolt-miner` was removed from the live registry and
+the saved reboot state on 2026-07-27 after repeated fixed-sequence no-fuel runs.
+Its source and logs remain. The dormant `ecosystem.config.js` declaration must
+also be removed before a future full ecosystem reload.
 
 **Common PM2 commands:**
 ```bash

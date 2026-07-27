@@ -18,9 +18,12 @@ const {
   parseCreatedArtifactId,
   sourceTitle,
   dailyPrompt,
+  dailyAudioFocus,
   SOURCE_VERSION,
+  DEFAULT_AUDIO_LENGTH,
   CITY_FRAME,
 } = require('./notebooklmDailyNews');
+const notebookConfig = require('../config/notebooklm.json');
 
 const syntheticInput = {
   cycle: 999,
@@ -75,13 +78,19 @@ assert.deepStrictEqual(
   { sourceIds: ['kept'], generatedAt: 'new' }
 );
 assert.strictEqual(isCompletedManifest({
-  sourceVersion: '1.2',
+  sourceVersion: '1.3',
   sourceIds: ['source'],
   audioPath: 'output/synthetic-noncanon.m4a',
   driveLink: 'https://example.invalid/synthetic',
 }), true);
 assert.strictEqual(isCompletedManifest({
   sourceVersion: '1.2',
+  sourceIds: ['source'],
+  audioPath: 'output/synthetic-noncanon.m4a',
+  driveLink: 'https://example.invalid/synthetic',
+}), false);
+assert.strictEqual(isCompletedManifest({
+  sourceVersion: '1.3',
   sourceIds: ['source'],
 }), false);
 
@@ -135,9 +144,12 @@ assert.strictEqual(isCompletedManifest({
   const title = sourceTitle('current source pack', 999, 'abcdef1234567890');
   assert.strictEqual(title, 'GodWorld Daily C999 — current source pack — abcdef123456');
   const prompt = dailyPrompt(999);
-  assert.strictEqual(SOURCE_VERSION, '1.2');
+  assert.strictEqual(SOURCE_VERSION, '1.3');
+  assert.strictEqual(DEFAULT_AUDIO_LENGTH, 'default');
+  assert.strictEqual(notebookConfig.dailyNews.audioLength, 'default');
   assert(prompt.includes(CITY_FRAME));
   assert(prompt.includes('Give me today’s Cycle 999 city news'));
+  assert(dailyAudioFocus(999).includes('standard-length daily city-news podcast'));
 }
 
 {

@@ -1,7 +1,7 @@
 ---
 title: Supermemory retrieval economics + the data-analyst seat — research
 created: 2026-07-26
-updated: 2026-07-26
+updated: 2026-07-27
 type: reference
 tags: [research, infrastructure, media, retrieval, token-budget, active]
 sources:
@@ -10,6 +10,8 @@ sources:
   - docs/media/AGENT_NEWSROOM.md §Full Reporter Roster — Rhea Morgan "Data Analyst / Copy Chief"; Elliot Marbury "Data Desk"
   - .claude/agents/rhea-morgan/IDENTITY.md §Your Canon Sources — the existing Supermemory search toolkit
   - Mike-direct S334 — "the idea is an agent spawns a haiku agent that properly searches and returns structured data … this is like the data team"
+  - https://supermemory.ai/docs/concepts/filtering — current official `AND`/`OR` metadata-filter grammar
+  - Live read-only filter proof, 2026-07-27 — `bay-tribune` query with `source=edition-ingest`
 pointers:
   - "[[../engine/archive/ROLLOUT_PLAN]] — pending-state home"
   - "[[index]] — register here, same commit"
@@ -37,23 +39,39 @@ pointers:
 **Not applicable / hazard:**
 
 - **Per-search cheap-model filtering: take-nothing.** The floor cost kills it, and the compression job it was meant to do is already done server-side.
-- **`--filter` syntax unresolved.** `--filter '{"source":"edition-ingest"}'` returned nothing parseable. If metadata filtering does work with correct syntax it removes part of what the seat would be paid for — settle this before sizing the seat.
+- **Metadata filtering is a deterministic first pass, not a complete
+  adjudicator.** The CLI expects filters wrapped in `AND` or `OR`, for example
+  `--filter '{"AND":[{"key":"source","value":"edition-ingest"}]}'`. A bounded
+  live query returned 20/20 `edition-ingest` hits. This removes known
+  non-published source classes cheaply, but it cannot classify mixed
+  `drive-archive` records or recover historical records whose provenance
+  metadata is missing.
 - **Stale caveat in a live agent file.** `rhea-morgan/IDENTITY.md` says `wd-*` cards need `--mode hybrid --threshold 0.3` because "defaults return zero hits (S183 M1-M4)". Re-measured S334: `wd-citizens` returns 10 hits on defaults AND on hybrid+0.3. The caveat no longer holds; the same section points retrieval at `world-data`, which returns 0.
 - **Don't dual-hat Rhea's reviewer lane into the retrieval seat carelessly.** Rhea is the publish gate (Sonnet, `cron-rhea-gate.js`), and reviewer lanes are their own class per `.claude/rules/research-build.md` §Standing rules. Her Data Analyst function and her gate function are different jobs on the same citizen; collapsing them puts the verifier in the position of sourcing what it later verifies.
 - **Do not churn `source-search`.** It is proven (C100 eval, Sonnet-parity, 0 fabrications) and referenced across three orchestrators. Attribution and question-scoping are additive; renaming it is not.
 
 **Verdict:** `adopt` — but a different shape than the premise. Adopt the two free wins (jq projection, container routing) and the **question-scoped** data-analyst seat attributed to Rhea Morgan's Data Analyst function. Reject the per-search filter on measured economics. The Marbury Data Desk seat is a separate, genuinely-unbuilt opportunity.
 
-**Ignited plans:** none yet — the `--filter` syntax question gates sizing the seat.
+**Ignited plans:** [[../plans/2026-07-25-notebooklm-source-search-wiring]] Task
+8 owns the deterministic projection, provenance-filter, and domain-routing
+hardening applied 2026-07-27. Rollout `research.26` separately tracks the
+question-scoped Data Analyst seat; that agent design remains plan work rather
+than being implied by the deterministic MCP change.
 
 ---
 
 ## Applications (living)
 
 - 2026-07-26 — Initial extraction (S334). Corrections applied to `.claude/agents/rhea-morgan/IDENTITY.md` §Your Canon Sources the same session (stale S183 caveat, `world-data` mis-pointer).
+- 2026-07-27 — Task 8 resolved the metadata-filter grammar and applied the
+  result to `search_canon`, projected retrieval output, and `wd-*` domain
+  fan-out. No Supermemory records were changed.
 
 ---
 
 ## Changelog
 
 - 2026-07-26 — Initial extraction (S334). Measured the retrieval path, found the data-analyst role already exists as Rhea Morgan, verdict adopt at question scope.
+- 2026-07-27 — Resolved `--filter`: `AND`/`OR` wrapper required. A read-only
+  `source=edition-ingest` proof returned 20/20 matching results, removing the
+  research.26 sizing gate while leaving mixed-provenance adjudication open.

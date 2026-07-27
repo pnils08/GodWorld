@@ -57,7 +57,7 @@ module.exports = {
     cwd: '/root/GodWorld',
     watch: false,
     autorestart: false,
-    cron_restart: '0 14,2 * * *',
+    cron_restart: '0 14 * * *',
     max_memory_restart: '100M',
     env: {
       NODE_ENV: 'production',

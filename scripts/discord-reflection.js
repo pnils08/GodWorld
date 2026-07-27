@@ -25,10 +25,12 @@ const mags = require('../lib/mags');
 const page = require('../lib/citizenPage');
 const memoryFence = require('../lib/memoryFence');
 const getCurrentCycle = require('../lib/getCurrentCycle');
+const moltbookActivity = require('./moltbookActivity');
 
 const MAGS_POPID = 'POP-00005';
 const CONVO_LOG_DIR = path.join(__dirname, '..', 'logs', 'discord-conversations');
 const MOLTBOOK_LOG_DIR = path.join(__dirname, '..', 'logs', 'moltbook');
+const MOLTBOOK_REFLECTION_CURSOR = path.join(MOLTBOOK_LOG_DIR, '.reflection-cursor.json');
 const LOG_DIR = mags.LOG_DIR;
 const LOG_FILE = path.join(LOG_DIR, 'discord-reflection.log');
 const CLAUDE_MEM_URL = 'http://127.0.0.1:37777/api/memory/save';
@@ -108,32 +110,13 @@ function loadTodayConversations() {
 // ---------------------------------------------------------------------------
 // Load today's Moltbook interactions
 // ---------------------------------------------------------------------------
-function loadTodayMoltbookInteractions() {
-  var centralDate = mags.getCentralDate();
-  var utcDate = new Date().toISOString().split('T')[0];
-
-  var entries = [];
-  [centralDate, utcDate].forEach(function(dateStr) {
-    var logFile = path.join(MOLTBOOK_LOG_DIR, dateStr + '.json');
-    if (!fs.existsSync(logFile)) return;
-    try {
-      var data = JSON.parse(fs.readFileSync(logFile, 'utf8'));
-      entries = entries.concat(data.filter(function(e) {
-        return e.type === 'reply' || e.type === 'upvote' || e.type === 'post';
-      }));
-    } catch (_) {}
-  });
-
-  // Deduplicate by timestamp
-  var seen = {};
-  entries = entries.filter(function(e) {
-    if (seen[e.timestamp]) return false;
-    seen[e.timestamp] = true;
-    return true;
-  });
-
+function loadUnconsumedMoltbookInteractions() {
+  var entries = moltbookActivity.loadUnconsumed(
+    MOLTBOOK_LOG_DIR,
+    MOLTBOOK_REFLECTION_CURSOR
+  );
   if (entries.length === 0) return [];
-  log.info('Loaded ' + entries.length + ' Moltbook interactions for ' + centralDate);
+  log.info('Loaded ' + entries.length + ' new Moltbook interactions');
   return entries;
 }
 
@@ -427,6 +410,7 @@ function logRun(status, details) {
 
   var line = new Date().toISOString() + ' | ' + status +
     ' | conversations=' + (details.conversations || 0) +
+    ' | moltbook=' + (details.moltbook || 0) +
     ' | reflection=' + (details.reflectionChars || 0) + ' chars' +
     ' | duration=' + (details.durationMs || 0) + 'ms' +
     (details.error ? ' | error=' + details.error : '') + '\n';
@@ -448,7 +432,7 @@ async function main() {
   try {
     // Load today's conversations (Discord + Moltbook)
     var entries = loadTodayConversations();
-    var moltbookEntries = loadTodayMoltbookInteractions();
+    var moltbookEntries = loadUnconsumedMoltbookInteractions();
 
     if ((!entries || entries.length === 0) && (!moltbookEntries || moltbookEntries.length === 0)) {
       log.info('No conversations today — nothing to reflect on. Quiet day.');
@@ -465,7 +449,11 @@ async function main() {
     var archiveContext = '';
     try {
       // Build search query from conversation topics
-      var topicSample = entries.slice(-5).map(function(e) { return e.message; }).join(' ');
+      var topicParts = entries.slice(-5).map(function(e) { return e.message; });
+      topicParts = topicParts.concat(moltbookEntries.slice(-5).map(function(e) {
+        return e.targetTitle || e.title || e.replyText || '';
+      }));
+      var topicSample = topicParts.filter(Boolean).join(' ');
       var searchQuery = topicSample.substring(0, 200);
       archiveContext = await mags.searchSupermemory(searchQuery, 3, 5000);
       if (archiveContext) {
@@ -524,8 +512,16 @@ async function main() {
     );
     log.info('Nightly reflection saved to Supermemory');
 
+    // Advance only after the durable reflection outputs above succeed. A failed
+    // wake leaves the batch available for the next wake instead of losing it.
+    if (moltbookEntries.length > 0) {
+      moltbookActivity.markConsumed(MOLTBOOK_REFLECTION_CURSOR, moltbookEntries);
+      log.info('Marked ' + moltbookEntries.length + ' Moltbook interactions reflected');
+    }
+
     logRun(status, {
       conversations: discordCount,
+      moltbook: moltbookCount,
       reflectionChars: reflection.length,
       durationMs: Date.now() - startTime
     });

@@ -274,6 +274,26 @@ function stageStem(cycle, desk, tag) {
 }
 const nameSlug = n => String(n || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
+function writerArtifactTag(assign, personaSlug) {
+  if (!assign || personaSlug) return null;
+  const tag = nameSlug(assign.name);
+  if (!tag) throw new Error('fan-out assignment has no usable reporter name');
+  if (!/^[a-z0-9][a-z0-9-]{0,47}$/.test(tag)) {
+    throw new Error('fan-out reporter slug exceeds the writer tag contract');
+  }
+  return tag;
+}
+
+function buildWriterArgs(desk, stateFile, personaSlug, artifactTag) {
+  return [
+    path.join(ROOT, 'scripts', 'cron-desk-writer.js'),
+    '--desk', desk,
+    '--state-file', stateFile,
+    ...(personaSlug ? ['--persona', personaSlug] : []),
+    ...(artifactTag ? ['--artifact-tag', artifactTag] : []),
+  ];
+}
+
 // Review copies accumulate (Mike-direct 2026-07-24): a same-cycle rerun must not
 // clobber the earlier sample/staged copy — suffix -HHMM when the name is taken.
 function uniqueDest(dir, name) {
@@ -411,9 +431,17 @@ async function runWrite(assign) {
   fs.writeFileSync(stateFile, buildLaneState(desk, cycle, lane, byline, quotes, persona,
     angle && angle.angleRead ? angle.angleRead.text : null));
   log('writing on lane (' + fs.statSync(stateFile).size + ' B injected state' + (persona ? ' + stance anchor' : '') + ')...');
-  execFileSync('node', [path.join(ROOT, 'scripts', 'cron-desk-writer.js'), '--desk', desk,
-    '--state-file', path.relative(ROOT, stateFile),
-    ...(personaSlug ? ['--persona', personaSlug] : [])], { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
+  const artifactTag = writerArtifactTag(assign, personaSlug);
+  execFileSync(
+    'node',
+    buildWriterArgs(
+      desk,
+      path.relative(ROOT, stateFile),
+      personaSlug,
+      artifactTag
+    ),
+    { cwd: ROOT, stdio: 'inherit', timeout: 600000 }
+  );
   if (!fs.existsSync(draftPath)) throw new Error('writer produced no draft at ' + path.relative(ROOT, draftPath));
 
   // gate (skipped for --no-gate samples)
@@ -740,10 +768,19 @@ if (STAGE && !['angle', 'report', 'write'].includes(STAGE)) {
   console.error('[run] unknown --stage "' + STAGE + '" (want angle | report | write)');
   process.exit(1);
 }
-Promise.resolve()
-  .then(() => (STAGE && FANOUT ? runFanoutStage()
-    : STAGE === 'angle' ? runAngle()
-    : STAGE === 'report' ? runReport()
-    : STAGE === 'write' ? runWrite()
-    : (WAKE ? runWake() : main())))
-  .catch(err => { console.error('[run] Fatal:', err.message); process.exit(1); });
+if (require.main === module) {
+  Promise.resolve()
+    .then(() => (STAGE && FANOUT ? runFanoutStage()
+      : STAGE === 'angle' ? runAngle()
+      : STAGE === 'report' ? runReport()
+      : STAGE === 'write' ? runWrite()
+      : (WAKE ? runWake() : main())))
+    .catch(err => { console.error('[run] Fatal:', err.message); process.exit(1); });
+}
+
+module.exports = {
+  stageStem,
+  nameSlug,
+  writerArtifactTag,
+  buildWriterArgs,
+};

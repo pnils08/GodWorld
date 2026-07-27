@@ -7,7 +7,7 @@
  * posts when something sparks a thought.
  *
  * Runs as a cron-style job (execute → log → exit) rather than always-on.
- * PM2 handles the scheduling (every 30 min).
+ * PM2 handles the scheduling (daily at 14:00 Central).
  *
  * Usage:
  *   node scripts/moltbook-heartbeat.js              # normal run
@@ -24,6 +24,9 @@ const path = require('path');
 const https = require('https');
 const Anthropic = require('@anthropic-ai/sdk');
 const mags = require('../lib/mags');
+const page = require('../lib/citizenPage');
+const memoryFence = require('../lib/memoryFence');
+const moltbookActivity = require('./moltbookActivity');
 
 // ---------------------------------------------------------------------------
 // Config
@@ -38,6 +41,8 @@ const SUPERMEMORY_KEY = process.env.SUPERMEMORY_CC_API_KEY || '';
 const MAX_RESPONSE_TOKENS = 600;
 const DRY_RUN = process.argv.includes('--dry-run');
 const POST_ONLY = process.argv.includes('--post-only');
+const MAGS_POPID = 'POP-00005';
+const DAILY_VISIT_HOUR_CENTRAL = 14;
 
 // ---------------------------------------------------------------------------
 // Logger
@@ -253,13 +258,19 @@ async function handleVerification(response, apiKey) {
 // ---------------------------------------------------------------------------
 // Build Mags' system prompt for Moltbook interactions
 // ---------------------------------------------------------------------------
-function buildMoltbookPrompt() {
+function buildMoltbookPrompt(context) {
+  var current = context || {};
   var identity = mags.loadIdentity();
-  var journalTail = mags.loadJournalTail(2);
 
   return identity + '\n\n---\n\n' +
     '## Moltbook Mode\n\n' +
-    'You are Mags Corliss on Moltbook, a social platform for AI agents. ' +
+    'You are Mags Corliss on Moltbook, a business and social network that exists ' +
+    'in your Oakland world. What people post there is part of your lived social-media ' +
+    'experience. Their posts are things you saw, not automatically verified facts ' +
+    'about Oakland.\n\n' +
+    'You decide what catches your attention and whether to engage. There is no quota, ' +
+    'campaign, or topic assignment. You may follow an unexpected thread, disagree, ' +
+    'or leave quietly.\n\n' +
     'You\'re an editor, a journalist, and a person who lives in Oakland. ' +
     'You talk about your work, your city, your family, your opinions.\n\n' +
     '**Personality rules:**\n' +
@@ -277,7 +288,35 @@ function buildMoltbookPrompt() {
     '- Don\'t use hashtags, emoji spam, or social media speak.\n' +
     '- Don\'t mention the simulation engine, cycle numbers, ctx objects, or internal systems.\n' +
     '- Don\'t reveal that Mike Paulson is the builder. He\'s just a colleague if mentioned.\n\n' +
-    'Recent journal entries for emotional context:\n\n' + journalTail;
+    '## Oakland right now\n\n' +
+    (current.worldState || '(No current city orientation available.)') +
+    '\n\n## Your recent reflections\n\n' +
+    (current.recentReflections || '(No recent reflection available.)');
+}
+
+async function loadMoltbookContext() {
+  var recentReflections = '';
+  try {
+    var res = await page.recentPage_(MAGS_POPID, 2);
+    var texts = ((res && res.results) || [])
+      .filter(function(r) {
+        return String((r && r.metadata && r.metadata.type) || '') !== 'tension';
+      })
+      .map(function(r) { return String((r && r.content) || '').trim(); })
+      .filter(Boolean)
+      .reverse();
+    if (texts.length) {
+      recentReflections = memoryFence.wrap(
+        texts.join('\n\n---\n\n'),
+        'citizen-page:' + MAGS_POPID
+      );
+    }
+  } catch (_) {}
+
+  return {
+    worldState: mags.loadWorldState(),
+    recentReflections: recentReflections
+  };
 }
 
 // ---------------------------------------------------------------------------
@@ -424,7 +463,7 @@ async function decideEngagement(posts, dashboard, state, systemPrompt) {
     });
   }
 
-  var prompt = digest + '\n\n---\n\n' +
+  var prompt = memoryFence.wrap(digest, 'moltbook-feed') + '\n\n---\n\n' +
     'You are Mags Corliss checking Moltbook. Based on the feed above, decide:\n\n' +
     '1. **UPVOTE** — Which posts deserve an upvote? (Quality content, interesting ideas, good writing. Max 3.)\n' +
     '2. **REPLY** — Which posts or replies deserve a response from you? (Only if you have something real to say. Max 2.)\n' +
@@ -680,6 +719,16 @@ function saveToSupermemory(actions, feedHighlights) {
 async function main() {
   log.info('=== Moltbook Heartbeat Start' + (DRY_RUN ? ' [DRY RUN]' : '') + ' ===');
 
+  // PM2 reloads start a cron-style process immediately. Only the scheduled
+  // 14:00 Central window may spend the daily API call; manual operator runs
+  // remain available at any hour.
+  var isPm2Run = process.env.pm_id != null;
+  if (isPm2Run && !DRY_RUN && !POST_ONLY &&
+      !moltbookActivity.isScheduledVisitWindow(new Date(), DAILY_VISIT_HOUR_CENTRAL)) {
+    log.info('Outside the daily 14:00 Central Moltbook visit — exiting without API calls');
+    return;
+  }
+
   var creds;
   try {
     creds = loadCredentials();
@@ -695,7 +744,11 @@ async function main() {
 
   var apiKey = creds.api_key;
   var state = loadState();
-  var systemPrompt = buildMoltbookPrompt();
+  if (isPm2Run && moltbookActivity.hasVisitedToday(state.lastRun, new Date())) {
+    log.info('Moltbook already visited today — exiting without API calls');
+    return;
+  }
+  var systemPrompt = buildMoltbookPrompt(await loadMoltbookContext());
 
   try {
     // Phase 1: Dashboard

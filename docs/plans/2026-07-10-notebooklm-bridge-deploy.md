@@ -1,7 +1,7 @@
 ---
 title: NotebookLM Bridge Deploy Plan
 created: 2026-07-10
-updated: 2026-07-25
+updated: 2026-07-27
 type: plan
 tags: [media, infrastructure, active]
 sources:
@@ -179,6 +179,22 @@ pointers:
 - **Fix:** a completed same-hash run is now a local no-op before any NotebookLM call; `--force` is available for an intentional repeat. Existing manifests merge on every retry so an auth failure cannot erase prior source IDs, Artifact IDs, audio paths, or Drive links.
 - **Status:** [~] built and locally validated 2026-07-25 — next distinct-input scheduled run still needs live authentication proof
 
+### Task 16: v1.3 default-length daily audio
+
+- **Files:** `scripts/notebooklmDailyNews.js`,
+  `scripts/notebooklmDailyNews.test.js`, `config/notebooklm.json`,
+  `docs/reference/notebookLM-CLI.md`
+- **Design:** retain the v1.2 natural-source and source-scoping behavior, change
+  Daily News audio from `short` to the CLI-supported `default` length, and keep
+  the concise written brief unchanged. Bump the bounded-source version so a
+  completed v1.2 manifest cannot turn the first v1.3 run into an idempotent
+  no-op.
+- **Status:** [x] corrected and live-validated 2026-07-27 — the original
+  `medium` value failed before rendering because the installed CLI accepts only
+  `short`, `default`, or `long`. v1.3 now uses `default`; a resumed C102 run
+  generated a 19m16s audio file and completed Drive + Discord delivery. The
+  live 08:00 schedule is unchanged.
+
 ---
 
 ## Open questions
@@ -198,3 +214,9 @@ pointers:
 - 2026-07-25 — Phase 5 live: created `GodWorld — Daily Newsroom`, passed cross-Cycle archive retrieval, uploaded one bounded C102 source, generated the written brief and 102 MB long audio, delivered by Drive + Discord, and installed the 08:00 server-local schedule. First-render recovery exposed two hardening needs now folded in: persist Artifact ID before polling and allow an explicit latest-audio recovery without regeneration; polling ceiling increased 12→15 minutes.
 - 2026-07-25 — v1.2 tuning from Mike's first-listen feedback: removed operational instructions from the uploaded source, reduced chat/audio customization to a natural GodWorld Oakland 2042 frame, versioned the source hash, and changed Deep Dive length long→short. v1 retained for comparison.
 - 2026-07-25 — First 08:00 schedule fired but auth was rejected before any external write. This was a <5h cookie lifetime, not the expected 2–4 week rotation. Same-hash completed runs now stop locally before auth; retry manifests preserve completed delivery metadata; `--force` enables intentional repetition.
+- 2026-07-27 — Added v1.3 after the short first listen proved useful but too
+  brief. The first `medium` configuration failed before rendering because the
+  installed CLI does not support that value; corrected it to `default`. The
+  source version remains v1.3 so the partial run can resume without duplicating
+  its source. The resumed C102 run completed with a 19m16s audio file and
+  successful Drive + Discord delivery; schedule remains unchanged.

@@ -95,7 +95,7 @@ Record for every seat: `retrievalLane`, `resultStatus`, selected/used source IDs
 2. every prior-arc claim carries a NotebookLM **source ID (uuid)** + citation number + excerpt — a claim sourced to a file path (`output/pdfs/*.pdf`, an edition `.txt`, an archive file) means the agent read the artifacts directly and escaped the reviewed source scope;
 3. the last line is a bare `reconcileVerdict` token from the enum, with no prose after it.
 
-Fail any of the three → re-dispatch that seat ONCE, naming the specific violation. Fail twice → log the seat `resultStatus=no-result`, drop its material entirely, and continue the run without prior-arc sourcing. **Never launder a file-path return into the writer's sourcing** — it looks like a good return and is not. Two of two test dispatches failed this gate at wiring time; assume it fires.
+Fail any of the three → re-dispatch that seat ONCE, naming the specific violation. Fail twice → log the seat `resultStatus=no_result`, drop its material entirely, and continue the run without prior-arc sourcing. **Never launder a file-path return into the writer's sourcing** — it looks like a good return and is not. Two of two test dispatches failed this gate at wiring time; assume it fires.
 
 ## Step 5 — Voice the citizens (pipeline.43)
 

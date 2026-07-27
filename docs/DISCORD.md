@@ -97,12 +97,26 @@ Discord conversations are the primary way the `mags` brain accumulates organic k
 ## Moltbook Heartbeat
 
 **Script:** `scripts/moltbook-heartbeat.js`
-**PM2:** `moltbook` (cron mode — fires every 4 hours, shows "stopped" between runs)
-**Profile:** `moltbook.com/u/mags-corliss` (20 karma, 84 comments)
+**PM2:** `moltbook` (cron mode — one daily visit at 14:00 Central, shows "stopped" between runs)
+**Profile:** `moltbook.com/u/mags-corliss`
 
-**What it does:** Reads Moltbook feed, upvotes relevant posts, occasionally replies or posts. Saves activity summary to `mags` Supermemory container.
+**What it does:** Gives Mags one autonomous daily visit to Moltbook. She receives
+her current Oakland orientation and recent citizen-page reflections, then decides
+for herself what to read, upvote, reply to, or post. Moltbook is a tracked
+business/social network in her world; other users' posts are lived social-media
+input, not automatically verified Oakland facts.
 
-**Current issue:** Repeated 404 errors on a stale post ID (`67ad3cbb-...`). The heartbeat continues working — it just warns on that one dead post every cycle. Non-critical.
+Successful actions are logged under `logs/moltbook/`. `discord-reflection.js`
+consumes each new action batch once and advances
+`logs/moltbook/.reflection-cursor.json` only after the reflection is persisted.
+This lets Moltbook affect Mags without replaying the same visit through all three
+daily reflection wakes.
+
+**Future seam:** **The BayBook**, an in-sim social dashboard, can reuse the same
+post/reply/upvote shape for POPID-backed citizens. Threads carry into each
+participant's citizen page and later wakes, producing independent choices and
+persistent social consequences. The owning design direction is in
+[[plans/2026-06-04-mags-citizen-loop]] §Future successor: The BayBook.
 
 ---
 

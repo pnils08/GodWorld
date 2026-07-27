@@ -1,16 +1,18 @@
 ---
 title: Headless Newsroom + City-Hall Pipeline Plan
 created: 2026-07-20
-updated: 2026-07-26
+updated: 2026-07-27
 type: plan
 tags: [architecture, media, civic, infrastructure, active]
 sources:
   - "[[../research/2026-07-19-headless-cron-newsroom-agentic-rag]] — research basis (both threads, empirical runs, Feedback1.txt validation)"
+  - "[[2026-07-25-notebooklm-source-search-wiring]] — bounded NotebookLM retrieval and headless-consumption evaluation"
   - "Drive 182GQGxrdbOUIc6dO-CJBZzcZ3zthG-Pa (The Bay Awakening) + 1jAuBUfXspDCbfRaspjXSp3Mon7-MgUfu (Feedback1.txt) — Mike-shared S325"
   - "scripts/cron-desk-writer.js — writer-worker prototype, proven c101 sports S325"
   - ".claude/agents/source-search/SKILL.md — retrieval layer (S326); .claude/agents/rhea-morgan — canon gate"
 pointers:
   - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout"
+  - "[[2026-07-25-notebooklm-source-search-wiring]] — Task 7 headless-consumption verdict"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — registered same commit"
 ---
@@ -234,6 +236,68 @@ This **refines "those four desks wake daily" above**: they wake M–F on a *stat
 
 This does not weaken the probation wall: staged and ungated Articles remain explicitly unverified, the permanent `GodWorld` notebook receives published material only, and every daily artifact is `NOT_CANON`. See [[2026-07-10-notebooklm-bridge-deploy]] Phase 5 for the source hierarchy, failure contract, and schedule gate.
 
+#### Prior-arc writer injection evaluation — not adopted (2026-07-26)
+
+Task 7 in [[2026-07-25-notebooklm-source-search-wiring]] compared the same
+Cycle 102 civic state with and without a bounded NotebookLM prior-arc packet.
+The treatment received 18 verified excerpts (15.9k characters) from Editions
+98–101 on Baylight, local hiring, apprenticeship, and Jack London warning
+signs. It used none of that prior arc. Baseline failed Rhea with 3 flags
+(2 high); treatment failed with 2 flags (1 high), for $0.1162 total API cost.
+The lower treatment flag count therefore does not establish a retrieval
+benefit.
+
+Do not add this raw-excerpt shape to the scheduled newsroom. Both drafts stayed
+`NOT_CANON` and unstaged. The writer's opt-in `--artifact-tag` exists only to
+prevent evaluation files from clobbering one another; normal cron naming and
+behavior are unchanged. Any retry must follow the protected Task 6
+source-search contract and reduce verified prior coverage to a compact
+claims-and-citations digest before composition.
+
+The compact follow-up also failed the adoption test. `source-search` returned a
+valid 1,602-character, 3-claim digest from the four selected Editions, but the
+treatment used none of those claims. Baseline failed Rhea with 2 flags
+(2 high); treatment failed with 3 flags (2 high). The completed comparison cost
+$0.2098 including the agent's reported retrieval cost. Therefore digest size
+was not the remaining blocker: append-only context does not make prior coverage
+an Article requirement. Do not schedule compact injection. A future experiment
+must separately design a Brief/PREWRITE field that binds one selected,
+verified prior-arc claim into composition and evidence.
+
+That binding evaluation is now complete. The treatment reused the existing
+verified digest and received one mandatory Brief fact: prior Tribune reporting
+placed Jack London's decline inside a fourteen-corridor contraction. It used
+the fact in the body, emitted the required `PRIOR_PUBLISHED` Evidence entry,
+kept the source UUID out of copy, and passed the fact through Rhea's opt-in
+historical evidence context. Baseline failed with 5 flags (3 high); treatment
+failed with 2 flags (2 high), at $0.1254 writer/gate cost. The remaining
+treatment failures—an invented official already present in the lane and an
+invented anonymous-source profile—are independent name/canon hygiene defects.
+
+Conclusion: a structured prior-arc Brief field is the viable composition
+shape; passive context is not. This is a design proof, not permission to add it
+to cron. Production adoption requires the canonical Brief/PREWRITE schema,
+deterministic provenance into Rhea, and clearance of the existing lane/name
+hygiene blockers.
+
+The controlled hygiene follow-up cleared only the first, obvious lane defect.
+Both drafts received the same digest and required prior-arc fact; the treatment
+alone replaced the two reporter-angle candidates that failed the ledger check
+and received a strict no-invention prompt. It removed Marisol Garcia and the
+anonymous bartender, but still failed Rhea with 4 flags (3 high), versus the
+baseline's 5 flags (4 high): it relocated Gregory Mims and Crisis Coffee to
+Fruitvale and misspelled Mims in Evidence. The lane supplied quote text and
+POPIDs but not enough spatial provenance to prevent the relocation. Both drafts
+used the required prior-published fact. Cost was $0.1191, with retrieval reused
+at zero additional retrieval cost.
+
+Therefore source hygiene is a data-contract problem, not another prompt-tuning
+step. Before this seam can enter the scheduled writer, the Packet/Brief must
+provide a deterministic allowed-source roster with person identity, location,
+verbatim quote or explicit no-quote state, and attribution constraints; the
+writer output must be checked against that roster before Rhea. Do not schedule
+the evaluation-only redactor or strict prompt.
+
 ### Phase 2.1 — Rhea gate scope (Mike-direct S332)
 Rhea's job is two flag classes, everything else the context supports **passes** — she polices the canon boundary, not the editorial voice:
 - **Engine verbiage** — system language, raw metric names, status enums, dial decimals leaking into prose (e.g. `construction-planning`, `active internal state`, `Ripple Ledger`, `impactScore 51`). Flag → rewrite to citizen-facing language.
@@ -289,6 +353,21 @@ Aggregate scorecards across the accrued articles to answer Feedback1.txt's per-d
 
 Phase 1 DONE (writer/gate/route+scorecard); Phase 2.0 DONE incl. build (S331 engine.79a-d: 5 dark staffers + POPID join + eligibility gate + in-cycle hint cap; bench C110-C113 proven, live-deployed; NOTE stale-seam finding — live WHO-assist is buildContractSeeds/suggestStoryAngle_, Engine B v3 path never reaches the v4 deck) → next: Phase 2 daily writer-wakes (needs W5 half 1 signal partition).
 
+### 2026-07-27 — fan-out filename handoff defect — fixed
+
+The 2026-07-26 write wake produced six desk-only raw drafts, but
+`cron-desk-run.js` expected reporter-specific draft paths. It therefore
+recorded `0/6` and promoted no Article through Rhea into `staged/` or
+`flagged/`. The downstream NotebookLM Daily News collector correctly ignores
+those raw drafts.
+
+Fixed under builder approval: non-persona fan-out assignments now pass the
+reporter name slug through the writer's existing `--artifact-tag` namespace.
+Persona and single-desk paths remain unchanged. Offline contract tests prove
+the orchestrator's expected path equals the writer's emitted path and preserve
+the firebrand filename. The next scheduled 18:15 write wake is the live proof;
+no paid/manual wake or crontab change was used for validation.
+
 ## Changelog
 
 - 2026-07-20 — Initial draft (S325). Research basis [[../research/2026-07-19-headless-cron-newsroom-agentic-rag]]; ignited by Mike's full-pipeline direction + Feedback1.txt validation. Phase 1 concrete (scorecard building this session); Phases 2–4 outlined to split into sub-plans when picked up.
@@ -298,3 +377,20 @@ Phase 1 DONE (writer/gate/route+scorecard); Phase 2.0 DONE incl. build (S331 eng
 - 2026-07-22 — Freeze retired + reporter-record added (S332). Staging reframed freeze→probation; graduate to publish-on-write on accuracy. Step 6 (layer 5): reporter acknowledges own article to wiki (page doc + intake); NO LifeHistory per S312 double-hit.
 - 2026-07-23 — Voice doctrine + Phase 2.1 Rhea gate scope (S332). Rhea flags 2 classes only: engine verbiage + data-output misrepresentation; context-supported content passes. Journalist-agnostic. Cadence ~5 short daily → 1 compiled.
 - 2026-07-25 — Added the bounded NotebookLM daily-listening consumer pointer (Phase 2.4). It reads probation output without publishing or ingesting it; the separate bridge plan owns source scoping, delivery, and scheduling.
+- 2026-07-26 — Recorded the Task 7 paired headless-consumption result. Raw
+  verified-excerpt injection was not adopted because the treatment ignored its
+  prior-arc packet; both samples failed Rhea and remained `NOT_CANON`.
+- 2026-07-26 — Recorded the compact Task 7 follow-up. The treatment ignored a
+  valid 1,602-character source-search digest and again failed Rhea, so no
+  headless prior-arc injection was scheduled.
+- 2026-07-27 — Recorded the structured Brief-binding proof. Required
+  prior-published evidence reached both Article body and Rhea successfully,
+  but scheduling remains blocked by unrelated lane/name hygiene failures.
+- 2026-07-27 — Recorded the controlled source-hygiene follow-up. Redaction and
+  a strict prompt reduced but did not eliminate canon failures; production now
+  requires a deterministic source roster rather than another prompt-only retry.
+- 2026-07-27 — Recorded the live fan-out filename handoff defect that left the
+  July 26 write wake at `0/6` and supplied no promoted Article to Daily News.
+- 2026-07-27 — Fixed that filename handoff by forwarding the roster reporter
+  slug through the writer output namespace; deterministic roster/persona tests
+  pass, with the next 18:15 wake retained as the live proof.

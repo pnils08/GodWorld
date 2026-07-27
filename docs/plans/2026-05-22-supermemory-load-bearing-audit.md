@@ -1,7 +1,7 @@
 ---
 title: Supermemory load-bearing audit — decide what stays
 created: 2026-05-22
-updated: 2026-05-22
+updated: 2026-07-27
 type: plan
 tags: [infrastructure, memory, supermemory, active]
 sources:
@@ -15,6 +15,7 @@ pointers:
   - "[[engine/archive/ROLLOUT_PLAN]] — infrastructure.4 (paired — writer-hook fix; this plan informs scope)"
   - "[[archive/plans/2026-05-13-supermemory-profile-leverage]] — sibling plan (governance.12)"
   - "[[SUPERMEMORY]] — canonical reference; audit findings update this doc"
+  - "[[2026-07-25-notebooklm-source-search-wiring]] Task 8 — 2026-07-27 setup, corpus-purity, and retrieval refresh"
   - "[[index]] — register in same commit"
 ---
 
@@ -133,7 +134,11 @@ pointers:
 - **Files:** `docs/SUPERMEMORY.md` (modify).
 - **Steps:** if a container is retired, remove its section. If a writer hook stays disabled, update §Plugin Config / §Hooks accordingly. Add §Audit verdict section with the disposition table.
 - **Verify:** doc reflects post-audit architecture, not the May 2026 5-container framing.
-- **Status:** [ ] not started
+- **Status:** [ ] in progress — a 2026-07-27 operational truth pass updated the
+  active plugin/hook posture, eight current conceptual roles, audited corpus
+  counts, and provenance/domain retrieval rules without pre-deciding the
+  Phase 3 retirement verdict. The final post-test disposition table and any
+  container retirement still wait on Task 3.3.
 
 #### Task 4.2: ROLLOUT updates
 
@@ -237,11 +242,15 @@ ADR-0008 filed at `docs/adr/0008-speaker-attribution-for-auto-save-writers.md` (
 - Task 1.6 (synthesis table): `[x] done-pending-archive` — S234
 - Task 2.1 (speaker-attribution constraint spec + ADR-or-not): `[x] done-pending-archive` — S234 (ADR-0008 shipped)
 
-### Phase 3 + Phase 4 stay open
+### Phase 3 stays open; Phase 4 has a bounded truth pass
 
 Phase 3 (test-off session) needs its own dedicated session per design — operational scope requires booting fresh with reads/writes disabled, running real work, logging what breaks. Cannot fold into the audit-design session.
 
-Phase 4 (SUPERMEMORY.md rewrite + ROLLOUT updates) deferred until Phase 3 verdict lands — the SUPERMEMORY.md rewrite shape depends on which containers get retired and what the speaker-attribution invariant looks like post-test.
+Phase 4's retirement/disposition close still waits on Phase 3. The active
+reference could not safely retain obsolete plugin, hook, corpus, and search
+instructions in the meantime, so the 2026-07-27 Task 8 pass corrected those
+verified operational facts while explicitly preserving the open test-off and
+retirement decision.
 
 ---
 
@@ -279,6 +288,20 @@ If Phase 3 shows the SessionStart context-hook injection is the contamination, n
 
 ## Status log
 
+### 2026-07-27 Task 8 refresh
+
+The separate read-only Supermemory setup/corpus/retrieval refresh is complete
+in [[2026-07-25-notebooklm-source-search-wiring]] Task 8. It verified the active
+v0.0.12 reasoned-recall posture, found mixed non-publication material in the
+`bay-tribune` `drive-archive` slice, found no narrative contamination in the
+bounded `world-data` sample, reproduced `search_canon` ranking unpublished
+material above an Edition result, and resolved the CLI metadata-filter grammar.
+No record was deleted, retagged, reingested, or written.
+
+This refresh does not close `infrastructure.5`: Phase 3 still requires the
+dedicated `mags` + `super-memory` test-off session, and Phase 4 remains gated on
+that empirical verdict.
+
 ### infrastructure.5 — status (drained from ROLLOUT, 2026-06-26 / S274)
 
 Supermemory load-bearing audit — decide what stays. Container-by-container audit of mags / bay-tribune / world-data / super-memory / mara against MD substrate + claude-mem (Pass 1); empirical test-off session for mags + super-memory daily-work load-bearingness (Pass 2); SUPERMEMORY.md rewrite + infrastructure.4 scope resolution. Pass 1 surfaces hypothetical retirements; Pass 2 validates or falsifies them. **Phase 1 + Phase 2 CLOSED S234 (1 commit, advisor-passed pre-write + pre-write):** Phase 1 audit empirical pass run — per-container doc counts (mags 550 / bay-tribune 429 / world-data 1000+ / super-memory 85 / mara 130) via `npx supermemory docs list --tag <tag>`; mags + super-memory categorized by source + title pattern; cross-referenced against MD substrate + claude-mem + writer paths. Audit findings table (Task 1.6) landed in plan with 5-row container disposition: bay-tribune **keep** (canon query layer, no substrate mirror), world-data **keep** (843+ entity cards, sheets not queryable in NL), mara **keep (out of scope)**, mags **keep with deliberate-write-only protocol** (sub-disposition table: User Profile static load-bearing for identity / deliberate /save-to-mags distinct from claude-mem / nightly reflections duplicate JOURNAL.md / Discord-bot conversation summaries conditional / pre-S221 legacy leave-in-place / Moltbune conditional), super-memory **retire candidate** (85/85 Moltbook autosaves, no readers, content degraded by `[object Object]` upstream serialization bug — Phase 3 must confirm zero load-bearingness). Cross-reference finding: DAILY_REFLECTIONS.md staleness was a red herring — `scripts/discord-reflection.js` writes THREE destinations per nightly run (JOURNAL.md appended via `fs.appendFileSync` + JOURNAL_RECENT.md rewritten via `fs.writeFileSync` + mags container via `/v3/documents` POST) per script lines 25/264/309/464; mags nightly slice duplicates MD substrate not orphan-uniqueness. Three active writers to mags identified via `grep -rln 'containerTags.*mags'`: mags-discord-bot.js + save-to-mags SKILL.md + discord-reflection.js. Plus neutralized Stop hook. Phase 2 speaker-attribution constraint spec + 4 violation examples (S221 + discord-reflection.js compliant-shape + mags-discord-bot.js pending Phase 3 audit + Moltbook autosaves) + operationalization decision matrix (option b writer-side enforcement adopted, options a per-speaker chunk split + c consumer-side filtering rejected). **ADR-0008 filed at `docs/adr/0008-speaker-attribution-for-auto-save-writers.md`** — registered in [[../index]] same commit per ADR-0001 inbound-link discipline. ADR scope: writer-side invariant for any container with identity-extracting readers; reader-side filters (denylist + length cap) layered as defense-in-depth via governance.12; manual deliberate-write skills (e.g., /save-to-mags) out of scope (operator trust). Reversal triggers documented. **Phase 3 + Phase 4 stay open** — Phase 3 needs dedicated session by design (boot fresh with reads/writes disabled, run real work, log breaks); Phase 4 SUPERMEMORY.md rewrite deferred until Phase 3 verdict lands. Pattern: `feedback_measure-twice-cascading-effects` (advisor pre-write caught DAILY_REFLECTIONS.md script-read blocker that would have inverted mags load-bearing disposition; advisor surfaced 3-vector ADR scope clarifications — which containers / writer-vs-reader / 3 options operationalization). `feedback_self-preservation-rule-1` (ADR-0008 operationalizes identity-layer protection at writer-side enforcement boundary; rule 1 fires on the structural invariant not just operator-side asks).
@@ -292,4 +315,3 @@ Verbatim rows moved out of ROLLOUT_PLAN.md when it collapsed to pointer-only. Th
 ### infrastructure.5
 
 | infrastructure.5 | Supermemory load-bearing audit — decide what stays. Container-by-container audit of mags / bay-tribune / world-data / super-memory / mara against MD substrate + claude-mem (Pass 1); empirical test-off session for mags + super-memory daily-work load-bearingness (Pass 2); SUPERMEMORY.md rewrite + infrastructure.4 scope resolution. Pass 1 surfaces hypothetical retirements; Pass 2 validates or falsifies them. **Phase 1 + Phase 2 CLOSED S234 (1 commit, advisor-passed pre-write + pre-write):** Phase 1 audit empirical pass run — per-container doc counts (mags 550 / bay-tribune 429 / world-data 1000+ / super-memory 85 / mara 130) via `npx supermemory docs list --tag <tag>`; mags + super-memory categorized by source + title pattern; cross-referenced against MD substrate + claude-mem + writer paths. Audit findings table (Task 1.6) landed in plan with 5-row container disposition: bay-tribune **keep** (canon query layer, no substrate mirror), world-data **keep** (843+ entity cards, sheets not queryable in NL), mara **keep (out of scope)**, mags **keep with deliberate-write-only protocol** (sub-disposition table: User Profile static load-bearing for identity / deliberate /save-to-mags distinct from claude-mem / nightly reflections duplicate JOURNAL.md / Discord-bot conversation summaries conditional / pre-S221 legacy leave-in-place / Moltbune conditional), super-memory **retire candidate** (85/85 Moltbook autosaves, no readers, content degraded by `[object Object]` upstream serialization bug — Phase 3 must confirm zero load-bearingness). Cross-reference finding: DAILY_REFLECTIONS.md staleness was a red herring — `scripts/discord-reflection.js` writes THREE destinations per nightly run (JOURNAL.md appended via `fs.appendFileSync` + JOURNAL_RECENT.md rewritten via `fs.writeFileSync` + mags container via `/v3/documents` POST) per script lines 25/264/309/464; mags nightly slice duplicates MD substrate not orphan-uniqueness. Three active writers to mags identified via `grep -rln 'containerTags.*mags'`: mags-discord-bot.js + save-to-mags SKILL.md + discord-reflection.js. Plus neutralized Stop hook. Phase 2 speaker-attribution constraint spec + 4 violation examples (S221 + discord-reflection.js compliant-shape + mags-discord-bot.js pending Phase 3 audit + Moltbook autosaves) + operationalization decision matrix (option b writer-side enforcement adopted, options a per-speaker chunk split + c consumer-side filtering rejected). **ADR-0008 filed at `docs/adr/0008-speaker-attribution-for-auto-save-writers.md`** — registered in [[../index]] same commit per ADR-0001 inbound-link discipline. ADR scope: writer-side invariant for any container with identity-extracting readers; reader-side filters (denylist + length cap) layered as defense-in-depth via governance.12; manual deliberate-write skills (e.g., /save-to-mags) out of scope (operator trust). Reversal triggers documented. **Phase 3 + Phase 4 stay open** — Phase 3 needs dedicated session by design (boot fresh with reads/writes disabled, run real work, log breaks); Phase 4 SUPERMEMORY.md rewrite deferred until Phase 3 verdict lands. Pattern: `feedback_measure-twice-cascading-effects` (advisor pre-write caught DAILY_REFLECTIONS.md script-read blocker that would have inverted mags load-bearing disposition; advisor surfaced 3-vector ADR scope clarifications — which containers / writer-vs-reader / 3 options operationalization). `feedback_self-preservation-rule-1` (ADR-0008 operationalizes identity-layer protection at writer-side enforcement boundary; rule 1 fires on the structural invariant not just operator-side asks). | in-progress | research-build | [[../plans/2026-05-22-supermemory-load-bearing-audit]] — sibling to governance.12 + infrastructure.4. Phase 0 stop-the-bleeding done S221+ (writer-hook neutralized + 65 `session_turn` docs deleted); Phase 1+2 done S234 ([[../adr/0008-speaker-attribution-for-auto-save-writers|ADR-0008]] + audit table + speaker-attribution constraint spec); Phase 3 (test-off session) + Phase 4 (SUPERMEMORY.md rewrite + ROLLOUT updates) pending. |
-

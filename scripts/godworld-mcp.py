@@ -26,6 +26,7 @@ Tools:
 import os
 import json
 import subprocess
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from urllib.parse import quote
 from fastmcp import FastMCP
@@ -47,15 +48,83 @@ mcp = FastMCP("godworld", instructions="GodWorld city simulation data. Search ca
 SUPERMEMORY_KEY = os.environ.get('SUPERMEMORY_CC_API_KEY', '')
 DASHBOARD_URL = 'http://localhost:3001'
 PROJECT_ROOT = Path(__file__).parent.parent
+PUBLISHED_CANON_FILTER = {
+    'AND': [
+        {'key': 'source', 'value': 'edition-ingest'},
+    ],
+}
+WORLD_DOMAIN_TAGS = (
+    'wd-citizens',
+    'wd-business',
+    'wd-faith',
+    'wd-cultural',
+    'wd-neighborhood',
+    'wd-initiative',
+    'wd-player-truesource',
+    'wd-summary',
+)
 
 
 # ═══════════════════════════════════════════════════════════════════════════
 # HELPERS
 # ═══════════════════════════════════════════════════════════════════════════
 
+def _project_supermemory_hits(query: str, container: str, hits: list,
+                              limit: int, sort: str = None,
+                              label: str = None) -> str:
+    """Render only retrieval content and useful provenance from JSON hits."""
+    if sort == 'recency':
+        hits.sort(
+            key=lambda item: (
+                item.get('updatedAt') or '',
+                item.get('similarity') or 0,
+            ),
+            reverse=True,
+        )
+    top = hits[:limit]
+    if not top:
+        return f"No results for '{query}' in {container}"
+
+    qualifier = f" — {label}" if label else ''
+    lines = [f"=== {container}{qualifier}; {len(top)} hit(s) ==="]
+    for hit in top:
+        metadata = hit.get('metadata')
+        if not isinstance(metadata, dict):
+            metadata = {}
+        title = hit.get('title') or metadata.get('title') or '(untitled)'
+        provenance = []
+        source = metadata.get('source') or hit.get('source')
+        cycle = metadata.get('cycle') or hit.get('cycle')
+        record_type = metadata.get('type') or hit.get('type')
+        updated = (hit.get('updatedAt') or '').split('T')[0]
+        similarity = hit.get('similarity')
+        if source:
+            provenance.append(f"source={source}")
+        if cycle is not None:
+            provenance.append(f"cycle={cycle}")
+        if record_type:
+            provenance.append(f"type={record_type}")
+        if updated:
+            provenance.append(f"updated={updated}")
+        if isinstance(similarity, (int, float)):
+            provenance.append(f"sim={similarity:.3f}")
+        suffix = f" [{' '.join(provenance)}]" if provenance else ''
+        lines.append(f"--- {title}{suffix}")
+        body = (
+            hit.get('memory')
+            or hit.get('content')
+            or hit.get('chunk')
+            or hit.get('summary')
+            or ''
+        )
+        lines.append(str(body).strip() or '(no projected text)')
+    return '\n'.join(lines)
+
+
 def supermemory_search(query: str, container: str, limit: int = 5,
                        mode: str = None, threshold: float = None,
-                       sort: str = None) -> str:
+                       sort: str = None, metadata_filter: dict = None,
+                       project: bool = False, label: str = None) -> str:
     """Search a Supermemory container.
 
     mode: None (CLI default 'memories'), 'hybrid', or 'documents'. Use 'hybrid'
@@ -70,65 +139,106 @@ def supermemory_search(query: str, container: str, limit: int = 5,
         66→55 across E85→E92→E93 + Dante Nelson Adams Point→West Oakland
         across E83→E86; bay-tribune doesn't dedupe per-citizen, so similarity
         ranking surfaces whichever version had the fattest content match).
+    metadata_filter: Supermemory AND/OR filter object passed as compact JSON.
+        A filtered search always parses JSON and returns the projected shape.
+    project: parse JSON and return only useful content/provenance fields.
     """
     try:
+        if not isinstance(limit, int) or limit < 1:
+            raise ValueError('limit must be a positive integer')
+        if sort not in (None, 'recency'):
+            raise ValueError("sort must be None or 'recency'")
+        if metadata_filter is not None and not isinstance(metadata_filter, dict):
+            raise ValueError('metadata_filter must be an object')
+
+        needs_json = bool(sort or project or metadata_filter is not None)
+        fetch_limit = max(limit * 3, 10) if sort == 'recency' else limit
         cmd = ['npx', 'supermemory', 'search', query, '--tag', container,
-               '--limit', str(limit)]
+               '--limit', str(fetch_limit)]
         if mode:
             cmd.extend(['--mode', mode])
         if threshold is not None:
             cmd.extend(['--threshold', str(threshold)])
-
-        if sort == 'recency':
-            # Need JSON to access updatedAt for client-side re-rank. Fetch a
-            # wider window then trim — the top-similarity hits aren't always
-            # the top-recency hits, so over-fetch + sort + trim is the only
-            # way to guarantee the newest version reaches the caller.
-            cmd_json = cmd + ['--limit', str(max(limit * 3, 10)), '--json']
-            # Replace the original --limit pair with the wider one
-            for i, arg in enumerate(cmd_json):
-                if arg == '--limit' and i + 1 < len(cmd_json) and cmd_json[i + 1] == str(limit):
-                    cmd_json[i + 1] = str(max(limit * 3, 10))
-                    break
-            result = subprocess.run(
-                cmd_json,
-                capture_output=True, text=True, timeout=15,
-                cwd=str(PROJECT_ROOT)
-            )
-            if not result.stdout:
-                return f"No results for '{query}' in {container}"
-            try:
-                parsed = json.loads(result.stdout)
-                hits = parsed.get('results', [])
-                # Sort newest-first by updatedAt (ISO 8601 strings sort
-                # lexicographically; falsy values to the end).
-                hits.sort(key=lambda r: r.get('updatedAt') or '', reverse=True)
-                top = hits[:limit]
-                if not top:
-                    return f"No results for '{query}' in {container}"
-                # Render same shape as the CLI text output for consistency
-                # with existing callers.
-                lines = [f"=== {container} — recency-ranked, {len(top)} of {len(hits)} hits ==="]
-                for r in top:
-                    when = (r.get('updatedAt') or '').split('T')[0]
-                    sim = r.get('similarity')
-                    sim_tag = f" sim={sim:.3f}" if isinstance(sim, (int, float)) else ''
-                    lines.append(f"--- {when} (id={r.get('id', '?')}){sim_tag}")
-                    body = r.get('memory') or r.get('content') or ''
-                    lines.append(body)
-                return '\n'.join(lines)
-            except (json.JSONDecodeError, AttributeError, TypeError):
-                # Fall back to raw stdout if JSON parse fails
-                return result.stdout.strip()
+        if metadata_filter is not None:
+            cmd.extend([
+                '--filter',
+                json.dumps(metadata_filter, separators=(',', ':'), sort_keys=True),
+            ])
+        if needs_json:
+            cmd.append('--json')
 
         result = subprocess.run(
             cmd,
-            capture_output=True, text=True, timeout=15,
+            capture_output=True, text=True, timeout=20,
             cwd=str(PROJECT_ROOT)
         )
-        return result.stdout.strip() if result.stdout else f"No results for '{query}' in {container}"
+        if result.returncode != 0:
+            return (
+                f"Search error: Supermemory CLI exited {result.returncode} "
+                f"for {container}"
+            )
+        if not result.stdout:
+            return f"No results for '{query}' in {container}"
+
+        if needs_json:
+            try:
+                parsed = json.loads(result.stdout)
+                hits = parsed.get('results', [])
+                if not isinstance(hits, list):
+                    raise TypeError('results must be an array')
+            except (json.JSONDecodeError, AttributeError, TypeError) as exc:
+                return f"Search error: invalid Supermemory JSON for {container}: {exc}"
+            return _project_supermemory_hits(
+                query, container, hits, limit, sort=sort, label=label
+            )
+
+        return result.stdout.strip()
     except Exception as e:
         return f"Search error: {str(e)}"
+
+
+def published_canon_search(query: str, limit: int = 5,
+                           sort: str = None) -> str:
+    """Search only the audited published-ingest provenance lane."""
+    return supermemory_search(
+        query,
+        'bay-tribune',
+        limit,
+        mode='hybrid',
+        threshold=0.3,
+        sort=sort,
+        metadata_filter=PUBLISHED_CANON_FILTER,
+        project=True,
+        label='published provenance only',
+    )
+
+
+def search_world_domains(query: str, per_domain_limit: int = 2) -> str:
+    """Fan out over real world-data domain tags, never the empty umbrella lane."""
+    def run_domain(tag):
+        return supermemory_search(
+            query,
+            tag,
+            per_domain_limit,
+            mode='hybrid',
+            threshold=0.3,
+            project=True,
+        )
+
+    # Three workers bound Node/npx pressure on the 1 GB production droplet.
+    with ThreadPoolExecutor(max_workers=3) as pool:
+        futures = {tag: pool.submit(run_domain, tag) for tag in WORLD_DOMAIN_TAGS}
+        results = {tag: future.result() for tag, future in futures.items()}
+
+    sections = []
+    for tag in WORLD_DOMAIN_TAGS:
+        result = results[tag]
+        if result.startswith('No results for '):
+            continue
+        sections.append(result)
+    if not sections:
+        return f"No results for '{query}' in world-data domain tags"
+    return '\n\n'.join(sections)
 
 
 def dashboard_get(endpoint: str) -> str:
@@ -247,25 +357,18 @@ def disk_search(query: str, max_files: int = 12) -> str:
 
 @mcp.tool()
 def lookup_citizen(name: str) -> str:
-    """Look up a citizen by name. Returns profile from world-data + appearance history from bay-tribune.
+    """Look up a citizen by name. Returns a current domain card plus published history.
     Use this instead of reading truesource or searching Supermemory manually."""
     # S197 BUNDLE-B (G-S7/G-S12): citizen cards are short structured records
     # — the default memories-mode threshold of 0.6 misses them. Use hybrid
     # mode + 0.3 threshold (same pattern as wd-* domain tools shipped S183).
-    # Also try wd-citizens directly first as the most specific source.
     citizen_card = supermemory_search(name, 'wd-citizens', 3, mode='hybrid', threshold=0.3)
-    world = supermemory_search(name, 'world-data', 3, mode='hybrid', threshold=0.3)
-    # S215 canon.1c (G-S9): bay-tribune stacks per-citizen wiki entries by
-    # edition (Patricia Nolan E85→E92→E93 each persist). Similarity ranking
-    # returns whichever version had the fattest text match — often a stale
-    # edition. Recency rank pushes the newest ingest to the top so callers
-    # see canonical-current facts first. canon.1b will eventually wipe the
-    # priors at ingest time; until then 1c surfaces the current version.
-    canon = supermemory_search(name, 'bay-tribune', 3, mode='hybrid', threshold=0.3,
-                               sort='recency')
+    # Supermemory is not the current-state authority. Recency helps order a
+    # citizen's paper-of-record appearances, while provenance filtering keeps
+    # mixed drive/archive directives out of the canon lane.
+    canon = published_canon_search(name, 3, sort='recency')
     return (f"=== WD-CITIZENS (structured card) ===\n{citizen_card}\n\n"
-            f"=== WORLD-DATA (broader state) ===\n{world}\n\n"
-            f"=== BAY-TRIBUNE (canon history, newest first) ===\n{canon}")
+            f"=== BAY-TRIBUNE (published history, newest first) ===\n{canon}")
 
 
 @mcp.tool()
@@ -298,10 +401,16 @@ def lookup_initiative(name: str) -> str:
     if not match:
         # Semantic fallback — no tracker row matched. Note miss explicitly so
         # callers know they got fallback prose, not authoritative tracker data.
-        world = supermemory_search(f"{name} initiative", 'world-data', 3,
-                                   mode='hybrid', threshold=0.3)
+        world = supermemory_search(
+            f"{name} initiative",
+            'wd-initiative',
+            3,
+            mode='hybrid',
+            threshold=0.3,
+            project=True,
+        )
         avail = ', '.join((it.get('id') or '?') for it in items) or '(tracker empty)'
-        return (f"=== NO TRACKER MATCH for '{name}' — semantic fallback (world-data) ===\n"
+        return (f"=== NO TRACKER MATCH for '{name}' — semantic fallback (wd-initiative) ===\n"
                 f"Available tracker IDs: {avail}\n\n{world}")
 
     # Engine outcome layer — read latest civic desk packet for this initiative
@@ -354,21 +463,18 @@ def lookup_initiative(name: str) -> str:
 @mcp.tool()
 def search_canon(query: str) -> str:
     """Search the Bay Tribune canon archive (bay-tribune container).
-    Returns published edition content matching the query.
+    Returns only records carrying audited edition-ingest provenance.
     Use for: 'What has been published about OARI?', 'Beverly Hayes quotes', 'Baylight timeline'."""
-    return supermemory_search(query, 'bay-tribune', 5)
+    return published_canon_search(query, 5)
 
 
 @mcp.tool()
 def search_world(query: str) -> str:
-    """Search the world state (world-data container).
-    Returns current city state: citizens, businesses, neighborhoods, demographics.
+    """Search world-data domain tags.
+    Returns derived cards from citizens, businesses, faith, culture,
+    neighborhoods, initiatives, player truesource, and Cycle summaries.
     Use for: 'Who lives in Temescal?', 'West Oakland businesses', 'neighborhood sentiment'."""
-    # S197 BUNDLE-B (G-S12): hybrid+0.3 to surface short citizen/biz/faith cards
-    # alongside longer narrative content. Default memories+0.6 returned only
-    # faith-org/business cards on citizen queries because citizen cards are
-    # below the threshold.
-    return supermemory_search(query, 'world-data', 5, mode='hybrid', threshold=0.3)
+    return search_world_domains(query)
 
 
 @mcp.tool()
@@ -451,9 +557,14 @@ def get_roster(team: str = "as") -> str:
 def get_neighborhood(name: str) -> str:
     """Get neighborhood state — demographics, sentiment, businesses, recent events.
     Use for: understanding a neighborhood before writing about it."""
-    # S197 BUNDLE-B: hybrid+0.3 (same root cause as lookup_citizen — short
-    # structured cards below default memories-mode threshold).
-    return supermemory_search(f"{name} neighborhood", 'world-data', 3, mode='hybrid', threshold=0.3)
+    return supermemory_search(
+        f"{name} neighborhood",
+        'wd-neighborhood',
+        3,
+        mode='hybrid',
+        threshold=0.3,
+        project=True,
+    )
 
 
 @mcp.tool()
@@ -492,9 +603,7 @@ def get_council_member(district: str) -> str:
                             f"Status:   {member.get('status', '?')}\n"
                         )
                         # Pull recent narrative if available
-                        narrative = supermemory_search(
-                            m_name, 'bay-tribune', 3, mode='hybrid', threshold=0.3
-                        )
+                        narrative = published_canon_search(m_name, 3)
                         return f"{struct}\n=== RECENT CANON ===\n{narrative}"
 
                 # Not matched — list what's available so caller can retry
@@ -507,9 +616,16 @@ def get_council_member(district: str) -> str:
         except (json.JSONDecodeError, KeyError):
             pass  # Fall through to supermemory search
 
-    # Fallback: supermemory search (with hybrid+0.3 to surface citizen cards)
+    # Fallback: the current citizen-card domain, not the empty umbrella search.
     query = f"council {district}"
-    return supermemory_search(query, 'world-data', 3, mode='hybrid', threshold=0.3)
+    return supermemory_search(
+        query,
+        'wd-citizens',
+        3,
+        mode='hybrid',
+        threshold=0.3,
+        project=True,
+    )
 
 
 @mcp.tool()
@@ -520,7 +636,7 @@ def get_domain_ratings(cycle: int) -> str:
     # Read from Edition_Coverage_Ratings via dashboard
     result = dashboard_get(f'/api/health')
     # Also search for cycle-specific data
-    canon = supermemory_search(f"Edition {cycle} coverage rating domain", 'bay-tribune', 3)
+    canon = published_canon_search(f"Edition {cycle} coverage rating domain", 3)
     return f"=== COVERAGE RATINGS C{cycle} ===\n{canon}"
 
 
@@ -528,9 +644,8 @@ def get_domain_ratings(cycle: int) -> str:
 # DOMAIN-FILTERED LOOKUPS (S183 — wd-* tag scheme, plan tasks M1-M4)
 # Each tool queries a single domain tag instead of the broad world-data tag,
 # returning only that domain's card without citizen/faith/cultural noise.
-# Existing tools (lookup_citizen, get_neighborhood, etc.) continue to query
-# the broad world-data tag and keep working — every domain card still
-# carries it.
+# Generic search_world fans out across the domain tags because the umbrella
+# search itself does not return useful measured results.
 # ═══════════════════════════════════════════════════════════════════════════
 
 @mcp.tool()
@@ -572,8 +687,8 @@ def get_neighborhood_state(name: str) -> str:
     phase, population, median income/rent, sentiment, crime index, displacement
     pressure, top businesses, top citizens, and bay-tribune appearances.
     Use when you need the structured neighborhood-state record specifically.
-    Narrower than the existing get_neighborhood tool — returns only the
-    neighborhood card (17 in world-data) without mixing in unrelated mentions."""
+    Same backing domain as get_neighborhood; this name makes the structured-card
+    contract explicit."""
     return supermemory_search(name, 'wd-neighborhood', 3, mode='hybrid', threshold=0.3)
 
 
@@ -585,9 +700,8 @@ def get_neighborhood_state(name: str) -> str:
 def search_everything(query: str) -> str:
     """Search EVERYTHING for a bare string — no entity type required. Fans out to
     all three storage shelves at once and returns merged, source-tagged hits:
-      1. world-data Supermemory  — umbrella tag; unions citizen/business/faith/
-         cultural/neighborhood domain cards in one call.
-      2. bay-tribune Supermemory — published canon history, newest-first.
+      1. world-data Supermemory  — bounded fan-out over the real wd-* domains.
+      2. bay-tribune Supermemory — published-ingest provenance only.
       3. dashboard articles API  — published-article index.
       4. disk (live grep)        — output/ + docs/, structured data ranked first.
 
@@ -607,15 +721,11 @@ def search_everything(query: str) -> str:
         except Exception as e:
             return f"({label} unavailable: {e})"
 
-    # Fan out concurrently — the four sources are independent I/O (two npx
-    # subprocesses, one HTTP call, one grep). Sequential they stack to ~7s;
-    # threaded they collapse to the slowest single call (~2-3s). Threads are
-    # safe here: no shared state, each call is its own subprocess/socket.
-    from concurrent.futures import ThreadPoolExecutor
+    # Fan out concurrently. search_world_domains applies its own three-worker
+    # bound so the 1 GB droplet does not launch all npx processes at once.
     sources = {
-        'world-data': lambda: supermemory_search(q, 'world-data', 5, mode='hybrid', threshold=0.3),
-        'bay-tribune': lambda: supermemory_search(q, 'bay-tribune', 3, mode='hybrid',
-                                                  threshold=0.3, sort='recency'),
+        'world-data': lambda: search_world_domains(q),
+        'bay-tribune': lambda: published_canon_search(q, 3),
         'dashboard': lambda: (dashboard_get(f'/api/search/articles?q={quote(q)}') or '')[:2000],
         'disk': lambda: disk_search(q),
     }
@@ -628,8 +738,8 @@ def search_everything(query: str) -> str:
 
     return (
         f"╔═══ SEARCH_EVERYTHING: '{q}' ═══╗\n\n"
-        f"=== SUPERMEMORY · world-data (structured cards, all domains) ===\n{world}\n\n"
-        f"=== SUPERMEMORY · bay-tribune (published canon, newest first) ===\n{canon}\n\n"
+        f"=== SUPERMEMORY · world-data (wd-* domain fan-out) ===\n{world}\n\n"
+        f"=== SUPERMEMORY · bay-tribune (published provenance only) ===\n{canon}\n\n"
         f"=== DASHBOARD · published articles ===\n{articles}\n\n"
         f"=== DISK · live grep (output/ + docs/) ===\n{disk}"
     )

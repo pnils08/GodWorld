@@ -760,6 +760,15 @@ function processAdvancementRows_(ctx, now, cycle) {
           newRow[lLifeHistory] += ' Seeking work (no tracked opening for ' + newRoleType + ').';
         }
       }
+      // S336 Task 7: stamp the field tag so the rehire matcher can route this
+      // citizen from birth. classifyMintSector_ returns the 4-industry bucket;
+      // map it to the canonical 15-category SkillTags vocabulary (coarse is
+      // fine — the backfill refines nothing that starts blank).
+      var lSkillTags = findColByName_(ledgerHeaders, 'SkillTags');
+      if (lSkillTags >= 0 && !newRow[lSkillTags]) {
+        var mintTagMap = { tech: 'Tech & Innovation', creative: 'Creative & Arts', 'public': 'Government & Civic', service: 'Small Business' };
+        newRow[lSkillTags] = mintTagMap[classifyMintSector_(newRoleType)] || 'Small Business';
+      }
       // Phase 42 §5.6 (impl #18): push new row to ctx.ledger.rows; Phase 10
       // consolidated commit auto-extends the sheet — no separate append intent.
       ledgerRows.push(newRow);

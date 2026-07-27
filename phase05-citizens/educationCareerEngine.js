@@ -661,6 +661,33 @@ function buildSettleBizPool_(ctx) {
   }
 }
 
+// v2.2 (S336 Task 7): settlement role → SkillTags category. MUST stay in
+// vocab-sync with the S336 SkillTags backfill and runCareerEngine's
+// sectorCategory_ — canonical 15-category strings only. Known settlement
+// roles mapped by their SETTLE_ECON_KEYS profile's category; keyword fallback
+// for band roles with no econ key. A settling 18-year-old is matchable by the
+// rehire matcher from day one.
+var SETTLE_TAG_BY_ROLE = {
+  'Biotech Lab Assistant': 'Healthcare', 'Research Assistant': 'Healthcare',
+  'Nurse Aide': 'Healthcare',
+  'Junior Accountant': 'Professional', 'Paralegal': 'Government & Civic',
+  'Civic Program Assistant': 'Government & Civic',
+  'Smart Grid Trainee': 'Transit & Infrastructure',
+  'Apprentice Electrician': 'Trades', 'Carpenter Apprentice': 'Trades',
+  'Solar Installer': 'Trades',
+  'Office Assistant': 'Professional', 'Bank Teller': 'Professional'
+};
+function settleSkillTag_(role) {
+  if (SETTLE_TAG_BY_ROLE[role]) return SETTLE_TAG_BY_ROLE[role];
+  var s = String(role || '').toLowerCase();
+  if (/retail|clerk|shop|store/.test(s)) return 'Small Business';
+  if (/food|cook|server|barista|dish|restaurant|fast/.test(s)) return 'Food & Culture';
+  if (/warehouse|labor|mover|dock/.test(s)) return 'Port & Labor';
+  if (/clean|janitor|custodial/.test(s)) return 'Trades';
+  if (/aide|care/.test(s)) return 'Healthcare';
+  return 'Small Business';
+}
+
 // Education rank shared by the settlement draw and career advancement.
 // Accepts both live-ledger spellings (bachelors/masters/doctorate) and the
 // engine constants (bachelor/graduate) — the ledger predominantly holds the
@@ -823,6 +850,13 @@ function settleAdulthood_(ctx, cycle, rng) {
           }
         }
       }
+    }
+
+    // v2.2 (S336 Task 7): stamp the field tag so the rehire matcher can route
+    // this citizen from their first adult cycle. Never overwrites.
+    var iTags2 = idx('SkillTags');
+    if (iTags2 >= 0 && !String(row[iTags2] || '').trim()) {
+      row[iTags2] = settleSkillTag_(row[iRole]);
     }
 
     row[iLife] = (life ? life + '\n' : '') +

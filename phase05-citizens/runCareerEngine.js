@@ -1,7 +1,20 @@
 /**
  * ============================================================================
- * Career Engine v2.6
+ * Career Engine v2.7
  * ============================================================================
+ *
+ * v2.7 (S336 / employment-living-system Task 7):
+ * - Field-matched rehiring: Active ENGINE adults (18-64) with a blank
+ *   EmployerBizId and SkillTags are matched to hiring businesses each cycle,
+ *   BEFORE the v2.6 reconciliation (hires grow stated same-cycle; the freshly
+ *   fired wait a cycle — unemployment is lived). "Opening" is EXPLICIT:
+ *   perCycle = Employee_Count × Growth_Rate/100 ÷ 52; floor, with small
+ *   growers hiring 1 on a deterministic row-phased cadence. Same-field first
+ *   (SkillTags ∋ business category via sectorCategory_); cross-field only when
+ *   a window finds zero same-field candidates AND (cycle+row)%4==0, logged as
+ *   Career-FieldChange. Sports orgs are opted out (Paulson's domain).
+ * - Settlement (educationCareerEngine v2.2) + mint (processAdvancementIntake)
+ *   stamp SkillTags at citizen creation so new citizens are matchable day one.
  *
  * v2.6 (S336 / employment-living-system Task 4):
  * - Business headcount write-back: businessDeltas now MOVE
@@ -1045,10 +1058,172 @@ function runCareerEngine_(ctx) {
   // the LifeHistory flush so firings ride the same batch; own try/catch so a
   // reconciliation bug can never poison the career events already generated.
   // ═══════════════════════════════════════════════════════════════════════════
+  // v2.7 (S336, employment-living-system Task 7): field-matched rehiring runs
+  // BEFORE the reconciliation — its hires register businessDeltas.gained, so
+  // the write-back below grows the stated headcount with each hire (the
+  // business literally grew), and citizens fired by THIS cycle's reconcile
+  // only become eligible next cycle: unemployment is a lived state.
+  try {
+    matchUnemployedToOpenings_();
+  } catch (matchErr) {
+    Logger.log('runCareerEngine v2.7 rehire matcher failed (career events unaffected): ' + matchErr);
+  }
+
   try {
     reconcileBusinessHeadcounts_();
   } catch (reconErr) {
     Logger.log('runCareerEngine v2.6 headcount reconciliation failed (career events unaffected): ' + reconErr);
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // v2.7 (S336, Task 7): FIELD-MATCHED REHIRING — the other half of the loop.
+  // "Opening" is defined EXPLICITLY (plan Task 7 step 5): stated − tracked is
+  // meaningless against a ~1:443 sample, so hiring signal = Growth_Rate.
+  //   perCycle = Employee_Count × Growth_Rate/100 ÷ 52   (annual growth as cycles)
+  //   openings = floor(perCycle); small growers (0 < perCycle < 1) hire 1 on a
+  //   deterministic cadence: every N = clamp(round(1/perCycle), 1, 52) cycles,
+  //   phase-shifted by sheet row so the whole city doesn't hire on one cycle.
+  // Same-field first: candidate's SkillTags (pipe-separated category tags, the
+  // 15-field taxonomy) must include the business's category. Cross-field is
+  // possible but RARE — only when a hiring window found zero same-field
+  // candidates AND the window's (cycle + row) % 4 === 0 — and reads as a
+  // career change in LifeHistory, never a shuffle.
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // Business Sector (free text) → SkillTags category. MUST stay in vocab-sync
+  // with the SkillTags backfill (S336) — canonical 15-category strings only.
+  function sectorCategory_(sector) {
+    var s = String(sector || '').toLowerCase();
+    if (/sports|stadium|franchise|athletic/.test(s)) return null; // FIRST: Paulson's domain — never route hires into sports orgs, whatever else matches
+    if (/\bport\b|logistic|longshore/.test(s)) return 'Port & Labor'; // \b — 'Sports' contains 'port'
+    if (/construction|contractor|builder|baylight/.test(s)) return 'Construction & Baylight';
+    if (/transit|transport|bus|bart|utilit|infrastructure/.test(s)) return 'Transit & Infrastructure';
+    if (/health|medical|clinic|hospital|care|biotech/.test(s)) return 'Healthcare';
+    if (/education|school|academy|tutor/.test(s)) return 'Education';
+    if (/tech|software|cloud|\bai\b|analytics|platform|agent|intelligence|coworking|venture|research|data/.test(s)) return 'Tech & Innovation';
+    if (/retail|shop|store|boutique|grocery|coworking|services|real estate|hospitality/.test(s)) return 'Small Business';
+    if (/media|journal|gallery|entertainment|nightlife|music|design|architect|arts|theater|theatre|studio/.test(s)) return 'Creative & Arts';
+    if (/legal|judicial|law|account|consult|insurance|finance|professional|capital/.test(s)) return 'Professional';
+    if (/municipal|government|civic|public|housing authority|safety|crisis/.test(s)) return 'Government & Civic';
+    if (/faith|church|temple|mosque|synagogue|congregation|ministry|community/.test(s)) return 'Faith & Community';
+    if (/restaurant|dining|cafe|coffee|bakery|food|bar\b|pub|brewery|lounge|club|market/.test(s)) return 'Food & Culture';
+    return 'Small Business';
+  }
+
+  function matchUnemployedToOpenings_() {
+    if (iEmployerBizId < 0) return;
+    var iTags = idx('SkillTags');
+    if (iTags < 0) { Logger.log('v2.7 rehire matcher skipped: SkillTags column missing'); return; }
+
+    var bizSheet = ctx.ss ? ctx.ss.getSheetByName('Business_Ledger') : null;
+    if (!bizSheet) return;
+    var bizData = bizSheet.getDataRange().getValues();
+    if (bizData.length < 2) return;
+    var bh = bizData[0];
+    var bId = -1, bNm = -1, bCount = -1, bSec = -1, bGrow = -1;
+    for (var hc = 0; hc < bh.length; hc++) {
+      var hn = String(bh[hc]).trim();
+      if (hn === 'BIZ_ID') bId = hc;
+      else if (hn === 'Name') bNm = hc;
+      else if (hn === 'Employee_Count') bCount = hc;
+      else if (hn === 'Sector') bSec = hc;
+      else if (hn === 'Growth_Rate') bGrow = hc;
+    }
+    if (bId < 0 || bCount < 0 || bGrow < 0) return;
+
+    // ── the unemployed pool: Active ENGINE adults (18-64), no employer, tagged ──
+    var simYear = 2040 + Math.floor(Number(cycle) / 52);
+    var pool = [];
+    for (var ur = 0; ur < rows.length; ur++) {
+      var uRow = rows[ur];
+      if (safeStr(uRow[iStatus]).trim() !== 'Active') continue;
+      if (safeStr(uRow[iClock]).trim() === 'GAME') continue;
+      if (safeStr(uRow[iEmployerBizId]).trim() !== '') continue;
+      if (iEconKey >= 0 && safeStr(uRow[iEconKey]).trim() === 'SPORTS_OVERRIDE') continue;
+      var uBy = Number(uRow[iBirthYear]) || 0;
+      if (uBy > 0) { var uAge = simYear - uBy; if (uAge < 18 || uAge >= 65) continue; }
+      var tags = safeStr(uRow[iTags]).trim();
+      if (!tags) continue; // untagged citizens aren't matchable — blank is honest
+      pool.push({ r: ur, tags: tags.split('|'), income: Number(uRow[iIncome]) || 0, pop: safeStr(uRow[iPopID]) });
+    }
+    if (!pool.length) return;
+
+    // ── hiring windows, deterministic business order (sheet order) ──
+    var hired = 0, crossField = 0;
+    var taken = {}; // pool index → true
+    for (var br3 = 1; br3 < bizData.length; br3++) {
+      var stated = Number(bizData[br3][bCount]);
+      var growth = Number(bizData[br3][bGrow]);
+      if (isNaN(stated) || isNaN(growth) || growth <= 0 || stated <= 0) continue;
+      var bizId2 = String(bizData[br3][bId] || '').trim();
+      if (!bizId2) continue;
+      var cat = sectorCategory_(bSec >= 0 ? bizData[br3][bSec] : '');
+      if (!cat) continue; // sports orgs opted out
+
+      var perCycle = (stated * growth / 100) / 52;
+      var openings = Math.floor(perCycle);
+      if (openings < 1 && perCycle > 0) {
+        var cadence = Math.max(1, Math.min(52, Math.round(1 / perCycle)));
+        if ((Number(cycle) + br3) % cadence === 0) openings = 1;
+      }
+      if (openings < 1) continue;
+
+      // same-field candidates first: SkillTags carry the business's category
+      var sameField = [];
+      for (var pi = 0; pi < pool.length; pi++) {
+        if (taken[pi]) continue;
+        if (pool[pi].tags.indexOf(cat) >= 0) sameField.push(pi);
+      }
+      sameField.sort(function (a, b4) {
+        if (pool[a].income !== pool[b4].income) return pool[a].income - pool[b4].income; // poorest first
+        return pool[a].pop < pool[b4].pop ? -1 : 1;
+      });
+
+      var slots = sameField.slice(0, openings);
+      // cross-field: RARE — zero same-field candidates AND 1-in-4 window
+      if (!slots.length && (Number(cycle) + br3) % 4 === 0) {
+        var anyField = [];
+        for (var pj = 0; pj < pool.length; pj++) if (!taken[pj]) anyField.push(pj);
+        anyField.sort(function (a, b5) {
+          if (pool[a].income !== pool[b5].income) return pool[a].income - pool[b5].income;
+          return pool[a].pop < pool[b5].pop ? -1 : 1;
+        });
+        slots = anyField.slice(0, 1); // one career-changer at most per window
+      }
+
+      for (var sv = 0; sv < slots.length; sv++) {
+        var hIdx = slots[sv];
+        var hRow = rows[pool[hIdx].r];
+        var isCross = pool[hIdx].tags.indexOf(cat) < 0;
+        hRow[iEmployerBizId] = bizId2;
+        var hInc = Number(hRow[iIncome]) || 0;
+        if (hInc > 0) {
+          // same-field rehire recovers ground (+5-10%); a career change starts flatter
+          hRow[iIncome] = Math.round(hInc * (isCross ? (0.95 + roll() * 0.10) : (1.05 + roll() * 0.05)));
+        }
+        hRow[iLastUpd] = ctx.now;
+        var bizName = String(bNm >= 0 ? (bizData[br3][bNm] || bizId2) : bizId2);
+        logRows.push([
+          ctx.now, hRow[iPopID], '',
+          isCross ? 'Career-FieldChange' : 'Career-Hired',
+          isCross
+            ? 'Changed fields — hired at ' + bizName + ' (' + cat + ')'
+            : 'Hired at ' + bizName,
+          '', cycle
+        ]);
+        if (!S.careerSignals.businessDeltas[bizId2]) S.careerSignals.businessDeltas[bizId2] = { gained: 0, lost: 0 };
+        S.careerSignals.businessDeltas[bizId2].gained += 1; // reconcile below grows stated with the hire
+        S.careerSignals.transitions += 1;
+        S.eventsGenerated = (S.eventsGenerated || 0) + 1;
+        taken[hIdx] = true;
+        hired++;
+        if (isCross) crossField++;
+      }
+    }
+
+    S.careerSignals.rehires = { hired: hired, crossField: crossField, unemployedPool: pool.length };
+    Logger.log('runCareerEngine v2.7 rehire matcher: ' + hired + ' hired (' + crossField +
+      ' career changes) from unemployed pool of ' + pool.length);
   }
 
   function reconcileBusinessHeadcounts_() {

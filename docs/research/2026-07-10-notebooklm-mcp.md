@@ -1,7 +1,7 @@
 ---
 title: NotebookLM MCP — edition-ingest bridge — research
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-27
 type: reference
 tags: [research, media, infrastructure, active]
 sources:
@@ -13,6 +13,7 @@ sources:
   - docs/mags-corliss/JOURNAL.md (S67 entry, ~line 3156) — Mike listens to every edition via NotebookLM
 pointers:
   - "[[../engine/ROLLOUT_PLAN]] — pending-state home"
+  - "[[../plans/2026-07-10-notebooklm-bridge-deploy]] — adopted implementation and authoritative Daily News listening trial log"
   - "[[index]] — registered same commit"
 ---
 
@@ -57,9 +58,16 @@ pointers:
 *APPEND a dated line each time grep surfaces this file for a new corner of the sim.*
 
 - 2026-07-11 — Bridge live (S310): auth via manual cookie paste, Mike's existing "GodWorld" notebook adopted as the target (he'd already populated it — no backfill), first grounded canon query answered with 19 citations. `nlm notebook query` + `notebooklm` MCP now a standing published-canon Q&A surface.
+- 2026-07-27 — Daily News listening experiments v1–v1.4 are tracked in
+  [[../plans/2026-07-10-notebooklm-bridge-deploy]] §Daily News listening trial
+  log. That table is the non-repeat authority for length, framing, and current
+  listening verdicts.
 
 ---
 
 ## Changelog
 
 - 2026-07-10 — Initial extraction (S310). Three-repo landscape + S67/BACKLOG/JOURNAL prior state folded in. Mike-direct trigger: deliberate edition-ingest relationship.
+- 2026-07-27 — Added the implementation/listening-log pointer and Applications
+  entry so the research record leads directly to the current Daily News trial
+  history.

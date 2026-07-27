@@ -212,6 +212,24 @@ pointers:
   is explicitly source-ID scoped. v1.4 forces a clean new bounded source on the
   next distinct run; the next 08:00 audio is the listening proof.
 
+### Daily News listening trial log
+
+This is the authoritative record of Daily News listening experiments. Update
+one row after each materially different listen. Do not retry a rejected
+configuration unless new evidence is recorded here first.
+
+| Version | Configuration | Listening result | Disposition / non-repeat guard |
+|---|---|---|---|
+| v1 | `long`; early bounded source with setup/authority material | 53m01s / 102 MB. Complete but far too long for the daily use case. | Rejected for Daily News. Do not return to `long` as the daily default. |
+| v1.2 | `short`; natural-source tuning; GodWorld Oakland 2042 frame | 5m24s / 3.9 MB. Useful as a quick hello and story preview, but too short for the desired depth. | Rejected as the daily default. Preserve `short` only as a possible future alert/preview format. |
+| v1.3 attempt | `medium` | Failed before rendering: the installed CLI accepts only `short`, `default`, or `long`. | Invalid configuration. Never retry `medium` unless the installed CLI's documented choices change. |
+| v1.3 | `default`; GodWorld Oakland 2042 frame | 19m16s / 37.2 MB. Content and depth were good, but the opening spent several minutes explaining GodWorld as a future civic simulation. | Keep `default` length. Reject the explanatory GodWorld/2042 setup frame. |
+| v1.4 | `default`; “The Bay Tribune daily news for Oakland”; generator footer removed from the uploaded copy | Pending the next 08:00 scheduled listen. Goal: preserve v1.3 content/depth while beginning directly inside the city. | Current candidate. Judge opening immersion first, then depth and length; change one axis at a time. |
+
+Research basis and adoption history:
+[[../research/2026-07-10-notebooklm-mcp]]. Operational commands and failure
+recovery: [[../reference/notebookLM-CLI]].
+
 ---
 
 ## Open questions
@@ -244,3 +262,7 @@ pointers:
   Audio Overview focus to “The Bay Tribune daily news for Oakland,” and left
   Civis Systems out of the provider frame. Next 08:00 audio is the listening
   proof.
+- 2026-07-27 — Added §Daily News listening trial log as the authoritative
+  non-repeat record for v1 through v1.4, with measured lengths, listening
+  verdicts, rejected configurations, current candidate, and pointers back to
+  the research basis and operator reference.

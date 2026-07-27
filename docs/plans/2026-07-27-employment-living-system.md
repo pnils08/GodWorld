@@ -131,6 +131,23 @@ pointers:
   2. Specify the **gate**. This is the whole risk: a desk agent hallucinating a name would mint economic canon. Route through the review `docs/canon/INSTITUTIONS.md` governs; a mint is a deliberate act, never a side effect of publication.
   3. Decide who mints — post-publish is the natural seam, but it is media-adjacent and media never builds. Name the executor explicitly.
 - **Verify:** the gate is written down and names its executor before any code exists
+- **Status:** [x] DONE S335 — and the design question turned out to be answered already, with a different defect underneath it.
+  **THE PATH EXISTS.** `/post-publish` Step 5 runs `scripts/ingestPublishedEntities.js`, which reads the edition's `BUSINESSES NAMED` section and appends new rows to `Business_Ledger`. Media invention already becomes canon.
+  **THE GATE EXISTS TOO, so my hazard note was overstated.** I warned that a hallucinating desk agent could mint economic canon. It cannot: the script is `--dry-run` by default and requires `--apply`, and `/post-publish` runs behind the mandatory user approval gate. A desk agent names a business in prose; *publication* mints it, and publication is approved by Mike. The gate is the publish approval, and it is sufficient. No new gate is needed.
+  **THE REAL DEFECT IS THE BIRTH, NOT THE GATE.** Line 814: `rowsToAppend.push([bizId, c.name, c.sector, c.neighborhood, '', '', '', '', ''])` — cols A–D filled, E–I blank, documented as intentional at the file header. **Every media-minted business is born economically dead**: no `Employee_Count`, so it cannot hire, fire, or be checked against the tracked sample. That is exactly the 23 rows Task 1 filled by hand (`BIZ-00070+`), and it regenerates as debt on every edition that names a new business.
+  Fix specified as Task 8 below. Executor: **engine-sheet** — `scripts/` is substrate, and media never builds.
+
+### Task 8: Mint businesses economically alive — engine-sheet
+
+- **Files:**
+  - `scripts/ingestPublishedEntities.js` — modify (the append at ~L814)
+  - a sector→scale lookup — location engine-sheet's call
+- **Steps:**
+  1. The append must populate `Employee_Count`, `Avg_Salary`, `Annual_Revenue` and `Growth_Rate` at mint time. A business born blank cannot participate in the loop Tasks 4 and 7 build.
+  2. Scale from `Sector`, which the mint already has. Task 1 established the shape by hand and it generalises: a cafe is ~11 staff / $720k, a retail shop ~4 / $380k, a faith organisation ~5–30 with revenue as contributions, a professional firm ~26–34 / $6–9M. A median-per-sector table is enough; precision is not the point, participation is.
+  3. `Employee_Count` must be the REAL headcount for that kind of business, never a tracked count — see the S335 sizing rule in the research. A newly minted business has ZERO tracked citizens, so any positive figure is legal.
+  4. Leave `Key_Personnel` blank. It is 84% blank across the sheet and nothing reads it yet.
+- **Verify:** mint a business in a dry-run and confirm all four economic columns arrive populated; re-scan `Business_Ledger` for blanks after the next real edition
 - **Status:** [ ] not started
 
 ---

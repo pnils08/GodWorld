@@ -19,8 +19,9 @@ simulation. Read persona and newsroom material as system context, not as an
 identity to adopt.
 
 Claude is the lead and owns the control plane. You propose and implement inside
-your authorized scope; you do not deploy, publish, or arbitrate. Being capable of
-a change is not authorization to make it.
+your authorized scope; you do not deploy, publish, or arbitrate. Codex and Kimi
+hold scoped commit/push rights (see Git and commit rules); being capable of any
+other change is not authorization to make it.
 
 ## Instruction precedence
 
@@ -293,7 +294,9 @@ For implementation:
 5. Apply only the approved scope.
 6. Run proportionate local validation.
 7. Show the resulting diff and validation results.
-8. Do not deploy, publish, ingest, commit, or push unless separately authorized.
+8. Do not deploy, publish, or ingest unless separately authorized. Commit and
+   push only within the Push authorization tier defined under Git and commit
+   rules below.
 
 Use `apply_patch` for manual edits. Preserve unrelated user changes.
 
@@ -335,10 +338,38 @@ Rules:
 
 ## Git and commit rules
 
-- Never run `git push`.
-- Do not create a branch, commit, tag, merge, rebase, amend, or open a pull
+### Push authorization (builder decision, 2026-07-27)
+
+After an engine-sheet spot-check review of a Codex working batch (S338: all
+tests passing, syntax clean, defensive validation and path guards unprompted),
+the builder loosened the push rules by agent tier:
+
+- **Codex and Kimi** may commit and push work that lies entirely inside the
+  ordinary writable scope (`scripts/**`, `output/**`, `docs/**`), including
+  tests. Conditions, all mandatory:
+  - every touched or added test file passes locally before the commit;
+  - `node --check` (or `python3 -m py_compile`) is clean on every changed
+    script;
+  - stage with path-specific `git add` — never `git add .` or `git add -A`;
+  - the commit touches zero control-plane paths (`.claude/**`, `.agents/**`,
+    `CLAUDE.md`, `SESSION_CONTEXT.md`) — those still land only through a
+    Claude session under the `CLAUDE_CTL` gate;
+  - the commit message names the authoring agent;
+  - before pushing, check `git log origin/main..HEAD --oneline`; if commits
+    from another terminal or agent are stacked, stop and report instead of
+    pushing them along.
+- **Engine substrate remains gated for every agent**: `phase*/`,
+  `utilities/`, `lib/`, `schemas/`, `dashboard/`, `editions/`, configuration
+  files, hooks, service manifests, and anything deployed via clasp. Changes
+  there are proposed only and land through the engine-sheet terminal.
+- **Antigravity and Gemini** have no commit or push authorization and remain
+  fully gated on engine work: propose diffs only.
+
+### General rules (all agents)
+
+- Do not create a branch, tag, merge, rebase, amend, or open a pull
   request unless explicitly requested.
-- Do not stage files unless the builder asks for a commit.
+- Do not stage files unless preparing an authorized commit.
 - Never use `git reset --hard`, `git clean`, destructive checkout commands, or
   equivalent operations.
 - Do not stash the builder's work without permission.

@@ -147,14 +147,30 @@ async function main() {
     var layer = null;
 
     // Layer 1: Sports override
-    if (econKey === 'SPORTS_OVERRIDE' || roleMapping[roleType] === 'SPORTS_OVERRIDE') {
+    // S334: driven by OriginGame → franchise, so a roster tab is the source of
+    // truth rather than a keyword guess. NBA 2K citizens are the Oakland Oaks
+    // (Oaks_Roster, POP-01022..01028) — previously they matched nothing here and
+    // fell all the way through to UNMATCHED with a blank employer.
+    // SPORTS_OTHER stays an INTERNAL sentinel only. It must never be written:
+    // it is not a BIZ_ID, and 7 ledger rows kept it as a literal value. Athletes
+    // from defunct/other leagues (MUBA hall-of-famers) have no current employer,
+    // so they fall through to later layers and end blank — which is honest.
+    if (econKey === 'SPORTS_OVERRIDE' || roleMapping[roleType] === 'SPORTS_OVERRIDE' ||
+        originGame === 'MLB The Show' || originGame === 'NBA 2K') {
       if (originGame === 'MLB The Show') {
         bizId = 'BIZ-00005'; // Oakland Athletics
         layer = 'sports';
-      } else {
-        // Non-Oakland franchise athletes — skip employer linkage
-        bizId = 'SPORTS_OTHER';
+      } else if (originGame === 'NBA 2K') {
+        bizId = 'BIZ-00074'; // Oakland Oaks
         layer = 'sports';
+      } else {
+        // Other/defunct leagues — no franchise linkage. Leave `layer` NULL so
+        // layers 2-5 still get a turn (every one of them is guarded by
+        // `if (!layer)`, so marking this 'sports' would silently strand the
+        // citizen on a sentinel). If nothing else resolves, the fallback turns
+        // it into UNMATCHED and the write path leaves the cell blank.
+        bizId = 'SPORTS_OTHER';
+        layer = null;
       }
     }
 
@@ -212,8 +228,10 @@ async function main() {
       }
     }
 
-    // Fallback
-    if (!bizId) {
+    // Fallback — SPORTS_OTHER counts as unresolved (S334). It is an internal
+    // sentinel, not a BIZ_ID; letting it survive to here is what put the literal
+    // string into 7 ledger rows.
+    if (!bizId || bizId === 'SPORTS_OTHER') {
       bizId = 'UNMATCHED';
       layer = 'unmatched';
       unmatched++;

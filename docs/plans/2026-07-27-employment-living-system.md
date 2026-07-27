@@ -83,6 +83,7 @@ pointers:
   1. Re-scope first: the S334 dry-run showed the current config produces `BIZ-00030` at exactly 62, its stated count, while the ledger holds 97. So the overage is accumulated drift, **not** the `Professional`/`2041-Specific` category defaults I originally blamed. Confirm that before editing `categoryDefaults`.
   2. For the remaining `unmatched` (283 at last dry-run), add keyword rules that generalise. Rules, never per-citizen edits.
   3. A citizen with no plausible tracked employer stays blank. Blank is honest; the bucket is not.
+  4. **Settle whether 62 is real before anyone is fired.** `BIZ-00030` reads 62 stated against 97 tracked — 35 over. Mike's read: if 62 is accurate the business must shed 35, that is a major headline, and the displaced get rehired into other tech openings. But 62 was itself produced BY the pre-S334 overwrite (engine.84), so it may be another fossilised sample count rather than a real headcount. **Establish provenance first.** If 62 is real, this is the sim's largest economic event and belongs in print. If it is a fossil, the true number is higher, nobody was ever laid off, and firing 35 citizens would be the sim manufacturing grief from a bookkeeping artifact. The distinction is "the business shrank" versus "our data was wrong", and only the first is a story.
 - **Verify:** `--dry-run` shows `unmatched` under 60 and `BIZ-00030` at or under its stated headcount
 - **Status:** [ ] not started
 
@@ -125,6 +126,21 @@ pointers:
   2. Specify the **gate**. This is the whole risk: a desk agent hallucinating a name would mint economic canon. Route through the review `docs/canon/INSTITUTIONS.md` governs; a mint is a deliberate act, never a side effect of publication.
   3. Decide who mints — post-publish is the natural seam, but it is media-adjacent and media never builds. Name the executor explicitly.
 - **Verify:** the gate is written down and names its executor before any code exists
+- **Status:** [ ] not started
+
+---
+
+### Task 7: Field-matched rehiring — engine-sheet (Fable)
+
+**Raised by Mike S335 alongside Task 4: a fired citizen should be rehired in their own field, not at random.**
+
+- **Files:** engine-sheet's call; depends on where Task 4's consumer lands
+- **Steps:**
+  1. The taxonomy already exists — do not build one. `EconomicProfileKey` resolves through `data/economic_parameters.json` (198 roles) to a `category`, 15 of them, plus `economicOutputCategory`. Every employed citizen already sits in a field.
+  2. Consider storing the resolved category on the citizen row. Today it is a JSON lookup, so nothing can ask "who works in tech" without the join — which a matcher needs to do cheaply, every cycle.
+  3. Build the matcher: a citizen fired by Task 4 is offered same-`category` employers before anything else. Cross-field moves should be possible but rarer, and should read as a career change rather than a shuffle.
+  4. **Define "opening".** It cannot be `stated − tracked`: stated is real headcount against a ~1:443 sample, so that subtraction is meaningless. `Growth_Rate` is the most plausible signal — a growing business is hiring, a contracting one is not. Whatever is chosen must be stated explicitly, because every rehire depends on it.
+- **Verify:** a bench cycle where a business sheds staff shows the displaced landing at same-field employers, with any cross-field move logged as such
 - **Status:** [ ] not started
 
 ---

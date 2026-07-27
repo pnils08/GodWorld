@@ -40,9 +40,11 @@ require('/root/GodWorld/lib/env');
 const fs = require('fs');
 const path = require('path');
 const sheets = require('/root/GodWorld/lib/sheets');
+// W5h2 (S336 engine.76): roster lane pools for the byline WHO-assist
+const { buildLanePools } = require('./engine-auditor/bayTribuneRoster');
 
 const REPO_ROOT = path.resolve(__dirname, '..');
-const SCRIPT_VERSION = '2.1.0';
+const SCRIPT_VERSION = '2.2.0';
 
 // ============================================================================
 // PURE HELPERS (testable without sheet access)
@@ -704,7 +706,7 @@ const RIPPLE_LANE_MAP = {
   'edition-coverage': 'business'
 };
 const RIPPLE_DEFAULT_LANE = 'business';
-const DESK_SIGNAL_VERSION = '1.0';
+const DESK_SIGNAL_VERSION = '1.1';
 
 // One-line label hygiene: single line, no table-breaking pipes doubled up.
 function signalLabel(...bits) {
@@ -735,6 +737,73 @@ function rippleEntry(r, cycle) {
   const popids = extractPopids(r.TargetIds, r.CauseDetail);
   if (popids.length) e.popids = popids;
   return e;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// W5 half 2 (S336 engine.76): per-lane byline candidate — the engine assists
+// WHO writes, never WHAT (Mike-direct S329). Emits a name + POPID per lane;
+// no angle, no story, no subject. Candidates draw from the Bay_Tribune_Oakland
+// lane pools (bayTribuneRoster.buildLanePools), weighted down by recent use
+// across the byline_shadow_log history so rotation reaches never-routed staff.
+// ─────────────────────────────────────────────────────────────────────────────
+const BYLINE_USAGE_WINDOW = 3;      // shadow logs consulted (cycles strictly before N)
+const BYLINE_USAGE_PENALTY_CAP = 4; // capped — the uncapped penalty produced the C105 35/35 blank blackout (S329)
+const BYLINE_BASE_BEAT = 2;         // lane's own beat writers
+const BYLINE_BASE_GENERAL = 1;      // beat-agnostic generals, eligible in every lane
+
+/** Recent-use tally from the last BYLINE_USAGE_WINDOW shadow logs before this
+ *  cycle. finalAssignment only — a candidate the desk overrode was not used,
+ *  so it carries no penalty. Fail-soft {} (missing dir / unreadable log). */
+function loadBylineUsage(cycle, dir) {
+  const usage = {};
+  const logDir = dir || path.join(REPO_ROOT, 'output');
+  let files = [];
+  try { files = fs.readdirSync(logDir); } catch (e) { return usage; }
+  const logs = files
+    .map(f => { const m = f.match(/^byline_shadow_log_c(\d+)\.json$/); return m ? { f, c: parseInt(m[1], 10) } : null; })
+    .filter(x => x && x.c < cycle)
+    .sort((a, b) => b.c - a.c)
+    .slice(0, BYLINE_USAGE_WINDOW);
+  for (const { f } of logs) {
+    try {
+      const j = JSON.parse(fs.readFileSync(path.join(logDir, f), 'utf-8'));
+      for (const e of j.entries || []) {
+        const n = String(e.finalAssignment || '').trim();
+        if (n) usage[n] = (usage[n] || 0) + 1;
+      }
+    } catch (e) { /* unreadable log — skip it, the tally degrades gracefully */ }
+  }
+  return usage;
+}
+
+/** Pure, deterministic: one candidate per lane. Score = beat/general base minus
+ *  capped recent-use penalty; argmax always emits (no blank lanes while a pool
+ *  has anyone) — ties break least-used then name. A name takes at most one lane
+ *  per cycle (cross-lane spread; lane order fixed for determinism). */
+function selectBylineCandidates(lanePools, usage) {
+  if (!lanePools || !lanePools.pools) return null;
+  const use = usage || {};
+  const picked = {};
+  const taken = {};
+  for (const lane of ['civic', 'sports', 'culture', 'business']) {
+    const scored = (lanePools.pools[lane] || []).map(j => ({ j, basis: 'beat' }))
+      .concat((lanePools.generals || []).map(j => ({ j, basis: 'general' })))
+      .filter(c => !taken[c.j.name])
+      .map(c => ({
+        name: c.j.name,
+        popid: c.j.popid,
+        basis: c.basis,
+        recentUse: use[c.j.name] || 0,
+        score: (c.basis === 'beat' ? BYLINE_BASE_BEAT : BYLINE_BASE_GENERAL)
+          - Math.min(use[c.j.name] || 0, BYLINE_USAGE_PENALTY_CAP)
+      }))
+      .sort((a, b) => b.score - a.score || a.recentUse - b.recentUse || a.name.localeCompare(b.name));
+    if (!scored.length) continue; // pool exhausted — caller notes the omission
+    const top = scored[0];
+    taken[top.name] = true;
+    picked[lane] = { name: top.name, popid: top.popid, basis: top.basis, recentUse: top.recentUse };
+  }
+  return picked;
 }
 
 // Pure: builds the desk-signal object from the same loaded cycle data the
@@ -872,6 +941,16 @@ function emitDeskSignal(cycle, data) {
     });
   }
 
+  // ── W5h2: per-lane byline candidate (WHO-assist, name + POPID only) ──
+  let bylineCandidates = null;
+  if (data.bylinePools) {
+    bylineCandidates = selectBylineCandidates(data.bylinePools, data.bylineUsage);
+    const missing = Object.keys(lanes).filter(l => !bylineCandidates || !bylineCandidates[l]);
+    if (missing.length) notes.push('byline candidate pool exhausted for lane(s): ' + missing.join(', '));
+  } else {
+    notes.push('Bay_Tribune_Oakland roster unavailable — byline candidates omitted');
+  }
+
   return {
     meta: {
       cycle,
@@ -881,9 +960,11 @@ function emitDeskSignal(cycle, data) {
       rippleLaneMap: RIPPLE_LANE_MAP,
       counts: Object.fromEntries(Object.entries(lanes).map(([k, v]) => [k, v.length])),
       contract: 'POINTERS ONLY — labels are verbatim source strings (they may embed source-native deltas); no derived stats, no career numbers, no angles. The desk reaches the raw material itself.',
+      bylineContract: 'bylineCandidates is a WHO-assist HINT — one name + POPID per lane, usage-rotated off the Bay_Tribune_Oakland roster. The desk still assigns; no angle, no story, no subject rides here (engine.76 W5h2 locked rule).',
       notes
     },
-    lanes
+    lanes,
+    ...(bylineCandidates ? { bylineCandidates } : {})
   };
 }
 
@@ -958,12 +1039,19 @@ async function loadCycleData(cycle) {
   const approvalRows = filterApprovalRows(civicOfficesAll);
   const priorApprovals = loadPriorApprovals(cycle);
 
+  // W5h2: byline WHO-assist inputs. Roster fetch is fail-soft (emitDeskSignal
+  // notes the omission and the artifact still ships); usage tally is local fs.
+  let bylinePools = null;
+  try { bylinePools = await buildLanePools(); } catch (e) { /* roster unreachable — candidates omitted */ }
+  const bylineUsage = loadBylineUsage(cycle);
+
   return {
     auditJson,
     rileyCurr, rileyPrev1, rileyPrev2,
     sportsAll, calendarAll, chaosAll, hospitalAll,
     rippleAll, lhlAll, householdAll,
-    worldPopCurr, neighborhoodsC, approvalRows, priorApprovals
+    worldPopCurr, neighborhoodsC, approvalRows, priorApprovals,
+    bylinePools, bylineUsage
   };
 }
 
@@ -1059,6 +1147,9 @@ module.exports = {
   extractPopids,
   RIPPLE_LANE_MAP,
   DESK_SIGNAL_VERSION,
+  // W5h2 byline WHO-assist (pure selection + fs-only usage tally)
+  selectBylineCandidates,
+  loadBylineUsage,
   // Pure helpers exported for testing
   round2,
   fmtSentiment,

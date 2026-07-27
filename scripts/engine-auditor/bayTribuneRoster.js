@@ -49,8 +49,13 @@ const BEAT_RULES = [
   { match: /editor-in-chief/i,                exclude: true,  reason: 'masthead' },
   { match: /copy chief/i,                     exclude: true,  reason: 'masthead/copy' },
   { match: /photographer|photo assistant/i,   exclude: true,  reason: 'photo desk' },
+  // `lane:'sports'` (S336 engine.76 W5h2): still excluded from the CITY-seed
+  // pool (engine_audit patterns are never sports), but these seats ARE the
+  // sports-lane byline pool for the desk-signal WHO-assist — buildLanePools()
+  // picks them up via this tag. Writers only; the exclusion reason is unchanged
+  // so existing consumers of `excluded` see identical rows.
   { match: /\bA's\b|sideline|gridiron|\bsports\b|fan columnist|statistical support|speculative internet/i,
-                                              exclude: true,  reason: 'sports (Paulson domain)' },
+                                              exclude: true,  reason: 'sports (Paulson domain)', lane: 'sports' },
 
   // Data Desk (S334) — Marbury's citywide seat. Matched narrowly on "data desk",
   // NOT /data analyst/, because Rhea Morgan is "Data Analyst / Copy Chief" and must
@@ -123,7 +128,9 @@ async function buildBylineRoster() {
 
     const beat = classifyBeat_(roleType);
     if (beat.exclude) {
-      excluded.push({ name, popid, roleType, reason: beat.reason });
+      const ex = { name, popid, roleType, reason: beat.reason };
+      if (beat.lane) ex.lane = beat.lane; // S336 W5h2 — sports seats carry their desk lane
+      excluded.push(ex);
       continue;
     }
 
@@ -146,7 +153,55 @@ async function buildBylineRoster() {
   return { roster, byPopid, included, excluded };
 }
 
-module.exports = { buildBylineRoster, classifyBeat_, BEAT_RULES };
+// ─────────────────────────────────────────────────────────────────────────────
+// S336 engine.76 W5h2 — desk-signal lane pools for the byline WHO-assist.
+// beatDomain → desk_signal lane ('*' = eligible for any lane; the generals are
+// the rotation's reach into never-routed staff). Lane names match
+// emitDeskSignal's partition {civic, sports, culture, business} and
+// REPORTER_DESK_INDEX.md routing (HEALTH/SAFETY/INFRASTRUCTURE → civic-desk,
+// EDUCATION/ENVIRONMENT/COMMUNITY → culture-desk).
+// ─────────────────────────────────────────────────────────────────────────────
+const LANE_BY_DOMAIN = {
+  CIVIC: 'civic',
+  SAFETY: 'civic',
+  HEALTH: 'civic',
+  INFRASTRUCTURE: 'civic',
+  ECONOMIC: 'business',
+  CULTURE: 'culture',
+  COMMUNITY: 'culture',
+  EDUCATION: 'culture',
+  ENVIRONMENT: 'culture',
+  GENERAL: '*'
+};
+
+/**
+ * Per-lane byline candidate pools from the live roster.
+ * @returns {Promise<{pools:Object, generals:Array, unmapped:Array}>}
+ *   pools    — { civic:[{name,popid,beat}], sports:[…], culture:[…], business:[…] }
+ *   generals — beat-agnostic writers eligible for any lane (beatDomain GENERAL)
+ *   unmapped — non-writer seats (masthead/photo), listed with reason
+ */
+async function buildLanePools() {
+  const { included, excluded } = await buildBylineRoster();
+  const pools = { civic: [], sports: [], culture: [], business: [] };
+  const generals = [];
+  const unmapped = [];
+
+  for (const j of included) {
+    const lane = LANE_BY_DOMAIN[j.beatDomain];
+    const entry = { name: j.name, popid: j.popid, beat: j.roleType };
+    if (lane === '*') generals.push(entry);
+    else if (pools[lane]) pools[lane].push(entry);
+    else unmapped.push({ name: j.name, popid: j.popid, reason: 'no lane for domain ' + j.beatDomain });
+  }
+  for (const e of excluded) {
+    if (e.lane && pools[e.lane]) pools[e.lane].push({ name: e.name, popid: e.popid, beat: e.roleType });
+    else unmapped.push({ name: e.name, popid: e.popid, reason: e.reason });
+  }
+  return { pools, generals, unmapped };
+}
+
+module.exports = { buildBylineRoster, buildLanePools, classifyBeat_, BEAT_RULES, LANE_BY_DOMAIN };
 
 // CLI smoke: `node scripts/engine-auditor/bayTribuneRoster.js`
 if (require.main === module) {

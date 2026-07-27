@@ -529,6 +529,97 @@ console.log('\nTest 11e: emitDeskSignal (degraded inputs)');
 }
 
 // ────────────────────────────────────────────────────────────────────────────
+// Test 11f: W5h2 byline WHO-assist — selectBylineCandidates + loadBylineUsage
+// ────────────────────────────────────────────────────────────────────────────
+console.log('\nTest 11f: byline candidates (W5h2)');
+{
+  const POOLS = {
+    pools: {
+      civic: [{ name: 'Carmen Delaine', popid: 'POP-00011', beat: 'Civic Affairs Reporter' },
+              { name: 'Luis Navarro', popid: 'POP-00636', beat: 'Investigations' }],
+      sports: [{ name: 'Anthony Raines', popid: 'POP-00002', beat: "Lead Beat Reporter - Oakland A's" },
+               { name: 'Tanya Cruz', popid: 'POP-00163', beat: 'Sideline Reporter' }],
+      culture: [{ name: 'Maria Keen', popid: 'POP-00013', beat: 'Cultural Liason' },
+                { name: 'Sharon Okafor', popid: 'POP-00159', beat: 'Lifestyle' }],
+      business: [{ name: 'Jordan Velez', popid: 'POP-00153', beat: 'Economics & Labor' }]
+    },
+    generals: [{ name: 'Dana Reeve', popid: 'POP-00010', beat: 'Lead Journalist' },
+               { name: 'Elliot Marbury', popid: 'POP-00166', beat: 'Journalist, Data Desk' }]
+  };
+
+  // 1. Zero usage: every lane emits its beat pick, deterministic name-asc tie-break
+  const c0 = helper.selectBylineCandidates(POOLS, {});
+  assertEqual('zero-usage picks all four lanes', Object.keys(c0).sort(), ['business', 'civic', 'culture', 'sports']);
+  assertEqual('civic tie-break name-asc', c0.civic.name, 'Carmen Delaine');
+  assert('popid resolved on every candidate', Object.values(c0).every(c => /^POP-\d{5}$/.test(c.popid)));
+  assert('no angle/story/subject fields emitted', Object.values(c0).every(c =>
+    Object.keys(c).every(k => ['name', 'popid', 'basis', 'recentUse'].includes(k))));
+
+  // 2. Rotation: heavy use in cycle N penalises in N+1 — beat sibling takes over
+  const c1 = helper.selectBylineCandidates(POOLS, { 'Carmen Delaine': 2 });
+  assertEqual('used civic writer rotates out', c1.civic.name, 'Luis Navarro');
+
+  // 3. Penalty floor: whole beat pool heavily used → general can outscore it
+  const c2 = helper.selectBylineCandidates(POOLS, { 'Carmen Delaine': 3, 'Luis Navarro': 2 });
+  assertEqual('exhausted beat pool falls to never-used general', c2.civic.name, 'Dana Reeve');
+
+  // 4. Penalty cap (C105 blackout regression): saturating usage NEVER blanks a
+  // lane — argmax always emits while a pool has anyone
+  const heavy = {};
+  for (const l of Object.keys(POOLS.pools)) POOLS.pools[l].forEach(j => { heavy[j.name] = 40; });
+  POOLS.generals.forEach(j => { heavy[j.name] = 40; });
+  const c3 = helper.selectBylineCandidates(POOLS, heavy);
+  assertEqual('saturated usage still fills all lanes (no blackout)', Object.keys(c3).length, 4);
+
+  // 5. Cross-lane spread: one name never takes two lanes in a cycle
+  const names = Object.values(c0).map(c => c.name);
+  assertEqual('four distinct names across lanes', new Set(names).size, 4);
+
+  // 6. Single-writer lane whose writer is taken → general fills, not blank
+  const soloTaken = helper.selectBylineCandidates(
+    { pools: { civic: [], sports: [], culture: [], business: [{ name: 'Jordan Velez', popid: 'POP-00153' }] }, generals: POOLS.generals },
+    { 'Jordan Velez': 6 });
+  assert('business still emits under heavy solo usage', Boolean(soloTaken.business));
+
+  // 7. Empty pools → null-ish behavior, no throw
+  assertEqual('null lanePools returns null', helper.selectBylineCandidates(null, {}), null);
+  assertEqual('empty pools object → no lanes picked',
+    Object.keys(helper.selectBylineCandidates({ pools: { civic: [], sports: [], culture: [], business: [] }, generals: [] }, {})).length, 0);
+
+  // 8. loadBylineUsage: synthetic dir, window of 3, cycles >= N excluded
+  const os = require('os');
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'byline-usage-'));
+  const mkLog = (c, names2) => fs.writeFileSync(path.join(tmp, `byline_shadow_log_c${c}.json`),
+    JSON.stringify({ cycle: c, entries: names2.map(n => ({ finalAssignment: n })) }));
+  mkLog(100, ['A', 'A', 'B']);
+  mkLog(101, ['B']);
+  mkLog(102, ['C']);
+  mkLog(103, ['D']);      // current cycle — must be excluded
+  mkLog(99, ['E']);       // outside the 3-log window
+  fs.writeFileSync(path.join(tmp, 'byline_shadow_log_c98.json'), '{{corrupt');
+  const usage = helper.loadBylineUsage(103, tmp);
+  assertEqual('window tallies A twice', usage.A, 2);
+  assertEqual('window tallies B across two logs', usage.B, 2);
+  assertEqual('current cycle excluded', usage.D, undefined);
+  assertEqual('outside-window log excluded', usage.E, undefined);
+  const usageMissing = helper.loadBylineUsage(103, path.join(tmp, 'no-such-dir'));
+  assertEqual('missing dir → empty tally', Object.keys(usageMissing).length, 0);
+  fs.rmSync(tmp, { recursive: true, force: true });
+
+  // 9. emitDeskSignal integration: pools present → bylineCandidates block +
+  // contract line; pools absent → omitted + noted
+  const withPools = helper.emitDeskSignal(101, {
+    auditJson: {}, rippleAll: [], sportsAll: [], neighborhoodsC: [], rileyCurr: {},
+    bylinePools: POOLS, bylineUsage: {}
+  });
+  assert('artifact carries bylineCandidates', Boolean(withPools.bylineCandidates && withPools.bylineCandidates.civic));
+  assert('meta carries bylineContract', String(withPools.meta.bylineContract).includes('WHO-assist'));
+  const noPools = helper.emitDeskSignal(101, { auditJson: {}, rippleAll: [], sportsAll: [], neighborhoodsC: [], rileyCurr: {} });
+  assert('no pools → bylineCandidates omitted', !('bylineCandidates' in noPools));
+  assert('no pools → omission noted', noPools.meta.notes.some(n => n.includes('byline candidates omitted')));
+}
+
+// ────────────────────────────────────────────────────────────────────────────
 // Test 12: integration — full build against live sheets (CANON_PRESENT skip)
 // ────────────────────────────────────────────────────────────────────────────
 const auditPath = path.join(__dirname, '..', 'output', 'engine_audit_c94.json');

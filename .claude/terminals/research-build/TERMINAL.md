@@ -84,96 +84,9 @@ Rationale: [[../../../docs/adr/0005-rollout-plan-structure]]; operating rules: [
 
 ## Owned Documentation
 
-### Vision & Architecture
+Removed S335 — it was a 93-line re-listing of `docs/index.md`, which carries every one of those docs already (verified: all 13 sampled entries present in the registry). Its "when to load" column is now done by mechanism: the `topic-inventory` UserPromptSubmit hook greps the corpus per prompt and injects matching paths, so relevance is answered live rather than from a table that has to be maintained.
 
-| File | What it covers | When to load |
-|------|---------------|--------------|
-| `docs/PRODUCT_VISION.md` | Where the project is heading | Architectural decisions |
-| `docs/ARCHITECTURE_VISION.md` | Jarvis at /root, persistent sessions, north star | Big picture planning |
-| `docs/BOOT_ARCHITECTURE.md` | Boot sequence design | Boot changes |
-| `docs/WORKFLOWS.md` | Per-workflow logic, room definitions | Workflow changes |
-| `docs/STACK.md` | Full tech stack | Infrastructure questions |
-
-### Research
-
-| File | What it covers | When to load |
-|------|---------------|--------------|
-| `docs/research/TEMPLATE.md` | Research-file template (S250) — source-mining record shape + verdict-not-state + never-archives rules | Filing any new research source |
-| `docs/research/index.md` | Research sub-catalog — every per-topic research instance | Finding prior research before re-reviewing a source |
-| `docs/RESEARCH.md` | **FROZEN legacy learning log** (S99–S248) — findings + early AI-literacy. New research → per-topic files via the template | Historical reference only |
-| `docs/research4_1.md` | Engineering patterns — bounded memory, death spirals, dual-output | Architecture decisions |
-| `docs/research4_2.md` | Ryan dissertation — story sifter, Hennepin, curation | Design philosophy |
-
-### Planning & Rollout
-
-| File | What it covers | When to load |
-|------|---------------|--------------|
-| `docs/engine/archive/ROLLOUT_PLAN.md` | All project work, terminal handoff tags | Every session |
-| `docs/engine/archive/ROLLOUT_ARCHIVE.md` | Completed phase details | Past work reference |
-| `docs/engine/archive/REVIEWER_LANE_SCHEMA.md` | Phase 39.6 contract — four fields every reviewer lane JSON must satisfy | Phase 39.x work |
-
-### Riley Integration
-
-| File | What it covers | When to load |
-|------|---------------|--------------|
-| `riley/RILEY_PLAN.md` | Riley ecosystem inventory, active triggers, what to keep/replace | Riley work |
-
-### Infrastructure Docs
-
-| File | What it covers | When to load |
-|------|---------------|--------------|
-| `docs/SUPERMEMORY.md` | 5 containers, API, search patterns, terminal tagging | Memory system work |
-| `docs/CLAUDE-MEM.md` | Claude-mem architecture | Memory system work |
-| `docs/DASHBOARD.md` | 40 API endpoints, Express + React | Dashboard planning |
-| `docs/DISCORD.md` | Bot architecture | Discord work |
-| `docs/OPERATIONS.md` | Operational procedures | Process changes |
-
-### Pipeline Design
-
-| File | What it covers | When to load |
-|------|---------------|--------------|
-| `docs/EDITION_PIPELINE.md` | Pipeline v2 skills map (S134) | Pipeline design |
-
-### Mags Persistence (read-on-demand — journal is media-owned)
-
-**The journal is media-only (S249 governance.20).** This terminal does not write `JOURNAL.md` / `JOURNAL_RECENT.md` at session-close — operational mode reads no JOURNAL_RECENT at boot, so a journal write conditions nothing here. Architectural reasoning lands in ROLLOUT close-notes / RESEARCH.md / commit bodies. Sole journal owner: media TERMINAL.md.
-
-| File | What it covers | When to load |
-|------|---------------|--------------|
-| `docs/mags-corliss/CHARACTER.md` | Core Mags persistence | Identity questions |
-| `docs/mags-corliss/NEWSROOM_MEMORY.md` | Newsroom institutional memory | Editorial planning |
-| `docs/mags-corliss/NOTES_TO_SELF.md` | Running notes | On demand |
-| `docs/mags-corliss/SESSION_HISTORY.md` | Session summary history | Session patterns |
-| `docs/mags-corliss/TECH_READING_ARCHIVE.md` | Tech reading log | Research sessions |
-| `docs/mags-corliss/DAILY_REFLECTIONS.md` | Nightly reflections | On demand |
-
-### Session & Lifecycle Skills
-
-| File | What it does |
-|------|-------------|
-| `.claude/skills/boot/SKILL.md` | Reload identity after compaction |
-| `.claude/skills/session-startup/SKILL.md` | Manual fallback boot |
-| `.claude/skills/session-end/SKILL.md` | Session close |
-| `.claude/skills/save-to-mags/SKILL.md` | Deliberate brain save |
-| `.claude/skills/save-to-profile/SKILL.md` | Deliberate static User Profile write — identity layer (S238 / governance.17) |
-| `.claude/skills/grill-me/SKILL.md` | Deep interrogation of plans |
-
-### Engine Health Skills (shared with engine terminal)
-
-| File | What it does |
-|------|-------------|
-| `.claude/skills/health/SKILL.md` | Quick 30s pulse |
-| `.claude/skills/pre-mortem/SKILL.md` | Pre-cycle scan |
-| `.claude/skills/tech-debt-audit/SKILL.md` | Comprehensive code health |
-| `.claude/skills/stub-engine/SKILL.md` | Function reference map |
-| `.claude/skills/ctx-map/SKILL.md` | Field dependency map |
-| `.claude/skills/deploy/SKILL.md` | Clasp push + verify |
-| `.claude/skills/doc-audit/SKILL.md` | Check docs for staleness |
-| `.claude/skills/visual-qa/SKILL.md` | Dashboard visual QA |
-| `.claude/skills/diagnose/SKILL.md` | Six-phase diagnosis loop for external-system bugs (Pocock MIT, S190) |
-| `.claude/skills/self-debug/SKILL.md` | Four-phase loop for when the agent is the failing thing (S187) |
-
----
+Registry: `docs/index.md` — grep it, don't load it. New MDs still register there (no-isolated-MDs, S147).
 
 ## NOT Your Files
 

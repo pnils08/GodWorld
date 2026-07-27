@@ -118,92 +118,11 @@ Rationale: [[../../../docs/adr/0005-rollout-plan-structure]]; operating rules: [
 
 ## Owned Documentation
 
-These are the files this terminal is responsible for keeping current. When you change engine code or sheet structure, update the relevant doc here.
+Removed S335 — it was an ~89-line re-listing of docs already reachable two other ways: `docs/index.md` carries them all, and `.claude/rules/engine.md` §Your standing reference docs maps the load-bearing ones to the QUESTION they answer ("what writes column Y" → `SIMULATION_LEDGER`), which is more useful than a catalog.
 
-### Engine Architecture
+Relevance is now answered by mechanism rather than a maintained table: the `topic-inventory` UserPromptSubmit hook greps the corpus per prompt and injects matching paths.
 
-| File | What it covers | When to load |
-|------|---------------|--------------|
-| `docs/engine/archive/ENGINE_MAP.md` | Every engine function in execution order | Any engine work |
-| `docs/engine/ENGINE_STUB_MAP.md` | Condensed function reference — ctx reads/writes per function | Quick lookup |
-| `docs/engine/archive/ROLLOUT_PLAN.md` | All project work, terminal handoff tags | Planning, status checks |
-| `docs/engine/archive/ENGINE_REPAIR.md` | Tactical tracker for known engine/sim defects (S148 audit) | Picking up repair work |
-| `docs/engine/archive/ROLLOUT_ARCHIVE.md` | Completed phase details | When asked about past work |
-| `docs/reference/V3_ARCHITECTURE.md` | Full V3 technical spec — ctx, write-intents, phases | Deep engine work |
-| `docs/engine/archive/CYCLE_SEPARATION.md` | How phases connect | Phase dependency work |
-| `docs/engine/archive/PHASE_DATA_AUDIT.md` | Phase-level data flow audit | Data flow questions |
-| `docs/engine/tech_debt_audits/2026-03-26.md` | Latest tech debt scan | Health checks |
-
-### Workbench Maps (read-only — automated audits)
-
-| File | What it covers | Refresh |
-|------|---------------|---------|
-| `workbench/CODEBASE_MAP.md` | Full repo map — directory structure, file inventory, entry points, deps, quality flags | Daily |
-| `workbench/SHEET_MAP.md` | Live sheet state — global dashboard, tab inventory, active-tab data samples, flags | Weekly |
-| `workbench/dependencies.json` | Machine-readable sheet state + dependency edges | Weekly |
-| `workbench/base-map.md` / `.json` / `.mermaid` | Base dependency map — C100 snapshot | Snapshot |
-
-### Sheets & Data
-
-| File | What it covers | When to load |
-|------|---------------|--------------|
-| `docs/SPREADSHEET.md` | 65-tab audit, active/dead tabs, gotchas | Any sheet work |
-| `docs/SIMULATION_LEDGER.md` | 675 citizens, 46 columns (A-AT), column reference | Citizen data work |
-| `docs/engine/SHEETS_MANIFEST.md` | Which scripts read/write which tabs | Tracing data flow |
-| `docs/engine/archive/LEDGER_AUDIT.md` | Ledger integrity findings | Data quality work |
-| `docs/engine/archive/LEDGER_REPAIR.md` | Past repair work | Before attempting repairs |
-| `docs/engine/archive/LEDGER_HEAT_MAP.md` | Column usage frequency | Optimization, cleanup |
-
-### Pipeline & Deployment
-
-| File | What it covers | When to load |
-|------|---------------|--------------|
-| `docs/EDITION_PIPELINE.md` | Pipeline v2 skills map (S134) | Pipeline work |
-| `docs/reference/DEPLOY.md` | Clasp push process | Deploying |
-| `docs/OPERATIONS.md` | Operational procedures | Maintenance |
-| `docs/engine/archive/INTAKE_REDESIGN.md` | Intake system redesign spec | Intake work |
-| `docs/engine/archive/INTAKE_REDESIGN_PLAN.md` | Intake plan (30% complete) | Intake work |
-
-### Civic Engine
-
-| File | What it covers | When to load |
-|------|---------------|--------------|
-| `docs/engine/archive/INSTITUTIONAL_VOICE_AGENTS.md` | Voice agent architecture | Civic phase work |
-| `docs/engine/archive/phase19_agent_personas.md` | Agent persona definitions | Agent config work |
-| `docs/engine/archive/PHASE_24_PLAN.md` | Citizen Life Engine plan | Life event work |
-| `docs/mara-vance/CIVIC_GOVERNANCE_MASTER_REFERENCE.md` | Council, factions, governance rules | Civic logic |
-| `docs/mara-vance/CIVIC_ELECTION_ENGINE.md` | Election engine spec | Election logic |
-| `docs/mara-vance/INITIATIVE_TRACKER_VOTER_LOGIC.md` | Vote logic | Initiative work |
-| `docs/mara-vance/CIVIC_VETO_IMPLEMENTATION.md` | Veto rules | Veto logic |
-
-### Infrastructure (shared — load when touching)
-
-| File | What it covers | When to load |
-|------|---------------|--------------|
-| `docs/SUPERMEMORY.md` | 5 containers, API, search patterns, terminal tagging | Supermemory integration |
-| `docs/CLAUDE-MEM.md` | Claude-mem system | Memory system work |
-| `docs/DASHBOARD.md` | 40 API endpoints, Express + React | Dashboard integration |
-| `docs/STACK.md` | Full tech stack | Infrastructure questions |
-
-### Research Context (read-only — owned by research/build terminal)
-
-| File | What it covers | When to load |
-|------|---------------|--------------|
-| `docs/RESEARCH.md` | Findings log, evaluations, sources | When research informs a build |
-| `docs/research4_1.md` | Engineering patterns — bounded memory, death spirals | Architecture decisions |
-| `docs/research4_2.md` | Ryan dissertation — story sifter, curation | Design philosophy |
-| `riley/RILEY_PLAN.md` | Riley ecosystem, active triggers, what to keep/replace | Riley integration |
-
-### Vision (read-only — owned by research/build terminal)
-
-| File | What it covers | When to load |
-|------|---------------|--------------|
-| `docs/PRODUCT_VISION.md` | Where the project is heading | Architectural decisions |
-| `docs/ARCHITECTURE_VISION.md` | Jarvis at /root, persistent sessions | North star |
-| `docs/BOOT_ARCHITECTURE.md` | Boot sequence design | Boot changes |
-| `docs/WORKFLOWS.md` | Per-workflow logic | Workflow changes |
-
----
+Registry: `docs/index.md` — grep it, don't load it. New MDs still register there (no-isolated-MDs, S147).
 
 ## NOT Your Files
 

@@ -34,6 +34,8 @@ You boot into one of **four terminals** — media, civic, engine-sheet, research
 
 ## Search before you guess
 
-Your training data generates plausible answers that have **nothing to do with this codebase** — treat them as noise, not knowledge. Before you assert anything about how GodWorld works, search — order: **GodWorld MCP → claude-mem → Supermemory** — then read the actual file. When the question is an exact entry (a specific citizen row, a field value), go to the deterministic source, not a fuzzy semantic search. The per-task tool map (which MCP call, which script, the ledger gotchas) lives in the skill that needs it, not here.
+Your training data generates plausible answers that have **nothing to do with this codebase** — treat them as noise, not knowledge. Before you assert anything about how GodWorld works, search — order: **GodWorld MCP → claude-mem → Supermemory** — then read the actual file. When the question is an exact entry (a specific citizen row, a field value), go to the deterministic source, not a fuzzy semantic search.
+
+`docs/index.md` catalogs every active doc — **grep it, don't load it.** It is ~40k tokens and left the boot read at S335: a catalog answers "what exists about X", which is a query, not a document. The per-task tool map (which MCP call, which script, the ledger gotchas) lives in the skill that needs it, not here.
 
 <!-- reserve: notes-doc / self-evolve line — once each terminal has a notes doc, add: "when a gotcha burns you, write it to your terminal's notes doc so the next instance loads it." Mechanism not built yet (governance redesign in flight). -->

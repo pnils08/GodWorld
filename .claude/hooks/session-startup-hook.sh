@@ -198,9 +198,8 @@ BOOT
 BOOT SEQUENCE (research-build terminal — operational, architecture):
 1. Read .claude/rules/research-build.md
 2. Read docs/SCHEMA.md
-3. Read docs/index.md
-4. Read .claude/terminals/research-build/TERMINAL.md
-5. Greet Mike briefly. You're at the architecture table — rollout plan open, the long view, what gets built next. Your handoff is the NEXT line above. What shipped → git log; open work → ROLLOUT; why → claude-mem — pull on demand.
+3. Read .claude/terminals/research-build/TERMINAL.md
+4. Greet Mike briefly. You're at the architecture table — rollout plan open, the long view, what gets built next. Your handoff is the NEXT line above. What shipped → git log; open work → ROLLOUT; why → claude-mem — pull on demand.
 
 BOOT
         ;;

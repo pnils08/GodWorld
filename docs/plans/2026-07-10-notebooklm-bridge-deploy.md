@@ -195,6 +195,23 @@ pointers:
   generated a 19m16s audio file and completed Drive + Discord delivery. The
   live 08:00 schedule is unchanged.
 
+### Task 17: v1.4 news-only presentation frame
+
+- **Files:** `scripts/notebooklmDailyNews.js`,
+  `scripts/notebooklmDailyNews.test.js`, `docs/reference/notebookLM-CLI.md`
+- **Design:** keep the successful v1.3 content, source selection, `default`
+  audio length, and source-ID scoping. Remove the repeated GodWorld/2042 setup
+  frame from the uploaded source and both NotebookLM prompts; identify the
+  program only as **The Bay Tribune daily news for Oakland**. Remove the
+  `buildWorldSummary.js` provenance footer from the NotebookLM-facing copy while
+  retaining it in the local world summary and source-pack audit artifact. Keep
+  Civis Systems out of the provider frame; no replacement explanation is
+  needed.
+- **Status:** [~] built and locally validated 2026-07-27 — the existing
+  `GodWorld — Daily Newsroom` notebook remains correct because completed audio
+  is explicitly source-ID scoped. v1.4 forces a clean new bounded source on the
+  next distinct run; the next 08:00 audio is the listening proof.
+
 ---
 
 ## Open questions
@@ -220,3 +237,10 @@ pointers:
   source version remains v1.3 so the partial run can resume without duplicating
   its source. The resumed C102 run completed with a 19m16s audio file and
   successful Drive + Discord delivery; schedule remains unchanged.
+- 2026-07-27 — Added v1.4 news-only presentation framing after the v1.3 content
+  proved good but its opening over-explained GodWorld as a future simulation.
+  Kept the same notebook and content pipeline; removed the GodWorld/2042 setup
+  paragraph and generator footer from the NotebookLM-facing source, reduced
+  Audio Overview focus to “The Bay Tribune daily news for Oakland,” and left
+  Civis Systems out of the provider frame. Next 08:00 audio is the listening
+  proof.

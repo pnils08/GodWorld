@@ -459,6 +459,15 @@ brief, bounded source, 08:00 schedule, Drive delivery, and Discord delivery are
 unchanged. The originally attempted `medium` value failed before audio
 rendering because the installed CLI accepts only `short`, `default`, or `long`.
 
+v1.4 keeps the v1.3 content and `default` audio length but removes the
+explanatory setup that Audio Overview was turning into a long preamble. The
+NotebookLM-facing source is titled as **The Bay Tribune Daily News**, the audio
+focus is only “The Bay Tribune daily news for Oakland,” and the generated-by
+footer stays in the local world summary rather than the uploaded presentation
+copy. The existing working notebook is retained: every generated audio artifact
+is bound to the current source ID, so its older setup sources are not part of a
+new program. Do not introduce Civis Systems as a provider explanation.
+
 **Upstream input incident and repair:** the 2026-07-26 fan-out write created six
 desk-only raw drafts while the orchestrator expected reporter-specific paths.
 It recorded `0/6` and promoted no Article. The 2026-07-27 repair forwards each
@@ -593,6 +602,11 @@ delete the CLI-managed profile as part of a normal rollback.
   version remains v1.3 so its partial manifest can resume without duplicating
   the bounded source. The resumed C102 run produced a 19m16s audio file and
   completed Drive + Discord delivery; schedule is unchanged.
+- 2026-07-27 — Added Daily News v1.4 news-only framing. Removed the
+  GodWorld/2042 explanatory frame and generator footer from the
+  NotebookLM-facing source, reduced Audio Overview focus to The Bay Tribune
+  daily news for Oakland, and retained the existing source-scoped working
+  notebook. Next 08:00 audio is the listening proof.
 - 2026-07-27 — Documented the 08:00/18:15 collection timing, source-driven
   variation/no-op contract, and the live fan-out filename mismatch currently
   preventing raw cron drafts from reaching the staged/sample input directories.

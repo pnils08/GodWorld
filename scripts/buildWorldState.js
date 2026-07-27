@@ -47,13 +47,12 @@ const BASE_CONTEXT_PATH = path.join(ROOT, 'output', 'desk-packets', 'base_contex
 // Freshest-wins cycle detection — same pattern as cron-desk-writer detectCycle():
 // world_summary_c{N}.md is written EVERY cycle; base_context.json is edition-frozen.
 function detectCycle() {
-  const arg = process.argv.find((a) => /^\d+$/.test(a));
-  if (arg) return parseInt(arg, 10);
-  const nums = fs.readdirSync(path.join(ROOT, 'output'))
-    .map((f) => (f.match(/^world_summary_c(\d+)\.md$/) || [])[1])
-    .filter(Boolean).map(Number);
-  if (nums.length) return Math.max(...nums);
-  throw new Error('buildWorldState: cannot determine cycle — pass it as an argument');
+  // engine.81 (S336): delegates to lib/getCurrentCycle (argv override + freshest
+  // world_summary + base_context divergence guard); local throw preserved.
+  const getCurrentCycle = require('../lib/getCurrentCycle');
+  const c = getCurrentCycle({ soft: true });
+  if (c === null) throw new Error('buildWorldState: cannot determine cycle — pass it as an argument');
+  return c;
 }
 
 // ### <Hood> blocks out of neighborhood_texture_c{N}.md → { hood: text }.

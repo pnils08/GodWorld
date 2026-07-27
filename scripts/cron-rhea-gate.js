@@ -55,15 +55,12 @@ const log = {
   error: (...a) => console.error('[ERROR]', new Date().toISOString(), ...a)
 };
 
-// Freshest-wins cycle detection (sim clock — same rule as the writer)
+// engine.81 (S336): delegates to lib/getCurrentCycle — ONE cycle source with
+// the base_context divergence guard. noArgv: this cron parses its own flags.
+const getCurrentCycle = require('../lib/getCurrentCycle');
 function detectCycle() {
-  try {
-    const nums = fs.readdirSync(path.join(ROOT, 'output'))
-      .map(f => (f.match(/^world_summary_c(\d+)\.md$/) || [])[1])
-      .filter(Boolean).map(Number);
-    if (nums.length) return String(Math.max(...nums));
-  } catch (_) {}
-  return 'current';
+  const c = getCurrentCycle({ soft: true, noArgv: true });
+  return c === null ? 'current' : String(c);
 }
 
 function buildPrompt(cycle, draftRel, worldRel, nameCheck) {

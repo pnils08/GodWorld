@@ -85,14 +85,12 @@ function personaInfo(slug) {
 
 const log = (...a) => console.log('[run]', new Date().toISOString(), ...a);
 
+// engine.81 (S336): delegates to lib/getCurrentCycle — ONE cycle source, with
+// the base_context divergence guard. noArgv: this cron parses its own flags.
+const getCurrentCycle = require('../lib/getCurrentCycle');
 function detectCycle() {
-  try {
-    const nums = fs.readdirSync(path.join(ROOT, 'output'))
-      .map(f => (f.match(/^world_summary_c(\d+)\.md$/) || [])[1])
-      .filter(Boolean).map(Number);
-    if (nums.length) return String(Math.max(...nums));
-  } catch (_) {}
-  return 'current';
+  const c = getCurrentCycle({ soft: true, noArgv: true });
+  return c === null ? 'current' : String(c);
 }
 function deskRoute(desk) {
   const m = JSON.parse(fs.readFileSync(path.join(__dirname, 'desk-model-map.json'), 'utf8'));

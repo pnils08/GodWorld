@@ -54,17 +54,10 @@ var EMPTY_QUERIES = [];
 // Detect cycle number
 // ---------------------------------------------------------------------------
 function detectCycle() {
-  var explicit = process.argv.find(function(a) { return /^\d+$/.test(a); });
-  if (explicit) return parseInt(explicit, 10);
-
-  var baseCtx = path.join(PACKETS_DIR, 'base_context.json');
-  if (fs.existsSync(baseCtx)) {
-    try {
-      var ctx = JSON.parse(fs.readFileSync(baseCtx, 'utf-8'));
-      return ctx.cycleNumber || ctx.cycle;
-    } catch (e) { /* fall through */ }
-  }
-  return null;
+  // engine.81 (S336): delegates to lib/getCurrentCycle — freshest world_summary
+  // beats base_context (the S332 stale-103 trap this script used to carry).
+  var getCurrentCycle = require('../lib/getCurrentCycle');
+  return getCurrentCycle({ soft: true });
 }
 
 // ---------------------------------------------------------------------------

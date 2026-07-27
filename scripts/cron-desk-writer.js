@@ -24,6 +24,7 @@
  * Usage:
  *   node scripts/cron-desk-writer.js --desk sports
  *   node scripts/cron-desk-writer.js --desk sports --model claude-sonnet-5 --dry-run
+ *   node scripts/cron-desk-writer.js --desk civic --artifact-tag task7-baseline
  *
  * Requires .env: ANTHROPIC_API_KEY
  *
@@ -94,10 +95,26 @@ function costUsd(model, tin, tout) {
 const PERSONA = arg('--persona', null);   // e.g. freelance-firebrand — load an authored reporter's ADVERSARIAL stance (IDENTITY+LENS+RULES) instead of the desk roundup skill (S332 firebrand lane — teeth, not roundup)
 const AGENT_DIR = path.join(ROOT, '.claude', 'agents', PERSONA || (DESK + '-desk'));
 const SKILL_PATH = path.join(AGENT_DIR, PERSONA ? 'IDENTITY.md' : 'SKILL.md');
+// Evaluation-only filename namespace. Additive and inert unless explicitly set;
+// the normal cron never passes it. Keep the model slug LAST so the independent
+// Rhea gate can still infer the writer family from the draft filename.
+function normalizeArtifactTag(value) {
+  if (value == null || value === '') return null;
+  const tag = String(value).trim();
+  if (!/^[a-z0-9][a-z0-9-]{0,47}$/.test(tag)) {
+    throw new Error('--artifact-tag must match [a-z0-9][a-z0-9-]{0,47}');
+  }
+  return tag;
+}
+const ARTIFACT_TAG = normalizeArtifactTag(arg('--artifact-tag', null));
 // Output tag (2026-07-24, Mike-direct: samples must accumulate, not overwrite) —
 // persona runs get their own filenames so a desk's roundup sample and a firebrand
-// sample on the same cycle coexist for comparison.
-const OUT_SLUG = (PERSONA ? PERSONA + '_' : '') + MODEL_SLUG;
+// sample on the same cycle coexist for comparison. Evaluation tags sit before
+// the model slug to preserve the gate's writer-family parser.
+const OUT_SLUG =
+  (PERSONA ? PERSONA + '_' : '') +
+  (ARTIFACT_TAG ? ARTIFACT_TAG + '_' : '') +
+  MODEL_SLUG;
 
 const log = {
   info: (...a) => console.log('[INFO]', new Date().toISOString(), ...a),
@@ -108,17 +125,13 @@ const log = {
 // ---------------------------------------------------------------------------
 // Cycle detection (best-effort, from the desk workspace)
 // ---------------------------------------------------------------------------
+// engine.81 (S336): delegates to lib/getCurrentCycle — ONE cycle source
+// (freshest world_summary primary, base_context divergence guard). noArgv:
+// this cron parses its own flags.
+const getCurrentCycle = require('../lib/getCurrentCycle');
 function detectCycle() {
-  // Freshest-wins: world_summary_c{NN}.md is written EVERY cycle, independent of
-  // the (paused) edition pipeline, so it is the true current cycle. The desk
-  // workspace JSON only refreshes when editions run — it is stale.
-  try {
-    const nums = fs.readdirSync(path.join(ROOT, 'output'))
-      .map(f => (f.match(/^world_summary_c(\d+)\.md$/) || [])[1])
-      .filter(Boolean).map(Number);
-    if (nums.length) return String(Math.max(...nums));
-  } catch (_) {}
-  return 'current';
+  const c = getCurrentCycle({ soft: true, noArgv: true });
+  return c === null ? 'current' : String(c);
 }
 
 // ---------------------------------------------------------------------------
@@ -468,7 +481,11 @@ async function main() {
   };
   if (!DRY_RUN && wrote) {
     fs.mkdirSync(COMPARE_DIR, { recursive: true });
-    fs.writeFileSync(path.join(COMPARE_DIR, DESK + '_c' + cycle + '_cron.meta.json'), JSON.stringify(meta, null, 2));
+    const metaName =
+      DESK + '_c' + cycle +
+      (ARTIFACT_TAG ? '_' + ARTIFACT_TAG : '') +
+      '_cron.meta.json';
+    fs.writeFileSync(path.join(COMPARE_DIR, metaName), JSON.stringify(meta, null, 2));
   }
 
   console.log('\n--- run summary ---');
@@ -480,4 +497,10 @@ async function main() {
   }
 }
 
-main().catch(err => { log.error('Fatal: ' + err.message); process.exit(1); });
+if (require.main === module) {
+  main().catch(err => { log.error('Fatal: ' + err.message); process.exit(1); });
+}
+
+module.exports = {
+  normalizeArtifactTag,
+};

@@ -99,6 +99,45 @@ function deskRoute(desk) {
 const slug = m => m.replace(/[^a-z0-9]+/gi, '-').toLowerCase();
 function readJson(p) { try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch (_) { return null; } }
 
+// engine.88 (S339): journalist usage→tier→fame. A gate-PASSED (staged) article
+// earns its author one Citizen_Media_Usage row, UsageType 'byline-landed'.
+// Phase 5 processMediaUsage_ counts it into the author's SL UsageCount next
+// cycle; the existing 3/6/9 tier bars + engine.69 decay do the rest. Saturday
+// edition selection adds 'byline-published' on top (ingestPublishedEntities.js).
+// Idempotent on (CitizenName, UsageType, Context=stage stem) so a rerun of the
+// same wake never double-counts. Row is header-mapped, robust to column order.
+// A failed append NEVER blocks article routing — logged, reported in the record.
+async function recordBylineUsage(cycle, byline, context) {
+  if (!byline || !byline.name) return { recorded: false, reason: 'no byline' };
+  try {
+    const sheets = require(path.join(ROOT, 'lib', 'sheets'));
+    const data = await sheets.getRawSheetData('Citizen_Media_Usage');
+    const h = data[0] || [];
+    const iN = h.indexOf('CitizenName'), iT = h.indexOf('UsageType'), iC = h.indexOf('Context');
+    if (iN < 0 || iT < 0) return { recorded: false, reason: 'Citizen_Media_Usage headers missing CitizenName/UsageType' };
+    const dup = data.slice(1).some(r =>
+      String(r[iN] || '').trim() === byline.name &&
+      String(r[iT] || '').trim() === 'byline-landed' &&
+      (iC < 0 || String(r[iC] || '').trim() === context));
+    if (dup) return { recorded: false, reason: 'duplicate — this stem already credited' };
+    const row = h.map(col => {
+      switch (String(col).trim()) {
+        case 'Timestamp':   return 'C' + cycle;       // sim clock, never Gregorian
+        case 'Cycle':       return String(cycle);
+        case 'CitizenName': return byline.name;
+        case 'UsageType':   return 'byline-landed';
+        case 'Context':     return context;
+        case 'Reporter':    return byline.name;
+        default:            return '';
+      }
+    });
+    await sheets.appendRows('Citizen_Media_Usage', [row]);
+    return { recorded: true };
+  } catch (e) {
+    return { recorded: false, reason: e.message };
+  }
+}
+
 // ===========================================================================
 // PHASE 2 — daily writer-wake chain (--wake). Assembles the six layers over the
 // pieces proven in Phase 1 + W5. Additive: without --wake, main() below runs the
@@ -473,9 +512,12 @@ async function runWrite(assign) {
       builtAt: new Date().toISOString()
     }, null, 2));
   } else if (pass) {
+    const bylineUsage = await recordBylineUsage(cycle, byline, base);   // engine.88: author earns byline-landed
+    log('byline-landed: ' + (bylineUsage.recorded ? 'recorded for ' + byline.name : 'skipped — ' + bylineUsage.reason));
     fs.writeFileSync(path.join(STAGED, base + '.staged.json'), JSON.stringify({
       status: 'staged', desk, cycle, persona: personaSlug, byline: byline ? byline.name : null, bylinePopid: byline ? byline.popid : null,
       article: path.relative(ROOT, destPath),
+      bylineUsage,
       note: 'M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.',
       stagedAt: new Date().toISOString()
     }, null, 2));
@@ -598,9 +640,12 @@ async function runWake() {
       builtAt: new Date().toISOString()
     }, null, 2));
   } else if (pass) {
+    const bylineUsage = await recordBylineUsage(cycle, byline, base);   // engine.88: author earns byline-landed
+    log('byline-landed: ' + (bylineUsage.recorded ? 'recorded for ' + byline.name : 'skipped — ' + bylineUsage.reason));
     fs.writeFileSync(path.join(STAGED, base + '.staged.json'), JSON.stringify({
       status: 'staged', desk: DESK, cycle, byline: byline ? byline.name : null, bylinePopid: byline ? byline.popid : null,
       article: path.relative(ROOT, destPath),
+      bylineUsage,
       note: 'M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.',
       stagedAt: new Date().toISOString()
     }, null, 2));

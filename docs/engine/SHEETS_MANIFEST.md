@@ -47,7 +47,7 @@ This manifest is the registry of all active Google Sheets tabs hooked into the P
 ## 5. Intake & Generation
 - **`Intake`**: The entry point for creating new citizens.
 - **`Advancement_Intake1`**: Pre-stage for citizen tier advancement.
-- **`Citizen_Media_Usage`**: Media consumption profiling.
+- **`Citizen_Media_Usage`**: Media consumption profiling. engine.88 (S339) — also the journalist-progression feed: `scripts/cron-desk-run.js` appends `byline-landed` rows at gate-pass, `scripts/ingestPublishedEntities.js` appends `byline-published` rows at edition publish (both Node-side via service account, header-mapped, idempotent); Phase 5 `processMediaUsage_` counts them into the author's `Simulation_Ledger.UsageCount`.
 - **`Citizen_Usage_Intake`**: Routing usage back into the engine.
 - **`Event_Content_Ledger`**: Sheet-resident Phase 5 pool lines + `$SLOT` fragments (S289 Design A). Fail-closed conditions DSL + source whitelist in `loadEventContentLedger.js`; empty tab falls back to hardcoded pools. Writers: hand + post-cycle `scripts/draftContentRows.js` (`auth:auto`). Schema: Kind/PoolKey/Slot/Text/Weight/Conditions/Tags/Grain/Active.
 

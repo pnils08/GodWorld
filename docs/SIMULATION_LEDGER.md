@@ -187,7 +187,7 @@ Every column is a data point in someone's life. This maps who writes each column
 | P | 16 | SpouseId | 'POP-NNNNN First Last' (ID + name) | bondEngine `marryCitizens_` (both spouses) | spouse-drip tooling | **RECORD** (S321 regen caught live rename CreatedAt→SpouseId — the `marryCitizens_` 'prod no-ops until rollout rename' guard is now live-active; full verdict next audit) |
 | Q | 17 | Last Updated | ISO timestamp | Engine orchestrator | — | RECORD-by-design (timestamp) |
 | R | 18 | TraitProfile | `Archetype:X\|Mods:a,b\|social:0.7\|...\|V:1.5\|Updated:cNN` | compressLifeHistory v1.5 (Phase 9), integrateAthletes | generateCitizensEvents v2.8 (archetype weights, tone, motifs), buildDeskPackets (voice cards) | **CAUSAL** — `generateCitizensEvents.js:371-407` archetype weights event pools 1.3-1.4x; `storyHook.js:1214` persona match; derived from DialState by `compressLifeHistory.js:426` |
-| S | 19 | UsageCount | Integer | processIntakeV3, processAdvancementIntake | — | **CAUSAL** — `generateCitizensEvents.js:130` + `:2083` — UsageCount >= 8 gates PUBLIC_FIGURE_CAP + fame-recognition events |
+| S | 19 | UsageCount | Integer | processIntakeV3, processAdvancementIntake | — | **CAUSAL** — `generateCitizensEvents.js:130` + `:2083` — UsageCount >= 8 gates PUBLIC_FIGURE_CAP + fame-recognition events. engine.88 (S339): journalists now accrue it from their OWN landed work — `cron-desk-run.js` appends a `byline-landed` Citizen_Media_Usage row at gate-pass, `ingestPublishedEntities.js` appends `byline-published` at edition publish; `processMediaUsage_` counts both into the author's row (tier bars 3/6/9, engine.69 decay) |
 
 ### Location & Household (T–Y)
 

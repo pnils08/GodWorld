@@ -27,7 +27,15 @@
 
 var EMERGENCE_USAGE_TYPES = [
   'quoted', 'observed', 'profile', 'scene', 'reaction', 'witness',
-  'mentioned', 'interviewed', 'featured', 'community'
+  'mentioned', 'interviewed', 'featured', 'community',
+  // engine.88 (S339): journalist progression — the author's OWN landed work
+  // counts toward their SL UsageCount. 'byline-landed' = article cleared the
+  // Rhea gate (staged, written by cron-desk-run.js); 'byline-published' =
+  // article selected into the Saturday edition (written by
+  // ingestPublishedEntities.js) — so a published article is worth 2 total.
+  // Legacy 'byline' (a citizen merely credited as author in a media paste)
+  // stays excluded below.
+  'byline-landed', 'byline-published'
 ];
 
 var NON_EMERGENCE_USAGE_TYPES = [

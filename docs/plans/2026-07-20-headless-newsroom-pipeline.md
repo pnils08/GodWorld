@@ -339,7 +339,7 @@ Aggregate scorecards across the accrued articles to answer Feedback1.txt's per-d
 **Newsroom machinery (Phase 2):** BUILT + proven wired (commit 705f656b). The six-layer `cron-desk-run.js --wake` runs civic c102 end-to-end. Remaining before live M–F operation:
 1. **Quote adoption + byline-not-source** — the writer ignored injected quotes and used the byline as a source (canon violation). Prompt fixes applied (byline author-only, quotes as sole sources), NOT yet live-validated. **Prove on a cheap DeepSeek desk**, not civic-Sonnet, to keep iteration cost down. *(Ungated c102 samples generating in `output/cron-compare/samples/` for exactly this review — culture/business/civic, `--no-gate`.)*
 2. **Submission-budget mechanism** — the ~20–28 cleared-articles/week cap + no same-byline/same-storyline repeat across the static-cycle week. Not built; this is the cost-ceiling enforcement. Pairs with the schedule.
-3. **Journalist usage→tier→fame ledger** — NEW build (undesigned). Cleared article → usage count → citizen Tier up → fame. Article-content ingest exists; the journalist progression ledger does not.
+3. **Journalist usage→tier→fame ledger** — BUILT (engine.88, S339). No new ledger: the existing SL UsageCount→Tier ladder (bars 3/6/9, engine.69 decay) is the progression; the build was making an author's OWN work count. `cron-desk-run.js` appends a `byline-landed` Citizen_Media_Usage row at gate-pass; `ingestPublishedEntities.js` appends `byline-published` at edition publish (published article = weight 2 total); both new types added to EMERGENCE_USAGE_TYPES in `processAdvancementIntake.js`. Both writers idempotent + header-mapped. Column readiness audited S339: 1 corrupt cell fixed (POP-00017 `married`→0), blanks safe (all readers coerce `Number(x)||0`).
 4. **THE GATE IS SUBSCRIPTION-LOCKED (critical finding S332).** `cron-rhea-gate.js` runs `claude -p` (Claude Code / Mike's subscription), NOT a raw API key — while the writer (Anthropic API) and quotes (OpenRouter) are off-subscription. So the "runs on recovered API tokens, not subscription" thesis holds for WRITING but **not for the GATE**. Since "cleared = canon" makes the gate mandatory, unattended off-subscription operation needs a **raw-API Rhea path** (the plan's deferred "bigger canon-lookup port"). Until then, downtime runs must use `--no-gate` (ungated samples, never canon) or wait for Mike's subscription. **This is the #1 blocker for true autonomous M–F.**
 5. **Schedule** — no `at` on the box; `crontab` available. The M–F daypart cron (reuse citizen-wake's 2-wake morning/night per the 5→2 change) fires `cron-desk-run.js --wake` per active desk. Turning on continuous autonomous operation is **Mike's go** (outward-facing/hard-to-reverse), gated on #4.
 
@@ -391,6 +391,11 @@ no paid/manual wake or crontab change was used for validation.
   requires a deterministic source roster rather than another prompt-only retry.
 - 2026-07-27 — Recorded the live fan-out filename handoff defect that left the
   July 26 write wake at `0/6` and supplied no promoted Article to Daily News.
+- 2026-07-27 — Built go-live item #3 (engine.88, S339 engine-sheet): journalist
+  usage→tier→fame wired through the existing UsageCount ladder via
+  `byline-landed` (gate-pass, cron-desk-run) + `byline-published` (edition
+  publish, ingestPublishedEntities) Citizen_Media_Usage rows. Dry-run on the
+  latest edition resolved 12/12 bylines (Margaret→Mags alias added).
 - 2026-07-27 — Fixed that filename handoff by forwarding the roster reporter
   slug through the writer output namespace; deterministic roster/persona tests
   pass, with the next 18:15 wake retained as the live proof.

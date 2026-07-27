@@ -875,6 +875,135 @@ async function appendBusinesses(candidates, maxBizNum, sheetsClient, sheetId) {
 }
 
 // ---------------------------------------------------------------------------
+// engine.88 (S339) — journalist usage→tier→fame, publish-side weight
+// ---------------------------------------------------------------------------
+// Edition selection weights higher (Mike-direct, headless-newsroom plan
+// "What's left" #3): every byline-bearing article in a PUBLISHED edition earns
+// its author one Citizen_Media_Usage row, UsageType 'byline-published', on top
+// of the 'byline-landed' row cron-desk-run.js wrote at gate-pass. Phase 5
+// processMediaUsage_ counts both into SL.UsageCount; the existing 3/6/9 tier
+// bars + engine.69 decay are the fame curve — no new math.
+//
+// Source of truth: the edition's ARTICLE TABLE (slot|section|reporter|headline)
+// via lib/editionParser.parseArticleTable — tolerant of legacy shapes, no
+// full-contract enforcement. Reporters resolve exact-match against
+// Simulation_Ledger First+Last (normalized); unresolved/ambiguous names are
+// reported, never minted. Idempotent on (CitizenName, 'byline-published',
+// Context) so an ingest re-run never double-counts. Rows are header-mapped
+// against the live Citizen_Media_Usage headers, robust to column order.
+// Byline aliases — formal print names that differ from the SL First+Last row.
+// Keys are normalizeFullName() output; values are the SL-canonical full name.
+// (Distinct from POPID_ALIASES above, which is POPID-scoped.)
+const BYLINE_ALIASES = {
+  'margaret corliss': 'Mags Corliss',
+};
+
+async function processBylinePublished(fullPath, type, cycle, sheetsClient, sheetId, apply) {
+  const out = {
+    eligible: type === 'edition', articles: 0,
+    resolved: [], unresolved: [], ambiguous: [],
+    duplicates: 0, appended: 0, verified: null, parserNote: null,
+  };
+  if (!out.eligible) { out.parserNote = 'type ' + type + ' — byline credit is edition-only'; return out; }
+
+  let table;
+  try {
+    const editionParser = require('../lib/editionParser');
+    table = editionParser.parseArticleTable(fs.readFileSync(fullPath, 'utf8'));
+  } catch (e) { out.parserNote = 'ARTICLE TABLE parse failed: ' + e.message; return out; }
+  if (!table.present || !table.rows.length) { out.parserNote = 'no ARTICLE TABLE found'; return out; }
+
+  // One credit per article row that names a reporter.
+  const credits = [];
+  for (const r of table.rows) {
+    const reporter = String(r.reporter || '').trim().replace(/^by\s+/i, '').split('|')[0].trim();
+    const headline = String(r.headline || '').trim();
+    if (!reporter) continue;
+    const slot = r.slot ? String(r.slot).toUpperCase() + ': ' : '';
+    credits.push({ reporter, context: 'E' + cycle + ' ' + slot + headline.slice(0, 80) });
+  }
+  out.articles = credits.length;
+  if (!credits.length) { out.parserNote = 'ARTICLE TABLE has no reporter cells'; return out; }
+
+  // Resolve reporters against SL First+Last — exact normalized full name only.
+  const slRes = await sheetsClient.spreadsheets.values.get({
+    spreadsheetId: sheetId, range: 'Simulation_Ledger!A1:AU',
+  });
+  const slRows = slRes.data.values || [];
+  const slHeaders = slRows[0] || [];
+  const iF = slHeaders.indexOf('First'), iL = slHeaders.indexOf('Last');
+  const byName = new Map();   // normalized full name -> { canonical, hits }
+  for (const row of slRows.slice(1)) {
+    const canonical = (String(row[iF] || '').trim() + ' ' + String(row[iL] || '').trim()).trim();
+    if (!canonical) continue;
+    const key = normalizeFullName(canonical);
+    const entry = byName.get(key);
+    if (entry) entry.hits++;
+    else byName.set(key, { canonical, hits: 1 });
+  }
+
+  // Dedup against existing byline-published rows (idempotent re-run).
+  const cmuRes = await sheetsClient.spreadsheets.values.get({
+    spreadsheetId: sheetId, range: 'Citizen_Media_Usage!A1:ZZ',
+  });
+  const cmu = cmuRes.data.values || [];
+  const ch = cmu[0] || [];
+  const cN = ch.indexOf('CitizenName'), cT = ch.indexOf('UsageType'), cC = ch.indexOf('Context');
+  if (cN < 0 || cT < 0 || cC < 0) {
+    out.parserNote = 'Citizen_Media_Usage headers missing CitizenName/UsageType/Context — no rows written';
+    return out;
+  }
+  const existingKeys = new Set(cmu.slice(1)
+    .filter(r => String(r[cT] || '').trim() === 'byline-published')
+    .map(r => String(r[cN] || '').trim() + '|' + String(r[cC] || '').trim()));
+
+  const plannedKeys = [];
+  const plannedRows = [];
+  for (const c of credits) {
+    const norm = normalizeFullName(c.reporter);
+    const hit = byName.get(BYLINE_ALIASES[norm] ? normalizeFullName(BYLINE_ALIASES[norm]) : norm);
+    if (!hit) { out.unresolved.push(c.reporter); continue; }
+    if (hit.hits > 1) { out.ambiguous.push(c.reporter); continue; }
+    const key = hit.canonical + '|' + c.context;
+    if (existingKeys.has(key) || plannedKeys.includes(key)) { out.duplicates++; continue; }
+    plannedKeys.push(key);
+    out.resolved.push({ citizen: hit.canonical, context: c.context });
+    plannedRows.push(ch.map(col => {
+      switch (String(col).trim()) {
+        case 'Timestamp':   return 'C' + cycle;       // sim clock, never Gregorian
+        case 'Cycle':       return String(cycle);
+        case 'CitizenName': return hit.canonical;
+        case 'UsageType':   return 'byline-published';
+        case 'Context':     return c.context;
+        case 'Reporter':    return hit.canonical;
+        default:            return '';
+      }
+    }));
+  }
+
+  if (apply && plannedRows.length) {
+    await sheetsClient.spreadsheets.values.append({
+      spreadsheetId: sheetId,
+      range: 'Citizen_Media_Usage!A1',
+      valueInputOption: 'RAW',
+      insertDataOption: 'INSERT_ROWS',
+      requestBody: { values: plannedRows },
+    });
+    out.appended = plannedRows.length;
+    // Verify by readback: every planned key must now exist in the tab.
+    const verifyRes = await sheetsClient.spreadsheets.values.get({
+      spreadsheetId: sheetId, range: 'Citizen_Media_Usage!A1:ZZ',
+    });
+    const after = verifyRes.data.values || [];
+    const afterKeys = new Set(after.slice(1)
+      .filter(r => String(r[cT] || '').trim() === 'byline-published')
+      .map(r => String(r[cN] || '').trim() + '|' + String(r[cC] || '').trim()));
+    out.verified = plannedKeys.every(k => afterKeys.has(k));
+  }
+  return out;
+}
+
+// ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
 async function main() {
@@ -1207,6 +1336,23 @@ async function main() {
     console.log('Mode: DRY-RUN — no writes performed. Run with --apply to write.');
   }
 
+  // engine.88 — publish-side byline credit (journalist usage→tier→fame)
+  const bylinePublished = await processBylinePublished(fullPath, type, cycle, sheetsClient, sheetId, apply);
+  console.log('');
+  console.log('BYLINE-PUBLISHED (journalist progression, engine.88):');
+  if (bylinePublished.parserNote) console.log('  note: ' + bylinePublished.parserNote);
+  console.log('  articles w/ reporter: ' + bylinePublished.articles
+    + ' | resolved: ' + bylinePublished.resolved.length
+    + ' | unresolved: ' + bylinePublished.unresolved.length
+    + ' | ambiguous: ' + bylinePublished.ambiguous.length
+    + ' | dup-skipped: ' + bylinePublished.duplicates
+    + ' | appended: ' + bylinePublished.appended
+    + (apply ? (bylinePublished.appended ? ' | verified: ' + bylinePublished.verified : '') : ' (dry-run)'));
+  if (bylinePublished.unresolved.length) console.log('  unresolved reporters: ' + bylinePublished.unresolved.join(', '));
+  if (apply && bylinePublished.appended && bylinePublished.verified !== true) {
+    console.error('[WARN] byline-published rows did not verify on read-back. Inspect output JSON.');
+  }
+
   // Write JSON output
   const outPath = path.join(__dirname, '..', 'output', 'intake_published_entities_c' + cycle + '_' + slug + '.json');
   const outDir = path.dirname(outPath);
@@ -1245,6 +1391,8 @@ async function main() {
       mismatches: bizResolution.mismatches,
       appended: businessAppended,
     },
+    // engine.88 — journalist usage→tier→fame publish-side credit
+    bylinePublished: bylinePublished,
   };
   fs.writeFileSync(outPath, JSON.stringify(report, null, 2));
   console.log('');

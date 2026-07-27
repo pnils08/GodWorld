@@ -1,7 +1,7 @@
 ---
 title: Instance-unification / model-triage pivot — research
 created: 2026-07-25
-updated: 2026-07-25
+updated: 2026-07-27
 type: reference
 tags: [research, architecture, models, orchestration, active]
 sources:
@@ -44,6 +44,29 @@ pointers:
 
 **One sharpening, measured S335 — injection only works when it is specific and actionable.** The evidence cuts both ways on "behaviour is prompt not memory". The `UserPromptSubmit` hook injected a supermemory-recall reminder on every single turn of a ~40-turn session and produced approximately zero behaviour change; it asks the instance to *consider whether* to recall, which is a decision, not an instruction. By contrast the `SessionStart` `<godworld-state>` block — PIN, terminal roster, NEXT line — shaped behaviour every turn it mattered, because it delivers *specific facts* rather than a reminder to think about something. **So the rule is not "prompts beat memory"; it is "specific injected facts beat both generic prompts and passive documents."** A topic-inventory hook (paths only, grepped live) is the specific-fact shape. A "remember to check the docs" reminder is the shape that already demonstrably fails.
 
+**Boot cost measured, and the visitor experiment that exposed it (S335).** Mike added Codex and Kimi to the workflow. They receive **no boot process at all** — one on-demand file, `AGENTS.md` — and work the project without issue. That is a natural experiment, and the numbers are lopsided:
+
+| | Delivery | Cost |
+|---|---|---|
+| Codex / Kimi | `AGENTS.md`, read on demand | **~6.3k tokens** |
+| Mags at boot | CLAUDE.md + identity.md + MEMORY.md + research-build.md + SCHEMA.md + **index.md** + TERMINAL.md, all injected | **~59.6k tokens** |
+
+Nine times the context, and worse results on the one thing that mattered in S335: knowing what already exists. `docs/index.md` alone is **~40k tokens — two-thirds of the entire boot** — and it is truncated at 139 of 441 lines, so the back half is never seen.
+
+**Mike's diagnosis of the index, and it is the sharp one: it exceeded its original purpose.** It was built as a *memory index* — a retrieval aid so a session could find a doc by pointer instead of grepping. It became *the MD index*: an exhaustive registry of 489 files. Those are different jobs with opposite size constraints. A registry needs completeness; a memory aid needs to be small enough to hold in working attention. It grew into the first and thereby stopped being able to do the second. **"What exists about X" is a query, not a document** — a live grep answers it better, costs nothing per session, and cannot go stale. The registry role stays valuable as a maintenance artifact; it is just not a boot artifact.
+
+**`AGENTS.md` is structurally better at the same job** and worth copying from: it does not inject its ten reference files, it *lists* them and says read on demand. A map instead of a truckload.
+
+**Authority is NOT symmetric, and the visitor boot is not the target (Mike-direct S335).** "Claude is the authority on this project and they all are visitors in your house." The lesson is about *volume*, not about levelling authority. Note also that the visitors' low boot is partly paid for by narrow blast radius — `AGENTS.md` forbids Codex to push, commit unasked, deploy, or touch the control plane, while Mags pushed 16 times and edited `.claude/` freely in S335. So the honest reading is: **the conditioning is disposable, the guardrails are not, and the reference should be on demand.** `AGENTS.md` carries its own guardrails inside that same 6.3k, which proves it can be done cheaply — just not at zero.
+
+**Proposed cut order (~53k → ~7k, guardrails intact):**
+1. `docs/index.md` out of boot — 40k, two-thirds of the cost, a catalog nobody memorises. Replace with a grep-on-demand topic inventory.
+2. `SCHEMA.md` + `research-build.md` on demand — 7.2k, pure reference, needed only when writing a doc or filing a row.
+3. `TERMINAL.md` shrinks to guardrails — most of its 5.6k is lane/persona scaffolding the work-type shift makes vestigial.
+4. **Keep** `<godworld-state>`, `CLAUDE.md`, `identity.md`, and the approval gates — specific facts and hard stops, the two categories that demonstrably work.
+
+**The framing Mike put on it:** these were old behaviours that were necessary once, and newer models correctly throw them aside because they no longer need them. The cost is not abstract — front-load is spending usage that real work needs.
+
 **Verdict:** `watch`
 - **Adopt-trigger:** either (a) parallel-instance count / coordination pain actually justifies building a dispatch layer, OR (b) a cheap one-session proving-run confirms the harness (skills/hooks/MCP) drives on a non-Claude brain (Kimi or DeepSeek base-URL'd as a Mags-core session on a real task). Attack (b) first — it's the load-bearing unknown, provable for the cost of one session vs. a full teardown. Until then the four-terminal apparatus stays; the only piece extracted-now is the subagent-cost rule (§8) + the live model map.
 
@@ -61,4 +84,5 @@ pointers:
 ## Changelog
 
 - 2026-07-25 — Initial capture (S333). Mike-direct: park the full pivot as research (watch), extract only the subagent-cost rule + model map now.
+- 2026-07-27 — Boot cost measured (S335): 59.6k injected vs 6.3k for the unbooted visitors, index.md alone 40k. Mike's index diagnosis (memory aid outgrown into a registry) + cut order + the authority-is-not-symmetric caveat.
 - 2026-07-27 — Direction refined (S335). Sessions by work type not terminal; reduce boot; behaviour is prompt not memory; consolidate duplicate MDs. Added the measured sharpening: injection works only when specific and actionable.

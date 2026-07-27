@@ -626,25 +626,35 @@ function classifySettleSector_(sector) {
 // Live Business_Ledger pool by industry — same shape runCareerEngine builds.
 // Returns null on read failure; caller then skips the employer write (blank
 // EmployerBizId is the pre-wire status quo, never a thrown cycle).
+// v2.2 (S336, employment-living-system Task 5): also returns statedById —
+// Employee_Count per business (null when blank/non-numeric) — so the
+// settlement draw can be capacity-aware. A hire that pushes tracked past
+// stated is the one illegal state; the kid takes an open slot or goes elsewhere.
 function buildSettleBizPool_(ctx) {
   try {
     var bizSheet = ctx.ss ? ctx.ss.getSheetByName('Business_Ledger') : null;
     if (!bizSheet) return null;
     var bizData = bizSheet.getDataRange().getValues();
     if (bizData.length < 2) return null;
-    var bh = bizData[0], bId = -1, bSector = -1;
+    var bh = bizData[0], bId = -1, bSector = -1, bCount = -1;
     for (var c = 0; c < bh.length; c++) {
       var h = String(bh[c]).trim();
       if (h === 'BIZ_ID') bId = c;
       if (h === 'Sector') bSector = c;
+      if (h === 'Employee_Count') bCount = c;
     }
     if (bId < 0 || bSector < 0) return null;
     var pools = { tech: [], service: [], public: [], creative: [] };
+    var statedById = {};
     for (var r = 1; r < bizData.length; r++) {
       var id = String(bizData[r][bId] || '').trim();
-      if (id) pools[classifySettleSector_(bizData[r][bSector])].push(id);
+      if (!id) continue;
+      pools[classifySettleSector_(bizData[r][bSector])].push(id);
+      var rawCount = bCount >= 0 ? bizData[r][bCount] : '';
+      statedById[id] = (rawCount === '' || rawCount === null || rawCount === undefined || isNaN(Number(rawCount)))
+        ? null : Number(rawCount);
     }
-    return pools;
+    return { pools: pools, statedById: statedById };
   } catch (e) {
     Logger.log('buildSettleBizPool_: Business_Ledger read failed (' + e.message + ') — settlement employer skipped');
     return null;
@@ -700,6 +710,7 @@ function settleAdulthood_(ctx, cycle, rng) {
 
   var diag = 0;
   var bizPool; // engine.62: lazy — Business_Ledger read only on cycles that settle someone
+  var trackedByBiz = {}; // v2.2 (S336): Active tracked count per business, built lazily with bizPool; reserves hires within the cycle
   var heritageByPop = null; // engine.66: lazy — Heritage_Ledger read only on cycles that settle someone
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
@@ -769,16 +780,40 @@ function settleAdulthood_(ctx, cycle, rng) {
     // Without the key, calculateCitizenIncomes_ re-derives this income next
     // cycle (no "managed externally" signal); without the employer, the
     // citizen works nowhere and the business rosters never see the hire.
+    // v2.2 (S336 Task 5): the draw is CAPACITY-AWARE — only businesses with
+    // room (stated Employee_Count above the Active tracked count, minus hires
+    // already made this cycle) are candidates. Blank-count rows can't prove
+    // room, so they never take hires. No opening anywhere → the citizen is
+    // explicitly recorded as seeking work; silence is not an outcome.
     if (iEcon >= 0) row[iEcon] = SETTLE_ECON_KEYS[row[iRole]] || row[iRole];
     var settledBiz = '';
     if (iEmployer >= 0) {
-      if (bizPool === undefined) bizPool = buildSettleBizPool_(ctx);
+      if (bizPool === undefined) {
+        bizPool = buildSettleBizPool_(ctx);
+        if (bizPool) {
+          // Active tracked headcount per business — one pass, then kept
+          // current via the cycle-local reservation below.
+          trackedByBiz = {};
+          for (var tb = 0; tb < rows.length; tb++) {
+            var tRow = rows[tb];
+            if (!tRow || String(tRow[iStatus] || 'active').toLowerCase() !== 'active') continue;
+            var tEmp = String(iEmployer >= 0 ? (tRow[iEmployer] || '') : '').trim();
+            if (tEmp.indexOf('BIZ-') === 0) trackedByBiz[tEmp] = (trackedByBiz[tEmp] || 0) + 1;
+          }
+        }
+      }
       if (bizPool) {
+        var hasRoom = function (bid) {
+          var stated = bizPool.statedById[bid];
+          return stated !== null && stated !== undefined && stated > (trackedByBiz[bid] || 0);
+        };
         var ind = SETTLE_INDUSTRY[row[iRole]] || 'service';
-        var pool = (bizPool[ind] && bizPool[ind].length) ? bizPool[ind] : bizPool.service;
-        if (pool && pool.length) {
+        var pool = (bizPool.pools[ind] || []).filter(hasRoom);
+        if (!pool.length) pool = (bizPool.pools.service || []).filter(hasRoom);
+        if (pool.length) {
           settledBiz = pool[Math.floor(rng() * pool.length)];
           row[iEmployer] = settledBiz;
+          trackedByBiz[settledBiz] = (trackedByBiz[settledBiz] || 0) + 1; // reserve the slot this cycle
           // Register the hire so Phase-6 ripples see it (career engine owns
           // the structure; it ran earlier in Phase 5, so it exists by now).
           var cs = ctx.summary && ctx.summary.careerSignals;
@@ -791,7 +826,8 @@ function settleAdulthood_(ctx, cycle, rng) {
     }
 
     row[iLife] = (life ? life + '\n' : '') +
-      stamp + ' — [Adulthood] ' + b.line + ' — ' + row[iRole];
+      stamp + ' — [Adulthood] ' + b.line + ' — ' + row[iRole] +
+      (settledBiz ? '' : ' — seeking work (no tracked opening)');
 
     results.settled++;
     results[band]++;

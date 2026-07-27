@@ -107,7 +107,7 @@ pointers:
   4. Selection of who gets fired must be deterministic via `ctx.rng`, never `Math.random()`, and should prefer a defensible signal (tenure, career stage) over pure chance.
   5. Writes route through `ctx.writeIntents` unless the consumer sits after Phase 10, in which case direct writes are the documented carve-out — check where it lands before choosing.
 - **Verify:** a bench cycle where a business contracts produces N firings, N `LifeHistory` entries, and a headcount that still exceeds the remaining tracked count
-- **Status:** [ ] not started
+- **Status:** [x] BUILT + bench-proven S336 (engine-sheet) — `runCareerEngine.js` v2.6 tail step `reconcileBusinessHeadcounts_`: deltas move `Employee_Count` via `queueCellIntent_` (Phase 5 → Phase 10 executor, per the answered open question); stated-below-tracked fires the difference (deterministic: lowest `[CareerState]` level → income → POPID; income cut matches the layoff path; `Career-Layoff` LifeHistory rides the existing batch flush; `careerSignals.layoffs`/`businessDeltas` incremented so the Phase-6 MAJOR_LAYOFFS ripple sees it). Blank counts skipped, never invented. Bench 18/18 incl. the plan's exact 90-stated/93-tracked → 3-fired case. **DEPLOY GATED on Tasks 2–3:** live today it would fire ~30 citizens off BIZ-00030's fossilised 62-vs-92 gap. clasp push only after rb's headcount truing lands.
 
 ### Task 5: Born into a tracked job, and the age-18 ladder — engine-sheet (Fable)
 
@@ -121,7 +121,7 @@ pointers:
   3. Age-18 transition: a citizen reaching 18 takes a tracked job, or is explicitly recorded as not-employed with a reason. Silence is not an outcome.
   4. Both paths must respect rule 1 — a hire that pushes tracked past stated is illegal; either the business has room or the citizen goes elsewhere.
 - **Verify:** a bench promotion arrives with a valid `EmployerBizId`; a bench 18th birthday either employs the citizen at a tracked business or records why not
-- **Status:** [ ] not started
+- **Status:** [x] BUILT + bench-proven S336 (engine-sheet) — (1) `EmployerBizId` column live on `Generic_Citizens` (col L, SCHEMA_HEADERS regenerated); (2) promotion chain carries it end-to-end: `checkEmergencePromotions_` copies a GC-assigned employer into the intake row, the mint (`processAdvancementRows_`) honors it **capacity-checked** (carried-but-full goes elsewhere — rule 1 binds both paths), else draws capacity-aware from the final RoleType (deterministic seed-hash), else writes "Seeking work (no tracked opening for {role})" into LifeHistory; (3) age-18: extended the EXISTING `settleAdulthood_` hook (engine.60/62, answering the open question) — `buildSettleBizPool_` v2.2 returns per-business stated counts, the draw filters to businesses with room (tracked + same-cycle reservations below stated; blank counts can't prove room and take no hires), and the no-opening case stamps "seeking work (no tracked opening)" on the `[Adulthood]` line. Hires register in `businessDeltas` for the Phase-6 ripple. Bench 16/16 (one-open-slot contention, carried-with-room kept, carried-full rerouted, seeking-work recorded, capacity invariant held).
 
 ### Task 6: Media-invented business → canon mint (design) — research-build
 
@@ -152,11 +152,12 @@ pointers:
 
 ## Open questions
 
-- [ ] Task 4 step 5 — does the write-back consumer land before or after Phase 10? Determines write-intents vs direct writes. engine-sheet answers from the phase map.
-- [ ] Task 5 — is there an existing age-18 hook in `educationCareerEngine`, or does the transition need a new trigger? Blocks step 3's shape, not its intent.
+- [x] **RESOLVED (S336):** the consumer lands INSIDE `runCareerEngine_` (Phase5-Career) as a v2.6 tail step — before `Phase10-ExecuteIntents`, so writes are `queueCellIntent_` write-intents (precedent: `applyChaosDecay.js` Business_Ledger intents from Phase 5). No new file: the career engine already reads Business_Ledger, owns the layoff mutation semantics, and flushes LifeHistory via `queueBatchAppendIntent_` — FIX-don't-ADD.
+- [x] **RESOLVED (S336):** the age-18 hook exists — `settleAdulthood_` (engine.60 T4, Phase5-EducationCareer Step 7) already assigned role/income/econ-key/employer. Task 5 extended it (capacity + explicit seeking-work) rather than adding a trigger.
 
 ---
 
 ## Changelog
 
 - 2026-07-27 — Initial draft (S335). Split by model fit per Mike: Opus 5 takes volume+judgment, Fable 5 takes the engine internals.
+- 2026-07-27 (S336, engine-sheet) — Tasks 4 + 5 BUILT + bench-proven (34 assertions green); both open questions resolved. **Live deploy of the Task 4 reconciliation is gated on Tasks 2–3** — detail in the task statuses.

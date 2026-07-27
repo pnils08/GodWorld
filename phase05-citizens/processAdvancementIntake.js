@@ -526,6 +526,7 @@ function processAdvancementRows_(ctx, now, cycle) {
   // schema but present if upstream writer adds them.
   var iBirthYear = findColByName_(intakeHeaders, 'BirthYear');
   var iNeighborhood = findColByName_(intakeHeaders, 'Neighborhood');
+  var iEmployerBiz = findColByName_(intakeHeaders, 'EmployerBizId'); // S336 Task 5
   // engine.66 (S324) — family-match drip columns (present only after the
   // family door first ensures them; -1 on older intake sheets is fine).
   var iMatchPop = findColByName_(intakeHeaders, 'MatchPopId');
@@ -554,6 +555,10 @@ function processAdvancementRows_(ctx, now, cycle) {
   var lNumChildren = findColByName_(ledgerHeaders, 'NumChildren');
   var lBirthYear = findColByName_(ledgerHeaders, 'BirthYear');
   var lNeighborhood = findColByName_(ledgerHeaders, 'Neighborhood');
+  var lEmployerBiz = findColByName_(ledgerHeaders, 'EmployerBizId'); // S336 Task 5
+  var lStatusCol = findColByName_(ledgerHeaders, 'Status');
+  var mintBizPool; // S336 Task 5: lazy — Business_Ledger read only on batches that mint someone
+  var mintTrackedByBiz = {};
 
   // S184 (Phase 4.1.b) — build ledger frequency snapshot ONCE per intake batch.
   // Used by deriveCitizenProfile_ for neighborhood-aware RoleType + EducationLevel draws.
@@ -702,6 +707,59 @@ function processAdvancementRows_(ctx, now, cycle) {
       // engine.66 — the name they carried before taking the family surname
       var lMaiden = findColByName_(ledgerHeaders, 'MaidenName');
       if (lMaiden >= 0 && maiden) newRow[lMaiden] = maiden;
+      // S336 (employment-living-system Task 5): a promoted citizen arrives with
+      // a tracked workplace — never a job title with no employer. Intake's
+      // EmployerBizId (carried from Generic_Citizens) wins; else a
+      // capacity-aware draw from the final RoleType. No opening anywhere →
+      // explicitly recorded as seeking work; silence is not an outcome.
+      if (lEmployerBiz >= 0) {
+        if (mintBizPool === undefined) {
+          mintBizPool = buildMintBizPool_(ss);
+          mintTrackedByBiz = {};
+          if (mintBizPool && lStatusCol >= 0) {
+            for (var mtb = 0; mtb < ledgerRows.length; mtb++) {
+              var mRow = ledgerRows[mtb];
+              if (!mRow || String(mRow[lStatusCol] || 'active').toLowerCase() !== 'active') continue;
+              var mEmp = String(mRow[lEmployerBiz] || '').trim();
+              if (mEmp.indexOf('BIZ-') === 0) mintTrackedByBiz[mEmp] = (mintTrackedByBiz[mEmp] || 0) + 1;
+            }
+          }
+        }
+        var carried = (iEmployerBiz >= 0) ? String(row[iEmployerBiz] || '').trim() : '';
+        var mintedBiz = '';
+        var mintRoom = function (bid) {
+          if (!mintBizPool) return false;
+          var st = mintBizPool.statedById[bid];
+          return st !== null && st !== undefined && st > (mintTrackedByBiz[bid] || 0);
+        };
+        if (carried.indexOf('BIZ-') === 0 && mintRoom(carried)) {
+          mintedBiz = carried; // born into the tracked job the pool assigned — and it has room
+        } else if (mintBizPool) {
+          // Carried-but-full falls through here: rule 1 binds BOTH paths — the
+          // business has room or the citizen goes elsewhere (plan Task 5 step 4).
+          var mInd = classifyMintSector_(newRoleType);
+          var mPool = (mintBizPool.pools[mInd] || []).filter(mintRoom);
+          if (!mPool.length) mPool = (mintBizPool.pools.service || []).filter(mintRoom);
+          if (mPool.length) {
+            // Deterministic slot: seed-hash over the citizen identity, no rng
+            // (this path predates ctx.rng plumbing; replayable either way).
+            var mHash = 0;
+            for (var mc = 0; mc < seed.length; mc++) mHash = ((mHash << 5) - mHash + seed.charCodeAt(mc)) | 0;
+            mintedBiz = mPool[Math.abs(mHash) % mPool.length];
+          }
+        }
+        if (mintedBiz) {
+          newRow[lEmployerBiz] = mintedBiz;
+          mintTrackedByBiz[mintedBiz] = (mintTrackedByBiz[mintedBiz] || 0) + 1; // reserve within the batch
+          var mcs = ctx.summary && ctx.summary.careerSignals;
+          if (mcs && mcs.businessDeltas) {
+            if (!mcs.businessDeltas[mintedBiz]) mcs.businessDeltas[mintedBiz] = { gained: 0, lost: 0 };
+            mcs.businessDeltas[mintedBiz].gained += 1;
+          }
+        } else if (lLifeHistory >= 0) {
+          newRow[lLifeHistory] += ' Seeking work (no tracked opening for ' + newRoleType + ').';
+        }
+      }
       // Phase 42 §5.6 (impl #18): push new row to ctx.ledger.rows; Phase 10
       // consolidated commit auto-extends the sheet — no separate append intent.
       ledgerRows.push(newRow);
@@ -910,6 +968,51 @@ var DRIP_PARENT_AGE_MAX = 45;
  * at threshold and re-queues next cycle; an already-promoted citizen routes
  * to the update path, never a duplicate mint.
  */
+// S336 (employment-living-system Task 5): capacity-aware Business_Ledger pool
+// for the mint's employer draw. MUST stay in sync with buildSettleBizPool_ /
+// classifySettleSector_ in educationCareerEngine.js (file-scoped there — the
+// deliberate small duplication is the established pattern, see that file's
+// classifySettleSector_ note). Returns null on any read failure; the mint then
+// records seeking-work instead of throwing.
+function classifyMintSector_(role) {
+  var s = String(role || '').toLowerCase();
+  if (/tech|software|cloud|\bai\b|analytics|platform|agent|biotech|intelligence|coworking|venture|engineer|developer|data/.test(s)) return 'tech';
+  if (/media|journal|gallery|entertainment|nightlife|music|design|architect|arts|artist|writer/.test(s)) return 'creative';
+  if (/public|municipal|government|transit|utilit|civic|education|teacher|healthcare|nurse|medical|legal|judicial|safety|police|fire|\bport\b|logistic|faith|community|housing|social/.test(s)) return 'public';
+  return 'service';
+}
+
+function buildMintBizPool_(ss) {
+  try {
+    var bizSheet = ss ? ss.getSheetByName('Business_Ledger') : null;
+    if (!bizSheet) return null;
+    var bizData = bizSheet.getDataRange().getValues();
+    if (bizData.length < 2) return null;
+    var bh = bizData[0], bId = -1, bSector = -1, bCount = -1;
+    for (var c = 0; c < bh.length; c++) {
+      var h = String(bh[c]).trim();
+      if (h === 'BIZ_ID') bId = c;
+      if (h === 'Sector') bSector = c;
+      if (h === 'Employee_Count') bCount = c;
+    }
+    if (bId < 0 || bSector < 0) return null;
+    var pools = { tech: [], service: [], public: [], creative: [] };
+    var statedById = {};
+    for (var r = 1; r < bizData.length; r++) {
+      var id = String(bizData[r][bId] || '').trim();
+      if (!id) continue;
+      pools[classifyMintSector_(bizData[r][bSector])].push(id);
+      var rawCount = bCount >= 0 ? bizData[r][bCount] : '';
+      statedById[id] = (rawCount === '' || rawCount === null || rawCount === undefined || isNaN(Number(rawCount)))
+        ? null : Number(rawCount);
+    }
+    return { pools: pools, statedById: statedById };
+  } catch (e) {
+    Logger.log('buildMintBizPool_: Business_Ledger read failed (' + e.message + ') — mint employer skipped');
+    return null;
+  }
+}
+
 function checkEmergencePromotions_(ss, cycle, maxQueue) {
   var results = { queued: 0 };
   // engine.66: shared drip cap — deferred citizens stay Active at threshold
@@ -925,7 +1028,8 @@ function checkEmergencePromotions_(ss, cycle, maxQueue) {
   var gF = findColByName_(h, 'First'), gL = findColByName_(h, 'Last'),
       gE = findColByName_(h, 'EmergenceCount'), gS = findColByName_(h, 'Status'),
       gB = findColByName_(h, 'BirthYear'), gN = findColByName_(h, 'Neighborhood'),
-      gO = findColByName_(h, 'Occupation'), gA = findColByName_(h, 'Age');
+      gO = findColByName_(h, 'Occupation'), gA = findColByName_(h, 'Age'),
+      gEmp = findColByName_(h, 'EmployerBizId'); // S336 Task 5 — the pool's tracked workplace, when assigned
   if (gF < 0 || gL < 0 || gE < 0) return results;
 
   var advSheet = ss.getSheetByName('Advancement_Intake1');
@@ -935,7 +1039,7 @@ function checkEmergencePromotions_(ss, cycle, maxQueue) {
     advSheet.appendRow(['First', 'Middle', 'Last', 'RoleType', 'Tier', 'ClockMode', 'CIV', 'MED', 'UNI', 'Notes']);
   }
   var advHeaders = advSheet.getRange(1, 1, 1, advSheet.getLastColumn()).getValues()[0];
-  var ensureCols = ['BirthYear', 'Neighborhood'];
+  var ensureCols = ['BirthYear', 'Neighborhood', 'EmployerBizId']; // EmployerBizId: S336 Task 5
   for (var e = 0; e < ensureCols.length; e++) {
     if (findColByName_(advHeaders, ensureCols[e]) < 0) {
       advSheet.getRange(1, advHeaders.length + 1).setValue(ensureCols[e]);
@@ -946,7 +1050,8 @@ function checkEmergencePromotions_(ss, cycle, maxQueue) {
       aL = findColByName_(advHeaders, 'Last'), aR = findColByName_(advHeaders, 'RoleType'),
       aT = findColByName_(advHeaders, 'Tier'), aC = findColByName_(advHeaders, 'ClockMode'),
       aNo = findColByName_(advHeaders, 'Notes'), aBY = findColByName_(advHeaders, 'BirthYear'),
-      aNB = findColByName_(advHeaders, 'Neighborhood');
+      aNB = findColByName_(advHeaders, 'Neighborhood'),
+      aEmp = findColByName_(advHeaders, 'EmployerBizId'); // S336 Task 5
 
   for (var r = 1; r < data.length; r++) {
     if (results.queued >= cap) break; // engine.66 shared drip cap
@@ -969,6 +1074,13 @@ function checkEmergencePromotions_(ss, cycle, maxQueue) {
     if (aNo >= 0) out[aNo] = 'GC emergence promotion — EmergenceCount ' + count + ', C' + cycle + ' (engine.58 lottery)';
     if (aBY >= 0 && birthYear) out[aBY] = birthYear;
     if (aNB >= 0) out[aNB] = gN >= 0 ? String(data[r][gN] || '').trim() : '';
+    // S336 Task 5: a pool citizen with an assigned tracked workplace carries it
+    // through promotion — "born into a tracked job". Blank rides blank; the
+    // mint resolves a capacity-aware employer from the final RoleType instead.
+    if (aEmp >= 0 && gEmp >= 0) {
+      var gcBiz = String(data[r][gEmp] || '').trim();
+      if (gcBiz.indexOf('BIZ-') === 0) out[aEmp] = gcBiz;
+    }
     advSheet.appendRow(out);
     results.queued++;
   }

@@ -1,7 +1,18 @@
 /**
  * ============================================================================
- * Career Engine v2.5
+ * Career Engine v2.6
  * ============================================================================
+ *
+ * v2.6 (S336 / employment-living-system Task 4):
+ * - Business headcount write-back: businessDeltas now MOVE
+ *   Business_Ledger.Employee_Count via queueCellIntent_ (the reverse edge —
+ *   previously the signal was consumed only narratively by economicRippleEngine).
+ * - Reconciliation firings: stated headcount below the Active tracked count
+ *   fires the difference among tracked citizens at that business (Mike-direct
+ *   S335). Each firing is a life event — LifeHistory 'Career-Layoff' entry +
+ *   income cut + EmployerBizId clear — never a bare cell edit. Selection is
+ *   deterministic: lowest [CareerState] level, then income, then POPID.
+ * - Blank/non-numeric Employee_Count rows are skipped, never invented.
  *
  * v2.5 (S204 B2 / 2026-05-06):
  * - LifeHistory_Log batch-flush via getRange(getLastRow()+1).setValues →
@@ -1024,6 +1035,128 @@ function runCareerEngine_(ctx) {
 
   // Phase 42 §5.6: flip ctx.ledger.dirty; consolidated commit at Phase 10.
   ctx.ledger.dirty = true;
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // v2.6 (S336, engine.83/employment-living-system Task 4): BUSINESS HEADCOUNT
+  // WRITE-BACK + RECONCILIATION — the missing reverse edge. The cycle's tracked
+  // movement (businessDeltas) moves Business_Ledger.Employee_Count, and a stated
+  // headcount sitting BELOW the tracked count becomes firings among tracked
+  // citizens (Mike-direct S335: 100→90 with 93 tracked = 3 fired). Runs before
+  // the LifeHistory flush so firings ride the same batch; own try/catch so a
+  // reconciliation bug can never poison the career events already generated.
+  // ═══════════════════════════════════════════════════════════════════════════
+  try {
+    reconcileBusinessHeadcounts_();
+  } catch (reconErr) {
+    Logger.log('runCareerEngine v2.6 headcount reconciliation failed (career events unaffected): ' + reconErr);
+  }
+
+  function reconcileBusinessHeadcounts_() {
+    var deltas = S.careerSignals.businessDeltas || {};
+    var bizSheet = ctx.ss ? ctx.ss.getSheetByName('Business_Ledger') : null;
+    if (!bizSheet) { Logger.log('v2.6 headcount write-back skipped: Business_Ledger not found'); return; }
+    var bizData = bizSheet.getDataRange().getValues();
+    if (bizData.length < 2) return;
+    var bh = bizData[0];
+    var bId = -1, bNm = -1, bCount = -1;
+    for (var bc2 = 0; bc2 < bh.length; bc2++) {
+      var hName = String(bh[bc2]).trim();
+      if (hName === 'BIZ_ID') bId = bc2;
+      else if (hName === 'Name') bNm = bc2;
+      else if (hName === 'Employee_Count') bCount = bc2;
+    }
+    if (bId < 0 || bCount < 0) { Logger.log('v2.6 headcount write-back skipped: BIZ_ID/Employee_Count column missing'); return; }
+
+    // BIZ_ID -> { sheetRow (1-based), name, stated (number | null when blank) }
+    var biz = {};
+    for (var br2 = 1; br2 < bizData.length; br2++) {
+      var bizIdVal = String(bizData[br2][bId] || '').trim();
+      if (!bizIdVal) continue;
+      var rawCount = bizData[br2][bCount];
+      var stated = (rawCount === '' || rawCount === null || rawCount === undefined || isNaN(Number(rawCount)))
+        ? null : Number(rawCount);
+      biz[bizIdVal] = {
+        sheetRow: br2 + 1,
+        name: String(bNm >= 0 ? (bizData[br2][bNm] || bizIdVal) : bizIdVal),
+        stated: stated
+      };
+    }
+
+    // ── Half 1: write-back. Tracked movement IS the business moving (1:443
+    // qualitative representation) — net delta lands on Employee_Count via
+    // write-intents (Phase 10 commits). Blank/non-numeric counts are SKIPPED,
+    // never invented — completing those rows is the living-system plan's Task 1.
+    var applied = 0, skippedBlank = 0;
+    for (var dBizId in deltas) {
+      var d = deltas[dBizId];
+      var net = (d.gained || 0) - (d.lost || 0);
+      if (!net) continue;
+      var bRec = biz[dBizId];
+      if (!bRec) continue; // SELF_EMPLOYED / UNMATCHED / unknown id — no row, no write
+      if (bRec.stated === null) { skippedBlank++; continue; }
+      bRec.stated = Math.max(0, bRec.stated + net);
+      queueCellIntent_(ctx, 'Business_Ledger', bRec.sheetRow, bCount + 1, bRec.stated,
+        'career-engine headcount write-back (' + (d.gained || 0) + ' hired, ' + (d.lost || 0) + ' left)', 'citizens');
+      applied++;
+    }
+
+    // ── Half 2: reconciliation. Stated below tracked is the ONE illegal state;
+    // the difference becomes firings among Active tracked citizens at that
+    // business. Firing is a life event — LifeHistory entry + income hit +
+    // employer clear — never a bare cell edit. Selection is deterministic and
+    // defensible: lowest career level (from the [CareerState] line) first, then
+    // lowest income, then POPID — replayable with no rng draw.
+    var trackedBy = {};
+    for (var tr2 = 0; tr2 < rows.length; tr2++) {
+      if (safeStr(rows[tr2][iStatus]).trim() !== 'Active') continue;
+      var eb = safeStr(rows[tr2][iEmployerBizId]).trim();
+      if (eb.indexOf('BIZ-') !== 0) continue;
+      (trackedBy[eb] = trackedBy[eb] || []).push(tr2);
+    }
+    function careerLevelOf_(row2) {
+      var m = safeStr(row2[iLife]).match(/\[CareerState\][^\n]*level=(\d+)/);
+      return m ? Number(m[1]) : 1;
+    }
+    var fired = 0, contracted = 0;
+    for (var fBizId in trackedBy) {
+      var fInfo = biz[fBizId];
+      if (!fInfo || fInfo.stated === null) continue;
+      var shortfall = trackedBy[fBizId].length - fInfo.stated;
+      if (shortfall <= 0) continue;
+      var victims = trackedBy[fBizId].slice().sort(function(a, b2) {
+        var la = careerLevelOf_(rows[a]), lb = careerLevelOf_(rows[b2]);
+        if (la !== lb) return la - lb;
+        var ia = Number(rows[a][iIncome]) || 0, ib = Number(rows[b2][iIncome]) || 0;
+        if (ia !== ib) return ia - ib;
+        return safeStr(rows[a][iPopID]) < safeStr(rows[b2][iPopID]) ? -1 : 1;
+      }).slice(0, shortfall);
+      for (var fv = 0; fv < victims.length; fv++) {
+        var vRow = rows[victims[fv]];
+        var vIncome = (iIncome >= 0) ? (Number(vRow[iIncome]) || 0) : 0;
+        if (vIncome > 0) vRow[iIncome] = Math.round(vIncome * (0.80 + roll() * 0.08)); // same cut as the layoff path
+        vRow[iEmployerBizId] = '';
+        vRow[iLastUpd] = ctx.now;
+        logRows.push([
+          ctx.now, vRow[iPopID], '', 'Career-Layoff',
+          'Lost their job when ' + fInfo.name + ' cut ' + shortfall + ' position' + (shortfall > 1 ? 's' : ''),
+          '', cycle
+        ]);
+        if (!S.careerSignals.businessDeltas[fBizId]) S.careerSignals.businessDeltas[fBizId] = { gained: 0, lost: 0 };
+        S.careerSignals.businessDeltas[fBizId].lost += 1; // Phase-6 ripple sees the contraction; stated is already reconciled
+        S.careerSignals.layoffs += 1;
+        S.careerSignals.transitions += 1;
+        S.eventsGenerated = (S.eventsGenerated || 0) + 1;
+        fired++;
+      }
+      contracted++;
+    }
+
+    S.careerSignals.headcountWriteBack = {
+      applied: applied, skippedBlank: skippedBlank, fired: fired, businessesContracted: contracted
+    };
+    Logger.log('runCareerEngine v2.6 headcount: ' + applied + ' businesses moved, ' + skippedBlank +
+      ' skipped (blank Employee_Count), ' + fired + ' reconciliation firings across ' + contracted + ' businesses');
+  }
 
   // v2.5: flush batched logs via Phase 10 executor.
   if (logRows.length > 0) {

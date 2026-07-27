@@ -122,7 +122,7 @@ Practical consequence for every re-run: **`--fill-blanks-only`.** Fill what is e
   2. Project directors: **OARI, Stabilization Fund, Health Center, and Transit Hub have NO `Business_Ledger` row** (only Baylight does — `BIZ-00006`, `BIZ-00020`). Park those directors at `BIZ-00017` — they are city employees running city programs — unless Mike wants authority BIZ rows minted.
   3. The capital building already exists as `BIZ-00017` City of Oakland (Municipal Government, Downtown). **Do not create a second one.**
 - **Verify:** zero `CIV=yes` at `BIZ-00030`; every civic citizen traceable to `BIZ-00017` or a real authority
-- **Status:** [ ] not started
+- **Status:** [x] DONE S334 — 10 moved, zero `CIV=yes` left at `BIZ-00030`. The justice cluster (Dane DA, D'Souza + Rourke ADAs, Reyes PD, Guzman Deputy PD, Tate Court Liaison) to `BIZ-00022` Alameda County Courts; Vasquez, Ellis, Bono to `BIZ-00017`; Ramirez (OPOA President) to `BIZ-00024`. **Left alone deliberately** — employer right, something else wrong: Graye at the Tribune (his CIV flag is the error), three senior pastors at `BIZ-00028` (they belong at their own faith-org rows, which needs the `Faith_Organizations` mapping rather than a guess), and a tenants-union rep, taxpayers-coalition president, artist and fitness trainer all correctly `SELF_EMPLOYED`.
 
 ### Task 5b: Mint the civic initiatives as establishments (Mike-direct S334)
 
@@ -154,7 +154,7 @@ Practical consequence for every re-run: **`--fill-blanks-only`.** Fill what is e
   1. All 31 `Bay_Tribune_Oakland` POPIDs should resolve to `BIZ-00018` except the canon freelancers (Jax Caldera, Farrah Del Rio, Kai Marston, Arman Gutierrez) — check each against its voice file before forcing the Tribune.
   2. `MED=yes` does not mean Tribune-employed; leave non-roster media citizens alone.
 - **Verify:** every roster POPID resolves to `BIZ-00018` or a named canon exception
-- **Status:** [ ] not started
+- **Status:** [x] DONE S334 — 26 of 31 already correct. Kai Marston + Arman Gutierrez to `BIZ-00018` (Culture desk staff; photo assistant to Tribune-staff Hartley). Mint Condition OFF `BIZ-00005` to `SELF_EMPLOYED`: canon says the Tribune *runs* his column with heavy disclaimers and his identity is unknown, so he is neither Tribune staff nor an Athletics employee. Unchanged as correct — Farrah Del Rio `SELF_EMPLOYED` ("a longtime Oakland essayist... she is not a reporter") and Ariana Reyes at `BIZ-00008`, whose title names the firm.
 
 ### Task 7: The tail — propose keyword rules, not per-citizen writes (agent-assisted)
 

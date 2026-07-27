@@ -64,20 +64,22 @@ pointers:
 
 ### Task 1: Authority — RULED (Mike-direct S334)
 
-**The roster is authoritative. The ledger is the citizen's life in the sim.**
+**The ledger is the truth. The rosters provide added depth on the same citizen.**
 
-Mike's ruling, verbatim in substance: *the roster is the more accurate as the routing requires more career detail, and the Supermemory card of them has their TrueSource; the ledger is its life in the sim.*
+Mike's ruling, refined S334: *the ledger is the truth, the rosters just provide added depth — they should be showing the same citizen ultimately.*
 
-So the division is:
+This is **not** a precedence hierarchy, and an earlier draft of this task got it wrong by writing one ("roster wins"). There is one citizen. `Simulation_Ledger` holds what is true about them; `Employment_Roster`, `As_Roster`, `Oaks_Roster` and the Supermemory **TrueSource card** carry career depth the ledger has no column for — position, salary, stat lines, professional history, the detail routing needs.
 
-| Source | Owns | Why |
-|---|---|---|
-| `Employment_Roster` + the citizen's Supermemory **TrueSource card** | career truth — employer, role, professional history | routing needs career detail the ledger does not carry |
-| `Simulation_Ledger` | the lived life — events, dials, bonds, current state | it is what happens to them, not what they are |
+| Source | Carries |
+|---|---|
+| `Simulation_Ledger` | the truth — employer, status, life state |
+| `Employment_Roster` | how that employer was derived (`MappingLayer` = provenance) |
+| `As_Roster` / `Oaks_Roster` | career depth — position, team, salary, stats |
+| Supermemory TrueSource card | the compiled professional dossier |
 
-When the two disagree on `EmployerBizId`, **the roster wins and the ledger is corrected to match.** That resolves all 324 divergences in one direction.
+**So a divergence is an error, not a contest.** The 324 disagreements are not resolved by picking a winning sheet; each is a case where the same citizen is described two ways and one description is stale. Reconcile toward whichever is actually true — usually the ledger, because the career engine writes lived events there, and a hire is a fact about the citizen.
 
-**One tension to respect, not to override.** The career engine mutates the ledger's `EmployerBizId` on hires and layoffs — that is a lived event, and lived events are exactly what the ledger legitimately owns. So a re-run must not blind-clobber it: keep `--fill-blanks-only` semantics for the resolver, and where the career engine has moved someone, **flow that change back into the roster** rather than reverting it. Roster-wins governs *derivation*; it does not mean the sim's own events get undone.
+Practical consequence for every re-run: **`--fill-blanks-only`.** Fill what is empty, never overwrite what the sim has already lived. Proven S334 — the apply wrote 9 blank cells and kept 795 existing values untouched.
 
 - **Verify:** ruling recorded here; the Task 9 re-run honours the flag semantics above
 - **Status:** [x] RULED — Mike-direct S334

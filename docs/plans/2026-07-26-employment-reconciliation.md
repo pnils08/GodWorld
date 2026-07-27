@@ -62,14 +62,25 @@ pointers:
 
 ## Tasks
 
-### Task 1: Rule the authority question (blocks Tasks 5-8)
+### Task 1: Authority — RULED (Mike-direct S334)
 
-- **Files:** this plan (record the ruling)
-- **Steps:**
-  1. The two sources disagree on 324 rows. Decide which wins when they differ. Evidence: `Employment_Roster` is the **more honest** of the two — where it says `UNMATCHED`, the ledger sometimes says `BIZ-00030`, i.e. the ledger holds a stale category default the roster declined to assert. But the career engine mutates the ledger's `EmployerBizId` on hires and layoffs (which is why `--fill-blanks-only` exists, S313), so the ledger carries live state the roster does not.
-  2. Recommended ruling: **the ledger is authoritative for a citizen's current employer; the roster is authoritative for how that employer was derived** (`MappingLayer` is provenance). Re-runs must therefore keep `--fill-blanks-only` semantics and never clobber career-engine state.
-- **Verify:** ruling written here before any re-run
-- **Status:** [ ] not started — needs Mike
+**The roster is authoritative. The ledger is the citizen's life in the sim.**
+
+Mike's ruling, verbatim in substance: *the roster is the more accurate as the routing requires more career detail, and the Supermemory card of them has their TrueSource; the ledger is its life in the sim.*
+
+So the division is:
+
+| Source | Owns | Why |
+|---|---|---|
+| `Employment_Roster` + the citizen's Supermemory **TrueSource card** | career truth — employer, role, professional history | routing needs career detail the ledger does not carry |
+| `Simulation_Ledger` | the lived life — events, dials, bonds, current state | it is what happens to them, not what they are |
+
+When the two disagree on `EmployerBizId`, **the roster wins and the ledger is corrected to match.** That resolves all 324 divergences in one direction.
+
+**One tension to respect, not to override.** The career engine mutates the ledger's `EmployerBizId` on hires and layoffs — that is a lived event, and lived events are exactly what the ledger legitimately owns. So a re-run must not blind-clobber it: keep `--fill-blanks-only` semantics for the resolver, and where the career engine has moved someone, **flow that change back into the roster** rather than reverting it. Roster-wins governs *derivation*; it does not mean the sim's own events get undone.
+
+- **Verify:** ruling recorded here; the Task 9 re-run honours the flag semantics above
+- **Status:** [x] RULED — Mike-direct S334
 
 ### Task 2: Sports layer — coaches, scouts, and the Oaks
 
@@ -78,8 +89,9 @@ pointers:
   1. Add keyword rules mapping A's non-player staff → `BIZ-00005`: `Coach, Oakland A's`, `Scout, Oakland A's`, `Manager, Oakland A's`, and the `Ex-As`/`Former` variants seen in the unmatched list.
   2. Add keyword rules mapping Oaks staff → `BIZ-00074`: `The Oaks`, `Oakland Oaks`, covering both player positions (`PG / The Oaks`) and `Head Coach, Oakland Oaks`.
   3. Keyword layer (3) runs before category default (5), so these resolve before anything reaches the bucket.
+  4. **Better than keyword rules for the Oaks: extend the sports layer to join `Oaks_Roster` the way it already joins `As_Roster`.** Mike added the tab S334 — 7 rows, POPID-keyed, `Position | Team | Salary | PPG | ASST | REB | STL | FG% | 3P%`. Join verified 7/7 against the ledger (POP-01022 Wilson Shepard through POP-01028 Wendell Carter Jr., all `Active`, all blank employer). A POPID join is exact where a keyword match is a guess — use it, and keep keyword rules only as the fallback for staff who appear on neither roster tab.
 - **Verify:** `--dry-run` shows all 7 Oaks and every A's staffer resolving; `unmatched` drops by the coach/scout count
-- **Status:** [ ] not started
+- **Status:** [ ] not started — unblocked: `Oaks_Roster` now supplies both employer and `Status`
 
 ### Task 3: Retire the `SPORTS_OTHER` leak
 
@@ -108,6 +120,29 @@ pointers:
   2. Project directors: **OARI, Stabilization Fund, Health Center, and Transit Hub have NO `Business_Ledger` row** (only Baylight does — `BIZ-00006`, `BIZ-00020`). Park those directors at `BIZ-00017` — they are city employees running city programs — unless Mike wants authority BIZ rows minted.
   3. The capital building already exists as `BIZ-00017` City of Oakland (Municipal Government, Downtown). **Do not create a second one.**
 - **Verify:** zero `CIV=yes` at `BIZ-00030`; every civic citizen traceable to `BIZ-00017` or a real authority
+- **Status:** [ ] not started
+
+### Task 5b: Mint the civic initiatives as establishments (Mike-direct S334)
+
+**"We should also be adding the civic_initiatives establishments as they are characters in the sim."** An initiative that hires, disburses, builds and answers to council is an actor, not a line item — and until it has a `BIZ_ID` its director has nowhere to work.
+
+- **Files:** `Business_Ledger`, then `data/employer_mapping.json`
+- **Steps:**
+  1. Add a `Business_Ledger` row per live initiative. From `Initiative_Tracker`, the five needing one (Baylight already has `BIZ-00006` Baylight District Mangement + `BIZ-00020` Baylight Construction Authority):
+
+     | Initiative | Name for the establishment | Sector | Neighborhood |
+     |---|---|---|---|
+     | INIT-001 | West Oakland Stabilization Fund | Community Development | West Oakland |
+     | INIT-002 | Oakland Alternative Response Initiative | Public Safety / Crisis Response | Downtown |
+     | INIT-003 | Fruitvale Transit Hub Authority | Transit & Infrastructure | Fruitvale |
+     | INIT-005 | Temescal Community Health Center | Healthcare | Temescal |
+     | INIT-007 | Oakland Youth Apprenticeship Pipeline | Workforce Development | Downtown |
+
+     `Employee_Count` must reflect the program's real staffing, NOT the tracked-citizen count — the ledger is a sample and tracked must never exceed stated (see the bounding rules above). Take headcount from the initiative's own budget/staffing record where one exists; where none does, leave it low and honest rather than invented.
+  2. Repoint the project directors off `BIZ-00017` onto their own establishment: Webb → Stabilization Fund, Tran-Muñoz → OARI, Chen-Ramirez → Health Center, Soria Dominguez → Transit Hub. Ramos already sits at `BIZ-00020`.
+  3. Add `parentheticalLookup` / `keywordRules` entries so future citizens naming these programs resolve to them.
+  4. Cross-check the establishment names against [[../canon/INSTITUTIONS]] before writing — these become canon entities that agents may name in print.
+- **Verify:** each of the five resolves from a director's `RoleType`; no establishment has tracked employees exceeding its stated `Employee_Count`
 - **Status:** [ ] not started
 
 ### Task 6: Media cohort
@@ -153,11 +188,14 @@ pointers:
 
 ## Open questions
 
-- [ ] Task 1's authority ruling — ledger vs roster when they disagree on 324 rows. Recommendation is in the task; needs Mike's yes.
-- [ ] Is there a roster source of truth for Oaks `Status`? `As_Roster` (90 rows) covers the A's; no equivalent Oaks tab exists among the 71. Blocks the `Status` half of Task 2 — employer assignment is unblocked either way.
+- [x] **RESOLVED S334 — authority.** Roster wins; the ledger is the citizen's life in the sim. Full ruling + the career-engine caveat in Task 1.
+- [x] **RESOLVED S334 — Oaks `Status` source.** Mike added `Oaks_Roster` (7 rows, POPID-keyed, with position/salary/stat columns). Join verified 7/7 against the ledger. Task 2 unblocked on both halves.
+- [ ] `Employee_Count` for the five new civic establishments (Task 5b) — is there a staffing figure in each initiative's budget record, or does Mike set them? Blocks nothing; a low honest number can land first and be revised.
+- [ ] `Initiative_Tracker` has no `INIT-004`. Gap or retired? Not this plan's job, but worth a look before the establishments are minted in case one is missing.
 
 ---
 
 ## Changelog
 
-- 2026-07-26 (S334) — Initial draft. Rewritten before publish once `Employment_Roster` + `linkCitizensToEmployers.js` were found: this is config repair on an existing five-layer resolver, not a new reconciliation.
+- 2026-07-26 (S334) — Initial draft, rewritten pre-publish around the existing resolver.
+- 2026-07-26 (S334) — Authority ruled (roster wins), Oaks_Roster landed, Task 5b added to mint civic initiatives as establishments.

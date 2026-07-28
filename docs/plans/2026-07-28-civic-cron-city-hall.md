@@ -45,7 +45,7 @@ pointers:
   1. Dump all Civic_Office_Ledger rows (Mike's figure: ~35 office-holders). Capture POPID, name, office/role, approval, faction/appointment status.
   2. Reconcile against `output/desk-packets/truesource_reference.json` (9-member council roster) and the 13 existing `.claude/agents/civic-*` dirs — note which office-holders have voice agents and which of the ~35 do not.
 - **Verify:** dump file row count recorded; mismatch list (ledger rows without agents / agents without ledger rows) written into the dump file header
-- **Status:** [ ] not started
+- **Status:** [x] DONE S343 — 35 offices verified; dump at `output/civic-office-ledger-dump_c102.json` (local, output/ untracked); reconciliation in dump `_meta`
 
 #### Task 0.2: `scripts/civic-office-map.json` — the civic persona-map
 - **Files:** `scripts/civic-office-map.json` — create (sibling of `scripts/persona-map.json`)
@@ -53,7 +53,7 @@ pointers:
   1. One entry per office-holder: `{ office, popid, name, agentDir (nullable), faction, dataDomain, dataSources: [sheet tabs / world_summary sections / output files], dutyDays: "sun-thu", model: null }`.
   2. Data-domain assignments from the ledger dump — e.g. police-chief → crime data slices, emergency-management → OARI/crisis, okoro → stabilization-fund disbursements. Leave `model` null until Task 1.2 fills it.
 - **Verify:** `node -e "JSON.parse(require('fs').readFileSync('scripts/civic-office-map.json'))"` → clean; every Task 0.1 ledger row has an entry
-- **Status:** [ ] not started
+- **Status:** [x] DONE S343 — 35 entries, 0 unassigned domains, 21 agent-less offices flagged; dataSources marked candidate-verify-at-build
 
 ### Phase 1 — Voice bake-off: per-faction OpenRouter models (research-build)
 

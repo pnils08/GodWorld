@@ -1,0 +1,594 @@
+{
+  "_meta": {
+    "task": "civic.15 plan Task 0.2 — the civic persona-map (sibling of scripts/persona-map.json)",
+    "source": "output/civic-office-ledger-dump_c102.json (35 offices, live-verified S343)",
+    "note": "dataSources are CANDIDATE pointers — verify each against real files/tabs at Phase 3 build before wiring. model stays null until Task 1.2 bake-off. Faction agents cover council rows collectively.",
+    "frictionRule": "mayor, opp, crc, ind must land on different model families at Task 1.2"
+  },
+  "offices": [
+    {
+      "officeId": "MAYOR-01",
+      "title": "Mayor",
+      "holder": "Avery Santana",
+      "popid": "POP-00034",
+      "district": "citywide",
+      "faction": "OPP",
+      "approval": 95,
+      "agentDir": "civic-office-mayor",
+      "dataDomain": "citywide-governance",
+      "dataSources": [
+        "output/world_summary_c{XX}.md",
+        "Initiative_Tracker",
+        "output/civic_sentiment_c{XX}.json"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "DA-01",
+      "title": "District Attorney",
+      "holder": "Clarissa Dane",
+      "popid": "POP-00143",
+      "district": "citywide",
+      "faction": "IND",
+      "approval": 65,
+      "agentDir": "civic-office-district-attorney",
+      "dataDomain": "justice-prosecution",
+      "dataSources": [
+        "output/world_summary_c{XX}.md §crime",
+        "Initiative_Tracker (OARI)"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "PD-01",
+      "title": "Public Defender",
+      "holder": "Caleb Reyes",
+      "popid": "POP-00146",
+      "district": "citywide",
+      "faction": "OPP",
+      "approval": 65,
+      "agentDir": null,
+      "dataDomain": "justice-defense",
+      "dataSources": [
+        "output/world_summary_c{XX}.md §crime"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "COUNCIL-D1",
+      "title": "City Council District 1",
+      "holder": "Denise Carter",
+      "popid": "POP-00501",
+      "district": "D1",
+      "faction": "OPP",
+      "approval": 95,
+      "agentDir": "civic-office-opp-faction",
+      "dataDomain": "district-representation",
+      "dataSources": [
+        "output/world_summary_c{XX}.md §neighborhoods (D1)",
+        "Initiative_Tracker AffectedNeighborhoods"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "COUNCIL-D2",
+      "title": "City Council District 2",
+      "holder": "Leonard Tran",
+      "popid": "POP-00502",
+      "district": "D2",
+      "faction": "IND",
+      "approval": 59,
+      "agentDir": "civic-office-ind-swing",
+      "dataDomain": "district-representation",
+      "dataSources": [
+        "output/world_summary_c{XX}.md §neighborhoods (D2)",
+        "Initiative_Tracker AffectedNeighborhoods"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "COUNCIL-D3",
+      "title": "City Council District 3",
+      "holder": "Rose Delgado",
+      "popid": "POP-00503",
+      "district": "D3",
+      "faction": "OPP",
+      "approval": 85,
+      "agentDir": "civic-office-opp-faction",
+      "dataDomain": "district-representation",
+      "dataSources": [
+        "output/world_summary_c{XX}.md §neighborhoods (D3)",
+        "Initiative_Tracker AffectedNeighborhoods"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "COUNCIL-D4",
+      "title": "City Council District 4",
+      "holder": "Ramon Vega",
+      "popid": "POP-00042",
+      "district": "D4",
+      "faction": "IND",
+      "approval": 55,
+      "agentDir": "civic-office-ind-swing",
+      "dataDomain": "district-representation",
+      "dataSources": [
+        "output/world_summary_c{XX}.md §neighborhoods (D4)",
+        "Initiative_Tracker AffectedNeighborhoods"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "COUNCIL-D5",
+      "title": "City Council District 5",
+      "holder": "Janae Rivers",
+      "popid": "POP-00043",
+      "district": "D5",
+      "faction": "OPP",
+      "approval": 85,
+      "agentDir": "civic-office-opp-faction",
+      "dataDomain": "district-representation",
+      "dataSources": [
+        "output/world_summary_c{XX}.md §neighborhoods (D5)",
+        "Initiative_Tracker AffectedNeighborhoods"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "COUNCIL-D6",
+      "title": "City Council District 6",
+      "holder": "Elliott Crane",
+      "popid": "POP-00044",
+      "district": "D6",
+      "faction": "CRC",
+      "approval": 55,
+      "agentDir": "civic-office-crc-faction",
+      "dataDomain": "district-representation",
+      "dataSources": [
+        "output/world_summary_c{XX}.md §neighborhoods (D6)",
+        "Initiative_Tracker AffectedNeighborhoods"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "COUNCIL-D7",
+      "title": "City Council District 7",
+      "holder": "Warren Ashford",
+      "popid": "POP-00504",
+      "district": "D7",
+      "faction": "CRC",
+      "approval": 51,
+      "agentDir": "civic-office-crc-faction",
+      "dataDomain": "district-representation",
+      "dataSources": [
+        "output/world_summary_c{XX}.md §neighborhoods (D7)",
+        "Initiative_Tracker AffectedNeighborhoods"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "COUNCIL-D8",
+      "title": "City Council District 8",
+      "holder": "Nina Chen",
+      "popid": "POP-00505",
+      "district": "D8",
+      "faction": "CRC",
+      "approval": 55,
+      "agentDir": "civic-office-crc-faction",
+      "dataDomain": "district-representation",
+      "dataSources": [
+        "output/world_summary_c{XX}.md §neighborhoods (D8)",
+        "Initiative_Tracker AffectedNeighborhoods"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "COUNCIL-D9",
+      "title": "City Council District 9",
+      "holder": "Terrence Mobley",
+      "popid": "POP-00506",
+      "district": "D9",
+      "faction": "OPP",
+      "approval": 55,
+      "agentDir": "civic-office-opp-faction",
+      "dataDomain": "district-representation",
+      "dataSources": [
+        "output/world_summary_c{XX}.md §neighborhoods (D9)",
+        "Initiative_Tracker AffectedNeighborhoods"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "STAFF-COS",
+      "title": "Chief of Staff",
+      "holder": "Laila Cortez",
+      "popid": "POP-00035",
+      "district": "citywide",
+      "faction": "STAFF",
+      "approval": 65,
+      "agentDir": null,
+      "dataDomain": "mayors-office-ops",
+      "dataSources": [
+        "output/civic-voice/mayor_c{XX}.json",
+        "Initiative_Tracker"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "STAFF-DM-ECON",
+      "title": "Deputy Mayor (Econ Dev)",
+      "holder": "Marcus Osei",
+      "popid": "POP-00036",
+      "district": "citywide",
+      "faction": "STAFF",
+      "approval": 65,
+      "agentDir": null,
+      "dataDomain": "economy-business",
+      "dataSources": [
+        "Business_Ledger",
+        "output/world_summary_c{XX}.md §economy"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "STAFF-DM-COMM",
+      "title": "Deputy Mayor (Community)",
+      "holder": "Brenda Okoro",
+      "popid": "POP-00037",
+      "district": "citywide",
+      "faction": "STAFF",
+      "approval": 65,
+      "agentDir": "civic-office-okoro",
+      "dataDomain": "community-development",
+      "dataSources": [
+        "Initiative_Tracker (stabilization-fund)",
+        "output/world_summary_c{XX}.md §neighborhoods"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "STAFF-COMMS",
+      "title": "Communications Director",
+      "holder": "Theo Park",
+      "popid": "POP-00038",
+      "district": "citywide",
+      "faction": "STAFF",
+      "approval": 65,
+      "agentDir": null,
+      "dataDomain": "media-relations",
+      "dataSources": [
+        "editions/ coverage",
+        "output/civic_sentiment_c{XX}.json"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "STAFF-LEGAL",
+      "title": "Chief Legal Counsel",
+      "holder": "Simone Ellis",
+      "popid": "POP-00039",
+      "district": "citywide",
+      "faction": "STAFF",
+      "approval": 65,
+      "agentDir": null,
+      "dataDomain": "legal-frameworks",
+      "dataSources": [
+        "Initiative_Tracker"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "STAFF-MANAGER",
+      "title": "City Manager",
+      "holder": "Aaron Whitfield",
+      "popid": "POP-00040",
+      "district": "citywide",
+      "faction": "STAFF",
+      "approval": 65,
+      "agentDir": null,
+      "dataDomain": "city-operations-budget",
+      "dataSources": [
+        "Initiative_Tracker",
+        "output/world_summary_c{XX}.md"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "STAFF-BAYLIGHT",
+      "title": "Baylight Authority Director",
+      "holder": "Keisha Ramos",
+      "popid": "POP-00041",
+      "district": "citywide",
+      "faction": "STAFF",
+      "approval": 65,
+      "agentDir": "civic-office-baylight-authority",
+      "dataDomain": "baylight-project",
+      "dataSources": [
+        "Initiative_Tracker (baylight)",
+        "output/city-civic-database/initiatives/baylight/"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "CHIEF-POLICE",
+      "title": "Police Chief",
+      "holder": "Rafael Montez",
+      "popid": "POP-00136",
+      "district": "citywide",
+      "faction": "STAFF",
+      "approval": 65,
+      "agentDir": "civic-office-police-chief",
+      "dataDomain": "crime-safety",
+      "dataSources": [
+        "output/world_summary_c{XX}.md §crime",
+        "neighborhood crime slices"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "CHIEF-FIRE",
+      "title": "Fire Chief",
+      "holder": "Marcus Hollowell",
+      "popid": "POP-00140",
+      "district": "citywide",
+      "faction": "STAFF",
+      "approval": 65,
+      "agentDir": null,
+      "dataDomain": "fire-incidents",
+      "dataSources": [
+        "output/world_summary_c{XX}.md §events"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "DCOP-OPS",
+      "title": "Deputy Chief Operations",
+      "holder": "Kimberly Cho",
+      "popid": "POP-00137",
+      "district": "citywide",
+      "faction": "STAFF",
+      "approval": 65,
+      "agentDir": null,
+      "dataDomain": "crime-safety",
+      "dataSources": [
+        "output/world_summary_c{XX}.md §crime"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "DCOP-COMM",
+      "title": "Deputy Chief Community",
+      "holder": "Leonard Briggs",
+      "popid": "POP-00138",
+      "district": "citywide",
+      "faction": "STAFF",
+      "approval": 65,
+      "agentDir": null,
+      "dataDomain": "crime-safety-community",
+      "dataSources": [
+        "output/world_summary_c{XX}.md §crime",
+        "neighborhood sentiment"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "IAD-LEAD",
+      "title": "Internal Affairs Lead",
+      "holder": "Samantha Viteri",
+      "popid": "POP-00139",
+      "district": "citywide",
+      "faction": "STAFF",
+      "approval": 65,
+      "agentDir": null,
+      "dataDomain": "police-accountability",
+      "dataSources": [
+        "OARI initiative state"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "EMS-DIR",
+      "title": "EMS Director",
+      "holder": "Priya Narang",
+      "popid": "POP-00141",
+      "district": "citywide",
+      "faction": "STAFF",
+      "approval": 65,
+      "agentDir": null,
+      "dataDomain": "emergency-medical",
+      "dataSources": [
+        "output/world_summary_c{XX}.md §health"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "MED-EXAM",
+      "title": "Medical Examiner",
+      "holder": "Jonas Patel",
+      "popid": "POP-00142",
+      "district": "citywide",
+      "faction": "STAFF",
+      "approval": 65,
+      "agentDir": null,
+      "dataDomain": "deaths-mortality",
+      "dataSources": [
+        "LifeHistory_Log deaths"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "EMERG-DIR",
+      "title": "Emergency Management Director",
+      "holder": "Shawna Delgado",
+      "popid": "POP-00152",
+      "district": "citywide",
+      "faction": "STAFF",
+      "approval": 65,
+      "agentDir": null,
+      "dataDomain": "emergency-crisis",
+      "dataSources": [
+        "Initiative_Tracker (OARI)",
+        "output/world_summary_c{XX}.md §events"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "ADA-MAJOR",
+      "title": "ADA Major Crimes",
+      "holder": "Ethan D’Souza",
+      "popid": "POP-00144",
+      "district": "citywide",
+      "faction": "STAFF",
+      "approval": 65,
+      "agentDir": null,
+      "dataDomain": "justice-prosecution",
+      "dataSources": [
+        "output/world_summary_c{XX}.md §crime"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "ADA-SAFETY",
+      "title": "ADA Community Safety",
+      "holder": "Janelle Rourke",
+      "popid": "POP-00145",
+      "district": "citywide",
+      "faction": "STAFF",
+      "approval": 65,
+      "agentDir": null,
+      "dataDomain": "justice-prosecution-community",
+      "dataSources": [
+        "output/world_summary_c{XX}.md §crime",
+        "OARI initiative state"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "DPD-DEPUTY",
+      "title": "Deputy Public Defender",
+      "holder": "Marisol Guzman",
+      "popid": "POP-00147",
+      "district": "citywide",
+      "faction": "STAFF",
+      "approval": 65,
+      "agentDir": null,
+      "dataDomain": "justice-defense",
+      "dataSources": [
+        "output/world_summary_c{XX}.md §crime"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "COURT-LIAISON",
+      "title": "Superior Court Liaison",
+      "holder": "Gordon Tate",
+      "popid": "POP-00148",
+      "district": "citywide",
+      "faction": "STAFF",
+      "approval": 65,
+      "agentDir": null,
+      "dataDomain": "justice-courts",
+      "dataSources": [
+        "output/world_summary_c{XX}.md §crime"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "CPRB-CHAIR",
+      "title": "Civilian Police Review Chair",
+      "holder": "Lamine Sissoko",
+      "popid": "POP-00149",
+      "district": "citywide",
+      "faction": "STAFF",
+      "approval": 65,
+      "agentDir": null,
+      "dataDomain": "police-accountability",
+      "dataSources": [
+        "OARI initiative state",
+        "civic sentiment"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "OMBUDSMAN",
+      "title": "City Ombudsman",
+      "holder": "Helena Morr",
+      "popid": "POP-00150",
+      "district": "citywide",
+      "faction": "STAFF",
+      "approval": 65,
+      "agentDir": null,
+      "dataDomain": "city-accountability",
+      "dataSources": [
+        "output/civic_sentiment_c{XX}.json"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "REENTRY-DIR",
+      "title": "Probation & Reentry Director",
+      "holder": "Victor Han",
+      "popid": "POP-00151",
+      "district": "citywide",
+      "faction": "STAFF",
+      "approval": 65,
+      "agentDir": null,
+      "dataDomain": "reentry-probation",
+      "dataSources": [
+        "output/world_summary_c{XX}.md §crime"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    },
+    {
+      "officeId": "PLANNING-DIR",
+      "title": "City Planning Director",
+      "holder": "Mara Vance",
+      "popid": "POP-00507",
+      "district": "citywide",
+      "faction": "STAFF",
+      "approval": 65,
+      "agentDir": null,
+      "dataDomain": "planning-housing-development",
+      "dataSources": [
+        "Initiative_Tracker (transit-hub, baylight)",
+        "output/world_summary_c{XX}.md §neighborhoods"
+      ],
+      "dutyDays": "sun-thu",
+      "model": null
+    }
+  ]
+}

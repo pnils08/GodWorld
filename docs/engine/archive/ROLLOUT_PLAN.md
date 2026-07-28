@@ -153,6 +153,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | governance.33 | C96 gap-log triage | in-progress | research-build / engine-sheet | [[../plans/2026-06-07-c96-gap-log-triage]] — detail in pointer (relocated 2026-07-02) |
 | governance.35 | REDUCED S260 by governance.36 §loop-tightening to the PIN-self-derive remnant | ready | engine-sheet (design: research-build DONE) | [[../plans/2026-06-14-session-context-mechanization]] — detail in pointer (relocated 2026-07-02) |
 | governance.36 | Boot doc architecture restructure. S340 landed the ungated all-lane boot emit + external lanes. OPEN: item 2 universal-discipline merge to the boot emitter. | in-progress | research-build | [[../plans/2026-06-14-boot-doc-architecture-restructure]] + [[../plans/2026-05-09-boot-load-audit]] — detail in pointer (relocated 2026-07-02) |
+| governance.42 | Monthly MD sweep (S341 gate loosen: MDs allowed, must be indexed). Widen mdStalenessDetector walk root — inventories docs/ only, .claude/ + memory dir are referrer-only → absent from "record of them all". Then cron it. | ready | research-build | scripts/mdStalenessDetector.js + /md-audit — no plan doc, Mike-direct S341 |
 
 ---
 

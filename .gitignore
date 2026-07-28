@@ -61,3 +61,6 @@ __pycache__/
 # Headless desk-writer A/B test output (research.25 Thread A) — fabricated test
 # sections; never let them enter the repo as canon.
 output/cron-compare/
+
+# Boot payload log — rewritten every session start, pure local diagnostic state (S341)
+.claude/state/boot-payload.txt

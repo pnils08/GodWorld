@@ -31,7 +31,13 @@ date +%s > "$GODWORLD_ROOT/.claude/state/session-start.txt" 2>/dev/null || true
 # it's off (crash, stray manual stop), this brings it back. `pm2 start <name>` is
 # idempotent: no-op on an already-online proc (no Discord-connection bounce), start
 # on a stopped one. Best-effort + backgrounded — can never block or break boot.
-(pm2 start mags-bot >/dev/null 2>&1 || true) &
+# S341: fds fully detached + disowned. Previously `(pm2 start ... >/dev/null 2>&1) &`
+# redirected pm2's own streams but left the backgrounded subshell holding the hook's
+# inherited stdout. If the harness reads the hook's pipe to EOF rather than waiting on
+# process exit, a pm2 that actually has to START (vs. no-op on an online proc) can hold
+# that pipe past the 10s budget and take the whole boot payload down with it.
+{ pm2 start mags-bot >/dev/null 2>&1 || true; } </dev/null >/dev/null 2>&1 &
+disown 2>/dev/null || true
 
 # (JOURNAL_RECENT "Last journal" boot line retired S300 — journal froze to Mags'
 # citizen page POP-00005; recent reflections come from scripts/magsPageRecall.js
@@ -144,44 +150,17 @@ OWNERSHIP: in SESSION_CONTEXT.md you own ONLY your own NEXT[<self>] line + the s
 ROSTER
   echo ""
 
-  # Per-terminal Supermemory container awareness (S300, Mike-direct; reframed S313,
-  # Mike-direct). Each registered terminal owns sl-<terminal>. Usage model (S313):
-  # DURABLE TERMINAL FACTS first — claude-mem already owns narrative what-happened,
-  # so save the facts a future boot needs (`--static` for permanent ones), not a
-  # second session log. Searches cost fractions of a penny on the flat $9/mo plan —
-  # far cheaper than the model re-deriving a fact from disk. Session-end auto-bridge
-  # still runs (searchable record), but it is the backstop, not the point.
+  # Per-terminal Supermemory container pointer (S300 → trimmed S341, Mike-direct).
+  # ON-DEMAND ONLY. The S313 boot auto-recall was CUT here at S341: it was the hook's
+  # only network call (npx + API, ~3s warm, unbounded cold) inside a 10s hook budget,
+  # and what it returned did not justify the risk — a live pull of sl-research-build
+  # at S341 came back with a corrupt entry ("Mand" x40), filler ("All code committed
+  # and pushed to origin/main"), and newsroom canon (Rhea gate, S332 probation) sitting
+  # in a build container. Noisy and cross-contaminated, and the 0.6 similarity floor
+  # passed it through. Supermemory is a write-then-query-later store, not a boot feed.
   if [ "$MAGS_ONLY" != "yes" ] && [ -n "$TERMINAL_NAME" ]; then
-    echo "Your Supermemory container: sl-$TERMINAL_NAME (durable terminal memory — facts a future boot needs, not a claude-mem duplicate). Save anytime: npx supermemory remember \"...\" --tag sl-$TERMINAL_NAME (--static for a permanent fact); recall anytime: npx supermemory search \"...\" --tag sl-$TERMINAL_NAME — searches are near-free, prefer them over re-deriving facts from disk. Across all terminals: --tag session-logs. (Deliberate canon saves still fan out to mags/bay-tribune/world-data, terminal-tagged.)"
+    echo "Supermemory (on-demand, never auto-pulled at boot): your container is sl-$TERMINAL_NAME. Save: npx supermemory remember \"...\" --tag sl-$TERMINAL_NAME (--static = permanent). Recall: npx supermemory search \"...\" --tag sl-$TERMINAL_NAME."
     echo ""
-
-    # S313 boot recall (Mike-approved): ONE targeted search of sl-<terminal>, keyed to
-    # the NEXT line, so durable terminal memory actually gets withdrawn at boot instead
-    # of write-only accumulating. Fail-open: timeout/empty/parse-error -> no block, boot
-    # continues. Hits are background conditioning — model must verify against live state.
-    if [ -n "$NEXT_LINE" ]; then
-      SL_QUERY=$(printf '%s' "$NEXT_LINE" | sed 's/^\*\*NEXT\[[^]]*\]:\*\*[[:space:]]*//' | cut -c1-300)
-      SL_HITS=$(timeout 15 npx supermemory search "$SL_QUERY" --tag "sl-$TERMINAL_NAME" --json 2>/dev/null | node -e '
-        let d = "";
-        process.stdin.on("data", c => d += c);
-        process.stdin.on("end", () => {
-          try {
-            const rs = (JSON.parse(d).results || [])
-              .filter(r => (r.similarity || 0) >= 0.6 && (r.memory || r.chunk))
-              .slice(0, 3);
-            for (const r of rs) {
-              const date = (r.metadata && (r.metadata.date || r.metadata.sessionPin)) || "";
-              const text = String(r.memory || r.chunk).replace(/\s+/g, " ").slice(0, 300);
-              console.log("- " + (date ? "[" + date + "] " : "") + text);
-            }
-          } catch (e) { /* fail-open */ }
-        });' 2>/dev/null)
-      if [ -n "$SL_HITS" ]; then
-        echo "Recalled from sl-$TERMINAL_NAME (keyed to your NEXT line — background memory, dated; verify against live state before acting on it):"
-        echo "$SL_HITS"
-        echo ""
-      fi
-    fi
   fi
 
   # --- EMIT BOOT SEQUENCE ---
@@ -290,6 +269,18 @@ BOOT
 }
 
 BOOT_TEXT=$(build_boot_context)
+
+# --- PAYLOAD LOG (S341, Mike-approved) ---
+# Boot has now failed to deliver this payload twice (S319 engine-sheet 2026-07-15,
+# S341 research-build 2026-07-28): the hook ran and the session still came up with no
+# terminal, no PIN, no NEXT. Both times it was diagnosed from scratch because nothing
+# was left behind to read. This file ends that:
+#   - No <godworld-state> in context BUT a fresh mtime here -> hook completed, the
+#     harness dropped the delivery. Read this file; the handoff is recovered in one step.
+#   - Stale mtime -> the hook itself died before finishing. Different bug, now visible.
+# Written immediately before the emit, so its existence means build_boot_context()
+# returned. Best-effort: a write failure here must never break boot.
+printf '%s\n' "$BOOT_TEXT" > "$GODWORLD_ROOT/.claude/state/boot-payload.txt" 2>/dev/null || true
 
 # --- EMIT ---
 # Preferred: single JSON object so sessionTitle + reloadSkills register (v2.1.152+ contract).

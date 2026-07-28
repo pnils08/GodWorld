@@ -89,6 +89,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 |---|------|-------|----------|---------|
 | civic.13 | City-hall engine-sheet reconciliation | blocked | engine-sheet | [[../plans/2026-05-22-c94-gap-log-triage]] — detail in pointer (relocated 2026-07-02) |
 | civic.14 | Initiative_Tracker contract + fine-tune | in-progress | research-build / engine-sheet | [[../plans/2026-06-01-initiative-tracker-contract]] + [[../research/2026-06-01-initiative-tracker-state]] — detail in pointer (relocated 2026-07-02) |
+| civic.15 | Civic cron city-hall — autonomous M-F civic decision wakes, no human in the loop (Mike-direct S343); research done S343, plan doc next (cadence model, wake-cascade mapping, tracker-apply gate design) | in-progress | research-build | [[../research/2026-07-28-civic-cron-city-hall]] |
 
 ### infrastructure.* — Supermemory, services, ingest
 

@@ -20,7 +20,7 @@ By decoupling the "Brain" (Strategy/Orchestration) from the "Hands" (Coding/Exec
 
 ## HIERARCHY STATUS: TBD — interim order (Mike-direct 2026-07-28)
 
-The model hierarchy is **TBD** — under active reconsideration. Interim order per Mike-direct 2026-07-28: **Claude is the lead** (§1), **Kimi is the backup CLI** (§3), and **Codex plus Antigravity/Gemini are gated, proposal-only assistants** (§4). This supersedes the S332 inversion below, kept as incident history.
+The model hierarchy is **TBD** — under active reconsideration. Interim order per Mike-direct 2026-07-28 (Codex restored to backup tier, S343): **Claude is the lead** (§1), **Kimi and Codex are the backup CLIs** (§3), and **Antigravity/Gemini are gated, proposal-only assistants** (§4). This supersedes the S332 inversion below, kept as incident history.
 
 _History — S332 inversion (superseded):_ Mike-direct S332, after Claude/Mags (a) was wrong on Canon Tier, (b) shipped an underspecified starter instruction that cost a $1.82 misrun, (c) mis-attributed Fable's contamination to Codex, and (d) **deleted 21 real citizen-quote rows without approval** — while Codex caught Fable's `record:true` bug, caught its own wrong task, and used the correct terms — Codex was made lead and Claude the gated backup. Reversed to the interim order above on 2026-07-24. The S332 lesson stands regardless of ranking: **no destructive or state-changing action without explicit per-action approval** — "fix all this" is not blanket approval.
 
@@ -47,16 +47,16 @@ Which Claude tier each terminal's lead session runs on. The lead holds orchestra
 * **The Job:** Mid-level feature writing and quality assurance. These agents take raw packets of data and write longer-form prose, or they review the output of junior agents for narrative consistency and stylistic adherence.
 * **Why it fits:** Sonnet hits the perfect sweet spot for prose generation. It is cheaper and faster than Opus, but significantly more creative and capable of complex writing than Haiku or standard open-weights models.
 
-## 3. Backup CLI: Kimi — *Mike's hands-on second assistant*
+## 3. Backup CLIs: Kimi + Codex — *Mike's hands-on second assistants*
 **Primary Persona:** Out-of-band terminal assistants (Mike-driven) — strictly outside the `GodWorld` roleplay layer
 
-* **The Job:** Doc-truing, running scripts, sim-design brainstorming, and general tool-using terminal work when Claude usage is exhausted mid-week. **Kimi Code** (K2.6, cheap pay-as-you-go, different lab) is the different-eyes secondary.
-* **Why here:** reliability + honest tool-use reporting is the #1 selection criterion for the CLI slot, above raw writing skill (S332).
+* **The Job:** Doc-truing, running scripts, sim-design brainstorming, and general tool-using terminal work when Claude usage is exhausted mid-week. **Kimi Code** (K2.6, cheap pay-as-you-go, different lab) and **Codex CLI** (GPT-5.6, validated S332) are the different-eyes secondaries. Both share the same writable scope and commit/push conditions (`AGENTS.md` §Push authorization).
+* **Why here:** reliability + honest tool-use reporting is the #1 selection criterion for the CLI slot, above raw writing skill (S332). Codex was briefly demoted to the gated tier on 2026-07-28 after inserting unapproved design into the Event_Content_Ledger plan; restored to backup tier the same day (Mike-direct, S343).
 
-## 4. Codex + Antigravity (`agy`) / Gemini — *Gated, proposal-only*
+## 4. Antigravity (`agy`) / Gemini — *Gated, proposal-only*
 
-* **The Job:** Read-only inspection, diagnostics, and proposed diffs. They do not modify project files or commit/push project work. An authorized Claude terminal or Kimi must review and apply any proposal.
-* **Why the constraint:** Antigravity's S332 provenance failure and Codex's 2026-07-28 insertion of unapproved design into the Event_Content_Ledger plan require the same gate: their output may inform work, but it never lands directly.
+* **The Job:** Read-only inspection, diagnostics, and proposed diffs. They do not modify project files or commit/push project work. An authorized Claude terminal, Kimi, or Codex must review and apply any proposal.
+* **Why the constraint:** Antigravity's S332 provenance failure: their output may inform work, but it never lands directly.
 
 _Retired from disk (S332, still retired):_ **Aider** ("the hands" — code-diff scalpel, little use when Opus + Fable write the codebase) and **Grok CLI** (2026 hallucination rate doubled 25%→54%).
 
@@ -68,15 +68,15 @@ _Retired from disk (S332, still retired):_ **Aider** ("the hands" — code-diff 
 
 ---
 
-## 6. File Boundaries & Isolation (S274; Codex gate 2026-07-28)
+## 6. File Boundaries & Isolation (S274; Codex restored to backup tier S343)
 
-The out-of-band CLIs (**Kimi** as backup; **Codex** and
+The out-of-band CLIs (**Kimi + Codex** as backups;
 **Antigravity/Gemini** gated; Aider + Grok retired S332) and the Claude
 orchestration layer share the same repo and run as the same OS user (root).
 `AGENTS.md` is the binding authorization source:
 
-| Zone | Paths | Kimi | Codex / Antigravity / Gemini |
-|------|-------|------|------------------------------|
+| Zone | Paths | Kimi / Codex | Antigravity / Gemini |
+|------|-------|--------------|----------------------|
 | **Control plane** (Claude-owned) | `.claude/**`, `.agents/**`, `CLAUDE.md`, `SESSION_CONTEXT.md` | read-only | read-only |
 | **Substrate + execution** | `phase*/`, `utilities/`, `lib/`, `scripts/` | `scripts/` read-write; other paths require explicit per-task permission | read-only; proposed diffs only |
 | **Content / output** | `output/`, `editions/`, most of `docs/` | `output/` + `docs/` read-write; `editions/` requires explicit permission | read-only; proposed diffs only |
@@ -88,7 +88,7 @@ orchestration layer share the same repo and run as the same OS user (root).
   default-denies any commit touching the control plane unless a Claude session
   prefixes `CLAUDE_CTL=1`.
 - The CLIs run as root with bash, so these boundaries remain policy-enforced;
-  Codex and Antigravity/Gemini have no project write or commit authority.
+  Antigravity/Gemini have no project write or commit authority.
 
 **Hard tier (deferred follow-up):** kernel-enforced read-only requires running the
 cheap agents as a non-root user with `.claude/**` owned by Claude, or in a sandbox
@@ -104,7 +104,7 @@ model-tier + cost-to-reasoning view.
 - **Premium Claude (Anthropic API / workbench) is reserved for judgment + gate work** that genuinely needs it: the **Rhea canon gate**, Mags EIC crons, deep review. NOT for grunt or bulk generation.
 - **Grunt / writing / bulk → OpenRouter + DeepSeek.** Proven cheap and canon-capable (DeepSeek ~500× cheaper than Sonnet at compose parity). Move API usage **off the Anthropic workbench** except the reserved judgment/gate cases.
 - **Check OpenRouter for best-model-per-task** rather than defaulting to one model — pick the cheapest model that clears the bar for each job.
-- **Backup CLI:** Kimi Code (different-eyes secondary). **Codex and Antigravity/Gemini:** gated, read-only, proposal-only; output must be reviewed and applied by an authorized terminal. Aider and Grok retired from disk (S332).
+- **Backup CLIs:** Kimi Code + Codex (different-eyes secondaries). **Antigravity/Gemini:** gated, read-only, proposal-only; output must be reviewed and applied by an authorized terminal. Aider and Grok retired from disk (S332).
 - **Friction is an agent/stance property, not a model or tool property (S332):** Jax-caliber accountability writing comes from running the `freelance-firebrand` agent skill (adversarial stance), not from any particular CLI or premium model. The gold is reproducible on cheap models once the writer runs the right persona.
 
 ---

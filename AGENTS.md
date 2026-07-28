@@ -16,8 +16,8 @@ Mags Corliss, a Bay Tribune reporter, a civic official, or a participant in the
 simulation. Read persona and newsroom material as system context, not as an
 identity to adopt.
 
-Claude is the lead and owns the control plane. Kimi may propose and implement
-inside its authorized scope. Codex and Antigravity/Gemini are fully gated:
+Claude is the lead and owns the control plane. Kimi and Codex may propose and
+implement inside their authorized scope. Antigravity/Gemini are fully gated:
 read-only inspection and proposed diffs only. They do not change project files,
 stage work, commit work, or push work. The sole exception is each agent's own
 `NEXT` handoff line under §Session close.
@@ -48,7 +48,7 @@ in order:
 6. `docs/STACK.md` — services, providers, storage, and runtime components.
 7. `docs/OPERATIONS.md` — documented processes, schedules, and runbooks.
 8. `docs/EDITION_PIPELINE_DEEP_DISPATCH.md` — deep-dispatch pipeline reference.
-9. `docs/MODEL_HIERARCHY.md` — model responsibilities and Codex boundaries.
+9. `docs/MODEL_HIERARCHY.md` — model responsibilities and agent-tier boundaries.
 10. `docs/engine/ROLLOUT_PLAN.md` — canonical open-work tracker.
 
 Then run:
@@ -140,13 +140,13 @@ commit touching the control plane unless a Claude session prefixes
 `CLAUDE_CTL=1`. That prefix is for Claude only — never set it, and never bypass
 the hook with `--no-verify`.
 
-Kimi's ordinary writable scope is limited to:
+Kimi's and Codex's ordinary writable scope is limited to:
 
 - `scripts/**`
 - `output/**`
 - `docs/**`
 
-Codex and Antigravity/Gemini have no ordinary writable scope. They may inspect
+Antigravity/Gemini have no ordinary writable scope. They may inspect
 the repository and return proposed patches, but another authorized terminal must
 review and apply them.
 
@@ -167,10 +167,10 @@ otherwise:
 Do not modify pre-existing dirty or untracked files unless the builder identifies
 them as part of the task.
 
-## Codex-local state
+## Gated-agent local state
 
-Codex does not create or modify repository-local scratch, reports,
-configuration, hooks, skills, or state. Its diagnostics and proposed patches
+Antigravity/Gemini do not create or modify repository-local scratch, reports,
+configuration, hooks, skills, or state. Their diagnostics and proposed patches
 remain in the conversation until an authorized terminal reviews and applies
 them.
 
@@ -276,7 +276,7 @@ For analysis, orientation, review, or diagnosis:
 - distinguish verified behavior from documentation claims;
 - report stale or conflicting documentation instead of silently correcting it.
 
-Codex and Antigravity/Gemini stop after analysis and a proposed diff; they do not
+Antigravity/Gemini stop after analysis and a proposed diff; they do not
 perform implementation. For an agent with implementation authorization:
 
 1. Inspect `git status --short --branch`.
@@ -335,7 +335,7 @@ Rules:
 
 The builder assigns commit and push rights by agent tier:
 
-- **Kimi** may commit and push work that lies entirely inside the
+- **Kimi and Codex** may commit and push work that lies entirely inside the
   ordinary writable scope (`scripts/**`, `output/**`, `docs/**`), including
   tests. Conditions, all mandatory:
   - every touched or added test file passes locally before the commit;
@@ -355,7 +355,7 @@ The builder assigns commit and push rights by agent tier:
   `utilities/`, `lib/`, `schemas/`, `dashboard/`, `editions/`, configuration
   files, hooks, service manifests, and anything deployed via clasp. Changes
   there are proposed only and land through the engine-sheet terminal.
-- **Codex, Antigravity, and Gemini** have no project commit or push
+- **Antigravity and Gemini** have no project commit or push
   authorization and remain fully gated on all work: propose diffs only. The
   only exception is committing the agent's own `**NEXT[<agent>]:**` handoff
   line alone, per §Session close below.
@@ -394,7 +394,7 @@ line records where the thread is.
 
 2. **Commit path-specifically**, per the push-authorization rules above.
 
-   **Codex and Antigravity:** this is the one commit you are authorized to make.
+   **Antigravity:** this is the one commit you are authorized to make.
    You have no commit or push authorization for work — diffs stay proposals —
    but your own handoff line is bookkeeping, not work. Commit the line alone;
    propose everything else.

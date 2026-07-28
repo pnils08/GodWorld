@@ -345,7 +345,9 @@ Aggregate scorecards across the accrued articles to answer Feedback1.txt's per-d
 
 **Cadence config (the numbers to bind):** budget **$20–40/mo** (subscription-token recovery, not new spend). Per-article measured: Sonnet-desk ≈ $1.17 (write $0.92 — the 223k-token explore phase is a trim target — + Haiku gate $0.22), DeepSeek-desk ≈ $0.25 (gate-dominated). ⇒ ~20–28 cleared articles/week, ~1/desk/day, all canon, all building journalists; edition curates the best ~8. Citizen wakes 5→2 (morning/night). Sample-generation surface: `cron-desk-run.js --wake --desk <d> --no-gate --cycle <N>` → `output/cron-compare/samples/`.
 
-**Civic side (Phase 3):** early notes captured above (voice-packets = Mara-directive-sourced per-office packets; Mara-as-Anthropic-API; friction loop). Undesigned; research-build lane.
+**Saturday model — DECIDED (Mike-direct S339).** Saturday compiles the **long-format edition**: it picks the best staged articles from the M–F week and runs them through ingest, so **everyone's tiers and fame are tied to the main Saturday edition run** (the engine.88 `byline-published` bonus anchors there, and Saturday curation remains the storyline-dedup step). The compiled edition IS the long format — Mike's weekend read. Weekly rhythm: reporters write M–F → Saturday compile+ingest → engine fires Sunday (one cycle = one week; fresh desk_signal every Monday). Crontab still runs the fan-out 7 days — needs the M–F trim when the schedule is bound.
+
+**Civic side (Phase 3):** early notes captured above (voice-packets = Mara-directive-sourced per-office packets; Mara-as-Anthropic-API; friction loop). Undesigned; research-build lane. **PRIORITY NEXT SESSION (Mike-direct S339):** how city hall works M–F and what the civic M–F jobs are — the civic offices are **the nodes making decisions for the sim**, the decision-producing counterpart to the newsroom's coverage.
 
 ## Status log
 
@@ -391,6 +393,11 @@ no paid/manual wake or crontab change was used for validation.
   requires a deterministic source roster rather than another prompt-only retry.
 - 2026-07-27 — Recorded the live fan-out filename handoff defect that left the
   July 26 write wake at `0/6` and supplied no promoted Article to Daily News.
+- 2026-07-27 — Saturday model decided (Mike-direct S339): compiled LONG-FORMAT
+  edition picks the week's best staged articles and runs them through ingest;
+  tiers/fame anchor to the Saturday run; engine fires Sundays (cycle = week).
+  Phase 3 civic (city-hall M–F jobs, the sim's decision nodes) named next
+  session's priority.
 - 2026-07-27 — Built go-live item #2 (S339 engine-sheet): submission budget —
   hard 28/week staged cap gating write wakes pre-spend + soft byline no-repeat
   (fresh-first, degrades to least-staged on heavy cycles) in the fanout

@@ -140,13 +140,13 @@
           {
             "type": "command",
             "command": "node /root/GodWorld/scripts/rolloutPointerGuard.js",
-            "if": "Edit(docs/engine/ROLLOUT_PLAN.md)",
+            "if": "Edit(docs/engine/archive/ROLLOUT_PLAN.md)",
             "timeout": 10
           },
           {
             "type": "command",
             "command": "node /root/GodWorld/scripts/rolloutPointerGuard.js",
-            "if": "Write(docs/engine/ROLLOUT_PLAN.md)",
+            "if": "Write(docs/engine/archive/ROLLOUT_PLAN.md)",
             "timeout": 10
           },
           {

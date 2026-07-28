@@ -365,7 +365,9 @@ the builder loosened the push rules by agent tier:
   files, hooks, service manifests, and anything deployed via clasp. Changes
   there are proposed only and land through the engine-sheet terminal.
 - **Antigravity and Gemini** have no commit or push authorization and remain
-  fully gated on engine work: propose diffs only.
+  fully gated on engine work: propose diffs only. **One exception for
+  Antigravity:** its own `**NEXT[antigravity]:**` handoff line, committed
+  alone, per §Session close below.
 
 ### General rules (all agents)
 

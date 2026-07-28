@@ -20,6 +20,13 @@ staged="$(git diff --cached --name-only | grep -E "$protected" || true)"
 # control-plane edit they cannot make, so their lanes would sit frozen at
 # whatever a Claude terminal typed once and the handoff would be decoration.
 #
+# SCOPE, precisely: `staged` holds PROTECTED paths only, so this fires when
+# SESSION_CONTEXT.md is the only protected file — non-protected files (scripts/,
+# output/, docs/) ride along in the same commit unchecked. That is fine for Codex
+# and Kimi, whose writable scope already covers them. For Antigravity, "your own
+# NEXT line is the one commit you may make" is POLICY in AGENTS.md, not something
+# this hook enforces. A diff that only DELETES a lane's NEXT line also passes.
+#
 # The carve-out is deliberately the narrowest thing that works: SESSION_CONTEXT.md
 # must be the ONLY protected path staged, and every changed line in it must be a
 # NEXT line for ONE external lane. A PIN edit, another lane's line, a second

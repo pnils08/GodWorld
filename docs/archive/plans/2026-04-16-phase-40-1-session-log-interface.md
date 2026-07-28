@@ -10,7 +10,7 @@ sources:
   - MEMORY.md — feedback_rollout-pointers-not-notes.md
 pointers:
   - "[[engine/archive/PHASE_40_PLAN]] — parent phase doc"
-  - "[[engine/archive/ROLLOUT_PLAN]] — step 9 of the spine"
+  - "[[engine/ROLLOUT_PLAN]] — step 9 of the spine"
   - "[[plans/TEMPLATE]] — shape this plan follows"
 ---
 

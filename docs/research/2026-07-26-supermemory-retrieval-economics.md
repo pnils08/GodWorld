@@ -13,7 +13,7 @@ sources:
   - https://supermemory.ai/docs/concepts/filtering — current official `AND`/`OR` metadata-filter grammar
   - Live read-only filter proof, 2026-07-27 — `bay-tribune` query with `source=edition-ingest`
 pointers:
-  - "[[../engine/archive/ROLLOUT_PLAN]] — pending-state home"
+  - "[[../engine/ROLLOUT_PLAN]] — pending-state home"
   - "[[index]] — register here, same commit"
   - "[[2026-07-19-headless-cron-newsroom-agentic-rag]] — sibling: the cheap-model retrieval eval that produced source-search"
 ---

@@ -7,7 +7,7 @@ tags: [research, architecture, models, orchestration, active]
 sources:
   - Mike-direct design conversation, S333 (2026-07-25) — no external source; internally-generated direction captured on Mike's "better served as a research.md" call
 pointers:
-  - "[[../engine/archive/ROLLOUT_PLAN]] — pending-state home (Watch List)"
+  - "[[../engine/ROLLOUT_PLAN]] — pending-state home (Watch List)"
   - "[[index]] — registered here, same commit"
   - "[[../MODEL_HIERARCHY]] — the doc this pivot would eventually rewrite; §8 subagent-cost rule was carved off this conversation and landed now"
 ---

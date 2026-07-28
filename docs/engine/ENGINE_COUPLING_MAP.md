@@ -10,9 +10,9 @@ sources:
   - "[[../plans/2026-05-31-compression-tag-triage]] (engine.31) — the dial substrate"
   - "[[../plans/2026-06-19-living-city-full-population-coverage]] (engine.38) — coverage + eligibility"
 pointers:
-  - "[[archive/ENGINE_MAP]] — execution-order function list (structural sibling)"
+  - "[[ENGINE_MAP]] — execution-order function list (structural sibling)"
   - "[[ENGINE_STUB_MAP]] — per-function ctx reads/writes (structural sibling)"
-  - "[[archive/ENGINE_TRUTH_MAP]] — per-file behavioral scaffold"
+  - "[[ENGINE_TRUTH_MAP]] — per-file behavioral scaffold"
   - "[[../index]] — registered there"
 ---
 

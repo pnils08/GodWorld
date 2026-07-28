@@ -8,7 +8,7 @@ sources:
   - scripts/godworld-mcp.py — existing MCP server (all 3 connectors already built)
   - claude-mem obs 27222 (S252) — MCP helper functions: supermemory / dashboard / disk
 pointers:
-  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout"
+  - "[[engine/ROLLOUT_PLAN]] — parent rollout"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — registered same commit"
 ---

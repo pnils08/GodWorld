@@ -5,7 +5,7 @@ updated: 2026-06-16
 type: plan
 tags: [media, engine, citizens, persona, architecture, draft]
 sources:
-  - docs/engine/archive/ROLLOUT_PLAN.md (new row — Tier-1 voice agents)
+  - docs/engine/ROLLOUT_PLAN.md (new row — Tier-1 voice agents)
   - docs/engine/archive/INSTITUTIONAL_VOICE_AGENTS.md (the four-file voice-agent pattern, S63+)
   - docs/plans/2026-06-04-mags-citizen-loop.md (research.14 — the live 24/7 citizen-loop substrate)
   - docs/plans/2026-05-31-autonomy-roadmap.md (research.9/12 — autonomy umbrella, Layer 3 citizen-autonomous)
@@ -13,7 +13,7 @@ sources:
   - scripts/buildVoiceWorkspaces.js (civic-hardcoded workspace builder — finding §Verified constraints)
   - scripts/mags-discord-bot.js (single-Mags-persona chat handler — finding §Verified constraints)
 pointers:
-  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout"
+  - "[[engine/ROLLOUT_PLAN]] — parent rollout"
   - "[[plans/2026-06-04-mags-citizen-loop]] — the 24/7 loop this composes with (do NOT duplicate)"
   - "[[plans/2026-05-31-autonomy-roadmap]] — umbrella; this is a Layer-3 instance, named-character flavor"
   - "[[engine/archive/INSTITUTIONAL_VOICE_AGENTS]] — the four-file persona pattern reused here"

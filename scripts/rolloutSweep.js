@@ -24,8 +24,8 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
-const ROLLOUT = path.join(ROOT, 'docs', 'engine', 'archive', 'ROLLOUT_PLAN.md');
-const ARCHIVE = path.join(ROOT, 'docs', 'engine', 'archive', 'ROLLOUT_ARCHIVE.md');
+const ROLLOUT = path.join(ROOT, 'docs', 'engine', 'ROLLOUT_PLAN.md');
+const ARCHIVE = path.join(ROOT, 'docs', 'engine', 'ROLLOUT_ARCHIVE.md');
 const STATE_TOKEN = ' | done-pending-archive | ';
 const ROW_ID = /^\|\s*([a-z][a-z-]*\.\d+[a-z]?)\s*\|/;
 const PASS_HEADER = /^## S(\d+) Archive Pass\b.*$/gm;

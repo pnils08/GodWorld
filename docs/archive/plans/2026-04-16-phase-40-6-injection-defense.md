@@ -12,7 +12,7 @@ sources:
   - /tmp/hermes-agent/agent/prompt_builder.py (lines 35-85 — regex scan)
 pointers:
   - "[[engine/archive/PHASE_40_PLAN]] — parent phase doc §40.6"
-  - "[[engine/archive/ROLLOUT_PLAN]] — step 9 of the spine"
+  - "[[engine/ROLLOUT_PLAN]] — step 9 of the spine"
   - "[[archive/plans/2026-04-16-phase-40-1-session-log-interface]] — sibling step-9 plan"
   - "[[plans/TEMPLATE]] — shape"
 ---

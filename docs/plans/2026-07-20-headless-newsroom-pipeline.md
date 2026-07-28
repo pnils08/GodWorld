@@ -11,7 +11,7 @@ sources:
   - "scripts/cron-desk-writer.js — writer-worker prototype, proven c101 sports S325"
   - ".claude/agents/source-search/SKILL.md — retrieval layer (S326); .claude/agents/rhea-morgan — canon gate"
 pointers:
-  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout"
+  - "[[engine/ROLLOUT_PLAN]] — parent rollout"
   - "[[2026-07-25-notebooklm-source-search-wiring]] — Task 7 headless-consumption verdict"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — registered same commit"

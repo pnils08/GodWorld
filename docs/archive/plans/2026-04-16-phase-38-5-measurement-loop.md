@@ -6,11 +6,11 @@ type: plan
 tags: [engine, complete]
 sources:
   - docs/engine/archive/PHASE_38_PLAN.md §8 (38.5 out-of-scope note) + §16.5 (downstream follow-ups)
-  - docs/engine/archive/ROLLOUT_PLAN.md §Phase 38 item 38.5 — "Measurement loop. Each ailment flagged gets a 'check next cycle' entry with specific fields to watch."
+  - docs/engine/ROLLOUT_PLAN.md §Phase 38 item 38.5 — "Measurement loop. Each ailment flagged gets a 'check next cycle' entry with specific fields to watch."
   - MEMORY.md — feedback_detector-framer-split.md (S146 pattern)
 pointers:
   - "[[engine/archive/PHASE_38_PLAN]] — parent phase doc (contains §§4, 14, 15, 16 enricher pattern this extends)"
-  - "[[engine/archive/ROLLOUT_PLAN]] — old spine step 8; splitting out now"
+  - "[[engine/ROLLOUT_PLAN]] — old spine step 8; splitting out now"
   - "[[archive/plans/2026-04-16-phase-38-6-skill-shrink]] — downstream skill edit that consumes this enricher's output"
   - "[[plans/TEMPLATE]] — shape this plan follows"
 ---

@@ -65,7 +65,7 @@ Triage and fixes route to **research-build** (skill / RULES / docs / canon edits
 
 **Your gap log is your research layer — and the ONLY place issues get logged.** Gap logs surfaced during a skill run land at `output/production_log_city_hall_c{XX}_*_gaps.md` per [[../../../docs/plans/GAP_LOG_TEMPLATE]]. That is this terminal's filing channel: issues, friction, observations during a run go in the gap log, nowhere else. **Never blind-log on ROLLOUT** — ROLLOUT is the shared map every terminal reads at boot; raw issues there tax everyone. Research-build triages the gap log into tracked rows next session.
 
-Doctrine every terminal follows: [[../../../docs/engine/archive/rollout-rules]] (§2 = the gap-log keystone). Per-terminal scope rule: [[../../../docs/adr/0005-rollout-plan-structure]] §Part 3.
+Doctrine every terminal follows: [[../../../docs/engine/rollout-rules]] (§2 = the gap-log keystone). Per-terminal scope rule: [[../../../docs/adr/0005-rollout-plan-structure]] §Part 3.
 
 ---
 
@@ -171,7 +171,7 @@ Doctrine every terminal follows: [[../../../docs/engine/archive/rollout-rules]] 
 | `docs/SUPERMEMORY.md` | Container architecture, search patterns | Shared |
 | `docs/SPREADSHEET.md` | Sheet tab reference | Engine/sheet terminal |
 | `docs/SIMULATION_LEDGER.md` | Citizen data reference | Engine/sheet terminal |
-| `docs/engine/archive/ROLLOUT_PLAN.md` | Project work, handoff tags | Research/build terminal |
+| `docs/engine/ROLLOUT_PLAN.md` | Project work, handoff tags | Research/build terminal |
 
 ---
 

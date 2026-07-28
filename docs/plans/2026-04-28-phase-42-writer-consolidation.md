@@ -12,7 +12,7 @@ sources:
   - phase10-persistence/persistenceExecutor.js (executor)
   - .claude/rules/engine.md (current exceptions list)
 pointers:
-  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout (ENGINE_REPAIR Row 8)"
+  - "[[engine/ROLLOUT_PLAN]] — parent rollout (ENGINE_REPAIR Row 8)"
   - "[[engine/archive/PHASE_42_INVENTORY]] — Phase 1 inventory consumed by this plan"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — registered in same commit"

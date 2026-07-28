@@ -14,7 +14,7 @@ sources:
   - docs/research/2026-07-06-citizen-loop-deepening.md — existing 24/7 loop and Discord findings
   - docs/plans/2026-05-31-autonomy-roadmap.md — citizen-autonomous Layer 3
 pointers:
-  - "[[../engine/archive/ROLLOUT_PLAN]] — pending-state home"
+  - "[[../engine/ROLLOUT_PLAN]] — pending-state home"
   - "[[index]] — register here, same commit"
   - "[[2026-07-04-voice-dial-sync-contract]] — live self-state contract; do not duplicate it here"
   - "[[2026-07-06-citizen-loop-deepening]] — wake/exchange substrate this extends"

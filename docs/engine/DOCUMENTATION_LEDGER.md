@@ -49,8 +49,8 @@
 |------|---------|------|------------|-----------|
 | `CLAUDE.md` | Zero layer — identity refs, work file index, rules index, session lifecycle | Boot | Manual (rare) | All |
 | `SESSION_CONTEXT.md` | Tools, infrastructure, last 5 sessions (under 300 lines). Engine versions + cascade deps moved to DOCUMENTATION_LEDGER S144. | Startup | `/session-end` Step 4 | P, D, X |
-| `docs/engine/archive/ROLLOUT_PLAN.md` | **Single source for all project work.** Next priorities, build phases, deferred items, watch list | On-Demand | `/session-end` Step 4 | P, D |
-| `docs/engine/archive/ROLLOUT_ARCHIVE.md` | Completed phase details (moved from ROLLOUT_PLAN when done) | On-Demand | Manual (when phases complete) | P |
+| `docs/engine/ROLLOUT_PLAN.md` | **Single source for all project work.** Next priorities, build phases, deferred items, watch list | On-Demand | `/session-end` Step 4 | P, D |
+| `docs/engine/ROLLOUT_ARCHIVE.md` | Completed phase details (moved from ROLLOUT_PLAN when done) | On-Demand | Manual (when phases complete) | P |
 | `README.md` | Project structure, 11-phase engine, tech stack, quick start | On-Demand | Manual (rare) | P, D |
 | `docs/reference/V3_ARCHITECTURE.md` | Technical contract — ctx shape, write-intents spec, phase order | On-Demand | Manual (rare) | D |
 | `docs/reference/DEPLOY.md` | Deployment guide (clasp vs git) | On-Demand | Manual (rare) | D |

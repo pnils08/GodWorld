@@ -10,7 +10,7 @@ sources:
   - scripts/linkCitizensToEmployers.js — the five-layer resolver
   - phase06-analysis/economicRippleEngine.js — already consumes careerSignals.businessDeltas + layoffs
 pointers:
-  - "[[../engine/archive/ROLLOUT_PLAN]] — pending-state home (engine.83, engine.84)"
+  - "[[../engine/ROLLOUT_PLAN]] — pending-state home (engine.83, engine.84)"
   - "[[index]] — register here, same commit"
   - "[[../plans/2026-07-26-employment-reconciliation]] — the repair plan this feeds"
 ---

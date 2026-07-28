@@ -30,7 +30,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
-const ROLLOUT = path.join(ROOT, 'docs', 'engine', 'archive', 'ROLLOUT_PLAN.md');
+const ROLLOUT = path.join(ROOT, 'docs', 'engine', 'ROLLOUT_PLAN.md');
 const DOCS = path.join(ROOT, 'docs');
 const STATES = new Set([
   'ready', 'in-progress', 'done-pending-archive', 'blocked', 'needs-info', 'wontfix', 'parked',
@@ -131,4 +131,4 @@ const planText = fs.readFileSync(planPath, 'utf8');
 fs.writeFileSync(planPath, insertStatusBlock(planText));   // relocate FIRST (lossless)
 rolloutLines[rowIdx] = newRow;
 fs.writeFileSync(ROLLOUT, rolloutLines.join('\n'));         // then slim the row
-console.log(`\nAPPLIED. Verify: git diff ${path.relative(ROOT, planPath)} docs/engine/archive/ROLLOUT_PLAN.md && node scripts/docLoopStatus.js --lint`);
+console.log(`\nAPPLIED. Verify: git diff ${path.relative(ROOT, planPath)} docs/engine/ROLLOUT_PLAN.md && node scripts/docLoopStatus.js --lint`);

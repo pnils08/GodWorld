@@ -11,7 +11,7 @@ sources:
   - docs/research4_1.md (bounded-memory shelf this extends)
   - docs/engine/archive/PHASE_39_PLAN.md (reviewer chain producing the reward signal this plan captures)
 pointers:
-  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout (entry under Other Ready Work)"
+  - "[[engine/ROLLOUT_PLAN]] — parent rollout (entry under Other Ready Work)"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — register in same commit"
   - "[[research4_1]] — bounded-memory research this plan operationalises"

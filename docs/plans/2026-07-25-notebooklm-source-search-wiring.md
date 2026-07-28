@@ -5,7 +5,7 @@ updated: 2026-07-27
 type: plan
 tags: [architecture, infrastructure, media, active]
 sources:
-  - docs/engine/archive/ROLLOUT_PLAN.md research.23
+  - docs/engine/ROLLOUT_PLAN.md research.23
   - docs/plans/2026-07-10-notebooklm-bridge-deploy.md
   - docs/research/2026-07-10-notebooklm-mcp.md
   - docs/research/2026-07-19-headless-cron-newsroom-agentic-rag.md
@@ -14,7 +14,7 @@ sources:
   - .claude/agents/source-search/SKILL.md (read-only control-plane consumer)
   - scripts/godworld-mcp.py
 pointers:
-  - "[[../engine/archive/ROLLOUT_PLAN]] — parent rollout, research.23"
+  - "[[../engine/ROLLOUT_PLAN]] — parent rollout, research.23"
   - "[[2026-07-10-notebooklm-bridge-deploy]] — live CLI, post-publish, and daily-news bridge"
   - "[[2026-07-20-headless-newsroom-pipeline]] — later headless consumer"
   - "[[../reference/notebookLM-CLI]] — operator guide and authority boundaries"

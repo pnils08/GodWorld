@@ -12,7 +12,7 @@ sources:
   - scripts/buildDeskPackets.js §Sports feeds — current-cycle selection and all-history fallback
   - docs/DASHBOARD.md — current dashboard surface and API inventory
 pointers:
-  - "[[../engine/archive/ROLLOUT_PLAN]] — pending-state home"
+  - "[[../engine/ROLLOUT_PLAN]] — pending-state home"
   - "[[index]] — register here, same commit"
   - "[[../plans/2026-07-05-game-night-connection-design]] — downstream sports-event propagation; not the entry-UI build"
 ---

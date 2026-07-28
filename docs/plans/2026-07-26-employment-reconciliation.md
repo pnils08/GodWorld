@@ -11,7 +11,7 @@ sources:
   - docs/canon/INSTITUTIONS.md §The Stack — real-world stack is by design; Civis Systems is the engine/sheet blanket
   - claude-mem S334 — Marbury (POP-00166) + Torres (POP-00057) repairs, the two proof cases
 pointers:
-  - "[[../engine/archive/ROLLOUT_PLAN]] — parent rollout (engine.83)"
+  - "[[../engine/ROLLOUT_PLAN]] — parent rollout (engine.83)"
   - "[[../canon/INSTITUTIONS]] — canon authority for entity names"
   - "[[../SIMULATION_LEDGER]] — column map"
   - "[[SCHEMA]] — doc conventions"
@@ -178,7 +178,7 @@ Practical consequence for every re-run: **`--fill-blanks-only`.** Fill what is e
 
 ### Task 9: Close out
 
-- **Files:** `docs/engine/archive/ROLLOUT_PLAN.md`, this plan
+- **Files:** `docs/engine/ROLLOUT_PLAN.md`, this plan
 - **Steps:**
   1. Full run: `node scripts/linkCitizensToEmployers.js --dry-run` → review → apply with the flag semantics Task 1 ruled.
   2. Re-scan: unmatched count, `SPORTS_OTHER` count, over-headcount businesses, roster-vs-ledger divergence. Record before/after in the Status log.

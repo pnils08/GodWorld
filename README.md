@@ -171,8 +171,8 @@ The docs layer is wiki-shaped (frontmatter + index) — see [docs/SCHEMA.md](doc
 | [GODWORLD_REFERENCE.md](docs/reference/GODWORLD_REFERENCE.md) | Complete system reference |
 | [V3_ARCHITECTURE.md](docs/reference/V3_ARCHITECTURE.md) | Technical design contract |
 | [BACKLOG.md](docs/plans/BACKLOG.md) | Designed-but-unbuilt phases (27.9 folk memory, 27.10 feedback loops, Phase 36/37, etc.) |
-| [ROLLOUT_PLAN.md](docs/engine/archive/ROLLOUT_PLAN.md) | Archived rollout plan — historical record of shipped work |
-| [ENGINE_MAP.md](docs/engine/archive/ENGINE_MAP.md) | Every function across all 11 phases (archived) |
+| [ROLLOUT_PLAN.md](docs/engine/ROLLOUT_PLAN.md) | Archived rollout plan — historical record of shipped work |
+| [ENGINE_MAP.md](docs/engine/ENGINE_MAP.md) | Every function across all 11 phases (archived) |
 | [EDITION_PIPELINE.md](docs/EDITION_PIPELINE.md) | Cycle Pulse pipeline: run-cycle → pre-flight → sift → write-edition → post-publish |
 | [DASHBOARD.md](docs/DASHBOARD.md) | Dashboard API and frontend reference |
 | [SIMULATION_LEDGER.md](docs/SIMULATION_LEDGER.md) | Citizen ledger schema and semantics |

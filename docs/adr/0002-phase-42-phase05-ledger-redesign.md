@@ -14,7 +14,7 @@ pointers:
   - "[[adr/0001-adopt-context-and-adrs]] — pattern source for this ADR"
   - "[[engine/archive/PHASE_42_PATTERNS]] — full spec, per-batch verification, before/after diffs"
   - "[[engine/archive/PHASE_42_INVENTORY]] — 37-file / 175-site classification"
-  - "[[engine/archive/ROLLOUT_PLAN]] §Data & Pipeline — active rollout entry"
+  - "[[engine/ROLLOUT_PLAN]] §Data & Pipeline — active rollout entry"
 ---
 
 # ADR-0002: Phase 42 §5.6 — phase05-ledger redesign via shared `ctx.ledger`
@@ -117,4 +117,4 @@ Leave the 11 direct-writers in place, document cohort B as a known bug, accept t
 - **Engine-sheet audit findings:** Supermemory `mags/2Lh8xsEHc6BMbBARM6mwHU`
 - **Verified amendments + final spec:** Supermemory `mags/hQE4rREEWBpS9aS1g3mQ3M`
 - **Implementation commits (S188):** `0e31e66`, `..6609c4a` (engine-sheet), `1a77e54` (research-build prerequisite-delete S185)
-- **ROLLOUT entry:** [[engine/archive/ROLLOUT_PLAN]] §Data & Pipeline — Phase 42
+- **ROLLOUT entry:** [[engine/ROLLOUT_PLAN]] §Data & Pipeline — Phase 42

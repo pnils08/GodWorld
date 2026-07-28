@@ -50,7 +50,7 @@ in order:
 7. `docs/OPERATIONS.md` — documented processes, schedules, and runbooks.
 8. `docs/EDITION_PIPELINE_DEEP_DISPATCH.md` — deep-dispatch pipeline reference.
 9. `docs/MODEL_HIERARCHY.md` — model responsibilities and Codex boundaries.
-10. `docs/engine/archive/ROLLOUT_PLAN.md` — canonical open-work tracker.
+10. `docs/engine/ROLLOUT_PLAN.md` — canonical open-work tracker.
 
 Then run:
 
@@ -186,7 +186,7 @@ state files without explicit approval.
 
 For durable research, non-trivial implementation, or cross-session work, follow
 the repository's canonical filing loop in
-`docs/engine/archive/rollout-rules.md`:
+`docs/engine/rollout-rules.md`:
 
 ```text
 research → plan → rollout → archive
@@ -206,7 +206,7 @@ Keep the layers distinct:
   and pointers; register it in `docs/index.md`. An adopted research verdict
   points forward to the plan, and the plan points back to its research basis.
 - **Rollout** is the clean open-work tracker at
-  `docs/engine/archive/ROLLOUT_PLAN.md`. Each row contains only an ID, one
+  `docs/engine/ROLLOUT_PLAN.md`. Each row contains only an ID, one
   actionable summary, lifecycle state, builder-terminal owner, and pointers to
   the owning plan or plans. Do not place research prose, implementation detail,
   handoff instructions, or raw issues in a rollout row. The row is
@@ -244,7 +244,7 @@ Rules:
   notes blob: relocate the narrative to the owning plan's `## Status log`
   (`scripts/rolloutDrain.js`, dry-run by default) or, when the row has no plan
   doc, to the relocated-row section of the owning parent spec such as
-  `docs/engine/archive/ENGINE_REPAIR.md`. Relocate the text; never delete it.
+  `docs/engine/ENGINE_REPAIR.md`. Relocate the text; never delete it.
 - Verify before calling a row filed:
 
 ```bash

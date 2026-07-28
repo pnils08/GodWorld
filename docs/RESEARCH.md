@@ -12,7 +12,7 @@ Don't duplicate — read these when you need to understand a system layer:
 
 | System | Doc | Summary |
 |--------|-----|---------|
-| Simulation engine | `docs/engine/archive/ENGINE_MAP.md` | 11-phase deterministic engine, ~170 .js files (clasp deploys subset), Google Apps Script |
+| Simulation engine | `docs/engine/ENGINE_MAP.md` | 11-phase deterministic engine, ~170 .js files (clasp deploys subset), Google Apps Script |
 | Citizen data | `docs/SIMULATION_LEDGER.md` | ~837 rows post-S185 trim, 47 columns A-AU, 4 ClockModes (ENGINE/GAME/CIVIC/MEDIA) |
 | Spreadsheet | `docs/SPREADSHEET.md` | 53+ visible tabs (see schemas/SCHEMA_HEADERS.md for authoritative count), data flow, dead tabs |
 | Newsroom | `docs/EDITION_PIPELINE.md` | Pipeline v2 (S134, enhanced through S165): 5 terminals, 9 steps, 9 individual reporters, story-driven layout, alternate-start formats (dispatch/interview/supplemental) |
@@ -621,7 +621,7 @@ This is the difference between "Marcus Webb reviewed the Stabilization Fund appl
 
 ## Ready for Rollout — RETIRED (S250)
 
-This lane was pending-state living inside a research doc — the anti-pattern the S250 doc-loop consolidation kills. **Pending-state now lives only in [[engine/archive/ROLLOUT_PLAN]]**, routed by a research file's verdict (`adopt` → a `ready` row; `watch` → the Watch List with a trigger; `take-nothing` → no row). It was empty at retirement, so nothing moved. See [[research/TEMPLATE]] §"verdict, never state".
+This lane was pending-state living inside a research doc — the anti-pattern the S250 doc-loop consolidation kills. **Pending-state now lives only in [[engine/ROLLOUT_PLAN]]**, routed by a research file's verdict (`adopt` → a `ready` row; `watch` → the Watch List with a trigger; `take-nothing` → no row). It was empty at retirement, so nothing moved. See [[research/TEMPLATE]] §"verdict, never state".
 
 ---
 
@@ -2030,7 +2030,7 @@ The `Task` tool today spawns Claude subagents that each produce one reply and ex
 
 **Rollout:** LOW pointer in Infrastructure. Test before build; build after Phase 39 + Phase 40 close and persistent-process infra decision is made.
 
-**Status:** Research-landscape entry. Rollout LOW pointer present in [[engine/archive/ROLLOUT_PLAN]] Infrastructure section. Solo adoptability check completed S172 — not adoptable, path (a) build-our-own locked as leading direction. No plan file (deferred until preconditions close and harness design needs operationalizing). Interim Task-tool PoC viable without plan file.
+**Status:** Research-landscape entry. Rollout LOW pointer present in [[engine/ROLLOUT_PLAN]] Infrastructure section. Solo adoptability check completed S172 — not adoptable, path (a) build-our-own locked as leading direction. No plan file (deferred until preconditions close and harness design needs operationalizing). Interim Task-tool PoC viable without plan file.
 
 ---
 

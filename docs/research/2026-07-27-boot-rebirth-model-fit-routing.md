@@ -11,7 +11,7 @@ sources:
   - .claude/rules/{research-build,engine,civic,newsroom}.md + the four TERMINAL.md files
 pointers:
   - "[[2026-07-25-instance-unification-model-triage]] — the parent pivot; this file is its enforcement half"
-  - "[[../engine/archive/ROLLOUT_PLAN]] — pending-state home"
+  - "[[../engine/ROLLOUT_PLAN]] — pending-state home"
   - "[[index]] — register here, same commit"
 ---
 

@@ -6,10 +6,10 @@ type: plan
 tags: [engine, citizens, economy, active]
 sources:
   - docs/research/2026-07-27-employment-as-a-living-system.md (research basis)
-  - docs/engine/archive/ROLLOUT_PLAN.md — engine.83, engine.84
+  - docs/engine/ROLLOUT_PLAN.md — engine.83, engine.84
   - Mike-direct S335 — businesses carry true employment numbers; citizens born into tracked jobs; kids at 18 take these jobs; media-invented businesses become canon; headcount drops fire people
 pointers:
-  - "[[../engine/archive/ROLLOUT_PLAN]] — parent rollout (engine.83)"
+  - "[[../engine/ROLLOUT_PLAN]] — parent rollout (engine.83)"
   - "[[../research/2026-07-27-employment-as-a-living-system]] — research basis; the rules and hazards live there"
   - "[[2026-07-26-employment-reconciliation]] — the static repair this builds on"
   - "[[SCHEMA]] — doc conventions"

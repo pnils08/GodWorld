@@ -10,13 +10,13 @@ sources:
   - "research.9 inter-agent conversation harness ([[../RESEARCH]] §S172, Solo MCP / Aaron Francis) — path-(a) build-our-own approved S172"
   - "scripts/spacemolt-miner.js — existence-proof autonomous-agent-loop already in-repo (pm2-managed)"
 pointers:
-  - "[[engine/archive/ROLLOUT_PLAN]] — parent rollout row research.12"
+  - "[[engine/ROLLOUT_PLAN]] — parent rollout row research.12"
   - "[[index]] — register here in same commit"
   - "[[ARCHITECTURE_VISION]] — Jarvis + persistent-sessions north star (the continuous-running infrastructure half)"
   - "[[PRODUCT_VISION]] — civic layer / desk scope / game layer / porosity (the WHAT)"
   - "project_city-for-bots-pivot (memory, S114) — the product framing: AI bots inhabit a city, AI newsroom covers them; moat SpaceMolt lacks"
   - "project_gpu-is-go-live-gate (memory) — hardware is the scale threshold between manual and autonomous"
-  - "[[plans/2026-05-30-citizen-lifecycle-fame-system]] (engine.29) + [[engine/archive/LEDGER_REPAIR_HOUSEHOLDS]] (engine.5) — deterministic continuous citizen life (the cheap substrate)"
+  - "[[plans/2026-05-30-citizen-lifecycle-fame-system]] (engine.29) + [[engine/LEDGER_REPAIR_HOUSEHOLDS]] (engine.5) — deterministic continuous citizen life (the cheap substrate)"
   - "[[canon/CANON_RULES]] + [[canon/INSTITUTIONS]] — the scaffold that must hold harder as horizon grows (§Why This Exists carries the S172 drift-event history)"
   - "[[archive/plans/2026-05-28-gemini-offload-pattern]] (governance.21) — adjacent token-budget lever, not part of autonomy"
   - "[[../RESEARCH]] §S248 — SkillOpt (Microsoft text-space skill optimizer) — the Layer-2 learning mechanism; scorer (finalArbiter.js) already exists, gap is held-out set + optimizer harness + rollout-cost ceiling"
@@ -48,7 +48,7 @@ pointers:
 
 The ~1,366 ledger citizens move every cycle by deterministic engine code — no LLM per citizen. Aging, marriage, birth, promotion, fame rise/decay, death-by-age. The world changes on its own; the newsroom has emergent material to cover before any citizen is a live agent.
 
-- **Status:** IN FLIGHT — engine.5 (`[[engine/archive/LEDGER_REPAIR_HOUSEHOLDS]]`) + engine.29 (`[[plans/2026-05-30-citizen-lifecycle-fame-system]]`). Track 1 of engine.29 (milestones mutate structural state) shipped S248, deploy held for C96.
+- **Status:** IN FLIGHT — engine.5 (`[[engine/LEDGER_REPAIR_HOUSEHOLDS]]`) + engine.29 (`[[plans/2026-05-30-citizen-lifecycle-fame-system]]`). Track 1 of engine.29 (milestones mutate structural state) shipped S248, deploy held for C96.
 - **Gate to next:** none — this is foundational and proceeds on its own rows. Most of the "autonomy feel" lands here cheaply.
 - **Why first:** delivers continuous-world motion without tripping the drift wire Emergence World + C92 both document. Canon scaffold still sits between model and world.
 

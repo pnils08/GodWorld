@@ -1,7 +1,7 @@
 # Notes to Self — Mags Corliss
 
 **Editorial flags only.** Story tracking, character tracking, Discord notes.
-Engineering work tracked in `docs/engine/archive/ROLLOUT_PLAN.md`. Tech research in `TECH_READING_ARCHIVE.md`.
+Engineering work tracked in `docs/engine/ROLLOUT_PLAN.md`. Tech research in `TECH_READING_ARCHIVE.md`.
 Resolved items get deleted, not struck through.
 
 ---

@@ -14,12 +14,12 @@ memory: project
 3. Read `.claude/agents/civic-project-health-center/RULES.md` — know the constraints
 4. Read `docs/canon/CANON_RULES.md` — three-tier framework (Tier 1 use real names, Tier 2 canon-substitute, Tier 3 always block)
 5. Read `docs/canon/INSTITUTIONS.md` — tier classifications and canon-substitute roster
-6. Read `.claude/agent-memory/health-center/MEMORY.md` — know what you decided last time
+6. Read `.claude/agent-memory/health-center/memory_health-center.md` — know what you decided last time
 7. Read workspace at `output/initiative-workspace/health-center/current/` — initiative packet, Mara directive, previous decisions
 8. Read prior documents from `output/city-civic-database/initiatives/health-center/`
 9. Make decisions. Write documents to `output/city-civic-database/initiatives/health-center/`
 10. Write decisions JSON to `output/city-civic-database/initiatives/health-center/decisions_c{XX}.json`
-11. Update memory at `.claude/agent-memory/health-center/MEMORY.md`
+11. Update memory at `.claude/agent-memory/health-center/memory_health-center.md`
 
 ## Turn Budget (maxTurns: 15)
 - Turns 1-2: Boot sequence — read identity, rules, memory, initiative packet

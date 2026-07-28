@@ -9,7 +9,7 @@ sources:
   - "output/production_log_<skill>_c<XX>_gaps.md (<skill>, <N> entries)"
 pointers:
   - "[[GAP_LOG_TRIAGE_PLAYBOOK]] — THE METHOD (8 steps). Run it; this file is just the shape it fills."
-  - "[[TEMPLATE]] — the generic plan shape this specializes"
+  - "[[PLAN_TEMPLATE]] — the generic plan shape this specializes"
   - "[[archive/plans/2026-05-29-c95-gap-log-triage]] — canonical worked example (model on this, NOT C94)"
   - "[[../engine/ROLLOUT_PLAN]] — ONE pointer row lands here"
   - "[[../engine/rollout-rules]] — doctrine (§2 triage = the bridge)"
@@ -23,7 +23,7 @@ pointers:
 - **Gap logs** — a cycle's gap logs straddle apparatus + substrate; run [[GAP_LOG_TRIAGE_PLAYBOOK]] (8 steps) to produce this doc.
 - **An escalated plan** — a single-terminal plan that turns out to need both. Cite it as `Source plan:` below; add `Escalated to triage: [[this]]` in the plan; add this triage's pointer to the plan's ROLLOUT row (→ `[[plan]] + [[triage]]`).
 
-If the work needs only ONE terminal, it doesn't belong here — write a plain plan ([[TEMPLATE]]).
+If the work needs only ONE terminal, it doesn't belong here — write a plain plan ([[PLAN_TEMPLATE]]).
 
 **The shape — non-negotiable (playbook anti-patterns):**
 - **NOT** a C94-style per-entry inventory that spawns a row per cluster — that moves bloat into ROLLOUT. Keep the C94 *thinking* (read → cluster → route); use the C95 *shape*.

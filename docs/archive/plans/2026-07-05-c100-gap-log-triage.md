@@ -10,7 +10,7 @@ sources:
   - "output/production_log_run_cycle_c100_gaps.md (run-cycle mechanical + judgment + all LEGs: G-EC/G-PREP/G-R/G-S/G-W, 34+11 entries)"
 pointers:
   - "[[GAP_LOG_TRIAGE_PLAYBOOK]] — THE METHOD (8 steps)"
-  - "[[TEMPLATE]] — generic plan shape this specializes"
+  - "[[plans/PLAN_TEMPLATE]] — generic plan shape this specializes"
   - "[[archive/plans/2026-05-29-c95-gap-log-triage]] — canonical worked example"
   - "[[../engine/ROLLOUT_PLAN]] — governance.46 pointer row lands here"
 ---

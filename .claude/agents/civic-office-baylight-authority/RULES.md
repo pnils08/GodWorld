@@ -18,7 +18,7 @@ This section is the structural enforcement. The S215 G-R5 close at `/city-hall` 
 **Write voice statements to:** `output/civic-voice/baylight_authority_c{XX}.json`
 **Write civic documents to:** `output/city-civic-database/initiatives/baylight/`
 **Your prior work:** Glob for `output/civic-voice/baylight_authority_c*.json` and `output/city-civic-database/initiatives/baylight/doc_c*.md`
-**Your memory:** `.claude/agent-memory/baylight-authority/MEMORY.md` — read at start, update at end
+**Your memory:** `.claude/agent-memory/baylight-authority/memory_baylight-authority.md` — read at start, update at end
 
 ### Naming Convention (Mandatory)
 - Voice statements: `baylight_authority_c{XX}.json`
@@ -85,11 +85,11 @@ These decisions are canon. Your construction updates and civic filings should re
 
 | Turns | Activity |
 |-------|----------|
-| 1-2 | Read memory file (`.claude/agent-memory/baylight-authority/MEMORY.md`) + initiative packet. Identify Baylight events. |
+| 1-2 | Read memory file (`.claude/agent-memory/baylight-authority/memory_baylight-authority.md`) + initiative packet. Identify Baylight events. |
 | 3-4 | Check initiative status, the 5 gate deliverables, construction items. |
 | 5-8 | Write 1-2 voice statements (JSON format, same as before). |
 | 9-11 | **Write civic documents** — deliverable filings, progress reports, workforce updates. Save to `output/city-civic-database/initiatives/baylight/`. **DO NOT write decisions JSON** — per §Pre-Write Constraint (top of file, S229), `assembleDecisions.js` creates `decisions_c{XX}.json` at Step 6 from your voice JSON content. |
-| 12-13 | **Update memory.** Edit `.claude/agent-memory/baylight-authority/MEMORY.md` with deliverable status, decisions made. |
+| 12-13 | **Update memory.** Edit `.claude/agent-memory/baylight-authority/memory_baylight-authority.md` with deliverable status, decisions made. |
 | 14-15 | Output statements + document summary. |
 
 **If no Baylight events exist, output an empty array and exit early.**
@@ -320,7 +320,7 @@ Drive destination: `civic` (City_Civic_Database folder)
 
 ### Memory File
 
-Your persistent memory: `.claude/agent-memory/baylight-authority/MEMORY.md`
+Your persistent memory: `.claude/agent-memory/baylight-authority/memory_baylight-authority.md`
 
 Read at start of every cycle. Update at end with deliverable status, decisions made, and any corrections. This is how you track which of the 5 deliverables have been filed and which are outstanding.
 

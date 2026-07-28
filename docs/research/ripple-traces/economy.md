@@ -5,14 +5,14 @@ type: research
 tags: [engine, ripples, attribution, economy, trace, reference]
 pointers:
   - "[[../2026-07-04-ripple-attribution-trace]] — synthesis doc (findings E1–E6 derive from this trace)"
-  - "[[TEMPLATE]] — the trace template this instantiates"
+  - "[[RIPPLE_TRACE_TEMPLATE]] — the trace template this instantiates"
 ---
 
 # Ripple Trace: ECONOMIC state shifts
 
 > Raw S291 trace, preserved verbatim as reference. These documents are impossible to
 > reconstruct without this level of detail (Mike-direct S291). File future domain traces
-> in this folder using [[TEMPLATE]].
+> in this folder using [[RIPPLE_TRACE_TEMPLATE]].
 
 **Execution order (all Phase 6 except gentrification/migration in Phase 5):** `runCareerEngine` (P5) → `processGentrification_` (P5) → `processMigrationTracking_` (P5) → `runEconomicRippleEngine_` (P6) → `applyMigrationDrift_` (P6) → `applyShockMonitor_` (P6) → `saveV3NeighborhoodMap_`/`v3NeighborhoodWriter` (P8/P10) → `finalizeCycleState` (P9). Confirmed by file headers (`economicRippleEngine.js:30-33`, `applyMigrationDrift.js:35-37`).
 

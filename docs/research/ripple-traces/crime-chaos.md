@@ -5,7 +5,7 @@ type: research
 tags: [engine, ripples, attribution, crime, chaos, trace, reference]
 pointers:
   - "[[../2026-07-04-ripple-attribution-trace]] — synthesis doc (findings K1–K5 derive from this trace)"
-  - "[[TEMPLATE]] — the trace template this instantiates"
+  - "[[RIPPLE_TRACE_TEMPLATE]] — the trace template this instantiates"
 ---
 
 # Ripple Trace: CRIME / CHAOS

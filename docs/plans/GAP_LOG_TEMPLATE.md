@@ -6,11 +6,11 @@ type: reference
 tags: [architecture, infrastructure, template, active]
 sources:
   - S212 grilling session (Mike) — "gap logs are sidecars to heavy skill terminals (civic + media), they catch inefficiency and gaps in the skills"
-  - "[[TEMPLATE]] — sibling document-shape template (plans)"
+  - "[[PLAN_TEMPLATE]] — sibling document-shape template (plans)"
   - "[[../adr/0005-rollout-plan-structure]] — gap logs are pointer destinations for pipeline.* / civic.* ROLLOUT entries"
   - "[[../adr/0004-skill-bag-naming-principle]] — civic + media are generator terminals; gap logs are the evaluation pass"
 pointers:
-  - "[[TEMPLATE]] — plan template (sibling)"
+  - "[[PLAN_TEMPLATE]] — plan template (sibling)"
   - "[[GAP_LOG_TRIAGE_PLAYBOOK]] — project-level method: how a cycle's gap logs get triaged into a phased two-track plan (this template is the single-log input to that method)"
   - "[[../engine/ROLLOUT_PLAN]] §How to add work — gap logs reference back from ROLLOUT rows"
   - "[[../index]] — register new gap log MD entry in same commit"
@@ -168,7 +168,7 @@ When promoting: create a new ROLLOUT row in the appropriate group (`pipeline.<n>
 
 ### Subagent-safety rule
 
-Same as [[TEMPLATE]] (plans): cite paths, not recall. Reference commits + scripts + files that exist. A fresh session reading the gap log should be able to act on a HIGH-severity entry without reconstructing prior context.
+Same as [[PLAN_TEMPLATE]] (plans): cite paths, not recall. Reference commits + scripts + files that exist. A fresh session reading the gap log should be able to act on a HIGH-severity entry without reconstructing prior context.
 
 ### Sidecar discipline
 
@@ -180,7 +180,7 @@ Gap logs are read-write artifacts during the session that produced them. After s
 
 Gap logs serve a different function than plans:
 
-- **Plans** ([[TEMPLATE]]) — designed work, forward-looking, task-list with verification steps. Read by execution sessions.
+- **Plans** ([[PLAN_TEMPLATE]]) — designed work, forward-looking, task-list with verification steps. Read by execution sessions.
 - **Gap logs** (this template) — observed friction, backward-looking from a skill run, inventory of sub-issues. Read by triage sessions deciding what to promote.
 
 Both are sidecar artifacts to the heavy work:

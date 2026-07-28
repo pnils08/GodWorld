@@ -22,8 +22,8 @@ sources:
 pointers:
   - "[[GAP_LOG_TRIAGE_PLAYBOOK]] — how this kind of plan is built (the method)"
   - "[[../engine/ROLLOUT_PLAN]] — single pointer row; this plan carries detail + tracking"
-  - "[[GAP_LOG_TEMPLATE]] — shape of the source gap logs"
-  - "[[TEMPLATE]] — plan shape"
+  - "[[plans/GAP_LOG_TEMPLATE]] — shape of the source gap logs"
+  - "[[plans/PLAN_TEMPLATE]] — plan shape"
   - "[[../index]] — registered same commit"
   - "[[2026-05-22-engine-regulatory-friction]] — sub-plan pointed at by ES-4"
   - "[[2026-05-22-sift-v2]] — sub-plan cross-linked by RB-2"
@@ -34,7 +34,7 @@ pointers:
 
 **Goal:** Close the ~80 gaps the C95 production run logged across 12 skills, executed by two terminals (research-build = apparatus, engine-sheet = substrate) working their own phases without re-reading each other's work, with ROLLOUT carrying one pointer row and this plan carrying all detail + per-phase tracking.
 
-**Architecture:** Every C95 skill run filed a sidecar gap log ([[GAP_LOG_TEMPLATE]]). This plan reads all 12, clusters the gaps by root cause into 11 themes (§Cluster Map), and routes each theme to the terminal whose expertise owns the fix — research-build for skill text / agent RULES / docs / rubrics / canon / boot architecture; engine-sheet for engine code / scripts / parser / auditor / sheets. Themes that split across both terminals get a task in each track, cross-linked. Correlated open ROLLOUT rows are folded in by reference (forward task only, never backward history) so each executing instance has one load-out. The plan supersedes the C94 *artifact* (inventory doc + 14 rows) with a phased two-track shape per Mike's S243 directive: "work completed per plan.md and summarized to rollout … 2 terminals carry out the work … keep 2 instances more aligned with the work of their expertise."
+**Architecture:** Every C95 skill run filed a sidecar gap log ([[plans/GAP_LOG_TEMPLATE]]). This plan reads all 12, clusters the gaps by root cause into 11 themes (§Cluster Map), and routes each theme to the terminal whose expertise owns the fix — research-build for skill text / agent RULES / docs / rubrics / canon / boot architecture; engine-sheet for engine code / scripts / parser / auditor / sheets. Themes that split across both terminals get a task in each track, cross-linked. Correlated open ROLLOUT rows are folded in by reference (forward task only, never backward history) so each executing instance has one load-out. The plan supersedes the C94 *artifact* (inventory doc + 14 rows) with a phased two-track shape per Mike's S243 directive: "work completed per plan.md and summarized to rollout … 2 terminals carry out the work … keep 2 instances more aligned with the work of their expertise."
 
 **Terminal:** research-build (Track A) + engine-sheet (Track B). Research-build owns this plan + the single ROLLOUT row + the session-end summarization cadence.
 

@@ -12,7 +12,7 @@ pointers:
   - "[[ROLLOUT_PLAN]] — the tracker these rules govern"
   - "[[ROLLOUT_ARCHIVE]] — cold storage; sweep destination"
   - "[[../adr/0005-rollout-plan-structure]] — full rationale + alternatives considered"
-  - "[[../plans/TEMPLATE]] — plan-file shape"
+  - "[[../plans/PLAN_TEMPLATE]] — plan-file shape"
   - "[[../plans/2026-06-01-rollout-v2-migration]] — governance.30, the migration that stands up v2 under these rules"
   - "scripts/rolloutSweep.js + scripts/docLoopStatus.js — the maintenance layer"
 ---
@@ -50,8 +50,8 @@ Every layer has a template and a fixed home. Copy the template; save to the path
 
 | Layer | Template | Saves to | Archives to |
 |-------|----------|----------|-------------|
-| **Research** | [[../research/TEMPLATE]] | `docs/research/YYYY-MM-DD-<topic>.md` | **never** — standing library, accretes applications |
-| **Plan** | [[../plans/TEMPLATE]] | `docs/plans/YYYY-MM-DD-<topic>.md` | `docs/archive/plans/` when fully shipped (repoint inbound links — §6) |
+| **Research** | [[../research/RESEARCH_TEMPLATE]] | `docs/research/YYYY-MM-DD-<topic>.md` | **never** — standing library, accretes applications |
+| **Plan** | [[../plans/PLAN_TEMPLATE]] | `docs/plans/YYYY-MM-DD-<topic>.md` | `docs/archive/plans/` when fully shipped (repoint inbound links — §6) |
 | **Triage** (multi-terminal handoff) | [[../plans/GAP_TRIAGE_TEMPLATE]] (shape) + [[../plans/GAP_LOG_TRIAGE_PLAYBOOK]] (method) | `docs/plans/YYYY-MM-DD-<topic>-triage.md` (gap-log form: `…-c<XX>-gap-log-triage.md`) | `docs/archive/plans/` once its row is filed |
 | **Production gap log** (civic/media) | [[../plans/GAP_LOG_TEMPLATE]] + [[../media/production_log_template]] | `output/production_log_<skill>_c<XX>_gaps.md` (+ unified `output/production_log_c<XX>.md`) | stays in `output/` — cycle artifact, not archived |
 | **Rollout** (tracker) | this doctrine | `docs/engine/ROLLOUT_PLAN.md` | rows → [[ROLLOUT_ARCHIVE]] via `scripts/rolloutSweep.js` |
@@ -70,7 +70,7 @@ The output is one plan + one row — **not** a per-gap inventory that sprawls RO
 
 ### Filing rules
 
-- **Research notes → research files.** Evaluations, paper-mining, what's-true / what-are-the-options → `docs/research/YYYY-MM-DD-<topic>.md` (per [[../research/TEMPLATE]]). A research file carries a verdict (`adopt` / `watch` / `take-nothing`), not a rollout state.
+- **Research notes → research files.** Evaluations, paper-mining, what's-true / what-are-the-options → `docs/research/YYYY-MM-DD-<topic>.md` (per [[../research/RESEARCH_TEMPLATE]]). A research file carries a verdict (`adopt` / `watch` / `take-nothing`), not a rollout state.
 
 - **Skill-terminal issues during a run → the production gap log. NOT rollout.** Civic and media keep a per-cycle `output/production_log_..._gaps.md`. That gap log is their research layer — it is where issues, friction, and observations get logged during a skill run. **Do not blind-log issues onto rollout.** Rollout is the shared map every terminal reads at boot; raw issues there tax everyone. The gap log is local and cheap; that's where it goes.
   - An issue only reaches rollout when it is **promoted** to tracked, actionable work — and the promoted row is a clean one-liner that *points at the gap log*, it does not reproduce the issue text.
@@ -128,9 +128,9 @@ State answers "is this pickable right now"; terminal answers "by whom." They are
 4. Set state (§3) — typically `ready`, or `needs-info` if gated.
 5. Set terminal — **builder terminals only**: `engine-sheet` (code / sheets / scripts) or `research-build` (skill / RULES / docs / ADRs / triage). Slash-separated for cross-builder work. **Never `media` or `civic`** — those are generator spaces (run skills, keep gap logs, produce artifacts; they don't carry routed rows). See ADR-0005 §Part 3.
 6. **Identify or create the pointer doc:**
-   - **Designed work** → copy [[../plans/TEMPLATE]] to `docs/plans/YYYY-MM-DD-<topic>.md`; register in [[../index]] same commit (S147 inbound-link rule).
+   - **Designed work** → copy [[../plans/PLAN_TEMPLATE]] to `docs/plans/YYYY-MM-DD-<topic>.md`; register in [[../index]] same commit (S147 inbound-link rule).
    - **In-flight observations** → existing gap log (`output/production_log_..._gaps.md`).
-   - **Evaluations** → `docs/research/YYYY-MM-DD-<topic>.md` (per [[../research/TEMPLATE]]).
+   - **Evaluations** → `docs/research/YYYY-MM-DD-<topic>.md` (per [[../research/RESEARCH_TEMPLATE]]).
    - **Architectural decisions** → next ADR (follow ADR-0001 / 0004 / 0005 shape).
    - **Engine work** → existing parent spec ([[engine/archive/PHASE_42_PATTERNS]], [[ENGINE_REPAIR]] row).
 7. Add the row to the appropriate group table in §Open Work.

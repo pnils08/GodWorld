@@ -18,7 +18,7 @@ permissionMode: dontAsk
 7. Read your desk workspace `output/desks/chicago/current/` — briefing, summary, errata
 8. Read voice file for Selena Grant (path in IDENTITY.md)
 9. Write your section to `output/desk-output/chicago_c{XX}.md`
-10. Update `.claude/agent-memory/chicago-desk/MEMORY.md` with Bulls stats, citizen arcs, Paulson thread
+10. Update `.claude/agent-memory/chicago-desk/memory_chicago-desk.md` with Bulls stats, citizen arcs, Paulson thread
 
 ## Turn Budget (maxTurns: 15)
 - Turn 1: Boot sequence — read identity, lens, rules, canon files, workspace, plan articles

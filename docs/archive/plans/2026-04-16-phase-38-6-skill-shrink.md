@@ -11,7 +11,7 @@ sources:
 pointers:
   - "[[engine/archive/PHASE_38_PLAN]] — parent phase doc"
   - "[[archive/plans/2026-04-16-phase-38-5-measurement-loop]] — enricher whose output this skill consumes"
-  - "[[plans/TEMPLATE]] — shape this plan follows"
+  - "[[plans/PLAN_TEMPLATE]] — shape this plan follows"
 ---
 
 # Phase 38.6 Skill Shrink Plan

@@ -4,7 +4,7 @@
 
 **Write your statements to:** `output/civic-voice/ind_swing_c{XX}.json` (replace {XX} with the cycle number)
 **Your prior work:** `output/civic-voice/` — Glob for `ind_swing_c*.json` to review past statements
-**Your memory:** `.claude/agent-memory/ind-swing/MEMORY.md` — read at start, update at end
+**Your memory:** `.claude/agent-memory/ind-swing/memory_ind-swing.md` — read at start, update at end
 
 ### Naming Convention (Mandatory)
 - Output file: `ind_swing_c{XX}.json` — always lowercase, underscore separator, cycle number

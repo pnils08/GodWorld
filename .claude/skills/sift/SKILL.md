@@ -19,7 +19,7 @@ v2.0 inverts /sift v1.x's city-hall-paper load-out to a reporter-agency model. T
 2. **Cadence cap: ONE slate variant per session.** Step 6 emits the slate ONCE; on rejection, surface rejection-shape question to Mike BEFORE re-propose. Hard stop on variant 2. Closes G-S5 (5-variant slate loops).
 3. **Six-decision triage vocabulary.** Step 5 uses [[../../../docs/media/sift_triage_vocabulary|sift_triage_vocabulary]]'s six decisions (`promote` / `publish-as-baseline` / `suppress` / `fold` / `covered-by-feature` / `defer-to-supplemental`) instead of the v1 three-decision set. Closes G-S13 (triage vocabulary gap).
 4. **Per-slot briefs + dispatch.json.** One brief per article slot at `output/reporters/{slug}/c{XX}_{SLOT}_brief.md` per [[../../../docs/media/brief_template_v2|brief_template_v2]]; `output/dispatch_c{XX}.json` emits per [[../../../docs/media/dispatch_schema|dispatch_schema]]. Closes G-W30 (dispatch.json not emitted) + G-W31 (multi-slot brief collision) + G-PR2 (untitled-title break).
-5. **Letters as candidate pool with rest-cycle pre-filter.** Step 10 emits `output/letters/c{XX}_candidates.md` filtered against `.claude/agent-memory/letters-desk/MEMORY.md §Rest Cycle Tracking`. Letters-desk LENS owns final selection; /write-edition Step 3.5b regenerates from compiled edition. Closes G-W33 + G-W39.
+5. **Letters as candidate pool with rest-cycle pre-filter.** Step 10 emits `output/letters/c{XX}_candidates.md` filtered against `.claude/agent-memory/letters-desk/memory_letters-desk.md §Rest Cycle Tracking`. Letters-desk LENS owns final selection; /write-edition Step 3.5b regenerates from compiled edition. Closes G-W33 + G-W39.
 
 v1.x companion files: [[../../../docs/media/brief_template|brief_template]] (v1) carries a DEPRECATED banner; stays in tree until v2.0 SKILL.md (this file) goes live, then archives per [[../../../docs/SCHEMA|SCHEMA]] §8.
 
@@ -188,7 +188,7 @@ Mandatory pre-extraction lookups. Skipping this step = silo'd story selection th
 **Additional canon surfaces:**
 - `docs/media/CITIZEN_NARRATIVE_MEMORY.md` (Tier-1 arc tracking).
 - `docs/media/CITIZENS_BY_ARTICLE.md` (citizen → coverage history).
-- `.claude/agent-memory/letters-desk/MEMORY.md §Rest Cycle Tracking` (PRELOAD for Step 10 — letters candidate pool needs rest-cycle filter).
+- `.claude/agent-memory/letters-desk/memory_letters-desk.md §Rest Cycle Tracking` (PRELOAD for Step 10 — letters candidate pool needs rest-cycle filter).
 
 **Emit:** `output/sift_canon_archive_log_c{XX}.json` — record of which queries ran + which NEWSROOM_MEMORY sections were read (line ranges). This is the verification artifact for Step 11.
 
@@ -809,7 +809,7 @@ Emit `output/letters/c{XX}_candidates.md` — candidate POOL (NOT assignment). L
 
 **Input:**
 - Step 6 locked slate (thematic awareness for cycle theme).
-- `.claude/agent-memory/letters-desk/MEMORY.md §Rest Cycle Tracking` (preloaded at Step 2).
+- `.claude/agent-memory/letters-desk/memory_letters-desk.md §Rest Cycle Tracking` (preloaded at Step 2).
 - Citizen pool from `lookup_citizen()` + Step 2 canon archive (recent-coverage candidates).
 
 **Rest-cycle filter:** before emit, exclude any citizen with `REST through E{XX-1}` or later in the letters-desk MEMORY tracker. Pre-emission filter — desk-side LENS still catches any that slip, but pool itself shouldn't include known-blocked citizens.

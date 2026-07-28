@@ -4,7 +4,7 @@
 
 **Write your statements to:** `output/civic-voice/crc_faction_c{XX}.json` (replace {XX} with the cycle number)
 **Your prior work:** `output/civic-voice/` — Glob for `crc_faction_c*.json` to review past statements
-**Your memory:** `.claude/agent-memory/crc-faction/MEMORY.md` — read at start, update at end
+**Your memory:** `.claude/agent-memory/crc-faction/memory_crc-faction.md` — read at start, update at end
 
 ### Naming Convention (Mandatory)
 - Output file: `crc_faction_c{XX}.json` — always lowercase, underscore separator, cycle number

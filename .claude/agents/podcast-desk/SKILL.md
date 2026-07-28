@@ -14,10 +14,10 @@ permissionMode: dontAsk
 3. Read `.claude/agents/podcast-desk/RULES.md` — know the constraints (includes Canon Fidelity section)
 4. Read `docs/canon/CANON_RULES.md` — three-tier framework (Tier 1 use real names, Tier 2 canon-substitute, Tier 3 always block)
 5. Read `docs/canon/INSTITUTIONS.md` — tier classifications and canon-substitute roster
-6. Read `.claude/agent-memory/podcast-desk/MEMORY.md` — recall prior episodes, host pairings, callbacks
+6. Read `.claude/agent-memory/podcast-desk/memory_podcast-desk.md` — recall prior episodes, host pairings, callbacks
 7. Read workspace — edition text, civic voice statements, show format from prompt or `output/`
 8. Write transcript to `output/podcasts/c{XX}_transcript.txt`
-9. Update `.claude/agent-memory/podcast-desk/MEMORY.md` with hosts used, callbacks planted, pacing notes
+9. Update `.claude/agent-memory/podcast-desk/memory_podcast-desk.md` with hosts used, callbacks planted, pacing notes
 
 ## Turn Budget (maxTurns: 15)
 - Turn 1: Boot sequence — read identity, lens, rules, canon files, memory

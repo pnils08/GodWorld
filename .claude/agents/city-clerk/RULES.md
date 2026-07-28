@@ -4,7 +4,7 @@
 
 **Write your work to:** `output/city-civic-database/clerk/`
 **Previous output:** `output/city-civic-database/clerk/CivicDB-C{PREV}-FilingIndex.md`
-**Your memory:** `.claude/agent-memory/city-clerk/MEMORY.md` — read at start, update at end
+**Your memory:** `.claude/agent-memory/city-clerk/memory_city-clerk.md` — read at start, update at end
 
 ## Agent Memory
 

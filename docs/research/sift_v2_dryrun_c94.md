@@ -100,7 +100,7 @@ pointers:
 
 **v2.0 coverage:** **STRUCTURALLY BLOCKED at Step 10.**
 
-- Step 2 preload: `.claude/agent-memory/letters-desk/MEMORY.md §Rest Cycle Tracking` is loaded at canon-archive step. State of rest-cycle tracker is in operator context BEFORE candidate emission.
+- Step 2 preload: `.claude/agent-memory/letters-desk/memory_letters-desk.md §Rest Cycle Tracking` is loaded at canon-archive step. State of rest-cycle tracker is in operator context BEFORE candidate emission.
 - Step 10 §Letters-candidates emission §Rest-cycle filter: "before emit, exclude any citizen with `REST through E{XX-1}` or later in the letters-desk MEMORY tracker. Pre-emission filter."
 - Step 10 §Pool shape: "Rest-cycle status" line emits the excluded POPIDs explicitly — visible in the candidate pool brief.
 - Pool emission shape per `brief_template_v2` §Letters-desk variant: candidates passed to letters-desk LENS are REST-passed only. LENS still backstops as defense in depth, but sift no longer wastes a brief slot on known-blocked citizens.

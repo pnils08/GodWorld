@@ -14,7 +14,7 @@ pointers:
   - "[[FOUR_COMPONENT_MAP]] — the tools ↔ environment seam this plan hardens"
   - "[[reference/DISASTER_RECOVERY]] — recovery path for credential loss (existing doc)"
   - "[[archive/plans/2026-04-16-phase-40-6-injection-defense]] — sister defense layer"
-  - "[[plans/TEMPLATE]] — shape this plan follows"
+  - "[[plans/PLAN_TEMPLATE]] — shape this plan follows"
 ---
 
 # Phase 40.3 Credential Isolation Audit Plan

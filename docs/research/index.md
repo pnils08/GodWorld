@@ -8,14 +8,14 @@ sources:
   - docs/plans/2026-06-01-doc-loop-consolidation.md — the plan that created this sub-catalog (S250)
   - docs/SCHEMA.md §10 (index discipline)
 pointers:
-  - "[[TEMPLATE]] — the shape every instance below follows"
+  - "[[RESEARCH_TEMPLATE]] — the shape every instance below follows"
   - "[[../index]] — top-level catalog; points here rather than listing every instance (boot-burn)"
   - "[[../RESEARCH]] — frozen legacy learning log (pre-S250 research lived there)"
 ---
 
 # Research Sub-Catalog
 
-**Every deliberate research file in `docs/research/` appears here exactly once.** This sub-catalog exists so the top-level `docs/index.md` — a research-build boot read — doesn't grow per research file. "Research never archives," so the corpus only accretes; keeping instances here keeps boot-burn flat. [[TEMPLATE]] defines the shape; this file lists the instances.
+**Every deliberate research file in `docs/research/` appears here exactly once.** This sub-catalog exists so the top-level `docs/index.md` — a research-build boot read — doesn't grow per research file. "Research never archives," so the corpus only accretes; keeping instances here keeps boot-burn flat. [[RESEARCH_TEMPLATE]] defines the shape; this file lists the instances.
 
 Grep here before grepping the tree. Each row: file · one-line purpose · verdict.
 

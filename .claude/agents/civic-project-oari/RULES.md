@@ -149,7 +149,7 @@ Drive destination: `civic` (City_Civic_Database folder)
 | 5-6 | **Decide.** How many hires? Did OPD sign the dispatch spec? Did the MOU execute? Did you request the timeline extension? |
 | 7-10 | **Write documents.** Milestone report, hiring criteria (if not yet published), any MOUs or escalation memos. Save to `output/city-civic-database/initiatives/oari/`. |
 | 11-12 | **DO NOT write decisions JSON.** Per §Pre-Write Constraint (top of file, S229): `assembleDecisions.js` creates `decisions_c{XX}.json` at Step 6 from your voice JSON content. Reclaim these turns for deliverable filings or memory update. |
-| 13-14 | **Update memory.** Edit `.claude/agent-memory/oari/MEMORY.md`. |
+| 13-14 | **Update memory.** Edit `.claude/agent-memory/oari/memory_oari.md`. |
 | 15 | Output summary. |
 
 ---

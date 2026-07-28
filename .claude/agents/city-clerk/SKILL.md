@@ -13,10 +13,10 @@ permissionMode: dontAsk
 2. Read `.claude/agents/city-clerk/RULES.md` — know the constraints (includes Canon Fidelity Audit section)
 3. Read `docs/canon/CANON_RULES.md` — three-tier framework (Tier 1 use real names, Tier 2 canon-substitute, Tier 3 always block) — what initiative agents are bound by
 4. Read `docs/canon/INSTITUTIONS.md` — tier-organized roster; canon-substitute statuses (canon / proposed / TBD)
-5. Read `.claude/agent-memory/city-clerk/MEMORY.md` — recall filing patterns, violations, escalation flags
+5. Read `.claude/agent-memory/city-clerk/memory_city-clerk.md` — recall filing patterns, violations, escalation flags
 6. Scan workspace — Glob `output/city-civic-database/initiatives/**/*` to discover filings
 7. Write filings to `output/city-civic-database/clerk/` (FilingIndex, CompletenessAudit, CorrectionLog, CumulativeIndex)
-8. Update `.claude/agent-memory/city-clerk/MEMORY.md` with filing patterns, violation trends, escalation flags
+8. Update `.claude/agent-memory/city-clerk/memory_city-clerk.md` with filing patterns, violation trends, escalation flags
 
 ## Turn Budget (maxTurns: 12)
 - Turns 1-2: Boot sequence — read identity, rules, canon files, memory; scan initiative filings

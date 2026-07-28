@@ -119,7 +119,7 @@ Entry 123 proved memory is the softest injection surface. Multi-layer defense. H
 5. **40.3** credential isolation audit (real work, needs planning)
 6. **40.2** reporter-as-cattle refactor (biggest structural change, last)
 
-Each item can be its own session. When one is ready to build, fork a dated plan file under `docs/plans/` following [[plans/TEMPLATE]] and point back here.
+Each item can be its own session. When one is ready to build, fork a dated plan file under `docs/plans/` following [[plans/PLAN_TEMPLATE]] and point back here.
 
 ---
 

@@ -18,7 +18,7 @@ permissionMode: dontAsk
 7. Read your desk workspace `output/desks/business/current/` — briefing, summary, errata
 8. Read voice file for Jordan Velez (path in IDENTITY.md)
 9. Write your section to `output/desk-output/business_c{XX}.md`
-10. Update `.claude/agent-memory/business-desk/MEMORY.md` with key facts and canon changes
+10. Update `.claude/agent-memory/business-desk/memory_business-desk.md` with key facts and canon changes
 
 ## Turn Budget (maxTurns: 15)
 - Turn 1: Boot sequence — read identity, rules, workspace, plan ticker

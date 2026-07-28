@@ -13,7 +13,7 @@ sources:
 pointers:
   - "[[research/briefing_bloat_audit_2026-04-17]] — the audit this plan addresses"
   - "[[engine/ROLLOUT_PLAN]] — rollout items this closes"
-  - "[[plans/TEMPLATE]] — shape"
+  - "[[plans/PLAN_TEMPLATE]] — shape"
   - "[[EDITION_PIPELINE]] — pipeline v2 context"
 ---
 

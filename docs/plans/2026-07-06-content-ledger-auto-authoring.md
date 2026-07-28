@@ -1,7 +1,7 @@
 ---
 title: Event_Content_Ledger Auto-Authoring Plan
 created: 2026-07-06
-updated: 2026-07-24
+updated: 2026-07-28
 type: plan
 tags: [engine, citizens, content-ledger, offload, active]
 sources:
@@ -93,6 +93,12 @@ Rows in the existing 8-col schema (`Kind|PoolKey|Slot|Text|Weight|Conditions|Tag
 
 ## Status
 
+- 2026-07-28 — **POOLKEY SANDBOX PROOF CLOSED S336.** Bench 0720
+  groundhog C103 held the per-row cap at exactly 40, drew 101 distinct rows
+  across 995 total ledger draws, and the balanced build subsequently deployed
+  with the S336 employment set. The current trajectory and ledger-native
+  proving-ground design is in
+  [[2026-07-01-persistence-seams-content-ledger]] Task 12.
 - 2026-07-24 — **DEPTH GUARDS + SANDBOX CIVIC-TAG REPAIR BUILT (Codex,
   builder-approved).** `draftContentRows.js` now reads `Content_Telemetry` into
   a bounded pool profile, prompts with the loader's complete condition DSL,

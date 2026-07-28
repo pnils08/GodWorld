@@ -1,10 +1,10 @@
 ---
 title: Event_Content_Ledger — Grok-depth review
 created: 2026-07-22
-updated: 2026-07-24
+updated: 2026-07-28
 type: review
 tags: [engine, content-ledger, citizens, review]
-status: PoolKey mass balancing built and locally validated 2026-07-24; sandbox proof pending; exclusive retirement, trajectory, and proving-ground work remains open
+status: mass balancing sandbox-proven; trajectory and ledger-native proving-ground design complete 2026-07-28; implementation and a named hardcoded-retirement target remain open
 sources:
   - phase02-world-state/loadEventContentLedger.js
   - phase05-citizens/generateCitizensEvents.js (composer + injection + life-state gate)
@@ -184,11 +184,42 @@ The missing feedback arrow is **LifeHistory draws → drafter / prune**. Right n
 
 1. **Telemetry + prune** — eligible/draw/null counts per row or poolKey; `Active=no` for auto rows dead 10+ cycles or never drawn N cycles.
 2. **Refresh ops docs** — `SPREADSHEET.md` row count + ENGINE+SCRIPT writers; regenerate event-pools DSL table from `CONTENT_LEDGER_DSL_FIELDS`.
-3. **PoolKey policy** — mass balancing built/local-tested 2026-07-24; sandbox proof pending. Exclusive/migrate mode so ledger can retire hardcoded blocks pool-by-pool remains open.
-4. **Trajectory conditions** — displacement/mood/intent deltas so state→experience tracks change.
+3. **PoolKey policy** — mass balancing sandbox-proven S336. Exclusive/migrate mode remains open pending one exact hardcoded replacement target.
+4. **Trajectory conditions** — aggregate-neighborhood design complete 2026-07-28; engine-sheet build remains.
 5. **Fragment economy** — cycle draw caps + role discipline; reduce “same MOOD clause everywhere.”
 6. **Ledger snapshot / content hash** — replay and audit honesty under auto-active.
-7. **Baylight / Tribune as proving grounds** — original parked pools: ledger-native content that *must not* drift hardcoded; use exclusive PoolKey policy here first.
+7. **Baylight / Tribune as proving grounds** — ledger-native design complete 2026-07-28; these prove ledger ownership, not hardcoded retirement.
+
+---
+
+## Research-build disposition — engine.79 items 4 + 7
+
+The build-ready contract now lives in
+[[../plans/2026-07-01-persistence-seams-content-ledger]] §PoolKey, Conditions,
+and Tags contract and §Aggregate trajectory condition vocabulary.
+
+The review's original wording conflated two different ideas:
+
+- Baylight and Tribune can prove that a domain is **ledger-native**.
+- They cannot prove **hardcoded retirement**, because neither has an equivalent
+  hardcoded block to suppress.
+
+Retirement policy therefore remains unbuilt until one exact hardcoded block is
+named. It must be a code-reviewed PoolKey-to-selector mapping with a minimum
+eligible-row threshold; it is never inferred from `Tags`, PoolKey prefixes, or
+Sheet content alone.
+
+The trajectory proposal also changes source. New conditions resolve from the
+lagged aggregate Neighborhood_Map state (`hoodtrajectory`, `hoodmomentum`,
+`housingpressure`, `migrationflow`, and `trajectorychanged`), not from new
+per-citizen `displDelta` or `migrationIntent` dependencies. That avoids
+deepening fields the active engine.34 permanent-node plan directs off the
+Simulation_Ledger. Existing `displacement` remains backward-compatible only.
+
+Baylight uses `source:civicNews` plus semantic provenance and the Sheet `Active`
+kill switch. Tribune uses `source:media` and only canonical ARTICLE TABLE
+headlines after publication, written as Cycle-bounded rows. No new source route
+is needed, and unpublished newsroom material cannot enter citizen memory.
 
 ---
 

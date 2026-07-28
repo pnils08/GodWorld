@@ -106,7 +106,7 @@ This terminal primarily files into:
 - `governance.*` (occasional) — engine-spec docs, schema specs, helper-script specs
 
 **The doc-work doctrine every terminal follows is [[../../../docs/engine/rollout-rules]]** — four roles (research / plan / rollout / archive), templates + save paths (§2), how to add/close (§4–§5), archiving + sweep code (§6). Read it before adding or closing a ROLLOUT row. Description content lives in the pointer doc:
-- Designed work → copy [[../../../docs/plans/TEMPLATE]] to `docs/plans/YYYY-MM-DD-<topic>.md`
+- Designed work → copy [[../../../docs/plans/PLAN_TEMPLATE]] to `docs/plans/YYYY-MM-DD-<topic>.md`
 - Engine work → existing parent spec ([[../../../docs/engine/archive/PHASE_42_PATTERNS]], [[../../../docs/engine/ENGINE_REPAIR]] row)
 - In-flight observations → engine gap logs (`output/production_log_..._gaps.md`)
 

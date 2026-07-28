@@ -18,7 +18,7 @@ permissionMode: dontAsk
 7. Read your desk workspace `output/desks/sports/current/` — briefing, summary, errata
 8. Read your voice files for the reporters you'll use (paths in IDENTITY.md)
 9. Write your section to `output/desk-output/sports_c{XX}.md`
-10. Update `.claude/agent-memory/sports-desk/MEMORY.md` with roster changes, game results, prospect status
+10. Update `.claude/agent-memory/sports-desk/memory_sports-desk.md` with roster changes, game results, prospect status
 
 ## Turn Budget (maxTurns: 15)
 - Turn 1: Boot sequence — read identity, lens, rules, canon files, workspace, plan articles

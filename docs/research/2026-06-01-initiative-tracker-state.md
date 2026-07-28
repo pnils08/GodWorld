@@ -13,7 +13,7 @@ sources:
   - docs/mara-vance/INITIATIVE_TRACKER_VOTER_LOGIC.md (Status lifecycle + STALE 17-col schema)
   - docs/mara-vance/CIVIC_GOVERNANCE_MASTER_REFERENCE.md §Initiative Status Lifecycle
   - docs/archive/plans/2026-05-11-civic-tracker-collision-schema.md (trackerOwner = who-writes contract)
-  - .claude/agent-memory/health-center/MEMORY.md (drift source — agent mints its own phase strings)
+  - .claude/agent-memory/health-center/memory_health-center.md (drift source — agent mints its own phase strings)
 pointers:
   - "[[../engine/ROLLOUT_PLAN]] — pending-state home"
   - "[[index]] — register here, same commit"
@@ -30,7 +30,7 @@ pointers:
 **Extraction — what's usable:**
 - **No canonical `ImplementationPhase` contract exists → the engine's `PHASE_INTENSITY` map (20 phases, `applyInitiativeImplementationEffects.js`) is the de-facto authority.** Any fix reconciles *to* that map. The documented "Status Lifecycle" (VOTER_LOGIC / GOVERNANCE_MASTER) is a *different column* and doesn't cover ImplementationPhase.
 - **Free-form writer + fixed reader = silent drift → the root failure mode.** Pre-flight enum-policing was removed S230 (Mike: "trust engine writer validation"), but no writer actually canonicalizes the phase; the Phase-2 map silently drops unrecognized strings (intensity 0 → skipped). INIT-005 `design-development-active` + INIT-006 `active-construction-phase-2-planning` are both dark to the engine right now.
-- **The drift source is the agent's own memory → fix must reach the writers, not just the sheet.** `.claude/agent-memory/health-center/MEMORY.md` tracks `design-development-active → awaiting-hcai-state-review` — the agent invents richer industry-real phase strings each cycle. Normalizing the sheet alone re-drifts next cycle.
+- **The drift source is the agent's own memory → fix must reach the writers, not just the sheet.** `.claude/agent-memory/health-center/memory_health-center.md` tracks `design-development-active → awaiting-hcai-state-review` — the agent invents richer industry-real phase strings each cycle. Normalizing the sheet alone re-drifts next cycle.
 - **The tolerance pattern already exists on one side → mirror it, don't reinvent.** `applyTrackerUpdates.js:366-383` already partial-matches these strings for *sentiment* (`design-development-active`→0.3, `active-construction…`→0.6). The Apps Script Phase-2 ripple map just never got the same tolerance. Durable fix = mirror that into the engine map (code, clasp).
 - **Exact-string blast radius is small → sheet normalization is contained.** Only `civicInitiativeEngine.js:246` (`implPhase==='vote-ready'`) and `detectStuckInitiatives.js:114` (self-comparison) key on exact phase values; neither target string hits them. Safe to normalize the two rows as a stopgap.
 - **The MCP/civic-packet layer disagrees with the sheet → a third drift surface.** `lookup_initiative` returned stale `disbursement-ordered`/`design-phase` (≈E89) while the sheet has `disbursement-active`/`design-development-active`. The packet the MCP reads lags the sheet.

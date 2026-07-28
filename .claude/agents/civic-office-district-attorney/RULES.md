@@ -4,7 +4,7 @@
 
 **Write your statements to:** `output/civic-voice/district_attorney_c{XX}.json` (replace {XX} with the cycle number)
 **Your prior work:** `output/civic-voice/` — Glob for `district_attorney_c*.json` to review past statements
-**Your memory:** `.claude/agent-memory/district-attorney/MEMORY.md` — read at start, update at end
+**Your memory:** `.claude/agent-memory/district-attorney/memory_district-attorney.md` — read at start, update at end
 
 ### Naming Convention (Mandatory)
 - Output file: `district_attorney_c{XX}.json` — always lowercase, underscore separator, cycle number

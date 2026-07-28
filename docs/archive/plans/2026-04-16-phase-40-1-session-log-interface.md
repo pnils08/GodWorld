@@ -11,7 +11,7 @@ sources:
 pointers:
   - "[[engine/archive/PHASE_40_PLAN]] — parent phase doc"
   - "[[engine/ROLLOUT_PLAN]] — step 9 of the spine"
-  - "[[plans/TEMPLATE]] — shape this plan follows"
+  - "[[plans/PLAN_TEMPLATE]] — shape this plan follows"
 ---
 
 # Phase 40.1 Session-Log Interface Plan

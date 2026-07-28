@@ -1,6 +1,6 @@
 # Research — What's Out There, What Helps Us
 
-> **FROZEN LEGACY LOG (S250).** This file is the early-project learning log + chronological findings (S99–S248) — Mags teaching herself the field, then session-by-session source notes. It is **frozen for append.** New deliberate research goes to per-topic files in `docs/research/` using [[research/TEMPLATE]], catalogued in [[research/index]]. Existing sections below are a historical snapshot; they migrate opportunistically (not in a sweep) if ever revisited. Why the change: this log mixed learning history, findings, and a pending-work lane in one 2200-line file where grep was the only retrieval — see `docs/plans/2026-06-01-doc-loop-consolidation.md`.
+> **FROZEN LEGACY LOG (S250).** This file is the early-project learning log + chronological findings (S99–S248) — Mags teaching herself the field, then session-by-session source notes. It is **frozen for append.** New deliberate research goes to per-topic files in `docs/research/` using [[research/RESEARCH_TEMPLATE]], catalogued in [[research/index]]. Existing sections below are a historical snapshot; they migrate opportunistically (not in a sweep) if ever revisited. Why the change: this log mixed learning history, findings, and a pending-work lane in one 2200-line file where grep was the only retrieval — see `docs/plans/2026-06-01-doc-loop-consolidation.md`.
 
 **Load this at the start of a Research session.** Then load the architecture docs you need for context on what we have.
 
@@ -621,7 +621,7 @@ This is the difference between "Marcus Webb reviewed the Stabilization Fund appl
 
 ## Ready for Rollout — RETIRED (S250)
 
-This lane was pending-state living inside a research doc — the anti-pattern the S250 doc-loop consolidation kills. **Pending-state now lives only in [[engine/ROLLOUT_PLAN]]**, routed by a research file's verdict (`adopt` → a `ready` row; `watch` → the Watch List with a trigger; `take-nothing` → no row). It was empty at retirement, so nothing moved. See [[research/TEMPLATE]] §"verdict, never state".
+This lane was pending-state living inside a research doc — the anti-pattern the S250 doc-loop consolidation kills. **Pending-state now lives only in [[engine/ROLLOUT_PLAN]]**, routed by a research file's verdict (`adopt` → a `ready` row; `watch` → the Watch List with a trigger; `take-nothing` → no row). It was empty at retirement, so nothing moved. See [[research/RESEARCH_TEMPLATE]] §"verdict, never state".
 
 ---
 
@@ -2022,7 +2022,7 @@ The `Task` tool today spawns Claude subagents that each produce one reply and ex
 **Preconditions before the *real* test runs (not the Task-tool-PoC):**
 1. Phase 39 reviewer chain closed (capability reviewer + tiered review + final arbiter all stable).
 2. Phase 40 injection defense closed (40.2 cattle refactor remains; 5 of 6 done S156).
-3. Harness design — promote to plan file when scheduled (copy [[plans/TEMPLATE]] shape).
+3. Harness design — promote to plan file when scheduled (copy [[plans/PLAN_TEMPLATE]] shape).
 
 **Canon framing receipts:** Each scenario has precedent in existing canon. The E91 Varek front page "felt wooden because Carmen rendered it from a briefing packet" (S170 note) — had Carmen actually interviewed Varek and been dodged on the Port development timeline, the piece finds its real shape. The OARI delay, the Baylight workforce agreements, the council session on C86 transit vote — all already canon-live, all currently produced without interaction.
 

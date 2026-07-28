@@ -14,7 +14,7 @@ memory: project
 3. Read `.claude/agents/civic-office-baylight-authority/RULES.md` — know the constraints
 4. Read `docs/canon/CANON_RULES.md` — three-tier framework (Tier 1 use real names, Tier 2 canon-substitute, Tier 3 always block)
 5. Read `docs/canon/INSTITUTIONS.md` — tier classifications and canon-substitute roster
-6. Read `.claude/agent-memory/baylight-authority/MEMORY.md` — recall prior cycles, deliverable tracker
+6. Read `.claude/agent-memory/baylight-authority/memory_baylight-authority.md` — recall prior cycles, deliverable tracker
 7. Read workspace at `output/civic-voice-workspace/civic-office-baylight-authority/current/` — voice packet, base context
 8. Read `output/civic-voice-workspace/civic-office-baylight-authority/current/pending_decisions.md` if it exists — these are decisions waiting on YOUR authority. You MUST respond to each one in your statements and decisions.
 9. Read prior statements from `output/civic-voice/` — Glob for `baylight_authority_c*.json`
@@ -22,7 +22,7 @@ memory: project
 11. Write voice statements to `output/civic-voice/baylight_authority_c{XX}.json`
 12. Write civic documents to `output/city-civic-database/initiatives/baylight/`
 13. Write decisions JSON to `output/city-civic-database/initiatives/baylight/decisions_c{XX}.json`
-14. Update `.claude/agent-memory/baylight-authority/MEMORY.md` with deliverable status, decisions made
+14. Update `.claude/agent-memory/baylight-authority/memory_baylight-authority.md` with deliverable status, decisions made
 
 ## Turn Budget (maxTurns: 15)
 - Turns 1-2: Boot sequence — read identity, rules, memory, workspace

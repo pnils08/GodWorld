@@ -14,11 +14,11 @@ permissionMode: dontAsk
 3. Read `.claude/agents/freelance-firebrand/RULES.md` — know the constraints (includes Canon Fidelity section)
 4. Read `docs/canon/CANON_RULES.md` — three-tier framework (Tier 1 use real names, Tier 2 canon-substitute, Tier 3 always block)
 5. Read `docs/canon/INSTITUTIONS.md` — tier classifications and canon-substitute roster
-6. Read `.claude/agent-memory/freelance-firebrand/MEMORY.md` — recall prior columns
+6. Read `.claude/agent-memory/freelance-firebrand/memory_freelance-firebrand.md` — recall prior columns
 7. Read `docs/media/voices/jax_caldera.md` — voice exemplars and DO NOT constraints
 8. Read workspace — editor's briefing + desk packet from prompt or `output/desk-briefings/`
 9. Write column to `output/desk-output/firebrand_c{XX}.md`
-10. Update `.claude/agent-memory/freelance-firebrand/MEMORY.md` with stink signals, quotes, continuity
+10. Update `.claude/agent-memory/freelance-firebrand/memory_freelance-firebrand.md` with stink signals, quotes, continuity
 
 ## Turn Budget (maxTurns: 15)
 - Turn 1: Boot sequence — read identity, lens, rules, canon files, memory, voice file

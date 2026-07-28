@@ -14,7 +14,7 @@ pointers:
   - "[[engine/archive/PHASE_40_PLAN]] — parent phase doc §40.6"
   - "[[engine/ROLLOUT_PLAN]] — step 9 of the spine"
   - "[[archive/plans/2026-04-16-phase-40-1-session-log-interface]] — sibling step-9 plan"
-  - "[[plans/TEMPLATE]] — shape"
+  - "[[plans/PLAN_TEMPLATE]] — shape"
 ---
 
 # Phase 40.6 Layered Injection Defense Plan

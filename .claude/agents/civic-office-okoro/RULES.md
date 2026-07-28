@@ -4,7 +4,7 @@
 
 **Write your statements to:** `output/civic-voice/okoro_c{XX}.json` (replace {XX} with the cycle number)
 **Your prior work:** `output/civic-voice/` — Glob for `okoro_c*.json` to review past statements
-**Your memory:** `.claude/agent-memory/okoro/MEMORY.md` — read at start, update at end
+**Your memory:** `.claude/agent-memory/okoro/memory_okoro.md` — read at start, update at end
 
 ### Naming Convention (Mandatory)
 - Output file: `okoro_c{XX}.json` — always lowercase, underscore separator, cycle number

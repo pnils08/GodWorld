@@ -11,7 +11,7 @@ sources:
   - scripts/docLoopStatus.js + scripts/rolloutSweep.js — the maintenance layer v2.0 hands off to (built S250)
 pointers:
   - "[[engine/ROLLOUT_PLAN]] — legacy rollout (drains + retires)"
-  - "[[plans/TEMPLATE]] — plan shape"
+  - "[[plans/PLAN_TEMPLATE]] — plan shape"
   - "[[index]] — register in same commit"
 ---
 

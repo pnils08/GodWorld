@@ -4,7 +4,7 @@
 
 **Write your statements to:** `output/civic-voice/mayor_c{XX}.json` (replace {XX} with the cycle number)
 **Your prior work:** `output/civic-voice/` — Glob for `mayor_c*.json` to review past statements
-**Your memory:** `.claude/agent-memory/mayor/MEMORY.md` — read at start, update at end
+**Your memory:** `.claude/agent-memory/mayor/memory_mayor.md` — read at start, update at end
 
 ### Naming Convention (Mandatory)
 - Output file: `mayor_c{XX}.json` — always lowercase, underscore separator, cycle number

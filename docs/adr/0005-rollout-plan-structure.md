@@ -9,11 +9,11 @@ sources:
   - "[[adr/0001-adopt-context-and-adrs]] — ADR pattern + bar-keeping discipline"
   - "[[adr/0004-skill-bag-naming-principle]] — discovery-wiring pattern this ADR follows"
   - "[[../../MEMORY.md]] — S147 'rollout uses pointers, not inline notes' rule (long-violated)"
-  - "[[../plans/TEMPLATE]] — canonical shape for new plan files created via ROLLOUT pointers (S152, obra/superpowers MIT)"
+  - "[[../plans/PLAN_TEMPLATE]] — canonical shape for new plan files created via ROLLOUT pointers (S152, obra/superpowers MIT)"
 pointers:
   - "[[../engine/ROLLOUT_PLAN]] — the document this ADR restructures"
   - "[[../engine/ROLLOUT_ARCHIVE]] — cold storage destination at session-end sweep"
-  - "[[../plans/TEMPLATE]] — copy this when a ROLLOUT pointer references a not-yet-existing plan"
+  - "[[../plans/PLAN_TEMPLATE]] — copy this when a ROLLOUT pointer references a not-yet-existing plan"
   - "[[../../.claude/terminals/research-build/TERMINAL]] — research-build owns ROLLOUT_PLAN"
   - "[[index]] — ADR registered same commit"
   - "auto-memory `feedback_rollout-pointers-not-notes.md` — the S147 rule this ADR institutionalizes"
@@ -197,7 +197,7 @@ ADR-0004 (skill-bag naming) and ADR-0005 (this) share a discovery-wiring pattern
 4. Set state per Convention §State labels (typically `ready` for picker-grabable work, `needs-info` if gated on Mike or external)
 5. Set terminal — **builder terminals only**: `engine-sheet` (code / sheets / scripts) or `research-build` (skill / RULES / docs / ADRs / triage). Slash-separated for cross-builder work. Never `media` or `civic` — those are generator spaces and don't receive routed work (see §Part 3 routing flow).
 6. **Identify or create the pointer doc:**
-   - For designed work: create or link `[[plans/YYYY-MM-DD-topic]]` — **copy `[[plans/TEMPLATE]]` for shape; register in `[[index]]` same commit per S147 inbound-link rule**
+   - For designed work: create or link `[[plans/YYYY-MM-DD-topic]]` — **copy `[[plans/PLAN_TEMPLATE]]` for shape; register in `[[index]]` same commit per S147 inbound-link rule**
    - For in-flight observations from heavy-skill runs (civic + media generator terminals): link the gap log `[[output/production_log_..._gaps]]` — **new gap logs follow `[[plans/GAP_LOG_TEMPLATE]]` per S212 protocol; engine-sheet uses `[[engine/ENGINE_REPAIR]]` rows for its tactical-defects sidecar (different shape)**
    - For evaluations: append to `[[RESEARCH]] §section` or create `[[research/topic]]`
    - For decisions: write or link an ADR (next ADR number, follow ADR-0001/0004/0005 shape)

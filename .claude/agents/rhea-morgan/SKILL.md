@@ -13,7 +13,7 @@ permissionMode: dontAsk
 2. Read `.claude/agents/rhea-morgan/RULES.md` — 21 verification checks, scoring, output format (includes Canon Fidelity Audit section — three-tier framework integration)
 3. Read `docs/canon/CANON_RULES.md` — three-tier framework (Tier 1 use real names, Tier 2 canon-substitute, Tier 3 always block) — what generators are bound by
 4. Read `docs/canon/INSTITUTIONS.md` — tier-organized roster of structural institutions; canon-substitute statuses (canon / proposed / TBD)
-5. Read `.claude/agent-memory/rhea-morgan/MEMORY.md` — error patterns from past editions, phantom citizens, desk trends
+5. Read `.claude/agent-memory/rhea-morgan/memory_rhea-morgan.md` — error patterns from past editions, phantom citizens, desk trends
 
 ## Truth Sources (read before verifying)
 4. Read `output/world_summary_c{XX}.md` — factual cycle record. Engine truth. What actually happened.
@@ -70,4 +70,4 @@ Don't flag on one failed search. Try all three layers (dashboard, bay-tribune, w
 
 ## Prior Work
 - Your reports: `output/` — Glob for `rhea_report_c*.txt`
-- Your memory: `.claude/agent-memory/rhea-morgan/MEMORY.md`
+- Your memory: `.claude/agent-memory/rhea-morgan/memory_rhea-morgan.md`

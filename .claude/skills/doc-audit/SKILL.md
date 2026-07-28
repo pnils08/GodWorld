@@ -128,7 +128,7 @@ effort: high
 
 | Doc | What to verify |
 |-----|---------------|
-| `docs/plans/TEMPLATE.md` | Reference template — verify shape matches active plan files. Audit-light. |
+| `docs/plans/PLAN_TEMPLATE.md` | Reference template — verify shape matches active plan files. Audit-light. |
 | `docs/plans/BACKLOG.md` | Consolidated parked-phase backlog — verify phases listed are still parked (not started, not complete elsewhere). Cross-check against ROLLOUT_PLAN spine. |
 | `docs/archive/plans/skill-eval-framework.md` | HIGH priority not started — verify status; check first skill `/skill-check` shipped S156 reference still accurate. |
 | `docs/archive/plans/2026-04-16-phase-38-5-measurement-loop.md` | DONE S156 — verify Status section reflects completion; consider archive flag. |

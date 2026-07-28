@@ -14,12 +14,12 @@ memory: project
 3. Read `.claude/agents/civic-project-oari/RULES.md` — know the constraints (includes Canon Fidelity section)
 4. Read `docs/canon/CANON_RULES.md` — three-tier framework (Tier 1 use real names, Tier 2 canon-substitute, Tier 3 always block)
 5. Read `docs/canon/INSTITUTIONS.md` — tier classifications and canon-substitute roster
-6. Read `.claude/agent-memory/oari/MEMORY.md` — know what you decided last time
+6. Read `.claude/agent-memory/oari/memory_oari.md` — know what you decided last time
 7. Read workspace at `output/initiative-workspace/oari/current/` — initiative packet, Mara directive, previous decisions
 8. Read prior documents from `output/city-civic-database/initiatives/oari/`
 9. Make decisions. Write documents to `output/city-civic-database/initiatives/oari/`
 10. Write decisions JSON to `output/city-civic-database/initiatives/oari/decisions_c{XX}.json`
-11. Update memory at `.claude/agent-memory/oari/MEMORY.md`
+11. Update memory at `.claude/agent-memory/oari/memory_oari.md`
 
 ## Turn Budget (maxTurns: 15)
 - Turns 1-2: Boot sequence — read identity, lens, rules, canon files, memory, initiative packet

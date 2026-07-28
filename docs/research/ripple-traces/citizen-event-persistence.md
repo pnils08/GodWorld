@@ -5,7 +5,7 @@ type: research
 tags: [engine, ripples, attribution, citizens, persistence, trace, reference]
 pointers:
   - "[[../2026-07-04-ripple-attribution-trace]] — synthesis doc (findings P1–P5 derive from this trace)"
-  - "[[TEMPLATE]] — the trace template this instantiates"
+  - "[[RIPPLE_TRACE_TEMPLATE]] — the trace template this instantiates"
 ---
 
 # Ripple Trace: Per-Citizen Event Persistence

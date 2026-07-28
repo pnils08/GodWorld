@@ -142,18 +142,18 @@ Doctrine every terminal follows: [[../../../docs/engine/rollout-rules]] (§2 = t
 
 | File | Agent |
 |------|-------|
-| `.claude/agent-memory/mayor/MEMORY.md` | Mayor patterns |
-| `.claude/agent-memory/police-chief/MEMORY.md` | Chief patterns |
-| `.claude/agent-memory/district-attorney/MEMORY.md` | DA patterns |
-| `.claude/agent-memory/opp-faction/MEMORY.md` | OPP patterns |
-| `.claude/agent-memory/crc-faction/MEMORY.md` | CRC patterns |
-| `.claude/agent-memory/ind-swing/MEMORY.md` | Independent patterns |
-| `.claude/agent-memory/baylight-authority/MEMORY.md` | Baylight patterns |
-| `.claude/agent-memory/oari/MEMORY.md` | OARI patterns |
-| `.claude/agent-memory/stabilization-fund/MEMORY.md` | Fund patterns |
-| `.claude/agent-memory/health-center/MEMORY.md` | Health Center patterns |
-| `.claude/agent-memory/transit-hub/MEMORY.md` | Transit Hub patterns |
-| `.claude/agent-memory/city-clerk/MEMORY.md` | Clerk patterns |
+| `.claude/agent-memory/mayor/memory_mayor.md` | Mayor patterns |
+| `.claude/agent-memory/police-chief/memory_police-chief.md` | Chief patterns |
+| `.claude/agent-memory/district-attorney/memory_district-attorney.md` | DA patterns |
+| `.claude/agent-memory/opp-faction/memory_opp-faction.md` | OPP patterns |
+| `.claude/agent-memory/crc-faction/memory_crc-faction.md` | CRC patterns |
+| `.claude/agent-memory/ind-swing/memory_ind-swing.md` | Independent patterns |
+| `.claude/agent-memory/baylight-authority/memory_baylight-authority.md` | Baylight patterns |
+| `.claude/agent-memory/oari/memory_oari.md` | OARI patterns |
+| `.claude/agent-memory/stabilization-fund/memory_stabilization-fund.md` | Fund patterns |
+| `.claude/agent-memory/health-center/memory_health-center.md` | Health Center patterns |
+| `.claude/agent-memory/transit-hub/memory_transit-hub.md` | Transit Hub patterns |
+| `.claude/agent-memory/city-clerk/memory_city-clerk.md` | Clerk patterns |
 
 ### Production Skill
 

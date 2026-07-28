@@ -18,7 +18,7 @@ permissionMode: dontAsk
 7. Read your desk workspace `output/desks/culture/current/` — briefing, summary, errata
 8. Read your voice file for Maria Keen (path in IDENTITY.md)
 9. Write your section to `output/desk-output/culture_c{XX}.md`
-10. Update `.claude/agent-memory/culture-desk/MEMORY.md` with cultural entities, citizen appearances, events
+10. Update `.claude/agent-memory/culture-desk/memory_culture-desk.md` with cultural entities, citizen appearances, events
 
 ## Turn Budget (maxTurns: 15)
 - Turn 1: Boot sequence — read identity, lens, rules, canon files, workspace, plan articles

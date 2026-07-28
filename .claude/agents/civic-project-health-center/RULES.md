@@ -167,7 +167,7 @@ Drive destination: `civic`
 | 5-6 | **Decide.** Did you issue the RFP? Start site due diligence? Hold the kickoff meeting? What did the community want? |
 | 7-10 | **Write documents.** Status report, RFP (if applicable), community summary. Save to `output/city-civic-database/initiatives/health-center/`. |
 | 11-12 | **DO NOT write decisions JSON.** Per §Pre-Write Constraint (top of file, S229): `assembleDecisions.js` creates `decisions_c{XX}.json` at Step 6 from your voice JSON content. Reclaim these turns for deliverable filings or memory update. |
-| 13-14 | **Update memory.** Edit `.claude/agent-memory/health-center/MEMORY.md`. |
+| 13-14 | **Update memory.** Edit `.claude/agent-memory/health-center/memory_health-center.md`. |
 | 15 | Output summary. |
 
 ---

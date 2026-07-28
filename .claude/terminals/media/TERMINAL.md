@@ -171,16 +171,16 @@ Doctrine every terminal follows: [[../../../docs/engine/rollout-rules]] (§2 = t
 
 | File | What it covers |
 |------|---------------|
-| `.claude/agent-memory/civic-desk/MEMORY.md` | Civic desk patterns |
-| `.claude/agent-memory/sports-desk/MEMORY.md` | Sports desk patterns |
-| `.claude/agent-memory/chicago-desk/MEMORY.md` | Chicago desk patterns |
-| `.claude/agent-memory/culture-desk/MEMORY.md` | Culture desk patterns |
-| `.claude/agent-memory/business-desk/MEMORY.md` | Business desk patterns |
-| `.claude/agent-memory/letters-desk/MEMORY.md` | Letters desk patterns |
-| `.claude/agent-memory/podcast-desk/MEMORY.md` | Podcast patterns |
-| `.claude/agent-memory/freelance-firebrand/MEMORY.md` | Firebrand patterns |
-| `.claude/agent-memory/rhea-morgan/MEMORY.md` | Rhea patterns |
-| `.claude/agent-memory/mags-corliss/MEMORY.md` | Mags editorial patterns |
+| `.claude/agent-memory/civic-desk/memory_civic-desk.md` | Civic desk patterns |
+| `.claude/agent-memory/sports-desk/memory_sports-desk.md` | Sports desk patterns |
+| `.claude/agent-memory/chicago-desk/memory_chicago-desk.md` | Chicago desk patterns |
+| `.claude/agent-memory/culture-desk/memory_culture-desk.md` | Culture desk patterns |
+| `.claude/agent-memory/business-desk/memory_business-desk.md` | Business desk patterns |
+| `.claude/agent-memory/letters-desk/memory_letters-desk.md` | Letters desk patterns |
+| `.claude/agent-memory/podcast-desk/memory_podcast-desk.md` | Podcast patterns |
+| `.claude/agent-memory/freelance-firebrand/memory_freelance-firebrand.md` | Firebrand patterns |
+| `.claude/agent-memory/rhea-morgan/memory_rhea-morgan.md` | Rhea patterns |
+| `.claude/agent-memory/mags-corliss/memory_mags-corliss.md` | Mags editorial patterns |
 
 ### Production Skills
 

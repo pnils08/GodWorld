@@ -8,7 +8,7 @@
 **Completed phase details:** [[engine/ROLLOUT_ARCHIVE]] — read on demand, not at boot.
 **Research context:** `docs/RESEARCH.md` — findings log, evaluations, sources.
 **Wiki layer:** [[SCHEMA]] (conventions) + [[index]] (catalog) — read at boot. (Phase 41.1 + 41.2, S146.)
-**Plan-file contract:** [[plans/TEMPLATE]] — every new plan copies this shape (S152). Also referenced from [[rollout-rules]] §4.
+**Plan-file contract:** [[plans/PLAN_TEMPLATE]] — every new plan copies this shape (S152). Also referenced from [[rollout-rules]] §4.
 **Phase backlog:** [[plans/BACKLOG]] — designs catalogued but not yet scheduled. Promote to its own plan file when a session picks one up.
 **Terminal owners:** `engine-sheet` / `research-build`. Research-build owns this
 doc; engine-sheet executes substrate work. Media and civic are generator
@@ -119,6 +119,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.34 | Ledger is a representative sample | parked | engine-sheet | [[../plans/2026-06-14-ledger-representative-sample-migration-removal]] — detail in pointer (relocated 2026-07-02) |
 | engine.36 | Isolated staging environment | parked | engine-sheet | [[ENGINE_REPAIR]] — detail in pointer (relocated 2026-07-02) |
 | engine.67 | Event pools — steps 1-9 + involvedCitizens wire LIVE S325, sweeps done; OPEN: Mike's live C102 verify + storylineWeaving status gap | in-progress | engine-sheet | [[../plans/2026-07-18-event-pools-design]] |
+| engine.79 | Build aggregate Event_Content_Ledger trajectory conditions plus ledger-native Baylight and publication-gated Tribune pools from the completed research-build design | ready | engine-sheet | [[../plans/2026-07-01-persistence-seams-content-ledger]] |
 | research.13 | Citizen-autonomous PoC | needs-info | research-build | [[../plans/2026-05-31-citizen-autonomous-poc]] — detail in pointer (relocated 2026-07-02) |
 | research.14 | Citizen-loop Phase 2 | in-progress | engine-sheet | [[../plans/2026-06-04-mags-citizen-loop]] — detail in pointer (relocated 2026-07-02) |
 | research.16 | Tier-1 character voice agents | in-progress | research-build + engine-sheet | [[../plans/2026-06-16-tier1-character-voice-agents]] — detail in pointer (relocated 2026-07-02) |

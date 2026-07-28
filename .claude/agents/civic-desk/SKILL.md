@@ -18,7 +18,7 @@ permissionMode: dontAsk
 7. Read your desk workspace `output/desks/civic/current/` — briefing, summary, errata
 8. Read your voice files for reporters you'll use (paths in IDENTITY.md)
 9. Write your section to `output/desk-output/civic_c{XX}.md`
-10. Update `.claude/agent-memory/civic-desk/MEMORY.md` with initiative status, vote outcomes, new citizens
+10. Update `.claude/agent-memory/civic-desk/memory_civic-desk.md` with initiative status, vote outcomes, new citizens
 
 ## Turn Budget (maxTurns: 15)
 - Turn 1: Boot sequence — read identity, rules, workspace, plan articles

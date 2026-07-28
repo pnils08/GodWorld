@@ -12,7 +12,7 @@ pointers:
   - "[[engine/archive/PHASE_38_PLAN]] — parent phase doc (contains §§4, 14, 15, 16 enricher pattern this extends)"
   - "[[engine/ROLLOUT_PLAN]] — old spine step 8; splitting out now"
   - "[[archive/plans/2026-04-16-phase-38-6-skill-shrink]] — downstream skill edit that consumes this enricher's output"
-  - "[[plans/TEMPLATE]] — shape this plan follows"
+  - "[[plans/PLAN_TEMPLATE]] — shape this plan follows"
 ---
 
 # Phase 38.5 Measurement Loop Plan
@@ -177,5 +177,5 @@ pointers:
 
 ## Changelog
 
-- 2026-04-16 — Initial draft (S152, research-build terminal). First plan written against [[plans/TEMPLATE]]. Scoped to 9 tasks after discovering 38.6 skill integration (spine-step-5 follow-ups) already landed S146, so this plan focuses only on the new enricher and leaves the skill edit to a separate plan.
+- 2026-04-16 — Initial draft (S152, research-build terminal). First plan written against [[plans/PLAN_TEMPLATE]]. Scoped to 9 tasks after discovering 38.6 skill integration (spine-step-5 follow-ups) already landed S146, so this plan focuses only on the new enricher and leaves the skill edit to a separate plan.
 - 2026-04-16 — Implemented (S154/S156, engine-sheet terminal). All 9 tasks done. Path A resolved — `measurementSpec` derived in `recommendRemedy.fill()` from existing `effectEvidence` (no `remedyTemplates.json` change needed). Test suite 19/19 passing. Live auditor verified deterministic with fixture; Temescal C90→C91 produces `remedy-not-firing` verdict end-to-end. Schema added per pattern, `measurementHistory[]` rollup at top level. PHASE_38_PLAN.md §18 documents the build.

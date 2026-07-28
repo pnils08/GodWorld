@@ -12,7 +12,7 @@ sources:
   - docs/BOOT_ARCHITECTURE.md (boot-handoff primitive this changes)
   - S243 Mike directive — "session that spans soft closes; hard close ends it; snapshot SESSION_CONTEXT_S## wiki-referenceable; auto-boot is contingent-relevance noise; on-demand document"
 pointers:
-  - "[[TEMPLATE]] — plan shape"
+  - "[[PLAN_TEMPLATE]] — plan shape"
   - "[[../engine/ROLLOUT_PLAN]] — single pointer row (governance.26)"
   - "[[archive/plans/2026-05-29-c95-gap-log-triage]] — RB-6 points here; origin of the concept"
   - "[[../BOOT_ARCHITECTURE]] — boot sequence this rewrites"

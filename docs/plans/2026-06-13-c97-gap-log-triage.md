@@ -13,7 +13,7 @@ sources:
 pointers:
   - "[[GAP_LOG_TRIAGE_PLAYBOOK]] — how this kind of plan is built (the method)"
   - "[[../engine/ROLLOUT_PLAN]] — single pointer row; this plan carries detail + tracking"
-  - "[[TEMPLATE]] — plan shape"
+  - "[[PLAN_TEMPLATE]] — plan shape"
   - "[[2026-05-30-citizen-lifecycle-fame-system]] — owns the Mayor-retirement root cause (T1)"
   - "[[../index]] — registered same commit"
 ---

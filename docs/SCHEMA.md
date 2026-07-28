@@ -166,7 +166,7 @@ docs/
 ├── reference/             — operational how-tos: deploy, recovery, drive guide (agent-owned)
 ├── plans/                 — in-flight plans not yet promoted to engine/ (agent-owned)
 ├── research/              — deliberate research files (per-topic, S250)
-│   ├── TEMPLATE.md         — research-file shape (source-mining record; verdict-not-state + never-archives rules)
+│   ├── RESEARCH_TEMPLATE.md — research-file shape (source-mining record; verdict-not-state + never-archives rules)
 │   ├── index.md            — sub-catalog of instances (keeps top-level index.md / boot-burn flat)
 │   ├── YYYY-MM-DD-*.md     — research instances from TEMPLATE (agent-owned, never archived)
 │   └── papers/            — source PDFs (raw, immutable)

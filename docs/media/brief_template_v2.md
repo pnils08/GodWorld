@@ -206,7 +206,7 @@ Letters-desk gets a CANDIDATE POOL, not a per-slot assignment. The brief shape i
 
 **Cycle theme summary** (3-5 lines from approved slate): {what the edition is about, so letters can react thematically}
 
-**Rest-cycle status** ({date stamp from `.claude/agent-memory/letters-desk/MEMORY.md §Rest Cycle Tracking`}): {N citizens currently REST through C{XX-1}}. Excluded from candidates.
+**Rest-cycle status** ({date stamp from `.claude/agent-memory/letters-desk/memory_letters-desk.md §Rest Cycle Tracking`}): {N citizens currently REST through C{XX-1}}. Excluded from candidates.
 
 ---
 

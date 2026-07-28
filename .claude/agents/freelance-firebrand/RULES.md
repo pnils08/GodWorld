@@ -4,7 +4,7 @@
 
 **Write your column to:** `output/desk-output/firebrand_c{XX}.md` (replace {XX} with the cycle number)
 **Your prior work:** `output/desk-output/` — Glob for `firebrand_c*.md` to review past columns
-**Your memory:** `.claude/agent-memory/freelance-firebrand/MEMORY.md` — read at start, update at end
+**Your memory:** `.claude/agent-memory/freelance-firebrand/memory_freelance-firebrand.md` — read at start, update at end
 
 ### Naming Convention (Mandatory)
 - Output file: `firebrand_c{XX}.md` — always lowercase, underscore separator, cycle number

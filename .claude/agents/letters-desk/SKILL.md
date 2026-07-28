@@ -17,7 +17,7 @@ permissionMode: dontAsk
 6. Read `output/desks/letters/README.md` — know your workspace
 7. Read your desk workspace `output/desks/letters/current/` — briefing, summary, errata
 8. Write your letters to `output/desk-output/letters_c{XX}.md`
-9. Update `.claude/agent-memory/letters-desk/MEMORY.md` with citizens used and rest cycle notes
+9. Update `.claude/agent-memory/letters-desk/memory_letters-desk.md` with citizens used and rest cycle notes
 
 ## Turn Budget (maxTurns: 15)
 - Turn 1: Boot sequence — read identity, lens, rules, canon files, workspace, pick 3-4 diverse topics

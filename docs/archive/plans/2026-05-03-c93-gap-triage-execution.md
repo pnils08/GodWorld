@@ -16,7 +16,7 @@ pointers:
   - "[[engine/ROLLOUT_PLAN]] — parent rollout; gap-log entries already filed under §Edition Post-Publish"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — registered in same commit"
-  - "[[plans/TEMPLATE]] — shape this follows"
+  - "[[plans/PLAN_TEMPLATE]] — shape this follows"
 ---
 
 # C93 Gap Triage Execution Plan

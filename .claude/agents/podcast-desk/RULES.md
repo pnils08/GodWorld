@@ -4,7 +4,7 @@
 
 **Write your work to:** `output/podcasts/c{XX}_transcript.txt`
 **Previous output:** `output/podcasts/c{PREV}_transcript.txt`
-**Your memory:** `.claude/agent-memory/podcast-desk/MEMORY.md` — read at start, update at end
+**Your memory:** `.claude/agent-memory/podcast-desk/memory_podcast-desk.md` — read at start, update at end
 
 ### Naming Convention (Mandatory)
 - Output file: `c{XX}_transcript.txt` — in `output/podcasts/`

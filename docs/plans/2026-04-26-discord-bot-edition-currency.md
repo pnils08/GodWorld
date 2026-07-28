@@ -109,7 +109,7 @@ pointers:
 
 - **Files:**
   - `.claude/agents/letters-desk/RULES.md:50` — modify
-  - `.claude/agent-memory/letters-desk/MEMORY.md:12` — modify
+  - `.claude/agent-memory/letters-desk/memory_letters-desk.md:12` — modify
 - **Steps:**
   1. Both lines reference `output/latest_edition_brief.md` for the "citizens already claimed by other desks" check. Replace with `output/production_log_edition_c{XX}.md` (latest cycle), specifically the `## Story Lineup` table where citizens are referenced.
   2. Verify the letters-desk skill / sift instruction set still works against the production log as the source — production log uses different formatting than the brief did, but the citizen-name list is enumerable from it.

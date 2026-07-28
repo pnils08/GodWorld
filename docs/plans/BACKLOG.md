@@ -9,12 +9,12 @@ sources:
 pointers:
   - "[[engine/ROLLOUT_PLAN]] — parent"
   - "[[SCHEMA]] — doc conventions"
-  - "[[plans/TEMPLATE]] — when any backlog item becomes active, extract to its own plan file using this shape"
+  - "[[plans/PLAN_TEMPLATE]] — when any backlog item becomes active, extract to its own plan file using this shape"
 ---
 
 # Phase Backlog
 
-**Not yet active, but designed.** When Mike picks one of these to build, extract it to its own [[plans/TEMPLATE]]-shaped plan file, then point back here for the historical design intent.
+**Not yet active, but designed.** When Mike picks one of these to build, extract it to its own [[plans/PLAN_TEMPLATE]]-shaped plan file, then point back here for the historical design intent.
 
 The content below was embedded in ROLLOUT_PLAN §Open Phases through S151. Moved here S152 to shrink ROLLOUT_PLAN without losing the designs. Content is verbatim unless noted.
 
@@ -499,4 +499,4 @@ The economic layer tracks formal businesses and employment. It doesn't track the
 
 ## Changelog
 
-- 2026-04-16 — Initial consolidation (S152). Content extracted verbatim from [[engine/ROLLOUT_PLAN]] §Open Phases + research patterns. When any phase here becomes active work, extract to its own [[plans/TEMPLATE]]-shaped plan file and replace the section here with a pointer.
+- 2026-04-16 — Initial consolidation (S152). Content extracted verbatim from [[engine/ROLLOUT_PLAN]] §Open Phases + research patterns. When any phase here becomes active work, extract to its own [[plans/PLAN_TEMPLATE]]-shaped plan file and replace the section here with a pointer.

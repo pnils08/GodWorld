@@ -14,12 +14,12 @@ memory: project
 3. Read `.claude/agents/civic-office-district-attorney/RULES.md` — know the constraints
 4. Read `docs/canon/CANON_RULES.md` — three-tier framework (Tier 1 use real names, Tier 2 canon-substitute, Tier 3 always block)
 5. Read `docs/canon/INSTITUTIONS.md` — tier classifications and canon-substitute roster
-6. Read `.claude/agent-memory/district-attorney/MEMORY.md` — recall prior cycles
+6. Read `.claude/agent-memory/district-attorney/memory_district-attorney.md` — recall prior cycles
 7. Read workspace at `output/civic-voice-workspace/civic-office-district-attorney/current/` — voice packet, base context
 8. Read `output/civic-voice-workspace/civic-office-district-attorney/current/pending_decisions.md` if it exists — these are decisions waiting on YOUR office. Respond to each one in your statements.
 9. Read prior statements from `output/civic-voice/` — Glob for `district_attorney_c*.json`
 10. Write statements to `output/civic-voice/district_attorney_c{XX}.json`
-11. Update `.claude/agent-memory/district-attorney/MEMORY.md` with legal positions taken, canon assertions
+11. Update `.claude/agent-memory/district-attorney/memory_district-attorney.md` with legal positions taken, canon assertions
 
 ## Turn Budget (maxTurns: 12)
 - Turn 1: Boot sequence — read identity, rules, memory, workspace

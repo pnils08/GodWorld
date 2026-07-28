@@ -138,7 +138,7 @@ See [[brief_template_v2_exemplar]] §Variant 2 — Quick-take brief.
 - {Theme 2 — one line, e.g. "Transit Hub 8-0, the vote that converted from C93's failed-fire"}
 - {Theme 3 — one line}
 
-**Rest-cycle status** ({date stamp from `.claude/agent-memory/letters-desk/MEMORY.md §Rest Cycle Tracking`}):
+**Rest-cycle status** ({date stamp from `.claude/agent-memory/letters-desk/memory_letters-desk.md §Rest Cycle Tracking`}):
 - {N citizens currently REST through C{XX-1}}: {comma-separated POPID list — excluded from pool}
 
 ---
@@ -157,7 +157,7 @@ See [[brief_template_v2_exemplar]] §Variant 2 — Quick-take brief.
 - Letters-desk LENS owns final selection. This is pool, not assignment.
 - /write-edition Step 3.5b regenerates this brief from the compiled edition + relaunches letters-desk with named-piece references — second-stage handoff.
 - Cycle-cadence: prefer NEW citizen voices when slate dominated by returning reporters; mix returning + new when cycle is texture-heavy.
-- Returning letter-writers carry rest cycles; check `.claude/agent-memory/letters-desk/MEMORY.md` BEFORE proposing.
+- Returning letter-writers carry rest cycles; check `.claude/agent-memory/letters-desk/memory_letters-desk.md` BEFORE proposing.
 ```
 
 [note: No word-count target — letters-desk LENS prunes the pool.]

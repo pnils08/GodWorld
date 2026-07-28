@@ -353,7 +353,9 @@ the builder loosened the push rules by agent tier:
   - stage with path-specific `git add` — never `git add .` or `git add -A`;
   - the commit touches zero control-plane paths (`.claude/**`, `.agents/**`,
     `CLAUDE.md`, `SESSION_CONTEXT.md`) — those still land only through a
-    Claude session under the `CLAUDE_CTL` gate;
+    Claude session under the `CLAUDE_CTL` gate. **One exception:** your own
+    `**NEXT[<you>]:**` line in `SESSION_CONTEXT.md`, committed alone, per
+    §Session close below;
   - the commit message names the authoring agent;
   - before pushing, check `git log origin/main..HEAD --oneline`; if commits
     from another terminal or agent are stacked, stop and report instead of
@@ -380,6 +382,60 @@ the builder loosened the push rules by agent tier:
   committed.
 - A commit must contain one coherent approved change and must not include
   pre-existing unrelated modifications.
+
+## Session close (kimi, codex, antigravity — builder decision, 2026-07-28)
+
+You carry a lane in `SESSION_CONTEXT.md`: a single `**NEXT[<you>]:**` line, sitting
+beside the four Claude terminals and sharing the same `**PIN:**`. Every terminal
+reads all of those lines at boot. That line is the only way work you did reaches
+the next session — yours or anyone's. Git history records what changed; the NEXT
+line records where the thread is.
+
+**Close your session by rewriting it. Two steps, nothing else.**
+
+1. **Rewrite your own `**NEXT[<you>]:**` line, in place.** One line. Where the work
+   landed and what the next move is — not a task stub, not a paragraph. Detail
+   belongs in the ROLLOUT row, the plan changelog, or the commit body; the NEXT
+   line is the entry point into them. Aim for 350 characters. Nothing enforces
+   that; it costs every terminal at every boot, so keep it tight.
+
+2. **Commit path-specifically**, per the push-authorization rules above.
+
+   **Antigravity:** this is the one commit you are authorized to make. You have no
+   commit or push authorization for work — diffs stay proposals — but your own
+   handoff line is bookkeeping, not work, and a lane nobody can close is a lane
+   that rots. Commit the line alone; propose everything else.
+
+**What you must not touch:**
+
+- **The `**PIN:**` line.** It is whole-world state — cycle, prod engine range,
+  cadence — and a Claude terminal owns it. Never edit it.
+- **Any other lane's NEXT line.** If `NEXT[media]` is stale, that is media's line
+  to fix. Correct content in the wrong hand is still wrong; this rule has governed
+  the four Claude terminals since S304 and it binds you identically.
+- **Everything else in the file.** No header edits, no new sections, no prose. The
+  file is a header line, a PIN line, and one NEXT line per lane. That is all it
+  has ever been allowed to be.
+
+**Mechanically:** `SESSION_CONTEXT.md` is control-plane, so the pre-commit hook
+normally blocks it without `CLAUDE_CTL=1`. There is a narrow carve-out for exactly
+this close — a commit whose only control-plane change is one external lane's own
+NEXT line passes without the flag and prints
+`external-lane handoff — NEXT[<you>] only, control-plane gate waived`. Touch the
+PIN, a second lane, or any other protected path in the same commit and the whole
+commit blocks. **Do not set `CLAUDE_CTL=1` to get around that** — the flag is a
+Claude session's opt-in to the whole control plane, and reaching for it here is the
+thing the carve-out exists to make unnecessary. A block means you staged more than
+your own line; unstage the rest.
+
+**You do not run `/session-end`.** That is a Claude Code skill and it is not
+reachable from your harness. No PIN bump, no ROLLOUT sweep, no mechanical
+orchestrator, no Supermemory bridge — those belong to the Claude terminals. Your
+close is the two steps above.
+
+**One asymmetry:** when a Claude terminal reviews and lands a batch you authored
+(engine-sheet did this for Codex at S338), the landing goes in *that terminal's*
+NEXT line and commit. You still write your own line for the work you did.
 
 ## Deployment and external-write restrictions
 

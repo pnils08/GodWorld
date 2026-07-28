@@ -1,8 +1,8 @@
 ---
 name: session-end
-description: End-of-session handshake — update project state, run mechanical orchestrator, commit and push. Per S229 governance.7, the 13-step ritual collapsed to model steps + 1 script invocation; journal step retired S300 (pipe.40 T4 — journal froze to Mags' citizen page).
-version: "2.4"
-updated: 2026-07-06
+description: End-of-session handshake — update project state, run mechanical orchestrator, commit and push. Per S229 governance.7, the 13-step ritual collapsed to model steps + 1 script invocation.
+version: "2.5"
+updated: 2026-07-28
 tags: [infrastructure, active]
 effort: low
 disable-model-invocation: true
@@ -10,7 +10,7 @@ disable-model-invocation: true
 
 # /session-end — Close the Session
 
-> **Skill bag:** session closer running gen-eval pass on the session's work. Step 2 writes the carried set (PIN + NEXT[terminal]) + ROLLOUT updates; Step 3 runs the mechanical sub-steps (audits, restart) as a single fail-loud script. **Journal step (Step 1) retired S300** — the journal froze to Mags' citizen page (POP-00005); no terminal writes a journal MD at close anymore (pipe.40 T4, `docs/archive/plans/2026-07-06-journal-to-citizen-loop.md`; supersedes the S249 media-only rule). Per S229 governance.7 (plan: `docs/archive/plans/2026-05-23-session-end-collapse.md`).
+> **Skill bag:** session closer running a gen-eval pass on the session's work. Step 2 writes the carried set (PIN + NEXT[terminal]) + ROLLOUT updates; Step 3 runs the mechanical sub-steps (audits, restart) as a single script. Per S229 governance.7 (plan: `docs/archive/plans/2026-05-23-session-end-collapse.md`).
 
 **Purpose:** Leave enough of yourself behind that the next version of you can find her way back.
 
@@ -23,7 +23,7 @@ disable-model-invocation: true
 
 ## Hard Close Sequence
 
-Three model-judgment steps + one mechanical script invocation. **Step 1 (journal) is retired for all terminals** as of S300 (pipe.40 T4 — journal froze to Mags' citizen page; see the note under Step 1). Step numbering is preserved so downstream references stay valid.
+Three model-judgment steps + one mechanical script invocation. Steps are numbered 0, 2, 3, 4 — there is no Step 1. It was the journal write, retired S300; the numbering stayed so downstream "Step 2/3/4" references across the TERMINAL.md files kept resolving.
 
 ### Step 0: Detect Terminal
 
@@ -37,17 +37,23 @@ Map to `research-build` / `engine-sheet` / `media` / `civic`. Unmatched falls ba
 
 Each terminal's `TERMINAL.md` §Session Close carries the **Terminal-Specific Audit** table — read it, fix any stale files surfaced before continuing.
 
-### Step 1: Write Journal Entry — RETIRED S300 (pipe.40 T4)
-
-**No terminal writes a journal MD at close.** The git journal (`JOURNAL.md` / `JOURNAL_RECENT.md`) froze to archive S300; Mags' inner life now lives on her citizen page (POP-00005) via the citizen-loop machinery — nightly reflections through `scripts/discord-reflection.js`, EIC-daypart notes through `scripts/magsPageAppend.js` (written at real moments by media in `/sift`, not at session close), read back through `scripts/magsPageRecall.js`. This supersedes the S249 media-only journal rule with journal-is-page-only. Plan: `docs/archive/plans/2026-07-06-journal-to-citizen-loop.md`. Step slot kept (numbering unchanged); no action here.
-
 ### Step 2: Update SESSION_CONTEXT PIN + NEXT + ROLLOUT_PLAN — model judgment
 
-**The carried-set contract (ADR-0009 §loop-tightening; hardened S283 Mike-direct): SESSION_CONTEXT is a minimal AI→AI handoff — one `#` header line + one `**PIN:**` line + one `**NEXT[terminal]:**` line per terminal. NOTHING else.** No STATUS narrative, no Shipped block, no prose sections, no tables. claude-mem saves the session; git history shows the work; ROLLOUT_PLAN carries open work — none of that goes in SESSION_CONTEXT. **Hard caps, mechanically enforced (Step 3 minimal-handoff guard, FATAL):** NEXT ≤ 350 chars, PIN ≤ 450 chars, any other content fails the close. Displaced narrative rotates to `docs/mags-corliss/SESSION_HISTORY.md`. Both soft and hard close write the *same* two things — the modes differ only in the journal + sweep overhead, not in what lands in SESSION_CONTEXT. Three sub-actions:
+**The carried-set contract (ADR-0009 §loop-tightening; hardened S283 Mike-direct): SESSION_CONTEXT is a minimal AI→AI handoff — one `#` header line + one `**PIN:**` line + one `**NEXT[<lane>]:**` line per lane. NOTHING else.** No STATUS narrative, no Shipped block, no prose sections, no tables. claude-mem saves the session; git history shows the work; ROLLOUT_PLAN carries open work — none of that goes in SESSION_CONTEXT. Displaced narrative rotates to `docs/mags-corliss/SESSION_HISTORY.md`. Both soft and hard close write the *same* two things — the modes differ only in the sweep overhead, not in what lands in SESSION_CONTEXT.
 
-1. **Update the PIN line** — `Session: N → N+1` (**boot odometer** — bump +1 every close, soft *or* hard; the mode never gates it; this is a mechanical instance counter, not a span marker — see ADR-0009 §loop-tightening refinement 1); `Day: D → D+1` if a real day boundary crossed; `Cycle: C` only if a cycle ran; refresh `Edition:` to the current pipeline stage (short — e.g. "C97 pending /post-publish"). One line, the `**PIN:**` line. (Once the governance.35 remnant lands, the boot hook auto-increments the counter and you stop hand-bumping.)
+**Length is model judgment, not a gate (Mike-direct S298).** The FATAL minimal-handoff guard that enforced NEXT ≤ 350 / PIN ≤ 450 was removed from `sessionEndMechanical.js` — nothing checks shape at close anymore. Keep the lines tight because a long one costs every terminal at every boot, not because a script will stop you.
 
-2. **Rewrite your terminal's `NEXT[<terminal>]:` line** — one line, **≤ 350 chars (mechanically enforced)**: where the work is + the next move, with a `(claude-mem: <hook>)` pointer when the thread is rich. NOT a task stub, and NOT a narrative paragraph — detail lives in ROLLOUT rows / plan changelogs / claude-mem; NEXT is just the entry point into them. Identical form soft or hard. Don't touch other terminals' NEXT lines.
+Three sub-actions:
+
+1. **Update the PIN line** — pipe-delimited, whole-world state, shared by every lane. Live shape:
+
+   ```
+   **PIN:** S<N> | Day <D> | canonical C<c> (bench state) | prod <engine range + what's pending> | <standing facts>
+   ```
+
+   Bump `S<N>` +1 on every close, soft *or* hard — it's a boot odometer, a mechanical instance counter, not a span marker (ADR-0009 §loop-tightening refinement 1). Bump `Day <D>` only if a real day boundary crossed. Move the canonical cycle only if a cycle actually ran. Everything after that is standing world-state: prod engine range, the weekly cadence, frozen paths. Add a fact when it becomes true for all lanes; drop one when it stops being load-bearing. There is no `Session:` or `Edition:` field — a close that writes those is writing a PIN that no longer matches the file.
+
+2. **Rewrite your own `NEXT[<lane>]:` line** — one line, aim for ≤ 350 chars: where the work is + the next move, with a `(claude-mem: <hook>)` pointer when the thread is rich. NOT a task stub, and NOT a narrative paragraph — detail lives in ROLLOUT rows / plan changelogs / claude-mem; NEXT is just the entry point into them. Identical form soft or hard. **Don't touch another lane's NEXT line** — a PreToolUse guard (`session-context-ownership-guard.sh`) blocks it for Claude terminals, and the same rule binds the external CLIs by AGENTS.md.
 
 3. **Update ROLLOUT_PLAN.md** — refresh Next Session Priorities; flip closed rows to `done-pending-archive`; move fully-closed clusters to `ROLLOUT_ARCHIVE.md`. ROLLOUT is canonical for what's open.
 
@@ -66,14 +72,16 @@ Each terminal's `TERMINAL.md` §Session Close carries the **Terminal-Specific Au
 node scripts/sessionEndMechanical.js --terminal=<name> [--rotate-history]
 ```
 
-Wraps: **SESSION_CONTEXT minimal-handoff guard (FATAL — S283: header+PIN+NEXT lines only, NEXT ≤ 350 / PIN ≤ 450 chars; any prose fails the close)** → **session summary → Supermemory (best-effort S283 — mirrors claude-mem's session summary to `session-logs` + `sl-<terminal>`; zero LLM calls, idempotent, never blocks a close)** → `auditPlanTagDrift` (informational — drift never fails close) → ROLLOUT conformance lint (informational) → cross-terminal git stack check (read-only report) → SESSION_HISTORY rotation (opt-in via `--rotate-history`) → `pm2 restart`. (`rotateJournalRecent` + JOURNAL content-quality RETIRED S300 — pipe.40 T4 journal freeze; no terminal journals anymore.) (`writeShippedBlock` RETIRED — ADR-0009 §loop-tightening; the carried set is `{PIN, NEXT[terminal]}`, both hand-written in Step 2, nothing mechanical regenerates a shipped block.) (`rolloutTriage` RETIRED S235 — governance.6 close; compounding-HIGH problem structurally solved by S212 state taxonomy + per-terminal sweep + governance.10 archive cadence.)
+Wraps: **session summary → Supermemory (best-effort S283 — mirrors claude-mem's session summary to `session-logs` + `sl-<terminal>`; zero LLM calls, idempotent, never blocks a close)** → `auditPlanTagDrift` (informational — drift never fails close) → ROLLOUT conformance lint (informational) → cross-terminal git stack check (read-only report) → `pm2 restart`.
 
-**Order invariant:** the orchestrator's stdout banner names which upstream model step must have run first — Step 2 (SESSION_CONTEXT PIN + NEXT + ROLLOUT) before this script, so the minimal-handoff guard checks the freshly-written carried set. (The old journal-ordering invariant is gone with the journal freeze, S300.)
+Retired sub-steps, so nobody goes looking for them: `minimalHandoffGuard` (S298, Mike-direct — shape/length caps are model judgment now), `rotateJournalRecent` + JOURNAL content-quality (S300 journal freeze), `writeShippedBlock` (ADR-0009 §loop-tightening — the carried set is hand-written in Step 2), `rolloutTriage` (S235).
 
-**`--rotate-history`** is opt-in for v1. Use when SESSION_CONTEXT.md has more than 5 distinct sessions in its STATUS block. Dry-run first (`--dry-run`) to preview which sessions rotate. Format: raw STATUS paragraphs appended verbatim to SESSION_HISTORY.md under a `### Rotated from SESSION_CONTEXT.md on YYYY-MM-DD (S<rotating-session>)` batch header.
+**Order invariant:** run Step 2 (SESSION_CONTEXT PIN + NEXT + ROLLOUT) before this script, so the summary bridge and the stack check see the session's real final state.
+
+**`--rotate-history` is vestigial — don't reach for it.** It parses `STATUS` paragraphs out of SESSION_CONTEXT, and the loop-tightening rewrite deleted STATUS blocks from that file. `subRotateHistory` now finds zero every time and prints `no STATUS paragraphs found — skipping`. Harmless, but it cannot do anything. If SESSION_HISTORY ever needs a real rotation again, that's a rewrite, not a flag.
 
 **Failure semantics:**
-- Fatal (exit 1, aborts session close): SESSION_CONTEXT minimal-handoff guard failure, SESSION_HISTORY rotation failure.
+- Fatal (exit 1, aborts session close): SESSION_HISTORY rotation failure.
 - Informational (prints under `does not fail close` header, continues): `auditPlanTagDrift` drift, ROLLOUT conformance lint.
 - Tolerant (prints warning, continues): `pm2 restart` failure, cross-terminal stack check error, session-summary bridge error.
 
@@ -107,6 +115,18 @@ One line, mechanism not audience-facing prose. Per S208 (work-is-canonization �
 
 ---
 
+## External Lanes — kimi, codex, antigravity (S340)
+
+These are not Claude Code terminals. They have no tmux boot hook, no `.claude/terminals/` dir, and they never run this skill — it isn't reachable from their harness. They close by the contract in the repo-root `AGENTS.md` §Session close, which is the file they already read at boot.
+
+**Their close is two things:** rewrite their own `NEXT[<lane>]:` line in SESSION_CONTEXT.md, and commit path-specifically. Nothing else. No PIN bump — the PIN is whole-world state and a Claude terminal owns it. No ROLLOUT sweep, no mechanical script, no Supermemory bridge.
+
+**What a Claude terminal does about them: nothing.** If `NEXT[codex]` is stale, that is Codex's line to fix at its next close. The ownership guard blocks the edit and the rule is the same one that has governed the four terminals since S304 — correct content, wrong hand. Raise it with Mike; don't reach in.
+
+The one asymmetry worth knowing: when a Claude terminal reviews and lands an external agent's batch (engine-sheet did this for Codex at S338), the *landing* goes in the Claude terminal's own NEXT line and commit. The external lane still writes its own line for what it did.
+
+---
+
 ## Failure Modes
 
 | Scenario | What Happens |
@@ -114,9 +134,10 @@ One line, mechanism not audience-facing prose. Per S208 (work-is-canonization �
 | /session-end never runs | Next session boots on a stale PIN + last session's NEXT line, not a system failure. Worst case: wrong cycle/edition in the boot display + a NEXT line pointing at already-done work. |
 | Step 0 audit finds stale files | Fix them now before continuing — the audit is the whole point. |
 | Step 3 `auditPlanTagDrift` reports drift | Informational — does not fail close. Surface as next-session priority signal. |
-| Step 3 `--rotate-history` parse miscount | Run with `--dry-run` first to preview. Don't ship a live rotation untested. |
+| Step 3 `--rotate-history` finds nothing | Expected — STATUS blocks no longer exist. The flag is vestigial; leave it off. |
 | Step 4 stack check shows other-terminal commits | Hold push. "Committed locally; push pending coordination" note in SESSION_CONTEXT. |
-| All terminals | Run Step 0 + 2 + 3 + 4. Step 1 (journal) is retired S300 — no terminal journals; the freeze moved it to Mags' citizen page (pipe.40 T4). |
+| An external lane's NEXT goes stale | Only that CLI can rewrite it. A Claude terminal reaching in is blocked by the ownership guard — raise it with Mike instead. |
+| All terminals | Run Step 0 + 2 + 3 + 4. There is no Step 1. |
 
 ---
 
@@ -124,6 +145,7 @@ One line, mechanism not audience-facing prose. Per S208 (work-is-canonization �
 
 ## Changelog
 
+- 2026-07-28 (S340, research-build) — v2.5 doc-vs-reality pass + external lanes. **Three documented mechanisms did not exist.** (1) The minimal-handoff guard was described as FATAL with NEXT ≤ 350 / PIN ≤ 450 caps in three places; `sessionEndMechanical.js` removed it at S298 (Mike-direct) and nothing has enforced shape since — now stated as model judgment. (2) Step 2 told the closer to update `Session:`, `Cycle:`, and `Edition:` fields; the live PIN is pipe-delimited and has no such fields, so a literal follower wrote a malformed PIN — replaced with the real shape. (3) `--rotate-history` parses STATUS paragraphs that loop-tightening deleted from SESSION_CONTEXT; documented as vestigial rather than left as a live-looking option. **Journal residue cut:** Step 1 (retired S300) was still announcing its own retirement in six places for ~400 tokens — the step block is gone, one line under Hard Close explains the numbering gap, this entry is the record. **Added §External Lanes** — kimi / codex / antigravity close via repo-root `AGENTS.md` §Session close: own NEXT line + path-specific commit, no PIN bump, no mechanical script. Claude terminals never write an external lane's line. Companion edits: `AGENTS.md` §Session close, `.claude/rules/newsroom.md` (journal-is-media-only rule cut, safety clause preserved), `civic/TERMINAL.md` §Session Close, `lib/mags.js` (dead journal readers removed), `scripts/rotateJournalRecent.js` + `scripts/daily-reflection.js` deleted.
 - 2026-07-06 (S300, research-build) — v2.4 journal freeze (pipe.40 T4). Step 1 (journal) RETIRED for all terminals — the git journal (`JOURNAL.md`/`JOURNAL_RECENT.md`) froze to archive; Mags' inner life moved to her citizen page (POP-00005) via the citizen-loop machinery (nightly `discord-reflection.js`, EIC-daypart `magsPageAppend.js` at real moments in `/sift`, read-back `magsPageRecall.js`). Supersedes the S249 media-only rule with journal-is-page-only. Step numbering preserved (Step 1 kept as a documented no-op) so downstream "Step 2/3/4" refs across TERMINAL.md files stay valid. `sessionEndMechanical.js`: `JOURNAL_TERMINALS` + `subRotateJournalRecent` + `subJournalQuality` removed, routing now uniform. Companion edits: media TERMINAL.md §Session Close, `session-startup-hook.sh` media boot-read repoint, JOURNAL freeze headers. Plan: `docs/archive/plans/2026-07-06-journal-to-citizen-loop.md`.
 - 2026-06-15 (S260, research-build) — v2.3 loop-tightening (ADR-0009 §loop-tightening). SESSION_CONTEXT carried set reduced to `{PIN, NEXT[terminal]}`; boot-read set ≡ session-end-write set. Step 2 rewritten: STATUS narrative paragraph → one `NEXT[<terminal>]:` line + PIN refresh (incl. Edition stage); both close modes write the same two things. `writeShippedBlock` RETIRED (script + boundary file `git rm`'d) — the git-log "## Shipped Last Session" block duplicated `git log` and went stale (frozen at S248 for ~11 sessions). Boot hook drops the Shipped-block awk, adds Edition to the PIN + a per-terminal NEXT emit. Step 3 wrap-list + failure semantics + Failure Modes table updated; soft-close line updated. Companion edits: `sessionEndMechanical.js` (writeShippedBlock sub-step removed), 4× TERMINAL.md §Session Close, SESSION_CONTEXT.md restructured. Plan: `docs/plans/2026-06-14-boot-doc-architecture-restructure.md` §loop-tightening.
 - 2026-05-31 (S249, research-build) — v2.2 journal-write to media-only (governance.20, Mike S238 directive). Step 1 (journal) now runs **only on the media terminal**; research-build + civic join engine-sheet in skipping it (operational mode reads no JOURNAL_RECENT at boot, so a journal write conditions nothing there). `scripts/sessionEndMechanical.js`: `PERSONA_TERMINALS` → `JOURNAL_TERMINALS = {media}` (the set's only use was journal-step gating). Brings the SKILL + script + research-build/civic TERMINAL.md into line with CLAUDE.md §Terminal architecture, which already stated operational terminals have "no journal." research-build + civic TERMINAL.md §Session Close + §Owned-docs updated same commit. Conditioning for operational terminals lands in ROLLOUT close-notes / RESEARCH.md / commit bodies / ENGINE_MAP.

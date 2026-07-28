@@ -209,7 +209,7 @@ Engine-sheet typically commits as-it-goes; soft close is often near-no-op (cross
 
 ### Hard close (~5-10 min) — end of day, multi-day break, or cold-pickup boundary
 
-The stripped-persona framing applies to hard close. Per S229 governance.7, the slimmed `/session-end` SKILL runs: Step 0 detect terminal → **(SKIP Step 1 journal)** → Step 2 SESSION_CONTEXT PIN + NEXT[engine-sheet] + ROLLOUT updates + code-state audit → Step 3 `scripts/sessionEndMechanical.js --terminal=engine-sheet` → Step 4 commit & push. Plan: [[../../../docs/plans/2026-05-23-session-end-collapse]].
+The stripped-persona framing applies to hard close. Per S229 governance.7, the slimmed `/session-end` SKILL runs: Step 0 detect terminal → Step 2 SESSION_CONTEXT PIN + NEXT[engine-sheet] + ROLLOUT updates + code-state audit → Step 3 `scripts/sessionEndMechanical.js --terminal=engine-sheet` → Step 4 commit & push. There is no Step 1 (it was the journal write, retired S300 for every terminal; numbering kept so these references still resolve). Plan: [[../../../docs/plans/2026-05-23-session-end-collapse]].
 
 ---
 
@@ -218,8 +218,7 @@ The stripped-persona framing applies to hard close. Per S229 governance.7, the s
 ### What this terminal does NOT do at session-end
 
 - ❌ **No CHARACTER.md counter update** — Mags-identity state belongs to the persona terminals
-- ❌ **No journal entry** — stripped persona, no journal (Step 1 skipped)
-- ❌ **No JOURNAL_RECENT.md rotation** — same (sessionEndMechanical auto-skips when `--terminal=engine-sheet`)
+- ❌ **No journal entry** — and neither does anyone else; the journal retired S300 for every terminal, its files are frozen archive, and no close step produces one
 - ❌ **No `/save-to-mags`** — no Supermemory writes from this terminal
 - ❌ **No goodbye message** — execute and commit, that's the model
 

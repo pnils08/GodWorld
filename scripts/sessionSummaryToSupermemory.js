@@ -8,9 +8,14 @@
 // into Supermemory so each terminal's slice of work holds its own session
 // context in the cloud brain.
 //
-// Container design (follows the citizen-pages umbrella+specific precedent):
-//   containerTags: ["session-logs", "sl-<terminal>"]
-//   → search ALL session logs via "session-logs", one terminal's via "sl-<t>".
+// Container design (S341 — was the citizen-pages umbrella+specific dual tag):
+//   containerTags: ["session-logs"]   ← auto-mirror writes HERE ONLY
+//   → search all session logs via "session-logs"; narrow by metadata.terminal.
+// `sl-<terminal>` is NO LONGER written automatically. It is a hand-write container:
+// facts you deliberately put there so a future query surfaces them. Rationale in
+// full at the containerTags line below — short version, this script posts a whole
+// session log as one doc, Supermemory chunks it, and each chunk becomes its own
+// searchable memory, so auto-mirroring buried deliberate writes under log fragments.
 // customId "session-log-<memory_session_id>" makes re-runs idempotent
 // (Supermemory upserts on customId — no duplicate docs if close runs twice).
 //
@@ -136,7 +141,20 @@ async function main() {
   const body = {
     content,
     customId: `session-log-${sid}`,
-    containerTags: ['session-logs', `sl-${args.terminal}`],
+    // S341 (Mike-direct): `sl-<terminal>` REMOVED from the auto-mirror. This bridge
+    // posts a whole session log as one doc; Supermemory chunks it, and every chunk
+    // becomes an independently searchable memory. That turned sl-<terminal> — meant
+    // to be a place you deliberately write a fact so a future query surfaces it —
+    // into a dump of session-log fragments. A live S341 pull of sl-research-build
+    // returned a lone "Completed:" bullet ("All code committed and pushed to
+    // origin/main"), a degenerate claude-mem row ("Mand" x40, nothing validates the
+    // rows before mirroring), and newsroom canon (Rhea gate, S332 probation) — that
+    // last because the tag records which TERMINAL WAS OPEN, not what the content is
+    // about. Deliberate writes were drowned by chunk debris.
+    // Narrative history still lands here under `session-logs`. `sl-<terminal>` is now
+    // written ONLY by hand (npx supermemory remember ... --tag sl-<terminal>).
+    // `metadata.terminal` below keeps these docs filterable by terminal regardless.
+    containerTags: ['session-logs'],
     metadata: {
       type: 'session-log',
       terminal: args.terminal,

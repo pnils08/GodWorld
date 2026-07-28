@@ -60,7 +60,7 @@ console.log('\nTest 4: SKIP_FILES excludes templates + index');
 {
   assert('SKIP_FILES Set declared',
     /const\s+SKIP_FILES\s*=\s*new\s+Set\(/.test(source));
-  for (const f of ['TEMPLATE.md', 'GAP_LOG_TEMPLATE.md', 'BACKLOG.md']) {
+  for (const f of ['PLAN_TEMPLATE.md', 'GAP_LOG_TEMPLATE.md', 'BACKLOG.md']) {
     assert(`SKIP_FILES includes '${f}'`, source.includes(`'${f}'`));
   }
 }

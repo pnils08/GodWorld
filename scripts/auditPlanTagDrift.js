@@ -16,7 +16,7 @@
 //   node scripts/auditPlanTagDrift.js          # report; exit 0 if clean, 1 if drift
 //   node scripts/auditPlanTagDrift.js --json   # JSON output for CI
 //
-// Skips: TEMPLATE.md, GAP_LOG_TEMPLATE.md, BACKLOG.md (templates + index docs).
+// Skips: PLAN_TEMPLATE.md, GAP_LOG_TEMPLATE.md, BACKLOG.md (templates + index docs).
 
 'use strict';
 
@@ -24,7 +24,7 @@ const fs = require('fs');
 const path = require('path');
 
 const PLANS_DIR = path.join(__dirname, '..', 'docs', 'plans');
-const SKIP_FILES = new Set(['TEMPLATE.md', 'GAP_LOG_TEMPLATE.md', 'BACKLOG.md']);
+const SKIP_FILES = new Set(['PLAN_TEMPLATE.md', 'GAP_LOG_TEMPLATE.md', 'BACKLOG.md']);
 const STATUS_TAGS = new Set(['draft', 'active', 'complete', 'done', 'parked', 'archived', 'deferred']);
 
 // Conservative detection: only flag explicit status-transition phrases.

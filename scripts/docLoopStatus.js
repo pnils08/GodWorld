@@ -32,7 +32,7 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const ROLLOUT = path.join(ROOT, 'docs', 'engine', 'ROLLOUT_PLAN.md');
 const RESEARCH_DIR = path.join(ROOT, 'docs', 'research');
-const RESEARCH_SKIP = new Set(['TEMPLATE.md', 'index.md']);
+const RESEARCH_SKIP = new Set(['RESEARCH_TEMPLATE.md', 'index.md']);
 
 const STATES = new Set([
   'ready', 'in-progress', 'done-pending-archive', 'blocked', 'needs-info', 'wontfix', 'parked',

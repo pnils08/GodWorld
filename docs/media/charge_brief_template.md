@@ -10,7 +10,7 @@ sources:
   - "[[../RESEARCH]] — S272 proof charge shape + two craft refinements (lived-anchor, canonize-meaning)"
   - "test artifacts: output/desk-test/sports_c100_deep_hal.md, output/desk-test/civic_c100_deep_carmen.md"
 pointers:
-  - "[[charge_brief_c100_civic_exemplar]] — worked exemplar reconstructing the C100 civic charge that produced Carmen's A piece"
+  - "[[media/examples/charge_brief_c100_civic_exemplar]] — worked exemplar reconstructing the C100 civic charge that produced Carmen's A piece"
   - "[[brief_template_v2]] — the parallel-path packet brief this REPLACES under deep-dispatch (both coexist; build-alongside)"
   - "[[story_evaluation]] — bug-is-event story signal the charge enacts at write time"
   - "[[SCHEMA]] — doc conventions; [[index]] — registered same commit"

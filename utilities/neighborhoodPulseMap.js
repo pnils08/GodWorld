@@ -16,7 +16,7 @@
  * Raw units are event-points; the fold (Task 4) applies dampening + caps —
  * nothing here writes a sheet. Pure logic, ES5-safe (Node + Apps Script).
  *
- * Plan: docs/plans/2026-06-10-engine33-neighborhood-citizen-loop.md Task 1.
+ * Plan: docs/archive/plans/2026-06-10-engine33-neighborhood-citizen-loop.md Task 1.
  */
 
 var PULSE_MAP = {

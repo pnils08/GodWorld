@@ -150,7 +150,7 @@ pointers:
 ## Parked (explicitly out of scope — do not fold in)
 
 - **Injury inflow from world events** (SAFETY/TRAFFIC city events injuring sampled citizens) — real coupling gap, separate row when this ships.
-- **Named hospital institution page / staff citizens** (doctors, nurses as Tier-3s) — publication-driven materialization per [[engine/LEDGER_REPAIR_HOUSEHOLDS]] model; earn it through coverage first.
+- **Named hospital institution page / staff citizens** (doctors, nurses as Tier-3s) — publication-driven materialization per [[engine/archive/LEDGER_REPAIR_HOUSEHOLDS]] model; earn it through coverage first.
 - **Neighborhood-level hospital load differentials** — one hospital citywide until census data suggests otherwise.
 
 ## Open questions

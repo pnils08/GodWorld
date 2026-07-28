@@ -132,7 +132,7 @@ State answers "is this pickable right now"; terminal answers "by whom." They are
    - **In-flight observations** → existing gap log (`output/production_log_..._gaps.md`).
    - **Evaluations** → `docs/research/YYYY-MM-DD-<topic>.md` (per [[../research/TEMPLATE]]).
    - **Architectural decisions** → next ADR (follow ADR-0001 / 0004 / 0005 shape).
-   - **Engine work** → existing parent spec ([[PHASE_42_PATTERNS]], [[ENGINE_REPAIR]] row).
+   - **Engine work** → existing parent spec ([[engine/archive/PHASE_42_PATTERNS]], [[ENGINE_REPAIR]] row).
 7. Add the row to the appropriate group table in §Open Work.
 
 **Description content lives in the pointer doc, NOT the ROLLOUT row.**

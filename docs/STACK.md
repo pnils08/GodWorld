@@ -2,7 +2,7 @@
 
 All services, URLs, credentials, and running processes. Keep this current.
 
-Last updated: 2026-07-27 (Moltbook reduced to one autonomous daily visit with one-consumption reflection handoff; SpaceMolt live PM2 entry removed and saved). Previous: 2026-07-24 Codex orientation audit.
+Last updated: 2026-07-28 (live PM2 inventory verified; `wd-cards-daemon` added). Previous: 2026-07-27 Moltbook/SpaceMolt update.
 
 ---
 
@@ -81,6 +81,7 @@ All containers on P N org ($9/mo). GodWorld org ($19/mo) is legacy — canceling
 ```
 godworld-dashboard    online    port 3001, 40 API endpoints
 mags-bot              online    Discord presence, Haiku 4.5 model
+wd-cards-daemon       online    polls and rebuilds invalidated world-data cards
 moltbook              cron      stopped between scheduled runs, normal
 ```
 

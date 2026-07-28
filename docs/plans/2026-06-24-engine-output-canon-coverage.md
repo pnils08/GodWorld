@@ -4,7 +4,7 @@
 **Filed:** 2026-06-24
 **ROLLOUT:** engine.41 (file on add)
 **Owner:** engine-sheet (build) — design seam reviewed inline; taxonomy questions → research-build if they surface
-**Parent specs:** [[../engine/PHASE_42_PATTERNS]] (seed pipeline), [[../engine/ROLLOUT_PLAN]]
+**Parent specs:** [[engine/archive/PHASE_42_PATTERNS]] (seed pipeline), [[../engine/ROLLOUT_PLAN]]
 **Pattern:** feedback_measure-twice-cascading-effects
 
 ## Problem (Mike, S271)

@@ -116,7 +116,7 @@
 | `output/desks/{desk}/README.md` | Static workspace navigation for desk agents (6 desks) | On-Demand | Manual (when folder structure changes) | M |
 | `docs/media/ARTICLE_INDEX_BY_POPID.md` | 326+ citizens indexed by POP-ID | On-Demand | `scripts/editionIntake.js` | M |
 | `docs/media/CITIZENS_BY_ARTICLE.md` | Reverse index: articles → citizens | On-Demand | `scripts/editionIntake.js` | M |
-| `docs/media/SHOW_FORMATS.md` | Podcast show formats — 3 formats, host assignments, segment structure | On-Demand | Manual (rare) | M |
+| `docs/media/podcast/SHOW_FORMATS.md` | Podcast show formats — 3 formats, host assignments, segment structure | On-Demand | Manual (rare) | M |
 | `docs/media/PLAYER_CARD_INDEX.md` | 11 Statcast player cards indexed with journalist interpretation notes | On-Demand | Manual (when cards added) | M |
 | `editions/CYCLE_PULSE_TEMPLATE.md` | v1.3 — Edition structure, canon rules, return formats | On-Demand | Manual (rare) | M |
 | `docs/mara-vance/` | Mara Vance: character, operating manual, newsroom interface | On-Demand | Manual (rare) | M |

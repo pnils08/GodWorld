@@ -671,7 +671,7 @@ Brief shape per v2 template (canonical):
 
 ## CANONICAL EXEMPLAR
 
-See [[brief_template_v2_exemplar]] for the placeholder-filled reference brief.
+See [[media/brief_template_v2_exemplar]] for the placeholder-filled reference brief.
 ```
 
 **Word-count target:** 250-500 words per brief. ≥500 drifts toward v1 over-curation; ≤250 risks under-specifying angle.
@@ -931,7 +931,7 @@ When /sift v2 completes, `/write-edition` picks up by reading:
 - Run city-hall voices — that already happened.
 - Read world_summary as canon — orientation only in v2.
 
-## Gap log (S212 — see [[../../docs/plans/GAP_LOG_TEMPLATE]])
+## Gap log (S212 — see [[plans/GAP_LOG_TEMPLATE]])
 
 At skill close, capture friction observed during sift as a gap log. /sift is a heavy skill at the **media generator terminal**; sidecar gap logs catch inefficiency the skill couldn't catch while running.
 

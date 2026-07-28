@@ -8,7 +8,7 @@
  * S222 C94 surfaced (Carmen Solis, Roberto Iglesias both published E93,
  * no Sim_Ledger row → /sift Step 5 classifies as NEW → ingest duplicates).
  *
- * Per plan: docs/plans/2026-05-24-canon-3-cross-layer-citizen-drift.md §Task 8.
+ * Per plan: docs/archive/plans/2026-05-24-canon-3-cross-layer-citizen-drift.md §Task 8.
  * Per ADR-0007 lookup precedence: bay-tribune appearance is paper-of-record;
  * absence of a Sim_Ledger row for a published name is structural drift,
  * not a missing citizen.

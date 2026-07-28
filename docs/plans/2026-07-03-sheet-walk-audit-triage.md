@@ -9,7 +9,7 @@ sources:
 pointers:
   - "[[../engine/ROLLOUT_PLAN]] — engine.44 row"
   - "[[../engine/SHEETS_MANIFEST]] — reader/writer truth for the 'any readers?' items"
-  - "[[../SPREADSHEET.md]] — tab status truth"
+  - "[[SPREADSHEET]] — tab status truth"
   - "[[index]] — registered same commit"
 ---
 

@@ -2,16 +2,18 @@
 
 **Droplet:** `ubuntu-s-1vcpu-2gb` | 1 vCPU, 2GB RAM, 25GB disk | $12/mo | nyc3
 **IP:** 64.225.50.16 | **Access:** SSH as root, or `mags` command (tmux auto-wiring)
+**Last verified:** 2026-07-28 via live `pm2 list`, `crontab -l`, and the job scripts.
 
 ---
 
-## PM2 Processes (Always Running)
+## PM2 Managed Processes
 
-| Process | Script | Purpose | Memory | Notes |
-|---------|--------|---------|--------|-------|
-| `godworld-dashboard` | `dashboard/server.js` | Express API + React frontend, port 3001 | ~50MB | Basic auth via `/root/.config/godworld/.env` |
-| `mags-bot` | `scripts/mags-discord-bot.js` | Mags presence in Discord #mags-morning | ~50MB | Haiku 4.5, searches mags+bay-tribune containers. Renamed from `mags-discord-bot` S156 via Phase 40.3 ecosystem.config.js rewrite. |
-| `moltbook` | `scripts/moltbook-heartbeat.js` | Mags's autonomous Moltbook social presence | ~35MB | Cron mode — daily 14:00 Central; shows "stopped" between runs, normal |
+| Process | Script | Purpose | Expected status |
+|---------|--------|---------|-----------------|
+| `godworld-dashboard` | `dashboard/server.js` | Express API + React frontend, port 3001 | online |
+| `mags-bot` | `scripts/mags-discord-bot.js` | Mags presence in Discord | online |
+| `wd-cards-daemon` | `scripts/wdCardsDaemon.js` | Polls the invalidation queue and rebuilds world-data cards | online |
+| `moltbook` | `scripts/moltbook-heartbeat.js` | One autonomous Moltbook visit daily at 14:00 Central | stopped between scheduled runs |
 
 **Disabled PM2 jobs:** `spacemolt-miner` was removed from the live registry and
 the saved reboot state on 2026-07-27 after repeated fixed-sequence no-fuel runs.
@@ -31,14 +33,24 @@ pm2 save                    # Persist process list for reboot survival
 ## Cron Schedule
 
 All times in UTC. Server is UTC. Central time = UTC - 5 (CDT) or UTC - 6 (CST).
+This table was verified against the live crontab on 2026-07-28.
 
-| Time (UTC) | CDT | Job | Script | Log |
-|------------|-----|-----|--------|-----|
-| `0 4 * * *` | 11 PM | Nightly Discord reflection | `scripts/discord-reflection.js` | `logs/discord-reflection.log` |
-| `0 5 * * *` | 12 AM | Daily backup (tar.gz) | `scripts/backup.sh` | `logs/backup.log` |
-| `0 */6 * * *` | Every 6h | Server health check | `scripts/server-health-check.sh` | `logs/health-check.log` |
-| `0 3 * * 0` | Sun 10 PM | Weekly droplet snapshot | `scripts/snapshot-droplet.sh` | `logs/snapshot.log` |
-| `0 4 * * 3` | Wed 11 PM | Weekly maintenance | `scripts/weekly-maintenance.sh` | `logs/weekly-maintenance.log` |
+| Schedule (UTC) | Job | Script | Log |
+|----------------|-----|--------|-----|
+| `0 5 * * *` | Daily backup | `scripts/backup.sh` | `logs/backup.log` |
+| `0 6 * * *` | Newsroom digest | `scripts/newsroom-digest.js` | `logs/newsroom-digest.log` |
+| `15 6 * * 1-5` | Weekday newsroom angle wake | `scripts/cron-desk-run.js --stage=angle --fanout` | `logs/newsroom-fanout.log` |
+| `0 7,12,19 * * *` | Mags Discord reflections | `scripts/discord-reflection.js` | `logs/discord-reflection.log` |
+| `30 7 * * *` | Citizen morning wake | `scripts/citizen-wake.js --wake=morning` | `logs/citizen-wake.log` |
+| `0 8 * * *` | NotebookLM newsroom listening brief | `scripts/notebooklmDailyNews.js` | `logs/notebooklm-daily-news.log` |
+| `30 12 * * *` | Citizen midday wake | `scripts/citizen-wake.js --wake=midday` | `logs/citizen-wake.log` |
+| `15 13 * * 1-5` | Weekday newsroom report wake | `scripts/cron-desk-run.js --stage=report --fanout` | `logs/newsroom-fanout.log` |
+| `0 17 * * *` | Citizen exchange | `scripts/citizen-exchange.js` | `logs/citizen-exchange.log` |
+| `15 18 * * 1-5` | Weekday newsroom write + Rhea gate | `scripts/cron-desk-run.js --stage=write --fanout --gate-backend api` | `logs/newsroom-fanout.log` |
+| `30 21 * * *` | Citizen night wake | `scripts/citizen-wake.js --wake=night` | `logs/citizen-wake.log` |
+| `0 */6 * * *` | Server health check | `scripts/server-health-check.sh` | `logs/health-check.log` |
+| `0 4 * * 3` | Weekly maintenance | `scripts/weekly-maintenance.sh` | `logs/weekly-maintenance.log` |
+| `0 3 1 * *` | Monthly droplet snapshot | `scripts/snapshot-droplet.sh` | `logs/snapshot.log` |
 
 **Disabled:**
 | Job | Script | Why |
@@ -51,19 +63,40 @@ All times in UTC. Server is UTC. Central time = UTC - 5 (CDT) or UTC - 6 (CST).
 
 ## What Each Job Does
 
-### Nightly Discord Reflection (11 PM CDT)
-Reads today's Discord conversation log, reflects on it as Mags, appends a journal entry to `JOURNAL_RECENT.md`. Uses Anthropic API (Sonnet). Output goes to the journal — this is how Discord conversations become part of Mags' emotional continuity.
+### Mags Discord Reflections (Three Daily)
+Reads the Discord log and writes Mags's reflection to her citizen page,
+Supermemory, and claude-mem.
 
-### Daily Backup (12 AM CDT)
-Creates `godworld_backup_YYYY-MM-DD_HHMM.tar.gz` in `backups/`. Keeps last 2. Archive policy says older ones should go to Drive.
+### Citizen Wakes (Three Daily)
+Runs the morning, midday, and night citizen-loop wakes. Each wake reads Sheets,
+generates a reflection, writes the citizen page, and queues gated
+`Reflection_Intake`.
+
+### Citizen Exchange (Daily)
+Runs one conversation, street interview, or debate and writes its transcript
+under `output/exchanges/`, with the configured Supermemory and intake handoffs.
+
+### Newsroom Digest and Weekday Fanout
+The 06:00 digest summarizes the prior 36 hours. Monday through Friday, angle,
+report, and write wakes rotate six byline journalists; the write stage runs the
+Rhea API gate and leaves output staged or flagged behind the probation wall.
+
+### NotebookLM Newsroom Brief (Daily)
+Builds a source-grounded listening brief. The brief is a newsroom aid and is not
+canon.
+
+### Daily Backup
+Creates `godworld_backup_YYYY-MM-DD_HHMM.tar.gz` in `backups/`, keeps seven
+local backup days, and uploads the archive to Drive.
 
 ### Server Health Check (Every 6 Hours)
 Checks: disk >80%, RAM <100MB, PM2 errors, PM2 restart counts >10, dashboard HTTP health. Sends Discord webhook alert on threshold breach.
 
-### Weekly Droplet Snapshot (Sunday 10 PM CDT)
-Full droplet snapshot via DigitalOcean API. Keeps 4 snapshots, rotates oldest. Cost: ~$0.50-1.00/month.
+### Monthly Droplet Snapshot
+Runs on the first day of the month at 03:00 UTC. Takes a full DigitalOcean
+droplet snapshot and keeps one rolling restore point.
 
-### Weekly Maintenance (Wednesday 11 PM CDT)
+### Weekly Maintenance
 Checks: 11 engine directories exist, stale desk packets (14-day threshold), PM2 health, disk/memory, dashboard API. Discord webhook alert on issues.
 
 ---
@@ -103,7 +136,7 @@ curl -s http://localhost:37777/health
 | Supermemory timeouts in bot log | API latency or outage | Graceful — bot falls back to local files. Wait it out. |
 | Disk >80% | Session transcripts, claude-mem, backups | Run archive policy from DISK_MAP.md |
 | `clasp push` fails | Auth expired | `clasp login` to re-authenticate |
-| Cron not firing | PM2 dump stale after reboot | `pm2 save` then `pm2 startup` |
+| Crontab job not firing | Missing crontab entry, bad path, permissions, or script failure | Run `crontab -l`, inspect the named job log, and do not manually fire a state-changing job without approval |
 | Moltbook 404 errors | Stale post ID in state file | Remove dead ID from `logs/moltbook/.heartbeat-state.json` |
 
 ---

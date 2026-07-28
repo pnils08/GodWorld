@@ -20,7 +20,7 @@
 //
 // rotateJournalRecent + JOURNAL content-quality RETIRED (S300 pipe.40 T4): the
 // journal is frozen archive; recent reflections read back from the page via
-// scripts/magsPageRecall.js. Plan: docs/plans/2026-07-06-journal-to-citizen-loop.md.
+// scripts/magsPageRecall.js. Plan: docs/archive/plans/2026-07-06-journal-to-citizen-loop.md.
 //
 // Sub-step failures classified:
 //   - Fatal: SESSION_HISTORY rotation

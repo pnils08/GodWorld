@@ -31,7 +31,7 @@ argument-hint: "[mode] [subject]"
 
 **Companion row:** `pipeline.34` (gap-log path convention harmonization across 5 heavy skills — /sift / /write-edition / /post-publish / /edition-print / /interview / /write-supplemental) split out per advisor pass S233; **SETTLED S248** — canonical convention `output/production_log_c<XX>_interview_<subject-slug>_gaps.md` (`production_log_c{XX}_<skill>_<slug>_gaps.md`, slug-infixed since interviews can run multiple times per cycle).
 
-**Source:** `output/production_log_interview_c94_gaps.md` (13 entries G-I1→G-I13, triage at bottom) + JOURNAL Entry 188 (S230 — "the plan was the work") + plan [[../../../docs/plans/2026-05-24-pipeline-30-interview-rewrite]].
+**Source:** `output/production_log_interview_c94_gaps.md` (13 entries G-I1→G-I13, triage at bottom) + JOURNAL Entry 188 (S230 — "the plan was the work") + plan [[archive/plans/2026-05-24-pipeline-30-interview-rewrite]].
 
 ---
 

@@ -2,7 +2,7 @@
 
 **This file is canonical for open/closed work** (S207). Pointer-only: one line per job, detail lives in the pointer doc — never here (S286 hard rule, Mike-direct).
 
-**Status:** ACTIVE (building) | **Last Updated:** Session 286 (2026-07-02) — pointer-collapse: all inline row detail relocated verbatim to owning plan docs; pre-collapse file in git history + section moves in [[ROLLOUT_ARCHIVE]].
+**Status:** ACTIVE (building) | **Last Updated:** Session 341 (2026-07-28) — live engine docs unarchived, MD indexing gate restored, and builder-terminal ownership normalized.
 **Filing protocol (S212):** semantic groups + pointer-only entries — see [[rollout-rules]] §3–§5 (taxonomy, add, close). Full design: [[../adr/0005-rollout-plan-structure]].
 **North star:** `docs/ARCHITECTURE_VISION.md` — Jarvis + persistent sessions. Everything we build points there.
 **Completed phase details:** [[engine/ROLLOUT_ARCHIVE]] — read on demand, not at boot.
@@ -40,23 +40,23 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | pipeline.8 | Supplemental strategy — one per cycle minimum | in-progress | research-build | [[../EDITION_PIPELINE]] |
 | pipeline.13 | Photo pipeline rebuild | in-progress | research-build | [[../plans/2026-04-25-photo-pipeline-rebuild]] — detail in pointer (relocated 2026-07-02) |
 | pipeline.24 | /sift v2 rebuild | in-progress | research-build | [[../plans/2026-05-22-sift-v2]] + [[../media/brief_template_v2]] — detail in pointer (relocated 2026-07-02) |
-| pipeline.37 | /post-publish C96 friction | ready | engine-sheet / research-build / media | [[../../output/production_log_c96_post_publish_gaps.md]] — detail in pointer (relocated 2026-07-02) |
+| pipeline.37 | /post-publish C96 friction | ready | engine-sheet / research-build | [[../../output/production_log_c96_post_publish_gaps.md]] — detail in pointer (relocated 2026-07-02) |
 | pipeline.36 | /edition-print C96 friction | ready | engine-sheet / research-build | [[../../output/production_log_c96_print_gaps.md]] — detail in pointer (relocated 2026-07-02) |
 | pipeline.35 | Cycle-init "admin" skill + one-true-cycle-source | ready | research-build / engine-sheet | [[../plans/2026-05-31-cycle-init-admin-skill]] + [[../plans/2026-05-24-governance-14-edition-pipeline-rewrite]] — detail in pointer (relocated 2026-07-02) |
-| pipeline.39 | C99 gap handoffs — post-publish/print/run-cycle logs + canon drift + letters-gate bug | ready | research-build / engine-sheet / media | [[../../output/production_log_c99_post_publish_gaps.md]] + [[../../output/production_log_c99_print_gaps.md]] + [[../../output/production_log_run_cycle_c99_gaps.md]] + canon_drift_c99.json — filed 2026-07-02 |
-| pipeline.41 | Tensions → /sift story seeds — /sift reads the open tension register as door-knock candidates (subjective material, never publishable as fact) | ready | media | [[../plans/2026-07-06-citizen-loop-deepening]] §Task 8 |
-| pipeline.43 | Citizen voice quote supply (PRIORITY, Mike-direct S312) — ALL T1–5 built (T1–2 live-verified S312); acceptance rides first live edition (C101 /write-edition) | in-progress | media (live verify) | [[../plans/2026-07-11-citizen-voice-quote-supply]] |
-| pipeline.44 | Desk-slice fork (FLAGSHIP, Mike-direct S313) — T1–T4 done S313 (3 skills live); open: T5 post-publish fit, T6 pilot | in-progress | engine-sheet (T5) + media (T6) | [[../research/2026-07-11-desk-slice-fork]] |
+| pipeline.39 | C99 gap handoffs — post-publish/print/run-cycle logs + canon drift + letters-gate bug | ready | research-build / engine-sheet | [[../../output/production_log_c99_post_publish_gaps.md]] + [[../../output/production_log_c99_print_gaps.md]] + [[../../output/production_log_run_cycle_c99_gaps.md]] + canon_drift_c99.json — filed 2026-07-02 |
+| pipeline.41 | Tensions → /sift story seeds — /sift reads the open tension register as door-knock candidates (subjective material, never publishable as fact) | ready | research-build | [[../plans/2026-07-06-citizen-loop-deepening]] §Task 8 |
+| pipeline.43 | Citizen voice quote supply (PRIORITY, Mike-direct S312) — ALL T1–5 built (T1–2 live-verified S312); acceptance rides first live edition (C101 /write-edition) | in-progress | research-build | [[../plans/2026-07-11-citizen-voice-quote-supply]] |
+| pipeline.44 | Desk-slice fork (FLAGSHIP, Mike-direct S313) — T1–T4 done S313 (3 skills live); open: T5 post-publish fit, T6 pilot | in-progress | engine-sheet / research-build | [[../research/2026-07-11-desk-slice-fork]] |
 
 ### engine.* — Engine code, ledger, schema
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| engine.1 | Phase 40.2 cattle refactor (needs plan) | blocked | engine-sheet | [[PHASE_40_PLAN]] §40.2 |
-| engine.2 | Phase 42 writer consolidation | in-progress | engine-sheet | [[../plans/2026-04-28-phase-42-writer-consolidation]] + [[PHASE_42_PATTERNS]] — detail in pointer (relocated 2026-07-02) |
+| engine.1 | Phase 40.2 cattle refactor (needs plan) | blocked | engine-sheet | [[engine/archive/PHASE_40_PLAN]] §40.2 |
+| engine.2 | Phase 42 writer consolidation | in-progress | engine-sheet | [[../plans/2026-04-28-phase-42-writer-consolidation]] + [[engine/archive/PHASE_42_PATTERNS]] — detail in pointer (relocated 2026-07-02) |
 | engine.3 | Advance-initiative remedy threshold calibration (post-E92 audit) | needs-info | engine-sheet | [[ENGINE_REPAIR]]; `output/engine_review_c92.md` |
 | engine.4 | Dead spreadsheet-tab cleanup — 7/8 done. Faith_Ledger reclassified (consumer shipped S180; corrected via SPREADSHEET.md audit). **OPEN: Youth_Events** — flips done-pending-archive when engine.5 unblocks it OR Youth_Events is itself phase-disabled. | blocked | engine-sheet | [[../SPREADSHEET]] (tab audit) |
-| engine.5 | Household + family simulation (Representative Sample model, reframed S243) — functional youth seed → engine life-event simulation → publication-driven family materialization. Steward authority granted S243. | in-progress | engine-sheet | [[LEDGER_REPAIR_HOUSEHOLDS]] |
+| engine.5 | Household + family simulation (Representative Sample model, reframed S243) — functional youth seed → engine life-event simulation → publication-driven family materialization. Steward authority granted S243. | in-progress | engine-sheet | [[engine/archive/LEDGER_REPAIR_HOUSEHOLDS]] |
 | engine.6 | Press_Drafts.LinkedStoryline 0% populated (DEAD-COLUMN, 164 rows) | blocked | engine-sheet | [[ENGINE_REPAIR]] row |
 | engine.7 | Engine Routing Foundation — Phase 6 cutover (gated on 3 cycles shadow data) | in-progress | research-build / engine-sheet | [[../plans/2026-05-07-engine-routing-foundation]] |
 | engine.8 | Header-drift detector C93 Type-2 triage (16 MED clusters) + C94 sweep absorbed S225 (G-EC5–G-EC21 orphan literals + G-EC24–G-EC32 defensive-fallback noise + G-RC7 KONO civic.10b follow-up) per triage cluster C11 | blocked | engine-sheet | [[../plans/2026-05-05-writer-header-alignment-detector]] §Triage; C11 fold ref [[../plans/2026-05-22-c94-gap-log-triage]] §3 C11 |
@@ -64,7 +64,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.10 | Phase 43 — Engine Expansion (city-functions, 5-domain priority order) | needs-info | research-build / engine-sheet | `output/drive-files/godworld_city_functions_analysis_2026-04-20.pdf` |
 | engine.11 | Chaos-cars engine | in-progress | engine-sheet / research-build | [[../plans/2026-05-07-chaos-cars-engine]] — detail in pointer (relocated 2026-07-02) |
 | engine.15 | ENGINE_REPAIR `Pattern` column | needs-info | engine-sheet | [[ENGINE_REPAIR]] — detail in pointer (relocated 2026-07-02) |
-| engine.20d | Sift Step 5 `covered-by-feature` triage handle — absorb regulatory-process noise into civic round-up. Cadence cap: at most 1 dedicated article per cycle per initiative AND only if actual movement (not process-tick). | blocked | media / research-build | blocked on pipeline.24 (sift v2); plan [[../plans/2026-05-22-engine-regulatory-friction]] §Task 5, cross-link C2 plan Task 5 |
+| engine.20d | Sift Step 5 `covered-by-feature` triage handle — absorb regulatory-process noise into civic round-up. Cadence cap: at most 1 dedicated article per cycle per initiative AND only if actual movement (not process-tick). | blocked | research-build | blocked on pipeline.24 (sift v2); plan [[../plans/2026-05-22-engine-regulatory-friction]] §Task 5, cross-link C2 plan Task 5 |
 | engine.27 | wd-card auto-invalidation hook | in-progress | engine-sheet | [[../plans/2026-05-26-engine-27-wd-card-auto-invalidation]] — detail in pointer (relocated 2026-07-02) |
 | engine.29 | Citizen lifecycle & fame system | parked | engine-sheet | [[../plans/2026-05-30-citizen-lifecycle-fame-system]] + [[ENGINE_REPAIR]] — detail in pointer (relocated 2026-07-02) |
 | engine.40 | Sports-stat intake | ready | research-build → engine-sheet | [[ENGINE_REPAIR]] — detail in pointer (relocated 2026-07-02) |
@@ -72,9 +72,9 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.43 | Voices/agents sync contract — BUILT S306, runtime smoke pending (detail: plan §Build notes) | in-progress | engine-sheet | [[../adr/0014-citizen-self-authorship-live-drift]] + [[../plans/2026-07-04-voice-dial-sync-contract-build]] |
 | engine.45 | Ripple ledger — T1–T3b live in prod; T3c retired + T3e folded S311; open: T3d, per-hood fold, T0 traces | in-progress | engine-sheet | [[../plans/2026-07-04-ripple-ledger-attribution]] |
 | engine.47 | Game-night connection design — one game traced through 10 hops, gaps close in 4 existing engines; build awaits Mike approval (S296 moratorium gate) | needs-info | engine-sheet | [[../plans/2026-07-05-game-night-connection-design]] |
-| engine.48 | Citizen-loop deepening — engine-sheet lane COMPLETE S312 (T1–5, T9–13); open: T8 /sift tension seeds (media) + T13 speculative-pairs call (Mike, see plan §T13 handoff) | in-progress | media + Mike (T13 list) | [[../plans/2026-07-06-citizen-loop-deepening]] |
+| engine.48 | Citizen-loop deepening — engine-sheet lane COMPLETE S312 (T1–5, T9–13); open: T8 /sift tension seeds (media) + T13 speculative-pairs call (Mike, see plan §T13 handoff) | in-progress | research-build | [[../plans/2026-07-06-citizen-loop-deepening]] |
 | engine.51 | Citizen intake unification — T1-T7 done; prod Intake tab S305; T8 extraction built S305 (dry-run verified, sandbox --apply pending Mike cycle-fire) | in-progress | research-build (T8) + engine-sheet | [[../plans/2026-07-07-citizen-intake-unification]] |
-| engine.53 | Agent exchange engine — T1–5 SHIPPED S312 (3 formats live-verified, 17:00 cron wired; conversations idle until engine.48 T4 ripple writer); open: T6 /sift sourcing | in-progress | media (T6) | [[../plans/2026-07-11-agent-exchange-engine]] |
+| engine.53 | Agent exchange engine — T1–5 SHIPPED S312 (3 formats live-verified, 17:00 cron wired; conversations idle until engine.48 T4 ripple writer); open: T6 /sift sourcing | in-progress | research-build | [[../plans/2026-07-11-agent-exchange-engine]] |
 | engine.76 | Compile-layer rebuild — W1–W3 + W5 complete (half 2 shipped S336: usage-rotated per-lane byline candidate in desk_signal, 3-cycle bench proven); OPEN: W4 two-stack consolidation only, gated on the fork proving (pipeline.44) | in-progress | engine-sheet | [[../plans/2026-07-26-compile-layer-rebuild]] |
 | engine.77 | Sports-event intake — trades/injuries/call-ups must write BOTH the ledger state change (Status/RoleType) AND the LifeHistory moment + ripple; proof case C101 Richards trade (POP-00031) | ready | research-build (design) → engine-sheet (build) | [[ENGINE_REPAIR]] §engine.77 (relocated detail); sibling engine.40 |
 
@@ -134,7 +134,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.83 | Employment reconciliation — config repair on the existing 5-layer resolver: Professional/2041-Specific categories dump into BIZ-00030, sports layer misses coaches/scouts/all of the Oaks, SPORTS_OTHER sentinel leaks, 286 of 909 unmatched | ready | engine-sheet | [[../plans/2026-07-26-employment-reconciliation]] |
 | engine.84 | Employee_Count conflates real headcount with the tracked sample — linkCitizensToEmployers overwrites it with the tracked count for any business that has one (30 rewritten S334), so zero-tracked rows keep real figures and the rest do not | ready | engine-sheet | [[../plans/2026-07-26-employment-reconciliation]] |
 | engine.85 | Employment living system — write-back consumer, Generic_Citizens employer column + skill tags, age-18 ladder, field-matched rehiring, economically-alive business mint. research-build half DONE S335 (T1-T3, T6) | in-progress | engine-sheet (T4,T5,T7,T8) | [[../plans/2026-07-27-employment-living-system]] |
-| canon.4 | Real-world stack in the sim is BY DESIGN, not contamination — DigitalOcean/Discord/Moltbook/Anthropic stay as themselves, and Civis Systems (Varek, POP-00789) is the in-world blanket for engine/sheet vocabulary. Doctrine recorded, nothing to scrub | wontfix | research-build | [[../../canon/INSTITUTIONS]] §The Stack |
+| canon.4 | Real-world stack in the sim is BY DESIGN, not contamination — DigitalOcean/Discord/Moltbook/Anthropic stay as themselves, and Civis Systems (Varek, POP-00789) is the in-world blanket for engine/sheet vocabulary. Doctrine recorded, nothing to scrub | wontfix | research-build | [[canon/INSTITUTIONS]] §The Stack |
 | research.25 | Headless newsroom pipeline — M–F writer-wakes + Sat compile; Phase 1 + Phase 2.0 done, next is Phase 2 daily writer-wakes (was gated on engine.76 W5 half 1, now shipped) | in-progress | research-build → engine-sheet | [[../plans/2026-07-20-headless-newsroom-pipeline]] |
 | research.26 | Data-analyst retrieval seat — draft the implementation plan for a question-scoped Supermemory seat attributed to Rhea Morgan's Data Analyst function; metadata-filter syntax resolved 2026-07-27 | ready | research-build | [[../research/2026-07-26-supermemory-retrieval-economics]] |
 

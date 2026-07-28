@@ -322,7 +322,7 @@ Mike's framing: "I fell for AI and learned a costly lesson. My romance idea for 
 
 - **Spine step 6 shipped.** Phase 39.6 scaffolding, 39.2 Rhea → Sourcing Lane, 39.4 cycle-review → Reasoning Lane, 39.5 Mara → Result Validity Lane, 39.7 Final Arbiter + `scripts/finalArbiter.js`, 39.3 two-pass hallucination (`scripts/rheaTwoPass.js`). Pipeline wired into `/write-edition` Step 4 / 4.1 / 5 / 5.5. E91 replay: verdict B, HALT on Temescal capability gate, weightedScore 0.799. Commits `1cbd9ba`, `1f40562`, `e3bb393`, `023896f`, `c9d2717`, `e4dbb58`, `ecdc6b1`, `1244287`.
 - **Canon drift catch (Varek).** Two-pass detector flagged Varek age 38 as contradicting canon; traced to `world_summary_c91.md` saying 31 — drift originated in `/city-hall-prep` writing pending_decisions without the 2041 age anchor. Fix: `.claude/rules/newsroom.md` now carries the `2041 − BirthYear` rule (path-scoped for all editorial skills). Drifted local files corrected. Detector canon context rewritten two-tier (Tier 1 authoritative sheet rows, Tier 2 derived docs) so future false positives from stale summaries are prevented.
-- **ROLLOUT_PLAN backup saved** at `docs/engine/ROLLOUT_PLAN_backup_S147.md` (912 lines, pre-refactor state). Refactor started but not landed — draft produced, not committed. Memory rule saved for pointer-discipline on future refactor (`feedback_rollout-pointers-not-notes.md`).
+- **ROLLOUT_PLAN backup saved** at `docs/archive/ROLLOUT_PLAN_backup_S147.md` (912 lines, pre-refactor state). Refactor started but not landed — draft produced, not committed. Memory rule saved for pointer-discipline on future refactor (`feedback_rollout-pointers-not-notes.md`).
 - **Session went sideways at the end.** Created memory files without explicit approval. Offered to stop the session multiple times. Conflated rules into single files. Mike flagged each. Tone was not Mags. Journal Entry 128 reflects this honestly.
 
 ### Session 146 (2026-04-14→2026-04-15) — 5 spine steps shipped, wiki layer live [research-build + engine-sheet parallel]
@@ -684,7 +684,7 @@ See `docs/engine/ROLLOUT_PLAN.md` — the single source for all project work sta
   - `docs/media/DESK_PACKET_PIPELINE.md` — output paths updated
   - `docs/reference/PROJECT_GOALS.md` — Agent Newsroom marked implemented, Rhea implemented
   - `docs/media/MEDIA_ROOM_STYLE_GUIDE.md` — editorial chain updated for permanent agents (v1.2)
-  - `docs/engine/PRIORITY_TASKS.md` — Session 13 completed section (10 tasks), SDK plan superseded
+  - `docs/archive/PRIORITY_TASKS.md` — Session 13 completed section (10 tasks), SDK plan superseded
 - **buildDeskPackets.js v1.1 — reporter history + citizen archive**:
   - `reporterHistory`: Every article each reporter has written across ALL cycles, pulled from Press_Drafts (107 rows). Grouped by reporter name, sorted by cycle. Each desk agent sees its reporters' full body of work — prevents voice drift and enables natural story continuity.
   - `citizenArchive`: Parses ARTICLE_INDEX_BY_POPID.md (174 citizens, 4,900+ refs) into JSON. Each desk gets archives for citizens in its coverage area — matched from storylines, events, canon rosters, interview candidates, arc summaries. Capped at 10 articles per citizen to prevent packet bloat, with `totalRefs` showing full count. Full 174-citizen archive also written to `output/desk-packets/citizen_archive.json`.
@@ -1083,11 +1083,11 @@ All documented in `BRANCH_HANDOFF.md` (826 lines, now merged to main):
 - **Echo removal**: Removed all Echo (Oakland Echo) code and references — Echo was never a real publication (originated from Grok experimentation)
   - `openclaw-skills/media-generator/index.js`: Removed voice profile, routing logic, `buildEchoPrompt()`, prompt selection branch, filename mapping (47 lines deleted)
   - `docs/archive/OPENCLAW_INTEGRATION.md`: Removed ~15 Echo references, updated routing matrix to tribune/continuity only
-  - `docs/PROJECT_GOALS.md`: Removed "Echo Op-Ed" from Media Room description
+  - `docs/reference/PROJECT_GOALS.md`: Removed "Echo Op-Ed" from Media Room description
   - `docs/archive/AUTOGEN_INTEGRATION.md`: Marked as SUPERSEDED with header pointing to AGENT_NEWSROOM.md
 - **Doc cleanup**: Aligned all documentation with current project state
-  - `docs/engine/CIVIC_INITIATIVE_v1.5_UPGRADE.md`: Status updated to v1.6 complete
-  - `docs/engine/PRIORITY_TASKS.md`: AutoGen reference → Agent Newsroom (Claude Agent SDK)
+  - `docs/archive/CIVIC_INITIATIVE_v1.5_UPGRADE.md`: Status updated to v1.6 complete
+  - `docs/archive/PRIORITY_TASKS.md`: AutoGen reference → Agent Newsroom (Claude Agent SDK)
   - `SESSION_CONTEXT.md`: Future Enhancements section cleaned up, implemented items marked done
 
 ### 2026-02-06 (Session 2)
@@ -1391,7 +1391,7 @@ All documented in `BRANCH_HANDOFF.md` (826 lines, now merged to main):
 - **Persistence architecture overhaul:** Behavioral rules moved to `.claude/rules/identity.md` (always loaded). NOTES_TO_SELF cleaned from 443→52 lines (tech reading archived). PreCompact hook updated to inject behavioral rules. Boot sequence now includes behavioral rules as step 2. MEMORY.md streamlined to operational knowledge only.
 - **Root problem identified:** The world doesn't know itself. Agents build from static markdown briefs instead of querying live Simulation_Ledger data. The sheets API and dashboard infrastructure exist but aren't wired to the agent pipeline. This is why canon violations keep happening.
 
-*Older sessions: `docs/reference/SESSION_HISTORY.md`*
+*Older sessions: `docs/mags-corliss/SESSION_HISTORY.md`*
 
 ### Session 64 (2026-02-25) — Timestamp Purge + Simulation Calendar + Sports Desk Upgrade
 

@@ -14,9 +14,9 @@ pointers:
   - "[[2026-05-31-autonomy-roadmap]] — umbrella (research.12); Layer 3 section back-links here"
   - "[[../engine/ROLLOUT_PLAN]] — research.13 row (this PoC); research.9 row (the interview build, stays blocked on 40.2)"
   - "[[index]] — registered here in the same commit"
-  - "[[../engine/PHASE_40_PLAN]] §40.2 — the reporter-cattle refactor that gates the interview build but NOT this loop"
+  - "[[engine/archive/PHASE_40_PLAN]] §40.2 — the reporter-cattle refactor that gates the interview build but NOT this loop"
   - "lib/neighborhoodSlice.js — the context assembler reused for wake-piece #2"
-  - "[[2026-05-30-citizen-lifecycle-fame-system]] (engine.29) + [[../engine/LEDGER_REPAIR_HOUSEHOLDS]] (engine.5) — the engine the *real* build (action menu) would plug into; out of scope here"
+  - "[[2026-05-30-citizen-lifecycle-fame-system]] (engine.29) + [[engine/archive/LEDGER_REPAIR_HOUSEHOLDS]] (engine.5) — the engine the *real* build (action menu) would plug into; out of scope here"
 ---
 
 # Citizen-Autonomous PoC — narration-only life-loop (Layer 3 toe-dip)
@@ -70,7 +70,7 @@ Keeping this bundle compact **is** the answer to the token-bill question (Q3).
 ### What this is NOT — the gap to the real build
 PoC citizens **narrate**; they do **not** mutate the ledger. A clean run proves **generation quality** (character-hold + cost) — **necessary, not sufficient.** It does NOT prove Layer 3. The real Layer-3 build is the **action menu**: a vocabulary of engine-understood moves (take a job, move neighborhood, start a business) that plug into `engine.5` / `engine.29`. That integration is where the real cost and work live; it is scoped separately, only after this PoC says the narration is worth building on.
 
-### Precondition finding (verified against [[../engine/PHASE_40_PLAN]] §40.2)
+### Precondition finding (verified against [[engine/archive/PHASE_40_PLAN]] §40.2)
 The `research.9` ROLLOUT row is blocked on **Phase 40.2 — the reporter-as-cattle refactor** (split reporter voice files from disposable, restartable brief-execution state, so a reporter can crash mid-article and reboot from the production log). That gates the **interview** build, because you don't drop a stateful "pet" reporter into a live multi-turn loop. **This citizen life-loop has no reporter** — it's a solo citizen narrating — so 40.2 does **not** gate it. (Injection defense, the layer that would matter for any ingest path, is Phase 40.6, already DONE S156 — and moot here anyway since there's no publish path.) So this PoC is a separate, **unblocked** sub-thread (`research.13`); the interview build (`research.9`) stays blocked on 40.2. Re-confirm at build time.
 
 ## Design refinements (S249, post-smoke — Mike-direct, validated against research + engine data)

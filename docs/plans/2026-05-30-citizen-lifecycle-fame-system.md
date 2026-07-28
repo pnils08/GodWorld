@@ -7,11 +7,11 @@ tags: [engine, citizens, ledger, fame, lifecycle, active]
 sources:
   - docs/engine/ROLLOUT_PLAN.md §engine.* (engine.5 expansion)
   - S248 Mike-direct design session (engine-sheet) — death-by-age, ClockMode authority, fame decay + ascension, Cultural_Ledger correction
-  - "[[../engine/LEDGER_REPAIR_HOUSEHOLDS]] — Representative Sample model (1 tracked : 438 real); engine life-event simulation"
+  - "[[engine/archive/LEDGER_REPAIR_HOUSEHOLDS]] — Representative Sample model (1 tracked : 438 real); engine life-event simulation"
   - "[[../engine/ENGINE_REPAIR]] Row 23 (citizen lives frozen / simYear), Row 24 (career drift-freeze)"
 pointers:
   - "[[../engine/ROLLOUT_PLAN]] — parent rollout (engine.5)"
-  - "[[../engine/LEDGER_REPAIR_HOUSEHOLDS]] — sibling plan (households + the Representative Sample model this builds on)"
+  - "[[engine/archive/LEDGER_REPAIR_HOUSEHOLDS]] — sibling plan (households + the Representative Sample model this builds on)"
   - "[[../engine/ENGINE_REPAIR]] — Row 23/24/25 tactical tracker"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — registered in same commit"
@@ -26,7 +26,7 @@ pointers:
 **Terminal:** engine/sheet (substrate) — Phase D cultural-gen correction may need a research-build canon pass on the 42 legacy figures.
 
 **Pointers:**
-- Prior work: [[../engine/LEDGER_REPAIR_HOUSEHOLDS]] (Phase 2b Track 1 shipped S248, commit `d173310`, deploy-held for C96); [[../engine/ENGINE_REPAIR]] Row 23 (simYear fix), Row 24 (career drift-freeze), Row 25 (this plan, lifecycle/fame).
+- Prior work: [[engine/archive/LEDGER_REPAIR_HOUSEHOLDS]] (Phase 2b Track 1 shipped S248, commit `d173310`, deploy-held for C96); [[../engine/ENGINE_REPAIR]] Row 23 (simYear fix), Row 24 (career drift-freeze), Row 25 (this plan, lifecycle/fame).
 - Related: the appearance counter (`UsageCount`) + tier ladder live in `phase05-citizens/processAdvancementIntake.js` (3/6/9 thresholds); fed by `phase07-evening-media/mediaRoomIntake.js` routing.
 - Research basis: S248 Mike-direct design session.
 
@@ -137,7 +137,7 @@ Citizen lifecycle & fame system (engine.5 expansion, S248 Mike-direct design) �
 
 ## Changelog
 
-- 2026-05-30 — Initial draft (S248, engine-sheet). Design from Mike-direct session: D1 death-by-age, D2 ClockMode authority matrix, D3 fame threshold 30, D4 full-SL cultural-gen. Verified current state (death no-age-gate, ClockMode dist, disjoint ledgers, Isley example, UsageCount sole signal). Four phases sequenced post-C96. Canon lock reframed as scaffolding (superseded by ClockMode gating). Sibling to [[../engine/LEDGER_REPAIR_HOUSEHOLDS]]; ENGINE_REPAIR Row 25 to be opened pointing here.
+- 2026-05-30 — Initial draft (S248, engine-sheet). Design from Mike-direct session: D1 death-by-age, D2 ClockMode authority matrix, D3 fame threshold 30, D4 full-SL cultural-gen. Verified current state (death no-age-gate, ClockMode dist, disjoint ledgers, Isley example, UsageCount sole signal). Four phases sequenced post-C96. Canon lock reframed as scaffolding (superseded by ClockMode gating). Sibling to [[engine/archive/LEDGER_REPAIR_HOUSEHOLDS]]; ENGINE_REPAIR Row 25 to be opened pointing here.
 - 2026-06-10 — S255 (engine-sheet, Mike-direct via lifecycle Q&A). **D2 REVISED:** all civilians can die — MEDIA/CIVIC death protection dropped, replaced by succession (MEDIA death recasts the voice in that job); GAME death career-gated (only once Retired, then the 85+ clock). **Phase A scope grew:** health columns ride-along — add `StatusStartCycle` + `HealthCause` to SL (engine already header-resolves both; activates dead duration timers + cause persistence, zero code). Health system audited: SL Status is the native illness tracker; `Health_Cause_Queue` = hospital intake (keep); `Health_Civic` spreadsheet abandoned (ignore). Two new open questions (CIVIC succession, recast mechanism). Context: ENGINE_REPAIR Row 27 (Isabelle Louis zombie-row, closed) prompted the lifecycle review.
 
 ---
@@ -148,5 +148,5 @@ Verbatim rows moved out of ROLLOUT_PLAN.md when it collapsed to pointer-only. Th
 
 ### engine.29
 
-| engine.29 | Citizen lifecycle & fame system (engine.5 expansion, S248 Mike-direct design) — 4 half-wired pieces: (A) death-by-age 85+ escalating + ClockMode authority matrix (ENGINE/GAME die at 85+, MEDIA/CIVIC no die-off but illness/injury, GAME injuries=Paulson); (B) SL tier fame-decay + the missing demotion path + engine-cultural-output appearance feed; (C) fame-ascension bridge `UsageCount≥30` → linked Cultural_Ledger entry (ledgers disjoint today, no POPID); (D) Cultural_Ledger figure-gen mints full SL citizen. Canon Tier-1 lock reframed as broken-engine scaffolding → ClockMode gating. Each phase its own post-C96 fire (attribution discipline). Decisions D1–D4 locked. **S255 (Mike-direct): D2 revised — all civilians die (MEDIA death recasts the voice in that job; GAME death gated on Retired first); Phase A ride-along = add SL `StatusStartCycle` + `HealthCause` columns (activates dead hospital-duration timers + cause persistence, zero code — engine header-resolves both). Health audit: SL Status is the native illness tracker; Health_Cause_Queue = hospital intake (keep); Health_Civic spreadsheet abandoned.** | parked | engine-sheet | [[../plans/2026-05-30-citizen-lifecycle-fame-system]]; [[ENGINE_REPAIR]] Row 25 |
+| engine.29 | Citizen lifecycle & fame system (engine.5 expansion, S248 Mike-direct design) — 4 half-wired pieces: (A) death-by-age 85+ escalating + ClockMode authority matrix (ENGINE/GAME die at 85+, MEDIA/CIVIC no die-off but illness/injury, GAME injuries=Paulson); (B) SL tier fame-decay + the missing demotion path + engine-cultural-output appearance feed; (C) fame-ascension bridge `UsageCount≥30` → linked Cultural_Ledger entry (ledgers disjoint today, no POPID); (D) Cultural_Ledger figure-gen mints full SL citizen. Canon Tier-1 lock reframed as broken-engine scaffolding → ClockMode gating. Each phase its own post-C96 fire (attribution discipline). Decisions D1–D4 locked. **S255 (Mike-direct): D2 revised — all civilians die (MEDIA death recasts the voice in that job; GAME death gated on Retired first); Phase A ride-along = add SL `StatusStartCycle` + `HealthCause` columns (activates dead hospital-duration timers + cause persistence, zero code — engine header-resolves both). Health audit: SL Status is the native illness tracker; Health_Cause_Queue = hospital intake (keep); Health_Civic spreadsheet abandoned.** | parked | engine-sheet | [[../plans/2026-05-30-citizen-lifecycle-fame-system]]; [[engine/ENGINE_REPAIR]] Row 25 |
 

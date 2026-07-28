@@ -209,7 +209,7 @@ Engine-sheet typically commits as-it-goes; soft close is often near-no-op (cross
 
 ### Hard close (~5-10 min) — end of day, multi-day break, or cold-pickup boundary
 
-The stripped-persona framing applies to hard close. Per S229 governance.7, the slimmed `/session-end` SKILL runs: Step 0 detect terminal → Step 2 SESSION_CONTEXT PIN + NEXT[engine-sheet] + ROLLOUT updates + code-state audit → Step 3 `scripts/sessionEndMechanical.js --terminal=engine-sheet` → Step 4 commit & push. There is no Step 1 (it was the journal write, retired S300 for every terminal; numbering kept so these references still resolve). Plan: [[../../../docs/plans/2026-05-23-session-end-collapse]].
+The stripped-persona framing applies to hard close. Per S229 governance.7, the slimmed `/session-end` SKILL runs: Step 0 detect terminal → Step 2 SESSION_CONTEXT PIN + NEXT[engine-sheet] + ROLLOUT updates + code-state audit → Step 3 `scripts/sessionEndMechanical.js --terminal=engine-sheet` → Step 4 commit & push. There is no Step 1 (it was the journal write, retired S300 for every terminal; numbering kept so these references still resolve). Plan: [[archive/plans/2026-05-23-session-end-collapse]].
 
 ---
 

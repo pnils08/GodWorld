@@ -68,4 +68,4 @@ The world and its canon move for free. The apparatus that runs edition productio
 
 ---
 
-Related: [[../CLAUDE.md]] (what this inventories), [[../.claude/skills]] (the 50 skills), [[../.claude/agents]] (the 33 agent configs).
+Related: [[CLAUDE]] (what this inventories), [[../.claude/skills]] (the 50 skills), [[../.claude/agents]] (the 33 agent configs).

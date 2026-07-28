@@ -18,7 +18,7 @@ pointers:
   - "[[2026-05-31-emergent-bio-engine]] (engine.30) — consumes hardened dials + clean O for the R→AT earned bio; RIPPLE: its 'core memory' promotion language reconciles to 'hardened dial' here (flagged, its own pass)"
   - "[[2026-05-31-life-event-generation]] (engine.32) — the matched pair: reads dial BANDS to bias generation (Integrity→crime reachability, Drive→career, Family-oriented→births). RIPPLE: its 'conduct-core' seam + 5th-Conduct-category collapse into the Integrity dial here (flagged, its own redesign pass)."
   - "[[../engine/TAG_REGISTRY]] (engine.31 Phase 0) — the tag→category map; reused as scaffolding. The NEW tag→{dial:delta} map (Phase 1 deliverable) extends it and supersedes compressLifeHistory's TAG_TRAIT_MAP."
-  - "[[../research4_1.md]] — Dwarf Fortress / RimWorld / CK3 / Victoria 3 memory + personality architectures"
+  - "[[research4_1]] — Dwarf Fortress / RimWorld / CK3 / Victoria 3 memory + personality architectures"
 supersedes: "TWO prior versions, both retained in git + claude-mem. (1) S249 'Compression-tag triage' (T1–T6 tag-routing) — built then reverted, patched routing on erase-and-rebuild without challenging the erase. (2) S250 'bounded-memory SLOT engine' (8-10 slots / 5 categories / JSON MemoryState column / promotion ladder / 5th Conduct category) — built S252 (commit 8004bd6) then FULLY REVERTED (commit 122a115): the slot/bucket framing pushed 1,100 citizens toward shared 'types' instead of each being a unique point in dial-space. This S253 version keeps what both got right (never-erase, stateful accretion, sustained-pattern-changes-you, crime-made-real) and replaces slots-and-categories with per-citizen dials. Phase 0's tag read-audit (TAG_REGISTRY) survives as input."
 ---
 

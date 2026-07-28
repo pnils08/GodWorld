@@ -325,7 +325,7 @@ The production log is the ONLY civic document sift reads. If a voice quote, deci
 
 **Save location:** the `## /city-hall` section of `output/production_log_c{XX}.md` — the unified cycle log persists. It survives compaction, session changes, and context loss. The edition pipeline reads this section.
 
-## Gap log (S212 — see [[../../docs/plans/GAP_LOG_TEMPLATE]])
+## Gap log (S212 — see [[plans/GAP_LOG_TEMPLATE]])
 
 At skill close, capture friction observed during the city-hall run as a gap log. /city-hall is a heavy skill at the **civic generator terminal**; sidecar gap logs catch inefficiency the skill couldn't catch while running.
 

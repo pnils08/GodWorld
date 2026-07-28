@@ -16,7 +16,7 @@
  * }
  *
  * Read-only — no sheet writes, no intents. ES5-safe.
- * Plan: docs/plans/2026-06-10-engine33-neighborhood-citizen-loop.md Task 5.
+ * Plan: docs/archive/plans/2026-06-10-engine33-neighborhood-citizen-loop.md Task 5.
  * ============================================================================
  */
 

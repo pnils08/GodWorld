@@ -529,7 +529,7 @@ These elements were part of the old write-edition (pre-S144) and are now handled
 - **Desk packet building** → legacy scripts preserved, not in pipeline
 - **Voice workspace building** → `/city-hall-prep`
 
-## Gap log (S212 — see [[../../docs/plans/GAP_LOG_TEMPLATE]])
+## Gap log (S212 — see [[plans/GAP_LOG_TEMPLATE]])
 
 At skill close, capture friction observed during edition write as a gap log. /write-edition is the heaviest skill at the **media generator terminal**; sidecar gap logs catch inefficiency the skill couldn't catch while running.
 

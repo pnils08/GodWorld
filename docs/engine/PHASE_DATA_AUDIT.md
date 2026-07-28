@@ -594,7 +594,7 @@ These are not bugs — the engine runs fine without consumers. But they represen
 
 ## Phase 40 — Agent Architecture Hardening (cross-cutting)
 
-**Status at S156:** 5 of 6 sub-items DONE. Only 40.2 (reporter-as-cattle refactor) remains. Full plan: `docs/engine/PHASE_40_PLAN.md`.
+**Status at S156:** 5 of 6 sub-items DONE. Only 40.2 (reporter-as-cattle refactor) remains. Full plan: `docs/engine/archive/PHASE_40_PLAN.md`.
 
 **Cross-cutting nature:** Phase 40 doesn't sit in a single `phase*/` directory. It's architecture hardening that touches: hooks (`/root/GodWorld/.claude/hooks/`), settings (`.claude/settings.json`), credentials layout (`/root/.config/godworld/` relocation), bot refusal logic (`scripts/mags-discord-bot.js`), and the determinism helper (`utilities/safeRand.js`).
 

@@ -26,7 +26,7 @@ pointers:
 **Terminals:** engine-sheet owns Phase 0 (sheet data) + Phase 2 (engine map). research-build / civic owns Phase 1 (contract doc) + Phase 3 (agent RULES + city-hall SKILL) + Phase 4 (add-initiative procedure). Cross-builder; sequenced, not parallel.
 
 **Acceptance criteria:**
-1. A canonical `docs/.../INITIATIVE_TRACKER_CONTRACT.md` (or section) exists: full 28-col schema (supersedes the stale 17-col doc), the authoritative `ImplementationPhase` vocabulary + intensities, the lifecycle/transition rules, and a how-to-add-an-initiative procedure. "City-hall knows the process without inventing it."
+1. A canonical `docs/mara-vance/INITIATIVE_TRACKER_CONTRACT.md` (or section) exists: full 28-col schema (supersedes the stale 17-col doc), the authoritative `ImplementationPhase` vocabulary + intensities, the lifecycle/transition rules, and a how-to-add-an-initiative procedure. "City-hall knows the process without inventing it."
 2. The engine's Phase-2 `PHASE_INTENSITY` consumption tolerates the canonical vocabulary (no silent intensity-0 drops for valid phases).
 3. The writers (assembleDecisions / applyTrackerUpdates) canonicalize phase to the vocabulary on write; agent RULES + city-hall SKILL reference the contract; a validation gate (the one pre-flight dropped S230) is restored pointed at the canonical vocab.
 4. INIT-005 + INIT-006 contribute correct (non-zero) civic ripple.

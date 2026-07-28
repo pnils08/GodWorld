@@ -40,7 +40,7 @@
  * Reversibility: appends → delete the rows by POPID. Updates → re-update with
  * the prior values (pre-write values logged in dry-run output for the record).
  *
- * Per plan: docs/plans/2026-05-24-canon-3-cross-layer-citizen-drift.md §Task 9.
+ * Per plan: docs/archive/plans/2026-05-24-canon-3-cross-layer-citizen-drift.md §Task 9.
  */
 
 'use strict';

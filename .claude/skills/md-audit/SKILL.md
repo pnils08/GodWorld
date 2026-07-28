@@ -65,5 +65,5 @@ Phase 3 (gated archival via `scripts/archiveStaleMd.js`) intentionally not built
 
 ## Tracking
 
-After every run, append a row to `[[../../docs/AUDITS]]` Run history table:
+After every run, append a row to `[[AUDITS]]` Run history table:
 - Date, skill (`/md-audit`), findings (1-line summary — orphan count / stale count / fresh count), action taken (typically `report only`; `archived N docs` if Phase 3 fires), artifact path (`output/md_audit_<DATE>.md`).

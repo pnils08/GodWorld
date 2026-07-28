@@ -290,7 +290,7 @@ vetoProb = Math.max(0.05, Math.min(0.75, vetoProb));
 
 ## File Checklist
 
-- [ ] `docs/engine/CIVIC_VETO_IMPLEMENTATION.md` (this file)
+- [ ] `docs/mara-vance/CIVIC_VETO_IMPLEMENTATION.md` (this file)
 - [ ] `scripts/addMayoralVetoColumns.js` (migration script)
 - [ ] `phase05-citizens/civicInitiativeEngine.js` v1.7 (engine update)
 - [ ] `tests/civicVetoTestScenarios.js` (4 test scenarios)

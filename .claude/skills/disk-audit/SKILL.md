@@ -93,5 +93,5 @@ Phase 3.1 (this triage report) is the read-only deliverable. Phase 3 archival (g
 
 ## Tracking
 
-After every run, append a row to `[[../../docs/AUDITS]]` Run history table:
+After every run, append a row to `[[AUDITS]]` Run history table:
 - Date, skill (`/disk-audit`), findings (1-line summary from the report), action taken (`report only`), artifact path (`output/disk_audit_<DATE>.md`).

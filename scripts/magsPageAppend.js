@@ -11,7 +11,7 @@
  *   echo "..." | node scripts/magsPageAppend.js --daypart=SIFT --cycle=118 --stdin
  *   [--key=<suffix>]  extra customId suffix when several docs share (cycle, daypart)
  *
- * Plan: docs/plans/2026-07-06-journal-to-citizen-loop.md (pipe.40).
+ * Plan: docs/archive/plans/2026-07-06-journal-to-citizen-loop.md (pipe.40).
  */
 require('/root/GodWorld/lib/env');
 const page = require('/root/GodWorld/lib/citizenPage');

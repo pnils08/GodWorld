@@ -18,7 +18,7 @@
  *   [--mark]  record the recalled keys so staleness rotates picks (/sift passes
  *             this; /write-edition stays read-only). Default: no state writes.
  *
- * Plan: docs/plans/2026-07-06-journal-to-citizen-loop.md (pipe.40).
+ * Plan: docs/archive/plans/2026-07-06-journal-to-citizen-loop.md (pipe.40).
  */
 require('/root/GodWorld/lib/env');
 const page = require('/root/GodWorld/lib/citizenPage');

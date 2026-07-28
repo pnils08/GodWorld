@@ -231,7 +231,7 @@ Both skills append their `## /dispatch — {slug}` section to the unified `outpu
 
 ---
 
-## Gap log (S212 — see [[../../docs/plans/GAP_LOG_TEMPLATE]])
+## Gap log (S212 — see [[plans/GAP_LOG_TEMPLATE]])
 
 At skill close, capture friction observed during dispatch production as a gap log. /dispatch is a heavy skill at the **media generator terminal**; sidecar gap logs catch inefficiency the skill couldn't catch while running.
 

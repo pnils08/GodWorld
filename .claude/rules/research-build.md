@@ -92,7 +92,7 @@ When evaluating papers, tools, or external patterns:
 - **Research never archives.** Unlike a plan (finalizes → ships its rollout pointer to ROLLOUT_ARCHIVE), a research file is a standing library — grep-able forever, accreting applications. It does not move to archive.
 - Don't propose adoption from a single source — name the adjacent tools / alternatives Mike could have picked instead, so the choice is contextualized (S145 teach-the-landscape rule)
 - Sources Mike shares deliberately are load-bearing — papers in chat = what he's wrestling with, not curiosities
-- Full design: [[../../../docs/plans/2026-06-01-doc-loop-consolidation]].
+- Full design: [[plans/2026-06-01-doc-loop-consolidation]].
 
 ## Architectural measure-twice
 

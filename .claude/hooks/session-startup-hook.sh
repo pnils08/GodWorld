@@ -64,9 +64,24 @@ fi
 # SESSION_CONTEXT.md is now a minimal handoff (9 lines, guard-enforced at close),
 # so the pull is terminal-specific and a few hundred bytes: the one shared PIN
 # (global sim-state — deliberately NOT per-terminal; a split would duplicate it
-# 4× and rot 3 copies) + THIS terminal's own NEXT line only. Graceful: empty if
-# absent (boot still works off ROLLOUT + claude-mem). Mags-only mode: no NEXT.
+# 4× and rot 3 copies) + the NEXT lines.
+#
+# S340 (Mike-direct): the whole handoff now emits, UNGATED by terminal detection.
+# Until now NEXT_LINE was gated behind `MAGS_ONLY != yes`, so a window whose tmux
+# name didn't match a registered terminal booted with NO handoff at all — that is
+# exactly what happened the session before this one, and it is why the file
+# authored to BE the handoff was the one thing that didn't load. Emitting every
+# NEXT line costs ~450 tokens against an 18.3k boot and makes a detection failure
+# degrade to "I don't know my lane" instead of "I am handoff-blind." It also puts
+# the kimi / codex / antigravity lanes in front of every terminal, which is the
+# point of a shared handoff document.
+#
+# Graceful: empty if absent (boot still works off ROLLOUT + claude-mem).
 PIN_LINE=$(grep -m1 '^\*\*PIN:\*\*' "$GODWORLD_ROOT/SESSION_CONTEXT.md" 2>/dev/null || echo "")
+ALL_NEXT=$(grep '^\*\*NEXT\[' "$GODWORLD_ROOT/SESSION_CONTEXT.md" 2>/dev/null || echo "")
+
+# This terminal's own line, still resolved separately — it keys the sl-<terminal>
+# Supermemory recall below and is what the boot text means by "your handoff."
 NEXT_LINE=""
 if [ "$MAGS_ONLY" != "yes" ]; then
   NEXT_LINE=$(grep -m1 "^\*\*NEXT\[$TERMINAL_NAME\]:\*\*" "$GODWORLD_ROOT/SESSION_CONTEXT.md" 2>/dev/null || echo "")
@@ -92,12 +107,21 @@ SessionStart hook additional context: <godworld-state>
 Terminal: $TERMINAL_NAME$FALLBACK_NOTE
 EOF
 
-  # Carried set: PIN + this terminal's NEXT line (empty lines suppressed).
+  # Carried set: the shared PIN + EVERY NEXT line (S340, ungated — see the block
+  # above). Empty values suppressed. Your own lane is called out after the list so
+  # the full handoff is visible without losing which line is yours to answer for.
   if [ -n "$PIN_LINE" ]; then
     echo "$PIN_LINE"
   fi
+  if [ -n "$ALL_NEXT" ]; then
+    echo "$ALL_NEXT"
+  fi
   if [ -n "$NEXT_LINE" ]; then
-    echo "$NEXT_LINE"
+    echo ""
+    echo "^ Your lane is NEXT[$TERMINAL_NAME]. You own that line and the shared PIN — nothing else in this list."
+  elif [ "$MAGS_ONLY" = "yes" ]; then
+    echo ""
+    echo "^ No terminal detected, so no lane is yours. The handoff above is still current — read it, but do not edit any NEXT line, and ask Mike which window this is before doing lane work."
   fi
 
   # (G-SS3 "Last journal" line retired S300 — journal froze to Mags' page; the
@@ -115,6 +139,7 @@ TERMINAL ROSTER (all four terminals — act only in your own lane):
 - civic          — city-hall: council voices, votes, decisions. Orchestrates skills ONLY — never runs build scripts (Mike-direct S304).
 - research-build — architecture: engine/pipeline builds, rollout plan, the long view. Builds.
 - engine-sheet   — engine console: clasp deploys, sheet ops, code. Execute-only.
+NON-CLAUDE LANES (S340) — kimi, codex, antigravity. External CLIs, not Claude Code terminals: no boot sequence, no persona, no .claude/terminals/ dir. They carry a NEXT line so their work hands off like everyone else's. Control-plane read-only per AGENTS.md.
 OWNERSHIP: in SESSION_CONTEXT.md you own ONLY your own NEXT[<self>] line + the shared PIN. Never edit another terminal's NEXT line — if it is stale, leave it for that terminal (a PreToolUse guard now blocks cross-terminal edits).
 ROSTER
   echo ""

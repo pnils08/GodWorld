@@ -39,7 +39,11 @@ if [ -z "$SELF" ]; then
   exit 0
 fi
 
-REGISTERED="media civic engine-sheet research-build jarvis"
+# S340: jarvis retired; kimi / codex / antigravity added. The last three are
+# handoff LANES, not tmux terminals — they have no .claude/terminals/<name>/ dir
+# and no boot sequence. They are listed here so a Claude Code terminal cannot
+# reach into their NEXT lines; the external CLIs themselves don't fire this hook.
+REGISTERED="media civic engine-sheet research-build kimi codex antigravity"
 TOOL_NAME=$(echo "$INPUT_JSON" | jq -r '.tool_name // empty' 2>/dev/null)
 
 violated=""

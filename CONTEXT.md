@@ -220,7 +220,7 @@ Deeper definitions and full content for terms above:
 - **Canon Tier, real-names policy** — `docs/canon/CANON_RULES.md`
 - **Canon-substitute roster** — `docs/canon/INSTITUTIONS.md`
 - **Pipeline stages, skills map** — `docs/EDITION_PIPELINE.md`
-- **Reviewer lanes, schema** — `docs/engine/REVIEWER_LANE_SCHEMA.md`
+- **Reviewer lanes, schema** — `docs/engine/archive/REVIEWER_LANE_SCHEMA.md`
 - **Memory containers, tag scheme** — `docs/SUPERMEMORY.md`
 - **Terminal architecture, persona levels** — `docs/BOOT_ARCHITECTURE.md` plus each `.claude/terminals/<name>/TERMINAL.md`
 - **Three-layer coverage principle** — `/root/.claude/projects/-root-GodWorld/memory/project_three-layer-coverage-principle.md`
@@ -234,5 +234,5 @@ Deeper definitions and full content for terms above:
 ## Changelog
 
 - 2026-07-24 — Codex orientation audit (builder-approved truing). Cycle anchor C92→C101; Simulation_Ledger row/column counts corrected to 922 rows / 52 columns A–AZ per `docs/SIMULATION_LEDGER.md` (ground truth).
-- 2026-05-01 — S190, research-build. Added §Architecture → Refactor lens subsection: 9 terms (Module, Interface, Implementation, Depth, Seam, Adapter, Leverage, Locality, Deletion test) adopted from Pocock's `improve-codebase-architecture` SKILL.md (MIT). Phase 42 §5.6 redesign serves as the canonical Deep-module example throughout. Used to reframe `docs/engine/PHASE_42_PATTERNS.md` opening (same session).
+- 2026-05-01 — S190, research-build. Added §Architecture → Refactor lens subsection: 9 terms (Module, Interface, Implementation, Depth, Seam, Adapter, Leverage, Locality, Deletion test) adopted from Pocock's `improve-codebase-architecture` SKILL.md (MIT). Phase 42 §5.6 redesign serves as the canonical Deep-module example throughout. Used to reframe `docs/engine/archive/PHASE_42_PATTERNS.md` opening (same session).
 - 2026-04-29 — Initial draft (S187, research-build). Pattern adapted from `mattpocock/skills` MIT-licensed CONTEXT.md. Term inventory drawn from canon-fidelity rollout, Phase 42, S186 scrub, terminal architecture, S183 world-data rebuild. Tier disambiguation (Citizen vs Canon) and Edition capitalization rule formalized in this commit.

@@ -10,11 +10,9 @@ sources:
   - docs/plans/2026-06-04-mags-citizen-loop.md (research.14 — wake loop, salience deferral)
   - utilities/compressLifeHistory.js, utilities/citizenMemory.js, utilities/citizenDialMap.js (substrate reads, S281)
   - scripts/citizen-wake.js, phase05-citizens/generateCitizensEvents.js, phase01-config/godWorldEngine2.js (substrate reads, S281)
-  - docs/reviews/2026-07-22-event-content-ledger-grok-depth.md (engine.79 depth review; items 4 + 7 design)
 pointers:
   - "[[../engine/ROLLOUT_PLAN]] — parent rollout (engine.38 depth step)"
   - "[[2026-06-30-central-generator-atmospheric-expansion]] — sibling plan; depth build order lives there"
-  - "[[../reviews/2026-07-22-event-content-ledger-grok-depth]] — engine.79 review and research-build disposition"
   - "[[../SCHEMA]] — doc conventions"
   - "[[../index]] — add entry in same commit"
 ---
@@ -101,64 +99,6 @@ The loader and composer alone leave ledger content with **no consumer**: the gen
 1. **Injection block** in the per-citizen pool assembly: for each poolKey, eval the row's (pre-parsed) conditions against the citizen/hood/cycle scopes; eligible `line` entries push into `pool` via `makeEntry` alongside the hardcoded blocks. Composer resolves `$SLOT`s only if the drawn entry came from the ledger.
 2. **Routing is fail-closed on `source:` tag (S289).** Routing goes through `primaryFromTags()` (`generateCitizensEvents.js:589-632`), which switches on known `source:` tags — an unrecognized source falls through to `Daily` silently. Rule: every ledger line row MUST carry a recognized `source:` tag from the code's whitelist as its first tag; loader skips + counts rows whose source tag isn't recognized. New sources (e.g. `source:baylight`) require an explicit `primaryFromTags` branch in the same commit that seeds the pool.
 3. **Collision rule — additive-only v1 (S289).** A ledger poolKey never replaces or suppresses a hardcoded pool; ledger entries only add. Migration of a hardcoded pool = delete the hardcoded block in a code commit, an explicit later step — never implicit shadowing.
-
-### PoolKey, Conditions, and Tags contract (engine.79 items 4 + 7)
-
-These are three separate control planes. Do not encode one in another:
-
-| Surface | Controls | Must not control |
-|---|---|---|
-| `PoolKey` | Authoring namespace, telemetry grouping, and equal aggregate ledger draw mass | Dial routing, citizen eligibility, or hardcoded suppression |
-| `Conditions` | Fail-closed pre-draw eligibility against explicit engine state | Dial effects or provenance |
-| `Tags` | First-tag source routing plus post-draw provenance/semantic labels | Pool selection, replacement mode, or activation |
-
-In particular, do **not** add `pool:exclusive` or a similar policy marker to
-`Tags`: tags ride the emitted event into LifeHistory and affect routing. Do not
-encode policy in a PoolKey prefix either. If hardcoded retirement is built, it
-uses a code-reviewed registry mapping one exact PoolKey to one exact hardcoded
-selector plus a minimum eligible-row threshold. A missing mapping or unmet
-threshold preserves the hardcoded block. Sheet-authored content can never turn
-off engine content by itself.
-
-Two dispositions remain distinct:
-
-- **ledger-native** — the domain starts in the ledger and has no hardcoded
-  fallback. This is an authoring/source-of-truth rule, not a runtime mode.
-- **replacement** — an existing hardcoded block is suppressed only after the
-  explicit registry and threshold above are built and proven.
-
-`baylight.construction` and `tribune.readership` are valid ledger-native proving
-grounds. They are **not** replacement-mode proofs because no equivalent
-hardcoded blocks exist. The first replacement target must be named separately
-from an actual hardcoded block before engine-sheet designs or builds that mode.
-
-### Aggregate trajectory condition vocabulary (engine.79 item 4)
-
-Trajectory authoring must use the lagged aggregate neighborhood state already
-loaded by `loadNeighborhoodState_`, not deepen the per-citizen migration model.
-The active permanent-node plan
-[[2026-06-14-ledger-representative-sample-migration-removal]] directs
-`DisplacementRisk` and `MigrationIntent` off the representative
-Simulation_Ledger. Existing `displacement` remains backward-compatible until
-that migration lands, but no new trajectory design depends on it.
-
-Engine-sheet's build slice adds these lowercase condition fields:
-
-| Field | Kind / values | Resolver |
-|---|---|---|
-| `hoodtrajectory` | enum: `decay`, `steady`, `growth` | `S.neighborhoodState[hood].trajectory` |
-| `hoodmomentum` | number 0–10 | `S.neighborhoodState[hood].trajectoryMomentum` |
-| `housingpressure` | number 0–10 | `S.neighborhoodState[hood].housingPressure` |
-| `migrationflow` | number −5–5 | `S.neighborhoodState[hood].migrationFlow` |
-| `trajectorychanged` | flag | true when the loaded row's `TrajectoryStartCycle` equals its `Cycle` |
-| `cycle` | number | current engine Cycle; supports bounded publication-derived rows |
-
-`loadNeighborhoodState_` therefore also retains the row `Cycle` and
-`TrajectoryStartCycle`. CitizenEvents intentionally sees the prior recorded
-neighborhood state, so these conditions preserve the existing one-Cycle
-experience lag and consume no RNG. A true numeric delta is not synthesized from
-missing history: if a later design needs one, its owning aggregate writer must
-persist it first.
 
 ### Disposition
 
@@ -341,39 +281,14 @@ Handoff slices — all builds are engine-sheet's (engine code and loop scripts b
 - **Status:** [x] done (S289, engine-sheet) — injection block at end of per-citizen pool assembly (all gate vars in scope; data-gated: empty ledger = zero pushes, zero rng, byte-identical replay); slot-fillability checked at injection so unfillable lines never pool; composer fills fragment slots via `pickWeighted_` + entity slots code-side (VENUE/INSTITUTION/CONTACT mirror the template-fallback resolvers; `!chosenVenue` guard stops double-venue). Two build notes: (1) composer matches pool house style — lowercase clause, no capitalize/period (plan rule assumed standalone sentences; existing pools are clauses); (2) rendered-line dedup added at compose because the S277 filter compares skeleton text while `cycleSeen` stores rendered. 12/12 `scripts/contentLedgerCompose.test.js` (full loader→generator pipeline) + full regression green (loader 14, dial 49, biasFold 25, unlivedFold 23, biasReadback 18, unlivedEcho 8, fame 12, chaosCars 14).
 
 ### Task 12: first ledger-native pools (A payoff)
-- **Research-build design (2026-07-28):** complete. PoolKey/Conditions/Tags
-  responsibilities and the aggregate trajectory vocabulary are locked above.
-- **Engine-sheet files:** `phase02-world-state/loadNeighborhoodState.js`,
-  `phase02-world-state/loadEventContentLedger.js`,
-  `phase05-citizens/generateCitizensEvents.js`, and their existing content-ledger
-  contract/composer tests.
-- **Baylight proving ground:** author only in `baylight.construction`; first tag
-  `source:civicNews`, with semantic tags such as `civic:baylight` and
-  `initiative:INIT-006`. Rows stay Sheet-controlled with `Active` as the
-  timeline kill switch and explicit `hood=` / aggregate trajectory conditions.
-  No `source:baylight` branch and no hardcoded copy.
-- **Tribune proving ground:** post-publish—not the engine—parses the approved
-  Edition's canonical ARTICLE TABLE and appends complete, already-published
-  headline reaction lines to `tribune.readership`. First tag is
-  `source:media`; provenance includes the existing `E<N>` edition tag and
-  `auth:post-publish`. Conditions bound each row to the next three Cycles:
-  `cycle>=N+1;cycle<=N+3`. Draft, staged, Dispatch, Supplemental, and
-  unpublished files never feed this pool. The external write remains
-  separately approval-gated.
-- **Verify:** loader rejects every unknown field/enum/source; fixed fixtures
-  prove `trajectorychanged` at the Cycle boundary and false otherwise; Baylight
-  rows reach only their gated neighborhoods; Tribune rows are absent before
-  `N+1`, eligible through `N+3`, and absent after; emitted events route through
-  Civic Perception or Media respectively; empty/missing rows preserve the
-  current hardcoded path and RNG sequence.
+- **Files:** Event_Content_Ledger rows (content authoring): `baylight.construction`, then `tribune.readership` once its headline feed exists
+- **Verify:** cycle run emits Baylight texture lines only for eligible hoods/conditions.
 - **Authoring rules (S289 sandbox rehearsal — learned from real output):**
   1. **Weights are house-scale (0.9–1.3).** Weights compete against the ~50-entry hardcoded per-citizen pool; a weight-60 test row became 36% of the entire city's day (823/2,282 events). One skeleton ≈ one hardcoded entry's presence at weight ~1.0.
   2. **First tag must be a whitelisted `source:`** (`loadEventContentLedger.js` CONTENT_LEDGER_SOURCE_WHITELIST). A `source:economy` fixture row was correctly rejected — economy has no primaryFromTags branch. New pool sources (e.g. `source:baylight`) need the primaryFromTags branch + whitelist entry in the same commit.
   3. **Skipped rows log to the execution log** (`[ContentLedger] N row(s) skipped fail-closed`) — check it after seeding.
   4. Conditions verify against draw-time state: WealthLevel re-derives AFTER CitizenEvents each cycle (Phase5 L294 vs L298), so a post-cycle audit can show gate "misses" that were correct at draw time.
-- **Status:** [~] research-build design complete; engine-sheet condition build,
-  approved Baylight row authoring, and the separately gated Tribune
-  post-publish feed remain.
+- **Status:** [ ] not started — rehearsed S289 on sandbox with test fixture (composer + gates + entity slots proven live); real content authoring still open
 
 ---
 
@@ -406,10 +321,3 @@ None — both resolved 2026-07-01 (Mike, S281):
 - 2026-07-02 — S289 pre-build critique of Design A folded into body: §Pool injection added (draw-site bridge was missing), fail-closed source routing, DSL resolver table + enum fix, unfillable-slot rule, offset deferred to v2, Task 10 = two safePhaseCall_ sites.
 - 2026-07-02 — Tasks 10+11 DONE (engine-sheet, S289): tab live + loader + injection + composer, 26 new tests + full regression green. Design A engine-side complete in code, clasp pending. Remaining: Task 12 (seed first pools — after the deploy window smokes).
 - 2026-07-03 — Sandbox rehearsal (S289): window on sandbox copy; composer proven live, gates exact, fail-closed held. Fixes: skeleton dedup + skipped-row log (95c854c8); aim-guard (2e0e746f). Task 12 authoring rules added to task body.
-- 2026-07-28 — engine.79 items 4 + 7 research-build design complete (Codex).
-  Separated PoolKey selection, Conditions eligibility, and Tags
-  routing/provenance; rejected tag-encoded suppression. Trajectory fields use
-  lagged aggregate Neighborhood_Map state rather than the migration columns
-  marked for removal by engine.34. Baylight/Tribune are ledger-native proofs,
-  not hardcoded-retirement proofs; Tribune intake is published-Edition-only and
-  Cycle-bounded.

@@ -8,20 +8,19 @@ alternate timeline. Do not import real-world Oakland people, institutions,
 businesses, teams, events, or assumptions.
 
 This file governs every out-of-band CLI engineering assistant working in this
-repository — Codex today, Kimi and any later addition on the same terms. Where a
-rule below names Codex, read it as naming your agent. Two things are per-agent:
-your scratch directory (`output/codex/` → `output/<agent>/`) and your config
-directory (`.codex/` → `.<agent>/`); both carry the same restrictions.
+repository. Agent-specific authorization is not transferable: Codex, Kimi, and
+Antigravity/Gemini follow the tier that names them below.
 
 An out-of-band CLI agent is an engineering assistant to the builder. It is not
 Mags Corliss, a Bay Tribune reporter, a civic official, or a participant in the
 simulation. Read persona and newsroom material as system context, not as an
 identity to adopt.
 
-Claude is the lead and owns the control plane. You propose and implement inside
-your authorized scope; you do not deploy, publish, or arbitrate. Codex and Kimi
-hold scoped commit/push rights (see Git and commit rules); being capable of any
-other change is not authorization to make it.
+Claude is the lead and owns the control plane. Kimi may propose and implement
+inside its authorized scope. Codex and Antigravity/Gemini are fully gated:
+read-only inspection and proposed diffs only. They do not change project files,
+stage work, commit work, or push work. The sole exception is each agent's own
+`NEXT` handoff line under §Session close.
 
 ## Instruction precedence
 
@@ -127,7 +126,7 @@ published or in-world copy. Engineering documentation metadata follows
 
 ## Protected files and directories
 
-The Claude control plane is read-only to Codex:
+The Claude control plane is read-only to every out-of-band CLI:
 
 - `.claude/**`
 - `.agents/**`
@@ -141,24 +140,22 @@ commit touching the control plane unless a Claude session prefixes
 `CLAUDE_CTL=1`. That prefix is for Claude only — never set it, and never bypass
 the hook with `--no-verify`.
 
-Codex's ordinary writable scope is limited to:
+Kimi's ordinary writable scope is limited to:
 
 - `scripts/**`
 - `output/**`
 - `docs/**`
 
-The repository-root `AGENTS.md` is a one-time exception only when the builder
-explicitly approves this proposal.
+Codex and Antigravity/Gemini have no ordinary writable scope. They may inspect
+the repository and return proposed patches, but another authorized terminal must
+review and apply them.
 
 Do not modify other areas—including `phase*/`, `utilities/`, `lib/`,
 `dashboard/`, `editions/`, `schemas/`, configuration files, hooks, or service
 manifests—without explicit permission naming that scope.
 
-Note: `docs/MODEL_HIERARCHY.md` §6 lists substrate paths (`phase*/`,
-`utilities/`, `lib/`) as read-write for the backup CLI. This file is stricter
-and governs: those paths require explicit permission here regardless of what
-MODEL_HIERARCHY says. Reconciling the two documents is an open builder
-decision (audit F3, 2026-07-24).
+`docs/MODEL_HIERARCHY.md` §6 mirrors these agent tiers. If the two documents
+drift, this file governs.
 
 Within `docs/`, treat these as immutable source/history unless explicitly told
 otherwise:
@@ -172,15 +169,10 @@ them as part of the task.
 
 ## Codex-local state
 
-Do not create a private persistent state layer automatically.
-
-Use `output/codex/` for builder-requested temporary reports, proposed patches,
-diagnostics, or handoff artifacts when a file is useful. Do not place canon or
-published material there.
-
-A project `.codex/` directory is reserved for separately approved Codex
-configuration. Do not create or modify `.codex/config.toml`, hooks, skills, or
-state files without explicit approval.
+Codex does not create or modify repository-local scratch, reports,
+configuration, hooks, skills, or state. Its diagnostics and proposed patches
+remain in the conversation until an authorized terminal reviews and applies
+them.
 
 ## Research, plan, rollout, and archive
 
@@ -284,7 +276,8 @@ For analysis, orientation, review, or diagnosis:
 - distinguish verified behavior from documentation claims;
 - report stale or conflicting documentation instead of silently correcting it.
 
-For implementation:
+Codex and Antigravity/Gemini stop after analysis and a proposed diff; they do not
+perform implementation. For an agent with implementation authorization:
 
 1. Inspect `git status --short --branch`.
 2. Read the relevant active plan, contract, ADR, implementation, and tests.
@@ -338,13 +331,11 @@ Rules:
 
 ## Git and commit rules
 
-### Push authorization (builder decision, 2026-07-27)
+### Push authorization (builder decision, 2026-07-28)
 
-After an engine-sheet spot-check review of a Codex working batch (S338: all
-tests passing, syntax clean, defensive validation and path guards unprompted),
-the builder loosened the push rules by agent tier:
+The builder assigns commit and push rights by agent tier:
 
-- **Codex and Kimi** may commit and push work that lies entirely inside the
+- **Kimi** may commit and push work that lies entirely inside the
   ordinary writable scope (`scripts/**`, `output/**`, `docs/**`), including
   tests. Conditions, all mandatory:
   - every touched or added test file passes locally before the commit;
@@ -364,10 +355,10 @@ the builder loosened the push rules by agent tier:
   `utilities/`, `lib/`, `schemas/`, `dashboard/`, `editions/`, configuration
   files, hooks, service manifests, and anything deployed via clasp. Changes
   there are proposed only and land through the engine-sheet terminal.
-- **Antigravity and Gemini** have no commit or push authorization and remain
-  fully gated on engine work: propose diffs only. **One exception for
-  Antigravity:** its own `**NEXT[antigravity]:**` handoff line, committed
-  alone, per §Session close below.
+- **Codex, Antigravity, and Gemini** have no project commit or push
+  authorization and remain fully gated on all work: propose diffs only. The
+  only exception is committing the agent's own `**NEXT[<agent>]:**` handoff
+  line alone, per §Session close below.
 
 ### General rules (all agents)
 
@@ -403,10 +394,10 @@ line records where the thread is.
 
 2. **Commit path-specifically**, per the push-authorization rules above.
 
-   **Antigravity:** this is the one commit you are authorized to make. You have no
-   commit or push authorization for work — diffs stay proposals — but your own
-   handoff line is bookkeeping, not work, and a lane nobody can close is a lane
-   that rots. Commit the line alone; propose everything else.
+   **Codex and Antigravity:** this is the one commit you are authorized to make.
+   You have no commit or push authorization for work — diffs stay proposals —
+   but your own handoff line is bookkeeping, not work. Commit the line alone;
+   propose everything else.
 
 **What you must not touch:**
 
@@ -476,6 +467,15 @@ or command lines.
 ## Documentation requirements
 
 Before creating or editing documentation, follow `docs/SCHEMA.md`.
+
+**No isolated Markdown files.** Every `.md` created anywhere in the repository
+must be registered in its canonical index in the same approved change. Active
+documents and root-level references register in `docs/index.md`; research
+instances register in `docs/research/index.md`; generated or temporary Markdown
+registers in the owning pipeline's canonical artifact index or manifest. If no
+canonical index exists, stop and ask the builder where the file belongs before
+creating it. A pointer from an unrelated document is not a substitute for an
+index entry.
 
 For every new active document other than a research instance:
 
@@ -601,16 +601,17 @@ production: do not edit their scripts, crontab entries, or PM2 processes
 without explicit approval, and expect their output directories and logs to
 change under you.
 
-### Crontab (verify with `crontab -l` before relying on this table)
+### Crontab (UTC; verify with `crontab -l` before relying on this table)
 
 | Schedule | Script | What it does |
 |---|---|---|
 | daily 05:00 | `scripts/backup.sh` | Tars credentials/logs/memory to `backups/` (keeps 7), uploads to Drive |
 | daily 06:00 | `scripts/newsroom-digest.js` | Phase 2.3 morning digest of the last 36h of newsroom runs → `output/cron-compare/digest-YYYY-MM-DD.md` (review surface for Mike) |
-| daily 06:15 / 13:15 / 18:15 | `scripts/cron-desk-run.js --stage={angle,report,write} --fanout` | Phase 2.3 three-wake fan-out: 6 byline journalists/day on least-recently-used rotation (quotas civic 2, sports 2, culture 1, business 1). Angle builds today's rota; report gathers citizen quotes; write runs the Rhea gate (`--gate-backend api`, OpenRouter gemini-3.5-flash ~$0.06/run) → staged/flagged behind the probation wall, **never canon** until the Saturday compile |
+| Mon–Fri 06:15 / 13:15 / 18:15 | `scripts/cron-desk-run.js --stage={angle,report,write} --fanout` | Phase 2.3 three-wake fan-out: 6 byline journalists/day on least-recently-used rotation (quotas civic 2, sports 2, culture 1, business 1). Angle builds today's rota; report gathers citizen quotes; write runs the Rhea gate (`--gate-backend api`, OpenRouter gemini-3.5-flash ~$0.06/run) → staged/flagged behind the probation wall, **never canon** until the Saturday compile |
 | 07:00 / 12:00 / 19:00 | `scripts/discord-reflection.js` | Mags reflection over Discord logs → citizen page + Supermemory + claude-mem (Anthropic API) |
-| 07:30 / 12:30 / 15:30 / 19:30 / 21:30 | `scripts/citizen-wake.js --wake=...` | Citizen-loop wake: Sheets + DeepSeek reflection → Supermemory page + gated `Reflection_Intake` row |
+| 07:30 / 12:30 / 21:30 | `scripts/citizen-wake.js --wake=...` | Citizen-loop wake: Sheets + DeepSeek reflection → Supermemory page + gated `Reflection_Intake` row |
 | daily 17:00 | `scripts/citizen-exchange.js` | One agent-to-agent exchange per day → Supermemory + intake row; transcripts in `output/exchanges/` |
+| daily 08:00 | `scripts/notebooklmDailyNews.js` | Source-grounded NotebookLM newsroom listening brief; not canon |
 | every 6h | `scripts/server-health-check.sh` | Disk/RAM/PM2/dashboard thresholds; Discord alert only on breach (silent when healthy) |
 | Wed 04:00 | `scripts/weekly-maintenance.sh` | Engine health audit; Discord alert on issues |
 | 1st of month 03:00 | `scripts/snapshot-droplet.sh` | DigitalOcean snapshot, keeps 1 |
@@ -623,7 +624,10 @@ The crontab header comment mentioning a "Mags Daily Heartbeat" refers to
 - `godworld-dashboard` (online) — Express + React dashboard, port 3001.
 - `mags-bot` (online) — Discord bot; historically high restart count.
 - `wd-cards-daemon` (online) — world-data citizen-card builder.
-- `moltbook`, `spacemolt-miner` (stopped) — do not restart without approval.
+- `moltbook` (stopped between its scheduled runs) — do not restart manually
+  without approval.
+- `spacemolt-miner` is removed from the live PM2 registry; do not re-add or
+  restart it without approval.
 
 ## Newsroom and agent landscape
 

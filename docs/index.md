@@ -55,7 +55,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 - **[[ARCHITECTURE_VISION]]** — Jarvis at /root, persistent sessions, the technical north star Phase 41 builds toward. *(concept, architecture, active)*
 - **[[BOOT_ARCHITECTURE]]** — boot sequence reference for S165. Skill split (boot=persona / session-startup=terminal), per-terminal persona levels, hook routing. *(reference, architecture, active)*
 - **[[FOUR_COMPONENT_MAP]]** — `model + harness + tools + environment` cross-section. Per-role model choices, terminal inventory, skill slice samples, Phase 40 seam map. *(reference, architecture, active)*
-- **[[MODEL_HIERARCHY]]** — model division of labor + cost-to-reasoning ratio. Hierarchy TBD; interim order (Mike-direct 2026-07-24): Opus=lead, Sonnet=desks, Haiku=civic voices, Codex+Kimi=backup CLIs, Antigravity/Gemini=grunt tier (S332 provenance caveat), Aider+Grok retired. §File Boundaries: control plane (`.claude/**`, `CLAUDE.md`, `SESSION_CONTEXT.md`) read-only to out-of-band CLIs via `.aiderignore` + `.githooks/pre-commit`; `AGENTS.md` governs the stricter backup-CLI scope. *(reference, architecture, isolation, active)*
+- **[[MODEL_HIERARCHY]]** — model division of labor + cost-to-reasoning ratio. Hierarchy TBD; interim order (Mike-direct 2026-07-28): Claude=lead, Kimi=backup CLI, Codex+Antigravity/Gemini=gated read-only proposal assistants, Aider+Grok retired. `AGENTS.md` is the binding authorization source. *(reference, architecture, isolation, active)*
 - **[[WORKFLOWS]]** — 7 workflow patterns (media-room, civic, build/deploy, maintenance, cycle run, research, chat-with-mags). Orthogonal to terminals. Post-S165: workflow reference, not boot file. *(reference, architecture, active)*
 
 ### Stack & ops
@@ -401,7 +401,7 @@ Small, dated decision records. Created only when a choice is (a) hard to reverse
 
 ## `docs/reviews/` — deep single-system reviews
 
-- **[[reviews/2026-07-22-event-content-ledger-grok-depth]]** — Grok-depth review of the Event_Content_Ledger (composer, injection, life-state gate, auto-authoring). PoolKey mass balancing sandbox-proven S336; trajectory and ledger-native Baylight/Tribune design completed 2026-07-28; engine-sheet build and a named hardcoded-retirement target remain. *(review, engine, content-ledger, citizens, active)*
+- **[[reviews/2026-07-22-event-content-ledger-grok-depth]]** — Grok-depth review of the Event_Content_Ledger (composer, injection, life-state gate, auto-authoring). PoolKey mass balancing sandbox-proven S336; exclusive retirement, trajectory, and proving-ground work remain open. *(review, engine, content-ledger, citizens, active)*
 
 ---
 
@@ -422,6 +422,7 @@ Small, dated decision records. Created only when a choice is (a) hard to reverse
 
 _(Newest first, per SCHEMA §12 — normalized 2026-07-24.)_
 
+- 2026-07-28 (Mike-direct) — [[MODEL_HIERARCHY]] demoted Codex to the same read-only, proposal-only gate as Antigravity/Gemini; Kimi remains the backup CLI.
 - 2026-07-28 (Codex, Mike-direct) — Corrected the Simulation_Ledger catalog snapshot to 922 rows / 52 columns and added the missing active-plan catalog entries for the headless newsroom and engine.59–61.
 - 2026-07-25 (Codex, Mike-direct) — Registered [[plans/2026-07-25-notebooklm-source-search-wiring]] under research.23 and started its fail-closed permanent-notebook source inventory. The plan keeps NotebookLM in the prior-published-arc lane, preserves current-state authority, and separates the Supermemory setup/corpus audit into its own session.
 - 2026-07-25 (Codex, Mike-direct) — Registered [[reference/notebookLM-CLI]] as the operational owner for Gemini Notebook / NotebookLM CLI setup, persistent authentication, root-Chrome compatibility, controlled upgrades, published-narrative canon search, post-publish additions, and the daily newsroom listening brief.

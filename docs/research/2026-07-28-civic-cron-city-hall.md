@@ -48,6 +48,16 @@ pointers:
 
 ---
 
+## Direction log (Mike, think-tank mode — append as the design evolves)
+
+*Mike's standing method for this project (S343): keep discussing, keep the attempts logged, learn what works and what doesn't. This section is that log. Entries are dated direction, not settled contract — the plan doc is where things get locked.*
+
+- **2026-07-28 (S343) — the frame.** Civic voices are the **"city-workers" — the nodes that make systems work.** Today citizens mostly *react* to deterministic engine events; this project changes that: LLM choices feed not just a civic initiative but **the engines and city behavior itself**. Where the sim becomes an interconnected system. (Mechanism note: the wire half-exists — `applyTrackerUpdates.js --apply` writes the tracker, and `phase02-world-state/applyCityDynamics.js` + `phase05-citizens/civicInitiativeEngine.js` already read tracker state back into engine behavior. The new part is the decision side going autonomous and the feedback loop being designed on purpose.)
+- **2026-07-28 (S343) — Sunday chain.** While crons are in test, the engine fires Sundays. Sequence: `run-cycle` runs → **forks off to a new city-hall-prep** (not the current interactive one) → **Mara voice directive** happens there — and the directive can almost certainly be **an agent, not Mara on claude.ai**; it is essentially "what the offices need to answer on this cycle" → city-hall runs **same Sunday** → **Monday media wakes open with all lanes set** (civic decisions become Monday's desk-signal material). Details explicitly not ironed out — sloppy-think-tank stage by design.
+- **Still open:** what mid-week (Tue–Fri) civic wakes do between Sunday decision runs. Candidate on the table: operational wakes — project directors emit progress between decisions, feeding entity protagonism + giving M-F reporters civic sources. Not yet ruled on.
+
+---
+
 ## Applications (living)
 
 - 2026-07-28 — Ignition record (S343). No reuse yet.

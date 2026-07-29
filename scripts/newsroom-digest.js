@@ -84,6 +84,38 @@ for (const k of keys) {
   L.push('');
 }
 
+// ── Civic section (civic.15 Task 4.1, S344) — review surface over the Sunday
+// chain + Mon-Thu datawakes. Dry-run era: shows what WOULD have applied.
+const CIVIC = path.join(ROOT, 'output', 'cron-civic');
+const civicCloses = recentJson(CIVIC, '.json').filter(x => /close_c\d+\.json$/.test(x.file));
+const civicGates = recentJson(CIVIC, '.json').filter(x => /gate_c\d+\.json$/.test(x.file));
+const civicWakes = recentJson(path.join(CIVIC, 'datawake'), '.json');
+if (civicCloses.length || civicGates.length || civicWakes.length) {
+  L.push('## Civic (cron chain)');
+  for (const { json: c } of civicCloses) {
+    L.push('- **Sunday chain c' + c.cycle + ':** ' + (c.expected || []).length + ' voices · clerk ' + c.clerk + ' · gate ' + (c.gatePass ? 'PASS' : 'BLOCKED') + ' · ' + (c.applied ? 'APPLIED to tracker' : 'DRY — staged, no sheet write'));
+    if (!c.applied) {
+      const dDir = path.join(ROOT, 'output', 'city-civic-database', 'initiatives');
+      if (fs.existsSync(dDir)) {
+        for (const slug of fs.readdirSync(dDir)) {
+          try {
+            const d = JSON.parse(fs.readFileSync(path.join(dDir, slug, 'decisions_c' + c.cycle + '.json'), 'utf8'));
+            const tu = d.trackerUpdates || {};
+            L.push('  - would apply: ' + (d.initiativeId || slug) + ' → ' + (tu.ImplementationPhase || '(no phase move)') + (tu.MilestoneNotes ? ' · "' + String(tu.MilestoneNotes).slice(0, 90) + '"' : ''));
+          } catch (_) { /* no decisions file for this initiative this cycle */ }
+        }
+      }
+    }
+  }
+  for (const { json: g } of civicGates) {
+    if (g.pass === false) L.push('- **Gate BLOCK c' + g.cycle + ':** ' + (g.failures || []).map(f => '[' + f.check + '] ' + String(f.detail).slice(0, 90)).join(' · '));
+  }
+  for (const { json: w } of civicWakes.filter(x => x.json && x.json.statement)) {
+    L.push('- **Datawake ' + w.date + ':** ' + w.holder + ' (' + w.title + ') — "' + String(w.numberMoved || w.statement).slice(0, 110) + '"' + (w.action ? ' · action: ' + String(w.action).slice(0, 80) : ''));
+  }
+  L.push('');
+}
+
 const outPath = path.resolve(ROOT, arg('--out', path.join('output', 'cron-compare', 'digest-' + datestamp + '.md')));
 fs.mkdirSync(path.dirname(outPath), { recursive: true });
 fs.writeFileSync(outPath, L.join('\n'));

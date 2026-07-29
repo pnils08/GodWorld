@@ -1419,7 +1419,32 @@ async function runDatawake() {
   if (failed.length) process.exit(1);
 }
 
-const STAGES = { prep: runPrep, directive: runDirective, decide: runDecide, voices: runVoices, projects: runProjects, close: runClose, datawake: runDatawake };
+// ---------------------------------------------------------------------------
+// Task 4.1 — the guarded Sunday runner: the engine fire is manual, so the cron
+// can't be timed to it. This wrapper self-checks (engine fired this cycle?
+// chain already ran?) and exits clean when there's nothing to do — safe to
+// schedule more than once per Sunday.
+// ---------------------------------------------------------------------------
+async function runChain() {
+  const cycle = arg('--cycle', null) || detectCycle();
+  console.log('Civic SUNDAY CHAIN — c' + cycle + (process.argv.includes('--apply') ? ' (APPLY)' : ' (dry)'));
+  console.log('===================================');
+  if (readJson(path.join(CIVIC, 'close_c' + cycle + '.json'))) {
+    console.log('[chain] close_c' + cycle + '.json already exists — chain already ran this cycle. Exiting clean.');
+    return;
+  }
+  const need = ['world_summary_c' + cycle + '.md', 'engine_audit_c' + cycle + '.json'];
+  const missing = need.filter(f => !fs.existsSync(path.join(ROOT, 'output', f)));
+  if (missing.length) {
+    console.log('[chain] engine has not fired for c' + cycle + ' yet (missing: ' + missing.join(', ') + '). Exiting clean.');
+    return;
+  }
+  for (const stage of [runDirective, runPrep, runDecide, runVoices, runProjects, runClose]) {
+    await stage();   // each stage fails loud (process.exit) — a failure halts the chain with state staged
+  }
+}
+
+const STAGES = { prep: runPrep, directive: runDirective, decide: runDecide, voices: runVoices, projects: runProjects, close: runClose, datawake: runDatawake, chain: runChain };
 if (require.main === module) {
   if (!STAGE || !STAGES[STAGE]) {
     console.error('[civic] unknown or missing --stage (built so far: ' + Object.keys(STAGES).join(', ') + ')');

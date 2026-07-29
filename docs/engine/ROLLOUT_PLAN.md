@@ -2,7 +2,7 @@
 
 **This file is canonical for open/closed work** (S207). Pointer-only: one line per job, detail lives in the pointer doc — never here (S286 hard rule, Mike-direct).
 
-**Status:** ACTIVE (building) | **Last Updated:** Session 341 (2026-07-28) — live engine docs unarchived, MD indexing gate restored, and builder-terminal ownership normalized.
+**Status:** ACTIVE (building) | **Last Updated:** Session 344 (2026-07-29) — Oakland sports intake and Citizen Archive research promoted to tracked work.
 **Filing protocol (S212):** semantic groups + pointer-only entries — see [[rollout-rules]] §3–§5 (taxonomy, add, close). Full design: [[../adr/0005-rollout-plan-structure]].
 **North star:** `docs/ARCHITECTURE_VISION.md` — Jarvis + persistent sessions. Everything we build points there.
 **Completed phase details:** [[engine/ROLLOUT_ARCHIVE]] — read on demand, not at boot.
@@ -67,7 +67,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.20d | Sift Step 5 `covered-by-feature` triage handle — absorb regulatory-process noise into civic round-up. Cadence cap: at most 1 dedicated article per cycle per initiative AND only if actual movement (not process-tick). | blocked | research-build | blocked on pipeline.24 (sift v2); plan [[../plans/2026-05-22-engine-regulatory-friction]] §Task 5, cross-link C2 plan Task 5 |
 | engine.27 | wd-card auto-invalidation hook | in-progress | engine-sheet | [[../plans/2026-05-26-engine-27-wd-card-auto-invalidation]] — detail in pointer (relocated 2026-07-02) |
 | engine.29 | Citizen lifecycle & fame system | parked | engine-sheet | [[../plans/2026-05-30-citizen-lifecycle-fame-system]] + [[ENGINE_REPAIR]] — detail in pointer (relocated 2026-07-02) |
-| engine.40 | Sports-stat intake | ready | research-build → engine-sheet | [[ENGINE_REPAIR]] — detail in pointer (relocated 2026-07-02) |
+| engine.40 | Sports-stat intake | ready | research-build → engine-sheet | [[../research/2026-07-27-oakland-sports-feed-entry-dashboard]] §Roster integration + [[ENGINE_REPAIR]] §engine.40 |
 | engine.41 | Engine-output → canon coverage | in-progress | engine-sheet | [[../plans/2026-06-24-engine-output-canon-coverage]] — detail in pointer (relocated 2026-07-02) |
 | engine.43 | Voices/agents sync contract — BUILT S306, runtime smoke pending (detail: plan §Build notes) | in-progress | engine-sheet | [[../adr/0014-citizen-self-authorship-live-drift]] + [[../plans/2026-07-04-voice-dial-sync-contract-build]] |
 | engine.45 | Ripple ledger — T1–T3b live in prod; T3c retired + T3e folded S311; open: T3d, per-hood fold, T0 traces | in-progress | engine-sheet | [[../plans/2026-07-04-ripple-ledger-attribution]] |
@@ -76,7 +76,9 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.51 | Citizen intake unification — T1-T7 done; prod Intake tab S305; T8 extraction built S305 (dry-run verified, sandbox --apply pending Mike cycle-fire) | in-progress | research-build (T8) + engine-sheet | [[../plans/2026-07-07-citizen-intake-unification]] |
 | engine.53 | Agent exchange engine — T1–5 SHIPPED S312 (3 formats live-verified, 17:00 cron wired; conversations idle until engine.48 T4 ripple writer); open: T6 /sift sourcing | in-progress | research-build | [[../plans/2026-07-11-agent-exchange-engine]] |
 | engine.76 | Compile-layer rebuild — W1–W3 + W5 complete (half 2 shipped S336: usage-rotated per-lane byline candidate in desk_signal, 3-cycle bench proven); OPEN: W4 two-stack consolidation only, gated on the fork proving (pipeline.44) | in-progress | engine-sheet | [[../plans/2026-07-26-compile-layer-rebuild]] |
-| engine.77 | Sports-event intake — trades/injuries/call-ups must write BOTH the ledger state change (Status/RoleType) AND the LifeHistory moment + ripple; proof case C101 Richards trade (POP-00031) | ready | research-build (design) → engine-sheet (build) | [[ENGINE_REPAIR]] §engine.77 (relocated detail); sibling engine.40 |
+| engine.77 | Sports-event intake — trades/injuries/call-ups must write BOTH the ledger state change (Status/RoleType) AND the LifeHistory moment + ripple; proof case C101 Richards trade (POP-00031) | ready | research-build (design) → engine-sheet (build) | [[../research/2026-07-27-oakland-sports-feed-entry-dashboard]] §Future Sports Engine boundary + [[ENGINE_REPAIR]] §engine.77 |
+| engine.89 | Oakland sports intake workspace — draft the implementation plan for feed entry, roster-backed current stat lines, Ripple Preview, and the engine.40/engine.77 write boundary | ready | research-build | [[../research/2026-07-27-oakland-sports-feed-entry-dashboard]] + [[../OAKLAND_SPORTS_FEED]] |
+| engine.90 | Citizen Archive — after sports intake, plan the full-row exit archive, permanent POPID allocator/resolver, verified move protocol, and return-with-same-POPID path | blocked | research-build → engine-sheet | [[../research/2026-07-29-citizen-archive]] |
 
 ### canon.* — World-fidelity layer
 
@@ -89,7 +91,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 |---|------|-------|----------|---------|
 | civic.13 | City-hall engine-sheet reconciliation | blocked | engine-sheet | [[../plans/2026-05-22-c94-gap-log-triage]] — detail in pointer (relocated 2026-07-02) |
 | civic.14 | Initiative_Tracker contract + fine-tune | in-progress | research-build / engine-sheet | [[../plans/2026-06-01-initiative-tracker-contract]] + [[../research/2026-06-01-initiative-tracker-state]] — detail in pointer (relocated 2026-07-02) |
-| civic.15 | Civic cron city-hall — autonomous Sun-Thu government (Mike-direct S343); Phases 0-1 done S343, next: Phase 2 Sunday chain build | in-progress | engine-sheet | [[../plans/2026-07-28-civic-cron-city-hall]] |
+| civic.15 | Civic cron city-hall (Mike-direct S343); Phases 0-4 built S344, dry-Sunday probation before --apply flip | in-progress | engine-sheet | [[../plans/2026-07-28-civic-cron-city-hall]] |
 
 ### infrastructure.* — Supermemory, services, ingest
 

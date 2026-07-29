@@ -82,7 +82,7 @@ pointers:
   1. `--stage=prep`: deterministic port of city-hall-prep Steps 1–4 — read `world_summary_c{XX}.md`, `engine_review_c{XX}.md`, tracker snapshot; build per-office `pending_decisions.md` packets; the interactive "Mike's pressure" input uses the existing AUTO path (engine HIGH ailments) unconditionally; run `scripts/lintCivicPackets.js` on every packet, fail-loud.
   2. State between stages = JSON files under `output/cron-civic/` (mirror of `output/cron-compare/`).
 - **Verify:** run against the last fired cycle's artifacts → packets exist for every duty office, linter exit 0
-- **Status:** [ ] not started
+- **Status:** [x] DONE S344 (d586c915) — 10 packets on C102, lint clean; packets under output/cron-civic/packets/ (workspace untouched); constituent crisis/credit questions added per Mike-direct S344
 
 #### Task 2.2: Directive agent (Mara-directive replacement)
 - **Files:** `scripts/cron-civic-run.js` — modify (`--stage=directive`)
@@ -90,7 +90,7 @@ pointers:
   1. One headless model call (system prompt from `.claude/agents/` Mara material or a new directive persona file — decide at build), input = fresh run-cycle summary + engine review HIGHs, output = `output/mara-directives/mara_directive_c{XX}_AUTO.txt` in the exact format prep already consumes ("what the offices must answer on").
   2. Model: different family from the Mayor's model (friction rule applies to the directive too).
 - **Verify:** directive file exists and prep consumes it without falling back
-- **Status:** [ ] not started
+- **Status:** [x] DONE S344 (09bfb536/d3d2f074) — gemini-flash, Mara in-world persona only; 8 blocks C102; prep consumes AUTO without fallback
 
 #### Task 2.3: Cascade stages (decide → voices → projects → close)
 - **Files:** `scripts/cron-civic-run.js` — modify
@@ -99,7 +99,7 @@ pointers:
   2. `--stage=voices`: Layer-2 offices in parallel, per-office models from the map; `--stage=projects`: Layer-3 project directors + Baylight, only where a voice decision touched their initiative (port of Step 5 trigger rule).
   3. `--stage=close`: Clerk verification call + `scripts/assembleDecisions.js` → dry-run `applyTrackerUpdates.js` → **mechanical gate** (Task 2.4) → `--apply` → `civic_sentiment_c{XX}.json`; write `## /city-hall` production-log section + media handoff (port of Step 7).
 - **Verify:** full chain on a fired cycle: all expected `output/civic-voice/*_c{XX}.json` present (Step 5.5 checklist ported), clerk audit written, tracker rows updated
-- **Status:** [ ] not started
+- **Status:** [x] DONE S344 (19c69198) — full C102 dry chain green; flat trackerUpdates contract; milestone notes normalized to primary voice at close
 
 #### Task 2.4: The apply gate — replace the human gate with mechanism
 - **Files:** `scripts/cron-civic-gate.js` — create (sibling of `cron-rhea-gate.js`)
@@ -108,7 +108,7 @@ pointers:
   2. One cheap different-family model call (independence rule: family ≠ any writer family in the run) sanity-reading the decision set for contradictions/fabrications.
   3. Any failure → skip `--apply`, leave decisions staged in `output/cron-civic/staged/`, Discord webhook alert (reuse `notifyFanoutFailures` pattern), digest entry. `utilities/cycleRollback.js` documented in the script header as the undo path.
 - **Verify:** gate blocks a deliberately-malformed fixture (bad phase value) with exit 2 + Discord post; passes a clean C101 replay with exit 0
-- **Status:** [ ] not started
+- **Status:** [x] DONE S344 (19c69198) — sanity-read audits ASSEMBLED write-set (Mike ruling); fixture blocks exit 2 + Discord; clean C101 replay exit 0
 
 ### Phase 3 — Mon–Thu data-voice wakes (engine-sheet)
 
@@ -118,14 +118,14 @@ pointers:
   1. Per duty rotation (subset of offices per day, LRU like `newsroom-fanout.js`): build a small domain-data slice per office from its `dataSources` in the map (deterministic reads only), one headless call in office voice → `output/cron-civic/datawake/{office}_{date}.json` (statement/action + what number moved).
   2. Stage where the media fanout's angle stage can read it as source material (same contract as `desk_signal` lanes — exact wiring agreed with the newsroom pipeline owner at build).
 - **Verify:** one dry datawake run produces JSONs for the day's rota; media angle stage can parse one as a source
-- **Status:** [ ] not started
+- **Status:** [x] DONE S344 (4fa458e2) — datawake stage + LRU rota + numeric-grounding gate + bloc spokespeople; loadLane merges into civic desk lane
 
 #### Task 3.2: Fri–Sat life-wake routing
 - **Files:** `scripts/citizen-wake.js` — read; wiring change TBD at build (routing, not new machinery)
 - **Steps:**
   1. Ensure office-holders' POPIDs are eligible in the existing citizen-wake pool on Fri–Sat, and *excluded from office wakes* those days (dutyDays check in the fanout).
 - **Verify:** rota builder never schedules an office wake Fri/Sat; a Fri citizen-wake for an office-holder POPID runs through the normal citizen path
-- **Status:** [ ] not started
+- **Status:** [x] DONE S344 (4fa458e2) — Fri/Sat/Sun guard in datawake; citizen-wake pool already includes office POPIDs, no change needed
 
 ### Phase 4 — Dry runs (probation)
 
@@ -135,7 +135,7 @@ pointers:
   1. Wire Sunday chain + Mon–Thu datawakes with `--no-apply` (gate runs, sheet write skipped) for 2 dry cycles; digest shows what *would* have applied.
   2. Mike reviews digests; flip `--apply` on when two consecutive dry Sundays are clean.
 - **Verify:** 2 dry Sunday digests reviewed; flip decision recorded in the research Direction log
-- **Status:** [ ] not started
+- **Status:** [~] WIRED DRY S344 (bda86d40) — guarded --stage=chain Sun 14:30+21:00, datawake Mon-Thu 05:45, civic digest section; REMAINING: 2 clean dry Sundays -> Mike flips --apply
 
 ---
 

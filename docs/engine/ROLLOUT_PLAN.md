@@ -89,7 +89,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 |---|------|-------|----------|---------|
 | civic.13 | City-hall engine-sheet reconciliation | blocked | engine-sheet | [[../plans/2026-05-22-c94-gap-log-triage]] — detail in pointer (relocated 2026-07-02) |
 | civic.14 | Initiative_Tracker contract + fine-tune | in-progress | research-build / engine-sheet | [[../plans/2026-06-01-initiative-tracker-contract]] + [[../research/2026-06-01-initiative-tracker-state]] — detail in pointer (relocated 2026-07-02) |
-| civic.15 | Civic cron city-hall — autonomous Sun-Thu civic government on crons (Mike-direct S343); plan drafted, next: Phase 0 office map + model bake-off | in-progress | research-build → engine-sheet | [[../plans/2026-07-28-civic-cron-city-hall]] |
+| civic.15 | Civic cron city-hall — autonomous Sun-Thu government (Mike-direct S343); Phases 0-1 done S343, next: Phase 2 Sunday chain build | in-progress | engine-sheet | [[../plans/2026-07-28-civic-cron-city-hall]] |
 
 ### infrastructure.* — Supermemory, services, ingest
 

@@ -7,7 +7,7 @@ tags: [architecture, models, orchestration, isolation, active]
 pointers:
   - "[[FOUR_COMPONENT_MAP]] — Core component boundaries"
   - "[[ARCHITECTURE_VISION]] — Overarching Jarvis/GodWorld vision"
-  - ".agents/AGENTS.md — per-agent roster (this doc = model-tier + cost view)"
+  - "../AGENTS.md — binding per-agent authorization (this doc = model-tier + cost view)"
 ---
 
 # Model Division of Labor & Hierarchy
@@ -77,16 +77,18 @@ orchestration layer share the same repo and run as the same OS user (root).
 
 | Zone | Paths | Kimi / Codex | Antigravity / Gemini |
 |------|-------|--------------|----------------------|
-| **Control plane** (Claude-owned) | `.claude/**`, `.agents/**`, `CLAUDE.md`, `SESSION_CONTEXT.md` | read-only | read-only |
-| **Substrate + execution** | `phase*/`, `utilities/`, `lib/`, `scripts/` | `scripts/` read-write; other paths require explicit per-task permission | read-only; proposed diffs only |
-| **Content / output** | `output/`, `editions/`, most of `docs/` | `output/` + `docs/` read-write; `editions/` requires explicit permission | read-only; proposed diffs only |
+| **Control plane** (Claude-owned) | `.claude/**`, `.agents/**`, `CLAUDE.md`, `SESSION_CONTEXT.md` | read-only; sole exception is committing the agent's own `NEXT[...]` line alone at session close | read-only; same own-`NEXT[...]`-line-only close exception |
+| **Ordinary CLI scope** | `scripts/**`, `output/**`, `docs/**` | read-write; commit/push only under `AGENTS.md` §Push authorization | read-only; proposed diffs only |
+| **Engine substrate + deployed surfaces** | `phase*/`, `utilities/`, `lib/`, `schemas/`, `dashboard/`, `editions/`, configuration files, hooks, service manifests | no ordinary write authority; changes are proposed only and land through `engine-sheet` | read-only; proposed diffs only |
+| **Protected documentation history** | `docs/archive/**`, `docs/research/papers/**`, `docs/drive-files/**` | immutable unless the builder explicitly names the scope | read-only; proposed diffs only |
 
 **Enforcement — soft tier (Mike's call, S274, under quota pressure):**
 - `.aiderignore` excludes the control plane from the editable map (legacy from the
   Aider era; kept as defense-in-depth after Aider's S332 retirement).
 - `.githooks/pre-commit` (activate once: `git config core.hooksPath .githooks`)
   default-denies any commit touching the control plane unless a Claude session
-  prefixes `CLAUDE_CTL=1`.
+  prefixes `CLAUDE_CTL=1`; the only external-agent carve-out is a commit whose
+  sole control-plane change is that agent's own `NEXT[...]` line.
 - The CLIs run as root with bash, so these boundaries remain policy-enforced;
   Antigravity/Gemini have no project write or commit authority.
 
@@ -123,3 +125,9 @@ model-tier + cost-to-reasoning view.
 
 ## Evolution & Maintenance
 *As new models (e.g., Claude 5.x, Gemini 4.x) are introduced, or as local open-weights models become more capable, update this document to reflect shifting responsibilities. Always prioritize shifting "Chorus" and "Hands" tasks to the lowest viable cost-center while preserving the "Brain" for pure reasoning.*
+
+---
+
+## Changelog
+
+- 2026-07-28 — Trued §6 to root `AGENTS.md`: corrected the binding-source pointer, made the Kimi/Codex ordinary writable scope exact, restored the engine-substrate and protected-history gates, and documented the own-`NEXT[...]`-line-only session-close exception.

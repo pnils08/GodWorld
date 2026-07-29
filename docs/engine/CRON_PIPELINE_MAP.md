@@ -19,6 +19,8 @@ All server times are in UTC. Central Daylight Time (CDT) is UTC-5.
 - **Weekly Droplet Snapshot**: Sundays at 10 PM CDT (`0 3 * * 0`)
 - **Weekly Maintenance**: Wednesdays at 11 PM CDT (`0 4 * * 3`)
 - *(Disabled)* Morning Heartbeat Reflection: Was at 8 AM CST.
+- **Civic Datawakes (civic.15)**: Mon–Thu 5:45 AM server time (`45 5 * * 1-4`) — `cron-civic-run.js --stage=datawake`, 3 offices/day voice their domain data into `output/cron-civic/datawake/`
+- **Civic Sunday Chain (civic.15)**: Sundays 14:30 + 21:00 retry (`30 14 * * 0`, `0 21 * * 0`) — `cron-civic-run.js --stage=chain`, guarded (exits clean if engine not fired / already ran). DRY era: no `--apply` until two clean dry Sundays are reviewed.
 
 ### Anthropic Cloud Scheduled Agents
 - **Daily Mara Canon Sync**: 6 AM CDT daily
@@ -84,3 +86,23 @@ The system utilizes automated failovers, recovery paths, and threshold monitorin
 - **Automated Health Checks**: The `server-health-check.sh` cron runs every 6 hours, checking for Disk space > 80%, RAM < 100MB, and PM2 errors > 10. Breaches trigger an immediate Discord webhook alert.
 - **Data Integrity Failures (LLM Pipeline)**: GodWorld's "Plan Mode Gate" prevents silent LLM hallucinations. If an agent blocks mid-execution (e.g., citizen not found, missing intake), it halts, logs the failure, and re-enters Plan Mode instead of guessing or forging data.
 - **System Reboots**: Crons and jobs are registered in `ecosystem.config.js`. If the droplet restarts, `pm2 startup` and `pm2 save` ensure the dashboard and bot resume immediately upon boot.
+
+## Weekly Lifecycle — civic.15 era (S344)
+
+The week as it actually runs, with MANUAL steps notated. Sunday chain + datawakes are live crons (dry mode); everything marked MANUAL is a bottleneck candidate.
+
+| When | What happens | Automated? |
+|---|---|---|
+| Sunday | Mike runs pre-checks (sports + civic intake entries) and fires `runWorldCycle()` in Apps Script | **MANUAL** (engine fire is the world's heartbeat — deliberate) |
+| Sunday | `buildWorldSummary.js` + `engineAuditor.js` produce `world_summary_c{XX}.md`, `engine_audit_c{XX}.json`, `desk_signal_c{XX}.json`, `baseline_briefs_c{XX}.json` | **MANUAL prompt today** — but both are deterministic scripts; cron-able behind a "new cycle detected" guard (candidate next automation) |
+| Sunday | `/engine-review` prose review + gap log | **MANUAL** (LLM skill, engine-sheet terminal) |
+| Sunday 14:30 | Civic chain cron: directive → prep → Mayor → voices → projects → close. Replaces the interactive `/city-hall-prep` + `/city-hall` civic-terminal session entirely | **CRON** (dry: decisions staged, no sheet write until `--apply` flips) |
+| Sunday (chain close) | Production log civic sections written BY SCRIPT: `--stage=prep` opens `production_log_c{XX}.md` + `## /city-hall-prep (AUTO)`; `--stage=close` writes `## /city-hall (AUTO)` (voice decisions table, tracker updates, media handoff). No Claude CLI involved | **CRON** |
+| Sunday (chain close) | Media handoff, three paths: (1) `## /city-hall` production-log section (sift's canonical civic source), (2) `output/cron-civic/decisions_lane_c{XX}.json` — decisions as lane entries merged into the civic desk lane by `cron-desk-run.js loadLane` (because `desk_signal` is built BEFORE city hall runs), (3) `output/civic-voice/*_c{XX}.json` full statements | **CRON** |
+| Mon–Thu 05:45 | Civic datawakes (3 offices/day, numeric-grounded) → merged into the civic lane before the 06:15 angle wake | **CRON** |
+| Mon–Fri 06:15/13:15/18:15 | Newsroom fanout wakes (angle/report/write + Rhea gate) | **CRON** |
+| Daily 06:00 | Morning digest (now includes Civic section: chain result, would-apply tracker moves, datawake quotes) | **CRON** |
+| Saturday | Mags compiles best-scored staged articles into the edition; scoring refinement owed (see plan); compile not yet designed as cron | **MANUAL** (headless-newsroom plan Phase 3 territory) |
+| Saturday | Print pipeline + canon ingest | **MANUAL** (skill runs, approval-gated) |
+
+Remaining manual bottlenecks, ranked: (1) Saturday compile + ingest (biggest; research-build/media design), (2) Sunday post-fire script prompts (world summary + auditor — mechanically cron-able), (3) engine-review prose + gap log (LLM, stays manual for now), (4) engine fire itself (stays manual by design).

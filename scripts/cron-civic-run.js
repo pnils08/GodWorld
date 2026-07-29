@@ -1230,9 +1230,32 @@ async function runClose() {
     fs.writeFileSync(gapLog, gapBody.replace(/\n+$/, '\n') + '\n' + legLines.join('\n') + '\n');
   }
 
+  // Media handoff, lane half (S344, Mike's "how will the media know" probe):
+  // desk_signal_c{XX}.json is built by buildWorldSummary BEFORE city hall runs,
+  // so Sunday's decisions never land in it. Write them as lane-shaped entries;
+  // cron-desk-run loadLane merges this file into the civic desk lane all week.
+  const laneMap = readJson(path.join(ROOT, 'scripts', 'civic-office-map.json')) || { offices: [] };
+  const popidBySlug = {};
+  for (const o of [...(laneMap.offices || []), ...(laneMap.projects || [])]) {
+    if (o.agentDir) popidBySlug[voiceSlug(o.agentDir)] = popidBySlug[voiceSlug(o.agentDir)] || o.popid;
+  }
+  const laneEntries = [];
+  for (const s of expected) {
+    for (const st of (voiceJsons[s].statements || [])) {
+      const label = cleanInline((voiceJsons[s].speaker || s) + ' (' + s.replace(/_/g, ' ') + '): ' + (st.decision || st.topic || '') + (st.quote ? ' — "' + st.quote + '"' : ''));
+      if (label) laneEntries.push({
+        label: label.slice(0, 220), kind: 'civic-decision',
+        ref: 'output/civic-voice/' + s + '_c' + cycle + '.json',
+        popids: popidBySlug[s] ? [popidBySlug[s]] : [],
+      });
+    }
+  }
+  fs.writeFileSync(path.join(CIVIC, 'decisions_lane_c' + cycle + '.json'), JSON.stringify({ cycle: Number(cycle), entries: laneEntries, builtAt: new Date().toISOString() }, null, 2));
+  log('media lane handoff: ' + laneEntries.length + ' civic-decision entries → decisions_lane_c' + cycle + '.json');
+
   fs.writeFileSync(path.join(CIVIC, 'close_c' + cycle + '.json'), JSON.stringify({
     stage: 'close', cycle: Number(cycle), expected, clerk: clerk.overall || 'unknown',
-    gatePass, applied, clerkModel, ranAt: new Date().toISOString(),
+    gatePass, applied, clerkModel, laneEntries: laneEntries.length, ranAt: new Date().toISOString(),
   }, null, 2));
   console.log('\n=== close complete: clerk=' + (clerk.overall || 'unknown') + ' gate=' + (gatePass ? 'PASS' : 'BLOCKED') + ' applied=' + applied + ' ===');
   if (!gatePass || clerk.overall !== 'pass') process.exit(1);

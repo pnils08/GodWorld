@@ -329,6 +329,10 @@ function loadLane(cycle, desk) {
   // datawakes — an office-holder voicing their domain's live numbers is beat
   // signal for the civic desk. Additive; absent dir or no wakes = no-op.
   if ((desk || DESK) === 'civic') {
+    // Sunday chain decisions (S344): desk_signal is built BEFORE city hall
+    // runs, so the close stage exports the cycle's decisions as lane entries.
+    const dl = readJson(path.join(ROOT, 'output', 'cron-civic', 'decisions_lane_c' + cycle + '.json'));
+    if (dl && Array.isArray(dl.entries)) lane.push(...dl.entries);
     const dwDir = path.join(ROOT, 'output', 'cron-civic', 'datawake');
     const today = new Date().toISOString().slice(0, 10);
     if (fs.existsSync(dwDir)) {

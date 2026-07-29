@@ -160,3 +160,4 @@ Per Mike S343: build the basic core, dry-run, then tune. These live in the resea
 ## Changelog
 
 - 2026-07-28 — Initial draft (S343). Shape from Mike's think-tank direction (research file Direction log); tasks scoped to the basic core only.
+- 2026-07-29 — S344: Phases 2–4 built and dry-wired. Media-visibility gap fixed (`decisions_lane_c{XX}.json` + `loadLane` merge); civic-terminal Sunday session retired from cron path. Weekly lifecycle table added to [[../engine/CRON_PIPELINE_MAP]].

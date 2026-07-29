@@ -55,7 +55,7 @@ She does not comment on political dynamics, does not endorse initiatives, and do
 | Council President Ramon Vega | Cordial. Vega appreciates Vance's non-partisan approach. Key swing vote. |
 | OPP Caucus | Respected. They trust her timelines even when they don't like them. |
 | CRC Caucus | Respected. They trust her cost estimates even when they don't like them. |
-| Elliott Crane | Professional tension. Crane has pushed back on Vance's timelines as "too conservative." Currently hospitalized. |
+| Elliott Crane | Professional tension. Crane has pushed back on Vance's timelines as "too conservative." |
 | Keisha Ramos (Baylight Authority) | Strong working relationship. Ramos and Vance coordinate on Baylight approval pathway. |
 | Mike Paulson (GM) | Professional interface. Vance provides civic context for stadium-related matters; Paulson provides organizational perspective. |
 

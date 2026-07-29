@@ -618,11 +618,37 @@ async function runDirective() {
     process.exit(2);
   }
 
-  // Mara persona: reused from docs/mara-vance/ (Mike-direct S344 — reuse, not a
-  // new persona file). Character + directive format/discipline.
+  // Mara persona: IN_WORLD_CHARACTER.md only (Mike-direct S344). The
+  // VOICE_DIRECTIVE_TEMPLATE is an apparatus doc (.claude paths, audit paths,
+  // owner sign-off) — feeding it whole put out-of-sim framing in her context.
+  // The directive craft is distilled into the in-world brief below instead.
+  const DIRECTIVE_BRIEF = [
+    '## Your cycle directive — how you work this desk',
+    '',
+    'Each cycle you review the city\'s live record and issue directives to the offices and',
+    'program directors who owe the public an answer. You are the city\'s institutional',
+    'memory: you catch the unresolved thread, the number nobody published, the office gone',
+    'quiet while a decision depends on them.',
+    '',
+    'Issue one block per addressee, exactly this shape:',
+    '',
+    '## [Full Name] — [Role]',
+    '',
+    '- **Agent:** `.claude/agents/<seat>/`  (routing line — copy the seat id exactly as listed for that person)',
+    '- **Address:** one sentence, action-shaped — what they must say, publish, or do this cycle',
+    '- **Why:** the unresolved thread. Cite cycles by number. Name the decision that depends on this.',
+    '- **Acceptance:** what counts as resolved — a number, a position, a filed deliverable, observable next cycle',
+    '- **Silence consequence:** what breaks if they stay silent. Silence is also a position.',
+    '',
+    'All five fields, every block. Order by urgency: vote-gating first, then',
+    'record-corrections, then coverage gaps, then escalations of prior directives that went',
+    'unanswered. Maximum 12 blocks. If you cannot write a clean Acceptance line, the',
+    'directive is not ready — cut it. Thin directives are noise; issuing fewer, sharper',
+    'directives is always the better cycle.',
+  ].join('\n');
   const persona = [
     mustRead(path.join(ROOT, 'docs', 'mara-vance', 'IN_WORLD_CHARACTER.md'), 'Mara persona'),
-    mustRead(path.join(ROOT, 'docs', 'mara-vance', 'VOICE_DIRECTIVE_TEMPLATE.md'), 'Mara directive template'),
+    DIRECTIVE_BRIEF,
   ].join('\n\n---\n\n');
 
   // Valid addressees = the chain's live seats (office map, agented only).

@@ -3,7 +3,18 @@
     "task": "civic.15 plan Task 0.2 — the civic persona-map (sibling of scripts/persona-map.json)",
     "source": "output/civic-office-ledger-dump_c102.json (35 offices, live-verified S343)",
     "note": "dataSources are CANDIDATE pointers — verify each against real files/tabs at Phase 3 build before wiring. model stays null until Task 1.2 bake-off. Faction agents cover council rows collectively.",
-    "frictionRule": "mayor, opp, crc, ind must land on different model families at Task 1.2"
+    "frictionRule": "mayor, opp, crc, ind must land on different model families at Task 1.2",
+    "modelAssignment": {
+      "when": "S343 Task 1.2",
+      "basis": "output/cron-civic/eval/*_c101_scorecard.json (4 friction seats x 5 models, gemini-3.5-flash judge)",
+      "frictionSeats": {
+        "MAYOR-01": "mistralai/mistral-large (voice 10)",
+        "OPP": "qwen/qwen3-235b-a22b (voice 10)",
+        "CRC": "deepseek/deepseek-chat (voice 7.5)",
+        "IND": "moonshotai/kimi-k2 (voice 9)"
+      },
+      "note": "4 distinct families across the friction seats. kimi->IND over CRC (9+7.5=16.5 beats 9.5+5=14.5 total). STAFF/projects/clerk -> deepseek (cheapest passing, matches all-desks-DeepSeek precedent S332). z-ai/glm-4.7 DROPPED: returned empty content on 3 of 4 offices."
+    }
   },
   "offices": [
     {
@@ -22,7 +33,7 @@
         "output/civic_sentiment_c{XX}.json"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "mistralai/mistral-large"
     },
     {
       "officeId": "DA-01",
@@ -39,7 +50,7 @@
         "Initiative_Tracker (OARI)"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "moonshotai/kimi-k2"
     },
     {
       "officeId": "PD-01",
@@ -55,7 +66,7 @@
         "output/world_summary_c{XX}.md §crime"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "qwen/qwen3-235b-a22b"
     },
     {
       "officeId": "COUNCIL-D1",
@@ -72,7 +83,7 @@
         "Initiative_Tracker AffectedNeighborhoods"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "qwen/qwen3-235b-a22b"
     },
     {
       "officeId": "COUNCIL-D2",
@@ -89,7 +100,7 @@
         "Initiative_Tracker AffectedNeighborhoods"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "moonshotai/kimi-k2"
     },
     {
       "officeId": "COUNCIL-D3",
@@ -106,7 +117,7 @@
         "Initiative_Tracker AffectedNeighborhoods"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "qwen/qwen3-235b-a22b"
     },
     {
       "officeId": "COUNCIL-D4",
@@ -123,7 +134,7 @@
         "Initiative_Tracker AffectedNeighborhoods"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "moonshotai/kimi-k2"
     },
     {
       "officeId": "COUNCIL-D5",
@@ -140,7 +151,7 @@
         "Initiative_Tracker AffectedNeighborhoods"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "qwen/qwen3-235b-a22b"
     },
     {
       "officeId": "COUNCIL-D6",
@@ -157,7 +168,7 @@
         "Initiative_Tracker AffectedNeighborhoods"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "deepseek/deepseek-chat"
     },
     {
       "officeId": "COUNCIL-D7",
@@ -174,7 +185,7 @@
         "Initiative_Tracker AffectedNeighborhoods"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "deepseek/deepseek-chat"
     },
     {
       "officeId": "COUNCIL-D8",
@@ -191,7 +202,7 @@
         "Initiative_Tracker AffectedNeighborhoods"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "deepseek/deepseek-chat"
     },
     {
       "officeId": "COUNCIL-D9",
@@ -208,7 +219,7 @@
         "Initiative_Tracker AffectedNeighborhoods"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "qwen/qwen3-235b-a22b"
     },
     {
       "officeId": "STAFF-COS",
@@ -225,7 +236,7 @@
         "Initiative_Tracker"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "deepseek/deepseek-chat"
     },
     {
       "officeId": "STAFF-DM-ECON",
@@ -242,7 +253,7 @@
         "output/world_summary_c{XX}.md §economy"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "deepseek/deepseek-chat"
     },
     {
       "officeId": "STAFF-DM-COMM",
@@ -259,7 +270,7 @@
         "output/world_summary_c{XX}.md §neighborhoods"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "deepseek/deepseek-chat"
     },
     {
       "officeId": "STAFF-COMMS",
@@ -276,7 +287,7 @@
         "output/civic_sentiment_c{XX}.json"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "deepseek/deepseek-chat"
     },
     {
       "officeId": "STAFF-LEGAL",
@@ -292,7 +303,7 @@
         "Initiative_Tracker"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "deepseek/deepseek-chat"
     },
     {
       "officeId": "STAFF-MANAGER",
@@ -309,7 +320,7 @@
         "output/world_summary_c{XX}.md"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "deepseek/deepseek-chat"
     },
     {
       "officeId": "STAFF-BAYLIGHT",
@@ -326,7 +337,7 @@
         "output/city-civic-database/initiatives/baylight/"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "deepseek/deepseek-chat"
     },
     {
       "officeId": "CHIEF-POLICE",
@@ -343,7 +354,7 @@
         "neighborhood crime slices"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "deepseek/deepseek-chat"
     },
     {
       "officeId": "CHIEF-FIRE",
@@ -359,7 +370,7 @@
         "output/world_summary_c{XX}.md §events"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "deepseek/deepseek-chat"
     },
     {
       "officeId": "DCOP-OPS",
@@ -375,7 +386,7 @@
         "output/world_summary_c{XX}.md §crime"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "deepseek/deepseek-chat"
     },
     {
       "officeId": "DCOP-COMM",
@@ -392,7 +403,7 @@
         "neighborhood sentiment"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "deepseek/deepseek-chat"
     },
     {
       "officeId": "IAD-LEAD",
@@ -408,7 +419,7 @@
         "OARI initiative state"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "deepseek/deepseek-chat"
     },
     {
       "officeId": "EMS-DIR",
@@ -424,7 +435,7 @@
         "output/world_summary_c{XX}.md §health"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "deepseek/deepseek-chat"
     },
     {
       "officeId": "MED-EXAM",
@@ -440,7 +451,7 @@
         "LifeHistory_Log deaths"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "deepseek/deepseek-chat"
     },
     {
       "officeId": "EMERG-DIR",
@@ -457,7 +468,7 @@
         "output/world_summary_c{XX}.md §events"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "deepseek/deepseek-chat"
     },
     {
       "officeId": "ADA-MAJOR",
@@ -473,7 +484,7 @@
         "output/world_summary_c{XX}.md §crime"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "deepseek/deepseek-chat"
     },
     {
       "officeId": "ADA-SAFETY",
@@ -490,7 +501,7 @@
         "OARI initiative state"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "deepseek/deepseek-chat"
     },
     {
       "officeId": "DPD-DEPUTY",
@@ -506,7 +517,7 @@
         "output/world_summary_c{XX}.md §crime"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "deepseek/deepseek-chat"
     },
     {
       "officeId": "COURT-LIAISON",
@@ -522,7 +533,7 @@
         "output/world_summary_c{XX}.md §crime"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "deepseek/deepseek-chat"
     },
     {
       "officeId": "CPRB-CHAIR",
@@ -539,7 +550,7 @@
         "civic sentiment"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "deepseek/deepseek-chat"
     },
     {
       "officeId": "OMBUDSMAN",
@@ -555,7 +566,7 @@
         "output/civic_sentiment_c{XX}.json"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "deepseek/deepseek-chat"
     },
     {
       "officeId": "REENTRY-DIR",
@@ -571,7 +582,7 @@
         "output/world_summary_c{XX}.md §crime"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "deepseek/deepseek-chat"
     },
     {
       "officeId": "PLANNING-DIR",
@@ -588,7 +599,7 @@
         "output/world_summary_c{XX}.md §neighborhoods"
       ],
       "dutyDays": "sun-thu",
-      "model": null
+      "model": "deepseek/deepseek-chat"
     }
   ]
 }

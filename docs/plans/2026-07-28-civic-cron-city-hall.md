@@ -64,7 +64,7 @@ pointers:
   2. Run the same packet across candidate models (candidates to test: `deepseek/deepseek-chat`, `google/gemini-3.5-flash`, `moonshotai/kimi-k2`, `qwen/qwen3-235b`, `mistralai/mistral-large` — final list at run time from OpenRouter availability/pricing).
   3. Score each output: (a) decision-JSON schema conformance, (b) `trackerUpdates` phase-vocabulary validity per [[mara-vance/INITIATIVE_TRACKER_CONTRACT]], (c) canon-name check (reuse `scripts/canon-name-check.js` prechecks), (d) voice distinctness — judged by a different-family model.
 - **Verify:** `node scripts/cron-civic-eval.js --office mayor --cycle 101 --dry` → per-model scorecard JSON in `output/cron-civic/eval/`
-- **Status:** [ ] not started
+- **Status:** [x] DONE S343 — harness built; 4 friction seats × 5 models run on real C101 packets; all writers 0 engine-leaks, 0 real fabrications; glm-4.7 dropped (empty content 3/4 offices)
 
 #### Task 1.2: Per-faction model assignment
 - **Files:** `scripts/civic-office-map.json` — modify (fill `model` fields)
@@ -72,7 +72,7 @@ pointers:
   1. From scorecards, assign models with the **friction rule**: OPP faction, CRC faction, Mayor's office, and independents each get a *different* model family where scores permit; projects/Clerk can share the cheapest passing model.
   2. Record the assignment rationale + costs in the research file's Direction log.
 - **Verify:** no two of {mayor, opp, crc, ind} share a model family in the map
-- **Status:** [ ] not started
+- **Status:** [x] DONE S343 — mayor=mistral-large(10), OPP=qwen3-235b(10), IND=kimi-k2(9), CRC=deepseek(7.5); 4 distinct families verified; STAFF/projects=deepseek
 
 ### Phase 2 — Sunday chain core (engine-sheet)
 

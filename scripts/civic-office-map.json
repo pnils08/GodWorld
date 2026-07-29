@@ -601,5 +601,55 @@
       "dutyDays": "sun-thu",
       "model": "deepseek/deepseek-chat"
     }
-  ]
+  ],
+  "projects": [
+    {
+      "projectId": "PROJ-STABFUND",
+      "title": "OEWD Program Director (Stabilization Fund)",
+      "holder": "Marcus Webb",
+      "popid": "POP-00790",
+      "agentDir": "civic-project-stabilization-fund",
+      "initiative": "INIT-001",
+      "neighborhoods": ["West Oakland"],
+      "dutyDays": "sun-thu",
+      "model": "deepseek/deepseek-chat"
+    },
+    {
+      "projectId": "PROJ-OARI",
+      "title": "OARI Program Director",
+      "holder": "Vanessa Tran-Muñoz",
+      "popid": "POP-01021",
+      "agentDir": "civic-project-oari",
+      "initiative": "INIT-002",
+      "neighborhoods": ["West Oakland", "Fruitvale", "East Oakland"],
+      "dutyDays": "sun-thu",
+      "model": "deepseek/deepseek-chat"
+    },
+    {
+      "projectId": "PROJ-HEALTHCTR",
+      "title": "Health Center Project Director",
+      "holder": "Bobby Chen-Ramirez",
+      "popid": "POP-00792",
+      "agentDir": "civic-project-health-center",
+      "initiative": "INIT-005",
+      "neighborhoods": ["Temescal"],
+      "dutyDays": "sun-thu",
+      "model": "deepseek/deepseek-chat"
+    },
+    {
+      "projectId": "PROJ-TRANSITHUB",
+      "title": "Transit Hub Planning Lead",
+      "holder": "Elena Soria Dominguez",
+      "popid": "POP-00791",
+      "agentDir": "civic-project-transit-hub",
+      "initiative": "INIT-003",
+      "neighborhoods": ["Fruitvale"],
+      "_note": "Ledger row POP-00791 carries FullName 'Eloise Soria-Dominguez'; agent canon (.claude/agents/civic-project-transit-hub) says 'Elena Soria Dominguez' — flagged S344, agent canon used here pending Mike's call",
+      "dutyDays": "sun-thu",
+      "model": "deepseek/deepseek-chat"
+    }
+  ],
+  "_projectsMeta": {
+    "added": "S344 civic.15 Task 2.1 — the 4 project directors are chain seats, not Civic_Office_Ledger office-holders, so they live outside the 35-row offices mirror. POPIDs live-verified against simulation_ledger_snapshot.jsonl (RoleType match). model per Task 1.2: STAFF/projects -> deepseek."
+  }
 }

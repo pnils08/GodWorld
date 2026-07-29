@@ -644,7 +644,7 @@
       "agentDir": "civic-project-transit-hub",
       "initiative": "INIT-003",
       "neighborhoods": ["Fruitvale"],
-      "_note": "Ledger row POP-00791 carries FullName 'Eloise Soria-Dominguez'; agent canon (.claude/agents/civic-project-transit-hub) says 'Elena Soria Dominguez' — flagged S344, agent canon used here pending Mike's call",
+      "_note": "S344: ledger FullName corrected Eloise->Elena by Mike; agent canon and ledger now agree",
       "dutyDays": "sun-thu",
       "model": "deepseek/deepseek-chat"
     }

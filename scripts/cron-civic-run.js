@@ -480,7 +480,7 @@ async function runPrep() {
       const sect = directive.split(/\n## /).find(s => s.includes('`' + dir + '`') || s.includes(dir));
       if (sect) {
         const clean = cleanLines('## ' + sect).trim();
-        if (clean) L.push('', '## Editorial pressure (Mara Vance, Bay Tribune — answer it or own the silence)', clean);
+        if (clean) L.push('', '## Directive from Mara Vance, City Planning Director — answer it or own the silence', clean);
       }
     }
 
@@ -561,8 +561,198 @@ async function runPrep() {
 }
 
 // ---------------------------------------------------------------------------
+// Stage: directive (Task 2.2 — the Mara-on-claude.ai replacement)
+// ---------------------------------------------------------------------------
 
-const STAGES = { prep: runPrep };
+// Local OpenRouter helper — same shape as cron-civic-eval.js / cron-desk-writer.js
+// (the eval script guards argv at module top, so it can't be required).
+function callOpenRouter(model, system, user, maxTokens) {
+  const https = require('https');
+  const body = JSON.stringify({
+    model, max_tokens: maxTokens || 4000,
+    messages: [{ role: 'system', content: system }, { role: 'user', content: user }]
+  });
+  return new Promise((resolve, reject) => {
+    const req = https.request({
+      hostname: 'openrouter.ai', path: '/api/v1/chat/completions', method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + process.env.OPENROUTER_API_KEY,
+        'Content-Length': Buffer.byteLength(body)
+      }, timeout: 180000
+    }, res => {
+      let b = '';
+      res.on('data', d => b += d);
+      res.on('end', () => {
+        try {
+          const j = JSON.parse(b);
+          if (j.error) return reject(new Error(model + ': ' + (j.error.message || JSON.stringify(j.error))));
+          resolve({ text: j.choices[0].message.content, usage: j.usage || {}, provider: j.provider || null });
+        } catch (e) { reject(new Error(model + ': bad response — ' + b.slice(0, 200))); }
+      });
+    });
+    req.on('error', reject);
+    req.on('timeout', () => { req.destroy(); reject(new Error(model + ': timeout')); });
+    req.write(body); req.end();
+  });
+}
+const modelFamily = slug => String(slug).split('/')[0];
+
+async function runDirective() {
+  const cycle = arg('--cycle', null) || detectCycle();
+  const prev = String(Number(cycle) - 1);
+  console.log('Civic DIRECTIVE — c' + cycle);
+  console.log('===================================');
+
+  const officeMap = mustJson(path.join(ROOT, 'scripts', 'civic-office-map.json'), 'office map');
+  const summaryMd = mustRead(path.join(ROOT, 'output', 'world_summary_c' + cycle + '.md'), 'run /build-world-summary first');
+  const audit = mustJson(path.join(ROOT, 'output', 'engine_audit_c' + cycle + '.json'), 'run /engine-review first');
+  const tracker = mustJson(path.join(ROOT, 'output', 'initiative_tracker.json'), 'tracker snapshot');
+
+  // Friction rule (plan Task 2.2): the directive's model family must differ
+  // from the Mayor's writer family.
+  const mayorModel = (officeMap.offices.find(o => o.officeId === 'MAYOR-01') || {}).model || '';
+  const MODEL = arg('--model', 'google/gemini-3.5-flash');
+  if (modelFamily(MODEL) === modelFamily(mayorModel)) {
+    console.error('FRICTION VIOLATION: directive model family "' + modelFamily(MODEL) + '" matches the Mayor\'s writer family. Pick a different --model.');
+    process.exit(2);
+  }
+
+  // Mara persona: reused from docs/mara-vance/ (Mike-direct S344 — reuse, not a
+  // new persona file). Character + directive format/discipline.
+  const persona = [
+    mustRead(path.join(ROOT, 'docs', 'mara-vance', 'IN_WORLD_CHARACTER.md'), 'Mara persona'),
+    mustRead(path.join(ROOT, 'docs', 'mara-vance', 'VOICE_DIRECTIVE_TEMPLATE.md'), 'Mara directive template'),
+  ].join('\n\n---\n\n');
+
+  // Valid addressees = the chain's live seats (office map, agented only).
+  const seats = [];
+  const seen = new Set();
+  for (const o of [...officeMap.offices, ...(officeMap.projects || [])]) {
+    if (!o.agentDir || seen.has(o.agentDir)) continue;
+    seen.add(o.agentDir);
+    seats.push({ agentDir: o.agentDir, holder: o.holder, title: o.title });
+  }
+
+  // Cycle material: summary slices + HIGH patterns + tracker + last cycle's
+  // voice record + prior directive (escalation detection). Mara sits at the
+  // fourth wall — she MAY see raw engine data; the prep-side line filter keeps
+  // it out of voice packets.
+  const sections = splitSections(summaryMd);
+  const priorDirective = ['mara_directive_c' + prev + '.md', 'mara_directive_c' + prev + '.txt', 'mara_directive_c' + prev + '_AUTO.txt']
+    .map(f => path.join(ROOT, 'output', 'mara-directives', f)).find(p => fs.existsSync(p));
+  const voiceDir = path.join(ROOT, 'output', 'civic-voice');
+  const priorSaid = [];
+  if (fs.existsSync(voiceDir)) {
+    for (const f of fs.readdirSync(voiceDir)) {
+      const m = f.match(/^(.+)_c(\d+)\.json$/);
+      if (!m || m[2] !== prev) continue;
+      const j = readJson(path.join(voiceDir, f));
+      if (!j) continue;
+      const gist = j.cascadeSummary || (Array.isArray(j.statements) ? j.statements.map(s => s.decision || s.topic).filter(Boolean).join(' — ') : '');
+      if (gist) priorSaid.push('- ' + m[1] + ': ' + String(gist).replace(/\s+/g, ' ').slice(0, 400));
+    }
+  }
+  const highs = audit.patterns.filter(p => p.severity === 'high')
+    .map(p => '- [' + p.type + '] ' + ((p.affectedEntities || {}).neighborhoods || []).join(', ') +
+      ((p.affectedEntities || {}).initiatives || []).map(i => ' ' + i).join('') +
+      ' — evidence: ' + JSON.stringify((p.evidence || {}).fields || {}).slice(0, 300));
+  const initLines = (tracker.initiatives || []).map(i => {
+    const impl = i.implementation || {};
+    return '- ' + i.id + ' ' + i.name + ' [' + (impl.phase || i.status) + '] next: ' + (impl.nextScheduledAction || '—') + ' (cycle ' + (impl.nextActionCycle || '—') + '). ' + String(impl.summary || '').slice(0, 300);
+  });
+
+  const user = [
+    'Produce your voice directive for cycle ' + cycle + ' as output text only — the structured block-per-addressee format from your template, with the cycle header. No prose outside the format.',
+    '',
+    'HARD RULES:',
+    '- Addressees MUST come from this seat list only (use the agentDir in the Agent field, formatted as `.claude/agents/<agentDir>/`):',
+    ...seats.map(s => '  - ' + s.agentDir + ' — ' + s.holder + ' (' + s.title + ')'),
+    '- Maximum 12 blocks. Every block carries all five fields (Agent, Address, Why, Acceptance, Silence consequence).',
+    '- Only issue a directive where the cycle material below gives you a real unresolved thread, gap, or dependency. Thin directives are noise.',
+    '- Cite cycles by number (C' + prev + ', C' + cycle + '). Never invent citizens, numbers, or events not present below.',
+    '',
+    '=== CYCLE ' + cycle + ' MATERIAL ===',
+    '',
+    '## City State (engine summary)',
+    findSection(sections, 'City State').slice(0, 3000),
+    '',
+    '## Three-Cycle Trends',
+    findSection(sections, 'Three-Cycle Trends').slice(0, 2000),
+    '',
+    '## Approval Ratings',
+    findSection(sections, 'Approval Ratings').slice(0, 1500),
+    '',
+    '## Engine review HIGH-severity patterns (' + highs.length + ')',
+    ...highs,
+    '',
+    '## Initiative Tracker (live)',
+    ...initLines,
+    '',
+    '## What the offices said last cycle (C' + prev + ')',
+    ...(priorSaid.length ? priorSaid : ['(no prior voice record on disk)']),
+    '',
+    '## Your prior directive (C' + prev + ') — check satisfaction, escalate what went unanswered',
+    priorDirective ? fs.readFileSync(priorDirective, 'utf8').slice(0, 6000) : '(none found on disk)',
+  ].join('\n');
+
+  log('model=' + MODEL + ' (mayor=' + mayorModel + ') seats=' + seats.length + ' user=' + user.length + 'ch');
+  const MAX_TOKENS = 8000;
+  const r = await callOpenRouter(MODEL, persona, user, MAX_TOKENS);
+  if (r.usage && r.usage.completion_tokens >= MAX_TOKENS - 8) {
+    log('WARNING: output hit the ' + MAX_TOKENS + '-token cap — tail block(s) may be truncated (field validation below drops them)');
+  }
+
+  // Validate: keep only blocks addressed to real seats AND carrying all five
+  // mandatory template fields (a truncated tail block fails the field check).
+  const text = r.text.replace(/^```(?:markdown)?\s*/i, '').replace(/\s*```\s*$/, '');
+  let blocks = text.split(/\n(?=## )/).filter(p => /^## /.test(p));
+  const known = new Set(seats.map(s => s.agentDir));
+  const FIELDS = ['**Agent', '**Address', '**Why', '**Acceptance', '**Silence consequence'];
+  const rejected = [];
+  blocks = blocks.filter(b => {
+    const m = b.match(/\.claude\/agents\/([a-z0-9-]+)\/?/i);
+    if (!m || !known.has(m[1])) { rejected.push({ head: (b.split('\n')[0] || '').slice(0, 80), why: 'unknown addressee' }); return false; }
+    const missing = FIELDS.filter(f => !b.includes(f));
+    if (missing.length) { rejected.push({ head: (b.split('\n')[0] || '').slice(0, 80), why: 'missing fields: ' + missing.join(', ') }); return false; }
+    return true;
+  });
+  if (blocks.length > 12) { log('truncating ' + blocks.length + ' blocks to the template max of 12'); blocks = blocks.slice(0, 12); }
+  if (!blocks.length) {
+    console.error('HALT: directive model produced no block addressed to a known seat (' + rejected.length + ' rejected). Raw output kept at output/cron-civic/directive_c' + cycle + '.raw.txt');
+    fs.mkdirSync(CIVIC, { recursive: true });
+    fs.writeFileSync(path.join(CIVIC, 'directive_c' + cycle + '.raw.txt'), r.text);
+    process.exit(1);
+  }
+
+  // Canonical header is OURS, never the model's — no Gregorian dates in
+  // sim-facing content (no-real-world-clock rule); sim clock only.
+  const outDir = path.join(ROOT, 'output', 'mara-directives');
+  fs.mkdirSync(outDir, { recursive: true });
+  const outPath = path.join(outDir, 'mara_directive_c' + cycle + '_AUTO.txt');
+  const canonHeader = [
+    '# C' + cycle + ' Voice Directives — Mara Vance (AUTO)',
+    '',
+    '**Cycle:** ' + cycle,
+    '**Issued:** C' + cycle + ' (auto-derived, cron-civic-run.js --stage=directive)',
+    '**Source:** world_summary_c' + cycle + ' + engine review HIGHs + tracker + C' + prev + ' voice record',
+    '',
+    '---',
+    '',
+  ].join('\n');
+  fs.writeFileSync(outPath, canonHeader + blocks.join('\n') + '\n');
+
+  fs.mkdirSync(CIVIC, { recursive: true });
+  fs.writeFileSync(path.join(CIVIC, 'directive_c' + cycle + '.json'), JSON.stringify({
+    stage: 'directive', cycle: Number(cycle), model: MODEL, mayorModel,
+    blocks: blocks.map(b => (b.split('\n')[0] || '').replace(/^## /, '').slice(0, 100)),
+    rejectedBlocks: rejected, usage: r.usage,
+    directive: path.relative(ROOT, outPath), ranAt: new Date().toISOString(),
+  }, null, 2));
+  console.log('\n=== directive complete: ' + blocks.length + ' block(s)' + (rejected.length ? ' (' + rejected.length + ' rejected — unknown addressee)' : '') + ' → ' + path.relative(ROOT, outPath) + ' ===');
+}
+
+const STAGES = { prep: runPrep, directive: runDirective };
 if (require.main === module) {
   if (!STAGE || !STAGES[STAGE]) {
     console.error('[civic] unknown or missing --stage (built so far: ' + Object.keys(STAGES).join(', ') + ')');

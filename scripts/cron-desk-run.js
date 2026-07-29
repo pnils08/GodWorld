@@ -324,8 +324,28 @@ function loadLane(cycle, desk) {
   const signalPath = path.join(ROOT, 'output', 'desk_signal_c' + cycle + '.json');
   const signal = readJson(signalPath);
   if (!signal || !signal.lanes) throw new Error('no desk_signal at ' + path.relative(ROOT, signalPath) + ' — run buildWorldSummary first');
-  const lane = signal.lanes[desk || DESK];
-  return (lane && lane.length) ? lane : null;
+  const lane = (signal.lanes[desk || DESK] || []).slice();
+  // civic.15 Task 3.1 (S344): the civic lane also carries today's office
+  // datawakes — an office-holder voicing their domain's live numbers is beat
+  // signal for the civic desk. Additive; absent dir or no wakes = no-op.
+  if ((desk || DESK) === 'civic') {
+    const dwDir = path.join(ROOT, 'output', 'cron-civic', 'datawake');
+    const today = new Date().toISOString().slice(0, 10);
+    if (fs.existsSync(dwDir)) {
+      for (const f of fs.readdirSync(dwDir)) {
+        if (!f.endsWith('_' + today + '.json')) continue;
+        const w = readJson(path.join(dwDir, f));
+        if (!w || !w.statement) continue;
+        lane.push({
+          label: w.holder + ' (' + w.title + '): ' + (w.numberMoved || String(w.statement).slice(0, 100)),
+          kind: 'civic-datawake',
+          ref: 'output/cron-civic/datawake/' + f,
+          popids: w.popid ? [w.popid] : [],
+        });
+      }
+    }
+  }
+  return lane.length ? lane : null;
 }
 
 // tag discriminates same-desk same-cycle artifacts: persona slug in single-desk
@@ -854,4 +874,5 @@ module.exports = {
   nameSlug,
   writerArtifactTag,
   buildWriterArgs,
+  loadLane,
 };

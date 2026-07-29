@@ -1238,7 +1238,188 @@ async function runClose() {
   if (!gatePass || clerk.overall !== 'pass') process.exit(1);
 }
 
-const STAGES = { prep: runPrep, directive: runDirective, decide: runDecide, voices: runVoices, projects: runProjects, close: runClose };
+// ---------------------------------------------------------------------------
+// Task 3.1/3.2 — Mon-Thu datawakes: office-holders voice their city-data domain
+// ---------------------------------------------------------------------------
+
+const DATAWAKE_DIR = path.join(CIVIC, 'datawake');
+
+// Deterministic domain-data slice per office — perception-translated, bounded.
+// Keyed on the map's dataDomain (the dataSources strings are loose candidates;
+// the structured world_summary parse is the reliable substrate).
+function domainSlice(office, sections, hoods, briefs, tracker, audit) {
+  const L = [];
+  const domain = String(office.dataDomain || '');
+  const initLines = (ids) => (tracker.initiatives || [])
+    .filter(i => ids.includes(i.id))
+    .map(i => cleanInline('- ' + i.name + ': ' + (i.implementation || {}).summary))
+    .filter(Boolean);
+  if (office.district && /^D\d$/.test(office.district)) {
+    for (const h of Object.keys(hoods)) {
+      if (getDistrictForNeighborhood(h) === office.district) {
+        const line = hoodPulseLine(h, hoods[h], briefs);
+        if (line) L.push(line);
+      }
+    }
+  } else if (office.neighborhoods) {
+    for (const h of office.neighborhoods) {
+      const line = hoodPulseLine(h, hoods[h], briefs);
+      if (line) L.push(line);
+    }
+    if (office.initiative) L.push(...initLines([office.initiative]));
+  } else if (/justice|crime|safety|police|emergency/i.test(domain)) {
+    for (const [h, s] of Object.entries(hoods)) {
+      if (s.crime >= 2.5) L.push('- ' + h + ': crime running ' + crimeWord(s.crime) + '.');
+    }
+    L.push(...initLines(['INIT-002']));
+    const ev = cleanLines(findSection(sections, 'World Events')).split('\n').filter(l => /SAFETY|CRIME/i.test(l));
+    L.push(...ev.slice(0, 4));
+  } else if (/econom|business|development/i.test(domain)) {
+    for (const [h, s] of Object.entries(hoods)) {
+      if (s.retail < 5 || s.retail >= 10) L.push('- ' + h + ': street trade ' + retailWord(s.retail) + '.');
+    }
+    L.push(...initLines(['INIT-001', 'INIT-006', 'INIT-007']));
+  } else if (/health/i.test(domain)) {
+    const cs = findSection(sections, 'City State');
+    const ill = (cs.match(/Illness rate ([\d.]+)%/) || [])[1];
+    if (ill) L.push('- Roughly ' + (parseFloat(ill) >= 9 ? 'one in ten' : 'fewer than one in ten') + ' residents are sick this cycle.');
+    L.push(...initLines(['INIT-005']));
+  } else {
+    // citywide-governance and everything else: the translated city digest
+    L.push(citywideDigest(sections, audit).split('\n').slice(0, 8).join('\n'));
+  }
+  return L.filter(Boolean).join('\n').slice(0, 2200);
+}
+
+// A bloc agent's datawake speaks through the bloc SPOKESPERSON (civic.md
+// faction table: OPP=Rivers D5, CRC=Ashford D7; IND datawakes go to Vega D4 as
+// Council President), not whichever member row happens to sort first.
+const BLOC_SPOKESPERSON_DISTRICT = {
+  'civic-office-opp-faction': 'D5',
+  'civic-office-crc-faction': 'D7',
+  'civic-office-ind-swing': 'D4',
+};
+
+// LRU rota: least-recently-woken duty seats first (scan existing datawake files).
+function datawakeRota(officeMap, limit) {
+  const seats = [];
+  const byDir = {};
+  for (const o of [...officeMap.offices, ...(officeMap.projects || [])]) {
+    if (!o.agentDir) continue;
+    (byDir[o.agentDir] = byDir[o.agentDir] || []).push(o);
+  }
+  for (const [dir, rows] of Object.entries(byDir)) {
+    const wantDistrict = BLOC_SPOKESPERSON_DISTRICT[dir];
+    seats.push(wantDistrict ? (rows.find(r => r.district === wantDistrict) || rows[0]) : rows[0]);
+  }
+  const lastWake = {};
+  if (fs.existsSync(DATAWAKE_DIR)) {
+    for (const f of fs.readdirSync(DATAWAKE_DIR)) {
+      const m = f.match(/^(.+)_(\d{4}-\d{2}-\d{2})\.json$/);
+      if (m) lastWake[m[1]] = (lastWake[m[1]] || '') < m[2] ? m[2] : lastWake[m[1]];
+    }
+  }
+  seats.sort((a, b) => (lastWake[a.agentDir] || '').localeCompare(lastWake[b.agentDir] || '') || a.agentDir.localeCompare(b.agentDir));
+  return seats.slice(0, limit);
+}
+
+// Numeric grounding: every digit-token in a datawake's output must appear in
+// the office's own data slice (commas stripped). Worded quantities ("seven
+// neighborhoods") pass; invented statistics ("renewals up 8%") don't — this
+// output is media-lane source material, so a fabricated number is contamination.
+function ungroundedNumbers(slice, texts) {
+  const norm = s => String(s || '').replace(/,/g, '');
+  const hay = norm(slice);
+  const bad = new Set();
+  for (const t of texts) {
+    for (const tok of norm(t).match(/\d+(?:\.\d+)?%?/g) || []) {
+      if (!hay.includes(tok.replace(/%$/, ''))) bad.add(tok);
+    }
+  }
+  return [...bad];
+}
+
+async function runDatawake() {
+  const cycle = arg('--cycle', null) || detectCycle();
+  const date = arg('--date', new Date().toISOString().slice(0, 10));
+  const LIMIT = parseInt(arg('--limit', '3'), 10);
+  const ONLY = arg('--office', null);
+  const day = new Date(date + 'T12:00:00Z').getUTCDay();   // 0=Sun..6=Sat
+  console.log('Civic DATAWAKE — ' + date + ' (c' + cycle + ')');
+  console.log('===================================');
+  // Task 3.2: offices work Sun-Thu; datawakes run Mon-Thu (Sunday is the chain).
+  // Fri/Sat the office-holders are citizens — their wakes belong to the
+  // citizen-loop (whose pool already includes them; no office wake here, ever).
+  if (day === 5 || day === 6 || day === 0) {
+    console.log('[datawake] ' + date + ' is ' + ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][day] + ' — no office wakes (Fri-Sat = citizen life days; Sun = decision chain). Exiting clean.');
+    return;
+  }
+  const officeMap = mustJson(path.join(ROOT, 'scripts', 'civic-office-map.json'), 'office map');
+  const tracker = mustJson(path.join(ROOT, 'output', 'initiative_tracker.json'), 'tracker snapshot');
+  const audit = mustJson(path.join(ROOT, 'output', 'engine_audit_c' + cycle + '.json'), 'engine audit');
+  const briefsFile = readJson(path.join(ROOT, 'output', 'baseline_briefs_c' + cycle + '.json')) || {};
+  const briefs = briefsFile.briefs || [];
+  const sections = splitSections(mustRead(path.join(ROOT, 'output', 'world_summary_c' + cycle + '.md'), 'world summary'));
+  const hoods = parseHoodTable(findSection(sections, 'City State'));
+
+  let rota;
+  if (ONLY) {
+    const rows = [...officeMap.offices, ...(officeMap.projects || [])].filter(o => o.agentDir === ONLY);
+    const wantDistrict = BLOC_SPOKESPERSON_DISTRICT[ONLY];
+    rota = rows.length ? [wantDistrict ? (rows.find(r => r.district === wantDistrict) || rows[0]) : rows[0]] : [];
+  } else {
+    rota = datawakeRota(officeMap, LIMIT);
+  }
+  if (!rota.length) throw new Error('no duty seats matched');
+  log('rota: ' + rota.map(o => o.agentDir).join(', '));
+
+  fs.mkdirSync(DATAWAKE_DIR, { recursive: true });
+  const results = [];
+  for (const office of rota) {
+    try {
+      const slice = domainSlice(office, sections, hoods, briefs, tracker, audit);
+      const user = [
+        'It\'s a working ' + ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][day] + 'day at your office. This is your domain\'s live picture this cycle:',
+        '', slice, '',
+        'Speak as yourself doing the job — one public statement or action about what these numbers mean for the people you serve. You argue initiatives on Sundays; today you fight for your constituents with what your desk shows you.',
+        'Respond with ONLY JSON (no fences): {"office": "' + voiceSlug(office.agentDir) + '", "holder": "' + office.holder + '", "statement": "<2-4 sentences in your voice>", "action": "<the one concrete thing you are doing about it today, or null>", "numberMoved": "<the single most important number/shift in plain words>"}',
+        'Never invent citizens, statistics, or events not present above.',
+      ].join('\n');
+      const persona = readPersonaDir(office.agentDir);
+      let j = null;
+      let attemptUser = user;
+      for (let attempt = 1; attempt <= 2; attempt++) {
+        const r = await callOpenRouter(office.model || 'deepseek/deepseek-chat', persona, attemptUser, 1500);
+        const cand = JSON.parse(stripFences(r.text));
+        if (!cand.statement) throw new Error('no statement field in model output');
+        const bad = ungroundedNumbers(slice, [cand.statement, cand.action, cand.numberMoved]);
+        if (!bad.length) { j = cand; break; }
+        log(office.agentDir + ' attempt ' + attempt + ': ungrounded number(s) ' + bad.join(', '));
+        if (attempt === 2) throw new Error('fabricated statistic(s) after retry: ' + bad.join(', '));
+        attemptUser = user + '\n\nYOUR PREVIOUS ATTEMPT WAS REJECTED: it cited number(s) [' + bad.join(', ') + '] that are NOT in your data. Use only quantities present in the material above, or say it in words without inventing figures.';
+      }
+      const rec = {
+        office: voiceSlug(office.agentDir), agentDir: office.agentDir, holder: office.holder,
+        popid: office.popid, title: office.title, date, cycle: Number(cycle),
+        model: office.model, statement: j.statement, action: j.action || null,
+        numberMoved: j.numberMoved || null, ranAt: new Date().toISOString(),
+      };
+      const outPath = path.join(DATAWAKE_DIR, office.agentDir + '_' + date + '.json');
+      fs.writeFileSync(outPath, JSON.stringify(rec, null, 2));
+      results.push({ office: office.agentDir, ok: true, out: path.relative(ROOT, outPath) });
+      console.log('  [✓] ' + office.agentDir + ' — "' + String(j.numberMoved || j.statement).slice(0, 80) + '"');
+    } catch (e) {
+      results.push({ office: office.agentDir, ok: false, error: e.message });
+      console.error('  [✗] ' + office.agentDir + ' — ' + e.message);
+    }
+  }
+  fs.writeFileSync(path.join(CIVIC, 'datawake_' + date + '.results.json'), JSON.stringify({ date, cycle: Number(cycle), results, ranAt: new Date().toISOString() }, null, 2));
+  const failed = results.filter(x => !x.ok);
+  console.log('\n=== datawake: ' + (results.length - failed.length) + '/' + results.length + ' ok ===');
+  if (failed.length) process.exit(1);
+}
+
+const STAGES = { prep: runPrep, directive: runDirective, decide: runDecide, voices: runVoices, projects: runProjects, close: runClose, datawake: runDatawake };
 if (require.main === module) {
   if (!STAGE || !STAGES[STAGE]) {
     console.error('[civic] unknown or missing --stage (built so far: ' + Object.keys(STAGES).join(', ') + ')');

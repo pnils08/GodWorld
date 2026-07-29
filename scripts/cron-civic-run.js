@@ -263,6 +263,24 @@ function phaseProse(phase) {
   return String(phase || 'an unspecified stage').replace(/[-_]/g, ' ');
 }
 
+// Crisis-and-credit question over a voice's turf: worst hood (lowest mood,
+// tie-break highest crime) and best hood (highest mood, tie-break busiest
+// street trade), asked as a fight-for-your-constituents decision.
+function constituentTopic(hoodNames, hoods, isCitywide) {
+  const rows = (hoodNames || []).map(h => ({ h, s: hoods[h] })).filter(x => x.s);
+  if (!rows.length) return null;
+  const worst = rows.slice().sort((a, b) => a.s.sentiment - b.s.sentiment || b.s.crime - a.s.crime)[0];
+  const best = rows.slice().sort((a, b) => b.s.sentiment - a.s.sentiment || b.s.retail - a.s.retail)[0];
+  const scope = isCitywide ? 'the city' : 'your neighborhoods';
+  const body = [
+    'Crisis: **' + worst.h + '** — mood ' + sentimentWord(worst.s.sentiment) + ', street trade ' + retailWord(worst.s.retail) + ', crime ' + crimeWord(worst.s.crime) + '. The people there are living this cycle whether City Hall speaks or not.',
+    (best.h !== worst.h ? 'Success: **' + best.h + '** — mood ' + sentimentWord(best.s.sentiment) + ', street trade ' + retailWord(best.s.retail) + '. Somebody\'s work is paying off; say whose, or someone else will claim it.' : null),
+    '',
+    'You argue the initiatives, but you fight for your constituents. Name what you will do — or defend — for the people of ' + scope + ' this cycle: who answers for ' + worst.h + (best.h !== worst.h ? ', and who gets the credit in ' + best.h : '') + '?',
+  ].filter(x => x !== null).join('\n');
+  return { kind: 'constituents', title: (isCitywide ? 'The city\'s people this cycle' : 'Your constituents this cycle') + ' — crisis and credit', body };
+}
+
 // ---------------------------------------------------------------------------
 // Stage: prep
 // ---------------------------------------------------------------------------
@@ -445,8 +463,10 @@ async function runPrep() {
 
     L.push('', '## City This Cycle');
     const projectHoods = rows[0].neighborhoods || null;   // project seats carry their own turf
+    let turfHoods;
     if (citywide && !projectHoods) {
       L.push(citywideDigest(sections, audit));
+      turfHoods = Object.keys(hoods);
     } else {
       const myHoods = new Set(projectHoods || []);
       for (const r of rows) {
@@ -459,6 +479,7 @@ async function runPrep() {
         if (line) L.push(line);
       }
       if (!myHoods.size) L.push('- No neighborhood pulse rows resolved for your district(s) this cycle.');
+      turfHoods = [...myHoods];
     }
 
     // Continuity — what this voice said last cycle
@@ -483,6 +504,12 @@ async function runPrep() {
         if (clean) L.push('', '## Directive from Mara Vance, City Planning Director — answer it or own the silence', clean);
       }
     }
+
+    // Constituent question — crisis and credit in the voice's own turf
+    // (Mike-direct S344: they argue initiatives, but they fight for their
+    // constituents — every packet asks about the people, not just the process).
+    const constituent = constituentTopic(turfHoods, hoods, citywide && !projectHoods);
+    if (constituent) topics.push(constituent);
 
     // Decisions
     let n = 0;
@@ -696,6 +723,7 @@ async function runDirective() {
     ...seats.map(s => '  - ' + s.agentDir + ' — ' + s.holder + ' (' + s.title + ')'),
     '- Maximum 12 blocks. Every block carries all five fields (Agent, Address, Why, Acceptance, Silence consequence).',
     '- Only issue a directive where the cycle material below gives you a real unresolved thread, gap, or dependency. Thin directives are noise.',
+    '- Do not limit directives to initiative process. Press offices on the crisis and the success in their neighborhoods, their programs, and the city — they argue the initiatives, but they must fight for their constituents.',
     '- Cite cycles by number (C' + prev + ', C' + cycle + '). Never invent citizens, numbers, or events not present below.',
     '',
     '=== CYCLE ' + cycle + ' MATERIAL ===',
@@ -778,7 +806,439 @@ async function runDirective() {
   console.log('\n=== directive complete: ' + blocks.length + ' block(s)' + (rejected.length ? ' (' + rejected.length + ' rejected — unknown addressee)' : '') + ' → ' + path.relative(ROOT, outPath) + ' ===');
 }
 
-const STAGES = { prep: runPrep, directive: runDirective };
+// ---------------------------------------------------------------------------
+// Task 2.3 — cascade stages: decide -> voices -> projects -> close
+// ---------------------------------------------------------------------------
+
+// Canonical 20-value ImplementationPhase vocabulary (INITIATIVE_TRACKER_CONTRACT
+// §2) — same set cron-civic-eval.js scores against.
+const PHASES = new Set([
+  'announced', 'legislation-filed', 'vote-scheduled', 'vote-ready',
+  'visioning', 'visioning-complete', 'design-phase', 'construction-planning',
+  'construction-active', 'implementation-active', 'disbursement-active',
+  'dispatch-live', 'pilot-active', 'pilot_evaluation', 'operational',
+  'complete', 'stalled', 'blocked', 'suspended', 'defunded'
+]);
+
+const voiceSlug = dir => dir.replace(/^civic-(office|project)-/, '').replace(/-/g, '_');
+const agentPath = dir => path.join(ROOT, '.claude', 'agents', dir);
+function readPersonaDir(dir) {
+  const files = ['IDENTITY.md', 'LENS.md', 'RULES.md']
+    .map(f => path.join(agentPath(dir), f)).filter(fs.existsSync);
+  if (!files.length) throw new Error('no persona files under .claude/agents/' + dir);
+  return files.map(f => fs.readFileSync(f, 'utf8')).join('\n\n---\n\n');
+}
+function stripFences(t) {
+  const s = String(t).replace(/^\s*```(?:json)?\s*/i, '').replace(/\s*```\s*$/, '').trim();
+  const a = s.indexOf('{'), b = s.lastIndexOf('}');
+  return (a !== -1 && b > a) ? s.slice(a, b + 1) : s;
+}
+function outputContract(officeSlug, cycle, initiatives) {
+  // FLAT trackerUpdates + InitiativeID — the shape validateTrackerUpdates and
+  // applyTrackerUpdates actually write. (First C102 chain run used the eval
+  // harness's keyed-by-name shape; every write validated as unresolvable/dark.)
+  const initList = (initiatives || []).map(i => '  - ' + i.id + ' = ' + i.name).join('\n');
+  return '\nRespond with ONLY a JSON object (no markdown fences, no prose before or after):\n' +
+    JSON.stringify({
+      office: officeSlug, cycle: Number(cycle), speaker: '<the office-holder\'s full name>',
+      cascadeSummary: '<2-4 sentences: what you decided and why>',
+      statements: [{
+        statementId: 'STMT-' + cycle + '-' + officeSlug + '-001', type: '<statement type>',
+        topic: '<topic>', initiative: '<exact initiative name from the list below, or null>',
+        decision: '<the concrete decision>', quote: '<one strong pull-quote in your voice>',
+        fullStatement: '<the full public statement in your voice>', trackerUpdates: {}
+      }]
+    }, null, 2) +
+    '\nIf (and only if) a statement changes an initiative\'s state, fill trackerUpdates as a FLAT object whose "initiative" field is the INIT id (this exact key/format — the pipeline attributes the write by it):\n' +
+    '{"initiative": "INIT-XXX", "ImplementationPhase": "<value or omit if unchanged>", "MilestoneNotes": "C' + cycle + ': <one sentence, max 200 chars>", "NextScheduledAction": "<optional>", "NextActionCycle": <optional number>}\n' +
+    'Known initiatives:\n' + initList + '\n' +
+    'A statement with no state change keeps trackerUpdates as {} (empty).\n' +
+    'ImplementationPhase MUST be one of: ' + [...PHASES].join(', ') + '.\n' +
+    'Never invent citizens, businesses, statistics, or votes not present in your packet.';
+}
+function validateVoiceJson(raw) {
+  const v = { ok: false, why: null, json: null };
+  let j;
+  try { j = JSON.parse(stripFences(raw)); } catch (e) { v.why = 'JSON parse failed: ' + e.message; return v; }
+  if (!(j.office && j.speaker && Array.isArray(j.statements) && j.statements.length &&
+    j.statements.every(st => st.decision && st.quote && st.fullStatement && 'trackerUpdates' in st))) {
+    v.why = 'schema incomplete (office/speaker/statements[].decision/quote/fullStatement/trackerUpdates)';
+    return v;
+  }
+  for (const st of j.statements) {
+    const tu = st.trackerUpdates || {};
+    // flat shape (the contract) — plus keyed-by-name tolerance for drifted models
+    const phases = [tu.ImplementationPhase, ...Object.values(tu).map(u => u && typeof u === 'object' ? u.ImplementationPhase : null)];
+    for (const p of phases) {
+      if (p && !PHASES.has(p)) { v.why = 'ImplementationPhase outside contract vocabulary: "' + p + '"'; return v; }
+    }
+  }
+  v.ok = true; v.json = j;
+  return v;
+}
+
+// One voice call with a single retry (models flake on JSON discipline; the
+// retry names the failure). Fail returns null — caller decides fatality.
+async function callVoice(dir, model, userPrompt, maxTokens) {
+  const persona = readPersonaDir(dir);
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    try {
+      const r = await callOpenRouter(model, persona, userPrompt, maxTokens || 4000);
+      const v = validateVoiceJson(r.text);
+      if (v.ok) return { json: v.json, usage: r.usage, attempts: attempt };
+      log(dir + ' attempt ' + attempt + ' invalid: ' + v.why);
+      if (attempt === 2) return { error: v.why, raw: r.text };
+      userPrompt += '\n\nYOUR PREVIOUS ATTEMPT WAS REJECTED: ' + v.why + '. Respond with ONLY the corrected JSON object.';
+    } catch (e) {
+      log(dir + ' attempt ' + attempt + ' call failed: ' + e.message);
+      if (attempt === 2) return { error: e.message };
+    }
+  }
+}
+
+function packetPathFor(dir, cycle) {
+  return path.join(PACKETS, dir + '_pending_decisions_c' + cycle + '.md');
+}
+function writeVoiceJson(slug, cycle, json) {
+  const p = path.join(ROOT, 'output', 'civic-voice', slug + '_c' + cycle + '.json');
+  fs.mkdirSync(path.dirname(p), { recursive: true });
+  fs.writeFileSync(p, JSON.stringify(json, null, 2));
+  return path.relative(ROOT, p);
+}
+function officeModel(officeMap, dir) {
+  const row = [...officeMap.offices, ...(officeMap.projects || [])].find(o => o.agentDir === dir && o.model);
+  if (!row) throw new Error('no model in civic-office-map.json for ' + dir);
+  return row.model;
+}
+// Baylight is a project seat behind an office-dir name (S229 G-R3); her
+// initiative lives here because the offices[] mirror carries no initiative field.
+const BAYLIGHT = { agentDir: 'civic-office-baylight-authority', initiative: 'INIT-006' };
+function projectSeats(officeMap) {
+  const seats = (officeMap.projects || []).map(p => ({ agentDir: p.agentDir, initiative: p.initiative }));
+  seats.push(BAYLIGHT);
+  return seats;
+}
+const LAYER3_DIRS = new Set(['civic-office-baylight-authority', 'civic-project-stabilization-fund',
+  'civic-project-oari', 'civic-project-health-center', 'civic-project-transit-hub']);
+
+// Statements that touch an initiative (by INIT id or tracker name) — the Step 5
+// trigger rule: a project runs only when a voice decision touched its initiative.
+function statementsTouching(voiceJsons, initId, tracker) {
+  const init = (tracker.initiatives || []).find(i => i.id === initId);
+  const name = init ? init.name : null;
+  const hits = [];
+  for (const [slug, j] of Object.entries(voiceJsons)) {
+    for (const st of (j && j.statements) || []) {
+      const hay = [st.initiative, st.topic, ...Object.keys(st.trackerUpdates || {})].filter(Boolean).join(' | ');
+      if (hay.includes(initId) || (name && hay.toLowerCase().includes(name.toLowerCase()))) {
+        hits.push({ slug, st });
+      }
+    }
+  }
+  return hits;
+}
+function loadVoiceJsons(cycle) {
+  const dir = path.join(ROOT, 'output', 'civic-voice');
+  const out = {};
+  if (!fs.existsSync(dir)) return out;
+  for (const f of fs.readdirSync(dir)) {
+    const m = f.match(/^(.+)_c(\d+)\.json$/);
+    if (m && m[2] === String(cycle)) out[m[1]] = readJson(path.join(dir, f));
+  }
+  return out;
+}
+
+// --- stage: decide (Mayor only, then cascade injection) ---
+async function runDecide() {
+  const cycle = arg('--cycle', null) || detectCycle();
+  console.log('Civic DECIDE (Mayor) — c' + cycle);
+  console.log('===================================');
+  const officeMap = mustJson(path.join(ROOT, 'scripts', 'civic-office-map.json'), 'office map');
+  const initiatives = (mustJson(path.join(ROOT, 'output', 'initiative_tracker.json'), 'tracker snapshot').initiatives) || [];
+  const packet = mustRead(packetPathFor('civic-office-mayor', cycle), 'run --stage=prep first');
+  const model = officeModel(officeMap, 'civic-office-mayor');
+  log('mayor model=' + model);
+  const user = 'YOUR PENDING DECISIONS PACKET (cycle ' + cycle + '):\n\n' + packet + '\n\n' + outputContract('mayor', cycle, initiatives);
+  const r = await callVoice('civic-office-mayor', model, user, 5000);
+  if (!r || r.error) {
+    console.error('HALT: Mayor call failed — ' + (r ? r.error : 'no result') + '. Chain must not proceed (everything cascades from her).');
+    if (r && r.raw) { fs.mkdirSync(CIVIC, { recursive: true }); fs.writeFileSync(path.join(CIVIC, 'decide_c' + cycle + '.raw.txt'), r.raw); }
+    process.exit(1);
+  }
+  const outPath = writeVoiceJson('mayor', cycle, r.json);
+
+  // Cascade: strip-then-append the Mayor's decisions into every other packet
+  // (idempotent — a re-run replaces the section, it never stacks).
+  const MARKER = "## MAYOR'S DECISIONS THIS CYCLE";
+  const cascade = [MARKER, ''];
+  for (const st of r.json.statements) {
+    const line = cleanInline([st.topic ? st.topic + ': ' : '', st.decision, st.quote ? ' — "' + st.quote + '"' : ''].join(''));
+    if (line) cascade.push('- ' + line);
+  }
+  cascade.push('', 'The Mayor has spoken. React in your own voice — support, oppose, or go your own way.');
+  let injected = 0;
+  for (const f of fs.readdirSync(PACKETS)) {
+    if (!f.endsWith('_c' + cycle + '.md') || f.startsWith('civic-office-mayor')) continue;
+    const p = path.join(PACKETS, f);
+    let body = fs.readFileSync(p, 'utf8');
+    const at = body.indexOf(MARKER);
+    if (at !== -1) body = body.slice(0, at).replace(/\n+$/, '\n');
+    fs.writeFileSync(p, body.replace(/\n+$/, '\n') + '\n' + cascade.join('\n') + '\n');
+    const issues = lintText(fs.readFileSync(p, 'utf8'));
+    if (issues.length) { console.error('HALT: cascade injection leaked telemetry into ' + f + ' — ' + issues.map(i => i.match).join(', ')); process.exit(1); }
+    injected++;
+  }
+  fs.mkdirSync(CIVIC, { recursive: true });
+  fs.writeFileSync(path.join(CIVIC, 'decide_c' + cycle + '.json'), JSON.stringify({
+    stage: 'decide', cycle: Number(cycle), model, output: outPath,
+    statements: r.json.statements.length, cascadeInjected: injected,
+    attempts: r.attempts, usage: r.usage, ranAt: new Date().toISOString(),
+  }, null, 2));
+  console.log('\n=== decide complete: ' + r.json.statements.length + ' statement(s) → ' + outPath + '; cascade into ' + injected + ' packet(s) ===');
+}
+
+// --- stage: voices (Layer 2, parallel, per-office models) ---
+async function runVoices() {
+  const cycle = arg('--cycle', null) || detectCycle();
+  console.log('Civic VOICES (Layer 2) — c' + cycle);
+  console.log('===================================');
+  const officeMap = mustJson(path.join(ROOT, 'scripts', 'civic-office-map.json'), 'office map');
+  const initiatives = (mustJson(path.join(ROOT, 'output', 'initiative_tracker.json'), 'tracker snapshot').initiatives) || [];
+  if (!fs.existsSync(path.join(ROOT, 'output', 'civic-voice', 'mayor_c' + cycle + '.json'))) {
+    throw new Error('no mayor_c' + cycle + '.json — run --stage=decide first (the cascade order is canonical)');
+  }
+  const dirs = fs.readdirSync(PACKETS)
+    .filter(f => f.endsWith('_c' + cycle + '.md'))
+    .map(f => f.replace('_pending_decisions_c' + cycle + '.md', ''))
+    .filter(d => d !== 'civic-office-mayor' && !LAYER3_DIRS.has(d));
+  log('layer-2 seats with packets: ' + dirs.join(', '));
+  const results = [];
+  await Promise.all(dirs.map(async dir => {
+    const slug = voiceSlug(dir);
+    try {
+      const model = officeModel(officeMap, dir);
+      const packet = fs.readFileSync(packetPathFor(dir, cycle), 'utf8');
+      const user = 'YOUR PENDING DECISIONS PACKET (cycle ' + cycle + ') — the Mayor\'s decisions are at the bottom; react to them:\n\n' + packet + '\n\n' + outputContract(slug, cycle, initiatives);
+      const r = await callVoice(dir, model, user, 4000);
+      if (!r || r.error) { results.push({ dir, slug, model, ok: false, error: r ? r.error : 'no result' }); return; }
+      const out = writeVoiceJson(slug, cycle, r.json);
+      results.push({ dir, slug, model, ok: true, output: out, statements: r.json.statements.length, attempts: r.attempts });
+    } catch (e) { results.push({ dir, slug, ok: false, error: e.message }); }
+  }));
+  fs.writeFileSync(path.join(CIVIC, 'voices_c' + cycle + '.json'), JSON.stringify({
+    stage: 'voices', cycle: Number(cycle), results, ranAt: new Date().toISOString(),
+  }, null, 2));
+  const failed = results.filter(x => !x.ok);
+  for (const x of results) console.log('  [' + (x.ok ? '✓' : '✗') + '] ' + x.slug + (x.ok ? ' — ' + x.statements + ' statement(s) (' + x.model + ')' : ' — ' + x.error));
+  if (failed.length) {
+    console.error('\nHALT: ' + failed.length + ' voice(s) failed — fix or rerun before projects (Step 5.5 completeness).');
+    process.exit(1);
+  }
+  console.log('\n=== voices complete: ' + results.length + '/' + results.length + ' ok ===');
+}
+
+// --- stage: projects (Layer 3 — only where a decision touched their initiative) ---
+async function runProjects() {
+  const cycle = arg('--cycle', null) || detectCycle();
+  console.log('Civic PROJECTS (Layer 3) — c' + cycle);
+  console.log('===================================');
+  const officeMap = mustJson(path.join(ROOT, 'scripts', 'civic-office-map.json'), 'office map');
+  const tracker = mustJson(path.join(ROOT, 'output', 'initiative_tracker.json'), 'tracker snapshot');
+  const voiceJsons = loadVoiceJsons(cycle);
+  if (!voiceJsons.mayor) throw new Error('no mayor_c' + cycle + '.json — run decide/voices first');
+  const layer12 = Object.fromEntries(Object.entries(voiceJsons).filter(([s]) => !['baylight_authority', 'stabilization_fund', 'oari', 'health_center', 'transit_hub'].includes(s)));
+
+  const results = [];
+  for (const seat of projectSeats(officeMap)) {
+    const slug = voiceSlug(seat.agentDir);
+    const touches = statementsTouching(layer12, seat.initiative, tracker);
+    if (!touches.length) { log('skip ' + slug + ' — no voice decision touched ' + seat.initiative + ' (Step 5 trigger rule)'); continue; }
+    try {
+      const model = officeModel(officeMap, seat.agentDir);
+      const packet = fs.existsSync(packetPathFor(seat.agentDir, cycle)) ? fs.readFileSync(packetPathFor(seat.agentDir, cycle), 'utf8') : '';
+      const frame = touches.map(t => '- [' + t.slug + '] ' + (t.st.decision || '') + (t.st.quote ? ' — "' + t.st.quote + '"' : '')).join('\n');
+      const user = [
+        'Here is what city hall decided this cycle (the political frame is LOCKED — you do not override it, stall it, or create political conflict):',
+        '', frame, '',
+        packet ? 'YOUR OWN DESK (from prep):\n\n' + packet + '\n' : '',
+        'Your job: describe what happens next operationally on your initiative.',
+        '- What does this look like on the ground?',
+        '- What details emerge from implementation?',
+        '- What would a reporter see if they visited?',
+        'You may invent operational details — names of facilities, timelines, specifics — but never citizens, statistics, or votes beyond your material.',
+        outputContract(slug, cycle, tracker.initiatives || []),
+      ].join('\n');
+      const r = await callVoice(seat.agentDir, model, user, 4000);
+      if (!r || r.error) { results.push({ slug, model, ok: false, error: r ? r.error : 'no result' }); continue; }
+      const out = writeVoiceJson(slug, cycle, r.json);
+      results.push({ slug, model, ok: true, output: out, statements: r.json.statements.length, triggeredBy: touches.map(t => t.slug) });
+    } catch (e) { results.push({ slug, ok: false, error: e.message }); }
+  }
+  fs.writeFileSync(path.join(CIVIC, 'projects_c' + cycle + '.json'), JSON.stringify({
+    stage: 'projects', cycle: Number(cycle), results, ranAt: new Date().toISOString(),
+  }, null, 2));
+  const failed = results.filter(x => !x.ok);
+  for (const x of results) console.log('  [' + (x.ok ? '✓' : '✗') + '] ' + x.slug + (x.ok ? ' — ' + x.statements + ' statement(s), triggered by ' + x.triggeredBy.join('/') : ' — ' + x.error));
+  if (failed.length) { console.error('\nHALT: ' + failed.length + ' project(s) failed.'); process.exit(1); }
+  console.log('\n=== projects complete: ' + results.length + ' ran ===');
+}
+
+// --- stage: close (Clerk -> assemble -> dry-run -> gate -> [--apply] -> log) ---
+async function runClose() {
+  const cycle = arg('--cycle', null) || detectCycle();
+  const APPLY = process.argv.includes('--apply');
+  console.log('Civic CLOSE — c' + cycle + (APPLY ? ' (APPLY)' : ' (dry — decisions staged, no sheet write)'));
+  console.log('===================================');
+  const voiceJsons = loadVoiceJsons(cycle);
+
+  // Step 5.5 completeness: everything decide/voices/projects reported as ok.
+  const expected = ['mayor'];
+  const vMan = readJson(path.join(CIVIC, 'voices_c' + cycle + '.json'));
+  const pMan = readJson(path.join(CIVIC, 'projects_c' + cycle + '.json'));
+  if (!vMan || !pMan) throw new Error('missing voices/projects manifest under output/cron-civic/ — run the earlier stages first');
+  expected.push(...vMan.results.filter(x => x.ok).map(x => x.slug));
+  expected.push(...pMan.results.filter(x => x.ok).map(x => x.slug));
+  const missing = expected.filter(s => !voiceJsons[s]);
+  if (missing.length) { console.error('HALT: expected voice JSON(s) missing: ' + missing.join(', ')); process.exit(1); }
+  log('completeness: ' + expected.length + ' voice JSONs present (' + expected.join(', ') + ')');
+
+  // Clerk verification — headless call on the STAFF model (deepseek per Task 1.2).
+  const clerkModel = arg('--clerk-model', 'deepseek/deepseek-chat');
+  const clerkPersona = readPersonaDir('city-clerk');
+  const clerkUser = [
+    'Cycle ' + cycle + ' civic outputs for verification. For each check answer pass/fail with one line of evidence.',
+    'Checks: (1) every expected office produced statements; (2) no single office contradicts ITSELF within its own statements; (3) tracker updates use only contract phases; (4) statements read as in-world civic voice (no engine/system language).',
+    'Cross-office disagreement (two offices naming different figures or phases) is EXPECTED POLITICS, not a failure — list any you see under "observations", never under failed checks; the apply gate separately audits the final write-set.',
+    '',
+    ...expected.map(s => {
+      const j = voiceJsons[s];
+      return '## ' + s + '\n' + (j.statements || []).map(st => '- ' + (st.decision || '') + ' | trackerUpdates: ' + JSON.stringify(st.trackerUpdates || {})).join('\n');
+    }),
+    '',
+    'Respond with ONLY JSON: {"cycle": ' + cycle + ', "checks": [{"check": "<name>", "pass": true|false, "evidence": "<one line>"}], "overall": "pass"|"fail", "issues": ["..."]}',
+  ].join('\n');
+  let clerk = null;
+  try {
+    const cr = await callOpenRouter(clerkModel, clerkPersona, clerkUser, 3000);
+    clerk = JSON.parse(stripFences(cr.text));
+  } catch (e) {
+    clerk = { overall: 'fail', issues: ['clerk call/parse failed: ' + e.message] };
+  }
+  const clerkDir = path.join(ROOT, 'output', 'city-civic-database');
+  fs.mkdirSync(clerkDir, { recursive: true });
+  fs.writeFileSync(path.join(clerkDir, 'clerk_audit_c' + cycle + '.json'), JSON.stringify(clerk, null, 2));
+  log('clerk: ' + (clerk.overall || 'unknown') + ((clerk.issues || []).length ? ' — ' + clerk.issues.join('; ').slice(0, 300) : ''));
+
+  // Assemble decisions files, then tracker dry-run (both existing scripts).
+  execFileSync('node', [path.join(ROOT, 'scripts', 'assembleDecisions.js'), String(cycle), '--apply'], { cwd: ROOT, stdio: 'inherit', timeout: 120000 });
+
+  // Headless-only normalization (S344, post-Mike write-set ruling): the assembly
+  // concatenates every voice's MilestoneNotes ("primary / others…"), which in a
+  // multi-model cascade re-imports cross-voice disagreement into the tracker's
+  // official record (C102 first run: 45-vs-47 figures, submitted-vs-stalled in
+  // one note). The tracker note becomes the PRIMARY voice's note only; the other
+  // voices' full statements stay in civic-voice JSONs + the production log for
+  // media. Interactive runs (operator-curated) are untouched — this rewrites
+  // only what this chain is about to apply.
+  const decisionsDir = path.join(ROOT, 'output', 'city-civic-database', 'initiatives');
+  let normalized = 0;
+  for (const slug of fs.existsSync(decisionsDir) ? fs.readdirSync(decisionsDir) : []) {
+    const p = path.join(decisionsDir, slug, 'decisions_c' + cycle + '.json');
+    const d = readJson(p);
+    if (!d || !d.trackerUpdates || typeof d.trackerUpdates.MilestoneNotes !== 'string') continue;
+    if (d.trackerUpdates.MilestoneNotes.includes(' / ')) {
+      d.trackerUpdates.MilestoneNotes = d.trackerUpdates.MilestoneNotes.split(' / ')[0].trim();
+      d._notesNormalized = 'primary-only (cron-civic-run close, S344)';
+      fs.writeFileSync(p, JSON.stringify(d, null, 2));
+      normalized++;
+    }
+  }
+  if (normalized) log('milestone notes normalized to primary voice: ' + normalized + ' decisions file(s)');
+  let dryOut = '';
+  try {
+    dryOut = execFileSync('node', [path.join(ROOT, 'scripts', 'applyTrackerUpdates.js'), String(cycle)], { cwd: ROOT, encoding: 'utf8', timeout: 300000 });
+    process.stdout.write(dryOut);
+  } catch (e) {
+    console.error('HALT: applyTrackerUpdates dry-run failed: ' + e.message);
+    process.exit(1);
+  }
+
+  // Mechanical gate (Task 2.4) — fail-closed: gate exit != 0 means staged, no apply.
+  let gatePass = false;
+  try {
+    execFileSync('node', [path.join(ROOT, 'scripts', 'cron-civic-gate.js'), '--cycle', String(cycle)], { cwd: ROOT, stdio: 'inherit', timeout: 300000 });
+    gatePass = true;
+  } catch (e) {
+    console.error('[civic] gate BLOCKED (exit ' + (e.status == null ? '?' : e.status) + ') — decisions remain staged, no sheet write.');
+  }
+
+  let applied = false;
+  if (gatePass && APPLY && clerk.overall === 'pass') {
+    execFileSync('node', [path.join(ROOT, 'scripts', 'applyTrackerUpdates.js'), String(cycle), '--apply'], { cwd: ROOT, stdio: 'inherit', timeout: 300000 });
+    applied = true;
+  } else if (APPLY) {
+    console.error('[civic] --apply requested but ' + (gatePass ? 'clerk verdict is not pass' : 'gate blocked') + ' — NOT applying.');
+  }
+
+  // Production log: ## /city-hall section (idempotent replace) + media handoff.
+  const plog = path.join(ROOT, 'output', 'production_log_c' + cycle + '.md');
+  const rows = expected.map(s => {
+    const j = voiceJsons[s];
+    const st = (j.statements || [])[0] || {};
+    return '| ' + (j.speaker || s) + ' | ' + cleanInline(st.decision || '—') + ' | "' + cleanInline(st.quote || '') + '" |';
+  });
+  const trackerRows = [];
+  for (const s of expected) {
+    for (const st of (voiceJsons[s].statements || [])) {
+      for (const [name, u] of Object.entries(st.trackerUpdates || {})) {
+        if (u && u.ImplementationPhase) trackerRows.push('| ' + name + ' | ' + u.ImplementationPhase + ' | ' + cleanInline(u.MilestoneNotes || '') + ' |');
+      }
+    }
+  }
+  const section = [
+    '', '## /city-hall (AUTO — cron-civic-run.js)',
+    '**Cycle:** ' + cycle,
+    '**Mode:** ' + (applied ? 'APPLIED to tracker' : 'DRY — decisions staged, tracker untouched'),
+    '**Clerk:** ' + (clerk.overall || 'unknown'),
+    '', '### Voice Decisions', '| Voice | Decision | Key Quote |', '|---|---|---|', ...rows,
+    '', '### Tracker Updates ' + (applied ? '(applied)' : '(staged)'), '| Initiative | Phase | Milestone |', '|---|---|---|',
+    ...(trackerRows.length ? trackerRows : ['| — | — | no phase moves this cycle |']),
+    '', '### Media Handoff',
+    'City hall ran headless this cycle. The voice decisions above are locked canon; project operational details live in output/civic-voice/*_c' + cycle + '.json. Desks report FROM this section.',
+    '',
+  ].join('\n');
+  const M2 = '## /city-hall (AUTO — cron-civic-run.js)';
+  const kept2 = [];
+  let drop2 = false;
+  if (!fs.existsSync(plog)) fs.writeFileSync(plog, '# Production Log — Cycle ' + cycle + '\n');
+  for (const line of fs.readFileSync(plog, 'utf8').split('\n')) {
+    if (line.trim() === M2) { drop2 = true; continue; }
+    if (drop2 && /^## /.test(line)) drop2 = false;
+    if (!drop2) kept2.push(line);
+  }
+  fs.writeFileSync(plog, kept2.join('\n').replace(/\n+$/, '\n') + section);
+
+  // Gap-log leg (gapLogGate contract) — headless runs still file the leg.
+  const gapLog = path.join(ROOT, 'output', 'production_log_run_cycle_c' + cycle + '_gaps.md');
+  const LEG = '## LEG: /city-hall (G-R)';
+  const gapBody = fs.existsSync(gapLog) ? fs.readFileSync(gapLog, 'utf8') : '# Cycle ' + cycle + ' gap log\n';
+  if (!gapBody.includes(LEG)) {
+    const legLines = [LEG, ''];
+    if (!gatePass) legLines.push('- G-R (AUTO): apply gate blocked — see output/cron-civic/gate_c' + cycle + '.json');
+    if (clerk.overall !== 'pass') legLines.push('- G-R (AUTO): clerk verdict ' + (clerk.overall || 'unknown') + ' — see clerk_audit_c' + cycle + '.json');
+    if (legLines.length === 2) legLines.push('No gaps this run.');
+    fs.writeFileSync(gapLog, gapBody.replace(/\n+$/, '\n') + '\n' + legLines.join('\n') + '\n');
+  }
+
+  fs.writeFileSync(path.join(CIVIC, 'close_c' + cycle + '.json'), JSON.stringify({
+    stage: 'close', cycle: Number(cycle), expected, clerk: clerk.overall || 'unknown',
+    gatePass, applied, clerkModel, ranAt: new Date().toISOString(),
+  }, null, 2));
+  console.log('\n=== close complete: clerk=' + (clerk.overall || 'unknown') + ' gate=' + (gatePass ? 'PASS' : 'BLOCKED') + ' applied=' + applied + ' ===');
+  if (!gatePass || clerk.overall !== 'pass') process.exit(1);
+}
+
+const STAGES = { prep: runPrep, directive: runDirective, decide: runDecide, voices: runVoices, projects: runProjects, close: runClose };
 if (require.main === module) {
   if (!STAGE || !STAGES[STAGE]) {
     console.error('[civic] unknown or missing --stage (built so far: ' + Object.keys(STAGES).join(', ') + ')');

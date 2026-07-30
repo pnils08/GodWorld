@@ -67,6 +67,22 @@ pointers:
 
 ---
 
+## Run log — daily cron outcomes (Mike-direct S344: track successes and failures here)
+
+*One row per cron day. Civic = datawake/chain results; Media = gate pass rate; Notebook = whether the daily pack carried journalism. Append daily during tuning; this is the record the `--apply` flip decision reads.*
+
+| Date | Civic wakes | Media gate | Notebook pack | Defects found / fixed |
+|---|---|---|---|---|
+| 2026-07-29 (Wed) | datawake 2/3 (IND failed) — 05:45 cron. Chain not due (Sun). Re-ran IND green after fixes | **1/6 passed** (business Velez); 5 flagged: invented officials, citizen-fact contradictions, engine decimals in prose | **No journalism** — "no staged or ungated reports found in the time window" (08:00 pack precedes 18:15 write wake; and almost nothing passes) | FIXED: angle-wake blindness (civic entries appended at idx 53, reporter digests only first 12 — now prepend); officials' POPIDs crowding the citizen quote pool (dropped); grounding false-positives on own-district + cycle numbers; kimi-k2 empty-content crash. FIXED: **gate fence blindness** — whole-doc ```fence made scanEngineVerbiage scan an empty string; the ONE passing article leaked 2 POPIDs + carried a python `write_file()` duplicate of itself. Deterministic blockers now override a model pass. NOT a bug: canon-name-check correctly verifies Okoro/Montez and flags Rebecca Kaplan — the "invented official" flags were judge-model over-flagging |
+
+### Standing observations (update as they resolve)
+
+- **One model writes everything.** `desk-model-map.json` routes every desk to `deepseek/deepseek-chat` (S332 decision: voice is an agent-stance property, not a model one, and DeepSeek tested 0-hallucination on C102). The S344 fabrication rate is evidence that finding does not hold under the current 3-wake prompt — the same model that tested clean is now inventing citizens and statistics. Track per-model when any desk is re-pointed.
+- **The 2-wake prep is a fabrication amplifier (S344 finding, answers Mike's question).** The angle wake asks the reporter's own citizen voice "what smells off?" and gets back unverified speculation — C102 Angela Reyes: *"I think Manfred Owens should answer for it. He's been around Jack London forever, knows the streets, the businesses… he's got connections to the city."* None of that biography is sourced. The write wake then injects that read under the header **"this IS the story, report it out"** — so the pipeline instructs the writer to publish its own speculation as fact. The prep wakes aren't neutral context-building; they manufacture assertions the writer is told to treat as established. Candidate fixes: run canon-name-check over the angle read before injection, and reframe the header from "this IS the story" to "this is your hunch — verify before asserting."
+- **Rebecca Kaplan** appeared in two civic drafts — a real Oakland councilmember from training data, not canon. The deterministic name check caught her; this is the class CLAUDE.md's anti-contamination rule exists for.
+
+---
+
 ## Applications (living)
 
 - 2026-07-28 — Ignition record (S343). No reuse yet.

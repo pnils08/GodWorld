@@ -1350,13 +1350,24 @@ function datawakeRota(officeMap, limit) {
 // the office's own data slice (commas stripped). Worded quantities ("seven
 // neighborhoods") pass; invented statistics ("renewals up 8%") don't — this
 // output is media-lane source material, so a fabricated number is contamination.
-function ungroundedNumbers(slice, texts) {
+function ungroundedNumbers(slice, texts, context) {
   const norm = s => String(s || '').replace(/,/g, '');
   const hay = norm(slice);
+  // Identity numbers an office legitimately says without them being in its data
+  // slice: its own district ("District 4"), the cycle it's living in, and the
+  // prior cycle it cites. First live cron run rejected all three as fabricated
+  // (IND on "4", Okoro on "102") — false positives, not invented statistics.
+  const allowed = new Set();
+  const ctx = context || {};
+  const d = String(ctx.district || '').match(/\d+/);
+  if (d) allowed.add(d[0]);
+  if (ctx.cycle) { allowed.add(String(ctx.cycle)); allowed.add(String(Number(ctx.cycle) - 1)); }
   const bad = new Set();
   for (const t of texts) {
     for (const tok of norm(t).match(/\d+(?:\.\d+)?%?/g) || []) {
-      if (!hay.includes(tok.replace(/%$/, ''))) bad.add(tok);
+      const bare = tok.replace(/%$/, '');
+      if (allowed.has(bare) || hay.includes(bare)) continue;
+      bad.add(tok);
     }
   }
   return [...bad];
@@ -1413,9 +1424,17 @@ async function runDatawake() {
       let attemptUser = user;
       for (let attempt = 1; attempt <= 2; attempt++) {
         const r = await callOpenRouter(office.model || 'deepseek/deepseek-chat', persona, attemptUser, 1500);
-        const cand = JSON.parse(stripFences(r.text));
-        if (!cand.statement) throw new Error('no statement field in model output');
-        const bad = ungroundedNumbers(slice, [cand.statement, cand.action, cand.numberMoved]);
+        let cand = null;
+        try { cand = JSON.parse(stripFences(r.text)); } catch (_) { cand = null; }
+        // kimi-k2 returned empty content on the first live IND wake (same class
+        // as the glm-4.7 bake-off failure) — JSON.parse('') / 'null' yields null.
+        if (!cand || typeof cand !== 'object' || !cand.statement) {
+          if (attempt === 2) throw new Error('no usable JSON statement after retry (model returned empty/invalid content)');
+          log(office.agentDir + ' attempt ' + attempt + ': empty/invalid model output — retrying');
+          attemptUser = user + '\n\nYOUR PREVIOUS ATTEMPT RETURNED NO USABLE JSON. Respond with ONLY the JSON object described above.';
+          continue;
+        }
+        const bad = ungroundedNumbers(slice, [cand.statement, cand.action, cand.numberMoved], { district: office.district, cycle });
         if (!bad.length) { j = cand; break; }
         log(office.agentDir + ' attempt ' + attempt + ': ungrounded number(s) ' + bad.join(', '));
         if (attempt === 2) throw new Error('fabricated statistic(s) after retry: ' + bad.join(', '));

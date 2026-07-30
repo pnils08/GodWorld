@@ -331,8 +331,14 @@ function loadLane(cycle, desk) {
   if ((desk || DESK) === 'civic') {
     // Sunday chain decisions (S344): desk_signal is built BEFORE city hall
     // runs, so the close stage exports the cycle's decisions as lane entries.
+    const civicFirst = [];
     const dl = readJson(path.join(ROOT, 'output', 'cron-civic', 'decisions_lane_c' + cycle + '.json'));
-    if (dl && Array.isArray(dl.entries)) lane.push(...dl.entries);
+    // popids deliberately dropped: the official ALREADY spoke this cycle (their
+    // words are in the label + ref file). Leaving their POPIDs in would spend the
+    // 4-citizen quote pre-pass re-interviewing officials and crowd out the
+    // affected residents the civic beat requires (feedback_civic-story-needs-
+    // affected-citizen). Government leads the story; residents still get quoted.
+    if (dl && Array.isArray(dl.entries)) civicFirst.push(...dl.entries.map(e => ({ ...e, popids: [] })));
     const dwDir = path.join(ROOT, 'output', 'cron-civic', 'datawake');
     const today = new Date().toISOString().slice(0, 10);
     if (fs.existsSync(dwDir)) {
@@ -340,7 +346,7 @@ function loadLane(cycle, desk) {
         if (!f.endsWith('_' + today + '.json')) continue;
         const w = readJson(path.join(dwDir, f));
         if (!w || !w.statement) continue;
-        lane.push({
+        civicFirst.push({
           label: w.holder + ' (' + w.title + '): ' + (w.numberMoved || String(w.statement).slice(0, 100)),
           kind: 'civic-datawake',
           ref: 'output/cron-civic/datawake/' + f,
@@ -348,6 +354,11 @@ function loadLane(cycle, desk) {
         });
       }
     }
+    // PREPEND, not append (S344 verification catch): the angle wake digests
+    // only lane.slice(0,12) and collectQuoteAsks caps at 4 citizens, so
+    // appended civic entries sat at index 53+ and the story-picking reporter
+    // never saw city hall at all. Government action leads the civic beat.
+    if (civicFirst.length) lane.unshift(...civicFirst);
   }
   return lane.length ? lane : null;
 }

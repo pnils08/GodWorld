@@ -229,10 +229,10 @@ This **refines "those four desks wake daily" above**: they wake M–F on a *stat
 - Carry `tribuneFraming.storyHandles[desk]` (angle, hookLine, citizens) on each lane entry.
 - **Verify:** `desk_signal_c{XX}.json` entries carry `.handle`; no consumer breaks.
 
-#### Task 2.5.2 — wake 1 becomes ASSIGNMENT (EIC pick, not open ask)
-- **Files:** `scripts/cron-desk-run.js` (runAngle), new `scripts/desk-approach-map.json`
-- Deterministic assignment: beat-match + LRU over seeded handles → the reporter's assigned angle. Per-desk approach prompt from the map (firebrand keeps "smells off" — persona-only; culture gets "what's the city vibing on"; civic = official action + affected citizen; business = follow the money; sports = game/fan). Reporter's voice reacts to the ASSIGNED angle (how they'd chase it), never invents the angle.
-- **Verify:** angle.json carries assigned handle + approach; canon-name-check runs on the angle read before injection (no unverified names enter wake 3).
+#### Task 2.5.2 — assignment at rota build (EIC step BEFORE the wakes — all 3 wakes stay the journalist's)
+- **Files:** `scripts/newsroom-fanout.js` (rota builder), new `scripts/desk-approach-map.json`
+- Mags's EIC function = the deterministic assignment step when the day's fanout file is built: beat-match + LRU over seeded handles → each rota entry carries its ASSIGNED angle + the desk's approach prompt from the map (firebrand keeps "smells off" — persona-only; culture gets "what's the city vibing on"; civic = official action + affected citizen; business = follow the money; sports = game/fan). The wakes never pick or invent the angle. Wake 1 = the reporter opens the assignment and plans the chase in their own voice; wake 2 = reporting; wake 3 = compile.
+- **Verify:** fanout-{date}.json entries carry handle + approach; wake-1 angle.json reacts to the assignment; canon-name-check runs on the wake-1 read before injection (no unverified names enter wake 3).
 
 #### Task 2.5.3 — wake templates (fill-in artifacts, fixed shape)
 - **Files:** `scripts/cron-desk-run.js` (buildLaneState + per-wake prompts)

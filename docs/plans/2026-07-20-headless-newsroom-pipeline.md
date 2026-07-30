@@ -236,6 +236,9 @@ This **refines "those four desks wake daily" above**: they wake M–F on a *stat
 #### Task 2.5.2 — assignment at rota build (EIC step BEFORE the wakes — all 3 wakes stay the journalist's)
 - **Files:** `scripts/newsroom-fanout.js` (rota builder), new `scripts/desk-approach-map.json`
 - Mags's EIC function = the deterministic assignment step when the day's fanout file is built: beat-match + LRU over seeded handles → each rota entry carries its ASSIGNED angle + the desk's approach prompt from the map (firebrand keeps "smells off" — persona-only; culture gets "what's the city vibing on"; civic = official action + affected citizen; business = follow the money; sports = game/fan). The wakes never pick or invent the angle. Wake 1 = the reporter opens the assignment and plans the chase in their own voice; wake 2 = reporting; wake 3 = compile.
+- **Assignment dedup + mixed seed kinds (pressure-test #1):** a handle assigned earlier this cycle-week cannot reassign without new evidence (a fresh datawake/decision touching it); assignments draw across ALL lane kinds (handles, datawakes, civic decisions, ripples, briefs), not audit patterns only.
+- **Weekday arc cadence (pressure-test #2):** Mon/Tue assignments lead with cycle events; Wed/Thu lead with FOLLOW-UPS — open questions from the wire, reactions to datawakes, "what's happened since." Second-day journalism; natural on-ramp for the Storyline_Tracker revival.
+- **Open question (Mike S344):** when does a reporter get an assignment CHOICE vs an order — decide at build (candidate: choice between 2 handles when the desk's seed pool is deep that day).
 - **Verify:** fanout-{date}.json entries carry handle + approach; wake-1 angle.json reacts to the assignment; canon-name-check runs on the wake-1 read before injection (no unverified names enter wake 3).
 
 #### Task 2.5.3 — wake templates (fill-in artifacts, fixed shape; Mike's spec S344)
@@ -247,19 +250,28 @@ This **refines "those four desks wake daily" above**: they wake M–F on a *stat
   - **WAKE 3 — article.** §5 The article, written from the template above it (research, angle, approach, canon facts, interviews); may pull world summary / engine audit again if needed. Canon facts immutable; color is theirs — "these facts are the record — don't bend them; the world around them is yours — you live there."
 - **Media-room pulse:** `production_log_c{XX}.md` stays the universal cycle MD — every staged filing appends a one-line wire entry (script-side), and wake 3 receives the current wire so each writer knows what the room has already filed (kills the five-articles-one-story failure).
 - **Publish rule:** best articles only make the Saturday edition — the wakes produce candidates, the compile selects.
-- **Verify:** one desk end-to-end; wake-1 fact minimum enforced mechanically; wake-3 canon facts trace to the template with zero contradictions (color NOT flagged); gate-pass rate tracked in the civic.15 run log.
+- **Depth validator (pressure-test #3):** the 3 canon facts must span ≥2 distinct sources and ≥1 must predate the current cycle — "deep thread" made mechanical; trivially-gamed same-paragraph citations fail.
+- **Self-scoring footer (pressure-test #6):** wake 3 ends with a declared footer — question answered? affected citizens named? sim state cited? — the Saturday compile scores against it mechanically (the Mike scoring params: answer-a-question / affect-a-citizen / move-the-sim).
+- **Verify:** one desk end-to-end; wake-1 fact minimum + depth validator enforced mechanically; wake-3 canon facts trace to the template with zero contradictions (color NOT flagged); footer present; gate-pass rate tracked in the civic.15 run log.
 
 #### Task 2.5.4 — quote pre-pass fed by seed citizens
 - **Files:** `scripts/cron-desk-run.js` (collectQuoteAsks)
 - The 4-slot citizen quote pool draws from the assigned handle's `citizens` list first (the engine's actual affected residents), lane popids as fallback — kills the fabricated-resident class at the root.
-- **Verify:** packet.json quotes match the handle's citizens on a seeded assignment.
+- **Interview rest-cycles (pressure-test #4):** per-citizen cap on repeat cron interviews (letters-desk rest-cycle pattern); a rested citizen is covered by likeness/canon-search instead — spread the light (universal protagonism).
+- **Verify:** packet.json quotes match the handle's citizens on a seeded assignment; a citizen interviewed ≥cap sits out.
+
+#### Task 2.5.6 — seed-citizen selection bias (engine-side; Mike-direct S344)
+- **Files:** `scripts/engineAuditor.js` (affectedEntities.citizens selection)
+- Mike's diagnosis: repeat-citizen dominance may be POSITION BIAS, not just pattern persistence — "if the list is 10 and Lucia is at the top, she instinctively looks like the top choice." Check how the auditor picks and orders `affectedEntities.citizens` per pattern; if orderings are stable, rotate deterministically (ctx-seeded) and widen the per-pattern pool so downstream top-N picks vary across cycles.
+- **Verify:** same pattern across 2 audit runs yields different citizen orderings under rotation; downstream quote pools show spread in the run log.
 
 #### Task 2.5.5 — reporter tool-loop: the model digs for itself (Mike-approved S344)
 - **Files:** `scripts/cron-desk-writer.js` (or a shared `lib/toolLoop.js` if the civic chain adopts it too)
 - The script guarantees the research FLOOR (Task 2.5.3's base pack — no wake starts empty); the tool-loop is how the reporter digs PAST it. OpenRouter function-calling (DeepSeek supports it): model requests, script executes, model reads, repeats — bounded (max ~6 tool calls/wake, read-only).
 - Tools: `canon_search` (edition archive + staged past work), `citizen_lookup` (ledger snapshot profile), `sheet_read` (bounded tab allowlist via lib/sheets), `memory` (the reporter's own Supermemory container, read/write — the one WRITE tool; precedent: crons already read/write their wiki containers).
 - Autonomy note: this is the piece the crons have never truly been tested with — same wiring lets voices/projects in cron-civic-run.js dig later.
-- **Verify:** one wake-1 run where the model issues ≥1 self-directed search beyond the base pack and the cited fact traces to the tool result; loop cap enforced; all tools read-only except own-container memory.
+- **Tool-trace scoreboard (pressure-test #5):** every tool call logged into the template's scratch section (reviewable per story) + a tool-use column in the daily run log — per-model tracking of whether the writer actually digs or ignores the tools.
+- **Verify:** one wake-1 run where the model issues ≥1 self-directed search beyond the base pack and the cited fact traces to the tool result; loop cap enforced; all tools read-only except own-container memory; trace present in template.
 
 ### Phase 2b — Saturday edition compile = the publish gate  *(research-build; sub-plan)*
 **Probation week:** the only place a headless story becomes citable fact. A Saturday cron where **Mags compiles**: `/sift`-style curation over the week's **staged** articles → pick the top stories → assemble edition → `/post-publish` (existing **full** canon ingest: `ingestEditionWiki.js` + `ingestEdition.js` + world-data entity records + citizen cards). During probation this is the publish gate: M–F stages, Saturday publishes. **Post-graduation** (articles publish-on-write): the Saturday compile shifts to curating already-published canon into the edition — the same `/sift` → assemble → `/post-publish` shape, but over canon rather than staged drafts. Acceptance: one Saturday run produces a published, fully-ingested edition; during probation, staged-but-uncompiled drafts never entered canon.

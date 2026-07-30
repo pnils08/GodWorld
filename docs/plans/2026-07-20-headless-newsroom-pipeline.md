@@ -218,6 +218,32 @@ This **refines "those four desks wake daily" above**: they wake M–F on a *stat
 - **API gate backend (2026-07-25, Mike: "does Rhea need to be Haiku?"):** NO — and DeepSeek is banned for a different reason than weakness: the *writer* is DeepSeek, and S325 proved self-grading fails (DeepSeek scored its own draft "0 hallucinations" with a 78 OVR leak in it). Haiku was only ever the choice because the gate ran on the `claude -p` tool harness — a premise made stale by the deterministic pre-checks. New `--backend=api` on `cron-rhea-gate.js`: one raw OpenRouter call (**google/gemini-3.5-flash**, independent family from the writer, enforced fail-loud by parsing the writer's model slug from the draft filename) with everything injected — Rhea's IDENTITY+RULES, the world summary, and THREE deterministic pre-checks: canon name-check, a new engine-verbiage body scan (ENGINE_TOKENS + POPID literals + raw decimals), and **ledger profiles of the verified citizens** (RoleType/neighborhood/birth-year/wealth/career — kills the invented-bio class). Verified on three drafts: the flagged Sonnet civic (2 engine-leak flags ✓), the firebrand sample (Marisol Garcia HIGH + construction-planning med ✓), and a fresh end-to-end `--gate-backend api` write (4 flags: Fruitvale sentiment inversion vs the injected summary, Gregory Mims identity contradiction vs his ledger profile, invented citizen "Isaac", engine verbiage ✓ — all four classes fired). Cost **~$0.06/gate, ~17s** (vs Haiku ~$0.15–0.25/100s+, Sonnet $0.74/147s) → ~$11/mo at 6/day, inside the $20–40 target with room. Claude backend remains the default for CLI use; cron uses api.
 - **runWake uniqueDest:** patched (Mike-direct: "we shouldn't leave broken systems in case they are used") — same rerun-never-clobbers semantics as runWrite.
 
+### Phase 2.5 — assignment desk: EIC assigns, templates structure the wakes  *(Mike-direct S344; engine-sheet builds)*
+
+**Root finding (S344, 1/6 gate-pass day):** the engine already writes per-desk angles — every `engine_audit` pattern carries `tribuneFraming.storyHandles` (angle + hookLine + affected citizens, per desk) — but `emitDeskSignal` drops them, and `/sift`//`/desk-slice` never run on the cron path. Reporters get a bare label + "what smells off" and fill the vacuum by inventing (Manfred Owens bio, Rebecca Kaplan). "What smells off" is a **Jax Caldera** prompt; "what's the city vibing on" is a lifestyle prompt — the two ideas were flattened into one vague ask for everyone.
+
+**Design (Mike):** real newsroom — **Mags is EIC and assigns the angle; the journalist creates the story.** Each desk gets its own research-approach prompt. Every wake completes a fixed TEMPLATE (wake 1 completes X, wake 2 completes Y, wake 3 completes Z) — cheap models work best with structure; spend their reasoning on the article, not on inventing shape. *(Lane note: desk-slice's S313 "no prescribed angles" rule stands for the interactive deep-dispatch lane; the cron lane deliberately inverts it — assigned angles ARE the fix for cheap-model vacuum-filling.)*
+
+#### Task 2.5.1 — seeds reach the lane
+- **Files:** `scripts/buildWorldSummary.js` (emitDeskSignal)
+- Carry `tribuneFraming.storyHandles[desk]` (angle, hookLine, citizens) on each lane entry.
+- **Verify:** `desk_signal_c{XX}.json` entries carry `.handle`; no consumer breaks.
+
+#### Task 2.5.2 — wake 1 becomes ASSIGNMENT (EIC pick, not open ask)
+- **Files:** `scripts/cron-desk-run.js` (runAngle), new `scripts/desk-approach-map.json`
+- Deterministic assignment: beat-match + LRU over seeded handles → the reporter's assigned angle. Per-desk approach prompt from the map (firebrand keeps "smells off" — persona-only; culture gets "what's the city vibing on"; civic = official action + affected citizen; business = follow the money; sports = game/fan). Reporter's voice reacts to the ASSIGNED angle (how they'd chase it), never invents the angle.
+- **Verify:** angle.json carries assigned handle + approach; canon-name-check runs on the angle read before injection (no unverified names enter wake 3).
+
+#### Task 2.5.3 — wake templates (fill-in artifacts, fixed shape)
+- **Files:** `scripts/cron-desk-run.js` (buildLaneState + per-wake prompts)
+- Wake 1 completes ASSIGNMENT SHEET (angle / hook / citizens-to-interview / refs-to-read / approach). Wake 2 completes REPORTING FILE (quotes landed vs asked, facts verified per ref, holes named). Wake 3 completes ARTICLE from sheet+file only — "this IS the story" header replaced with "this is your assignment; report it out with what wake 2 verified."
+- **Verify:** one desk end-to-end; wake-3 draft cites only wake-2 verified facts; gate-pass rate tracked in the civic.15 run log.
+
+#### Task 2.5.4 — quote pre-pass fed by seed citizens
+- **Files:** `scripts/cron-desk-run.js` (collectQuoteAsks)
+- The 4-slot citizen quote pool draws from the assigned handle's `citizens` list first (the engine's actual affected residents), lane popids as fallback — kills the fabricated-resident class at the root.
+- **Verify:** packet.json quotes match the handle's citizens on a seeded assignment.
+
 ### Phase 2b — Saturday edition compile = the publish gate  *(research-build; sub-plan)*
 **Probation week:** the only place a headless story becomes citable fact. A Saturday cron where **Mags compiles**: `/sift`-style curation over the week's **staged** articles → pick the top stories → assemble edition → `/post-publish` (existing **full** canon ingest: `ingestEditionWiki.js` + `ingestEdition.js` + world-data entity records + citizen cards). During probation this is the publish gate: M–F stages, Saturday publishes. **Post-graduation** (articles publish-on-write): the Saturday compile shifts to curating already-published canon into the edition — the same `/sift` → assemble → `/post-publish` shape, but over canon rather than staged drafts. Acceptance: one Saturday run produces a published, fully-ingested edition; during probation, staged-but-uncompiled drafts never entered canon.
 
@@ -308,6 +334,9 @@ What **passes**: anything the world-summary/context genuinely supports — alleg
 Reference run (one calibration sample, not the design's organizing case): `cron-rhea-gate.js` on the C102 Dirt Carnival, `output/cron-compare/baylight_dirt_carnival.rhea.json` (`pass:false`, Sonnet $0.96/147s). **Open verify — RESOLVED S332:** Rhea *passed* "Jack London retail down / crime spiking" and was **right** — the labeled anomaly audit (`engine_audit_c102` patterns[8]) shows `Jack London: decay [RetailVitality -1.90, CrimeIndex +2.99]`. Jax was accurate; the earlier "+0.16 up, real decline is KONO" call was a misread of a composite `world_summary` column (no headers). Both Jack London and KONO are in decay; Jax named the sharper one. Build: `rhea-morgan` RULES + the `cron-rhea-gate.js` prompt encode these two flag classes + the context-passes default.
 
 ### Phase 3 — city-hall headless (daily)  *(civic content, research-build infra; sub-plan)*
+
+**BUILT — this slot is filled by civic.15 (S343–S344): [[2026-07-28-civic-cron-city-hall]].** Sunday chain (directive→prep→Mayor→voices→projects→gated close), Mon–Thu datawakes merged into the civic desk lane, dry crontab live. Media and civic wakes are one plan family (Mike-direct S344): daily outcomes for BOTH tracked in the civic.15 research run log; the wake-quality work is Phase 2.5 above. Early notes below kept for the voice-packet design history.
+
 Same continuous model on the civic side: city-hall voices/agents wake M–F, work the active civic storylines (agenda → positions → votes as they occur), articles ingest to canon and feed Mags' Saturday compile. Mirrors the writer-worker shape on civic agents.
 
 **Early notes — voice-packets = what runs city hall (Mike-direct S332, capture before design):**

@@ -148,8 +148,36 @@ const ENGINE_TOKENS = [
   'EmployerBizId', 'SMPageId', 'desk_signal', 'world_summary', 'Initiative_Tracker',
   'Neighborhood_Map', 'Reflection_Intake', 'Supermemory', 'claude-mem'
 ];
+// Unwrap a whole-document code fence before any scan. S344: a DeepSeek business
+// draft wrapped its ENTIRE article in ```markdown …```; scanEngineVerbiage strips
+// fenced blocks (to skip code examples), so it stripped the whole article, scanned
+// an empty string, reported "clean", and the gate passed a draft leaking two raw
+// POPIDs. Fence-stripping must never be able to blank the document.
+function unwrapWholeDocFence(text) {
+  const t = String(text).trim();
+  const m = t.match(/^```[a-z]*\s*\n([\s\S]*?)\n?```\s*$/i);
+  if (m) return m[1];
+  // Leading fence with no closing fence at EOF, or fenced head + trailing junk:
+  // if stripping fences would remove most of the document, keep the raw text.
+  const stripped = t.replace(/```[\s\S]*?```/g, '').trim();
+  if (t.length > 400 && stripped.length < t.length * 0.35) return t.replace(/^```[a-z]*\s*/i, '').replace(/```\s*$/, '');
+  return text;
+}
+
+// Structural junk a model emits when it thinks it's calling tools instead of
+// filing copy — the S344 business draft carried a python write_file() block
+// duplicating the whole article. Never publishable; deterministic hard fail.
+function scanStructuralJunk(draftText) {
+  const hits = [];
+  const t = String(draftText);
+  if (/```(?:python|js|javascript|bash|sh)\b/i.test(t)) hits.push('code block in an article draft');
+  if (/\bwrite_file\s*\(|\bopen\s*\([^)]*['"]w['"]\)/.test(t)) hits.push('tool-call code (write_file/open) in draft body');
+  if (/^\s*```/.test(t)) hits.push('draft wrapped in a code fence (not clean prose)');
+  return hits;
+}
+
 function scanEngineVerbiage(draftText) {
-  const body = String(draftText).replace(/```[\s\S]*?```/g, '');
+  const body = unwrapWholeDocFence(draftText).replace(/```[\s\S]*?```/g, '');
   const hits = [];
   for (const t of ENGINE_TOKENS) {
     const re = new RegExp(t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
@@ -349,7 +377,22 @@ async function main() {
   // flags that didn't parse as an array count as unverified → block.
   const flagsArr = Array.isArray(verdict.flags) ? verdict.flags : [];
   const highSevCount = flagsArr.filter(f => (f.severity || '').toLowerCase() === 'high').length;
-  const gatePass = verdict.pass === true && Array.isArray(verdict.flags) && highSevCount === 0;
+
+  // Deterministic blockers (S344) — these OVERRIDE a model pass. The judge model
+  // approved a draft that leaked two POPIDs inside a whole-doc fence and carried a
+  // python write_file() duplicate of itself; no model verdict should be able to
+  // clear machine-detectable contamination.
+  const detBlockers = [];
+  for (const j of scanStructuralJunk(draftText)) detBlockers.push({ severity: 'high', check: 'structural', issue: j });
+  const bodyForScan = unwrapWholeDocFence(draftText).replace(/```[\s\S]*?```/g, '');
+  const popHits = bodyForScan.match(/\bPOP-\d{5}\b/g);
+  if (popHits) detBlockers.push({ severity: 'high', check: 'popid-leak', issue: 'raw POPID(s) in prose: ' + [...new Set(popHits)].join(', ') });
+  if (detBlockers.length) {
+    console.log('deterministic blockers: ' + detBlockers.map(d => d.check).join(', '));
+    flagsArr.push(...detBlockers);
+  }
+
+  const gatePass = verdict.pass === true && Array.isArray(verdict.flags) && highSevCount === 0 && detBlockers.length === 0;
 
   const out = {
     draft: draftRel, cycle, backend: BACKEND, model: BACKEND === 'api' ? API_MODEL : MODEL,

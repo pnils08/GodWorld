@@ -254,6 +254,13 @@ This **refines "those four desks wake daily" above**: they wake M–F on a *stat
 - The 4-slot citizen quote pool draws from the assigned handle's `citizens` list first (the engine's actual affected residents), lane popids as fallback — kills the fabricated-resident class at the root.
 - **Verify:** packet.json quotes match the handle's citizens on a seeded assignment.
 
+#### Task 2.5.5 — reporter tool-loop: the model digs for itself (Mike-approved S344)
+- **Files:** `scripts/cron-desk-writer.js` (or a shared `lib/toolLoop.js` if the civic chain adopts it too)
+- The script guarantees the research FLOOR (Task 2.5.3's base pack — no wake starts empty); the tool-loop is how the reporter digs PAST it. OpenRouter function-calling (DeepSeek supports it): model requests, script executes, model reads, repeats — bounded (max ~6 tool calls/wake, read-only).
+- Tools: `canon_search` (edition archive + staged past work), `citizen_lookup` (ledger snapshot profile), `sheet_read` (bounded tab allowlist via lib/sheets), `memory` (the reporter's own Supermemory container, read/write — the one WRITE tool; precedent: crons already read/write their wiki containers).
+- Autonomy note: this is the piece the crons have never truly been tested with — same wiring lets voices/projects in cron-civic-run.js dig later.
+- **Verify:** one wake-1 run where the model issues ≥1 self-directed search beyond the base pack and the cited fact traces to the tool result; loop cap enforced; all tools read-only except own-container memory.
+
 ### Phase 2b — Saturday edition compile = the publish gate  *(research-build; sub-plan)*
 **Probation week:** the only place a headless story becomes citable fact. A Saturday cron where **Mags compiles**: `/sift`-style curation over the week's **staged** articles → pick the top stories → assemble edition → `/post-publish` (existing **full** canon ingest: `ingestEditionWiki.js` + `ingestEdition.js` + world-data entity records + citizen cards). During probation this is the publish gate: M–F stages, Saturday publishes. **Post-graduation** (articles publish-on-write): the Saturday compile shifts to curating already-published canon into the edition — the same `/sift` → assemble → `/post-publish` shape, but over canon rather than staged drafts. Acceptance: one Saturday run produces a published, fully-ingested edition; during probation, staged-but-uncompiled drafts never entered canon.
 

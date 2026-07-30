@@ -224,6 +224,8 @@ This **refines "those four desks wake daily" above**: they wake M–F on a *stat
 
 **Design (Mike):** real newsroom — **Mags is EIC and assigns the angle; the journalist creates the story.** Each desk gets its own research-approach prompt. Every wake completes a fixed TEMPLATE (wake 1 completes X, wake 2 completes Y, wake 3 completes Z) — cheap models work best with structure; spend their reasoning on the article, not on inventing shape. *(Lane note: desk-slice's S313 "no prescribed angles" rule stands for the interactive deep-dispatch lane; the cron lane deliberately inverts it — assigned angles ARE the fix for cheap-model vacuum-filling.)*
 
+**The color doctrine (Mike-direct S344 — governs every wake template; reaffirms `project_subjective-hallucination-is-canon`):** the two cycle documents are the skeleton anyone could summarize for free; the reporters are paid for what the engine does NOT provide — **they live in the sim.** "KONO data spiked" is engine; *what it felt like in the lives affected, the weather that day, which store had a sale, whether kids played in the street, whether the farm stand was open* — that is the job. So the rule the templates carry is a wall, not a leash: **canon facts are load-bearing and immutable** (ledger names/ages/roles, tracker states, numbers, events from the two documents — changing one is the hallucination class the gate kills, as is any real-world bleed like Rebecca Kaplan); **everything else is theirs to invent freely** so long as it conflicts with nothing — scene texture, weather, unnamed street life, the feel of a block. Additive invention IS the product; contradiction and real-world import are the only sins.
+
 #### Task 2.5.1 — seeds reach the lane
 - **Files:** `scripts/buildWorldSummary.js` (emitDeskSignal)
 - Carry `tribuneFraming.storyHandles[desk]` (angle, hookLine, citizens) on each lane entry.
@@ -236,8 +238,8 @@ This **refines "those four desks wake daily" above**: they wake M–F on a *stat
 
 #### Task 2.5.3 — wake templates (fill-in artifacts, fixed shape)
 - **Files:** `scripts/cron-desk-run.js` (buildLaneState + per-wake prompts)
-- Wake 1 completes ASSIGNMENT SHEET (angle / hook / citizens-to-interview / refs-to-read / approach). Wake 2 completes REPORTING FILE (quotes landed vs asked, facts verified per ref, holes named). Wake 3 completes ARTICLE from sheet+file only — "this IS the story" header replaced with "this is your assignment; report it out with what wake 2 verified."
-- **Verify:** one desk end-to-end; wake-3 draft cites only wake-2 verified facts; gate-pass rate tracked in the civic.15 run log.
+- Wake 1 completes ASSIGNMENT SHEET (angle / hook / citizens-to-interview / refs-to-read / approach). Wake 2 completes REPORTING FILE (quotes landed vs asked, canon facts pulled per ref, holes named). Wake 3 completes ARTICLE — canon facts come from sheet+file and are immutable; color (scene, weather, unnamed street life, lived texture) is the reporter's own invention per the color doctrine above. Header: "these facts are the record — don't bend them; the world around them is yours — you live there."
+- **Verify:** one desk end-to-end; wake-3 canon facts trace to sheet+file with zero contradictions (color is NOT flagged); gate-pass rate tracked in the civic.15 run log.
 
 #### Task 2.5.4 — quote pre-pass fed by seed citizens
 - **Files:** `scripts/cron-desk-run.js` (collectQuoteAsks)

@@ -270,6 +270,8 @@ Handles two NAMES INDEX formats: T1 strict (`POP-NNNNN | Name | Role`) and pre-T
 
 Default mode is `--dry-run`; pass `--apply` to write. Output: `output/intake_published_entities_c<XX>_<slug>.json` with full resolution detail (matched / candidates / canon-drift / ambiguous / phantom) plus `intakeRows` (planned lean rows, inspectable in dry-run) and `intakeVerified` (readback, populated on `--apply`).
 
+**Canon-drift is a HANDOFF, not a log line (S345, C101-Abraham precedent).** The canon-drift bucket writes `output/canon_drift_c<XX>.json` — but nothing downstream reads that file. If the bucket is non-empty, this run must do BOTH: (1) list the drift names + suggested actions in the publish close report shown to the builder, and (2) append them to the `NEXT[engine-sheet]` handoff line (or say plainly "N canon-drift citizens need engine-sheet backfill — names in canon_drift_c<XX>.json"). Writing the JSON alone is a silent parking lot: Elliot Abraham was flagged `backfill` at C101 publish and sat unminted until S345; a C95–C101 sweep found 9 more names parked the same way (ENGINE_REPAIR row R-CANON-DRIFT). Name-variant check before treating a drift name as missing: accent/hyphen forms (Tran-Munoz vs Tran-Muñoz, Soria Dominguez vs Soria-Dominguez) resolve to existing SL rows.
+
 **Verification gate (defense-in-depth, S189 dispatch gap E8 + S197 BUNDLE-A `--strict`):** after `ingestPublishedEntities.js` finishes, cross-check its parsed entity count against the source `.txt` directly:
 
 ```bash

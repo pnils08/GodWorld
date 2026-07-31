@@ -80,6 +80,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 - **[[SIM_DOCTRINE]]** — what makes GodWorld a sim, not a data system: no output caps, physics only, world allowed to hurt (Mike-direct S318). Consult before designing any mechanic. *(doctrine, engine, active)*
 - **[[SIMULATION_LEDGER]]** — Simulation_Ledger reference: 922 rows and 52 columns A–AZ at the S282 verified snapshot. *(reference, citizens, active)*
 - **[[SPREADSHEET]]** — Google Sheets environment, 65 tabs, service account scope. *(reference, infrastructure, active)*
+- **[[SEARCH_FUNCTIONS]]** — every world-data search/retrieval function in one reference: which-tool-for-which-question table, then per-surface entries (MCP tools + internal shelves, queryLedger modes, bot searchDisk, citizen-page recall, Supermemory CLI) with matching semantics, consumers, and staleness model. Written S345, the session the matchers were fixed. *(reference, infrastructure, engine, active)*
 
 ### Research
 - **[[research/RESEARCH_TEMPLATE]]** — research-file template (S250). Source-mining record shape: Source / What this addresses / What it does / Extraction-in-sim-terms / Not-applicable+hazard / Verdict (adopt|watch|take-nothing) / Ignited-plans / Applications-living / Changelog. Carries the verdict-not-state + never-archives rules. *(reference, research, active)*

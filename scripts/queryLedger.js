@@ -9,6 +9,7 @@
  *
  * Query types:
  *   citizen <name|popId>       — Full citizen profile + life history + bonds
+ *   pair <a> <b>               — Two citizens side-by-side + shared household/bonds/neighborhood
  *   initiative <id|name>       — Initiative status + vote breakdown + implementation
  *   council [faction|district] — Council roster, optionally filtered
  *   neighborhood <name>        — Citizens + businesses + events in a neighborhood
@@ -52,6 +53,7 @@ if (!queryType) {
   console.error('');
   console.error('Query types:');
   console.error('  citizen <name|popId>       — Full citizen profile');
+  console.error('  pair <a> <b>               — Two citizens + shared context (quote multi-word names)');
   console.error('  initiative <id|name>       — Initiative status + implementation');
   console.error('  council [faction|district] — Council roster');
   console.error('  neighborhood <name>        — Neighborhood snapshot');
@@ -77,91 +79,63 @@ function output(label, data) {
   }
 }
 
-// --- Query: citizen ---
-async function queryCitizen(search) {
-  if (!search) { console.error('Usage: queryLedger citizen <name|popId>'); process.exit(1); }
+// --- Citizen helpers (shared by `citizen` and `pair`) ---
 
+function findCitizen(ledger, search) {
   const isPopId = /^POP-\d+$/i.test(search);
   const searchLower = search.toLowerCase();
-
-  // 1. Simulation_Ledger — main record
-  const ledger = await sheets.getSheetAsObjects('Simulation_Ledger');
-  let citizen = null;
   if (isPopId) {
-    citizen = ledger.find(r => r.POPID?.toLowerCase() === searchLower);
-  } else {
-    citizen = ledger.find(r => {
-      const fullName = `${r.First} ${r.Last}`.toLowerCase();
-      return fullName === searchLower || fullName.includes(searchLower);
+    return ledger.find(r => r.POPID?.toLowerCase() === searchLower) || null;
+  }
+  return ledger.find(r => {
+    const fullName = `${r.First} ${r.Last}`.toLowerCase();
+    return fullName === searchLower || fullName.includes(searchLower);
+  }) || null;
+}
+
+// LifeHistory is newline-delimited; each line is either
+//   `YYYY-MM-DD HH:MM — [Tag] text`  (real-clock entries)
+//   `Y<n>C<m> — [Tag] text`          (sim-calendar entries)
+// The old parser only recognized the date shape, so every Y<n>C<m> line
+// collapsed into one unstructured blob.
+function parseLifeHistory(raw) {
+  const events = [];
+  if (!raw) return events;
+  for (const line of raw.split('\n')) {
+    if (!line.trim()) continue;
+    const m = line.match(/^(?:(\d{4}-\d{2}-\d{2})(?:\s+\d{2}:\d{2})?|(Y\d+C\d+))?\s*[—–-]*\s*(?:\[([\w-]+)\])?\s*(.*)$/s);
+    events.push({
+      date: m?.[1] || null,
+      cycle: m?.[2] || null,
+      tag: m?.[3] || 'General',
+      text: (m?.[4] || line).trim(),
     });
   }
+  return events;
+}
 
-  if (!citizen) {
-    console.error(`Citizen not found: ${search}`);
-    process.exit(1);
-  }
-
-  const popId = citizen.POPID;
-  const fullName = `${citizen.First} ${citizen.Last}`;
-
-  // 2. LifeHistory_Log — recent events
-  let lifeHistory = [];
-  try {
-    const history = await sheets.getSheetAsObjects('LifeHistory_Log');
-    lifeHistory = history
-      .filter(r => r.POPID?.toLowerCase() === popId.toLowerCase())
-      .slice(-10); // Last 10 entries
-  } catch (e) { /* LifeHistory_Log may not exist */ }
-
-  // 3. Relationship_Bonds — connections
-  let bonds = [];
-  try {
-    const allBonds = await sheets.getSheetAsObjects('Relationship_Bonds');
-    bonds = allBonds.filter(r =>
-      r.Person1_POPID?.toLowerCase() === popId.toLowerCase() ||
-      r.Person2_POPID?.toLowerCase() === popId.toLowerCase()
-    );
-  } catch (e) { /* Relationship_Bonds may not exist */ }
-
-  // 4. Household_Ledger — household context
-  let household = null;
-  if (citizen.HouseholdId) {
-    try {
-      const households = await sheets.getSheetAsObjects('Household_Ledger');
-      household = households.find(r => r.HouseholdId === citizen.HouseholdId);
-    } catch (e) { /* may not exist */ }
-  }
-
-  // Parse LifeHistory field from ledger
-  let ledgerLifeEvents = [];
-  if (citizen.LifeHistory) {
-    const parts = citizen.LifeHistory.split(/(?=\d{4}-\d{2}-\d{2})|(?=Engine Event:)/g).filter(s => s.trim());
-    for (const part of parts) {
-      const dateMatch = part.match(/^(\d{4}-\d{2}-\d{2})\s+(\d{2}:\d{2})?\s*[—-]*\s*(?:\[(\w+)\])?\s*(.*)/s);
-      if (dateMatch) {
-        ledgerLifeEvents.push({
-          date: dateMatch[1],
-          tag: dateMatch[3] || 'General',
-          text: dateMatch[4]?.trim() || part.trim(),
-        });
-      } else if (part.trim()) {
-        ledgerLifeEvents.push({ date: null, tag: 'General', text: part.trim() });
-      }
-    }
-  }
-
-  output('citizen', {
-    popId,
-    name: fullName,
+// Full-column profile. All 54 Simulation_Ledger columns are already fetched
+// per row — dropping them saved nothing and blinded story agents to
+// migration, family-graph, and memory-page fields (Antigravity diagnostic,
+// verified S345).
+function buildCitizenProfile(citizen, aux) {
+  const { lifeHistory = [], bonds = [], household = null } = aux || {};
+  return {
+    popId: citizen.POPID,
+    name: `${citizen.First} ${citizen.Last}`,
+    maidenName: citizen.MaidenName || null,
     tier: parseInt(citizen.Tier) || 4,
     // Age is ALWAYS computed as 2041 - BirthYear. The Simulation_Ledger `Age`
     // column is empty by design, so reading it returned null for every citizen
     // (S334 — surfaced on POP-00166, applied to all). Never trust a pre-computed
     // Age field; the 2041 anchor keeps every age in the project consistent.
     age: citizen.BirthYear ? 2041 - parseInt(citizen.BirthYear) : null,
+    gender: citizen.Gender || null,
     neighborhood: citizen.Neighborhood || null,
     role: citizen.RoleType || null,
     status: citizen.Status || null,
+    statusStartCycle: citizen.StatusStartCycle || null,
+    healthCause: citizen.HealthCause || null,
     income: citizen.Income ? parseInt(citizen.Income) : null,
     wealthLevel: citizen.WealthLevel ? parseInt(citizen.WealthLevel) : null,
     educationLevel: citizen.EducationLevel || null,
@@ -169,14 +143,50 @@ async function queryCitizen(search) {
     maritalStatus: citizen.MaritalStatus || null,
     numChildren: citizen.NumChildren ? parseInt(citizen.NumChildren) : 0,
     originCity: citizen.OrginCity || null,
+    originGame: citizen.OriginGame || null,
     householdId: citizen.HouseholdId || null,
+    spouseId: citizen.SpouseId || null,
+    parentIds: citizen.ParentIds || null,
+    childrenIds: citizen.ChildrenIds || null,
+    lineageId: citizen.LineageId || null,
+    economics: {
+      netWorth: citizen.NetWorth || null,
+      savingsRate: citizen.SavingsRate || null,
+      debtLevel: citizen.DebtLevel || null,
+      inheritanceReceived: citizen.InheritanceReceived || null,
+      economicProfileKey: citizen.EconomicProfileKey || null,
+      employerBizId: citizen.EmployerBizId || null,
+    },
+    career: {
+      yearsInCareer: citizen.YearsInCareer || null,
+      careerMobility: citizen.CareerMobility || null,
+      lastPromotionCycle: citizen.LastPromotionCycle || null,
+      schoolQuality: citizen.SchoolQuality || null,
+    },
+    migration: {
+      displacementRisk: citizen.DisplacementRisk || null,
+      migrationIntent: citizen.MigrationIntent || null,
+      migrationReason: citizen.MigrationReason || null,
+      migrationDestination: citizen.MigrationDestination || null,
+      migratedCycle: citizen.MigratedCycle || null,
+      returnedCycle: citizen.ReturnedCycle || null,
+    },
+    memory: {
+      smPageId: citizen.SMPageId || null,
+      memoryRegisters: citizen.MemoryRegisters || null,
+    },
+    skillTags: citizen.SkillTags || null,
+    citizenBio: citizen.CitizenBio || null,
+    dialState: citizen.DialState || null,
+    usageCount: citizen.UsageCount ? parseInt(citizen.UsageCount) : 0,
+    lastUpdated: citizen.LastUpdated || null,
     flags: {
       universe: citizen['UNI (y/n)']?.toLowerCase() === 'yes',
       media: citizen['MED (y/n)']?.toLowerCase() === 'yes',
       civic: citizen['CIV (y/n)']?.toLowerCase() === 'yes',
     },
     traitProfile: citizen.TraitProfile || null,
-    lifeEvents: ledgerLifeEvents,
+    lifeEvents: parseLifeHistory(citizen.LifeHistory),
     recentHistory: lifeHistory,
     bonds: bonds.map(b => ({
       person1: b.Person1_POPID,
@@ -190,6 +200,123 @@ async function queryCitizen(search) {
       size: household.Size,
       address: household.Address,
     } : null,
+  };
+}
+
+async function loadCitizenAux(citizen) {
+  const popId = citizen.POPID;
+
+  let lifeHistory = [];
+  try {
+    const history = await sheets.getSheetAsObjects('LifeHistory_Log');
+    lifeHistory = history
+      .filter(r => r.POPID?.toLowerCase() === popId.toLowerCase())
+      .slice(-10); // Last 10 entries
+  } catch (e) { /* LifeHistory_Log may not exist */ }
+
+  let bonds = [];
+  try {
+    const allBonds = await sheets.getSheetAsObjects('Relationship_Bonds');
+    bonds = allBonds.filter(r =>
+      r.Person1_POPID?.toLowerCase() === popId.toLowerCase() ||
+      r.Person2_POPID?.toLowerCase() === popId.toLowerCase()
+    );
+  } catch (e) { /* Relationship_Bonds may not exist */ }
+
+  let household = null;
+  if (citizen.HouseholdId) {
+    try {
+      const households = await sheets.getSheetAsObjects('Household_Ledger');
+      household = households.find(r => r.HouseholdId === citizen.HouseholdId);
+    } catch (e) { /* may not exist */ }
+  }
+
+  return { lifeHistory, bonds, household };
+}
+
+// --- Query: citizen ---
+async function queryCitizen(search) {
+  if (!search) { console.error('Usage: queryLedger citizen <name|popId>'); process.exit(1); }
+
+  const ledger = await sheets.getSheetAsObjects('Simulation_Ledger');
+  const citizen = findCitizen(ledger, search);
+
+  if (!citizen) {
+    console.error(`Citizen not found: ${search}`);
+    process.exit(1);
+  }
+
+  const aux = await loadCitizenAux(citizen);
+  output('citizen', buildCitizenProfile(citizen, aux));
+}
+
+// --- Query: pair ---
+// Two citizens side-by-side + the shared context a 2-person story needs:
+// direct bonds between them, shared bond partners, household/neighborhood
+// overlap, and both migration blocks (relocation deltas live in the profiles).
+async function queryPair(a, b) {
+  if (!a || !b) { console.error('Usage: queryLedger pair <name|popId> <name|popId>  (quote multi-word names)'); process.exit(1); }
+
+  const ledger = await sheets.getSheetAsObjects('Simulation_Ledger');
+  const citizenA = findCitizen(ledger, a);
+  const citizenB = findCitizen(ledger, b);
+  if (!citizenA) { console.error(`Citizen not found: ${a}`); process.exit(1); }
+  if (!citizenB) { console.error(`Citizen not found: ${b}`); process.exit(1); }
+  if (citizenA.POPID === citizenB.POPID) { console.error('pair needs two distinct citizens'); process.exit(1); }
+
+  // Fetch each aux sheet once, partition per citizen
+  let historyAll = [];
+  try { historyAll = await sheets.getSheetAsObjects('LifeHistory_Log'); } catch (e) { /* may not exist */ }
+  let bondsAll = [];
+  try { bondsAll = await sheets.getSheetAsObjects('Relationship_Bonds'); } catch (e) { /* may not exist */ }
+  let householdsAll = [];
+  try { householdsAll = await sheets.getSheetAsObjects('Household_Ledger'); } catch (e) { /* may not exist */ }
+
+  const auxFor = (c) => {
+    const id = c.POPID.toLowerCase();
+    return {
+      lifeHistory: historyAll.filter(r => r.POPID?.toLowerCase() === id).slice(-10),
+      bonds: bondsAll.filter(r =>
+        r.Person1_POPID?.toLowerCase() === id || r.Person2_POPID?.toLowerCase() === id
+      ),
+      household: c.HouseholdId ? householdsAll.find(r => r.HouseholdId === c.HouseholdId) || null : null,
+    };
+  };
+
+  const idA = citizenA.POPID.toLowerCase();
+  const idB = citizenB.POPID.toLowerCase();
+  const directBonds = bondsAll.filter(r => {
+    const p1 = r.Person1_POPID?.toLowerCase();
+    const p2 = r.Person2_POPID?.toLowerCase();
+    return (p1 === idA && p2 === idB) || (p1 === idB && p2 === idA);
+  });
+
+  const partnersOf = (id) => new Set(
+    bondsAll
+      .filter(r => r.Person1_POPID?.toLowerCase() === id || r.Person2_POPID?.toLowerCase() === id)
+      .map(r => (r.Person1_POPID?.toLowerCase() === id ? r.Person2_POPID : r.Person1_POPID))
+      .filter(Boolean)
+      .map(p => p.toUpperCase())
+  );
+  const sharedBondPartners = [...partnersOf(idA)].filter(p =>
+    partnersOf(idB).has(p) && p !== citizenA.POPID && p !== citizenB.POPID
+  );
+
+  output('pair', {
+    citizenA: buildCitizenProfile(citizenA, auxFor(citizenA)),
+    citizenB: buildCitizenProfile(citizenB, auxFor(citizenB)),
+    shared: {
+      sameHousehold: !!(citizenA.HouseholdId && citizenA.HouseholdId === citizenB.HouseholdId),
+      sameNeighborhood: !!(citizenA.Neighborhood && citizenA.Neighborhood === citizenB.Neighborhood),
+      spouses: citizenA.SpouseId === citizenB.POPID || citizenB.SpouseId === citizenA.POPID,
+      directBonds: directBonds.map(bd => ({
+        person1: bd.Person1_POPID,
+        person2: bd.Person2_POPID,
+        type: bd.BondType || bd.Type,
+        strength: bd.Strength,
+      })),
+      sharedBondPartners,
+    },
   });
 }
 
@@ -538,6 +665,9 @@ async function main() {
       case 'citizen':
         await queryCitizen(queryArg);
         break;
+      case 'pair':
+        await queryPair(positional[1], positional[2]);
+        break;
       case 'initiative':
         await queryInitiative(queryArg);
         break;
@@ -555,7 +685,7 @@ async function main() {
         break;
       default:
         console.error(`Unknown query type: ${queryType}`);
-        console.error('Valid types: citizen, initiative, council, neighborhood, articles, verify');
+        console.error('Valid types: citizen, pair, initiative, council, neighborhood, articles, verify');
         process.exit(1);
     }
   } catch (err) {

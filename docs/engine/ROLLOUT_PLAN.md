@@ -79,6 +79,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.77 | Sports-event intake — trades/injuries/call-ups must write BOTH the ledger state change (Status/RoleType) AND the LifeHistory moment + ripple; proof case C101 Richards trade (POP-00031) | ready | research-build (design) → engine-sheet (build) | [[../research/2026-07-27-oakland-sports-feed-entry-dashboard]] §Future Sports Engine boundary + [[ENGINE_REPAIR]] §engine.77 |
 | engine.89 | Oakland sports intake workspace — draft the implementation plan for feed entry, roster-backed current stat lines, Ripple Preview, and the engine.40/engine.77 write boundary | ready | research-build | [[../research/2026-07-27-oakland-sports-feed-entry-dashboard]] + [[../OAKLAND_SPORTS_FEED]] |
 | engine.90 | Citizen Archive — after sports intake, plan the full-row exit archive, permanent POPID allocator/resolver, verified move protocol, and return-with-same-POPID path | blocked | research-build → engine-sheet | [[../research/2026-07-29-citizen-archive]] |
+| engine.91 | Canon ingest backfill & sweep — customId idempotency, deterministic sweep (reporters corpus + Deep Canon Drive), post-publish tail + cron, drive-files scope call | ready | engine-sheet | [[../plans/2026-07-31-canon-ingest-backfill]] |
 
 ### canon.* — World-fidelity layer
 

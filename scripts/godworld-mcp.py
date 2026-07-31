@@ -315,6 +315,29 @@ def disk_search(query: str, max_files: int = 12) -> str:
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=15,
                                 cwd=str(PROJECT_ROOT))
         files = [ln.strip() for ln in result.stdout.splitlines() if ln.strip()]
+        # S345: exact-phrase miss on a multi-word query falls back to AND-of-terms
+        # (every term present somewhere in the file, any order) — same semantics
+        # as lib/mags.js searchDisk, which the Discord bot already uses. Without
+        # this, "Elliot Abraham Oaks General Manager" missed files that contain
+        # every one of those words. snippet_pat tracks what the snippet grep
+        # should look for (the phrase normally; the first term on fallback).
+        snippet_pat = q
+        terms = q.split()
+        if not files and len(terms) > 1:
+            first = subprocess.run(
+                ['grep', '-rIliF', '--include=*.json', '--include=*.jsonl',
+                 '--include=*.md', '--include=*.txt', '--', terms[0],
+                 'output', 'docs', 'editions'],
+                capture_output=True, text=True, timeout=15, cwd=str(PROJECT_ROOT))
+            files = [ln.strip() for ln in first.stdout.splitlines() if ln.strip()]
+            for term in terms[1:]:
+                if not files:
+                    break
+                nxt = subprocess.run(
+                    ['grep', '-IliF', '--', term] + files,
+                    capture_output=True, text=True, timeout=15, cwd=str(PROJECT_ROOT))
+                files = [ln.strip() for ln in nxt.stdout.splitlines() if ln.strip()]
+            snippet_pat = terms[0]
         if not files:
             return f"No disk hits for '{q}'"
         files.sort(key=_disk_rank)
@@ -334,7 +357,7 @@ def disk_search(query: str, max_files: int = 12) -> str:
             snippet = ''
             try:
                 snip = subprocess.run(
-                    ['grep', '-m1', '-niF', '--', q, rel],
+                    ['grep', '-m1', '-niF', '--', snippet_pat, rel],
                     capture_output=True, text=True, timeout=5,
                     cwd=str(PROJECT_ROOT))
                 first = snip.stdout.splitlines()[0] if snip.stdout else ''

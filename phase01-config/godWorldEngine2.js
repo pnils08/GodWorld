@@ -152,13 +152,51 @@ function computeShortHash_(input) {
  * Returns true if successful, false if error occurred.
  */
 function safePhaseCall_(ctx, phaseName, fn) {
+  var t0 = new Date().getTime();
   try {
     fn();
+    recordPhaseTiming_(ctx, phaseName, new Date().getTime() - t0, true);
     return true;
   } catch (e) {
+    recordPhaseTiming_(ctx, phaseName, new Date().getTime() - t0, false);
     logEngineError_(ctx, phaseName, e);
     return false;
   }
+}
+
+/**
+ * engine.95 Task 2: per-phase timing collection (observation only).
+ * Accumulates {phase, ms, ok} into ctx.summary.phaseTimings. In-memory
+ * only — ctx.summary never persists to Sheets, so zero sheet impact.
+ * Emitted at cycle close by emitPhaseTimings_.
+ */
+function recordPhaseTiming_(ctx, phaseName, ms, ok) {
+  if (!ctx || !ctx.summary) return;
+  var timings = ctx.summary.phaseTimings || (ctx.summary.phaseTimings = []);
+  timings.push({ phase: phaseName, ms: ms, ok: ok });
+}
+
+/**
+ * engine.95 Task 2: emit collected phase timings as a Logger marker
+ * block, PHASE42_VERIFY_BEGIN/END pattern (:1659-1667). Pull with:
+ *   clasp logs --json | grep PHASE_TIMING
+ * Gives the wall-distance baseline for engine.95 Task 3.
+ */
+function emitPhaseTimings_(ctx) {
+  if (!ctx || !ctx.summary || !ctx.summary.phaseTimings) return;
+  var timings = ctx.summary.phaseTimings;
+  var total = 0;
+  for (var i = 0; i < timings.length; i++) total += timings[i].ms;
+  var slowest = timings.slice().sort(function(a, b) { return b.ms - a.ms; }).slice(0, 5);
+  Logger.log('PHASE_TIMING_BEGIN');
+  Logger.log(JSON.stringify({
+    cycle: ctx.summary.cycleId || 'Unknown',
+    totalMs: total,
+    phaseCount: timings.length,
+    slowest: slowest,
+    timings: timings
+  }));
+  Logger.log('PHASE_TIMING_END');
 }
 
 function runWorldCycle() {
@@ -534,6 +572,7 @@ function runWorldCycle() {
     // and produced the "errors logged: 2 vs Engine_Errors row: 1" gap.
     var engineErrors = (ctx && ctx.summary && ctx.summary.engineErrorCount) || 0;
     var auditIssueCount = (ctx && ctx.summary && ctx.summary.auditIssues) ? ctx.summary.auditIssues.length : 0;
+    emitPhaseTimings_(ctx);  // engine.95 Task 2 — PHASE_TIMING markers (clasp logs pattern)
     Logger.log('Cycle completed. Engine errors logged: ' + engineErrors + '; audit issues tracked: ' + auditIssueCount);
   }
 }

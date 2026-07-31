@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-07-22 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-07-31 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -34,6 +34,13 @@
 - **computeShortHash_(input)**
 
 - **safePhaseCall_(ctx, phaseName, fn)**
+  Reads: S.phaseTimings
+
+- **recordPhaseTiming_(ctx, phaseName, ms, ok)**
+  Writes: S.phaseTimings
+
+- **emitPhaseTimings_(ctx)**
+  Reads: S.cycleId, S.phaseTimings
 
 - **runWorldCycle()**
   Reads: S.auditIssues, S.citizenEvents, S.cityEvents, S.contractSeeds, S.engineErrorCount, S.eveningSports, S.mediaIntake, S.nightlife, S.nightlifeVolume, S.rippleEvents
@@ -153,6 +160,8 @@
   Sheets: Oakland_Sports_Feed
 
 - **getColVal_(row, colIdx)**
+
+- **normalizeOaklandFeedTeam_(value)**
 
 - **deriveActiveSportsFromFeed_(entries)**
 
@@ -1037,13 +1046,13 @@
 - **buildSettleBizPool_(ctx)**
   Sheets: Business_Ledger
 
+- **settleSkillTag_(role)**
+
 - **eduRank_(v)**
 
 - **settleAdulthood_(ctx, cycle, rng)**
   Reads: S.careerSignals
-  Writes: S.careerSignals.businessDeltas (settlement hires)
-  Sheets: Household_Ledger, Business_Ledger (capacity-aware employer pool, v2.2 S336)
-  Note: v2.2 (S336 Task 5+7) — employer draw filters to businesses with room (stated > tracked + same-cycle reservations); no-opening case stamps "seeking work" on the [Adulthood] line; stamps SkillTags via settleSkillTag_
+  Sheets: Household_Ledger
 
 - **checkSchoolQuality_(ss, ctx, cycle)**
   Writes: S.storyHooks
@@ -1073,6 +1082,8 @@
 - **testChicagoCitizenGeneration_()**
 
 ### generateCitizensEvents.js
+- **balanceContentLedgerPoolWeights_(pool)**
+
 - **generateCitizensEvents_(ctx)**
   Reads: S.cityDynamics, S.contentLedger, S.crimeByNeighborhood, S.cycle, S.cycleId, S.economicMood, S.faithEvents, S.holiday, S.holidayPriority, S.initiativeEvents, S.isCreationDay, S.isFirstFriday, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.simYear, S.simulationYear, S.sportsFeedEntries, S.sportsSeason, S.sportsSentimentBoost, S.transitState, S.weather, S.worldEvents
   Writes: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.crimeMetrics, S.cycleActiveCitizens, S.eventsGenerated, S.faithExposures, S.householdMoments, S.localEntities, S.storyHooks, S.templateCooldowns
@@ -1329,9 +1340,9 @@
   Sheets: Citizen_Media_Usage, Generic_Citizens, LifeHistory_Log
 
 - **processAdvancementRows_(ctx, now, cycle)**
-  Sheets: Advancement_Intake, Advancement_Intake1, Generic_Citizens, LifeHistory_Log, Business_Ledger (mint employer pool via buildMintBizPool_, S336 Task 5)
+  Reads: S.careerSignals
+  Sheets: Advancement_Intake, Advancement_Intake1, Generic_Citizens, LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
-  Note: S336 Task 5+7 — minted citizens arrive with a capacity-checked EmployerBizId (intake-carried wins if room, else deterministic seed-hash draw, else "Seeking work" in LifeHistory) + SkillTags stamped via classifyMintSector_; hires register S.careerSignals.businessDeltas
 
 - **processIntakeRows_(ss, now, cycle)**
   Sheets: Intake
@@ -1339,6 +1350,11 @@
 - **decayMediaAttention_(ctx, cycle)**
   Writes: S.tierDecay
   Sheets: Citizen_Media_Usage, LifeHistory_Log
+
+- **classifyMintSector_(role)**
+
+- **buildMintBizPool_(ss)**
+  Sheets: Business_Ledger
 
 - **checkEmergencePromotions_(ss, cycle, maxQueue)**
   Sheets: Advancement_Intake, Advancement_Intake1, Generic_Citizens
@@ -1382,11 +1398,10 @@
 ### runCareerEngine.js
 - **runCareerEngine_(ctx)**
   Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.weather, S.weatherMood, S.worldEvents
-  Writes: S.careerEvents, S.careerSignals (incl. .headcountWriteBack + .rehires, S336), S.eventsGenerated
+  Writes: S.careerEvents, S.careerSignals, S.eventsGenerated
   Config: ctx.config.cycleCount, ctx.config.rngSeed
-  Sheets: Business_Ledger (READ for pools + WRITE Employee_Count via queueCellIntent_, v2.6 S336), LifeHistory_Log
+  Sheets: Business_Ledger, LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
-  Note: v2.6+v2.7 (S336) tail steps, in order — matchUnemployedToOpenings_ (field-matched rehiring: SkillTags vs sectorCategory_, Growth_Rate-derived openings, cross-field rare + logged) then reconcileBusinessHeadcounts_ (businessDeltas move stated headcount; stated-below-tracked fires the difference as Career-Layoff life events, deterministic lowest-level-first)
 
 ### runCivicElectionsv1.js
 - **runCivicElections_(ctx)**
@@ -3330,4 +3345,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 179
-**Functions mapped:** 1117
+**Functions mapped:** 1124

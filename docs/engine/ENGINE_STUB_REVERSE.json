@@ -1,8 +1,8 @@
 {
-  "generated": "2026-07-22",
+  "generated": "2026-07-31",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 179,
-  "functionsMapped": 1117,
+  "functionsMapped": 1124,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -671,6 +671,7 @@
       ],
       "readers": [
         "phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_",
+        "phase01-config/godWorldEngine2.js::emitPhaseTimings_",
         "phase01-config/godWorldEngine2.js::logEngineError_",
         "phase01-config/godWorldEngine2.js::processIntake_",
         "phase01-config/godWorldEngine2.js::runDryRunCycle",
@@ -815,6 +816,15 @@
       ],
       "readers": [
         "phase01-config/godWorldEngine2.js::runWorldCycle"
+      ]
+    },
+    "phaseTimings": {
+      "writers": [
+        "phase01-config/godWorldEngine2.js::recordPhaseTiming_"
+      ],
+      "readers": [
+        "phase01-config/godWorldEngine2.js::emitPhaseTimings_",
+        "phase01-config/godWorldEngine2.js::safePhaseCall_"
       ]
     },
     "faithStorySignals": {
@@ -2699,6 +2709,7 @@
       ],
       "readers": [
         "phase05-citizens/educationCareerEngine.js::settleAdulthood_",
+        "phase05-citizens/processAdvancementIntake.js::processAdvancementRows_",
         "phase06-analysis/economicRippleEngine.js::detectCareerRipples_",
         "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_"
       ]
@@ -3768,6 +3779,7 @@
         "phase05-citizens/educationCareerEngine.js::stampPromotion_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase05-citizens/processAdvancementIntake.js::decayMediaAttention_",
+        "phase05-citizens/runCareerEngine.js::runCareerEngine_",
         "phase05-citizens/runCivicRoleEngine.js::runCivicRoleEngine_",
         "phase05-citizens/runConductEngine.js::runConductEngine_",
         "phase05-citizens/runHouseholdEngine.js::runHouseholdEngine_",
@@ -3964,7 +3976,8 @@
       "writers": [
         "phase04-events/chaosCarsEngine.js::flushBusinessFold_",
         "phase05-citizens/applyChaosDecay.js::applyChaosDecay_",
-        "phase05-citizens/generationalWealthEngine.js::updateHeritage_"
+        "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
+        "phase05-citizens/runCareerEngine.js::runCareerEngine_"
       ],
       "readers": [
         "phase04-events/chaosCarsEngine.js::flushBusinessFold_",
@@ -3975,6 +3988,7 @@
         "phase05-citizens/applyChaosDecay.test.js::ctxWith",
         "phase05-citizens/educationCareerEngine.js::buildSettleBizPool_",
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
+        "phase05-citizens/processAdvancementIntake.js::buildMintBizPool_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
         "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_",
         "phase07-evening-media/buildContractSeeds.js::contractSeedBackdropIndex_",

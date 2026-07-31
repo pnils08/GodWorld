@@ -1,6 +1,6 @@
 # Engine Stub Reverse Index
 
-**Generated:** 2026-07-22 by `scripts/stubEngine.js` (mechanical — no LLM).
+**Generated:** 2026-07-31 by `scripts/stubEngine.js` (mechanical — no LLM).
 
 **Purpose:** Cheap lookup — given an `S.*` field or sheet name, find every function that reads or writes it. Companion to `ENGINE_STUB_MAP.md` (forward: function → fields).
 
@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 179 · **Functions mapped:** 1117 · **S.* fields:** 320 · **Sheets:** 65
+**Files scanned:** 179 · **Functions mapped:** 1124 · **S.* fields:** 321 · **Sheets:** 65
 
 ## S.* / ctx.summary reverse index
 
@@ -45,7 +45,7 @@
 | `S.canonSportsPhase` | `phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_` | _(none)_ | 1 | 0 |
 | `S.careerChurn` | `phase06-analysis/economicRippleEngine.js::detectCareerRipples_` | _(none)_ | 1 | 0 |
 | `S.careerEvents` | `phase05-citizens/runCareerEngine.js::runCareerEngine_` | _(none)_ | 1 | 0 |
-| `S.careerSignals` | `phase05-citizens/runCareerEngine.js::runCareerEngine_` | `phase05-citizens/educationCareerEngine.js::settleAdulthood_`, `phase06-analysis/economicRippleEngine.js::detectCareerRipples_`, `phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_` | 1 | 3 |
+| `S.careerSignals` | `phase05-citizens/runCareerEngine.js::runCareerEngine_` | `phase05-citizens/educationCareerEngine.js::settleAdulthood_`, `phase05-citizens/processAdvancementIntake.js::processAdvancementRows_`, `phase06-analysis/economicRippleEngine.js::detectCareerRipples_`, `phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_` | 1 | 4 |
 | `S.chaosBusinessFold` | `phase04-events/chaosCarsEngine.js::accumulateBusinessEvent_` | `phase04-events/chaosCarsEngine.js::flushBusinessFold_` | 1 | 1 |
 | `S.chaosCarsEvents` | `phase04-events/chaosCarsEngine.js::runChaosCarsEngine_` | `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_` | 1 | 1 |
 | `S.chaosCategoryMap` | `phase02-world-state/calendarChaosWeights.js::applyChaosCategoryWeights_` | _(none)_ | 1 | 0 |
@@ -106,7 +106,7 @@
 | `S.cycleCount` | _(none)_ | `phase04-events/eventArcEngine.js::getCurrentCycle_` | 0 | 1 |
 | `S.cycleFinalizedAt` | `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | `phase09-digest/finalizeCycleState.js::compactInitiativeRipples_` | 1 | 1 |
 | `S.cycleFinalState` | `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | `phase09-digest/finalizeCycleState.js::compactInitiativeRipples_` | 1 | 1 |
-| `S.cycleId` | `phase01-config/godWorldEngine2.js::advanceWorldTime_`, `phase08-v3-chicago/v3Integration.js::v3Integration_` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_`, `phase01-config/godWorldEngine2.js::logEngineError_`, `phase01-config/godWorldEngine2.js::processIntake_`, `phase01-config/godWorldEngine2.js::runDryRunCycle`, `phase01-config/godWorldEngine2.js::writeDigest_`, `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, …(+98 more) | 2 | 104 |
+| `S.cycleId` | `phase01-config/godWorldEngine2.js::advanceWorldTime_`, `phase08-v3-chicago/v3Integration.js::v3Integration_` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_`, `phase01-config/godWorldEngine2.js::emitPhaseTimings_`, `phase01-config/godWorldEngine2.js::logEngineError_`, `phase01-config/godWorldEngine2.js::processIntake_`, `phase01-config/godWorldEngine2.js::runDryRunCycle`, `phase01-config/godWorldEngine2.js::writeDigest_`, …(+99 more) | 2 | 105 |
 | `S.cycleInMonth` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_` | `phase08-v3-chicago/chicagoSatellite.js::chicagoSatelliteEngine_`, `phase08-v3-chicago/v3ChicagoWriter.js::saveV3Chicago_`, `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 1 | 3 |
 | `S.cycleOfYear` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_` | `phase02-world-state/applySeasonWeights.js::applySeasonalWeights_`, `phase02-world-state/applyWeatherModel.js::applyWeatherModel_`, `phase02-world-state/calendarStorySeeds.js::applySeasonalStorySeeds_`, `phase05-citizens/runCivicElectionsv1.js::runCivicElections_`, `phase07-evening-media/mediaRoomBriefingGenerator.js::generateMediaBriefing_`, `phase07-evening-media/storyHook.js::storyHookEngine_`, …(+3 more) | 1 | 9 |
 | `S.cyclePacket` | `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | _(none)_ | 1 | 0 |
@@ -248,6 +248,7 @@
 | `S.patternFlag` | `phase06-analysis/applyPatternDetection.js::applyPatternDetection_`, `phase07-evening-media/storyHook.js::storyHookEngine_` | `phase01-config/godWorldEngine2.js::writeDigest_`, `phase03-population/finalizeWorldPopulation.js::finalizeWorldPopulation_`, `phase04-events/worldEventsEngine.js::worldEventsEngine_`, `phase05-citizens/applyNamedCitizenSpotlight.js::applyNamedCitizenSpotlights_`, `phase06-analysis/applyCivicLoadIndicator.js::applyCivicLoadIndicator_`, `phase06-analysis/applyShockMonitor.js::applyShockMonitor_`, …(+12 more) | 2 | 18 |
 | `S.pendingCascades` | `phase04-events/generationalEventsEngine.js::triggerBirthCascade_`, `phase04-events/generationalEventsEngine.js::triggerDeathCascade_` | `phase04-events/generationalEventsEngine.js::generateGenerationalSummary_` | 2 | 1 |
 | `S.pendingConfrontations` | `phase05-citizens/bondEngine.js::runBondEngine_` | `phase05-citizens/bondEngine.js::generateBondSummary_`, `phase07-evening-media/mediaRoomBriefingGenerator.js::generateMediaBriefing_` | 1 | 2 |
+| `S.phaseTimings` | `phase01-config/godWorldEngine2.js::recordPhaseTiming_` | `phase01-config/godWorldEngine2.js::emitPhaseTimings_`, `phase01-config/godWorldEngine2.js::safePhaseCall_` | 1 | 2 |
 | `S.positiveInitiatives` | `phase05-citizens/civicInitiativeEngine.js::applyInitiativeConsequences_` | `phase07-evening-media/storyHook.js::storyHookEngine_` | 1 | 1 |
 | `S.postCareerEvents` | `phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_` | _(none)_ | 1 | 0 |
 | `S.previousCityDynamics` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_` | _(none)_ | 1 | 0 |
@@ -357,7 +358,7 @@ Sheet detection: `getSheetByName`, `queue*Intent_`, known sheet-name string + wr
 |---|---|---|---:|---:|
 | `Advancement_Intake` | _(none)_ | `phase05-citizens/processAdvancementIntake.js::checkEmergencePromotions_`, `phase05-citizens/processAdvancementIntake.js::checkFamilyMatchPromotions_`, `phase05-citizens/processAdvancementIntake.js::processAdvancementRows_`, `phase07-evening-media/mediaRoomIntake.js::flagCitizenForTierReview_`, `phase07-evening-media/mediaRoomIntake.js::processCategoryEntries_`, …(+2 more) | 0 | 7 |
 | `Advancement_Intake1` | _(none)_ | `phase05-citizens/processAdvancementIntake.js::checkEmergencePromotions_`, `phase05-citizens/processAdvancementIntake.js::checkFamilyMatchPromotions_`, `phase05-citizens/processAdvancementIntake.js::processAdvancementRows_`, `phase07-evening-media/mediaRoomIntake.js::processCategoryEntries_`, `phase07-evening-media/mediaRoomIntake.js::processQuotedCitizens_`, …(+1 more) | 0 | 6 |
-| `Business_Ledger` | `phase04-events/chaosCarsEngine.js::flushBusinessFold_`, `phase05-citizens/applyChaosDecay.js::applyChaosDecay_`, `phase05-citizens/generationalWealthEngine.js::updateHeritage_` | `phase04-events/chaosCarsEngine.js::flushBusinessFold_`, `phase04-events/chaosCarsEngine.js::loadBusinessRows_`, `phase04-events/chaosCarsEngine.test.js::makeCtx`, `phase04-events/chaosCarsEngine.test.js::reset`, `phase05-citizens/applyChaosDecay.js::applyChaosDecay_`, …(+7 more) | 3 | 12 |
+| `Business_Ledger` | `phase04-events/chaosCarsEngine.js::flushBusinessFold_`, `phase05-citizens/applyChaosDecay.js::applyChaosDecay_`, `phase05-citizens/generationalWealthEngine.js::updateHeritage_`, `phase05-citizens/runCareerEngine.js::runCareerEngine_` | `phase04-events/chaosCarsEngine.js::flushBusinessFold_`, `phase04-events/chaosCarsEngine.js::loadBusinessRows_`, `phase04-events/chaosCarsEngine.test.js::makeCtx`, `phase04-events/chaosCarsEngine.test.js::reset`, `phase05-citizens/applyChaosDecay.js::applyChaosDecay_`, …(+8 more) | 4 | 13 |
 | `Chaos_Cars` | _(none)_ | `phase05-citizens/applyChaosDecay.js::applyChaosDecay_` | 0 | 1 |
 | `Chicago_Citizens` | _(none)_ | `phase05-citizens/generateChicagoCitizensv1.js::generateChicagoCitizens_` | 0 | 1 |
 | `Chicago_Feed` | _(none)_ | `phase08-v3-chicago/v3ChicagoWriter.js::saveV3Chicago_`, `utilities/diagnoseDashboardData.js::diagnoseDashboardData` | 0 | 2 |
@@ -394,7 +395,7 @@ Sheet detection: `getSheetByName`, `queue*Intent_`, known sheet-name string + wr
 | `Initiative_Tracker` | `phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_` | `phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_`, `phase05-citizens/civicInitiativeEngine.js::addSwingVoter2Columns`, `phase05-citizens/civicInitiativeEngine.js::createInitiativeTrackerSheet_`, `phase05-citizens/civicInitiativeEngine.js::getInitiativeSummaryForMedia_`, `phase05-citizens/civicInitiativeEngine.js::manualRunVote`, …(+9 more) | 1 | 14 |
 | `Intake` | `phase01-config/godWorldEngine2.js::processIntake_`, `phase05-citizens/processIntakeV3.js::processIntakeV3_`, `phase07-evening-media/mediaRoomIntake.js::routeCitizenUsageToIntake_` | `phase01-config/godWorldEngine2.js::processIntake_`, `phase05-citizens/processAdvancementIntake.js::processIntakeRows_`, `phase05-citizens/processIntakeV3.js::processIntakeV3_`, `phase07-evening-media/mediaRoomIntake.js::processCategoryEntries_`, `phase07-evening-media/mediaRoomIntake.js::processQuotedCitizens_`, …(+1 more) | 3 | 6 |
 | `LifeHistory_Archive` | _(none)_ | `utilities/archiveLifeHistory.js::runArchive_` | 0 | 1 |
-| `LifeHistory_Log` | `phase01-config/godWorldEngine2.js::processIntake_`, `phase04-events/chaosCarsEngine.js::writeCitizenEvent_`, `phase04-events/generateGameModeMicroEvents.js::generateGameModeMicroEvents_`, `phase04-events/generationalEventsEngine.js::applyMilestone_`, `phase05-citizens/educationCareerEngine.js::stampPromotion_`, …(+9 more) | `phase01-config/godWorldEngine2.js::processIntake_`, `phase04-events/chaosCarsEngine.js::writeCitizenEvent_`, `phase04-events/chaosCarsEngine.test.js::reset`, `phase04-events/generateGameModeMicroEvents.js::generateGameModeMicroEvents_`, `phase04-events/generateGenericCitizenMicroEvent.js::generateGenericCitizenMicroEvents_`, …(+29 more) | 14 | 34 |
+| `LifeHistory_Log` | `phase01-config/godWorldEngine2.js::processIntake_`, `phase04-events/chaosCarsEngine.js::writeCitizenEvent_`, `phase04-events/generateGameModeMicroEvents.js::generateGameModeMicroEvents_`, `phase04-events/generationalEventsEngine.js::applyMilestone_`, `phase05-citizens/educationCareerEngine.js::stampPromotion_`, …(+10 more) | `phase01-config/godWorldEngine2.js::processIntake_`, `phase04-events/chaosCarsEngine.js::writeCitizenEvent_`, `phase04-events/chaosCarsEngine.test.js::reset`, `phase04-events/generateGameModeMicroEvents.js::generateGameModeMicroEvents_`, `phase04-events/generateGenericCitizenMicroEvent.js::generateGenericCitizenMicroEvents_`, …(+29 more) | 15 | 34 |
 | `Media_Briefing` | _(none)_ | `phase07-evening-media/mediaRoomBriefingGenerator.js::generateMediaBriefing_` | 0 | 1 |
 | `Media_Intake` | _(none)_ | `phase07-evening-media/mediaRoomIntake.js::processArticleIntake_`, `phase07-evening-media/mediaRoomIntake.js::setupMediaIntakeV2`, `phase07-evening-media/parseMediaRoomMarkdown.js::ensureMediaIntakeSheet_` | 0 | 3 |
 | `Media_Ledger` | _(none)_ | `phase07-evening-media/mediaRoomIntake.js::logCulturalMention_`, `phase07-evening-media/mediaRoomIntake.js::upgradeMediaLedgerWithCalendar_`, `phase10-persistence/recordMediaLedger.js::recordMediaLedger_`, `utilities/ensureMediaLedger.js::ensureMediaLedger_` | 0 | 4 |

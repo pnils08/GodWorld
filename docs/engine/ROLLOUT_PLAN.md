@@ -80,6 +80,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.89 | Oakland sports intake workspace — draft the implementation plan for feed entry, roster-backed current stat lines, Ripple Preview, and the engine.40/engine.77 write boundary | ready | research-build | [[../research/2026-07-27-oakland-sports-feed-entry-dashboard]] + [[../OAKLAND_SPORTS_FEED]] |
 | engine.90 | Citizen Archive — after sports intake, plan the full-row exit archive, permanent POPID allocator/resolver, verified move protocol, and return-with-same-POPID path | blocked | research-build → engine-sheet | [[../research/2026-07-29-citizen-archive]] |
 | engine.91 | Canon ingest backfill & sweep — customId idempotency, deterministic sweep (reporters corpus + Deep Canon Drive), post-publish tail + cron, drive-files scope call | ready | engine-sheet | [[../plans/2026-07-31-canon-ingest-backfill]] |
+| engine.92 | Search-function consolidation — caller-map every consumer FIRST (Mike-direct), then extract shared Supermemory client + disk matcher, repoint ~8 searchSupermemory copies, resolve articles naming split | ready | engine-sheet | [[../SEARCH_FUNCTIONS]] §Consolidation queue |
 
 ### canon.* — World-fidelity layer
 

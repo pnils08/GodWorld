@@ -191,3 +191,21 @@ matrix (L270+).
   Code conversations, observations), not GodWorld world data. Use it to
   recall "what did a past session learn about this file," never to answer "who
   is this citizen" or "what happened in the sim."
+
+## Consolidation queue (engine.92 — map users BEFORE merging)
+
+Known redundancy, filed S345. **Rule (Mike-direct): no consolidation until each
+function's consumers are caller-graphed — never assume what a query is used for
+from its name.** The S345 inventory found same-named functions doing different
+things (`search_articles` vs `articles`; two `search_world`s), so name-based
+merging would break callers silently.
+
+| Candidate | Redundancy | Pre-merge caller map needed |
+|---|---|---|
+| `searchSupermemory` ×~8 | Independently reimplemented in `lib/mags.js` + ~7 `build*Cards.js` scripts; same name, per-file copies, different containers | Which containers/tags each copy targets; which are write-side idempotency checks vs read-side search |
+| Disk matchers ×2 | MCP `disk_search` (phrase-first + AND fallback) vs `lib/mags.js searchDisk` (AND-only); same corpus, drifted semantics + separate rank functions | Bot tool-loop, `discord-reflection.js`, `cron-desk-writer.js` on the mags side; every MCP `search_everything` consumer on the other |
+| `articles` naming | `queryLedger.js articles` (disk grep) vs MCP `search_articles` (dashboard index) — different corpora under one concept | Which skills/agents call each; whether either corpus is a strict superset |
+
+Consolidation shape when it runs: extract shared helpers (one Supermemory search
+client, one disk matcher with a phrase-first flag), repoint copies, keep tool
+names stable. Each repoint ships with its caller-graph evidence in the commit.

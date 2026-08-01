@@ -108,6 +108,60 @@ function bylinePreference(stagedBy, hist) {
   };
 }
 
+// ---------------------------------------------------------------------------
+// Task 2.5.2 (Mike-direct S344) — EIC assignment at rota build. Mags's EIC
+// function is this deterministic step: each rota entry carries an ASSIGNED
+// story seed from the desk_signal lane (engine handles first — the angle the
+// engine itself framed) plus the desk's research-approach prompt. The wakes
+// never pick or invent the angle; the journalist creates the story FROM it.
+// ---------------------------------------------------------------------------
+
+function loadApproachMap() {
+  try { return JSON.parse(fs.readFileSync(path.join(__dirname, 'desk-approach-map.json'), 'utf8')); }
+  catch (_) { return {}; }
+}
+
+// Story refs assigned in prior fanout files for the SAME cycle — a handle
+// assigned earlier this cycle-week cannot reassign (assignment dedup,
+// plan pressure-test #1). Old files without a cycle field never block.
+function assignedStoryRefs(cycle) {
+  const taken = new Set();
+  let files = [];
+  try {
+    files = fs.readdirSync(COMPARE).filter(f => /^fanout-\d{4}-\d{2}-\d{2}\.json$/.test(f));
+  } catch (_) {}
+  for (const f of files) {
+    let j; try { j = JSON.parse(fs.readFileSync(path.join(COMPARE, f), 'utf8')); } catch (_) { continue; }
+    if (String(j.cycle) !== String(cycle)) continue;
+    for (const a of (j.assignments || [])) if (a.story && a.story.ref) taken.add(a.story.ref);
+  }
+  return taken;
+}
+
+// Per-desk seed queue from the desk_signal lane: entries the engine framed a
+// handle for lead (they carry angle + hookLine + affected citizens); the rest
+// of the lane follows so every desk assigns across ALL kinds (anomalies,
+// datawakes, initiatives, sports-feed rows), not audit patterns only.
+function laneSeeds(lane, taken) {
+  const withHandle = [], rest = [];
+  for (const e of (lane || [])) {
+    if (!e || !e.ref || taken.has(e.ref)) continue;
+    (e.handle ? withHandle : rest).push(e);
+  }
+  return withHandle.concat(rest);
+}
+
+function storyFromSeed(e) {
+  const h = e.handle || {};
+  const story = { ref: e.ref, label: e.label || null, kind: e.kind || null };
+  if (h.angle) story.angle = h.angle;
+  if (h.hookLine) story.hookLine = h.hookLine;
+  if (Array.isArray(h.citizens) && h.citizens.length) story.citizens = h.citizens;
+  if (Array.isArray(e.popids) && e.popids.length) story.popids = e.popids;
+  if (e.hood) story.hood = e.hood;
+  return story;
+}
+
 async function buildFanout(date) {
   const { buildBylineRoster } = require(path.join(ROOT, 'scripts', 'engine-auditor', 'bayTribuneRoster'));
   const roster = await buildBylineRoster();
@@ -118,6 +172,13 @@ async function buildFanout(date) {
   const cycle = getCurrentCycle({ soft: true, noArgv: true });
   const stagedBy = cycle === null ? {} : stagedTally(cycle).byByline;
   const personaRev = loadPersonaReverse();
+  // Task 2.5.2: the day's seed material. A missing desk_signal degrades to
+  // approach-only assignments — the rota never blocks on the signal file.
+  const signal = cycle === null ? null
+    : (() => { try { return JSON.parse(fs.readFileSync(path.join(ROOT, 'output', 'desk_signal_c' + cycle + '.json'), 'utf8')); } catch (_) { return null; } })();
+  const lanes = (signal && signal.lanes) || {};
+  const takenRefs = cycle === null ? new Set() : assignedStoryRefs(cycle);
+  const approachMap = loadApproachMap();
   const assignments = [];
   const shortfalls = [];
   const usedToday = new Set();
@@ -127,20 +188,27 @@ async function buildFanout(date) {
     let candidates = pool.filter(j => domains.includes(j.beatDomain));
     if (!candidates.length) candidates = pool.filter(j => j.beatDomain === 'GENERAL');
     candidates.sort(bylinePreference(stagedBy, hist));
+    const seeds = laneSeeds(lanes[desk], takenRefs);
     let taken = 0;
     for (const j of candidates) {
       if (taken >= quota) break;
       if (usedToday.has(j.name)) continue;   // GENERAL pool is shared (sports+business)
       usedToday.add(j.name);
-      assignments.push({
+      const a = {
         desk, name: j.name, popid: j.popid, beatDomain: j.beatDomain,
-        persona: personaRev[j.popid] || null
-      });
+        persona: personaRev[j.popid] || null,
+        approach: approachMap[desk] || approachMap._default || null
+      };
+      // EIC assignment: hand this reporter the next unassigned seed. Seed pool
+      // exhausted -> approach-only open beat (never drops the slot).
+      const seed = seeds.shift();
+      if (seed) { a.story = storyFromSeed(seed); takenRefs.add(seed.ref); }
+      assignments.push(a);
       taken++;
     }
     if (taken < quota) shortfalls.push({ desk, wanted: quota, got: taken });
   }
-  return { date, quotas: DAILY_QUOTAS, assignments, shortfalls, builtAt: new Date().toISOString() };
+  return { date, cycle, quotas: DAILY_QUOTAS, assignments, shortfalls, builtAt: new Date().toISOString() };
 }
 
 function fanoutPath(date) { return path.join(COMPARE, 'fanout-' + date + '.json'); }
@@ -167,10 +235,12 @@ if (require.main === module) {
         (f.shortfalls && f.shortfalls.length ? ' (SHORTFALL: ' + f.shortfalls.map(s => s.desk + ' ' + s.got + '/' + s.wanted).join(', ') + ')' : ''));
       for (const a of f.assignments) {
         console.log('  ' + a.desk.padEnd(9) + a.name.padEnd(18) + (a.popid || '-').padEnd(11) + a.beatDomain + (a.persona ? '  [persona: ' + a.persona + ']' : ''));
+        if (a.story) console.log('           assigned: ' + String(a.story.angle || a.story.label || a.story.ref).slice(0, 110));
       }
       console.log('→ ' + path.relative(ROOT, fanoutPath(f.date)));
     })
     .catch(e => { console.error('fanout failed: ' + e.message); process.exit(1); });
 }
 
-module.exports = { buildFanout, writeFanout, loadFanout, usageHistory, stagedTally, bylinePreference, DAILY_QUOTAS, DESK_DOMAINS };
+module.exports = { buildFanout, writeFanout, loadFanout, usageHistory, stagedTally, bylinePreference,
+  assignedStoryRefs, laneSeeds, storyFromSeed, DAILY_QUOTAS, DESK_DOMAINS };

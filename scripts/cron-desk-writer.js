@@ -495,7 +495,14 @@ async function main() {
       priorArcFinal + strictSourceFinal + ' Output ONLY the section.';
     const r = await callOpenRouter(system, composeUser);
     usageIn += r.usageIn; usageOut += r.usageOut; turns = 1;
-    if (r.text.trim()) toolWriteFile({ path: DESK + '_c' + cycle + '.md', content: r.text });
+    // DeepSeek habitually wraps the whole article in a ``` fence despite "Output
+    // ONLY the section" — a deterministic gate flag (structural, HIGH) that sank
+    // ~8 c102 drafts. Unwrap a single whole-draft fence; inner fences untouched.
+    const unwrapped = (() => {
+      const m = r.text.trim().match(/^```[a-z]*\s*\n([\s\S]*?)\n```\s*$/i);
+      return m ? m[1] : r.text;
+    })();
+    if (unwrapped.trim()) toolWriteFile({ path: DESK + '_c' + cycle + '.md', content: unwrapped });
     else log.warn('OpenRouter returned empty.');
   } else {
     // ANTHROPIC two-phase (Claude Code parity): bounded explore → forced compose.

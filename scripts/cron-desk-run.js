@@ -231,24 +231,28 @@ function budgetReached(cycle) {
   return false;
 }
 
-// Layer 4 — collect the lane's affected citizens (distinct POPIDs, capped) and
-// their reaction ask (keyed to the entry label). Returns the asks + the source map.
-function collectQuoteAsks(lane, persona) {
+// Layer 4 — collect the affected citizens (distinct POPIDs, capped) and their
+// reaction ask. Task 2.5.4: the assigned story's citizens fill the pool FIRST —
+// they are the engine's actual affected residents for this angle — with the
+// lane's popids as fallback. Kills the fabricated-resident class at the root.
+function collectQuoteAsks(lane, persona, story) {
   const asks = [];
   const seen = new Set();
+  const push = (pop, label) => {
+    if (!pop || seen.has(pop) || asks.length >= QUOTE_CITIZEN_CAP) return;
+    seen.add(pop);
+    // Phase 2.3: voice the ask in the persona's register — the question's voice
+    // shapes the answer's friction (the Antigravity/Jax lesson, 2026-07-24).
+    const l = String(label || '').slice(0, 160);
+    const askText = persona
+      ? 'I\'m ' + persona.name + ' — Tribune. Something smells off about "' + l + '" and I\'m not letting it go. What have you seen with your own eyes?'
+      : 'The Tribune is looking into this in your part of Oakland: "' + l + '". Speak about how it touches your life.';
+    asks.push({ pop, ask: askText,
+      record: !NO_GATE, maxTokens: 200 });   // S332: --no-gate SAMPLES never write citizen memory (was unconditional record:true — the layer-4 leak Codex caught)
+  };
+  if (story) for (const pop of (story.popids || [])) push(pop, story.angle || story.label);
   for (const e of lane) {
-    for (const pop of (e.popids || [])) {
-      if (seen.has(pop) || asks.length >= QUOTE_CITIZEN_CAP) continue;
-      seen.add(pop);
-      // Phase 2.3: voice the ask in the persona's register — the question's voice
-      // shapes the answer's friction (the Antigravity/Jax lesson, 2026-07-24).
-      const label = String(e.label || '').slice(0, 160);
-      const askText = persona
-        ? 'I\'m ' + persona.name + ' — Tribune. Something smells off about "' + label + '" and I\'m not letting it go. What have you seen with your own eyes?'
-        : 'The Tribune is looking into this in your part of Oakland: "' + label + '". Speak about how it touches your life.';
-      asks.push({ pop, ask: askText,
-        record: !NO_GATE, maxTokens: 200 });   // S332: --no-gate SAMPLES never write citizen memory (was unconditional record:true — the layer-4 leak Codex caught)
-    }
+    for (const pop of (e.popids || [])) push(pop, e.label);
     if (asks.length >= QUOTE_CITIZEN_CAP) break;
   }
   return asks;
@@ -256,8 +260,32 @@ function collectQuoteAsks(lane, persona) {
 
 // Layer 3 — compose the injected state: byline note + lane pointers + real quotes.
 // This REPLACES the 40k world_summary blob as the writer's injected state.
-function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead) {
+// Task 2.5.2/2.5.3: an assigned story leads the state — the angle is the
+// editor's, the words are the reporter's — and the color doctrine draws the
+// wall: canon facts immutable, scene texture free.
+function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, assignment) {
   const L = [];
+  const story = assignment && assignment.story;
+  if (story) {
+    const brief = citizenBrief(story.citizens);
+    L.push('### YOUR ASSIGNMENT (from your editor — the angle is fixed; the story is yours)');
+    L.push('ANGLE: ' + (story.angle || story.label));
+    if (story.hookLine) L.push('HOOK: ' + story.hookLine);
+    if (brief.names.length) L.push('AFFECTED CITIZENS (real people from the record — your sources): ' + brief.names.join('; '));
+    if (brief.profiles.length) {
+      L.push('WHO THEY ARE (ledger record — these facts are immutable; never contradict them):');
+      for (const p of brief.profiles) L.push('  - ' + p);
+    }
+    if (story.hood) L.push('WHERE: ' + story.hood);
+    if (assignment.approach) L.push('APPROACH: ' + assignment.approach);
+    L.push('');
+    L.push('THE WALL: facts from the record — names, ages, roles, neighborhoods, numbers, events — are');
+    L.push('load-bearing and immutable. Never bend one, never invent a statistic, never import a');
+    L.push('real-world person. Never print internal IDs (POP-numbers) or raw system decimals in prose.');
+    L.push('Everything else is yours: the weather that day, the street sounds, what the block felt');
+    L.push('like. That color is the job — invent it freely so long as it contradicts nothing.');
+    L.push('');
+  }
   if (persona) {
     // Stance anchor (Phase 2.3, 2026-07-24 tuning fix): the injected lane is
     // EVIDENCE, not assignments. Without this the desk framing dilutes the
@@ -299,10 +327,18 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead) {
     L.push('### Citizen sources for this piece — these are REAL people, already interviewed');
     L.push('Quote FROM these people, by name, when you need a resident voice. Do NOT invent other');
     L.push('residents or attribute a quote to anyone not listed here. If you need no quote, use none —');
-    L.push('but never fabricate a source when these are provided.');
+    L.push('but never fabricate a source when these are provided. Never print their ID numbers.');
     L.push('');
+    // POPIDs deliberately absent — "Name (POP-…)" in the state taught the writer
+    // to print literal POPIDs in prose (gate flag class, first 2.5.2 live run).
+    const qProfiles = citizenBrief(quotes.map(q => q.name)).profiles;
     for (const q of quotes) {
-      L.push('- ' + q.name + ' (' + q.pop + '): "' + String(q.quote).replace(/\s+/g, ' ').trim() + '"');
+      L.push('- ' + q.name + ': "' + String(q.quote).replace(/\s+/g, ' ').trim() + '"');
+    }
+    if (qProfiles.length) {
+      L.push('');
+      L.push('Who they are (ledger record — immutable, never contradict):');
+      for (const p of qProfiles) L.push('  - ' + p);
     }
     L.push('');
   } else {
@@ -418,10 +454,26 @@ async function runAngle(assign) {
   const persona = personaInfo(personaSlug);
   const asker = persona || (assign ? { name: assign.name, popid: assign.popid } : null);
   const digest = lane.slice(0, 12).map(e => '- ' + (e.label || '(no label)') + (e.hood ? ' [' + e.hood + ']' : '')).join('\n');
+  // Task 2.5.2/2.5.3 wake-1 shape: an ASSIGNED reporter opens the assignment and
+  // plans the chase in their own voice — they never pick the angle. Personas keep
+  // their authored smells-off stance (persona-only, per the plan's lane note).
+  const story = assign && assign.story;
+  const approach = assign && assign.approach;
   let angleRead = null;
   if (asker) {
-    const ask = 'You\'re ' + asker.name + ', between stories. This is the ' + desk + ' beat\'s raw signal this cycle:\n' + digest +
-      '\n\nWhat\'s smelling off to you? Point at the ONE thing nobody\'s touching — and name who should answer for it.';
+    const brief = story ? citizenBrief(story.citizens) : { names: [], profiles: [] };
+    const ask = (!persona && story)
+      ? 'You\'re ' + asker.name + ', ' + desk + ' desk. Your editor just handed you today\'s assignment:\n' +
+        'ASSIGNED ANGLE: ' + (story.angle || story.label) +
+        (story.hookLine ? '\nHOOK: ' + story.hookLine : '') +
+        (brief.names.length ? '\nAFFECTED CITIZENS (real, from the record): ' + brief.names.join('; ') : '') +
+        (brief.profiles.length ? '\nWHO THEY ARE (ledger — plan around who they actually are):\n' + brief.profiles.map(p => '  - ' + p).join('\n') : '') +
+        (story.hood ? '\nWHERE: ' + story.hood : '') +
+        (approach ? '\n\n' + approach : '') +
+        '\n\nThe angle is fixed — the story is yours to create from it. In your own voice: how do you ' +
+        'chase this today? What will you verify in the record first, and who do you want to talk to?'
+      : 'You\'re ' + asker.name + ', between stories. This is the ' + desk + ' beat\'s raw signal this cycle:\n' + digest +
+        '\n\nWhat\'s smelling off to you? Point at the ONE thing nobody\'s touching — and name who should answer for it.';
     log('asking ' + asker.name + ' (' + asker.popid + ') what smells off...');
     const out = execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
       '--pop=' + asker.popid, '--ask=' + ask, '--cycle=' + cycle, '--json', '--max-tokens=320'],
@@ -441,12 +493,64 @@ async function runAngle(assign) {
   fs.writeFileSync(anglePath, JSON.stringify({
     stage: 'angle', desk, cycle, persona: personaSlug,
     reporter: assign ? { name: assign.name, popid: assign.popid } : null,
+    assignment: story ? { story, approach } : null,   // Task 2.5.2: the EIC assignment rides the handoff
     angleRead,
     lanePicks: lane.slice(0, 5).map(e => ({ label: e.label, kind: e.kind, hood: e.hood, ref: e.ref, popids: e.popids || [] })),
     laneEntries: lane.length,
     ranAt: new Date().toISOString()
   }, null, 2));
   console.log('angle → ' + path.relative(ROOT, anglePath));
+  // Task 2.5.3 — one growing template per story: wake 1 opens it (§1 assignment
+  // + §2 the reporter's plan); wake 2 appends interviews; wake 3 appends the
+  // article pointer. Uniform shape, one inspectable doc per story.
+  storyDocOpen(stem, { desk, cycle, reporter: asker, story, approach, angleRead });
+}
+
+// Task 2.5.3 §3 — the assignment's citizens presented WITH their ledger
+// profiles. Names alone invited invented bios (first live run: the writer made
+// 10-year-old student Tomas Renteria a long-time hardware-store owner); the
+// profile line is the deterministic kill for that class. POPIDs are stripped
+// from every writer-facing surface — literals in prose are a gate flag.
+function citizenBrief(citizens) {
+  const names = (citizens || []).map(c => String(c).replace(/\s*\(POP-[\d]+\)\s*/g, ' ').replace(/\s+/g, ' ').trim()).filter(Boolean);
+  let profiles = [];
+  try { profiles = require('./canon-name-check').profilesFor(names); } catch (_) { /* no snapshot -> names only */ }
+  return { names, profiles };
+}
+
+// ---------------------------------------------------------------------------
+// Task 2.5.3 — the growing story template (docs/media/wake_templates/
+// STORY_TEMPLATE.md defines the shape). Each wake appends its section in order;
+// the doc is the per-story audit trail the Saturday compile reads.
+// ---------------------------------------------------------------------------
+function storyDocPath(stem) { return path.join(COMPARE, stem + 'story.md'); }
+
+function storyDocOpen(stem, s) {
+  const L = [];
+  L.push('# STORY — ' + s.desk + ' c' + s.cycle + (s.reporter ? ' — ' + s.reporter.name : ''));
+  L.push('');
+  L.push('## §1 ASSIGNMENT');
+  if (s.story) {
+    L.push('- ANGLE (assigned by the editor — fixed): ' + (s.story.angle || s.story.label));
+    if (s.story.hookLine) L.push('- HOOK: ' + s.story.hookLine);
+    if (s.story.citizens && s.story.citizens.length) L.push('- AFFECTED CITIZENS: ' + s.story.citizens.join('; '));
+    if (s.story.hood) L.push('- WHERE: ' + s.story.hood);
+    L.push('- SOURCE: ' + s.story.ref);
+  } else {
+    L.push('- OPEN BEAT (no seed this wake) — reporter\'s own read leads.');
+  }
+  if (s.approach) L.push('- DESK APPROACH: ' + s.approach);
+  L.push('');
+  L.push('## §2 THE REPORTER\'S PLAN (wake 1, their own voice)');
+  L.push(s.angleRead && s.angleRead.text ? String(s.angleRead.text).trim() : '(no angle read this wake)');
+  L.push('');
+  try { fs.writeFileSync(storyDocPath(stem), L.join('\n')); } catch (e) { log('story doc open failed (non-fatal): ' + e.message); }
+}
+
+function storyDocAppend(stem, header, body) {
+  const p = storyDocPath(stem);
+  if (!fs.existsSync(p)) return;   // wake 1 didn't open one (old artifact chain) — skip quietly
+  try { fs.appendFileSync(p, '## ' + header + '\n' + body + '\n\n'); } catch (e) { log('story doc append failed (non-fatal): ' + e.message); }
 }
 
 // WAKE 2 — REPORT: persona-voiced questions to the affected citizens (batch
@@ -466,7 +570,12 @@ async function runReport(assign) {
   // voice the asks in the reporter's register even without an authored persona —
   // the question's voice shapes the answer's friction (the Antigravity/Jax lesson)
   const askVoice = persona || (assign ? { name: assign.name } : null);
-  const asks = collectQuoteAsks(lane, askVoice);
+  // Task 2.5.4: the assignment's citizens lead the quote pool. The assignment
+  // rides the angle artifact (wake-1 handoff), so a report wake fired without
+  // today's fanout entry still sees it.
+  const angleArt = readJson(anglePath);
+  const story = (assign && assign.story) || (angleArt && angleArt.assignment && angleArt.assignment.story) || null;
+  const asks = collectQuoteAsks(lane, askVoice, story);
   let quotes = [];
   if (asks.length) {
     log('quote pre-pass (reporter-voiced): ' + asks.length + ' citizen(s)...');
@@ -485,11 +594,17 @@ async function runReport(assign) {
   fs.writeFileSync(packetPath, JSON.stringify({
     stage: 'report', desk, cycle, persona: personaSlug,
     reporter: assign ? { name: assign.name, popid: assign.popid } : null,
+    assignment: story ? { story } : null,   // Task 2.5.4: what the quote pool was seeded from
     angle: path.relative(ROOT, anglePath),
     quotesRequested: asks.length, quotesLanded: quotes.length, quotes,
     ranAt: new Date().toISOString()
   }, null, 2));
   console.log('packet → ' + path.relative(ROOT, packetPath) + ' (' + quotes.length + ' quotes)');
+  // Task 2.5.3 — §3: the interviews land in the growing story doc.
+  storyDocAppend(stem, '§3 INTERVIEWS (wake 2 — real citizens, real quotes)',
+    quotes.length
+      ? quotes.map(q => '- ' + q.name + ' (' + q.pop + '): "' + String(q.quote).replace(/\s+/g, ' ').trim() + '"').join('\n')
+      : '(no quotes landed this wake — write from the record; do not invent residents)');
 }
 
 // WAKE 3 — WRITE (+ gate + route + self-record): requires angle + packet
@@ -526,9 +641,13 @@ async function runWrite(assign) {
   log('byline: ' + (byline ? byline.name + ' (' + byline.popid + (persona ? ', persona' : (assign ? ', fanout ' + byline.beatDomain : ', ' + byline.beatDomain + ', used ' + byline.usageCount)) + ')' : 'NONE — fallback, no self-record'));
 
   const quotes = (packet && packet.quotes) || [];
+  // Task 2.5.2: the assignment reaches the writer — from today's fanout entry,
+  // falling back to the wake-1 angle artifact's copy.
+  const assignment = (assign && assign.story ? { story: assign.story, approach: assign.approach } : null)
+    || (angle && angle.assignment) || null;
   const stateFile = path.join(COMPARE, base + '.state.md');
   fs.writeFileSync(stateFile, buildLaneState(desk, cycle, lane, byline, quotes, persona,
-    angle && angle.angleRead ? angle.angleRead.text : null));
+    angle && angle.angleRead ? angle.angleRead.text : null, assignment));
   log('writing on lane (' + fs.statSync(stateFile).size + ' B injected state' + (persona ? ' + stance anchor' : '') + ')...');
   const artifactTag = writerArtifactTag(assign, personaSlug);
   execFileSync(
@@ -613,6 +732,10 @@ async function runWrite(assign) {
     selfRecord, ranAt: new Date().toISOString()
   };
   fs.writeFileSync(path.join(COMPARE, base + '.wake.json'), JSON.stringify(record, null, 2));
+  // Task 2.5.3 — §4 closes the growing story doc: where the article landed.
+  storyDocAppend(stem, '§4 THE ARTICLE (wake 3)',
+    '- draft: ' + path.relative(ROOT, destPath) + '\n- disposition: ' + record.disposition +
+    (rhea ? '\n- rhea: ' + (rhea.pass ? 'PASS' : 'flagged (' + rhea.flagCount + ')') : ''));
   console.log('\n=== write disposition: ' + record.disposition.toUpperCase() + ' ===');
   console.log(JSON.stringify(record, null, 2));
 }

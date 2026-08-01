@@ -60,7 +60,9 @@ const { CANONICAL_HOODS } = require('../lib/canonNeighborhoods');
 // it's the Oakland Coliseum transit station / sports venue (legitimate
 // infrastructure token), not a neighborhood-canon violation; only the SKILL's
 // "Coliseum District" form is a stray.
-const KNOWN_STRAY_HOODS = ['East Oakland', 'Coliseum District', 'Elmhurst', 'Jingletown'];
+// 'East Oakland' left this list S347 — S328 made it canonical (Mike-direct), so the
+// canonical-guard below already skipped it; the entry was dead weight.
+const KNOWN_STRAY_HOODS = ['Coliseum District', 'Elmhurst', 'Jingletown'];
 
 function loadKnownGaps() {
   try { return JSON.parse(fs.readFileSync(KNOWN_GAPS_PATH, 'utf8')); }

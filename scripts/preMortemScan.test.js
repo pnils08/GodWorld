@@ -58,7 +58,8 @@ console.log('\nTest 5: CANONICAL_HOODS membership');
   assertEq('canon-12 Temescal canonical', CANONICAL_HOODS.has('temescal'), true);
   assertEq('Map-17 Adams Point canonical', CANONICAL_HOODS.has('adams point'), true);
   assertEq('child Lakeshore canonical', CANONICAL_HOODS.has('lakeshore'), true);
-  assertEq('East Oakland NOT canonical (stray)', CANONICAL_HOODS.has('east oakland'), false);
+  // S328 Mike-direct: East Oakland is legit Oakland land mass and is represented.
+  assertEq('East Oakland canonical (S328)', CANONICAL_HOODS.has('east oakland'), true);
   assertEq('Jingletown NOT canonical (stray)', CANONICAL_HOODS.has('jingletown'), false);
 }
 

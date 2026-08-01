@@ -55,6 +55,13 @@ const API_MODEL = arg('--api-model', 'google/gemini-3.5-flash');
 // Evaluation-only verified historical evidence. Default gate behavior is
 // unchanged when absent.
 const EVIDENCE_FILE = arg('--evidence-file', null);
+// Task 2.5.3 (S347): wake-1 validated canon research — facts whose refs were
+// deterministically resolved into published editions/current summary. Passed
+// by cron-desk-run as the angle artifact path; injected as verified PRIOR
+// coverage so the gate stops flagging cited history as a current-cycle
+// contradiction (first live run: both flags on a tool-loop draft were
+// prior-edition facts the draft correctly cited as history).
+const CANON_FACTS_FILE = arg('--canon-facts', null);
 
 const log = {
   info: (...a) => console.log('[INFO]', new Date().toISOString(), ...a),
@@ -325,6 +332,22 @@ async function main() {
     let worldText = fs.existsSync(path.join(ROOT, worldRel)) ? fs.readFileSync(path.join(ROOT, worldRel), 'utf8') : '(world summary missing: ' + worldRel + ')';
     if (priorArcEvidence) {
       worldText += '\n\n' + formatReviewerEvidence(priorArcEvidence.requirement);
+    }
+    // Task 2.5.3 — wake-1 validated canon facts ride into the gate context.
+    // These refs deterministically resolve into the published record; the draft
+    // citing them AS HISTORY is correct journalism, not a contradiction. A past
+    // state presented as CURRENT is still a flag — that rule stays.
+    if (CANON_FACTS_FILE) {
+      try {
+        const angleArt = JSON.parse(fs.readFileSync(path.resolve(ROOT, CANON_FACTS_FILE), 'utf8'));
+        const facts = (angleArt.canonResearch && angleArt.canonResearch.facts) || [];
+        if (facts.length) {
+          worldText += '\n\nVERIFIED PRIOR COVERAGE (wake-1 canon research; every ref resolves into the published record):\n' +
+            facts.map(f => '- ' + f.fact + '  [' + f.ref + ']').join('\n') +
+            '\nThe draft may cite these as prior reporting/history without penalty. Flag ONLY if the draft presents a past state as the CURRENT cycle state or distorts the fact itself.';
+          console.log('canon-facts context: ' + facts.length + ' verified prior-coverage fact(s) injected');
+        }
+      } catch (e) { log.warn('canon-facts load failed (non-fatal): ' + e.message); }
     }
     const profiles = nameCheck ? require('./canon-name-check').profilesFor(nameCheck.verified) : [];
     const { system, user } = buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profiles);

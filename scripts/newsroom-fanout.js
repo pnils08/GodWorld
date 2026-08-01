@@ -142,13 +142,23 @@ function assignedStoryRefs(cycle) {
 // handle for lead (they carry angle + hookLine + affected citizens); the rest
 // of the lane follows so every desk assigns across ALL kinds (anomalies,
 // datawakes, initiatives, sports-feed rows), not audit patterns only.
-function laneSeeds(lane, taken) {
-  const withHandle = [], rest = [];
+// Weekday arc cadence (plan pressure-test #2): Mon/Tue assignments lead with
+// cycle events (engine handles); Wed/Thu lead with FOLLOW-UPS — datawakes,
+// decisions, initiatives, reactions ("what's happened since"), second-day
+// journalism. Other days keep the handle-first default.
+const FOLLOWUP_KINDS = new Set(['civic-datawake', 'decision', 'initiative', 'vote']);
+function laneSeeds(lane, taken, date) {
+  const withHandle = [], followups = [], rest = [];
   for (const e of (lane || [])) {
     if (!e || !e.ref || taken.has(e.ref)) continue;
-    (e.handle ? withHandle : rest).push(e);
+    if (e.handle) withHandle.push(e);
+    else if (FOLLOWUP_KINDS.has(e.kind)) followups.push(e);
+    else rest.push(e);
   }
-  return withHandle.concat(rest);
+  const dow = date ? new Date(date + 'T12:00:00Z').getUTCDay() : 0;
+  return (dow === 3 || dow === 4)                       // Wed/Thu: follow-ups lead
+    ? followups.concat(withHandle, rest)
+    : withHandle.concat(followups, rest);
 }
 
 function storyFromSeed(e) {
@@ -188,7 +198,7 @@ async function buildFanout(date) {
     let candidates = pool.filter(j => domains.includes(j.beatDomain));
     if (!candidates.length) candidates = pool.filter(j => j.beatDomain === 'GENERAL');
     candidates.sort(bylinePreference(stagedBy, hist));
-    const seeds = laneSeeds(lanes[desk], takenRefs);
+    const seeds = laneSeeds(lanes[desk], takenRefs, date);
     let taken = 0;
     for (const j of candidates) {
       if (taken >= quota) break;

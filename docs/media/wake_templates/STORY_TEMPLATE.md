@@ -21,7 +21,14 @@ scene texture, weather, unnamed street life are the reporter's to invent freely
 so long as nothing contradicts. Additive invention IS the product; contradiction
 and real-world import are the only sins.
 
-**Open (rest of 2.5.3, not yet built):** §2 canon-search enforcement (minimum 3
-cited canon facts, ≥2 sources, ≥1 predating the cycle — needs the script-side
-material pack), the media-room wire pulse, and the wake-3 self-scoring footer.
-Tracked in the plan's Task 2.5.3 verify list.
+**All 2.5.3 mechanics live (S347):** §2b canon research — the script gathers the
+floor (edition grep + world-summary slices + evidence ref), the model selects
+≥3 facts through the bounded tool loop, and a deterministic validator enforces
+count / resolving refs / ≥2 sources / ≥1 pre-cycle deep thread (script-fallback
+on double failure, never blocks the wake). Wire pulse — staged filings prepend
+one line under `## Newsroom wire` in `production_log_c{XX}.md`; wake 3 reads it
+(don't re-report). Self-scoring footer — the `<!-- SELF-SCORE: … -->` comment,
+checked deterministically into `wake.json` (`footerPresent`); the Saturday
+compile scores against it. Wake-1 validated facts also ride into the Rhea gate
+(`--canon-facts`) as verified prior coverage — cited history is not a
+current-cycle contradiction.

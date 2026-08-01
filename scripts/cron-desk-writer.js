@@ -293,16 +293,11 @@ function callModel(client, system, messages) {
     { timeout: CALL_TIMEOUT_MS, maxRetries: 2 });
 }
 
-// OpenRouter (OpenAI-compatible) — compose-only path for the cheap-model sweep
-// (research.25 Thread B). No tool loop: full world state is injected into the
-// prompt, and OpenAI-format tool-calling differs from Anthropic's — for a
-// creative-WRITING comparison, compose-from-injected-state is the fair unit.
-function callOpenRouter(system, userContent) {
+// OpenRouter (OpenAI-compatible) raw POST — shared by the compose call and the
+// Task 2.5.5 tool loop. Returns the parsed response body.
+function callOpenRouterRaw(payloadObj) {
   return new Promise((resolve, reject) => {
-    const payload = JSON.stringify({
-      model: MODEL, max_tokens: MAX_TOKENS,
-      messages: [{ role: 'system', content: system }, { role: 'user', content: userContent }]
-    });
+    const payload = JSON.stringify(payloadObj);
     const req = https.request({
       hostname: 'openrouter.ai', path: '/api/v1/chat/completions', method: 'POST',
       headers: {
@@ -319,9 +314,7 @@ function callOpenRouter(system, userContent) {
         try {
           const j = JSON.parse(data);
           if (j.error) return reject(new Error('OpenRouter: ' + (j.error.message || JSON.stringify(j.error))));
-          const text = (j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || '';
-          const u = j.usage || {};
-          resolve({ text, usageIn: u.prompt_tokens || 0, usageOut: u.completion_tokens || 0 });
+          resolve(j);
         } catch (e) { reject(new Error('OpenRouter parse: ' + e.message + ' | ' + data.slice(0, 300))); }
       });
     });
@@ -329,6 +322,97 @@ function callOpenRouter(system, userContent) {
     req.write(payload); req.end();
   });
 }
+
+// ---------------------------------------------------------------------------
+// Task 2.5.5 — reporter tool-loop on the OpenRouter path: the script guarantees
+// the research FLOOR (injected state — no wake starts empty); this loop is how
+// the reporter digs PAST it. OpenAI-format function calling (DeepSeek supports
+// it): model requests, script executes, model reads, repeats — bounded, read-
+// only. Every call is traced (pressure-test #5: the scoreboard needs to know
+// whether the writer actually digs or ignores the tools).
+// Deferred from the plan's tool list: `memory` (own Supermemory container) —
+// no per-reporter containers exist yet; add when they do.
+// ---------------------------------------------------------------------------
+const OPENROUTER_TOOLS = [
+  { type: 'function', function: { name: 'canon_search', description: 'Ranked keyword search across the city records on disk — published editions, citizens, businesses, world summaries, staged past work. Use for canon depth and prior coverage.', parameters: { type: 'object', properties: { query: { type: 'string', description: 'keywords, e.g. "Fruitvale transit"' } }, required: ['query'] } } },
+  { type: 'function', function: { name: 'citizen_lookup', description: 'Exact citizen lookup in the simulation ledger by name. Returns the canonical profile (role, neighborhood, birth year) — these facts are immutable.', parameters: { type: 'object', properties: { name: { type: 'string', description: 'full name, e.g. "Lucia Polito"' } }, required: ['name'] } } },
+  { type: 'function', function: { name: 'sheet_read', description: 'Read a bounded slice of one allowlisted live city sheet: Initiative_Tracker, Neighborhood_Map, Oakland_Sports_Feed, Civic_Office_Ledger.', parameters: { type: 'object', properties: { tab: { type: 'string' } }, required: ['tab'] } } }
+];
+const SHEET_READ_ALLOWLIST = ['Initiative_Tracker', 'Neighborhood_Map', 'Oakland_Sports_Feed', 'Civic_Office_Ledger'];
+
+function toolCitizenLookup(input) {
+  try {
+    const { profilesFor } = require('./canon-name-check');
+    const rows = profilesFor([String(input.name || '')]);
+    return rows.length ? rows.join('\n') : 'No ledger citizen named "' + input.name + '". Do not use this name as a person.';
+  } catch (e) { return '(citizen lookup failed: ' + e.message + ')'; }
+}
+
+async function toolSheetRead(input) {
+  const tab = String(input.tab || '').trim();
+  if (!SHEET_READ_ALLOWLIST.includes(tab)) return 'tab not allowed. Allowed: ' + SHEET_READ_ALLOWLIST.join(', ');
+  try {
+    const sheets = require('../lib/sheets');
+    const data = await sheets.getRawSheetData(tab);
+    return cap(data.slice(0, 40).map(r => r.join(' | ')).join('\n'), 6000);
+  } catch (e) { return '(sheet read failed: ' + e.message + ')'; }
+}
+
+async function execOpenRouterTool(name, input) {
+  if (name === 'canon_search') return toolSearchWorld({ query: input.query });
+  if (name === 'citizen_lookup') return toolCitizenLookup(input);
+  if (name === 'sheet_read') return toolSheetRead(input);
+  return 'unknown tool ' + name;
+}
+
+// Bounded explore-then-compose loop. Returns { text, usageIn, usageOut, trace }.
+// trace: [{tool, input, resultChars}] — read-only tools only, cap enforced.
+async function openRouterToolLoop(opts) {
+  const model = opts.model || MODEL;
+  const maxCalls = opts.maxToolCalls || 6;
+  const messages = [{ role: 'system', content: opts.system }, { role: 'user', content: opts.user }];
+  const trace = [];
+  let usageIn = 0, usageOut = 0, calls = 0;
+  for (let turn = 0; turn < maxCalls + 2; turn++) {
+    const toolsOn = calls < maxCalls;
+    const j = await callOpenRouterRaw({
+      model, max_tokens: opts.maxTokens || MAX_TOKENS, messages,
+      ...(toolsOn ? { tools: OPENROUTER_TOOLS } : {})
+    });
+    const msg = (j.choices && j.choices[0] && j.choices[0].message) || {};
+    const u = j.usage || {};
+    usageIn += u.prompt_tokens || 0; usageOut += u.completion_tokens || 0;
+    if (toolsOn && Array.isArray(msg.tool_calls) && msg.tool_calls.length) {
+      messages.push(msg);
+      for (const tc of msg.tool_calls) {
+        let input = {};
+        try { input = JSON.parse(tc.function.arguments || '{}'); } catch (_) {}
+        const result = calls < maxCalls
+          ? String(await execOpenRouterTool(tc.function.name, input))
+          : 'tool budget exhausted — compose from what you have.';
+        calls++;
+        trace.push({ tool: tc.function.name, input, resultChars: result.length });
+        messages.push({ role: 'tool', tool_call_id: tc.id, content: cap(result, 8000) });
+      }
+      continue;
+    }
+    return { text: msg.content || '', usageIn, usageOut, trace };
+  }
+  return { text: '', usageIn, usageOut, trace };
+}
+
+// OpenRouter compose call (kept for the scorer + fact-selection callers).
+function callOpenRouter(system, userContent) {
+  return callOpenRouterRaw({
+    model: MODEL, max_tokens: MAX_TOKENS,
+    messages: [{ role: 'system', content: system }, { role: 'user', content: userContent }]
+  }).then(j => {
+    const text = (j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || '';
+    const u = j.usage || {};
+    return { text, usageIn: u.prompt_tokens || 0, usageOut: u.completion_tokens || 0 };
+  });
+}
+
 
 // Per-run scorecard scoring pass (Feedback1.txt, S325). A lightweight self-score
 // (voice / facts / hallucinations / word-count) — NOT the authoritative canon
@@ -484,17 +568,25 @@ async function main() {
   let usageIn = 0, usageOut = 0, turns = 0;
 
   if (PROVIDER === 'openrouter') {
-    // COMPOSE-ONLY on the full injected world state (Thread B cheap-model sweep).
-    // No tool loop: full state is already in the prompt, and OpenAI-format tool
-    // calling differs from Anthropic's — for a creative-WRITING comparison, the
-    // fair unit is compose-from-injected-state, holding inputs constant.
-    log.info('compose-only via OpenRouter (' + MODEL + ') on full injected world state...');
+    // Task 2.5.5 — explore-then-compose with the bounded read-only tool loop.
+    // The injected state is the guaranteed FLOOR; the tools are how the
+    // reporter digs past it (canon_search / citizen_lookup / sheet_read,
+    // max 6 calls, every call traced). Supersedes the Thread-B compose-only
+    // design — the comparison era is over, this is the production wake.
+    log.info('tool-loop write via OpenRouter (' + MODEL + '), max 6 calls...');
     const composeUser = kickoff +
-      '\n\nNow WRITE the full ' + DESK + ' section for cycle ' + cycle + ' — the complete, publish-ready ' +
-      'markdown, built ONLY from the events/names/records in the world state above.' +
+      '\n\nWRITE the full ' + DESK + ' section for cycle ' + cycle + ' — the complete, publish-ready ' +
+      'markdown, built ONLY from the events/names/records in the world state above plus what your tools ' +
+      'return. Use your tools FIRST where the state runs thin — verify a citizen before characterizing ' +
+      'them, search prior coverage for depth — then compose.' +
       priorArcFinal + strictSourceFinal + ' Output ONLY the section.';
-    const r = await callOpenRouter(system, composeUser);
-    usageIn += r.usageIn; usageOut += r.usageOut; turns = 1;
+    const r = await openRouterToolLoop({ model: MODEL, system, user: composeUser, maxToolCalls: 6 });
+    usageIn += r.usageIn; usageOut += r.usageOut; turns = 1 + r.trace.length;
+    try {
+      const traceName = (ARTIFACT_TAG ? DESK + '_c' + cycle + '_' + ARTIFACT_TAG : DESK + '_c' + cycle) + '.tooltrace.json';
+      fs.writeFileSync(path.join(COMPARE_DIR, traceName), JSON.stringify({ model: MODEL, calls: r.trace, ranAt: new Date().toISOString() }, null, 2));
+      log.info('tool trace: ' + r.trace.length + ' call(s) → ' + traceName);
+    } catch (e) { log.warn('tool trace write failed: ' + e.message); }
     // DeepSeek habitually wraps the whole article in a ``` fence despite "Output
     // ONLY the section" — a deterministic gate flag (structural, HIGH) that sank
     // ~8 c102 drafts. Unwrap a single whole-draft fence; inner fences untouched.
@@ -617,4 +709,6 @@ module.exports = {
   normalizeArtifactTag,
   buildOutputSlug,
   formatStrictSourceHygiene,
+  openRouterToolLoop,      // Task 2.5.5 — shared by the wake-1 fact selection (cron-desk-run.js)
+  callOpenRouterRaw,
 };

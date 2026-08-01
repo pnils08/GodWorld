@@ -310,6 +310,11 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
     }
     if (story.hood) L.push('WHERE: ' + story.hood);
     if (assignment.approach) L.push('APPROACH: ' + assignment.approach);
+    if (assignment.canonFacts && assignment.canonFacts.length) {
+      L.push('');
+      L.push('CANON FACTS (researched wake 1 — validated against the record; cite them, never bend them):');
+      for (const f of assignment.canonFacts) L.push('  - ' + f.fact + '  [' + f.ref + ']');
+    }
     L.push('');
     L.push('THE WALL: facts from the record — names, ages, roles, neighborhoods, numbers, events — are');
     L.push('load-bearing and immutable. Never bend one, never invent a statistic, never import a');
@@ -379,6 +384,18 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
     L.push('storyline facts and official record only; leave resident reaction as an open question.');
     L.push('');
   }
+  // Task 2.5.3 — the room's wire: what colleagues already filed this cycle.
+  const wire = readWire(cycle, 10);
+  if (wire.length) {
+    L.push('### The room\'s wire — already filed this cycle (do NOT re-report these; new angles only)');
+    for (const w of wire) L.push(w);
+    L.push('');
+  }
+  // Task 2.5.3 — self-scoring footer (pressure-test #6): declared, machine-
+  // checkable, stripped before publication by the Saturday compile.
+  L.push('END your article with this exact one-line footer (working metadata, not prose):');
+  L.push('<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->');
+  L.push('');
   return L.join('\n');
 }
 
@@ -520,12 +537,20 @@ async function runAngle(assign) {
     angleRead = { name: r.name, popid: r.popId, text: r.text };
     log('angle read: "' + String(r.text).replace(/\s+/g, ' ').slice(0, 140) + '..."');
   }
+  // Task 2.5.3 §2 — canon research through the 2.5.5 tool loop, validated
+  // deterministically. Non-fatal: a research failure never kills the wake.
+  let canonResearch = null;
+  if (!persona && story) {
+    try { canonResearch = await runCanonResearch(cycle, desk, story, asker); }
+    catch (e) { log('canon research failed (non-fatal): ' + e.message); }
+  }
   const anglePath = path.join(COMPARE, stem + 'angle.json');
   fs.mkdirSync(COMPARE, { recursive: true });
   fs.writeFileSync(anglePath, JSON.stringify({
     stage: 'angle', desk, cycle, persona: personaSlug,
     reporter: assign ? { name: assign.name, popid: assign.popid } : null,
     assignment: story ? { story, approach } : null,   // Task 2.5.2: the EIC assignment rides the handoff
+    canonResearch,                                    // Task 2.5.3 §2: ≥3 validated canon facts + tool trace
     angleRead,
     lanePicks: lane.slice(0, 5).map(e => ({ label: e.label, kind: e.kind, hood: e.hood, ref: e.ref, popids: e.popids || [] })),
     laneEntries: lane.length,
@@ -536,6 +561,14 @@ async function runAngle(assign) {
   // + §2 the reporter's plan); wake 2 appends interviews; wake 3 appends the
   // article pointer. Uniform shape, one inspectable doc per story.
   storyDocOpen(stem, { desk, cycle, reporter: asker, story, approach, angleRead });
+  if (canonResearch) {
+    storyDocAppend(stem, '§2b CANON RESEARCH (wake 1 — validated, refs resolve, ≥1 deep thread)',
+      canonResearch.facts.map(f => '- ' + f.fact + '\n  ref: ' + f.ref).join('\n') +
+      '\n\nselection: ' + canonResearch.source +
+      (canonResearch.trace.length
+        ? '\ntool trace (2.5.5 scoreboard): ' + canonResearch.trace.map(t => t.tool + '(' + JSON.stringify(t.input) + ')→' + t.resultChars + 'ch').join('; ')
+        : '\ntool trace: none — composed from the gathered floor'));
+  }
 }
 
 // Task 2.5.3 §3 — the assignment's citizens presented WITH their ledger
@@ -548,6 +581,152 @@ function citizenBrief(citizens) {
   let profiles = [];
   try { profiles = require('./canon-name-check').profilesFor(names); } catch (_) { /* no snapshot -> names only */ }
   return { names, profiles };
+}
+
+// ---------------------------------------------------------------------------
+// Task 2.5.3 §2 — canon research, mechanically enforced. The raw-API model
+// cannot search on its own initiative alone, so the SCRIPT gathers the floor
+// (edition-archive grep + world-summary slices + the assignment's evidence
+// ref) and the model selects + cites its facts through the bounded 2.5.5 tool
+// loop — digging PAST the floor is the point. The depth validator is the
+// deterministic wall: ≥3 facts, every ref resolves, ≥2 distinct sources,
+// ≥1 predating the current cycle (pressure-test #3 — same-paragraph citation
+// gaming fails).
+// ---------------------------------------------------------------------------
+function grepLines(args, capN) {
+  try {
+    const out = execFileSync('grep', args, { cwd: ROOT, encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 });
+    return out.split('\n').filter(Boolean).slice(0, capN);
+  } catch (_) { return []; }   // grep exit 1 = no match
+}
+
+function gatherCanonCandidates(cycle, story) {
+  const terms = [];
+  if (story.hood) terms.push(...String(story.hood).split(',').map(s => s.trim()).filter(Boolean));
+  const { profilesFor } = require('./canon-name-check');
+  const names = (story.citizens || []).map(c => String(c).replace(/\s*\(POP-[\d]+\)\s*/g, '').trim()).filter(Boolean);
+  const lines = [];
+  for (const t of terms.slice(0, 2)) {
+    for (const l of grepLines(['-rni', '-m', '2', '--include=*.txt', '--', t, 'editions'], 6)) lines.push(l);
+  }
+  for (const n of names.slice(0, 3)) {
+    for (const l of grepLines(['-rni', '-m', '1', '--include=*.txt', '--', n, 'editions'], 3)) lines.push(l);
+  }
+  for (const t of terms.slice(0, 1)) {
+    for (const l of grepLines(['-ni', '-m', '4', '--', t, 'output/world_summary_c' + cycle + '.md'], 4)) {
+      lines.push('output/world_summary_c' + cycle + '.md:' + l);
+    }
+  }
+  const profiles = profilesFor(names);
+  return { lines: [...new Set(lines)].slice(0, 16), profiles };
+}
+
+// ref shapes accepted: "editions/foo.txt:123: text", "output/world_summary_c102.md:9",
+// or the assignment's own evidence ref. A ref resolves when its file exists.
+function refFile(ref) {
+  const head = String(ref || '').split(/[\s;]/)[0];
+  return head.split(':')[0];
+}
+function refCycleNum(ref) {
+  const m = String(ref || '').match(/_c?(\d+)[_.]/) || String(ref || '').match(/c(\d+)/i);
+  return m ? parseInt(m[1], 10) : null;
+}
+function validateCanonFacts(facts, cycle, storyRef) {
+  const errs = [];
+  const list = Array.isArray(facts) ? facts.filter(f => f && f.fact && f.ref) : [];
+  if (list.length < 3) errs.push('fewer than 3 facts with fact+ref');
+  const files = new Set();
+  let priorCount = 0;
+  for (const f of list) {
+    const file = refFile(f.ref);
+    const isStoryRef = storyRef && String(f.ref).startsWith(refFile(storyRef));
+    if (!isStoryRef && !fs.existsSync(path.join(ROOT, file))) errs.push('ref does not resolve: ' + f.ref);
+    files.add(file);
+    const cn = refCycleNum(f.ref);
+    if (cn !== null && cn < parseInt(cycle, 10)) priorCount++;
+  }
+  if (files.size < 2) errs.push('facts span fewer than 2 distinct sources');
+  if (!priorCount) errs.push('no fact predates the current cycle (deep-thread rule)');
+  return { ok: errs.length === 0, errs, facts: list };
+}
+
+async function runCanonResearch(cycle, desk, story, reporter) {
+  const { openRouterToolLoop } = require('./cron-desk-writer');
+  const cand = gatherCanonCandidates(cycle, story);
+  const material = [
+    'CANDIDATE MATERIAL (each line is "file:line: text" — usable as a ref):',
+    ...cand.lines.map(l => '- ' + l.slice(0, 300)),
+    '',
+    'LEDGER PROFILES (immutable):',
+    ...cand.profiles.map(p => '- ' + p),
+    '',
+    'ASSIGNMENT EVIDENCE REF (usable as a ref): ' + story.ref
+  ].join('\n');
+  const system = 'You are a newsroom researcher. You verify against the record and cite precisely. Return ONLY strict JSON.';
+  const user = 'Assignment (' + desk + ' desk): ' + (story.angle || story.label) +
+    (story.hood ? ' — ' + story.hood : '') + '\n\n' + material +
+    '\n\nSelect AT LEAST 3 canon facts that ground this assignment — current AND deep threads. Rules:\n' +
+    '- every fact carries a ref: a file:line from the material, the assignment evidence ref, or a file you found via canon_search\n' +
+    '- facts must span at least 2 distinct source files\n' +
+    '- at least 1 fact must come from a PAST cycle (an earlier edition or earlier-cycle file)\n' +
+    '- use canon_search to dig past the material where it runs thin\n' +
+    'Return ONLY JSON: {"facts":[{"fact":"...","ref":"..."}]}';
+  let trace = [];
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const r = await openRouterToolLoop({ model: 'deepseek/deepseek-chat', system, user, maxToolCalls: 3, maxTokens: 900 });
+    trace = trace.concat(r.trace);
+    let parsed = null;
+    try {
+      const m = String(r.text).match(/\{[\s\S]*\}/);
+      parsed = m ? JSON.parse(m[0]) : null;
+    } catch (_) {}
+    const v = validateCanonFacts(parsed && parsed.facts, cycle, story.ref);
+    if (v.ok) return { facts: v.facts, source: 'model', trace };
+    log('[research] attempt ' + (attempt + 1) + ' failed validation: ' + v.errs.join('; '));
+  }
+  // Deterministic fallback — the floor itself, validator-passing by construction:
+  // one edition line (prior cycle), one world-summary line (current), the evidence ref.
+  const fallback = [];
+  const editionLine = cand.lines.find(l => l.startsWith('editions/'));
+  const summaryLine = cand.lines.find(l => l.startsWith('output/world_summary'));
+  if (editionLine) fallback.push({ fact: editionLine.split(':').slice(2).join(':').trim().slice(0, 200), ref: editionLine.split(':').slice(0, 2).join(':') });
+  if (summaryLine) fallback.push({ fact: summaryLine.split(':').slice(2).join(':').trim().slice(0, 200), ref: summaryLine.split(':').slice(0, 2).join(':') });
+  fallback.push({ fact: story.label || story.angle, ref: story.ref });
+  const v = validateCanonFacts(fallback, cycle, story.ref);
+  return { facts: fallback, source: 'script-fallback' + (v.ok ? '' : ' (validator: ' + v.errs.join('; ') + ')'), trace };
+}
+
+// ---------------------------------------------------------------------------
+// Task 2.5.3 — media-room wire pulse: every STAGED filing appends a one-line
+// entry to the cycle's production log (newest first, under one AUTO header);
+// wake 3 reads the current wire so each writer knows what the room already
+// filed (kills five-articles-one-story). Sim clock only — no Gregorian dates.
+// ---------------------------------------------------------------------------
+const WIRE_HEADER = '## Newsroom wire (AUTO — cron-desk-run.js)';
+function wirePath(cycle) { return path.join(ROOT, 'output', 'production_log_c' + cycle + '.md'); }
+function appendWireEntry(cycle, line) {
+  try {
+    const p = wirePath(cycle);
+    let txt = fs.existsSync(p) ? fs.readFileSync(p, 'utf8') : '# Production log — C' + cycle + '\n';
+    if (!txt.includes(WIRE_HEADER)) txt = txt.trimEnd() + '\n\n' + WIRE_HEADER + '\n';
+    const lines = txt.split('\n');
+    lines.splice(lines.findIndex(l => l.trim() === WIRE_HEADER) + 1, 0, line);
+    fs.writeFileSync(p, lines.join('\n'));
+  } catch (e) { log('wire append failed (non-fatal): ' + e.message); }
+}
+function readWire(cycle, max) {
+  try {
+    const txt = fs.readFileSync(wirePath(cycle), 'utf8');
+    const lines = txt.split('\n');
+    const start = lines.findIndex(l => l.trim() === WIRE_HEADER);
+    if (start < 0) return [];
+    const out = [];
+    for (let i = start + 1; i < lines.length && out.length < (max || 12); i++) {
+      if (/^## /.test(lines[i])) break;
+      if (lines[i].trim().startsWith('- ')) out.push(lines[i].trim());
+    }
+    return out;
+  } catch (_) { return []; }
 }
 
 // ---------------------------------------------------------------------------
@@ -674,9 +853,13 @@ async function runWrite(assign) {
 
   const quotes = (packet && packet.quotes) || [];
   // Task 2.5.2: the assignment reaches the writer — from today's fanout entry,
-  // falling back to the wake-1 angle artifact's copy.
+  // falling back to the wake-1 angle artifact's copy. The wake-1 canon facts
+  // (2.5.3 §2) ride along whichever path supplied the assignment.
   const assignment = (assign && assign.story ? { story: assign.story, approach: assign.approach } : null)
     || (angle && angle.assignment) || null;
+  if (assignment && angle && angle.canonResearch && Array.isArray(angle.canonResearch.facts)) {
+    assignment.canonFacts = angle.canonResearch.facts;
+  }
   const stateFile = path.join(COMPARE, base + '.state.md');
   fs.writeFileSync(stateFile, buildLaneState(desk, cycle, lane, byline, quotes, persona,
     angle && angle.angleRead ? angle.angleRead.text : null, assignment));
@@ -702,7 +885,11 @@ async function runWrite(assign) {
     log('gating...');
     try {
       execFileSync('node', [path.join(ROOT, 'scripts', 'cron-rhea-gate.js'), '--draft', path.relative(ROOT, draftPath),
-        '--model', GATE_MODEL, '--backend', GATE_BACKEND, '--api-model', GATE_API_MODEL, '--cycle', cycle], { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
+        '--model', GATE_MODEL, '--backend', GATE_BACKEND, '--api-model', GATE_API_MODEL, '--cycle', cycle,
+        // Task 2.5.3: wake-1 validated canon facts ride into the gate as
+        // verified prior coverage (cited history is not a contradiction).
+        ...(angle && angle.canonResearch ? ['--canon-facts', path.relative(ROOT, anglePath)] : [])],
+        { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
     } catch (_) { /* gate exit 2/3 — verdict json still written */ }
     rhea = readJson(path.join(COMPARE, base + '.rhea.json'));
     pass = rhea && rhea.pass === true;
@@ -732,6 +919,10 @@ async function runWrite(assign) {
       note: 'M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.',
       stagedAt: new Date().toISOString()
     }, null, 2));
+    // Task 2.5.3 — wire pulse: the staged filing hits the room's wire.
+    const headline = String(fs.readFileSync(draftPath, 'utf8').split('\n').find(l => l.trim()) || '')
+      .replace(/^#+\s*/, '').replace(/[*_`]/g, '').slice(0, 90).trim();
+    appendWireEntry(cycle, '- c' + cycle + ' ' + desk + ' | ' + (byline ? byline.name : 'desk') + ': "' + headline + '" (staged)');
   } else {
     fs.writeFileSync(path.join(FLAGGED, base + '.flags.json'),
       JSON.stringify({ draft: draftName, flags: (rhea && rhea.flags) || [], summary: (rhea && rhea.summary) || 'no rhea verdict' }, null, 2));
@@ -753,6 +944,10 @@ async function runWrite(assign) {
     } catch (e) { selfRecord = { recorded: false, reason: e.status === 2 ? 'no-dials (fallback)' : e.message }; log('self-record fallback: ' + (selfRecord.reason)); }
   }
 
+  // Task 2.5.3 — self-scoring footer check (pressure-test #6, deterministic).
+  const footerPresent = /<!--\s*SELF-SCORE:/.test(fs.readFileSync(draftPath, 'utf8'));
+  // Task 2.5.5 — tool-use scoreboard column (pressure-test #5): did the writer dig?
+  const traceArt = readJson(path.join(COMPARE, (artifactTag ? desk + '_c' + cycle + '_' + artifactTag : desk + '_c' + cycle) + '.tooltrace.json'));
   const record = {
     mode: 'wake-write', desk, cycle, provider: route.provider, model: route.model, gateModel: GATE_BACKEND === 'api' ? GATE_API_MODEL : GATE_MODEL,
     persona: personaSlug,
@@ -760,6 +955,8 @@ async function runWrite(assign) {
     laneEntries: lane.length, quotesLanded: quotes.length,
     disposition: NO_GATE ? 'ungated-sample' : (pass ? 'staged' : 'flagged'),
     rheaPass: rhea ? rhea.pass : null, rheaFlagCount: rhea ? rhea.flagCount : null,
+    footerPresent,
+    toolUse: traceArt ? traceArt.calls.map(t => t.tool) : [],
     article: path.relative(ROOT, destPath),
     selfRecord, ranAt: new Date().toISOString()
   };
@@ -767,7 +964,9 @@ async function runWrite(assign) {
   // Task 2.5.3 — §4 closes the growing story doc: where the article landed.
   storyDocAppend(stem, '§4 THE ARTICLE (wake 3)',
     '- draft: ' + path.relative(ROOT, destPath) + '\n- disposition: ' + record.disposition +
-    (rhea ? '\n- rhea: ' + (rhea.pass ? 'PASS' : 'flagged (' + rhea.flagCount + ')') : ''));
+    (rhea ? '\n- rhea: ' + (rhea.pass ? 'PASS' : 'flagged (' + rhea.flagCount + ')') : '') +
+    '\n- self-score footer: ' + (footerPresent ? 'present' : 'MISSING') +
+    '\n- tool use: ' + (record.toolUse.length ? record.toolUse.join(', ') : 'none'));
   console.log('\n=== write disposition: ' + record.disposition.toUpperCase() + ' ===');
   console.log(JSON.stringify(record, null, 2));
 }

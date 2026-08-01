@@ -1,7 +1,7 @@
 ---
 title: Citizen Memory & Perception Plan (Typed Emotion + Folk Memory)
 created: 2026-07-31
-updated: 2026-07-31
+updated: 2026-08-01
 type: plan
 tags: [engine, citizens, media, memory, active]
 sources:
@@ -19,7 +19,7 @@ pointers:
 
 **Goal:** Citizens and neighborhoods carry typed memory of what happened — grief, grudge, ambition as mechanics and folk memory as collective recall — so the sim tracks what people *think* happened, not only what happened.
 
-**Architecture:** Two tracks, split by gate. **Track A (ungated, buildable now):** (1) Give the existing grief stub consumers — `phase04-events/generationalEventsEngine.js:1423-1432` emits `type: "grief", effect: "grief_period"` cascade entries on death-of-ally/mentor, and `grief_period` has **zero consumers** today (surfaces only as a count in `phase10-persistence/buildCyclePacket.js:350-351`); wire it into the dial engine (`utilities/compressLifeHistory.js` v2.0, `REFLECTION_MULT 0.45`) and event-pool biasing the same way the `Quoted` tag already works (`utilities/citizenDialMap.js:46` → sociability +3). (2) Ship BACKLOG **27.10** negative feedback loops: soft ceilings on runaway positive spirals — scandal probability rising with sustained high approval, building on the existing scandal mechanic (`phase05-citizens/runCivicElectionsv1.js:334-335`, "Scandal status: -25%"); rapid development → housing-pressure coupling. **Track B (gated on research.17 — REGROUNDED S306, "design WITH Mike", needs-info):** typed grudge/ambition state on top of the working rivalry mechanics (`phase05-citizens/bondEngine.js:1706-1724` `resolveRivalry_`; escalation at intensity ≥ 6, :856-859) and BACKLOG **27.9** folk memory (2–3 `Folk_Memory` records per major event keyed event×neighborhood — "Fruitvale remembers the transit vote as a betrayal; Rockridge remembers it as fiscal responsibility" — feeding reporter/Letters briefings). research.19's T3 "read the Pulse" news-awareness pilot rides the same gate.
+**Architecture:** Two tracks, split by gate. **Track A (ungated, buildable now):** (1) Give the existing grief stub consumers — `phase04-events/generationalEventsEngine.js:1423-1432` emits `type: "grief", effect: "grief_period"` cascade entries on death-of-ally/mentor, and `grief_period` has **zero consumers** today (no reader anywhere in the engine — verified by repo grep 2026-08-01); wire it into the dial engine (`utilities/compressLifeHistory.js` v2.0, `REFLECTION_MULT 0.45`) and event-pool biasing the same way the `Quoted` tag already works (`utilities/citizenDialMap.js:46` → sociability +3). (2) Ship BACKLOG **27.10** negative feedback loops: soft ceilings on runaway positive spirals — scandal probability rising with sustained high approval, building on the existing scandal mechanic (`phase05-citizens/runCivicElectionsv1.js:334-335`, "Scandal status: -25%"); rapid development → housing-pressure coupling. **Track B (gated on research.17 — REGROUNDED S306, "design WITH Mike", needs-info):** typed grudge/ambition state on top of the working rivalry mechanics (`phase05-citizens/bondEngine.js:1706-1724` `resolveRivalry_`; escalation at intensity ≥ 6, :856-859) and BACKLOG **27.9** folk memory (2–3 `Folk_Memory` records per major event keyed event×neighborhood — "Fruitvale remembers the transit vote as a betrayal; Rockridge remembers it as fiscal responsibility" — feeding reporter/Letters briefings). research.19's T3 "read the Pulse" news-awareness pilot rides the same gate.
 
 **Terminal:** research-build (Track B design WITH Mike) / engine-sheet (Track A build)
 
@@ -39,7 +39,7 @@ pointers:
 
 ### Task 1: Map the grief stub surface
 - **Files:** `phase04-events/generationalEventsEngine.js` — read
-- **Steps:** Read lines 1410–1440. Record who receives `grief_period` entries (which citizens, what payload), and where the cycle packet counts them (`phase10-persistence/buildCyclePacket.js:350-351`).
+- **Steps:** Read lines 1410–1440. Record who receives `grief_period` entries (which citizens, what payload). Confirm no cycle-packet or downstream reader exists (2026-08-01 grep found none).
 - **Verify:** grief-surface notes in Build notes
 - **Status:** [ ] not started
 
@@ -91,3 +91,4 @@ Filled as tasks complete.
 ## Changelog
 
 - 2026-07-31 — Initial draft (Kimi CLI, builder-directed external-audit remediation batch). Audit gaps #3+#4 combined with BACKLOG 27.9/27.10 (the project's own prior framing of the same gaps). Track A scoped to ungated work so the plan is pickable while research.17 is needs-info.
+- 2026-08-01 — Kimi: corrected stale pointer — `grief_period` has no reader at `buildCyclePacket.js:350-351` (grep: no `grief` in that file at all); verified zero consumers engine-wide. Task 1 step updated accordingly.

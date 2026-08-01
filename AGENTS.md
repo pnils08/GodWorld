@@ -662,6 +662,24 @@ Three publication pipelines coexist (see Pipeline safety):
 `openclaw-skills/` at repo root is archived Cycle-78-era legacy (superseded by
 the `.claude/skills/` pipeline); do not implement from it.
 
+## Subagent cost discipline (kimi, codex — builder decision, 2026-08-01)
+
+A CLI lead never fans out to its own tier by default. Grunt subagent work —
+exploration sweeps, mechanical edits, test runs, bulk reads — goes to the
+cheapest model that clears the bar. The lead holds judgment and orchestration;
+the fan-out runs a tier down, where the harness supports model binding.
+
+- **Kimi Code:** bind subagents to the K2.7-code tier via `/secondary_model`
+  (experimental — enable in `/experiments` first). K3-tier stays for the lead
+  and for subtasks with a genuine reasoning floor.
+- **Codex:** use the cheapest subagent tier the harness exposes for grunt
+  work.
+
+Cheaper-by-default, not cheapest-always: escalate a subagent back up only when
+the subtask has a real reasoning floor (adversarial canon calls, subtle code
+review). This mirrors `docs/MODEL_HIERARCHY.md` §8, which binds the Claude
+terminals; this section binds the CLI lanes.
+
 ## Operating posture
 
 Search before asserting. Read the actual implementation behind documentation

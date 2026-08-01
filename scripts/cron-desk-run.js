@@ -231,6 +231,28 @@ function budgetReached(cycle) {
   return false;
 }
 
+// Interview rest-cycles (Task 2.5.4 pressure-test #4, Mike-direct 2026-08-01
+// "just because a citizen is higher on the list doesn't mean use her every
+// single time"): tally who landed quotes in recent packet artifacts; a citizen
+// at the cap sits out this wake and the pool moves down the list — spread the
+// light (universal protagonism). Soft: if EVERY candidate is rested the cap is
+// waived rather than running a quoteless wake on a seeded assignment.
+const REST_CAP = 2;              // interviews inside the window before a rest
+const REST_WINDOW_H = 72;        // hours of packet history that count
+function interviewTally() {
+  const tally = {};
+  const cutoff = Date.now() - REST_WINDOW_H * 3600 * 1000;
+  let files = [];
+  try { files = fs.readdirSync(COMPARE).filter(f => f.endsWith('packet.json')); } catch (_) { return tally; }
+  for (const f of files) {
+    const p = path.join(COMPARE, f);
+    try { if (fs.statSync(p).mtimeMs < cutoff) continue; } catch (_) { continue; }
+    const j = readJson(p);
+    for (const q of ((j && j.quotes) || [])) if (q.pop) tally[q.pop] = (tally[q.pop] || 0) + 1;
+  }
+  return tally;
+}
+
 // Layer 4 — collect the affected citizens (distinct POPIDs, capped) and their
 // reaction ask. Task 2.5.4: the assigned story's citizens fill the pool FIRST —
 // they are the engine's actual affected residents for this angle — with the
@@ -238,8 +260,11 @@ function budgetReached(cycle) {
 function collectQuoteAsks(lane, persona, story) {
   const asks = [];
   const seen = new Set();
-  const push = (pop, label) => {
+  const rested = [];
+  const tally = interviewTally();
+  const push = (pop, label, ignoreRest) => {
     if (!pop || seen.has(pop) || asks.length >= QUOTE_CITIZEN_CAP) return;
+    if (!ignoreRest && (tally[pop] || 0) >= REST_CAP) { rested.push({ pop, label }); return; }
     seen.add(pop);
     // Phase 2.3: voice the ask in the persona's register — the question's voice
     // shapes the answer's friction (the Antigravity/Jax lesson, 2026-07-24).
@@ -254,6 +279,13 @@ function collectQuoteAsks(lane, persona, story) {
   for (const e of lane) {
     for (const pop of (e.popids || [])) push(pop, e.label);
     if (asks.length >= QUOTE_CITIZEN_CAP) break;
+  }
+  // soft floor: everyone rested -> waive the cap rather than run quoteless
+  if (!asks.length && rested.length) {
+    log('[rest] all candidates rested (' + rested.length + ') — cap waived for this wake');
+    for (const r of rested) { push(r.pop, r.label, true); if (asks.length >= QUOTE_CITIZEN_CAP) break; }
+  } else if (rested.length) {
+    log('[rest] resting ' + rested.length + ' recently-interviewed citizen(s): ' + rested.map(r => r.pop).join(', '));
   }
   return asks;
 }

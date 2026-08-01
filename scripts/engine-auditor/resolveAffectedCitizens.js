@@ -24,7 +24,7 @@
  * citizens slot and propagates to storyHandles.
  */
 
-const VERSION = '1.0.0';
+const VERSION = '1.1.0';
 
 function citizenLabel(row) {
   const first = (row.First || '').trim();
@@ -111,6 +111,19 @@ function enrich(patterns, ctx) {
 
   const byNeighborhood = buildNeighborhoodIndex(ledger);
   const neighborhoodNames = buildNeighborhoodNameSet(ctx, byNeighborhood);
+  // Task 2.5.6 (Mike-direct S344, confirmed live 2026-08-01): the ranked index
+  // is STABLE — tier asc + usage desc handed every Fruitvale pattern the same
+  // top-3 in the same order, cycle after cycle, and usage-desc is a
+  // rich-get-richer loop (coverage raises UsageCount raises rank). Two levers,
+  // both deterministic (audit runs must replay identically — no Math.random):
+  //   1. per-pattern rotation offset seeded on (cycle, pattern index) over a
+  //      WIDENED slate, so orderings vary across patterns and cycles;
+  //   2. cross-pattern spread within one audit — a citizen already resolved
+  //      onto an earlier pattern this run is skipped while fresh candidates
+  //      remain (soft: pool exhaustion falls back to reuse, never empties).
+  const SLATE_WIDTH = 12;   // per neighborhood — the pool downstream top-3 picks rotate over
+  const cycleNum = parseInt(ctx.cycle, 10) || 0;
+  const usedThisAudit = new Set();
 
   for (let p = 0; p < patterns.length; p++) {
     const pattern = patterns[p];
@@ -135,16 +148,35 @@ function enrich(patterns, ctx) {
       ? pattern.affectedEntities.neighborhoods
       : [];
 
-    const resolved = [...existing];
-    for (let n = 0; n < neighborhoods.length && resolved.length < 3; n++) {
-      const nhood = (neighborhoods[n] || '').trim().toLowerCase();
+    // Widened slate across the pattern's neighborhoods, deduped by popId,
+    // ranked order preserved (tier still gates who is IN the slate).
+    const slate = [];
+    const inSlate = new Set();
+    for (const n of neighborhoods) {
+      const nhood = (n || '').trim().toLowerCase();
       if (!nhood) continue;
-      const candidates = byNeighborhood[nhood] || [];
-      for (let c = 0; c < candidates.length && resolved.length < 3; c++) {
-        const cand = candidates[c];
-        if (cand.popId && seenPopIds.has(cand.popId)) continue;
-        resolved.push(cand.label);
-        if (cand.popId) seenPopIds.add(cand.popId);
+      for (const cand of (byNeighborhood[nhood] || []).slice(0, SLATE_WIDTH)) {
+        if (cand.popId && inSlate.has(cand.popId)) continue;
+        if (cand.popId) inSlate.add(cand.popId);
+        slate.push(cand);
+      }
+    }
+
+    const resolved = [...existing];
+    if (slate.length) {
+      const offset = (cycleNum * 7 + p * 3) % slate.length;
+      // pass 1: fresh-this-audit candidates from the rotated start;
+      // pass 2: pool exhausted — allow cross-pattern reuse (soft floor).
+      for (const requireFresh of [true, false]) {
+        for (let i = 0; i < slate.length && resolved.length < 3; i++) {
+          const cand = slate[(offset + i) % slate.length];
+          if (!cand.popId || seenPopIds.has(cand.popId)) continue;
+          if (requireFresh && usedThisAudit.has(cand.popId)) continue;
+          resolved.push(cand.label);
+          seenPopIds.add(cand.popId);
+          usedThisAudit.add(cand.popId);
+        }
+        if (resolved.length >= 3) break;
       }
     }
 

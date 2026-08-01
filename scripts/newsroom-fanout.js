@@ -183,9 +183,15 @@ async function buildFanout(date) {
   const stagedBy = cycle === null ? {} : stagedTally(cycle).byByline;
   const personaRev = loadPersonaReverse();
   // Task 2.5.2: the day's seed material. A missing desk_signal degrades to
-  // approach-only assignments — the rota never blocks on the signal file.
+  // approach-only assignments — the rota never blocks on the signal file —
+  // but LOUDLY: seedless days are a pipeline break upstream (/run-cycle →
+  // build-world-summary didn't run for this cycle), not a normal state.
   const signal = cycle === null ? null
     : (() => { try { return JSON.parse(fs.readFileSync(path.join(ROOT, 'output', 'desk_signal_c' + cycle + '.json'), 'utf8')); } catch (_) { return null; } })();
+  if (!signal) {
+    console.error('[fanout] WARNING: no output/desk_signal_c' + cycle + '.json — every assignment goes out '
+      + 'APPROACH-ONLY (no assigned angle, no seed citizens). Upstream: run /engine-review + /build-world-summary for c' + cycle + '.');
+  }
   const lanes = (signal && signal.lanes) || {};
   const takenRefs = cycle === null ? new Set() : assignedStoryRefs(cycle);
   const approachMap = loadApproachMap();
@@ -218,7 +224,10 @@ async function buildFanout(date) {
     }
     if (taken < quota) shortfalls.push({ desk, wanted: quota, got: taken });
   }
-  return { date, cycle, quotas: DAILY_QUOTAS, assignments, shortfalls, builtAt: new Date().toISOString() };
+  const seedless = assignments.filter(a => !a.story).length;
+  return { date, cycle, quotas: DAILY_QUOTAS, assignments, shortfalls,
+    seedless, signalMissing: !signal,   // loud in the file too — the 06:00 digest and any reader sees a seedless day
+    builtAt: new Date().toISOString() };
 }
 
 function fanoutPath(date) { return path.join(COMPARE, 'fanout-' + date + '.json'); }

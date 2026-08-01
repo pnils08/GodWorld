@@ -178,24 +178,29 @@ function recordPhaseTiming_(ctx, phaseName, ms, ok) {
 
 /**
  * engine.95 Task 2: emit collected phase timings as a Logger marker
- * block, PHASE42_VERIFY_BEGIN/END pattern (:1659-1667). Pull with:
- *   clasp logs --json | grep PHASE_TIMING
- * Gives the wall-distance baseline for engine.95 Task 3.
+ * block, PHASE42_VERIFY_BEGIN/END pattern (:1659-1667), and stash the
+ * same payload in ENGINE95_TIMING_DIAG for the web-trigger response
+ * (ENGINE59_DIAG channel — the script has no GCP project, so `clasp
+ * logs` can't pull the Logger block; the fire response is the
+ * terminal-reachable surface). Wall-distance baseline for Task 3.
  */
+var ENGINE95_TIMING_DIAG = null;
 function emitPhaseTimings_(ctx) {
   if (!ctx || !ctx.summary || !ctx.summary.phaseTimings) return;
   var timings = ctx.summary.phaseTimings;
   var total = 0;
   for (var i = 0; i < timings.length; i++) total += timings[i].ms;
   var slowest = timings.slice().sort(function(a, b) { return b.ms - a.ms; }).slice(0, 5);
-  Logger.log('PHASE_TIMING_BEGIN');
-  Logger.log(JSON.stringify({
+  var payload = {
     cycle: ctx.summary.cycleId || 'Unknown',
     totalMs: total,
     phaseCount: timings.length,
     slowest: slowest,
     timings: timings
-  }));
+  };
+  ENGINE95_TIMING_DIAG = payload;
+  Logger.log('PHASE_TIMING_BEGIN');
+  Logger.log(JSON.stringify(payload));
   Logger.log('PHASE_TIMING_END');
 }
 

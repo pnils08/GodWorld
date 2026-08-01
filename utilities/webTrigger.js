@@ -45,6 +45,8 @@ function doGet(e) {
           if (typeof ENGINE59_DIAG !== 'undefined' && ENGINE59_DIAG) out.diag59 = ENGINE59_DIAG;
           // engine.61 diag-emit: the rate walk's why (persistence is invisible from outside)
           if (typeof ENGINE61_DIAG !== 'undefined' && ENGINE61_DIAG) out.diag61 = ENGINE61_DIAG;
+          // engine.95 Task 2: per-phase timings (no GCP project → clasp logs unavailable)
+          if (typeof ENGINE95_TIMING_DIAG !== 'undefined' && ENGINE95_TIMING_DIAG) out.timing = ENGINE95_TIMING_DIAG;
         } finally {
           lock.releaseLock();
         }

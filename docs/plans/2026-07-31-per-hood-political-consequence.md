@@ -1,7 +1,7 @@
 ---
 title: Per-Hood Political Consequence & Cross-Hood Spillover Plan
 created: 2026-07-31
-updated: 2026-07-31
+updated: 2026-08-01
 type: plan
 tags: [engine, citizens, civic, neighborhoods, active]
 sources:
@@ -10,6 +10,7 @@ sources:
   - docs/research/2026-07-04-ripple-attribution-trace.md (pre-fix trace doc; findings C1–C6/E1–E6 mostly CLOSED by engine.45 T1–T3b)
 pointers:
   - "[[engine/ROLLOUT_PLAN]] — parent rollout (engine.93)"
+  - "[[../research/2026-08-01-simulation-realism-audit]] — build-order step 3; the two zero-reader buses re-verified there 2026-08-01"
   - "[[2026-07-04-ripple-ledger-attribution]] — engine.45; per-hood fold is its open item, do not duplicate its shipped T1–T3b work"
   - "[[../SCHEMA]] — doc conventions"
   - "[[../index]] — registered same commit"
@@ -104,3 +105,4 @@ Filled as tasks complete. (Shapes from Tasks 1–2, grep evidence from Task 3, f
 ## Changelog
 
 - 2026-07-31 — Initial draft (Kimi CLI, builder-directed external-audit remediation batch). Audit gaps #1+#2 combined; audit's headline claims verified stale/refuted (engine.45 T1–T3b shipped before the audit's pinned commit), surviving kernel scoped into Tracks A–C.
+- 2026-08-01 (Kimi) — Audit pointer added: build-order step 3 of [[../research/2026-08-01-simulation-realism-audit]]; the two zero-reader buses re-verified there at file:line.

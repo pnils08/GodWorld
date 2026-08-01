@@ -84,6 +84,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.93 | Per-hood political consequence — wire the two zero-reader neighborhood-effect buses into a Phase 2 fold (executes engine.45's open per-hood fold), resolve dead `getRippleEffectsForNeighborhood_`, then design commuting/resource-competition (Mike gate) | ready | research-build → engine-sheet | [[../plans/2026-07-31-per-hood-political-consequence]] |
 | engine.94 | Citizen memory & perception — Track A ungated: grief-stub consumers + BACKLOG 27.10 feedback ceilings; Track B gated on research.17: typed grudge/ambition + 27.9 folk memory | ready | research-build / engine-sheet | [[../plans/2026-07-31-citizen-memory-perception]] |
 | engine.95 | Platform ceiling resilience — instrumentation live + wall baselined at 34–38% of 6-min wall (Tasks 1–3, 5–7 complete); remaining build: Task 4 checkpoint/resume + Task 5 append-dedup, Mike decisions locked, design + constraints in plan | in-progress | engine-sheet | [[../plans/2026-07-31-platform-ceiling-resilience]] |
+| engine.96 | Business lifecycle generator — per-cycle Growth_Rate/Revenue drift, decline→layoff via existing career path, closure events for desks, 27.10 success-pressure coupling; sequence after engine.85 per realism-audit build order | ready | research-build / engine-sheet | [[../plans/2026-08-01-business-lifecycle-generator]] |
 
 ### canon.* — World-fidelity layer
 

@@ -1,7 +1,7 @@
 ---
 title: Employment Living System Plan
 created: 2026-07-27
-updated: 2026-07-27
+updated: 2026-08-01
 type: plan
 tags: [engine, citizens, economy, active]
 sources:
@@ -12,6 +12,7 @@ pointers:
   - "[[../engine/ROLLOUT_PLAN]] — parent rollout (engine.83)"
   - "[[../research/2026-07-27-employment-as-a-living-system]] — research basis; the rules and hazards live there"
   - "[[2026-07-26-employment-reconciliation]] — the static repair this builds on"
+  - "[[../research/2026-08-01-simulation-realism-audit]] — build-order step 5; business birth/mint stays in this plan, decline/death is engine.96"
   - "[[SCHEMA]] — doc conventions"
   - "[[../index]] — registered same commit"
 ---
@@ -181,3 +182,4 @@ pointers:
 - 2026-07-27 (S336, engine-sheet) — Tasks 4 + 5 BUILT + bench-proven (34 assertions green); both open questions resolved. **Live deploy of the Task 4 reconciliation is gated on Tasks 2–3** — detail in the task statuses.
 - 2026-07-27 (S336, engine-sheet, second pass) — Task 4 data gate verified CLEAR (deploy now waits on engine.79 only — see Task 4 status); SkillTags schema live + engine.86/87 closed (detail in Task 7 status).
 - 2026-07-27 (S336, engine-sheet, third pass) — Tasks 7 + 8 BUILT: rehire matcher (v2.7) + mint economics; every engine-sheet task in this plan is now built. Deploy of the whole employment set rides the engine.79 gate.
+- 2026-08-01 (Kimi) — Audit pointer added: build-order step 5 of [[../research/2026-08-01-simulation-realism-audit]]. Business birth/mint stays in this plan; decline/death scoped to engine.96 ([[2026-08-01-business-lifecycle-generator]]).

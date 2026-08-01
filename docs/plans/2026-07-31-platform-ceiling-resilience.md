@@ -1,7 +1,7 @@
 ---
 title: Platform Ceiling Resilience Plan (Cycle Runtime + Sheets Migration)
 created: 2026-07-31
-updated: 2026-07-31
+updated: 2026-08-01
 type: plan
 tags: [engine, infrastructure, architecture, active]
 sources:
@@ -9,6 +9,7 @@ sources:
   - phase10-persistence/persistenceExecutor.js:176-200 (persistWithRetry_ — S271 transient-write backoff)
 pointers:
   - "[[engine/ROLLOUT_PLAN]] — parent rollout (engine.95)"
+  - "[[../research/2026-08-01-simulation-realism-audit]] — build-order step 1: Task 4 checkpoint/resume is the platform prerequisite for every heavy engine addition"
   - "[[../SPREADSHEET]] — tab audit (56 documented tabs)"
   - "[[../SCHEMA]] — doc conventions"
   - "[[../index]] — registered same commit"
@@ -147,3 +148,4 @@ Cross-tab torn state (kill mid-commit → some tabs updated, others stale) **con
 ## Changelog
 
 - 2026-07-31 — Initial draft (Kimi CLI, builder-directed external-audit remediation batch). Audit gaps #5+#6 combined (both are Sheets/Apps-Script platform-ceiling concerns). Audit's "time bomb" framing tempered by the verified writes-confined-to-Phase-10 safety property; the real exposure is Phase 10 mid-commit and the absence of any wall-distance measurement.
+- 2026-08-01 (Kimi) — Audit pointer added: build-order step 1 of [[../research/2026-08-01-simulation-realism-audit]] — Task 4 checkpoint/resume is the platform prerequisite for every heavy engine addition (incl. engine.96).

@@ -1,7 +1,7 @@
 ---
 title: Employment Reconciliation — roster vs careers vs Business_Ledger
 created: 2026-07-26
-updated: 2026-07-26
+updated: 2026-08-01
 type: plan
 tags: [engine, citizens, economy, canon, active]
 sources:
@@ -12,6 +12,7 @@ sources:
   - claude-mem S334 — Marbury (POP-00166) + Torres (POP-00057) repairs, the two proof cases
 pointers:
   - "[[../engine/ROLLOUT_PLAN]] — parent rollout (engine.83)"
+  - "[[../research/2026-08-01-simulation-realism-audit]] — build-order step 2: static repair is the precondition for a living economy"
   - "[[../canon/INSTITUTIONS]] — canon authority for entity names"
   - "[[../SIMULATION_LEDGER]] — column map"
   - "[[SCHEMA]] — doc conventions"
@@ -201,3 +202,4 @@ Practical consequence for every re-run: **`--fill-blanks-only`.** Fill what is e
 
 - 2026-07-26 (S334) — Initial draft, rewritten pre-publish around the existing resolver.
 - 2026-07-26 (S334) — Authority ruled (roster wins), Oaks_Roster landed, Task 5b added to mint civic initiatives as establishments.
+- 2026-08-01 (Kimi) — Audit pointer added: build-order step 2 of [[../research/2026-08-01-simulation-realism-audit]] — this static repair is the precondition for the living economy.

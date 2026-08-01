@@ -51,8 +51,12 @@ console.log('Test 1: all sheets present + populated → no patterns, summary all
   };
   const found = detector.detect(ctx);
   assert('no completeness patterns when all populated', found.length === 0, `got ${found.length}`);
-  assert('summary sheetsChecked = 6', ctx.ledgerCompleteness.sheetsChecked === 6, `got ${ctx.ledgerCompleteness.sheetsChecked}`);
-  assert('summary ok lists all 6', ctx.ledgerCompleteness.ok.length === 6);
+  // Derived from LEDGER_CONFIG, not hardcoded — S328 retired Event_Arc_Ledger
+  // (6→5) and these assertions went red for a deliberate config change. The
+  // invariant worth testing is "every configured sheet got checked", not the count.
+  const CONFIGURED = detector.LEDGER_CONFIG.length;
+  assert(`summary sheetsChecked = ${CONFIGURED}`, ctx.ledgerCompleteness.sheetsChecked === CONFIGURED, `got ${ctx.ledgerCompleteness.sheetsChecked}`);
+  assert(`summary ok lists all ${CONFIGURED}`, ctx.ledgerCompleteness.ok.length === CONFIGURED);
   assert('no zeroRow', ctx.ledgerCompleteness.zeroRow.length === 0);
   assert('no partialColumns', ctx.ledgerCompleteness.partialColumns.length === 0);
 }
@@ -146,7 +150,7 @@ console.log('\nTest 7: sheet absent from snapshot → notLoaded, not flagged');
   };
   const found = detector.detect(ctx);
   assert('no patterns for absent sheets', found.length === 0, `got ${found.length}`);
-  assert('absent sheets recorded in notLoaded', ctx.ledgerCompleteness.notLoaded.length === 5, `got ${ctx.ledgerCompleteness.notLoaded.length}`);
+  assert('absent sheets recorded in notLoaded', ctx.ledgerCompleteness.notLoaded.length === detector.LEDGER_CONFIG.length - 1, `got ${ctx.ledgerCompleteness.notLoaded.length}`);
   assert('only WP counted as checked', ctx.ledgerCompleteness.sheetsChecked === 1);
 }
 

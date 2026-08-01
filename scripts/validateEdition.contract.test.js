@@ -208,11 +208,19 @@ function countCriticals(stdout) {
   // officials reshuffled), so old editions now fail against current
   // truesource. Floor assertions catch validator-going-silent regressions
   // without locking specific issue counts that drift with each canon edit.
+  //
+  // S347: the floors were 20/5/2 and two of them had gone red. Bisect settled
+  // why — every validateEdition.js revision back to S249 (25f397c9), run against
+  // today's canon, returns the identical count on all three editions. The
+  // validator never lost capability; canon moved and the hardcoded numbers
+  // didn't. That is exactly the "locking specific issue counts" this comment
+  // warns against, so the floors now assert only what they were for: the
+  // validator still speaks. Raise one ONLY with a bisect showing capability loss.
   console.log('\nTest 10: E78 historical snapshot — canon-drift floor');
   if (CANON_PRESENT) {
     assert('E78 exits 1', e78.status === 1, `exit=${e78.status}`);
     const n = countCriticals(e78.stdout);
-    assert('E78 has >= 20 CRITICALs (snapshot floor)', n >= 20, `found ${n}`);
+    assert('E78 still flags CRITICALs (not-silent floor)', n >= 1, `found ${n}`);
   } else {
     skip('E78 exits 1', 'canon files absent (CI environment)');
     skip('E78 >= 20 CRITICALs', 'canon files absent (CI environment)');
@@ -222,7 +230,7 @@ function countCriticals(stdout) {
   if (CANON_PRESENT) {
     assert('E85 exits 1', e85.status === 1, `exit=${e85.status}`);
     const n = countCriticals(e85.stdout);
-    assert('E85 has >= 5 CRITICALs (snapshot floor)', n >= 5, `found ${n}`);
+    assert('E85 still flags CRITICALs (not-silent floor)', n >= 1, `found ${n}`);
   } else {
     skip('E85 exits 1', 'canon files absent (CI environment)');
     skip('E85 >= 5 CRITICALs', 'canon files absent (CI environment)');
@@ -232,7 +240,7 @@ function countCriticals(stdout) {
   if (CANON_PRESENT) {
     assert('E90 exits 1', e90.status === 1, `exit=${e90.status}`);
     const n = countCriticals(e90.stdout);
-    assert('E90 has >= 2 CRITICALs (snapshot floor)', n >= 2, `found ${n}`);
+    assert('E90 still flags CRITICALs (not-silent floor)', n >= 1, `found ${n}`);
   } else {
     skip('E90 exits 1', 'canon files absent (CI environment)');
     skip('E90 >= 2 CRITICALs', 'canon files absent (CI environment)');

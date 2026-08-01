@@ -57,25 +57,25 @@ pointers:
 - **Files:** `phase01-config/godWorldEngine2.js`, `phase09-digest/finalizeCycleState.js` — read; this plan — modify
 - **Steps:** Design: budget guard checks elapsed before each phase; at threshold, serialize Ctx (the `finalizeCycleState.js` snapshot pattern at :103-108 is the precedent for compacting ripple state) to `PropertiesService` + a continuation trigger (`ScriptApp.newTrigger` precedent: `phase10-persistence/cycleExportAutomation.js:469`); resume rehydrates and continues at the next phase. Guard against double-fire. Mike sign-off on the design before build.
 - **Verify:** design in Build notes; Mike approval recorded
-- **Status:** [ ] not started
+- **Status:** [~] DECISIONS LOCKED 2026-07-31 (Mike-direct): auto-resume (not manual gate), hidden-tab checkpoint store, threshold computed from live timing data. Design write-up + build handed to engine-sheet with constraints in Open questions resolution below; input numbers ready (Task 3 baseline: tail = Phase10 15.4s + Phase11 19.1s mean, 18.3/23.8 max).
 
 ### Task 5: Phase 10 commit resumability audit
 - **Files:** `phase10-persistence/persistenceExecutor.js` — read
 - **Steps:** Read the full intent-commit loop. Determine: if killed mid-commit, which intents are idempotent on re-run (append = duplicate risk; `setValues` = safe per :186 comment) and what a resume marker needs. Write findings + minimal fix (e.g. per-intent commit markers) to Build notes.
 - **Verify:** resumability findings + fix proposal in Build notes
-- **Status:** [ ] not started
+- **Status:** [x] DONE 2026-07-31 (Kimi CLI) — audit in Build notes. Verdict: every intent kind is kill-safe on blind re-run EXCEPT batch append (duplicate-row hazard after post-landing kill). Fix proposal: hash-dedup appends (Engine_Errors precedent) + 2-row commit journal in `_CycleCheckpoint`, shared with Task 4's resume path. Build awaits Mike/Fable.
 
 ### Task 6: Sheets ceiling inventory
 - **Files:** `backups/sheets/` (latest CSV dump), `schemas/SCHEMA_HEADERS.md` — read
 - **Steps:** From the latest CSV backup: row counts per tab, total cells, per-tab growth across the last 4 weekly dumps if present. Project against Sheets limits (10M cells/file, 40k new rows/day API). Table into Build notes.
 - **Verify:** inventory + projection table in Build notes
-- **Status:** [ ] not started
+- **Status:** [x] DONE 2026-07-31 (Kimi CLI) — only one CSV dump exists (2026-03-01), so growth computed as Mar→Jul delta vs SCHEMA_HEADERS, not 4 weekly dumps. 4.6% of cell limit; append-ledgers are the growers. Table in Build notes.
 
 ### Task 7: Export-to-DB evaluation (research file)
 - **Files:** `docs/research/2026-07-31-sheets-ceiling-export-eval.md` — create (per `docs/research/RESEARCH_TEMPLATE.md`)
 - **Steps:** Write the eval: current headroom (Task 6), options (stay-Sheets + hygiene / SQLite sidecar for cold tabs / full DB migration), cost-benefit, verdict. Register in `docs/research/index.md` per its sub-catalog rule. This is an evaluation, not a build plan.
 - **Verify:** research file exists with verdict; indexed
-- **Status:** [ ] not started
+- **Status:** [x] DONE 2026-07-31 (Kimi CLI) — `docs/research/2026-07-31-sheets-ceiling-export-eval.md`, registered in `docs/research/index.md`. Verdict: take-nothing (migration build) / watch with 4 named triggers.
 
 ---
 
@@ -108,12 +108,39 @@ Top phases by mean ms: Phase11-MaintainLifeHistoryLog 19.1s (max 23.8) · Phase1
 
 **ctx-map cross-check (2026-07-31):** `node scripts/ctxMap.js phaseTimings` reports "ORPHANED WRITE — Read by: NONE". Verified this is the tool's vocabulary, not a defect: the detail view counts only *external* readers (`scripts/ctxMap.js` :185 — readers in files that don't also write), and `phaseTimings`'s writer + sole reader both live in `godWorldEngine2.js` (write :175, reads :186-187). A deliberate single-file leaf — consumed by Logger emission, not another phase. Future audits: do not re-flag; the field is documented observation-only in `docs/engine/PHASE_DATA_AUDIT.md`.
 
+**Task 6 (2026-07-31, Kimi CLI) — Sheets ceiling inventory.** Only one local CSV dump exists (`backups/sheets/2026-03-01`, 60 tabs) — joined against live `schemas/SCHEMA_HEADERS.md` (2026-07-27, 56 tabs) for a ~5-month delta. Headline: **456,780 cells of 10M = 4.6% used** (34,027 rows). Growth concentrated in append-ledgers (rows/mo): LifeHistory_Log +1,469, Relationship_Bond_Ledger +945, LifeHistory_Archive +877, Household_Ledger +126. Trimmed rotating tabs shrink or hold (Media_Briefing −7,245, Simulation_Ledger 3,417→931). Tab churn healthy (Chicago_* gone per S229; Ripple_Ledger etc. new). Full analysis + projection: `docs/research/2026-07-31-sheets-ceiling-export-eval.md`.
+
+**Task 7 (2026-07-31, Kimi CLI) — export-to-DB eval delivered:** `docs/research/2026-07-31-sheets-ceiling-export-eval.md`, registered in `docs/research/index.md` same change. Verdict **take-nothing (migration build) / watch** with 4 named triggers (>50% cells; <2 min wall headroom on PHASE_TIMING; 4-cycle monotonic trim-phase creep; quota-error class in Engine_Errors). Key reframe: the operative ceiling is per-cycle read *time* on fat tabs coupling into the 6-min wall (Phase 11 trim already 19.1s mean), not cell count. Adjacent accepted work: extend the LifeHistory trim pattern to Relationship_Bond_Ledger + fast append-ledgers (engine-sheet batch or small standalone row).
+
+**Task 5 (2026-07-31, Kimi CLI) — Phase 10 commit resumability audit.** Read: `phase10-persistence/persistenceExecutor.js` (528 lines, full).
+
+Execution order: replaceOps (ensure @25 → replace @50) → updates by sheet (cells → ranges → batch appends) → logs by sheet (appends). Per-sheet errors are isolated (collected into `stats.errors`, loop continues) — a failed tab doesn't abort the commit.
+
+Idempotency of a **blind full-cycle re-run** after a wall-clock kill *during* Phase 10 (re-run is valid because seeded RNG makes the intent stream deterministic given the same sheet state):
+
+| Intent kind | Kill-safe? | Why |
+|---|---|---|
+| ensure | YES | Tab exists → no-op (`:222-227`) |
+| replace | YES (one caveat) | clear+rewrite is self-healing on re-run. Caveat: a kill landing *between* `clearContent()` and `setValues()` inside the retry (`:283-285`) leaves the tab **wiped** until the re-run heals it — the S271 comment (:266) covers transient timeouts, not wall-clock kills |
+| cell | YES | `setValue` same cell/value (`:347`) |
+| range | YES | `setValues` fixed address, atomic all-or-throw (`:366`) |
+| **append** | **NO — the one real hazard** | Batch append computes `startRow = getLastRow()+1` inside the retry (`:410-412`). The :407-409 comment proves safety only for *thrown* setValues. A kill **after** a batch lands server-side → the re-run re-appends identical rows → **duplicate rows in the canonical append-ledgers** (LifeHistory_Log, Ripple_Ledger, Election_Log, etc.). Window is one `setValues` per sheet, but duplicates in ledgers are canon contamination |
+
+Cross-tab torn state (kill mid-commit → some tabs updated, others stale) **converges on re-run** for every kind except the append-duplication above.
+
+`persistWithRetry_` (:188) covers *transient* Google errors (0/2/5/12s backoff, transient-class regex). It does **nothing** for a 6-min wall kill — that kill type isn't recoverable inside the run by definition. This is the boundary between "already handled" (transient) and "Task 5's gap" (wall).
+
+**Minimal fix proposal (for Fable/Mike, not built):**
+1. **Append dedup via the existing hash pattern.** Append intents carry `(cycle, rowHash)`; the append path in `executeSheetIntents_` skips rows whose hash is already present on the target tab. Precedent in-repo: Engine_Errors `Hash` column + `computeShortHash_` (`godWorldEngine2.js:109-110`), mirrored node-side by `lib/diagnosticLedger.computeHash()`. Determinism means re-run duplicates are *exact* duplicates, so hash-dedup is exact, not fuzzy.
+2. **Two-row commit journal** (`cycle N commit: pending → committed`, written before Phase 10 starts and after it succeeds). On cycle start, an incomplete journal = previous run died mid-commit → log loud + engage dedup mode. Rows can live in Mike's chosen `_CycleCheckpoint` tab (Task 4 decision) — same mechanism serves both Task 4 resume and Task 5 dedup.
+3. Task 4 implication: a resume run should re-queue intents and route appends **through the dedup path** — resume and re-run then share one safe mechanism instead of two.
+
 ---
 
 ## Open questions
 
 - [x] ~~Does cycle-duration data already exist anywhere?~~ **RESOLVED 2026-07-31 (Task 1): No.** Engine_Errors has no duration column, the completion summary is Logger-only error counts, dashboard session-events are harness hooks not engine cycles. Task 3 needs new collection.
-- [ ] Checkpoint store: `PropertiesService` (size limits) vs a hidden sheet tab vs Drive file — decide in Task 4 design with size data from the Ctx snapshot. — blocks Task 4
+- [x] ~~Checkpoint store: `PropertiesService` vs a hidden sheet tab vs Drive file~~ **RESOLVED 2026-07-31 (Mike-direct): hidden Sheet tab** (e.g. `_CycleCheckpoint`) — roomy, same permissions/plumbing, human-inspectable for debugging. Design constraints from the decision: (a) the guard threshold must reserve Phase 10+11 tail time **plus checkpoint-save time** (est. 10–30s for ~48k-cell ctx.ledger + queued intents — measure real Ctx size first); (b) resume run must identify itself as a resume, skip completed phases, and clean the checkpoint tab after success so a later crash can't double-resume a stale save. **Auto-resume over manual gate: also Mike-direct same day** (clean-stop + alarm rejected as the primary; it remains the natural fallback if the guard itself fails). Threshold: computed from live timing data (Task 2 instrumentation), not a fixed guess.
 
 ---
 

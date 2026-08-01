@@ -2,7 +2,7 @@
 
 **This file is canonical for open/closed work** (S207). Pointer-only: one line per job, detail lives in the pointer doc — never here (S286 hard rule, Mike-direct).
 
-**Status:** ACTIVE (building) | **Last Updated:** Session 344 (2026-07-29) — Oakland sports intake and Citizen Archive research promoted to tracked work.
+**Status:** ACTIVE (building) | **Last Updated:** 2026-07-31 — engine.89 Waves A–C source-built; review, TLS/proxy deployment, and live proof remain open.
 **Filing protocol (S212):** semantic groups + pointer-only entries — see [[rollout-rules]] §3–§5 (taxonomy, add, close). Full design: [[../adr/0005-rollout-plan-structure]].
 **North star:** `docs/ARCHITECTURE_VISION.md` — Jarvis + persistent sessions. Everything we build points there.
 **Completed phase details:** [[engine/ROLLOUT_ARCHIVE]] — read on demand, not at boot.
@@ -77,10 +77,13 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.53 | Agent exchange engine — T1–5 SHIPPED S312 (3 formats live-verified, 17:00 cron wired; conversations idle until engine.48 T4 ripple writer); open: T6 /sift sourcing | in-progress | research-build | [[../plans/2026-07-11-agent-exchange-engine]] |
 | engine.76 | Compile-layer rebuild — W1–W3 + W5 complete (half 2 shipped S336: usage-rotated per-lane byline candidate in desk_signal, 3-cycle bench proven); OPEN: W4 two-stack consolidation only, gated on the fork proving (pipeline.44) | in-progress | engine-sheet | [[../plans/2026-07-26-compile-layer-rebuild]] |
 | engine.77 | Sports-event intake — trades/injuries/call-ups must write BOTH the ledger state change (Status/RoleType) AND the LifeHistory moment + ripple; proof case C101 Richards trade (POP-00031) | ready | research-build (design) → engine-sheet (build) | [[../research/2026-07-27-oakland-sports-feed-entry-dashboard]] §Future Sports Engine boundary + [[ENGINE_REPAIR]] §engine.77 |
-| engine.89 | Oakland sports intake workspace — draft the implementation plan for feed entry, roster-backed current stat lines, Ripple Preview, and the engine.40/engine.77 write boundary | ready | research-build | [[../research/2026-07-27-oakland-sports-feed-entry-dashboard]] + [[../OAKLAND_SPORTS_FEED]] |
+| engine.89 | Review and deploy the source-built A's/Oaks sports workspace and gated append path; prove authenticated reads and one separately approved verified append | in-progress | engine-sheet | [[../plans/2026-07-30-oakland-sports-workspace]] |
 | engine.90 | Citizen Archive — after sports intake, plan the full-row exit archive, permanent POPID allocator/resolver, verified move protocol, and return-with-same-POPID path | blocked | research-build → engine-sheet | [[../research/2026-07-29-citizen-archive]] |
 | engine.91 | Canon ingest backfill & sweep — customId idempotency, deterministic sweep (reporters corpus + Deep Canon Drive), post-publish tail + cron, drive-files scope call | ready | engine-sheet | [[../plans/2026-07-31-canon-ingest-backfill]] |
 | engine.92 | Search-function consolidation — caller-map every consumer FIRST (Mike-direct), then extract shared Supermemory client + disk matcher, repoint ~8 searchSupermemory copies, resolve articles naming split | ready | engine-sheet | [[../SEARCH_FUNCTIONS]] §Consolidation queue |
+| engine.93 | Per-hood political consequence — wire the two zero-reader neighborhood-effect buses into a Phase 2 fold (executes engine.45's open per-hood fold), resolve dead `getRippleEffectsForNeighborhood_`, then design commuting/resource-competition (Mike gate) | ready | research-build → engine-sheet | [[../plans/2026-07-31-per-hood-political-consequence]] |
+| engine.94 | Citizen memory & perception — Track A ungated: grief-stub consumers + BACKLOG 27.10 feedback ceilings; Track B gated on research.17: typed grudge/ambition + 27.9 folk memory | ready | research-build / engine-sheet | [[../plans/2026-07-31-citizen-memory-perception]] |
+| engine.95 | Platform ceiling resilience — instrumentation live + wall baselined at 34–38% of 6-min wall (Tasks 1–3, 5–7 complete); remaining build: Task 4 checkpoint/resume + Task 5 append-dedup, Mike decisions locked, design + constraints in plan | in-progress | engine-sheet | [[../plans/2026-07-31-platform-ceiling-resilience]] |
 
 ### canon.* — World-fidelity layer
 
@@ -104,6 +107,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | infrastructure.3 | Reviewer lanes → Claude Managed Agents (Dreaming pilot, Anthropic preview-access gated) | needs-info | research-build | [[../ACTION_MANAGED_AGENTS]] |
 | infrastructure.4 | supermemory-claude plugin auto-saved session transcripts to `mags` as `session_turn` do… | in-progress | engine-sheet | [[../SUPERMEMORY]] + [[../adr/0008-speaker-attribution-for-auto-save-writers|ADR-0008]] — detail in pointer (relocated 2026-07-02) |
 | infrastructure.5 | Supermemory load-bearing audit | in-progress | research-build | [[../plans/2026-05-22-supermemory-load-bearing-audit]] + [[../adr/0008-speaker-attribution-for-auto-save-writers|ADR-0008]] — detail in pointer (relocated 2026-07-02) |
+| infrastructure.6 | Sim-health observability + ghost-tab integrity — `/api/sim-health` off engineAuditor JSON + dashboard panel; disposition 11 ghost tab refs + tab-reference integrity test | ready | engine-sheet | [[../plans/2026-07-31-engine-observability-integrity]] |
 
 ### research.* — Papers, external tools, evaluations
 

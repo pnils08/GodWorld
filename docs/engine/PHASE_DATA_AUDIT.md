@@ -2,6 +2,8 @@
 
 **Last refreshed:** Session 180/181 (2026-04-26) — research-build spot-check confirmed Phase 1–11 coverage still tracks current ctx.summary writes. Phase 40 coverage section unchanged from S156. S180 phase05 dict additions (PHASE_INTENSITY / PHASE_SENTIMENT — vote-ready / legislation-filed / pilot_evaluation values) do not introduce new ctx.summary fields. Prior baseline: S146 (Phase 1–11) + S156 (Phase 40 append).
 
+**2026-07-31 (engine.95 Task 2, Kimi CLI — Fable-reviewed):** new ctx.summary field `S.phaseTimings` — array of `{phase, ms, ok}`, one entry per `safePhaseCall_` invocation, written by `recordPhaseTiming_` in `phase01-config/godWorldEngine2.js`. **Observation-only**: never serialized to Cycle_Packet or Sheets; consumed solely by `emitPhaseTimings_` at cycle close (PHASE_TIMING_BEGIN/END Logger markers, clasp-logs pull) for the 6-minute wall baseline (engine.95 Task 3). The post-write orphan guard flags it as unrecognized — that is expected and deliberate.
+
 What each phase writes to ctx.summary, what gets serialized to Cycle_Packet, and what reaches the newsroom via buildDeskPackets.js.
 
 Purpose: Map the gap between what the engine produces and what the desk agents see.

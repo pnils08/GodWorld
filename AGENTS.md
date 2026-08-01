@@ -187,13 +187,13 @@ research → plan → rollout → archive
 Keep the layers distinct:
 
 - **Research** records findings, evaluated options, hazards, and a verdict. Copy
-  `docs/research/TEMPLATE.md` to
+  `docs/research/RESEARCH_TEMPLATE.md` to
   `docs/research/YYYY-MM-DD-<topic>.md`; register the instance in
   `docs/research/index.md`, not the top-level documentation index. Research
   carries `adopt`, `watch`, or `take-nothing`—never rollout state—and remains a
   standing, grep-able source after application.
 - **Plan** is the self-contained executable specification. Copy
-  `docs/plans/TEMPLATE.md` to `docs/plans/YYYY-MM-DD-<topic>.md`; include exact
+  `docs/plans/PLAN_TEMPLATE.md` to `docs/plans/YYYY-MM-DD-<topic>.md`; include exact
   tasks, files, acceptance criteria, validation, terminal ownership, sources,
   and pointers; register it in `docs/index.md`. An adopted research verdict
   points forward to the plan, and the plan points back to its research basis.
@@ -487,7 +487,7 @@ For every new active document other than a research instance:
 - add the document to `docs/index.md` in the same approved change;
 - update the document's changelog when appropriate.
 
-For a new research instance, follow `docs/research/TEMPLATE.md` and register it
+For a new research instance, follow `docs/research/RESEARCH_TEMPLATE.md` and register it
 in `docs/research/index.md` instead of `docs/index.md`.
 
 When renaming or moving a document:

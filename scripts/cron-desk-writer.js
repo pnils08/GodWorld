@@ -106,6 +106,14 @@ function costUsd(model, tin, tout) {
 }
 
 const PERSONA = arg('--persona', null);   // e.g. freelance-firebrand — load an authored reporter's ADVERSARIAL stance (IDENTITY+LENS+RULES) instead of the desk roundup skill (S332 firebrand lane — teeth, not roundup)
+// Task 2.5.5 memory tools: whose citizen page the loop may read/write. Passed
+// by cron-desk-run (the byline it resolved); persona runs fall back to the
+// persona map's own POPID. Absent -> memory tools stay out of the toolset.
+const BYLINE_POPID = arg('--byline-popid', null) || (() => {
+  if (!PERSONA) return null;
+  try { return (JSON.parse(fs.readFileSync(path.join(__dirname, 'persona-map.json'), 'utf8'))[PERSONA] || {}).popid || null; }
+  catch (_) { return null; }
+})();
 const AGENT_DIR = path.join(ROOT, '.claude', 'agents', PERSONA || (DESK + '-desk'));
 const SKILL_PATH = path.join(AGENT_DIR, PERSONA ? 'IDENTITY.md' : 'SKILL.md');
 // Optional filename namespace. Roster fan-out uses the reporter slug so two
@@ -330,8 +338,11 @@ function callOpenRouterRaw(payloadObj) {
 // it): model requests, script executes, model reads, repeats — bounded, read-
 // only. Every call is traced (pressure-test #5: the scoreboard needs to know
 // whether the writer actually digs or ignores the tools).
-// Deferred from the plan's tool list: `memory` (own Supermemory container) —
-// no per-reporter containers exist yet; add when they do.
+// The `memory` tool pair reads/writes the reporter's OWN citizen page — the
+// per-citizen Supermemory container every citizen already has (lib/citizenPage,
+// tag cp-POP-XXXXX under citizen-pages). Reporters are citizens; their page IS
+// their container. The one WRITE tool in the loop, own-page only by
+// construction (pageTagFor throws on anything but the byline's POPID).
 // ---------------------------------------------------------------------------
 const OPENROUTER_TOOLS = [
   { type: 'function', function: { name: 'canon_search', description: 'Ranked keyword search across the city records on disk — published editions, citizens, businesses, world summaries, staged past work. Use for canon depth and prior coverage.', parameters: { type: 'object', properties: { query: { type: 'string', description: 'keywords, e.g. "Fruitvale transit"' } }, required: ['query'] } } },
@@ -339,6 +350,12 @@ const OPENROUTER_TOOLS = [
   { type: 'function', function: { name: 'sheet_read', description: 'Read a bounded slice of one allowlisted live city sheet: Initiative_Tracker, Neighborhood_Map, Oakland_Sports_Feed, Civic_Office_Ledger.', parameters: { type: 'object', properties: { tab: { type: 'string' } }, required: ['tab'] } } }
 ];
 const SHEET_READ_ALLOWLIST = ['Initiative_Tracker', 'Neighborhood_Map', 'Oakland_Sports_Feed', 'Civic_Office_Ledger'];
+// memory tools appear in the loop only when the run knows whose page it is
+// (--byline-popid from cron-desk-run, or the persona's own POPID).
+const MEMORY_TOOLS = [
+  { type: 'function', function: { name: 'memory_recall', description: 'Read your OWN reporter memory (your citizen page): your recent reflections and working notes from past wakes. Optional query narrows by topic.', parameters: { type: 'object', properties: { query: { type: 'string', description: 'optional topic keywords' } }, required: [] } } },
+  { type: 'function', function: { name: 'memory_note', description: 'Write ONE short working note to your OWN reporter memory (your citizen page) — a thread you want to pick up next wake, a source to revisit. Not the article.', parameters: { type: 'object', properties: { note: { type: 'string' } }, required: ['note'] } } }
+];
 
 function toolCitizenLookup(input) {
   try {
@@ -358,10 +375,41 @@ async function toolSheetRead(input) {
   } catch (e) { return '(sheet read failed: ' + e.message + ')'; }
 }
 
-async function execOpenRouterTool(name, input) {
+let memoryNoteSeq = 0;   // same-wake note keys must not collide (idempotence key component)
+async function toolMemoryRecall(popId, input) {
+  try {
+    const { recentPage_, readPage_ } = require('../lib/citizenPage');
+    const parts = [];
+    const recent = await recentPage_(popId, 5);
+    if (recent.results && recent.results.length) {
+      parts.push('YOUR RECENT MEMORY (newest first):');
+      for (const d of recent.results) parts.push('- ' + String(d.content || '').replace(/\s+/g, ' ').slice(0, 400));
+    }
+    if (input.query) {
+      const hits = await readPage_(popId, input.query, 5);
+      if (hits.results && hits.results.length) {
+        parts.push('ON "' + input.query + '":');
+        for (const d of hits.results) parts.push('- ' + String(d.content || d.chunk || '').replace(/\s+/g, ' ').slice(0, 400));
+      }
+    }
+    return parts.length ? cap(parts.join('\n'), 6000) : 'Your page has no notes yet — this is your first recorded wake on this thread.';
+  } catch (e) { return '(memory recall failed: ' + e.message + ')'; }
+}
+async function toolMemoryNote(popId, input, cycle) {
+  try {
+    const { appendReflection_ } = require('../lib/citizenPage');
+    const r = await appendReflection_(popId, String(input.note || '').slice(0, 800),
+      { cycle, daypart: 'deskwork', key: 'note' + (++memoryNoteSeq), extra: { kind: 'reporter-working-note', desk: DESK } });
+    return r.error ? '(note failed: ' + r.error + ')' : 'noted to your page (' + r.tag + ')';
+  } catch (e) { return '(note failed: ' + e.message + ')'; }
+}
+
+async function execOpenRouterTool(name, input, memCtx) {
   if (name === 'canon_search') return toolSearchWorld({ query: input.query });
   if (name === 'citizen_lookup') return toolCitizenLookup(input);
   if (name === 'sheet_read') return toolSheetRead(input);
+  if (name === 'memory_recall' && memCtx) return toolMemoryRecall(memCtx.popId, input);
+  if (name === 'memory_note' && memCtx) return toolMemoryNote(memCtx.popId, input, memCtx.cycle);
   return 'unknown tool ' + name;
 }
 
@@ -370,6 +418,8 @@ async function execOpenRouterTool(name, input) {
 async function openRouterToolLoop(opts) {
   const model = opts.model || MODEL;
   const maxCalls = opts.maxToolCalls || 6;
+  // memCtx {popId, cycle}: enables the reporter's own-page memory tool pair.
+  const toolset = opts.memCtx ? OPENROUTER_TOOLS.concat(MEMORY_TOOLS) : OPENROUTER_TOOLS;
   const messages = [{ role: 'system', content: opts.system }, { role: 'user', content: opts.user }];
   const trace = [];
   let usageIn = 0, usageOut = 0, calls = 0;
@@ -377,7 +427,7 @@ async function openRouterToolLoop(opts) {
     const toolsOn = calls < maxCalls;
     const j = await callOpenRouterRaw({
       model, max_tokens: opts.maxTokens || MAX_TOKENS, messages,
-      ...(toolsOn ? { tools: OPENROUTER_TOOLS } : {})
+      ...(toolsOn ? { tools: toolset } : {})
     });
     const msg = (j.choices && j.choices[0] && j.choices[0].message) || {};
     const u = j.usage || {};
@@ -388,7 +438,7 @@ async function openRouterToolLoop(opts) {
         let input = {};
         try { input = JSON.parse(tc.function.arguments || '{}'); } catch (_) {}
         const result = calls < maxCalls
-          ? String(await execOpenRouterTool(tc.function.name, input))
+          ? String(await execOpenRouterTool(tc.function.name, input, opts.memCtx))
           : 'tool budget exhausted — compose from what you have.';
         calls++;
         trace.push({ tool: tc.function.name, input, resultChars: result.length });
@@ -580,7 +630,8 @@ async function main() {
       'return. Use your tools FIRST where the state runs thin — verify a citizen before characterizing ' +
       'them, search prior coverage for depth — then compose.' +
       priorArcFinal + strictSourceFinal + ' Output ONLY the section.';
-    const r = await openRouterToolLoop({ model: MODEL, system, user: composeUser, maxToolCalls: 6 });
+    const r = await openRouterToolLoop({ model: MODEL, system, user: composeUser, maxToolCalls: 6,
+      memCtx: BYLINE_POPID ? { popId: BYLINE_POPID, cycle } : null });
     usageIn += r.usageIn; usageOut += r.usageOut; turns = 1 + r.trace.length;
     try {
       const traceName = (ARTIFACT_TAG ? DESK + '_c' + cycle + '_' + ARTIFACT_TAG : DESK + '_c' + cycle) + '.tooltrace.json';

@@ -865,16 +865,16 @@ async function runWrite(assign) {
     angle && angle.angleRead ? angle.angleRead.text : null, assignment));
   log('writing on lane (' + fs.statSync(stateFile).size + ' B injected state' + (persona ? ' + stance anchor' : '') + ')...');
   const artifactTag = writerArtifactTag(assign, personaSlug);
-  execFileSync(
-    'node',
-    buildWriterArgs(
-      desk,
-      path.relative(ROOT, stateFile),
-      personaSlug,
-      artifactTag
-    ),
-    { cwd: ROOT, stdio: 'inherit', timeout: 600000 }
+  const writerArgs = buildWriterArgs(
+    desk,
+    path.relative(ROOT, stateFile),
+    personaSlug,
+    artifactTag
   );
+  // Task 2.5.5: hand the writer the byline's POPID so the memory tool pair
+  // (own citizen page, cp-<popid>) joins the tool loop.
+  if (byline && byline.popid) writerArgs.push('--byline-popid', byline.popid);
+  execFileSync('node', writerArgs, { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
   if (!fs.existsSync(draftPath)) throw new Error('writer produced no draft at ' + path.relative(ROOT, draftPath));
 
   // gate (skipped for --no-gate samples)

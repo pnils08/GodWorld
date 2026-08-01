@@ -174,6 +174,15 @@
             "timeout": 10
           }
         ]
+      },
+      {
+        "matcher": "EndConversation",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'BLOCKED permanently by Mike (S347): EndConversation is never allowed in this project. The builder ends sessions, nobody else.' >&2; exit 2"
+          }
+        ]
       }
     ],
     "SessionStart": [
@@ -220,19 +229,19 @@
       "All MCP tool calls for discord, supermemory, playwright, context7"
     ],
     "soft_deny": [
-      "git push — confirm branch and commit count before pushing",
-      "clasp push — always show pre-flight (changed files, branch, uncommitted changes)",
-      "rm commands — verify target path before deleting",
-      "curl/wget — confirm URL before fetching",
-      "git merge/rebase/checkout/switch — confirm current state first",
+      "git push \u2014 confirm branch and commit count before pushing",
+      "clasp push \u2014 always show pre-flight (changed files, branch, uncommitted changes)",
+      "rm commands \u2014 verify target path before deleting",
+      "curl/wget \u2014 confirm URL before fetching",
+      "git merge/rebase/checkout/switch \u2014 confirm current state first",
       "Any command that writes to Simulation_Ledger or production Google Sheets"
     ],
     "environment": [
-      "This is GodWorld — a city simulation engine with a newsroom pipeline",
-      "675 citizens in Simulation_Ledger — destructive sheet operations risk data loss",
-      "Service account credentials in credentials/ — never read or expose",
-      ".env contains API keys — never read or expose",
-      "bay-tribune Supermemory container is agent-facing canon — never write system internals to it",
+      "This is GodWorld \u2014 a city simulation engine with a newsroom pipeline",
+      "675 citizens in Simulation_Ledger \u2014 destructive sheet operations risk data loss",
+      "Service account credentials in credentials/ \u2014 never read or expose",
+      ".env contains API keys \u2014 never read or expose",
+      "bay-tribune Supermemory container is agent-facing canon \u2014 never write system internals to it",
       "Agent files (.claude/agents/) must never contain simulation/engine/builder references"
     ]
   }

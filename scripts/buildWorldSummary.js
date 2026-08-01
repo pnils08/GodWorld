@@ -806,6 +806,19 @@ function selectBylineCandidates(lanePools, usage) {
   return picked;
 }
 
+// A pattern's per-desk story handle, normalized for the lane (Phase 2.5 Task
+// 2.5.1). generateTribuneFraming already writes angle + hookLine + the engine's
+// own affected citizens per desk; this is the shape reporters read.
+function handleEntry(h) {
+  const out = {};
+  const clean = s => String(s).replace(/\s+/g, ' ').trim();
+  if (h.angle) out.angle = clean(h.angle);
+  if (h.hookLine) out.hookLine = clean(h.hookLine);
+  const cits = (Array.isArray(h.citizens) ? h.citizens : []).filter(Boolean).map(clean);
+  if (cits.length) out.citizens = cits;
+  return out;
+}
+
 // Pure: builds the desk-signal object from the same loaded cycle data the
 // summary emitters consume. No sheet reads of its own.
 function emitDeskSignal(cycle, data) {
@@ -819,17 +832,42 @@ function emitDeskSignal(cycle, data) {
   const patterns = Array.isArray(auditJson.patterns) ? auditJson.patterns : [];
   patterns.forEach((p, i) => {
     const ev = p.evidence || {};
-    const entry = {
-      kind: 'anomaly',
-      ref: `output/engine_audit_c${cycle}.json patterns[${i}]`
-        + (ev.sheet ? `; evidence: ${ev.sheet} row(s) ${(ev.rows || []).join(',')}` : ''),
-      label: signalLabel(`${p.type || 'unknown-type'} (${p.severity || '—'})`, p.description)
-    };
+    const ref = `output/engine_audit_c${cycle}.json patterns[${i}]`
+      + (ev.sheet ? `; evidence: ${ev.sheet} row(s) ${(ev.rows || []).join(',')}` : '');
     const ae = p.affectedEntities || {};
     const popids = extractPopids(ae.citizens);
+    const hood = (Array.isArray(ae.neighborhoods) && ae.neighborhoods.length)
+      ? ae.neighborhoods.join(', ') : null;
+    const handles = (p.tribuneFraming || {}).storyHandles || {};
+
+    const entry = {
+      kind: 'anomaly',
+      ref,
+      label: signalLabel(`${p.type || 'unknown-type'} (${p.severity || '—'})`, p.description)
+    };
     if (popids.length) entry.popids = popids;
-    if (Array.isArray(ae.neighborhoods) && ae.neighborhoods.length) entry.hood = ae.neighborhoods.join(', ');
+    if (hood) entry.hood = hood;
+    if (handles.civic) entry.handle = handleEntry(handles.civic);
     lanes.civic.push(entry);
+
+    // Task 2.5.1: a pattern reaches business/culture/sports only where the
+    // engine framed an angle for that desk. Civic keeps every pattern above
+    // (bug-is-event reachability); these are additive, so no lane loses rows.
+    for (const desk of ['business', 'culture', 'sports']) {
+      const h = handles[desk];
+      if (!h || !(h.angle || h.hookLine)) continue;
+      const deskEntry = {
+        kind: 'anomaly',
+        ref,
+        label: signalLabel(h.angle, h.hookLine),
+        handle: handleEntry(h)
+      };
+      const handlePopids = extractPopids(h.citizens);
+      const carried = handlePopids.length ? handlePopids : popids;
+      if (carried.length) deskEntry.popids = carried;
+      if (hood) deskEntry.hood = hood;
+      lanes[desk].push(deskEntry);
+    }
   });
 
   // ── civic: initiatives + votes (audit snapshot — same-cycle, zero extra reads) ──

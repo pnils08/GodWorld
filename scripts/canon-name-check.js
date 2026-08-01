@@ -65,11 +65,18 @@ function loadRows() {
 
 function loadCanonNames() {
   const names = new Set();
+  const add = n => {
+    if (!n) return;
+    names.add(n);
+    // "Wendell Carter Jr." — the \b extractor can't capture a trailing period,
+    // so index the period-free form too
+    if (/\.$/.test(n)) names.add(n.replace(/\.+$/, ''));
+  };
   for (const row of loadRows()) {
     // ledger has stray double-spaces ("Jax  Caldera") — normalize or exact match misses
-    if (row.Name) names.add(String(row.Name).replace(/\s+/g, ' ').trim());
+    if (row.Name) add(String(row.Name).replace(/\s+/g, ' ').trim());
     const fl = [row.First, row.Last].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
-    if (fl) names.add(fl);
+    add(fl);
   }
   return names;
 }
@@ -94,9 +101,26 @@ function profilesFor(names) {
   return out;
 }
 
-const HONORIFIC = /^(?:Dr|Sgt|Det|Officer|Mayor|Chief|Councilmember|Councilwoman|Councilman|Ms|Mr|Mrs|Rev|Pastor|Coach|Sen|Rep|President)\.?\.?\s+/;
-// 2-4 capitalized words ("Marisol Garcia", "Dr. Lila Mezran", "A's" excluded — apostrophe words excluded deliberately)
-const CANDIDATE = /\b([A-Z][a-z'-]+(?:\s+[A-Z][a-z'-]+){1,3})\b/g;
+// Title words stripped iteratively from the front of a candidate ("Deputy Mayor
+// Brenda Okoro" -> "Brenda Okoro"; "Police Chief Montez" -> "Montez" -> skipped
+// as single-word rather than false-flagged invented). Compound titles were the
+// S347 false-positive class: real officials reported NOT-IN-LEDGER to the gate.
+const TITLE_WORDS = new Set(['Dr', 'Sgt', 'Det', 'Officer', 'Mayor', 'Chief', 'Councilmember',
+  'Councilwoman', 'Councilman', 'Ms', 'Mr', 'Mrs', 'Rev', 'Pastor', 'Coach', 'Sen', 'Rep',
+  'President', 'Deputy', 'Vice', 'Interim', 'Acting', 'Police', 'Fire', 'Council', 'District',
+  'Attorney', 'Director', 'Superintendent', 'Commissioner', 'Judge', 'Professor', 'Principal',
+  'Project', 'Program']);
+function stripTitles(c) {
+  let words = c.split(/\s+/);
+  while (words.length && TITLE_WORDS.has(words[0].replace(/\.$/, ''))) words = words.slice(1);
+  return words.join(' ');
+}
+// 2-4 capitalized words ("Marisol Garcia", "Dr. Lila Mezran", "A's" excluded — apostrophe words
+// excluded deliberately). Word shape allows hyphenated capitalized parts ("Chen-Ramirez") and
+// Latin-extended lowercase ("Muñoz") — the S347 truncation bug fed "Bobby Chen-" to the gate
+// as an invented name when the real citizen is Bobby Chen-Ramirez.
+const NAME_WORD = "[A-Z][a-z'\\u00C0-\\u024F]+(?:-[A-Z][a-z'\\u00C0-\\u024F]+)*";
+const CANDIDATE = new RegExp('\\b(' + NAME_WORD + '(?:\\s+' + NAME_WORD + '){1,3})\\b', 'g');
 // words that signal the phrase is prose, not a name
 const PROSE_WORDS = new Set(['The', 'This', 'That', 'These', 'Those', 'When', 'What', 'Why', 'How', 'Who',
   'But', 'So', 'And', 'Or', 'If', 'In', 'On', 'At', 'It', 'He', 'She', 'They', 'We', 'You', 'His', 'Her',
@@ -112,7 +136,7 @@ function extractCandidates(text) {
     if (/^\s*#/.test(line)) continue;   // headlines are wordplay, not names ("Who's Sitting…", "Plods Along")
     for (const m of line.matchAll(CANDIDATE)) {
       let c = m[1].trim().replace(/'s$/, '');   // possessive: "Jack London's" -> "Jack London"
-      c = c.replace(HONORIFIC, '').trim();
+      c = stripTitles(c);
       if (c.split(/\s+/).length < 2) continue;
       if (c.split(/\s+/).some(w => PROSE_WORDS.has(w))) continue;
       if (!found.has(c.toLowerCase())) found.set(c.toLowerCase(), c);

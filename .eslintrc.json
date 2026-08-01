@@ -49,7 +49,10 @@
         "scripts/buildArticleIndex.js",
         "scripts/reorganizeArchive.js",
         "dashboard/server.js",
-        "dashboard/vite.config.js"
+        "dashboard/vite.config.js",
+        "dashboard/sportsRoutes.js",
+        "dashboard/sportsRoutes.test.js",
+        "dashboard/src/lib/*.js"
       ],
       "parserOptions": {
         "sourceType": "module"

@@ -1630,9 +1630,7 @@ function extractHandoffCitizenNames_(data) {
 // ════════════════════════════════════════════════════════════════════════════
 
 /**
- * Loads Oakland_Sports_Feed and Chicago_Sports_Feed for recent cycles.
- * Includes entries from (cycle - 10) through cycle, plus entries with no cycle
- * (ongoing narrative items).
+ * Loads exact-Cycle entries from Oakland_Sports_Feed and Chicago_Sports_Feed.
  *
  * @param {Object} cache - SheetCache instance
  * @param {number} cycle - Target cycle number
@@ -1680,6 +1678,16 @@ function loadSingleSportsFeed_(cache, sheetName, cycle) {
   var iRecord = idx('Team Record');
   var iGameDate = idx('VideoGameDate');
   var iGame = idx('VideoGame');
+  var iStoryAngle = idx('StoryAngle');
+  var iPlayerMood = idx('PlayerMood');
+  var iEventTrigger = idx('EventTrigger');
+  var iHomeNeighborhood = idx('HomeNeighborhood');
+  var iStreak = idx('Streak');
+  var iFanSentiment = idx('FanSentiment');
+  var iFranchiseStability = idx('FranchiseStability');
+  var iEconomicFootprint = idx('EconomicFootprint');
+  var iCommunityInvestment = idx('CommunityInvestment');
+  var iMediaProfile = idx('MediaProfile');
 
   var results = [];
 
@@ -1705,7 +1713,17 @@ function loadSingleSportsFeed_(cache, sheetName, cycle) {
       stats: String(safeColRead_(row, iStats, '')).trim(),
       record: String(safeColRead_(row, iRecord, '')).trim(),
       gameDate: String(safeColRead_(row, iGameDate, '')).trim(),
-      videoGame: String(safeColRead_(row, iGame, '')).trim()
+      videoGame: String(safeColRead_(row, iGame, '')).trim(),
+      storyAngle: String(safeColRead_(row, iStoryAngle, '')).trim(),
+      playerMood: String(safeColRead_(row, iPlayerMood, '')).trim(),
+      eventTrigger: String(safeColRead_(row, iEventTrigger, '')).trim(),
+      homeNeighborhood: String(safeColRead_(row, iHomeNeighborhood, '')).trim(),
+      streak: String(safeColRead_(row, iStreak, '')).trim(),
+      fanSentiment: String(safeColRead_(row, iFanSentiment, '')).trim(),
+      franchiseStability: String(safeColRead_(row, iFranchiseStability, '')).trim(),
+      economicFootprint: String(safeColRead_(row, iEconomicFootprint, '')).trim(),
+      communityInvestment: String(safeColRead_(row, iCommunityInvestment, '')).trim(),
+      mediaProfile: String(safeColRead_(row, iMediaProfile, '')).trim()
     });
   }
 
@@ -1722,12 +1740,12 @@ function buildSection15_SportsFeeds_(data) {
   var lines = [];
   var feeds = data.sportsFeeds;
 
-  lines.push('Recent sports activity from video game play. Use this data to');
+  lines.push('Exact-Cycle activity from the sports feeds. Use this data to');
   lines.push('inform sports coverage. Names and events here are canon.');
   lines.push('');
 
   // Oakland feed
-  lines.push('--- OAKLAND (A\'s / Warriors) ---');
+  lines.push('--- OAKLAND (A\'s / Oaks) ---');
   if (feeds.oakland.length > 0) {
     for (var o = 0; o < feeds.oakland.length; o++) {
       var oe = feeds.oakland[o];
@@ -1784,6 +1802,23 @@ function formatSportsFeedEntry_(entry) {
   }
   if (entry.record) {
     line += '\n  Record: ' + entry.record;
+  }
+  if (entry.storyAngle) {
+    line += '\n  Story angle: ' + entry.storyAngle;
+  }
+
+  var stateParts = [];
+  if (entry.playerMood) stateParts.push('mood=' + entry.playerMood);
+  if (entry.eventTrigger) stateParts.push('trigger=' + entry.eventTrigger);
+  if (entry.homeNeighborhood) stateParts.push('home=' + entry.homeNeighborhood);
+  if (entry.streak) stateParts.push('streak=' + entry.streak);
+  if (entry.fanSentiment) stateParts.push('fans=' + entry.fanSentiment);
+  if (entry.franchiseStability) stateParts.push('franchise=' + entry.franchiseStability);
+  if (entry.economicFootprint) stateParts.push('economy=' + entry.economicFootprint);
+  if (entry.communityInvestment) stateParts.push('community=' + entry.communityInvestment);
+  if (entry.mediaProfile) stateParts.push('media=' + entry.mediaProfile);
+  if (stateParts.length > 0) {
+    line += '\n  State: ' + stateParts.join(' | ');
   }
 
   return line;

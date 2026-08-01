@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import fs from 'fs';
+import crypto from 'crypto';
 // Phase 40.3 — env relocated outside repo. Override so stale shell/PM2 env
 // doesn't shadow the canonical values.
 const __envPath = process.env.GODWORLD_ENV_FILE || '/root/.config/godworld/.env';
@@ -10,6 +11,7 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { createRequire } from 'module';
 import { execSync } from 'child_process';
+import { createSportsSheetReader, registerSportsRoutes } from './sportsRoutes.js';
 
 const require = createRequire(import.meta.url);
 
@@ -17,13 +19,18 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const app = express();
 const PORT = process.env.DASHBOARD_PORT || 3001;
+const BIND_HOST = process.env.DASHBOARD_BIND_HOST || '0.0.0.0';
+const DASH_COOKIE_SECURE = process.env.DASHBOARD_COOKIE_SECURE === 'true';
+
+// Accept forwarded protocol/client information only from a loopback proxy.
+app.set('trust proxy', 'loopback');
 
 // --- Auth (Phase 8.7) — Basic Auth + Cookie Login for PWA ---
 const DASH_USER = (process.env.DASHBOARD_USER || '').trim();
 const DASH_PASS = (process.env.DASHBOARD_PASS || '').trim();
 const AUTH_COOKIE = 'gw_auth';
 const COOKIE_TOKEN = DASH_USER && DASH_PASS
-  ? Buffer.from(`${DASH_USER}:${DASH_PASS}`).toString('base64')
+  ? crypto.randomBytes(32).toString('base64url')
   : '';
 
 if (DASH_USER && DASH_PASS) {
@@ -91,7 +98,11 @@ function doLogin(e) {
   app.post('/auth', (req, res) => {
     const { user, pass } = req.body || {};
     if (user === DASH_USER && pass === DASH_PASS) {
-      res.set('Set-Cookie', `${AUTH_COOKIE}=${COOKIE_TOKEN}; Path=/; HttpOnly; SameSite=Strict; Max-Age=2592000`);
+      const secure = DASH_COOKIE_SECURE ? '; Secure' : '';
+      res.set(
+        'Set-Cookie',
+        `${AUTH_COOKIE}=${COOKIE_TOKEN}; Path=/; HttpOnly; SameSite=Strict; Max-Age=2592000${secure}`
+      );
       return res.json({ ok: true });
     }
     return res.status(401).json({ error: 'Invalid credentials' });
@@ -106,14 +117,20 @@ function doLogin(e) {
     if (req.path === '/api/webhooks' && req.method === 'POST') return next();
 
     // Check cookie first (PWA)
-    if (req.cookies[AUTH_COOKIE] === COOKIE_TOKEN) return next();
+    if (req.cookies[AUTH_COOKIE] === COOKIE_TOKEN) {
+      req.authActor = DASH_USER;
+      return next();
+    }
 
     // Check basic auth (browser)
     const auth = req.headers.authorization;
     if (auth && auth.startsWith('Basic ')) {
       const decoded = Buffer.from(auth.slice(6), 'base64').toString();
       const [user, pass] = decoded.split(':');
-      if (user === DASH_USER && pass === DASH_PASS) return next();
+      if (user === DASH_USER && pass === DASH_PASS) {
+        req.authActor = DASH_USER;
+        return next();
+      }
     }
 
     // No valid auth — redirect to login page for HTML requests, 401 for API
@@ -154,6 +171,60 @@ async function getLiveSheetData(sheetName) {
     return cached?.data || null;
   }
 }
+
+const readSportsSheet = createSportsSheetReader(async (sheetName) => {
+  if (!sheetsLib) throw new Error('Sheets API is not available');
+  return sheetsLib.getSheetAsObjects(sheetName);
+});
+
+const {
+  createFileAuditStore,
+  createSportsFeedWriter,
+} = require(join(ROOT, 'scripts/sportsFeedWriter.js'));
+const sportsAuditStore = createFileAuditStore(
+  join(ROOT, 'output/sports-intake/append-audit.jsonl')
+);
+const writeSportsFeed = sheetsLib
+  ? createSportsFeedWriter({
+    appendRowsDetailed: sheetsLib.appendRowsDetailed,
+    readRange: sheetsLib.getSheetData,
+    auditStore: sportsAuditStore,
+  })
+  : null;
+
+async function readFreshSportsSheet(sheetName) {
+  if (!sheetsLib) throw new Error('Sheets API is not available');
+  const rows = await sheetsLib.getSheetAsObjects(sheetName);
+  return {
+    data: rows.map((row, index) => ({
+      ...row,
+      __rowNumber: index + 2,
+    })),
+    fetchedAt: new Date().toISOString(),
+    cacheAgeMs: 0,
+    cacheHit: false,
+    stale: false,
+    warnings: [],
+  };
+}
+
+registerSportsRoutes(app, {
+  readSheet: readSportsSheet,
+  readFreshSheet: readFreshSportsSheet,
+  writeSportsFeed,
+  invalidateSheet: (sheetName) => {
+    readSportsSheet.invalidate(sheetName);
+    delete sheetCache[sheetName];
+  },
+  writeConfig: {
+    enabled: process.env.SPORTS_WRITE_ENABLED === 'true',
+    publicOrigin: process.env.SPORTS_WRITE_ORIGIN,
+    previewSecret: process.env.SPORTS_PREVIEW_TOKEN_SECRET,
+    capabilitySecret: process.env.SPORTS_WRITE_CAPABILITY,
+    secureCookie: DASH_COOKIE_SECURE,
+    directPortRestricted: BIND_HOST === '127.0.0.1' || BIND_HOST === '::1',
+  },
+});
 
 // --- Helpers ---
 
@@ -2098,7 +2169,22 @@ app.get('/api/sports', (req, res) => {
     .filter(f => f.match(/^sports_c\d+\.json$/))
     .sort((a, b) => parseInt(b.match(/\d+/)[0]) - parseInt(a.match(/\d+/)[0]))[0];
 
-  if (!latestSports) return res.json({ feeds: null, digest: null });
+  if (!latestSports) {
+    return res.json({
+      contractVersion: 1,
+      source: {
+        kind: 'desk-packet',
+        name: 'Legacy Oakland and Chicago sports packet endpoint',
+        fetchedAt: null,
+        cycle: null,
+        deprecated: true,
+        replacement: '/api/sports/overview',
+      },
+      warnings: [{ code: 'legacy_sports_packet_missing' }],
+      oakland: { feeds: [], digest: null },
+      chicago: { feeds: [], digest: null },
+    });
+  }
 
   const packet = readJSON(join(packetDir, latestSports));
   const feeds = packet?.sportsFeeds || {};
@@ -2118,6 +2204,19 @@ app.get('/api/sports', (req, res) => {
   }
 
   res.json({
+    contractVersion: 1,
+    source: {
+      kind: 'desk-packet',
+      name: 'Legacy Oakland and Chicago sports packet endpoint',
+      fetchedAt: null,
+      cycle: latestSports ? parseInt(latestSports.match(/\d+/)[0]) : null,
+      deprecated: true,
+      replacement: '/api/sports/overview',
+    },
+    warnings: [{
+      code: 'legacy_sports_endpoint',
+      message: 'Oakland consumers should use /api/sports/overview and /api/sports/workspace.',
+    }],
     oakland: { feeds, digest },
     chicago: { feeds: chicagoFeeds, digest: chicagoDigest },
   });
@@ -2496,8 +2595,8 @@ if (existsSync(distPath)) {
   });
 }
 
-app.listen(PORT, () => {
-  console.log(`GodWorld Dashboard API v3.0 running on http://localhost:${PORT}`);
+app.listen(PORT, BIND_HOST, () => {
+  console.log(`GodWorld Dashboard API v3.0 listening on ${BIND_HOST}:${PORT}`);
   console.log(`\n  DATA`);
   console.log(`  /api/health              — Service status`);
   console.log(`  /api/world-state         — World state (agents/bot)`);

@@ -5,7 +5,10 @@
 **PM2:** `godworld-dashboard` (always running)
 **Stack:** Express + React (Vite build) | Port 3001
 
-Last audited: Session 156 (2026-04-17) — 40 endpoints verified, frontend tabs current.
+Full-dashboard audit: Session 156 (2026-04-17). Sports source/runtime audit:
+2026-07-31 — Waves A–C implemented and locally validated; TLS/proxy deployment,
+production restart, authenticated live-read proof, and live append proof remain
+pending.
 
 ---
 
@@ -35,7 +38,7 @@ Last audited: Session 156 (2026-04-17) — 40 endpoints verified, frontend tabs 
 | **Council** | 9 council seats, factions (OPP/CRC/IND), civic officials |
 | **Tracker** | Initiative status — Stabilization Fund, OARI, Baylight, Transit Hub, Health Center |
 | **Intel** | Story hooks, arcs, domains, storylines |
-| **Sports** | Oakland + Chicago sports feeds, player index |
+| **Sports** | Oakland Sports Desk — exact-Cycle A's/Oaks events and inherited state, live roster/stat lines, non-canon Notebook inbox, deterministic Ripple Preview, and a separately gated verified append flow |
 | **City** | Weather, culture events, transit, faith orgs, neighborhoods |
 | **Search** | Full-text article search across all editions and supplementals |
 | **Chicago** | Chicago bureau — Bulls card, feed events, bureau coverage, reporters (menu only) |
@@ -47,7 +50,7 @@ Last audited: Session 156 (2026-04-17) — 40 endpoints verified, frontend tabs 
 
 ---
 
-## API Endpoints (40 total)
+## API Endpoints
 
 ### System
 | Endpoint | Data Source | Returns | Health |
@@ -109,7 +112,12 @@ Last audited: Session 156 (2026-04-17) — 40 endpoints verified, frontend tabs 
 ### Sports & Scores
 | Endpoint | Data Source | Returns | Health |
 |----------|-----------|---------|--------|
-| `GET /api/sports` | Desk packets (sports + chicago) | Oakland + Chicago sports feeds and digest | Working |
+| `GET /api/sports/overview?cycle=N` | Live `Oakland_Sports_Feed`, `As_Roster`, `Oaks_Roster` | Exact-Cycle events, both effective team states, roster counts, available Cycles, provenance, warnings | Source-built; restart/live proof pending |
+| `GET /api/sports/workspace?cycle=N&team=as\|oaks` | Same live Sheets | One normalized roster, current-stat fields, effective state, events, and valid entry options | Source-built; restart/live proof pending |
+| `GET /api/sports/notebook?limit=1..7` | Complete local `output/notebooklm/daily/` artifacts | Allowlisted brief text, Cycle, freshness, citation count, optional Drive link, permanent `NOT_CANON` | Source-built; no NotebookLM call |
+| `POST /api/sports/preview` | Shared contract + live roster/Simulation Ledger reads | Exact twenty-cell row, resolved POPIDs, and Ripple Preview with `writePerformed: false` | Source-built and fake-source tested; no append |
+| `POST /api/sports/entries` | Signed preview + fresh live reads + detailed Sheets writer | One append, exact `A:T` read-back, persistent idempotency result, and metadata-only receipt | Source-built; disabled by default; TLS/proxy deployment and live proof pending |
+| `GET /api/sports` | Desk packets (sports + chicago) | Deprecated compatibility response for Chicago/unmigrated consumers, with provenance and replacement metadata | Retained temporarily |
 | `GET /api/scores` | `output/edition_scores.json` | Mara audit scores by edition | Working |
 
 ### Mara
@@ -193,7 +201,47 @@ The civic data pipeline is rich underneath but has freshness and display issues.
 
 ---
 
-## Sports Tab Assessment (S106)
+## Oakland Sports Workspace (2026-07-31 source state)
+
+Waves A–C of [[plans/2026-07-30-oakland-sports-workspace]] replace the old
+Oakland packet renderer in the source tree:
+
+- the Sports tab is Oakland-only; Chicago remains on its dedicated tab;
+- The A's and The Oaks have separate state cards and live roster views;
+- event cards are exact-Cycle; an empty Cycle stays empty while inherited state
+  displays its source Cycle and Sheet row;
+- `As_Roster` and `Oaks_Roster` supply exact POPIDs and read-only current-stat
+  fields;
+- the Notebook Daily Inbox reads complete local artifacts only, exposes an
+  allowlist, and stays visibly `NOT CANON`;
+- entry templates project the exact twenty-column compatibility row and current
+  ripple consumers before any write control appears;
+- the final confirmation requires HTTPS, the configured origin, authenticated
+  actor, per-preview CSRF token, separate write key, explicit acknowledgement,
+  and idempotency key;
+- successful confirmation revalidates fresh source data, appends one row,
+  reads back exact `A:T`, invalidates the sports cache, and returns a receipt;
+- the feature flag stays off unless the server is loopback-bound behind TLS
+  with a Secure cookie; no public plain-HTTP write path is accepted;
+- all new sports APIs use contract version 1, provenance, warnings, safe errors,
+  and a 60-second per-Sheet cache with explicit stale failover.
+
+Synthetic tests and intercepted browser fixtures perform no network or Sheet
+write. The final local visual run passed 24/24 checks for desktop, tablet,
+mobile, both teams and roster views, preview, secure confirmation, verified
+receipt, empty/stale/error states, roster readability, bottom-nav clearance,
+structured object rendering, and accessibility.
+
+This is source state, not a deployment claim. No PM2 restart, authenticated live
+probe, NotebookLM invocation, proxy installation, feature-flag enablement, or
+external write was performed. The live host still needs a chosen hostname and
+TLS proxy before Wave C can deploy. `engine.40` and `engine.77` remain open
+sibling gates.
+
+## Historical Sports Tab Assessment (S106; superseded)
+
+The following section records the April packet-based surface. It is not the
+current implementation contract and must not be used as a runbook.
 
 **What's working:**
 - A's card with record (0-0), season state (regular-season), trend (STEADY)
@@ -210,7 +258,7 @@ The civic data pipeline is rich underneath but has freshness and display issues.
 | **No player↔coverage link** | Clicking a player name doesn't navigate to their citizen detail or article coverage trail | Future enhancement |
 | **Chicago buried in Sports tab** | Chicago is a satellite city (123 citizens, 2 reporters, full season data, Paulson GM) but shares a tab with Oakland sports | Consider dedicated CHICAGO tab — see below |
 
-## Chicago Tab Proposal
+## Historical Chicago Tab Proposal (implemented before current sports rebuild)
 
 Chicago isn't just a franchise — it's a satellite city with its own civic context:
 - **123 citizens** on Chicago_Citizens tab (separate from SL)
@@ -264,7 +312,7 @@ The sports desk truesource was enriched:
 | **Council** | Working | All 9 seats + mayor from live Sheets. Factions, districts, POPIDs, notes all correct. |
 | **Tracker** | Working (stale data) | 5 initiatives with rich implementation detail. Last updated Feb 28. 3 show "UNTRACKED" despite having data. |
 | **Intel** | Working — strongest tab | 64 story hooks, 37 arcs (all stuck at "early" — known bug), 53 storylines with citizen/desk routing. Rich engine data. |
-| **Sports** | Partially broken | "Warriors" header bug. No player roster in UI. Chicago buried in bottom half. |
+| **Sports** | Source-built; deployment pending | A's/Oaks exact-Cycle workspace, live roster/stat views, local non-canon inbox, deterministic no-write preview. Restart/authenticated live proof and Wave C remain gated. |
 | **City** | Working | 17 neighborhoods ranked by sentiment with crime, nightlife, retail, events metrics. Status flags on pressure zones. |
 | **Search** | Working | Full-text search across 256 articles (editions + archive + civic). Source field in results. |
 
@@ -297,6 +345,7 @@ The dashboard reads from two categories: live data that auto-refreshes, and loca
 | **Domain_Tracker** (live sheet) | Every API call | 5 min | `/api/domains` |
 | **Crime_Metrics** (live sheet) | Every API call | 5 min | `/api/world-state` |
 | **World_Config** (live sheet) | Every API call | 5 min | `/api/world-state` |
+| **Oakland_Sports_Feed + As_Roster + Oaks_Roster** (live sheets) | Sports route request | 60 sec per-Sheet cache; stale cache is labeled if refresh fails | `/api/sports/overview`, `/api/sports/workspace`, `/api/sports/preview` |
 | **Edition files** (editions/ + archive/) | 5 min cache | Re-scans dirs | `/api/editions`, `/api/search/articles`, `/api/edition/:cycle` |
 
 ### Pipeline-Refresh (requires action)
@@ -310,6 +359,7 @@ The dashboard reads from two categories: live data that auto-refreshes, and loca
 | `article-index.json` | `postRunFiling.js` → `buildArticleIndex.js` (auto S106) | Step 22 of edition pipeline | `/api/articles/index` | Current (S106 — 244 entries) |
 | `player-index.json` | `buildPlayerIndex.js --write` | After TrueSource data changes | `/api/players`, `/api/players/:popId` | Current (62 players) |
 | `bay_tribune_roster.json` | Manual schema file | When reporter roster changes | `/api/newsroom` (roster section) | Current |
+| `output/notebooklm/daily/c<Cycle>/<pack-hash>/` | `notebooklmDailyNews.js` | Existing separately governed daily job | `/api/sports/notebook` | Complete local artifacts only; `NOT_CANON`; route never invokes NotebookLM |
 
 ### Automated Refresh (S106)
 
@@ -333,16 +383,20 @@ On restart (PM2 or `node dashboard/server.js`):
 
 ## Frontend Status
 
-The frontend is functional but not user-optimized:
+The overall frontend remains mixed-generation:
 - Dark theme, responsive layout, card-based articles
 - Login page with cookie-based auth
 - Tab navigation across 10 views (Mission Control + Chicago added S113)
 - Key Figures section with Tier 1 citizen cards
 - Mission Control: session events timeline, system health, channel status, quick actions
-- **Not mobile-friendly** in current state
+- **Sports is responsive and accessibility-checked** across desktop, tablet, and
+  mobile synthetic fixtures; older tabs were not re-audited in this change
 - **No real-time updates** — data loads on page load
 
-The frontend is a visualization layer. The backend API is the primary value.
+The sports surface can explicitly refresh or select another Cycle. The frontend
+remains read-only through preview. Wave C exposes confirmation only when every
+server-side write gate is satisfied; the current live deployment has not
+enabled that boundary.
 
 ---
 
@@ -350,7 +404,10 @@ The frontend is a visualization layer. The backend API is the primary value.
 
 | File | Purpose |
 |------|---------|
-| `dashboard/server.js` | Express API (~2,350 lines, 40 endpoints) |
+| `dashboard/server.js` | Express API and route registration |
+| `dashboard/sportsRoutes.js` | Versioned Oakland sports reads, local Notebook inbox, and deterministic no-write preview |
+| `dashboard/src/components/Sports*.jsx` | Responsive Oakland Sports Desk UI |
+| `dashboard/src/lib/sportsApi.js` | Versioned sports envelope client and typed-safe errors |
 | `output/session-events.jsonl` | File-backed session event history (persists across restarts) |
 | `dashboard/src/` | React frontend source (Vite) |
 | `dashboard/dist/` | Built frontend (served as static) |

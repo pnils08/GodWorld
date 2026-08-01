@@ -181,6 +181,32 @@ function getColVal_(row, colIdx) {
   return (row[colIdx] || '').toString().trim();
 }
 
+/**
+ * Normalizes the active Oakland team contract without introducing a Node
+ * dependency into Apps Script. Free-text matching preserves the historical
+ * read path; NBA/Warriors and NFL remain read-only compatibility values.
+ */
+function normalizeOaklandFeedTeam_(value) {
+  var rawTeam = (value || '').toString().trim();
+  if (!rawTeam) return '';
+
+  var team = rawTeam.toLowerCase();
+  if (team === 'as' || team.indexOf("a's") !== -1) return "A's";
+  if (
+    team.indexOf('oaks') !== -1 ||
+    team.indexOf('nba') !== -1 ||
+    team.indexOf('warriors') !== -1
+  ) return 'Oaks';
+  if (team.indexOf('nfl') !== -1) return 'NFL';
+
+  Logger.log(
+    'normalizeOaklandFeedTeam_: unknown nonblank TeamsUsed value "' +
+    rawTeam +
+    '"; skipping'
+  );
+  return '';
+}
+
 
 /**
  * Derive activeSports array from TeamsUsed across all feed entries.
@@ -190,18 +216,18 @@ function deriveActiveSportsFromFeed_(entries) {
   var active = [];
 
   for (var i = 0; i < entries.length; i++) {
-    var team = (entries[i].teamsUsed || '').toLowerCase();
+    var team = normalizeOaklandFeedTeam_(entries[i].teamsUsed);
     if (!team) continue;
 
-    if ((team.indexOf("a's") !== -1 || team === "as" || team === "oakland a's") && !seen.baseball) {
+    if (team === "A's" && !seen.baseball) {
       seen.baseball = true;
       active.push("baseball");
     }
-    if ((team === "nba" || team.indexOf("nba") !== -1) && !seen.basketball) {
+    if (team === 'Oaks' && !seen.basketball) {
       seen.basketball = true;
       active.push("basketball");
     }
-    if ((team === "nfl" || team.indexOf("nfl") !== -1) && !seen.football) {
+    if (team === 'NFL' && !seen.football) {
       seen.football = true;
       active.push("football");
     }
@@ -389,7 +415,7 @@ function processFeedSheet_(sheet, currentCycle) {
     if (isNaN(cycle) || cycle === 0) continue;
     if (currentCycle > 0 && cycle > currentCycle) continue;
 
-    var team = teamsCol !== -1 ? (row[teamsCol] || '').toString().trim() : '';
+    var team = teamsCol !== -1 ? normalizeOaklandFeedTeam_(row[teamsCol]) : '';
     if (!team) continue;
 
     if (!teamState[team]) {
@@ -743,8 +769,9 @@ function findColumnIndex_(headers, possibleNames) {
  *
  * TeamsUsed values (Oakland_Sports_Feed):
  * - A's              : Oakland A's baseball
- * - NBA              : Oakland NBA team (future)
- * - NFL              : Oakland NFL team (future)
+ * - Oaks             : Oakland Oaks basketball
+ * - NBA / Warriors   : legacy read aliases for Oaks; never write new rows with them
+ * - NFL / free text  : historical read compatibility only; not a new-write value
  *
  * ============================================================================
  */

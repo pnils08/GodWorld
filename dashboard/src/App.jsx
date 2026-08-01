@@ -39,6 +39,7 @@ import {
   Server,
   MapPinned,
 } from 'lucide-react';
+import SportsTab from './components/SportsTab';
 
 // --- Data Fetching ---
 
@@ -70,7 +71,6 @@ export default function App() {
   const [storylines, setStorylines] = useState(null);
   const [articleSearchResults, setArticleSearchResults] = useState(null);
   const [articleQuery, setArticleQuery] = useState('');
-  const [sports, setSports] = useState(null);
   const [newsroom, setNewsroom] = useState(null);
   const [overlayArticle, setOverlayArticle] = useState(null);
   const [citizenDetail, setCitizenDetail] = useState(null);
@@ -133,13 +133,6 @@ export default function App() {
       setArticleSearchResults(data);
     } catch { /* ignore */ }
   }, []);
-
-  // Load sports data when SPORTS tab is selected
-  useEffect(() => {
-    if (activeTab === 'SPORTS' && !sports) {
-      fetchAPI('/api/sports').then(setSports).catch(() => {});
-    }
-  }, [activeTab, sports]);
 
   // Load newsroom data when NEWSROOM tab is selected
   useEffect(() => {
@@ -451,10 +444,10 @@ export default function App() {
       )}
 
       {/* MAIN CONTENT */}
-      <main className="pt-24 px-5 max-w-2xl mx-auto">
+      <main className={`pt-24 px-5 mx-auto ${activeTab === 'SPORTS' ? 'max-w-6xl' : 'max-w-2xl'}`}>
 
         {/* TELEMETRY CARDS */}
-        <section className="mb-8">
+        {activeTab !== 'SPORTS' && <section className="mb-8">
           <div className="grid grid-cols-2 gap-3 mb-4">
             <MetricCard label="Cycle" value={edHeader.cycle || '—'} color="sky" />
             <MetricCard label="Sentiment" value={avgSentiment} color="amber" icon={sentimentIcon(avgSentiment)} />
@@ -474,7 +467,7 @@ export default function App() {
               </p>
             </div>
           </div>
-        </section>
+        </section>}
 
         {/* TAB BAR */}
         <div className="flex gap-3 border-b border-white/5 mb-6 overflow-x-auto no-scrollbar">
@@ -482,7 +475,7 @@ export default function App() {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`pb-2 text-[10px] font-black tracking-widest uppercase transition-colors whitespace-nowrap ${activeTab === tab ? 'text-white border-b-2 border-sky-500' : 'text-neutral-500'}`}
+              className={`pb-2 text-[10px] font-black tracking-widest uppercase transition-colors whitespace-nowrap ${activeTab === tab ? 'text-white border-b-2 border-sky-500' : 'text-neutral-400'}`}
             >
               {tab}
             </button>
@@ -902,20 +895,7 @@ export default function App() {
 
         {/* SPORTS TAB */}
         {activeTab === 'SPORTS' && (
-          <section className="space-y-6">
-            {!sports && (
-              <div className="p-8 text-center text-neutral-500">
-                <Loader size={24} className="mx-auto mb-3 animate-spin text-sky-500" />
-                <p className="text-sm">Loading sports data...</p>
-              </div>
-            )}
-            {sports && (
-              <>
-                <SportsSection city="oakland" data={sports.oakland} color="green" />
-                <SportsSection city="chicago" data={sports.chicago} color="red" />
-              </>
-            )}
-          </section>
+          <SportsTab />
         )}
 
         {/* CITY TAB */}
@@ -1494,229 +1474,6 @@ function ArticleSearchView() {
         </div>
       )}
     </section>
-  );
-}
-
-function SportsSection({ city, data, color }) {
-  const [showAllFeeds, setShowAllFeeds] = useState(false);
-  if (!data) return null;
-
-  // Digest may be flat ({teamLabel, ...}) or nested by team ({as: {...}, warriors: {...}})
-  let rawDigest = typeof data.digest === 'object' ? data.digest : null;
-  let teamDigests = [];
-  if (rawDigest) {
-    if (rawDigest.teamLabel) {
-      teamDigests = [rawDigest];
-    } else {
-      teamDigests = Object.values(rawDigest).filter(v => v && typeof v === 'object' && v.teamLabel);
-    }
-  }
-  const digest = teamDigests[0] || null;
-  const feeds = Array.isArray(data.feeds) ? data.feeds : [];
-  const accentColor = color === 'green' ? 'text-green-400' : 'text-red-400';
-  const borderColor = color === 'green' ? 'border-green-500/20' : 'border-red-500/20';
-  const bgColor = color === 'green' ? 'bg-green-500/10' : 'bg-red-500/10';
-
-  const momentumColors = { rising: 'text-green-400', steady: 'text-sky-400', falling: 'text-amber-400', declining: 'text-red-400' };
-  const eventTypeColors = {
-    'roster-move': 'bg-purple-500/20 text-purple-400',
-    'game-result': 'bg-sky-500/20 text-sky-400',
-    'injury': 'bg-red-500/20 text-red-400',
-    'milestone': 'bg-amber-500/20 text-amber-400',
-    'trade': 'bg-orange-500/20 text-orange-400',
-    'callup': 'bg-emerald-500/20 text-emerald-400',
-    'signing': 'bg-pink-500/20 text-pink-400',
-  };
-
-  const displayFeeds = showAllFeeds ? feeds : feeds.slice(0, 5);
-
-  return (
-    <div>
-      {/* Team header */}
-      <div className="flex items-center gap-2 mb-3">
-        <Trophy size={14} className={accentColor} />
-        <h3 className="text-xs font-black uppercase tracking-widest">{city === 'oakland' ? 'Oakland' : 'Chicago'}</h3>
-      </div>
-
-      {/* Digest card */}
-      {digest && (
-        <div className={`p-4 bg-neutral-900/60 rounded-2xl border ${borderColor} mb-4`}>
-          <div className="flex justify-between items-start mb-3">
-            <div>
-              <h4 className={`text-lg font-black ${accentColor}`}>{digest.teamLabel || city.charAt(0).toUpperCase() + city.slice(1)}</h4>
-              <span className="text-[10px] text-neutral-500">{digest.seasonState}</span>
-            </div>
-            <div className="text-right">
-              {digest.currentRecord && (
-                <div className="text-xl font-black tracking-tight">{digest.currentRecord}</div>
-              )}
-              {digest.teamMomentum && (
-                <span className={`text-[9px] font-bold uppercase ${momentumColors[digest.teamMomentum] || 'text-neutral-500'}`}>
-                  {digest.teamMomentum === 'rising' ? '▲' : digest.teamMomentum === 'falling' ? '▼' : '●'} {digest.teamMomentum}
-                </span>
-              )}
-            </div>
-          </div>
-
-          {/* Roster moves */}
-          {digest.rosterMoves?.length > 0 && (
-            <div className="mb-3">
-              <h5 className="text-[8px] font-black uppercase tracking-widest text-neutral-500 mb-1.5">Roster Moves</h5>
-              {digest.rosterMoves.map((rm, i) => (
-                <div key={i} className="flex items-start gap-2 mb-1">
-                  <span className="text-[9px] font-mono text-neutral-500 shrink-0">C{rm.cycle}</span>
-                  <span className="text-[10px] text-neutral-400">{rm.names?.join(', ')}</span>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* Player features */}
-          {digest.playerFeatures?.length > 0 && (
-            <div className="mb-3">
-              <h5 className="text-[8px] font-black uppercase tracking-widest text-neutral-500 mb-1.5">Player Features</h5>
-              {digest.playerFeatures.map((pf, i) => (
-                <div key={i} className="flex items-start gap-2 mb-1">
-                  <span className="text-[9px] font-mono text-neutral-500 shrink-0">C{pf.cycle}</span>
-                  <span className={`text-[10px] font-bold ${accentColor}`}>{pf.names?.join(', ')}</span>
-                  {pf.angle && <span className="text-[9px] text-neutral-500 italic">{pf.angle}</span>}
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* Story angles */}
-          {digest.activeStoryAngles?.length > 0 && (
-            <div className="mb-3">
-              <h5 className="text-[8px] font-black uppercase tracking-widest text-neutral-500 mb-1.5">Story Angles</h5>
-              <div className="flex flex-wrap gap-1.5">
-                {digest.activeStoryAngles.map((angle, i) => (
-                  <span key={i} className={`text-[9px] px-2 py-0.5 rounded-full ${bgColor} ${accentColor} font-bold`}>
-                    {typeof angle === 'string' ? angle : angle.angle || angle.name || JSON.stringify(angle)}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Player moods */}
-          {digest.playerMoods?.length > 0 && (
-            <div className="mb-3">
-              <h5 className="text-[8px] font-black uppercase tracking-widest text-neutral-500 mb-1.5">Clubhouse</h5>
-              <div className="space-y-1">
-                {digest.playerMoods.map((pm, i) => (
-                  <div key={i} className="flex items-center gap-2">
-                    <span className="text-[10px] text-neutral-300 font-bold">{pm.name}</span>
-                    <span className={`text-[9px] ${pm.mood === 'hot' || pm.mood === 'confident' ? 'text-green-400' : pm.mood === 'cold' || pm.mood === 'frustrated' ? 'text-red-400' : 'text-neutral-500'}`}>
-                      {pm.mood}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Editorial notes */}
-          {digest.editorialNotes && (Array.isArray(digest.editorialNotes) ? digest.editorialNotes.length > 0 : true) && (
-            <div className="mt-3 pt-3 border-t border-white/5">
-              <p className="text-[10px] text-neutral-500 italic leading-relaxed">
-                {typeof digest.editorialNotes === 'string' ? digest.editorialNotes : Array.isArray(digest.editorialNotes) ? digest.editorialNotes.join(' · ') : String(digest.editorialNotes)}
-              </p>
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* Additional team digests — filter out Warriors (not a GodWorld franchise) */}
-      {teamDigests.slice(1).filter(td => !/warriors/i.test(td.teamLabel)).map((td, idx) => (
-        <div key={idx} className={`p-4 bg-neutral-900/60 rounded-2xl border ${borderColor} mb-4`}>
-          <div className="flex justify-between items-start mb-3">
-            <div>
-              <h4 className={`text-lg font-black ${accentColor}`}>{td.teamLabel}</h4>
-              <span className="text-[10px] text-neutral-500">{td.seasonState}</span>
-            </div>
-            <div className="text-right">
-              {td.currentRecord && <div className="text-xl font-black tracking-tight">{td.currentRecord}</div>}
-              {td.teamMomentum && (
-                <span className={`text-[9px] font-bold uppercase ${momentumColors[td.teamMomentum] || 'text-neutral-500'}`}>
-                  {td.teamMomentum === 'rising' ? '▲' : td.teamMomentum === 'falling' ? '▼' : '●'} {td.teamMomentum}
-                </span>
-              )}
-            </div>
-          </div>
-          {td.editorialNotes && (Array.isArray(td.editorialNotes) ? td.editorialNotes.length > 0 : true) && (
-            <p className="text-[10px] text-neutral-500 italic leading-relaxed">
-              {typeof td.editorialNotes === 'string' ? td.editorialNotes : Array.isArray(td.editorialNotes) ? td.editorialNotes.join(' · ') : String(td.editorialNotes)}
-            </p>
-          )}
-        </div>
-      ))}
-
-      {/* Feed events */}
-      {feeds.length > 0 && (
-        <div>
-          <div className="flex items-center justify-between mb-2">
-            <h5 className="text-[9px] font-black uppercase tracking-widest text-neutral-500">
-              Feed Events <span className="text-neutral-500">({feeds.length})</span>
-            </h5>
-          </div>
-          <div className="space-y-2">
-            {displayFeeds.map((ev, i) => (
-              <SportsFeedEvent key={i} event={ev} eventTypeColors={eventTypeColors} />
-            ))}
-          </div>
-          {feeds.length > 5 && (
-            <button
-              onClick={() => setShowAllFeeds(!showAllFeeds)}
-              className="w-full mt-2 py-2 text-[10px] font-bold text-neutral-500 hover:text-white transition-colors"
-            >
-              {showAllFeeds ? 'Show less' : `Show all ${feeds.length} events`}
-            </button>
-          )}
-        </div>
-      )}
-
-      {!digest && feeds.length === 0 && (
-        <p className="text-[10px] text-neutral-500 italic">No {city} sports data in current desk packet</p>
-      )}
-    </div>
-  );
-}
-
-function SportsFeedEvent({ event, eventTypeColors }) {
-  const [expanded, setExpanded] = useState(false);
-  const ev = event;
-
-  return (
-    <div className="p-3 bg-neutral-900/40 rounded-xl border border-white/5 cursor-pointer hover:bg-neutral-900/60 transition-colors"
-      onClick={() => setExpanded(!expanded)}>
-      <div className="flex justify-between items-start mb-1">
-        <div className="flex items-center gap-2">
-          <span className={`text-[8px] px-1.5 py-0.5 rounded font-bold ${eventTypeColors[ev.EventType] || 'bg-neutral-500/20 text-neutral-400'}`}>
-            {ev.EventType}
-          </span>
-          <span className="text-[9px] text-neutral-500">{ev.SeasonType}</span>
-        </div>
-        <div className="flex items-center gap-2">
-          {ev.Streak && <span className="text-[9px] font-mono text-amber-500">{ev.Streak}</span>}
-          {ev['Team Record'] && <span className="text-[9px] font-mono text-neutral-500">{ev['Team Record']}</span>}
-        </div>
-      </div>
-      <div className="flex items-center gap-2 mb-1">
-        {ev.NamesUsed && ev.NamesUsed.toLowerCase() !== 'none' && <span className="text-[10px] font-bold text-neutral-300">{ev.NamesUsed}</span>}
-      </div>
-      <p className={`text-[10px] text-neutral-400 leading-relaxed ${expanded ? '' : 'line-clamp-2'}`}>{ev.Notes}</p>
-      {expanded && (
-        <div className="mt-2 pt-2 border-t border-white/5 grid grid-cols-2 gap-2">
-          {ev.Stats && <MiniDetail label="Stats" value={ev.Stats} />}
-          {ev.StoryAngle && <MiniDetail label="Story Angle" value={ev.StoryAngle} />}
-          {ev.PlayerMood && <MiniDetail label="Mood" value={ev.PlayerMood} />}
-          {ev.HomeNeighborhood && <MiniDetail label="Neighborhood" value={ev.HomeNeighborhood} />}
-          {ev.TeamsUsed && <MiniDetail label="Team" value={ev.TeamsUsed} />}
-          {ev.EventTrigger && <MiniDetail label="Trigger" value={ev.EventTrigger} />}
-        </div>
-      )}
-    </div>
   );
 }
 

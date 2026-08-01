@@ -98,7 +98,7 @@ var EVENT_TRIGGER_VALUES = [
   'draft'
 ];
 
-var OAKLAND_TEAMS = ["A's", 'Warriors'];
+var OAKLAND_TEAMS = ["A's", 'Oaks'];
 
 var CHICAGO_TEAMS = ['Bulls'];
 

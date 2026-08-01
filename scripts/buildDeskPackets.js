@@ -94,6 +94,7 @@ function getCliArg(flag) {
 // ─── CONFIGURATION ─────────────────────────────────────────
 const getCurrentCycle = require('../lib/getCurrentCycle');
 const contextScan = require('../lib/contextScan');
+const sportsFeedContract = require('./sportsFeedContract');
 const CYCLE = getCurrentCycle();
 const PROJECT_ROOT = path.resolve(__dirname, '..');
 // pipeline.12 Task 3 — cap the full packet's interviewCandidates so the bundle
@@ -153,7 +154,7 @@ const DESKS = {
     rosterDeskKeys: ['sports'],
     articleBudget: { min: 2, max: 5, recommended: 3 },
     storylineKeywords: [
-      "a's", 'spring training', 'keane', 'seymour', 'warriors', 'giannis',
+      "a's", 'spring training', 'keane', 'seymour', 'oaks', 'warriors', 'giannis',
       'dynasty', 'horn', 'aitken', 'davis', 'mesa', 'coliseum', 'dillon',
       'ramos', 'coles', 'ellis', 'paulson', 'oakland sports', 'antetokounmpo',
       'green', 'moody', 'championship', 'expansion', 'nba',
@@ -253,7 +254,7 @@ const DOMAIN_TO_DESKS = {
 
 // Chicago-specific filtering for SPORTS domain
 const CHICAGO_TEAM_KEYWORDS = ['bulls', 'chicago', 'trepagnier', 'giddey', 'simmons', 'holiday', 'buzelis', 'huerter', 'kessler', 'stanley'];
-const OAKLAND_TEAM_KEYWORDS = ['a\'s', 'warriors', 'keane', 'aitken', 'horn', 'seymour', 'giannis', 'antetokounmpo', 'green', 'moody', 'dillon', 'ramos', 'coles', 'taveras', 'quintero', 'rosales', 'richards', 'rivas', 'kelley', 'davis'];
+const OAKLAND_TEAM_KEYWORDS = ['a\'s', 'oaks', 'warriors', 'keane', 'aitken', 'horn', 'seymour', 'giannis', 'antetokounmpo', 'green', 'moody', 'dillon', 'ramos', 'coles', 'taveras', 'quintero', 'rosales', 'richards', 'rivas', 'kelley', 'davis'];
 
 // ─── SHEETS API SETUP ──────────────────────────────────────
 require('/root/GodWorld/lib/env');
@@ -2154,11 +2155,10 @@ async function main() {
   // Cultural
   var culturalLedger = allToObjects(culturalRaw);
 
-  // Sports feeds: current cycle for desk packets, full history for roster building
-  var allOakSports = allToObjects(oakSportsRaw);
+  // Sports feeds: exact current Cycle for Oakland desk packets. Do not substitute
+  // historical events when the selected Cycle is empty.
   var allChiSports = allToObjects(chiSportsRaw);
-  var oakSports = filterByCycle(oakSportsRaw, CYCLE);
-  if (oakSports.length === 0) oakSports = allOakSports; // fallback to all
+  var oakSports = sportsFeedContract.filterFeedRowsForCycle(allToObjects(oakSportsRaw), CYCLE);
   var chiSports = filterByCycle(chiSportsRaw, CYCLE);
   if (chiSports.length === 0) chiSports = allChiSports;
 
@@ -2547,30 +2547,21 @@ async function main() {
     // Sports feed digest (v1.6) — structured intelligence from raw feed, team-separated
     var sportsFeedDigest = null;
     if (desk.getsSportsFeeds === 'oakland') {
-      // Oakland feed contains both A's and Warriors — split by TeamsUsed
-      var asEntries = oakSports.filter(function(e) {
-        return (e.TeamsUsed || '').toString().trim().toLowerCase() === "a's";
-      });
-      var warriorsEntries = oakSports.filter(function(e) {
-        return (e.TeamsUsed || '').toString().trim().toLowerCase() === 'warriors';
-      });
+      var oaklandTeams = sportsFeedContract.splitOaklandFeedEntries(oakSports);
       sportsFeedDigest = {
-        as: buildSportsFeedDigest(asEntries, deskStorylines, "A's"),
-        warriors: buildSportsFeedDigest(warriorsEntries, deskStorylines, 'Warriors')
+        as: buildSportsFeedDigest(oaklandTeams.as, deskStorylines, "A's"),
+        oaks: buildSportsFeedDigest(oaklandTeams.oaks, deskStorylines, 'Oaks'),
+        warnings: oaklandTeams.warnings
       };
     } else if (desk.getsSportsFeeds === 'chicago') {
       sportsFeedDigest = buildSportsFeedDigest(chiSports, deskStorylines, 'Bulls');
     } else if (desk.getsSportsFeeds === 'both') {
-      var asEntriesAll = oakSports.filter(function(e) {
-        return (e.TeamsUsed || '').toString().trim().toLowerCase() === "a's";
-      });
-      var warriorsEntriesAll = oakSports.filter(function(e) {
-        return (e.TeamsUsed || '').toString().trim().toLowerCase() === 'warriors';
-      });
+      var allOaklandTeams = sportsFeedContract.splitOaklandFeedEntries(oakSports);
       sportsFeedDigest = {
-        as: buildSportsFeedDigest(asEntriesAll, deskStorylines, "A's"),
-        warriors: buildSportsFeedDigest(warriorsEntriesAll, deskStorylines, 'Warriors'),
-        chicago: buildSportsFeedDigest(chiSports, deskStorylines, 'Bulls')
+        as: buildSportsFeedDigest(allOaklandTeams.as, deskStorylines, "A's"),
+        oaks: buildSportsFeedDigest(allOaklandTeams.oaks, deskStorylines, 'Oaks'),
+        chicago: buildSportsFeedDigest(chiSports, deskStorylines, 'Bulls'),
+        warnings: allOaklandTeams.warnings
       };
     }
 
@@ -2761,11 +2752,18 @@ async function main() {
                 '| Households:', (packet.households || []).length,
                 '| Bonds:', (packet.bonds || []).length);
     console.log('  Story connections:', storyConnections.enrichmentNote);
-    if (sportsFeedDigest && !sportsFeedDigest.empty) {
-      var digestLabel = sportsFeedDigest.oakland ? 'Oakland + Chicago' : (sportsFeedDigest.teamLabel || 'sports');
-      var digestNote = sportsFeedDigest.oakland
-        ? sportsFeedDigest.oakland.digestNote + ' | ' + sportsFeedDigest.chicago.digestNote
-        : sportsFeedDigest.digestNote;
+    if (sportsFeedDigest) {
+      var digestParts = sportsFeedDigest.teamLabel
+        ? [sportsFeedDigest.digestNote]
+        : ['as', 'oaks', 'chicago'].filter(function(key) {
+          return sportsFeedDigest[key];
+        }).map(function(key) {
+          return sportsFeedDigest[key].digestNote;
+        });
+      var digestLabel = sportsFeedDigest.teamLabel || (
+        sportsFeedDigest.chicago ? 'Oakland + Chicago' : 'Oakland'
+      );
+      var digestNote = digestParts.filter(Boolean).join(' | ') || 'No exact-Cycle entries';
       console.log('  Sports digest (' + digestLabel + '):', digestNote);
     }
     console.log('  Reporters:', reporterNames.join(', ') || '(citizen voices)');

@@ -1,7 +1,7 @@
 ---
 title: Model Division of Labor & Hierarchy
 created: 2026-06-26
-updated: 2026-07-28
+updated: 2026-08-01
 type: reference
 tags: [architecture, models, orchestration, isolation, active]
 pointers:
@@ -50,7 +50,7 @@ Which Claude tier each terminal's lead session runs on. The lead holds orchestra
 ## 3. Backup CLIs: Kimi + Codex — *Mike's hands-on second assistants*
 **Primary Persona:** Out-of-band terminal assistants (Mike-driven) — strictly outside the `GodWorld` roleplay layer
 
-* **The Job:** Doc-truing, running scripts, sim-design brainstorming, and general tool-using terminal work when Claude usage is exhausted mid-week. **Kimi Code** (K2.6, cheap pay-as-you-go, different lab) and **Codex CLI** (GPT-5.6, validated S332) are the different-eyes secondaries. Both share the same writable scope and commit/push conditions (`AGENTS.md` §Push authorization).
+* **The Job:** Doc-truing, running scripts, sim-design brainstorming, and general tool-using terminal work when Claude usage is exhausted mid-week. **Kimi Code** (K3 / k3-256k lead + K2.7-code subagent tier, subscription 7-day quota + optional Extra Usage top-ups — not pay-as-you-go, different lab) and **Codex CLI** (GPT-5.6, validated S332) are the different-eyes secondaries. Both share the same writable scope and commit/push conditions (`AGENTS.md` §Push authorization).
 * **Why here:** reliability + honest tool-use reporting is the #1 selection criterion for the CLI slot, above raw writing skill (S332). Codex was briefly demoted to the gated tier on 2026-07-28 after inserting unapproved design into the Event_Content_Ledger plan; restored to backup tier the same day (Mike-direct, S343).
 
 ## 4. Antigravity (`agy`) / Gemini — *Gated, proposal-only*
@@ -131,3 +131,4 @@ model-tier + cost-to-reasoning view.
 ## Changelog
 
 - 2026-07-28 — Trued §6 to root `AGENTS.md`: corrected the binding-source pointer, made the Kimi/Codex ordinary writable scope exact, restored the engine-substrate and protected-history gates, and documented the own-`NEXT[...]`-line-only session-close exception.
+- 2026-08-01 — Kimi: trued §3's stale Kimi label ("K2.6, cheap pay-as-you-go" → K3 / k3-256k lead + K2.7-code subagent tier, subscription 7-day quota + optional Extra Usage). Companion rule filed same day in `AGENTS.md` §Subagent cost discipline (uncommitted at edit time).

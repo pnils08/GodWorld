@@ -562,9 +562,51 @@ deployment, closing the cross-session double-append finding in
      engine.77 proving event, and any season-close Drive update.
 - **Verify:** Documentation and source agree; all local checks pass; every live
   action has its own builder approval and exact read-back record.
-- **Status:** [ ] in progress — active docs, local validation, independent
-  review, rollout coordination, and source landing complete; deployment and
-  separately approved live proofs remain
+- **Status:** [ ] in progress — source landed by engine-sheet at `ce2a7d11`
+  (S349); independent review COMPLETE — [[../reviews/2026-08-02-sports-intake-opus-review]],
+  verdict **FIX-BEFORE-DEPLOY**. Deployment is now gated on that fix list
+  (items 1–4), the first live proof on item 5, plus Mike's separate go for
+  each live action. See Task 10.
+
+### Task 10: Clear the independent-review fix list (engine-sheet)
+
+Opened S349 from [[../reviews/2026-08-02-sports-intake-opus-review]]. Nothing
+deploys until items 1–4 land and their regression cases pass.
+
+- **Files:**
+  - `scripts/sportsFeedWriter.js` — modify (items 1, 2, 3, 4, 7)
+  - `scripts/sportsFeedContract.js` — modify (items 3-input-cap, 6)
+  - `dashboard/server.js` / `dashboard/sportsRoutes.js` — modify (item 8)
+  - the five sports test files — extend with a regression case per item
+- **Steps:**
+  1. **Item 1** — enforce exact `Oakland_Sports_Feed` header layout in the
+     write path (same `exactHeaders` guard the other four surfaces use), so a
+     column insert/reorder fails loud instead of writing one column off with a
+     green read-back.
+  2. **Item 2** — stop `updateCells` from silently replacing formulas: read
+     the before-image with an unformatted/formula-visible value render and
+     refuse to overwrite a formula cell; write numeric stat fields as numbers,
+     not `stringValue`.
+  3. **Item 3** — distinguish provably-no-op failures (structured 4xx from
+     `batchUpdate`, which validates all subrequests before applying) from
+     genuinely uncertain ones (lost response/timeout); only the latter latches.
+     Add a draft field length cap upstream + fix the ineffective route-level
+     body limit (item 8 of the review — the global `express.json()` already
+     parsed the body).
+  4. **Item 4** — make "no confirmation during a cycle run" mechanical, not
+     advisory: re-resolve LifeHistory_Log / Ripple_Ledger append targets
+     immediately before the batch and narrow the precondition hash so a
+     routine engine append can't 409 every pending preview.
+  5. **Item 5 (before first live proof)** — check whether `As_Roster.Middle`
+     is populated for any player; reconcile the roster `First Middle Last`
+     join against the ledger's `First Last`.
+  6. **Items 6–9 (hardening, take with the above)** — `hasOwnProperty`
+     allowlist check; audit records capture the pre-image of every written
+     cell; document that same-origin/HTTPS are proxy attestations and the real
+     controls are dashboard auth + capability header.
+- **Verify:** a regression test per item in the existing fake-only harnesses;
+  full sports suite + dashboard build green; no live write.
+- **Status:** [ ] not started
 
 ## Validation matrix
 
@@ -656,3 +698,5 @@ compensation.
 - 2026-08-02 — Initial registered draft combining engine.40 and engine.77,
   choosing duplicate-header-safe roster storage, atomic multi-ledger writes,
   four bounded roster actions, and an explicit Tier-1 A's season-close gate.
+- 2026-08-02 (engine-sheet) — Codex source landed at `ce2a7d11` after review.
+- 2026-08-02 (engine-sheet) — Task 9 independent review done: FIX-BEFORE-DEPLOY. Task 10 opened for the fix list.

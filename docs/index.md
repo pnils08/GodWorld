@@ -416,6 +416,7 @@ Small, dated decision records. Created only when a choice is (a) hard to reverse
 
 ## `docs/reviews/` — deep single-system reviews
 
+- **[[reviews/2026-08-02-sports-intake-opus-review]]** — Task 9 independent adversarial review of the sports stat/event intake write boundary (commit ce2a7d11). Verdict FIX-BEFORE-DEPLOY: feed header unvalidated in the write path, updateCells destroys formulas, any batch error latches permanent `uncertain`, concurrent cycles force false uncertain; gate-off writes / token forgery / formula injection / duplicate-SO all held under attack. *(review, sports, engine, security, active)*
 - **[[reviews/2026-07-22-event-content-ledger-grok-depth]]** — Grok-depth review of the Event_Content_Ledger (composer, injection, life-state gate, auto-authoring). PoolKey mass balancing sandbox-proven S336; exclusive retirement, trajectory, and proving-ground work remain open. *(review, engine, content-ledger, citizens, active)*
 
 ---

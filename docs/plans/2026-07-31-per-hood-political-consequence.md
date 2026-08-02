@@ -61,7 +61,7 @@ pointers:
 - **Files:** `phase02-world-state/applyCityDynamics.js` — read; this plan — modify (Build notes)
 - **Steps:** Decide consumer placement (Phase 2, near `applySentimentBleed_` at :1055-1091), delta math (decayed strength → hood sentiment/pressure fields, mirroring the city-scalar application in `applyActiveInitiativeRipples_` at `phase05-citizens/civicInitiativeEngine.js:1720-1748`), clamps, and ordering vs sentiment bleed. Resolve Open question 1 in the same pass.
 - **Verify:** design paragraph in Build notes; Mike sign-off on delta math before build
-- **Status:** [~] design written 2026-08-02 (kimi) — awaiting Mike sign-off on delta math
+- **Status:** [x] design signed off 2026-08-02 (engine-sheet) — delta math APPROVED as specced; see Build notes §Rulings
 
 ### Task 5: Implement `applyNeighborhoodEffectsFold_` (engine-sheet)
 - **Files:** `phase02-world-state/applyCityDynamics.js` (or sibling per Task 4) — modify
@@ -132,6 +132,13 @@ Per-hood object keyed by hood display name:
 
 **`getRippleEffectsForNeighborhood_` (Task 7) — recommend DELETE.** It queries `S.activeRipples` (the city-scalar ripple path), not the two per-hood buses; its return shape (`sentiment/sick/unemployment/retail/traffic/community`) matches neither bus; wiring it into the fold would double-count initiative effects already applied as city scalars at `civicInitiativeEngine.js:1720-1748`. Deletion test: complexity vanishes, zero callers. Deletion touches `phase*/` — needs Mike's OK per AGENTS.md scope.
 
+### Rulings (engine-sheet, 2026-08-02 — the two decisions gating Tasks 5–7)
+
+1. **Delta math APPROVED as specced.** Independently verified before ruling: both writers at the cited lines, zero readers (grep reproduced), the `:345` no-consumer note, and the magnitude envelope — applyCityDynamics' existing edition-coverage fold runs 0.05–0.15 pre-clamp, so ±0.01–0.05 initiative / ±0.003-per-point approval sit inside established behavior, bounded by the existing `clampMult`/`clampSent`. Consume-and-clear after the loop approved; failure semantics noted for the build: a phase throw before the clear leaves both buses intact for next cycle (deltas re-apply late rather than vanish — the acceptable direction). The per-cycle `neighborhood-fold` consumption rows ride the existing engine.45 ripple-write path — no new write machinery.
+2. **Task 7 APPROVED — DELETE `getRippleEffectsForNeighborhood_`.** Zero callers independently confirmed; shape matches neither bus; wiring it would double-count city-scalar effects already applied at `civicInitiativeEngine.js:1720-1748`. The cut is engine-sheet's, made in the Tasks 5–7 build.
+
+Tasks 5–7 fully specced and unblocked for engine-sheet. Task 8 Track C one-pager remains kimi's.
+
 ### Task 8 — Track C one-pager
 
 Not started.
@@ -150,3 +157,4 @@ Not started.
 - 2026-07-31 — Initial draft (Kimi CLI, builder-directed external-audit remediation batch). Audit gaps #1+#2 combined; audit's headline claims verified stale/refuted (engine.45 T1–T3b shipped before the audit's pinned commit), surviving kernel scoped into Tracks A–C.
 - 2026-08-01 (Kimi) — Audit pointer added: build-order step 3 of [[../research/2026-08-01-simulation-realism-audit]]; the two zero-reader buses re-verified there at file:line.
 - 2026-08-02 (kimi) — Tasks 1–4 complete (research-build half): both bus shapes extracted, zero readers reconfirmed, fold design + ordering resolution in Build notes. Delta math awaiting Mike sign-off; Task 7 recommendation is DELETE (needs Mike OK, touches `phase*/`). Open: Task 8 Track C one-pager (kimi), Tasks 5–7 engine-sheet after sign-off.
+- 2026-08-02 (engine-sheet) — Both gating decisions RULED (§Rulings): delta math approved, Task 7 delete approved. Tasks 5–7 unblocked; Task 8 stays kimi.

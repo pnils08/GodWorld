@@ -191,7 +191,8 @@ Practical consequence for every re-run: **`--fill-blanks-only`.** Fill what is e
 
 ## Status log
 
-- **S349 close-out — all six acceptance criteria hold, verified against live sheets:**
+- **S349 REVERT (later same session, Mike's order):** the Task 9 apply is rolled back. Exact method: pre-session state pulled from spreadsheet revision 33355 (2026-08-02 05:52Z, before any session write); all 76 blank→filled EmployerBizId cells re-blanked; the 2 Harborline moves (POP-00744, POP-00965) restored to BIZ-00044; Employment_Roster reset to match. Read-back verified: SL EmployerBizId column byte-identical to the revision snapshot, 0 diffs across 931 rows. **What stands:** dup consolidations (5 businesses), 14 institution-scale headcount repairs, Avg_Salary write-path cut, script skip-class, config rules (Kimi's 61 + 4). **What this means:** the close-out below describes a state that no longer exists on the sheets; a future apply run would re-create the 76 fills — do NOT run without Mike's explicit go. The acceptance-criteria snapshot below is kept for the record of what the apply produced while it was live.
+- **S349 close-out — all six acceptance criteria hold, verified against live sheets (SUPERSEDED by the revert above):**
   1. Unmatched **286 → 59** (target <60). Reasons for the 59: **44 generic-service roles** (janitor 10 / security guard 9 / mover 9 / mechanic 8 / maintenance 3 / delivery 3 / driver 1 / office worker 1) with no such employer in the ledger — Kimi's S348 ruling, blank is honest; most also carry role↔econ-profile drift (RoleType "Janitor", econ "Environmental Consultant") which is engine.82-family data damage, not a resolution failure. **15 no-matching-business cases** — casino manager, bank teller, parking-garage manager, landscaper, counselor, OakTown Echo investigator (rival outlet has no BIZ row), 2 franchise-less Athletes, tenants-union rep, sanitation-econ mover, etc.
   2. Zero `SPORTS_OTHER` / non-BIZ values in both sheets.
   3. 8 Oaks at BIZ-00074 (7 roster + GM), 93 A's at BIZ-00005 incl. coaches/scouts.
@@ -217,3 +218,4 @@ Practical consequence for every re-run: **`--fill-blanks-only`.** Fill what is e
 - 2026-07-26 (S334) — Authority ruled (roster wins), Oaks_Roster landed, Task 5b added to mint civic initiatives as establishments.
 - 2026-08-01 (Kimi) — Audit pointer added: build-order step 2 of [[../research/2026-08-01-simulation-realism-audit]] — this static repair is the precondition for the living economy.
 - 2026-08-02 (S349) — Plan CLOSED: all tasks done, six acceptance criteria verified live (Status log). engine.83 + engine.84 → done-pending-archive.
+- 2026-08-02 (S349, later) — **Task 9 apply REVERTED on Mike's order** — 76 fills + 2 moves rolled back, SL verified identical to rev33355 (detail: Status log). engine.83 reopened needs-info.

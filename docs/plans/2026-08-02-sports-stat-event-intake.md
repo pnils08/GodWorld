@@ -562,8 +562,9 @@ deployment, closing the cross-session double-append finding in
      engine.77 proving event, and any season-close Drive update.
 - **Verify:** Documentation and source agree; all local checks pass; every live
   action has its own builder approval and exact read-back record.
-- **Status:** [ ] in progress — active docs and local validation complete;
-  independent review, rollout coordination, deployment, and live proofs remain
+- **Status:** [ ] in progress — active docs, local validation, independent
+  review, rollout coordination, and source landing complete; deployment and
+  separately approved live proofs remain
 
 ## Validation matrix
 
@@ -626,8 +627,12 @@ compensation.
   and synthetic browser QA pass; the full visual report is 27/27 with desktop,
   tablet, mobile, stat, engine.77, horizontal-fit, and accessibility checks.
   No service restart, deployment, Sheet/Drive/memory write, or live proof was
-  performed. Task 9 remains open for independent review and deployment/proof
-  gates.
+  performed. Task 9 remains open for deployment/proof gates.
+- 2026-08-02 — Engine-sheet and Claude independently reviewed and landed the
+  exact 23-file source batch as `ce2a7d11`; `14d68f16` reconciled the engine.40
+  and engine.77 rollout rows to `in-progress`. Review confirmed the live write
+  boundary remains cold and all reviewed tests/builds pass without a live
+  Sheet write. Deployment and proving events remain separately gated.
 - 2026-08-02 — The repository-wide 118-file runner reached every sports suite,
   and all sports suites passed. Fourteen unrelated legacy test files remained
   red: credential/network smoke tests cannot reach Google in this local

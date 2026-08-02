@@ -52,7 +52,12 @@ pointers:
   1. Determine exactly what causes `runCareerEngine` to emit a layoff today. Specifically: does a negative `Growth_Rate` on a `Business_Ledger` row already produce layoffs via the openings formula (:1081-1082), or is an explicit decline signal required?
   2. Record the answer in this plan's Build notes (Task 3 step 5 consumes it) — Task 6's shape depends on it.
 - **Verify:** the answer is written down with a `runCareerEngine.js` line reference; if negative growth already lays off, Task 6 shrinks to "write the drifted value and let the existing engine fire."
-- **Status:** [ ] not started
+- **Status:** [x] DONE 2026-08-01 (Kimi, read-only) — **negative Growth_Rate stops hiring but never fires anyone.** `matchUnemployedToOpenings_` skips any business with `growth <= 0` (`runCareerEngine.js:1163`); firings happen ONLY in `reconcileBusinessHeadcounts_` Half 2, when *stated* `Employee_Count` falls below the *tracked* count (:1284+). So Task 6 takes the explicit-signal branch: the dynamics pass must emit `careerSignals.businessDeltas[bizId].lost` entries; Half 1's write-back (:1271-1282) then lowers the stated count via `queueCellIntent_`, Half 2 converts any stated-below-tracked gap into real firings (LifeHistory + income hit + employer clear), and Phase-6 `economicRippleEngine` narrates the losses. No new headcount writer — the deltas feed the existing machine exactly as designed in engine.85.
+- **Full inventory — every consumer tied to these numbers (Mike's question 2026-08-01):**
+  - `Growth_Rate`: ONE mechanical consumer — the v2.7 hiring formula (:1163, :1169). Display-only: `buildDeskPackets.js:2293`, `buildInitiativePackets.js:370`, `buildBusinessCards.js`. No threshold, ceiling, or constant anywhere keys off growth values. The dynamics pass can write it freely — worst case is hiring slows, which is the intended behavior.
+  - `Annual_Revenue`: one writer (`applyChaosDecay.js:95`, chaos-incident decay), display-only readers. No mechanic reads revenue today — the closure floor in this plan would be the FIRST revenue mechanic. No conflict: chaos decay and the drift pass both multiply revenue down/up; they compose.
+  - `Employee_Count`: `runCareerEngine` write-back + pool capacity checks; `linkCitizensToEmployers` overwrite hazard is engine.84's row, not this plan's.
+  - Hardcoded tunables already living in this code (ADR-0015 migrate-on-touch candidates when next worked): the ÷52 annualization (:1169), cadence clamps (:1172), rehire income recovery +5–10% / career-change 0.95–1.05 (:1208), poorest-first/cross-field 1-in-4 rules (:1184, :1190). None conflict with the new keys; they are siblings, not overlaps.
 
 ### Task 2: Extract the writer pattern (read-only)
 
@@ -82,14 +87,24 @@ pointers:
 **Drift formula (design, per business per cycle — all draws seeded cycle+BIZ_ID hash):**
 
 ```text
+EVENT-DRIVEN FIRST (Mike's design concept 2026-08-01: "the engine determines these
+numbers based on events — the random mix of events causes the shift in data").
+Ambient state + noise are the background; the cycle's event mix is the signal.
+
+eventModifier     = sum over the cycle's events touching this business/hood/sector:
+                      chaos incident at the business or in its hood  -> -bizEventShockScale
+                      initiative implementation landing in its hood   -> +bizEventShockScale
+                        (post-engine.93: S.initiativeNeighborhoodEffects has readers)
+                      edition coverage sentiment about the business   -> +-0.5 * bizEventShockScale
+                    each source scaled by bizEventShockScale, capped +-2.0 pp total
 vitalityModifier  = clamp((hoodVitality - bizVitalityNeutral) * bizVitalityGain, -0.5, +0.5)
 successPressure   = -bizSuccessPenalty  IF hood vitality >= bizSuccessVitalityHigh
                     AND mayor approval >= bizSuccessApprovalHigh
                     for bizSuccessWindow consecutive cycles  ELSE 0
 disruptionShock   = -bizDisruptShock    IF seededDraw < chance
                     chance = bizDisruptBaseChance/100 * (successWindowActive ? bizDisruptSuccessMult : 1)
-noise             = seeded uniform in [-bizNoiseBound, +bizNoiseBound]
-drift             = clamp((vitalityModifier + successPressure + disruptionShock + noise)
+noise             = seeded uniform in [-bizNoiseBound, +bizNoiseBound]   // texture only, kept small
+drift             = clamp((eventModifier + vitalityModifier + successPressure + disruptionShock + noise)
                           * bizVol_<class>, -bizDriftMaxDown, +bizDriftMaxUp)   // percentage points
 Growth_Rate'      = clamp(Growth_Rate + drift, bizGrowthFloor, bizGrowthCeil)
 Annual_Revenue'   = Annual_Revenue * (1 + Growth_Rate'/100/52)   // runCareerEngine :1082 convention
@@ -118,6 +133,7 @@ closure           = distress >= bizClosureStreak AND
 | `bizDisruptShock` | 2.0 | pp one-cycle negative shock on disruption |
 | `bizClosureStreak` | 8 | Consecutive negative-growth cycles for closure eligibility |
 | `bizClosureRevenueFloorPct` | 40 | Revenue below this % of sector mint median (27.10: BOTH conditions required) |
+| `bizEventShockScale` | 1.0 | Scales each event-driven contribution into pp drift; event term capped ±2.0 total (Mike: events are the signal, ambient is background) |
 | `bizVol_faith` | 0.5 | Sector volatility multipliers — scale the whole drift term per class: |
 | `bizVol_retail` | 1.2 | |
 | `bizVol_food` | 1.3 | food/nightlife most volatile of the small classes |
@@ -160,12 +176,13 @@ closure           = distress >= bizClosureStreak AND
 
 - **Files:**
   - `phase05-citizens/applyBusinessDynamics.js` — modify
-  - possibly `phase05-citizens/runCareerEngine.js` — modify (only if Task 1 shows an explicit signal is required)
+  - `phase05-citizens/runCareerEngine.js` — NOT modified (Task 1 verified the contract; the existing machine consumes the deltas unchanged)
 - **Steps:**
-  1. If Task 1 found negative `Growth_Rate` already lays off: nothing to wire — the drifted write (Task 5) is the whole mechanism; document that and skip to Task 7.
-  2. Otherwise: emit decline records into the existing `careerSignals.businessDeltas` shape so the v2.6 write-back and Phase-6 ripple narration consume them unchanged. Do not build a second headcount writer.
-- **Verify:** bench: force a business into decline streak; its `Employee_Count` falls via the existing write-back and a ripple narration row references it.
-- **Status:** [ ] not started
+  1. Task 1 settled the branch: negative growth alone only stops hiring (`runCareerEngine.js:1163`); firings need the stated headcount to fall. So the dynamics pass emits explicit decline records into `S.careerSignals.businessDeltas[bizId].lost` — same shape the v2.7 rehire matcher already increments (`:1220-1221`).
+  2. Cycle-order dependency (folds into the phase-placement open question): the dynamics pass must run BEFORE `runCareerEngine` so its deltas are present when `reconcileBusinessHeadcounts_` reads `S.careerSignals.businessDeltas` (:1236). Then Half 1 lowers stated `Employee_Count` via `queueCellIntent_` (:1279), Half 2 converts any stated-below-tracked gap into firings, and Phase-6 `economicRippleEngine` narrates. Do not build a second headcount writer, and do not fire citizens from the dynamics pass — decline enters ONLY as deltas.
+  3. Decline sizing: workers shed per cycle = f(drift severity) — start with 1 tracked-equivalent per consecutive distress cycle beyond `bizDeclineStreak`, capped so a business cannot shed faster than its stated count falls (everything-is-earned: layoffs scale with the decline, never a flat cull).
+- **Verify:** bench: force a business into decline streak; deltas appear in `S.careerSignals.businessDeltas`, its `Employee_Count` falls via the existing write-back, and a ripple narration row references it.
+- **Status:** [ ] not started — branch resolved by Task 1 (explicit signal); sizing rule 3 is design, Mike review with Task 3 table
 
 ### Task 7: Closure mechanic (engine-sheet)
 
@@ -218,3 +235,5 @@ closure           = distress >= bizClosureStreak AND
 - 2026-08-01 — Mike rulings folded in: (1) tunables live in `World_Config` key→value rows, not a code config file — `loadConfig_` already loads them into `ctx.config`, tuning is a cell edit; Task 3 rewritten, `utilities/businessDynamicsConfig.js` dropped from the design. (2) Everything-is-earned doctrine: no static/free numbers — every drift modifier derives from live sim state; missing keys fail loud, never silently default (the 0.91-fallback disease must not reappear in a new home).
 - 2026-08-01 — Rulings promoted to [[../adr/0015-world-config-tunable-values]] (World_Config = house for tunables, migrate-on-touch not a project, everything-is-earned). This plan's Task 3 is the ADR's first application.
 - 2026-08-01 — Task 3 DRAFTED (Kimi): full drift formula + 27-key World_Config defaults table, calibrated from the sector mint table (growth 2–8 by class), live pulls (uniform 8% legacy, vitality 6.13–9.27, Mayor 95), and the runCareerEngine annual-percent convention. Revenue moves at Growth_Rate/100/52 per cycle so both engines agree on what the number means. Closure requires streak AND revenue floor per 27.10. Awaits Mike sign-off before Task 5.
+- 2026-08-01 — Task 1 DONE (Kimi, read-only): negative Growth_Rate stops hiring (`runCareerEngine.js:1163`) but never fires — firings require stated headcount to fall via `businessDeltas` (Half-1 write-back :1279 → Half-2 reconciliation :1284+). Full consumer inventory recorded in Task 1 status (Mike's "is any code tied to these numbers" question): Growth_Rate has exactly ONE mechanical consumer (the v2.7 hiring formula), revenue has one writer (chaos decay) and zero mechanic readers — the closure floor would be the first; hardcoded siblings (÷52, income-recovery multipliers) noted as ADR-0015 migrate-on-touch candidates, no overlaps. Task 6 branch resolved: explicit-signal path, dynamics must run before runCareerEngine; decline enters ONLY as deltas.
+- 2026-08-01 — Mike's design concept folded into the formula: **events are the signal, ambient state is background.** Added `eventModifier` term (chaos incidents, initiative landings, edition coverage sentiment touching the business/hood/sector) with a new `bizEventShockScale` key (default 1.0, event term capped ±2.0pp); noise demoted to texture. 28 keys total.

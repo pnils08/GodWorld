@@ -266,6 +266,25 @@ civic are generator terminals: their run findings enter production gap logs and
 are promoted through research-build rather than assigned directly as rollout
 work.
 
+### Marking completed work (rollout-rules.md §7)
+
+When an out-of-band agent completes plan work, completion is marked in the
+owning plan, lane-tagged, so any terminal can see who closed what without
+reading git blame:
+
+- Flip the finished task's `Status` line in the plan, and add a dated one-line
+  changelog entry prefixed with your lane name:
+  `- 2026-08-02 (kimi) — Task 3 shipped, commit <sha>.`
+- Keep the lane prefix on commit messages (`kimi: …`, `codex: …`) so
+  `git log --grep "^kimi:"` returns the lane's work history.
+- When a rollout row's work is fully complete, set its state to
+  `done-pending-archive` (respect the row contract above; lint before commit).
+  Never run `scripts/rolloutSweep.js` — sweeping and plan-archiving belong to
+  the owning builder terminal at session-end.
+- Update your `NEXT[<lane>]` line in `SESSION_CONTEXT.md` with open work only,
+  pointing at the plan — the plan is the handoff payload, the NEXT line is its
+  discovery pointer.
+
 ## Change protocol
 
 For analysis, orientation, review, or diagnosis:

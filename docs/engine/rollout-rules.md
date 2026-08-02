@@ -1,7 +1,7 @@
 ---
 title: Rollout Rules — operating doctrine for the doc-work pipeline
 created: 2026-06-01
-updated: 2026-06-01
+updated: 2026-08-02
 type: reference
 tags: [architecture, governance, active]
 sources:
@@ -48,13 +48,15 @@ This is the section that keeps rollout clean. Read it before you log anything.
 
 Every layer has a template and a fixed home. Copy the template; save to the path; archive where the table says.
 
-| Layer | Template | Saves to | Archives to |
-|-------|----------|----------|-------------|
-| **Research** | [[../research/RESEARCH_TEMPLATE]] | `docs/research/YYYY-MM-DD-<topic>.md` | **never** — standing library, accretes applications |
-| **Plan** | [[../plans/PLAN_TEMPLATE]] | `docs/plans/YYYY-MM-DD-<topic>.md` | `docs/archive/plans/` when fully shipped (repoint inbound links — §6) |
-| **Triage** (multi-terminal handoff) | [[../plans/GAP_TRIAGE_TEMPLATE]] (shape) + [[../plans/GAP_LOG_TRIAGE_PLAYBOOK]] (method) | `docs/plans/YYYY-MM-DD-<topic>-triage.md` (gap-log form: `…-c<XX>-gap-log-triage.md`) | `docs/archive/plans/` once its row is filed |
-| **Production gap log** (civic/media) | [[../plans/GAP_LOG_TEMPLATE]] + [[../media/production_log_template]] | `output/production_log_<skill>_c<XX>_gaps.md` (+ unified `output/production_log_c<XX>.md`) | stays in `output/` — cycle artifact, not archived |
-| **Rollout** (tracker) | this doctrine | `docs/engine/ROLLOUT_PLAN.md` | rows → [[ROLLOUT_ARCHIVE]] via `scripts/rolloutSweep.js` |
+| Layer | Template | Saves to | Registers in (same commit) | Archives to |
+|-------|----------|----------|----------------------------|-------------|
+| **Research** | [[../research/RESEARCH_TEMPLATE]] | `docs/research/YYYY-MM-DD-<topic>.md` | `docs/research/index.md` — **not** the top-level index | **never** — standing library, accretes applications |
+| **Plan** | [[../plans/PLAN_TEMPLATE]] | `docs/plans/YYYY-MM-DD-<topic>.md` | [[../index]] | `docs/archive/plans/` when fully shipped (repoint inbound links — §6) |
+| **Triage** (multi-terminal handoff) | [[../plans/GAP_TRIAGE_TEMPLATE]] (shape) + [[../plans/GAP_LOG_TRIAGE_PLAYBOOK]] (method) | `docs/plans/YYYY-MM-DD-<topic>-triage.md` (gap-log form: `…-c<XX>-gap-log-triage.md`) | [[../index]] | `docs/archive/plans/` once its row is filed |
+| **Production gap log** (civic/media) | [[../plans/GAP_LOG_TEMPLATE]] + [[../media/production_log_template]] | `output/production_log_<skill>_c<XX>_gaps.md` (+ unified `output/production_log_c<XX>.md`) | — (cycle artifact, not indexed) | stays in `output/` — cycle artifact, not archived |
+| **Rollout** (tracker) | this doctrine | `docs/engine/ROLLOUT_PLAN.md` | — (is itself the index of open work) | rows → [[ROLLOUT_ARCHIVE]] via `scripts/rolloutSweep.js` |
+
+**Index registration is part of creating the file, not a later step (S147 no-isolated-MDs).** A research/plan/triage MD lands in its index **in the same commit** that creates it, and links both ways with at least one existing doc. An unindexed doc is invisible to `/md-audit` and to every future session's grep — it effectively doesn't exist.
 
 **Triage is the multi-terminal handoff document.** It's research-build's two-track decomposition: split a body of work across **both builder terminals** (Track A research-build / Track B engine-sheet) + cross-track dependencies + **one** ROLLOUT pointer row. Research-build authors it (the orchestrator); engine-sheet reads and executes its Track B. Generators (civic/media) never triage.
 
@@ -75,7 +77,9 @@ The output is one plan + one row — **not** a per-gap inventory that sprawls RO
 - **Skill-terminal issues during a run → the production gap log. NOT rollout.** Civic and media keep a per-cycle `output/production_log_..._gaps.md`. That gap log is their research layer — it is where issues, friction, and observations get logged during a skill run. **Do not blind-log issues onto rollout.** Rollout is the shared map every terminal reads at boot; raw issues there tax everyone. The gap log is local and cheap; that's where it goes.
   - An issue only reaches rollout when it is **promoted** to tracked, actionable work — and the promoted row is a clean one-liner that *points at the gap log*, it does not reproduce the issue text.
 
-- **Plan changes → the plan itself.** If a plan's tasks, scope, or decisions change, the change is recorded in that plan's changelog / shown as a redline in the plan. Not on rollout. Rollout's row just keeps pointing at the (now-updated) plan.
+- **Plan changes → the plan itself.** If a plan's tasks, scope, or decisions change, the change is recorded in that plan's changelog / shown as a redline in the plan. Not on rollout. Rollout's row just keeps pointing at the (now-updated) plan. Changelog entries are **one dated line** (date + what changed); running detail belongs in the plan body / `## Status log` — the `rolloutPointerGuard.js` PreToolUse hook denies fat entries.
+
+- **Research changes → the research file itself.** Research never archives, so it accretes: new applications, revised findings, and reversed verdicts are logged in the research file's own changelog/applications section, dated one-line entries same as plans. A verdict that flips (e.g. `watch` → `adopt`) is a changelog entry in the research file, never a rollout row edit.
 
 - **Rollout → clean pointer rows only.** See §3.
 
@@ -86,6 +90,19 @@ The output is one plan + one row — **not** a per-gap inventory that sprawls RO
 Rollout is the index, not the encyclopedia. (S147 rule, ADR-0005 enforcement.)
 
 **Row schema:** one row = `id · one-line actionable next-action · state · terminal · → plan-pointer`. If it can't be one actionable line, it's a plan, not a row. Description content lives in the pointer doc, never in the row.
+
+### Row contract (mechanical — a malformed row is silently skipped)
+
+`scripts/rolloutSweep.js` archives completed rows by splitting each line on its state cell. A row that breaks the contract is not rejected loudly — it is **skipped forever** and its work stops being tracked (five rows failed this way before 2026-07-26). A row is exactly five cells:
+
+```text
+| <group>.<n> | <one actionable line> | <state> | <terminal> | <pointer> |
+```
+
+- The state cell is a **bare token** from the table below — no parenthetical, no added prose, no invented word. `queued` and `draft` are not states; a row using one is skipped by the sweep.
+- Exactly **one** cell in the line may equal a state token; a state word sitting loose in the summary creates a phantom state cell and the sweep may split on the wrong one.
+- No literal `|` anywhere in the summary cell; summary ≤ 280 chars. Over that, the row has become a notes blob — relocate the narrative to the owning plan's `## Status log` (`scripts/rolloutDrain.js`, dry-run by default), never delete it.
+- Verify before calling a row filed: `node scripts/docLoopStatus.js --lint` → expect `ROLLOUT LINT: clean`. Anything else means the row is not filed yet. The same lint runs as a pre-commit gate.
 
 ### State labels (S204 — adapted from Pocock's `triage` skill, MIT)
 
@@ -98,6 +115,7 @@ Every active rollout item carries one state tag inline.
 | `in-progress` | Active work claimed; partial-shipped or being chipped at. |
 | `blocked` | Depends on something not yet landed (preconditions named in the entry). |
 | `done-pending-archive` | Completed, awaiting move to ROLLOUT_ARCHIVE at next sweep. |
+| `parked` | Deliberately shelved — kept for the record, not pickable, revisit on trigger named in the pointer doc. |
 | `wontfix` | Decided not to do. Rare; document the reason. |
 
 State answers "is this pickable right now"; terminal answers "by whom." They are orthogonal.
@@ -160,8 +178,21 @@ Closing detail goes to cold storage; the tracker stays lean. **Archive doesn't m
 
 ---
 
+## 7. House guests — how non-Claude lanes mark completed work
+
+The house-guest lanes (**kimi / codex / antigravity**, S340) work plans under this same doctrine, but their harnesses have no boot sequence, no hooks, and no session-end sweep. Their entry point to these rules is `AGENTS.md` §Research, plan, rollout, and archive, which mirrors this doc. How they identify completed work:
+
+1. **Completion is marked in the owning plan, lane-tagged.** Finishing a task = flip the task's `Status` line + add a dated one-line changelog entry prefixed with the lane name: `- 2026-08-02 (kimi) — Task 3 shipped, commit <sha>.` The lane tag is the identification — it tells every terminal *who* closed the work without reading git blame.
+2. **Commit messages carry the lane prefix** (`kimi: …`, `codex: …`) — the standing pattern; `git log --grep "^kimi:"` returns a lane's full work history.
+3. **Rollout row:** when a row's work is fully complete, the house guest may set its state to `done-pending-archive` (respecting the §3 row contract — lint before commit). They **never run the sweep** — sweeping and plan-archiving stay with the owning builder terminal at session-end.
+4. **New plan/research MDs remain builder-approved acts** (AGENTS.md rule): propose the file + its rollout row together and wait for approval. Updating the owning artifact needs no approval — that's the default over starting a parallel record.
+5. **The handoff rides `NEXT[<lane>]`** in SESSION_CONTEXT.md — open work only, pointer to the plan, never a recap.
+
+---
+
 ## Changelog
 
+- 2026-08-02 (S349, Mike-direct) — Gap-fix pass after Kimi failed to find this doc: §2 gained a **Registers in** column (research → `docs/research/index.md`, plans/triage → `docs/index.md`, same commit) + the index-registration rule; filing rules gained **research changes → the research file itself**; §3 gained the **mechanical row contract** (was only in AGENTS.md) + `parked` state (was live in the tracker but undocumented here); new **§7 House guests** — lane-tagged plan-changelog completion convention for kimi/codex/antigravity. `rolloutPointerGuard.js` now injects a pointer to this doc on every ROLLOUT_PLAN / docs/plans edit in Claude terminals.
 - 2026-06-01 (S251) — Created. Task 1 of the ROLLOUT v2.0 migration (governance.30). The operating-rule sections (state labels, group taxonomy, how-to-add, how-to-close) evicted from ROLLOUT_PLAN.md and folded into the four-role doctrine Mike set across the S251 conversation: research (incl. skill-terminal gap logs) / plan (self-documenting via redlines) / rollout (clean tracker) / archive (code-maintained). Keystone: skill terminals don't blind-log on rollout — the gap log is their research layer. ROLLOUT_PLAN keeps a pointer header to this file. §The Spine (completed historical roadmap) relocated to ROLLOUT_ARCHIVE rather than carried here — a rules doc shouldn't hold a finished roadmap.
 - 2026-06-01 (S251, triage reframe, Mike-directed) — Triage generalized from "gap-log→rollout bridge" to **the multi-terminal handoff document**: research-build's two-track decomposition for work spanning both builder terminals. Discriminator (needs both terminals? → triage; else plain plan) + two feeders (gap logs / escalated plan) + the **escalation-pointer rule** (a plan that escalates adds the triage pointer to its same ROLLOUT row → `[[plan]] + [[triage]]`; docs cross-link via `Source plan:` / `Escalated to triage:`). GAP_TRIAGE_TEMPLATE intro + index entry generalized to match.
 - 2026-06-01 (S251, same session, Mike-directed) — §2 gained the **Templates & save paths** table — research / plan / **triage** / gap log / rollout, each with its template + save path + archive destination. Two conventions established: (1) **closed plans archive to `docs/archive/plans/`** with inbound-link repoint (§6) — ends the "plans never move / 69 piled in docs/plans/" drift; (2) **triage earns its own template** (`docs/plans/GAP_TRIAGE_TEMPLATE.md`, to build) — the recurring gap-log→rollout bridge pass was hand-built every cycle (C93/C94/C95) with no shape. Triage named as the research-build conversion step between research (gap logs) and rollout.

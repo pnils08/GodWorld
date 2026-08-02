@@ -15,18 +15,30 @@ process.stdin.on('end', () => {
   const text = (input.tool_input && (input.tool_input.new_string ?? input.tool_input.content)) || '';
   const lines = text.split('\n');
 
-  let fat = 0, reason = '';
+  let fat = 0, reason = '', context = '';
   if (fp.endsWith('docs/engine/ROLLOUT_PLAN.md')) {
     fat = lines.filter(l => l.trimStart().startsWith('|') && l.length > MAX).length;
     reason = `ROLLOUT is a pointer index — ${fat} row(s) exceed ${MAX} chars. ` +
       'Move the detail into the owning plan/research/triage doc and keep the rollout row to one pointer line (id | title | state | owner | plan link).';
+    context = 'Doctrine for this file: docs/engine/rollout-rules.md — row contract (§3: 5 cells, bare state token, summary ≤280 chars), add/close (§4-§5), sweep (§6), house-guest conventions (§7). Verify rows with: node scripts/docLoopStatus.js --lint';
   } else if (/\/docs\/plans\/[^/]+\.md$/.test(fp)) {
     fat = lines.filter(l => /^\s*-\s*20\d\d-\d\d-\d\d/.test(l) && l.length > MAX).length;
     reason = `Plan changelog entries are one line — ${fat} dated entry(ies) exceed ${MAX} chars. ` +
       'A changelog line is date + what-changed (SCHEMA §12); running detail belongs in the plan body/task sections, not the changelog.';
+    context = 'Doctrine for plan files: docs/engine/rollout-rules.md — plan changes log in the plan itself (one-line dated changelog entries), detail in the plan body/Status log, rollout row stays a pointer. New plans register in docs/index.md same commit.';
   }
 
-  if (!fat) process.exit(0);
+  if (!fat) {
+    if (context) {
+      console.log(JSON.stringify({
+        hookSpecificOutput: {
+          hookEventName: 'PreToolUse',
+          additionalContext: context
+        }
+      }));
+    }
+    process.exit(0);
+  }
   console.log(JSON.stringify({
     hookSpecificOutput: {
       hookEventName: 'PreToolUse',

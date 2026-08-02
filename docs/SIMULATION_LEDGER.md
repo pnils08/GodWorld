@@ -103,6 +103,27 @@ Minimal processing — life events from games, not from lifecycle engines:
 
 GAME citizens do NOT get career transitions, household formation, education, or neighborhood processing. Their sports data lives on `As_Roster`, not the SL.
 
+### Source-built sports state intake (not deployed)
+
+[[plans/2026-08-02-sports-stat-event-intake]] adds a separately gated
+Dashboard writer for four exact, existing-citizen actions: injury, return,
+call-up, and trade-away. Every confirmation resolves one POPID and physical
+roster row plus one `Simulation_Ledger` row, then applies the feed row and all
+applicable effects in one Sheets batch:
+
+- injury writes owner-compatible `injured` or `serious-condition`,
+  `StatusStartCycle`, and reviewed `HealthCause`;
+- return writes `Active` and clears `StatusStartCycle` and `HealthCause`;
+- call-up writes exact confirmed roster Team/Position and citizen RoleType;
+- trade-away writes exact destination state and `Status=Traded`, but does not
+  delete or archive the citizen.
+
+All four append one deterministic `[SportsRoster]` LifeHistory line, one
+`LifeHistory_Log` row, and one citizen-scope `Ripple_Ledger` row. Feed Notes
+never become LifeHistory prose. Exact source hashes and read-back fail closed;
+an ambiguous result requires builder review. This is source state only: no
+Dashboard deployment or live Sheet proving write has occurred.
+
 ### CIVIC Mode (46 citizens)
 
 Council and government processing:

@@ -45,6 +45,51 @@ async function call(handler, {
   return res;
 }
 
+const AS_HEADERS = [
+  'POPID', 'First', 'Middle', 'Last', 'Tier', 'Position', 'Team', 'Salary',
+  'AB', 'AVG', 'H', 'HR', 'RBI', 'SB', 'SO', 'IP', 'ERA', 'W-L', 'SO', 'BB',
+];
+const OAKS_HEADERS = [
+  'POPID', 'First', 'Middle', 'Last', 'Tier', 'Position', 'Team', 'Salary',
+  'PPG', 'ASST', 'REB', 'STL', 'FG%', '3P%',
+];
+const CITIZEN_HEADERS = [
+  'POPID',
+  'First',
+  'Last',
+  'Tier',
+  'RoleType',
+  'Status',
+  'LifeHistory',
+  'Neighborhood',
+  'StatusStartCycle',
+  'HealthCause',
+];
+const LIFE_HISTORY_LOG_HEADERS = [
+  'Timestamp',
+  'POPID',
+  'Name',
+  'EventTag',
+  'EventText',
+  'Neighborhood',
+  'Cycle',
+];
+const RIPPLE_LEDGER_HEADERS = [
+  'Cycle',
+  'CauseType',
+  'CauseId',
+  'CauseDetail',
+  'EffectType',
+  'TargetScope',
+  'TargetIds',
+  'Neighborhood',
+  'Magnitude',
+  'Duration',
+  'RemainingStrength',
+  'SourceEngine',
+  'CycleStamp',
+];
+
 const syntheticSheets = {
   Oakland_Sports_Feed: [
     { Cycle: '403', TeamsUsed: "A's", SeasonType: 'early-season', 'Team Record': '3-2' },
@@ -60,22 +105,98 @@ const syntheticSheets = {
       FanSentiment: 'electric',
     },
   ],
-  As_Roster: [
-    {
-      POPID: 'POP-90001', First: 'Synthetic', Last: 'Batter',
-      Position: 'CF', Team: "A's", AVG: '.300', HR: '5',
-    },
-  ],
-  Oaks_Roster: [
-    {
-      POPID: 'POP-90002', First: 'Synthetic', Last: 'Guard',
-      Position: 'G', Team: 'Oaks', PPG: '20.0', ASST: '7.0',
-    },
-  ],
-  Simulation_Ledger: [
-    { POPID: 'POP-90001', First: 'Synthetic', Last: 'Batter' },
-    { POPID: 'POP-90002', First: 'Synthetic', Last: 'Guard' },
-  ],
+  As_Roster: {
+    headers: AS_HEADERS,
+    rows: [{
+      rowNumber: 11,
+      values: [
+        'POP-90001', 'Synthetic', '', 'Batter', '1', 'CF', "A's", '$1',
+        '100', '.300', '30', '5', '20', '4', '21',
+        '12.1', '2.50', '2-1', '33', '7',
+      ],
+    }],
+  },
+  Oaks_Roster: {
+    headers: OAKS_HEADERS,
+    rows: [{
+      rowNumber: 8,
+      values: [
+        'POP-90002', 'Synthetic', '', 'Guard', '1', 'G', 'Oaks', '$1',
+        '20.0', '7.0', '5.0', '2.0', '51.0%', '38.0%',
+      ],
+    }],
+  },
+  Simulation_Ledger: {
+    headers: CITIZEN_HEADERS,
+    rows: [
+      {
+        rowNumber: 22,
+        values: [
+          'POP-90001',
+          'Synthetic',
+          'Batter',
+          '1',
+          "A's Player",
+          'Active',
+          'C403 — [Synthetic] Prior non-canon event.',
+          'Downtown',
+          '',
+          '',
+        ],
+      },
+      {
+        rowNumber: 23,
+        values: [
+          'POP-90002',
+          'Synthetic',
+          'Guard',
+          '2',
+          'Oaks Player',
+          'Active',
+          '',
+          'West Oakland',
+          '',
+          '',
+        ],
+      },
+    ],
+  },
+  LifeHistory_Log: {
+    headers: LIFE_HISTORY_LOG_HEADERS,
+    rows: [{
+      rowNumber: 2,
+      values: [
+        'C403',
+        'POP-99999',
+        'Prior Synthetic',
+        'Synthetic',
+        'Prior non-canon event.',
+        'Downtown',
+        '403',
+      ],
+    }],
+  },
+  Ripple_Ledger: {
+    headers: RIPPLE_LEDGER_HEADERS,
+    rows: [{
+      rowNumber: 2,
+      values: [
+        '403',
+        'synthetic',
+        'prior-synthetic',
+        'Prior non-canon ripple.',
+        'synthetic-effect',
+        'citizen',
+        'POP-99999',
+        'Downtown',
+        '1',
+        '1',
+        '',
+        'synthetic.test',
+        'C403',
+      ],
+    }],
+  },
 };
 
 const reads = [];
@@ -132,9 +253,37 @@ const workspace = await call(handlers.workspace, { query: { cycle: '404', team: 
 assert.strictEqual(workspace.statusCode, 200);
 assert.strictEqual(workspace.body.data.team.roster[0].popid, 'POP-90002');
 assert.strictEqual(workspace.body.data.team.roster[0].stats.PPG, '20.0');
+assert.strictEqual(
+  workspace.body.data.team.roster[0].statValues['basketball.threePct'],
+  '38.0%',
+);
 assert.ok(workspace.body.data.validEventOptions.eventTypes.includes('game-result'));
 assert.strictEqual(workspace.body.data.writePolicy.featureEnabled, false);
 assert.strictEqual(workspace.body.data.writePolicy.reasonCode, 'sports_write_disabled');
+assert.strictEqual(workspace.body.data.validMutationOptions.statFields.length, 6);
+assert.strictEqual(workspace.body.data.team.roster[0].citizen.tier, '2');
+assert.deepStrictEqual(
+  workspace.body.data.validMutationOptions.rosterActions,
+  ['injury', 'return', 'call-up', 'trade-away'],
+);
+assert.deepStrictEqual(
+  workspace.body.data.validMutationOptions.verificationSources,
+  ['manual-verified', 'screenshot-verified'],
+);
+
+const asWorkspace = await call(handlers.workspace, { query: { cycle: '404', team: 'as' } });
+assert.strictEqual(asWorkspace.statusCode, 200);
+assert.strictEqual(asWorkspace.body.data.team.roster[0].sourceRow, 11);
+assert.strictEqual(asWorkspace.body.data.team.roster[0].statValues['batting.so'], '21');
+assert.strictEqual(asWorkspace.body.data.team.roster[0].statValues['pitching.so'], '33');
+assert.strictEqual(asWorkspace.body.data.team.roster[0].citizen.tier, '1');
+assert.strictEqual(asWorkspace.body.data.validMutationOptions.statFields.length, 12);
+assert.deepStrictEqual(
+  asWorkspace.body.data.validMutationOptions.statFields
+    .filter((field) => field.key.endsWith('.so'))
+    .map((field) => [field.label, field.column]),
+  [['Batting SO', 'O'], ['Pitching SO', 'S']],
+);
 
 const invalidTeam = await call(handlers.workspace, { query: { cycle: '404', team: 'Warriors' } });
 assert.strictEqual(invalidTeam.statusCode, 400);
@@ -192,9 +341,378 @@ assert.strictEqual(preview.body.data.row.length, 20);
 assert.strictEqual(preview.body.data.rowByHeader.TeamsUsed, "A's");
 assert.strictEqual(preview.body.data.resolvedNames[0].popid, 'POP-90001');
 assert.strictEqual(preview.body.data.provenance.answer, undefined);
-assert.strictEqual(preview.body.data.ripplePreview.unavailableSiblings[0].id, 'engine.40');
+assert.strictEqual(
+  preview.body.data.ripplePreview.unavailableSiblings[0].id,
+  'season-close',
+);
 assert.strictEqual(preview.body.data.confirmation.available, false);
 assert.strictEqual(preview.body.data.confirmation.reasonCode, 'sports_write_disabled');
+
+function statSubmission({
+  team = 'as',
+  popid = 'POP-90001',
+  name = 'Synthetic Batter',
+  rosterSource = 'As_Roster',
+  sourceRow = 11,
+  changes,
+  verificationSource = 'manual-verified',
+} = {}) {
+  return {
+    draft: {
+      ...validDraft,
+      EventType: 'stat-capture',
+      TeamsUsed: team,
+      NamesUsed: name,
+      Stats: 'Synthetic reviewed current-season stat line',
+      'Team Record': '',
+      Streak: '',
+    },
+    submissionId: `synthetic-stat-${team}-0001`,
+    participant: { popid, name, rosterSource, sourceRow },
+    mutation: {
+      kind: 'stat-line',
+      action: 'stat-capture',
+      changes,
+      verification: {
+        source: verificationSource,
+        confirmed: true,
+      },
+    },
+  };
+}
+
+function rosterEventSubmission(action, changes, {
+  team = 'as',
+  popid = 'POP-90001',
+  name = 'Synthetic Batter',
+  rosterSource = 'As_Roster',
+  sourceRow = 11,
+} = {}) {
+  return {
+    draft: {
+      ...validDraft,
+      EventType: 'roster-move',
+      TeamsUsed: team,
+      NamesUsed: name,
+      Stats: '',
+      'Team Record': '',
+      Streak: '',
+    },
+    submissionId: `synthetic-${action}-0001`,
+    participant: { popid, name, rosterSource, sourceRow },
+    mutation: {
+      kind: 'roster-event',
+      action,
+      changes: changes.map((change) => ({ ...change, reviewed: true })),
+      verification: {
+        source: 'manual-verified',
+        confirmed: true,
+      },
+    },
+  };
+}
+
+const asStatPreview = await call(handlers.preview, {
+  body: statSubmission({
+    changes: [
+      { field: 'batting.so', before: '21', after: '22', reviewed: true },
+      { field: 'pitching.so', before: '33', after: '34', reviewed: true },
+      { field: 'batting.avg', before: '.300', after: '.300', reviewed: false },
+    ],
+    verificationSource: 'screenshot-verified',
+  }),
+});
+assert.strictEqual(asStatPreview.statusCode, 200);
+assert.strictEqual(asStatPreview.body.data.writePerformed, false);
+assert.strictEqual(asStatPreview.body.data.mutationPreview.statDiff.changedCount, 2);
+assert.strictEqual(asStatPreview.body.data.mutationPreview.statDiff.unchangedCount, 1);
+assert.deepStrictEqual(
+  asStatPreview.body.data.mutationPreview.statDiff.fields
+    .filter((field) => field.field.endsWith('.so'))
+    .map((field) => [field.field, field.column, field.before, field.after]),
+  [
+    ['batting.so', 'O', '21', '22'],
+    ['pitching.so', 'S', '33', '34'],
+  ],
+);
+assert.strictEqual(asStatPreview.body.data.confirmation.available, false);
+assert.strictEqual(
+  asStatPreview.body.data.confirmation.reasonCode,
+  'sports_write_disabled',
+);
+
+const oaksStatPreview = await call(handlers.preview, {
+  body: statSubmission({
+    team: 'oaks',
+    popid: 'POP-90002',
+    name: 'Synthetic Guard',
+    rosterSource: 'Oaks_Roster',
+    sourceRow: 8,
+    changes: [
+      { field: 'basketball.ppg', before: '20.0', after: '20.5', reviewed: true },
+      { field: 'basketball.fgPct', before: '51.0%', after: '51.5%', reviewed: true },
+    ],
+  }),
+});
+assert.strictEqual(oaksStatPreview.statusCode, 200);
+assert.strictEqual(oaksStatPreview.body.data.mutationPreview.statDiff.changedCount, 2);
+assert.strictEqual(
+  oaksStatPreview.body.data.mutationPreview.participant.rosterSource,
+  'Oaks_Roster',
+);
+
+const invalidStatPreview = await call(handlers.preview, {
+  body: statSubmission({
+    changes: [
+      { field: 'pitching.ip', before: '12.1', after: '12.3', reviewed: true },
+    ],
+  }),
+});
+assert.strictEqual(invalidStatPreview.statusCode, 422);
+assert.strictEqual(invalidStatPreview.body.error.code, 'sports_validation_failed');
+
+const noopStatPreview = await call(handlers.preview, {
+  body: statSubmission({
+    changes: [
+      { field: 'batting.hr', before: '5', after: '5', reviewed: false },
+    ],
+  }),
+});
+assert.strictEqual(noopStatPreview.statusCode, 422);
+assert.strictEqual(noopStatPreview.body.error.code, 'sports_validation_failed');
+
+const staleStatPreview = await call(handlers.preview, {
+  body: statSubmission({
+    changes: [
+      { field: 'batting.hr', before: '4', after: '6', reviewed: true },
+    ],
+  }),
+});
+assert.strictEqual(staleStatPreview.statusCode, 409);
+assert.strictEqual(staleStatPreview.body.error.code, 'sports_source_changed');
+
+const inactiveStatHandlers = createSportsHandlers({
+  readSheet: async (sheetName) => {
+    const snapshot = await readSheet(sheetName);
+    if (sheetName !== 'Simulation_Ledger') return snapshot;
+    return {
+      ...snapshot,
+      data: {
+        ...snapshot.data,
+        rows: snapshot.data.rows.map((row) => (
+          row.rowNumber === 22
+            ? {
+              ...row,
+              values: row.values.map((value, index) => (
+                index === 5 ? 'Traded' : value
+              )),
+            }
+            : row
+        )),
+      },
+    };
+  },
+});
+const inactiveStatPreview = await call(inactiveStatHandlers.preview, {
+  body: statSubmission({
+    changes: [
+      { field: 'batting.hr', before: '5', after: '6', reviewed: true },
+    ],
+  }),
+});
+assert.strictEqual(inactiveStatPreview.statusCode, 422);
+assert.strictEqual(
+  inactiveStatPreview.body.error.code,
+  'sports_participant_state_invalid',
+);
+
+const injurySubmission = rosterEventSubmission('injury', [
+  { field: 'citizen.status', before: 'Active', after: 'injured' },
+  { field: 'citizen.statusStartCycle', before: '', after: '404' },
+  {
+    field: 'citizen.healthCause',
+    before: '',
+    after: 'Synthetic verified condition',
+  },
+]);
+const injuryPreview = await call(handlers.preview, {
+  body: injurySubmission,
+});
+assert.strictEqual(injuryPreview.statusCode, 200);
+assert.strictEqual(injuryPreview.body.data.mutationPreview.action, 'injury');
+assert.strictEqual(
+  injuryPreview.body.data.mutationPreview.participant.citizenTier,
+  '1',
+);
+assert.strictEqual(
+  injuryPreview.body.data.mutationPreview.stateDiff.changedCount,
+  3,
+);
+assert.strictEqual(
+  injuryPreview.body.data.mutationPreview.lifeHistory.line,
+  'C404 — [SportsRoster] Synthetic Batter entered injured status with cause: ' +
+    'Synthetic verified condition.',
+);
+assert.strictEqual(
+  injuryPreview.body.data.mutationPreview.ripple.effectType,
+  'roster-injury',
+);
+assert.deepStrictEqual(
+  injuryPreview.body.data.ripplePreview.mutationEffects.map((item) => item.id),
+  ['engine.77-state', 'engine.77-life', 'engine.77-ripple'],
+);
+assert.ok(injuryPreview.body.source.sheets.LifeHistory_Log);
+assert.ok(injuryPreview.body.source.sheets.Ripple_Ledger);
+
+const returnReadSheet = async (sheetName) => {
+  const snapshot = await readSheet(sheetName);
+  if (sheetName !== 'Simulation_Ledger') return snapshot;
+  return {
+    ...snapshot,
+    data: {
+      ...snapshot.data,
+      rows: snapshot.data.rows.map((row) => (
+        row.rowNumber === 22
+          ? {
+            ...row,
+            values: row.values.map((value, index) => {
+              if (index === 5) return 'serious-condition';
+              if (index === 8) return '401';
+              if (index === 9) return 'Synthetic verified condition';
+              return value;
+            }),
+          }
+          : row
+      )),
+    },
+  };
+};
+const returnHandlers = createSportsHandlers({
+  readSheet: returnReadSheet,
+});
+const returnPreview = await call(returnHandlers.preview, {
+  body: rosterEventSubmission('return', [
+    { field: 'citizen.status', before: 'serious-condition', after: 'Active' },
+    { field: 'citizen.statusStartCycle', before: '401', after: '' },
+    {
+      field: 'citizen.healthCause',
+      before: 'Synthetic verified condition',
+      after: '',
+    },
+  ]),
+});
+assert.strictEqual(returnPreview.statusCode, 200);
+assert.strictEqual(
+  returnPreview.body.data.mutationPreview.lifeHistory.eventText,
+  'returned to Active status.',
+);
+assert.strictEqual(
+  returnPreview.body.data.mutationPreview.ripple.effectType,
+  'roster-return',
+);
+
+const callUpReadSheet = async (sheetName) => {
+  const snapshot = await readSheet(sheetName);
+  if (sheetName === 'As_Roster') {
+    return {
+      ...snapshot,
+      data: {
+        ...snapshot.data,
+        rows: snapshot.data.rows.map((row) => ({
+          ...row,
+          values: row.values.map((value, index) => {
+            if (index === 5) return 'SP';
+            if (index === 6) return 'Synthetic Affiliate';
+            return value;
+          }),
+        })),
+      },
+    };
+  }
+  if (sheetName === 'Simulation_Ledger') {
+    return {
+      ...snapshot,
+      data: {
+        ...snapshot.data,
+        rows: snapshot.data.rows.map((row) => (
+          row.rowNumber === 22
+            ? {
+              ...row,
+              values: row.values.map((value, index) => {
+                if (index === 4) return 'Synthetic Minor Leaguer';
+                if (index === 5) return 'active';
+                return value;
+              }),
+            }
+            : row
+        )),
+      },
+    };
+  }
+  return snapshot;
+};
+const callUpHandlers = createSportsHandlers({
+  readSheet: callUpReadSheet,
+});
+const callUpPreview = await call(callUpHandlers.preview, {
+  body: rosterEventSubmission('call-up', [
+    { field: 'roster.team', before: 'Synthetic Affiliate', after: "A's" },
+    { field: 'roster.position', before: 'SP', after: 'RP' },
+    { field: 'citizen.status', before: 'active', after: 'Active' },
+    {
+      field: 'citizen.roleType',
+      before: 'Synthetic Minor Leaguer',
+      after: 'Synthetic Major Leaguer',
+    },
+  ]),
+});
+assert.strictEqual(callUpPreview.statusCode, 200);
+assert.strictEqual(
+  callUpPreview.body.data.mutationPreview.participant.citizenTier,
+  '1',
+);
+assert.match(
+  callUpPreview.body.data.mutationPreview.lifeHistory.eventText,
+  /Position SP → RP/,
+);
+assert.strictEqual(
+  callUpPreview.body.data.mutationPreview.ripple.effectType,
+  'roster-call-up',
+);
+
+const tradePreview = await call(handlers.preview, {
+  body: rosterEventSubmission('trade-away', [
+    { field: 'roster.team', before: "A's", after: 'Synthetic Destination' },
+    { field: 'roster.position', before: 'CF', after: 'RF' },
+    { field: 'citizen.status', before: 'Active', after: 'Traded' },
+    {
+      field: 'citizen.roleType',
+      before: "A's Player",
+      after: 'Synthetic Destination Player',
+    },
+  ]),
+});
+assert.strictEqual(tradePreview.statusCode, 200);
+assert.match(
+  tradePreview.body.data.mutationPreview.tradeWarning,
+  /unarchived until engine\.90/,
+);
+assert.strictEqual(
+  tradePreview.body.data.mutationPreview.ripple.effectType,
+  'roster-trade-away',
+);
+
+const forbiddenAction = await call(handlers.preview, {
+  body: {
+    ...injurySubmission,
+    mutation: {
+      ...injurySubmission.mutation,
+      action: 'signing',
+    },
+  },
+});
+assert.strictEqual(forbiddenAction.statusCode, 422);
+assert.strictEqual(forbiddenAction.body.error.code, 'sports_validation_failed');
 
 const unresolved = await call(handlers.preview, {
   body: {
@@ -230,6 +748,19 @@ const stale = await cachedReader('Oakland_Sports_Feed');
 assert.strictEqual(stale.stale, true);
 assert.strictEqual(stale.warnings[0].code, 'sheet_refresh_failed');
 
+const rawReader = createSportsSheetReader(async () => ({
+  headers: AS_HEADERS,
+  rows: [{
+    rowNumber: 44,
+    values: syntheticSheets.As_Roster.rows[0].values,
+  }],
+}));
+const raw = await rawReader('As_Roster');
+assert.deepStrictEqual(raw.data.headers, AS_HEADERS);
+assert.strictEqual(raw.data.rows[0].rowNumber, 44);
+assert.strictEqual(raw.data.rows[0].values[14], '21');
+assert.strictEqual(raw.data.rows[0].values[18], '33');
+
 const failingHandlers = createSportsHandlers({
   readSheet: async () => {
     const error = new Error('synthetic loader failure');
@@ -256,7 +787,7 @@ assert.strictEqual(noCycle.statusCode, 422);
 assert.strictEqual(noCycle.body.error.code, 'sports_cycle_unavailable');
 
 let writeCalls = 0;
-let invalidations = 0;
+const invalidatedSheets = [];
 let secureNow = 1_000_000;
 let capturedWrite = null;
 const secureDependencies = {
@@ -281,15 +812,14 @@ const secureDependencies = {
       rowNumber: 55,
       cycle: 404,
       team: "A's",
-      eventType: 'game-result',
+      eventType: input.expectedRow[2],
       requestHash: input.requestHash,
       idempotencyKey: input.idempotencyKey,
       writtenAt: '2042-01-01T00:00:00.000Z',
     };
   },
   invalidateSheet: (sheetName) => {
-    assert.strictEqual(sheetName, 'Oakland_Sports_Feed');
-    invalidations += 1;
+    invalidatedSheets.push(sheetName);
   },
 };
 const secureHandlers = createSportsHandlers(secureDependencies);
@@ -308,7 +838,6 @@ const confirmHeaders = {
   origin: 'https://sports.synthetic.test',
   'x-sports-write-capability': 'synthetic-write-capability',
   'x-gw-csrf': securePreview.body.data.confirmation.csrfToken,
-  'idempotency-key': 'synthetic-route-key-0001',
 };
 const confirmBody = {
   previewToken: securePreview.body.data.confirmation.previewToken,
@@ -326,10 +855,90 @@ assert.strictEqual(confirmed.statusCode, 200);
 assert.strictEqual(confirmed.body.data.writePerformed, true);
 assert.strictEqual(confirmed.body.data.updatedRange, 'Oakland_Sports_Feed!A55:T55');
 assert.strictEqual(writeCalls, 1);
-assert.strictEqual(invalidations, 1);
-assert.strictEqual(capturedWrite.idempotencyKey, 'synthetic-route-key-0001');
+assert.deepStrictEqual(invalidatedSheets, ['Oakland_Sports_Feed']);
+assert.match(
+  capturedWrite.idempotencyKey,
+  /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/,
+);
 assert.strictEqual(capturedWrite.draft.TeamsUsed, 'as');
 assert.strictEqual(capturedWrite.expectedRow.length, 20);
+
+const secureStatPreview = await call(secureHandlers.preview, {
+  secure: true,
+  headers: { origin: 'https://sports.synthetic.test' },
+  body: statSubmission({
+    changes: [
+      { field: 'batting.so', before: '21', after: '22', reviewed: true },
+      { field: 'pitching.so', before: '33', after: '34', reviewed: true },
+    ],
+  }),
+});
+assert.strictEqual(secureStatPreview.statusCode, 200);
+assert.strictEqual(secureStatPreview.body.data.confirmation.available, true);
+
+const secureStatConfirmed = await call(secureHandlers.entries, {
+  secure: true,
+  headers: {
+    origin: 'https://sports.synthetic.test',
+    'x-sports-write-capability': 'synthetic-write-capability',
+    'x-gw-csrf': secureStatPreview.body.data.confirmation.csrfToken,
+  },
+  body: {
+    previewToken: secureStatPreview.body.data.confirmation.previewToken,
+    confirmation: SPORTS_WRITE_CONFIRMATION,
+  },
+});
+assert.strictEqual(secureStatConfirmed.statusCode, 200);
+assert.strictEqual(writeCalls, 2);
+assert.deepStrictEqual(
+  invalidatedSheets,
+  ['Oakland_Sports_Feed', 'Oakland_Sports_Feed', 'As_Roster'],
+);
+assert.strictEqual(capturedWrite.submission.mutation.action, 'stat-capture');
+assert.strictEqual(capturedWrite.sourcePreconditions.rosterSource, 'As_Roster');
+assert.match(
+  capturedWrite.idempotencyKey,
+  /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/,
+);
+
+const secureInjuryPreview = await call(secureHandlers.preview, {
+  secure: true,
+  headers: { origin: 'https://sports.synthetic.test' },
+  body: injurySubmission,
+});
+assert.strictEqual(secureInjuryPreview.statusCode, 200);
+assert.strictEqual(secureInjuryPreview.body.data.confirmation.available, true);
+const secureInjuryConfirmed = await call(secureHandlers.entries, {
+  secure: true,
+  headers: {
+    origin: 'https://sports.synthetic.test',
+    'x-sports-write-capability': 'synthetic-write-capability',
+    'x-gw-csrf': secureInjuryPreview.body.data.confirmation.csrfToken,
+  },
+  body: {
+    previewToken: secureInjuryPreview.body.data.confirmation.previewToken,
+    confirmation: SPORTS_WRITE_CONFIRMATION,
+  },
+});
+assert.strictEqual(secureInjuryConfirmed.statusCode, 200);
+assert.strictEqual(writeCalls, 3);
+assert.deepStrictEqual(
+  invalidatedSheets,
+  [
+    'Oakland_Sports_Feed',
+    'Oakland_Sports_Feed',
+    'As_Roster',
+    'Oakland_Sports_Feed',
+    'As_Roster',
+    'Simulation_Ledger',
+    'LifeHistory_Log',
+    'Ripple_Ledger',
+  ],
+);
+assert.strictEqual(capturedWrite.submission.mutation.action, 'injury');
+assert.strictEqual(capturedWrite.sourcePreconditions.citizenRow, 22);
+assert.strictEqual(capturedWrite.sourcePreconditions.nextLifeHistoryLogRow, 3);
+assert.strictEqual(capturedWrite.sourcePreconditions.nextRippleLedgerRow, 3);
 
 let disabledWriteCalls = 0;
 const disabledHandlers = createSportsHandlers({
@@ -409,10 +1018,15 @@ const changedFreshHandlers = createSportsHandlers({
     if (sheetName !== 'As_Roster') return snapshot;
     return {
       ...snapshot,
-      data: snapshot.data.map((row) => ({
-        ...row,
-        Position: 'CHANGED-SYNTHETIC-POSITION',
-      })),
+      data: {
+        ...snapshot.data,
+        rows: snapshot.data.rows.map((row) => ({
+          ...row,
+          values: row.values.map((cell, index) => (
+            index === 5 ? 'CHANGED-SYNTHETIC-POSITION' : cell
+          )),
+        })),
+      },
     };
   },
 });
@@ -423,7 +1037,7 @@ const changedSource = await call(changedFreshHandlers.entries, {
 });
 assert.strictEqual(changedSource.statusCode, 409);
 assert.strictEqual(changedSource.body.error.code, 'sports_source_changed');
-assert.strictEqual(writeCalls, 1);
+assert.strictEqual(writeCalls, 3);
 
 secureNow += 15 * 60 * 1000;
 const expired = await call(secureHandlers.entries, {
@@ -433,7 +1047,7 @@ const expired = await call(secureHandlers.entries, {
 });
 assert.strictEqual(expired.statusCode, 410);
 assert.strictEqual(expired.body.error.code, 'sports_preview_expired');
-assert.strictEqual(writeCalls, 1);
+assert.strictEqual(writeCalls, 3);
 
 assert.ok(reads.includes('Oakland_Sports_Feed'));
 assert.ok(reads.includes('As_Roster'));

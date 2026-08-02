@@ -232,14 +232,17 @@ relationship is conventional:
 
 Therefore a roster picker is a safety improvement only when the server validates
 the selection, preserves the POPID in the staged submission, and writes the
-compatible exact name. A feed entry alone does not trade, sign, injure, release,
-or call up a player.
+compatible exact name. A feed-only entry still does not trade, sign, injure,
+release, or call up a player. The source-built mutation path accepts only one
+exact roster/ledger participant and one of four bounded actions: `injury`,
+`return`, `call-up`, or `trade-away`.
 
 The sport-specific roster columns are Mike's handy current-stat-line snapshot.
-They should appear read-only when a player is selected. Feed `Stats` describe
-the event for downstream story context; they do not synchronize the roster.
-Updating a player's current line is a separate, explicitly confirmed operation
-in the proposed `engine.40` stat-intake lane.
+`As_Roster` and `Oaks_Roster` are authoritative for current-season values.
+Feed `Stats` describe the event for downstream story context; they are never a
+hidden structured payload. A `stat-capture` confirmation updates only reviewed,
+allowlisted roster cells and appends one compatible feed row in the same batch.
+Season history remains a separate TrueSource concern.
 
 ## Current entry checklist
 
@@ -254,8 +257,9 @@ proved, use the Sheet directly:
 5. Add only the event controls and team-state values supported by what happened.
 6. Remember that a later non-empty team-state value in the same Cycle overrides
    an earlier one.
-7. Treat roster/status changes as a separate state-and-LifeHistory operation
-   until `engine.77` ships.
+7. Treat roster/status changes as one separately confirmed engine.77 operation;
+   until the Dashboard source is deployed and live-proved, perform it only
+   through the existing operator-controlled Sheet workflow.
 8. Run the documented current-Cycle preflight before an engine Cycle.
 
 ## Workspace implementation (Waves A–C)
@@ -273,8 +277,14 @@ replacement Sheet schema:
   effects;
 - inspect the exact twenty-column compatibility row;
 - keep Notebook Daily items permanently `NOT CANON` and attach provenance only;
-- confirm a single feed append only through the separately gated browser flow;
-- perform no roster, citizen, NotebookLM, Drive, or publication write.
+- review current-season stat diffs without collapsing the A's duplicate `SO`
+  headers;
+- preview exact roster/citizen state, deterministic LifeHistory/log text, and
+  citizen Ripple attribution for the four engine.77 actions;
+- confirm one atomic feed/stat or feed/state/life/Ripple batch only through the
+  separately gated browser flow;
+- perform no NotebookLM, Drive, memory, publication, deployment, or service
+  write.
 
 The implemented server routes are `GET /api/sports/overview`,
 `GET /api/sports/workspace`, `GET /api/sports/notebook`, and
@@ -284,13 +294,20 @@ warnings, safe errors, and a 60-second live-Sheet cache with explicit stale
 failover. The local Notebook adapter reads only complete
 `output/notebooklm/daily/c<Cycle>/<pack-hash>/` artifacts.
 
-Wave C signs 15-minute previews with a stable server secret, binds actor,
-request, projected row, source snapshot, and CSRF nonce, requires a separate
-write capability and explicit acknowledgement, revalidates fresh Sheet data,
-appends exactly one row, reads back exact `A:T`, and stores only metadata in
-`output/sports-intake/append-audit.jsonl`. A pending audit reservation exists
-before the external append so an uncertain result blocks replay instead of
-risking a duplicate.
+The extended writer signs 15-minute previews with a stable server secret and
+server-generated idempotency key. It binds the actor, projected feed row,
+selected physical roster and citizen rows, relevant append targets, and CSRF
+nonce. One process-global lock revalidates those sources and sends one
+`spreadsheets.batchUpdate` request. Exact read-back covers the feed, roster,
+citizen, `LifeHistory_Log`, and `Ripple_Ledger` surfaces applicable to the
+action. The metadata-only audit stores hashes, ranges, counts, and safe result
+codes; it does not duplicate Notes, Stats, HealthCause, or LifeHistory prose.
+An ambiguous batch or read-back disables later writes in that process for
+builder review.
+
+`trade-away` writes `Status=Traded` but deletes or archives no row; engine.90
+owns any later departure archive. `season-close` remains fail-closed until an
+updated authoritative TrueSource establishes the complete row/header payload.
 
 The route refuses writes unless its feature flag is enabled and the dashboard
 is loopback-bound behind the exact configured HTTPS origin with a Secure
@@ -306,9 +323,11 @@ coverage are repaired. Remaining gaps are:
 - the Sheet setup utility does not cover columns P–T;
 - the preflight and dropdown utility do not share one validator;
 - A's roster context has wider reviewer coverage than Oaks roster context;
-- feed `Stats` and roster current-stat fields have no synchronization contract.
-- `engine.40` roster-stat and `engine.77` state/LifeHistory effects remain
-  explicitly unavailable sibling work.
+- the source-built mutation path still needs independent review, deployment,
+  authenticated live reads, and separately approved stat/engine.77 proving
+  writes;
+- TrueSource season close remains open until the authoritative source update
+  defines its complete payload contract;
 - the remote-browser deployment still needs a public hostname, TLS proxy,
   direct-port restriction, secure environment configuration, and review.
 
@@ -328,6 +347,10 @@ parsers, validators, and consumers through an approved implementation plan.
   exact-Cycle projections, live-read/local-artifact endpoints, roster UI,
   non-canon Notebook inbox, and deterministic no-write Ripple Preview; retained
   restart, live proof, and Wave C append as separate gates.
+- 2026-08-02 — Documented the source-built engine.40/engine.77 extension:
+  duplicate-header-safe current-season stat writes, four bounded roster actions,
+  one atomic multi-ledger batch with exact read-back, engine.90 exclusion, and
+  the deferred TrueSource season-close gate. No deployment or live write.
 - 2026-07-31 — Documented the pre-landing Task 4 compatibility correction:
   Phase 2 retains historical free-text/NFL reads, logs unknown nonblank team
   values, and keeps the new draft/write contract restricted to A's and Oaks.

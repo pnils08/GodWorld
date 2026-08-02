@@ -89,6 +89,14 @@ remain `engine.40`; roster/team-state and LifeHistory mutations remain
 no Edition, Dispatch, Supplemental, Drive, NotebookLM, Supermemory, Discord, or
 other external write.
 
+The approved follow-on [[2026-08-02-sports-stat-event-intake]] preserves this
+feed compatibility boundary while extending the same Dashboard surface with
+source-built engine.40 and engine.77 mutations. That owning plan controls the
+duplicate-header-safe stat maps, four-action state matrix, atomic multi-ledger
+writer, exact read-back, and deferred TrueSource season close. This plan remains
+the deployment prerequisite for hostname, TLS/proxy, authentication, and the
+base feed-write proof.
+
 ### Locked version-1 decisions
 
 - One event is previewed and confirmed at a time. There is no multi-row Cycle
@@ -882,3 +890,6 @@ own plan change and builder approval.
   restart-stable signed previews, real write capability, exact append/read-back,
   persistent idempotency audit, secure confirmation, and verified receipt;
   retained TLS/proxy, deployment, and live proof as separate gates.
+- 2026-08-02 — Linked the approved engine.40/engine.77 follow-on without
+  rewriting this plan's version-1 history; deployment and live proof remain
+  prerequisites owned here.

@@ -18,7 +18,7 @@
  */
 
 import { readFileSync, writeFileSync, existsSync, readdirSync, mkdirSync } from 'fs';
-import { join, dirname, basename } from 'path';
+import { join, dirname, basename, resolve } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -194,6 +194,130 @@ function classifyFile(fileName) {
 }
 
 // ---------------------------------------------------------------------------
+// Header-driven A's hitter season stats
+// ---------------------------------------------------------------------------
+
+const HITTER_SEASON_HEADERS = Object.freeze({
+  withoutCaughtStealing: Object.freeze([
+    'Year', 'Team', 'G', 'AB', 'R', 'H', '2B', '3B', 'HR', 'RBI',
+    'BB', 'SO', 'SB', 'AVG', 'OBP', 'SLG',
+  ]),
+  withCaughtStealing: Object.freeze([
+    'Year', 'Team', 'G', 'AB', 'R', 'H', '2B', '3B', 'HR', 'RBI',
+    'BB', 'SO', 'SB', 'CS', 'AVG', 'OBP', 'SLG',
+  ]),
+});
+
+const HITTER_SEASON_KEYS = Object.freeze({
+  Year: 'year',
+  Team: 'team',
+  G: 'g',
+  AB: 'ab',
+  R: 'r',
+  H: 'h',
+  '2B': 'doubles',
+  '3B': 'triples',
+  HR: 'hr',
+  RBI: 'rbi',
+  BB: 'bb',
+  SO: 'so',
+  SB: 'sb',
+  CS: 'cs',
+  AVG: 'avg',
+  OBP: 'obp',
+  SLG: 'slg',
+});
+
+const HITTER_INTEGER_HEADERS = new Set([
+  'Year', 'G', 'AB', 'R', 'H', '2B', '3B', 'HR', 'RBI', 'BB', 'SO', 'SB', 'CS',
+]);
+
+function splitSeasonCells(line) {
+  return String(line || '').trim().split(/\s+/).filter(Boolean);
+}
+
+function sameHeader(left, right) {
+  return left.length === right.length &&
+    left.every((value, index) => value === right[index]);
+}
+
+function parseHitterSeasonStats(input, options = {}) {
+  const strict = options.strict !== false;
+  const onWarning = typeof options.onWarning === 'function'
+    ? options.onWarning
+    : () => {};
+  const lines = Array.isArray(input) ? input : String(input || '').split('\n');
+  const headerIndex = lines.findIndex((line) => (
+    /^Year\s+Team\s+G\s+AB\b/i.test(String(line || '').trim())
+  ));
+  if (headerIndex < 0) return [];
+
+  const headers = splitSeasonCells(lines[headerIndex]);
+  const supported = sameHeader(
+    headers,
+    HITTER_SEASON_HEADERS.withoutCaughtStealing,
+  ) || sameHeader(
+    headers,
+    HITTER_SEASON_HEADERS.withCaughtStealing,
+  );
+  if (!supported) {
+    const message = `Unsupported hitter season header: ${headers.join(' ')}`;
+    if (strict) throw new Error(message);
+    onWarning(message);
+    return [];
+  }
+
+  const rows = [];
+  for (let index = headerIndex + 1; index < lines.length; index += 1) {
+    const line = String(lines[index] || '').trim();
+    if (!line) {
+      if (rows.length) break;
+      continue;
+    }
+    if (!/^20\d{2}\s+[A-Z]{3}\s+\d+/.test(line)) {
+      if (rows.length) break;
+      continue;
+    }
+
+    const values = splitSeasonCells(line);
+    if (values.length !== headers.length) {
+      const message = (
+        `Hitter season row has ${values.length} values for ${headers.length} headers: ${line}`
+      );
+      if (strict) throw new Error(message);
+      onWarning(message);
+      continue;
+    }
+
+    const parsed = {};
+    headers.forEach((header, cellIndex) => {
+      const key = HITTER_SEASON_KEYS[header];
+      const raw = values[cellIndex];
+      if (HITTER_INTEGER_HEADERS.has(header)) {
+        if (!/^\d+$/.test(raw)) {
+          const message = `Hitter season ${header} must be a whole number: ${raw}`;
+          if (strict) throw new Error(message);
+          onWarning(message);
+          parsed[key] = null;
+          return;
+        }
+        parsed[key] = Number(raw);
+      } else {
+        parsed[key] = raw;
+      }
+    });
+    rows.push(parsed);
+  }
+
+  if (!rows.length) {
+    const message = 'Hitter season header was present without any parseable rows';
+    if (strict) throw new Error(message);
+    onWarning(message);
+  }
+  return rows;
+}
+
+// ---------------------------------------------------------------------------
 // Parser: A's TrueSource DataPage / Data Card / True Source
 // ---------------------------------------------------------------------------
 
@@ -338,7 +462,14 @@ function parseAsDataPage(text, fileName) {
     }
   }
 
-  if (statsLines.length > 0) {
+  if (hasHitterHeader) {
+    player.seasonStats = parseHitterSeasonStats(lines, {
+      strict: false,
+      onWarning: (message) => {
+        console.warn(`  Season stats warning: ${fileName} — ${message}`);
+      },
+    });
+  } else if (statsLines.length > 0) {
     player.seasonStats = statsLines.map(line => {
       const vals = line.split(/\s+/);
       if (isPitcher) {
@@ -949,4 +1080,14 @@ function buildPlayerIndex() {
   return { players, stats };
 }
 
-buildPlayerIndex();
+function isDirectExecution() {
+  return Boolean(process.argv[1]) &&
+    resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+}
+
+if (isDirectExecution()) buildPlayerIndex();
+
+export {
+  buildPlayerIndex,
+  parseHitterSeasonStats,
+};

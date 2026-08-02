@@ -1,15 +1,33 @@
 'use strict';
 
-const { TEAM_CONFIG, normalizeTeam } = require('./sportsFeedContract');
+const {
+  STAT_FIELD_MAPS,
+  TEAM_CONFIG,
+  normalizeTeam,
+} = require('./sportsFeedContract');
 
 const STATE_FIELDS = Object.freeze([
   'SeasonType', 'Team Record', 'Streak', 'FanSentiment', 'FranchiseStability',
   'EconomicFootprint', 'CommunityInvestment', 'MediaProfile'
 ]);
 const POPID_RE = /^POP-\d{5}$/;
-const ROSTER_STAT_HEADERS = Object.freeze({
-  as: ['AB', 'AVG', 'H', 'HR', 'RBI', 'SB', 'SO', 'IP', 'ERA', 'W-L', 'BB'],
-  oaks: ['PPG', 'ASST', 'REB', 'STL', 'FG%', '3P%']
+const ROSTER_SCHEMAS = Object.freeze({
+  as: Object.freeze({
+    sheetName: 'As_Roster',
+    headers: Object.freeze([
+      'POPID', 'First', 'Middle', 'Last', 'Tier', 'Position', 'Team', 'Salary',
+      'AB', 'AVG', 'H', 'HR', 'RBI', 'SB', 'SO', 'IP', 'ERA', 'W-L', 'SO', 'BB',
+    ]),
+    stats: Object.freeze(Object.values(STAT_FIELD_MAPS.As_Roster)),
+  }),
+  oaks: Object.freeze({
+    sheetName: 'Oaks_Roster',
+    headers: Object.freeze([
+      'POPID', 'First', 'Middle', 'Last', 'Tier', 'Position', 'Team', 'Salary',
+      'PPG', 'ASST', 'REB', 'STL', 'FG%', '3P%',
+    ]),
+    stats: Object.freeze(Object.values(STAT_FIELD_MAPS.Oaks_Roster)),
+  }),
 });
 
 function value(row, header) {
@@ -24,19 +42,79 @@ function eventFromRow(row, index, team, cycle) {
   ['SeasonType', 'EventType', 'NamesUsed', 'Notes', 'Stats', 'Team Record', 'StoryAngle', 'PlayerMood', 'EventTrigger', 'HomeNeighborhood', 'Streak', 'FanSentiment', 'FranchiseStability', 'EconomicFootprint', 'CommunityInvestment', 'MediaProfile'].forEach((header) => { event[header] = value(row, header); });
   return event;
 }
-function projectRoster(rows, teamId, warnings) {
-  if (!Array.isArray(rows)) {
+
+function rawValue(values, index) {
+  return values && values[index] != null ? String(values[index]).trim() : '';
+}
+
+function validateRosterHeaders(headers, teamId) {
+  const schema = ROSTER_SCHEMAS[teamId];
+  if (!Array.isArray(headers)) {
+    throw new Error(`${schema.sheetName} raw snapshot headers must be an array`);
+  }
+  const actual = headers.map((header) => String(header == null ? '' : header).trim());
+  const expected = schema.headers;
+  const mismatchIndex = expected.findIndex((header, index) => actual[index] !== header);
+  if (actual.length !== expected.length || mismatchIndex !== -1) {
+    const position = mismatchIndex !== -1
+      ? mismatchIndex + 1
+      : Math.min(actual.length, expected.length) + 1;
+    throw new Error(
+      `${schema.sheetName} header layout mismatch at physical column ${position}; ` +
+      `expected ${expected.join(', ')} but received ${actual.join(', ')}`
+    );
+  }
+}
+
+function projectRoster(snapshot, teamId, warnings) {
+  const schema = ROSTER_SCHEMAS[teamId];
+  if (snapshot == null) {
     warnings.push(`${TEAM_CONFIG[teamId].label} roster is unavailable`);
     return [];
   }
-  return rows.map((row, index) => {
-    const popid = value(row, 'POPID');
-    const name = [value(row, 'First'), value(row, 'Middle'), value(row, 'Last')].filter(Boolean).join(' ');
+  if (Array.isArray(snapshot)) {
+    throw new Error(
+      `${schema.sheetName} must use a duplicate-header-safe raw snapshot; object rows are not accepted`
+    );
+  }
+  if (!snapshot || !Array.isArray(snapshot.rows)) {
+    throw new Error(`${schema.sheetName} raw snapshot rows must be an array`);
+  }
+  validateRosterHeaders(snapshot.headers, teamId);
+
+  return snapshot.rows.map((row, index) => {
+    if (!row || !Array.isArray(row.values)) {
+      throw new Error(`${schema.sheetName} raw snapshot row ${index + 1} must carry a values array`);
+    }
+    if (!Number.isInteger(row.rowNumber) || row.rowNumber < 2) {
+      throw new Error(`${schema.sheetName} raw snapshot row ${index + 1} has an invalid physical row number`);
+    }
+    const cells = row.values;
+    const popid = rawValue(cells, 0);
+    const name = [rawValue(cells, 1), rawValue(cells, 2), rawValue(cells, 3)]
+      .filter(Boolean)
+      .join(' ');
     const validPopid = POPID_RE.test(popid);
-    if (!validPopid) warnings.push(`${TEAM_CONFIG[teamId].label} roster row ${rowNumber(row, index)} has malformed POPID${popid ? `: ${popid}` : ''}`);
+    if (!validPopid) warnings.push(`${TEAM_CONFIG[teamId].label} roster row ${row.rowNumber} has malformed POPID${popid ? `: ${popid}` : ''}`);
     const stats = {};
-    ROSTER_STAT_HEADERS[teamId].forEach((header) => { if (value(row, header)) stats[header] = value(row, header); });
-    return { sourceRow: rowNumber(row, index), popid, validPopid, name, tier: value(row, 'Tier'), position: value(row, 'Position'), team: value(row, 'Team'), salary: value(row, 'Salary'), stats };
+    const statValues = {};
+    schema.stats.forEach((stat) => {
+      const current = rawValue(cells, stat.columnIndex);
+      statValues[stat.key] = current;
+      if (current) stats[stat.label] = current;
+    });
+    return {
+      sourceRow: row.rowNumber,
+      popid,
+      validPopid,
+      name,
+      tier: rawValue(cells, 4),
+      position: rawValue(cells, 5),
+      team: rawValue(cells, 6),
+      salary: rawValue(cells, 7),
+      stats,
+      statValues,
+    };
   });
 }
 
@@ -85,4 +163,9 @@ function projectSportsWorkspace(input) {
   return { cycle, events: Object.values(teams).flatMap((team) => team.events), teams, freshness: source.freshness || null, warnings };
 }
 
-module.exports = { STATE_FIELDS, POPID_RE, projectSportsWorkspace };
+module.exports = {
+  STATE_FIELDS,
+  POPID_RE,
+  ROSTER_SCHEMAS,
+  projectSportsWorkspace,
+};

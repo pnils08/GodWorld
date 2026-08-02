@@ -9,7 +9,6 @@ import {
 } from 'lucide-react';
 import {
   confirmSportsEntry,
-  createSportsIdempotencyKey,
 } from '../lib/sportsApi';
 
 const reasonCopy = {
@@ -54,6 +53,7 @@ function GatedState({ reasonCode }) {
 }
 
 function Receipt({ receipt, onStartAnother }) {
+  const isMutation = Boolean(receipt.mutationAction);
   return (
     <section role="status" className="mt-5 overflow-hidden rounded-2xl border border-emerald-400/25 bg-emerald-950/15">
       <div className="border-b border-emerald-400/10 bg-emerald-400/5 p-4 sm:p-5">
@@ -61,9 +61,15 @@ function Receipt({ receipt, onStartAnother }) {
           <CheckCircle2 size={20} className="mt-0.5 shrink-0 text-emerald-400" />
           <div>
             <div className="text-[9px] font-black uppercase tracking-[0.2em] text-emerald-300">Read-back verified</div>
-            <h3 className="mt-1 text-lg font-black text-white">Event added to the Oakland feed</h3>
+            <h3 className="mt-1 text-lg font-black text-white">
+              {isMutation
+                ? 'Event and mutation verified'
+                : 'Event added to the Oakland feed'}
+            </h3>
             <p className="mt-1 text-[10px] text-neutral-400">
-              Exactly one 20-cell row was appended and matched its exact-range read-back.
+              {isMutation
+                ? `${receipt.updatedRanges?.length || 1} affected range${receipt.updatedRanges?.length === 1 ? '' : 's'} matched exact read-back.`
+                : 'Exactly one 20-cell row was appended and matched its exact-range read-back.'}
             </p>
           </div>
         </div>
@@ -104,14 +110,13 @@ export default function SportsWriteConfirmation({
   onStartAnother,
 }) {
   const confirmation = preview?.confirmation;
+  const statDiff = preview?.mutationPreview?.statDiff;
+  const stateDiff = preview?.mutationPreview?.stateDiff;
   const [writeKey, setWriteKey] = useState('');
   const [acknowledged, setAcknowledged] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
   const [receipt, setReceipt] = useState(null);
-  const [idempotencyKey, setIdempotencyKey] = useState(
-    () => createSportsIdempotencyKey()
-  );
 
   useEffect(() => {
     setWriteKey('');
@@ -119,7 +124,6 @@ export default function SportsWriteConfirmation({
     setSubmitting(false);
     setError(null);
     setReceipt(null);
-    setIdempotencyKey(createSportsIdempotencyKey());
   }, [confirmation?.previewToken]);
 
   if (!preview || !confirmation) return null;
@@ -146,7 +150,6 @@ export default function SportsWriteConfirmation({
         previewToken: confirmation.previewToken,
         csrfToken: confirmation.csrfToken,
         capability,
-        idempotencyKey,
         confirmation: confirmation.confirmationPhrase,
       });
       setReceipt(response.data);
@@ -165,9 +168,19 @@ export default function SportsWriteConfirmation({
           <LockKeyhole size={18} className="mt-0.5 shrink-0 text-sky-300" />
           <div>
             <div className="text-[9px] font-black uppercase tracking-[0.2em] text-sky-300">Final confirmation</div>
-            <h3 className="mt-1 text-base font-black text-white">Append this event?</h3>
+            <h3 className="mt-1 text-base font-black text-white">
+              {statDiff
+                ? 'Append the event and update this stat line?'
+                : stateDiff
+                  ? 'Apply this roster, state, life, and Ripple event?'
+                  : 'Append this event?'}
+            </h3>
             <p className="mt-1 max-w-2xl text-[10px] leading-relaxed text-neutral-400">
-              This is the only step that can change the Sheet. The server will re-read the feed and rosters, append one row, and compare all 20 cells before returning a receipt.
+              {statDiff
+                ? `This is the only step that can change the Sheets. The server will re-read every source, append one feed row, update ${statDiff.changedCount} reviewed roster field${statDiff.changedCount === 1 ? '' : 's'}, and verify exact read-back.`
+                : stateDiff
+                  ? 'This is the only step that can change the Sheets. The server will re-read the feed, roster, citizen, LifeHistory log, and Ripple ledger; apply one atomic batch; then verify every affected surface.'
+                  : 'This is the only step that can change the Sheet. The server will re-read the feed and rosters, append one row, and compare all 20 cells before returning a receipt.'}
             </p>
           </div>
         </div>
@@ -188,6 +201,45 @@ export default function SportsWriteConfirmation({
           </div>
         ))}
       </div>
+
+      {statDiff && (
+        <div className="mt-4 rounded-xl border border-sky-300/15 bg-black/20 p-3">
+          <div className="text-[8px] font-black uppercase tracking-widest text-sky-300">Reviewed roster changes</div>
+          <ul className="mt-2 grid gap-1.5 sm:grid-cols-2">
+            {statDiff.fields
+              .filter((field) => field.status !== 'unchanged')
+              .map((field) => (
+                <li key={field.field} className="rounded-lg border border-white/5 px-2.5 py-2 font-mono text-[9px] text-neutral-300">
+                  <span className="font-bold text-white">{field.label}</span> {field.before || 'blank'} → {field.after}
+                </li>
+              ))}
+          </ul>
+        </div>
+      )}
+      {stateDiff && (
+        <div className="mt-4 rounded-xl border border-violet-300/15 bg-black/20 p-3">
+          <div className="text-[8px] font-black uppercase tracking-widest text-violet-300">
+            Reviewed engine.77 operation
+          </div>
+          <ul className="mt-2 grid gap-1.5 sm:grid-cols-2">
+            {stateDiff.fields.map((field) => (
+              <li key={field.field} className="rounded-lg border border-white/5 px-2.5 py-2 font-mono text-[9px] text-neutral-300">
+                <span className="font-bold text-white">{field.label}</span>{' '}
+                {field.before || 'blank'} → {field.after || 'blank'}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-2 rounded-lg border border-white/5 p-2.5 text-[9px] leading-relaxed text-neutral-300">
+            <span className="font-black text-white">LifeHistory:</span>{' '}
+            {preview.mutationPreview.lifeHistory.line}
+          </div>
+          {preview.mutationPreview.tradeWarning && (
+            <div className="mt-2 rounded-lg border border-amber-400/15 bg-amber-950/10 p-2.5 text-[9px] text-amber-200">
+              {preview.mutationPreview.tradeWarning}
+            </div>
+          )}
+        </div>
+      )}
 
       {error && (
         <div role="alert" className="mt-4 rounded-xl border border-red-400/20 bg-red-950/20 p-3">
@@ -234,7 +286,11 @@ export default function SportsWriteConfirmation({
             className="mt-0.5 size-4 accent-sky-400"
           />
           <span className="text-[10px] leading-relaxed text-neutral-300">
-            I reviewed the exact row and understand this appends one canon-bearing event to <span className="font-mono text-white">Oakland_Sports_Feed</span>.
+            {statDiff
+              ? <>I reviewed the exact feed row and every changed roster field, and understand they will be applied together as one canon-bearing operation.</>
+              : stateDiff
+                ? <>I reviewed the exact feed row, roster and citizen transitions, deterministic LifeHistory text, log tag, and Ripple attribution, and understand they will be applied together.</>
+                : <>I reviewed the exact row and understand this appends one canon-bearing event to <span className="font-mono text-white">Oakland_Sports_Feed</span>.</>}
           </span>
         </label>
 
@@ -244,7 +300,13 @@ export default function SportsWriteConfirmation({
           className="mt-4 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-sky-300 px-5 text-xs font-black text-sky-950 transition hover:bg-sky-200 disabled:cursor-not-allowed disabled:opacity-40 sm:w-auto"
         >
           <ShieldCheck size={15} />
-          {submitting ? 'Appending and verifying…' : 'Append one verified row'}
+          {submitting
+            ? 'Applying and verifying…'
+            : statDiff
+              ? 'Apply one verified stat event'
+              : stateDiff
+                ? 'Apply one verified roster event'
+                : 'Append one verified row'}
         </button>
       </form>
     </section>

@@ -72,11 +72,14 @@ export function getSportsNotebook(limit = 3) {
   return requestEnvelope(query('/api/sports/notebook', { limit }));
 }
 
-export function previewSportsEntry(draft, provenance) {
+export function previewSportsEntry(submission, provenance) {
+  const body = submission && Object.prototype.hasOwnProperty.call(submission, 'draft')
+    ? { ...submission, provenance }
+    : { draft: submission, provenance };
   return requestEnvelope('/api/sports/preview', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ draft, provenance }),
+    body: JSON.stringify(body),
   });
 }
 
@@ -87,11 +90,14 @@ export function createSportsIdempotencyKey() {
   return Array.from(bytes, (value) => value.toString(16).padStart(2, '0')).join('');
 }
 
+export function createSportsSubmissionId() {
+  return `sports-${createSportsIdempotencyKey()}`;
+}
+
 export function confirmSportsEntry({
   previewToken,
   csrfToken,
   capability,
-  idempotencyKey,
   confirmation,
 }) {
   return requestEnvelope('/api/sports/entries', {
@@ -100,7 +106,6 @@ export function confirmSportsEntry({
       'Content-Type': 'application/json',
       'X-GW-CSRF': csrfToken,
       'X-Sports-Write-Capability': capability,
-      'Idempotency-Key': idempotencyKey,
     },
     body: JSON.stringify({ previewToken, confirmation }),
   });

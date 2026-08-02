@@ -6,12 +6,54 @@ const fs = require('fs');
 const path = require('path');
 const {
   FEED_HEADERS,
+  STAT_FIELD_MAPS,
   projectNewRow,
-  validateDraft,
+  projectRosterEventMutation,
+  validateSportsSubmission,
 } = require('./sportsFeedContract.js');
+const { ROSTER_SCHEMAS } = require('./sportsWorkspaceProjection.js');
 
 const FEED_SHEET = 'Oakland_Sports_Feed';
-const AUDIT_VERSION = 1;
+const CITIZEN_SHEET = 'Simulation_Ledger';
+const LIFE_HISTORY_LOG_SHEET = 'LifeHistory_Log';
+const RIPPLE_LEDGER_SHEET = 'Ripple_Ledger';
+const AUDIT_VERSION = 2;
+const CITIZEN_REQUIRED_HEADERS = Object.freeze([
+  'POPID',
+  'First',
+  'Last',
+  'Tier',
+  'RoleType',
+  'Status',
+  'LifeHistory',
+  'Neighborhood',
+  'StatusStartCycle',
+  'HealthCause',
+]);
+const LIFE_HISTORY_LOG_HEADERS = Object.freeze([
+  'Timestamp',
+  'POPID',
+  'Name',
+  'EventTag',
+  'EventText',
+  'Neighborhood',
+  'Cycle',
+]);
+const RIPPLE_LEDGER_HEADERS = Object.freeze([
+  'Cycle',
+  'CauseType',
+  'CauseId',
+  'CauseDetail',
+  'EffectType',
+  'TargetScope',
+  'TargetIds',
+  'Neighborhood',
+  'Magnitude',
+  'Duration',
+  'RemainingStrength',
+  'SourceEngine',
+  'CycleStamp',
+]);
 
 class SportsFeedWriterError extends Error {
   constructor(code, message, status = 500, details = {}) {
@@ -44,12 +86,20 @@ function sha256(value) {
   return crypto.createHash('sha256').update(String(value)).digest('hex');
 }
 
-function sportsRequestHash(row, provenance = null) {
-  return sha256(stableStringify({
+function sportsRequestHash(
+  row,
+  provenance = null,
+  mutationEnvelope = null,
+  sourcePreconditions = null,
+) {
+  const payload = {
     contractVersion: 1,
     row,
     provenance: provenance || null,
-  }));
+  };
+  if (mutationEnvelope) payload.mutation = mutationEnvelope;
+  if (sourcePreconditions) payload.sourcePreconditions = sourcePreconditions;
+  return sha256(stableStringify(payload));
 }
 
 function safeCell(value) {
@@ -67,18 +117,257 @@ function rowsMatch(left, right) {
   return a.every((value, index) => value === b[index]);
 }
 
-function parseUpdatedRange(value) {
-  const match = String(value || '').match(
-    /^'?Oakland_Sports_Feed'?!A(\d+):T(\d+)$/
+function rosterTeamId(rosterSource) {
+  if (rosterSource === 'As_Roster') return 'as';
+  if (rosterSource === 'Oaks_Roster') return 'oaks';
+  return null;
+}
+
+function normalizedRawSnapshot(snapshot, sheetName, options = {}) {
+  if (!snapshot || !Array.isArray(snapshot.headers) || !Array.isArray(snapshot.rows)) {
+    throw new Error(`${sheetName} raw snapshot is unavailable`);
+  }
+  const headers = snapshot.headers.map((header) => safeCell(header).trim());
+  if (options.exactHeaders) {
+    if (headers.length !== options.exactHeaders.length ||
+        headers.some((header, index) => header !== options.exactHeaders[index])) {
+      throw new Error(`${sheetName} header layout changed`);
+    }
+  }
+  const indexByHeader = {};
+  for (const required of options.requiredHeaders || []) {
+    const matches = headers.reduce((indexes, header, index) => (
+      header === required ? indexes.concat(index) : indexes
+    ), []);
+    if (matches.length !== 1) {
+      throw new Error(`${sheetName} requires exactly one ${required} header`);
+    }
+    indexByHeader[required] = matches[0];
+  }
+  const rows = snapshot.rows.map((row, index) => ({
+    rowNumber: Number.isInteger(row && row.rowNumber) ? row.rowNumber : index + 2,
+    values: headers.map((_, columnIndex) => safeCell(
+      row && Array.isArray(row.values) ? row.values[columnIndex] : ''
+    )),
+  }));
+  return { headers, indexByHeader, rows };
+}
+
+function normalizedFeedRows(rows) {
+  if (!Array.isArray(rows)) throw new Error('Oakland_Sports_Feed rows must be an array');
+  return rows.map((row) => FEED_HEADERS.map((header) => safeCell(row && row[header])));
+}
+
+function selectedRosterRow(snapshot, participant) {
+  const teamId = rosterTeamId(participant && participant.rosterSource);
+  const schema = teamId && ROSTER_SCHEMAS[teamId];
+  if (!schema || !snapshot || !Array.isArray(snapshot.headers) ||
+      !Array.isArray(snapshot.rows)) {
+    throw new Error('Selected roster raw snapshot is unavailable');
+  }
+  const headers = snapshot.headers.map((header) => safeCell(header).trim());
+  if (headers.length !== schema.headers.length ||
+      headers.some((header, index) => header !== schema.headers[index])) {
+    throw new Error(`${schema.sheetName} header layout changed`);
+  }
+  const row = snapshot.rows.find((candidate) => (
+    candidate && candidate.rowNumber === participant.sourceRow
+  ));
+  if (!row || !Array.isArray(row.values)) {
+    throw new Error('Selected roster physical row is unavailable');
+  }
+  const values = schema.headers.map((_, index) => safeCell(row.values[index]).trim());
+  const name = [values[1], values[2], values[3]].filter(Boolean).join(' ');
+  if (values[0] !== participant.popid || name !== participant.name) {
+    throw new Error('Selected roster identity changed');
+  }
+  return { headers, rowNumber: row.rowNumber, values };
+}
+
+function nameFromSelectedRow(selected) {
+  const first = selected.values[selected.indexByHeader.First] || '';
+  const middleIndex = selected.headers.indexOf('Middle');
+  const middle = middleIndex >= 0 ? selected.values[middleIndex] : '';
+  const last = selected.values[selected.indexByHeader.Last] || '';
+  return [first, middle, last].map((part) => part.trim()).filter(Boolean).join(' ');
+}
+
+function selectedCitizenRow(snapshot, participant) {
+  const normalized = normalizedRawSnapshot(snapshot, CITIZEN_SHEET, {
+    requiredHeaders: CITIZEN_REQUIRED_HEADERS,
+  });
+  const popIndex = normalized.indexByHeader.POPID;
+  const matches = normalized.rows.filter((row) => (
+    row.values[popIndex].trim() === participant.popid
+  ));
+  if (matches.length !== 1) {
+    throw new Error('Selected citizen POPID is unavailable or ambiguous');
+  }
+  const selected = {
+    headers: normalized.headers,
+    indexByHeader: normalized.indexByHeader,
+    rowNumber: matches[0].rowNumber,
+    values: matches[0].values,
+  };
+  if (nameFromSelectedRow(selected) !== participant.name) {
+    throw new Error('Selected citizen identity changed');
+  }
+  return selected;
+}
+
+function selectedState(selected) {
+  return Object.fromEntries(
+    Object.entries(selected.indexByHeader).map(([header, index]) => [
+      header,
+      selected.values[index],
+    ])
   );
-  if (!match || match[1] !== match[2]) {
+}
+
+function rosterState(selected) {
+  return Object.fromEntries(selected.headers.map((header, index) => [
+    header,
+    selected.values[index],
+  ]));
+}
+
+function appendTargetPrecondition(snapshot, sheetName, exactHeaders) {
+  const normalized = normalizedRawSnapshot(snapshot, sheetName, { exactHeaders });
+  return {
+    headerHash: sha256(stableStringify(normalized.headers)),
+    rowsHash: sha256(stableStringify(normalized.rows)),
+    rowCount: normalized.rows.length,
+    nextRow: normalized.rows.length + 2,
+  };
+}
+
+function createSportsSourcePreconditions({
+  feedRows,
+  rosterSnapshot = null,
+  citizenSnapshot = null,
+  lifeHistoryLogSnapshot = null,
+  rippleLedgerSnapshot = null,
+  participant = null,
+  action = null,
+}) {
+  const feed = normalizedFeedRows(feedRows);
+  const result = {
+    feedHash: sha256(stableStringify(feed)),
+    feedRowCount: feed.length,
+    nextFeedRow: feed.length + 2,
+  };
+  if (participant) {
+    const roster = selectedRosterRow(rosterSnapshot, participant);
+    const citizen = selectedCitizenRow(citizenSnapshot, participant);
+    result.rosterSource = participant.rosterSource;
+    result.rosterRow = participant.sourceRow;
+    result.rosterHeaderHash = sha256(stableStringify(roster.headers));
+    result.rosterRowHash = sha256(stableStringify(roster.values));
+    result.citizenRow = citizen.rowNumber;
+    result.citizenHeaderHash = sha256(stableStringify(citizen.headers));
+    result.citizenRowHash = sha256(stableStringify(citizen.values));
+  }
+  if (action && action !== 'stat-capture') {
+    const lifeHistory = appendTargetPrecondition(
+      lifeHistoryLogSnapshot,
+      LIFE_HISTORY_LOG_SHEET,
+      LIFE_HISTORY_LOG_HEADERS,
+    );
+    const ripple = appendTargetPrecondition(
+      rippleLedgerSnapshot,
+      RIPPLE_LEDGER_SHEET,
+      RIPPLE_LEDGER_HEADERS,
+    );
+    result.lifeHistoryLogHeaderHash = lifeHistory.headerHash;
+    result.lifeHistoryLogRowsHash = lifeHistory.rowsHash;
+    result.lifeHistoryLogRowCount = lifeHistory.rowCount;
+    result.nextLifeHistoryLogRow = lifeHistory.nextRow;
+    result.rippleLedgerHeaderHash = ripple.headerHash;
+    result.rippleLedgerRowsHash = ripple.rowsHash;
+    result.rippleLedgerRowCount = ripple.rowCount;
+    result.nextRippleLedgerRow = ripple.nextRow;
+  }
+  return result;
+}
+
+function mutationEnvelope(validation) {
+  if (!validation.mutation) return null;
+  return {
+    submissionId: validation.submissionId,
+    participant: validation.participant,
+    mutation: validation.mutation,
+  };
+}
+
+function stringCell(value) {
+  return { userEnteredValue: { stringValue: safeCell(value) } };
+}
+
+function appendCellsRequest(sheetId, values) {
+  return {
+    appendCells: {
+      sheetId,
+      rows: [{ values: values.map(stringCell) }],
+      fields: 'userEnteredValue',
+    },
+  };
+}
+
+function updateCellRequest(sheetId, rowNumber, columnIndex, value) {
+  return {
+    updateCells: {
+      start: {
+        sheetId,
+        rowIndex: rowNumber - 1,
+        columnIndex,
+      },
+      rows: [{ values: [stringCell(value)] }],
+      fields: 'userEnteredValue',
+    },
+  };
+}
+
+function columnLetter(columnIndex) {
+  let value = columnIndex + 1;
+  let result = '';
+  while (value > 0) {
+    const remainder = (value - 1) % 26;
+    result = String.fromCharCode(65 + remainder) + result;
+    value = Math.floor((value - 1) / 26);
+  }
+  return result;
+}
+
+function rowRange(sheetName, startColumn, endColumn, rowNumber) {
+  return `${sheetName}!${startColumn}${rowNumber}:${endColumn}${rowNumber}`;
+}
+
+function rowsEqual(left, right) {
+  return Array.isArray(left) &&
+    Array.isArray(right) &&
+    left.length === right.length &&
+    left.every((value, index) => safeCell(value) === safeCell(right[index]));
+}
+
+function changedStatFields(validation) {
+  if (!validation.mutation || validation.mutation.action !== 'stat-capture') return [];
+  const fields = STAT_FIELD_MAPS[validation.participant.rosterSource];
+  return validation.mutation.changes
+    .filter((change) => change.before !== change.after)
+    .map((change) => ({ ...change, spec: fields[change.field] }));
+}
+
+function assertStatCitizenEligible(citizen) {
+  const status = safeCell(
+    citizen.values[citizen.indexByHeader.Status]
+  ).trim().toLowerCase();
+  if (!['active', 'recovering'].includes(status)) {
     throw new SportsFeedWriterError(
-      'sports_updated_range_invalid',
-      'Sheets did not return one exact Oakland sports row range',
-      502
+      'sports_participant_state_invalid',
+      'Stat capture requires an Active or recovering citizen',
+      422,
     );
   }
-  return { range: String(value), rowNumber: Number(match[1]) };
 }
 
 function createFileAuditStore(filePath) {
@@ -116,14 +405,20 @@ function createFileAuditStore(filePath) {
 }
 
 function createSportsFeedWriter(dependencies) {
-  const appendRowsDetailed = dependencies && dependencies.appendRowsDetailed;
+  const batchUpdateSpreadsheet = dependencies && dependencies.batchUpdateSpreadsheet;
+  const getSheetIds = dependencies && dependencies.getSheetIds;
+  const readSportsSource = dependencies && dependencies.readSportsSource;
   const readRange = dependencies && dependencies.readRange;
   const auditStore = dependencies && dependencies.auditStore;
   const now = dependencies && dependencies.now
     ? dependencies.now
     : () => new Date();
-  if (typeof appendRowsDetailed !== 'function') {
-    throw new Error('appendRowsDetailed is required');
+  if (typeof batchUpdateSpreadsheet !== 'function') {
+    throw new Error('batchUpdateSpreadsheet is required');
+  }
+  if (typeof getSheetIds !== 'function') throw new Error('getSheetIds is required');
+  if (typeof readSportsSource !== 'function') {
+    throw new Error('readSportsSource is required');
   }
   if (typeof readRange !== 'function') throw new Error('readRange is required');
   if (!auditStore || typeof auditStore.find !== 'function' ||
@@ -131,10 +426,14 @@ function createSportsFeedWriter(dependencies) {
     throw new Error('auditStore with find and append is required');
   }
 
-  const locks = new Map();
+  let globalTail = Promise.resolve();
+  let uncertain = false;
 
   async function execute(input) {
-    const validation = validateDraft(input && input.draft);
+    const submission = input && input.submission
+      ? input.submission
+      : input && input.draft;
+    const validation = validateSportsSubmission(submission);
     if (!validation.valid) {
       throw new SportsFeedWriterError(
         'sports_validation_failed',
@@ -143,6 +442,7 @@ function createSportsFeedWriter(dependencies) {
       );
     }
 
+    const envelope = mutationEnvelope(validation);
     const idempotencyKey = String(input.idempotencyKey || '').trim();
     if (!/^[A-Za-z0-9_-]{16,128}$/.test(idempotencyKey)) {
       throw new SportsFeedWriterError(
@@ -152,7 +452,9 @@ function createSportsFeedWriter(dependencies) {
       );
     }
 
-    const row = projectNewRow(input.draft);
+    const row = projectNewRow(
+      input.submission ? input.submission.draft : input.draft
+    );
     if (!rowsMatch(row, input.expectedRow)) {
       throw new SportsFeedWriterError(
         'sports_preview_row_mismatch',
@@ -161,7 +463,20 @@ function createSportsFeedWriter(dependencies) {
       );
     }
 
-    const requestHash = sportsRequestHash(row, input.provenance);
+    if (!input.sourcePreconditions ||
+        !Number.isInteger(input.sourcePreconditions.nextFeedRow)) {
+      throw new SportsFeedWriterError(
+        'sports_source_preconditions_missing',
+        'Signed sports source preconditions are required',
+        409
+      );
+    }
+    const requestHash = sportsRequestHash(
+      row,
+      input.provenance,
+      envelope,
+      input.sourcePreconditions,
+    );
     if (requestHash !== input.requestHash) {
       throw new SportsFeedWriterError(
         'sports_request_hash_mismatch',
@@ -184,13 +499,24 @@ function createSportsFeedWriter(dependencies) {
           prior.errorCode || 'sports_prior_write_failed',
           'The prior append attempt requires builder review before retrying',
           409,
-          { replayed: true, updatedRange: prior.updatedRange || null }
+          {
+            replayed: true,
+            updatedRange: Array.isArray(prior.updatedRanges)
+              ? prior.updatedRanges[0] || null
+              : prior.updatedRange || null,
+          }
         );
       }
+      const priorRanges = Array.isArray(prior.updatedRanges)
+        ? prior.updatedRanges
+        : prior.updatedRange ? [prior.updatedRange] : [];
       return {
         writePerformed: true,
         replayed: true,
-        updatedRange: prior.updatedRange,
+        updatedRange: priorRanges[0] || null,
+        updatedRanges: priorRanges,
+        changedFieldCount: prior.changedFieldCount || 0,
+        mutationAction: prior.mutationAction || null,
         rowNumber: prior.rowNumber,
         cycle: prior.cycle,
         team: prior.team,
@@ -201,60 +527,334 @@ function createSportsFeedWriter(dependencies) {
       };
     }
 
+    if (uncertain) {
+      throw new SportsFeedWriterError(
+        'sports_writer_uncertain',
+        'A prior sports write has ambiguous read-back and requires builder review',
+        503
+      );
+    }
+
     const auditBase = {
       auditVersion: AUDIT_VERSION,
       actorHash: String(input.actorHash || ''),
-      cycle: Number(validation.value.Cycle),
-      team: validation.value.TeamsUsed,
-      eventType: validation.value.EventType,
+      cycle: Number(validation.draft.Cycle),
+      team: validation.draft.TeamsUsed,
+      eventType: validation.draft.EventType,
+      mutationAction: validation.mutation ? validation.mutation.action : null,
+      changedFieldCount: validation.mutation
+        ? validation.mutation.changes.filter(
+          (change) => change.before !== change.after
+        ).length
+        : 0,
       requestHash,
       idempotencyKey,
     };
     await auditStore.append({
       ...auditBase,
       timestamp: now().toISOString(),
-      updatedRange: null,
+      targetHash: null,
+      updatedRanges: [],
       rowNumber: null,
       result: 'pending',
     });
 
-    let updatedRange = null;
+    let batchAttempted = false;
+    let targetHash = null;
+    let updatedRanges = [];
     try {
-      const appendResult = await appendRowsDetailed(FEED_SHEET, [row]);
-      if (appendResult.updatedRows !== 1) {
+      const action = validation.mutation ? validation.mutation.action : null;
+      const rosterEvent = validation.mutation &&
+        validation.mutation.kind === 'roster-event';
+      const [
+        feedRows,
+        rosterSnapshot,
+        citizenSnapshot,
+        lifeHistoryLogSnapshot,
+        rippleLedgerSnapshot,
+      ] = await Promise.all([
+        readSportsSource(FEED_SHEET),
+        validation.participant
+          ? readSportsSource(validation.participant.rosterSource)
+          : Promise.resolve(null),
+        validation.participant
+          ? readSportsSource(CITIZEN_SHEET)
+          : Promise.resolve(null),
+        rosterEvent
+          ? readSportsSource(LIFE_HISTORY_LOG_SHEET)
+          : Promise.resolve(null),
+        rosterEvent
+          ? readSportsSource(RIPPLE_LEDGER_SHEET)
+          : Promise.resolve(null),
+      ]);
+      let currentPreconditions;
+      try {
+        currentPreconditions = createSportsSourcePreconditions({
+          feedRows,
+          rosterSnapshot,
+          citizenSnapshot,
+          lifeHistoryLogSnapshot,
+          rippleLedgerSnapshot,
+          participant: validation.participant,
+          action,
+        });
+      } catch {
         throw new SportsFeedWriterError(
-          'sports_append_count_mismatch',
-          'Sheets did not report exactly one appended row',
-          502
+          'sports_source_changed',
+          'The feed or selected mutation source could not be revalidated',
+          409
         );
       }
-      const parsedRange = parseUpdatedRange(appendResult.updatedRange);
-      updatedRange = parsedRange.range;
+      if (stableStringify(currentPreconditions) !==
+          stableStringify(input.sourcePreconditions)) {
+        throw new SportsFeedWriterError(
+          'sports_source_changed',
+          'The feed or selected roster row changed after preview',
+          409
+        );
+      }
 
-      const readBack = await readRange(updatedRange);
-      if (!Array.isArray(readBack) || readBack.length !== 1 ||
-          !rowsMatch(row, readBack[0])) {
+      const statChanges = changedStatFields(validation);
+      let selectedRoster = null;
+      let selectedCitizen = null;
+      let rosterEventProjection = null;
+      if (validation.participant) {
+        selectedRoster = selectedRosterRow(rosterSnapshot, validation.participant);
+        selectedCitizen = selectedCitizenRow(citizenSnapshot, validation.participant);
+      }
+      if (action === 'stat-capture') {
+        assertStatCitizenEligible(selectedCitizen);
+        for (const change of validation.mutation.changes) {
+          if (selectedRoster.values[STAT_FIELD_MAPS[
+            validation.participant.rosterSource
+          ][change.field].columnIndex] !== change.before) {
+            throw new SportsFeedWriterError(
+              'sports_source_changed',
+              `${change.field} no longer matches its reviewed before value`,
+              409
+            );
+          }
+        }
+      }
+      if (rosterEvent) {
+        try {
+          rosterEventProjection = projectRosterEventMutation(validation, {
+            roster: rosterState(selectedRoster),
+            citizen: {
+              ...selectedState(selectedCitizen),
+              sourceRow: selectedCitizen.rowNumber,
+            },
+          });
+        } catch (error) {
+          throw new SportsFeedWriterError(
+            'sports_source_changed',
+            error.message,
+            409,
+          );
+        }
+      }
+
+      const sheetNames = [
+        FEED_SHEET,
+        ...(validation.participant ? [validation.participant.rosterSource] : []),
+        ...(validation.participant ? [CITIZEN_SHEET] : []),
+        ...(rosterEvent ? [LIFE_HISTORY_LOG_SHEET, RIPPLE_LEDGER_SHEET] : []),
+      ];
+      const sheetIds = await getSheetIds(sheetNames);
+      const requests = [appendCellsRequest(sheetIds[FEED_SHEET], row)];
+      const feedRange = rowRange(
+        FEED_SHEET,
+        'A',
+        'T',
+        currentPreconditions.nextFeedRow,
+      );
+      const mutationRanges = [];
+      const expectedRosterValues = selectedRoster
+        ? selectedRoster.values.slice()
+        : null;
+      const expectedCitizenValues = selectedCitizen
+        ? selectedCitizen.values.slice()
+        : null;
+
+      for (const change of statChanges) {
+        requests.push(updateCellRequest(
+          sheetIds[validation.participant.rosterSource],
+          validation.participant.sourceRow,
+          change.spec.columnIndex,
+          change.after,
+        ));
+        expectedRosterValues[change.spec.columnIndex] = change.after;
+        mutationRanges.push(rowRange(
+          validation.participant.rosterSource,
+          change.spec.column,
+          change.spec.column,
+          validation.participant.sourceRow,
+        ));
+      }
+
+      if (rosterEventProjection) {
+        for (const field of rosterEventProjection.stateDiff.fields) {
+          if (!field.changed) continue;
+          const selected = field.surface === 'roster'
+            ? selectedRoster
+            : selectedCitizen;
+          const sheetName = field.surface === 'roster'
+            ? validation.participant.rosterSource
+            : CITIZEN_SHEET;
+          const rowNumber = selected.rowNumber;
+          const columnIndex = field.surface === 'roster'
+            ? selected.headers.indexOf(field.header)
+            : selected.indexByHeader[field.header];
+          if (columnIndex < 0 || !Number.isInteger(columnIndex)) {
+            throw new SportsFeedWriterError(
+              'sports_source_changed',
+              `${sheetName} no longer contains ${field.header}`,
+              409,
+            );
+          }
+          requests.push(updateCellRequest(
+            sheetIds[sheetName],
+            rowNumber,
+            columnIndex,
+            field.after,
+          ));
+          if (field.surface === 'roster') {
+            expectedRosterValues[columnIndex] = field.after;
+          } else {
+            expectedCitizenValues[columnIndex] = field.after;
+          }
+          const column = columnLetter(columnIndex);
+          mutationRanges.push(rowRange(sheetName, column, column, rowNumber));
+        }
+
+        const lifeHistoryIndex = selectedCitizen.indexByHeader.LifeHistory;
+        requests.push(updateCellRequest(
+          sheetIds[CITIZEN_SHEET],
+          selectedCitizen.rowNumber,
+          lifeHistoryIndex,
+          rosterEventProjection.lifeHistory.after,
+        ));
+        expectedCitizenValues[lifeHistoryIndex] =
+          rosterEventProjection.lifeHistory.after;
+        const lifeColumn = columnLetter(lifeHistoryIndex);
+        mutationRanges.push(rowRange(
+          CITIZEN_SHEET,
+          lifeColumn,
+          lifeColumn,
+          selectedCitizen.rowNumber,
+        ));
+
+        requests.push(
+          appendCellsRequest(
+            sheetIds[LIFE_HISTORY_LOG_SHEET],
+            rosterEventProjection.lifeHistory.logRow,
+          ),
+          appendCellsRequest(
+            sheetIds[RIPPLE_LEDGER_SHEET],
+            rosterEventProjection.ripple.row,
+          ),
+        );
+        mutationRanges.push(
+          rowRange(
+            LIFE_HISTORY_LOG_SHEET,
+            'A',
+            'G',
+            currentPreconditions.nextLifeHistoryLogRow,
+          ),
+          rowRange(
+            RIPPLE_LEDGER_SHEET,
+            'A',
+            'M',
+            currentPreconditions.nextRippleLedgerRow,
+          ),
+        );
+      }
+
+      updatedRanges = [feedRange, ...mutationRanges];
+      targetHash = sha256(stableStringify(updatedRanges));
+
+      batchAttempted = true;
+      await batchUpdateSpreadsheet(requests);
+
+      const feedReadBack = await readRange(feedRange);
+      if (!Array.isArray(feedReadBack) || feedReadBack.length !== 1 ||
+          !rowsMatch(row, feedReadBack[0])) {
         throw new SportsFeedWriterError(
           'sports_readback_mismatch',
           'The appended row did not match exact-range read-back',
           502
         );
       }
+      if (validation.participant) {
+        const [rosterAfter, citizenAfter] = await Promise.all([
+          readSportsSource(validation.participant.rosterSource),
+          readSportsSource(CITIZEN_SHEET),
+        ]);
+        const rosterReadBack = selectedRosterRow(
+          rosterAfter,
+          validation.participant,
+        );
+        const citizenReadBack = selectedCitizenRow(
+          citizenAfter,
+          validation.participant,
+        );
+        if (!rowsEqual(expectedRosterValues, rosterReadBack.values) ||
+            !rowsEqual(expectedCitizenValues, citizenReadBack.values)) {
+          throw new SportsFeedWriterError(
+            'sports_readback_mismatch',
+            'The selected roster or citizen row did not match exact read-back',
+            502
+          );
+        }
+      }
+      if (rosterEventProjection) {
+        const [lifeLogReadBack, rippleReadBack] = await Promise.all([
+          readRange(rowRange(
+            LIFE_HISTORY_LOG_SHEET,
+            'A',
+            'G',
+            currentPreconditions.nextLifeHistoryLogRow,
+          )),
+          readRange(rowRange(
+            RIPPLE_LEDGER_SHEET,
+            'A',
+            'M',
+            currentPreconditions.nextRippleLedgerRow,
+          )),
+        ]);
+        if (!Array.isArray(lifeLogReadBack) || lifeLogReadBack.length !== 1 ||
+            !rowsEqual(
+              rosterEventProjection.lifeHistory.logRow,
+              lifeLogReadBack[0],
+            ) ||
+            !Array.isArray(rippleReadBack) || rippleReadBack.length !== 1 ||
+            !rowsEqual(rosterEventProjection.ripple.row, rippleReadBack[0])) {
+          throw new SportsFeedWriterError(
+            'sports_readback_mismatch',
+            'The LifeHistory or Ripple append did not match exact read-back',
+            502,
+          );
+        }
+      }
 
       const timestamp = now().toISOString();
       const record = {
         ...auditBase,
         timestamp,
-        updatedRange,
-        rowNumber: parsedRange.rowNumber,
+        targetHash,
+        updatedRanges,
+        rowNumber: currentPreconditions.nextFeedRow,
         result: 'success',
       };
       await auditStore.append(record);
       return {
         writePerformed: true,
         replayed: false,
-        updatedRange,
-        rowNumber: parsedRange.rowNumber,
+        updatedRange: feedRange,
+        updatedRanges,
+        changedFieldCount: auditBase.changedFieldCount,
+        mutationAction: auditBase.mutationAction,
+        rowNumber: currentPreconditions.nextFeedRow,
         cycle: record.cycle,
         team: record.team,
         eventType: record.eventType,
@@ -263,19 +863,34 @@ function createSportsFeedWriter(dependencies) {
         writtenAt: timestamp,
       };
     } catch (error) {
-      const safeError = error instanceof SportsFeedWriterError
+      let safeError = error instanceof SportsFeedWriterError
         ? error
         : new SportsFeedWriterError(
-          'sports_append_failed',
-          'The sports row could not be safely appended',
+          batchAttempted ? 'sports_write_uncertain' : 'sports_batch_failed',
+          batchAttempted
+            ? 'The sports batch result is ambiguous and requires builder review'
+            : 'The sports batch could not be prepared safely',
           502
         );
+      const result = batchAttempted ? 'uncertain' : 'error';
+      if (batchAttempted) {
+        uncertain = true;
+        if (safeError.code !== 'sports_readback_mismatch') {
+          safeError = new SportsFeedWriterError(
+            'sports_write_uncertain',
+            'The sports batch result is ambiguous and requires builder review',
+            502,
+            { causeCode: safeError.code },
+          );
+        }
+      }
       await auditStore.append({
         ...auditBase,
         timestamp: now().toISOString(),
-        updatedRange,
-        rowNumber: updatedRange ? parseUpdatedRange(updatedRange).rowNumber : null,
-        result: 'error',
+        targetHash,
+        updatedRanges,
+        rowNumber: input.sourcePreconditions.nextFeedRow,
+        result,
         errorCode: safeError.code,
       });
       throw safeError;
@@ -283,26 +898,32 @@ function createSportsFeedWriter(dependencies) {
   }
 
   return async function writeSportsFeed(input) {
-    const key = String(input && input.idempotencyKey || '').trim();
-    const previous = locks.get(key) || Promise.resolve();
+    const previous = globalTail;
     let release;
     const current = new Promise((resolve) => { release = resolve; });
     const tail = previous.then(() => current);
-    locks.set(key, tail);
+    globalTail = tail;
     await previous;
     try {
       return await execute(input || {});
     } finally {
       release();
-      if (locks.get(key) === tail) locks.delete(key);
+      if (globalTail === tail) globalTail = Promise.resolve();
     }
   };
 }
 
 module.exports = {
   FEED_SHEET,
+  CITIZEN_SHEET,
+  LIFE_HISTORY_LOG_SHEET,
+  RIPPLE_LEDGER_SHEET,
+  CITIZEN_REQUIRED_HEADERS,
+  LIFE_HISTORY_LOG_HEADERS,
+  RIPPLE_LEDGER_HEADERS,
   SportsFeedWriterError,
   createFileAuditStore,
+  createSportsSourcePreconditions,
   createSportsFeedWriter,
   sha256,
   sportsRequestHash,

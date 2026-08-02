@@ -69,16 +69,59 @@ function sportsEnvelope(data, source) {
 }
 
 async function installSportsFixture(page) {
+  let lastMutationAction = null;
   const roster = {
     as: [{
       sourceRow: 2, popid: 'POP-90001', validPopid: true,
       name: 'Synthetic Batter', tier: '1', position: 'CF', team: "A's",
       stats: { AVG: '.300', HR: '5', RBI: '18' },
+      statValues: {
+        'batting.ab': '100',
+        'batting.avg': '.300',
+        'batting.h': '30',
+        'batting.hr': '5',
+        'batting.rbi': '18',
+        'batting.sb': '4',
+        'batting.so': '21',
+        'pitching.ip': '',
+        'pitching.era': '',
+        'pitching.wl': '',
+        'pitching.so': '',
+        'pitching.bb': '',
+      },
+      citizen: {
+        resolved: true,
+        sourceRow: 22,
+        tier: '1',
+        status: 'Active',
+        roleType: "A's Player",
+        statusStartCycle: '',
+        healthCause: '',
+        neighborhood: 'Downtown',
+      },
     }],
     oaks: [{
       sourceRow: 2, popid: 'POP-90002', validPopid: true,
       name: 'Synthetic Guard', tier: '1', position: 'G', team: 'Oaks',
       stats: { PPG: '20.0', ASST: '7.0', '3P%': '39.0' },
+      statValues: {
+        'basketball.ppg': '20.0',
+        'basketball.asst': '7.0',
+        'basketball.reb': '5.0',
+        'basketball.stl': '2.0',
+        'basketball.fgPct': '51.0%',
+        'basketball.threePct': '39.0%',
+      },
+      citizen: {
+        resolved: true,
+        sourceRow: 23,
+        tier: '2',
+        status: 'Active',
+        roleType: 'Oaks Player',
+        statusStartCycle: '',
+        healthCause: '',
+        neighborhood: 'West Oakland',
+      },
     }],
   };
   const team = (id, eventCount = 1) => ({
@@ -109,7 +152,7 @@ async function installSportsFixture(page) {
     },
   ];
   const options = {
-    eventTypes: ['game-result', 'roster-move', 'player-feature', 'front-office', 'fan-civic', 'season-state', 'editorial-note'],
+    eventTypes: ['game-result', 'stat-capture', 'roster-move', 'player-feature', 'front-office', 'fan-civic', 'season-state', 'editorial-note'],
     seasonTypes: ['off-season', 'regular-season', 'playoffs'],
     playerMoods: ['', 'confident', 'frustrated'],
     eventTriggers: ['', 'hot-streak', 'cold-streak'],
@@ -119,6 +162,30 @@ async function installSportsFixture(page) {
     economicFootprints: ['', 'steady', 'growing'],
     communityInvestments: ['', 'active', 'moderate'],
     mediaProfiles: ['', 'local', 'regional'],
+  };
+  const statFields = {
+    as: [
+      { key: 'batting.ab', label: 'AB', column: 'I', validator: 'integer' },
+      { key: 'batting.avg', label: 'AVG', column: 'J', validator: 'rate' },
+      { key: 'batting.h', label: 'H', column: 'K', validator: 'integer' },
+      { key: 'batting.hr', label: 'HR', column: 'L', validator: 'integer' },
+      { key: 'batting.rbi', label: 'RBI', column: 'M', validator: 'integer' },
+      { key: 'batting.sb', label: 'SB', column: 'N', validator: 'integer' },
+      { key: 'batting.so', label: 'Batting SO', column: 'O', validator: 'integer' },
+      { key: 'pitching.ip', label: 'IP', column: 'P', validator: 'innings' },
+      { key: 'pitching.era', label: 'ERA', column: 'Q', validator: 'decimal' },
+      { key: 'pitching.wl', label: 'W-L', column: 'R', validator: 'record' },
+      { key: 'pitching.so', label: 'Pitching SO', column: 'S', validator: 'integer' },
+      { key: 'pitching.bb', label: 'BB', column: 'T', validator: 'integer' },
+    ],
+    oaks: [
+      { key: 'basketball.ppg', label: 'PPG', column: 'I', validator: 'decimal' },
+      { key: 'basketball.asst', label: 'ASST', column: 'J', validator: 'decimal' },
+      { key: 'basketball.reb', label: 'REB', column: 'K', validator: 'decimal' },
+      { key: 'basketball.stl', label: 'STL', column: 'L', validator: 'decimal' },
+      { key: 'basketball.fgPct', label: 'FG%', column: 'M', validator: 'percentage' },
+      { key: 'basketball.threePct', label: '3P%', column: 'N', validator: 'percentage' },
+    ],
   };
 
   await page.route('**/api/**', async (route) => {
@@ -180,6 +247,11 @@ async function installSportsFixture(page) {
         availableCycles: [404, 403],
         team: { ...team(id, cycleEvents.length), events: cycleEvents, roster: roster[id] },
         validEventOptions: options,
+        validMutationOptions: {
+          verificationSources: ['manual-verified', 'screenshot-verified'],
+          rosterActions: ['injury', 'return', 'call-up', 'trade-away'],
+          statFields: statFields[id],
+        },
         writePolicy: {
           featureEnabled: true,
           configured: true,
@@ -204,20 +276,92 @@ async function installSportsFixture(page) {
         cycle: 404,
       });
     } else if (url.pathname === '/api/sports/preview') {
+      const submission = request.postDataJSON();
+      const mutation = submission && submission.mutation;
+      lastMutationAction = mutation ? mutation.action : null;
+      const rowByHeader = {
+        Cycle: '404',
+        EventType: mutation
+          ? mutation.action === 'stat-capture' ? 'stat-capture' : 'roster-move'
+          : 'game-result',
+        TeamsUsed: "A's",
+        Notes: 'SYNTHETIC NON-CANON preview.',
+      };
+      let mutationPreview = null;
+      let ripplePreview = {
+        currentConsumers: [{ id: 'phase02-team-state', label: 'City and team state', status: 'will-read' }],
+        mutationEffects: [],
+        unavailableSiblings: [{ id: 'season-close', label: 'TrueSource season close', status: 'deferred-until-truesource-update' }],
+      };
+      if (mutation && mutation.action === 'stat-capture') {
+        mutationPreview = {
+          participant: submission.participant,
+          citizenTier: '1',
+          rosterTier: '1',
+          citizenStatus: 'Active',
+          kind: 'stat-line',
+          action: 'stat-capture',
+          verification: mutation.verification,
+          statDiff: {
+            fields: mutation.changes.map((change) => ({
+              ...change,
+              label: change.field === 'batting.hr' ? 'HR' : change.field,
+              column: change.field === 'batting.hr' ? 'L' : '?',
+              status: change.before === change.after ? 'unchanged' : 'changed',
+            })),
+            changedCount: mutation.changes.filter((change) => change.before !== change.after).length,
+            unchangedCount: mutation.changes.filter((change) => change.before === change.after).length,
+            blankSourceCount: 0,
+            invalidCount: 0,
+          },
+        };
+        ripplePreview.mutationEffects = [{
+          id: 'engine.40',
+          label: 'Roster current-stat update',
+          status: 'signed-confirmation-ready',
+        }];
+      } else if (mutation && mutation.action === 'injury') {
+        const line = 'C404 — [SportsRoster] Synthetic Batter entered injured status with cause: Synthetic verified condition.';
+        mutationPreview = {
+          participant: {
+            ...submission.participant,
+            citizenSourceRow: 22,
+            citizenTier: '1',
+            rosterTier: '1',
+          },
+          kind: 'roster-event',
+          action: 'injury',
+          verification: mutation.verification,
+          statDiff: null,
+          stateDiff: {
+            changedCount: 3,
+            fields: [
+              { field: 'citizen.status', surface: 'citizen', label: 'Citizen Status', before: 'Active', after: 'injured', changed: true },
+              { field: 'citizen.statusStartCycle', surface: 'citizen', label: 'Status Start Cycle', before: '', after: '404', changed: true },
+              { field: 'citizen.healthCause', surface: 'citizen', label: 'Health Cause', before: '', after: 'Synthetic verified condition', changed: true },
+            ],
+          },
+          lifeHistory: {
+            line,
+            eventTag: 'SportsRoster|source:sports|submission:synthetic-visual|action:injury',
+            eventText: 'entered injured status with cause: Synthetic verified condition.',
+          },
+          ripple: { effectType: 'roster-injury' },
+          tradeWarning: null,
+        };
+        ripplePreview.mutationEffects = [
+          { id: 'engine.77-state', label: 'Roster and citizen state', status: 'signed-confirmation-ready' },
+          { id: 'engine.77-life', label: 'LifeHistory and LifeHistory_Log', status: 'signed-confirmation-ready' },
+          { id: 'engine.77-ripple', label: 'Citizen Ripple attribution', status: 'signed-confirmation-ready' },
+        ];
+      }
       body = sportsEnvelope({
         writePerformed: false,
         row: new Array(20).fill(''),
-        rowByHeader: {
-          Cycle: '404',
-          EventType: 'game-result',
-          TeamsUsed: "A's",
-          Notes: 'SYNTHETIC NON-CANON preview.',
-        },
+        rowByHeader,
         resolvedNames: [],
-        ripplePreview: {
-          currentConsumers: [{ id: 'phase02-team-state', label: 'City and team state', status: 'will-read' }],
-          unavailableSiblings: [{ id: 'engine.40', label: 'Roster current-stat update', status: 'not-implemented-here' }],
-        },
+        ripplePreview,
+        mutationPreview,
         team: { id: 'as', label: "The A's" },
         confirmation: {
           available: true,
@@ -241,6 +385,10 @@ async function installSportsFixture(page) {
         cycle: 404,
         team: "A's",
         eventType: 'game-result',
+        mutationAction: lastMutationAction,
+        updatedRanges: lastMutationAction
+          ? ['Oakland_Sports_Feed!A55:T55', 'Simulation_Ledger!L22:L22']
+          : ['Oakland_Sports_Feed!A55:T55'],
         requestHash: 'synthetic-request-hash',
         idempotencyKey: 'synthetic-idempotency-key',
         writtenAt: '2042-01-01T00:00:00.000Z',
@@ -454,6 +602,67 @@ async function main() {
         });
       }
 
+      await page.getByRole('button', { name: 'Enter another event' }).click();
+      await page.getByRole('button', { name: /^Current stats/ }).click();
+      await page.locator(
+        '#sports-intake select:has(option[value="POP-90001"])'
+      ).selectOption('POP-90001');
+      await page.locator('[id="sports-stat-batting.hr"]').fill('6');
+      await page.getByLabel('I checked this exact before/after value.').check();
+      await page.getByLabel('Reviewed stat summary').fill(
+        'Synthetic reviewed current-season stat line'
+      );
+      await page.getByRole('button', { name: 'Preview stat changes' }).click();
+      await page.getByRole('heading', { name: 'Exact roster stat diff' }).waitFor();
+      await page.getByRole(
+        'heading',
+        { name: 'Append the event and update this stat line?' }
+      ).waitFor();
+      pass('Stat mutation review renders', 'Exact field diff and separate confirmation visible');
+
+      await page.getByRole('button', { name: /^Injury/ }).click();
+      await page.locator(
+        '#sports-intake select:has(option[value="POP-90001"])'
+      ).selectOption('POP-90001');
+      await page.getByLabel('Verified health cause').fill(
+        'Synthetic verified condition'
+      );
+      await page.getByLabel(
+        /I checked the exact source state and every proposed transition/
+      ).check();
+      await page.getByRole(
+        'button',
+        { name: 'Preview state, life, and Ripple' }
+      ).click();
+      await page.getByRole(
+        'heading',
+        { name: 'Exact roster and citizen diff' }
+      ).waitFor();
+      await page.getByText(
+        'C404 — [SportsRoster] Synthetic Batter entered injured status with cause: Synthetic verified condition.',
+        { exact: true }
+      ).first().waitFor();
+      await page.getByRole(
+        'heading',
+        { name: 'Apply this roster, state, life, and Ripple event?' }
+      ).waitFor();
+      pass(
+        'Engine.77 mutation review renders',
+        'State diff, deterministic LifeHistory, Ripple, and confirmation visible'
+      );
+      if (!SKIP_SCREENSHOTS) {
+        await page.screenshot({
+          path: path.join(OUTPUT_DIR, 'sports_engine77_confirmation.png'),
+          fullPage: true,
+        });
+        await page.setViewportSize({ width: 375, height: 812 });
+        await page.screenshot({
+          path: path.join(OUTPUT_DIR, 'sports_engine77_confirmation_mobile.png'),
+          fullPage: true,
+        });
+        await page.setViewportSize({ width: 1440, height: 900 });
+      }
+
       const cycleControl = page.getByLabel('Sports Cycle');
       await cycleControl.fill('405');
       await page.getByRole('button', { name: 'View', exact: true }).click();
@@ -479,6 +688,17 @@ async function main() {
       await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
       const navBox = await page.locator('nav').boundingBox();
       const intakeBox = await page.locator('#sports-intake').boundingBox();
+      const horizontalOverflow = await page.evaluate(
+        () => document.documentElement.scrollWidth - window.innerWidth
+      );
+      if (horizontalOverflow <= 1) {
+        pass('Mobile horizontal fit', 'No page-level horizontal overflow');
+      } else {
+        fail(
+          'Mobile horizontal fit',
+          `${horizontalOverflow}px page-level horizontal overflow`
+        );
+      }
       if (navBox && intakeBox && intakeBox.y + intakeBox.height <= navBox.y) {
         pass('Mobile bottom-nav clearance', `${Math.round(navBox.y - (intakeBox.y + intakeBox.height))}px clearance`);
       } else {

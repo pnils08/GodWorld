@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * setupSportsFeedValidation.js v2.1
+ * setupSportsFeedValidation.js v2.2
  * ============================================================================
  *
  * Sets up Oakland_Sports_Feed and Chicago_Sports_Feed with:
@@ -36,7 +36,7 @@
  *
  * Safe to run multiple times — updates existing validations.
  *
- * @version 2.0
+ * @version 2.2
  * ============================================================================
  */
 
@@ -61,6 +61,17 @@ var SEASON_TYPE_VALUES = [
 
 var EVENT_TYPE_VALUES = [
   'game-result',
+  'roster-move',
+  'player-feature',
+  'front-office',
+  'fan-civic',
+  'season-state',
+  'editorial-note'
+];
+
+var OAKLAND_EVENT_TYPE_VALUES = [
+  'game-result',
+  'stat-capture',
   'roster-move',
   'player-feature',
   'front-office',
@@ -193,7 +204,7 @@ function setupSportsFeedValidation() {
     results.push('Chicago_Sports_Feed: NOT FOUND (skipped)');
   }
 
-  Logger.log('setupSportsFeedValidation v2.1: Complete');
+  Logger.log('setupSportsFeedValidation v2.2: Complete');
   SpreadsheetApp.getUi().alert(
     'Sports Feed Setup Complete!\n\n' +
     results.join('\n') + '\n\n' +
@@ -280,7 +291,10 @@ function setupFeedSheet_(sheet, city, teamValues, neighborhoodValues) {
   applyDropdownValidation_(sheet, 2, 2, dataRows, SEASON_TYPE_VALUES, 'SeasonType');
 
   // C: EventType (column 3)
-  applyDropdownValidation_(sheet, 2, 3, dataRows, EVENT_TYPE_VALUES, 'EventType');
+  var eventTypeValues = city === 'Oakland'
+    ? OAKLAND_EVENT_TYPE_VALUES
+    : EVENT_TYPE_VALUES;
+  applyDropdownValidation_(sheet, 2, 3, dataRows, eventTypeValues, 'EventType');
 
   // D: TeamsUsed (column 4)
   applyDropdownValidation_(sheet, 2, 4, dataRows, teamValues, 'TeamsUsed');

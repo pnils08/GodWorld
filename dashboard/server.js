@@ -172,10 +172,23 @@ async function getLiveSheetData(sheetName) {
   }
 }
 
-const readSportsSheet = createSportsSheetReader(async (sheetName) => {
+const SPORTS_RAW_SNAPSHOT_SHEETS = new Set([
+  'As_Roster',
+  'Oaks_Roster',
+  'Simulation_Ledger',
+  'LifeHistory_Log',
+  'Ripple_Ledger',
+]);
+
+async function loadSportsSheetData(sheetName) {
   if (!sheetsLib) throw new Error('Sheets API is not available');
+  if (SPORTS_RAW_SNAPSHOT_SHEETS.has(sheetName)) {
+    return sheetsLib.getRawSheetSnapshot(sheetName);
+  }
   return sheetsLib.getSheetAsObjects(sheetName);
-});
+}
+
+const readSportsSheet = createSportsSheetReader(loadSportsSheetData);
 
 const {
   createFileAuditStore,
@@ -186,7 +199,9 @@ const sportsAuditStore = createFileAuditStore(
 );
 const writeSportsFeed = sheetsLib
   ? createSportsFeedWriter({
-    appendRowsDetailed: sheetsLib.appendRowsDetailed,
+    batchUpdateSpreadsheet: sheetsLib.batchUpdateSpreadsheet,
+    getSheetIds: sheetsLib.getSheetIds,
+    readSportsSource: loadSportsSheetData,
     readRange: sheetsLib.getSheetData,
     auditStore: sportsAuditStore,
   })
@@ -194,12 +209,9 @@ const writeSportsFeed = sheetsLib
 
 async function readFreshSportsSheet(sheetName) {
   if (!sheetsLib) throw new Error('Sheets API is not available');
-  const rows = await sheetsLib.getSheetAsObjects(sheetName);
+  const data = await loadSportsSheetData(sheetName);
   return {
-    data: rows.map((row, index) => ({
-      ...row,
-      __rowNumber: index + 2,
-    })),
+    data,
     fetchedAt: new Date().toISOString(),
     cacheAgeMs: 0,
     cacheHit: false,

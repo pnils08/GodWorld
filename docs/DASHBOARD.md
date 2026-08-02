@@ -201,7 +201,7 @@ The civic data pipeline is rich underneath but has freshness and display issues.
 
 ---
 
-## Oakland Sports Workspace (2026-07-31 source state)
+## Oakland Sports Workspace (2026-08-02 source state)
 
 Waves A–C of [[plans/2026-07-30-oakland-sports-workspace]] replace the old
 Oakland packet renderer in the source tree:
@@ -211,7 +211,8 @@ Oakland packet renderer in the source tree:
 - event cards are exact-Cycle; an empty Cycle stays empty while inherited state
   displays its source Cycle and Sheet row;
 - `As_Roster` and `Oaks_Roster` supply exact POPIDs and read-only current-stat
-  fields;
+  fields; the new stat template can update only explicitly reviewed,
+  allowlisted current-season fields;
 - the Notebook Daily Inbox reads complete local artifacts only, exposes an
   allowlist, and stays visibly `NOT CANON`;
 - entry templates project the exact twenty-column compatibility row and current
@@ -219,24 +220,31 @@ Oakland packet renderer in the source tree:
 - the final confirmation requires HTTPS, the configured origin, authenticated
   actor, per-preview CSRF token, separate write key, explicit acknowledgement,
   and idempotency key;
-- successful confirmation revalidates fresh source data, appends one row,
-  reads back exact `A:T`, invalidates the sports cache, and returns a receipt;
+- successful stat confirmation revalidates fresh feed, roster, and citizen
+  state, then atomically appends the feed row and updates exact stat cells;
+- injury, return, call-up, and trade-away previews show exact roster/citizen
+  diffs, Citizen Tier, deterministic LifeHistory/log text, Ripple attribution,
+  and the engine.90 boundary;
+- successful engine.77 confirmation sends the feed, state, LifeHistory/log, and
+  Ripple effects in one atomic batch and reads every target back exactly;
 - the feature flag stays off unless the server is loopback-bound behind TLS
   with a Secure cookie; no public plain-HTTP write path is accepted;
 - all new sports APIs use contract version 1, provenance, warnings, safe errors,
   and a 60-second per-Sheet cache with explicit stale failover.
 
-Synthetic tests and intercepted browser fixtures perform no network or Sheet
-write. The final local visual run passed 24/24 checks for desktop, tablet,
-mobile, both teams and roster views, preview, secure confirmation, verified
-receipt, empty/stale/error states, roster readability, bottom-nav clearance,
-structured object rendering, and accessibility.
+Synthetic tests and intercepted browser fixtures perform no Sheet or external
+write. The final local visual run passed 27/27 checks for desktop, tablet,
+mobile, both teams and roster views, feed/stat/engine.77 previews, secure
+confirmation, verified receipt, empty/stale/error states, roster readability,
+horizontal fit, bottom-nav clearance, structured object rendering, and
+accessibility.
 
 This is source state, not a deployment claim. No PM2 restart, authenticated live
 probe, NotebookLM invocation, proxy installation, feature-flag enablement, or
 external write was performed. The live host still needs a chosen hostname and
-TLS proxy before Wave C can deploy. `engine.40` and `engine.77` remain open
-sibling gates.
+TLS proxy before the writer can deploy. Independent review and separately
+approved stat and engine.77 proving writes remain open. TrueSource season close
+is deferred until the authoritative source update defines its payload.
 
 ## Historical Sports Tab Assessment (S106; superseded)
 
@@ -345,7 +353,7 @@ The dashboard reads from two categories: live data that auto-refreshes, and loca
 | **Domain_Tracker** (live sheet) | Every API call | 5 min | `/api/domains` |
 | **Crime_Metrics** (live sheet) | Every API call | 5 min | `/api/world-state` |
 | **World_Config** (live sheet) | Every API call | 5 min | `/api/world-state` |
-| **Oakland_Sports_Feed + As_Roster + Oaks_Roster** (live sheets) | Sports route request | 60 sec per-Sheet cache; stale cache is labeled if refresh fails | `/api/sports/overview`, `/api/sports/workspace`, `/api/sports/preview` |
+| **Oakland_Sports_Feed + As_Roster + Oaks_Roster + mutation ledgers** (live sheets) | Sports route request | 60 sec per-Sheet cache; stale cache is labeled if refresh fails | `/api/sports/overview`, `/api/sports/workspace`, `/api/sports/preview`; mutation previews also bind Simulation_Ledger, LifeHistory_Log, and Ripple_Ledger |
 | **Edition files** (editions/ + archive/) | 5 min cache | Re-scans dirs | `/api/editions`, `/api/search/articles`, `/api/edition/:cycle` |
 
 ### Pipeline-Refresh (requires action)
@@ -393,10 +401,9 @@ The overall frontend remains mixed-generation:
   mobile synthetic fixtures; older tabs were not re-audited in this change
 - **No real-time updates** — data loads on page load
 
-The sports surface can explicitly refresh or select another Cycle. The frontend
-remains read-only through preview. Wave C exposes confirmation only when every
-server-side write gate is satisfied; the current live deployment has not
-enabled that boundary.
+The sports surface can explicitly refresh or select another Cycle. Preview is
+always read-only. Confirmation appears only when every server-side write gate
+is satisfied; the current live deployment has not enabled that boundary.
 
 ---
 
@@ -405,7 +412,7 @@ enabled that boundary.
 | File | Purpose |
 |------|---------|
 | `dashboard/server.js` | Express API and route registration |
-| `dashboard/sportsRoutes.js` | Versioned Oakland sports reads, local Notebook inbox, and deterministic no-write preview |
+| `dashboard/sportsRoutes.js` | Versioned Oakland sports reads, local Notebook inbox, signed stat/engine.77 previews, and gated confirmation |
 | `dashboard/src/components/Sports*.jsx` | Responsive Oakland Sports Desk UI |
 | `dashboard/src/lib/sportsApi.js` | Versioned sports envelope client and typed-safe errors |
 | `output/session-events.jsonl` | File-backed session event history (persists across restarts) |

@@ -394,7 +394,8 @@ deployment, closing the cross-session double-append finding in
   3. Fail on missing, moved, or additional duplicate load-bearing headers.
 - **Verify:** Synthetic raw fixtures prove both SO values survive independently
   and the current object-reader collapse cannot reach the write path.
-- **Status:** [ ] not started
+- **Status:** [x] source complete — raw duplicate-header fixtures and route
+  projections pass
 
 ### Task 2: Extend the pure sports mutation contract
 
@@ -413,7 +414,8 @@ deployment, closing the cross-session double-append finding in
 - **Verify:** Pure synthetic tests cover every allowed action and reject
   unknown fields, unsupported actions, multiple participants, blank erasure,
   guessed defaults, and legacy team aliases on new writes.
-- **Status:** [ ] not started
+- **Status:** [x] source complete — all allowed actions pass and season-close
+  remains reserved/fail-closed
 
 ### Task 3: Correct TrueSource season parsing before patching
 
@@ -428,7 +430,8 @@ deployment, closing the cross-session double-append finding in
   3. Keep unsupported or malformed headers fail-loud.
 - **Verify:** The repository Horn fixture parses `.322 AVG`, `.391 OBP`, and
   `.598 SLG` in the correct fields; a synthetic headed-CS variant also passes.
-- **Status:** [ ] not started
+- **Status:** [x] source complete — Horn and headed-CS parser fixtures pass;
+  full dry run preserves the player-index baseline
 
 ### Wave A — engine.40 stat line and season close
 
@@ -449,7 +452,8 @@ deployment, closing the cross-session double-append finding in
      an OCR blob as a write payload.
 - **Verify:** Route and intercepted UI fixtures cover A's hitter, A's pitcher,
   Oaks, invalid numeric formats, no-op diffs, stale source, and mobile review.
-- **Status:** [ ] not started
+- **Status:** [x] source complete — route fixtures and intercepted desktop/mobile
+  review pass
 
 ### Task 5: Replace the feed append primitive with the atomic sports batch
 
@@ -468,10 +472,15 @@ deployment, closing the cross-session double-append finding in
 - **Verify:** Fake-client tests prove all-or-none request construction, one
   append across different keys/tokens, exact stat-cell targeting, replay,
   conflict, stale preview, ambiguous read-back shutdown, and zero network.
-- **Status:** [ ] not started
+- **Status:** [x] source complete — fake-client race, replay, exact-cell,
+  multi-ledger, and uncertain-recovery cases pass
 
 ### Task 6: Build the Tier-1 A's season-close preview
 
+- **Trigger:** Keep this task open until Mike updates the authoritative
+  TrueSource and provides the resulting complete season-row/header contract.
+  Do not infer that payload from `As_Roster`, which remains the current-season
+  subset ledger.
 - **Files:**
   - `scripts/sportsTrueSourceSeasonClose.js` — create
   - `scripts/sportsTrueSourceSeasonClose.test.js` — create
@@ -489,7 +498,8 @@ deployment, closing the cross-session double-append finding in
   temporary copy, parses correctly, preserves all unrelated sections, and
   rejects duplicate years, incomplete rows, wrong hashes, unsupported headers,
   and non-Tier-1 scope.
-- **Status:** [ ] not started
+- **Status:** [ ] open — deferred until the authoritative TrueSource update
+  establishes the complete payload contract
 
 ### Wave B — engine.77 state, life, and Ripple
 
@@ -510,7 +520,8 @@ deployment, closing the cross-session double-append finding in
 - **Verify:** Synthetic fixtures cover all four actions, T1/T2 visibility,
   wrong-state rejection, absent ledger/roster identity, and forbidden
   signing/release/mint attempts.
-- **Status:** [ ] not started
+- **Status:** [x] source complete — all four action previews, Citizen Tier,
+  deterministic life/Ripple projections, and exclusions pass
 
 ### Task 8: Execute the atomic engine.77 batch
 
@@ -528,7 +539,8 @@ deployment, closing the cross-session double-append finding in
 - **Verify:** Fake-client tests prove the exact request set for each action,
   no partial request on validation failure, owner-compatible Status casing,
   deterministic tags, no prose in audit, and trade-away without deletion.
-- **Status:** [ ] not started
+- **Status:** [x] source complete — all four exact request sets and read-back
+  surfaces pass without network
 
 ### Wave C — contract docs, review, and separately gated proof
 
@@ -550,7 +562,8 @@ deployment, closing the cross-session double-append finding in
      engine.77 proving event, and any season-close Drive update.
 - **Verify:** Documentation and source agree; all local checks pass; every live
   action has its own builder approval and exact read-back record.
-- **Status:** [ ] not started
+- **Status:** [ ] in progress — active docs and local validation complete;
+  independent review, rollout coordination, deployment, and live proofs remain
 
 ## Validation matrix
 
@@ -561,7 +574,7 @@ deployment, closing the cross-session double-append finding in
 | TrueSource parser | `node scripts/buildPlayerIndex.seasonStats.test.js` | Header-driven stat fields pass |
 | Writer | `node scripts/sportsFeedWriter.test.js` | Atomic request/replay/race/recovery cases pass; no network |
 | Routes | `node dashboard/sportsRoutes.test.js` | Preview and disabled/write cases pass |
-| Season close | `node scripts/sportsTrueSourceSeasonClose.test.js` | Local fixture-only patch passes |
+| Season close | Deferred until authoritative TrueSource update | Task 6 remains open and fail-closed |
 | Syntax | `node --check` on every changed backend/script file | Exit 0 |
 | Repository lint | `npm run lint` | Exit 0 |
 | Frontend | Existing Dashboard build command | Exit 0 |
@@ -608,6 +621,25 @@ compensation.
 
 ## Status log
 
+- 2026-08-02 — Tasks 1–5 and 7–8 are source-complete. Focused tests, parser
+  dry run, syntax, Dashboard build, repository lint, diff check, rollout lint,
+  and synthetic browser QA pass; the full visual report is 27/27 with desktop,
+  tablet, mobile, stat, engine.77, horizontal-fit, and accessibility checks.
+  No service restart, deployment, Sheet/Drive/memory write, or live proof was
+  performed. Task 9 remains open for independent review and deployment/proof
+  gates.
+- 2026-08-02 — The repository-wide 118-file runner reached every sports suite,
+  and all sports suites passed. Fourteen unrelated legacy test files remained
+  red: credential/network smoke tests cannot reach Google in this local
+  environment; nested-subprocess wrappers lose captured grandchild stdout in
+  this harness even though the same commands pass directly; and the existing
+  C94 retired-anchor integration still expects one downweight but observes
+  zero. None touches the sports source, but the full repository command is not
+  globally green.
+- 2026-08-02 — Mike confirmed `As_Roster` and `Oaks_Roster` are authoritative
+  for current-season stats. Task 6 remains open and deliberately fail-closed:
+  define season-close only after the authoritative TrueSource update exposes
+  the complete row/header contract; do not derive it from the roster subset.
 - 2026-08-02 — Drafted and registered from the adopted sports workspace
   research, the source-built engine.89 boundary, the current roster/feed/health
   implementations, and engine.90 archive research. No implementation,

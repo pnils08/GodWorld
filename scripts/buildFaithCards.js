@@ -109,39 +109,10 @@ function smRequest(method, apiPath, body) {
 function smSleep(ms) { return new Promise(function(r) { setTimeout(r, ms); }); }
 
 function searchSupermemory(query, container) {
-  return new Promise(function(resolve) {
-    var payload = JSON.stringify({
-      q: query,
-      containerTag: container,
-      searchMode: 'hybrid',
-      limit: 5
-    });
-    var options = {
-      hostname: API_HOST,
-      path: '/v4/search',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + API_KEY,
-        'Content-Length': Buffer.byteLength(payload)
-      }
-    };
-    var req = https.request(options, function(res) {
-      var data = '';
-      res.on('data', function(chunk) { data += chunk; });
-      res.on('end', function() {
-        try {
-          var parsed = JSON.parse(data);
-          resolve(parsed.results || []);
-        } catch (e) {
-          resolve([]);
-        }
-      });
-    });
-    req.on('error', function() { resolve([]); });
-    req.setTimeout(10000, function() { req.destroy(); resolve([]); });
-    req.write(payload);
-    req.end();
+  // engine.92 (S349): transport consolidated into lib/supermemory.js — v4
+  // hybrid, limit 5, fail-soft [] — identical semantics to the removed copy.
+  return require('../lib/supermemory').search(query, {
+    containerTag: container, searchMode: 'hybrid', limit: 5, apiVersion: 'v4'
   });
 }
 

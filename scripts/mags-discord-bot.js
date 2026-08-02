@@ -303,70 +303,15 @@ async function getSystemPrompt(provider, session) {
 // ---------------------------------------------------------------------------
 function searchSupermemory(query) {
   if (!USE_SUPERMEMORY) return Promise.resolve('');
-
-  return new Promise(function(resolve) {
-    var payload = JSON.stringify({
-      q: query,
-      containerTags: ['world-data', 'bay-tribune'],
-      limit: 5
-    });
-
-    var options = {
-      hostname: 'api.supermemory.ai',
-      path: '/v3/search',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + SUPERMEMORY_KEY,
-        'Content-Length': Buffer.byteLength(payload)
-      }
-    };
-
-    var req = require('https').request(options, function(res) {
-      var data = '';
-      res.on('data', function(chunk) { data += chunk; });
-      res.on('end', function() {
-        try {
-          if (res.statusCode !== 200) {
-            log.warn('Supermemory search returned ' + res.statusCode);
-            resolve('');
-            return;
-          }
-          var parsed = JSON.parse(data);
-          if (!parsed.results || !parsed.results.length) {
-            resolve('');
-            return;
-          }
-          var context = parsed.results.map(function(r) {
-            var chunks = r.chunks.filter(function(c) { return c.isRelevant; });
-            return chunks.map(function(c) { return c.content; }).join('\n');
-          }).filter(Boolean).join('\n\n---\n\n');
-
-          if (context) {
-            log.info('Supermemory returned ' + parsed.results.length + ' results (' + context.length + ' chars)');
-          }
-          resolve(context);
-        } catch (err) {
-          log.warn('Supermemory parse error: ' + err.message);
-          resolve('');
-        }
-      });
-    });
-
-    req.on('error', function(err) {
-      log.warn('Supermemory search failed: ' + err.message);
-      resolve(''); // graceful fallback — bot works without it
-    });
-
-    // 8 second timeout — external API, give it room
-    req.setTimeout(8000, function() {
-      req.destroy();
-      log.warn('Supermemory search timed out');
-      resolve('');
-    });
-
-    req.write(payload);
-    req.end();
+  // engine.92 (S349): transport consolidated into lib/supermemory.js — v3
+  // multi-container read (world-data + bay-tribune), 8s timeout, '' fail-soft.
+  // Per-failure warn logs moved behind the shared client; found-context info
+  // log preserved.
+  return require('../lib/supermemory').searchContext(query, {
+    containerTags: ['world-data', 'bay-tribune'], limit: 5, timeoutMs: 8000, apiVersion: 'v3'
+  }).then(function(context) {
+    if (context) log.info('Supermemory returned context (' + context.length + ' chars)');
+    return context;
   });
 }
 

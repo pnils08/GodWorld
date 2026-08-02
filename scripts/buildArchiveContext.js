@@ -64,46 +64,10 @@ function detectCycle() {
 // Search Supermemory
 // ---------------------------------------------------------------------------
 function searchSupermemory(query, limit) {
-  limit = limit || 3;
-  return new Promise(function(resolve) {
-    var payload = JSON.stringify({
-      q: query,
-      containerTags: [CONTAINER_TAG],
-      limit: limit
-    });
-
-    var options = {
-      hostname: API_HOST,
-      path: '/v3/search',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + API_KEY,
-        'Content-Length': Buffer.byteLength(payload)
-      }
-    };
-
-    var req = https.request(options, function(res) {
-      var data = '';
-      res.on('data', function(chunk) { data += chunk; });
-      res.on('end', function() {
-        try {
-          if (res.statusCode !== 200) { resolve(''); return; }
-          var parsed = JSON.parse(data);
-          if (!parsed.results || !parsed.results.length) { resolve(''); return; }
-          var context = parsed.results.map(function(r) {
-            var chunks = (r.chunks || []).filter(function(c) { return c.isRelevant; });
-            return chunks.map(function(c) { return c.content; }).join('\n');
-          }).filter(Boolean).join('\n\n---\n\n');
-          resolve(context);
-        } catch (err) { resolve(''); }
-      });
-    });
-
-    req.on('error', function() { resolve(''); });
-    req.setTimeout(8000, function() { req.destroy(); resolve(''); });
-    req.write(payload);
-    req.end();
+  // engine.92 (S349): transport consolidated into lib/supermemory.js — v3
+  // containerTags shape + shared chunk-joining shaper, 8s timeout, '' fail-soft.
+  return require('./../lib/supermemory').searchContext(query, {
+    containerTags: [CONTAINER_TAG], limit: limit || 3, timeoutMs: 8000, apiVersion: 'v3'
   });
 }
 

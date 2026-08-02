@@ -200,12 +200,46 @@ from its name.** The S345 inventory found same-named functions doing different
 things (`search_articles` vs `articles`; two `search_world`s), so name-based
 merging would break callers silently.
 
-| Candidate | Redundancy | Pre-merge caller map needed |
-|---|---|---|
-| `searchSupermemory` ×~8 | Independently reimplemented in `lib/mags.js` + ~7 `build*Cards.js` scripts; same name, per-file copies, different containers | Which containers/tags each copy targets; which are write-side idempotency checks vs read-side search |
-| Disk matchers ×2 | MCP `disk_search` (phrase-first + AND fallback) vs `lib/mags.js searchDisk` (AND-only); same corpus, drifted semantics + separate rank functions | Bot tool-loop, `discord-reflection.js`, `cron-desk-writer.js` on the mags side; every MCP `search_everything` consumer on the other |
-| `articles` naming | `queryLedger.js articles` (disk grep) vs MCP `search_articles` (dashboard index) — different corpora under one concept | Which skills/agents call each; whether either corpus is a strict superset |
+### Caller map (S349 — the Mike-mandated pre-merge audit, complete)
 
-Consolidation shape when it runs: extract shared helpers (one Supermemory search
-client, one disk matcher with a phrase-first flag), repoint copies, keep tool
-names stable. Each repoint ships with its caller-graph evidence in the commit.
+**`searchSupermemory` — 12 copies, two API generations.** No two-way behavior
+assumption survived the audit: the copies split cleanly by transport AND by role.
+
+| Copy | API | Container target | Role |
+|---|---|---|---|
+| `lib/mags.js:678` | v3, `containerTags` array | `[SUPERMEMORY_CONTAINER]` | READ — archive context; consumers `daily-reflection.js:324`, `discord-reflection.js:458` (via export) |
+| `scripts/mags-discord-bot.js:304` | v3, array | `['world-data','bay-tribune']` | READ — bot context assembly (multi-container) |
+| `scripts/buildArchiveContext.js:66` | v3, array | `[CONTAINER_TAG]` | READ — archive context build |
+| `scripts/build{Cultural,Citizen,Faith,Neighborhood,Business,Initiative}Cards.js` ×6 | v4, `containerTag` singular, `searchMode:'hybrid'` | `world-data` + `wd-*` domain tag | WRITE-side idempotency/dedup before card upsert |
+| `scripts/ingestEditionWiki.js:625` (`searchSupermemoryJSON`) | v4, singular | `bay-tribune` | WRITE-side citizen resolution during ingest |
+| `scripts/checkSupermemory.js:5` (untracked, S349 house-guest) | v4, singular | `bay-tribune` | READ — spot-check util |
+| `scripts/sweepCanonIngest.js:8` (untracked, S349 house-guest) | v4, singular | `bay-tribune` | WRITE-side idempotency for engine.91 sweep |
+
+**Disk matchers ×2 — different languages, drifted semantics.** MCP
+`disk_search` (`scripts/godworld-mcp.py:295`) is phrase-first + AND-fallback
+with editions-outranking; `lib/mags.js searchDisk` (~:593) is AND-only with its
+own rank. They can never share one implementation (Python vs Node) — the
+consolidation target is **semantic parity**, not shared code. Consumers:
+mags side — `mags-discord-bot.js:546` (tool-loop), `cron-desk-writer.js:253`,
+`discord-reflection.js:260`; MCP side — every `search_everything`/`disk_search`
+caller (skill-side: sift ×9, city-hall-prep ×4, write-supplemental, desk-slice,
+self-debug, post-publish, make-citizen-voice, deep-dispatch, skill-audit,
+run-cycle).
+
+**`articles` naming — two corpora, keep both, document the split.**
+`queryLedger.js articles` greps `editions/` + `output/drive-files/` on disk;
+MCP `search_articles` queries the dashboard article index
+(`godworld-mcp.py:504` → `localhost:3001`). Neither is a superset (disk sees
+drive-files; dashboard sees index metadata). Tool names stay stable; the §Term
+table above is the disambiguation.
+
+### Consolidation shape (executing S349)
+
+One shared transport — `lib/supermemory.js` `search(query, opts)` — fail-soft,
+timeout-capped, supporting both API shapes (`containerTags` → v3,
+`containerTag` → v4/hybrid) so every repoint is a zero-behavior-change delegate.
+Copies keep their local names and result-shaping; only transport dedupes.
+The two untracked house-guest scripts repoint when their author lands them.
+Disk matchers: `searchDisk` gains phrase-first + AND-fallback to mirror MCP
+semantics (parity documented at both sites). Each repoint ships with its
+caller-graph evidence in the commit.

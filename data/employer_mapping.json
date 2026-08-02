@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Maps RoleType patterns to BIZ-IDs for employer linkage. Five-layer resolution: sports → parenthetical → keyword → selfEmployed → category.",
-    "version": "1.4",
+    "version": "1.6",
     "phase": "14.7",
     "layerOrder": [
       "sports",
@@ -12,7 +12,9 @@
     ],
     "venueExpansion": "Phase 14.7: 16 anchor venues from Phase 7 nightlife/food engines promoted to BIZ entries. 171 total venues exist in engine pools; these 16 are the permanent base establishments across 11 neighborhoods.",
     "civicEstablishments": "S334: INIT-001/002/003/005/007 minted as BIZ-00094..00098 (Business_Ledger) so civic programs employ their own directors instead of parking at City of Oakland. Keyword rules route future citizens naming these programs.",
-    "categoryFix": "S335: Professional -> SELF_EMPLOYED (private practice is honest for vets/CPAs/agents/attorneys); 2041-Specific default REMOVED (no one employer fits the range) with per-role keyword rules routing the placeable specialists. Only Tech & Innovation still defaults to BIZ-00030."
+    "categoryFix": "S335: Professional -> SELF_EMPLOYED (private practice is honest for vets/CPAs/agents/attorneys); 2041-Specific default REMOVED (no one employer fits the range) with per-role keyword rules routing the placeable specialists. Only Tech & Innovation still defaults to BIZ-00030.",
+    "engine83Tail": "S348 (Kimi): Task 7 tail rules — 61 keyword rules from a 6-seat agent fan-out over 293 unmatched citizens, lead-reviewed. Civic/public-safety cluster routed by exact role (DEPUTY CHIEF/INTERNAL AFFAIRS -> BIZ-00024, DISTRICT ATTORNEY/PUBLIC DEFENDER -> BIZ-00022, FIRE CHIEF/EMS -> BIZ-00023), trades -> BIZ-00020, food-service -> BIZ-00044 (Line Cook precedent), creative/gig roles -> SELF_EMPLOYED. Rejected as unearned guesses, left blank: Janitor, Security Guard, Mover, Mechanic, Delivery driver, Maintenance tech, generic Athlete/Driver/Office worker (no honest employer exists in the ledger). Specific-before-generic ordering matters: Climate Modeling before Model; West Oakland Community Center before Community Director.",
+    "engine83Close": "S349: close-out pass on the post-Kimi tail (119). Script gains a no-employment skip class (student/retired/hall-of-famer/resident ~55 rows — blank employer is correct, they are not failed matches); Health Officer -> BIZ-00015 (county public health sits with Alameda Health); informal-economy operators (Booky, Drug Dealer, Organized Crime) -> SELF_EMPLOYED. Remaining unmatched are Kimi's ruled-blank generic-service roles plus role/econ-drift rows — blank with reason, per the plan's 'blank is honest' rule."
   },
   "parentheticalLookup": {
     "Port of Oakland": "BIZ-00012",
@@ -411,6 +413,254 @@
     {
       "pattern": "A's Marketing",
       "bizId": "BIZ-00005"
+    },
+    {
+      "pattern": "City Manager",
+      "bizId": "BIZ-00017"
+    },
+    {
+      "pattern": "Public Safety",
+      "bizId": "BIZ-00017"
+    },
+    {
+      "pattern": "DIRECTOR OF EMERGENCY MANAGEMENT",
+      "bizId": "BIZ-00017"
+    },
+    {
+      "pattern": "POLICE REVIEW BOARD",
+      "bizId": "BIZ-00017"
+    },
+    {
+      "pattern": "Climate Modeling",
+      "bizId": "BIZ-00017"
+    },
+    {
+      "pattern": "Director of Sustainability",
+      "bizId": "BIZ-00017"
+    },
+    {
+      "pattern": "Port Worker",
+      "bizId": "BIZ-00012"
+    },
+    {
+      "pattern": "Warehouse",
+      "bizId": "BIZ-00012"
+    },
+    {
+      "pattern": "DEPUTY CHIEF",
+      "bizId": "BIZ-00024"
+    },
+    {
+      "pattern": "INTERNAL AFFAIRS",
+      "bizId": "BIZ-00024"
+    },
+    {
+      "pattern": "OPOA",
+      "bizId": "BIZ-00024"
+    },
+    {
+      "pattern": "FIRE CHIEF",
+      "bizId": "BIZ-00023"
+    },
+    {
+      "pattern": "EMS DIRECTOR",
+      "bizId": "BIZ-00023"
+    },
+    {
+      "pattern": "MEDICAL EXAMINER",
+      "bizId": "BIZ-00015"
+    },
+    {
+      "pattern": "DISTRICT ATTORNEY",
+      "bizId": "BIZ-00022"
+    },
+    {
+      "pattern": "PUBLIC DEFENDER",
+      "bizId": "BIZ-00022"
+    },
+    {
+      "pattern": "SUPERIOR COURT",
+      "bizId": "BIZ-00022"
+    },
+    {
+      "pattern": "PROBATION & REENTRY DIRECTOR",
+      "bizId": "BIZ-00022"
+    },
+    {
+      "pattern": "Sea Level Monitoring",
+      "bizId": "BIZ-00031"
+    },
+    {
+      "pattern": "Oakland Oaks",
+      "bizId": "BIZ-00074"
+    },
+    {
+      "pattern": "Copy Chief",
+      "bizId": "BIZ-00018"
+    },
+    {
+      "pattern": "Club Manager",
+      "bizId": "BIZ-00040"
+    },
+    {
+      "pattern": "West Oakland Community Center",
+      "bizId": "BIZ-00028"
+    },
+    {
+      "pattern": "Community Director",
+      "bizId": "BIZ-00028"
+    },
+    {
+      "pattern": "Community Advocate",
+      "bizId": "BIZ-00028"
+    },
+    {
+      "pattern": "DigitalOcean",
+      "bizId": "BIZ-00002"
+    },
+    {
+      "pattern": "Civis Systems",
+      "bizId": "BIZ-00052"
+    },
+    {
+      "pattern": "Autonomous Systems",
+      "bizId": "BIZ-00052"
+    },
+    {
+      "pattern": "Smart City",
+      "bizId": "BIZ-00052"
+    },
+    {
+      "pattern": "Algae Biofuel",
+      "bizId": "BIZ-00010"
+    },
+    {
+      "pattern": "Library Worker",
+      "bizId": "BIZ-00021"
+    },
+    {
+      "pattern": "Software engineer",
+      "bizId": "BIZ-00030"
+    },
+    {
+      "pattern": "After-school",
+      "bizId": "BIZ-00016"
+    },
+    {
+      "pattern": "Bart Transit",
+      "bizId": "BIZ-00014"
+    },
+    {
+      "pattern": "Bus driver",
+      "bizId": "BIZ-00013"
+    },
+    {
+      "pattern": "Bus Driver",
+      "bizId": "BIZ-00013"
+    },
+    {
+      "pattern": "Plumber",
+      "bizId": "BIZ-00020"
+    },
+    {
+      "pattern": "Electrician",
+      "bizId": "BIZ-00020"
+    },
+    {
+      "pattern": "Construction",
+      "bizId": "BIZ-00020"
+    },
+    {
+      "pattern": "Bakery",
+      "bizId": "BIZ-00064"
+    },
+    {
+      "pattern": "Line cook",
+      "bizId": "BIZ-00044"
+    },
+    {
+      "pattern": "Dishwasher",
+      "bizId": "BIZ-00044"
+    },
+    {
+      "pattern": "Waiter",
+      "bizId": "BIZ-00044"
+    },
+    {
+      "pattern": "Server",
+      "bizId": "BIZ-00044"
+    },
+    {
+      "pattern": "Cook",
+      "bizId": "BIZ-00044"
+    },
+    {
+      "pattern": "Retail",
+      "bizId": "BIZ-00033"
+    },
+    {
+      "pattern": "Taxi driver",
+      "bizId": "SELF_EMPLOYED"
+    },
+    {
+      "pattern": "Taxi Driver",
+      "bizId": "SELF_EMPLOYED"
+    },
+    {
+      "pattern": "Pianist",
+      "bizId": "SELF_EMPLOYED"
+    },
+    {
+      "pattern": "Aura Wellness",
+      "bizId": "SELF_EMPLOYED"
+    },
+    {
+      "pattern": "Speculative Internet",
+      "bizId": "SELF_EMPLOYED"
+    },
+    {
+      "pattern": "Gallery Owner",
+      "bizId": "SELF_EMPLOYED"
+    },
+    {
+      "pattern": "small business owner",
+      "bizId": "SELF_EMPLOYED"
+    },
+    {
+      "pattern": "Actress",
+      "bizId": "SELF_EMPLOYED"
+    },
+    {
+      "pattern": "Actor",
+      "bizId": "SELF_EMPLOYED"
+    },
+    {
+      "pattern": "Rapper",
+      "bizId": "SELF_EMPLOYED"
+    },
+    {
+      "pattern": "Musician",
+      "bizId": "SELF_EMPLOYED"
+    },
+    {
+      "pattern": "Painter",
+      "bizId": "SELF_EMPLOYED"
+    },
+    {
+      "pattern": "Artist",
+      "bizId": "SELF_EMPLOYED"
+    },
+    {
+      "pattern": "Model",
+      "bizId": "SELF_EMPLOYED"
+    },
+    {
+      "pattern": "Writer",
+      "bizId": "SELF_EMPLOYED"
+    },
+    {
+      "pattern": "Health Officer",
+      "bizId": "BIZ-00015"
     }
   ],
   "selfEmployedPatterns": [
@@ -421,7 +671,10 @@
     "Pitmaster$",
     "Food Truck",
     "Tattoo Artist",
-    "Muralist"
+    "Muralist",
+    "^Booky$",
+    "Drug Dealer",
+    "Organized Crime"
   ],
   "categoryDefaults": {
     "Port & Labor": "BIZ-00012",

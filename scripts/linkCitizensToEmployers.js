@@ -30,6 +30,9 @@ const DRY_RUN = process.argv.includes('--dry-run');
 // (hires/layoffs since Phase 14.4) from being clobbered by re-resolution.
 // Roster rebuild + new-business append are unaffected by the flag.
 const FILL_BLANKS_ONLY = process.argv.includes('--fill-blanks-only');
+// engine.83 Task 7: --list-unmatched — print every UNMATCHED citizen with the
+// fields a rule proposer needs (RoleType/EconomicProfileKey/Neighborhood).
+const LIST_UNMATCHED = process.argv.includes('--list-unmatched');
 
 async function main() {
   console.log(DRY_RUN ? '=== DRY RUN ===' : '=== LIVE RUN ===');
@@ -119,6 +122,12 @@ async function main() {
   var layerCounts = { sports: 0, parenthetical: 0, keyword: 0, selfEmployed: 0, category: 0 };
   var skippedInactive = 0;
   var skippedNoRole = 0;
+  var skippedNoEmployment = 0;
+  // engine.83 Task 7: roles with no employment expected. Students, retirees,
+  // hall-of-famers and "resident" placeholder roles are not failed matches —
+  // counting them as UNMATCHED buries the real unresolved tail in noise.
+  // Blank employer is correct for them; they are skipped, not unresolved.
+  var NO_EMPLOYMENT_ROLE = /^student$|retired|hall of famer|resident$/i;
   var unmatched = 0;
   var results = []; // { rowIndex, popId, name, roleType, bizId, layer }
   var bizEmployees = {}; // bizId → [{ popId, name, roleType, income }]
@@ -134,6 +143,10 @@ async function main() {
     var roleType = (row[iRoleType] || '').toString().trim();
     if (!roleType) {
       skippedNoRole++;
+      continue;
+    }
+    if (NO_EMPLOYMENT_ROLE.test(roleType)) {
+      skippedNoEmployment++;
       continue;
     }
 
@@ -248,7 +261,9 @@ async function main() {
       roleType: roleType,
       bizId: bizId,
       layer: layer,
-      income: income
+      income: income,
+      econKey: econKey,
+      neighborhood: (row[iNeighborhood] || '').toString().trim()
     });
 
     // Accumulate employee data per business
@@ -269,6 +284,7 @@ async function main() {
   console.log('  Layer 5 (category): ' + layerCounts.category);
   console.log('  Skipped (inactive): ' + skippedInactive);
   console.log('  Skipped (no role): ' + skippedNoRole);
+  console.log('  Skipped (no employment expected — student/retired/HoF/resident): ' + skippedNoEmployment);
   console.log('  Unmatched: ' + unmatched);
   console.log('');
 
@@ -322,6 +338,14 @@ async function main() {
                 r.bizId + ' ' + (bizNames[r.bizId] || '') + ' [' + r.layer + ']');
   });
   console.log('');
+
+  if (LIST_UNMATCHED) {
+    console.log('--- UNMATCHED CITIZENS ---');
+    results.filter(function(r) { return r.layer === 'unmatched'; }).forEach(function(r) {
+      console.log('  ' + r.popId + ' | ' + r.name + ' | ' + r.roleType + ' | econ=' + (r.econKey || '?') + ' | hood=' + (r.neighborhood || '?'));
+    });
+    console.log('');
+  }
 
   if (DRY_RUN) {
     console.log('=== DRY RUN COMPLETE — no changes written ===');
@@ -411,8 +435,8 @@ async function main() {
     console.log('  Roster rows ' + (rc + 1) + '-' + Math.min(rc + CHUNK, rosterRows.length) + ' of ' + rosterRows.length);
   }
 
-  // 4. Update Business_Ledger Employee_Count and Avg_Salary
-  console.log('Updating Business_Ledger Employee_Count and Avg_Salary...');
+  // 4. Headcount sanity check against Business_Ledger (read-only — S349)
+  console.log('Checking Business_Ledger headcounts...');
 
   // Re-read Business_Ledger to get updated row positions (after new rows added)
   var updatedBizData = await sheets.getSheetData('Business_Ledger');
@@ -421,28 +445,13 @@ async function main() {
 
   var iBizIdCol = updatedBizHeader.indexOf('BIZ_ID');
   var iEmpCount = updatedBizHeader.indexOf('Employee_Count');
-  var iAvgSalary = updatedBizHeader.indexOf('Avg_Salary');
 
-  // Reuse colLetter
-  function colL(idx) {
-    if (idx < 26) return String.fromCharCode(65 + idx);
-    return String.fromCharCode(64 + Math.floor(idx / 26)) + String.fromCharCode(65 + (idx % 26));
-  }
-
-  var bizUpdates = [];
   var headcountViolations = []; // tracked > stated — the only illegal state (S334)
   for (var br = 0; br < updatedBizRows.length; br++) {
     var bizRow = updatedBizRows[br];
     var thisBizId = (bizRow[iBizIdCol] || '').toString().trim();
     if (bizEmployees[thisBizId]) {
       var emps = bizEmployees[thisBizId];
-      var empTotal = 0;
-      var empIncomeCount = 0;
-      emps.forEach(function(e) {
-        if (e.income > 0) { empTotal += e.income; empIncomeCount++; }
-      });
-      var avgSal = empIncomeCount > 0 ? Math.round(empTotal / empIncomeCount) : 0;
-      var rowN = br + 2;
 
       // S334 (Mike-direct): Employee_Count is the business's ACTUAL headcount, not
       // the tracked-citizen count. Simulation_Ledger tracks a ~1:443 sample, so
@@ -465,18 +474,13 @@ async function main() {
           });
         }
       }
-      if (iAvgSalary >= 0) {
-        bizUpdates.push({
-          range: 'Business_Ledger!' + colL(iAvgSalary) + rowN,
-          values: [[avgSal]]
-        });
-      }
+      // S349: Avg_Salary no longer writes — it carried the same conflation the
+      // S334 note above fixed for Employee_Count: a whole-org average silently
+      // replaced by the mean of a handful of tracked citizens (1 tracked row
+      // rewrote Peralta CCD to that one salary). The sample never overwrites
+      // the institution figure. Repair of the 41 already-overwritten rows:
+      // ENGINE_REPAIR row 34.
     }
-  }
-
-  if (bizUpdates.length > 0) {
-    await sheets.batchUpdate(bizUpdates);
-    console.log('  Updated Avg_Salary on ' + bizUpdates.length + ' businesses (Employee_Count left alone — S334)');
   }
 
   if (headcountViolations.length > 0) {

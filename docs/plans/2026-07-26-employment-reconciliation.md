@@ -94,7 +94,7 @@ Practical consequence for every re-run: **`--fill-blanks-only`.** Fill what is e
   3. Keyword layer (3) runs before category default (5), so these resolve before anything reaches the bucket.
   4. **Better than keyword rules for the Oaks: extend the sports layer to join `Oaks_Roster` the way it already joins `As_Roster`.** Mike added the tab S334 — 7 rows, POPID-keyed, `Position | Team | Salary | PPG | ASST | REB | STL | FG% | 3P%`. Join verified 7/7 against the ledger (POP-01022 Wilson Shepard through POP-01028 Wendell Carter Jr., all `Active`, all blank employer). A POPID join is exact where a keyword match is a guess — use it, and keep keyword rules only as the fallback for staff who appear on neither roster tab.
 - **Verify:** `--dry-run` shows all 7 Oaks and every A's staffer resolving; `unmatched` drops by the coach/scout count
-- **Status:** [ ] not started — unblocked: `Oaks_Roster` now supplies both employer and `Status`
+- **Status:** [x] DONE S334 (commit `b5b5554b`) — OriginGame→franchise join replaced keyword guessing; verified S349: ER carries 8 Oaks (7 roster + GM Abraham) + 93 A's incl. staff
 
 ### Task 3: Retire the `SPORTS_OTHER` leak
 
@@ -103,7 +103,7 @@ Practical consequence for every re-run: **`--fill-blanks-only`.** Fill what is e
   1. The sentinel is correct as an internal marker; the bug is that it can survive to a written value. Make the write path treat a surviving `SPORTS_OTHER` as blank (the script already argues this for `UNMATCHED` at lines 27-31 — same reasoning, same fix).
   2. Repair the 7 existing ledger rows: resolve by `RoleType` to `BIZ-00005` / `BIZ-00074`, else blank.
 - **Verify:** zero `SPORTS_OTHER` in either sheet; a dry-run cannot produce one
-- **Status:** [ ] not started
+- **Status:** [x] DONE S334 (commit `b5b5554b`) — sentinel can no longer survive to a write; verified S349: zero non-BIZ values in SL and ER
 
 ### Task 4: Split the `Professional` and `2041-Specific` defaults
 
@@ -113,7 +113,7 @@ Practical consequence for every re-run: **`--fill-blanks-only`.** Fill what is e
   2. `Professional` and `2041-Specific` must stop pointing at `BIZ-00030`. Add keyword rules ABOVE the category layer for the concrete professions in the bucket (attorney/counsel → a legal employer or `BIZ-00017` where the role is a city post; urban planner → `BIZ-00017`; event planner → `SELF_EMPLOYED`).
   3. Whatever genuinely has no better home may keep the tech-hub default, but the category itself should no longer sweep everything there.
 - **Verify:** `--dry-run` shows `BIZ-00030` tracked count at or under its stated 62
-- **Status:** [ ] not started
+- **Status:** [x] DONE S335 (mapping v1.5 `categoryFix`) — Professional → SELF_EMPLOYED, 2041-Specific default removed with per-role keyword routing; verified S349: BIZ-00030 at 7 tracked
 
 ### Task 5: Civic cohort
 
@@ -165,7 +165,7 @@ Practical consequence for every re-run: **`--fill-blanks-only`.** Fill what is e
   2. Per `docs/MODEL_HIERARCHY.md` §8 the lead holds judgment: review every proposed rule before it enters the config. Haiku only if a seat demonstrates it holds the sector rules.
   3. A citizen with no plausible tracked employer stays blank. Blank is honest; the bucket is not.
 - **Verify:** `--dry-run` shows `unmatched` under 60; each new rule cites its sector logic
-- **Status:** [ ] not started
+- **Status:** [x] DONE S348 (Kimi) + S349 close — Kimi: 6-seat Sonnet fan-out → 61 lead-reviewed keyword rules (mapping `_meta.engine83Tail`), generic-service roles ruled blank-is-honest. S349: no-employment skip class in the script (student/retired/HoF/resident, 67 rows out of the unmatched noise), Health Officer → BIZ-00015, informal-economy operators (Booky/Drug Dealer/Organized Crime) → SELF_EMPLOYED. Final: **59 unmatched**, all reasoned (see Status log)
 
 ### Task 8: Local-service proximity pass
 
@@ -175,7 +175,7 @@ Practical consequence for every re-run: **`--fill-blanks-only`.** Fill what is e
   2. Where a matching-sector tracked business exists in or adjacent to the citizen's neighborhood, prefer it. Where none exists, leave them — **do not create a business to satisfy the rule.**
   3. Note the resolver is name/keyword-driven, not location-aware; if per-neighborhood routing needs a sixth layer, that is a separate design and Mike's call, not a silent addition here.
 - **Verify:** local-service citizens in-neighborhood where possible; the rest listed with "no matching business in hood"
-- **Status:** [ ] not started
+- **Status:** [x] DONE S349 as a one-time repair, not a sixth layer — Kimi's food-service rule had funneled the whole tail into Harborline Grill ($642k-revenue grill, 32 tracked). 12 food workers redistributed to in/adjacent-hood Restaurant & Dining rows under headcount caps (roster `MappingLayer=proximity`); 3 Jack London workers stayed. The location-aware sixth layer remains a separate design and Mike's call, per step 3
 
 ### Task 9: Close out
 
@@ -185,7 +185,20 @@ Practical consequence for every re-run: **`--fill-blanks-only`.** Fill what is e
   2. Re-scan: unmatched count, `SPORTS_OTHER` count, over-headcount businesses, roster-vs-ledger divergence. Record before/after in the Status log.
   3. Flip engine.83 to `done-pending-archive` when all six acceptance criteria hold.
 - **Verify:** `node scripts/docLoopStatus.js --lint` clean
-- **Status:** [ ] not started
+- **Status:** [x] DONE S349 — full apply run (`--fill-blanks-only`: 76 blanks written, 762 lived values kept, 859-row roster rebuilt), all six acceptance criteria verified live (see Status log)
+
+---
+
+## Status log
+
+- **S349 close-out — all six acceptance criteria hold, verified against live sheets:**
+  1. Unmatched **286 → 59** (target <60). Reasons for the 59: **44 generic-service roles** (janitor 10 / security guard 9 / mover 9 / mechanic 8 / maintenance 3 / delivery 3 / driver 1 / office worker 1) with no such employer in the ledger — Kimi's S348 ruling, blank is honest; most also carry role↔econ-profile drift (RoleType "Janitor", econ "Environmental Consultant") which is engine.82-family data damage, not a resolution failure. **15 no-matching-business cases** — casino manager, bank teller, parking-garage manager, landscaper, counselor, OakTown Echo investigator (rival outlet has no BIZ row), 2 franchise-less Athletes, tenants-union rep, sanitation-econ mover, etc.
+  2. Zero `SPORTS_OTHER` / non-BIZ values in both sheets.
+  3. 8 Oaks at BIZ-00074 (7 roster + GM), 93 A's at BIZ-00005 incl. coaches/scouts.
+  4. Zero `CIV=yes` at BIZ-00030.
+  5. Zero businesses with tracked > stated. Fossil headcount repairs S349 (sized to institution per Mike's S335 rule): 13 rows — Ridgeline 12, Gridiron 20, Portside Bio 25, BART Div 900, EBMUD 1900, OPL 300, Kaiser 2600, Parks&Rec 350, PG&E 1400, Peralta 1800, OakHouse 22, OFD 450 (adjacent fix, was 30 vs OPD 700), EBRP 750.
+  6. ER↔SL divergence **330 → 0** — roster synced to ledger truth where the sim had lived past the resolver (148 rows, `MappingLayer=existing`).
+  - **Also this close:** duplicate Atlas Bay Architects resolved — consolidated to BIZ-00089 (kept: 3 references), BIZ-00099 row deleted, canon stats merged; Business_Ledger 98 rows, positionally aligned, next mint BIZ-00099. **New defect filed:** Avg_Salary carries the same sample-conflation Employee_Count had — write path cut this session, 41-row re-derivation open as ENGINE_REPAIR row 34.
 
 ---
 
@@ -203,3 +216,4 @@ Practical consequence for every re-run: **`--fill-blanks-only`.** Fill what is e
 - 2026-07-26 (S334) — Initial draft, rewritten pre-publish around the existing resolver.
 - 2026-07-26 (S334) — Authority ruled (roster wins), Oaks_Roster landed, Task 5b added to mint civic initiatives as establishments.
 - 2026-08-01 (Kimi) — Audit pointer added: build-order step 2 of [[../research/2026-08-01-simulation-realism-audit]] — this static repair is the precondition for the living economy.
+- 2026-08-02 (S349) — Plan CLOSED: all tasks done, six acceptance criteria verified live (Status log). engine.83 + engine.84 → done-pending-archive.

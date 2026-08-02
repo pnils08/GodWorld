@@ -266,6 +266,16 @@ civic are generator terminals: their run findings enter production gap logs and
 are promoted through research-build rather than assigned directly as rollout
 work.
 
+**Terminal names are Claude identities, not roles you can hold.**
+`research-build`, `engine-sheet`, `media`, and `civic` are Claude Code
+terminals; an out-of-band agent is never one of them and never writes "the
+research-build half is done" about its own work. When your task covers work a
+terminal would normally do, do the work, but attribute it to your own lane
+(`kimi`, `codex`, `antigravity`) in plan notes, changelogs, and commits —
+"design tasks 1–4 complete (kimi), engine-sheet builds 5–7" — so ownership and
+review boundaries stay legible. The terminal whose scope you touched remains
+the reviewer/lander of gated changes.
+
 ### Marking completed work (rollout-rules.md §7)
 
 When an out-of-band agent completes plan work, completion is marked in the

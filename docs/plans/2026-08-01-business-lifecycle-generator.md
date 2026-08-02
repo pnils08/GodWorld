@@ -77,7 +77,59 @@ pointers:
   4. Canon constraint (CLAUDE.md prosperity-era doctrine): modifiers are *consequences of success*, never imported recession cynicism.
   5. Include the Task 1 layoff-contract finding in this plan's Build notes.
 - **Verify:** key/defaults table in this plan reviewed by Mike before Task 5; at implementation, one bench cycle shows `ctx.config` carrying the new keys.
-- **Status:** [ ] not started
+- **Status:** [~] DRAFTED 2026-08-01 (Kimi) — table below; awaits Mike sign-off before Task 5. Defaults derived from: sector mint table (`scripts/ingestPublishedEntities.js:815-825` — 9 classes + fallback, mint growth 2–8), live calibration (Task 4: legacy rows uniform 8%, live range 0–40 median 8; vitality observed 6.13–9.27; Mayor approval 95), and the `runCareerEngine.js:1082` convention (Growth_Rate = annual percent; per-cycle effect = value/100/52).
+
+**Drift formula (design, per business per cycle — all draws seeded cycle+BIZ_ID hash):**
+
+```text
+vitalityModifier  = clamp((hoodVitality - bizVitalityNeutral) * bizVitalityGain, -0.5, +0.5)
+successPressure   = -bizSuccessPenalty  IF hood vitality >= bizSuccessVitalityHigh
+                    AND mayor approval >= bizSuccessApprovalHigh
+                    for bizSuccessWindow consecutive cycles  ELSE 0
+disruptionShock   = -bizDisruptShock    IF seededDraw < chance
+                    chance = bizDisruptBaseChance/100 * (successWindowActive ? bizDisruptSuccessMult : 1)
+noise             = seeded uniform in [-bizNoiseBound, +bizNoiseBound]
+drift             = clamp((vitalityModifier + successPressure + disruptionShock + noise)
+                          * bizVol_<class>, -bizDriftMaxDown, +bizDriftMaxUp)   // percentage points
+Growth_Rate'      = clamp(Growth_Rate + drift, bizGrowthFloor, bizGrowthCeil)
+Annual_Revenue'   = Annual_Revenue * (1 + Growth_Rate'/100/52)   // runCareerEngine :1082 convention
+distress          = consecutive cycles Growth_Rate < 0  (streak state in companion tab, see note)
+closure           = distress >= bizClosureStreak AND
+                    Annual_Revenue < bizClosureRevenueFloorPct% of sector mint median
+```
+
+**World_Config key table (defaults — Mike review):**
+
+| Key | Default | What it governs |
+|---|---|---|
+| `bizDriftMaxUp` | 1.0 | Max +pp Growth_Rate move per cycle |
+| `bizDriftMaxDown` | 1.0 | Max −pp move per cycle |
+| `bizGrowthCeil` | 40 | Growth_Rate ceiling (matches live range top) |
+| `bizGrowthFloor` | -10 | Growth_Rate floor |
+| `bizNoiseBound` | 0.25 | Seeded noise half-width (pp) |
+| `bizVitalityNeutral` | 6.0 | Hood retail vitality at which vitalityModifier = 0 |
+| `bizVitalityGain` | 0.15 | pp drift per vitality point from neutral (clamped ±0.5) |
+| `bizSuccessWindow` | 3 | Consecutive prosperous cycles before success pressure bites (27.10) |
+| `bizSuccessVitalityHigh` | 9.0 | Hood vitality that counts as "prosperous" (Grand Lake reads 9.27) |
+| `bizSuccessApprovalHigh` | 85 | Mayor approval that counts as golden-era (observed 95) |
+| `bizSuccessPenalty` | 0.3 | pp drift penalty on incumbents under sustained success |
+| `bizDisruptBaseChance` | 2 | % per-cycle disruption-shock chance per business (seeded draw) |
+| `bizDisruptSuccessMult` | 3 | Disruption-chance multiplier while success window active (27.10: correction increasingly likely, never guaranteed) |
+| `bizDisruptShock` | 2.0 | pp one-cycle negative shock on disruption |
+| `bizClosureStreak` | 8 | Consecutive negative-growth cycles for closure eligibility |
+| `bizClosureRevenueFloorPct` | 40 | Revenue below this % of sector mint median (27.10: BOTH conditions required) |
+| `bizVol_faith` | 0.5 | Sector volatility multipliers — scale the whole drift term per class: |
+| `bizVol_retail` | 1.2 | |
+| `bizVol_food` | 1.3 | food/nightlife most volatile of the small classes |
+| `bizVol_health` | 0.7 | |
+| `bizVol_tech` | 1.5 | tech most volatile (matches its mint growth 8) |
+| `bizVol_professional` | 0.8 | |
+| `bizVol_construction` | 1.1 | |
+| `bizVol_arts` | 1.2 | |
+| `bizVol_education` | 0.6 | |
+| `bizVol_default` | 1.0 | fallback small-neighborhood class |
+
+**Implementation notes (not config):** (a) distress-streak state needs a home — `Business_Ledger` has no spare column (A–I all owned); design calls for a small companion tab `Business_Dynamics_State` (BIZ_ID, declineStreak, lastDrift, successWindowCycles), documented in SPREADSHEET.md same commit per ADR-0015 §5. (b) Sector class resolved by reusing `SECTOR_ECON_SEEDS`' regex list — export it rather than duplicating (single source, engine.85's classifier already syncs to it). (c) Every key above is asserted present at bench startup — fail loud, no silent defaults (ADR-0015 §4). (d) 27.10's "correction isn't guaranteed" is preserved: all counter-pressure is probabilistic via seeded draws, and the success-pressure path only penalizes *drift*, it never forces decline.
 
 ### Task 4: Live-state calibration pull (approved Sheets read)
 
@@ -165,3 +217,4 @@ pointers:
 - 2026-08-01 — Task 4 DONE (builder-approved pull via derived cards + on-disk summaries; dashboard API is session-gated). Live data confirms the audit's core claims: Growth_Rate uniform 8% across all sampled businesses (static, matches "no post-mint writer"), golden-era approval pattern confirmed C92–C99 for the governing faction. Calibration notes in Task 4 status: drift bounds must assume all legacy rows start at 8%; retail vitality is a livelier per-hood prosperity input than sentiment.
 - 2026-08-01 — Mike rulings folded in: (1) tunables live in `World_Config` key→value rows, not a code config file — `loadConfig_` already loads them into `ctx.config`, tuning is a cell edit; Task 3 rewritten, `utilities/businessDynamicsConfig.js` dropped from the design. (2) Everything-is-earned doctrine: no static/free numbers — every drift modifier derives from live sim state; missing keys fail loud, never silently default (the 0.91-fallback disease must not reappear in a new home).
 - 2026-08-01 — Rulings promoted to [[../adr/0015-world-config-tunable-values]] (World_Config = house for tunables, migrate-on-touch not a project, everything-is-earned). This plan's Task 3 is the ADR's first application.
+- 2026-08-01 — Task 3 DRAFTED (Kimi): full drift formula + 27-key World_Config defaults table, calibrated from the sector mint table (growth 2–8 by class), live pulls (uniform 8% legacy, vitality 6.13–9.27, Mayor 95), and the runCareerEngine annual-percent convention. Revenue moves at Growth_Rate/100/52 per cycle so both engines agree on what the number means. Closure requires streak AND revenue floor per 27.10. Awaits Mike sign-off before Task 5.

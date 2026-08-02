@@ -697,6 +697,16 @@ the subtask has a real reasoning floor (adversarial canon calls, subtle code
 review). This mirrors `docs/MODEL_HIERARCHY.md` §8, which binds the Claude
 terminals; this section binds the CLI lanes.
 
+### Doc propagation is subagent work (builder decision, 2026-08-01)
+
+When a change touches the Simulation_Ledger or other canon schema/state, the
+correlating Markdown updates (`docs/SIMULATION_LEDGER.md`, `docs/SPREADSHEET.md`,
+`schemas/SCHEMA_HEADERS.md` pointers, `docs/index.md` entries) are fanned to the
+cheap subagent tier: the subagent pulls the relevant MDs and updates them, the
+lead reviews the diff before commit. The lead keeps `docs/index.md` registration
+discipline in mind on every doc touch — no isolated Markdown files — but the
+mechanical propagation itself is not lead-tier work.
+
 ## Operating posture
 
 Search before asserting. Read the actual implementation behind documentation

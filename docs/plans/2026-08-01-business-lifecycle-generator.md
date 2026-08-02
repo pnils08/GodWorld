@@ -17,6 +17,7 @@ pointers:
   - "[[2026-07-27-employment-living-system]] — engine.85, business BIRTH (mint) stays there; this plan owns decline/death"
   - "[[2026-07-31-citizen-memory-perception]] — engine.94 Track A owns the scandal-ceiling slice of 27.10; not duplicated here"
   - "[[../research/2026-07-29-citizen-archive]] — the Citizen_Archive pattern this plan mirrors for businesses (builder-generalized to all sim exits 2026-08-01)"
+  - "[[../adr/0015-world-config-tunable-values]] — tunables live in World_Config (migrate-on-touch); this plan's Task 3 is the ADR's first application"
   - "[[2026-07-31-platform-ceiling-resilience]] — engine.95 Task 4 (checkpoint/resume) is the platform prerequisite for heavy engine additions"
   - "[[SCHEMA]] — doc conventions"
   - "[[../index]] — registered same commit"
@@ -163,3 +164,4 @@ pointers:
 - 2026-08-01 — Open question 1 RESOLVED (Mike): closure ledger. `Business_Archive` mirrors the adopted `Citizen_Archive` pattern; BIZ-IDs permanent. Mike generalized the archive-ledger principle to every sim exit (death, traded, closed business). Task 7 rewritten: in-cycle zero-headcount marking (no Status column needed), post-commit copy-verify-remove, BIZ-ID allocator hazard flagged (active-sheet max-id reads break once rows move out — same trap the citizen-archive research documented for POPIDs).
 - 2026-08-01 — Task 4 DONE (builder-approved pull via derived cards + on-disk summaries; dashboard API is session-gated). Live data confirms the audit's core claims: Growth_Rate uniform 8% across all sampled businesses (static, matches "no post-mint writer"), golden-era approval pattern confirmed C92–C99 for the governing faction. Calibration notes in Task 4 status: drift bounds must assume all legacy rows start at 8%; retail vitality is a livelier per-hood prosperity input than sentiment.
 - 2026-08-01 — Mike rulings folded in: (1) tunables live in `World_Config` key→value rows, not a code config file — `loadConfig_` already loads them into `ctx.config`, tuning is a cell edit; Task 3 rewritten, `utilities/businessDynamicsConfig.js` dropped from the design. (2) Everything-is-earned doctrine: no static/free numbers — every drift modifier derives from live sim state; missing keys fail loud, never silently default (the 0.91-fallback disease must not reappear in a new home).
+- 2026-08-01 — Rulings promoted to [[../adr/0015-world-config-tunable-values]] (World_Config = house for tunables, migrate-on-touch not a project, everything-is-earned). This plan's Task 3 is the ADR's first application.

@@ -80,6 +80,8 @@ Recommended build order (existing rows unless noted):
 ## Applications (living)
 
 - 2026-08-01 — Builder realism verdict ("start over?") answered: keep; build order proposed.
+- 2026-08-01 — engine.96 created from build-order item 6 ([[../plans/2026-08-01-business-lifecycle-generator]], builder-approved); audit pointers wired into the engine.83/84/85/93/94/95 plans.
+- 2026-08-01 — Builder-approved live pull CONFIRMED the audit's headline findings against live data: Growth_Rate uniform 8% across 6/6 sampled businesses (finding 2's static economy, card layer built from the live ledger 2026-07-17); Mayor approval 78→95 monotonic C92–C99 with the OPP cohort rising (finding 4's frictionless golden era — factional: CRC/IND seats decline −1/cycle but face no event-level counter-pressure). Resolved engine.94 Open question 1 and engine.96 Task 4.
 
 ---
 

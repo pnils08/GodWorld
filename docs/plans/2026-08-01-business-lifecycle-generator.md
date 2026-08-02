@@ -83,7 +83,10 @@ pointers:
   1. Pull current `Business_Ledger` economic columns and recent approval/prosperity trend data.
   2. Use it to sanity-check Task 3 defaults against live distributions (shared with engine.94 Open question 1 — one pull serves both plans).
 - **Verify:** distributions recorded in this plan's changelog; defaults adjusted or confirmed.
-- **Status:** [ ] not started — gated on approved Sheets access
+- **Status:** [x] DONE 2026-08-01 (Kimi, builder-approved pull). Dashboard API is session-gated (401 without login — credentials not inspected per policy); pull ran over the derived-card layer (MCP world-data) + on-disk world summaries instead, which proved decisive:
+  - **Growth_Rate is uniform and static in live data**: 6/6 sampled businesses (OPD BIZ-00024, Oakland Athletics BIZ-00005, SpeedyBurger BIZ-00051, Oakland Tech Collective BIZ-00030, Green & Gold Tavern BIZ-00041, Marigold Cafe BIZ-00068) all read exactly 8% (wd-business cards built 2026-07-17 from the live ledger). Matches the code finding (no post-mint writer) and confirms Task 3's drift bounds must assume every legacy row starts at the same value.
+  - **Approval trend C92–C99** (`output/world_summary_c{92..99}.md`): Mayor 78→88→93→95→95 (monotonic, pinned at 95), D1 Carter 72→94, OPP cohort rising; CRC/IND seats −1/cycle to 58–59. Sustained-prosperity trigger for the success-pressure modifiers is real for the governing faction; design detail recorded in [[2026-07-31-citizen-memory-perception]] Open question 1.
+  - **Neighborhood sentiment hovers near zero** (San Antonio −0.01, Eastlake +0.01) while retail vitality varies (Grand Lake 9.27 vs San Antonio 6.13) — vitality, not sentiment, is the livelier per-hood prosperity input for the drift pass.
 
 ### Task 5: Drift pass implementation (engine-sheet)
 
@@ -155,3 +158,4 @@ pointers:
 
 - 2026-08-01 — Initial draft (Kimi CLI). Builder approved the new row from [[../research/2026-08-01-simulation-realism-audit]] build-order item 6. Scoped to the genuinely undesigned gap: business decline/death + 27.10 non-scandal counter-pressure. Birth stays engine.85, scandal ceilings stay engine.94 Track A. All mechanics routed through existing write-back/ripple machinery — no parallel writers.
 - 2026-08-01 — Open question 1 RESOLVED (Mike): closure ledger. `Business_Archive` mirrors the adopted `Citizen_Archive` pattern; BIZ-IDs permanent. Mike generalized the archive-ledger principle to every sim exit (death, traded, closed business). Task 7 rewritten: in-cycle zero-headcount marking (no Status column needed), post-commit copy-verify-remove, BIZ-ID allocator hazard flagged (active-sheet max-id reads break once rows move out — same trap the citizen-archive research documented for POPIDs).
+- 2026-08-01 — Task 4 DONE (builder-approved pull via derived cards + on-disk summaries; dashboard API is session-gated). Live data confirms the audit's core claims: Growth_Rate uniform 8% across all sampled businesses (static, matches "no post-mint writer"), golden-era approval pattern confirmed C92–C99 for the governing faction. Calibration notes in Task 4 status: drift bounds must assume all legacy rows start at 8%; retail vitality is a livelier per-hood prosperity input than sentiment.

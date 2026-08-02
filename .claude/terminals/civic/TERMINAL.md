@@ -233,7 +233,7 @@ Use when the next civic session opens within minutes.
 **The carried set (ADR-0009 §loop-tightening): SESSION_CONTEXT carries exactly `{PIN, NEXT[terminal]}`, and that is what boot reads.** No STATUS paragraph, no Shipped block. **Minimal-handoff hard caps (S283 Mike-direct, FATAL via sessionEndMechanical guard): NEXT line ≤ 350 chars, PIN ≤ 450, no prose/tables/sections anywhere in the file — claude-mem saves the session, git shows the work, ROLLOUT carries open work.**
 
 1. **Cross-terminal git stack check.** `git log --oneline origin/main..HEAD` — expect empty.
-2. **Update the carried set in SESSION_CONTEXT.md** — the `**PIN:**` line (Session N→N+1, Day/Cycle/Edition as they changed) + your `**NEXT[civic]:**` line (one line: what next session opens with). Don't touch other terminals' NEXT lines.
+2. **Update the carried set in SESSION_CONTEXT.md** — the `**PIN:**` line (Session N→N+1, Day/Cycle/Edition as they changed) + your `**NEXT[civic]:**` line (one line: what next session OPENS WITH — open work only, never a recap (git log + claude-mem already carry what shipped; if a clause is reconstructable from git log, cut it)). Don't touch other terminals' NEXT lines.
 3. **Commit** SESSION_CONTEXT.md (with any work commits). Push.
 
 **Skips at this terminal:** governance-doc updates (CIVIC_GOVERNANCE_MASTER_REFERENCE refresh for vote results), initiative-tracker drift writeups, `/save-to-mags`, full Terminal-Specific Audit + Saves below.
@@ -264,7 +264,7 @@ Update during Step 2 of the slimmed SKILL alongside SESSION_CONTEXT + ROLLOUT:
 - **Production log** — ensure `production_log_city_hall_c{XX}.md` is complete with Mayor decision, faction responses, project agent updates, and clerk verification.
 - **Governance docs** — if votes happened or initiatives moved, update the master reference and initiative tracker.
 - **`/save-to-mags`** — save civic decisions, what the Mayor chose, how factions reacted, anything the media terminal needs for journalism. Tag with `[civic]`. Optional — model judgment.
-- **SESSION_CONTEXT.md PIN + NEXT[civic] line** — refresh the PIN (Session/Day/Cycle/Edition); one NEXT line: what next session opens with. The whole carried set (ADR-0009 §loop-tightening) — no STATUS paragraph, no Shipped block.
+- **SESSION_CONTEXT.md PIN + NEXT[civic] line** — refresh the PIN (Session/Day/Cycle/Edition); one NEXT line: what next session OPENS WITH — open work only, never a recap (git log + claude-mem already carry what shipped; if a clause is reconstructable from git log, cut it). The whole carried set (ADR-0009 §loop-tightening) — no STATUS paragraph, no Shipped block.
 - **Flag for media terminal** — note in the production log what's ready for the newsroom. The civic production log is the media terminal's input.
 
 **Mechanical (Step 3) — auto-runs from `sessionEndMechanical.js --terminal=civic`:** session-summary → Supermemory bridge + `auditPlanTagDrift` (informational, never fatal) + ROLLOUT conformance lint + cross-terminal git stack check + `pm2 restart`. (`writeShippedBlock`, `minimalHandoffGuard`, `rotateJournalRecent`, and the JOURNAL content-quality check are all retired — see the skill's Step 3 for what each was. `--rotate-history` is vestigial; leave it off.) Plan: [[archive/plans/2026-05-23-session-end-collapse]].

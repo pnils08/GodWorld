@@ -198,7 +198,7 @@ Engine-sheet typically commits as-it-goes; soft close is often near-no-op (cross
 **The carried set (ADR-0009 §loop-tightening): SESSION_CONTEXT carries exactly `{PIN, NEXT[terminal]}`, and that is what boot reads.** No STATUS paragraph, no Shipped block. **Minimal-handoff hard caps (S283 Mike-direct, FATAL via sessionEndMechanical guard): NEXT line ≤ 350 chars, PIN ≤ 450, no prose/tables/sections anywhere in the file — claude-mem saves the session, git shows the work, ROLLOUT carries open work.**
 
 1. **Cross-terminal git stack check.** `git log --oneline origin/main..HEAD` — expect empty given commit-as-you-go cadence.
-2. **Update the carried set in SESSION_CONTEXT.md** — the `**PIN:**` line (Session N→N+1, Day/Cycle/Edition + engine-version if deployed) + your `**NEXT[engine-sheet]:**` line (one line: what next session opens with — incl. any "smoke-test pending" deploy note). Don't touch other terminals' NEXT lines.
+2. **Update the carried set in SESSION_CONTEXT.md** — the `**PIN:**` line (Session N→N+1, Day/Cycle/Edition + engine-version if deployed) + your `**NEXT[engine-sheet]:**` line (one line: what next session OPENS WITH — open work only, never a recap (git log + claude-mem already carry what shipped; if a clause is reconstructable from git log, cut it) — incl. any "smoke-test pending" deploy note). Don't touch other terminals' NEXT lines.
 3. **Commit** SESSION_CONTEXT.md (with any work commits). Push.
 
 **Skips at this terminal:** Boot Quick-State doc refreshes (ENGINE_MAP / STUB_MAP / LEDGER_AUDIT / LEDGER_HEAT_MAP / SPREADSHEET / SIMULATION_LEDGER), Terminal-Specific Audit table below, MD Gap Self-Audit (S201), PM2 restart, ROLLOUT_PLAN status sweep beyond rows touched this session.
@@ -228,7 +228,7 @@ The stripped-persona framing applies to hard close. Per S229 governance.7, the s
 |---|---|
 | 0 | **Detect terminal** — `tmux display-message -t "$TMUX_PANE" -p '#W'` |
 | 2a | **Code-state audit** (table below) |
-| 2b | **Update SESSION_CONTEXT.md** — PIN refresh (engine version bump if deployed) + `NEXT[engine-sheet]` line (one line, what next session opens with). No STATUS paragraph, no Shipped block (ADR-0009 §loop-tightening) |
+| 2b | **Update SESSION_CONTEXT.md** — PIN refresh (engine version bump if deployed) + `NEXT[engine-sheet]` line (one line, what next session OPENS WITH — open work only, never a recap (git log + claude-mem already carry what shipped; if a clause is reconstructable from git log, cut it)). No STATUS paragraph, no Shipped block (ADR-0009 §loop-tightening) |
 | 2c | **Update ROLLOUT_PLAN.md** — phase statuses, move completed items to ROLLOUT_ARCHIVE |
 | 3 | **Run mechanical orchestrator** — `node scripts/sessionEndMechanical.js --terminal=engine-sheet` (auto-skips journal sub-steps; runs `auditPlanTagDrift` (informational, never fatal) + cross-terminal git stack check + opt-in `--rotate-history` + `pm2 restart`. `writeShippedBlock` RETIRED — ADR-0009 §loop-tightening) |
 | 4 | **Commit & push** — the central act of this terminal (model writes message, reads Step 3 stack-check report, decides hold-push if other terminals stacked) |

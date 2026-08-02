@@ -348,26 +348,13 @@ The builder assigns commit and push rights by agent tier:
     `**NEXT[<you>]:**` line in `SESSION_CONTEXT.md`, committed alone, per
     §Session close below;
   - the commit message names the authoring agent;
-  - **push immediately after committing.** Do not bank commits for a later
-    push. The stacking rule below stops you inheriting another lane's
-    unreviewed work; sitting on a finished commit is what creates the pile it
-    then refuses to move;
-  - before pushing, check `git log origin/main..HEAD --oneline`; if commits
-    from another terminal or agent are stacked, stop and report instead of
-    pushing them along. Report it and continue working — a stack is not your
-    problem to solve, and it does not revoke your commit rights. Keep
-    committing; a landing pass clears the queue.
-- **Landing pass (builder decision, 2026-08-01).** A cross-lane stack cannot
-  clear itself: whoever commits second is blocked by the rule above, and every
-  commit after that inherits the block. Left alone the lanes deadlock and
-  finished work never reaches `origin/main`. So: **any Claude terminal may land
-  a stack it did not author.** The lander verifies each commit sits entirely
-  inside its author's writable scope, then pushes the stack intact — no rebase,
-  no squash, no amend. Original commit attribution stands; the landing is
-  recorded in the *lander's* `NEXT` line, not the authors'. Trigger: any Claude
-  terminal that finds a stacked queue at boot or session close should land it
-  (prior art: engine-sheet landed Codex at S338). If a commit falls outside its
-  author's scope, land the rest and report that one instead of pushing it.
+  - **push immediately after committing** — banking commits forms the stack the
+    next rule refuses to move;
+  - before pushing, check `git log origin/main..HEAD --oneline`; if another
+    lane's commits are stacked, report and keep committing — do not push them
+    along. Any Claude terminal may then land the stack: verify each commit is
+    in its author's writable scope and push intact (no rebase/squash/amend);
+    attribution stays with the author, the landing goes in the lander's `NEXT`.
 - **Engine substrate remains gated for every agent**: `phase*/`,
   `utilities/`, `lib/`, `schemas/`, `dashboard/`, `editions/`, configuration
   files, hooks, service manifests, and anything deployed via clasp. Changes

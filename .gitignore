@@ -64,3 +64,10 @@ output/cron-compare/
 
 # Boot payload log — rewritten every session start, pure local diagnostic state (S341)
 .claude/state/boot-payload.txt
+
+# Session-start stamp — `date +%s` rewritten by session-startup-hook.sh at every
+# boot. Only consumer is scripts/gapLogGate.js --stop-gate, which reads it off
+# disk to tell this-session artifacts from older ones; it never consults git
+# history, and it is FAIL-OPEN when the stamp is missing. Tracked by accident
+# until S348, where it dirtied every lane's tree at every boot. (S348)
+.claude/state/session-start.txt

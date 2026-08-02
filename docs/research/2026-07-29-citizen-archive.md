@@ -1,7 +1,7 @@
 ---
 title: Citizen Archive — research
 created: 2026-07-29
-updated: 2026-07-29
+updated: 2026-08-01
 type: reference
 tags: [research, citizens, engine, active]
 sources:
@@ -332,6 +332,13 @@ plan requires a later, separate approval.
   and recovery remain in `Hospital_Ledger`.
 - 2026-07-29 — Filed `engine.90` as the separate post-intake rollout discovery
   pointer.
+- 2026-08-01 — Mike generalized the archive-ledger principle to every sim exit:
+  death, traded, closed business — anything leaving the sim lands on an archive
+  ledger, and the ledger enforces ID non-reuse. First application outside
+  citizens: engine.96 business closures adopt `Business_Archive` mirroring the
+  `Citizen_Archive` pattern resolved here ([[../plans/2026-08-01-business-lifecycle-generator]]
+  Task 7). The POPID max-id hazard documented above applies identically to
+  BIZ-IDs.
 
 ---
 
@@ -339,3 +346,6 @@ plan requires a later, separate approval.
 
 - 2026-07-29 — Initial internal extraction, builder decisions, and `engine.90`
   rollout pointer recorded.
+- 2026-08-01 — Builder generalized the archive-ledger principle to all sim
+  exits (death, traded, closed business); recorded in Applications. engine.96
+  Task 7 is the first non-citizen application.

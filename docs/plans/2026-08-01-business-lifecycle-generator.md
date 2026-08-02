@@ -16,6 +16,7 @@ pointers:
   - "[[../research/2026-08-01-simulation-realism-audit]] — research basis; this plan is build-order item 6"
   - "[[2026-07-27-employment-living-system]] — engine.85, business BIRTH (mint) stays there; this plan owns decline/death"
   - "[[2026-07-31-citizen-memory-perception]] — engine.94 Track A owns the scandal-ceiling slice of 27.10; not duplicated here"
+  - "[[../research/2026-07-29-citizen-archive]] — the Citizen_Archive pattern this plan mirrors for businesses (builder-generalized to all sim exits 2026-08-01)"
   - "[[2026-07-31-platform-ceiling-resilience]] — engine.95 Task 4 (checkpoint/resume) is the platform prerequisite for heavy engine additions"
   - "[[SCHEMA]] — doc conventions"
   - "[[../index]] — registered same commit"
@@ -113,10 +114,10 @@ pointers:
   - `phase05-citizens/applyBusinessDynamics.js` — modify
   - `docs/SPREADSHEET.md` — modify (Business_Ledger row, same commit, if the schema changes)
 - **Steps:**
-  1. Resolve Open question 1 first (closure representation).
-  2. On threshold cross: set the closure representation, zero the headcount through the existing path (workers become unemployed — the v2.7 matcher already treats the freshly fired as waiting a cycle, a lived state), and push a closure event into `worldEvents` with business name, neighborhood, and sector so desks can report it (E95/E98/E101 symptom sample showed the newsroom has almost no closure material — this is the fix).
-  3. Closed businesses must exit the hiring pools (`runCareerEngine.js:163+` live pool build, `educationCareerEngine.js:626+` settle pool, `processAdvancementIntake.js:988+` mint pool) — filter at pool build, not at each consumer.
-- **Verify:** bench: threshold-crossed business closes, workers unemployed, event present, pool rebuild excludes it.
+  1. Closure representation RESOLVED 2026-08-01 (Mike): a closure ledger — `Business_Archive`, mirroring the adopted `Citizen_Archive` pattern ([[../research/2026-07-29-citizen-archive]]): full-row snapshot + exit metadata (`ArchiveReason=closed`, `ExitCycle`, `SourceEventId`), copy-verify-remove, BIZ-IDs permanent and never reissued. Mike generalized the principle: every sim exit (death, traded, closed business) lands on an archive ledger; the ledger enforces ID non-reuse. WARNING — the POPID max-id hazard documented in that research applies to BIZ-IDs too: `phase05-citizens/generationalWealthEngine.js:1499` mints from a lazy max-id read over the active sheet, which breaks the moment rows move out. BIZ-ID allocation must read active + archive (or a persisted high-water mark) BEFORE the first archive move ships; verify this in this task, not after.
+  2. In-cycle marking: on threshold cross, zero the headcount through the existing layoff path (workers become unemployed — the v2.7 matcher already treats the freshly fired as waiting a cycle, a lived state) and push a closure event into `worldEvents` with business name, neighborhood, and sector so desks can report it (E95/E98/E101 symptom sample showed the newsroom has almost no closure material — this is the fix). No Status column needed: a zero-headcount row fails every capacity check, so hiring pools skip it same-cycle with no schema change.
+  3. Post-commit move: at the verified post-commit finalization point (the citizen-archive movement protocol — never mid-cycle while consumers hold `ctx`), append the full `Business_Ledger` row + exit metadata to `Business_Archive`, read back and verify by BIZ-ID, then remove the active row. Document the new tab in `docs/SPREADSHEET.md` in the same commit.
+- **Verify:** bench: threshold-crossed business drains headcount via the existing path, closure event present in `worldEvents`, archive append → read-back → active-row remove protocol runs clean, pool rebuild excludes it, and the BIZ-ID allocator provably does not reissue the freed number.
 - **Status:** [ ] not started
 
 ### Task 8: Success-pressure coupling (27.10 remainder)
@@ -144,7 +145,7 @@ pointers:
 
 ## Open questions
 
-- [ ] **Closure representation** — `Business_Ledger` has no Status column (cols A–I: BIZ_ID, Name, Sector, Neighborhood, Employee_Count, Avg_Salary, Annual_Revenue, Growth_Rate, Key_Personnel). Options: (a) new Status column (schema change, SPREADSHEET.md same-commit), (b) Employee_Count=0 + Growth_Rate sentinel (no schema change, but sentinel values are the engine.82 disease), (c) move closed rows to a closure ledger (mirrors citizen-archive research 2026-07-29). Blocks Task 7. Mike decides.
+- [x] **Closure representation** — RESOLVED 2026-08-01 (Mike): a closure ledger. `Business_Archive` mirrors `Citizen_Archive`; full-row snapshot + exit metadata; BIZ-IDs never reissued. Mike's general principle: any sim exit (death, traded, closed business) lands on an archive ledger. Detail in Task 7.
 - [ ] **Phase placement** — 27.10 says "Phase 2 or Phase 3"; the writer pattern (`applyChaosDecay`) lives in Phase 5 beside the career engine it feeds. Task 2 step 2 produces the concrete invocation options; decide at Task 5. Blocks Task 5.
 - [ ] **Golden-era confirmation** — does C91+ live data confirm the sustained-prosperity pattern 27.10 assumes? Shared with engine.94 Open question 1; gated on the Task 4 approved pull. Tunes thresholds, does not block the build.
 
@@ -153,3 +154,4 @@ pointers:
 ## Changelog
 
 - 2026-08-01 — Initial draft (Kimi CLI). Builder approved the new row from [[../research/2026-08-01-simulation-realism-audit]] build-order item 6. Scoped to the genuinely undesigned gap: business decline/death + 27.10 non-scandal counter-pressure. Birth stays engine.85, scandal ceilings stay engine.94 Track A. All mechanics routed through existing write-back/ripple machinery — no parallel writers.
+- 2026-08-01 — Open question 1 RESOLVED (Mike): closure ledger. `Business_Archive` mirrors the adopted `Citizen_Archive` pattern; BIZ-IDs permanent. Mike generalized the archive-ledger principle to every sim exit (death, traded, closed business). Task 7 rewritten: in-cycle zero-headcount marking (no Status column needed), post-commit copy-verify-remove, BIZ-ID allocator hazard flagged (active-sheet max-id reads break once rows move out — same trap the citizen-archive research documented for POPIDs).

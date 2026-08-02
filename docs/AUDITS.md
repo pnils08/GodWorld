@@ -46,7 +46,8 @@ Standing maintenance jobs (`/disk-audit`, `/disk-rotate`, `/md-audit`, `/doc-aud
 | 2026-06-01 | `/doc-audit boot` | 14 docs surveyed (S251, ~39 sessions after S212 — oldest group, picked over tied infra/persona for boot-criticality + heaviest churn). Big finding: `BOOT_ARCHITECTURE.md` carried 3 epochs of drift — S221 (PERSISTENCE→CHARACTER rename, unregistered-window fallback line still said "research-build" contradicting the correct Mags-only statement lower in the same doc, Persona Levels table on the dead Light+PERSISTENCE tier) + S248 (Decision 2 still described the pre-ADR-0009 `limit 80`/231-line boot read of SESSION_CONTEXT). `SCHEMA.md` folder map missing `docs/canon/` (S174) + `docs/adr/` (S187). Mike's-lane flag: MEMORY.md 25.4KB over 24.4KB ceiling (~419B) — not touched, identity rule. 8 healthy (SESSION_CONTEXT 169 lines, rules/=6 matches CLAUDE.md, CHARACTER identity-only + family POPIDs, CANON_RULES/INSTITUTIONS current, identity.md, index.md S251 entries registered, POST_MORTEM frozen). | fixes applied: 3 docs + 1 skill (BOOT_ARCHITECTURE.md full drift correction + ADR-0009 sources/pointers + stamp; SCHEMA.md §7 tree + placement rules + changelog for canon/ + adr/; doc-audit/SKILL.md SESSION_CONTEXT criterion → span model so next audit doesn't false-flag) + 1 flag (MEMORY.md over-limit → Mike) | S251 boot doc-audit commit |
 
 | 2026-07-24 | orientation audit (Codex/Kimi, manual) | AGENTS.md gap analysis + doc-truing sweep: CONTEXT.md cycle anchor C92→C101 stale, ledger col count wrong in CONTEXT/STACK (authority: 52 A–AZ), STACK skill/agent counts 47/27→52/34, MODEL_HIERARCHY stale S274 prose + dup `## 4.` heading, index.md changelog order + `docs/reviews/` orphan, 2 stale script headers | fixes applied: 6 files (AGENTS.md +2 sections, CONTEXT.md, STACK.md, MODEL_HIERARCHY.md, index.md, AUDITS.md row) + 2 script headers. Follow-up same day (Mike-direct): MODEL_HIERARCHY interim order (Claude lead / Codex+Kimi backup / Antigravity grunt, TBD); crontab comment cleanup installed (2 comment lines only, 14 schedules byte-identical, backup at output/codex/crontab-backup-2026-07-24.txt); dead 0-byte logs removed (supermemory-ingest.log, daily-heartbeat.log — verified unreferenced; health-check.log kept, live cron target) | `output/codex/audit-2026-07-24-agents-gap.md` |
-| 2026-08-01 | `/md-audit` (governance.42 validation) | 616 files across docs/control-plane/project-memory; 26 orphan candidates (11 control-plane, 15 memory), 8 stale-but-linked (all memory), 400 fresh | report only; detector widened to all 3 surfaces with safe per-surface guidance; no files moved; cron held on the active manual-only contract conflict | `output/md_audit_2026-08-01.md` |
+| 2026-08-01 | `/md-audit` (governance.42 validation) | 616 files across docs/control-plane/project-memory; 26 orphan candidates (11 control-plane, 15 memory), 8 stale-but-linked (all memory), 400 fresh | report only; detector widened to all 3 surfaces with safe per-surface guidance; no files moved; monthly cron installed for 04:30 UTC on day 2 after aligning the active contract | `output/md_audit_2026-08-01.md` |
+| 2026-08-02 | `mdStalenessDetector` (scheduled-payload verification) | 618 files across docs/control-plane/project-memory; 16 orphan candidates, 8 stale-but-linked, 149 stable-by-reference, 445 fresh | report only; exact cron payload passed with full Git history and no warnings; no files moved or rewritten | `output/md_audit_2026-08-02.md` |
 
 ---
 
@@ -56,17 +57,17 @@ Standing maintenance jobs (`/disk-audit`, `/disk-rotate`, `/md-audit`, `/doc-aud
 |---|---|---|
 | `/disk-audit` | On demand | Droplet >85% disk OR after large `output/` accumulation |
 | `/disk-rotate` | Per-target on demand | Always after `/disk-audit` flags a recoverable bucket; never schedule |
-| `/md-audit` | Monthly-ish | Or after large doc churn (post-archive sweep, post-plan retirement wave) |
+| `mdStalenessDetector` (`/md-audit`, `$md-audit`) | Monthly detector + agent runs on demand | Droplet cron at 04:30 UTC on day 2; rerun after large doc churn |
 | `/doc-audit` | Per-group on demand | Quarterly per group; or after architectural shifts touch a group's surface |
 
-No skill in this registry runs on a schedule. All are manually invoked. Each gets verification gates before destructive action.
+Agent skills remain manually invoked. The deterministic `mdStalenessDetector` is the sole scheduled exception: droplet cron runs it monthly in report-only mode without invoking an agent or acting on findings. Every audit keeps verification gates before destructive action.
 
 ---
 
 ## Pattern — every audit skill MUST
 
 1. **Produce a dated artifact** — either an MD report (`output/<skill>_<DATE>.md`) or a JSON manifest. Never log results only to stdout.
-2. **Append a row to this file** — at the end of the skill's run, before declaring done. Mike-readable summary in 1 line.
+2. **Append a row to this file** — at the end of a manually accepted run, before declaring done. Mike-readable summary in 1 line. Scheduled detector runs are registered when human-reviewed; cron must not rewrite repository docs.
 3. **Never auto-delete** — destructive actions in `/disk-rotate` etc. require explicit `--apply --target X` per-target invocation.
 
 ---
@@ -74,4 +75,4 @@ No skill in this registry runs on a schedule. All are manually invoked. Each get
 ## Changelog
 
 - 2026-05-06 — Initial registry (S203, research-build). Pattern adopted to give standing maintenance jobs a home outside ROLLOUT_PLAN (which is for in-progress / open work). Bootstrapped with the `/disk-audit` first-run record + the manual `/disk-rotate` cleanup of S203.
-- 2026-08-01 — Recorded the governance.42 widened `/md-audit` validation run; surfaced the rollout-vs-registry scheduling conflict without changing live cron.
+- 2026-08-01 — Recorded the governance.42 widened `/md-audit` validation; installed the report-only monthly detector cron after defining it as the sole scheduled exception; added the explicit-only Codex `$md-audit` interface.

@@ -2,7 +2,7 @@
 
 **This file is canonical for open/closed work** (S207). Pointer-only: one line per job, detail lives in the pointer doc — never here (S286 hard rule, Mike-direct).
 
-**Status:** ACTIVE (building) | **Last Updated:** 2026-08-01 — governance.42 detector widened and validated; cron/skill-contract alignment remains needs-info.
+**Status:** ACTIVE (building) | **Last Updated:** 2026-08-01 — governance.42 complete: three-surface detector, Codex skill, and monthly report-only cron.
 **Filing protocol (S212):** semantic groups + pointer-only entries — see [[rollout-rules]] §3–§5 (taxonomy, add, close). Full design: [[../adr/0005-rollout-plan-structure]].
 **North star:** `docs/ARCHITECTURE_VISION.md` — Jarvis + persistent sessions. Everything we build points there.
 **Completed phase details:** [[engine/ROLLOUT_ARCHIVE]] — read on demand, not at boot.
@@ -163,7 +163,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | governance.33 | C96 gap-log triage | in-progress | research-build / engine-sheet | [[../plans/2026-06-07-c96-gap-log-triage]] — detail in pointer (relocated 2026-07-02) |
 | governance.35 | REDUCED S260 by governance.36 §loop-tightening to the PIN-self-derive remnant | ready | engine-sheet (design: research-build DONE) | [[../plans/2026-06-14-session-context-mechanization]] — detail in pointer (relocated 2026-07-02) |
 | governance.36 | Boot doc architecture restructure. S340 landed the ungated all-lane boot emit + external lanes. OPEN: item 2 universal-discipline merge to the boot emitter. | in-progress | research-build | [[../plans/2026-06-14-boot-doc-architecture-restructure]] + [[../plans/2026-05-09-boot-load-audit]] — detail in pointer (relocated 2026-07-02) |
-| governance.42 | MD sweep widened to docs, control plane, and project memory; monthly cron remains unresolved against AUDITS.md's active manual-only contract and the protected /md-audit skill | needs-info | research-build | scripts/mdStalenessDetector.js + [[../AUDITS]] |
+| governance.42 | Monthly report-only MD sweep widened to docs, control plane, and project memory; Codex skill installed and droplet cron set for 04:30 UTC on day 2 | done-pending-archive | research-build | scripts/mdStalenessDetector.js + [[../AUDITS]] |
 
 ---
 

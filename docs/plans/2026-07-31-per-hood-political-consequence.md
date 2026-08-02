@@ -43,25 +43,25 @@ pointers:
 - **Files:** `phase02-world-state/applyInitiativeImplementationEffects.js` — read
 - **Steps:** Read lines 320–360. Record the exact object shape written to `S.initiativeNeighborhoodEffects` (keys, hood addressing, strength/decay fields) in this plan's Build notes.
 - **Verify:** shape notes present in Build notes below
-- **Status:** [ ] not started
+- **Status:** [x] complete 2026-08-02 (kimi)
 
 ### Task 2: Extract approval effect-bus shape
 - **Files:** `phase05-citizens/updateCivicApprovalRatings.js` — read
 - **Steps:** Read lines 300–345 (writer at 305–321, Ripple rows at 325–337). Record the `S.approvalNeighborhoodEffects` shape and how district → hoods mapping is done (it already targets district hoods for the ledger rows — reuse that mapping).
 - **Verify:** shape notes present in Build notes below
-- **Status:** [ ] not started
+- **Status:** [x] complete 2026-08-02 (kimi)
 
 ### Task 3: Reconfirm zero readers
 - **Files:** repo-wide — read
 - **Steps:** `rg -n 'initiativeNeighborhoodEffects|approvalNeighborhoodEffects' phase* utilities lib scripts` — confirm the only hits are the two writers + comments.
 - **Verify:** grep output attached to Build notes
-- **Status:** [ ] not started
+- **Status:** [x] complete 2026-08-02 (kimi)
 
 ### Task 4: Design the fold (research-build)
 - **Files:** `phase02-world-state/applyCityDynamics.js` — read; this plan — modify (Build notes)
 - **Steps:** Decide consumer placement (Phase 2, near `applySentimentBleed_` at :1055-1091), delta math (decayed strength → hood sentiment/pressure fields, mirroring the city-scalar application in `applyActiveInitiativeRipples_` at `phase05-citizens/civicInitiativeEngine.js:1720-1748`), clamps, and ordering vs sentiment bleed. Resolve Open question 1 in the same pass.
 - **Verify:** design paragraph in Build notes; Mike sign-off on delta math before build
-- **Status:** [ ] not started
+- **Status:** [~] design written 2026-08-02 (kimi) — awaiting Mike sign-off on delta math
 
 ### Task 5: Implement `applyNeighborhoodEffectsFold_` (engine-sheet)
 - **Files:** `phase02-world-state/applyCityDynamics.js` (or sibling per Task 4) — modify
@@ -91,13 +91,56 @@ pointers:
 
 ## Build notes
 
-Filled as tasks complete. (Shapes from Tasks 1–2, grep evidence from Task 3, fold design from Task 4, Track C one-pager from Task 8.)
+### Task 1 — `S.initiativeNeighborhoodEffects` shape (writer `applyInitiativeImplementationEffects.js:237-252`, merge `:322-336`)
+
+Per-hood object, keyed by hood display name parsed from the tracker's AffectedNeighborhoods column:
+
+```js
+{ traffic: 0, retail: 0, nightlife: 0, publicSpaces: 0, communityEngagement: 0, sentiment: 0 }
+```
+
+Values are `DOMAIN_EFFECTS[domain][key] * |intensity| * sign(intensity)` accumulated per hood. Merge (`:322-336`) is **additive across cycles with no reset** — today the bus grows unboundedly because nothing reads it. No strength/decay fields; values are per-cycle deltas.
+
+### Task 2 — `S.approvalNeighborhoodEffects` shape (writer `updateCivicApprovalRatings.js:305-321`)
+
+Per-hood object keyed by hood display name:
+
+```js
+{ sentiment: 0, communityEngagement: 0 }
+```
+
+`sentiment += approvalDelta * 0.003`; `communityEngagement += sentiment * 0.5`. Also additive with no reset. District → hoods mapping: local `DISTRICT_HOODS` map at `updateCivicApprovalRatings.js:112-122` (9 districts, 21 hoods — matches `lib/canonNeighborhoods.js`). Fold reuses hood keys directly, no mapping needed.
+
+### Task 3 — zero readers reconfirmed (2026-08-02)
+
+`rg 'initiativeNeighborhoodEffects|approvalNeighborhoodEffects'` over all `*.js`: hits only in the two writers plus the `:345` "still has no per-hood consumer" comment. Zero readers.
+
+### Task 4 — fold design (kimi, 2026-08-02 — delta math pending Mike sign-off)
+
+**Placement:** inside the per-neighborhood loop of `applyCityDynamics_` (`phase02-world-state/applyCityDynamics.js:1096+`), applied to `nm` **after the momentum blend (`:1170-1180`), immediately before the clamp block (`:1183-1189`)**. This is the last-write position: fresh fold deltas land at full strength (momentum would damp them to 70%) and the existing `clampMult`/`clampSent` calls catch overflow — no new clamp code.
+
+**Ordering (Open question 1 — resolved):** `applySentimentBleed_` (`:1091`) runs at cluster level before hood derivation; the fold runs at hood level after it. The fold is structurally post-bleed, so targeted hoods receive the full delta in-cycle and bleed never dilutes a same-cycle initiative effect. Decay happens via the existing momentum blend (30% carry-forward per cycle) — no decay fields needed on the bus.
+
+**Delta math:** additive, per field, only when the bus entry's field is a finite number:
+
+- initiative bus: `nm.traffic/retail/nightlife/publicSpaces/communityEngagement/sentiment += e.<field>` — values are ~±0.01–0.05 (DOMAIN_EFFECTS × intensity), i.e. ±1–5% on the ~1.0 multipliers and ±0.01–0.05 sentiment, consistent with existing micro adjustments (×0.90–1.05, ±0.02–0.08).
+- approval bus: `nm.sentiment += a.sentiment; nm.communityEngagement += a.communityEngagement` — ±0.003 per approval point, intentionally micro.
+
+**Consume-and-clear:** after the neighborhood loop, reset both buses (`S.initiativeNeighborhoodEffects = {}`, `S.approvalNeighborhoodEffects = {}`). Writers re-merge fresh each cycle; this makes the bus a per-cycle delta channel, satisfies the sandbox no-double-apply criterion, and stops the unbounded accumulation.
+
+**Ripple rows from the fold:** per-initiative cause attribution already exists at the write sites (engine.45 T3e `initiative-implementation` rows with hood `targetIds`; T1 `approval-shift` rows) — the fold must NOT re-ledger those. The fold writes one consumption row per bus per cycle: `causeType: 'neighborhood-fold'`, `effectType: 'fold-applied/initiative-implementation'` or `'fold-applied/approval-shift'`, `targetScope: 'neighborhood'`, `targetIds:` hoods receiving nonzero deltas, `sourceEngine: 'applyCityDynamics.foldNeighborhoodEffects'`.
+
+**`getRippleEffectsForNeighborhood_` (Task 7) — recommend DELETE.** It queries `S.activeRipples` (the city-scalar ripple path), not the two per-hood buses; its return shape (`sentiment/sick/unemployment/retail/traffic/community`) matches neither bus; wiring it into the fold would double-count initiative effects already applied as city scalars at `civicInitiativeEngine.js:1720-1748`. Deletion test: complexity vanishes, zero callers. Deletion touches `phase*/` — needs Mike's OK per AGENTS.md scope.
+
+### Task 8 — Track C one-pager
+
+Not started.
 
 ---
 
 ## Open questions
 
-- [ ] Fold ordering vs `applySentimentBleed_` — before or after? Bleed consumes hood sentiment, so the fold's sentiment deltas change bleed inputs. — blocks Task 4
+- [x] Fold ordering vs `applySentimentBleed_` — RESOLVED 2026-08-02 (kimi): fold is structurally post-bleed (bleed is cluster-level at :1091, fold is hood-level after derivation); decay rides the existing 30% momentum carry. See Build notes §Task 4.
 - [ ] Wire vs delete for `getRippleEffectsForNeighborhood_` — deletion is a code removal in `phase*/`; confirm with Mike per AGENTS.md scope if delete is chosen. — blocks Task 7
 
 ---
@@ -106,3 +149,4 @@ Filled as tasks complete. (Shapes from Tasks 1–2, grep evidence from Task 3, f
 
 - 2026-07-31 — Initial draft (Kimi CLI, builder-directed external-audit remediation batch). Audit gaps #1+#2 combined; audit's headline claims verified stale/refuted (engine.45 T1–T3b shipped before the audit's pinned commit), surviving kernel scoped into Tracks A–C.
 - 2026-08-01 (Kimi) — Audit pointer added: build-order step 3 of [[../research/2026-08-01-simulation-realism-audit]]; the two zero-reader buses re-verified there at file:line.
+- 2026-08-02 (kimi) — Tasks 1–4 complete (research-build half): both bus shapes extracted, zero readers reconfirmed, fold design + ordering resolution in Build notes. Delta math awaiting Mike sign-off; Task 7 recommendation is DELETE (needs Mike OK, touches `phase*/`). Open: Task 8 Track C one-pager (kimi), Tasks 5–7 engine-sheet after sign-off.

@@ -26,7 +26,7 @@ pointers:
 
 **Goal:** Businesses in `Business_Ledger` live on a per-cycle economic trajectory — `Growth_Rate` and `Annual_Revenue` drift with city state, sustained decline produces layoffs through the existing career-engine path, and terminal decline produces a closure the newsroom can report — so success has consequences and no economic figure stays mint-static.
 
-**Architecture:** One new per-cycle evaluator, `phase05-citizens/applyBusinessDynamics.js`, modeled on `applyChaosDecay.js` (the only existing per-cycle `Business_Ledger` economic writer: reads the sheet directly, queues cell intents via `queueCellIntent_`, fails loud on missing columns). It drifts `Growth_Rate`/`Annual_Revenue` from city state plus tunable thresholds (`utilities/businessDynamicsConfig.js`), routes decline into the *existing* layoff/rehire machinery (`runCareerEngine` businessDeltas → Phase-6 `economicRippleEngine` narration), and emits closure events into `worldEvents` for the desks. Birth is explicitly out of scope: engine.85 Task 8 already mints businesses economically alive. Scandal ceilings are explicitly out of scope: engine.94 Track A owns that slice of BACKLOG 27.10. This plan owns the remaining 27.10 items — business death, outside-investment disruption, success-pressure coupling — the audit's one genuinely undesigned gap.
+**Architecture:** One new per-cycle evaluator, `phase05-citizens/applyBusinessDynamics.js`, modeled on `applyChaosDecay.js` (the only existing per-cycle `Business_Ledger` economic writer: reads the sheet directly, queues cell intents via `queueCellIntent_`, fails loud on missing columns). It drifts `Growth_Rate`/`Annual_Revenue` from city state plus tunable thresholds held as **`World_Config` key→value rows** (Mike ruling 2026-08-01: tunables live in the sheet, not in code — `loadConfig_` at `phase01-config/godWorldEngine2.js:591-608` already loads every World_Config row into `ctx.config` with numeric parsing, so tuning is a cell edit, never a deploy), routes decline into the *existing* layoff/rehire machinery (`runCareerEngine` businessDeltas → Phase-6 `economicRippleEngine` narration), and emits closure events into `worldEvents` for the desks. **Everything-is-earned doctrine (Mike, 2026-08-01):** no static/free numbers anywhere in this design — every drift modifier derives from live sim state (retail vitality, approval trends, coverage, competitive density). Static fallbacks of the 0.91-employment / uniform-8%-growth class are the disease this plan kills; it must not introduce new ones. Birth is explicitly out of scope: engine.85 Task 8 already mints businesses economically alive. Scandal ceilings are explicitly out of scope: engine.94 Track A owns that slice of BACKLOG 27.10. This plan owns the remaining 27.10 items — business death, outside-investment disruption, success-pressure coupling — the audit's one genuinely undesigned gap.
 
 **Terminal:** Design + config research-build → engine code engine-sheet.
 
@@ -49,7 +49,7 @@ pointers:
   - `docs/research/2026-07-27-employment-as-a-living-system.md` — read (the layoff/businessDeltas design)
 - **Steps:**
   1. Determine exactly what causes `runCareerEngine` to emit a layoff today. Specifically: does a negative `Growth_Rate` on a `Business_Ledger` row already produce layoffs via the openings formula (:1081-1082), or is an explicit decline signal required?
-  2. Record the answer as a comment block at the head of the new config file (Task 3) — Task 6's shape depends on it.
+  2. Record the answer in this plan's Build notes (Task 3 step 5 consumes it) — Task 6's shape depends on it.
 - **Verify:** the answer is written down with a `runCareerEngine.js` line reference; if negative growth already lays off, Task 6 shrinks to "write the drifted value and let the existing engine fire."
 - **Status:** [ ] not started
 
@@ -64,15 +64,18 @@ pointers:
 - **Verify:** invocation site identified by file:line.
 - **Status:** [ ] not started
 
-### Task 3: Thresholds config (design — research-build, Mike review)
+### Task 3: Thresholds as World_Config keys (design — research-build, Mike review)
 
 - **Files:**
-  - `utilities/businessDynamicsConfig.js` — create
+  - this plan — the defaults table lives here until Mike signs off
+  - `World_Config` sheet — keys appended at implementation time (engine-sheet), NOT a code config file (Mike ruling 2026-08-01: "editing code for this is too much work when a world config can have every variable")
 - **Steps:**
-  1. Define tunables per BACKLOG 27.10: drift bounds per sector class (reuse `economicSeedForSector()`'s 9 keyword classes in `scripts/ingestPublishedEntities.js:812+`), decline-streak length before layoffs, closure threshold (e.g. N consecutive cycles of negative drift AND revenue below floor), success-pressure modifiers (sustained high growth/prosperity attracts disruption: incumbent drift penalty when neighborhood prosperity indicators stay high for 3+ cycles).
-  2. Canon constraint (CLAUDE.md prosperity-era doctrine): modifiers are *consequences of success*, never imported recession cynicism. State this in the file header.
-  3. Include the Task 1 layoff-contract finding as a header comment.
-- **Verify:** `node --check utilities/businessDynamicsConfig.js` clean; Mike signs off on threshold defaults before Task 5.
+  1. Define tunables per BACKLOG 27.10 as `World_Config` key→value rows: drift bounds per sector class (reuse `economicSeedForSector()`'s 9 keyword classes in `scripts/ingestPublishedEntities.js:812+`), decline-streak length before layoffs, closure threshold (N consecutive cycles of negative drift AND revenue below floor), success-pressure window (prosperity sustained 3+ cycles), modifier magnitudes.
+  2. Read path already exists — do not build one: `loadConfig_` (`phase01-config/godWorldEngine2.js:591-608`) loads every World_Config row into `ctx.config` with numeric auto-parsing each cycle; the dynamics pass reads `ctx.config.<key>`. Tuning = editing a sheet cell. Missing-key behavior must fail loud at bench, never silently default (a silent default would be the 0.91-fallback disease in a new home).
+  3. Everything-is-earned doctrine (Mike, 2026-08-01): defaults are *starting calibration only*; every modifier must derive from live sim state in operation (retail vitality, approval trends, coverage, competitive density), never apply as a bare constant.
+  4. Canon constraint (CLAUDE.md prosperity-era doctrine): modifiers are *consequences of success*, never imported recession cynicism.
+  5. Include the Task 1 layoff-contract finding in this plan's Build notes.
+- **Verify:** key/defaults table in this plan reviewed by Mike before Task 5; at implementation, one bench cycle shows `ctx.config` carrying the new keys.
 - **Status:** [ ] not started
 
 ### Task 4: Live-state calibration pull (approved Sheets read)
@@ -127,7 +130,7 @@ pointers:
 
 - **Files:**
   - `phase05-citizens/applyBusinessDynamics.js` — modify
-  - `utilities/businessDynamicsConfig.js` — modify (modifier values)
+  - `World_Config` sheet — modifier values tuned by cell edit, no code change (Task 3)
 - **Steps:**
   1. Wire the Task 3 success-pressure modifiers into the drift computation: sustained neighborhood prosperity (3+ cycles) applies competitive-pressure drift penalty to incumbent high-growth businesses; outside-investment disruption probability rises with sustained city-wide growth.
   2. Thresholds stay probabilistic and tunable per 27.10 — "correction isn't guaranteed but becomes increasingly likely."
@@ -159,3 +162,4 @@ pointers:
 - 2026-08-01 — Initial draft (Kimi CLI). Builder approved the new row from [[../research/2026-08-01-simulation-realism-audit]] build-order item 6. Scoped to the genuinely undesigned gap: business decline/death + 27.10 non-scandal counter-pressure. Birth stays engine.85, scandal ceilings stay engine.94 Track A. All mechanics routed through existing write-back/ripple machinery — no parallel writers.
 - 2026-08-01 — Open question 1 RESOLVED (Mike): closure ledger. `Business_Archive` mirrors the adopted `Citizen_Archive` pattern; BIZ-IDs permanent. Mike generalized the archive-ledger principle to every sim exit (death, traded, closed business). Task 7 rewritten: in-cycle zero-headcount marking (no Status column needed), post-commit copy-verify-remove, BIZ-ID allocator hazard flagged (active-sheet max-id reads break once rows move out — same trap the citizen-archive research documented for POPIDs).
 - 2026-08-01 — Task 4 DONE (builder-approved pull via derived cards + on-disk summaries; dashboard API is session-gated). Live data confirms the audit's core claims: Growth_Rate uniform 8% across all sampled businesses (static, matches "no post-mint writer"), golden-era approval pattern confirmed C92–C99 for the governing faction. Calibration notes in Task 4 status: drift bounds must assume all legacy rows start at 8%; retail vitality is a livelier per-hood prosperity input than sentiment.
+- 2026-08-01 — Mike rulings folded in: (1) tunables live in `World_Config` key→value rows, not a code config file — `loadConfig_` already loads them into `ctx.config`, tuning is a cell edit; Task 3 rewritten, `utilities/businessDynamicsConfig.js` dropped from the design. (2) Everything-is-earned doctrine: no static/free numbers — every drift modifier derives from live sim state; missing keys fail loud, never silently default (the 0.91-fallback disease must not reappear in a new home).

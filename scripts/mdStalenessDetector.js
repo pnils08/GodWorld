@@ -258,31 +258,43 @@ function escapeRe(s) {
   return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-// Match canonical wikilinks, literal paths, relative Markdown links, and exact
-// parent-directory references. The relative-link branch is load-bearing for
-// the external project-memory index (`MEMORY.md` → `feedback_*.md`).
+function wikilinkRegex(forms) {
+  const alternatives = Array.from(new Set(forms.filter(Boolean))).map(escapeRe);
+  return new RegExp(
+    `\\[\\[(?:${alternatives.join('|')})(?:#[^\\]|]+)?(?:\\|[^\\]]*)?\\]\\]`,
+  );
+}
+
+// Match canonical/relative wikilinks, literal paths, relative Markdown links,
+// and exact parent-directory references. Relative links are load-bearing for
+// the external project-memory graph (`[[feedback_rule]]` and
+// `[Rule](feedback_rule.md)`).
 function inboundReferrers(target, contents, dirRefs) {
   const targetRel = target.path;
   const wikilinkForm = targetRel.startsWith('docs/')
     ? targetRel.replace(/^docs\//, '').replace(/\.md$/, '')
     : targetRel.replace(/\.md$/, '');
   const directForms = [targetRel, target.fullPath].filter(Boolean);
-  const directRe = new RegExp(
-    `\\[\\[${escapeRe(wikilinkForm)}(\\||\\]\\])|${directForms.map(escapeRe).join('|')}`,
-    'g',
-  );
   const parentDir = path.posix.dirname(targetRel) + '/';
   const checkDirRef = !['docs/', '.claude/', 'memory/'].includes(parentDir);
   const referrers = new Set();
   for (const [src, content] of contents) {
     if (src === targetRel) continue;
-    directRe.lastIndex = 0;
-    if (directRe.test(content)) {
+    const relativeTarget = path.posix.relative(path.posix.dirname(src), targetRel);
+    const relativeWithoutExtension = relativeTarget.replace(/\.md$/, '');
+    const wikiForms = [
+      wikilinkForm,
+      relativeTarget,
+      relativeWithoutExtension,
+      relativeTarget.startsWith('.') ? null : `./${relativeTarget}`,
+      relativeWithoutExtension.startsWith('.') ? null : `./${relativeWithoutExtension}`,
+    ];
+    const hasDirectPath = directForms.some(form => content.includes(form));
+    if (hasDirectPath || wikilinkRegex(wikiForms).test(content)) {
       referrers.add(src);
       continue;
     }
 
-    const relativeTarget = path.posix.relative(path.posix.dirname(src), targetRel);
     const relativeRe = new RegExp(
       `\\]\\((?:\\./)?${escapeRe(relativeTarget)}(?:#[^)]*)?\\)`,
     );
@@ -297,10 +309,28 @@ function inboundReferrers(target, contents, dirRefs) {
   return Array.from(referrers);
 }
 
+function conventionStableReason(doc) {
+  if (doc.surface !== 'control-plane') return null;
+  if (/^\.claude\/hookify\.[^/]+\.local\.md$/.test(doc.path)) {
+    return 'Hookify auto-discovery (`.claude/hookify.*.local.md`)';
+  }
+  if (/^\.claude\/skills\/[^/]+\/SKILL\.md$/.test(doc.path)) {
+    return 'Claude skill entrypoint auto-discovery';
+  }
+  if (/^\.claude\/agents\/[^/]+\/(?:IDENTITY|LENS|RULES|SKILL)\.md$/.test(doc.path)) {
+    return 'Claude agent component auto-discovery';
+  }
+  return null;
+}
+
 function classify(doc) {
   const fm = doc.frontmatter || {};
   if (fm.stable === true) {
     return { bucket: 'reference-stable', rationale: 'frontmatter `stable: true`' };
+  }
+  const conventionReason = conventionStableReason(doc);
+  if (conventionReason) {
+    return { bucket: 'reference-stable', rationale: conventionReason };
   }
   if (!doc.is_stale) {
     return { bucket: 'fresh', rationale: `${doc.age_days}d old (< ${STALE_DAYS}d)` };
@@ -485,13 +515,13 @@ function main() {
 
   lines.push(`## Reference-stable (${buckets['reference-stable'].length})`);
   lines.push('');
-  lines.push('`stable: true` in frontmatter — marked durable. Skipped from staleness scoring.');
+  lines.push('Marked durable by `stable: true` frontmatter or a recognized control-plane discovery contract. Skipped from staleness scoring.');
   lines.push('');
   if (buckets['reference-stable'].length === 0) {
     lines.push('_None._');
   } else {
     for (const d of buckets['reference-stable'].sort((a, b) => a.path.localeCompare(b.path))) {
-      lines.push(`- \`${d.path}\``);
+      lines.push(`- \`${d.path}\` — ${d.rationale}`);
     }
   }
   lines.push('');
@@ -519,6 +549,7 @@ module.exports = {
   parseGitHistoryMtimes,
   extractDirectoryRefs,
   inboundReferrers,
+  conventionStableReason,
   classify,
   reviewAction,
   isRecent,

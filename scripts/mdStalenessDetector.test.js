@@ -12,6 +12,7 @@ const {
   parseGitHistoryMtimes,
   extractDirectoryRefs,
   inboundReferrers,
+  conventionStableReason,
   classify,
   reviewAction,
 } = require('./mdStalenessDetector');
@@ -92,6 +93,19 @@ function main() {
         .includes('memory/MEMORY.md'),
       'resolves relative links inside the external memory surface',
     );
+    const memoryWikiContents = new Map([
+      ['memory/peer.md', 'See [[feedback_rule]] and [[feedback_rule#Detail|Rule]].\n'],
+      ['memory/feedback_rule.md', '# Rule\n'],
+    ]);
+    const memoryWikiDirRefs = new Map([
+      ['memory/peer.md', new Set()],
+      ['memory/feedback_rule.md', new Set()],
+    ]);
+    check(
+      inboundReferrers(memoryTarget, memoryWikiContents, memoryWikiDirRefs)
+        .includes('memory/peer.md'),
+      'resolves relative wikilinks inside the external memory surface',
+    );
 
     const claudeTarget = audited.find(doc => doc.path === '.claude/skills/demo/SKILL.md');
     const claudeContents = new Map([
@@ -116,6 +130,42 @@ function main() {
       age_days: 120,
     });
     check(orphan.bucket === 'orphan-candidate', 'preserves five-bucket classification');
+
+    check(
+      conventionStableReason({
+        surface: 'control-plane',
+        path: '.claude/hookify.guard.local.md',
+      }) !== null,
+      'recognizes Hookify rules as convention-discovered',
+    );
+    check(
+      conventionStableReason(claudeTarget) !== null,
+      'recognizes Claude skill entrypoints as convention-discovered',
+    );
+    check(
+      classify({
+        surface: 'control-plane',
+        path: '.claude/agents/demo/IDENTITY.md',
+        frontmatter: {},
+        is_stale: true,
+        inbound: [],
+        inbound_active: [],
+        age_days: 120,
+      }).bucket === 'reference-stable',
+      'classifies Claude agent components as reference-stable',
+    );
+    check(
+      classify({
+        surface: 'control-plane',
+        path: '.claude/notes/unused.md',
+        frontmatter: {},
+        is_stale: true,
+        inbound: [],
+        inbound_active: [],
+        age_days: 120,
+      }).bucket === 'orphan-candidate',
+      'does not exempt ordinary unlinked control-plane notes',
+    );
 
     check(
       !reviewAction({ surface: 'control-plane' }).includes('git mv'),

@@ -1,7 +1,7 @@
 ---
 title: Audit Run Registry
 created: 2026-05-06
-updated: 2026-08-01
+updated: 2026-08-02
 type: reference
 tags: [architecture, infrastructure, active]
 sources:
@@ -47,7 +47,7 @@ Standing maintenance jobs (`/disk-audit`, `/disk-rotate`, `/md-audit`, `/doc-aud
 
 | 2026-07-24 | orientation audit (Codex/Kimi, manual) | AGENTS.md gap analysis + doc-truing sweep: CONTEXT.md cycle anchor C92→C101 stale, ledger col count wrong in CONTEXT/STACK (authority: 52 A–AZ), STACK skill/agent counts 47/27→52/34, MODEL_HIERARCHY stale S274 prose + dup `## 4.` heading, index.md changelog order + `docs/reviews/` orphan, 2 stale script headers | fixes applied: 6 files (AGENTS.md +2 sections, CONTEXT.md, STACK.md, MODEL_HIERARCHY.md, index.md, AUDITS.md row) + 2 script headers. Follow-up same day (Mike-direct): MODEL_HIERARCHY interim order (Claude lead / Codex+Kimi backup / Antigravity grunt, TBD); crontab comment cleanup installed (2 comment lines only, 14 schedules byte-identical, backup at output/codex/crontab-backup-2026-07-24.txt); dead 0-byte logs removed (supermemory-ingest.log, daily-heartbeat.log — verified unreferenced; health-check.log kept, live cron target) | `output/codex/audit-2026-07-24-agents-gap.md` |
 | 2026-08-01 | `/md-audit` (governance.42 validation) | 616 files across docs/control-plane/project-memory; 26 orphan candidates (11 control-plane, 15 memory), 8 stale-but-linked (all memory), 400 fresh | report only; detector widened to all 3 surfaces with safe per-surface guidance; no files moved; monthly cron installed for 04:30 UTC on day 2 after aligning the active contract | `output/md_audit_2026-08-01.md` |
-| 2026-08-02 | `mdStalenessDetector` (scheduled-payload verification) | 618 files across docs/control-plane/project-memory; 16 orphan candidates, 8 stale-but-linked, 149 stable-by-reference, 445 fresh | report only; exact cron payload passed with full Git history and no warnings; no files moved or rewritten | `output/md_audit_2026-08-02.md` |
+| 2026-08-02 | `$md-audit` (governance.42 orphan review) | 620 pre-retirement files: 16 apparent orphans reduced to 4 verified candidates after matcher correction; 616 final files with 0 orphans, 11 stale-linked, 95 stable-by-reference, 173 reference-stable, 337 fresh | fixed relative wikilinks + convention discovery; moved 4 superseded memory files to a recoverable holding folder with matching SHA-256 hashes | `output/md_audit_2026-08-02.md` + `output/codex/md-audit-retired-2026-08-02/manifest.json` |
 
 ---
 
@@ -76,3 +76,4 @@ Agent skills remain manually invoked. The deterministic `mdStalenessDetector` is
 
 - 2026-05-06 — Initial registry (S203, research-build). Pattern adopted to give standing maintenance jobs a home outside ROLLOUT_PLAN (which is for in-progress / open work). Bootstrapped with the `/disk-audit` first-run record + the manual `/disk-rotate` cleanup of S203.
 - 2026-08-01 — Recorded the governance.42 widened `/md-audit` validation; installed the report-only monthly detector cron after defining it as the sole scheduled exception; added the explicit-only Codex `$md-audit` interface.
+- 2026-08-02 — Corrected relative-wikilink and convention-discovery false positives; reviewed and recoverably retired the four remaining memory candidates; final orphan queue is empty.

@@ -14,6 +14,7 @@ pointers:
   - "[[../plans/2026-08-01-business-lifecycle-generator]] — engine.96, first design built under this ADR (Task 3)"
   - "[[../research/2026-08-01-simulation-realism-audit]] — the audit that surfaced the free-numbers disease"
   - "[[../SPREADSHEET]] — World_Config tab contract; row-shape changes land same-commit"
+  - "[[0016-data-ledgers-are-the-truth-source]] — sibling doctrine: this ADR governs tunable VALUES, that one governs canonical ENTITY SETS (data ledgers)"
   - "[[../index]] — registered same commit"
 ---
 

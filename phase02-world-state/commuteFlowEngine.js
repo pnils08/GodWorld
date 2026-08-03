@@ -47,6 +47,13 @@
 // fuzzy matcher. An unlisted name that matches no residence hood is counted as
 // unresolved rather than guessed, so a new workplace hood shows up in the stats
 // instead of quietly landing in the wrong neighborhood.
+// SCHEDULED FOR DELETION — ADR-0016 (docs/adr/0016-data-ledgers-are-the-truth-source.md).
+// This map exists only because Business_Ledger and Simulation_Ledger spell the
+// same neighborhood differently, and it is a LOCAL PATCH on a systemic problem
+// (85 files hardcode hood literals across 6 divergent namespaces). The decided
+// fix is one canonical set loaded from Neighborhood_Map; when the neighborhood
+// cohort lands, this map is deleted rather than maintained. Do not extend it —
+// a new entry here is a new place for the drift to hide.
 var COMMUTE_HOOD_ALIASES = {
   'Piedmont Avenue': 'Piedmont Ave',
   'Old Oakland': 'Downtown',

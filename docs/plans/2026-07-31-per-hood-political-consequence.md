@@ -12,6 +12,7 @@ pointers:
   - "[[engine/ROLLOUT_PLAN]] — parent rollout (engine.93)"
   - "[[../research/2026-08-01-simulation-realism-audit]] — build-order step 3; the two zero-reader buses re-verified there 2026-08-01"
   - "[[2026-07-04-ripple-ledger-attribution]] — engine.45; per-hood fold is its open item, do not duplicate its shipped T1–T3b work"
+  - "[[../adr/0016-data-ledgers-are-the-truth-source]] — Task 9's COMMUTE_HOOD_ALIASES map is the local patch that ADR retires; scheduled for deletion by the neighborhood cohort"
   - "[[../SCHEMA]] — doc conventions"
   - "[[../index]] — registered same commit"
 ---

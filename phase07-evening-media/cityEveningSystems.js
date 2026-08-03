@@ -67,12 +67,8 @@ function buildCityEveningSystems_(ctx) {
   var isCreationDay = !!S.isCreationDay;
   var sportsSeason = S.sportsSeason || "off-season";
 
-  // Oakland neighborhoods
-  var neighborhoods = [
-    "Temescal", "Downtown", "Fruitvale", "Lake Merritt",
-    "West Oakland", "Laurel", "Rockridge", "Jack London",
-    "Uptown", "KONO", "Chinatown", "Piedmont Ave"
-  ];
+  // engine.99 Cohort 2 — core-sim hoods from Neighborhood_Map CoreSimRank (ADR-0016)
+  var neighborhoods = getCoreSimNeighborhoods_(ctx);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // HELPERS

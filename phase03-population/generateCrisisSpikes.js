@@ -237,23 +237,19 @@ function generateCrisisSpikes_(ctx) {
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // OAKLAND NEIGHBORHOODS (12 - v2.5)
+  // OAKLAND NEIGHBORHOODS — core-sim set from Neighborhood_Map CoreSimRank
+  // (engine.99 Cohort 2, ADR-0016). Crisis weights stay engine tuning; a core
+  // hood without an entry runs at neutral 1.0, so promoting a hood via the
+  // sheet needs no deploy.
   // ═══════════════════════════════════════════════════════════════════════════
-  var neighborhoods = [
-    { name: 'Temescal', weight: 0.9 },
-    { name: 'Downtown', weight: 1.2 },
-    { name: 'Fruitvale', weight: 1.0 },
-    { name: 'Lake Merritt', weight: 0.8 },
-    { name: 'West Oakland', weight: 1.3 },
-    { name: 'Laurel', weight: 0.7 },
-    { name: 'Rockridge', weight: 0.6 },
-    { name: 'Jack London', weight: 1.0 },
-    // v2.5: New neighborhoods
-    { name: 'Uptown', weight: 1.1 },
-    { name: 'KONO', weight: 0.9 },
-    { name: 'Chinatown', weight: 1.0 },
-    { name: 'Piedmont Ave', weight: 0.5 }
-  ];
+  var CRISIS_HOOD_WEIGHTS = {
+    'Temescal': 0.9, 'Downtown': 1.2, 'Fruitvale': 1.0, 'Lake Merritt': 0.8,
+    'West Oakland': 1.3, 'Laurel': 0.7, 'Rockridge': 0.6, 'Jack London': 1.0,
+    'Uptown': 1.1, 'KONO': 0.9, 'Chinatown': 1.0, 'Piedmont Ave': 0.5
+  };
+  var neighborhoods = getCoreSimNeighborhoods_(ctx).map(function(name) {
+    return { name: name, weight: CRISIS_HOOD_WEIGHTS[name] || 1.0 };
+  });
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CALENDAR NEIGHBORHOOD ADJUSTMENTS (v2.5)

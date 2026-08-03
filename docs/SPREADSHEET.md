@@ -40,7 +40,7 @@ These are read/written during every cycle run.
 | **Family_Relationships** | 2 | ENGINE | ENGINE | Parent-child links (mostly in SL ParentIds/ChildrenIds) |
 | **Relationship_Bonds** | 211 | ENGINE | ENGINE | Active alliance/rivalry/mentorship bonds |
 | **Relationship_Bond_Ledger** | 2,424 | ENGINE | ENGINE | Full bond history |
-| **Neighborhood_Map** | 21 | ENGINE, SCRIPT | ENGINE, SCRIPT | 21 neighborhoods, 23 cols (S315: trajectory block replaced gentrification block — NeighborhoodTrajectory/HousingPressure/TrajectoryStartCycle/TrajectoryMomentum; Y/Z/AA real-world-study cols deleted) |
+| **Neighborhood_Map** | 22 | ENGINE, SCRIPT | ENGINE, SCRIPT | 22 neighborhoods, 24 cols (S315: trajectory block replaced gentrification block; S352 engine.99: East Oakland row added + CoreSimRank col X — ADR-0016 truth source for the hood set AND the core-sim subset/draw order; loader: phase01-config/canonNeighborhoodLoader.js, detector: scripts/auditHoodDrift.js) |
 | **Event_Content_Ledger** | 253 | ENGINE, SCRIPT | HAND, SCRIPT | Sheet-resident event content (S289 Design A + engine.49 auto-author): `line` pool rows + `fragment` slot fillers, 9 cols A–I (Kind/PoolKey/Slot/Text/Weight/Conditions/Tags/Grain/Active). Read by `loadEventContentLedger_` Phase 2 → `S.contentLedger`; empty/missing tab = no-op fallback to hardcoded pools. Written by hand + post-cycle `scripts/draftContentRows.js` (`auth:auto` provenance; Active kill switch). DSL + source whitelist live in the loader — see `loadEventContentLedger.js` |
 | **Neighborhood_Demographics** | 17 | ENGINE, SCRIPT, DASHBOARD | ENGINE | Per-neighborhood population/income/age |
 | **Crime_Metrics** | 17 | ENGINE, SCRIPT, DASHBOARD | ENGINE | QoL index, patrol, hotspots per neighborhood |

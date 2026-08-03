@@ -74,14 +74,8 @@ function buildEveningFamous_(ctx) {
   var isCreationDay = S.isCreationDay || false;
   var sportsSeason = S.sportsSeason || "off-season";
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // OAKLAND NEIGHBORHOODS (12 - v2.2)
-  // ═══════════════════════════════════════════════════════════════════════════
-  var neighborhoods = [
-    "Temescal", "Downtown", "Fruitvale", "Lake Merritt",
-    "West Oakland", "Laurel", "Rockridge", "Jack London",
-    "Uptown", "KONO", "Chinatown", "Piedmont Ave"
-  ];
+  // engine.99 Cohort 2 — core-sim hoods from Neighborhood_Map CoreSimRank (ADR-0016)
+  var neighborhoods = getCoreSimNeighborhoods_(ctx);
 
   // Arts neighborhoods for First Friday
   var artsNeighborhoods = ["Uptown", "KONO", "Temescal", "Jack London"];
@@ -443,14 +437,13 @@ function buildEveningFamous_(ctx) {
   // sighting can name a real venue in its neighborhood, and the venue gets a
   // business-scoped ripple so it reaches the seed deck as exact protagonist.
   // Same three-col pattern as contractSeedBackdropIndex_; empty on any failure.
-  // S329 R1: index + lookup keyed on normalized hood — the raw-string key
-  // missed 'Piedmont Ave' (ledger says 'Piedmont Avenue') and any case/space
-  // variant, which is a big part of why only 2 lifestyle-sighting ripples
-  // landed across c100-c102 against 2-4 sightings/cycle.
+  // S329 R1: index + lookup keyed on normalized hood (case/space variants).
+  // engine.99 Cohort 2: the piedmont special-case is retired — Business_Ledger's
+  // 'Piedmont Avenue' rows were reconciled to the canonical 'Piedmont Ave' at
+  // the ledger (ADR-0016 §4), so spelling normalization here would be drift
+  // re-hidden. Case/trim hygiene stays.
   function normHood_(h) {
-    var n = String(h || '').trim().toLowerCase();
-    if (n === 'piedmont ave') n = 'piedmont avenue';
-    return n;
+    return String(h || '').trim().toLowerCase();
   }
   var venuesByHood = {};
   try {

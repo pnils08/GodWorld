@@ -2,7 +2,7 @@
   "generated": "2026-08-03",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 181,
-  "functionsMapped": 1130,
+  "functionsMapped": 1131,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -820,6 +820,7 @@
       ],
       "readers": [
         "phase01-config/canonNeighborhoodLoader.js::getCanonNeighborhoods_",
+        "phase01-config/canonNeighborhoodLoader.js::getCoreSimNeighborhoods_",
         "phase01-config/canonNeighborhoodLoader.js::isCanonNeighborhood_"
       ]
     },

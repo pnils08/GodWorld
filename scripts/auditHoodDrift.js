@@ -44,17 +44,33 @@
 require('../lib/env');
 const fs = require('fs');
 const path = require('path');
-const { MAP_NEIGHBORHOODS, CHILDREN } = require('../lib/canonNeighborhoods');
+const { CANON_12, MAP_NEIGHBORHOODS, CHILDREN } = require('../lib/canonNeighborhoods');
 
 const ROOT = path.resolve(__dirname, '..');
 
 // Migrated-file scope — explicit, per plan Task 3. Grows cohort by cohort.
 const MIGRATED_FILES = [
+  // Cohort 1
   'phase01-config/canonNeighborhoodLoader.js',
   'lib/canonNeighborhoods.js',
   'lib/districtMap.js',
   'lib/citizenDerivation.js',
   'lib/photoGenerator.js',
+  // Cohort 2 — the shared core-12 literal group, now on getCoreSimNeighborhoods_
+  'phase01-config/godWorldEngine2.js',
+  'phase03-population/generateCrisisSpikes.js',
+  'phase05-citizens/checkForPromotions.js',
+  'phase05-citizens/generateGenericCitizens.js',
+  'phase05-citizens/runNeighborhoodEngine.js',
+  'phase05-citizens/bondEngine.js',
+  'phase07-evening-media/buildEveningFamous.js',
+  'phase07-evening-media/buildEveningFood.js',
+  'phase07-evening-media/cityEveningSystems.js',
+  'phase07-evening-media/culturalLedger.js',
+  'phase07-evening-media/textureTriggers.js',
+  'phase10-persistence/recordWorldEventsv3.js',
+  'utilities/citizenDerivation.js',
+  'phase02-world-state/commuteFlowEngine.js',
 ];
 
 // Known non-canonical hood-like tokens (S349 survey + Oakland geography the
@@ -62,8 +78,8 @@ const MIGRATED_FILES = [
 // (Coliseum/Elmhurst moved to CHILDREN in Cohort 1 — real East Oakland
 // sub-areas the sim legitimately speaks; 'Coliseum District' stays here.)
 const DRIFT_LEXICON = [
-  'Piedmont Avenue', 'Jingletown', 'Brooklyn Basin', 'Coliseum District',
-  'Cleveland Heights', 'Golden Gate', 'Bushrod', 'Mosswood', 'Sobrante Park',
+  'Piedmont Avenue', 'Jingletown', 'Coliseum District',
+  'Cleveland Heights', 'Bushrod', 'Mosswood', 'Sobrante Park',
   'Millsmont', 'Havenscourt', 'Seminary', 'Fairfax', 'Allendale',
   'Trestle Glen', 'Crocker Highlands', 'Oakmore', 'Redwood Heights',
 ];
@@ -76,16 +92,23 @@ async function fetchSheetHoods() {
   const header = rows[0];
   const iHood = header.indexOf('Neighborhood');
   if (iHood < 0) throw new Error('Neighborhood_Map has no "Neighborhood" header');
+  const iRank = header.indexOf('CoreSimRank');
   const seen = new Set();
   const list = [];
+  const ranked = [];
   for (const row of rows.slice(1)) {
     const hood = String(row[iHood] || '').trim();
     if (!hood || seen.has(hood.toLowerCase())) continue;
     seen.add(hood.toLowerCase());
     list.push(hood);
+    if (iRank >= 0) {
+      const rank = Number(row[iRank]);
+      if (!isNaN(rank) && rank > 0) ranked.push({ hood, rank });
+    }
   }
   if (!list.length) throw new Error('Neighborhood_Map yielded zero hood names');
-  return list;
+  const core = ranked.sort((a, b) => a.rank - b.rank).map(r => r.hood);
+  return { list, core };
 }
 
 function scanFile(absPath, canonExact, canonLower, childLower, driftLower) {
@@ -133,7 +156,7 @@ async function main() {
     console.log('⚠ OFFLINE MODE — live-sheet reconcile SKIPPED. lib/canonNeighborhoods.js');
     console.log('  is being trusted as a cache without proof. Run without --offline before deploy.');
   } else {
-    const sheetHoods = await fetchSheetHoods();
+    const { list: sheetHoods, core: sheetCore } = await fetchSheetHoods();
     const sheetSet = new Set(sheetHoods);
     const libSet = new Set(MAP_NEIGHBORHOODS);
     const inLibNotSheet = MAP_NEIGHBORHOODS.filter(h => !sheetSet.has(h));
@@ -145,6 +168,16 @@ async function main() {
       if (inSheetNotLib.length) console.log('      in sheet, not lib: ' + inSheetNotLib.join(', '));
     } else {
       console.log('PASS  reconcile: lib cache == Neighborhood_Map (' + sheetHoods.length + ' hoods)');
+    }
+    // Core reconcile — ORDER matters: CoreSimRank order is seeded-draw order,
+    // and lib CANON_12 is the Node-side cache of it (engine.99 Cohort 2).
+    if (JSON.stringify(sheetCore) !== JSON.stringify(CANON_12)) {
+      drift++;
+      console.log('FAIL  core reconcile: lib CANON_12 != Neighborhood_Map CoreSimRank order');
+      console.log('      sheet core: ' + sheetCore.join(', '));
+      console.log('      lib CANON_12: ' + CANON_12.join(', '));
+    } else {
+      console.log('PASS  core reconcile: CANON_12 == CoreSimRank order (' + sheetCore.length + ' hoods)');
     }
   }
 

@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 181 · **Functions mapped:** 1130 · **S.* fields:** 327 · **Sheets:** 65
+**Files scanned:** 181 · **Functions mapped:** 1131 · **S.* fields:** 327 · **Sheets:** 65
 
 ## S.* / ctx.summary reverse index
 
@@ -43,7 +43,7 @@
 | `S.biasIntents` | `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_`, `utilities/compressLifeHistory.js::compressLifeHistory_` | 1 | 2 |
 | `S.bondSummary` | `phase05-citizens/bondEngine.js::generateBondSummary_`, `phase05-citizens/seedRelationBondsv1.js::seedRelationshipBonds_` | `phase05-citizens/seedRelationBondsv1.js::testBondSeeding_`, `phase07-evening-media/mediaRoomBriefingGenerator.js::generateCitizenSpotlight_`, `phase07-evening-media/mediaRoomBriefingGenerator.js::generateMediaBriefing_`, `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 2 | 4 |
 | `S.canonHoodCount` | `phase01-config/canonNeighborhoodLoader.js::loadCanonNeighborhoods_` | _(none)_ | 1 | 0 |
-| `S.canonHoods` | `phase01-config/canonNeighborhoodLoader.js::loadCanonNeighborhoods_` | `phase01-config/canonNeighborhoodLoader.js::getCanonNeighborhoods_`, `phase01-config/canonNeighborhoodLoader.js::isCanonNeighborhood_` | 1 | 2 |
+| `S.canonHoods` | `phase01-config/canonNeighborhoodLoader.js::loadCanonNeighborhoods_` | `phase01-config/canonNeighborhoodLoader.js::getCanonNeighborhoods_`, `phase01-config/canonNeighborhoodLoader.js::getCoreSimNeighborhoods_`, `phase01-config/canonNeighborhoodLoader.js::isCanonNeighborhood_` | 1 | 3 |
 | `S.canonSportsPhase` | `phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_` | _(none)_ | 1 | 0 |
 | `S.careerChurn` | `phase06-analysis/economicRippleEngine.js::detectCareerRipples_` | _(none)_ | 1 | 0 |
 | `S.careerEvents` | `phase05-citizens/runCareerEngine.js::runCareerEngine_` | _(none)_ | 1 | 0 |

@@ -33,6 +33,9 @@
 - **getCanonNeighborhoods_(ctx)**
   Reads: S.canonHoods
 
+- **getCoreSimNeighborhoods_(ctx)**
+  Reads: S.canonHoods
+
 - **isCanonNeighborhood_(ctx, name)**
   Reads: S.canonHoods
 
@@ -3400,4 +3403,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 181
-**Functions mapped:** 1130
+**Functions mapped:** 1131

@@ -10,7 +10,7 @@
  *      two runs (the spec's headline requirement).
  *   2. Cross-hood flows are counted in the right direction (home -> work).
  *   3. Self-employed / unemployed citizens land on the diagonal, not dropped.
- *   4. Business_Ledger hood aliases resolve ('Piedmont Avenue' -> 'Piedmont Ave').
+ *   4. Child-area workplaces fold to their core hood ('Old Oakland' -> 'Downtown').
  *   5. Non-hood workplaces ('City-wide', Chicago) are EXCLUDED and COUNTED,
  *      never guessed into a neighborhood.
  *   6. An unknown BIZ-ID is counted unresolved, never silently dropped.
@@ -38,7 +38,7 @@ function check(label, cond, detail) {
 const BIZ_HEADER = ['BIZ_ID', 'Name', 'Sector', 'Neighborhood'];
 const BIZ_ROWS = [
   ['BIZ-00001', 'Downtown Tower', 'Tech', 'Downtown'],
-  ['BIZ-00002', 'Piedmont Clinic', 'Health', 'Piedmont Avenue'], // alias case
+  ['BIZ-00002', 'Piedmont Clinic', 'Health', 'Old Oakland'], // child-area fold case (engine.99: spelling aliases retired, hierarchy folds remain)
   ['BIZ-00003', 'City Authority', 'Gov', 'City-wide'],           // non-hood
   ['BIZ-00004', 'Chicago Office', 'Media', 'Chicago'],           // non-Oakland
   ['BIZ-00005', 'Temescal Shop', 'Retail', 'Temescal'],
@@ -78,7 +78,7 @@ const CITIZENS = [
   ['POP-00003', 'Fruitvale', 'BIZ-00001', 'Active'],      // Fruitvale -> Downtown (3 total)
   ['POP-00004', 'Temescal', 'BIZ-00001', 'Active'],       // Temescal  -> Downtown
   ['POP-00005', 'Downtown', 'BIZ-00001', 'Active'],       // Downtown  -> Downtown (local)
-  ['POP-00006', 'West Oakland', 'BIZ-00002', 'Active'],   // -> Piedmont Ave (alias)
+  ['POP-00006', 'West Oakland', 'BIZ-00002', 'Active'],   // -> Downtown (child-area fold)
   ['POP-00007', 'Rockridge', 'SELF_EMPLOYED', 'Active'],  // diagonal
   ['POP-00008', 'Laurel', '', 'Active'],                  // no employer -> diagonal
   ['POP-00009', 'Chinatown', 'BIZ-00003', 'Active'],      // City-wide -> excluded
@@ -115,9 +115,10 @@ check('self-employed citizen works in their own hood',
 check('citizen with no employer works in their own hood',
   flows.Laurel && flows.Laurel.Laurel === 1);
 
-// 4. Alias resolution.
-check("Business_Ledger 'Piedmont Avenue' resolves to ledger 'Piedmont Ave'",
-  flows['West Oakland'] && flows['West Oakland']['Piedmont Ave'] === 1,
+// 4. Child-area fold (engine.99 Cohort 2: spelling aliases retired — drift is
+// fixed at the ledger; geographic hierarchy folds child areas to core hoods).
+check("Business_Ledger 'Old Oakland' folds to core hood 'Downtown'",
+  flows['West Oakland'] && flows['West Oakland']['Downtown'] === 1,
   JSON.stringify(flows['West Oakland']));
 
 // 5 + 6. Coverage honesty — excluded AND counted, never guessed.
@@ -150,7 +151,7 @@ check('commuteOriginsFor_ excludes the hood itself',
 
 const inboundDT = sandbox.commuteInboundExternal_(a.S, 'Downtown');
 check('inbound count excludes the hood\'s own local workers',
-  inboundDT === 4, 'expected 4 (3 Fruitvale + 1 Temescal), got ' + inboundDT);
+  inboundDT === 5, 'expected 5 (3 Fruitvale + 1 Temescal + 1 West Oakland via Old Oakland fold), got ' + inboundDT);
 check('a hood nobody commutes to reports zero inbound',
   sandbox.commuteInboundExternal_(a.S, 'Laurel') === 0);
 

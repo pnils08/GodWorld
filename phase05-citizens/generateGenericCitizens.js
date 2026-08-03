@@ -408,14 +408,8 @@ function generateGenericCitizens_(ctx) {
     "Hair stylist", "Landscaper", "Urban garden worker"
   ];
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // OAKLAND NEIGHBORHOODS (12 - v2.2)
-  // ═══════════════════════════════════════════════════════════════════════════
-  var neighborhoods = [
-    "Temescal", "Downtown", "Fruitvale", "Lake Merritt",
-    "West Oakland", "Laurel", "Rockridge", "Jack London",
-    "Uptown", "KONO", "Chinatown", "Piedmont Ave"
-  ];
+  // engine.99 Cohort 2 — core-sim hoods from Neighborhood_Map CoreSimRank (ADR-0016)
+  var neighborhoods = getCoreSimNeighborhoods_(ctx);
 
   // Base neighborhood weights
   var neighborhoodWeights = {

@@ -196,14 +196,11 @@ function loadNeighborhoodsFromSheet_(ctx) {
     }
   }
 
-  // Fallback defaults if sheet is empty/missing
+  // engine.99 Cohort 2 — fail loud, no embedded fallback (ADR-0016). The old
+  // default list here was a THIRD 12-hood variant (Adams Point/Grand Lake in
+  // place of Uptown/KONO) — exactly the drift class this migration retires.
   if (neighborhoods.length === 0) {
-    Logger.log('loadNeighborhoodsFromSheet_: No neighborhoods found, using defaults');
-    neighborhoods = [
-      'Temescal', 'Downtown', 'Fruitvale', 'Lake Merritt',
-      'West Oakland', 'Laurel', 'Rockridge', 'Jack London',
-      'Adams Point', 'Grand Lake', 'Piedmont Ave', 'Chinatown'
-    ];
+    throw new Error('loadNeighborhoodsFromSheet_: no neighborhoods found in sheet — refusing embedded-list fallback (ADR-0016).');
   }
 
   return neighborhoods;

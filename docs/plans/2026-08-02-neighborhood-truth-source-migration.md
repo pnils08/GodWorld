@@ -156,6 +156,31 @@ the mechanical repoint with the caller list, lead reviews every diff —
 `COMMUTE_HOOD_ALIASES`. **Hazard:** any file whose hood list feeds a seeded draw
 needs bench proof that determinism did not move.
 
+**Status: [x] done S352.** Design decision (the "one decision"): the shared
+12-hood literal is a deliberate CORE-SIM SUBSET, not stale drift — widening
+those engines to all 22 hoods would be a sim-scope change AC#4 forbids folding
+in silently. So the subset itself became ledger truth: **`CoreSimRank` column
+on Neighborhood_Map** (rank = draw order); loader v2 seeds `S.canonHoods.core`;
+`getCoreSimNeighborhoods_(ctx)` is the accessor (throws unseeded/empty,
+mutation-safe copies). **Determinism proof:** live core reads back IDENTICAL to
+the old embedded literal, membership and order — seeded draws consume
+byte-identical values, no bench movement by construction. **Mike's lever:**
+promoting a hood into full engine coverage is now a one-cell sheet edit
+(rank it), no deploy; crisis/generic-citizen weights default neutral 1.0 for
+unranked-then-promoted hoods. Migrated: godWorldEngine2 (intake),
+generateCrisisSpikes (weights→map), checkForPromotions, generateGenericCitizens,
+runNeighborhoodEngine, buildEveningFamous, buildEveningFood, cityEveningSystems,
+culturalLedger, textureTriggers, recordWorldEventsv3, utilities/citizenDerivation
++ fallback retirements: bondEngine (embedded 3rd-variant list → throw),
+utilities/citizenDerivation lookupNeighborhood_ (→ throw, unreachable in
+practice), lib/citizenDerivation (→ CANON_12 cache). `COMMUTE_HOOD_ALIASES`
+retired per charter: spelling half fixed AT Business_Ledger (3 'Piedmont
+Avenue' rows reconciled, then buildEveningFamous' piedmont special-case
+removed); hierarchy half renamed `COMMUTE_CHILD_HOOD_FOLD` (child-area→core
+fold is geography, not drift — Finding #9). Detector v2 adds core reconcile
+(CANON_12 ≡ CoreSimRank order) + 14 files to migrated scope; 0 findings.
+NOT deployed — holds for window-1 smoke (next engine fire).
+
 ### Cohort 3: the 6-file group + oddballs (est. 2 sessions)
 Includes `phase06-analysis/economicRippleEngine.js`, the nastiest case: its
 private mapper collapses 18 hoods to 11. **This is a behavioral question, not a
@@ -182,6 +207,10 @@ Every finding: what, where, and its triage — `fix-in-cohort` / `escalate`
 | 6 | `OAKLAND_SCENES` has no scene for 8 canonical hoods (Laurel, KONO, Brooklyn, Eastlake, Glenview, Ivy Hill, San Antonio, Baylight District) — their articles get no setting line. Content authoring, media-adjacent. | `lib/photoGenerator.js:69` | **file-as-row** — flag to media/research-build; not an engine-sheet edit. |
 | 7 | District ASSIGNMENTS are themselves triplicated truth: `districtMap.js`, `updateCivicApprovalRatings.js`, writer's canon map — and the sheet carries a District column only 8 hoods deep. Candidate second application of ADR-0016 (entity ATTRIBUTE, not just set). | 3 files + sheet col | **file-as-row** — needs its own decision; deliberately NOT folded into Cohort 1 (AC#4). |
 | 8 | `NEIGHBORHOOD_GENDER_VARIANCE` lacks keys for Brooklyn, Dimond, Grand Lake, East Oakland, Baylight District — they silently fall to BASE_FEMALE_PCT 0.51. Harmless (fallback by design), noted so nobody rediscovers it. | `lib/citizenDerivation.js:26` | note only. |
+| 9 | Child-area → core-hood HIERARCHY is duplicated truth across ≥3 files: `commuteFlowEngine`'s fold (Old Oakland→Downtown, Brooklyn Basin→Jack London, Coliseum→East Oakland, Telegraph corridor→Temescal), `checkForPromotions`' bigger fold map (Montclair→Rockridge, Golden Gate/McClymonds/Prescott/Hoover-Foster→West Oakland, ...), and lib CHILDREN (flat list, no parent link). Same shape as Finding #7 (entity ATTRIBUTE as ledger truth — a ParentHood dimension the ledger doesn't carry). | 3 files | **file-as-row** — own decision; folds kept explicit and named meanwhile (`COMMUTE_CHILD_HOOD_FOLD`). |
+| 10 | Business_Ledger carried 3 `'Piedmont Avenue'` rows — the cross-ledger spelling drift that forced engine.93's alias map. Reconciled at the ledger (ADR-0016 §4), verified 0 remaining; alias machinery then deleted rather than maintained. | `Business_Ledger` | **fixed-in-cohort** (S352). |
+| 11 | `bondEngine`'s sheet-empty fallback was a THIRD 12-hood variant (Adams Point/Grand Lake in place of Uptown/KONO) — silently different pool if Neighborhood_Map ever read empty. Now throws (fail-loud, ADR-0016). | `bondEngine.js:202` | **fixed-in-cohort** (S352). |
+| 12 | `regenSchemaHeaders.js` died whole-run on gridless tabs ('GODWORLD Mission Control Dashboard' 400s on values.get) — schema doc silently stale-able. Per-tab skip-with-note added. | `scripts/regenSchemaHeaders.js:89` | **fixed-in-cohort** (S352, standing-latitude). |
 
 ---
 
@@ -202,6 +231,12 @@ Every finding: what, where, and its triage — `fix-in-cohort` / `escalate`
   ordered from the S349 signature-clustering survey. Written at session end as
   the handoff artifact so Cohort 1 starts in a fresh context with the survey
   already durable.
+- 2026-08-03 (S352, Cohort 2) — Cohort 2 COMPLETE: CoreSimRank column added to
+  Neighborhood_Map (core subset + draw order as ledger truth), loader v2 +
+  getCoreSimNeighborhoods_, 14 files migrated, COMMUTE_HOOD_ALIASES retired
+  (spelling fixed at Business_Ledger, hierarchy renamed COMMUTE_CHILD_HOOD_FOLD),
+  detector v2 core reconcile, findings #9–#12. Determinism: live core reads back
+  byte-identical to the old literal. NOT deployed — holds for window-1 smoke.
 - 2026-08-03 (S352, later) — Finding #5 resolved Mike-direct: East Oakland → D5
   (writer canon map + sheet District cell). Deploy window verified clean via
   live pull-diff (sports source is all claspignored; engine.93 rides the same

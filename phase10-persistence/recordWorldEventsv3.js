@@ -84,12 +84,10 @@ function recordWorldEventsv3_(ctx) {
 
   var cycle = ctx.config.cycleCount || ctx.summary.cycleId;
 
-  // Oakland neighborhoods (v3.2: expanded)
-  var neighborhoods = [
-    'Temescal', 'Downtown', 'Fruitvale', 'Lake Merritt',
-    'West Oakland', 'Laurel', 'Rockridge', 'Jack London',
-    'Uptown', 'KONO', 'Chinatown', 'Piedmont Ave'
-  ];
+  // engine.99 Cohort 2 — core-sim hoods from Neighborhood_Map CoreSimRank
+  // (ADR-0016). Fallback pool when a domain has no curated preference list;
+  // domainNeighborhoods below stays — curated design data, not the drift class.
+  var neighborhoods = getCoreSimNeighborhoods_(ctx);
 
   // v3.5: Domain → preferred neighborhoods (meaningful assignment)
   var domainNeighborhoods = {

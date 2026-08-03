@@ -47,15 +47,15 @@
 // fuzzy matcher. An unlisted name that matches no residence hood is counted as
 // unresolved rather than guessed, so a new workplace hood shows up in the stats
 // instead of quietly landing in the wrong neighborhood.
-// SCHEDULED FOR DELETION — ADR-0016 (docs/adr/0016-data-ledgers-are-the-truth-source.md).
-// This map exists only because Business_Ledger and Simulation_Ledger spell the
-// same neighborhood differently, and it is a LOCAL PATCH on a systemic problem
-// (85 files hardcode hood literals across 6 divergent namespaces). The decided
-// fix is one canonical set loaded from Neighborhood_Map; when the neighborhood
-// cohort lands, this map is deleted rather than maintained. Do not extend it —
-// a new entry here is a new place for the drift to hide.
-var COMMUTE_HOOD_ALIASES = {
-  'Piedmont Avenue': 'Piedmont Ave',
+// engine.99 Cohort 2 — the ALIAS half of the old COMMUTE_HOOD_ALIASES is
+// retired: 'Piedmont Avenue' spelling drift was fixed AT Business_Ledger
+// (3 rows reconciled S352, ADR-0016 §4 — reconcile ledgers, don't distribute
+// alias maps). What remains is GEOGRAPHIC HIERARCHY, not spelling: businesses
+// legitimately sit in child areas (Old Oakland, Brooklyn Basin, ...) and the
+// commute matrix folds them to their core hood. Do not add spelling entries —
+// a misspelled ledger value is a data fix, not a new row here. Child→parent
+// hierarchy as ledger truth is filed as engine.99 Finding #9.
+var COMMUTE_CHILD_HOOD_FOLD = {
   'Old Oakland': 'Downtown',
   'Telegraph corridor': 'Temescal',
   'Brooklyn Basin': 'Jack London',
@@ -151,8 +151,8 @@ function buildCommuteFlows_(ctx) {
         stats.unresolved++; stats.nonHoodWorkplace++;
         continue;
       }
-      work = Object.prototype.hasOwnProperty.call(COMMUTE_HOOD_ALIASES, raw)
-        ? COMMUTE_HOOD_ALIASES[raw] : raw;
+      work = Object.prototype.hasOwnProperty.call(COMMUTE_CHILD_HOOD_FOLD, raw)
+        ? COMMUTE_CHILD_HOOD_FOLD[raw] : raw;
     }
 
     if (!work) { stats.unresolved++; stats.unknownHood++; continue; }

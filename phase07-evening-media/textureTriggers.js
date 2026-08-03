@@ -66,14 +66,8 @@ function textureTriggerEngine_(ctx) {
     (recoveryLevel === 'moderate') ? 0.18 :
     0.25;
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // OAKLAND NEIGHBORHOODS (12)
-  // ═══════════════════════════════════════════════════════════════════════════
-  var neighborhoods = [
-    'Temescal', 'Downtown', 'Fruitvale', 'Lake Merritt',
-    'West Oakland', 'Laurel', 'Rockridge', 'Jack London',
-    'Uptown', 'KONO', 'Chinatown', 'Piedmont Ave'
-  ];
+  // engine.99 Cohort 2 — core-sim hoods from Neighborhood_Map CoreSimRank (ADR-0016)
+  var neighborhoods = getCoreSimNeighborhoods_(ctx);
 
   function makeTrigger(domain, neighborhood, key, reason, intensity) {
     return {

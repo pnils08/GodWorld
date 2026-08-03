@@ -101,14 +101,8 @@ function checkForPromotions_(ctx) {
   // Use simYear or calculate from cycle (52 cycles = 1 year)
   var simYear = S.simYear || (2040 + Math.floor(cycle / 52));
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // OAKLAND NEIGHBORHOODS (12 - v2.2)
-  // ═══════════════════════════════════════════════════════════════════════════
-  var validNeighborhoods = [
-    "Temescal", "Downtown", "Fruitvale", "Lake Merritt",
-    "West Oakland", "Laurel", "Rockridge", "Jack London",
-    "Uptown", "KONO", "Chinatown", "Piedmont Ave"
-  ];
+  // engine.99 Cohort 2 — core-sim hoods from Neighborhood_Map CoreSimRank (ADR-0016)
+  var validNeighborhoods = getCoreSimNeighborhoods_(ctx);
 
   // Arts-focused neighborhoods for First Friday bonus
   var artsNeighborhoods = ["Uptown", "KONO", "Temescal", "Jack London"];

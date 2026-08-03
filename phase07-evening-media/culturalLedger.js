@@ -224,14 +224,8 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
 
   var fam = classifyRole(roleType);
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // NEIGHBORHOODS (12 - v2.2)
-  // ═══════════════════════════════════════════════════════════════════════════
-  var validNeighborhoods = [
-    "Temescal", "Downtown", "Fruitvale", "Lake Merritt",
-    "West Oakland", "Laurel", "Rockridge", "Jack London",
-    "Uptown", "KONO", "Chinatown", "Piedmont Ave"
-  ];
+  // engine.99 Cohort 2 — core-sim hoods from Neighborhood_Map CoreSimRank (ADR-0016)
+  var validNeighborhoods = getCoreSimNeighborhoods_(ctx);
   var validNeighborhood = "";
   for (var ni = 0; ni < validNeighborhoods.length; ni++) {
     if (validNeighborhoods[ni] === neighborhood) {

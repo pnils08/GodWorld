@@ -1243,7 +1243,11 @@ function processIntake_(ctx) {
     // Profile draw survives for Occupation; income/education are derived at
     // promotion time by processAdvancementRows_.
     var birthYear = age > 0 ? (2041 - age) : (2041 - (22 + Math.floor(rng() * 44))); // adult band 22-65
-    if (!nbhd) nbhd = INTAKE_NEIGHBORHOODS[Math.floor(rng() * INTAKE_NEIGHBORHOODS.length)];
+    // engine.99 Cohort 2 — core-sim hoods from Neighborhood_Map CoreSimRank (ADR-0016)
+    if (!nbhd) {
+      var intakeHoods = getCoreSimNeighborhoods_(ctx);
+      nbhd = intakeHoods[Math.floor(rng() * intakeHoods.length)];
+    }
 
     var gcNew = new Array(gcHeader.length).fill('');
     var setG = function(name, val) { var gi2 = idxG(name); if (gi2 >= 0) gcNew[gi2] = val; };
@@ -1289,11 +1293,8 @@ function processIntake_(ctx) {
 /**
  * engine.51 helpers — intake category → Economic_Parameters salary pools.
  */
-var INTAKE_NEIGHBORHOODS = [
-  "Temescal", "Downtown", "Fruitvale", "Lake Merritt",
-  "West Oakland", "Laurel", "Rockridge", "Jack London",
-  "Uptown", "KONO", "Chinatown", "Piedmont Ave"
-];
+// INTAKE_NEIGHBORHOODS removed engine.99 Cohort 2 — intake hood fallback now
+// draws from getCoreSimNeighborhoods_(ctx) at the use site (ADR-0016).
 
 var INTAKE_CATEGORY_ECON_MAP = {
   'blue-collar':  ['Port & Labor', 'Construction & Baylight', 'Trades', 'Transit & Infrastructure'],

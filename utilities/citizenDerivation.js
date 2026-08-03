@@ -245,14 +245,14 @@ var NEIGHBORHOOD_GENDER_VARIANCE_ = {
   // Fine-grained extras (Neighborhood_Map)
   'Adams Point': 0.53,
   'Coliseum': 0.49,
-  'Coliseum District': 0.49,
   'Eastlake': 0.50,
   'Montclair': 0.51,
   'San Antonio': 0.50,
   'Glenview': 0.51,
   'Ivy Hill': 0.51,
-  'Elmhurst': 0.50,
-  'Jingletown': 0.50
+  'Elmhurst': 0.50
+  // engine.99 Cohort 2 — dead keys removed: 'Coliseum District' (spelling
+  // variant) + 'Jingletown' (off-roster); zero live SL citizens in either.
 };
 
 var ANCHOR_YEAR_ = 2041;
@@ -589,9 +589,13 @@ function lookupNeighborhood_(provided, seed, ledgerFreq) {
   var drawn = freqWeightedDraw_(r, freq);
   if (drawn) return drawn;
 
-  var canon12 = ['Temescal', 'Downtown', 'Fruitvale', 'Lake Merritt', 'West Oakland', 'Laurel',
-                 'Rockridge', 'Jack London', 'Uptown', 'KONO', 'Chinatown', 'Piedmont Ave'];
-  return canon12[hashSeed_(seed + '|nbhd-fallback') % canon12.length];
+  // engine.99 Cohort 2 — fail loud, no embedded list (ADR-0016). This library is
+  // deliberately ctx-free (deterministic from seed), so it cannot read the
+  // canonical set; reaching here means no hood was provided AND the ledger
+  // frequency snapshot was empty — there is no truth to draw from. In practice
+  // unreachable: the sole caller (processAdvancementIntake_) builds ledgerFreq
+  // from the live Simulation_Ledger.
+  throw new Error('lookupNeighborhood_: no provided neighborhood and empty ledger frequency snapshot — refusing embedded-list fallback (ADR-0016).');
 }
 
 // ───────────────────────────────────────────────────────────────────────────

@@ -88,10 +88,22 @@ async function main() {
 
   for (const tab of tabs) {
     const escaped = tab.title.replace(/'/g, "''");
-    const resp = await sheets.spreadsheets.values.get({
-      spreadsheetId,
-      range: `'${escaped}'`
-    });
+    let resp;
+    try {
+      resp = await sheets.spreadsheets.values.get({
+        spreadsheetId,
+        range: `'${escaped}'`
+      });
+    } catch (e) {
+      // Gridless tabs (dashboard/chart sheets) 400 on a whole-sheet values.get;
+      // skip with a visible note instead of killing the whole regen (S352).
+      out.push('## ' + tab.title);
+      out.push('');
+      out.push('- **SKIPPED:** values.get failed — ' + (e.message || e));
+      out.push('');
+      console.error('SKIP ' + tab.title + ': ' + (e.message || e));
+      continue;
+    }
     const values = resp.data.values || [];
     const lastRow = values.length;
     const lastCol = values.reduce((max, row) => Math.max(max, row.length), 0);

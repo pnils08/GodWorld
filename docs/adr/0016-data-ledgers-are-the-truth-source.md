@@ -12,6 +12,7 @@ sources:
   - "phase02-world-state/loadNeighborhoodState.js:25,74 — already reads Neighborhood_Map into S.neighborhoodState every cycle; the seam exists and is unused as a hood list"
 pointers:
   - "[[0015-world-config-tunable-values]] — sibling doctrine: tunable VALUES live in World_Config; this ADR covers canonical ENTITY SETS"
+  - "[[../plans/2026-08-02-neighborhood-truth-source-migration]] — engine.99, the plan that executes this ADR (cohorts, findings log, re-price gate)"
   - "[[../plans/2026-07-31-per-hood-political-consequence]] — engine.93, whose Task 9 alias map is the local patch this ADR retires"
   - "[[../SPREADSHEET]] — tab contract; Neighborhood_Map is the neighborhood ledger"
   - "[[../engine/rollout-rules]] — where escalation lands when a systemic blocker is found"

@@ -151,9 +151,7 @@ Per-hood object keyed by hood display name:
 
 Tasks 5–7 fully specced and unblocked for engine-sheet. Task 8 Track C one-pager remains kimi's.
 
-### Task 8 — Track C one-pager (kimi, 2026-08-02 — presented to Mike, yes/no pending)
-
-**Scope:** the two cross-hood couplings the sim lacks, against the four it has (crime adjacency displacement, hotspot spillover, sentiment bleed, engine.55 relocation). Design-only — zero code before Mike's approval.
+### Task 8 — Track C one-pager (kimi, 2026-08-02 — APPROVED by Mike: Coupling 1 + 2a → Tasks 9–10)
 
 **Coupling 1 — Commute flows (recommend: BUILD).** Today `updateTransitMetrics.js` draws each BART station's ridership from its *own* hood's demographics only (`:274-281`), and no engine models "lives in A, works in B." The inputs all exist post-engine.83/85: every employed citizen has an employer, and `employer_mapping.json` + Business_Ledger locate employers by hood. A deterministic origin→destination matrix (home hood → employer hood, aggregated over the ledger) would feed: (a) transit ridership weighted by flow origins instead of home-hood-only; (b) daytime-population effects on employment-center hoods (Downtown, Jack London retail/traffic); (c) engine.96 business decline/closure rippling sentiment to workers' *home* hoods — the political-consequence multiplier this plan exists for; (d) transit disruptions hitting every hood whose flow routes through a broken station, not just the station's hood. Cost: ~150-line module + 3 small consumer wires; matrix rebuilds per cycle or on employment/move dirty flags; no new sheets (lives in `ctx.summary`, optional dashboard persist later).
 
@@ -162,7 +160,29 @@ Tasks 5–7 fully specced and unblocked for engine-sheet. Task 8 Track C one-pag
 - *City capital pool (defer):* initiative budgets competing for a finite per-cycle pool gives council votes zero-sum texture, but it risks the civic-theater failure mode (process blocking interventions from going live — the exact inversion `GodWorld_My_Oakland.md` warns against) and belongs behind the civic.14 Initiative_Tracker contract. Revisit after civic.14.
 - *Retail customer pie (skip):* sentiment bleed + existing retail dynamics already approximate spillover; a zero-sum retail pool would double-count them.
 
-**Ask of Mike:** yes/no on commute-flow matrix (Coupling 1) and housing-supply response (Coupling 2a). Both are engine-sheet builds after a yes; 2b deferred, 2c skipped regardless.
+**Ask of Mike:** yes/no on commute-flow matrix (Coupling 1) and housing-supply response (Coupling 2a). Both are engine-sheet builds after a yes; 2b deferred, 2c skipped regardless. — ANSWERED 2026-08-02: yes on both.
+
+---
+
+## Case study: the Temescal health center (kimi, 2026-08-02 — Mike-directed trace)
+
+Mike's doctrine test case: *a. not built yet, b. doesn't change the math, c. the storyline vanished.* All three verified — and the third has a twist worth its weight.
+
+**The crisis (the world's first storyline).** Four waves: C34–43 cognitive cluster, C44–50 pediatric spike, C63 ghost wave, C69–73 return (Wave 4). 9% peak illness rate; CDC/FEMA deployed; zero cause ever identified. Each wave **faded on its own, unexplained** (civic_c89 packet: "Never resolved, never explained… the mystery is OPEN"). Crisis coverage stopped after C85. As of C96 the engine still carries Temescal's demographic marker as **"health crisis zone"** — the signal never stopped; the story just walked away from it.
+
+**The response.** INIT-005, $45M, passed 6-2 at C80. Then: 5-month Mayor-priority delay (resolved C85 after Mara Vance resubmission), permitting limbo ("permitting is where civic projects go to age" — supplemental_c84), Mayor's three-deadline clock C92, HCAI filed C95, parcel closed C96, groundbreaking C99–100, construction-active at C101 (excavation ~68%). **22 cycles from vote to mid-construction; still not built.**
+
+**Where the chain breaks — three breaks, not one:**
+
+1. **The counter doesn't address the measured problem (the deep break).** The crisis signal is *illness* — 9% peak rate, `neighborhoodDemographics.sick`, the "health crisis zone" marker. But `DOMAIN_EFFECTS['health']` = `{sentiment 0.06, communityEngagement 0.04, publicSpaces 0.02}` (`applyInitiativeImplementationEffects.js:147-149`) — **no field maps to illness/sickness anywhere in the effect system.** Even completed, the health center would lift Temescal's *mood* and never touch its *sickness*. The C92 engine audit saw exactly this: "Temescal Sentiment flat at 0 against expected +0.02, the neighborhood's health metrics never rising because no mitigator was firing."
+2. **The per-hood bus has zero readers (this plan's Track A).** construction-active = intensity 0.8, so since ~C99 the initiative has written `sentiment +0.048, communityEngagement +0.032, publicSpaces +0.016` per cycle into `S.initiativeNeighborhoodEffects.Temescal` — into the void. Only the city-wide sentimentBoost (~+0.024) reaches state, diluted across 21 hoods. Track A's fold fixes this break.
+3. **The storyline faded by decay, not by resolution.** The waves receded on their own timers; nothing in the world explained them, and nothing tied the health center's progress to the crisis metric. The mystery being OPEN is good game material — but the sim let coverage lapse while the marker stayed live, instead of making "we built a clinic for a sickness we never understood" the running story.
+
+**Follow-ups this case argues for (Mike's call):**
+
+- **F1 — a health-domain illness field.** Add `sick` (or `illness`) to the initiative effect vocabulary so health initiatives write a negative illness delta in target hoods, and the "health crisis zone" marker clears only when the measured rate actually drops — the story resolves because the math moved, per doctrine. Natural home: DOMAIN_EFFECTS extension + the Track A fold (or the follow-on build).
+- **F2 — the intervention/ledger check.** A deterministic audit: for each live initiative, does the targeted hood's *relevant* metric move within N cycles of the phase going live? If not, flag "civic theater" — which is itself a story (red tape as content), not silence. This is the gate `GodWorld_My_Oakland.md` §"Why this doc is not enough" asks for.
+- **F3 — open-mystery stewardship.** A faded-unexplained crisis is a story asset, not a closed ticket: the storyline register should keep OPEN mysteries visible to Sift/slices until a cause or a counter lands in the math.
 
 ---
 
@@ -183,3 +203,4 @@ Tasks 5–7 fully specced and unblocked for engine-sheet. Task 8 Track C one-pag
 - 2026-08-02 (engine-sheet) — Tasks 5–7 SHIPPED: fold live, 19-assertion sandbox (mutation-tested), dead helper deleted. Acceptance 2+3 met; 1 pends a live cycle. Task 8 (kimi) is all that remains.
 - 2026-08-02 (kimi) — Task 8 Track C one-pager delivered (Build notes §Task 8): commute-flow matrix recommended BUILD, housing-supply response recommended BUILD (small), capital pool DEFERRED to civic.14, retail pie SKIP. Awaiting Mike yes/no.
 - 2026-08-02 (kimi) — Mike APPROVED Coupling 1 (commute flows) + 2a (housing-supply response) → specced as Tasks 9–10 (engine-sheet). Mike design doctrine recorded: build layers as true ripples — events must reach citizens' life history (a business closure is a story seed); wire through existing surfaces (storyHooks, Ripple_Ledger, engine.77 LifeHistory batch), never new parallel buses. 2b capital pool stays deferred to civic.14; 2c skipped.
+- 2026-08-02 (kimi) — Temescal health center case study added (§Case study, Mike-directed trace): all three doctrine claims verified; found a third, deeper break — no effect-system field maps to illness, so even a completed center can't move the metric that made it necessary. Follow-ups F1 (illness field), F2 (intervention/ledger check), F3 (open-mystery stewardship) proposed, Mike's call.

@@ -618,6 +618,40 @@ deploys until items 1–4 land and their regression cases pass.
   strict cross-system Cycle exclusion still needs the builder's lock-boundary
   decision. Independent re-review remains open; nothing deploys.
 
+## Engine-sheet rulings on the review gate (2026-08-02, S349)
+
+Codex asked for two design confirmations before closing the remediation. Both
+ruled here; the reasoning is recorded because both were close calls.
+
+**1. Item 4 (concurrent-cycle false `uncertain`) — CONFIRMED: design the shared
+lock, do NOT let a maintenance window close it.** Codex's instinct is right and
+matches ADR-0016: an advisory "don't run a proving event during a cycle" is not
+a control, and a workaround that lets this session finish is exactly how drift
+accumulates. **But item 4 is DOWNGRADED from deploy-blocker to
+enable-limitation**, because with item 3 fixed its failure mode is now
+fail-CLOSED: a collision produces a 502 and a latched writer — writes are
+refused, canon is not corrupted. So: attended proving runs may proceed once
+items 1-3 are verified live; **unattended/enabled operation waits for the lock.**
+
+**Escalation flag on the lock's scope (ADR-0016 §7):** a shared lock reaching
+`phase01-config/godWorldEngine2.js` and trigger scope makes the ENGINE take a
+dependency on the DASHBOARD writer. The engine currently has no knowledge of the
+dashboard at all. That is a cross-boundary coupling decision, not a sports-plan
+detail — it needs Mike's explicit call before design, not just before
+implementation.
+
+**2. Item 7 (audit pre-images) — CONFIRMED: retain hashes, do not store
+plaintext.** The tension is real: a hash proves *that* a cell differed but
+cannot tell you *what to restore*. Storing plaintext canon pre-images, however,
+breaks a deliberate existing design — the writer tests assert audit records
+never carry HealthCause/LifeHistory prose — and would put canon in a second,
+weaker-protected place. **The recovery path is the sheet's own revision
+history, not the audit file.** That store already exists, costs nothing, and was
+proven this session: the S349 engine.83 revert reconstructed 76 exact
+pre-session cell values from spreadsheet revision 33355. The audit's job is to
+say *something moved and here is the range*; Drive's job is to say *here is what
+it was*. Recorded so a future session doesn't re-open this as a gap.
+
 ## Validation matrix
 
 | Gate | Command or proof | Expected result |
@@ -718,5 +752,6 @@ compensation.
   four bounded roster actions, and an explicit Tier-1 A's season-close gate.
 - 2026-08-02 (engine-sheet) — Codex source landed at `ce2a7d11` after review.
 - 2026-08-02 (engine-sheet) — Task 9 independent review done: FIX-BEFORE-DEPLOY. Task 10 opened for the fix list.
+- 2026-08-02 (engine-sheet) — Codex remediation landed (1bbedbd9); item-1 regression added after mutation exposed it uncovered. Item 4 + 7 ruled — see §Engine-sheet rulings.
 - 2026-08-02 (Codex) — Task 10 remediation source advanced through items 1–3
   and 5–9; item 4 remains open at the cross-system lock boundary.

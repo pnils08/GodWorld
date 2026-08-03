@@ -248,6 +248,7 @@ function runWorldCycle() {
   // PHASE 1: CORE TIME + CONFIG
   // ═══════════════════════════════════════════════════════════
   safePhaseCall_(ctx, 'Phase1-LoadConfig', function() { loadConfig_(ctx); });
+  safePhaseCall_(ctx, 'Phase1-CanonHoods', function() { loadCanonNeighborhoods_(ctx); });  // engine.99 — ADR-0016 canonical hood set from Neighborhood_Map
   safePhaseCall_(ctx, 'Phase1-AdvanceTime', function() { advanceWorldTime_(ctx); });
   safePhaseCall_(ctx, 'Phase1-Calendar', function() { advanceSimulationCalendar_(ctx); });
   safePhaseCall_(ctx, 'Phase1-ResetAudit', function() { resetCycleAuditIssues_(ctx); });
@@ -1834,6 +1835,7 @@ function runCyclePhases_(ctx) {
   // PHASE 1: CORE TIME + CONFIG
   // ═══════════════════════════════════════════════════════════
   safePhaseCall_(ctx, 'Phase1-LoadConfig', function() { loadConfig_(ctx); });
+  safePhaseCall_(ctx, 'Phase1-CanonHoods', function() { loadCanonNeighborhoods_(ctx); });  // engine.99 — ADR-0016 canonical hood set from Neighborhood_Map
   safePhaseCall_(ctx, 'Phase1-AdvanceTime', function() { advanceWorldTime_(ctx); });
   safePhaseCall_(ctx, 'Phase1-Calendar', function() { advanceSimulationCalendar_(ctx); });
   safePhaseCall_(ctx, 'Phase1-ResetAudit', function() { resetCycleAuditIssues_(ctx); });

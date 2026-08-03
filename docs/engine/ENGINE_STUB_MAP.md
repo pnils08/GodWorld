@@ -25,6 +25,17 @@
 - **inWorldStamp_(ctx)**
   Reads: S.absoluteCycle, S.cycle, S.cycleRef
 
+### canonNeighborhoodLoader.js
+- **loadCanonNeighborhoods_(ctx)**
+  Writes: S.canonHoodCount, S.canonHoods
+  Sheets: Neighborhood_Map
+
+- **getCanonNeighborhoods_(ctx)**
+  Reads: S.canonHoods
+
+- **isCanonNeighborhood_(ctx, name)**
+  Reads: S.canonHoods
+
 ### godWorldEngine2.js
 - **logEngineError_(ctx, phase, error)**
   Reads: S.auditIssues, S.cycleId, S.engineErrorCount
@@ -3388,5 +3399,5 @@ _No top-level function declarations found (helper/constants file)._
 
 ---
 
-**Files scanned:** 180
-**Functions mapped:** 1127
+**Files scanned:** 181
+**Functions mapped:** 1130

@@ -1,8 +1,8 @@
 {
   "generated": "2026-08-03",
   "generator": "scripts/stubEngine.js",
-  "filesScanned": 180,
-  "functionsMapped": 1127,
+  "filesScanned": 181,
+  "functionsMapped": 1130,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -806,6 +806,21 @@
         "phase09-digest/applyCycleWeight.js::applyCycleWeight_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_",
         "utilities/rippleLedger.js::recordRipple_"
+      ]
+    },
+    "canonHoodCount": {
+      "writers": [
+        "phase01-config/canonNeighborhoodLoader.js::loadCanonNeighborhoods_"
+      ],
+      "readers": []
+    },
+    "canonHoods": {
+      "writers": [
+        "phase01-config/canonNeighborhoodLoader.js::loadCanonNeighborhoods_"
+      ],
+      "readers": [
+        "phase01-config/canonNeighborhoodLoader.js::getCanonNeighborhoods_",
+        "phase01-config/canonNeighborhoodLoader.js::isCanonNeighborhood_"
       ]
     },
     "auditIssues": {
@@ -4004,6 +4019,23 @@
         "phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_"
       ]
     },
+    "Neighborhood_Map": {
+      "writers": [
+        "phase05-citizens/neighborhoodTrajectoryEngine.js::updateNeighborhoodTrajectories_"
+      ],
+      "readers": [
+        "phase01-config/canonNeighborhoodLoader.js::loadCanonNeighborhoods_",
+        "phase02-world-state/loadNeighborhoodState.js::loadNeighborhoodState_",
+        "phase04-events/chaosCarsEngine.js::loadNeighborhoodNames_",
+        "phase04-events/chaosCarsEngine.test.js::reset",
+        "phase05-citizens/bondEngine.js::loadNeighborhoodsFromSheet_",
+        "phase05-citizens/migrationTrackingEngine.js::buildNeighborhoodPressureMap_",
+        "phase05-citizens/migrationTrackingEngine.js::buildRelocationHoodState_",
+        "phase05-citizens/neighborhoodTrajectoryEngine.js::updateNeighborhoodTrajectories_",
+        "phase06-analysis/applyMigrationDrift.js::applyMigrationDrift_",
+        "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_"
+      ]
+    },
     "Engine_Errors": {
       "writers": [
         "phase01-config/godWorldEngine2.js::logEngineError_"
@@ -4243,22 +4275,6 @@
       "writers": [],
       "readers": [
         "phase02-world-state/loadEventContentLedger.js::loadEventContentLedger_"
-      ]
-    },
-    "Neighborhood_Map": {
-      "writers": [
-        "phase05-citizens/neighborhoodTrajectoryEngine.js::updateNeighborhoodTrajectories_"
-      ],
-      "readers": [
-        "phase02-world-state/loadNeighborhoodState.js::loadNeighborhoodState_",
-        "phase04-events/chaosCarsEngine.js::loadNeighborhoodNames_",
-        "phase04-events/chaosCarsEngine.test.js::reset",
-        "phase05-citizens/bondEngine.js::loadNeighborhoodsFromSheet_",
-        "phase05-citizens/migrationTrackingEngine.js::buildNeighborhoodPressureMap_",
-        "phase05-citizens/migrationTrackingEngine.js::buildRelocationHoodState_",
-        "phase05-citizens/neighborhoodTrajectoryEngine.js::updateNeighborhoodTrajectories_",
-        "phase06-analysis/applyMigrationDrift.js::applyMigrationDrift_",
-        "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_"
       ]
     },
     "WorldEvents_Ledger": {

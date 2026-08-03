@@ -1,7 +1,7 @@
 ---
 title: Per-Hood Political Consequence & Cross-Hood Spillover Plan
 created: 2026-07-31
-updated: 2026-08-01
+updated: 2026-08-02
 type: plan
 tags: [engine, citizens, civic, neighborhoods, active]
 sources:
@@ -85,7 +85,7 @@ pointers:
 - **Files:** this plan — modify (Build notes)
 - **Steps:** One page scoping commute flows (hood-to-hood work movement, building on `phase02-world-state/updateTransitMetrics.js` city-level indices) and resource competition (what scarce pool hoods contend over — engine.55 destination scoring at `migrationTrackingEngine.js:497-699` compares hoods but consumes no shared pool). Alternatives + cost estimate; ends in a Mike yes/no.
 - **Verify:** one-pager in Build notes; presented to Mike
-- **Status:** [ ] not started
+- **Status:** [x] one-pager written 2026-08-02 (kimi) — awaiting Mike yes/no on Coupling 1 + 2a
 
 ---
 
@@ -115,7 +115,7 @@ Per-hood object keyed by hood display name:
 
 `rg 'initiativeNeighborhoodEffects|approvalNeighborhoodEffects'` over all `*.js`: hits only in the two writers plus the `:345` "still has no per-hood consumer" comment. Zero readers.
 
-### Task 4 — fold design (kimi, 2026-08-02 — delta math pending Mike sign-off)
+### Task 4 — fold design (kimi, 2026-08-02 — delta math APPROVED by engine-sheet, independent verification)
 
 **Placement:** inside the per-neighborhood loop of `applyCityDynamics_` (`phase02-world-state/applyCityDynamics.js:1096+`), applied to `nm` **after the momentum blend (`:1170-1180`), immediately before the clamp block (`:1183-1189`)**. This is the last-write position: fresh fold deltas land at full strength (momentum would damp them to 70%) and the existing `clampMult`/`clampSent` calls catch overflow — no new clamp code.
 
@@ -139,16 +139,25 @@ Per-hood object keyed by hood display name:
 
 Tasks 5–7 fully specced and unblocked for engine-sheet. Task 8 Track C one-pager remains kimi's.
 
-### Task 8 — Track C one-pager
+### Task 8 — Track C one-pager (kimi, 2026-08-02 — presented to Mike, yes/no pending)
 
-Not started.
+**Scope:** the two cross-hood couplings the sim lacks, against the four it has (crime adjacency displacement, hotspot spillover, sentiment bleed, engine.55 relocation). Design-only — zero code before Mike's approval.
+
+**Coupling 1 — Commute flows (recommend: BUILD).** Today `updateTransitMetrics.js` draws each BART station's ridership from its *own* hood's demographics only (`:274-281`), and no engine models "lives in A, works in B." The inputs all exist post-engine.83/85: every employed citizen has an employer, and `employer_mapping.json` + Business_Ledger locate employers by hood. A deterministic origin→destination matrix (home hood → employer hood, aggregated over the ledger) would feed: (a) transit ridership weighted by flow origins instead of home-hood-only; (b) daytime-population effects on employment-center hoods (Downtown, Jack London retail/traffic); (c) engine.96 business decline/closure rippling sentiment to workers' *home* hoods — the political-consequence multiplier this plan exists for; (d) transit disruptions hitting every hood whose flow routes through a broken station, not just the station's hood. Cost: ~150-line module + 3 small consumer wires; matrix rebuilds per cycle or on employment/move dirty flags; no new sheets (lives in `ctx.summary`, optional dashboard persist later).
+
+**Coupling 2 — Resource competition (recommend: SPLIT).** Hoods are compared (engine.55 scoring) but never contend for a shared scarce pool. Three candidate pools:
+- *Housing supply (build, small):* engine.55 moves households into a hood with zero supply response — inflow should raise HousingPressure → rent trajectory → displacement risk, closing the loop relocation currently leaves open. Small patch: post-move pressure nudge in the destination hood via the existing Neighborhood_Map writer.
+- *City capital pool (defer):* initiative budgets competing for a finite per-cycle pool gives council votes zero-sum texture, but it risks the civic-theater failure mode (process blocking interventions from going live — the exact inversion `GodWorld_My_Oakland.md` warns against) and belongs behind the civic.14 Initiative_Tracker contract. Revisit after civic.14.
+- *Retail customer pie (skip):* sentiment bleed + existing retail dynamics already approximate spillover; a zero-sum retail pool would double-count them.
+
+**Ask of Mike:** yes/no on commute-flow matrix (Coupling 1) and housing-supply response (Coupling 2a). Both are engine-sheet builds after a yes; 2b deferred, 2c skipped regardless.
 
 ---
 
 ## Open questions
 
 - [x] Fold ordering vs `applySentimentBleed_` — RESOLVED 2026-08-02 (kimi): fold is structurally post-bleed (bleed is cluster-level at :1091, fold is hood-level after derivation); decay rides the existing 30% momentum carry. See Build notes §Task 4.
-- [ ] Wire vs delete for `getRippleEffectsForNeighborhood_` — deletion is a code removal in `phase*/`; confirm with Mike per AGENTS.md scope if delete is chosen. — blocks Task 7
+- [x] Wire vs delete for `getRippleEffectsForNeighborhood_` — RESOLVED 2026-08-02: DELETE approved by engine-sheet (zero callers, wrong shape, would double-count city-scalar application). engine-sheet executes the removal in the Task 5–7 build.
 
 ---
 
@@ -157,4 +166,6 @@ Not started.
 - 2026-07-31 — Initial draft (Kimi CLI, builder-directed external-audit remediation batch). Audit gaps #1+#2 combined; audit's headline claims verified stale/refuted (engine.45 T1–T3b shipped before the audit's pinned commit), surviving kernel scoped into Tracks A–C.
 - 2026-08-01 (Kimi) — Audit pointer added: build-order step 3 of [[../research/2026-08-01-simulation-realism-audit]]; the two zero-reader buses re-verified there at file:line.
 - 2026-08-02 (kimi) — Tasks 1–4 complete (research-build half): both bus shapes extracted, zero readers reconfirmed, fold design + ordering resolution in Build notes. Delta math awaiting Mike sign-off; Task 7 recommendation is DELETE (needs Mike OK, touches `phase*/`). Open: Task 8 Track C one-pager (kimi), Tasks 5–7 engine-sheet after sign-off.
+- 2026-08-02 (kimi) — engine-sheet (substrate steward) ruled both gates after independent verification: delta math approved as specced incl. consume-and-clear; `getRippleEffectsForNeighborhood_` delete approved. Tasks 5–7 unblocked for engine-sheet; Task 8 one-pager remains kimi's.
 - 2026-08-02 (engine-sheet) — Both gating decisions RULED (§Rulings): delta math approved, Task 7 delete approved. Tasks 5–7 unblocked; Task 8 stays kimi.
+- 2026-08-02 (kimi) — Task 8 Track C one-pager delivered (Build notes §Task 8): commute-flow matrix recommended BUILD, housing-supply response recommended BUILD (small), capital pool DEFERRED to civic.14, retail pie SKIP. Awaiting Mike yes/no.

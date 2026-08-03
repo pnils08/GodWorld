@@ -600,14 +600,17 @@ deploys until items 1–4 land and their regression cases pass.
      Add a draft field length cap upstream + fix the ineffective route-level
      body limit (item 8 of the review — the global `express.json()` already
      parsed the body).
-  4. **Item 4** — RULED retry-on-shift, NOT a cross-runtime lock (see
-     §Engine-sheet rulings for the reasoning and the revisit triggers).
-     Re-resolve LifeHistory_Log / Ripple_Ledger append targets immediately
-     before the batch; if a target moved, re-resolve and retry ONCE instead of
-     latching the writer. Narrow the precondition hash so a routine engine
-     append can't 409 every pending preview. Contained to the writer — no
-     engine-side change, no trigger scope, no dashboard dependency in
-     `godWorldEngine2.js`.
+  4. **Item 4** — RULED retry-on-shift, NOT a cross-runtime lock — with the
+     Codex correction folded in (see §Engine-sheet rulings; the original
+     fail-closed premise was disproved). Re-resolve LifeHistory_Log /
+     Ripple_Ledger append targets **strictly before `batchUpdate`**; retry ONCE
+     on a moved target; **never retry an ambiguous post-batch result** (a
+     post-batch retry can double-apply). Narrow the precondition hash so a
+     routine engine append can't 409 every pending preview. Contained to the
+     writer — no engine-side change, no trigger scope. **Does NOT make
+     engine.77 safe to run during a cycle:** the ledger snapshot→Phase 10
+     commit clobber is outside the writer's reach, so engine.77 stays gated to
+     attended, non-overlapping runs.
   5. **Item 5 (before first live proof)** — check whether `As_Roster.Middle`
      is populated for any player; reconcile the roster `First Middle Last`
      join against the ledger's `First Last`.
@@ -620,8 +623,11 @@ deploys until items 1–4 land and their regression cases pass.
 - **Status:** [ ] in progress — items 1–3 and 5–9 LANDED `1bbedbd9` (verified by
   engine-sheet; the item-1 regression was added there after mutation testing
   exposed the fix as uncovered). Item 4's full-log hash/append-target fragility
-  is removed; its remaining scope is the retry-on-shift writer fix, no longer a
-  design decision. Item 5 still gates the first live proof. Nothing deploys.
+  is removed; its remaining scope is the strictly-pre-batch retry-on-shift writer
+  fix — decided, not an open design question. Item 5 still gates the first live
+  proof. engine.77 is gated to attended non-overlapping runs on canon-safety
+  grounds (ledger clobber path); engine.40 stat capture is assessable
+  separately. Nothing deploys.
 
 ## Engine-sheet rulings on the review gate (2026-08-02, S349)
 
@@ -634,12 +640,34 @@ in the writer; do NOT build a cross-runtime lock.** (Supersedes the earlier
 initially confirmed. Reversed after sizing the actual exposure — recorded rather
 than quietly changed.)
 
-**The problem is a false alarm, not a safety hole.** The engine (Apps Script,
-Google's servers) and the sports writer (Node, droplet) can both write the
-spreadsheet. On overlap, the writer's computed target row shifts underneath it —
-it *detects* this and refuses to write, so canon is never corrupted. It then
-latches shut until restart and files an audit record about writes that never
-happened. With item 3 fixed, that is the whole blast radius: fail-CLOSED noise.
+**CORRECTION (Codex, same session — this ruling's original premise was WRONG).**
+The first version of this ruling asserted a concurrent collision "fails closed:
+writes refused, canon never corrupted," and rested the whole proportionality
+argument on it. Codex traced the implementation and disproved it. The trace,
+verified by engine-sheet before accepting:
+
+1. `phase01-config/initSimulationLedger.js:43` snapshots the ENTIRE
+   `Simulation_Ledger` into `ctx.ledger.rows` at cycle start.
+2. An engine.77 confirmation mutates citizen fields (Status, RoleType,
+   LifeHistory) on the live sheet mid-cycle.
+3. `phase10-persistence/commitSimulationLedger.js:25` queues the whole in-memory
+   body back over rows 2..N at Phase 10.
+
+So a sports write that lands after the snapshot and passes its own read-back is
+**silently reverted** by the cycle's own commit — while its feed row,
+`LifeHistory_Log` row and `Ripple_Ledger` row survive on other tabs. The event
+is recorded in three places and the citizen-state change is gone. **That is
+canon divergence, not a false latch.** The original ruling was reasoned from an
+unverified premise; the discipline that should have caught it is tracing the
+commit path before asserting a failure mode.
+
+**Split boundary (the corrected shape).** Exposure differs by track:
+- **engine.77 (roster/state + life events)** mutates `Simulation_Ledger` → in
+  the clobber path → **must not run unattended, and an attended run must not
+  overlap a cycle.** This is a canon-safety rule now, not annoyance avoidance.
+- **engine.40 (stat capture)** writes `As_Roster` / `Oaks_Roster` only, never
+  `Simulation_Ledger` → outside this clobber path → assessable separately on
+  its own merits.
 
 **Why not a lock.** Apps Script and Node share no lock primitive — `LockService`
 is GAS-only, and a lock cell in a sheet is not atomic (both sides can read
@@ -652,19 +680,27 @@ defend a few minutes a week.
 minutes; a confirmation is a manual click at a time Mike controls. The overlap
 window is narrow, operator-controlled, and now fails closed.
 
-**Ruling:** re-resolve the append targets immediately before the batch; if a
-target moved, re-resolve and retry ONCE rather than latching. Scheduling
-discipline (no proving event during a cycle fire) stays the operating habit, not
-a claimed control. **Revisit triggers — write these down rather than
-re-deriving:** (a) the engine becomes continuous instead of a weekly fire, or
-(b) a second writer gains write access (another dashboard, another agent). Then
-the window stops being narrow and a real lock earns its keep.
+**Ruling (corrected):**
+1. Build retry-on-shift for append drift **strictly before `batchUpdate`**.
+   NEVER retry an ambiguous post-batch result — a post-batch retry can double-
+   apply, which is the one thing worse than latching.
+2. Do NOT build a fake Sheet-cell lock or a cross-runtime broker now. That part
+   of the original reasoning stands: `LockService` is GAS-only, a lock cell is
+   not atomic, and the result would give false confidence.
+3. **engine.77 stays disabled for unattended use**, and attended runs must not
+   overlap a cycle — enforced as a canon-safety rule, not a habit.
+4. **Unattended engine.77 enablement is itself a real-lock revisit trigger** —
+   the moment nobody is watching the clock, the operator control disappears and
+   a genuine exclusion mechanism has to exist.
+5. Additional revisit triggers, unchanged: the engine becomes continuous rather
+   than a weekly fire, or a second writer gains write access.
 
-**Escalation flag CLEARED.** The earlier ADR-0016 §7 flag on this item — that a
-shared lock would reach `phase01-config/godWorldEngine2.js` and trigger scope,
-needing Mike's cross-boundary call — no longer applies: retry-on-shift is
-contained entirely within the writer. Task 10's remaining scope is a writer fix,
-not a design job.
+**Escalation flag — cleared for NOW, re-armed on enablement.** The retry-on-shift
+work is contained entirely within the writer, so there is no cross-boundary call
+for Mike today. But the clobber path means the lock question returns the moment
+engine.77 is enabled unattended, and at that point it IS the
+`godWorldEngine2.js`/trigger-scope decision ADR-0016 §7 covers. Recorded so the
+next session inherits the trigger instead of re-deriving it.
 
 **2. Item 7 (audit pre-images) — CONFIRMED: retain hashes, do not store
 plaintext.** The tension is real: a hash proves *that* a cell differed but
@@ -782,3 +818,9 @@ compensation.
 - 2026-08-02 (engine-sheet, Mike-direct) — Item 4 REVERSED to retry-on-shift; cross-runtime lock rejected on proportionality. Escalation flag cleared; Task 10 is now a contained writer fix.
 - 2026-08-02 (Codex) — Task 10 remediation source advanced through items 1–3
   and 5–9; item 4 remains open at the cross-system lock boundary.
+- 2026-08-02 (Codex, accepted by engine-sheet) — **Item-4 ruling CORRECTED.**
+  Codex disproved its fail-closed premise via the ledger snapshot→commit trace;
+  a mid-cycle engine.77 write is silently reverted by Phase 10 while its feed /
+  LifeHistory_Log / Ripple rows survive = canon divergence. Split boundary
+  adopted: engine.77 gated (canon-safety), engine.40 assessable separately.
+  Retry-on-shift confined to strictly-pre-batch. See §Engine-sheet rulings.

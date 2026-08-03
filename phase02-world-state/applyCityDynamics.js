@@ -1091,6 +1091,74 @@ function applyCityDynamics_(ctx) {
   applySentimentBleed_(clusterDynamics, CLUSTER_ADJACENCY);
 
   // ─────────────────────────────────────────────────────────────────────────
+  // PER-HOOD POLITICAL CONSEQUENCE FOLD (engine.93 Task 5)
+  // ─────────────────────────────────────────────────────────────────────────
+  // Two effect buses have been written every cycle with ZERO readers since they
+  // landed: S.initiativeNeighborhoodEffects (applyInitiativeImplementationEffects
+  // :322-336) and S.approvalNeighborhoodEffects (updateCivicApprovalRatings
+  // :305-321). Initiative and approval consequences therefore dissolved into
+  // city-wide scalars and never reached the hoods they targeted. This fold is
+  // their consumer.
+  //
+  // Placement is load-bearing: the fold runs inside the per-hood loop AFTER the
+  // momentum blend and BEFORE the clamps, so this cycle's targeted deltas land
+  // at full strength (momentum would damp them to 70%) and the existing
+  // clampMult/clampSent catch any overflow — no new clamp code. It is
+  // structurally post-bleed: applySentimentBleed_ runs at cluster level above,
+  // the fold at hood level here, so bleed can never dilute a same-cycle
+  // initiative effect on its target hood.
+  //
+  // Decay rides the existing 30% momentum carry — the buses hold per-cycle
+  // deltas, not durable strength, so they carry no decay fields.
+  var initiativeBus = (S.initiativeNeighborhoodEffects &&
+    typeof S.initiativeNeighborhoodEffects === 'object') ? S.initiativeNeighborhoodEffects : {};
+  var approvalBus = (S.approvalNeighborhoodEffects &&
+    typeof S.approvalNeighborhoodEffects === 'object') ? S.approvalNeighborhoodEffects : {};
+  var foldedInitiativeHoods = [];
+  var foldedApprovalHoods = [];
+  var foldedInitiativeMag = 0;
+  var foldedApprovalMag = 0;
+
+  var FOLD_INITIATIVE_FIELDS = ['traffic', 'retail', 'nightlife',
+    'publicSpaces', 'communityEngagement', 'sentiment'];
+  var FOLD_APPROVAL_FIELDS = ['sentiment', 'communityEngagement'];
+
+  // Applies both buses' deltas for one hood onto its metric object, in place.
+  // Only finite numbers on own properties are folded — a malformed bus entry is
+  // skipped, never NaN-poisoning a hood's state.
+  function applyNeighborhoodEffectsFold_(metrics, hood) {
+    var iEff = Object.prototype.hasOwnProperty.call(initiativeBus, hood)
+      ? initiativeBus[hood] : null;
+    if (iEff && typeof iEff === 'object') {
+      var iApplied = false;
+      for (var fi = 0; fi < FOLD_INITIATIVE_FIELDS.length; fi++) {
+        var fkey = FOLD_INITIATIVE_FIELDS[fi];
+        var fval = Number(iEff[fkey]);
+        if (!isFinite(fval) || fval === 0) continue;
+        metrics[fkey] += fval;
+        iApplied = true;
+        if (Math.abs(fval) > Math.abs(foldedInitiativeMag)) foldedInitiativeMag = fval;
+      }
+      if (iApplied) foldedInitiativeHoods.push(hood);
+    }
+
+    var aEff = Object.prototype.hasOwnProperty.call(approvalBus, hood)
+      ? approvalBus[hood] : null;
+    if (aEff && typeof aEff === 'object') {
+      var aApplied = false;
+      for (var aj = 0; aj < FOLD_APPROVAL_FIELDS.length; aj++) {
+        var akey = FOLD_APPROVAL_FIELDS[aj];
+        var aval = Number(aEff[akey]);
+        if (!isFinite(aval) || aval === 0) continue;
+        metrics[akey] += aval;
+        aApplied = true;
+        if (Math.abs(aval) > Math.abs(foldedApprovalMag)) foldedApprovalMag = aval;
+      }
+      if (aApplied) foldedApprovalHoods.push(hood);
+    }
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
   // NEIGHBORHOOD DYNAMICS (derived from clusters)
   // ─────────────────────────────────────────────────────────────────────────
   for (var cname2 in CLUSTERS) {
@@ -1179,6 +1247,10 @@ function applyCityDynamics_(ctx) {
         if (prevNhood.communityEngagement !== undefined) nm.communityEngagement = nm.communityEngagement * (1 - nhMom) + prevNhood.communityEngagement * nhMom;
       }
 
+      // engine.93 Task 5: per-hood political consequence — post-momentum,
+      // pre-clamp (see the fold block above for why this position).
+      applyNeighborhoodEffectsFold_(nm, nhood);
+
       // Clamp
       nm.traffic = clampMult(nm.traffic);
       nm.retail = clampMult(nm.retail);
@@ -1191,6 +1263,57 @@ function applyCityDynamics_(ctx) {
 
       neighborhoodDynamics[nhood] = nm;
     }
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // FOLD ATTRIBUTION + CONSUME-AND-CLEAR (engine.93 Task 5)
+  // ─────────────────────────────────────────────────────────────────────────
+  // Per-initiative and per-approval cause rows already exist at the write sites
+  // (engine.45 T3e 'initiative-implementation', T1 'approval-shift'). The fold
+  // must NOT re-ledger those — it writes one CONSUMPTION row per bus per cycle
+  // naming the hoods that actually received deltas, so the trail reads
+  // "this cause fired" → "these hoods lived it".
+  if (foldedInitiativeHoods.length && typeof recordRipple_ === 'function') {
+    recordRipple_(ctx, {
+      causeType: 'neighborhood-fold',
+      causeId: 'initiativeNeighborhoodEffects',
+      causeDetail: 'Initiative work landed in ' + foldedInitiativeHoods.length +
+        ' neighborhood(s): ' + foldedInitiativeHoods.join(', '),
+      effectType: 'fold-applied/initiative-implementation',
+      targetScope: 'neighborhood',
+      targetIds: foldedInitiativeHoods,
+      magnitude: foldedInitiativeMag,
+      duration: 1,
+      sourceEngine: 'applyCityDynamics.foldNeighborhoodEffects'
+    });
+  }
+  if (foldedApprovalHoods.length && typeof recordRipple_ === 'function') {
+    recordRipple_(ctx, {
+      causeType: 'neighborhood-fold',
+      causeId: 'approvalNeighborhoodEffects',
+      causeDetail: 'Shifts in how residents rate their officials reached ' +
+        foldedApprovalHoods.length + ' neighborhood(s): ' + foldedApprovalHoods.join(', '),
+      effectType: 'fold-applied/approval-shift',
+      targetScope: 'neighborhood',
+      targetIds: foldedApprovalHoods,
+      magnitude: foldedApprovalMag,
+      duration: 1,
+      sourceEngine: 'applyCityDynamics.foldNeighborhoodEffects'
+    });
+  }
+
+  // Consume-and-clear: both buses are per-cycle delta channels. Before this fold
+  // existed they accumulated forever (nothing read them); clearing here prevents
+  // a delta being applied on every subsequent cycle. The writers re-merge fresh
+  // each cycle. Deliberate failure semantics: if a later phase throws before the
+  // cycle completes, the buses are already cleared for effects that DID land —
+  // the reverse order (clear-then-apply) would silently drop them instead.
+  S.initiativeNeighborhoodEffects = {};
+  S.approvalNeighborhoodEffects = {};
+
+  if (foldedInitiativeHoods.length || foldedApprovalHoods.length) {
+    Logger.log('applyNeighborhoodEffectsFold_: initiative → ' + foldedInitiativeHoods.length +
+      ' hood(s), approval → ' + foldedApprovalHoods.length + ' hood(s); buses cleared');
   }
 
   // ─────────────────────────────────────────────────────────────────────────

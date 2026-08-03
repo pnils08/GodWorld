@@ -85,18 +85,28 @@ function analyzeFunction(fn) {
     while ((mm = re.exec(body)) !== null) writesS.add(mm[1]);
   }
 
-  // S.X / ctx.summary.X — any reference (read) minus pure writes
-  const refRe = /(?:^|[^.\w])(?:S|ctx\.summary)\.([A-Za-z_][A-Za-z0-9_]*)/g;
+  // S.X / ctx.summary.X — any NON-ASSIGNING reference is a read, whether or not
+  // the field is also written.
+  //
+  // S349 fix (engine.93): this previously read `if (!writesS.has(...)) readsS.add(...)`,
+  // so any field both read and written was reported write-only — the exact
+  // shape of a consume-and-clear channel (`var x = S.bus; ... S.bus = {}`).
+  // That made ENGINE_STUB_REVERSE claim "no reader in scan" for fields with a
+  // real, live reader, which is a lying truth-doc in the direction that hides
+  // wiring. The block comment here already described the intended behavior
+  // ("keep it as a reader of its own prior value when referenced
+  // non-assigningly"); the code just never implemented it. It does now.
+  // The trailing context is a LOOKAHEAD, not a capture: consuming it would
+  // advance lastIndex past an adjacent reference (`S.foo, S.bar` would lose
+  // S.bar) and silently shrink the field inventory.
+  const refRe = /(?:^|[^.\w])(?:S|ctx\.summary)\.([A-Za-z_][A-Za-z0-9_]*)(?=([\s\S]{0,12}))/g;
   let m;
   while ((m = refRe.exec(body)) !== null) {
-    if (!writesS.has(m[1])) readsS.add(m[1]);
+    // Assignment target → not a read of the prior value. Compound assignment
+    // (+=, ++, .push) IS a read as well as a write, so only bare `=` excludes.
+    const isPlainAssign = /^\s*=(?!=)/.test(m[2] || '');
+    if (!isPlainAssign) readsS.add(m[1]);
   }
-  // A field that is both written and read still appears as a write; also keep
-  // it as a reader of its own prior value when referenced non-assigningly.
-  // Re-scan: any reference that isn't solely an assignment target → also read.
-  // (Keep simple: if written, still list as reader only when body also has a
-  // non-assignment reference. For reverse index usefulness, writers ∩ readers
-  // is fine — reverse index lists both.)
 
   // ctx.config.X
   const cfgRe = /(?:^|[^.\w])ctx\.config\.([A-Za-z_][A-Za-z0-9_]*)/g;

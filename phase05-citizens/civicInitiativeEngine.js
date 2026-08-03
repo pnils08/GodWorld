@@ -1780,47 +1780,19 @@ function applyActiveInitiativeRipples_(ctx) {
 
 
 /**
- * v1.5: Get active ripple effects for a specific neighborhood
- * Helper function for other engines to query ripple state
+ * engine.93 Task 7 (S349): `getRippleEffectsForNeighborhood_` DELETED.
  *
- * @param {Object} ctx - Engine context
- * @param {string} neighborhood - Neighborhood name
- * @return {Object} Combined effects for this neighborhood
+ * The v1.5 per-neighborhood query API was never wired — zero callers from
+ * landing through S349. engine.93 built the real per-hood consumer instead
+ * (`applyNeighborhoodEffectsFold_` in phase02-world-state/applyCityDynamics.js),
+ * which reads the two per-hood effect buses. This helper read a different
+ * source (`S.activeRipples`, the city-scalar ripple path) and returned a shape
+ * matching neither bus; wiring it into the fold would have double-counted
+ * effects `applyActiveInitiativeRipples_` already applies city-wide above.
+ * Deletion test: it was an unwired query API, so the complexity does not
+ * reappear elsewhere. Design + ruling: docs/plans/2026-07-31-per-hood-political-consequence.md
  */
-function getRippleEffectsForNeighborhood_(ctx, neighborhood) {
-  var S = ctx.summary || {};
-  var activeRipples = S.activeRipples || [];
 
-  var combinedEffects = {
-    sentiment: 0,
-    sick: 0,
-    unemployment: 0,
-    retail: 0,
-    traffic: 0,
-    community: 0
-  };
-
-  for (var i = 0; i < activeRipples.length; i++) {
-    var ripple = activeRipples[i];
-    var hoods = ripple.neighborhoods || [];
-    var affectsThisHood = hoods.length === 0 || // City-wide
-                          hoods.indexOf(neighborhood) >= 0;
-
-    if (!affectsThisHood) continue;
-
-    var effects = ripple.effects || {};
-    var decay = ripple.decayFactor || 1.0;
-
-    if (effects.sentiment_modifier) combinedEffects.sentiment += effects.sentiment_modifier * decay;
-    if (effects.sick_modifier) combinedEffects.sick += effects.sick_modifier * decay;
-    if (effects.unemployment_modifier) combinedEffects.unemployment += effects.unemployment_modifier * decay;
-    if (effects.retail_modifier) combinedEffects.retail += effects.retail_modifier * decay;
-    if (effects.traffic_modifier) combinedEffects.traffic += effects.traffic_modifier * decay;
-    if (effects.community_modifier) combinedEffects.community += effects.community_modifier * decay;
-  }
-
-  return combinedEffects;
-}
 
 
 /**

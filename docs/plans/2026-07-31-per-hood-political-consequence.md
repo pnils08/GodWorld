@@ -67,25 +67,37 @@ pointers:
 - **Files:** `phase02-world-state/applyCityDynamics.js` (or sibling per Task 4) — modify
 - **Steps:** Implement the fold per Task 4 design: read both buses, apply per-hood deltas, write `recordRipple_` rows with `causeDetail` + hood scope (pattern: `updateCivicApprovalRatings.js:325-337`).
 - **Verify:** `node --check` on the modified file
-- **Status:** [ ] not started
+- **Status:** [x] SHIPPED 2026-08-02 (engine-sheet) — inner `applyNeighborhoodEffectsFold_` in `applyCityDynamics.js`, called post-momentum/pre-clamp per the Task 4 design; two `neighborhood-fold` consumption rows + consume-and-clear after the hood loop
 
 ### Task 6: Sandbox fold test
 - **Files:** engine sandbox harness (per engine.45 Task 2 precedent in `docs/plans/2026-07-04-ripple-ledger-attribution.md`) — modify
 - **Steps:** Seed one `initiativeNeighborhoodEffects` + one `approvalNeighborhoodEffects` entry, run Phases 1–2, assert hood delta applied and exactly one attributed Ripple row per effect.
 - **Verify:** sandbox assertions pass; no double-apply on re-run
-- **Status:** [ ] not started
+- **Status:** [x] SHIPPED 2026-08-02 (engine-sheet) — `scripts/testNeighborhoodEffectsFold.js`, 19 assertions green, VM harness (no sheet/network). Mutation-tested: fold-disabled → 10 failures, clear-removed → 4 failures
 
 ### Task 7: Resolve `getRippleEffectsForNeighborhood_`
 - **Files:** `phase05-citizens/civicInitiativeEngine.js` — modify
 - **Steps:** If its return shape serves the Track A fold, wire it as the fold's reader (callers > 0). Otherwise delete the function (deletion test: it is an unwired query API; complexity does not reappear). Record the decision in Build notes.
 - **Verify:** `rg -c 'getRippleEffectsForNeighborhood_'` → wired (≥2 hits: def + call) or gone (0 hits)
-- **Status:** [ ] not started
+- **Status:** [x] SHIPPED 2026-08-02 (engine-sheet) — DELETED (43 lines) with a tombstone comment naming the replacement; zero callers re-confirmed immediately before the cut
 
 ### Task 8: Track C design one-pager (research-build)
 - **Files:** this plan — modify (Build notes)
 - **Steps:** One page scoping commute flows (hood-to-hood work movement, building on `phase02-world-state/updateTransitMetrics.js` city-level indices) and resource competition (what scarce pool hoods contend over — engine.55 destination scoring at `migrationTrackingEngine.js:497-699` compares hoods but consumes no shared pool). Alternatives + cost estimate; ends in a Mike yes/no.
 - **Verify:** one-pager in Build notes; presented to Mike
-- **Status:** [x] one-pager written 2026-08-02 (kimi) — awaiting Mike yes/no on Coupling 1 + 2a
+- **Status:** [x] APPROVED 2026-08-02 (Mike) — Coupling 1 + 2a become Tasks 9–10; 2b deferred to civic.14; 2c skipped
+
+### Task 9: Commute-flow matrix (engine-sheet) — Mike-approved Track C build
+- **Files:** new module (suggest `phase02-world-state/commuteFlowEngine.js` — placement is engine-sheet's call); consumers `phase02-world-state/updateTransitMetrics.js` (`:274-281` ridership demographics, `:180-190` affectedHoods), engine.96 closure path when built
+- **Steps:** Build `S.commuteFlows = { originHood: { destHood: workerCount } }` from `ctx.ledger`: home hood = `Neighborhood`, work hood = employer's Business_Ledger neighborhood (citizen → BIZ-ID via `employer_mapping.json` resolution, BIZ → hood). Aggregate counts per pair; sorted keys, no rng — fully deterministic. Wire three consumers: (a) station ridership demographic term flow-weighted by origins, replacing home-hood-only; (b) disruption `affectedHoods` expanded to hoods whose flows route through the broken station; (c) daytime-population delta for employment-center hoods into `neighborhoodDynamics` retail/traffic. Events surface as `storyHooks` (pattern `migrationTrackingEngine.js:681-694`), never direct LifeHistory writes — LifeHistory intake rides engine.77's batch path.
+- **Verify:** sandbox — seeded employment yields an identical matrix across two runs (determinism); a disruption at one station names ≥1 non-local hood
+- **Status:** [ ] not started
+
+### Task 10: Housing-supply response (engine-sheet) — Mike-approved Track C build
+- **Files:** `phase05-citizens/neighborhoodTrajectoryEngine.js` (owns HousingPressure writes, 0–10 scale, rent kicker ≥8 at `:67`); `phase05-citizens/migrationTrackingEngine.js` (move execution `:661-697`)
+- **Steps:** On each executed relocation, nudge destination hood HousingPressure up (~+0.1) and source hood down (~−0.05) through the trajectory engine's existing pressure update path — NO new writer. Bounded by the existing 0–10 clamps; the ≥8 rent kicker then fires naturally. One `recordRipple_` row per cycle's move batch: `causeType: 'relocation-pressure'`, hood-scoped `targetIds`.
+- **Verify:** sandbox — 3 seeded moves into one hood raise its HousingPressure by the expected delta; no double-apply on re-run
+- **Status:** [ ] not started
 
 ---
 
@@ -168,4 +180,5 @@ Tasks 5–7 fully specced and unblocked for engine-sheet. Task 8 Track C one-pag
 - 2026-08-02 (kimi) — Tasks 1–4 complete (research-build half): both bus shapes extracted, zero readers reconfirmed, fold design + ordering resolution in Build notes. Delta math awaiting Mike sign-off; Task 7 recommendation is DELETE (needs Mike OK, touches `phase*/`). Open: Task 8 Track C one-pager (kimi), Tasks 5–7 engine-sheet after sign-off.
 - 2026-08-02 (kimi) — engine-sheet (substrate steward) ruled both gates after independent verification: delta math approved as specced incl. consume-and-clear; `getRippleEffectsForNeighborhood_` delete approved. Tasks 5–7 unblocked for engine-sheet; Task 8 one-pager remains kimi's.
 - 2026-08-02 (engine-sheet) — Both gating decisions RULED (§Rulings): delta math approved, Task 7 delete approved. Tasks 5–7 unblocked; Task 8 stays kimi.
+- 2026-08-02 (engine-sheet) — Tasks 5–7 SHIPPED: fold live, 19-assertion sandbox (mutation-tested), dead helper deleted. Acceptance 2+3 met; 1 pends a live cycle. Task 8 (kimi) is all that remains.
 - 2026-08-02 (kimi) — Task 8 Track C one-pager delivered (Build notes §Task 8): commute-flow matrix recommended BUILD, housing-supply response recommended BUILD (small), capital pool DEFERRED to civic.14, retail pie SKIP. Awaiting Mike yes/no.

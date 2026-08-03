@@ -118,8 +118,8 @@
 
 ### applyCityDynamics.js
 - **applyCityDynamics_(ctx)**
-  Reads: S.absoluteCycle, S.activityObservations, S.approvalNeighborhoodEffects, S.cityCapacity, S.cityDynamics, S.cityDynamicsLag, S.clusterDefinitions, S.crimeByNeighborhood, S.crimeEvents, S.crimeSpikes, S.cycleId, S.editionNeighborhoodEffects, S.editionSentimentBoost, S.eventsGenerated, S.holiday, S.holidayPriority, S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.isCreationDay, S.isFirstFriday, S.manualDynamicsInputs, S.mediaCount, S.mediaCoverage, S.neighborhoodDemographics, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodWeather, S.previousCityDynamics, S.previousCycleState, S.resetDynamicsMomentum, S.season, S.sentiment, S.shockFlag, S.sportsSeason, S.sportsSentimentBoost, S.storySeeds, S.weather, S.worldEvents
-  Writes: S.activityObservations, S.approvalNeighborhoodEffects, S.cityDynamics, S.cityDynamicsCapacity, S.cityDynamicsLag, S.clusterDefinitions, S.clusterDynamics, S.initiativeNeighborhoodEffects, S.neighborhoodDemographics, S.neighborhoodDynamics, S.previousCityDynamics, S.previousClusterDynamics, S.previousNeighborhoodDynamics, S.resetDynamicsMomentum, S.storySeedSignals
+  Reads: S.absoluteCycle, S.activityObservations, S.approvalNeighborhoodEffects, S.cityCapacity, S.cityDynamics, S.cityDynamicsLag, S.clusterDefinitions, S.commuteInbound, S.crimeByNeighborhood, S.crimeEvents, S.crimeSpikes, S.cycleId, S.editionNeighborhoodEffects, S.editionSentimentBoost, S.eventsGenerated, S.holiday, S.holidayPriority, S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.isCreationDay, S.isFirstFriday, S.manualDynamicsInputs, S.mediaCount, S.mediaCoverage, S.neighborhoodDemographics, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodWeather, S.previousCityDynamics, S.previousCycleState, S.resetDynamicsMomentum, S.season, S.sentiment, S.shockFlag, S.sportsSeason, S.sportsSentimentBoost, S.storySeeds, S.weather, S.worldEvents
+  Writes: S.activityObservations, S.approvalNeighborhoodEffects, S.cityDynamics, S.cityDynamicsCapacity, S.cityDynamicsLag, S.clusterDefinitions, S.clusterDynamics, S.commuteInbound, S.initiativeNeighborhoodEffects, S.neighborhoodDemographics, S.neighborhoodDynamics, S.previousCityDynamics, S.previousClusterDynamics, S.previousNeighborhoodDynamics, S.resetDynamicsMomentum, S.storySeedSignals
   Config: ctx.config.cityCapacity, ctx.config.cycleCount, ctx.config.manualDynamicsInputs
 
 - **getNeighborhoodDynamics_(ctx, neighborhood)**
@@ -249,6 +249,20 @@
   Reads: S.cityDynamics, S.creationDayAnniversary, S.cycleOfYear, S.economicMood, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.weather, S.weatherMood, S.worldEvents
   Writes: S.seasonalStorySeeds
 
+### commuteFlowEngine.js
+- **buildCommuteFlows_(ctx)**
+  Reads: S.commuteFlows
+  Writes: S.commuteFlowStats, S.commuteFlows, S.commuteInbound
+  Sheets: Business_Ledger
+
+- **commuteInboundExternal_(S, hood)**
+  Reads: S.commuteFlows
+
+- **commuteOriginsFor_(S, hood, minWorkers)**
+  Reads: S.commuteFlows
+
+- **indexOfStr_(arr, v)**
+
 ### getSimHoliday.js
 - **getSimHoliday_(cycleOfYear)**
 
@@ -293,7 +307,7 @@
 
 ### updateTransitMetrics.js
 - **updateTransitMetrics_Phase2_(ctx)**
-  Reads: S.absoluteCycle, S.holiday, S.previousCycleState, S.season, S.transitMetrics, S.transitState, S.weather
+  Reads: S.absoluteCycle, S.commuteFlows, S.holiday, S.previousCycleState, S.season, S.transitMetrics, S.transitState, S.weather
   Writes: S.transitMetrics, S.transitState
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -1320,8 +1334,8 @@
   Config: ctx.config.cycleCount
 
 - **updateNeighborhoodTrajectories_(ctx, cycle)**
-  Reads: S.neighborhoodTrajectory
-  Writes: S.neighborhoodTrajectory
+  Reads: S.neighborhoodTrajectory, S.relocationPressureDeltas
+  Writes: S.neighborhoodTrajectory, S.relocationPressureDeltas
   Sheets: Neighborhood_Map
 
 - **emitTrajectoryHooks_(ctx, cycle, neighborhood, prevTrajectory, trajectory, momentum, pressure)**
@@ -3374,5 +3388,5 @@ _No top-level function declarations found (helper/constants file)._
 
 ---
 
-**Files scanned:** 179
-**Functions mapped:** 1123
+**Files scanned:** 180
+**Functions mapped:** 1127

@@ -1,8 +1,8 @@
 {
   "generated": "2026-08-03",
   "generator": "scripts/stubEngine.js",
-  "filesScanned": 179,
-  "functionsMapped": 1123,
+  "filesScanned": 180,
+  "functionsMapped": 1127,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1622,6 +1622,15 @@
         "phase02-world-state/applyCityDynamics.js::getClusterDynamics_"
       ]
     },
+    "commuteInbound": {
+      "writers": [
+        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
+        "phase02-world-state/commuteFlowEngine.js::buildCommuteFlows_"
+      ],
+      "readers": [
+        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_"
+      ]
+    },
     "initiativeNeighborhoodEffects": {
       "writers": [
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
@@ -2144,6 +2153,23 @@
       ],
       "readers": [
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_"
+      ]
+    },
+    "commuteFlowStats": {
+      "writers": [
+        "phase02-world-state/commuteFlowEngine.js::buildCommuteFlows_"
+      ],
+      "readers": []
+    },
+    "commuteFlows": {
+      "writers": [
+        "phase02-world-state/commuteFlowEngine.js::buildCommuteFlows_"
+      ],
+      "readers": [
+        "phase02-world-state/commuteFlowEngine.js::buildCommuteFlows_",
+        "phase02-world-state/commuteFlowEngine.js::commuteInboundExternal_",
+        "phase02-world-state/commuteFlowEngine.js::commuteOriginsFor_",
+        "phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_"
       ]
     },
     "contentLedger": {
@@ -3071,6 +3097,14 @@
       ],
       "readers": [
         "phase05-citizens/migrationTrackingEngine.js::buildRelocationHoodState_",
+        "phase05-citizens/neighborhoodTrajectoryEngine.js::updateNeighborhoodTrajectories_"
+      ]
+    },
+    "relocationPressureDeltas": {
+      "writers": [
+        "phase05-citizens/neighborhoodTrajectoryEngine.js::updateNeighborhoodTrajectories_"
+      ],
+      "readers": [
         "phase05-citizens/neighborhoodTrajectoryEngine.js::updateNeighborhoodTrajectories_"
       ]
     },
@@ -4181,6 +4215,30 @@
         "utilities/setupSportsFeedValidation.js::setupSportsFeedValidation"
       ]
     },
+    "Business_Ledger": {
+      "writers": [
+        "phase04-events/chaosCarsEngine.js::flushBusinessFold_",
+        "phase05-citizens/applyChaosDecay.js::applyChaosDecay_",
+        "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
+        "phase05-citizens/runCareerEngine.js::runCareerEngine_"
+      ],
+      "readers": [
+        "phase02-world-state/commuteFlowEngine.js::buildCommuteFlows_",
+        "phase04-events/chaosCarsEngine.js::flushBusinessFold_",
+        "phase04-events/chaosCarsEngine.js::loadBusinessRows_",
+        "phase04-events/chaosCarsEngine.test.js::makeCtx",
+        "phase04-events/chaosCarsEngine.test.js::reset",
+        "phase05-citizens/applyChaosDecay.js::applyChaosDecay_",
+        "phase05-citizens/applyChaosDecay.test.js::ctxWith",
+        "phase05-citizens/educationCareerEngine.js::buildSettleBizPool_",
+        "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
+        "phase05-citizens/processAdvancementIntake.js::buildMintBizPool_",
+        "phase05-citizens/runCareerEngine.js::runCareerEngine_",
+        "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_",
+        "phase07-evening-media/buildContractSeeds.js::contractSeedBackdropIndex_",
+        "phase07-evening-media/buildEveningFamous.js::buildEveningFamous_"
+      ]
+    },
     "Event_Content_Ledger": {
       "writers": [],
       "readers": [
@@ -4241,29 +4299,6 @@
         "phase05-citizens/generationalWealthEngine.js::ensureHeritageSchema_",
         "phase05-citizens/generationalWealthEngine.js::heritageTierByPop_",
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_"
-      ]
-    },
-    "Business_Ledger": {
-      "writers": [
-        "phase04-events/chaosCarsEngine.js::flushBusinessFold_",
-        "phase05-citizens/applyChaosDecay.js::applyChaosDecay_",
-        "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
-        "phase05-citizens/runCareerEngine.js::runCareerEngine_"
-      ],
-      "readers": [
-        "phase04-events/chaosCarsEngine.js::flushBusinessFold_",
-        "phase04-events/chaosCarsEngine.js::loadBusinessRows_",
-        "phase04-events/chaosCarsEngine.test.js::makeCtx",
-        "phase04-events/chaosCarsEngine.test.js::reset",
-        "phase05-citizens/applyChaosDecay.js::applyChaosDecay_",
-        "phase05-citizens/applyChaosDecay.test.js::ctxWith",
-        "phase05-citizens/educationCareerEngine.js::buildSettleBizPool_",
-        "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
-        "phase05-citizens/processAdvancementIntake.js::buildMintBizPool_",
-        "phase05-citizens/runCareerEngine.js::runCareerEngine_",
-        "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_",
-        "phase07-evening-media/buildContractSeeds.js::contractSeedBackdropIndex_",
-        "phase07-evening-media/buildEveningFamous.js::buildEveningFamous_"
       ]
     },
     "Household_Ledger": {

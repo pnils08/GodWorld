@@ -92,6 +92,14 @@ var EVENT_TYPES = {
 // stress check in householdFormationEngine — keep the two aligned).
 var SAVINGS_BUFFER_MONTHS = 12;
 
+// engine.93 Task 10: per-household-move housing-pressure deltas, published to
+// S.relocationPressureDeltas and consumed by neighborhoodTrajectoryEngine (the
+// only writer of the HousingPressure column, 0–10 scale, rent kicker at >= 8).
+// Asymmetric by design — arrival tightens a market faster than departure eases
+// it. Sized so a hood absorbing ~10 net household arrivals gains ~1 full point.
+var RELOCATION_PRESSURE_IN = 0.1;
+var RELOCATION_PRESSURE_OUT = -0.05;
+
 // Displacement risk weights
 var RISK_WEIGHTS = {
   RENT_BURDEN_HIGH: 4,        // Rent >50% income
@@ -692,6 +700,26 @@ function processRelocations_(ctx, cycle) {
     };
     ctx.summary.storyHooks.push(moveHook);
     if (typeof recordHookRipple_ === 'function') recordHookRipple_(ctx, 'migration', moveHook, 'migrationTrackingEngine');
+
+    // engine.93 Task 10: housing-supply response. A move is demand moving with
+    // it — the destination tightens, the origin loosens. This engine does NOT
+    // write HousingPressure; it publishes per-hood deltas that the trajectory
+    // engine (the column's only writer) folds into its existing pressure
+    // computation. Asymmetric on purpose: arriving demand bids a place up
+    // harder than a departure relieves it, so churn ratchets pressure upward
+    // the way it does in a desirable city.
+    //
+    // One-cycle lag is structural and correct: Phase5-Trajectory runs BEFORE
+    // Phase5-MigrationTracking (godWorldEngine2 :353-354), so this cycle's
+    // moves land on next cycle's pressure — people move, then the block feels it.
+    // Per household unit, not per member row: a family of four arriving is one
+    // household competing for one home, not four.
+    var S10 = ctx.summary;
+    if (!S10.relocationPressureDeltas) S10.relocationPressureDeltas = {};
+    S10.relocationPressureDeltas[bestName] =
+      (S10.relocationPressureDeltas[bestName] || 0) + RELOCATION_PRESSURE_IN;
+    S10.relocationPressureDeltas[unit.hood] =
+      (S10.relocationPressureDeltas[unit.hood] || 0) + RELOCATION_PRESSURE_OUT;
 
     moved++;
   }

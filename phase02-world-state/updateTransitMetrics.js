@@ -112,7 +112,10 @@ function updateTransitMetrics_Phase2_(ctx) {
     season: season,
     dayType: dayType,
     events: majorEvents,
-    gameDay: gameDay
+    gameDay: gameDay,
+    // engine.93 Task 9: the commute matrix rides along so per-station ridership
+    // can weight by who commutes IN, not just who lives nearby.
+    summary: S
   };
 
   // Calculate station metrics
@@ -187,6 +190,20 @@ function updateTransitMetrics_Phase2_(ctx) {
       if (OAKLAND_BART_STATIONS[ahs].station === otSorted[ah].station) { ahStation = OAKLAND_BART_STATIONS[ahs]; break; }
     }
     if (ahStation && affectedHoods.indexOf(ahStation.neighborhood) < 0) affectedHoods.push(ahStation.neighborhood);
+  }
+
+  // engine.93 Task 9: a broken station is not only a story where it stands.
+  // Expand the affected set to the hoods whose residents commute through it —
+  // the people whose morning actually breaks. Threshold of 3 workers keeps a
+  // single commuter from dragging a whole neighborhood into the story.
+  if (S.commuteFlows && typeof commuteOriginsFor_ === 'function') {
+    var directHoods = affectedHoods.slice();
+    for (var dh = 0; dh < directHoods.length; dh++) {
+      var upstream = commuteOriginsFor_(S, directHoods[dh], 3);
+      for (var us = 0; us < upstream.length; us++) {
+        if (affectedHoods.indexOf(upstream[us]) < 0) affectedHoods.push(upstream[us]);
+      }
+    }
   }
 
   var gridlockNow = avgTR >= 78 && (majorEvents > 0 || gameDay);
@@ -279,6 +296,22 @@ function calculateStationMetrics_(station, context, demographics, rng) {
   var totalPop = adults + students + seniors;
   var adultsRatio = totalPop > 0 ? (adults / totalPop) : 0.6;
   ridershipMod *= (0.7 + adultsRatio * 0.5); // More working adults = more riders
+
+  // engine.93 Task 9: a station's riders are not just the people who live
+  // around it. Commuters arriving from other hoods are exactly who a
+  // weekday-morning platform is full of, and before the commute matrix existed
+  // this term was blind to them — a downtown station scored purely off downtown
+  // residents. Bounded lift so an employment centre never runs away with
+  // ridership: +30% at the cap.
+  var commuteS = (context && context.summary) || null;
+  if (commuteS && commuteS.commuteFlows && typeof commuteInboundExternal_ === 'function') {
+    var inbound = commuteInboundExternal_(commuteS, hood);
+    if (inbound > 0) {
+      var localWorkers = adults > 0 ? adults : 1;
+      var inboundRatio = inbound / (inbound + localWorkers);
+      ridershipMod *= (1 + Math.min(0.30, inboundRatio * 0.5));
+    }
+  }
 
   // Game day boost for Coliseum
   if (context.gameDay && station.station.indexOf('Coliseum') !== -1) {

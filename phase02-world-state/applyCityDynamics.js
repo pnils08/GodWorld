@@ -1090,6 +1090,13 @@ function applyCityDynamics_(ctx) {
 
   applySentimentBleed_(clusterDynamics, CLUSTER_ADJACENCY);
 
+  // engine.93 Task 9: inbound-commuter count at which a hood receives the full
+  // daytime lift. Sized against the tracked sample, not real headcount — the
+  // ledger is ~1:443, so ~40 tracked inbound workers marks a genuine
+  // employment centre (Downtown/Jack London class) rather than a hood with a
+  // few commuters.
+  var COMMUTE_DAYTIME_FULL_LIFT = 40;
+
   // ─────────────────────────────────────────────────────────────────────────
   // PER-HOOD POLITICAL CONSEQUENCE FOLD (engine.93 Task 5)
   // ─────────────────────────────────────────────────────────────────────────
@@ -1122,6 +1129,12 @@ function applyCityDynamics_(ctx) {
   var FOLD_INITIATIVE_FIELDS = ['traffic', 'retail', 'nightlife',
     'publicSpaces', 'communityEngagement', 'sentiment'];
   var FOLD_APPROVAL_FIELDS = ['sentiment', 'communityEngagement'];
+
+  // engine.93 Task 9: inbound commuters per hood (buildCommuteFlows_, Phase 2).
+  // Absent on a cycle where the matrix could not build → the daytime term is
+  // simply skipped, never a partial or invented lift.
+  var commuteInbound = (S.commuteInbound && typeof S.commuteInbound === 'object')
+    ? S.commuteInbound : null;
 
   // Applies both buses' deltas for one hood onto its metric object, in place.
   // Only finite numbers on own properties are folded — a malformed bus entry is
@@ -1250,6 +1263,20 @@ function applyCityDynamics_(ctx) {
       // engine.93 Task 5: per-hood political consequence — post-momentum,
       // pre-clamp (see the fold block above for why this position).
       applyNeighborhoodEffectsFold_(nm, nhood);
+
+      // engine.93 Task 9: daytime population. A hood full of offices is a
+      // different place at 1pm than its resident count suggests — those workers
+      // buy lunch and clog the streets. Every metric here was resident-derived
+      // until the commute matrix existed. Bounded: +12% retail / +8% traffic at
+      // the cap, so an employment centre lifts without running away.
+      if (commuteInbound && commuteInbound[nhood]) {
+        var inWorkers = Number(commuteInbound[nhood]) || 0;
+        if (inWorkers > 0) {
+          var dayLift = Math.min(1, inWorkers / COMMUTE_DAYTIME_FULL_LIFT);
+          nm.retail *= (1 + dayLift * 0.12);
+          nm.traffic *= (1 + dayLift * 0.08);
+        }
+      }
 
       // Clamp
       nm.traffic = clampMult(nm.traffic);

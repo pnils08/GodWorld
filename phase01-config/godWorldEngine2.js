@@ -264,6 +264,11 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase2-EditionCoverage', function() { applyEditionCoverageEffects_(ctx); });  // v2.0 S137b
   safePhaseCall_(ctx, 'Phase2-InitiativeEffects', function() { applyInitiativeImplementationEffects_(ctx); });  // v1.0 S137b
   safePhaseCall_(ctx, 'Phase2-Weather', function() { applyWeatherModel_(ctx); });
+  // engine.93 Task 9: build the home-hood -> work-hood matrix BEFORE the
+  // consumers that need it (CityDynamics daytime lift, Transit ridership +
+  // disruption blast-radius). Read-and-aggregate over ctx.ledger (loaded
+  // Phase 1) + Business_Ledger; deterministic, writes no sheet.
+  safePhaseCall_(ctx, 'Phase2-CommuteFlows', function() { buildCommuteFlows_(ctx); });
   safePhaseCall_(ctx, 'Phase2-CityDynamics', function() { applyCityDynamics_(ctx); });
   safePhaseCall_(ctx, 'Phase2-NeighborhoodState', function() { loadNeighborhoodState_(ctx); });  // engine.33 — inbound loop (prev cycle's Neighborhood_Map)
   safePhaseCall_(ctx, 'Phase2-ContentLedger', function() { loadEventContentLedger_(ctx); });  // engine.38 Design A — sheet-resident event content (missing tab = no-op)
@@ -1845,6 +1850,11 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase2-EditionCoverage', function() { applyEditionCoverageEffects_(ctx); });  // v2.0 S137b
   safePhaseCall_(ctx, 'Phase2-InitiativeEffects', function() { applyInitiativeImplementationEffects_(ctx); });  // v1.0 S137b
   safePhaseCall_(ctx, 'Phase2-Weather', function() { applyWeatherModel_(ctx); });
+  // engine.93 Task 9: build the home-hood -> work-hood matrix BEFORE the
+  // consumers that need it (CityDynamics daytime lift, Transit ridership +
+  // disruption blast-radius). Read-and-aggregate over ctx.ledger (loaded
+  // Phase 1) + Business_Ledger; deterministic, writes no sheet.
+  safePhaseCall_(ctx, 'Phase2-CommuteFlows', function() { buildCommuteFlows_(ctx); });
   safePhaseCall_(ctx, 'Phase2-CityDynamics', function() { applyCityDynamics_(ctx); });
   safePhaseCall_(ctx, 'Phase2-NeighborhoodState', function() { loadNeighborhoodState_(ctx); });  // engine.33 — inbound loop (prev cycle's Neighborhood_Map)
   safePhaseCall_(ctx, 'Phase2-ContentLedger', function() { loadEventContentLedger_(ctx); });  // engine.38 Design A — sheet-resident event content (missing tab = no-op)

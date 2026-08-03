@@ -138,6 +138,15 @@ function updateNeighborhoodTrajectories_(ctx, cycle) {
   ctx.summary = S;
   S.neighborhoodTrajectory = {};
 
+  // engine.93 Task 10: last cycle's executed relocations, published by
+  // migrationTrackingEngine as { hood: netDelta }. Consumed here because this
+  // engine is the ONLY writer of HousingPressure — the alternative (migration
+  // writing the column directly) would have made it a two-writer field, the
+  // exact class of clobber the T1.5 cell-intent rule exists to prevent.
+  var relocationDeltas = (S.relocationPressureDeltas &&
+    typeof S.relocationPressureDeltas === 'object') ? S.relocationPressureDeltas : null;
+  var relocationApplied = {};
+
   var analyzed = 0, growthN = 0, decayN = 0, hooks = 0;
 
   for (var r = 0; r < rows.length; r++) {
@@ -190,7 +199,33 @@ function updateNeighborhoodTrajectories_(ctx, cycle) {
     if (trajectory === TRAJECTORY_STATES.GROWTH) pressure += (momentum >= 7 ? 1 : 0.5);
     else if (trajectory === TRAJECTORY_STATES.DECAY) pressure -= 1;
     else pressure -= 0.5;
-    pressure = Math.round(Math.max(0, Math.min(10, pressure)) * 10) / 10;
+
+    // engine.93 Task 10: housing-supply response. Before this, pressure moved
+    // only on the city-relative trajectory score — actual households moving in
+    // and out of a hood changed nothing. migrationTrackingEngine publishes
+    // per-hood deltas (+0.1 per arriving household, −0.05 per departing one)
+    // and this is their consumer; no second writer of the column. The deltas
+    // are LAST cycle's moves by construction (Phase5-Trajectory runs before
+    // Phase5-MigrationTracking), which is the honest ordering: people move,
+    // then the block feels it. The existing 0–10 clamp below bounds the result,
+    // so the >= 8 rent kicker in TRAJECTORY_DRIFT fires on its own.
+    if (relocationDeltas && Object.prototype.hasOwnProperty.call(relocationDeltas, neighborhood)) {
+      var relDelta = Number(relocationDeltas[neighborhood]);
+      if (isFinite(relDelta) && relDelta !== 0) {
+        pressure += relDelta;
+        relocationApplied[neighborhood] = relDelta;
+      }
+    }
+
+    // Rounded to 2dp, not 1dp (engine.93 Task 10). At 1dp the −0.05 departure
+    // delta rounded away to nothing, so a hood losing one household every cycle
+    // never eased — the signal was silently swallowed by the granularity, and
+    // consume-and-clear meant the residual was lost rather than carried. The
+    // trajectory-only steps (±0.5, ±1) are unaffected by the finer rounding, and
+    // no consumer assumes 1dp: loadNeighborhoodState passes the number through,
+    // generateCrisisBuckets z-scores it and prints toFixed(2), the rent kicker
+    // and hooks are >= 8 threshold tests.
+    pressure = Math.round(Math.max(0, Math.min(10, pressure)) * 100) / 100;
 
     analyzed++;
     if (trajectory === TRAJECTORY_STATES.GROWTH) growthN++;
@@ -260,6 +295,39 @@ function updateNeighborhoodTrajectories_(ctx, cycle) {
     // ── Story hooks ─────────────────────────────────────────────────────────
     hooks += emitTrajectoryHooks_(ctx, cycle, neighborhood, prevTrajectory, trajectory, momentum, pressure);
   }
+
+  // ── engine.93 Task 10: attribute + consume the relocation deltas ──────────
+  // One row per cycle's move batch, not per move — the per-move CITIZEN_RELOCATED
+  // hooks already carry each household's story (migrationTrackingEngine); this
+  // records what those moves did to the neighborhoods they landed in.
+  var appliedHoods = Object.keys(relocationApplied).sort();
+  if (appliedHoods.length && typeof recordRipple_ === 'function') {
+    var tighter = appliedHoods.filter(function(h) { return relocationApplied[h] > 0; });
+    var easier = appliedHoods.filter(function(h) { return relocationApplied[h] < 0; });
+    var detail = 'Households moving reset the pressure on ' + appliedHoods.length +
+      ' neighborhood(s)' +
+      (tighter.length ? '; tighter in ' + tighter.join(', ') : '') +
+      (easier.length ? '; easier in ' + easier.join(', ') : '');
+    var biggest = 0;
+    for (var bh = 0; bh < appliedHoods.length; bh++) {
+      var bv = relocationApplied[appliedHoods[bh]];
+      if (Math.abs(bv) > Math.abs(biggest)) biggest = bv;
+    }
+    recordRipple_(ctx, {
+      causeType: 'relocation-pressure',
+      causeId: 'relocationPressureDeltas',
+      causeDetail: detail,
+      effectType: 'housing-pressure/relocation',
+      targetScope: 'neighborhood',
+      targetIds: appliedHoods,
+      magnitude: biggest,
+      duration: 1,
+      sourceEngine: 'neighborhoodTrajectoryEngine'
+    });
+  }
+  // Consume-and-clear: these are per-cycle deltas. Without the clear they would
+  // re-apply every cycle and ratchet a hood to the 10 ceiling off one move.
+  if (relocationDeltas) S.relocationPressureDeltas = {};
 
   return { analyzed: analyzed, growth: growthN, decay: decayN, hooks: hooks };
 }

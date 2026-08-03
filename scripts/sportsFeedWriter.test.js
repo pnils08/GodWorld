@@ -219,13 +219,40 @@ function writerHarness(options = {}) {
   };
   let batchCalls = 0;
   let formulaReadCalls = 0;
+  let earlyAppendTargetShiftInjected = false;
   const capturedBatches = [];
   let appendedRow = null;
+  const shiftAppendTargets = (
+    sequence,
+    shiftedSheets = ['LifeHistory_Log', 'Ripple_Ledger'],
+  ) => {
+    if (shiftedSheets.includes('LifeHistory_Log')) {
+      lifeHistoryLogSnapshot.rows.push({
+        rowNumber: lifeHistoryLogSnapshot.rows.length + 2,
+        values: LIFE_HISTORY_LOG_HEADERS.map((_, index) => (
+          index === 3 ? `SYNTHETIC-RACE-${sequence}` : ''
+        )),
+      });
+    }
+    if (shiftedSheets.includes('Ripple_Ledger')) {
+      rippleLedgerSnapshot.rows.push({
+        rowNumber: rippleLedgerSnapshot.rows.length + 2,
+        values: RIPPLE_LEDGER_HEADERS.map((_, index) => (
+          index === 2 ? `synthetic-race-${sequence}` : ''
+        )),
+      });
+    }
+  };
 
   const writer = createSportsFeedWriter({
     auditStore,
     now: () => new Date('2042-01-01T00:00:00.000Z'),
     getSheetIds: async (sheetNames) => {
+      if (options.appendTargetShiftBeforeFirstFormulaRead &&
+          !earlyAppendTargetShiftInjected) {
+        earlyAppendTargetShiftInjected = true;
+        shiftAppendTargets('EARLY');
+      }
       const result = {};
       if (sheetNames.includes('Oakland_Sports_Feed')) result.Oakland_Sports_Feed = 101;
       if (sheetNames.includes('As_Roster')) result.As_Roster = 202;
@@ -344,6 +371,27 @@ function writerHarness(options = {}) {
               : citizenSnapshot.rows[0].values[column],
           };
         }
+        const appendMatch = range.match(
+          /^(LifeHistory_Log|Ripple_Ledger)!([A-Z]+)(\d+):[A-Z]+\d+$/
+        );
+        if (appendMatch) {
+          const snapshot = appendMatch[1] === 'LifeHistory_Log'
+            ? lifeHistoryLogSnapshot
+            : rippleLedgerSnapshot;
+          const column = appendMatch[2].split('').reduce(
+            (value, character) => value * 26 + character.charCodeAt(0) - 64,
+            0,
+          ) - 1;
+          const row = snapshot.rows.find(
+            (candidate) => candidate.rowNumber === Number(appendMatch[3])
+          );
+          return {
+            range,
+            value: options.formulaRange === range
+              ? '=SYNTHETIC_FORMULA()'
+              : row ? row.values[column] : '',
+          };
+        }
         return {
           range,
           value: options.formulaRange === range
@@ -355,22 +403,7 @@ function writerHarness(options = {}) {
       if (formulaReadCalls <= Number(options.appendTargetShifts || 0)) {
         const shiftedSheets = options.appendTargetShiftSheets ||
           ['LifeHistory_Log', 'Ripple_Ledger'];
-        if (shiftedSheets.includes('LifeHistory_Log')) {
-          lifeHistoryLogSnapshot.rows.push({
-            rowNumber: lifeHistoryLogSnapshot.rows.length + 2,
-            values: LIFE_HISTORY_LOG_HEADERS.map((_, index) => (
-              index === 3 ? `SYNTHETIC-RACE-${formulaReadCalls}` : ''
-            )),
-          });
-        }
-        if (shiftedSheets.includes('Ripple_Ledger')) {
-          rippleLedgerSnapshot.rows.push({
-            rowNumber: rippleLedgerSnapshot.rows.length + 2,
-            values: RIPPLE_LEDGER_HEADERS.map((_, index) => (
-              index === 2 ? `synthetic-race-${formulaReadCalls}` : ''
-            )),
-          });
-        }
+        shiftAppendTargets(formulaReadCalls, shiftedSheets);
       }
       return values;
     },
@@ -796,6 +829,26 @@ async function expectCode(promise, code) {
   const appendRaceResult = await appendRaceHarness.writer(appendRaceInput);
   assert.strictEqual(appendRaceHarness.batchCalls, 1);
   assert.ok(appendRaceResult.updatedRanges.includes('LifeHistory_Log!A4:G4'));
+
+  const earlyShiftHarness = writerHarness({
+    appendTargetShiftBeforeFirstFormulaRead: true,
+  });
+  const earlyShiftResult = await earlyShiftHarness.writer(inputFor(
+    injuryValue,
+    'synthetic-pre-formula-shift-01',
+    earlyShiftHarness,
+  ));
+  assert.strictEqual(earlyShiftHarness.formulaReadCalls, 1);
+  assert.strictEqual(earlyShiftHarness.batchCalls, 1);
+  assert.ok(earlyShiftResult.updatedRanges.includes('LifeHistory_Log!A4:G4'));
+  assert.ok(earlyShiftResult.updatedRanges.includes('Ripple_Ledger!A4:M4'));
+  const earlyShiftAudit = earlyShiftHarness.auditStore.records.at(-1);
+  assert.ok(earlyShiftAudit.cellTransitions.some(
+    (transition) => transition.range === 'LifeHistory_Log!A4:A4'
+  ));
+  assert.ok(earlyShiftAudit.cellTransitions.some(
+    (transition) => transition.range === 'Ripple_Ledger!A4:A4'
+  ));
 
   const preBatchShiftHarness = writerHarness({ appendTargetShifts: 1 });
   const preBatchShiftResult = await preBatchShiftHarness.writer(inputFor(

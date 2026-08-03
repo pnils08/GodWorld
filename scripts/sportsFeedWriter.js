@@ -1054,71 +1054,81 @@ function createSportsFeedWriter(dependencies) {
       }
 
       updatedRanges = [feedRange, ...mutationRanges];
+      let appendTargetRetargeted = false;
+      const recheckAppendTargets = async () => {
+        if (!rosterEventProjection) return false;
+        const [latestLifeHistoryLog, latestRippleLedger] = await Promise.all([
+          readSportsSource(LIFE_HISTORY_LOG_SHEET),
+          readSportsSource(RIPPLE_LEDGER_SHEET),
+        ]);
+        const latestLifeHistoryLogRow = assertAppendIdentityAvailable(
+          latestLifeHistoryLog,
+          LIFE_HISTORY_LOG_SHEET,
+          LIFE_HISTORY_LOG_HEADERS,
+          3,
+          rosterEventProjection.lifeHistory.eventTag,
+        );
+        const latestRippleLedgerRow = assertAppendIdentityAvailable(
+          latestRippleLedger,
+          RIPPLE_LEDGER_SHEET,
+          RIPPLE_LEDGER_HEADERS,
+          2,
+          validation.submissionId,
+        );
+        const targetMoved =
+          latestLifeHistoryLogRow !== nextLifeHistoryLogRow ||
+          latestRippleLedgerRow !== nextRippleLedgerRow;
+        if (!targetMoved) return false;
+        if (appendTargetRetargeted) {
+          throw new SportsFeedWriterError(
+            'sports_source_changed',
+            'Sports append targets kept moving before the batch',
+            409,
+            { appendTargetRetryExhausted: true },
+          );
+        }
+
+        appendTargetRetargeted = true;
+        nextLifeHistoryLogRow = latestLifeHistoryLogRow;
+        nextRippleLedgerRow = latestRippleLedgerRow;
+        mutationRanges = mutationRanges.map((range) => (
+          retargetAppendRange(
+            retargetAppendRange(
+              range,
+              LIFE_HISTORY_LOG_SHEET,
+              nextLifeHistoryLogRow,
+            ),
+            RIPPLE_LEDGER_SHEET,
+            nextRippleLedgerRow,
+          )
+        ));
+        writeCells = writeCells.map((cell) => ({
+          ...cell,
+          range: retargetAppendRange(
+            retargetAppendRange(
+              cell.range,
+              LIFE_HISTORY_LOG_SHEET,
+              nextLifeHistoryLogRow,
+            ),
+            RIPPLE_LEDGER_SHEET,
+            nextRippleLedgerRow,
+          ),
+        }));
+        updatedRanges = [feedRange, ...mutationRanges];
+        return true;
+      };
+
+      await recheckAppendTargets();
       cellTransitions = await preflightCellTransitions(
         writeCells,
         readFormulaRanges,
       );
 
       if (rosterEventProjection) {
-        for (let appendTargetAttempt = 0; appendTargetAttempt < 2;
-          appendTargetAttempt += 1) {
-          const [latestLifeHistoryLog, latestRippleLedger] = await Promise.all([
-            readSportsSource(LIFE_HISTORY_LOG_SHEET),
-            readSportsSource(RIPPLE_LEDGER_SHEET),
-          ]);
-          const latestLifeHistoryLogRow = assertAppendIdentityAvailable(
-            latestLifeHistoryLog,
-            LIFE_HISTORY_LOG_SHEET,
-            LIFE_HISTORY_LOG_HEADERS,
-            3,
-            rosterEventProjection.lifeHistory.eventTag,
-          );
-          const latestRippleLedgerRow = assertAppendIdentityAvailable(
-            latestRippleLedger,
-            RIPPLE_LEDGER_SHEET,
-            RIPPLE_LEDGER_HEADERS,
-            2,
-            validation.submissionId,
-          );
-          const targetMoved =
-            latestLifeHistoryLogRow !== nextLifeHistoryLogRow ||
-            latestRippleLedgerRow !== nextRippleLedgerRow;
+        for (let appendTargetCheck = 0; appendTargetCheck < 2;
+          appendTargetCheck += 1) {
+          const targetMoved = await recheckAppendTargets();
           if (!targetMoved) break;
-          if (appendTargetAttempt === 1) {
-            throw new SportsFeedWriterError(
-              'sports_source_changed',
-              'Sports append targets kept moving before the batch',
-              409,
-              { appendTargetRetryExhausted: true },
-            );
-          }
-
-          nextLifeHistoryLogRow = latestLifeHistoryLogRow;
-          nextRippleLedgerRow = latestRippleLedgerRow;
-          mutationRanges = mutationRanges.map((range) => (
-            retargetAppendRange(
-              retargetAppendRange(
-                range,
-                LIFE_HISTORY_LOG_SHEET,
-                nextLifeHistoryLogRow,
-              ),
-              RIPPLE_LEDGER_SHEET,
-              nextRippleLedgerRow,
-            )
-          ));
-          writeCells = writeCells.map((cell) => ({
-            ...cell,
-            range: retargetAppendRange(
-              retargetAppendRange(
-                cell.range,
-                LIFE_HISTORY_LOG_SHEET,
-                nextLifeHistoryLogRow,
-              ),
-              RIPPLE_LEDGER_SHEET,
-              nextRippleLedgerRow,
-            ),
-          }));
-          updatedRanges = [feedRange, ...mutationRanges];
           cellTransitions = await preflightCellTransitions(
             writeCells,
             readFormulaRanges,

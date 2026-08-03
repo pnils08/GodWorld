@@ -600,10 +600,14 @@ deploys until items 1–4 land and their regression cases pass.
      Add a draft field length cap upstream + fix the ineffective route-level
      body limit (item 8 of the review — the global `express.json()` already
      parsed the body).
-  4. **Item 4** — make "no confirmation during a cycle run" mechanical, not
-     advisory: re-resolve LifeHistory_Log / Ripple_Ledger append targets
-     immediately before the batch and narrow the precondition hash so a
-     routine engine append can't 409 every pending preview.
+  4. **Item 4** — RULED retry-on-shift, NOT a cross-runtime lock (see
+     §Engine-sheet rulings for the reasoning and the revisit triggers).
+     Re-resolve LifeHistory_Log / Ripple_Ledger append targets immediately
+     before the batch; if a target moved, re-resolve and retry ONCE instead of
+     latching the writer. Narrow the precondition hash so a routine engine
+     append can't 409 every pending preview. Contained to the writer — no
+     engine-side change, no trigger scope, no dashboard dependency in
+     `godWorldEngine2.js`.
   5. **Item 5 (before first live proof)** — check whether `As_Roster.Middle`
      is populated for any player; reconcile the roster `First Middle Last`
      join against the ledger's `First Last`.
@@ -613,32 +617,54 @@ deploys until items 1–4 land and their regression cases pass.
      controls are dashboard auth + capability header.
 - **Verify:** a regression test per item in the existing fake-only harnesses;
   full sports suite + dashboard build green; no live write.
-- **Status:** [ ] in progress — items 1–3 and 5–9 have a locally green source
-  remediation. Item 4's full-log hash/append-target fragility is removed, but
-  strict cross-system Cycle exclusion still needs the builder's lock-boundary
-  decision. Independent re-review remains open; nothing deploys.
+- **Status:** [ ] in progress — items 1–3 and 5–9 LANDED `1bbedbd9` (verified by
+  engine-sheet; the item-1 regression was added there after mutation testing
+  exposed the fix as uncovered). Item 4's full-log hash/append-target fragility
+  is removed; its remaining scope is the retry-on-shift writer fix, no longer a
+  design decision. Item 5 still gates the first live proof. Nothing deploys.
 
 ## Engine-sheet rulings on the review gate (2026-08-02, S349)
 
 Codex asked for two design confirmations before closing the remediation. Both
 ruled here; the reasoning is recorded because both were close calls.
 
-**1. Item 4 (concurrent-cycle false `uncertain`) — CONFIRMED: design the shared
-lock, do NOT let a maintenance window close it.** Codex's instinct is right and
-matches ADR-0016: an advisory "don't run a proving event during a cycle" is not
-a control, and a workaround that lets this session finish is exactly how drift
-accumulates. **But item 4 is DOWNGRADED from deploy-blocker to
-enable-limitation**, because with item 3 fixed its failure mode is now
-fail-CLOSED: a collision produces a 502 and a latched writer — writes are
-refused, canon is not corrupted. So: attended proving runs may proceed once
-items 1-3 are verified live; **unattended/enabled operation waits for the lock.**
+**1. Item 4 (concurrent-cycle false `uncertain`) — RULED: build retry-on-shift
+in the writer; do NOT build a cross-runtime lock.** (Supersedes the earlier
+"authorize a shared-lock design" position, which Codex proposed and this session
+initially confirmed. Reversed after sizing the actual exposure — recorded rather
+than quietly changed.)
 
-**Escalation flag on the lock's scope (ADR-0016 §7):** a shared lock reaching
-`phase01-config/godWorldEngine2.js` and trigger scope makes the ENGINE take a
-dependency on the DASHBOARD writer. The engine currently has no knowledge of the
-dashboard at all. That is a cross-boundary coupling decision, not a sports-plan
-detail — it needs Mike's explicit call before design, not just before
-implementation.
+**The problem is a false alarm, not a safety hole.** The engine (Apps Script,
+Google's servers) and the sports writer (Node, droplet) can both write the
+spreadsheet. On overlap, the writer's computed target row shifts underneath it —
+it *detects* this and refuses to write, so canon is never corrupted. It then
+latches shut until restart and files an audit record about writes that never
+happened. With item 3 fixed, that is the whole blast radius: fail-CLOSED noise.
+
+**Why not a lock.** Apps Script and Node share no lock primitive — `LockService`
+is GAS-only, and a lock cell in a sheet is not atomic (both sides can read
+"free" in the same instant). The result would look like a lock and give false
+confidence. It would also make the ENGINE depend on the DASHBOARD writer, which
+it has no knowledge of today — a permanent cross-boundary coupling bought to
+defend a few minutes a week.
+
+**Proportionality decides it.** The engine fires weekly (Sunday) for a few
+minutes; a confirmation is a manual click at a time Mike controls. The overlap
+window is narrow, operator-controlled, and now fails closed.
+
+**Ruling:** re-resolve the append targets immediately before the batch; if a
+target moved, re-resolve and retry ONCE rather than latching. Scheduling
+discipline (no proving event during a cycle fire) stays the operating habit, not
+a claimed control. **Revisit triggers — write these down rather than
+re-deriving:** (a) the engine becomes continuous instead of a weekly fire, or
+(b) a second writer gains write access (another dashboard, another agent). Then
+the window stops being narrow and a real lock earns its keep.
+
+**Escalation flag CLEARED.** The earlier ADR-0016 §7 flag on this item — that a
+shared lock would reach `phase01-config/godWorldEngine2.js` and trigger scope,
+needing Mike's cross-boundary call — no longer applies: retry-on-shift is
+contained entirely within the writer. Task 10's remaining scope is a writer fix,
+not a design job.
 
 **2. Item 7 (audit pre-images) — CONFIRMED: retain hashes, do not store
 plaintext.** The tension is real: a hash proves *that* a cell differed but
@@ -753,5 +779,6 @@ compensation.
 - 2026-08-02 (engine-sheet) — Codex source landed at `ce2a7d11` after review.
 - 2026-08-02 (engine-sheet) — Task 9 independent review done: FIX-BEFORE-DEPLOY. Task 10 opened for the fix list.
 - 2026-08-02 (engine-sheet) — Codex remediation landed (1bbedbd9); item-1 regression added after mutation exposed it uncovered. Item 4 + 7 ruled — see §Engine-sheet rulings.
+- 2026-08-02 (engine-sheet, Mike-direct) — Item 4 REVERSED to retry-on-shift; cross-runtime lock rejected on proportionality. Escalation flag cleared; Task 10 is now a contained writer fix.
 - 2026-08-02 (Codex) — Task 10 remediation source advanced through items 1–3
   and 5–9; item 4 remains open at the cross-system lock boundary.

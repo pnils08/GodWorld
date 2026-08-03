@@ -178,7 +178,7 @@ Every finding: what, where, and its triage — `fix-in-cohort` / `escalate`
 | 2 | Code-only hoods confirmed (answers Open question 1): `Elmhurst`, `Coliseum` (real East Oakland sub-areas), `Montclair`/`Old Oakland` (already CHILDREN), `Jingletown` (deliberately off-roster), `Coliseum District` (spelling variant), `Piedmont Avenue` (alias spelling). | district maps, `citizenDerivation`, `photoGenerator`, `economicRippleEngine` | **fixed-in-cohort** for the 4 lib files — Coliseum/Elmhurst→CHILDREN; dead keys (Jingletown, Coliseum District — zero live citizens) removed. Engine-file instances belong to their cohorts. |
 | 3 | `OAKLAND_SCENES['Piedmont Avenue']` was a dead key — exact-match lookup vs ledger's `Piedmont Ave` never hit, so Piedmont Ave articles silently lost their setting line. The drift class producing invisible feature loss, not just messy joins. | `lib/photoGenerator.js:84` | **fixed-in-cohort** — key renamed (behavioral, called out per AC#4). |
 | 4 | `districtMap.js` D5 was missing Baylight District; sheet District col + writer's canon-authorized map both say D5. `getDistrictForNeighborhood('Baylight District')` returned null → civic attribution never reached the $2.1B build. Third copy in `updateCivicApprovalRatings.js` STILL lags — its cohort inherits the fix. | `lib/districtMap.js:13` | **fixed-in-cohort** (behavioral, called out). `updateCivicApprovalRatings` copy → its cohort. |
-| 5 | East Oakland has NO canon-authorized district in the writer's map (blank District, "pending canon authorization") while `districtMap.js` + `updateCivicApprovalRatings.js` both place it D5. Canon-authorization gap — not engine-sheet's call. | `v3NeighborhoodWriter.js:123` map | **escalate** — Mike decision: authorize East Oakland→D5 (or elsewhere), then the writer map + sheet follow. |
+| 5 | East Oakland has NO canon-authorized district in the writer's map (blank District, "pending canon authorization") while `districtMap.js` + `updateCivicApprovalRatings.js` both place it D5. Canon-authorization gap — not engine-sheet's call. | `v3NeighborhoodWriter.js:123` map | **RESOLVED S352 (Mike-direct)** — East Oakland → D5 ("its logical district"); writer map updated, sheet District cell set. |
 | 6 | `OAKLAND_SCENES` has no scene for 8 canonical hoods (Laurel, KONO, Brooklyn, Eastlake, Glenview, Ivy Hill, San Antonio, Baylight District) — their articles get no setting line. Content authoring, media-adjacent. | `lib/photoGenerator.js:69` | **file-as-row** — flag to media/research-build; not an engine-sheet edit. |
 | 7 | District ASSIGNMENTS are themselves triplicated truth: `districtMap.js`, `updateCivicApprovalRatings.js`, writer's canon map — and the sheet carries a District column only 8 hoods deep. Candidate second application of ADR-0016 (entity ATTRIBUTE, not just set). | 3 files + sheet col | **file-as-row** — needs its own decision; deliberately NOT folded into Cohort 1 (AC#4). |
 | 8 | `NEIGHBORHOOD_GENDER_VARIANCE` lacks keys for Brooklyn, Dimond, Grand Lake, East Oakland, Baylight District — they silently fall to BASE_FEMALE_PCT 0.51. Harmless (fallback by design), noted so nobody rediscovers it. | `lib/citizenDerivation.js:26` | note only. |
@@ -202,6 +202,10 @@ Every finding: what, where, and its triage — `fix-in-cohort` / `escalate`
   ordered from the S349 signature-clustering survey. Written at session end as
   the handoff artifact so Cohort 1 starts in a fresh context with the survey
   already durable.
+- 2026-08-03 (S352, later) — Finding #5 resolved Mike-direct: East Oakland → D5
+  (writer canon map + sheet District cell). Deploy window verified clean via
+  live pull-diff (sports source is all claspignored; engine.93 rides the same
+  push).
 - 2026-08-03 (S352) — Cohort 1 COMPLETE (Tasks 1–5): loader + accessors shipped
   and wired both entry points (NOT yet clasp-pushed), detector live, 4 lib files
   migrated, ledger reconciled (East Oakland row 23), 8 findings triaged,

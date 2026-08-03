@@ -128,9 +128,13 @@ var NEIGHBORHOOD_DISTRICT_MAP = {
   // S256 roster alignment — canon-authorized in INSTITUTIONS §Neighborhoods (S256).
   'Lake Merritt': 'D8',  // Chen (CRC). Lake-ring cluster (Adams Point/Grand Lake/Eastlake).
   'Uptown': 'D9',        // Mobley (OPP). Legacy lib/districtMap assignment, ratified S256.
-  'Baylight District': 'D5' // Rivers (OPP). Coliseum-site build (Baylight Authority LENS:
+  'Baylight District': 'D5', // Rivers (OPP). Coliseum-site build (Baylight Authority LENS:
                           // 65-acre former-Coliseum grounds, Elmhurst/Coliseum-area context);
                           // sim map already places Coliseum+Elmhurst in D5.
+  // S352 (Mike-direct): East Oakland placed in its logical district — the east
+  // flatlands sit with Coliseum/Elmhurst in D5; both civic maps already assumed
+  // it (engine.99 Finding #5 resolved).
+  'East Oakland': 'D5'
   // 10 other neighborhoods (Laurel, West Oakland, Fruitvale, Jack London,
   // Rockridge, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake,
   // Glenview, Dimond, Ivy Hill, San Antonio) — pending canon authorization.

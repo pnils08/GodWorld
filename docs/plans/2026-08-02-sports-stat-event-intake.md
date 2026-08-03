@@ -572,11 +572,12 @@ deployment, closing the cross-session double-append finding in
 - **Status:** [ ] in progress — source landed at `ce2a7d11`; independent review
   [[../reviews/2026-08-02-sports-intake-opus-review]] returned
   **FIX-BEFORE-DEPLOY**. Its source remediation landed in `1bbedbd9` and
-  `5d82fc71`, with the missing item-1 cases added by engine-sheet and item 4
-  mutation-tested by Codex. Remaining gates are remediation re-review, the
-  parent workspace's hostname/TLS/authenticated-live-read deployment work,
-  item 5's live roster check, and Mike's separate approval for each proving
-  write. See Task 10.
+  `5d82fc71`; Codex closed the remaining early-shift window in `ef69f4c8`.
+  Private hostname/TLS transport and public-port restriction are deployed.
+  Remaining gates are remediation re-review, the parent workspace's
+  loopback/Secure-cookie runtime restart and authenticated sports proof, item
+  5's live roster check, and Mike's separate approval for each proving write.
+  See Task 10.
 
 ### Task 10: Clear the independent-review fix list (engine-sheet)
 
@@ -629,10 +630,11 @@ deployment, and proving-write approvals remain open.
   mutation testing exposed the fix as uncovered). Item 4 now re-checks append
   targets strictly before the batch, performs at most one retargeted preflight,
   and returns a safe pre-batch 409 on a second move; post-batch ambiguity is
-  never retried; that implementation landed as `5d82fc71`. Item 5 still gates
-  the first live proof. engine.77 is gated to attended non-overlapping runs on
-  canon-safety grounds (ledger clobber path); engine.40 stat capture is
-  assessable separately. Nothing deploys.
+  never retried. The original implementation landed as `5d82fc71`; the
+  before-first-formula-read shift regression and recheck landed as `ef69f4c8`.
+  Item 5 still gates the first live proof. engine.77 is gated to attended
+  non-overlapping runs on canon-safety grounds (ledger clobber path); engine.40
+  stat capture is assessable separately. No live write is authorized.
 
 ## Engine-sheet rulings on the review gate (2026-08-02, S349)
 
@@ -823,6 +825,13 @@ compensation.
   check, and separately approved proving writes. Engine.77 remains attended
   and non-overlapping with a Cycle; unattended enablement re-arms the genuine
   exclusion-design gate. No deployment or live write occurred.
+- 2026-08-03 — Codex closed the early append-shift window in `ef69f4c8`, then
+  deployed private Tailscale HTTPS and removed the public IPv4/IPv6 `3001`
+  rules. Private health and login checks passed; unauthenticated sports access
+  remained `401`, and the builder verified Chromebook access. The
+  loopback/Secure-cookie sports-write restart, authenticated sports proof,
+  live-roster check, and every proving write remain open. No Sheet write
+  occurred.
 - 2026-08-02 — Drafted and registered from the adopted sports workspace
   research, the source-built engine.89 boundary, the current roster/feed/health
   implementations, and engine.90 archive research. No implementation,
@@ -855,3 +864,7 @@ compensation.
   re-review, deployment/authenticated-read, live-roster, and proving-write
   gates. Frontmatter transitioned `draft → active` to match adoption and
   in-progress rollout state.
+- 2026-08-03 (Codex) — Closed the early append-shift window in `ef69f4c8` and
+  recorded private Tailscale transport deployment; retained remediation
+  re-review, runtime restart, authenticated sports proof, live-roster, and
+  proving-write gates.

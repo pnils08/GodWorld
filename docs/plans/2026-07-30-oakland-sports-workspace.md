@@ -530,10 +530,11 @@ decision.
 ### Wave C — disabled-by-default append boundary
 
 The builder selected **remote browser** on 2026-07-31 for the best entry
-experience. The source boundary therefore requires all of these before it
-reports itself configured:
+experience, then selected private Tailscale access on 2026-08-03 instead of a
+purchased public domain. The source boundary therefore requires all of these
+before it reports itself configured:
 
-- an HTTPS public origin set by `SPORTS_WRITE_ORIGIN`;
+- an HTTPS private origin set by `SPORTS_WRITE_ORIGIN`;
 - a loopback-only dashboard listener via `DASHBOARD_BIND_HOST`;
 - trusted-proxy handling limited to loopback;
 - a Secure, HttpOnly, SameSite=Strict dashboard cookie via
@@ -543,10 +544,10 @@ reports itself configured:
 - separate `SPORTS_PREVIEW_TOKEN_SECRET` and `SPORTS_WRITE_CAPABILITY` secrets;
 - the disabled-by-default `SPORTS_WRITE_ENABLED` feature flag.
 
-No TLS proxy is installed on the inspected host. Choosing and installing the
-proxy, selecting the public hostname, restricting direct port `3001`, setting
-the source configuration, and restarting the service remain separately
-approved deployment work.
+Tailscale Serve now provides private HTTPS at
+`https://godworld.tail6d8700.ts.net`, and UFW exposes no direct `3001/tcp` rule.
+The dashboard still needs its loopback/Secure-cookie sports-write environment
+configuration and restart before the source can report itself configured.
 
 Both modes use a dedicated step-up sports-write capability because the current
 single dashboard credential has no roles. The capability is not stored in the
@@ -689,11 +690,13 @@ real proving event remain builder gates even after source approval.
 - **Verify:** documentation/link checks and rollout lint pass; deployment and
   live-write gates remain explicit.
 - **Status:** [ ] in progress — Waves A–C are source-built and the approved
-  engine.40/engine.77 follow-on remediation landed through `5d82fc71`. The
-  original Opus review is complete; remediation re-review,
-  hostname/proxy/TLS deployment, authenticated live-read proof, separately
-  approved live append/proving writes, and archive gates remain. Engine.77
-  proving must be attended and must not overlap a Cycle.
+  engine.40/engine.77 follow-on remediation landed through `5d82fc71` and
+  `ef69f4c8`. Private hostname/TLS transport and direct-port restriction are
+  deployed. The original Opus review is complete; remediation re-review,
+  loopback/Secure-cookie sports-write restart, authenticated sports
+  read/preview proof, separately approved live append/proving writes, and
+  archive gates remain. Engine.77 proving must be attended and must not overlap
+  a Cycle.
 
 ## Validation matrix
 
@@ -720,10 +723,10 @@ real proving event remain builder gates even after source approval.
 1. Opus 5 reviews the corrected Waves A–B diff and complete Wave C source
    evidence; engine-sheet resolves any findings before landing.
 2. Build and inspect desktop/mobile output before any dashboard restart.
-3. Choose the public hostname and TLS proxy, install/configure it through a
-   separately approved infrastructure change, bind the dashboard to loopback,
-   restrict direct port `3001`, enable the Secure cookie, and keep
-   `SPORTS_WRITE_ENABLED=false`.
+3. Private hostname/TLS transport is deployed through Tailscale Serve and
+   direct public port `3001` is restricted. Engine-sheet still binds the
+   dashboard to loopback, enables the Secure cookie, and keeps
+   `SPORTS_WRITE_ENABLED=false` in a separately approved runtime restart.
 4. With separate builder approval, deploy/restart and prove authenticated live
    read and preview endpoints through HTTPS.
 5. Do not `clasp push` `phase02-world-state/applySportsSeason.js` as an
@@ -741,11 +744,12 @@ consumer if necessary, and leaves the appended canon row untouched pending
 builder review. Never “repair” a bad proving row by silently deleting or
 rewriting it.
 
-## Open questions
+## Resolved deployment decision
 
-1. Which public hostname should the HTTPS sports workspace use, and which TLS
-   proxy should engine-sheet install? No proxy is currently installed; this
-   decision is required only for deployment, not source review.
+The private-project transport is Tailscale Serve at
+`https://godworld.tail6d8700.ts.net`; no purchased domain or public reverse
+proxy is required. This resolves the hostname/TLS/direct-port question but does
+not authorize the sports-write runtime restart or a live write.
 
 Roster current-stat writes, team/roster state mutation, LifeHistory
 emission, structured NotebookLM extraction, Chicago redesign, historical row
@@ -882,6 +886,11 @@ own plan change and builder approval.
   authenticated-live-read deployment, and separately approved proving writes.
   Engine.77 remains attended and non-overlapping with a Cycle; nothing was
   deployed or written live.
+- 2026-08-03 — Private remote-browser transport deployed through Tailscale
+  Serve at `https://godworld.tail6d8700.ts.net`; Chromebook access, HTTPS
+  health, login reachability, unauthenticated sports `401`, and removal of the
+  public IPv4/IPv6 `3001` rules were verified. No PM2 restart, sports feature
+  enablement, or external write occurred.
 
 ## Changelog
 
@@ -915,3 +924,6 @@ own plan change and builder approval.
 - 2026-08-03 — Reconciled the parent plan after the engine.40/engine.77 review
   remediation landed through `5d82fc71`; retained remediation re-review,
   deployment/authenticated-read, proving-write, and archive gates.
+- 2026-08-03 (Codex) — Recorded private Tailscale HTTPS deployment and public
+  `3001` restriction; retained the loopback/Secure-cookie restart,
+  authenticated sports proof, proving-write, and archive gates.

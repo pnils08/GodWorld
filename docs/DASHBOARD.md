@@ -1,14 +1,16 @@
 # GodWorld Dashboard
 
-**URL:** `http://64.225.50.16:3001` (or `localhost:3001` from the droplet)
+**URL:** `https://godworld.tail6d8700.ts.net` from a connected tailnet device
+(or `localhost:3001` from the droplet)
 **Auth:** Basic auth — credentials in `.env` (`DASHBOARD_USER`, `DASHBOARD_PASS`)
 **PM2:** `godworld-dashboard` (always running)
-**Stack:** Express + React (Vite build) | Port 3001
+**Stack:** Express + React (Vite build) | local port 3001 behind Tailscale Serve
 
 Full-dashboard audit: Session 156 (2026-04-17). Sports source/runtime audit:
-2026-08-02 — independent review fix pass is in progress; TLS/proxy deployment,
-production restart, authenticated live-read proof, and live append proof remain
-pending.
+2026-08-03 — private Tailscale HTTPS is live and public `3001` is blocked.
+Independent remediation re-review, the loopback/Secure-cookie sports-write
+runtime restart, authenticated sports read/preview proof, and live append proof
+remain pending.
 
 ---
 
@@ -253,14 +255,15 @@ confirmation, verified receipt, empty/stale/error states, roster readability,
 horizontal fit, bottom-nav clearance, structured object rendering, and
 accessibility.
 
-This is source state, not a deployment claim. No PM2 restart, authenticated live
-probe, NotebookLM invocation, proxy installation, feature-flag enablement, or
-external write was performed. Cross-system Cycle exclusion remains a deployment
-gate pending the builder's lock-boundary decision. The live host still needs a
-chosen hostname and TLS proxy before the writer can deploy. Re-review and
-separately approved stat and engine.77 proving writes remain open. TrueSource
-season close is deferred until the authoritative source update defines its
-payload.
+The private transport is deployed through Tailscale Serve at
+`https://godworld.tail6d8700.ts.net`; the operator verified it from a Chromebook,
+and UFW no longer exposes `3001/tcp`. No PM2 restart, authenticated sports
+read/preview proof, NotebookLM invocation, feature-flag enablement, or external
+write was performed. The dashboard still needs the loopback/Secure-cookie
+sports-write runtime configuration before the writer can report itself ready.
+Re-review and separately approved stat and engine.77 proving writes remain
+open. TrueSource season close is deferred until the authoritative source update
+defines its payload.
 
 ## Historical Sports Tab Assessment (S106; superseded)
 
@@ -336,7 +339,7 @@ The sports desk truesource was enriched:
 | **Council** | Working | All 9 seats + mayor from live Sheets. Factions, districts, POPIDs, notes all correct. |
 | **Tracker** | Working (stale data) | 5 initiatives with rich implementation detail. Last updated Feb 28. 3 show "UNTRACKED" despite having data. |
 | **Intel** | Working — strongest tab | 64 story hooks, 37 arcs (all stuck at "early" — known bug), 53 storylines with citizen/desk routing. Rich engine data. |
-| **Sports** | Source-built; deployment pending | A's/Oaks exact-Cycle workspace, live roster/stat views, local non-canon inbox, deterministic no-write preview. Restart/authenticated live proof and Wave C remain gated. |
+| **Sports** | Source-built; private transport deployed | A's/Oaks exact-Cycle workspace, live roster/stat views, local non-canon inbox, deterministic no-write preview. Sports-write runtime restart, authenticated sports proof, and Wave C proving writes remain gated. |
 | **City** | Working | 17 neighborhoods ranked by sentiment with crime, nightlife, retail, events metrics. Status flags on pressure zones. |
 | **Search** | Working | Full-text search across 256 articles (editions + archive + civic). Source field in results. |
 

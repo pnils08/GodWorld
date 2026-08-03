@@ -2,7 +2,9 @@
 
 **Droplet:** `ubuntu-s-1vcpu-2gb` | 1 vCPU, 2GB RAM, 25GB disk | $12/mo | nyc3
 **IP:** 64.225.50.16 | **Access:** SSH as root, or `mags` command (tmux auto-wiring)
-**Last verified:** 2026-07-28 via live `pm2 list`, `crontab -l`, and the job scripts.
+**Last verified:** 2026-07-28 via live `pm2 list`, `crontab -l`, and the job
+scripts. Dashboard transport reverified 2026-08-03 via live Tailscale, UFW, and
+health probes.
 
 ---
 
@@ -10,7 +12,7 @@
 
 | Process | Script | Purpose | Expected status |
 |---------|--------|---------|-----------------|
-| `godworld-dashboard` | `dashboard/server.js` | Express API + React frontend, port 3001 | online |
+| `godworld-dashboard` | `dashboard/server.js` | Express API + React frontend, local port 3001 behind private Tailscale HTTPS | online |
 | `mags-bot` | `scripts/mags-discord-bot.js` | Mags presence in Discord | online |
 | `wd-cards-daemon` | `scripts/wdCardsDaemon.js` | Polls the invalidation queue and rebuilds world-data cards | online |
 | `moltbook` | `scripts/moltbook-heartbeat.js` | One autonomous Moltbook visit daily at 14:00 Central | stopped between scheduled runs |
@@ -112,6 +114,10 @@ free -m
 # Dashboard
 curl -s http://localhost:3001/api/health | python3 -m json.tool
 
+# Private Dashboard transport
+tailscale status
+tailscale serve status
+
 # Discord bot
 pm2 logs mags-bot --lines 10 --nostream
 
@@ -127,11 +133,42 @@ curl -s http://localhost:37777/health
 
 ---
 
+## Private Dashboard Access
+
+The operator URL is `https://godworld.tail6d8700.ts.net`. It resolves and
+connects only from a device signed into Mike's tailnet. Tailscale Serve
+terminates HTTPS on the server's private Tailscale addresses and proxies to
+`http://127.0.0.1:3001`.
+
+The direct dashboard port is not public: UFW has no IPv4 or IPv6 allow rule for
+`3001/tcp`. Check the boundary without changing it:
+
+```bash
+tailscale status
+tailscale serve status
+ufw status numbered
+curl -s http://127.0.0.1:3001/api/health | python3 -m json.tool
+```
+
+If the private URL fails, verify `tailscaled` and restore the private proxy:
+
+```bash
+systemctl status tailscaled --no-pager
+tailscale serve --bg http://127.0.0.1:3001
+```
+
+Do not reopen public port `3001` as a routine recovery step. Disabling Serve
+uses `tailscale serve --https=443 off`; restoring public access requires a
+separate builder decision.
+
+---
+
 ## When Things Break
 
 | Symptom | Likely Cause | Fix |
 |---------|-------------|-----|
 | Dashboard returns 502 | PM2 process crashed | `pm2 restart godworld-dashboard` |
+| Private Dashboard name does not resolve | Chromebook/device is disconnected from Tailscale or its Tailscale DNS setting is off | Connect the Tailscale client and enable its DNS setting; do not reopen public `3001` |
 | Bot not responding in Discord | PM2 process crashed or rate limited | `pm2 restart mags-bot`, check error log |
 | Supermemory timeouts in bot log | API latency or outage | Graceful — bot falls back to local files. Wait it out. |
 | Disk >80% | Session transcripts, claude-mem, backups | Run archive policy from DISK_MAP.md |

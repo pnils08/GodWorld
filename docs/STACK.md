@@ -2,7 +2,8 @@
 
 All services, URLs, credentials, and running processes. Keep this current.
 
-Last updated: 2026-07-28 (live PM2 inventory verified; `wd-cards-daemon` added). Previous: 2026-07-27 Moltbook/SpaceMolt update.
+Last updated: 2026-08-03 (Tailscale private dashboard HTTPS deployed; public
+dashboard port removed). Previous: 2026-07-28 live PM2 inventory verification.
 
 ---
 
@@ -11,6 +12,7 @@ Last updated: 2026-07-28 (live PM2 inventory verified; `wd-cards-daemon` added).
 | Service | URL | Purpose | Account |
 |---------|-----|---------|---------|
 | **Digital Ocean** | cloud.digitalocean.com / API via DO token in `/root/.config/godworld/.env` | Droplet `ubuntu-s-1vcpu-2gb` — 1 vCPU, 2GB RAM, 25GB disk, IP `64.225.50.16`, region nyc3. Created 2026-02-04 | pnils08@gmail.com (Google SSO). API access via `DIGITALOCEAN_TOKEN` |
+| **Tailscale** | `https://godworld.tail6d8700.ts.net` | Private tailnet access and HTTPS termination for the Dashboard. `tailscale serve` proxies to `127.0.0.1:3001`; UFW exposes no public `3001` rule. | Mike-owned Personal tailnet |
 | **Local Disk** | `/root/GodWorld` on the DO droplet | Source of truth. All code, docs, editions, output, credentials, logs. 17GB used / 24GB total (74%). This is where Mags lives. | root@64.225.50.16 |
 | **GitHub** | github.com/pnils08/GodWorld | Private repo — code backup. Not all files sync (editions, output, .env, credentials are gitignored) | pnils08 |
 
@@ -40,7 +42,7 @@ Last updated: 2026-07-28 (live PM2 inventory verified; `wd-cards-daemon` added).
 | **Discord** | discord.com | Mags bot — community presence | **RUNNING** (pm2: `mags-bot` — name normalized S156 via Phase 40.3) |
 | **Moltbook** | [mags-corliss profile](https://www.moltbook.com/u/mags-corliss) | Tracked social-media business — one autonomous Mags visit/day; new actions enter her continuity through a deduplicated reflection handoff. | **CRON** (pm2: `moltbook` — 14:00 Central; stopped between runs, normal) |
 | **SpaceMolt Miner** | — | Preserved legacy script/logs; fixed-sequence miner retired after repeated no-fuel/no-ore runs. | **DISABLED** (live PM2 entry removed + saved 2026-07-27; ecosystem declaration remains dormant) |
-| **GodWorld Dashboard** | localhost:3001 | Express API (40 endpoints) + frontend — cycle data, citizen info. Basic auth (`DASHBOARD_USER`/`DASHBOARD_PASS` in `/root/.config/godworld/.env`) | **RUNNING** (pm2: `godworld-dashboard`) |
+| **GodWorld Dashboard** | `https://godworld.tail6d8700.ts.net` from a connected tailnet device; `localhost:3001` on the droplet | Express API (40 endpoints) + frontend — cycle data, citizen info. Basic auth (`DASHBOARD_USER`/`DASHBOARD_PASS` in `/root/.config/godworld/.env`) | **RUNNING** (pm2: `godworld-dashboard`; public `3001` blocked) |
 
 ## Supermemory Architecture
 
@@ -79,7 +81,7 @@ All containers on P N org ($9/mo). GodWorld org ($19/mo) is legacy — canceling
 ## PM2 Processes
 
 ```
-godworld-dashboard    online    port 3001, 40 API endpoints
+godworld-dashboard    online    local port 3001 behind private Tailscale HTTPS, 40 API endpoints
 mags-bot              online    Discord presence, Haiku 4.5 model
 wd-cards-daemon       online    polls and rebuilds invalidated world-data cards
 moltbook              cron      stopped between scheduled runs, normal

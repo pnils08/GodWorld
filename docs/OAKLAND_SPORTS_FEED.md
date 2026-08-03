@@ -1,7 +1,7 @@
 ---
 title: Oakland Sports Feed
 created: 2026-07-28
-updated: 2026-08-02
+updated: 2026-08-03
 type: reference
 tags: [sports, engine, citizens, active]
 sources:
@@ -35,9 +35,10 @@ not replace `As_Roster`, `Oaks_Roster`, or `Simulation_Ledger` as the authority
 for citizen identity and roster state.
 
 This reference documents verified current behavior. Dashboard Waves A–C are
-implemented in the source tree and await separately approved TLS/proxy
-deployment, dashboard restart, live-read proof, and one real append proof. The
-write feature is disabled by default.
+implemented in the source tree. Private Tailscale HTTPS is deployed and direct
+public access to port `3001` is blocked; the sports-write runtime restart,
+authenticated sports read/preview proof, and one real append proof remain
+separately gated. The write feature is disabled by default.
 
 ## Authority and safety
 
@@ -324,14 +325,16 @@ and the dashboard is loopback-bound behind the exact configured HTTPS origin
 with a Secure cookie. Dashboard authentication plus the capability are the
 authorization controls; HTTPS, same-origin, Secure-cookie, and loopback checks
 are proxy/transport attestations. Sports request bodies are capped at 64 KiB
-before JSON parsing and feed fields at 50,000 characters. No TLS proxy is
-installed yet, so the source cannot report itself ready for live appends.
-Deployment/restart, authenticated live reads, and a builder-supplied proving
-event remain separate approval gates. Engine.77 remains disabled for unattended
-use; an attended engine.77 confirmation must not overlap a Cycle because the
-Cycle's whole-ledger Phase 10 commit can overwrite a mid-Cycle citizen change.
-Engine.40 stat capture does not mutate `Simulation_Ledger` and is assessed
-separately.
+before JSON parsing and feed fields at 50,000 characters. Tailscale Serve now
+provides private HTTPS at `https://godworld.tail6d8700.ts.net`, and UFW blocks
+direct public access to `3001/tcp`. The Dashboard has not been restarted with
+the loopback/Secure-cookie sports-write configuration, so the source still
+cannot report itself ready for live appends. Authenticated sports read/preview
+proof and a builder-supplied proving event remain separate approval gates.
+Engine.77 remains disabled for unattended use; an attended engine.77
+confirmation must not overlap a Cycle because the Cycle's whole-ledger Phase 10
+commit can overwrite a mid-Cycle citizen change. Engine.40 stat capture does
+not mutate `Simulation_Ledger` and is assessed separately.
 
 ## Remaining gaps
 
@@ -344,12 +347,13 @@ coverage are repaired. Remaining gaps are:
 - the independent review remediation needs re-review; unattended engine.77
   remains disabled until a genuine cross-runtime exclusion mechanism is
   separately designed and approved;
-- deployment, authenticated live reads, and separately approved stat/engine.77
-  proving writes remain open;
+- the loopback/Secure-cookie sports-write runtime restart, authenticated sports
+  reads/previews, and separately approved stat/engine.77 proving writes remain
+  open;
 - TrueSource season close remains open until the authoritative source update
   defines its complete payload contract;
-- the remote-browser deployment still needs a public hostname, TLS proxy,
-  direct-port restriction, secure environment configuration, and review.
+- private remote-browser transport is deployed; secure sports-write environment
+  configuration, restart, and review remain.
 
 Do not repair the world by changing historical feed values. Align the active
 parsers, validators, and consumers through an approved implementation plan.
@@ -386,3 +390,6 @@ parsers, validators, and consumers through an approved implementation plan.
   target receives one fresh preflight/re-check, a second move fails before the
   batch, and no post-batch result is retried. Recorded the split Cycle boundary:
   engine.77 attended/non-overlapping only; engine.40 assessed separately.
+- 2026-08-03 (Codex) — Recorded private Tailscale HTTPS deployment and removal
+  of public `3001` access. The sports-write runtime restart, authenticated
+  sports proof, and every live write remain separately gated.

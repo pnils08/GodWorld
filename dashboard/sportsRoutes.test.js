@@ -1,9 +1,11 @@
 import assert from 'assert';
 import {
   SPORTS_CACHE_TTL_MS,
+  SPORTS_REQUEST_BODY_LIMIT_BYTES,
   SPORTS_WRITE_CONFIRMATION,
   createSportsHandlers,
   createSportsSheetReader,
+  sportsBodyLimitVerify,
 } from './sportsRoutes.js';
 
 function responseHarness() {
@@ -49,6 +51,13 @@ const AS_HEADERS = [
   'POPID', 'First', 'Middle', 'Last', 'Tier', 'Position', 'Team', 'Salary',
   'AB', 'AVG', 'H', 'HR', 'RBI', 'SB', 'SO', 'IP', 'ERA', 'W-L', 'SO', 'BB',
 ];
+const FEED_HEADERS = [
+  'Cycle', 'SeasonType', 'EventType', 'TeamsUsed', 'NamesUsed', 'Notes',
+  'Stats', 'Team Record', 'VideoGameDate', 'VideoGame', 'StoryAngle',
+  'PlayerMood', 'EventTrigger', 'HomeNeighborhood', 'Streak',
+  'FanSentiment', 'FranchiseStability', 'EconomicFootprint',
+  'CommunityInvestment', 'MediaProfile',
+];
 const OAKS_HEADERS = [
   'POPID', 'First', 'Middle', 'Last', 'Tier', 'Position', 'Team', 'Salary',
   'PPG', 'ASST', 'REB', 'STL', 'FG%', '3P%',
@@ -91,20 +100,37 @@ const RIPPLE_LEDGER_HEADERS = [
 ];
 
 const syntheticSheets = {
-  Oakland_Sports_Feed: [
-    { Cycle: '403', TeamsUsed: "A's", SeasonType: 'early-season', 'Team Record': '3-2' },
-    {
+  Oakland_Sports_Feed: {
+    headers: FEED_HEADERS,
+    rows: [
+      {
+        rowNumber: 2,
+        values: FEED_HEADERS.map((header) => ({
+          Cycle: '403',
+          TeamsUsed: "A's",
+          SeasonType: 'early-season',
+          'Team Record': '3-2',
+        })[header] || ''),
+      },
+      {
+        rowNumber: 3,
+        values: FEED_HEADERS.map((header) => ({
       Cycle: '404', TeamsUsed: "A's", SeasonType: 'regular-season',
       EventType: 'game-result', NamesUsed: 'Synthetic Batter',
       Notes: 'Synthetic non-canon result.', 'Team Record': '4-2', Streak: 'W2',
       HomeNeighborhood: 'Downtown',
-    },
-    {
+        })[header] || ''),
+      },
+      {
+        rowNumber: 4,
+        values: FEED_HEADERS.map((header) => ({
       Cycle: '404', TeamsUsed: 'Warriors', SeasonType: 'regular-season',
       EventType: 'season-state', Notes: 'Synthetic legacy-alias state.',
       FanSentiment: 'electric',
-    },
-  ],
+        })[header] || ''),
+      },
+    ],
+  },
   As_Roster: {
     headers: AS_HEADERS,
     rows: [{
@@ -348,6 +374,41 @@ assert.strictEqual(
 assert.strictEqual(preview.body.data.confirmation.available, false);
 assert.strictEqual(preview.body.data.confirmation.reasonCode, 'sports_write_disabled');
 
+const oversizedPreview = await call(handlers.preview, {
+  body: {
+    ...validDraft,
+    Notes: 'x'.repeat(SPORTS_REQUEST_BODY_LIMIT_BYTES),
+  },
+});
+assert.strictEqual(oversizedPreview.statusCode, 413);
+assert.strictEqual(oversizedPreview.body.error.code, 'sports_body_too_large');
+assert.doesNotThrow(() => sportsBodyLimitVerify(
+  { originalUrl: '/api/sports/preview' },
+  null,
+  Buffer.alloc(SPORTS_REQUEST_BODY_LIMIT_BYTES),
+));
+assert.throws(
+  () => sportsBodyLimitVerify(
+    { originalUrl: '/api/sports/entries' },
+    null,
+    Buffer.alloc(SPORTS_REQUEST_BODY_LIMIT_BYTES + 1),
+  ),
+  (error) => error.code === 'sports_body_too_large' && error.status === 413,
+);
+
+const badFeedHeaderHandlers = createSportsHandlers({
+  readSheet: async (sheetName) => {
+    const snapshot = await readSheet(sheetName);
+    if (sheetName !== 'Oakland_Sports_Feed') return snapshot;
+    const headers = snapshot.data.headers.slice();
+    [headers[0], headers[1]] = [headers[1], headers[0]];
+    return { ...snapshot, data: { ...snapshot.data, headers } };
+  },
+});
+const badFeedHeader = await call(badFeedHeaderHandlers.overview);
+assert.strictEqual(badFeedHeader.statusCode, 503);
+assert.strictEqual(badFeedHeader.body.error.code, 'sports_source_schema_changed');
+
 function statSubmission({
   team = 'as',
   popid = 'POP-90001',
@@ -459,6 +520,37 @@ assert.strictEqual(oaksStatPreview.body.data.mutationPreview.statDiff.changedCou
 assert.strictEqual(
   oaksStatPreview.body.data.mutationPreview.participant.rosterSource,
   'Oaks_Roster',
+);
+
+const middleNameReadSheet = async (sheetName) => {
+  const snapshot = await readSheet(sheetName);
+  if (sheetName !== 'As_Roster') return snapshot;
+  return {
+    ...snapshot,
+    data: {
+      ...snapshot.data,
+      rows: snapshot.data.rows.map((row) => ({
+        ...row,
+        values: row.values.map((value, index) => (
+          index === 2 ? 'Middle' : value
+        )),
+      })),
+    },
+  };
+};
+const middleNameHandlers = createSportsHandlers({ readSheet: middleNameReadSheet });
+const middleNamePreview = await call(middleNameHandlers.preview, {
+  body: statSubmission({
+    name: 'Synthetic Middle Batter',
+    changes: [
+      { field: 'batting.hr', before: '5', after: '6', reviewed: true },
+    ],
+  }),
+});
+assert.strictEqual(middleNamePreview.statusCode, 200);
+assert.strictEqual(
+  middleNamePreview.body.data.mutationPreview.participant.name,
+  'Synthetic Middle Batter',
 );
 
 const invalidStatPreview = await call(handlers.preview, {
@@ -777,7 +869,18 @@ assert.strictEqual(failed.body.error.retryable, true);
 
 const noCycleHandlers = createSportsHandlers({
   readSheet: async (sheetName) => ({
-    data: sheetName === 'Oakland_Sports_Feed' ? [{ Cycle: 'invalid' }] : [],
+    data: sheetName === 'Oakland_Sports_Feed'
+      ? {
+        headers: FEED_HEADERS,
+        rows: [{
+          rowNumber: 2,
+          values: FEED_HEADERS.map((header) => header === 'Cycle' ? 'invalid' : ''),
+        }],
+      }
+      : {
+        headers: sheetName === 'As_Roster' ? AS_HEADERS : OAKS_HEADERS,
+        rows: [],
+      },
     fetchedAt: '2042-01-01T00:00:00.000Z',
     warnings: [],
   }),
@@ -799,6 +902,7 @@ const secureDependencies = {
     publicOrigin: 'https://sports.synthetic.test',
     previewSecret: 'synthetic-preview-secret-32-bytes-minimum',
     capabilitySecret: 'synthetic-write-capability',
+    dashboardAuthReady: true,
     secureCookie: true,
     directPortRestricted: true,
   },
@@ -833,6 +937,29 @@ assert.strictEqual(securePreview.body.data.confirmation.available, true);
 assert.ok(securePreview.body.data.confirmation.previewToken);
 assert.ok(securePreview.body.data.confirmation.csrfToken);
 assert.ok(securePreview.body.data.confirmation.expiresAt);
+assert.deepStrictEqual(
+  securePreview.body.data.confirmation.authorizationControls,
+  ['dashboard-auth', 'sports-write-capability'],
+);
+
+const noDashboardAuthHandlers = createSportsHandlers({
+  ...secureDependencies,
+  writeConfig: {
+    ...secureDependencies.writeConfig,
+    dashboardAuthReady: false,
+  },
+});
+const noDashboardAuthPreview = await call(noDashboardAuthHandlers.preview, {
+  secure: true,
+  headers: { origin: 'https://sports.synthetic.test' },
+  body: { draft: validDraft },
+});
+assert.strictEqual(noDashboardAuthPreview.statusCode, 200);
+assert.strictEqual(noDashboardAuthPreview.body.data.confirmation.available, false);
+assert.strictEqual(
+  noDashboardAuthPreview.body.data.confirmation.reasonCode,
+  'sports_write_not_ready',
+);
 
 const confirmHeaders = {
   origin: 'https://sports.synthetic.test',
@@ -937,8 +1064,10 @@ assert.deepStrictEqual(
 );
 assert.strictEqual(capturedWrite.submission.mutation.action, 'injury');
 assert.strictEqual(capturedWrite.sourcePreconditions.citizenRow, 22);
-assert.strictEqual(capturedWrite.sourcePreconditions.nextLifeHistoryLogRow, 3);
-assert.strictEqual(capturedWrite.sourcePreconditions.nextRippleLedgerRow, 3);
+assert.ok(capturedWrite.sourcePreconditions.lifeHistoryLogHeaderHash);
+assert.ok(capturedWrite.sourcePreconditions.rippleLedgerHeaderHash);
+assert.strictEqual(capturedWrite.sourcePreconditions.nextLifeHistoryLogRow, undefined);
+assert.strictEqual(capturedWrite.sourcePreconditions.nextRippleLedgerRow, undefined);
 
 let disabledWriteCalls = 0;
 const disabledHandlers = createSportsHandlers({

@@ -308,6 +308,12 @@ expectInvalid(syntheticSubmission('stat-capture', [
   { field: 'batting.unknown', before: '1', after: '2' },
 ]), /not allowed/);
 expectInvalid(syntheticSubmission('stat-capture', [
+  { field: 'constructor', before: '1', after: '2' },
+]), /not allowed/);
+expectInvalid(syntheticSubmission('stat-capture', [
+  { field: '__proto__', before: '1', after: '2' },
+]), /not allowed/);
+expectInvalid(syntheticSubmission('stat-capture', [
   { field: 'batting.hr', before: '1', after: '' },
 ]), /must not erase a nonblank current value/);
 expectInvalid(syntheticSubmission('stat-capture', [
@@ -405,4 +411,9 @@ expectInvalid({
     verification: { source: 'manual-verified', confirmed: false },
   },
 }, /confirmed must be true/);
+const oversizedDraft = contract.validateDraft(syntheticDraft({
+  Notes: 'x'.repeat(contract.MAX_DRAFT_FIELD_CHARACTERS + 1),
+}));
+assert.strictEqual(oversizedDraft.valid, false);
+assert.ok(oversizedDraft.errors.some((error) => /50,000 characters or fewer/.test(error)));
 console.log('sportsFeedContract.test.js: all assertions passed');

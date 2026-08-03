@@ -17,7 +17,7 @@ const FEED_SHEET = 'Oakland_Sports_Feed';
 const CITIZEN_SHEET = 'Simulation_Ledger';
 const LIFE_HISTORY_LOG_SHEET = 'LifeHistory_Log';
 const RIPPLE_LEDGER_SHEET = 'Ripple_Ledger';
-const AUDIT_VERSION = 2;
+const AUDIT_VERSION = 3;
 const CITIZEN_REQUIRED_HEADERS = Object.freeze([
   'POPID',
   'First',
@@ -127,7 +127,7 @@ function normalizedRawSnapshot(snapshot, sheetName, options = {}) {
   if (!snapshot || !Array.isArray(snapshot.headers) || !Array.isArray(snapshot.rows)) {
     throw new Error(`${sheetName} raw snapshot is unavailable`);
   }
-  const headers = snapshot.headers.map((header) => safeCell(header).trim());
+  const headers = snapshot.headers.map((header) => safeCell(header));
   if (options.exactHeaders) {
     if (headers.length !== options.exactHeaders.length ||
         headers.some((header, index) => header !== options.exactHeaders[index])) {
@@ -153,9 +153,10 @@ function normalizedRawSnapshot(snapshot, sheetName, options = {}) {
   return { headers, indexByHeader, rows };
 }
 
-function normalizedFeedRows(rows) {
-  if (!Array.isArray(rows)) throw new Error('Oakland_Sports_Feed rows must be an array');
-  return rows.map((row) => FEED_HEADERS.map((header) => safeCell(row && row[header])));
+function normalizedFeedSnapshot(snapshot) {
+  return normalizedRawSnapshot(snapshot, FEED_SHEET, {
+    exactHeaders: FEED_HEADERS,
+  });
 }
 
 function selectedRosterRow(snapshot, participant) {
@@ -181,18 +182,19 @@ function selectedRosterRow(snapshot, participant) {
   if (values[0] !== participant.popid || name !== participant.name) {
     throw new Error('Selected roster identity changed');
   }
-  return { headers, rowNumber: row.rowNumber, values };
+  return {
+    headers,
+    rowNumber: row.rowNumber,
+    values,
+    identity: {
+      first: values[1],
+      middle: values[2],
+      last: values[3],
+    },
+  };
 }
 
-function nameFromSelectedRow(selected) {
-  const first = selected.values[selected.indexByHeader.First] || '';
-  const middleIndex = selected.headers.indexOf('Middle');
-  const middle = middleIndex >= 0 ? selected.values[middleIndex] : '';
-  const last = selected.values[selected.indexByHeader.Last] || '';
-  return [first, middle, last].map((part) => part.trim()).filter(Boolean).join(' ');
-}
-
-function selectedCitizenRow(snapshot, participant) {
+function selectedCitizenRow(snapshot, participant, rosterIdentity) {
   const normalized = normalizedRawSnapshot(snapshot, CITIZEN_SHEET, {
     requiredHeaders: CITIZEN_REQUIRED_HEADERS,
   });
@@ -209,7 +211,11 @@ function selectedCitizenRow(snapshot, participant) {
     rowNumber: matches[0].rowNumber,
     values: matches[0].values,
   };
-  if (nameFromSelectedRow(selected) !== participant.name) {
+  const citizenFirst = selected.values[selected.indexByHeader.First].trim();
+  const citizenLast = selected.values[selected.indexByHeader.Last].trim();
+  if (!rosterIdentity ||
+      citizenFirst !== rosterIdentity.first ||
+      citizenLast !== rosterIdentity.last) {
     throw new Error('Selected citizen identity changed');
   }
   return selected;
@@ -235,8 +241,6 @@ function appendTargetPrecondition(snapshot, sheetName, exactHeaders) {
   const normalized = normalizedRawSnapshot(snapshot, sheetName, { exactHeaders });
   return {
     headerHash: sha256(stableStringify(normalized.headers)),
-    rowsHash: sha256(stableStringify(normalized.rows)),
-    rowCount: normalized.rows.length,
     nextRow: normalized.rows.length + 2,
   };
 }
@@ -250,15 +254,20 @@ function createSportsSourcePreconditions({
   participant = null,
   action = null,
 }) {
-  const feed = normalizedFeedRows(feedRows);
+  const feed = normalizedFeedSnapshot(feedRows);
   const result = {
-    feedHash: sha256(stableStringify(feed)),
-    feedRowCount: feed.length,
-    nextFeedRow: feed.length + 2,
+    feedHeaderHash: sha256(stableStringify(feed.headers)),
+    feedHash: sha256(stableStringify(feed.rows)),
+    feedRowCount: feed.rows.length,
+    nextFeedRow: feed.rows.length + 2,
   };
   if (participant) {
     const roster = selectedRosterRow(rosterSnapshot, participant);
-    const citizen = selectedCitizenRow(citizenSnapshot, participant);
+    const citizen = selectedCitizenRow(
+      citizenSnapshot,
+      participant,
+      roster.identity,
+    );
     result.rosterSource = participant.rosterSource;
     result.rosterRow = participant.sourceRow;
     result.rosterHeaderHash = sha256(stableStringify(roster.headers));
@@ -279,13 +288,7 @@ function createSportsSourcePreconditions({
       RIPPLE_LEDGER_HEADERS,
     );
     result.lifeHistoryLogHeaderHash = lifeHistory.headerHash;
-    result.lifeHistoryLogRowsHash = lifeHistory.rowsHash;
-    result.lifeHistoryLogRowCount = lifeHistory.rowCount;
-    result.nextLifeHistoryLogRow = lifeHistory.nextRow;
     result.rippleLedgerHeaderHash = ripple.headerHash;
-    result.rippleLedgerRowsHash = ripple.rowsHash;
-    result.rippleLedgerRowCount = ripple.rowCount;
-    result.nextRippleLedgerRow = ripple.nextRow;
   }
   return result;
 }
@@ -303,6 +306,25 @@ function stringCell(value) {
   return { userEnteredValue: { stringValue: safeCell(value) } };
 }
 
+function statCell(value, spec) {
+  if (!spec || spec.validator === 'record') return stringCell(value);
+  let numberValue;
+  if (spec.validator === 'percentage') {
+    const raw = safeCell(value).trim().replace(/%$/, '');
+    numberValue = Number(raw) / 100;
+  } else {
+    numberValue = Number(value);
+  }
+  if (!Number.isFinite(numberValue)) {
+    throw new SportsFeedWriterError(
+      'sports_validation_failed',
+      `${spec.key} is not a finite numeric value`,
+      422,
+    );
+  }
+  return { userEnteredValue: { numberValue } };
+}
+
 function appendCellsRequest(sheetId, values) {
   return {
     appendCells: {
@@ -313,7 +335,7 @@ function appendCellsRequest(sheetId, values) {
   };
 }
 
-function updateCellRequest(sheetId, rowNumber, columnIndex, value) {
+function updateCellRequest(sheetId, rowNumber, columnIndex, value, spec = null) {
   return {
     updateCells: {
       start: {
@@ -321,10 +343,23 @@ function updateCellRequest(sheetId, rowNumber, columnIndex, value) {
         rowIndex: rowNumber - 1,
         columnIndex,
       },
-      rows: [{ values: [stringCell(value)] }],
+      rows: [{ values: [spec ? statCell(value, spec) : stringCell(value)] }],
       fields: 'userEnteredValue',
     },
   };
+}
+
+function enteredValue(request) {
+  const cell = request && request.updateCells &&
+    request.updateCells.rows[0].values[0].userEnteredValue;
+  if (!cell) return '';
+  if (Object.prototype.hasOwnProperty.call(cell, 'numberValue')) {
+    return cell.numberValue;
+  }
+  if (Object.prototype.hasOwnProperty.call(cell, 'boolValue')) {
+    return cell.boolValue;
+  }
+  return safeCell(cell.stringValue);
 }
 
 function columnLetter(columnIndex) {
@@ -349,6 +384,45 @@ function rowsEqual(left, right) {
     left.every((value, index) => safeCell(value) === safeCell(right[index]));
 }
 
+function comparableStatNumbers(value, spec) {
+  const raw = safeCell(value).trim();
+  if (!raw) return [];
+  if (spec.validator === 'percentage') {
+    const numeric = Number(raw.replace(/%$/, ''));
+    if (!Number.isFinite(numeric)) return [];
+    return raw.endsWith('%')
+      ? [numeric / 100]
+      : [numeric, numeric / 100];
+  }
+  if (spec.validator === 'record') return [];
+  const numeric = Number(raw);
+  return Number.isFinite(numeric) ? [numeric] : [];
+}
+
+function statValuesEqual(left, right, spec) {
+  if (spec.validator === 'record') return safeCell(left) === safeCell(right);
+  const leftCandidates = comparableStatNumbers(left, spec);
+  const rightCandidates = comparableStatNumbers(right, spec);
+  return leftCandidates.some((leftValue) => (
+    rightCandidates.some((rightValue) => Math.abs(leftValue - rightValue) < 1e-9)
+  ));
+}
+
+function rosterRowsEqual(left, right, statChanges) {
+  const specsByIndex = new Map(
+    statChanges.map((change) => [change.spec.columnIndex, change.spec])
+  );
+  return Array.isArray(left) &&
+    Array.isArray(right) &&
+    left.length === right.length &&
+    left.every((value, index) => {
+      const spec = specsByIndex.get(index);
+      return spec
+        ? statValuesEqual(value, right[index], spec)
+        : safeCell(value) === safeCell(right[index]);
+    });
+}
+
 function changedStatFields(validation) {
   if (!validation.mutation || validation.mutation.action !== 'stat-capture') return [];
   const fields = STAT_FIELD_MAPS[validation.participant.rosterSource];
@@ -368,6 +442,69 @@ function assertStatCitizenEligible(citizen) {
       422,
     );
   }
+}
+
+function formulaRangeValue(item) {
+  return item && Object.prototype.hasOwnProperty.call(item, 'value')
+    ? item.value
+    : '';
+}
+
+function isFormulaValue(value) {
+  return typeof value === 'string' && value.startsWith('=');
+}
+
+function transitionRecord(range, before, after, valueKind) {
+  return {
+    range,
+    beforeHash: sha256(stableStringify(before)),
+    afterHash: sha256(stableStringify(after)),
+    valueKind,
+  };
+}
+
+function structuredBatchNoOp(error) {
+  const status = Number(error && error.response && error.response.status);
+  return Number.isInteger(status) &&
+    status >= 400 &&
+    status < 500 &&
+    status !== 408 &&
+    status !== 499;
+}
+
+function findUniqueRawRow(snapshot, sheetName, exactHeaders, identityIndex, identity, expected) {
+  const normalized = normalizedRawSnapshot(snapshot, sheetName, { exactHeaders });
+  const matches = normalized.rows.filter((row) => (
+    safeCell(row.values[identityIndex]) === safeCell(identity)
+  ));
+  if (matches.length !== 1 || !rowsEqual(expected, matches[0].values)) {
+    throw new SportsFeedWriterError(
+      'sports_readback_mismatch',
+      `${sheetName} append did not match unique read-back`,
+      502,
+    );
+  }
+  return matches[0];
+}
+
+function assertAppendIdentityAvailable(
+  snapshot,
+  sheetName,
+  exactHeaders,
+  identityIndex,
+  identity,
+) {
+  const normalized = normalizedRawSnapshot(snapshot, sheetName, { exactHeaders });
+  if (normalized.rows.some((row) => (
+    safeCell(row.values[identityIndex]) === safeCell(identity)
+  ))) {
+    throw new SportsFeedWriterError(
+      'sports_source_changed',
+      `${sheetName} already contains this submission identity`,
+      409,
+    );
+  }
+  return normalized.rows.length + 2;
 }
 
 function createFileAuditStore(filePath) {
@@ -395,11 +532,14 @@ function createFileAuditStore(filePath) {
     },
 
     async append(record) {
-      fs.mkdirSync(path.dirname(resolved), { recursive: true });
+      const directory = path.dirname(resolved);
+      fs.mkdirSync(directory, { recursive: true, mode: 0o700 });
+      fs.chmodSync(directory, 0o700);
       fs.appendFileSync(resolved, `${JSON.stringify(record)}\n`, {
         encoding: 'utf8',
         mode: 0o600,
       });
+      fs.chmodSync(resolved, 0o600);
     },
   };
 }
@@ -409,6 +549,7 @@ function createSportsFeedWriter(dependencies) {
   const getSheetIds = dependencies && dependencies.getSheetIds;
   const readSportsSource = dependencies && dependencies.readSportsSource;
   const readRange = dependencies && dependencies.readRange;
+  const readFormulaRanges = dependencies && dependencies.readFormulaRanges;
   const auditStore = dependencies && dependencies.auditStore;
   const now = dependencies && dependencies.now
     ? dependencies.now
@@ -421,6 +562,9 @@ function createSportsFeedWriter(dependencies) {
     throw new Error('readSportsSource is required');
   }
   if (typeof readRange !== 'function') throw new Error('readRange is required');
+  if (typeof readFormulaRanges !== 'function') {
+    throw new Error('readFormulaRanges is required');
+  }
   if (!auditStore || typeof auditStore.find !== 'function' ||
       typeof auditStore.append !== 'function') {
     throw new Error('auditStore with find and append is required');
@@ -555,6 +699,7 @@ function createSportsFeedWriter(dependencies) {
       timestamp: now().toISOString(),
       targetHash: null,
       updatedRanges: [],
+      cellTransitions: [],
       rowNumber: null,
       result: 'pending',
     });
@@ -562,6 +707,7 @@ function createSportsFeedWriter(dependencies) {
     let batchAttempted = false;
     let targetHash = null;
     let updatedRanges = [];
+    let cellTransitions = [];
     try {
       const action = validation.mutation ? validation.mutation.action : null;
       const rosterEvent = validation.mutation &&
@@ -620,7 +766,11 @@ function createSportsFeedWriter(dependencies) {
       let rosterEventProjection = null;
       if (validation.participant) {
         selectedRoster = selectedRosterRow(rosterSnapshot, validation.participant);
-        selectedCitizen = selectedCitizenRow(citizenSnapshot, validation.participant);
+        selectedCitizen = selectedCitizenRow(
+          citizenSnapshot,
+          validation.participant,
+          selectedRoster.identity,
+        );
       }
       if (action === 'stat-capture') {
         assertStatCitizenEligible(selectedCitizen);
@@ -654,6 +804,25 @@ function createSportsFeedWriter(dependencies) {
         }
       }
 
+      let nextLifeHistoryLogRow = null;
+      let nextRippleLedgerRow = null;
+      if (rosterEventProjection) {
+        nextLifeHistoryLogRow = assertAppendIdentityAvailable(
+          lifeHistoryLogSnapshot,
+          LIFE_HISTORY_LOG_SHEET,
+          LIFE_HISTORY_LOG_HEADERS,
+          3,
+          rosterEventProjection.lifeHistory.eventTag,
+        );
+        nextRippleLedgerRow = assertAppendIdentityAvailable(
+          rippleLedgerSnapshot,
+          RIPPLE_LEDGER_SHEET,
+          RIPPLE_LEDGER_HEADERS,
+          2,
+          validation.submissionId,
+        );
+      }
+
       const sheetNames = [
         FEED_SHEET,
         ...(validation.participant ? [validation.participant.rosterSource] : []),
@@ -669,6 +838,18 @@ function createSportsFeedWriter(dependencies) {
         currentPreconditions.nextFeedRow,
       );
       const mutationRanges = [];
+      const writeCells = row.map((value, columnIndex) => ({
+        range: rowRange(
+          FEED_SHEET,
+          columnLetter(columnIndex),
+          columnLetter(columnIndex),
+          currentPreconditions.nextFeedRow,
+        ),
+        before: '',
+        after: safeCell(value),
+        valueKind: 'string',
+        spec: null,
+      }));
       const expectedRosterValues = selectedRoster
         ? selectedRoster.values.slice()
         : null;
@@ -677,19 +858,29 @@ function createSportsFeedWriter(dependencies) {
         : null;
 
       for (const change of statChanges) {
-        requests.push(updateCellRequest(
+        const request = updateCellRequest(
           sheetIds[validation.participant.rosterSource],
           validation.participant.sourceRow,
           change.spec.columnIndex,
           change.after,
-        ));
+          change.spec,
+        );
+        requests.push(request);
         expectedRosterValues[change.spec.columnIndex] = change.after;
-        mutationRanges.push(rowRange(
+        const range = rowRange(
           validation.participant.rosterSource,
           change.spec.column,
           change.spec.column,
           validation.participant.sourceRow,
-        ));
+        );
+        mutationRanges.push(range);
+        writeCells.push({
+          range,
+          before: change.before,
+          after: enteredValue(request),
+          valueKind: change.spec.validator === 'record' ? 'string' : 'number',
+          spec: change.spec,
+        });
       }
 
       if (rosterEventProjection) {
@@ -712,37 +903,55 @@ function createSportsFeedWriter(dependencies) {
               409,
             );
           }
-          requests.push(updateCellRequest(
+          const request = updateCellRequest(
             sheetIds[sheetName],
             rowNumber,
             columnIndex,
             field.after,
-          ));
+          );
+          requests.push(request);
           if (field.surface === 'roster') {
             expectedRosterValues[columnIndex] = field.after;
           } else {
             expectedCitizenValues[columnIndex] = field.after;
           }
           const column = columnLetter(columnIndex);
-          mutationRanges.push(rowRange(sheetName, column, column, rowNumber));
+          const range = rowRange(sheetName, column, column, rowNumber);
+          mutationRanges.push(range);
+          writeCells.push({
+            range,
+            before: field.before,
+            after: enteredValue(request),
+            valueKind: 'string',
+            spec: null,
+          });
         }
 
         const lifeHistoryIndex = selectedCitizen.indexByHeader.LifeHistory;
-        requests.push(updateCellRequest(
+        const lifeHistoryRequest = updateCellRequest(
           sheetIds[CITIZEN_SHEET],
           selectedCitizen.rowNumber,
           lifeHistoryIndex,
           rosterEventProjection.lifeHistory.after,
-        ));
+        );
+        requests.push(lifeHistoryRequest);
         expectedCitizenValues[lifeHistoryIndex] =
           rosterEventProjection.lifeHistory.after;
         const lifeColumn = columnLetter(lifeHistoryIndex);
-        mutationRanges.push(rowRange(
+        const lifeHistoryRange = rowRange(
           CITIZEN_SHEET,
           lifeColumn,
           lifeColumn,
           selectedCitizen.rowNumber,
-        ));
+        );
+        mutationRanges.push(lifeHistoryRange);
+        writeCells.push({
+          range: lifeHistoryRange,
+          before: rosterEventProjection.lifeHistory.before,
+          after: enteredValue(lifeHistoryRequest),
+          valueKind: 'string',
+          spec: null,
+        });
 
         requests.push(
           appendCellsRequest(
@@ -759,19 +968,84 @@ function createSportsFeedWriter(dependencies) {
             LIFE_HISTORY_LOG_SHEET,
             'A',
             'G',
-            currentPreconditions.nextLifeHistoryLogRow,
+            nextLifeHistoryLogRow,
           ),
           rowRange(
             RIPPLE_LEDGER_SHEET,
             'A',
             'M',
-            currentPreconditions.nextRippleLedgerRow,
+            nextRippleLedgerRow,
           ),
         );
+        rosterEventProjection.lifeHistory.logRow.forEach((value, columnIndex) => {
+          writeCells.push({
+            range: rowRange(
+              LIFE_HISTORY_LOG_SHEET,
+              columnLetter(columnIndex),
+              columnLetter(columnIndex),
+              nextLifeHistoryLogRow,
+            ),
+            before: '',
+            after: safeCell(value),
+            valueKind: 'string',
+            spec: null,
+          });
+        });
+        rosterEventProjection.ripple.row.forEach((value, columnIndex) => {
+          writeCells.push({
+            range: rowRange(
+              RIPPLE_LEDGER_SHEET,
+              columnLetter(columnIndex),
+              columnLetter(columnIndex),
+              nextRippleLedgerRow,
+            ),
+            before: '',
+            after: safeCell(value),
+            valueKind: 'string',
+            spec: null,
+          });
+        });
       }
 
       updatedRanges = [feedRange, ...mutationRanges];
-      targetHash = sha256(stableStringify(updatedRanges));
+      const formulaValues = await readFormulaRanges(
+        writeCells.map((cell) => cell.range)
+      );
+      if (!Array.isArray(formulaValues) ||
+          formulaValues.length !== writeCells.length) {
+        throw new SportsFeedWriterError(
+          'sports_formula_preflight_failed',
+          'Formula-visible preflight did not return every target cell',
+          503,
+        );
+      }
+      cellTransitions = writeCells.map((cell, index) => {
+        const current = formulaRangeValue(formulaValues[index]);
+        if (isFormulaValue(current)) {
+          throw new SportsFeedWriterError(
+            'sports_formula_cell_blocked',
+            `${cell.range} contains a formula and cannot be replaced`,
+            409,
+          );
+        }
+        const matches = cell.spec
+          ? statValuesEqual(current, cell.before, cell.spec)
+          : safeCell(current) === safeCell(cell.before);
+        if (!matches) {
+          throw new SportsFeedWriterError(
+            'sports_source_changed',
+            `${cell.range} changed before the sports batch`,
+            409,
+          );
+        }
+        return transitionRecord(
+          cell.range,
+          current,
+          cell.after,
+          cell.valueKind,
+        );
+      });
+      targetHash = sha256(stableStringify(cellTransitions));
 
       batchAttempted = true;
       await batchUpdateSpreadsheet(requests);
@@ -797,8 +1071,13 @@ function createSportsFeedWriter(dependencies) {
         const citizenReadBack = selectedCitizenRow(
           citizenAfter,
           validation.participant,
+          rosterReadBack.identity,
         );
-        if (!rowsEqual(expectedRosterValues, rosterReadBack.values) ||
+        if (!rosterRowsEqual(
+          expectedRosterValues,
+          rosterReadBack.values,
+          statChanges,
+        ) ||
             !rowsEqual(expectedCitizenValues, citizenReadBack.values)) {
           throw new SportsFeedWriterError(
             'sports_readback_mismatch',
@@ -808,33 +1087,35 @@ function createSportsFeedWriter(dependencies) {
         }
       }
       if (rosterEventProjection) {
-        const [lifeLogReadBack, rippleReadBack] = await Promise.all([
-          readRange(rowRange(
-            LIFE_HISTORY_LOG_SHEET,
-            'A',
-            'G',
-            currentPreconditions.nextLifeHistoryLogRow,
-          )),
-          readRange(rowRange(
-            RIPPLE_LEDGER_SHEET,
-            'A',
-            'M',
-            currentPreconditions.nextRippleLedgerRow,
-          )),
+        const [lifeLogAfter, rippleAfter] = await Promise.all([
+          readSportsSource(LIFE_HISTORY_LOG_SHEET),
+          readSportsSource(RIPPLE_LEDGER_SHEET),
         ]);
-        if (!Array.isArray(lifeLogReadBack) || lifeLogReadBack.length !== 1 ||
-            !rowsEqual(
-              rosterEventProjection.lifeHistory.logRow,
-              lifeLogReadBack[0],
-            ) ||
-            !Array.isArray(rippleReadBack) || rippleReadBack.length !== 1 ||
-            !rowsEqual(rosterEventProjection.ripple.row, rippleReadBack[0])) {
-          throw new SportsFeedWriterError(
-            'sports_readback_mismatch',
-            'The LifeHistory or Ripple append did not match exact read-back',
-            502,
-          );
-        }
+        const lifeRow = findUniqueRawRow(
+          lifeLogAfter,
+          LIFE_HISTORY_LOG_SHEET,
+          LIFE_HISTORY_LOG_HEADERS,
+          3,
+          rosterEventProjection.lifeHistory.eventTag,
+          rosterEventProjection.lifeHistory.logRow,
+        );
+        const rippleRow = findUniqueRawRow(
+          rippleAfter,
+          RIPPLE_LEDGER_SHEET,
+          RIPPLE_LEDGER_HEADERS,
+          2,
+          validation.submissionId,
+          rosterEventProjection.ripple.row,
+        );
+        updatedRanges = updatedRanges.map((range) => {
+          if (range.startsWith(`${LIFE_HISTORY_LOG_SHEET}!`)) {
+            return rowRange(LIFE_HISTORY_LOG_SHEET, 'A', 'G', lifeRow.rowNumber);
+          }
+          if (range.startsWith(`${RIPPLE_LEDGER_SHEET}!`)) {
+            return rowRange(RIPPLE_LEDGER_SHEET, 'A', 'M', rippleRow.rowNumber);
+          }
+          return range;
+        });
       }
 
       const timestamp = now().toISOString();
@@ -843,6 +1124,7 @@ function createSportsFeedWriter(dependencies) {
         timestamp,
         targetHash,
         updatedRanges,
+        cellTransitions,
         rowNumber: currentPreconditions.nextFeedRow,
         result: 'success',
       };
@@ -863,17 +1145,28 @@ function createSportsFeedWriter(dependencies) {
         writtenAt: timestamp,
       };
     } catch (error) {
-      let safeError = error instanceof SportsFeedWriterError
-        ? error
-        : new SportsFeedWriterError(
-          batchAttempted ? 'sports_write_uncertain' : 'sports_batch_failed',
-          batchAttempted
-            ? 'The sports batch result is ambiguous and requires builder review'
-            : 'The sports batch could not be prepared safely',
-          502
+      const provedNoOp = batchAttempted && structuredBatchNoOp(error);
+      let safeError;
+      if (provedNoOp) {
+        safeError = new SportsFeedWriterError(
+          'sports_batch_rejected',
+          'Google Sheets rejected the batch before applying any request',
+          Number(error.response.status),
         );
-      const result = batchAttempted ? 'uncertain' : 'error';
-      if (batchAttempted) {
+      } else {
+        safeError = error instanceof SportsFeedWriterError
+          ? error
+          : new SportsFeedWriterError(
+            batchAttempted ? 'sports_write_uncertain' : 'sports_batch_failed',
+            batchAttempted
+              ? 'The sports batch result is ambiguous and requires builder review'
+              : 'The sports batch could not be prepared safely',
+            502
+          );
+      }
+      const ambiguous = batchAttempted && !provedNoOp;
+      const result = ambiguous ? 'uncertain' : 'error';
+      if (ambiguous) {
         uncertain = true;
         if (safeError.code !== 'sports_readback_mismatch') {
           safeError = new SportsFeedWriterError(
@@ -889,6 +1182,7 @@ function createSportsFeedWriter(dependencies) {
         timestamp: now().toISOString(),
         targetHash,
         updatedRanges,
+        cellTransitions,
         rowNumber: input.sourcePreconditions.nextFeedRow,
         result,
         errorCode: safeError.code,

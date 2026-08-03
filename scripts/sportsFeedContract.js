@@ -46,6 +46,7 @@ const SAFE_ENUMS = Object.freeze({
 });
 
 const REQUIRED_FIELDS = Object.freeze(['Cycle', 'SeasonType', 'EventType', 'TeamsUsed']);
+const MAX_DRAFT_FIELD_CHARACTERS = 50_000;
 const RECORD_RE = /^\d+\s*[-–]\s*\d+$/;
 const STREAK_RE = /^[WL]\d+$/;
 const POPID_RE = /^POP-\d{5}$/;
@@ -244,7 +245,15 @@ function validateDraft(draft) {
   const source = draft || {};
   const value = {};
   const errors = [];
-  FEED_HEADERS.forEach((header) => { value[header] = text(source[header]); });
+  FEED_HEADERS.forEach((header) => {
+    const raw = source[header] == null ? '' : String(source[header]);
+    if (raw.length > MAX_DRAFT_FIELD_CHARACTERS) {
+      errors.push(
+        `${header} must be ${MAX_DRAFT_FIELD_CHARACTERS.toLocaleString('en-US')} characters or fewer`
+      );
+    }
+    value[header] = text(raw);
+  });
   const cycle = Number(value.Cycle);
   if (!Number.isInteger(cycle) || cycle <= 0) errors.push('Cycle must be a positive integer');
   else value.Cycle = String(cycle);
@@ -480,11 +489,11 @@ function validateStatChanges(participant, changes, errors) {
   if (!fields) return;
   let changedCount = 0;
   changes.forEach((change) => {
-    const spec = fields[change.field];
-    if (!spec) {
+    if (!Object.prototype.hasOwnProperty.call(fields, change.field)) {
       errors.push(`mutation stat field is not allowed for ${participant.rosterSource}: ${change.field}`);
       return;
     }
+    const spec = fields[change.field];
     if (!change.after) {
       if (change.before) errors.push(`${change.field}.after must not erase a nonblank current value`);
       return;
@@ -730,7 +739,8 @@ function projectNewRow(draft) {
 
 module.exports = {
   FEED_HEADERS, TEAM_CONFIG, EVENT_TYPES, SEASON_TYPES, OAKLAND_NEIGHBORHOODS,
-  SAFE_ENUMS, REQUIRED_FIELDS, POPID_RE, ROSTER_SOURCES, STAT_FIELD_MAPS,
+  SAFE_ENUMS, REQUIRED_FIELDS, MAX_DRAFT_FIELD_CHARACTERS, POPID_RE,
+  ROSTER_SOURCES, STAT_FIELD_MAPS,
   ACTION_MATRIX, ROSTER_EVENT_FIELDS, ROSTER_EVENT_EFFECT_TYPES,
   VERIFICATION_SOURCES,
   normalizeTeam, normalizeDraftTeam, filterFeedRowsForCycle, splitOaklandFeedEntries,

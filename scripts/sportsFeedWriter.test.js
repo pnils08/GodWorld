@@ -2,10 +2,14 @@
 'use strict';
 
 const assert = require('assert');
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
 const {
   CITIZEN_REQUIRED_HEADERS,
   LIFE_HISTORY_LOG_HEADERS,
   RIPPLE_LEDGER_HEADERS,
+  createFileAuditStore,
   createSportsFeedWriter,
   createSportsSourcePreconditions,
   sportsRequestHash,
@@ -126,25 +130,26 @@ function memoryAuditStore() {
   };
 }
 
-function feedObject(values) {
-  return Object.fromEntries(FEED_HEADERS.map((header, index) => [
-    header,
-    values[index] == null ? '' : String(values[index]),
-  ]));
-}
-
 function clone(value) {
   return JSON.parse(JSON.stringify(value));
 }
 
 function writerHarness(options = {}) {
   const auditStore = memoryAuditStore();
-  const feedRows = [{
-    Cycle: '403',
-    SeasonType: 'regular-season',
-    EventType: 'season-state',
-    TeamsUsed: "A's",
-  }];
+  const feedSnapshot = {
+    // engine-sheet S349: opt-in header drift for the item-1 regression below.
+    // Default stays the exact contract, so every existing case is unaffected.
+    headers: options.feedHeaders ? options.feedHeaders.slice() : FEED_HEADERS.slice(),
+    rows: [{
+      rowNumber: 2,
+      values: FEED_HEADERS.map((header) => ({
+        Cycle: '403',
+        SeasonType: 'regular-season',
+        EventType: 'season-state',
+        TeamsUsed: "A's",
+      })[header] || ''),
+    }],
+  };
   const rosterSnapshot = {
     headers: AS_HEADERS.slice(),
     rows: [{
@@ -229,7 +234,7 @@ function writerHarness(options = {}) {
       return result;
     },
     readSportsSource: async (sheetName) => {
-      if (sheetName === 'Oakland_Sports_Feed') return clone(feedRows);
+      if (sheetName === 'Oakland_Sports_Feed') return clone(feedSnapshot);
       if (sheetName === 'As_Roster') return clone(rosterSnapshot);
       if (sheetName === 'Simulation_Ledger') return clone(citizenSnapshot);
       if (sheetName === 'LifeHistory_Log') return clone(lifeHistoryLogSnapshot);
@@ -239,6 +244,7 @@ function writerHarness(options = {}) {
     batchUpdateSpreadsheet: async (requests) => {
       batchCalls += 1;
       capturedBatches.push(clone(requests));
+      if (options.batchError) throw options.batchError;
       if (options.batchThrow) throw new Error('synthetic ambiguous batch failure');
 
       requests.filter((request) => request.appendCells).forEach((request) => {
@@ -248,11 +254,18 @@ function writerHarness(options = {}) {
         );
         if (append.sheetId === 101) {
           appendedRow = values;
-          feedRows.push(feedObject(values));
+          feedSnapshot.rows.push({
+            rowNumber: feedSnapshot.rows.length + 2,
+            values: FEED_HEADERS.map((_, index) => values[index] || ''),
+          });
         } else if (append.sheetId === 404) {
+          const storedValues = LIFE_HISTORY_LOG_HEADERS.map(
+            (_, index) => values[index] || ''
+          );
+          if (options.lifeReadBackMismatch) storedValues[4] = 'DIFFERENT';
           lifeHistoryLogSnapshot.rows.push({
             rowNumber: lifeHistoryLogSnapshot.rows.length + 2,
-            values: LIFE_HISTORY_LOG_HEADERS.map((_, index) => values[index] || ''),
+            values: storedValues,
           });
         } else if (append.sheetId === 505) {
           rippleLedgerSnapshot.rows.push({
@@ -277,8 +290,11 @@ function writerHarness(options = {}) {
         const row = snapshot.rows.find(
           (candidate) => candidate.rowNumber === update.start.rowIndex + 1
         );
-        row.values[update.start.columnIndex] =
-          update.rows[0].values[0].userEnteredValue.stringValue;
+        const entered = update.rows[0].values[0].userEnteredValue;
+        const value = Object.prototype.hasOwnProperty.call(entered, 'numberValue')
+          ? entered.numberValue
+          : entered.stringValue;
+        row.values[update.start.columnIndex] = String(value);
       });
       return { replies: requests.map(() => ({})) };
     },
@@ -290,22 +306,52 @@ function writerHarness(options = {}) {
         return [row];
       }
       if (/^LifeHistory_Log!A\d+:G\d+$/.test(range)) {
-        const values = lifeHistoryLogSnapshot.rows.at(-1).values.slice(0, 7);
-        return [options.lifeReadBackMismatch
-          ? values.map((value, index) => index === 4 ? 'DIFFERENT' : value)
-          : values];
+        return [lifeHistoryLogSnapshot.rows.at(-1).values.slice(0, 7)];
       }
       if (/^Ripple_Ledger!A\d+:M\d+$/.test(range)) {
         return [rippleLedgerSnapshot.rows.at(-1).values.slice(0, 13)];
       }
       throw new Error(`unexpected synthetic read range: ${range}`);
     },
+    readFormulaRanges: async (ranges) => ranges.map((range) => {
+      const rosterMatch = range.match(/^As_Roster!([A-Z]+)(\d+):[A-Z]+\d+$/);
+      if (rosterMatch) {
+        const column = rosterMatch[1].split('').reduce(
+          (value, character) => value * 26 + character.charCodeAt(0) - 64,
+          0,
+        ) - 1;
+        return {
+          range,
+          value: options.formulaRange === range
+            ? '=SYNTHETIC_FORMULA()'
+            : rosterSnapshot.rows[0].values[column],
+        };
+      }
+      const citizenMatch = range.match(/^Simulation_Ledger!([A-Z]+)(\d+):[A-Z]+\d+$/);
+      if (citizenMatch) {
+        const column = citizenMatch[1].split('').reduce(
+          (value, character) => value * 26 + character.charCodeAt(0) - 64,
+          0,
+        ) - 1;
+        return {
+          range,
+          value: options.formulaRange === range
+            ? '=SYNTHETIC_FORMULA()'
+            : citizenSnapshot.rows[0].values[column],
+        };
+      }
+      return {
+        range,
+        value: options.formulaRange === range ? '=SYNTHETIC_FORMULA()' : '',
+      };
+    }),
   });
 
   return {
     writer,
     auditStore,
-    feedRows,
+    feedRows: feedSnapshot,
+    feedSnapshot,
     rosterSnapshot,
     citizenSnapshot,
     lifeHistoryLogSnapshot,
@@ -388,7 +434,14 @@ async function expectCode(promise, code) {
   assert.strictEqual(successHarness.auditStore.records.length, 2);
   assert.strictEqual(successHarness.auditStore.records[0].result, 'pending');
   assert.strictEqual(successHarness.auditStore.records[1].result, 'success');
-  assert.strictEqual(successHarness.auditStore.records[1].auditVersion, 2);
+  assert.strictEqual(successHarness.auditStore.records[1].auditVersion, 3);
+  assert.strictEqual(successHarness.auditStore.records[1].cellTransitions.length, 20);
+  assert.ok(successHarness.auditStore.records[1].cellTransitions.every(
+    (transition) => (
+      /^[a-f0-9]{64}$/.test(transition.beforeHash) &&
+      /^[a-f0-9]{64}$/.test(transition.afterHash)
+    )
+  ));
   assert.strictEqual(
     JSON.stringify(successHarness.auditStore.records).includes('SYNTHETIC NON-CANON'),
     false,
@@ -441,6 +494,20 @@ async function expectCode(promise, code) {
   );
   assert.strictEqual(successHarness.batchCalls, 1);
 
+  const feedHeaderHarness = writerHarness();
+  const feedHeaderInput = inputFor(
+    draft(),
+    'synthetic-feed-header-01',
+    feedHeaderHarness,
+  );
+  [feedHeaderHarness.feedSnapshot.headers[0], feedHeaderHarness.feedSnapshot.headers[1]] =
+    [feedHeaderHarness.feedSnapshot.headers[1], feedHeaderHarness.feedSnapshot.headers[0]];
+  await expectCode(
+    feedHeaderHarness.writer(feedHeaderInput),
+    'sports_source_changed',
+  );
+  assert.strictEqual(feedHeaderHarness.batchCalls, 0);
+
   const statHarness = writerHarness();
   const statInput = inputFor(
     statSubmission(),
@@ -460,7 +527,7 @@ async function expectCode(promise, code) {
       sheetId: request.updateCells.start.sheetId,
       rowIndex: request.updateCells.start.rowIndex,
       columnIndex: request.updateCells.start.columnIndex,
-      value: request.updateCells.rows[0].values[0].userEnteredValue.stringValue,
+      value: request.updateCells.rows[0].values[0].userEnteredValue,
       fields: request.updateCells.fields,
     })),
     [
@@ -468,14 +535,14 @@ async function expectCode(promise, code) {
         sheetId: 202,
         rowIndex: 10,
         columnIndex: 14,
-        value: '22',
+        value: { numberValue: 22 },
         fields: 'userEnteredValue',
       },
       {
         sheetId: 202,
         rowIndex: 10,
         columnIndex: 18,
-        value: '34',
+        value: { numberValue: 34 },
         fields: 'userEnteredValue',
       },
     ],
@@ -485,6 +552,46 @@ async function expectCode(promise, code) {
   assert.strictEqual(statHarness.rosterSnapshot.rows[0].values[9], '.300');
   assert.strictEqual(statHarness.auditStore.records[1].mutationAction, 'stat-capture');
   assert.strictEqual(statHarness.auditStore.records[1].changedFieldCount, 2);
+  assert.strictEqual(statHarness.auditStore.records[1].cellTransitions.length, 22);
+
+  const numericHarness = writerHarness();
+  const numericValue = statSubmission();
+  numericValue.mutation.changes = [
+    { field: 'batting.avg', before: '.300', after: '.301', reviewed: true },
+  ];
+  await numericHarness.writer(inputFor(
+    numericValue,
+    'synthetic-numeric-key-01',
+    numericHarness,
+  ));
+  assert.deepStrictEqual(
+    numericHarness.capturedBatches[0][1].updateCells
+      .rows[0].values[0].userEnteredValue,
+    { numberValue: 0.301 },
+  );
+
+  const middleNameHarness = writerHarness();
+  middleNameHarness.rosterSnapshot.rows[0].values[2] = 'Middle';
+  const middleNameValue = statSubmission();
+  middleNameValue.draft.NamesUsed = 'Synthetic Middle Batter';
+  middleNameValue.participant.name = 'Synthetic Middle Batter';
+  const middleNameResult = await middleNameHarness.writer(inputFor(
+    middleNameValue,
+    'synthetic-middle-name-01',
+    middleNameHarness,
+  ));
+  assert.strictEqual(middleNameResult.writePerformed, true);
+
+  const formulaHarness = writerHarness({ formulaRange: 'As_Roster!O11:O11' });
+  await expectCode(
+    formulaHarness.writer(inputFor(
+      statSubmission(),
+      'synthetic-formula-key-01',
+      formulaHarness,
+    )),
+    'sports_formula_cell_blocked',
+  );
+  assert.strictEqual(formulaHarness.batchCalls, 0);
 
   const injuryHarness = writerHarness();
   const injuryValue = rosterSubmission('injury', [
@@ -546,6 +653,10 @@ async function expectCode(promise, code) {
     false,
     'engine.77 audit records must not contain HealthCause or LifeHistory prose',
   );
+  assert.strictEqual(injuryHarness.auditStore.records[1].cellTransitions.length, 44);
+  assert.ok(injuryHarness.auditStore.records[1].cellTransitions.some(
+    (transition) => transition.range === 'Simulation_Ledger!J22:J22'
+  ));
 
   const returnHarness = writerHarness();
   returnHarness.citizenSnapshot.rows[0].values[5] = 'serious-condition';
@@ -650,11 +761,9 @@ async function expectCode(promise, code) {
     rowNumber: 3,
     values: LIFE_HISTORY_LOG_HEADERS.map(() => 'SYNTHETIC-RACE'),
   });
-  await expectCode(
-    appendRaceHarness.writer(appendRaceInput),
-    'sports_source_changed',
-  );
-  assert.strictEqual(appendRaceHarness.batchCalls, 0);
+  const appendRaceResult = await appendRaceHarness.writer(appendRaceInput);
+  assert.strictEqual(appendRaceHarness.batchCalls, 1);
+  assert.ok(appendRaceResult.updatedRanges.includes('LifeHistory_Log!A4:G4'));
 
   const lifeMismatchHarness = writerHarness({ lifeReadBackMismatch: true });
   await expectCode(
@@ -708,6 +817,37 @@ async function expectCode(promise, code) {
   );
   assert.strictEqual(ambiguousHarness.auditStore.records[1].result, 'uncertain');
 
+  for (const status of [400, 429]) {
+    const error = new Error(`synthetic structured ${status}`);
+    error.response = { status };
+    const rejectedHarness = writerHarness({ batchError: error });
+    await expectCode(
+      rejectedHarness.writer(inputFor(
+        draft(),
+        `synthetic-rejected-${status}`,
+        rejectedHarness,
+      )),
+      'sports_batch_rejected',
+    );
+    assert.strictEqual(rejectedHarness.auditStore.records[1].result, 'error');
+    assert.strictEqual(rejectedHarness.auditStore.records[1].errorCode, 'sports_batch_rejected');
+    const retryError = new Error(`synthetic structured ${status} retry`);
+    retryError.response = { status };
+    await expectCode(
+      rejectedHarness.writer(inputFor(
+        draft({ Notes: `Synthetic retry after ${status}.` }),
+        `synthetic-rejected-${status}-retry`,
+        rejectedHarness,
+      )),
+      'sports_batch_rejected',
+    );
+    assert.strictEqual(
+      rejectedHarness.auditStore.records.some((record) => record.result === 'uncertain'),
+      false,
+      `structured ${status} must not latch the writer`,
+    );
+  }
+
   const invalidHarness = writerHarness();
   const invalidDraft = draft({ TeamsUsed: 'Warriors' });
   await expectCode(
@@ -720,6 +860,55 @@ async function expectCode(promise, code) {
     'sports_validation_failed',
   );
   assert.strictEqual(invalidHarness.batchCalls, 0);
+
+  const auditRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'sports-audit-mode-'));
+  try {
+    const auditPath = path.join(auditRoot, 'nested', 'audit.jsonl');
+    const fileStore = createFileAuditStore(auditPath);
+    await fileStore.append({ idempotencyKey: 'synthetic-audit-mode' });
+    assert.strictEqual(
+      fs.statSync(path.dirname(auditPath)).mode & 0o777,
+      0o700,
+    );
+    assert.strictEqual(fs.statSync(auditPath).mode & 0o777, 0o600);
+  } finally {
+    fs.rmSync(auditRoot, { recursive: true, force: true });
+  }
+
+  // ── engine-sheet S349: item-1 regression (Opus review, FIX-BEFORE-DEPLOY) ──
+  // The feed is read BY HEADER NAME but written POSITIONALLY into A..T, and the
+  // read-back compares what we wrote to what we wrote. Without an exact-header
+  // guard, a column inserted or reordered in Oakland_Sports_Feed makes every
+  // append land one column off while read-back still reports success — silent
+  // canon corruption, the only critical finding in the review.
+  //
+  // The fix (exactHeaders: FEED_HEADERS) shipped WITHOUT this test: disabling
+  // the guard left the whole suite green, so nothing prevented its removal.
+  // This case is the thing that makes the fix stay fixed.
+  const driftedHeaders = FEED_HEADERS.slice();
+  driftedHeaders.splice(3, 0, 'InsertedColumn');
+  const headerDriftHarness = writerHarness({ feedHeaders: driftedHeaders });
+  // The guard fires while BUILDING the preconditions — earlier than the writer
+  // call, which is the correct place: a drifted feed can't even be described,
+  // let alone appended to.
+  assert.throws(
+    () => inputFor(draft(), 'synthetic-header-drift-01', headerDriftHarness),
+    /header layout changed/,
+  );
+  assert.strictEqual(headerDriftHarness.batchCalls, 0);
+
+  // Reordering without adding a column must fail too — same physical width, so
+  // only a name-by-position check catches it.
+  const swappedHeaders = FEED_HEADERS.slice();
+  const swapTmp = swappedHeaders[1];
+  swappedHeaders[1] = swappedHeaders[2];
+  swappedHeaders[2] = swapTmp;
+  const headerSwapHarness = writerHarness({ feedHeaders: swappedHeaders });
+  assert.throws(
+    () => inputFor(draft(), 'synthetic-header-swap-01', headerSwapHarness),
+    /header layout changed/,
+  );
+  assert.strictEqual(headerSwapHarness.batchCalls, 0);
 
   console.log('sportsFeedWriter.test.js: all assertions passed');
 })().catch((error) => {

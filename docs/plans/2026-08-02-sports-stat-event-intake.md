@@ -177,8 +177,9 @@ The signed preview binds:
 - exact twenty-cell feed row;
 - participant POPID, name, roster source, and physical source row;
 - mutation kind, action, every before/after value, and verification source;
-- hashes of the feed tail, selected raw roster row, selected
-  `Simulation_Ledger` row, and relevant append targets;
+- hashes of the exact feed header/rows, selected raw roster row, selected
+  `Simulation_Ledger` row, and exact log/Ripple headers; append row numbers are
+  deliberately re-resolved inside the writer lock rather than signed;
 - deterministic LifeHistory, log, and Ripple projections when applicable.
 
 Any changed source hash produces `409 sports_source_changed`; the writer
@@ -316,20 +317,26 @@ actor, preview token, submission ID, or idempotency key. Inside the lock:
 
 1. Re-read the feed, selected raw roster row, selected citizen row,
    `LifeHistory_Log`, and `Ripple_Ledger`.
-2. Revalidate headers, POPID/name identity, before values, append targets,
-   request hash, and source hashes.
-3. Build one `spreadsheets.batchUpdate` request using `appendCells` for feed and
+2. Revalidate exact headers, POPID plus roster/ledger first-and-last identity,
+   before values, request hash, and source hashes; then re-resolve append
+   targets.
+3. Read every exact target cell with formula-visible rendering; reject formulas
+   and retain hashed before/after transitions for the audit.
+4. Build one `spreadsheets.batchUpdate` request using `appendCells` for feed and
    log rows and `updateCells` for the exact roster/citizen cells.
-4. Send the request once. If request validation fails, none of its subrequests
+5. Send the request once. If request validation fails, none of its subrequests
    apply.
-5. Re-read every affected sheet and verify the exact feed row, changed cells,
+6. Re-read every affected sheet and verify the exact feed row, changed cells,
    LifeHistory suffix, log row, and Ripple row.
-6. Record one success receipt containing hashes and resolved rows/ranges only.
+7. Record one success receipt containing hashes and resolved rows/ranges only.
 
 If the API reports success but read-back is ambiguous or mismatched, the audit
 records `uncertain`, the global writer disables further mutation attempts for
 that process, and the route returns a safe 502. It never retries, deletes, or
 rewrites canon automatically. Mike reviews the Sheet and chooses the repair.
+A structured Google 4xx rejection proves that validation rejected the atomic
+batch before application; it records `error`, burns that preview/idempotency
+key, and does not latch later fresh confirmations.
 
 The existing feed-only path also moves under this global lock before
 deployment, closing the cross-session double-append finding in
@@ -606,7 +613,10 @@ deploys until items 1–4 land and their regression cases pass.
      controls are dashboard auth + capability header.
 - **Verify:** a regression test per item in the existing fake-only harnesses;
   full sports suite + dashboard build green; no live write.
-- **Status:** [ ] not started
+- **Status:** [ ] in progress — items 1–3 and 5–9 have a locally green source
+  remediation. Item 4's full-log hash/append-target fragility is removed, but
+  strict cross-system Cycle exclusion still needs the builder's lock-boundary
+  decision. Independent re-review remains open; nothing deploys.
 
 ## Validation matrix
 
@@ -687,6 +697,14 @@ compensation.
   for current-season stats. Task 6 remains open and deliberately fail-closed:
   define season-close only after the authoritative TrueSource update exposes
   the complete row/header contract; do not derive it from the roster subset.
+- 2026-08-02 — Task 10 remediation pass locally green for exact feed headers,
+  formula-visible preflight, typed numeric stat writes, structured 4xx no-op
+  classification, 64 KiB request/50,000-character field caps, middle-name-safe
+  POPID+first/last joins, prototype-safe allowlists, hashed per-cell pre-images,
+  and audit permissions. Full-log precondition hashes were narrowed to exact
+  headers and append targets now resolve inside the writer lock. Strict
+  Apps-Script↔Node Cycle exclusion remains a builder decision; no deployment,
+  service action, or live write occurred.
 - 2026-08-02 — Drafted and registered from the adopted sports workspace
   research, the source-built engine.89 boundary, the current roster/feed/health
   implementations, and engine.90 archive research. No implementation,
@@ -700,3 +718,5 @@ compensation.
   four bounded roster actions, and an explicit Tier-1 A's season-close gate.
 - 2026-08-02 (engine-sheet) — Codex source landed at `ce2a7d11` after review.
 - 2026-08-02 (engine-sheet) — Task 9 independent review done: FIX-BEFORE-DEPLOY. Task 10 opened for the fix list.
+- 2026-08-02 (Codex) — Task 10 remediation source advanced through items 1–3
+  and 5–9; item 4 remains open at the cross-system lock boundary.

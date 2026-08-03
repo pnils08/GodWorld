@@ -11,7 +11,11 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { createRequire } from 'module';
 import { execSync } from 'child_process';
-import { createSportsSheetReader, registerSportsRoutes } from './sportsRoutes.js';
+import {
+  createSportsSheetReader,
+  registerSportsRoutes,
+  sportsBodyLimitVerify,
+} from './sportsRoutes.js';
 
 const require = createRequire(import.meta.url);
 
@@ -94,7 +98,28 @@ function doLogin(e) {
   });
 
   // Auth endpoint — sets cookie on success
-  app.use(express.json());
+  app.use(express.json({ verify: sportsBodyLimitVerify }));
+  app.use((error, req, res, next) => {
+    if (error && error.code === 'sports_body_too_large') {
+      return res.status(413).json({
+        contractVersion: 1,
+        source: {
+          kind: 'projection',
+          name: 'Oakland sports request',
+          fetchedAt: null,
+          cycle: null,
+        },
+        data: null,
+        warnings: [],
+        error: {
+          code: error.code,
+          message: error.message,
+          retryable: false,
+        },
+      });
+    }
+    return next(error);
+  });
   app.post('/auth', (req, res) => {
     const { user, pass } = req.body || {};
     if (user === DASH_USER && pass === DASH_PASS) {
@@ -173,6 +198,7 @@ async function getLiveSheetData(sheetName) {
 }
 
 const SPORTS_RAW_SNAPSHOT_SHEETS = new Set([
+  'Oakland_Sports_Feed',
   'As_Roster',
   'Oaks_Roster',
   'Simulation_Ledger',
@@ -203,6 +229,7 @@ const writeSportsFeed = sheetsLib
     getSheetIds: sheetsLib.getSheetIds,
     readSportsSource: loadSportsSheetData,
     readRange: sheetsLib.getSheetData,
+    readFormulaRanges: sheetsLib.getFormulaVisibleRanges,
     auditStore: sportsAuditStore,
   })
   : null;
@@ -233,6 +260,7 @@ registerSportsRoutes(app, {
     publicOrigin: process.env.SPORTS_WRITE_ORIGIN,
     previewSecret: process.env.SPORTS_PREVIEW_TOKEN_SECRET,
     capabilitySecret: process.env.SPORTS_WRITE_CAPABILITY,
+    dashboardAuthReady: Boolean(DASH_USER && DASH_PASS),
     secureCookie: DASH_COOKIE_SECURE,
     directPortRestricted: BIND_HOST === '127.0.0.1' || BIND_HOST === '::1',
   },

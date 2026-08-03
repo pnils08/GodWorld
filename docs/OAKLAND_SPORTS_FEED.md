@@ -1,7 +1,7 @@
 ---
 title: Oakland Sports Feed
 created: 2026-07-28
-updated: 2026-07-31
+updated: 2026-08-02
 type: reference
 tags: [sports, engine, citizens, active]
 sources:
@@ -296,24 +296,33 @@ failover. The local Notebook adapter reads only complete
 
 The extended writer signs 15-minute previews with a stable server secret and
 server-generated idempotency key. It binds the actor, projected feed row,
-selected physical roster and citizen rows, relevant append targets, and CSRF
-nonce. One process-global lock revalidates those sources and sends one
-`spreadsheets.batchUpdate` request. Exact read-back covers the feed, roster,
-citizen, `LifeHistory_Log`, and `Ripple_Ledger` surfaces applicable to the
-action. The metadata-only audit stores hashes, ranges, counts, and safe result
-codes; it does not duplicate Notes, Stats, HealthCause, or LifeHistory prose.
-An ambiguous batch or read-back disables later writes in that process for
-builder review.
+selected physical roster and citizen rows, exact source headers, and CSRF nonce.
+One process-global lock revalidates those sources, re-resolves append targets,
+rejects any formula-backed update target, and sends one
+`spreadsheets.batchUpdate` request. Numeric stat fields use numeric
+`userEnteredValue`; W-L and narrative/state cells remain explicit strings.
+Exact read-back covers the feed, roster, citizen, `LifeHistory_Log`, and
+`Ripple_Ledger` surfaces applicable to the action. The metadata-only audit
+stores ranges plus hashed before/after values for every target cell; it does not
+duplicate Notes, Stats, HealthCause, or LifeHistory prose. A structured Google
+4xx rejection is a proven no-op and does not latch the writer. A timeout, lost
+response, or read-back mismatch remains ambiguous and disables later writes in
+that process for builder review.
 
 `trade-away` writes `Status=Traded` but deletes or archives no row; engine.90
 owns any later departure archive. `season-close` remains fail-closed until an
 updated authoritative TrueSource establishes the complete row/header payload.
 
-The route refuses writes unless its feature flag is enabled and the dashboard
-is loopback-bound behind the exact configured HTTPS origin with a Secure
-cookie. No TLS proxy is installed yet, so the source cannot report itself ready
-for live appends. Deployment/restart, authenticated live reads, and a
-builder-supplied proving event remain separate approval gates.
+The route refuses writes unless its feature flag is enabled, dashboard
+authentication and the separate sports-write capability are both configured,
+and the dashboard is loopback-bound behind the exact configured HTTPS origin
+with a Secure cookie. Dashboard authentication plus the capability are the
+authorization controls; HTTPS, same-origin, Secure-cookie, and loopback checks
+are proxy/transport attestations. Sports request bodies are capped at 64 KiB
+before JSON parsing and feed fields at 50,000 characters. No TLS proxy is
+installed yet, so the source cannot report itself ready for live appends.
+Deployment/restart, authenticated live reads, cross-system Cycle exclusion,
+and a builder-supplied proving event remain separate approval gates.
 
 ## Remaining gaps
 
@@ -323,9 +332,10 @@ coverage are repaired. Remaining gaps are:
 - the Sheet setup utility does not cover columns P–T;
 - the preflight and dropdown utility do not share one validator;
 - A's roster context has wider reviewer coverage than Oaks roster context;
-- the source-built mutation path still needs independent review, deployment,
-  authenticated live reads, and separately approved stat/engine.77 proving
-  writes;
+- the independent review remediation needs re-review; strict cross-system Cycle
+  exclusion still needs the builder's selected lock boundary;
+- deployment, authenticated live reads, and separately approved stat/engine.77
+  proving writes remain open;
 - TrueSource season close remains open until the authoritative source update
   defines its complete payload contract;
 - the remote-browser deployment still needs a public hostname, TLS proxy,
@@ -358,3 +368,8 @@ parsers, validators, and consumers through an approved implementation plan.
   signed restart-stable previews, one-row append/exact read-back, persistent
   idempotency audit, and the confirmation/receipt UI; retained proxy,
   deployment, and live proof as separate approvals.
+- 2026-08-02 — Documented the independent-review remediation source: exact feed
+  headers, formula-safe typed stat writes, structured no-op error
+  classification, bounded bodies/fields, first/last+POPID roster joins, and
+  hashed cell pre-images. Cross-system Cycle exclusion, re-review, deployment,
+  and live proof remain open.

@@ -35,6 +35,7 @@ const {
 export const SPORTS_CONTRACT_VERSION = 1;
 export const SPORTS_CACHE_TTL_MS = 60 * 1000;
 export const SPORTS_WRITE_CONFIRMATION = 'APPEND_TO_OAKLAND_SPORTS_FEED';
+export const SPORTS_REQUEST_BODY_LIMIT_BYTES = 64 * 1024;
 
 const SPORTS_SHEETS = Object.freeze({
   feed: 'Oakland_Sports_Feed',
@@ -51,6 +52,32 @@ function routeError(code, message, status = 500, retryable = false) {
   error.status = status;
   error.retryable = retryable;
   return error;
+}
+
+export function sportsBodyLimitVerify(req, _res, buffer) {
+  const url = String(req && (req.originalUrl || req.url) || '');
+  if (!/^\/api\/sports\/(?:preview|entries)(?:[/?]|$)/.test(url)) return;
+  if (buffer.length <= SPORTS_REQUEST_BODY_LIMIT_BYTES) return;
+  const error = new Error('Sports requests must be 64 KiB or smaller');
+  error.code = 'sports_body_too_large';
+  error.status = 413;
+  throw error;
+}
+
+function assertSportsBodySize(body) {
+  let bytes;
+  try {
+    bytes = Buffer.byteLength(JSON.stringify(body == null ? null : body), 'utf8');
+  } catch {
+    throw routeError('sports_body_invalid', 'Sports request JSON is invalid', 400);
+  }
+  if (bytes > SPORTS_REQUEST_BODY_LIMIT_BYTES) {
+    throw routeError(
+      'sports_body_too_large',
+      'Sports requests must be 64 KiB or smaller',
+      413,
+    );
+  }
 }
 
 function envelope({ source, data = null, warnings = [], error = null }) {
@@ -105,6 +132,7 @@ function buildWritePolicy(config, dependencies) {
     Buffer.byteLength(config.previewSecret, 'utf8') >= 32;
   const capabilityReady = typeof (config && config.capabilitySecret) === 'string' &&
     Buffer.byteLength(config.capabilitySecret, 'utf8') >= 16;
+  const dashboardAuthReady = config && config.dashboardAuthReady === true;
   const transportReady = Boolean(
     config && config.secureCookie === true &&
     config.directPortRestricted === true
@@ -113,7 +141,7 @@ function buildWritePolicy(config, dependencies) {
     typeof dependencies.readFreshSheet === 'function';
   const configured = Boolean(
     publicOrigin && previewSecretReady && capabilityReady &&
-    transportReady && dependenciesReady
+    dashboardAuthReady && transportReady && dependenciesReady
   );
   return {
     featureEnabled,
@@ -136,6 +164,8 @@ function publicWritePolicy(policy) {
     configured: policy.configured,
     mode: policy.mode,
     requiresHttps: true,
+    authorizationControls: ['dashboard-auth', 'sports-write-capability'],
+    proxyAttestations: ['https', 'same-origin', 'loopback-bind'],
     reasonCode: policy.reasonCode,
   };
 }
@@ -247,6 +277,36 @@ function normalizeSnapshot(snapshot, sheetName) {
   };
 }
 
+function feedRowsFromSnapshot(data) {
+  if (!isRawSheetSnapshot(data)) {
+    throw routeError(
+      'sports_source_schema_changed',
+      'Oakland_Sports_Feed must use a raw header-validated snapshot',
+      503,
+      true,
+    );
+  }
+  const headers = data.headers.map((header) => String(header || ''));
+  if (headers.length !== FEED_HEADERS.length ||
+      headers.some((header, index) => header !== FEED_HEADERS[index])) {
+    throw routeError(
+      'sports_source_schema_changed',
+      'Oakland_Sports_Feed header layout changed',
+      503,
+      true,
+    );
+  }
+  return data.rows.map((row) => {
+    const result = { __rowNumber: row.rowNumber };
+    FEED_HEADERS.forEach((header, index) => {
+      result[header] = row.values[index] == null
+        ? ''
+        : String(row.values[index]);
+    });
+    return result;
+  });
+}
+
 function sourceFromSnapshots(snapshots, cycle) {
   const fetchedTimes = snapshots.map((snapshot) => snapshot.fetchedAt).filter(Boolean).sort();
   const sheets = {};
@@ -334,7 +394,8 @@ async function loadProjection(readSheet, requestedCycle) {
     [SPORTS_SHEETS.feed, SPORTS_SHEETS.as, SPORTS_SHEETS.oaks][index],
   ));
 
-  const cycles = availableCycles(feed.data);
+  const feedRows = feedRowsFromSnapshot(feed.data);
+  const cycles = availableCycles(feedRows);
   const cycle = requestedCycle || cycles[0];
   if (!cycle) {
     throw routeError(
@@ -347,7 +408,7 @@ async function loadProjection(readSheet, requestedCycle) {
   const source = sourceFromSnapshots([feed, asRoster, oaksRoster], cycle);
   const projection = projectSportsWorkspace({
     cycle,
-    feedRows: feed.data,
+    feedRows,
     asRoster: asRoster.data,
     oaksRoster: oaksRoster.data,
     freshness: source,
@@ -384,6 +445,16 @@ function nameFromCitizen(row) {
     .map((part) => part == null ? '' : String(part).trim())
     .filter(Boolean)
     .join(' ');
+}
+
+function rosterCitizenIdentityMatches(player, citizen) {
+  return Boolean(
+    player &&
+    citizen &&
+    String(citizen.POPID || '').trim() === player.popid &&
+    String(citizen.First || '').trim() === player.firstName &&
+    String(citizen.Last || '').trim() === player.lastName
+  );
 }
 
 function citizenRowsFromSnapshot(data) {
@@ -444,8 +515,7 @@ function citizenRowsFromSnapshot(data) {
 
 function citizenWorkspaceState(player, citizens) {
   const matches = (citizens || []).filter((row) => (
-    String(row && row.POPID || '').trim() === player.popid &&
-    nameFromCitizen(row) === player.name
+    rosterCitizenIdentityMatches(player, row)
   ));
   if (matches.length !== 1) {
     return {
@@ -638,13 +708,12 @@ function resolveMutationParticipant(validation, team, citizens) {
     );
   }
   const citizenMatches = (citizens || []).filter((row) => (
-    String(row && row.POPID || '').trim() === participant.popid
+    rosterCitizenIdentityMatches(rosterPlayer, row)
   ));
-  if (citizenMatches.length !== 1 ||
-      nameFromCitizen(citizenMatches[0]) !== participant.name) {
+  if (citizenMatches.length !== 1) {
     throw routeError(
       'sports_participant_resolution_failed',
-      'The selected participant does not resolve uniquely by POPID and name in Simulation_Ledger',
+      'The selected participant does not resolve uniquely by POPID and first/last identity in Simulation_Ledger',
       422,
     );
   }
@@ -1002,6 +1071,7 @@ export function createSportsHandlers(dependencies) {
 
     preview: async (req, res) => {
       try {
+        assertSportsBodySize(req.body);
         const prepared = await preparePreview(
           readSheet,
           req.body,
@@ -1109,6 +1179,7 @@ export function createSportsHandlers(dependencies) {
 
     entries: async (req, res) => {
       try {
+        assertSportsBodySize(req.body);
         if (!writePolicy.featureEnabled) {
           throw routeError(
             'sports_write_disabled',

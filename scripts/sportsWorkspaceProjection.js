@@ -91,7 +91,10 @@ function projectRoster(snapshot, teamId, warnings) {
     }
     const cells = row.values;
     const popid = rawValue(cells, 0);
-    const name = [rawValue(cells, 1), rawValue(cells, 2), rawValue(cells, 3)]
+    const firstName = rawValue(cells, 1);
+    const middleName = rawValue(cells, 2);
+    const lastName = rawValue(cells, 3);
+    const name = [firstName, middleName, lastName]
       .filter(Boolean)
       .join(' ');
     const validPopid = POPID_RE.test(popid);
@@ -108,6 +111,9 @@ function projectRoster(snapshot, teamId, warnings) {
       popid,
       validPopid,
       name,
+      firstName,
+      middleName,
+      lastName,
       tier: rawValue(cells, 4),
       position: rawValue(cells, 5),
       team: rawValue(cells, 6),

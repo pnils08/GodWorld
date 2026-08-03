@@ -300,8 +300,10 @@ write route refuses unless all of these hold:
 1. a dedicated sports-write feature flag is enabled;
 2. the approved transport mode is satisfied: loopback for tunnel-only use, or
    HTTPS behind an approved reverse proxy for remote-browser use;
-3. dashboard authentication, same-origin, CSRF, and a separate step-up sports
-   write capability check pass;
+3. dashboard authentication and the separate step-up sports-write capability
+   both pass as the authorization controls; same-origin, CSRF, HTTPS, and
+   loopback checks remain required transport/request-integrity attestations,
+   not substitutes for authorization;
 4. the preview token, explicit confirmation, and idempotency key are valid;
 5. revalidation returns zero errors;
 6. one append is performed through a single server-side writer;
@@ -536,6 +538,8 @@ reports itself configured:
 - trusted-proxy handling limited to loopback;
 - a Secure, HttpOnly, SameSite=Strict dashboard cookie via
   `DASHBOARD_COOKIE_SECURE`;
+- configured dashboard authentication via `DASHBOARD_USER` and
+  `DASHBOARD_PASS`;
 - separate `SPORTS_PREVIEW_TOKEN_SECRET` and `SPORTS_WRITE_CAPABILITY` secrets;
 - the disabled-by-default `SPORTS_WRITE_ENABLED` feature flag.
 
@@ -638,9 +642,10 @@ real proving event remain builder gates even after source approval.
 - **Steps:**
   1. Resolve the builder's loopback-only versus remote-browser transport
      decision and record the exact authorized deployment surface.
-  2. Enforce the feature flag, selected transport, same-origin, CSRF, dedicated
-     step-up write capability, signed preview token, confirmation, idempotency,
-     and request-hash checks.
+  2. Enforce the feature flag, dashboard authentication, dedicated step-up
+     write capability, selected transport, same-origin, CSRF, signed preview
+     token, confirmation, idempotency, and request-hash checks. Treat auth plus
+     capability as authorization; treat proxy/origin checks as attestations.
   3. Keep confirmation unavailable in the UI while the feature flag is off.
   4. Return safe status codes for expired preview, conflict, read-back mismatch,
      and disabled writes.
@@ -893,3 +898,7 @@ own plan change and builder approval.
 - 2026-08-02 — Linked the approved engine.40/engine.77 follow-on without
   rewriting this plan's version-1 history; deployment and live proof remain
   prerequisites owned here.
+- 2026-08-02 — Clarified the independent-review security boundary: dashboard
+  authentication plus the sports-write capability are authorization controls;
+  HTTPS, same-origin, Secure-cookie, CSRF, and loopback checks remain mandatory
+  transport/request-integrity attestations.

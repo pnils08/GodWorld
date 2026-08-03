@@ -6,7 +6,7 @@
 **Stack:** Express + React (Vite build) | Port 3001
 
 Full-dashboard audit: Session 156 (2026-04-17). Sports source/runtime audit:
-2026-07-31 — Waves A–C implemented and locally validated; TLS/proxy deployment,
+2026-08-02 — independent review fix pass is in progress; TLS/proxy deployment,
 production restart, authenticated live-read proof, and live append proof remain
 pending.
 
@@ -217,16 +217,30 @@ Oakland packet renderer in the source tree:
   allowlist, and stays visibly `NOT CANON`;
 - entry templates project the exact twenty-column compatibility row and current
   ripple consumers before any write control appears;
-- the final confirmation requires HTTPS, the configured origin, authenticated
-  actor, per-preview CSRF token, separate write key, explicit acknowledgement,
-  and idempotency key;
+- the actual authorization controls are dashboard authentication and the
+  separate sports-write capability; HTTPS, same-origin, Secure-cookie, and
+  loopback-bind checks are required proxy/transport attestations, not substitutes
+  for either authorization control;
+- the final confirmation also requires a per-preview CSRF token, explicit
+  acknowledgement, and idempotency key;
+- preview and confirmation bodies are capped at 64 KiB before JSON parsing,
+  and every individual feed field is capped at the Sheet cell limit;
+- `Oakland_Sports_Feed` now uses the same exact raw-header guard as the roster
+  and append surfaces, so a column reorder fails before request construction;
 - successful stat confirmation revalidates fresh feed, roster, and citizen
-  state, then atomically appends the feed row and updates exact stat cells;
+  state, rejects formula targets, then atomically appends the feed row and
+  updates exact stat cells with numeric types where the contract is numeric;
 - injury, return, call-up, and trade-away previews show exact roster/citizen
   diffs, Citizen Tier, deterministic LifeHistory/log text, Ripple attribution,
   and the engine.90 boundary;
 - successful engine.77 confirmation sends the feed, state, LifeHistory/log, and
   Ripple effects in one atomic batch and reads every target back exactly;
+- structured Google 4xx batch rejections are recorded as proven no-ops without
+  latching the writer; lost responses, timeouts, and read-back mismatches remain
+  uncertain and fail closed;
+- audit version 3 stores only target ranges plus hashed before/after cell
+  transitions, with a 0700 directory and 0600 file; it still stores no Notes,
+  Stats, HealthCause, or LifeHistory prose;
 - the feature flag stays off unless the server is loopback-bound behind TLS
   with a Secure cookie; no public plain-HTTP write path is accepted;
 - all new sports APIs use contract version 1, provenance, warnings, safe errors,
@@ -241,10 +255,12 @@ accessibility.
 
 This is source state, not a deployment claim. No PM2 restart, authenticated live
 probe, NotebookLM invocation, proxy installation, feature-flag enablement, or
-external write was performed. The live host still needs a chosen hostname and
-TLS proxy before the writer can deploy. Independent review and separately
-approved stat and engine.77 proving writes remain open. TrueSource season close
-is deferred until the authoritative source update defines its payload.
+external write was performed. Cross-system Cycle exclusion remains a deployment
+gate pending the builder's lock-boundary decision. The live host still needs a
+chosen hostname and TLS proxy before the writer can deploy. Re-review and
+separately approved stat and engine.77 proving writes remain open. TrueSource
+season close is deferred until the authoritative source update defines its
+payload.
 
 ## Historical Sports Tab Assessment (S106; superseded)
 

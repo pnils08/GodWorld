@@ -1,9 +1,9 @@
 ---
 title: Sports Stat and Event Intake Plan
 created: 2026-08-02
-updated: 2026-08-02
+updated: 2026-08-03
 type: plan
-tags: [sports, engine, citizens, draft]
+tags: [sports, engine, citizens, active]
 sources:
   - Mike-direct 2026-08-02 — draft and register the engine.40 and engine.77 implementation plan
   - docs/research/2026-07-27-oakland-sports-feed-entry-dashboard.md
@@ -569,16 +569,20 @@ deployment, closing the cross-session double-append finding in
      engine.77 proving event, and any season-close Drive update.
 - **Verify:** Documentation and source agree; all local checks pass; every live
   action has its own builder approval and exact read-back record.
-- **Status:** [ ] in progress — source landed by engine-sheet at `ce2a7d11`
-  (S349); independent review COMPLETE — [[../reviews/2026-08-02-sports-intake-opus-review]],
-  verdict **FIX-BEFORE-DEPLOY**. Deployment is now gated on that fix list
-  (items 1–4), the first live proof on item 5, plus Mike's separate go for
-  each live action. See Task 10.
+- **Status:** [ ] in progress — source landed at `ce2a7d11`; independent review
+  [[../reviews/2026-08-02-sports-intake-opus-review]] returned
+  **FIX-BEFORE-DEPLOY**. Its source remediation landed in `1bbedbd9` and
+  `5d82fc71`, with the missing item-1 cases added by engine-sheet and item 4
+  mutation-tested by Codex. Remaining gates are remediation re-review, the
+  parent workspace's hostname/TLS/authenticated-live-read deployment work,
+  item 5's live roster check, and Mike's separate approval for each proving
+  write. See Task 10.
 
 ### Task 10: Clear the independent-review fix list (engine-sheet)
 
-Opened S349 from [[../reviews/2026-08-02-sports-intake-opus-review]]. Nothing
-deploys until items 1–4 land and their regression cases pass.
+Opened S349 from [[../reviews/2026-08-02-sports-intake-opus-review]]. Items 1–4
+and their regression cases are source-landed; remediation re-review,
+deployment, and proving-write approvals remain open.
 
 - **Files:**
   - `scripts/sportsFeedWriter.js` — modify (items 1, 2, 3, 4, 7)
@@ -625,9 +629,10 @@ deploys until items 1–4 land and their regression cases pass.
   mutation testing exposed the fix as uncovered). Item 4 now re-checks append
   targets strictly before the batch, performs at most one retargeted preflight,
   and returns a safe pre-batch 409 on a second move; post-batch ambiguity is
-  never retried. Item 5 still gates the first live proof. engine.77 is gated to
-  attended non-overlapping runs on canon-safety grounds (ledger clobber path);
-  engine.40 stat capture is assessable separately. Nothing deploys.
+  never retried; that implementation landed as `5d82fc71`. Item 5 still gates
+  the first live proof. engine.77 is gated to attended non-overlapping runs on
+  canon-safety grounds (ledger clobber path); engine.40 stat capture is
+  assessable separately. Nothing deploys.
 
 ## Engine-sheet rulings on the review gate (2026-08-02, S349)
 
@@ -678,7 +683,10 @@ defend a few minutes a week.
 
 **Proportionality decides it.** The engine fires weekly (Sunday) for a few
 minutes; a confirmation is a manual click at a time Mike controls. The overlap
-window is narrow, operator-controlled, and now fails closed.
+window is narrow and operator-controlled, so the corrected ruling defers a
+cross-runtime lock for attended use. It does **not** fail closed: engine.77
+overlap remains forbidden because the Phase 10 ledger commit can silently
+revert the citizen change.
 
 **Ruling (corrected):**
 1. Build retry-on-shift for append drift **strictly before `batchUpdate`**.
@@ -800,13 +808,21 @@ compensation.
   and audit permissions. Full-log precondition hashes were narrowed to exact
   headers and append targets now resolve inside the writer lock. Strict
   Apps-Script↔Node Cycle exclusion remains a builder decision; no deployment,
-  service action, or live write occurred.
+  service action, or live write occurred. **Superseded later the same session:**
+  attended engine.77 uses the non-overlap gate; genuine exclusion returns as a
+  design requirement only before unattended enablement.
 - 2026-08-02 — Task 10 item 4 source complete: one pre-batch append-target
   shift receives one retargeted formula-visible preflight and re-check; a
   second shift fails 409 with zero batches, and post-batch ambiguity remains
   non-retryable. Synthetic simultaneous and asymmetric shifts pass, and
   weakening the retry-exhaustion guard makes the regression test fail. No
   deployment, service action, or live write occurred.
+- 2026-08-03 — Current state reconciled after `5d82fc71`: Task 10 source work is
+  complete and locally verified. Task 9 remains open for remediation re-review,
+  parent-workspace deployment/authenticated-read gates, item 5's live roster
+  check, and separately approved proving writes. Engine.77 remains attended
+  and non-overlapping with a Cycle; unattended enablement re-arms the genuine
+  exclusion-design gate. No deployment or live write occurred.
 - 2026-08-02 — Drafted and registered from the adopted sports workspace
   research, the source-built engine.89 boundary, the current roster/feed/health
   implementations, and engine.90 archive research. No implementation,
@@ -823,7 +839,8 @@ compensation.
 - 2026-08-02 (engine-sheet) — Codex remediation landed (1bbedbd9); item-1 regression added after mutation exposed it uncovered. Item 4 + 7 ruled — see §Engine-sheet rulings.
 - 2026-08-02 (engine-sheet, Mike-direct) — Item 4 REVERSED to retry-on-shift; cross-runtime lock rejected on proportionality. Escalation flag cleared; Task 10 is now a contained writer fix.
 - 2026-08-02 (Codex) — Task 10 remediation source advanced through items 1–3
-  and 5–9; item 4 remains open at the cross-system lock boundary.
+  and 5–9; item 4 remained open at the cross-system lock boundary. Superseded
+  later the same session by the corrected split boundary and bounded retry.
 - 2026-08-02 (Codex, accepted by engine-sheet) — **Item-4 ruling CORRECTED.**
   Codex disproved its fail-closed premise via the ledger snapshot→commit trace;
   a mid-cycle engine.77 write is silently reverted by Phase 10 while its feed /
@@ -833,3 +850,8 @@ compensation.
 - 2026-08-02 (Codex) — Implemented the bounded strictly-pre-batch item-4
   retry with actual-row audit remapping and simultaneous/asymmetric race
   regressions; post-batch paths remain single-attempt.
+- 2026-08-03 (Codex) — Reconciled the active plan to pushed commit `5d82fc71`:
+  Task 10 source-complete; Task 9 remains in progress through remediation
+  re-review, deployment/authenticated-read, live-roster, and proving-write
+  gates. Frontmatter transitioned `draft → active` to match adoption and
+  in-progress rollout state.

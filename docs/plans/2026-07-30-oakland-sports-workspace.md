@@ -1,7 +1,7 @@
 ---
 title: Oakland Sports Workspace Plan
 created: 2026-07-30
-updated: 2026-07-31
+updated: 2026-08-03
 type: plan
 tags: [sports, infrastructure, engine, active]
 sources:
@@ -688,9 +688,12 @@ real proving event remain builder gates even after source approval.
      source and Dashboard server as separate deployments.
 - **Verify:** documentation/link checks and rollout lint pass; deployment and
   live-write gates remain explicit.
-- **Status:** [ ] in progress — Waves A–C are source-built; Opus 5 review,
+- **Status:** [ ] in progress — Waves A–C are source-built and the approved
+  engine.40/engine.77 follow-on remediation landed through `5d82fc71`. The
+  original Opus review is complete; remediation re-review,
   hostname/proxy/TLS deployment, authenticated live-read proof, separately
-  approved live append proof, and archive gates remain
+  approved live append/proving writes, and archive gates remain. Engine.77
+  proving must be attended and must not overlap a Cycle.
 
 ## Validation matrix
 
@@ -872,6 +875,13 @@ own plan change and builder approval.
   `engine.88` batch. The push stays a separate coordinated engine-sheet action.
   Source approval authorizes no restart, no feature-flag enablement, no TLS or
   proxy deployment, and no live append.
+- 2026-08-03 — Current state reconciled with the owning
+  [[2026-08-02-sports-stat-event-intake]] plan: independent-review remediation
+  landed through `5d82fc71` and all local sports/build/visual gates are green.
+  This parent remains open for remediation re-review, hostname/TLS/proxy and
+  authenticated-live-read deployment, and separately approved proving writes.
+  Engine.77 remains attended and non-overlapping with a Cycle; nothing was
+  deployed or written live.
 
 ## Changelog
 
@@ -902,3 +912,6 @@ own plan change and builder approval.
   authentication plus the sports-write capability are authorization controls;
   HTTPS, same-origin, Secure-cookie, CSRF, and loopback checks remain mandatory
   transport/request-integrity attestations.
+- 2026-08-03 — Reconciled the parent plan after the engine.40/engine.77 review
+  remediation landed through `5d82fc71`; retained remediation re-review,
+  deployment/authenticated-read, proving-write, and archive gates.

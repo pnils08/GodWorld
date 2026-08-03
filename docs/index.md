@@ -1,7 +1,7 @@
 ---
 title: GodWorld Documentation Index
 created: 2026-04-14
-updated: 2026-08-01
+updated: 2026-08-03
 type: reference
 tags: [architecture, infrastructure, active]
 sources:
@@ -224,7 +224,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 ## `docs/plans/` — in-flight plans not yet promoted
 
 - **[[plans/PLAN_TEMPLATE]]** — plan file template. Every new plan copies this shape. Adapted from obra/superpowers writing-plans skill (S152). *(reference, architecture, active)*
-- **[[plans/2026-08-02-sports-stat-event-intake]]** — engine.40 + engine.77. Registered draft for screenshot-verified current-stat updates and atomic injury/return/call-up/trade-away intake: one confirmed event carries its feed row, applicable roster/citizen state, LifeHistory/log, and Ripple together; Tier-1 A's season-close TrueSource updates remain separately approved. *(plan, sports, engine, citizens, draft)*
+- **[[plans/2026-08-02-sports-stat-event-intake]]** — engine.40 + engine.77 active plan. Source remediation for the independent-review findings is complete through `5d82fc71`: exact stat updates plus atomic injury/return/call-up/trade-away intake, bounded pre-batch append-target retry, and metadata-only audit. Open: remediation re-review, parent deployment/authenticated reads, live roster check, and separately approved proofs; engine.77 remains attended/non-overlapping with a Cycle. *(plan, sports, engine, citizens, active)*
 - **[[plans/2026-07-31-canon-ingest-backfill]]** — engine.91, S345. Every published artifact searchable in bay-tribune without depending on a session remembering to ingest: editions/ backfill shipped inline S345 (31 files, E89 deduped 6→1); open tasks are ingestEdition customId idempotency, the deterministic sweep script over reporters corpus + Deep Canon Drive folder, post-publish tail-step + cron wiring, and Mike's drive-files scope call. *(plan, engine, canon, active)*
 - **[[plans/2026-07-31-per-hood-political-consequence]]** — engine.93. Initiative/approval consequences land on the hoods they target: wire the two zero-reader neighborhood-effect buses into a Phase 2 fold with Ripple_Ledger attribution (executes engine.45's open per-hood fold), resolve dead `getRippleEffectsForNeighborhood_`, then Mike-gated design for commuting + resource competition. From the external-audit remediation batch; audit's "ripples destroyed at cycle boundary" verified stale (engine.45 T1–T3b live). *(plan, engine, citizens, civic, active)*
 - **[[plans/2026-07-31-citizen-memory-perception]]** — engine.94. Typed emotional + collective memory. Track A ungated: consumers for the orphaned `grief_period` stub (dial-engine path, `Quoted`-tag precedent) + BACKLOG 27.10 negative feedback ceilings (scandal probability vs sustained approval). Track B gated on research.17: typed grudge/ambition on bondEngine rivalry + 27.9 folk-memory records. *(plan, engine, citizens, media, active)*
@@ -440,6 +440,7 @@ Small, dated decision records. Created only when a choice is (a) hard to reverse
 
 _(Newest first, per SCHEMA §12 — normalized 2026-07-24.)_
 
+- 2026-08-03 (Codex, Mike-direct) — Reconciled [[plans/2026-08-02-sports-stat-event-intake]] and parent [[plans/2026-07-30-oakland-sports-workspace]] to pushed state `5d82fc71`: Task 10 source-complete; remediation re-review, deployment/authenticated reads, live roster check, and separately approved proofs remain. Engine.77 stays attended and non-overlapping with a Cycle.
 - 2026-08-02 (Codex, Mike-direct) — Registered [[plans/2026-08-02-sports-stat-event-intake]] for engine.40 + engine.77: duplicate-header-safe stat diffs, an atomic feed/roster/citizen/LifeHistory/Ripple write boundary, four bounded roster actions, and a separately gated Tier-1 A's season-close TrueSource path.
 - 2026-08-01 (Kimi CLI, builder-approved) — Registered [[plans/2026-08-01-business-lifecycle-generator]] (engine.96): the one genuinely undesigned gap from [[research/2026-08-01-simulation-realism-audit]] — per-cycle business drift, decline→layoff via existing career machinery, closure events, 27.10 success-pressure coupling. ROLLOUT row added same change; audit pointers added to the engine.83/84/85/93/94/95 plans.
 - 2026-07-31 (Kimi CLI, Mike-direct) — Registered the external-audit remediation batch: [[plans/2026-07-31-per-hood-political-consequence]] (engine.93), [[plans/2026-07-31-citizen-memory-perception]] (engine.94), [[plans/2026-07-31-platform-ceiling-resilience]] (engine.95), [[plans/2026-07-31-engine-observability-integrity]] (infrastructure.6). Audit claims verified against live code first — several were stale (ripples, arcs) or wrong (21 hoods not 17; 56 tabs not ~65); plans scope only the surviving gaps. ROLLOUT rows added same change.

@@ -218,6 +218,7 @@ function writerHarness(options = {}) {
     }],
   };
   let batchCalls = 0;
+  let formulaReadCalls = 0;
   const capturedBatches = [];
   let appendedRow = null;
 
@@ -313,38 +314,66 @@ function writerHarness(options = {}) {
       }
       throw new Error(`unexpected synthetic read range: ${range}`);
     },
-    readFormulaRanges: async (ranges) => ranges.map((range) => {
-      const rosterMatch = range.match(/^As_Roster!([A-Z]+)(\d+):[A-Z]+\d+$/);
-      if (rosterMatch) {
-        const column = rosterMatch[1].split('').reduce(
-          (value, character) => value * 26 + character.charCodeAt(0) - 64,
-          0,
-        ) - 1;
+    readFormulaRanges: async (ranges) => {
+      const values = ranges.map((range) => {
+        const rosterMatch = range.match(/^As_Roster!([A-Z]+)(\d+):[A-Z]+\d+$/);
+        if (rosterMatch) {
+          const column = rosterMatch[1].split('').reduce(
+            (value, character) => value * 26 + character.charCodeAt(0) - 64,
+            0,
+          ) - 1;
+          return {
+            range,
+            value: options.formulaRange === range
+              ? '=SYNTHETIC_FORMULA()'
+              : rosterSnapshot.rows[0].values[column],
+          };
+        }
+        const citizenMatch = range.match(
+          /^Simulation_Ledger!([A-Z]+)(\d+):[A-Z]+\d+$/
+        );
+        if (citizenMatch) {
+          const column = citizenMatch[1].split('').reduce(
+            (value, character) => value * 26 + character.charCodeAt(0) - 64,
+            0,
+          ) - 1;
+          return {
+            range,
+            value: options.formulaRange === range
+              ? '=SYNTHETIC_FORMULA()'
+              : citizenSnapshot.rows[0].values[column],
+          };
+        }
         return {
           range,
           value: options.formulaRange === range
             ? '=SYNTHETIC_FORMULA()'
-            : rosterSnapshot.rows[0].values[column],
+            : '',
         };
+      });
+      formulaReadCalls += 1;
+      if (formulaReadCalls <= Number(options.appendTargetShifts || 0)) {
+        const shiftedSheets = options.appendTargetShiftSheets ||
+          ['LifeHistory_Log', 'Ripple_Ledger'];
+        if (shiftedSheets.includes('LifeHistory_Log')) {
+          lifeHistoryLogSnapshot.rows.push({
+            rowNumber: lifeHistoryLogSnapshot.rows.length + 2,
+            values: LIFE_HISTORY_LOG_HEADERS.map((_, index) => (
+              index === 3 ? `SYNTHETIC-RACE-${formulaReadCalls}` : ''
+            )),
+          });
+        }
+        if (shiftedSheets.includes('Ripple_Ledger')) {
+          rippleLedgerSnapshot.rows.push({
+            rowNumber: rippleLedgerSnapshot.rows.length + 2,
+            values: RIPPLE_LEDGER_HEADERS.map((_, index) => (
+              index === 2 ? `synthetic-race-${formulaReadCalls}` : ''
+            )),
+          });
+        }
       }
-      const citizenMatch = range.match(/^Simulation_Ledger!([A-Z]+)(\d+):[A-Z]+\d+$/);
-      if (citizenMatch) {
-        const column = citizenMatch[1].split('').reduce(
-          (value, character) => value * 26 + character.charCodeAt(0) - 64,
-          0,
-        ) - 1;
-        return {
-          range,
-          value: options.formulaRange === range
-            ? '=SYNTHETIC_FORMULA()'
-            : citizenSnapshot.rows[0].values[column],
-        };
-      }
-      return {
-        range,
-        value: options.formulaRange === range ? '=SYNTHETIC_FORMULA()' : '',
-      };
-    }),
+      return values;
+    },
   });
 
   return {
@@ -359,6 +388,9 @@ function writerHarness(options = {}) {
     capturedBatches,
     get batchCalls() {
       return batchCalls;
+    },
+    get formulaReadCalls() {
+      return formulaReadCalls;
     },
   };
 }
@@ -765,6 +797,79 @@ async function expectCode(promise, code) {
   assert.strictEqual(appendRaceHarness.batchCalls, 1);
   assert.ok(appendRaceResult.updatedRanges.includes('LifeHistory_Log!A4:G4'));
 
+  const preBatchShiftHarness = writerHarness({ appendTargetShifts: 1 });
+  const preBatchShiftResult = await preBatchShiftHarness.writer(inputFor(
+    injuryValue,
+    'synthetic-pre-batch-shift-01',
+    preBatchShiftHarness,
+  ));
+  assert.strictEqual(preBatchShiftHarness.formulaReadCalls, 2);
+  assert.strictEqual(preBatchShiftHarness.batchCalls, 1);
+  assert.ok(
+    preBatchShiftResult.updatedRanges.includes('LifeHistory_Log!A4:G4'),
+  );
+  assert.ok(
+    preBatchShiftResult.updatedRanges.includes('Ripple_Ledger!A4:M4'),
+  );
+  const shiftedAudit = preBatchShiftHarness.auditStore.records.at(-1);
+  assert.strictEqual(shiftedAudit.result, 'success');
+  assert.ok(shiftedAudit.cellTransitions.some(
+    (transition) => transition.range === 'LifeHistory_Log!A4:A4'
+  ));
+  assert.ok(shiftedAudit.cellTransitions.some(
+    (transition) => transition.range === 'Ripple_Ledger!A4:A4'
+  ));
+  assert.strictEqual(shiftedAudit.cellTransitions.some(
+    (transition) => (
+      transition.range.startsWith('LifeHistory_Log!') &&
+      transition.range.includes('3:')
+    )
+  ), false);
+
+  const asymmetricShiftHarness = writerHarness({
+    appendTargetShifts: 1,
+    appendTargetShiftSheets: ['LifeHistory_Log'],
+  });
+  const asymmetricShiftResult = await asymmetricShiftHarness.writer(inputFor(
+    injuryValue,
+    'synthetic-pre-batch-asymmetric-01',
+    asymmetricShiftHarness,
+  ));
+  assert.strictEqual(asymmetricShiftHarness.formulaReadCalls, 2);
+  assert.strictEqual(asymmetricShiftHarness.batchCalls, 1);
+  assert.ok(
+    asymmetricShiftResult.updatedRanges.includes('LifeHistory_Log!A4:G4'),
+  );
+  assert.ok(
+    asymmetricShiftResult.updatedRanges.includes('Ripple_Ledger!A3:M3'),
+  );
+  const asymmetricAudit = asymmetricShiftHarness.auditStore.records.at(-1);
+  assert.ok(asymmetricAudit.cellTransitions.some(
+    (transition) => transition.range === 'LifeHistory_Log!A4:A4'
+  ));
+  assert.ok(asymmetricAudit.cellTransitions.some(
+    (transition) => transition.range === 'Ripple_Ledger!A3:A3'
+  ));
+
+  const movingTwiceHarness = writerHarness({ appendTargetShifts: 2 });
+  await expectCode(
+    movingTwiceHarness.writer(inputFor(
+      injuryValue,
+      'synthetic-pre-batch-shift-02',
+      movingTwiceHarness,
+    )),
+    'sports_source_changed',
+  );
+  assert.strictEqual(movingTwiceHarness.formulaReadCalls, 2);
+  assert.strictEqual(movingTwiceHarness.batchCalls, 0);
+  assert.strictEqual(movingTwiceHarness.auditStore.records.at(-1).result, 'error');
+  assert.strictEqual(
+    movingTwiceHarness.auditStore.records.some(
+      (record) => record.result === 'uncertain'
+    ),
+    false,
+  );
+
   const lifeMismatchHarness = writerHarness({ lifeReadBackMismatch: true });
   await expectCode(
     lifeMismatchHarness.writer(inputFor(
@@ -778,6 +883,8 @@ async function expectCode(promise, code) {
     lifeMismatchHarness.auditStore.records.at(-1).result,
     'uncertain',
   );
+  assert.strictEqual(lifeMismatchHarness.formulaReadCalls, 1);
+  assert.strictEqual(lifeMismatchHarness.batchCalls, 1);
 
   const staleHarness = writerHarness();
   const staleInput = inputFor(

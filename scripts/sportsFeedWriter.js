@@ -463,6 +463,52 @@ function transitionRecord(range, before, after, valueKind) {
   };
 }
 
+function retargetAppendRange(range, sheetName, rowNumber) {
+  const prefix = `${sheetName}!`;
+  if (!String(range).startsWith(prefix)) return range;
+  return `${prefix}${String(range).slice(prefix.length).replace(/\d+/g, String(rowNumber))}`;
+}
+
+async function preflightCellTransitions(writeCells, readFormulaRanges) {
+  const formulaValues = await readFormulaRanges(
+    writeCells.map((cell) => cell.range)
+  );
+  if (!Array.isArray(formulaValues) ||
+      formulaValues.length !== writeCells.length) {
+    throw new SportsFeedWriterError(
+      'sports_formula_preflight_failed',
+      'Formula-visible preflight did not return every target cell',
+      503,
+    );
+  }
+  return writeCells.map((cell, index) => {
+    const current = formulaRangeValue(formulaValues[index]);
+    if (isFormulaValue(current)) {
+      throw new SportsFeedWriterError(
+        'sports_formula_cell_blocked',
+        `${cell.range} contains a formula and cannot be replaced`,
+        409,
+      );
+    }
+    const matches = cell.spec
+      ? statValuesEqual(current, cell.before, cell.spec)
+      : safeCell(current) === safeCell(cell.before);
+    if (!matches) {
+      throw new SportsFeedWriterError(
+        'sports_source_changed',
+        `${cell.range} changed before the sports batch`,
+        409,
+      );
+    }
+    return transitionRecord(
+      cell.range,
+      current,
+      cell.after,
+      cell.valueKind,
+    );
+  });
+}
+
 function structuredBatchNoOp(error) {
   const status = Number(error && error.response && error.response.status);
   return Number.isInteger(status) &&
@@ -837,8 +883,8 @@ function createSportsFeedWriter(dependencies) {
         'T',
         currentPreconditions.nextFeedRow,
       );
-      const mutationRanges = [];
-      const writeCells = row.map((value, columnIndex) => ({
+      let mutationRanges = [];
+      let writeCells = row.map((value, columnIndex) => ({
         range: rowRange(
           FEED_SHEET,
           columnLetter(columnIndex),
@@ -1008,43 +1054,77 @@ function createSportsFeedWriter(dependencies) {
       }
 
       updatedRanges = [feedRange, ...mutationRanges];
-      const formulaValues = await readFormulaRanges(
-        writeCells.map((cell) => cell.range)
+      cellTransitions = await preflightCellTransitions(
+        writeCells,
+        readFormulaRanges,
       );
-      if (!Array.isArray(formulaValues) ||
-          formulaValues.length !== writeCells.length) {
-        throw new SportsFeedWriterError(
-          'sports_formula_preflight_failed',
-          'Formula-visible preflight did not return every target cell',
-          503,
-        );
+
+      if (rosterEventProjection) {
+        for (let appendTargetAttempt = 0; appendTargetAttempt < 2;
+          appendTargetAttempt += 1) {
+          const [latestLifeHistoryLog, latestRippleLedger] = await Promise.all([
+            readSportsSource(LIFE_HISTORY_LOG_SHEET),
+            readSportsSource(RIPPLE_LEDGER_SHEET),
+          ]);
+          const latestLifeHistoryLogRow = assertAppendIdentityAvailable(
+            latestLifeHistoryLog,
+            LIFE_HISTORY_LOG_SHEET,
+            LIFE_HISTORY_LOG_HEADERS,
+            3,
+            rosterEventProjection.lifeHistory.eventTag,
+          );
+          const latestRippleLedgerRow = assertAppendIdentityAvailable(
+            latestRippleLedger,
+            RIPPLE_LEDGER_SHEET,
+            RIPPLE_LEDGER_HEADERS,
+            2,
+            validation.submissionId,
+          );
+          const targetMoved =
+            latestLifeHistoryLogRow !== nextLifeHistoryLogRow ||
+            latestRippleLedgerRow !== nextRippleLedgerRow;
+          if (!targetMoved) break;
+          if (appendTargetAttempt === 1) {
+            throw new SportsFeedWriterError(
+              'sports_source_changed',
+              'Sports append targets kept moving before the batch',
+              409,
+              { appendTargetRetryExhausted: true },
+            );
+          }
+
+          nextLifeHistoryLogRow = latestLifeHistoryLogRow;
+          nextRippleLedgerRow = latestRippleLedgerRow;
+          mutationRanges = mutationRanges.map((range) => (
+            retargetAppendRange(
+              retargetAppendRange(
+                range,
+                LIFE_HISTORY_LOG_SHEET,
+                nextLifeHistoryLogRow,
+              ),
+              RIPPLE_LEDGER_SHEET,
+              nextRippleLedgerRow,
+            )
+          ));
+          writeCells = writeCells.map((cell) => ({
+            ...cell,
+            range: retargetAppendRange(
+              retargetAppendRange(
+                cell.range,
+                LIFE_HISTORY_LOG_SHEET,
+                nextLifeHistoryLogRow,
+              ),
+              RIPPLE_LEDGER_SHEET,
+              nextRippleLedgerRow,
+            ),
+          }));
+          updatedRanges = [feedRange, ...mutationRanges];
+          cellTransitions = await preflightCellTransitions(
+            writeCells,
+            readFormulaRanges,
+          );
+        }
       }
-      cellTransitions = writeCells.map((cell, index) => {
-        const current = formulaRangeValue(formulaValues[index]);
-        if (isFormulaValue(current)) {
-          throw new SportsFeedWriterError(
-            'sports_formula_cell_blocked',
-            `${cell.range} contains a formula and cannot be replaced`,
-            409,
-          );
-        }
-        const matches = cell.spec
-          ? statValuesEqual(current, cell.before, cell.spec)
-          : safeCell(current) === safeCell(cell.before);
-        if (!matches) {
-          throw new SportsFeedWriterError(
-            'sports_source_changed',
-            `${cell.range} changed before the sports batch`,
-            409,
-          );
-        }
-        return transitionRecord(
-          cell.range,
-          current,
-          cell.after,
-          cell.valueKind,
-        );
-      });
       targetHash = sha256(stableStringify(cellTransitions));
 
       batchAttempted = true;
@@ -1116,6 +1196,19 @@ function createSportsFeedWriter(dependencies) {
           }
           return range;
         });
+        cellTransitions = cellTransitions.map((transition) => ({
+          ...transition,
+          range: retargetAppendRange(
+            retargetAppendRange(
+              transition.range,
+              LIFE_HISTORY_LOG_SHEET,
+              lifeRow.rowNumber,
+            ),
+            RIPPLE_LEDGER_SHEET,
+            rippleRow.rowNumber,
+          ),
+        }));
+        targetHash = sha256(stableStringify(cellTransitions));
       }
 
       const timestamp = now().toISOString();

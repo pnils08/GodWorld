@@ -620,14 +620,14 @@ deploys until items 1–4 land and their regression cases pass.
      controls are dashboard auth + capability header.
 - **Verify:** a regression test per item in the existing fake-only harnesses;
   full sports suite + dashboard build green; no live write.
-- **Status:** [ ] in progress — items 1–3 and 5–9 LANDED `1bbedbd9` (verified by
-  engine-sheet; the item-1 regression was added there after mutation testing
-  exposed the fix as uncovered). Item 4's full-log hash/append-target fragility
-  is removed; its remaining scope is the strictly-pre-batch retry-on-shift writer
-  fix — decided, not an open design question. Item 5 still gates the first live
-  proof. engine.77 is gated to attended non-overlapping runs on canon-safety
-  grounds (ledger clobber path); engine.40 stat capture is assessable
-  separately. Nothing deploys.
+- **Status:** [x] source complete — items 1–3 and 5–9 LANDED `1bbedbd9`
+  (verified by engine-sheet; the item-1 regression was added there after
+  mutation testing exposed the fix as uncovered). Item 4 now re-checks append
+  targets strictly before the batch, performs at most one retargeted preflight,
+  and returns a safe pre-batch 409 on a second move; post-batch ambiguity is
+  never retried. Item 5 still gates the first live proof. engine.77 is gated to
+  attended non-overlapping runs on canon-safety grounds (ledger clobber path);
+  engine.40 stat capture is assessable separately. Nothing deploys.
 
 ## Engine-sheet rulings on the review gate (2026-08-02, S349)
 
@@ -801,6 +801,12 @@ compensation.
   headers and append targets now resolve inside the writer lock. Strict
   Apps-Script↔Node Cycle exclusion remains a builder decision; no deployment,
   service action, or live write occurred.
+- 2026-08-02 — Task 10 item 4 source complete: one pre-batch append-target
+  shift receives one retargeted formula-visible preflight and re-check; a
+  second shift fails 409 with zero batches, and post-batch ambiguity remains
+  non-retryable. Synthetic simultaneous and asymmetric shifts pass, and
+  weakening the retry-exhaustion guard makes the regression test fail. No
+  deployment, service action, or live write occurred.
 - 2026-08-02 — Drafted and registered from the adopted sports workspace
   research, the source-built engine.89 boundary, the current roster/feed/health
   implementations, and engine.90 archive research. No implementation,
@@ -824,3 +830,6 @@ compensation.
   LifeHistory_Log / Ripple rows survive = canon divergence. Split boundary
   adopted: engine.77 gated (canon-safety), engine.40 assessable separately.
   Retry-on-shift confined to strictly-pre-batch. See §Engine-sheet rulings.
+- 2026-08-02 (Codex) — Implemented the bounded strictly-pre-batch item-4
+  retry with actual-row audit remapping and simultaneous/asymmetric race
+  regressions; post-batch paths remain single-attempt.

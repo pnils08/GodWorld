@@ -297,17 +297,22 @@ failover. The local Notebook adapter reads only complete
 The extended writer signs 15-minute previews with a stable server secret and
 server-generated idempotency key. It binds the actor, projected feed row,
 selected physical roster and citizen rows, exact source headers, and CSRF nonce.
-One process-global lock revalidates those sources, re-resolves append targets,
-rejects any formula-backed update target, and sends one
-`spreadsheets.batchUpdate` request. Numeric stat fields use numeric
-`userEnteredValue`; W-L and narrative/state cells remain explicit strings.
+One process-global lock revalidates those sources, rejects any formula-backed
+update target, and sends one `spreadsheets.batchUpdate` request. Immediately
+before that batch, the writer re-resolves the `LifeHistory_Log` and
+`Ripple_Ledger` append targets. One moved target causes one fresh
+formula-visible preflight and one re-check; a second move returns
+`409 sports_source_changed` before any batch. The writer never retries after
+`batchUpdate`, because an ambiguous result may already have applied. Numeric
+stat fields use numeric `userEnteredValue`; W-L and narrative/state cells remain
+explicit strings.
 Exact read-back covers the feed, roster, citizen, `LifeHistory_Log`, and
 `Ripple_Ledger` surfaces applicable to the action. The metadata-only audit
-stores ranges plus hashed before/after values for every target cell; it does not
-duplicate Notes, Stats, HealthCause, or LifeHistory prose. A structured Google
-4xx rejection is a proven no-op and does not latch the writer. A timeout, lost
-response, or read-back mismatch remains ambiguous and disables later writes in
-that process for builder review.
+stores the actual resolved ranges plus hashed before/after values for every
+target cell; it does not duplicate Notes, Stats, HealthCause, or LifeHistory
+prose. A structured Google 4xx rejection is a proven no-op and does not latch
+the writer. A timeout, lost response, or read-back mismatch remains ambiguous
+and disables later writes in that process for builder review.
 
 `trade-away` writes `Status=Traded` but deletes or archives no row; engine.90
 owns any later departure archive. `season-close` remains fail-closed until an
@@ -321,8 +326,12 @@ authorization controls; HTTPS, same-origin, Secure-cookie, and loopback checks
 are proxy/transport attestations. Sports request bodies are capped at 64 KiB
 before JSON parsing and feed fields at 50,000 characters. No TLS proxy is
 installed yet, so the source cannot report itself ready for live appends.
-Deployment/restart, authenticated live reads, cross-system Cycle exclusion,
-and a builder-supplied proving event remain separate approval gates.
+Deployment/restart, authenticated live reads, and a builder-supplied proving
+event remain separate approval gates. Engine.77 remains disabled for unattended
+use; an attended engine.77 confirmation must not overlap a Cycle because the
+Cycle's whole-ledger Phase 10 commit can overwrite a mid-Cycle citizen change.
+Engine.40 stat capture does not mutate `Simulation_Ledger` and is assessed
+separately.
 
 ## Remaining gaps
 
@@ -332,8 +341,9 @@ coverage are repaired. Remaining gaps are:
 - the Sheet setup utility does not cover columns P–T;
 - the preflight and dropdown utility do not share one validator;
 - A's roster context has wider reviewer coverage than Oaks roster context;
-- the independent review remediation needs re-review; strict cross-system Cycle
-  exclusion still needs the builder's selected lock boundary;
+- the independent review remediation needs re-review; unattended engine.77
+  remains disabled until a genuine cross-runtime exclusion mechanism is
+  separately designed and approved;
 - deployment, authenticated live reads, and separately approved stat/engine.77
   proving writes remain open;
 - TrueSource season close remains open until the authoritative source update
@@ -371,5 +381,8 @@ parsers, validators, and consumers through an approved implementation plan.
 - 2026-08-02 — Documented the independent-review remediation source: exact feed
   headers, formula-safe typed stat writes, structured no-op error
   classification, bounded bodies/fields, first/last+POPID roster joins, and
-  hashed cell pre-images. Cross-system Cycle exclusion, re-review, deployment,
-  and live proof remain open.
+  hashed cell pre-images. Re-review, deployment, and live proof remain open.
+- 2026-08-02 — Documented the bounded pre-batch append-target retry: one moved
+  target receives one fresh preflight/re-check, a second move fails before the
+  batch, and no post-batch result is retried. Recorded the split Cycle boundary:
+  engine.77 attended/non-overlapping only; engine.40 assessed separately.

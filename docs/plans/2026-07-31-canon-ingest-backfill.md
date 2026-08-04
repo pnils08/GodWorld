@@ -39,6 +39,7 @@ Ingest scripts are deterministic and correct; invocation was the failure. 28+ pu
 | T4 | Wire sweep as `/post-publish` tail step + weekly cron (dry-run report to Discord; `--apply` on Mike's go until trust is earned) | engine-sheet |
 | T5 | Scope decision: `output/drive-files/` in or out of canon search | Mike |
 | T6 | Backfill run over T3-qualified reporter corpus + Deep Canon Drive folder once T1–T3 land | engine-sheet |
+| T7 | Single-artifact ingest path (kimi P5, 2026-08-03 — `output/kimi/deep-dispatch-guardrail-proposals.md`): the deep-dispatch fork ends at per-desk artifacts with no clean ingest route — post-publish is edition/dispatch-scoped, bulk archiver has no idempotency. Provide a customId-keyed, tag-schema'd single-file ingester (likely `ingestEdition.js` single-file mode on top of T1). Until it lands: no hand-rolled ingest of fork artifacts | engine-sheet |
 
 ## Verification
 
@@ -47,3 +48,4 @@ Re-run the S345 container audit (documents/list diff = zero missing for in-scope
 ## Changelog
 
 - 2026-07-31 — created (S345, engine-sheet) after the editions/ backfill shipped inline.
+- 2026-08-03 — T7 added (S353, research-build): single-artifact ingest path for deep-dispatch fork artifacts, from kimi P5.

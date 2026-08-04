@@ -1,8 +1,8 @@
 ---
 name: deep-dispatch
 description: Fork-path desk writer (pipeline.44). One desk at a time, DEEP — charge assembled from the desk's slice, cheap propose→OK gate, bounded source-search with orchestrator reconcile, supplied citizen voices (pipeline.43), artifact to the desk's own corpus. Production ends at artifacts-on-disk; review is a separate decoupled flow. Run after /desk-slice.
-version: "2.3"
-updated: 2026-07-26
+version: "2.4"
+updated: 2026-08-03
 tags: [media, pipeline-44, fork, deep-dispatch, active]
 effort: medium
 argument-hint: "<desk> [cycle-number]"
@@ -85,6 +85,7 @@ Before the writer sees anything:
 
 - Cross-check the ≤3 returns against each other. Where two disagree on a **specific fact** (vote count, program scope/districts, date, dollar figure), the **newer / primary source wins** — verify against `world_summary_c{XX}.md` or MCP (`lookup_initiative`, `search_world`) before it reaches the writer.
 - A contradicted **scope** claim is a HARD STOP — resolve now, not in the prose. (The exact C100 OARI miss: a stale return said OARI was a D1/D3/D5 pilot when INIT-002 was citywide since ~C97; the contradicting signal was in-hand and unreconciled.)
+- **Person-name identity is a standing check**, same weight as vote counts/dates/dollar figures (kimi P3, 2026-08-03). Any named person in a locked record (civic-voice packet, generated quote, project filing) that conflicts with published canon is ruled **canon-wins** unless a retcon is explicit; log the drift as an engine.43 instance. (The C102 catch: "Roberta" vs Bobby Chen-Ramirez — one packet outlier against 10+ cycles of canon.)
 - Hand the writer **reconciled** sourcing + a one-line note per resolved fact; log each reconcile to the run log. *(Structural because charge prose alone did not catch the S272 error; this step is why it can't recur silently.)*
 
 Record for every seat: `retrievalLane`, `resultStatus`, selected/used source IDs, citation count, and `reconcileVerdict`. Do not record the NotebookLM answer body. A prior-published claim that conflicts with current primary state loses and is logged `conflict-current-wins`.
@@ -106,6 +107,8 @@ node scripts/citizenVoice.js --batch=output/voices/voices_c{XX}_{desk}_batch.jso
 ```
 
 Entries `{pop, name, quote, disp, recorded, fallback}` — recording writes the *speaking* (PRESS page doc + gated intake; dials stay behind the cycle drain). Fallbacks are explicit entries, never silent gaps. Log per-call + total tokens to the run log.
+
+**Test-run mode (kimi P2, 2026-08-03):** a pilot run — new model at the desk, harness change — may set `record: false` to exercise the full chain with no external writes (no PRESS page, no gated intake). The deviation MUST be named in the run's production-log row. Live runs stay `record: true`.
 
 ## Step 6 — The deep write (LOCKED: desk writes, no Agent grant)
 
@@ -132,6 +135,12 @@ Emit: headline, "By {journalist} | Bay Tribune {Desk}", body.
 Do NOT spawn agents. Do NOT read other desks' files. Write.
 ```
 
+**Supplied-line errors (kimi P1 + Mike's policy 2026-08-03 — two separate dynamics, never merged):**
+
+- A supplied line is the citizen's own words, but it is not canon-insulated. The hard line is **mutating a tracked entity**: a wrong name for a tracked person (the "Watkins"/Ashford and "Roberta"/Bobby class), wrong district, wrong figure, or invented words in a real POPID's mouth. Do not print that segment — trim around it with ellipsis (front/back cuts only) and log the error to the production log. A named error pattern in the voice model is engine.43 signal. The guard is mechanical, not vigilance-based: Rhea's C102 gate is the enforcement behind the writer.
+- **Social-world color is allowed.** A first-name relationship reference inside testimony ("my friend Noor told me") is the citizen's real social world — essence, not citation. It needs no canon lookup and is never trimmed for being unverifiable. Only tracked-entity mutation is gated.
+- If a story ever genuinely needs a citizen who doesn't exist: never mint straight into the ledger — birth into Generic_Citizens (nothing is free), and only as last-case strict-necessity, not a pipeline. **Businesses run the opposite dynamic:** a new business named honestly in a story is the sanctioned way businesses become tracked (no generic-birth pool exists; ~90 tracked vs 386k population). The real-world-entity gate (canon substitutes) guards against real-world business/institution influx — it is not a citizen rationale.
+
 ## Step 7 — Close the run
 
 Append to `output/production_log_c{XX}.md` `## /deep-dispatch` one row per artifact: `| Desk | Journalist | Storyline | Artifact path | File exists | Words | Searches | Voices ok/fallback | Reconciles | Status |`. A run that produced no file is **DROPPED** with the reason — never a silent gap (G-W61).
@@ -145,4 +154,5 @@ Record per desk run: total token cost of the chain (charge + ≤3 searches + rec
 ## Changelog
 
 - 2026-06-29 (S274, research.20 Phase 2 Tasks 4+5): v0.1 initial harness. Inverted Step 1 only; reused write-edition Step 2/3. Two LOCKED forks enforced. Reconcile pass = Task 5 orchestrator half.
+- 2026-08-03 (S353, kimi guardrail landing — `output/kimi/deep-dispatch-guardrail-proposals.md`): v2.4. P3 → Step 4 person-name standing check (canon-wins). P2 → Step 5 record:false sanctioned test mode. P1 + Mike's citizen/business policy → Step 6 supplied-line error convention (tracked-entity mutation gated; social-world color allowed; Generic_Citizens birth vs business story-mint split). P4 (faith-event vocabulary) and P5 (single-article ingest) routed to engine-sheet / engine.91 — not skill text.
 - 2026-07-11 (S313, pipeline.44 Task 3): v2.0 fork rewrite. Slices in (not sift slate), propose→OK gate (Mike-direct), supplied citizen voices via pipeline.43 batch (machinery didn't exist at v0.1), REAL-ASKS-ONLY rule (Task 1 new veer class), production decoupled from compile/review — ends at artifacts-on-disk. LOCKED forks, ≤3-search cap, reconcile pass, serialize-under-quota carried forward unchanged.

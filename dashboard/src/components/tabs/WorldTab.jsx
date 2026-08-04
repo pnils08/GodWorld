@@ -74,14 +74,14 @@ function BondWeb({ world, onCitizenClick }) {
           enabled: true,
           solver: 'forceAtlas2Based',
           forceAtlas2Based: {
-            gravitationalConstant: -60,
-            centralGravity: 0.005,
+            gravitationalConstant: -80,
+            centralGravity: 0.02,
             springLength: 110,
             springConstant: 0.06,
             damping: 0.4,
             avoidOverlap: 0.2,
           },
-          stabilization: { iterations: 250, updateInterval: 25 },
+          stabilization: { iterations: 800, updateInterval: 50 },
         },
         interaction: { hover: true, tooltipDelay: 200, hideEdgesOnDrag: true },
         layout: { randomSeed: 42 },
@@ -94,6 +94,9 @@ function BondWeb({ world, onCitizenClick }) {
         network.setOptions({ physics: { enabled: false } });
         network.fit({ animation: { duration: 500, easingFunction: 'easeInOutQuad' } });
       });
+      // Headless/slow-render fallback: re-fit once positions have settled even if
+      // the stabilization event already fired mid-drift.
+      setTimeout(() => network.fit({ animation: false }), 4000);
 
       network.on('click', (params) => {
         if (params.nodes.length > 0 && onCitizenClick) {

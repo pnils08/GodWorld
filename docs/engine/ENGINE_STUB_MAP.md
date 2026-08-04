@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-08-03 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-08-04 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -2990,6 +2990,8 @@
   Sheets: Cultural_Ledger
 
 ### ensureFaithLedger.js
+- **faithVocabFor_(tradition)**
+
 - **ensureFaithLedgerSchema_(ss)**
 
 - **ensureFaithOrgsSchema_(ss)**
@@ -3010,7 +3012,7 @@
 
 - **getHolyDayForTradition_(tradition, month)**
 
-- **pickFaithEvent_(eventType, rng)**
+- **pickFaithEvent_(eventType, rng, tradition)**
 
 - **calculateAttendance_(congregation, eventType, rng)**
 
@@ -3403,4 +3405,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 181
-**Functions mapped:** 1131
+**Functions mapped:** 1132

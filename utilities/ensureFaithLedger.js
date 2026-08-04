@@ -225,16 +225,20 @@ var FAITH_EVENT_TYPES = {
 };
 
 var FAITH_EVENTS_POOL = {
+  // engine.100 — tradition-specific nouns are placeholders ($TALK/$HALL/$CARE/
+  // $MUSIC), substituted per the org's tradition at pick time. The C102 Mara
+  // flag ("pastoral counseling" on Temescal Islamic Center) is this class:
+  // Christian-default vocabulary applied to every tradition.
   regular_service: [
     'weekly service draws faithful',
-    'special sermon addresses community concerns',
-    'choir performance highlights service',
+    'special $TALK addresses community concerns',
+    '$MUSIC highlights service',
     'guest speaker visits congregation'
   ],
   holy_day: [
     'congregation celebrates $HOLIDAY',
     '$HOLIDAY observance brings community together',
-    'special $HOLIDAY service fills sanctuary',
+    'special $HOLIDAY service fills the $HALL',
     'traditional $HOLIDAY rituals observed'
   ],
   community_program: [
@@ -263,10 +267,39 @@ var FAITH_EVENTS_POOL = {
     'congregation opens doors for community support',
     'vigil held for community healing',
     'emergency assistance fund activated',
-    'pastoral counseling services expanded',
+    '$CARE services expanded',
     'community grief gathering organized'
   ]
 };
+
+// engine.100 — per-tradition clergy/space vocabulary. Substituted into the
+// $-placeholders above by pickFaithEvent_. Christian terms reproduce the old
+// text byte-identically; the other families get tradition-correct terms
+// (sibling class to the Bauer/Rabbi honorific fix). Unknown traditions get
+// neutral terms — vocabulary is flavor, not entity truth, so no throw.
+var FAITH_VOCAB = {
+  christian: { TALK: 'sermon', HALL: 'sanctuary', CARE: 'pastoral counseling', MUSIC: 'choir performance' },
+  jewish:    { TALK: "d'var Torah", HALL: 'sanctuary', CARE: 'rabbinic counseling', MUSIC: 'cantorial singing' },
+  muslim:    { TALK: 'khutbah', HALL: 'prayer hall', CARE: 'spiritual counseling', MUSIC: 'Quranic recitation' },
+  buddhist:  { TALK: 'dharma talk', HALL: 'meditation hall', CARE: 'spiritual counseling', MUSIC: 'communal chanting' },
+  hindu:     { TALK: 'spiritual discourse', HALL: 'temple hall', CARE: 'spiritual counseling', MUSIC: 'devotional singing' },
+  sikh:      { TALK: 'scripture reading', HALL: 'gurdwara hall', CARE: 'spiritual counseling', MUSIC: 'kirtan singing' },
+  neutral:   { TALK: 'reflection', HALL: 'main hall', CARE: 'spiritual counseling', MUSIC: 'communal music' }
+};
+
+function faithVocabFor_(tradition) {
+  var t = (tradition || '').toString().toLowerCase();
+  if (t.indexOf('jewish') !== -1 || t.indexOf('judai') !== -1) return FAITH_VOCAB.jewish;
+  if (t.indexOf('muslim') !== -1 || t.indexOf('islam') !== -1) return FAITH_VOCAB.muslim;
+  if (t.indexOf('buddhist') !== -1) return FAITH_VOCAB.buddhist;
+  if (t.indexOf('hindu') !== -1) return FAITH_VOCAB.hindu;
+  if (t.indexOf('sikh') !== -1) return FAITH_VOCAB.sikh;
+  if (t.indexOf('protestant') !== -1 || t.indexOf('baptist') !== -1 ||
+      t.indexOf('catholic') !== -1 || t.indexOf('methodist') !== -1 ||
+      t.indexOf('pentecostal') !== -1 || t.indexOf('unitarian') !== -1 ||
+      t.indexOf('christian') !== -1 || t.indexOf('gospel') !== -1) return FAITH_VOCAB.christian;
+  return FAITH_VOCAB.neutral;
+}
 
 // Holy days by tradition (month-based approximation)
 var HOLY_DAYS = {
@@ -662,18 +695,29 @@ function getHolyDayForTradition_(tradition, month) {
 }
 
 /**
- * Get a random event from a pool.
+ * Get a random event from a pool, with tradition-correct vocabulary.
+ *
+ * engine.100 — substitution happens AFTER the pick, so rng consumption is
+ * unchanged from the pre-vocab version (determinism preserved; Christian
+ * traditions reproduce the old strings byte-identically).
  *
  * @param {string} eventType
  * @param {Function} rng
+ * @param {string} [tradition] - org's FaithTradition; omitted → neutral terms
  * @return {string}
  */
-function pickFaithEvent_(eventType, rng) {
+function pickFaithEvent_(eventType, rng, tradition) {
   var pool = FAITH_EVENTS_POOL[eventType];
   if (!pool || pool.length === 0) {
     return 'community gathering';
   }
-  return pool[Math.floor(rng() * pool.length)];
+  var text = pool[Math.floor(rng() * pool.length)];
+  var vocab = faithVocabFor_(tradition);
+  return text
+    .replace('$TALK', vocab.TALK)
+    .replace('$HALL', vocab.HALL)
+    .replace('$CARE', vocab.CARE)
+    .replace('$MUSIC', vocab.MUSIC);
 }
 
 /**

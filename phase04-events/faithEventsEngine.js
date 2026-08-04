@@ -256,7 +256,7 @@ function generateOrgEvents_(org, context, rng) {
 
   // Holy day event (high priority if applicable)
   if (holyDay && rng() < 0.7) {
-    var holyDayDesc = pickFaithEvent_('holy_day', rng)
+    var holyDayDesc = pickFaithEvent_('holy_day', rng, org.tradition)
       .replace('$HOLIDAY', holyDay);
 
     events.push({
@@ -278,7 +278,7 @@ function generateOrgEvents_(org, context, rng) {
       tradition: org.tradition,
       neighborhood: org.neighborhood,
       eventType: 'regular_service',
-      description: pickFaithEvent_('regular_service', rng),
+      description: pickFaithEvent_('regular_service', rng, org.tradition),
       attendance: calculateAttendance_(org.congregation, 'regular_service', rng)
     });
   }
@@ -293,7 +293,7 @@ function generateOrgEvents_(org, context, rng) {
       tradition: org.tradition,
       neighborhood: org.neighborhood,
       eventType: 'community_program',
-      description: pickFaithEvent_('community_program', rng),
+      description: pickFaithEvent_('community_program', rng, org.tradition),
       attendance: calculateAttendance_(org.congregation, 'community_program', rng)
     });
   }
@@ -308,7 +308,7 @@ function generateOrgEvents_(org, context, rng) {
       tradition: org.tradition,
       neighborhood: org.neighborhood,
       eventType: 'outreach',
-      description: pickFaithEvent_('outreach', rng),
+      description: pickFaithEvent_('outreach', rng, org.tradition),
       attendance: calculateAttendance_(org.congregation, 'outreach', rng)
     });
   }
@@ -324,7 +324,7 @@ function generateOrgEvents_(org, context, rng) {
         tradition: org.tradition,
         neighborhood: org.neighborhood,
         eventType: 'crisis_response',
-        description: pickFaithEvent_('crisis_response', rng),
+        description: pickFaithEvent_('crisis_response', rng, org.tradition),
         attendance: calculateAttendance_(org.congregation, 'crisis_response', rng)
       });
     }

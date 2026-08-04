@@ -25,7 +25,9 @@ function parseArgs(argv) {
   const args = {};
   for (let i = 2; i < argv.length; i++) {
     const arg = argv[i];
-    if (arg === '--input' && i + 1 < argv.length) {
+    if (arg === '--live') {
+      args.live = true;
+    } else if (arg === '--input' && i + 1 < argv.length) {
       args.input = argv[++i];
     } else if (arg === '--names' && i + 1 < argv.length) {
       args.names = argv[++i];
@@ -382,10 +384,40 @@ setTimeout(() => network.fit({ animation: false }), 2500);
 `;
 }
 
-function main() {
+async function fetchLiveExports() {
+  // --live: pull current Relationship_Bonds + Simulation_Ledger names from
+  // Sheets and stage them as the same TSV exports the file-based flow uses.
+  require('dotenv').config({ path: path.join(require('os').homedir(), '.config/godworld/.env') });
+  const sheets = require(path.join(REPO_ROOT, 'lib', 'sheets.js'));
+
+  const bondRows = await sheets.getSheetData('Relationship_Bonds');
+  const bondTsv = ['RELATIONSHIP_BONDS live export ' + new Date().toISOString(),
+    bondRows.map((r) => r.join('\t')).join('\n')].join('\n') + '\n';
+  const bondPath = path.join(REPO_ROOT, 'output', 'bond-ledger-live.tsv');
+  fs.writeFileSync(bondPath, bondTsv, 'utf8');
+
+  const slRows = await sheets.getSheetData('Simulation_Ledger');
+  const nameLines = ['POPID\tName\tNeighborhood'];
+  for (const r of slRows.slice(1)) {
+    const name = ((r[1] || '') + ' ' + (r[3] || '')).trim();
+    if (r[0] && name) nameLines.push([r[0], name, r[19] || ''].join('\t'));
+  }
+  const namesPath = path.join(REPO_ROOT, 'output', 'citizen-names.tsv');
+  fs.writeFileSync(namesPath, nameLines.join('\n') + '\n', 'utf8');
+
+  console.log(`--live: exported ${bondRows.length - 1} bonds, ${nameLines.length - 1} citizen names`);
+  return { bondPath, namesPath };
+}
+
+async function main() {
   const args = parseArgs(process.argv);
+  if (args.live) {
+    const { bondPath, namesPath } = await fetchLiveExports();
+    if (!args.input) args.input = bondPath;
+    if (!args.names) args.names = namesPath;
+  }
   if (!args.input) {
-    console.error('Usage: node scripts/buildCitizenBondGraph.js --input <path.tsv> [--out output/citizen-bond-graph.json] [--html output/citizen-bond-graph.html] [--min-intensity N]');
+    console.error('Usage: node scripts/buildCitizenBondGraph.js (--live | --input <path.tsv>) [--names <names.tsv>] [--out output/citizen-bond-graph.json] [--html output/citizen-bond-graph.html] [--min-intensity N]');
     process.exit(1);
   }
 
@@ -414,5 +446,8 @@ function main() {
 module.exports = { buildGraph, renderHtml, parseTsv, slugify };
 
 if (require.main === module) {
-  main();
+  main().catch((err) => {
+    console.error('buildCitizenBondGraph failed:', err.message);
+    process.exit(1);
+  });
 }

@@ -51,6 +51,7 @@ This table was verified against the live crontab on 2026-07-28.
 | `15 18 * * 1-5` | Weekday newsroom write + Rhea gate | `scripts/cron-desk-run.js --stage=write --fanout --gate-backend api` | `logs/newsroom-fanout.log` |
 | `30 21 * * *` | Citizen night wake | `scripts/citizen-wake.js --wake=night` | `logs/citizen-wake.log` |
 | `0 */6 * * *` | Server health check | `scripts/server-health-check.sh` | `logs/health-check.log` |
+| `7 23 * * 0` | Citizen bond graph rebuild (post-cycle, --live from Sheets) | `scripts/buildCitizenBondGraph.js` | `logs/bond-graph.log` |
 | `0 4 * * 3` | Weekly maintenance | `scripts/weekly-maintenance.sh` | `logs/weekly-maintenance.log` |
 | `0 3 1 * *` | Monthly droplet snapshot | `scripts/snapshot-droplet.sh` | `logs/snapshot.log` |
 
@@ -86,6 +87,13 @@ Rhea API gate and leaves output staged or flagged behind the probation wall.
 ### NotebookLM Newsroom Brief (Daily)
 Builds a source-grounded listening brief. The brief is a newsroom aid and is not
 canon.
+
+### Citizen Bond Graph Rebuild (Weekly)
+Regenerates the WORLD tab bond web from live `Relationship_Bonds` +
+`Simulation_Ledger` names after the Sunday cycle: exports both tabs to
+`output/bond-ledger-live.tsv` / `output/citizen-names.tsv`, then writes
+`output/citizen-bond-graph.json` + `.html`. The dashboard reads the JSON via
+`/api/world/bond-graph` (10-min cache). Added 2026-08-04 (kimi).
 
 ### Daily Backup
 Creates `godworld_backup_YYYY-MM-DD_HHMM.tar.gz` in `backups/`, keeps seven

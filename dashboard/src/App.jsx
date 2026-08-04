@@ -8,38 +8,27 @@ import {
   Activity,
   Users,
   ChevronRight,
-  ChevronDown,
-  Clock,
-  Database,
-  ArrowRight,
   Newspaper,
   MapPin,
   Shield,
   Loader,
   AlertCircle,
-  Landmark,
-  CircleDot,
-  AlertTriangle,
-  CheckCircle2,
-  Timer,
-  FileWarning,
-  Zap,
-  BookOpen,
-  GitBranch,
-  Eye,
+  ArrowRight,
   FileText,
-  Hash,
-  Target,
-  Trophy,
   Briefcase,
-  Radio,
-  Star,
-  BarChart3,
-  Wifi,
-  Server,
-  MapPinned,
+  Zap,
+  Trophy,
 } from 'lucide-react';
 import SportsTab from './components/SportsTab';
+import EditionTab from './components/tabs/EditionTab';
+import NewsroomTab from './components/tabs/NewsroomTab';
+import CouncilTab from './components/tabs/CouncilTab';
+import TrackerTab from './components/tabs/TrackerTab';
+import IntelTab from './components/tabs/IntelTab';
+import CityTab from './components/tabs/CityTab';
+import SearchTab from './components/tabs/SearchTab';
+import ChicagoTab from './components/tabs/ChicagoTab';
+import MissionTab from './components/tabs/MissionTab';
 import { Stat, Badge, TabButton } from './components/ui';
 
 // --- Data Fetching ---
@@ -101,7 +90,11 @@ export default function App() {
         setNeighborhoods(n);
         setCitizens(cz);
         setInitiatives(iv);
-        setSupplementals((eds?.editions || []).filter(ed => ed.isSupplemental).sort((a, b) => (b.cycle || 0) - (a.cycle || 0)));
+        setSupplementals(
+          (eds?.editions || [])
+            .filter((ed) => ed.isSupplemental)
+            .sort((a, b) => (b.cycle || 0) - (a.cycle || 0))
+        );
         setLoading(false);
       } catch (err) {
         setError(err.message);
@@ -119,20 +112,31 @@ export default function App() {
     }
     const timer = setTimeout(async () => {
       try {
-        const data = await fetchAPI(`/api/citizens?search=${encodeURIComponent(searchQuery)}&limit=20`);
+        const data = await fetchAPI(
+          `/api/citizens?search=${encodeURIComponent(searchQuery)}&limit=20`
+        );
         setSearchResults(data);
-      } catch { /* ignore */ }
+      } catch {
+        /* ignore */
+      }
     }, 300);
     return () => clearTimeout(timer);
   }, [searchQuery]);
 
   // Article search
   const runArticleSearch = useCallback(async (q) => {
-    if (!q || q.length < 2) { setArticleSearchResults(null); return; }
+    if (!q || q.length < 2) {
+      setArticleSearchResults(null);
+      return;
+    }
     try {
-      const data = await fetchAPI(`/api/search/articles?q=${encodeURIComponent(q)}&limit=30`);
+      const data = await fetchAPI(
+        `/api/search/articles?q=${encodeURIComponent(q)}&limit=30`
+      );
       setArticleSearchResults(data);
-    } catch { /* ignore */ }
+    } catch {
+      /* ignore */
+    }
   }, []);
 
   // Load newsroom data when NEWSROOM tab is selected
@@ -150,12 +154,11 @@ export default function App() {
   }, [activeTab, missionData]);
 
   function loadMissionData() {
-    Promise.all([
-      fetchAPI('/api/health'),
-      fetchAPI('/api/session-events'),
-    ]).then(([h, events]) => {
-      setMissionData({ health: h, events });
-    }).catch(() => {});
+    Promise.all([fetchAPI('/api/health'), fetchAPI('/api/session-events')])
+      .then(([h, events]) => {
+        setMissionData({ health: h, events });
+      })
+      .catch(() => {});
   }
 
   // Load chicago data when CHICAGO tab is selected
@@ -164,10 +167,16 @@ export default function App() {
       Promise.all([
         fetchAPI('/api/sports'),
         fetchAPI('/api/search/articles?section=chicago&limit=20'),
-      ]).then(([sportsData, articles]) => {
-        const chi = sportsData?.chicago || {};
-        setChicagoData({ feeds: chi.feeds || [], digest: chi.digest || null, articles: articles?.results || [] });
-      }).catch(() => {});
+      ])
+        .then(([sportsData, articles]) => {
+          const chi = sportsData?.chicago || {};
+          setChicagoData({
+            feeds: chi.feeds || [],
+            digest: chi.digest || null,
+            articles: articles?.results || [],
+          });
+        })
+        .catch(() => {});
     }
   }, [activeTab, chicagoData]);
 
@@ -178,11 +187,13 @@ export default function App() {
         fetchAPI('/api/hooks'),
         fetchAPI('/api/arcs'),
         fetchAPI('/api/storylines?status=active'),
-      ]).then(([h, a, s]) => {
-        setHooks(h);
-        setArcs(a);
-        setStorylines(s);
-      }).catch(() => {});
+      ])
+        .then(([h, a, s]) => {
+          setHooks(h);
+          setArcs(a);
+          setStorylines(s);
+        })
+        .catch(() => {});
     }
   }, [activeTab, hooks]);
 
@@ -190,11 +201,15 @@ export default function App() {
   const loadOverlayArticle = useCallback(async (r) => {
     if (r.file && r.articleIndex !== undefined) {
       try {
-        const data = await fetchAPI(`/api/article?file=${encodeURIComponent(r.file)}&index=${r.articleIndex}`);
+        const data = await fetchAPI(
+          `/api/article?file=${encodeURIComponent(r.file)}&index=${r.articleIndex}`
+        );
         setOverlayArticle(data);
         setCitizenDetail(null);
         setCoverageTrail(null);
-      } catch { /* ignore */ }
+      } catch {
+        /* ignore */
+      }
     }
   }, []);
 
@@ -208,39 +223,66 @@ export default function App() {
       setCitizenDetail(detail);
       // Also try name-based coverage if we have the name
       if (detail.ledger?.First && detail.ledger?.Last) {
-        const nameCoverage = await fetchAPI(`/api/citizen-coverage/${encodeURIComponent(detail.ledger.First + ' ' + detail.ledger.Last)}`);
+        const nameCoverage = await fetchAPI(
+          `/api/citizen-coverage/${encodeURIComponent(
+            detail.ledger.First + ' ' + detail.ledger.Last
+          )}`
+        );
         setCoverageTrail(nameCoverage);
       } else {
         setCoverageTrail(coverage);
       }
-    } catch { /* ignore */ }
+    } catch {
+      /* ignore */
+    }
   }, []);
 
-  // Faction colors
-  const factionColor = (f) => {
-    if (!f) return 'bg-neutral-700 text-neutral-300';
-    switch (f.toUpperCase()) {
-      case 'OPP': return 'bg-sky-500/20 text-sky-400';
-      case 'CRC': return 'bg-amber-500/20 text-amber-400';
-      case 'IND': return 'bg-purple-500/20 text-purple-400';
-      default: return 'bg-neutral-700 text-neutral-300';
+  const handleSupplementalClick = useCallback(async (s) => {
+    try {
+      const data = await fetchAPI(
+        `/api/article/raw?file=${encodeURIComponent(s.file)}`
+      );
+      const label = s.file
+        .replace('supplemental_', '')
+        .replace(/\.txt$/, '')
+        .replace(/_c\d+/, '')
+        .replace(/_/g, ' ');
+      setOverlayArticle({
+        title: label,
+        body: data.text,
+        cycle: data.cycle,
+        file: data.file,
+      });
+      setSearchOpen(true);
+    } catch {
+      /* ignore */
     }
-  };
+  }, []);
+
+  const handleCitizenClick = useCallback(
+    (popId) => {
+      setSearchOpen(true);
+      loadCitizenDetail(popId);
+    },
+    [loadCitizenDetail]
+  );
 
   const sentimentIcon = (val) => {
     const n = parseFloat(val);
     if (isNaN(n)) return null;
-    return n >= 0.5
-      ? <TrendingUp size={14} className="inline ml-1 text-green-400" />
-      : <TrendingDown size={14} className="inline ml-1 text-amber-400" />;
+    return n >= 0.5 ? (
+      <TrendingUp size={14} className="inline ml-1 text-good" />
+    ) : (
+      <TrendingDown size={14} className="inline ml-1 text-warn" />
+    );
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
+      <div className="min-h-screen bg-ink flex items-center justify-center">
         <div className="text-center">
-          <Loader size={32} className="text-sky-500 animate-spin mx-auto mb-4" />
-          <p className="text-neutral-500 text-sm font-mono">Loading GodWorld...</p>
+          <Loader size={32} className="text-accent animate-spin mx-auto mb-4" />
+          <p className="text-dim text-sm font-mono">Loading GodWorld...</p>
         </div>
       </div>
     );
@@ -248,12 +290,15 @@ export default function App() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6">
+      <div className="min-h-screen bg-ink flex items-center justify-center px-6">
         <div className="text-center max-w-md">
-          <AlertCircle size={32} className="text-red-500 mx-auto mb-4" />
-          <p className="text-red-400 text-sm font-mono mb-2">Connection Failed</p>
-          <p className="text-neutral-500 text-xs">{error}</p>
-          <p className="text-neutral-500 text-xs mt-4">Make sure the API server is running: <code className="text-neutral-400">npm start</code></p>
+          <AlertCircle size={32} className="text-bad mx-auto mb-4" />
+          <p className="text-bad text-sm font-mono mb-2">Connection Failed</p>
+          <p className="text-dim text-xs">{error}</p>
+          <p className="text-dim text-xs mt-4">
+            Make sure the API server is running:{' '}
+            <code className="text-text">npm start</code>
+          </p>
         </div>
       </div>
     );
@@ -271,7 +316,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-ink text-text font-sans selection:bg-accent/30">
-
       {/* HEADER */}
       <header className="fixed top-0 inset-x-0 z-50 bg-ink/90 backdrop-blur-xl border-b border-edge py-4 px-6 flex justify-between items-center">
         <div>
@@ -279,26 +323,30 @@ export default function App() {
             Bay Tribune <span className="text-accent underline decoration-2 underline-offset-4">Oakland</span>
           </h1>
           <div className="flex gap-2 mt-1">
-            <span className="text-[8px] font-mono text-dim">GODWORLD ENGINE v3.1</span>
-            <span className="text-[8px] font-mono text-accent">
+            <span className="text-[11px] font-mono text-dim">GODWORLD ENGINE v3.1</span>
+            <span className="text-[11px] font-mono text-accent">
               CYCLE {edHeader.cycle || health?.data?.latestCycleArchive?.replace('cycle-', '') || '—'}
             </span>
-            <span className="text-[8px] font-mono text-dim">
-              {edHeader.season || ''}
-            </span>
+            <span className="text-[11px] font-mono text-dim">{edHeader.season || ''}</span>
           </div>
         </div>
         <div className="flex gap-2">
           <button
             aria-label="Toggle search"
-            onClick={() => { setSearchOpen(!searchOpen); setMenuOpen(false); }}
+            onClick={() => {
+              setSearchOpen(!searchOpen);
+              setMenuOpen(false);
+            }}
             className="w-10 h-10 flex items-center justify-center bg-panel rounded-full border border-edge active:scale-90 transition-transform"
           >
             <Search size={16} />
           </button>
           <button
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-            onClick={() => { setMenuOpen(!menuOpen); setSearchOpen(false); }}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            onClick={() => {
+              setMenuOpen(!menuOpen);
+              setSearchOpen(false);
+            }}
             className="w-10 h-10 flex items-center justify-center bg-panel rounded-full border border-edge active:scale-90 transition-transform"
           >
             {menuOpen ? <X size={18} /> : <Menu size={18} />}
@@ -308,13 +356,24 @@ export default function App() {
 
       {/* SEARCH OVERLAY — Now dual-mode: citizens + articles */}
       {searchOpen && (
-        <div className="fixed inset-0 z-40 bg-black/95 pt-24 px-6 overflow-y-auto pb-24"
+        <div
+          className="fixed inset-0 z-40 bg-ink/95 pt-24 px-6 overflow-y-auto pb-24"
           tabIndex={-1}
-          onKeyDown={(e) => { if (e.key === 'Escape') { setSearchOpen(false); setSearchQuery(''); setSearchResults(null); setArticleSearchResults(null); setCitizenDetail(null); setCoverageTrail(null); setOverlayArticle(null); } }}
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') {
+              setSearchOpen(false);
+              setSearchQuery('');
+              setSearchResults(null);
+              setArticleSearchResults(null);
+              setCitizenDetail(null);
+              setCoverageTrail(null);
+              setOverlayArticle(null);
+            }
+          }}
         >
           <div className="max-w-lg mx-auto">
-            <div className="flex items-center gap-3 bg-neutral-900 rounded-2xl border border-white/10 px-4 py-3">
-              <Search size={18} className="text-neutral-500" />
+            <div className="flex items-center gap-3 bg-panel rounded-2xl border border-edge px-4 py-3">
+              <Search size={18} className="text-dim" />
               <input
                 type="text"
                 placeholder="Search citizens, articles, stories..."
@@ -324,14 +383,37 @@ export default function App() {
                   runArticleSearch(e.target.value);
                 }}
                 autoFocus
-                className="flex-1 bg-transparent text-white text-sm outline-none placeholder:text-neutral-500"
+                className="flex-1 bg-transparent text-text text-sm outline-none placeholder:text-faint"
               />
               {searchQuery && (
-                <button aria-label="Clear search" onClick={() => { setSearchQuery(''); setArticleSearchResults(null); setSearchResults(null); setCitizenDetail(null); setCoverageTrail(null); setOverlayArticle(null); }} className="text-neutral-500">
+                <button
+                  aria-label="Clear search"
+                  onClick={() => {
+                    setSearchQuery('');
+                    setArticleSearchResults(null);
+                    setSearchResults(null);
+                    setCitizenDetail(null);
+                    setCoverageTrail(null);
+                    setOverlayArticle(null);
+                  }}
+                  className="text-dim"
+                >
                   <X size={16} />
                 </button>
               )}
-              <button aria-label="Close search" onClick={() => { setSearchOpen(false); setSearchQuery(''); setSearchResults(null); setArticleSearchResults(null); setCitizenDetail(null); setCoverageTrail(null); setOverlayArticle(null); }} className="text-neutral-400 hover:text-white ml-1">
+              <button
+                aria-label="Close search"
+                onClick={() => {
+                  setSearchOpen(false);
+                  setSearchQuery('');
+                  setSearchResults(null);
+                  setArticleSearchResults(null);
+                  setCitizenDetail(null);
+                  setCoverageTrail(null);
+                  setOverlayArticle(null);
+                }}
+                className="text-dim hover:text-text ml-1"
+              >
                 <X size={20} />
               </button>
             </div>
@@ -339,23 +421,25 @@ export default function App() {
             {/* Citizen Results */}
             {searchResults && searchResults.citizens?.length > 0 && (
               <div className="mt-4">
-                <p className="text-[10px] text-neutral-500 font-mono uppercase tracking-widest mb-2">
+                <p className="text-[11px] text-faint font-mono uppercase tracking-widest mb-2">
                   <Users size={10} className="inline mr-1" /> {searchResults.total} citizens
                 </p>
                 <div className="space-y-2">
-                  {searchResults.citizens.map(c => (
+                  {searchResults.citizens.map((c) => (
                     <div
                       key={c.popId}
-                      className="p-4 bg-neutral-900/60 rounded-xl border border-white/5 flex justify-between items-center cursor-pointer hover:border-sky-500/30 transition-colors"
+                      className="p-4 bg-panel rounded-xl border border-edge flex justify-between items-center cursor-pointer hover:border-accent/30 transition-colors"
                       onClick={() => loadCitizenDetail(c.popId)}
                     >
                       <div>
-                        <div className="text-sm font-bold">{c.firstName} {c.lastName}</div>
-                        <div className="text-[10px] text-neutral-500 mt-0.5">
+                        <div className="text-sm font-bold text-text">
+                          {c.firstName} {c.lastName}
+                        </div>
+                        <div className="text-xs text-dim mt-0.5">
                           {c.role} {c.neighborhood ? `· ${c.neighborhood}` : ''} · Tier {c.tier}
                         </div>
                       </div>
-                      <span className="text-[9px] font-mono text-neutral-500">{c.popId}</span>
+                      <span className="text-[11px] font-mono text-faint">{c.popId}</span>
                     </div>
                   ))}
                 </div>
@@ -367,7 +451,10 @@ export default function App() {
               <CitizenDetailPanel
                 detail={citizenDetail}
                 coverage={coverageTrail}
-                onClose={() => { setCitizenDetail(null); setCoverageTrail(null); }}
+                onClose={() => {
+                  setCitizenDetail(null);
+                  setCoverageTrail(null);
+                }}
               />
             )}
 
@@ -376,7 +463,7 @@ export default function App() {
               <div className="mt-4">
                 <button
                   onClick={() => setOverlayArticle(null)}
-                  className="flex items-center gap-2 text-[10px] text-neutral-500 hover:text-white transition-colors mb-3"
+                  className="flex items-center gap-2 text-[11px] text-dim hover:text-text transition-colors mb-3"
                 >
                   <ChevronRight size={12} className="rotate-180" /> Back to results
                 </button>
@@ -387,24 +474,32 @@ export default function App() {
             {/* Article Results */}
             {!overlayArticle && articleSearchResults && articleSearchResults.results?.length > 0 && (
               <div className="mt-6">
-                <p className="text-[10px] text-neutral-500 font-mono uppercase tracking-widest mb-2">
-                  <FileText size={10} className="inline mr-1" /> {articleSearchResults.total} articles
+                <p className="text-[11px] text-faint font-mono uppercase tracking-widest mb-2">
+                  <FileText size={10} className="inline mr-1" /> {articleSearchResults.total}{' '}
+                  articles
                 </p>
                 <div className="space-y-2">
                   {articleSearchResults.results.map((r, i) => (
-                    <div key={i} className="p-3 bg-neutral-900/40 rounded-xl border border-white/5 cursor-pointer hover:border-sky-500/30 transition-colors"
-                      onClick={() => loadOverlayArticle(r)}>
+                    <div
+                      key={i}
+                      className="p-3 bg-panel rounded-xl border border-edge cursor-pointer hover:border-accent/30 transition-colors"
+                      onClick={() => loadOverlayArticle(r)}
+                    >
                       <div className="flex justify-between items-start mb-1">
-                        <span className="text-[9px] font-mono text-sky-500">{r.cycle ? `E${r.cycle}` : 'ARCHIVE'}</span>
-                        <span className="text-[9px] text-neutral-500">{r.section}</span>
+                        <span className="text-[11px] font-mono text-accent">
+                          {r.cycle ? `E${r.cycle}` : 'ARCHIVE'}
+                        </span>
+                        <span className="text-[11px] text-dim">{r.section}</span>
                       </div>
-                      <h4 className="text-xs font-bold mb-1">{r.title}</h4>
+                      <h4 className="text-xs font-bold text-text mb-1">{r.title}</h4>
                       {r.snippet && (
-                        <p className="text-[10px] text-neutral-500 leading-relaxed line-clamp-2">{r.snippet}</p>
+                        <p className="text-xs text-dim leading-relaxed line-clamp-2">{r.snippet}</p>
                       )}
                       <div className="flex justify-between items-center mt-1">
-                        {r.author && <span className="text-[9px] text-neutral-500">{r.author}</span>}
-                        <span className="text-[8px] text-neutral-500 font-mono">{r.bodyLength > 1000 ? `${Math.round(r.bodyLength/1000)}k` : `${r.bodyLength}b`}</span>
+                        {r.author && <span className="text-[11px] text-dim">{r.author}</span>}
+                        <span className="text-[11px] text-faint font-mono">
+                          {r.bodyLength > 1000 ? `${Math.round(r.bodyLength / 1000)}k` : `${r.bodyLength}b`}
+                        </span>
                       </div>
                     </div>
                   ))}
@@ -417,7 +512,7 @@ export default function App() {
 
       {/* MENU OVERLAY */}
       {menuOpen && (
-        <div className="fixed inset-0 z-40 bg-black pt-24 px-8 space-y-6">
+        <div className="fixed inset-0 z-40 bg-ink pt-24 px-8 space-y-6">
           {[
             { label: 'Edition Feed', view: 'feed', tab: 'EDITION' },
             { label: 'Newsroom', view: 'newsroom', tab: 'NEWSROOM' },
@@ -429,16 +524,23 @@ export default function App() {
             { label: 'Article Search', view: 'search', tab: 'SEARCH' },
             { label: 'Chicago', view: 'chicago', tab: 'CHICAGO' },
             { label: 'Mission Control', view: 'mission', tab: 'MISSION' },
-          ].map(item => (
+          ].map((item) => (
             <div
               key={item.view}
               className="group cursor-pointer"
-              onClick={() => { setView(item.view); setActiveTab(item.tab); setMenuOpen(false); }}
+              onClick={() => {
+                setView(item.view);
+                setActiveTab(item.tab);
+                setMenuOpen(false);
+              }}
             >
-              <span className="text-4xl font-black uppercase tracking-tighter group-hover:text-sky-500 transition-colors">
+              <span className="text-4xl font-black uppercase tracking-tighter group-hover:text-accent transition-colors">
                 {item.label}
               </span>
-              <ChevronRight size={24} className="inline ml-2 text-neutral-500 group-hover:text-sky-500 transition-colors" />
+              <ChevronRight
+                size={24}
+                className="inline ml-2 text-dim group-hover:text-accent transition-colors"
+              />
             </div>
           ))}
         </div>
@@ -446,38 +548,68 @@ export default function App() {
 
       {/* MAIN CONTENT */}
       <main className="pt-24 px-4 sm:px-6 pb-32 mx-auto max-w-7xl">
-
         {/* TELEMETRY CARDS */}
-        {activeTab !== 'SPORTS' && <section className="mb-8">
-          <div className="grid grid-cols-2 gap-3 mb-4">
-            <MetricCard label="Cycle" value={edHeader.cycle || '—'} color="sky" />
-            <MetricCard label="Sentiment" value={avgSentiment} color="amber" icon={sentimentIcon(avgSentiment)} />
-            <MetricCard label="Neighborhoods" value={hoods.length || '17'} color="neutral" />
-            <MetricCard label="Council" value={`${councilMembers.filter(c => c.officeId?.startsWith('COUNCIL')).length} seats`} color="neutral" />
-          </div>
+        {activeTab !== 'SPORTS' && (
+          <section className="mb-8">
+            <div className="grid grid-cols-2 gap-3 mb-4">
+              <MetricCard label="Cycle" value={edHeader.cycle || '—'} color="sky" />
+              <MetricCard
+                label="Sentiment"
+                value={avgSentiment}
+                color="amber"
+                icon={sentimentIcon(avgSentiment)}
+              />
+              <MetricCard label="Neighborhoods" value={hoods.length || '17'} color="neutral" />
+              <MetricCard
+                label="Council"
+                value={`${councilMembers.filter((c) => c.officeId?.startsWith('COUNCIL')).length} seats`}
+                color="neutral"
+              />
+            </div>
 
-          {/* STATUS TICKER */}
-          <div className="bg-black border border-sky-500/20 rounded-xl p-3 flex items-center gap-3">
-            <div className="p-2 bg-sky-500/10 rounded-lg shrink-0">
-              <Activity size={16} className="text-sky-500" />
+            {/* STATUS TICKER */}
+            <div className="bg-panel border border-accent/20 rounded-xl p-3 flex items-center gap-3">
+              <div className="p-2 bg-accent/10 rounded-lg shrink-0">
+                <Activity size={16} className="text-accent" />
+              </div>
+              <div className="flex-1 overflow-hidden">
+                <div className="text-[11px] font-mono text-accent uppercase tracking-tighter">
+                  System Status
+                </div>
+                <p className="text-xs text-dim truncate">
+                  {edHeader.weather || 'API online'} ·{' '}
+                  {edHeader.pattern
+                    ? `Pattern: ${edHeader.pattern}`
+                    : `Cycle ${health?.data?.latestCycleArchive?.replace('cycle-', '') || 'connected'}`}
+                </p>
+              </div>
             </div>
-            <div className="flex-1 overflow-hidden">
-              <div className="text-[10px] font-mono text-sky-400 uppercase tracking-tighter">System Status</div>
-              <p className="text-[11px] text-neutral-400 truncate">
-                {edHeader.weather || 'API online'} · {edHeader.pattern ? `Pattern: ${edHeader.pattern}` : `Cycle ${health?.data?.latestCycleArchive?.replace('cycle-', '') || 'connected'}`}
-              </p>
-            </div>
-          </div>
-        </section>}
+          </section>
+        )}
 
         {/* TAB BAR */}
         <div className="sticky top-16 z-30 bg-ink/90 backdrop-blur border-b border-edge -mx-4 sm:-mx-6 px-4 sm:px-6 mb-6 overflow-x-auto no-scrollbar">
           <div className="flex gap-4">
-            {['EDITION', 'NEWSROOM', 'COUNCIL', 'TRACKER', 'INTEL', 'SPORTS', 'CITY', 'SEARCH', 'CHICAGO', 'MISSION'].map(tab => (
+            {[
+              'EDITION',
+              'NEWSROOM',
+              'COUNCIL',
+              'TRACKER',
+              'INTEL',
+              'SPORTS',
+              'CITY',
+              'SEARCH',
+              'CHICAGO',
+              'MISSION',
+            ].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`pb-2 pt-3 text-xs font-bold tracking-wide uppercase transition-colors whitespace-nowrap ${activeTab === tab ? 'text-accent border-b-2 border-accent' : 'text-dim hover:text-text'}`}
+                className={`pb-2 pt-3 text-xs font-bold tracking-wide uppercase transition-colors whitespace-nowrap ${
+                  activeTab === tab
+                    ? 'text-accent border-b-2 border-accent'
+                    : 'text-dim hover:text-text'
+                }`}
               >
                 {tab}
               </button>
@@ -485,510 +617,110 @@ export default function App() {
           </div>
         </div>
 
-        {/* EDITION TAB */}
         {activeTab === 'EDITION' && (
-          <section className="space-y-6">
-            {articles.length === 0 && (
-              <div className="p-8 text-center text-neutral-500">
-                <Newspaper size={32} className="mx-auto mb-3 opacity-50" />
-                <p className="text-sm">No edition data loaded</p>
-              </div>
-            )}
-            {articles.map((article, i) => (
-              <ArticleCard key={i} article={article} isFirst={i === 0} />
-            ))}
-
-            {/* SUPPLEMENTALS */}
-            {supplementals.length > 0 && (
-              <div className="mt-10">
-                <div className="flex items-center gap-3 mb-4">
-                  <BookOpen size={16} className="text-amber-500" />
-                  <h4 className="text-[10px] font-black uppercase tracking-widest text-amber-500">Supplemental Editions</h4>
-                  <span className="text-[9px] text-neutral-500 font-mono">{supplementals.length}</span>
-                </div>
-                <div className="space-y-3">
-                  {supplementals.map((s, i) => {
-                    const label = s.file.replace('supplemental_', '').replace(/\.txt$/, '').replace(/_c\d+/, '').replace(/_/g, ' ');
-                    return (
-                      <div key={i} className="p-4 bg-neutral-900/60 rounded-xl border border-amber-500/10 hover:border-amber-500/30 transition-colors cursor-pointer"
-                        onClick={async () => {
-                          try {
-                            const data = await fetchAPI(`/api/article/raw?file=${encodeURIComponent(s.file)}`);
-                            setOverlayArticle({ title: label, body: data.text, cycle: data.cycle, file: data.file });
-                            setSearchOpen(true);
-                          } catch {}
-                        }}
-                      >
-                        <div className="flex justify-between items-start">
-                          <div className="text-sm font-bold capitalize">{label}</div>
-                          <span className="text-[8px] px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 font-mono border border-amber-500/20">C{s.cycle}</span>
-                        </div>
-                        <div className="text-[9px] text-neutral-500 mt-1 font-mono">{s.file}</div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </section>
+          <EditionTab
+            articles={articles}
+            supplementals={supplementals}
+            tier1={tier1}
+            ArticleCard={ArticleCard}
+            onSupplementalClick={handleSupplementalClick}
+            onCitizenClick={handleCitizenClick}
+          />
         )}
-
-        {/* NEWSROOM TAB */}
-        {activeTab === 'NEWSROOM' && (
-          <section className="space-y-6">
-            {!newsroom && (
-              <div className="p-8 text-center text-neutral-500">
-                <Loader size={24} className="mx-auto mb-3 animate-spin text-sky-500" />
-                <p className="text-sm">Loading newsroom...</p>
-              </div>
-            )}
-            {newsroom && (
-              <>
-                {/* Editor Card */}
-                <div className="p-5 bg-neutral-900/60 rounded-2xl border border-sky-500/20">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-full bg-sky-500/10 border border-sky-500/20 flex items-center justify-center font-black text-sm text-sky-400">M</div>
-                    <div>
-                      <h3 className="text-base font-black">{newsroom.editor.name}</h3>
-                      <span className="text-[9px] text-neutral-500">{newsroom.editor.role}</span>
-                    </div>
-                  </div>
-                  {newsroom.editor.journal && (
-                    <div className="mt-3 p-3 bg-black/30 rounded-xl">
-                      <div className="flex justify-between items-center mb-1">
-                        <span className="text-[9px] font-black text-sky-400 uppercase tracking-widest">
-                          Entry {newsroom.editor.journal.entryNumber}: {newsroom.editor.journal.entryTitle}
-                        </span>
-                        <span className="text-[8px] font-mono text-neutral-500">S{newsroom.editor.journal.session}</span>
-                      </div>
-                      <p className="text-[10px] text-neutral-400 leading-relaxed italic">{newsroom.editor.journal.preview}</p>
-                    </div>
-                  )}
-                </div>
-
-                {/* Audit Card — Mara */}
-                <div className="p-5 bg-neutral-900/60 rounded-2xl border border-amber-500/20">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Star size={14} className="text-amber-400" />
-                    <h3 className="text-xs font-black uppercase tracking-widest">Mara Vance — Audit</h3>
-                  </div>
-                  {newsroom.audit.latestScore && (
-                    <div className="grid grid-cols-3 gap-3 mb-3">
-                      <div className="text-center p-3 bg-black/30 rounded-xl">
-                        <div className="text-2xl font-black text-amber-400">{newsroom.audit.latestScore.grade}</div>
-                        <div className="text-[8px] font-bold text-neutral-500 uppercase">Grade</div>
-                      </div>
-                      <div className="text-center p-3 bg-black/30 rounded-xl">
-                        <div className="text-2xl font-black">{newsroom.audit.latestScore.total || '—'}</div>
-                        <div className="text-[8px] font-bold text-neutral-500 uppercase">Score</div>
-                      </div>
-                      <div className="text-center p-3 bg-black/30 rounded-xl">
-                        <div className="text-2xl font-black">E{newsroom.audit.latestScore.edition}</div>
-                        <div className="text-[8px] font-bold text-neutral-500 uppercase">Edition</div>
-                      </div>
-                    </div>
-                  )}
-                  {newsroom.audit.latestScore?.deskErrors && (
-                    <div className="space-y-1.5">
-                      {Object.entries(newsroom.audit.latestScore.deskErrors).map(([desk, errors]) => (
-                        errors.length > 0 && (
-                          <div key={desk} className="flex items-start gap-2">
-                            <span className="text-[8px] font-black text-neutral-500 uppercase w-14 shrink-0 mt-0.5">{desk}</span>
-                            <div className="flex-1">
-                              {errors.map((err, i) => (
-                                <p key={i} className="text-[9px] text-red-400/80 leading-relaxed">{err}</p>
-                              ))}
-                            </div>
-                          </div>
-                        )
-                      ))}
-                    </div>
-                  )}
-                  {/* Score history mini chart */}
-                  {newsroom.audit.scoreHistory?.length > 1 && (
-                    <div className="mt-3 pt-3 border-t border-white/5">
-                      <h5 className="text-[8px] font-black uppercase tracking-widest text-neutral-500 mb-2">Score History</h5>
-                      <div className="flex items-end gap-1 h-12">
-                        {newsroom.audit.scoreHistory.map((s, i) => (
-                          <div key={i} className="flex-1 flex flex-col items-center gap-0.5">
-                            <span className="text-[7px] font-bold text-neutral-500">{s.grade}</span>
-                            <div className="w-full rounded-sm bg-amber-500/30" style={{ height: `${Math.max(4, (s.total || 80) * 0.4)}px` }} />
-                            <span className="text-[7px] font-mono text-neutral-500">E{s.edition}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Desk Status Grid */}
-                <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <Briefcase size={14} className="text-sky-400" />
-                    <h3 className="text-xs font-black uppercase tracking-widest">Desk Status</h3>
-                  </div>
-                  <div className="grid grid-cols-2 gap-2">
-                    {Object.entries(newsroom.desks).map(([desk, status]) => {
-                      const deskColors = {
-                        civic: 'border-emerald-500/20', sports: 'border-amber-500/20', culture: 'border-purple-500/20',
-                        business: 'border-orange-500/20', chicago: 'border-red-500/20', letters: 'border-neutral-500/20',
-                      };
-                      const deskTextColors = {
-                        civic: 'text-emerald-400', sports: 'text-amber-400', culture: 'text-purple-400',
-                        business: 'text-orange-400', chicago: 'text-red-400', letters: 'text-neutral-400',
-                      };
-                      return (
-                        <div key={desk} className={`p-3 bg-neutral-900/40 rounded-xl border ${deskColors[desk] || 'border-white/5'}`}>
-                          <div className="flex justify-between items-start mb-1">
-                            <span className={`text-[10px] font-black uppercase ${deskTextColors[desk] || 'text-neutral-500'}`}>{desk}</span>
-                            <span className="text-[8px] font-mono text-neutral-500">C{status.latestCycle}</span>
-                          </div>
-                          <div className="flex gap-3 mt-1">
-                            {status.latestArticles > 0 && (
-                              <span className="text-[9px] text-neutral-400">{status.latestArticles} articles</span>
-                            )}
-                            {status.hookCount > 0 && (
-                              <span className="text-[9px] text-neutral-500">{status.hookCount} hooks</span>
-                            )}
-                            {status.arcCount > 0 && (
-                              <span className="text-[9px] text-neutral-500">{status.arcCount} arcs</span>
-                            )}
-                          </div>
-                          <span className="text-[8px] text-neutral-500">{status.packetCount} packets</span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* Pipeline Metrics */}
-                <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <BarChart3 size={14} className="text-emerald-400" />
-                    <h3 className="text-xs font-black uppercase tracking-widest">Pipeline</h3>
-                  </div>
-                  <div className="grid grid-cols-3 gap-2 mb-3">
-                    <div className="p-3 bg-neutral-900/40 rounded-xl border border-white/5 text-center">
-                      <div className="text-lg font-black">{newsroom.pipeline.totalEditions}</div>
-                      <div className="text-[8px] font-bold text-neutral-500 uppercase">Total Files</div>
-                    </div>
-                    <div className="p-3 bg-neutral-900/40 rounded-xl border border-white/5 text-center">
-                      <div className="text-lg font-black">{newsroom.pipeline.mainEditions}</div>
-                      <div className="text-[8px] font-bold text-neutral-500 uppercase">Editions</div>
-                    </div>
-                    <div className="p-3 bg-neutral-900/40 rounded-xl border border-white/5 text-center">
-                      <div className="text-lg font-black">{newsroom.pipeline.supplementals}</div>
-                      <div className="text-[8px] font-bold text-neutral-500 uppercase">Supplementals</div>
-                    </div>
-                  </div>
-                  {/* Article trend */}
-                  {newsroom.pipeline.articleTrend?.length > 0 && (
-                    <div className="p-3 bg-neutral-900/40 rounded-xl border border-white/5">
-                      <h5 className="text-[8px] font-black uppercase tracking-widest text-neutral-500 mb-2">Article Count — Recent Editions</h5>
-                      <div className="flex items-end gap-2 h-16">
-                        {newsroom.pipeline.articleTrend.slice().reverse().map((t, i) => (
-                          <div key={i} className="flex-1 flex flex-col items-center gap-0.5">
-                            <span className="text-[9px] font-black text-sky-400">{t.articles}</span>
-                            <div className="w-full rounded-sm bg-sky-500/30" style={{ height: `${Math.max(8, t.articles * 3)}px` }} />
-                            <span className="text-[8px] font-mono text-neutral-500">E{t.cycle}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Roster */}
-                <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <Users size={14} className="text-sky-400" />
-                    <h3 className="text-xs font-black uppercase tracking-widest">
-                      Tribune Roster <span className="text-neutral-500 normal-case">({newsroom.roster.totalReporters} journalists)</span>
-                    </h3>
-                  </div>
-                  <div className="space-y-2">
-                    {newsroom.roster.desks.map(d => (
-                      <div key={d.desk} className="p-3 bg-neutral-900/40 rounded-xl border border-white/5">
-                        <h5 className="text-[10px] font-black uppercase text-neutral-400 mb-1.5">{d.desk}</h5>
-                        <div className="space-y-1">
-                          {d.reporters.map((r, i) => (
-                            <div key={i} className="flex justify-between items-center">
-                              <span className="text-[10px] text-neutral-300 font-bold">{r.name}</span>
-                              <span className="text-[9px] text-neutral-500">{r.beat}</span>
-                            </div>
-                          ))}
-                          {d.columnists.map((c, i) => (
-                            <div key={`c${i}`} className="flex justify-between items-center">
-                              <span className="text-[10px] text-neutral-300 font-bold">{c.name}</span>
-                              <span className="text-[9px] text-amber-500/60 italic">{c.column}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Process Status */}
-                {newsroom.processes?.length > 0 && (
-                  <div>
-                    <div className="flex items-center gap-2 mb-3">
-                      <Radio size={14} className="text-green-400" />
-                      <h3 className="text-xs font-black uppercase tracking-widest">Processes</h3>
-                    </div>
-                    <div className="space-y-2">
-                      {newsroom.processes.map((p, i) => (
-                        <div key={i} className="p-3 bg-neutral-900/40 rounded-xl border border-white/5 flex justify-between items-center">
-                          <div>
-                            <span className="text-[10px] font-bold text-neutral-300">{p.name}</span>
-                            <div className="flex gap-3 mt-0.5">
-                              {p.memory && <span className="text-[8px] text-neutral-500">{p.memory} MB</span>}
-                              <span className="text-[8px] text-neutral-500">{p.restarts} restarts</span>
-                              {p.uptime && <span className="text-[8px] text-neutral-500">since {p.uptime.split('T')[0]}</span>}
-                            </div>
-                          </div>
-                          <span className={`text-[8px] px-2 py-0.5 rounded-full font-bold ${p.status === 'online' ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
-                            {p.status}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Citizen Archive Stats */}
-                {newsroom.citizenArchive && (
-                  <div>
-                    <div className="flex items-center gap-2 mb-3">
-                      <Database size={14} className="text-purple-400" />
-                      <h3 className="text-xs font-black uppercase tracking-widest">
-                        Citizen Archive <span className="text-neutral-500 normal-case">({newsroom.citizenArchive.totalCitizens} citizens, {newsroom.citizenArchive.totalRefs} refs)</span>
-                      </h3>
-                    </div>
-                    <div className="space-y-1">
-                      {newsroom.citizenArchive.topCitizens.map((c, i) => (
-                        <div key={i} className="flex items-center gap-2 p-2 bg-neutral-900/40 rounded-lg">
-                          <span className="text-[9px] font-mono text-neutral-500 w-4 text-right">{i + 1}</span>
-                          <span className="text-[10px] font-bold text-neutral-300 flex-1">{c.name}</span>
-                          <span className="text-[9px] font-mono text-sky-500">{c.refs} refs</span>
-                          <span className="text-[8px] font-mono text-neutral-500">{c.popId}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </>
-            )}
-          </section>
-        )}
-
-        {/* COUNCIL TAB */}
-        {activeTab === 'COUNCIL' && (
-          <section className="space-y-4">
-            {councilMembers.filter(c => c.officeId === 'MAYOR-01').map(m => (
-              <div key={m.officeId} className="p-5 bg-neutral-900/60 rounded-2xl border border-sky-500/20">
-                <div className="flex justify-between items-start mb-2">
-                  <span className="text-[9px] font-black text-sky-500 uppercase tracking-widest">Mayor</span>
-                  <span className={`text-[8px] px-2 py-0.5 rounded-full font-bold ${factionColor(m.faction)}`}>{m.faction}</span>
-                </div>
-                <h3 className="text-xl font-black tracking-tight">{m.holder}</h3>
-                <p className="text-xs text-neutral-500 mt-1">{m.notes}</p>
-              </div>
-            ))}
-            <div className="grid grid-cols-1 gap-3">
-              {councilMembers.filter(c => c.officeId?.startsWith('COUNCIL-')).map(m => (
-                <div key={m.officeId} className="p-4 bg-neutral-900/40 rounded-xl border border-white/5 flex justify-between items-center">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-[9px] font-mono text-neutral-500">{m.district}</span>
-                      <span className={`text-[8px] px-2 py-0.5 rounded-full font-bold ${factionColor(m.faction)}`}>{m.faction}</span>
-                      {m.status === 'injured' && (
-                        <span className="text-[8px] px-2 py-0.5 rounded-full bg-red-500/20 text-red-400 font-bold">INJURED</span>
-                      )}
-                    </div>
-                    <h4 className="text-sm font-bold">{m.holder}</h4>
-                    <p className="text-[10px] text-neutral-500 mt-0.5">{m.notes}</p>
-                  </div>
-                  <span className="text-[9px] font-mono text-neutral-700">{m.popId}</span>
-                </div>
-              ))}
-            </div>
-            <div className="p-4 bg-black rounded-xl border border-white/5 mt-4">
-              <h4 className="text-[10px] font-black uppercase tracking-widest text-neutral-500 mb-3">Faction Breakdown</h4>
-              <div className="flex gap-4">
-                {['OPP', 'CRC', 'IND'].map(faction => {
-                  const count = councilMembers.filter(c => c.officeId?.startsWith('COUNCIL-') && c.faction === faction).length;
-                  return (
-                    <div key={faction} className="flex-1 text-center">
-                      <div className={`text-xl font-black ${faction === 'OPP' ? 'text-sky-400' : faction === 'CRC' ? 'text-amber-400' : 'text-purple-400'}`}>
-                        {count}
-                      </div>
-                      <div className="text-[9px] font-bold text-neutral-500 uppercase">{faction}</div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* TRACKER TAB */}
-        {activeTab === 'TRACKER' && (
-          <section className="space-y-4">
-            {initiatives?.summary && (
-              <div className="grid grid-cols-4 gap-2 mb-4">
-                <StatusBadge label="Blocked" count={initiatives.summary.blocked} color="red" />
-                <StatusBadge label="Stalled" count={initiatives.summary.stalled} color="amber" />
-                <StatusBadge label="Clock" count={initiatives.summary.clockRunning} color="sky" />
-                <StatusBadge label="Active" count={initiatives.summary.inProgress} color="green" />
-              </div>
-            )}
-            {(initiatives?.initiatives || []).map(init => (
-              <InitiativeCard key={init.id} initiative={init} />
-            ))}
-            {initiatives?.lastUpdated && (
-              <p className="text-[9px] text-neutral-500 text-center mt-6 font-mono">
-                Last updated: {initiatives.lastUpdated} by {initiatives.updatedBy}
-              </p>
-            )}
-          </section>
-        )}
-
-        {/* INTEL TAB — Hooks, Arcs, Storylines */}
-        {activeTab === 'INTEL' && (
-          <section className="space-y-6">
-            {/* Story Hooks */}
-            <div>
-              <div className="flex items-center gap-2 mb-3">
-                <Zap size={14} className="text-amber-400" />
-                <h3 className="text-xs font-black uppercase tracking-widest">Story Hooks</h3>
-                <span className="text-[9px] font-mono text-neutral-500">{hooks?.total || 0}</span>
-              </div>
-              {(hooks?.hooks || []).slice(0, 10).map((hook, i) => (
-                <HookCard key={i} hook={hook} />
-              ))}
-              {!hooks && <p className="text-[10px] text-neutral-500">Loading...</p>}
-            </div>
-
-            {/* Active Arcs */}
-            <div>
-              <div className="flex items-center gap-2 mb-3">
-                <GitBranch size={14} className="text-purple-400" />
-                <h3 className="text-xs font-black uppercase tracking-widest">Active Arcs</h3>
-                <span className="text-[9px] font-mono text-neutral-500">{arcs?.total || 0}</span>
-              </div>
-              {(arcs?.arcs || []).slice(0, 10).map((arc, i) => (
-                <ArcCard key={i} arc={arc} />
-              ))}
-            </div>
-
-            {/* Storylines */}
-            <div>
-              <div className="flex items-center gap-2 mb-3">
-                <BookOpen size={14} className="text-emerald-400" />
-                <h3 className="text-xs font-black uppercase tracking-widest">Active Storylines</h3>
-                <span className="text-[9px] font-mono text-neutral-500">{storylines?.total || 0}</span>
-              </div>
-              {(storylines?.storylines || []).slice(0, 15).map((sl, i) => (
-                <StorylineCard key={i} storyline={sl} />
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* SPORTS TAB */}
-        {activeTab === 'SPORTS' && (
-          <SportsTab />
-        )}
-
-        {/* CITY TAB */}
-        {activeTab === 'CITY' && (
-          <section className="space-y-3">
-            {hoods.sort((a, b) => b.sentiment - a.sentiment).map(h => (
-              <div key={h.name} className="p-4 bg-neutral-900/40 rounded-xl border border-white/5">
-                <div className="flex justify-between items-start mb-2">
-                  <div className="flex items-center gap-2">
-                    <MapPin size={12} className="text-sky-500" />
-                    <h4 className="text-sm font-bold">{h.name}</h4>
-                  </div>
-                  <span className={`text-xs font-mono font-bold ${h.sentiment >= 0.92 ? 'text-green-400' : h.sentiment >= 0.88 ? 'text-sky-400' : 'text-amber-400'}`}>
-                    {h.sentiment.toFixed(2)}
-                  </span>
-                </div>
-                <div className="flex gap-4 mt-2">
-                  <MiniStat label="Crime" value={h.crimeIndex} warn={h.crimeIndex >= 2} />
-                  <MiniStat label="Nightlife" value={h.nightlife.toFixed(1)} />
-                  <MiniStat label="Retail" value={h.retailVitality.toFixed(1)} />
-                  <MiniStat label="Events" value={h.eventAttractiveness.toFixed(0)} />
-                </div>
-                {h.demographic && h.demographic !== 'Stable' && (
-                  <p className="text-[10px] text-amber-400 mt-2">{h.demographic}</p>
-                )}
-              </div>
-            ))}
-          </section>
-        )}
-
-        {/* SEARCH TAB — Dedicated article search */}
+        {activeTab === 'NEWSROOM' && <NewsroomTab newsroom={newsroom} />}
+        {activeTab === 'COUNCIL' && <CouncilTab councilMembers={councilMembers} />}
+        {activeTab === 'TRACKER' && <TrackerTab initiatives={initiatives} />}
+        {activeTab === 'INTEL' && <IntelTab hooks={hooks} arcs={arcs} storylines={storylines} />}
+        {activeTab === 'SPORTS' && <SportsTab />}
+        {activeTab === 'CITY' && <CityTab hoods={hoods} />}
         {activeTab === 'SEARCH' && (
-          <ArticleSearchView />
+          <SearchTab fetchAPI={fetchAPI} FullArticleReader={FullArticleReader} />
         )}
-
-        {/* CHICAGO TAB */}
-        {activeTab === 'CHICAGO' && <ChicagoView data={chicagoData} />}
-
-        {/* MISSION TAB */}
-        {activeTab === 'MISSION' && <MissionControlView data={missionData} onRefresh={() => { setMissionData(null); loadMissionData(); }} />}
-
-        {/* KEY CITIZENS */}
-        {activeTab === 'EDITION' && tier1.length > 0 && (
-          <section className="mt-12 mb-8">
-            <div className="flex items-center gap-3 mb-4">
-              <Shield size={18} className="text-sky-500" />
-              <h4 className="text-sm font-black uppercase tracking-widest">Key Figures</h4>
-              <span className="text-[9px] text-neutral-500 font-mono">TIER 1</span>
-            </div>
-            <div className="grid grid-cols-2 gap-3">
-              {tier1.slice(0, 12).map(c => (
-                <div key={c.popId} className="p-3 bg-neutral-900/40 rounded-xl border border-white/5 cursor-pointer hover:border-sky-500/30 transition-colors"
-                  onClick={() => { setSearchOpen(true); loadCitizenDetail(c.popId); }}
-                >
-                  <div className="flex justify-between items-start">
-                    <div className="text-xs font-bold">{c.firstName} {c.lastName}</div>
-                    <span className="text-[7px] px-1 py-0.5 rounded bg-amber-500/15 text-amber-400 font-black border border-amber-500/20">T{c.tier}</span>
-                  </div>
-                  <div className="text-[9px] text-neutral-500 mt-0.5">{c.role}</div>
-                  <div className="flex justify-between items-center mt-1">
-                    <span className="text-[8px] text-neutral-500">{c.neighborhood}</span>
-                    {c.totalRefs > 0 && (
-                      <span className="text-[8px] font-mono text-sky-500/60">{c.totalRefs} refs</span>
-                    )}
-                  </div>
-                  {c.originCity && <div className="text-[8px] text-neutral-500 mt-0.5 italic">{c.originCity}</div>}
-                </div>
-              ))}
-            </div>
-          </section>
+        {activeTab === 'CHICAGO' && <ChicagoTab chicagoData={chicagoData} />}
+        {activeTab === 'MISSION' && (
+          <MissionTab
+            missionData={missionData}
+            onRefresh={() => {
+              setMissionData(null);
+              loadMissionData();
+            }}
+          />
         )}
       </main>
 
       {/* BOTTOM NAV */}
       <nav className="fixed bottom-0 inset-x-0 z-40 bg-ink/90 backdrop-blur border-t border-edge">
         <div className="max-w-7xl mx-auto h-16 px-4 flex items-center justify-around">
-          <TabButton icon={Newspaper} label="Edition" active={activeTab === 'EDITION'} onClick={() => { setView('feed'); setActiveTab('EDITION'); }} />
-          <TabButton icon={Briefcase} label="Newsroom" active={activeTab === 'NEWSROOM'} onClick={() => { setView('newsroom'); setActiveTab('NEWSROOM'); }} />
-          <TabButton icon={Shield} label="Council" active={activeTab === 'COUNCIL'} onClick={() => { setView('council'); setActiveTab('COUNCIL'); }} />
-          <TabButton icon={Zap} label="Intel" active={activeTab === 'INTEL'} onClick={() => { setView('intel'); setActiveTab('INTEL'); }} />
-          <TabButton icon={Trophy} label="Sports" active={activeTab === 'SPORTS'} onClick={() => { setView('sports'); setActiveTab('SPORTS'); }} />
-          <TabButton icon={MapPin} label="City" active={activeTab === 'CITY'} onClick={() => { setView('neighborhoods'); setActiveTab('CITY'); }} />
-          <TabButton icon={Activity} label="Mission" active={activeTab === 'MISSION'} onClick={() => { setView('mission'); setActiveTab('MISSION'); }} />
+          <TabButton
+            icon={Newspaper}
+            label="Edition"
+            active={activeTab === 'EDITION'}
+            onClick={() => {
+              setView('feed');
+              setActiveTab('EDITION');
+            }}
+          />
+          <TabButton
+            icon={Briefcase}
+            label="Newsroom"
+            active={activeTab === 'NEWSROOM'}
+            onClick={() => {
+              setView('newsroom');
+              setActiveTab('NEWSROOM');
+            }}
+          />
+          <TabButton
+            icon={Shield}
+            label="Council"
+            active={activeTab === 'COUNCIL'}
+            onClick={() => {
+              setView('council');
+              setActiveTab('COUNCIL');
+            }}
+          />
+          <TabButton
+            icon={Zap}
+            label="Intel"
+            active={activeTab === 'INTEL'}
+            onClick={() => {
+              setView('intel');
+              setActiveTab('INTEL');
+            }}
+          />
+          <TabButton
+            icon={Trophy}
+            label="Sports"
+            active={activeTab === 'SPORTS'}
+            onClick={() => {
+              setView('sports');
+              setActiveTab('SPORTS');
+            }}
+          />
+          <TabButton
+            icon={MapPin}
+            label="City"
+            active={activeTab === 'CITY'}
+            onClick={() => {
+              setView('neighborhoods');
+              setActiveTab('CITY');
+            }}
+          />
+          <TabButton
+            icon={Activity}
+            label="Mission"
+            active={activeTab === 'MISSION'}
+            onClick={() => {
+              setView('mission');
+              setActiveTab('MISSION');
+            }}
+          />
         </div>
       </nav>
     </div>
   );
 }
 
-// --- Components ---
+// --- Shared Components ---
 
 function MetricCard({ label, value, color, icon }) {
   // Thin wrapper around the shared Stat primitive; preserves the existing prop surface.
@@ -1006,58 +738,94 @@ function MetricCard({ label, value, color, icon }) {
   );
 }
 
-function ArticleCard({ article, isFirst }) {
+function ArticleCard({ article, isFirst, className = '' }) {
   const [expanded, setExpanded] = useState(false);
   const sectionColors = {
-    'FRONT PAGE': 'text-sky-500', 'CIVIC AFFAIRS': 'text-emerald-500', 'SPORTS': 'text-amber-500',
-    'CULTURE & COMMUNITY': 'text-purple-500', 'BUSINESS TICKER': 'text-orange-500',
-    'CHICAGO BUREAU': 'text-red-500', 'LETTERS TO THE EDITOR': 'text-neutral-400',
+    'FRONT PAGE': 'text-sky-500',
+    'CIVIC AFFAIRS': 'text-emerald-500',
+    SPORTS: 'text-amber-500',
+    'CULTURE & COMMUNITY': 'text-purple-500',
+    'BUSINESS TICKER': 'text-orange-500',
+    'CHICAGO BUREAU': 'text-red-500',
+    'LETTERS TO THE EDITOR': 'text-neutral-400',
   };
-  const bodyLines = (article.body || '').split('\n').filter(l => l.trim());
+  const bodyLines = (article.body || '').split('\n').filter((l) => l.trim());
   const summary = bodyLines[0] || '';
 
   return (
     <div className="group" onClick={() => setExpanded(!expanded)}>
       {isFirst && (
         <div className="flex items-center gap-2 mb-2">
-          <span className="h-2 w-2 rounded-full bg-sky-500 animate-ping" />
-          <span className="text-[9px] font-black text-sky-500 uppercase tracking-widest">Lead Story</span>
+          <span className="h-2 w-2 rounded-full bg-accent animate-ping" />
+          <span className="text-[11px] font-black text-accent uppercase tracking-widest">
+            Lead Story
+          </span>
         </div>
       )}
-      <div className={`p-6 bg-neutral-900/40 border rounded-[2rem] cursor-pointer transition-colors ${expanded ? 'border-sky-500/30 bg-neutral-900' : 'border-white/10 hover:bg-neutral-900'}`}>
+      <div
+        className={`p-6 border cursor-pointer transition-colors ${
+          isFirst ? 'bg-panel-2 border-edge' : 'bg-panel border-edge hover:bg-panel-2'
+        } ${isFirst ? 'rounded-[2rem]' : 'rounded-[2rem]'} ${className}`}
+      >
         <div className="flex justify-between items-start mb-4">
-          <span className={`text-[10px] font-bold uppercase tracking-widest ${sectionColors[article.section] || 'text-neutral-500'}`}>
+          <span
+            className={`text-xs font-bold uppercase tracking-widest ${
+              sectionColors[article.section] || 'text-faint'
+            }`}
+          >
             {article.section}
           </span>
         </div>
-        <h3 className={`text-xl font-black leading-tight tracking-tight mb-1 uppercase italic transition-colors ${expanded ? 'text-sky-400' : 'group-hover:text-sky-400'}`}>
+        <h3
+          className={`${
+            isFirst ? 'text-2xl' : 'text-xl'
+          } font-black leading-tight tracking-tight mb-1 uppercase italic transition-colors ${
+            expanded ? 'text-accent' : 'group-hover:text-accent'
+          }`}
+        >
           {article.title}
         </h3>
-        {article.subtitle && <p className="text-xs text-neutral-400 italic mb-3">{article.subtitle}</p>}
-        {!expanded && <p className="text-sm text-neutral-400 leading-relaxed mb-6 line-clamp-3">{summary}</p>}
+        {article.subtitle && <p className="text-xs text-dim italic mb-3">{article.subtitle}</p>}
+        {!expanded && (
+          <p className="text-sm text-dim leading-relaxed mb-6 line-clamp-3">{summary}</p>
+        )}
         {expanded && (
           <div className="mt-4 space-y-3">
-            {bodyLines.map((line, i) => <p key={i} className="text-sm text-neutral-300 leading-relaxed">{line}</p>)}
+            {bodyLines.map((line, i) => (
+              <p key={i} className="text-sm text-text leading-relaxed">
+                {line}
+              </p>
+            ))}
             {article.namesIndex && (
-              <div className="pt-3 border-t border-white/5">
-                <span className="text-[9px] font-black text-neutral-500 uppercase tracking-widest">Names Index: </span>
-                <span className="text-[10px] text-neutral-500">{article.namesIndex}</span>
+              <div className="pt-3 border-t border-edge">
+                <span className="text-[11px] font-black text-faint uppercase tracking-widest">
+                  Names Index:{' '}
+                </span>
+                <span className="text-xs text-dim">{article.namesIndex}</span>
               </div>
             )}
           </div>
         )}
         {article.author && (
-          <div className={`flex items-center justify-between pt-4 border-t border-white/5 ${expanded ? 'mt-4' : ''}`}>
+          <div
+            className={`flex items-center justify-between pt-4 border-t border-edge ${
+              expanded ? 'mt-4' : ''
+            }`}
+          >
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-neutral-800 border border-white/10 flex items-center justify-center font-bold text-[10px]">
+              <div className="w-8 h-8 rounded-full bg-panel-2 border border-edge flex items-center justify-center font-bold text-xs">
                 {article.author[0]}
               </div>
               <div>
-                <span className="text-[10px] font-bold text-neutral-400">{article.author}</span>
-                {article.desk && <span className="text-[9px] text-neutral-500 block">{article.desk}</span>}
+                <span className="text-xs font-bold text-text">{article.author}</span>
+                {article.desk && <span className="text-[11px] text-dim block">{article.desk}</span>}
               </div>
             </div>
-            <div className={`p-2 rounded-full transition-all ${expanded ? 'bg-sky-500 text-black rotate-90' : 'bg-white/5'}`}>
+            <div
+              className={`p-2 rounded-full transition-all ${
+                expanded ? 'bg-accent text-ink rotate-90' : 'bg-edge'
+              }`}
+            >
               <ArrowRight size={16} />
             </div>
           </div>
@@ -1067,81 +835,66 @@ function ArticleCard({ article, isFirst }) {
   );
 }
 
-function HookCard({ hook }) {
-  const [expanded, setExpanded] = useState(false);
-  const domainColors = {
-    CIVIC: 'text-emerald-400', ECONOMIC: 'text-orange-400', CRIME: 'text-red-400',
-    HEALTH: 'text-pink-400', CULTURE: 'text-purple-400', SPORTS: 'text-amber-400',
-    NIGHTLIFE: 'text-violet-400',
+function FullArticleReader({ article }) {
+  const sectionColors = {
+    'FRONT PAGE': 'text-sky-500',
+    'CIVIC AFFAIRS': 'text-emerald-500',
+    SPORTS: 'text-amber-500',
+    'CULTURE & COMMUNITY': 'text-purple-500',
+    'BUSINESS TICKER': 'text-orange-500',
+    'CHICAGO BUREAU': 'text-red-500',
+    'LETTERS TO THE EDITOR': 'text-neutral-400',
   };
-  return (
-    <div className="p-3 bg-neutral-900/40 rounded-xl border border-white/5 mb-2 cursor-pointer hover:border-amber-500/20 transition-colors"
-      onClick={() => setExpanded(!expanded)}>
-      <div className="flex justify-between items-start mb-1">
-        <div className="flex items-center gap-2">
-          <span className={`text-[9px] font-black uppercase ${domainColors[hook.domain] || 'text-neutral-500'}`}>{hook.domain}</span>
-          {hook.neighborhood && <span className="text-[9px] text-neutral-500">{hook.neighborhood}</span>}
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="text-[9px] font-mono text-amber-500">P{hook.priorityScore || hook.priority}</span>
-          <span className="text-[8px] px-1.5 py-0.5 rounded bg-neutral-800 text-neutral-400">{hook.hookType}</span>
-        </div>
-      </div>
-      <p className={`text-[11px] text-neutral-300 leading-relaxed ${expanded ? '' : 'line-clamp-2'}`}>{hook.text}</p>
-      {expanded && hook.suggestedDesks && (
-        <p className="text-[9px] text-sky-500 mt-2">Desk: {hook.suggestedDesks}</p>
-      )}
-    </div>
-  );
-}
+  const bodyLines = (article.body || '').split('\n').filter((l) => l.trim());
 
-function ArcCard({ arc }) {
-  const phaseColors = { early: 'text-sky-400', rising: 'text-amber-400', peak: 'text-red-400', falling: 'text-purple-400', resolved: 'text-green-400' };
-  const tension = parseFloat(arc.tension) || 0;
-  const tensionWidth = Math.min(100, (tension / 5) * 100);
   return (
-    <div className="p-3 bg-neutral-900/40 rounded-xl border border-white/5 mb-2">
-      <div className="flex justify-between items-start mb-1">
-        <div className="flex items-center gap-2">
-          <span className="text-[9px] font-black uppercase text-purple-400">{arc.domain}</span>
-          <span className={`text-[9px] font-bold ${phaseColors[arc.phase] || 'text-neutral-500'}`}>{arc.phase}</span>
-        </div>
-        <div className="flex items-center gap-2">
-          {arc.neighborhood && <span className="text-[9px] text-neutral-500">{arc.neighborhood}</span>}
-          <span className="text-[9px] font-mono text-neutral-500">age {arc.arcAge}</span>
-        </div>
-      </div>
-      <p className="text-[11px] text-neutral-300 mb-2">{arc.summary}</p>
-      <div className="flex items-center gap-2">
-        <span className="text-[8px] text-neutral-500 uppercase">Tension</span>
-        <div className="flex-1 h-1 bg-neutral-800 rounded-full overflow-hidden">
-          <div className={`h-full rounded-full ${tension > 3 ? 'bg-red-500' : tension > 2 ? 'bg-amber-500' : 'bg-sky-500'}`}
-            style={{ width: `${tensionWidth}%` }} />
-        </div>
-        <span className="text-[9px] font-mono text-neutral-500">{tension.toFixed(1)}</span>
-      </div>
-    </div>
-  );
-}
-
-function StorylineCard({ storyline }) {
-  const priorityColors = { high: 'text-red-400', medium: 'text-amber-400', low: 'text-neutral-500' };
-  return (
-    <div className="p-3 bg-neutral-900/40 rounded-xl border border-white/5 mb-2">
-      <div className="flex justify-between items-start mb-1">
-        <span className={`text-[9px] font-black uppercase ${priorityColors[storyline.priority] || 'text-neutral-500'}`}>
-          {storyline.priority} · {storyline.type}
+    <div className="p-6 bg-panel rounded-2xl border border-edge">
+      <div className="flex justify-between items-start mb-3">
+        <span
+          className={`text-xs font-bold uppercase tracking-widest ${
+            sectionColors[article.section] || 'text-faint'
+          }`}
+        >
+          {article.section}
         </span>
-        <span className="text-[9px] font-mono text-neutral-500">C{storyline.cycleAdded}</span>
+        <span className="text-[11px] font-mono text-accent">
+          {article.cycle ? `E${article.cycle}` : article.source === 'drive-archive' ? 'ARCHIVE' : ''}
+        </span>
       </div>
-      <p className="text-[11px] text-neutral-300 leading-relaxed">{storyline.description}</p>
-      <div className="flex gap-2 mt-1.5">
-        {storyline.relatedCitizens && <span className="text-[9px] text-sky-500">{storyline.relatedCitizens}</span>}
-        {storyline.neighborhood && <span className="text-[9px] text-neutral-500">{storyline.neighborhood}</span>}
-        {storyline.desks?.length > 0 && (
-          <span className="text-[8px] text-neutral-500">{storyline.desks.join(', ')}</span>
-        )}
+
+      <h2 className="text-xl font-black leading-tight tracking-tight mb-1 uppercase italic text-text">
+        {article.title}
+      </h2>
+      {article.subtitle && <p className="text-sm text-dim italic mb-4">{article.subtitle}</p>}
+
+      {article.author && (
+        <div className="flex items-center gap-2 mb-6 pb-4 border-b border-edge">
+          <div className="w-8 h-8 rounded-full bg-panel-2 border border-edge flex items-center justify-center font-bold text-xs">
+            {article.author[0]}
+          </div>
+          <div>
+            <span className="text-xs font-bold text-text">{article.author}</span>
+            {article.desk && <span className="text-[11px] text-dim block">{article.desk}</span>}
+          </div>
+        </div>
+      )}
+
+      <div className="space-y-3">
+        {bodyLines.map((line, i) => (
+          <p key={i} className="text-sm text-text leading-relaxed">
+            {line}
+          </p>
+        ))}
       </div>
+
+      {article.namesIndex && (
+        <div className="pt-4 mt-6 border-t border-edge">
+          <span className="text-[11px] font-black text-faint uppercase tracking-widest">
+            Names Index:{' '}
+          </span>
+          <span className="text-xs text-dim">{article.namesIndex}</span>
+        </div>
+      )}
     </div>
   );
 }
@@ -1173,24 +926,30 @@ function CitizenDetailPanel({ detail, coverage, onClose }) {
   };
 
   return (
-    <div className="mt-4 p-5 bg-neutral-900 rounded-2xl border border-sky-500/20">
+    <div className="mt-4 p-5 bg-panel rounded-2xl border border-accent/20">
       {/* Header */}
       <div className="flex justify-between items-start mb-3">
         <div>
-          <h3 className="text-lg font-black">{name}</h3>
+          <h3 className="text-lg font-black text-text">{name}</h3>
           <div className="flex items-center gap-2 mt-0.5">
-            <span className="text-[9px] font-mono text-sky-500">{detail.popId}</span>
+            <span className="text-[11px] font-mono text-accent">{detail.popId}</span>
             {l.Tier && (
-              <span className={`text-[8px] px-1.5 py-0.5 rounded-full font-black border ${tierColors[l.Tier] || tierColors['4']}`}>
+              <span
+                className={`text-[11px] px-1.5 py-0.5 rounded-full font-black border ${
+                  tierColors[l.Tier] || tierColors['4']
+                }`}
+              >
                 TIER {l.Tier}
               </span>
             )}
             {l.Status && l.Status !== 'Active' && (
-              <span className="text-[8px] px-1.5 py-0.5 rounded-full bg-red-500/20 text-red-400 font-bold">{l.Status}</span>
+              <span className="text-[11px] px-1.5 py-0.5 rounded-full bg-bad/20 text-bad font-bold">
+                {l.Status}
+              </span>
             )}
           </div>
         </div>
-        <button aria-label="Close detail panel" onClick={onClose} className="text-neutral-500 hover:text-white">
+        <button aria-label="Close detail panel" onClick={onClose} className="text-dim hover:text-text">
           <X size={16} />
         </button>
       </div>
@@ -1198,9 +957,21 @@ function CitizenDetailPanel({ detail, coverage, onClose }) {
       {/* Involvement flags */}
       {(flags.universe || flags.media || flags.civic) && (
         <div className="flex gap-1.5 mb-3">
-          {flags.universe && <span className="text-[8px] px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-400 font-bold border border-amber-500/20">UNI</span>}
-          {flags.media && <span className="text-[8px] px-2 py-0.5 rounded-full bg-sky-500/15 text-sky-400 font-bold border border-sky-500/20">MED</span>}
-          {flags.civic && <span className="text-[8px] px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 font-bold border border-emerald-500/20">CIV</span>}
+          {flags.universe && (
+            <span className="text-[11px] px-2 py-0.5 rounded-full bg-warn/15 text-warn font-bold border border-warn/20">
+              UNI
+            </span>
+          )}
+          {flags.media && (
+            <span className="text-[11px] px-2 py-0.5 rounded-full bg-accent/15 text-accent font-bold border border-accent/20">
+              MED
+            </span>
+          )}
+          {flags.civic && (
+            <span className="text-[11px] px-2 py-0.5 rounded-full bg-good/15 text-good font-bold border border-good/20">
+              CIV
+            </span>
+          )}
         </div>
       )}
 
@@ -1220,17 +991,23 @@ function CitizenDetailPanel({ detail, coverage, onClose }) {
       {/* Life History Timeline */}
       {lifeEvents.length > 0 && (
         <div className="mb-4">
-          <h4 className="text-[9px] font-black uppercase tracking-widest text-neutral-500 mb-2">
-            Life History <span className="text-neutral-500">({lifeEvents.length} events)</span>
+          <h4 className="text-[11px] font-black uppercase tracking-widest text-faint mb-2">
+            Life History <span className="text-dim">({lifeEvents.length} events)</span>
           </h4>
           <div className="space-y-1.5 max-h-36 overflow-y-auto">
             {lifeEvents.map((ev, i) => (
-              <div key={i} className="flex items-start gap-2 p-2 bg-black/30 rounded-lg">
-                {ev.date && <span className="text-[8px] font-mono text-neutral-500 shrink-0 mt-0.5">{ev.date}</span>}
-                <span className={`text-[8px] px-1.5 py-0.5 rounded font-bold shrink-0 ${lifeTagColors[ev.tag] || lifeTagColors.General}`}>
+              <div key={i} className="flex items-start gap-2 p-2 bg-panel-2 rounded-lg border border-edge">
+                {ev.date && (
+                  <span className="text-[11px] font-mono text-faint shrink-0 mt-0.5">{ev.date}</span>
+                )}
+                <span
+                  className={`text-[11px] px-1.5 py-0.5 rounded font-bold shrink-0 ${
+                    lifeTagColors[ev.tag] || lifeTagColors.General
+                  }`}
+                >
                   {ev.tag}
                 </span>
-                <span className="text-[10px] text-neutral-300 leading-relaxed">{ev.text}</span>
+                <span className="text-xs text-text leading-relaxed">{ev.text}</span>
               </div>
             ))}
           </div>
@@ -1240,14 +1017,19 @@ function CitizenDetailPanel({ detail, coverage, onClose }) {
       {/* Archive — article appearances */}
       {detail.voiceCard && detail.voiceCard.articles?.length > 0 && (
         <div className="mb-4">
-          <h4 className="text-[9px] font-black uppercase tracking-widest text-amber-400 mb-2">
-            Archive <span className="text-neutral-500">({detail.voiceCard.totalRefs} refs, {detail.voiceCard.articles.length} sources)</span>
+          <h4 className="text-[11px] font-black uppercase tracking-widest text-warn mb-2">
+            Archive{' '}
+            <span className="text-dim">
+              ({detail.voiceCard.totalRefs} refs, {detail.voiceCard.articles.length} sources)
+            </span>
           </h4>
           <div className="space-y-1 max-h-36 overflow-y-auto">
             {detail.voiceCard.articles.map((a, i) => (
-              <div key={i} className="flex items-start gap-2 p-1.5 bg-black/20 rounded-lg">
-                <span className="text-[8px] text-amber-500/60 shrink-0 mt-0.5">{a.source?.replace(/_/g, ' ')}</span>
-                <span className="text-[10px] text-neutral-400 truncate">{a.title}</span>
+              <div key={i} className="flex items-start gap-2 p-1.5 bg-panel-2 rounded-lg border border-edge">
+                <span className="text-[11px] text-warn/60 shrink-0 mt-0.5">
+                  {a.source?.replace(/_/g, ' ')}
+                </span>
+                <span className="text-xs text-dim truncate">{a.title}</span>
               </div>
             ))}
           </div>
@@ -1257,26 +1039,29 @@ function CitizenDetailPanel({ detail, coverage, onClose }) {
       {/* Fallback for voice card with no articles array */}
       {detail.voiceCard && !detail.voiceCard.articles?.length && (
         <div className="mb-4">
-          <h4 className="text-[9px] font-black uppercase tracking-widest text-amber-400 mb-1">Archive</h4>
-          <p className="text-[10px] text-neutral-400">{detail.voiceCard.totalRefs} references</p>
+          <h4 className="text-[11px] font-black uppercase tracking-widest text-warn mb-1">Archive</h4>
+          <p className="text-xs text-dim">{detail.voiceCard.totalRefs} references</p>
         </div>
       )}
 
       {/* Coverage trail */}
       {coverage && coverage.totalArticles > 0 && (
         <div>
-          <h4 className="text-[9px] font-black uppercase tracking-widest text-sky-400 mb-2">
-            Coverage Trail <span className="text-neutral-500">({coverage.totalArticles} articles, {coverage.totalMentions} mentions)</span>
+          <h4 className="text-[11px] font-black uppercase tracking-widest text-accent mb-2">
+            Coverage Trail{' '}
+            <span className="text-dim">
+              ({coverage.totalArticles} articles, {coverage.totalMentions} mentions)
+            </span>
           </h4>
           <div className="space-y-1.5 max-h-48 overflow-y-auto">
             {coverage.trail.map((t, i) => (
-              <div key={i} className="flex items-start gap-2 p-2 bg-black/30 rounded-lg">
-                <span className="text-[9px] font-mono text-sky-500 shrink-0">E{t.cycle}</span>
+              <div key={i} className="flex items-start gap-2 p-2 bg-panel-2 rounded-lg border border-edge">
+                <span className="text-[11px] font-mono text-accent shrink-0">E{t.cycle}</span>
                 <div className="flex-1 min-w-0">
-                  <p className="text-[10px] text-neutral-300 font-bold truncate">{t.title}</p>
-                  <p className="text-[9px] text-neutral-500 line-clamp-1">{t.context}</p>
+                  <p className="text-xs text-text font-bold truncate">{t.title}</p>
+                  <p className="text-[11px] text-dim line-clamp-1">{t.context}</p>
                 </div>
-                <span className="text-[9px] font-mono text-neutral-500 shrink-0">{t.mentions}x</span>
+                <span className="text-[11px] font-mono text-faint shrink-0">{t.mentions}x</span>
               </div>
             ))}
           </div>
@@ -1284,64 +1069,22 @@ function CitizenDetailPanel({ detail, coverage, onClose }) {
       )}
 
       {detail.totalAppearances === 0 && !coverage?.totalArticles && (
-        <p className="text-[10px] text-neutral-500 italic">No coverage trail found</p>
+        <p className="text-xs text-dim italic">No coverage trail found</p>
       )}
 
       {/* Footer — timestamps */}
       {(flags.createdAt || flags.lastUpdated) && (
-        <div className="mt-4 pt-3 border-t border-white/5 flex gap-4">
-          {flags.createdAt && <span className="text-[8px] text-neutral-500 font-mono">Created: {flags.createdAt.split('T')[0]}</span>}
-          {flags.lastUpdated && <span className="text-[8px] text-neutral-500 font-mono">Updated: {flags.lastUpdated.split('T')[0]}</span>}
-        </div>
-      )}
-    </div>
-  );
-}
-
-function FullArticleReader({ article }) {
-  const sectionColors = {
-    'FRONT PAGE': 'text-sky-500', 'CIVIC AFFAIRS': 'text-emerald-500', 'SPORTS': 'text-amber-500',
-    'CULTURE & COMMUNITY': 'text-purple-500', 'BUSINESS TICKER': 'text-orange-500',
-    'CHICAGO BUREAU': 'text-red-500', 'LETTERS TO THE EDITOR': 'text-neutral-400',
-  };
-  const bodyLines = (article.body || '').split('\n').filter(l => l.trim());
-
-  return (
-    <div className="p-6 bg-neutral-900/60 rounded-2xl border border-sky-500/20">
-      <div className="flex justify-between items-start mb-3">
-        <span className={`text-[10px] font-bold uppercase tracking-widest ${sectionColors[article.section] || 'text-neutral-500'}`}>
-          {article.section}
-        </span>
-        <span className="text-[9px] font-mono text-sky-500">
-          {article.cycle ? `E${article.cycle}` : article.source === 'drive-archive' ? 'ARCHIVE' : ''}
-        </span>
-      </div>
-
-      <h2 className="text-xl font-black leading-tight tracking-tight mb-1 uppercase italic">{article.title}</h2>
-      {article.subtitle && <p className="text-sm text-neutral-400 italic mb-4">{article.subtitle}</p>}
-
-      {article.author && (
-        <div className="flex items-center gap-2 mb-6 pb-4 border-b border-white/5">
-          <div className="w-8 h-8 rounded-full bg-neutral-800 border border-white/10 flex items-center justify-center font-bold text-[10px]">
-            {article.author[0]}
-          </div>
-          <div>
-            <span className="text-[11px] font-bold text-neutral-300">{article.author}</span>
-            {article.desk && <span className="text-[9px] text-neutral-500 block">{article.desk}</span>}
-          </div>
-        </div>
-      )}
-
-      <div className="space-y-3">
-        {bodyLines.map((line, i) => (
-          <p key={i} className="text-sm text-neutral-300 leading-relaxed">{line}</p>
-        ))}
-      </div>
-
-      {article.namesIndex && (
-        <div className="pt-4 mt-6 border-t border-white/5">
-          <span className="text-[9px] font-black text-neutral-500 uppercase tracking-widest">Names Index: </span>
-          <span className="text-[10px] text-neutral-500">{article.namesIndex}</span>
+        <div className="mt-4 pt-3 border-t border-edge flex gap-4">
+          {flags.createdAt && (
+            <span className="text-[11px] text-faint font-mono">
+              Created: {flags.createdAt.split('T')[0]}
+            </span>
+          )}
+          {flags.lastUpdated && (
+            <span className="text-[11px] text-faint font-mono">
+              Updated: {flags.lastUpdated.split('T')[0]}
+            </span>
+          )}
         </div>
       )}
     </div>
@@ -1351,609 +1094,8 @@ function FullArticleReader({ article }) {
 function MiniDetail({ label, value }) {
   return (
     <div>
-      <div className="text-[8px] font-bold text-neutral-500 uppercase">{label}</div>
-      <div className="text-[11px] text-neutral-300">{value || '—'}</div>
+      <div className="text-[11px] font-bold text-faint uppercase">{label}</div>
+      <div className="text-xs text-text">{value || '—'}</div>
     </div>
-  );
-}
-
-function ArticleSearchView() {
-  const [query, setQuery] = useState('');
-  const [authorFilter, setAuthorFilter] = useState('');
-  const [results, setResults] = useState(null);
-  const [searching, setSearching] = useState(false);
-  const [fullArticle, setFullArticle] = useState(null);
-  const [loadingArticle, setLoadingArticle] = useState(false);
-
-  const search = async () => {
-    if (!query && !authorFilter) return;
-    setSearching(true);
-    setFullArticle(null);
-    try {
-      const params = new URLSearchParams();
-      if (query) params.set('q', query);
-      if (authorFilter) params.set('author', authorFilter);
-      params.set('limit', '40');
-      const data = await fetchAPI(`/api/search/articles?${params}`);
-      setResults(data);
-    } catch { /* ignore */ }
-    setSearching(false);
-  };
-
-  const loadFullArticle = async (r) => {
-    if (r.file && r.articleIndex !== undefined) {
-      setLoadingArticle(true);
-      try {
-        const data = await fetchAPI(`/api/article?file=${encodeURIComponent(r.file)}&index=${r.articleIndex}`);
-        setFullArticle(data);
-      } catch { /* ignore */ }
-      setLoadingArticle(false);
-    }
-  };
-
-  // Full article reader view
-  if (fullArticle) {
-    return (
-      <section className="space-y-4">
-        <button
-          onClick={() => setFullArticle(null)}
-          className="flex items-center gap-2 text-[10px] text-neutral-500 hover:text-white transition-colors"
-        >
-          <ChevronRight size={12} className="rotate-180" /> Back to results
-        </button>
-        <FullArticleReader article={fullArticle} />
-      </section>
-    );
-  }
-
-  return (
-    <section className="space-y-4">
-      <div className="space-y-3">
-        <div className="flex items-center gap-3 bg-neutral-900 rounded-2xl border border-white/10 px-4 py-3">
-          <Search size={16} className="text-neutral-500 shrink-0" />
-          <input
-            type="text"
-            placeholder="Search all editions..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && search()}
-            className="flex-1 bg-transparent text-white text-sm outline-none placeholder:text-neutral-500"
-          />
-          {searching && <Loader size={14} className="text-sky-500 animate-spin" />}
-        </div>
-        <div className="flex gap-2">
-          <input
-            type="text"
-            placeholder="Filter by author..."
-            value={authorFilter}
-            onChange={(e) => setAuthorFilter(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && search()}
-            className="flex-1 bg-neutral-900 rounded-xl border border-white/5 px-3 py-2 text-xs text-white outline-none placeholder:text-neutral-500"
-          />
-          <button
-            onClick={search}
-            className="px-4 py-2 bg-sky-500 text-black text-xs font-black uppercase rounded-xl active:scale-95 transition-transform"
-          >
-            Search
-          </button>
-        </div>
-      </div>
-
-      {results && (
-        <div>
-          <p className="text-[10px] text-neutral-500 font-mono uppercase tracking-widest mb-3">
-            {results.total} results across all editions
-          </p>
-          <div className="space-y-3">
-            {results.results.map((r, i) => (
-              <div key={i}
-                className="p-4 bg-neutral-900/40 rounded-xl border border-white/5 cursor-pointer hover:border-sky-500/30 transition-colors"
-                onClick={() => loadFullArticle(r)}
-              >
-                <div className="flex justify-between items-start mb-2">
-                  <span className="text-[9px] font-mono text-sky-500 font-bold">{r.cycle ? `E${r.cycle}` : 'ARCHIVE'}</span>
-                  <span className="text-[9px] text-neutral-500">{r.section}</span>
-                </div>
-                <h4 className="text-sm font-bold mb-1">{r.title}</h4>
-                {r.subtitle && <p className="text-[10px] text-neutral-500 italic mb-1">{r.subtitle}</p>}
-                {r.snippet && (
-                  <p className="text-[10px] text-neutral-400 leading-relaxed line-clamp-3">{r.snippet}</p>
-                )}
-                <div className="flex justify-between items-center mt-2">
-                  <div className="flex gap-3">
-                    {r.author && <span className="text-[9px] text-neutral-500">{r.author}</span>}
-                    {r.namesIndex && <span className="text-[9px] text-neutral-500 truncate max-w-[200px]">{r.namesIndex}</span>}
-                  </div>
-                  <span className="text-[8px] text-neutral-500 font-mono">{r.bodyLength > 1000 ? `${Math.round(r.bodyLength/1000)}k` : `${r.bodyLength}b`}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-          {loadingArticle && (
-            <div className="p-4 text-center">
-              <Loader size={16} className="text-sky-500 animate-spin mx-auto" />
-            </div>
-          )}
-        </div>
-      )}
-
-      {!results && (
-        <div className="p-12 text-center text-neutral-500">
-          <Search size={32} className="mx-auto mb-3 opacity-30" />
-          <p className="text-sm">Search across all editions and supplementals</p>
-          <p className="text-[10px] mt-1">Full archive from Cycle 1 through current</p>
-        </div>
-      )}
-    </section>
-  );
-}
-
-function MiniStat({ label, value, warn }) {
-  return (
-    <div>
-      <div className="text-[8px] font-bold text-neutral-500 uppercase">{label}</div>
-      <div className={`text-xs font-mono font-bold ${warn ? 'text-red-400' : 'text-neutral-400'}`}>{value}</div>
-    </div>
-  );
-}
-
-function StatusBadge({ label, count, color }) {
-  const colors = {
-    red: 'bg-red-500/10 text-red-400 border-red-500/20',
-    amber: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
-    sky: 'bg-sky-500/10 text-sky-400 border-sky-500/20',
-    green: 'bg-green-500/10 text-green-400 border-green-500/20',
-  };
-  return (
-    <div className={`text-center p-2 rounded-xl border ${colors[color] || colors.sky}`}>
-      <div className="text-lg font-black">{count}</div>
-      <div className="text-[8px] font-bold uppercase tracking-widest">{label}</div>
-    </div>
-  );
-}
-
-function InitiativeCard({ initiative }) {
-  const [expanded, setExpanded] = useState(false);
-  const impl = initiative.implementation || {};
-  const statusConfig = {
-    'blocked': { icon: AlertTriangle, color: 'text-red-400', bg: 'bg-red-500/10', border: 'border-red-500/20', label: 'BLOCKED' },
-    'stalled': { icon: FileWarning, color: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-amber-500/20', label: 'STALLED' },
-    'clock-running': { icon: Timer, color: 'text-sky-400', bg: 'bg-sky-500/10', border: 'border-sky-500/20', label: 'CLOCK RUNNING' },
-    'in-progress': { icon: CheckCircle2, color: 'text-green-400', bg: 'bg-green-500/10', border: 'border-green-500/20', label: 'IN PROGRESS' },
-    'untracked': { icon: CircleDot, color: 'text-neutral-500', bg: 'bg-neutral-500/10', border: 'border-neutral-500/20', label: 'UNTRACKED' },
-  };
-  const cfg = statusConfig[impl.status] || statusConfig['untracked'];
-  const StatusIcon = cfg.icon;
-
-  return (
-    <div className={`p-5 rounded-2xl border cursor-pointer transition-colors ${cfg.bg} ${cfg.border} hover:bg-neutral-900`}
-      onClick={() => setExpanded(!expanded)}>
-      <div className="flex justify-between items-start mb-2">
-        <div className="flex items-center gap-2">
-          <StatusIcon size={14} className={cfg.color} />
-          <span className={`text-[9px] font-black uppercase tracking-widest ${cfg.color}`}>{cfg.label}</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="text-[9px] font-mono text-neutral-500">{initiative.id}</span>
-          <span className="text-[9px] font-mono text-neutral-500">C{initiative.voteCycle}</span>
-        </div>
-      </div>
-      <h3 className="text-base font-black tracking-tight mb-1">{initiative.name}</h3>
-      <div className="flex gap-3 mt-2 mb-3">
-        <span className="text-[10px] text-neutral-400">{initiative.vote} vote</span>
-        <span className="text-[10px] text-neutral-400">{initiative.budget}</span>
-        {initiative.domain && <span className="text-[10px] text-neutral-500 capitalize">{initiative.domain}</span>}
-        {initiative.relatedArticles?.length > 0 && (
-          <span className="text-[10px] text-sky-500 font-bold">{initiative.relatedArticles.length} articles</span>
-        )}
-      </div>
-      <p className="text-xs text-neutral-400 leading-relaxed">{impl.summary}</p>
-      {expanded && (
-        <div className="mt-4 pt-4 border-t border-white/5 space-y-3">
-          {impl.pendingItems?.length > 0 && (
-            <div>
-              <h5 className="text-[9px] font-black uppercase tracking-widest text-neutral-500 mb-2">Pending</h5>
-              {impl.pendingItems.map((item, i) => (
-                <div key={i} className="flex items-start gap-2 mb-1.5">
-                  <CircleDot size={10} className={`${cfg.color} mt-0.5 shrink-0`} />
-                  <span className="text-[11px] text-neutral-300">{item}</span>
-                </div>
-              ))}
-            </div>
-          )}
-          {impl.keyContacts?.length > 0 && (
-            <div>
-              <h5 className="text-[9px] font-black uppercase tracking-widest text-neutral-500 mb-2">Key Contacts</h5>
-              {impl.keyContacts.map((contact, i) => (
-                <p key={i} className="text-[11px] text-neutral-400 mb-1">{contact}</p>
-              ))}
-            </div>
-          )}
-          {impl.newsroomNote && (
-            <div className="p-3 bg-black/40 rounded-xl">
-              <h5 className="text-[9px] font-black uppercase tracking-widest text-sky-500 mb-1">Newsroom Note</h5>
-              <p className="text-[11px] text-neutral-300 leading-relaxed italic">{impl.newsroomNote}</p>
-            </div>
-          )}
-          {initiative.relatedArticles?.length > 0 && (
-            <div>
-              <h5 className="text-[9px] font-black uppercase tracking-widest text-neutral-500 mb-2">
-                Coverage Trail <span className="text-neutral-500">({initiative.relatedArticles.length} articles)</span>
-              </h5>
-              <div className="space-y-1.5">
-                {initiative.relatedArticles.map((article, i) => (
-                  <div key={i} className="flex items-start gap-2 p-2 bg-black/30 rounded-lg">
-                    <span className="text-[9px] font-mono text-sky-500 shrink-0 mt-0.5">E{article.cycle}</span>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-[11px] text-neutral-300 font-bold truncate">{article.title}</p>
-                      <div className="flex gap-2 mt-0.5">
-                        {article.author && <span className="text-[9px] text-neutral-500">{article.author}</span>}
-                        {article.section && <span className="text-[9px] text-neutral-500">{article.section}</span>}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-          {initiative.engine?.voteBreakdown && (
-            <div>
-              <h5 className="text-[9px] font-black uppercase tracking-widest text-neutral-500 mb-1">Vote Record</h5>
-              <p className="text-[10px] text-neutral-500 leading-relaxed">{initiative.engine.voteBreakdown}</p>
-            </div>
-          )}
-        </div>
-      )}
-    </div>
-  );
-}
-
-function MissionControlView({ data, onRefresh }) {
-  const [actionStatus, setActionStatus] = useState(null);
-  if (!data) {
-    return (
-      <div className="flex items-center justify-center py-20">
-        <Loader size={24} className="text-sky-500 animate-spin" />
-      </div>
-    );
-  }
-
-  const { health, events } = data;
-  const engineStatus = health?.status || 'unknown';
-  const engineLabel = health?.engine || '—';
-  const latestCycle = health?.data?.latestCycleArchive?.replace('cycle-', '') || '—';
-  const latestEdition = health?.data?.latestEdition || '—';
-
-  const recentEvents = (events || [])
-    .sort((a, b) => new Date(b.receivedAt || b.timestamp) - new Date(a.receivedAt || a.timestamp))
-    .slice(0, 10);
-
-  const eventColor = (type) => {
-    if (!type) return 'text-neutral-500';
-    const t = type.toLowerCase();
-    if (t.includes('start')) return 'text-emerald-500';
-    if (t.includes('stop') || t.includes('end')) return 'text-amber-500';
-    if (t.includes('webhook')) return 'text-sky-500';
-    return 'text-neutral-400';
-  };
-
-  const formatTime = (ts) => {
-    if (!ts) return '—';
-    try {
-      const d = new Date(ts);
-      return d.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false });
-    } catch { return '—'; }
-  };
-
-  return (
-    <section className="space-y-4">
-      {/* SYSTEM HEALTH */}
-      <div className="p-5 bg-neutral-900 rounded-2xl border border-white/5">
-        <div className="flex items-center gap-2 mb-4">
-          <Server size={14} className="text-sky-500" />
-          <h3 className="text-[10px] font-bold uppercase tracking-widest text-sky-500">System Health</h3>
-        </div>
-        <div className="grid grid-cols-2 gap-3">
-          <div className="p-3 bg-black/40 rounded-xl">
-            <div className="text-[8px] font-bold text-neutral-500 uppercase">Status</div>
-            <div className={`text-sm font-black ${engineStatus === 'ok' ? 'text-emerald-500' : 'text-amber-500'}`}>
-              {engineStatus === 'ok' ? 'Online' : engineStatus}
-            </div>
-          </div>
-          <div className="p-3 bg-black/40 rounded-xl">
-            <div className="text-[8px] font-bold text-neutral-500 uppercase">Engine</div>
-            <div className="text-sm font-black text-neutral-300">{engineLabel}</div>
-          </div>
-          <div className="p-3 bg-black/40 rounded-xl">
-            <div className="text-[8px] font-bold text-neutral-500 uppercase">Latest Cycle</div>
-            <div className="text-sm font-black text-neutral-300">{latestCycle}</div>
-          </div>
-          <div className="p-3 bg-black/40 rounded-xl">
-            <div className="text-[8px] font-bold text-neutral-500 uppercase">Latest Edition</div>
-            <div className="text-sm font-black text-neutral-300 truncate">{latestEdition}</div>
-          </div>
-          <div className="p-3 bg-black/40 rounded-xl">
-            <div className="text-[8px] font-bold text-neutral-500 uppercase">Droplet</div>
-            <div className="text-sm font-black text-neutral-300">1 vCPU / 2GB</div>
-          </div>
-          <div className="p-3 bg-black/40 rounded-xl">
-            <div className="text-[8px] font-bold text-neutral-500 uppercase">Disk</div>
-            <div className="text-sm font-black text-neutral-300">25GB SSD</div>
-          </div>
-        </div>
-      </div>
-
-      {/* SESSION EVENTS */}
-      <div className="p-5 bg-neutral-900 rounded-2xl border border-white/5">
-        <div className="flex items-center gap-2 mb-4">
-          <Radio size={14} className="text-sky-500" />
-          <h3 className="text-[10px] font-bold uppercase tracking-widest text-sky-500">Session Events</h3>
-          <span className="text-[9px] font-mono text-neutral-500 ml-auto">{events?.length || 0} total</span>
-        </div>
-        {recentEvents.length === 0 ? (
-          <p className="text-xs text-neutral-500 italic">No events recorded</p>
-        ) : (
-          <div className="space-y-2">
-            {recentEvents.map((ev, i) => (
-              <div key={i} className="flex items-center gap-3 p-2.5 bg-black/40 rounded-xl">
-                <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${eventColor(ev.type).replace('text-', 'bg-')}`} />
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <span className={`text-[11px] font-bold ${eventColor(ev.type)}`}>{ev.type || 'unknown'}</span>
-                    {ev.session_id && (
-                      <span className="text-[8px] font-mono text-neutral-500 truncate">{ev.session_id.slice(0, 12)}</span>
-                    )}
-                  </div>
-                  <div className="text-[9px] text-neutral-500 mt-0.5">{formatTime(ev.receivedAt || ev.timestamp)}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* CHANNEL STATUS */}
-      <div className="p-5 bg-neutral-900 rounded-2xl border border-white/5">
-        <div className="flex items-center gap-2 mb-4">
-          <Wifi size={14} className="text-sky-500" />
-          <h3 className="text-[10px] font-bold uppercase tracking-widest text-sky-500">Channel Status</h3>
-        </div>
-        <div className="flex items-center gap-3 p-3 bg-black/40 rounded-xl">
-          <div className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
-          <div className="flex-1">
-            <div className="text-xs font-bold text-neutral-300">Discord</div>
-            <div className="text-[9px] text-neutral-500">MagsClaudeCode</div>
-          </div>
-          <span className="text-[9px] font-bold text-emerald-500 uppercase">Connected</span>
-        </div>
-      </div>
-
-      {/* QUICK ACTIONS */}
-      <div className="p-5 bg-neutral-900 rounded-2xl border border-white/5">
-        <div className="flex items-center gap-2 mb-4">
-          <Zap size={14} className="text-sky-500" />
-          <h3 className="text-[10px] font-bold uppercase tracking-widest text-sky-500">Quick Actions</h3>
-        </div>
-        <div className="flex gap-2">
-          <button
-            onClick={async () => {
-              setActionStatus('Restarting bot...');
-              try {
-                const r = await fetch('/api/actions/restart-bot', { method: 'POST' });
-                setActionStatus(r.ok ? 'Bot restarted' : 'Failed');
-              } catch { setActionStatus('Failed'); }
-              setTimeout(() => { setActionStatus(null); onRefresh?.(); }, 2000);
-            }}
-            className="flex-1 px-3 py-2.5 rounded-xl border border-white/10 text-[11px] font-bold text-neutral-400 hover:text-white hover:border-white/20 transition-colors"
-          >
-            Restart Bot
-          </button>
-          <button
-            onClick={async () => {
-              setActionStatus('Checking health...');
-              try {
-                const r = await fetch('/api/actions/health-check', { method: 'POST' });
-                const d = await r.json();
-                setActionStatus(`${d.mem} RAM | ${d.disk} disk`);
-              } catch { setActionStatus('Failed'); }
-              setTimeout(() => { setActionStatus(null); onRefresh?.(); }, 5000);
-            }}
-            className="flex-1 px-3 py-2.5 rounded-xl border border-white/10 text-[11px] font-bold text-neutral-400 hover:text-white hover:border-white/20 transition-colors"
-          >
-            Health Check
-          </button>
-          <button
-            onClick={async () => {
-              setActionStatus('Clearing...');
-              try {
-                await fetch('/api/session-events', { method: 'DELETE' });
-                setActionStatus('Cleared');
-              } catch { setActionStatus('Failed'); }
-              setTimeout(() => { setActionStatus(null); onRefresh?.(); }, 1500);
-            }}
-            className="flex-1 px-3 py-2.5 rounded-xl border border-white/10 text-[11px] font-bold text-neutral-400 hover:text-white hover:border-white/20 transition-colors"
-          >
-            Clear Events
-          </button>
-        </div>
-        {actionStatus && (
-          <div className="mt-3 text-[10px] text-sky-400 font-mono text-center animate-pulse">{actionStatus}</div>
-        )}
-      </div>
-    </section>
-  );
-}
-
-function ChicagoView({ data }) {
-  if (!data) {
-    return (
-      <div className="p-8 text-center text-neutral-500">
-        <Loader size={24} className="mx-auto mb-3 animate-spin text-red-500" />
-        <p className="text-sm">Loading Chicago data...</p>
-      </div>
-    );
-  }
-
-  const feeds = data.feeds || [];
-  const articles = data.articles || [];
-
-  // Extract digest info
-  let digest = null;
-  if (data.digest) {
-    if (typeof data.digest === 'object' && data.digest.teamLabel) {
-      digest = data.digest;
-    } else if (typeof data.digest === 'object') {
-      const vals = Object.values(data.digest).filter(v => v && typeof v === 'object' && v.teamLabel);
-      digest = vals[0] || null;
-    }
-  }
-
-  // Extract record/trend from latest feed if no digest
-  const latestFeed = feeds[0] || {};
-  const record = digest?.currentRecord || latestFeed.Record || null;
-  const trend = digest?.teamMomentum || latestFeed.Trend || null;
-  const seasonType = digest?.seasonState || latestFeed.SeasonType || null;
-
-  const eventTypeColors = {
-    'game-result': 'bg-sky-500/20 text-sky-400 border-sky-500/20',
-    'trade': 'bg-amber-500/20 text-amber-400 border-amber-500/20',
-    'transaction': 'bg-amber-500/20 text-amber-400 border-amber-500/20',
-    'roster-move': 'bg-purple-500/20 text-purple-400 border-purple-500/20',
-    'injury': 'bg-red-500/20 text-red-400 border-red-500/20',
-    'milestone': 'bg-amber-500/20 text-amber-400 border-amber-500/20',
-    'signing': 'bg-pink-500/20 text-pink-400 border-pink-500/20',
-    'callup': 'bg-emerald-500/20 text-emerald-400 border-emerald-500/20',
-  };
-  const defaultEventColor = 'bg-neutral-700/40 text-neutral-400 border-neutral-600/20';
-
-  const trendColors = { rising: 'text-green-400', steady: 'text-sky-400', falling: 'text-amber-400', declining: 'text-red-400' };
-  const trendArrow = trend === 'rising' ? '▲' : trend === 'falling' || trend === 'declining' ? '▼' : '●';
-
-  return (
-    <section className="space-y-6">
-
-      {/* BULLS CARD */}
-      <div className="p-4 bg-neutral-900 rounded-2xl border border-red-500/20">
-        <div className="flex justify-between items-start mb-3">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-red-500/10 rounded-lg">
-              <MapPinned size={18} className="text-red-500" />
-            </div>
-            <div>
-              <h3 className="text-lg font-black text-red-500">Chicago Bulls</h3>
-              {seasonType && <span className="text-[10px] text-neutral-500 uppercase">{seasonType}</span>}
-            </div>
-          </div>
-          <div className="text-right">
-            {record && <div className="text-xl font-black tracking-tight">{record}</div>}
-            {trend && (
-              <span className={`text-[9px] font-bold uppercase ${trendColors[trend] || 'text-neutral-500'}`}>
-                {trendArrow} {trend}
-              </span>
-            )}
-          </div>
-        </div>
-        {digest?.rosterMoves?.length > 0 && (
-          <div className="mt-2 pt-2 border-t border-white/5">
-            <h5 className="text-[8px] font-black uppercase tracking-widest text-neutral-500 mb-1.5">Recent Moves</h5>
-            {digest.rosterMoves.slice(0, 3).map((rm, i) => (
-              <div key={i} className="flex items-start gap-2 mb-1">
-                <span className="text-[9px] font-mono text-neutral-500 shrink-0">C{rm.cycle}</span>
-                <span className="text-[10px] text-neutral-400">{rm.names?.join(', ')}</span>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* FEED EVENTS */}
-      {feeds.length > 0 && (
-        <div>
-          <p className="text-[10px] font-bold uppercase tracking-widest text-red-500 mb-3">
-            <Activity size={10} className="inline mr-1" /> Feed Events
-          </p>
-          <div className="space-y-2">
-            {feeds.map((f, i) => {
-              const evtType = (f.EventType || '').toLowerCase();
-              const colorClass = eventTypeColors[evtType] || defaultEventColor;
-              return (
-                <div key={i} className="p-3 bg-neutral-900/40 rounded-xl border border-white/5">
-                  <div className="flex items-center gap-2 mb-1.5">
-                    {f.Cycle && <span className="text-[8px] font-mono text-neutral-500">C{f.Cycle}</span>}
-                    {f.EventType && (
-                      <span className={`text-[8px] px-1.5 py-0.5 rounded-full font-bold uppercase border ${colorClass}`}>
-                        {f.EventType}
-                      </span>
-                    )}
-                    {f.SeasonType && <span className="text-[8px] text-neutral-500 uppercase">{f.SeasonType}</span>}
-                  </div>
-                  {f.Notes && <p className="text-[11px] text-neutral-300 leading-relaxed mb-1">{f.Notes}</p>}
-                  <div className="flex flex-wrap gap-x-4 gap-y-1 mt-1">
-                    {f.TeamsUsed && <span className="text-[9px] text-neutral-500"><Trophy size={9} className="inline mr-0.5" /> {f.TeamsUsed}</span>}
-                    {f.NamesUsed && <span className="text-[9px] text-neutral-500"><Users size={9} className="inline mr-0.5" /> {f.NamesUsed}</span>}
-                    {f.Stats && <span className="text-[9px] text-sky-500 font-mono">{f.Stats}</span>}
-                    {f.Record && <span className="text-[9px] font-mono text-neutral-400">{f.Record}</span>}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
-
-      {/* BUREAU COVERAGE */}
-      {articles.length > 0 && (
-        <div>
-          <p className="text-[10px] font-bold uppercase tracking-widest text-red-500 mb-3">
-            <Newspaper size={10} className="inline mr-1" /> Bureau Coverage
-          </p>
-          <div className="space-y-2">
-            {articles.map((a, i) => (
-              <div key={i} className="p-3 bg-neutral-900/40 rounded-xl border border-white/5">
-                <div className="flex justify-between items-start mb-1">
-                  <span className="text-[9px] font-mono text-red-500">{a.cycle ? `C${a.cycle}` : 'ARCHIVE'}</span>
-                  {a.section && <span className="text-[9px] text-neutral-500">{a.section}</span>}
-                </div>
-                <h4 className="text-xs font-bold mb-1">{a.title}</h4>
-                {a.snippet && (
-                  <p className="text-[10px] text-neutral-500 leading-relaxed line-clamp-2">{a.snippet}</p>
-                )}
-                {a.author && <span className="text-[9px] text-neutral-500 mt-1 block">{a.author}</span>}
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* BUREAU REPORTERS */}
-      <div>
-        <p className="text-[10px] font-bold uppercase tracking-widest text-red-500 mb-3">
-          <Users size={10} className="inline mr-1" /> Bureau Reporters
-        </p>
-        <div className="grid grid-cols-2 gap-3">
-          <div className="p-3 bg-neutral-900/40 rounded-xl border border-white/5">
-            <div className="text-xs font-bold">Selena Grant</div>
-            <div className="text-[9px] text-neutral-500 mt-0.5">Beats Reporter</div>
-          </div>
-          <div className="p-3 bg-neutral-900/40 rounded-xl border border-white/5">
-            <div className="text-xs font-bold">Talia Finch</div>
-            <div className="text-[9px] text-neutral-500 mt-0.5">Neighborhood Texture</div>
-          </div>
-        </div>
-      </div>
-
-    </section>
-  );
-}
-
-function NavButton({ icon: Icon, active, onClick, label }) {
-  return (
-    <button
-      aria-label={label}
-      onClick={onClick}
-      className={`p-3 rounded-full transition-all ${active ? 'bg-sky-500 text-black scale-110' : 'text-neutral-500 hover:text-white'}`}
-    >
-      <Icon size={20} />
-    </button>
   );
 }

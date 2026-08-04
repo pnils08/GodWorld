@@ -14,9 +14,9 @@ import React from 'react';
  * @param {string} [props.className]
  * @param {React.ReactNode} props.children
  */
-export function Card({ title, right, pad = true, className = '', children }) {
+export function Card({ title, right, pad = true, className = '', children, ...rest }) {
   return (
-    <div className={`bg-panel border border-edge rounded-2xl overflow-hidden ${className}`}>
+    <div className={`bg-panel border border-edge rounded-2xl overflow-hidden ${className}`} {...rest}>
       {title && (
         <div className="flex items-center justify-between px-5 py-4 border-b border-edge">
           <h3 className="text-[11px] font-black uppercase tracking-widest text-faint">{title}</h3>

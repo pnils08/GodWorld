@@ -664,7 +664,7 @@ export default function App() {
         )}
         {activeTab === 'CHICAGO' && <ChicagoTab chicagoData={chicagoData} />}
         {activeTab === 'WORLD' && (
-          <WorldTab world={world} photos={photos} onCitizenClick={handleCitizenClick} />
+          <WorldTab world={world} photos={photos} neighborhoods={neighborhoods} onCitizenClick={handleCitizenClick} />
         )}
         {activeTab === 'MISSION' && (
           <MissionTab

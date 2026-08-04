@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { X } from 'lucide-react';
 import { Card, Badge } from '../ui';
+import CityMap from './CityMap';
 
 /**
  * Deterministic HSL color for a neighborhood name.
@@ -244,22 +245,12 @@ function PhotoWire({ photos }) {
   );
 }
 
-function CityMapPlaceholder() {
-  return (
-    <Card title="CITY MAP">
-      <p className="text-sm text-dim italic">
-        Neighborhood choropleth lands with the geometry asset (Oakland neighborhood GeoJSON x canon names). Data contract ready: /api/neighborhoods carries Sentiment, CrimeIndex, RetailVitality, HousingPressure per hood.
-      </p>
-    </Card>
-  );
-}
-
-export default function WorldTab({ world, photos, onCitizenClick }) {
+export default function WorldTab({ world, photos, neighborhoods, onCitizenClick }) {
   return (
     <div className="space-y-6 pb-20">
       <BondWeb world={world} onCitizenClick={onCitizenClick} />
       <PhotoWire photos={photos} />
-      <CityMapPlaceholder />
+      <CityMap neighborhoods={neighborhoods} />
     </div>
   );
 }

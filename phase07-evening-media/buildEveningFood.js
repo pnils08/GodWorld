@@ -66,8 +66,8 @@ function buildEveningFood_(ctx) {
   var isCreationDay = S.isCreationDay || false;
   var sportsSeason = S.sportsSeason || "off-season";
 
-  // engine.99 Cohort 2 — core-sim hoods from Neighborhood_Map CoreSimRank (ADR-0016)
-  var neighborhoods = getCoreSimNeighborhoods_(ctx);
+  // engine.99 Cohort 2 — the embedded 12-hood list here was already DEAD (never
+  // read; the file draws venues by other means). Removed rather than migrated.
 
   // ═══════════════════════════════════════════════════════════════════════════
   // RESTAURANT POOLS (Oakland-themed)

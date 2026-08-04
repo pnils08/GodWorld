@@ -40,6 +40,7 @@ import {
   MapPinned,
 } from 'lucide-react';
 import SportsTab from './components/SportsTab';
+import { Stat, Badge, TabButton } from './components/ui';
 
 // --- Data Fetching ---
 
@@ -269,20 +270,20 @@ export default function App() {
     : edHeader.sentiment || '—';
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-[#e5e5e5] font-sans selection:bg-sky-500/30 pb-24">
+    <div className="min-h-screen bg-ink text-text font-sans selection:bg-accent/30">
 
       {/* HEADER */}
-      <header className="fixed top-0 inset-x-0 z-50 bg-black/90 backdrop-blur-xl border-b border-white/5 py-4 px-6 flex justify-between items-center">
+      <header className="fixed top-0 inset-x-0 z-50 bg-ink/90 backdrop-blur-xl border-b border-edge py-4 px-6 flex justify-between items-center">
         <div>
           <h1 className="text-xl font-black uppercase tracking-tighter leading-none italic">
-            Bay Tribune <span className="text-sky-500 underline decoration-2 underline-offset-4">Oakland</span>
+            Bay Tribune <span className="text-accent underline decoration-2 underline-offset-4">Oakland</span>
           </h1>
           <div className="flex gap-2 mt-1">
-            <span className="text-[8px] font-mono text-neutral-500">GODWORLD ENGINE v3.1</span>
-            <span className="text-[8px] font-mono text-sky-400">
+            <span className="text-[8px] font-mono text-dim">GODWORLD ENGINE v3.1</span>
+            <span className="text-[8px] font-mono text-accent">
               CYCLE {edHeader.cycle || health?.data?.latestCycleArchive?.replace('cycle-', '') || '—'}
             </span>
-            <span className="text-[8px] font-mono text-neutral-500">
+            <span className="text-[8px] font-mono text-dim">
               {edHeader.season || ''}
             </span>
           </div>
@@ -291,14 +292,14 @@ export default function App() {
           <button
             aria-label="Toggle search"
             onClick={() => { setSearchOpen(!searchOpen); setMenuOpen(false); }}
-            className="w-10 h-10 flex items-center justify-center bg-white/5 rounded-full border border-white/10 active:scale-90 transition-transform"
+            className="w-10 h-10 flex items-center justify-center bg-panel rounded-full border border-edge active:scale-90 transition-transform"
           >
             <Search size={16} />
           </button>
           <button
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             onClick={() => { setMenuOpen(!menuOpen); setSearchOpen(false); }}
-            className="w-10 h-10 flex items-center justify-center bg-white/5 rounded-full border border-white/10 active:scale-90 transition-transform"
+            className="w-10 h-10 flex items-center justify-center bg-panel rounded-full border border-edge active:scale-90 transition-transform"
           >
             {menuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
@@ -444,7 +445,7 @@ export default function App() {
       )}
 
       {/* MAIN CONTENT */}
-      <main className={`pt-24 px-5 mx-auto ${activeTab === 'SPORTS' ? 'max-w-6xl' : 'max-w-2xl'}`}>
+      <main className="pt-24 px-4 sm:px-6 pb-32 mx-auto max-w-7xl">
 
         {/* TELEMETRY CARDS */}
         {activeTab !== 'SPORTS' && <section className="mb-8">
@@ -470,16 +471,18 @@ export default function App() {
         </section>}
 
         {/* TAB BAR */}
-        <div className="flex gap-3 border-b border-white/5 mb-6 overflow-x-auto no-scrollbar">
-          {['EDITION', 'NEWSROOM', 'COUNCIL', 'TRACKER', 'INTEL', 'SPORTS', 'CITY', 'SEARCH'].map(tab => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`pb-2 text-[10px] font-black tracking-widest uppercase transition-colors whitespace-nowrap ${activeTab === tab ? 'text-white border-b-2 border-sky-500' : 'text-neutral-400'}`}
-            >
-              {tab}
-            </button>
-          ))}
+        <div className="sticky top-16 z-30 bg-ink/90 backdrop-blur border-b border-edge -mx-4 sm:-mx-6 px-4 sm:px-6 mb-6 overflow-x-auto no-scrollbar">
+          <div className="flex gap-4">
+            {['EDITION', 'NEWSROOM', 'COUNCIL', 'TRACKER', 'INTEL', 'SPORTS', 'CITY', 'SEARCH', 'CHICAGO', 'MISSION'].map(tab => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`pb-2 pt-3 text-xs font-bold tracking-wide uppercase transition-colors whitespace-nowrap ${activeTab === tab ? 'text-accent border-b-2 border-accent' : 'text-dim hover:text-text'}`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* EDITION TAB */}
@@ -970,14 +973,16 @@ export default function App() {
       </main>
 
       {/* BOTTOM NAV */}
-      <nav className="fixed bottom-6 inset-x-6 h-16 bg-black/80 backdrop-blur-2xl border border-white/10 rounded-full flex items-center justify-around px-4 shadow-2xl z-50 max-w-lg mx-auto">
-        <NavButton icon={Newspaper} label="Edition" active={activeTab === 'EDITION'} onClick={() => { setView('feed'); setActiveTab('EDITION'); }} />
-        <NavButton icon={Briefcase} label="Newsroom" active={activeTab === 'NEWSROOM'} onClick={() => { setView('newsroom'); setActiveTab('NEWSROOM'); }} />
-        <NavButton icon={Shield} label="Council" active={activeTab === 'COUNCIL'} onClick={() => { setView('council'); setActiveTab('COUNCIL'); }} />
-        <NavButton icon={Zap} label="Intel" active={activeTab === 'INTEL'} onClick={() => { setView('intel'); setActiveTab('INTEL'); }} />
-        <NavButton icon={Trophy} label="Sports" active={activeTab === 'SPORTS'} onClick={() => { setView('sports'); setActiveTab('SPORTS'); }} />
-        <NavButton icon={MapPin} label="City" active={activeTab === 'CITY'} onClick={() => { setView('neighborhoods'); setActiveTab('CITY'); }} />
-        <NavButton icon={Activity} label="Mission" active={activeTab === 'MISSION'} onClick={() => { setView('mission'); setActiveTab('MISSION'); }} />
+      <nav className="fixed bottom-0 inset-x-0 z-40 bg-ink/90 backdrop-blur border-t border-edge">
+        <div className="max-w-7xl mx-auto h-16 px-4 flex items-center justify-around">
+          <TabButton icon={Newspaper} label="Edition" active={activeTab === 'EDITION'} onClick={() => { setView('feed'); setActiveTab('EDITION'); }} />
+          <TabButton icon={Briefcase} label="Newsroom" active={activeTab === 'NEWSROOM'} onClick={() => { setView('newsroom'); setActiveTab('NEWSROOM'); }} />
+          <TabButton icon={Shield} label="Council" active={activeTab === 'COUNCIL'} onClick={() => { setView('council'); setActiveTab('COUNCIL'); }} />
+          <TabButton icon={Zap} label="Intel" active={activeTab === 'INTEL'} onClick={() => { setView('intel'); setActiveTab('INTEL'); }} />
+          <TabButton icon={Trophy} label="Sports" active={activeTab === 'SPORTS'} onClick={() => { setView('sports'); setActiveTab('SPORTS'); }} />
+          <TabButton icon={MapPin} label="City" active={activeTab === 'CITY'} onClick={() => { setView('neighborhoods'); setActiveTab('CITY'); }} />
+          <TabButton icon={Activity} label="Mission" active={activeTab === 'MISSION'} onClick={() => { setView('mission'); setActiveTab('MISSION'); }} />
+        </div>
       </nav>
     </div>
   );
@@ -986,12 +991,18 @@ export default function App() {
 // --- Components ---
 
 function MetricCard({ label, value, color, icon }) {
-  const colorMap = { sky: 'text-sky-500', amber: 'text-amber-500', neutral: 'text-neutral-500' };
+  // Thin wrapper around the shared Stat primitive; preserves the existing prop surface.
+  const tone = color === 'amber' ? 'warn' : 'default';
   return (
-    <div className="p-4 bg-neutral-900 rounded-2xl border border-white/5">
-      <div className={`text-[10px] font-bold uppercase mb-1 ${colorMap[color] || colorMap.neutral}`}>{label}</div>
-      <div className="text-xl font-black tracking-tight">{value} {icon}</div>
-    </div>
+    <Stat
+      label={label}
+      value={
+        <>
+          {value} {icon}
+        </>
+      }
+      tone={tone}
+    />
   );
 }
 

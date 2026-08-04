@@ -1,1 +1,25 @@
 @import "tailwindcss";
+
+@theme {
+  --color-ink: #0a0a0f;        /* page bg */
+  --color-panel: #121218;      /* card bg */
+  --color-panel-2: #17171f;    /* raised card */
+  --color-edge: #26262e;       /* borders (solid, replaces white/5-/10 soup) */
+  --color-text: #e7e7ea;
+  --color-dim: #9a9aa5;        /* secondary text */
+  --color-faint: #6b6b76;      /* micro labels */
+  --color-accent: #38bdf8;     /* sky — links, active states */
+  --color-warn: #f59e0b;
+  --color-good: #34d399;
+  --color-bad: #f87171;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-text);
+  }
+}

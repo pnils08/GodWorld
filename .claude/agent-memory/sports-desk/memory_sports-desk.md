@@ -103,3 +103,19 @@ Before writing, verify these names are correct (errata-prone):
 6. Benji DILLON is LEFT-HANDED
 7. Ernesto QUINTERO is DH (no Gold Gloves) — C88 briefing confirmed ERNESTO not Hector
 8. Mike PAULSON is GM of Oakland A's and Chicago Bulls — NEVER "owner." General Manager of both franchises.
+
+## STALE — Paulson role corrected as of C102
+Item 8 above is outdated. Current canon (C101/C102 world summary, confirmed in C102 reconciled sourcing): **Mike Paulson (POP-00527, Jack London) is General Manager of the Oakland A's AND Head of Basketball Operations for the Oaks** (the new NBA expansion franchise). His Bulls role was a ONE-YEAR PAST stint (reached NBA Finals, lost, C92) — not current. Do not print him as current Bulls GM. queryLedger still returns a stale "General Manager, Oakland A's & Chicago Bulls" string — world summary wins on role descriptors, per C102 ruling 3.
+
+## Oaks Front Office — Identity Block (C102, do not conflate — desk conflated these at proposal stage)
+- **Elias Varek** (POP-00789), age 38 (BirthYear 2003), West Oakland — OWNER of the Oaks. Founder of Civis Systems (BIZ-00052), urban-intelligence firm embedded in Baylight infrastructure. Civis Systems owns naming rights to the NEW A'S STADIUM ("Civis Systems Field," sold E99) — NOT the Oaks arena, which has no naming rights sold yet (local businesses being considered, per C102). Two different buildings — do not conflate them.
+- **Mike Paulson** (POP-00527) — Head of Basketball Operations, Oaks; GM, A's. See correction above.
+- **Elliot Abraham** — Oaks GENERAL MANAGER, hired C101, previously Paulson's lieutenant in Chicago.
+- **Wilson Shepard** — Oaks HEAD COACH, first year; formerly a Minnesota offensive specialist.
+- **Draymond Green** — veteran PF the Oaks took in the 2041 expansion draft and traded days later to Portland for Jerami Grant. C102: went on his podcast, called the Oaks garbage, said players don't respect Paulson as a basketball man. Front office (Paulson AND Abraham) recorded as declining to comment on the podcast.
+
+## Oaks Arena Timeline (C102, verified-current)
+Arena in the Baylight District not ready until AFTER the All-Star break. Oaks play at Oakland Arena until then. Naming rights search (local businesses) is separate and unrelated to the A's Civis Systems Field deal.
+
+## Oaks Credibility Arc — running thread, do not resolve
+E94: Varek publicly floats hiring Paulson ("I will absolutely be making that phone call"); Paulson same cycle: "I have not received that call." E95: this paper's read — the gap is conspicuous. E96: Paulson, cornered in a Minnesota clubhouse, answers in two words: "we spoke." E99: Baylight director Keisha Ramos names Varek's conflict of interest (Oaks + Civis + Baylight + A's stadium naming rights) three cycles late; four-part recusal wall built. Same cycle, Paulson trades the 5th pick + Herbert Jones + an unprotected first (Y5C1) to move up for AJ Dybantsa — Year One played like Year Four. E101: Abraham hire — nothing on record beyond Paulson's own account of the Bulls year; two-city structure "works exactly as well as the trust between the two people running it." C102: Green's podcast attack lands; Varek defends the arena, not Paulson personally ("if that exec can't take a punch, he shouldn't be in the room — but that's between him and me"); Paulson gives the Bay Tribune an exclusive on-record statement — first real answer since the two-word clubhouse quote — conceding respect is earned, not claimed, and answering the "garbage" charge with "I guess we will see." Wrote as C102 piece: output/desks/sports/articles/c102_oaks_credibility.md. Thread is live — do not resolve it in future coverage without a new triggering event.

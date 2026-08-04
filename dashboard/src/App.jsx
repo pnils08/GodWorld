@@ -29,6 +29,7 @@ import CityTab from './components/tabs/CityTab';
 import SearchTab from './components/tabs/SearchTab';
 import ChicagoTab from './components/tabs/ChicagoTab';
 import MissionTab from './components/tabs/MissionTab';
+import WorldTab from './components/tabs/WorldTab';
 import { Stat, Badge, TabButton } from './components/ui';
 
 // --- Data Fetching ---
@@ -68,6 +69,10 @@ export default function App() {
   const [missionData, setMissionData] = useState(null);
   const [chicagoData, setChicagoData] = useState(null);
   const [supplementals, setSupplementals] = useState([]);
+  const [world, setWorld] = useState(null);
+  const [worldLoaded, setWorldLoaded] = useState(false);
+  const [photos, setPhotos] = useState(null);
+  const [photosLoaded, setPhotosLoaded] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -196,6 +201,25 @@ export default function App() {
         .catch(() => {});
     }
   }, [activeTab, hooks]);
+
+  // Load world bond graph and photo index when WORLD tab is selected
+  useEffect(() => {
+    if (activeTab === 'WORLD' && (!worldLoaded || !photosLoaded)) {
+      const bondPromise = worldLoaded
+        ? Promise.resolve()
+        : fetchAPI('/api/world/bond-graph')
+            .then((data) => setWorld(data))
+            .catch(() => setWorld(null))
+            .finally(() => setWorldLoaded(true));
+      const photoPromise = photosLoaded
+        ? Promise.resolve()
+        : fetchAPI('/api/photos')
+            .then((data) => setPhotos(data))
+            .catch(() => setPhotos(null))
+            .finally(() => setPhotosLoaded(true));
+      Promise.all([bondPromise, photoPromise]).catch(() => {});
+    }
+  }, [activeTab, worldLoaded, photosLoaded]);
 
   // Load full article for overlay search
   const loadOverlayArticle = useCallback(async (r) => {
@@ -521,6 +545,7 @@ export default function App() {
             { label: 'Story Intel', view: 'intel', tab: 'INTEL' },
             { label: 'Sports', view: 'sports', tab: 'SPORTS' },
             { label: 'Neighborhoods', view: 'neighborhoods', tab: 'CITY' },
+            { label: 'World', view: 'world', tab: 'WORLD' },
             { label: 'Article Search', view: 'search', tab: 'SEARCH' },
             { label: 'Chicago', view: 'chicago', tab: 'CHICAGO' },
             { label: 'Mission Control', view: 'mission', tab: 'MISSION' },
@@ -598,6 +623,7 @@ export default function App() {
               'INTEL',
               'SPORTS',
               'CITY',
+              'WORLD',
               'SEARCH',
               'CHICAGO',
               'MISSION',
@@ -637,6 +663,9 @@ export default function App() {
           <SearchTab fetchAPI={fetchAPI} FullArticleReader={FullArticleReader} />
         )}
         {activeTab === 'CHICAGO' && <ChicagoTab chicagoData={chicagoData} />}
+        {activeTab === 'WORLD' && (
+          <WorldTab world={world} photos={photos} onCitizenClick={handleCitizenClick} />
+        )}
         {activeTab === 'MISSION' && (
           <MissionTab
             missionData={missionData}

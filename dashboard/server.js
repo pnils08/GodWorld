@@ -1665,6 +1665,38 @@ function getPlayerIndex() {
   } catch { return null; }
 }
 
+// --- World Bond Graph ---
+let _bondGraphCache = null;
+let _bondGraphCacheTime = 0;
+
+function getBondGraph() {
+  const graphPath = join(ROOT, 'output/citizen-bond-graph.json');
+  if (!existsSync(graphPath)) return null;
+  const now = Date.now();
+  if (_bondGraphCache && now - _bondGraphCacheTime < SHEET_CACHE_TTL) return _bondGraphCache;
+  try {
+    _bondGraphCache = JSON.parse(readFileSync(graphPath, 'utf-8'));
+    _bondGraphCacheTime = now;
+    return _bondGraphCache;
+  } catch { return null; }
+}
+
+// --- Photo Index ---
+let _photoIndexCache = null;
+let _photoIndexCacheTime = 0;
+
+function getPhotoIndex() {
+  const indexPath = join(ROOT, 'output/photos/index.json');
+  if (!existsSync(indexPath)) return null;
+  const now = Date.now();
+  if (_photoIndexCache && now - _photoIndexCacheTime < SHEET_CACHE_TTL) return _photoIndexCache;
+  try {
+    _photoIndexCache = JSON.parse(readFileSync(indexPath, 'utf-8'));
+    _photoIndexCacheTime = now;
+    return _photoIndexCache;
+  } catch { return null; }
+}
+
 app.get('/api/players', (req, res) => {
   const index = getPlayerIndex();
   if (!index) {
@@ -1744,6 +1776,29 @@ app.get('/api/articles/index', (req, res) => {
     showing: Math.min(limit, entries.length),
     entries: entries.slice(0, limit),
   });
+});
+
+// --- WORLD Tab Data Surfaces (Phase C) ---
+
+// Citizen bond graph
+app.get('/api/world/bond-graph', (req, res) => {
+  const graph = getBondGraph();
+  if (!graph) {
+    return res.status(404).json({
+      error: 'not_generated',
+      hint: 'run: node scripts/buildCitizenBondGraph.js --input <bonds.tsv> --html output/citizen-bond-graph.html',
+    });
+  }
+  res.json(graph);
+});
+
+// Photo wire index
+app.get('/api/photos', (req, res) => {
+  const index = getPhotoIndex();
+  if (!index) {
+    return res.status(404).json({ error: 'not_generated', hint: 'run: node scripts/buildPhotoIndex.js' });
+  }
+  res.json(index);
 });
 
 // --- Full-Text Article Search ---
@@ -2623,6 +2678,9 @@ app.post('/api/actions/health-check', (req, res) => {
     res.status(500).json({ error: e.message });
   }
 });
+
+// Private photo files for WORLD tab (mounted after auth middleware)
+app.use('/photos', express.static(join(__dirname, '..', 'output', 'photos')));
 
 // Serve static React build in production
 const distPath = join(__dirname, 'dist');

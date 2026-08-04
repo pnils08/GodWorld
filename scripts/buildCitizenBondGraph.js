@@ -27,6 +27,8 @@ function parseArgs(argv) {
     const arg = argv[i];
     if (arg === '--input' && i + 1 < argv.length) {
       args.input = argv[++i];
+    } else if (arg === '--names' && i + 1 < argv.length) {
+      args.names = argv[++i];
     } else if (arg === '--out' && i + 1 < argv.length) {
       args.out = argv[++i];
     } else if (arg === '--html' && i + 1 < argv.length) {
@@ -67,6 +69,31 @@ function findHeaderLine(lines) {
     }
   }
   return -1;
+}
+
+function parseNamesTsv(filePath) {
+  const raw = fs.readFileSync(filePath, 'utf8');
+  const lines = raw.split(/\r?\n/);
+  let headerIdx = -1;
+  for (let i = 0; i < lines.length; i++) {
+    if (lines[i].includes('POPID') && lines[i].includes('Name')) { headerIdx = i; break; }
+  }
+  if (headerIdx === -1) throw new Error(`Could not locate POPID/Name header in ${filePath}`);
+  const headers = lines[headerIdx].split('\t').map((h) => h.trim().toLowerCase());
+  const col = {};
+  headers.forEach((h, i) => { col[h] = i; });
+  const map = new Map();
+  for (let i = headerIdx + 1; i < lines.length; i++) {
+    if (!lines[i].trim()) continue;
+    const cells = lines[i].split('\t');
+    const popid = (cells[col.popid] || '').trim();
+    if (!popid) continue;
+    map.set(popid.toLowerCase(), {
+      name: (cells[col.name] || '').trim(),
+      neighborhood: col.neighborhood != null ? (cells[col.neighborhood] || '').trim() : '',
+    });
+  }
+  return map;
 }
 
 function parseTsv(filePath) {
@@ -133,6 +160,7 @@ function hslToHex(h, s, l) {
 function buildGraph(inputPath, options) {
   const minIntensity = Number.isFinite(options.minIntensity) ? options.minIntensity : 0;
   const rows = parseTsv(inputPath);
+  const names = options.namesPath ? parseNamesTsv(options.namesPath) : null;
 
   let skippedBlank = 0;
   let skippedInactive = 0;
@@ -167,10 +195,14 @@ function buildGraph(inputPath, options) {
 
     const idA = slugify(a);
     const idB = slugify(b);
-    if (!labels.has(idA)) labels.set(idA, a);
-    if (!labels.has(idB)) labels.set(idB, b);
-    if (!neighborhoods.has(idA) && row.neighborhood) neighborhoods.set(idA, row.neighborhood);
-    if (!neighborhoods.has(idB) && row.neighborhood) neighborhoods.set(idB, row.neighborhood);
+    const recA = names ? names.get(a.toLowerCase()) : null;
+    const recB = names ? names.get(b.toLowerCase()) : null;
+    if (!labels.has(idA)) labels.set(idA, (recA && recA.name) || a);
+    if (!labels.has(idB)) labels.set(idB, (recB && recB.name) || b);
+    const hoodA = row.neighborhood || (recA && recA.neighborhood) || '';
+    const hoodB = row.neighborhood || (recB && recB.neighborhood) || '';
+    if (!neighborhoods.has(idA) && hoodA) neighborhoods.set(idA, hoodA);
+    if (!neighborhoods.has(idB) && hoodB) neighborhoods.set(idB, hoodB);
 
     const key = [idA, idB].sort().join('|');
     const weight = parseIntensity(row.intensity);
@@ -320,6 +352,7 @@ const edgesDS = new vis.DataSet(RAW_EDGES.map((e, i) => ({
 
 const container = document.getElementById('graph');
 const network = new vis.Network(container, { nodes: nodesDS, edges: edgesDS }, {
+  layout: { improvedLayout: false },
   physics: {
     enabled: true,
     solver: 'forceAtlas2Based',
@@ -340,7 +373,9 @@ const network = new vis.Network(container, { nodes: nodesDS, edges: edgesDS }, {
 
 network.once('stabilizationIterationsDone', () => {
   network.setOptions({ physics: { enabled: false } });
+  network.fit({ animation: false });
 });
+setTimeout(() => network.fit({ animation: false }), 2500);
 </script>
 </body>
 </html>
@@ -358,7 +393,7 @@ function main() {
   const outPath = args.out ? path.resolve(args.out) : path.join(REPO_ROOT, 'output', 'citizen-bond-graph.json');
   const htmlPath = args.html ? path.resolve(args.html) : null;
 
-  const { graph } = buildGraph(inputPath, { minIntensity: args.minIntensity });
+  const { graph } = buildGraph(inputPath, { minIntensity: args.minIntensity, namesPath: args.names });
 
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
   fs.writeFileSync(outPath, JSON.stringify(graph, null, 2) + '\n', 'utf8');

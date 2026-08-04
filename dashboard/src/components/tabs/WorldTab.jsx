@@ -92,17 +92,26 @@ function BondWeb({ world, onCitizenClick }) {
       networkRef.current = network;
 
       network.once('stabilizationIterationsDone', () => {
+        if (cancelled) return;
         network.setOptions({ physics: { enabled: false } });
         network.fit({ animation: { duration: 500, easingFunction: 'easeInOutQuad' } });
       });
       // Headless/slow-render fallback: re-fit once positions have settled even if
-      // the stabilization event already fired mid-drift.
-      setTimeout(() => network.fit({ animation: false }), 4000);
+      // the stabilization event already fired mid-drift. Guarded by `cancelled` —
+      // the effect's cleanup (tab switch or re-run) destroys the network, and
+      // calling fit() on a destroyed instance throws.
+      setTimeout(() => {
+        if (!cancelled) network.fit({ animation: false });
+      }, 4000);
 
       network.on('click', (params) => {
         if (params.nodes.length > 0 && onCitizenClick) {
           const node = nodes.get(params.nodes[0]);
-          if (node?.label) onCitizenClick(node.label);
+          if (!node) return;
+          // Node ids are slugified POPIDs (pop-00001) when the bond ledger used
+          // POPIDs; fall back to the display label otherwise.
+          const key = /^pop-\d+$/i.test(node.id) ? node.id.toUpperCase() : node.label;
+          if (key) onCitizenClick(key);
         }
       });
     }

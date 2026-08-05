@@ -33,8 +33,8 @@ const getCurrentCycle = require('/root/GodWorld/lib/getCurrentCycle');
 // Task 5 (citizen-loop-deepening, S300): perception assembly extracted to lib/wakePerception —
 // shared with scripts/citizenVoice.js (edition voicing) + the Task-6 conversation engine.
 const { buildPool, coResidents, loadLifeArc, loadSportsSlice, loadNeighborhoodTexture,
-  loadBonds, loadOwnPageReadback, dialTrajectory,
-  loadCardAnchor, loadVoiceTexture } = require('/root/GodWorld/lib/wakePerception'); // engine.48 T10 + T11
+  loadBonds, loadFamily, loadOwnPageReadback, dialTrajectory,
+  loadCardAnchor, loadVoiceTexture } = require('/root/GodWorld/lib/wakePerception'); // engine.48 T10 + T11; loadFamily loop-doctrine 2026-08-04
 const { selectProvocation, _hash53 } = require('/root/GodWorld/lib/provocationBank'); // T5 varied-provocation bank; _hash53 seeds T1 draw + T2 slot
 
 const ARGV = process.argv.slice(2);
@@ -185,19 +185,20 @@ function selectCitizen(pool, state, cycle) {
   return { c: candidates[0], slot: 'rotation' };
 }
 
-function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, pageMemory, cycle, tensionBlock, editionLine, rippleLine, cardBlock, voiceLine) {
+function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, familyLine, pageMemory, cycle, tensionBlock, editionLine, rippleLine, cardBlock, voiceLine) {
   const disp = dials.disposition(c.cur);
   const who = neighbors.length
     ? `\n\nPeople around you in ${c.nh}: ${neighbors.map((n) => `${n.name}${n.occupation ? ' (' + n.occupation + ')' : ''}`).join(', ')}.`
     : '';
   const bonds = bondsLine ? `\n\nPeople you have history with: ${bondsLine}.` : ''; // relationships-with-texture (ingredient 3)
+  const family = familyLine ? `\n\n${familyLine}` : ''; // loop doctrine — the ledger's structural family, ahead of neighbors/bonds
   // B1 bias readback (seams Task 7): opinions the citizen carries join the voice ONLY
   // when today's perception mentions the target — carried history surfacing, not a
   // recital. Match text = the UNfenced perception slices (fenced page/tension prose
   // deliberately excluded — recalled memory must not trigger opinion lines). Fed from
   // MemoryRegisters .biases (Task-6 fold); sentiment is bias-local, never dials.
   const biasLine = resonance.biasReadback(c.memReg,
-    [c.life, neighbors.map((n) => n.name).join(' '), bondsLine, sportsLine, textureLine, lifeArc].filter(Boolean).join(' '));
+    [c.life, neighbors.map((n) => n.name).join(' '), bondsLine, familyLine, sportsLine, textureLine, lifeArc].filter(Boolean).join(' '));
   const opinions = biasLine ? `\n\nOpinions you carry: ${biasLine}` : '';
   const traj = dialTrajectory(c.baseDials, c.cur);                    // T1a trajectory (dormant until drain)
   const arcLine = lifeArc ? `\n\nYour life so far: ${lifeArc}.` : ''; // T1a self-state read-back (Log-sourced)
@@ -216,7 +217,7 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
   // facts never compete with page recall. T11 — authored speech texture rides beside it.
   const anchor = cardBlock ? `\n\nWho you are:\n${cardBlock}` : '';
   const talk = voiceLine ? `\n\nHow you talk: ${voiceLine}` : '';
-  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}${anchor}${talk}\n\nReal things from your life recently:\n${c.life}${who}${bonds}${ripple}${opinions}${sports}${paper}${texture}${memory}${tensions}`;
+  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}${anchor}${talk}\n\nReal things from your life recently:\n${c.life}${family}${who}${bonds}${ripple}${opinions}${sports}${paper}${texture}${memory}${tensions}`;
   // T5 — varied-provocation question bank. The fixed "small things on your mind"
   // prompt becomes a deterministically-seeded pick latching a real signal this
   // citizen perceives, so two citizens woken the same cycle are prompted
@@ -258,6 +259,7 @@ async function generateVoice(system, user) {
   const bondsRes = await loadBonds(c.popId, { pairs: true }); // relationships-with-texture — people the citizen has history with (canon bonds)
   const bondsLine = bondsRes.line;
   const bondPairs = bondsRes.pairs;
+  const familyLine = await loadFamily(c.popId); // loop doctrine — ledger family columns reach the wake
   // engine.48 T3 — the paper closes the loop into perception (named tier > hood tier > omit)
   const editionLine = loadEditionSlice(c.popId, c.name, c.nh, cycle);
   // engine.48 T10 — card anchor (facts of the life, fenced; '' degrades gracefully)
@@ -284,14 +286,14 @@ async function generateVoice(system, user) {
   // unlived entries (dormant until the Task-8 fold writes MemoryRegisters) compete as candidates.
   const pageRead = await loadOwnPageReadback(c.popId, {
     cycle, wake: WAKE, milestone: lifeArc,
-    contextText: [textureLine, sportsLine, bondsLine, c.nh, c.occ, WAKE_FRAME[WAKE] || ''].filter(Boolean).join(' '),
+    contextText: [textureLine, sportsLine, bondsLine, familyLine, c.nh, c.occ, WAKE_FRAME[WAKE] || ''].filter(Boolean).join(' '),
     extraCandidates: resonance.tensionCandidates(tensionState[c.popId]).concat(resonance.unlivedCandidates(c.memReg)),
   });
   const pageMemory = pageRead.block;
   const tensionBlock = openTensions.length
     ? memoryFence.wrap(openTensions.map((t) => t.q).join('\n'), 'citizen-tension:' + c.popId)
     : '';
-  const { system, user, disp, prov } = buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, pageMemory, cycle, tensionBlock, editionLine, rippleLine, cardBlock, voiceLine);
+  const { system, user, disp, prov } = buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, familyLine, pageMemory, cycle, tensionBlock, editionLine, rippleLine, cardBlock, voiceLine);
 
   logLine(`woke ${c.popId} ${c.name} — ${c.occ || 'resident'}, ${c.nh}${c.age ? ', ' + c.age : ''} | eventMag=${c.eventMag} | ${disp} | provocation=${prov.id} route=${prov.route} wake=${WAKE} slot=${picked.slot}`);
   if (DRY) console.log('\n--- perception (system prompt) ---\n' + system + '\n----------------------------------');

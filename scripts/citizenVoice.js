@@ -45,7 +45,7 @@ const memoryFence = require('/root/GodWorld/lib/memoryFence');
 const classifier = require('/root/GodWorld/lib/reflectionClassifier');
 const getCurrentCycle = require('/root/GodWorld/lib/getCurrentCycle');
 const { buildPool, coResidents, loadLifeArc, loadSportsSlice, loadNeighborhoodTexture,
-  loadBonds, loadOwnPageReadback, dialTrajectory } = require('/root/GodWorld/lib/wakePerception');
+  loadBonds, loadFamily, loadOwnPageReadback, dialTrajectory } = require('/root/GodWorld/lib/wakePerception');
 
 const ARGV = process.argv.slice(2);
 const DRY = ARGV.includes('--dry-run');
@@ -102,13 +102,13 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
   const c = pool.find((p) => p.popId === popId);
   if (!c) { const e = new Error(`${popId} not voiceable (no DialState / not in ledger / no name+hood)`); e.code = 2; throw e; }
 
-  const [neighbors, sportsLine, lifeArc, bondsLine] = await Promise.all([
-    coResidents(c.nh, c.popId), loadSportsSlice(), loadLifeArc(c.popId), loadBonds(c.popId),
+  const [neighbors, sportsLine, lifeArc, bondsLine, familyLine] = await Promise.all([
+    coResidents(c.nh, c.popId), loadSportsSlice(), loadLifeArc(c.popId), loadBonds(c.popId), loadFamily(c.popId),
   ]);
   const textureLine = loadNeighborhoodTexture(c.nh, cycle);
   const pageRead = await loadOwnPageReadback(c.popId, {
     cycle, wake: 'VOICE',
-    contextText: [ask, textureLine, sportsLine, bondsLine, c.nh, c.occ].filter(Boolean).join(' '),
+    contextText: [ask, textureLine, sportsLine, bondsLine, familyLine, c.nh, c.occ].filter(Boolean).join(' '),
   });
 
   // Citizen-self system prompt — same block structure and immersion-ingredient order as the
@@ -117,12 +117,13 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
   const traj = dialTrajectory(c.baseDials, c.cur);
   const who = neighbors.length ? `\n\nPeople around you in ${c.nh}: ${neighbors.map((n) => `${n.name}${n.occupation ? ' (' + n.occupation + ')' : ''}`).join(', ')}.` : '';
   const bonds = bondsLine ? `\n\nPeople you have history with: ${bondsLine}.` : '';
+  const family = familyLine ? `\n\n${familyLine}` : ''; // loop doctrine — ledger family columns reach the voice
   const arcLine = lifeArc ? `\n\nYour life so far: ${lifeArc}.` : '';
   const trajLine = traj ? ` Lately you've been ${traj}.` : '';
   const sports = sportsLine ? `\n\nAround Oakland: ${sportsLine}` : '';
   const texture = textureLine ? `\n\nAround your neighborhood: ${textureLine}` : '';
   const memory = pageRead.block ? `\n\n---\n\nWhat's been on your mind lately, from your own private reflections:\n${pageRead.block}` : '';
-  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}\n\nReal things from your life recently:\n${c.life}${who}${bonds}${sports}${texture}${memory}`;
+  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}\n\nReal things from your life recently:\n${c.life}${family}${who}${bonds}${sports}${texture}${memory}`;
 
   // The ask arrives from the caller (letters desk, interview brief). Fence it — desk-authored
   // context is instructions TO the citizen, but anything quoted inside it must not be able to

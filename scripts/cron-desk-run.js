@@ -836,6 +836,32 @@ async function runReport(assign) {
       : '(no quotes landed this wake — write from the record; do not invent residents)');
 }
 
+// pipeline.45 Phase 1 — enrich the parsed INTAKE with ids for the sidecar.
+// The model emits no ids (prose-leak class); quoted-source ids come from the
+// wake-2 packet (exact records), the rest resolve against the ledger snapshot.
+// bizId stays null until a business snapshot exists (Saturday sheets
+// bind-point). Downstream consumers read THIS object, never the prose.
+function buildIntakeSidecar(draftText, quotes) {
+  const parsed = require('../lib/articleIntake').parse(draftText);
+  if (!parsed.found) return null;
+  const byQuote = new Map((quotes || []).filter(q => q.pop).map(q => [String(q.name).toLowerCase(), q.pop]));
+  const resolved = new Map(require('./canon-name-check').resolveCitizens(parsed.names.map(n => n.name))
+    .map(r => [String(r.name).toLowerCase(), r]));
+  return {
+    names: parsed.names.map(n => {
+      const k = String(n.name).toLowerCase();
+      const r = resolved.get(k);
+      return { name: n.name, role: n.role,
+        popid: n.popid || byQuote.get(k) || (r && r.popid) || null,
+        ...(r && r.ambiguous ? { ambiguous: true } : {}) };
+    }),
+    businesses: parsed.businesses.map(b => ({ name: b.name, bizId: b.bizId, role: b.role })),
+    storylines: parsed.storylines.map(s => ({ slug: s.slug, verb: s.verb })),
+    hoods: parsed.hoods.map(h => h.name),
+    claims: parsed.claims.map(c => ({ claim: c.claim, sourceRef: c.sourceRef }))
+  };
+}
+
 // WAKE 3 — WRITE (+ gate + route + self-record): requires angle + packet
 // artifacts — no angle, no write (no filing on stale data).
 async function runWrite(assign) {
@@ -904,6 +930,8 @@ async function runWrite(assign) {
     try {
       execFileSync('node', [path.join(ROOT, 'scripts', 'cron-rhea-gate.js'), '--draft', path.relative(ROOT, draftPath),
         '--model', GATE_MODEL, '--backend', GATE_BACKEND, '--api-model', GATE_API_MODEL, '--cycle', cycle,
+        // pipeline.45: the wake-2 packet backs the INTAKE quoted-source check.
+        '--packet', path.relative(ROOT, packetPath),
         // Task 2.5.3: wake-1 validated canon facts ride into the gate as
         // verified prior coverage (cited history is not a contradiction).
         ...(angle && angle.canonResearch ? ['--canon-facts', path.relative(ROOT, anglePath)] : [])],
@@ -934,6 +962,9 @@ async function runWrite(assign) {
       status: 'staged', desk, cycle, persona: personaSlug, byline: byline ? byline.name : null, bylinePopid: byline ? byline.popid : null,
       article: path.relative(ROOT, destPath),
       bylineUsage,
+      // pipeline.45 Phase 1: the id-enriched INTAKE — the one surface the
+      // Saturday run (sheets, Supermemory tags, EIC audit) reads.
+      intake: buildIntakeSidecar(fs.readFileSync(draftPath, 'utf8'), quotes),
       note: 'M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.',
       stagedAt: new Date().toISOString()
     }, null, 2));

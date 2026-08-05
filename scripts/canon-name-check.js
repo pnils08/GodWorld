@@ -179,6 +179,43 @@ function checkText(text) {
   };
 }
 
+// pipeline.45 Phase 1 — INTAKE name→POPID resolution. The wake-3 model emits
+// INTAKE NAMES lines WITHOUT ids (prose-leak class keeps POPIDs out of the
+// writer state); the gate blocks unresolvable names and the orchestrator
+// enriches the .staged.json sidecar with the ids this returns. Same snapshot,
+// same normalization conventions as checkText (title-strip, whitespace,
+// trailing-period). A name shared by 2+ citizens returns popid:null with
+// ambiguous:true — canon name, indeterminate id; not a fabrication flag.
+function resolveCitizens(names) {
+  if (!resolveCitizens._index) {
+    const index = new Map();   // lowercase name -> { popid, distinct: Set }
+    for (const row of loadRows()) {
+      const popid = String(row.POPID || '').trim();
+      if (!popid) continue;
+      const full = String(row.Name || '').replace(/\s+/g, ' ').trim();
+      const fl = [row.First, row.Last].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
+      for (const n of new Set([full, fl].filter(Boolean))) {
+        for (const key of new Set([n.toLowerCase(), n.toLowerCase().replace(/\.+$/, '')])) {
+          const cur = index.get(key);
+          if (!cur) index.set(key, { popid, distinct: new Set([popid]) });
+          else cur.distinct.add(popid);
+        }
+      }
+    }
+    resolveCitizens._index = index;
+  }
+  const index = resolveCitizens._index;
+  return (names || []).map(raw => {
+    const n = String(raw || '').replace(/\s+/g, ' ').trim();
+    const hit = index.get(n.toLowerCase())
+      || index.get(stripTitles(n).toLowerCase())
+      || index.get(n.toLowerCase().replace(/\.+$/, ''));
+    if (!hit) return { name: raw, popid: null, ambiguous: false };
+    if (hit.distinct.size > 1) return { name: raw, popid: null, ambiguous: true };
+    return { name: raw, popid: hit.popid, ambiguous: false };
+  });
+}
+
 function arg(flag, def) {
   const i = process.argv.indexOf(flag);
   if (i !== -1 && process.argv[i + 1]) return process.argv[i + 1];
@@ -197,4 +234,4 @@ if (require.main === module) {
   process.exit(out.unverified.length ? 2 : 0);
 }
 
-module.exports = { checkText, extractCandidates, loadCanonNames, buildStoplist, profilesFor };
+module.exports = { checkText, extractCandidates, loadCanonNames, buildStoplist, profilesFor, resolveCitizens };

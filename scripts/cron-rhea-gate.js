@@ -62,6 +62,11 @@ const EVIDENCE_FILE = arg('--evidence-file', null);
 // contradiction (first live run: both flags on a tool-loop draft were
 // prior-edition facts the draft correctly cited as history).
 const CANON_FACTS_FILE = arg('--canon-facts', null);
+// pipeline.45 Phase 1 Task 3: wake-2 packet artifact (real citizenVoice quotes).
+// When present, every INTAKE quoted-source must name someone in packet.quotes —
+// a quoted-source with no packet backing is the invented-source class. Passed
+// by cron-desk-run; absent on manual gate runs → backing check is skipped.
+const PACKET_FILE = arg('--packet', null);
 
 const log = {
   info: (...a) => console.log('[INFO]', new Date().toISOString(), ...a),
@@ -322,6 +327,51 @@ async function main() {
       nameCheck.unverified.length + ' not-in-ledger' + (nameCheck.unverified.length ? ' [' + nameCheck.unverified.join('; ') + ']' : ''));
   } catch (e) { log.warn('name pre-check failed (non-fatal): ' + e.message); }
 
+  // pipeline.45 Phase 1 Task 3 — deterministic INTAKE pre-check. Parse validity,
+  // name resolution, and quoted-source backing are clearance criteria: everything
+  // downstream (sheet ingest, Supermemory tags, EIC claim audit) reads INTAKE,
+  // so a draft with a broken block is flagged regardless of the model verdict.
+  // Blockers join detBlockers below (S344 class — override a model pass).
+  const intakeBlockers = [];
+  let intakeReport = null;
+  {
+    const parsed = require('../lib/articleIntake').parse(draftText);
+    const resolveCitizens = require('./canon-name-check').resolveCitizens;
+    const resolved = parsed.found ? resolveCitizens(parsed.names.map(n => n.name)) : [];
+    const unresolvable = resolved.filter(r => r.popid === null && !r.ambiguous).map(r => r.name);
+    let unbackedQuoted = [];
+    if (parsed.found && PACKET_FILE) {
+      try {
+        const packet = JSON.parse(fs.readFileSync(path.resolve(ROOT, PACKET_FILE), 'utf8'));
+        const quoted = new Set(((packet && packet.quotes) || []).map(q => String(q.name).toLowerCase()));
+        unbackedQuoted = parsed.names.filter(n => n.role === 'quoted-source' && !quoted.has(String(n.name).toLowerCase())).map(n => n.name);
+      } catch (e) { log.warn('intake packet load failed (backing check skipped): ' + e.message); }
+    }
+    if (!parsed.found) {
+      intakeBlockers.push({ severity: 'high', check: 'intake-missing', issue: 'no ## INTAKE block in draft' });
+    } else {
+      if (parsed.errors.length) intakeBlockers.push({ severity: 'high', check: 'intake-grammar',
+        issue: parsed.errors.slice(0, 6).map(e => e.code + (e.lineNumber ? '@L' + e.lineNumber : '')).join('; ') + (parsed.errors.length > 6 ? ' (+' + (parsed.errors.length - 6) + ' more)' : '') });
+      if (unresolvable.length) intakeBlockers.push({ severity: 'high', check: 'intake-name',
+        issue: 'INTAKE name(s) not in ledger: ' + unresolvable.join('; ') });
+      if (unbackedQuoted.length) intakeBlockers.push({ severity: 'high', check: 'intake-quoted-source',
+        issue: 'quoted-source with no wake-2 packet backing: ' + unbackedQuoted.join('; ') });
+    }
+    intakeReport = {
+      found: parsed.found,
+      counts: { names: parsed.names.length, businesses: parsed.businesses.length,
+        storylines: parsed.storylines.length, hoods: parsed.hoods.length, claims: parsed.claims.length },
+      grammarErrors: parsed.errors.length,
+      unresolvable, unbackedQuoted,
+      packetChecked: !!(parsed.found && PACKET_FILE)
+    };
+    console.log('intake pre-check: ' + (parsed.found
+      ? parsed.names.length + ' names / ' + parsed.claims.length + ' claims, ' + parsed.errors.length + ' grammar error(s)' +
+        (unresolvable.length ? ', unresolvable [' + unresolvable.join('; ') + ']' : '') +
+        (unbackedQuoted.length ? ', unbacked quoted-source [' + unbackedQuoted.join('; ') + ']' : '')
+      : 'MISSING'));
+  }
+
   const started = Date.now();
   let verdict = null, apiCost = null, durationMs = 0;
 
@@ -406,6 +456,7 @@ async function main() {
   // python write_file() duplicate of itself; no model verdict should be able to
   // clear machine-detectable contamination.
   const detBlockers = [];
+  detBlockers.push(...intakeBlockers);   // pipeline.45: INTAKE validity is part of clearance
   for (const j of scanStructuralJunk(draftText)) detBlockers.push({ severity: 'high', check: 'structural', issue: j });
   const bodyForScan = unwrapWholeDocFence(draftText).replace(/```[\s\S]*?```/g, '');
   const popHits = bodyForScan.match(/\bPOP-\d{5}\b/g);
@@ -425,6 +476,7 @@ async function main() {
     highSeverityCount: Array.isArray(verdict.flags) ? highSevCount : null,
     summary: verdict.summary || '',
     nameCheck: nameCheck ? { verified: nameCheck.verified, unverified: nameCheck.unverified } : null,
+    intake: intakeReport,
     apiCostUsd: apiCost,
     durationMs,
     parseError: verdict.parseError || false,

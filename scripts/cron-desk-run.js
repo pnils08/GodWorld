@@ -391,6 +391,23 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
     for (const w of wire) L.push(w);
     L.push('');
   }
+  // pipeline.45 Phase 2 — previous day's staged filings for THIS desk ride the
+  // wake state (Mike-direct 2026-08-04, supersedes the S332 zero-staged-
+  // retrieval wall in-week): the newsroom's own prior filings, retrievable as
+  // "what we've filed this week", never as canon fact.
+  const filings = yesterdaysFilings(desk, cycle);
+  if (filings.length) {
+    L.push('### Your desk\'s filings from yesterday (our own prior reporting this week — NOT');
+    L.push('established canon: follow the thread, reference it as "our reporting", but never');
+    L.push('treat an unverified claim from it as settled fact; do NOT re-report the same story)');
+    for (const f of filings) {
+      L.push('');
+      L.push('FILED: "' + f.headline + '"' + (f.byline ? ' — ' + f.byline : ''));
+      if (f.intakeBlock) L.push(f.intakeBlock);
+      if (f.excerpt) L.push(f.excerpt);
+    }
+    L.push('');
+  }
   // pipeline.45 Phase 1 — INTAKE block: the machine-parseable index of the
   // piece. Parsed by lib/articleIntake.js at the gate; ids deliberately NOT
   // asked for — the writer state carries no POPIDs (prose-leak class) and the
@@ -712,6 +729,42 @@ async function runCanonResearch(cycle, desk, story, reporter) {
   fallback.push({ fact: story.label || story.angle, ref: story.ref });
   const v = validateCanonFacts(fallback, cycle, story.ref);
   return { facts: fallback, source: 'script-fallback' + (v.ok ? '' : ' (validator: ' + v.errs.join('; ') + ')'), trace };
+}
+
+// ---------------------------------------------------------------------------
+// pipeline.45 Phase 2 — daily continuity feed: yesterday's staged filings for
+// one desk, bounded (≤3 filings, headline + INTAKE + 600-char excerpt) so the
+// pack never regrows the 40k blob. Content comes from the ARTICLE TEXT — the
+// model-form, id-free INTAKE — never the sidecar `intake:` object, which
+// carries resolved POPIDs (prose-leak class; ids stay out of writer state).
+// ---------------------------------------------------------------------------
+const FILINGS_MAX = 3, FILINGS_EXCERPT_CAP = 600;
+function yesterdaysFilings(desk, cycle) {
+  const out = [];
+  try {
+    if (!fs.existsSync(STAGED)) return out;
+    const yday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+    for (const f of fs.readdirSync(STAGED)) {
+      if (!f.endsWith('.staged.json') || out.length >= FILINGS_MAX) continue;
+      const side = readJson(path.join(STAGED, f));
+      if (!side || side.desk !== desk || String(side.cycle) !== String(cycle)) continue;
+      if (String(side.stagedAt || '').slice(0, 10) !== yday) continue;
+      const artPath = path.join(ROOT, side.article || '');
+      if (!fs.existsSync(artPath)) continue;
+      const text = fs.readFileSync(artPath, 'utf8');
+      const headline = String(text.split('\n').find(l => l.trim()) || '')
+        .replace(/^#+\s*/, '').replace(/[*_`]/g, '').slice(0, 90).trim();
+      // split body / INTAKE on the block heading; strip the self-score comment
+      const m = text.match(/^##\s+INTAKE\s*$/im);
+      const body = (m ? text.slice(0, m.index) : text).trim();
+      const intakeBlock = m ? text.slice(m.index).replace(/<!--[\s\S]*?-->/g, '').trim() : null;
+      const excerpt = body.length > FILINGS_EXCERPT_CAP
+        ? body.slice(0, FILINGS_EXCERPT_CAP).replace(/\S+$/, '').trim() + ' […]'
+        : body;
+      out.push({ headline, byline: side.byline || null, intakeBlock, excerpt });
+    }
+  } catch (e) { log('yesterdays-filings read failed (non-fatal): ' + e.message); }
+  return out;
 }
 
 // ---------------------------------------------------------------------------
@@ -1293,4 +1346,6 @@ module.exports = {
   writerArtifactTag,
   buildWriterArgs,
   loadLane,
+  yesterdaysFilings,
+  buildIntakeSidecar,
 };

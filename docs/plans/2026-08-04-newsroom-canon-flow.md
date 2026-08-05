@@ -120,3 +120,4 @@ One cron, six steps, in order:
 - 2026-08-04 (engine-sheet) — Phase 1 Task 2 shipped: `lib/articleIntake.js` parser + 37-assertion suite. BIZ `-` → `bizId: null` (gate decides clearance). Tasks 1/3/4 open.
 - 2026-08-04 (engine-sheet) — Phase 1 Task 1 shipped: INTAKE spec into STORY_TEMPLATE §5 + wake-3 prompt tail in `cron-desk-run.js`. Build amendment: model emits 2-field (no-id) lines; gate resolves ids (see §spec detail).
 - 2026-08-05 (engine-sheet) — Phase 1 Task 3 shipped: gate INTAKE pre-check (4 deterministic blocker classes, `--packet` backing check), `resolveCitizens` in canon-name-check, id-enriched `intake:` in the staged sidecar. Smoke pending next unattended M–F run.
+- 2026-08-05 (engine-sheet) — Phase 2 shipped: `yesterdaysFilings` in wake state (≤3 same-desk filings, headline + id-free INTAKE + 600-char excerpt, never-canon label). Sourced from article text, never the id-bearing sidecar. 14-assertion suite.

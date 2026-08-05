@@ -58,15 +58,11 @@ pointers:
 
 ---
 
-## Verdict: `watch`
+## Verdict: `adopt` (trigger fired 2026-08-04)
 
-**Adopt-trigger:** Mike completing the design in his stated clean session. He has explicitly more to add; this file is the capture point and extension target, not a spec. **Do not execute from this document.**
+**The adopt-trigger fired:** Mike completed the design in the 2026-08-04 remote session (research-build terminal). The five-point completion — Saturday-as-test with a 90% accuracy graduation to Rhea-published autonomy, Mags-as-EIC weekly accuracy report, previous-day staged articles feeding the daily crons, edition → permanent NotebookLM as the canon door, all staged articles → Supermemory per-article tagged journalist+cycle, sheet-ingestable INTAKE sections as the Supermemory search key — is captured as the design contract in the ignited plan. Saturday is confirmed **curation + narration both**, two steps of one run; reporters stay authors-in-canon, Mags narrates on top.
 
-On trigger firing, this routes to **research-build** to write the plan and file the ROLLOUT row. **No row is filed from this research file** — media terminal never writes ROLLOUT rows (ADR-0005 §Part 3, `feedback_media-orchestrates-research-build-builds`). Media's filing channel is the production gap log, which is where the C102 evidence already sits.
-
-Reasoning for `watch` over `adopt`: the direction is Mike-direct and load-bearing, but an incomplete design that deletes a compile layer should not ignite a plan mid-thought. The three-lever half is more nearly complete than the narrator half and could ignite separately if he wants momentum before the full redesign.
-
-**Ignited plans:** none yet.
+**Ignited plans:** [[../plans/2026-08-04-newsroom-canon-flow]] (pipeline.45).
 
 ---
 
@@ -89,6 +85,7 @@ Roughly half the C102 findings describe machinery this design proposes to delete
 ## Applications (living)
 
 - 2026-08-04 — Written from the S353 media session; C102 gap-log §DESIGN ITEMS D-1..D-7 cross-references this file for the design context behind its deferred findings.
+- 2026-08-04 (later, research-build remote session) — Adopt-trigger fired: Mike completed the design; verdict flipped `watch`→`adopt`; plan ignited. The moot/survives table resolves in the plan §Out of scope: G-DR3/G-DR4 moot, G-DR5 + D-4 promoted to load-bearing.
 
 ---
 

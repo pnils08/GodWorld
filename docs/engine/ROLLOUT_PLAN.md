@@ -47,6 +47,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | pipeline.41 | Tensions → /sift story seeds — /sift reads the open tension register as door-knock candidates (subjective material, never publishable as fact) | ready | research-build | [[../plans/2026-07-06-citizen-loop-deepening]] §Task 8 |
 | pipeline.43 | Citizen voice quote supply (PRIORITY, Mike-direct S312) — ALL T1–5 built (T1–2 live-verified S312); acceptance rides first live edition (C101 /write-edition) | in-progress | research-build | [[../plans/2026-07-11-citizen-voice-quote-supply]] |
 | pipeline.44 | Desk-slice fork (FLAGSHIP, Mike-direct S313) — T1–T4 done S313 (3 skills live); open: T5 post-publish fit, T6 pilot | in-progress | engine-sheet / research-build | [[../research/2026-07-11-desk-slice-fork]] |
+| pipeline.45 | Newsroom canon flow (Mike-direct 2026-08-04) — INTAKE contract, Saturday run (EIC scorecard + curation + narration + canon door), 90%-accuracy autonomy graduation | ready | engine-sheet / research-build / media (Sat seats) | [[../plans/2026-08-04-newsroom-canon-flow]] |
 
 ### engine.* — Engine code, ledger, schema
 

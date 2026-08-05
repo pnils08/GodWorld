@@ -220,6 +220,52 @@ function entryByline(stem) {
 }
 
 // ---------------------------------------------------------------------------
+// Step 6b — storyline signal aggregation (Mike-direct 2026-08-05: "open the
+// door to ingest storylines to ledgers to keep high-signal storylines open,
+// but avoid pigeonholing"). Anti-pigeonhole contract: slugs are REPORTER-
+// AUTHORED free-form kebab — never validated against a pre-approved list,
+// never constrained by the tracker. The signal file follows the reporting;
+// curation (step 2) ranks on it. The Storyline_Tracker WRITE is deliberately
+// deferred: the live tab shows header drift (21-cell rows vs 26 headers,
+// id-like values in the Timestamp column, checked 2026-08-05) — engine-owned
+// tab, rule on the drift before writing rows into it.
+// ---------------------------------------------------------------------------
+function aggregateStorylineSignals(set) {
+  const bySlug = {};
+  for (const entry of set) {
+    const intake = entry.sidecar.intake;
+    if (!intake) continue;
+    for (const s of (intake.storylines || [])) {
+      const agg = bySlug[s.slug] || (bySlug[s.slug] = {
+        slug: s.slug, advanced: 0, opened: 0, closed: 0, referenced: 0,
+        articles: [], hoods: [], citizens: []
+      });
+      if (agg[s.verb] !== undefined) agg[s.verb]++;
+      agg.articles.push(entry.stem);
+      for (const h of (intake.hoods || [])) if (!agg.hoods.includes(h)) agg.hoods.push(h);
+      for (const n of (intake.names || [])) if (n.popid && !agg.citizens.includes(n.popid)) agg.citizens.push(n.popid);
+    }
+  }
+  // High-signal first: moves (advanced+opened+closed) beat passive references.
+  return Object.values(bySlug).sort((a, b) =>
+    (b.advanced + b.opened + b.closed) - (a.advanced + a.opened + a.closed) ||
+    b.articles.length - a.articles.length);
+}
+
+function stepSignals(cycle) {
+  console.log('--- step 6b: storyline signal aggregation ---');
+  const signals = aggregateStorylineSignals(loadStagedSet(cycle));
+  const outPath = path.join(ROOT, 'output', 'storyline_signal_c' + cycle + '.json');
+  fs.writeFileSync(outPath, JSON.stringify({ cycle: String(cycle), signals }, null, 2));
+  console.log(signals.length + ' storyline(s) → ' + path.relative(ROOT, outPath));
+  for (const s of signals.slice(0, 8)) {
+    console.log('  ' + s.slug + ': ' + s.advanced + ' advanced / ' + s.opened + ' opened / ' +
+      s.closed + ' closed / ' + s.referenced + ' referenced (' + s.articles.length + ' article(s))');
+  }
+  return { signals: signals.length };
+}
+
+// ---------------------------------------------------------------------------
 // Steps 1–4 — seams. Loud exits, not silent skips.
 // ---------------------------------------------------------------------------
 function seatBlocked(step) {
@@ -239,14 +285,16 @@ async function main() {
   const dispatch = {
     audit: () => seatBlocked(1), curate: () => seatBlocked(2),
     narrate: () => seatBlocked(3), publish: () => seatBlocked(4),
-    sweep: () => stepSweep(cycle), sheets: () => stepSheets(cycle)
+    sweep: () => stepSweep(cycle), sheets: () => stepSheets(cycle),
+    signals: () => stepSignals(cycle)
   };
   if (step) {
-    if (!dispatch[step]) throw new Error('unknown --step "' + step + '" (want audit|curate|narrate|publish|sweep|sheets)');
+    if (!dispatch[step]) throw new Error('unknown --step "' + step + '" (want audit|curate|narrate|publish|sweep|sheets|signals)');
     await dispatch[step]();
   } else {
     await stepSweep(cycle);
     await stepSheets(cycle);
+    stepSignals(cycle);
     seatBlocked('1-4 (skipped in all-step mode)');
   }
 }
@@ -255,4 +303,4 @@ if (require.main === module) {
   main().catch(err => { console.error('[saturday] Fatal: ' + err.message); process.exit(1); });
 }
 
-module.exports = { loadStagedSet, articleCustomId, articleDoc, usageRowsFor, ROLE_TO_USAGE };
+module.exports = { loadStagedSet, articleCustomId, articleDoc, usageRowsFor, ROLE_TO_USAGE, aggregateStorylineSignals };

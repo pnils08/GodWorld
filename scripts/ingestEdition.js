@@ -43,6 +43,13 @@ var ALLOWED_TYPES = ['edition', 'interview', 'supplemental', 'dispatch', 'interv
 
 var DRY_RUN = process.argv.includes('--dry-run');
 var NO_STRIP = process.argv.includes('--no-strip');
+// pipeline.45 (Mike-direct 2026-08-05): the INTAKE block is the standard —
+// anyone writing an article adds the section, and ingest is where the
+// requirement bites. --require-intake hard-fails a file with no valid block;
+// without the flag legacy/backfill content ingests with a loud warning.
+// Pipeline callers (Saturday run, post-publish) pass the flag; the warn
+// default exists ONLY for pre-INTAKE archive material.
+var REQUIRE_INTAKE = process.argv.includes('--require-intake');
 
 // ---------------------------------------------------------------------------
 // Defense-in-depth metadata strip (S172 — HIGH ROLLOUT item, S180 build)
@@ -165,12 +172,17 @@ function extractCycle(content, filename) {
   // supplemental_education_first_week_c88.txt → 88
   var cMatch = filename.match(/[_-]c(\d+)\./i);
   if (cMatch) return parseInt(cMatch[1], 10);
+  // c100_martin_richards_trade.txt → 100
+  var prefixMatch = filename.match(/^c(\d+)_/i);
+  if (prefixMatch) return parseInt(prefixMatch[1], 10);
   // cycle_pulse_edition_88.txt → 88
   var fileMatch = filename.match(/edition[_-](\d+)/i);
   if (fileMatch) return parseInt(fileMatch[1], 10);
   // Content fallback: "Cycle 88" in header
   var cycleMatch = content.match(/Cycle\s+(\d+)/i);
   if (cycleMatch) return parseInt(cycleMatch[1], 10);
+  // No default-cycle fallback (reviewed 2026-08-05): a silently-guessed cycle
+  // mistags canon — caller fail-louds on null and asks for --cycle instead.
   return null;
 }
 
@@ -274,20 +286,61 @@ function extractBylineMeta(text) {
 }
 
 // ---------------------------------------------------------------------------
+// pipeline.45 (2026-08-05) — INTAKE block → Supermemory metadata. Parses the
+// `## INTAKE` section (lib/articleIntake, same parser as the Rhea gate) and
+// flattens it into filterable metadata: popids (explicit ids first, ledger
+// resolution via canon-name-check for the id-free model form), hoods,
+// storylines, claim count. Returns { parsed, meta } — meta is {} when the
+// block is absent so callers can Object.assign unconditionally.
+// ---------------------------------------------------------------------------
+function intakeMeta(text) {
+  var parsed = require('../lib/articleIntake').parse(text);
+  if (!parsed.found) return { parsed: parsed, meta: {} };
+  var meta = {};
+  var pops = [];
+  var resolved = [];
+  try {
+    resolved = require('./canon-name-check').resolveCitizens(
+      parsed.names.map(function(n) { return n.name; }));
+  } catch (e) { /* snapshot missing — explicit ids still count */ }
+  for (var i = 0; i < parsed.names.length; i++) {
+    var id = parsed.names[i].popid || (resolved[i] && resolved[i].popid) || null;
+    if (id && pops.indexOf(id) === -1) pops.push(id);
+  }
+  if (pops.length) meta.popids = pops.join(',');
+  if (parsed.hoods.length) meta.hoods = parsed.hoods.map(function(h) { return h.name; }).join(',');
+  if (parsed.storylines.length) meta.storylines = parsed.storylines.map(function(s) { return s.slug; }).join(',');
+  if (parsed.claims.length) meta.intakeClaims = parsed.claims.length;
+  return { parsed: parsed, meta: meta };
+}
+
+// ---------------------------------------------------------------------------
+// engine.91 T1 (2026-08-05) — customId so re-ingest UPSERTS instead of
+// duplicating (E89 got 6 copies). Scheme: <type>-c<cycle>-<slug>-<chunk>.
+// ---------------------------------------------------------------------------
+function deriveCustomId(type, cycle, filename, chunkIndex) {
+  var slug = String(filename).replace(/\.(txt|md)$/i, '')
+    .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  return type + '-c' + cycle + '-' + slug + '-' + chunkIndex;
+}
+
+// ---------------------------------------------------------------------------
 // POST a document to Supermemory
 // ---------------------------------------------------------------------------
-function addDocument(title, content, extraTags, metaExtras) {
+function addDocument(title, content, extraTags, metaExtras, customId) {
   return new Promise(function(resolve, reject) {
     var tags = [CONTAINER_TAG].concat(extraTags || []);
     var metadata = Object.assign({
       title: title,
       source: 'edition-ingest'
     }, metaExtras || {});
-    var payload = JSON.stringify({
+    var body = {
       content: content,
       containerTags: tags,
       metadata: metadata
-    });
+    };
+    if (customId) body.customId = customId;
+    var payload = JSON.stringify(body);
 
     var options = {
       hostname: API_HOST,
@@ -324,9 +377,9 @@ function addDocument(title, content, extraTags, metaExtras) {
 async function main() {
   var type = parseType();
   var cycleFlag = parseCycleFlag();
-  var editionPath = process.argv.find(function(a) { return a.endsWith('.txt'); });
+  var editionPath = process.argv.find(function(a) { return a.endsWith('.txt') || a.endsWith('.md'); });
   if (!editionPath) {
-    console.error('Usage: node scripts/ingestEdition.js <source.txt> [--type <type>] [--cycle N] [--dry-run]');
+    console.error('Usage: node scripts/ingestEdition.js <source.txt|source.md> [--type <type>] [--cycle N] [--dry-run]');
     process.exit(1);
   }
 
@@ -387,7 +440,32 @@ async function main() {
   }
   if (DRY_RUN) console.log('[INFO] Mode: DRY RUN');
 
-  var metaExtras = { type: type, cycle: cycle };
+  // pipeline.45 — INTAKE standard, enforced at ingest. File-level parse feeds
+  // every chunk's metadata; per-section blocks (multi-article editions) merge
+  // on top in the loop below.
+  var fileIntake = intakeMeta(content);
+  if (!fileIntake.parsed.found) {
+    if (REQUIRE_INTAKE) {
+      console.error('[ERROR] No ## INTAKE block found and --require-intake is set. Every');
+      console.error('        article entering canon carries the INTAKE section (pipeline.45).');
+      process.exit(1);
+    }
+    console.log('[WARN] No ## INTAKE block — ingesting as legacy content. New articles');
+    console.log('       REQUIRE the section; pipeline callers pass --require-intake.');
+  } else if (fileIntake.parsed.errors.length) {
+    var intakeErrs = fileIntake.parsed.errors.map(function(e) {
+      return e.code + (e.lineNumber ? '@L' + e.lineNumber : '');
+    }).join('; ');
+    if (REQUIRE_INTAKE) {
+      console.error('[ERROR] INTAKE block malformed (' + intakeErrs + ') and --require-intake is set.');
+      process.exit(1);
+    }
+    console.log('[WARN] INTAKE grammar errors (ingested anyway, legacy mode): ' + intakeErrs);
+  } else {
+    console.log('[INTAKE] ' + JSON.stringify(fileIntake.meta));
+  }
+
+  var metaExtras = Object.assign({ type: type, cycle: cycle }, fileIntake.meta);
 
   // Print the metadata block prominently — post-publish verifier reads stdout
   // to confirm type/cycle plumbed correctly.
@@ -407,16 +485,21 @@ async function main() {
 
   for (var i = 0; i < sections.length; i++) {
     var section = sections[i];
+    // engine.91 T1: stable per-chunk customId — re-ingest upserts, never dups.
+    var customId = deriveCustomId(type, cycle, filename, i + 1);
     if (DRY_RUN) {
-      console.log('[DRY] Would ingest: ' + section.title + ' (' + section.content.length + ' chars, tags: ' + section.tags.join(', ') + ')');
+      console.log('[DRY] Would ingest: ' + section.title + ' (' + section.content.length + ' chars, tags: ' + section.tags.join(', ') + ', customId: ' + customId + ')');
       success++;
       continue;
     }
 
     try {
-      // engine.46 T2: per-chunk byline/desk ride along with the run-level extras.
+      // engine.46 T2: per-chunk byline/desk ride along with the run-level
+      // extras; pipeline.45: a section carrying its OWN INTAKE block (multi-
+      // article editions) overrides the file-level intake metadata.
       var resp = await addDocument(section.title, section.content, section.tags,
-        Object.assign({}, metaExtras, extractBylineMeta(section.content)));
+        Object.assign({}, metaExtras, extractBylineMeta(section.content), intakeMeta(section.content).meta),
+        customId);
       // ES-1 (G-P-C100-1): surface the returned doc id on its own line so
       // autonomous callers can capture it (mirrors ingestPlayerTrueSource).
       var docId = '';
@@ -440,7 +523,18 @@ async function main() {
   }
 }
 
-main().catch(function(err) {
-  console.error('[FATAL]', err);
-  process.exit(1);
-});
+if (require.main === module) {
+  main().catch(function(err) {
+    console.error('[FATAL]', err);
+    process.exit(1);
+  });
+}
+
+module.exports = {
+  extractCycle: extractCycle,
+  splitEdition: splitEdition,
+  extractBylineMeta: extractBylineMeta,
+  intakeMeta: intakeMeta,
+  deriveCustomId: deriveCustomId,
+  stripMetadataLeaks: stripMetadataLeaks
+};

@@ -117,6 +117,7 @@ One cron, six steps, in order:
 
 - 2026-08-04 — Initial plan (research-build, remote session). Ignited by Mike completing the narrator design — the adopt-trigger in the research file. Phase order = dependency order: INTAKE contract first (everything downstream reads it), Saturday run third, graduation last.
 - 2026-08-04 (same session) — Phase 1 spec detail added: INTAKE line grammar + enums, parser contract, four consumer contracts, `extractBylineMeta` per-article seam. Grounded against live staged artifacts.
+- 2026-08-05 — Phase 3 seats BUILT (research-build): audit/curate/narrate/publish live in `cron-saturday-run.js`, full chain proven on c102 staged set. Open: Saturday cron install (Mike's go) + ingestPublishedEntities INTAKE adaptation + audit verdict-stability watch.
 - 2026-08-04 (engine-sheet) — Phase 1 Task 2 shipped: `lib/articleIntake.js` parser + 37-assertion suite. BIZ `-` → `bizId: null` (gate decides clearance). Tasks 1/3/4 open.
 - 2026-08-04 (engine-sheet) — Phase 1 Task 1 shipped: INTAKE spec into STORY_TEMPLATE §5 + wake-3 prompt tail in `cron-desk-run.js`. Build amendment: model emits 2-field (no-id) lines; gate resolves ids (see §spec detail).
 - 2026-08-05 (engine-sheet) — Phase 1 Task 3 shipped: gate INTAKE pre-check (4 deterministic blocker classes, `--packet` backing check), `resolveCitizens` in canon-name-check, id-enriched `intake:` in the staged sidecar. Smoke pending next unattended M–F run.

@@ -49,6 +49,35 @@ Tasks:
 
 **Acceptance:** one cleared article yields a parsed INTAKE with zero unverified names; parser output writes a valid Citizen_Media_Usage payload and a Supermemory tag set; an article with a fabricated name in INTAKE routes to `flagged/`.
 
+### Phase 1 spec detail (research-build, 2026-08-04 — the bind-points for the engine-sheet build)
+
+**Block format — strict line grammar, in the article body.** Cheap models produce line grammar reliably (the `<!-- SELF-SCORE -->` footer already proves the machine-block pattern in wake-3 output). Final section of every draft:
+
+```
+## INTAKE
+NAMES: Lucia Polito | POP-00654 | quoted-source
+NAMES: Calvin Turner | POP-00381 | subject
+BIZ: Rico's Auto | BIZ-0112 | mentioned
+STORYLINE: fruitvale-transit-hub | advanced
+HOOD: Fruitvale
+CLAIM: Transit Hub Phase II is a $230M visioning process | world_summary_c102 §initiatives
+```
+
+- `NAMES:` role enum: `quoted-source` / `subject` / `mentioned`. Every `quoted-source` must trace to §3 INTERVIEWS (real citizenVoice quotes) — an INTAKE quoted-source with no §3 backing is the invented-source class, auto-flag.
+- `STORYLINE:` verb enum: `advanced` / `opened` / `closed` / `referenced` — this is the moves-the-sim signal Saturday curation ranks on.
+- `CLAIM:` one load-bearing factual claim per line + the source ref that backs it. This is the EIC audit's checkable surface: each claim is deterministically re-verifiable, which is what makes the 90% accuracy score computable rather than vibed.
+- No entity invented for the block: names/BIZ IDs must resolve against the ledger snapshot (reuse `canon-name-check.js` machinery). Unnamed color per the S344 doctrine never appears in INTAKE — the block indexes the record, not the texture.
+
+**Parser — `lib/articleIntake.js`** (one home, three consumers): `parse(text) → { names[], businesses[], storylines[], hoods[], claims[], errors[] }`. On gate pass, the parsed object is written into the existing `.staged.json` sidecar as `intake:` — downstream consumers read the sidecar, never re-parse prose.
+
+**Consumer contracts:**
+1. **Gate** (`cron-rhea-gate.js` pre-check): parse errors, unresolvable POPID/BIZ IDs, or an unbacked quoted-source → `flagged/`. INTAKE validity is part of clearance.
+2. **Sheets** (Saturday step 6): usage rows from INTAKE names — `quoted-source` rows already exist via `citizenVoice --record` (do NOT double-write; skip that class), so the new writes are `subject`/`mentioned` classes. Exact UsageType strings are an engine-sheet bind-point against `EMERGENCE_USAGE_TYPES` in `processAdvancementIntake.js` — bind at build, don't invent here. Header-mapped + idempotent like `recordBylineUsage`.
+3. **Supermemory** (Saturday step 5): one document per article. `containerTags`: `bay-tribune` + `journalist-<bylinePopid>` + `cycle-<N>` + desk. `metadata`: byline, bylinePopid, desk, cycle, POPIDs, hoods, storylines, status (`staged`→`published` on curation). Queries filter on these — Mike's "queries grab these for searches."
+4. **EIC audit** (Saturday step 1): per-article accuracy = claims verified / claims total, weighted by the S344 severity classes; NAMES resolution is a hard fail class (citizen-bending).
+
+**Known seam:** staged article bodies carry no `By <Name>` line — `ingestEdition.js:extractBylineMeta` regexes published-edition bylines and will find nothing on per-article input. The per-article ingest path must take byline/desk from the sidecar, not the regex. (This is the concrete instance of the "ingest scripts are edition-shaped" caveat.)
+
 ## Phase 2 — daily continuity feed *(engine-sheet)*
 
 1. Wake context packs (`buildLaneState`) include the **previous day's staged articles** for that desk — labeled as the newsroom's own filings this week, not canon. Bounded (previous day only, headline + INTAKE + body cap) so the pack doesn't regrow the 40k blob.
@@ -85,3 +114,4 @@ One cron, six steps, in order:
 ## Changelog
 
 - 2026-08-04 — Initial plan (research-build, remote session). Ignited by Mike completing the narrator design — the adopt-trigger in the research file. Phase order = dependency order: INTAKE contract first (everything downstream reads it), Saturday run third, graduation last.
+- 2026-08-04 (same session) — Phase 1 spec detail added: INTAKE line grammar + enums, parser contract, four consumer contracts, `extractBylineMeta` per-article seam. Grounded against live staged artifacts.

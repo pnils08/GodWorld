@@ -78,6 +78,8 @@ CLAIM: Transit Hub Phase II is a $230M visioning process | world_summary_c102 §
 
 **Known seam:** staged article bodies carry no `By <Name>` line — `ingestEdition.js:extractBylineMeta` regexes published-edition bylines and will find nothing on per-article input. The per-article ingest path must take byline/desk from the sidecar, not the regex. (This is the concrete instance of the "ingest scripts are edition-shaped" caveat.)
 
+**Build amendment (engine-sheet, 2026-08-04) — the MODEL never writes ids.** The wake-3 writer state deliberately carries no POPIDs (prose-leak class, first 2.5.2 live run; THE WALL forbids printing them) — instructing the model to emit `NAMES: Name | POP-##### | role` would regress that fix or force invented ids. Resolution: the model emits the 2-field form (`NAMES: <name> | <role>`, `BIZ: <name> | <role>`); `lib/articleIntake.js` accepts both forms (`popid`/`bizId: null` when absent); the GATE resolves name→id deterministically from its own records (`quotes[].pop`, `story.popids`, ledger snapshot) and writes the enriched object into the sidecar. Unresolvable name = the fabricated-source flag, unchanged. Full-grammar ids live in the sidecar, which is the only surface consumers read.
+
 ## Phase 2 — daily continuity feed *(engine-sheet)*
 
 1. Wake context packs (`buildLaneState`) include the **previous day's staged articles** for that desk — labeled as the newsroom's own filings this week, not canon. Bounded (previous day only, headline + INTAKE + body cap) so the pack doesn't regrow the 40k blob.
@@ -116,3 +118,4 @@ One cron, six steps, in order:
 - 2026-08-04 — Initial plan (research-build, remote session). Ignited by Mike completing the narrator design — the adopt-trigger in the research file. Phase order = dependency order: INTAKE contract first (everything downstream reads it), Saturday run third, graduation last.
 - 2026-08-04 (same session) — Phase 1 spec detail added: INTAKE line grammar + enums, parser contract, four consumer contracts, `extractBylineMeta` per-article seam. Grounded against live staged artifacts.
 - 2026-08-04 (engine-sheet) — Phase 1 Task 2 shipped: `lib/articleIntake.js` parser + 37-assertion suite. BIZ `-` → `bizId: null` (gate decides clearance). Tasks 1/3/4 open.
+- 2026-08-04 (engine-sheet) — Phase 1 Task 1 shipped: INTAKE spec into STORY_TEMPLATE §5 + wake-3 prompt tail in `cron-desk-run.js`. Build amendment: model emits 2-field (no-id) lines; gate resolves ids (see §spec detail).

@@ -391,9 +391,27 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
     for (const w of wire) L.push(w);
     L.push('');
   }
+  // pipeline.45 Phase 1 — INTAKE block: the machine-parseable index of the
+  // piece. Parsed by lib/articleIntake.js at the gate; ids deliberately NOT
+  // asked for — the writer state carries no POPIDs (prose-leak class) and the
+  // gate resolves name->id deterministically into the .staged.json sidecar.
+  L.push('END your article with this exact two-part tail (working metadata, not prose):');
+  L.push('');
+  L.push('First, an INTAKE section indexing what you printed. Strict line grammar — one fact');
+  L.push('per line, pipe-separated fields, nothing else in the section:');
+  L.push('## INTAKE');
+  L.push('NAMES: <citizen name as printed> | <quoted-source OR subject OR mentioned>');
+  L.push('BIZ: <business/org name as printed> | <quoted-source OR subject OR mentioned>');
+  L.push('STORYLINE: <short-kebab-case-slug for the storyline this piece moves> | <advanced OR opened OR closed OR referenced>');
+  L.push('HOOD: <one neighborhood the story lives in>');
+  L.push('CLAIM: <one load-bearing fact or number from your article> | <the source ref backing it, from your state above>');
+  L.push('One NAMES line per named citizen, one BIZ line per named business/org, one HOOD line');
+  L.push('per neighborhood, one CLAIM line per load-bearing fact. Index ONLY what your article');
+  L.push('actually prints — never add a person or claim to INTAKE that is not in the piece.');
+  L.push('');
   // Task 2.5.3 — self-scoring footer (pressure-test #6): declared, machine-
   // checkable, stripped before publication by the Saturday compile.
-  L.push('END your article with this exact one-line footer (working metadata, not prose):');
+  L.push('Second, this exact one-line footer:');
   L.push('<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->');
   L.push('');
   return L.join('\n');

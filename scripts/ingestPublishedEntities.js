@@ -482,6 +482,57 @@ function parseBusinessesNamed(sectionLines) {
 }
 
 // ---------------------------------------------------------------------------
+// INTAKE block parser (pipeline.45, 2026-08-05) — narrator-era editions carry
+// per-article `## INTAKE` claim registers instead of a single NAMES INDEX.
+// Line grammar (docs/plans/2026-08-04-newsroom-canon-flow.md §Phase 1 spec —
+// note the field ORDER is name-first, the inverse of NAMES INDEX):
+//   NAMES: Lucia Polito | POP-00654 | quoted-source
+//   BIZ: Rico's Auto | BIZ-0112 | mentioned
+// Every INTAKE section in the file contributes; rows dedup by ID-else-name.
+// Output mirrors parseNamesIndex/parseBusinessesNamed shapes so downstream
+// (resolveCitizens routing, usage rows) is untouched.
+// ---------------------------------------------------------------------------
+function parseIntakeBlocks(lines) {
+  const citizens = [];
+  const businesses = [];
+  const seenC = new Set();
+  const seenB = new Set();
+  let inBlock = false;
+  for (const raw of lines) {
+    const line = raw.trim();
+    if (/^##\s+INTAKE\s*$/.test(line)) { inBlock = true; continue; }
+    if (inBlock && (/^##\s/.test(line) || /^={3,}/.test(line) || /^By\s/.test(line))) inBlock = false;
+    if (!inBlock) continue;
+    const m = line.match(/^(NAMES|BIZ):\s*(.+)$/);
+    if (!m) continue;
+    const parts = m[2].split('|').map(p => p.trim());
+    const key = String(parts[1] || parts[0] || '').toUpperCase();
+    if (!key) continue;
+    if (m[1] === 'NAMES') {
+      if (seenC.has(key)) continue;
+      seenC.add(key);
+      citizens.push({
+        popId: parts[1] || null,
+        prefix: parts[1] ? parts[1].split('-')[0] : null,
+        fullName: parts[0] || '',
+        description: parts[2] || '',
+        format: parts[1] ? 'strict' : 'freeform',
+      });
+    } else {
+      if (seenB.has(key)) continue;
+      seenB.add(key);
+      businesses.push({
+        bizId: parts[1] || 'NEW',
+        name: parts[0] || '',
+        sector: '',
+        neighborhood: '',
+      });
+    }
+  }
+  return { citizens, businesses };
+}
+
+// ---------------------------------------------------------------------------
 // Cycle resolution from filename (edition only)
 // ---------------------------------------------------------------------------
 function extractCycleFromFilename(filename) {
@@ -1115,6 +1166,21 @@ async function main() {
           path.basename(fullPath) + ' --inject` to add strict sections (idempotent).');
       }
     }
+  }
+
+  // pipeline.45 (2026-08-05) — merge per-article INTAKE blocks. Narrator-era
+  // editions carry these instead of (or alongside) the footer sections; merge
+  // additively with ID-else-name dedup so mixed-format files never double-mint.
+  const intakeParsed = parseIntakeBlocks(lines);
+  if (intakeParsed.citizens.length || intakeParsed.businesses.length) {
+    const keyC = c => String(c.popId || c.fullName || '').toUpperCase();
+    const keyB = b => String((b.bizId && b.bizId !== 'NEW') ? b.bizId : b.name || '').toUpperCase();
+    const haveC = new Set(parsedCitizens.map(keyC));
+    const haveB = new Set(parsedBusinesses.map(keyB));
+    let addedC = 0, addedB = 0;
+    for (const c of intakeParsed.citizens) if (!haveC.has(keyC(c))) { parsedCitizens.push(c); addedC++; }
+    for (const b of intakeParsed.businesses) if (!haveB.has(keyB(b))) { parsedBusinesses.push(b); addedB++; }
+    console.log('[INTAKE] merged ' + addedC + ' citizen + ' + addedB + ' business row(s) from per-article INTAKE blocks.');
   }
 
   console.log(`Parsed: ${parsedCitizens.length} citizen rows, ${parsedBusinesses.length} business rows` +

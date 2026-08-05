@@ -37,9 +37,10 @@
  *   recordBylineUsage; Timestamp is sim clock ('C<n>'), never Gregorian.
  *
  * Usage:
- *   node scripts/cron-saturday-run.js --step sweep  --cycle 102 [--apply]
- *   node scripts/cron-saturday-run.js --step sheets --cycle 102 [--apply]
- *   node scripts/cron-saturday-run.js --cycle 102 [--apply]   # all runnable steps
+ *   node scripts/cron-saturday-run.js [--cycle 102] [--apply]        # full run
+ *   node scripts/cron-saturday-run.js --step audit [--cycle 102]     # one step
+ *   (--cycle optional — defaults to lib/getCurrentCycle, the engine.81 truth
+ *    source; the Saturday crontab entry passes no cycle and no step)
  *
  * DRY-RUN IS THE DEFAULT (engine.91 T2 convention): without --apply nothing
  * posts to Supermemory and nothing writes a sheet — the run prints what it
@@ -707,8 +708,11 @@ async function stepPublish(cycle) {
 
 // ---------------------------------------------------------------------------
 async function main() {
-  const cycle = arg('--cycle', null);
-  if (!cycle) throw new Error('--cycle <N> is required');
+  // --cycle overrides; otherwise the single source of truth (engine.81 —
+  // freshest world_summary; noArgv because this script parses its own flags
+  // and getCurrentCycle's argv scan would eat e.g. `--top 9`). Exits loudly
+  // on failure — a cron must never run against a guessed cycle.
+  const cycle = arg('--cycle', null) || require(path.join(ROOT, 'lib', 'getCurrentCycle'))({ noArgv: true });
   const step = arg('--step', null);
   console.log('Saturday run — c' + cycle + (APPLY ? ' [APPLY]' : ' [dry-run]'));
   const dispatch = {

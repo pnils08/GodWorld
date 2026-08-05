@@ -645,6 +645,7 @@ change under you.
 | 07:30 / 12:30 / 21:30 | `scripts/citizen-wake.js --wake=...` | Citizen-loop wake: Sheets + DeepSeek reflection → Supermemory page + gated `Reflection_Intake` row |
 | daily 17:00 | `scripts/citizen-exchange.js` | One agent-to-agent exchange per day → Supermemory + intake row; transcripts in `output/exchanges/` |
 | daily 08:00 | `scripts/notebooklmDailyNews.js` | Source-grounded NotebookLM newsroom listening brief; not canon |
+| Sat 16:00 | `scripts/cron-saturday-run.js --apply` | pipeline.45 Saturday run: EIC accuracy scorecard (%-to-90 graduation metric) → curation → Mags narration → canon door (ingestEdition + permanent NotebookLM) → per-article Supermemory sweep → Citizen_Media_Usage/Storyline_Ledger ingest. THE weekly publication event |
 | every 6h | `scripts/server-health-check.sh` | Disk/RAM/PM2/dashboard thresholds; Discord alert only on breach (silent when healthy) |
 | Wed 04:00 | `scripts/weekly-maintenance.sh` | Engine health audit; Discord alert on issues |
 | 1st of month 03:00 | `scripts/snapshot-droplet.sh` | DigitalOcean snapshot, keeps 1 |

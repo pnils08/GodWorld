@@ -7,7 +7,8 @@
  * Exits 0 on pass, 1 on failure.
  */
 
-const { articleCustomId, articleDoc, usageRowsFor, ROLE_TO_USAGE, aggregateStorylineSignals } = require('./cron-saturday-run');
+const { articleCustomId, articleDoc, usageRowsFor, ROLE_TO_USAGE,
+  aggregateStorylineSignals, mergeStorylineLedger, STORYLINE_LEDGER_HEADERS } = require('./cron-saturday-run');
 
 let passed = 0;
 let failed = 0;
@@ -92,6 +93,43 @@ console.log('Test 5: aggregateStorylineSignals');
   assert('hoods deduped across articles', JSON.stringify(sig[0].hoods) === JSON.stringify(['Fruitvale', 'Uptown']));
   assert('citizens: resolved popids only', JSON.stringify(sig[0].citizens) === JSON.stringify(['POP-00001']));
   assert('free-form slug accepted (no registry check)', sig.some(s => s.slug === 'new-thread'));
+}
+
+console.log('Test 6: mergeStorylineLedger');
+{
+  const sig = (slug, verbs, extra) => Object.assign({
+    slug, advanced: 0, opened: 0, closed: 0, referenced: 0,
+    articles: ['a1'], citizens: [], hoods: [], desks: []
+  }, verbs, extra || {});
+  const H = STORYLINE_LEDGER_HEADERS;
+
+  // fresh tab (headers only) → all appends
+  const fresh = mergeStorylineLedger([H], [sig('new-thread', { opened: 1 })], '103');
+  assert('fresh: 1 append 0 updates', fresh.appends.length === 1 && fresh.updates.length === 0);
+  assert('fresh: keyed + cycles + status', fresh.appends[0][0] === 'new-thread' &&
+    fresh.appends[0][1] === '103' && fresh.appends[0][2] === '103' && fresh.appends[0][3] === 'open');
+
+  // existing row accumulates + repositions LastCycle
+  const existing = [H, ['transit-hub', '101', '102', 'open', 3, 1, 0, 2, 4, 'POP-00001', 'Fruitvale', 'civic']];
+  const m = mergeStorylineLedger(existing,
+    [sig('transit-hub', { advanced: 2, referenced: 1 }, { citizens: ['POP-00002', 'POP-00001'], hoods: ['Uptown'], desks: ['business'], articles: ['a1', 'a2'] })], '103');
+  assert('update not append', m.updates.length === 1 && m.appends.length === 0);
+  const row = m.updates[0].row;
+  assert('sheetRow preserved', m.updates[0].sheetRow === 2);
+  assert('counts accumulate', row[4] === 5 && row[7] === 3 && row[8] === 6);
+  assert('LastCycle bumped, FirstCycle kept', row[2] === '103' && row[1] === '101');
+  assert('lists deduped-merged', row[9] === 'POP-00001,POP-00002' && row[10] === 'Fruitvale,Uptown' && row[11] === 'civic,business');
+
+  // status transitions
+  const closedRow = [H, ['done-arc', '99', '100', 'open', 1, 0, 0, 0, 1, '', '', '']];
+  const closes = mergeStorylineLedger(closedRow, [sig('done-arc', { closed: 1 })], '103');
+  assert('closed verb closes', closes.updates[0].row[3] === 'closed');
+  const reopens = mergeStorylineLedger([H, ['done-arc', '99', '100', 'closed', 1, 0, 1, 0, 1, '', '', '']],
+    [sig('done-arc', { advanced: 1 })], '104');
+  assert('advance reopens', reopens.updates[0].row[3] === 'open');
+  const refOnly = mergeStorylineLedger([H, ['done-arc', '99', '100', 'closed', 1, 0, 1, 0, 1, '', '', '']],
+    [sig('done-arc', { referenced: 1 })], '104');
+  assert('reference never flips status', refOnly.updates[0].row[3] === 'closed');
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

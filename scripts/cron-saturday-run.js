@@ -220,16 +220,24 @@ function entryByline(stem) {
 }
 
 // ---------------------------------------------------------------------------
-// Step 6b — storyline signal aggregation (Mike-direct 2026-08-05: "open the
-// door to ingest storylines to ledgers to keep high-signal storylines open,
-// but avoid pigeonholing"). Anti-pigeonhole contract: slugs are REPORTER-
-// AUTHORED free-form kebab — never validated against a pre-approved list,
-// never constrained by the tracker. The signal file follows the reporting;
-// curation (step 2) ranks on it. The Storyline_Tracker WRITE is deliberately
-// deferred: the live tab shows header drift (21-cell rows vs 26 headers,
-// id-like values in the Timestamp column, checked 2026-08-05) — engine-owned
-// tab, rule on the drift before writing rows into it.
+// Step 6b — storyline signal aggregation + Storyline_Ledger upsert
+// (Mike-direct 2026-08-05: "open the door to ingest storylines to ledgers to
+// keep high-signal storylines open, but avoid pigeonholing"; the OLD
+// Storyline_Tracker is DISCONTINUED — this replaces it, slim by design).
+//
+// Anti-pigeonhole contract: slugs are REPORTER-AUTHORED free-form kebab —
+// never validated against a pre-approved list. The ledger follows the
+// reporting: any advanced/opened signal (re)opens a thread, a closed verb
+// with no same-week advance closes it, a bare reference never flips status.
+// Dormancy is DERIVED by readers from LastCycle age — deliberately not a
+// stored column, so the tab cannot rot the way the old tracker did
+// (IsStale/CoverageGap et al. were stored-derived and drifted).
 // ---------------------------------------------------------------------------
+const STORYLINE_LEDGER_TAB = 'Storyline_Ledger';
+const STORYLINE_LEDGER_HEADERS = ['StorylineId', 'FirstCycle', 'LastCycle', 'Status',
+  'Advanced', 'Opened', 'Closed', 'Referenced', 'Articles', 'Citizens', 'Hoods', 'Desks'];
+const LEDGER_LIST_CAP = 15;
+
 function aggregateStorylineSignals(set) {
   const bySlug = {};
   for (const entry of set) {
@@ -238,12 +246,14 @@ function aggregateStorylineSignals(set) {
     for (const s of (intake.storylines || [])) {
       const agg = bySlug[s.slug] || (bySlug[s.slug] = {
         slug: s.slug, advanced: 0, opened: 0, closed: 0, referenced: 0,
-        articles: [], hoods: [], citizens: []
+        articles: [], hoods: [], citizens: [], desks: []
       });
       if (agg[s.verb] !== undefined) agg[s.verb]++;
       agg.articles.push(entry.stem);
       for (const h of (intake.hoods || [])) if (!agg.hoods.includes(h)) agg.hoods.push(h);
       for (const n of (intake.names || [])) if (n.popid && !agg.citizens.includes(n.popid)) agg.citizens.push(n.popid);
+      const desk = entry.sidecar.desk;
+      if (desk && !agg.desks.includes(desk)) agg.desks.push(desk);
     }
   }
   // High-signal first: moves (advanced+opened+closed) beat passive references.
@@ -252,8 +262,70 @@ function aggregateStorylineSignals(set) {
     b.articles.length - a.articles.length);
 }
 
-function stepSignals(cycle) {
-  console.log('--- step 6b: storyline signal aggregation ---');
+// Pure merge: existing sheet data (headers + rows) × week's signals → row ops.
+// Update rows keep their sheet position; new slugs append. Counts accumulate;
+// list columns dedupe under LEDGER_LIST_CAP.
+function mergeStorylineLedger(existing, signals, cycle) {
+  const h = (existing[0] && existing[0].length ? existing[0] : STORYLINE_LEDGER_HEADERS).map(c => String(c).trim());
+  const idx = {}; h.forEach((c, i) => { idx[c] = i; });
+  const byId = new Map();
+  existing.slice(1).forEach((r, i) => {
+    const id = String(r[idx.StorylineId] || '').trim();
+    if (id) byId.set(id, { r, sheetRow: i + 2 });
+  });
+  const num = v => { const n = parseInt(v, 10); return Number.isFinite(n) ? n : 0; };
+  const mergeList = (curStr, add) => {
+    const list = String(curStr || '').split(',').map(x => x.trim()).filter(Boolean);
+    for (const a of (add || [])) if (!list.includes(a) && list.length < LEDGER_LIST_CAP) list.push(a);
+    return list.join(',');
+  };
+  const statusFor = (s, prev) => {
+    if (s.advanced + s.opened > 0) return 'open';
+    if (s.closed > 0) return 'closed';
+    return prev || 'open';   // reference-only weeks never flip status
+  };
+  const updates = [], appends = [];
+  for (const s of signals) {
+    const cur = byId.get(s.slug);
+    if (cur) {
+      const row = cur.r.slice();
+      while (row.length < h.length) row.push('');
+      row[idx.LastCycle] = String(cycle);
+      row[idx.Status] = statusFor(s, String(cur.r[idx.Status] || '').trim());
+      row[idx.Advanced] = num(row[idx.Advanced]) + s.advanced;
+      row[idx.Opened] = num(row[idx.Opened]) + s.opened;
+      row[idx.Closed] = num(row[idx.Closed]) + s.closed;
+      row[idx.Referenced] = num(row[idx.Referenced]) + s.referenced;
+      row[idx.Articles] = num(row[idx.Articles]) + s.articles.length;
+      row[idx.Citizens] = mergeList(row[idx.Citizens], s.citizens);
+      row[idx.Hoods] = mergeList(row[idx.Hoods], s.hoods);
+      row[idx.Desks] = mergeList(row[idx.Desks], s.desks);
+      updates.push({ sheetRow: cur.sheetRow, row });
+    } else {
+      appends.push(h.map(col => {
+        switch (col) {
+          case 'StorylineId': return s.slug;
+          case 'FirstCycle':  return String(cycle);
+          case 'LastCycle':   return String(cycle);
+          case 'Status':      return statusFor(s, null);
+          case 'Advanced':    return s.advanced;
+          case 'Opened':      return s.opened;
+          case 'Closed':      return s.closed;
+          case 'Referenced':  return s.referenced;
+          case 'Articles':    return s.articles.length;
+          case 'Citizens':    return s.citizens.slice(0, LEDGER_LIST_CAP).join(',');
+          case 'Hoods':       return s.hoods.slice(0, LEDGER_LIST_CAP).join(',');
+          case 'Desks':       return s.desks.slice(0, LEDGER_LIST_CAP).join(',');
+          default:            return '';
+        }
+      }));
+    }
+  }
+  return { updates, appends };
+}
+
+async function stepSignals(cycle) {
+  console.log('--- step 6b: storyline signals → Storyline_Ledger ---');
   const signals = aggregateStorylineSignals(loadStagedSet(cycle));
   const outPath = path.join(ROOT, 'output', 'storyline_signal_c' + cycle + '.json');
   fs.writeFileSync(outPath, JSON.stringify({ cycle: String(cycle), signals }, null, 2));
@@ -262,7 +334,18 @@ function stepSignals(cycle) {
     console.log('  ' + s.slug + ': ' + s.advanced + ' advanced / ' + s.opened + ' opened / ' +
       s.closed + ' closed / ' + s.referenced + ' referenced (' + s.articles.length + ' article(s))');
   }
-  return { signals: signals.length };
+  if (!signals.length) return { signals: 0, written: 0 };
+  if (!APPLY) {
+    console.log('(dry-run) would upsert ' + signals.length + ' row(s) into ' + STORYLINE_LEDGER_TAB);
+    return { signals: signals.length, written: 0 };
+  }
+  const sheets = require(path.join(ROOT, 'lib', 'sheets'));
+  const data = await sheets.getRawSheetData(STORYLINE_LEDGER_TAB);
+  const { updates, appends } = mergeStorylineLedger(data, signals, cycle);
+  for (const u of updates) await sheets.updateRangeByPosition(STORYLINE_LEDGER_TAB, u.sheetRow, 1, [u.row]);
+  if (appends.length) await sheets.appendRows(STORYLINE_LEDGER_TAB, appends);
+  console.log(updates.length + ' row(s) updated, ' + appends.length + ' appended to ' + STORYLINE_LEDGER_TAB);
+  return { signals: signals.length, written: updates.length + appends.length };
 }
 
 // ---------------------------------------------------------------------------
@@ -303,4 +386,5 @@ if (require.main === module) {
   main().catch(err => { console.error('[saturday] Fatal: ' + err.message); process.exit(1); });
 }
 
-module.exports = { loadStagedSet, articleCustomId, articleDoc, usageRowsFor, ROLE_TO_USAGE, aggregateStorylineSignals };
+module.exports = { loadStagedSet, articleCustomId, articleDoc, usageRowsFor, ROLE_TO_USAGE,
+  aggregateStorylineSignals, mergeStorylineLedger, STORYLINE_LEDGER_HEADERS };

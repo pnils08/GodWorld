@@ -79,7 +79,8 @@ Read/written by Node.js scripts during edition production.
 | **Storyline_Intake** | 346 | SCRIPT | SCRIPT | Storyline intake from editions |
 | **Citizen_Usage_Intake** | 852 | SCRIPT | SCRIPT | Citizen usage tracking with POPID |
 | **Citizen_Media_Usage** | 500 | ENGINE, SCRIPT | ENGINE, SCRIPT | Citizen media appearances (cleaned S99) |
-| **Storyline_Tracker** | 212 | ENGINE, SCRIPT, DASHBOARD | ENGINE, SCRIPT | Storyline status and health |
+| **Storyline_Tracker** | 212 | ENGINE, SCRIPT, DASHBOARD | ENGINE, SCRIPT | DISCONTINUED 2026-08-05 (Mike-direct) — superseded by Storyline_Ledger; legacy writers still touch it |
+| **Storyline_Ledger** | 1 | SCRIPT (Saturday run, curation) | SCRIPT (cron-saturday-run.js step 6b) | INTAKE-fed storyline threads (pipeline.45) — reporter slugs, verb-driven status |
 | **Employment_Roster** | 658 | SCRIPT | SCRIPT | Citizen-employer linkage |
 | **Health_Cause_Queue** | 3 | ENGINE | ENGINE | Phase 11 health cause assignments |
 

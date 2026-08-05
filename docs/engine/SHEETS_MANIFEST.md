@@ -66,7 +66,8 @@ This manifest is the registry of all active Google Sheets tabs hooked into the P
 - **`Media_Ledger`**: Tracking media articles published.
 - **`Media_Intake`**: Parsing published articles back into the simulation.
 - **`Media_Briefing`**: Pre-publish directives to the LLMs.
-- **`Storyline_Tracker`**: Manual storylines designated for media coverage.
+- **`Storyline_Tracker`**: DISCONTINUED (Mike-direct 2026-08-05) — superseded by `Storyline_Ledger`; legacy engine writers (storylineWeavingEngine et al.) still touch it, retirement is separate work.
+- **`Storyline_Ledger`**: INTAKE-fed storyline threads (pipeline.45). Upserted by `scripts/cron-saturday-run.js` step 6b from reporter-authored INTAKE slugs; 12 slim columns, status flips on verbs only, dormancy derived by readers from `LastCycle` (never stored).
 - **`Storyline_Intake`**: Parsing media coverage into storyline progress.
 - **`Story_Seed_Deck`**: Queued ideas for LLM articles.
 - **`Story_Hook_Deck`**: Curated hooks sent to the V3 generator.

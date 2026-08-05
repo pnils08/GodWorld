@@ -117,6 +117,20 @@ The Sheets-ceiling eval (`2026-07-31-sheets-ceiling-export-eval.md`) returned **
 
 ---
 
+## Addendum — the loop doctrine (builder-direct, 2026-08-04)
+
+**"The loop from sheet to cron is the goal — both surface the same life. Sheets are the persistence; the cron is life. How an LLM chooses to react to what the engine gives them is the citizen living."**
+
+Consequences for every thread in this file:
+
+1. **Sheet → cron must be lossless.** The wake must see everything persistence knows — spouse, children, household, health, employment — not just bonds. Verified gap: `lib/wakePerception.js` reads `Relationship_Bonds` but zero direct family columns (C102).
+2. **Cron → sheet must write back more than dials.** The handles already exist: the wake classifier emits `{event, affect, tension, resolves}` per reflection into `Reflection_Intake`; `tension`/`resolves` are relationship signals. A bond write-back consumer riding the existing `compressLifeHistory` drain (same gate, same `applied='yes'` audit) can nudge `Relationship_Bonds.Intensity` by interaction outcome — no new write path, engine-sheet territory.
+3. **Tier doctrine stands underneath:** tier 5 is SimCity's aggregate (Generic_Citizens waiting room); tiers 1–4 are the Sims. The loop above governs tracked citizens; tier-5 family materializes on need (family-match drip, GC courtship — live since S324).
+
+This doctrine supersedes the framing of these as separate "gaps" — they are one roadmap: close the sheet↔cron loop so persistence and life mirror each other.
+
+---
+
 ## Applications (living)
 
 - 2026-08-03 — Filed from the builder's game-environment review session (Kimi CLI). Awaiting thread picks.

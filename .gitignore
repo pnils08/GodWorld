@@ -71,3 +71,7 @@ output/cron-compare/
 # history, and it is FAIL-OPEN when the stamp is missing. Tracked by accident
 # until S348, where it dirtied every lane's tree at every boot. (S348)
 .claude/state/session-start.txt
+
+# godworld_batch_ingest skill writes its run log to cwd (repo root) — runtime
+# log, not a doc; belongs untracked like logs/. (S354)
+/changelog.md

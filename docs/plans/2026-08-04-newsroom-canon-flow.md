@@ -115,3 +115,4 @@ One cron, six steps, in order:
 
 - 2026-08-04 — Initial plan (research-build, remote session). Ignited by Mike completing the narrator design — the adopt-trigger in the research file. Phase order = dependency order: INTAKE contract first (everything downstream reads it), Saturday run third, graduation last.
 - 2026-08-04 (same session) — Phase 1 spec detail added: INTAKE line grammar + enums, parser contract, four consumer contracts, `extractBylineMeta` per-article seam. Grounded against live staged artifacts.
+- 2026-08-04 (engine-sheet) — Phase 1 Task 2 shipped: `lib/articleIntake.js` parser + 37-assertion suite. BIZ `-` → `bizId: null` (gate decides clearance). Tasks 1/3/4 open.

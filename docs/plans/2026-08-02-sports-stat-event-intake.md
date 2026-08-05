@@ -95,9 +95,10 @@ this plan before engine-sheet starts Wave 0.
    append the same event. This plan must replace the per-key lock with one
    global sports-write lock before any mutation feature is enabled.
 3. `As_Roster` contains two physical headers named `SO`: batting strikeouts at
-   column O and pitching strikeouts at column S. The object reader collapses
-   duplicate headers, so engine.40 must use a header-plus-row snapshot and
-   internal stat keys rather than object-property lookup.
+   column O and pitching strikeouts at column T, with `SV` at S between them.
+   The object reader collapses duplicate headers, so engine.40 must use a
+   header-plus-row snapshot and internal stat keys rather than object-property
+   lookup. `SV` at S and `WAR` at V remain read-only in this intake.
 4. `As_Roster` and `Oaks_Roster` already hold Mike's handy current stat lines.
    They remain the live structured stores; feed `Stats` remains story/event
    detail and never becomes a hidden roster payload.
@@ -195,7 +196,7 @@ Blank `after` values never erase a nonblank current value.
 | Team | Internal keys and physical columns | Validation |
 |---|---|---|
 | A's batting | `batting.ab` I, `batting.avg` J, `batting.h` K, `batting.hr` L, `batting.rbi` M, `batting.sb` N, `batting.so` O | Counts are non-negative integers; AVG is a reviewed decimal from 0 through 1 |
-| A's pitching | `pitching.ip` P, `pitching.era` Q, `pitching.wl` R, `pitching.so` S, `pitching.bb` T | IP uses baseball thirds `.0/.1/.2`; ERA is non-negative; W-L is whole-number `W-L`; counts are non-negative integers |
+| A's pitching | `pitching.ip` P, `pitching.era` Q, `pitching.wl` R, `pitching.so` T, `pitching.bb` U; current `SV` S and `WAR` V are displayed but not allowlisted for writes | IP uses baseball thirds `.0/.1/.2`; ERA is non-negative; W-L is whole-number `W-L`; counts are non-negative integers |
 | Oaks | `basketball.ppg` I, `basketball.asst` J, `basketball.reb` K, `basketball.stl` L, `basketball.fgPct` M, `basketball.threePct` N | Per-game values are non-negative decimals; percentages are reviewed values from 0 through 100 with optional `%` preserved |
 
 The preview shows unchanged, changed, blank-source, and invalid fields
@@ -574,10 +575,12 @@ deployment, closing the cross-session double-append finding in
   **FIX-BEFORE-DEPLOY**. Its source remediation landed in `1bbedbd9` and
   `5d82fc71`; Codex closed the remaining early-shift window in `ef69f4c8`.
   Private hostname/TLS transport and public-port restriction are deployed.
-  Remaining gates are remediation re-review, the parent workspace's
-  loopback/Secure-cookie runtime restart and authenticated sports proof, item
-  5's live roster check, and Mike's separate approval for each proving write.
-  See Task 10.
+  The dashboard was restarted after reconciling the live 22-column A's roster;
+  authenticated overview and both team workspaces now return 200, all 90 A's
+  POPIDs resolve, and no A's middle-name cells are populated. Sports writes
+  remain disabled and reject with 403. Remaining gates are remediation
+  re-review, loopback/Secure-cookie write configuration, authenticated preview
+  proof, and Mike's separate approval for each proving write. See Task 10.
 
 ### Task 10: Clear the independent-review fix list (engine-sheet)
 
@@ -832,6 +835,12 @@ compensation.
   loopback/Secure-cookie sports-write restart, authenticated sports proof,
   live-roster check, and every proving write remain open. No Sheet write
   occurred.
+- 2026-08-03 — Codex reconciled the live A's `A:V` roster schema, moved the
+  writable pitching SO/BB map to T/U, kept SV/WAR read-only, restarted only the
+  dashboard, and proved private authenticated overview/A's/Oaks reads. The
+  write policy reported disabled and the write route returned 403; no Sheet
+  write occurred. The live middle-name check found 0 of 90 populated and all
+  90 POPIDs resolved.
 - 2026-08-02 — Drafted and registered from the adopted sports workspace
   research, the source-built engine.89 boundary, the current roster/feed/health
   implementations, and engine.90 archive research. No implementation,
@@ -868,3 +877,7 @@ compensation.
   recorded private Tailscale transport deployment; retained remediation
   re-review, runtime restart, authenticated sports proof, live-roster, and
   proving-write gates.
+- 2026-08-03 (Codex) — Reconciled the A's 22-column roster contract and
+  completed the dashboard restart, authenticated live-read, disabled-write,
+  and middle-name/POPID proofs; retained re-review, secure write configuration,
+  authenticated preview, and proving-write gates.

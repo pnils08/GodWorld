@@ -11,14 +11,22 @@ const STATE_FIELDS = Object.freeze([
   'EconomicFootprint', 'CommunityInvestment', 'MediaProfile'
 ]);
 const POPID_RE = /^POP-\d{5}$/;
+const AS_READ_ONLY_STATS = Object.freeze([
+  Object.freeze({ key: 'pitching.sv', columnIndex: 18, label: 'SV' }),
+  Object.freeze({ key: 'baseball.war', columnIndex: 21, label: 'WAR' }),
+]);
 const ROSTER_SCHEMAS = Object.freeze({
   as: Object.freeze({
     sheetName: 'As_Roster',
     headers: Object.freeze([
       'POPID', 'First', 'Middle', 'Last', 'Tier', 'Position', 'Team', 'Salary',
-      'AB', 'AVG', 'H', 'HR', 'RBI', 'SB', 'SO', 'IP', 'ERA', 'W-L', 'SO', 'BB',
+      'AB', 'AVG', 'H', 'HR', 'RBI', 'SB', 'SO', 'IP', 'ERA', 'W-L', 'SV', 'SO',
+      'BB', 'WAR',
     ]),
-    stats: Object.freeze(Object.values(STAT_FIELD_MAPS.As_Roster)),
+    stats: Object.freeze([
+      ...Object.values(STAT_FIELD_MAPS.As_Roster),
+      ...AS_READ_ONLY_STATS,
+    ].sort((left, right) => left.columnIndex - right.columnIndex)),
   }),
   oaks: Object.freeze({
     sheetName: 'Oaks_Roster',

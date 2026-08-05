@@ -692,11 +692,12 @@ real proving event remain builder gates even after source approval.
 - **Status:** [ ] in progress — Waves A–C are source-built and the approved
   engine.40/engine.77 follow-on remediation landed through `5d82fc71` and
   `ef69f4c8`. Private hostname/TLS transport and direct-port restriction are
-  deployed. The original Opus review is complete; remediation re-review,
-  loopback/Secure-cookie sports-write restart, authenticated sports
-  read/preview proof, separately approved live append/proving writes, and
-  archive gates remain. Engine.77 proving must be attended and must not overlap
-  a Cycle.
+  deployed. The dashboard was restarted after reconciling the live 22-column
+  A's roster, and authenticated overview plus both team workspaces pass with
+  sports writes disabled. The original Opus review is complete; remediation
+  re-review, loopback/Secure-cookie write configuration, authenticated preview
+  proof, separately approved live append/proving writes, and archive gates
+  remain. Engine.77 proving must be attended and must not overlap a Cycle.
 
 ## Validation matrix
 
@@ -891,6 +892,11 @@ own plan change and builder approval.
   health, login reachability, unauthenticated sports `401`, and removal of the
   public IPv4/IPv6 `3001` rules were verified. No PM2 restart, sports feature
   enablement, or external write occurred.
+- 2026-08-03 — Dashboard restart and private authenticated live-read proof
+  completed after reconciling the A's roster from the stale 20-column contract
+  to live `A:V`. Overview, A's workspace, and Oaks workspace returned 200;
+  sports writes remained disabled and the write route returned 403. No Sheet
+  write occurred.
 
 ## Changelog
 
@@ -927,3 +933,7 @@ own plan change and builder approval.
 - 2026-08-03 (Codex) — Recorded private Tailscale HTTPS deployment and public
   `3001` restriction; retained the loopback/Secure-cookie restart,
   authenticated sports proof, proving-write, and archive gates.
+- 2026-08-03 (Codex) — Reconciled the live A's 22-column contract, restarted
+  the dashboard, and completed authenticated overview/A's/Oaks plus
+  disabled-write proof; retained re-review, secure write configuration,
+  authenticated preview, proving-write, and archive gates.

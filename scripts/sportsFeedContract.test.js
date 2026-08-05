@@ -102,11 +102,15 @@ assert.strictEqual(feedOnly.valid, true, feedOnly.errors.join('; '));
 assert.strictEqual(feedOnly.mutation, null);
 
 assert.strictEqual(contract.STAT_FIELD_MAPS.As_Roster['batting.so'].column, 'O');
-assert.strictEqual(contract.STAT_FIELD_MAPS.As_Roster['pitching.so'].column, 'S');
+assert.strictEqual(contract.STAT_FIELD_MAPS.As_Roster['pitching.so'].column, 'T');
+assert.strictEqual(contract.STAT_FIELD_MAPS.As_Roster['pitching.bb'].column, 'U');
 assert.strictEqual(contract.STAT_FIELD_MAPS.As_Roster['batting.so'].columnIndex, 14);
-assert.strictEqual(contract.STAT_FIELD_MAPS.As_Roster['pitching.so'].columnIndex, 18);
+assert.strictEqual(contract.STAT_FIELD_MAPS.As_Roster['pitching.so'].columnIndex, 19);
+assert.strictEqual(contract.STAT_FIELD_MAPS.As_Roster['pitching.bb'].columnIndex, 20);
 assert.strictEqual(contract.STAT_FIELD_MAPS.As_Roster['batting.so'].label, 'Batting SO');
 assert.strictEqual(contract.STAT_FIELD_MAPS.As_Roster['pitching.so'].label, 'Pitching SO');
+assert.strictEqual(Object.hasOwn(contract.STAT_FIELD_MAPS.As_Roster, 'pitching.sv'), false);
+assert.strictEqual(Object.hasOwn(contract.STAT_FIELD_MAPS.As_Roster, 'baseball.war'), false);
 
 const asStats = contract.validateSportsSubmission(syntheticSubmission('stat-capture', [
   { field: 'batting.so', before: '20', after: '21' },

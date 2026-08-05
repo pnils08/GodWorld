@@ -79,8 +79,8 @@ const STAT_FIELD_MAPS = Object.freeze({
     'pitching.ip': statField('pitching.ip', 'P', 15, 'IP', 'IP', 'innings'),
     'pitching.era': statField('pitching.era', 'Q', 16, 'ERA', 'ERA', 'decimal'),
     'pitching.wl': statField('pitching.wl', 'R', 17, 'W-L', 'W-L', 'record'),
-    'pitching.so': statField('pitching.so', 'S', 18, 'SO', 'Pitching SO', 'integer'),
-    'pitching.bb': statField('pitching.bb', 'T', 19, 'BB', 'BB', 'integer'),
+    'pitching.so': statField('pitching.so', 'T', 19, 'SO', 'Pitching SO', 'integer'),
+    'pitching.bb': statField('pitching.bb', 'U', 20, 'BB', 'BB', 'integer'),
   }),
   Oaks_Roster: Object.freeze({
     'basketball.ppg': statField('basketball.ppg', 'I', 8, 'PPG', 'PPG', 'decimal'),

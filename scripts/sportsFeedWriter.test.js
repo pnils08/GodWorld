@@ -22,7 +22,8 @@ const {
 
 const AS_HEADERS = [
   'POPID', 'First', 'Middle', 'Last', 'Tier', 'Position', 'Team', 'Salary',
-  'AB', 'AVG', 'H', 'HR', 'RBI', 'SB', 'SO', 'IP', 'ERA', 'W-L', 'SO', 'BB',
+  'AB', 'AVG', 'H', 'HR', 'RBI', 'SB', 'SO', 'IP', 'ERA', 'W-L', 'SV', 'SO',
+  'BB', 'WAR',
 ];
 const CITIZEN_HEADERS = CITIZEN_REQUIRED_HEADERS.slice();
 
@@ -157,7 +158,7 @@ function writerHarness(options = {}) {
       values: [
         'POP-90001', 'Synthetic', '', 'Batter', '1', 'CF', "A's", '$1',
         '100', '.300', '30', '5', '20', '4', '21',
-        '12.1', '2.50', '2-1', '33', '7',
+        '12.1', '2.50', '2-1', '2', '33', '7', '1.8',
       ],
     }],
   };
@@ -584,7 +585,7 @@ async function expectCode(promise, code) {
   assert.deepStrictEqual(statResult.updatedRanges, [
     'Oakland_Sports_Feed!A3:T3',
     'As_Roster!O11:O11',
-    'As_Roster!S11:S11',
+    'As_Roster!T11:T11',
   ]);
   assert.strictEqual(statHarness.capturedBatches[0].length, 3);
   assert.deepStrictEqual(
@@ -606,14 +607,14 @@ async function expectCode(promise, code) {
       {
         sheetId: 202,
         rowIndex: 10,
-        columnIndex: 18,
+        columnIndex: 19,
         value: { numberValue: 34 },
         fields: 'userEnteredValue',
       },
     ],
   );
   assert.strictEqual(statHarness.rosterSnapshot.rows[0].values[14], '22');
-  assert.strictEqual(statHarness.rosterSnapshot.rows[0].values[18], '34');
+  assert.strictEqual(statHarness.rosterSnapshot.rows[0].values[19], '34');
   assert.strictEqual(statHarness.rosterSnapshot.rows[0].values[9], '.300');
   assert.strictEqual(statHarness.auditStore.records[1].mutationAction, 'stat-capture');
   assert.strictEqual(statHarness.auditStore.records[1].changedFieldCount, 2);

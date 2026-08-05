@@ -204,11 +204,16 @@ guarantee a moment for every citizen.
 
 ### `As_Roster`
 
-`As_Roster` has 20 columns:
+`As_Roster` has 22 columns:
 
 - identity and roster fields: POPID, name parts, Tier, Position, Team, Salary;
 - current batting-stat fields: AB, AVG, H, HR, RBI, SB, SO;
-- current pitching-stat fields: IP, ERA, W-L, SO, BB.
+- current pitching-stat fields: IP, ERA, W-L, SV, SO, BB;
+- current summary stat: WAR.
+
+The dashboard stat-intake allowlist may update pitching SO at column T and BB
+at column U. SV at column S and WAR at column V are projected for reference but
+remain read-only.
 
 It is also read by several canon/reviewer and reference-building scripts.
 
@@ -247,8 +252,8 @@ Season history remains a separate TrueSource concern.
 
 ## Current entry checklist
 
-Until the source-built dashboard workspace is separately deployed and live-read
-proved, use the Sheet directly:
+The private dashboard workspace is deployed and live-read proved. Sports writes
+remain disabled, so continue to use the Sheet directly for entries:
 
 1. Enter the exact Cycle.
 2. Enter `SeasonType`, `EventType`, and canonical `TeamsUsed` on every row.
@@ -347,9 +352,8 @@ coverage are repaired. Remaining gaps are:
 - the independent review remediation needs re-review; unattended engine.77
   remains disabled until a genuine cross-runtime exclusion mechanism is
   separately designed and approved;
-- the loopback/Secure-cookie sports-write runtime restart, authenticated sports
-  reads/previews, and separately approved stat/engine.77 proving writes remain
-  open;
+- loopback/Secure-cookie sports-write configuration, authenticated preview
+  proof, and separately approved stat/engine.77 proving writes remain open;
 - TrueSource season close remains open until the authoritative source update
   defines its complete payload contract;
 - private remote-browser transport is deployed; secure sports-write environment
@@ -393,3 +397,9 @@ parsers, validators, and consumers through an approved implementation plan.
 - 2026-08-03 (Codex) — Recorded private Tailscale HTTPS deployment and removal
   of public `3001` access. The sports-write runtime restart, authenticated
   sports proof, and every live write remain separately gated.
+- 2026-08-03 (Codex) — Reconciled the live 22-column A's roster contract:
+  pitching SO/BB map to T/U, while SV/WAR at S/V remain read-only.
+- 2026-08-03 (Codex) — Restarted the dashboard and proved authenticated private
+  overview plus both team workspaces against live Sheets. All 90 A's POPIDs
+  resolve, no A's middle-name cells are populated, and the write route remains
+  disabled with a verified 403.

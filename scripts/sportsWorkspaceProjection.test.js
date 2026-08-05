@@ -5,7 +5,8 @@ const { projectSportsWorkspace } = require('./sportsWorkspaceProjection');
 
 const AS_HEADERS = [
   'POPID', 'First', 'Middle', 'Last', 'Tier', 'Position', 'Team', 'Salary',
-  'AB', 'AVG', 'H', 'HR', 'RBI', 'SB', 'SO', 'IP', 'ERA', 'W-L', 'SO', 'BB',
+  'AB', 'AVG', 'H', 'HR', 'RBI', 'SB', 'SO', 'IP', 'ERA', 'W-L', 'SV', 'SO',
+  'BB', 'WAR',
 ];
 const OAKS_HEADERS = [
   'POPID', 'First', 'Middle', 'Last', 'Tier', 'Position', 'Team', 'Salary',
@@ -30,7 +31,7 @@ const result = projectSportsWorkspace({
       values: [
         'POP-90001', 'Synthetic', '', 'Two-Way', '1', 'CF/SP', "A's", '$1',
         '100', '.300', '30', '5', '20', '4', '21',
-        '12.1', '2.50', '2-1', '33', '7',
+        '12.1', '2.50', '2-1', '2', '33', '7', '1.8',
       ],
     }],
   },
@@ -62,8 +63,12 @@ assert.strictEqual(result.teams.as.roster[0].validPopid, true);
 assert.strictEqual(result.teams.as.roster[0].sourceRow, 12);
 assert.strictEqual(result.teams.as.roster[0].statValues['batting.so'], '21');
 assert.strictEqual(result.teams.as.roster[0].statValues['pitching.so'], '33');
+assert.strictEqual(result.teams.as.roster[0].statValues['pitching.sv'], '2');
+assert.strictEqual(result.teams.as.roster[0].statValues['baseball.war'], '1.8');
 assert.strictEqual(result.teams.as.roster[0].stats['Batting SO'], '21');
 assert.strictEqual(result.teams.as.roster[0].stats['Pitching SO'], '33');
+assert.strictEqual(result.teams.as.roster[0].stats.SV, '2');
+assert.strictEqual(result.teams.as.roster[0].stats.WAR, '1.8');
 assert.strictEqual(result.teams.oaks.roster[0].validPopid, false);
 assert.strictEqual(result.teams.oaks.roster[0].statValues['basketball.ppg'], '20.0');
 
@@ -104,13 +109,24 @@ assert.throws(
     cycle: 404,
     asRoster: {
       headers: AS_HEADERS.map((header, index) => (
-        index === 14 ? 'NOT-SO' : index === 18 ? 'SO' : header
+        index === 14 ? 'NOT-SO' : header
       )),
       rows: [],
     },
     oaksRoster: { headers: OAKS_HEADERS, rows: [] },
   }),
   /physical column 15/,
+);
+assert.throws(
+  () => projectSportsWorkspace({
+    cycle: 404,
+    asRoster: {
+      headers: AS_HEADERS.filter((header) => !['SV', 'WAR'].includes(header)),
+      rows: [],
+    },
+    oaksRoster: { headers: OAKS_HEADERS, rows: [] },
+  }),
+  /header layout mismatch/,
 );
 assert.throws(
   () => projectSportsWorkspace({

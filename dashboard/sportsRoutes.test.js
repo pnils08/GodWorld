@@ -49,7 +49,8 @@ async function call(handler, {
 
 const AS_HEADERS = [
   'POPID', 'First', 'Middle', 'Last', 'Tier', 'Position', 'Team', 'Salary',
-  'AB', 'AVG', 'H', 'HR', 'RBI', 'SB', 'SO', 'IP', 'ERA', 'W-L', 'SO', 'BB',
+  'AB', 'AVG', 'H', 'HR', 'RBI', 'SB', 'SO', 'IP', 'ERA', 'W-L', 'SV', 'SO',
+  'BB', 'WAR',
 ];
 const FEED_HEADERS = [
   'Cycle', 'SeasonType', 'EventType', 'TeamsUsed', 'NamesUsed', 'Notes',
@@ -138,7 +139,7 @@ const syntheticSheets = {
       values: [
         'POP-90001', 'Synthetic', '', 'Batter', '1', 'CF', "A's", '$1',
         '100', '.300', '30', '5', '20', '4', '21',
-        '12.1', '2.50', '2-1', '33', '7',
+        '12.1', '2.50', '2-1', '2', '33', '7', '1.8',
       ],
     }],
   },
@@ -308,7 +309,7 @@ assert.deepStrictEqual(
   asWorkspace.body.data.validMutationOptions.statFields
     .filter((field) => field.key.endsWith('.so'))
     .map((field) => [field.label, field.column]),
-  [['Batting SO', 'O'], ['Pitching SO', 'S']],
+  [['Batting SO', 'O'], ['Pitching SO', 'T']],
 );
 
 const invalidTeam = await call(handlers.workspace, { query: { cycle: '404', team: 'Warriors' } });
@@ -493,7 +494,7 @@ assert.deepStrictEqual(
     .map((field) => [field.field, field.column, field.before, field.after]),
   [
     ['batting.so', 'O', '21', '22'],
-    ['pitching.so', 'S', '33', '34'],
+    ['pitching.so', 'T', '33', '34'],
   ],
 );
 assert.strictEqual(asStatPreview.body.data.confirmation.available, false);
@@ -851,7 +852,7 @@ const raw = await rawReader('As_Roster');
 assert.deepStrictEqual(raw.data.headers, AS_HEADERS);
 assert.strictEqual(raw.data.rows[0].rowNumber, 44);
 assert.strictEqual(raw.data.rows[0].values[14], '21');
-assert.strictEqual(raw.data.rows[0].values[18], '33');
+assert.strictEqual(raw.data.rows[0].values[19], '33');
 
 const failingHandlers = createSportsHandlers({
   readSheet: async () => {

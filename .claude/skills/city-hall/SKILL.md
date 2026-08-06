@@ -1,8 +1,8 @@
 ---
 name: city-hall
 description: Run the civic government — voice agents make decisions, tracker updates, canon output. Mags sifts, agents decide.
-version: "2.1"
-updated: 2026-05-11
+version: "2.2"
+updated: 2026-08-05
 tags: [civic, active]
 effort: high
 disable-model-invocation: true
@@ -230,6 +230,8 @@ done
 For any MISSING voice, relaunch with a simpler prompt that explicitly names the output path. Common failure: agent searches for files that don't exist instead of reading the pending_decisions.md.
 
 ## Step 5.6: City Clerk (Closer/Verifier)
+
+**Model tier for the City Clerk: may run on a cheaper tier (Haiku) — checklist verification, not canon generation (C101 G-R4, Mike-authorized experiment, validated: 5/6 checks clean, the 1 failure a genuine catch).** This does NOT extend to Steps 3–5 voice/project generation — the Sonnet mandate above (S258 RB-4, G-R2) stands; C101's quality issues originated from Sonnet-tier schema imprecision, which a cheaper tier would compound, not fix.
 
 City Clerk runs LAST. Not a participant — a closer. Checks:
 - Did tracker updates save correctly?

@@ -349,3 +349,9 @@ plan requires a later, separate approval.
 - 2026-08-01 — Builder generalized the archive-ledger principle to all sim
   exits (death, traded, closed business); recorded in Applications. engine.96
   Task 7 is the first non-citizen application.
+- 2026-08-05 — Allocator open question ANSWERED for the BIZ-ID case (S356):
+  persisted high-water mark in World_Config + active-scan max guard, archive
+  never scanned, move protocol bumps the mark. Spec in
+  [[../plans/2026-08-01-business-lifecycle-generator]] Task 7 step 1. The
+  engine.90 POPID allocator should adopt the same pattern; the resolver
+  question (identity lookup across active+archive) remains open.

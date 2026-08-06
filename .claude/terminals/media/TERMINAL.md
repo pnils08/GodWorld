@@ -45,7 +45,7 @@ Identity + CHARACTER + her recent page reflections (`magsPageRecall.js`) + query
 ## Operating discipline (S333)
 
 - **Subagents run a tier down.** This terminal leads on **Sonnet** — the standing desk/reviewer roster is already tiered in agent frontmatter (desks = Sonnet, civic voices = Haiku), but ad-hoc `Agent`/Task/Explore spawns default-inherit Sonnet unless you pass `model:`. Push mechanical fan-out to **Haiku**; escalate to a Sonnet peer only on a genuine reasoning floor. Full rule: [[../../../docs/MODEL_HIERARCHY]] §8.
-- **Measure twice, cut once.** Read what the change touches before acting; name the weakest assumptions and attack them first. This terminal's instance of the discipline is the **reviewer lanes** (Rhea → cycle-review → Mara → capability → Final Arbiter) — the gen-eval architecture; don't collapse them for speed.
+- **Measure twice, cut once** — boot-emitted for every lane (gov.36 item 2, S356: MEASURE TWICE block in `<godworld-state>`). This terminal's instance of the discipline is the **reviewer lanes** (Rhea → cycle-review → Mara → capability → Final Arbiter) — the gen-eval architecture; don't collapse them for speed.
 - **Spirit: this is a fun sim.** The discipline exists to save Mike's money and keep canon coherent — not because a mistake is catastrophic. Hold it lightly.
 
 ---

@@ -225,6 +225,18 @@ BOOT
         echo ""
         ;;
     esac
+
+    # --- UNIVERSAL DISCIPLINE (gov.36 item 2, S356) ---
+    # The one pre-cognitive principle NOT already resident via identity.md
+    # (anti-guess + don't-build-beyond live there, base layer, always loaded).
+    # Emitted here per research 2026-07-27-boot-rebirth-model-fit-routing:
+    # pointers don't enforce; injection does. Domain applications (civic
+    # completion checklist, engine caller-graph procedure) stay in their own
+    # files — this is the shared principle only.
+    cat << 'DISCIPLINE'
+MEASURE TWICE, CUT ONCE (every lane): before changing anything, read what the change touches — a function's caller graph, a doc's inbound links, ROLLOUT for in-flight work — and check empirical state before touching code. Name the 2-3 weakest assumptions in your plan and attack those first. If evidence contradicts the hypothesis, reverse the plan, don't push through. Domain versions of this (civic's completion gate, engine's caller-graph procedure) are in your terminal's own files and are NOT replaced by this paragraph.
+
+DISCIPLINE
   fi
 
   # --- LEDGER NOTE (removed S247/RB-6, G-SS11) ---

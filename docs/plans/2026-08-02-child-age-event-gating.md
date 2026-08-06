@@ -96,6 +96,48 @@ Plus 2 hardcoded lines per band via `agePoolFor_`. 188 of 252 active rows carry 
 - **Note:** one grandchild line already exists and is correctly written — `retirement.depth`, "taught a grandchild a card game with rules that changed by round." It is gated only on `lifestate=retired`; it belongs in the 60+ band.
 - **Verify:** each band returns ≥1 eligible line for a matching test citizen.
 
+#### Task 3 — authored rows (S356, research-build). Ready for engine-sheet append after Task 1 lands.
+
+All rows: `Kind=line`, `PoolKey=family.parenting`, `Slot=` (blank), `Weight=1`, `Grain=` (blank), `Active=yes`, `Tags=source:familyLife,auth:library-s356`.
+
+**Band 18–30** — `children>=1; age>=18; age<=30` (first child, no sleep, learning it in public):
+
+| Text |
+|---|
+| drove the long loop past Lake Merritt at 2 AM because the car was the only place the baby would sleep |
+| showed up to work with a burp cloth still on one shoulder and didn't notice until lunch |
+| called their own mother from the pharmacy aisle to ask which infant fever medicine was the right one |
+| learned to eat an entire dinner one-handed without looking down |
+
+**Band 41–50** — `children>=1; age>=41; age<=50` (teenagers: waiting up, the car, the argument that isn't about the thing):
+
+| Text |
+|---|
+| sat up pretending to read until the headlights swung into the driveway at 11:40 |
+| handed over the car keys and delivered the entire speech in one long breath |
+| had the argument about the dishes that was not actually about the dishes |
+| watched their teenager walk into school without looking back and remembered when they used to wave |
+
+**Band 51+** — `children>=1; age>=51` (the room that stays clean, the phone that rings less):
+
+| Text |
+|---|
+| walked past the bedroom that stays clean now and closed the door without going in |
+| cooked the full Sunday dinner out of habit and packed half of it straight into the freezer |
+| texted the kid a news article as a way of saying good morning |
+| let the phone ring twice before answering so it wouldn't seem like they'd been waiting |
+
+**Band 60+** — `children>=1; age>=60` (grandchildren):
+
+| Text |
+|---|
+| kept a drawer of crayons at exactly grandkid height and restocked it before every visit |
+| learned the video-call button by heart because that's where the grandkid lives most days |
+| walked a grandchild the slow way around the block, naming every dog they passed |
+| slipped the grandkid a five and said don't tell your mother, exactly like their own grandfather did |
+
+(The existing `retirement.depth` card-game line covers the grandchild-visit register already — these four avoid duplicating it. Its re-gate to the 60+ band is engine-sheet's, per the Task 3 note above.)
+
 ### Task 4: Fold the 3 hardcoded family lines into the ledger
 
 - **Files:** `phase05-citizens/generateCitizensEvents.js` L2351–2355 — modify
@@ -114,3 +156,4 @@ Plus 2 hardcoded lines per band via `agePoolFor_`. 188 of 252 active rows carry 
 
 - 2026-08-02 — Initial draft (S350). Defect found at boot: POP-00594 drew a Little League at-bat with children aged 25 and 22.
 - 2026-08-02 — Rewritten (S350, Mike-direct): resolver, ladder, and `childstage` enum dropped for one numeric `age` field in the existing DSL. Rationale in §Design note.
+- 2026-08-05 — Task 3 content AUTHORED (S356, research-build): 16 rows, four bands, §Task 3 authored rows. Append rides engine-sheet's Task 1 (age terms don't parse until the DSL line lands).

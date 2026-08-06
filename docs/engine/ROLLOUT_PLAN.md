@@ -89,7 +89,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.94 | Citizen memory & perception — Track A ungated: grief-stub consumers + BACKLOG 27.10 feedback ceilings; Track B gated on research.17: typed grudge/ambition + 27.9 folk memory | ready | research-build / engine-sheet | [[../plans/2026-07-31-citizen-memory-perception]] |
 | engine.95 | Platform ceiling resilience — instrumentation live + wall baselined at 34–38% of 6-min wall (Tasks 1–3, 5–7 complete); remaining build: Task 4 checkpoint/resume + Task 5 append-dedup, Mike decisions locked, design + constraints in plan | in-progress | engine-sheet | [[../plans/2026-07-31-platform-ceiling-resilience]] |
 | engine.96 | Business lifecycle generator — per-cycle Growth_Rate/Revenue drift, decline→layoff via existing career path, closure events for desks, 27.10 success-pressure coupling; sequence after engine.85 per realism-audit build order | ready | research-build / engine-sheet | [[../plans/2026-08-01-business-lifecycle-generator]] |
-| engine.97 | Age-banded life content — numeric `age` in the ECL conditions DSL, then author the 4 empty parenting bands; youth/youngAdult/adult/senior have zero aimed rows. Absorbs engine.4 Youth_Events retirement | ready | engine-sheet | [[../plans/2026-08-02-child-age-event-gating]] |
+| engine.97 | Age-banded life content — numeric `age` in the ECL conditions DSL; 4 parenting bands AUTHORED S356 (16 rows in-plan, append rides the DSL line). Absorbs engine.4 Youth_Events retirement | ready | engine-sheet | [[../plans/2026-08-02-child-age-event-gating]] |
 | engine.98 | Pets as household members — Scout is canon with no carrier; open: SL column vs Household_Pets tab, entity vs attribute. Mike-deferred S350 | parked | research-build | [[../mags-corliss/CHARACTER]] §Family |
 
 ### canon.* — World-fidelity layer
@@ -169,7 +169,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | governance.34 | C97 gap-log triage | in-progress | research-build / engine-sheet | [[../plans/2026-06-13-c97-gap-log-triage]] — detail in pointer (relocated 2026-07-02) |
 | governance.33 | C96 gap-log triage | in-progress | research-build / engine-sheet | [[../plans/2026-06-07-c96-gap-log-triage]] — detail in pointer (relocated 2026-07-02) |
 | governance.35 | REDUCED S260 by governance.36 §loop-tightening to the PIN-self-derive remnant | ready | engine-sheet (design: research-build DONE) | [[../plans/2026-06-14-session-context-mechanization]] — detail in pointer (relocated 2026-07-02) |
-| governance.36 | Boot doc architecture restructure. S340 landed the ungated all-lane boot emit + external lanes. OPEN: item 2 universal-discipline merge to the boot emitter. | in-progress | research-build | [[../plans/2026-06-14-boot-doc-architecture-restructure]] + [[../plans/2026-05-09-boot-load-audit]] — detail in pointer (relocated 2026-07-02) |
+| governance.36 | Boot doc architecture restructure. S340 all-lane boot emit; S356 item 2 universal-discipline merge SHIPPED. | done-pending-archive | research-build | [[../plans/2026-06-14-boot-doc-architecture-restructure]] — detail in pointer |
 | governance.42 | Monthly report-only MD sweep widened to docs, control plane, and project memory; Codex skill installed and droplet cron set for 04:30 UTC on day 2 | done-pending-archive | research-build | scripts/mdStalenessDetector.js + [[../AUDITS]] |
 
 ---

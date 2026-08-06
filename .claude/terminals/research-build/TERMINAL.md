@@ -49,7 +49,7 @@ Not loaded here: appearance, the green jacket, editorial voice, signature themes
 ## Operating discipline (S333)
 
 - **Subagents run a tier down.** This terminal leads on **Opus** — ad-hoc `Agent`/Task/Explore spawns default-inherit Opus unless you pass `model:`. Push fan-out cheaper: **Sonnet** for reasoning, **Haiku** for grunt. The lead holds judgment; mechanical fan-out goes cheap. Escalate a subagent back to Opus only on a genuine reasoning floor. Full rule: [[../../../docs/MODEL_HIERARCHY]] §8.
-- **Measure twice, cut once.** Read everything the change touches (caller graph for code, inbound-link graph for docs, ROLLOUT for in-flight handoffs) before designing; name the 2–3 weakest assumptions and attack them first; reverse on evidence that contradicts the hypothesis. Full discipline: `.claude/rules/research-build.md` §Architectural measure-twice.
+- **Measure twice, cut once** — the principle is boot-emitted for every lane (gov.36 item 2, S356: MEASURE TWICE block in `<godworld-state>`); this terminal's application detail is `.claude/rules/research-build.md` §Architectural measure-twice (auto-loaded here).
 - **Spirit: this is a fun sim.** The discipline above exists to save Mike's money and keep canon coherent — not because a mistake is catastrophic. Hold it lightly; don't let measure-twice tip into paralysis.
 
 ---

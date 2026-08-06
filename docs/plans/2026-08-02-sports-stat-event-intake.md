@@ -881,3 +881,16 @@ compensation.
   completed the dashboard restart, authenticated live-read, disabled-write,
   and middle-name/POPID proofs; retained re-review, secure write configuration,
   authenticated preview, and proving-write gates.
+- 2026-08-06 (engine-sheet, S357, Mike-go "clear to deploy sports") — Remediation
+  re-review PASSED: diff 1bbedbd9..ef69f4c8 read end-to-end; item-4 boundary
+  matches the corrected ruling (one bounded strictly-pre-batch retarget, second
+  move throws sports_source_changed, preflight re-runs post-retarget, post-batch
+  single-attempt audit remap); retargetAppendRange digit-replace safely scoped by
+  sheet-prefix strip; full writer suite green. Secure-write configuration DONE:
+  SPORTS_WRITE_ENABLED/ORIGIN + preview/capability secrets (0600 env, never
+  echoed), DASHBOARD_BIND_HOST=127.0.0.1 (ss-verified loopback-only),
+  DASHBOARD_COOKIE_SECURE=true; authenticated policy probe returns
+  featureEnabled:true configured:true reasonCode:null; unauth requests 401.
+  REMAINING: authenticated preview + one approved proof — attended, Mike at
+  https://godworld.tail6d8700.ts.net sports workspace (direct :3001 and plain
+  http login no longer work by design).

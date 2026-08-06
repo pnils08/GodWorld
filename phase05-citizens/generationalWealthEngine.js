@@ -1601,6 +1601,15 @@ function updateHeritage_(ss, ctx, cycle) {
               if (bm && +bm[1] >= nextBizNum) nextBizNum = +bm[1] + 1;
             }
           } catch (eB) { nextBizNum = null; }
+          // engine.96 allocator contract: next = max(highWater, activeMax)+1.
+          // The active scan alone breaks once rows move to Business_Archive;
+          // the World_Config mark (via loadConfig_/ctx.config) is monotonic
+          // over every ID that was ever active. Write-back after the lineage
+          // loop; a lost write heals next run via this same active scan.
+          if (nextBizNum !== null) {
+            var bizHW = Number(ctx.config && ctx.config.bizIdHighWater);
+            if (!isNaN(bizHW) && bizHW + 1 > nextBizNum) nextBizNum = bizHW + 1;
+          }
         }
         if (nextBizNum !== null) {
           var capital = Math.max(50000, Math.round(stakeNW * 0.2));
@@ -1687,6 +1696,32 @@ function updateHeritage_(ss, ctx, cycle) {
     }
     outRows.push(hl);
     results.lines++;
+  }
+
+  // engine.96: persist the BIZ-ID high-water mark after the mint batch —
+  // rides the cache write queue (same channel as cycleCount; commits at
+  // Phase 10, skipped in dry-run). Monotonic: only raised, never lowered.
+  // Absent key: loud log, no append — the cache layer has no append
+  // primitive; the row is seeded at rollout and the Node-side helper
+  // (lib/sheets.js setBizIdHighWater) self-seeds if it is ever deleted.
+  if (results.businessesOpened > 0 && nextBizNum !== null) {
+    var hwLastUsed = nextBizNum - 1;
+    var hwCur = Number(ctx.config && ctx.config.bizIdHighWater);
+    if (isNaN(hwCur) || hwLastUsed > hwCur) {
+      var hwCached = ctx.cache.getData('World_Config');
+      var hwRowNum = null;
+      if (hwCached.exists) {
+        for (var hwR = 1; hwR < hwCached.values.length; hwR++) {
+          if ((hwCached.values[hwR][0] || '').toString().trim() === 'bizIdHighWater') { hwRowNum = hwR + 1; break; }
+        }
+      }
+      if (hwRowNum) {
+        ctx.cache.queueWrite('World_Config', hwRowNum, 2, hwLastUsed);
+        ctx.config.bizIdHighWater = hwLastUsed;
+      } else {
+        Logger.log('updateHeritage_ engine.96 WARNING: World_Config bizIdHighWater row missing — mark NOT persisted this cycle (allocation stayed safe via active scan). Seed the row.');
+      }
+    }
   }
 
   // Deterministic order: by LIN id. Full-table rewrite (own tracking sheet).

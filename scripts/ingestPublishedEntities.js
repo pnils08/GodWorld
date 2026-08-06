@@ -883,12 +883,21 @@ function economicSeedForSector(sector) {
 async function appendBusinesses(candidates, maxBizNum, sheetsClient, sheetId) {
   if (candidates.length === 0) return [];
 
+  // engine.96 allocator contract: next = max(highWater, activeSheetMax) + 1.
+  // The active scan alone (maxBizNum) breaks once rows move to
+  // Business_Archive; the World_Config mark is monotonic over every ID
+  // that was ever active. Lazy require: only the mint path pays for it.
+  const libSheets = require('../lib/sheets');
+  const hw = await libSheets.getBizIdHighWater();
+  if (hw.value === null) console.warn('[bizId] World_Config bizIdHighWater missing — will self-seed on write-back');
+  const startNum = Math.max(hw.value || 0, maxBizNum) + 1;
+
   const rowsToAppend = [];
   const bizIds = [];
 
   for (let i = 0; i < candidates.length; i++) {
     const c = candidates[i];
-    const bizNum = maxBizNum + 1 + i;
+    const bizNum = startNum + i;
     const bizId = 'BIZ-' + String(bizNum).padStart(5, '0');
     bizIds.push(bizId);
     // Cols A-I: BIZ_ID, Name, Sector, Neighborhood, Employee_Count, Avg_Salary, Annual_Revenue, Growth_Rate, Key_Personnel
@@ -922,6 +931,10 @@ async function appendBusinesses(candidates, maxBizNum, sheetsClient, sheetId) {
       ok: row[0] === bizIds[i],
     });
   }
+
+  // engine.96: persist the high-water mark after the batch lands.
+  await libSheets.setBizIdHighWater(startNum + candidates.length - 1);
+
   return verified;
 }
 

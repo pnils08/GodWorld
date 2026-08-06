@@ -102,7 +102,11 @@ async function main() {
   var newRows = [];
   var promoted = [];
   var rejected = [];
-  var nextBizNum = maxBizNum + 1;
+  // engine.96 allocator contract: next = max(highWater, activeSheetMax) + 1.
+  // The active scan alone breaks once rows move to Business_Archive.
+  var hw = await sheets.getBizIdHighWater();
+  if (hw.value === null) console.warn('[bizId] World_Config bizIdHighWater missing — will self-seed on write-back');
+  var nextBizNum = Math.max(hw.value || 0, maxBizNum) + 1;
 
   for (var s = 0; s < staged.length; s++) {
     var entry = staged[s];
@@ -168,6 +172,11 @@ async function main() {
 
   await sheets.appendRows('Business_Ledger', appendValues);
   console.log('  -> Business_Ledger updated.');
+
+  // engine.96: persist the high-water mark after the batch (nextBizNum is
+  // one past the last number used).
+  await sheets.setBizIdHighWater(nextBizNum - 1);
+  console.log('  -> bizIdHighWater = ' + (nextBizNum - 1));
 
   // 5. Update Business_Intake statuses via updateRangeByPosition
   // Get header row to find Status column index

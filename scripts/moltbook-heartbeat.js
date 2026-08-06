@@ -14,7 +14,8 @@
  *   node scripts/moltbook-heartbeat.js --dry-run     # log decisions, don't act
  *   node scripts/moltbook-heartbeat.js --post-only   # skip feed, just check if Mags wants to post
  *
- * Requires .env: ANTHROPIC_API_KEY
+ * Requires .env: OPENROUTER_API_KEY (default provider; MOLTBOOK_PROVIDER=anthropic
+ *   reverts to ANTHROPIC_API_KEY + Sonnet — see the model helper)
  * Requires: ~/.config/moltbook/credentials.json
  */
 
@@ -320,11 +321,57 @@ async function loadMoltbookContext() {
 }
 
 // ---------------------------------------------------------------------------
-// Claude API helper
+// Model helper — provider-routed (S356, mags-bot/moltbook OpenRouter item).
+// Heartbeat prose is single-turn, no tools: cheap-model work per the offload
+// doctrine. Default is OpenRouter deepseek (the standing cron model);
+// MOLTBOOK_PROVIDER=anthropic reverts. A missing OpenRouter key fails loud —
+// a silent fallback to Anthropic would be silent billing.
 // ---------------------------------------------------------------------------
+const PROVIDER = process.env.MOLTBOOK_PROVIDER || 'openrouter';
+const OR_MODEL = process.env.MOLTBOOK_MODEL || 'deepseek/deepseek-chat';
 const claude = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
+function callOpenRouterRaw(payloadObj) {
+  return new Promise((resolve, reject) => {
+    const payload = JSON.stringify(payloadObj);
+    const req = https.request({
+      hostname: 'openrouter.ai', path: '/api/v1/chat/completions', method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(payload),
+        'Authorization': 'Bearer ' + process.env.OPENROUTER_API_KEY,
+        'HTTP-Referer': 'https://godworld.local',
+        'X-Title': 'GodWorld moltbook heartbeat'
+      }
+    }, (res) => {
+      let data = '';
+      res.on('data', c => (data += c));
+      res.on('end', () => {
+        try {
+          const j = JSON.parse(data);
+          if (j.error) return reject(new Error('OpenRouter: ' + (j.error.message || JSON.stringify(j.error))));
+          resolve(j);
+        } catch (e) { reject(new Error('OpenRouter parse: ' + e.message + ' | ' + data.slice(0, 300))); }
+      });
+    });
+    req.on('error', reject);
+    req.write(payload); req.end();
+  });
+}
+
 async function askClaude(systemPrompt, userPrompt) {
+  if (PROVIDER === 'openrouter') {
+    if (!process.env.OPENROUTER_API_KEY) throw new Error('MOLTBOOK_PROVIDER=openrouter but OPENROUTER_API_KEY is missing');
+    var j = await callOpenRouterRaw({
+      model: OR_MODEL,
+      max_tokens: MAX_RESPONSE_TOKENS,
+      messages: [
+        { role: 'system', content: systemPrompt },
+        { role: 'user', content: userPrompt }
+      ]
+    });
+    return (j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || '';
+  }
   var response = await claude.messages.create({
     model: 'claude-sonnet-4-6',
     max_tokens: MAX_RESPONSE_TOKENS,

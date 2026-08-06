@@ -913,9 +913,13 @@ function runCareerEngine_(ctx) {
           row[iIncome] = Math.round(currentIncome * (0.80 + roll() * 0.08)); // -12-20%
         }
         // v2.4: Clear employer — citizen is now unemployed/searching
+        // S357: UNTRACKED still clears (they lost that untracked job) but
+        // records no businessDelta — the sentinel has no Business_Ledger row.
         if (iEmployerBizId >= 0 && currentBizId && !isSelfEmployed) {
-          if (!S.careerSignals.businessDeltas[currentBizId]) S.careerSignals.businessDeltas[currentBizId] = { gained: 0, lost: 0 };
-          S.careerSignals.businessDeltas[currentBizId].lost += 1;
+          if (currentBizId !== 'UNTRACKED') {
+            if (!S.careerSignals.businessDeltas[currentBizId]) S.careerSignals.businessDeltas[currentBizId] = { gained: 0, lost: 0 };
+            S.careerSignals.businessDeltas[currentBizId].lost += 1;
+          }
           row[iEmployerBizId] = '';
         }
         S.careerSignals.layoffs += 1;
@@ -1144,7 +1148,12 @@ function runCareerEngine_(ctx) {
       var uRow = rows[ur];
       if (safeStr(uRow[iStatus]).trim() !== 'Active') continue;
       if (safeStr(uRow[iClock]).trim() === 'GAME') continue;
-      if (safeStr(uRow[iEmployerBizId]).trim() !== '') continue;
+      // S357 engine.83: UNTRACKED ("employed at an untracked business") stays
+      // hire-eligible — organic hiring is the ONLY path that moves citizens
+      // into tracked jobs now that bulk category-assignment is retired; the
+      // move lands as a normal hire with its promotion/transition event.
+      var uEmp = safeStr(uRow[iEmployerBizId]).trim();
+      if (uEmp !== '' && uEmp !== 'UNTRACKED') continue;
       if (iEconKey >= 0 && safeStr(uRow[iEconKey]).trim() === 'SPORTS_OVERRIDE') continue;
       var uBy = Number(uRow[iBirthYear]) || 0;
       if (uBy > 0) { var uAge = simYear - uBy; if (uAge < 18 || uAge >= 65) continue; }

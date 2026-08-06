@@ -311,10 +311,6 @@
       "bizId": "BIZ-00044"
     },
     {
-      "pattern": "Barista",
-      "bizId": "BIZ-00038"
-    },
-    {
       "pattern": "Bartender",
       "bizId": "BIZ-00036"
     },
@@ -431,19 +427,11 @@
       "bizId": "BIZ-00017"
     },
     {
-      "pattern": "Climate Modeling",
-      "bizId": "BIZ-00017"
-    },
-    {
       "pattern": "Director of Sustainability",
       "bizId": "BIZ-00017"
     },
     {
       "pattern": "Port Worker",
-      "bizId": "BIZ-00012"
-    },
-    {
-      "pattern": "Warehouse",
       "bizId": "BIZ-00012"
     },
     {
@@ -487,10 +475,6 @@
       "bizId": "BIZ-00022"
     },
     {
-      "pattern": "Sea Level Monitoring",
-      "bizId": "BIZ-00031"
-    },
-    {
       "pattern": "Oakland Oaks",
       "bizId": "BIZ-00074"
     },
@@ -507,14 +491,6 @@
       "bizId": "BIZ-00028"
     },
     {
-      "pattern": "Community Director",
-      "bizId": "BIZ-00028"
-    },
-    {
-      "pattern": "Community Advocate",
-      "bizId": "BIZ-00028"
-    },
-    {
       "pattern": "DigitalOcean",
       "bizId": "BIZ-00002"
     },
@@ -523,28 +499,12 @@
       "bizId": "BIZ-00052"
     },
     {
-      "pattern": "Autonomous Systems",
-      "bizId": "BIZ-00052"
-    },
-    {
-      "pattern": "Smart City",
-      "bizId": "BIZ-00052"
-    },
-    {
-      "pattern": "Algae Biofuel",
-      "bizId": "BIZ-00010"
-    },
-    {
       "pattern": "Library Worker",
       "bizId": "BIZ-00021"
     },
     {
       "pattern": "Software engineer",
       "bizId": "BIZ-00030"
-    },
-    {
-      "pattern": "After-school",
-      "bizId": "BIZ-00016"
     },
     {
       "pattern": "Bart Transit",
@@ -557,46 +517,6 @@
     {
       "pattern": "Bus Driver",
       "bizId": "BIZ-00013"
-    },
-    {
-      "pattern": "Plumber",
-      "bizId": "BIZ-00020"
-    },
-    {
-      "pattern": "Electrician",
-      "bizId": "BIZ-00020"
-    },
-    {
-      "pattern": "Construction",
-      "bizId": "BIZ-00020"
-    },
-    {
-      "pattern": "Bakery",
-      "bizId": "BIZ-00064"
-    },
-    {
-      "pattern": "Line cook",
-      "bizId": "BIZ-00044"
-    },
-    {
-      "pattern": "Dishwasher",
-      "bizId": "BIZ-00044"
-    },
-    {
-      "pattern": "Waiter",
-      "bizId": "BIZ-00044"
-    },
-    {
-      "pattern": "Server",
-      "bizId": "BIZ-00044"
-    },
-    {
-      "pattern": "Cook",
-      "bizId": "BIZ-00044"
-    },
-    {
-      "pattern": "Retail",
-      "bizId": "BIZ-00033"
     },
     {
       "pattern": "Taxi driver",
@@ -933,5 +853,6 @@
       "sector": "Fast Food & Quick Service",
       "neighborhood": "Downtown"
     }
-  ]
+  ],
+  "notes": "S357 engine.83: 20 generic-occupation keyword rules demoted (generic trade -> tracked biz was the mass-hiring failure; those roles now resolve UNTRACKED). Org-name rules kept."
 }

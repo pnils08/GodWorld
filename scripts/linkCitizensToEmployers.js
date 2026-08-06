@@ -24,12 +24,23 @@ const fs = require('fs');
 
 const DRY_RUN = process.argv.includes('--dry-run');
 // S313: --fill-blanks-only — write ONLY citizens whose EmployerBizId is
-// currently blank, and never write the literal 'UNMATCHED' (leave blank —
-// the career engine treats '' as no-employer; 'UNMATCHED' would pollute
-// businessDeltas keys). Protects career-engine-maintained employer state
+// currently blank. Protects career-engine-maintained employer state
 // (hires/layoffs since Phase 14.4) from being clobbered by re-resolution.
-// Roster rebuild + new-business append are unaffected by the flag.
+// S357 engine.83 (Mike-approved): the category layer and the unmatched
+// fallthrough now resolve to the 'UNTRACKED' sentinel — "employed somewhere
+// in the city, workplace is not a tracked business" (1:443 doctrine: xx
+// waiters on the ledger does NOT mean they all work at tracked restaurants).
+// SELF_EMPLOYED is the precedent token; runCareerEngine treats UNTRACKED as
+// hire-eligible, so organic hiring can still move these citizens into
+// tracked jobs WITH the promotion event. The old "never write a sentinel"
+// note predates that career-engine change.
 const FILL_BLANKS_ONLY = process.argv.includes('--fill-blanks-only');
+// S357 engine.83: --untracked-only — of the resolutions this run produced,
+// write ONLY the UNTRACKED sentinels (implies fill-blanks semantics). Layer
+// 1-4 tracked-business resolutions for blank cells are NOT bulk-written —
+// no mass hiring event (Mike-direct); they surface in the roster as PENDING
+// rows for case-by-case approval.
+const UNTRACKED_ONLY = process.argv.includes('--untracked-only');
 // engine.83 Task 7: --list-unmatched — print every UNMATCHED citizen with the
 // fields a rule proposer needs (RoleType/EconomicProfileKey/Neighborhood).
 const LIST_UNMATCHED = process.argv.includes('--list-unmatched');
@@ -229,13 +240,17 @@ async function main() {
       }
     }
 
-    // Layer 5: Category default
+    // Layer 5: Category default → UNTRACKED (S357 engine.83, Mike-approved).
+    // A category match ("waiter" → restaurants exist) proves the citizen is
+    // EMPLOYED, not that they work at a tracked business — assigning the
+    // category-default BIZ-ID was the mass-hiring failure the S349 revert
+    // undid. The category still resolves, but to the sentinel.
     if (!bizId || bizId === 'SPORTS_OTHER') {
       if (!layer) {
         var mappedProfileName = roleMapping[roleType];
         var profile = mappedProfileName ? paramByRole[mappedProfileName] : null;
         if (profile && profile.category && employerMapping.categoryDefaults[profile.category]) {
-          bizId = employerMapping.categoryDefaults[profile.category];
+          bizId = 'UNTRACKED';
           layer = 'category';
         }
       }
@@ -243,9 +258,11 @@ async function main() {
 
     // Fallback — SPORTS_OTHER counts as unresolved (S334). It is an internal
     // sentinel, not a BIZ_ID; letting it survive to here is what put the literal
-    // string into 7 ledger rows.
+    // string into 7 ledger rows. S357: unresolved ALSO lands on UNTRACKED —
+    // a citizen with a real RoleType is employed somewhere; unmatched only
+    // means no rule named the workplace. (Skip-classes never reach here.)
     if (!bizId || bizId === 'SPORTS_OTHER') {
-      bizId = 'UNMATCHED';
+      bizId = 'UNTRACKED';
       layer = 'unmatched';
       unmatched++;
     }
@@ -266,8 +283,8 @@ async function main() {
       neighborhood: (row[iNeighborhood] || '').toString().trim()
     });
 
-    // Accumulate employee data per business
-    if (bizId && bizId !== 'SELF_EMPLOYED' && bizId !== 'SPORTS_OTHER' && bizId !== 'UNMATCHED') {
+    // Accumulate employee data per business (sentinels have no biz row)
+    if (bizId && bizId !== 'SELF_EMPLOYED' && bizId !== 'SPORTS_OTHER' && bizId !== 'UNTRACKED') {
       if (!bizEmployees[bizId]) bizEmployees[bizId] = [];
       bizEmployees[bizId].push({ popId: popId, name: name, roleType: roleType, income: income });
     }
@@ -326,8 +343,9 @@ async function main() {
     console.log('  ' + b.bizId + ' ' + b.name + ': ' + b.count + ' employees, avg $' + b.avgSalary.toLocaleString());
   });
   console.log('  SELF_EMPLOYED: ' + selfEmployedCount + ' citizens');
+  var untrackedCount = results.filter(function(r) { return r.bizId === 'UNTRACKED'; }).length;
+  console.log('  UNTRACKED: ' + untrackedCount + ' (' + layerCounts.category + ' category + ' + unmatched + ' unmatched)');
   if (sportsOtherCount > 0) console.log('  SPORTS_OTHER: ' + sportsOtherCount + ' (non-Oakland athletes)');
-  if (unmatched > 0) console.log('  UNMATCHED: ' + unmatched);
   console.log('');
 
   // Sample mappings
@@ -386,23 +404,30 @@ async function main() {
   var empCol = colLetter2(iEmployerBizId);
 
   var batchUpdates = [];
-  var skippedExisting = 0, skippedUnmatched = 0;
+  var writtenByPop = {}; // popId -> value this run writes (roster mirrors the ledger)
+  var skippedExisting = 0, skippedPendingCanonTie = 0;
   for (var w = 0; w < results.length; w++) {
     var res = results[w];
-    if (FILL_BLANKS_ONLY) {
+    if (FILL_BLANKS_ONLY || UNTRACKED_ONLY) {
       var existing = employerColExists ? String(rows[res.rowIndex][iEmployerBizId] || '').trim() : '';
       if (existing) { skippedExisting++; continue; }
-      if (res.bizId === 'UNMATCHED') { skippedUnmatched++; continue; }
     }
+    // S357: --untracked-only — never bulk-write a tracked BIZ-ID (no mass
+    // hiring event, Mike-direct). Tracked resolutions for blank cells stay
+    // unwritten and surface as PENDING roster rows for case-by-case approval.
+    // Sentinels (UNTRACKED, SELF_EMPLOYED) are not hiring events — they write.
+    if (UNTRACKED_ONLY && /^BIZ-/.test(res.bizId)) { skippedPendingCanonTie++; continue; }
     var rowNum = res.rowIndex + 2; // +1 header, +1 for 1-based
+    writtenByPop[res.popId] = res.bizId;
     batchUpdates.push({
       range: 'Simulation_Ledger!' + empCol + rowNum,
       values: [[res.bizId]]
     });
   }
-  if (FILL_BLANKS_ONLY) {
-    console.log('  --fill-blanks-only: writing ' + batchUpdates.length + ' blank cells; kept ' +
-      skippedExisting + ' existing values; left ' + skippedUnmatched + ' UNMATCHED blank');
+  if (FILL_BLANKS_ONLY || UNTRACKED_ONLY) {
+    console.log('  blank-cell mode: writing ' + batchUpdates.length + ' cells; kept ' +
+      skippedExisting + ' existing values' +
+      (UNTRACKED_ONLY ? '; ' + skippedPendingCanonTie + ' tracked-biz resolutions left PENDING (case-by-case)' : ''));
   }
 
   // Write in chunks of 500
@@ -420,12 +445,21 @@ async function main() {
   var rosterHeaders = ['BIZ_ID', 'POP_ID', 'CitizenName', 'RoleType', 'Status', 'MappingLayer'];
   await sheets.createSheet('Employment_Roster', rosterHeaders);
 
+  // S357 engine.83: the roster mirrors the LEDGER, never the resolver's
+  // unwritten opinion — a roster/SL disagreement is the acceptance-criterion-6
+  // failure. Effective value = what this run wrote, else the existing SL
+  // value (layer 'existing'), else blank → a PENDING row: a resolution the
+  // run deliberately did not bulk-write (case-by-case queue for Mike).
   var rosterRows = results.map(function(r) {
+    var liveVal = employerColExists ? String(rows[r.rowIndex][iEmployerBizId] || '').trim() : '';
+    var effective = writtenByPop[r.popId] || liveVal || '';
+    var layerOut = writtenByPop[r.popId] ? r.layer : (liveVal ? 'existing' : r.layer);
     var rosterStatus = 'Active';
-    if (r.bizId === 'SELF_EMPLOYED') rosterStatus = 'SELF_EMPLOYED';
-    else if (r.layer === 'sports') rosterStatus = 'SPORTS_OVERRIDE';
-    else if (r.bizId === 'SPORTS_OTHER') rosterStatus = 'SPORTS_OTHER';
-    return [r.bizId, r.popId, r.name, r.roleType, rosterStatus, r.layer];
+    if (effective === 'SELF_EMPLOYED') rosterStatus = 'SELF_EMPLOYED';
+    else if (effective === 'UNTRACKED') rosterStatus = 'UNTRACKED';
+    else if (!effective) rosterStatus = 'PENDING';
+    else if (layerOut === 'sports') rosterStatus = 'SPORTS_OVERRIDE';
+    return [effective, r.popId, r.name, r.roleType, rosterStatus, layerOut];
   });
 
   // Write in chunks

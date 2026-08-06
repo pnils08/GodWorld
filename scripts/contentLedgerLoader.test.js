@@ -163,5 +163,23 @@ function check(name, cond) {
   check('bad rows counted as skipped', L.skipped === 2);
 }
 
+// 9. engine.97 + engine.79 item 4 (S357) — numeric age + trajectory vocabulary
+{
+  const ctx = mockCtx([
+    HDR,
+    ['line', 'family.parenting', '', 'waited up for headlights', '', 'children>=1; age>=41; age<=50', 'source:familyLife', '', ''],
+    ['line', 'bad3.pool', '', 'age as enum', '', 'age=old', 'source:familyLife', '', ''],
+    ['line', 'traj.pool', '', 'watched the third storefront paper over', '', 'hoodtrend=decay; momentum<=3', 'source:nbhdState', '', ''],
+    ['line', 'bad4.pool', '', 'unknown trend value', '', 'hoodtrend=booming', 'source:nbhdState', '', '']
+  ]);
+  loadEventContentLedger_(ctx);
+  const L = ctx.summary.contentLedger;
+  check('age-banded parenting line loads', (L.lines['family.parenting'] || []).length === 1);
+  check('age=old rejected (num field, non-numeric value)', !L.lines['bad3.pool']);
+  check('hoodtrend+momentum line loads', (L.lines['traj.pool'] || []).length === 1);
+  check('hoodtrend=booming fails closed', !L.lines['bad4.pool']);
+  check('both bad rows counted as skipped', L.skipped === 2);
+}
+
 console.log('\n' + pass + '/' + (pass + fail) + ' passed');
 process.exit(fail ? 1 : 0);

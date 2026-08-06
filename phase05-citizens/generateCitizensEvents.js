@@ -771,6 +771,18 @@ function generateCitizensEvents_(ctx) {
   // ===========================================================================
   var CONTENT_ENTITY_SLOTS = { VENUE: 1, INSTITUTION: 1, CONTACT: 1 }; // resolved code-side, not from fragments
 
+  // engine.79 item 7 (S357): proving-ground exclusive pools. When a pool named
+  // in World_Config eclExclusivePools has enough eligible ledger lines for
+  // THIS citizen, the matching-domain hardcoded entries (marked with an
+  // ecl:domain:* tag at their build site) drop from the draw pool — the first
+  // counterexample to additive-only. Below threshold the hardcoded set stays;
+  // never compose-null. ONLY these two domains are annotated (no global
+  // retrofit — plan 2026-08-05-ecl-trajectory-proving-grounds Task 2).
+  var ECL_EXCLUSIVE_DOMAIN_BY_POOL = {
+    'civic.baylight-construction': 'ecl:domain:baylight',
+    'tribune.newsroom': 'ecl:domain:tribune'
+  };
+
   function contentSlotTokens_(text) {
     var out = [], re = /\$([A-Z_]+)/g, m;
     while ((m = re.exec(String(text))) !== null) { if (out.indexOf(m[1]) < 0) out.push(m[1]); }
@@ -1599,6 +1611,10 @@ function generateCitizensEvents_(ctx) {
     if (!iName) continue;
     var iOut = String(iEv.outcome || "").toLowerCase();
     var iTags = ["source:civicNews", "civic:" + (iOut || "update")];
+    // engine.79 item 7: Baylight-domain marker — survives the basePool re-wrap
+    // via tags; the exclusive-pool check drops marked entries when the
+    // civic.baylight-construction ledger pool carries the citizen's texture.
+    if (iName.toLowerCase().indexOf("baylight") >= 0) iTags.push("ecl:domain:baylight");
     if (iOut === "passed" || iOut === "approved") {
       civicNewsPool.push(makeEntry("caught the news that " + iName + " passed and talked it over at the counter", iTags, 1.1, false));
       civicNewsPool.push(makeEntry("overheard neighbors already planning around " + iName, iTags, 1.0, false));
@@ -2301,7 +2317,10 @@ function generateCitizensEvents_(ctx) {
         "overheard their own name in a conversation outside the cafe"
       ];
       for (var fmi = 0; fmi < famePool.length; fmi++) {
-        pool.push(makeEntry(famePool[fmi], mergeTags(["source:fame"], calendarTags), fameWeight, false));
+        // engine.79 item 7: the Tribune line carries the tribune domain marker
+        // so the tribune.newsroom proving-ground pool can supersede it.
+        var fameTags = fmi === 0 ? ["source:fame", "ecl:domain:tribune"] : ["source:fame"];
+        pool.push(makeEntry(famePool[fmi], mergeTags(fameTags, calendarTags), fameWeight, false));
       }
     }
 
@@ -2348,11 +2367,10 @@ function generateCitizensEvents_(ctx) {
     // {composure:2, family:1}, same ambient scale as the domain pools.
     var maritalLc = (iMarital >= 0) ? String(row[iMarital] || "").trim().toLowerCase() : "";
     var kidCount = (iNumChildren >= 0) ? (Number(row[iNumChildren]) || 0) : 0;
-    if (kidCount > 0) {
-      pool.push(makeEntry("one of the kids asked a question at dinner that stopped the room", mergeTags(["source:familyLife", "family:kids"], calendarTags), 1.0, false));
-      pool.push(makeEntry("found a school drawing folded in a jacket pocket and kept it", mergeTags(["source:familyLife", "family:kids"], calendarTags), 1.0, false));
-      pool.push(makeEntry("negotiated bedtime like a seasoned diplomat, and lost gracefully", mergeTags(["source:familyLife", "family:kids"], calendarTags), 0.95, false));
-    }
+    // engine.97 Task 4 (S357): the three kid lines moved into Event_Content_
+    // Ledger as family.parenting rows (bedtime + school-drawing age-gated
+    // 31-40, dinner-question age-neutral) so ALL parenting content lives in
+    // one editable place. kidCount stays — condScopes.children reads it.
     if (maritalLc === "married") {
       pool.push(makeEntry("split the last of the coffee and the morning's plans with their partner", mergeTags(["source:familyLife", "family:partner"], calendarTags), 1.0, false));
       pool.push(makeEntry("caught their partner humming the song they'd had stuck all day", mergeTags(["source:familyLife", "family:partner"], calendarTags), 0.95, false));
@@ -2523,6 +2541,8 @@ function generateCitizensEvents_(ctx) {
     // enter the pool (no raw $SLOT can reach LifeHistory).
     var contentLedger = S.contentLedger;
     if (contentLedger && contentLedger.lineCount) {
+      var hoodStateForCond = (S.neighborhoodState && neighborhood) ? S.neighborhoodState[neighborhood] : null;
+      var eclEligibleByPool = {}; // engine.79 item 7: per-pool eligible count for THIS citizen (post-cap)
       var condScopes = {
         wealth: wealthLvl,
         children: kidCount,
@@ -2542,7 +2562,16 @@ function generateCitizensEvents_(ctx) {
         heritage: (ctx._heritageTierByPop && ctx._heritageTierByPop[String(popId).trim().toUpperCase()]) || "none",
         // engine.68: fame joins the authoring surface (0 below the 25 bar)
         fame: culturalFame,
-        culdomain: culturalStatus ? culturalStatus.domain : ""
+        culdomain: culturalStatus ? culturalStatus.domain : "",
+        // engine.97: numeric age from deriveLifeState_ — null (unusable
+        // BirthYear) fails any age term via the missing-data check above.
+        age: lifeState ? lifeState.age : null,
+        // engine.79 item 4: hood trajectory pair. The trajectory engine
+        // writes both columns together, so a blank trajectory means the
+        // hood row is unwritten — null momentum then, never the loader's
+        // blank-cell 0 (0 would read as maximal decay entrenchment).
+        hoodtrend: hoodStateForCond ? hoodStateForCond.trajectory : "",
+        momentum: (hoodStateForCond && hoodStateForCond.trajectory) ? hoodStateForCond.trajectoryMomentum : null
       };
       for (var clk in contentLedger.lines) {
         if (!contentLedger.lines.hasOwnProperty(clk)) continue;
@@ -2565,7 +2594,33 @@ function generateCitizensEvents_(ctx) {
           clPooled.eclKey = eclRowKey_(clk, clEntry.text); // S329 telemetry identity
           clPooled.eclPoolKey = clk;           // PoolKey mass-balancing identity
           eclTelemetry.eligible[clPooled.eclKey] = (eclTelemetry.eligible[clPooled.eclKey] || 0) + 1;
+          eclEligibleByPool[clk] = (eclEligibleByPool[clk] || 0) + 1;
           pool.push(clPooled);
+        }
+      }
+
+      // engine.79 item 7 (S357): exclusive-pool check. For each World_Config
+      // eclExclusivePools entry whose ledger pool reached eclExclusiveMinLines
+      // (default 3) eligible lines for this citizen, drop the matching
+      // ecl:domain:* hardcoded entries. Counts are post-cap (a capped-out pool
+      // falls back to hardcoded — a cap must narrow variety, never null a
+      // domain). Missing config key = feature off. No rng consumed either way.
+      var eclExclRaw = (ctx.config && ctx.config.eclExclusivePools) ? String(ctx.config.eclExclusivePools) : '';
+      if (eclExclRaw) {
+        var eclExclMin = (ctx.config && typeof ctx.config.eclExclusiveMinLines === 'number') ? ctx.config.eclExclusiveMinLines : 3;
+        var eclDropTags = {};
+        var eclAnyDrop = false;
+        var eclExclKeys = eclExclRaw.split(',');
+        for (var xk = 0; xk < eclExclKeys.length; xk++) {
+          var exclPoolKey = eclExclKeys[xk].trim();
+          if (!exclPoolKey || !ECL_EXCLUSIVE_DOMAIN_BY_POOL[exclPoolKey]) continue; // unannotated pool: nothing to drop
+          if ((eclEligibleByPool[exclPoolKey] || 0) >= eclExclMin) { eclDropTags[ECL_EXCLUSIVE_DOMAIN_BY_POOL[exclPoolKey]] = 1; eclAnyDrop = true; }
+        }
+        for (var xdi = eclAnyDrop ? pool.length - 1 : -1; xdi >= 0; xdi--) {
+          var xTags = pool[xdi].tags || [];
+          for (var xti = 0; xti < xTags.length; xti++) {
+            if (eclDropTags[xTags[xti]]) { pool.splice(xdi, 1); break; }
+          }
         }
       }
     }

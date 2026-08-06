@@ -79,7 +79,16 @@ var CONTENT_LEDGER_DSL_FIELDS = {
   // content at the culturally known (fame = Cultural_Ledger FameScore via
   // UniverseLinks; 0 below the 25 bar). culdomain: Arts/Sports/Community etc.
   fame:         { kind: 'num' },
-  culdomain:    { kind: 'str' }
+  culdomain:    { kind: 'str' },
+  // engine.97 (S357): numeric age — parenting bands live in the sheet as
+  // ordinary conditions (age>=41; age<=50), retunable without a deploy.
+  // Reads lifeState.age (deriveLifeState_); null age fails any age term.
+  age:          { kind: 'num' },
+  // engine.79 items 4 (S357): trajectory vocabulary — content aimed at a
+  // hood's DIRECTION, not just its level. Reads S.neighborhoodState[hood]
+  // (neighborhoodTrajectoryEngine); blank trajectory fails both terms.
+  hoodtrend:    { kind: 'enum', values: { decay: 1, steady: 1, growth: 1 } },
+  momentum:     { kind: 'num' }
 };
 
 /**

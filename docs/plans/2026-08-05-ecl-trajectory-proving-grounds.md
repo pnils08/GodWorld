@@ -82,3 +82,4 @@ Read live 2026-08-05 (S356).
 ## Changelog
 
 - 2026-08-05 — Initial draft (S356, research-build). engine.79 items 4+7 design closed into this plan; execution engine-sheet + Mags authoring.
+- 2026-08-05 — Tasks 1-3 SHIPPED (S357, engine-sheet, 27776f0a + sheet batch): DSL fields, tag-borne domain markers + compose check, World_Config seeded (pools empty = off), tribune 4 / baylight +3 / hood.trajectory 4 appended. OPEN: Task 4 flip after C103 smoke + 2 cycles.

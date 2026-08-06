@@ -157,3 +157,4 @@ All rows: `Kind=line`, `PoolKey=family.parenting`, `Slot=` (blank), `Weight=1`, 
 - 2026-08-02 — Initial draft (S350). Defect found at boot: POP-00594 drew a Little League at-bat with children aged 25 and 22.
 - 2026-08-02 — Rewritten (S350, Mike-direct): resolver, ladder, and `childstage` enum dropped for one numeric `age` field in the existing DSL. Rationale in §Design note.
 - 2026-08-05 — Task 3 content AUTHORED (S356, research-build): 16 rows, four bands, §Task 3 authored rows. Append rides engine-sheet's Task 1 (age terms don't parse until the DSL line lands).
+- 2026-08-05 — ALL TASKS SHIPPED (S357, engine-sheet): commit 27776f0a (code) + sheet batch (6 re-gates incl. card-game 60+, 19 appends, ECL 282, read-back verified). youthActivities deleted, engine.4 closed. Clasp pushed; smoke = C103 fire. Detail in commit body.

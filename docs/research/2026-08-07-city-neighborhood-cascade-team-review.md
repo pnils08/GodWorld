@@ -234,9 +234,32 @@ Not pure vanilla forever — **weather model already has salient majors** (`appl
 
 ---
 
+## Reviews
+
+### engine-sheet (S360, 2026-08-07) — code-truth pass
+
+Every checkable claim verified against code + live sheets. Layer map §2 and feed table §3.1 are accurate. Additions and corrections:
+
+**Proven live, upgrade from "hazard" to bug (§4.1):** the migration split over-allocates every cycle. `updateNeighborhoodDemographics.js:97` gives each hood `migration/17 × inflowMod`, and the loop iterates the ND sheet's **21 hoods** (divisor was written when the sheet had 17). Baseline sum = 21/17 ≈ **1.24× city migration** before calendar boosts (mods run 1.3–2.0 on holidays). Live c102: city migration +1085 → hood layer absorbs ~1,340+ allocated migrants. Sign inversion (all-hoods-influx under city outflow) is NOT possible in this path — `round(negative × positive mod)` keeps sign per-hood — but magnitude never reconciles. Fix shape: normalize by `Σ inflowMod` over live hood count, not a constant.
+
+**Second hardcoded denominator (missed by paper):** `applyMigrationDrift.js:133` hardcodes `totalPopulation = 400000`; live WP = 386,587. The −50..+50 drift score is computed against a stale constant, not the sheet. Same W2 config-ization bucket.
+
+**Three-scale divergence confirmed live (§4.2), with a sharper framing:** WP illness **9.85%** / hood Sick sum **5.2%** (1,679 of 32,249) / ledger **0** — zero HealthCause values AND zero sick statuses in 940 rows (856 active, 49 traded, 23 pending, 7 retired, 5 deceased). The citizen layer cannot support ANY illness rate today. Also: hoodPop 32,249 vs cityPop 386,587 means the hood layer is its own **~1:12 scale** — three denominators (1:1 model, 1:12 hoods, 1:411 sample), none reconciled anywhere. The 5.2% vs 9.85% gap is chase lag by construction: ±3/hood/cycle clamp = max ~63/cycle convergence citywide; the gap is ~1,500 sick, i.e. ~24 cycles behind the dial.
+
+**Hardcoded drift math confirmed (§6/W2):** `applyDemographicDrift.js` is all literals — illness steps 0.0002–0.0006, cap 0.15, employment attractor band 0.90–0.93 (free prosperity, never earned). `World_Config` live keys: migrationRate/deathRate/growthRate + infra keys only — zero illness/employment/hospital keys. W2 is real and cheap.
+
+**Hospital (§7):** confirmed no Hospital tab on live sheet; Health_Cause_Queue exists but is operator-intake shaped, not a facility sink. **Vote: new tab**, light schema first — own-tracking-tab pattern, consistent with Phase-5 engine carve-outs.
+
+**Vote on §8.1 (A/B/C): C as destination, A-with-support-rule as the transition.** B (ground primary) is not buildable today — the ground layers are too thin to aggregate from (0 sick citizens, no hospital, hood layer itself synthetic). Pure A is the current half-built state and fails doctrine at publication. So: keep L1 as controlled dice feeding story engines, enforce the §6 support rule (L4 within band of L1 within T cycles — W1 audit makes this measurable), build talk-back incrementally (W3), and gate news leads on support (W5). This matches Mike's thermostat thesis without pretending the census exists.
+
+**Must-have invariants (§8.2) from this lane:** (1) `Σ hood migration deltas ≈ city migration ±10%` (after divisor fix); (2) `hood Sick/pop within ±2pp of illnessRate × mean mod` after 10-cycle convergence window; (3) same for unemployed vs `1−employmentRate`; (4) sample-support: illnessRate ≥ 8% sustained 3+ cycles ⇒ ≥1 ledger citizen carries a sick status/HealthCause (the Heavy lottery in §7, minimum viable dose). Soft tolerance + audit report first (W1), hard enforcement only after the divisor and lag classes are fixed — enforcing invariants against known-broken math just makes noise.
+
+**W1–W6 order (engine-sheet view):** W1 first and alone (audit script quantifies everything before any change — measure twice); then W2 (mechanical, unblocks tuning); W6 rides W1's data; W3 design next; W4 after W3 picks the talk-back signals; W5 (media) can run parallel any time. W1+W2 are single-session engine-sheet jobs.
+
 ## Applications (living)
 
 - 2026-08-07 — Written for full LLM team review per Mike.
+- 2026-08-07 — engine-sheet code-truth review pass (S360): claims verified live, /17 divisor + 400000 constant found, C-via-A vote recorded.
 
 ---
 

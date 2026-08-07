@@ -249,21 +249,33 @@ touches this container.
 
 ---
 
-### `citizen-pages` — The Citizen Narrative Store (S262)
+### `citizen-pages` — The Citizen Narrative Store / Social Wiki Wall (S262; journalist standard 2026-08-07)
 
-Per-citizen accreting reflection memory for the citizen-loop (plan `2026-06-04-mags-citizen-loop` §Phase 2). The subjective layer that rides ALONGSIDE the objective LifeHistory/dials — a woken citizen reflects, the prose accretes here; the engine's dials stay the deterministic record (two-layer ownership, never a loop).
+Per-citizen accreting first-person memory — the subjective layer alongside objective LifeHistory/dials (two-layer ownership, never a loop). **Framing (Mike + grok 2026-08-07):** treat each `cp-POP-XXXXX` page as that person's **social wiki wall** (private feed), not the public paper. Journalists are ledger citizens; **their wall is their portfolio + life feed**.
 
-**Structure:** one parent tag `citizen-pages` groups all; each citizen has their own tag `cp-POP-XXXXX` (derived from POPID, stored in `Simulation_Ledger` col AW `SMPageId`). Each per-citizen tag is its own queryable namespace — a `/v4/search` by `cp-POP-XXXXX` returns ONLY that citizen's page. **Isolation verified S262** (two-tag smoke: cross-tag search does not leak across the shared parent).
+**Structure:** parent tag `citizen-pages`; per-citizen tag `cp-POP-XXXXX` (POPID; also denormalized on Simulation_Ledger col AW `SMPageId`). Isolation verified S262.
 
-**What goes in:** a citizen's own wake-time reflections (first-person prose), one doc per wake, idempotent per `(popId, cycle, daypart)` via customId. **What does NOT:** anything objective/engine (dials, LifeHistory — those are the deterministic cycle's), and nothing from other citizens.
+**What goes in:**
+- Citizen-loop wake reflections / tensions (life)
+- Interview PRESS dayparts when they are quoted (`citizenVoice --record`)
+- **Journalist filings:** after Rhea PASS, `filed: <headline>` on the byline POPID (author self-record)
+- **Working notes:** `memory_note` tool → short deskwork notes (optional dig)
 
-**Why isolated (not nested in `world-data`):** reflections are subjective first-person prose ("I'm furious at my boss"). Mixed into `world-data` they would contaminate `lookup_citizen`/`search_world`/desk packets and could surface unfenced in angle briefs. A dedicated container is isolated by default — nothing reads it unless explicitly pointed via the AW tag. (Same contamination class the engineer-Mags case taught.)
+**What does NOT:** engine metrics as authority, other people's walls, bay-tribune canon prose mixed in as fact.
 
-**Who reads:** the citizen-loop bot at wake-time (a citizen's own page, alongside their LifeHistory) + editions that interview model-citizens from their page (forward thread). **Who writes:** `lib/citizenPage.js` (`appendReflection_`) at wake-time. **NOT in the plugin config; NOT read at boot; NOT touched by MCP tools, desk agents, or Mara.**
+**Why isolated (not nested in `world-data`):** first-person prose contaminates city lookup if mixed. Dedicated container; nothing reads it unless explicitly pointed.
 
-**Determinism:** wake-side only — `lib/citizenPage.js` is NEVER called from the cycle path (it's I/O; replay would re-hit Supermemory). The cycle only ever reads the persisted categorical tag (col AW / classifier intake), never this prose. Fence: consumers wrap recalled page content via `lib/memoryFence.js` at injection.
+**Who reads:**
+- Citizen-loop at wake (own page + LifeHistory)
+- Editions/interviews that pull a subject's page
+- **Newsroom writer/angle (2026-08-07):** **HARD-INJECT** recent wall posts into state/angle ask via `scripts/reporterWall.js` — **not** “optional memory_recall.” First wake must hook past entries. Tools remain for deeper mid-compose digs.
+- **Jax / firebrand:** `cp-POP-00799` is the reference journalist social wall (Grok seat). Setup + tracking: `docs/plans/2026-08-06-jax-sim-stink-audit.md` Task 8; `NEXT[grok]`.
 
-**Status (S262):** container + module landed; populated at bot-wiring (citizen-loop piece 4 / bot terminal). The live AW pointer write (`ensurePagePointer_`) is exercised at bot-wiring against a sentinel row.
+**Who writes:** `lib/citizenPage.js` (`appendReflection_`) wake-side only; reporter self-record on gate pass; memory_note. **NOT** in plugin config; **NOT** boot; **NOT** MCP lookup_citizen / search_world / Mara.
+
+**Determinism:** wake-side only — never from the cycle path. Fence: consumers wrap page content via `lib/memoryFence.js` when injecting into models.
+
+**Status:** container + module live (S262). Journalist hard-inject: `scripts/reporterWall.js` + `cron-desk-run.js` angle/write (2026-08-07). Optional tools still available; they are **not** the continuity contract.
 
 ---
 
@@ -293,6 +305,7 @@ published provenance for canon searches.
 | World-state one-liner ("where are we now") | planned `world-data` + `wd-snapshot` | none yet | — | Writer target added S313, but the live tag had 0 documents on 2026-07-27; it is omitted from MCP fan-out until populated |
 | Mags' deliberate brain | `mags` | plugin only | `/supermemory-search --user "query"` | deliberate context and reasoning |
 | Project memory | `super-memory` | plugin only | `/supermemory-search --repo "query"` | explicit saves/indexes; Stop auto-capture is off |
+| Citizen / journalist social wiki wall | `citizen-pages` + `cp-POP-XXXXX` | `lib/citizenPage.js` / `scripts/reporterWall.js` | list via module; not MCP | First-person feed; newsroom hard-injects recent posts on angle/write (2026-08-07). Not city canon. |
 
 ### Write operations
 

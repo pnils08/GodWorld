@@ -133,12 +133,42 @@ pointers:
 - **Verify:** `node scripts/buildJaxSlice.test.js`; `node scripts/buildJaxSlice.js --cycle 102`
 - **Status:** [x] done (grok 2026-08-07)
 
+### Task 8: Social wiki wall standard + Jax first-wake hook
+
+**Framing (Mike-direct 2026-08-07):** `citizen-pages` / `cp-POP-XXXXX` = each person's **social wiki wall** (private feed), not the Tribune and not `wd-citizens`. Journalists are citizens; their wall is portfolio + life. **First wake must hard-hook past posts** — not “maybe call memory_recall.”
+
+**Jax setup (`POP-00799` → `cp-POP-00799`):**
+
+| Event | Wall write | When |
+|--------|------------|------|
+| Citizen-loop reflection/tension | `appendReflection_` | Existing wakes (already has posts) |
+| Quoted as source | PRESS daypart | Report stage (others' pages) |
+| **Filed column** | `filed: <headline>` | Gate **PASS** only (self-record) |
+| Working note | `memory_note` | Optional mid-compose dig |
+
+| Event | Wall read | When |
+|--------|-----------|------|
+| **Angle wake** | `reporterWall.loadReporterWall` → inject into ask | **Hard** (always for byline POPID) |
+| **Write wake** | same → `### YOUR SOCIAL WIKI WALL` in state | **Hard** |
+| Tool `memory_recall` | deeper dig | Optional; **not** the continuity contract |
+
+- **Files:**
+  - `scripts/reporterWall.js` — create (load/format/ensure)
+  - `scripts/cron-desk-run.js` — hard inject angle + write
+  - `docs/SUPERMEMORY.md` — social-wall doctrine + journalist readers
+  - This plan + `NEXT[grok]` track wall + filings
+- **Verify:** `node scripts/reporterWall.js --pop POP-00799 --ensure` prints recent posts; angle.json carries `reporterWall.postCount`
+- **Status:** [x] done (grok 2026-08-07)
+
+**Still track (not a bug — contract):** ungated samples do **not** write `filed:` (contamination wall). Continuity grows on Rhea-pass / citizen-loop posts.
+
 ---
 
 ## Open questions
 
 - Threshold 35 / illness 8% / 7-day cooldown remain knobs.
 - Business_Ledger name/address join + Cultural_Ledger venues-by-hood are the top color deepeners.
+- Extend hard wall-inject to **all** roster bylines (not only when byline has popid — already general) — done for any byline POPID; firebrand is the reference.
 
 ---
 
@@ -146,6 +176,7 @@ pointers:
 
 - 2026-08-06 (grok) — Plan + Tasks 1–5 implemented in same change. Control plane agent files untouched. Engine bylineIneligible left intentional.
 - 2026-08-07 (grok) — Task 7 Jax stink slice + scene pack + gap inventory; heat model Llama 3.3; NEXT[grok] tracking.
+- 2026-08-07 (grok) — Task 8 social wiki wall hard-inject; SUPERMEMORY doctrine; Jax wall is reference setup.
 
 ---
 
@@ -153,3 +184,4 @@ pointers:
 
 - 2026-08-06 (grok) — Initial plan + implementation of scanner, force-slot, approach, angle ask. Research basis adopted.
 - 2026-08-07 (grok) — Jax-owned slice (not Mags); scene color from texture/weather/chaos/bonds; ledger gap list for color depth.
+- 2026-08-07 (grok) — Social wiki wall standard; first-wake hard hook for reporter POPIDs; Jax cp-POP-00799 documented.

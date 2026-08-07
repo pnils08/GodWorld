@@ -297,7 +297,8 @@ function collectQuoteAsks(lane, persona, story) {
 // Task 2.5.2/2.5.3: an assigned story leads the state — the angle is the
 // editor's, the words are the reporter's — and the color doctrine draws the
 // wall: canon facts immutable, scene texture free.
-function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, assignment) {
+// wallPosts: HARD-INJECTED social wiki wall lines (reporterWall) — not optional tool.
+function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, assignment, wallBlock) {
   const L = [];
   const story = assignment && assignment.story;
   if (story) {
@@ -380,6 +381,11 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
     // the writer as an allowed CITIZEN to name/quote, which invented a fake resident
     // and tripped the canon gate (S332 c102). The byline is who WRITES, never a source.
     L.push('BYLINE (the reporter writing this — write in their voice; NEVER name or quote them in the body): ' + byline.name);
+    L.push('');
+  }
+  // Social wiki wall — mandatory first-wake hook when loaded (journalist = citizen).
+  if (wallBlock) {
+    L.push(wallBlock);
     L.push('');
   }
   L.push('This is your beat\'s signal for the cycle — POINTERS. Reach the raw material yourself');
@@ -574,6 +580,25 @@ async function runAngle(assign) {
   const persona = personaInfo(personaSlug);
   const asker = persona || (assign ? { name: assign.name, popid: assign.popid } : null);
   const digest = lane.slice(0, 12).map(e => '- ' + (e.label || '(no label)') + (e.hood ? ' [' + e.hood + ']' : '')).join('\n');
+  // Social wiki wall (cp-POP-*) — HARD load before angle, not optional tool.
+  let wallBlock = null;
+  let wallMeta = null;
+  if (asker && asker.popid) {
+    try {
+      const { loadReporterWall, formatWallBlock, wallAskSnippet, ensureReporterWall } =
+        require(path.join(__dirname, 'reporterWall'));
+      await ensureReporterWall(asker.popid);
+      const wall = await loadReporterWall(asker.popid, 6);
+      wallMeta = { tag: wall.tag, postCount: wall.posts.length, error: wall.error || null };
+      wallBlock = formatWallBlock(wall, { name: asker.name });
+      log('reporter wall: ' + (wall.tag || asker.popid) + ' posts=' + wall.posts.length +
+        (wall.error ? ' err=' + wall.error : ''));
+      // stash snippet for ask construction
+      asker._wallSnippet = wallAskSnippet(wall, 3);
+    } catch (e) {
+      log('reporter wall load failed (non-fatal): ' + e.message);
+    }
+  }
   // Task 2.5.2/2.5.3 wake-1 shape: an ASSIGNED reporter opens the assignment and
   // plans the chase in their own voice — they never pick the angle. Personas keep
   // their authored smells-off stance (persona-only, per the plan's lane note).
@@ -625,8 +650,9 @@ async function runAngle(assign) {
         (story.hood ? '\nWHERE: ' + story.hood : '') +
         (sceneBits.length ? '\nSCENE PACK:\n' + sceneBits.join('\n') : '') +
         (approach ? '\n\n' + approach : '') +
+        (asker._wallSnippet ? '\n\n' + asker._wallSnippet : '') +
         '\n\nIn your own voice: what does not line up, who should answer, and what question ends the piece? ' +
-        'Color the room from the scene pack without inventing careers or named people. ' +
+        'Hook your wall posts for continuity (do not amnesia). Color the room from the scene pack without inventing careers or named people. ' +
         'Do not file a process roundup. One stink. Name names of canon officials only.';
     } else if (!persona && story) {
       ask = 'You\'re ' + asker.name + ', ' + desk + ' desk. Your editor just handed you today\'s assignment:\n' +
@@ -636,10 +662,12 @@ async function runAngle(assign) {
         (brief.profiles.length ? '\nWHO THEY ARE (ledger — plan around who they actually are):\n' + brief.profiles.map(p => '  - ' + p).join('\n') : '') +
         (story.hood ? '\nWHERE: ' + story.hood : '') +
         (approach ? '\n\n' + approach : '') +
+        (asker._wallSnippet ? '\n\n' + asker._wallSnippet : '') +
         '\n\nThe angle is fixed — the story is yours to create from it. In your own voice: how do you ' +
         'chase this today? What will you verify in the record first, and who do you want to talk to?';
     } else {
       ask = 'You\'re ' + asker.name + ', between stories. This is the ' + desk + ' beat\'s raw signal this cycle:\n' + digest +
+        (asker._wallSnippet ? '\n\n' + asker._wallSnippet : '') +
         '\n\nWhat\'s smelling off to you? Point at the ONE thing nobody\'s touching — and name who should answer for it.';
     }
     log('asking ' + asker.name + ' (' + asker.popid + ') what smells off...');
@@ -677,6 +705,7 @@ async function runAngle(assign) {
       bonds: (jaxSlice.bonds || []).slice(0, 12),
       gaps: jaxSlice.gaps
     } : null,
+    reporterWall: wallMeta,
     canonResearch,                                    // Task 2.5.3 §2: ≥3 validated canon facts + tool trace
     angleRead,
     lanePicks: lane.slice(0, 5).map(e => ({ label: e.label, kind: e.kind, hood: e.hood, ref: e.ref, popids: e.popids || [] })),
@@ -1049,10 +1078,25 @@ async function runWrite(assign) {
   if (assignment && angle && angle.canonResearch && Array.isArray(angle.canonResearch.facts)) {
     assignment.canonFacts = angle.canonResearch.facts;
   }
+  // Social wiki wall — HARD inject into writer state (not optional memory_recall).
+  let wallBlock = null;
+  if (byline && byline.popid) {
+    try {
+      const { loadReporterWall, formatWallBlock, ensureReporterWall } =
+        require(path.join(__dirname, 'reporterWall'));
+      await ensureReporterWall(byline.popid);
+      const wall = await loadReporterWall(byline.popid, 6);
+      wallBlock = formatWallBlock(wall, { name: byline.name });
+      log('reporter wall: ' + (wall.tag || byline.popid) + ' posts=' + wall.posts.length);
+    } catch (e) {
+      log('reporter wall load failed (non-fatal): ' + e.message);
+    }
+  }
   const stateFile = path.join(COMPARE, base + '.state.md');
   fs.writeFileSync(stateFile, buildLaneState(desk, cycle, lane, byline, quotes, persona,
-    angle && angle.angleRead ? angle.angleRead.text : null, assignment));
-  log('writing on lane (' + fs.statSync(stateFile).size + ' B injected state' + (persona ? ' + stance anchor' : '') + ')...');
+    angle && angle.angleRead ? angle.angleRead.text : null, assignment, wallBlock));
+  log('writing on lane (' + fs.statSync(stateFile).size + ' B injected state' + (persona ? ' + stance anchor' : '') +
+    (wallBlock ? ' + wall' : '') + ')...');
   const artifactTag = writerArtifactTag(assign, personaSlug);
   const writerArgs = buildWriterArgs(
     desk,

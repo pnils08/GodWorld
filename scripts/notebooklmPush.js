@@ -23,6 +23,7 @@
 
 require('/root/GodWorld/lib/env');
 const { spawnSync } = require('child_process');
+const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 
@@ -32,6 +33,7 @@ const CONFIG_PATH = path.join(ROOT, 'config/notebooklm.json');
 const AUDIO_RETRY_INTERVAL_MS = 30 * 1000;
 const AUDIO_RETRY_MAX = 24; // 12 minutes — audio overviews typically render in 2-6
 const DISCORD_ATTACH_CAP = 8 * 1024 * 1024; // webhook attachment limit; bigger files go link-only
+const DIRECTION_GUIDE_PATH = path.join(ROOT, 'config/audio_direction_weekly.md');
 
 function degrade(reason) {
   console.log('NOTEBOOKLM PUSH FAILED (non-blocking): ' + reason);
@@ -68,6 +70,40 @@ function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
 
+// Reuse-or-add the audio-direction guide as an archive-notebook source
+// (pipeline.51). Title carries a content hash so guide edits re-upload and an
+// unchanged guide reuses the existing source. Non-blocking: any failure
+// returns null and the audio overview proceeds undirected.
+function ensureDirectionSource(notebookId) {
+  if (!fs.existsSync(DIRECTION_GUIDE_PATH)) return null;
+  try {
+    const hash = crypto.createHash('sha256')
+      .update(fs.readFileSync(DIRECTION_GUIDE_PATH, 'utf-8'))
+      .digest('hex');
+    const title = '00_AUDIO_DIRECTION_GUIDE — weekly — ' + hash.slice(0, 12);
+    const list = nlm(['source', 'list', notebookId, '--json']);
+    if (list.ok) {
+      try {
+        const sources = JSON.parse(list.out);
+        const found = (Array.isArray(sources) ? sources : []).find(
+          (s) => s && (s.title === title || s.name === title)
+        );
+        if (found && (found.id || found.source_id)) return found.id || found.source_id;
+      } catch (_) { /* fall through to add */ }
+    }
+    const add = nlm(['source', 'add', notebookId, '--file', DIRECTION_GUIDE_PATH, '--title', title, '--wait']);
+    if (!add.ok) {
+      console.log('AUDIO DIRECTION GUIDE SKIPPED (non-blocking): ' + add.out.slice(0, 200));
+      return null;
+    }
+    const m = add.out.match(/Source ID:\s*(\S+)/);
+    return m ? m[1] : null;
+  } catch (e) {
+    console.log('AUDIO DIRECTION GUIDE SKIPPED (non-blocking): ' + e.message);
+    return null;
+  }
+}
+
 async function main() {
   const args = parseArgs(process.argv);
 
@@ -96,10 +132,17 @@ async function main() {
   // 2. Audio overview (editions only — quota is scarce, /post-publish passes --audio for --type edition)
   if (args.audio) {
     // Scope to the just-added source — the notebook holds the whole archive; an
-    // unscoped overview would podcast ALL editions, not this cycle's.
+    // unscoped overview would podcast ALL editions, not this cycle's. The
+    // direction guide rides alongside as a second source (pipeline.51).
+    // Guide only rides when the edition source resolved — a guide-only scope
+    // would podcast the direction doc itself.
+    const directionId = sourceId ? ensureDirectionSource(config.notebookId) : null;
     const audioArgs = ['audio', 'create', config.notebookId, '--format', config.audioFormat || 'deep_dive', '--confirm'];
-    if (sourceId) audioArgs.push('--source-ids', sourceId);
-    audioArgs.push('--focus', 'Edition C' + args.cycle);
+    const audioSourceIds = [sourceId, directionId].filter(Boolean);
+    if (audioSourceIds.length) audioArgs.push('--source-ids', audioSourceIds.join(','));
+    audioArgs.push('--focus', 'Edition C' + args.cycle + (directionId
+      ? '. Follow the 00_AUDIO_DIRECTION_GUIDE source for host persona, tone, and thematic allocation.'
+      : ''));
     const create = nlm(audioArgs);
     if (!create.ok) {
       console.log('NOTEBOOKLM AUDIO SKIPPED (non-blocking): create failed: ' + create.out.slice(0, 300));

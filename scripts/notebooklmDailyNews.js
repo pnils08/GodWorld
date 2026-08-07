@@ -33,9 +33,10 @@ const COMPARE_DIR = path.join(ROOT, 'output', 'cron-compare');
 const OUTPUT_DIR = path.join(ROOT, 'output', 'notebooklm', 'daily');
 const AUDIO_RETRY_INTERVAL_MS = 30 * 1000;
 const AUDIO_RETRY_MAX = 30;
-const SOURCE_VERSION = '1.4';
+const SOURCE_VERSION = '1.5';
 const DEFAULT_AUDIO_LENGTH = 'default';
 const DAILY_NEWS_IDENTITY = 'The Bay Tribune daily news for Oakland.';
+const DIRECTION_GUIDE_PATH = path.join(ROOT, 'config', 'audio_direction_daily.md');
 
 function parseArgs(argv) {
   const args = {
@@ -367,6 +368,10 @@ function sourceTitle(kind, cycle, hash) {
   return 'The Bay Tribune Daily C' + cycle + ' — ' + kind + ' — ' + hash.slice(0, 12);
 }
 
+function directionGuideTitle(hash) {
+  return '00_AUDIO_DIRECTION_GUIDE — daily — ' + hash.slice(0, 12);
+}
+
 function ensureSource(notebookId, file, title, existingSources) {
   const existing = findSourceId(existingSources, title);
   if (existing) return { id: existing, reused: true };
@@ -398,8 +403,10 @@ function dailyPrompt(cycle) {
     ', including the connections that matter and what the newsroom should watch next.';
 }
 
-function dailyAudioFocus() {
-  return DAILY_NEWS_IDENTITY;
+function dailyAudioFocus(hasDirectionGuide) {
+  if (!hasDirectionGuide) return DAILY_NEWS_IDENTITY;
+  return DAILY_NEWS_IDENTITY +
+    ' Follow the 00_AUDIO_DIRECTION_GUIDE source for host persona, tone, and thematic allocation.';
 }
 
 async function downloadAudio(notebookId, artifactId, audioPath) {
@@ -604,13 +611,36 @@ async function run(argv) {
 
   let audioPath = null;
   if (args.audio) {
+    // Audio-direction guide rides ONLY the audio create — the written brief
+    // query stays scoped to the bounded source so host direction never leaks
+    // into written output (pipeline.51).
+    let directionSourceId = null;
+    if (fs.existsSync(DIRECTION_GUIDE_PATH)) {
+      try {
+        const guideHash = stableHash(fs.readFileSync(DIRECTION_GUIDE_PATH, 'utf8'));
+        const guide = ensureSource(
+          config.newsroomNotebookId,
+          DIRECTION_GUIDE_PATH,
+          directionGuideTitle(guideHash),
+          existingSources
+        );
+        directionSourceId = guide.id;
+        manifest.audioDirectionSourceId = directionSourceId;
+        fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+      } catch (e) {
+        console.log('AUDIO DIRECTION GUIDE SKIPPED (non-blocking): ' + e.message);
+      }
+    }
+    const audioSourceIds = directionSourceId
+      ? sourceIds.concat(directionSourceId)
+      : sourceIds.slice();
     const audioLength = dailyConfig.audioLength || DEFAULT_AUDIO_LENGTH;
     const create = nlm([
       'audio', 'create', config.newsroomNotebookId,
       '--format', dailyConfig.audioFormat || config.audioFormat || 'deep_dive',
       '--length', audioLength,
-      '--source-ids', sourceIds.join(','),
-      '--focus', dailyAudioFocus(),
+      '--source-ids', audioSourceIds.join(','),
+      '--focus', dailyAudioFocus(Boolean(directionSourceId)),
       '--confirm',
     ]);
     if (!create.ok) throw new Error('daily audio create failed: ' + create.out.slice(0, 400));

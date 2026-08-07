@@ -37,6 +37,8 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 - **`AGENTS.md`** — Codex/backup-CLI operating boundaries (control-plane read-only, no-invent-canon, no-deploy, propose-not-deploy). Authored by Codex GPT-5.6, tweaked + approved S332. *(reference, infrastructure, active)*
 - **`MEMORY.md`** — Mags' persistent-memory layer (separate from this catalog). Lives under `/root/.claude/projects/-root-GodWorld/memory/`.
 - **`GodWorld_My_Oakland.md`** — the operating doctrine. The sheets/citizens are the world; City Hall serves the sheets, editions serve the citizens; engine signals (errors = crises, spikes/drops = stories) are what civic + media capture so Mike can intervene with real fixes. Read before any cycle run. Pointer in CLAUDE.md §Canon facts. *(reference, doctrine, active)*
+- **`config/audio_direction_daily.md`** — NotebookLM audio-host direction guide for the daily listening brief (in-world Bay Tribune hosts, 40/40/20 allocation). Uploaded as a notebook source by `scripts/notebooklmDailyNews.js` on audio create only; editing it auto-re-uploads via content-hash title. Source: [[research/2026-08-07-notebooklm-audio-overview-direction]] (pipeline.51). *(reference, media, active)*
+- **`config/audio_direction_weekly.md`** — NotebookLM audio-host direction guide for the Saturday edition overview (Mike's archivist persona from Drive `00_AUDIO_DIRECTION_GUIDE`). Uploaded to the archive notebook by `scripts/notebooklmPush.js` on audio create; rides `--source-ids` beside the edition source. Source: [[research/2026-08-07-notebooklm-audio-overview-direction]] (pipeline.51). *(reference, media, active)*
 
 ---
 

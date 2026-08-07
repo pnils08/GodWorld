@@ -32,13 +32,14 @@ pointers:
 - We need to integrate an `AUDIO_DIRECTION_GUIDE` into both the Daily News Run and the Weekly Drop.
 - This will require creating a plan to update `scripts/notebooklmDailyNews.js` and `scripts/notebooklmPush.js` to support this programmatic source injection.
 
-**Ignited plans:** none yet (plan pending)
+**Ignited plans:** landed direct (S358, engine-sheet) — no separate plan doc; implementation notes below.
 
 ---
 
 ## Applications (living)
 
 - 2026-08-07 — Initial extraction.
+- 2026-08-07 (S358) — **Landed.** Two guide files: `config/audio_direction_daily.md` (in-world Bay Tribune hosts — the Drive archivist persona would break the daily's in-world news frame) + `config/audio_direction_weekly.md` (Drive `00_AUDIO_DIRECTION_GUIDE` near-verbatim). Both scripts upload the guide as a notebook source with a content-hash title (edit → auto-re-upload, unchanged → reuse) and append its ID to `--source-ids` on **audio create only** — written brief/summary queries stay unscoped to it. `--focus` gains a pointer sentence binding hosts to the guide. Guards: push.js only attaches the guide when the edition source ID resolved (guide-only scope would podcast the directive itself); all guide failures are non-blocking. SOURCE_VERSION 1.4→1.5. **Accepted hazard (Mike, S358):** the weekly guide lives as a permanent source in the canon archive notebook — unscoped archive queries can see it. Mitigation: meta first-line tells the model to ignore it for research/summary queries. **Watch:** next scheduled daily run + Saturday edition run; fine-tune if the canon notebook surfaces the guide in query answers.
 
 ---
 

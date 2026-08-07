@@ -84,7 +84,7 @@ assert.deepStrictEqual(
   { sourceIds: ['kept'], generatedAt: 'new' }
 );
 assert.strictEqual(isCompletedManifest({
-  sourceVersion: '1.4',
+  sourceVersion: SOURCE_VERSION,
   sourceIds: ['source'],
   audioPath: 'output/synthetic-noncanon.m4a',
   driveLink: 'https://example.invalid/synthetic',
@@ -102,7 +102,7 @@ assert.strictEqual(isCompletedManifest({
   driveLink: 'https://example.invalid/synthetic',
 }), false);
 assert.strictEqual(isCompletedManifest({
-  sourceVersion: '1.4',
+  sourceVersion: SOURCE_VERSION,
   sourceIds: ['source'],
 }), false);
 
@@ -158,13 +158,15 @@ assert.strictEqual(isCompletedManifest({
   const title = sourceTitle('current source pack', 999, 'abcdef1234567890');
   assert.strictEqual(title, 'The Bay Tribune Daily C999 — current source pack — abcdef123456');
   const prompt = dailyPrompt(999);
-  assert.strictEqual(SOURCE_VERSION, '1.4');
+  assert.strictEqual(SOURCE_VERSION, '1.5');
   assert.strictEqual(DEFAULT_AUDIO_LENGTH, 'default');
   assert.strictEqual(notebookConfig.dailyNews.audioLength, 'default');
   assert(prompt.includes('The Bay Tribune daily news for Oakland for Cycle 999'));
   assert(!prompt.includes('GodWorld Oakland, 2042'));
   assert.strictEqual(dailyAudioFocus(), DAILY_NEWS_IDENTITY);
-  assert.strictEqual(dailyAudioFocus(), 'The Bay Tribune daily news for Oakland.');
+  assert.strictEqual(dailyAudioFocus(false), 'The Bay Tribune daily news for Oakland.');
+  assert(dailyAudioFocus(true).startsWith(DAILY_NEWS_IDENTITY));
+  assert(dailyAudioFocus(true).includes('00_AUDIO_DIRECTION_GUIDE'));
 }
 
 {

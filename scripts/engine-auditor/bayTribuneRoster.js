@@ -19,9 +19,11 @@
  * Theme profiles are enriched from rosterLookup by name-match where available
  * (22/31 overlap), else synthesized from the beat so the theme axis still scores.
  *
- * Pool excludes non-writers and Paulson's sports domain (identity rule: Paulson runs
- * sports). Engine_audit patterns are city/civic/economic/health signals — never
- * sports — so sports/photo/masthead seats are out of the city-seed pool.
+ * Pool excludes non-writers (masthead, photo). Sports writers are IN the writing
+ * pool with beatDomain SPORTS (Mike-direct 2026-08-07: Paulson owns long-form /
+ * interview depth, NOT M–F cron exclusion — crons are the life, including sports).
+ * City-seed engine_audit patterns remain non-sports; sports seats still tag
+ * lane:'sports' for desk-signal WHO-assist via LANE_BY_DOMAIN.
  *
  * Runtime: Node only (engine-auditor lane). Reads live sheet via lib/sheets.
  */
@@ -49,13 +51,14 @@ const BEAT_RULES = [
   { match: /editor-in-chief/i,                exclude: true,  reason: 'masthead' },
   { match: /copy chief/i,                     exclude: true,  reason: 'masthead/copy' },
   { match: /photographer|photo assistant/i,   exclude: true,  reason: 'photo desk' },
-  // `lane:'sports'` (S336 engine.76 W5h2): still excluded from the CITY-seed
-  // pool (engine_audit patterns are never sports), but these seats ARE the
-  // sports-lane byline pool for the desk-signal WHO-assist — buildLanePools()
-  // picks them up via this tag. Writers only; the exclusion reason is unchanged
-  // so existing consumers of `excluded` see identical rows.
+  // Sports writers (S336 lane tag; 2026-08-07 Mike-direct: INCLUDE in fanout).
+  // Was exclude reason 'sports (Paulson domain)' — wrong for M–F crons. Paulson
+  // gate is long-form interviews / depth, not daily wakes. Fan columnist,
+  // beat, sideline, etc. route to SPORTS domain → sports fanout quota.
   { match: /\bA's\b|sideline|gridiron|\bsports\b|fan columnist|statistical support|speculative internet/i,
-                                              exclude: true,  reason: 'sports (Paulson domain)', lane: 'sports' },
+                                              domain: 'SPORTS',
+                                              themes: ['sports', 'athletics', "a's", 'fan', 'roster', 'coliseum', 'standings'],
+                                              lane: 'sports' },
 
   // Data Desk (S334) — Marbury's citywide seat. Matched narrowly on "data desk",
   // NOT /data analyst/, because Rhea Morgan is "Data Analyst / Copy Chief" and must
@@ -171,6 +174,7 @@ const LANE_BY_DOMAIN = {
   COMMUNITY: 'culture',
   EDUCATION: 'culture',
   ENVIRONMENT: 'culture',
+  SPORTS: 'sports',
   GENERAL: '*'
 };
 

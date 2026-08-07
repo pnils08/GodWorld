@@ -12,5 +12,10 @@
     "model": "meta-llama/llama-3.3-70b-instruct",
     "note": "Jax heat seat (grok 2026-08-07). Llama 3.3 70B: stronger adversarial/character voice than deepseek-chat, still ~pennies/article. Hermes-4-70b is the heat upgrade if this still sands; full x-ai/grok-* is character-true but leaves the penny band."
   },
+  "p-slayer": {
+    "provider": "openrouter",
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "note": "P.Slayer fan-heat seat (grok 2026-08-07). Same heat band as firebrand — confrontation over press-box calm. Solo persona, not multi-voice sports-desk."
+  },
   "_default":   { "provider": "openrouter", "model": "deepseek/deepseek-chat" }
 }

@@ -33,14 +33,14 @@ const COMPARE = path.join(ROOT, 'output', 'cron-compare');
 // per the 2026-07-25 directive; culture/business fill out the page.
 const DAILY_QUOTAS = { civic: 2, sports: 2, culture: 1, business: 1 };
 
-// Mirrors LANE_DOMAINS in cron-desk-run.js (keep in sync). Sports has no SPORTS
-// beatDomain in the Tribune roster (Paulson is excluded), so it falls back to
-// the GENERAL pool — which sports therefore shares with business.
+// Mirrors LANE_DOMAINS in cron-desk-run.js (keep in sync).
+// 2026-08-07: SPORTS beatDomain is live (P Slayer, Anthony, Tanya, …). Sports
+// quota no longer falls through to GENERAL-only (that was the Paulson-exclude hangover).
 const DESK_DOMAINS = {
   civic:    ['CIVIC', 'HEALTH', 'SAFETY', 'INFRASTRUCTURE', 'EDUCATION', 'ENVIRONMENT'],
   culture:  ['CULTURE', 'COMMUNITY'],
   business: ['ECONOMIC', 'GENERAL'],
-  sports:   []
+  sports:   ['SPORTS']
 };
 
 function arg(flag, def) {

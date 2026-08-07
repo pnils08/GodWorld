@@ -602,6 +602,13 @@ async function main() {
       'bullet-led number dumps, sanding a metric fight into a calm initiative status piece. ' +
       'If two signals fight (decay vs recovery, money vs placements, illness with no lead), that FIGHT is the story. ' +
       'Heat without inventing citizens or criminal claims — question or attributed allegation only.\n'
+    : PERSONA === 'p-slayer'
+    ? '\n\nP SLAYER HEAT (hard): You are P Slayer — die-hard fan columnist, not the press box and not multi-voice sports-desk. ' +
+      'First-person I/we only. Target 400–700 words. Open with gut or Oakland sensory (bar, lot, bleacher, BART). ' +
+      'Most columns carry CHARGE — fury, dread, euphoria, defiance — boring if mostly content. ' +
+      'Friction pivot required: name the counter-argument, kill it. Metrics are foils/weapons, not Anthony analysis. ' +
+      'Signature arc: hate the move → live with it → "I was wrong" or double down. Hook your wall if a prior take is in play. ' +
+      'FORBIDDEN: FO press-release voice, third-person "fans expressed," measured both-sides without a pick, Hal archive essay, Anthony contract architecture.\n'
     : '';
 
   const system =

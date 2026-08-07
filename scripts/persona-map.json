@@ -5,5 +5,11 @@
     "popid": "POP-00799",
     "beatDomain": "ACCOUNTABILITY",
     "note": "Tier-2 ledger citizen, Tribune freelance accountability (Grok seat). Sim bullshit detector — short, hot, uncomfortable. Writer model: desk-model-map freelance-firebrand (llama-3.3-70b), not civic DeepSeek."
+  },
+  "p-slayer": {
+    "name": "P Slayer",
+    "popid": "POP-00008",
+    "beatDomain": "SPORTS",
+    "note": "Fan columnist (Grok heat seat, parallel to Jax). Die-hard fan voice — hate the signing / I was wrong arc. NOT multi-voice sports-desk. Wall cp-POP-00008. Model: desk-model-map p-slayer."
   }
 }

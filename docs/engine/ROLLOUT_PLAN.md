@@ -49,6 +49,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | pipeline.44 | Desk-slice fork (FLAGSHIP, Mike-direct S313) — T1–T4 done S313 (3 skills live); open: T5 post-publish fit, T6 pilot | in-progress | engine-sheet / research-build | [[../research/2026-07-11-desk-slice-fork]] |
 | pipeline.45 | Newsroom canon flow (Mike-direct 2026-08-04) — Phases 1-3 BUILT + Saturday cron INSTALLED (Sat 16:00 UTC); acceptance = first unattended run Aug 8, then Phase 4 graduation watch | in-progress | engine-sheet / research-build | [[../plans/2026-08-04-newsroom-canon-flow]] |
 | pipeline.46 | Jax sim stink-audit (grok) — scanner + weekly firebrand force-slot + approach override; Tasks 1-5 shipped 2026-08-06; live fanout observe remains | in-progress | research-build | [[../plans/2026-08-06-jax-sim-stink-audit]] |
+| pipeline.47 | P Slayer fan-heat seat (grok) — sports writers IN M-F fanout; solo p-slayer persona; multi-voice sports-desk legacy for headless | in-progress | research-build | [[../plans/2026-08-07-p-slayer-fan-heat-seat]] |
 
 ### engine.* — Engine code, ledger, schema
 

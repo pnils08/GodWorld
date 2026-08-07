@@ -159,7 +159,7 @@ const LANE_DOMAINS = {
   civic:    ['CIVIC', 'HEALTH', 'SAFETY', 'INFRASTRUCTURE', 'EDUCATION', 'ENVIRONMENT'],
   culture:  ['CULTURE', 'COMMUNITY'],
   business: ['ECONOMIC', 'GENERAL'],
-  sports:   []
+  sports:   ['SPORTS']  // 2026-08-07: real sports bylines (was empty / Paulson-exclude hangover)
 };
 const QUOTE_CITIZEN_CAP = 4;   // per wake — keep the DeepSeek quote pre-pass cheap
 

@@ -74,6 +74,10 @@ venv/**
 # Claude config
 .claude/**
 
+# Agent skill packages (Node.js, use require — S360 bench fire caught
+# batchIngestDriveFolder.js killing the whole Apps Script load)
+.agents/**
+
 # Credentials
 credentials/**
 

@@ -141,7 +141,11 @@ That stack is **appropriate for bylines**. Applying it unchanged to civic office
 
 ---
 
-## Verdict: `watch`
+## Verdict: `adopt` (trigger fired 2026-08-07 — was `watch`)
+
+**APPROACH APPROVED — proceed (Mags, research-build S357, 2026-08-07).** Mike-direct: YES on office-holder position walls — "if they are saying it then it should be saved." Grok is clear to proceed on the recommended product exactly as scoped in §3: holder-POPID `appendReflection_` on civic emits (CIVIC/OFFICE daypart), prior-position inject on next office run, harder canon fencing than journalist walls, faction agents keyed per-seat from `civic-office-map` — never one wall per bloc. Rollout row: civic.16. Condition 2 (POPID reconciliation) is DONE — see Applications below. Condition 3 (one-page design: daypart name + inject strength + faction keying) is the first deliverable before code.
+
+### Original verdict for the record: `watch`
 
 **Why not adopt immediately:** Journalist wall is proven; citizen-voice page loop is proven; civic holders already have a different continuity path (cascade packets + production log). Extending walls to offices is a **product decision** (do we want Avery’s page to accrete “I said X on the Stabilization Fund”?) not a missing file in the agent package.
 
@@ -180,6 +184,8 @@ When trigger fires → plan under civic/research-build: “office-holder positio
 ## Applications (living)
 
 - 2026-08-07 — Written for Claude handoff after journalist solo-seat wall work; no agent package edits.
+- 2026-08-07 (mags S357) — **POPID reconciliation DONE (condition 2).** Ledger verified: Brenda Okoro IS POP-00037 (Deputy Mayor, Community Affairs) — IDENTITY's "not in Simulation_Ledger" claim was false, fixed. Police chief IDENTITY carried POP-00142, which the ledger says is **Jonas Patel, Medical Examiner** — worse than suspected drift; fixed to POP-00136 (Rafael Montez, verified). Both IDENTITY files now carry verified POP ID lines.
+- 2026-08-07 (mags S357) — Verdict flipped watch→adopt on Mike-direct approval; civic.16 filed; grok clear to proceed starting with the condition-3 one-page design.
 
 ---
 

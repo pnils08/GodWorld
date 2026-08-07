@@ -163,7 +163,27 @@ When trigger fires → plan under civic/research-build: “office-holder positio
 - Optional shared wall formatter for voiced wakes.  
 - Expand authored voices only with the POP ID line contract.
 
-**Ignited plans:** none yet (watch).
+**Ignited plans:** civic.16 (ready) — design then build; pointer remains this research until a plan MD is cut for condition 3.
+
+### Duty calendar (Mike-clarified 2026-08-07 — load-bearing for wall design)
+
+Civic voice/project agents are **working offices**, not only Sunday cascade characters:
+
+| Window | What runs | Who |
+|--------|-----------|-----|
+| **Sun** | Decision chain (prep → Mayor → voices → projects → Clerk) | Full cascade |
+| **Mon–Thu** | **Datawakes** — office-holders voice their **domain data** | dutyDays `sun-thu` seats on LRU rota |
+| **Fri–Sat** | Citizen life (no office datawake) | Holders may still hit citizen-wake as people |
+
+Domain examples (already wired in `cron-civic-run.js` `domainSlice` + map `dataDomain`):
+
+- **Police Chief** → crime / safety (`CrimeIndex`, safety sections)  
+- **Health / project health center** → hospitals, sick rates, health signals  
+- **Baylight Authority** → construction / project progress as daily build reality  
+- **Stabilization / OARI / Transit Hub** → their initiative domains  
+- **Mayor / factions / DA / Okoro** → governance, justice, community development slices  
+
+**Implication for position walls:** save not only Sunday vote positions but **Mon–Thu domain statements** (`stated:` / datawake JSON `statement` + `numberMoved`). That is the continuous “they are saying it” feed. Inject prior domain posts on the next datawake for that **holder POPID**.
 
 ---
 

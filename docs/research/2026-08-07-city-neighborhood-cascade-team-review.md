@@ -248,13 +248,23 @@ Every checkable claim verified against code + live sheets. Layer map §2 and fee
 
 **Hardcoded drift math confirmed (§6/W2):** `applyDemographicDrift.js` is all literals — illness steps 0.0002–0.0006, cap 0.15, employment attractor band 0.90–0.93 (free prosperity, never earned). `World_Config` live keys: migrationRate/deathRate/growthRate + infra keys only — zero illness/employment/hospital keys. W2 is real and cheap.
 
-**Hospital (§7):** confirmed no Hospital tab on live sheet; Health_Cause_Queue exists but is operator-intake shaped, not a facility sink. **Vote: new tab**, light schema first — own-tracking-tab pattern, consistent with Phase-5 engine carve-outs.
+**Hospital (§7):** ~~confirmed no Hospital tab on live sheet~~ **CORRECTED same-session (Mike):** the tab is absent but its WRITER IS LIVE — `buildCyclePacket.js persistHospitalLedger_` (Phase 10) lazy-creates `Hospital_Ledger` (AdmissionId/POPID/Name/Neighborhood/Cause/AdmitCycle/StatusNow/LastTransitionCycle/DischargeCycle/Outcome/CyclesInCare) on the first `ctx.summary.hospitalEvents` from Phase 4. §7's "needs schema + writer design" is stale — both exist; what's missing is the census→city talk-back and crisis tiers. C103 is the first live chance for the tab to mint.
+
+**Health engine wiring (correction to §3.1 feed table):** "Ledger sick → city: not wired" is true, but the REVERSE hop exists and the paper misses it: `generationalEventsEngine.checkHealthEvent_` (engine.52 A2) couples citizen sickness incidence DIRECTLY to the city dial — `c *= illnessRate/0.05` (~2× at today's 9.85%) with severity shifting severe-ward at ≥8%. So today's cascade is city→hood AND city→citizen in parallel; hood→citizen does not exist. L4 and L5 each chase L1 independently and never reconcile with each other — the precise mechanism of the three-worlds symptom.
 
 **Vote on §8.1 (A/B/C): C as destination, A-with-support-rule as the transition.** B (ground primary) is not buildable today — the ground layers are too thin to aggregate from (0 sick citizens, no hospital, hood layer itself synthetic). Pure A is the current half-built state and fails doctrine at publication. So: keep L1 as controlled dice feeding story engines, enforce the §6 support rule (L4 within band of L1 within T cycles — W1 audit makes this measurable), build talk-back incrementally (W3), and gate news leads on support (W5). This matches Mike's thermostat thesis without pretending the census exists.
 
 **Must-have invariants (§8.2) from this lane:** (1) `Σ hood migration deltas ≈ city migration ±10%` (after divisor fix); (2) `hood Sick/pop within ±2pp of illnessRate × mean mod` after 10-cycle convergence window; (3) same for unemployed vs `1−employmentRate`; (4) sample-support: illnessRate ≥ 8% sustained 3+ cycles ⇒ ≥1 ledger citizen carries a sick status/HealthCause (the Heavy lottery in §7, minimum viable dose). Soft tolerance + audit report first (W1), hard enforcement only after the divisor and lag classes are fixed — enforcing invariants against known-broken math just makes noise.
 
 **W1–W6 order (engine-sheet view):** W1 first and alone (audit script quantifies everything before any change — measure twice); then W2 (mechanical, unblocks tuning); W6 rides W1's data; W3 design next; W4 after W3 picks the talk-back signals; W5 (media) can run parallel any time. W1+W2 are single-session engine-sheet jobs.
+
+### Mike direction (S360, 2026-08-07 — recorded verbatim-in-substance; answers much of §8)
+
+1. **Cascade chain is city → neighborhood → citizen, strictly.** City ties to neighborhoods; citizens fork from THEIR NEIGHBORHOOD'S data, never from the city dial directly. (Today's `checkHealthEvent_` city→citizen coupling is therefore mis-routed — reroute the incidence input from `demographicDrift.illnessRate` to the citizen's own hood rate.)
+2. **1:443 plays at the hood level.** A hood rate rises → a few sample citizens IN THAT HOOD wind up sick, aligned with the ripple. Rate spikes hard → the story seed carries a healthy list of affected citizens drawn from what's already in place (existing health lifecycle + hospital writer), feeding coverage.
+3. **World_Population metrics get addressed one by one, following each metric's own cascade.** Each WP column has a different downstream graph (illness → hoods+citizens+hospital; migration → hoods+drift; employment → hoods only). Trace, then fix, per metric — not one omnibus pass. (Refines W1: per-metric audit, not monolith.)
+4. **WP self-overwrite is a defect for trend truth.** One row rewritten per cycle; `appendPopulationHistory_` was deleted (v3.2 bug, S237, no readers) so trend data is scattered/lost and the ledger has never demonstrably tracked the lived world. A history/trend mechanism (or Riley-derived view) is part of the fix scope.
+5. Hospital tab + health-event engine already exist in code (see corrections above) — the work is wiring, not building.
 
 ## Applications (living)
 

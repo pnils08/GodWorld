@@ -894,3 +894,4 @@ compensation.
   REMAINING: authenticated preview + one approved proof — attended, Mike at
   https://godworld.tail6d8700.ts.net sports workspace (direct :3001 and plain
   http login no longer work by design).
+- 2026-08-07 (engine-sheet, S357) — PROVING WRITE LANDED: attended cycle-103 Oaks game-result through preview→confirm→atomic append (feed row 202, full 20-col envelope, audit journal result:success, idempotency key recorded). Capability key rotated post-proof. engine.40 + engine.89 gates ALL CLEAR → done-pending-archive. engine.77 still needs a roster-EVENT proof (this one carried mutationAction null).

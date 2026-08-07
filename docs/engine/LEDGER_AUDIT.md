@@ -17,6 +17,8 @@ Mike-direct coherence audit (POPID/RoleType/Income/EducationLevel, DeepSeek batc
 
 ## Current State — S250 headline refresh (2026-06-01) over S234 structural baseline
 
+**S360 delta (2026-08-07):** +9 rows — ENGINE_REPAIR row 32 canon-drift mint, POP-01047..01055 (5 ENGINE citizens, 3 CIVIC Transit Hub staff, 1 GAME Status=Traded). Total 940, max POPID POP-01055. Headline table below still reads S250; full refresh pending next audit pass.
+
 **Verifier:** `scripts/auditSimulationLedger.js` (run from engine-sheet to refresh). *Headline counts (rows/extant/POPID/tier/status) re-verified S250; structural rows carry from S234.*
 
 ### Headline numbers

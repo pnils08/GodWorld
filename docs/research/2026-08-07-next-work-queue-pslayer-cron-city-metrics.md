@@ -55,7 +55,7 @@ pointers:
 
 **Deliverable shape:** One research or ops note: job → schedule → writes → fail mode → owner terminal. No code until gaps named.
 
-**Verdict lean:** `adopt` as **read-only audit first** (research-build / grok), then file rows only for real holes.
+**Verdict lean:** `adopt` — **done 2026-08-07** as [[2026-08-07-cron-lifecycle-review]].
 
 ### C. City data output metrics — fine-tune to sim reality
 
@@ -69,7 +69,7 @@ pointers:
 
 **Deliverable shape:** Metric inventory (source sheet/col → who reads → sample distribution last N cycles → “feels real?” → tune or accept). Then engine-sheet owns physics changes.
 
-**Verdict lean:** `adopt` as **measure-twice audit** before any rebalance; split “display/translation” vs “sim physics.”
+**Verdict lean:** `adopt` — **baseline done 2026-08-07** as [[2026-08-07-city-metrics-sim-reality]]; engine tune still Mike-gated.
 
 ---
 
@@ -109,6 +109,8 @@ pointers:
 ## Applications (living)
 
 - 2026-08-07 — Mike named queue after civic.16/solo-seat close; filed for sequencing.
+- 2026-08-07 (grok) — B shipped: [[2026-08-07-cron-lifecycle-review]]. C baseline: [[2026-08-07-city-metrics-sim-reality]]. A (P Slayer slice) remains for next session.
+
 
 ---
 

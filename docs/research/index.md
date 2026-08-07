@@ -60,6 +60,8 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 | **[[2026-08-02-notebooklm-deep-research]]** | Gemini Notebook untapped potential — evaluating deep research (to Drive), structured exports (JSON/CSV), and master brain notes against the current v0.8.5 audio/text usage. | `adopt` (CLI upgrade + deep research integration plan to follow) |
 | **[[2026-08-06-jax-caldera-sim-stink-audit]]** | Jax Caldera / firebrand as sim stink-audit product — not civic watchdog; accountability agent on the ledger; Claude tidy-system restrictions measured (bylineIneligible, no stink scanner, rare fanout, stance dilution); gold path proven; Mara Vance dual (in-world City Planner + external auditor) | `adopt` (plan pending builder promote; options A force-slot / C hunter cron) |
 | **[[2026-08-07-notebooklm-audio-overview-direction]]** | NotebookLM Audio Overview Direction — using source prompt injection (e.g., `00_AUDIO_DIRECTION_GUIDE.md`) to dictate tone, pacing, and thematic allocation for daily and weekly overviews. | `adopt` (plan pending to wire source injection into `notebooklmDailyNews.js` and `notebooklmPush.js`) |
+| **[[2026-08-07-cron-lifecycle-review]]** | Live crontab/PM2 lifecycle map — who runs when, writes, fail modes; queue item B | `adopt` (standing ops map) |
+| **[[2026-08-07-city-metrics-sim-reality]]** | Live sick%/employment%/hood metrics baseline vs sim reality; queue item C | `adopt` (inventory; sick%≈0, employ ~85% BIZ-linked) |
 | **[[2026-08-07-next-work-queue-pslayer-cron-city-metrics]]** | Mike next-work queue: P Slayer fan-pulse slice, cron lifecycle review, city metrics (sick%/employment%) fine-tune to sim reality — recommended order B→C→A | `adopt` (queue; A has plan, B/C audit-first) |
 | **[[2026-08-07-voice-project-agents-social-wall-review]]** | Voice + project agents vs journalist social wiki wall — citizen-voice pages OK; civic office/project no position-wall; Okoro POPID identity/map drift; watch until Mike wants office-holder continuity on cp-POP | `watch` (adopt-trigger: office position wall design + POPID reconcile) |
 
@@ -73,6 +75,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 ---
 
 ## Changelog
+- 2026-08-07 — Cron lifecycle review + city metrics baseline (grok).
 - 2026-08-07 — Registered voice/project agents social-wall review (grok) — watch verdict for Claude.
 
 - 2026-06-01 — Created (S250). First instance: headroom. Per `docs/plans/2026-06-01-doc-loop-consolidation.md`.

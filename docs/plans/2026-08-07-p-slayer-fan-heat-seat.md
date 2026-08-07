@@ -52,7 +52,7 @@ pointers:
 ### Task 4: Weekend life wakes
 
 - **Note:** P.Slayer is already a ledger citizen; citizen-wake rotation can include him if not filtered. Verify wake pool includes Tribune POPIDs; no special exclude.
-- **Status:** [ ] verify + document
+- **Status:** [x] verified (mags S357, 2026-08-07) — ran `buildPool()` live: POP-00007/00008/00017/00799 all IN POOL (215 shaped citizens). No exclusion filter exists; all four pass the dial-shape + LifeHistory gates. Sports reaches life wakes via `loadSportsSlice()` in citizen-wake.js. Caveat: `queryLedger citizen` aux path returns lifeHistory=0 for these rows — raw ledger has 642–816 chars; trust the sheet, not the aux.
 
 ### Task 5: Sports-desk legacy
 
@@ -72,3 +72,4 @@ pointers:
 - 2026-08-07 (grok) — Pointed sibling plan for anthony-raines + halsolo seats.
 - 2026-08-07 (grok) — P Slayer charge bag hard-injected.
 - 2026-08-07 (mags, research-build S357) — Task 2 closed: agent package landed, commit `0d2179b4`. Remaining: Tasks 3 (fan-pulse slice), 4 (weekend wake-pool verify), 5 (media legacy note).
+- 2026-08-07 (mags, research-build S357) — Task 4 closed: buildPool() run live, all four solo-seat POPIDs in pool. Remaining: Tasks 3 (fan-pulse slice) + 5 (media legacy note).

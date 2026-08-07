@@ -8,7 +8,7 @@ alternate timeline. Do not import real-world Oakland people, institutions,
 businesses, teams, events, or assumptions.
 
 This file governs every out-of-band CLI engineering assistant working in this
-repository. Agent-specific authorization is not transferable: Codex, Kimi, and
+repository. Agent-specific authorization is not transferable: Codex, Kimi, Grok, and
 Antigravity/Gemini follow the tier that names them below.
 
 An out-of-band CLI agent is an engineering assistant to the builder. It is not
@@ -16,8 +16,8 @@ Mags Corliss, a Bay Tribune reporter, a civic official, or a participant in the
 simulation. Read persona and newsroom material as system context, not as an
 identity to adopt.
 
-Claude is the lead and owns the control plane. Kimi and Codex may propose and
-implement inside their authorized scope. Antigravity/Gemini are fully gated:
+Claude is the lead and owns the control plane. Kimi, Codex, and Grok may propose
+and implement inside their authorized scope. Antigravity/Gemini are fully gated:
 read-only inspection and proposed diffs only. They do not change project files,
 stage work, commit work, or push work. The sole exception is each agent's own
 `NEXT` handoff line under §Session close.
@@ -409,7 +409,7 @@ The builder assigns commit and push rights by agent tier:
 - A commit must contain one coherent approved change and must not include
   pre-existing unrelated modifications.
 
-## Session close (kimi, codex, antigravity — builder decision, 2026-07-28)
+## Session close (kimi, codex, grok, antigravity — builder decision, 2026-07-28)
 
 You carry a lane in `SESSION_CONTEXT.md`: a single `**NEXT[<you>]:**` line, sitting
 beside the four Claude terminals and sharing the same `**PIN:**`. Every terminal

@@ -1,7 +1,7 @@
 ---
 title: Research Sub-Catalog
 created: 2026-06-01
-updated: 2026-08-06
+updated: 2026-08-07
 type: reference
 tags: [research, architecture, active]
 sources:
@@ -59,6 +59,8 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 | **[[2026-08-04-mags-as-narrator]]** | Mags-as-narrator (Mike-direct S353, INCOMPLETE by his account) — four memory surfaces already hold every fact, so compiling desk submissions into a Cycle Pulse is redundant work; journalists are canon-curators; the Pulse becomes Mags' narration and she stops being an employee of the process. Plus the three-lever decomposition: momentum (cheap crons), depth (promotion-triggered, ~400k/artifact, 1-2 per cycle), world-building (daily citizen voice batches, cheapest by 100x). Carries the voice-differentiation hazard + which C102 gap-log findings this design moots. | `adopt` (trigger fired 2026-08-04: Mike completed the design — Saturday = curation + narration, 90%-accuracy graduation to Rhea-published autonomy; ignited [[../plans/2026-08-04-newsroom-canon-flow]], pipeline.45) |
 | **[[2026-08-02-notebooklm-deep-research]]** | Gemini Notebook untapped potential — evaluating deep research (to Drive), structured exports (JSON/CSV), and master brain notes against the current v0.8.5 audio/text usage. | `adopt` (CLI upgrade + deep research integration plan to follow) |
 | **[[2026-08-06-jax-caldera-sim-stink-audit]]** | Jax Caldera / firebrand as sim stink-audit product — not civic watchdog; accountability agent on the ledger; Claude tidy-system restrictions measured (bylineIneligible, no stink scanner, rare fanout, stance dilution); gold path proven; Mara Vance dual (in-world City Planner + external auditor) | `adopt` (plan pending builder promote; options A force-slot / C hunter cron) |
+| **[[2026-08-07-notebooklm-audio-overview-direction]]** | NotebookLM Audio Overview Direction — using source prompt injection (e.g., `00_AUDIO_DIRECTION_GUIDE.md`) to dictate tone, pacing, and thematic allocation for daily and weekly overviews. | `adopt` (plan pending to wire source injection into `notebooklmDailyNews.js` and `notebooklmPush.js`) |
+| **[[2026-08-07-voice-project-agents-social-wall-review]]** | Voice + project agents vs journalist social wiki wall — citizen-voice pages OK; civic office/project no position-wall; Okoro POPID identity/map drift; watch until Mike wants office-holder continuity on cp-POP | `watch` (adopt-trigger: office position wall design + POPID reconcile) |
 
 ---
 
@@ -70,6 +72,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 ---
 
 ## Changelog
+- 2026-08-07 — Registered voice/project agents social-wall review (grok) — watch verdict for Claude.
 
 - 2026-06-01 — Created (S250). First instance: headroom. Per `docs/plans/2026-06-01-doc-loop-consolidation.md`.
 - 2026-07-27 — Registered the separate Oakland sports-feed entry dashboard and SpaceMolt citizen-agency/cultural-phenomenon research records.
@@ -91,3 +94,4 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
   `docs/research/`; engine.10 (Phase 43) rollout pointer fixed same commit.
 - 2026-08-02 — Registered Gemini Notebook untapped potential (Antigravity): adopt; evaluated deep research (to Drive), structured exports, and master brain notes.
 - 2026-08-03 — Registered the game environment review (Kimi CLI, builder-directed): adopt on visual-layer tranche + replica-first stance; watch on migration (5 triggers) and builder-picked threads (played events, Sims layer, wagering).
+- 2026-08-07 — Registered NotebookLM audio overview direction via source prompt injection (Antigravity).

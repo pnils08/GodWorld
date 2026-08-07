@@ -44,7 +44,15 @@ async function main() {
   console.log(`source (LIVE): ${liveMeta.data.properties.title} — ${liveMeta.data.sheets.length} tabs`);
   console.log(`dest (BENCH):  ${destMeta.data.properties.title} — ${destMeta.data.sheets.length} tabs`);
 
-  const liveTabs = liveMeta.data.sheets.map(s => s.properties.title);
+  // Grid sheets only — chart/object sheets (e.g. dashboard tabs) have no values
+  // range and make the whole batchGet throw "Invalid range" (S360).
+  const nonGrid = liveMeta.data.sheets
+    .filter(s => s.properties.sheetType && s.properties.sheetType !== 'GRID')
+    .map(s => s.properties.title);
+  if (nonGrid.length) console.log(`non-grid live tabs (skipped, no values range): ${nonGrid.join(', ')}`);
+  const liveTabs = liveMeta.data.sheets
+    .filter(s => !s.properties.sheetType || s.properties.sheetType === 'GRID')
+    .map(s => s.properties.title);
   const destTabs = new Set(destMeta.data.sheets.map(s => s.properties.title));
   const benchOnly = [...destTabs].filter(t => !liveTabs.includes(t));
   const missing = liveTabs.filter(t => !destTabs.has(t));

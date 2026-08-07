@@ -74,9 +74,11 @@ pointers:
 
 - 2026-08-07 (grok) — Solo packages + maps + stance wired; control-plane commit needs Claude.
 - 2026-08-07 (grok) — Anthony Analysis Bag: `docs/media/ANTHONY_ANALYSIS_BAG.md` + hard inject in cron-desk-writer; voice file remapped to ledger stats.
+- 2026-08-07 (grok) — Hal Archive Bag + P Slayer Charge Bag (sibling variety bags); all three sports seats hard-injected.
 
 ## Changelog
 
 - 2026-08-07 (grok) — Initial plan; Tasks 1–2 shipped in scripts; Task 3 agent packages on disk.
 - 2026-08-07 (grok) — Anthony go-to analysis bag (As_Roster/TrueSource/feed-aligned).
+- 2026-08-07 (grok) — Hal archive bag + P Slayer charge bag.
 - 2026-08-07 (mags, research-build S357) — Task 3 closed: agent packages design-reviewed and landed, commit `0d2179b4`. Remaining: Tasks 4 (live observe) + 5 (media legacy note).

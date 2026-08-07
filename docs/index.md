@@ -173,6 +173,8 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 - **[[media/RICHMOND_ARCHIVE_INDEX]]** — Hal Richmond's archive index. *(entity, media, active)*
 - **[[media/ANTHONY_RAINES_PORTFOLIO_INDEX]]** — Anthony Raines portfolio index. *(entity, media, active)*
 - **[[media/ANTHONY_ANALYSIS_BAG]]** — (grok). Anthony Raines go-to analysis concepts hard-injected on solo `anthony-raines` writes — remapped onto As_Roster + TrueSource + Oakland_Sports_Feed (no invented Savant fields). *(reference, media, sports, active)*
+- **[[media/P_SLAYER_CHARGE_BAG]]** — (grok). P Slayer go-to charge architectures hard-injected on solo `p-slayer` writes — variety of heat (not stat board). *(reference, media, sports, active)*
+- **[[media/HAL_ARCHIVE_BAG]]** — (grok). Hal Richmond go-to archive architectures hard-injected on solo `hal-richmond` writes — variety of time (not fan heat). *(reference, media, sports, active)*
 - **[[media/P_SLAYER_JOURNEY_INDEX]]** — P Slayer's journey across editions. *(entity, media, active)*
 - **[[media/PAULSON_CARPENTERS_LINE]]** — "The Carpenter's Line" — Mike Paulson backstory by Hal Richmond. *(entity, media, active)*
 

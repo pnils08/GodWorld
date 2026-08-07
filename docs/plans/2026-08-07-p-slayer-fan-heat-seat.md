@@ -64,9 +64,11 @@ pointers:
 
 - 2026-08-07 (grok) — Paulson cron-exclude reversed; p-slayer persona + agent package; plan filed.
 - 2026-08-07 (grok) — Sibling seats filed: [[2026-08-07-anthony-hal-solo-sports-seats]] (Anthony analytic + Hal legacy).
+- 2026-08-07 (grok) — Charge bag: `docs/media/P_SLAYER_CHARGE_BAG.md` + hard inject (variety of heat).
 
 ## Changelog
 
 - 2026-08-07 (grok) — Initial plan + Tasks 1–2 shipped in scripts; agent package on disk.
 - 2026-08-07 (grok) — Pointed sibling plan for anthony-raines + halsolo seats.
+- 2026-08-07 (grok) — P Slayer charge bag hard-injected.
 - 2026-08-07 (mags, research-build S357) — Task 2 closed: agent package landed, commit `0d2179b4`. Remaining: Tasks 3 (fan-pulse slice), 4 (weekend wake-pool verify), 5 (media legacy note).

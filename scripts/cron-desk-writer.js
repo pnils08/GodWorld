@@ -64,20 +64,43 @@ const DESK = arg('--desk', 'sports');
 // Persona first — firebrand model routing must not inherit civic DeepSeek.
 const PERSONA = arg('--persona', null);   // e.g. freelance-firebrand — adversarial stance (IDENTITY+LENS+RULES)
 // Per-desk / per-persona routing: persona key in desk-model-map.json wins over desk.
-/** Hard-inject Anthony's ledger-aligned analysis bag (docs/media/ANTHONY_ANALYSIS_BAG.md). */
-function loadAnthonyAnalysisBag() {
-  const bagPath = path.join(ROOT, 'docs', 'media', 'ANTHONY_ANALYSIS_BAG.md');
+/**
+ * Hard-inject a sports solo-seat concept bag from docs/media/.
+ * @param {string} fileName e.g. ANTHONY_ANALYSIS_BAG.md
+ * @param {string} banner short label for the injected block
+ * @param {string} missingHint fallback line if file absent
+ */
+function loadPersonaBag(fileName, banner, missingHint) {
+  const bagPath = path.join(ROOT, 'docs', 'media', fileName);
   try {
     const raw = fs.readFileSync(bagPath, 'utf8');
-    // Drop YAML frontmatter if present
     const body = raw.replace(/^---[\s\S]*?---\s*/, '').trim();
-    return '\n\n=== ANTHONY ANALYSIS BAG (go-to tools — As_Roster + TrueSource + feed only) ===\n' +
-      body +
-      '\n=== END ANALYSIS BAG ===\n';
+    return '\n\n=== ' + banner + ' ===\n' + body + '\n=== END ' + banner + ' ===\n';
   } catch (e) {
-    return '\n\nANTHONY ANALYSIS BAG MISSING at docs/media/ANTHONY_ANALYSIS_BAG.md (' + e.message +
-      '). Still: use As_Roster line stats only; never invent x-stats.\n';
+    return '\n\n' + banner + ' MISSING at docs/media/' + fileName + ' (' + e.message + '). ' +
+      (missingHint || '') + '\n';
   }
+}
+function loadAnthonyAnalysisBag() {
+  return loadPersonaBag(
+    'ANTHONY_ANALYSIS_BAG.md',
+    'ANTHONY ANALYSIS BAG (go-to tools — As_Roster + TrueSource + feed only)',
+    'Still: use As_Roster line stats only; never invent x-stats.'
+  );
+}
+function loadPSlayerChargeBag() {
+  return loadPersonaBag(
+    'P_SLAYER_CHARGE_BAG.md',
+    'P SLAYER CHARGE BAG (column architectures — variety of heat)',
+    'Still: first-person I/we, friction pivot, no FO PR voice.'
+  );
+}
+function loadHalArchiveBag() {
+  return loadPersonaBag(
+    'HAL_ARCHIVE_BAG.md',
+    'HAL ARCHIVE BAG (legacy architectures — variety of time)',
+    'Still: present fact first, then era echo; never wire copy.'
+  );
 }
 
 function loadDeskRoute(desk, persona) {
@@ -624,7 +647,8 @@ async function main() {
       'Most columns carry CHARGE — fury, dread, euphoria, defiance — boring if mostly content. ' +
       'Friction pivot required: name the counter-argument, kill it. Metrics are foils/weapons, not Anthony analysis. ' +
       'Signature arc: hate the move → live with it → "I was wrong" or double down. Hook your wall if a prior take is in play. ' +
-      'FORBIDDEN: FO press-release voice, third-person "fans expressed," measured both-sides without a pick, Hal archive essay, Anthony contract architecture.\n'
+      'FORBIDDEN: FO press-release voice, third-person "fans expressed," measured both-sides without a pick, Hal archive essay, Anthony contract architecture.\n' +
+      loadPSlayerChargeBag()
     : PERSONA === 'anthony-raines'
     ? '\n\nANTHONY STANCE (hard): You are Anthony Raines — analytic beat, not the bleachers and not multi-voice sports-desk. ' +
       'Third-person only. One evaluative claim built on verifiable numbers. ' +
@@ -636,7 +660,8 @@ async function main() {
     ? '\n\nHAL STANCE (hard): You are Hal Richmond — senior historian, not the fan column and not multi-voice sports-desk. ' +
       'First-person reflective. Literary. Present fact first (packet-true), then era echo. Spell years in words. ' +
       'Numbers are poetry of time, not scouting grades. End on continuity or its loss. Daily wake may be shorter but never wire copy. ' +
-      'FORBIDDEN: bleacher rage, pure transaction card, multi-story desk section, inventing roster/history beyond packet + franchise carveout.\n'
+      'FORBIDDEN: bleacher rage, pure transaction card, multi-story desk section, inventing roster/history beyond packet + franchise carveout.\n' +
+      loadHalArchiveBag()
     : '';
 
   const system =

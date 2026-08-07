@@ -830,6 +830,22 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 <!-- ARCHIVE-PASS ORDERING CONVENTION (G-SE4, added S248). Foundational Phase sections + named passes through this S227 anchor are CHRONOLOGICAL top→bottom (oldest first). The post-S227 sweep-pass region below is NEWEST-FIRST going forward: insert a new "## S<NN> Archive Pass" block immediately below this comment (above the current first post-S227 pass), so the most recent pass sits nearest this anchor. The existing post-S227 region is NOT cleanly sorted (S230/S238/S236/S235/S234/S233 as of S248) — do NOT re-sort it; just insert new passes here at the top of the run. Each pass header records its own session + a "This pass: N rows" line. -->
 
+## S359 Archive Pass (2026-08-07, research-build) — solo-seat week + S357 batch closures sweep
+
+10 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6). Each entry preserves the original ROLLOUT description verbatim. Cluster: 6 engine.*, 1 civic.*, 1 research.*, 2 governance.*.
+
+- **engine.4** [engine-sheet] — Dead spreadsheet-tab cleanup — 8/8 done. Youth_Events resolved S357 via engine.97 Task 5: `utilities/youthActivities.js` deleted (zero callers; band=child/teen already carry the content) **State at archive:** done-pending-archive. Pointer: [[../SPREADSHEET]] (tab audit)
+- **engine.40** [engine-sheet] — Sports stat intake — COMPLETE S357: re-review, secure-write config, authenticated preview, and the approved stat proof (cycle-103 Oaks game-result, audit row 202) all passed; TrueSource season close stays deferred by design **State at archive:** done-pending-archive. Pointer: [[../plans/2026-08-02-sports-stat-event-intake]] §Track A — engine.40 stat intake
+- **engine.89** [engine-sheet] — Sports workspace — COMPLETE S357: private transport, authenticated reads, secure-write config, authenticated preview, and one approved append all proved **State at archive:** done-pending-archive. Pointer: [[../plans/2026-07-30-oakland-sports-workspace]]
+- **engine.92** [engine-sheet] — Search consolidation — closed S349: caller map recorded, lib/supermemory.js transport, 10 copies repointed, searchDisk phrase-first parity, articles split documented **State at archive:** done-pending-archive. Pointer: [[../SEARCH_FUNCTIONS]] §Consolidation queue
+- **engine.100** [engine-sheet] — Faith-event template vocabulary — tradition-correct clergy terms (kimi P4, C102 "pastoral counseling"/Islamic Center; Bauer/Rabbi sibling) **State at archive:** done-pending-archive. Pointer: `output/kimi/deep-dispatch-guardrail-proposals.md` §P4
+- **civic.16** [research-build] — Office-holder position wall (Mike-direct) — officeWall.js + cron-civic inject/record; design [[../plans/2026-08-07-office-holder-position-wall]] **State at archive:** done-pending-archive. Pointer: [[../plans/2026-08-07-office-holder-position-wall]]
+- **research.23** [research-build] — NotebookLM bridge — complete Task 6 protected retrieval-observability handoff **State at archive:** done-pending-archive. Pointer: [[../plans/2026-07-10-notebooklm-bridge-deploy]] + [[../plans/2026-07-25-notebooklm-source-search-wiring]]
+- **engine.84** [engine-sheet] — Employee_Count conflation — closed S349: write cut S334, 13 fossil rows re-sized to institution; sibling Avg_Salary conflation filed as ENGINE_REPAIR row 34 **State at archive:** done-pending-archive. Pointer: [[../plans/2026-07-26-employment-reconciliation]]
+- **governance.36** [research-build] — Boot doc architecture restructure. S340 all-lane boot emit; S356 item 2 universal-discipline merge SHIPPED. **State at archive:** done-pending-archive. Pointer: [[../plans/2026-06-14-boot-doc-architecture-restructure]] — detail in pointer
+- **governance.42** [research-build] — Monthly report-only MD sweep widened to docs, control plane, and project memory; Codex skill installed and droplet cron set for 04:30 UTC on day 2 **State at archive:** done-pending-archive. Pointer: scripts/mdStalenessDetector.js + [[../AUDITS]]
+
+
 ## S331 Archive Pass (2026-07-22, research-build) — post-S330 closures sweep
 
 8 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 8 engine.*.

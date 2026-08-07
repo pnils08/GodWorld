@@ -240,16 +240,36 @@ function applyStinkForce(assignments, cycle, date, approachMap, takenRefs) {
     console.error('[fanout] stink force skipped — ' + out.reason);
     return out;
   }
-  const story = report.top.story || {
+  // Prefer full Jax slice (citizens + scene pack) over bare stink label.
+  let story = report.top.story || {
     ref: report.top.ref,
     label: report.top.label,
     kind: report.top.kind,
     angle: report.top.label,
     hood: report.top.hood
   };
+  let firebrandApproach = approachFor(approachMap, 'civic', persona.slug);
+  let stinkMeta = {
+    className: report.top.className,
+    score: report.top.score,
+    label: report.top.label,
+    ref: report.top.ref
+  };
+  try {
+    const { buildJaxSlice, writeJaxSlice, assignmentFromSlice } = require(path.join(__dirname, 'buildJaxSlice'));
+    const slice = buildJaxSlice(cycle, { report });
+    writeJaxSlice(cycle, slice);
+    const fromSlice = assignmentFromSlice(slice);
+    if (fromSlice && fromSlice.story) {
+      story = fromSlice.story;
+      firebrandApproach = fromSlice.approach || firebrandApproach;
+      stinkMeta = fromSlice.stink || stinkMeta;
+    }
+  } catch (e) {
+    console.error('[fanout] jax slice enrich skipped: ' + e.message);
+  }
   if (story.ref) takenRefs.add(story.ref);
 
-  const firebrandApproach = approachFor(approachMap, 'civic', persona.slug);
   const forceFields = {
     desk: 'civic',
     name: persona.name,
@@ -259,12 +279,8 @@ function applyStinkForce(assignments, cycle, date, approachMap, takenRefs) {
     approach: firebrandApproach,
     story,
     stinkForce: true,
-    stink: {
-      className: report.top.className,
-      score: report.top.score,
-      label: report.top.label,
-      ref: report.top.ref
-    }
+    stink: stinkMeta,
+    jaxSlice: true
   };
 
   // Prefer upgrading an existing Jax slot; else replace the first civic slot;

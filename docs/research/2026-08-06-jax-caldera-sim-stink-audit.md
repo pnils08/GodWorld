@@ -195,6 +195,7 @@ Acceptance sketch (for plan tasks, not research state):
 - 2026-08-06 — Initial extraction from Grok deep-dive + Mike product framing; basis for a forthcoming plan when builder promotes.
 - 2026-08-06 — Plan ignited + implementation (scanner + fanout force + approach + angle ask): [[../plans/2026-08-06-jax-sim-stink-audit]].
 - 2026-08-06 (Mike-direct) — **Two systems, not one:** the `.claude/agents/freelance-firebrand` package is the *old* interactive system (manual invoke, Claude-orchestrated, Mags-points-Jax). Live product path is cron scripts + persona load. **Jax is a Grok agent** — accountability on the sim, not a leashed civic tool Claude aims at tidy targets. Claude house control of the agent package keeps a leash (sparing LENS, bylineIneligible, process framing); do not let that redefine who Jax is. Future identity/LENS truth-up of the agent files is Claude-terminal only unless builder opens control plane; product behavior must keep living in the unsheathed script path.
+- 2026-08-07 (Mike-approved) — **Jax slice, not Mags slice.** `scripts/buildJaxSlice.js` emits `output/slices/c{N}/firebrand.md`. Scene color from weather + neighborhood_texture + Who Lived It + Chaos_Cars + bonds. **Verify before invent-flags.** Soft side-work on real names ≠ made-up people. Ledger gaps for color: EmployerBiz→Business_Ledger street name, Cultural_Ledger venues by hood, Faith join, LifeHistory depth, bond export freshness.
 
 ---
 

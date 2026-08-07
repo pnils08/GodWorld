@@ -95,7 +95,10 @@ function profilesFor(names) {
       row.Neighborhood && 'neighborhood: ' + row.Neighborhood,
       row.BirthYear && 'born: ' + row.BirthYear,
       row.WealthLevel && 'wealth: ' + row.WealthLevel,
-      row.CareerStage && 'career: ' + row.CareerStage
+      row.CareerStage && 'careerStage: ' + row.CareerStage,
+      row.EmployerBizId && 'employerBiz: ' + row.EmployerBizId,
+      row.SkillTags && ('skills: ' + String(row.SkillTags).slice(0, 80)),
+      row.POPID && ('popid: ' + row.POPID)
     ].filter(Boolean).join('; '));
   }
   return out;

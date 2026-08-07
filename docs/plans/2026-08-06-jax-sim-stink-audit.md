@@ -114,22 +114,42 @@ pointers:
 - **Steps:**
   1. `node scripts/stink-scanner.js --cycle 102` on droplet with artifacts.
   2. Optional: `node scripts/newsroom-fanout.js --date YYYY-MM-DD --force` only with builder OK (mutates today's fanout file).
-- **Status:** [ ] observe after commit; do not require `--force` for merge
+- **Status:** [x] scanner + samples observed; cron schedule never modified
+
+### Task 7: Jax stink slice (Grok-owned — not Mags desk-slice)
+
+- **Files:**
+  - `scripts/buildJaxSlice.js` — create
+  - `scripts/buildJaxSlice.test.js` — create
+  - `scripts/stink-scanner.js` — emit slice after scan
+  - `scripts/cron-desk-run.js` — persona loads slice for angle/state
+  - `scripts/newsroom-fanout.js` — force-slot enriches from slice
+  - `scripts/canon-name-check.js` — richer profiles (employerBiz, skills)
+- **Steps:**
+  1. Emit `output/slices/c{N}/firebrand.md` + `output/cron-compare/jax_slice_c{N}.json`
+  2. Pack: top stink, contradiction A/B, citizens with RoleType, bonds, scene color (weather, neighborhood_texture, Who Lived It, Chaos_Cars)
+  3. Document ledger gaps for deeper color (Business name resolve, Cultural venues, Faith, LifeHistory depth, bond export freshness)
+  4. Wire persona path to prefer slice over free civic firehose
+- **Verify:** `node scripts/buildJaxSlice.test.js`; `node scripts/buildJaxSlice.js --cycle 102`
+- **Status:** [x] done (grok 2026-08-07)
 
 ---
 
 ## Open questions
 
-- None blocking ship of Tasks 1–5. Threshold 35 / illness 8% / 7-day cooldown are knobs; retune from `stink_c*.json` if force is too hot or too cold after 2 weeks of fanout.
+- Threshold 35 / illness 8% / 7-day cooldown remain knobs.
+- Business_Ledger name/address join + Cultural_Ledger venues-by-hood are the top color deepeners.
 
 ---
 
 ## Status log
 
 - 2026-08-06 (grok) — Plan + Tasks 1–5 implemented in same change. Control plane agent files untouched. Engine bylineIneligible left intentional.
+- 2026-08-07 (grok) — Task 7 Jax stink slice + scene pack + gap inventory; heat model Llama 3.3; NEXT[grok] tracking.
 
 ---
 
 ## Changelog
 
 - 2026-08-06 (grok) — Initial plan + implementation of scanner, force-slot, approach, angle ask. Research basis adopted.
+- 2026-08-07 (grok) — Jax-owned slice (not Mags); scene color from texture/weather/chaos/bonds; ledger gap list for color depth.

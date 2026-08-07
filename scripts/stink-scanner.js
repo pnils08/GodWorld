@@ -302,6 +302,16 @@ if (require.main === module) {
   }
   const report = scanCycle(cycle);
   const outPath = writeReport(cycle, report);
+  // Always emit Jax slice alongside scan (pipeline.46) — cheap, deterministic.
+  let slicePath = null;
+  try {
+    const { buildJaxSlice, writeJaxSlice } = require(path.join(__dirname, 'buildJaxSlice'));
+    const slice = buildJaxSlice(cycle, { report });
+    const paths = writeJaxSlice(cycle, slice);
+    slicePath = paths.md;
+  } catch (e) {
+    console.error('[stink-scanner] jax slice emit skipped: ' + e.message);
+  }
   if (process.argv.includes('--json')) {
     console.log(JSON.stringify(report, null, 2));
   } else {
@@ -316,6 +326,7 @@ if (require.main === module) {
         String(report.top.label).slice(0, 120));
     }
     console.log('→ ' + path.relative(ROOT, outPath));
+    if (slicePath) console.log('→ ' + path.relative(ROOT, slicePath));
   }
 }
 

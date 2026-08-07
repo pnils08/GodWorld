@@ -339,6 +339,30 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
       L.push('Do the count in prose — no bullet inventory of numbers. Translate officialese into the street read.');
       L.push('If signals fight (decay vs recovery, money vs jobs, illness with no owner) — that fight IS the story.');
       L.push('End on ONE unanswered question, then tipline. Never sand the contradiction into a process status piece.');
+      L.push('RoleType lines are immutable — soft side-work color must not replace someone\'s career.');
+      // Inject Jax stink-slice scene pack when present (buildJaxSlice).
+      try {
+        const { loadJaxSlice } = require(path.join(__dirname, 'buildJaxSlice'));
+        const js = loadJaxSlice(cycle);
+        if (js && !js.empty && js.scene) {
+          L.push('');
+          L.push('### JAX STINK SLICE (assignment + color room — not a Mags desk-slice)');
+          if (js.contradiction) {
+            L.push('CONTRADICTION A: ' + js.contradiction.a);
+            L.push('CONTRADICTION B: ' + js.contradiction.b);
+            L.push('FRAME: ' + js.contradiction.frame);
+          }
+          if (js.scene.weather) L.push('WEATHER: ' + js.scene.weather);
+          if (js.scene.neighborhoodTexture) L.push('HOOD TEXTURE: ' + js.scene.neighborhoodTexture);
+          if (js.scene.whoLivedIt && js.scene.whoLivedIt.length) {
+            L.push('WHO LIVED IT (hood): ' + js.scene.whoLivedIt.slice(0, 5).join(' | '));
+          }
+          if (js.bonds && js.bonds.length) {
+            L.push('BONDS: ' + js.bonds.slice(0, 6).map(b => b.aName + '↔' + b.bName + '(' + b.type + ')').join('; '));
+          }
+          L.push('COLOR: ' + (js.scene.colorRoom || ''));
+        }
+      } catch (_) { /* optional */ }
     }
     L.push('');
   }
@@ -553,8 +577,28 @@ async function runAngle(assign) {
   // Task 2.5.2/2.5.3 wake-1 shape: an ASSIGNED reporter opens the assignment and
   // plans the chase in their own voice — they never pick the angle. Personas keep
   // their authored smells-off stance (persona-only, per the plan's lane note).
-  const story = assign && assign.story;
-  const approach = assign && assign.approach;
+  // grok: firebrand prefers Jax stink-slice over free civic firehose / Mags civic slice.
+  let story = assign && assign.story;
+  let approach = assign && assign.approach;
+  let jaxSlice = null;
+  if (personaSlug === 'freelance-firebrand' && !story) {
+    try {
+      const { loadJaxSlice } = require(path.join(__dirname, 'buildJaxSlice'));
+      jaxSlice = loadJaxSlice(cycle);
+      if (jaxSlice && !jaxSlice.empty) {
+        story = jaxSlice.story;
+        approach = jaxSlice.approach || approach;
+        log('jax slice loaded — stink ' + jaxSlice.stink.className + ' score ' + jaxSlice.stink.score);
+      }
+    } catch (e) {
+      log('jax slice load failed (non-fatal): ' + e.message);
+    }
+  } else if (personaSlug === 'freelance-firebrand' && story) {
+    try {
+      const { loadJaxSlice } = require(path.join(__dirname, 'buildJaxSlice'));
+      jaxSlice = loadJaxSlice(cycle);
+    } catch (_) { /* optional scene pack */ }
+  }
   let angleRead = null;
   if (asker) {
     const brief = story ? citizenBrief(story.citizens) : { names: [], profiles: [] };
@@ -563,15 +607,26 @@ async function runAngle(assign) {
     // Persona without story keeps the original smells-off digest ask.
     let ask;
     if (persona && story) {
+      const sceneBits = [];
+      if (jaxSlice && jaxSlice.scene) {
+        if (jaxSlice.scene.weather) sceneBits.push('WEATHER: ' + jaxSlice.scene.weather);
+        if (jaxSlice.scene.neighborhoodTexture) sceneBits.push('HOOD TEXTURE: ' + jaxSlice.scene.neighborhoodTexture);
+        if (jaxSlice.contradiction) {
+          sceneBits.push('CONTRADICTION A: ' + jaxSlice.contradiction.a);
+          sceneBits.push('CONTRADICTION B: ' + jaxSlice.contradiction.b);
+        }
+      }
       ask = 'You\'re ' + asker.name + '. Something stinks and this is the lead you\'re not walking past:\n' +
         'STINK: ' + (story.angle || story.label) +
         (story.stinkClass ? '\nCLASS: ' + story.stinkClass : '') +
         (story.hookLine ? '\nHOOK: ' + story.hookLine : '') +
         (brief.names.length ? '\nAFFECTED CITIZENS (real, from the record): ' + brief.names.join('; ') : '') +
-        (brief.profiles.length ? '\nWHO THEY ARE (ledger):\n' + brief.profiles.map(p => '  - ' + p).join('\n') : '') +
+        (brief.profiles.length ? '\nWHO THEY ARE (ledger — RoleType immutable):\n' + brief.profiles.map(p => '  - ' + p).join('\n') : '') +
         (story.hood ? '\nWHERE: ' + story.hood : '') +
+        (sceneBits.length ? '\nSCENE PACK:\n' + sceneBits.join('\n') : '') +
         (approach ? '\n\n' + approach : '') +
         '\n\nIn your own voice: what does not line up, who should answer, and what question ends the piece? ' +
+        'Color the room from the scene pack without inventing careers or named people. ' +
         'Do not file a process roundup. One stink. Name names of canon officials only.';
     } else if (!persona && story) {
       ask = 'You\'re ' + asker.name + ', ' + desk + ' desk. Your editor just handed you today\'s assignment:\n' +
@@ -612,8 +667,16 @@ async function runAngle(assign) {
   fs.mkdirSync(COMPARE, { recursive: true });
   fs.writeFileSync(anglePath, JSON.stringify({
     stage: 'angle', desk, cycle, persona: personaSlug,
-    reporter: assign ? { name: assign.name, popid: assign.popid } : null,
+    reporter: assign ? { name: assign.name, popid: assign.popid } : (persona ? { name: persona.name, popid: persona.popid } : null),
     assignment: story ? { story, approach } : null,   // Task 2.5.2: the EIC assignment rides the handoff
+    jaxSlice: jaxSlice ? {
+      stink: jaxSlice.stink,
+      contradiction: jaxSlice.contradiction,
+      scene: jaxSlice.scene,
+      citizens: jaxSlice.citizens,
+      bonds: (jaxSlice.bonds || []).slice(0, 12),
+      gaps: jaxSlice.gaps
+    } : null,
     canonResearch,                                    // Task 2.5.3 §2: ≥3 validated canon facts + tool trace
     angleRead,
     lanePicks: lane.slice(0, 5).map(e => ({ label: e.label, kind: e.kind, hood: e.hood, ref: e.ref, popids: e.popids || [] })),

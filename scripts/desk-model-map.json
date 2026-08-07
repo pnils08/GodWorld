@@ -1,5 +1,5 @@
 {
-  "_comment": "Per-desk model routing (research.25). ALL DESKS -> DeepSeek (Mike-direct S332): the C102 test showed DeepSeek produced canon-accurate, in-voice, 0-hallucination articles on all 4 desks (incl civic+sports) at ~$0.003 vs Sonnet's ~$1.50. Sonnet bought no quality; article voice is an agent-stance property, not a model one. Override per-run with --provider/--model if ever needed.",
+  "_comment": "Per-desk + persona model routing (research.25; grok firebrand 2026-08-07). Desk default: DeepSeek (S332 — pennies, canon-ok). Firebrand is a separate seat: needs more heat/voice than deepseek-chat's tidy default without leaving the penny band. Live OpenRouter prices (2026-08-07): deepseek/deepseek-chat ~$0.26/$1.03 per 1M; llama-3.3-70b ~$0.10/$0.32; hermes-4-70b ~$0.13/$0.40; x-ai/grok-4.x ~$1–2/$2–6 (too rich for M–F cron). Override per-run with --provider/--model.",
   "sports":     { "provider": "openrouter", "model": "deepseek/deepseek-chat" },
   "civic":      { "provider": "openrouter", "model": "deepseek/deepseek-chat" },
   "chicago":    { "provider": "openrouter", "model": "deepseek/deepseek-chat" },
@@ -7,5 +7,10 @@
   "culture":    { "provider": "openrouter", "model": "deepseek/deepseek-chat" },
   "letters":    { "provider": "openrouter", "model": "deepseek/deepseek-chat" },
   "podcast":    { "provider": "openrouter", "model": "deepseek/deepseek-chat" },
+  "freelance-firebrand": {
+    "provider": "openrouter",
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "note": "Jax heat seat (grok 2026-08-07). Llama 3.3 70B: stronger adversarial/character voice than deepseek-chat, still ~pennies/article. Hermes-4-70b is the heat upgrade if this still sands; full x-ai/grok-* is character-true but leaves the penny band."
+  },
   "_default":   { "provider": "openrouter", "model": "deepseek/deepseek-chat" }
 }

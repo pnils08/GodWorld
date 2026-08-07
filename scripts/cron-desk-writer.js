@@ -61,16 +61,19 @@ function arg(flag, def) {
   return eq ? eq.slice(flag.length + 1) : def;
 }
 const DESK = arg('--desk', 'sports');
-// Per-desk routing (Task 3): if --provider/--model not on the CLI, read scripts/desk-model-map.json.
-function loadDeskRoute(desk) {
+// Persona first — firebrand model routing must not inherit civic DeepSeek.
+const PERSONA = arg('--persona', null);   // e.g. freelance-firebrand — adversarial stance (IDENTITY+LENS+RULES)
+// Per-desk / per-persona routing: persona key in desk-model-map.json wins over desk.
+function loadDeskRoute(desk, persona) {
   try {
     const m = JSON.parse(fs.readFileSync(path.join(__dirname, 'desk-model-map.json'), 'utf8'));
+    if (persona && m[persona]) return m[persona];
     return m[desk] || m._default || null;
   } catch (_) { return null; }
 }
 const PROVIDER_FLAG = arg('--provider', null);
 const MODEL_FLAG = arg('--model', null);
-const DESK_ROUTE = (!PROVIDER_FLAG || !MODEL_FLAG) ? loadDeskRoute(DESK) : null;
+const DESK_ROUTE = (!PROVIDER_FLAG || !MODEL_FLAG) ? loadDeskRoute(DESK, PERSONA) : null;
 const PROVIDER = PROVIDER_FLAG || (DESK_ROUTE && DESK_ROUTE.provider) || 'anthropic';   // 'anthropic' | 'openrouter'
 const MODEL = MODEL_FLAG || (DESK_ROUTE && DESK_ROUTE.model) || (PROVIDER === 'openrouter' ? 'deepseek/deepseek-chat' : 'claude-sonnet-5');
 const MODEL_SLUG = MODEL.replace(/[^a-z0-9]+/gi, '-').toLowerCase();
@@ -94,18 +97,20 @@ const STRICT_SOURCE_HYGIENE =
   process.argv.includes('--strict-source-hygiene');
 
 // Approx USD per 1M tokens [input, output] — for the scorecard's apiCostUsd (estimate).
+// Live OpenRouter check 2026-08-07 (prompt/completion per 1M).
 const RATES = {
   'claude-sonnet-5': [3, 15],
   'claude-opus-4-8': [15, 75],
-  'deepseek/deepseek-chat': [0.14, 0.28],
-  _default: [3, 15]
+  'deepseek/deepseek-chat': [0.26, 1.03],
+  'meta-llama/llama-3.3-70b-instruct': [0.10, 0.32],
+  'nousresearch/hermes-4-70b': [0.13, 0.40],
+  'deepseek/deepseek-v4-flash': [0.09, 0.18],
+  _default: [0.5, 1.5]
 };
 function costUsd(model, tin, tout) {
   const r = RATES[model] || RATES._default;
   return +(((tin / 1e6) * r[0]) + ((tout / 1e6) * r[1])).toFixed(4);
 }
-
-const PERSONA = arg('--persona', null);   // e.g. freelance-firebrand — load an authored reporter's ADVERSARIAL stance (IDENTITY+LENS+RULES) instead of the desk roundup skill (S332 firebrand lane — teeth, not roundup)
 // Task 2.5.5 memory tools: whose citizen page the loop may read/write. Passed
 // by cron-desk-run (the byline it resolved); persona runs fall back to the
 // persona map's own POPID. Absent -> memory tools stay out of the toolset.
@@ -587,6 +592,18 @@ async function main() {
     : 'The current cycle and its world state are in the first message; read output/world_summary_c' + cycle +
       '.md in full and use search_world for depth.';
 
+  const firebrandHeat = PERSONA === 'freelance-firebrand'
+    ? '\n\nFIREBRAND HEAT (hard): You are Jax Caldera — accountability of bullshit, not a tidy desk. ' +
+      'Write SHORT and HOT (target 400–650 words). First-person. Bar/laundromat/BART open with a SPECIFIC place and time. ' +
+      'Lead with the contradiction or the unowned crisis — not the official timeline. Do the raw count in prose (not a bullet inventory). ' +
+      'Translate officialese into what it actually means. Name who owes an answer. End on ONE unanswered question, then ' +
+      '`-- Jax Caldera | tipline: JAX-TIPS`. ' +
+      'FORBIDDEN: process roundup voice, "stakeholders," "community leaders," "moving forward," engine/system jargon, ' +
+      'bullet-led number dumps, sanding a metric fight into a calm initiative status piece. ' +
+      'If two signals fight (decay vs recovery, money vs placements, illness with no lead), that FIGHT is the story. ' +
+      'Heat without inventing citizens or criminal claims — question or attributed allegation only.\n'
+    : '';
+
   const system =
     'You are running HEADLESS as the ' + DESK + ' desk of The Cycle Pulse — the same agent that ' +
     'normally runs inside Claude Code, now driven by a standalone script. Your SKILL is below: follow it ' +
@@ -595,15 +612,19 @@ async function main() {
     'CURRENT-CYCLE OVERRIDE: the edition pipeline is paused, so your desk workspace ' +
     '(output/desks/' + DESK + '/current/) is STALE — do NOT take cycle facts from it. ' + depthInstr +
     ' When your section is finished, call write_file with the full markdown. Do not ' +
-    'stop until you have written the section.\n\n' +
+    'stop until you have written the section.\n' +
+    firebrandHeat +
     priorArcSystem +
-    '=== YOUR SKILL (.claude/agents/' + DESK + '-desk/SKILL.md) ===\n\n' + skill +
+    '=== YOUR SKILL (.claude/agents/' + (PERSONA || (DESK + '-desk')) + ') ===\n\n' + skill +
     (strictSourceBlock ? '\n\n' + strictSourceBlock : '');
 
   const kickoff = STATE_FILE
     ? 'Current cycle: ' + cycle + '. Write the ' + DESK + ' section for THIS cycle from YOUR LANE below — ' +
       'build only from the storylines it names and the citizen quotes it supplies; find your own angle. Do not ' +
       'invent events, players, or officials the lane does not name. Use your reporters\' voices per your SKILL. ' +
+      (PERSONA === 'freelance-firebrand'
+        ? 'You are Jax — write ONE column of heat into the stink, not a multi-story desk section. '
+        : '') +
       'Ignore the stale desk workspace. Research EFFICIENTLY via the pointers — do not re-search the same source.\n\n' +
       priorArcKickoff +
       strictSourceKickoff +

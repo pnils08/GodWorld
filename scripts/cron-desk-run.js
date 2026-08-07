@@ -97,8 +97,10 @@ function detectCycle() {
   const c = getCurrentCycle({ soft: true, noArgv: true });
   return c === null ? 'current' : String(c);
 }
-function deskRoute(desk) {
+function deskRoute(desk, persona) {
   const m = JSON.parse(fs.readFileSync(path.join(__dirname, 'desk-model-map.json'), 'utf8'));
+  // Persona key wins (freelance-firebrand heat model) — do not inherit civic DeepSeek.
+  if (persona && m[persona]) return m[persona];
   return m[desk] || m._default;
 }
 const slug = m => m.replace(/[^a-z0-9]+/gi, '-').toLowerCase();
@@ -332,6 +334,12 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
     L.push('the answer. Never file the roundup. Anonymous scene texture you observed is yours');
     L.push('(that\'s what you saw); named people come from the storyline record and the quoted');
     L.push('citizens below.');
+    if (persona.name && /jax|caldera/i.test(persona.name)) {
+      L.push('HEAT: short, hot, first-person. Specific bar/street open. Lead with what does not line up.');
+      L.push('Do the count in prose — no bullet inventory of numbers. Translate officialese into the street read.');
+      L.push('If signals fight (decay vs recovery, money vs jobs, illness with no owner) — that fight IS the story.');
+      L.push('End on ONE unanswered question, then tipline. Never sand the contradiction into a process status piece.');
+    }
     L.push('');
   }
   if (angleRead) {
@@ -503,12 +511,16 @@ function writerArtifactTag(assign, personaSlug) {
 }
 
 function buildWriterArgs(desk, stateFile, personaSlug, artifactTag) {
+  const route = deskRoute(desk, personaSlug);
   return [
     path.join(ROOT, 'scripts', 'cron-desk-writer.js'),
     '--desk', desk,
     '--state-file', stateFile,
     ...(personaSlug ? ['--persona', personaSlug] : []),
     ...(artifactTag ? ['--artifact-tag', artifactTag] : []),
+    // Explicit route so persona model is never lost if writer defaults shift.
+    ...(route && route.provider ? ['--provider', route.provider] : []),
+    ...(route && route.model ? ['--model', route.model] : []),
   ];
 }
 
@@ -951,7 +963,7 @@ async function runWrite(assign) {
   const angle = readJson(anglePath);
   const packet = readJson(packetPath);
   const persona = personaInfo(personaSlug);
-  const route = deskRoute(desk);
+  const route = deskRoute(desk, personaSlug);
   const draftName = stem + slug(route.model) + '.md';
   const draftPath = path.join(COMPARE, draftName);
   const base = draftName.replace(/\.md$/, '');

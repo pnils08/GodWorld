@@ -29,6 +29,8 @@ assert.deepStrictEqual(
     '--desk', 'civic',
     '--state-file', 'output/cron-compare/civic.state.md',
     '--artifact-tag', 'dr-lila-mezran',
+    '--provider', 'openrouter',
+    '--model', 'deepseek/deepseek-chat',
   ]
 );
 
@@ -61,17 +63,21 @@ assert.deepStrictEqual(
     '--desk', 'civic',
     '--state-file', 'output/cron-compare/civic.state.md',
     '--persona', 'freelance-firebrand',
+    '--provider', 'openrouter',
+    '--model', 'meta-llama/llama-3.3-70b-instruct',
   ]
 );
+// Firebrand routes to llama-3.3-70b (heat seat); slug must match desk-model-map.
+const firebrandSlug = 'meta-llama-llama-3-3-70b-instruct';
 const expectedPersonaDraft =
   stageStem(102, 'civic', personaAssignment.persona) +
-  'deepseek-deepseek-chat.md';
+  firebrandSlug + '.md';
 const emittedPersonaDraft =
   'civic_c102_' +
   buildOutputSlug(
     personaAssignment.persona,
     null,
-    'deepseek-deepseek-chat'
+    firebrandSlug
   ) +
   '.md';
 assert.strictEqual(emittedPersonaDraft, expectedPersonaDraft);

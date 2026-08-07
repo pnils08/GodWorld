@@ -15,7 +15,7 @@ protected='^(\.claude/|CLAUDE\.md|SESSION_CONTEXT\.md)'
 staged="$(git diff --cached --name-only | grep -E "$protected" || true)"
 
 # --- EXTERNAL-LANE HANDOFF CARVE-OUT (S340) ---
-# kimi / codex / antigravity carry a NEXT line in SESSION_CONTEXT.md and close by
+# kimi / codex / antigravity / grok carry a NEXT line in SESSION_CONTEXT.md and close by
 # rewriting it (AGENTS.md §Session close). Without this, that write is a
 # control-plane edit they cannot make, so their lanes would sit frozen at
 # whatever a Claude terminal typed once and the handoff would be decoration.
@@ -37,10 +37,10 @@ if [ "$staged" = "SESSION_CONTEXT.md" ] && [ "$CLAUDE_CTL" != "1" ]; then
   sc_changes="$(git diff --cached -U0 -- SESSION_CONTEXT.md \
     | grep -E '^[+-]' | grep -Ev '^(\+\+\+|---)' || true)"
   sc_lanes="$(printf '%s\n' "$sc_changes" \
-    | sed -nE 's/^[+-]\*\*NEXT\[(kimi|codex|antigravity)\]:\*\*.*/\1/p' \
+    | sed -nE 's/^[+-]\*\*NEXT\[(kimi|codex|antigravity|grok)\]:\*\*.*/\1/p' \
     | sort -u)"
   sc_offending="$(printf '%s\n' "$sc_changes" \
-    | grep -Ev '^[+-]\*\*NEXT\[(kimi|codex|antigravity)\]:\*\*' || true)"
+    | grep -Ev '^[+-]\*\*NEXT\[(kimi|codex|antigravity|grok)\]:\*\*' || true)"
   if [ -n "$sc_changes" ] && [ -z "$sc_offending" ] \
      && [ "$(printf '%s\n' "$sc_lanes" | grep -c .)" = "1" ]; then
     echo "pre-commit: external-lane handoff — NEXT[$sc_lanes] only, control-plane gate waived (S340)."

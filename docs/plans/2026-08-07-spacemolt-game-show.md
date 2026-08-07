@@ -36,7 +36,7 @@ pointers:
 
 ## Phase 0 — Decisions + verification (research-build + Mike)
 
-- **0.1 Account identity.** Confirmed S360 audit: the existing account's username is literally **"Mags Corliss"** (Nebula Collective, home system Haven, ~1,581 credits, player_id on file, creds at `~/.config/spacemolt/credentials.json`). The pilot seat should not be Mags. Decide: fresh show account(s) via `spacemolt-lib` multi-account (one Clerk key can own the fleet), vs. renaming/repurposing the existing account and its history. Blocks 1.1.
+- **0.1 Account identity — DECIDED S360 (Mike-approved): fresh show account(s)** via `spacemolt-lib` multi-account (one Clerk key owns the fleet). The existing "Mags Corliss" account (Nebula Collective, home system Haven, ~1,581 credits, creds at `~/.config/spacemolt/credentials.json` — confirmed S360 audit) stays Mags' own; its history is 61 failed mining runs, not show material. Execution note for next session: verify how spacemolt-lib's Clerk-key auth coexists with the game's per-account register/login flow before minting cast accounts.
 - **0.1b Audit facts binding the build (S360 agent audit).** The old miner's response parsing NEVER matched the server schema — 61 "completed" runs, 0 ores recorded ever, last successful sell logged 17 items at 0 credits; then 71 days of `no_fuel` (no refuel step existed). Rate limit is real: 60 public API req/min per IP, shared across the whole fleet — bounds both the episode runner and the adapter's polling. Both facts reinforce principle 1 (adopt typed upstream clients; never hand-parse response text again).
 - **0.2 Commander adopt-verify.** Clone `SpaceMolt/commander`; run ONE bounded session on OpenRouter cheap tier against the live server: verify a turn-capped/one-shot mode exists (or wrap), action log capturable, cost per episode measured. Acceptance: one episode, durable log, cost number in hand.
 - **0.3 Cast shortlist.** Mags shortlists 3–5 plausible real citizens from the ledger (age, neighborhood, arc fit — no invented entrants); Mike picks 2–4 and names the show. Blocks Phase 1 persona binding and all coverage.
@@ -81,3 +81,4 @@ pointers:
 ## Changelog
 
 - 2026-08-07 — Initial draft (S360, research-build). Ignited by Mike-direct game-show direction; research basis + upstream org audit same day. Moltbook restart-storm fix shipped same session (crontab lesson baked into principle 5).
+- 2026-08-07 — 0.1 DECIDED (S360, Mike-approved): fresh show accounts, Mags account stays hers. 0.1b audit facts added. Next session opens on Phase 0 execution: cast shortlist (Mags, from ledger), commander adopt-verify (cheap OpenRouter, produce cost-per-episode), show name + cast picks (Mike).

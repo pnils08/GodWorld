@@ -183,6 +183,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 - **[[media/TORRES_SAFETY_BAG]]** — (grok). Sgt. Rachel Torres public-safety architectures hard-injected on solo `rachel-torres`. *(reference, media, civic, active)*
 - **[[media/MEZRAN_HEALTH_BAG]]** — (grok). Dr. Lila Mezran health/human-cost architectures hard-injected on solo `lila-mezran`. *(reference, media, civic, active)*
 - **[[plans/2026-08-07-civic-solo-seats]]** — pipeline.49 (grok). Five civic solo personas + bags; multi-voice civic-desk legacy for headless. *(plan, media, civic, active)*
+- **[[plans/2026-08-07-office-holder-position-wall]]** — civic.16 (grok). Office-holder position walls: CIVIC daypart on cp-POP, datawake+cascade save, hard inject; faction spokesperson keying. *(plan, civic, active)*
 - **[[plans/2026-08-07-culture-sports-support-solo-seats]]** — pipeline.50 (grok). Culture desk 6 solos + sports support (Tanya/Simon/Marbury); Marbury audit-grade data bag for canon-path deep analysis. *(plan, media, culture, sports, active)*
 - **[[media/MARBURY_DATA_BAG]]** — (grok). Elliot Marbury deep analysis architectures — As_Roster/TrueSource memo-grade for staged/canon. *(reference, media, sports, data, active)*
 - **[[media/MARIA_GROUND_BAG]]** · **[[media/GRAYE_FAITH_BAG]]** · **[[media/KAI_ARTS_BAG]]** · **[[media/MASON_KITCHEN_BAG]]** · **[[media/ANGELA_EDUCATION_BAG]]** · **[[media/NOAH_ENVIRONMENT_BAG]]** — culture solo bags (grok). *(reference, media, culture, active)*

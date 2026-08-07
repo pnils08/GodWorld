@@ -163,7 +163,7 @@ When trigger fires → plan under civic/research-build: “office-holder positio
 - Optional shared wall formatter for voiced wakes.  
 - Expand authored voices only with the POP ID line contract.
 
-**Ignited plans:** civic.16 (ready) — design then build; pointer remains this research until a plan MD is cut for condition 3.
+**Ignited plans:** [[../plans/2026-08-07-office-holder-position-wall]] (civic.16) — design locked + `scripts/officeWall.js` + cron-civic wiring shipped (grok 2026-08-07).
 
 ### Duty calendar (Mike-clarified 2026-08-07 — load-bearing for wall design)
 
@@ -194,8 +194,8 @@ Domain examples (already wired in `cron-civic-run.js` `domainSlice` + map `dataD
 | Journalist personas | persona-map | cp-POP | **Hard** (reporterWall) | PASS filed + memory_note | **A** |
 | Citizen-voice authored | IDENTITY `POP ID:` | cp-POP | Soft (pageMemory) | Wake + PRESS record | **A−** |
 | Random ledger citizens | Simulation_Ledger | cp-POP | Soft when woken | Wake | **B+** (by design) |
-| Civic office holders | civic-office-map | possible if woken | None on civic run | **None on civic run** | **D** for office-continuity; **B** as source agents |
-| Civic project directors | map popids | same | None on civic run | None on civic run | **D** for holder continuity |
+| Civic office holders | civic-office-map | cp-POP via officeWall | **Hard** position wall on civic run | datawake + cascade `stated:`/`datawake:` (CIVIC daypart) | **A−** (wired civic.16; live SM depends on next cron) |
+| Civic project directors | map popids | same | **Hard** on project cascade + datawake | same CIVIC daypart | **A−** (wired civic.16) |
 | Faction multi-seat agents | many POPIDs | N/A single | N/A | Must not single-wall | **N/A — design correctly as multi** |
 | City Clerk | none | none | none | none | **Correct** |
 
@@ -206,9 +206,13 @@ Domain examples (already wired in `cron-civic-run.js` `domainSlice` + map `dataD
 - 2026-08-07 — Written for Claude handoff after journalist solo-seat wall work; no agent package edits.
 - 2026-08-07 (mags S357) — **POPID reconciliation DONE (condition 2).** Ledger verified: Brenda Okoro IS POP-00037 (Deputy Mayor, Community Affairs) — IDENTITY's "not in Simulation_Ledger" claim was false, fixed. Police chief IDENTITY carried POP-00142, which the ledger says is **Jonas Patel, Medical Examiner** — worse than suspected drift; fixed to POP-00136 (Rafael Montez, verified). Both IDENTITY files now carry verified POP ID lines.
 - 2026-08-07 (mags S357) — Verdict flipped watch→adopt on Mike-direct approval; civic.16 filed; grok clear to proceed starting with the condition-3 one-page design.
+- 2026-08-07 (grok) — civic.16 implemented: officeWall.js + cron-civic inject/record on datawake + cascade.
+- 2026-08-07 (Mike via grok) — Clarified duty model: project/voice agents **work** Sun–Thu; Mon–Thu datawakes own domain numbers (crime, health/sick rates, Baylight build daily, etc.). Wall design must save those domain statements, not only Sunday cascade positions.
 
 ---
 
 ## Changelog
 
 - 2026-08-07 (grok) — Initial review + watch verdict; research registered for Claude.
+- 2026-08-07 (mags S357) — adopt + POPID fixes + civic.16.
+- 2026-08-07 (grok) — Duty calendar + domain-datawake implication appended for wall design.

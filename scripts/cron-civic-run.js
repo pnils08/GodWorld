@@ -48,6 +48,55 @@ const PACKETS = path.join(CIVIC, 'packets');
 const { lintText } = require('./lintCivicPackets');
 const { getDistrictForNeighborhood } = require('../lib/districtMap');
 const getCurrentCycle = require('../lib/getCurrentCycle');
+const officeWall = require('./officeWall');
+
+/** Non-fatal: prior CIVIC positions for holder of agentDir. */
+async function positionWallInject(officeMap, agentDir) {
+  try {
+    const h = officeWall.resolveHolder(officeMap, agentDir);
+    if (!h) return '';
+    const block = await officeWall.injectBlockForHolder(h, 6);
+    return block ? '\n\n' + block + '\n' : '';
+  } catch (e) {
+    log('position-wall inject failed (' + agentDir + '): ' + e.message);
+    return '';
+  }
+}
+
+/** Non-fatal: save cascade voice JSON statements to holder page. */
+async function positionWallRecordCascade(officeMap, agentDir, voiceJson, cycle) {
+  try {
+    const r = await officeWall.recordCascadeForDir(officeMap, agentDir, voiceJson, cycle);
+    if (r.recorded) log('position-wall cascade ' + agentDir + ' → ' + (r.holder && r.holder.popid));
+    else if (r.error) log('position-wall cascade skip ' + agentDir + ': ' + r.error);
+    return r;
+  } catch (e) {
+    log('position-wall cascade failed (' + agentDir + '): ' + e.message);
+    return { recorded: false, error: e.message };
+  }
+}
+
+/** Non-fatal: save datawake rec to holder page. */
+async function positionWallRecordDatawake(rec) {
+  try {
+    if (!rec || !rec.popid || !rec.statement) return { recorded: false, error: 'no-rec' };
+    const line = officeWall.lineFromDatawake(rec);
+    if (!line) return { recorded: false, error: 'no-line' };
+    const r = await officeWall.recordPosition(rec.popid, line.text, {
+      cycle: rec.cycle,
+      key: line.key,
+      kind: 'datawake',
+      office: rec.agentDir || rec.office,
+      holder: rec.holder,
+    });
+    if (r.recorded) log('position-wall datawake ' + rec.holder + ' → ' + rec.popid);
+    else if (r.error) log('position-wall datawake skip: ' + r.error);
+    return r;
+  } catch (e) {
+    log('position-wall datawake failed: ' + e.message);
+    return { recorded: false, error: e.message };
+  }
+}
 
 function arg(flag, def) {
   const i = process.argv.indexOf(flag);
@@ -958,7 +1007,8 @@ async function runDecide() {
   const packet = mustRead(packetPathFor('civic-office-mayor', cycle), 'run --stage=prep first');
   const model = officeModel(officeMap, 'civic-office-mayor');
   log('mayor model=' + model);
-  const user = 'YOUR PENDING DECISIONS PACKET (cycle ' + cycle + '):\n\n' + packet + '\n\n' + outputContract('mayor', cycle, initiatives);
+  const wallInj = await positionWallInject(officeMap, 'civic-office-mayor');
+  const user = 'YOUR PENDING DECISIONS PACKET (cycle ' + cycle + '):\n\n' + packet + wallInj + '\n\n' + outputContract('mayor', cycle, initiatives);
   const r = await callVoice('civic-office-mayor', model, user, 5000);
   if (!r || r.error) {
     console.error('HALT: Mayor call failed — ' + (r ? r.error : 'no result') + '. Chain must not proceed (everything cascades from her).');
@@ -966,6 +1016,7 @@ async function runDecide() {
     process.exit(1);
   }
   const outPath = writeVoiceJson('mayor', cycle, r.json);
+  await positionWallRecordCascade(officeMap, 'civic-office-mayor', r.json, cycle);
 
   // Cascade: strip-then-append the Mayor's decisions into every other packet
   // (idempotent — a re-run replaces the section, it never stacks).
@@ -1018,10 +1069,12 @@ async function runVoices() {
     try {
       const model = officeModel(officeMap, dir);
       const packet = fs.readFileSync(packetPathFor(dir, cycle), 'utf8');
-      const user = 'YOUR PENDING DECISIONS PACKET (cycle ' + cycle + ') — the Mayor\'s decisions are at the bottom; react to them:\n\n' + packet + '\n\n' + outputContract(slug, cycle, initiatives);
+      const wallInj = await positionWallInject(officeMap, dir);
+      const user = 'YOUR PENDING DECISIONS PACKET (cycle ' + cycle + ') — the Mayor\'s decisions are at the bottom; react to them:\n\n' + packet + wallInj + '\n\n' + outputContract(slug, cycle, initiatives);
       const r = await callVoice(dir, model, user, 4000);
       if (!r || r.error) { results.push({ dir, slug, model, ok: false, error: r ? r.error : 'no result' }); return; }
       const out = writeVoiceJson(slug, cycle, r.json);
+      await positionWallRecordCascade(officeMap, dir, r.json, cycle);
       results.push({ dir, slug, model, ok: true, output: out, statements: r.json.statements.length, attempts: r.attempts });
     } catch (e) { results.push({ dir, slug, ok: false, error: e.message }); }
   }));
@@ -1057,10 +1110,12 @@ async function runProjects() {
       const model = officeModel(officeMap, seat.agentDir);
       const packet = fs.existsSync(packetPathFor(seat.agentDir, cycle)) ? fs.readFileSync(packetPathFor(seat.agentDir, cycle), 'utf8') : '';
       const frame = touches.map(t => '- [' + t.slug + '] ' + (t.st.decision || '') + (t.st.quote ? ' — "' + t.st.quote + '"' : '')).join('\n');
+      const wallInj = await positionWallInject(officeMap, seat.agentDir);
       const user = [
         'Here is what city hall decided this cycle (the political frame is LOCKED — you do not override it, stall it, or create political conflict):',
         '', frame, '',
         packet ? 'YOUR OWN DESK (from prep):\n\n' + packet + '\n' : '',
+        wallInj,
         'Your job: describe what happens next operationally on your initiative.',
         '- What does this look like on the ground?',
         '- What details emerge from implementation?',
@@ -1071,6 +1126,7 @@ async function runProjects() {
       const r = await callVoice(seat.agentDir, model, user, 4000);
       if (!r || r.error) { results.push({ slug, model, ok: false, error: r ? r.error : 'no result' }); continue; }
       const out = writeVoiceJson(slug, cycle, r.json);
+      await positionWallRecordCascade(officeMap, seat.agentDir, r.json, cycle);
       results.push({ slug, model, ok: true, output: out, statements: r.json.statements.length, triggeredBy: touches.map(t => t.slug) });
     } catch (e) { results.push({ slug, ok: false, error: e.message }); }
   }
@@ -1412,9 +1468,11 @@ async function runDatawake() {
   for (const office of rota) {
     try {
       const slice = domainSlice(office, sections, hoods, briefs, tracker, audit);
+      const wallInj = await positionWallInject(officeMap, office.agentDir);
       const user = [
         'It\'s a working ' + ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][day] + 'day at your office. This is your domain\'s live picture this cycle:',
         '', slice, '',
+        wallInj,
         'Speak as yourself doing the job — one public statement or action about what these numbers mean for the people you serve. You argue initiatives on Sundays; today you fight for your constituents with what your desk shows you.',
         'Respond with ONLY JSON (no fences): {"office": "' + voiceSlug(office.agentDir) + '", "holder": "' + office.holder + '", "statement": "<2-4 sentences in your voice>", "action": "<the one concrete thing you are doing about it today, or null>", "numberMoved": "<the single most important number/shift in plain words>"}',
         'Never invent citizens, statistics, or events not present above.',
@@ -1448,6 +1506,7 @@ async function runDatawake() {
       };
       const outPath = path.join(DATAWAKE_DIR, office.agentDir + '_' + date + '.json');
       fs.writeFileSync(outPath, JSON.stringify(rec, null, 2));
+      await positionWallRecordDatawake(rec);
       results.push({ office: office.agentDir, ok: true, out: path.relative(ROOT, outPath) });
       console.log('  [✓] ' + office.agentDir + ' — "' + String(j.numberMoved || j.statement).slice(0, 80) + '"');
     } catch (e) {

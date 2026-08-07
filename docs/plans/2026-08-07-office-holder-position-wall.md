@@ -50,10 +50,17 @@ pointers:
 - index, research applications, civic.16 → in-progress / done-pending-archive
 - **Status:** [x] done
 
+### Task 5: Backfill + live verify
+- `node scripts/officeWall.js --backfill --cycle 102` — 12 datawake + 24 cascade lines, 0 errors
+- Sample walls: Mayor, Montez (cascade+datawake), Baylight Ramos
+- **Status:** [x] done (Fri UTC — no live datawake; backfill seeded walls for Mon inject)
+
 ---
 
 ## Status log
 - 2026-08-07 (grok) — Design locked + module + cron-civic wiring shipped.
+- 2026-08-07 (grok) — `--backfill` CLI; c102 live SM write verified on holder pages.
 
 ## Changelog
 - 2026-08-07 (grok) — Initial plan + implementation.
+- 2026-08-07 (grok) — Backfill from disk + live verify.

@@ -231,6 +231,111 @@ async function recordCascadeForDir(officeMap, agentDir, voiceJson, cycle) {
   return { holder, results, recorded: results.some((r) => r.recorded) };
 }
 
+/**
+ * Backfill CIVIC positions from disk artifacts (datawake JSON + civic-voice cascade).
+ * Idempotent via customId keys. Safe to re-run.
+ */
+async function backfillFromDisk(opts) {
+  const o = opts || {};
+  const map = loadOfficeMap();
+  const dry = !!o.dry;
+  const datawakeDir = path.join(ROOT, 'output', 'cron-civic', 'datawake');
+  const voiceDir = path.join(ROOT, 'output', 'civic-voice');
+  const summary = { datawake: 0, cascade: 0, errors: [], dry };
+
+  // Prefer latest date per agentDir for datawakes
+  const byDir = {};
+  if (fs.existsSync(datawakeDir)) {
+    for (const f of fs.readdirSync(datawakeDir)) {
+      const m = f.match(/^(.+)_(\d{4}-\d{2}-\d{2})\.json$/);
+      if (!m) continue;
+      const prev = byDir[m[1]];
+      if (!prev || prev.date < m[2]) byDir[m[1]] = { date: m[2], file: f };
+    }
+  }
+  for (const { file } of Object.values(byDir)) {
+    try {
+      const rec = JSON.parse(fs.readFileSync(path.join(datawakeDir, file), 'utf8'));
+      if (!rec.popid || !rec.statement) continue;
+      if (dry) {
+        summary.datawake++;
+        continue;
+      }
+      const r = await (async () => {
+        const line = lineFromDatawake(rec);
+        if (!line) return { recorded: false };
+        return recordPosition(rec.popid, line.text, {
+          cycle: rec.cycle,
+          key: line.key,
+          kind: 'datawake',
+          office: rec.agentDir || rec.office,
+          holder: rec.holder,
+        });
+      })();
+      if (r.recorded) summary.datawake++;
+      else if (r.error) summary.errors.push(file + ': ' + r.error);
+    } catch (e) {
+      summary.errors.push(file + ': ' + e.message);
+    }
+  }
+
+  // Latest cascade cycle: prefer --cycle or max cN in voice dir
+  let cycle = o.cycle;
+  if (cycle == null && fs.existsSync(voiceDir)) {
+    let max = 0;
+    for (const f of fs.readdirSync(voiceDir)) {
+      const m = f.match(/_c(\d+)\.json$/);
+      if (m) max = Math.max(max, Number(m[1]));
+    }
+    cycle = max || null;
+  }
+  if (cycle != null && fs.existsSync(voiceDir)) {
+    const slugToDir = {};
+    for (const row of [...(map.offices || []), ...(map.projects || [])]) {
+      if (!row.agentDir) continue;
+      const slug = row.agentDir.replace(/^civic-office-/, '').replace(/^civic-project-/, '').replace(/-/g, '_');
+      // voiceSlug in cron: baylight_authority style — rebuild from agentDir
+      const vs = row.agentDir.replace(/^civic-(office|project)-/, '').replace(/-/g, '_');
+      slugToDir[vs] = row.agentDir;
+    }
+    // common aliases from writeVoiceJson(slug)
+    slugToDir.mayor = 'civic-office-mayor';
+    slugToDir.opp_faction = 'civic-office-opp-faction';
+    slugToDir.crc_faction = 'civic-office-crc-faction';
+    slugToDir.ind_swing = 'civic-office-ind-swing';
+    slugToDir.okoro = 'civic-office-okoro';
+    slugToDir.police_chief = 'civic-office-police-chief';
+    slugToDir.baylight_authority = 'civic-office-baylight-authority';
+    slugToDir.stabilization_fund = 'civic-project-stabilization-fund';
+    slugToDir.oari = 'civic-project-oari';
+    slugToDir.health_center = 'civic-project-health-center';
+    slugToDir.transit_hub = 'civic-project-transit-hub';
+    slugToDir.district_attorney = 'civic-office-district-attorney';
+
+    for (const f of fs.readdirSync(voiceDir)) {
+      const m = f.match(/^(.+)_c(\d+)\.json$/);
+      if (!m || Number(m[2]) !== Number(cycle)) continue;
+      const slug = m[1];
+      const agentDir = slugToDir[slug];
+      if (!agentDir) continue;
+      try {
+        const j = JSON.parse(fs.readFileSync(path.join(voiceDir, f), 'utf8'));
+        if (dry) {
+          summary.cascade += (j.statements || []).length;
+          continue;
+        }
+        const r = await recordCascadeForDir(map, agentDir, j, cycle);
+        if (r.recorded) summary.cascade += (r.results || []).filter((x) => x.recorded).length;
+        else if (r.error) summary.errors.push(f + ': ' + r.error);
+      } catch (e) {
+        summary.errors.push(f + ': ' + e.message);
+      }
+    }
+  }
+  summary.cycle = cycle;
+  return summary;
+}
+
 if (require.main === module) {
   const pop = process.argv.includes('--pop')
     ? process.argv[process.argv.indexOf('--pop') + 1]
@@ -240,6 +345,15 @@ if (require.main === module) {
       if (process.argv.includes('--resolve')) {
         const dir = process.argv[process.argv.indexOf('--resolve') + 1] || 'civic-office-mayor';
         console.log(JSON.stringify(resolveHolder(null, dir), null, 2));
+        return;
+      }
+      if (process.argv.includes('--backfill')) {
+        const dry = process.argv.includes('--dry-run');
+        const ci = process.argv.indexOf('--cycle');
+        const cycle = ci !== -1 ? process.argv[ci + 1] : null;
+        const s = await backfillFromDisk({ dry, cycle: cycle != null ? Number(cycle) : null });
+        console.log(JSON.stringify(s, null, 2));
+        if (s.errors && s.errors.length) process.exitCode = 1;
         return;
       }
       await ensurePositionWall(pop);
@@ -262,4 +376,5 @@ module.exports = {
   injectBlockForHolder,
   recordCascadeForDir,
   loadOfficeMap,
+  backfillFromDisk,
 };

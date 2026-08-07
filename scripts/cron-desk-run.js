@@ -749,7 +749,7 @@ async function runAngle(assign) {
   // deterministically. Non-fatal: a research failure never kills the wake.
   let canonResearch = null;
   if (!persona && story) {
-    try { canonResearch = await runCanonResearch(cycle, desk, story, asker); }
+    try { canonResearch = await runCanonResearch(cycle, desk, story, asker, stem); }
     catch (e) { log('canon research failed (non-fatal): ' + e.message); }
   }
   const anglePath = path.join(COMPARE, stem + 'angle.json');
@@ -782,6 +782,7 @@ async function runAngle(assign) {
     storyDocAppend(stem, '§2b CANON RESEARCH (wake 1 — validated, refs resolve, ≥1 deep thread)',
       canonResearch.facts.map(f => '- ' + f.fact + '\n  ref: ' + f.ref).join('\n') +
       '\n\nselection: ' + canonResearch.source +
+      '\nnlm archive brief: ' + (canonResearch.nlmBrief || 'none (grep floor only)') +
       (canonResearch.trace.length
         ? '\ntool trace (2.5.5 scoreboard): ' + canonResearch.trace.map(t => t.tool + '(' + JSON.stringify(t.input) + ')→' + t.resultChars + 'ch').join('; ')
         : '\ntool trace: none — composed from the gathered floor'));
@@ -867,9 +868,54 @@ function validateCanonFacts(facts, cycle, storyRef) {
   return { ok: errs.length === 0, errs, facts: list };
 }
 
-async function runCanonResearch(cycle, desk, story, reporter) {
+// pipeline.51b — NotebookLM archive continuity joins the canon-research floor.
+// The published-record notebook answers a per-assignment continuity query; the
+// cited answer is saved as a ref-able file in the run dir so the validator
+// accepts it like any other source. Non-blocking by bridge contract: auth rot
+// (cookies die every 2-4 weeks), rate limits, and CLI absence all degrade to
+// the grep floor — a hard NLM gate would kill every wake the week auth expires.
+function nlmCanonBrief(cycle, story, stem) {
+  try {
+    const cfg = readJson(path.join(ROOT, 'config/notebooklm.json'));
+    if (!cfg || !cfg.notebookId) return null;
+    const { NLM, nlm } = require('./notebooklmPush');
+    if (!fs.existsSync(NLM)) return null;
+    const names = (story.citizens || []).map(c => String(c).replace(/\s*\(POP-[\d]+\)\s*/g, '').trim()).filter(Boolean);
+    const prompt = [
+      'Using only the published sources in this notebook, prepare a cited continuity brief for this newsroom assignment for Cycle ' + cycle + ':',
+      '- Assignment: ' + (story.angle || story.label) + (story.hood ? ' — ' + story.hood : ''),
+      names.length ? '- Named citizens: ' + names.slice(0, 5).join(', ') : null,
+      'Trace prior events, promises, institutions, and unresolved storylines that bear on this assignment.',
+      'Separate direct published fact from inference. Do not invent missing history, quotes, figures, or current-cycle outcomes.'
+    ].filter(Boolean).join('\n');
+    const q = nlm(['notebook', 'query', cfg.notebookId, prompt, '--json', '--timeout', '180'], { timeoutMs: 200 * 1000 });
+    if (!q.ok) { log('[research] nlm archive query skipped (non-fatal): ' + q.out.slice(0, 160)); return null; }
+    let answer = '';
+    try {
+      const j = JSON.parse(q.out);
+      answer = String(j.answer || j.response || j.text || '').trim();
+    } catch (_) {}
+    if (!answer) return null;
+    const file = path.join(COMPARE, stem + 'nlm-canon.md');
+    fs.mkdirSync(COMPARE, { recursive: true });
+    fs.writeFileSync(file,
+      '# Archive continuity brief — NotebookLM over the published record\n\n' +
+      'Assignment: ' + (story.angle || story.label) + '\nCycle: ' + cycle + '\n\n' + answer + '\n');
+    return { rel: path.relative(ROOT, file), answer };
+  } catch (e) {
+    log('[research] nlm archive query failed (non-fatal): ' + e.message);
+    return null;
+  }
+}
+
+async function runCanonResearch(cycle, desk, story, reporter, stem) {
   const { openRouterToolLoop } = require('./cron-desk-writer');
   const cand = gatherCanonCandidates(cycle, story);
+  const brief = stem ? nlmCanonBrief(cycle, story, stem) : null;
+  const briefLines = brief
+    ? brief.answer.slice(0, 2400).split('\n').slice(0, 40)
+      .map((l, i) => String(i + 1).padStart(3) + ': ' + l)
+    : [];
   const material = [
     'CANDIDATE MATERIAL (each line is "file:line: text" — usable as a ref):',
     ...cand.lines.map(l => '- ' + l.slice(0, 300)),
@@ -877,6 +923,11 @@ async function runCanonResearch(cycle, desk, story, reporter) {
     'LEDGER PROFILES (immutable):',
     ...cand.profiles.map(p => '- ' + p),
     '',
+    ...(brief ? [
+      'ARCHIVE CONTINUITY BRIEF (NotebookLM synthesis over the published record — cite a line as "' + brief.rel + ':<line>"):',
+      ...briefLines,
+      '',
+    ] : []),
     'ASSIGNMENT EVIDENCE REF (usable as a ref): ' + story.ref
   ].join('\n');
   const system = 'You are a newsroom researcher. You verify against the record and cite precisely. Return ONLY strict JSON.';
@@ -884,6 +935,7 @@ async function runCanonResearch(cycle, desk, story, reporter) {
     (story.hood ? ' — ' + story.hood : '') + '\n\n' + material +
     '\n\nSelect AT LEAST 3 canon facts that ground this assignment — current AND deep threads. Rules:\n' +
     '- every fact carries a ref: a file:line from the material, the assignment evidence ref, or a file you found via canon_search\n' +
+    (brief ? '- the archive continuity brief is the deepest source here — prefer its threads where they are specific\n' : '') +
     '- facts must span at least 2 distinct source files\n' +
     '- at least 1 fact must come from a PAST cycle (an earlier edition or earlier-cycle file)\n' +
     '- use canon_search to dig past the material where it runs thin\n' +
@@ -898,7 +950,7 @@ async function runCanonResearch(cycle, desk, story, reporter) {
       parsed = m ? JSON.parse(m[0]) : null;
     } catch (_) {}
     const v = validateCanonFacts(parsed && parsed.facts, cycle, story.ref);
-    if (v.ok) return { facts: v.facts, source: 'model', trace };
+    if (v.ok) return { facts: v.facts, source: 'model', trace, nlmBrief: brief ? brief.rel : null };
     log('[research] attempt ' + (attempt + 1) + ' failed validation: ' + v.errs.join('; '));
   }
   // Deterministic fallback — the floor itself, validator-passing by construction:
@@ -910,7 +962,7 @@ async function runCanonResearch(cycle, desk, story, reporter) {
   if (summaryLine) fallback.push({ fact: summaryLine.split(':').slice(2).join(':').trim().slice(0, 200), ref: summaryLine.split(':').slice(0, 2).join(':') });
   fallback.push({ fact: story.label || story.angle, ref: story.ref });
   const v = validateCanonFacts(fallback, cycle, story.ref);
-  return { facts: fallback, source: 'script-fallback' + (v.ok ? '' : ' (validator: ' + v.errs.join('; ') + ')'), trace };
+  return { facts: fallback, source: 'script-fallback' + (v.ok ? '' : ' (validator: ' + v.errs.join('; ') + ')'), trace, nlmBrief: brief ? brief.rel : null };
 }
 
 // ---------------------------------------------------------------------------

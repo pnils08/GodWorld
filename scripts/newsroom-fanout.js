@@ -9,6 +9,12 @@
  * computed from prior fanout-*.json files (self-contained history — no Sheets
  * read for usage; the roster itself still comes from buildBylineRoster).
  *
+ * grok 2026-08-06 — stink force-slot (research 2026-08-06-jax-caldera-sim-stink-audit):
+ * when the deterministic stink scanner scores ≥ threshold and no firebrand force
+ * landed in the last 7 days, one civic assignment becomes Jax Caldera
+ * (freelance-firebrand) seeded from the top stink, with firebrand approach text.
+ * Cap 1/week. Scanner failure is non-fatal (rota still builds).
+ *
  * The 06:15 angle wake builds today's file if missing; report/write consume it.
  *
  * Usage:
@@ -172,6 +178,125 @@ function storyFromSeed(e) {
   return story;
 }
 
+// Approach: persona slug key (freelance-firebrand) beats desk key so civic
+// process framing cannot dilute a firebrand force/LRU slot.
+function approachFor(approachMap, desk, personaSlug) {
+  if (personaSlug && approachMap[personaSlug]) return approachMap[personaSlug];
+  return approachMap[desk] || approachMap._default || null;
+}
+
+function loadFirebrandPersona() {
+  try {
+    const map = JSON.parse(fs.readFileSync(path.join(__dirname, 'persona-map.json'), 'utf8'));
+    const p = map['freelance-firebrand'];
+    if (!p || !p.popid || !p.name) return null;
+    return { slug: 'freelance-firebrand', name: p.name, popid: p.popid, beatDomain: p.beatDomain || 'CIVIC' };
+  } catch (_) { return null; }
+}
+
+/**
+ * If stink scanner says force and cooldown is clear, pin one civic slot to Jax
+ * with the top stink story + firebrand approach. Mutates assignments in place.
+ * Never throws — scanner/IO failures log and leave the LRU rota intact.
+ */
+function applyStinkForce(assignments, cycle, date, approachMap, takenRefs) {
+  const out = { attempted: false, forced: false, reason: null, top: null, reportPath: null };
+  if (cycle == null) {
+    out.reason = 'no-cycle';
+    return out;
+  }
+  out.attempted = true;
+  let scanner;
+  try {
+    scanner = require(path.join(__dirname, 'stink-scanner'));
+  } catch (e) {
+    out.reason = 'scanner-load-failed: ' + e.message;
+    console.error('[fanout] stink force skipped — ' + out.reason);
+    return out;
+  }
+  let report;
+  try {
+    report = scanner.scanCycle(cycle);
+    out.reportPath = scanner.writeReport(cycle, report);
+  } catch (e) {
+    out.reason = 'scan-failed: ' + e.message;
+    console.error('[fanout] stink force skipped — ' + out.reason);
+    return out;
+  }
+  out.top = report.top ? { score: report.top.score, className: report.top.className, label: report.top.label } : null;
+  if (!report.shouldForce || !report.top) {
+    out.reason = 'below-threshold maxScore=' + report.maxScore;
+    return out;
+  }
+  // Exclude `date` so fanout --force same day can re-seed; other days in window block.
+  const recent = scanner.recentForceCount(COMPARE, scanner.FORCE_COOLDOWN_DAYS, date, date);
+  if (recent.count > 0) {
+    out.reason = 'cooldown recentForce=' + recent.dates.join(',');
+    return out;
+  }
+  const persona = loadFirebrandPersona();
+  if (!persona) {
+    out.reason = 'persona-map missing freelance-firebrand';
+    console.error('[fanout] stink force skipped — ' + out.reason);
+    return out;
+  }
+  const story = report.top.story || {
+    ref: report.top.ref,
+    label: report.top.label,
+    kind: report.top.kind,
+    angle: report.top.label,
+    hood: report.top.hood
+  };
+  if (story.ref) takenRefs.add(story.ref);
+
+  const firebrandApproach = approachFor(approachMap, 'civic', persona.slug);
+  const forceFields = {
+    desk: 'civic',
+    name: persona.name,
+    popid: persona.popid,
+    beatDomain: 'CIVIC',
+    persona: persona.slug,
+    approach: firebrandApproach,
+    story,
+    stinkForce: true,
+    stink: {
+      className: report.top.className,
+      score: report.top.score,
+      label: report.top.label,
+      ref: report.top.ref
+    }
+  };
+
+  // Prefer upgrading an existing Jax slot; else replace the first civic slot;
+  // else push (should not happen if civic quota filled).
+  const jaxIdx = assignments.findIndex(a => a.popid === persona.popid || a.persona === persona.slug);
+  if (jaxIdx >= 0) {
+    const prev = assignments[jaxIdx];
+    assignments[jaxIdx] = Object.assign({}, prev, forceFields, { desk: prev.desk || 'civic' });
+  } else {
+    const civicIdx = assignments.findIndex(a => a.desk === 'civic');
+    if (civicIdx >= 0) {
+      assignments[civicIdx] = forceFields;
+    } else {
+      assignments.unshift(forceFields);
+    }
+  }
+  // Drop duplicate Jax if upgrade path left two (shouldn't, but fail-safe).
+  const seenJax = new Set();
+  for (let i = assignments.length - 1; i >= 0; i--) {
+    const a = assignments[i];
+    if (a.popid === persona.popid || a.persona === persona.slug) {
+      if (seenJax.has(persona.popid)) assignments.splice(i, 1);
+      else seenJax.add(persona.popid);
+    }
+  }
+  out.forced = true;
+  out.reason = 'forced score=' + report.top.score + ' class=' + report.top.className;
+  console.error('[fanout] STINK FORCE — ' + persona.name + ' on ' +
+    String(report.top.label).slice(0, 100) + ' (score ' + report.top.score + ')');
+  return out;
+}
+
 async function buildFanout(date) {
   const { buildBylineRoster } = require(path.join(ROOT, 'scripts', 'engine-auditor', 'bayTribuneRoster'));
   const roster = await buildBylineRoster();
@@ -210,10 +335,11 @@ async function buildFanout(date) {
       if (taken >= quota) break;
       if (usedToday.has(j.name)) continue;   // GENERAL pool is shared (sports+business)
       usedToday.add(j.name);
+      const persona = personaRev[j.popid] || null;
       const a = {
         desk, name: j.name, popid: j.popid, beatDomain: j.beatDomain,
-        persona: personaRev[j.popid] || null,
-        approach: approachMap[desk] || approachMap._default || null
+        persona,
+        approach: approachFor(approachMap, desk, persona)
       };
       // EIC assignment: hand this reporter the next unassigned seed. Seed pool
       // exhausted -> approach-only open beat (never drops the slot).
@@ -224,9 +350,14 @@ async function buildFanout(date) {
     }
     if (taken < quota) shortfalls.push({ desk, wanted: quota, got: taken });
   }
+
+  // grok: after LRU rota is built, optionally force one firebrand stink slot.
+  const stinkForce = applyStinkForce(assignments, cycle, date, approachMap, takenRefs);
+
   const seedless = assignments.filter(a => !a.story).length;
   return { date, cycle, quotas: DAILY_QUOTAS, assignments, shortfalls,
     seedless, signalMissing: !signal,   // loud in the file too — the 06:00 digest and any reader sees a seedless day
+    stinkForce,
     builtAt: new Date().toISOString() };
 }
 
@@ -262,4 +393,5 @@ if (require.main === module) {
 }
 
 module.exports = { buildFanout, writeFanout, loadFanout, usageHistory, stagedTally, bylinePreference,
-  assignedStoryRefs, laneSeeds, storyFromSeed, DAILY_QUOTAS, DESK_DOMAINS };
+  assignedStoryRefs, laneSeeds, storyFromSeed, approachFor, applyStinkForce, loadFirebrandPersona,
+  DAILY_QUOTAS, DESK_DOMAINS };

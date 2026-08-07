@@ -1,7 +1,7 @@
 ---
 title: Research Sub-Catalog
 created: 2026-06-01
-updated: 2026-07-30
+updated: 2026-08-06
 type: reference
 tags: [research, architecture, active]
 sources:
@@ -58,6 +58,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 | **[[2026-08-03-game-environment-review]]** | Game environment review (builder-directed) — the engine already contains a game (dials/conduct engine, arcs, chaos-cars deck, bond graph, tycoon layer, fame) with a newspaper for a UI; sports feed is the proven played-event bridge but sports-hardcoded at 11 seams (writer pattern reusable); visual layer priced: Neighborhood_Map choropleth, surfacing output/photos (no route serves them), Relationship_Bond_Ledger → vis-network world graph, cycle replay; replica-first migration stance extends (not contradicts) the sheets-ceiling take-nothing, with a new fifth trigger (interactive game-runtime write-latency) | `adopt` (visual layer tranche + read-replica stance; realism build order reframed as drama roadmap) / `watch` (migration on 5 triggers; played-events generalization, Sims-layer plan, wagering lane each ignite on builder pick) |
 | **[[2026-08-04-mags-as-narrator]]** | Mags-as-narrator (Mike-direct S353, INCOMPLETE by his account) — four memory surfaces already hold every fact, so compiling desk submissions into a Cycle Pulse is redundant work; journalists are canon-curators; the Pulse becomes Mags' narration and she stops being an employee of the process. Plus the three-lever decomposition: momentum (cheap crons), depth (promotion-triggered, ~400k/artifact, 1-2 per cycle), world-building (daily citizen voice batches, cheapest by 100x). Carries the voice-differentiation hazard + which C102 gap-log findings this design moots. | `adopt` (trigger fired 2026-08-04: Mike completed the design — Saturday = curation + narration, 90%-accuracy graduation to Rhea-published autonomy; ignited [[../plans/2026-08-04-newsroom-canon-flow]], pipeline.45) |
 | **[[2026-08-02-notebooklm-deep-research]]** | Gemini Notebook untapped potential — evaluating deep research (to Drive), structured exports (JSON/CSV), and master brain notes against the current v0.8.5 audio/text usage. | `adopt` (CLI upgrade + deep research integration plan to follow) |
+| **[[2026-08-06-jax-caldera-sim-stink-audit]]** | Jax Caldera / firebrand as sim stink-audit product — not civic watchdog; accountability agent on the ledger; Claude tidy-system restrictions measured (bylineIneligible, no stink scanner, rare fanout, stance dilution); gold path proven; Mara Vance dual (in-world City Planner + external auditor) | `adopt` (plan pending builder promote; options A force-slot / C hunter cron) |
 
 ---
 
@@ -78,6 +79,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
   `engine.89` implementation plan.
 - 2026-07-30 — Recorded the Oakland sports Waves A–B application and retained
   Wave C plus engine.40/engine.77 as open work.
+- 2026-08-06 — Registered Jax Caldera sim stink-audit research (Grok CLI + Mike-direct product framing).
 - 2026-07-31 — Registered the Sheets-ceiling export-to-DB eval (engine.95 Task 7,
   Kimi CLI): take-nothing on migration build, watch with 4 named triggers; ceiling
   reframed as per-cycle read time coupling into the 6-min wall, not cell count.

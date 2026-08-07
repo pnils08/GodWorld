@@ -546,8 +546,23 @@ async function runAngle(assign) {
   let angleRead = null;
   if (asker) {
     const brief = story ? citizenBrief(story.citizens) : { names: [], profiles: [] };
-    const ask = (!persona && story)
-      ? 'You\'re ' + asker.name + ', ' + desk + ' desk. Your editor just handed you today\'s assignment:\n' +
+    // grok 2026-08-06: persona + stink seed → lead with the contradiction (not free
+    // digest only, not civic "official action first"). Roster + story stays EIC-fixed.
+    // Persona without story keeps the original smells-off digest ask.
+    let ask;
+    if (persona && story) {
+      ask = 'You\'re ' + asker.name + '. Something stinks and this is the lead you\'re not walking past:\n' +
+        'STINK: ' + (story.angle || story.label) +
+        (story.stinkClass ? '\nCLASS: ' + story.stinkClass : '') +
+        (story.hookLine ? '\nHOOK: ' + story.hookLine : '') +
+        (brief.names.length ? '\nAFFECTED CITIZENS (real, from the record): ' + brief.names.join('; ') : '') +
+        (brief.profiles.length ? '\nWHO THEY ARE (ledger):\n' + brief.profiles.map(p => '  - ' + p).join('\n') : '') +
+        (story.hood ? '\nWHERE: ' + story.hood : '') +
+        (approach ? '\n\n' + approach : '') +
+        '\n\nIn your own voice: what does not line up, who should answer, and what question ends the piece? ' +
+        'Do not file a process roundup. One stink. Name names of canon officials only.';
+    } else if (!persona && story) {
+      ask = 'You\'re ' + asker.name + ', ' + desk + ' desk. Your editor just handed you today\'s assignment:\n' +
         'ASSIGNED ANGLE: ' + (story.angle || story.label) +
         (story.hookLine ? '\nHOOK: ' + story.hookLine : '') +
         (brief.names.length ? '\nAFFECTED CITIZENS (real, from the record): ' + brief.names.join('; ') : '') +
@@ -555,9 +570,11 @@ async function runAngle(assign) {
         (story.hood ? '\nWHERE: ' + story.hood : '') +
         (approach ? '\n\n' + approach : '') +
         '\n\nThe angle is fixed — the story is yours to create from it. In your own voice: how do you ' +
-        'chase this today? What will you verify in the record first, and who do you want to talk to?'
-      : 'You\'re ' + asker.name + ', between stories. This is the ' + desk + ' beat\'s raw signal this cycle:\n' + digest +
+        'chase this today? What will you verify in the record first, and who do you want to talk to?';
+    } else {
+      ask = 'You\'re ' + asker.name + ', between stories. This is the ' + desk + ' beat\'s raw signal this cycle:\n' + digest +
         '\n\nWhat\'s smelling off to you? Point at the ONE thing nobody\'s touching — and name who should answer for it.';
+    }
     log('asking ' + asker.name + ' (' + asker.popid + ') what smells off...');
     const out = execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
       '--pop=' + asker.popid, '--ask=' + ask, '--cycle=' + cycle, '--json', '--max-tokens=320'],

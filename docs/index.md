@@ -175,6 +175,12 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 - **[[media/ANTHONY_ANALYSIS_BAG]]** — (grok). Anthony Raines go-to analysis concepts hard-injected on solo `anthony-raines` writes — remapped onto As_Roster + TrueSource + Oakland_Sports_Feed (no invented Savant fields). *(reference, media, sports, active)*
 - **[[media/P_SLAYER_CHARGE_BAG]]** — (grok). P Slayer go-to charge architectures hard-injected on solo `p-slayer` writes — variety of heat (not stat board). *(reference, media, sports, active)*
 - **[[media/HAL_ARCHIVE_BAG]]** — (grok). Hal Richmond go-to archive architectures hard-injected on solo `hal-richmond` writes — variety of time (not fan heat). *(reference, media, sports, active)*
+- **[[media/CARMEN_ACCRETION_BAG]]** — (grok). Carmen Delaine civic-ledger architectures hard-injected on solo `carmen-delaine`. *(reference, media, civic, active)*
+- **[[media/LUIS_INVESTIGATION_BAG]]** — (grok). Luis Navarro investigation architectures hard-injected on solo `luis-navarro`. *(reference, media, civic, active)*
+- **[[media/TREVOR_SYSTEMS_BAG]]** — (grok). Trevor Shimizu systems/infrastructure architectures hard-injected on solo `trevor-shimizu`. *(reference, media, civic, active)*
+- **[[media/TORRES_SAFETY_BAG]]** — (grok). Sgt. Rachel Torres public-safety architectures hard-injected on solo `rachel-torres`. *(reference, media, civic, active)*
+- **[[media/MEZRAN_HEALTH_BAG]]** — (grok). Dr. Lila Mezran health/human-cost architectures hard-injected on solo `lila-mezran`. *(reference, media, civic, active)*
+- **[[plans/2026-08-07-civic-solo-seats]]** — pipeline.49 (grok). Five civic solo personas + bags; multi-voice civic-desk legacy for headless. *(plan, media, civic, active)*
 - **[[media/P_SLAYER_JOURNEY_INDEX]]** — P Slayer's journey across editions. *(entity, media, active)*
 - **[[media/PAULSON_CARPENTERS_LINE]]** — "The Carpenter's Line" — Mike Paulson backstory by Hal Richmond. *(entity, media, active)*
 

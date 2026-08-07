@@ -23,5 +23,35 @@
     "popid": "POP-00007",
     "beatDomain": "SPORTS",
     "note": "Solo legacy/historian seat (Grok 2026-08-07). Era comparison, literary long view. NOT multi-voice sports-desk. Wall cp-POP-00007. Model: desk-model-map hal-richmond (DeepSeek literary default)."
+  },
+  "carmen-delaine": {
+    "name": "Carmen Delaine",
+    "popid": "POP-00011",
+    "beatDomain": "CIVIC",
+    "note": "Solo civic ledger (Grok 2026-08-07). Council/initiatives/money accretion. NOT multi-voice civic-desk. Wall cp-POP-00011. Bag: CARMEN_ACCRETION_BAG."
+  },
+  "luis-navarro": {
+    "name": "Luis Navarro",
+    "popid": "POP-00636",
+    "beatDomain": "CIVIC",
+    "note": "Solo investigations (Grok 2026-08-07). Know/don't-know pressure, silence clocks. NOT multi-voice civic-desk; not Jax theater. Wall cp-POP-00636. Bag: LUIS_INVESTIGATION_BAG."
+  },
+  "trevor-shimizu": {
+    "name": "Trevor Shimizu",
+    "popid": "POP-00155",
+    "beatDomain": "INFRASTRUCTURE",
+    "note": "Solo transit/infrastructure (Grok 2026-08-07). Systems failures, cascade warnings. NOT multi-voice civic-desk. Wall cp-POP-00155. Bag: TREVOR_SYSTEMS_BAG."
+  },
+  "rachel-torres": {
+    "name": "Sgt. Rachel Torres",
+    "popid": "POP-00057",
+    "beatDomain": "SAFETY",
+    "note": "Solo public safety (Grok 2026-08-07). Incident structure, classification gaps. NOT multi-voice civic-desk. Wall cp-POP-00057. Bag: TORRES_SAFETY_BAG."
+  },
+  "lila-mezran": {
+    "name": "Dr. Lila Mezran",
+    "popid": "POP-00154",
+    "beatDomain": "HEALTH",
+    "note": "Solo health desk (Grok 2026-08-07). Clusters, human cost, clinical calm. NOT multi-voice civic-desk. Wall cp-POP-00154. Bag: MEZRAN_HEALTH_BAG."
   }
 }

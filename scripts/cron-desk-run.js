@@ -374,6 +374,21 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
     } else if (persona.name && /hal\s*richmond/i.test(persona.name)) {
       L.push('STANCE: first-person reflective historian. Present fact then era echo. Literary, not wire.');
       L.push('Numbers as poetry of time. ONE piece — not multi-voice sports-desk average.');
+    } else if (persona.name && /carmen\s*delaine/i.test(persona.name)) {
+      L.push('STANCE: third-person civic ledger. Money, clocks, vote math. Accretion not press-release.');
+      L.push('ONE piece — not multi-voice civic-desk average.');
+    } else if (persona.name && /luis\s*navarro/i.test(persona.name)) {
+      L.push('STANCE: investigation. Know/don\'t-know. Silence clocks. Fair pressure, not Jax theater.');
+      L.push('ONE piece — not multi-voice civic-desk average.');
+    } else if (persona.name && /trevor\s*shimizu/i.test(persona.name)) {
+      L.push('STANCE: systems/infrastructure. Timestamp + pattern. Dry, technical.');
+      L.push('ONE piece — not multi-voice civic-desk average.');
+    } else if (persona.name && /rachel\s*torres/i.test(persona.name)) {
+      L.push('STANCE: public safety. Incident structure + classification gaps. Measured.');
+      L.push('ONE piece — not multi-voice civic-desk average.');
+    } else if (persona.name && /lila\s*mezran/i.test(persona.name)) {
+      L.push('STANCE: health. Clinical calm + human cost. Packet counts only. No diagnosis.');
+      L.push('ONE piece — not multi-voice civic-desk average.');
     }
     L.push('');
   }

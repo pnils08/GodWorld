@@ -27,5 +27,30 @@
     "model": "deepseek/deepseek-chat",
     "note": "Hal legacy seat (grok 2026-08-07). Literary long-view on DeepSeek penny band; upgrade only if voice flattens to wire. Solo persona, not multi-voice sports-desk."
   },
+  "carmen-delaine": {
+    "provider": "openrouter",
+    "model": "deepseek/deepseek-chat",
+    "note": "Carmen civic ledger solo (grok 2026-08-07). DeepSeek penny band for precise accretion. Multi-voice civic-desk is legacy for headless."
+  },
+  "luis-navarro": {
+    "provider": "openrouter",
+    "model": "deepseek/deepseek-chat",
+    "note": "Luis investigations solo (grok 2026-08-07). Persistent fair pressure — not Jax Llama heat. DeepSeek default."
+  },
+  "trevor-shimizu": {
+    "provider": "openrouter",
+    "model": "deepseek/deepseek-chat",
+    "note": "Trevor systems solo (grok 2026-08-07). Infrastructure/transit. DeepSeek default."
+  },
+  "rachel-torres": {
+    "provider": "openrouter",
+    "model": "deepseek/deepseek-chat",
+    "note": "Torres safety solo (grok 2026-08-07). Procedural public safety. DeepSeek default."
+  },
+  "lila-mezran": {
+    "provider": "openrouter",
+    "model": "deepseek/deepseek-chat",
+    "note": "Mezran health solo (grok 2026-08-07). Clinical human-cost. DeepSeek default."
+  },
   "_default":   { "provider": "openrouter", "model": "deepseek/deepseek-chat" }
 }

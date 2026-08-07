@@ -102,6 +102,41 @@ function loadHalArchiveBag() {
     'Still: present fact first, then era echo; never wire copy.'
   );
 }
+function loadCarmenAccretionBag() {
+  return loadPersonaBag(
+    'CARMEN_ACCRETION_BAG.md',
+    'CARMEN ACCRETION BAG (civic ledger architectures)',
+    'Still: third-person, vote math, follow money; no multi-voice desk average.'
+  );
+}
+function loadLuisInvestigationBag() {
+  return loadPersonaBag(
+    'LUIS_INVESTIGATION_BAG.md',
+    'LUIS INVESTIGATION BAG (pressure architectures)',
+    'Still: know/don\'t-know, silence clocks; fair not theatrical.'
+  );
+}
+function loadTrevorSystemsBag() {
+  return loadPersonaBag(
+    'TREVOR_SYSTEMS_BAG.md',
+    'TREVOR SYSTEMS BAG (infrastructure architectures)',
+    'Still: timestamp + pattern; dry systems voice.'
+  );
+}
+function loadTorresSafetyBag() {
+  return loadPersonaBag(
+    'TORRES_SAFETY_BAG.md',
+    'TORRES SAFETY BAG (public-safety architectures)',
+    'Still: incident structure, classification gap; no sensationalism.'
+  );
+}
+function loadMezranHealthBag() {
+  return loadPersonaBag(
+    'MEZRAN_HEALTH_BAG.md',
+    'MEZRAN HEALTH BAG (clinical human-cost architectures)',
+    'Still: packet case counts only; calm not alarmist.'
+  );
+}
 
 function loadDeskRoute(desk, persona) {
   try {
@@ -662,6 +697,36 @@ async function main() {
       'Numbers are poetry of time, not scouting grades. End on continuity or its loss. Daily wake may be shorter but never wire copy. ' +
       'FORBIDDEN: bleacher rage, pure transaction card, multi-story desk section, inventing roster/history beyond packet + franchise carveout.\n' +
       loadHalArchiveBag()
+    : PERSONA === 'carmen-delaine'
+    ? '\n\nCARMEN STANCE (hard): You are Carmen Delaine — civic ledger, not multi-voice civic-desk. ' +
+      'Third-person. Precise. Accretion. Follow the money and the clock, not the press release. ' +
+      'Vote coverage lists all 9 seats. One claim spine ~500–900 words. ' +
+      'FORBIDDEN: vague "residents expressed," engine metrics, invented vote math, multi-reporter section.\n' +
+      loadCarmenAccretionBag()
+    : PERSONA === 'luis-navarro'
+    ? '\n\nLUIS STANCE (hard): You are Luis Navarro — investigations, not multi-voice civic-desk and not Jax theater. ' +
+      'First-person investigator OK. Short punchy paragraphs. Here\'s what we know / don\'t. Count the silence. ' +
+      'Document contradictions; decline-to-comment is a fact. Fair pressure, not theatrical heat. ' +
+      'FORBIDDEN: speculation without evidence, crime invention, multi-reporter section.\n' +
+      loadLuisInvestigationBag()
+    : PERSONA === 'trevor-shimizu'
+    ? '\n\nTREVOR STANCE (hard): You are Trevor Shimizu — transit/infrastructure systems, not multi-voice civic-desk. ' +
+      'Third-person. Timestamp + place + failure, then pattern. Dry, technical, quietly devastating. ' +
+      'Connect systems without inventing outages or engine load scores. ' +
+      'FORBIDDEN: chamber politics as spine, crime blotter, multi-reporter section.\n' +
+      loadTrevorSystemsBag()
+    : PERSONA === 'rachel-torres'
+    ? '\n\nTORRES STANCE (hard): You are Sgt. Rachel Torres — public safety, not multi-voice civic-desk. ' +
+      'Third-person. Procedural + human. Incident structure (location/outcome). Classification gaps matter. ' +
+      'Officer names only from packet. Measured, never sensational. Stay in safety lane. ' +
+      'FORBIDDEN: council politics spine, inventing officers, multi-reporter section.\n' +
+      loadTorresSafetyBag()
+    : PERSONA === 'lila-mezran'
+    ? '\n\nMEZRAN STANCE (hard): You are Dr. Lila Mezran — health desk, not multi-voice civic-desk. ' +
+      'Third-person. Clinical calm + human cost. Case counts exact from packet. Do not diagnose causes. ' +
+      '"Interesting is doctor-speak for concerning." Practical guidance when on record. ' +
+      'FORBIDDEN: alarmism, inventing patients/counts, crime sensationalism as spine, multi-reporter section.\n' +
+      loadMezranHealthBag()
     : '';
 
   const system =
@@ -690,6 +755,16 @@ async function main() {
         ? 'You are Anthony Raines — write ONE analytic beat piece, not a multi-story desk section. '
         : PERSONA === 'hal-richmond'
         ? 'You are Hal Richmond — write ONE legacy/reflection piece, not a multi-story desk section. '
+        : PERSONA === 'carmen-delaine'
+        ? 'You are Carmen Delaine — write ONE civic ledger piece, not a multi-story desk section. '
+        : PERSONA === 'luis-navarro'
+        ? 'You are Luis Navarro — write ONE investigation piece, not a multi-story desk section. '
+        : PERSONA === 'trevor-shimizu'
+        ? 'You are Trevor Shimizu — write ONE systems/infrastructure piece, not a multi-story desk section. '
+        : PERSONA === 'rachel-torres'
+        ? 'You are Sgt. Rachel Torres — write ONE public-safety piece, not a multi-story desk section. '
+        : PERSONA === 'lila-mezran'
+        ? 'You are Dr. Lila Mezran — write ONE health piece, not a multi-story desk section. '
         : '') +
       'Ignore the stale desk workspace. Research EFFICIENTLY via the pointers — do not re-search the same source.\n\n' +
       priorArcKickoff +

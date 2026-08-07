@@ -41,7 +41,7 @@ pointers:
 ### Task 2: Solo persona package + map
 
 - **Files:** `.claude/agents/p-slayer/*`, `scripts/persona-map.json`, `scripts/desk-model-map.json`, writer heat block
-- **Status:** [x] agent on disk + maps; control-plane commit may need Claude land
+- **Status:** [x] done — agent on disk + maps (grok); control plane landed via CLAUDE_CTL commit `0d2179b4` (S357 design review, 2026-08-07)
 
 ### Task 3: Fan-pulse slice (like Jax stink slice)
 
@@ -69,3 +69,4 @@ pointers:
 
 - 2026-08-07 (grok) — Initial plan + Tasks 1–2 shipped in scripts; agent package on disk.
 - 2026-08-07 (grok) — Pointed sibling plan for anthony-raines + halsolo seats.
+- 2026-08-07 (mags, research-build S357) — Task 2 closed: agent package landed, commit `0d2179b4`. Remaining: Tasks 3 (fan-pulse slice), 4 (weekend wake-pool verify), 5 (media legacy note).

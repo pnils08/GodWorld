@@ -57,7 +57,7 @@ pointers:
 ### Task 3: Solo agent packages
 
 - **Files:** `.claude/agents/anthony-raines/*`, `.claude/agents/hal-richmond/*`
-- **Status:** [x] on disk (grok); [ ] Claude land commit
+- **Status:** [x] done — on disk (grok); landed via CLAUDE_CTL commit `0d2179b4` (S357 design review, 2026-08-07)
 
 ### Task 4: Live observe
 
@@ -77,3 +77,4 @@ pointers:
 ## Changelog
 
 - 2026-08-07 (grok) — Initial plan; Tasks 1–2 shipped in scripts; Task 3 agent packages on disk.
+- 2026-08-07 (mags, research-build S357) — Task 3 closed: agent packages design-reviewed and landed, commit `0d2179b4`. Remaining: Tasks 4 (live observe) + 5 (media legacy note).

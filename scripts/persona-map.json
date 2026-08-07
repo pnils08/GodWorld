@@ -11,5 +11,17 @@
     "popid": "POP-00008",
     "beatDomain": "SPORTS",
     "note": "Fan columnist (Grok heat seat, parallel to Jax). Die-hard fan voice — hate the signing / I was wrong arc. NOT multi-voice sports-desk. Wall cp-POP-00008. Model: desk-model-map p-slayer."
+  },
+  "anthony-raines": {
+    "name": "Anthony Raines",
+    "popid": "POP-00017",
+    "beatDomain": "SPORTS",
+    "note": "Solo analytic beat (Grok 2026-08-07). Roster architecture, numbers, FO fit. NOT multi-voice sports-desk. Wall cp-POP-00017. Model: desk-model-map anthony-raines (DeepSeek analytic)."
+  },
+  "hal-richmond": {
+    "name": "Hal Richmond",
+    "popid": "POP-00007",
+    "beatDomain": "SPORTS",
+    "note": "Solo legacy/historian seat (Grok 2026-08-07). Era comparison, literary long view. NOT multi-voice sports-desk. Wall cp-POP-00007. Model: desk-model-map hal-richmond (DeepSeek literary default)."
   }
 }

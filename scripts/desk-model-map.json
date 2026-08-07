@@ -17,5 +17,15 @@
     "model": "meta-llama/llama-3.3-70b-instruct",
     "note": "P.Slayer fan-heat seat (grok 2026-08-07). Same heat band as firebrand — confrontation over press-box calm. Solo persona, not multi-voice sports-desk."
   },
+  "anthony-raines": {
+    "provider": "openrouter",
+    "model": "deepseek/deepseek-chat",
+    "note": "Anthony analytic seat (grok 2026-08-07). DeepSeek is fine for number-first press-box — heat models sand less relevant than clear structure. Solo persona, not multi-voice sports-desk."
+  },
+  "hal-richmond": {
+    "provider": "openrouter",
+    "model": "deepseek/deepseek-chat",
+    "note": "Hal legacy seat (grok 2026-08-07). Literary long-view on DeepSeek penny band; upgrade only if voice flattens to wire. Solo persona, not multi-voice sports-desk."
+  },
   "_default":   { "provider": "openrouter", "model": "deepseek/deepseek-chat" }
 }

@@ -63,7 +63,9 @@ pointers:
 ## Status log
 
 - 2026-08-07 (grok) — Paulson cron-exclude reversed; p-slayer persona + agent package; plan filed.
+- 2026-08-07 (grok) — Sibling seats filed: [[2026-08-07-anthony-hal-solo-sports-seats]] (Anthony analytic + Hal legacy).
 
 ## Changelog
 
 - 2026-08-07 (grok) — Initial plan + Tasks 1–2 shipped in scripts; agent package on disk.
+- 2026-08-07 (grok) — Pointed sibling plan for anthony-raines + halsolo seats.

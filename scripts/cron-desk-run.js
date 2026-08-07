@@ -364,6 +364,16 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
           L.push('COLOR: ' + (js.scene.colorRoom || ''));
         }
       } catch (_) { /* optional */ }
+    } else if (persona.name && /p\.?\s*slayer/i.test(persona.name)) {
+      L.push('HEAT: first-person I/we fan column. Gut or Oakland sensory open. Charge most of the time.');
+      L.push('Friction pivot required. Metrics are foils, not Anthony analysis. Hate-the-move / I-was-wrong arc OK.');
+      L.push('ONE column — not multi-voice sports-desk average.');
+    } else if (persona.name && /anthony\s*raines/i.test(persona.name)) {
+      L.push('STANCE: third-person analytic beat. One claim on verifiable numbers. Fit and process over bleacher heat.');
+      L.push('Never invent contracts/stats. ONE piece — not multi-voice sports-desk average.');
+    } else if (persona.name && /hal\s*richmond/i.test(persona.name)) {
+      L.push('STANCE: first-person reflective historian. Present fact then era echo. Literary, not wire.');
+      L.push('Numbers as poetry of time. ONE piece — not multi-voice sports-desk average.');
     }
     L.push('');
   }

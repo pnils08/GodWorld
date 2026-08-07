@@ -50,6 +50,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | pipeline.45 | Newsroom canon flow (Mike-direct 2026-08-04) — Phases 1-3 BUILT + Saturday cron INSTALLED (Sat 16:00 UTC); acceptance = first unattended run Aug 8, then Phase 4 graduation watch | in-progress | engine-sheet / research-build | [[../plans/2026-08-04-newsroom-canon-flow]] |
 | pipeline.46 | Jax sim stink-audit (grok) — scanner + weekly firebrand force-slot + approach override; Tasks 1-5 shipped 2026-08-06; live fanout observe remains | in-progress | research-build | [[../plans/2026-08-06-jax-sim-stink-audit]] |
 | pipeline.47 | P Slayer fan-heat seat (grok) — sports writers IN M-F fanout; solo p-slayer persona; multi-voice sports-desk legacy for headless | in-progress | research-build | [[../plans/2026-08-07-p-slayer-fan-heat-seat]] |
+| pipeline.48 | Anthony + Hal solo sports seats (grok) — persona maps + stance; agent packages on disk; Claude lands .claude agents | in-progress | research-build | [[../plans/2026-08-07-anthony-hal-solo-sports-seats]] |
 
 ### engine.* — Engine code, ledger, schema
 

@@ -103,6 +103,21 @@ function Receipt({ receipt, onStartAnother }) {
   );
 }
 
+// S357 (Mike-approved): the browser may remember the write key AFTER its
+// first accepted write — single-operator tool behind dashboard auth +
+// Tailscale; the key never leaves this machine. A rejected key is never
+// stored. "Forget key" clears it.
+const WRITE_KEY_STORAGE = 'gw-sports-write-key';
+function loadStoredWriteKey() {
+  try { return window.localStorage.getItem(WRITE_KEY_STORAGE) || ''; } catch { return ''; }
+}
+function storeWriteKey(value) {
+  try { window.localStorage.setItem(WRITE_KEY_STORAGE, value); } catch { /* storage unavailable — key stays session-only */ }
+}
+function forgetStoredWriteKey() {
+  try { window.localStorage.removeItem(WRITE_KEY_STORAGE); } catch { /* nothing stored */ }
+}
+
 export default function SportsWriteConfirmation({
   preview,
   onEntryWritten,
@@ -112,14 +127,15 @@ export default function SportsWriteConfirmation({
   const confirmation = preview?.confirmation;
   const statDiff = preview?.mutationPreview?.statDiff;
   const stateDiff = preview?.mutationPreview?.stateDiff;
-  const [writeKey, setWriteKey] = useState('');
+  const [writeKey, setWriteKey] = useState(loadStoredWriteKey);
+  const [keyRemembered, setKeyRemembered] = useState(() => Boolean(loadStoredWriteKey()));
   const [acknowledged, setAcknowledged] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
   const [receipt, setReceipt] = useState(null);
 
   useEffect(() => {
-    setWriteKey('');
+    setWriteKey(loadStoredWriteKey());
     setAcknowledged(false);
     setSubmitting(false);
     setError(null);
@@ -152,6 +168,8 @@ export default function SportsWriteConfirmation({
         capability,
         confirmation: confirmation.confirmationPhrase,
       });
+      storeWriteKey(capability); // accepted by the server — safe to remember
+      setKeyRemembered(true);
       setReceipt(response.data);
       onEntryWritten?.(response.data);
     } catch (requestError) {
@@ -273,8 +291,19 @@ export default function SportsWriteConfirmation({
             placeholder="Enter only for this confirmation"
             className="h-11 w-full rounded-xl border border-white/10 bg-black/40 px-3 text-xs text-white outline-none transition placeholder:text-neutral-700 focus:border-sky-400/60"
           />
-          <span className="mt-1 block text-[9px] text-neutral-500">
-            The key is sent once for this request, cleared immediately, and never returned by the API.
+          <span className="mt-1 flex items-center gap-2 text-[9px] text-neutral-500">
+            {keyRemembered
+              ? 'Key remembered in this browser after its first accepted write.'
+              : 'Sent once per request, never returned by the API; remembered in this browser after its first accepted write.'}
+            {keyRemembered && (
+              <button
+                type="button"
+                onClick={() => { forgetStoredWriteKey(); setKeyRemembered(false); setWriteKey(''); }}
+                className="rounded border border-white/10 px-1.5 py-0.5 text-[8px] font-black uppercase tracking-wider text-neutral-400 transition hover:border-red-300/30 hover:text-red-200"
+              >
+                Forget key
+              </button>
+            )}
           </span>
         </label>
 

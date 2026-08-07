@@ -389,7 +389,6 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
     } else if (persona.name && /lila\s*mezran/i.test(persona.name)) {
       L.push('STANCE: health. Clinical calm + human cost. Packet counts only. No diagnosis.');
       L.push('ONE piece — not multi-voice civic-desk average.');
-    }
     } else if (persona.name && /maria\s*keen/i.test(persona.name)) {
       L.push('STANCE: culture ground. First-person witness. One block one truth.');
       L.push('ONE piece — not multi-voice culture-desk average.');

@@ -75,3 +75,7 @@ output/cron-compare/
 # godworld_batch_ingest skill writes its run log to cwd (repo root) — runtime
 # log, not a doc; belongs untracked like logs/. (S354)
 /changelog.md
+
+# Grok CLI local config — config.toml carries the permission allowlist,
+# which includes historical commands with inline API keys. Never commit.
+.grok/

@@ -1,22 +1,30 @@
 # Freelance Firebrand — Agent Memory
 
-**Agent:** Accountability Columnist (deployed sparingly)
-**Last Updated:** C98 (2026-06-19)
+**Agent:** Jax Caldera / sim bullshit accountability (Grok seat)
+**Last Updated:** 2026-08-06 (IDENTITY/LENS/SKILL/voice re-authored — product lock)
+
+## Product lock (do not drift)
+- Job: bad code in action as world events; accountability of bullshit — not civic process roundup
+- Live path: `scripts/stink-scanner.js` + fanout force-slot + `--persona freelance-firebrand`
+- Legacy: interactive agent invoke still valid; same job, no leash into tidy timelines
+- Research: `docs/research/2026-08-06-jax-caldera-sim-stink-audit.md`
+- Plan: `docs/plans/2026-08-06-jax-sim-stink-audit.md`
 
 ## Output Directory
-Write to: `output/reporters/jax-caldera/articles/c{XX}_*.md` (brief specifies path, not desk-output)
+Write to: `output/reporters/jax-caldera/articles/c{XX}_*.md` or `output/desk-output/firebrand_c{XX}.md` (brief/cron specifies)
 C92: `output/reporters/jax-caldera/articles/c92_youth_apprenticeship_where_are_they.md`
 C93: `output/reporters/jax-caldera/articles/c93_crc_oversight.md`
 C95 O1: `output/reporters/jax-caldera/articles/c95_O1.md`
+C98: `output/reporters/freelance-firebrand/articles/c98_C1.md`
 
 ## Rules
-- Deploy ONLY when there is a verified gap, contradiction, or suspicious silence
-- Every claim must be verifiable against canon data
-- Sharp voice but responsible — adversarial pressure, not conspiracy
-- NOT a regular column — sparingly deployed by editorial decision
-- **"cycle" is FORBIDDEN in Jax's voice** — IDENTITY.md prohibition is character-spec, tighter than newsroom.md general allowance. Use concrete anchors: "18 out of 280," "over a year," "fourteen months late." The two constraints coexist: newsroom reporters CAN use cycle; Jax CANNOT.
-- Output path may vary by brief — check brief for exact path (recent: `output/reporters/freelance-firebrand/articles/`)
-- Word count follows assignment brief, not RULES.md default
+- Deploy ONLY on verified stink (gap, contradiction, silence, crisis unattended, metric fight, scene-vs-record)
+- Every claim verifiable against canon/record
+- Sharp, responsible — adversarial pressure, not conspiracy
+- Sparing heat — but do not invent calm when the city is sick and the map is decaying
+- System language forbidden in body prose (engine/simulation/ledger as jargon)
+- Output path may vary by brief / cron stem
+- Word count: short and hot (RULES default unless brief overrides)
 
 ## C92 Stink Signals
 - **Contradiction / Implementation Gap:** Oakland Youth Apprenticeship Pipeline v1.0 (C73) is a fully-financed $12.5M spec with named schools, named union locals, specific launch target (Year 3 Q1). Mayor Santana and Councilmember Rivers both described program as dormant/new at C92 — framing contradicts the document.

@@ -52,6 +52,27 @@ var YOUTH_EVENT_PROBS = {
   college: 0.15       // 15% of college students
 };
 
+// Academic calendar by month — relocated from utilities/youthActivities.js when
+// S357 (27776f0a) retired that file; its caller-graph grepped the FILENAME but
+// this file referenced the bare identifier, so Phase5-Youth threw
+// "ACADEMIC_CALENDAR is not defined" from load (bench C103 catch, S360).
+// Consumed by generateSchoolWideEvents_ + adjustProbByCalendar_ below; the
+// school-wide events feed the S326 V2-5 youth ripple emitter.
+var ACADEMIC_CALENDAR = {
+  1: { period: 'winter_break_return', events: ['new semester begins', 'winter sports season'] },
+  2: { period: 'mid_winter', events: ['black history month', 'winter formal dances'] },
+  3: { period: 'spring_prep', events: ['spring break approaching', 'standardized testing'] },
+  4: { period: 'spring', events: ['spring sports', 'prom season begins'] },
+  5: { period: 'end_of_year', events: ['AP exams', 'spring concerts', 'senior activities'] },
+  6: { period: 'graduation', events: ['graduation ceremonies', 'summer programs begin'] },
+  7: { period: 'summer', events: ['summer camp', 'summer jobs', 'college prep'] },
+  8: { period: 'late_summer', events: ['back to school prep', 'fall sports tryouts'] },
+  9: { period: 'fall_start', events: ['first day of school', 'fall sports season'] },
+  10: { period: 'fall', events: ['homecoming', 'fall plays', 'college applications'] },
+  11: { period: 'fall_end', events: ['thanksgiving break', 'early college decisions'] },
+  12: { period: 'winter', events: ['winter break', 'winter concerts', 'holiday programs'] }
+};
+
 // ============================================================================
 // MAIN ENGINE FUNCTION
 // ============================================================================

@@ -345,6 +345,7 @@ Prior reviewers filled most of the original §8. **Your job is dissent + missed 
 | 2 | engine-sheet S360 | Live verify; **/17 bug**; **400k hardcode**; three-scale numbers; hospital **writer live**; city→citizen hop exists; C-via-A interim vote; soft invariants |
 | 3 | Mike S360 | **city→hood→citizen** strict; 1:443 at hood; per-metric WP; WP history defect; hospital wiring not greenfield |
 | 4 | grok second pass | Dose math E≈1–2/cycle; multi employment graphs; weather siblings; reconcile Mike vs C-vote; W2a/b + W3 reroute order |
+| 4b | engine-sheet S360 bench fires | Bench 0720 synced + HEAD pushed, C103 cold + C104 warm fired (Mike-direct "fire on sandbox"). PROVEN: East Oakland row self-heals Phase 8; hospital path live (3 admissions, multi-cycle lifecycle); Content_Telemetry + traj DSL fire; 9 fresh mints got 16 first-cycle events; illness 9.85→10.24%. NEW GAP: hospital `Cause` blank on all rows — HealthCause chain never feeds `ev.cause` (add to W4). CAUGHT+FIXED+PROD-PUSHED: (a) `.agents/**` Node file killed the whole Apps Script load (`require is not defined`) — live carried it since S357, Sunday would have died at load; `.claspignore` fixed; (b) S357 youthActivities retirement deleted `ACADEMIC_CALENDAR` while runYouthEngine references the bare identifier — Phase5-Youth threw; const restored inline (A7 class: grep identifiers, not filenames). C104: 0 errors, 217 youth/school rows. Bench-verify hygiene: bench-only tabs survive sync, so cycle numbers RECUR across eras — filter proofs by write-era, not AdmitCycle. |
 | 5 | **kimi (you)** | This pass |
 
 Full narrative of passes 2–4 lived in earlier file revisions; body above is the merged truth.
@@ -367,3 +368,4 @@ Full narrative of passes 2–4 lived in earlier file revisions; body above is th
 - 2026-08-07 (engine-sheet S360) — Hospital/health hop corrections + Mike direction.
 - 2026-08-07 (grok) — Second-pass re-review: agree/dissent, missed ripples, dose math, build order.
 - 2026-08-07 (grok) — **Kimi-facing rewrite:** fold all corrections into §§1–9; §10 open for Kimi; Appendix A provenance; checklist retargeted.
+- 2026-08-07 (engine-sheet S360) — Bench proving fires C103/C104 (Appendix A pass 4b): hospital path + East Oakland self-heal + mints proven; 2 live-fire landmines fixed and prod-pushed; hospital Cause-blank gap added to W4 scope.

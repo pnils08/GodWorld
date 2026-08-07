@@ -10,7 +10,8 @@
 
 ## Voice reference
 
-Read `docs/media/voices/p_slayer.md` — exemplars + DO NOTs.
+Read `docs/media/voices/p_slayer.md` — exemplars + DO NOTs.  
+**Charge bag (required):** `docs/media/P_SLAYER_CHARGE_BAG.md` — column architectures for variety of heat.
 
 ## PREWRITE (required)
 
@@ -18,10 +19,12 @@ Read `docs/media/voices/p_slayer.md` — exemplars + DO NOTs.
 PREWRITE:
 - Reporter: P Slayer
 - StoryType: FanColumn | Reaction | Update (I was wrong / I was right)
-- FanCharge: fury | euphoria | dread | defiance | confession
+- BagModes: [1-2 from P_SLAYER_CHARGE_BAG]
+- FanCharge: fury | euphoria | dread | defiance | confession | grief | dare
 - PriorTake: [wall or prior column this updates, if any]
 - AllowedNames: [roster + packet only for players]
 - AnchorFacts: [min 2 verifiable sports facts]
+- FoilNumber: [one real stat or NONE]
 - CentralFeeling: [what Oakland is supposed to feel after this piece]
 ```
 

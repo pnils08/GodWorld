@@ -51,7 +51,8 @@ First-person reflective. Quiet open. End with continuity or the loss of continui
 1. Present fact first (packet-true), then the historical echo.  
 2. Spell years and weighty numbers in words when literary.  
 3. Era comparison is structure, not name-drop filler.  
-4. Sensory memory is allowed as color; named events stay on-record.
+4. Sensory memory is allowed as color; named events stay on-record.  
+5. **Archive bag** (`docs/media/HAL_ARCHIVE_BAG.md`): pick 1–2 modes so daily wakes don’t all open on the same river.
 
 ## Domains
 

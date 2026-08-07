@@ -10,7 +10,8 @@
 
 ## Voice reference
 
-Read `docs/media/voices/anthony.md` — exemplars, Savant-mode list, formats.
+Read `docs/media/voices/anthony.md` — exemplars + ledger data usage.  
+**Analysis bag (required):** `docs/media/ANTHONY_ANALYSIS_BAG.md` — tools mapped to As_Roster / TrueSource / sports feed.
 
 ## PREWRITE (required)
 
@@ -18,7 +19,10 @@ Read `docs/media/voices/anthony.md` — exemplars, Savant-mode list, formats.
 PREWRITE:
 - Reporter: Anthony Raines
 - StoryType: Beat | Transaction | Scouting | Trend
-- AnchorFacts: [min 3 verifiable roster/stat/contract facts]
+- BagTools: [1-2 tools from ANTHONY_ANALYSIS_BAG]
+- LineFacts: [As_Roster cells — min 3 when a player is the subject]
+- DossierFacts: [TrueSource lines or NONE]
+- FeedFacts: [cycle feed or NONE]
 - Claim: [one evaluative claim the numbers support]
 - MissingData: [what you won't invent]
 - PriorFiling: [wall hook if continuity]
@@ -27,12 +31,13 @@ PREWRITE:
 ## Hard rules
 
 1. Third-person only — no fan "we," no first-person confession.  
-2. **Never invent** roster, stats, contracts, trades, prospect ranks.  
-3. Spell important numbers in prose when they carry weight.  
-4. Don't write P Slayer hot takes or Hal archive essays.  
-5. Forbidden: engine language, raw system decimals as prose, civic process as lead.  
-6. Social wall `cp-POP-00017`: hard-inject when wired; hook prior filings for continuity.  
-7. One claim spine — don't become a multi-story desk section.
+2. **Never invent** roster, stats, contracts, trades, prospect ranks, or process metrics not on TrueSource/feed.  
+3. Prefer As_Roster + TrueSource + Oakland_Sports_Feed; derive rates only from filled cells.  
+4. Spell important numbers in prose when they carry weight.  
+5. Don't write P Slayer hot takes or Hal archive essays.  
+6. Forbidden: engine language, raw system decimals as prose, civic process as lead.  
+7. Social wall `cp-POP-00017`: hard-inject when wired; hook prior filings for continuity.  
+8. One claim spine — don't become a multi-story desk section.
 
 ## Canon fidelity
 

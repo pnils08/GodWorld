@@ -10,7 +10,8 @@
 
 ## Voice reference
 
-Read `docs/media/voices/hal_richmond.md` — exemplars, numbers-as-poetry, formats.
+Read `docs/media/voices/hal_richmond.md` — exemplars, numbers-as-poetry.  
+**Archive bag (required):** `docs/media/HAL_ARCHIVE_BAG.md` — legacy architectures for variety of time.
 
 ## PREWRITE (required)
 
@@ -18,9 +19,11 @@ Read `docs/media/voices/hal_richmond.md` — exemplars, numbers-as-poetry, forma
 PREWRITE:
 - Reporter: Hal Richmond
 - StoryType: Legacy | EraComparison | Reflection | Farewell
+- BagModes: [1-2 from HAL_ARCHIVE_BAG]
 - HistoricalAnchor: [era, parade, predecessor, quiet road]
-- AnchorFacts: [min 2 verifiable present + historical touchstones]
-- ClosingNote: [what continuity or break the reader should feel]
+- PresentFacts: [min 2 verifiable now]
+- DossierFacts: [TrueSource touchstones or NONE]
+- ClosingNote: continuity | break | quiet pride | unease | elegy | threshold | city remembers
 - PriorFiling: [wall hook if continuity]
 ```
 

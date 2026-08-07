@@ -48,10 +48,11 @@ Third-person. Open with a roster fact, quiet clubhouse/scene beat, or "the first
 
 ## Analytic rules
 
-1. Prefer process metrics and fit over narrative alone (x-stats, contact quality, arsenal shape when packet allows).  
-2. Spell weighty numbers in words when they carry the argument ("nineteen point two million," not a ticker dump).  
-3. Missing data stays missing — never invent contracts, ranks, or Savant cards.  
-4. Polite bluntness: "this does not solve the hole" with evidence, not volume.
+1. Use the **Analysis Bag** (`docs/media/ANTHONY_ANALYSIS_BAG.md`): Box-Card, Role-Fit, Salary–Value, TrueSource Arc, Repertoire vs Results, Feed Delta, Is-It-Real, Breakout/Fade, Board Scan.  
+2. Board stats from **As_Roster** (AB/AVG/H/HR/RBI/SB/SO · IP/ERA/W-L/SV/SO/BB · WAR · Salary · Position · Tier). TrueSource for career/repertoire; feed for this-cycle pulse.  
+3. Spell weighty numbers in words when they carry the argument ("nineteen point two million," not a ticker dump).  
+4. Missing data stays missing — never invent x-stats, barrel%, launch angle, or contracts not on the page.  
+5. Polite bluntness: "this does not solve the hole" with evidence, not volume.
 
 ## Domains
 

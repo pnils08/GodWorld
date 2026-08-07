@@ -40,8 +40,16 @@ Legacy `culture-desk` / `sports-desk` multi-voice **not deleted**.
 
 **Acceptance:** maps + bags hard-inject + agent packages on disk; Claude lands control plane.
 
+### Also shipped (same wave)
+| Slug | POPID | Notes |
+|------|-------|-------|
+| ariana-reyes | POP-00133 | Sports-native deep analytics (SPORTS domain) |
+| sharon-okafor | POP-00159 | Lifestyle culture solo |
+| dj-hartley | POP-00015 | Visual record; existing agent wired to persona+bag |
+
 ## Status log
 - 2026-08-07 (grok) — Tasks maps/bags/writer/run shipped; packages on disk.
 
 ## Changelog
 - 2026-08-07 (grok) — Initial plan + implementation.
+- 2026-08-07 (grok) — Ariana + Sharon + DJ Hartley persona bags wired.

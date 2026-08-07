@@ -121,5 +121,20 @@
     "provider": "openrouter",
     "model": "deepseek/deepseek-chat",
     "note": "Marbury deep analysis (grok 2026-08-07). DeepSeek for precise numeric memos; not Llama heat."
+  },
+  "ariana-reyes": {
+    "provider": "openrouter",
+    "model": "deepseek/deepseek-chat",
+    "note": "Ariana sports analytics deep (grok). DeepSeek numeric memos."
+  },
+  "sharon-okafor": {
+    "provider": "openrouter",
+    "model": "deepseek/deepseek-chat",
+    "note": "Sharon lifestyle solo (grok). DeepSeek default."
+  },
+  "dj-hartley": {
+    "provider": "openrouter",
+    "model": "deepseek/deepseek-chat",
+    "note": "DJ Hartley visual (grok). DeepSeek; photo prompts not heat."
   }
 }

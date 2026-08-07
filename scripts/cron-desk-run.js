@@ -416,6 +416,15 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
     } else if (persona.name && /elliot\s*marbury/i.test(persona.name)) {
       L.push('STANCE: deep analysis data desk. As_Roster+TrueSource audit. Show sample floors.');
       L.push('ONE memo-grade piece for canon path — not multi-voice sports-desk footnote.');
+    } else if (persona.name && /ariana\s*reyes/i.test(persona.name)) {
+      L.push('STANCE: sports analytics deep. As_Roster+TrueSource. Sample floors. Sports-lane memo.');
+      L.push('ONE memo-grade piece for canon path — not multi-voice sports-desk average.');
+    } else if (persona.name && /sharon\s*okafor/i.test(persona.name)) {
+      L.push('STANCE: lifestyle behavior patterns. Warm analytical. Packet venues/people.');
+      L.push('ONE piece — not multi-voice culture-desk average.');
+    } else if (persona.name && /(dj\s*)?hartley|deshawn\s*hartley/i.test(persona.name)) {
+      L.push('STANCE: senior photographer. Visual record/prompts. Not prose articles.');
+      L.push('ONE visual assignment set — not multi-voice desk average.');
     }
     L.push('');
   }

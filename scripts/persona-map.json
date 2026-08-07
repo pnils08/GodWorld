@@ -107,5 +107,23 @@
     "popid": "POP-00166",
     "beatDomain": "GENERAL",
     "note": "Data desk deep analysis (grok 2026-08-07). Audit-grade As_Roster/TrueSource memos for canon. GENERAL domain (cross-lane). Bag: MARBURY_DATA_BAG. NOT multi-voice sports-desk footnote."
+  },
+  "ariana-reyes": {
+    "name": "Ariana Reyes",
+    "popid": "POP-00133",
+    "beatDomain": "SPORTS",
+    "note": "Gridiron/sports analytics (grok 2026-08-07). Sports-native deep analysis for canon path. Bag: ARIANA_ANALYTICS_BAG. Peer to Marbury (GENERAL)."
+  },
+  "sharon-okafor": {
+    "name": "Sharon Okafor",
+    "popid": "POP-00159",
+    "beatDomain": "CULTURE",
+    "note": "Lifestyle solo (grok 2026-08-07). Behavior patterns. Bag: SHARON_LIFESTYLE_BAG. Not multi-voice culture-desk."
+  },
+  "dj-hartley": {
+    "name": "DeShawn Hartley",
+    "popid": "POP-00015",
+    "beatDomain": "SPORTS",
+    "note": "Senior photographer (grok 2026-08-07). Visual record / prompts. Bag: HARTLEY_VISUAL_BAG. Wall cp-POP-00015. Not prose desk."
   }
 }

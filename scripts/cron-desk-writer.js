@@ -164,6 +164,16 @@ function loadSimonLongviewBag() {
 function loadMarburyDataBag() {
   return loadPersonaBag('MARBURY_DATA_BAG.md', 'MARBURY DEEP ANALYSIS BAG (audit-grade board memos for canon)', 'As_Roster+TrueSource only; show sample floors; never invent x-stats.');
 }
+function loadSharonLifestyleBag() {
+  return loadPersonaBag('SHARON_LIFESTYLE_BAG.md', 'SHARON LIFESTYLE BAG (behavior/pattern architectures)', 'Warm analytical; packet venues; no engine decimals.');
+}
+function loadArianaAnalyticsBag() {
+  return loadPersonaBag('ARIANA_ANALYTICS_BAG.md', 'ARIANA SPORTS ANALYTICS BAG (sports-native deep analysis for canon)', 'As_Roster+TrueSource; sample floors; never invent x-stats.');
+}
+function loadHartleyVisualBag() {
+  return loadPersonaBag('HARTLEY_VISUAL_BAG.md', 'HARTLEY VISUAL BAG (visual record / prompt architectures)', 'Prompts and visual assignments; not prose articles; no invented institutions.');
+}
+
 
 
 function loadDeskRoute(desk, persona) {
@@ -801,6 +811,23 @@ async function main() {
       'One falsifiable claim. Name blank cells. Target memo-grade depth that can stage toward canon. ' +
       'FORBIDDEN: invented x-stats, fan heat, Hal elegy, hiding missing data.\n' +
       loadMarburyDataBag()
+    : PERSONA === 'ariana-reyes'
+    ? '\n\nARIANA STANCE (hard): You are Ariana Reyes — sports analytics deep analysis, sports-lane native. ' +
+      'Third-person. Audit-grade. As_Roster + TrueSource + feed. Sample floors. Peer band when relevant. ' +
+      'Memo-grade claims for canon path. Name blanks. ' +
+      'FORBIDDEN: invented x-stats, fan heat, multi-reporter section.\n' +
+      loadArianaAnalyticsBag()
+    : PERSONA === 'sharon-okafor'
+    ? '\n\nSHARON STANCE (hard): You are Sharon Okafor — lifestyle, not multi-voice culture-desk. ' +
+      'First-person observer. Behavior patterns. Venue ground. Packet people only. Warm analytical. ' +
+      'FORBIDDEN: raw engine nightlife metrics, inventing patrons, multi-reporter section.\n' +
+      loadSharonLifestyleBag()
+    : PERSONA === 'dj-hartley'
+    ? '\n\nHARTLEY STANCE (hard): You are DJ Hartley — senior photographer, visual record. ' +
+      'Not prose articles. Produce visual assignment / prompt work tied to lane storylines. ' +
+      'One frame one moment. Canon institutions only. ' +
+      'FORBIDDEN: inventing buildings, writing news copy as if a reporter, multi-story desk section.\n' +
+      loadHartleyVisualBag()
     : '';
 
   const system =
@@ -857,6 +884,12 @@ async function main() {
         ? 'You are Simon Leary — write ONE long-view piece, not a multi-story desk section. '
         : PERSONA === 'elliot-marbury'
         ? 'You are Elliot Marbury — write ONE deep analysis memo, not a multi-story desk section. '
+        : PERSONA === 'ariana-reyes'
+        ? 'You are Ariana Reyes — write ONE sports analytics memo, not a multi-story desk section. '
+        : PERSONA === 'sharon-okafor'
+        ? 'You are Sharon Okafor — write ONE lifestyle piece, not a multi-story desk section. '
+        : PERSONA === 'dj-hartley'
+        ? 'You are DJ Hartley — produce ONE visual assignment/prompt set, not a prose desk section. '
         : '') +
       'Ignore the stale desk workspace. Research EFFICIENTLY via the pointers — do not re-search the same source.\n\n' +
       priorArcKickoff +

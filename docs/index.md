@@ -185,6 +185,9 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 - **[[media/MARBURY_DATA_BAG]]** — (grok). Elliot Marbury deep analysis architectures — As_Roster/TrueSource memo-grade for staged/canon. *(reference, media, sports, data, active)*
 - **[[media/MARIA_GROUND_BAG]]** · **[[media/GRAYE_FAITH_BAG]]** · **[[media/KAI_ARTS_BAG]]** · **[[media/MASON_KITCHEN_BAG]]** · **[[media/ANGELA_EDUCATION_BAG]]** · **[[media/NOAH_ENVIRONMENT_BAG]]** — culture solo bags (grok). *(reference, media, culture, active)*
 - **[[media/TANYA_SIDELINE_BAG]]** · **[[media/SIMON_LONGVIEW_BAG]]** — sports-support bags (grok). *(reference, media, sports, active)*
+- **[[media/ARIANA_ANALYTICS_BAG]]** — Ariana Reyes sports-native deep analytics (grok). *(reference, media, sports, data, active)*
+- **[[media/SHARON_LIFESTYLE_BAG]]** — Sharon Okafor lifestyle (grok). *(reference, media, culture, active)*
+- **[[media/HARTLEY_VISUAL_BAG]]** — DJ Hartley visual record (grok). *(reference, media, sports, photo, active)*
 - **[[media/P_SLAYER_JOURNEY_INDEX]]** — P Slayer's journey across editions. *(entity, media, active)*
 - **[[media/PAULSON_CARPENTERS_LINE]]** — "The Carpenter's Line" — Mike Paulson backstory by Hal Richmond. *(entity, media, active)*
 

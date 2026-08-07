@@ -390,6 +390,34 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
       L.push('STANCE: health. Clinical calm + human cost. Packet counts only. No diagnosis.');
       L.push('ONE piece — not multi-voice civic-desk average.');
     }
+    } else if (persona.name && /maria\s*keen/i.test(persona.name)) {
+      L.push('STANCE: culture ground. First-person witness. One block one truth.');
+      L.push('ONE piece — not multi-voice culture-desk average.');
+    } else if (persona.name && /elliot\s*graye/i.test(persona.name)) {
+      L.push('STANCE: faith/quiet work. Dignity. Packet institutions only.');
+      L.push('ONE piece — not multi-voice culture-desk average.');
+    } else if (persona.name && /kai\s*marston/i.test(persona.name)) {
+      L.push('STANCE: arts present-tense. Neighborhood act not gallery PR.');
+      L.push('ONE piece — not multi-voice culture-desk average.');
+    } else if (persona.name && /mason\s*ortega/i.test(persona.name)) {
+      L.push('STANCE: kitchen workplaces first. Packet-named workers only.');
+      L.push('ONE piece — not multi-voice culture-desk average.');
+    } else if (persona.name && /angela\s*reyes/i.test(persona.name)) {
+      L.push('STANCE: education stability. Warm brief. No invented scores.');
+      L.push('ONE piece — not multi-voice culture-desk average.');
+    } else if (persona.name && /noah\s*tan/i.test(persona.name)) {
+      L.push('STANCE: weather/environment science-first ground translation.');
+      L.push('ONE piece — not multi-voice culture-desk average.');
+    } else if (persona.name && /tanya\s*cruz/i.test(persona.name)) {
+      L.push('STANCE: sideline dispatch. Clubhouse signal. Packet quotes only.');
+      L.push('ONE piece — not multi-voice sports-desk average.');
+    } else if (persona.name && /simon\s*leary/i.test(persona.name)) {
+      L.push('STANCE: long view. Sports as civic architecture. Quiet continuity.');
+      L.push('ONE piece — not multi-voice sports-desk average.');
+    } else if (persona.name && /elliot\s*marbury/i.test(persona.name)) {
+      L.push('STANCE: deep analysis data desk. As_Roster+TrueSource audit. Show sample floors.');
+      L.push('ONE memo-grade piece for canon path — not multi-voice sports-desk footnote.');
+    }
     L.push('');
   }
   if (angleRead) {

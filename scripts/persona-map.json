@@ -1,16 +1,16 @@
 {
-  "_comment": "Phase 2.3 (2026-07-24): persona slug -> ledger identity. When cron-desk-run.js gets --persona, the byline + self-record come from HERE (not the desk-roster resolveByline). Personas are real citizens — Jax is POP-00799, Tier 2 — so author-side self-record accretes to their own dials/page.",
+  "_comment": "Phase 2.3 (2026-07-24): persona slug -> ledger identity. When cron-desk-run.js gets --persona, the byline + self-record come from HERE (not the desk-roster resolveByline). Personas are real citizens \u2014 Jax is POP-00799, Tier 2 \u2014 so author-side self-record accretes to their own dials/page.",
   "freelance-firebrand": {
     "name": "Jax Caldera",
     "popid": "POP-00799",
     "beatDomain": "ACCOUNTABILITY",
-    "note": "Tier-2 ledger citizen, Tribune freelance accountability (Grok seat). Sim bullshit detector — short, hot, uncomfortable. Writer model: desk-model-map freelance-firebrand (llama-3.3-70b), not civic DeepSeek."
+    "note": "Tier-2 ledger citizen, Tribune freelance accountability (Grok seat). Sim bullshit detector \u2014 short, hot, uncomfortable. Writer model: desk-model-map freelance-firebrand (llama-3.3-70b), not civic DeepSeek."
   },
   "p-slayer": {
     "name": "P Slayer",
     "popid": "POP-00008",
     "beatDomain": "SPORTS",
-    "note": "Fan columnist (Grok heat seat, parallel to Jax). Die-hard fan voice — hate the signing / I was wrong arc. NOT multi-voice sports-desk. Wall cp-POP-00008. Model: desk-model-map p-slayer."
+    "note": "Fan columnist (Grok heat seat, parallel to Jax). Die-hard fan voice \u2014 hate the signing / I was wrong arc. NOT multi-voice sports-desk. Wall cp-POP-00008. Model: desk-model-map p-slayer."
   },
   "anthony-raines": {
     "name": "Anthony Raines",
@@ -53,5 +53,59 @@
     "popid": "POP-00154",
     "beatDomain": "HEALTH",
     "note": "Solo health desk (Grok 2026-08-07). Clusters, human cost, clinical calm. NOT multi-voice civic-desk. Wall cp-POP-00154. Bag: MEZRAN_HEALTH_BAG."
+  },
+  "maria-keen": {
+    "name": "Maria Keen",
+    "popid": "POP-00013",
+    "beatDomain": "CULTURE",
+    "note": "Solo Cultural Liaison (grok 2026-08-07). hyper-local neighborhood texture. Bag: MARIA_GROUND_BAG.md."
+  },
+  "elliot-graye": {
+    "name": "Elliot Graye",
+    "popid": "POP-00012",
+    "beatDomain": "COMMUNITY",
+    "note": "Solo Ethics & Faith (grok 2026-08-07). faith communities and quiet work. Bag: GRAYE_FAITH_BAG.md."
+  },
+  "kai-marston": {
+    "name": "Kai Marston",
+    "popid": "POP-00158",
+    "beatDomain": "CULTURE",
+    "note": "Solo Arts & Entertainment (grok 2026-08-07). arts as neighborhood act. Bag: KAI_ARTS_BAG.md."
+  },
+  "mason-ortega": {
+    "name": "Mason Ortega",
+    "popid": "POP-00160",
+    "beatDomain": "CULTURE",
+    "note": "Solo Food & Hospitality (grok 2026-08-07). restaurants as workplaces. Bag: MASON_KITCHEN_BAG.md."
+  },
+  "angela-reyes": {
+    "name": "Angela Reyes",
+    "popid": "POP-00156",
+    "beatDomain": "EDUCATION",
+    "note": "Solo Education (grok 2026-08-07). schools and youth stability. Bag: ANGELA_EDUCATION_BAG.md."
+  },
+  "noah-tan": {
+    "name": "Noah Tan",
+    "popid": "POP-00157",
+    "beatDomain": "ENVIRONMENT",
+    "note": "Solo Weather & Environment (grok 2026-08-07). weather/environment ground translation. Bag: NOAH_ENVIRONMENT_BAG.md."
+  },
+  "tanya-cruz": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014",
+    "beatDomain": "SPORTS",
+    "note": "Solo Sideline / Clubhouse (grok 2026-08-07). clubhouse access and real-time signal. Bag: TANYA_SIDELINE_BAG.md."
+  },
+  "simon-leary": {
+    "name": "Simon Leary",
+    "popid": "POP-00016",
+    "beatDomain": "SPORTS",
+    "note": "Solo Long View Column (grok 2026-08-07). sports as civic architecture. Bag: SIMON_LONGVIEW_BAG.md."
+  },
+  "elliot-marbury": {
+    "name": "Elliot Marbury",
+    "popid": "POP-00166",
+    "beatDomain": "GENERAL",
+    "note": "Data desk deep analysis (grok 2026-08-07). Audit-grade As_Roster/TrueSource memos for canon. GENERAL domain (cross-lane). Bag: MARBURY_DATA_BAG. NOT multi-voice sports-desk footnote."
   }
 }

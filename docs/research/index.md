@@ -61,7 +61,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 | **[[2026-08-06-jax-caldera-sim-stink-audit]]** | Jax Caldera / firebrand as sim stink-audit product — not civic watchdog; accountability agent on the ledger; Claude tidy-system restrictions measured (bylineIneligible, no stink scanner, rare fanout, stance dilution); gold path proven; Mara Vance dual (in-world City Planner + external auditor) | `adopt` (plan pending builder promote; options A force-slot / C hunter cron) |
 | **[[2026-08-07-notebooklm-audio-overview-direction]]** | NotebookLM Audio Overview Direction — using source prompt injection (e.g., `00_AUDIO_DIRECTION_GUIDE.md`) to dictate tone, pacing, and thematic allocation for daily and weekly overviews. | `adopt` (plan pending to wire source injection into `notebooklmDailyNews.js` and `notebooklmPush.js`) |
 | **[[2026-08-07-cron-lifecycle-review]]** | Live crontab/PM2 lifecycle map — who runs when, writes, fail modes; queue item B | `adopt` (standing ops map) |
-| **[[2026-08-07-city-neighborhood-cascade-team-review]]** | TEAM REVIEW: city vs hood which is feed; WP controlled dice; migration/sick consistency; heat/flood drivers; temper free numbers; hospital talk-back; open A/B/C truth choice | `adopt` (paper for multi-LLM review; plan after A/B/C) |
+| **[[2026-08-07-city-neighborhood-cascade-team-review]]** | TEAM REVIEW + engine-sheet S360 + grok second pass: /17 migration bug, 400k hardcode, city→citizen weak dose, hospital writer live, Mike city→hood→citizen, W1–W6 order | `adopt` (ready for plan once Mike confirms order) |
 | **[[2026-08-07-world-population-bidirectional-design]]** | Mike model: WP controlled dice + cascade; Riley flight recorder; rates→World_Config; talk-back + hospital ground impact missing | `adopt` (design; plan pending Mike go) |
 | **[[2026-08-07-city-metrics-sim-reality]]** | World_Population authority: illness~10% employment~90% designed drift; ledger HealthCause≠city sick; hood demo desync note | `adopt` (corrected after Mike WP paste) |
 | **[[2026-08-07-next-work-queue-pslayer-cron-city-metrics]]** | Mike next-work queue: P Slayer fan-pulse slice, cron lifecycle review, city metrics (sick%/employment%) fine-tune to sim reality — recommended order B→C→A | `adopt` (queue; A has plan, B/C audit-first) |
@@ -77,6 +77,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 ---
 
 ## Changelog
+- 2026-08-07 — Cascade team review: engine-sheet S360 + grok second pass (grok).
 - 2026-08-07 — City/neighborhood cascade team review brief (grok).
 - 2026-08-07 — World_Population bidirectional design research (grok).
 - 2026-08-07 — Cron lifecycle review + city metrics baseline (grok).

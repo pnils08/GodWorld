@@ -266,13 +266,141 @@ Every checkable claim verified against code + live sheets. Layer map §2 and fee
 4. **WP self-overwrite is a defect for trend truth.** One row rewritten per cycle; `appendPopulationHistory_` was deleted (v3.2 bug, S237, no readers) so trend data is scattered/lost and the ledger has never demonstrably tracked the lived world. A history/trend mechanism (or Riley-derived view) is part of the fix scope.
 5. Hospital tab + health-event engine already exist in code (see corrections above) — the work is wiring, not building.
 
+### grok second pass (2026-08-07) — re-review after engine-sheet + Mike block
+
+**Job:** Catch missed elements/ripples; agree/dissent with engine-sheet; lock a coherent build story for Mike.
+
+#### Verdict on engine-sheet review
+
+| Finding | Grok call |
+|---------|-----------|
+| Layer map + city→hood feed table mostly accurate | **Agree** |
+| migration `/17` over 21 hoods → ~1.24× over-allocation | **Agree — ship-fix class** (W2 mini / W1 quant) |
+| `totalPopulation = 400000` hardcode in applyMigrationDrift | **Agree** |
+| Three denominators (WP ~387k / hood demo ~32k / ledger ~940) | **Agree — core architecture debt** |
+| Hood Sick lag vs dial (±3/hood/cycle) | **Agree** — explains 5.2% vs 9.85% without mystery |
+| Hospital_Ledger writer live, tab lazy | **Agree** — paper §7 was wrong; corrected |
+| City→citizen hop via `checkHealthEvent_` | **Agree hop exists; add dose math below** |
+| Vote C destination / A+support transition | **Agree as interim** — superseded in *routing* by Mike city→hood→citizen |
+| W1 first alone | **Agree** |
+
+#### Mike block vs engine-sheet vote (reconcile)
+
+Mike: **strict city → neighborhood → citizen**; 1:443 dose **at hood**; citizens must **not** read city dial directly.  
+Engine-sheet: C destination, A+support transition; noted city→citizen as today's parallel hop.
+
+**Grok synthesis (recommended lock):**
+
+1. **Target cascade (doctrine + Mike):**  
+   `World_Config physics → WP city face → Neighborhood_* → citizen (hood-scoped) → Hospital_Ledger / story seeds`  
+   with **talk-back** upward (W3).
+
+2. **Transition:** keep WP as controlled dice **only if** support rules hold; **reroute** `checkHealthEvent_` illness input from `demographicDrift.illnessRate` to **citizen's hood sick rate** (or hood expectedSick/pop) — matches Mike #1.
+
+3. **C vs A:** Destination is **not pure C** (rates never news-lead alone) and **not pure B** yet (ground too thin). Destination is **Mike chain + dual truth**:  
+   - L1 = city pressure / dice face (earned, config-bounded)  
+   - L4 = hood support + citizen fork  
+   - L5 = lived proof at sample dose  
+   - News leads L5/L4/events, not bare L1  
+
+Engine-sheet "C via A+support" ≈ same if "C" means publication hygiene + eventual ground support, not "L1 never exists."
+
+#### Missed / under-weighted ripples (add to paper)
+
+**1. Health lottery is real but tiny (explains 0 sick statuses)**  
+`checkHealthEvent_`: base chance ~0.0005–0.003 × `(illnessRate/0.05)`. At 9.85% illness ≈ **2× baseline**, still ~1/500–1/1000 per eligible draw. Even ~856 Active adults at mean c≈0.002 → **E[hits] ≈ 1–2/cycle**, many **minor** (LifeHistory only, **no Status**). Only severe (and some moderate) set hospitalized/injured/serious-condition + hospitalEvents. So:
+
+- City dial can scream 10% ill  
+- Sample still shows ~0 Status sick  
+- Not "health engine dead" — **dose + status gate** too weak for support rule (4)
+
+**2. Parallel unemployment graphs (employment ripple is multi-headed)**  
+- WP `employmentRate` → ND Unemployed chase  
+- Crime metrics use **hood Unemployed/totalPop** (not WP directly)  
+- `applyCityDynamics` demoAgg has its **own** unemploymentRate path  
+- Civic initiative modifiers use yet another unemp aggregate  
+- Ledger EmployerBizId = fourth definition  
+
+W1 per-metric for **employment** must map **all four**, not only WP→ND.
+
+**3. MigrationDrift vs migration count (semantics trap for news/civic)**  
+`migrationDrift` is a **scaled score** from migration % of pop (and hardcodes 400k), not hood sum. Civic/datawake "drift −3" ≠ "three people left." Paper said this; team must treat as **label debt** in W5.
+
+**4. Weather → more than illness mod**  
+Already: heat/flood → hood sick mod, chaos cars, hospital events on severe heat path, relationship/engine hooks, story hooks, crisis buckets (`generateCrisisBuckets` reads prev hospitalEvents). Full ripple map for **illness metric** should include **weather as sibling feed**, not only WP dial.
+
+**5. Riley vs WP duplication**  
+Loads/sentiment/flags appear on **both** WP finalize and Riley row — two publication surfaces for same family. Audit "who leads the news" must list **both** consumers (world_summary, Riley, desk packets, civic domainSlice).
+
+**6. applyCityDynamics sicknessRate 0.05 fallback**  
+Separate free-number class (demoAgg default) — W2 bucket alongside demographicDrift.
+
+**7. Health event caps**  
+`healthCount >= 3` → no more health milestones — dampens epidemic storytelling on the sample even when city dial is high.
+
+**8. Promotion path commented / limited**  
+Mike noted "no massive promotions" — generational promotion block appears **commented out** in the health-adjacent scan region; employment story won't show career lottery from city emp dial. Separate from illness but same "macro without micro" class.
+
+**9. Scale story for 1:443**  
+Mike: 1:443 at **hood** level. Today hood layer is ~1:12 of city pop (32k vs 387k), sample ~1:411 of city — **three scales**. Any "few citizens sick when hood rate rises" math must pick **one** scaling story (hood sample density vs city sample density) and document it.
+
+#### Elements still thin / need W1 quant (not assumed fixed)
+
+| Element | Status after dual review |
+|---------|---------------------------|
+| City→hood migration magnitude | **Bug proven** (/17) |
+| City→hood sick/unemp lag | **By design** (±3) — may need wider chase or talk-back |
+| City→citizen health | **Wired weak** — dose + status gate |
+| Hood→citizen | **Missing** (Mike priority) |
+| Talk-back ground→city | **Missing** |
+| Hospital census→city | **Missing** (writer exists) |
+| WP history/trend | **Missing** (self-overwrite; appendPopulationHistory_ dead) |
+| Employment multi-definition | **Mapped, not audited** |
+| News consumer list for WP/Riley | **Not fully enumerated** (W5) |
+| Event probability vs macro flags | **W6 still open** |
+| Neighborhood_Map vs ND consistency | **Not fully traced** (metrics vs demography two hood sheets) |
+
+#### Recommended build order (updated)
+
+| Order | Work | Why |
+|-------|------|-----|
+| **0** | Mike locks cascade: city→hood→citizen + per-metric passes | Direction already recorded § Mike block |
+| **W1** | Per-metric cascade audit script (illness, employment, migration, loads…) | Measure; include consumer graph + scale table |
+| **W2a** | Fix migration `/N` normalize + kill 400000 hardcode | Proven bug, low risk |
+| **W2b** | World_Config-ize illness/emp steps/caps/attractors | ADR-0015; kill free 0.90–0.93 as permanent |
+| **W3** | Reroute health incidence to **hood** rate; dose so support rule (4) can ever fire | Mike #1–2 |
+| **W4** | Hospital_Ledger live path + crisis tiers + talk-back design | Writer exists; wire + feedback |
+| **W5** | Media/civic: no bare WP rate leads until support | Parallel anytime |
+| **W6** | Probability vs macro (heat/flood gates vs high-signal flags) | After W1 data |
+
+#### Grok checklist fill (§ team checklist)
+
+- [x] Layer map vs code — confirmed + hospital/health hop corrections  
+- [x] A/B/C — **Mike chain + C-publication hygiene**; not pure B  
+- [x] Must-have invariants — engine-sheet list + dose caveat  
+- [x] Hospital — existing writer; not greenfield  
+- [ ] News ban — **recommend yes** until W3/W4 support  
+- [ ] World_Config key draft — **still needed** (W2b deliverable)  
+- [x] Owner order — table above  
+
+#### Residual risks if team ships W2a only
+
+Fixing `/17` without W3 still leaves **10% city ill / 0 sample sick**. Fixing W3 without talk-back still leaves WP free to drift. **Don't ship partial without saying which truth news may use.**
+
+---
+
 ## Applications (living)
 
 - 2026-08-07 — Written for full LLM team review per Mike.
 - 2026-08-07 — engine-sheet code-truth review pass (S360): claims verified live, /17 divisor + 400000 constant found, C-via-A vote recorded.
+- 2026-08-07 — Mike cascade direction block recorded (city→hood→citizen, per-metric WP, hospital exists, WP history defect).
+- 2026-08-07 — grok second pass: health dose math, multi employment graphs, weather sibling feeds, reconcilation of votes, updated build order.
 
 ---
 
 ## Changelog
 
 - 2026-08-07 (grok) — Initial team review brief from Mike direction + code map.
+- 2026-08-07 (engine-sheet S360) — Code-truth review + hardcode finds + C-via-A vote.
+- 2026-08-07 (engine-sheet S360) — Hospital/health hop corrections + Mike direction.
+- 2026-08-07 (grok) — Second-pass re-review: agree/dissent, missed ripples, dose math, build order.

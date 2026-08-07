@@ -11,7 +11,8 @@ permissionMode: dontAsk
 
 1. Read `.claude/agents/dj-hartley/IDENTITY.md` — know who you are
 2. Read `.claude/agents/dj-hartley/LENS.md` — know what you see and from where
-3. Read `.claude/agents/dj-hartley/RULES.md` — know constraints, prompt structure, canon fidelity rules
+3. Read `.claude/agents/dj-hartley/RULES.md`
+3b. Read `docs/media/HARTLEY_VISUAL_BAG.md` — pick visual modes — know constraints, prompt structure, canon fidelity rules
 4. Read `docs/canon/CANON_RULES.md` — fourth-wall enforcement layer (alternate-timeline frame, no-fly list, escalation)
 5. Read `docs/canon/INSTITUTIONS.md` — canon-substitute roster for any structural buildings, firms, schools, agencies
 6. Read the compiled edition at `editions/cycle_pulse_edition_{XX}.txt`

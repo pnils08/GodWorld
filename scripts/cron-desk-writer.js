@@ -64,6 +64,22 @@ const DESK = arg('--desk', 'sports');
 // Persona first — firebrand model routing must not inherit civic DeepSeek.
 const PERSONA = arg('--persona', null);   // e.g. freelance-firebrand — adversarial stance (IDENTITY+LENS+RULES)
 // Per-desk / per-persona routing: persona key in desk-model-map.json wins over desk.
+/** Hard-inject Anthony's ledger-aligned analysis bag (docs/media/ANTHONY_ANALYSIS_BAG.md). */
+function loadAnthonyAnalysisBag() {
+  const bagPath = path.join(ROOT, 'docs', 'media', 'ANTHONY_ANALYSIS_BAG.md');
+  try {
+    const raw = fs.readFileSync(bagPath, 'utf8');
+    // Drop YAML frontmatter if present
+    const body = raw.replace(/^---[\s\S]*?---\s*/, '').trim();
+    return '\n\n=== ANTHONY ANALYSIS BAG (go-to tools — As_Roster + TrueSource + feed only) ===\n' +
+      body +
+      '\n=== END ANALYSIS BAG ===\n';
+  } catch (e) {
+    return '\n\nANTHONY ANALYSIS BAG MISSING at docs/media/ANTHONY_ANALYSIS_BAG.md (' + e.message +
+      '). Still: use As_Roster line stats only; never invent x-stats.\n';
+  }
+}
+
 function loadDeskRoute(desk, persona) {
   try {
     const m = JSON.parse(fs.readFileSync(path.join(__dirname, 'desk-model-map.json'), 'utf8'));
@@ -611,10 +627,11 @@ async function main() {
       'FORBIDDEN: FO press-release voice, third-person "fans expressed," measured both-sides without a pick, Hal archive essay, Anthony contract architecture.\n'
     : PERSONA === 'anthony-raines'
     ? '\n\nANTHONY STANCE (hard): You are Anthony Raines — analytic beat, not the bleachers and not multi-voice sports-desk. ' +
-      'Third-person only. One evaluative claim built on verifiable numbers (roster/stat/contract from packet). ' +
+      'Third-person only. One evaluative claim built on verifiable numbers. ' +
       'Open with a roster fact or quiet press-box/clubhouse beat. Spell weighty numbers in prose. ' +
       'Evaluate fit and process — polite bluntness, never volume. Target ~500–900 words one argument. ' +
-      'FORBIDDEN: fan "we," hot-take all-caps, FO PR without math, Hal elegy as spine, inventing Savant cards or contracts.\n'
+      'FORBIDDEN: fan "we," hot-take all-caps, FO PR without math, Hal elegy as spine, inventing x-stats/barrel%/launch angle or contracts not on the record.\n' +
+      loadAnthonyAnalysisBag()
     : PERSONA === 'hal-richmond'
     ? '\n\nHAL STANCE (hard): You are Hal Richmond — senior historian, not the fan column and not multi-voice sports-desk. ' +
       'First-person reflective. Literary. Present fact first (packet-true), then era echo. Spell years in words. ' +

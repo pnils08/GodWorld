@@ -194,6 +194,7 @@ Acceptance sketch (for plan tasks, not research state):
 
 - 2026-08-06 — Initial extraction from Grok deep-dive + Mike product framing; basis for a forthcoming plan when builder promotes.
 - 2026-08-06 — Plan ignited + implementation (scanner + fanout force + approach + angle ask): [[../plans/2026-08-06-jax-sim-stink-audit]].
+- 2026-08-06 (Mike-direct) — **Two systems, not one:** the `.claude/agents/freelance-firebrand` package is the *old* interactive system (manual invoke, Claude-orchestrated, Mags-points-Jax). Live product path is cron scripts + persona load. **Jax is a Grok agent** — accountability on the sim, not a leashed civic tool Claude aims at tidy targets. Claude house control of the agent package keeps a leash (sparing LENS, bylineIneligible, process framing); do not let that redefine who Jax is. Future identity/LENS truth-up of the agent files is Claude-terminal only unless builder opens control plane; product behavior must keep living in the unsheathed script path.
 
 ---
 
@@ -201,3 +202,4 @@ Acceptance sketch (for plan tasks, not research state):
 
 - 2026-08-06 — Initial extraction (Grok CLI, Mike-direct). Verdict `adopt`. Corrected Mara Vance dual role. No plan/rollout row yet.
 - 2026-08-06 — Ignited [[../plans/2026-08-06-jax-sim-stink-audit]]; implementation landed (grok).
+- 2026-08-06 — Mike: agent skill = old manual system; Jax = Grok agent; Claude leash must not redefine the seat (filed under Applications).

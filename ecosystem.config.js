@@ -52,38 +52,15 @@ module.exports = {
     out_file: 'logs/dashboard-out.log',
     log_date_format: 'YYYY-MM-DD HH:mm:ss Z'
   }, {
-    name: 'moltbook',
-    script: 'scripts/moltbook-heartbeat.js',
-    cwd: '/root/GodWorld',
-    watch: false,
-    autorestart: false,
-    cron_restart: '0 14 * * *',
-    max_memory_restart: '100M',
-    env: {
-      NODE_ENV: 'production',
-      GODWORLD_ENV_FILE: GODWORLD_ENV_FILE
-    },
-    env_file: GODWORLD_ENV_FILE,
-    error_file: 'logs/moltbook-error.log',
-    out_file: 'logs/moltbook-out.log',
-    log_date_format: 'YYYY-MM-DD HH:mm:ss Z'
-  }, {
-    name: 'spacemolt-miner',
-    script: 'scripts/spacemolt-miner.js',
-    cwd: '/root/GodWorld',
-    watch: false,
-    autorestart: false,
-    cron_restart: '0 8,16,0 * * *',
-    max_memory_restart: '100M',
-    env: {
-      NODE_ENV: 'production',
-      GODWORLD_ENV_FILE: GODWORLD_ENV_FILE
-    },
-    env_file: GODWORLD_ENV_FILE,
-    error_file: 'logs/spacemolt-error.log',
-    out_file: 'logs/spacemolt-out.log',
-    log_date_format: 'YYYY-MM-DD HH:mm:ss Z'
-  }, {
+    // moltbook-heartbeat moved to system crontab (S360, 2026-08-07): pm2
+    // cron_restart re-fires every 30s tick during the matching window on a
+    // one-shot script — mid-run SIGINT before state save caused duplicate
+    // upvotes/replies daily since ~Jul 28. One-shot dailies belong in crontab.
+    //
+    // spacemolt-miner dormant declaration REMOVED (S360, 2026-08-07): process
+    // was de-registered live 2026-07-27 (OPERATIONS.md); the block here would
+    // have resurrected it on a full ecosystem reload. Successor: research.27
+    // (docs/plans/2026-08-07-spacemolt-game-show.md). Script + logs remain.
     // engine.27 Phase A (S242) — wd-* card auto-invalidation daemon.
     // Row-hash polls Simulation_Ledger / Business_Ledger / Cultural_Ledger /
     // Faith_Organizations; dispatches targeted scripts/build*Cards.js rebuilds

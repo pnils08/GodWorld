@@ -5,14 +5,12 @@
 All server times are in UTC. Central Daylight Time (CDT) is UTC-5.
 
 ### PM2 Cron Jobs (Server Background Processes)
-- **Moltbook Heartbeat (`moltbook`)**: 
-  - `0 14,2 * * *` (9 AM and 9 PM CDT daily)
-- **SpaceMolt Miner (`spacemolt-miner`)**: 
-  - `0 8,16,0 * * *` (3 AM, 11 AM, and 7 PM CDT daily)
 - **WD Cards Daemon (`wd-cards-daemon`)**:
   - Polls continuously every 300 seconds (5 minutes) if enabled manually.
+- *(Retired from pm2: `moltbook` moved to system crontab 14:00 CDT daily, S360 — pm2 `cron_restart` re-fired one-shot runs and duplicated actions. `spacemolt-miner` de-registered 2026-07-27 and its dormant ecosystem.config.js block removed S360; successor is research.27, docs/plans/2026-08-07-spacemolt-game-show.md.)*
 
 ### System Cron Jobs (`crontab`)
+- **Moltbook Heartbeat**: 2 PM server time daily (`0 14 * * *`) — `moltbook-heartbeat.js`, moved off pm2 S360
 - **Nightly Discord Reflection**: 11 PM CDT (`0 4 * * *`)
 - **Daily Backup (tar.gz)**: 12 AM CDT (`0 5 * * *`)
 - **Server Health Check**: Every 6 Hours (`0 */6 * * *`)

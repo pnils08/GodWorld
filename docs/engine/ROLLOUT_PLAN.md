@@ -153,6 +153,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | canon.4 | Real-world stack in the sim is BY DESIGN, not contamination — DigitalOcean/Discord/Moltbook/Anthropic stay as themselves, and Civis Systems (Varek, POP-00789) is the in-world blanket for engine/sheet vocabulary. Doctrine recorded, nothing to scrub | wontfix | research-build | [[canon/INSTITUTIONS]] §The Stack |
 | research.25 | Headless newsroom pipeline — M–F writer-wakes + Sat compile; Phase 1 + Phase 2.0 done, next is Phase 2 daily writer-wakes (was gated on engine.76 W5 half 1, now shipped) | in-progress | research-build → engine-sheet | [[../plans/2026-07-20-headless-newsroom-pipeline]] |
 | research.26 | Data-analyst retrieval seat — draft the implementation plan for a question-scoped Supermemory seat attributed to Rhea Morgan's Data Analyst function; metadata-filter syntax resolved 2026-07-27 | ready | research-build | [[../research/2026-07-26-supermemory-retrieval-economics]] |
+| research.27 | SpaceMolt game show (Mike-direct S360) — pilot-cast reality show; next: Phase 0 decisions (account identity, cast picks, commander adopt-verify) | in-progress | research-build → engine-sheet | [[../plans/2026-08-07-spacemolt-game-show]] |
 
 ### governance.* — Skills, MDs, ADRs, project hygiene
 

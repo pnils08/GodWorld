@@ -66,6 +66,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 | **[[2026-08-07-city-metrics-sim-reality]]** | World_Population authority: illness~10% employment~90% designed drift; ledger HealthCause≠city sick; hood demo desync note | `adopt` (corrected after Mike WP paste) |
 | **[[2026-08-07-next-work-queue-pslayer-cron-city-metrics]]** | Mike next-work queue: P Slayer fan-pulse slice, cron lifecycle review, city metrics (sick%/employment%) fine-tune to sim reality — recommended order B→C→A | `adopt` (queue; A has plan, B/C audit-first) |
 | **[[2026-08-07-voice-project-agents-social-wall-review]]** | Voice + project agents vs journalist social wiki wall — citizen-voice pages OK; civic office/project no position-wall; Okoro POPID identity/map drift; watch until Mike wants office-holder continuity on cp-POP | `watch` (adopt-trigger: office position wall design + POPID reconcile) |
+| **[[2026-08-08-journalist-heat-slice-architecture]]** | Journalist heat slices vs Mags desk-slices vs legacy multi-voice skills; only Jax+P Slayer have packs; evening/Riley data exists but culture seeds don't unpack nightlife/TV/restaurants/fame; shared substrate + persona overlay; Hal sports historian; Anthony analytic | `adopt` (ignites [[../plans/2026-08-08-journalist-heat-slice-packs]], pipeline.52) |
 
 ---
 
@@ -78,6 +79,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 
 ## Changelog
 - 2026-08-07 — Cascade team review: engine-sheet S360 + grok second pass (grok).
+- 2026-08-08 — Registered [[2026-08-08-journalist-heat-slice-architecture]] (grok) — heat-slice packs architecture; adopt → pipeline.52.
 - 2026-08-07 — City/neighborhood cascade team review brief (grok).
 - 2026-08-07 — World_Population bidirectional design research (grok).
 - 2026-08-07 — Cron lifecycle review + city metrics baseline (grok).

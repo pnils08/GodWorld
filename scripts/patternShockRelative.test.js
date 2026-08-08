@@ -93,7 +93,7 @@ console.log('═══ B3 applyShockMonitor — population-relative + regime gua
 
 function runShock(curEvents, prevEvents, sOverrides) {
   const ctx = {
-    config: { cycleCount: 100 },
+    config: { cycleCount: 100, employmentFallbackRate: 0.91 },
     summary: Object.assign({
       eventsGenerated: curEvents,
       worldEvents: [],

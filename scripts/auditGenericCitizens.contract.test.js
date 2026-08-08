@@ -22,7 +22,12 @@ const SCRIPT_PATH = path.resolve(__dirname, 'auditGenericCitizens.js');
 const ROOT = path.resolve(__dirname, '..');
 const source = fs.readFileSync(SCRIPT_PATH, 'utf8');
 
-const HAS_SHEETS_CREDS = fs.existsSync('/root/.config/godworld/credentials/service-account.json');
+const LIVE_SHEETS = process.env.GODWORLD_TEST_LIVE === '1';
+const HAS_SHEETS_CREDS = LIVE_SHEETS &&
+  fs.existsSync('/root/.config/godworld/credentials/service-account.json');
+const SHEETS_SKIP_REASON = LIVE_SHEETS
+  ? 'service-account.json absent'
+  : 'live Sheets integration disabled (run npm test -- --live)';
 
 let passed = 0;
 let failed = 0;
@@ -131,10 +136,10 @@ if (HAS_SHEETS_CREDS) {
   assert('output contains AUDIT COMPLETE footer',
     /AUDIT COMPLETE/.test(out));
 } else {
-  skip('script exits 0 on successful audit', 'service-account.json absent (CI)');
-  skip('output contains GENERIC_CITIZENS AUDIT header', 'service-account.json absent (CI)');
-  skip('output contains STATUS BREAKDOWN section', 'service-account.json absent (CI)');
-  skip('output contains AUDIT COMPLETE footer', 'service-account.json absent (CI)');
+  skip('script exits 0 on successful audit', SHEETS_SKIP_REASON);
+  skip('output contains GENERIC_CITIZENS AUDIT header', SHEETS_SKIP_REASON);
+  skip('output contains STATUS BREAKDOWN section', SHEETS_SKIP_REASON);
+  skip('output contains AUDIT COMPLETE footer', SHEETS_SKIP_REASON);
 }
 
 console.log('\n' + '═'.repeat(60));

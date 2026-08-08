@@ -15,7 +15,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { spawnSync } = require('child_process');
+const { spawnSyncCapture } = require('./testSubprocess');
 
 const SCRIPT_PATH = path.resolve(__dirname, 'validateRosterNames.js');
 const ROOT = path.resolve(__dirname, '..');
@@ -89,10 +89,10 @@ console.log('\n═══ Section B — subprocess smoke');
 
 console.log('\nTest 7: E93 against canon roster exits 0 (no typos)');
 {
-  const result = spawnSync(
-    'node',
+  const result = spawnSyncCapture(
+    process.execPath,
     [SCRIPT_PATH, path.join(ROOT, 'editions/cycle_pulse_edition_93.txt'), '--json'],
-    { cwd: ROOT, encoding: 'utf8', timeout: 30000 }
+    { cwd: ROOT, timeout: 30000 }
   );
   assert('E93 exits 0', result.status === 0, `status=${result.status}`);
   let parsed = null;
@@ -119,10 +119,10 @@ console.log('\nTest 8: hand-crafted typo fixture triggers finding');
   // cleanly as foundFirst='Eric', foundLast='Tavares'. Position-appropriate
   // framing (Taveras is 2B, not a pitcher — keeps the fixture canon-true).
   fs.writeFileSync(TMP, 'In the seventh, Eric Tavares lined a double to right.\n');
-  const result = spawnSync(
-    'node',
+  const result = spawnSyncCapture(
+    process.execPath,
     [SCRIPT_PATH, TMP, '--json'],
-    { cwd: ROOT, encoding: 'utf8', timeout: 30000 }
+    { cwd: ROOT, timeout: 30000 }
   );
   fs.unlinkSync(TMP);
   assert('typo fixture exits 1', result.status === 1, `status=${result.status}`);
@@ -145,10 +145,10 @@ console.log('\nTest 8: hand-crafted typo fixture triggers finding');
 
 console.log('\nTest 9: missing target file exits 2');
 {
-  const result = spawnSync(
-    'node',
+  const result = spawnSyncCapture(
+    process.execPath,
     [SCRIPT_PATH, '/tmp/nonexistent_file_for_test.txt'],
-    { cwd: ROOT, encoding: 'utf8', timeout: 30000 }
+    { cwd: ROOT, timeout: 30000 }
   );
   assert('missing-file exits 2', result.status === 2, `status=${result.status}`);
 }

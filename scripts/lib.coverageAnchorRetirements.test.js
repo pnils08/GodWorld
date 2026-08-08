@@ -20,7 +20,7 @@
 
 var fs = require('fs');
 var path = require('path');
-var execSync = require('child_process').execSync;
+var spawnSyncCapture = require('./testSubprocess').spawnSyncCapture;
 var registry = require('../lib/coverageAnchorRetirements');
 
 var passed = 0;
@@ -157,13 +157,9 @@ var c94Path = path.resolve(__dirname, '..', 'editions', 'cycle_pulse_edition_94.
 if (!fs.existsSync(c94Path)) {
   assert('C94 fixture present', false, 'editions/cycle_pulse_edition_94.txt missing');
 } else {
-  var output;
-  try {
-    output = execSync('node ' + path.join(__dirname, 'rateEditionCoverage.js') + ' ' + c94Path,
-      { encoding: 'utf-8', stdio: ['ignore', 'pipe', 'pipe'] });
-  } catch (e) {
-    output = e.stdout ? e.stdout.toString() : '';
-  }
+  var coverageResult = spawnSyncCapture(process.execPath,
+    [path.join(__dirname, 'rateEditionCoverage.js'), c94Path]);
+  var output = coverageResult.stdout;
 
   // Count downweight diagnostic lines
   var downweightMatches = output.match(/\[retired-anchor\]\s+downweight/g) || [];

@@ -22,7 +22,12 @@ const SCRIPT_PATH = path.resolve(__dirname, 'auditSimulationLedger.js');
 const ROOT = path.resolve(__dirname, '..');
 const source = fs.readFileSync(SCRIPT_PATH, 'utf8');
 
-const HAS_SHEETS_CREDS = fs.existsSync('/root/.config/godworld/credentials/service-account.json');
+const LIVE_SHEETS = process.env.GODWORLD_TEST_LIVE === '1';
+const HAS_SHEETS_CREDS = LIVE_SHEETS &&
+  fs.existsSync('/root/.config/godworld/credentials/service-account.json');
+const SHEETS_SKIP_REASON = LIVE_SHEETS
+  ? 'service-account.json absent'
+  : 'live Sheets integration disabled (run npm test -- --live)';
 
 let passed = 0;
 let failed = 0;
@@ -161,15 +166,15 @@ if (HAS_SHEETS_CREDS) {
       Array.isArray(parsed.completeness));
   }
 } else {
-  skip('script exits 0 on --json run', 'service-account.json absent (CI)');
-  skip('stdout is valid JSON', 'service-account.json absent (CI)');
-  skip("sheet === 'Simulation_Ledger'", 'service-account.json absent (CI)');
-  skip('columns is numeric', 'service-account.json absent (CI)');
-  skip('extantCitizens > 0', 'service-account.json absent (CI)');
-  skip('extantCitizens in expected range (500-2000)', 'service-account.json absent (CI)');
-  skip('statusEnum is object', 'service-account.json absent (CI)');
-  skip('popidRange has min + max', 'service-account.json absent (CI)');
-  skip('completeness is array', 'service-account.json absent (CI)');
+  skip('script exits 0 on --json run', SHEETS_SKIP_REASON);
+  skip('stdout is valid JSON', SHEETS_SKIP_REASON);
+  skip("sheet === 'Simulation_Ledger'", SHEETS_SKIP_REASON);
+  skip('columns is numeric', SHEETS_SKIP_REASON);
+  skip('extantCitizens > 0', SHEETS_SKIP_REASON);
+  skip('extantCitizens in expected range (500-2000)', SHEETS_SKIP_REASON);
+  skip('statusEnum is object', SHEETS_SKIP_REASON);
+  skip('popidRange has min + max', SHEETS_SKIP_REASON);
+  skip('completeness is array', SHEETS_SKIP_REASON);
 }
 
 console.log('\n' + '═'.repeat(60));

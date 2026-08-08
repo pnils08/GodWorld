@@ -88,13 +88,11 @@ if (!fs.existsSync(c94Path)) {
 // Pre-fix C94 had 6 unmatched proposals ("FP1 untitled, C1 untitled, ...");
 // post-fix the canonical slot match resolves them all.
 console.log('  ... running djDirect against C94 ...');
-var execSync = require('child_process').execSync;
-var output;
-try {
-  output = execSync('node ' + path.join(__dirname, 'djDirect.js') + ' 94', { encoding: 'utf-8', stdio: ['ignore', 'pipe', 'pipe'] });
-} catch (e) {
-  output = e.stdout ? e.stdout.toString() : '';
-  console.error('  djDirect exited non-zero — stderr fragment: ' + (e.stderr ? e.stderr.toString().slice(0, 200) : '(none)'));
+var spawnSyncCapture = require('./testSubprocess').spawnSyncCapture;
+var djResult = spawnSyncCapture(process.execPath, [path.join(__dirname, 'djDirect.js'), '94']);
+var output = djResult.stdout;
+if (djResult.status !== 0) {
+  console.error('  djDirect exited non-zero — stderr fragment: ' + (djResult.stderr ? djResult.stderr.slice(0, 200) : '(none)'));
 }
 
 var unmatchedMatch = output.match(/unmatched:\s+(\d+)\s+proposals?/);

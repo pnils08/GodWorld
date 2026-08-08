@@ -31,9 +31,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { exec } = require('child_process');
-const { promisify } = require('util');
-const execAsync = promisify(exec);
+const { spawnCapture } = require('./testSubprocess');
 
 const ROOT = path.resolve(__dirname, '..');
 const SCRIPT_PATH = path.resolve(__dirname, 'validateEdition.js');
@@ -158,15 +156,9 @@ fs.writeFileSync(TMP_MAYOR,
   'Mayor Smith addressed the press conference yesterday afternoon.\n');
 
 async function runValidator(editionPath) {
-  try {
-    const { stdout, stderr } = await execAsync(
-      `node "${SCRIPT_PATH}" "${editionPath}" --no-sheets`,
-      { cwd: ROOT, maxBuffer: 10 * 1024 * 1024 }
-    );
-    return { status: 0, stdout, stderr };
-  } catch (err) {
-    return { status: err.code, stdout: err.stdout || '', stderr: err.stderr || '' };
-  }
+  return spawnCapture(process.execPath,
+    [SCRIPT_PATH, editionPath, '--no-sheets'],
+    { cwd: ROOT, timeout: 30000 });
 }
 
 function countCriticals(stdout) {

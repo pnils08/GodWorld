@@ -1,7 +1,7 @@
 ---
 title: Engine Repair Tracker
 created: 2026-04-16
-updated: 2026-07-26
+updated: 2026-08-08
 type: plan
 tags: [engine, citizens, active]
 sources:
@@ -158,7 +158,7 @@ Verbatim rows moved out of ROLLOUT_PLAN.md when it collapsed to pointer-only. Th
 
 ### engine.9
 
-| engine.9 | Bounded test surface — **iron fence is NON-FUNCTIONAL (S274 finding, research-build).** `npm run test:unit`=`vitest run` is structurally red: 93/95 `.test.js` are standalone `process.exit` Node harnesses with no vitest config, so the command can never pass (1 assertion runs). The repo's real runner is `npm test`→`scripts/run-tests.js`. No aider `test-cmd` / git-hook wiring existed → 10 Aider commits (engine.42) landed with NO gate; the 3 edited files have zero `.test.js` coverage. **GATE WIRED S274 (`b70fac21`):** `.aider.conf.yml` → `test-cmd: npm test` + `auto-test: true` (auto-test REQUIRED — defaults false; test-cmd alone only enables manual /test). Config now version-controlled (`!.aider.conf.yml` un-ignore added). Proven: run-tests.js exits non-zero + covers utilities/+phase05 transitively via scripts/*.test.js → it DID catch the engine.42 ctx regression. Lint NOT a second layer (eslint `no-undef` off). **Also fixed 3 citizen-substrate harnesses** (missing `global.inWorldStamp_` cycle-stub mirroring testNeighborhoodLoop; conductEngine 4.5 stale `STAMP`→`C<cycle>` per no-timestamp directive): citizensEventsFame.t3 + householdEngine.t4 + conductEngine now GREEN. **REMAINING for clean-green full-suite baseline (4 pre-existing reds, NOT Aider, owned elsewhere):** engine32MultiCycle (behavioral family-variance sd=0/0-of-60-moved — engine.32 follow-up), districtMap (stale KONO=D2 vs canon D7), editionParser + validateEdition (media-terminal edition content). **Sibling fence:** `.githooks/pre-commit` control-plane isolation guard (research-build, untracked — needs commit by them). | in-progress | engine-sheet | docs/MODEL_HIERARCHY.md §File Boundaries; engine.42; gate b70fac21 |
+| engine.9 | Bounded test surface — **COMPLETE 2026-08-08 (codex).** The canonical fence is `npm test` → `scripts/run-tests.js`; Aider remains wired to it through `test-cmd: npm test` + `auto-test: true`, and the pre-commit isolation/lint guard is tracked. Codex refreshed the stale red inventory and restored a clean baseline: two deterministic harness regressions fixed (pattern-shock config fixture; Jax rich-slice approach expectation); eight credential-backed Sheet sections now require explicit `npm test -- --live` while their pure structural assertions remain in the offline default; six nested-subprocess suites use a test-only file-descriptor capture helper so exit status and stdout/stderr assertions survive managed shells. Evidence: all 19 changed/added JS files pass `node --check`; targeted regressions and helper contracts pass; default offline fence passes **131/131 test files in 75.43s**. Live integrations were intentionally not run because they require separate external-read approval. | done | codex (engine-sheet review/land) | docs/MODEL_HIERARCHY.md §File Boundaries; engine.42; gate b70fac21 |
 
 ### engine.15
 

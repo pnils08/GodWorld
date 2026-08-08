@@ -623,13 +623,16 @@ console.log('\nTest 11f: byline candidates (W5h2)');
 // Test 12: integration — full build against live sheets (CANON_PRESENT skip)
 // ────────────────────────────────────────────────────────────────────────────
 const auditPath = path.join(__dirname, '..', 'output', 'engine_audit_c94.json');
-const CANON_PRESENT = fs.existsSync(auditPath)
+const LIVE_SHEETS = process.env.GODWORLD_TEST_LIVE === '1';
+const CANON_PRESENT = LIVE_SHEETS && fs.existsSync(auditPath)
   && (process.env.GOOGLE_APPLICATION_CREDENTIALS
       || fs.existsSync('/root/.config/godworld/.env'));
 
 console.log('\nTest 12: integration build (CANON_PRESENT=' + Boolean(CANON_PRESENT) + ')');
 if (!CANON_PRESENT) {
-  console.log('  SKIP — engine_audit_c94.json or service-account creds missing (CI path)');
+  console.log('  SKIP — ' + (LIVE_SHEETS
+    ? 'engine_audit_c94.json or service-account creds missing'
+    : 'live Sheets integration disabled (run npm test -- --live)'));
 } else {
   (async () => {
     try {

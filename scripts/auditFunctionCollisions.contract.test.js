@@ -13,7 +13,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { spawnSync } = require('child_process');
+const { spawnSyncCapture } = require('./testSubprocess');
 
 const SCRIPT_PATH = path.resolve(__dirname, 'auditFunctionCollisions.js');
 const ROOT = path.resolve(__dirname, '..');
@@ -84,8 +84,8 @@ console.log('\n═══ Section B — subprocess smoke');
 
 console.log('\nTest 6: dry-run on real codebase');
 {
-  const result = spawnSync('node', [SCRIPT_PATH], {
-    cwd: ROOT, encoding: 'utf8', timeout: 30000,
+  const result = spawnSyncCapture(process.execPath, [SCRIPT_PATH], {
+    cwd: ROOT, timeout: 30000,
   });
   // Exit code from main() — script doesn't explicitly process.exit. Node default
   // is 0 on clean run; treat any non-zero as a crash.

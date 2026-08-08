@@ -9,6 +9,7 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 const { approachFor, applyStinkForce, loadFirebrandPersona } = require('./newsroom-fanout');
+const { FIREBRAND_APPROACH } = require('./buildJaxSlice');
 
 let failures = 0;
 function ok(label, cond) {
@@ -52,7 +53,7 @@ if (!fs.existsSync(signalPath)) {
     const jax = assignments.find(a => a.persona === 'freelance-firebrand');
     ok('Jax on rota after force', !!jax);
     ok('stinkForce flag', jax && jax.stinkForce === true);
-    ok('firebrand approach', jax && jax.approach === 'FIREBRAND_APPROACH');
+    ok('firebrand approach', jax && jax.approach === FIREBRAND_APPROACH);
     ok('story seeded', jax && jax.story && jax.story.ref);
     ok('civic still present', assignments.some(a => a.desk === 'civic'));
   } else {

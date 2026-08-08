@@ -14,7 +14,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { spawnSync } = require('child_process');
+const { spawnSyncCapture } = require('./testSubprocess');
 
 const SCRIPT_PATH = path.resolve(__dirname, 'auditPlanTagDrift.js');
 const ROOT = path.resolve(__dirname, '..');
@@ -88,8 +88,8 @@ console.log('\n═══ Section B — subprocess smoke');
 
 console.log('\nTest 8: --json mode runs on real docs/plans/');
 {
-  const result = spawnSync('node', [SCRIPT_PATH, '--json'], {
-    cwd: ROOT, encoding: 'utf8', timeout: 30000,
+  const result = spawnSyncCapture(process.execPath, [SCRIPT_PATH, '--json'], {
+    cwd: ROOT, timeout: 30000,
   });
   // Exit 0 if no drift, 1 if drift detected. Either is a valid runtime state.
   assert('script exits 0 or 1', result.status === 0 || result.status === 1,

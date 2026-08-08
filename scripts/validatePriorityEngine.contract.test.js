@@ -23,7 +23,9 @@ const SCRIPT_PATH = path.resolve(__dirname, 'validatePriorityEngine.js');
 const ROOT = path.resolve(__dirname, '..');
 const source = fs.readFileSync(SCRIPT_PATH, 'utf8');
 
-const HAS_SHEETS_CREDS = fs.existsSync('/root/.config/godworld/credentials/service-account.json');
+const LIVE_SHEETS = process.env.GODWORLD_TEST_LIVE === '1';
+const HAS_SHEETS_CREDS = LIVE_SHEETS &&
+  fs.existsSync('/root/.config/godworld/credentials/service-account.json');
 const PROPOSALS_DIR = path.join(ROOT, 'output');
 
 function findLatestProposalCycle() {
@@ -204,8 +206,11 @@ if (HAS_SHEETS_CREDS && HAS_PROPOSALS) {
       /Engine A top-15|## Status/.test(md));
   }
 } else {
-  const reason = !HAS_SHEETS_CREDS ? 'service-account.json absent (CI)' :
-                                     'no sift_proposals_c*.json fixture';
+  const reason = !LIVE_SHEETS
+    ? 'live Sheets integration disabled (run npm test -- --live)'
+    : !HAS_SHEETS_CREDS
+      ? 'service-account.json absent'
+      : 'no sift_proposals_c*.json fixture';
   skip('script exits 0 on --cycle latest', reason);
   skip("output mentions 'Wrote' for report file", reason);
   skip('output mentions cycle number', reason);

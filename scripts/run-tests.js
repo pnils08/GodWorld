@@ -11,6 +11,7 @@
  * Usage:
  *   node scripts/run-tests.js              # run all
  *   node scripts/run-tests.js --filter X   # only files containing X in path
+ *   node scripts/run-tests.js --live        # opt in to credential-gated live integration sections
  *
  * Exit 0 if all test files pass; exit 1 if any fail (CI-compatible).
  */
@@ -48,6 +49,7 @@ const bold = s => colorize(s, '1');
 
 const filterArg = process.argv.find(a => a.startsWith('--filter='));
 const filter = filterArg ? filterArg.split('=')[1] : null;
+const liveIntegrations = process.argv.includes('--live');
 
 let tests = SEARCH_DIRS.flatMap(d => findTests(d));
 if (filter) tests = tests.filter(t => t.includes(filter));
@@ -58,7 +60,8 @@ if (tests.length === 0) {
   process.exit(0);
 }
 
-console.log(bold(`Running ${tests.length} test file${tests.length === 1 ? '' : 's'}\n`));
+console.log(bold(`Running ${tests.length} test file${tests.length === 1 ? '' : 's'} ` +
+  `(${liveIntegrations ? 'live integrations enabled' : 'offline default'})\n`));
 
 const startTime = Date.now();
 const failed = [];
@@ -67,7 +70,13 @@ for (const t of tests) {
   const rel = path.relative(ROOT, t);
   console.log(bold(`▶ ${rel}`));
   const t0 = Date.now();
-  const result = spawnSync('node', [t], { stdio: 'inherit', cwd: ROOT });
+  const result = spawnSync('node', [t], {
+    stdio: 'inherit',
+    cwd: ROOT,
+    env: Object.assign({}, process.env, {
+      GODWORLD_TEST_LIVE: liveIntegrations ? '1' : '0',
+    }),
+  });
   const elapsed = ((Date.now() - t0) / 1000).toFixed(2);
   if (result.status !== 0) {
     console.log(red(`✗ FAILED: ${rel}`) + dim(` (${elapsed}s)\n`));

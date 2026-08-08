@@ -23,7 +23,12 @@ const SCRIPT_PATH = path.resolve(__dirname, 'validateIntakeDerivation.js');
 const ROOT = path.resolve(__dirname, '..');
 const source = fs.readFileSync(SCRIPT_PATH, 'utf8');
 
-const HAS_SHEETS_CREDS = fs.existsSync('/root/.config/godworld/credentials/service-account.json');
+const LIVE_SHEETS = process.env.GODWORLD_TEST_LIVE === '1';
+const HAS_SHEETS_CREDS = LIVE_SHEETS &&
+  fs.existsSync('/root/.config/godworld/credentials/service-account.json');
+const SHEETS_SKIP_REASON = LIVE_SHEETS
+  ? 'service-account.json absent'
+  : 'live Sheets integration disabled (run npm test -- --live)';
 
 let passed = 0;
 let failed = 0;
@@ -167,12 +172,12 @@ if (HAS_SHEETS_CREDS) {
   assert("verdict prints PASS or FAIL",
     /PASS\s*—\s*all\s*5\s*gates|FAIL\s*—\s*\d+\s*gate/.test(out));
 } else {
-  skip('script exits 0 or 1 (not 2)', 'service-account.json absent (CI)');
-  skip("output contains 'Phase 5' header", 'service-account.json absent (CI)');
-  skip("output contains 'Fixture' section", 'service-account.json absent (CI)');
-  skip("output contains 'Distribution sweep' section", 'service-account.json absent (CI)');
-  skip("output contains 'Verdict' section", 'service-account.json absent (CI)');
-  skip("verdict prints PASS or FAIL", 'service-account.json absent (CI)');
+  skip('script exits 0 or 1 (not 2)', SHEETS_SKIP_REASON);
+  skip("output contains 'Phase 5' header", SHEETS_SKIP_REASON);
+  skip("output contains 'Fixture' section", SHEETS_SKIP_REASON);
+  skip("output contains 'Distribution sweep' section", SHEETS_SKIP_REASON);
+  skip("output contains 'Verdict' section", SHEETS_SKIP_REASON);
+  skip("verdict prints PASS or FAIL", SHEETS_SKIP_REASON);
 }
 
 console.log('\n' + '═'.repeat(60));

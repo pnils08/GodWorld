@@ -20,7 +20,12 @@ const SCRIPT_PATH = path.resolve(__dirname, 'auditRemainingHeaders.js');
 const ROOT = path.resolve(__dirname, '..');
 const source = fs.readFileSync(SCRIPT_PATH, 'utf8');
 
-const HAS_SHEETS_CREDS = fs.existsSync('/root/.config/godworld/credentials/service-account.json');
+const LIVE_SHEETS = process.env.GODWORLD_TEST_LIVE === '1';
+const HAS_SHEETS_CREDS = LIVE_SHEETS &&
+  fs.existsSync('/root/.config/godworld/credentials/service-account.json');
+const SHEETS_SKIP_REASON = LIVE_SHEETS
+  ? 'service-account.json absent'
+  : 'live Sheets integration disabled (run npm test -- --live)';
 
 let passed = 0;
 let failed = 0;
@@ -115,9 +120,9 @@ if (HAS_SHEETS_CREDS) {
   assert('output contains "SUMMARY:" line',
     /SUMMARY:/.test(result.stdout || ''));
 } else {
-  skip('script exits 0 on successful audit', 'service-account.json absent (CI)');
-  skip('output contains "RESULTS" header', 'service-account.json absent (CI)');
-  skip('output contains "SUMMARY:" line', 'service-account.json absent (CI)');
+  skip('script exits 0 on successful audit', SHEETS_SKIP_REASON);
+  skip('output contains "RESULTS" header', SHEETS_SKIP_REASON);
+  skip('output contains "SUMMARY:" line', SHEETS_SKIP_REASON);
 }
 
 console.log('\n' + '═'.repeat(60));

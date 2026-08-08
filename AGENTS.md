@@ -430,20 +430,27 @@ reads all of those lines at boot. That line is the only way work you did reaches
 the next session — yours or anyone's. Git history records what changed; the NEXT
 line records where the thread is.
 
-**Close your session by rewriting it. Two steps, nothing else.**
+**Close your session with the external-lane procedure.** Contract is the rules
+below; the step-by-step lives in `.grok/skills/session-end/SKILL.md` (tracked;
+Grok: `/session-end`). That is **not** the Claude Code `/session-end` skill —
+no PIN bump, no ROLLOUT sweep, no `sessionEndMechanical.js`, no Supermemory
+bridge. Those belong to Claude terminals.
+
+**Two steps, nothing else (after any authorized work commits):**
 
 1. **Rewrite your own `**NEXT[<you>]:**` line, in place.** One line. Where the work
    landed and what the next move is — not a task stub, not a paragraph. Detail
    belongs in the ROLLOUT row, the plan changelog, or the commit body; the NEXT
    line is the entry point into them. Aim for 350 characters. Nothing enforces
-   that; it costs every terminal at every boot, so keep it tight.
+   that; it costs every terminal at every boot, so keep it tight. Drop pointers
+   to work that already shipped.
 
 2. **Commit path-specifically**, per the push-authorization rules above.
+   The handoff commit stages **only** `SESSION_CONTEXT.md`.
 
-   **Antigravity:** this is the one commit you are authorized to make.
-   You have no commit or push authorization for work — diffs stay proposals —
-   but your own handoff line is bookkeeping, not work. Commit the line alone;
-   propose everything else.
+   **Antigravity:** the NEXT-line commit is the one commit you are authorized to
+   make. You have no commit or push authorization for work — diffs stay
+   proposals — but your own handoff line is bookkeeping, not work.
 
 **What you must not touch:**
 
@@ -466,11 +473,6 @@ commit blocks. **Do not set `CLAUDE_CTL=1` to get around that** — the flag is 
 Claude session's opt-in to the whole control plane, and reaching for it here is the
 thing the carve-out exists to make unnecessary. A block means you staged more than
 your own line; unstage the rest.
-
-**You do not run `/session-end`.** That is a Claude Code skill and it is not
-reachable from your harness. No PIN bump, no ROLLOUT sweep, no mechanical
-orchestrator, no Supermemory bridge — those belong to the Claude terminals. Your
-close is the two steps above.
 
 **One asymmetry:** when a Claude terminal reviews and lands a batch you authored
 (engine-sheet did this for Codex at S338), the landing goes in *that terminal's*

@@ -78,4 +78,7 @@ output/cron-compare/
 
 # Grok CLI local config — config.toml carries the permission allowlist,
 # which includes historical commands with inline API keys. Never commit.
-.grok/
+# Skills under .grok/skills/ are project-shared and tracked (exception below).
+.grok/*
+!.grok/skills/
+!.grok/skills/**

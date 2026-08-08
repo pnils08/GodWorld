@@ -49,7 +49,7 @@ pointers:
   2. Emit: three-denominator scale table (city model / hood demo / ledger sample, with live ratios); per-metric table (illness, employment, migration, loads) with current values at each scale; invariant checks per the review paper §8 (migration sum ±10%, sick-rate band with the amended ≥25-cycle convergence window, unemployment band, sample-support rule); ND-vs-NM hood-set diff (which hood is missing from each).
   3. Report is markdown + machine-readable JSON; deterministic ordering; no writes anywhere.
 - **Verify:** `node scripts/cascadeAudit.js` → report written; invariants section shows PASS/FAIL per item; run twice, identical numbers (modulo live sheet drift).
-- **Status:** [ ] not started
+- **Status:** [x] done (2026-08-08, kimi) — first report: city 386,587 / hood 32,249 / ledger 940 (1:12, 1:411); illness 9.85% city vs 5.21% hood vs 0.00% ledger; invariants FAIL as measured (documented defects, now quantified); `Hospital_Ledger` tab absent (mint pending first event).
 
 ### Task 2: W2a/W2b patch proposals (kimi, output/ only)
 
@@ -64,7 +64,7 @@ pointers:
   2. W2b: illness steps 0.0002–0.0006, cap 0.15, employment attractor 0.90–0.93 → `ctx.config.*` reads per the key draft in the review paper pass 5 (camelCase per ADR-0015), each with the current literal as the inline default so behavior is unchanged until keys land.
   3. Fallback sweep: `generationalEventsEngine.js:1262 || 0.05`, `updateNeighborhoodDemographics.js:68 || 0.91` — proposed config reads with loud-default comments.
 - **Verify:** `node --check` n/a (Apps Script ES5 — verify by review); each proposal carries a "landing notes" block stating exact original line(s) replaced.
-- **Status:** [ ] not started
+- **Status:** [x] done (2026-08-08, kimi) — 5 files in `output/kimi/engine102/`; all paper-cited line numbers verified current; ES5-only; behavior-preserving defaults (no physics change until World_Config keys land).
 
 ### Task 3: W2a land + bench (engine-sheet)
 
@@ -114,8 +114,9 @@ pointers:
 
 ## Open questions
 
-- [ ] ND (21 hoods) vs NM (22 hoods): which hood is missing from which — Task 1's audit must answer this before Task 3's divisor normalization lands (watch item from kimi pass 5).
+- [x] ND (21 hoods) vs NM (22 hoods): which hood is missing from which — **ANSWERED by Task 1 audit (2026-08-08): `East Oakland` is in Neighborhood_Map but absent from Neighborhood_Demographics.** Task 3's divisor normalization should count hoods from the ND layer it writes, and the missing ND row is engine-sheet's call (likely related to the S360 East Oakland NM seed).
 
 ## Changelog
 
 - 2026-08-08 (kimi) — Initial draft on Mike's go, per the five-pass cascade review with kimi amendments. kimi builds Tasks 1–2 (+8 later); engine-sheet lands/deploys substrate Tasks 3–7.
+- 2026-08-08 (kimi) — Tasks 1–2 complete same session: `scripts/cascadeAudit.js` + first report (three denominators measured, 3 invariant FAILs quantified, East Oakland ND gap identified); W2a/W2b patch proposals in `output/kimi/engine102/` with verified line refs. Handoff to engine-sheet for Tasks 3–7.

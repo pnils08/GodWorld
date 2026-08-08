@@ -981,12 +981,17 @@ function updateWorldPopulation_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // WRITE BACK TO SHEET (v2.10: queued writes with column bounds checking)
   // ═══════════════════════════════════════════════════════════════════════════
+  // engine.102 ownership fix (S361): illnessRate/employmentRate/economy writes
+  // REMOVED. applyDemographicDrift_ (Phase3-Demographics, config-driven per
+  // World_Config W2b keys) is the sole owner of those three stats. This
+  // function's queued writes flush at cycle-end (the `finally` cache.flush) and
+  // silently overwrote the drift engine's values every cycle since the v2.10
+  // cache refactor (d02dbf8d, 2026-01-21) flipped the last-writer. Local ill/
+  // emp/econ stay as READS for the births-deaths coupling and summary below.
+  // This function still owns totalPopulation + migration (v2.3 separation).
 
   if (iTotal >= 0) ctx.cache.queueWrite('World_Population', 2, iTotal + 1, total);
-  if (iIll >= 0) ctx.cache.queueWrite('World_Population', 2, iIll + 1, ill);
-  if (iEmp >= 0) ctx.cache.queueWrite('World_Population', 2, iEmp + 1, emp);
   if (iMig >= 0) ctx.cache.queueWrite('World_Population', 2, iMig + 1, mig);
-  if (iEcon >= 0) ctx.cache.queueWrite('World_Population', 2, iEcon + 1, econ);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // STORE IN CTX FOR DOWNSTREAM USE

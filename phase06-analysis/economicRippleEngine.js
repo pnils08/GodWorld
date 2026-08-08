@@ -737,30 +737,12 @@ function deriveEmploymentRate_(ctx) {
   derivedEmployment = Math.round(derivedEmployment * 1000) / 1000;
   
   S.derivedEmploymentRate = derivedEmployment;
-  
-  // Update World_Population if available
-  var popSheet = ctx.ss.getSheetByName('World_Population');
-  if (popSheet) {
-    var popVals = popSheet.getDataRange().getValues();
-    var header = popVals[0];
-    var employmentIdx = header.indexOf('employmentRate');
-    var economyIdx = header.indexOf('economy');
-    
-    if (employmentIdx >= 0) {
-      popSheet.getRange(2, employmentIdx + 1).setValue(derivedEmployment);
-    }
-    
-    // Update economy descriptor
-    if (economyIdx >= 0) {
-      var econDesc = 'stable';
-      if (S.economicMood >= 65) econDesc = 'strong';
-      else if (S.economicMood >= 45) econDesc = 'stable';
-      else if (S.economicMood >= 30) econDesc = 'weak';
-      else econDesc = 'unstable';
-      
-      popSheet.getRange(2, economyIdx + 1).setValue(econDesc);
-    }
-  }
+
+  // engine.102 ownership fix (S361): World_Population employmentRate/economy
+  // writes REMOVED — applyDemographicDrift_ (config-driven) is the sole owner
+  // of the WP stat face. This engine's mood-derived employment stays available
+  // to downstream consumers via S.derivedEmploymentRate (applyMigrationDrift
+  // already recomputes it independently for effectiveEmployment).
 }
 
 

@@ -1,9 +1,14 @@
 /**
  * ============================================================================
- * applyDemographicDrift_ v2.3
+ * applyDemographicDrift_ v2.4-W2b
  * ============================================================================
  *
  * Long-term background demographic drift with GodWorld Calendar integration.
+ *
+ * v2.4-W2b (engine.102): illness/employment physics literals read from
+ * World_Config via ctx.config (keys per output/kimi/engine102/world-config-keys.md,
+ * camelCase per ADR-0015). Missing keys warn loudly into ctx.summary.auditIssues
+ * (ADR-0015 rule 4) and fall back to the pre-W2b literals.
  *
  * v2.2 Enhancements:
  * - Full GodWorld Calendar integration (30+ holidays)
@@ -57,6 +62,39 @@ function applyDemographicDrift_(ctx) {
   var round2 = function(v) { return Math.round(v * 100) / 100; };
 
   // ═══════════════════════════════════════════════════════════════════════════
+  // WORLD CONFIG READS (W2b, engine.102)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // loadConfig_ (phase01-config/godWorldEngine2.js) auto-parses numeric strings,
+  // so these reads work whether the sheet stores numbers or strings. cfgNum_
+  // warns loudly on a missing key (ADR-0015 rule 4) and treats an explicit 0 as
+  // a legitimate tuned value — never a falsy trigger back to the default.
+  var cfg = ctx.config || {};
+
+  // Illness physics
+  var illnessCalmStep = cfgNum_(ctx, cfg, 'illnessCalmStep', 0.0004);
+  var illnessStepUp = cfgNum_(ctx, cfg, 'illnessStepUp', 0.0002);
+  var illnessStepDown = cfgNum_(ctx, cfg, 'illnessStepDown', 0.0002);
+  var illnessCap = cfgNum_(ctx, cfg, 'illnessCap', 0.15);
+  var illnessSupportThreshold = cfgNum_(ctx, cfg, 'illnessSupportThreshold', 0.08);
+  var illnessSupportCycles = cfgNum_(ctx, cfg, 'illnessSupportCycles', 3);
+
+  // Employment physics
+  var employmentFloor = cfgNum_(ctx, cfg, 'employmentFloor', 0.80);
+  var employmentAttractor = cfgNum_(ctx, cfg, 'employmentAttractor', 0.90);
+  var employmentStep = cfgNum_(ctx, cfg, 'employmentStep', 0.0003);
+  var prosperityEarnedOnly = String(cfg.prosperityEarnedOnly || '').toUpperCase() === 'TRUE';
+
+  // Migration clamps (read for downstream consistency; not applied here because
+  // migration is owned by updateWorldPopulation_).
+  var migrationClampLow = cfgNum_(ctx, cfg, 'migrationClampLow', -5000);
+  var migrationClampHigh = cfgNum_(ctx, cfg, 'migrationClampHigh', 5000);
+
+  // Hospital coefficients (read for W4 talk-back; not applied here).
+  var hospitalBaseCapacity = cfgNum_(ctx, cfg, 'hospitalBaseCapacity', 100);
+  var hospitalLoadPerSick = cfgNum_(ctx, cfg, 'hospitalLoadPerSick', 1);
+  var hospitalTalkbackGain = cfgNum_(ctx, cfg, 'hospitalTalkbackGain', 0.001);
+
+  // ═══════════════════════════════════════════════════════════════════════════
   // WORLD CONTEXT
   // ═══════════════════════════════════════════════════════════════════════════
   var S = ctx.summary;
@@ -88,25 +126,25 @@ function applyDemographicDrift_(ctx) {
   var prevIll = ill;
 
   // Base downward drift
-  ill += (rng() - 0.6) * 0.0004;
+  ill += (rng() - 0.6) * illnessCalmStep;
 
   // Winter → slightly more upward pressure
-  if (season === "Winter") ill += 0.0003;
+  if (season === "Winter") ill += illnessStepUp * 1.5;
 
   // Fog increases mild illness drift
-  if (weather.type === "fog") ill += 0.0002;
+  if (weather.type === "fog") ill += illnessStepUp;
 
   // Weather discomfort increases illness
-  if (weatherMood.comfortIndex && weatherMood.comfortIndex < 0.3) ill += 0.0002;
+  if (weatherMood.comfortIndex && weatherMood.comfortIndex < 0.3) ill += illnessStepUp;
 
   // Heat waves stress population
-  if (weatherMood.conflictPotential && weatherMood.conflictPotential > 0.3) ill += 0.0001;
+  if (weatherMood.conflictPotential && weatherMood.conflictPotential > 0.3) ill += illnessStepUp * 0.5;
 
   // Chaos increases instability
-  if (chaos.length > 0) ill += 0.0002;
+  if (chaos.length > 0) ill += illnessStepUp;
 
   // Economic stress affects health
-  if (econMood <= 35) ill += 0.0002;
+  if (econMood <= 35) ill += illnessStepUp;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CALENDAR ILLNESS MODIFIERS (v2.2)
@@ -118,27 +156,27 @@ function applyDemographicDrift_(ctx) {
     "Independence", "OpeningDay", "OaklandPride"
   ];
   if (gatheringHolidays.indexOf(holiday) >= 0) {
-    ill += 0.0006;
+    ill += illnessStepUp * 3;
   }
 
   // Winter holidays compound cold-season effect
   if (season === "Winter" && (holiday === "Holiday" || holiday === "NewYear" || holiday === "NewYearsEve")) {
-    ill += 0.0004;
+    ill += illnessStepUp * 2;
   }
 
   // First Friday slight uptick (crowds, bars)
   if (isFirstFriday) {
-    ill += 0.0002;
+    ill += illnessStepUp;
   }
 
   // High community engagement reduces illness (better support networks)
   if (dynamics.communityEngagement >= 1.4) {
-    ill -= 0.0002;
+    ill -= illnessStepDown;
   }
 
   ill = round4(ill);
   if (ill < 0) ill = 0;
-  if (ill > 0.15) ill = 0.15; // Cap at 15%
+  if (ill > illnessCap) ill = illnessCap;
 
   if (Math.abs(ill - prevIll) > 0.0005) {
     changes.push('illness ' + (ill > prevIll ? 'up' : 'down'));
@@ -150,20 +188,23 @@ function applyDemographicDrift_(ctx) {
 
   var prevEmp = emp;
 
-  // Tend toward 0.90–0.93 band
-  if (emp < 0.90) emp += 0.0003;
-  if (emp > 0.93) emp -= 0.0003;
+  // Tend toward employmentAttractor band (default 0.90–0.93).
+  // prosperityEarnedOnly=TRUE disables the free-prosperity attractor.
+  if (!prosperityEarnedOnly) {
+    if (emp < employmentAttractor) emp += employmentStep;
+    if (emp > employmentAttractor + 0.03) emp -= employmentStep;
+  }
 
   // Sentiment influences small shifts
-  if (dynamics.sentiment <= -0.3) emp -= 0.0002;
-  if (dynamics.sentiment >= 0.3) emp += 0.0002;
+  if (dynamics.sentiment <= -0.3) emp -= illnessStepUp;
+  if (dynamics.sentiment >= 0.3) emp += illnessStepUp;
 
   // Economic mood integration
-  if (econMood >= 65) emp += 0.0003;
-  if (econMood <= 35) emp -= 0.0003;
+  if (econMood >= 65) emp += employmentStep;
+  if (econMood <= 35) emp -= employmentStep;
 
   // Perfect weather slightly boosts productivity
-  if (weatherMood.perfectWeather) emp += 0.0001;
+  if (weatherMood.perfectWeather) emp += illnessStepUp * 0.5;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CALENDAR EMPLOYMENT MODIFIERS (v2.2)
@@ -172,39 +213,39 @@ function applyDemographicDrift_(ctx) {
   // Retail holidays boost temporary employment
   var retailHolidays = ["Holiday", "BlackFriday", "Valentine", "MothersDay", "FathersDay"];
   if (retailHolidays.indexOf(holiday) >= 0) {
-    emp += 0.0008;
+    emp += illnessStepUp * 4;
   }
 
   // Service industry holidays boost employment
   var serviceHolidays = ["Independence", "MemorialDay", "LaborDay", "CincoDeMayo"];
   if (serviceHolidays.indexOf(holiday) >= 0) {
-    emp += 0.0005;
+    emp += illnessStepUp * 2.5;
   }
 
   // Championship economic boost
   if (sportsSeason === "championship") {
-    emp += 0.001;
+    emp += illnessStepUp * 5;
   } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
-    emp += 0.0006;
+    emp += illnessStepUp * 3;
   }
 
   // First Friday boosts arts/service employment
   if (isFirstFriday) {
-    emp += 0.0004;
+    emp += illnessStepUp * 2;
   }
 
   // High cultural activity boosts creative employment
   if (dynamics.culturalActivity >= 1.4) {
-    emp += 0.0004;
+    emp += illnessStepUp * 2;
   }
 
   // January slump (post-holiday layoffs)
   if (holiday === "NewYear" && econ !== "strong" && econ !== "booming") {
-    emp -= 0.0006;
+    emp -= illnessStepUp * 3;
   }
 
   emp = round4(emp);
-  if (emp < 0.80) emp = 0.80; // Floor at 80%
+  if (emp < employmentFloor) emp = employmentFloor;
   if (emp > 0.98) emp = 0.98; // Cap at 98%
 
   if (Math.abs(emp - prevEmp) > 0.0005) {
@@ -216,6 +257,9 @@ function applyDemographicDrift_(ctx) {
   // Migration is calculated by updateWorldPopulation_ in Phase 1.
   // This function only reads it for summary/logging. No double-modification.
   // ═══════════════════════════════════════════════════════════════════════════
+
+  // W2b: expose clamps in summary so the W1 audit can see intended bounds.
+  S.migrationClamps = { low: migrationClampLow, high: migrationClampHigh };
 
   // ═══════════════════════════════════════════════════════════════════════════
   // 4. ECONOMY LABEL UPDATE
@@ -283,6 +327,14 @@ function applyDemographicDrift_(ctx) {
       isFirstFriday: isFirstFriday,
       isCreationDay: isCreationDay,
       sportsSeason: sportsSeason
+    },
+    // W2b: surface tunables so downstream phases can use them without re-reading.
+    illnessSupportThreshold: illnessSupportThreshold,
+    illnessSupportCycles: illnessSupportCycles,
+    hospitalConfig: {
+      baseCapacity: hospitalBaseCapacity,
+      loadPerSick: hospitalLoadPerSick,
+      talkbackGain: hospitalTalkbackGain
     }
   };
 
@@ -291,85 +343,99 @@ function applyDemographicDrift_(ctx) {
 
 
 /**
+ * W2b (engine.102): numeric World_Config read with loud missing-key warning.
+ *
+ * ADR-0015 rule 4 — missing keys fail loud, never silently default. An explicit
+ * 0 in the sheet is a legitimate tuned value (freeze a step, disable a gain),
+ * so absence is detected before coercion, never via falsiness.
+ */
+function cfgNum_(ctx, cfg, key, defaultValue) {
+  var raw = cfg ? cfg[key] : undefined;
+  if (raw === undefined || raw === null || raw === '') {
+    pushMissingConfigWarning_(ctx, key, defaultValue);
+    return defaultValue;
+  }
+  var v = Number(raw);
+  if (isNaN(v)) {
+    pushMissingConfigWarning_(ctx, key, defaultValue);
+    return defaultValue;
+  }
+  return v;
+}
+
+
+/**
+ * W2b helper: push a one-time ctx warning when a World_Config key is missing.
+ *
+ * Shared by the W2b fallback-class sweep sites:
+ *   - phase04-events/generationalEventsEngine.js (illnessFallbackRate)
+ *   - phase03-population/updateNeighborhoodDemographics.js (illness/employment fallbacks)
+ *
+ * Mirrors the ctx.summary.auditIssues channel used by logEngineError_ and is
+ * surfaced in the cycle-close digest.
+ */
+function pushMissingConfigWarning_(ctx, key, defaultValue) {
+  var S = (ctx && ctx.summary) || {};
+  if (!S._configMissingWarnings) S._configMissingWarnings = {};
+  if (S._configMissingWarnings[key]) return;
+  S._configMissingWarnings[key] = true;
+  if (!S.auditIssues) S.auditIssues = [];
+  S.auditIssues.push('World_Config key "' + key + '" missing; using default ' + defaultValue +
+                     ' (engine.102 W2b)');
+  if (ctx) ctx.summary = S;
+}
+
+
+/**
  * ============================================================================
- * DEMOGRAPHIC DRIFT REFERENCE
+ * DEMOGRAPHIC DRIFT REFERENCE (updated for W2b)
  * ============================================================================
- * 
+ *
  * ILLNESS RATE:
- * - Base: downward drift ×0.0004
- * - Winter: +0.0003
- * - Fog: +0.0002
- * - Low comfort: +0.0002
- * - High conflict potential: +0.0001
- * - Chaos: +0.0002
- * - Low economic mood: +0.0002
- * 
+ * - Base: downward drift x illnessCalmStep (default 0.0004)
+ * - Winter: +illnessStepUp x1.5 (default 0.0003)
+ * - Fog: +illnessStepUp (default 0.0002)
+ * - Low comfort: +illnessStepUp (default 0.0002)
+ * - High conflict potential: +illnessStepUp x0.5 (default 0.0001)
+ * - Chaos: +illnessStepUp (default 0.0002)
+ * - Low economic mood: +illnessStepUp (default 0.0002)
+ *
  * CALENDAR ILLNESS (v2.2):
- * - Gathering holidays: +0.0006
- * - Winter + winter holiday: +0.0004
- * - First Friday: +0.0002
- * - High community engagement: -0.0002
- * - Cap: 15%
- * 
+ * - Gathering holidays: +illnessStepUp x3 (default 0.0006)
+ * - Winter + winter holiday: +illnessStepUp x2 (default 0.0004)
+ * - First Friday: +illnessStepUp (default 0.0002)
+ * - High community engagement: -illnessStepDown (default 0.0002)
+ * - Cap: illnessCap (default 0.15)
+ *
  * EMPLOYMENT RATE:
- * - Base: trends toward 0.90-0.93
- * - Negative sentiment: -0.0002
- * - Positive sentiment: +0.0002
- * - High economic mood: +0.0003
- * - Low economic mood: -0.0003
- * - Perfect weather: +0.0001
- * 
+ * - prosperityEarnedOnly=FALSE: trends toward employmentAttractor band
+ *   [employmentAttractor, employmentAttractor+0.03] with step employmentStep
+ *   (defaults 0.90-0.93, step 0.0003)
+ * - Negative sentiment: -illnessStepUp / Positive sentiment: +illnessStepUp
+ * - High economic mood: +employmentStep / Low: -employmentStep
+ * - Perfect weather: +illnessStepUp x0.5
+ *
  * CALENDAR EMPLOYMENT (v2.2):
- * - Retail holidays: +0.0008
- * - Service holidays: +0.0005
- * - Championship: +0.001
- * - Playoffs: +0.0006
- * - First Friday: +0.0004
- * - High cultural activity: +0.0004
- * - January slump: -0.0006
- * - Cap: 80%-98%
- * 
+ * - Retail holidays: +illnessStepUp x4 (default 0.0008)
+ * - Service holidays: +illnessStepUp x2.5 (default 0.0005)
+ * - Championship: +illnessStepUp x5 (default 0.001)
+ * - Playoffs: +illnessStepUp x3 (default 0.0006)
+ * - First Friday / High cultural activity: +illnessStepUp x2 (default 0.0004)
+ * - January slump: -illnessStepUp x3 (default 0.0006)
+ * - Floor: employmentFloor (default 0.80) / Cap: 0.98
+ *
  * MIGRATION:
- * - Natural damping toward 0
- * - Chaos: ±20
- * - Weather impact: ±10
- * - High economic mood: +5
- * - Low economic mood: -5
- * - Negative sentiment: -3
- * 
- * CALENDAR MIGRATION (v2.2):
- * 
- * | Holiday Category | Effect |
- * |-----------------|--------|
- * | Travel holidays | ±50 volatility |
- * | Gathering holidays | +40 inflow |
- * | Cultural visitor holidays | +25 inflow |
- * | Minor holidays | ±20 |
- * | Civic rest holidays | ±10 |
- * | Major priority | ±30 |
- * | Oakland priority | +35 inflow |
- * | Cultural priority | +20 inflow |
- * | First Friday | +30 inflow |
- * | Creation Day | +15 settling |
- * | Championship | +60 inflow |
- * | Playoffs | +40 inflow |
- * | Late-season | +20 inflow |
- * | High public spaces | ±20 |
- * | High cultural activity | +15 inflow |
- * | High community engagement | +10 retention |
- * 
+ * - Owned by updateWorldPopulation_; this phase reads only.
+ * - Clamps exposed in summary: migrationClampLow / migrationClampHigh
+ *
  * ECONOMY LABEL:
- * - econMood ≥70: "booming"
- * - econMood ≥55: "strong"
- * - econMood ≥45: "stable"
- * - econMood ≥30: "weak"
- * - econMood <30: "struggling"
- * - 3+ chaos events: "unstable"
- * 
+ * - econMood >=70 booming / >=55 strong / >=45 stable / >=30 weak / <30 struggling
+ * - 3+ chaos events: unstable
+ *
  * CALENDAR ECONOMY (v2.2):
- * - Major holiday + high employment + strong → "booming"
- * - Championship + non-weak → "booming"
- * - NewYear + booming → "strong" (January correction)
- * 
+ * - Major holiday + high employment + strong -> booming
+ * - Championship + non-weak -> booming
+ * - NewYear + booming -> strong (January correction)
+ *
  * ============================================================================
  */

@@ -1258,8 +1258,14 @@ function checkHealthEvent_(ctx, popId, age, lifeHistory, cal) {
 
   // engine.52 A2 — incidence couples to the city illness rate (Phase 3 drift,
   // 5% baseline / 15% cap). At baseline this is a no-op; at cap it triples.
+  // engine.102 W2b — fallback reads World_Config illnessFallbackRate; missing key is LOUD.
+  var illnessFallbackRate = Number(ctx.config && ctx.config.illnessFallbackRate);
+  if (isNaN(illnessFallbackRate)) {
+    illnessFallbackRate = 0.05;
+    pushMissingConfigWarning_(ctx, 'illnessFallbackRate', 0.05);
+  }
   var illness = (ctx.summary && ctx.summary.demographicDrift &&
-                 ctx.summary.demographicDrift.illnessRate) || 0.05;
+                 ctx.summary.demographicDrift.illnessRate) || illnessFallbackRate;
   c *= (illness / 0.05);
 
   var healthMatches = lifeHistory.match(/\[Health\]/g);

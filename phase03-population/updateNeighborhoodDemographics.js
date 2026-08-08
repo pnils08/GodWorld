@@ -66,9 +66,22 @@ function updateNeighborhoodDemographics_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   var demographicDrift = S.demographicDrift || {};
   var driftFactors = S.demographicDriftFactors || [];
+  // engine.102 W2b — fallbacks read World_Config; missing keys are LOUD. The
+  // README sweep cited only the employment site, but the illness twin on the
+  // next line is the same free-number class (acceptance criterion 2).
+  var illnessFallbackRate = Number(ctx.config && ctx.config.illnessFallbackRate);
+  if (isNaN(illnessFallbackRate)) {
+    illnessFallbackRate = 0.05;
+    pushMissingConfigWarning_(ctx, 'illnessFallbackRate', 0.05);
+  }
+  var employmentFallbackRate = Number(ctx.config && ctx.config.employmentFallbackRate);
+  if (isNaN(employmentFallbackRate)) {
+    employmentFallbackRate = 0.91;
+    pushMissingConfigWarning_(ctx, 'employmentFallbackRate', 0.91);
+  }
   var migration = (typeof demographicDrift === 'object') ? (demographicDrift.migration || 0) : demographicDrift;
-  var illnessRate = (typeof demographicDrift === 'object') ? (demographicDrift.illnessRate || 0.05) : 0.05;
-  var employmentRate = (typeof demographicDrift === 'object') ? (demographicDrift.employmentRate || 0.91) : 0.91;
+  var illnessRate = (typeof demographicDrift === 'object') ? (demographicDrift.illnessRate || illnessFallbackRate) : illnessFallbackRate;
+  var employmentRate = (typeof demographicDrift === 'object') ? (demographicDrift.employmentRate || employmentFallbackRate) : employmentFallbackRate;
 
   var holiday = S.holiday || 'none';
   var isFirstFriday = S.isFirstFriday || false;

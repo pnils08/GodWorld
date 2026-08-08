@@ -229,7 +229,14 @@ function applyShockMonitor_(ctx) {
   if (Math.abs(migration) >= migrationThreshold) { shock = true; shockReasons.push("migration surge"); }
 
   // 8) EMPLOYMENT SHOCK
-  var employment = demographicDrift.employmentRate || 0.91;
+  // engine.102 W2b — fallback reads World_Config employmentFallbackRate; missing
+  // key is LOUD (site missed by the kimi sweep, same free-number class).
+  var employmentFallbackRate = Number(ctx.config && ctx.config.employmentFallbackRate);
+  if (isNaN(employmentFallbackRate)) {
+    employmentFallbackRate = 0.91;
+    pushMissingConfigWarning_(ctx, 'employmentFallbackRate', 0.91);
+  }
+  var employment = demographicDrift.employmentRate || employmentFallbackRate;
   if (employment < 0.85) { shock = true; shockReasons.push("employment crisis"); }
 
   // 9) CIVIC LOAD STRAIN

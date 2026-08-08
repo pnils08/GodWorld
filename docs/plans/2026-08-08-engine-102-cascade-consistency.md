@@ -78,13 +78,13 @@ pointers:
 - **Files:** World_Config tab (live Sheet)
 - **Steps:** add the key rows from `output/kimi/engine102/world-config-keys.md` with current-literal values (behavior-preserving), then tune.
 - **Verify:** `loadConfig_` surfaces keys (bench log or a config dump line).
-- **Status:** [ ] not started — **owner: engine-sheet/Mike**
+- **Status:** [x] done (2026-08-08, engine-sheet, S361) — 18 rows appended to BENCH and LIVE World_Config, read-back verified 18/18. Config path proven by differential probe on bench: illnessCap=0.10 bound the C107 illness write to exactly 0.10; restored 0.15, C108 drifted normally (0.1001). Live keys are inert until the W2b code deploy (no readers in pre-W2b live code).
 
 ### Task 5: W2b land (engine-sheet)
 
 - **Files:** `phase03-population/deriveDemographicDrift.js` / `applyDemographicDrift.js`, plus fallback sites from Task 2 step 3.
 - **Verify:** acceptance criterion 2.
-- **Status:** [ ] not started — **owner: engine-sheet**
+- **Status:** [x] done (2026-08-08, engine-sheet, S361) — commits `a567f933` + `e181e0d5`. W2b landed with cfgNum_ loud-warning reads (ADR-0015 rule 4; fixes the falsy-zero trap in the proposal's `|| default` pattern). Fallback sweep covered kimi's 2 cited sites + 2 uncited same-class sites (updateNeighborhoodDemographics illness :67, applyShockMonitor employment :232). **Plus the load-bearing discovery:** WP illness/employment/economy had 3 writers/cycle; the v2.10 cache refactor (d02dbf8d, 2026-01-21) made old hardcoded `updateWorldPopulation_` the cycle-end last-writer, silently overwriting the drift engine ever since — so W1's measurements were of the wrong engine's physics. Ownership fix (Mike-approved "config driven is the future"): updateWorldPopulation_ keeps totalPopulation+migration only; economicRippleEngine WP writes cut; applyDemographicDrift_ is sole owner of the three stats. Proven on bench C107 (probe binds) + C108 (normal drift), 0 errors.
 
 ### Task 6: W3 — hood reroute + dose + wake perception (engine-sheet; lib/ read)
 
@@ -121,3 +121,5 @@ pointers:
 - 2026-08-08 (kimi) — Initial draft on Mike's go, per the five-pass cascade review with kimi amendments. kimi builds Tasks 1–2 (+8 later); engine-sheet lands/deploys substrate Tasks 3–7.
 - 2026-08-08 (kimi) — Tasks 1–2 complete same session: `scripts/cascadeAudit.js` + first report (three denominators measured, 3 invariant FAILs quantified, East Oakland ND gap identified); W2a/W2b patch proposals in `output/kimi/engine102/` with verified line refs. Handoff to engine-sheet for Tasks 3–7.
 - 2026-08-08 (engine-sheet, S361) — Task 3 done: W2a landed (`4f7f934b`), bench C105 clean, invariant PASS +6.1%. Detail in Task 3 status.
+- 2026-08-08 (engine-sheet, S361) — Tasks 4+5 done: W2b landed, 18 keys on bench+live, probe bound on C107. Detail in task statuses.
+- 2026-08-08 (engine-sheet, S361) — WP stat ownership fix (`e181e0d5`): 3 writers → 1, applyDemographicDrift sole owner. Detail in Task 5 status.

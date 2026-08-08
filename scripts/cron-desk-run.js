@@ -368,6 +368,38 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
       L.push('HEAT: first-person I/we fan column. Gut or Oakland sensory open. Charge most of the time.');
       L.push('Friction pivot required. Metrics are foils, not Anthony analysis. Hate-the-move / I-was-wrong arc OK.');
       L.push('ONE column — not multi-voice sports-desk average.');
+      // Inject fan-pulse slice when present (buildPSlayerSlice).
+      try {
+        const { loadPSlayerSlice } = require(path.join(__dirname, 'buildPSlayerSlice'));
+        const ps = loadPSlayerSlice(cycle);
+        if (ps && !ps.empty) {
+          L.push('');
+          L.push('### P SLAYER FAN-PULSE SLICE (charge assignment — not a Mags desk-slice, not Jax stink)');
+          L.push('PULSE: ' + ps.pulse.className + ' · score ' + ps.pulse.score + ' · ' + ps.pulse.label);
+          if (ps.charge) {
+            L.push('BAG MODES: ' + (ps.charge.bagModes || []).map(m => m.id + ' ' + m.name).join('; '));
+            L.push('FAN CHARGE: ' + ps.charge.fanCharge);
+            if (ps.charge.foilNumber) L.push('FOIL NUMBER: ' + ps.charge.foilNumber);
+            L.push('CENTRAL FEELING: ' + ps.charge.centralFeeling);
+          }
+          if (ps.friction) {
+            L.push('FRICTION A: ' + ps.friction.a);
+            L.push('FRICTION B: ' + ps.friction.b);
+            L.push('FRAME: ' + ps.friction.frame);
+          }
+          if (ps.priorTakes && ps.priorTakes.length) {
+            L.push('PRIOR TAKES:');
+            for (const p of ps.priorTakes.slice(0, 3)) {
+              L.push('  - C' + (p.cycle != null ? p.cycle : '?') + ' ' + p.headline + ' [' + p.why + ']');
+            }
+          }
+          if (ps.prewrite && ps.prewrite.anchorFacts) {
+            L.push('ANCHOR FACTS (feed only):');
+            for (const a of ps.prewrite.anchorFacts.slice(0, 4)) L.push('  - ' + a);
+          }
+          if (ps.scene && ps.scene.colorRoom) L.push('COLOR: ' + ps.scene.colorRoom);
+        }
+      } catch (_) { /* optional */ }
     } else if (persona.name && /anthony\s*raines/i.test(persona.name)) {
       L.push('STANCE: third-person analytic beat. One claim on verifiable numbers. Fit and process over bleacher heat.');
       L.push('Never invent contracts/stats. ONE piece — not multi-voice sports-desk average.');
@@ -664,9 +696,11 @@ async function runAngle(assign) {
   // plans the chase in their own voice — they never pick the angle. Personas keep
   // their authored smells-off stance (persona-only, per the plan's lane note).
   // grok: firebrand prefers Jax stink-slice over free civic firehose / Mags civic slice.
+  // grok: p-slayer prefers fan-pulse slice (feed heat + charge bag) over soft sports seed.
   let story = assign && assign.story;
   let approach = assign && assign.approach;
   let jaxSlice = null;
+  let pslayerSlice = null;
   if (personaSlug === 'freelance-firebrand' && !story) {
     try {
       const { loadJaxSlice } = require(path.join(__dirname, 'buildJaxSlice'));
@@ -684,6 +718,20 @@ async function runAngle(assign) {
       const { loadJaxSlice } = require(path.join(__dirname, 'buildJaxSlice'));
       jaxSlice = loadJaxSlice(cycle);
     } catch (_) { /* optional scene pack */ }
+  } else if (personaSlug === 'p-slayer') {
+    try {
+      const { loadPSlayerSlice } = require(path.join(__dirname, 'buildPSlayerSlice'));
+      pslayerSlice = loadPSlayerSlice(cycle);
+      if (pslayerSlice && !pslayerSlice.empty) {
+        // Fan-heat pulse wins over generic sports lane seed when present.
+        story = pslayerSlice.story || story;
+        approach = pslayerSlice.approach || approach;
+        log('pslayer slice loaded — pulse ' + pslayerSlice.pulse.className +
+          ' score ' + pslayerSlice.pulse.score + ' charge ' + pslayerSlice.charge.fanCharge);
+      }
+    } catch (e) {
+      log('pslayer slice load failed (non-fatal): ' + e.message);
+    }
   }
   let angleRead = null;
   if (asker) {
@@ -691,8 +739,52 @@ async function runAngle(assign) {
     // grok 2026-08-06: persona + stink seed → lead with the contradiction (not free
     // digest only, not civic "official action first"). Roster + story stays EIC-fixed.
     // Persona without story keeps the original smells-off digest ask.
+    // grok 2026-08-07: p-slayer gets fan-heat ask (not Jax stink register).
     let ask;
-    if (persona && story) {
+    if (persona && personaSlug === 'p-slayer' && story) {
+      const sceneBits = [];
+      if (pslayerSlice) {
+        if (pslayerSlice.pulse) {
+          sceneBits.push('PULSE CLASS: ' + pslayerSlice.pulse.className + ' · score ' + pslayerSlice.pulse.score);
+          if (pslayerSlice.pulse.record) {
+            sceneBits.push('RECORD/STREAK: ' + pslayerSlice.pulse.record + ' / ' + (pslayerSlice.pulse.streak || '—'));
+          }
+          if (pslayerSlice.pulse.fanSentiment) {
+            sceneBits.push('FAN SENTIMENT: ' + pslayerSlice.pulse.fanSentiment +
+              (pslayerSlice.pulse.mood ? ' · mood ' + pslayerSlice.pulse.mood : ''));
+          }
+        }
+        if (pslayerSlice.charge) {
+          sceneBits.push('BAG MODES: ' + (pslayerSlice.charge.bagModes || []).map(m => m.id + ' ' + m.name).join('; '));
+          sceneBits.push('FAN CHARGE: ' + pslayerSlice.charge.fanCharge);
+          if (pslayerSlice.charge.foilNumber) sceneBits.push('FOIL NUMBER: ' + pslayerSlice.charge.foilNumber);
+        }
+        if (pslayerSlice.friction) {
+          sceneBits.push('FRICTION A: ' + pslayerSlice.friction.a);
+          sceneBits.push('FRICTION B: ' + pslayerSlice.friction.b);
+          sceneBits.push('FRAME: ' + pslayerSlice.friction.frame);
+        }
+        if (pslayerSlice.priorTakes && pslayerSlice.priorTakes.length) {
+          sceneBits.push('PRIOR TAKES (eat or double down):');
+          for (const p of pslayerSlice.priorTakes.slice(0, 3)) {
+            sceneBits.push('  - C' + (p.cycle != null ? p.cycle : '?') + ' ' + p.headline + ' [' + p.why + ']');
+          }
+        }
+      }
+      ask = 'You\'re ' + asker.name + '. This is the fan-heat pulse you\'re writing into — not the press box:\n' +
+        'PULSE: ' + (story.angle || story.label) +
+        (story.pulseClass ? '\nCLASS: ' + story.pulseClass : '') +
+        (story.hookLine ? '\nHOOK: ' + story.hookLine : '') +
+        (brief.names.length ? '\nPLAYERS / NAMES (feed + ledger — do not invent):\n' +
+          brief.names.map(n => '  - ' + n).join('\n') : '') +
+        (story.hood ? '\nWHERE (feed neighborhood): ' + story.hood : '') +
+        (sceneBits.length ? '\nCHARGE PACK:\n' + sceneBits.join('\n') : '') +
+        (approach ? '\n\n' + approach : '') +
+        (asker._wallSnippet ? '\n\n' + asker._wallSnippet : '') +
+        '\n\nIn your own voice (I/we): what does this feel like in the stands, which charge-bag mode you\'re riding, ' +
+        'and what prior take you\'re eating or doubling down on? Name the friction pivot. ' +
+        'Do not open with FO process or Anthony board math. One heat. End on dare, confession, or update.';
+    } else if (persona && story) {
       const sceneBits = [];
       if (jaxSlice && jaxSlice.scene) {
         if (jaxSlice.scene.weather) sceneBits.push('WEATHER: ' + jaxSlice.scene.weather);
@@ -765,6 +857,16 @@ async function runAngle(assign) {
       citizens: jaxSlice.citizens,
       bonds: (jaxSlice.bonds || []).slice(0, 12),
       gaps: jaxSlice.gaps
+    } : null,
+    pslayerSlice: pslayerSlice && !pslayerSlice.empty ? {
+      pulse: pslayerSlice.pulse,
+      charge: pslayerSlice.charge,
+      prewrite: pslayerSlice.prewrite,
+      friction: pslayerSlice.friction,
+      priorTakes: pslayerSlice.priorTakes,
+      players: pslayerSlice.players,
+      scene: pslayerSlice.scene,
+      candidates: (pslayerSlice.candidates || []).slice(0, 6)
     } : null,
     reporterWall: wallMeta,
     canonResearch,                                    // Task 2.5.3 §2: ≥3 validated canon facts + tool trace

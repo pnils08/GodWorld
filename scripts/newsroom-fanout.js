@@ -370,10 +370,46 @@ async function buildFanout(date) {
   // grok: after LRU rota is built, optionally force one firebrand stink slot.
   const stinkForce = applyStinkForce(assignments, cycle, date, approachMap, takenRefs);
 
+  // grok: enrich any P Slayer sports seat with fan-pulse slice (charge bag + prior takes).
+  let pslayerEnrich = { enriched: false, reason: 'none' };
+  if (cycle != null) {
+    try {
+      const { enrichAssignment, buildPSlayerSlice, writePSlayerSlice } =
+        require(path.join(__dirname, 'buildPSlayerSlice'));
+      const before = assignments.map(a => a.persona || a.popid);
+      for (let i = 0; i < assignments.length; i++) {
+        const next = enrichAssignment(assignments[i], cycle);
+        if (next && next.pslayerSlice) {
+          assignments[i] = next;
+          pslayerEnrich = {
+            enriched: true,
+            reason: 'pulse=' + (next.pulse && next.pulse.className) +
+              ' score=' + (next.pulse && next.pulse.score) +
+              ' charge=' + (next.charge && next.charge.fanCharge)
+          };
+        }
+      }
+      // Always materialize slice artifact when sports rota ran (even if no p-slayer slot today)
+      try {
+        const slice = buildPSlayerSlice(cycle);
+        writePSlayerSlice(cycle, slice);
+      } catch (_) { /* non-fatal */ }
+      if (!pslayerEnrich.enriched) {
+        pslayerEnrich.reason = 'no p-slayer assignment in rota (before=' + before.join(',') + ')';
+      } else {
+        console.error('[fanout] P SLAYER FAN-HEAT — ' + pslayerEnrich.reason);
+      }
+    } catch (e) {
+      pslayerEnrich = { enriched: false, reason: 'error: ' + e.message };
+      console.error('[fanout] pslayer slice enrich skipped: ' + e.message);
+    }
+  }
+
   const seedless = assignments.filter(a => !a.story).length;
   return { date, cycle, quotas: DAILY_QUOTAS, assignments, shortfalls,
     seedless, signalMissing: !signal,   // loud in the file too — the 06:00 digest and any reader sees a seedless day
     stinkForce,
+    pslayerEnrich,
     builtAt: new Date().toISOString() };
 }
 

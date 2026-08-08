@@ -45,9 +45,9 @@ pointers:
 
 ### Task 3: Fan-pulse slice (like Jax stink slice)
 
-- **Files:** future `scripts/buildPSlayerSlice.js` or sports-signal pack
+- **Files:** `scripts/buildPSlayerSlice.js`, `scripts/buildPSlayerSlice.test.js`; wire-in `scripts/cron-desk-run.js` + `scripts/newsroom-fanout.js`
 - **Steps:** Roster move / loss / quiet win / prospect blocked → charge brief + wall prior takes
-- **Status:** [ ] not started — next build
+- **Status:** [x] done (grok 2026-08-07) — offline fan-pulse from world_summary Sports + prior columns; charge bag modes + foil + PREWRITE; artifacts `output/slices/c{N}/p-slayer.md` + `output/cron-compare/pslayer_slice_c{N}.json`. Not Jax: pulse not stink, I/we heat not civic contradiction.
 
 ### Task 4: Weekend life wakes
 
@@ -73,3 +73,4 @@ pointers:
 - 2026-08-07 (grok) — P Slayer charge bag hard-injected.
 - 2026-08-07 (mags, research-build S357) — Task 2 closed: agent package landed, commit `0d2179b4`. Remaining: Tasks 3 (fan-pulse slice), 4 (weekend wake-pool verify), 5 (media legacy note).
 - 2026-08-07 (mags, research-build S357) — Task 4 closed: buildPool() run live, all four solo-seat POPIDs in pool. Remaining: Tasks 3 (fan-pulse slice) + 5 (media legacy note).
+- 2026-08-07 (grok) — Task 3 shipped: `buildPSlayerSlice.js` (+ tests), cron angle/write inject + fanout enrich. C102 top pulse = Kelley re-sign (Hate the Move / I Was Wrong / Friction), foil 7.1war, priors c95/c94/c92. Remaining: Task 5 (media legacy note).

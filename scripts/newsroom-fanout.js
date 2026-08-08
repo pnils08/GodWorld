@@ -405,6 +405,42 @@ async function buildFanout(date) {
     }
   }
 
+  // grok pipeline.52: enrich Anthony analytic sports seat with board pulse.
+  let anthonyEnrich = { enriched: false, reason: 'none' };
+  if (cycle != null) {
+    try {
+      const {
+        enrichAssignment: enrichAnthony,
+        buildAnthonySlice,
+        writeAnthonySlice
+      } = require(path.join(__dirname, 'buildAnthonySlice'));
+      for (let i = 0; i < assignments.length; i++) {
+        const next = enrichAnthony(assignments[i], cycle);
+        if (next && next.anthonySlice) {
+          assignments[i] = next;
+          anthonyEnrich = {
+            enriched: true,
+            reason: 'pulse=' + (next.pulse && next.pulse.className) +
+              ' score=' + (next.pulse && next.pulse.score) +
+              ' foil=' + (next.pulse && next.pulse.foilNumber)
+          };
+        }
+      }
+      try {
+        const slice = buildAnthonySlice(cycle);
+        writeAnthonySlice(cycle, slice);
+      } catch (_) { /* non-fatal */ }
+      if (!anthonyEnrich.enriched) {
+        anthonyEnrich.reason = 'no anthony-raines assignment in rota';
+      } else {
+        console.error('[fanout] ANTHONY ANALYTIC — ' + anthonyEnrich.reason);
+      }
+    } catch (e) {
+      anthonyEnrich = { enriched: false, reason: 'error: ' + e.message };
+      console.error('[fanout] anthony slice enrich skipped: ' + e.message);
+    }
+  }
+
   // grok pipeline.52: enrich culture evening consumers with evening-life pack.
   let eveningEnrich = { enriched: false, reason: 'none', seats: [] };
   if (cycle != null) {
@@ -451,6 +487,7 @@ async function buildFanout(date) {
     seedless, signalMissing: !signal,   // loud in the file too — the 06:00 digest and any reader sees a seedless day
     stinkForce,
     pslayerEnrich,
+    anthonyEnrich,
     eveningEnrich,
     builtAt: new Date().toISOString() };
 }

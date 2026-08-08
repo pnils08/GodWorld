@@ -403,6 +403,33 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
     } else if (persona.name && /anthony\s*raines/i.test(persona.name)) {
       L.push('STANCE: third-person analytic beat. One claim on verifiable numbers. Fit and process over bleacher heat.');
       L.push('Never invent contracts/stats. ONE piece — not multi-voice sports-desk average.');
+      // grok pipeline.52: analytic pack from shared sports substrate + analysis bag.
+      try {
+        const { loadAnthonySlice } = require(path.join(__dirname, 'buildAnthonySlice'));
+        const ant = loadAnthonySlice(cycle);
+        if (ant && !ant.empty) {
+          L.push('');
+          L.push('### ANTHONY ANALYTIC SLICE (board assignment — not fan heat, not Hal elegy)');
+          L.push('PULSE: ' + ant.pulse.className + ' · score ' + ant.pulse.score + ' · ' + ant.pulse.label);
+          if (ant.bag && ant.bag.tools) {
+            L.push('BAG TOOLS: ' + ant.bag.tools.map(t => t.id + ' ' + t.name).join('; '));
+          }
+          if (ant.bag && ant.bag.claim) L.push('CLAIM: ' + ant.bag.claim);
+          if (ant.pulse.foilNumber) L.push('FOIL (feed only): ' + ant.pulse.foilNumber);
+          if (ant.prewrite && ant.prewrite.lineFacts) {
+            L.push('LINE FACTS (feed only):');
+            for (const f of ant.prewrite.lineFacts.slice(0, 5)) L.push('  - ' + f);
+          }
+          if (ant.prewrite && ant.prewrite.missing) {
+            L.push('MISSING (do not invent): ' + ant.prewrite.missing.slice(0, 3).join('; '));
+          }
+          if (ant.players && ant.players.length) {
+            L.push('PLAYERS: ' + ant.players.slice(0, 6).map(p =>
+              p.name + (p.popid ? ' (' + p.popid + ')' : '')).join('; '));
+          }
+          if (ant.scene && ant.scene.colorRoom) L.push('COLOR: ' + ant.scene.colorRoom);
+        }
+      } catch (_) { /* optional */ }
     } else if (persona.name && /hal\s*richmond/i.test(persona.name)) {
       L.push('STANCE: first-person reflective historian. Present fact then era echo. Literary, not wire.');
       L.push('Numbers as poetry of time. ONE piece — not multi-voice sports-desk average.');
@@ -765,6 +792,7 @@ async function runAngle(assign) {
   let jaxSlice = null;
   let pslayerSlice = null;
   let eveningSlice = null;
+  let anthonySlice = null;
   const EVENING_SLUGS = {
     'mason-ortega': 1, 'kai-marston': 1, 'sharon-okafor': 1,
     'maria-keen': 1, 'elliot-graye': 1
@@ -799,6 +827,20 @@ async function runAngle(assign) {
       }
     } catch (e) {
       log('pslayer slice load failed (non-fatal): ' + e.message);
+    }
+  } else if (personaSlug === 'anthony-raines') {
+    try {
+      const { loadAnthonySlice } = require(path.join(__dirname, 'buildAnthonySlice'));
+      anthonySlice = loadAnthonySlice(cycle);
+      if (anthonySlice && !anthonySlice.empty) {
+        story = anthonySlice.story || story;
+        approach = anthonySlice.approach || approach;
+        log('anthony slice loaded — pulse ' + anthonySlice.pulse.className +
+          ' score ' + anthonySlice.pulse.score +
+          ' foil ' + (anthonySlice.pulse.foilNumber || '—'));
+      }
+    } catch (e) {
+      log('anthony slice load failed (non-fatal): ' + e.message);
     }
   } else if (personaSlug && EVENING_SLUGS[personaSlug]) {
     try {
@@ -879,6 +921,41 @@ async function runAngle(assign) {
         '\n\nIn your own voice (I/we): what does this feel like in the stands, which charge-bag mode you\'re riding, ' +
         'and what prior take you\'re eating or doubling down on? Name the friction pivot. ' +
         'Do not open with FO process or Anthony board math. One heat. End on dare, confession, or update.';
+    } else if (persona && personaSlug === 'anthony-raines' && story) {
+      const sceneBits = [];
+      if (anthonySlice && !anthonySlice.empty) {
+        if (anthonySlice.pulse) {
+          sceneBits.push('PULSE CLASS: ' + anthonySlice.pulse.className + ' · score ' + anthonySlice.pulse.score);
+          if (anthonySlice.pulse.foilNumber) sceneBits.push('FOIL (feed): ' + anthonySlice.pulse.foilNumber);
+          if (anthonySlice.pulse.record) {
+            sceneBits.push('RECORD/STREAK: ' + anthonySlice.pulse.record + ' / ' +
+              (anthonySlice.pulse.streak || '—'));
+          }
+        }
+        if (anthonySlice.bag && anthonySlice.bag.tools) {
+          sceneBits.push('BAG TOOLS: ' + anthonySlice.bag.tools.map(t => t.id + ' ' + t.name).join('; '));
+        }
+        if (anthonySlice.bag && anthonySlice.bag.claim) sceneBits.push('CLAIM: ' + anthonySlice.bag.claim);
+        if (anthonySlice.prewrite && anthonySlice.prewrite.lineFacts) {
+          sceneBits.push('LINE FACTS:');
+          for (const f of anthonySlice.prewrite.lineFacts.slice(0, 4)) sceneBits.push('  - ' + f);
+        }
+        if (anthonySlice.prewrite && anthonySlice.prewrite.missing) {
+          sceneBits.push('MISSING: ' + anthonySlice.prewrite.missing.slice(0, 3).join('; '));
+        }
+      }
+      ask = 'You\'re ' + asker.name + '. This is the analytic board pulse — not the bleachers:\n' +
+        'PULSE: ' + (story.angle || story.label) +
+        (story.pulseClass ? '\nCLASS: ' + story.pulseClass : '') +
+        (story.hookLine ? '\nHOOK: ' + story.hookLine : '') +
+        (brief.names.length ? '\nPLAYERS / NAMES (feed + ledger — do not invent):\n' +
+          brief.names.map(n => '  - ' + n).join('\n') : '') +
+        (story.hood ? '\nWHERE: ' + story.hood : '') +
+        (sceneBits.length ? '\nBOARD PACK:\n' + sceneBits.join('\n') : '') +
+        (approach ? '\n\n' + approach : '') +
+        (asker._wallSnippet ? '\n\n' + asker._wallSnippet : '') +
+        '\n\nIn third person: what is the one evaluative claim, which bag tools you ride, and which feed line numbers ' +
+        'must appear? Do not open with fan we or Hal elegy. Never invent x-stats. One argument spine.';
     } else if (persona && EVENING_SLUGS[personaSlug] && story) {
       const sceneBits = [];
       if (eveningSlice && !eveningSlice.empty) {
@@ -1021,6 +1098,15 @@ async function runAngle(assign) {
       scene: eveningSlice.scene,
       candidates: (eveningSlice.candidates || []).slice(0, 8),
       perSeat: eveningSlice.perSeat
+    } : null,
+    anthonySlice: anthonySlice && !anthonySlice.empty ? {
+      pulse: anthonySlice.pulse,
+      bag: anthonySlice.bag,
+      prewrite: anthonySlice.prewrite,
+      friction: anthonySlice.friction,
+      players: anthonySlice.players,
+      scene: anthonySlice.scene,
+      candidates: (anthonySlice.candidates || []).slice(0, 6)
     } : null,
     reporterWall: wallMeta,
     canonResearch,                                    // Task 2.5.3 §2: ≥3 validated canon facts + tool trace

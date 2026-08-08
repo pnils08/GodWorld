@@ -458,6 +458,68 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
       L.push('STANCE: senior photographer. Visual record/prompts. Not prose articles.');
       L.push('ONE visual assignment set — not multi-voice desk average.');
     }
+    // grok pipeline.52: shared evening-life pack for culture consumers (mason/kai/sharon/maria/graye).
+    if (persona.name &&
+        /maria\s*keen|elliot\s*graye|kai\s*marston|mason\s*ortega|sharon\s*okafor/i.test(persona.name)) {
+      try {
+        const { loadEveningSlice, pickPulseForPersona, EVENING_CONSUMERS } =
+          require(path.join(__dirname, 'buildEveningSlice'));
+        const es = loadEveningSlice(cycle);
+        if (es && !es.empty) {
+          const slug = Object.keys(EVENING_CONSUMERS).find(s =>
+            EVENING_CONSUMERS[s].popid === persona.popid ||
+            new RegExp(EVENING_CONSUMERS[s].name.split(' ')[0], 'i').test(persona.name)
+          );
+          const pulse = pickPulseForPersona(es.pulses || [], slug) ||
+            (es.pulses && es.pulses[0]);
+          L.push('');
+          L.push('### EVENING LIFE SLICE (shared culture pack — not a Mags desk-slice)');
+          if (pulse) {
+            L.push('PULSE: ' + pulse.className + ' · score ' + pulse.score + ' · ' + pulse.label);
+            if (pulse.angle) L.push('ANGLE: ' + pulse.angle);
+            if (pulse.hookLine) L.push('HOOK: ' + pulse.hookLine);
+            if (pulse.sceneBits && pulse.sceneBits.length) {
+              L.push('SCENE:');
+              for (const b of pulse.sceneBits.slice(0, 6)) L.push('  - ' + b);
+            }
+          } else if (es.pulse) {
+            L.push('PULSE: ' + es.pulse.className + ' · score ' + es.pulse.score + ' · ' + es.pulse.label);
+          }
+          if (es.recommend && es.recommend.bag) {
+            L.push('RECOMMENDED BAG (fit, not force): ' + es.recommend.bag +
+              (es.recommend.slug ? ' (`' + es.recommend.slug + '`)' : '') +
+              ' — ' + (es.recommend.reason || ''));
+          }
+          const t = es.texture || {};
+          if ((t.restaurants || []).length) {
+            L.push('RESTAURANTS (named only): ' +
+              t.restaurants.map(v => v.name + (v.hood ? ' (' + v.hood + ')' : '')).join('; '));
+          }
+          if ((t.nightlife || []).length) {
+            L.push('NIGHTLIFE (named only): ' +
+              t.nightlife.map(v => v.name + (v.hood ? ' (' + v.hood + ')' : '')).join('; '));
+          }
+          if (t.nightlifeMeta && (t.nightlifeMeta.volume != null || t.nightlifeMeta.vibe)) {
+            L.push('NIGHTLIFE META: volume ' + (t.nightlifeMeta.volume ?? '—') +
+              ', vibe ' + (t.nightlifeMeta.vibe || '—') +
+              ', movement ' + (t.nightlifeMeta.movement || '—') +
+              ' — translate to human language; do not lead with raw decimals.');
+          }
+          if ((t.cityEvents || []).length) L.push('CITY EVENTS: ' + t.cityEvents.join('; '));
+          if ((t.tv || []).length) L.push('TV SLATE: ' + t.tv.join('; '));
+          if ((t.movies || []).length) L.push('MOVIES: ' + t.movies.join('; '));
+          if ((es.signals && es.signals.sightings || []).length) {
+            L.push('SIGHTINGS:');
+            for (const s of es.signals.sightings.slice(0, 4)) {
+              L.push('  - ' + (s.name || '?') + (s.venue ? ' @ ' + s.venue : '') +
+                (s.hood ? ' (' + s.hood + ')' : ''));
+            }
+          }
+          if (es.scene && es.scene.colorRoom) L.push('COLOR: ' + es.scene.colorRoom);
+          L.push('Never invent venues, employees, or neighbors. Named places only from this pack.');
+        }
+      } catch (_) { /* optional */ }
+    }
     L.push('');
   }
   if (angleRead) {
@@ -697,10 +759,16 @@ async function runAngle(assign) {
   // their authored smells-off stance (persona-only, per the plan's lane note).
   // grok: firebrand prefers Jax stink-slice over free civic firehose / Mags civic slice.
   // grok: p-slayer prefers fan-pulse slice (feed heat + charge bag) over soft sports seed.
+  // grok pipeline.52: culture evening consumers prefer evening-life pack over bare hood seed.
   let story = assign && assign.story;
   let approach = assign && assign.approach;
   let jaxSlice = null;
   let pslayerSlice = null;
+  let eveningSlice = null;
+  const EVENING_SLUGS = {
+    'mason-ortega': 1, 'kai-marston': 1, 'sharon-okafor': 1,
+    'maria-keen': 1, 'elliot-graye': 1
+  };
   if (personaSlug === 'freelance-firebrand' && !story) {
     try {
       const { loadJaxSlice } = require(path.join(__dirname, 'buildJaxSlice'));
@@ -731,6 +799,33 @@ async function runAngle(assign) {
       }
     } catch (e) {
       log('pslayer slice load failed (non-fatal): ' + e.message);
+    }
+  } else if (personaSlug && EVENING_SLUGS[personaSlug]) {
+    try {
+      const {
+        loadEveningSlice, assignmentFromSlice
+      } = require(path.join(__dirname, 'buildEveningSlice'));
+      eveningSlice = loadEveningSlice(cycle);
+      if (eveningSlice && !eveningSlice.empty) {
+        const from = assignmentFromSlice(eveningSlice, personaSlug);
+        if (from) {
+          // Graye keeps a prior non-faith story when pack has no faith heat.
+          if (personaSlug === 'elliot-graye' && from.pulse &&
+              from.pulse.className !== 'faith-overlap' && story) {
+            approach = from.approach || approach;
+          } else {
+            story = from.story || story;
+            approach = from.approach || approach;
+          }
+        }
+        log('evening slice loaded — pulse ' +
+          (eveningSlice.pulse && eveningSlice.pulse.className) +
+          ' score ' + (eveningSlice.pulse && eveningSlice.pulse.score) +
+          ' bag=' + ((from && from.bag) ||
+            (eveningSlice.recommend && eveningSlice.recommend.bag) || '—'));
+      }
+    } catch (e) {
+      log('evening slice load failed (non-fatal): ' + e.message);
     }
   }
   let angleRead = null;
@@ -784,6 +879,51 @@ async function runAngle(assign) {
         '\n\nIn your own voice (I/we): what does this feel like in the stands, which charge-bag mode you\'re riding, ' +
         'and what prior take you\'re eating or doubling down on? Name the friction pivot. ' +
         'Do not open with FO process or Anthony board math. One heat. End on dare, confession, or update.';
+    } else if (persona && EVENING_SLUGS[personaSlug] && story) {
+      const sceneBits = [];
+      if (eveningSlice && !eveningSlice.empty) {
+        if (eveningSlice.pulse) {
+          sceneBits.push('TOP PULSE: ' + eveningSlice.pulse.className + ' · score ' + eveningSlice.pulse.score +
+            ' · ' + eveningSlice.pulse.label);
+        }
+        if (story.pulseClass) sceneBits.push('YOUR PULSE CLASS: ' + story.pulseClass);
+        if (eveningSlice.recommend && eveningSlice.recommend.bag) {
+          sceneBits.push('RECOMMENDED BAG: ' + eveningSlice.recommend.bag +
+            (eveningSlice.recommend.slug ? ' (`' + eveningSlice.recommend.slug + '`)' : ''));
+        }
+        const t = eveningSlice.texture || {};
+        if ((t.restaurants || []).length) {
+          sceneBits.push('RESTAURANTS: ' +
+            t.restaurants.map(v => v.name + (v.hood ? ' (' + v.hood + ')' : '')).join('; '));
+        }
+        if ((t.nightlife || []).length) {
+          sceneBits.push('NIGHTLIFE: ' +
+            t.nightlife.map(v => v.name + (v.hood ? ' (' + v.hood + ')' : '')).join('; '));
+        }
+        if (t.nightlifeMeta && t.nightlifeMeta.vibe) {
+          sceneBits.push('NIGHT META: volume ' + (t.nightlifeMeta.volume ?? '—') +
+            ', vibe ' + t.nightlifeMeta.vibe + ', movement ' + (t.nightlifeMeta.movement || '—'));
+        }
+        if ((t.cityEvents || []).length) sceneBits.push('CITY EVENTS: ' + t.cityEvents.join('; '));
+        if ((eveningSlice.signals && eveningSlice.signals.sightings || []).length) {
+          for (const s of eveningSlice.signals.sightings.slice(0, 3)) {
+            sceneBits.push('SIGHTING: ' + (s.name || '?') + (s.venue ? ' @ ' + s.venue : ''));
+          }
+        }
+      }
+      ask = 'You\'re ' + asker.name + '. This is the evening-life pulse you\'re writing into — named places only:\n' +
+        'PULSE: ' + (story.angle || story.label) +
+        (story.pulseClass ? '\nCLASS: ' + story.pulseClass : '') +
+        (story.hookLine ? '\nHOOK: ' + story.hookLine : '') +
+        (story.venue || story.named ? '\nNAMED: ' + (story.venue || story.named) : '') +
+        (brief.names.length ? '\nNAMES (packet only — do not invent):\n' +
+          brief.names.map(n => '  - ' + n).join('\n') : '') +
+        (story.hood ? '\nWHERE: ' + story.hood : '') +
+        (sceneBits.length ? '\nEVENING PACK:\n' + sceneBits.join('\n') : '') +
+        (approach ? '\n\n' + approach : '') +
+        (asker._wallSnippet ? '\n\n' + asker._wallSnippet : '') +
+        '\n\nIn your own voice: which named room or sighting are you standing in, what is true there tonight, ' +
+        'and what question or image ends the piece? Never invent venues or employees. One pulse. Not multi-voice culture average.';
     } else if (persona && story) {
       const sceneBits = [];
       if (jaxSlice && jaxSlice.scene) {
@@ -867,6 +1007,20 @@ async function runAngle(assign) {
       players: pslayerSlice.players,
       scene: pslayerSlice.scene,
       candidates: (pslayerSlice.candidates || []).slice(0, 6)
+    } : null,
+    eveningSlice: eveningSlice && !eveningSlice.empty ? {
+      pulse: eveningSlice.pulse,
+      recommend: eveningSlice.recommend,
+      prewrite: eveningSlice.prewrite,
+      texture: eveningSlice.texture,
+      signals: {
+        fameCount: eveningSlice.signals && eveningSlice.signals.fameCount,
+        sightingCount: eveningSlice.signals && eveningSlice.signals.sightingCount,
+        sightings: (eveningSlice.signals && eveningSlice.signals.sightings || []).slice(0, 6)
+      },
+      scene: eveningSlice.scene,
+      candidates: (eveningSlice.candidates || []).slice(0, 8),
+      perSeat: eveningSlice.perSeat
     } : null,
     reporterWall: wallMeta,
     canonResearch,                                    // Task 2.5.3 §2: ≥3 validated canon facts + tool trace

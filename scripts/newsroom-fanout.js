@@ -405,11 +405,53 @@ async function buildFanout(date) {
     }
   }
 
+  // grok pipeline.52: enrich culture evening consumers with evening-life pack.
+  let eveningEnrich = { enriched: false, reason: 'none', seats: [] };
+  if (cycle != null) {
+    try {
+      const {
+        enrichAssignment: enrichEvening,
+        buildEveningSlice,
+        writeEveningSlice,
+        isEveningConsumer
+      } = require(path.join(__dirname, 'buildEveningSlice'));
+      for (let i = 0; i < assignments.length; i++) {
+        if (!isEveningConsumer(assignments[i])) continue;
+        const next = enrichEvening(assignments[i], cycle);
+        if (next && next.eveningSlice) {
+          assignments[i] = next;
+          eveningEnrich.enriched = true;
+          eveningEnrich.seats.push({
+            persona: next.persona || next.popid,
+            bag: next.bag,
+            pulse: next.pulse && next.pulse.className,
+            score: next.pulse && next.pulse.score
+          });
+        }
+      }
+      try {
+        const slice = buildEveningSlice(cycle);
+        writeEveningSlice(cycle, slice);
+      } catch (_) { /* non-fatal */ }
+      if (!eveningEnrich.enriched) {
+        eveningEnrich.reason = 'no evening-consumer assignment in rota';
+      } else {
+        eveningEnrich.reason = 'seats=' + eveningEnrich.seats.length;
+        console.error('[fanout] EVENING LIFE — ' + eveningEnrich.reason +
+          ' ' + eveningEnrich.seats.map(s => s.persona + '/' + s.bag + ':' + s.pulse).join(', '));
+      }
+    } catch (e) {
+      eveningEnrich = { enriched: false, reason: 'error: ' + e.message, seats: [] };
+      console.error('[fanout] evening slice enrich skipped: ' + e.message);
+    }
+  }
+
   const seedless = assignments.filter(a => !a.story).length;
   return { date, cycle, quotas: DAILY_QUOTAS, assignments, shortfalls,
     seedless, signalMissing: !signal,   // loud in the file too — the 06:00 digest and any reader sees a seedless day
     stinkForce,
     pslayerEnrich,
+    eveningEnrich,
     builtAt: new Date().toISOString() };
 }
 

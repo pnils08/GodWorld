@@ -79,7 +79,7 @@ Shipped exemplars: Jax (stink substrate + firebrand overlay), P Slayer (sports f
   3. Write `output/slices/c{N}/evening.md` + `output/cron-compare/evening_slice_c{N}.json`.
   4. Persona overlay: recommend which consumer bag fits top pulse (kitchen vs arts vs lifestyle vs ground) without forcing all four.
 - **Verify:** `node scripts/buildEveningSlice.test.js` PASS; `node scripts/buildEveningSlice.js --cycle 102` names venues from C102 summary (e.g. The 44th Table, KONO Cocktails).
-- **Status:** [ ] not started
+- **Status:** [x] done (grok 2026-08-08) — builder + tests + cron inject + fanout enrich
 
 ### Task 2: Economic / storefront pack (P0)
 
@@ -171,9 +171,11 @@ Shipped exemplars: Jax (stink substrate + firebrand overlay), P Slayer (sports f
 ## Status log
 
 - 2026-08-08 (grok) — Plan filed from research; ready to build Task 1 when session continues.
+- 2026-08-08 (grok) — Task 1 shipped: `scripts/buildEveningSlice.js` + test; C102 top pulse quiet-nightlife @ KONO Cocktails; recommends Sharon lifestyle; per-seat fit (Mason→44th Table); wired cron-desk-run culture inject + newsroom-fanout enrich. NEXT: Task 2 economic pack.
 
 ---
 
 ## Changelog
 
 - 2026-08-08 (grok) — Initial plan; pipeline.52; Hal locked as sports historian on shared sports substrate with Anthony; evening + economic P0.
+- 2026-08-08 (grok) — Task 1 Evening life pack shipped.

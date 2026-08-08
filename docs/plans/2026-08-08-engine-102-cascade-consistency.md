@@ -70,8 +70,8 @@ pointers:
 
 - **Files:** `phase03-population/updateNeighborhoodDemographics.js`, `phase06-analysis/applyMigrationDrift.js` — modify (from `output/kimi/engine102/` proposals)
 - **Steps:** review proposal → apply → sandbox bench fire → confirm migration sum invariant ±10%.
-- **Verify:** bench cycle report; `rg "400000|/ 17" phase03-population phase06-analysis` → empty.
-- **Status:** [ ] not started — **owner: engine-sheet**
+- **Verify:** bench cycle report; `rg "/ 17" phase03-population` → empty; `400000` remains ONLY as the documented final-guard fallback in applyMigrationDrift (kimi README's "grep empty" expectation was wrong — removing the guard risks divide-by-zero in migrationPercent when sheet AND config are absent).
+- **Status:** [x] done (2026-08-08, engine-sheet, S361) — commit `4f7f934b`; bench fire abs C105 on SANDBOX 0720 (deployment @32) clean, 0 error rows. **Invariant PASS: Σ hood deltas 1164 vs city migration 1097 = +6.1%** (pre-fix error was ~+33%). Analytic note: outflow cycles sum exactly; inflow cycles carry +7.5% systematic from NEIGHBORHOOD_PROFILES age mods (eff 0.975–1.19/hood) — inside band but only 2.5pts margin; if a future bench breaches ±10%, the bounded fix is normalizing the inflow split by per-hood eff.
 
 ### Task 4: World_Config key rows (engine-sheet or Mike — Sheet write)
 
@@ -120,3 +120,4 @@ pointers:
 
 - 2026-08-08 (kimi) — Initial draft on Mike's go, per the five-pass cascade review with kimi amendments. kimi builds Tasks 1–2 (+8 later); engine-sheet lands/deploys substrate Tasks 3–7.
 - 2026-08-08 (kimi) — Tasks 1–2 complete same session: `scripts/cascadeAudit.js` + first report (three denominators measured, 3 invariant FAILs quantified, East Oakland ND gap identified); W2a/W2b patch proposals in `output/kimi/engine102/` with verified line refs. Handoff to engine-sheet for Tasks 3–7.
+- 2026-08-08 (engine-sheet, S361) — Task 3 done: W2a landed (`4f7f934b`), bench C105 clean, invariant PASS +6.1%. Detail in Task 3 status.

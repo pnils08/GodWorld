@@ -35,38 +35,51 @@ Apply instructions in this order:
 If two repository sources conflict, stop and report the conflict. Do not silently
 choose one or rewrite either source.
 
-## Required boot-reading order
+## Boot and orientation (proportional — do not dump context)
 
-Before making claims about the repository or proposing changes, read these files
-in order:
+Default is **minimal**. Do not load a fixed doc stack into every session.
+Search and open only what the current request needs. Tokens spent orienting
+are tokens not spent on the task.
 
-1. `CLAUDE.md` — project grounding and Claude-owned operating context; read-only.
-2. `CONTEXT.md` — canonical project vocabulary.
-3. `GodWorld_My_Oakland.md` — operating doctrine and simulation feedback loop.
-4. `docs/index.md` — documentation catalog and lifecycle status.
-5. `docs/SCHEMA.md` — documentation shape, placement, and update rules.
-6. `docs/STACK.md` — services, providers, storage, and runtime components.
-7. `docs/OPERATIONS.md` — documented processes, schedules, and runbooks.
-8. `docs/EDITION_PIPELINE_DEEP_DISPATCH.md` — deep-dispatch pipeline reference.
-9. `docs/MODEL_HIERARCHY.md` — model responsibilities and agent-tier boundaries.
-10. `docs/engine/ROLLOUT_PLAN.md` — canonical open-work tracker.
+### Always (cheap)
 
-Then run:
+1. This `AGENTS.md` (harness-loaded project rules — do not re-read unless
+   checking a clause).
+2. SessionStart hook output when present (PIN + NEXT lines). Follow it; do not
+   re-detect or re-plan boot.
+3. `git status --short --branch` before claiming workspace state or changing
+   files.
 
-```bash
-git status --short --branch
-```
+For a narrow, fully specified task (run a named script, read a file, collect
+outputs), stop here and go straight to the task plus its directly-linked files.
 
-Before task work, read only the task-specific plans, ADRs, contracts, scripts,
-and tests linked from the index or rollout tracker.
+### On demand by task surface
 
-For a narrow, low-risk task the builder fully specifies (run a named script,
-read a file, collect outputs), skip the full boot-read and go straight to the
-task plus its directly-linked context. Reserve the full boot for claims about
-the repository or non-trivial changes.
+Open a reference only when the work lands on it:
 
-Do not run memory, boot, publishing, civic, edition, deployment, or production
-skills merely to orient yourself.
+| Need | Open |
+|------|------|
+| Canonical vocabulary / naming | `CONTEXT.md` |
+| What GodWorld is / sim feedback loop | `GodWorld_My_Oakland.md` |
+| Claude-owned project grounding (read-only) | `CLAUDE.md` |
+| "What doc exists about X" | **grep** `docs/index.md` — never load the whole catalog |
+| New/edited MD shape, frontmatter, registration | `docs/SCHEMA.md` |
+| Services, providers, PM2, runtime layout | `docs/STACK.md` |
+| Schedules, runbooks, live automation | `docs/OPERATIONS.md` |
+| Newsroom / deep-dispatch / edition path | `docs/EDITION_PIPELINE_DEEP_DISPATCH.md` |
+| Model tiers / agent-boundary claims | `docs/MODEL_HIERARCHY.md` |
+| Open tracked work / multi-session handoff | `docs/engine/ROLLOUT_PLAN.md` (+ owning plan) |
+
+Before non-trivial work, also read the task-specific plans, ADRs, contracts,
+scripts, and tests linked for *this* task — not every link in the index.
+
+### Explicitly do not
+
+- Blindly open STACK, deep-dispatch, SCHEMA, OPERATIONS, MODEL_HIERARCHY, or
+  ROLLOUT at every session start.
+- Treat `docs/index.md` as a boot document; it is a catalog query surface.
+- Run memory, boot, publishing, civic, edition, deployment, or production
+  skills merely to orient yourself.
 
 ## Canonical terminology
 

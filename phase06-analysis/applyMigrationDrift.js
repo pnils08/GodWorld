@@ -1,9 +1,14 @@
 /**
  * ============================================================================
- * applyMigrationDrift_ v2.7
+ * applyMigrationDrift_ v2.8-W2a
  * ============================================================================
  *
  * CONNECTED: Reads ctx.summary.economicMood from economicRippleEngine.
+ *
+ * v2.8-W2a Changes (engine.102):
+ * - Stale 400000 population constant removed; totalPopulation reads live from
+ *   World_Population, falling back to ctx.config.migrationPopulationFallback,
+ *   then 400000 as final guard.
  *
  * v2.7 Changes:
  * - rand() fallback now prefers ctx.rng over Math.random()
@@ -130,7 +135,8 @@ function applyMigrationDrift_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   var popSheet = ctx.ss ? ctx.ss.getSheetByName('World_Population') : null;
   var worldMig = 0;
-  var totalPopulation = 400000;
+  // W2a (engine.102): hardcoded 400000 removed. Start from config fallback if present.
+  var totalPopulation = Number(ctx.config.migrationPopulationFallback) || 400000;
   var sheetEmployment = 0.91;
   var sheetEconomy = 'stable';
 
@@ -142,11 +148,17 @@ function applyMigrationDrift_(ctx) {
       var idx = function(n) { return header.indexOf(n); };
 
       worldMig = Number(row[idx('migration')] || 0);
-      totalPopulation = Number(row[idx('totalPopulation')] || 400000);
+      // W2a: live read from WP, then config fallback, then final guard.
+      totalPopulation = Number(row[idx('totalPopulation')] ||
+                               ctx.config.migrationPopulationFallback || 400000);
       sheetEmployment = Number(row[idx('employmentRate')] || 0.91);
       sheetEconomy = (row[idx('economy')] || 'stable').toString();
     }
   }
+
+  Logger.log('applyMigrationDrift_: totalPopulation=' + totalPopulation +
+             ' worldMig=' + worldMig + ' (fallback source: ' +
+             (ctx.config.migrationPopulationFallback ? 'World_Config' : 'hardcoded 400000') + ')');
 
   // ═══════════════════════════════════════════════════════════════════════════
   // v2.4: NEIGHBORHOOD_MAP PULL

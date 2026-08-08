@@ -1,9 +1,12 @@
 /**
  * ============================================================================
- * updateNeighborhoodDemographics_ v1.1
+ * updateNeighborhoodDemographics_ v1.2-W2a
  * ============================================================================
  *
  * Tier 3.2 Implementation: Phase 3 (Population) demographics integration.
+ *
+ * v1.2-W2a (engine.102): migration divisor is the live ND hood count with
+ * Σ inflowMod normalization — Σ hood migration deltas ≈ city migration.
  *
  * Updates Neighborhood_Demographics based on:
  * - Births/deaths (from World_Population changes)
@@ -79,6 +82,29 @@ function updateNeighborhoodDemographics_(ctx) {
   // Determine neighborhood-specific modifiers based on calendar context
   var neighborhoodModifiers = buildNeighborhoodDemographicModifiers_(holiday, isFirstFriday, isCreationDay, sportsSeason);
 
+  // W2a (engine.102): pre-compute live hood count and total inflowMod for
+  // migration normalization. The loaded demographics object is the canonical
+  // hood set — this function writes the ND layer, so it counts ND hoods.
+  var liveHoodNames = [];
+  var inflowModSum = 0;
+  for (var hName in demographics) {
+    if (!demographics.hasOwnProperty(hName)) continue;
+    liveHoodNames.push(hName);
+    var hModifier = neighborhoodModifiers[hName] || { inflowMod: 1, outflowMod: 1 };
+    inflowModSum += Number(hModifier.inflowMod) || 0;
+  }
+  var liveHoodCount = liveHoodNames.length;
+  if (liveHoodCount === 0) {
+    Logger.log('updateNeighborhoodDemographics_: no live neighborhoods, defaulting to 1');
+    liveHoodCount = 1;
+  }
+  if (inflowModSum === 0) {
+    Logger.log('updateNeighborhoodDemographics_: inflowModSum is zero, defaulting to live hood count');
+    inflowModSum = liveHoodCount;
+  }
+  Logger.log('updateNeighborhoodDemographics_: liveHoodCount=' + liveHoodCount +
+             ' inflowModSum=' + inflowModSum + ' | Cycle ' + cycle);
+
   // Apply changes to each neighborhood
   for (var neighborhood in demographics) {
     if (!demographics.hasOwnProperty(neighborhood)) continue;
@@ -93,8 +119,16 @@ function updateNeighborhoodDemographics_(ctx) {
     // ─────────────────────────────────────────────────────────────────────────
     // MIGRATION EFFECTS
     // ─────────────────────────────────────────────────────────────────────────
-    // Distribute migration across neighborhoods based on character
-    var neighborhoodMigration = Math.round(migration / 17 * modifier.inflowMod);
+    // W2a (engine.102): divisor was a constant 17 from the 17-hood era — live
+    // ND has 21 hoods, so the hood layer over-allocated ~1.24x before holiday
+    // mods. Divisor is now the live hood count, normalized by Σ inflowMod so
+    // Σ hood deltas ≈ city migration (exact modulo rounding); with all mods at
+    // 1.0 this collapses to migration / liveHoodCount, and holiday mods
+    // self-temper the denominator.
+    var meanInflowMod = inflowModSum / liveHoodCount;
+    var neighborhoodMigration = Math.round(
+      (migration / liveHoodCount) * (modifier.inflowMod / meanInflowMod)
+    );
 
     if (neighborhoodMigration > 0) {
       // Inflow: distribute by age profile
@@ -225,7 +259,7 @@ function updateNeighborhoodDemographics_(ctx) {
   }
 
   ctx.summary = S;
-  Logger.log('updateNeighborhoodDemographics_ v1.1: Updated ' + Object.keys(demographics).length + ' neighborhoods | Cycle ' + cycle);
+  Logger.log('updateNeighborhoodDemographics_ v1.2-W2a: Updated ' + Object.keys(demographics).length + ' neighborhoods | Cycle ' + cycle);
 }
 
 

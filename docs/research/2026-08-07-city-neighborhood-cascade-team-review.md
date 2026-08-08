@@ -324,16 +324,30 @@ Prior reviewers filled most of the original §8. **Your job is dissent + missed 
 
 ---
 
-## Kimi review checklist (fill in your pass)
+## Kimi review checklist (pass 5, 2026-08-08 — FILLED)
 
-- [ ] Layer map + hospital status still accurate?
-- [ ] Cascade lock city→hood→citizen — adopt / amend?
-- [ ] Must-have invariants — adopt / amend numbers?
-- [ ] W1→W6 order — adopt / reorder?
-- [ ] News ban scope — yes / soft / scoped?
-- [ ] World_Config key draft (optional but valuable)
-- [ ] Missed ripples / writers / consumers listed
-- [ ] Residual risks you would block plan on
+- [x] **Layer map + hospital status still accurate?** Yes on spot-checks: `/17` hardcode confirmed `updateNeighborhoodDemographics.js:97`; `400000` hardcode confirmed `applyMigrationDrift.js:133` (with a second fallback at `:145`); city-illness feed confirmed `generationalEventsEngine.js:1262` — **which carries its own `|| 0.05` fallback**, same free-number class as the realism audit's 0.91 employment fallback (see missed ripples). NM=22 live vs ND=21 confirmed; the missing-hood identity is a W1 deliverable.
+- [x] **Cascade lock city→hood→citizen — adopt / amend?** **Adopt with one amendment: no direct city→citizen hop, even for crises.** A citywide crisis (pandemic-class) should express as universal hood modulation — the city event raises every hood's mod, citizen dose stays hood-scoped. One fork point, no exception channel to rot. Storytelling loses nothing; the mechanism stays single.
+- [x] **Must-have invariants — adopt / amend numbers?** **Amend invariant 2's window.** The paper's own math (§4.2) says the ±3/hood/cycle chase closes a ~1,500-person gap in ~24 cycles; a 10-cycle convergence window alarms against by-design lag. Set the window to ≥25 cycles or raise the chase clamp — but don't ship an invariant that fires when the system is healthy. Also: denominators must use live hood count post-W2a, and the ND-21-vs-NM-22 reconciliation must land before any invariant computes hood sums, or the invariant bakes in the drift it measures.
+- [x] **W1→W6 order — adopt / reorder?** **Reorder one: W2a parallel with W1, not after.** Two proven hardcodes (wrong divisor, stale constant) are fix-on-sight; landing them first makes W1's measurements truthful instead of measuring known-broken math. Rest of order adopted.
+- [x] **News ban scope — yes / soft / scoped?** **Scoped, and extended.** Gate illness/employment/crisis *rate* leads until support; migration counts may run as labeled flows. Extension: the ban must cover the **dashboard** — see missed ripples.
+- [x] **World_Config key draft:** (camelCase per ADR-0015) `illnessCalmStep`, `illnessStepUp`, `illnessStepDown`, `illnessCap`, `illnessSupportThreshold` (0.08), `illnessSupportCycles` (3), `employmentFloor`, `employmentAttractor`, `employmentStep`, `prosperityEarnedOnly` (bool gate on the 0.90–0.93 attractor), `migrationHoodDivisor` ('liveCount'), `migrationClampLow`, `migrationClampHigh`, `hospitalBaseCapacity`, `hospitalLoadPerSick`, `hospitalTalkbackGain`.
+- [x] **Missed ripples / writers / consumers listed** — below.
+- [x] **Residual risks you would block plan on** — none blocking; two watch items below.
+
+### Missed ripples (the pass-5 contribution)
+
+1. **The dashboard is now a publication surface and W5 doesn't name it.** As of 2026-08-04 the dashboard renders `Neighborhood_Map` live (CITY tab, WORLD choropleth) — it will narrate dice as census with a prettier face, exactly the §4.4 doctrine failure. Both flagged defects this week (East Oakland's zeroed row, the /17 over-allocation's 1.24×) were *surfaced by the visual layer*. W5 scope should read "media / civic / dashboard," and once the support rule exists, dashboard metrics should carry a provenance chip (dice vs supported) — cheap, since every metric already flows through one API.
+2. **The support rule must reach the cron layer or illness isn't *lived*.** Builder-direct 2026-08-04 (loop doctrine, filed in [[2026-08-03-game-environment-review]] addendum): sheets are persistence, the cron is life. W3's dose raises ledger sick statuses — but `lib/wakePerception.js` reads bonds and LifeHistory milestones, not `HealthCause`/hospital status directly. A hospitalized citizen should wake *changed*, not just row-changed. Add to W3 scope: wake-perception health read. Otherwise the support rule passes on paper while the citizens never feel the plague the city face is screaming about — the same failure at the experience layer.
+3. **W2b should sweep all drift fallbacks, not just steps/caps.** `generationalEventsEngine.js:1262`'s `|| 0.05`, the realism audit's `0.91` employment fallback (`updateNeighborhoodDemographics.js:68`), the `400000` pair at `applyMigrationDrift.js:133,145` — one class of defect (silently plausible constants), four known sites. A fallback grep pass belongs in W2b.
+4. **Sickness has a social layer the dose math ignores.** Illness touching only Status misses bonds: a sick partner should show up in family wakes. This is engine.94's grief-consumer pattern applied to health — not a blocker, a note that W3's dose creates the material the cron layer consumes, and the bond web (live on the dashboard as of 2026-08-04) is where it becomes visible.
+
+### Watch items (not blockers)
+
+- **W2a ordering hazard:** normalize by live hood count *after* identifying the ND-vs-NM missing hood, or the divisor fix re-bakes the drift.
+- **engine.99 overlap:** the two-hood-sheet integrity hazard (Q8) is already engine.99 territory (canonical hood set + drift detector). W1's audit should consume engine.99's canonical set when it lands rather than minting a third hood list.
+
+**Kimi verdict: adopt with amendments** — cascade lock (crisis-through-hoods amendment), invariant window fixed to match the paper's own convergence math, W2a parallel to W1, W5 extended to dashboard, W3 extended to wake perception, W2b extended to the fallback class, key draft offered. Plan (engine.102) is clear to file when Mike confirms order.
 
 ---
 
@@ -346,7 +360,7 @@ Prior reviewers filled most of the original §8. **Your job is dissent + missed 
 | 3 | Mike S360 | **city→hood→citizen** strict; 1:443 at hood; per-metric WP; WP history defect; hospital wiring not greenfield |
 | 4 | grok second pass | Dose math E≈1–2/cycle; multi employment graphs; weather siblings; reconcile Mike vs C-vote; W2a/b + W3 reroute order |
 | 4b | engine-sheet S360 bench fires | Bench 0720 synced + HEAD pushed, C103 cold + C104 warm fired (Mike-direct "fire on sandbox"). PROVEN: East Oakland row self-heals Phase 8; hospital path live (3 admissions, multi-cycle lifecycle); Content_Telemetry + traj DSL fire; 9 fresh mints got 16 first-cycle events; illness 9.85→10.24%. NEW GAP: hospital `Cause` blank on all rows — HealthCause chain never feeds `ev.cause` (add to W4). CAUGHT+FIXED+PROD-PUSHED: (a) `.agents/**` Node file killed the whole Apps Script load (`require is not defined`) — live carried it since S357, Sunday would have died at load; `.claspignore` fixed; (b) S357 youthActivities retirement deleted `ACADEMIC_CALENDAR` while runYouthEngine references the bare identifier — Phase5-Youth threw; const restored inline (A7 class: grep identifiers, not filenames). C104: 0 errors, 217 youth/school rows. Bench-verify hygiene: bench-only tabs survive sync, so cycle numbers RECUR across eras — filter proofs by write-era, not AdmitCycle. |
-| 5 | **kimi (you)** | This pass |
+| 5 | **kimi** | Adopt-with-amendments pass (2026-08-08): crisis-through-hoods (no city→citizen hop), invariant-window fix to match the paper's own 24-cycle convergence math, W2a parallel to W1, W5 extended to the dashboard as a publication surface, W3 extended to wake perception (loop doctrine), W2b extended to the free-number fallback class, World_Config key draft. Spot-verified /17, 400k, and the illness feed's 0.05 fallback. Clear to file engine.102 plan on Mike's order confirmation. |
 
 Full narrative of passes 2–4 lived in earlier file revisions; body above is the merged truth.
 
@@ -369,3 +383,4 @@ Full narrative of passes 2–4 lived in earlier file revisions; body above is th
 - 2026-08-07 (grok) — Second-pass re-review: agree/dissent, missed ripples, dose math, build order.
 - 2026-08-07 (grok) — **Kimi-facing rewrite:** fold all corrections into §§1–9; §10 open for Kimi; Appendix A provenance; checklist retargeted.
 - 2026-08-07 (engine-sheet S360) — Bench proving fires C103/C104 (Appendix A pass 4b): hospital path + East Oakland self-heal + mints proven; 2 live-fire landmines fixed and prod-pushed; hospital Cause-blank gap added to W4 scope.
+- 2026-08-08 (kimi) — Pass 5 filled: adopt-with-amendments review complete; checklist answered, 4 missed ripples (dashboard-as-publication, wake-perception health read, fallback-class sweep, illness→bond social layer), 2 watch items; verdict adopt with amendments, engine.102 plan clear to file on Mike's order confirmation.

@@ -441,6 +441,44 @@ async function buildFanout(date) {
     }
   }
 
+  // grok pipeline.52: enrich business desk with economic / storefront pack.
+  let economicEnrich = { enriched: false, reason: 'none' };
+  if (cycle != null) {
+    try {
+      const {
+        enrichAssignment: enrichEconomic,
+        buildEconomicSlice,
+        writeEconomicSlice,
+        isBusinessDesk
+      } = require(path.join(__dirname, 'buildEconomicSlice'));
+      for (let i = 0; i < assignments.length; i++) {
+        if (!isBusinessDesk(assignments[i])) continue;
+        const next = enrichEconomic(assignments[i], cycle);
+        if (next && next.economicSlice) {
+          assignments[i] = next;
+          economicEnrich = {
+            enriched: true,
+            reason: 'pulse=' + (next.pulse && next.pulse.className) +
+              ' score=' + (next.pulse && next.pulse.score) +
+              ' hood=' + (next.pulse && next.pulse.hood)
+          };
+        }
+      }
+      try {
+        const slice = buildEconomicSlice(cycle);
+        writeEconomicSlice(cycle, slice);
+      } catch (_) { /* non-fatal */ }
+      if (!economicEnrich.enriched) {
+        economicEnrich.reason = 'no business desk assignment in rota';
+      } else {
+        console.error('[fanout] ECONOMIC STOREFRONT — ' + economicEnrich.reason);
+      }
+    } catch (e) {
+      economicEnrich = { enriched: false, reason: 'error: ' + e.message };
+      console.error('[fanout] economic slice enrich skipped: ' + e.message);
+    }
+  }
+
   // grok pipeline.52: enrich culture evening consumers with evening-life pack.
   let eveningEnrich = { enriched: false, reason: 'none', seats: [] };
   if (cycle != null) {
@@ -488,6 +526,7 @@ async function buildFanout(date) {
     stinkForce,
     pslayerEnrich,
     anthonyEnrich,
+    economicEnrich,
     eveningEnrich,
     builtAt: new Date().toISOString() };
 }

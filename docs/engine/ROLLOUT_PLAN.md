@@ -54,7 +54,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | pipeline.49 | Civic solo seats (grok) — five persona stacks + bags; multi-voice civic-desk legacy for headless; Claude lands agents | in-progress | research-build | [[../plans/2026-08-07-civic-solo-seats]] |
 | pipeline.50 | Culture + sports-support solos (grok) — 6 culture + Tanya/Simon/Marbury; Marbury deep-analysis bag for canon path | in-progress | research-build | [[../plans/2026-08-07-culture-sports-support-solo-seats]] |
 | pipeline.51 | NotebookLM audio-direction injection + archive-query canon hook in desk wake (51b) — landed S358; watching next scheduled daily + M-F + Sat runs | in-progress | engine-sheet | [[../research/2026-08-07-notebooklm-audio-overview-direction]] |
-| pipeline.52 | Journalist heat-slice packs (grok) — evening + sports substrate + Anthony shipped; next economic then Hal | in-progress | research-build | [[../plans/2026-08-08-journalist-heat-slice-packs]] |
+| pipeline.52 | Journalist heat-slice packs (grok) — evening + economic + sports substrate + Anthony shipped; next Hal | in-progress | research-build | [[../plans/2026-08-08-journalist-heat-slice-packs]] |
 
 ### engine.* — Engine code, ledger, schema
 

@@ -92,7 +92,7 @@ Shipped exemplars: Jax (stink substrate + firebrand overlay), P Slayer (sports f
   2. Surface neighborhood rising/cooling **with** named businesses when available; never invent Employee_Count or Key_Personnel.
   3. Artifacts: `output/slices/c{N}/economic.md` + `output/cron-compare/economic_slice_c{N}.json`.
 - **Verify:** offline tests; dry fanout enrich path non-fatal if empty.
-- **Status:** [ ] not started
+- **Status:** [x] done (grok 2026-08-09) — builder + tests + cron/fanout; C102 West Oakland cooling + named ledger/evening businesses
 
 ### Task 3: Shared sports substrate module (P1)
 
@@ -149,13 +149,13 @@ Shipped exemplars: Jax (stink substrate + firebrand overlay), P Slayer (sports f
 
 ---
 
-## Build order (Mike-agreed; revised 2026-08-08)
+## Build order (Mike-agreed; revised 2026-08-09)
 
 1. Task 1 Evening — **shipped**  
 2. Task 3 Sports substrate extract — **shipped** (with Anthony)  
 3. Task 4 Anthony — **shipped** (pulled ahead of economic per Mike)  
-4. Task 2 Economic — next P0  
-5. Task 5 Hal  
+4. Task 2 Economic — **shipped**  
+5. Task 5 Hal — next  
 6. Tasks 6–7 as capacity allows  
 
 ---
@@ -173,6 +173,7 @@ Shipped exemplars: Jax (stink substrate + firebrand overlay), P Slayer (sports f
 - 2026-08-08 (grok) — Plan filed from research; ready to build Task 1 when session continues.
 - 2026-08-08 (grok) — Task 1 shipped: `scripts/buildEveningSlice.js` + test; C102 top pulse quiet-nightlife @ KONO Cocktails; recommends Sharon lifestyle; per-seat fit (Mason→44th Table); wired cron-desk-run culture inject + newsroom-fanout enrich. NEXT: Task 2 economic pack.
 - 2026-08-08 (grok) — Mike moved Anthony up chain. Task 3 substrate + Task 4 Anthony shipped: `sportsSubstrate.js`, `buildAnthonySlice.js`; C102 pulse roster-architecture (Kelley resign) score 89, bag tools 1+2; P Slayer tests still PASS. Economic remains next P0; Hal after.
+- 2026-08-09 (grok) — Task 2 economic pack shipped: `buildEconomicSlice.js`; C102 West Oakland cooling with Oakmesh / WOCC / Crisis Coffee named from ledger+evening; cron business desk + fanout enrich. NEXT: Task 5 Hal.
 
 ---
 
@@ -181,3 +182,4 @@ Shipped exemplars: Jax (stink substrate + firebrand overlay), P Slayer (sports f
 - 2026-08-08 (grok) — Initial plan; pipeline.52; Hal locked as sports historian on shared sports substrate with Anthony; evening + economic P0.
 - 2026-08-08 (grok) — Task 1 Evening life pack shipped.
 - 2026-08-08 (grok) — Task 3 sports substrate + Task 4 Anthony analytic pack shipped (order revised).
+- 2026-08-09 (grok) — Task 2 Economic / storefront pack shipped.

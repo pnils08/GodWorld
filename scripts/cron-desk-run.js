@@ -326,6 +326,42 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
     L.push('like. That color is the job — invent it freely so long as it contradicts nothing.');
     L.push('');
   }
+  // grok pipeline.52: economic / storefront pack for business desk (shared substrate).
+  if (desk === 'business') {
+    try {
+      const { loadEconomicSlice } = require(path.join(__dirname, 'buildEconomicSlice'));
+      const es = loadEconomicSlice(cycle);
+      if (es && !es.empty) {
+        L.push('### ECONOMIC / STOREFRONT SLICE (business pack — not civic process filler)');
+        L.push('PULSE: ' + es.pulse.className + ' · score ' + es.pulse.score + ' · ' + es.pulse.label);
+        if ((es.pulse.namedBusinesses || []).length) {
+          L.push('NAMED BUSINESSES (sources only): ' + es.pulse.namedBusinesses.join('; '));
+        }
+        if (es.texture) {
+          if ((es.texture.cooling || []).length) {
+            L.push('COOLING: ' + es.texture.cooling.slice(0, 8).join('; '));
+          }
+          if ((es.texture.rising || []).length) {
+            L.push('RISING: ' + es.texture.rising.slice(0, 8).join('; '));
+          }
+          if ((es.texture.venues || []).length) {
+            L.push('EVENING VENUES: ' +
+              es.texture.venues.slice(0, 6).map(v => v.name + (v.hood ? ' (' + v.hood + ')' : '')).join('; '));
+          }
+          if (es.texture.ledgerSource) {
+            L.push('LEDGER SNAPSHOT: ' + es.texture.ledgerCount + ' rows (`' + es.texture.ledgerSource +
+              '`) — headcount only when listed; never invent Employee_Count or Key_Personnel.');
+          }
+        }
+        if (es.prewrite && es.prewrite.anchorFacts) {
+          L.push('ANCHORS:');
+          for (const a of es.prewrite.anchorFacts.slice(0, 6)) L.push('  - ' + a);
+        }
+        if (es.scene && es.scene.colorRoom) L.push('COLOR: ' + es.scene.colorRoom);
+        L.push('');
+      }
+    } catch (_) { /* optional */ }
+  }
   if (persona) {
     // Stance anchor (Phase 2.3, 2026-07-24 tuning fix): the injected lane is
     // EVIDENCE, not assignments. Without this the desk framing dilutes the
@@ -485,6 +521,8 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
       L.push('STANCE: senior photographer. Visual record/prompts. Not prose articles.');
       L.push('ONE visual assignment set — not multi-voice desk average.');
     }
+    // grok pipeline.52: economic pack when this is a business-desk assignment (desk via assignment approach).
+    // (Persona-named inject for culture evening follows; business often has no solo persona.)
     // grok pipeline.52: shared evening-life pack for culture consumers (mason/kai/sharon/maria/graye).
     if (persona.name &&
         /maria\s*keen|elliot\s*graye|kai\s*marston|mason\s*ortega|sharon\s*okafor/i.test(persona.name)) {
@@ -574,12 +612,38 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
   L.push('(read the referenced files with your tools for depth). Do NOT invent events not named here.');
   L.push('');
   L.push('### Your storylines (desk_signal lane)');
+  // S361 — a storyline named people and handed over nothing but their name, so the
+  // writer invented the rest (a 10-year-old became a hardware-store owner of 17
+  // years; residents were invented for a hood the lane named with nobody attached).
+  // Grok's Jax pack already had the answer: attach the ledger profile to the people
+  // in the assignment. Same profilesFor already used for quotes — it simply never
+  // reached this block.
+  const laneProfiles = new Map();
+  {
+    const lanePops = [...new Set(lane.flatMap(e => e.popids || []))];
+    if (lanePops.length) {
+      try {
+        for (const line of require('./canon-name-check').profilesForPopids(lanePops)) {
+          const m = String(line).match(/popid: (POP-\d+)/);
+          if (m) laneProfiles.set(m[1], line);
+        }
+      } catch (_) { /* resolver unavailable — entries still render without profiles */ }
+    }
+  }
   for (const e of lane) {
     const tags = [e.kind, e.hood].filter(Boolean).join(' · ');
     L.push('- ' + (e.label || '(no label)') + (tags ? '  [' + tags + ']' : ''));
     L.push('  ref: ' + e.ref);
+    const known = (e.popids || []).map(p => laneProfiles.get(p)).filter(Boolean);
+    for (const p of known) L.push('    who: ' + p.replace(/; popid: POP-\d+/, ''));
   }
   L.push('');
+  if (laneProfiles.size) {
+    L.push('The `who:` lines are the ledger record — immutable. Never give a named person a job,');
+    L.push('an age, or a history that contradicts them. Street and scene texture around them is');
+    L.push('yours to write; their life is not.');
+    L.push('');
+  }
   if (quotes && quotes.length) {
     L.push('### Citizen sources for this piece — these are REAL people, already interviewed');
     L.push('Quote FROM these people, by name, when you need a resident voice. Do NOT invent other');
@@ -793,6 +857,7 @@ async function runAngle(assign) {
   let pslayerSlice = null;
   let eveningSlice = null;
   let anthonySlice = null;
+  let economicSlice = null;
   const EVENING_SLUGS = {
     'mason-ortega': 1, 'kai-marston': 1, 'sharon-okafor': 1,
     'maria-keen': 1, 'elliot-graye': 1
@@ -841,6 +906,20 @@ async function runAngle(assign) {
       }
     } catch (e) {
       log('anthony slice load failed (non-fatal): ' + e.message);
+    }
+  } else if (desk === 'business') {
+    try {
+      const { loadEconomicSlice } = require(path.join(__dirname, 'buildEconomicSlice'));
+      economicSlice = loadEconomicSlice(cycle);
+      if (economicSlice && !economicSlice.empty) {
+        story = economicSlice.story || story;
+        approach = economicSlice.approach || approach;
+        log('economic slice loaded — pulse ' + economicSlice.pulse.className +
+          ' score ' + economicSlice.pulse.score +
+          ' hood ' + (economicSlice.pulse.hood || '—'));
+      }
+    } catch (e) {
+      log('economic slice load failed (non-fatal): ' + e.message);
     }
   } else if (personaSlug && EVENING_SLUGS[personaSlug]) {
     try {
@@ -956,6 +1035,37 @@ async function runAngle(assign) {
         (asker._wallSnippet ? '\n\n' + asker._wallSnippet : '') +
         '\n\nIn third person: what is the one evaluative claim, which bag tools you ride, and which feed line numbers ' +
         'must appear? Do not open with fan we or Hal elegy. Never invent x-stats. One argument spine.';
+    } else if (desk === 'business' && story && economicSlice && !economicSlice.empty) {
+      const sceneBits = [];
+      if (economicSlice.pulse) {
+        sceneBits.push('PULSE: ' + economicSlice.pulse.className + ' · score ' + economicSlice.pulse.score +
+          ' · ' + economicSlice.pulse.label);
+      }
+      if ((economicSlice.pulse.namedBusinesses || []).length) {
+        sceneBits.push('NAMED BUSINESSES (sources only): ' + economicSlice.pulse.namedBusinesses.join('; '));
+      }
+      if (economicSlice.texture) {
+        if ((economicSlice.texture.cooling || []).length) {
+          sceneBits.push('COOLING HOODS: ' + economicSlice.texture.cooling.slice(0, 6).join('; '));
+        }
+        if ((economicSlice.texture.rising || []).length) {
+          sceneBits.push('RISING HOODS: ' + economicSlice.texture.rising.slice(0, 6).join('; '));
+        }
+      }
+      if (economicSlice.prewrite && economicSlice.prewrite.forbidden) {
+        sceneBits.push('FORBIDDEN: ' + economicSlice.prewrite.forbidden.join('; '));
+      }
+      ask = 'You\'re ' + asker.name + '. This is the economic / storefront pulse — named places only:\n' +
+        'PULSE: ' + (story.angle || story.label) +
+        (story.pulseClass ? '\nCLASS: ' + story.pulseClass : '') +
+        (story.hookLine ? '\nHOOK: ' + story.hookLine : '') +
+        (brief.names.length ? '\nCITIZENS (packet only):\n' + brief.names.map(n => '  - ' + n).join('\n') : '') +
+        (story.hood ? '\nWHERE: ' + story.hood : '') +
+        (sceneBits.length ? '\nSTOREFRONT PACK:\n' + sceneBits.join('\n') : '') +
+        (approach ? '\n\n' + approach : '') +
+        (asker._wallSnippet ? '\n\n' + asker._wallSnippet : '') +
+        '\n\nIn your own voice: which hood or named business is moving, what does the block feel like, ' +
+        'and what must not be invented (employees, owners, counts)? One economic claim. Not civic process filler.';
     } else if (persona && EVENING_SLUGS[personaSlug] && story) {
       const sceneBits = [];
       if (eveningSlice && !eveningSlice.empty) {
@@ -1107,6 +1217,19 @@ async function runAngle(assign) {
       players: anthonySlice.players,
       scene: anthonySlice.scene,
       candidates: (anthonySlice.candidates || []).slice(0, 6)
+    } : null,
+    economicSlice: economicSlice && !economicSlice.empty ? {
+      pulse: economicSlice.pulse,
+      prewrite: economicSlice.prewrite,
+      texture: {
+        rising: economicSlice.texture && economicSlice.texture.rising,
+        cooling: economicSlice.texture && economicSlice.texture.cooling,
+        ledgerCount: economicSlice.texture && economicSlice.texture.ledgerCount,
+        ledgerSource: economicSlice.texture && economicSlice.texture.ledgerSource,
+        venues: (economicSlice.texture && economicSlice.texture.venues || []).slice(0, 8)
+      },
+      scene: economicSlice.scene,
+      candidates: (economicSlice.candidates || []).slice(0, 8)
     } : null,
     reporterWall: wallMeta,
     canonResearch,                                    // Task 2.5.3 §2: ≥3 validated canon facts + tool trace

@@ -67,7 +67,7 @@ pointers:
 - **Files:** `phase05-citizens/updateCivicApprovalRatings.js`, `phase05-citizens/runCivicElectionsv1.js` — modify; `scripts/civicApprovalCeiling.test.js`, `scripts/applyApprovalCeilingConfig.js`, `scripts/applyApprovalCeilingConfig.test.js` — add; `docs/SPREADSHEET.md` — modify; `Civic_Office_Ledger` + `World_Config` — separately approved migration/replay
 - **Steps:** Track post-update high approval every Cycle; use seeded RNG for the approved risk curve; write a bounded, source-owned scandal lifecycle and immediate approval correction; emit a story/ripple hook without inventing allegations; preserve manual statuses; keep the configured election penalty; clear state on election turnover. Persist `HighApprovalStreak`, `AutoScandalUntilCycle`, and `AutoScandalSource` on the office ledger.
 - **Verify:** deterministic unit harness proves validation, streak/chance curve, cap, approval drop, inclusive expiry, manual-status safety, event/ripple output, election penalty, turnover reset, and no `Math.random`; migration harness proves dry-run/confirmation/idempotence/conflict failure
-- **Status:** [ ] local proof complete 2026-08-09 (Codex) — behavior 27/27, migration 17/17, and full offline suite 140/140; SANDBOX 0720 migration/deploy/fire remain
+- **Status:** [ ] sandbox staged 2026-08-09 (Codex) — local proof is clean; migration 8/8 + 3/3 and exact `dda0b129` deployment @40 are verified; attended C114 fire/read-back remains
 
 ### Task 6: Track B design-options doc (research-build, WITH Mike)
 - **Files:** `docs/research/2026-06-20-layered-memory-architecture.md` §S306 — read; this plan — modify
@@ -160,6 +160,7 @@ Per [[../adr/0015-world-config-tunable-values]], these are required key→value 
 - `runCivicElectionsv1.js` reads the configured 25-point scandal penalty and clears all owned state on election turnover so a challenger cannot inherit the incumbent's streak or scandal.
 - `applyApprovalCeilingConfig.js` is dry-run by default and migrates the eight config rows plus three office columns with explicit target/confirmation, pre-write conflict checks, interrupted-prefix recovery, and read-back verification.
 - Local proof: `civicApprovalCeiling.test.js` 27/27; migration contract 17/17; full offline suite 140/140 files; all four changed/new scripts pass `node --check`; no `Math.random` calls in the changed engine files.
+- Sandbox stage: SANDBOX 0720 at C113 accepted and read-back verified all eight config rows plus the three contiguous state columns at T:V. Exact pushed main `dda0b129` changed only the two intended Phase-5 files relative to @39; @40 pull-back matched 171/171 files byte-for-byte with zero test files. Pre-fire state has four of ten elected offices at approval ≥80, all streaks zero, no scandals, and zero C113 engine errors. The token-gated C114 fire/read-back remains; direct `clasp run` is unavailable because this project is not deployed as an API executable.
 
 ---
 
@@ -184,3 +185,4 @@ Per [[../adr/0015-world-config-tunable-values]], these are required key→value 
 - 2026-08-09 — Codex: Mike authorized Codex takeover after Claude left the project. Kimi concurrently landed the Codex-authored core as `8285601d`; Codex added a guarded, replayable grief-config migration and spreadsheet contract and continued SANDBOX 0720 staging with production explicitly out of scope.
 - 2026-08-09 — Codex: Task 3 sandbox stage complete. Exact main `068fc2d6` pull-back matched 171/171 files with no tests; SANDBOX 0720 advanced C112→C113 with config 6/6 retained, zero C113 engine errors, and expected LifeHistory compression. No natural death occurred, so grief-path proof remains the targeted 38/38 harness. Production untouched.
 - 2026-08-09 — Codex: Task 4 designed and Mike-approved after tracing the actual writers. Housing pressure already closes the development half; the every-Cycle approval writer owns the new scandal ceiling. Task 5 passed 27/27 behavior, 17/17 migration, and the 140/140-file offline suite; sandbox proof remains.
+- 2026-08-09 — Codex: Task 5 staged on SANDBOX 0720. Migration read-back is 8/8 config and 3/3 columns; exact main `dda0b129` is deployed @40 with a 171/171 byte-identical pull-back and zero test files. C113 pre-fire state is clean; attended C114 fire remains.

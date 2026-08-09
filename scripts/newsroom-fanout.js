@@ -441,6 +441,42 @@ async function buildFanout(date) {
     }
   }
 
+  // grok pipeline.52: enrich Hal historian sports seat with archive pulse.
+  let halEnrich = { enriched: false, reason: 'none' };
+  if (cycle != null) {
+    try {
+      const {
+        enrichAssignment: enrichHal,
+        buildHalSlice,
+        writeHalSlice
+      } = require(path.join(__dirname, 'buildHalSlice'));
+      for (let i = 0; i < assignments.length; i++) {
+        const next = enrichHal(assignments[i], cycle);
+        if (next && next.halSlice) {
+          assignments[i] = next;
+          halEnrich = {
+            enriched: true,
+            reason: 'pulse=' + (next.pulse && next.pulse.className) +
+              ' score=' + (next.pulse && next.pulse.score) +
+              ' close=' + (next.pulse && next.pulse.closingNote)
+          };
+        }
+      }
+      try {
+        const slice = buildHalSlice(cycle);
+        writeHalSlice(cycle, slice);
+      } catch (_) { /* non-fatal */ }
+      if (!halEnrich.enriched) {
+        halEnrich.reason = 'no hal-richmond assignment in rota';
+      } else {
+        console.error('[fanout] HAL ARCHIVE — ' + halEnrich.reason);
+      }
+    } catch (e) {
+      halEnrich = { enriched: false, reason: 'error: ' + e.message };
+      console.error('[fanout] hal slice enrich skipped: ' + e.message);
+    }
+  }
+
   // grok pipeline.52: enrich business desk with economic / storefront pack.
   let economicEnrich = { enriched: false, reason: 'none' };
   if (cycle != null) {
@@ -526,6 +562,7 @@ async function buildFanout(date) {
     stinkForce,
     pslayerEnrich,
     anthonyEnrich,
+    halEnrich,
     economicEnrich,
     eveningEnrich,
     builtAt: new Date().toISOString() };

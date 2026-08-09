@@ -468,7 +468,38 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
       } catch (_) { /* optional */ }
     } else if (persona.name && /hal\s*richmond/i.test(persona.name)) {
       L.push('STANCE: first-person reflective historian. Present fact then era echo. Literary, not wire.');
-      L.push('Numbers as poetry of time. ONE piece — not multi-voice sports-desk average.');
+      L.push('Numbers as poetry of time. ONE piece — not multi-voice sports-desk average. Never business desk.');
+      // grok pipeline.52: archive pack from shared sports substrate + HAL_ARCHIVE_BAG.
+      try {
+        const { loadHalSlice } = require(path.join(__dirname, 'buildHalSlice'));
+        const hs = loadHalSlice(cycle);
+        if (hs && !hs.empty) {
+          L.push('');
+          L.push('### HAL ARCHIVE SLICE (historian assignment — not fan heat, not Anthony board, not business)');
+          L.push('PULSE: ' + hs.pulse.className + ' · score ' + hs.pulse.score + ' · ' + hs.pulse.label);
+          L.push('CLOSING NOTE: ' + hs.pulse.closingNote);
+          if (hs.bag && hs.bag.modes) {
+            L.push('BAG MODES: ' + hs.bag.modes.map(m => m.id + ' ' + m.name).join('; '));
+          }
+          if (hs.bag && hs.bag.historicalAnchor) L.push('HISTORICAL ANCHOR: ' + hs.bag.historicalAnchor);
+          if (hs.prewrite && hs.prewrite.presentFacts) {
+            L.push('PRESENT FACTS (feed only):');
+            for (const f of hs.prewrite.presentFacts.slice(0, 4)) L.push('  - ' + f);
+          }
+          if (hs.pulse.foilNumber) L.push('RECEIPT (feed only): ' + hs.pulse.foilNumber);
+          if (hs.priorTakes && hs.priorTakes.length) {
+            L.push('PRIOR FILINGS:');
+            for (const p of hs.priorTakes.slice(0, 3)) {
+              L.push('  - C' + (p.cycle != null ? p.cycle : '?') + ' ' + p.headline + ' [' + p.why + ']');
+            }
+          }
+          if (hs.players && hs.players.length) {
+            L.push('PLAYERS: ' + hs.players.slice(0, 6).map(p =>
+              p.name + (p.popid ? ' (' + p.popid + ')' : '')).join('; '));
+          }
+          if (hs.scene && hs.scene.colorRoom) L.push('COLOR: ' + hs.scene.colorRoom);
+        }
+      } catch (_) { /* optional */ }
     } else if (persona.name && /carmen\s*delaine/i.test(persona.name)) {
       L.push('STANCE: third-person civic ledger. Money, clocks, vote math. Accretion not press-release.');
       L.push('ONE piece — not multi-voice civic-desk average.');
@@ -857,6 +888,7 @@ async function runAngle(assign) {
   let pslayerSlice = null;
   let eveningSlice = null;
   let anthonySlice = null;
+  let halSlice = null;
   let economicSlice = null;
   const EVENING_SLUGS = {
     'mason-ortega': 1, 'kai-marston': 1, 'sharon-okafor': 1,
@@ -906,6 +938,20 @@ async function runAngle(assign) {
       }
     } catch (e) {
       log('anthony slice load failed (non-fatal): ' + e.message);
+    }
+  } else if (personaSlug === 'hal-richmond') {
+    try {
+      const { loadHalSlice } = require(path.join(__dirname, 'buildHalSlice'));
+      halSlice = loadHalSlice(cycle);
+      if (halSlice && !halSlice.empty) {
+        story = halSlice.story || story;
+        approach = halSlice.approach || approach;
+        log('hal slice loaded — pulse ' + halSlice.pulse.className +
+          ' score ' + halSlice.pulse.score +
+          ' close ' + (halSlice.pulse.closingNote || '—'));
+      }
+    } catch (e) {
+      log('hal slice load failed (non-fatal): ' + e.message);
     }
   } else if (desk === 'business') {
     try {
@@ -1035,6 +1081,44 @@ async function runAngle(assign) {
         (asker._wallSnippet ? '\n\n' + asker._wallSnippet : '') +
         '\n\nIn third person: what is the one evaluative claim, which bag tools you ride, and which feed line numbers ' +
         'must appear? Do not open with fan we or Hal elegy. Never invent x-stats. One argument spine.';
+    } else if (persona && personaSlug === 'hal-richmond' && story) {
+      const sceneBits = [];
+      if (halSlice && !halSlice.empty) {
+        if (halSlice.pulse) {
+          sceneBits.push('PULSE CLASS: ' + halSlice.pulse.className + ' · score ' + halSlice.pulse.score);
+          sceneBits.push('CLOSING NOTE: ' + halSlice.pulse.closingNote);
+          if (halSlice.pulse.foilNumber) sceneBits.push('RECEIPT (feed): ' + halSlice.pulse.foilNumber);
+        }
+        if (halSlice.bag && halSlice.bag.modes) {
+          sceneBits.push('BAG MODES: ' + halSlice.bag.modes.map(m => m.id + ' ' + m.name).join('; '));
+        }
+        if (halSlice.bag && halSlice.bag.historicalAnchor) {
+          sceneBits.push('HISTORICAL ANCHOR: ' + halSlice.bag.historicalAnchor);
+        }
+        if (halSlice.prewrite && halSlice.prewrite.presentFacts) {
+          sceneBits.push('PRESENT FACTS:');
+          for (const f of halSlice.prewrite.presentFacts.slice(0, 4)) sceneBits.push('  - ' + f);
+        }
+        if (halSlice.priorTakes && halSlice.priorTakes.length) {
+          sceneBits.push('PRIOR FILINGS:');
+          for (const p of halSlice.priorTakes.slice(0, 3)) {
+            sceneBits.push('  - C' + (p.cycle != null ? p.cycle : '?') + ' ' + p.headline);
+          }
+        }
+      }
+      ask = 'You\'re ' + asker.name + '. This is the archive pulse — present fact first, then time:\n' +
+        'PULSE: ' + (story.angle || story.label) +
+        (story.pulseClass ? '\nCLASS: ' + story.pulseClass : '') +
+        (story.closingNote ? '\nCLOSING NOTE: ' + story.closingNote : '') +
+        (story.hookLine ? '\nHOOK: ' + story.hookLine : '') +
+        (brief.names.length ? '\nPLAYERS / NAMES (feed + ledger — do not invent):\n' +
+          brief.names.map(n => '  - ' + n).join('\n') : '') +
+        (story.hood ? '\nWHERE: ' + story.hood : '') +
+        (sceneBits.length ? '\nARCHIVE PACK:\n' + sceneBits.join('\n') : '') +
+        (approach ? '\n\n' + approach : '') +
+        (asker._wallSnippet ? '\n\n' + asker._wallSnippet : '') +
+        '\n\nIn first-person reflective voice: name the present fact, the era echo you will touch, ' +
+        'and which closing note you ride. Not fan we. Not Anthony board. Not business storefront. Not wire copy.';
     } else if (desk === 'business' && story && economicSlice && !economicSlice.empty) {
       const sceneBits = [];
       if (economicSlice.pulse) {
@@ -1217,6 +1301,16 @@ async function runAngle(assign) {
       players: anthonySlice.players,
       scene: anthonySlice.scene,
       candidates: (anthonySlice.candidates || []).slice(0, 6)
+    } : null,
+    halSlice: halSlice && !halSlice.empty ? {
+      pulse: halSlice.pulse,
+      bag: halSlice.bag,
+      prewrite: halSlice.prewrite,
+      friction: halSlice.friction,
+      priorTakes: (halSlice.priorTakes || []).slice(0, 4),
+      players: halSlice.players,
+      scene: halSlice.scene,
+      candidates: (halSlice.candidates || []).slice(0, 6)
     } : null,
     economicSlice: economicSlice && !economicSlice.empty ? {
       pulse: economicSlice.pulse,

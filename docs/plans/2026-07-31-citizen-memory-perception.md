@@ -11,6 +11,7 @@ sources:
 pointers:
   - "[[engine/ROLLOUT_PLAN]] — parent rollout (engine.94)"
   - "[[../research/2026-08-01-simulation-realism-audit]] — build-order step 4 (Track A) / step 7 (Track B gate unchanged); grief_period zero-consumer finding re-verified there"
+  - "[[../adr/0015-world-config-tunable-values]] — approved home and failure contract for grief calibration values"
   - "[[2026-06-23-citizen-perception-immersion-layer]] — research.19; its T3 'read the Pulse' rides this plan's Track B gate"
   - "[[../SCHEMA]] — doc conventions"
   - "[[../index]] — registered same commit"
@@ -48,12 +49,12 @@ pointers:
 - **Files:** `phase04-events/generationalEventsEngine.js`, `phase05-citizens/generateCitizensEvents.js`, `utilities/compressLifeHistory.js`, `utilities/citizenDialMap.js` — read; this plan — modify
 - **Steps:** Design the grief consumer against the actual Phase ordering and persistence seams. Grief should bias toward withdrawal/memorial/reconnection draws for a bounded window, not become permanent identity. Mike sign-off on the proposed event weights and existing-tag dial routing before build.
 - **Verify:** design notes + approved weights/dial routing in Build notes
-- **Status:** [ ] design drafted 2026-08-09 (Codex) — awaiting Mike sign-off on the Task 2 decision box below
+- **Status:** [x] done 2026-08-09 (Codex design; Mike-approved) — `World_Config` owns all six calibration values; code owns the structural invariants and existing-tag dial routing
 
 ### Task 3: Implement grief consumer (engine-sheet)
-- **Files:** `phase04-events/generationalEventsEngine.js`, `utilities/compressLifeHistory.js`, `phase05-citizens/generateCitizensEvents.js`, `scripts/griefPeriod.test.js` — modify/add; `utilities/citizenDialMap.js` — existing tags only unless Task 2 approval changes the routing
-- **Steps:** Implement the approved Task 2 envelope, Phase-9 drain, exact Cycle window, and Phase-5 pool consumption. Keep machine identity in fields/tags rather than parsing prose; preserve `MemoryRegisters.biases` and `.unlived` byte-for-byte when grief is unchanged.
-- **Verify:** targeted grief harness proves cascade → Phase-9 persistence → next-Cycle draw bias → expiry; `node scripts/compressLifeHistory.dial.test.js`, `node scripts/biasFold.test.js`, and `node scripts/unlivedEcho.test.js` remain green
+- **Files:** `phase04-events/generationalEventsEngine.js`, `utilities/compressLifeHistory.js`, `phase05-citizens/generateCitizensEvents.js`, `scripts/griefPeriod.test.js` — modify/add; `utilities/citizenDialMap.js` — read/use existing tags only; `World_Config` + `docs/SPREADSHEET.md` — add/document the six approved key rows in the separately approved Sheet-write step
+- **Steps:** Implement the approved Task 2 envelope, required-config validation, Phase-9 drain, exact Cycle window, and Phase-5 pool consumption. Keep machine identity in fields/tags rather than parsing prose; preserve `MemoryRegisters.biases` and `.unlived` byte-for-byte when grief is unchanged. Read all calibration through `ctx.config`; no inline numeric defaults.
+- **Verify:** targeted grief harness proves cascade → Phase-9 persistence → next-Cycle draw bias → expiry, plus missing/malformed config fails loud; grep finds no duplicate calibration literals in consumer code; `node scripts/compressLifeHistory.dial.test.js`, `node scripts/biasFold.test.js`, and `node scripts/unlivedEcho.test.js` remain green
 - **Status:** [ ] not started
 
 ### Task 4: Design 27.10 feedback ceilings (research-build)
@@ -86,7 +87,7 @@ pointers:
 - **Lifetime and readers:** the raw entry exists only in `ctx.summary.pendingCascades`. `generateGenerationalSummary_` folds the array to a numeric count, and `buildCyclePacket.js` may render that count as `Pending Cascades: N`. A repo-wide current-code search found no reader of `grief_period`, no field-level reader of the raw grief entry, no duration decrement, and no Sheet/LifeHistory/DialState persistence. Therefore the prior "no cycle-packet reader" wording was too broad, while the underlying finding remains: grief has no mechanical consumer and disappears with the in-memory Ctx at Cycle end.
 - **Task 2 constraint:** duration cannot become meaningful until the design names a persisted carrier or explicitly converts the cascade into an existing persisted tag/state. Adding only a dial-map entry would not consume this payload because it never reaches the dial path.
 
-### Task 2 — grief consumption design (Codex draft, 2026-08-09; awaiting Mike sign-off)
+### Task 2 — grief consumption design (Codex, 2026-08-09; Mike-approved)
 
 #### Verified constraints
 
@@ -105,13 +106,25 @@ grief: { startCycle, throughCycle, sourceIds }
 - Deduplicate `sourceIds`; duplicate qualifying bonds to the same deceased do not stack. A distinct loss during an active window may extend `throughCycle` to the later boundary but does not multiply weights. Cap `sourceIds` at 3 because identity is provenance, not an unbounded memorial ledger.
 - Phase 5 treats malformed or out-of-window state as inactive. Phase 9 removes the expired `grief` field on its next scan while preserving every other top-level register field.
 
-#### Proposed consumer and dial routing — Mike decision box
+#### Approved consumer and dial routing
 
 - **Direct grief-to-identity delta: none.** The envelope changes event opportunity, not permanent personality; storage and expiry must leave `DialState.base` and `streak` byte-identical.
-- While active, multiply the citizen's overall atmospheric participation chance by **0.80** (withdrawal).
-- In the ordinary pool, multiply public/out-and-about sources (`source:fame`, `source:prevEvening`, First Friday, sports, holiday/city-event attendance) by **0.75**; multiply living-support sources (family life, faith, community, alliance, mentorship) by **1.25**. Apply each family once per entry so multi-tag rows do not compound accidentally.
-- Permit at most one grief-specific response per citizen per Cycle through a **35% reserved draw**. The small response pool contains withdrawal, memorial, and reconnection entries; it does not name or invent the deceased. Route selected responses through existing primary tags and existing deltas: `grief:withdrawal` → `Strain` `{composure:-1}`; `grief:memorial` → `Personal` `{openness:+2}`; `grief:reconnection` → `Community` `{sociability:+4,warmth:+2}`. The temporary state expires; only a response the citizen actually lives enters normal LifeHistory hardening.
-- **Approval requested:** approve these four weights/routings as written, or replace the numeric values before Task 3. Until approval, Task 2 remains open and Task 3 must not start.
+- While active, multiply the citizen's overall atmospheric participation chance by the required `World_Config.griefParticipationMultiplier` (**0.80** at approval).
+- In the ordinary pool, multiply public/out-and-about sources (`source:fame`, `source:prevEvening`, First Friday, sports, holiday/city-event attendance) by required `World_Config.griefPublicActivityMultiplier` (**0.75**); multiply living-support sources (family life, faith, community, alliance, mentorship) by required `World_Config.griefSupportMultiplier` (**1.25**). Apply each family once per entry so multi-tag rows do not compound accidentally.
+- Permit at most one grief-specific response per citizen per Cycle through a reserved roll against required `World_Config.griefResponseChance` (**0.35**). The small response pool contains withdrawal, memorial, and reconnection entries; it does not name or invent the deceased. Route selected responses through existing primary tags and existing deltas: `grief:withdrawal` → `Strain` `{composure:-1}`; `grief:memorial` → `Personal` `{openness:+2}`; `grief:reconnection` → `Community` `{sociability:+4,warmth:+2}`. The temporary state expires; only a response the citizen actually lives enters normal LifeHistory hardening.
+
+#### Approved `World_Config` keys
+
+| Key | Approved value | Consumer |
+|---|---:|---|
+| `griefDurationCycles` | 3 | ordinary grief envelope duration |
+| `griefHolidayDurationCycles` | 5 | stress-holiday grief envelope duration |
+| `griefParticipationMultiplier` | 0.80 | active citizen participation chance |
+| `griefPublicActivityMultiplier` | 0.75 | public/out-and-about pool entries |
+| `griefSupportMultiplier` | 1.25 | living-support pool entries |
+| `griefResponseChance` | 0.35 | maximum-one reserved response roll |
+
+Per [[../adr/0015-world-config-tunable-values]], these are required key→value rows loaded once per Cycle through the existing `loadConfig_` path. The consumers validate presence, numeric type, and range and fail loud on absence or malformed values; they must not carry behavior-preserving code defaults. The following remain structural code invariants rather than tunables: C+1 start/inclusive expiry semantics, source deduplication, source cap 3, no multiplier stacking, maximum one response per Cycle, machine-tag routing, and zero direct identity mutation.
 
 #### Implementation acceptance fence
 
@@ -120,13 +133,14 @@ grief: { startCycle, throughCycle, sourceIds }
 3. A seeded next-Cycle harness shows lower public/out-and-about selection and higher support/grief-response selection than the identical no-grief citizen.
 4. The created Cycle is unaffected by the Phase-9 carrier; Cycles C+1..C+D are active; C+D+1 is inactive and the later Phase-9 scan removes the field.
 5. Duplicate bonds/source IDs and overlapping losses never compound the numeric multipliers; no citizen emits more than one grief-specific response per Cycle.
+6. Missing, nonnumeric, or out-of-range grief config keys fail loud; the targeted harness supplies all six keys explicitly and proves changed config values alter the seeded result without a code edit.
 
 ---
 
 ## Open questions
 
 - [x] BACKLOG 27.10's own build trigger is "build when feedback loop data from C91+ confirms the golden-era pattern" — **CONFIRMED 2026-08-01** (Kimi pull, builder-approved). World summaries C92–C99 (`output/world_summary_c{92..99}.md`): Mayor Santana 78→88→93→95→95 — monotonic rise across 8 cycles, now pinned at 95; D1 Carter 72→94 (+8 in C99 alone); OPP cohort (D3/D5/D9) +5 in C99. Caveat shaping Task 4's design: the pattern is **factional**, not universal — CRC/IND seats drift −1/cycle to 58–59 over the same window, so the engine already produces slow decline for the opposition but zero event-level counter-pressure for the governing faction. Also note the C92 summary's own caveat: engine review pattern #16 flagged 26 approval values unchanged despite coverage (writeback-drift-vs-precision open question) — ceiling thresholds should use multi-cycle windows, not single-cycle deltas. Edition_Coverage_Ratings history not separately pulled (MCP `get_domain_ratings` returned no numeric table); the approval tables were decisive on their own.
-- [ ] **Task 2 decision awaiting Mike:** adopt the Track-A `MemoryRegisters.grief` envelope and proposed weights/routing above. This is bounded situational state on an existing carrier, not Track-B grudge/ambition identity and not a new ledger. If approved, the prior dial-engine-vs-typed-state question is resolved in favor of event-pool state plus existing-tag dial effects.
+- [x] **Task 2 decision (Mike, 2026-08-09):** adopt the Track-A `MemoryRegisters.grief` envelope and approved weights/routing above, with every calibration value in `World_Config` per ADR-0015. This is bounded situational state on an existing carrier, not Track-B grudge/ambition identity and not a new ledger. The prior dial-engine-vs-typed-state question is resolved in favor of event-pool state plus existing-tag dial effects.
 
 ---
 
@@ -138,3 +152,4 @@ grief: { startCycle, throughCycle, sourceIds }
 - 2026-08-01 — Kimi: Open question 1 RESOLVED (builder-approved pull): C92–C99 approval tables confirm the golden-era pattern for the governing faction (Mayor 78→95 monotonic, OPP cohort rising) with factional nuance (CRC/IND slow −1/cycle decline). Task 4's build trigger is met; thresholds should use multi-cycle windows per the C92 pattern-#16 caveat.
 - 2026-08-09 — Codex: Task 1 complete (read-only). Mapped both death emit paths, survivor eligibility, exact payload, and 3/5-Cycle duration intent; corrected the stale "no cycle-packet reader" claim to count-only reporting. Confirmed no raw-payload consumer or persistence, so Task 2 must first choose a carrier before dial/event-pool design.
 - 2026-08-09 — Codex: Task 2 design drafted after tracing both Cycle entry points, the Phase-9 `MemoryRegisters` single-writer seam, dial serialization, and Phase-5 weighting. Rejected direct `base` mutation and a stand-alone `Grief` map entry; proposed a next-Cycle bounded register envelope plus withdrawal/memorial/reconnection pool bias. Awaiting Mike's numeric/routing sign-off; no engine code changed.
+- 2026-08-09 — Codex: Task 2 approved and closed after Mike's config-vs-code correction. All six calibration values moved to required `World_Config` keys under ADR-0015; Cycle boundaries, deduplication/caps, tag routing, and zero direct identity mutation remain structural code invariants. Task 3 is build-ready; no Sheet rows or engine code changed in this design close.

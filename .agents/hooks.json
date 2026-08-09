@@ -1,0 +1,10 @@
+{
+  "auto-boot": {
+    "PreInvocation": [
+      {
+        "type": "command",
+        "command": "node boot-hook.js"
+      }
+    ]
+  }
+}

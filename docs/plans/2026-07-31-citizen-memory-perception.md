@@ -58,16 +58,16 @@ pointers:
 - **Status:** [x] done 2026-08-09 (Codex, Mike-authorized takeover) — core `8285601d`, config 6/6 verified, exact main `068fc2d6` deployed to SANDBOX 0720 @39, and C112→C113 smoke passed with zero C113 engine errors. No natural death occurred in C113, so the attended fire proves deployment/config/no-regression while the 38/38 targeted harness supplies the grief-path proof.
 
 ### Task 4: Design 27.10 feedback ceilings (research-build)
-- **Files:** `phase05-citizens/runCivicElectionsv1.js`, `docs/plans/BACKLOG.md:257` — read; this plan — modify
-- **Steps:** Design soft ceilings: (a) scandal probability scales with consecutive cycles of high approval (mechanism: extend the existing scandal status path); (b) rapid development → housing-pressure coupling (link to engine.54 trajectory state, per engine.55's pressure lane precedent). First resolve Open question 1 (BACKLOG's own build-trigger condition).
+- **Files:** `phase05-citizens/updateCivicApprovalRatings.js`, `phase05-citizens/runCivicElectionsv1.js`, `phase05-citizens/neighborhoodTrajectoryEngine.js`, `docs/plans/BACKLOG.md:257` — read; this plan — modify
+- **Steps:** Design soft ceilings: (a) scandal probability scales with consecutive Cycles of high approval through the every-Cycle approval writer, with the election engine retaining the existing scandal consequence; (b) verify whether rapid development → housing-pressure coupling still needs a build or is already owned by engine.54/engine.55. First resolve Open question 1 (BACKLOG's own build-trigger condition).
 - **Verify:** ceiling formulas in Build notes; Mike sign-off
-- **Status:** [ ] not started
+- **Status:** [x] done 2026-08-09 (Codex design; Mike-approved) — approval ≥80 advances a streak; Cycle 3 starts at 5%, each further high Cycle adds 5%, capped at 30%; a trigger owns `Status=scandal` for 3 Cycles and drops approval 12 points. All calibration is required `World_Config`. Housing pressure was already closed by the trajectory engine and is not rebuilt.
 
 ### Task 5: Implement scandal-ceiling mechanic (engine-sheet)
-- **Files:** `phase05-citizens/runCivicElectionsv1.js` — modify
-- **Steps:** Implement (a) from Task 4: track sustained-approval streak per official, scale scandal probability, keep the -25% election effect.
-- **Verify:** unit test: streak below threshold → base probability; above → elevated; deterministic under seeded RNG
-- **Status:** [ ] not started
+- **Files:** `phase05-citizens/updateCivicApprovalRatings.js`, `phase05-citizens/runCivicElectionsv1.js` — modify; `scripts/civicApprovalCeiling.test.js`, `scripts/applyApprovalCeilingConfig.js`, `scripts/applyApprovalCeilingConfig.test.js` — add; `docs/SPREADSHEET.md` — modify; `Civic_Office_Ledger` + `World_Config` — separately approved migration/replay
+- **Steps:** Track post-update high approval every Cycle; use seeded RNG for the approved risk curve; write a bounded, source-owned scandal lifecycle and immediate approval correction; emit a story/ripple hook without inventing allegations; preserve manual statuses; keep the configured election penalty; clear state on election turnover. Persist `HighApprovalStreak`, `AutoScandalUntilCycle`, and `AutoScandalSource` on the office ledger.
+- **Verify:** deterministic unit harness proves validation, streak/chance curve, cap, approval drop, inclusive expiry, manual-status safety, event/ripple output, election penalty, turnover reset, and no `Math.random`; migration harness proves dry-run/confirmation/idempotence/conflict failure
+- **Status:** [ ] local proof complete 2026-08-09 (Codex) — behavior 27/27, migration 17/17, and full offline suite 140/140; SANDBOX 0720 migration/deploy/fire remain
 
 ### Task 6: Track B design-options doc (research-build, WITH Mike)
 - **Files:** `docs/research/2026-06-20-layered-memory-architecture.md` §S306 — read; this plan — modify
@@ -145,12 +145,29 @@ Per [[../adr/0015-world-config-tunable-values]], these are required key→value 
 - **Gate:** Mike authorized Codex to take over the former Claude landing and sandbox proving lane on 2026-08-09. Production remains untouched; sandbox config, temp-dir deployment, attended fire, Sheet read-back, and `Engine_Errors` proof are the active steps.
 - **Sandbox proof:** SANDBOX 0720 was at Cycle 112 with zero grief registers. The six required rows were appended and read-back verified 6/6. A fresh temp directory was built from exact pushed main `068fc2d6`; its sandbox clasp target was verified while the production target remained untouched, 171 files were pushed, and the existing web deployment was advanced to @39. Pull-back verified all 171 remote files byte-identical to the frozen payload with zero test files. The attended fire advanced C112→C113 with all six config rows retained, zero C113 engine errors, and `LifeHistory_Log` compressed from 24,783 to 24,353 rows. C113 had no natural death and therefore no grief envelope; grief-path behavior is established by the 38/38 targeted harness, not claimed from this smoke.
 
+### Task 4 — feedback-ceiling design (Codex, 2026-08-09; Mike-approved)
+
+- **Build trigger:** already met by the recorded C92–C99 approval trajectory; SANDBOX 0720 at C113 independently has 35 populated active offices, four approvals at or above 80, and a maximum of 95.
+- **Correct producer:** `runCivicElectionsv1.js` runs meaningful election logic only once per 208-Cycle office group and merely consumes `Status=scandal`; repo-wide tracing found no engine writer or expiry path for that civic status. The ceiling therefore belongs in the every-Cycle `updateCivicApprovalRatings_` writer. Elections keep the configured incumbent consequence and clear state on turnover.
+- **Approved curve:** post-update approval ≥80 advances `HighApprovalStreak`. Cycles 1–2 do not roll. Cycle 3 rolls at 0.05; each further consecutive high Cycle adds 0.05; probability caps at 0.30. A trigger immediately drops approval 12 points, resets the streak, owns `Status=scandal` for three inclusive Cycles, and emits a deterministic story/ripple hook. Manual scandals and external statuses are never auto-cleared.
+- **State:** append `HighApprovalStreak`, `AutoScandalUntilCycle`, and `AutoScandalSource` to `Civic_Office_Ledger`. `AutoScandalSource=approval-ceiling` is the ownership marker; malformed owned expiry fails loud. Election turnover resets all three fields.
+- **Configuration:** the threshold, streak minimum, base/step/cap probabilities, duration, approval drop, and existing 25-point election penalty are eight required `World_Config` keys under ADR-0015. There are no code defaults.
+- **Housing-pressure verdict:** no Task 5 build. `neighborhoodTrajectoryEngine.js` already turns a city-relative growth score into trajectory momentum; growth raises `HousingPressure` by +0.5 or +1 each Cycle, pressure ≥8 adds the rent kicker and `HOUSING_PRESSURE_HIGH` hook, and engine.55 consumes the state for displacement/relocation. Engine.93 additionally feeds actual relocation deltas back through the same sole writer. A second 27.10 writer would duplicate and risk clobbering the working lane.
+
+### Task 5 — local implementation (Codex, 2026-08-09)
+
+- `updateCivicApprovalRatings.js` now validates the eight-key config, advances and persists the every-Cycle streak, performs one seeded roll only after the minimum, applies the approved correction, owns/clears bounded auto-scandal state, and emits `CIVIC_APPROVAL_SCANDAL` through `storyHooks` plus `Ripple_Ledger` attribution. Existing approval deltas and neighborhood ripples receive the combined net change.
+- `runCivicElectionsv1.js` reads the configured 25-point scandal penalty and clears all owned state on election turnover so a challenger cannot inherit the incumbent's streak or scandal.
+- `applyApprovalCeilingConfig.js` is dry-run by default and migrates the eight config rows plus three office columns with explicit target/confirmation, pre-write conflict checks, interrupted-prefix recovery, and read-back verification.
+- Local proof: `civicApprovalCeiling.test.js` 27/27; migration contract 17/17; full offline suite 140/140 files; all four changed/new scripts pass `node --check`; no `Math.random` calls in the changed engine files.
+
 ---
 
 ## Open questions
 
 - [x] BACKLOG 27.10's own build trigger is "build when feedback loop data from C91+ confirms the golden-era pattern" — **CONFIRMED 2026-08-01** (Kimi pull, builder-approved). World summaries C92–C99 (`output/world_summary_c{92..99}.md`): Mayor Santana 78→88→93→95→95 — monotonic rise across 8 cycles, now pinned at 95; D1 Carter 72→94 (+8 in C99 alone); OPP cohort (D3/D5/D9) +5 in C99. Caveat shaping Task 4's design: the pattern is **factional**, not universal — CRC/IND seats drift −1/cycle to 58–59 over the same window, so the engine already produces slow decline for the opposition but zero event-level counter-pressure for the governing faction. Also note the C92 summary's own caveat: engine review pattern #16 flagged 26 approval values unchanged despite coverage (writeback-drift-vs-precision open question) — ceiling thresholds should use multi-cycle windows, not single-cycle deltas. Edition_Coverage_Ratings history not separately pulled (MCP `get_domain_ratings` returned no numeric table); the approval tables were decisive on their own.
 - [x] **Task 2 decision (Mike, 2026-08-09):** adopt the Track-A `MemoryRegisters.grief` envelope and approved weights/routing above, with every calibration value in `World_Config` per ADR-0015. This is bounded situational state on an existing carrier, not Track-B grudge/ambition identity and not a new ledger. The prior dial-engine-vs-typed-state question is resolved in favor of event-pool state plus existing-tag dial effects.
+- [x] **Task 4 decision (Mike, 2026-08-09):** approve the 80 / 3-Cycle / 5%-plus-5%-to-30% scandal curve, three-Cycle owned status, 12-point approval correction, and existing 25-point election consequence as required `World_Config`. Persist three explicit office-state fields; never clear manual scandals. Treat rapid-development housing pressure as already implemented by the engine.54/55/93 trajectory lane.
 
 ---
 
@@ -166,3 +183,4 @@ Per [[../adr/0015-world-config-tunable-values]], these are required key→value 
 - 2026-08-09 — Codex: Task 3 built locally and validated (targeted 202 assertions; full offline suite 134/134 files). Recorded the engine-sheet landing gate plus the still-separate `World_Config`, spreadsheet-contract, sandbox, and deployment steps; no live state changed.
 - 2026-08-09 — Codex: Mike authorized Codex takeover after Claude left the project. Kimi concurrently landed the Codex-authored core as `8285601d`; Codex added a guarded, replayable grief-config migration and spreadsheet contract and continued SANDBOX 0720 staging with production explicitly out of scope.
 - 2026-08-09 — Codex: Task 3 sandbox stage complete. Exact main `068fc2d6` pull-back matched 171/171 files with no tests; SANDBOX 0720 advanced C112→C113 with config 6/6 retained, zero C113 engine errors, and expected LifeHistory compression. No natural death occurred, so grief-path proof remains the targeted 38/38 harness. Production untouched.
+- 2026-08-09 — Codex: Task 4 designed and Mike-approved after tracing the actual writers. Housing pressure already closes the development half; the every-Cycle approval writer owns the new scandal ceiling. Task 5 passed 27/27 behavior, 17/17 migration, and the 140/140-file offline suite; sandbox proof remains.

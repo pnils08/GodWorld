@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * runCivicElections_ v1.2
+ * runCivicElections_ v1.3
  * ============================================================================
  *
  * v1.2 — S229 engine.2 §3.5 routing (PHASE_42_PATTERNS):
@@ -13,6 +13,11 @@
  *     Civic_Office_Ledger + Election_Log only.
  *   Cadence: cycle 45 of even God-world years; next firing C97 (we're
  *     at C94, 3-cycle smoke-test buffer pre-firing).
+ *
+ * v1.3 — engine.94 Task 5:
+ * - Scandal election penalty reads required World_Config calibration.
+ * - Election turnover clears approval-ceiling state so challengers never
+ *   inherit an incumbent's high-approval streak or owned scandal lifecycle.
  * 
  * Lightweight election engine for GodWorld civic positions.
  * Runs during November election window (Cycles 45-48 of even years).
@@ -45,6 +50,7 @@ function runCivicElections_(ctx) {
   var ss = ctx.ss;
   var S = ctx.summary;
   var rng = safeRand_(ctx);
+  var approvalCeilingConfig = getApprovalCeilingConfig_(ctx);
   
   // ═══════════════════════════════════════════════════════════════════════════
   // CHECK ELECTION WINDOW
@@ -97,6 +103,20 @@ function runCivicElections_(ctx) {
   var iStatus = oCol('Status');
   var iLastElection = oCol('LastElection');
   var iNextElection = oCol('NextElection');
+  var iHighApprovalStreak = oCol('HighApprovalStreak');
+  var iAutoScandalUntil = oCol('AutoScandalUntilCycle');
+  var iAutoScandalSource = oCol('AutoScandalSource');
+
+  var ceilingColumns = [
+    ['HighApprovalStreak', iHighApprovalStreak],
+    ['AutoScandalUntilCycle', iAutoScandalUntil],
+    ['AutoScandalSource', iAutoScandalSource]
+  ];
+  for (var cc = 0; cc < ceilingColumns.length; cc++) {
+    if (ceilingColumns[cc][1] === -1) {
+      throw new Error('approval ceiling: Civic_Office_Ledger missing ' + ceilingColumns[cc][0]);
+    }
+  }
   
   // Determine which group is up
   // Year 2, 6, 10... = Group A
@@ -333,7 +353,7 @@ function runCivicElections_(ctx) {
       
       // Scandal/injury hurts incumbent significantly
       if (seat.status === 'scandal') {
-        incumbentScore -= 25;
+        incumbentScore -= approvalCeilingConfig.electionPenalty;
       } else if (seat.status === 'injured' || seat.status === 'serious-condition') {
         incumbentScore -= 10;
       }
@@ -400,6 +420,9 @@ function runCivicElections_(ctx) {
     officeRow[iStatus] = 'active';
     officeRow[iLastElection] = cycle;
     officeRow[iNextElection] = 'Cycles ' + (newTermEnd - 3) + '-' + newTermEnd;
+    officeRow[iHighApprovalStreak] = 0;
+    officeRow[iAutoScandalUntil] = '';
+    officeRow[iAutoScandalSource] = '';
     
     officeData[seat.rowIndex] = officeRow;
     

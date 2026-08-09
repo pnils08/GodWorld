@@ -81,6 +81,25 @@ These six required key→value rows calibrate the bounded `MemoryRegisters.grief
 
 Apply or verify the rows with `scripts/applyGriefWorldConfig.js`, which requires an explicit spreadsheet ID and matching confirmation in write mode. Sandbox writes must be replayed explicitly against production at live deployment; Apps Script code deployment does not carry Sheet data.
 
+### Approval ceiling state and calibration (engine.94)
+
+The sustained-high-approval ceiling uses eight required `World_Config` rows. Missing, nonnumeric, or out-of-range values fail loud; code owns streak/lifecycle invariants while Sheet values own calibration.
+
+| Key | Approved value | Purpose |
+|---|---:|---|
+| `approvalCeilingThreshold` | 80 | approval at or above this value advances the streak |
+| `approvalCeilingMinStreakCycles` | 3 | minimum consecutive high-approval Cycles before rolls begin |
+| `approvalCeilingBaseChance` | 0.05 | scandal probability at the minimum streak |
+| `approvalCeilingChanceStep` | 0.05 | probability added per further high-approval Cycle |
+| `approvalCeilingMaxChance` | 0.30 | maximum scandal probability per Cycle |
+| `approvalCeilingScandalDurationCycles` | 3 | inclusive owned-scandal duration |
+| `approvalCeilingApprovalDrop` | 12 | immediate approval-point correction on trigger |
+| `approvalCeilingElectionPenalty` | 25 | incumbent-score penalty while `Status=scandal` |
+
+`Civic_Office_Ledger` carries three engine-owned columns appended after `Approval`: `HighApprovalStreak` (integer), `AutoScandalUntilCycle` (inclusive Cycle), and `AutoScandalSource` (`approval-ceiling` or blank). The source field distinguishes bounded engine-created scandals from manual/civic status; the engine never auto-clears a scandal it does not own. Election turnover clears all three fields so a challenger cannot inherit an incumbent's state.
+
+Apply or verify both the config rows and columns with `scripts/applyApprovalCeilingConfig.js`. It is dry-run by default, requires an explicit Sheet ID, refuses conflicts/duplicates/column drift, and requires the same ID again for apply. Sandbox writes must be replayed explicitly against production during the eventual live deployment; regenerate `schemas/SCHEMA_HEADERS.md` from live only after that replay.
+
 ---
 
 ## Active Tabs — Intake & Media Pipeline

@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * updateCivicApprovalRatings_ v1.1 (ES5)
+ * updateCivicApprovalRatings_ v1.2 (ES5)
  * ============================================================================
  * [engine/sheet] — Phase 27 civic feedback loop
  *
@@ -9,6 +9,12 @@
  *   pattern: per-change ledgerSheet.getRange(c.row, iApproval+1).setValue
  *   (direct sheet write, documented exception). Now queues per-cell intents
  *   committed at Phase 10. isDryRun guard preserved.
+ *
+ * v1.2 (engine.94 Task 5 / 2026-08-09):
+ * - Adds the World_Config-driven sustained-high-approval ceiling.
+ * - Persists per-office streak + owned scandal lifecycle in Civic_Office_Ledger.
+ * - Emits a deterministic story/ripple hook and an immediate approval drop
+ *   when the seeded scandal roll fires. Manual scandal statuses are untouched.
  *
  * Updates Civic_Office_Ledger Approval column based on:
  * 1. Initiative performance in the official's district
@@ -26,11 +32,126 @@
  * ============================================================================
  */
 
+function getApprovalCeilingConfig_(ctx) {
+  if (ctx && ctx._approvalCeilingConfig) return ctx._approvalCeilingConfig;
+  var source = ctx && ctx.config;
+  if (!source) throw new Error('approval ceiling: ctx.config required');
+
+  var required = function(key, min, max, integer) {
+    var raw = source[key];
+    var value = Number(raw);
+    if (raw === '' || raw === null || raw === undefined || !isFinite(value) ||
+        value < min || value > max || (integer && Math.floor(value) !== value)) {
+      throw new Error('approval ceiling: invalid or missing World_Config.' + key);
+    }
+    return value;
+  };
+
+  var config = {
+    threshold: required('approvalCeilingThreshold', 1, 100, false),
+    minStreakCycles: required('approvalCeilingMinStreakCycles', 1, 1000, true),
+    baseChance: required('approvalCeilingBaseChance', 0, 1, false),
+    chanceStep: required('approvalCeilingChanceStep', 0, 1, false),
+    maxChance: required('approvalCeilingMaxChance', 0, 1, false),
+    scandalDurationCycles: required('approvalCeilingScandalDurationCycles', 1, 1000, true),
+    approvalDrop: required('approvalCeilingApprovalDrop', 0, 100, false),
+    electionPenalty: required('approvalCeilingElectionPenalty', 0, 100, false)
+  };
+  if (config.baseChance > config.maxChance) {
+    throw new Error('approval ceiling: World_Config.approvalCeilingBaseChance exceeds approvalCeilingMaxChance');
+  }
+  if (ctx) ctx._approvalCeilingConfig = config;
+  return config;
+}
+
+function resolveApprovalCeilingLifecycle_(state, cycle) {
+  var out = {
+    status: String(state.status || '').toLowerCase(),
+    highStreak: Math.max(0, Math.floor(Number(state.highStreak) || 0)),
+    untilCycle: state.untilCycle === '' || state.untilCycle === null || state.untilCycle === undefined ? '' : Number(state.untilCycle),
+    source: String(state.source || ''),
+    blocked: false,
+    recovered: false,
+    staleOwnedStateCleared: false
+  };
+
+  if (out.source === 'approval-ceiling') {
+    if (out.status === 'scandal') {
+      if (!isFinite(out.untilCycle) || Math.floor(out.untilCycle) !== out.untilCycle) {
+        throw new Error('approval ceiling: invalid AutoScandalUntilCycle');
+      }
+      if (cycle > out.untilCycle) {
+        out.status = 'active';
+        out.highStreak = 0;
+        out.untilCycle = '';
+        out.source = '';
+        out.recovered = true;
+      } else {
+        out.highStreak = 0;
+        out.blocked = true;
+        return out;
+      }
+    } else {
+      // Another writer changed Status. Clear only state owned by this mechanic;
+      // never overwrite the external/manual status.
+      out.highStreak = 0;
+      out.untilCycle = '';
+      out.source = '';
+      out.staleOwnedStateCleared = true;
+    }
+  }
+
+  if (out.status !== 'active' && out.status !== 'recovering') {
+    out.highStreak = 0;
+    out.blocked = true;
+  }
+  return out;
+}
+
+function applyApprovalCeilingRisk_(state, config, rng) {
+  var out = {
+    cycle: state.cycle,
+    status: state.status,
+    approval: state.approval,
+    highStreak: state.highStreak,
+    untilCycle: state.untilCycle,
+    source: state.source,
+    chance: 0,
+    roll: null,
+    triggered: false
+  };
+
+  if (out.status !== 'active') {
+    out.highStreak = 0;
+    return out;
+  }
+  out.highStreak = out.approval >= config.threshold ? out.highStreak + 1 : 0;
+  if (out.highStreak < config.minStreakCycles) return out;
+
+  out.chance = Math.min(config.maxChance,
+    config.baseChance + (out.highStreak - config.minStreakCycles) * config.chanceStep);
+  out.roll = rng();
+  if (out.roll >= out.chance) return out;
+
+  out.triggered = true;
+  out.approval = Math.max(10, out.approval - config.approvalDrop);
+  out.status = 'scandal';
+  out.highStreak = 0;
+  out.untilCycle = out.cycle + config.scandalDurationCycles - 1;
+  out.source = 'approval-ceiling';
+  return out;
+}
+
 function updateCivicApprovalRatings_(ctx) {
   var S = ctx.summary;
   if (!S) S = ctx.summary = {};
 
   S.approvalChanges = [];
+  S.approvalCeilingEvents = [];
+
+  var ceilingConfig = getApprovalCeilingConfig_(ctx);
+  var rng = safeRand_(ctx);
+  var cycle = Number(S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0);
 
   var ss = ctx.ss;
   if (!ss) return;
@@ -55,13 +176,22 @@ function updateCivicApprovalRatings_(ctx) {
   var iTitle = findApprCol_(lHeaders, ['Title', 'title']);
   var iDistrict = findApprCol_(lHeaders, ['District', 'district']);
   var iHolder = findApprCol_(lHeaders, ['Holder', 'holder']);
+  var iPopId = findApprCol_(lHeaders, ['PopId', 'popid']);
   var iStatus = findApprCol_(lHeaders, ['Status', 'status']);
   var iApproval = findApprCol_(lHeaders, ['Approval', 'approval']);
   var iFaction = findApprCol_(lHeaders, ['Faction', 'faction']);
+  var iHighStreak = findApprCol_(lHeaders, ['HighApprovalStreak', 'highapprovalstreak']);
+  var iAutoUntil = findApprCol_(lHeaders, ['AutoScandalUntilCycle', 'autoscandaluntilcycle']);
+  var iAutoSource = findApprCol_(lHeaders, ['AutoScandalSource', 'autoscandalsource']);
 
-  if (iApproval === -1) {
-    Logger.log('updateCivicApprovalRatings_ v1.0: Approval column not found');
-    return;
+  var requiredColumns = [
+    ['Status', iStatus], ['Approval', iApproval], ['HighApprovalStreak', iHighStreak],
+    ['AutoScandalUntilCycle', iAutoUntil], ['AutoScandalSource', iAutoSource]
+  ];
+  for (var rc = 0; rc < requiredColumns.length; rc++) {
+    if (requiredColumns[rc][1] === -1) {
+      throw new Error('approval ceiling: Civic_Office_Ledger missing ' + requiredColumns[rc][0]);
+    }
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -133,6 +263,14 @@ function updateCivicApprovalRatings_(ctx) {
 
   var changes = [];
   var approvalTriggers = [];
+  var ceilingWrites = [];
+
+  var planCeilingWrite = function(rowNumber, columnIndex, before, after, reason) {
+    var beforeNorm = before === null || before === undefined ? '' : String(before);
+    var afterNorm = after === null || after === undefined ? '' : String(after);
+    if (beforeNorm === afterNorm) return;
+    ceilingWrites.push({ row: rowNumber, col: columnIndex + 1, value: after, reason: reason });
+  };
 
   for (var li = 1; li < ledgerData.length; li++) {
     var row = ledgerData[li];
@@ -143,12 +281,34 @@ function updateCivicApprovalRatings_(ctx) {
     var status = iStatus !== -1 ? (row[iStatus] || '').toString().trim().toLowerCase() : '';
     var currentApproval = iApproval !== -1 ? parseInt(row[iApproval], 10) : 65;
     var faction = iFaction !== -1 ? (row[iFaction] || '').toString().trim().toUpperCase() : '';
+    var currentHighStreak = row[iHighStreak];
+    var currentAutoUntil = row[iAutoUntil];
+    var currentAutoSource = row[iAutoSource];
 
     if (isNaN(currentApproval)) currentApproval = 65;
 
     // Only process active elected officials and mayor
-    if (status !== 'active' && status !== 'recovering') continue;
     if (!officeId || (!officeId.match(/^COUNCIL/) && !officeId.match(/^MAYOR/))) continue;
+
+    var lifecycle = resolveApprovalCeilingLifecycle_({
+      status: status,
+      highStreak: currentHighStreak,
+      untilCycle: currentAutoUntil,
+      source: currentAutoSource
+    }, cycle);
+    status = lifecycle.status;
+
+    if (lifecycle.blocked) {
+      planCeilingWrite(li + 1, iStatus, row[iStatus], status,
+        'approval ceiling status state');
+      planCeilingWrite(li + 1, iHighStreak, currentHighStreak, lifecycle.highStreak,
+        'approval ceiling streak state');
+      planCeilingWrite(li + 1, iAutoUntil, currentAutoUntil, lifecycle.untilCycle,
+        'approval ceiling expiry state');
+      planCeilingWrite(li + 1, iAutoSource, currentAutoSource, lifecycle.source,
+        'approval ceiling source state');
+      continue;
+    }
 
     var delta = 0;
     var reasons = [];
@@ -240,6 +400,48 @@ function updateCivicApprovalRatings_(ctx) {
     // APPLY AND CLAMP
     // ─────────────────────────────────────────────────────────────────────
     var newApproval = Math.max(10, Math.min(95, currentApproval + delta));
+    var ceiling = applyApprovalCeilingRisk_({
+      cycle: cycle,
+      status: status,
+      approval: newApproval,
+      highStreak: lifecycle.highStreak,
+      untilCycle: lifecycle.untilCycle,
+      source: lifecycle.source
+    }, ceilingConfig, rng);
+
+    if (ceiling.triggered) {
+      reasons.push('sustained high approval scandal (-' + ceilingConfig.approvalDrop + ')');
+      newApproval = ceiling.approval;
+      delta = newApproval - currentApproval;
+
+      var hook = {
+        hookType: 'CIVIC_APPROVAL_SCANDAL',
+        severity: 7,
+        description: holder + ' entered scandal status after ' +
+          (lifecycle.highStreak + 1) + ' consecutive Cycles at or above ' + ceilingConfig.threshold + ' approval',
+        cycleGenerated: cycle,
+        popid: iPopId !== -1 ? (row[iPopId] || '').toString().trim() : '',
+        officeId: officeId,
+        approval: newApproval,
+        chance: ceiling.chance
+      };
+      S.storyHooks = S.storyHooks || [];
+      S.storyHooks.push(hook);
+      S.approvalCeilingEvents.push(hook);
+      if (!isDryRun && typeof recordHookRipple_ === 'function') {
+        recordHookRipple_(ctx, 'approval-ceiling', hook, 'updateCivicApprovalRatings');
+      }
+    }
+
+    planCeilingWrite(li + 1, iStatus, row[iStatus], ceiling.status,
+      ceiling.triggered ? 'approval ceiling scandal triggered' :
+        (lifecycle.recovered ? 'approval ceiling scandal expired' : 'approval ceiling status state'));
+    planCeilingWrite(li + 1, iHighStreak, currentHighStreak, ceiling.highStreak,
+      'approval ceiling streak update');
+    planCeilingWrite(li + 1, iAutoUntil, currentAutoUntil, ceiling.untilCycle,
+      'approval ceiling expiry update');
+    planCeilingWrite(li + 1, iAutoSource, currentAutoSource, ceiling.source,
+      'approval ceiling source update');
 
     if (newApproval !== currentApproval) {
       changes.push({
@@ -295,6 +497,15 @@ function updateCivicApprovalRatings_(ctx) {
         'approval rating update', 'civic');
     }
     Logger.log('updateCivicApprovalRatings_ v1.1: Queued ' + changes.length + ' approval rating updates');
+  }
+  if (!isDryRun && ceilingWrites.length > 0) {
+    for (var cwi = 0; cwi < ceilingWrites.length; cwi++) {
+      var cw = ceilingWrites[cwi];
+      queueCellIntent_(ctx, 'Civic_Office_Ledger', cw.row, cw.col, cw.value,
+        cw.reason, 'civic');
+    }
+    Logger.log('updateCivicApprovalRatings_ v1.2: Queued ' + ceilingWrites.length +
+      ' approval ceiling state updates');
   }
 
   // ═══════════════════════════════════════════════════════════════════════════

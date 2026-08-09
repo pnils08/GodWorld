@@ -66,6 +66,21 @@ These are read/written during every cycle run.
 
 *Civic_Office_Ledger and Initiative_Tracker show ~1000 rows due to Google Sheets grid allocation, actual data is much smaller.
 
+### `World_Config` grief calibration (engine.94)
+
+These six required key→value rows calibrate the bounded `MemoryRegisters.grief` consumer. They are loaded through `loadConfig_`; missing, nonnumeric, or out-of-range values fail loud. Structural behavior—C+1 start, inclusive expiry, source cap 3, deduplication, non-stacking, maximum one grief response per Cycle, and existing-tag dial routing—remains in code.
+
+| Key | Approved value | Purpose |
+|---|---:|---|
+| `griefDurationCycles` | 3 | ordinary grief duration in Cycles |
+| `griefHolidayDurationCycles` | 5 | stress-holiday grief duration in Cycles |
+| `griefParticipationMultiplier` | 0.80 | active-grief atmospheric participation multiplier |
+| `griefPublicActivityMultiplier` | 0.75 | public and out-and-about pool multiplier |
+| `griefSupportMultiplier` | 1.25 | living-support pool multiplier |
+| `griefResponseChance` | 0.35 | maximum-one reserved response probability |
+
+Apply or verify the rows with `scripts/applyGriefWorldConfig.js`, which requires an explicit spreadsheet ID and matching confirmation in write mode. Sandbox writes must be replayed explicitly against production at live deployment; Apps Script code deployment does not carry Sheet data.
+
 ---
 
 ## Active Tabs — Intake & Media Pipeline

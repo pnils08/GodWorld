@@ -882,6 +882,50 @@ function persistHospitalLedger_(ctx) {
     }
   }
 
+  // ═══════════════════════════════════════════════════════════════════════════
+  // GHOST-BED RECONCILE (engine.102, S361)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // A bed only closes when a lifecycle transition event arrives. Any path that
+  // returns a citizen to active/deceased WITHOUT emitting one leaves the row
+  // open forever — the citizen walks out of the hospital and goes on living
+  // while their bed stays occupied. Found on bench C111: 5 of 14 open beds were
+  // phantom, one of them a citizen who had been dead for 5 cycles. The census
+  // feeds the illness talk-back, so ghosts make the whole city sicker.
+  //
+  // The citizens themselves are the authority: if the ledger doesn't say a
+  // person is in a health state, their bed is released. Self-healing every
+  // cycle — no backfill script, no recurrence.
+  var HEALTH_STATES_102 = ['hospitalized', 'critical', 'recovering', 'injured', 'serious-condition'];
+  var ghostsClosed = 0;
+  if (ctx.ledger && ctx.ledger.rows && ctx.ledger.headers) {
+    var lh102 = ctx.ledger.headers;
+    var lPop = lh102.indexOf('POPID'), lStatus = lh102.indexOf('Status');
+    if (lPop >= 0 && lStatus >= 0) {
+      var liveStatus = {};
+      for (var lr = 0; lr < ctx.ledger.rows.length; lr++) {
+        liveStatus[String(ctx.ledger.rows[lr][lPop])] =
+          String(ctx.ledger.rows[lr][lStatus] || '').trim().toLowerCase();
+      }
+      for (var gPop in openByPopId) {
+        if (!openByPopId.hasOwnProperty(gPop)) continue;
+        var gStatus = liveStatus[gPop];
+        if (gStatus === undefined) continue; // not in ledger — leave for manual triage, don't guess
+        if (HEALTH_STATES_102.indexOf(gStatus) >= 0) continue; // genuinely still a patient
+        var gRow = openByPopId[gPop];
+        var gAdmit = Number(data[gRow][5]) || cycle;
+        var gOutcome = (gStatus === 'deceased') ? 'deceased' : 'recovered';
+        sheet.getRange(gRow + 1, 7, 1, 5).setValues([[
+          gStatus, cycle, cycle, gOutcome + '-reconciled', Math.max(0, cycle - gAdmit)
+        ]]);
+        data[gRow][8] = cycle;
+        delete openByPopId[gPop];
+        ghostsClosed++;
+        Logger.log('persistHospitalLedger_ reconcile: released ghost bed for ' + gPop +
+                   ' (ledger says "' + gStatus + '", admitted C' + gAdmit + ')');
+      }
+    }
+  }
+
   var open = 0;
   for (var k in openByPopId) if (openByPopId.hasOwnProperty(k)) open++;
 
@@ -890,12 +934,14 @@ function persistHospitalLedger_(ctx) {
     admitsThisCycle: admits,
     dischargesThisCycle: discharges,
     deathsThisCycle: deaths,
+    ghostsReleased: ghostsClosed,
     load: open / HOSPITAL_CAPACITY
   };
   ctx.summary.hospitalCensus = census;
 
   Logger.log('persistHospitalLedger_ (engine.52): cycle ' + cycle + ' | open ' + open +
-    ' | admits ' + admits + ' | discharges ' + discharges + ' | deaths ' + deaths);
+    ' | admits ' + admits + ' | discharges ' + discharges + ' | deaths ' + deaths +
+    ' | ghost beds released ' + ghostsClosed);
 
   return census;
 }

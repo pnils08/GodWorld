@@ -56,6 +56,7 @@ The dial effect of an event is **not applied when it is logged.** It applies **o
 - **`mood` is not persisted** — only `{base, streak}` (+ `chaosExposure`) serialize to `DialState`; mood is a re-derivable window swing, zeroed after fold.
 - **The seam `getCitizenDialBands_`** exposes to generators: `crimeReachable = bandIndex(integrity) <= 0` (**only the lowest integrity band, raw <20** — this is the conduct throttle), `careerFreq = mult.drive`, `familyFreq = mult.family`, plus signed bands −2..+2 and 0.5–1.5 multipliers per dial. Returns `null` when DialState absent → generators fall back to base rates.
 - **Reflection drain (research.14, gated):** `readPendingReflections_` pulls `Reflection_Intake` and accretes a bounded fraction (`REFLECTION_MULT 0.45 × REFLECTION_ACCRETION_FRAC 0.5`) of subjective wake-reflections directly into `base` — the only path to the negative composure pole from daily life. Composed into the per-row RMW (not a Phase-9 sibling). Local/clasp-gated per S270.
+- **Bond write-back (engine.101, same drain/gate):** intake col I (`BondTarget`) + affect valence nudge the named bond's `Intensity` **in memory** (`ctx.summary.relationshipBonds`, ±0.25, ±0.5/pair/cycle cap, clamp [0,10]) — Phase 10 full-replaces the sheet from that array, so a cell intent would not survive. Cols J/K (tension/resolves) persist for audit, unconsumed in v1.
 
 ### The loop it closes: O → R → AT
 

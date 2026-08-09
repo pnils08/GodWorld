@@ -9,6 +9,12 @@
  *
  * Read-only. Usage:
  *   node scripts/buildCitizenWeekDigest.js [--days 7] [--vignettes 12] [--out output/citizen-week-digest.md]
+ *   node scripts/buildCitizenWeekDigest.js --daily   # 24h people-slice for the 8am listening drop
+ *
+ * `--daily` is the pipeline.53 mode: days=1, vignettes=5, writes
+ * output/citizen-day-digest.md, and frames the doc as "Today" instead of
+ * "The Week". notebooklmDailyNews.js calls buildDigest({ daily: true })
+ * in-process at run start and folds the result into its bounded source.
  */
 
 'use strict';
@@ -30,11 +36,19 @@ const LIFE_EVENT_PATTERNS = [
 ];
 
 function parseArgs(argv) {
-  const a = { days: 7, vignettes: 12, out: path.join(REPO, 'output', 'citizen-week-digest.md') };
+  const a = { days: 7, vignettes: 12, out: null, daily: false };
   for (let i = 2; i < argv.length; i++) {
     if (argv[i] === '--days') a.days = Number(argv[++i]);
     else if (argv[i] === '--vignettes') a.vignettes = Number(argv[++i]);
     else if (argv[i] === '--out') a.out = path.resolve(argv[++i]);
+    else if (argv[i] === '--daily') a.daily = true;
+  }
+  if (a.daily) {
+    a.days = 1;
+    a.vignettes = 5;
+  }
+  if (!a.out) {
+    a.out = path.join(REPO, 'output', a.daily ? 'citizen-day-digest.md' : 'citizen-week-digest.md');
   }
   return a;
 }
@@ -56,8 +70,18 @@ function clip(text, maxLen) {
   return (lastStop > 60 ? cut.slice(0, lastStop + 1) : cut.replace(/\s+\S*$/, '') + '…');
 }
 
-async function main() {
-  const args = parseArgs(process.argv);
+async function buildDigest(options) {
+  const args = Object.assign(
+    { days: 7, vignettes: 12, out: null, daily: false },
+    options || {}
+  );
+  if (args.daily) {
+    args.days = 1;
+    args.vignettes = 5;
+  }
+  if (!args.out) {
+    args.out = path.join(REPO, 'output', args.daily ? 'citizen-day-digest.md' : 'citizen-week-digest.md');
+  }
   const since = new Date(Date.now() - args.days * 864e5);
 
   const [slRows, reflRows, lifeRows, bondRows] = await Promise.all([
@@ -153,6 +177,25 @@ async function main() {
     }
   }
 
+  // ── Pair CONVO reflections by time proximity ──
+  // An exchange writes both participants' intake rows within the same run
+  // (seconds apart). Pairing on nearest timestamp attributes the actual
+  // conversation partner; the first-active-bond fallback can name the wrong
+  // person (observed: Victor Alize attributed to Dimas Wong while talking
+  // to Elliot Marbury).
+  const convos = reflections.filter((r) => r.kind === 'CONVO');
+  const convoPartner = new Map(); // reflection object -> partner popid
+  for (const rf of convos) {
+    let best = null;
+    let bestDt = Infinity;
+    for (const other of convos) {
+      if (other === rf || other.popid === rf.popid) continue;
+      const dt = Math.abs(other.ts - rf.ts);
+      if (dt < bestDt) { bestDt = dt; best = other; }
+    }
+    if (best && bestDt <= 10 * 60e3) convoPartner.set(rf, best.popid);
+  }
+
   // ── Rank citizens for vignettes ──
   const byCitizen = new Map();
   for (const rf of reflections) {
@@ -175,9 +218,15 @@ async function main() {
   // ── Compose ──
   const latestCycle = Math.max(0, ...reflections.map((r) => Number(r.cycle || 0)).filter(Number.isFinite));
   const md = [];
-  md.push('# The Week in Oakland — told by its people');
-  md.push('');
-  md.push(`A weekly digest of citizen life, assembled from the citizens' own reflections and life events on record${latestCycle ? ` (through Cycle ${latestCycle})` : ''}. Everything below is sourced from the world ledger — nothing is invented.`);
+  if (args.daily) {
+    md.push('# Today in Oakland — told by its people');
+    md.push('');
+    md.push(`A daily digest of citizen life over the last 24 hours, assembled from the citizens' own reflections and life events on record${latestCycle ? ` (through Cycle ${latestCycle})` : ''}. Everything below is sourced from the world ledger — nothing is invented.`);
+  } else {
+    md.push('# The Week in Oakland — told by its people');
+    md.push('');
+    md.push(`A weekly digest of citizen life, assembled from the citizens' own reflections and life events on record${latestCycle ? ` (through Cycle ${latestCycle})` : ''}. Everything below is sourced from the world ledger — nothing is invented.`);
+  }
   md.push('');
 
   if (lifeEvents.length) {
@@ -200,9 +249,12 @@ async function main() {
     md.push(`### ${header.join(' — ')}`);
     md.push('');
     for (const rf of rfs.slice(0, 2)) {
-      const partnerLine = rf.kind === 'CONVO' && partnerOf.get(popid)?.length
-        ? ` *(talking with ${person(partnerOf.get(popid)[0].other).name})*`
-        : '';
+      const convoWith = convoPartner.get(rf);
+      const partnerLine = rf.kind === 'CONVO' && convoWith
+        ? ` *(talking with ${person(convoWith).name})*`
+        : rf.kind === 'CONVO' && partnerOf.get(popid)?.length
+          ? ` *(talking with ${person(partnerOf.get(popid)[0].other).name})*`
+          : '';
       md.push(`> ${rf.text}${partnerLine}`);
       md.push('');
     }
@@ -214,11 +266,27 @@ async function main() {
   }
 
   md.push('---');
-  md.push(`*Assembled ${new Date().toISOString().slice(0, 10)} from Reflection_Intake (${reflections.length} reflections, ${byCitizen.size} citizens) and LifeHistory_Log (${lifeEvents.length} life events) by scripts/buildCitizenWeekDigest.js. Read-only; no content generated.*`);
+  md.push(`*Assembled ${new Date().toISOString().slice(0, 10)} from Reflection_Intake (${reflections.length} reflections, ${byCitizen.size} citizens) and LifeHistory_Log (${lifeEvents.length} life events) over the last ${args.days} day${args.days === 1 ? '' : 's'} by scripts/buildCitizenWeekDigest.js${args.daily ? ' --daily' : ''}. Read-only; no content generated.*`);
 
   fs.mkdirSync(path.dirname(args.out), { recursive: true });
   fs.writeFileSync(args.out, md.join('\n'), 'utf8');
-  console.log(`Digest: ${picked.length} vignettes, ${lifeEvents.length} life events, ${reflections.length} reflections in window -> ${path.relative(REPO, args.out)}`);
+  return {
+    out: args.out,
+    text: md.join('\n'),
+    vignettes: picked.length,
+    lifeEvents: lifeEvents.length,
+    reflections: reflections.length,
+  };
 }
 
-main().catch((e) => { console.error(e); process.exit(1); });
+async function main() {
+  const args = parseArgs(process.argv);
+  const result = await buildDigest(args);
+  console.log(`Digest: ${result.vignettes} vignettes, ${result.lifeEvents} life events, ${result.reflections} reflections in window -> ${path.relative(REPO, result.out)}`);
+}
+
+if (require.main === module) {
+  main().catch((e) => { console.error(e); process.exit(1); });
+}
+
+module.exports = { buildDigest, parseArgs };

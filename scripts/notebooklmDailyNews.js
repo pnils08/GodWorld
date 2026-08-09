@@ -3,7 +3,9 @@
  * notebooklmDailyNews.js — grounded daily listening brief for GodWorld.
  *
  * Builds one bounded source pack from the latest world summary plus recent
- * newsroom output, asks the permanent published-edition notebook for cited
+ * newsroom output plus the daily citizen digest (pipeline.53 — verbatim
+ * citizen reflections/life texture from buildCitizenWeekDigest.js --daily),
+ * asks the permanent published-edition notebook for cited
  * continuity, and gives ONLY that combined source to the working daily-news
  * notebook. The written brief and audio overview are research/listening
  * artifacts, never canon and never an ingestion input.
@@ -33,7 +35,7 @@ const COMPARE_DIR = path.join(ROOT, 'output', 'cron-compare');
 const OUTPUT_DIR = path.join(ROOT, 'output', 'notebooklm', 'daily');
 const AUDIO_RETRY_INTERVAL_MS = 30 * 1000;
 const AUDIO_RETRY_MAX = 30;
-const SOURCE_VERSION = '1.5';
+const SOURCE_VERSION = '1.6';
 const DEFAULT_AUDIO_LENGTH = 'default';
 const DAILY_NEWS_IDENTITY = 'The Bay Tribune daily news for Oakland.';
 const DIRECTION_GUIDE_PATH = path.join(ROOT, 'config', 'audio_direction_daily.md');
@@ -186,6 +188,7 @@ function buildSourcePack(input) {
     sourceVersion: SOURCE_VERSION,
     cycle: input.cycle,
     worldSummary: input.worldSummary,
+    citizenDigest: input.citizenDigest ? input.citizenDigest.text : null,
     reports: input.reports.map((r) => ({
       classification: r.classification,
       relativePath: r.relativePath,
@@ -215,9 +218,24 @@ function buildSourcePack(input) {
     '',
     input.worldSummary.trim(),
     '',
+  ];
+
+  if (input.citizenDigest) {
+    lines.push(
+      '## The people, in their own words — daily citizen digest',
+      '',
+      'Source: ' + input.citizenDigest.path,
+      'Canon status: NOT CANON. Verbatim citizen reflections and life events from the world ledger — a listening slice, not published reporting.',
+      '',
+      input.citizenDigest.text.trim(),
+      ''
+    );
+  }
+
+  lines.push(
     '## Recent newsroom reports — not established fact',
     '',
-  ];
+  );
 
   if (!input.reports.length) {
     lines.push('_No staged or ungated reports for this Cycle were found in the time window._', '');
@@ -272,9 +290,21 @@ function buildBoundedNewsSource(input) {
     '',
     dailyWorldRecord(input.worldSummary),
     '',
+  ];
+
+  if (input.citizenDigest) {
+    lines.push(
+      '## The people, in their own words',
+      '',
+      input.citizenDigest.text.trim(),
+      ''
+    );
+  }
+
+  lines.push(
     '## Bay Tribune newsroom reports',
     '',
-  ];
+  );
 
   if (!input.reports.length) {
     lines.push('_No new newsroom reports were filed for this Cycle._', '');
@@ -437,10 +467,28 @@ async function run(argv) {
   const dailyConfig = config.dailyNews || {};
   const hours = args.hours || dailyConfig.hours || 36;
   const newsroom = collectNewsroomArtifacts(cycle, hours, Date.now());
+
+  // pipeline.53: the daily citizen digest is the people-spine of the drop.
+  // Build failure must never block the run (same contract as the audio
+  // direction guide below) — log and continue without it.
+  let citizenDigest = null;
+  try {
+    const { buildDigest } = require('./buildCitizenWeekDigest.js');
+    const digest = await buildDigest({ daily: true });
+    citizenDigest = { path: path.relative(ROOT, digest.out), text: digest.text };
+    console.log(
+      'Citizen day digest: ' + citizenDigest.path +
+      ' (' + digest.vignettes + ' vignettes, ' + digest.reflections + ' reflections in 24h)'
+    );
+  } catch (e) {
+    console.log('CITIZEN DAY DIGEST SKIPPED (non-blocking): ' + e.message);
+  }
+
   const pack = buildSourcePack({
     cycle,
     worldSummaryPath: path.relative(ROOT, worldPath),
     worldSummary: fs.readFileSync(worldPath, 'utf8'),
+    citizenDigest,
     reports: newsroom.reports,
     flagged: newsroom.flagged,
   });
@@ -491,6 +539,7 @@ async function run(argv) {
     hours,
     packHash: pack.hash,
     worldSummary: path.relative(ROOT, worldPath),
+    citizenDigest: citizenDigest ? citizenDigest.path : null,
     reports: newsroom.reports.map((r) => ({
       classification: r.classification,
       path: r.relativePath,
@@ -569,6 +618,7 @@ async function run(argv) {
   fs.writeFileSync(boundedSourcePath, buildBoundedNewsSource({
     cycle,
     worldSummary: fs.readFileSync(worldPath, 'utf8'),
+    citizenDigest,
     reports: newsroom.reports,
     archiveAnswer: queryAnswer(archiveQuery),
   }));

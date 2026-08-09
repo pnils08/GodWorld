@@ -55,6 +55,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | pipeline.50 | Culture + sports-support solos (grok) — 6 culture + Tanya/Simon/Marbury; Marbury deep-analysis bag for canon path | in-progress | research-build | [[../plans/2026-08-07-culture-sports-support-solo-seats]] |
 | pipeline.51 | NotebookLM audio-direction injection + archive-query canon hook in desk wake (51b) — landed S358; watching next scheduled daily + M-F + Sat runs | in-progress | engine-sheet | [[../research/2026-08-07-notebooklm-audio-overview-direction]] |
 | pipeline.52 | Journalist heat-slice packs (grok) — evening + economic + sports substrate + Anthony shipped; next Hal | in-progress | research-build | [[../plans/2026-08-08-journalist-heat-slice-packs]] |
+| pipeline.53 | Citizen day digest (kimi) — 24h people-slice folded into the 8am notebooklmDailyNews bounded source, written + audio per Mike 2026-08-09; engine-sheet lands config rebalance | in-progress | engine-sheet | [[../plans/2026-08-09-citizen-day-digest]] |
 
 ### engine.* — Engine code, ledger, schema
 

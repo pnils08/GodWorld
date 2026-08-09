@@ -135,6 +135,40 @@ assert.strictEqual(isCompletedManifest({
   assert(!source.includes('FLAGGED_EXCLUSION'));
 }
 
+const syntheticDigest = {
+  path: 'output/citizen-day-digest.md',
+  text: '# SYNTHETIC NON-CANON DIGEST\n\nA visibly synthetic citizen slice.',
+};
+
+{
+  const withDigest = Object.assign({}, syntheticInput, { citizenDigest: syntheticDigest });
+  const pack = buildSourcePack(withDigest);
+  assert(pack.text.includes('## The people, in their own words — daily citizen digest'));
+  assert(pack.text.includes('A visibly synthetic citizen slice.'));
+  assert(pack.text.includes('a listening slice, not published reporting'));
+  assert.notStrictEqual(
+    pack.hash,
+    buildSourcePack(syntheticInput).hash,
+    'digest text must perturb the pack hash so reflections-only changes bust the no-op cache'
+  );
+}
+
+{
+  const source = buildBoundedNewsSource({
+    cycle: syntheticInput.cycle,
+    worldSummary: syntheticInput.worldSummary,
+    citizenDigest: syntheticDigest,
+    reports: syntheticInput.reports,
+    archiveAnswer: 'Synthetic published background.',
+  });
+  assert(source.includes('## The people, in their own words'));
+  assert(source.includes('A visibly synthetic citizen slice.'));
+  assert(
+    source.indexOf('## The people, in their own words') < source.indexOf('## Bay Tribune newsroom reports'),
+    'digest section must precede the newsroom reports section'
+  );
+}
+
 {
   const parsed = parseJsonOutput('{"answer":"Grounded answer","sources_used":[{"id":"s1"}]}', 'test');
   assert.strictEqual(queryAnswer(parsed), 'Grounded answer');
@@ -158,7 +192,7 @@ assert.strictEqual(isCompletedManifest({
   const title = sourceTitle('current source pack', 999, 'abcdef1234567890');
   assert.strictEqual(title, 'The Bay Tribune Daily C999 — current source pack — abcdef123456');
   const prompt = dailyPrompt(999);
-  assert.strictEqual(SOURCE_VERSION, '1.5');
+  assert.strictEqual(SOURCE_VERSION, '1.6');
   assert.strictEqual(DEFAULT_AUDIO_LENGTH, 'default');
   assert.strictEqual(notebookConfig.dailyNews.audioLength, 'default');
   assert(prompt.includes('The Bay Tribune daily news for Oakland for Cycle 999'));

@@ -91,7 +91,7 @@ pointers:
 - **Files:** `phase04-events/generationalEventsEngine.js` (`checkHealthEvent_` feed: city illnessRate → hood Sick rate), `lib/wakePerception.js` (add HealthCause/hospital status to wake context)
 - **Steps:** per review §7 "Heavy" + kimi amendment 2; dose sized so the sample-support rule can fire (`E[carriers] = hoodRate × hoodSampleSize`).
 - **Verify:** acceptance criterion 4 on bench.
-- **Status:** [ ] not started — **owner: engine-sheet**
+- **Status:** [x] done (2026-08-08, engine-sheet, S361) — commit `87e68f94`. Dose keys off hood Sick rate (fallback hood→city→config); epidemic floor `c = max(c, rate/illnessSupportCycles)` above illnessSupportThreshold. Wake: MILESTONE_TAGS += Health (reaches every consumer via existing arcLine channel, zero consumer edits) + new `loadHealthState()` export. **Criterion 4 PASS on bench C109** (hoods fast-forwarded to the 10% convergence target): 5 new tracked statuses across 5 hoods, 29 citizens with C109 [Health] lines (analytic E≈31), Hospital_Ledger rows minted, and POP-00663's wake reads "You are currently in the hospital, since cycle 109." Gotcha reconfirmed: lib/env `override:true` stomps a shell GODWORLD_SHEET_ID — set it after module load for bench-targeted Node reads.
 
 ### Task 7: W4 — hospital talk-back + Cause fix (engine-sheet)
 
@@ -123,3 +123,4 @@ pointers:
 - 2026-08-08 (engine-sheet, S361) — Task 3 done: W2a landed (`4f7f934b`), bench C105 clean, invariant PASS +6.1%. Detail in Task 3 status.
 - 2026-08-08 (engine-sheet, S361) — Tasks 4+5 done: W2b landed, 18 keys on bench+live, probe bound on C107. Detail in task statuses.
 - 2026-08-08 (engine-sheet, S361) — WP stat ownership fix (`e181e0d5`): 3 writers → 1, applyDemographicDrift sole owner. Detail in Task 5 status.
+- 2026-08-09 (engine-sheet, S361) — Task 6 done (`87e68f94`): hood-scoped dose + wake health read, criterion 4 PASS on bench C109. Detail in Task 6 status.

@@ -289,6 +289,20 @@ ${warnings.map(w => '- ' + w).join('\n') || '- None'}
   fs.mkdirSync(outDir, { recursive: true });
   fs.writeFileSync(path.join(outDir, 'eval-latest.md'), report);
 
+  // Blocking gate — guess indicators stop the turn instead of being logged after the fact.
+  // Guarded by stop_hook_active: fires at most once per turn, so it can never trap a session.
+  if (guessIndicators.length > 0 && hookData.stop_hook_active !== true) {
+    const cited = guessIndicators.slice(0, 5)
+      .map(g => `  - "${g.snippet}"`).join('\n');
+    console.log(JSON.stringify({
+      decision: 'block',
+      reason: `ANTI-GUESS GATE — ${guessIndicators.length} unverified assertion(s) about this codebase:\n${cited}\n\n` +
+        `Rewrite the response. Every claim about a file, function, config value, or count must ` +
+        `carry the command that produced it in the same message. If you cannot run it, say you do not know.`
+    }));
+    return;
+  }
+
   // Also print summary to stdout so it shows in the hook output
   if (warnings.length > 0) {
     console.log(`Session eval: ${warnings.length} warning(s) — see output/session-evaluations/eval-latest.md`);

@@ -201,9 +201,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node /root/GodWorld/scripts/session-eval.js",
-            "timeout": 15,
-            "async": true
+            "command": "node /root/GodWorld/.claude/hooks/session-eval.js",
+            "timeout": 15
           },
           {
             "type": "command",

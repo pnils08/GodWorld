@@ -968,29 +968,13 @@ function updateHouseholdWealth_(ctx) {
 // value: a move of 2+ rungs in one cycle is a life moment, not noise.
 // ════════════════════════════════════════════════════════════════════════════
 
-// S361: captures the CAUSE fields alongside the level. A WealthLevel diff on its
-// own is not an event — it is arithmetic. Sim doctrine §2 (causes, then dice)
-// requires the collision the ledger recorded, so mobility now needs income,
-// inheritance or employer to have actually moved. Y2C50 is the proof: 41 lines
-// fired in one cycle because the recompute output changed while nobody's income
-// did. Under this capture, that cycle produces zero events — not by a cap
-// (doctrine §1 forbids hands on the output), but because nothing happened.
 function captureWealthLevels_(ctx) {
   var header = ctx.ledger.headers, rows = ctx.ledger.rows;
   var iPop = header.indexOf('POPID'), iWL = header.indexOf('WealthLevel');
-  var iInc = header.indexOf('Income'), iInh = header.indexOf('InheritanceReceived'),
-      iEmp = header.indexOf('EmployerBizId');
   var map = {};
   if (iPop < 0 || iWL < 0) return map;
   for (var r = 0; r < rows.length; r++) {
-    var row = rows[r];
-    if (!row || !row[iPop]) continue;
-    map[String(row[iPop]).trim()] = {
-      wl: Number(row[iWL]) || 0,
-      inc: iInc >= 0 ? (Number(row[iInc]) || 0) : 0,
-      inh: iInh >= 0 ? (Number(row[iInh]) || 0) : 0,
-      emp: iEmp >= 0 ? String(row[iEmp] || '') : ''
-    };
+    if (rows[r] && rows[r][iPop]) map[String(rows[r][iPop]).trim()] = Number(rows[r][iWL]) || 0;
   }
   return map;
 }
@@ -1001,7 +985,6 @@ function trackWealthMobility_(ctx, cycle, prevLevels) {
   var idx = function(n) { return header.indexOf(n); };
   var iPop = idx('POPID'), iWL = idx('WealthLevel'), iStatus = idx('Status'),
       iBirth = idx('BirthYear'), iLife = idx('LifeHistory');
-  var iInc = idx('Income'), iInh = idx('InheritanceReceived'), iEmp = idx('EmployerBizId');
   if (iPop < 0 || iWL < 0 || iLife < 0 || !prevLevels) return results;
 
   var simYear = 2040 + Math.floor(cycle / 52);
@@ -1013,22 +996,10 @@ function trackWealthMobility_(ctx, cycle, prevLevels) {
     if (String(row[iStatus] || 'active').toLowerCase() !== 'active') continue;
     var by = iBirth >= 0 ? (Number(row[iBirth]) || 0) : 0;
     if (by > 0 && (simYear - by) < 18) continue; // minors: no mobility arc yet
-    var snap = prevLevels[String(row[iPop]).trim()];
-    if (!snap) continue;
+    var prev = prevLevels[String(row[iPop]).trim()];
     // prev >= 2 gate: a first WealthLevel (settlement kids, fresh promotions
     // from GC) is an entry, not mobility — the arc needs a standing to move from.
-    var prev = snap.wl;
     if (typeof prev !== 'number' || prev < 2) continue;
-
-    // S361 — doctrine §2: the collision the ledger recorded IS the event. A level
-    // that moved while income, inheritance and employer all held still is the
-    // formula re-running, not something that happened to this person. No cap, no
-    // quota (doctrine §1) — an uncaused arithmetic change simply is not an event.
-    var incNow = iInc >= 0 ? (Number(row[iInc]) || 0) : 0;
-    var inhNow = iInh >= 0 ? (Number(row[iInh]) || 0) : 0;
-    var empNow = iEmp >= 0 ? String(row[iEmp] || '') : '';
-    if (incNow === snap.inc && inhNow === snap.inh && empNow === snap.emp) continue;
-
     var now = Number(row[iWL]) || 0;
     var delta = now - prev;
     if (delta < 2 && delta > -2) continue;
@@ -1038,12 +1009,8 @@ function trackWealthMobility_(ctx, cycle, prevLevels) {
     var life = String(row[iLife] || '');
     // engine.60 display bound holds: one [Money] line per citizen per cycle.
     if (life.indexOf(stamp + ' — [Money]') >= 0) continue;
-    // S361: the up-line said "the ledger says so" — the engine speaking in the first
-    // person inside a citizen's own memory (37 live rows carry it). Replaced with the
-    // same shape the down-line already used: person-readable phrase + the magnitude,
-    // so both directions read as something a person would think about their own year.
     var line = delta > 0 ?
-      '[Money] moved up in the world — ' + Math.abs(delta) + ' rungs up in one season' :
+      '[Money] moved up in the world — the ledger says so' :
       '[Money] the ground gave a little — ' + Math.abs(delta) + ' rungs down in one season';
     row[iLife] = (life ? life + '\n' : '') + stamp + ' — ' + line;
     ctx.summary.storyHooks = ctx.summary.storyHooks || [];

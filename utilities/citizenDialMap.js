@@ -161,6 +161,15 @@ var CONTENT_RULES = [
   { re: /promot|raise|bonus|reward/,                                           fx: { drive: 7, composure: 2 } },
   { re: /inherit|windfall/,                                                    fx: { composure: 3, family: 2 } },
   { re: /invest|lost money|bad debt|financial loss/,                           fx: { composure: -5 } },
+  // S361 — the [Money] tag from trackWealthMobility_ (engine.61 T5) was never mapped,
+  // so BOTH directions fell through to DEFAULT_AMBIENT (+1 composure): a citizen whose
+  // standing collapsed and one whose standing doubled got the same nudge as an ordinary
+  // day. The tag alone cannot tell the two apart — the direction lives in the prose —
+  // so it routes here, ahead of the generic financial-loss rule. Ground gained: the
+  // footing under a life, so drive + composure. Ground lost: the same footing going, so
+  // composure down with drive up under necessity, mirroring Setback without duplicating it.
+  { re: /moved up in the world|rungs up in one season/,                        fx: { drive: 4, composure: 4 } },
+  { re: /the ground gave a little|rungs down in one season/,                   fx: { composure: -6, drive: 2 } },
   { re: /business|venture|startup|started a small/,                            fx: { drive: 6, openness: 3 } },
   { re: /new relationship|married|wedding|engaged|partner/,                    fx: { sociability: 4, warmth: 3, family: 2 } },
   { re: /moved to|relocat|larger home|new home/,                              fx: { family: 4, openness: 2 } },

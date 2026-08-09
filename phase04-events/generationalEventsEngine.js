@@ -562,7 +562,7 @@ function runGenerationalEngine_(ctx) {
       }
     }
 
-    var healthResult2 = checkHealthEvent_(ctx, popId, age, lifeHistory, calendarContext);
+    var healthResult2 = checkHealthEvent_(ctx, popId, age, lifeHistory, calendarContext, neighborhood);
     if (healthResult2) {
       var admitStatus = null;
       if (healthResult2.severity === "severe") {
@@ -1246,7 +1246,7 @@ function checkDeath_(ctx, popId, age, lifeHistory, tier, cal) {
   return { type: MILESTONE_TYPES.DEATH, description: pick_(ctx, descriptions), tag: "Death", age: age, season: cal.season };
 }
 
-function checkHealthEvent_(ctx, popId, age, lifeHistory, cal) {
+function checkHealthEvent_(ctx, popId, age, lifeHistory, cal, neighborhood) {
   var c = 0.0005;
   if (age >= 50) c = 0.001;
   if (age >= 60) c = 0.002;
@@ -1256,17 +1256,44 @@ function checkHealthEvent_(ctx, popId, age, lifeHistory, cal) {
   if (STRESS_HOLIDAYS.indexOf(cal.holiday) >= 0) c *= 1.4;
   if (cal.month === 1) c *= 1.3;
 
-  // engine.52 A2 — incidence couples to the city illness rate (Phase 3 drift,
-  // 5% baseline / 15% cap). At baseline this is a no-op; at cap it triples.
-  // engine.102 W2b — fallback reads World_Config illnessFallbackRate; missing key is LOUD.
+  // engine.102 W3 (crisis-through-hoods amendment): the dose keys off the
+  // citizen's HOOD Sick rate — the neighborhood is the citizen fork point, no
+  // city→citizen hop. Fallback chain: hood rate → city drift rate → World_Config
+  // illnessFallbackRate (loud). Phase3-NeighborhoodDemo runs before Phase 4 at
+  // both entry points, so S.neighborhoodDemographics is this cycle's state.
   var illnessFallbackRate = Number(ctx.config && ctx.config.illnessFallbackRate);
   if (isNaN(illnessFallbackRate)) {
     illnessFallbackRate = 0.05;
     pushMissingConfigWarning_(ctx, 'illnessFallbackRate', 0.05);
   }
-  var illness = (ctx.summary && ctx.summary.demographicDrift &&
-                 ctx.summary.demographicDrift.illnessRate) || illnessFallbackRate;
-  c *= (illness / 0.05);
+  var effRate = null;
+  var nd102 = ctx.summary && ctx.summary.neighborhoodDemographics;
+  if (nd102 && neighborhood && nd102[neighborhood]) {
+    var d102 = nd102[neighborhood];
+    var hoodPop102 = (Number(d102.students) || 0) + (Number(d102.adults) || 0) + (Number(d102.seniors) || 0);
+    if (hoodPop102 > 0) effRate = (Number(d102.sick) || 0) / hoodPop102;
+  }
+  if (effRate === null) {
+    effRate = (ctx.summary && ctx.summary.demographicDrift &&
+               ctx.summary.demographicDrift.illnessRate) || illnessFallbackRate;
+  }
+  c *= (effRate / 0.05);
+
+  // engine.102 W3 epidemic support floor: when the hood is in epidemic
+  // (rate ≥ illnessSupportThreshold), floor the per-citizen chance at
+  // rate / illnessSupportCycles so the sample-support rule CAN fire —
+  // E[carriers] ≈ hoodRate × hoodSampleSize across the sustained window,
+  // instead of an epidemic the ledger never lives (the 9%-sick/zero-articles
+  // failure). Below threshold the gentle lottery stands unchanged.
+  var supportThreshold102 = Number(ctx.summary && ctx.summary.demographicDrift &&
+                                   ctx.summary.demographicDrift.illnessSupportThreshold);
+  if (isNaN(supportThreshold102) || supportThreshold102 <= 0) supportThreshold102 = 0.08;
+  var supportCycles102 = Number(ctx.summary && ctx.summary.demographicDrift &&
+                                ctx.summary.demographicDrift.illnessSupportCycles);
+  if (isNaN(supportCycles102) || supportCycles102 <= 0) supportCycles102 = 3;
+  if (effRate >= supportThreshold102) {
+    c = Math.max(c, effRate / supportCycles102);
+  }
 
   var healthMatches = lifeHistory.match(/\[Health\]/g);
   var healthCount = healthMatches ? healthMatches.length : 0;
@@ -1275,9 +1302,10 @@ function checkHealthEvent_(ctx, popId, age, lifeHistory, cal) {
   if (!chance_(ctx, c)) return null;
 
   // engine.52 A2 — an epidemic doesn't just mean more colds: at elevated
-  // city illness the severity distribution shifts toward severe/moderate.
-  var severeCut = illness >= 0.08 ? 0.08 : 0.05;
-  var moderateCut = illness >= 0.08 ? 0.28 : 0.20;
+  // local illness the severity distribution shifts toward severe/moderate.
+  // engine.102 W3: cuts key off the same hood-scoped rate as the dose.
+  var severeCut = effRate >= supportThreshold102 ? 0.08 : 0.05;
+  var moderateCut = effRate >= supportThreshold102 ? 0.28 : 0.20;
 
   var severity = "minor";
   var sr = rand_(ctx);

@@ -1,7 +1,7 @@
 ---
 title: Citizen Memory & Perception Plan (Typed Emotion + Folk Memory)
 created: 2026-07-31
-updated: 2026-08-01
+updated: 2026-08-09
 type: plan
 tags: [engine, citizens, media, memory, active]
 sources:
@@ -20,7 +20,7 @@ pointers:
 
 **Goal:** Citizens and neighborhoods carry typed memory of what happened — grief, grudge, ambition as mechanics and folk memory as collective recall — so the sim tracks what people *think* happened, not only what happened.
 
-**Architecture:** Two tracks, split by gate. **Track A (ungated, buildable now):** (1) Give the existing grief stub consumers — `phase04-events/generationalEventsEngine.js:1423-1432` emits `type: "grief", effect: "grief_period"` cascade entries on death-of-ally/mentor, and `grief_period` has **zero consumers** today (no reader anywhere in the engine — verified by repo grep 2026-08-01); wire it into the dial engine (`utilities/compressLifeHistory.js` v2.0, `REFLECTION_MULT 0.45`) and event-pool biasing the same way the `Quoted` tag already works (`utilities/citizenDialMap.js:46` → sociability +3). (2) Ship BACKLOG **27.10** negative feedback loops: soft ceilings on runaway positive spirals — scandal probability rising with sustained high approval, building on the existing scandal mechanic (`phase05-citizens/runCivicElectionsv1.js:334-335`, "Scandal status: -25%"); rapid development → housing-pressure coupling. **Track B (gated on research.17 — REGROUNDED S306, "design WITH Mike", needs-info):** typed grudge/ambition state on top of the working rivalry mechanics (`phase05-citizens/bondEngine.js:1706-1724` `resolveRivalry_`; escalation at intensity ≥ 6, :856-859) and BACKLOG **27.9** folk memory (2–3 `Folk_Memory` records per major event keyed event×neighborhood — "Fruitvale remembers the transit vote as a betrayal; Rockridge remembers it as fiscal responsibility" — feeding reporter/Letters briefings). research.19's T3 "read the Pulse" news-awareness pilot rides the same gate.
+**Architecture:** Two tracks, split by gate. **Track A (ungated, buildable now):** (1) Give the existing grief stub consumers — `triggerDeathCascade_` in `phase04-events/generationalEventsEngine.js` emits `type: "grief", effect: "grief_period"` cascade entries on death-of-ally/mentor. `grief_period` has **zero mechanical consumers** today: `phase10-persistence/buildCyclePacket.js` renders only the aggregate `Pending Cascades` count, never reads the raw grief payload or changes citizen state; wire the payload into the dial engine (`utilities/compressLifeHistory.js` v2.0, `REFLECTION_MULT 0.45`) and event-pool biasing the same way the `Quoted` tag already works (`utilities/citizenDialMap.js:46` → sociability +3). (2) Ship BACKLOG **27.10** negative feedback loops: soft ceilings on runaway positive spirals — scandal probability rising with sustained high approval, building on the existing scandal mechanic (`phase05-citizens/runCivicElectionsv1.js:334-335`, "Scandal status: -25%"); rapid development → housing-pressure coupling. **Track B (gated on research.17 — REGROUNDED S306, "design WITH Mike", needs-info):** typed grudge/ambition state on top of the working rivalry mechanics (`phase05-citizens/bondEngine.js:1706-1724` `resolveRivalry_`; escalation at intensity ≥ 6, :856-859) and BACKLOG **27.9** folk memory (2–3 `Folk_Memory` records per major event keyed event×neighborhood — "Fruitvale remembers the transit vote as a betrayal; Rockridge remembers it as fiscal responsibility" — feeding reporter/Letters briefings). research.19's T3 "read the Pulse" news-awareness pilot rides the same gate.
 
 **Terminal:** research-build (Track B design WITH Mike) / engine-sheet (Track A build)
 
@@ -40,9 +40,9 @@ pointers:
 
 ### Task 1: Map the grief stub surface
 - **Files:** `phase04-events/generationalEventsEngine.js` — read
-- **Steps:** Read lines 1410–1440. Record who receives `grief_period` entries (which citizens, what payload). Confirm no cycle-packet or downstream reader exists (2026-08-01 grep found none).
+- **Steps:** Trace `triggerDeathCascade_`. Record who receives `grief_period` entries (which citizens, what payload). Distinguish aggregate reporting from a mechanical payload consumer.
 - **Verify:** grief-surface notes in Build notes
-- **Status:** [ ] not started
+- **Status:** [x] done 2026-08-09 (Codex, read-only) — emitter, recipient, payload, lifetime, and current readers mapped below
 
 ### Task 2: Design grief → dial/event-pool consumption (research-build)
 - **Files:** `utilities/compressLifeHistory.js`, `utilities/citizenDialMap.js` — read; this plan — modify
@@ -78,7 +78,13 @@ pointers:
 
 ## Build notes
 
-Filled as tasks complete.
+### Task 1 — grief stub surface (Codex, 2026-08-09)
+
+- **Emit paths:** both death routes call the same `triggerDeathCascade_`: a health-lifecycle transition whose new status is `deceased`, and the regular milestone death check.
+- **Recipient rule:** every bond incident to the deceased is severed. Only an `alliance` or `mentorship` also emits grief, targeting the surviving endpoint (`citizenA` or `citizenB`). Rivalry and other bond types receive no grief entry. The loop emits once per qualifying bond; it has no survivor-level deduplication.
+- **Payload:** `{ type: "grief", citizenId: survivorId, effect: "grief_period", duration, note: "Mourning <deceased name>", cycleCreated, holiday, season }`. Duration is 3 Cycles normally and 5 when the current holiday is `Thanksgiving`, `Holiday`, or `NewYearsEve`. The payload carries neither the deceased POPID nor a neighborhood.
+- **Lifetime and readers:** the raw entry exists only in `ctx.summary.pendingCascades`. `generateGenerationalSummary_` folds the array to a numeric count, and `buildCyclePacket.js` may render that count as `Pending Cascades: N`. A repo-wide current-code search found no reader of `grief_period`, no field-level reader of the raw grief entry, no duration decrement, and no Sheet/LifeHistory/DialState persistence. Therefore the prior "no cycle-packet reader" wording was too broad, while the underlying finding remains: grief has no mechanical consumer and disappears with the in-memory Ctx at Cycle end.
+- **Task 2 constraint:** duration cannot become meaningful until the design names a persisted carrier or explicitly converts the cascade into an existing persisted tag/state. Adding only a dial-map entry would not consume this payload because it never reaches the dial path.
 
 ---
 
@@ -95,3 +101,4 @@ Filled as tasks complete.
 - 2026-08-01 — Kimi: corrected stale pointer — `grief_period` has no reader at `buildCyclePacket.js:350-351` (grep: no `grief` in that file at all); verified zero consumers engine-wide. Task 1 step updated accordingly.
 - 2026-08-01 — Kimi: audit pointer added — build-order step 4 (Track A) / step 7 (Track B gate unchanged) of [[../research/2026-08-01-simulation-realism-audit]].
 - 2026-08-01 — Kimi: Open question 1 RESOLVED (builder-approved pull): C92–C99 approval tables confirm the golden-era pattern for the governing faction (Mayor 78→95 monotonic, OPP cohort rising) with factional nuance (CRC/IND slow −1/cycle decline). Task 4's build trigger is met; thresholds should use multi-cycle windows per the C92 pattern-#16 caveat.
+- 2026-08-09 — Codex: Task 1 complete (read-only). Mapped both death emit paths, survivor eligibility, exact payload, and 3/5-Cycle duration intent; corrected the stale "no cycle-packet reader" claim to count-only reporting. Confirmed no raw-payload consumer or persistence, so Task 2 must first choose a carrier before dial/event-pool design.

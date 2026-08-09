@@ -97,7 +97,7 @@ pointers:
 
 - **Files:** `phase10-persistence/buildCyclePacket.js` (`persistHospitalLedger_` Cause wiring), `phase03-population/applyDemographicDrift.js` (census → next WP illness)
 - **Verify:** acceptance criterion 5 on bench.
-- **Status:** [ ] not started — **owner: engine-sheet**
+- **Status:** [~] code landed, bench pending — W4 shipped unflipped by mags (`febd6492` admission cause + talk-back, `5a989406` legacy blank-cause backfill, `29df2d2d` ghost-bed reconcile). Code verified in-tree 2026-08-09 (kimi sweep): Cause on new admissions, idempotent legacy backfill, ghost reconcile against ledger authority, census→WP-illness talk-back (`applyDemographicDrift.js:184-208`). Node proof: `scripts/hospitalTalkback.test.js` 24/24 (kimi, vm-sandbox, no Sheets). Bench fire (criterion 5 literal) approved by Mike 2026-08-09, pending — note the bench deploy now also carries engine.94 grief (needs the six World_Config grief keys on the SANDBOX sheet too; live rows landed 2026-08-09) and engine.101 bond drain.
 
 ### Task 8: W5 dashboard half — provenance chip (kimi, dashboard/)
 
@@ -108,7 +108,7 @@ pointers:
 ### Task 9: W5 media half — no bare rate leads (research-build → media)
 
 - **Files:** sift/desk guidance (scoped ban: illness/employment/crisis rates until supported; migration flows allowed with label)
-- **Status:** [ ] not started — **owner: research-build/media**
+- **Status:** [~] cron half done (2026-08-09, kimi) — `cascadeRateRule` block in `scripts/cron-desk-writer.js` shared system prompt (static ban until support lands, then flip off). **/sift skill half open** — `.claude/skills/` is control-plane; needs whoever owns it post-Claude.
 
 ---
 

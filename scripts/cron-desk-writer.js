@@ -830,6 +830,14 @@ async function main() {
       loadHartleyVisualBag()
     : '';
 
+  // engine.102 W5 (Task 9 cron half): the WP city dial is a model face, not census.
+  // Static scoped ban until cascade support lands and someone flips this rule off.
+  const cascadeRateRule =
+    '\n\nCASCADE RATE RULE (hard, engine.102 W5): never lead with a bare citywide illness/employment/crisis ' +
+    'rate as if it were census fact — the citywide dial is a model face, not ground support. Rate figures ' +
+    'appear only attributed to the layer that supports them (ledger counts, hospital census, neighborhood ' +
+    'demographics). Migration flows may run with the label "city model estimate".\n';
+
   const system =
     'You are running HEADLESS as the ' + DESK + ' desk of The Cycle Pulse — the same agent that ' +
     'normally runs inside Claude Code, now driven by a standalone script. Your SKILL is below: follow it ' +
@@ -841,6 +849,7 @@ async function main() {
     'stop until you have written the section.\n' +
     firebrandHeat +
     priorArcSystem +
+    cascadeRateRule +
     '=== YOUR SKILL (.claude/agents/' + (PERSONA || (DESK + '-desk')) + ') ===\n\n' + skill +
     (strictSourceBlock ? '\n\n' + strictSourceBlock : '');
 

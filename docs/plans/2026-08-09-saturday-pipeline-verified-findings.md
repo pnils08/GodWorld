@@ -175,7 +175,7 @@ Recorded so the next session does not inherit them as fact.
 | "The scorecard will print 100% again next week regardless" | **FALSE** | `stepAudit` bails on an empty set at `cron-saturday-run.js:512` (`if (!set.length) ... return { audited: 0 }`). With nothing staged it writes no scorecard at all. |
 | "The bug is the denominator" | **WRONG DIAGNOSIS** | The denominator is honest about what it measures. The defect is F4 — stale sidecars are never swept, so the same two articles are re-graded. |
 | "The Hal slice landed" | **FALSE** | F8 — untracked, never committed. |
-| "Rhea don't work" (accepted from the complaint, then tested) | **FALSE** | F7 — Rhea is the working component. |
+| "Rhea is functioning / is the working component" | **NOT ESTABLISHED** | F7 — I read Rhea's own summaries and treated the auditor's word as ground truth. Mike's counter-claim (90% false blocks) is untested. W4 measures it. |
 
 I asked for approval twice on a fix aimed at the wrong mechanism. That is the failure this
 plan is gated behind.

@@ -380,6 +380,17 @@ function runGenerationalEngine_(ctx) {
       if (healthResult) {
         row[iStatus] = healthResult.newStatus;
 
+        // engine.102 W4 — legacy tracked citizens with a blank HealthCause
+        // (pre-W4 admissions) get a cause stamped at their next transition,
+        // keyed to their current status class; backfilled to the ledger row so
+        // the Phase 10 persist and the operator queue both see it.
+        if (!healthCause) {
+          var causeClass102 = (status === 'injured') ? 'injured' :
+                              (status === 'serious-condition') ? 'serious-condition' : 'hospitalized';
+          healthCause = buildAdmissionCause_(ctx, causeClass102, null, calendarContext);
+          if (iHealthCause >= 0) row[iHealthCause] = healthCause;
+        }
+
         // engine.52 B1 — every health-status transition lands in ctx.summary
         // for the Phase 10 Hospital_Ledger persist. No sheet writes here.
         ctx.summary.hospitalEvents = ctx.summary.hospitalEvents || [];

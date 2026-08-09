@@ -130,7 +130,7 @@ Shipped exemplars: Jax (stink substrate + firebrand overlay), P Slayer (sports f
   2. Overlay `HAL_ARCHIVE_BAG`: present fact first, then era echo; closing palette; not FO PR, not fan heat.
   3. Prior columns from `output/reporters` / desks for Hal if present; wall at wake remains cron-owned.
 - **Verify:** tests PASS; approach names historian/continuity; never assigns business desk.
-- **Status:** [ ] not started
+- **Status:** [x] done (grok code; landed by kimi 2026-08-09, commit 916cccdc, while grok locked out) — builder + test + cron/fanout wiring; smoke vs C102 (Kelley re-signing, score 99 era-door, close=elegy)
 
 ### Task 6: Civic family + education note (P2)
 
@@ -155,7 +155,7 @@ Shipped exemplars: Jax (stink substrate + firebrand overlay), P Slayer (sports f
 2. Task 3 Sports substrate extract — **shipped** (with Anthony)  
 3. Task 4 Anthony — **shipped** (pulled ahead of economic per Mike)  
 4. Task 2 Economic — **shipped**  
-5. Task 5 Hal — next  
+5. Task 5 Hal — **shipped** (grok code; landed by kimi 2026-08-09, 916cccdc)  
 6. Tasks 6–7 as capacity allows  
 
 ---
@@ -174,6 +174,7 @@ Shipped exemplars: Jax (stink substrate + firebrand overlay), P Slayer (sports f
 - 2026-08-08 (grok) — Task 1 shipped: `scripts/buildEveningSlice.js` + test; C102 top pulse quiet-nightlife @ KONO Cocktails; recommends Sharon lifestyle; per-seat fit (Mason→44th Table); wired cron-desk-run culture inject + newsroom-fanout enrich. NEXT: Task 2 economic pack.
 - 2026-08-08 (grok) — Mike moved Anthony up chain. Task 3 substrate + Task 4 Anthony shipped: `sportsSubstrate.js`, `buildAnthonySlice.js`; C102 pulse roster-architecture (Kelley resign) score 89, bag tools 1+2; P Slayer tests still PASS. Economic remains next P0; Hal after.
 - 2026-08-09 (grok) — Task 2 economic pack shipped: `buildEconomicSlice.js`; C102 West Oakland cooling with Oakmesh / WOCC / Crisis Coffee named from ledger+evening; cron business desk + fanout enrich. NEXT: Task 5 Hal.
+- 2026-08-09 (kimi) — Task 5 Hal found code-complete but uncommitted in the tree (grok locked out on usage, builder-directed landing). Validated (test PASS, node --check clean, smoke vs C102: Kelley re-signing score 99 era-door, close=elegy, 3 priors, 2 players) and landed as `916cccdc` with grok attribution. Live from the Mon–Fri 06:15 angle wake. NEXT: Tasks 6–7 when grok returns (or builder reassigns).
 
 ---
 
@@ -183,3 +184,4 @@ Shipped exemplars: Jax (stink substrate + firebrand overlay), P Slayer (sports f
 - 2026-08-08 (grok) — Task 1 Evening life pack shipped.
 - 2026-08-08 (grok) — Task 3 sports substrate + Task 4 Anthony analytic pack shipped (order revised).
 - 2026-08-09 (grok) — Task 2 Economic / storefront pack shipped.
+- 2026-08-09 (grok code; landed by kimi) — Task 5 Hal archive pulse shipped, commit 916cccdc.

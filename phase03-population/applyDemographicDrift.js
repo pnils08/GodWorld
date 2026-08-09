@@ -174,6 +174,39 @@ function applyDemographicDrift_(ctx) {
     ill -= illnessStepDown;
   }
 
+  // ═══════════════════════════════════════════════════════════════════════════
+  // HOSPITAL TALK-BACK (engine.102 W4, Task 7)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // Previous cycle's hospital census strains the city: open admissions above
+  // capacity push the illness rate up (ground talking back to the city face).
+  // Phase 3 runs before this cycle's Phase-10 hospital persist, so the read is
+  // structurally last cycle's census — exactly the talk-back direction.
+  var hospitalOpen = 0;
+  var hospSheet = ctx.ss.getSheetByName('Hospital_Ledger');
+  if (hospSheet) {
+    var hospVals = hospSheet.getDataRange().getValues();
+    var hIdxDischarge = hospVals.length ? hospVals[0].indexOf('DischargeCycle') : -1;
+    if (hIdxDischarge >= 0) {
+      for (var hRow102 = 1; hRow102 < hospVals.length; hRow102++) {
+        var dv = hospVals[hRow102][hIdxDischarge];
+        if (dv === '' || dv === null) hospitalOpen++;
+      }
+    }
+  }
+  var hospitalLoadUnits = hospitalOpen * hospitalLoadPerSick;
+  var hospitalStrainApplied = 0;
+  if (hospitalLoadUnits > hospitalBaseCapacity) {
+    hospitalStrainApplied = hospitalTalkbackGain * (hospitalLoadUnits - hospitalBaseCapacity);
+    ill += hospitalStrainApplied;
+    changes.push('hospital-strain');
+  }
+  S.hospitalTalkback = {
+    open: hospitalOpen,
+    loadUnits: hospitalLoadUnits,
+    capacity: hospitalBaseCapacity,
+    applied: round4(hospitalStrainApplied)
+  };
+
   ill = round4(ill);
   if (ill < 0) ill = 0;
   if (ill > illnessCap) ill = illnessCap;

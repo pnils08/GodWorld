@@ -600,12 +600,18 @@ function runGenerationalEngine_(ctx) {
         row[iStatus] = admitStatus;
         if (iStatusStart >= 0) row[iStatusStart] = cycle;
 
+        // engine.102 W4 (Task 7) — stamp a known cause at admission instead of
+        // leaving it blank for the operator queue (criterion 5; the queue flow
+        // becomes optional refinement — healthCauseIntake skips non-blank).
+        var cause102 = buildAdmissionCause_(ctx, admitStatus, healthResult2, calendarContext);
+        if (iHealthCause >= 0 && !row[iHealthCause]) row[iHealthCause] = cause102;
+
         // engine.52 B1 — new admissions land in ctx.summary alongside
         // lifecycle transitions for the Phase 10 Hospital_Ledger persist.
         ctx.summary.hospitalEvents = ctx.summary.hospitalEvents || [];
         ctx.summary.hospitalEvents.push({
           popId: popId, name: name, neighborhood: neighborhood,
-          cause: "", from: "active", to: admitStatus, cycle: cycle
+          cause: cause102, from: "active", to: admitStatus, cycle: cycle
         });
       }
 
@@ -1338,8 +1344,43 @@ function checkHealthEvent_(ctx, popId, age, lifeHistory, cal, neighborhood) {
     description: pick_(ctx, descriptions),
     tag: "Health",
     severity: severity,
-    season: cal.season
+    season: cal.season,
+    // engine.102 W4 — carry the dose context so the admission can stamp a
+    // KNOWN cause (S325 heat-wave precedent: a known cause skips the
+    // operator queue).
+    epidemic: effRate >= supportThreshold102,
+    localRate: effRate
   };
+}
+
+// engine.102 W4 (Task 7) — deterministic admission cause from what the engine
+// already knows drove the event: severity, season, and whether the citizen's
+// hood is in epidemic. Causes-then-numbers: the dose context IS the cause.
+function buildAdmissionCause_(ctx, admitStatus, healthResult, cal) {
+  if (admitStatus === 'injured') {
+    return pick_(ctx, [
+      'a fall at home', 'a workplace accident', 'a bicycle accident',
+      'an accident that required treatment'
+    ]);
+  }
+  if (admitStatus === 'serious-condition') {
+    return pick_(ctx, [
+      'a cardiac condition', 'complications from a chronic illness',
+      'a serious diagnosis after weeks of symptoms'
+    ]);
+  }
+  // hospitalized (severe)
+  if (healthResult && healthResult.epidemic) {
+    return pick_(ctx, [
+      'a severe case of the illness moving through the neighborhood',
+      'a serious respiratory infection amid the local outbreak',
+      'complications from the illness sweeping the neighborhood'
+    ]);
+  }
+  if (cal && cal.season === 'winter') {
+    return pick_(ctx, ['severe seasonal flu', 'pneumonia following a winter illness']);
+  }
+  return pick_(ctx, ['a sudden acute illness', 'an emergency medical episode']);
 }
 
 // ============================================================

@@ -36,6 +36,7 @@ const { buildPool, coResidents, loadLifeArc, loadSportsSlice, loadNeighborhoodTe
   loadBonds, loadFamily, loadOwnPageReadback, dialTrajectory,
   loadCardAnchor, loadVoiceTexture } = require('/root/GodWorld/lib/wakePerception'); // engine.48 T10 + T11; loadFamily loop-doctrine 2026-08-04
 const { selectProvocation, _hash53 } = require('/root/GodWorld/lib/provocationBank'); // T5 varied-provocation bank; _hash53 seeds T1 draw + T2 slot
+const { matchBondTargets_ } = require('./bondTargetMatch'); // engine.101 — intake BondTarget (col I) + T4 ripple share one match
 
 const ARGV = process.argv.slice(2);
 const DRY = ARGV.includes('--dry-run');
@@ -330,9 +331,11 @@ async function generateVoice(system, user) {
   //    both can fire on the same wake. Typed docs (metadata.type='tension', customId key suffix)
   //    so they never collide with the reflection doc or leak into recall candidates.
   const tlist = tensionState[c.popId] = tensionState[c.popId] || [];
+  let resolvedText = ''; // engine.101 — rides Reflection_Intake col K when a resolution fired
   if (cls.resolves != null && openTensions[cls.resolves]) {
     const t = openTensions[cls.resolves]; // reference into tensionState — status flip persists on save
     t.status = 'resolved'; t.resolvedCy = cycle;
+    resolvedText = t.q;
     await page.appendReflection_(c.popId, `TENSION-RESOLVED[c${cycle}]: ${t.q}`, { cycle, daypart: WAKE, key: 'tension-resolved', extra: { type: 'tension' } });
     logLine(`tension RESOLVED <- "${t.q.slice(0, 80)}"`);
   }
@@ -348,15 +351,23 @@ async function generateVoice(system, user) {
   }
   saveTensionState(tensionState); // also persists this wake's silent expiry pass
 
+  // engine.101 — ONE bond name-match serves both the intake BondTarget column (first hit)
+  // and the T4 ripple register (all hits, step 4b). Hoisted ahead of the append.
+  const bondHits = matchBondTargets_(reflection, bondPairs);
+  const bondTarget = bondHits.length ? bondHits[0].pop : '';
+
   // 4) persist the dual classified tags to Reflection_Intake (the cycle reads this when the gate opens).
-  //    Row: [ts, popId, cycle, WAKE, EVENT(col E), snippet, applied='no', AFFECT(col H)] — A-G stay
-  //    positional (back-compat); affect is appended at H. composure-as-affect-only lives in the
-  //    cycle's gated write-back (nudgesForReflection_), not here.
+  //    Row: [ts, popId, cycle, WAKE, EVENT(col E), snippet, applied='no', AFFECT(col H),
+  //    BondTarget(col I), Tension(col J), Resolves(col K)] — A-H stay positional (back-compat);
+  //    engine.101 appends I-K (research 2026-08-03 §Addendum 2: tension/resolves are relationship
+  //    signals; BondTarget is the bond counterpart named in the reflection, '' when none).
+  //    composure-as-affect-only lives in the cycle's gated write-back (nudgesForReflection_), not here.
   if (cls.event || cls.affect) {
     await sheets.appendRows('Reflection_Intake', [[
       new Date().toISOString(), c.popId, cycle, WAKE, cls.event || '', reflection.slice(0, 180).replace(/\n/g, ' '), 'no', cls.affect || '',
+      bondTarget, cls.tension || '', resolvedText,
     ]]);
-    logLine(`Reflection_Intake <- event=[${cls.event || '-'}] affect=[${cls.affect || '-'}]${cls.affectFallback ? ' (affect fallback)' : ''} (applied=no, gated)`);
+    logLine(`Reflection_Intake <- event=[${cls.event || '-'}] affect=[${cls.affect || '-'}]${cls.affectFallback ? ' (affect fallback)' : ''}${bondTarget ? ' bondTarget=' + bondTarget : ''} (applied=no, gated)`);
   } else {
     logLine(`classifier off-vocab/err, intake skipped: ${cls.raw}`);
   }
@@ -366,14 +377,9 @@ async function generateVoice(system, user) {
   // 4b) engine.48 T4 ripple register — live runs only. Write side: naming a bonded citizen in
   // the reflection leaves a trace they perceive at their next wake (one live entry per pair,
   // overwrite refreshes). Read side consumption: the rendered entry is spent.
-  for (const bp of bondPairs) {
-    const first = String(bp.name || '').split(/\s+/)[0];
-    const hitFull = bp.name && new RegExp(`\\b${bp.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i').test(reflection);
-    const hitFirst = first && first.length >= 3 && new RegExp(`\\b${first.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i').test(reflection);
-    if (hitFull || hitFirst) {
-      rippleState[`${c.popId}->${bp.pop}`] = { to: bp.pop, from: c.popId, fromName: c.name, affect: cls.affect || '', cy: cycle };
-      logLine(`ripple <- ${c.popId} named ${bp.name} (${bp.pop})`);
-    }
+  for (const bp of bondHits) {
+    rippleState[`${c.popId}->${bp.pop}`] = { to: bp.pop, from: c.popId, fromName: c.name, affect: cls.affect || '', cy: cycle };
+    logLine(`ripple <- ${c.popId} named ${bp.name} (${bp.pop})`);
   }
   for (const k of rippleKeysHit) { delete rippleState[k]; logLine(`ripple consumed: ${k}`); }
   saveRippleState(rippleState); // also persists this wake's silent expiry pass

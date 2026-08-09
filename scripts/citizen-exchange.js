@@ -142,8 +142,10 @@ async function runExchange(speakers, totalTurns, maxTokens) {
   return transcript;
 }
 
-/* Wake write block (citizen-wake steps 1-4) on a participant's OWN lines. */
-async function recordParticipant(c, ownText, daypart, cycle, tensionState) {
+/* Wake write block (citizen-wake steps 1-4) on a participant's OWN lines.
+ * bondTarget (engine.101): POPID of the bond counterpart this exchange was with,
+ * '' when the format has no bond counterpart (interview/debate) — rides intake col I. */
+async function recordParticipant(c, ownText, daypart, cycle, tensionState, bondTarget) {
   const openTensions = openTensionsFor(tensionState, c.popId, cycle);
   let cls = {};
   try { cls = await classifier.classifyTripleReflection_(ownText, openTensions.map((t) => t.q)); } catch (e) { cls = { raw: 'classify threw: ' + e.message }; }
@@ -155,9 +157,11 @@ async function recordParticipant(c, ownText, daypart, cycle, tensionState) {
   if (appended.error) throw new Error('appendReflection_: ' + appended.error);
   logLine(`[record] ${c.popId} page ${ptr.tag} <- ${daypart} doc ${appended.id || '?'}`);
   const tlist = tensionState[c.popId] = tensionState[c.popId] || [];
+  let resolvedText = ''; // engine.101 — intake col K
   if (cls.resolves != null && openTensions[cls.resolves]) {
     const t = openTensions[cls.resolves];
     t.status = 'resolved'; t.resolvedCy = cycle;
+    resolvedText = t.q;
     await page.appendReflection_(c.popId, `TENSION-RESOLVED[c${cycle}]: ${t.q}`, { cycle, daypart, key: 'tension-resolved', extra: { type: 'tension' } });
   }
   if (cls.tension && !tlist.some((t) => t.status === 'open' && t.q.toLowerCase() === cls.tension.toLowerCase())) {
@@ -172,8 +176,9 @@ async function recordParticipant(c, ownText, daypart, cycle, tensionState) {
   if (cls.event || cls.affect) {
     await sheets.appendRows('Reflection_Intake', [[
       new Date().toISOString(), c.popId, cycle, daypart, cls.event || '', ownText.slice(0, 180).replace(/\n/g, ' '), 'no', cls.affect || '',
+      bondTarget || '', cls.tension || '', resolvedText, // engine.101 cols I-K (positional back-compat A-H)
     ]]);
-    logLine(`[record] ${c.popId} Reflection_Intake <- event=[${cls.event || '-'}] affect=[${cls.affect || '-'}] (applied=no, gated)`);
+    logLine(`[record] ${c.popId} Reflection_Intake <- event=[${cls.event || '-'}] affect=[${cls.affect || '-'}]${bondTarget ? ' bondTarget=' + bondTarget : ''} (applied=no, gated)`);
   } else {
     logLine(`[record] ${c.popId} classifier off-vocab/err, intake skipped: ${cls.raw}`);
   }
@@ -238,8 +243,9 @@ async function formatConversation(pool, cycle, forcedPops) {
   if (DRY) { printDry(speakers, transcript); return { dry: true }; }
   const tensionState = loadJson(TENSION_FILE, {});
   for (const p of [pa, pb]) {
+    const other = p === pa ? pb : pa;
     const own = transcript.filter((t) => t.popId === p.c.popId).map((t) => t.text).join('\n');
-    await recordParticipant(p.c, own, 'CONVO', cycle, tensionState);
+    await recordParticipant(p.c, own, 'CONVO', cycle, tensionState, other.c.popId); // engine.101 — a bonded conversation IS the interaction
   }
   saveJson(TENSION_FILE, tensionState);
   if (rippleKey) { delete rippleState[rippleKey]; saveJson(RIPPLE_FILE, rippleState); logLine(`ripple consumed: ${rippleKey}`); }

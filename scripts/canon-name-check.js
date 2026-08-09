@@ -83,6 +83,29 @@ function loadCanonNames() {
 
 // One-line ledger profiles for verified citizens (the "Calvin Turner, mechanic
 // for thirty years" class): bio claims contradicting these are misrepresentation.
+// S361 — same profile line, keyed by POPID instead of name. Lane entries carry
+// ids, not names, and a name round-trip is exactly where a typo'd feed row loses
+// the person. Shares loadRows() and the format with profilesFor.
+function profilesForPopids(popids) {
+  const want = new Set((popids || []).map(p => String(p).trim().toUpperCase()).filter(Boolean));
+  if (!want.size) return [];
+  const out = [];
+  for (const row of loadRows()) {
+    const pop = String(row.POPID || '').trim().toUpperCase();
+    if (!want.has(pop)) continue;
+    const full = String(row.Name || '').replace(/\s+/g, ' ').trim()
+      || [row.First, row.Last].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
+    out.push(full + ' — ' + [
+      row.RoleType && 'role: ' + row.RoleType,
+      row.Neighborhood && 'neighborhood: ' + row.Neighborhood,
+      row.BirthYear && 'age: ' + (2041 - Number(row.BirthYear)),
+      row.CareerStage && 'careerStage: ' + row.CareerStage,
+      'popid: ' + pop
+    ].filter(Boolean).join('; '));
+  }
+  return out;
+}
+
 function profilesFor(names) {
   const want = new Set((names || []).map(n => String(n).toLowerCase()));
   const out = [];
@@ -237,4 +260,4 @@ if (require.main === module) {
   process.exit(out.unverified.length ? 2 : 0);
 }
 
-module.exports = { checkText, extractCandidates, loadCanonNames, buildStoplist, profilesFor, resolveCitizens };
+module.exports = { checkText, extractCandidates, loadCanonNames, buildStoplist, profilesFor, profilesForPopids, resolveCitizens };

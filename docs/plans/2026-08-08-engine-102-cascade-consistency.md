@@ -103,7 +103,7 @@ pointers:
 
 - **Files:** `dashboard/server.js` (provenance field on metric payloads), `dashboard/src/components/tabs/CityMap.jsx` + `CityTab.jsx` (dice-vs-supported chip)
 - **Steps:** once Task 5 lands and a support flag exists per metric, surface it. Blocked until then; do not invent the flag client-side.
-- **Status:** [x] done (2026-08-09, kimi) — ungated by Mike after Task 5 landed (S361). `GET /api/cascade` (audit-driven support state per metric, 10-min cache) + `SupportChip.jsx` on CityMap + CityTab. Verified on throwaway instance; **live PM2 restart pending builder OK** (server.js change). Note: chip shows honest current state — illness + employment CITY DIAL, migration NO DATA until W3/W4 ground support lands.
+- **Status:** [x] done (2026-08-09, kimi) — ungated by Mike after Task 5 landed (S361). `GET /api/cascade` (audit-driven support state per metric, 10-min cache) + `SupportChip.jsx` on CityMap + CityTab. Live on production (PM2 restart approved+run 2026-08-09); employment gap semantics corrected in unemployment space (`924dcc8a`, matches audit invariant exactly). Chip shows honest current state — illness + employment CITY DIAL, migration NO DATA — and flips to SUPPORTED as Tasks 6–7 ground support lands.
 
 ### Task 9: W5 media half — no bare rate leads (research-build → media)
 

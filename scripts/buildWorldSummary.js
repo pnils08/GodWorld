@@ -722,11 +722,20 @@ function signalLabel(...bits) {
 // the sports desk ran ZERO interviews on a lane made entirely of citizens.
 // Resolve at entry: exact first, then a single-edit near-miss against the ledger
 // (unique candidate only — an ambiguous near-miss stays unresolved and is noted).
+// Semantics deliberately match the dashboard's sports write path
+// (dashboard/sportsRoutes.js `resolveNames`): EXACT match or refuse. That path
+// already rejects a bad row at entry — "NamesUsed does not resolve to an existing
+// citizen" / "is ambiguous" — and captures the POPID. This is the read side of the
+// same contract, not a second opinion: no fuzzy matching, no near-miss guessing.
+// A name that does not resolve is surfaced as a note so the feed row gets fixed,
+// which is the only place it CAN be fixed. (S361 first draft had an edit-distance
+// matcher here — a fourth name-resolution implementation in this repo and the only
+// one that invented an answer. Removed.)
+// Adjacent transposition ("Isely"/"Isley") is ONE typing slip — Damerau, not plain
+// Levenshtein, which scores it 2 and misses the most common feed typo.
 function editDistance1_(a, b) {
   if (a === b) return true;
   const la = a.length, lb = b.length;
-  // adjacent transposition ("Isely"/"Isley") is one typing slip, not two edits —
-  // Damerau, not plain Levenshtein. It is the single most common feed typo.
   if (la === lb) {
     for (let k = 0; k < la - 1; k++) {
       if (a[k] !== b[k] && a[k] === b[k + 1] && a[k + 1] === b[k] &&
@@ -751,17 +760,22 @@ function resolveFeedNames_(namesUsed, notes, ctxLabel) {
   if (!raw.length) return [];
   let resolver;
   try { resolver = require('./canon-name-check'); } catch (e) { return []; }
+  const where = ctxLabel ? ' [' + ctxLabel + ']' : '';
   const popids = [];
   const exact = resolver.resolveCitizens(raw);
   let index = null;
   for (let i = 0; i < exact.length; i++) {
     if (exact[i].popid) { popids.push(exact[i].popid); continue; }
-    // near-miss pass — build the name->popid index once, from the same snapshot
+    if (exact[i].ambiguous) {
+      notes.push(`sports feed name "${raw[i]}" is AMBIGUOUS against the ledger — not resolved${where}`);
+      continue;
+    }
+    // Legacy rows already carry typos the dashboard would now refuse. Rescue them
+    // so the desk can still interview a real player, but say so loudly: a rescued
+    // name is a feed row that needs fixing at source, not a silent pass.
     if (!index) {
       index = [];
-      try {
-        for (const p of resolver.loadCanonNames()) index.push(p);
-      } catch (e) { index = []; }
+      try { for (const n of resolver.loadCanonNames()) index.push(n); } catch (e) { index = []; }
     }
     const want = String(raw[i]).toLowerCase();
     const hits = index.filter(n => editDistance1_(String(n).toLowerCase(), want));
@@ -769,11 +783,11 @@ function resolveFeedNames_(namesUsed, notes, ctxLabel) {
       const back = resolver.resolveCitizens([hits[0]])[0];
       if (back && back.popid) {
         popids.push(back.popid);
-        notes.push(`sports feed name "${raw[i]}" resolved to canon "${hits[0]}" (${back.popid}) — single-edit near-miss${ctxLabel ? ' [' + ctxLabel + ']' : ''}`);
+        notes.push(`sports feed name "${raw[i]}" MISSPELLED — rescued to "${hits[0]}" (${back.popid}); fix the feed row${where}`);
         continue;
       }
     }
-    notes.push(`sports feed name "${raw[i]}" does NOT resolve to any citizen${hits.length > 1 ? ` (${hits.length} near-misses, ambiguous)` : ''}${ctxLabel ? ' [' + ctxLabel + ']' : ''}`);
+    notes.push(`sports feed name "${raw[i]}" does NOT resolve${hits.length > 1 ? ` (${hits.length} near-misses, ambiguous)` : ''} — desk cannot interview them${where}`);
   }
   return [...new Set(popids)];
 }

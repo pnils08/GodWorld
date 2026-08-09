@@ -1749,7 +1749,8 @@ app.get('/api/cascade', async (req, res) => {
           city: m.employment?.cityDial?.value ?? null,
           hood: m.employment?.hoodLayer?.value ?? null,
           ledger: m.employment?.ledgerLayer?.value ?? null,
-          gap: rateGap(m.employment?.cityDial?.value, m.employment?.hoodLayer?.value),
+          // hood/ledger layers are UNEMPLOYMENT rates — compare in that space
+          gap: rateGap(Number.isFinite(m.employment?.cityDial?.value) ? 1 - m.employment.cityDial.value : null, m.employment?.hoodLayer?.value),
           support: invariantSupport(report, 'unemploy'),
         },
         migration: {

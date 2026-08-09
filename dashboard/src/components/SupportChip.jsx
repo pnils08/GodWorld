@@ -20,12 +20,15 @@ function fmtPct(v) {
 
 function tooltip(name, m, denominators) {
   if (!m) return `${name}: no data`;
+  // City dial is an EMPLOYMENT rate while hood/ledger layers are UNEMPLOYMENT
+  // rates — label them so the three-scale line doesn't mislead.
+  const groundSuffix = name === 'employment' ? ' unemp' : '';
   const parts = [];
   if (Number.isFinite(m.city)) parts.push(`city ${fmtPct(m.city)}`);
-  if (Number.isFinite(m.hood)) parts.push(`hood ${fmtPct(m.hood)}`);
+  if (Number.isFinite(m.hood)) parts.push(`hood ${fmtPct(m.hood)}${groundSuffix}`);
   if (Number.isFinite(m.ledger)) {
     const denom = denominators?.ledger;
-    parts.push(`ledger ${fmtPct(m.ledger)}${denom ? ` (of ${denom})` : ''}`);
+    parts.push(`ledger ${fmtPct(m.ledger)}${groundSuffix}${denom ? ` (of ${denom})` : ''}`);
   }
   return `${name}: ${parts.join(' | ') || 'no data'}`;
 }

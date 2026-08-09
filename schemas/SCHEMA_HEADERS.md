@@ -922,7 +922,7 @@ pointers:
 ## Reflection_Intake
 
 - **Rows:** 481
-- **Columns:** 8
+- **Columns:** 11
 
 | Col | Header |
 |-----|--------|
@@ -934,6 +934,14 @@ pointers:
 | F | ReflectionExcerpt |
 | G | Applied |
 | H | Affect |
+| I | BondTarget |
+| J | Tension |
+| K | Resolves |
+
+<!-- engine.101 (2026-08-09): I = POPID of the bonded citizen named in the
+     reflection ('' when none; CONVO rows carry the exchange counterpart);
+     J = newly opened tension text; K = resolved tension question text.
+     8-wide rows predate engine.101 — trailing cells read blank. -->
 
 ---
 

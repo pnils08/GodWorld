@@ -126,8 +126,27 @@ var REFLECTION_INTAKE_TAB = 'Reflection_Intake';
 var REFLECTION_MULT = 0.45;
 var REFLECTION_ACCRETION_FRAC = 0.5;
 // Reflection_Intake column layout (1-based): A ts | B popId | C cycle | D wake |
-// E event | F snippet | G applied | H affect. (citizen-wake.js writer, S262.)
+// E event | F snippet | G applied | H affect | I bondTarget | J tension | K resolves.
+// A-H: citizen-wake.js writer, S262. I-K: engine.101 bond write-back (additive —
+// rows predating it read as ''). Writers: citizen-wake.js, citizen-exchange.js.
 var RI_COL_POPID = 2, RI_COL_EVENT = 5, RI_COL_SNIPPET = 6, RI_COL_APPLIED = 7, RI_COL_AFFECT = 8;
+var RI_COL_BOND_TARGET = 9, RI_COL_TENSION = 10, RI_COL_RESOLVES = 11;
+
+// engine.101 bond write-back (research 2026-08-03 §Addendum 2 — "tension/resolves
+// are relationship signals"): a reflection naming a bonded citizen (intake col I)
+// nudges that bond's Intensity by interaction outcome. v1 signal = affect valence
+// ONLY; cols J/K persist tension/resolves for audit and future consumers but are
+// deliberately NOT consumed for intensity yet. The nudge mutates the IN-MEMORY
+// ctx.summary.relationshipBonds entries — Phase 10 full-replaces Relationship_Bonds
+// from that array AFTER Phase 9, so a queued cell intent would be overwritten.
+// Same gate, same applied='yes' audit as the dial drain above.
+var BOND_NUDGE = 0.25;             // per named-reflection nudge, signed by valence
+var BOND_NUDGE_CYCLE_CAP = 0.5;    // max |total| per bond pair per cycle (both directions)
+var BOND_INTENSITY_MIN = 0, BOND_INTENSITY_MAX = 10;
+var AFFECT_VALENCE = {             // the closed 9-tag affect vocab (reflectionClassifier)
+  frustrated: -1, irritable: -1, anxious: -1, angry: -1, resentful: -1,
+  excited: 1, energized: 1, content: 1, calm: 1
+};
 
 // Default decay basis
 var DEFAULT_DECAY_BASIS = 'entries';
@@ -286,10 +305,44 @@ function readPendingReflections_(ctx) {
       rowNum: r + 1,                                   // 1-based sheet row
       event: event,
       affect: affect,
-      text: vrow[RI_COL_SNIPPET - 1] || ''
+      text: vrow[RI_COL_SNIPPET - 1] || '',
+      bondTarget: String(vrow[RI_COL_BOND_TARGET - 1] || '').trim().toUpperCase(), // engine.101
+      tension: vrow[RI_COL_TENSION - 1] || '',         // engine.101 (audit/future; not consumed v1)
+      resolves: vrow[RI_COL_RESOLVES - 1] || ''        // engine.101 (audit/future; not consumed v1)
     });
   }
   return out;
+}
+
+// engine.101 — find the active bond for an unordered POPID pair and apply a
+// capped, signed intensity nudge IN MEMORY (Phase-10 replace persists it).
+// `totals` ({pairKey: signedTotal}) enforces BOND_NUDGE_CYCLE_CAP across both
+// directions (A names B and B names A in the same cycle). Misses (pair unknown,
+// severed between wake and drain) are a stat, never a throw.
+// Returns 'nudged' | 'capped' | 'missed'.
+function nudgeBondIntensity_(bonds, totals, fromPop, toPop, delta, cycle) {
+  var a = String(fromPop || '').trim().toUpperCase();
+  var b = String(toPop || '').trim().toUpperCase();
+  if (!a || !b || a === b || !delta) return 'missed';
+  var key = a < b ? a + '|' + b : b + '|' + a;
+  for (var i = 0; i < bonds.length; i++) {
+    var bond = bonds[i];
+    if (!bond) continue;
+    var ba = String(bond.citizenA || '').trim().toUpperCase();
+    var bb = String(bond.citizenB || '').trim().toUpperCase();
+    if (!((ba === a && bb === b) || (ba === b && bb === a))) continue;
+    var used = totals[key] || 0;
+    var room = BOND_NUDGE_CYCLE_CAP - Math.abs(used);
+    if (room <= 0) return 'capped';
+    var applied = Math.abs(delta) > room ? (delta < 0 ? -room : room) : delta;
+    var cur = Number(bond.intensity);
+    if (!isFinite(cur)) cur = 5;
+    bond.intensity = Math.max(BOND_INTENSITY_MIN, Math.min(BOND_INTENSITY_MAX, Math.round((cur + applied) * 100) / 100));
+    bond.lastUpdate = cycle;
+    totals[key] = used + applied;
+    return 'nudged';
+  }
+  return 'missed';
 }
 
 function compressLifeHistory_(ctx, options) {
@@ -354,6 +407,9 @@ function compressLifeHistory_(ctx, options) {
   // harness where the reflection surface isn't loaded (drain simply stays dormant).
   var reflectionDialMap = (typeof nudgesForReflection_ !== 'undefined') ? { nudgesForReflection_: nudgesForReflection_ } : null;
   var reflectionsMoved = 0, reflectionCitizens = 0;
+  // engine.101: per-cycle per-pair nudge totals (cap) + outcome stats.
+  var bondNudgeTotals = {};
+  var bondsNudged = 0, bondTargetsMissed = 0;
 
   // engine.38 B1 (S283): bias-intent drain. Phase-5 generators tally drawn
   // opinion events into S.biasIntents {popId: [{t,s,o}]}; the tally is
@@ -503,6 +559,20 @@ function compressLifeHistory_(ctx, options) {
         queueCellIntent_(ctx, REFLECTION_INTAKE_TAB, pending[p].rowNum, RI_COL_APPLIED, 'yes',
           'reflection-drain accreted (citizen-loop)', 'citizens', 100);
       }
+      // engine.101 bond write-back: same drain, same gate. Nudge the named bond's
+      // intensity IN MEMORY — Phase 10 full-replaces Relationship_Bonds from
+      // ctx.summary.relationshipBonds, so only an in-memory mutation survives.
+      if (Array.isArray(S.relationshipBonds)) {
+        for (var bn = 0; bn < pending.length; bn++) {
+          var btRow = pending[bn];
+          if (!btRow.bondTarget) continue;
+          var valence = AFFECT_VALENCE[String(btRow.affect || '').toLowerCase()] || 0;
+          if (!valence) continue;
+          var nRes = nudgeBondIntensity_(S.relationshipBonds, bondNudgeTotals, popId, btRow.bondTarget, valence * BOND_NUDGE, cycle);
+          if (nRes === 'nudged') bondsNudged++;
+          else if (nRes === 'missed') bondTargetsMissed++;
+        }
+      }
     }
 
     // engine.38 B1 (S283): fold this citizen's bias intents into the register.
@@ -541,6 +611,8 @@ function compressLifeHistory_(ctx, options) {
     skipped: skipped,
     reflectionsMoved: reflectionsMoved,
     reflectionCitizens: reflectionCitizens,
+    bondsNudged: bondsNudged,
+    bondTargetsMissed: bondTargetsMissed,
     biasApplied: biasApplied,
     biasCitizens: biasCitizens,
     unlivedApplied: unlivedApplied,
@@ -554,7 +626,8 @@ function compressLifeHistory_(ctx, options) {
   Logger.log('compressLifeHistory_ v' + COMPRESS_VERSION + ': Updated ' + updated + ', skipped ' + skipped +
     ', reflections ' + reflectionsMoved + '/' + reflectionCitizens + ' citizens' +
     ', biases ' + biasApplied + '/' + biasCitizens + ' citizens' +
-    ', unlived ' + unlivedApplied);
+    ', unlived ' + unlivedApplied +
+    ', bonds nudged ' + bondsNudged + (bondTargetsMissed ? ' (missed ' + bondTargetsMissed + ')' : ''));
 }
 
 // ============================================================================
@@ -1391,6 +1464,10 @@ if (typeof module !== 'undefined' && module.exports) {
     parseProfileString_: parseProfileString_,
     getCitizenDialBands_: getCitizenDialBands_,
     readPendingReflections_: readPendingReflections_,
+    nudgeBondIntensity_: nudgeBondIntensity_,
+    AFFECT_VALENCE: AFFECT_VALENCE,
+    BOND_NUDGE: BOND_NUDGE,
+    BOND_NUDGE_CYCLE_CAP: BOND_NUDGE_CYCLE_CAP,
     COMPRESS_VERSION: COMPRESS_VERSION,
     KEEP_RAW_ENTRIES: KEEP_RAW_ENTRIES,
     MIN_CYCLES_BETWEEN_COMPRESS: MIN_CYCLES_BETWEEN_COMPRESS,

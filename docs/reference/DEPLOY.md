@@ -52,9 +52,9 @@ clear whenever Mike fires them; they confirm, they don't gate.
 **CURRENT sandbox: `SANDBOX 0720` (S328 2026-07-20).** Copy of live at post-C102 canonical state (prod code engine.57-.71 incl. weather/transit/crisis coupling; C102 fired live by Mike, verify PASS). Purpose: vet the next engine wave (Row 24 career-unfreeze prod window, engine.72 triage fixes) before live carries it. Sheet name `SANDBOX_0720_Simulation_Narrative` (71 tabs).
 - Spreadsheet ID `1SHlquj9iLCK129SQEcXcvFCNkuGMgwLItDPj_ERiofI`
 - Bound Apps Script ID: `1ntl6YwpLt-KwIX7HWCU-swMk-cGQ8aZR0aKNh5qUjz93m4OPUVhIB5nV`
-- Code pushed at S328 (HEAD 8ab5a591, temp-dir route, sandbox `.clasp.json` ID grep-verified). Service-account read access verified from Node.
+- Code current at exact main `068fc2d6` (2026-08-09 Codex takeover; temp-dir route, sandbox target verified and production target untouched). Service-account read access verified from Node.
 - SIM_SSID Script Property set (Mike, S328).
-- Web-app deployment `AKfycbztm3ZXPO-V43KICxyFGJKS63jkZQJqATBotcuynuL9yl4lty3kaaO1YpYW4WUIMStq` @1 (S328 initial: HEAD 8ab5a591). CYCLE_TRIGGER_TOKEN set (Mike, S328 — 0717/0716c lineage value; properties don't copy with the sheet).
+- Web-app deployment `AKfycbztm3ZXPO-V43KICxyFGJKS63jkZQJqATBotcuynuL9yl4lty3kaaO1YpYW4WUIMStq` @39 (2026-08-09: exact main `068fc2d6`; engine.94 grief + engine.101 bond write-back, fire proof pending). CYCLE_TRIGGER_TOKEN set (Mike, S328 — 0717/0716c lineage value; properties don't copy with the sheet).
 - Staging dir `sandbox-0720` (recreated per-session in scratchpad via `git archive HEAD`).
 - S328 proving fires C103–C105 (Row 24 release 25→17→13 promotions, crisis detection C104, faith-join, 0 errors ×3).
 

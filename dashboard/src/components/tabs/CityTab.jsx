@@ -1,6 +1,7 @@
 import React from 'react';
 import { MapPin } from 'lucide-react';
 import { Card, Badge } from '../ui';
+import SupportChip, { useCascade } from '../SupportChip';
 
 function MiniStat({ label, value, tone = 'default' }) {
   const colorClass =
@@ -21,9 +22,14 @@ function sentimentTone(s) {
 
 export default function CityTab({ hoods }) {
   const sorted = [...hoods].sort((a, b) => b.sentiment - a.sentiment);
+  const cascade = useCascade();
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 pb-20">
+    <div>
+      <div className="flex items-center justify-end mb-2">
+        <SupportChip cascade={cascade} />
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 pb-20">
       {sorted.map((h) => {
         const tone = sentimentTone(h.sentiment);
         const hasShockEvent = Boolean(h.shockEvent) || Boolean(h.demographic && h.demographic !== 'Stable');
@@ -50,6 +56,7 @@ export default function CityTab({ hoods }) {
           </Card>
         );
       })}
+      </div>
     </div>
   );
 }

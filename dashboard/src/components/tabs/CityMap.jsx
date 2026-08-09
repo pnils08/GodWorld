@@ -1,6 +1,7 @@
 import React, { useMemo, useState, useRef } from 'react';
 import hoodsGeoRaw from '../../assets/oakland-neighborhoods.geojson?raw';
 import { Card, Badge } from '../ui';
+import SupportChip, { useCascade } from '../SupportChip';
 
 const hoodsGeo = JSON.parse(hoodsGeoRaw);
 
@@ -315,6 +316,7 @@ export default function CityMap({ neighborhoods }) {
   const { arr: hoods, map: hoodLookup } = useHoodLookup(neighborhoods);
   const { canonEntries, backgroundFeatures, bbox, project } = useGeometry();
   const [metric, setMetric] = useState('sentiment');
+  const cascade = useCascade();
   const [hovered, setHovered] = useState(null);
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
   const [selected, setSelected] = useState(null);
@@ -389,8 +391,8 @@ export default function CityMap({ neighborhoods }) {
 
   return (
     <Card title="CITY MAP" className="relative overflow-visible">
-      {/* Metric toggles */}
-      <div className="flex flex-wrap gap-2 px-5 pt-4">
+      {/* Metric toggles + cascade provenance */}
+      <div className="flex flex-wrap items-center gap-2 px-5 pt-4">
         {specs.map((s) => (
           <button
             key={s.key}
@@ -404,6 +406,9 @@ export default function CityMap({ neighborhoods }) {
             {s.label}
           </button>
         ))}
+        <span className="ml-auto">
+          <SupportChip cascade={cascade} />
+        </span>
       </div>
 
       {/* Map */}

@@ -1697,6 +1697,72 @@ function getPhotoIndex() {
   } catch { return null; }
 }
 
+// --- Cascade consistency audit (engine.102 Task 8) ---
+const { computeCascadeAudit } = require(join(ROOT, 'scripts/cascadeAudit.js'));
+let _cascadeCache = null;
+let _cascadeCacheTime = 0;
+
+async function getCascadeAudit() {
+  const now = Date.now();
+  if (_cascadeCache && now - _cascadeCacheTime < SHEET_CACHE_TTL) return _cascadeCache;
+  const { report } = await computeCascadeAudit();
+  _cascadeCache = report;
+  _cascadeCacheTime = Date.now();
+  return _cascadeCache;
+}
+
+function invariantSupport(report, metricLabel) {
+  const matches = (report.invariants || []).filter((i) =>
+    (i.label || '').toLowerCase().includes(metricLabel));
+  if (!matches.length) return 'unknown';
+  if (matches.some((i) => i.result === 'FAIL')) return 'unsupported';
+  if (matches.some((i) => i.result === 'PASS')) return 'supported';
+  return 'unknown';
+}
+
+function rateGap(city, hood) {
+  return Number.isFinite(city) && Number.isFinite(hood) ? city - hood : null;
+}
+
+app.get('/api/cascade', async (req, res) => {
+  try {
+    const report = await getCascadeAudit();
+    const st = report.scaleTable || {};
+    const m = report.metrics || {};
+    res.json({
+      generatedAt: report.generatedAt,
+      denominators: {
+        city: st.cityModelPop ?? null,
+        hood: st.hoodDemoTotal ?? null,
+        ledger: st.ledgerSampleRows ?? null,
+        active: st.ledgerActiveCount ?? null,
+      },
+      metrics: {
+        illness: {
+          city: m.illness?.cityDial?.value ?? null,
+          hood: m.illness?.hoodLayer?.value ?? null,
+          ledger: m.illness?.ledgerLayer?.value ?? null,
+          gap: rateGap(m.illness?.cityDial?.value, m.illness?.hoodLayer?.value),
+          support: invariantSupport(report, 'sick'),
+        },
+        employment: {
+          city: m.employment?.cityDial?.value ?? null,
+          hood: m.employment?.hoodLayer?.value ?? null,
+          ledger: m.employment?.ledgerLayer?.value ?? null,
+          gap: rateGap(m.employment?.cityDial?.value, m.employment?.hoodLayer?.value),
+          support: invariantSupport(report, 'unemploy'),
+        },
+        migration: {
+          city: m.migration?.cityDial?.value ?? null,
+          support: invariantSupport(report, 'migration'),
+        },
+      },
+    });
+  } catch (err) {
+    res.status(503).json({ error: 'audit_failed' });
+  }
+});
+
 app.get('/api/players', (req, res) => {
   const index = getPlayerIndex();
   if (!index) {

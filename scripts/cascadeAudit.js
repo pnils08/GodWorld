@@ -96,7 +96,7 @@ async function safeGetSheetData(tab) {
   }
 }
 
-async function main() {
+async function computeCascadeAudit() {
   const report = {
     generatedAt: new Date().toISOString(),
     date: DATE,
@@ -454,6 +454,13 @@ async function main() {
   }
 
   // ── Markdown output ──
+  return { report, raw, nd, sl };
+}
+
+function renderMarkdown({ report, raw, nd, sl }) {
+  const cityDenom = report.scaleTable.cityModelPop;
+  const hoodDenom = report.scaleTable.hoodDemoTotal;
+  const ledgerDenom = report.scaleTable.ledgerSampleRows;
   const md = [];
   md.push(`# Cascade Consistency Audit — ${DATE}`);
   md.push('');
@@ -535,13 +542,22 @@ async function main() {
   md.push('- The sick-rate band is intentionally soft: the hood chase is designed to lag the city dial by many cycles, so a ≥25-cycle convergence window is expected before failing.');
   md.push('- Migration invariant is currently SKIP because Neighborhood_Demographics has no migration/inflow column; the known `/17` over-allocation bug is latent in the code, not visible in this sheet layout.');
   md.push('');
+  return md.join('\n');
+}
 
+async function main() {
+  const audit = await computeCascadeAudit();
+  const md = renderMarkdown(audit);
   fs.mkdirSync(OUT_DIR, { recursive: true });
-  fs.writeFileSync(OUT_MD, md.join('\n'), 'utf8');
-  fs.writeFileSync(OUT_JSON, JSON.stringify(report, null, 2), 'utf8');
+  fs.writeFileSync(OUT_MD, md, 'utf8');
+  fs.writeFileSync(OUT_JSON, JSON.stringify(audit.report, null, 2), 'utf8');
 
   console.log(`Wrote ${OUT_MD}`);
   console.log(`Wrote ${OUT_JSON}`);
 }
 
-main().catch(e => { console.error(e); process.exit(1); });
+module.exports = { computeCascadeAudit, renderMarkdown };
+
+if (require.main === module) {
+  main().catch(e => { console.error(e); process.exit(1); });
+}

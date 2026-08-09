@@ -107,8 +107,10 @@ function buildPrompt(cycle, draftRel, worldRel, nameCheck, evidenceRel) {
     'Do NOT trust the draft\'s own EVIDENCE/sourcing blocks — verify independently.',
     '',
     'Flag: (a) any claim not grounded in the world state or canon; (b) invented names, numbers, or events; ' +
-    '(c) ENGINE-metric leaks per newsroom.md — "tension score", "severity level", "civic load", raw decimals/dial ' +
-    'values, engine phase/system language. DO NOT flag legitimate sports-game stats — OVR/overall ratings, potential ' +
+    '(c) ENGINE-metric leaks per newsroom.md — "tension score", "severity level", "civic load", ' +
+    'engine phase/system language, raw table/column names. DO NOT flag city-level metric FIGURES: Civis Systems ' +
+    'is the in-world publisher of Oakland city data, so a cited index value or rate is legitimate journalism — ' +
+    'only the raw system VOCABULARY is a leak. DO NOT flag legitimate sports-game stats — OVR/overall ratings, potential ' +
     'grades, avg/HR/RBI/ERA, records, standings are canon (GodWorld sports is a game). (d) canon contradictions ' +
     '(wrong GM/manager/roster).',
     '',
@@ -198,8 +200,10 @@ function scanEngineVerbiage(draftText) {
   }
   const pops = body.match(/\bPOP-\d{5}\b/g);
   if (pops) hits.push({ token: 'POPID literal (POP-XXXXX)', count: pops.length });
-  const decimals = body.match(/\b[-+]?\d+\.\d{2,}\b/g);
-  if (decimals) hits.push({ token: 'raw decimals [' + [...new Set(decimals)].slice(0, 5).join(', ') + ']', count: decimals.length });
+  // Mike-direct 2026-08-07: engine NUMBERS are not contamination — Civis Systems is the
+  // in-world publisher of city-level metrics, so a cited figure is ordinary journalism.
+  // The raw-decimal scan is retired; system LANGUAGE (metric names, status enums, table
+  // names, POPID literals) is still policed by the token list above.
   return hits;
 }
 
@@ -276,7 +280,8 @@ function buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profil
     draftText,
     '',
     'Your job is TWO flag classes — you police the canon boundary, not the editorial voice:',
-    '(a) ENGINE VERBIAGE — system language, raw metric names, status enums, dial decimals leaking into prose.',
+    '(a) ENGINE VERBIAGE — system language, status enums, raw table/column names leaking into prose. NOT numbers: ' +
+    '    city metric figures are published by Civis Systems in-world and are legitimate to cite.',
     '(b) MISREPRESENTATION OF DATA OUTPUT — a claim that distorts or contradicts the ground truth above',
     '    (a metric stated as falling when it rose; a count off from canon; a prior-cycle stat presented as current).',
     'Plus the pre-check classes above (invented names used as people).',

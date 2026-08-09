@@ -530,7 +530,7 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
             L.push('NIGHTLIFE META: volume ' + (t.nightlifeMeta.volume ?? '—') +
               ', vibe ' + (t.nightlifeMeta.vibe || '—') +
               ', movement ' + (t.nightlifeMeta.movement || '—') +
-              ' — translate to human language; do not lead with raw decimals.');
+              ' — figures are Civis Systems city data and may be cited by name; lead with the people, not the index.');
           }
           if ((t.cityEvents || []).length) L.push('CITY EVENTS: ' + t.cityEvents.join('; '));
           if ((t.tv || []).length) L.push('TV SLATE: ' + t.tv.join('; '));

@@ -179,6 +179,82 @@ was *"I can't keep up with what's true and what's not."* The labels are the deli
 
 ---
 
+## G. Corrections — findings above that were WRONG, and Mike's rulings that replaced them
+
+Recorded because the errors are the more useful artifact. All four came from the same failure: an empty
+grep treated as proof of absence, then asserted as fact. Mike: *"you were completely wrong about the dials
+so safe to say every single issue you pointed out likely isn't — that's the true lesson."*
+
+51. **WRONG — "dials don't ingest life events."** `utilities/citizenDialMap.js` exists: 83 mapped tags,
+    with the rule stated at the top — *"RULE (Mike, S253): every event ever logged to a citizen MUST move a
+    dial. Nothing the engine has ever emitted is dead output."* `compressLifeHistory.js:1106` folds every
+    entry through `nudgesForEvent_`. Promotion → drive +8 / composure +2; Setback → composure −5. The
+    architecture Mike described is built and running. I grepped `citizenDials.js` only.
+52. **WRONG — "`WEALTH_MOBILITY` has zero consumers."** `ctx.summary.storyHooks` has at least four:
+    `deriveDemographicDrift.js:49`, `applyCycleWeight.js:67`, `v3DomainWriter.js:177`, and
+    `buildMediaPacket.js:224` — which puts hooks into the media packet with byline and angle guidance. I
+    grepped the literal hookType string, which by construction only appears where it is created. **Real
+    residual:** `buildMediaPacket` takes `hooks.slice(0, 4)` unranked, so a hook reaches media only if it
+    lands in the first four of the cycle.
+53. **CORRECTED — `[Money]` was genuinely unmapped, and that WAS the defect.** Verified by executing the
+    resolver, not reading it: `nudgesForEvent_('Money', 1, <either line>)` → `{composure: 1}` =
+    `DEFAULT_AMBIENT`, "a logged ordinary day". Both directions identical — a collapse and a doubling
+    produced the same nudge as checking in with a relative. **FIXED `c0820e79`** via CONTENT_RULES (the tag
+    alone cannot carry direction; the prose does): up → drive +4 / composure +4, down → composure −6 /
+    drive +2. Regression-verified by execution; 121 tests pass across the four dial suites.
+54. **WRONG — my own cause-gate (`6bfef71d`, REVERTED `e654c80b`).** Mike's ruling: the Y2C50 mass write
+    **was** a legitimate event — the code was finally fixed to set tiers correctly, so tiers moved, and an
+    event is owed. *"The event was data recalibrations."* Gating mobility on income/inheritance/employer
+    having moved would suppress a real recalibration and fix nothing downstream. **The defect was never a
+    missing cause. It was a missing consumer.**
+
+### The designed architecture (Mike-direct, S361) — what SHOULD happen
+
+> *"All life history events clear every cycle and earned events move to citizens bio. A promotion happens
+> one week, it doesn't sit in life history forever, and dials need to ingest them. Promotion does a
+> positive, getting fired would be a negative."*
+
+Three legs. Leg 3 (dial ingest) is **built and working** — see #51. Legs 1 and 2 are **not**:
+
+55. **LifeHistory has no per-cycle clear.** Every `row[iLife] =` write across the engine is an append; the
+    only removal is `trimLifeHistory_` at `KEEP_RAW_ENTRIES = 20` — a rolling cap, not a drain. `VERIFIED`.
+    This is why 6,495 lines have accumulated over 102 cycles and why 70% of the corpus is duplicate
+    templated texture: a buffer designed to empty has been filling instead.
+56. **Nothing graduates earned events to CitizenBio.** The only writer in the codebase is
+    `scripts/applyCitizenBios.js`, a one-time setup script. No phase writes it. That is the entire reason
+    CitizenBio sits at 5.2% — 49 citizens got a bio once and nothing has been added since. `VERIFIED`.
+    **This is the missing consumer that #54 was really about.**
+
+### Sports desk — the finding at #9 was framed wrong
+
+57. **WRONG framing — "sports has no people."** The lane is *nothing but* citizens: Danny Horn, Eric
+    Taveras, Darrin Davis, Kevin Clark, Sidney Tumolo, Travis Coles, Elias Varek. Mike: *"the entire city
+    is A's citizens — why does it need specific citizens?"* The real defect is that they are carried as
+    **name strings with no POPID**, so the writer sees "Danny Horn (CF)" and cannot reach his age,
+    neighborhood, life history or bonds. **A name with no record behind it is a blank, and blanks get
+    filled** — which is why the drafts invented injuries and games for real players.
+58. **The interview list can only draw from pre-attached POPIDs.** `collectQuoteAsks`
+    (`cron-desk-run.js:262`) builds `asks` from `story.popids` and `e.popids` only. Sports had zero POPIDs
+    on eleven rows, so **the sports desk conducted zero interviews that cycle** — not for want of sources.
+    `VERIFIED`. Mike's ruling: *"Every citizen in the sim is a fan of the A's. Every single story can ask
+    any of the 940 citizens"* — sources should be **found by the reporter from the population**, not
+    stapled to the row by the engine. The current design lets the engine decide who a reporter may speak
+    to, and when it names nobody the reporter writes about a city of 940 without speaking to one.
+59. **Feed names are misspelled against the ledger and unresolved.** Same cycle, same lane: "Isely Kelley"
+    *and* "Isley Kelley" (ledger: **Isley Kelley**, POP-00019); "Ernesto Quitero" (ledger: **Ernesto
+    Quintero**, POP-00050). `VERIFIED`. The writer copies the typo, Rhea can't match it, and a correctly
+    reported real player kills the draft as a fabrication (elliot-marbury). Mike: *"So I have to have
+    perfect handwriting too?"* — **no.** `canon-name-check.js` already exports `resolveCitizens()` and is
+    already used to match names in article prose; it is simply never run on the feed at entry. Resolve at
+    the point of entry, fail loudly there, never pass a typo downstream.
+60. **Roster/team mismatch in the feed.** Frank Reyna is listed under "A's | player-feature"; the ledger
+    has him at Right Fielder, Las Vegas Aviators (AAA). `VERIFIED`.
+61. **Three sports ripple rows dump raw JSON as their label** —
+    `{"traffic":0.25876521739130437,"retail":0.30884347826086955,...}` — handed to a writer as a storyline.
+    `VERIFIED`.
+
+---
+
 ## Not applicable / hazard
 
 - **#17 gates #13.** The lives exist and reach no desk, but only 29.7% are distinct. Routing the raw feed

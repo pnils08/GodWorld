@@ -715,6 +715,69 @@ function signalLabel(...bits) {
     .join(' | ');
 }
 
+// S361 — sports feed names arrive hand-typed ("Ernesto Quitero", "Isely Kelley")
+// and were passed downstream as bare strings: the writer copied the typo, Rhea
+// couldn't match it, and a correctly-reported real player killed the draft as an
+// invented person. Worse, no POPID meant collectQuoteAsks had nothing to ask —
+// the sports desk ran ZERO interviews on a lane made entirely of citizens.
+// Resolve at entry: exact first, then a single-edit near-miss against the ledger
+// (unique candidate only — an ambiguous near-miss stays unresolved and is noted).
+function editDistance1_(a, b) {
+  if (a === b) return true;
+  const la = a.length, lb = b.length;
+  // adjacent transposition ("Isely"/"Isley") is one typing slip, not two edits —
+  // Damerau, not plain Levenshtein. It is the single most common feed typo.
+  if (la === lb) {
+    for (let k = 0; k < la - 1; k++) {
+      if (a[k] !== b[k] && a[k] === b[k + 1] && a[k + 1] === b[k] &&
+          a.slice(0, k) === b.slice(0, k) && a.slice(k + 2) === b.slice(k + 2)) return true;
+    }
+  }
+  if (Math.abs(la - lb) > 1) return false;
+  let i = 0, j = 0, edits = 0;
+  while (i < la && j < lb) {
+    if (a[i] === b[j]) { i++; j++; continue; }
+    if (++edits > 1) return false;
+    if (la > lb) i++; else if (lb > la) j++; else { i++; j++; }
+  }
+  return edits + (la - i) + (lb - j) <= 1;
+}
+
+function resolveFeedNames_(namesUsed, notes, ctxLabel) {
+  const raw = String(namesUsed || '')
+    .split(/[,;]/)
+    .map(s => s.replace(/\([^)]*\)/g, '').replace(/\s+/g, ' ').trim())
+    .filter(n => /^[A-Z]/.test(n) && n.split(' ').length >= 2);
+  if (!raw.length) return [];
+  let resolver;
+  try { resolver = require('./canon-name-check'); } catch (e) { return []; }
+  const popids = [];
+  const exact = resolver.resolveCitizens(raw);
+  let index = null;
+  for (let i = 0; i < exact.length; i++) {
+    if (exact[i].popid) { popids.push(exact[i].popid); continue; }
+    // near-miss pass — build the name->popid index once, from the same snapshot
+    if (!index) {
+      index = [];
+      try {
+        for (const p of resolver.loadCanonNames()) index.push(p);
+      } catch (e) { index = []; }
+    }
+    const want = String(raw[i]).toLowerCase();
+    const hits = index.filter(n => editDistance1_(String(n).toLowerCase(), want));
+    if (hits.length === 1) {
+      const back = resolver.resolveCitizens([hits[0]])[0];
+      if (back && back.popid) {
+        popids.push(back.popid);
+        notes.push(`sports feed name "${raw[i]}" resolved to canon "${hits[0]}" (${back.popid}) — single-edit near-miss${ctxLabel ? ' [' + ctxLabel + ']' : ''}`);
+        continue;
+      }
+    }
+    notes.push(`sports feed name "${raw[i]}" does NOT resolve to any citizen${hits.length > 1 ? ` (${hits.length} near-misses, ambiguous)` : ''}${ctxLabel ? ' [' + ctxLabel + ']' : ''}`);
+  }
+  return [...new Set(popids)];
+}
+
 function extractPopids(...sources) {
   const ids = new Set();
   for (const s of sources) {
@@ -909,11 +972,16 @@ function emitDeskSignal(cycle, data) {
   // ── sports: feed rows, current cycle. NO StoryAngle — WHAT stays desk-side. ──
   for (const r of sportsAll) {
     if (String(r.Cycle) !== String(cycle)) continue;
-    lanes.sports.push({
+    const feedEntry = {
       kind: 'feed',
       ref: `Oakland_Sports_Feed cycle ${cycle}; rendered: world_summary_c${cycle}.md "## Sports" C${cycle} (StoryAngle at the pointer)`,
       label: signalLabel(r.TeamsUsed, r.EventType, r.SeasonType ? `(${r.SeasonType})` : null, r.NamesUsed)
-    });
+    };
+    // S361: players ARE citizens — carry their POPIDs so the desk can interview
+    // them instead of writing about names it cannot look up.
+    const feedPops = resolveFeedNames_(r.NamesUsed, notes, `${r.TeamsUsed || 'sports'} C${cycle}`);
+    if (feedPops.length) feedEntry.popids = feedPops;
+    lanes.sports.push(feedEntry);
   }
 
   // ── culture: hoods with world-event signal this cycle + texture index ──

@@ -86,11 +86,52 @@ function balanceContentLedgerPoolWeights_(pool) {
   return pool;
 }
 
+// engine.94 Task 3 — bounded grief response content. These lines never name or
+// infer the deceased; machine provenance remains in MemoryRegisters.grief.
+// Category choice is deliberately uniform/structural. World_Config controls
+// whether a reserved response occurs and how the ordinary pool is biased.
+var GRIEF_RESPONSE_POOL_ = [
+  { text: 'let a call go unanswered and stayed with the quiet for a while', tags: ['grief:withdrawal'] },
+  { text: 'kept the evening small and did not explain why', tags: ['grief:withdrawal'] },
+  { text: 'paused over a small reminder of someone they had lost', tags: ['grief:memorial'] },
+  { text: 'made room for a memory that arrived without warning', tags: ['grief:memorial'] },
+  { text: 'answered a check-in from someone who knew not to rush the conversation', tags: ['grief:reconnection'] },
+  { text: 'accepted quiet company without needing to fill the silence', tags: ['grief:reconnection'] }
+];
+
+function applyGriefPoolWeights_(pool, griefConfig) {
+  if (!pool || !griefConfig) return pool;
+  for (var i = 0; i < pool.length; i++) {
+    var entry = pool[i];
+    var tags = entry.tags || [];
+    var publicActivity = false;
+    var livingSupport = false;
+    for (var t = 0; t < tags.length; t++) {
+      var tag = tags[t];
+      if (tag === 'source:fame' || tag === 'source:prevEvening' ||
+          tag === 'source:firstFriday' || tag === 'source:sports' ||
+          tag === 'source:holiday' || tag === 'evening:cityEventAttend') publicActivity = true;
+      if (tag === 'source:familyLife' || tag === 'source:faith' ||
+          tag === 'source:communityLife' || tag === 'relationship:alliance' ||
+          tag === 'relationship:mentorship') livingSupport = true;
+    }
+    var mod = 1;
+    if (publicActivity) mod *= griefConfig.publicActivityMultiplier;
+    if (livingSupport) mod *= griefConfig.supportMultiplier;
+    if (mod !== 1) entry.weight = (entry.weight || 1) * mod;
+  }
+  return pool;
+}
+
 function generateCitizensEvents_(ctx) {
   // Phase 42 §5.6: SL read/mutate via shared ctx.ledger; commit at Phase 10.
   if (!ctx.ledger) {
     throw new Error('generateCitizensEvents_: ctx.ledger not initialized');
   }
+  // engine.94 Task 3: every calibration value is required World_Config state.
+  // Validate before any citizen draw so missing keys fail loud, never at the
+  // first grief incident after a partial Cycle has already run.
+  var griefConfig = getGriefConfig_(ctx);
 
   // S329 (Grok review item 1): content-ledger row telemetry — the missing
   // feedback arrow (LifeHistory draws -> drafter/prune). Per-cycle, closure-
@@ -652,6 +693,12 @@ function generateCitizensEvents_(ctx) {
 
   function primaryFromTags(tags) {
     function has(t) { return tags.indexOf(t) >= 0; }
+    // engine.94 Task 3: the temporary envelope never mutates identity directly.
+    // Only a response the citizen actually lives routes through an EXISTING
+    // dial tag, preserving the one canonical event->dial vocabulary.
+    if (has("grief:withdrawal")) return "Strain";
+    if (has("grief:memorial")) return "Personal";
+    if (has("grief:reconnection")) return "Community";
     if (has("source:qol")) return "QoL";
     if (has("source:media")) return "Media";
     if (has("source:weather")) return "Weather";
@@ -1983,6 +2030,9 @@ function generateCitizensEvents_(ctx) {
     if (status === "deceased" || status === "traded" || status === "pending") continue;
 
     var mem = getMem(popId);
+    var griefState = (iMemReg >= 0)
+      ? activeGriefFromRegisters_(row[iMemReg] ? String(row[iMemReg]) : '', cycle)
+      : null;
 
     // v2.7: Get TraitProfile for archetype-aware event generation
     var traitProfile = getCitizenTraitProfile_(popId);
@@ -2131,6 +2181,10 @@ function generateCitizensEvents_(ctx) {
     if (typeof hasWeatherCondition_ === "function" && hasWeatherCondition_(ctx, "heat_wave")) {
       chance += 0.01;
     }
+
+    // engine.94 Task 3: situational withdrawal changes opportunity for the
+    // exact active window; it does not alter DialState base/streak.
+    if (griefState) chance *= griefConfig.participationMultiplier;
 
     // engine.38 A2 — anti-inert floor: a citizen in the log but dark for more
     // than ANTI_INERT_N cycles is forced in regardless of the roll. Citizens
@@ -2692,6 +2746,10 @@ function generateCitizensEvents_(ctx) {
       }
     }
 
+    // engine.94 Task 3: grief biases the already-built ordinary pool once per
+    // semantic family. Multi-tag entries cannot accidentally square a weight.
+    if (griefState) applyGriefPoolWeights_(pool, griefConfig);
+
     // v2.7: Continuity penalty - reduce weight if TopTags overlap with recent primary tags
     if (traitProfile && traitProfile.topTags && mem && mem.recentPrimary) {
       var topTags = traitProfile.topTags;
@@ -2707,6 +2765,15 @@ function generateCitizensEvents_(ctx) {
           }
         }
       }
+    }
+
+    // engine.94 Task 3: one reserved grief response may replace the first
+    // ordinary draw. It is rolled only for an active, participating citizen and
+    // is capped structurally at one per Cycle; the probability lives in config.
+    var reservedGriefEntry = null;
+    if (griefState && chanceHit(griefConfig.responseChance)) {
+      var griefDef = GRIEF_RESPONSE_POOL_[Math.floor(roll() * GRIEF_RESPONSE_POOL_.length)];
+      reservedGriefEntry = makeEntry(griefDef.text, mergeTags(griefDef.tags, calendarTags), 1, false);
     }
 
     // engine.38 A1-cont (S277): emit a random 1..N atmospheric events for this
@@ -2742,16 +2809,19 @@ function generateCitizensEvents_(ctx) {
       }
       usePool = hardPool;
     }
-    if (!usePool.length) break; // nothing fresh left to say this cycle
+    if (!usePool.length && !reservedGriefEntry) break; // nothing fresh left to say this cycle
 
-    // PoolKey is a draw bucket, not just an authoring label. Preserve the
-    // ledger's total effective mass after trait/dial/continuity modifiers, but
-    // divide that mass evenly across the eligible ledger PoolKeys in this draw.
-    // This removes row-count dominance without changing hardcoded weights,
-    // event volume, gates, or RNG sequence.
-    balanceContentLedgerPoolWeights_(usePool);
-
-    var entry = pickWeighted_(usePool);
+    var entry = null;
+    if (reservedGriefEntry) {
+      entry = reservedGriefEntry;
+      reservedGriefEntry = null;
+    } else {
+      // PoolKey is a draw bucket, not just an authoring label. Preserve the
+      // ledger's total effective mass after trait/dial/continuity modifiers,
+      // but divide that mass evenly across eligible ledger PoolKeys.
+      balanceContentLedgerPoolWeights_(usePool);
+      entry = pickWeighted_(usePool);
+    }
     var pick = entry.text;
     var tags = entry.tags.slice();
 

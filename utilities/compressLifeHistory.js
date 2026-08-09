@@ -80,6 +80,37 @@ var KEEP_RAW_ENTRIES = 20;
 // Minimum cycles between compression runs per citizen
 var MIN_CYCLES_BETWEEN_COMPRESS = 5;
 
+// engine.94 Task 3 — grief calibration is required World_Config state, not
+// deploy-time code tuning (ADR-0015). Structural rules stay in code; these six
+// values are loaded once per Cycle into ctx.config by loadConfig_. Every caller
+// uses this one validator so Phase 4 duration and Phase 5 consumption cannot
+// drift. Missing/malformed keys fail loud; there are deliberately no defaults.
+function griefConfigNumber_(ctx, key, min, max, integerOnly) {
+  var raw = ctx && ctx.config ? ctx.config[key] : undefined;
+  if (raw === '' || raw === null || raw === undefined || typeof raw === 'boolean') {
+    throw new Error('engine.94 grief config missing World_Config.' + key);
+  }
+  var n = Number(raw);
+  if (!isFinite(n) || n < min || n > max || (integerOnly && Math.floor(n) !== n)) {
+    throw new Error('engine.94 grief config invalid World_Config.' + key + ': ' + String(raw));
+  }
+  return n;
+}
+
+function getGriefConfig_(ctx) {
+  if (ctx && ctx._griefConfig) return ctx._griefConfig;
+  var cfg = {
+    durationCycles: griefConfigNumber_(ctx, 'griefDurationCycles', 1, 52, true),
+    holidayDurationCycles: griefConfigNumber_(ctx, 'griefHolidayDurationCycles', 1, 52, true),
+    participationMultiplier: griefConfigNumber_(ctx, 'griefParticipationMultiplier', 0, 2, false),
+    publicActivityMultiplier: griefConfigNumber_(ctx, 'griefPublicActivityMultiplier', 0, 2, false),
+    supportMultiplier: griefConfigNumber_(ctx, 'griefSupportMultiplier', 0, 2, false),
+    responseChance: griefConfigNumber_(ctx, 'griefResponseChance', 0, 1, false)
+  };
+  if (ctx) ctx._griefConfig = cfg;
+  return cfg;
+}
+
 // --- Reflection write-back drain (citizen-loop research.14, S269) ---------------
 // Wake reflections land a frozen dual tag in Reflection_Intake; the drain (composed
 // INTO this compressor's per-row RMW — NOT a Phase-9 sibling, which would re-read
@@ -337,6 +368,41 @@ function compressLifeHistory_(ctx, options) {
   var biasApplied = 0, biasCitizens = 0;
   var unlivedApplied = 0; // engine.38 B3 (S283) — branch events captured at fold
 
+  // engine.94 Task 3: Phase-4 grief cascades drain into the same single-writer
+  // MemoryRegisters RMW as biases/unlived. Group by normalized survivor POPID;
+  // the raw ctx tally dies after this Cycle, so even compress-ineligible rows
+  // must drain. A missing carrier is a loud format failure, not a dropped loss.
+  var griefByPop = {};
+  var rawCascades = Array.isArray(S.pendingCascades) ? S.pendingCascades : [];
+  for (var gc = 0; gc < rawCascades.length; gc++) {
+    var cascade = rawCascades[gc];
+    if (!cascade || cascade.type !== 'grief' || cascade.effect !== 'grief_period') continue;
+    var griefPop = String(cascade.citizenId || '').trim().toUpperCase();
+    if (!griefPop) throw new Error('engine.94 grief cascade missing citizenId');
+    if (!griefByPop[griefPop]) griefByPop[griefPop] = [];
+    griefByPop[griefPop].push(cascade);
+  }
+  if (iMemoryRegisters < 0 && Object.keys(griefByPop).length) {
+    throw new Error('compressLifeHistory_: MemoryRegisters column absent — cannot persist grief');
+  }
+  var griefTargetCount = Object.keys(griefByPop).length;
+  if (griefTargetCount) {
+    var griefLedgerMatches = {};
+    for (var gr = 0; gr < rows.length; gr++) {
+      var griefLedgerPop = String(rows[gr][iPopID] || '').trim().toUpperCase();
+      if (griefByPop[griefLedgerPop]) griefLedgerMatches[griefLedgerPop] = (griefLedgerMatches[griefLedgerPop] || 0) + 1;
+    }
+    var griefMatchCount = 0;
+    var griefTargets = Object.keys(griefByPop);
+    for (var gt = 0; gt < griefTargets.length; gt++) {
+      if (griefLedgerMatches[griefTargets[gt]] === 1) griefMatchCount++;
+    }
+    if (griefMatchCount !== griefTargetCount) {
+      throw new Error('compressLifeHistory_: grief survivor missing/duplicate in Simulation_Ledger (' + griefMatchCount + '/' + griefTargetCount + ')');
+    }
+  }
+  var griefApplied = 0, griefCitizens = 0, griefExpired = 0;
+
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
     var popId = row[iPopID];
@@ -347,6 +413,23 @@ function compressLifeHistory_(ctx, options) {
     var existingDialState = row[iDialState] ? String(row[iDialState]) : '';
     var pending = pendingByPop[popId] || [];
     var biasPending = biasIntentsByPop[popId] || [];
+    var griefPending = griefByPop[String(popId).trim().toUpperCase()] || [];
+
+    // Active grief needs no Phase-9 rewrite. Only a pending cascade, malformed
+    // envelope, or envelope past throughCycle enters maintenance; this keeps an
+    // unchanged MemoryRegisters cell and DialState byte-identical between edges.
+    var preParsedRegs = null;
+    var griefNeedsMaintenance = false;
+    if (iMemoryRegisters >= 0 && row[iMemoryRegisters] && String(row[iMemoryRegisters]).indexOf('"grief"') >= 0) {
+      preParsedRegs = parseMemoryRegisters_(row[iMemoryRegisters]);
+      if (Object.prototype.hasOwnProperty.call(preParsedRegs, 'grief')) {
+        var preG = preParsedRegs.grief;
+        var preStart = preG && griefCycleNumber_(preG.startCycle);
+        var preThrough = preG && griefCycleNumber_(preG.throughCycle);
+        griefNeedsMaintenance = !preG || typeof preG !== 'object' || Array.isArray(preG) ||
+          preStart === null || preThrough === null || preThrough < preStart || cycle > preThrough;
+      }
+    }
 
     // Compress eligibility — gates ONLY the objective fold/face/trim, NOT the reflection
     // drain. A sparsely-active (<3 entries) or cadence-skipped citizen still accretes
@@ -364,24 +447,37 @@ function compressLifeHistory_(ctx, options) {
       if (!entries || entries.length < 3) compressEligible = false;
     }
 
-    if (!compressEligible && !pending.length && !biasPending.length) { skipped++; continue; }
+    if (!compressEligible && !pending.length && !biasPending.length && !griefPending.length && !griefNeedsMaintenance) { skipped++; continue; }
 
-    // Load persisted dial state (base + streak); neutral if absent/corrupt. `mood`
-    // is NOT persisted — base is the permanent self, mood is a re-derivable swing.
-    var c = deserialize_(parseDialState_(existingDialState));
+    // Grief-only maintenance must not even normalize the DialState cell. Existing
+    // compressor/reflection/bias paths keep their prior RMW behavior; an envelope
+    // insert/expiry by itself is strictly a MemoryRegisters change.
+    var dialRmwNeeded = compressEligible || pending.length || biasPending.length;
+    var c = dialRmwNeeded ? deserialize_(parseDialState_(existingDialState)) : null;
 
     // engine.42 chaos-trauma (S275): chaos-free time heals. Lazily fade the persisted
     // chaos accumulator (and lift the labeled break) so positive folds + quiet weeks recover
     // a citizen instead of locking trauma — the symmetric counterpart to chaos-cars accrual.
     // Gap-based, so a citizen compressed every few cycles still decays at the right rate.
-    decayChaosExposure_(c, cycle);
+    if (dialRmwNeeded) decayChaosExposure_(c, cycle);
 
     // engine.38 B1+B3 (S283): ONE parse of the register cell serves both the
     // unlived capture (fold-time, below) and the bias drain; written back only
     // when a fold actually changed it — blank cells stay blank, no churn.
-    var regs = (iMemoryRegisters >= 0 && (compressEligible || biasPending.length))
-      ? parseMemoryRegisters_(row[iMemoryRegisters]) : null;
+    var regs = (iMemoryRegisters >= 0 && (compressEligible || biasPending.length || griefPending.length || griefNeedsMaintenance))
+      ? (preParsedRegs || parseMemoryRegisters_(row[iMemoryRegisters])) : null;
     var regsDirty = false;
+
+    if (regs && pruneExpiredGrief_(regs, cycle)) {
+      griefExpired++;
+      regsDirty = true;
+    }
+
+    if (griefPending.length && regs) {
+      var griefN = foldGriefCascades_(regs, griefPending);
+      if (griefN > 0) { griefApplied += griefN; regsDirty = true; }
+      griefCitizens++;
+    }
 
     if (compressEligible) {
       // FOLD-ON-TRIM (the stateful spine): events LEAVING the raw-20 window accrete
@@ -429,7 +525,7 @@ function compressLifeHistory_(ctx, options) {
       }
     }
 
-    row[iDialState] = serializeDialState_(c);
+    if (dialRmwNeeded) row[iDialState] = serializeDialState_(c);
     rows[r] = row;
     updated++;
   }
@@ -448,6 +544,9 @@ function compressLifeHistory_(ctx, options) {
     biasApplied: biasApplied,
     biasCitizens: biasCitizens,
     unlivedApplied: unlivedApplied,
+    griefApplied: griefApplied,
+    griefCitizens: griefCitizens,
+    griefExpired: griefExpired,
     version: COMPRESS_VERSION
   };
 
@@ -1011,10 +1110,9 @@ function zeroMood_(c) {
   for (var i = 0; i < DIALS.length; i++) c.mood[DIALS[i]] = 0;
 }
 
-// MemoryRegisters cell (JSON {biases:[], unlived:[]}) -> object; corrupt/empty
-// -> fresh registers (DialState-pattern degrade: graceful, never loud). Additive:
-// unknown top-level fields survive the round-trip untouched (engine.38 B3's
-// unlived array shares this cell — B1 only ever writes .biases).
+// MemoryRegisters cell (JSON {biases:[], unlived:[], grief?:{...}}) -> object;
+// corrupt/empty -> fresh registers (DialState-pattern degrade: graceful, never
+// loud). Additive: unknown top-level fields survive the round-trip untouched.
 function parseMemoryRegisters_(str) {
   var o = null;
   if (str) {
@@ -1024,6 +1122,103 @@ function parseMemoryRegisters_(str) {
   if (!Array.isArray(o.biases)) o.biases = [];
   if (!Array.isArray(o.unlived)) o.unlived = [];
   return o;
+}
+
+// engine.94 Task 3 — bounded situational grief state. The cascade's note is
+// human prose and is NEVER parsed for identity; sourceCitizenId is mandatory.
+// Record shape: {startCycle, throughCycle, sourceIds}. Multiple bonds to the
+// same deceased dedupe. Distinct losses may extend the window but do not add a
+// strength field or stack multipliers. Provenance is bounded to three POPIDs.
+var GRIEF_SOURCE_CAP = 3;
+
+function validGriefCycle_(n) {
+  return typeof n === 'number' && isFinite(n) && Math.floor(n) === n && n >= 0;
+}
+
+function griefCycleNumber_(raw) {
+  if (raw === '' || raw === null || raw === undefined || typeof raw === 'boolean') return null;
+  var n = Number(raw);
+  return validGriefCycle_(n) ? n : null;
+}
+
+function foldGriefCascades_(regs, cascades) {
+  if (!regs || !cascades || !cascades.length) return 0;
+  var changed = 0;
+  for (var i = 0; i < cascades.length; i++) {
+    var c = cascades[i];
+    if (!c || c.type !== 'grief' || c.effect !== 'grief_period') continue;
+    var sourceId = String(c.sourceCitizenId || '').trim().toUpperCase();
+    var created = griefCycleNumber_(c.cycleCreated);
+    var duration = griefCycleNumber_(c.duration);
+    if (!sourceId) throw new Error('engine.94 grief cascade missing sourceCitizenId');
+    if (created === null || duration === null || duration < 1 || duration > 52) {
+      throw new Error('engine.94 grief cascade invalid cycle/duration for ' + sourceId);
+    }
+
+    var start = created + 1;
+    var through = created + duration;
+    var g = regs.grief;
+    if (!g || typeof g !== 'object' || Array.isArray(g) ||
+        griefCycleNumber_(g.startCycle) === null || griefCycleNumber_(g.throughCycle) === null ||
+        griefCycleNumber_(g.throughCycle) < griefCycleNumber_(g.startCycle)) {
+      regs.grief = { startCycle: start, throughCycle: through, sourceIds: [sourceId] };
+      changed++;
+      continue;
+    }
+
+    var beforeStart = griefCycleNumber_(g.startCycle);
+    var beforeThrough = griefCycleNumber_(g.throughCycle);
+    g.startCycle = Math.min(beforeStart, start);
+    g.throughCycle = Math.max(beforeThrough, through);
+    if (!Array.isArray(g.sourceIds)) g.sourceIds = [];
+    var sourcesTrimmed = false;
+    if (g.sourceIds.length > GRIEF_SOURCE_CAP) {
+      g.sourceIds = g.sourceIds.slice(0, GRIEF_SOURCE_CAP);
+      sourcesTrimmed = true;
+    }
+    var sourceSeen = false;
+    for (var s = 0; s < g.sourceIds.length; s++) {
+      if (String(g.sourceIds[s] || '').trim().toUpperCase() === sourceId) { sourceSeen = true; break; }
+    }
+    var sourceAdded = false;
+    if (!sourceSeen && g.sourceIds.length < GRIEF_SOURCE_CAP) {
+      g.sourceIds.push(sourceId);
+      sourceAdded = true;
+    }
+    if (g.startCycle !== beforeStart || g.throughCycle !== beforeThrough || sourceAdded || sourcesTrimmed) changed++;
+  }
+  return changed;
+}
+
+function pruneExpiredGrief_(regs, cycle) {
+  if (!regs || !Object.prototype.hasOwnProperty.call(regs, 'grief')) return false;
+  var g = regs.grief;
+  var start = g && griefCycleNumber_(g.startCycle);
+  var through = g && griefCycleNumber_(g.throughCycle);
+  if (!g || typeof g !== 'object' || Array.isArray(g) ||
+      start === null || through === null || through < start ||
+      (griefCycleNumber_(cycle) !== null && griefCycleNumber_(cycle) > through)) {
+    delete regs.grief;
+    return true;
+  }
+  return false;
+}
+
+function activeGriefFromRegisters_(str, cycle) {
+  var current = griefCycleNumber_(cycle);
+  if (current === null) return null;
+  var regs = parseMemoryRegisters_(str);
+  var g = regs.grief;
+  if (!g || typeof g !== 'object' || Array.isArray(g)) return null;
+  var start = griefCycleNumber_(g.startCycle);
+  var through = griefCycleNumber_(g.throughCycle);
+  if (start === null || through === null || through < start) return null;
+  if (current < start || current > through) return null;
+  return {
+    startCycle: start,
+    throughCycle: through,
+    sourceIds: Array.isArray(g.sourceIds) ? g.sourceIds.slice(0, GRIEF_SOURCE_CAP) : []
+  };
 }
 
 // Design B1 asymmetric-bias fold (seams plan 2026-07-01). Record shape:
@@ -1185,6 +1380,10 @@ if (typeof module !== 'undefined' && module.exports) {
     parseDialState_: parseDialState_,
     serializeDialState_: serializeDialState_,
     parseMemoryRegisters_: parseMemoryRegisters_,
+    getGriefConfig_: getGriefConfig_,
+    foldGriefCascades_: foldGriefCascades_,
+    pruneExpiredGrief_: pruneExpiredGrief_,
+    activeGriefFromRegisters_: activeGriefFromRegisters_,
     foldBiasIntents_: foldBiasIntents_,
     foldAgedOutEntries_: foldAgedOutEntries_,
     deriveArchetypeFromBands_: deriveArchetypeFromBands_,

@@ -178,6 +178,10 @@ function runGenerationalEngine_(ctx) {
   if (!ctx.ledger) {
     throw new Error('runGenerationalEngine_: ctx.ledger not initialized');
   }
+  // engine.94 Task 3: grief durations are required World_Config values.
+  // Validate at engine entry so a missing key fails before a death can emit an
+  // unpersistable/defaulted cascade. getGriefConfig_ caches on ctx.
+  getGriefConfig_(ctx);
   var header = ctx.ledger.headers;
   var rows = ctx.ledger.rows;
   if (!rows.length) return;
@@ -1490,6 +1494,7 @@ function triggerRetirementCascade_(ctx, retiredId, name, tierRole, neighborhood,
 
 function triggerDeathCascade_(ctx, deceasedId, name, tier, tierRole, neighborhood, cycle, cal) {
   var bonds = ctx.summary.relationshipBonds || [];
+  var griefConfig = getGriefConfig_(ctx);
 
   for (var i = 0; i < bonds.length; i++) {
     var bond = bonds[i];
@@ -1504,11 +1509,13 @@ function triggerDeathCascade_(ctx, deceasedId, name, tier, tierRole, neighborhoo
       var survivorId = bond.citizenA === deceasedId ? bond.citizenB : bond.citizenA;
       ctx.summary.pendingCascades = ctx.summary.pendingCascades || [];
 
-      var griefDuration = (STRESS_HOLIDAYS.indexOf(cal.holiday) >= 0) ? 5 : 3;
+      var griefDuration = (STRESS_HOLIDAYS.indexOf(cal.holiday) >= 0)
+        ? griefConfig.holidayDurationCycles : griefConfig.durationCycles;
 
       ctx.summary.pendingCascades.push({
         type: "grief",
         citizenId: survivorId,
+        sourceCitizenId: deceasedId,
         effect: "grief_period",
         duration: griefDuration,
         note: "Mourning " + name,

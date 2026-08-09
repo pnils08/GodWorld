@@ -16,7 +16,19 @@ const path = require('path');
 
 global.Logger = { log() {} };
 const M = require('../utilities/citizenDialMap.js');
+const C = require('../utilities/compressLifeHistory.js');
 global.getCitizenDialBands_ = () => null;
+global.getGriefConfig_ = C.getGriefConfig_;
+global.activeGriefFromRegisters_ = C.activeGriefFromRegisters_;
+
+const GRIEF_CONFIG = {
+  griefDurationCycles: 3,
+  griefHolidayDurationCycles: 5,
+  griefParticipationMultiplier: 0.80,
+  griefPublicActivityMultiplier: 0.75,
+  griefSupportMultiplier: 1.25,
+  griefResponseChance: 0.35
+};
 global.Utilities = { formatDate: () => 'STAMP' };
 global.Session = { getScriptTimeZone: () => 'UTC' };
 global.inWorldStamp_ = (ctx) => 'C' + ((ctx && ctx.config && ctx.config.cycleCount) || 0);
@@ -62,7 +74,7 @@ function makeCtx(rows, rng) {
   return {
     now: new Date(0),
     rng,
-    config: {},
+    config: { ...GRIEF_CONFIG },
     ss: { getSheetByName: () => null },
     summary: { cycleId: 100, season: 'Summer', economicMood: 50 },
     ledger: { headers: HEADERS.slice(), rows, dirty: false }

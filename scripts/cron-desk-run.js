@@ -1057,6 +1057,15 @@ async function runAngle(assign) {
             story = from.story || story;
             approach = from.approach || approach;
           }
+          eveningSlice = Object.assign({}, eveningSlice, {
+            packetSeat: {
+              persona: personaSlug,
+              bag: from.bag,
+              bagDoc: from.bagDoc,
+              pulseClass: from.pulse && from.pulse.className,
+              pulseLabel: from.pulse && from.pulse.label,
+            }
+          });
         }
         log('evening slice loaded — pulse ' +
           (eveningSlice.pulse && eveningSlice.pulse.className) +
@@ -1311,7 +1320,7 @@ async function runAngle(assign) {
     if (PACKET_ACTIVE) {
       inputPacket = livedPacket.buildAnglePacket({
         cycle, desk, reporter: asker, story, approach,
-        slice: jaxSlice || pslayerSlice || economicSlice, lane,
+        slice: jaxSlice || pslayerSlice || economicSlice || eveningSlice, lane,
       });
       ask = livedPacket.prompt(inputPacket);
     }

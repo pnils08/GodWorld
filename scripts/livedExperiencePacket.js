@@ -90,8 +90,7 @@ function creativeBriefFromSlice(slice) {
       priorTake: clean(slice.prewrite && slice.prewrite.priorTake, 300) || null,
       sceneRule: clean(slice.scene && slice.scene.colorRoom, 500) || null,
     };
-  } else if (slice.kind === 'economic-storefront' ||
-      (slice.prewrite && slice.prewrite.pulseClass)) {
+  } else if (slice.kind === 'economic-storefront') {
     const prewrite = slice.prewrite || {};
     brief = {
       kind: 'economic-storefront',
@@ -101,6 +100,26 @@ function creativeBriefFromSlice(slice) {
       namedBusinesses: uniq(prewrite.namedBusinesses).slice(0, 8),
       forbidden: uniq(prewrite.forbidden).slice(0, 8),
       sceneRule: clean(slice.scene && slice.scene.colorRoom, 500) || null,
+    };
+  } else if (slice.kind === 'evening-life') {
+    const prewrite = slice.prewrite || {};
+    const seat = slice.packetSeat || {};
+    const texture = slice.texture || {};
+    const signals = slice.signals || {};
+    const fame = (signals.fame || []).map(row => clean(
+      [row && row.name, row && row.venue, row && row.label].filter(Boolean).join(' — '), 240));
+    brief = {
+      kind: 'evening-life',
+      bag: clean(seat.bag || prewrite.bagRecommend, 80) || null,
+      pulseClass: clean(seat.pulseClass || prewrite.pulseClass, 100) || null,
+      pulseLabel: clean(seat.pulseLabel || '', 300) || null,
+      namedEvents: uniq([...(texture.cityEvents || []), ...(texture.tv || []), ...(texture.movies || [])]).slice(0, 8),
+      namedPlaces: uniq([...(texture.restaurants || []).map(v => v && v.name),
+        ...(texture.nightlife || []).map(v => v && v.name)]).slice(0, 8),
+      famousSightings: uniq([...(texture.famous || []), ...fame]).slice(0, 8),
+      streamingTrend: clean(texture.streamingTrend, 240) || null,
+      sceneRule: clean(slice.scene && slice.scene.colorRoom, 500) || null,
+      sourcePointers: uniq([seat.bagDoc, ...(slice.pointers || [])]).slice(0, 5),
     };
   }
   if (!brief) return null;

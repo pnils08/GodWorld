@@ -160,4 +160,21 @@ assert.equal(stageRoute('business', jordanAssignment.persona, 'report').model,
 assert.equal(stageRoute('business', jordanAssignment.persona, 'write').model,
   'deepseek/deepseek-chat');
 
+const kaiAssignment = {
+  name: 'Kai Marston',
+  popid: 'POP-00158',
+  desk: 'culture',
+  beatDomain: 'CULTURE',
+  persona: 'kai-marston',
+};
+const kaiContext = activateWakeContext(kaiAssignment, kaiAssignment.persona);
+assert.equal(kaiContext.packetContract, 'v2');
+assert.equal(kaiContext.wakePackage.version, 'KAI-LEP2-1');
+assert.equal(stageRoute('culture', kaiAssignment.persona, 'angle').model,
+  'meta-llama/llama-3.3-70b-instruct');
+assert.equal(stageRoute('culture', kaiAssignment.persona, 'report').model,
+  'meta-llama/llama-3.3-70b-instruct');
+assert.equal(stageRoute('culture', kaiAssignment.persona, 'write').model,
+  'meta-llama/llama-3.3-70b-instruct');
+
 console.log('cron fan-out filename handoff tests: PASS');

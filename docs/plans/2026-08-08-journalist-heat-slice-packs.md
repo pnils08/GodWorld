@@ -191,3 +191,8 @@ Shipped exemplars: Jax (stink substrate + firebrand overlay), P Slayer (sports f
 - 2026-08-09 (grok code; landed by kimi) — Task 5 Hal archive pulse shipped, commit 916cccdc.
 - 2026-08-10 (codex) — Connected the shipped economic/storefront pack to Jordan
   Velez's JORDAN-LEP2-1 live package; no model or external-state run.
+- 2026-08-10 (codex) — Connected the shared evening pack to Kai Marston's
+  KAI-LEP2-1 LEP/2 package with an arts seat overlay. The Packet now carries
+  Kai's scored pulse, bag authority, named TV/movie/event/place/fame inputs, and
+  source pointers; Mason, Maria, Sharon, and Graye remain separate package
+  gates. No model or external-state run.

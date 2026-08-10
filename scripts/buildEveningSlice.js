@@ -1071,6 +1071,7 @@ function assignmentFromSlice(slice, personaSlug) {
     popid: consumer ? consumer.popid : null,
     beatDomain: consumer && consumer.bag === 'faith' ? 'COMMUNITY' : 'CULTURE',
     persona: consumer ? consumer.slug : null,
+    bagDoc: consumer ? consumer.bagDoc : null,
     approach,
     story,
     eveningSlice: true,

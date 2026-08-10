@@ -224,6 +224,22 @@ The fourth package and first business seat is `business-desk`
 - the required package reserves only a business seat and cannot consume a civic,
   sports, culture, or other desk assignment.
 
+The fifth package and first evening/culture seat is `kai-marston`
+(`KAI-LEP2-1`), the established Arts & Entertainment identity:
+
+- all three wakes use `meta-llama/llama-3.3-70b-instruct` as the initial arts
+  voice route; the cheaper-model comparison remains a graduation measurement,
+  not a prompt-only assumption;
+- Kai consumes the shared deterministic evening substrate, but receives a
+  seat-specific arts pulse and `KAI_ARTS_BAG` overlay rather than a shared
+  culture-desk voice;
+- named TV, movies, city events, venues, artists, famous sightings, and
+  streaming signals remain source-addressed Packet inputs; unnamed sensory room
+  color is allowed only under the review profile conditions;
+- the required package reserves only the culture seat and cannot evict a civic,
+  sports, or business package. Mason, Maria, Sharon, Graye, and future Social
+  Trends seats require their own packages even when they share this substrate.
+
 ## Rejected alternatives
 
 - **Prompt tuning only.** Rejected: the C102 defect was discarded structure and
@@ -249,3 +265,4 @@ The fourth package and first business seat is `business-desk`
 - 2026-08-10 (codex) — Added P Slayer as PSLAYER-LEP2-1 with all-Llama routing, a load-bearing fan-heat profile, and a typed fan-pulse handoff through Wake 3; Jax and Carmen are unchanged.
 - 2026-08-10 (codex) — Added Jordan Velez as JORDAN-LEP2-1 with DeepSeek across all three wakes, the existing single-reporter business-desk identity, a load-bearing economics/labor profile, and a typed economic/storefront handoff through Wake 3; Jax, Carmen, and P Slayer are unchanged.
 - 2026-08-10 (codex) — Hardened the C103 angle boundary after the first unattended cohort wake: exact sourced claims now deduplicate before LEP/2 IDs, and candidate-free W1 Packets explicitly produce no targets. No recovery wake or external write was run.
+- 2026-08-10 (codex) — Added KAI-LEP2-1 as the first evening/culture package. Kai uses a separate Llama route and arts review profile while sharing the deterministic evening substrate; the LEP/2 handoff now preserves seat-specific pulse, arts authority, named media/events/places/sightings, and source pointers.

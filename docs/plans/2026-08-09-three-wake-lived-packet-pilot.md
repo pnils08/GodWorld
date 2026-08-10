@@ -347,16 +347,20 @@ slice and model text is a starting work surface, not an adopted contract.
 | pending | Ariana Reyes / POP-00133 | sports analytics | Candidate Article LEP/2; numeric/board pulse | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | Maria Keen / POP-00013 | culture | Candidate Article LEP/2; evening-life/neighborhood ground | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | Elliot Graye / POP-00012 | community/faith | Candidate Article LEP/2; faith/quiet work | Candidate DeepSeek; benchmark | [ ] | [ ] |
-| pending | Kai Marston / POP-00158 | culture/arts | Candidate Article LEP/2; arts as neighborhood act | Candidate DeepSeek; benchmark | [ ] | [ ] |
+| KAI-LEP2-1 | Kai Marston / POP-00158 | culture/arts | Article LEP/2; shared evening substrate with arts overlay | Llama / Llama / Llama | [x] | [ ] full W1-W3/Rhea |
 | pending | Mason Ortega / POP-00160 | culture/food | Candidate Article LEP/2; restaurants as workplaces | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | Sharon Okafor / POP-00159 | culture/lifestyle | Candidate Article LEP/2; behavior patterns | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | Elliot Marbury / POP-00166 | data/general | Separate data-memo contract; TrueSource/As_Roster audit slice | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | DeShawn Hartley / POP-00015 | visual media | Separate visual/photo-prompt contract; visual record slice | Candidate DeepSeek; benchmark | [ ] | [ ] |
 
-The four active packages have locked routes, but their cost/model comparison and
+The five active packages have locked routes, but their cost/model comparison and
 full unattended graduation remain checklist work. Elliot Marbury and DeShawn
 Hartley are deliberately not forced into Article LEP/2 until their data-memo and
-visual contracts are specified; contract shape is part of Gate 1.
+visual contracts are specified; contract shape is part of Gate 1. Celeste Tran
+(`POP-00164`) is confirmed in the canonical roster but is not yet in
+`persona-map.json`; she is not counted as one of these 22 mapped personas and
+must receive a Social Trends overlay before any package or shared evening access
+is activated for her.
 
 ## Status log — first C102 A/B
 
@@ -467,3 +471,4 @@ observation remains open.
 - 2026-08-10 (codex) — Added Jordan Velez as JORDAN-LEP2-1 with DeepSeek across all three wakes and a load-bearing economics/labor profile. Reused the single-reporter business-desk identity and carried the existing economic/storefront slice into LEP/2 as sourced anchors plus bounded creative limits. Jax, Carmen, and P Slayer are unchanged; no model or external-write run.
 - 2026-08-10 (codex) — Diagnosed the first C103 unattended angle wake and hardened the LEP/2 boundary: exact sourced claims deduplicate before ID derivation, and a candidate-free W1 Packet narrows model-added targets to an empty list. Recovery was not fired.
 - 2026-08-10 (codex) — Filed Task 17, the surgical migration checklist for all 22 newsroom personas: typed slice, per-wake model benchmark, aligned contracts, deterministic tests, attended proof, and separate data/visual contract gates. Jax and Jordan angle recoveries succeeded; full cohort graduation remains open.
+- 2026-08-10 (codex) — Added KAI-LEP2-1 as the first evening/culture package. Kai shares the deterministic evening substrate but receives a seat-specific arts pulse, bag authority, LEP/2 creative brief, Llama route, and load-bearing Rhea profile; Mason, Maria, and future Social Trends remain separate package gates.

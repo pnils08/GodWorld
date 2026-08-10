@@ -6,7 +6,7 @@ const packagesApi = require('./newsroomWakePackages');
 const packages = packagesApi.loadPackages();
 const active = packagesApi.activePackages(packages);
 assert.deepStrictEqual(active.map(row => row.key),
-  ['freelance-firebrand', 'carmen-delaine', 'p-slayer', 'business-desk']);
+  ['freelance-firebrand', 'carmen-delaine', 'p-slayer', 'business-desk', 'kai-marston']);
 
 const jax = packages['freelance-firebrand'];
 assert.equal(jax.version, 'JAX-LEP2-1');
@@ -64,6 +64,21 @@ assert.equal(jordan.reviewProfile.canonPolicy, 'load-bearing');
 assert.ok(jordan.reviewProfile.textureConditions.some(v => v.includes('raw engine labels')));
 assert.ok(jordan.reviewProfile.canonBlockers.some(v => v.includes('fabricated owner')));
 
+const kai = packages['kai-marston'];
+assert.equal(kai.version, 'KAI-LEP2-1');
+assert.equal(kai.requiredDaily, true);
+assert.equal(kai.assignment.desk, 'culture');
+assert.equal(kai.assignment.name, 'Kai Marston');
+assert.equal(kai.assignment.popid, 'POP-00158');
+assert.equal(kai.assignment.beatDomain, 'CULTURE');
+assert.equal(kai.packetContract, 'v2');
+assert.equal(packagesApi.routeFor(kai, 'angle').model, 'meta-llama/llama-3.3-70b-instruct');
+assert.equal(packagesApi.routeFor(kai, 'report').model, 'meta-llama/llama-3.3-70b-instruct');
+assert.equal(packagesApi.routeFor(kai, 'write').model, 'meta-llama/llama-3.3-70b-instruct');
+assert.equal(kai.reviewProfile.canonPolicy, 'load-bearing');
+assert.ok(kai.reviewProfile.textureConditions.some(v => v.includes('evening source')));
+assert.ok(kai.reviewProfile.canonBlockers.some(v => v.includes('social-media reaction')));
+
 const gate = packagesApi.gateAssignments([
   { desk: 'civic', name: 'Jax Caldera', persona: 'freelance-firebrand' },
   { desk: 'civic', name: 'Carmen Delaine', persona: 'carmen-delaine' },
@@ -97,22 +112,26 @@ const pinned = applyWakePackageGate([
   'carmen-delaine': 'Carmen civic ledger',
   'p-slayer': 'P Slayer fan heat',
   'business-desk': 'Jordan storefront ledger',
+  'kai-marston': 'Kai arts pulse',
 }, packages);
-assert.equal(pinned.assignments.length, 4);
-assert.equal(pinned.assignments[0].name, 'Jax Caldera');
-assert.equal(pinned.assignments[0].approach, 'Jax accountability');
-assert.equal(pinned.assignments[0].story.ref, 'TEST-CIVIC-ONE');
-assert.equal(pinned.assignments[1].name, 'Carmen Delaine');
-assert.equal(pinned.assignments[1].approach, 'Carmen civic ledger');
-assert.equal(pinned.assignments[1].story.ref, 'TEST-CIVIC-TWO');
-assert.equal(pinned.assignments[2].name, 'P Slayer');
-assert.equal(pinned.assignments[2].approach, 'P Slayer fan heat');
-assert.equal(pinned.assignments[2].story.ref, 'TEST-SPORTS-ONE');
-assert.equal(pinned.assignments[3].name, 'Jordan Velez');
-assert.equal(pinned.assignments[3].approach, 'Jordan storefront ledger');
+assert.equal(pinned.assignments.length, 5);
+const pinnedByPersona = new Map(pinned.assignments.map(row => [row.persona, row]));
+assert.equal(pinnedByPersona.get('freelance-firebrand').name, 'Jax Caldera');
+assert.equal(pinnedByPersona.get('freelance-firebrand').approach, 'Jax accountability');
+assert.equal(pinnedByPersona.get('freelance-firebrand').story.ref, 'TEST-CIVIC-ONE');
+assert.equal(pinnedByPersona.get('carmen-delaine').name, 'Carmen Delaine');
+assert.equal(pinnedByPersona.get('carmen-delaine').approach, 'Carmen civic ledger');
+assert.equal(pinnedByPersona.get('carmen-delaine').story.ref, 'TEST-CIVIC-TWO');
+assert.equal(pinnedByPersona.get('p-slayer').name, 'P Slayer');
+assert.equal(pinnedByPersona.get('p-slayer').approach, 'P Slayer fan heat');
+assert.equal(pinnedByPersona.get('p-slayer').story.ref, 'TEST-SPORTS-ONE');
+assert.equal(pinnedByPersona.get('business-desk').name, 'Jordan Velez');
+assert.equal(pinnedByPersona.get('business-desk').approach, 'Jordan storefront ledger');
+assert.equal(pinnedByPersona.get('kai-marston').name, 'Kai Marston');
+assert.equal(pinnedByPersona.get('kai-marston').approach, 'Kai arts pulse');
 assert.deepStrictEqual(pinned.pinned.map(row => row.replaced),
   ['TEST-ONLY Civic One', 'TEST-ONLY Civic Two', 'TEST-ONLY Sports One',
-    'TEST-ONLY Business Reporter']);
+    'TEST-ONLY Business Reporter', null]);
 assert.deepStrictEqual(pinned.skipped.map(row => row.name),
   ['TEST-ONLY Sports Two']);
 
@@ -136,10 +155,10 @@ const shortDesk = applyWakePackageGate([
   { desk: 'business', name: 'TEST-ONLY Business Seat', popid: 'POP-99994', story: { ref: 'TEST-BUSINESS' } },
   { desk: 'culture', name: 'TEST-ONLY Culture Preserved', popid: 'POP-99991', story: { ref: 'TEST-CULTURE' } },
 ], { civic: 'generic civic' }, packages);
-assert.equal(shortDesk.assignments.length, 4);
+assert.equal(shortDesk.assignments.length, 5);
 assert.deepStrictEqual(new Set(shortDesk.assignments.map(row => row.persona)),
-  new Set(['freelance-firebrand', 'carmen-delaine', 'p-slayer', 'business-desk']));
-assert.ok(shortDesk.skipped.some(row => row.name === 'TEST-ONLY Culture Preserved'));
+  new Set(['freelance-firebrand', 'carmen-delaine', 'p-slayer', 'business-desk', 'kai-marston']));
+assert.ok(shortDesk.pinned.some(row => row.replaced === 'TEST-ONLY Culture Preserved'));
 assert.equal(shortDesk.pinned.filter(row => row.replaced === null).length, 2);
 
 console.log('newsroomWakePackages.test.js: PASS');

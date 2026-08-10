@@ -267,4 +267,39 @@ assert.ok(economicW3.manifest.approvedFacts.some(row =>
   row.text === economicSlice.prewrite.anchorFacts[0]));
 assert.doesNotThrow(() => p.assertBase(economicW3, 'W3'));
 
+// Kai's arts seat consumes the shared evening substrate through a seat-specific
+// pulse/overlay; TV, movies, fame, and named places stay source-bounded.
+const kaiStory = {
+  ref: 'output/TEST_ONLY_EVENING.json lanes.culture[0]',
+  label: 'TEST-ONLY TV slate changes the neighborhood night',
+  angle: 'what the TEST-ONLY screen night does to the arts block',
+  kind: 'tv-slate', hood: 'TEST-HOOD',
+  hookLine: 'TEST-ONLY viewers are choosing the supplied slate tonight',
+};
+const kaiSlice = {
+  kind: 'evening-life',
+  packetSeat: { persona: 'kai-marston', bag: 'arts', bagDoc: 'docs/media/KAI_ARTS_BAG.md', pulseClass: 'tv-slate', pulseLabel: 'TEST-ONLY screen pulse' },
+  prewrite: { pulseClass: 'tv-slate', angle: 'TEST-ONLY screen pulse', hookLine: 'TEST-ONLY supplied hook', bagRecommend: 'arts', bagSlug: 'kai-marston', anchorFacts: ['NAMED: Test Arts Event'] },
+  texture: {
+    cityEvents: ['Test Arts Event'], tv: ['Test Show'], movies: ['Test Film'],
+    famous: ['Test Artist'], restaurants: [{ name: 'Test Venue' }], nightlife: [],
+    streamingTrend: 'Test streaming trend',
+  },
+  signals: { fame: [{ name: 'Test Artist', venue: 'Test Venue' }] },
+  scene: { colorRoom: 'TEST-ONLY unnamed gallery light and room sound' },
+  pointers: ['output/world_summary_c999.md ## Evening Texture', 'output/desk_signal_c999.json lanes.culture'],
+};
+const kaiW1 = p.buildAnglePacket({
+  cycle: 999, desk: 'culture', reporter: { popid: 'POP-00158', name: 'Kai Marston' },
+  story: kaiStory, approach: 'TEST-ONLY Kai arts approach', slice: kaiSlice, lane: [],
+});
+assert.deepStrictEqual(kaiW1.task.creativeBrief, {
+  kind: 'evening-life', bag: 'arts', pulseClass: 'tv-slate', pulseLabel: 'TEST-ONLY screen pulse',
+  namedEvents: ['Test Arts Event', 'Test Show', 'Test Film'], namedPlaces: ['Test Venue'],
+  famousSightings: ['Test Artist', 'Test Artist — Test Venue'], streamingTrend: 'Test streaming trend',
+  sceneRule: 'TEST-ONLY unnamed gallery light and room sound',
+  sourcePointers: ['docs/media/KAI_ARTS_BAG.md', 'output/world_summary_c999.md ## Evening Texture', 'output/desk_signal_c999.json lanes.culture'],
+});
+assert.ok(kaiW1.known.some(row => row.text === kaiStory.label));
+
 console.log('livedExperiencePacketV2.test.js: PASS');

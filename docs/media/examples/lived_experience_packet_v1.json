@@ -1,0 +1,88 @@
+{
+  "v": "LEP/1",
+  "wake": "W2",
+  "actor": {
+    "id": "TEST-POP-01",
+    "name": "Test Citizen",
+    "role": "Resident",
+    "desk": null
+  },
+  "task": {
+    "goal": "Answer one reporter question from bounded lived experience",
+    "reporter": "Test Reporter",
+    "question": "As a resident of TEST-HOOD, what about the supplied trend feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+  },
+  "signal": {
+    "kind": "test-signal",
+    "hood": "TEST-HOOD",
+    "focus": "TEST-ONLY condition changed",
+    "src": "output/TEST_ONLY.json rows[1]"
+  },
+  "exposure": {
+    "basis": [
+      "same-neighborhood"
+    ],
+    "self": "Test Citizen — Resident, TEST-HOOD",
+    "planTarget": null
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "TEST-ONLY condition changed",
+      "src": "output/TEST_ONLY.json rows[1]"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "FACT already supplied",
+      "your own feeling",
+      "your own intention"
+    ],
+    "classify": [
+      "FACT",
+      "OBSERVATION",
+      "INTERPRETATION",
+      "INTENTION",
+      "LEAD"
+    ],
+    "never": [
+      "invent a named person",
+      "invent a public event",
+      "invent a date",
+      "invent a count",
+      "turn suspicion into observation"
+    ],
+    "rule": "Only Packet FACT claims are the press-evidence floor. Private memory may shape emotion, but it is not evidence of a public event. INTERPRETATION stays abstract; every concrete unsupplied detail becomes an unverifiedLead or an abstention."
+  },
+  "output": {
+    "format": "json-only",
+    "schema": {
+      "answer": "quote|abstain",
+      "observation": [
+        {
+          "text": "string",
+          "src": "exact src from packet.known; empty when none"
+        }
+      ],
+      "interpretation": [
+        "string"
+      ],
+      "intention": [
+        "personal intention only; no new institutional action"
+      ],
+      "unverifiedLead": [
+        "string"
+      ],
+      "quoteParts": [
+        {
+          "t": "INTERPRETATION|INTENTION",
+          "i": "zero-based index into that array"
+        }
+      ],
+      "limits": [
+        "string"
+      ]
+    },
+    "rule": "The backend assembles the publishable quote from quoteParts. New firsthand claims belong in unverifiedLead unless packet.known supplies their exact source."
+  }
+}

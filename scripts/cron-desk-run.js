@@ -71,9 +71,35 @@ const OUT_TAG = (PERSONA ? PERSONA + '_' : '');
 // (angle -> report -> write) instead of the full chain. Stages hand off via
 // output/cron-compare/<stem>.angle.json / .packet.json artifacts.
 const STAGE = arg('--stage', null);   // 'angle' | 'report' | 'write'
-// --fanout (Mike-direct 2026-07-25): run the stage for EVERY assignment in
-// today's rotation file (output/cron-compare/fanout-YYYY-MM-DD.json, built by
-// the angle wake if missing) instead of a single --desk/--persona run.
+// pipeline.54 / ADR-0017. An explicit flag remains a samples-only evaluation
+// override. Live scheduled fanout gets its Packet contract and models from the
+// journalist's active wake package instead; no package means no scheduled wake.
+const PACKET_CONTRACT_FLAG = arg('--packet-contract', null);
+const wakePackages = require('./newsroomWakePackages');
+let ACTIVE_WAKE_PACKAGE = null;
+let PACKET_CONTRACT = null;
+let PACKET_ACTIVE = false;
+let livedPacket = require('./livedExperiencePacket');
+
+function activateWakeContext(assign, personaSlug) {
+  const packageAssignment = assign || (personaSlug ? { persona: personaSlug } : null);
+  ACTIVE_WAKE_PACKAGE = wakePackages.packageForAssignment(packageAssignment);
+  PACKET_CONTRACT = PACKET_CONTRACT_FLAG ||
+    (ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.packetContract) || null;
+  PACKET_ACTIVE = PACKET_CONTRACT === 'v1' || PACKET_CONTRACT === 'v2';
+  livedPacket = PACKET_CONTRACT === 'v2'
+    ? require('./livedExperiencePacketV2')
+    : require('./livedExperiencePacket');
+  return {
+    wakePackage: ACTIVE_WAKE_PACKAGE,
+    packetContract: PACKET_CONTRACT,
+    packetActive: PACKET_ACTIVE,
+    livedPacket,
+  };
+}
+// --fanout (Mike-direct 2026-07-25): run the stage for every PACKAGE-ELIGIBLE
+// assignment in today's rotation file. ADR-0017 forbids a legacy generic
+// fallback for unupgraded journalists.
 const FANOUT = process.argv.includes('--fanout');
 
 // Persona registry (Phase 2.3): personas are real ledger citizens (Jax = POP-00799),
@@ -102,6 +128,11 @@ function deskRoute(desk, persona) {
   // Persona key wins (freelance-firebrand heat model) — do not inherit civic DeepSeek.
   if (persona && m[persona]) return m[persona];
   return m[desk] || m._default;
+}
+function stageRoute(desk, persona, stage) {
+  return ACTIVE_WAKE_PACKAGE
+    ? wakePackages.routeFor(ACTIVE_WAKE_PACKAGE, stage)
+    : deskRoute(desk, persona);
 }
 const slug = m => m.replace(/[^a-z0-9]+/gi, '-').toLowerCase();
 function readJson(p) { try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch (_) { return null; } }
@@ -168,7 +199,7 @@ const QUOTE_CITIZEN_CAP = 4;   // per wake — keep the DeepSeek quote pre-pass 
 // /\[[\s\S]*\]/ grabs the banner and fails to parse. JSON.stringify(_,null,2)
 // puts the array's own `[` and `]` each on their own line — the banner never
 // does — so anchor on the bare-bracket lines.
-function parseBatchQuotes(out) {
+function parseBatchResults(out) {
   const lines = String(out).split('\n');
   let end = -1;
   for (let i = lines.length - 1; i >= 0; i--) { if (lines[i].trim() === ']') { end = i; break; } }
@@ -177,7 +208,11 @@ function parseBatchQuotes(out) {
   if (start < 0 || end <= start) return [];
   let parsed;
   try { parsed = JSON.parse(lines.slice(start, end + 1).join('\n')); } catch (_) { return []; }
-  return (Array.isArray(parsed) ? parsed : []).filter(q => q.quote && !q.fallback);
+  return Array.isArray(parsed) ? parsed : [];
+}
+
+function parseBatchQuotes(out) {
+  return parseBatchResults(out).filter(q => q.quote && !q.fallback);
 }
 
 // Least-used-wins rotation: tally finalAssignment bylines across recent shadow logs.
@@ -259,23 +294,49 @@ function interviewTally() {
 // reaction ask. Task 2.5.4: the assigned story's citizens fill the pool FIRST —
 // they are the engine's actual affected residents for this angle — with the
 // lane's popids as fallback. Kills the fabricated-resident class at the root.
-function collectQuoteAsks(lane, persona, story) {
+function collectQuoteAsks(lane, persona, story, angleArt) {
   const asks = [];
   const seen = new Set();
   const rested = [];
   const tally = interviewTally();
+  const packetCandidates = story
+    ? livedPacket.candidateRows(story, angleArt && angleArt.jaxSlice).reduce((m, c) => m.set(c.pop, c), new Map())
+    : new Map();
   const push = (pop, label, ignoreRest) => {
     if (!pop || seen.has(pop) || asks.length >= QUOTE_CITIZEN_CAP) return;
-    if (!ignoreRest && (tally[pop] || 0) >= REST_CAP) { rested.push({ pop, label }); return; }
+    // The A/B treatment holds the candidate pool fixed across retries. The
+    // production rest window remains unchanged on the baseline path.
+    if (!PACKET_ACTIVE && !ignoreRest && (tally[pop] || 0) >= REST_CAP) { rested.push({ pop, label }); return; }
     seen.add(pop);
     // Phase 2.3: voice the ask in the persona's register — the question's voice
     // shapes the answer's friction (the Antigravity/Jax lesson, 2026-07-24).
     const l = String(label || '').slice(0, 160);
-    const askText = persona
-      ? 'I\'m ' + persona.name + ' — Tribune. Something smells off about "' + l + '" and I\'m not letting it go. What have you seen with your own eyes?'
-      : 'The Tribune is looking into this in your part of Oakland: "' + l + '". Speak about how it touches your life.';
+    let askText;
+    let inputPacket = null;
+    if (PACKET_ACTIVE) {
+      const candidate = packetCandidates.get(pop) || {
+        pop, name: null, role: null, hood: story && story.hood || null,
+        profile: null, why: 'desk-signal candidate',
+      };
+      inputPacket = livedPacket.buildReportPacket({
+        cycle: angleArt && angleArt.cycle,
+        desk: angleArt && angleArt.desk,
+        reporter: persona,
+        angleInput: angleArt && angleArt.inputPacket,
+        anglePlan: angleArt && angleArt.angleRead && angleArt.angleRead.plan,
+        story,
+        candidate,
+      });
+      askText = livedPacket.prompt(inputPacket);
+    } else {
+      askText = persona
+        ? 'I\'m ' + persona.name + ' — Tribune. Something smells off about "' + l + '" and I\'m not letting it go. What have you seen with your own eyes?'
+        : 'The Tribune is looking into this in your part of Oakland: "' + l + '". Speak about how it touches your life.';
+    }
     asks.push({ pop, ask: askText,
-      record: !NO_GATE, maxTokens: 200 });   // S332: --no-gate SAMPLES never write citizen memory (was unconditional record:true — the layer-4 leak Codex caught)
+      ...(inputPacket ? { packetContract: livedPacket.VERSION, inputPacket, evidenceBound: true } : {}),
+      ...(ACTIVE_WAKE_PACKAGE ? { model: wakePackages.routeFor(ACTIVE_WAKE_PACKAGE, 'report').model } : {}),
+      record: PACKET_ACTIVE ? false : !NO_GATE, maxTokens: PACKET_ACTIVE ? 420 : 200 });   // S332: --no-gate SAMPLES never write citizen memory (was unconditional record:true — the layer-4 leak Codex caught)
   };
   if (story) for (const pop of (story.popids || [])) push(pop, story.angle || story.label);
   for (const e of lane) {
@@ -807,6 +868,15 @@ function stageStem(cycle, desk, tag) {
 }
 const nameSlug = n => String(n || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
+function wakeStageStem(cycle, desk, assign, personaSlug) {
+  if (assign && !personaSlug) {
+    const tag = nameSlug(assign.name) + (PACKET_ACTIVE ? '-packet-' + PACKET_CONTRACT : '');
+    return stageStem(cycle, desk, tag);
+  }
+  const base = assign ? stageStem(cycle, desk, personaSlug) : stageStem(cycle, desk);
+  return PACKET_ACTIVE ? base + 'packet-' + PACKET_CONTRACT + '_' : base;
+}
+
 function writerArtifactTag(assign, personaSlug) {
   if (!assign || personaSlug) return null;
   const tag = nameSlug(assign.name);
@@ -817,8 +887,8 @@ function writerArtifactTag(assign, personaSlug) {
   return tag;
 }
 
-function buildWriterArgs(desk, stateFile, personaSlug, artifactTag) {
-  const route = deskRoute(desk, personaSlug);
+function buildWriterArgs(desk, stateFile, personaSlug, artifactTag, routeOverride) {
+  const route = routeOverride || deskRoute(desk, personaSlug);
   return [
     path.join(ROOT, 'scripts', 'cron-desk-writer.js'),
     '--desk', desk,
@@ -849,7 +919,8 @@ async function runAngle(assign) {
   const cycle = arg('--cycle', null) || detectCycle();
   const desk = assign ? assign.desk : DESK;
   const personaSlug = assign ? assign.persona : PERSONA;
-  const stem = assign ? stageStem(cycle, desk, personaSlug || nameSlug(assign.name)) : stageStem(cycle);
+  activateWakeContext(assign, personaSlug);
+  const stem = wakeStageStem(cycle, desk, assign, personaSlug);
   console.log('Wake 1 ANGLE — ' + desk + ' c' + cycle + (personaSlug ? ' (' + personaSlug + ')' : '') + (assign ? ' [' + assign.name + ']' : ''));
   console.log('===================================');
   const lane = loadLane(cycle, desk);
@@ -860,7 +931,7 @@ async function runAngle(assign) {
   // Social wiki wall (cp-POP-*) — HARD load before angle, not optional tool.
   let wallBlock = null;
   let wallMeta = null;
-  if (asker && asker.popid) {
+  if (asker && asker.popid && !PACKET_ACTIVE) {
     try {
       const { loadReporterWall, formatWallBlock, wallAskSnippet, ensureReporterWall } =
         require(path.join(__dirname, 'reporterWall'));
@@ -996,6 +1067,7 @@ async function runAngle(assign) {
     }
   }
   let angleRead = null;
+  let inputPacket = null;
   if (asker) {
     const brief = story ? citizenBrief(story.citizens) : { names: [], profiles: [] };
     // grok 2026-08-06: persona + stink seed → lead with the contradiction (not free
@@ -1234,9 +1306,19 @@ async function runAngle(assign) {
         (asker._wallSnippet ? '\n\n' + asker._wallSnippet : '') +
         '\n\nWhat\'s smelling off to you? Point at the ONE thing nobody\'s touching — and name who should answer for it.';
     }
-    log('asking ' + asker.name + ' (' + asker.popid + ') what smells off...');
+    if (PACKET_ACTIVE) {
+      inputPacket = livedPacket.buildAnglePacket({
+        cycle, desk, reporter: asker, story, approach, slice: jaxSlice, lane,
+      });
+      ask = livedPacket.prompt(inputPacket);
+    }
+    log('asking ' + asker.name + ' (' + asker.popid + ') ' +
+      (PACKET_ACTIVE ? 'for a typed reporter plan...' : 'what smells off...'));
     const out = execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
-      '--pop=' + asker.popid, '--ask=' + ask, '--cycle=' + cycle, '--json', '--max-tokens=320'],
+      '--pop=' + asker.popid, '--ask=' + ask, '--cycle=' + cycle, '--json',
+      ...(PACKET_ACTIVE ? ['--evidence-bound'] : []),
+      ...(ACTIVE_WAKE_PACKAGE ? ['--model=' + wakePackages.routeFor(ACTIVE_WAKE_PACKAGE, 'angle').model] : []),
+      '--max-tokens=' + (PACKET_ACTIVE ? '700' : '320')],
       { cwd: ROOT, encoding: 'utf8', timeout: 300000 });
     const outTrim = out.trim();
     // tolerate dotenv banner lines before the JSON — line-anchored: the rotating
@@ -1245,7 +1327,10 @@ async function runAngle(assign) {
     const jsonStart = outTrim.search(/^\{/m);
     if (jsonStart === -1) throw new Error('citizenVoice --json returned no JSON envelope: ' + outTrim.slice(0, 200));
     const r = JSON.parse(outTrim.slice(jsonStart));
-    angleRead = { name: r.name, popid: r.popId, text: r.text };
+    const plan = PACKET_ACTIVE ? livedPacket.validateAngleOutput(r.text, inputPacket) : null;
+    angleRead = { name: r.name, popid: r.popId,
+      text: PACKET_ACTIVE ? JSON.stringify(plan, null, 2) : r.text,
+      ...(plan ? { plan } : {}) };
     log('angle read: "' + String(r.text).replace(/\s+/g, ' ').slice(0, 140) + '..."');
   }
   // Task 2.5.3 §2 — canon research through the 2.5.5 tool loop, validated
@@ -1259,6 +1344,7 @@ async function runAngle(assign) {
   fs.mkdirSync(COMPARE, { recursive: true });
   fs.writeFileSync(anglePath, JSON.stringify({
     stage: 'angle', desk, cycle, persona: personaSlug,
+    ...(PACKET_ACTIVE ? { packetContract: livedPacket.VERSION, inputPacket } : {}),
     reporter: assign ? { name: assign.name, popid: assign.popid } : (persona ? { name: persona.name, popid: persona.popid } : null),
     assignment: story ? { story, approach } : null,   // Task 2.5.2: the EIC assignment rides the handoff
     jaxSlice: jaxSlice ? {
@@ -1634,7 +1720,8 @@ async function runReport(assign) {
   const cycle = arg('--cycle', null) || detectCycle();
   const desk = assign ? assign.desk : DESK;
   const personaSlug = assign ? assign.persona : PERSONA;
-  const stem = assign ? stageStem(cycle, desk, personaSlug || nameSlug(assign.name)) : stageStem(cycle);
+  activateWakeContext(assign, personaSlug);
+  const stem = wakeStageStem(cycle, desk, assign, personaSlug);
   console.log('Wake 2 REPORT — ' + desk + ' c' + cycle + (personaSlug ? ' (' + personaSlug + ')' : '') + (assign ? ' [' + assign.name + ']' : ''));
   console.log('===================================');
   const anglePath = path.join(COMPARE, stem + 'angle.json');
@@ -1650,8 +1737,9 @@ async function runReport(assign) {
   // today's fanout entry still sees it.
   const angleArt = readJson(anglePath);
   const story = (assign && assign.story) || (angleArt && angleArt.assignment && angleArt.assignment.story) || null;
-  const asks = collectQuoteAsks(lane, askVoice, story);
+  const asks = collectQuoteAsks(lane, askVoice, story, angleArt);
   let quotes = [];
+  let interviews = [];
   if (asks.length) {
     log('quote pre-pass (reporter-voiced): ' + asks.length + ' citizen(s)...');
     const asksPath = path.join(COMPARE, stem + 'asks.json');
@@ -1659,7 +1747,26 @@ async function runReport(assign) {
     try {
       const out = execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
         '--batch=' + asksPath, '--cycle=' + cycle], { cwd: ROOT, encoding: 'utf8', timeout: 600000 });
-      quotes = parseBatchQuotes(out);
+      if (PACKET_ACTIVE) {
+        const inputByPop = new Map(asks.map(a => [a.pop, a.inputPacket]));
+        interviews = parseBatchResults(out).map(q => {
+          const inputPacket = inputByPop.get(q.pop);
+          if (!q.quote || q.fallback) return { ...q, claims: null,
+            ...(livedPacket.VERSION === 'LEP/2' ? { inputPacket } : {}) };
+          try {
+            const claims = livedPacket.validateReportOutput(q.quote, inputPacket);
+            return { ...q, raw: q.quote, quote: claims.publishableQuote, claims,
+              ...(livedPacket.VERSION === 'LEP/2' ? { inputPacket } : {}) };
+          } catch (e) {
+            return { ...q, raw: q.quote, quote: null, claims: null,
+              ...(livedPacket.VERSION === 'LEP/2' ? { inputPacket } : {}),
+              fallback: 'contract-invalid: ' + e.message };
+          }
+        });
+        quotes = interviews.filter(q => q.quote && q.claims && !q.fallback);
+      } else {
+        quotes = parseBatchQuotes(out);
+      }
       log('quotes landed: ' + quotes.length + '/' + asks.length + (quotes.length ? ' (' + quotes.map(q => q.name).join(', ') + ')' : ''));
     } catch (e) { log('quote pre-pass failed (non-fatal): ' + e.message); }
   } else {
@@ -1668,10 +1775,12 @@ async function runReport(assign) {
   const packetPath = path.join(COMPARE, stem + 'packet.json');
   fs.writeFileSync(packetPath, JSON.stringify({
     stage: 'report', desk, cycle, persona: personaSlug,
+    ...(PACKET_ACTIVE ? { packetContract: livedPacket.VERSION } : {}),
     reporter: assign ? { name: assign.name, popid: assign.popid } : null,
     assignment: story ? { story } : null,   // Task 2.5.4: what the quote pool was seeded from
     angle: path.relative(ROOT, anglePath),
     quotesRequested: asks.length, quotesLanded: quotes.length, quotes,
+    ...(PACKET_ACTIVE ? { interviews } : {}),
     ranAt: new Date().toISOString()
   }, null, 2));
   console.log('packet → ' + path.relative(ROOT, packetPath) + ' (' + quotes.length + ' quotes)');
@@ -1714,7 +1823,8 @@ async function runWrite(assign) {
   const cycle = arg('--cycle', null) || detectCycle();
   const desk = assign ? assign.desk : DESK;
   const personaSlug = assign ? assign.persona : PERSONA;
-  const stem = assign ? stageStem(cycle, desk, personaSlug || nameSlug(assign.name)) : stageStem(cycle);
+  activateWakeContext(assign, personaSlug);
+  const stem = wakeStageStem(cycle, desk, assign, personaSlug);
   console.log('Wake 3 WRITE — ' + desk + ' c' + cycle + (personaSlug ? ' (' + personaSlug + ')' : '') + (assign ? ' [' + assign.name + ']' : ''));
   console.log('===================================');
   const anglePath = path.join(COMPARE, stem + 'angle.json');
@@ -1727,7 +1837,7 @@ async function runWrite(assign) {
   const angle = readJson(anglePath);
   const packet = readJson(packetPath);
   const persona = personaInfo(personaSlug);
-  const route = deskRoute(desk, personaSlug);
+  const route = stageRoute(desk, personaSlug, 'write');
   const draftName = stem + slug(route.model) + '.md';
   const draftPath = path.join(COMPARE, draftName);
   const base = draftName.replace(/\.md$/, '');
@@ -1752,7 +1862,7 @@ async function runWrite(assign) {
   }
   // Social wiki wall — HARD inject into writer state (not optional memory_recall).
   let wallBlock = null;
-  if (byline && byline.popid) {
+  if (byline && byline.popid && !PACKET_ACTIVE) {
     try {
       const { loadReporterWall, formatWallBlock, ensureReporterWall } =
         require(path.join(__dirname, 'reporterWall'));
@@ -1764,21 +1874,40 @@ async function runWrite(assign) {
       log('reporter wall load failed (non-fatal): ' + e.message);
     }
   }
-  const stateFile = path.join(COMPARE, base + '.state.md');
-  fs.writeFileSync(stateFile, buildLaneState(desk, cycle, lane, byline, quotes, persona,
-    angle && angle.angleRead ? angle.angleRead.text : null, assignment, wallBlock));
-  log('writing on lane (' + fs.statSync(stateFile).size + ' B injected state' + (persona ? ' + stance anchor' : '') +
-    (wallBlock ? ' + wall' : '') + ')...');
-  const artifactTag = writerArtifactTag(assign, personaSlug);
+  const stateFile = path.join(COMPARE, base + (PACKET_ACTIVE ? '.state.json' : '.state.md'));
+  if (PACKET_ACTIVE) {
+    const writePacket = livedPacket.buildWritePacket({
+      cycle, desk, reporter: byline,
+      story: assignment && assignment.story,
+      approach: assignment && assignment.approach,
+      angleInput: angle && angle.inputPacket,
+      anglePlan: angle && angle.angleRead && angle.angleRead.plan,
+      interviews: packet && packet.interviews || [],
+      lane,
+      reviewProfile: ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.reviewProfile,
+    });
+    fs.writeFileSync(stateFile, JSON.stringify(writePacket, null, 2));
+  } else {
+    fs.writeFileSync(stateFile, buildLaneState(desk, cycle, lane, byline, quotes, persona,
+      angle && angle.angleRead ? angle.angleRead.text : null, assignment, wallBlock));
+  }
+  log('writing on ' + (PACKET_ACTIVE ? 'typed Packet' : 'lane') + ' (' + fs.statSync(stateFile).size +
+    ' B injected state' + (persona ? ' + stance anchor' : '') + (wallBlock ? ' + wall' : '') + ')...');
+  const baseArtifactTag = writerArtifactTag(assign, personaSlug);
+  const artifactTag = PACKET_ACTIVE
+    ? (baseArtifactTag ? baseArtifactTag + '-packet-' + PACKET_CONTRACT : 'packet-' + PACKET_CONTRACT)
+    : baseArtifactTag;
   const writerArgs = buildWriterArgs(
     desk,
     path.relative(ROOT, stateFile),
     personaSlug,
-    artifactTag
+    artifactTag,
+    route
   );
   // Task 2.5.5: hand the writer the byline's POPID so the memory tool pair
   // (own citizen page, cp-<popid>) joins the tool loop.
-  if (byline && byline.popid) writerArgs.push('--byline-popid', byline.popid);
+  if (PACKET_ACTIVE) writerArgs.push('--strict-source-hygiene', '--packet-only');
+  else if (byline && byline.popid) writerArgs.push('--byline-popid', byline.popid);
   execFileSync('node', writerArgs, { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
   if (!fs.existsSync(draftPath)) throw new Error('writer produced no draft at ' + path.relative(ROOT, draftPath));
 
@@ -1791,6 +1920,8 @@ async function runWrite(assign) {
     try {
       execFileSync('node', [path.join(ROOT, 'scripts', 'cron-rhea-gate.js'), '--draft', path.relative(ROOT, draftPath),
         '--model', GATE_MODEL, '--backend', GATE_BACKEND, '--api-model', GATE_API_MODEL, '--cycle', cycle,
+        ...(personaSlug ? ['--persona', personaSlug] : []),
+        ...(PACKET_ACTIVE ? ['--article-packet', path.relative(ROOT, stateFile)] : []),
         // pipeline.45: the wake-2 packet backs the INTAKE quoted-source check.
         '--packet', path.relative(ROOT, packetPath),
         // Task 2.5.3: wake-1 validated canon facts ride into the gate as
@@ -2088,6 +2219,11 @@ async function runFanoutStage() {
   const limit = parseInt(arg('--limit', '0'), 10);
   let list = fanout.assignments || [];
   if (only) list = list.filter(a => a.name === only || a.persona === only || a.desk === only);
+  const packageGate = wakePackages.gateAssignments(list);
+  for (const skipped of packageGate.skipped) {
+    log('[package-gate] skipped ' + skipped.name + ' (' + skipped.desk + '): ' + skipped.reason);
+  }
+  list = packageGate.eligible;
   if (limit > 0) list = list.slice(0, limit);
   console.log('Fan-out ' + STAGE.toUpperCase() + ' — ' + date + ', ' + list.length + ' assignment(s)');
   console.log('===================================');
@@ -2138,6 +2274,18 @@ if (STAGE && !['angle', 'report', 'write'].includes(STAGE)) {
   console.error('[run] unknown --stage "' + STAGE + '" (want angle | report | write)');
   process.exit(1);
 }
+if (PACKET_CONTRACT_FLAG && !['v1', 'v2'].includes(PACKET_CONTRACT_FLAG)) {
+  console.error('[run] unknown --packet-contract "' + PACKET_CONTRACT_FLAG + '" (want v1 or v2)');
+  process.exit(1);
+}
+if (PACKET_CONTRACT_FLAG && !NO_GATE) {
+  console.error('[run] explicit --packet-contract=' + PACKET_CONTRACT_FLAG + ' is evaluation-only and requires --no-gate');
+  process.exit(1);
+}
+if (PACKET_CONTRACT_FLAG && !STAGE) {
+  console.error('[run] explicit --packet-contract=' + PACKET_CONTRACT_FLAG + ' requires one --stage=angle|report|write');
+  process.exit(1);
+}
 if (require.main === module) {
   Promise.resolve()
     .then(() => (STAGE && FANOUT ? runFanoutStage()
@@ -2153,6 +2301,8 @@ module.exports = {
   nameSlug,
   writerArtifactTag,
   buildWriterArgs,
+  activateWakeContext,
+  stageRoute,
   loadLane,
   yesterdaysFilings,
   buildIntakeSidecar,

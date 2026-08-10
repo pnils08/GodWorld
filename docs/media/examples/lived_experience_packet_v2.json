@@ -1,0 +1,134 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "TEST-REPORTER",
+    "name": "Test Reporter",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write one TEST-ONLY Article from the exhaustive claim manifest",
+    "assignment": "TEST-ONLY mismatch",
+    "approach": "Choose emphasis and order without enlarging the record"
+  },
+  "signal": {
+    "kind": "test-signal",
+    "hood": "TEST-HOOD",
+    "src": "output/TEST_ONLY.json rows[1]",
+    "plan": {
+      "focus": "TEST-ONLY mismatch",
+      "closeQuestion": "Who should answer?"
+    }
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "TEST-POP-01",
+        "name": "Test Citizen",
+        "profile": "Test Citizen — Resident, TEST-HOOD",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-TEST-POP-01-0123456789",
+        "pop": "TEST-POP-01",
+        "name": "Test Citizen",
+        "quote": "What this record shows concerns me. Who is responsible for answering this? I want a clear answer.",
+        "factIds": [
+          "F-0123456789ab"
+        ],
+        "src": "packet.W2[TEST-POP-01]"
+      }
+    ],
+    "excludedLeads": []
+  },
+  "known": [
+    {
+      "id": "F-0123456789ab",
+      "t": "FACT",
+      "text": "TEST-ONLY value changed by 4",
+      "src": "output/TEST_ONLY.json rows[1]"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "permitted interpretation slots"
+    ],
+    "never": [
+      "enlarge the manifest"
+    ],
+    "rule": "The Article claim manifest is exhaustive. Better prose may arrange and interpret it, but may not enlarge it."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Index only what the Article prints.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "manifest": {
+    "id": "AM-0123456789ab",
+    "policy": "exhaustive",
+    "approvedFacts": [
+      {
+        "id": "F-0123456789ab",
+        "t": "FACT",
+        "text": "TEST-ONLY value changed by 4",
+        "src": "output/TEST_ONLY.json rows[1]"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-TEST-POP-01-0123456789",
+        "speakerId": "TEST-POP-01",
+        "speakerName": "Test Citizen",
+        "text": "What this record shows concerns me. Who is responsible for answering this? I want a clear answer.",
+        "factIds": [
+          "F-0123456789ab"
+        ],
+        "src": "packet.W2[TEST-POP-01]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "TEST-POP-01",
+        "name": "Test Citizen",
+        "profile": "Test Citizen — Resident, TEST-HOOD",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; add no factual premise."
+      }
+    ],
+    "unverifiedLeads": [],
+    "authorizedTexture": [],
+    "textureConditions": [],
+    "forbiddenClaimClasses": [
+      "new place or street",
+      "new event or firsthand scene",
+      "new direct quotation",
+      "unsupported history or causality"
+    ]
+  }
+}

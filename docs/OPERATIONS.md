@@ -2,9 +2,9 @@
 
 **Droplet:** `ubuntu-s-1vcpu-2gb` | 1 vCPU, 2GB RAM, 25GB disk | $12/mo | nyc3
 **IP:** 64.225.50.16 | **Access:** SSH as root, or `mags` command (tmux auto-wiring)
-**Last verified:** 2026-07-28 via live `pm2 list`, `crontab -l`, and the job
-scripts. Dashboard transport reverified 2026-08-03 via live Tailscale, UFW, and
-health probes.
+**Last verified:** crontab 2026-08-10 via live `crontab -l`; PM2 2026-07-28 via
+live `pm2 list`. Dashboard transport reverified 2026-08-03 via live Tailscale,
+UFW, and health probes.
 
 ---
 
@@ -35,7 +35,7 @@ pm2 save                    # Persist process list for reboot survival
 ## Cron Schedule
 
 All times in UTC. Server is UTC. Central time = UTC - 5 (CDT) or UTC - 6 (CST).
-This table was verified against the live crontab on 2026-07-28.
+This table was verified against the live crontab on 2026-08-10.
 
 | Schedule (UTC) | Job | Script | Log |
 |----------------|-----|--------|-----|
@@ -81,8 +81,11 @@ under `output/exchanges/`, with the configured Supermemory and intake handoffs.
 
 ### Newsroom Digest and Weekday Fanout
 The 06:00 digest summarizes the prior 36 hours. Monday through Friday, angle,
-report, and write wakes rotate six byline journalists; the write stage runs the
-Rhea API gate and leaves output staged or flagged behind the probation wall.
+report, and write cron entries consume the daily fanout. ADR-0017 now gates that
+fanout by `scripts/newsroom-wake-packages.json`: only active journalist packages
+wake, and missing packages are logged and skipped with no generic fallback. Jax
+Caldera is the first active cohort. His write stage runs the persona-aware Rhea
+API gate and leaves output staged or flagged behind the probation wall.
 
 ### NotebookLM Newsroom Brief (Daily)
 Builds a source-grounded listening brief. The brief is a newsroom aid and is not

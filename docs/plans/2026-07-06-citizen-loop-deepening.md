@@ -1,7 +1,7 @@
 ---
 title: Citizen-Loop Deepening Plan
 created: 2026-07-06
-updated: 2026-07-06
+updated: 2026-08-10
 type: plan
 tags: [citizens, citizen-loop, voice-agents, engine, media, active]
 sources:
@@ -241,6 +241,8 @@ candidate have Tier-5 spouses — correct as-is.
 
 ## Changelog
 
+- 2026-08-10 (codex) — Supersedes the pilot-only note for the newsroom path: `citizenVoice.js --evidence-bound` now serves Jax's live package-gated Wake 1/2 with an explicit per-request OpenRouter model and no PRESS recording. Ordinary citizen wakes remain unchanged.
+- 2026-08-09 (codex) — [[../adr/0017-typed-lived-experience-packets]] now separates private citizen subjectivity from press evidence. `citizenVoice.js --evidence-bound` is a read-only pilot mode owned by [[2026-08-09-three-wake-lived-packet-pilot]]; normal wake and quote-supply behavior is unchanged.
 - 2026-07-11 — **Tasks 10–13 added (S312, research-build, Mike-direct anti-flattening).** Card-anchor slice + voiced speech-texture + salience-weighted tail + spousal bond backfill; findings documented in each task's header note.
 - 2026-07-11 — **Tasks 6+7 amended (S312, research-build, Mike-direct B+C design).** Conversation
   engine + cron generalized into the three-format exchange engine before first build —

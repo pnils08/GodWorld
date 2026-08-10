@@ -1,7 +1,7 @@
 ---
 title: Citizen Voice Quote Supply — Every Quote Is a Cheap Call to the Citizen Plan
 created: 2026-07-11
-updated: 2026-07-11
+updated: 2026-08-10
 type: plan
 tags: [media, citizens, citizen-loop, edition-pipeline, active]
 sources:
@@ -115,6 +115,8 @@ pointers:
 
 ## Changelog
 
+- 2026-08-10 (codex) — Supersedes the baseline note for scheduled Jax: JAX-LEP2-1 uses candidate-specific evidence-bound Wake 2 on Llama, code-rendered quote IDs, and no PRESS write. Other scheduled journalists remain stopped at the ADR-0017 package gate until upgraded.
+- 2026-08-09 (codex) — Wake 2's press-evidence application moves to [[../adr/0017-typed-lived-experience-packets]] + [[2026-08-09-three-wake-lived-packet-pilot]]: candidate-specific exposure, typed observation/interpretation/lead, and explicit abstention replace the generic “what have you seen?” treatment path. Existing quote supply remains baseline until the A/B clears.
 - 2026-07-11 — Initial draft (S312, research-build). Mike-direct: priority citizen-usage avenue + record-at-speak-time (page + gated intake; dials stay behind the cycle drain). Closes the S296 curation diagnosis.
 - 2026-07-11 — Tasks 3–5 skill wiring shipped (S313): `write-edition` v2.7 (Step 0.7 pre-pass + prompt block + gate flips) + `post-publish` v1.11 (2e dedup). Detail in task Status lines. Open: engine-sheet T1–2, then live verify.
 - 2026-07-11 — T1–T2 shipped + live-verified (S312, engine-sheet): `--record` + `--batch` on citizenVoice.js. All 5 tasks built; remaining acceptance (2/4/5 — desk verbatim use, letters, post-publish dedup) rides the first live edition (C101 /write-edition).

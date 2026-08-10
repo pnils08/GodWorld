@@ -1,7 +1,7 @@
 ---
 title: Newsroom Canon Flow — Saturday Gate, Autonomy Graduation, Narrator
 created: 2026-08-04
-updated: 2026-08-04
+updated: 2026-08-10
 type: plan
 tags: [media, canon, infrastructure, architecture, active]
 sources:
@@ -115,6 +115,8 @@ One cron, six steps, in order:
 
 ## Changelog
 
+- 2026-08-10 (codex) — Upstream scheduled fanout is now ADR-0017 package-only with Jax as the first active cohort. This downstream Saturday canon door is unchanged; only Rhea-passed staged Articles can enter its candidate set.
+- 2026-08-09 (codex) — [[../adr/0017-typed-lived-experience-packets]] names this Saturday Edition/post-publish path as the life-cycle closure: samples, private reflections, and staged drafts do not become shared lived experience until this canon door succeeds. The upstream Packet pilot is [[2026-08-09-three-wake-lived-packet-pilot]].
 - 2026-08-04 — Initial plan (research-build, remote session). Ignited by Mike completing the narrator design — the adopt-trigger in the research file. Phase order = dependency order: INTAKE contract first (everything downstream reads it), Saturday run third, graduation last.
 - 2026-08-04 (same session) — Phase 1 spec detail added: INTAKE line grammar + enums, parser contract, four consumer contracts, `extractBylineMeta` per-article seam. Grounded against live staged artifacts.
 - 2026-08-05 — Phase 3 seats BUILT (research-build): audit/curate/narrate/publish live in `cron-saturday-run.js`, full chain proven on c102 staged set. Open: Saturday cron install (Mike's go) + ingestPublishedEntities INTAKE adaptation + audit verdict-stability watch.

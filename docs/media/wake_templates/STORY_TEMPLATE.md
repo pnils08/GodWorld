@@ -12,15 +12,25 @@ Saturday compile reads.
 | §1 ASSIGNMENT | 1 | script (deterministic, from the fanout entry) | Assigned angle + hook + affected citizens + source ref + desk approach (`scripts/desk-approach-map.json`). Open-beat marker when the seed pool was exhausted. |
 | §2 THE REPORTER'S PLAN | 1 | reporter (citizenVoice, their own words) | How they chase the assigned angle today — what to verify, who to talk to. Personas keep their authored smells-off stance instead. |
 | §3 INTERVIEWS | 2 | script (real citizenVoice quotes) | The assignment's affected citizens first (Task 2.5.4), lane popids as fallback. No quotes landed → an explicit do-not-invent marker. |
-| §4 THE ARTICLE | 3 | script | Draft path + disposition + Rhea verdict. The article itself is the draft file; the wall (canon facts immutable, color free) is injected in the writer state. |
-| §5 INTAKE (in the draft) | 3 | reporter (strict line grammar); gate resolves IDs | `## INTAKE` block ending every draft, beside the self-score footer: `NAMES:`/`BIZ:`/`STORYLINE:`/`HOOD:`/`CLAIM:` lines per pipeline.45 Phase 1 ([[../../plans/2026-08-04-newsroom-canon-flow]]). |
+| §4 THE ARTICLE | 3 | script | Draft path + disposition + Rhea verdict. The article itself is the draft file; the Packet keeps load-bearing canon facts immutable and declares any persona-authorized texture. |
+| §5 INTAKE (in the draft) | 3 | backend in Packet mode; reporter otherwise; gate resolves IDs | `## INTAKE` block ending every draft, beside the self-score footer: `NAMES:`/`BIZ:`/`STORYLINE:`/`HOOD:`/`CLAIM:` lines per pipeline.45 Phase 1 ([[../../plans/2026-08-04-newsroom-canon-flow]]). |
 
-**The color doctrine carried by every wake** (S344, reaffirms
-`project_subjective-hallucination-is-canon`): facts from the record — names,
-ages, roles, neighborhoods, numbers, events — are load-bearing and immutable;
-scene texture, weather, unnamed street life are the reporter's to invent freely
-so long as nothing contradicts. Additive invention IS the product; contradiction
-and real-world import are the only sins.
+**The lived-experience doctrine carried by every wake** ([[../../adr/0017-typed-lived-experience-packets]],
+which narrows the S344 color doctrine): facts from the record — names, ages,
+roles, neighborhoods, numbers, and events — are load-bearing and immutable.
+Interpretation, intention, cadence, and sensory prose remain the reporter's
+creative space. A new named person, business, institution, relationship, public
+event, official act, vote, date, count, or causal claim is structured world
+state: it must be Packet-backed or remain an unpublished `LEAD`. A journalist
+package may explicitly authorize generic rooms, streets, reporter presence, and
+role-only anonymous voices as lived texture when they carry no canon assertion.
+Private subjective memory may shape feeling but does not become press evidence
+merely because a citizen says it to a reporter.
+
+Under LEP/1, LEP/2, and the first live Jax package, this Markdown file is the human audit rendering. The
+canonical machine handoff is JSON in the fixed sequence `actor → task → signal →
+exposure → known claims → limits → output`; see
+[[../../plans/2026-08-09-three-wake-lived-packet-pilot]].
 
 **All 2.5.3 mechanics live (S347):** §2b canon research — the script gathers the
 floor (edition grep + world-summary slices + evidence ref), the model selects

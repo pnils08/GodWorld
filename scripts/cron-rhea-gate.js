@@ -67,6 +67,10 @@ const CANON_FACTS_FILE = arg('--canon-facts', null);
 // a quoted-source with no packet backing is the invented-source class. Passed
 // by cron-desk-run; absent on manual gate runs → backing check is skipped.
 const PACKET_FILE = arg('--packet', null);
+// ADR-0017: the writer's package profile and exact Wake-3 Packet let Rhea
+// distinguish persona-authorized street texture from load-bearing canon claims.
+const PERSONA = arg('--persona', null);
+const ARTICLE_PACKET_FILE = arg('--article-packet', null);
 
 const log = {
   info: (...a) => console.log('[INFO]', new Date().toISOString(), ...a),
@@ -82,7 +86,7 @@ function detectCycle() {
   return c === null ? 'current' : String(c);
 }
 
-function buildPrompt(cycle, draftRel, worldRel, nameCheck, evidenceRel) {
+function buildPrompt(cycle, draftRel, worldRel, nameCheck, evidenceRel, reviewContext) {
   const pre = nameCheck ? [
     'DETERMINISTIC NAME PRE-CHECK (canon-name-check.js vs the simulation ledger snapshot, ' + nameCheck.canonNames + ' canon citizens):',
     nameCheck.unverified.length
@@ -100,13 +104,20 @@ function buildPrompt(cycle, draftRel, worldRel, nameCheck, evidenceRel) {
         '. Current Cycle world state wins every conflict.']
       : []),
     'The draft to verify is: ' + draftRel + '.',
+    ...(reviewContext ? [
+      '',
+      'WRITER AUTHORITY PROFILE (apply while sourcing; do not turn this into a voice score):',
+      JSON.stringify(reviewContext.profile),
+      'Wake-3 manifest: ' + JSON.stringify(reviewContext.manifest),
+      'Lexical observations are review cues, not automatic flags: ' + JSON.stringify(reviewContext.audit.observations || []),
+    ] : []),
     '',
     pre +
     'Cross-check EVERY named person, team, record, score, vote, trade, and roster fact in the draft against the ' +
     'world state and canon. Use Read/Grep, the dashboard API at http://localhost:3001, or the godworld MCP if available. ' +
     'Do NOT trust the draft\'s own EVIDENCE/sourcing blocks — verify independently.',
     '',
-    'Flag: (a) any claim not grounded in the world state or canon; (b) invented names, numbers, or events; ' +
+    'Flag load-bearing canon claims that are not grounded in the world state or canon; flag invented named people, organizations, official acts, votes, criminal claims, and contradictory figures. ' +
     '(c) ENGINE-metric leaks per newsroom.md — "tension score", "severity level", "civic load", ' +
     'engine phase/system language, raw table/column names. DO NOT flag city-level metric FIGURES: Civis Systems ' +
     'is the in-world publisher of Oakland city data, so a cited index value or rate is legitimate journalism — ' +
@@ -119,7 +130,7 @@ function buildPrompt(cycle, draftRel, worldRel, nameCheck, evidenceRel) {
     'facts, stop and return the verdict.',
     '',
     'Return ONLY a JSON object — no prose, no markdown fences:',
-    '{"pass": <true only if there are ZERO high-severity flags>, "flags": [{"claim":"...","issue":"...","severity":"low|med|high"}], "summary":"<one line>"}'
+    '{"pass": <true only if there are ZERO high-severity flags>, "flags": [{"claim":"...","issue":"...","severity":"low|med|high"}], "review":{"profileId":"<id-or-default>","canonIntegrity":"pass|revise|fail","texture":"none|authorized|overreach"}, "summary":"<one line>"}'
   ].join('\n');
 }
 
@@ -248,7 +259,35 @@ function readAgentFile(rel) {
   try { return fs.readFileSync(path.join(ROOT, rel), 'utf8'); } catch (_) { return ''; }
 }
 
-function buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profiles) {
+function loadReviewContext(persona, articlePacketFile, draftText) {
+  if (!persona && !articlePacketFile) return null;
+  const packagesApi = require('./newsroomWakePackages');
+  const wakePackage = persona ? packagesApi.packageForAssignment({ persona }) : null;
+  let packet = null;
+  if (articlePacketFile) {
+    const abs = path.resolve(ROOT, articlePacketFile);
+    if (!abs.startsWith(COMPARE_DIR + path.sep)) {
+      throw new Error('--article-packet must be inside output/cron-compare/');
+    }
+    packet = JSON.parse(fs.readFileSync(abs, 'utf8'));
+  }
+  const profile = (wakePackage && wakePackage.reviewProfile) || (packet && packet.reviewProfile) || null;
+  if (!profile) return null;
+  if (packet && packet.reviewProfile && packet.reviewProfile.id !== profile.id) {
+    throw new Error('Wake-3 Packet review profile does not match active journalist package');
+  }
+  const audit = packet && packet.v === 'LEP/2'
+    ? require('./livedExperiencePacketV2').auditArticle(draftText, packet)
+    : { ok: true, manifestId: null, errors: [], observations: [] };
+  return {
+    profile,
+    manifest: packet && packet.manifest ? packet.manifest : null,
+    audit,
+    packageVersion: wakePackage && wakePackage.version || null,
+  };
+}
+
+function buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profiles, reviewContext) {
   const system = [
     'You are Rhea Morgan, the Cycle Pulse verification agent, running headless as a publish gate.',
     'Your role and rules follow — they govern your verdict.',
@@ -257,7 +296,7 @@ function buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profil
     '=== RULES.md ===', readAgentFile('.claude/agents/rhea-morgan/RULES.md'),
     '',
     'Return ONLY a JSON object — no prose, no markdown fences:',
-    '{"pass": <true only if there are ZERO high-severity flags>, "flags": [{"claim":"...","issue":"...","severity":"low|med|high"}], "summary":"<one line>"}'
+    '{"pass": <true only if there are ZERO high-severity flags>, "flags": [{"claim":"...","issue":"...","severity":"low|med|high"}], "review":{"profileId":"<id-or-default>","canonIntegrity":"pass|revise|fail","texture":"none|authorized|overreach"}, "summary":"<one line>"}'
   ].join('\n');
   const user = [
     'GROUND TRUTH for cycle ' + cycle + ' (the world state — claims are checked against THIS):',
@@ -275,6 +314,21 @@ function buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profil
     '3. Ledger profiles of verified citizens named in the draft (bio ground truth — any age, occupation,' +
     '   tenure, wealth, or neighborhood claim contradicting these is HIGH-severity misrepresentation):',
     profiles.length ? profiles.map(p => '   - ' + p).join('\n') : '   (none)',
+    ...(reviewContext ? [
+      '',
+      '4. PERSONA-SPECIFIC SOURCING AUTHORITY — profile ' + reviewContext.profile.id +
+        ' (package ' + (reviewContext.packageVersion || 'unknown') + '):',
+      '   PURPOSE: ' + reviewContext.profile.purpose,
+      '   AUTHORIZED TEXTURE (absence from the ledger is not a sourcing failure by itself):',
+      ...reviewContext.profile.authorizedTexture.map(v => '   - ' + v),
+      '   CONDITIONS:',
+      ...reviewContext.profile.textureConditions.map(v => '   - ' + v),
+      '   CANON BLOCKERS:',
+      ...reviewContext.profile.canonBlockers.map(v => '   - ' + v),
+      '   WAKE-3 MANIFEST POLICY: ' + (reviewContext.manifest && reviewContext.manifest.policy || 'unknown'),
+      '   LEXICAL REVIEW CUES (not automatic flags): ' +
+        JSON.stringify(reviewContext.audit.observations || []),
+    ] : []),
     '',
     '=== DRAFT TO VERIFY ===',
     draftText,
@@ -286,8 +340,11 @@ function buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profil
     '    (a metric stated as falling when it rose; a count off from canon; a prior-cycle stat presented as current).',
     'Plus the pre-check classes above (invented names used as people).',
     'WHAT PASSES: anything the ground truth genuinely supports — allegations, cross-signal connections, a',
-    'reporter\'s inference from real data, anonymous scene texture the reporter observed, editorial voice.',
-    'Do not fact-check opinion; do not flatten voice.',
+    'reporter\'s inference from real data, and texture authorized by the active writer profile.',
+    reviewContext
+      ? 'For this profile, a street reference, generic room, or role-only anonymous voice is not a fabricated canon entity. Flag it only when it violates a listed texture condition or carries a listed canon blocker.'
+      : 'Anonymous scene texture may pass when it carries no load-bearing factual claim.',
+    'Do not fact-check opinion; do not flatten voice. Do not score whether the Article moves the sim — that belongs to the editorial/capability lanes.',
     'Verify the load-bearing claims against the ground truth, then return the verdict JSON.'
   ].join('\n');
   return { system, user };
@@ -325,6 +382,12 @@ async function main() {
   // Deterministic canon name pre-check (2026-07-25, the "Marisol Garcia" class):
   // invented officials/sources get handed to the gate as a must-verify list.
   const draftText = fs.readFileSync(draftAbs, 'utf8');
+  const reviewContext = loadReviewContext(PERSONA, ARTICLE_PACKET_FILE, draftText);
+  if (reviewContext) {
+    console.log('review profile: ' + reviewContext.profile.id + ' package=' +
+      (reviewContext.packageVersion || 'packet-only') + ' manifest=' +
+      (reviewContext.audit.manifestId || 'none'));
+  }
   let nameCheck = null;
   try {
     nameCheck = require('./canon-name-check').checkText(draftText);
@@ -405,7 +468,7 @@ async function main() {
       } catch (e) { log.warn('canon-facts load failed (non-fatal): ' + e.message); }
     }
     const profiles = nameCheck ? require('./canon-name-check').profilesFor(nameCheck.verified) : [];
-    const { system, user } = buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profiles);
+    const { system, user } = buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profiles, reviewContext);
     log.info('calling ' + API_MODEL + ' via OpenRouter (no tools, injected context)...');
     const r = await callOpenRouter(API_MODEL, system, user);
     durationMs = Date.now() - started;
@@ -420,7 +483,8 @@ async function main() {
       draftRel,
       worldRel,
       nameCheck,
-      priorArcEvidence ? priorArcEvidence.rel : null
+      priorArcEvidence ? priorArcEvidence.rel : null,
+      reviewContext
     );
     // --allowedTools whitelists read-only work (no Write/Edit); last so the variadic
     // list doesn't swallow other flags.
@@ -480,6 +544,17 @@ async function main() {
     flagCount: Array.isArray(verdict.flags) ? verdict.flags.length : null,
     highSeverityCount: Array.isArray(verdict.flags) ? highSevCount : null,
     summary: verdict.summary || '',
+    review: verdict.review || (reviewContext ? {
+      profileId: reviewContext.profile.id,
+      canonIntegrity: gatePass ? 'pass' : 'revise',
+      texture: 'not-returned',
+    } : null),
+    reviewProfile: reviewContext ? {
+      id: reviewContext.profile.id,
+      packageVersion: reviewContext.packageVersion,
+      manifestId: reviewContext.audit.manifestId,
+      lexicalObservations: reviewContext.audit.observations || [],
+    } : null,
     nameCheck: nameCheck ? { verified: nameCheck.verified, unverified: nameCheck.unverified } : null,
     intake: intakeReport,
     apiCostUsd: apiCost,
@@ -509,5 +584,15 @@ async function main() {
   process.exit(out.parseError ? 3 : (out.pass === true ? 0 : 2));
 }
 
-Promise.resolve().then(() => main())
-  .catch(err => { log.error('Fatal: ' + err.message); process.exit(1); });
+if (require.main === module) {
+  Promise.resolve().then(() => main())
+    .catch(err => { log.error('Fatal: ' + err.message); process.exit(1); });
+}
+
+module.exports = {
+  buildPrompt,
+  buildApiPrompt,
+  loadReviewContext,
+  scanEngineVerbiage,
+  scanStructuralJunk,
+};

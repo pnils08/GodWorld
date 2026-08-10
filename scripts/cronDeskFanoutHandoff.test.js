@@ -7,6 +7,8 @@ const {
   nameSlug,
   writerArtifactTag,
   buildWriterArgs,
+  activateWakeContext,
+  stageRoute,
 } = require('./cron-desk-run');
 const { buildOutputSlug } = require('./cron-desk-writer');
 
@@ -67,6 +69,40 @@ assert.deepStrictEqual(
     '--model', 'meta-llama/llama-3.3-70b-instruct',
   ]
 );
+
+const livePackageRoute = require('./newsroomWakePackages')
+  .routeFor(require('./newsroomWakePackages').loadPackages()['freelance-firebrand'], 'write');
+const packagedPersonaArgs = buildWriterArgs(
+  'civic',
+  'output/cron-compare/civic.state.json',
+  personaAssignment.persona,
+  'packet-v2',
+  livePackageRoute
+);
+assert.deepStrictEqual(
+  packagedPersonaArgs.slice(1),
+  [
+    '--desk', 'civic',
+    '--state-file', 'output/cron-compare/civic.state.json',
+    '--persona', 'freelance-firebrand',
+    '--artifact-tag', 'packet-v2',
+    '--provider', 'openrouter',
+    '--model', 'anthropic/claude-sonnet-5',
+  ]
+);
+const sonnetSlug = 'anthropic-claude-sonnet-5';
+const expectedPackagedDraft =
+  stageStem(102, 'civic', personaAssignment.persona) +
+  'packet-v2_' + sonnetSlug + '.md';
+const emittedPackagedDraft =
+  'civic_c102_' +
+  buildOutputSlug(
+    personaAssignment.persona,
+    'packet-v2',
+    sonnetSlug
+  ) +
+  '.md';
+assert.strictEqual(emittedPackagedDraft, expectedPackagedDraft);
 // Firebrand routes to llama-3.3-70b (heat seat); slug must match desk-model-map.
 const firebrandSlug = 'meta-llama-llama-3-3-70b-instruct';
 const expectedPersonaDraft =
@@ -92,5 +128,13 @@ assert.throws(
   () => writerArtifactTag({ name: 'a'.repeat(49) }, null),
   /exceeds the writer tag contract/
 );
+
+const liveContext = activateWakeContext(personaAssignment, personaAssignment.persona);
+assert.equal(liveContext.packetContract, 'v2');
+assert.equal(liveContext.wakePackage.version, 'JAX-LEP2-1');
+assert.equal(stageRoute('civic', personaAssignment.persona, 'angle').model,
+  'meta-llama/llama-3.3-70b-instruct');
+assert.equal(stageRoute('civic', personaAssignment.persona, 'write').model,
+  'anthropic/claude-sonnet-5');
 
 console.log('cron fan-out filename handoff tests: PASS');

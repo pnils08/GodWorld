@@ -1,7 +1,7 @@
 ---
 title: Cron lifecycle review — research
 created: 2026-08-07
-updated: 2026-08-07
+updated: 2026-08-10
 type: reference
 tags: [research, operations, active]
 sources:
@@ -114,9 +114,13 @@ Use as standing **ops map**. Ignite plans only for named gaps (e.g. cron health 
 ## Applications (living)
 
 - 2026-08-07 — Written as queue item B; grounds P Slayer slice schedule + metrics work.
+- 2026-08-09 (codex) — This remains the canonical schedule/write/canon-boundary map. [[../adr/0017-typed-lived-experience-packets]] now owns the shared machine handoff contract across citizen, civic, and media wakes; [[../plans/2026-08-09-three-wake-lived-packet-pilot]] proves it without changing this live schedule.
+- 2026-08-10 (codex) — Cron entries remain unchanged, but M-F newsroom fanout is now package-only: Jax is the first active ADR-0017 cohort and unupgraded assignments are logged and skipped.
 
 ---
 
 ## Changelog
 
 - 2026-08-07 (grok) — Live crontab/PM2 inventory.
+- 2026-08-09 (codex) — Centralized the cross-domain LLM handoff decision by pointer to ADR-0017; no cron or live status changed.
+- 2026-08-10 (codex) — Recorded the package-only behavioral change beneath the existing three-wake schedule; no crontab entry changed.

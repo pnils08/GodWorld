@@ -31,7 +31,7 @@
   "freelance-firebrand": {
     "provider": "openrouter",
     "model": "meta-llama/llama-3.3-70b-instruct",
-    "note": "Jax heat seat (grok 2026-08-07). Llama 3.3 70B: stronger adversarial/character voice than deepseek-chat, still ~pennies/article. Hermes-4-70b is the heat upgrade if this still sands; full x-ai/grok-* is character-true but leaves the penny band."
+    "note": "Legacy/manual fallback only. The scheduled JAX-LEP2-1 package in newsroom-wake-packages.json owns live routing: Llama 3.3 70B for angle/report and Sonnet 5 for write."
   },
   "p-slayer": {
     "provider": "openrouter",

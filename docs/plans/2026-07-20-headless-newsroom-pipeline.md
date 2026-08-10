@@ -1,7 +1,7 @@
 ---
 title: Headless Newsroom + City-Hall Pipeline Plan
 created: 2026-07-20
-updated: 2026-07-27
+updated: 2026-08-10
 type: plan
 tags: [architecture, media, civic, infrastructure, active]
 sources:
@@ -432,6 +432,7 @@ no paid/manual wake or crontab change was used for validation.
 
 ## Changelog
 
+- 2026-08-09 (codex) — The broad S344 “additive invention” wording is narrowed by [[../adr/0017-typed-lived-experience-packets]]: interpretation remains free, but new hard events/entities are typed claims. The isolated all-three-wake proof is [[2026-08-09-three-wake-lived-packet-pilot]]; the baseline stays live and unchanged during the A/B.
 - 2026-07-20 — Initial draft (S325). Research basis [[../research/2026-07-19-headless-cron-newsroom-agentic-rag]]; ignited by Mike's full-pipeline direction + Feedback1.txt validation. Phase 1 concrete (scorecard building this session); Phases 2–4 outlined to split into sub-plans when picked up.
 - 2026-07-22 — Phase 2.0 designed + triaged (S330). Angle-assigner reframed → four-layer model; Phase 2.0 = byline WHO-assist spec; PoolKey dropped as stale; Phase 2 gained layer-4 citizen-quote pre-pass. No new files.
 - 2026-07-22 — Phase 2.0 BUILT, bench-proven C110–C113, live-deployed (S331 engine.79a–d, engine-sheet). Seam corrections + results recorded in the Phase 2.0 section.
@@ -471,3 +472,8 @@ no paid/manual wake or crontab change was used for validation.
 - 2026-07-27 — Fixed that filename handoff by forwarding the roster reporter
   slug through the writer output namespace; deterministic roster/persona tests
   pass, with the next 18:15 wake retained as the live proof.
+- 2026-08-10 (codex) — Superseded the generic-live baseline for scheduled
+  fanout with ADR-0017 package gating. JAX-LEP2-1 is the first active package:
+  W1/W2 Llama, W3 Sonnet 5, zero writer tools, load-bearing manifest, and
+  persona-aware Rhea. Unpackaged assignments are skipped, never given the
+  legacy generic prompt. See [[2026-08-09-three-wake-lived-packet-pilot]].

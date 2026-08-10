@@ -207,11 +207,16 @@ const STATE_FILE = arg('--state-file', null);
 const BRIEF_REQUIREMENT_FILE = arg('--brief-requirement-file', null);
 const STRICT_SOURCE_HYGIENE =
   process.argv.includes('--strict-source-hygiene');
+// ADR-0017 Packet mode: compose only from the injected typed Packet. No
+// canon/sheet/memory tool is exposed, so a scheduled package cannot silently
+// enlarge its evidence set mid-run.
+const PACKET_ONLY = process.argv.includes('--packet-only');
 
 // Approx USD per 1M tokens [input, output] — for the scorecard's apiCostUsd (estimate).
-// Live OpenRouter check 2026-08-07 (prompt/completion per 1M).
+// Live OpenRouter check 2026-08-10 (prompt/completion per 1M).
 const RATES = {
   'claude-sonnet-5': [3, 15],
+  'anthropic/claude-sonnet-5': [2, 10],
   'claude-opus-4-8': [15, 75],
   'deepseek/deepseek-chat': [0.26, 1.03],
   'meta-llama/llama-3.3-70b-instruct': [0.10, 0.32],
@@ -226,11 +231,11 @@ function costUsd(model, tin, tout) {
 // Task 2.5.5 memory tools: whose citizen page the loop may read/write. Passed
 // by cron-desk-run (the byline it resolved); persona runs fall back to the
 // persona map's own POPID. Absent -> memory tools stay out of the toolset.
-const BYLINE_POPID = arg('--byline-popid', null) || (() => {
+const BYLINE_POPID = PACKET_ONLY ? null : (arg('--byline-popid', null) || (() => {
   if (!PERSONA) return null;
   try { return (JSON.parse(fs.readFileSync(path.join(__dirname, 'persona-map.json'), 'utf8'))[PERSONA] || {}).popid || null; }
   catch (_) { return null; }
-})();
+})());
 const AGENT_DIR = path.join(ROOT, '.claude', 'agents', PERSONA || (DESK + '-desk'));
 const SKILL_PATH = path.join(AGENT_DIR, PERSONA ? 'IDENTITY.md' : 'SKILL.md');
 // Optional filename namespace. Roster fan-out uses the reporter slug so two
@@ -316,29 +321,100 @@ function loadEvaluationPriorArcRequirement(filePath) {
   }
 }
 
-function formatStrictSourceHygiene(nameCheck) {
+function formatStrictSourceHygiene(nameCheck, packet) {
   const verified = Array.isArray(nameCheck && nameCheck.verified)
     ? nameCheck.verified
     : [];
   const unverified = Array.isArray(nameCheck && nameCheck.unverified)
     ? nameCheck.unverified
     : [];
+  const loadBearing = packet && packet.manifest && packet.manifest.policy === 'load-bearing';
   return [
-    '=== STRICT SOURCE HYGIENE — EVALUATION OVERRIDE ===',
-    'This stricter rule overrides persona text that permits invented or anonymous sources.',
-    'Use only supplied, ledger-verified citizens as people or quote sources.',
+    '=== STRICT SOURCE HYGIENE — PACKET BOUNDARY ===',
+    loadBearing
+      ? 'The Packet is exhaustive for load-bearing canon claims. The persona profile still authorizes bounded narrative texture.'
+      : 'This stricter rule overrides persona text that permits invented or anonymous sources.',
+    loadBearing
+      ? 'Use only supplied, ledger-verified citizens for named people and canon quote sources. A role-only anonymous voice may appear solely as authorized texture; it is not a verified citizen or source.'
+      : 'Use only supplied, ledger-verified citizens as people or quote sources.',
     'Verified people available in the injected state: ' +
       (verified.length ? verified.join('; ') : '(none)'),
     'These candidates are not ledger-verified as people: ' +
       (unverified.length ? unverified.join('; ') : '(none)'),
     'Do not use an unverified candidate as a person or official. It may appear ' +
       'only as a place/organization when the lane explicitly identifies it as one.',
-    'Do not invent anonymous people, quotes, observations, counts, ages, jobs, ' +
-      'relationships, biographies, or scene events.',
-    'Do not put Anonymous/Unnamed descriptors in the Names Index. If no supplied ' +
-      'canon quote fits, use no quote rather than fabricating one.',
+    loadBearing
+      ? 'You may use ONLY the texture listed in packet.manifest.authorizedTexture and only under packet.manifest.textureConditions. Anonymous role-only color is not an official source or canon proof.'
+      : 'Do not invent anonymous people, quotes, observations, counts, ages, jobs, relationships, biographies, or scene events.',
+    loadBearing
+      ? 'Do not put Anonymous/Unnamed descriptors in INTAKE. A role-only texture quote must remain anonymous color and must not be attributed to a named citizen, official, institution, or canon source.'
+      : 'Do not put Anonymous/Unnamed descriptors in the Names Index. If no supplied canon quote fits, use no quote rather than fabricating one.',
     '=== END STRICT SOURCE HYGIENE ===',
   ].join('\n');
+}
+
+function stripModelMetadataTail(text) {
+  const markers = [
+    /^##\s+INTAKE\s*$/im,
+    /^Names Index:/im,
+    /^EVIDENCE:/im,
+    /^ARTICLE TABLE ENTRIES:/im,
+    /^CITIZEN USAGE LOG:/im,
+    /^CONTINUITY NOTES:/im,
+    /^FACTUAL ASSERTIONS:/im,
+    /^<!--\s*SELF-SCORE:/im,
+  ];
+  let cut = String(text).length;
+  for (const re of markers) {
+    const m = re.exec(String(text));
+    if (m && m.index < cut) cut = m.index;
+  }
+  return String(text).slice(0, cut).trimEnd();
+}
+
+function intakeSlug(packet) {
+  const hood = packet && packet.signal && packet.signal.hood || 'city';
+  const kind = packet && packet.signal && packet.signal.kind || 'story';
+  return (hood + '-' + kind).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 80);
+}
+
+// ADR-0017: prose is model-authored; canon metadata is not. For a typed Packet
+// pilot, discard any model footer and render INTAKE from the supplied evidence
+// plus names the Article actually printed. This is deterministic formatting,
+// not editorial rewriting.
+function renderPacketIntake(draftText, packet) {
+  const body = stripModelMetadataTail(draftText);
+  const lines = [body, '', '## INTAKE'];
+  const people = new Map();
+  for (const s of (packet && packet.exposure && packet.exposure.subjects) || []) {
+    if (s && s.name) people.set(s.name, { role: 'subject', quote: null });
+  }
+  for (const s of (packet && packet.exposure && packet.exposure.sources) || []) {
+    if (s && s.name) people.set(s.name, { role: 'quoted-source', quote: s.quote || null });
+  }
+  for (const e of (packet && packet.signal && packet.signal.nearby) || []) {
+    const m = String(e && e.text || '').match(/^([A-Z][A-Za-z'’-]+(?:\s+[A-Z][A-Za-z'’-]+){1,3})\s*(?:\(|:)/);
+    if (m && !people.has(m[1])) people.set(m[1], { role: 'mentioned', quote: null });
+  }
+  for (const [name, meta] of people) {
+    if (!body.includes(name)) continue;
+    const role = meta.quote && body.includes(String(meta.quote).slice(0, Math.min(48, meta.quote.length)))
+      ? 'quoted-source' : meta.role === 'quoted-source' ? 'mentioned' : meta.role;
+    lines.push('NAMES: ' + name + ' | ' + role);
+  }
+  const hood = packet && packet.signal && packet.signal.hood;
+  lines.push('STORYLINE: ' + intakeSlug(packet) + ' | referenced');
+  if (hood && body.includes(hood)) lines.push('HOOD: ' + hood);
+  const facts = (packet && packet.known || []).filter(c => c && c.t === 'FACT' && c.text && c.src);
+  if (facts.length) {
+    const f = facts[0];
+    lines.push('CLAIM: ' + String(f.text).replace(/\|/g, '—').replace(/\s+/g, ' ').trim() +
+      ' | ' + String(f.src).replace(/\|/g, '—').replace(/\s+/g, ' ').trim());
+  }
+  lines.push('<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=' +
+    (((packet && packet.exposure && packet.exposure.sources) || []).length ? 'yes' : 'no') +
+    '; sim-state-cited=' + (facts.length ? 'yes' : 'no') + ' -->');
+  return lines.join('\n') + '\n';
 }
 
 // ---------------------------------------------------------------------------
@@ -532,9 +608,15 @@ async function execOpenRouterTool(name, input, memCtx) {
 
 // Bounded explore-then-compose loop. Returns { text, usageIn, usageOut, trace }.
 // trace: [{tool, input, resultChars}] — read-only tools only, cap enforced.
+function resolveMaxToolCalls(value) {
+  return Number.isInteger(value) && value >= 0 ? value : 6;
+}
+
 async function openRouterToolLoop(opts) {
   const model = opts.model || MODEL;
-  const maxCalls = opts.maxToolCalls || 6;
+  // Zero is a deliberate fail-closed budget for typed Packet runs. Do not use
+  // truthiness here: `0 || 6` silently re-enables the live research tools.
+  const maxCalls = resolveMaxToolCalls(opts.maxToolCalls);
   // memCtx {popId, cycle}: enables the reporter's own-page memory tool pair.
   const toolset = opts.memCtx ? OPENROUTER_TOOLS.concat(MEMORY_TOOLS) : OPENROUTER_TOOLS;
   const messages = [{ role: 'system', content: opts.system }, { role: 'user', content: opts.user }];
@@ -682,8 +764,12 @@ async function main() {
       worldState = mags.loadWorldState();
     }
   }
+  let packetState = null;
+  if (PACKET_ONLY) {
+    try { packetState = JSON.parse(worldState); } catch (_) { /* fail-loud normalization below */ }
+  }
   const strictSourceBlock = STRICT_SOURCE_HYGIENE
-    ? formatStrictSourceHygiene(checkCanonNames(worldState))
+    ? formatStrictSourceHygiene(checkCanonNames(worldState), packetState)
     : '';
   const strictSourceKickoff = strictSourceBlock
     ? strictSourceBlock + '\n\n'
@@ -851,7 +937,15 @@ async function main() {
     priorArcSystem +
     cascadeRateRule +
     '=== YOUR SKILL (.claude/agents/' + (PERSONA || (DESK + '-desk')) + ') ===\n\n' + skill +
-    (strictSourceBlock ? '\n\n' + strictSourceBlock : '');
+    (strictSourceBlock ? '\n\n' + strictSourceBlock : '') +
+    (PACKET_ONLY
+      ? '\n\n=== TYPED PACKET OUTPUT CONTRACT ===\n' +
+        'Use the SKILL for voice only. Ignore its legacy section/footer format. Output ONE Article, then the exact Packet output.intake grammar, then the exact Packet output.footer. ' +
+        'Never output Names Index, EVIDENCE, ARTICLE TABLE ENTRIES, CITIZEN USAGE LOG, CONTINUITY NOTES, or FACTUAL ASSERTIONS. ' +
+        'When packet.manifest.policy is load-bearing, create only the street texture explicitly authorized by packet.manifest.authorizedTexture and packet.manifest.textureConditions. Texture creates lived experience; it never enlarges the canon facts. ' +
+        'Repeat one NAMES/BIZ/HOOD/CLAIM record per line; omit empty record types; never combine records with commas.\n' +
+        '=== END TYPED PACKET OUTPUT CONTRACT ==='
+      : '');
 
   const kickoff = STATE_FILE
     ? 'Current cycle: ' + cycle + '. Write the ' + DESK + ' section for THIS cycle from YOUR LANE below — ' +
@@ -919,14 +1013,17 @@ async function main() {
     // reporter digs past it (canon_search / citizen_lookup / sheet_read,
     // max 6 calls, every call traced). Supersedes the Thread-B compose-only
     // design — the comparison era is over, this is the production wake.
-    log.info('tool-loop write via OpenRouter (' + MODEL + '), max 6 calls...');
+    log.info((PACKET_ONLY ? 'packet-only compose' : 'tool-loop write') + ' via OpenRouter (' + MODEL +
+      (PACKET_ONLY ? ', 0 live tools' : ', max 6 calls') + ')...');
     const composeUser = kickoff +
       '\n\nWRITE the full ' + DESK + ' section for cycle ' + cycle + ' — the complete, publish-ready ' +
       'markdown, built ONLY from the events/names/records in the world state above plus what your tools ' +
-      'return. Use your tools FIRST where the state runs thin — verify a citizen before characterizing ' +
-      'them, search prior coverage for depth — then compose.' +
+      'return. ' + (PACKET_ONLY
+        ? 'The typed Packet is the complete load-bearing evidence boundary. Do not request or imply outside research. If its manifest policy is load-bearing, use its authorized texture to make the Article feel lived without turning that texture into canon proof. Compose directly. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment; no legacy desk metadata. '
+        : 'Use your tools FIRST where the state runs thin — verify a citizen before characterizing them, search prior coverage for depth — then compose. ') +
       priorArcFinal + strictSourceFinal + ' Output ONLY the section.';
-    const r = await openRouterToolLoop({ model: MODEL, system, user: composeUser, maxToolCalls: 6,
+    const r = await openRouterToolLoop({ model: MODEL, system, user: composeUser,
+      maxToolCalls: PACKET_ONLY ? 0 : 6,
       memCtx: BYLINE_POPID ? { popId: BYLINE_POPID, cycle } : null });
     usageIn += r.usageIn; usageOut += r.usageOut; turns = 1 + r.trace.length;
     try {
@@ -989,12 +1086,35 @@ async function main() {
 
   const wrote = savedFiles.length > 0;
   if (!wrote) log.warn('no section produced — compose returned empty.');
+  if (PACKET_ONLY && wrote) {
+    let packet;
+    try { packet = JSON.parse(worldState); }
+    catch (e) { throw new Error('typed Packet state is not JSON: ' + e.message); }
+    const normalized = renderPacketIntake(fs.readFileSync(savedFiles[0], 'utf8'), packet);
+    fs.writeFileSync(savedFiles[0], normalized);
+    const parsed = require('../lib/articleIntake').parse(normalized);
+    if (!parsed.found || parsed.errors.length) {
+      throw new Error('typed Packet output contract failed: ' +
+        (parsed.errors.length ? parsed.errors.map(e => e.code + ': ' + e.message).join('; ') : 'missing INTAKE'));
+    }
+    if (packet.v === 'LEP/2') {
+      const audit = require('./livedExperiencePacketV2').auditArticle(normalized, packet);
+      if (!audit.ok) {
+        throw new Error('LEP/2 Article manifest audit failed (' + audit.manifestId + '): ' +
+          audit.errors.map(e => e.code + '=' + e.values.join(',')).join('; '));
+      }
+      if (audit.observations && audit.observations.length) {
+        log.info('LEP/2 lexical observations deferred to persona-aware Rhea (' + audit.manifestId + '): ' +
+          audit.observations.map(e => e.code + '=' + e.values.join(',')).join('; '));
+      }
+    }
+  }
 
   // Scorecard (Task 1, plan 2026-07-20-headless-newsroom-pipeline). Lightweight
   // self-score of the produced draft — the measurement instrument Feedback1.txt
   // recommends. NOT the authoritative canon gate (that's the headless-Rhea step).
   let scorecard = null;
-  if (wrote && !DRY_RUN) {
+  if (wrote && !DRY_RUN && !PACKET_ONLY) {
     try {
       const draftText = fs.readFileSync(savedFiles[0], 'utf8');
       log.info('scoring the draft...');
@@ -1028,7 +1148,7 @@ async function main() {
     usageInputTokens: usageIn, usageOutputTokens: usageOut,
     savedFiles: savedFiles.map(f => path.relative(ROOT, f)),
     compareAgainst: 'output/desk-output/' + DESK + '_c' + cycle + '.md',
-    durationMs, dryRun: DRY_RUN, ranAt: new Date().toISOString()
+    durationMs, dryRun: DRY_RUN, packetOnly: PACKET_ONLY, ranAt: new Date().toISOString()
   };
   if (!DRY_RUN && wrote) {
     fs.mkdirSync(COMPARE_DIR, { recursive: true });
@@ -1056,6 +1176,9 @@ module.exports = {
   normalizeArtifactTag,
   buildOutputSlug,
   formatStrictSourceHygiene,
+  stripModelMetadataTail,
+  renderPacketIntake,
+  resolveMaxToolCalls,
   openRouterToolLoop,      // Task 2.5.5 — shared by the wake-1 fact selection (cron-desk-run.js)
   callOpenRouterRaw,
 };

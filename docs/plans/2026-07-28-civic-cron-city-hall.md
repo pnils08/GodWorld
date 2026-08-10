@@ -1,7 +1,7 @@
 ---
 title: Civic Cron City-Hall — Core Build Plan
 created: 2026-07-28
-updated: 2026-07-28
+updated: 2026-08-10
 type: plan
 tags: [civic, architecture, draft]
 sources:
@@ -159,5 +159,7 @@ Per Mike S343: build the basic core, dry-run, then tune. These live in the resea
 
 ## Changelog
 
+- 2026-08-10 (codex) — Jax's newsroom package now consumes ADR-0017 live; the separate civic-office cron remains unchanged and is not implicitly promoted by the newsroom cohort.
+- 2026-08-09 (codex) — The civic datawake's small deterministic slice + JSON + unsupported-number wall is the working domain precedent for [[../adr/0017-typed-lived-experience-packets]]. Civic adoption is intentionally after the newsroom A/B in [[2026-08-09-three-wake-lived-packet-pilot]]; no civic cron behavior changed.
 - 2026-07-28 — Initial draft (S343). Shape from Mike's think-tank direction (research file Direction log); tasks scoped to the basic core only.
 - 2026-07-29 — S344: Phases 2–4 built and dry-wired. Media-visibility gap fixed (`decisions_lane_c{XX}.json` + `loadLane` merge); civic-terminal Sunday session retired from cron path. Weekly lifecycle table added to [[../engine/CRON_PIPELINE_MAP]].

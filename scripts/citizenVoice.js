@@ -20,7 +20,7 @@
  * Usage:
  *   node scripts/citizenVoice.js --pop=POP-00123 --ask="The Tribune ran a story about rising
  *     rents on your block. Write a short letter to the editor reacting to it." [--cycle=N]
- *     [--dry-run] [--json] [--max-tokens=260] [--stdin] [--record]
+ *     [--dry-run] [--json] [--max-tokens=260] [--model=provider/model] [--stdin] [--record]
  *   node scripts/citizenVoice.js --batch=asks.json [--cycle=N] [--dry-run]
  *   --dry-run : print the assembled prompts (+ would-be writes under --record), no API call.
  *   --json    : emit {popId,name,nh,occ,disposition,text} instead of plain text.
@@ -51,7 +51,12 @@ const ARGV = process.argv.slice(2);
 const DRY = ARGV.includes('--dry-run');
 const JSON_OUT = ARGV.includes('--json');
 const RECORD = ARGV.includes('--record');
+// ADR-0017: typed Packet in, claim-class JSON out. This mode is deliberately
+// read-only so a bounded interview cannot write PRESS state.
+const EVIDENCE_BOUND = ARGV.includes('--evidence-bound');
 const arg = (k, d) => { const m = ARGV.find((a) => a.startsWith(`--${k}=`)); return m ? m.split('=')[1] : d; };
+const DEFAULT_MODEL = 'deepseek/deepseek-chat';
+const MODEL = arg('model', DEFAULT_MODEL);
 
 // Tension register — same file, cap, and expiry as citizen-wake.js (B2 index; the page is
 // the durable surface). PRESS quotes participate in the same open-question lifecycle.
@@ -79,11 +84,14 @@ async function readStdin() {
   return buf.trim();
 }
 
-async function generate(system, user, maxTokens) {
+async function generate(system, user, maxTokens, temperature, model) {
+  const selectedModel = model || DEFAULT_MODEL;
   const r = await fetch('https://openrouter.ai/api/v1/chat/completions', {
     method: 'POST',
     headers: { Authorization: 'Bearer ' + process.env.OPENROUTER_API_KEY, 'Content-Type': 'application/json', 'HTTP-Referer': 'https://godworld.local' },
-    body: JSON.stringify({ model: 'deepseek/deepseek-chat', max_tokens: maxTokens, temperature: 0.85, messages: [{ role: 'system', content: system }, { role: 'user', content: user }] }),
+    body: JSON.stringify({ model: selectedModel, max_tokens: maxTokens,
+      temperature: temperature == null ? 0.85 : temperature,
+      messages: [{ role: 'system', content: system }, { role: 'user', content: user }] }),
   });
   const j = await r.json();
   if (j.error) throw new Error('voice: ' + (j.error.message || JSON.stringify(j.error)));
@@ -91,16 +99,17 @@ async function generate(system, user, maxTokens) {
   usageTotals.calls += 1;
   usageTotals.prompt += Number(u.prompt_tokens) || 0;
   usageTotals.completion += Number(u.completion_tokens) || 0;
-  console.error(`[tokens] call ${usageTotals.calls}: prompt=${u.prompt_tokens || '?'} completion=${u.completion_tokens || '?'}`);
+  console.error(`[tokens] call ${usageTotals.calls}: model=${selectedModel} prompt=${u.prompt_tokens || '?'} completion=${u.completion_tokens || '?'}`);
   return String(j.choices?.[0]?.message?.content || '').trim();
 }
 
 /* Voice one citizen. Returns {popId,name,nh,occ,disposition,text,recorded}.
  * Throws {code:2} when unvoiceable (no dials / not in ledger) so single-call
  * mode keeps its exit-2 contract and batch mode maps it to a fallback. */
-async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preText }) {
+async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preText, evidenceBound, model }) {
   const c = pool.find((p) => p.popId === popId);
   if (!c) { const e = new Error(`${popId} not voiceable (no DialState / not in ledger / no name+hood)`); e.code = 2; throw e; }
+  if (record && evidenceBound) throw new Error('evidence-bound pilot is read-only; record is forbidden');
 
   const [neighbors, sportsLine, lifeArc, bondsLine, familyLine, healthLine] = await Promise.all([
     coResidents(c.nh, c.popId), loadSportsSlice(), loadLifeArc(c.popId), loadBonds(c.popId), loadFamily(c.popId),
@@ -130,7 +139,10 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
   // The ask arrives from the caller (letters desk, interview brief). Fence it — desk-authored
   // context is instructions TO the citizen, but anything quoted inside it must not be able to
   // rewrite who they are. The speech guard rides outside the fence.
-  const user = `${memoryFence.sanitize(ask)}\n\nSpeak as yourself, plainly, in first person — your temperament and your history shape what you say and what you leave out. Never mention data, records, or that you were asked by a system.`;
+  const evidenceGuard = evidenceBound
+    ? `\n\nEVIDENCE MODE: Return ONLY the JSON requested by packet.output. Treat only the Packet's FACT claims as the press-evidence floor. The "Real things from your life recently" above may shape private emotion, interpretation, or personal intention, but they do not become press evidence and do not prove a public event. Never create a named person, institution, public event, date, count, relationship, job, official action, illustrative object, street condition, meeting, grant, schedule, or promise. Follow packet.output exactly. When it supplies a lattice, select its IDs and do not write quote prose. Otherwise, INTERPRETATION stays abstract and any concrete unsupplied detail belongs in unverifiedLead. The backend assembles publishable text and rejects free factual expansion. If you lack grounded material, abstain.`
+    : '';
+  const user = `${memoryFence.sanitize(ask)}\n\nSpeak as yourself, plainly, in first person — your temperament and your history shape what you say and what you leave out. Never mention data, records, or that you were asked by a system.${evidenceGuard}`;
 
   if (dry) {
     console.log('--- system ---\n' + system + '\n--- user ---\n' + user);
@@ -142,7 +154,8 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
   // preText (Phase 2 layer 5, reporter self-record): record a SUPPLIED line
   // (e.g. "filed: <headline>") through the exact page+intake write-block, with
   // NO DeepSeek generation — the author-side mirror of the quote pre-pass.
-  const text = preText != null ? String(preText) : await generate(system, user, maxTokens);
+  const text = preText != null ? String(preText) :
+    await generate(system, user, maxTokens, evidenceBound ? 0.25 : 0.85, model);
   if (!text) { const e = new Error('empty generation'); e.code = 3; throw e; }
 
   let recorded = false;
@@ -221,6 +234,8 @@ async function runBatch(batchPath, cycle) {
         maxTokens: Number(entry.maxTokens) || 260,
         record: !!entry.record && !DRY,
         dry: DRY,
+        evidenceBound: !!entry.evidenceBound,
+        model: entry.model || MODEL,
       });
       out.push({ ...base, name: r.name, quote: r.text, disp: r.disposition, recorded: r.recorded });
     } catch (e) {
@@ -249,6 +264,7 @@ async function runBatch(batchPath, cycle) {
     try {
       r = await voiceOne(pool, rtPop, 'You filed a story for the Tribune: ' + recordText, {
         cycle, maxTokens: 60, record: !DRY, dry: DRY, preText: recordText,
+        model: MODEL,
       });
     } catch (e) { console.error('citizenVoice record-text: ' + e.message); process.exit(e.code || 1); }
     console.log(JSON.stringify({ popId: r.popId, name: r.name, recorded: r.recorded, text: r.text }, null, 2));
@@ -258,7 +274,7 @@ async function runBatch(batchPath, cycle) {
   const popId = String(arg('pop', '') || '').toUpperCase();
   let ask = arg('ask', null);
   if (!ask && ARGV.includes('--stdin')) ask = await readStdin();
-  if (!popId || !ask) { console.error('usage: citizenVoice.js --pop=POP-XXXXX (--ask="..." | --stdin) [--cycle=N] [--dry-run] [--json] [--record] | --batch=asks.json'); process.exit(1); }
+  if (!popId || !ask) { console.error('usage: citizenVoice.js --pop=POP-XXXXX (--ask="..." | --stdin) [--cycle=N] [--dry-run] [--json] [--record] [--evidence-bound] [--model=provider/model] | --batch=asks.json'); process.exit(1); }
   const maxTokens = Number(arg('max-tokens', 260)) || 260;
 
   // No shaped floor for edition voicing — a citizen the Tribune touched deserves a voice even at
@@ -268,7 +284,11 @@ async function runBatch(batchPath, cycle) {
 
   let r;
   try {
-    r = await voiceOne(pool, popId, ask, { cycle, maxTokens, record: RECORD, dry: DRY });
+    r = await voiceOne(pool, popId, ask, {
+      cycle, maxTokens, record: RECORD, dry: DRY,
+      evidenceBound: EVIDENCE_BOUND,
+      model: MODEL,
+    });
   } catch (e) {
     console.error('citizenVoice: ' + e.message);
     process.exit(e.code || 1);

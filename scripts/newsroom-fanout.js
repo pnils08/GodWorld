@@ -3,11 +3,11 @@
  * Newsroom fan-out rotation — scripts/newsroom-fanout.js
  *
  * Phase 2.3 fan-out (Mike-direct 2026-07-25): the three-wake cadence runs as a
- * daily ROTA, not one hardcoded desk. 5–7 articles/day (~25–35/wk) so nearly
- * every Tribune byline journalist works ~once a week and sports + civic are
- * weighted 2–3. Selection is least-recently-used within each desk's beat pool,
- * computed from prior fanout-*.json files (self-contained history — no Sheets
- * read for usage; the roster itself still comes from buildBylineRoster).
+ * daily ROTA, not one hardcoded desk. The base rota targets 5–7 assignments/day
+ * with sports + civic weighted 2–3. ADR-0017 then applies a package-only gate:
+ * only journalists with active entries in newsroom-wake-packages.json remain,
+ * and required probation seats are pinned before the filter. Selection inside
+ * the base rota remains least-recently-used, computed from prior fanout files.
  *
  * grok 2026-08-06 — stink force-slot (research 2026-08-06-jax-caldera-sim-stink-audit):
  * when the deterministic stink scanner scores ≥ threshold and no firebrand force
@@ -29,8 +29,8 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const COMPARE = path.join(ROOT, 'output', 'cron-compare');
 
-// Daily desk quotas (sum = 6, inside Mike's 5–7/day). Sports + civic weighted
-// per the 2026-07-25 directive; culture/business fill out the page.
+// Pre-package desk quotas (sum = 6). The ADR-0017 gate below may intentionally
+// reduce the live set while journalist packages are being expanded.
 const DAILY_QUOTAS = { civic: 2, sports: 2, culture: 1, business: 1 };
 
 // Mirrors LANE_DOMAINS in cron-desk-run.js (keep in sync).
@@ -183,6 +183,45 @@ function storyFromSeed(e) {
 function approachFor(approachMap, desk, personaSlug) {
   if (personaSlug && approachMap[personaSlug]) return approachMap[personaSlug];
   return approachMap[desk] || approachMap._default || null;
+}
+
+// ADR-0017 live expansion gate. A scheduled journalist must own an active wake
+// package; the old generic prompt is not a fallback. A requiredDaily package is
+// pinned into its desk before filtering so the first probation seat (Jax) wakes
+// even when ordinary least-recently-used rotation or stink cooldown would omit it.
+function applyWakePackageGate(assignments, approachMap, packagesOverride) {
+  const packagesApi = require('./newsroomWakePackages');
+  const packages = packagesOverride || packagesApi.loadPackages();
+  const work = (assignments || []).map(row => Object.assign({}, row));
+  const pinned = [];
+
+  for (const { key, value } of packagesApi.activePackages(packages)) {
+    let index = work.findIndex(row => row.persona === key ||
+      row.popid === value.assignment.popid || row.name === value.assignment.name);
+    if (index < 0 && value.requiredDaily) {
+      index = work.findIndex(row => row.desk === value.assignment.desk);
+      const previous = index >= 0 ? work[index] : {};
+      const replacement = Object.assign({}, previous, value.assignment, {
+        persona: key,
+        approach: approachFor(approachMap, value.assignment.desk, key),
+        packagePin: true,
+      });
+      if (index >= 0) work[index] = replacement;
+      else work.unshift(replacement);
+      pinned.push({ persona: key, desk: value.assignment.desk,
+        replaced: previous.name || null });
+    } else if (index >= 0) {
+      work[index] = Object.assign({}, work[index], value.assignment, { persona: key });
+    }
+  }
+
+  const gated = packagesApi.gateAssignments(work, packages);
+  return {
+    policy: 'package-only',
+    assignments: gated.eligible,
+    skipped: gated.skipped,
+    pinned,
+  };
 }
 
 function loadFirebrandPersona() {
@@ -556,9 +595,21 @@ async function buildFanout(date) {
     }
   }
 
+  const packageGate = applyWakePackageGate(assignments, approachMap);
+  assignments.splice(0, assignments.length, ...packageGate.assignments);
+  const packageShortfalls = Object.entries(DAILY_QUOTAS).map(([desk, wanted]) => ({
+    desk, wanted, got: assignments.filter(a => a.desk === desk).length,
+  })).filter(row => row.got < row.wanted);
   const seedless = assignments.filter(a => !a.story).length;
-  return { date, cycle, quotas: DAILY_QUOTAS, assignments, shortfalls,
+  return { date, cycle, quotas: DAILY_QUOTAS, assignments, shortfalls: packageShortfalls,
+    rotationShortfalls: shortfalls,
     seedless, signalMissing: !signal,   // loud in the file too — the 06:00 digest and any reader sees a seedless day
+    packageGate: {
+      policy: packageGate.policy,
+      pinned: packageGate.pinned,
+      skipped: packageGate.skipped,
+      activeAssignments: assignments.map(a => ({ name: a.name, persona: a.persona, wakePackage: a.wakePackage })),
+    },
     stinkForce,
     pslayerEnrich,
     anthonyEnrich,
@@ -601,4 +652,4 @@ if (require.main === module) {
 
 module.exports = { buildFanout, writeFanout, loadFanout, usageHistory, stagedTally, bylinePreference,
   assignedStoryRefs, laneSeeds, storyFromSeed, approachFor, applyStinkForce, loadFirebrandPersona,
-  DAILY_QUOTAS, DESK_DOMAINS };
+  applyWakePackageGate, DAILY_QUOTAS, DESK_DOMAINS };

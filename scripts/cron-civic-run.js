@@ -1232,6 +1232,15 @@ async function runClose() {
   if (gatePass && APPLY && clerk.overall === 'pass') {
     execFileSync('node', [path.join(ROOT, 'scripts', 'applyTrackerUpdates.js'), String(cycle), '--apply'], { cwd: ROOT, stdio: 'inherit', timeout: 300000 });
     applied = true;
+    // Refresh the local snapshot the datawakes read (output/initiative_tracker.json)
+    // so Mon-Thu office wakes see the state this close just filed — without this,
+    // the snapshot serves pre-apply state until the next engine export and every
+    // daily slice all week contradicts what the officials decided on Sunday.
+    try {
+      execFileSync('node', [path.join(ROOT, 'scripts', 'buildInitiativePackets.js')], { cwd: ROOT, stdio: 'inherit', timeout: 300000 });
+    } catch (e2) {
+      console.error('[civic] snapshot refresh failed (sheet is applied; datawakes will read stale snapshot until next refresh): ' + e2.message);
+    }
   } else if (APPLY) {
     console.error('[civic] --apply requested but ' + (gatePass ? 'clerk verdict is not pass' : 'gate blocked') + ' — NOT applying.');
   }

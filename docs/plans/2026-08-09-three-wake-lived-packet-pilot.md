@@ -336,7 +336,7 @@ slice and model text is a starting work surface, not an adopted contract.
 | JORDAN-LEP2-1 | Jordan Velez / POP-00153 | economics/labor | Article LEP/2; economic/storefront | DeepSeek / DeepSeek / DeepSeek | [x] | [ ] full W1-W3/Rhea |
 | pending | Luis Navarro / POP-00636 | civic investigations | Candidate Article LEP/2; know/don't-know and silence clock | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | Trevor Shimizu / POP-00155 | infrastructure | Candidate Article LEP/2; transit/system cascade | Candidate DeepSeek; benchmark | [ ] | [ ] |
-| pending | Sgt. Rachel Torres / POP-00057 | safety | Candidate Article LEP/2; incident/classification gap | Candidate DeepSeek; benchmark | [ ] | [ ] |
+| RACHEL-LEP2-1 | Sgt. Rachel Torres / POP-00057 | safety | Article LEP/2; typed public-safety signal and classification/response gap | DeepSeek / DeepSeek / DeepSeek | [x] | [ ] full W1-W3/Rhea |
 | pending | Dr. Lila Mezran / POP-00154 | health | Candidate Article LEP/2; cluster/human cost | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | Angela Reyes / POP-00156 | education | Candidate Article LEP/2; school/youth stability | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | Noah Tan / POP-00157 | environment | Candidate Article LEP/2; weather/environment ground | Candidate DeepSeek; benchmark | [ ] | [ ] |
@@ -353,7 +353,7 @@ slice and model text is a starting work surface, not an adopted contract.
 | pending | Elliot Marbury / POP-00166 | data/general | Separate data-memo contract; TrueSource/As_Roster audit slice | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | DeShawn Hartley / POP-00015 | visual media | Separate visual/photo-prompt contract; visual record slice | Candidate DeepSeek; benchmark | [ ] | [ ] |
 
-The five active packages have locked routes, but their cost/model comparison and
+The six active packages have locked routes, but their cost/model comparison and
 full unattended graduation remain checklist work. Elliot Marbury and DeShawn
 Hartley are deliberately not forced into Article LEP/2 until their data-memo and
 visual contracts are specified; contract shape is part of Gate 1. Celeste Tran
@@ -361,6 +361,12 @@ visual contracts are specified; contract shape is part of Gate 1. Celeste Tran
 `persona-map.json`; she is not counted as one of these 22 mapped personas and
 must receive a Social Trends overlay before any package or shared evening access
 is activated for her.
+
+Document normalization is a separate, proposal-only workstream: inventory each
+persona's IDENTITY/LENS/RULES/SKILL and bag, render backend-readable candidate
+diffs, run schema/canon checks, and require the owning terminal's approval before
+touching protected `.claude` files. Package activation does not authorize an
+automatic rewrite.
 
 ## Status log — first C102 A/B
 
@@ -472,3 +478,4 @@ observation remains open.
 - 2026-08-10 (codex) — Diagnosed the first C103 unattended angle wake and hardened the LEP/2 boundary: exact sourced claims deduplicate before ID derivation, and a candidate-free W1 Packet narrows model-added targets to an empty list. Recovery was not fired.
 - 2026-08-10 (codex) — Filed Task 17, the surgical migration checklist for all 22 newsroom personas: typed slice, per-wake model benchmark, aligned contracts, deterministic tests, attended proof, and separate data/visual contract gates. Jax and Jordan angle recoveries succeeded; full cohort graduation remains open.
 - 2026-08-10 (codex) — Added KAI-LEP2-1 as the first evening/culture package. Kai shares the deterministic evening substrate but receives a seat-specific arts pulse, bag authority, LEP/2 creative brief, Llama route, and load-bearing Rhea profile; Mason, Maria, and future Social Trends remain separate package gates.
+- 2026-08-10 (codex) — Added RACHEL-LEP2-1 for Sgt. Rachel Torres with a disk-first public-safety slice, typed safety creative brief, DeepSeek route, and load-bearing incident/classification review profile; full W1-W3/Rhea proof remains open. Document normalization is explicitly proposal-only and separate from activation.

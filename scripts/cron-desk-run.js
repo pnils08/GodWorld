@@ -963,6 +963,7 @@ async function runAngle(assign) {
   let anthonySlice = null;
   let halSlice = null;
   let economicSlice = null;
+  let safetySlice = null;
   const EVENING_SLUGS = {
     'mason-ortega': 1, 'kai-marston': 1, 'sharon-okafor': 1,
     'maria-keen': 1, 'elliot-graye': 1
@@ -1076,6 +1077,17 @@ async function runAngle(assign) {
     } catch (e) {
       log('evening slice load failed (non-fatal): ' + e.message);
     }
+  } else if (personaSlug === 'rachel-torres') {
+    try {
+      const { loadSafetySlice } = require(path.join(__dirname, 'buildSafetySlice'));
+      safetySlice = loadSafetySlice(cycle);
+      if (safetySlice && !safetySlice.empty) {
+        story = safetySlice.story || story;
+        approach = safetySlice.approach || approach;
+        log('safety slice loaded — pulse ' + safetySlice.pulse.className +
+          ' hood ' + (safetySlice.pulse.hood || '—'));
+      }
+    } catch (e) { log('safety slice load failed (non-fatal): ' + e.message); }
   }
   let angleRead = null;
   let inputPacket = null;
@@ -1278,6 +1290,19 @@ async function runAngle(assign) {
         (asker._wallSnippet ? '\n\n' + asker._wallSnippet : '') +
         '\n\nIn your own voice: which named room or sighting are you standing in, what is true there tonight, ' +
         'and what question or image ends the piece? Never invent venues or employees. One pulse. Not multi-voice culture average.';
+    } else if (persona && personaSlug === 'rachel-torres' && story) {
+      const sceneBits = [];
+      if (safetySlice && safetySlice.pulse) sceneBits.push('PULSE: ' + safetySlice.pulse.className + ' · ' + safetySlice.pulse.label);
+      if (safetySlice && safetySlice.prewrite) {
+        sceneBits.push('ANCHOR FACTS:\n' + safetySlice.prewrite.anchorFacts.map(f => '  - ' + f).join('\n'));
+        sceneBits.push('MISSING: ' + safetySlice.prewrite.missing.join('; '));
+      }
+      ask = 'You\'re ' + asker.name + '. This is the supplied public-safety record — one claim spine, no crime sensationalism:\n' +
+        'SIGNAL: ' + (story.angle || story.label) + (story.hookLine ? '\nHOOK: ' + story.hookLine : '') +
+        (brief.names.length ? '\nCITIZENS (packet only):\n' + brief.names.map(n => '  - ' + n).join('\n') : '') +
+        (story.hood ? '\nAREA: ' + story.hood : '') + (sceneBits.length ? '\nSAFETY PACK:\n' + sceneBits.join('\n') : '') +
+        (approach ? '\n\n' + approach : '') + (asker._wallSnippet ? '\n\n' + asker._wallSnippet : '') +
+        '\n\nIn measured third person: what does the record establish, what classification or response question remains, which supplied citizen should the Tribune ask about, and what will you not invent? One public-safety claim. No officers, cases, quotes, counts, or fear claims absent from the Packet.';
     } else if (persona && story) {
       const sceneBits = [];
       if (jaxSlice && jaxSlice.scene) {
@@ -1320,7 +1345,7 @@ async function runAngle(assign) {
     if (PACKET_ACTIVE) {
       inputPacket = livedPacket.buildAnglePacket({
         cycle, desk, reporter: asker, story, approach,
-        slice: jaxSlice || pslayerSlice || economicSlice || eveningSlice, lane,
+        slice: jaxSlice || pslayerSlice || economicSlice || safetySlice || eveningSlice, lane,
       });
       ask = livedPacket.prompt(inputPacket);
     }
@@ -1422,6 +1447,13 @@ async function runAngle(assign) {
       },
       scene: economicSlice.scene,
       candidates: (economicSlice.candidates || []).slice(0, 8)
+    } : null,
+    safetySlice: safetySlice && !safetySlice.empty ? {
+      pulse: safetySlice.pulse,
+      prewrite: safetySlice.prewrite,
+      candidates: (safetySlice.candidates || []).slice(0, 8),
+      scene: safetySlice.scene,
+      pointers: safetySlice.pointers
     } : null,
     reporterWall: wallMeta,
     canonResearch,                                    // Task 2.5.3 §2: ≥3 validated canon facts + tool trace

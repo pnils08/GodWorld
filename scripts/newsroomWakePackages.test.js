@@ -6,7 +6,7 @@ const packagesApi = require('./newsroomWakePackages');
 const packages = packagesApi.loadPackages();
 const active = packagesApi.activePackages(packages);
 assert.deepStrictEqual(active.map(row => row.key),
-  ['freelance-firebrand', 'carmen-delaine', 'p-slayer', 'business-desk', 'kai-marston']);
+  ['freelance-firebrand', 'carmen-delaine', 'p-slayer', 'business-desk', 'kai-marston', 'rachel-torres']);
 
 const jax = packages['freelance-firebrand'];
 assert.equal(jax.version, 'JAX-LEP2-1');
@@ -79,6 +79,14 @@ assert.equal(kai.reviewProfile.canonPolicy, 'load-bearing');
 assert.ok(kai.reviewProfile.textureConditions.some(v => v.includes('evening source')));
 assert.ok(kai.reviewProfile.canonBlockers.some(v => v.includes('social-media reaction')));
 
+const rachel = packages['rachel-torres'];
+assert.equal(rachel.version, 'RACHEL-LEP2-1');
+assert.equal(rachel.assignment.popid, 'POP-00057');
+assert.equal(rachel.assignment.beatDomain, 'SAFETY');
+assert.equal(packagesApi.routeFor(rachel, 'write').model, 'deepseek/deepseek-chat');
+assert.equal(rachel.reviewProfile.canonPolicy, 'load-bearing');
+assert.ok(rachel.reviewProfile.canonBlockers.some(v => v.includes('invented incident')));
+
 const gate = packagesApi.gateAssignments([
   { desk: 'civic', name: 'Jax Caldera', persona: 'freelance-firebrand' },
   { desk: 'civic', name: 'Carmen Delaine', persona: 'carmen-delaine' },
@@ -113,8 +121,9 @@ const pinned = applyWakePackageGate([
   'p-slayer': 'P Slayer fan heat',
   'business-desk': 'Jordan storefront ledger',
   'kai-marston': 'Kai arts pulse',
+  'rachel-torres': 'Rachel public safety',
 }, packages);
-assert.equal(pinned.assignments.length, 5);
+assert.equal(pinned.assignments.length, 6);
 const pinnedByPersona = new Map(pinned.assignments.map(row => [row.persona, row]));
 assert.equal(pinnedByPersona.get('freelance-firebrand').name, 'Jax Caldera');
 assert.equal(pinnedByPersona.get('freelance-firebrand').approach, 'Jax accountability');
@@ -129,9 +138,11 @@ assert.equal(pinnedByPersona.get('business-desk').name, 'Jordan Velez');
 assert.equal(pinnedByPersona.get('business-desk').approach, 'Jordan storefront ledger');
 assert.equal(pinnedByPersona.get('kai-marston').name, 'Kai Marston');
 assert.equal(pinnedByPersona.get('kai-marston').approach, 'Kai arts pulse');
+assert.equal(pinnedByPersona.get('rachel-torres').name, 'Sgt. Rachel Torres');
+assert.equal(pinnedByPersona.get('rachel-torres').approach, 'Rachel public safety');
 assert.deepStrictEqual(pinned.pinned.map(row => row.replaced),
   ['TEST-ONLY Civic One', 'TEST-ONLY Civic Two', 'TEST-ONLY Sports One',
-    'TEST-ONLY Business Reporter', null]);
+    'TEST-ONLY Business Reporter', null, null]);
 assert.deepStrictEqual(pinned.skipped.map(row => row.name),
   ['TEST-ONLY Sports Two']);
 
@@ -155,10 +166,10 @@ const shortDesk = applyWakePackageGate([
   { desk: 'business', name: 'TEST-ONLY Business Seat', popid: 'POP-99994', story: { ref: 'TEST-BUSINESS' } },
   { desk: 'culture', name: 'TEST-ONLY Culture Preserved', popid: 'POP-99991', story: { ref: 'TEST-CULTURE' } },
 ], { civic: 'generic civic' }, packages);
-assert.equal(shortDesk.assignments.length, 5);
+assert.equal(shortDesk.assignments.length, 6);
 assert.deepStrictEqual(new Set(shortDesk.assignments.map(row => row.persona)),
-  new Set(['freelance-firebrand', 'carmen-delaine', 'p-slayer', 'business-desk', 'kai-marston']));
+  new Set(['freelance-firebrand', 'carmen-delaine', 'p-slayer', 'business-desk', 'kai-marston', 'rachel-torres']));
 assert.ok(shortDesk.pinned.some(row => row.replaced === 'TEST-ONLY Culture Preserved'));
-assert.equal(shortDesk.pinned.filter(row => row.replaced === null).length, 2);
+assert.equal(shortDesk.pinned.filter(row => row.replaced === null).length, 3);
 
 console.log('newsroomWakePackages.test.js: PASS');

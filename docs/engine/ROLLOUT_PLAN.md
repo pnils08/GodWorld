@@ -57,7 +57,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | pipeline.52 | Journalist heat-slice packs (grok) — evening/economic/sports packs shipped; Jordan consumes typed economic slice via pipeline.54; open Tasks 6–7 civic-family note + legacy desk bookkeeping | in-progress | research-build | [[../plans/2026-08-08-journalist-heat-slice-packs]] |
 | pipeline.53 | Citizen day digest (kimi) — 24h people-slice folded into the 8am notebooklmDailyNews bounded source, written + audio per Mike 2026-08-09; engine-sheet lands config rebalance | in-progress | engine-sheet | [[../plans/2026-08-09-citizen-day-digest]] |
 | pipeline.54 | ADR-0017 Jax+Carmen+P Slayer+Jordan cohort (codex) — civic/sports/business seats; package-owned models; typed fan-pulse + economic LEP/2 briefs; persona-aware Rhea; observe unattended wakes | in-progress | research-build / engine-sheet | [[../plans/2026-08-09-three-wake-lived-packet-pilot]] + [[../adr/0017-typed-lived-experience-packets]] |
-| pipeline.55 | C102 recovery-run print gaps — photoQA API-credit fallback route, FLUX signage-concept ban in DJ instruction, one-FP-photo rule in djDirect, sanctioned eic-authored sift bypass for recovery editions | ready | research-build | output/production_log_c102_print_gaps.md |
+| pipeline.55 | C102 recovery-run gaps (print + post-publish) — photoQA API-credit fallback, FLUX signage ceiling, one-FP-photo rule, eic-authored sift bypass; nlm-CLI-absent MCP fallback, Abraham drift-detector stale re-flag (POP-01046 minted), "Dr." byline resolution, hollow-A marker on recovery grades | ready | research-build | output/production_log_c102_print_gaps.md + output/production_log_c102_post_publish_gaps.md |
 
 ### engine.* — Engine code, ledger, schema
 

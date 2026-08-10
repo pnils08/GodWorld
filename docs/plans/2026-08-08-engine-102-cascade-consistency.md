@@ -97,7 +97,7 @@ pointers:
 
 - **Files:** `phase10-persistence/buildCyclePacket.js` (`persistHospitalLedger_` Cause wiring), `phase03-population/applyDemographicDrift.js` (census → next WP illness)
 - **Verify:** acceptance criterion 5 on bench.
-- **Status:** [~] code landed, bench pending — W4 shipped unflipped by mags (`febd6492` admission cause + talk-back, `5a989406` legacy blank-cause backfill, `29df2d2d` ghost-bed reconcile). Code verified in-tree 2026-08-09 (kimi sweep): Cause on new admissions, idempotent legacy backfill, ghost reconcile against ledger authority, census→WP-illness talk-back (`applyDemographicDrift.js:184-208`). Node proof: `scripts/hospitalTalkback.test.js` 24/24 (kimi, vm-sandbox, no Sheets). Bench fire (criterion 5 literal) approved by Mike 2026-08-09, pending — note the bench deploy now also carries engine.94 grief (needs the six World_Config grief keys on the SANDBOX sheet too; live rows landed 2026-08-09) and engine.101 bond drain.
+- **Status:** [x] done (2026-08-09, kimi bench proof) — W4 shipped unflipped by mags (`febd6492` admission cause + talk-back, `5a989406` legacy blank-cause backfill, `29df2d2d` ghost-bed reconcile). **Criterion 5 PASS on SANDBOX 0720 fires C114–C115** (token-fired per AGENTS.md §Deployment carve-out, 128 phases ok:true ×2): C115 minted two new admissions with populated epidemic-aware Causes (POP-00662 "a serious respiratory infection amid the local outbreak", POP-00990 "complications from the illness sweeping the neighborhood"); six lifecycle closures (3 recovered/3 deceased); ghost reconcile correctly idle (ledger clean); census talk-back correctly inactive at load 4 ≪ capacity 100 — binding math proven by `scripts/hospitalTalkback.test.js` (24/24, exact-delta above/below capacity). Grief validator ran clean in-code both fires (six keys present on sandbox).
 
 ### Task 8: W5 dashboard half — provenance chip (kimi, dashboard/)
 
@@ -124,3 +124,4 @@ pointers:
 - 2026-08-08 (engine-sheet, S361) — Tasks 4+5 done: W2b landed, 18 keys on bench+live, probe bound on C107. Detail in task statuses.
 - 2026-08-08 (engine-sheet, S361) — WP stat ownership fix (`e181e0d5`): 3 writers → 1, applyDemographicDrift sole owner. Detail in Task 5 status.
 - 2026-08-09 (engine-sheet, S361) — Task 6 done (`87e68f94`): hood-scoped dose + wake health read, criterion 4 PASS on bench C109. Detail in Task 6 status.
+- 2026-08-09 (kimi) — Task 8 done S361 (dashboard provenance chip, live). Task 7 code found landed-but-unflipped (mags commits); Node proof `hospitalTalkback.test.js` 24/24 + bench proof C114–C115 (criterion 5 PASS; detail in Task 7 status + DEPLOY.md). Task 9 cron half landed (`a65497b6` rate rule); /sift half remains control-plane. engine.102 effectively closes except the /sift guidance half.

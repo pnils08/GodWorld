@@ -592,34 +592,26 @@ function calculateCitizenWealth_(ctx) {
 }
 
 function deriveWealthLevel_(income, inheritance, netWorth, debt) {
-  // v14.2: Recalibrated for 2041 Oakland role-based income distribution.
-  // Aligned with economicLookup.js deriveWealthLevel() thresholds.
-  // Uses effective income = income + 5% of net worth as annual yield.
-  var effectiveIncome = income + (netWorth * 0.05);
-
-  var baseWealth = 0;
-  if (effectiveIncome >= 300000) baseWealth = 10;      // Elite
-  else if (effectiveIncome >= 180000) baseWealth = 9;   // Wealthy
-  else if (effectiveIncome >= 120000) baseWealth = 7;   // Upper-middle
-  else if (effectiveIncome >= 85000) baseWealth = 6;    // Middle
-  else if (effectiveIncome >= 60000) baseWealth = 5;    // Working+
-  else if (effectiveIncome >= 45000) baseWealth = 4;    // Working
-  else if (effectiveIncome >= 30000) baseWealth = 2;    // Low
-  else baseWealth = 0;                                   // Poverty
-
-  // Inheritance boost
-  if (inheritance > 100000) baseWealth += 2;
-  else if (inheritance > 50000) baseWealth += 1;
-
-  // Debt penalty
-  if (debt >= 8) baseWealth -= 2;
-  else if (debt >= 5) baseWealth -= 1;
-
-  // Clamp to 0-10
-  if (baseWealth < 0) baseWealth = 0;
-  if (baseWealth > 10) baseWealth = 10;
-
-  return baseWealth;
+  // v15 (S363, Mike-direct): WealthLevel measures WEALTH — pure NetWorth
+  // bands on GodWorld's own scale. The v14.2 income proxy ("recalibrated
+  // for 2041 Oakland") put $67K and $10B citizens in the same tier and
+  // left rungs 1/3/8 unreachable. Income class, where an engine wants it,
+  // bands the Income column at read time. Inheritance and debt are already
+  // reflected in NetWorth — no modifiers. Signature kept for callers;
+  // income/inheritance/debt intentionally unused.
+  // Plan: docs/plans/2026-08-09-wealthlevel-networth-bands.md
+  var nw = Number(netWorth) || 0;
+  if (nw >= 50000000) return 10;  // ≥ $50M
+  if (nw >= 5000000)  return 9;   // ≥ $5M
+  if (nw >= 1000000)  return 8;   // ≥ $1M
+  if (nw >= 500000)   return 7;   // ≥ $500K
+  if (nw >= 250000)   return 6;   // ≥ $250K
+  if (nw >= 100000)   return 5;   // ≥ $100K
+  if (nw >= 50000)    return 4;   // ≥ $50K
+  if (nw >= 25000)    return 3;   // ≥ $25K
+  if (nw >= 10000)    return 2;   // ≥ $10K
+  if (nw >= 1000)     return 1;   // ≥ $1K
+  return 0;                        // < $1K
 }
 
 

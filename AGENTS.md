@@ -480,9 +480,19 @@ NEXT line and commit. You still write your own line for the work you did.
 
 ## Deployment and external-write restrictions
 
+**Sandbox proving-loop carve-out (builder decision, 2026-08-09):** Kimi and Codex
+may run the groundhog proving loop against the ACTIVE sandbox bench without
+per-conversation approval — `clasp push`/`clasp deploy` targeting the sandbox
+deployment only, token-fired bench cycles, and sandbox-sheet verification reads.
+Procedure and bench IDs: `docs/reference/DEPLOY.md` §Groundhog; the fire token
+loads from the shared env file via the repository loaders (never print it).
+Everything below still applies to LIVE: live clasp deploys, live cycles, and
+live-sheet writes remain gated exactly as listed.
+
 Without explicit approval in the current conversation, do not:
 
-- run `clasp push`, `clasp deploy`, or change Apps Script deployments;
+- run `clasp push`, `clasp deploy`, or change Apps Script deployments
+  (sandbox-bench deployments excepted per the carve-out above);
 - invoke a live engine Cycle;
 - write to any Google Sheet, ledger, intake tab, or queue;
 - run an `--apply`, `--write`, `--record`, ingestion, rebuild, or migration mode

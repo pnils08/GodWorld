@@ -54,7 +54,7 @@ clear whenever Mike fires them; they confirm, they don't gate.
 - Bound Apps Script ID: `1ntl6YwpLt-KwIX7HWCU-swMk-cGQ8aZR0aKNh5qUjz93m4OPUVhIB5nV`
 - Code current at exact main `dda0b129` (2026-08-09 Codex engine.94 approval ceiling; temp-dir route, sandbox target verified and production target untouched). Remote pull-back matched all 171 deployed files byte-for-byte with zero test files. Service-account read access verified from Node.
 - SIM_SSID Script Property set (Mike, S328).
-- Web-app deployment `AKfycbztm3ZXPO-V43KICxyFGJKS63jkZQJqATBotcuynuL9yl4lty3kaaO1YpYW4WUIMStq` @40 (2026-08-09: exact main `dda0b129`; engine.94 approval ceiling staged at C113 — config 8/8 and state columns 3/3 verified, 171/171 pull-back match, zero test files; attended C114 smoke pending). CYCLE_TRIGGER_TOKEN set (Mike, S328 — 0717/0716c lineage value; properties don't copy with the sheet).
+- Web-app deployment `AKfycbztm3ZXPO-V43KICxyFGJKS63jkZQJqATBotcuynuL9yl4lty3kaaO1YpYW4WUIMStq` @40 (2026-08-09: exact main `dda0b129`; engine.94 approval ceiling staged at C113 — config 8/8 and state columns 3/3 verified, 171/171 pull-back match, zero test files; attended C114 smoke pending). CYCLE_TRIGGER_TOKEN set (Mike, S328 — 0717/0716c lineage value; properties don't copy with the sheet). Token value lives in the shared godworld env file (`CYCLE_TRIGGER_TOKEN`, added S363) — any authorized lane loads it from there; kimi/codex proving-loop rights per AGENTS.md §Deployment carve-out.
 - Staging dir `sandbox-0720` (recreated per-session in scratchpad via `git archive HEAD`).
 - S328 proving fires C103–C105 (Row 24 release 25→17→13 promotions, crisis detection C104, faith-join, 0 errors ×3).
 

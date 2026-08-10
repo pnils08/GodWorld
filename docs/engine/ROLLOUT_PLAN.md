@@ -2,7 +2,7 @@
 
 **This file is canonical for open/closed work** (S207). Pointer-only: one line per job, detail lives in the pointer doc — never here (S286 hard rule, Mike-direct).
 
-**Status:** ACTIVE (building) | **Last Updated:** 2026-08-09 — engine.94 Track A sandbox-proven through C115 (codex); Track B needs-info on research.17.
+**Status:** ACTIVE (building) | **Last Updated:** 2026-08-09 — engine.94 code-only deployment safety correction built locally (codex); sandbox redeploy/fire remains.
 **Filing protocol (S212):** semantic groups + pointer-only entries — see [[rollout-rules]] §3–§5 (taxonomy, add, close). Full design: [[../adr/0005-rollout-plan-structure]].
 **North star:** `docs/ARCHITECTURE_VISION.md` — Jarvis + persistent sessions. Everything we build points there.
 **Completed phase details:** [[engine/ROLLOUT_ARCHIVE]] — read on demand, not at boot.
@@ -90,7 +90,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.101 | Sheet↔cron loop closure (kimi) — family perception + bond write-back SHIPPED (intake A–K + drain nudge landed S361); open: health slice | in-progress | engine-sheet / research-build | [[../research/2026-08-03-game-environment-review]] §Addendum |
 | engine.102 | City/hood cascade integrity — T1–T8 done; W4 bench-proven C114–C115 (kimi, criterion 5 PASS); T9 cron rate rule landed; open: /sift guidance half (control-plane, ownerless post-Claude) | in-progress | kimi | [[../plans/2026-08-08-engine-102-cascade-consistency]] + [[../research/2026-08-07-city-neighborhood-cascade-team-review]] |
 | engine.93 | Per-hood political consequence — ALL BUILDS SHIPPED S349 (Tasks 5-7 fold + Tasks 9-10 commute matrix/housing response, 3 sandbox suites, mutation-tested); open: live-cycle proof only; capital pool deferred to civic.14 | in-progress | engine-sheet | [[../plans/2026-07-31-per-hood-political-consequence]] |
-| engine.94 | Citizen memory & perception — Track A grief and approval-ceiling mechanics sandbox-proven through C115. Track B typed grudge, ambition, and folk-memory design remains gated on research.17 and a Mike design session | needs-info | research-build / engine-sheet | [[../plans/2026-07-31-citizen-memory-perception]] |
+| engine.94 | Citizen memory and approval ceiling — release blocker corrected: code now self-arms 14 config rows and 3 headers before any Cycle mutation. Local safety/full-suite proof clean; next sandbox redeploy/fire. Track B remains gated on research.17 | in-progress | research-build / engine-sheet | [[../plans/2026-07-31-citizen-memory-perception]] |
 | engine.95 | Platform ceiling resilience — instrumentation live + wall baselined at 34–38% of 6-min wall (Tasks 1–3, 5–7 complete); remaining build: Task 4 checkpoint/resume + Task 5 append-dedup, Mike decisions locked, design + constraints in plan | in-progress | engine-sheet | [[../plans/2026-07-31-platform-ceiling-resilience]] |
 | engine.96 | Business lifecycle generator — sequence after engine.85 per realism-audit build order; BIZ-ID allocator SHIPPED S357 (all 3 minters), detail in plan changelog | ready | research-build / engine-sheet | [[../plans/2026-08-01-business-lifecycle-generator]] |
 | engine.97 | Age-banded life content — SHIPPED S357 (age DSL, re-gates, 19 rows appended, youthActivities retired, clasp pushed); smoke = C103 fire, detail in plan changelog | in-progress | engine-sheet | [[../plans/2026-08-02-child-age-event-gating]] |

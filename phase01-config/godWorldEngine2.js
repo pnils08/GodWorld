@@ -1,7 +1,11 @@
 /**
  * ============================================================================
- * GOD WORLD ENGINE v2.14
+ * GOD WORLD ENGINE v2.15
  * ============================================================================
+ *
+ * v2.15 Changes:
+ * - engine.94 code-carried Sheet contract runs before cache/world mutation
+ * - First production Cycle self-arms missing config rows and civic headers
  *
  * v2.14 Changes:
  * - Replaced Math.random() with ctx.rng in updateWorldPopulation_ (23 instances)
@@ -209,8 +213,12 @@ function runWorldCycle() {
 
   try {
     ss = openSimSpreadsheet_();  // v2.14: Use configured spreadsheet ID
+    // engine.94 code-carried migration: production receives code, not sandbox
+    // Sheet mutations. Seed/verify the required rows and headers before cache
+    // creation, time advance, ledger initialization, or any other Cycle write.
+    ensureEngine94SheetContract_(ss);
   } catch (e) {
-    Logger.log('FATAL: Cannot open spreadsheet: ' + e.message);
+    Logger.log('FATAL: Cannot open or prepare spreadsheet: ' + e.message);
     throw e; // Cannot continue without spreadsheet
   }
 

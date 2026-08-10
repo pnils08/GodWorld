@@ -79,7 +79,7 @@ These six required key→value rows calibrate the bounded `MemoryRegisters.grief
 | `griefSupportMultiplier` | 1.25 | living-support pool multiplier |
 | `griefResponseChance` | 0.35 | maximum-one reserved response probability |
 
-Apply or verify the rows with `scripts/applyGriefWorldConfig.js`, which requires an explicit spreadsheet ID and matching confirmation in write mode. Sandbox writes must be replayed explicitly against production at live deployment; Apps Script code deployment does not carry Sheet data.
+`phase01-config/engine94SheetContract.js` code-carries the approved starting calibration and seeds only missing rows before cache creation or any Cycle mutation. Existing valid operator-tuned values are preserved. `scripts/applyGriefWorldConfig.js` remains an explicit audit/rehearsal tool; the production Sheet does not depend on replaying sandbox writes.
 
 ### Approval ceiling state and calibration (engine.94)
 
@@ -98,7 +98,7 @@ The sustained-high-approval ceiling uses eight required `World_Config` rows. Mis
 
 `Civic_Office_Ledger` carries three engine-owned columns appended after `Approval`: `HighApprovalStreak` (integer), `AutoScandalUntilCycle` (inclusive Cycle), and `AutoScandalSource` (`approval-ceiling` or blank). The source field distinguishes bounded engine-created scandals from manual/civic status; the engine never auto-clears a scandal it does not own. Election turnover clears all three fields so a challenger cannot inherit an incumbent's state.
 
-Apply or verify both the config rows and columns with `scripts/applyApprovalCeilingConfig.js`. It is dry-run by default, requires an explicit Sheet ID, refuses conflicts/duplicates/column drift, and requires the same ID again for apply. Sandbox writes must be replayed explicitly against production during the eventual live deployment; regenerate `schemas/SCHEMA_HEADERS.md` from live only after that replay.
+`phase01-config/engine94SheetContract.js` seeds missing rows and appends missing state headers before cache creation, ledger loading, time advance, or any other Cycle mutation. It is idempotent, preserves valid operator tuning, and aborts before writes on malformed config or schema conflicts. `scripts/applyApprovalCeilingConfig.js` remains an explicit audit/rehearsal tool rather than a production deployment prerequisite. Regenerate `schemas/SCHEMA_HEADERS.md` from live after the first production Cycle self-arms the columns.
 
 ---
 

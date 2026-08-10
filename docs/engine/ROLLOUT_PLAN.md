@@ -2,7 +2,7 @@
 
 **This file is canonical for open/closed work** (S207). Pointer-only: one line per job, detail lives in the pointer doc — never here (S286 hard rule, Mike-direct).
 
-**Status:** ACTIVE (building) | **Last Updated:** 2026-08-10 — pipeline.54 Jax+Carmen+P Slayer+Jordan live wake packages wired locally (codex); unattended proof remains open. pipeline.55 C102 print gaps filed (research-build).
+**Status:** ACTIVE (building) | **Last Updated:** 2026-08-10 — pipeline.54 Jax+Carmen+P Slayer live wake packages wired locally (codex); unattended proof remains open. pipeline.55 C102 print gaps filed (research-build).
 **Filing protocol (S212):** semantic groups + pointer-only entries — see [[rollout-rules]] §3–§5 (taxonomy, add, close). Full design: [[../adr/0005-rollout-plan-structure]].
 **North star:** `docs/ARCHITECTURE_VISION.md` — Jarvis + persistent sessions. Everything we build points there.
 **Completed phase details:** [[engine/ROLLOUT_ARCHIVE]] — read on demand, not at boot.
@@ -54,10 +54,10 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | pipeline.49 | Civic solo seats (grok) — five persona stacks + bags; multi-voice civic-desk legacy for headless; Claude lands agents | in-progress | research-build | [[../plans/2026-08-07-civic-solo-seats]] |
 | pipeline.50 | Culture + sports-support solos (grok) — 6 culture + Tanya/Simon/Marbury; Marbury deep-analysis bag for canon path | in-progress | research-build | [[../plans/2026-08-07-culture-sports-support-solo-seats]] |
 | pipeline.51 | NotebookLM audio-direction injection + archive-query canon hook in desk wake (51b) — landed S358; watching next scheduled daily + M-F + Sat runs | in-progress | engine-sheet | [[../research/2026-08-07-notebooklm-audio-overview-direction]] |
-| pipeline.52 | Journalist heat-slice packs (grok) — evening/economic/sports packs shipped; Jordan consumes typed economic slice via pipeline.54; open Tasks 6–7 civic-family note + legacy desk bookkeeping | in-progress | research-build | [[../plans/2026-08-08-journalist-heat-slice-packs]] |
+| pipeline.52 | Journalist heat-slice packs (grok) — evening + economic + sports substrate + Anthony shipped; next Hal | in-progress | research-build | [[../plans/2026-08-08-journalist-heat-slice-packs]] |
 | pipeline.53 | Citizen day digest (kimi) — 24h people-slice folded into the 8am notebooklmDailyNews bounded source, written + audio per Mike 2026-08-09; engine-sheet lands config rebalance | in-progress | engine-sheet | [[../plans/2026-08-09-citizen-day-digest]] |
-| pipeline.54 | ADR-0017 Jax+Carmen+P Slayer+Jordan cohort (codex) — civic/sports/business seats; package-owned models; typed fan-pulse + economic LEP/2 briefs; persona-aware Rhea; observe unattended wakes | in-progress | research-build / engine-sheet | [[../plans/2026-08-09-three-wake-lived-packet-pilot]] + [[../adr/0017-typed-lived-experience-packets]] |
-| pipeline.55 | C102 recovery-run gaps (print + post-publish) — photoQA API-credit fallback, FLUX signage ceiling, one-FP-photo rule, eic-authored sift bypass; nlm-CLI-absent MCP fallback, Abraham drift-detector stale re-flag (POP-01046 minted), "Dr." byline resolution, hollow-A marker on recovery grades | ready | research-build | output/production_log_c102_print_gaps.md + output/production_log_c102_post_publish_gaps.md |
+| pipeline.54 | ADR-0017 Jax+Carmen+P Slayer cohort (codex) — civic/sports package seats; Jax Llama/Llama/Sonnet, Carmen DeepSeek x3, P Slayer Llama x3; typed LEP/2 fan-pulse + persona-aware Rhea; observe unattended wakes | in-progress | research-build / engine-sheet | [[../plans/2026-08-09-three-wake-lived-packet-pilot]] + [[../adr/0017-typed-lived-experience-packets]] |
+| pipeline.55 | C102 recovery-run print gaps — photoQA API-credit fallback route, FLUX signage-concept ban in DJ instruction, one-FP-photo rule in djDirect, sanctioned eic-authored sift bypass for recovery editions | ready | research-build | output/production_log_c102_print_gaps.md |
 
 ### engine.* — Engine code, ledger, schema
 
@@ -158,7 +158,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.85 | Employment living system — write-back consumer, Generic_Citizens employer column + skill tags, age-18 ladder, field-matched rehiring, economically-alive business mint. research-build half DONE S335 (T1-T3, T6) | in-progress | engine-sheet (T4,T5,T7,T8) | [[../plans/2026-07-27-employment-living-system]] |
 | canon.4 | Real-world stack in the sim is BY DESIGN, not contamination — DigitalOcean/Discord/Moltbook/Anthropic stay as themselves, and Civis Systems (Varek, POP-00789) is the in-world blanket for engine/sheet vocabulary. Doctrine recorded, nothing to scrub | wontfix | research-build | [[canon/INSTITUTIONS]] §The Stack |
 | research.25 | Headless newsroom pipeline — M–F writer-wakes + Sat compile; Phase 1 + Phase 2.0 done, next is Phase 2 daily writer-wakes (was gated on engine.76 W5 half 1, now shipped) | in-progress | research-build → engine-sheet | [[../plans/2026-07-20-headless-newsroom-pipeline]] |
-| research.26 | Data-analyst retrieval seat — draft the implementation plan for a question-scoped Supermemory seat attributed to Rhea Morgan's Data Analyst function; metadata-filter syntax resolved 2026-07-27 | ready | research-build | [[../research/2026-07-26-supermemory-retrieval-economics]] |
+| research.26 | Data-analyst retrieval seat — seat SHIPPED S334 as source-search attributed to Marbury (794861f5 + 4138acd1); Rhea attribution superseded by separation-of-duties; verdict map zero gaps | done-pending-archive | research-build | [[../plans/2026-08-10-data-analyst-retrieval-seat]] |
 | research.27 | SpaceMolt game show (Mike-direct S360) — pilot-cast reality show; next: Phase 0 decisions (account identity, cast picks, commander adopt-verify) | in-progress | research-build → engine-sheet | [[../plans/2026-08-07-spacemolt-game-show]] |
 
 ### governance.* — Skills, MDs, ADRs, project hygiene

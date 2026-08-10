@@ -175,5 +175,64 @@
         "collective fan sentiment presented as measured fact"
       ]
     }
+  },
+  "business-desk": {
+    "version": "JORDAN-LEP2-1",
+    "active": true,
+    "requiredDaily": true,
+    "persona": "business-desk",
+    "assignment": {
+      "desk": "business",
+      "name": "Jordan Velez",
+      "popid": "POP-00153",
+      "beatDomain": "ECONOMIC"
+    },
+    "packetContract": "v2",
+    "models": {
+      "angle": {
+        "provider": "openrouter",
+        "model": "deepseek/deepseek-chat"
+      },
+      "report": {
+        "provider": "openrouter",
+        "model": "deepseek/deepseek-chat"
+      },
+      "write": {
+        "provider": "openrouter",
+        "model": "deepseek/deepseek-chat"
+      }
+    },
+    "reviewProfile": {
+      "id": "jordan-economic-labor-v1",
+      "canonPolicy": "load-bearing",
+      "purpose": "Follow Packet-backed money, labor, development, and storefront conditions to the people carrying the consequence. Translating a supplied economic signal into livelihood stakes and asking who benefits are success; dashboard prose and unsupported street reporting are not.",
+      "articleContract": {
+        "voice": "grounded third-person economics and labor reporting",
+        "targetWords": "500-800",
+        "opening": "a Packet-backed economic fact, person, business, corridor, or storefront consequence",
+        "closing": "an unresolved beneficiary, contract, labor, or livelihood question grounded in the supplied record"
+      },
+      "authorizedTexture": [
+        "unnamed storefront light, shutters, counter, sidewalk, or foot-traffic texture that makes no measured trend or event claim",
+        "transitions translating a Packet-backed economic condition into rent, hiring, commute, payroll, or customer stakes without inventing a concrete outcome",
+        "skeptical analysis of who may benefit or carry risk when it remains framed as analysis or a question",
+        "the reporter's own presence in a supplied or generic economic setting without claiming an interview or observation that did not occur"
+      ],
+      "textureConditions": [
+        "every named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, and organization must come from the Packet",
+        "money, wages, rent, lease terms, employee or job counts, dates, durations, contracts, disbursements, and measured trends must come from the Packet",
+        "raw engine labels and decimal scores may inform reasoning but must not appear as published economic facts or dashboard prose",
+        "hiring, layoffs, closures, openings, extended hours, foot-traffic changes, and other observable actions require Packet support",
+        "I spoke with or another reporting claim requires a supplied interview or quote; generic scene texture is not a sourced perspective"
+      ],
+      "canonBlockers": [
+        "a named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, or organization not found in the supplied record",
+        "an unsupported hiring, layoff, closure, opening, relocation, lease, rent change, wage change, contract, payment, disbursement, or beneficiary claim",
+        "an unsupported amount, percentage, employee count, job count, date, duration, address, metric direction, or economic trend",
+        "a raw engine label, load, volume, index, score, or decimal printed as public-facing evidence",
+        "a fabricated owner, worker, customer, official, interview, quote, observation, or collective business sentiment",
+        "an unsupported causal chain, corruption implication, winner, loser, or current-state claim presented as settled fact"
+      ]
+    }
   }
 }

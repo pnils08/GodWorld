@@ -67,17 +67,33 @@ function candidateRows(story, slice) {
 }
 
 function creativeBriefFromSlice(slice) {
-  if (!slice || !slice.charge) return null;
-  const brief = {
-    kind: 'fan-heat',
-    fanCharge: clean(slice.charge.fanCharge, 80) || null,
-    bagModes: (slice.charge.bagModes || []).slice(0, 3).map(mode =>
-      clean([mode && mode.id, mode && mode.name].filter(Boolean).join(' '), 120)).filter(Boolean),
-    friction: clean(slice.friction && slice.friction.frame, 500) || null,
-    centralFeeling: clean(slice.charge.centralFeeling, 500) || null,
-    priorTake: clean(slice.prewrite && slice.prewrite.priorTake, 300) || null,
-    sceneRule: clean(slice.scene && slice.scene.colorRoom, 500) || null,
-  };
+  if (!slice) return null;
+  let brief = null;
+  if (slice.charge) {
+    brief = {
+      kind: 'fan-heat',
+      fanCharge: clean(slice.charge.fanCharge, 80) || null,
+      bagModes: (slice.charge.bagModes || []).slice(0, 3).map(mode =>
+        clean([mode && mode.id, mode && mode.name].filter(Boolean).join(' '), 120)).filter(Boolean),
+      friction: clean(slice.friction && slice.friction.frame, 500) || null,
+      centralFeeling: clean(slice.charge.centralFeeling, 500) || null,
+      priorTake: clean(slice.prewrite && slice.prewrite.priorTake, 300) || null,
+      sceneRule: clean(slice.scene && slice.scene.colorRoom, 500) || null,
+    };
+  } else if (slice.kind === 'economic-storefront' ||
+      (slice.prewrite && slice.prewrite.pulseClass)) {
+    const prewrite = slice.prewrite || {};
+    brief = {
+      kind: 'economic-storefront',
+      pulseClass: clean(prewrite.pulseClass, 100) || null,
+      economicFrame: clean(prewrite.angle, 500) || null,
+      hook: clean(prewrite.hookLine, 500) || null,
+      namedBusinesses: uniq(prewrite.namedBusinesses).slice(0, 8),
+      forbidden: uniq(prewrite.forbidden).slice(0, 8),
+      sceneRule: clean(slice.scene && slice.scene.colorRoom, 500) || null,
+    };
+  }
+  if (!brief) return null;
   return Object.values(brief).some(value => Array.isArray(value) ? value.length : value)
     ? brief
     : null;
@@ -102,7 +118,8 @@ function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane 
   }
   for (const fact of (slice && slice.prewrite && slice.prewrite.anchorFacts) || []) {
     const text = clean(fact, 500);
-    if (text && !known.some(claim => claim.text === text && claim.src === clean(src, 300))) {
+    if (text && !/\b(?:do not|never)\s+(?:invent|lead|print|publish|assert|name|use)\b/i.test(text) &&
+        !known.some(claim => claim.text === text && claim.src === clean(src, 300))) {
       known.push(refClaim('FACT', text, src));
     }
   }

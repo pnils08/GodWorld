@@ -3,7 +3,7 @@ title: Three-Wake Typed Lived-Experience Packet Pilot
 created: 2026-08-09
 updated: 2026-08-10
 type: plan
-tags: [media, citizens, civic, sports, agents, evaluation, active]
+tags: [media, citizens, civic, sports, business, agents, evaluation, active]
 sources:
   - "[[../adr/0017-typed-lived-experience-packets]] — governing decision"
   - "[[../research/2026-08-07-cron-lifecycle-review]] — standing operations map"
@@ -28,12 +28,13 @@ pointers:
 samples-only evaluation namespace and requires `--no-gate`. Live scheduled
 adoption is separate and package-gated through
 `scripts/newsroom-wake-packages.json`. Jax's `JAX-LEP2-1`, Carmen's
-`CARMEN-LEP2-1`, and P Slayer's `PSLAYER-LEP2-1` packages automatically use
-LEP/2, zero live writer tools, per-wake model routing, and load-bearing manifests
-interpreted by persona-aware Rhea. P Slayer's typed fan-pulse slice adds sports
-feed anchors and a bounded creative brief to that same contract. Scheduled
-journalists without an active package are skipped; the legacy generic prompt is
-not a fallback.
+`CARMEN-LEP2-1`, P Slayer's `PSLAYER-LEP2-1`, and Jordan Velez's
+`JORDAN-LEP2-1` packages automatically use LEP/2, zero live writer tools,
+per-wake model routing, and load-bearing manifests interpreted by persona-aware
+Rhea. P Slayer's typed fan-pulse slice and Jordan's typed economic/storefront
+slice add domain anchors and bounded creative briefs to that same contract.
+Scheduled journalists without an active package are skipped; the legacy generic
+prompt is not a fallback.
 
 **Terminal:** research-build / engine-sheet review; implementation and local proof by codex
 
@@ -231,10 +232,10 @@ The final scored treatment Article is
   Grade canon integrity, street life, and sim movement separately; add another
   journalist package only after its persona authority and review profile exist.
 - **Verify:** Jax and Carmen occupy separate civic seats, P Slayer occupies the
-  required sports seat, all other assignments are logged as package-gate skips,
-  and no generic wake executes.
+  required sports seat, Jordan Velez occupies the required business seat, all
+  other assignments are logged as package-gate skips, and no generic wake executes.
 - **Status:** [ ] unattended observation begins with the next M-F wake for the
-  three-package civic/sports cohort
+  four-package civic/sports/business cohort
 
 ### Task 14: Add the second civic package without evicting Jax
 
@@ -266,6 +267,25 @@ The final scored treatment Article is
   pinned to P Slayer without consuming another desk; player candidates and feed
   anchors enter LEP/2; the creative brief survives to Wake 3; Jax and Carmen's
   package objects remain unchanged.
+- **Status:** [x] built and locally validated 2026-08-10 (codex)
+
+### Task 16: Add Jordan Velez with a typed economic/storefront handoff
+
+- **Files:**
+  - `scripts/newsroom-wake-packages.json` — add Jordan's package and authority
+  - persona/model maps — bind Jordan to the existing single-reporter
+    `business-desk` control-plane package
+  - `scripts/cron-desk-run.js` and `scripts/livedExperiencePacket.js` — carry
+    economic candidates, sourced anchors, and business limits through LEP/2
+  - package, routing, economic-slice, and Packet tests — cover the business seat
+- **Steps:** Add Jordan Velez (`POP-00153`) as `JORDAN-LEP2-1` with DeepSeek on
+  all three wakes. Preserve the economic/storefront pack's named businesses,
+  translated frame, forbidden claims, and scene boundary while keeping money,
+  labor actions, contracts, quotes, and measured trends Packet-bound.
+- **Verify:** the required business seat coexists with both civic seats and the
+  sports seat; the existing `business-desk` identity loads; sourced anchors and
+  limits survive to Wake 3; Jax, Carmen, and P Slayer's package objects remain
+  unchanged.
 - **Status:** [x] built and locally validated 2026-08-10 (codex)
 
 ## Status log — first C102 A/B
@@ -344,10 +364,10 @@ persona behavior the pilot proved useful.
 
 ## Open questions
 
-- No implementation question blocks Jax, Carmen, or P Slayer. The next evidence is their
-  unattended week. Expansion remains blocked per journalist until that person's wake models,
-  Packet contract, creative authority, movement contract, and Rhea profile are
-  encoded in an active package.
+- No implementation question blocks Jax, Carmen, P Slayer, or Jordan Velez. The
+  next evidence is their unattended week. Expansion remains blocked per
+  journalist until that person's wake models, Packet contract, creative
+  authority, movement contract, and Rhea profile are encoded in an active package.
 
 ## Changelog
 
@@ -359,3 +379,4 @@ persona behavior the pilot proved useful.
 - 2026-08-10 (codex) — Corrected the C102 product verdict after reading Jax's authority: the Article passed; the generic lexical cage overrejected signature texture. Promoted JAX-LEP2-1 with Llama/Llama/Sonnet routing, package-only fanout, load-bearing review, and persona-aware Rhea. No new model or external-write run.
 - 2026-08-10 (codex) — Made required-package pinning multi-seat and cross-desk safe, then added Carmen Delaine as the second civic LEP/2 package with her established DeepSeek route and civic-ledger authority. JAX-LEP2-1 is unchanged; no model or external-write run.
 - 2026-08-10 (codex) — Added P Slayer as the first sports LEP/2 package with all-Llama routing and a load-bearing fan-heat profile. Wired the existing fan-pulse slice into the typed Packet so players, feed anchors, charge, friction, prior-take pointer, and scene limits survive through Wake 3. Jax and Carmen are unchanged; no model or external-write run.
+- 2026-08-10 (codex) — Added Jordan Velez as JORDAN-LEP2-1 with DeepSeek across all three wakes and a load-bearing economics/labor profile. Reused the single-reporter business-desk identity and carried the existing economic/storefront slice into LEP/2 as sourced anchors plus bounded creative limits. Jax, Carmen, and P Slayer are unchanged; no model or external-write run.

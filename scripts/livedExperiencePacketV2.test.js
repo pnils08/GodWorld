@@ -166,4 +166,70 @@ assert.ok(sportsW3.manifest.approvedFacts.some(row =>
   row.text === sportsSlice.prewrite.anchorFacts[0]));
 assert.doesNotThrow(() => p.assertBase(sportsW3, 'W3'));
 
+// Jordan's economic slice carries sourced conditions and limits through LEP/2.
+const economicStory = {
+  ref: 'output/TEST_ONLY_ECONOMIC.json rows[1]',
+  label: 'TEST-ONLY storefront pressure',
+  angle: 'what the TEST-ONLY pressure means for one block',
+  kind: 'hood-cooling', hood: 'TEST-HOOD',
+  popids: ['TEST-WORKER-01'],
+  citizens: ['Test Worker — Worker, TEST-HOOD'],
+};
+const economicSlice = {
+  kind: 'economic-storefront',
+  prewrite: {
+    pulseClass: 'hood-cooling',
+    angle: 'TEST-ONLY storefront pressure reaches payroll decisions',
+    hookLine: 'TEST-ONLY counters are quieter in the supplied record',
+    namedBusinesses: ['Test Storefront'],
+    anchorFacts: [
+      'TEST-ONLY Test Storefront appears in the supplied ledger',
+      'Do not invent TEST-ONLY employee counts',
+    ],
+    forbidden: ['Do not invent employee counts', 'Do not print raw engine decimals'],
+  },
+  scene: { colorRoom: 'TEST-ONLY generic shutters and counter light only' },
+};
+const jordanReporter = { popid: 'POP-00153', name: 'Jordan Velez' };
+const economicW1 = p.buildAnglePacket({
+  cycle: 999, desk: 'business', reporter: jordanReporter, story: economicStory,
+  approach: 'TEST-ONLY follow the money', slice: economicSlice, lane: [],
+});
+assert.equal(economicW1.exposure.candidates[0].pop, 'TEST-WORKER-01');
+assert.ok(economicW1.known.some(row =>
+  row.text === economicSlice.prewrite.anchorFacts[0]));
+assert.ok(!economicW1.known.some(row =>
+  row.text === economicSlice.prewrite.anchorFacts[1]));
+assert.deepStrictEqual(economicW1.task.creativeBrief, {
+  kind: 'economic-storefront',
+  pulseClass: 'hood-cooling',
+  economicFrame: 'TEST-ONLY storefront pressure reaches payroll decisions',
+  hook: 'TEST-ONLY counters are quieter in the supplied record',
+  namedBusinesses: ['Test Storefront'],
+  forbidden: ['Do not invent employee counts', 'Do not print raw engine decimals'],
+  sceneRule: 'TEST-ONLY generic shutters and counter light only',
+});
+const economicPlan = p.validateAngleOutput({
+  focus: 'TEST-ONLY livelihood pressure', why: 'The supplied condition has a worker consequence',
+  checks: ['Check the supplied ledger record'],
+  targets: [{ pop: 'TEST-WORKER-01', question: 'What changed?', basis: 'assignment' }],
+  interpretation: 'The pressure may reach payroll', unverifiedLead: [],
+  closeQuestion: 'Who carries the supplied pressure?',
+}, economicW1);
+const jordanProfile = {
+  id: 'TEST-JORDAN', canonPolicy: 'load-bearing',
+  authorizedTexture: ['generic storefront light'],
+  textureConditions: ['texture carries no measured trend'],
+  canonBlockers: ['unsupported hiring claim'],
+};
+const economicW3 = p.buildWritePacket({
+  cycle: 999, desk: 'business', reporter: jordanReporter, story: economicStory,
+  approach: 'TEST-ONLY follow the money', angleInput: economicW1,
+  anglePlan: economicPlan, interviews: [], lane: [], reviewProfile: jordanProfile,
+});
+assert.deepStrictEqual(economicW3.task.creativeBrief, economicW1.task.creativeBrief);
+assert.ok(economicW3.manifest.approvedFacts.some(row =>
+  row.text === economicSlice.prewrite.anchorFacts[0]));
+assert.doesNotThrow(() => p.assertBase(economicW3, 'W3'));
+
 console.log('livedExperiencePacketV2.test.js: PASS');

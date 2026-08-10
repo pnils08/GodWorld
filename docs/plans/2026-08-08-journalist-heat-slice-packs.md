@@ -1,9 +1,9 @@
 ---
 title: Journalist heat-slice packs Plan
 created: 2026-08-08
-updated: 2026-08-08
+updated: 2026-08-10
 type: plan
-tags: [media, pipeline, active]
+tags: [media, business, pipeline, active]
 sources:
   - docs/research/2026-08-08-journalist-heat-slice-architecture.md
   - Mike-direct 2026-08-08 — adopt packs architecture; Hal sports historian; Anthony analytic; evening first
@@ -175,6 +175,10 @@ Shipped exemplars: Jax (stink substrate + firebrand overlay), P Slayer (sports f
 - 2026-08-08 (grok) — Mike moved Anthony up chain. Task 3 substrate + Task 4 Anthony shipped: `sportsSubstrate.js`, `buildAnthonySlice.js`; C102 pulse roster-architecture (Kelley resign) score 89, bag tools 1+2; P Slayer tests still PASS. Economic remains next P0; Hal after.
 - 2026-08-09 (grok) — Task 2 economic pack shipped: `buildEconomicSlice.js`; C102 West Oakland cooling with Oakmesh / WOCC / Crisis Coffee named from ledger+evening; cron business desk + fanout enrich. NEXT: Task 5 Hal.
 - 2026-08-09 (kimi) — Task 5 Hal found code-complete but uncommitted in the tree (grok locked out on usage, builder-directed landing). Validated (test PASS, node --check clean, smoke vs C102: Kelley re-signing score 99 era-door, close=elegy, 3 priors, 2 players) and landed as `916cccdc` with grok attribution. Live from the Mon–Fri 06:15 angle wake. NEXT: Tasks 6–7 when grok returns (or builder reassigns).
+- 2026-08-10 (codex) — pipeline.54 promoted Jordan Velez as the first business
+  wake package. `JORDAN-LEP2-1` reuses the single-reporter `business-desk`
+  identity and carries this plan's economic/storefront pack through LEP/2 as
+  sourced anchors and bounded creative limits. Local-only; Tasks 6–7 remain open.
 
 ---
 
@@ -185,3 +189,5 @@ Shipped exemplars: Jax (stink substrate + firebrand overlay), P Slayer (sports f
 - 2026-08-08 (grok) — Task 3 sports substrate + Task 4 Anthony analytic pack shipped (order revised).
 - 2026-08-09 (grok) — Task 2 Economic / storefront pack shipped.
 - 2026-08-09 (grok code; landed by kimi) — Task 5 Hal archive pulse shipped, commit 916cccdc.
+- 2026-08-10 (codex) — Connected the shipped economic/storefront pack to Jordan
+  Velez's JORDAN-LEP2-1 live package; no model or external-state run.

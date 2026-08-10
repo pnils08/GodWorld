@@ -38,6 +38,11 @@
     "model": "meta-llama/llama-3.3-70b-instruct",
     "note": "Legacy/manual fallback only. The scheduled PSLAYER-LEP2-1 package in newsroom-wake-packages.json owns live all-Llama routing. Fan heat favors confrontation over press-box calm; solo persona, not multi-voice sports-desk."
   },
+  "business-desk": {
+    "provider": "openrouter",
+    "model": "deepseek/deepseek-chat",
+    "note": "Legacy/manual fallback only. The scheduled JORDAN-LEP2-1 package in newsroom-wake-packages.json owns live all-DeepSeek routing for Jordan Velez."
+  },
   "anthony-raines": {
     "provider": "openrouter",
     "model": "deepseek/deepseek-chat",

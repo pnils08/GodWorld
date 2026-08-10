@@ -2,6 +2,8 @@
 'use strict';
 
 const assert = require('assert');
+const fs = require('fs');
+const path = require('path');
 const {
   stageStem,
   nameSlug,
@@ -136,5 +138,26 @@ assert.equal(stageRoute('civic', personaAssignment.persona, 'angle').model,
   'meta-llama/llama-3.3-70b-instruct');
 assert.equal(stageRoute('civic', personaAssignment.persona, 'write').model,
   'anthropic/claude-sonnet-5');
+
+const jordanAssignment = {
+  name: 'Jordan Velez',
+  popid: 'POP-00153',
+  desk: 'business',
+  beatDomain: 'ECONOMIC',
+  persona: 'business-desk',
+};
+const jordanContext = activateWakeContext(jordanAssignment, jordanAssignment.persona);
+assert.equal(jordanContext.packetContract, 'v2');
+assert.equal(jordanContext.wakePackage.version, 'JORDAN-LEP2-1');
+for (const file of ['IDENTITY.md', 'LENS.md', 'RULES.md']) {
+  assert.ok(fs.existsSync(path.join(__dirname, '..', '.claude', 'agents',
+    jordanAssignment.persona, file)), 'Jordan control-plane identity missing ' + file);
+}
+assert.equal(stageRoute('business', jordanAssignment.persona, 'angle').model,
+  'deepseek/deepseek-chat');
+assert.equal(stageRoute('business', jordanAssignment.persona, 'report').model,
+  'deepseek/deepseek-chat');
+assert.equal(stageRoute('business', jordanAssignment.persona, 'write').model,
+  'deepseek/deepseek-chat');
 
 console.log('cron fan-out filename handoff tests: PASS');

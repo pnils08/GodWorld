@@ -5,7 +5,8 @@ const packagesApi = require('./newsroomWakePackages');
 
 const packages = packagesApi.loadPackages();
 const active = packagesApi.activePackages(packages);
-assert.deepStrictEqual(active.map(row => row.key), ['freelance-firebrand', 'carmen-delaine', 'p-slayer']);
+assert.deepStrictEqual(active.map(row => row.key),
+  ['freelance-firebrand', 'carmen-delaine', 'p-slayer', 'business-desk']);
 
 const jax = packages['freelance-firebrand'];
 assert.equal(jax.version, 'JAX-LEP2-1');
@@ -48,16 +49,33 @@ assert.equal(pSlayer.reviewProfile.canonPolicy, 'load-bearing');
 assert.ok(pSlayer.reviewProfile.textureConditions.some(v => v.includes('prior-take')));
 assert.ok(pSlayer.reviewProfile.canonBlockers.some(v => v.includes('collective fan sentiment')));
 
+const jordan = packages['business-desk'];
+assert.equal(jordan.version, 'JORDAN-LEP2-1');
+assert.equal(jordan.requiredDaily, true);
+assert.equal(jordan.assignment.desk, 'business');
+assert.equal(jordan.assignment.name, 'Jordan Velez');
+assert.equal(jordan.assignment.popid, 'POP-00153');
+assert.equal(jordan.assignment.beatDomain, 'ECONOMIC');
+assert.equal(jordan.packetContract, 'v2');
+assert.equal(packagesApi.routeFor(jordan, 'angle').model, 'deepseek/deepseek-chat');
+assert.equal(packagesApi.routeFor(jordan, 'report').model, 'deepseek/deepseek-chat');
+assert.equal(packagesApi.routeFor(jordan, 'write').model, 'deepseek/deepseek-chat');
+assert.equal(jordan.reviewProfile.canonPolicy, 'load-bearing');
+assert.ok(jordan.reviewProfile.textureConditions.some(v => v.includes('raw engine labels')));
+assert.ok(jordan.reviewProfile.canonBlockers.some(v => v.includes('fabricated owner')));
+
 const gate = packagesApi.gateAssignments([
   { desk: 'civic', name: 'Jax Caldera', persona: 'freelance-firebrand' },
   { desk: 'civic', name: 'Carmen Delaine', persona: 'carmen-delaine' },
   { desk: 'sports', name: 'P Slayer', persona: 'p-slayer' },
-  { desk: 'business', name: 'TEST-ONLY Unpackaged Reporter', persona: 'test-only' },
+  { desk: 'business', name: 'Jordan Velez', persona: 'business-desk' },
+  { desk: 'culture', name: 'TEST-ONLY Unpackaged Reporter', persona: 'test-only' },
 ], packages);
-assert.equal(gate.eligible.length, 3);
+assert.equal(gate.eligible.length, 4);
 assert.equal(gate.eligible[0].wakePackage, 'JAX-LEP2-1');
 assert.equal(gate.eligible[1].wakePackage, 'CARMEN-LEP2-1');
 assert.equal(gate.eligible[2].wakePackage, 'PSLAYER-LEP2-1');
+assert.equal(gate.eligible[3].wakePackage, 'JORDAN-LEP2-1');
 assert.equal(gate.skipped.length, 1);
 assert.equal(gate.skipped[0].reason, 'no-active-wake-package');
 
@@ -74,11 +92,13 @@ const pinned = applyWakePackageGate([
 ], {
   civic: 'generic civic',
   sports: 'generic sports',
+  business: 'generic business',
   'freelance-firebrand': 'Jax accountability',
   'carmen-delaine': 'Carmen civic ledger',
   'p-slayer': 'P Slayer fan heat',
+  'business-desk': 'Jordan storefront ledger',
 }, packages);
-assert.equal(pinned.assignments.length, 3);
+assert.equal(pinned.assignments.length, 4);
 assert.equal(pinned.assignments[0].name, 'Jax Caldera');
 assert.equal(pinned.assignments[0].approach, 'Jax accountability');
 assert.equal(pinned.assignments[0].story.ref, 'TEST-CIVIC-ONE');
@@ -88,10 +108,13 @@ assert.equal(pinned.assignments[1].story.ref, 'TEST-CIVIC-TWO');
 assert.equal(pinned.assignments[2].name, 'P Slayer');
 assert.equal(pinned.assignments[2].approach, 'P Slayer fan heat');
 assert.equal(pinned.assignments[2].story.ref, 'TEST-SPORTS-ONE');
+assert.equal(pinned.assignments[3].name, 'Jordan Velez');
+assert.equal(pinned.assignments[3].approach, 'Jordan storefront ledger');
 assert.deepStrictEqual(pinned.pinned.map(row => row.replaced),
-  ['TEST-ONLY Civic One', 'TEST-ONLY Civic Two', 'TEST-ONLY Sports One']);
+  ['TEST-ONLY Civic One', 'TEST-ONLY Civic Two', 'TEST-ONLY Sports One',
+    'TEST-ONLY Business Reporter']);
 assert.deepStrictEqual(pinned.skipped.map(row => row.name),
-  ['TEST-ONLY Sports Two', 'TEST-ONLY Business Reporter']);
+  ['TEST-ONLY Sports Two']);
 
 // Registry order cannot let one required civic package overwrite the other.
 const reversedPackages = {
@@ -110,12 +133,13 @@ assert.equal(reversed.assignments[1].story.ref, 'TEST-JAX');
 // Desk shortfalls add missing required seats without stealing another desk.
 const shortDesk = applyWakePackageGate([
   { desk: 'civic', name: 'TEST-ONLY Civic Solo', popid: 'POP-99995', story: { ref: 'TEST-CIVIC' } },
-  { desk: 'business', name: 'TEST-ONLY Business Preserved', popid: 'POP-99994', story: { ref: 'TEST-BUSINESS' } },
+  { desk: 'business', name: 'TEST-ONLY Business Seat', popid: 'POP-99994', story: { ref: 'TEST-BUSINESS' } },
+  { desk: 'culture', name: 'TEST-ONLY Culture Preserved', popid: 'POP-99991', story: { ref: 'TEST-CULTURE' } },
 ], { civic: 'generic civic' }, packages);
-assert.equal(shortDesk.assignments.length, 3);
+assert.equal(shortDesk.assignments.length, 4);
 assert.deepStrictEqual(new Set(shortDesk.assignments.map(row => row.persona)),
-  new Set(['freelance-firebrand', 'carmen-delaine', 'p-slayer']));
-assert.ok(shortDesk.skipped.some(row => row.name === 'TEST-ONLY Business Preserved'));
+  new Set(['freelance-firebrand', 'carmen-delaine', 'p-slayer', 'business-desk']));
+assert.ok(shortDesk.skipped.some(row => row.name === 'TEST-ONLY Culture Preserved'));
 assert.equal(shortDesk.pinned.filter(row => row.replaced === null).length, 2);
 
 console.log('newsroomWakePackages.test.js: PASS');

@@ -3,7 +3,7 @@ title: "ADR-0017: Typed lived-experience Packets are the standard dynamic LLM bo
 created: 2026-08-09
 updated: 2026-08-10
 type: reference
-tags: [architecture, agents, citizens, civic, sports, media, canon, decision, active]
+tags: [architecture, agents, citizens, civic, sports, business, media, canon, decision, active]
 sources:
   - "Mike direction 2026-08-09 — facts enter canon; prose is secondary; dynamic state should be compact and structured for LLM use"
   - "Mike direction 2026-08-09 — a Cycle is not complete without its published Edition feeding RAG, NotebookLM, journalist memory, and citizen memory"
@@ -26,7 +26,7 @@ pointers:
 
 # ADR-0017: Typed lived-experience Packets are the standard dynamic LLM boundary
 
-**Status:** Accepted; Jax, Carmen, and P Slayer are the first live package-gated cohort
+**Status:** Accepted; Jax, Carmen, P Slayer, and Jordan Velez are the first live package-gated cohort
 **Date:** 2026-08-09
 **Deciders:** Mike (direction), Codex (C102 trace and pilot implementation); research-build and engine-sheet remain reviewers/landers for their surfaces
 
@@ -202,6 +202,24 @@ The third package and first sports seat is `p-slayer` (`PSLAYER-LEP2-1`):
 - the required sports package reserves only a sports seat and cannot evict either
   civic package or consume another desk's assignment.
 
+The fourth package and first business seat is `business-desk`
+(`JORDAN-LEP2-1`), the established single-reporter Jordan Velez identity:
+
+- all three wakes use `deepseek/deepseek-chat`, preserving Jordan's established
+  precise, numbers-serve-the-story route;
+- the economic/storefront slice enters LEP/2 as candidate citizens, sourced
+  anchor facts, named-business bounds, and a creative brief carrying the
+  translated economic frame, hook, forbidden claims, and scene rule;
+- Jordan may use generic storefront texture and skeptical economic analysis, but
+  texture cannot create a measured trend, hiring action, closure, interview,
+  quote, contract, payment, or named entity;
+- money, wages, rent, employee/job counts, dates, leases, contracts,
+  disbursements, observable economic actions, and current-state claims remain
+  Packet-backed load-bearing facts; raw engine labels and decimals stay out of
+  public-facing prose;
+- the required package reserves only a business seat and cannot consume a civic,
+  sports, culture, or other desk assignment.
+
 ## Rejected alternatives
 
 - **Prompt tuning only.** Rejected: the C102 defect was discarded structure and
@@ -225,3 +243,4 @@ The third package and first sports seat is `p-slayer` (`PSLAYER-LEP2-1`):
 - 2026-08-10 (codex) — Corrected the C102 verdict after persona audit: the Article passed and the generic lexical cage failed. Added the JAX-LEP2-1 live package, per-wake Llama/Llama/Sonnet routing, package-only fanout, load-bearing manifest policy, and persona-aware Rhea review.
 - 2026-08-10 (codex) — Made required-package pinning multi-seat and cross-desk safe, then added Carmen Delaine as CARMEN-LEP2-1 with her existing DeepSeek civic-ledger route and load-bearing review profile; JAX-LEP2-1 is unchanged.
 - 2026-08-10 (codex) — Added P Slayer as PSLAYER-LEP2-1 with all-Llama routing, a load-bearing fan-heat profile, and a typed fan-pulse handoff through Wake 3; Jax and Carmen are unchanged.
+- 2026-08-10 (codex) — Added Jordan Velez as JORDAN-LEP2-1 with DeepSeek across all three wakes, the existing single-reporter business-desk identity, a load-bearing economics/labor profile, and a typed economic/storefront handoff through Wake 3; Jax, Carmen, and P Slayer are unchanged.

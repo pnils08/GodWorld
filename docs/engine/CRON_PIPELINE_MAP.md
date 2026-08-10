@@ -62,6 +62,22 @@ The GodWorld pipeline follows a strict sequence from engine execution to LLM gen
   - `node scripts/photoQA.js output/photos/eXX`
   - `node scripts/generate-edition-pdf.js`
 
+### Journalist Slice Build & Delivery (newsroom fanout)
+
+Slices are built **once per cycle, at the 06:15 M–F angle wake only** (`cron-desk-run.js --stage=angle --fanout` → `newsroom-fanout.js`). No other job builds them.
+
+1. Fanout picks the day's roster from the ~20-byline pool (least-recently-used, max 6/day).
+2. Per rostered journalist, before the model call, fanout builds that persona's slice from the current cycle's engine artifacts in `output/cron-compare/` and writes it to `output/cron-compare/`:
+   - freelance-firebrand → `jax_slice_c{N}.json` (`newsroom-fanout.js:307-309`)
+   - p-slayer → `pslayer_slice_c{N}.json` (:442-443)
+   - anthony-raines → `anthony_slice_c{N}.json` (:478-479)
+   - hal-richmond → `hal_slice_c{N}.json` (:514-515)
+   - business desk → `economic_slice_c{N}.json` (:552-553)
+   - evening consumers → `evening_slice_c{N}.json` (:591-592)
+   - If the slice file already exists for the cycle, it is reused, not rebuilt (:430, :467).
+3. `cron-desk-run.js` injects the slice content into the journalist's prompt packet (:395-624) on top of the desk lane. Journalists without a slice builder get the desk lane only.
+4. **13:15 report and 18:15 write wakes do not rebuild** — they `load*Slice` the same file written at 06:15. Same slice, all three wakes, one per cycle per persona. Anything landing after 06:15 (e.g. that day's civic datawakes if they run late) is not in the slice wakes 2/3 consume.
+
 ---
 
 ## 3. Rate-Limiting & Delays

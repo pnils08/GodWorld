@@ -2,7 +2,7 @@
 
 **This file is canonical for open/closed work** (S207). Pointer-only: one line per job, detail lives in the pointer doc — never here (S286 hard rule, Mike-direct).
 
-**Status:** ACTIVE (building) | **Last Updated:** 2026-08-10 — pipeline.54 Jax live wake package wired locally (codex); unattended scheduled proof remains open.
+**Status:** ACTIVE (building) | **Last Updated:** 2026-08-09 — engine.94 Track A code-only safety correction sandbox-proven at C116 (codex); Track B needs-info on research.17.
 **Filing protocol (S212):** semantic groups + pointer-only entries — see [[rollout-rules]] §3–§5 (taxonomy, add, close). Full design: [[../adr/0005-rollout-plan-structure]].
 **North star:** `docs/ARCHITECTURE_VISION.md` — Jarvis + persistent sessions. Everything we build points there.
 **Completed phase details:** [[engine/ROLLOUT_ARCHIVE]] — read on demand, not at boot.
@@ -56,7 +56,6 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | pipeline.51 | NotebookLM audio-direction injection + archive-query canon hook in desk wake (51b) — landed S358; watching next scheduled daily + M-F + Sat runs | in-progress | engine-sheet | [[../research/2026-08-07-notebooklm-audio-overview-direction]] |
 | pipeline.52 | Journalist heat-slice packs (grok) — evening + economic + sports substrate + Anthony shipped; next Hal | in-progress | research-build | [[../plans/2026-08-08-journalist-heat-slice-packs]] |
 | pipeline.53 | Citizen day digest (kimi) — 24h people-slice folded into the 8am notebooklmDailyNews bounded source, written + audio per Mike 2026-08-09; engine-sheet lands config rebalance | in-progress | engine-sheet | [[../plans/2026-08-09-citizen-day-digest]] |
-| pipeline.54 | ADR-0017 Jax live cohort (codex) — package-only fanout; LEP/2 W1-W2 Llama, W3 Sonnet 5; persona-aware Rhea; next observe unattended week and add packages | in-progress | research-build / engine-sheet | [[../plans/2026-08-09-three-wake-lived-packet-pilot]] + [[../adr/0017-typed-lived-experience-packets]] |
 
 ### engine.* — Engine code, ledger, schema
 
@@ -90,7 +89,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.99 | Neighborhood truth-source migration (ADR-0016 first application) — one canonical hood set from Neighborhood_Map + drift detector; 53 structural files across ~8 copy-pasted namespaces. Cohort 1 then re-price; a week where discovery is the output | ready | engine-sheet | [[../plans/2026-08-02-neighborhood-truth-source-migration]] + [[../adr/0016-data-ledgers-are-the-truth-source]] |
 | engine.101 | Sheet↔cron loop closure (kimi) — ALL SHIPPED: family perception, bond write-back (intake A–K + drain nudge), health slice (loadHealthState wired into wake/voice/exchange prompts 2026-08-10) | done-pending-archive | kimi | [[../research/2026-08-03-game-environment-review]] §Addendum |
 | engine.103 | WealthLevel v15 — code landed + live column direct-written + bench C117 confirmed (952/956 exact) S363; open: 4 reader files eyeball + live deploy rides next wave | in-progress | engine-sheet / research-build | [[../plans/2026-08-09-wealthlevel-networth-bands]] |
-| engine.102 | City/hood cascade integrity — T1–T8 done; W4 bench-proven C114–C115 (kimi, criterion 5 PASS); T9 cron rate rule landed; open: /sift guidance half (control-plane, ownerless post-Claude) | in-progress | kimi | [[../plans/2026-08-08-engine-102-cascade-consistency]] + [[../research/2026-08-07-city-neighborhood-cascade-team-review]] |
+| engine.102 | City/hood cascade integrity — T1–T8 done; W4 bench-proven C114–C115 (kimi, criterion 5 PASS); T9 cron rule landed + /sift skill diff drafted (output/kimi/engine102); open: control-plane land only | in-progress | kimi | [[../plans/2026-08-08-engine-102-cascade-consistency]] + [[../research/2026-08-07-city-neighborhood-cascade-team-review]] |
 | engine.93 | Per-hood political consequence — ALL BUILDS SHIPPED S349 (Tasks 5-7 fold + Tasks 9-10 commute matrix/housing response, 3 sandbox suites, mutation-tested); open: live-cycle proof only; capital pool deferred to civic.14 | in-progress | engine-sheet | [[../plans/2026-07-31-per-hood-political-consequence]] |
 | engine.94 | Citizen memory and approval ceiling — Track A code-only self-arm plus grief and approval mechanics sandbox-proven through C116. Track B typed grudge, ambition, and folk-memory design remains gated on research.17 and a Mike design session | needs-info | research-build / engine-sheet | [[../plans/2026-07-31-citizen-memory-perception]] |
 | engine.95 | Platform ceiling resilience — instrumentation live + wall baselined at 34–38% of 6-min wall (Tasks 1–3, 5–7 complete); remaining build: Task 4 checkpoint/resume + Task 5 append-dedup, Mike decisions locked, design + constraints in plan | in-progress | engine-sheet | [[../plans/2026-07-31-platform-ceiling-resilience]] |

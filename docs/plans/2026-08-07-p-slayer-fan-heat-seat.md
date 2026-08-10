@@ -1,7 +1,7 @@
 ---
 title: P Slayer fan-heat seat Plan
 created: 2026-08-07
-updated: 2026-08-07
+updated: 2026-08-10
 type: plan
 tags: [media, sports, p-slayer, active]
 sources:
@@ -62,6 +62,11 @@ pointers:
 
 ## Status log
 
+- 2026-08-10 (codex) — pipeline.54 added `PSLAYER-LEP2-1`: required sports seat,
+  Llama 3.3 70B on all three wakes, load-bearing fan-heat review profile, and a
+  typed fan-pulse handoff carrying player candidates, feed anchors, charge,
+  friction, prior-take pointer, and scene limits through Wake 3. Local-only;
+  Task 5 remains open.
 - 2026-08-07 (grok) — Paulson cron-exclude reversed; p-slayer persona + agent package; plan filed.
 - 2026-08-07 (grok) — Sibling seats filed: [[2026-08-07-anthony-hal-solo-sports-seats]] (Anthony analytic + Hal legacy).
 - 2026-08-07 (grok) — Charge bag: `docs/media/P_SLAYER_CHARGE_BAG.md` + hard inject (variety of heat).
@@ -71,6 +76,8 @@ pointers:
 - 2026-08-07 (grok) — Initial plan + Tasks 1–2 shipped in scripts; agent package on disk.
 - 2026-08-07 (grok) — Pointed sibling plan for anthony-raines + halsolo seats.
 - 2026-08-07 (grok) — P Slayer charge bag hard-injected.
+- 2026-08-10 (codex) — Added the first sports wake package and repaired the
+  LEP/2 fan-pulse handoff; no model, Sheet, publish, or other external run.
 - 2026-08-07 (mags, research-build S357) — Task 2 closed: agent package landed, commit `0d2179b4`. Remaining: Tasks 3 (fan-pulse slice), 4 (weekend wake-pool verify), 5 (media legacy note).
 - 2026-08-07 (mags, research-build S357) — Task 4 closed: buildPool() run live, all four solo-seat POPIDs in pool. Remaining: Tasks 3 (fan-pulse slice) + 5 (media legacy note).
 - 2026-08-07 (grok) — Task 3 shipped: `buildPSlayerSlice.js` (+ tests), cron angle/write inject + fanout enrich. C102 top pulse = Kelley re-sign (Hate the Move / I Was Wrong / Friction), foil 7.1war, priors c95/c94/c92. Remaining: Task 5 (media legacy note).

@@ -103,4 +103,67 @@ assert.deepStrictEqual(jaxAudit.errors, []);
 assert.ok(jaxAudit.observations.some(e => e.code === 'UNAPPROVED_NUMBER'));
 assert.ok(jaxAudit.observations.some(e => e.code === 'UNAPPROVED_QUOTE'));
 
+// P Slayer's fan-pulse slice is a typed LEP/2 input, not side-channel prompt text.
+const sportsStory = {
+  ref: 'output/TEST_ONLY_SPORTS.json rows[1]',
+  label: 'TEST-ONLY Test Club won 4-3',
+  angle: 'what the TEST-ONLY result means to the fan seat',
+  kind: 'result-pulse',
+};
+const sportsSlice = {
+  players: [{
+    popid: 'TEST-PLAYER-01', name: 'Test Player', role: 'TEST-ONLY Player',
+    neighborhood: 'TEST-HOOD', why: 'feed-name',
+  }],
+  prewrite: {
+    anchorFacts: ['TEST-ONLY Sports Feed: Test Club won 4-3'],
+    priorTake: 'TEST-ONLY prior take (output/TEST_ONLY_PRIOR.md)',
+  },
+  charge: {
+    fanCharge: 'defiance',
+    bagModes: [{ id: 3, name: 'Friction Pivot' }],
+    centralFeeling: 'TEST-ONLY relief fighting with doubt',
+  },
+  friction: { frame: 'TEST-ONLY one win does not settle the argument' },
+  scene: { colorRoom: 'TEST-ONLY unnamed bleacher color only' },
+};
+const pReporter = { popid: 'POP-00008', name: 'P Slayer' };
+const sportsW1 = p.buildAnglePacket({
+  cycle: 999, desk: 'sports', reporter: pReporter, story: sportsStory,
+  approach: 'TEST-ONLY first-person fan heat', slice: sportsSlice, lane: [],
+});
+assert.equal(sportsW1.exposure.candidates[0].pop, 'TEST-PLAYER-01');
+assert.ok(sportsW1.known.some(row => row.text === sportsSlice.prewrite.anchorFacts[0]));
+assert.deepStrictEqual(sportsW1.task.creativeBrief, {
+  kind: 'fan-heat',
+  fanCharge: 'defiance',
+  bagModes: ['3 Friction Pivot'],
+  friction: 'TEST-ONLY one win does not settle the argument',
+  centralFeeling: 'TEST-ONLY relief fighting with doubt',
+  priorTake: 'TEST-ONLY prior take (output/TEST_ONLY_PRIOR.md)',
+  sceneRule: 'TEST-ONLY unnamed bleacher color only',
+});
+const sportsPlan = p.validateAngleOutput({
+  focus: 'TEST-ONLY fan consequence', why: 'The supplied result leaves tension',
+  checks: ['Check the supplied sports feed'],
+  targets: [{ pop: 'TEST-PLAYER-01', question: 'What changed?', basis: 'feed-name' }],
+  interpretation: 'The result may sharpen the argument', unverifiedLead: [],
+  closeQuestion: 'Does one result change the fan verdict?',
+}, sportsW1);
+const pProfile = {
+  id: 'TEST-P-SLAYER', canonPolicy: 'load-bearing',
+  authorizedTexture: ['unnamed bleacher color'],
+  textureConditions: ['texture carries no sports fact'],
+  canonBlockers: ['unsupported roster move'],
+};
+const sportsW3 = p.buildWritePacket({
+  cycle: 999, desk: 'sports', reporter: pReporter, story: sportsStory,
+  approach: 'TEST-ONLY first-person fan heat', angleInput: sportsW1,
+  anglePlan: sportsPlan, interviews: [], lane: [], reviewProfile: pProfile,
+});
+assert.deepStrictEqual(sportsW3.task.creativeBrief, sportsW1.task.creativeBrief);
+assert.ok(sportsW3.manifest.approvedFacts.some(row =>
+  row.text === sportsSlice.prewrite.anchorFacts[0]));
+assert.doesNotThrow(() => p.assertBase(sportsW3, 'W3'));
+
 console.log('livedExperiencePacketV2.test.js: PASS');

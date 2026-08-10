@@ -10,7 +10,7 @@
     "name": "P Slayer",
     "popid": "POP-00008",
     "beatDomain": "SPORTS",
-    "note": "Fan columnist (Grok heat seat, parallel to Jax). Die-hard fan voice \u2014 hate the signing / I was wrong arc. NOT multi-voice sports-desk. Wall cp-POP-00008. Model: desk-model-map p-slayer."
+    "note": "Fan columnist (Grok heat seat, parallel to Jax). Die-hard fan voice \u2014 hate the signing / I was wrong arc. NOT multi-voice sports-desk. Wall cp-POP-00008. Scheduled routing and Rhea authority come from newsroom-wake-packages.json; desk-model-map is legacy/manual fallback."
   },
   "anthony-raines": {
     "name": "Anthony Raines",

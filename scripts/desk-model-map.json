@@ -36,7 +36,7 @@
   "p-slayer": {
     "provider": "openrouter",
     "model": "meta-llama/llama-3.3-70b-instruct",
-    "note": "P.Slayer fan-heat seat (grok 2026-08-07). Same heat band as firebrand \u2014 confrontation over press-box calm. Solo persona, not multi-voice sports-desk."
+    "note": "Legacy/manual fallback only. The scheduled PSLAYER-LEP2-1 package in newsroom-wake-packages.json owns live all-Llama routing. Fan heat favors confrontation over press-box calm; solo persona, not multi-voice sports-desk."
   },
   "anthony-raines": {
     "provider": "openrouter",

@@ -300,7 +300,8 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
   const rested = [];
   const tally = interviewTally();
   const packetCandidates = story
-    ? livedPacket.candidateRows(story, angleArt && angleArt.jaxSlice).reduce((m, c) => m.set(c.pop, c), new Map())
+    ? livedPacket.candidateRows(story, angleArt && (angleArt.jaxSlice || angleArt.pslayerSlice))
+      .reduce((m, c) => m.set(c.pop, c), new Map())
     : new Map();
   const push = (pop, label, ignoreRest) => {
     if (!pop || seen.has(pop) || asks.length >= QUOTE_CITIZEN_CAP) return;
@@ -1308,7 +1309,8 @@ async function runAngle(assign) {
     }
     if (PACKET_ACTIVE) {
       inputPacket = livedPacket.buildAnglePacket({
-        cycle, desk, reporter: asker, story, approach, slice: jaxSlice, lane,
+        cycle, desk, reporter: asker, story, approach,
+        slice: jaxSlice || pslayerSlice, lane,
       });
       ask = livedPacket.prompt(inputPacket);
     }

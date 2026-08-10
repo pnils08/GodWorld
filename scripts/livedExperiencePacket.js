@@ -47,7 +47,9 @@ function assertBase(packet, wake) {
 }
 
 function candidateRows(story, slice) {
-  const fromSlice = Array.isArray(slice && slice.citizens) ? slice.citizens : [];
+  const fromSlice = Array.isArray(slice && slice.citizens)
+    ? slice.citizens
+    : (Array.isArray(slice && slice.players) ? slice.players : []);
   if (fromSlice.length) return fromSlice.map(c => ({
     pop: c.popid || null,
     name: c.name || null,
@@ -62,6 +64,23 @@ function candidateRows(story, slice) {
     return { pop: pops[i] || null, name: parts[0] || null, profile: line,
       why: 'assignment', role: parts[1] || null, hood: story.hood || null };
   });
+}
+
+function creativeBriefFromSlice(slice) {
+  if (!slice || !slice.charge) return null;
+  const brief = {
+    kind: 'fan-heat',
+    fanCharge: clean(slice.charge.fanCharge, 80) || null,
+    bagModes: (slice.charge.bagModes || []).slice(0, 3).map(mode =>
+      clean([mode && mode.id, mode && mode.name].filter(Boolean).join(' '), 120)).filter(Boolean),
+    friction: clean(slice.friction && slice.friction.frame, 500) || null,
+    centralFeeling: clean(slice.charge.centralFeeling, 500) || null,
+    priorTake: clean(slice.prewrite && slice.prewrite.priorTake, 300) || null,
+    sceneRule: clean(slice.scene && slice.scene.colorRoom, 500) || null,
+  };
+  return Object.values(brief).some(value => Array.isArray(value) ? value.length : value)
+    ? brief
+    : null;
 }
 
 function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane }) {
@@ -81,14 +100,22 @@ function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane 
   if (slice && slice.scene && slice.scene.neighborhoodTexture) {
     known.push(refClaim('FACT', slice.scene.neighborhoodTexture, src));
   }
+  for (const fact of (slice && slice.prewrite && slice.prewrite.anchorFacts) || []) {
+    const text = clean(fact, 500);
+    if (text && !known.some(claim => claim.text === text && claim.src === clean(src, 300))) {
+      known.push(refClaim('FACT', text, src));
+    }
+  }
   const candidates = candidateRows(story, slice).slice(0, 12);
+  const creativeBrief = creativeBriefFromSlice(slice);
   const packet = {
     v: VERSION,
     wake: 'W1',
     actor: { id: reporter && reporter.popid || null, name: reporter && reporter.name || null,
       role: 'desk reporter', desk },
     task: { goal: 'Plan one Article chase without choosing a new assignment',
-      assignment: clean(story.angle || story.label, 500), approach: clean(approach, 900) || null },
+      assignment: clean(story.angle || story.label, 500), approach: clean(approach, 900) || null,
+      ...(creativeBrief ? { creativeBrief } : {}) },
     signal: { kind: story.kind || 'story-signal', hood: story.hood || null,
       score: story.stinkScore == null ? null : story.stinkScore, src },
     exposure: { basis: ['editor-assignment', 'desk-signal'],
@@ -257,7 +284,10 @@ function buildWritePacket({ cycle, desk, reporter, story, approach, angleInput, 
       approach: clean(approach, 900).replace(/Scene color is yours\s*\([^)]*\)\s*so long as it contradicts nothing on this slice\.?/i, '').trim() || null,
       voice: /jax|caldera/i.test(reporter && reporter.name || '')
         ? 'Short, hot, first-person accountability column. Open on the sourced contradiction, press the supplied accountable subject, and end on the plan closeQuestion. No generic revitalization plea.'
-        : null },
+        : null,
+      ...(angleInput && angleInput.task && angleInput.task.creativeBrief
+        ? { creativeBrief: angleInput.task.creativeBrief }
+        : {}) },
     signal: { kind: story && story.kind || 'story-signal', hood: story && story.hood || null,
       src: story && story.ref || 'assignment',
       plan: anglePlan ? {

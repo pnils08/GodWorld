@@ -3,7 +3,7 @@ title: "ADR-0017: Typed lived-experience Packets are the standard dynamic LLM bo
 created: 2026-08-09
 updated: 2026-08-10
 type: reference
-tags: [architecture, agents, citizens, civic, media, canon, decision, active]
+tags: [architecture, agents, citizens, civic, sports, media, canon, decision, active]
 sources:
   - "Mike direction 2026-08-09 — facts enter canon; prose is secondary; dynamic state should be compact and structured for LLM use"
   - "Mike direction 2026-08-09 — a Cycle is not complete without its published Edition feeding RAG, NotebookLM, journalist memory, and citizen memory"
@@ -26,7 +26,7 @@ pointers:
 
 # ADR-0017: Typed lived-experience Packets are the standard dynamic LLM boundary
 
-**Status:** Accepted; Jax and Carmen are the first live package-gated cohort
+**Status:** Accepted; Jax, Carmen, and P Slayer are the first live package-gated cohort
 **Date:** 2026-08-09
 **Deciders:** Mike (direction), Codex (C102 trace and pilot implementation); research-build and engine-sheet remain reviewers/landers for their surfaces
 
@@ -186,6 +186,22 @@ The second package is `carmen-delaine` (`CARMEN-LEP2-1`):
 - the two required civic packages reserve separate same-desk seats. Neither may
   replace the other, and a civic shortfall never consumes another desk's slot.
 
+The third package and first sports seat is `p-slayer` (`PSLAYER-LEP2-1`):
+
+- all three wakes use `meta-llama/llama-3.3-70b-instruct`, preserving the
+  established confrontation-first heat route;
+- the sports fan-pulse slice enters LEP/2 as player candidates, immutable feed
+  anchor facts, and a bounded creative brief carrying charge, bag modes,
+  friction, central feeling, prior-take pointer, and scene rule;
+- P Slayer may use first-person I/we rhetoric, unnamed fan-setting texture,
+  metaphor, and rhetorical counterargument without turning them into measured
+  collective sentiment, sourced quotes, or new events;
+- roster moves, results, records, stats, numbers, contracts, injuries, named
+  entities, player/coach/front-office acts, and attributed statements remain
+  Packet-backed load-bearing claims;
+- the required sports package reserves only a sports seat and cannot evict either
+  civic package or consume another desk's assignment.
+
 ## Rejected alternatives
 
 - **Prompt tuning only.** Rejected: the C102 defect was discarded structure and
@@ -208,3 +224,4 @@ The second package is `carmen-delaine` (`CARMEN-LEP2-1`):
 - 2026-08-09 (codex) — LEP/2 C102 proof: Wake 2 produced three bounded quotes plus one institutional abstention; Wake 3 invented a bar/bartender scene and altered a signed metric, then failed closed before scoring. Manifest containment works; semantic prose control remains open.
 - 2026-08-10 (codex) — Corrected the C102 verdict after persona audit: the Article passed and the generic lexical cage failed. Added the JAX-LEP2-1 live package, per-wake Llama/Llama/Sonnet routing, package-only fanout, load-bearing manifest policy, and persona-aware Rhea review.
 - 2026-08-10 (codex) — Made required-package pinning multi-seat and cross-desk safe, then added Carmen Delaine as CARMEN-LEP2-1 with her existing DeepSeek civic-ledger route and load-bearing review profile; JAX-LEP2-1 is unchanged.
+- 2026-08-10 (codex) — Added P Slayer as PSLAYER-LEP2-1 with all-Llama routing, a load-bearing fan-heat profile, and a typed fan-pulse handoff through Wake 3; Jax and Carmen are unchanged.

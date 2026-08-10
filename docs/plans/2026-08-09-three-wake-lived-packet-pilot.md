@@ -27,10 +27,11 @@ pointers:
 **Architecture:** Explicit `--packet-contract=v1|v2` remains an isolated,
 samples-only evaluation namespace and requires `--no-gate`. Live scheduled
 adoption is separate and package-gated through
-`scripts/newsroom-wake-packages.json`. Jax's `JAX-LEP2-1` package automatically
-uses LEP/2, zero live writer tools, per-wake model routing, and a load-bearing
-manifest interpreted by persona-aware Rhea. Scheduled journalists without an
-active package are skipped; the legacy generic prompt is not a fallback.
+`scripts/newsroom-wake-packages.json`. Jax's `JAX-LEP2-1` and Carmen's
+`CARMEN-LEP2-1` packages automatically use LEP/2, zero live writer tools,
+per-wake model routing, and load-bearing manifests interpreted by persona-aware
+Rhea. Scheduled journalists without an active package are skipped; the legacy
+generic prompt is not a fallback.
 
 **Terminal:** research-build / engine-sheet review; implementation and local proof by codex
 
@@ -158,10 +159,11 @@ The final scored treatment Article is
   variable at a time. Civic and citizen cron adoption are later applications,
   not part of this pilot.
 - **Status:** [x] v1 was not promoted. LEP/2 plus a persona-aware load-bearing
-  review profile is promoted for Jax only. The C102 Article preserved the
+  review profile was first promoted for Jax. The C102 Article preserved the
   accountability angle, created street life, and moved the sim through public
   pressure without a false named entity or false official act. Expansion is by
-  completed journalist package, never generic fallback.
+  completed journalist package, never generic fallback; Carmen became the
+  second package in Task 14.
 
 ### Task 9: Build the LEP/2 claim-manifest refinement
 
@@ -220,15 +222,30 @@ The final scored treatment Article is
   reviewer-lane boundary; exhaustive evaluation behavior still fails closed.
 - **Status:** [x] built and locally validated 2026-08-10 (codex)
 
-### Task 13: Observe the unattended Jax week
+### Task 13: Observe the unattended packaged cohort
 
 - **Steps:** Do not run another synthetic Article. Inspect scheduled angle,
   report, write, Rhea, and staging artifacts after the next unattended wakes.
-  Grade canon integrity, street life, and sim movement separately; add the next
+  Grade canon integrity, street life, and sim movement separately; add another
   journalist package only after its persona authority and review profile exist.
-- **Verify:** Jax is the only active scheduled package; all other assignments are
-  logged as package-gate skips; no generic wake executes.
-- **Status:** [ ] unattended observation begins with the next M-F wake
+- **Verify:** Jax and Carmen occupy separate civic seats; all other assignments
+  are logged as package-gate skips; no generic wake executes.
+- **Status:** [ ] unattended observation begins with the next M-F wake for the
+  two-package civic cohort
+
+### Task 14: Add the second civic package without evicting Jax
+
+- **Files:**
+  - `scripts/newsroom-fanout.js` — reserve active package seats before pinning
+  - `scripts/newsroom-wake-packages.json` — add Carmen's package and authority
+  - `scripts/newsroomWakePackages.test.js` — same-desk and cross-desk regressions
+- **Steps:** Make required-package replacement aware of every active package
+  identity; add Carmen Delaine (`POP-00011`) as `CARMEN-LEP2-1`; preserve
+  `JAX-LEP2-1` unchanged.
+- **Verify:** both required civic seats coexist regardless of registry order; a
+  missing civic seat is added without replacing another desk; package, handoff,
+  LEP/2, Rhea, syntax, and documentation lint checks pass.
+- **Status:** [x] built and locally validated 2026-08-10 (codex)
 
 ## Status log — first C102 A/B
 
@@ -306,8 +323,8 @@ persona behavior the pilot proved useful.
 
 ## Open questions
 
-- No implementation question blocks Jax. The next evidence is his unattended
-  week. Expansion remains blocked per journalist until that person's wake models,
+- No implementation question blocks Jax or Carmen. The next evidence is their
+  unattended week. Expansion remains blocked per journalist until that person's wake models,
   Packet contract, creative authority, movement contract, and Rhea profile are
   encoded in an active package.
 
@@ -319,3 +336,4 @@ persona behavior the pilot proved useful.
 - 2026-08-09 (codex) — Built the isolated LEP/2 next variable from the blind review: claim IDs, finite Wake 2 lattice, code-rendered quote IDs, exhaustive W3 manifest, and pre-score number/direct-quote audit. Local-only; paid three-wake rerun remains pending.
 - 2026-08-09 (codex) — Ran the fixed LEP/2 C102 comparison. W2 eliminated free quote prose; W3 nevertheless invented a bar/bartender scene and altered a signed metric, then failed closed at the manifest audit before scoring or sample routing. Next variable: code-rendered W3 block plan.
 - 2026-08-10 (codex) — Corrected the C102 product verdict after reading Jax's authority: the Article passed; the generic lexical cage overrejected signature texture. Promoted JAX-LEP2-1 with Llama/Llama/Sonnet routing, package-only fanout, load-bearing review, and persona-aware Rhea. No new model or external-write run.
+- 2026-08-10 (codex) — Made required-package pinning multi-seat and cross-desk safe, then added Carmen Delaine as the second civic LEP/2 package with her established DeepSeek route and civic-ledger authority. JAX-LEP2-1 is unchanged; no model or external-write run.

@@ -26,7 +26,7 @@ pointers:
 
 # ADR-0017: Typed lived-experience Packets are the standard dynamic LLM boundary
 
-**Status:** Accepted; Jax is the first live package-gated cohort
+**Status:** Accepted; Jax and Carmen are the first live package-gated cohort
 **Date:** 2026-08-09
 **Deciders:** Mike (direction), Codex (C102 trace and pilot implementation); research-build and engine-sheet remain reviewers/landers for their surfaces
 
@@ -152,7 +152,7 @@ causality, collective sentiment, and absence claims still require a stronger
 sentence/claim enforcement layer and the independent editorial gate. Model
 quality remains a prose and compliance variable, never the canon authority.
 
-## First live package: Jax Caldera
+## First live packages
 
 `scripts/newsroom-wake-packages.json` is the live registry. The first package is
 `freelance-firebrand` (`JAX-LEP2-1`):
@@ -173,6 +173,18 @@ Its `7th Street`, bar, and anonymous bartender are signature Jax texture. The
 pre-Rhea lexical rejection was the failed component. Remaining tuning issues are
 duplicate lattice language, exact framing of council responsibility, and ending
 the substantive copy on Jax's unanswered question.
+
+The second package is `carmen-delaine` (`CARMEN-LEP2-1`):
+
+- all three wakes use `deepseek/deepseek-chat`, preserving Carmen's established
+  precise-accretion route;
+- LEP/2 and zero live writer tools remain the evidence boundary;
+- Carmen may connect Packet-backed votes, Initiatives, money, and clocks to a
+  Packet-backed named resident consequence, with unnamed street color only;
+- named people and places, nine-seat vote math, official acts or absence,
+  budgets, timelines, and implementation state must remain Packet-backed;
+- the two required civic packages reserve separate same-desk seats. Neither may
+  replace the other, and a civic shortfall never consumes another desk's slot.
 
 ## Rejected alternatives
 
@@ -195,3 +207,4 @@ the substantive copy on Jax's unanswered question.
 - 2026-08-09 (codex) — Added the LEP/2 claim-manifest refinement from the first A/B and DeepSeek blind review: finite Wake 2 lattice, code-rendered quote IDs, and fail-closed number/direct-quote audit. No API or live run performed.
 - 2026-08-09 (codex) — LEP/2 C102 proof: Wake 2 produced three bounded quotes plus one institutional abstention; Wake 3 invented a bar/bartender scene and altered a signed metric, then failed closed before scoring. Manifest containment works; semantic prose control remains open.
 - 2026-08-10 (codex) — Corrected the C102 verdict after persona audit: the Article passed and the generic lexical cage failed. Added the JAX-LEP2-1 live package, per-wake Llama/Llama/Sonnet routing, package-only fanout, load-bearing manifest policy, and persona-aware Rhea review.
+- 2026-08-10 (codex) — Made required-package pinning multi-seat and cross-desk safe, then added Carmen Delaine as CARMEN-LEP2-1 with her existing DeepSeek civic-ledger route and load-bearing review profile; JAX-LEP2-1 is unchanged.

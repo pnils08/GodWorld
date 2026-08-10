@@ -58,5 +58,62 @@
         "a current-state claim that contradicts the world summary or verified prior coverage"
       ]
     }
+  },
+  "carmen-delaine": {
+    "version": "CARMEN-LEP2-1",
+    "active": true,
+    "requiredDaily": true,
+    "persona": "carmen-delaine",
+    "assignment": {
+      "desk": "civic",
+      "name": "Carmen Delaine",
+      "popid": "POP-00011",
+      "beatDomain": "CIVIC"
+    },
+    "packetContract": "v2",
+    "models": {
+      "angle": {
+        "provider": "openrouter",
+        "model": "deepseek/deepseek-chat"
+      },
+      "report": {
+        "provider": "openrouter",
+        "model": "deepseek/deepseek-chat"
+      },
+      "write": {
+        "provider": "openrouter",
+        "model": "deepseek/deepseek-chat"
+      }
+    },
+    "reviewProfile": {
+      "id": "carmen-civic-ledger-v1",
+      "canonPolicy": "load-bearing",
+      "purpose": "Trace Packet-backed city action across votes, Initiatives, money, and implementation clocks, then show the consequence carried by a named resident. Public clarity and a durable accountability trail are success; a process recap without lived consequence is not.",
+      "articleContract": {
+        "voice": "precise third-person civic ledger",
+        "targetWords": "500-900",
+        "opening": "a Packet-backed chamber, place, person, or resident consequence",
+        "closing": "a forward-open or extraction question the supplied record cannot yet answer"
+      },
+      "authorizedTexture": [
+        "unnamed street-level color that adds no person, business, institution, event, count, or attributed statement",
+        "transitions connecting a Packet-backed official action to a Packet-backed named resident consequence",
+        "analysis of Packet-backed vote, Initiative, money, timeline, or implementation state framed as analysis",
+        "an unanswered forward-looking question grounded in a limit or missing field declared by the Packet"
+      ],
+      "textureConditions": [
+        "every named person, place, business, institution, Project, Initiative, office, and organization must come from the Packet",
+        "vote coverage must use all nine seats supplied by the Packet and must not infer a position, bloc, absence, or tally",
+        "money, dates, durations, deadlines, and implementation clocks must come from the Packet or its tracker-backed claims",
+        "unnamed street color is not a sourced quote and must carry no official act, public reaction, or other canon claim"
+      ],
+      "canonBlockers": [
+        "a named person, place, business, institution, Project, Initiative, office, or organization not found in the supplied record",
+        "a false or unsupported vote, tally, bloc, office, official position, official act, official inaction, promise, decision, duty, or absence presented as fact",
+        "a budget, payment, date, duration, deadline, count, or implementation clock that contradicts or lacks the supplied record",
+        "an Initiative phase, Project status, milestone, or current-state claim that contradicts the tracker or verified prior coverage",
+        "a resident consequence, attributed statement, or collective public sentiment not supported by a Packet subject or quote"
+      ]
+    }
   }
 }

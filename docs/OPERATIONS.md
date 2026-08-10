@@ -84,8 +84,9 @@ The 06:00 digest summarizes the prior 36 hours. Monday through Friday, angle,
 report, and write cron entries consume the daily fanout. ADR-0017 now gates that
 fanout by `scripts/newsroom-wake-packages.json`: only active journalist packages
 wake, and missing packages are logged and skipped with no generic fallback. Jax
-Caldera is the first active cohort. His write stage runs the persona-aware Rhea
-API gate and leaves output staged or flagged behind the probation wall.
+Caldera and Carmen Delaine are the first two active packages and occupy separate
+civic seats. Their write stages run the persona-aware Rhea API gate and leave
+output staged or flagged behind the probation wall.
 
 ### NotebookLM Newsroom Brief (Daily)
 Builds a source-grounded listening brief. The brief is a newsroom aid and is not

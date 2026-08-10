@@ -186,20 +186,29 @@ function approachFor(approachMap, desk, personaSlug) {
 }
 
 // ADR-0017 live expansion gate. A scheduled journalist must own an active wake
-// package; the old generic prompt is not a fallback. A requiredDaily package is
-// pinned into its desk before filtering so the first probation seat (Jax) wakes
-// even when ordinary least-recently-used rotation or stink cooldown would omit it.
+// package; the old generic prompt is not a fallback. Required packages are
+// pinned into their own desk before filtering, and an active package seat is
+// never used as another package's replacement candidate. This keeps multiple
+// required seats on one desk independent without stealing capacity cross-desk.
 function applyWakePackageGate(assignments, approachMap, packagesOverride) {
   const packagesApi = require('./newsroomWakePackages');
   const packages = packagesOverride || packagesApi.loadPackages();
   const work = (assignments || []).map(row => Object.assign({}, row));
   const pinned = [];
+  const active = packagesApi.activePackages(packages);
+  const matchesPackage = (row, key, value) => Boolean(row) && (
+    row.persona === key ||
+    row.popid === value.assignment.popid ||
+    row.name === value.assignment.name
+  );
+  const isReservedPackageSeat = row => active.some(({ key, value }) =>
+    matchesPackage(row, key, value));
 
-  for (const { key, value } of packagesApi.activePackages(packages)) {
-    let index = work.findIndex(row => row.persona === key ||
-      row.popid === value.assignment.popid || row.name === value.assignment.name);
+  for (const { key, value } of active) {
+    let index = work.findIndex(row => matchesPackage(row, key, value));
     if (index < 0 && value.requiredDaily) {
-      index = work.findIndex(row => row.desk === value.assignment.desk);
+      index = work.findIndex(row => row.desk === value.assignment.desk &&
+        !isReservedPackageSeat(row));
       const previous = index >= 0 ? work[index] : {};
       const replacement = Object.assign({}, previous, value.assignment, {
         persona: key,

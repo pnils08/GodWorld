@@ -362,6 +362,19 @@ record supplies the absence; and place Jax's unanswered question at the actual
 end. A code-rendered prose block plan is rejected because it would flatten the
 persona behavior the pilot proved useful.
 
+## Status log — first C103 unattended angle wake
+
+The 2026-08-10 scheduled angle fanout proved the four required seats coexisted:
+Carmen and P Slayer completed, while Jax and Jordan failed before artifact
+write. Jax's selected audit label exactly repeated `contradiction.a` at the same
+source, so LEP/2 derived a duplicate claim ID. Jordan's selected storefront
+signal supplied no citizen POPIDs, while the generic W1 target schema invited
+DeepSeek to add two unsupported targets. The local correction collapses exact
+type/text/source claim duplicates before ID derivation and makes candidate-free
+target output explicitly and deterministically empty. The recovery wakes remain
+unfired pending builder approval; Task 13 remains open for the recovered angle
+and later report/write/Rhea observation.
+
 ## Open questions
 
 - No implementation question blocks Jax, Carmen, P Slayer, or Jordan Velez. The
@@ -380,3 +393,4 @@ persona behavior the pilot proved useful.
 - 2026-08-10 (codex) — Made required-package pinning multi-seat and cross-desk safe, then added Carmen Delaine as the second civic LEP/2 package with her established DeepSeek route and civic-ledger authority. JAX-LEP2-1 is unchanged; no model or external-write run.
 - 2026-08-10 (codex) — Added P Slayer as the first sports LEP/2 package with all-Llama routing and a load-bearing fan-heat profile. Wired the existing fan-pulse slice into the typed Packet so players, feed anchors, charge, friction, prior-take pointer, and scene limits survive through Wake 3. Jax and Carmen are unchanged; no model or external-write run.
 - 2026-08-10 (codex) — Added Jordan Velez as JORDAN-LEP2-1 with DeepSeek across all three wakes and a load-bearing economics/labor profile. Reused the single-reporter business-desk identity and carried the existing economic/storefront slice into LEP/2 as sourced anchors plus bounded creative limits. Jax, Carmen, and P Slayer are unchanged; no model or external-write run.
+- 2026-08-10 (codex) — Diagnosed the first C103 unattended angle wake and hardened the LEP/2 boundary: exact sourced claims deduplicate before ID derivation, and a candidate-free W1 Packet narrows model-added targets to an empty list. Recovery was not fired.

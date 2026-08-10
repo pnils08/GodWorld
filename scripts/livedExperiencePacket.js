@@ -22,6 +22,16 @@ function uniq(values) {
   return [...new Set((values || []).map(v => clean(v)).filter(Boolean))];
 }
 
+function uniqueClaims(claims) {
+  const seen = new Set();
+  return (claims || []).filter(claim => {
+    const key = [clean(claim && claim.t), clean(claim && claim.text), clean(claim && claim.src)].join('\n');
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
 function refClaim(type, text, src, extra) {
   if (!CLAIM_TYPES.includes(type)) throw new Error('unknown claim type: ' + type);
   const claim = { t: type, text: clean(text, 500), src: clean(src, 300) };
@@ -124,6 +134,7 @@ function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane 
     }
   }
   const candidates = candidateRows(story, slice).slice(0, 12);
+  const hasTargetCandidates = candidates.some(candidate => clean(candidate.pop));
   const creativeBrief = creativeBriefFromSlice(slice);
   const packet = {
     v: VERSION,
@@ -137,7 +148,7 @@ function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane 
       score: story.stinkScore == null ? null : story.stinkScore, src },
     exposure: { basis: ['editor-assignment', 'desk-signal'],
       candidates: candidates.map(c => ({ pop: c.pop, name: c.name, profile: clean(c.profile, 300), why: c.why })) },
-    known,
+    known: uniqueClaims(known),
     limits: {
       assert: ['FACT'],
       reason: ['INTERPRETATION', 'INTENTION', 'LEAD'],
@@ -147,8 +158,13 @@ function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane 
     output: {
       format: 'json-only',
       schema: { focus: 'string', why: 'string', checks: ['string'],
-        targets: [{ pop: 'string', question: 'string', basis: 'string' }],
+        targets: hasTargetCandidates
+          ? [{ pop: 'supplied non-empty candidate pop', question: 'string', basis: 'string' }]
+          : [],
         interpretation: 'string', unverifiedLead: ['string'], closeQuestion: 'string' },
+      rule: hasTargetCandidates
+        ? 'Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers.'
+        : 'No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier.',
     },
   };
   if (Array.isArray(lane) && lane.length) {
@@ -175,15 +191,19 @@ function validateAngleOutput(value, input) {
   if (!Array.isArray(out && out.checks)) errs.push('checks must be an array');
   if (!Array.isArray(out && out.targets)) errs.push('targets must be an array');
   const allowed = new Set(((input && input.exposure && input.exposure.candidates) || []).map(c => c.pop).filter(Boolean));
-  for (const t of (out && out.targets) || []) {
-    if (!t || !allowed.has(t.pop) || !clean(t.question) || !clean(t.basis)) errs.push('target must use a supplied pop with question+basis');
+  if (allowed.size) {
+    for (const t of (out && out.targets) || []) {
+      if (!t || !allowed.has(t.pop) || !clean(t.question) || !clean(t.basis)) errs.push('target must use a supplied pop with question+basis');
+    }
   }
   if (!Array.isArray(out && out.unverifiedLead)) errs.push('unverifiedLead must be an array');
   if (errs.length) throw new Error('invalid W1 output: ' + errs.join('; '));
   return {
     focus: clean(out.focus, 500), why: clean(out.why, 500),
     checks: uniq(out.checks).slice(0, 8),
-    targets: out.targets.slice(0, 8).map(t => ({ pop: t.pop, question: clean(t.question, 400), basis: clean(t.basis, 300) })),
+    targets: allowed.size
+      ? out.targets.slice(0, 8).map(t => ({ pop: t.pop, question: clean(t.question, 400), basis: clean(t.basis, 300) }))
+      : [],
     interpretation: clean(out.interpretation, 500),
     unverifiedLead: uniq(out.unverifiedLead).slice(0, 8),
     closeQuestion: clean(out.closeQuestion, 400),

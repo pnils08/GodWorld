@@ -29,6 +29,20 @@ assert.equal(w1.v, 'LEP/2');
 assert.ok(w1.known.every(c => /^F-[a-f0-9]{12}$/.test(c.id)));
 assert.equal(new Set(w1.known.map(c => c.id)).size, w1.known.length);
 
+// C103 Jax regression: a story label may repeat contradiction.a at the same source.
+// Exact sourced duplicates collapse before LEP/2 derives stable claim IDs.
+const repeatedClaim = 'TEST-ONLY Initiative is stuck for 9 cycles';
+const repeatedClaimW1 = p.buildAnglePacket({
+  cycle: 999, desk: 'civic', reporter, approach: 'Test the stalled initiative', lane: [],
+  story: {
+    ref: 'output/TEST_ONLY_AUDIT.json patterns[0]', label: repeatedClaim,
+    angle: 'why the TEST-ONLY Initiative remains stuck', kind: 'stuck-initiative',
+  },
+  slice: { contradiction: { a: repeatedClaim, b: 'TEST-ONLY record shows no phase change' } },
+});
+assert.equal(repeatedClaimW1.known.filter(claim => claim.text === repeatedClaim).length, 1);
+assert.equal(new Set(repeatedClaimW1.known.map(claim => claim.id)).size, repeatedClaimW1.known.length);
+
 const plan = p.validateAngleOutput({
   focus: 'TEST-ONLY mismatch', why: 'It is unresolved', checks: ['Check the source'],
   targets: [{ pop: 'TEST-POP-01', question: 'What do you own?', basis: 'assigned-official' }],
@@ -209,6 +223,27 @@ assert.deepStrictEqual(economicW1.task.creativeBrief, {
   forbidden: ['Do not invent employee counts', 'Do not print raw engine decimals'],
   sceneRule: 'TEST-ONLY generic shutters and counter light only',
 });
+
+// C103 Jordan regression: a selected economic signal can carry no citizen POPIDs.
+// The Packet makes the empty contract explicit and narrows invented targets to [].
+const noCandidateW1 = p.buildAnglePacket({
+  cycle: 999, desk: 'business', reporter: jordanReporter,
+  story: { ...economicStory, popids: [], citizens: [] },
+  approach: 'TEST-ONLY follow the money', slice: economicSlice, lane: [],
+});
+assert.deepStrictEqual(noCandidateW1.output.schema.targets, []);
+assert.match(noCandidateW1.output.rule, /Return targets as an empty array/);
+const noCandidatePlan = p.validateAngleOutput({
+  focus: 'TEST-ONLY livelihood pressure', why: 'The supplied condition has a worker consequence',
+  checks: ['Check the supplied ledger record'],
+  targets: [
+    { pop: 'MADE-UP-01', question: 'What changed?', basis: 'invented' },
+    { pop: 'MADE-UP-02', question: 'Who is affected?', basis: 'invented' },
+  ],
+  interpretation: 'The pressure may reach payroll', unverifiedLead: [],
+  closeQuestion: 'Who carries the supplied pressure?',
+}, noCandidateW1);
+assert.deepStrictEqual(noCandidatePlan.targets, []);
 const economicPlan = p.validateAngleOutput({
   focus: 'TEST-ONLY livelihood pressure', why: 'The supplied condition has a worker consequence',
   checks: ['Check the supplied ledger record'],

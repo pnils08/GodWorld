@@ -99,7 +99,11 @@ backend can arrange once. Facts are canon inputs; prose is a rendering.
    prose. An exhaustive evaluation manifest may also fail on an unapproved
    number or quotation. A live load-bearing profile routes those lexical findings
    to persona-aware Rhea because ordinals, sign phrasing, punctuation, and
-   anonymous color require semantic classification.
+   anonymous color require semantic classification. Before claim IDs are derived,
+   exact type/text/source duplicates collapse to one known claim. When Wake 1
+   supplies no candidate with a POPID, its target schema is explicitly empty and
+   any model-added target rows are narrowed to `[]`; all other malformed output
+   still fails loud.
 
 7. **The Edition closes the life cycle.** A Cycle's generated state becomes
    shared lived experience only when its Edition is published and post-publish
@@ -244,3 +248,4 @@ The fourth package and first business seat is `business-desk`
 - 2026-08-10 (codex) — Made required-package pinning multi-seat and cross-desk safe, then added Carmen Delaine as CARMEN-LEP2-1 with her existing DeepSeek civic-ledger route and load-bearing review profile; JAX-LEP2-1 is unchanged.
 - 2026-08-10 (codex) — Added P Slayer as PSLAYER-LEP2-1 with all-Llama routing, a load-bearing fan-heat profile, and a typed fan-pulse handoff through Wake 3; Jax and Carmen are unchanged.
 - 2026-08-10 (codex) — Added Jordan Velez as JORDAN-LEP2-1 with DeepSeek across all three wakes, the existing single-reporter business-desk identity, a load-bearing economics/labor profile, and a typed economic/storefront handoff through Wake 3; Jax, Carmen, and P Slayer are unchanged.
+- 2026-08-10 (codex) — Hardened the C103 angle boundary after the first unattended cohort wake: exact sourced claims now deduplicate before LEP/2 IDs, and candidate-free W1 Packets explicitly produce no targets. No recovery wake or external write was run.

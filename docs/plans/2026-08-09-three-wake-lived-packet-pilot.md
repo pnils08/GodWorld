@@ -288,6 +288,76 @@ The final scored treatment Article is
   unchanged.
 - **Status:** [x] built and locally validated 2026-08-10 (codex)
 
+### Task 17: Surgical package migration checklist — every newsroom persona
+
+This checklist is the migration gate for the next phase of pipeline.54. A
+persona is not ready because a prompt was rewritten or a model was swapped. A
+package becomes active only after its identity, typed slice, model route,
+angle/report/write contracts, reviewer boundary, tests, and attended proof all
+agree. The package registry remains package-only: an unchecked seat is skipped,
+never silently sent through the generic prompt.
+
+#### Non-negotiable gates for every seat
+
+1. **Identity and scope:** verify name, POPID, beat domain, persona authority,
+   canon tier, and whether the seat is an Article, data-memo, or visual contract.
+2. **Typed slice:** build the smallest deterministic domain slice: assigned
+   signal, source-addressed facts, candidate POPIDs, creative brief, limits,
+   and explicit missing-data/abstention behavior. A slice must not make the
+   model reconstruct the world from prose.
+3. **Model route:** choose angle, report, and write models independently. Test
+   the cheapest plausible model against a stronger candidate on the same fixed
+   Packet fixtures. Record voice fidelity, unsupported-claim rate, abstentions,
+   token count, latency, and cost. A different personality may require a
+   different model; extra prompt scaffolding is not a substitute for a model
+   that cannot hold the voice.
+4. **Aligned contracts:** align the slice, angle assignment, W1 schema/rule,
+   W2 question/report contract, W3 writer manifest, and Rhea profile. No generic
+   angle or generic model fallback may remain hidden in the path.
+5. **Local gates:** add deterministic Packet/route/package tests, syntax checks,
+   malformed-output tests, empty-candidate tests, and persona-specific review
+   fixtures. Record the exact model route and expected failure behavior.
+6. **Proof and activation:** run one attended three-wake proof, inspect W1/W2/W3
+   plus Rhea and staging artifacts, measure cost/latency, then activate the
+   package. Full unattended graduation is a separate gate; angle success alone
+   does not close it.
+
+#### Persona inventory
+
+`[x] package` means the package is implemented and active; `[ ] proof` means
+the full three-wake/Rhea graduation is still open. For unchecked seats, the
+slice and model text is a starting work surface, not an adopted contract.
+
+| Package | Seat / POPID | Domain | Contract and slice surface | Model route | Package | Proof |
+|---|---|---|---|---|---|---|
+| JAX-LEP2-1 | Jax Caldera / POP-00799 | accountability | Article LEP/2; stink contradiction | Llama / Llama / Sonnet | [x] | [ ] full W1-W3/Rhea |
+| CARMEN-LEP2-1 | Carmen Delaine / POP-00011 | civic ledger | Article LEP/2; initiatives/votes/money | DeepSeek / DeepSeek / DeepSeek | [x] | [ ] full W1-W3/Rhea |
+| PSLAYER-LEP2-1 | P Slayer / POP-00008 | sports | Article LEP/2; typed fan pulse | Llama / Llama / Llama | [x] | [ ] full W1-W3/Rhea |
+| JORDAN-LEP2-1 | Jordan Velez / POP-00153 | economics/labor | Article LEP/2; economic/storefront | DeepSeek / DeepSeek / DeepSeek | [x] | [ ] full W1-W3/Rhea |
+| pending | Luis Navarro / POP-00636 | civic investigations | Candidate Article LEP/2; know/don't-know and silence clock | Candidate DeepSeek; benchmark | [ ] | [ ] |
+| pending | Trevor Shimizu / POP-00155 | infrastructure | Candidate Article LEP/2; transit/system cascade | Candidate DeepSeek; benchmark | [ ] | [ ] |
+| pending | Sgt. Rachel Torres / POP-00057 | safety | Candidate Article LEP/2; incident/classification gap | Candidate DeepSeek; benchmark | [ ] | [ ] |
+| pending | Dr. Lila Mezran / POP-00154 | health | Candidate Article LEP/2; cluster/human cost | Candidate DeepSeek; benchmark | [ ] | [ ] |
+| pending | Angela Reyes / POP-00156 | education | Candidate Article LEP/2; school/youth stability | Candidate DeepSeek; benchmark | [ ] | [ ] |
+| pending | Noah Tan / POP-00157 | environment | Candidate Article LEP/2; weather/environment ground | Candidate DeepSeek; benchmark | [ ] | [ ] |
+| pending | Anthony Raines / POP-00017 | sports analytics | Candidate Article LEP/2; roster/board pulse | Candidate DeepSeek; benchmark | [ ] | [ ] |
+| pending | Hal Richmond / POP-00007 | sports history | Candidate Article LEP/2; archive/long-view pulse | Candidate DeepSeek; benchmark | [ ] | [ ] |
+| pending | Tanya Cruz / POP-00014 | sports sideline | Candidate Article LEP/2; clubhouse/sideline signal | Candidate DeepSeek; benchmark | [ ] | [ ] |
+| pending | Simon Leary / POP-00016 | sports long view | Candidate Article LEP/2; sports as civic architecture | Candidate DeepSeek; benchmark | [ ] | [ ] |
+| pending | Ariana Reyes / POP-00133 | sports analytics | Candidate Article LEP/2; numeric/board pulse | Candidate DeepSeek; benchmark | [ ] | [ ] |
+| pending | Maria Keen / POP-00013 | culture | Candidate Article LEP/2; evening-life/neighborhood ground | Candidate DeepSeek; benchmark | [ ] | [ ] |
+| pending | Elliot Graye / POP-00012 | community/faith | Candidate Article LEP/2; faith/quiet work | Candidate DeepSeek; benchmark | [ ] | [ ] |
+| pending | Kai Marston / POP-00158 | culture/arts | Candidate Article LEP/2; arts as neighborhood act | Candidate DeepSeek; benchmark | [ ] | [ ] |
+| pending | Mason Ortega / POP-00160 | culture/food | Candidate Article LEP/2; restaurants as workplaces | Candidate DeepSeek; benchmark | [ ] | [ ] |
+| pending | Sharon Okafor / POP-00159 | culture/lifestyle | Candidate Article LEP/2; behavior patterns | Candidate DeepSeek; benchmark | [ ] | [ ] |
+| pending | Elliot Marbury / POP-00166 | data/general | Separate data-memo contract; TrueSource/As_Roster audit slice | Candidate DeepSeek; benchmark | [ ] | [ ] |
+| pending | DeShawn Hartley / POP-00015 | visual media | Separate visual/photo-prompt contract; visual record slice | Candidate DeepSeek; benchmark | [ ] | [ ] |
+
+The four active packages have locked routes, but their cost/model comparison and
+full unattended graduation remain checklist work. Elliot Marbury and DeShawn
+Hartley are deliberately not forced into Article LEP/2 until their data-memo and
+visual contracts are specified; contract shape is part of Gate 1.
+
 ## Status log — first C102 A/B
 
 All treatment artifacts are `NOT_CANON`; no Sheet, Drive, memory, staging, or
@@ -371,9 +441,11 @@ source, so LEP/2 derived a duplicate claim ID. Jordan's selected storefront
 signal supplied no citizen POPIDs, while the generic W1 target schema invited
 DeepSeek to add two unsupported targets. The local correction collapses exact
 type/text/source claim duplicates before ID derivation and makes candidate-free
-target output explicitly and deterministically empty. The recovery wakes remain
-unfired pending builder approval; Task 13 remains open for the recovered angle
-and later report/write/Rhea observation.
+target output explicitly and deterministically empty. The initial recovery wakes
+were held pending builder approval; Task 13 remains open for the recovered angle
+and later report/write/Rhea observation. After approval, the Jax and Jordan
+angle-only recoveries succeeded and wrote C103 artifacts; full report/write/Rhea
+observation remains open.
 
 ## Open questions
 
@@ -394,3 +466,4 @@ and later report/write/Rhea observation.
 - 2026-08-10 (codex) — Added P Slayer as the first sports LEP/2 package with all-Llama routing and a load-bearing fan-heat profile. Wired the existing fan-pulse slice into the typed Packet so players, feed anchors, charge, friction, prior-take pointer, and scene limits survive through Wake 3. Jax and Carmen are unchanged; no model or external-write run.
 - 2026-08-10 (codex) — Added Jordan Velez as JORDAN-LEP2-1 with DeepSeek across all three wakes and a load-bearing economics/labor profile. Reused the single-reporter business-desk identity and carried the existing economic/storefront slice into LEP/2 as sourced anchors plus bounded creative limits. Jax, Carmen, and P Slayer are unchanged; no model or external-write run.
 - 2026-08-10 (codex) — Diagnosed the first C103 unattended angle wake and hardened the LEP/2 boundary: exact sourced claims deduplicate before ID derivation, and a candidate-free W1 Packet narrows model-added targets to an empty list. Recovery was not fired.
+- 2026-08-10 (codex) — Filed Task 17, the surgical migration checklist for all 22 newsroom personas: typed slice, per-wake model benchmark, aligned contracts, deterministic tests, attended proof, and separate data/visual contract gates. Jax and Jordan angle recoveries succeeded; full cohort graduation remains open.

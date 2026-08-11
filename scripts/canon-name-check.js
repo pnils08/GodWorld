@@ -25,6 +25,7 @@ const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
 const LEDGER_SNAPSHOT = path.join(ROOT, 'output', 'simulation_ledger_snapshot.jsonl');
+const LEDGER_SNAPSHOT_META = path.join(ROOT, 'output', 'simulation_ledger_snapshot.meta.json');
 
 // Places/orgs/phrases that look like person names to the extractor. Neighborhoods
 // come from lib/canonNeighborhoods (canon source); the rest are recurring
@@ -58,9 +59,52 @@ function loadRows() {
     for (const line of lines) {
       try { rows.push(JSON.parse(line)); } catch (_) { /* skip bad line */ }
     }
-  } catch (_) { /* missing snapshot -> empty (fail-loud to the gate) */ }
+  } catch (e) {
+    // missing snapshot -> empty (fail-loud to the gate). R3: say so once per
+    // process — a silent empty row set reads as "0 canon citizens" downstream.
+    if (!loadRows._warned) {
+      loadRows._warned = true;
+      process.stderr.write('[profiles] ledger snapshot unreadable (' + (e && e.code || e && e.message || 'unknown') + ') at '
+        + path.relative(ROOT, LEDGER_SNAPSHOT) + ' — canon checks degrade to empty rows\n');
+    }
+  }
   loadRows._cache = rows;
   return rows;
+}
+
+// R2 — desk-run snapshot freshness, same S252/S329 pattern as cron-civic-run
+// Step 1.5: quote the meta, refresh via dumpLedger.js when it does not match
+// the cycle being worked. Doctrine differs at the failure tail: civic HALTS
+// (a stale roster poisons a public document); the desk DEGRADES — a stale
+// snapshot still resolves most citizens, and dropping the run is worse than
+// logging the staleness. Returns { fresh, meta, refreshed } for callers that
+// want to stamp provenance; never throws.
+function ensureLedgerSnapshot(cycle) {
+  const readMeta = () => {
+    try { return JSON.parse(fs.readFileSync(LEDGER_SNAPSHOT_META, 'utf8')); } catch (_) { return null; }
+  };
+  let meta = readMeta();
+  let refreshed = false;
+  if (!meta || String(meta.cycle) !== String(cycle)) {
+    process.stderr.write('[profiles] ledger snapshot stale (' + (meta ? 'cycle ' + meta.cycle : 'missing')
+      + ' vs working cycle ' + cycle + ') — refreshing via dumpLedger.js\n');
+    try {
+      require('child_process').execFileSync('node',
+        [path.join(ROOT, 'scripts', 'dumpLedger.js'), String(cycle), '--quiet'],
+        { cwd: ROOT, stdio: 'inherit', timeout: 300000 });
+      refreshed = true;
+      loadRows._cache = null;   // bust — re-read the refreshed snapshot
+    } catch (e) {
+      process.stderr.write('[profiles] dumpLedger refresh FAILED: ' + (e && e.message || e)
+        + ' — continuing on the stale snapshot (desk doctrine: degrade, do not drop)\n');
+    }
+    meta = readMeta();
+    if (refreshed && (!meta || String(meta.cycle) !== String(cycle))) {
+      process.stderr.write('[profiles] snapshot STILL stale after refresh ('
+        + (meta ? 'cycle ' + meta.cycle : 'missing') + ' vs ' + cycle + ') — profiles may lag the engine by a cycle\n');
+    }
+  }
+  return { fresh: !!(meta && String(meta.cycle) === String(cycle)), meta, refreshed };
 }
 
 function loadCanonNames() {
@@ -99,7 +143,10 @@ function profilesForPopids(popids) {
       row.RoleType && 'role: ' + row.RoleType,
       row.Neighborhood && 'neighborhood: ' + row.Neighborhood,
       row.BirthYear && 'age: ' + (2041 - Number(row.BirthYear)),
+      row.WealthLevel && 'wealth: ' + row.WealthLevel,
       row.CareerStage && 'careerStage: ' + row.CareerStage,
+      row.EmployerBizId && 'employerBiz: ' + row.EmployerBizId,
+      row.SkillTags && ('skills: ' + String(row.SkillTags).slice(0, 80)),
       'popid: ' + pop
     ].filter(Boolean).join('; '));
   }
@@ -260,4 +307,4 @@ if (require.main === module) {
   process.exit(out.unverified.length ? 2 : 0);
 }
 
-module.exports = { checkText, extractCandidates, loadCanonNames, buildStoplist, profilesFor, profilesForPopids, resolveCitizens };
+module.exports = { checkText, extractCandidates, loadCanonNames, buildStoplist, profilesFor, profilesForPopids, resolveCitizens, ensureLedgerSnapshot };

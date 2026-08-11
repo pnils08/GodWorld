@@ -18,10 +18,14 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 
-# Load environment
-if [ -f "$PROJECT_DIR/.env" ]; then
-  export $(grep -v '^#' "$PROJECT_DIR/.env" | grep DIGITALOCEAN_TOKEN | xargs)
-fi
+# Load environment — Phase 40.3 relocated .env to /root/.config/godworld/.env;
+# reading only the repo copy is what silently killed snapshots after April.
+for ENV_FILE in /root/.config/godworld/.env "$PROJECT_DIR/.env"; do
+  if [ -f "$ENV_FILE" ]; then
+    export $(grep -v '^#' "$ENV_FILE" | grep DIGITALOCEAN_TOKEN | xargs)
+    break
+  fi
+done
 
 if [ -z "$DIGITALOCEAN_TOKEN" ]; then
   echo "ERROR: DIGITALOCEAN_TOKEN not set in .env"
@@ -30,7 +34,7 @@ fi
 
 DROPLET_ID="549312661"
 SNAPSHOT_PREFIX="godworld-auto"
-KEEP_COUNT=1
+KEEP_COUNT=2
 DATE_TAG=$(date +%Y-%m-%d)
 SNAPSHOT_NAME="${SNAPSHOT_PREFIX}-${DATE_TAG}"
 API="https://api.digitalocean.com/v2"
@@ -58,8 +62,9 @@ fi
 echo "Action ID: $ACTION_ID"
 echo "Snapshot in progress (takes 1-3 minutes)..."
 
-# Wait for completion (poll every 15s, max 5 minutes)
-for i in $(seq 1 20); do
+# Wait for completion (poll every 15s, max 15 minutes — disk grew past the
+# 5-minute window and rotation must not run before the new snapshot registers)
+for i in $(seq 1 60); do
   sleep 15
   STATUS=$(curl -s "$API/droplets/$DROPLET_ID/actions/$ACTION_ID" \
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \

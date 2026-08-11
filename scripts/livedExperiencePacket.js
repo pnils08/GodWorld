@@ -59,7 +59,8 @@ function assertBase(packet, wake) {
 function candidateRows(story, slice) {
   const fromSlice = Array.isArray(slice && slice.citizens)
     ? slice.citizens
-    : (Array.isArray(slice && slice.players) ? slice.players : []);
+    : (Array.isArray(slice && slice.players) ? slice.players
+      : (Array.isArray(slice && slice.candidates) ? slice.candidates : []));
   if (fromSlice.length) return fromSlice.map(c => ({
     pop: c.popid || null,
     name: c.name || null,
@@ -374,10 +375,19 @@ function buildWritePacket({ cycle, desk, reporter, story, approach, angleInput, 
             return /council|mayor|official|director|chief/i.test(candidate && candidate.profile || '');
           }));
         const wanted = new Set([...officialTargets, ...usable.map(q => q.pop)]);
-        return candidates
+        const byPop = new Map(candidates.map(c => [c.pop, c]));
+        for (const q of usable) {
+          if (!byPop.has(q.pop)) byPop.set(q.pop, {
+            pop: q.pop, name: q.name,
+            profile: q.inputPacket && q.inputPacket.actor ? q.inputPacket.actor.name : q.name,
+            src: 'packet.W2.interview'
+          });
+          wanted.add(q.pop);
+        }
+        return [...byPop.values()]
           .filter(c => wanted.has(c.pop))
           .map(c => ({ pop: c.pop, name: c.name, profile: c.profile,
-            quotationEligible: usable.some(q => q.pop === c.pop), src: 'packet.W1.exposure' }));
+            quotationEligible: usable.some(q => q.pop === c.pop), src: c.src || 'packet.W1.exposure' }));
       })(),
       sources: usable,
       excludedLeads: leads.concat((anglePlan && anglePlan.unverifiedLead || [])

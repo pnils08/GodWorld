@@ -301,7 +301,8 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
   const tally = interviewTally();
   const packetCandidates = story
     ? livedPacket.candidateRows(story, angleArt &&
-      (angleArt.jaxSlice || angleArt.pslayerSlice || angleArt.economicSlice))
+      (angleArt.jaxSlice || angleArt.pslayerSlice || angleArt.economicSlice ||
+        angleArt.safetySlice || angleArt.eveningSlice))
       .reduce((m, c) => m.set(c.pop, c), new Map())
     : new Map();
   const push = (pop, label, ignoreRest) => {

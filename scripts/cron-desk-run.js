@@ -302,7 +302,7 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
   const packetCandidates = story
     ? livedPacket.candidateRows(story, angleArt &&
       (angleArt.jaxSlice || angleArt.pslayerSlice || angleArt.economicSlice ||
-        angleArt.safetySlice || angleArt.eveningSlice))
+        angleArt.safetySlice || angleArt.eveningSlice || angleArt.civicDomainSlice))
       .reduce((m, c) => m.set(c.pop, c), new Map())
     : new Map();
   const push = (pop, label, ignoreRest) => {
@@ -621,6 +621,34 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
     } else if (persona.name && /(dj\s*)?hartley|deshawn\s*hartley/i.test(persona.name)) {
       L.push('STANCE: senior photographer. Visual record/prompts. Not prose articles.');
       L.push('ONE visual assignment set — not multi-voice desk average.');
+    }
+    // pipeline.52 Task 6: selected packet from the shared civic substrate.
+    // Rachel is intentionally absent: her completed safety slice stays separate.
+    if (/carmen\s*delaine|luis\s*navarro|trevor\s*shimizu|lila\s*mezran|noah\s*tan|angela\s*reyes/i.test(persona.name || '')) {
+      try {
+        const {
+          CIVIC_SEATS,
+          loadCivicDomainSlice,
+          packetForPersona
+        } = require(path.join(__dirname, 'buildCivicDomainSlice'));
+        const slug = Object.keys(CIVIC_SEATS).find(key => CIVIC_SEATS[key].name === persona.name);
+        const packet = slug && packetForPersona(loadCivicDomainSlice(cycle), slug);
+        if (packet) {
+          L.push('');
+          L.push('### CIVIC DOMAIN SLICE (shared substrate — selected for this solo seat)');
+          L.push('DOMAIN: ' + packet.seat.domain);
+          L.push('PULSE: ' + packet.pulse.label);
+          if (packet.story.hookLine) L.push('HOOK: ' + packet.story.hookLine);
+          L.push('ANCHORS:');
+          for (const fact of packet.prewrite.anchorFacts.slice(0, 4)) L.push('  - ' + fact);
+          if (packet.candidates.length > 1) {
+            L.push('OTHER RECORD CANDIDATES:');
+            for (const candidate of packet.candidates.slice(1, 4)) {
+              L.push('  - ' + candidate.label + ' [' + candidate.ref + ']');
+            }
+          }
+        }
+      } catch (_) { /* optional local pack */ }
     }
     // grok pipeline.52: economic pack when this is a business-desk assignment (desk via assignment approach).
     // (Persona-named inject for culture evening follows; business often has no solo persona.)
@@ -992,6 +1020,7 @@ async function runAngle(assign) {
   let halSlice = null;
   let economicSlice = null;
   let safetySlice = null;
+  let civicDomainSlice = null;
   const EVENING_SLUGS = {
     'mason-ortega': 1, 'kai-marston': 1, 'sharon-okafor': 1,
     'maria-keen': 1, 'elliot-graye': 1
@@ -1116,6 +1145,19 @@ async function runAngle(assign) {
           ' hood ' + (safetySlice.pulse.hood || '—'));
       }
     } catch (e) { log('safety slice load failed (non-fatal): ' + e.message); }
+  } else if (personaSlug && /^(carmen-delaine|luis-navarro|trevor-shimizu|lila-mezran|noah-tan|angela-reyes)$/.test(personaSlug)) {
+    try {
+      const { loadCivicDomainSlice, packetForPersona } = require(path.join(__dirname, 'buildCivicDomainSlice'));
+      civicDomainSlice = loadCivicDomainSlice(cycle);
+      const packet = packetForPersona(civicDomainSlice, personaSlug);
+      if (packet) {
+        story = packet.story || story;
+        approach = packet.approach || approach;
+        civicDomainSlice = Object.assign({}, civicDomainSlice, { packetSeat: packet });
+        log('civic-domain slice loaded — ' + personaSlug + ' pulse ' + packet.pulse.className +
+          ' ref ' + packet.pulse.source);
+      }
+    } catch (e) { log('civic-domain slice load failed (non-fatal): ' + e.message); }
   }
   let angleRead = null;
   let inputPacket = null;
@@ -1318,6 +1360,27 @@ async function runAngle(assign) {
         (asker._wallSnippet ? '\n\n' + asker._wallSnippet : '') +
         '\n\nIn your own voice: which named room or sighting are you standing in, what is true there tonight, ' +
         'and what question or image ends the piece? Never invent venues or employees. One pulse. Not multi-voice culture average.';
+    } else if (persona && civicDomainSlice && civicDomainSlice.packetSeat && story) {
+      const packet = civicDomainSlice.packetSeat;
+      const sceneBits = [
+        'DOMAIN: ' + packet.seat.domain,
+        'PULSE: ' + packet.pulse.label,
+        'ANCHORS:\n' + packet.prewrite.anchorFacts.map(f => '  - ' + f).join('\n')
+      ];
+      if (packet.candidates.length > 1) {
+        sceneBits.push('OTHER CANDIDATES:\n' + packet.candidates.slice(1, 4)
+          .map(candidate => '  - ' + candidate.label + ' [' + candidate.ref + ']').join('\n'));
+      }
+      ask = 'You\'re ' + asker.name + '. This is the supplied civic-domain record for your solo beat:\n' +
+        'SIGNAL: ' + (story.angle || story.label) +
+        (story.hookLine ? '\nHOOK: ' + story.hookLine : '') +
+        (brief.names.length ? '\nAFFECTED CITIZENS (packet only):\n' + brief.names.map(n => '  - ' + n).join('\n') : '') +
+        (story.hood ? '\nWHERE: ' + story.hood : '') +
+        '\nCIVIC DOMAIN PACK:\n' + sceneBits.join('\n') +
+        (approach ? '\n\n' + approach : '') +
+        (asker._wallSnippet ? '\n\n' + asker._wallSnippet : '') +
+        '\n\nIn your own beat voice: state the one record-backed claim, identify what remains unestablished, ' +
+        'and name the next record or affected resident to pursue. No invented official action, metrics, votes, or outcomes. One civic domain story, not a desk roundup.';
     } else if (persona && personaSlug === 'rachel-torres' && story) {
       const sceneBits = [];
       if (safetySlice && safetySlice.pulse) sceneBits.push('PULSE: ' + safetySlice.pulse.className + ' · ' + safetySlice.pulse.label);
@@ -1373,7 +1436,7 @@ async function runAngle(assign) {
     if (PACKET_ACTIVE) {
       inputPacket = livedPacket.buildAnglePacket({
         cycle, desk, reporter: asker, story, approach,
-        slice: jaxSlice || pslayerSlice || economicSlice || safetySlice || eveningSlice, lane,
+        slice: jaxSlice || pslayerSlice || economicSlice || safetySlice || eveningSlice || civicDomainSlice, lane,
       });
       ask = livedPacket.prompt(inputPacket);
     }
@@ -1482,6 +1545,13 @@ async function runAngle(assign) {
       candidates: (safetySlice.candidates || []).slice(0, 8),
       scene: safetySlice.scene,
       pointers: safetySlice.pointers
+    } : null,
+    civicDomainSlice: civicDomainSlice && civicDomainSlice.packetSeat ? {
+      seat: civicDomainSlice.packetSeat.seat,
+      pulse: civicDomainSlice.packetSeat.pulse,
+      prewrite: civicDomainSlice.packetSeat.prewrite,
+      candidates: (civicDomainSlice.packetSeat.candidates || []).slice(0, 8),
+      pointers: civicDomainSlice.packetSeat.pointers
     } : null,
     reporterWall: wallMeta,
     canonResearch,                                    // Task 2.5.3 §2: ≥3 validated canon facts + tool trace

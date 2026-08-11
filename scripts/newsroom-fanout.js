@@ -604,6 +604,49 @@ async function buildFanout(date) {
     }
   }
 
+  // pipeline.52 Task 6: one shared civic substrate, then a named solo-seat
+  // packet for Carmen, Luis, Trevor, Lila, Noah, or Angela. Rachel remains on
+  // her completed standalone safety slice.
+  let civicDomainEnrich = { enriched: false, reason: 'none', seats: [] };
+  if (cycle != null) {
+    try {
+      const {
+        enrichAssignment: enrichCivicDomain,
+        buildCivicDomainSlice,
+        writeCivicDomainSlice,
+        isCivicDomainPersona
+      } = require(path.join(__dirname, 'buildCivicDomainSlice'));
+      for (let i = 0; i < assignments.length; i++) {
+        if (!isCivicDomainPersona(assignments[i])) continue;
+        const next = enrichCivicDomain(assignments[i], cycle);
+        if (next && next.civicDomainSlice) {
+          assignments[i] = next;
+          civicDomainEnrich.enriched = true;
+          civicDomainEnrich.seats.push({
+            persona: next.persona,
+            domain: next.pulse && next.pulse.className,
+            label: next.pulse && next.pulse.label
+          });
+        }
+      }
+      // Materialize once per cycle even when no eligible civic seat made today's rota.
+      try {
+        const slice = buildCivicDomainSlice(cycle);
+        writeCivicDomainSlice(cycle, slice);
+      } catch (_) { /* non-fatal */ }
+      if (!civicDomainEnrich.enriched) {
+        civicDomainEnrich.reason = 'no civic-domain persona assignment in rota';
+      } else {
+        civicDomainEnrich.reason = 'seats=' + civicDomainEnrich.seats.length;
+        console.error('[fanout] CIVIC DOMAIN — ' + civicDomainEnrich.reason + ' ' +
+          civicDomainEnrich.seats.map(seat => seat.persona + '/' + seat.domain).join(', '));
+      }
+    } catch (e) {
+      civicDomainEnrich = { enriched: false, reason: 'error: ' + e.message, seats: [] };
+      console.error('[fanout] civic-domain slice enrich skipped: ' + e.message);
+    }
+  }
+
   const packageGate = applyWakePackageGate(assignments, approachMap);
   assignments.splice(0, assignments.length, ...packageGate.assignments);
   const packageShortfalls = Object.entries(DAILY_QUOTAS).map(([desk, wanted]) => ({
@@ -625,6 +668,7 @@ async function buildFanout(date) {
     halEnrich,
     economicEnrich,
     eveningEnrich,
+    civicDomainEnrich,
     builtAt: new Date().toISOString() };
 }
 

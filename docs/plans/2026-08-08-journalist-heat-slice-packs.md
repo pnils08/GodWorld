@@ -132,15 +132,19 @@ Shipped exemplars: Jax (stink substrate + firebrand overlay), P Slayer (sports f
 - **Verify:** tests PASS; approach names historian/continuity; never assigns business desk.
 - **Status:** [x] done (grok code; landed by kimi 2026-08-09, commit 916cccdc, while grok locked out) — builder + test + cron/fanout wiring; smoke vs C102 (Kelley re-signing, score 99 era-door, close=elegy)
 
-### Task 6: Civic family + education note (P2)
+### Task 6: Civic family shared domain pack (P2)
 
-- **Files:** plan status log + optional thin `buildCivicDomainSlice.js` later
+- **Files:**
+  - `scripts/buildCivicDomainSlice.js` — create
+  - `scripts/buildCivicDomainSlice.test.js` — create
+  - `scripts/newsroom-fanout.js` + `scripts/cron-desk-run.js` — inject for civic solo personas
 - **Steps:**
-  1. **Decision (2026-08-11):** Angela uses the existing shared civic substrate: both fanout and the writer-wake civic lane include `EDUCATION`, and Angela has a distinct one-piece education stance. Do not add a civic voice, quota, or dedicated slice.
-  2. C103's Youth Apprenticeship and youth-program signals remain civic/workforce inputs in that shared lane; they do not yet establish an education-specific source stream.
-  3. Reopen for a dedicated education pack only when recurring school/education-specific engine rows need selection or sourcing beyond the shared civic lane.
-- **Verify:** `newsroom-fanout.js` and `cron-desk-run.js` both map `EDUCATION` to the civic lane; Angela's stance is education-specific.
-- **Status:** [x] done (codex 2026-08-11) — shared civic filter retained; dedicated education pack deferred to the stated trigger
+  1. Build one local-only substrate from `desk_signal` civic entries plus available cycle-matched civic decisions/datawakes. Preserve source labels and refs; never query Sheets or invent a civic fact.
+  2. Apply domain overlays for Carmen (civic/initiative), Luis (accountability/anomaly), Trevor (infrastructure/transit), Lila (health), Noah (environment), and Angela (education/youth). Rachel stays on her completed `buildSafetySlice.js` pack and is excluded. Each persona receives only its filtered candidate packet; no civic voice, quota, or control-plane agent change.
+  3. Emit `output/slices/c{N}/civic-domain.md` and `output/cron-compare/civic_domain_slice_c{N}.json`. Fanout materializes/reuses the shared file at the angle wake; report/write load the same selected persona packet.
+  4. Keep all completed heat builders unchanged.
+- **Verify:** targeted offline test covers six persona filters, retained refs, empty/fail-soft input, and deterministic reuse; smoke fixture contains a youth-apprenticeship candidate for Angela and no cross-domain candidate.
+- **Status:** [x] done (codex 2026-08-11) — shared builder, offline test, fanout/three-wake injection; Rachel safety slice untouched
 
 ### Task 7: Legacy desk skill note (bookkeeping)
 
@@ -168,7 +172,7 @@ Shipped exemplars: Jax (stink substrate + firebrand overlay), P Slayer (sports f
 
 - [ ] Fanout **culture quota = 1**: after evening pack, should high-heat evening force a second culture seat some days? (quota change = separate Mike call)
 - [ ] Business pack: live Sheets `Business_Ledger` vs disk-only until snapshot exists — default disk-first offline, optional Sheets behind explicit approve
-- [x] Task 6 education-pack decision: use the shared civic lane; reopen only for a recurring education-specific source stream that needs dedicated selection or sourcing
+- [x] Task 6 civic-domain pack: shared substrate plus six persona filters; no civic voice or quota change
 
 ---
 
@@ -190,6 +194,13 @@ Shipped exemplars: Jax (stink substrate + firebrand overlay), P Slayer (sports f
 - 2026-08-11 (codex) — Task 7 resolved: current headless fanout is already
   persona-only with one-piece prompt constraints. Legacy multi-voice desk skills
   remain pre-cron/edition context; no control-plane IDENTITY files changed.
+- 2026-08-11 (codex) — Builder directed an actual Task 6 civic-domain pack after
+  the plan-only decision. Scope is one local shared substrate for Carmen, Luis,
+  Trevor, Lila, Noah, and Angela; completed heat builders stay untouched.
+- 2026-08-11 (codex) — Task 6 shipped: `buildCivicDomainSlice.js` selects one
+  local civic substrate into six domain packets; fanout materializes it at the
+  angle wake and all three wakes reuse the selected packet. Offline tests and
+  fanout handoff tests pass; Rachel's completed safety slice is untouched.
 
 ---
 
@@ -211,3 +222,9 @@ Shipped exemplars: Jax (stink substrate + firebrand overlay), P Slayer (sports f
   filter and Angela's persona stance; no civic voice, quota, or dedicated slice.
 - 2026-08-11 (codex) — Task 7 recorded as plan-only bookkeeping: headless fanout
   remains persona-plus-pack; legacy multi-voice desk skills remain untouched.
+- 2026-08-11 (codex) — Reopened Task 6 for the builder-directed local civic-domain
+  pack: six persona filters on one shared substrate, without a civic voice or
+  quota change. Supersedes the prior plan-only Task 6 closure.
+- 2026-08-11 (codex) — Task 6 shipped: local civic-domain shared substrate with
+  Carmen/Luis/Trevor/Lila/Noah/Angela filters, targeted offline coverage, and
+  fanout plus three-wake injection; Rachel safety slice untouched.

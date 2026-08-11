@@ -16,13 +16,12 @@
 #   - settings.local.json (permission overrides)
 #   - .claude/agent-memory/ (persistent desk agent memory — civic, sports, culture, chicago, rhea)
 #
-# What's NOT backed up (already durable):
-#   - Code/docs → GitHub
+# What's NOT included in this archive (already durable):
+#   - Code/docs/output → GitHub
 #   - Simulation data → Google Sheets
 #   - Curated knowledge → Supermemory
 #   - Editions → Google Drive
-#   - output/drive-files/ → re-crawlable from Drive
-#   - output/desk-packets/ → regenerated every cycle
+#   - output/ → versioned in Git for recovery, including generated artifacts
 #
 # Usage:
 #   bash scripts/backup.sh           # Full backup + upload

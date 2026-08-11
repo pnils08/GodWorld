@@ -26,8 +26,7 @@ exports/*.json
 # MCP server config (contains API keys)
 .mcp.json
 
-# Generated desk packets and cycle output
-output/
+# Generated desk packets and cycle output are versioned in Git for recovery.
 
 # Logs (generated runtime output)
 logs/
@@ -47,8 +46,6 @@ data/audio/
 # Graphify output (generated knowledge graph artifacts, regenerated on demand)
 graphify-out/
 **/graphify-out/
-output/audit-reports/
-output/audit-state.json
 
 # Python bytecode caches (e.g., from godworld MCP server)
 __pycache__/
@@ -58,9 +55,6 @@ __pycache__/
 !.aiderignore
 !.aider.conf.yml
 
-# Headless desk-writer A/B test output (research.25 Thread A) — fabricated test
-# sections; never let them enter the repo as canon.
-output/cron-compare/
 
 # Boot payload log — rewritten every session start, pure local diagnostic state (S341)
 .claude/state/boot-payload.txt

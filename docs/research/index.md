@@ -1,7 +1,7 @@
 ---
 title: Research Sub-Catalog
 created: 2026-06-01
-updated: 2026-08-07
+updated: 2026-08-11
 type: reference
 tags: [research, architecture, active]
 sources:
@@ -68,6 +68,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 | **[[2026-08-07-next-work-queue-pslayer-cron-city-metrics]]** | Mike next-work queue: P Slayer fan-pulse slice, cron lifecycle review, city metrics (sick%/employment%) fine-tune to sim reality — recommended order B→C→A | `adopt` (queue; A has plan, B/C audit-first) |
 | **[[2026-08-07-voice-project-agents-social-wall-review]]** | Voice + project agents vs journalist social wiki wall — citizen-voice pages OK; civic office/project no position-wall; Okoro POPID identity/map drift; watch until Mike wants office-holder continuity on cp-POP | `watch` (adopt-trigger: office position wall design + POPID reconcile) |
 | **[[2026-08-08-journalist-heat-slice-architecture]]** | Journalist heat slices vs Mags desk-slices vs legacy multi-voice skills; only Jax+P Slayer have packs; evening/Riley data exists but culture seeds don't unpack nightlife/TV/restaurants/fame; shared substrate + persona overlay; Hal sports historian; Anthony analytic | `adopt` (ignites [[../plans/2026-08-08-journalist-heat-slice-packs]], pipeline.52) |
+| **[[2026-08-11-minmax-citizen-goals]]** | Mike concept seeds: min-maxing = per-citizen goal engine (dominant dial band selects the pumped stat, the dumped stat is the story; shape for engine.94 Track B typed ambition); minimax = scarce-slot contest resolution only (job openings, budgets — loser's row takes the consequence) | `adopt` — parked (usage-gated Mike-direct 2026-08-11; ignites via engine.94 Track B when research.17 gate + usage clear) |
 
 ---
 
@@ -109,3 +110,4 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 - 2026-08-07 — Registered NotebookLM audio overview direction via source prompt injection (Antigravity).
 - 2026-08-09 — Registered the S361 sim-integrity traces (engine-sheet): 50 findings across publication, desk inputs, life supply, money, citizen identity and ledger completeness, each labelled VERIFIED vs INFERRED. Adopt is gated — Mike halted C103 the same session.
 - 2026-08-10 (kimi) — research.26 close-out recorded on the [[2026-07-26-supermemory-retrieval-economics]] verdict cell: seat shipped S334 as `source-search` attributed to Marbury (`794861f5` + `4138acd1`); Rhea attribution superseded by the separation-of-duties hazard. Plan [[../plans/2026-08-10-data-analyst-retrieval-seat]].
+- 2026-08-11 (S366, research-build) — Registered [[2026-08-11-minmax-citizen-goals]] (Mike-direct concept seeds): adopt, parked on usage; no ROLLOUT row by Mike's direction — future build extends engine.94 Track B.

@@ -1,7 +1,7 @@
 ---
 title: Journalist heat-slice packs Plan
 created: 2026-08-08
-updated: 2026-08-10
+updated: 2026-08-11
 type: plan
 tags: [media, business, pipeline, active]
 sources:
@@ -136,16 +136,20 @@ Shipped exemplars: Jax (stink substrate + firebrand overlay), P Slayer (sports f
 
 - **Files:** plan status log + optional thin `buildCivicDomainSlice.js` later
 - **Steps:**
-  1. Document that Angela/education has no dedicated lane yet — either civic substrate filter or future education pack.
-  2. Do not block P0/P1 on this.
-- **Verify:** open question resolved or deferred with trigger.
-- **Status:** [ ] not started
+  1. **Decision (2026-08-11):** Angela uses the existing shared civic substrate: both fanout and the writer-wake civic lane include `EDUCATION`, and Angela has a distinct one-piece education stance. Do not add a civic voice, quota, or dedicated slice.
+  2. C103's Youth Apprenticeship and youth-program signals remain civic/workforce inputs in that shared lane; they do not yet establish an education-specific source stream.
+  3. Reopen for a dedicated education pack only when recurring school/education-specific engine rows need selection or sourcing beyond the shared civic lane.
+- **Verify:** `newsroom-fanout.js` and `cron-desk-run.js` both map `EDUCATION` to the civic lane; Angela's stance is education-specific.
+- **Status:** [x] done (codex 2026-08-11) — shared civic filter retained; dedicated education pack deferred to the stated trigger
 
 ### Task 7: Legacy desk skill note (bookkeeping)
 
 - **Files:** optional one-liner in culture-desk / sports-desk / business-desk IDENTITY or plan only
-- **Steps:** Mark multi-voice desks as pre-cron skills; headless uses personas + packs. No cron rewrite required if already persona-only.
-- **Status:** [ ] not started — media terminal may land control-plane notes
+- **Steps:**
+  1. **Decision (2026-08-11):** Record this in the plan only. Legacy multi-voice desk skills remain pre-cron/edition context; they are not headless wake behavior.
+  2. Headless fanout invokes an individual `--persona` per assignment, and the writer-wake prompt requires one piece rather than a multi-voice desk average. No cron rewrite or control-plane IDENTITY edit is required.
+- **Verify:** `cron-desk-run.js` persona/fanout path and `CRON_PIPELINE_MAP.md` describe persona slices per rostered journalist.
+- **Status:** [x] done (codex 2026-08-11) — plan-only bookkeeping; legacy desk skills left untouched
 
 ---
 
@@ -164,7 +168,7 @@ Shipped exemplars: Jax (stink substrate + firebrand overlay), P Slayer (sports f
 
 - [ ] Fanout **culture quota = 1**: after evening pack, should high-heat evening force a second culture seat some days? (quota change = separate Mike call)
 - [ ] Business pack: live Sheets `Business_Ledger` vs disk-only until snapshot exists — default disk-first offline, optional Sheets behind explicit approve
-- [ ] Task 6 education pack trigger: when youth/school rows appear on feed or world events
+- [x] Task 6 education-pack decision: use the shared civic lane; reopen only for a recurring education-specific source stream that needs dedicated selection or sourcing
 
 ---
 
@@ -179,6 +183,13 @@ Shipped exemplars: Jax (stink substrate + firebrand overlay), P Slayer (sports f
   wake package. `JORDAN-LEP2-1` reuses the single-reporter `business-desk`
   identity and carries this plan's economic/storefront pack through LEP/2 as
   sourced anchors and bounded creative limits. Local-only; Tasks 6–7 remain open.
+- 2026-08-11 (codex) — Task 6 resolved: the existing civic lane already carries
+  `EDUCATION`, and Angela already has an education-specific one-piece stance.
+  C103 youth-apprenticeship signals remain shared civic/workforce inputs; a
+  dedicated education pack waits for a recurring education-specific source stream.
+- 2026-08-11 (codex) — Task 7 resolved: current headless fanout is already
+  persona-only with one-piece prompt constraints. Legacy multi-voice desk skills
+  remain pre-cron/edition context; no control-plane IDENTITY files changed.
 
 ---
 
@@ -196,3 +207,7 @@ Shipped exemplars: Jax (stink substrate + firebrand overlay), P Slayer (sports f
   Kai's scored pulse, bag authority, named TV/movie/event/place/fame inputs, and
   source pointers; Mason, Maria, Sharon, and Graye remain separate package
   gates. No model or external-state run.
+- 2026-08-11 (codex) — Task 6 resolved through the existing civic `EDUCATION`
+  filter and Angela's persona stance; no civic voice, quota, or dedicated slice.
+- 2026-08-11 (codex) — Task 7 recorded as plan-only bookkeeping: headless fanout
+  remains persona-plus-pack; legacy multi-voice desk skills remain untouched.

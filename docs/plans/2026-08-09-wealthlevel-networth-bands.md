@@ -98,3 +98,32 @@ distribution — target roughly monotonic deciles, keep 0–10 contiguous):
   executes it as their own lane work, which needs no Claude involvement at all.
 - Mike-direct constraints honored: no new column (sheet bloat), no backfill
   (self-healing derived column), GodWorld-native bands (no Oakland import).
+
+## Reader-file eyeball (S364, research-build — closes the open item)
+
+Result: **no structural changes needed, no band constants adjusted.**
+
+- `migrationTrackingEngine.js`, `educationCareerEngine.js` — WealthLevel in
+  header comments only; neither reads the column. Clean.
+- `loadEventContentLedger.js` — `wealth` is a semantics-agnostic DSL field;
+  thresholds live in sheet-authored Conditions (`wealth<=3`, one
+  `wealth<=5`), retunable without a deploy. Clean.
+- `generateCitizensEvents.js` (~2443) + `citizenContextBuilder.js`
+  `wealthBand` (~90) — the one real threshold pair, `<=3` tight / `>=8`
+  comfortable. Shift measured on the S363 snapshot (940 rows, WL recomputed
+  from NetWorth with v15 bands): tight 173→120 (18.4%→12.8%); comfortable
+  156→235 (16.6%→25.0%); `>=9` would capture only 31 (3.3%) and starve the
+  pool. Verdict: constants stay.
+- New-band distribution (n=940): 90/7/15/8/46/149/201/189/204/13/18 for
+  WL 0–10 — all rungs reachable, WL8 no longer empty.
+
+Live C103 (2026-08-10) ran the old formula and re-clobbered the S363
+direct-written column — the cost of the "rides next wave" gate, retired
+project-wide same night (Mike-direct S364: no code ever waits). Column
+self-heals next live fire.
+
+## Changelog
+
+- 2026-08-09 — Designed + code landed (eda94abd); bench C117 confirm 952/956; live column direct-written.
+- 2026-08-10 — Reader eyeball closed (no constant changes); LIVE DEPLOYED S364 (`clasp push`), wave gate retired.
+- 2026-08-10 — Restored after repo deletion (original commits 78edbd23/5465834a lost with local clone).

@@ -709,8 +709,9 @@ function processAdvancementRows_(ctx, now, cycle) {
       // engine's (C106: POP-01062 landed stage-blank via this path).
       var lCareerStage = findColByName_(ledgerHeaders, 'CareerStage');
       if (lCareerStage >= 0) {
-        var stMap = { early: 'entry-level', mid: 'mid-career', senior: 'senior', retired: 'retired' };
-        newRow[lCareerStage] = age < 22 ? 'student' : (stMap[profile._careerStage] || 'entry-level');
+        // engine.82 (S366): canonical enum via shared derivation — an active
+        // RoleType beats the age<22 student stamp (the C103 $24M-ace class).
+        newRow[lCareerStage] = deriveCareerStage_('active', newRoleType, age, profile.YearsInCareer);
       }
       // engine.66 — the name they carried before taking the family surname
       var lMaiden = findColByName_(ledgerHeaders, 'MaidenName');

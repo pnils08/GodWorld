@@ -333,7 +333,7 @@ function lookupIncome_(roleType) {
 
 function computeCareerStage_(seed, age, roleType) {
   if (age >= 65) return 'retired';
-  if (age < 25) return 'early';
+  if (age < 25) return 'entry'; // engine.82: canonical enum ('early' retired)
   if (age < 40) return 'mid';
   if (age < 55) return rand01_(seed, 'career') < 0.3 ? 'senior' : 'mid';
   return 'senior';

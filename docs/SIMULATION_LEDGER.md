@@ -238,7 +238,7 @@ Every column is a data point in someone's life. This maps who writes each column
 |-----|---|--------|-------------|---------|---------|--------------|
 | AF | 32 | EducationLevel | hs-diploma / bachelors / masters / doctorate / trade-cert / associates | educationCareerEngine | buildDeskPackets, migrationTrackingEngine | **CAUSAL** — EDU_SAVINGS_FACTOR yield 1.0-1.2x; `eduRank_` gates mid→senior advancement; migration displacement-risk gate (`:254`) |
 | AG | 33 | SchoolQuality | Numeric rating | educationCareerEngine | — | **CAUSAL** — `settleAdulthood_` career-entry draw (sq>=8 +2, >=6 +1); stamped on minors from Neighborhood_Demographics |
-| AH | 34 | CareerStage | entry / mid / senior / retired | educationCareerEngine | queryFamily | **CAUSAL** — advancement state machine gates |
+| AH | 34 | CareerStage | student / entry / mid / senior / retired — canonical short forms (engine.82 S366; legacy spellings normalized on read via careerStageClass_, all writers emit canonical via deriveCareerStage_; role+status beat age heuristics) | educationCareerEngine | queryFamily | **CAUSAL** — advancement state machine gates |
 | AI | 35 | YearsInCareer | Integer | educationCareerEngine | — | **CAUSAL** — tenure gates (>=5 entry→mid, >=10 mid→senior) |
 | AJ | 36 | CareerMobility | advancing / stagnant / declining | educationCareerEngine | runCareerEngine `maybeTransition_` (S321 wire) | **CAUSAL** — stagnant 1.25× / declining 1.4× on shift/lateral transition rolls |
 | AK | 37 | LastPromotionCycle | Cycle number (integer) | educationCareerEngine | — | **CAUSAL** — cyclesSincePromotion gates all advancement + stagnation (>=40) |

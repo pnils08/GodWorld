@@ -43,4 +43,18 @@ GodWorld-native role-family bands (no real-world import per [[../SIM_DOCTRINE]])
 
 ## State
 
-Task 1–2 ready for bench; Task 3 design-only. Bench first, then prod push same session per no-code-ever-waits once proven.
+Tasks 1–2 code SHIPPED S366 (commit `cadebead`, live `clasp push` done, offline proof `scripts/careerStage.test.js` 36/36 — bench 0720 gone per Mike, offline harness is the proving path). Column repair pending — see §Incident. Task 3 design-only, untouched.
+
+## Incident — S366 YearsInCareer clobber + blocked recovery
+
+First `--apply` of the column repair passed `iStage+1` to `updateRangeByPosition`, whose `startCol` is **0-indexed** (`lib/sheets.js:589`) — 940 stage strings landed in col AI (**YearsInCareer**) instead of AH. CareerStage itself untouched; the read-back verify caught it immediately. Recovery is staged and dry-run-verified, blocked only on permission (classifier denied the writes ×2 → stopped per protocol):
+
+1. `node scripts/migrations/engine82_restoreYearsInCareer.js --apply` — restores all 940 values from `output/simulation_ledger_snapshot.jsonl` (06:15 same day; dry-run: 940/940 POPID match, 0 missing, all 940 cells confirmed clobbered).
+2. `node scripts/migrations/engine82_repairCareerStage.js --apply` — the CareerStage repair, off-by-one fixed.
+
+**Order is mandatory** — the repair derivation reads YearsInCareer; run against the clobbered column it bands everyone entry. Same dependency applies to the engine's own self-heal: no cycle may fire before the restore lands. No cron fires engine cycles (verified: crontab has zero cycle triggers), so the corrupt column is inert until the next manual fire.
+
+## Changelog
+
+- 2026-08-11 (S366) — Tasks 1–2 built, proven (36/36 harness), committed `cadebead`, deployed live via clasp push.
+- 2026-08-11 (S366) — Column-repair incident: YearsInCareer clobbered by 0-index off-by-one; recovery staged, blocked on permission — see §Incident.

@@ -2179,7 +2179,7 @@ function processGCCourtship_(ctx) {
     var dYears = deriveYearsInCareer_(dSeed, gAgeM, dRetired ? 'retired' : '');
     if (dYears > Math.max(0, gAgeM - 18)) dYears = Math.max(0, gAgeM - 18);
     setC('YearsInCareer', dYears);
-    setC('CareerStage', deriveCareerStage_('active', newRow[idxCol('RoleType')], gAgeM, dYears)); // engine.82: canonical enum, role beats age
+    setC('CareerStage', dRetired ? 'retired' : (dYears >= 5 ? 'mid-career' : 'entry-level'));
     setC('EducationLevel', deriveEducationLevel_(dSeed, P.hood, gAgeM, null));
     setC('DebtLevel', deriveDebtLevel_(dSeed, gAgeM, GC_SPOUSE_INCOME));
     setC('NetWorth', deriveNetWorth_(dSeed, gAgeM, GC_SPOUSE_INCOME, dRetired ? 'retired' : ''));
@@ -2370,7 +2370,7 @@ function processGCMarriageLottery_(ctx) {
     var dYears = deriveYearsInCareer_(dSeed, pick.age, dRetired ? 'retired' : '');
     if (dYears > Math.max(0, pick.age - 18)) dYears = Math.max(0, pick.age - 18);
     setC('YearsInCareer', dYears);
-    setC('CareerStage', deriveCareerStage_('active', newRow[idxCol('RoleType')], pick.age, dYears)); // engine.82: canonical enum, role beats age
+    setC('CareerStage', dRetired ? 'retired' : (dYears >= 5 ? 'mid-career' : 'entry-level'));
     setC('EducationLevel', deriveEducationLevel_(dSeed, P.hood, pick.age, null));
     setC('DebtLevel', deriveDebtLevel_(dSeed, pick.age, GC_SPOUSE_INCOME));
     setC('NetWorth', deriveNetWorth_(dSeed, pick.age, GC_SPOUSE_INCOME, dRetired ? 'retired' : ''));

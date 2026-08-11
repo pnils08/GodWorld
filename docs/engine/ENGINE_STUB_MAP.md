@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-08-11 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-08-04 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -38,16 +38,6 @@
 
 - **isCanonNeighborhood_(ctx, name)**
   Reads: S.canonHoods
-
-### engine94SheetContract.js
-- **inspectEngine94Config_(values)**
-
-- **inspectEngine94CivicHeader_(header)**
-
-- **readEngine94CivicHeader_(sheet)**
-
-- **ensureEngine94SheetContract_(ss)**
-  Sheets: Civic_Office_Ledger, World_Config
 
 ### godWorldEngine2.js
 - **logEngineError_(ctx, phase, error)**
@@ -373,16 +363,9 @@
 ### applyDemographicDrift.js
 - **applyDemographicDrift_(ctx)**
   Reads: S.cityDynamics, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsAtmosphereEnabled, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
-  Writes: S.demographicDrift, S.hospitalTalkback, S.migrationClamps, S.sportsAtmosphereEnabled
-  Sheets: Hospital_Ledger, World_Population
+  Writes: S.demographicDrift, S.sportsAtmosphereEnabled
+  Sheets: World_Population
   RNG: ctx.rng / safeRand_(ctx)
-
-- **cfgNum_(ctx, cfg, key, defaultValue)**
-  Reads: S.auditIssues
-
-- **pushMissingConfigWarning_(ctx, key, defaultValue)**
-  Reads: S._configMissingWarnings, S.auditIssues
-  Writes: S._configMissingWarnings, S.auditIssues
 
 ### deriveDemographicDrift.js
 - **deriveDemographicDrift_(ctx)**
@@ -461,7 +444,7 @@
 - **updateNeighborhoodDemographics_(ctx)**
   Reads: S.crimeMetrics, S.cycleId, S.demographicDrift, S.demographicDriftFactors, S.holiday, S.isCreationDay, S.isFirstFriday, S.sportsAtmosphereEnabled, S.sportsSeason, S.weatherEvents
   Writes: S.demographicShifts, S.demographicShiftsCount, S.neighborhoodDemographics, S.sportsAtmosphereEnabled
-  Config: ctx.config.cycleCount, ctx.config.employmentFallbackRate, ctx.config.illnessFallbackRate
+  Config: ctx.config.cycleCount
   RNG: ctx.rng / safeRand_(ctx)
 
 - **buildNeighborhoodDemographicModifiers_(holiday, isFirstFriday, isCreationDay, sportsSeason)**
@@ -651,11 +634,8 @@
 
 - **checkDeath_(ctx, popId, age, lifeHistory, tier, cal)**
 
-- **checkHealthEvent_(ctx, popId, age, lifeHistory, cal, neighborhood)**
-  Reads: S.demographicDrift, S.neighborhoodDemographics
-  Config: ctx.config.illnessFallbackRate
-
-- **buildAdmissionCause_(ctx, admitStatus, healthResult, cal)**
+- **checkHealthEvent_(ctx, popId, age, lifeHistory, cal)**
+  Reads: S.demographicDrift
 
 - **triggerBirthCascade_(ctx, parentId, parentName, neighborhood, cycle, cal)**
   Reads: S.pendingCascades
@@ -1081,10 +1061,6 @@
 ### educationCareerEngine.js
 - **careerStageClass_(v)**
 
-- **roleIsActive_(roleType)**
-
-- **deriveCareerStage_(status, roleType, age, yearsInCareer)**
-
 - **processEducationCareer_(ctx)**
   Reads: S.cycleId
   Config: ctx.config.cycleCount
@@ -1150,12 +1126,10 @@
 ### generateCitizensEvents.js
 - **balanceContentLedgerPoolWeights_(pool)**
 
-- **applyGriefPoolWeights_(pool, griefConfig)**
-
 - **generateCitizensEvents_(ctx)**
   Reads: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.cityDynamics, S.contentLedger, S.crimeByNeighborhood, S.crimeMetrics, S.cycle, S.cycleActiveCitizens, S.cycleId, S.economicMood, S.eventsGenerated, S.faithEvents, S.faithExposures, S.holiday, S.holidayPriority, S.initiativeEvents, S.isCreationDay, S.isFirstFriday, S.localEntities, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.simYear, S.simulationYear, S.sportsFeedEntries, S.sportsSeason, S.sportsSentimentBoost, S.storyHooks, S.templateCooldowns, S.transitState, S.weather, S.worldEvents
   Writes: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.crimeMetrics, S.cycleActiveCitizens, S.eventsGenerated, S.faithExposures, S.householdMoments, S.localEntities, S.storyHooks, S.templateCooldowns
-  Config: ctx.config.cycleCount, ctx.config.eclExclusiveMinLines, ctx.config.eclExclusivePools, ctx.config.rngSeed
+  Config: ctx.config.cycleCount, ctx.config.rngSeed
   Sheets: Content_Telemetry, Generic_Citizens, LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -1274,7 +1248,6 @@
 - **updateHeritage_(ss, ctx, cycle)**
   Reads: S.homesPurchasedByLine, S.storyHooks
   Writes: S.heritage, S.storyHooks
-  Config: ctx.config.bizIdHighWater
   Sheets: Business_Ledger, Cultural_Ledger, Family_Relationships, Heritage_Ledger
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -1603,18 +1576,10 @@
   Reads: S.bondSummary
 
 ### updateCivicApprovalRatings.js
-- **getApprovalCeilingConfig_(ctx)**
-
-- **resolveApprovalCeilingLifecycle_(state, cycle)**
-
-- **applyApprovalCeilingRisk_(state, config, rng)**
-
 - **updateCivicApprovalRatings_(ctx)**
-  Reads: S.absoluteCycle, S.approvalCeilingEvents, S.approvalNeighborhoodEffects, S.cycleId, S.editionDomainBalance, S.storyHooks
-  Writes: S.approvalCeilingEvents, S.approvalChanges, S.approvalNeighborhoodEffects, S.approvalTriggers, S.storyHooks
-  Config: ctx.config.cycleCount
+  Reads: S.approvalNeighborhoodEffects, S.editionDomainBalance
+  Writes: S.approvalChanges, S.approvalNeighborhoodEffects, S.approvalTriggers
   Sheets: Civic_Office_Ledger, Initiative_Tracker
-  RNG: ctx.rng / safeRand_(ctx)
 
 - **isPerforming_(phase)**
 
@@ -1651,7 +1616,7 @@
 - **applyMigrationDrift_(ctx)**
   Reads: S.cityDynamics, S.economicMood, S.economicMoodDesc, S.economicRipples, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.manualMigrationInputs, S.neighborhoodEconomies, S.rngState, S.sportsSeason, S.weather, S.worldEvents
   Writes: S.economicMood, S.economicMoodDesc, S.migrationDrift, S.migrationDriftFactors, S.migrationEconomicLink, S.neighborhoodEconomies, S.neighborhoodEconomyFeedback, S.neighborhoodMigration, S.rngState
-  Config: ctx.config.enableMigrationEconomicFeedback, ctx.config.enableMigrationNeighborhoodEconomicFeedback, ctx.config.manualMigrationInputs, ctx.config.migrationEconomicFeedbackMaxDelta, ctx.config.migrationEconomicFeedbackScale, ctx.config.migrationNeighborhoodEconomicFeedbackMaxDelta, ctx.config.migrationNeighborhoodEconomicFeedbackScale, ctx.config.migrationPopulationFallback, ctx.config.rngSeed, ctx.config.rngState
+  Config: ctx.config.enableMigrationEconomicFeedback, ctx.config.enableMigrationNeighborhoodEconomicFeedback, ctx.config.manualMigrationInputs, ctx.config.migrationEconomicFeedbackMaxDelta, ctx.config.migrationEconomicFeedbackScale, ctx.config.migrationNeighborhoodEconomicFeedbackMaxDelta, ctx.config.migrationNeighborhoodEconomicFeedbackScale, ctx.config.rngSeed, ctx.config.rngState
   Sheets: Neighborhood_Map, World_Population
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -1670,7 +1635,7 @@
 - **applyShockMonitor_(ctx)**
   Reads: S.absoluteCycle, S.cityDynamics, S.civicLoad, S.civicLoadScore, S.currentCycleState, S.cycle, S.cycleId, S.demographicDrift, S.economicMood, S.eventArcs, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.patternFlag, S.previousCycleState, S.simMonth, S.sportsSeason, S.sportsSource, S.weather, S.weatherMood, S.worldEvents
   Writes: S.currentCycleState, S.previousCycleState, S.shockCalendarContext, S.shockDuration, S.shockFlag, S.shockReasons, S.shockScore, S.shockStartCycle
-  Config: ctx.config.cycleCount, ctx.config.employmentFallbackRate
+  Config: ctx.config.cycleCount
 
 ### computeRecurringCitizens.js
 - **computeRecurringCitizens_(ctx)**
@@ -1712,8 +1677,9 @@
   Writes: S.economicMood, S.economicMoodDesc
 
 - **deriveEmploymentRate_(ctx)**
-  Reads: S.derivedEmploymentRate, S.economicMood
+  Reads: S.economicMood
   Writes: S.derivedEmploymentRate
+  Sheets: World_Population
 
 - **calculateNeighborhoodEconomies_(ctx)**
   Reads: S.economicMood, S.economicRipples
@@ -2872,18 +2838,10 @@
 - **decayChaosExposure_(c, currentCycle)**
 
 ### compressLifeHistory.js
-- **griefConfigNumber_(ctx, key, min, max, integerOnly)**
-
-- **getGriefConfig_(ctx)**
-  Reads: S.relationshipBonds
-  Sheets: Reflection_Intake
-
 - **readPendingReflections_(ctx)**
 
-- **nudgeBondIntensity_(bonds, totals, fromPop, toPop, delta, cycle)**
-
 - **compressLifeHistory_(ctx, options)**
-  Reads: S.absoluteCycle, S.biasIntents, S.cycleId, S.pendingCascades, S.relationshipBonds
+  Reads: S.absoluteCycle, S.biasIntents, S.cycleId
   Writes: S.lifeHistoryCompression
 
 - **parseLifeHistoryEntries_(historyStr)**
@@ -2931,16 +2889,6 @@
 - **zeroMood_(c)**
 
 - **parseMemoryRegisters_(str)**
-
-- **validGriefCycle_(n)**
-
-- **griefCycleNumber_(raw)**
-
-- **foldGriefCascades_(regs, cascades)**
-
-- **pruneExpiredGrief_(regs, cycle)**
-
-- **activeGriefFromRegisters_(str, cycle)**
 
 - **foldBiasIntents_(regs, intents, cycle)**
 
@@ -3429,7 +3377,32 @@ _No top-level function declarations found (helper/constants file)._
 
 - **validateIntent_(intent)**
 
+### youthActivities.js
+- **ensureYouthEventsSchema_(ss)**
+
+- **getSchoolsInNeighborhood_(neighborhood)**
+
+- **assignSchoolForYouth_(age, neighborhood, rng)**
+
+- **getRecentYouthEvents_(ss, cyclesBack)**
+
+- **getYouthEventsForCitizen_(ss, youthId)**
+
+- **recordYouthEvent_(ctx, event)**
+  Reads: S.absoluteCycle
+
+- **batchRecordYouthEvents_(ctx, events)**
+  Reads: S.absoluteCycle
+
+- **pickYouthEvent_(eventType, rng)**
+
+- **getAcademicPeriod_(month)**
+
+- **selectYouthEventType_(age, month, rng)**
+
+- **generateYouthOutcome_(eventType, rng)**
+
 ---
 
 **Files scanned:** 181
-**Functions mapped:** 1142
+**Functions mapped:** 1132

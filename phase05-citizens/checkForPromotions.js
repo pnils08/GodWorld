@@ -431,9 +431,7 @@ function checkForPromotions_(ctx) {
     }
     setL('Income', dIncome);
     setL('YearsInCareer', dYears);
-    // engine.82 (S366): canonical enum via shared derivation — role beats age.
-    // (age<18 set RoleType='student' above, so minors still derive 'student'.)
-    setL('CareerStage', deriveCareerStage_('active', iRoleType >= 0 ? newRow[iRoleType] : occ, age, dYears));
+    setL('CareerStage', age < 22 ? 'student' : (dRetired ? 'retired' : (dYears >= 5 ? 'mid-career' : 'entry-level')));
     setL('EducationLevel', deriveEducationLevel_(dSeed, neigh, age, null));
     setL('DebtLevel', age < 18 ? 0 : deriveDebtLevel_(dSeed, age, dIncome));
     setL('NetWorth', age < 18 ? 0 : deriveNetWorth_(dSeed, age, dIncome, dRetired ? 'retired' : ''));

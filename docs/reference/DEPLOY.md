@@ -49,9 +49,7 @@ sandbox is the intended target for anything unverified.
 bench is the same state as live, so the bench fire + sheet verify is the smoke. Live runs
 clear whenever Mike fires them; they confirm, they don't gate.
 
-**NO CURRENT SANDBOX (Mike-direct 2026-08-11, S366).** SANDBOX 0720 is gone; no bench exists. Until a new one is stood up (§Standing up a NEW sandbox — requires Mike for the Drive copy + Script Properties), engine changes prove via offline Node harnesses (`scripts/*.test.js` vm-sandbox pattern, e.g. `hospitalTalkback.test.js`, `careerStage.test.js`) and verify on the next live cycle fire. Column repairs snapshot a pre-image to `output/` before writing.
-
-**RETIRED: `SANDBOX 0720` (S328 2026-07-20 → gone 2026-08-11).** Was: copy of live at post-C102 canonical state (prod code engine.57-.71 incl. weather/transit/crisis coupling; C102 fired live by Mike, verify PASS). Purpose: vet the next engine wave (Row 24 career-unfreeze prod window, engine.72 triage fixes) before live carries it. Sheet name `SANDBOX_0720_Simulation_Narrative` (71 tabs).
+**CURRENT sandbox: `SANDBOX 0720` (S328 2026-07-20).** Copy of live at post-C102 canonical state (prod code engine.57-.71 incl. weather/transit/crisis coupling; C102 fired live by Mike, verify PASS). Purpose: vet the next engine wave (Row 24 career-unfreeze prod window, engine.72 triage fixes) before live carries it. Sheet name `SANDBOX_0720_Simulation_Narrative` (71 tabs).
 - Spreadsheet ID `1SHlquj9iLCK129SQEcXcvFCNkuGMgwLItDPj_ERiofI`
 - Bound Apps Script ID: `1ntl6YwpLt-KwIX7HWCU-swMk-cGQ8aZR0aKNh5qUjz93m4OPUVhIB5nV`
 - Code current at exact main `d3b70f3c` (2026-08-09 Codex engine.94 code-only deployment safety correction; temp-dir route, sandbox target verified and production target untouched). Remote pull-back matched all 172 deployed files byte-for-byte with zero test files. Service-account read access verified from Node.

@@ -87,59 +87,13 @@ function careerStageClass_(v) {
   return 'MID'; // blank/unknown keeps the existing default-to-MID behavior
 }
 
-// engine.82 (S366): canonical enum is the SHORT form — student | entry | mid |
-// senior | retired. careerStageClass_ still accepts every legacy spelling on
-// read; all write sites now emit canonical strings via deriveCareerStage_ /
-// CAREER_STAGES, so the vocabulary converges instead of drifting.
 var CAREER_STAGES = {
   STUDENT: 'student',
-  ENTRY: 'entry',
-  MID: 'mid',
+  ENTRY: 'entry-level',
+  MID: 'mid-career',
   SENIOR: 'senior',
   RETIRED: 'retired'
 };
-
-// engine.82 (S366): the single role-activity predicate. A role is active
-// unless blank, 'student', or it carries 'retired' anywhere in the string
-// ("Retired PG&E Engineer"). Every stage writer routes through this — do not
-// inline role checks per file; a duplicated predicate is how enum drift starts.
-function roleIsActive_(roleType) {
-  var role = String(roleType || '').trim().toLowerCase();
-  if (!role || role === 'student') return false;
-  if (role.indexOf('retired') !== -1) return false;
-  return true;
-}
-
-// engine.82 (S366): canonical CareerStage derivation — role+status beat any
-// age heuristic. The age-only stamps (age<22 → student, age>=65 → retired)
-// mislabeled the sitting Mayor and an active $24M Cy Young candidate (C103
-// audit: 217 active 'retired', 5 active athletes 'student'). Rules:
-//   Status retired/deceased            → retired
-//   role contains 'retired'            → retired
-//   role 'student', or no role + age<22 → student
-//   no role + age>=65                  → retired
-//   no role otherwise                  → '' (blank allowed only when roleless)
-//   active role → band by YearsInCareer: 0-2 entry, 3-9 mid, 10+ senior
-// YearsInCareer is clamped to age-18 first — mislabeled-retired rows carry
-// 35-45yr fossils from deriveYearsInCareer's retiree branch; unclamped, a
-// 25-year-old 'retired' would repair straight into 'senior' (same lie, new label).
-function deriveCareerStage_(status, roleType, age, yearsInCareer) {
-  var st = String(status || 'active').trim().toLowerCase();
-  if (st === 'retired' || st === 'deceased') return CAREER_STAGES.RETIRED;
-  var role = String(roleType || '').trim().toLowerCase();
-  if (role.indexOf('retired') !== -1) return CAREER_STAGES.RETIRED;
-  if (!roleIsActive_(roleType)) {
-    if (role === 'student' || (Number(age) || 0) < 22) return CAREER_STAGES.STUDENT;
-    if ((Number(age) || 0) >= 65) return CAREER_STAGES.RETIRED;
-    return '';
-  }
-  var yrs = Number(yearsInCareer) || 0;
-  var ageN = Number(age) || 0;
-  if (ageN >= 18 && yrs > ageN - 18) yrs = Math.max(0, ageN - 18);
-  if (yrs < 3) return CAREER_STAGES.ENTRY;
-  if (yrs < 10) return CAREER_STAGES.MID;
-  return CAREER_STAGES.SENIOR;
-}
 
 // Career mobility states
 var CAREER_MOBILITY = {
@@ -364,7 +318,6 @@ function updateCareerProgression_(ctx, cycle, rng) {
   var iStatus = idx('Status');
   var iLastPromotion = idx('LastPromotionCycle');
   var iLife = idx('LifeHistory');
-  var iRole = idx('RoleType'); // engine.82: role beats age in stage stamps
   // Row 24 (b): the OWNING engine stamps the promotion narrative
   var iPop24 = idx('POPID');
   var iFirst24 = idx('First');
@@ -404,20 +357,11 @@ function updateCareerProgression_(ctx, cycle, rng) {
       row[iYearsInCareer] = Math.round(yearsInCareer * 10) / 10;
     }
 
-    // Check for career stage advancement — engine.82 (S366): the age-only
-    // stamps here were the bug class (sitting Mayor 'retired', $24M ace
-    // 'student'). An active RoleType ALWAYS beats the age heuristic; the
-    // age stamps now apply only to roleless citizens.
-    var roleActive = iRole >= 0 ? roleIsActive_(row[iRole]) : false;
-    if (!roleActive && age < 22) {
+    // Check for career stage advancement
+    if (age < 22) {
       row[iCareerStage] = CAREER_STAGES.STUDENT;
-    } else if (!roleActive && (age >= 65 || String(row[iRole] || '').toLowerCase().indexOf('retired') !== -1)) {
+    } else if (age >= 65) {
       row[iCareerStage] = CAREER_STAGES.RETIRED;
-    } else if (roleActive && (careerStageClass_(careerStage) === 'STUDENT' || careerStageClass_(careerStage) === 'RETIRED' || !String(row[iCareerStage] || '').trim())) {
-      // Self-heal a mislabeled or blank stage on an active-role citizen —
-      // re-derive from status+role+years so the column converges each cycle
-      // without waiting for the one-time repair write.
-      row[iCareerStage] = deriveCareerStage_(row[iStatus], row[iRole], age, yearsInCareer);
     } else {
       // Check if eligible for advancement — class-normalized (Row 24 a)
       var cyclesSincePromotion = cycle - lastPromotion;
@@ -507,7 +451,7 @@ function detectCareerMobility_(ctx, cycle, rng) {
     if (status === 'deceased') continue;
 
     var lastPromotion = iLastPromotion >= 0 ? (Number(row[iLastPromotion]) || 0) : 0;
-    var careerStage = iCareerStage >= 0 ? (row[iCareerStage] || CAREER_STAGES.MID) : CAREER_STAGES.MID;
+    var careerStage = iCareerStage >= 0 ? (row[iCareerStage] || 'mid-career') : 'mid-career';
     var cyclesSincePromotion = cycle - lastPromotion;
 
     var mobility = CAREER_MOBILITY.STAGNANT;
@@ -855,11 +799,9 @@ function settleAdulthood_(ctx, cycle, rng) {
     if (iDebt2 >= 0) row[iDebt2] = deriveDebtLevel_(sSeed, 18, row[iInc]);
     if (iNW2 >= 0) row[iNW2] = deriveNetWorth_(sSeed, 18, row[iInc], '');
     if (iYears2 >= 0) row[iYears2] = 0;
-    // engine.82 (S366): this block just assigned a real role + income, so the
-    // stage is 'entry' (years 0). Pre-.104 it wrote 'student' to avoid
-    // flip-flopping against the unconditional <22 stamp; that stamp is now
-    // role-aware and no longer fires on an active-role 18-year-old.
-    if (iStage2 >= 0) row[iStage2] = CAREER_STAGES.ENTRY;
+    // 'student' matches the <22 stamp updateCareerProgression_ re-applies every
+    // cycle — writing 'entry-level' here would just flip-flop against it.
+    if (iStage2 >= 0) row[iStage2] = 'student';
 
     // engine.62 (S322): employer wire — first job gets an econ key + employer.
     // Without the key, calculateCitizenIncomes_ re-derives this income next

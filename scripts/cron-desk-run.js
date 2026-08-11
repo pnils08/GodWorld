@@ -363,9 +363,15 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
 // wallPosts: HARD-INJECTED social wiki wall lines (reporterWall) — not optional tool.
 function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, assignment, wallBlock) {
   const L = [];
+  // R3 — identity-load provenance for the state artifact: how much of each
+  // citizen surface actually resolved against the ledger. Rendered as an HTML
+  // comment at the tail (same stripped-before-publication class as the
+  // SELF-SCORE footer) — greppable in the artifact trail, invisible in prose.
+  const profileStamp = { assignment: null, lane: null, quotes: null };
   const story = assignment && assignment.story;
   if (story) {
     const brief = citizenBrief(story.citizens);
+    if (brief.total) profileStamp.assignment = brief.resolved + '/' + brief.total;
     L.push('### YOUR ASSIGNMENT (from your editor — the angle is fixed; the story is yours)');
     L.push('ANGLE: ' + (story.angle || story.label));
     if (story.hookLine) L.push('HOOK: ' + story.hookLine);
@@ -713,15 +719,22 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
   // in the assignment. Same profilesFor already used for quotes — it simply never
   // reached this block.
   const laneProfiles = new Map();
-  {
-    const lanePops = [...new Set(lane.flatMap(e => e.popids || []))];
-    if (lanePops.length) {
-      try {
-        for (const line of require('./canon-name-check').profilesForPopids(lanePops)) {
-          const m = String(line).match(/popid: (POP-\d+)/);
-          if (m) laneProfiles.set(m[1], line);
-        }
-      } catch (_) { /* resolver unavailable — entries still render without profiles */ }
+  const lanePops = [...new Set(lane.flatMap(e => e.popids || []))];
+  if (lanePops.length) {
+    try {
+      for (const line of require('./canon-name-check').profilesForPopids(lanePops)) {
+        const m = String(line).match(/popid: (POP-\d+)/);
+        if (m) laneProfiles.set(m[1], line);
+      }
+    } catch (e) {
+      // R3 — was a silent swallow; an unresolved lane reads as "no ledger
+      // record" downstream, which is exactly the invented-bio invite.
+      log('[profiles] lane resolver unavailable — entries render without profiles: ' + e.message);
+    }
+    profileStamp.lane = laneProfiles.size + '/' + lanePops.length;
+    if (laneProfiles.size < lanePops.length) {
+      log('[profiles] lane citizens resolved ' + laneProfiles.size + '/' + lanePops.length
+        + ' — NO LEDGER PROFILE: ' + lanePops.filter(p => !laneProfiles.has(p)).join(', '));
     }
   }
   for (const e of lane) {
@@ -744,9 +757,14 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
     L.push('residents or attribute a quote to anyone not listed here. If you need no quote, use none —');
     L.push('but never fabricate a source when these are provided. Never print their ID numbers.');
     L.push('');
-    // POPIDs deliberately absent — "Name (POP-…)" in the state taught the writer
-    // to print literal POPIDs in prose (gate flag class, first 2.5.2 live run).
-    const qProfiles = citizenBrief(quotes.map(q => q.name)).profiles;
+    // POPIDs deliberately absent from the RENDERED state — "Name (POP-…)" taught
+    // the writer to print literal POPIDs in prose (gate flag class, first 2.5.2
+    // live run). They still key the lookup: batch quotes carry .pop, and the
+    // POPID-keyed path is the one a name typo can't derail (R1). citizenBrief
+    // strips the id from every profile line it returns.
+    const qBrief = citizenBrief(quotes.map(q => q.name + (q.pop ? ' (' + q.pop + ')' : '')));
+    const qProfiles = qBrief.profiles;
+    if (qBrief.total) profileStamp.quotes = qBrief.resolved + '/' + qBrief.total;
     for (const q of quotes) {
       L.push('- ' + q.name + ': "' + String(q.quote).replace(/\s+/g, ' ').trim() + '"');
     }
@@ -809,6 +827,12 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
   L.push('Second, this exact one-line footer:');
   L.push('<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->');
   L.push('');
+  // R3 provenance stamp — identity-load resolution counts for this state.
+  const stampParts = [];
+  if (profileStamp.assignment) stampParts.push('assignment ' + profileStamp.assignment);
+  if (profileStamp.lane) stampParts.push('lane ' + profileStamp.lane);
+  if (profileStamp.quotes) stampParts.push('quotes ' + profileStamp.quotes);
+  if (stampParts.length) L.push('<!-- profiles: ' + stampParts.join(' · ') + ' (c' + cycle + ') -->');
   return L.join('\n');
 }
 
@@ -927,6 +951,9 @@ async function runAngle(assign) {
   console.log('===================================');
   const lane = loadLane(cycle, desk);
   if (!lane) { console.log('[angle] no "' + desk + '" lane in desk_signal — skipping (not an error).'); return; }
+  // R2 — ledger snapshot freshness before any profile resolution this wake
+  // (S252/S329 pattern; desk doctrine: refresh + degrade-not-drop, never halt)
+  require('./canon-name-check').ensureLedgerSnapshot(cycle);
   const persona = personaInfo(personaSlug);
   const asker = persona || (assign ? { name: assign.name, popid: assign.popid } : null);
   const digest = lane.slice(0, 12).map(e => '- ' + (e.label || '(no label)') + (e.hood ? ' [' + e.hood + ']' : '')).join('\n');
@@ -1483,11 +1510,63 @@ async function runAngle(assign) {
 // 10-year-old student Tomas Renteria a long-time hardware-store owner); the
 // profile line is the deterministic kill for that class. POPIDs are stripped
 // from every writer-facing surface — literals in prose are a gate flag.
+// R1 (Row 35 trace): resolution is POPID-keyed FIRST — engine-side citizen
+// strings carry "Name (POP-x)", and a name round-trip is exactly where a
+// typo'd feed row loses the person (the S361 lane-block doctrine, applied to
+// the assignment surface it never reached). Name-keyed profilesFor stays as
+// the fallback for pop-less or unresolved entries. Resolution misses are
+// logged, never swallowed — a citizen with NO LEDGER PROFILE is precisely the
+// case a writer will hallucinate a bio for.
 function citizenBrief(citizens) {
-  const names = (citizens || []).map(c => String(c).replace(/\s*\(POP-[\d]+\)\s*/g, ' ').replace(/\s+/g, ' ').trim()).filter(Boolean);
-  let profiles = [];
-  try { profiles = require('./canon-name-check').profilesFor(names); } catch (_) { /* no snapshot -> names only */ }
-  return { names, profiles };
+  const parsed = (citizens || []).map(raw => {
+    const s = String(raw);
+    const pm = s.match(/\(?(POP-\d+)\)?/i);
+    return {
+      popid: pm ? pm[1].toUpperCase() : null,
+      name: s.replace(/\s*\(POP-[\d]+\)\s*/g, ' ').replace(/\s+/g, ' ').trim()
+    };
+  }).filter(c => c.name || c.popid);
+  const names = parsed.map(c => c.name).filter(Boolean);
+  const cnc = require('./canon-name-check');
+  const byPop = new Map();    // POPID -> profile line
+  const byName = new Map();   // lowercase profile name-head -> profile line
+  try {
+    for (const line of cnc.profilesForPopids(parsed.map(c => c.popid).filter(Boolean))) {
+      const m = String(line).match(/popid: (POP-\d+)/);
+      if (m) byPop.set(m[1], line);
+    }
+  } catch (e) {
+    log('[profiles] POPID resolver unavailable (' + e.message + ') — falling back to name-keyed profiles');
+  }
+  try {
+    for (const line of cnc.profilesFor(names)) {
+      const head = String(line).split(' — ')[0].toLowerCase();
+      if (head) byName.set(head, line);
+    }
+  } catch (e) {
+    log('[profiles] name resolver unavailable (' + e.message + ') — continuing with POPID-keyed profiles only');
+  }
+  const profiles = [];
+  const seen = new Set();
+  const missing = [];
+  for (const c of parsed) {
+    const line = (c.popid && byPop.get(c.popid)) || byName.get(c.name.toLowerCase());
+    if (line) {
+      // dedupe on identity, not line text — the POPID-keyed and name-keyed
+      // resolvers format the same person differently ("age:" vs "born:")
+      const idm = String(line).match(/popid: (POP-\d+)/);
+      const key = idm ? idm[1] : line;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      // writer-facing surfaces never carry the popid literal (gate flag class)
+      profiles.push(line.replace(/; popid: POP-\d+/, ''));
+    } else missing.push(c.name || c.popid);
+  }
+  if (parsed.length) {
+    log('[profiles] citizens resolved ' + (parsed.length - missing.length) + '/' + parsed.length
+      + (missing.length ? ' — NO LEDGER PROFILE: ' + missing.join('; ') : ''));
+  }
+  return { names, profiles, resolved: parsed.length - missing.length, total: parsed.length, missing };
 }
 
 // ---------------------------------------------------------------------------
@@ -1878,6 +1957,8 @@ async function runWrite(assign) {
   const lane = loadLane(cycle, desk);
   if (!lane) { console.log('[write] no "' + desk + '" lane in desk_signal — skipping (not an error).'); return; }
   if (budgetReached(cycle)) return;   // S339 submission budget — exit before writer spend
+  // R2 — ledger snapshot freshness (S252/S329 pattern; degrade-not-drop)
+  require('./canon-name-check').ensureLedgerSnapshot(cycle);
   const angle = readJson(anglePath);
   const packet = readJson(packetPath);
   const persona = personaInfo(personaSlug);
@@ -2070,6 +2151,8 @@ async function runWake() {
     return;
   }
   if (budgetReached(cycle)) return;   // S339 submission budget — exit before writer spend
+  // R2 — ledger snapshot freshness (S252/S329 pattern; degrade-not-drop)
+  require('./canon-name-check').ensureLedgerSnapshot(cycle);
   const route = deskRoute(DESK);
   const draftName = DESK + '_c' + cycle + '_' + OUT_TAG + slug(route.model) + '.md';
   const draftPath = path.join(COMPARE, draftName);

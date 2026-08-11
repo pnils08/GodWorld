@@ -43,7 +43,7 @@ GodWorld-native role-family bands (no real-world import per [[../SIM_DOCTRINE]])
 
 ## State
 
-Tasks 1–2 code SHIPPED S366 (commit `cadebead`, live `clasp push` done, offline proof `scripts/careerStage.test.js` 36/36 — bench 0720 gone per Mike, offline harness is the proving path). Column repair pending — see §Incident. Task 3 design-only, untouched.
+**REVERTED in full (Mike-direct, S366).** YearsInCareer restored from the 06:15 snapshot (940/940, read-back zero mismatches). Code revert `f05a59e4` deployed live (re-push confirmed "already up to date"). CareerStage was never modified — the C103 drift documented above still stands, unrepaired. No engine cycle fired while the new code was live (~15 min window), so no cycle ever executed it. Plan work (Tasks 1–3) remains designed but unshipped; the reverted implementation lives in git history at `cadebead` if ever re-approved.
 
 ## Incident — S366 YearsInCareer clobber + blocked recovery
 
@@ -58,3 +58,4 @@ First `--apply` of the column repair passed `iStage+1` to `updateRangeByPosition
 
 - 2026-08-11 (S366) — Tasks 1–2 built, proven (36/36 harness), committed `cadebead`, deployed live via clasp push.
 - 2026-08-11 (S366) — Column-repair incident: YearsInCareer clobbered by 0-index off-by-one; recovery staged, blocked on permission — see §Incident.
+- 2026-08-11 (S366) — FULL REVERT (Mike-direct): YearsInCareer restored + verified; code revert `f05a59e4` pushed live. Ledger back to morning state; CareerStage drift stands.

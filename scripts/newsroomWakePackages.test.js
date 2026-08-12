@@ -64,6 +64,7 @@ assert.equal(packagesApi.routeFor(trevor, 'angle').model, 'deepseek/deepseek-cha
 assert.equal(packagesApi.routeFor(trevor, 'report').model, 'deepseek/deepseek-chat');
 assert.equal(packagesApi.routeFor(trevor, 'write').model, 'deepseek/deepseek-chat');
 assert.equal(trevor.reviewProfile.canonPolicy, 'load-bearing');
+assert.equal(trevor.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.ok(trevor.reviewProfile.textureConditions.some(v => v.includes('cascade')));
 assert.ok(trevor.reviewProfile.canonBlockers.some(v => v.includes('invented outage')));
 

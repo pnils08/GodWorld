@@ -50,3 +50,5 @@ Mike's corrections to the framing above, after the original template pack (`Note
 3. **Template 3 (System Specification) — do not use verbatim** (Mike cautioned; prior leak). Any system facts ride inside the almanac as in-world description.
 
 **Revised verdict:** `adopt` the checklist-fields + Tier-1 depth files + in-world almanac; `reject` the meta-doc/guardrail framing and Template 3 as-is. Build stays gated on Mike (new script = FIX-don't-ADD gate).
+
+**Ignition trigger (Mike-direct, 2026-08-12):** both send pipelines already exist and are working — the daily-news one is landing especially well (cron-wake writes arrive as citizen quotes; Mike laughed out loud twice at the output). This design "takes true form when the 2 pipelines are reviewed" — i.e., the dossier + almanac shape gets folded in at the next review of the edition-send and daily-news-send pipelines, not as a standalone build.

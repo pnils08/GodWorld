@@ -202,7 +202,11 @@ function scanStructuralJunk(draftText) {
 }
 
 function scanEngineVerbiage(draftText) {
-  const body = unwrapWholeDocFence(draftText).replace(/```[\s\S]*?```/g, '');
+  // INTAKE is machine-readable provenance, not Article prose. Source refs in
+  // that block intentionally retain canonical table/artifact names, so scanning
+  // it would turn valid sourcing metadata into a false engine-leak cue.
+  const prose = unwrapWholeDocFence(draftText).split(/^##\s+INTAKE\s*$/im)[0];
+  const body = prose.replace(/```[\s\S]*?```/g, '');
   const hits = [];
   for (const t of ENGINE_TOKENS) {
     const re = new RegExp(t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');

@@ -388,19 +388,15 @@ function emitPulses(texture, signals, cycle) {
       requiresName: true,
       source: 'world_summary ## Evening Texture · Nightlife',
       angle: quiet
-        ? 'Quiet nightlife at ' + v.name + ' — low volume, restricted movement, the room still breathing'
+        ? 'A quiet night at ' + v.name + ' — what the supplied evening record can and cannot explain'
         : 'Nightlife at ' + v.name + ' — who is out and what the block is saying',
       hookLine: quiet
-        ? v.name + ' is open but the night is quiet' +
-          (meta.volume != null ? ' (volume ' + meta.volume + ', vibe ' + (meta.vibe || '—') + ')' : '') + '.'
+        ? 'The supplied evening record describes ' + v.name + ' as open and quiet.'
         : v.name + ' holds the evening out' + (v.hood ? ' in ' + v.hood : '') + '.',
       sceneBits: [
         'VENUE: ' + v.name,
         v.hood ? 'HOOD: ' + v.hood : null,
-        meta.volume != null ? 'VOLUME: ' + meta.volume : null,
-        meta.vibe ? 'VIBE: ' + meta.vibe : null,
-        meta.movement ? 'MOVEMENT: ' + meta.movement : null,
-        meta.weatherImpact != null ? 'WEATHER IMPACT: ' + meta.weatherImpact : null
+        'EVENING RECORD: open and quiet'
       ].filter(Boolean),
       nightlifeMeta: meta
     });
@@ -420,15 +416,9 @@ function emitPulses(texture, signals, cycle) {
       names: [],
       requiresName: false,
       source: 'world_summary ## Evening Texture · Nightlife meta',
-      angle: 'A quiet night across the city — restricted movement, low volume, where people still go',
-      hookLine: 'Nightlife is quiet' +
-        (meta.vibe ? ' (' + meta.vibe + ')' : '') +
-        (meta.movement ? ', movement ' + meta.movement : '') + '.',
-      sceneBits: [
-        meta.volume != null ? 'VOLUME: ' + meta.volume : null,
-        meta.vibe ? 'VIBE: ' + meta.vibe : null,
-        meta.movement ? 'MOVEMENT: ' + meta.movement : null
-      ].filter(Boolean),
+      angle: 'A quiet night across the city — where people still go and what the supplied record cannot explain',
+      hookLine: 'The supplied evening record describes city nightlife as quiet.',
+      sceneBits: ['EVENING RECORD: city nightlife is quiet'],
       nightlifeMeta: meta
     });
   }
@@ -895,11 +885,9 @@ function buildEveningSlice(cycle, opts) {
 
 function quietColor(meta) {
   if (!meta) return '';
-  const bits = [];
-  if (meta.volume != null) bits.push('volume ' + meta.volume);
-  if (meta.vibe) bits.push('vibe ' + meta.vibe);
-  if (meta.movement) bits.push('movement ' + meta.movement);
-  return bits.length ? 'Nightlife meta: ' + bits.join(', ') + '. ' : '';
+  return isQuietNightlife(meta)
+    ? 'The supplied evening record describes nightlife as quiet; raw scoring fields stay internal. '
+    : '';
 }
 
 function formatEveningSliceMarkdown(slice) {

@@ -14,6 +14,7 @@ const {
   parseSportsSection,
   pickBagModes,
   classifyPulse,
+  publicSportsRow,
   FAN_HEAT_APPROACH
 } = require('./buildPSlayerSlice');
 
@@ -22,6 +23,14 @@ function ok(label, cond) {
   if (cond) { console.log('  ok — ' + label); return; }
   failures++;
   console.error('  FAIL — ' + label);
+}
+{
+  const publicRow = publicSportsRow({
+    eventKind: 're-signing',
+    storyAngle: 'TEST-ONLY veteran resigns with the club'
+  });
+  ok('re-signing feed disambiguates resigns as re-signs',
+    /re-signs/.test(publicRow.storyAngle) && !/\bresigns\b/.test(publicRow.storyAngle));
 }
 
 // Unit: classify + bag modes
@@ -39,6 +48,13 @@ console.log('classify / bag modes:');
   ok('includes friction pivot (3)', modes.includes(3));
   ok('includes hate the move (1)', modes.includes(1));
   ok('priorHits → I was wrong (2)', modes.includes(2));
+}
+
+const summary103 = path.join(__dirname, '..', 'output', 'world_summary_c103.md');
+if (fs.existsSync(summary103)) {
+  const current = buildPSlayerSlice(103);
+  ok('c103 feed row owns c103 assignment when available',
+    current.empty || current.pulse.feedCycle === 103);
 }
 {
   const insult = classifyPulse({

@@ -86,6 +86,16 @@ console.log('emitPulses + recommend:');
     /Fake Bar|Unreal Lounge/i.test(p.named || '') ||
     /Fake Bar|Unreal Lounge/i.test(p.venue || '')
   ));
+  const quietPulse = pulses.find(p => p.className === 'quiet-nightlife');
+  const publicQuiet = JSON.stringify({
+    angle: quietPulse && quietPulse.angle,
+    hookLine: quietPulse && quietPulse.hookLine,
+    sceneBits: quietPulse && quietPulse.sceneBits,
+  });
+  ok('quiet pulse keeps raw scoring fields out of public copy',
+    !/VOLUME|WEATHER IMPACT|1\.03|restricted movement/i.test(publicQuiet));
+  ok('quiet pulse retains machine scoring metadata internally',
+    quietPulse && quietPulse.nightlifeMeta && quietPulse.nightlifeMeta.weatherImpact === 1.03);
   const rec = recommendConsumer(pulses);
   ok('recommend has bag', !!(rec && rec.bag));
   const masonPulse = pickPulseForPersona(pulses, 'mason-ortega');

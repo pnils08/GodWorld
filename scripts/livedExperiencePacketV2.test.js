@@ -112,10 +112,29 @@ assert.equal(jaxW3.manifest.policy, 'load-bearing');
 assert.deepStrictEqual(jaxW3.manifest.authorizedTexture, jaxProfile.authorizedTexture);
 assert.deepStrictEqual(jaxW3.manifest.forbiddenClaimClasses, jaxProfile.canonBlockers);
 const jaxAudit = p.auditArticle(bad, jaxW3);
-assert.equal(jaxAudit.ok, true);
-assert.deepStrictEqual(jaxAudit.errors, []);
+assert.equal(jaxAudit.ok, false);
+assert.ok(jaxAudit.errors.some(e => e.code === 'UNAPPROVED_QUOTE'));
 assert.ok(jaxAudit.observations.some(e => e.code === 'UNAPPROVED_NUMBER'));
-assert.ok(jaxAudit.observations.some(e => e.code === 'UNAPPROVED_QUOTE'));
+const jaxRawMetadata = p.auditArticle('The TEST-ONLY Initiative remains in construction-planning.', jaxW3);
+assert.equal(jaxRawMetadata.ok, false);
+assert.ok(jaxRawMetadata.errors.some(e => e.code === 'ENGINE_METADATA_LEAK'));
+
+const sourceBriefProfile = {
+  ...jaxProfile,
+  articleContract: { renderMode: 'SOURCE_BRIEF' },
+};
+const sourceBriefW3 = p.buildWritePacket({
+  cycle: 999, desk: 'civic', reporter, story, approach: 'Test the mismatch',
+  angleInput: w1, anglePlan: plan,
+  interviews: [{ pop: 'TEST-POP-02', name: 'Test Resident', claims, inputPacket: resident }],
+  lane: [], reviewProfile: sourceBriefProfile,
+});
+assert.equal(sourceBriefW3.task.writingMode, 'SOURCE_BRIEF');
+assert.match(sourceBriefW3.reviewProfile.articleContract.targetWords, /evidence-bounded/);
+const sourceBrief = p.renderSourceBrief(sourceBriefW3);
+assert.match(sourceBrief, new RegExp(claims.publishableQuote.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+assert.doesNotMatch(sourceBrief, /invented biography|collective sentiment/i);
+assert.equal(p.auditArticle(sourceBrief, sourceBriefW3).ok, true);
 
 // P Slayer's fan-pulse slice is a typed LEP/2 input, not side-channel prompt text.
 const sportsStory = {

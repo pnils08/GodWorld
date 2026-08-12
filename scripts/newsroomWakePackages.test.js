@@ -32,6 +32,7 @@ assert.equal(packagesApi.routeFor(carmen, 'angle').model, 'deepseek/deepseek-cha
 assert.equal(packagesApi.routeFor(carmen, 'report').model, 'deepseek/deepseek-chat');
 assert.equal(packagesApi.routeFor(carmen, 'write').model, 'deepseek/deepseek-chat');
 assert.equal(carmen.reviewProfile.canonPolicy, 'load-bearing');
+assert.equal(carmen.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.ok(carmen.reviewProfile.textureConditions.some(v => v.includes('all nine seats')));
 assert.ok(carmen.reviewProfile.canonBlockers.some(v => v.includes('implementation clock')));
 
@@ -92,6 +93,7 @@ assert.equal(packagesApi.routeFor(jordan, 'angle').model, 'deepseek/deepseek-cha
 assert.equal(packagesApi.routeFor(jordan, 'report').model, 'deepseek/deepseek-chat');
 assert.equal(packagesApi.routeFor(jordan, 'write').model, 'deepseek/deepseek-chat');
 assert.equal(jordan.reviewProfile.canonPolicy, 'load-bearing');
+assert.equal(jordan.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.ok(jordan.reviewProfile.textureConditions.some(v => v.includes('raw engine labels')));
 assert.ok(jordan.reviewProfile.canonBlockers.some(v => v.includes('fabricated owner')));
 
@@ -116,6 +118,7 @@ assert.equal(rachel.assignment.popid, 'POP-00057');
 assert.equal(rachel.assignment.beatDomain, 'SAFETY');
 assert.equal(packagesApi.routeFor(rachel, 'write').model, 'deepseek/deepseek-chat');
 assert.equal(rachel.reviewProfile.canonPolicy, 'load-bearing');
+assert.equal(rachel.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.ok(rachel.reviewProfile.canonBlockers.some(v => v.includes('invented incident')));
 
 const gate = packagesApi.gateAssignments([

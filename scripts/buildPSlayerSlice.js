@@ -318,6 +318,14 @@ function buildAnchorFacts(row, cycle) {
   return buildFeedAnchorFacts(row, cycle);
 }
 
+function publicSportsRow(row) {
+  const out = Object.assign({}, row);
+  if (/\bre-?signing\b/i.test(String(out.eventKind || ''))) {
+    out.storyAngle = String(out.storyAngle || '').replace(/\bresigns\b/gi, 're-signs');
+  }
+  return out;
+}
+
 function matchPriorTakes(row, priorCols, limit) {
   const names = extractPlayerNames(
     [row.namesUsed, row.storyAngle, row.notes].join(' ')
@@ -462,17 +470,13 @@ function buildPSlayerSlice(cycle, opts) {
   });
   scored.sort((a, b) => b.score - a.score);
 
-  // Prefer a row that still yields at least one anchor fact + names when possible
-  let top = scored[0];
-  for (const cand of scored) {
-    if (cand.score < top.score - 15) break;
-    if ((cand.row.storyAngle || cand.row.notes) && cand.row.cycle === cyc) {
-      top = cand;
-      break;
-    }
-  }
+  // A prior-cycle row may provide a PriorTake, but it must never become the
+  // current Cycle's assignment while a current feed row exists.
+  const current = scored.filter(cand => cand.row.cycle === cyc);
+  const top = current.find(cand => cand.row.storyAngle || cand.row.notes) || scored[0];
 
-  const { row, score, cls, priorHits } = top;
+  const { score, cls, priorHits } = top;
+  const row = publicSportsRow(top.row);
   const bagModes = pickBagModes(cls, priorHits, row);
   const fanCharge = pickFanCharge(cls, row);
   const foil = extractFoilNumber(row.stats, row.notes);
@@ -552,7 +556,7 @@ function buildPSlayerSlice(cycle, opts) {
     cycle: s.row.cycle,
     team: s.row.team,
     primary: s.cls.primary,
-    angle: (s.row.storyAngle || s.row.rawHeader || '').slice(0, 120),
+    angle: (publicSportsRow(s.row).storyAngle || s.row.rawHeader || '').slice(0, 120),
     priorHits: s.priorHits
   }));
 
@@ -829,6 +833,7 @@ module.exports = {
   classifyPulse,
   scoreRow,
   pickBagModes,
+  publicSportsRow,
   FAN_HEAT_APPROACH,
   BAG_MODES
 };

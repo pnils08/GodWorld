@@ -2114,20 +2114,24 @@ async function runWrite(assign) {
   // (own citizen page, cp-<popid>) joins the tool loop.
   if (PACKET_ACTIVE) writerArgs.push('--strict-source-hygiene', '--packet-only');
   else if (byline && byline.popid) writerArgs.push('--byline-popid', byline.popid);
-  const codeRenderedBrief = PACKET_ACTIVE && writePacket && writePacket.task &&
-    writePacket.task.writingMode === 'RECORDS_BRIEF';
-  if (codeRenderedBrief) {
-    log('rendering evidence-thin records brief locally (0 writer model calls)...');
-    fs.writeFileSync(draftPath, livedPacket.renderRecordsBrief(writePacket));
+  const codeRenderedMode = PACKET_ACTIVE && writePacket && writePacket.task &&
+    ['RECORDS_BRIEF', 'SOURCE_BRIEF'].includes(writePacket.task.writingMode)
+    ? writePacket.task.writingMode
+    : null;
+  if (codeRenderedMode) {
+    log('rendering ' + codeRenderedMode.toLowerCase().replace('_', ' ') + ' locally (0 writer model calls)...');
+    fs.writeFileSync(draftPath, codeRenderedMode === 'RECORDS_BRIEF'
+      ? livedPacket.renderRecordsBrief(writePacket)
+      : livedPacket.renderSourceBrief(writePacket));
     const text = fs.readFileSync(draftPath, 'utf8');
     const parsed = require('../lib/articleIntake').parse(text);
     if (!parsed.found || parsed.errors.length) {
-      throw new Error('code-rendered records brief INTAKE failed: ' +
+      throw new Error('code-rendered brief INTAKE failed: ' +
         (parsed.errors.length ? parsed.errors.map(e => e.code + ': ' + e.message).join('; ') : 'missing INTAKE'));
     }
     const audit = livedPacket.auditArticle(text, writePacket);
     if (!audit.ok) {
-      throw new Error('code-rendered records brief audit failed (' + audit.manifestId + '): ' +
+      throw new Error('code-rendered brief audit failed (' + audit.manifestId + '): ' +
         audit.errors.map(e => e.code + '=' + e.values.join(',')).join('; '));
     }
   } else {

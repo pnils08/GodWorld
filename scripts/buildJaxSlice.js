@@ -221,6 +221,16 @@ function collectCitizens(top, signal, ledger) {
   return out.slice(0, 12);
 }
 
+function publicStuckFact(top) {
+  const hook = String(top && top.handle && top.handle.hookLine || '').trim();
+  if (hook && !/\b(?:stuck-initiative|construction-planning|severity)\b/i.test(hook)) return hook;
+  const label = String(top && top.label || '');
+  const initiative = (label.match(/Initiative\s+["“]([^"”]+)["”]/i) || [])[1];
+  const cycles = (label.match(/\bfor\s+(\d+)\s+cycles?\b/i) || [])[1];
+  return (initiative ? 'The ' + initiative + ' Initiative' : 'The supplied Initiative') +
+    ' has not advanced' + (cycles ? ' in ' + cycles + ' cycles' : ' over the supplied span') + '.';
+}
+
 function buildContradiction(top, illnessRate) {
   if (!top) return null;
   const label = top.label || '';
@@ -234,9 +244,9 @@ function buildContradiction(top, illnessRate) {
   }
   if (/stuck-initiative/i.test(label)) {
     return {
-      a: label,
-      b: 'Official voice still treats the initiative as live / on track',
-      frame: 'Phase stuck in name; the street sees a lot that does not move.'
+      a: publicStuckFact(top),
+      b: 'The Initiative remains listed in the supplied tracker.',
+      frame: 'The record shows an Initiative that remains listed but has not advanced; what explains the stall?'
     };
   }
   if (top.className === 'crisis-unattended' || illnessRate >= 8) {
@@ -344,12 +354,20 @@ function buildJaxSlice(cycle, opts) {
       'RoleType is immutable — do not reassign careers. Soft side-work color only if it does not replace RoleType.'
   };
 
+  const rawStoryLabel = String(top.label || '');
+  const stuckStory = /stuck-initiative/i.test(rawStoryLabel);
+  const publicStoryLabel = stuckStory ? publicStuckFact(top) : rawStoryLabel;
+  const publicStoryAngle = stuckStory
+    ? publicStoryLabel + ' What record explains the stall?'
+    : ((top.handle && top.handle.angle) || rawStoryLabel);
   const story = {
     ref: top.ref,
-    label: top.label,
+    label: publicStoryLabel,
     kind: top.kind || 'anomaly',
-    angle: (top.handle && top.handle.angle) || top.label,
-    hookLine: (top.handle && top.handle.hookLine) || (contradiction && contradiction.frame) || null,
+    angle: publicStoryAngle,
+    hookLine: stuckStory
+      ? publicStoryLabel
+      : ((top.handle && top.handle.hookLine) || (contradiction && contradiction.frame) || null),
     hood,
     popids: citizens.map(c => c.popid),
     citizens: citizens.map(c => c.name + (c.role ? ' — ' + c.role : '') + (c.neighborhood ? ', ' + c.neighborhood : '')),
@@ -605,5 +623,7 @@ module.exports = {
   formatJaxSliceMarkdown,
   assignmentFromSlice,
   slicePaths,
+  publicStuckFact,
+  buildContradiction,
   FIREBRAND_APPROACH
 };

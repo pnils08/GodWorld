@@ -90,6 +90,7 @@
       "canonPolicy": "load-bearing",
       "purpose": "Trace Packet-backed city action across votes, Initiatives, money, and implementation clocks, then show the consequence carried by a named resident. Public clarity and a durable accountability trail are success; a process recap without lived consequence is not.",
       "articleContract": {
+        "renderMode": "SOURCE_BRIEF",
         "voice": "precise third-person civic ledger",
         "targetWords": "500-900",
         "opening": "a Packet-backed chamber, place, person, or resident consequence",
@@ -321,6 +322,7 @@
       "canonPolicy": "load-bearing",
       "purpose": "Follow Packet-backed money, labor, development, and storefront conditions to the people carrying the consequence. Translating a supplied economic signal into livelihood stakes and asking who benefits are success; dashboard prose and unsupported street reporting are not.",
       "articleContract": {
+        "renderMode": "SOURCE_BRIEF",
         "voice": "grounded third-person economics and labor reporting",
         "targetWords": "500-800",
         "opening": "a Packet-backed economic fact, person, business, corridor, or storefront consequence",
@@ -424,7 +426,7 @@
       "id": "rachel-public-safety-v1",
       "canonPolicy": "load-bearing",
       "purpose": "Trace one Packet-backed public-safety incident, classification gap, or OARI response question without sensationalism or invented case detail.",
-      "articleContract": { "voice": "measured third-person public-safety reporting", "targetWords": "500-800", "opening": "a Packet-backed safety signal, place, or resident consequence", "closing": "an unresolved accountability or practical-safety question grounded in the record" },
+      "articleContract": { "renderMode": "SOURCE_BRIEF", "voice": "measured third-person public-safety reporting", "targetWords": "500-800", "opening": "a Packet-backed safety signal, place, or resident consequence", "closing": "an unresolved accountability or practical-safety question grounded in the record" },
       "authorizedTexture": ["unnamed restrained scene texture with no incident facts", "analysis of a supplied classification or response gap", "a practical close limited to the supplied record"],
       "textureConditions": ["every named person, institution, incident, agency, number, and date must come from the Packet", "do not claim an interview, observation, quote, fear, trend, or response metric absent from the Packet", "crime or safety interpretation must remain framed as analysis when not a supplied fact"],
       "canonBlockers": ["invented incident, arrest, officer, case, quote, clearance, response time, or agency action", "unsupported crime classification or collective fear claim", "raw engine labels or decimals as public-facing evidence", "a named person or institution not supplied by the Packet"]

@@ -7,13 +7,30 @@
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
-const { buildJaxSlice, formatJaxSliceMarkdown, assignmentFromSlice, writeJaxSlice } = require('./buildJaxSlice');
+const {
+  buildJaxSlice, formatJaxSliceMarkdown, assignmentFromSlice, writeJaxSlice,
+  publicStuckFact, buildContradiction
+} = require('./buildJaxSlice');
 
 let failures = 0;
 function ok(label, cond) {
   if (cond) { console.log('  ok — ' + label); return; }
   failures++;
   console.error('  FAIL — ' + label);
+}
+
+console.log('public stuck-Initiative language:');
+{
+  const top = {
+    label: 'stuck-initiative (high) | Initiative "TEST-ONLY Transit Visioning" in phase "construction-planning" for 9 cycles',
+    handle: { hookLine: 'The TEST-ONLY transit Initiative has not advanced in 9 cycles.' }
+  };
+  const publicFact = publicStuckFact(top);
+  const contradiction = buildContradiction(top, null);
+  ok('public fact omits classifier and phase enum',
+    !/stuck-initiative|construction-planning|severity/i.test(publicFact));
+  ok('contradiction stays on supplied record',
+    !/official voice|stuck-initiative|construction-planning/i.test(JSON.stringify(contradiction)));
 }
 
 console.log('buildJaxSlice c102 (live artifacts if present):');

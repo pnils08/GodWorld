@@ -271,6 +271,16 @@ function buildWritePacket(args) {
     }
   }
   const loadBearingPolicy = reviewProfile && reviewProfile.canonPolicy === 'load-bearing';
+  const configuredRenderMode = reviewProfile && reviewProfile.articleContract &&
+    reviewProfile.articleContract.renderMode;
+  if (!investigation && configuredRenderMode === 'SOURCE_BRIEF') {
+    packet.task.writingMode = 'SOURCE_BRIEF';
+    packet.task.goal = 'Assemble one source brief and machine-parseable INTAKE from the supplied evidence';
+    reviewProfile.articleContract = Object.assign({}, reviewProfile.articleContract, {
+      voice: 'concise evidence-first source brief with code-rendered exact quote blocks',
+      targetWords: 'evidence-bounded; length follows supplied public facts and exact quotes',
+    });
+  }
   if (reviewProfile) packet.reviewProfile = reviewProfile;
   attachFactIds(packet);
   const interviews = args.interviews || [];
@@ -354,6 +364,9 @@ function buildWritePacket(args) {
       packet.limits.rule += ' This Packet has no supplied reporting trail: write a 180-280 word RECORDS_BRIEF. Do not print engine classifier names, severity labels, source row numbers, or a silence-clock section.';
     }
   }
+  if (packet.task.writingMode === 'SOURCE_BRIEF') {
+    packet.limits.rule += ' This package uses a code-rendered SOURCE_BRIEF: preserve approved quote text exactly, omit raw engine fields and source-path metadata from public copy, and add no biographical or collective-sentiment prose.';
+  }
   packet.output.preflight = {
     facts: 'select manifest.approvedFacts ids',
     quotes: 'select manifest.approvedQuotes ids',
@@ -428,6 +441,76 @@ function renderRecordsBrief(packet) {
   return lines.filter(line => line !== null).join('\n');
 }
 
+function publicBriefFacts(packet) {
+  return packet.manifest.approvedFacts.filter(row => {
+    if (row.src === 'cron-desk-run explicit cycle argument') return false;
+    const text = clean(row.text, 500);
+    if (!text) return false;
+    if (/\b(?:engine_audit|snapshot:|world_summary|desk_signal)\b/i.test(text)) return false;
+    if (/^(?:NAMED|PERSON|VENUE|HOOD|TRAJECTORY|VOLUME|VIBE|MOVEMENT|WEATHER IMPACT|RETAIL VITALITY)\s*:/i.test(text)) return false;
+    if (/\b\d+\.\d+\b/.test(text)) return false;
+    return true;
+  }).map(row => {
+    const text = clean(row.text, 500);
+    const tracker = text.match(/^(.+?)\s*\|\s*Status\s+([^|]+?)\s*\|\s*phase\s+(.+)$/i);
+    return Object.assign({}, row, {
+      text: tracker
+        ? tracker[1] + ' is listed as ' + tracker[2].trim() + ', with ' +
+          tracker[3].trim().replace(/-/g, ' ') + '.'
+        : text,
+    });
+  });
+}
+
+function renderSourceBrief(packet) {
+  assertBase(packet, 'W3');
+  if (!packet.task || packet.task.writingMode !== 'SOURCE_BRIEF') {
+    throw new Error('renderSourceBrief requires W3 SOURCE_BRIEF mode');
+  }
+  const facts = publicBriefFacts(packet);
+  if (!facts.length) throw new Error('SOURCE_BRIEF requires one public approved fact');
+  const quotes = packet.manifest.approvedQuotes || [];
+  const subjects = new Map((packet.manifest.approvedSubjects || []).map(row => [row.id, row]));
+  const closeQuestion = clean(packet.signal && packet.signal.plan && packet.signal.plan.closeQuestion, 400);
+  const title = clean(packet.task.assignment, 500).split(/\s*\|\s*/)[0];
+  const sourceLines = quotes.flatMap(quote => {
+    const subject = subjects.get(quote.speakerId);
+    const profile = subject && clean(subject.profile, 300);
+    const descriptor = profile && profile !== quote.speakerName &&
+      profile.startsWith(quote.speakerName + ' — ')
+      ? profile.slice((quote.speakerName + ' — ').length)
+      : null;
+    return [
+      '**' + clean(quote.speakerName, 160) + (descriptor ? ' — ' + descriptor : '') + '**',
+      '',
+      '> “' + clean(quote.text, 1400) + '”',
+      ''
+    ];
+  });
+  const lines = [
+    '# ' + title,
+    '',
+    'The supplied record establishes:',
+    '',
+    ...facts.map(row => '- ' + clean(row.text, 500)),
+    '',
+    ...(sourceLines.length ? [
+      'The supplied source material provides these exact statements:',
+      '',
+      ...sourceLines,
+    ] : []),
+    closeQuestion ? 'The record leaves one question open: ' + closeQuestion : null,
+    '',
+    '## INTAKE',
+    ...quotes.map(quote => 'NAMES: ' + clean(quote.speakerName, 160) + ' | quoted-source'),
+    packet.signal && packet.signal.hood ? 'HOOD: ' + clean(packet.signal.hood, 160) : null,
+    'CLAIM: ' + clean(facts[0].text, 500) + ' | ' + clean(facts[0].src, 300),
+    '<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=' + (quotes.length ? 'yes' : 'no') + '; sim-state-cited=yes -->',
+    ''
+  ];
+  return lines.filter(line => line !== null).join('\n');
+}
+
 function auditArticle(draftText, packet) {
   assertBase(packet, 'W3');
   const bodyText = String(draftText || '').split(/^##\s+INTAKE\s*$/im)[0];
@@ -444,6 +527,17 @@ function auditArticle(draftText, packet) {
   const errors = [];
   if (newNumbers.length) errors.push({ code: 'UNAPPROVED_NUMBER', values: newNumbers });
   if (unknownQuotes.length) errors.push({ code: 'UNAPPROVED_QUOTE', values: unknownQuotes });
+  const engineMetadata = [
+    /\bstuck-initiative\b/i,
+    /\bconstruction-planning\b/i,
+    /\b(?:severity|marked)\s+high\b/i,
+    /\brow\s+\d+\b/i,
+    /\b(?:VOLUME|WEATHER IMPACT|RETAIL VITALITY)\s*:\s*[+-]?\d+(?:\.\d+)?/i,
+  ].flatMap(re => bodyText.match(re) || []).map(value => clean(value));
+  if (engineMetadata.length) errors.push({
+    code: 'ENGINE_METADATA_LEAK',
+    values: [...new Set(engineMetadata)],
+  });
   const investigation = packet.task && packet.task.creativeBrief &&
     packet.task.creativeBrief.kind === 'civic-investigation';
   if (investigation) {
@@ -463,15 +557,6 @@ function auditArticle(draftText, packet) {
       code: 'INVESTIGATION_EPISTEMIC_OVERREACH',
       values: [...new Set(overreach)],
     });
-    const engineMetadata = [
-      /\bstuck-initiative\b/i,
-      /\b(?:severity|marked)\s+high\b/i,
-      /\brow\s+\d+\b/i,
-    ].flatMap(re => bodyText.match(re) || []).map(value => clean(value));
-    if (engineMetadata.length) errors.push({
-      code: 'ENGINE_METADATA_LEAK',
-      values: [...new Set(engineMetadata)],
-    });
   }
   // A load-bearing profile deliberately routes lexical differences to Rhea for
   // semantic review. Street ordinals, sign phrasing, punctuation, and anonymous
@@ -480,8 +565,7 @@ function auditArticle(draftText, packet) {
   // evaluation packets retain their original fail-closed behavior.
   if (packet.manifest.policy === 'load-bearing') {
     const hard = errors.filter(error =>
-      ['INVESTIGATION_EPISTEMIC_OVERREACH', 'ENGINE_METADATA_LEAK'].includes(error.code) ||
-      (packet.task.writingMode === 'RECORDS_BRIEF' && error.code === 'UNAPPROVED_QUOTE'));
+      ['UNAPPROVED_QUOTE', 'INVESTIGATION_EPISTEMIC_OVERREACH', 'ENGINE_METADATA_LEAK'].includes(error.code));
     if (hard.length) return { ok: false, manifestId: packet.manifest.id, errors: hard,
       observations: errors.filter(error => !hard.includes(error)) };
     return { ok: true, manifestId: packet.manifest.id, errors: [], observations: errors };
@@ -508,5 +592,6 @@ module.exports = {
   buildWritePacket,
   auditArticle,
   renderRecordsBrief,
+  renderSourceBrief,
   prompt,
 };

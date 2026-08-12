@@ -405,7 +405,8 @@ function renderPacketIntake(draftText, packet) {
   const hood = packet && packet.signal && packet.signal.hood;
   lines.push('STORYLINE: ' + intakeSlug(packet) + ' | referenced');
   if (hood && body.includes(hood)) lines.push('HOOD: ' + hood);
-  const facts = (packet && packet.known || []).filter(c => c && c.t === 'FACT' && c.text && c.src);
+  const facts = (packet && packet.known || []).filter(c => c && c.t === 'FACT' && c.text && c.src &&
+    c.src !== 'cron-desk-run explicit cycle argument');
   if (facts.length) {
     const f = facts[0];
     lines.push('CLAIM: ' + String(f.text).replace(/\|/g, '—').replace(/\s+/g, ' ').trim() +

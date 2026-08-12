@@ -77,6 +77,34 @@ function loadJson(file) {
   try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch (_) { return null; }
 }
 
+function loadCitizenProfiles(root = ROOT) {
+  const file = path.join(root, 'output', 'simulation_ledger_snapshot.jsonl');
+  const out = new Map();
+  try {
+    for (const line of fs.readFileSync(file, 'utf8').split(/\r?\n/).filter(Boolean)) {
+      const row = JSON.parse(line);
+      const popid = String(row.POPID || '').trim().toUpperCase();
+      if (popid) out.set(popid, row);
+    }
+  } catch (_) { /* absence means no civic interview candidate is verified */ }
+  return out;
+}
+
+function luisCandidateScope(entry, profiles) {
+  const allowed = [];
+  const excluded = [];
+  for (const popid of entry.popids || []) {
+    const row = profiles.get(popid);
+    const sportsRole = row && (String(row['EconomicProfileKey'] || '') === 'SPORTS_OVERRIDE' ||
+      /\b(?:athlete|player|pitcher|catcher|fielder|shortstop|baseman|designated hitter|coach)\b/i
+        .test(String(row.RoleType || '')));
+    if (!row) excluded.push({ popid, reason: 'NO_LEDGER_PROFILE' });
+    else if (sportsRole) excluded.push({ popid, reason: 'PRO_ATHLETE_CIVIC_INELIGIBLE' });
+    else allowed.push({ popid, name: String(row.Name || '').trim() });
+  }
+  return { allowed, excluded };
+}
+
 function unique(values) {
   const list = Array.isArray(values) ? values : (values == null ? [] : [values]);
   return [...new Set(list.filter(Boolean))];
@@ -193,7 +221,7 @@ function candidateFor(entry, score) {
   };
 }
 
-function prewriteForSeat(slug, top) {
+function prewriteForSeat(slug, top, candidateScope) {
   if (slug === 'trevor-shimizu') {
     return {
       anchorFacts: [top.label],
@@ -224,11 +252,12 @@ function prewriteForSeat(slug, top) {
       'request timestamp and elapsed silence duration',
       'responsible person, office, or duty unless named by the source'
     ],
-    silenceClock: { state: 'UNESTABLISHED', value: null, src: null }
+    silenceClock: { state: 'UNESTABLISHED', value: null, src: null },
+    excludedCandidates: (candidateScope && candidateScope.excluded) || []
   };
 }
 
-function packetForEntries(entries, slug) {
+function packetForEntries(entries, slug, profiles) {
   const seat = CIVIC_SEATS[slug];
   if (!seat) return null;
   const candidates = entries
@@ -247,6 +276,13 @@ function packetForEntries(entries, slug) {
       pointers: []
     };
   }
+  const candidateScope = slug === 'luis-navarro'
+    ? luisCandidateScope(top, profiles || new Map())
+    : null;
+  const storyPopids = candidateScope ? candidateScope.allowed.map(row => row.popid) : top.popids;
+  const storyCitizens = candidateScope
+    ? candidateScope.allowed.map(row => row.name + ' (' + row.popid + ')')
+    : top.citizens;
   return {
     seat: { slug, name: seat.name, popid: seat.popid, domain: seat.domain },
     empty: false,
@@ -258,8 +294,8 @@ function packetForEntries(entries, slug) {
       angle: top.angle || top.label,
       hookLine: top.hookLine || seat.hook,
       hood: top.hood,
-      popids: top.popids,
-      citizens: top.citizens
+      popids: storyPopids,
+      citizens: storyCitizens
     },
     pulse: {
       className: seat.domain,
@@ -268,7 +304,7 @@ function packetForEntries(entries, slug) {
       hood: top.hood,
       source: top.ref
     },
-    prewrite: prewriteForSeat(slug, top),
+    prewrite: prewriteForSeat(slug, top, candidateScope),
     candidates,
     pointers: unique(candidates.map(candidate => candidate.ref))
   };
@@ -276,10 +312,12 @@ function packetForEntries(entries, slug) {
 
 function buildCivicDomainSlice(cycle, { root = ROOT } = {}) {
   const entries = loadCycleCivicEntries(cycle, root);
-  const packets = Object.fromEntries(Object.keys(CIVIC_SEATS).map(slug => [slug, packetForEntries(entries, slug)]));
+  const profiles = loadCitizenProfiles(root);
+  const packets = Object.fromEntries(Object.keys(CIVIC_SEATS).map(slug =>
+    [slug, packetForEntries(entries, slug, profiles)]));
   const nonempty = Object.values(packets).filter(packet => packet && !packet.empty);
   return {
-    version: 'CIVIC-DOMAIN-SLICE-1',
+    version: 'CIVIC-DOMAIN-SLICE-3',
     cycle: Number(cycle),
     kind: 'civic-domain',
     empty: nonempty.length === 0,
@@ -338,7 +376,7 @@ function writeCivicDomainSlice(cycle, slice, root = ROOT) {
 
 function loadCivicDomainSlice(cycle, root = ROOT) {
   const existing = loadJson(slicePaths(cycle, root).json);
-  if (existing && existing.version === 'CIVIC-DOMAIN-SLICE-1') return existing;
+  if (existing && existing.version === 'CIVIC-DOMAIN-SLICE-3') return existing;
   const slice = buildCivicDomainSlice(cycle, { root });
   if (!slice.empty) writeCivicDomainSlice(cycle, slice, root);
   return slice.empty ? null : slice;

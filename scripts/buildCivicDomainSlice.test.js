@@ -16,7 +16,8 @@ try {
     lanes: {
       civic: [
         { kind: 'initiative', ref: 'INIT-TRANSIT', label: 'Fruitvale Transit Hub | Status visioning-complete', hood: 'Fruitvale' },
-        { kind: 'anomaly', ref: 'AUDIT-STUCK', label: 'stuck-initiative | Fruitvale Transit Hub stalled for 9 cycles', hood: 'Fruitvale' },
+        { kind: 'anomaly', ref: 'AUDIT-STUCK', label: 'stuck-initiative | Fruitvale Transit Hub stalled for 9 cycles', hood: 'Fruitvale',
+          popids: ['POP-90001', 'POP-90002'], handle: { citizens: ['Test Civic Resident (POP-90001)', 'Test Pro Athlete (POP-90002)'] } },
         { kind: 'initiative', ref: 'INIT-HEALTH', label: 'Temescal Community Health Center | construction-active', hood: 'Temescal' },
         { kind: 'initiative', ref: 'INIT-YOUTH', label: 'Oakland Youth Apprenticeship Pipeline | pilot-active', hood: 'East Oakland' },
         { kind: 'ripple', ref: 'ENV-1', label: 'environmental air quality review | public comment window', hood: 'West Oakland' },
@@ -24,6 +25,10 @@ try {
       ]
     }
   }, null, 2));
+  fs.writeFileSync(path.join(output, 'simulation_ledger_snapshot.jsonl'), [
+    { Name: 'Test Civic Resident', POPID: 'POP-90001', RoleType: 'Mechanic', EconomicProfileKey: 'Skilled Trade' },
+    { Name: 'Test Pro Athlete', POPID: 'POP-90002', RoleType: 'Right Fielder, Test Team', EconomicProfileKey: 'SPORTS_OVERRIDE' }
+  ].map(row => JSON.stringify(row)).join('\n') + '\n');
 
   const slice = civic.buildCivicDomainSlice(103, { root });
   assert.strictEqual(slice.empty, false);
@@ -48,6 +53,11 @@ try {
   assert(slice.packets['luis-navarro'].prewrite.missing.some(row => row.includes('elapsed silence')));
   assert(!slice.packets['luis-navarro'].prewrite.anchorFacts.includes('AUDIT-STUCK'),
     'source pointer must not be duplicated as a factual sentence');
+  assert.deepStrictEqual(slice.packets['luis-navarro'].story.popids, ['POP-90001']);
+  assert.deepStrictEqual(slice.packets['luis-navarro'].story.citizens,
+    ['Test Civic Resident (POP-90001)']);
+  assert.deepStrictEqual(slice.packets['luis-navarro'].prewrite.excludedCandidates,
+    [{ popid: 'POP-90002', reason: 'PRO_ATHLETE_CIVIC_INELIGIBLE' }]);
   assert.strictEqual(slice.packets['lila-mezran'].story.ref, 'INIT-HEALTH');
   assert.strictEqual(slice.packets['noah-tan'].story.ref, 'ENV-1');
   assert.strictEqual(slice.packets['carmen-delaine'].story.ref, 'INIT-TRANSIT');
@@ -62,6 +72,15 @@ try {
   assert(fs.existsSync(paths.json));
   assert(fs.existsSync(paths.md));
   assert.strictEqual(civic.loadCivicDomainSlice(103, root).packets['angela-reyes'].story.ref, 'INIT-YOUTH');
+
+  const stale = JSON.parse(JSON.stringify(slice));
+  stale.version = 'CIVIC-DOMAIN-SLICE-2';
+  stale.packets['luis-navarro'].prewrite = { anchorFacts: ['STALE TEST-ONLY FACT'] };
+  fs.writeFileSync(paths.json, JSON.stringify(stale, null, 2));
+  const rebuilt = civic.loadCivicDomainSlice(103, root);
+  assert.strictEqual(rebuilt.version, 'CIVIC-DOMAIN-SLICE-3');
+  assert.strictEqual(rebuilt.packets['luis-navarro'].prewrite.schema, 'INVESTIGATION-BRIEF-1');
+  assert.notDeepStrictEqual(rebuilt.packets['luis-navarro'].prewrite.anchorFacts, ['STALE TEST-ONLY FACT']);
 
   const enriched = civic.enrichAssignment({
     desk: 'civic', name: 'Angela Reyes', popid: 'POP-TEST', beatDomain: 'EDUCATION', persona: 'angela-reyes'

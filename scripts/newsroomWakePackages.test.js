@@ -45,7 +45,7 @@ assert.equal(luis.assignment.beatDomain, 'CIVIC');
 assert.equal(luis.packetContract, 'v2');
 assert.equal(packagesApi.routeFor(luis, 'angle').model, 'deepseek/deepseek-chat');
 assert.equal(packagesApi.routeFor(luis, 'report').model, 'deepseek/deepseek-chat');
-assert.equal(packagesApi.routeFor(luis, 'write').model, 'deepseek/deepseek-chat');
+assert.equal(packagesApi.routeFor(luis, 'write').model, 'anthropic/claude-sonnet-5');
 assert.equal(luis.reviewProfile.canonPolicy, 'load-bearing');
 assert.ok(luis.reviewProfile.textureConditions.some(v => v.includes('silence clock')));
 assert.ok(luis.reviewProfile.canonBlockers.some(v => v.includes('records request')));
@@ -136,6 +136,28 @@ assert.throws(() => packagesApi.routeFor(jax, 'publish'), /unknown wake stage/);
 assert.throws(() => packagesApi.validatePackage('bad', { active: true }), /invalid wake package/);
 
 const { applyWakePackageGate } = require('./newsroom-fanout');
+const runApi = require('./cron-desk-run');
+runApi.activateWakeContext(null, 'luis-navarro');
+const packetAsks = runApi.collectQuoteAsks([
+  { label: 'TEST-ONLY generic civic fallback', popids: ['POP-90003', 'POP-90004'] }
+], { name: 'Luis Navarro', popid: 'POP-00636' }, {
+  ref: 'TEST-ONLY-ASSIGNMENT', label: 'TEST-ONLY assigned investigation',
+  popids: ['POP-90001', 'POP-90002'],
+  citizens: ['Test Civic One (POP-90001)', 'Test Civic Two (POP-90002)']
+}, {
+  cycle: 999, desk: 'civic',
+  inputPacket: {
+    v: 'LEP/2', wake: 'W1', actor: {}, task: {}, signal: {}, exposure: {
+      candidates: [
+        { pop: 'POP-90001', name: 'Test Civic One', profile: 'Test profile one', why: 'assignment' },
+        { pop: 'POP-90002', name: 'Test Civic Two', profile: 'Test profile two', why: 'assignment' }
+      ]
+    }, known: [], limits: {}, output: {}
+  },
+  angleRead: { plan: { focus: 'TEST-ONLY focus', targets: [], closeQuestion: 'TEST-ONLY close' } }
+});
+assert.deepStrictEqual(packetAsks.map(row => row.pop), ['POP-90001', 'POP-90002'],
+  'Packet quote pool must not fill from the generic desk lane');
 const pinned = applyWakePackageGate([
   { desk: 'civic', name: 'TEST-ONLY Civic One', popid: 'POP-99997', story: { ref: 'TEST-CIVIC-ONE', label: 'Test signal one' } },
   { desk: 'civic', name: 'TEST-ONLY Civic Two', popid: 'POP-99998', story: { ref: 'TEST-CIVIC-TWO', label: 'Test signal two' } },

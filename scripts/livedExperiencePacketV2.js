@@ -291,6 +291,15 @@ function buildWritePacket(args) {
   packet.limits.rule = loadBearingPolicy
     ? 'The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact.'
     : 'The Article claim manifest is exhaustive. Better prose may arrange and interpret it, but may not enlarge it.';
+  if (packet.task && packet.task.creativeBrief &&
+      packet.task.creativeBrief.kind === 'civic-investigation') {
+    packet.limits.rule += ' For this investigation, do not convert a source intention to keep watching into past tracking; do not invent conversations, access, requests, responses, files, owners, duties, offices, expectations, or collective conclusions. Attribute each approved quote exactly and separately. Missing fields stay unknown, not implied.';
+    packet.limits.rule += ' Use the exact epistemic form "the Packet does not establish X" for missing evidence. Never rewrite missing evidence as "X did not happen," "no one did X," "I looked/asked/requested," or "the absence proves X." First-person reporting acts require an approved fact that names that act.';
+    packet.manifest.permittedInterpretationSlots.push({
+      id: 'P_KNOWN_UNKNOWN',
+      rule: 'Contrast approved facts with creativeBrief.missing only; do not narrate a missing item as an event that occurred.'
+    });
+  }
   packet.output.preflight = {
     facts: 'select manifest.approvedFacts ids',
     quotes: 'select manifest.approvedQuotes ids',
@@ -326,12 +335,33 @@ function auditArticle(draftText, packet) {
   const errors = [];
   if (newNumbers.length) errors.push({ code: 'UNAPPROVED_NUMBER', values: newNumbers });
   if (unknownQuotes.length) errors.push({ code: 'UNAPPROVED_QUOTE', values: unknownQuotes });
+  const investigation = packet.task && packet.task.creativeBrief &&
+    packet.task.creativeBrief.kind === 'civic-investigation';
+  if (investigation) {
+    const overreach = [
+      /\bI(?:'ve| have)?\s+(?:looked|asked|requested|heard|found|checked|reviewed|tracked)\b/i,
+      /\b(?:flagged|told|said)\s+(?:it\s+)?to\s+me\b/i,
+      /\b(?:independently|before I did)\b/i,
+      /\bno (?:one|office|agency|person)\s+(?:has|had|was|is)\b/i,
+      /\b(?:no|without an?)\s+(?:attached\s+)?record of (?:anyone|an office|a request|a response)\b/i,
+      /\b(?:the )?absence (?:is|becomes|proves|shows)\b/i,
+      /\b(?:whoever|somebody)\s+(?:owns|holds)\b/i,
+      /\b(?:office|owner|file-holder|duty-holder)\s+(?:behind|holding|responsible for)\b/i,
+    ].flatMap(re => String(draftText || '').match(re) || []).map(clean);
+    if (overreach.length) errors.push({
+      code: 'INVESTIGATION_EPISTEMIC_OVERREACH',
+      values: [...new Set(overreach)],
+    });
+  }
   // A load-bearing profile deliberately routes lexical differences to Rhea for
   // semantic review. Street ordinals, sign phrasing, punctuation, and anonymous
   // color are not mechanically distinguishable from factual claims. The old
   // fatal lexical wall therefore becomes review evidence, while exhaustive
   // evaluation packets retain their original fail-closed behavior.
   if (packet.manifest.policy === 'load-bearing') {
+    const hard = errors.filter(error => error.code === 'INVESTIGATION_EPISTEMIC_OVERREACH');
+    if (hard.length) return { ok: false, manifestId: packet.manifest.id, errors: hard,
+      observations: errors.filter(error => !hard.includes(error)) };
     return { ok: true, manifestId: packet.manifest.id, errors: [], observations: errors };
   }
   return { ok: errors.length === 0, manifestId: packet.manifest.id, errors, observations: [] };

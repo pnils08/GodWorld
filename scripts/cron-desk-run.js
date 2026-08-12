@@ -342,9 +342,14 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
       record: PACKET_ACTIVE ? false : !NO_GATE, maxTokens: PACKET_ACTIVE ? 420 : 200 });   // S332: --no-gate SAMPLES never write citizen memory (was unconditional record:true — the layer-4 leak Codex caught)
   };
   if (story) for (const pop of (story.popids || [])) push(pop, story.angle || story.label);
-  for (const e of lane) {
-    for (const pop of (e.popids || [])) push(pop, e.label);
-    if (asks.length >= QUOTE_CITIZEN_CAP) break;
+  // A typed Packet's assigned candidate set is exhaustive. Filling unused
+  // quote capacity from the generic desk lane silently widens the evidence
+  // boundary and can reintroduce beat-ineligible people after W1 validation.
+  if (!PACKET_ACTIVE) {
+    for (const e of lane) {
+      for (const pop of (e.popids || [])) push(pop, e.label);
+      if (asks.length >= QUOTE_CITIZEN_CAP) break;
+    }
   }
   // soft floor: everyone rested -> waive the cap rather than run quoteless
   if (!asks.length && rested.length) {
@@ -2499,6 +2504,7 @@ module.exports = {
   nameSlug,
   writerArtifactTag,
   buildWriterArgs,
+  collectQuoteAsks,
   activateWakeContext,
   stageRoute,
   loadLane,

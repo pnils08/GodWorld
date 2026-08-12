@@ -139,7 +139,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "anthropic/claude-sonnet-5"
       }
     },
     "reviewProfile": {

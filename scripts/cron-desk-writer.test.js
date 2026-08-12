@@ -71,4 +71,14 @@ assert.ok(normalized.includes('CLAIM: TEST-ONLY value — changed | output/TEST_
 assert.ok(!normalized.includes('BIZ: None'));
 assert.equal(require('../lib/articleIntake').parse(normalized).errors.length, 0);
 
+const withoutRuntimeClaim = renderPacketIntake('# TEST-ONLY Article\n\nTEST-ONLY sourced fact.\n', {
+  signal: { hood: null, kind: 'test-signal', nearby: [] }, exposure: { subjects: [], sources: [] },
+  known: [
+    { t: 'FACT', text: 'Current cycle: C999', src: 'cron-desk-run explicit cycle argument' },
+    { t: 'FACT', text: 'TEST-ONLY sourced fact', src: 'output/TEST_ONLY.json rows[2]' }
+  ]
+});
+assert.ok(withoutRuntimeClaim.includes('CLAIM: TEST-ONLY sourced fact | output/TEST_ONLY.json rows[2]'));
+assert.ok(!withoutRuntimeClaim.includes('CLAIM: Current cycle: C999'));
+
 console.log('cron-desk-writer artifact-tag tests: PASS');

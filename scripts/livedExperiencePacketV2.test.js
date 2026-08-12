@@ -180,6 +180,39 @@ assert.ok(sportsW3.manifest.approvedFacts.some(row =>
   row.text === sportsSlice.prewrite.anchorFacts[0]));
 assert.doesNotThrow(() => p.assertBase(sportsW3, 'W3'));
 
+const luisProfile = {
+  id: 'TEST-LUIS', canonPolicy: 'load-bearing',
+  authorizedTexture: ['known versus unknown structure'],
+  textureConditions: ['missing fields remain unknown'],
+  canonBlockers: ['invented request or owner'],
+};
+const luisW1 = p.buildAnglePacket({
+  cycle: 999, desk: 'civic', reporter,
+  story: { ...story, popids: [], citizens: [] }, approach: 'TEST-ONLY investigation',
+  slice: { kind: 'civic-domain', packetSeat: {
+    seat: { domain: 'accountability-anomaly' },
+    prewrite: { method: 'KNOWN_UNKNOWN', missing: ['documented response'],
+      silenceClock: { state: 'UNESTABLISHED', value: null, src: null }, forbidden: [] }
+  } }, lane: [],
+});
+const luisPlan = p.validateAngleOutput({
+  focus: 'TEST-ONLY gap', why: 'It is open', checks: ['Check the record'], targets: [],
+  interpretation: 'The cause is unknown', unverifiedLead: [], closeQuestion: 'What explains it?'
+}, luisW1);
+const luisW3 = p.buildWritePacket({ cycle: 999, desk: 'civic', reporter,
+  story: { ...story, popids: [], citizens: [] }, approach: 'TEST-ONLY investigation',
+  angleInput: luisW1, anglePlan: luisPlan, interviews: [], lane: [], reviewProfile: luisProfile });
+assert.match(luisW3.limits.rule, /do not convert a source intention to keep watching into past tracking/);
+assert.match(luisW3.limits.rule, /the Packet does not establish X/);
+assert.match(luisW3.limits.rule, /First-person reporting acts require an approved fact/);
+assert.ok(luisW3.manifest.permittedInterpretationSlots.some(row => row.id === 'P_KNOWN_UNKNOWN'));
+const luisOverreach = p.auditArticle(
+  'I went looking. Two residents flagged it to me independently. Somebody owns the file.', luisW3);
+assert.equal(luisOverreach.ok, false);
+assert.ok(luisOverreach.errors.some(row => row.code === 'INVESTIGATION_EPISTEMIC_OVERREACH'));
+assert.equal(p.auditArticle(
+  'The Packet does not establish a request, response, owner, office, or cause.', luisW3).ok, true);
+
 // Jordan's economic slice carries sourced conditions and limits through LEP/2.
 const economicStory = {
   ref: 'output/TEST_ONLY_ECONOMIC.json rows[1]',

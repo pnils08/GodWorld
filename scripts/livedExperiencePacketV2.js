@@ -448,7 +448,8 @@ function publicBriefFacts(packet) {
     if (row.src === 'cron-desk-run explicit cycle argument') return false;
     const text = clean(row.text, 500);
     if (!text) return false;
-    if (/\b(?:engine_audit|snapshot:|world_summary|desk_signal)\b/i.test(text)) return false;
+    if (/(?:engine_audit|snapshot:|world_summary|desk_signal|patterns?\[|rows?\[|\s##\s)/i.test(text)) return false;
+    if (/^Initiative_Tracker\s*\(InitiativeID\b/i.test(text)) return false;
     if (/^(?:NAMED|PERSON|VENUE|HOOD|TRAJECTORY|VOLUME|VIBE|MOVEMENT|WEATHER IMPACT|RETAIL VITALITY)\s*:/i.test(text)) return false;
     if (/\bvolume\s+(?:of\s+)?\d+(?:\.\d+)?\b/i.test(text)) return false;
     if (/\bweather impact\b/i.test(text)) return false;
@@ -460,7 +461,7 @@ function publicBriefFacts(packet) {
     const tracker = text.match(/^(.+?)\s*\|\s*Status\s+([^|]+?)\s*\|\s*phase\s+(.+)$/i);
     return Object.assign({}, row, {
       text: tracker
-        ? tracker[1] + ' is listed as ' + tracker[2].trim() + ', with ' +
+        ? tracker[1] + ' is listed as ' + tracker[2].trim() + ', and its supplied phase is ' +
           tracker[3].trim().replace(/-/g, ' ') + '.'
         : text,
     });
@@ -476,7 +477,7 @@ function renderSourceBrief(packet) {
   if (!facts.length) throw new Error('SOURCE_BRIEF requires one public approved fact');
   const quotes = packet.manifest.approvedQuotes || [];
   const subjects = new Map((packet.manifest.approvedSubjects || []).map(row => [row.id, row]));
-  const closeQuestion = clean(packet.signal && packet.signal.plan && packet.signal.plan.closeQuestion, 400);
+  const closeQuestion = 'What additional record would explain the supplied condition?';
   const title = clean(facts[0].text, 500).replace(/[.!?]+$/, '');
   const sourceLines = quotes.flatMap(quote => {
     const subject = subjects.get(quote.speakerId);

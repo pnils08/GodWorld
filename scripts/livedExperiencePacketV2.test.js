@@ -139,7 +139,26 @@ const sourceBrief = p.renderSourceBrief(sourceBriefW3);
 assert.equal(sourceBrief.split('\n')[0], '# TEST-ONLY signal changed');
 assert.match(sourceBrief, new RegExp(claims.publishableQuote.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
 assert.doesNotMatch(sourceBrief, /invented biography|collective sentiment/i);
+assert.match(sourceBrief, /What additional record would explain the supplied condition\?/);
 assert.equal(p.auditArticle(sourceBrief, sourceBriefW3).ok, true);
+
+const trackerSourceBriefW3 = JSON.parse(JSON.stringify(sourceBriefW3));
+trackerSourceBriefW3.manifest.approvedFacts = [{
+  id: 'F-TRACKER', t: 'FACT',
+  text: 'TEST-ONLY Initiative | Status passed | phase pilot-active', src: 'TEST-ONLY tracker'
+}, {
+  id: 'F-POINTER', t: 'FACT',
+  text: 'Initiative_Tracker (InitiativeID TEST-ONLY); snapshot: engine_audit_c999.json snapshots.Initiative_Tracker',
+  src: 'TEST-ONLY tracker'
+}];
+trackerSourceBriefW3.known = trackerSourceBriefW3.manifest.approvedFacts.map(row => ({ ...row }));
+trackerSourceBriefW3.manifest.approvedQuotes = [];
+trackerSourceBriefW3.manifest.approvedSubjects = [];
+trackerSourceBriefW3.signal.plan.closeQuestion = 'Does CrimeIndex explain this?';
+const trackerSourceBrief = p.renderSourceBrief(trackerSourceBriefW3);
+assert.match(trackerSourceBrief,
+  /TEST-ONLY Initiative is listed as passed, and its supplied phase is pilot active\./);
+assert.doesNotMatch(trackerSourceBrief, /engine_audit|snapshot:|CrimeIndex/);
 
 const inlinePopProfileW3 = p.buildWritePacket({
   cycle: 999, desk: 'civic', reporter, story, approach: 'Test the mismatch',

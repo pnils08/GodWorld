@@ -475,7 +475,7 @@ function renderSourceBrief(packet) {
   const quotes = packet.manifest.approvedQuotes || [];
   const subjects = new Map((packet.manifest.approvedSubjects || []).map(row => [row.id, row]));
   const closeQuestion = clean(packet.signal && packet.signal.plan && packet.signal.plan.closeQuestion, 400);
-  const title = clean(packet.task.assignment, 500).split(/\s*\|\s*/)[0];
+  const title = clean(facts[0].text, 500).replace(/[.!?]+$/, '');
   const sourceLines = quotes.flatMap(quote => {
     const subject = subjects.get(quote.speakerId);
     const profile = subject && clean(subject.profile, 300);
@@ -539,6 +539,8 @@ function auditArticle(draftText, packet) {
     /\bvolume\s+(?:of\s+)?[+-]?\d+(?:\.\d+)?\b/i,
     /\bweather impact(?:\s+(?:is|was|at))?\s*[=:]?\s*[+-]?\d+(?:\.\d+)?\b/i,
     /\bmovement\s+(?:is\s+)?restricted\b/i,
+    /\brestricted movement\b/i,
+    /\blow volume\b/i,
   ].flatMap(re => bodyText.match(re) || []).map(value => clean(value));
   if (engineMetadata.length) errors.push({
     code: 'ENGINE_METADATA_LEAK',

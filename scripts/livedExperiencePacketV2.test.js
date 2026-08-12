@@ -119,7 +119,7 @@ const jaxRawMetadata = p.auditArticle('The TEST-ONLY Initiative remains in const
 assert.equal(jaxRawMetadata.ok, false);
 assert.ok(jaxRawMetadata.errors.some(e => e.code === 'ENGINE_METADATA_LEAK'));
 const naturalizedMetadata = p.auditArticle(
-  'The room had a volume of 3, movement is restricted, and weather impact was at 1.05.', jaxW3);
+  'The room had a volume of 3, movement is restricted, low volume, restricted movement, and weather impact was at 1.05.', jaxW3);
 assert.equal(naturalizedMetadata.ok, false);
 assert.ok(naturalizedMetadata.errors.some(e => e.code === 'ENGINE_METADATA_LEAK'));
 
@@ -136,6 +136,7 @@ const sourceBriefW3 = p.buildWritePacket({
 assert.equal(sourceBriefW3.task.writingMode, 'SOURCE_BRIEF');
 assert.match(sourceBriefW3.reviewProfile.articleContract.targetWords, /evidence-bounded/);
 const sourceBrief = p.renderSourceBrief(sourceBriefW3);
+assert.equal(sourceBrief.split('\n')[0], '# TEST-ONLY signal changed');
 assert.match(sourceBrief, new RegExp(claims.publishableQuote.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
 assert.doesNotMatch(sourceBrief, /invented biography|collective sentiment/i);
 assert.equal(p.auditArticle(sourceBrief, sourceBriefW3).ok, true);

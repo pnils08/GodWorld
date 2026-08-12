@@ -172,6 +172,9 @@ const inlinePopProfileW3 = p.buildWritePacket({
   lane: [], reviewProfile: sourceBriefProfile,
 });
 assert.ok(inlinePopProfileW3.manifest.approvedSubjects.every(row => !/POP-\d+/.test(row.profile)));
+const inlineProfileBrief = p.renderSourceBrief(inlinePopProfileW3);
+assert.match(inlineProfileBrief, /\*\*Test Resident — TEST-ONLY Mechanic, TEST-HOOD\*\*/);
+assert.doesNotMatch(inlineProfileBrief, /careerStage|wealth|employerBiz|tier:/);
 
 // P Slayer's fan-pulse slice is a typed LEP/2 input, not side-channel prompt text.
 const sportsStory = {

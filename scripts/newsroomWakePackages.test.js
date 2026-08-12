@@ -162,7 +162,10 @@ const packetAsks = runApi.collectQuoteAsks([
       ]
     }, known: [], limits: {}, output: {}
   },
-  angleRead: { plan: { focus: 'TEST-ONLY focus', targets: [], closeQuestion: 'TEST-ONLY close' } }
+  angleRead: { plan: { focus: 'TEST-ONLY focus', targets: [
+    { pop: 'POP-90001', question: 'TEST-ONLY one?', basis: 'assignment' },
+    { pop: 'POP-90002', question: 'TEST-ONLY two?', basis: 'assignment' }
+  ], closeQuestion: 'TEST-ONLY close' } }
 });
 assert.deepStrictEqual(packetAsks.map(row => row.pop), ['POP-90001', 'POP-90002'],
   'Packet quote pool must not fill from the generic desk lane');

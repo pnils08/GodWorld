@@ -346,7 +346,11 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
       record: PACKET_ACTIVE ? false : !NO_GATE, maxTokens: PACKET_ACTIVE ? 420 : 200 });   // S332: --no-gate SAMPLES never write citizen memory (was unconditional record:true — the layer-4 leak Codex caught)
   };
   if (story) {
-    for (const pop of (story.popids || [])) {
+    const plannedPops = PACKET_ACTIVE && angleArt && angleArt.angleRead &&
+      angleArt.angleRead.plan && Array.isArray(angleArt.angleRead.plan.targets)
+      ? angleArt.angleRead.plan.targets.map(target => target && target.pop).filter(Boolean)
+      : (story.popids || []);
+    for (const pop of plannedPops) {
       if (!PACKET_ACTIVE || packetCandidates.has(pop)) push(pop, story.angle || story.label);
     }
   }

@@ -450,6 +450,7 @@ function publicBriefFacts(packet) {
     if (!text) return false;
     if (/(?:engine_audit|snapshot:|world_summary|desk_signal|patterns?\[|rows?\[|\s##\s)/i.test(text)) return false;
     if (/^Initiative_Tracker\s*\(InitiativeID\b/i.test(text)) return false;
+    if (/\bfrontState\b/i.test(text)) return false;
     if (/^(?:NAMED|PERSON|VENUE|HOOD|TRAJECTORY|VOLUME|VIBE|MOVEMENT|WEATHER IMPACT|RETAIL VITALITY)\s*:/i.test(text)) return false;
     if (/\bvolume\s+(?:of\s+)?\d+(?:\.\d+)?\b/i.test(text)) return false;
     if (/\bweather impact\b/i.test(text)) return false;
@@ -468,6 +469,14 @@ function publicBriefFacts(packet) {
   });
 }
 
+function publicSubjectDescriptor(profile, name) {
+  const escapedName = String(name || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const text = clean(profile, 300).replace(new RegExp('^' + escapedName + '\\s+—\\s+', 'i'), '');
+  const role = (text.match(/(?:^|;\s*)role:\s*([^;]+)/i) || [])[1];
+  const neighborhood = (text.match(/(?:^|;\s*)neighborhood:\s*([^;]+)/i) || [])[1];
+  return [role, neighborhood].map(value => clean(value, 160)).filter(Boolean).join(', ') || null;
+}
+
 function renderSourceBrief(packet) {
   assertBase(packet, 'W3');
   if (!packet.task || packet.task.writingMode !== 'SOURCE_BRIEF') {
@@ -481,11 +490,7 @@ function renderSourceBrief(packet) {
   const title = clean(facts[0].text, 500).replace(/[.!?]+$/, '');
   const sourceLines = quotes.flatMap(quote => {
     const subject = subjects.get(quote.speakerId);
-    const profile = subject && clean(subject.profile, 300);
-    const descriptor = profile && profile !== quote.speakerName &&
-      profile.startsWith(quote.speakerName + ' — ')
-      ? profile.slice((quote.speakerName + ' — ').length)
-      : null;
+    const descriptor = subject && publicSubjectDescriptor(subject.profile, quote.speakerName);
     return [
       '**' + clean(quote.speakerName, 160) + (descriptor ? ' — ' + descriptor : '') + '**',
       '',
@@ -544,6 +549,7 @@ function auditArticle(draftText, packet) {
     /\bmovement\s+(?:is\s+)?restricted\b/i,
     /\brestricted movement\b/i,
     /\blow volume\b/i,
+    /\bfrontState\b/i,
   ].flatMap(re => bodyText.match(re) || []).map(value => clean(value));
   if (engineMetadata.length) errors.push({
     code: 'ENGINE_METADATA_LEAK',

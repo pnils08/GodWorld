@@ -61,6 +61,38 @@ assert.deepStrictEqual(luisW1.task.creativeBrief, {
 assert.equal(luisW1.known.filter(row => row.text === 'TEST-ONLY audit gap remains open').length, 1,
   'compact Packet deduplicates the assigned fact');
 
+const trevorSlice = {
+  kind: 'civic-domain',
+  packetSeat: {
+    seat: { slug: 'trevor-shimizu', domain: 'infrastructure-transit' },
+    prewrite: {
+      method: 'INCIDENT_LINK_WARNING',
+      anchorFacts: ['TEST-ONLY transit condition remains open'],
+      missing: ['timestamp', 'second linked system fact'],
+      cascade: { state: 'UNESTABLISHED', facts: [], link: null, src: null },
+      forbidden: ['Do not invent an outage or causal link.']
+    }
+  }
+};
+const trevorW1 = p.buildAnglePacket({
+  cycle: 999,
+  desk: 'civic',
+  reporter: { popid: 'TEST-TREVOR', name: 'Test Trevor' },
+  story: { ref: 'output/TEST_TREVOR.json', label: 'TEST-ONLY transit condition remains open', kind: 'initiative' },
+  approach: 'Trace only supplied system facts.',
+  slice: trevorSlice,
+  lane: []
+});
+assert.deepStrictEqual(trevorW1.task.creativeBrief, {
+  kind: 'infrastructure-systems',
+  method: 'INCIDENT_LINK_WARNING',
+  missing: ['timestamp', 'second linked system fact'],
+  cascade: { state: 'UNESTABLISHED', facts: [], link: null, src: null },
+  forbidden: ['Do not invent an outage or causal link.']
+});
+assert.equal(trevorW1.known.filter(row => row.text === 'TEST-ONLY transit condition remains open').length, 1,
+  'compact Packet deduplicates the assigned system fact');
+
 const plan = p.validateAngleOutput({
   focus: 'TEST-ONLY mismatch', why: 'It is unresolved', checks: ['Check the source'],
   targets: [{ pop: 'TEST-POP-01', question: 'What do you own?', basis: 'assigned-official' }],

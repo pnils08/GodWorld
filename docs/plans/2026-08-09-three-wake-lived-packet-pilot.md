@@ -335,7 +335,7 @@ slice and model text is a starting work surface, not an adopted contract.
 | PSLAYER-LEP2-1 | P Slayer / POP-00008 | sports | Article LEP/2; typed fan pulse | Llama / Llama / Llama | [x] | [ ] full W1-W3/Rhea |
 | JORDAN-LEP2-1 | Jordan Velez / POP-00153 | economics/labor | Article LEP/2; economic/storefront | DeepSeek / DeepSeek / DeepSeek | [x] | [ ] full W1-W3/Rhea |
 | LUIS-LEP2-1 | Luis Navarro / POP-00636 | civic investigations | Article LEP/2; typed known/unknown investigation brief and unestablished silence clock | DeepSeek / DeepSeek / DeepSeek | [x] | [ ] full W1-W3/Rhea |
-| pending | Trevor Shimizu / POP-00155 | infrastructure | Candidate Article LEP/2; transit/system cascade | Candidate DeepSeek; benchmark | [ ] | [ ] |
+| TREVOR-LEP2-1 | Trevor Shimizu / POP-00155 | infrastructure | Article LEP/2; typed incident/link/warning systems brief and unestablished cascade | DeepSeek / DeepSeek / DeepSeek | [x] | [ ] full W1-W3/Rhea |
 | RACHEL-LEP2-1 | Sgt. Rachel Torres / POP-00057 | safety | Article LEP/2; typed public-safety signal and classification/response gap | DeepSeek / DeepSeek / DeepSeek | [x] | [ ] full W1-W3/Rhea |
 | pending | Dr. Lila Mezran / POP-00154 | health | Candidate Article LEP/2; cluster/human cost | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | Angela Reyes / POP-00156 | education | Candidate Article LEP/2; school/youth stability | Candidate DeepSeek; benchmark | [ ] | [ ] |
@@ -480,3 +480,4 @@ observation remains open.
 - 2026-08-10 (codex) — Added KAI-LEP2-1 as the first evening/culture package. Kai shares the deterministic evening substrate but receives a seat-specific arts pulse, bag authority, LEP/2 creative brief, Llama route, and load-bearing Rhea profile; Mason, Maria, and future Social Trends remain separate package gates.
 - 2026-08-10 (codex) — Added RACHEL-LEP2-1 for Sgt. Rachel Torres with a disk-first public-safety slice, typed safety creative brief, DeepSeek route, and load-bearing incident/classification review profile; full W1-W3/Rhea proof remains open. Document normalization is explicitly proposal-only and separate from activation.
 - 2026-08-12 (codex) — Added LUIS-LEP2-1 with an all-DeepSeek route and a compact investigation brief that separates known facts, missing evidence, and an explicitly unestablished silence clock. Existing packages remain unchanged; full W1-W3/Rhea proof and model comparison remain open.
+- 2026-08-12 (codex) — Added TREVOR-LEP2-1 with an all-DeepSeek route and a compact systems brief that keeps timestamps, second-system evidence, causal links, and cascade claims explicitly missing until supplied. Existing packages remain unchanged; full W1-W3/Rhea proof and model comparison remain open.

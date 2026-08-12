@@ -194,6 +194,20 @@ function candidateFor(entry, score) {
 }
 
 function prewriteForSeat(slug, top) {
+  if (slug === 'trevor-shimizu') {
+    return {
+      anchorFacts: [top.label],
+      forbidden: ['Do not add outages, closures, delays, routes, timestamps, load scores, causes, repairs, agencies, or outcomes absent from the supplied entries.'],
+      schema: 'SYSTEMS-BRIEF-1',
+      method: 'INCIDENT_LINK_WARNING',
+      missing: [
+        'timestamp and duration unless supplied by the source',
+        'second system fact and evidence linking it to the assigned condition',
+        'responsible agency, maintenance action, capacity, load, or service effect unless named by the source'
+      ],
+      cascade: { state: 'UNESTABLISHED', facts: [], link: null, src: null }
+    };
+  }
   if (slug !== 'luis-navarro') {
     return {
       anchorFacts: [top.label, top.ref],

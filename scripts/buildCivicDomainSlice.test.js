@@ -29,6 +29,15 @@ try {
   assert.strictEqual(slice.empty, false);
   assert.strictEqual(slice.packets['angela-reyes'].story.ref, 'INIT-YOUTH');
   assert.strictEqual(slice.packets['trevor-shimizu'].story.ref, 'INIT-TRANSIT');
+  assert.strictEqual(slice.packets['trevor-shimizu'].prewrite.schema, 'SYSTEMS-BRIEF-1');
+  assert.strictEqual(slice.packets['trevor-shimizu'].prewrite.method, 'INCIDENT_LINK_WARNING');
+  assert.deepStrictEqual(slice.packets['trevor-shimizu'].prewrite.anchorFacts,
+    ['Fruitvale Transit Hub | Status visioning-complete']);
+  assert.deepStrictEqual(slice.packets['trevor-shimizu'].prewrite.cascade,
+    { state: 'UNESTABLISHED', facts: [], link: null, src: null });
+  assert(slice.packets['trevor-shimizu'].prewrite.missing.some(row => row.includes('timestamp')));
+  assert(!slice.packets['trevor-shimizu'].prewrite.anchorFacts.includes('INIT-TRANSIT'),
+    'source pointer must not be duplicated as a factual sentence');
   assert.strictEqual(slice.packets['luis-navarro'].story.ref, 'AUDIT-STUCK');
   assert.strictEqual(slice.packets['luis-navarro'].prewrite.schema, 'INVESTIGATION-BRIEF-1');
   assert.strictEqual(slice.packets['luis-navarro'].prewrite.method, 'KNOWN_UNKNOWN');

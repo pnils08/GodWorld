@@ -147,6 +147,18 @@ function creativeBriefFromSlice(slice) {
         : null,
       forbidden: uniq(prewrite.forbidden).slice(0, 6),
     };
+  } else if (slice.kind === 'civic-domain' && slice.packetSeat &&
+      slice.packetSeat.seat && slice.packetSeat.seat.domain === 'infrastructure-transit') {
+    const prewrite = slice.packetSeat.prewrite || {};
+    brief = {
+      kind: 'infrastructure-systems',
+      method: clean(prewrite.method, 40) || 'INCIDENT_LINK_WARNING',
+      missing: uniq(prewrite.missing).slice(0, 6),
+      cascade: prewrite.cascade && prewrite.cascade.state === 'UNESTABLISHED'
+        ? { state: 'UNESTABLISHED', facts: [], link: null, src: null }
+        : null,
+      forbidden: uniq(prewrite.forbidden).slice(0, 6),
+    };
   }
   if (!brief) return null;
   return Object.values(brief).some(value => Array.isArray(value) ? value.length : value)

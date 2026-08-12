@@ -193,6 +193,27 @@ function candidateFor(entry, score) {
   };
 }
 
+function prewriteForSeat(slug, top) {
+  if (slug !== 'luis-navarro') {
+    return {
+      anchorFacts: [top.label, top.ref],
+      forbidden: ['Do not add officials, votes, budgets, outcomes, measurements, quotes, or affected people absent from the supplied entries.']
+    };
+  }
+  return {
+    anchorFacts: [top.label],
+    forbidden: ['Do not add officials, votes, budgets, outcomes, measurements, quotes, responses, or affected people absent from the supplied entries.'],
+    schema: 'INVESTIGATION-BRIEF-1',
+    method: 'KNOWN_UNKNOWN',
+    missing: [
+      'documented response or documented non-response',
+      'request timestamp and elapsed silence duration',
+      'responsible person, office, or duty unless named by the source'
+    ],
+    silenceClock: { state: 'UNESTABLISHED', value: null, src: null }
+  };
+}
+
 function packetForEntries(entries, slug) {
   const seat = CIVIC_SEATS[slug];
   if (!seat) return null;
@@ -233,10 +254,7 @@ function packetForEntries(entries, slug) {
       hood: top.hood,
       source: top.ref
     },
-    prewrite: {
-      anchorFacts: [top.label, top.ref],
-      forbidden: ['Do not add officials, votes, budgets, outcomes, measurements, quotes, or affected people absent from the supplied entries.']
-    },
+    prewrite: prewriteForSeat(slug, top),
     candidates,
     pointers: unique(candidates.map(candidate => candidate.ref))
   };

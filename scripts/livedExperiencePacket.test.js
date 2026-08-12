@@ -29,6 +29,38 @@ assert.deepStrictEqual(Object.keys(w1).slice(0, 8), ['v', 'wake', 'actor', 'task
 assert.equal(w1.v, 'LEP/1');
 assert.ok(w1.known.every(c => c.t && c.text && c.src));
 
+const luisSlice = {
+  kind: 'civic-domain',
+  packetSeat: {
+    seat: { slug: 'luis-navarro', domain: 'accountability-anomaly' },
+    prewrite: {
+      method: 'KNOWN_UNKNOWN',
+      anchorFacts: ['TEST-ONLY audit gap remains open'],
+      missing: ['documented response', 'elapsed silence duration'],
+      silenceClock: { state: 'UNESTABLISHED', value: null, src: null },
+      forbidden: ['Do not invent a response or records request.']
+    }
+  }
+};
+const luisW1 = p.buildAnglePacket({
+  cycle: 999,
+  desk: 'civic',
+  reporter: { popid: 'TEST-LUIS', name: 'Test Luis' },
+  story: { ref: 'output/TEST_LUIS.json', label: 'TEST-ONLY audit gap remains open', kind: 'anomaly' },
+  approach: 'Separate known from unknown.',
+  slice: luisSlice,
+  lane: []
+});
+assert.deepStrictEqual(luisW1.task.creativeBrief, {
+  kind: 'civic-investigation',
+  method: 'KNOWN_UNKNOWN',
+  missing: ['documented response', 'elapsed silence duration'],
+  silenceClock: { state: 'UNESTABLISHED', value: null, src: null },
+  forbidden: ['Do not invent a response or records request.']
+});
+assert.equal(luisW1.known.filter(row => row.text === 'TEST-ONLY audit gap remains open').length, 1,
+  'compact Packet deduplicates the assigned fact');
+
 const plan = p.validateAngleOutput({
   focus: 'TEST-ONLY mismatch', why: 'It is unresolved', checks: ['Check the source'],
   targets: [{ pop: 'TEST-POP-01', question: 'What do you own?', basis: 'assigned-official' }],

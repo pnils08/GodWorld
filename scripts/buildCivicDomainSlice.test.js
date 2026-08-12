@@ -30,9 +30,21 @@ try {
   assert.strictEqual(slice.packets['angela-reyes'].story.ref, 'INIT-YOUTH');
   assert.strictEqual(slice.packets['trevor-shimizu'].story.ref, 'INIT-TRANSIT');
   assert.strictEqual(slice.packets['luis-navarro'].story.ref, 'AUDIT-STUCK');
+  assert.strictEqual(slice.packets['luis-navarro'].prewrite.schema, 'INVESTIGATION-BRIEF-1');
+  assert.strictEqual(slice.packets['luis-navarro'].prewrite.method, 'KNOWN_UNKNOWN');
+  assert.deepStrictEqual(slice.packets['luis-navarro'].prewrite.anchorFacts,
+    ['stuck-initiative | Fruitvale Transit Hub stalled for 9 cycles']);
+  assert.deepStrictEqual(slice.packets['luis-navarro'].prewrite.silenceClock,
+    { state: 'UNESTABLISHED', value: null, src: null });
+  assert(slice.packets['luis-navarro'].prewrite.missing.some(row => row.includes('elapsed silence')));
+  assert(!slice.packets['luis-navarro'].prewrite.anchorFacts.includes('AUDIT-STUCK'),
+    'source pointer must not be duplicated as a factual sentence');
   assert.strictEqual(slice.packets['lila-mezran'].story.ref, 'INIT-HEALTH');
   assert.strictEqual(slice.packets['noah-tan'].story.ref, 'ENV-1');
   assert.strictEqual(slice.packets['carmen-delaine'].story.ref, 'INIT-TRANSIT');
+  assert.deepStrictEqual(slice.packets['carmen-delaine'].prewrite.anchorFacts,
+    ['Fruitvale Transit Hub | Status visioning-complete', 'INIT-TRANSIT'],
+    'completed civic package payload remains unchanged');
   assert.strictEqual(civic.CIVIC_SEATS['rachel-torres'], undefined, 'Rachel remains on her completed safety slice');
   assert(!slice.packets['angela-reyes'].candidates.some(row => row.ref === 'CULTURE-1'));
   assert(slice.packets['angela-reyes'].pointers.includes('INIT-YOUTH'), 'source ref retained');

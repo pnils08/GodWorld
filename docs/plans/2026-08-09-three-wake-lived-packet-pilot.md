@@ -1,7 +1,7 @@
 ---
 title: Three-Wake Typed Lived-Experience Packet Pilot
 created: 2026-08-09
-updated: 2026-08-10
+updated: 2026-08-12
 type: plan
 tags: [media, citizens, civic, sports, business, agents, evaluation, active]
 sources:
@@ -334,7 +334,7 @@ slice and model text is a starting work surface, not an adopted contract.
 | CARMEN-LEP2-1 | Carmen Delaine / POP-00011 | civic ledger | Article LEP/2; initiatives/votes/money | DeepSeek / DeepSeek / DeepSeek | [x] | [ ] full W1-W3/Rhea |
 | PSLAYER-LEP2-1 | P Slayer / POP-00008 | sports | Article LEP/2; typed fan pulse | Llama / Llama / Llama | [x] | [ ] full W1-W3/Rhea |
 | JORDAN-LEP2-1 | Jordan Velez / POP-00153 | economics/labor | Article LEP/2; economic/storefront | DeepSeek / DeepSeek / DeepSeek | [x] | [ ] full W1-W3/Rhea |
-| pending | Luis Navarro / POP-00636 | civic investigations | Candidate Article LEP/2; know/don't-know and silence clock | Candidate DeepSeek; benchmark | [ ] | [ ] |
+| LUIS-LEP2-1 | Luis Navarro / POP-00636 | civic investigations | Article LEP/2; typed known/unknown investigation brief and unestablished silence clock | DeepSeek / DeepSeek / DeepSeek | [x] | [ ] full W1-W3/Rhea |
 | pending | Trevor Shimizu / POP-00155 | infrastructure | Candidate Article LEP/2; transit/system cascade | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | RACHEL-LEP2-1 | Sgt. Rachel Torres / POP-00057 | safety | Article LEP/2; typed public-safety signal and classification/response gap | DeepSeek / DeepSeek / DeepSeek | [x] | [ ] full W1-W3/Rhea |
 | pending | Dr. Lila Mezran / POP-00154 | health | Candidate Article LEP/2; cluster/human cost | Candidate DeepSeek; benchmark | [ ] | [ ] |
@@ -479,3 +479,4 @@ observation remains open.
 - 2026-08-10 (codex) — Filed Task 17, the surgical migration checklist for all 22 newsroom personas: typed slice, per-wake model benchmark, aligned contracts, deterministic tests, attended proof, and separate data/visual contract gates. Jax and Jordan angle recoveries succeeded; full cohort graduation remains open.
 - 2026-08-10 (codex) — Added KAI-LEP2-1 as the first evening/culture package. Kai shares the deterministic evening substrate but receives a seat-specific arts pulse, bag authority, LEP/2 creative brief, Llama route, and load-bearing Rhea profile; Mason, Maria, and future Social Trends remain separate package gates.
 - 2026-08-10 (codex) — Added RACHEL-LEP2-1 for Sgt. Rachel Torres with a disk-first public-safety slice, typed safety creative brief, DeepSeek route, and load-bearing incident/classification review profile; full W1-W3/Rhea proof remains open. Document normalization is explicitly proposal-only and separate from activation.
+- 2026-08-12 (codex) — Added LUIS-LEP2-1 with an all-DeepSeek route and a compact investigation brief that separates known facts, missing evidence, and an explicitly unestablished silence clock. Existing packages remain unchanged; full W1-W3/Rhea proof and model comparison remain open.

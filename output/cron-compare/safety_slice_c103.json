@@ -1,0 +1,40 @@
+{
+  "version": "SAFETY-SLICE-1",
+  "cycle": 103,
+  "kind": "public-safety",
+  "empty": false,
+  "approach": "Measured public-safety approach: choose one packet-backed incident, classification gap, or OARI response question. Third-person only. Use supplied names, places, dates, and numbers; do not invent officers, cases, quotes, crime waves, or public fear.",
+  "story": {
+    "kind": "public-safety",
+    "angle": "Oakland Alternative Response Initiative | Status passed | phase operational",
+    "label": "Oakland Alternative Response Initiative | Status passed | phase operational",
+    "hookLine": "The record leaves a public-safety response or classification question open.",
+    "hood": "West Oakland, Fruitvale, East Oakland",
+    "ref": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+  },
+  "pulse": {
+    "className": "initiative",
+    "label": "Oakland Alternative Response Initiative | Status passed | phase operational",
+    "hood": "West Oakland, Fruitvale, East Oakland",
+    "source": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+  },
+  "prewrite": {
+    "anchorFacts": [
+      "Oakland Alternative Response Initiative | Status passed | phase operational",
+      "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+      "Supplied area: West Oakland, Fruitvale, East Oakland"
+    ],
+    "classificationNote": null,
+    "practicalClose": "State what the supplied record does and does not establish.",
+    "missing": [
+      "officer names, case details, quotes, and response metrics unless supplied"
+    ]
+  },
+  "candidates": [],
+  "pointers": [
+    "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+  ],
+  "scene": {
+    "colorRoom": "Use only restrained, unnamed scene texture; it carries no incident fact, quote, or public sentiment."
+  }
+}

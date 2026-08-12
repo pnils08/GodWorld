@@ -1,0 +1,414 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "103",
+  "persona": "luis-navarro",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00636",
+      "name": "Luis Navarro",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning — remedy path + responsible office",
+      "approach": "Investigation approach: distinguish what the supplied record establishes from what it does not. Follow the unresolved gap fairly; no invented response, silence, or accusation.",
+      "creativeBrief": {
+        "kind": "civic-investigation",
+        "method": "KNOWN_UNKNOWN",
+        "missing": [
+          "documented response or documented non-response",
+          "request timestamp and elapsed silence duration",
+          "responsible person, office, or duty unless named by the source"
+        ],
+        "silenceClock": {
+          "state": "UNESTABLISHED",
+          "value": null,
+          "src": null
+        },
+        "forbidden": [
+          "Do not add officials, votes, budgets, outcomes, measurements, quotes, responses, or affected people absent from the supplied entries."
+        ]
+      }
+    },
+    "signal": {
+      "kind": "anomaly",
+      "hood": "Fruitvale",
+      "score": null,
+      "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+      "nearby": [
+        {
+          "text": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+          "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+        },
+        {
+          "text": "repeating-event (medium) | Issue \"strain\" recurred 3 cycles",
+          "src": "output/engine_audit_c103.json patterns[1]; evidence: Riley_Digest row(s)"
+        },
+        {
+          "text": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+          "src": "output/engine_audit_c103.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s)"
+        },
+        {
+          "text": "production-imbalance (medium) | 22 neighborhoods report migration flow with zero economic events this cycle",
+          "src": "output/engine_audit_c103.json patterns[3]; evidence: Neighborhood_Map row(s)"
+        },
+        {
+          "text": "incoherence (high) | Initiative \"Oakland Alternative Response Initiative\" (operational, safety) but 3 affected neighborhoods show contradicting CrimeIndex",
+          "src": "output/engine_audit_c103.json patterns[4]; evidence: Initiative_Tracker row(s) 3"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00231",
+          "name": "Calvin Turner (POP-00231)",
+          "profile": "Calvin Turner (POP-00231)",
+          "why": "assignment"
+        },
+        {
+          "pop": "POP-00744",
+          "name": "Tomas Renteria (POP-00744)",
+          "profile": "Tomas Renteria (POP-00744)",
+          "why": "assignment"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C103",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-4ac610ea40fe"
+      },
+      {
+        "t": "FACT",
+        "text": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+        "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+        "id": "F-11c83bcb168d"
+      },
+      {
+        "t": "FACT",
+        "text": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+        "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+        "id": "F-c4b3917a7eab"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers."
+    }
+  },
+  "reporter": {
+    "name": "Luis Navarro",
+    "popid": "POP-00636"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+      "label": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+      "kind": "anomaly",
+      "angle": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning — remedy path + responsible office",
+      "hookLine": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+      "hood": "Fruitvale",
+      "popids": [
+        "POP-00231",
+        "POP-00744"
+      ],
+      "citizens": [
+        "Calvin Turner (POP-00231)",
+        "Tomas Renteria (POP-00744)"
+      ]
+    },
+    "approach": "Investigation approach: distinguish what the supplied record establishes from what it does not. Follow the unresolved gap fairly; no invented response, silence, or accusation."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "economicSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": {
+    "seat": {
+      "slug": "luis-navarro",
+      "name": "Luis Navarro",
+      "popid": "POP-00636",
+      "domain": "accountability-anomaly"
+    },
+    "pulse": {
+      "className": "accountability-anomaly",
+      "score": 80,
+      "label": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+      "hood": "Fruitvale",
+      "source": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+    },
+    "prewrite": {
+      "anchorFacts": [
+        "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles"
+      ],
+      "forbidden": [
+        "Do not add officials, votes, budgets, outcomes, measurements, quotes, responses, or affected people absent from the supplied entries."
+      ],
+      "schema": "INVESTIGATION-BRIEF-1",
+      "method": "KNOWN_UNKNOWN",
+      "missing": [
+        "documented response or documented non-response",
+        "request timestamp and elapsed silence duration",
+        "responsible person, office, or duty unless named by the source"
+      ],
+      "silenceClock": {
+        "state": "UNESTABLISHED",
+        "value": null,
+        "src": null
+      },
+      "excludedCandidates": [
+        {
+          "popid": "POP-00598",
+          "reason": "PRO_ATHLETE_CIVIC_INELIGIBLE"
+        }
+      ]
+    },
+    "candidates": [
+      {
+        "score": 80,
+        "kind": "anomaly",
+        "label": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+        "ref": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+        "hood": "Fruitvale",
+        "popids": [
+          "POP-00231",
+          "POP-00598",
+          "POP-00744"
+        ],
+        "angle": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning — remedy path + responsible office",
+        "hookLine": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+        "citizens": [
+          "Calvin Turner (POP-00231)",
+          "Vladimir Gonzalez (POP-00598)",
+          "Tomas Renteria (POP-00744)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 0
+      },
+      {
+        "score": 80,
+        "kind": "anomaly",
+        "label": "repeating-event (medium) | Issue \"strain\" recurred 3 cycles",
+        "ref": "output/engine_audit_c103.json patterns[1]; evidence: Riley_Digest row(s)",
+        "hood": null,
+        "popids": [],
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle.",
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 1
+      },
+      {
+        "score": 80,
+        "kind": "anomaly",
+        "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+        "ref": "output/engine_audit_c103.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s)",
+        "hood": null,
+        "popids": [],
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle.",
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 2
+      },
+      {
+        "score": 80,
+        "kind": "anomaly",
+        "label": "production-imbalance (medium) | 22 neighborhoods report migration flow with zero economic events this cycle",
+        "ref": "output/engine_audit_c103.json patterns[3]; evidence: Neighborhood_Map row(s)",
+        "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District, East Oakland",
+        "popids": [
+          "POP-00010",
+          "POP-00039",
+          "POP-00635"
+        ],
+        "angle": "West Oakland Stabilization Fund stalled in disbursement-active — remedy path + responsible office",
+        "hookLine": "The economic initiative carrying Downtown has not advanced in several cycles.",
+        "citizens": [
+          "Dana Reeve (POP-00010)",
+          "Mei Chen (POP-00635)",
+          "Simone Ellis (POP-00039)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 3
+      },
+      {
+        "score": 80,
+        "kind": "anomaly",
+        "label": "incoherence (high) | Initiative \"Oakland Alternative Response Initiative\" (operational, safety) but 3 affected neighborhoods show contradicting CrimeIndex",
+        "ref": "output/engine_audit_c103.json patterns[4]; evidence: Initiative_Tracker row(s) 3",
+        "hood": "West Oakland, Fruitvale, East Oakland",
+        "popids": [
+          "POP-00758",
+          "POP-00771",
+          "POP-00773"
+        ],
+        "angle": "Oakland Alternative Response Initiative stalled in operational — remedy path + responsible office",
+        "hookLine": "The safety initiative carrying West Oakland has not advanced in several cycles.",
+        "citizens": [
+          "Robert Jaston (POP-00758)",
+          "Sage Vienta (POP-00771)",
+          "Jada Rayes (POP-00773)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 4
+      },
+      {
+        "score": 35,
+        "kind": "initiative",
+        "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "ref": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+        "hood": "West Oakland",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 5
+      }
+    ],
+    "pointers": [
+      "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+      "output/engine_audit_c103.json patterns[1]; evidence: Riley_Digest row(s)",
+      "output/engine_audit_c103.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s)",
+      "output/engine_audit_c103.json patterns[3]; evidence: Neighborhood_Map row(s)",
+      "output/engine_audit_c103.json patterns[4]; evidence: Initiative_Tracker row(s) 3",
+      "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+    ]
+  },
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Luis Navarro",
+    "popid": "POP-00636",
+    "text": "{\n  \"focus\": \"Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning\",\n  \"why\": \"The initiative has been stuck in the same phase for 9 cycles with no visible progress or documented response.\",\n  \"checks\": [\n    \"Verify if there's any documented response or non-response regarding the stall\",\n    \"Check for a request timestamp and elapsed silence duration\",\n    \"Identify the responsible person, office, or duty if named in the source\"\n  ],\n  \"targets\": [\n    {\n      \"pop\": \"POP-00231\",\n      \"question\": \"What steps, if any, have been taken to address the stall in the Fruitvale Transit Hub Phase II initiative?\",\n      \"basis\": \"assignment\"\n    },\n    {\n      \"pop\": \"POP-00744\",\n      \"question\": \"Is there a documented reason for the lack of progress in the construction-planning phase?\",\n      \"basis\": \"assignment\"\n    }\n  ],\n  \"interpretation\": \"The prolonged stall suggests either bureaucratic inertia or unresolved issues in planning, but without documented responses, the exact cause remains unclear.\",\n  \"unverifiedLead\": [\n    \"Potential internal disagreements or resource allocation issues may be contributing to the delay\",\n    \"Community or stakeholder input might be pending, causing the hold-up\"\n  ],\n  \"closeQuestion\": \"What specific obstacle is preventing the transition out of the construction-planning phase?\"\n}",
+    "plan": {
+      "focus": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning",
+      "why": "The initiative has been stuck in the same phase for 9 cycles with no visible progress or documented response.",
+      "checks": [
+        "Verify if there's any documented response or non-response regarding the stall",
+        "Check for a request timestamp and elapsed silence duration",
+        "Identify the responsible person, office, or duty if named in the source"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00231",
+          "question": "What steps, if any, have been taken to address the stall in the Fruitvale Transit Hub Phase II initiative?",
+          "basis": "assignment"
+        },
+        {
+          "pop": "POP-00744",
+          "question": "Is there a documented reason for the lack of progress in the construction-planning phase?",
+          "basis": "assignment"
+        }
+      ],
+      "interpretation": "The prolonged stall suggests either bureaucratic inertia or unresolved issues in planning, but without documented responses, the exact cause remains unclear.",
+      "unverifiedLead": [
+        "Potential internal disagreements or resource allocation issues may be contributing to the delay",
+        "Community or stakeholder input might be pending, causing the hold-up"
+      ],
+      "closeQuestion": "What specific obstacle is preventing the transition out of the construction-planning phase?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+      "kind": "anomaly",
+      "hood": "Fruitvale",
+      "ref": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+      "popids": [
+        "POP-00231",
+        "POP-00598",
+        "POP-00744"
+      ]
+    },
+    {
+      "label": "repeating-event (medium) | Issue \"strain\" recurred 3 cycles",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c103.json patterns[1]; evidence: Riley_Digest row(s) ",
+      "popids": []
+    },
+    {
+      "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c103.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s) ",
+      "popids": []
+    },
+    {
+      "label": "production-imbalance (medium) | 22 neighborhoods report migration flow with zero economic events this cycle",
+      "kind": "anomaly",
+      "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District, East Oakland",
+      "ref": "output/engine_audit_c103.json patterns[3]; evidence: Neighborhood_Map row(s) ",
+      "popids": [
+        "POP-00010",
+        "POP-00039",
+        "POP-00635"
+      ]
+    },
+    {
+      "label": "incoherence (high) | Initiative \"Oakland Alternative Response Initiative\" (operational, safety) but 3 affected neighborhoods show contradicting CrimeIndex",
+      "kind": "anomaly",
+      "hood": "West Oakland, Fruitvale, East Oakland",
+      "ref": "output/engine_audit_c103.json patterns[4]; evidence: Initiative_Tracker row(s) 3",
+      "popids": [
+        "POP-00758",
+        "POP-00771",
+        "POP-00773"
+      ]
+    }
+  ],
+  "laneEntries": 32,
+  "ranAt": "2026-08-12T07:01:58.682Z"
+}

@@ -1,0 +1,320 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "103",
+  "persona": "carmen-delaine",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00011",
+      "name": "Carmen Delaine",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "approach": "Civic-ledger approach: follow the supplied initiative, vote, or decision through money, clocks, and responsible offices. One record-backed civic claim; not a press release or multi-voice roundup."
+    },
+    "signal": {
+      "kind": "initiative",
+      "hood": "West Oakland",
+      "score": null,
+      "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+      "nearby": [
+        {
+          "text": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+          "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+        },
+        {
+          "text": "repeating-event (medium) | Issue \"strain\" recurred 3 cycles",
+          "src": "output/engine_audit_c103.json patterns[1]; evidence: Riley_Digest row(s)"
+        },
+        {
+          "text": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+          "src": "output/engine_audit_c103.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s)"
+        },
+        {
+          "text": "production-imbalance (medium) | 22 neighborhoods report migration flow with zero economic events this cycle",
+          "src": "output/engine_audit_c103.json patterns[3]; evidence: Neighborhood_Map row(s)"
+        },
+        {
+          "text": "incoherence (high) | Initiative \"Oakland Alternative Response Initiative\" (operational, safety) but 3 affected neighborhoods show contradicting CrimeIndex",
+          "src": "output/engine_audit_c103.json patterns[4]; evidence: Initiative_Tracker row(s) 3"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": []
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C103",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-4ac610ea40fe"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+        "id": "F-68d6bc93c2e8"
+      },
+      {
+        "t": "FACT",
+        "text": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+        "id": "F-97e9f8f2c6df"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier."
+    }
+  },
+  "reporter": {
+    "name": "Carmen Delaine",
+    "popid": "POP-00011"
+  },
+  "assignment": {
+    "story": {
+      "ref": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+      "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "kind": "initiative",
+      "angle": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "hookLine": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+      "hood": "West Oakland",
+      "popids": [],
+      "citizens": []
+    },
+    "approach": "Civic-ledger approach: follow the supplied initiative, vote, or decision through money, clocks, and responsible offices. One record-backed civic claim; not a press release or multi-voice roundup."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "economicSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": {
+    "seat": {
+      "slug": "carmen-delaine",
+      "name": "Carmen Delaine",
+      "popid": "POP-00011",
+      "domain": "civic-ledger"
+    },
+    "pulse": {
+      "className": "civic-ledger",
+      "score": 55,
+      "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "hood": "West Oakland",
+      "source": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+    },
+    "prewrite": {
+      "anchorFacts": [
+        "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+      ],
+      "forbidden": [
+        "Do not add officials, votes, budgets, outcomes, measurements, quotes, or affected people absent from the supplied entries."
+      ]
+    },
+    "candidates": [
+      {
+        "score": 55,
+        "kind": "initiative",
+        "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "ref": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+        "hood": "West Oakland",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 5
+      },
+      {
+        "score": 55,
+        "kind": "vote",
+        "label": "West Oakland Stabilization Fund | Month-five disbursement batch review C103",
+        "ref": "Initiative_Tracker (InitiativeID INIT-001)",
+        "hood": null,
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 6
+      },
+      {
+        "score": 55,
+        "kind": "initiative",
+        "label": "Oakland Alternative Response Initiative | Status passed | phase operational",
+        "ref": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+        "hood": "West Oakland, Fruitvale, East Oakland",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 7
+      },
+      {
+        "score": 55,
+        "kind": "vote",
+        "label": "Oakland Alternative Response Initiative | D7 next-cycle report and community satisfaction survey C103",
+        "ref": "Initiative_Tracker (InitiativeID INIT-002)",
+        "hood": null,
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 8
+      },
+      {
+        "score": 55,
+        "kind": "initiative",
+        "label": "Fruitvale Transit Hub Phase II — Visioning | Status visioning-complete | phase construction-planning",
+        "ref": "Initiative_Tracker (InitiativeID INIT-003); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+        "hood": "Fruitvale",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 9
+      },
+      {
+        "score": 55,
+        "kind": "vote",
+        "label": "Fruitvale Transit Hub Phase II — Visioning | Bureau review of compliance submissions C103",
+        "ref": "Initiative_Tracker (InitiativeID INIT-003)",
+        "hood": null,
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 10
+      }
+    ],
+    "pointers": [
+      "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+      "Initiative_Tracker (InitiativeID INIT-001)",
+      "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+      "Initiative_Tracker (InitiativeID INIT-002)",
+      "Initiative_Tracker (InitiativeID INIT-003); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+      "Initiative_Tracker (InitiativeID INIT-003)"
+    ]
+  },
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Carmen Delaine",
+    "popid": "POP-00011",
+    "text": "{\n  \"focus\": \"West Oakland Stabilization Fund disbursement progress\",\n  \"why\": \"Public funds in active disbursement phase require transparency—especially when other initiatives stall or show incoherence in neighboring areas.\",\n  \"checks\": [\n    \"Verify ledger entries against disbursement timelines\",\n    \"Cross-reference with any audit flags from engine_audit_c103.json\",\n    \"Compare with patterns of stuck initiatives (Fruitvale Transit Hub) or economic imbalances in migration-reporting neighborhoods\"\n  ],\n  \"targets\": [],\n  \"interpretation\": \"This feels like a rare case where city machinery is actually moving—but after seeing Marcus' photo-op cleanups and the A's roster churn, I’m skeptical about whether the money’s landing where it should. Oakland’s got a habit of celebrating announcements while the follow-through fizzles.\",\n  \"unverifiedLead\": [\n    \"Are disbursements prioritizing areas with visible economic strain, or just those with political optics?\",\n    \"Is there a disconnect between the fund’s paper trail and on-ground impact in West Oakland?\"\n  ],\n  \"closeQuestion\": \"What’s the gap between the ledger’s ‘disbursement-active’ status and tangible changes in West Oakland’s economic stability?\"\n}",
+    "plan": {
+      "focus": "West Oakland Stabilization Fund disbursement progress",
+      "why": "Public funds in active disbursement phase require transparency—especially when other initiatives stall or show incoherence in neighboring areas.",
+      "checks": [
+        "Verify ledger entries against disbursement timelines",
+        "Cross-reference with any audit flags from engine_audit_c103.json",
+        "Compare with patterns of stuck initiatives (Fruitvale Transit Hub) or economic imbalances in migration-reporting neighborhoods"
+      ],
+      "targets": [],
+      "interpretation": "This feels like a rare case where city machinery is actually moving—but after seeing Marcus' photo-op cleanups and the A's roster churn, I’m skeptical about whether the money’s landing where it should. Oakland’s got a habit of celebrating announcements while the follow-through fizzles.",
+      "unverifiedLead": [
+        "Are disbursements prioritizing areas with visible economic strain, or just those with political optics?",
+        "Is there a disconnect between the fund’s paper trail and on-ground impact in West Oakland?"
+      ],
+      "closeQuestion": "What’s the gap between the ledger’s ‘disbursement-active’ status and tangible changes in West Oakland’s economic stability?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+      "kind": "anomaly",
+      "hood": "Fruitvale",
+      "ref": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+      "popids": [
+        "POP-00231",
+        "POP-00598",
+        "POP-00744"
+      ]
+    },
+    {
+      "label": "repeating-event (medium) | Issue \"strain\" recurred 3 cycles",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c103.json patterns[1]; evidence: Riley_Digest row(s) ",
+      "popids": []
+    },
+    {
+      "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c103.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s) ",
+      "popids": []
+    },
+    {
+      "label": "production-imbalance (medium) | 22 neighborhoods report migration flow with zero economic events this cycle",
+      "kind": "anomaly",
+      "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District, East Oakland",
+      "ref": "output/engine_audit_c103.json patterns[3]; evidence: Neighborhood_Map row(s) ",
+      "popids": [
+        "POP-00010",
+        "POP-00039",
+        "POP-00635"
+      ]
+    },
+    {
+      "label": "incoherence (high) | Initiative \"Oakland Alternative Response Initiative\" (operational, safety) but 3 affected neighborhoods show contradicting CrimeIndex",
+      "kind": "anomaly",
+      "hood": "West Oakland, Fruitvale, East Oakland",
+      "ref": "output/engine_audit_c103.json patterns[4]; evidence: Initiative_Tracker row(s) 3",
+      "popids": [
+        "POP-00758",
+        "POP-00771",
+        "POP-00773"
+      ]
+    }
+  ],
+  "laneEntries": 32,
+  "ranAt": "2026-08-11T11:15:42.430Z"
+}

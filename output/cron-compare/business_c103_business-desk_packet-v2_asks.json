@@ -1,0 +1,690 @@
+[
+  {
+    "pop": "POP-00231",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00231\",\"name\":null,\"role\":\"citizen\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question from bounded lived experience\",\"reporter\":\"Jordan Velez\",\"question\":\"As a resident of Dimond, what about the supplied trend \\\"Dimond's cooling retail scene compared to the rest of the city\\\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Dimond\",\"focus\":\"Dimond's cooling retail scene compared to the rest of the city\",\"src\":\"world_summary ## What Moved · trajectory\"},\"exposure\":{\"basis\":[\"desk-signal candidate\",\"same-neighborhood\"],\"self\":null,\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C103\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4ac610ea40fe\"},{\"t\":\"FACT\",\"text\":\"Dimond cooling\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-2c3c1b14061a\"},{\"t\":\"FACT\",\"text\":\"Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-5967d0383c65\"},{\"t\":\"FACT\",\"text\":\"HOOD: Dimond\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-5f30e356b99b\"},{\"t\":\"FACT\",\"text\":\"TRAJECTORY: cooling\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-68dbfc1e6fba\"},{\"t\":\"FACT\",\"text\":\"RETAIL VITALITY (scene color): 8.24\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-c40d99359f50\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Select supplied FACT ids and code-owned lattice ids only. Free text is allowed solely in unverifiedLead and never reaches Wake 3.\"},\"output\":{\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"fact_ids\":[\"one or more ids from packet.known\"],\"stance_id\":\"one id from packet.lattice.stances; null on abstain\",\"question_id\":\"one id from packet.lattice.questions; null on abstain\",\"intention_id\":\"one id from packet.lattice.intentions; I_NONE allowed\",\"unverifiedLead\":[\"free lead text; never publishable\"],\"abstain_reason\":\"institutional_path_required|insufficient_evidence|contract_conflict|other|null\"},\"rule\":\"The backend renders the quote from selected lattice ids. Do not write quote prose.\"},\"lattice\":{\"stances\":[{\"id\":\"S_CONCERN\",\"text\":\"What this record shows concerns me.\"},{\"id\":\"S_MISMATCH\",\"text\":\"What the record shows does not line up with what I expected.\"},{\"id\":\"S_ATTENTION\",\"text\":\"This deserves a closer look.\"},{\"id\":\"S_ACCOUNTABILITY\",\"text\":\"Someone should answer for what the record shows.\"}],\"questions\":[{\"id\":\"Q_ATTENTION\",\"text\":\"Why is this not getting more attention?\"},{\"id\":\"Q_OWNER\",\"text\":\"Who is responsible for answering this?\"},{\"id\":\"Q_NEXT\",\"text\":\"What happens next?\"},{\"id\":\"Q_GAP\",\"text\":\"What explains the gap in the record?\"}],\"intentions\":[{\"id\":\"I_NONE\",\"text\":\"\"},{\"id\":\"I_WATCH\",\"text\":\"I am going to keep watching this.\"},{\"id\":\"I_ANSWER\",\"text\":\"I want a clear answer.\"},{\"id\":\"I_PRESS\",\"text\":\"The Tribune should keep pressing for an answer.\"}]}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00231",
+        "name": null,
+        "role": "citizen",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question from bounded lived experience",
+        "reporter": "Jordan Velez",
+        "question": "As a resident of Dimond, what about the supplied trend \"Dimond's cooling retail scene compared to the rest of the city\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Dimond",
+        "focus": "Dimond's cooling retail scene compared to the rest of the city",
+        "src": "world_summary ## What Moved · trajectory"
+      },
+      "exposure": {
+        "basis": [
+          "desk-signal candidate",
+          "same-neighborhood"
+        ],
+        "self": null,
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C103",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4ac610ea40fe"
+        },
+        {
+          "t": "FACT",
+          "text": "Dimond cooling",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-2c3c1b14061a"
+        },
+        {
+          "t": "FACT",
+          "text": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-5967d0383c65"
+        },
+        {
+          "t": "FACT",
+          "text": "HOOD: Dimond",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-5f30e356b99b"
+        },
+        {
+          "t": "FACT",
+          "text": "TRAJECTORY: cooling",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-68dbfc1e6fba"
+        },
+        {
+          "t": "FACT",
+          "text": "RETAIL VITALITY (scene color): 8.24",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-c40d99359f50"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Select supplied FACT ids and code-owned lattice ids only. Free text is allowed solely in unverifiedLead and never reaches Wake 3."
+      },
+      "output": {
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "fact_ids": [
+            "one or more ids from packet.known"
+          ],
+          "stance_id": "one id from packet.lattice.stances; null on abstain",
+          "question_id": "one id from packet.lattice.questions; null on abstain",
+          "intention_id": "one id from packet.lattice.intentions; I_NONE allowed",
+          "unverifiedLead": [
+            "free lead text; never publishable"
+          ],
+          "abstain_reason": "institutional_path_required|insufficient_evidence|contract_conflict|other|null"
+        },
+        "rule": "The backend renders the quote from selected lattice ids. Do not write quote prose."
+      },
+      "lattice": {
+        "stances": [
+          {
+            "id": "S_CONCERN",
+            "text": "What this record shows concerns me."
+          },
+          {
+            "id": "S_MISMATCH",
+            "text": "What the record shows does not line up with what I expected."
+          },
+          {
+            "id": "S_ATTENTION",
+            "text": "This deserves a closer look."
+          },
+          {
+            "id": "S_ACCOUNTABILITY",
+            "text": "Someone should answer for what the record shows."
+          }
+        ],
+        "questions": [
+          {
+            "id": "Q_ATTENTION",
+            "text": "Why is this not getting more attention?"
+          },
+          {
+            "id": "Q_OWNER",
+            "text": "Who is responsible for answering this?"
+          },
+          {
+            "id": "Q_NEXT",
+            "text": "What happens next?"
+          },
+          {
+            "id": "Q_GAP",
+            "text": "What explains the gap in the record?"
+          }
+        ],
+        "intentions": [
+          {
+            "id": "I_NONE",
+            "text": ""
+          },
+          {
+            "id": "I_WATCH",
+            "text": "I am going to keep watching this."
+          },
+          {
+            "id": "I_ANSWER",
+            "text": "I want a clear answer."
+          },
+          {
+            "id": "I_PRESS",
+            "text": "The Tribune should keep pressing for an answer."
+          }
+        ]
+      }
+    },
+    "evidenceBound": true,
+    "model": "deepseek/deepseek-chat",
+    "record": false,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00598",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00598\",\"name\":null,\"role\":\"citizen\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question from bounded lived experience\",\"reporter\":\"Jordan Velez\",\"question\":\"As a resident of Dimond, what about the supplied trend \\\"Dimond's cooling retail scene compared to the rest of the city\\\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Dimond\",\"focus\":\"Dimond's cooling retail scene compared to the rest of the city\",\"src\":\"world_summary ## What Moved · trajectory\"},\"exposure\":{\"basis\":[\"desk-signal candidate\",\"same-neighborhood\"],\"self\":null,\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C103\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4ac610ea40fe\"},{\"t\":\"FACT\",\"text\":\"Dimond cooling\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-2c3c1b14061a\"},{\"t\":\"FACT\",\"text\":\"Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-5967d0383c65\"},{\"t\":\"FACT\",\"text\":\"HOOD: Dimond\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-5f30e356b99b\"},{\"t\":\"FACT\",\"text\":\"TRAJECTORY: cooling\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-68dbfc1e6fba\"},{\"t\":\"FACT\",\"text\":\"RETAIL VITALITY (scene color): 8.24\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-c40d99359f50\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Select supplied FACT ids and code-owned lattice ids only. Free text is allowed solely in unverifiedLead and never reaches Wake 3.\"},\"output\":{\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"fact_ids\":[\"one or more ids from packet.known\"],\"stance_id\":\"one id from packet.lattice.stances; null on abstain\",\"question_id\":\"one id from packet.lattice.questions; null on abstain\",\"intention_id\":\"one id from packet.lattice.intentions; I_NONE allowed\",\"unverifiedLead\":[\"free lead text; never publishable\"],\"abstain_reason\":\"institutional_path_required|insufficient_evidence|contract_conflict|other|null\"},\"rule\":\"The backend renders the quote from selected lattice ids. Do not write quote prose.\"},\"lattice\":{\"stances\":[{\"id\":\"S_CONCERN\",\"text\":\"What this record shows concerns me.\"},{\"id\":\"S_MISMATCH\",\"text\":\"What the record shows does not line up with what I expected.\"},{\"id\":\"S_ATTENTION\",\"text\":\"This deserves a closer look.\"},{\"id\":\"S_ACCOUNTABILITY\",\"text\":\"Someone should answer for what the record shows.\"}],\"questions\":[{\"id\":\"Q_ATTENTION\",\"text\":\"Why is this not getting more attention?\"},{\"id\":\"Q_OWNER\",\"text\":\"Who is responsible for answering this?\"},{\"id\":\"Q_NEXT\",\"text\":\"What happens next?\"},{\"id\":\"Q_GAP\",\"text\":\"What explains the gap in the record?\"}],\"intentions\":[{\"id\":\"I_NONE\",\"text\":\"\"},{\"id\":\"I_WATCH\",\"text\":\"I am going to keep watching this.\"},{\"id\":\"I_ANSWER\",\"text\":\"I want a clear answer.\"},{\"id\":\"I_PRESS\",\"text\":\"The Tribune should keep pressing for an answer.\"}]}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00598",
+        "name": null,
+        "role": "citizen",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question from bounded lived experience",
+        "reporter": "Jordan Velez",
+        "question": "As a resident of Dimond, what about the supplied trend \"Dimond's cooling retail scene compared to the rest of the city\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Dimond",
+        "focus": "Dimond's cooling retail scene compared to the rest of the city",
+        "src": "world_summary ## What Moved · trajectory"
+      },
+      "exposure": {
+        "basis": [
+          "desk-signal candidate",
+          "same-neighborhood"
+        ],
+        "self": null,
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C103",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4ac610ea40fe"
+        },
+        {
+          "t": "FACT",
+          "text": "Dimond cooling",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-2c3c1b14061a"
+        },
+        {
+          "t": "FACT",
+          "text": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-5967d0383c65"
+        },
+        {
+          "t": "FACT",
+          "text": "HOOD: Dimond",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-5f30e356b99b"
+        },
+        {
+          "t": "FACT",
+          "text": "TRAJECTORY: cooling",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-68dbfc1e6fba"
+        },
+        {
+          "t": "FACT",
+          "text": "RETAIL VITALITY (scene color): 8.24",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-c40d99359f50"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Select supplied FACT ids and code-owned lattice ids only. Free text is allowed solely in unverifiedLead and never reaches Wake 3."
+      },
+      "output": {
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "fact_ids": [
+            "one or more ids from packet.known"
+          ],
+          "stance_id": "one id from packet.lattice.stances; null on abstain",
+          "question_id": "one id from packet.lattice.questions; null on abstain",
+          "intention_id": "one id from packet.lattice.intentions; I_NONE allowed",
+          "unverifiedLead": [
+            "free lead text; never publishable"
+          ],
+          "abstain_reason": "institutional_path_required|insufficient_evidence|contract_conflict|other|null"
+        },
+        "rule": "The backend renders the quote from selected lattice ids. Do not write quote prose."
+      },
+      "lattice": {
+        "stances": [
+          {
+            "id": "S_CONCERN",
+            "text": "What this record shows concerns me."
+          },
+          {
+            "id": "S_MISMATCH",
+            "text": "What the record shows does not line up with what I expected."
+          },
+          {
+            "id": "S_ATTENTION",
+            "text": "This deserves a closer look."
+          },
+          {
+            "id": "S_ACCOUNTABILITY",
+            "text": "Someone should answer for what the record shows."
+          }
+        ],
+        "questions": [
+          {
+            "id": "Q_ATTENTION",
+            "text": "Why is this not getting more attention?"
+          },
+          {
+            "id": "Q_OWNER",
+            "text": "Who is responsible for answering this?"
+          },
+          {
+            "id": "Q_NEXT",
+            "text": "What happens next?"
+          },
+          {
+            "id": "Q_GAP",
+            "text": "What explains the gap in the record?"
+          }
+        ],
+        "intentions": [
+          {
+            "id": "I_NONE",
+            "text": ""
+          },
+          {
+            "id": "I_WATCH",
+            "text": "I am going to keep watching this."
+          },
+          {
+            "id": "I_ANSWER",
+            "text": "I want a clear answer."
+          },
+          {
+            "id": "I_PRESS",
+            "text": "The Tribune should keep pressing for an answer."
+          }
+        ]
+      }
+    },
+    "evidenceBound": true,
+    "model": "deepseek/deepseek-chat",
+    "record": false,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00744",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00744\",\"name\":null,\"role\":\"citizen\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question from bounded lived experience\",\"reporter\":\"Jordan Velez\",\"question\":\"As a resident of Dimond, what about the supplied trend \\\"Dimond's cooling retail scene compared to the rest of the city\\\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Dimond\",\"focus\":\"Dimond's cooling retail scene compared to the rest of the city\",\"src\":\"world_summary ## What Moved · trajectory\"},\"exposure\":{\"basis\":[\"desk-signal candidate\",\"same-neighborhood\"],\"self\":null,\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C103\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4ac610ea40fe\"},{\"t\":\"FACT\",\"text\":\"Dimond cooling\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-2c3c1b14061a\"},{\"t\":\"FACT\",\"text\":\"Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-5967d0383c65\"},{\"t\":\"FACT\",\"text\":\"HOOD: Dimond\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-5f30e356b99b\"},{\"t\":\"FACT\",\"text\":\"TRAJECTORY: cooling\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-68dbfc1e6fba\"},{\"t\":\"FACT\",\"text\":\"RETAIL VITALITY (scene color): 8.24\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-c40d99359f50\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Select supplied FACT ids and code-owned lattice ids only. Free text is allowed solely in unverifiedLead and never reaches Wake 3.\"},\"output\":{\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"fact_ids\":[\"one or more ids from packet.known\"],\"stance_id\":\"one id from packet.lattice.stances; null on abstain\",\"question_id\":\"one id from packet.lattice.questions; null on abstain\",\"intention_id\":\"one id from packet.lattice.intentions; I_NONE allowed\",\"unverifiedLead\":[\"free lead text; never publishable\"],\"abstain_reason\":\"institutional_path_required|insufficient_evidence|contract_conflict|other|null\"},\"rule\":\"The backend renders the quote from selected lattice ids. Do not write quote prose.\"},\"lattice\":{\"stances\":[{\"id\":\"S_CONCERN\",\"text\":\"What this record shows concerns me.\"},{\"id\":\"S_MISMATCH\",\"text\":\"What the record shows does not line up with what I expected.\"},{\"id\":\"S_ATTENTION\",\"text\":\"This deserves a closer look.\"},{\"id\":\"S_ACCOUNTABILITY\",\"text\":\"Someone should answer for what the record shows.\"}],\"questions\":[{\"id\":\"Q_ATTENTION\",\"text\":\"Why is this not getting more attention?\"},{\"id\":\"Q_OWNER\",\"text\":\"Who is responsible for answering this?\"},{\"id\":\"Q_NEXT\",\"text\":\"What happens next?\"},{\"id\":\"Q_GAP\",\"text\":\"What explains the gap in the record?\"}],\"intentions\":[{\"id\":\"I_NONE\",\"text\":\"\"},{\"id\":\"I_WATCH\",\"text\":\"I am going to keep watching this.\"},{\"id\":\"I_ANSWER\",\"text\":\"I want a clear answer.\"},{\"id\":\"I_PRESS\",\"text\":\"The Tribune should keep pressing for an answer.\"}]}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00744",
+        "name": null,
+        "role": "citizen",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question from bounded lived experience",
+        "reporter": "Jordan Velez",
+        "question": "As a resident of Dimond, what about the supplied trend \"Dimond's cooling retail scene compared to the rest of the city\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Dimond",
+        "focus": "Dimond's cooling retail scene compared to the rest of the city",
+        "src": "world_summary ## What Moved · trajectory"
+      },
+      "exposure": {
+        "basis": [
+          "desk-signal candidate",
+          "same-neighborhood"
+        ],
+        "self": null,
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C103",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4ac610ea40fe"
+        },
+        {
+          "t": "FACT",
+          "text": "Dimond cooling",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-2c3c1b14061a"
+        },
+        {
+          "t": "FACT",
+          "text": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-5967d0383c65"
+        },
+        {
+          "t": "FACT",
+          "text": "HOOD: Dimond",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-5f30e356b99b"
+        },
+        {
+          "t": "FACT",
+          "text": "TRAJECTORY: cooling",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-68dbfc1e6fba"
+        },
+        {
+          "t": "FACT",
+          "text": "RETAIL VITALITY (scene color): 8.24",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-c40d99359f50"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Select supplied FACT ids and code-owned lattice ids only. Free text is allowed solely in unverifiedLead and never reaches Wake 3."
+      },
+      "output": {
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "fact_ids": [
+            "one or more ids from packet.known"
+          ],
+          "stance_id": "one id from packet.lattice.stances; null on abstain",
+          "question_id": "one id from packet.lattice.questions; null on abstain",
+          "intention_id": "one id from packet.lattice.intentions; I_NONE allowed",
+          "unverifiedLead": [
+            "free lead text; never publishable"
+          ],
+          "abstain_reason": "institutional_path_required|insufficient_evidence|contract_conflict|other|null"
+        },
+        "rule": "The backend renders the quote from selected lattice ids. Do not write quote prose."
+      },
+      "lattice": {
+        "stances": [
+          {
+            "id": "S_CONCERN",
+            "text": "What this record shows concerns me."
+          },
+          {
+            "id": "S_MISMATCH",
+            "text": "What the record shows does not line up with what I expected."
+          },
+          {
+            "id": "S_ATTENTION",
+            "text": "This deserves a closer look."
+          },
+          {
+            "id": "S_ACCOUNTABILITY",
+            "text": "Someone should answer for what the record shows."
+          }
+        ],
+        "questions": [
+          {
+            "id": "Q_ATTENTION",
+            "text": "Why is this not getting more attention?"
+          },
+          {
+            "id": "Q_OWNER",
+            "text": "Who is responsible for answering this?"
+          },
+          {
+            "id": "Q_NEXT",
+            "text": "What happens next?"
+          },
+          {
+            "id": "Q_GAP",
+            "text": "What explains the gap in the record?"
+          }
+        ],
+        "intentions": [
+          {
+            "id": "I_NONE",
+            "text": ""
+          },
+          {
+            "id": "I_WATCH",
+            "text": "I am going to keep watching this."
+          },
+          {
+            "id": "I_ANSWER",
+            "text": "I want a clear answer."
+          },
+          {
+            "id": "I_PRESS",
+            "text": "The Tribune should keep pressing for an answer."
+          }
+        ]
+      }
+    },
+    "evidenceBound": true,
+    "model": "deepseek/deepseek-chat",
+    "record": false,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00010",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00010\",\"name\":null,\"role\":\"citizen\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question from bounded lived experience\",\"reporter\":\"Jordan Velez\",\"question\":\"As a resident of Dimond, what about the supplied trend \\\"Dimond's cooling retail scene compared to the rest of the city\\\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Dimond\",\"focus\":\"Dimond's cooling retail scene compared to the rest of the city\",\"src\":\"world_summary ## What Moved · trajectory\"},\"exposure\":{\"basis\":[\"desk-signal candidate\",\"same-neighborhood\"],\"self\":null,\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C103\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4ac610ea40fe\"},{\"t\":\"FACT\",\"text\":\"Dimond cooling\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-2c3c1b14061a\"},{\"t\":\"FACT\",\"text\":\"Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-5967d0383c65\"},{\"t\":\"FACT\",\"text\":\"HOOD: Dimond\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-5f30e356b99b\"},{\"t\":\"FACT\",\"text\":\"TRAJECTORY: cooling\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-68dbfc1e6fba\"},{\"t\":\"FACT\",\"text\":\"RETAIL VITALITY (scene color): 8.24\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-c40d99359f50\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Select supplied FACT ids and code-owned lattice ids only. Free text is allowed solely in unverifiedLead and never reaches Wake 3.\"},\"output\":{\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"fact_ids\":[\"one or more ids from packet.known\"],\"stance_id\":\"one id from packet.lattice.stances; null on abstain\",\"question_id\":\"one id from packet.lattice.questions; null on abstain\",\"intention_id\":\"one id from packet.lattice.intentions; I_NONE allowed\",\"unverifiedLead\":[\"free lead text; never publishable\"],\"abstain_reason\":\"institutional_path_required|insufficient_evidence|contract_conflict|other|null\"},\"rule\":\"The backend renders the quote from selected lattice ids. Do not write quote prose.\"},\"lattice\":{\"stances\":[{\"id\":\"S_CONCERN\",\"text\":\"What this record shows concerns me.\"},{\"id\":\"S_MISMATCH\",\"text\":\"What the record shows does not line up with what I expected.\"},{\"id\":\"S_ATTENTION\",\"text\":\"This deserves a closer look.\"},{\"id\":\"S_ACCOUNTABILITY\",\"text\":\"Someone should answer for what the record shows.\"}],\"questions\":[{\"id\":\"Q_ATTENTION\",\"text\":\"Why is this not getting more attention?\"},{\"id\":\"Q_OWNER\",\"text\":\"Who is responsible for answering this?\"},{\"id\":\"Q_NEXT\",\"text\":\"What happens next?\"},{\"id\":\"Q_GAP\",\"text\":\"What explains the gap in the record?\"}],\"intentions\":[{\"id\":\"I_NONE\",\"text\":\"\"},{\"id\":\"I_WATCH\",\"text\":\"I am going to keep watching this.\"},{\"id\":\"I_ANSWER\",\"text\":\"I want a clear answer.\"},{\"id\":\"I_PRESS\",\"text\":\"The Tribune should keep pressing for an answer.\"}]}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00010",
+        "name": null,
+        "role": "citizen",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question from bounded lived experience",
+        "reporter": "Jordan Velez",
+        "question": "As a resident of Dimond, what about the supplied trend \"Dimond's cooling retail scene compared to the rest of the city\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Dimond",
+        "focus": "Dimond's cooling retail scene compared to the rest of the city",
+        "src": "world_summary ## What Moved · trajectory"
+      },
+      "exposure": {
+        "basis": [
+          "desk-signal candidate",
+          "same-neighborhood"
+        ],
+        "self": null,
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C103",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4ac610ea40fe"
+        },
+        {
+          "t": "FACT",
+          "text": "Dimond cooling",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-2c3c1b14061a"
+        },
+        {
+          "t": "FACT",
+          "text": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-5967d0383c65"
+        },
+        {
+          "t": "FACT",
+          "text": "HOOD: Dimond",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-5f30e356b99b"
+        },
+        {
+          "t": "FACT",
+          "text": "TRAJECTORY: cooling",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-68dbfc1e6fba"
+        },
+        {
+          "t": "FACT",
+          "text": "RETAIL VITALITY (scene color): 8.24",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-c40d99359f50"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Select supplied FACT ids and code-owned lattice ids only. Free text is allowed solely in unverifiedLead and never reaches Wake 3."
+      },
+      "output": {
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "fact_ids": [
+            "one or more ids from packet.known"
+          ],
+          "stance_id": "one id from packet.lattice.stances; null on abstain",
+          "question_id": "one id from packet.lattice.questions; null on abstain",
+          "intention_id": "one id from packet.lattice.intentions; I_NONE allowed",
+          "unverifiedLead": [
+            "free lead text; never publishable"
+          ],
+          "abstain_reason": "institutional_path_required|insufficient_evidence|contract_conflict|other|null"
+        },
+        "rule": "The backend renders the quote from selected lattice ids. Do not write quote prose."
+      },
+      "lattice": {
+        "stances": [
+          {
+            "id": "S_CONCERN",
+            "text": "What this record shows concerns me."
+          },
+          {
+            "id": "S_MISMATCH",
+            "text": "What the record shows does not line up with what I expected."
+          },
+          {
+            "id": "S_ATTENTION",
+            "text": "This deserves a closer look."
+          },
+          {
+            "id": "S_ACCOUNTABILITY",
+            "text": "Someone should answer for what the record shows."
+          }
+        ],
+        "questions": [
+          {
+            "id": "Q_ATTENTION",
+            "text": "Why is this not getting more attention?"
+          },
+          {
+            "id": "Q_OWNER",
+            "text": "Who is responsible for answering this?"
+          },
+          {
+            "id": "Q_NEXT",
+            "text": "What happens next?"
+          },
+          {
+            "id": "Q_GAP",
+            "text": "What explains the gap in the record?"
+          }
+        ],
+        "intentions": [
+          {
+            "id": "I_NONE",
+            "text": ""
+          },
+          {
+            "id": "I_WATCH",
+            "text": "I am going to keep watching this."
+          },
+          {
+            "id": "I_ANSWER",
+            "text": "I want a clear answer."
+          },
+          {
+            "id": "I_PRESS",
+            "text": "The Tribune should keep pressing for an answer."
+          }
+        ]
+      }
+    },
+    "evidenceBound": true,
+    "model": "deepseek/deepseek-chat",
+    "record": false,
+    "maxTokens": 420
+  }
+]

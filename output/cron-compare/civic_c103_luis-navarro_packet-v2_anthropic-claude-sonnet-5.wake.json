@@ -1,0 +1,24 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "103",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5",
+  "gateModel": "sonnet",
+  "persona": "luis-navarro",
+  "byline": {
+    "name": "Luis Navarro",
+    "popid": "POP-00636",
+    "beatDomain": "CIVIC"
+  },
+  "laneEntries": 32,
+  "quotesLanded": 2,
+  "disposition": "ungated-sample",
+  "rheaPass": null,
+  "rheaFlagCount": null,
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/samples/civic_c103_luis-navarro_packet-v2_anthropic-claude-sonnet-5.sample-0708.md",
+  "selfRecord": null,
+  "ranAt": "2026-08-12T07:08:29.893Z"
+}

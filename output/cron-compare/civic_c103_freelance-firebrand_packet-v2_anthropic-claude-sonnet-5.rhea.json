@@ -1,0 +1,66 @@
+{
+  "draft": "output/cron-compare/civic_c103_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5.md",
+  "cycle": "103",
+  "backend": "api",
+  "model": "google/gemini-3.5-flash",
+  "pass": false,
+  "flags": [
+    {
+      "claim": "parked in a phase called 'construction-planning' for nine cycles running.",
+      "issue": "Leaked engine verbiage ('construction-planning') in prose. System status enums must be translated into citizen-facing language.",
+      "severity": "high"
+    }
+  ],
+  "flagCount": 1,
+  "highSeverityCount": 1,
+  "summary": "The article is factually accurate regarding the 9-cycle stall of the Fruitvale Transit Hub initiative, but it leaks the raw engine status enum 'construction-planning' into the prose.",
+  "review": {
+    "profileId": "jax-accountability-v1",
+    "canonIntegrity": "revise",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "jax-accountability-v1",
+    "packageVersion": "JAX-LEP2-1",
+    "manifestId": "AM-22bcb4e278fb",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "That fence has been there since I had a different job,",
+          "Whatever's happening back there, it isn't happening fast.",
+          "Fruitvale Transit Hub Phase II — Visioning.",
+          "construction-planning",
+          "on track",
+          "parked for nine cycles",
+          "Visioning",
+          "on track."
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Jax Caldera"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0501,
+  "durationMs": 13414,
+  "parseError": false,
+  "ranAt": "2026-08-11T23:16:42.417Z"
+}

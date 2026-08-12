@@ -1,0 +1,1280 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "103",
+  "persona": "rachel-torres",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Sgt. Rachel Torres",
+    "popid": "POP-00057"
+  },
+  "assignment": {
+    "story": {
+      "kind": "public-safety",
+      "angle": "Oakland Alternative Response Initiative | Status passed | phase operational",
+      "label": "Oakland Alternative Response Initiative | Status passed | phase operational",
+      "hookLine": "The record leaves a public-safety response or classification question open.",
+      "hood": "West Oakland, Fruitvale, East Oakland",
+      "ref": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+    }
+  },
+  "angle": "output/cron-compare/civic_c103_rachel-torres_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 3,
+  "quotes": [
+    {
+      "pop": "POP-00598",
+      "name": "Vladimir Gonzalez",
+      "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": false,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"fact_ids\": [\"F-5df54683a1df\", \"F-d43a7e2d2c43\"],\n  \"stance_id\": \"S_MISMATCH\",\n  \"question_id\": \"Q_GAP\",\n  \"intention_id\": \"I_WATCH\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5df54683a1df",
+          "F-d43a7e2d2c43"
+        ],
+        "stanceId": "S_MISMATCH",
+        "questionId": "Q_GAP",
+        "intentionId": "I_WATCH",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00598-fd1096c673",
+        "publishableQuote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00598",
+          "name": null,
+          "role": "citizen",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question from bounded lived experience",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "As a resident of West Oakland, Fruitvale, East Oakland, what about the supplied trend \"Inconsistent impact of Oakland Alternative Response Initiative across targeted neighborhoods\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "public-safety",
+          "hood": "West Oakland, Fruitvale, East Oakland",
+          "focus": "Inconsistent impact of Oakland Alternative Response Initiative across targeted neighborhoods",
+          "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+        },
+        "exposure": {
+          "basis": [
+            "desk-signal candidate",
+            "same-neighborhood"
+          ],
+          "self": null,
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakland Alternative Response Initiative | Status passed | phase operational",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-5df54683a1df"
+          },
+          {
+            "t": "FACT",
+            "text": "The record leaves a public-safety response or classification question open.",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-d43a7e2d2c43"
+          },
+          {
+            "t": "FACT",
+            "text": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-0fc9dd7a717d"
+          },
+          {
+            "t": "FACT",
+            "text": "Supplied area: West Oakland, Fruitvale, East Oakland",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-253e91a50bf4"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Select supplied FACT ids and code-owned lattice ids only. Free text is allowed solely in unverifiedLead and never reaches Wake 3."
+        },
+        "output": {
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "fact_ids": [
+              "one or more ids from packet.known"
+            ],
+            "stance_id": "one id from packet.lattice.stances; null on abstain",
+            "question_id": "one id from packet.lattice.questions; null on abstain",
+            "intention_id": "one id from packet.lattice.intentions; I_NONE allowed",
+            "unverifiedLead": [
+              "free lead text; never publishable"
+            ],
+            "abstain_reason": "institutional_path_required|insufficient_evidence|contract_conflict|other|null"
+          },
+          "rule": "The backend renders the quote from selected lattice ids. Do not write quote prose."
+        },
+        "lattice": {
+          "stances": [
+            {
+              "id": "S_CONCERN",
+              "text": "What this record shows concerns me."
+            },
+            {
+              "id": "S_MISMATCH",
+              "text": "What the record shows does not line up with what I expected."
+            },
+            {
+              "id": "S_ATTENTION",
+              "text": "This deserves a closer look."
+            },
+            {
+              "id": "S_ACCOUNTABILITY",
+              "text": "Someone should answer for what the record shows."
+            }
+          ],
+          "questions": [
+            {
+              "id": "Q_ATTENTION",
+              "text": "Why is this not getting more attention?"
+            },
+            {
+              "id": "Q_OWNER",
+              "text": "Who is responsible for answering this?"
+            },
+            {
+              "id": "Q_NEXT",
+              "text": "What happens next?"
+            },
+            {
+              "id": "Q_GAP",
+              "text": "What explains the gap in the record?"
+            }
+          ],
+          "intentions": [
+            {
+              "id": "I_NONE",
+              "text": ""
+            },
+            {
+              "id": "I_WATCH",
+              "text": "I am going to keep watching this."
+            },
+            {
+              "id": "I_ANSWER",
+              "text": "I want a clear answer."
+            },
+            {
+              "id": "I_PRESS",
+              "text": "The Tribune should keep pressing for an answer."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "pop": "POP-00744",
+      "name": "Tomas Renteria",
+      "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
+      "disp": "draws people in, deep with them",
+      "recorded": false,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"fact_ids\": [\"F-5df54683a1df\", \"F-d43a7e2d2c43\"],\n  \"stance_id\": \"S_MISMATCH\",\n  \"question_id\": \"Q_GAP\",\n  \"intention_id\": \"I_WATCH\",\n  \"unverifiedLead\": [\"Feels like the initiative's presence shifts block by block—some corners get all the attention, others feel forgotten. Like they're patching potholes on one street while the next one over's been crumbling for years.\"],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5df54683a1df",
+          "F-d43a7e2d2c43"
+        ],
+        "stanceId": "S_MISMATCH",
+        "questionId": "Q_GAP",
+        "intentionId": "I_WATCH",
+        "unverifiedLead": [
+          "Feels like the initiative's presence shifts block by block—some corners get all the attention, others feel forgotten. Like they're patching potholes on one street while the next one over's been crumbling for years."
+        ],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00744-fd1096c673",
+        "publishableQuote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00744",
+          "name": null,
+          "role": "citizen",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question from bounded lived experience",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "As a resident of West Oakland, Fruitvale, East Oakland, what about the supplied trend \"Inconsistent impact of Oakland Alternative Response Initiative across targeted neighborhoods\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "public-safety",
+          "hood": "West Oakland, Fruitvale, East Oakland",
+          "focus": "Inconsistent impact of Oakland Alternative Response Initiative across targeted neighborhoods",
+          "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+        },
+        "exposure": {
+          "basis": [
+            "desk-signal candidate",
+            "same-neighborhood"
+          ],
+          "self": null,
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakland Alternative Response Initiative | Status passed | phase operational",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-5df54683a1df"
+          },
+          {
+            "t": "FACT",
+            "text": "The record leaves a public-safety response or classification question open.",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-d43a7e2d2c43"
+          },
+          {
+            "t": "FACT",
+            "text": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-0fc9dd7a717d"
+          },
+          {
+            "t": "FACT",
+            "text": "Supplied area: West Oakland, Fruitvale, East Oakland",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-253e91a50bf4"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Select supplied FACT ids and code-owned lattice ids only. Free text is allowed solely in unverifiedLead and never reaches Wake 3."
+        },
+        "output": {
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "fact_ids": [
+              "one or more ids from packet.known"
+            ],
+            "stance_id": "one id from packet.lattice.stances; null on abstain",
+            "question_id": "one id from packet.lattice.questions; null on abstain",
+            "intention_id": "one id from packet.lattice.intentions; I_NONE allowed",
+            "unverifiedLead": [
+              "free lead text; never publishable"
+            ],
+            "abstain_reason": "institutional_path_required|insufficient_evidence|contract_conflict|other|null"
+          },
+          "rule": "The backend renders the quote from selected lattice ids. Do not write quote prose."
+        },
+        "lattice": {
+          "stances": [
+            {
+              "id": "S_CONCERN",
+              "text": "What this record shows concerns me."
+            },
+            {
+              "id": "S_MISMATCH",
+              "text": "What the record shows does not line up with what I expected."
+            },
+            {
+              "id": "S_ATTENTION",
+              "text": "This deserves a closer look."
+            },
+            {
+              "id": "S_ACCOUNTABILITY",
+              "text": "Someone should answer for what the record shows."
+            }
+          ],
+          "questions": [
+            {
+              "id": "Q_ATTENTION",
+              "text": "Why is this not getting more attention?"
+            },
+            {
+              "id": "Q_OWNER",
+              "text": "Who is responsible for answering this?"
+            },
+            {
+              "id": "Q_NEXT",
+              "text": "What happens next?"
+            },
+            {
+              "id": "Q_GAP",
+              "text": "What explains the gap in the record?"
+            }
+          ],
+          "intentions": [
+            {
+              "id": "I_NONE",
+              "text": ""
+            },
+            {
+              "id": "I_WATCH",
+              "text": "I am going to keep watching this."
+            },
+            {
+              "id": "I_ANSWER",
+              "text": "I want a clear answer."
+            },
+            {
+              "id": "I_PRESS",
+              "text": "The Tribune should keep pressing for an answer."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "pop": "POP-00010",
+      "name": "Dana Reeve",
+      "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
+      "disp": "draws people in, deep with them",
+      "recorded": false,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"fact_ids\": [\"F-5df54683a1df\", \"F-d43a7e2d2c43\"],\n  \"stance_id\": \"S_MISMATCH\",\n  \"question_id\": \"Q_GAP\",\n  \"intention_id\": \"I_WATCH\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5df54683a1df",
+          "F-d43a7e2d2c43"
+        ],
+        "stanceId": "S_MISMATCH",
+        "questionId": "Q_GAP",
+        "intentionId": "I_WATCH",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00010-fd1096c673",
+        "publishableQuote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00010",
+          "name": null,
+          "role": "citizen",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question from bounded lived experience",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "As a resident of West Oakland, Fruitvale, East Oakland, what about the supplied trend \"Inconsistent impact of Oakland Alternative Response Initiative across targeted neighborhoods\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "public-safety",
+          "hood": "West Oakland, Fruitvale, East Oakland",
+          "focus": "Inconsistent impact of Oakland Alternative Response Initiative across targeted neighborhoods",
+          "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+        },
+        "exposure": {
+          "basis": [
+            "desk-signal candidate",
+            "same-neighborhood"
+          ],
+          "self": null,
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakland Alternative Response Initiative | Status passed | phase operational",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-5df54683a1df"
+          },
+          {
+            "t": "FACT",
+            "text": "The record leaves a public-safety response or classification question open.",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-d43a7e2d2c43"
+          },
+          {
+            "t": "FACT",
+            "text": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-0fc9dd7a717d"
+          },
+          {
+            "t": "FACT",
+            "text": "Supplied area: West Oakland, Fruitvale, East Oakland",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-253e91a50bf4"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Select supplied FACT ids and code-owned lattice ids only. Free text is allowed solely in unverifiedLead and never reaches Wake 3."
+        },
+        "output": {
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "fact_ids": [
+              "one or more ids from packet.known"
+            ],
+            "stance_id": "one id from packet.lattice.stances; null on abstain",
+            "question_id": "one id from packet.lattice.questions; null on abstain",
+            "intention_id": "one id from packet.lattice.intentions; I_NONE allowed",
+            "unverifiedLead": [
+              "free lead text; never publishable"
+            ],
+            "abstain_reason": "institutional_path_required|insufficient_evidence|contract_conflict|other|null"
+          },
+          "rule": "The backend renders the quote from selected lattice ids. Do not write quote prose."
+        },
+        "lattice": {
+          "stances": [
+            {
+              "id": "S_CONCERN",
+              "text": "What this record shows concerns me."
+            },
+            {
+              "id": "S_MISMATCH",
+              "text": "What the record shows does not line up with what I expected."
+            },
+            {
+              "id": "S_ATTENTION",
+              "text": "This deserves a closer look."
+            },
+            {
+              "id": "S_ACCOUNTABILITY",
+              "text": "Someone should answer for what the record shows."
+            }
+          ],
+          "questions": [
+            {
+              "id": "Q_ATTENTION",
+              "text": "Why is this not getting more attention?"
+            },
+            {
+              "id": "Q_OWNER",
+              "text": "Who is responsible for answering this?"
+            },
+            {
+              "id": "Q_NEXT",
+              "text": "What happens next?"
+            },
+            {
+              "id": "Q_GAP",
+              "text": "What explains the gap in the record?"
+            }
+          ],
+          "intentions": [
+            {
+              "id": "I_NONE",
+              "text": ""
+            },
+            {
+              "id": "I_WATCH",
+              "text": "I am going to keep watching this."
+            },
+            {
+              "id": "I_ANSWER",
+              "text": "I want a clear answer."
+            },
+            {
+              "id": "I_PRESS",
+              "text": "The Tribune should keep pressing for an answer."
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-00231",
+      "name": "Calvin Turner",
+      "quote": null,
+      "disp": "driven, hard to sit still; magnetic, center of every room; devoted, family is everything",
+      "recorded": false,
+      "fallback": "contract-invalid: invalid LEP/2 W2 output: unverifiedLead must be an array",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"fact_ids\": [\"F-5df54683a1df\", \"F-d43a7e2d2c43\", \"F-253e91a50bf4\"],\n  \"stance_id\": \"S_MISMATCH\",\n  \"question_id\": \"Q_GAP\",\n  \"intention_id\": \"I_WATCH\",\n  \"unverifiedLead\": \"Feels like the initiative's hitting different depending on which side of the tracks you're on, but nobody's saying that out loud.\",\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00231",
+          "name": null,
+          "role": "citizen",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question from bounded lived experience",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "As a resident of West Oakland, Fruitvale, East Oakland, what about the supplied trend \"Inconsistent impact of Oakland Alternative Response Initiative across targeted neighborhoods\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "public-safety",
+          "hood": "West Oakland, Fruitvale, East Oakland",
+          "focus": "Inconsistent impact of Oakland Alternative Response Initiative across targeted neighborhoods",
+          "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+        },
+        "exposure": {
+          "basis": [
+            "desk-signal candidate",
+            "same-neighborhood"
+          ],
+          "self": null,
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakland Alternative Response Initiative | Status passed | phase operational",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-5df54683a1df"
+          },
+          {
+            "t": "FACT",
+            "text": "The record leaves a public-safety response or classification question open.",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-d43a7e2d2c43"
+          },
+          {
+            "t": "FACT",
+            "text": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-0fc9dd7a717d"
+          },
+          {
+            "t": "FACT",
+            "text": "Supplied area: West Oakland, Fruitvale, East Oakland",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-253e91a50bf4"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Select supplied FACT ids and code-owned lattice ids only. Free text is allowed solely in unverifiedLead and never reaches Wake 3."
+        },
+        "output": {
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "fact_ids": [
+              "one or more ids from packet.known"
+            ],
+            "stance_id": "one id from packet.lattice.stances; null on abstain",
+            "question_id": "one id from packet.lattice.questions; null on abstain",
+            "intention_id": "one id from packet.lattice.intentions; I_NONE allowed",
+            "unverifiedLead": [
+              "free lead text; never publishable"
+            ],
+            "abstain_reason": "institutional_path_required|insufficient_evidence|contract_conflict|other|null"
+          },
+          "rule": "The backend renders the quote from selected lattice ids. Do not write quote prose."
+        },
+        "lattice": {
+          "stances": [
+            {
+              "id": "S_CONCERN",
+              "text": "What this record shows concerns me."
+            },
+            {
+              "id": "S_MISMATCH",
+              "text": "What the record shows does not line up with what I expected."
+            },
+            {
+              "id": "S_ATTENTION",
+              "text": "This deserves a closer look."
+            },
+            {
+              "id": "S_ACCOUNTABILITY",
+              "text": "Someone should answer for what the record shows."
+            }
+          ],
+          "questions": [
+            {
+              "id": "Q_ATTENTION",
+              "text": "Why is this not getting more attention?"
+            },
+            {
+              "id": "Q_OWNER",
+              "text": "Who is responsible for answering this?"
+            },
+            {
+              "id": "Q_NEXT",
+              "text": "What happens next?"
+            },
+            {
+              "id": "Q_GAP",
+              "text": "What explains the gap in the record?"
+            }
+          ],
+          "intentions": [
+            {
+              "id": "I_NONE",
+              "text": ""
+            },
+            {
+              "id": "I_WATCH",
+              "text": "I am going to keep watching this."
+            },
+            {
+              "id": "I_ANSWER",
+              "text": "I want a clear answer."
+            },
+            {
+              "id": "I_PRESS",
+              "text": "The Tribune should keep pressing for an answer."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "pop": "POP-00598",
+      "name": "Vladimir Gonzalez",
+      "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": false,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"fact_ids\": [\"F-5df54683a1df\", \"F-d43a7e2d2c43\"],\n  \"stance_id\": \"S_MISMATCH\",\n  \"question_id\": \"Q_GAP\",\n  \"intention_id\": \"I_WATCH\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5df54683a1df",
+          "F-d43a7e2d2c43"
+        ],
+        "stanceId": "S_MISMATCH",
+        "questionId": "Q_GAP",
+        "intentionId": "I_WATCH",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00598-fd1096c673",
+        "publishableQuote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00598",
+          "name": null,
+          "role": "citizen",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question from bounded lived experience",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "As a resident of West Oakland, Fruitvale, East Oakland, what about the supplied trend \"Inconsistent impact of Oakland Alternative Response Initiative across targeted neighborhoods\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "public-safety",
+          "hood": "West Oakland, Fruitvale, East Oakland",
+          "focus": "Inconsistent impact of Oakland Alternative Response Initiative across targeted neighborhoods",
+          "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+        },
+        "exposure": {
+          "basis": [
+            "desk-signal candidate",
+            "same-neighborhood"
+          ],
+          "self": null,
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakland Alternative Response Initiative | Status passed | phase operational",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-5df54683a1df"
+          },
+          {
+            "t": "FACT",
+            "text": "The record leaves a public-safety response or classification question open.",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-d43a7e2d2c43"
+          },
+          {
+            "t": "FACT",
+            "text": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-0fc9dd7a717d"
+          },
+          {
+            "t": "FACT",
+            "text": "Supplied area: West Oakland, Fruitvale, East Oakland",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-253e91a50bf4"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Select supplied FACT ids and code-owned lattice ids only. Free text is allowed solely in unverifiedLead and never reaches Wake 3."
+        },
+        "output": {
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "fact_ids": [
+              "one or more ids from packet.known"
+            ],
+            "stance_id": "one id from packet.lattice.stances; null on abstain",
+            "question_id": "one id from packet.lattice.questions; null on abstain",
+            "intention_id": "one id from packet.lattice.intentions; I_NONE allowed",
+            "unverifiedLead": [
+              "free lead text; never publishable"
+            ],
+            "abstain_reason": "institutional_path_required|insufficient_evidence|contract_conflict|other|null"
+          },
+          "rule": "The backend renders the quote from selected lattice ids. Do not write quote prose."
+        },
+        "lattice": {
+          "stances": [
+            {
+              "id": "S_CONCERN",
+              "text": "What this record shows concerns me."
+            },
+            {
+              "id": "S_MISMATCH",
+              "text": "What the record shows does not line up with what I expected."
+            },
+            {
+              "id": "S_ATTENTION",
+              "text": "This deserves a closer look."
+            },
+            {
+              "id": "S_ACCOUNTABILITY",
+              "text": "Someone should answer for what the record shows."
+            }
+          ],
+          "questions": [
+            {
+              "id": "Q_ATTENTION",
+              "text": "Why is this not getting more attention?"
+            },
+            {
+              "id": "Q_OWNER",
+              "text": "Who is responsible for answering this?"
+            },
+            {
+              "id": "Q_NEXT",
+              "text": "What happens next?"
+            },
+            {
+              "id": "Q_GAP",
+              "text": "What explains the gap in the record?"
+            }
+          ],
+          "intentions": [
+            {
+              "id": "I_NONE",
+              "text": ""
+            },
+            {
+              "id": "I_WATCH",
+              "text": "I am going to keep watching this."
+            },
+            {
+              "id": "I_ANSWER",
+              "text": "I want a clear answer."
+            },
+            {
+              "id": "I_PRESS",
+              "text": "The Tribune should keep pressing for an answer."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "pop": "POP-00744",
+      "name": "Tomas Renteria",
+      "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
+      "disp": "draws people in, deep with them",
+      "recorded": false,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"fact_ids\": [\"F-5df54683a1df\", \"F-d43a7e2d2c43\"],\n  \"stance_id\": \"S_MISMATCH\",\n  \"question_id\": \"Q_GAP\",\n  \"intention_id\": \"I_WATCH\",\n  \"unverifiedLead\": [\"Feels like the initiative's presence shifts block by block—some corners get all the attention, others feel forgotten. Like they're patching potholes on one street while the next one over's been crumbling for years.\"],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5df54683a1df",
+          "F-d43a7e2d2c43"
+        ],
+        "stanceId": "S_MISMATCH",
+        "questionId": "Q_GAP",
+        "intentionId": "I_WATCH",
+        "unverifiedLead": [
+          "Feels like the initiative's presence shifts block by block—some corners get all the attention, others feel forgotten. Like they're patching potholes on one street while the next one over's been crumbling for years."
+        ],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00744-fd1096c673",
+        "publishableQuote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00744",
+          "name": null,
+          "role": "citizen",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question from bounded lived experience",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "As a resident of West Oakland, Fruitvale, East Oakland, what about the supplied trend \"Inconsistent impact of Oakland Alternative Response Initiative across targeted neighborhoods\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "public-safety",
+          "hood": "West Oakland, Fruitvale, East Oakland",
+          "focus": "Inconsistent impact of Oakland Alternative Response Initiative across targeted neighborhoods",
+          "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+        },
+        "exposure": {
+          "basis": [
+            "desk-signal candidate",
+            "same-neighborhood"
+          ],
+          "self": null,
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakland Alternative Response Initiative | Status passed | phase operational",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-5df54683a1df"
+          },
+          {
+            "t": "FACT",
+            "text": "The record leaves a public-safety response or classification question open.",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-d43a7e2d2c43"
+          },
+          {
+            "t": "FACT",
+            "text": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-0fc9dd7a717d"
+          },
+          {
+            "t": "FACT",
+            "text": "Supplied area: West Oakland, Fruitvale, East Oakland",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-253e91a50bf4"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Select supplied FACT ids and code-owned lattice ids only. Free text is allowed solely in unverifiedLead and never reaches Wake 3."
+        },
+        "output": {
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "fact_ids": [
+              "one or more ids from packet.known"
+            ],
+            "stance_id": "one id from packet.lattice.stances; null on abstain",
+            "question_id": "one id from packet.lattice.questions; null on abstain",
+            "intention_id": "one id from packet.lattice.intentions; I_NONE allowed",
+            "unverifiedLead": [
+              "free lead text; never publishable"
+            ],
+            "abstain_reason": "institutional_path_required|insufficient_evidence|contract_conflict|other|null"
+          },
+          "rule": "The backend renders the quote from selected lattice ids. Do not write quote prose."
+        },
+        "lattice": {
+          "stances": [
+            {
+              "id": "S_CONCERN",
+              "text": "What this record shows concerns me."
+            },
+            {
+              "id": "S_MISMATCH",
+              "text": "What the record shows does not line up with what I expected."
+            },
+            {
+              "id": "S_ATTENTION",
+              "text": "This deserves a closer look."
+            },
+            {
+              "id": "S_ACCOUNTABILITY",
+              "text": "Someone should answer for what the record shows."
+            }
+          ],
+          "questions": [
+            {
+              "id": "Q_ATTENTION",
+              "text": "Why is this not getting more attention?"
+            },
+            {
+              "id": "Q_OWNER",
+              "text": "Who is responsible for answering this?"
+            },
+            {
+              "id": "Q_NEXT",
+              "text": "What happens next?"
+            },
+            {
+              "id": "Q_GAP",
+              "text": "What explains the gap in the record?"
+            }
+          ],
+          "intentions": [
+            {
+              "id": "I_NONE",
+              "text": ""
+            },
+            {
+              "id": "I_WATCH",
+              "text": "I am going to keep watching this."
+            },
+            {
+              "id": "I_ANSWER",
+              "text": "I want a clear answer."
+            },
+            {
+              "id": "I_PRESS",
+              "text": "The Tribune should keep pressing for an answer."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "pop": "POP-00010",
+      "name": "Dana Reeve",
+      "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
+      "disp": "draws people in, deep with them",
+      "recorded": false,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"fact_ids\": [\"F-5df54683a1df\", \"F-d43a7e2d2c43\"],\n  \"stance_id\": \"S_MISMATCH\",\n  \"question_id\": \"Q_GAP\",\n  \"intention_id\": \"I_WATCH\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5df54683a1df",
+          "F-d43a7e2d2c43"
+        ],
+        "stanceId": "S_MISMATCH",
+        "questionId": "Q_GAP",
+        "intentionId": "I_WATCH",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00010-fd1096c673",
+        "publishableQuote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00010",
+          "name": null,
+          "role": "citizen",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question from bounded lived experience",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "As a resident of West Oakland, Fruitvale, East Oakland, what about the supplied trend \"Inconsistent impact of Oakland Alternative Response Initiative across targeted neighborhoods\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "public-safety",
+          "hood": "West Oakland, Fruitvale, East Oakland",
+          "focus": "Inconsistent impact of Oakland Alternative Response Initiative across targeted neighborhoods",
+          "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+        },
+        "exposure": {
+          "basis": [
+            "desk-signal candidate",
+            "same-neighborhood"
+          ],
+          "self": null,
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakland Alternative Response Initiative | Status passed | phase operational",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-5df54683a1df"
+          },
+          {
+            "t": "FACT",
+            "text": "The record leaves a public-safety response or classification question open.",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-d43a7e2d2c43"
+          },
+          {
+            "t": "FACT",
+            "text": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-0fc9dd7a717d"
+          },
+          {
+            "t": "FACT",
+            "text": "Supplied area: West Oakland, Fruitvale, East Oakland",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-253e91a50bf4"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Select supplied FACT ids and code-owned lattice ids only. Free text is allowed solely in unverifiedLead and never reaches Wake 3."
+        },
+        "output": {
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "fact_ids": [
+              "one or more ids from packet.known"
+            ],
+            "stance_id": "one id from packet.lattice.stances; null on abstain",
+            "question_id": "one id from packet.lattice.questions; null on abstain",
+            "intention_id": "one id from packet.lattice.intentions; I_NONE allowed",
+            "unverifiedLead": [
+              "free lead text; never publishable"
+            ],
+            "abstain_reason": "institutional_path_required|insufficient_evidence|contract_conflict|other|null"
+          },
+          "rule": "The backend renders the quote from selected lattice ids. Do not write quote prose."
+        },
+        "lattice": {
+          "stances": [
+            {
+              "id": "S_CONCERN",
+              "text": "What this record shows concerns me."
+            },
+            {
+              "id": "S_MISMATCH",
+              "text": "What the record shows does not line up with what I expected."
+            },
+            {
+              "id": "S_ATTENTION",
+              "text": "This deserves a closer look."
+            },
+            {
+              "id": "S_ACCOUNTABILITY",
+              "text": "Someone should answer for what the record shows."
+            }
+          ],
+          "questions": [
+            {
+              "id": "Q_ATTENTION",
+              "text": "Why is this not getting more attention?"
+            },
+            {
+              "id": "Q_OWNER",
+              "text": "Who is responsible for answering this?"
+            },
+            {
+              "id": "Q_NEXT",
+              "text": "What happens next?"
+            },
+            {
+              "id": "Q_GAP",
+              "text": "What explains the gap in the record?"
+            }
+          ],
+          "intentions": [
+            {
+              "id": "I_NONE",
+              "text": ""
+            },
+            {
+              "id": "I_WATCH",
+              "text": "I am going to keep watching this."
+            },
+            {
+              "id": "I_ANSWER",
+              "text": "I want a clear answer."
+            },
+            {
+              "id": "I_PRESS",
+              "text": "The Tribune should keep pressing for an answer."
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-08-11T18:15:49.534Z"
+}

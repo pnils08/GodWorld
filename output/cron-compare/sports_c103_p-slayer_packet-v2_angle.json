@@ -1,0 +1,430 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "103",
+  "persona": "p-slayer",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00008",
+      "name": "P Slayer",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging star?",
+      "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average.",
+      "creativeBrief": {
+        "kind": "fan-heat",
+        "fanCharge": "fury",
+        "bagModes": [
+          "1 Hate the Move",
+          "3 Friction Pivot"
+        ],
+        "friction": "The stands feel sold out or sold short — write into that gap, not the press release.",
+        "centralFeeling": "Oakland should feel the FO heard the bleachers.",
+        "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
+        "sceneRule": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
+      }
+    },
+    "signal": {
+      "kind": "roster-move",
+      "hood": "Baylight District",
+      "score": null,
+      "src": "Oakland_Sports_Feed cycle 102; world_summary_c103.md \"## Sports\" · Isley Kelley resigns, don't close the door just yet on the era, is this the righ",
+      "nearby": [
+        {
+          "text": "Oaks | team-update | (preseason) | Adash Stanley (PG), AJ Dybantsa (SF)",
+          "src": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | front-office | (preseason) | Mike Paulson, Elias Varek, Dillon Brooks (SF)",
+          "src": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (late-season) | Benji Dillon (SP/RP) Pablo Almanzar (SP)",
+          "src": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (late-season) | Isley Kelley (SS)",
+          "src": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (late-season) | Pablo Almanzar (SP), Vinne Keane (DH)",
+          "src": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": null,
+          "name": "Isley Kelley",
+          "profile": "Isley Kelley",
+          "why": "feed-names"
+        },
+        {
+          "pop": null,
+          "name": "Isley Kelley",
+          "profile": "Isley Kelley",
+          "why": "feed-names"
+        },
+        {
+          "pop": null,
+          "name": "Mike Paulson",
+          "profile": "Mike Paulson",
+          "why": "feed-names"
+        },
+        {
+          "pop": null,
+          "name": "Isley Kelley",
+          "profile": "Isley Kelley",
+          "why": "feed-names"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C103",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-4ac610ea40fe"
+      },
+      {
+        "t": "FACT",
+        "text": "Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging star?",
+        "src": "Oakland_Sports_Feed cycle 102; world_summary_c103.md \"## Sports\" · Isley Kelley resigns, don't close the door just yet on the era, is this the righ",
+        "id": "F-bb64a5d01ffa"
+      },
+      {
+        "t": "FACT",
+        "text": "The stands feel sold out or sold short — write into that gap, not the press release.",
+        "src": "Oakland_Sports_Feed cycle 102; world_summary_c103.md \"## Sports\" · Isley Kelley resigns, don't close the door just yet on the era, is this the righ",
+        "id": "F-17e052a35c20"
+      },
+      {
+        "t": "FACT",
+        "text": "StoryAngle (feed): Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging star?",
+        "src": "Oakland_Sports_Feed cycle 102; world_summary_c103.md \"## Sports\" · Isley Kelley resigns, don't close the door just yet on the era, is this the righ",
+        "id": "F-f5ccbb8defe4"
+      },
+      {
+        "t": "FACT",
+        "text": "Team record (feed): 107-31 · streak W3",
+        "src": "Oakland_Sports_Feed cycle 102; world_summary_c103.md \"## Sports\" · Isley Kelley resigns, don't close the door just yet on the era, is this the righ",
+        "id": "F-4a594bb28620"
+      },
+      {
+        "t": "FACT",
+        "text": "Stats (feed): Isley Kelly, .339avg, 28hr, 92rbi, 7.1war",
+        "src": "Oakland_Sports_Feed cycle 102; world_summary_c103.md \"## Sports\" · Isley Kelley resigns, don't close the door just yet on the era, is this the righ",
+        "id": "F-8df40afc09fe"
+      },
+      {
+        "t": "FACT",
+        "text": "Event: A's — re-signing (late-season)",
+        "src": "Oakland_Sports_Feed cycle 102; world_summary_c103.md \"## Sports\" · Isley Kelley resigns, don't close the door just yet on the era, is this the righ",
+        "id": "F-1a6855793a4e"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier."
+    }
+  },
+  "reporter": {
+    "name": "P Slayer",
+    "popid": "POP-00008"
+  },
+  "assignment": {
+    "story": {
+      "ref": "Oakland_Sports_Feed cycle 102; world_summary_c103.md \"## Sports\" · Isley Kelley resigns, don't close the door just yet on the era, is this the righ",
+      "label": "Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging star?",
+      "kind": "roster-move",
+      "angle": "Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging star?",
+      "hookLine": "The stands feel sold out or sold short — write into that gap, not the press release.",
+      "hood": "Baylight District",
+      "team": "A's",
+      "eventKind": "re-signing",
+      "popids": [],
+      "citizens": [
+        "Isley Kelley",
+        "Isley Kelley",
+        "Mike Paulson",
+        "Isley Kelley"
+      ],
+      "pulseClass": "roster-move",
+      "pulseScore": 79,
+      "fanCharge": "fury",
+      "bagModeIds": [
+        1,
+        3
+      ]
+    },
+    "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": {
+    "pulse": {
+      "className": "roster-move",
+      "classes": [
+        "roster-move",
+        "injury-load",
+        "win-streak",
+        "award-board"
+      ],
+      "score": 79,
+      "label": "Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging star?",
+      "team": "A's",
+      "eventKind": "re-signing",
+      "seasonType": "late-season",
+      "feedCycle": 102,
+      "record": "107-31",
+      "streak": "W3",
+      "mood": "electric",
+      "fanSentiment": "high",
+      "neighborhood": "Baylight District",
+      "notes": "In a somewhat shocking turn of events Mike Paulson and The Oakland As have decided to resign Isely Kelly to a 2-year $50M contract. Word was that Kelley was seeking 4-years but likely go the boost in per year he was looking for. Kelley who turns 34 next season has shown resurgence this season as he in a battle for the batting title and MVP with fellow teammate Danny Horn. The news comes at an oppu",
+      "stats": "Isley Kelly, .339avg, 28hr, 92rbi, 7.1war"
+    },
+    "charge": {
+      "bagModes": [
+        {
+          "id": 1,
+          "name": "Hate the Move"
+        },
+        {
+          "id": 3,
+          "name": "Friction Pivot"
+        }
+      ],
+      "fanCharge": "fury",
+      "foilNumber": "7.1war",
+      "centralFeeling": "Oakland should feel the FO heard the bleachers.",
+      "palette": [
+        "fury",
+        "euphoria",
+        "dread",
+        "defiance",
+        "confession",
+        "grief",
+        "dare"
+      ]
+    },
+    "prewrite": {
+      "reporter": "P.Slayer",
+      "bagModes": [
+        {
+          "id": 1,
+          "name": "Hate the Move"
+        },
+        {
+          "id": 3,
+          "name": "Friction Pivot"
+        }
+      ],
+      "fanCharge": "fury",
+      "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
+      "anchorFacts": [
+        "StoryAngle (feed): Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging star?",
+        "Team record (feed): 107-31 · streak W3",
+        "Stats (feed): Isley Kelly, .339avg, 28hr, 92rbi, 7.1war",
+        "Event: A's — re-signing (late-season)"
+      ],
+      "foilNumber": "7.1war",
+      "centralFeeling": "Oakland should feel the FO heard the bleachers."
+    },
+    "friction": {
+      "a": "Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging star?",
+      "b": "FO language (transition / flexibility / prepared) or the tidy \"genius in hindsight\" read",
+      "frame": "The stands feel sold out or sold short — write into that gap, not the press release."
+    },
+    "priorTakes": [],
+    "players": [
+      {
+        "name": "Isley Kelley",
+        "popid": null,
+        "role": null,
+        "neighborhood": null,
+        "why": "feed-names"
+      },
+      {
+        "name": "Isley Kelley",
+        "popid": null,
+        "role": null,
+        "neighborhood": null,
+        "why": "feed-names"
+      },
+      {
+        "name": "Mike Paulson",
+        "popid": null,
+        "role": null,
+        "neighborhood": null,
+        "why": "feed-names"
+      },
+      {
+        "name": "Isley Kelley",
+        "popid": null,
+        "role": null,
+        "neighborhood": null,
+        "why": "feed-names"
+      }
+    ],
+    "scene": {
+      "neighborhood": "Baylight District",
+      "record": "107-31",
+      "streak": "W3",
+      "mood": "electric",
+      "fanSentiment": "high",
+      "colorRoom": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
+    },
+    "candidates": [
+      {
+        "score": 79,
+        "cycle": 102,
+        "team": "A's",
+        "primary": "roster-move",
+        "angle": "Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging star?",
+        "priorHits": 0
+      },
+      {
+        "score": 66,
+        "cycle": 101,
+        "team": "A's",
+        "primary": "roster-move",
+        "angle": "Martin Richards traded at the deadline, trading a franchise pillar in a title run",
+        "priorHits": 0
+      },
+      {
+        "score": 58,
+        "cycle": 103,
+        "team": "A's",
+        "primary": "prospect-callup",
+        "angle": "Pablo Almanzar throws a No No in his MLB debut",
+        "priorHits": 0
+      },
+      {
+        "score": 56,
+        "cycle": 103,
+        "team": "A's",
+        "primary": "prospect-callup",
+        "angle": "Benji Dillon moves to the bullpen, In an effort to give some young arms so run and rest a vet arm Dillon will be moving ",
+        "priorHits": 0
+      },
+      {
+        "score": 52,
+        "cycle": 102,
+        "team": "Oaks",
+        "primary": "insult-pulse",
+        "angle": "Veteran Green calls out The Oaks",
+        "priorHits": 0
+      },
+      {
+        "score": 49,
+        "cycle": 103,
+        "team": "A's",
+        "primary": "win-streak",
+        "angle": "Isley Kelly at 499 Homeruns",
+        "priorHits": 0
+      }
+    ]
+  },
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "economicSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "P Slayer",
+    "popid": "POP-00008",
+    "text": "{\n  \"focus\": \"Isley Kelley's resignation\",\n  \"why\": \"the stands feel sold out or sold short\",\n  \"checks\": [\n    \"friction pivot required\"\n  ],\n  \"targets\": [],\n  \"interpretation\": \"a move that sparks debate among fans\",\n  \"unverifiedLead\": [\n    \"the right move for an aging star\"\n  ],\n  \"closeQuestion\": \"is this the end of an era for the A's?\"\n}",
+    "plan": {
+      "focus": "Isley Kelley's resignation",
+      "why": "the stands feel sold out or sold short",
+      "checks": [
+        "friction pivot required"
+      ],
+      "targets": [],
+      "interpretation": "a move that sparks debate among fans",
+      "unverifiedLead": [
+        "the right move for an aging star"
+      ],
+      "closeQuestion": "is this the end of an era for the A's?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Oaks | team-update | (preseason) | Adash Stanley (PG), AJ Dybantsa (SF)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)",
+      "popids": []
+    },
+    {
+      "label": "Oaks | front-office | (preseason) | Mike Paulson, Elias Varek, Dillon Brooks (SF)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)",
+      "popids": []
+    },
+    {
+      "label": "A's | player-feature | (late-season) | Benji Dillon (SP/RP) Pablo Almanzar (SP)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)",
+      "popids": []
+    },
+    {
+      "label": "A's | player-feature | (late-season) | Isley Kelley (SS)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)",
+      "popids": []
+    },
+    {
+      "label": "A's | player-feature | (late-season) | Pablo Almanzar (SP), Vinne Keane (DH)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)",
+      "popids": []
+    }
+  ],
+  "laneEntries": 8,
+  "ranAt": "2026-08-11T11:15:50.661Z"
+}

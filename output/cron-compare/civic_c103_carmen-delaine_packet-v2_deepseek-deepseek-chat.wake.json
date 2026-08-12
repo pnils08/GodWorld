@@ -1,0 +1,24 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "103",
+  "provider": "openrouter",
+  "model": "deepseek/deepseek-chat",
+  "gateModel": "google/gemini-3.5-flash",
+  "persona": "carmen-delaine",
+  "byline": {
+    "name": "Carmen Delaine",
+    "popid": "POP-00011",
+    "beatDomain": "CIVIC"
+  },
+  "laneEntries": 32,
+  "quotesLanded": 4,
+  "disposition": "flagged",
+  "rheaPass": false,
+  "rheaFlagCount": 4,
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/flagged/civic_c103_carmen-delaine_packet-v2_deepseek-deepseek-chat.md",
+  "selfRecord": null,
+  "ranAt": "2026-08-11T23:17:19.222Z"
+}

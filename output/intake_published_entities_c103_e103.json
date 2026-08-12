@@ -1,0 +1,58 @@
+{
+  "timestamp": "2026-08-12T05:51:58.111Z",
+  "source": "c103_the_west_oakland_vacuum.txt",
+  "type": "edition",
+  "cycle": 103,
+  "slug": "e103",
+  "mode": "apply",
+  "citizens": {
+    "parsed": 3,
+    "matched": [
+      {
+        "popId": "POP-00023",
+        "fullName": "Gregory Mims",
+        "driftWarning": null
+      },
+      {
+        "popId": "POP-00789",
+        "fullName": "Elias Varek",
+        "driftWarning": null
+      },
+      {
+        "popId": "POP-00034",
+        "fullName": "Avery Santana",
+        "driftWarning": null
+      }
+    ],
+    "candidates": [],
+    "canonDrift": [],
+    "malformed": [],
+    "ambiguous": [],
+    "phantom": [],
+    "culturalOnly": [],
+    "appended": [],
+    "intakeRows": [],
+    "intakeVerified": [],
+    "intakeSummary": {
+      "mint": 0
+    }
+  },
+  "businesses": {
+    "parsed": 0,
+    "matched": [],
+    "candidates": [],
+    "mismatches": [],
+    "appended": []
+  },
+  "bylinePublished": {
+    "eligible": true,
+    "articles": 0,
+    "resolved": [],
+    "unresolved": [],
+    "ambiguous": [],
+    "duplicates": 0,
+    "appended": 0,
+    "verified": null,
+    "parserNote": "no ARTICLE TABLE found"
+  }
+}

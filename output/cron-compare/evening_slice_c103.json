@@ -1,0 +1,830 @@
+{
+  "empty": false,
+  "cycle": 103,
+  "kind": "evening-life",
+  "journalist": {
+    "shared": true,
+    "consumers": [
+      "mason-ortega",
+      "kai-marston",
+      "sharon-okafor",
+      "maria-keen",
+      "elliot-graye"
+    ]
+  },
+  "texture": {
+    "famous": [
+      "Claire Ashford",
+      "Mark Aitken",
+      "Tara Ellison"
+    ],
+    "restaurants": [
+      {
+        "name": "Piedmont Heights",
+        "hood": "Piedmont Ave"
+      },
+      {
+        "name": "Festive Feast",
+        "hood": "Downtown"
+      },
+      {
+        "name": "Rockridge Cellar",
+        "hood": "Rockridge"
+      }
+    ],
+    "fastFood": [
+      {
+        "name": "SoupStop",
+        "hood": "Temescal"
+      }
+    ],
+    "nightlife": [
+      {
+        "name": "Nightline Station",
+        "hood": "West Oakland"
+      }
+    ],
+    "nightlifeMeta": {
+      "volume": 3,
+      "vibe": "quiet",
+      "movement": "restricted",
+      "weatherImpact": 1.05
+    },
+    "cityEvents": [
+      "Jack London Holiday Market",
+      "Fruitvale Emergency Town Briefing",
+      "Lake Merritt Community Joy Parade",
+      "Lake Merritt Festival of Lights"
+    ],
+    "tv": [
+      "Classic Christmas",
+      "Winter Wonderland",
+      "Bay Area Alert",
+      "Warm House",
+      "Oakland Baseball Tonight",
+      "Isley Kelley (SS) — Player Profile"
+    ],
+    "movies": [
+      "Miracle Season",
+      "Holiday Magic",
+      "New Beginnings",
+      "Ninth Inning"
+    ],
+    "sportsBroadcast": "Oakland Sports Tonight",
+    "streamingTrend": "holiday classics marathon",
+    "foodTrend": "Holiday celebration dining - festive atmosphere"
+  },
+  "signals": {
+    "fameCount": 5,
+    "sightingCount": 3,
+    "faithCount": 6,
+    "eveningPointer": {
+      "ref": "output/world_summary_c103.md \"## Evening Texture\"",
+      "label": "Named venues that moved — restaurants, fast food, nightlife spots, city events, media"
+    },
+    "sightings": [
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Claire Ashford spotted at Beth Jacob Congregation",
+        "name": "Claire Ashford",
+        "venue": "Beth Jacob Congregation",
+        "ref": "Ripple_Ledger cycle 103 (CauseType lifestyle-sighting); rendered: world_summary_c103.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Piedmont Ave",
+        "popids": []
+      },
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Mark Aitken spotted at Ridgeline Ventures",
+        "name": "Mark Aitken",
+        "venue": "Ridgeline Ventures",
+        "ref": "Ripple_Ledger cycle 103 (CauseType lifestyle-sighting); rendered: world_summary_c103.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Lake Merritt",
+        "popids": []
+      },
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Tara Ellison spotted at City of Oakland",
+        "name": "Tara Ellison",
+        "venue": "City of Oakland",
+        "ref": "Ripple_Ledger cycle 103 (CauseType lifestyle-sighting); rendered: world_summary_c103.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Downtown",
+        "popids": []
+      }
+    ],
+    "fame": [
+      {
+        "kind": "fame-event",
+        "label": "fame-rise | Vinnie Keane — the city is watching: disagreed with a Tribune column out loud to an empty kitchen",
+        "name": "Vinnie Keane",
+        "ref": "Ripple_Ledger cycle 103 (CauseType fame-event); rendered: world_summary_c103.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Rockridge",
+        "popids": [
+          "POP-00001"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "fame-rise | Marin Tao — the city is watching: stepped over a puddle reflecting the Tribune Tower neon and thought about taking a picture",
+        "name": "Marin Tao",
+        "ref": "Ripple_Ledger cycle 103 (CauseType fame-event); rendered: world_summary_c103.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Chinatown",
+        "popids": [
+          "POP-00537"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "fame-rise | Lena Cross — the city is watching: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "name": "Lena Cross",
+        "ref": "Ripple_Ledger cycle 103 (CauseType fame-event); rendered: world_summary_c103.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Piedmont Ave",
+        "popids": [
+          "POP-00539"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-decay | Marin Tao — the spotlight moved on: Tier 3 -> 4",
+        "name": "Marin Tao",
+        "ref": "Ripple_Ledger cycle 103 (CauseType fame-event); rendered: world_summary_c103.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Chinatown",
+        "popids": [
+          "POP-00537"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-decay | Lena Cross — the spotlight moved on: Tier 3 -> 4",
+        "name": "Lena Cross",
+        "ref": "Ripple_Ledger cycle 103 (CauseType fame-event); rendered: world_summary_c103.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Piedmont Ave",
+        "popids": [
+          "POP-00539"
+        ]
+      }
+    ]
+  },
+  "pulse": {
+    "className": "quiet-nightlife",
+    "score": 24,
+    "label": "Nightline Station (West Oakland) · quiet night",
+    "named": "Nightline Station",
+    "hood": "West Oakland",
+    "person": null,
+    "venue": null
+  },
+  "candidates": [
+    {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Nightline Station (West Oakland) · quiet night",
+      "named": "Nightline Station",
+      "hood": "West Oakland"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Claire Ashford at Beth Jacob Congregation (Piedmont Ave)",
+      "named": "Beth Jacob Congregation",
+      "hood": "Piedmont Ave"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Mark Aitken at Ridgeline Ventures (Lake Merritt)",
+      "named": "Ridgeline Ventures",
+      "hood": "Lake Merritt"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Tara Ellison at City of Oakland (Downtown)",
+      "named": "City of Oakland",
+      "hood": "Downtown"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Piedmont Heights (Piedmont Ave)",
+      "named": "Piedmont Heights",
+      "hood": "Piedmont Ave"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Festive Feast (Downtown)",
+      "named": "Festive Feast",
+      "hood": "Downtown"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Rockridge Cellar (Rockridge)",
+      "named": "Rockridge Cellar",
+      "hood": "Rockridge"
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "Lake Merritt Festival of Lights",
+      "named": "Lake Merritt Festival of Lights",
+      "hood": null
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Vinnie Keane — fame rise",
+      "named": "Vinnie Keane",
+      "hood": "Rockridge"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Marin Tao — fame rise",
+      "named": "Marin Tao",
+      "hood": "Chinatown"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Lena Cross — fame rise",
+      "named": "Lena Cross",
+      "hood": "Piedmont Ave"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Marin Tao — fame rise",
+      "named": "Marin Tao",
+      "hood": "Chinatown"
+    }
+  ],
+  "pulses": [
+    {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Nightline Station (West Oakland) · quiet night",
+      "named": "Nightline Station",
+      "hood": "West Oakland",
+      "names": [
+        "Nightline Station"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Nightlife",
+      "angle": "Quiet nightlife at Nightline Station — low volume, restricted movement, the room still breathing",
+      "hookLine": "Nightline Station is open but the night is quiet (volume 3, vibe quiet).",
+      "sceneBits": [
+        "VENUE: Nightline Station",
+        "HOOD: West Oakland",
+        "VOLUME: 3",
+        "VIBE: quiet",
+        "MOVEMENT: restricted",
+        "WEATHER IMPACT: 1.05"
+      ],
+      "nightlifeMeta": {
+        "volume": 3,
+        "vibe": "quiet",
+        "movement": "restricted",
+        "weatherImpact": 1.05
+      },
+      "cycle": 103
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Claire Ashford at Beth Jacob Congregation (Piedmont Ave)",
+      "named": "Beth Jacob Congregation",
+      "hood": "Piedmont Ave",
+      "names": [
+        "Claire Ashford",
+        "Beth Jacob Congregation"
+      ],
+      "person": "Claire Ashford",
+      "venue": "Beth Jacob Congregation",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 103 (CauseType lifestyle-sighting); rendered: world_summary_c103.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Claire Ashford spotted at Beth Jacob Congregation in Piedmont Ave — ground truth only, no invented companions",
+      "hookLine": "sighting | Claire Ashford spotted at Beth Jacob Congregation",
+      "sceneBits": [
+        "PERSON: Claire Ashford",
+        "VENUE: Beth Jacob Congregation",
+        "HOOD: Piedmont Ave"
+      ],
+      "cycle": 103
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Mark Aitken at Ridgeline Ventures (Lake Merritt)",
+      "named": "Ridgeline Ventures",
+      "hood": "Lake Merritt",
+      "names": [
+        "Mark Aitken",
+        "Ridgeline Ventures"
+      ],
+      "person": "Mark Aitken",
+      "venue": "Ridgeline Ventures",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 103 (CauseType lifestyle-sighting); rendered: world_summary_c103.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Mark Aitken spotted at Ridgeline Ventures in Lake Merritt — ground truth only, no invented companions",
+      "hookLine": "sighting | Mark Aitken spotted at Ridgeline Ventures",
+      "sceneBits": [
+        "PERSON: Mark Aitken",
+        "VENUE: Ridgeline Ventures",
+        "HOOD: Lake Merritt"
+      ],
+      "cycle": 103
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Tara Ellison at City of Oakland (Downtown)",
+      "named": "City of Oakland",
+      "hood": "Downtown",
+      "names": [
+        "Tara Ellison",
+        "City of Oakland"
+      ],
+      "person": "Tara Ellison",
+      "venue": "City of Oakland",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 103 (CauseType lifestyle-sighting); rendered: world_summary_c103.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Tara Ellison spotted at City of Oakland in Downtown — ground truth only, no invented companions",
+      "hookLine": "sighting | Tara Ellison spotted at City of Oakland",
+      "sceneBits": [
+        "PERSON: Tara Ellison",
+        "VENUE: City of Oakland",
+        "HOOD: Downtown"
+      ],
+      "cycle": 103
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Piedmont Heights (Piedmont Ave)",
+      "named": "Piedmont Heights",
+      "hood": "Piedmont Ave",
+      "names": [
+        "Piedmont Heights"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Kitchen / dining room at Piedmont Heights in Piedmont Ave — who works the room and what the night costs them",
+      "hookLine": "Piedmont Heights is on the evening board in Piedmont Ave.",
+      "sceneBits": [
+        "VENUE: Piedmont Heights",
+        "HOOD: Piedmont Ave",
+        "FOOD TREND: Holiday celebration dining - festive atmosphere"
+      ],
+      "cycle": 103
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Festive Feast (Downtown)",
+      "named": "Festive Feast",
+      "hood": "Downtown",
+      "names": [
+        "Festive Feast"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Kitchen / dining room at Festive Feast in Downtown — who works the room and what the night costs them",
+      "hookLine": "Festive Feast is on the evening board in Downtown.",
+      "sceneBits": [
+        "VENUE: Festive Feast",
+        "HOOD: Downtown",
+        "FOOD TREND: Holiday celebration dining - festive atmosphere"
+      ],
+      "cycle": 103
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Rockridge Cellar (Rockridge)",
+      "named": "Rockridge Cellar",
+      "hood": "Rockridge",
+      "names": [
+        "Rockridge Cellar"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Kitchen / dining room at Rockridge Cellar in Rockridge — who works the room and what the night costs them",
+      "hookLine": "Rockridge Cellar is on the evening board in Rockridge.",
+      "sceneBits": [
+        "VENUE: Rockridge Cellar",
+        "HOOD: Rockridge",
+        "FOOD TREND: Holiday celebration dining - festive atmosphere"
+      ],
+      "cycle": 103
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "Lake Merritt Festival of Lights",
+      "named": "Lake Merritt Festival of Lights",
+      "hood": null,
+      "names": [
+        "Lake Merritt Festival of Lights"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "Arts/cultural event: Lake Merritt Festival of Lights — present-tense room, not calendar filler",
+      "hookLine": "Lake Merritt Festival of Lights is on the evening board.",
+      "sceneBits": [
+        "EVENT: Lake Merritt Festival of Lights",
+        "ARTS SIGNAL: yes"
+      ],
+      "cycle": 103
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Vinnie Keane — fame rise",
+      "named": "Vinnie Keane",
+      "hood": "Rockridge",
+      "names": [
+        "Vinnie Keane"
+      ],
+      "person": "Vinnie Keane",
+      "popids": [
+        "POP-00001"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 103 (CauseType fame-event); rendered: world_summary_c103.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Vinnie Keane — city watching; do not invent the private life",
+      "hookLine": "fame-rise | Vinnie Keane — the city is watching: disagreed with a Tribune column out loud to an empty kitchen",
+      "sceneBits": [
+        "PERSON: Vinnie Keane",
+        "HOOD: Rockridge",
+        "LABEL: fame-rise | Vinnie Keane — the city is watching: disagreed with a Tribune column out loud to an empty kitchen"
+      ],
+      "cycle": 103
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Marin Tao — fame rise",
+      "named": "Marin Tao",
+      "hood": "Chinatown",
+      "names": [
+        "Marin Tao"
+      ],
+      "person": "Marin Tao",
+      "popids": [
+        "POP-00537"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 103 (CauseType fame-event); rendered: world_summary_c103.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Marin Tao — city watching; do not invent the private life",
+      "hookLine": "fame-rise | Marin Tao — the city is watching: stepped over a puddle reflecting the Tribune Tower neon and thought about taking a picture",
+      "sceneBits": [
+        "PERSON: Marin Tao",
+        "HOOD: Chinatown",
+        "LABEL: fame-rise | Marin Tao — the city is watching: stepped over a puddle reflecting the Tribune Tower neon and thought about taking a picture"
+      ],
+      "cycle": 103
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Lena Cross — fame rise",
+      "named": "Lena Cross",
+      "hood": "Piedmont Ave",
+      "names": [
+        "Lena Cross"
+      ],
+      "person": "Lena Cross",
+      "popids": [
+        "POP-00539"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 103 (CauseType fame-event); rendered: world_summary_c103.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Lena Cross — city watching; do not invent the private life",
+      "hookLine": "fame-rise | Lena Cross — the city is watching: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+      "sceneBits": [
+        "PERSON: Lena Cross",
+        "HOOD: Piedmont Ave",
+        "LABEL: fame-rise | Lena Cross — the city is watching: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots"
+      ],
+      "cycle": 103
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Marin Tao — fame rise",
+      "named": "Marin Tao",
+      "hood": "Chinatown",
+      "names": [
+        "Marin Tao"
+      ],
+      "person": "Marin Tao",
+      "popids": [
+        "POP-00537"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 103 (CauseType fame-event); rendered: world_summary_c103.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Marin Tao — city watching; do not invent the private life",
+      "hookLine": "tier-decay | Marin Tao — the spotlight moved on: Tier 3 -> 4",
+      "sceneBits": [
+        "PERSON: Marin Tao",
+        "HOOD: Chinatown",
+        "LABEL: tier-decay | Marin Tao — the spotlight moved on: Tier 3 -> 4"
+      ],
+      "cycle": 103
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Lena Cross — fame rise",
+      "named": "Lena Cross",
+      "hood": "Piedmont Ave",
+      "names": [
+        "Lena Cross"
+      ],
+      "person": "Lena Cross",
+      "popids": [
+        "POP-00539"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 103 (CauseType fame-event); rendered: world_summary_c103.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Lena Cross — city watching; do not invent the private life",
+      "hookLine": "tier-decay | Lena Cross — the spotlight moved on: Tier 3 -> 4",
+      "sceneBits": [
+        "PERSON: Lena Cross",
+        "HOOD: Piedmont Ave",
+        "LABEL: tier-decay | Lena Cross — the spotlight moved on: Tier 3 -> 4"
+      ],
+      "cycle": 103
+    },
+    {
+      "className": "tv-slate",
+      "score": 16,
+      "label": "TV slate: Classic Christmas; Winter Wonderland; Bay Area Alert",
+      "named": "Classic Christmas",
+      "hood": null,
+      "names": [
+        "Classic Christmas",
+        "Winter Wonderland",
+        "Bay Area Alert",
+        "Warm House",
+        "Oakland Baseball Tonight",
+        "Isley Kelley (SS) — Player Profile"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Evening media TV",
+      "angle": "Evening TV slate — Classic Christmas, Winter Wonderland, Bay Area Alert; sports desk: Oakland Sports Tonight",
+      "hookLine": "On the box tonight: Classic Christmas, Winter Wonderland.",
+      "sceneBits": [
+        "TV: Classic Christmas; Winter Wonderland; Bay Area Alert; Warm House; Oakland Baseball Tonight; Isley Kelley (SS) — Player Profile",
+        "SPORTS BROADCAST: Oakland Sports Tonight"
+      ],
+      "cycle": 103
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "Jack London Holiday Market",
+      "named": "Jack London Holiday Market",
+      "hood": null,
+      "names": [
+        "Jack London Holiday Market"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "City event: Jack London Holiday Market — present-tense room, not calendar filler",
+      "hookLine": "Jack London Holiday Market is on the evening board.",
+      "sceneBits": [
+        "EVENT: Jack London Holiday Market"
+      ],
+      "cycle": 103
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "Fruitvale Emergency Town Briefing",
+      "named": "Fruitvale Emergency Town Briefing",
+      "hood": null,
+      "names": [
+        "Fruitvale Emergency Town Briefing"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "City event: Fruitvale Emergency Town Briefing — present-tense room, not calendar filler",
+      "hookLine": "Fruitvale Emergency Town Briefing is on the evening board.",
+      "sceneBits": [
+        "EVENT: Fruitvale Emergency Town Briefing"
+      ],
+      "cycle": 103
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "Lake Merritt Community Joy Parade",
+      "named": "Lake Merritt Community Joy Parade",
+      "hood": null,
+      "names": [
+        "Lake Merritt Community Joy Parade"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "City event: Lake Merritt Community Joy Parade — present-tense room, not calendar filler",
+      "hookLine": "Lake Merritt Community Joy Parade is on the evening board.",
+      "sceneBits": [
+        "EVENT: Lake Merritt Community Joy Parade"
+      ],
+      "cycle": 103
+    },
+    {
+      "className": "fast-food",
+      "score": 13,
+      "label": "SoupStop (Temescal)",
+      "named": "SoupStop",
+      "hood": "Temescal",
+      "names": [
+        "SoupStop"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Fast food",
+      "angle": "Counter rush at SoupStop — speed, labor, and who still shows up",
+      "hookLine": "SoupStop holds the late-service line in Temescal.",
+      "sceneBits": [
+        "VENUE: SoupStop",
+        "HOOD: Temescal"
+      ],
+      "cycle": 103
+    },
+    {
+      "className": "movie-slate",
+      "score": 13,
+      "label": "Movies: Miracle Season; Holiday Magic; New Beginnings; Ninth Inning",
+      "named": "Miracle Season",
+      "hood": null,
+      "names": [
+        "Miracle Season",
+        "Holiday Magic",
+        "New Beginnings",
+        "Ninth Inning"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Evening media movies",
+      "angle": "Evening movie slate — Miracle Season, Holiday Magic, New Beginnings, Ninth Inning",
+      "hookLine": "Screens tonight: Miracle Season, Holiday Magic, New Beginnings, Ninth Inning.",
+      "sceneBits": [
+        "MOVIES: Miracle Season; Holiday Magic; New Beginnings; Ninth Inning"
+      ],
+      "cycle": 103
+    },
+    {
+      "className": "fame-sighting",
+      "score": 12,
+      "label": "Claire Ashford spotted (Riley famous list)",
+      "named": "Claire Ashford",
+      "hood": null,
+      "names": [
+        "Claire Ashford"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Famous people spotted",
+      "angle": "Claire Ashford is on the evening famous list — sighting without inventing a stop",
+      "hookLine": "Claire Ashford is being seen around town.",
+      "sceneBits": [
+        "NAME: Claire Ashford"
+      ],
+      "cycle": 103
+    }
+  ],
+  "recommend": {
+    "bag": "lifestyle",
+    "slug": "sharon-okafor",
+    "name": "Sharon Okafor",
+    "popid": "POP-00159",
+    "bagDoc": "docs/media/SHARON_LIFESTYLE_BAG.md",
+    "reason": "top pulse quiet-nightlife → lifestyle",
+    "pulseClass": "quiet-nightlife",
+    "pulseLabel": "Nightline Station (West Oakland) · quiet night"
+  },
+  "perSeat": {
+    "mason-ortega": {
+      "pulseClass": "named-restaurant",
+      "label": "Piedmont Heights (Piedmont Ave)",
+      "score": 34,
+      "bag": "kitchen"
+    },
+    "kai-marston": {
+      "pulseClass": "quiet-nightlife",
+      "label": "Nightline Station (West Oakland) · quiet night",
+      "score": 32,
+      "bag": "arts"
+    },
+    "sharon-okafor": {
+      "pulseClass": "quiet-nightlife",
+      "label": "Nightline Station (West Oakland) · quiet night",
+      "score": 32,
+      "bag": "lifestyle"
+    },
+    "maria-keen": {
+      "pulseClass": "quiet-nightlife",
+      "label": "Nightline Station (West Oakland) · quiet night",
+      "score": 32,
+      "bag": "ground"
+    },
+    "elliot-graye": {
+      "pulseClass": "fame-sighting",
+      "label": "Claire Ashford at Beth Jacob Congregation (Piedmont Ave)",
+      "score": 43,
+      "bag": "faith"
+    }
+  },
+  "approach": "Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw engine decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth.",
+  "story": {
+    "angle": "Quiet nightlife at Nightline Station — low volume, restricted movement, the room still breathing",
+    "label": "Nightline Station (West Oakland) · quiet night",
+    "hookLine": "Nightline Station is open but the night is quiet (volume 3, vibe quiet).",
+    "hood": "West Oakland",
+    "pulseClass": "quiet-nightlife",
+    "citizens": [],
+    "popids": [],
+    "named": "Nightline Station",
+    "venue": "Nightline Station",
+    "ref": "world_summary ## Evening Texture · Nightlife",
+    "cycle": 103
+  },
+  "prewrite": {
+    "pulseClass": "quiet-nightlife",
+    "angle": "Quiet nightlife at Nightline Station — low volume, restricted movement, the room still breathing",
+    "hookLine": "Nightline Station is open but the night is quiet (volume 3, vibe quiet).",
+    "anchorFacts": [
+      "NAMED: Nightline Station",
+      "HOOD: West Oakland",
+      "VENUE: Nightline Station",
+      "HOOD: West Oakland",
+      "VOLUME: 3",
+      "VIBE: quiet",
+      "MOVEMENT: restricted",
+      "WEATHER IMPACT: 1.05"
+    ],
+    "bagRecommend": "lifestyle",
+    "bagSlug": "sharon-okafor"
+  },
+  "scene": {
+    "venues": [
+      {
+        "name": "Piedmont Heights",
+        "hood": "Piedmont Ave"
+      },
+      {
+        "name": "Festive Feast",
+        "hood": "Downtown"
+      },
+      {
+        "name": "Rockridge Cellar",
+        "hood": "Rockridge"
+      },
+      {
+        "name": "SoupStop",
+        "hood": "Temescal"
+      },
+      {
+        "name": "Nightline Station",
+        "hood": "West Oakland"
+      }
+    ],
+    "nightlifeMeta": {
+      "volume": 3,
+      "vibe": "quiet",
+      "movement": "restricted",
+      "weatherImpact": 1.05
+    },
+    "cityEvents": [
+      "Jack London Holiday Market",
+      "Fruitvale Emergency Town Briefing",
+      "Lake Merritt Community Joy Parade",
+      "Lake Merritt Festival of Lights"
+    ],
+    "tv": [
+      "Classic Christmas",
+      "Winter Wonderland",
+      "Bay Area Alert",
+      "Warm House",
+      "Oakland Baseball Tonight",
+      "Isley Kelley (SS) — Player Profile"
+    ],
+    "movies": [
+      "Miracle Season",
+      "Holiday Magic",
+      "New Beginnings",
+      "Ninth Inning"
+    ],
+    "colorRoom": "Named places only from Evening Texture / desk_signal. Nightlife meta: volume 3, vibe quiet, movement restricted.  Sensory room (weather, light, sound) is free; careers and employees are not."
+  },
+  "pointers": [
+    "output/world_summary_c103.md ## Evening Texture",
+    "output/desk_signal_c103.json lanes.culture",
+    "docs/media/SHARON_LIFESTYLE_BAG.md",
+    "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 1"
+  ]
+}

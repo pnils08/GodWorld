@@ -1,0 +1,325 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00636",
+    "name": "Luis Navarro",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write one Article and machine-parseable INTAKE from the supplied evidence",
+    "assignment": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning — remedy path + responsible office",
+    "approach": "Investigation approach: distinguish what the supplied record establishes from what it does not. Follow the unresolved gap fairly; no invented response, silence, or accusation.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "civic-investigation",
+      "method": "KNOWN_UNKNOWN",
+      "missing": [
+        "documented response or documented non-response",
+        "request timestamp and elapsed silence duration",
+        "responsible person, office, or duty unless named by the source"
+      ],
+      "silenceClock": {
+        "state": "UNESTABLISHED",
+        "value": null,
+        "src": null
+      },
+      "forbidden": [
+        "Do not add officials, votes, budgets, outcomes, measurements, quotes, responses, or affected people absent from the supplied entries."
+      ]
+    }
+  },
+  "signal": {
+    "kind": "anomaly",
+    "hood": "Fruitvale",
+    "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+    "plan": {
+      "focus": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning",
+      "closeQuestion": "What specific obstacle is preventing the transition out of the construction-planning phase?"
+    }
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00231",
+        "name": "Calvin Turner (POP-00231)",
+        "profile": "Calvin Turner (POP-00231)",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00744",
+        "name": "Tomas Renteria (POP-00744)",
+        "profile": "Tomas Renteria (POP-00744)",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00231-42c685d910",
+        "pop": "POP-00231",
+        "name": "Calvin Turner",
+        "quote": "What the record shows does not line up with what I expected. Who is responsible for answering this? I am going to keep watching this.",
+        "factIds": [
+          "F-11c83bcb168d",
+          "F-c4b3917a7eab"
+        ],
+        "src": "packet.W2[POP-00231]"
+      },
+      {
+        "id": "Q-POP-00744-00792a12a5",
+        "pop": "POP-00744",
+        "name": "Tomas Renteria",
+        "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
+        "factIds": [
+          "F-11c83bcb168d",
+          "F-c4b3917a7eab"
+        ],
+        "src": "packet.W2[POP-00744]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Calvin Turner",
+        "text": "Feels like the usual promises without follow-through. Who's actually steering this ship?",
+        "usable": false
+      },
+      {
+        "from": "Tomas Renteria",
+        "text": "Feels like the same conversations keep happening without any shovels hitting dirt. Like we're stuck in a loop.",
+        "usable": false
+      },
+      {
+        "from": "Luis Navarro",
+        "text": "Potential internal disagreements or resource allocation issues may be contributing to the delay",
+        "usable": false
+      },
+      {
+        "from": "Luis Navarro",
+        "text": "Community or stakeholder input might be pending, causing the hold-up",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C103",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-4ac610ea40fe"
+    },
+    {
+      "t": "FACT",
+      "text": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+      "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+      "id": "F-11c83bcb168d"
+    },
+    {
+      "t": "FACT",
+      "text": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+      "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+      "id": "F-c4b3917a7eab"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. For this investigation, do not convert a source intention to keep watching into past tracking; do not invent conversations, access, requests, responses, files, owners, duties, offices, expectations, or collective conclusions. Attribute each approved quote exactly and separately. Missing fields stay unknown, not implied. Use the exact epistemic form \"the Packet does not establish X\" for missing evidence. Never rewrite missing evidence as \"X did not happen,\" \"no one did X,\" \"I looked/asked/requested,\" or \"the absence proves X.\" First-person reporting acts require an approved fact that names that act."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "luis-investigation-record-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Separate what the Packet establishes from what remains open, pursue the accountable record fairly, and make a documented contradiction or documented silence visible without inventing either.",
+    "articleContract": {
+      "voice": "short, evidence-first investigation in first or third person",
+      "targetWords": "450-750",
+      "opening": "the strongest Packet-backed fact followed by the unresolved question",
+      "closing": "the next record, responsible office, or answer still needed"
+    },
+    "authorizedTexture": [
+      "the reporter's own act of reading, comparing, requesting, or following a record only when that act is supplied by the Packet",
+      "a concise known-versus-unknown structure over Packet-backed facts and declared missing fields",
+      "fair pressure framed as a question, interpretation, or explicit request for a record",
+      "short transitions between supplied facts that add no event, response, duration, source, or accusation"
+    ],
+    "textureConditions": [
+      "every named person, office, institution, Project, Initiative, business, organization, quote, response, request, and document must come from the Packet",
+      "a silence clock requires a Packet-backed request or response event and a supplied duration or Cycle span; otherwise its state is unestablished",
+      "decline-to-comment, no-response, refusal, contradiction, and responsible-office claims must each have a supplied source",
+      "an open question must remain a question and must not imply criminality, misconduct, duty, motive, or official knowledge absent from the Packet"
+    ],
+    "canonBlockers": [
+      "an invented records request, interview attempt, response, refusal, decline-to-comment, document, source, or silence duration",
+      "an unsupported contradiction, official duty, responsible office, act, inaction, promise, decision, motive, accusation, or finding",
+      "a named person, office, institution, Project, Initiative, business, or organization not found in the supplied record",
+      "a number, date, duration, budget, metric, count, vote, or timeline that contradicts or lacks the supplied record",
+      "Jax-style theatrical heat that turns an unestablished lead into a settled factual claim"
+    ]
+  },
+  "manifest": {
+    "id": "AM-909327d84e31",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-4ac610ea40fe",
+        "t": "FACT",
+        "text": "Current cycle: C103",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-11c83bcb168d",
+        "t": "FACT",
+        "text": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+        "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+      },
+      {
+        "id": "F-c4b3917a7eab",
+        "t": "FACT",
+        "text": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+        "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00231-42c685d910",
+        "speakerId": "POP-00231",
+        "speakerName": "Calvin Turner",
+        "text": "What the record shows does not line up with what I expected. Who is responsible for answering this? I am going to keep watching this.",
+        "factIds": [
+          "F-11c83bcb168d",
+          "F-c4b3917a7eab"
+        ],
+        "src": "packet.W2[POP-00231]"
+      },
+      {
+        "id": "Q-POP-00744-00792a12a5",
+        "speakerId": "POP-00744",
+        "speakerName": "Tomas Renteria",
+        "text": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
+        "factIds": [
+          "F-11c83bcb168d",
+          "F-c4b3917a7eab"
+        ],
+        "src": "packet.W2[POP-00744]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00231",
+        "name": "Calvin Turner (POP-00231)",
+        "profile": "Calvin Turner (POP-00231)",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00744",
+        "name": "Tomas Renteria (POP-00744)",
+        "profile": "Tomas Renteria (POP-00744)",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      },
+      {
+        "id": "P_KNOWN_UNKNOWN",
+        "rule": "Contrast approved facts with creativeBrief.missing only; do not narrate a missing item as an event that occurred."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Calvin Turner",
+        "text": "Feels like the usual promises without follow-through. Who's actually steering this ship?",
+        "publishable": false
+      },
+      {
+        "from": "Tomas Renteria",
+        "text": "Feels like the same conversations keep happening without any shovels hitting dirt. Like we're stuck in a loop.",
+        "publishable": false
+      },
+      {
+        "from": "Luis Navarro",
+        "text": "Potential internal disagreements or resource allocation issues may be contributing to the delay",
+        "publishable": false
+      },
+      {
+        "from": "Luis Navarro",
+        "text": "Community or stakeholder input might be pending, causing the hold-up",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "the reporter's own act of reading, comparing, requesting, or following a record only when that act is supplied by the Packet",
+      "a concise known-versus-unknown structure over Packet-backed facts and declared missing fields",
+      "fair pressure framed as a question, interpretation, or explicit request for a record",
+      "short transitions between supplied facts that add no event, response, duration, source, or accusation"
+    ],
+    "textureConditions": [
+      "every named person, office, institution, Project, Initiative, business, organization, quote, response, request, and document must come from the Packet",
+      "a silence clock requires a Packet-backed request or response event and a supplied duration or Cycle span; otherwise its state is unestablished",
+      "decline-to-comment, no-response, refusal, contradiction, and responsible-office claims must each have a supplied source",
+      "an open question must remain a question and must not imply criminality, misconduct, duty, motive, or official knowledge absent from the Packet"
+    ],
+    "forbiddenClaimClasses": [
+      "an invented records request, interview attempt, response, refusal, decline-to-comment, document, source, or silence duration",
+      "an unsupported contradiction, official duty, responsible office, act, inaction, promise, decision, motive, accusation, or finding",
+      "a named person, office, institution, Project, Initiative, business, or organization not found in the supplied record",
+      "a number, date, duration, budget, metric, count, vote, or timeline that contradicts or lacks the supplied record",
+      "Jax-style theatrical heat that turns an unestablished lead into a settled factual claim"
+    ]
+  }
+}

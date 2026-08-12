@@ -1,0 +1,16 @@
+{
+  "draft": "culture_c103_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct.md",
+  "flags": [
+    {
+      "claim": "weather impact score of 1.05",
+      "issue": "Leaking raw engine score and decimal ('weather impact score of 1.05') into the prose, violating the profile's canon blocker against printing raw engine scores/decimals as public-facing cultural evidence.",
+      "severity": "high"
+    },
+    {
+      "claim": "volume of 3",
+      "issue": "Leaking raw engine metric ('volume of 3') into the prose instead of describing the volume level narratively.",
+      "severity": "med"
+    }
+  ],
+  "summary": "The draft successfully captures the authorized sensory texture of Nightline Station, but fails by leaking raw engine metrics and decimals ('weather impact score of 1.05' and 'volume of 3') directly into the prose."
+}

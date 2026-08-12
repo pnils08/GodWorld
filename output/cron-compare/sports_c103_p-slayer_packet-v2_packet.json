@@ -1,0 +1,32 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "103",
+  "persona": "p-slayer",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "P Slayer",
+    "popid": "POP-00008"
+  },
+  "assignment": {
+    "story": {
+      "angle": "One line anchors the board read — 2-3 — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar throws a No No in his MLB debut",
+      "label": "A's · player-feature — Pablo Almanzar throws a No No in his MLB debut",
+      "hookLine": "Pablo Almanzar throws a No No in his MLB debut",
+      "hood": "Downtown",
+      "pulseClass": "line-card",
+      "team": "A's",
+      "eventKind": "player-feature",
+      "citizens": [],
+      "popids": [],
+      "ref": "world_summary_c103.md ## Sports",
+      "cycle": 103
+    }
+  },
+  "angle": "output/cron-compare/sports_c103_p-slayer_packet-v2_angle.json",
+  "quotesRequested": 0,
+  "quotesLanded": 0,
+  "quotes": [],
+  "interviews": [],
+  "ranAt": "2026-08-11T18:16:54.803Z"
+}

@@ -1,0 +1,258 @@
+{
+  "cycle": 103,
+  "scannedAt": "2026-08-11T11:15:07.613Z",
+  "signalPath": "/root/GodWorld/output/desk_signal_c103.json",
+  "signalMissing": false,
+  "illnessRate": 10.1,
+  "forceThreshold": 35,
+  "shouldForce": true,
+  "maxScore": 50,
+  "top": {
+    "className": "implementation-gap",
+    "score": 50,
+    "desk": "civic",
+    "kind": "anomaly",
+    "label": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+    "ref": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+    "hood": "Fruitvale",
+    "popids": [
+      "POP-00231",
+      "POP-00598",
+      "POP-00744"
+    ],
+    "handle": {
+      "angle": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning — remedy path + responsible office",
+      "hookLine": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+      "citizens": [
+        "Calvin Turner (POP-00231)",
+        "Vladimir Gonzalez (POP-00598)",
+        "Tomas Renteria (POP-00744)"
+      ]
+    },
+    "story": {
+      "ref": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+      "label": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+      "kind": "anomaly",
+      "angle": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning — remedy path + responsible office",
+      "hookLine": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+      "citizens": [
+        "Calvin Turner (POP-00231)",
+        "Vladimir Gonzalez (POP-00598)",
+        "Tomas Renteria (POP-00744)"
+      ],
+      "popids": [
+        "POP-00231",
+        "POP-00598",
+        "POP-00744"
+      ],
+      "hood": "Fruitvale",
+      "stinkClass": "implementation-gap"
+    }
+  },
+  "candidates": [
+    {
+      "className": "implementation-gap",
+      "score": 50,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+      "ref": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+      "hood": "Fruitvale",
+      "popids": [
+        "POP-00231",
+        "POP-00598",
+        "POP-00744"
+      ],
+      "handle": {
+        "angle": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning — remedy path + responsible office",
+        "hookLine": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+        "citizens": [
+          "Calvin Turner (POP-00231)",
+          "Vladimir Gonzalez (POP-00598)",
+          "Tomas Renteria (POP-00744)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+        "label": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+        "kind": "anomaly",
+        "angle": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning — remedy path + responsible office",
+        "hookLine": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+        "citizens": [
+          "Calvin Turner (POP-00231)",
+          "Vladimir Gonzalez (POP-00598)",
+          "Tomas Renteria (POP-00744)"
+        ],
+        "popids": [
+          "POP-00231",
+          "POP-00598",
+          "POP-00744"
+        ],
+        "hood": "Fruitvale",
+        "stinkClass": "implementation-gap"
+      }
+    },
+    {
+      "className": "crisis-unattended",
+      "score": 40,
+      "desk": "civic",
+      "kind": "health-crisis",
+      "label": "crisis-unattended (high) | City illness rate 10.1% with no desk forced onto the health signal",
+      "ref": "output/world_summary_c103.md#illness-rate",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": "City illness rate 10.1% — who owns the health signal and why is it not the lead?",
+        "hookLine": "Illness is 10.1 percent and the page is still process timelines.",
+        "citizens": []
+      },
+      "story": {
+        "ref": "output/world_summary_c103.md#illness-rate",
+        "label": "crisis-unattended (high) | City illness rate 10.1% with no desk forced onto the health signal",
+        "kind": "health-crisis",
+        "angle": "City illness rate 10.1% — who owns the health signal and why is it not the lead?",
+        "hookLine": "Illness is 10.1 percent and the page is still process timelines.",
+        "citizens": null,
+        "popids": [],
+        "hood": null,
+        "stinkClass": "crisis-unattended",
+        "illnessRate": 10.1
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 38,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "incoherence (high) | Initiative \"Oakland Alternative Response Initiative\" (operational, safety) but 3 affected neighborhoods show contradicting CrimeIndex",
+      "ref": "output/engine_audit_c103.json patterns[4]; evidence: Initiative_Tracker row(s) 3",
+      "hood": "West Oakland, Fruitvale, East Oakland",
+      "popids": [
+        "POP-00758",
+        "POP-00771",
+        "POP-00773"
+      ],
+      "handle": {
+        "angle": "Oakland Alternative Response Initiative stalled in operational — remedy path + responsible office",
+        "hookLine": "The safety initiative carrying West Oakland has not advanced in several cycles.",
+        "citizens": [
+          "Robert Jaston (POP-00758)",
+          "Sage Vienta (POP-00771)",
+          "Jada Rayes (POP-00773)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c103.json patterns[4]; evidence: Initiative_Tracker row(s) 3",
+        "label": "incoherence (high) | Initiative \"Oakland Alternative Response Initiative\" (operational, safety) but 3 affected neighborhoods show contradicting CrimeIndex",
+        "kind": "anomaly",
+        "angle": "Oakland Alternative Response Initiative stalled in operational — remedy path + responsible office",
+        "hookLine": "The safety initiative carrying West Oakland has not advanced in several cycles.",
+        "citizens": [
+          "Robert Jaston (POP-00758)",
+          "Sage Vienta (POP-00771)",
+          "Jada Rayes (POP-00773)"
+        ],
+        "popids": [
+          "POP-00758",
+          "POP-00771",
+          "POP-00773"
+        ],
+        "hood": "West Oakland, Fruitvale, East Oakland",
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "crisis-unattended",
+      "score": 38,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "repeating-event (medium) | Issue \"strain\" recurred 3 cycles",
+      "ref": "output/engine_audit_c103.json patterns[1]; evidence: Riley_Digest row(s) ",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle."
+      },
+      "story": {
+        "ref": "output/engine_audit_c103.json patterns[1]; evidence: Riley_Digest row(s) ",
+        "label": "repeating-event (medium) | Issue \"strain\" recurred 3 cycles",
+        "kind": "anomaly",
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle.",
+        "citizens": null,
+        "popids": [],
+        "hood": null,
+        "stinkClass": "crisis-unattended"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 28,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+      "ref": "output/engine_audit_c103.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s) ",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle."
+      },
+      "story": {
+        "ref": "output/engine_audit_c103.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s) ",
+        "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+        "kind": "anomaly",
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle.",
+        "citizens": null,
+        "popids": [],
+        "hood": null,
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 28,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "production-imbalance (medium) | 22 neighborhoods report migration flow with zero economic events this cycle",
+      "ref": "output/engine_audit_c103.json patterns[3]; evidence: Neighborhood_Map row(s) ",
+      "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District, East Oakland",
+      "popids": [
+        "POP-00010",
+        "POP-00039",
+        "POP-00635"
+      ],
+      "handle": {
+        "angle": "West Oakland Stabilization Fund stalled in disbursement-active — remedy path + responsible office",
+        "hookLine": "The economic initiative carrying Downtown has not advanced in several cycles.",
+        "citizens": [
+          "Dana Reeve (POP-00010)",
+          "Mei Chen (POP-00635)",
+          "Simone Ellis (POP-00039)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c103.json patterns[3]; evidence: Neighborhood_Map row(s) ",
+        "label": "production-imbalance (medium) | 22 neighborhoods report migration flow with zero economic events this cycle",
+        "kind": "anomaly",
+        "angle": "West Oakland Stabilization Fund stalled in disbursement-active — remedy path + responsible office",
+        "hookLine": "The economic initiative carrying Downtown has not advanced in several cycles.",
+        "citizens": [
+          "Dana Reeve (POP-00010)",
+          "Mei Chen (POP-00635)",
+          "Simone Ellis (POP-00039)"
+        ],
+        "popids": [
+          "POP-00010",
+          "POP-00039",
+          "POP-00635"
+        ],
+        "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District, East Oakland",
+        "stinkClass": "anomaly"
+      }
+    }
+  ],
+  "candidateCount": 6
+}

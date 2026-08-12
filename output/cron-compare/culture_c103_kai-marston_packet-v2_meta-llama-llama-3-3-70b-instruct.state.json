@@ -1,0 +1,327 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00158",
+    "name": "Kai Marston",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write one Article and machine-parseable INTAKE from the supplied evidence",
+    "assignment": "Adams Point | 1 world event(s) this cycle",
+    "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "evening-life",
+      "bag": "arts",
+      "pulseClass": "quiet-nightlife",
+      "pulseLabel": "Nightline Station (West Oakland) · quiet night",
+      "namedEvents": [
+        "Jack London Holiday Market",
+        "Fruitvale Emergency Town Briefing",
+        "Lake Merritt Community Joy Parade",
+        "Lake Merritt Festival of Lights",
+        "Classic Christmas",
+        "Winter Wonderland",
+        "Bay Area Alert",
+        "Warm House"
+      ],
+      "namedPlaces": [
+        "Piedmont Heights",
+        "Festive Feast",
+        "Rockridge Cellar",
+        "Nightline Station"
+      ],
+      "famousSightings": [
+        "Claire Ashford",
+        "Mark Aitken",
+        "Tara Ellison",
+        "Vinnie Keane — fame-rise | Vinnie Keane — the city is watching: disagreed with a Tribune column out loud to an empty kitchen",
+        "Marin Tao — fame-rise | Marin Tao — the city is watching: stepped over a puddle reflecting the Tribune Tower neon and thought about taking a picture",
+        "Lena Cross — fame-rise | Lena Cross — the city is watching: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "Marin Tao — tier-decay | Marin Tao — the spotlight moved on: Tier 3 -> 4",
+        "Lena Cross — tier-decay | Lena Cross — the spotlight moved on: Tier 3 -> 4"
+      ],
+      "streamingTrend": "holiday classics marathon",
+      "sceneRule": "Named places only from Evening Texture / desk_signal. Nightlife meta: volume 3, vibe quiet, movement restricted. Sensory room (weather, light, sound) is free; careers and employees are not.",
+      "sourcePointers": [
+        "docs/media/KAI_ARTS_BAG.md",
+        "output/world_summary_c103.md ## Evening Texture",
+        "output/desk_signal_c103.json lanes.culture",
+        "docs/media/SHARON_LIFESTYLE_BAG.md",
+        "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 1"
+      ]
+    }
+  },
+  "signal": {
+    "kind": "hood",
+    "hood": "Adams Point",
+    "src": "output/neighborhood_texture_c103.md \"### Adams Point\"; events: world_summary_c103.md \"## World Events\"",
+    "plan": {
+      "focus": "Nightline Station",
+      "closeQuestion": "What's behind the quiet night at Nightline Station?"
+    }
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Kai Marston",
+        "text": "restricted movement and quiet vibe",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C103",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-4ac610ea40fe"
+    },
+    {
+      "t": "FACT",
+      "text": "Nightline Station (West Oakland) · quiet night",
+      "src": "world_summary ## Evening Texture · Nightlife",
+      "id": "F-e9aa40059164"
+    },
+    {
+      "t": "FACT",
+      "text": "Nightline Station is open but the night is quiet (volume 3, vibe quiet).",
+      "src": "world_summary ## Evening Texture · Nightlife",
+      "id": "F-eb06f26d4668"
+    },
+    {
+      "t": "FACT",
+      "text": "NAMED: Nightline Station",
+      "src": "world_summary ## Evening Texture · Nightlife",
+      "id": "F-853409f6f59f"
+    },
+    {
+      "t": "FACT",
+      "text": "HOOD: West Oakland",
+      "src": "world_summary ## Evening Texture · Nightlife",
+      "id": "F-36a5efc57a78"
+    },
+    {
+      "t": "FACT",
+      "text": "VENUE: Nightline Station",
+      "src": "world_summary ## Evening Texture · Nightlife",
+      "id": "F-690388ff68fb"
+    },
+    {
+      "t": "FACT",
+      "text": "VOLUME: 3",
+      "src": "world_summary ## Evening Texture · Nightlife",
+      "id": "F-7f9099fbcc1a"
+    },
+    {
+      "t": "FACT",
+      "text": "VIBE: quiet",
+      "src": "world_summary ## Evening Texture · Nightlife",
+      "id": "F-2cc50cb7f1d9"
+    },
+    {
+      "t": "FACT",
+      "text": "MOVEMENT: restricted",
+      "src": "world_summary ## Evening Texture · Nightlife",
+      "id": "F-10f02310d906"
+    },
+    {
+      "t": "FACT",
+      "text": "WEATHER IMPACT: 1.05",
+      "src": "world_summary ## Evening Texture · Nightlife",
+      "id": "F-782d4a339aa5"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "kai-arts-entertainment-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn a sourced evening pulse into present-tense arts and entertainment reporting where art, media, and a named place become a neighborhood act. A vivid room grounded in the Packet is success; generic culture roundup and invented nightlife are not.",
+    "articleContract": {
+      "voice": "present-tense arts and entertainment scene with grounded neighborhood analysis",
+      "targetWords": "500-800",
+      "opening": "a Packet-backed named event, media slate, sighting, venue, or neighborhood arts consequence",
+      "closing": "an image or open question about what the room, screen, or block is becoming"
+    },
+    "authorizedTexture": [
+      "unnamed sensory room color—light, sound, weather, crowd movement, or the reporter's presence—that adds no new named fact",
+      "present-tense interpretation of how a Packet-backed arts, TV, movie, streaming, event, or sighting pulse lands on a neighborhood",
+      "metaphor, contrast, and scene transition grounded in the supplied pulse",
+      "a skeptical or curious question about what the supplied cultural signal means, framed as analysis rather than settled fact"
+    ],
+    "textureConditions": [
+      "every named person, artist, show, movie, event, venue, business, institution, neighborhood, and organization must come from the Packet",
+      "TV, movie, streaming, fame-sighting, event, and venue details must remain tied to the supplied evening source or pulse",
+      "unnamed sensory color may not create a new event, attendance count, quote, review, business action, or public reaction",
+      "the reporter may not claim an interview, attendance, observation, trend, or social-media response that the Packet does not supply",
+      "do not turn a shared evening substrate into a multi-voice culture average; one pulse, one room, one truth"
+    ],
+    "canonBlockers": [
+      "a named artist, celebrity, show, movie, event, venue, business, institution, neighborhood, or organization not found in the supplied record",
+      "an invented opening, screening, performance, appearance, sighting, crowd, attendance figure, review, or social-media reaction",
+      "an unsupported quote, interview, direct observation, career claim, release date, rating, or cultural trend",
+      "raw engine scores, labels, or decimals printed as public-facing cultural evidence",
+      "a causal claim about what a neighborhood or audience feels presented as measured fact",
+      "a generic culture-desk roundup that abandons the assigned evening pulse"
+    ]
+  },
+  "manifest": {
+    "id": "AM-e7ee6fe95693",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-4ac610ea40fe",
+        "t": "FACT",
+        "text": "Current cycle: C103",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-e9aa40059164",
+        "t": "FACT",
+        "text": "Nightline Station (West Oakland) · quiet night",
+        "src": "world_summary ## Evening Texture · Nightlife"
+      },
+      {
+        "id": "F-eb06f26d4668",
+        "t": "FACT",
+        "text": "Nightline Station is open but the night is quiet (volume 3, vibe quiet).",
+        "src": "world_summary ## Evening Texture · Nightlife"
+      },
+      {
+        "id": "F-853409f6f59f",
+        "t": "FACT",
+        "text": "NAMED: Nightline Station",
+        "src": "world_summary ## Evening Texture · Nightlife"
+      },
+      {
+        "id": "F-36a5efc57a78",
+        "t": "FACT",
+        "text": "HOOD: West Oakland",
+        "src": "world_summary ## Evening Texture · Nightlife"
+      },
+      {
+        "id": "F-690388ff68fb",
+        "t": "FACT",
+        "text": "VENUE: Nightline Station",
+        "src": "world_summary ## Evening Texture · Nightlife"
+      },
+      {
+        "id": "F-7f9099fbcc1a",
+        "t": "FACT",
+        "text": "VOLUME: 3",
+        "src": "world_summary ## Evening Texture · Nightlife"
+      },
+      {
+        "id": "F-2cc50cb7f1d9",
+        "t": "FACT",
+        "text": "VIBE: quiet",
+        "src": "world_summary ## Evening Texture · Nightlife"
+      },
+      {
+        "id": "F-10f02310d906",
+        "t": "FACT",
+        "text": "MOVEMENT: restricted",
+        "src": "world_summary ## Evening Texture · Nightlife"
+      },
+      {
+        "id": "F-782d4a339aa5",
+        "t": "FACT",
+        "text": "WEATHER IMPACT: 1.05",
+        "src": "world_summary ## Evening Texture · Nightlife"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Kai Marston",
+        "text": "restricted movement and quiet vibe",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "unnamed sensory room color—light, sound, weather, crowd movement, or the reporter's presence—that adds no new named fact",
+      "present-tense interpretation of how a Packet-backed arts, TV, movie, streaming, event, or sighting pulse lands on a neighborhood",
+      "metaphor, contrast, and scene transition grounded in the supplied pulse",
+      "a skeptical or curious question about what the supplied cultural signal means, framed as analysis rather than settled fact"
+    ],
+    "textureConditions": [
+      "every named person, artist, show, movie, event, venue, business, institution, neighborhood, and organization must come from the Packet",
+      "TV, movie, streaming, fame-sighting, event, and venue details must remain tied to the supplied evening source or pulse",
+      "unnamed sensory color may not create a new event, attendance count, quote, review, business action, or public reaction",
+      "the reporter may not claim an interview, attendance, observation, trend, or social-media response that the Packet does not supply",
+      "do not turn a shared evening substrate into a multi-voice culture average; one pulse, one room, one truth"
+    ],
+    "forbiddenClaimClasses": [
+      "a named artist, celebrity, show, movie, event, venue, business, institution, neighborhood, or organization not found in the supplied record",
+      "an invented opening, screening, performance, appearance, sighting, crowd, attendance figure, review, or social-media reaction",
+      "an unsupported quote, interview, direct observation, career claim, release date, rating, or cultural trend",
+      "raw engine scores, labels, or decimals printed as public-facing cultural evidence",
+      "a causal claim about what a neighborhood or audience feels presented as measured fact",
+      "a generic culture-desk roundup that abandons the assigned evening pulse"
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "desk": "culture",
+  "cycle": "103",
+  "model": "meta-llama/llama-3.3-70b-instruct",
+  "turns": 1,
+  "maxTurns": 15,
+  "usageInputTokens": 5294,
+  "usageOutputTokens": 340,
+  "savedFiles": [
+    "output/cron-compare/culture_c103_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct.md"
+  ],
+  "compareAgainst": "output/desk-output/culture_c103.md",
+  "durationMs": 5655,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-08-11T23:17:54.141Z"
+}

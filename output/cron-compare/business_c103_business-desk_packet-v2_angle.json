@@ -1,0 +1,444 @@
+{
+  "stage": "angle",
+  "desk": "business",
+  "cycle": "103",
+  "persona": "business-desk",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00153",
+      "name": "Jordan Velez",
+      "role": "desk reporter",
+      "desk": "business"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Storefronts quieter in Dimond — foot traffic down",
+      "approach": "Economic / storefront approach (business desk pack): open from a named hood trajectory or named business on this pack — rising retail, cooling storefronts, workforce/initiative footprint. Never invent Employee_Count, Key_Personnel, or storefronts not listed. Translate RetailVitality / magnitude into human language (busy counters, empty windows) — do not lead with raw engine decimals. One claim about how the block or the board is moving. Not civic process roundup. Not multi-voice business-desk average.",
+      "creativeBrief": {
+        "kind": "economic-storefront",
+        "pulseClass": "hood-cooling",
+        "economicFrame": "Storefronts quieter in Dimond — foot traffic down",
+        "hook": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
+        "namedBusinesses": [],
+        "forbidden": [
+          "Do not invent Employee_Count",
+          "Do not invent Key_Personnel",
+          "Do not invent storefronts not on ledger or evening texture",
+          "Do not lead with raw RetailVitality decimals — translate to scene"
+        ],
+        "sceneRule": "Storefront light, foot traffic, open/closed shutters. Named places only from ledger or evening texture. Headcount only when snapshot lists it. No invented owners or employee counts."
+      }
+    },
+    "signal": {
+      "kind": "story-signal",
+      "hood": "Dimond",
+      "score": null,
+      "src": "world_summary ## What Moved · trajectory",
+      "nearby": [
+        {
+          "text": "transit ailment — economic footprint, affected businesses, workforce impact in Fruitvale | Business conditions in Fruitvale track the transit picture.",
+          "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+        },
+        {
+          "text": "economic ailment — economic footprint, affected businesses, workforce impact in Downtown | Business conditions in Downtown track the economic picture.",
+          "src": "output/engine_audit_c103.json patterns[3]; evidence: Neighborhood_Map row(s)"
+        },
+        {
+          "text": "fold-applied/initiative-implementation | Initiative work landed in 5 neighborhood(s): Downtown, Jack London, West Oakland, Temescal, Fruitvale",
+          "src": "Ripple_Ledger cycle 103 (CauseType neighborhood-fold); rendered: world_summary_c103.md \"## What Moved\" > \"### neighborhood-fold\""
+        },
+        {
+          "text": "traffic/retail/nightlife/publicSpaces/communityEngagement/culturalActivity | Edition coverage lifted the city: traffic +0.03, retail +0.048, nightlife +0.06, publicSpaces -0.026, communityEngagement -0.03, culturalActivity +0",
+          "src": "Ripple_Ledger cycle 103 (CauseType edition-coverage); rendered: world_summary_c103.md \"## What Moved\" > \"### edition-coverage\""
+        },
+        {
+          "text": "sentiment | prior-cycle coverage ratings × sentimentWeight × 0.015, clamped ±0.20",
+          "src": "Ripple_Ledger cycle 103 (CauseType edition-coverage); rendered: world_summary_c103.md \"## What Moved\" > \"### edition-coverage\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": null,
+          "name": null,
+          "profile": "",
+          "why": "assignment"
+        },
+        {
+          "pop": null,
+          "name": null,
+          "profile": "",
+          "why": "assignment"
+        },
+        {
+          "pop": null,
+          "name": null,
+          "profile": "",
+          "why": "assignment"
+        },
+        {
+          "pop": null,
+          "name": null,
+          "profile": "",
+          "why": "assignment"
+        },
+        {
+          "pop": null,
+          "name": null,
+          "profile": "",
+          "why": "assignment"
+        },
+        {
+          "pop": null,
+          "name": null,
+          "profile": "",
+          "why": "assignment"
+        },
+        {
+          "pop": null,
+          "name": null,
+          "profile": "",
+          "why": "assignment"
+        },
+        {
+          "pop": null,
+          "name": null,
+          "profile": "",
+          "why": "assignment"
+        },
+        {
+          "pop": null,
+          "name": null,
+          "profile": "",
+          "why": "assignment"
+        },
+        {
+          "pop": null,
+          "name": null,
+          "profile": "",
+          "why": "assignment"
+        },
+        {
+          "pop": null,
+          "name": null,
+          "profile": "",
+          "why": "assignment"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C103",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-4ac610ea40fe"
+      },
+      {
+        "t": "FACT",
+        "text": "Dimond cooling",
+        "src": "world_summary ## What Moved · trajectory",
+        "id": "F-2c3c1b14061a"
+      },
+      {
+        "t": "FACT",
+        "text": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
+        "src": "world_summary ## What Moved · trajectory",
+        "id": "F-5967d0383c65"
+      },
+      {
+        "t": "FACT",
+        "text": "HOOD: Dimond",
+        "src": "world_summary ## What Moved · trajectory",
+        "id": "F-5f30e356b99b"
+      },
+      {
+        "t": "FACT",
+        "text": "TRAJECTORY: cooling",
+        "src": "world_summary ## What Moved · trajectory",
+        "id": "F-68dbfc1e6fba"
+      },
+      {
+        "t": "FACT",
+        "text": "RETAIL VITALITY (scene color): 8.24",
+        "src": "world_summary ## What Moved · trajectory",
+        "id": "F-c40d99359f50"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier."
+    }
+  },
+  "reporter": {
+    "name": "Jordan Velez",
+    "popid": "POP-00153"
+  },
+  "assignment": {
+    "story": {
+      "angle": "Storefronts quieter in Dimond — foot traffic down",
+      "label": "Dimond cooling",
+      "hookLine": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
+      "hood": "Dimond",
+      "pulseClass": "hood-cooling",
+      "namedBusinesses": [],
+      "citizens": [],
+      "popids": [],
+      "ref": "world_summary ## What Moved · trajectory",
+      "cycle": 103
+    },
+    "approach": "Economic / storefront approach (business desk pack): open from a named hood trajectory or named business on this pack — rising retail, cooling storefronts, workforce/initiative footprint. Never invent Employee_Count, Key_Personnel, or storefronts not listed. Translate RetailVitality / magnitude into human language (busy counters, empty windows) — do not lead with raw engine decimals. One claim about how the block or the board is moving. Not civic process roundup. Not multi-voice business-desk average."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "economicSlice": {
+    "pulse": {
+      "className": "hood-cooling",
+      "score": 24,
+      "label": "Dimond cooling",
+      "hood": "Dimond",
+      "namedBusinesses": [],
+      "retail": 8.24,
+      "retailDelta": null
+    },
+    "prewrite": {
+      "pulseClass": "hood-cooling",
+      "angle": "Storefronts quieter in Dimond — foot traffic down",
+      "hookLine": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
+      "namedBusinesses": [],
+      "anchorFacts": [
+        "HOOD: Dimond",
+        "TRAJECTORY: cooling",
+        "MAGNITUDE (translate, do not lead): 6",
+        "RETAIL VITALITY (scene color): 8.24",
+        "NAMED BUSINESSES: none on disk for this hood — do not invent"
+      ],
+      "forbidden": [
+        "Do not invent Employee_Count",
+        "Do not invent Key_Personnel",
+        "Do not invent storefronts not on ledger or evening texture",
+        "Do not lead with raw RetailVitality decimals — translate to scene"
+      ]
+    },
+    "texture": {
+      "rising": [
+        "Laurel"
+      ],
+      "cooling": [
+        "Dimond",
+        "San Antonio",
+        "East Oakland"
+      ],
+      "ledgerCount": 0,
+      "ledgerSource": null,
+      "venues": [
+        {
+          "name": "Piedmont Heights",
+          "hood": "Piedmont Ave",
+          "kind": "restaurant",
+          "source": "evening-texture"
+        },
+        {
+          "name": "Festive Feast",
+          "hood": "Downtown",
+          "kind": "restaurant",
+          "source": "evening-texture"
+        },
+        {
+          "name": "Rockridge Cellar",
+          "hood": "Rockridge",
+          "kind": "restaurant",
+          "source": "evening-texture"
+        },
+        {
+          "name": "SoupStop",
+          "hood": "Temescal",
+          "kind": "fast-food",
+          "source": "evening-texture"
+        },
+        {
+          "name": "Nightline Station",
+          "hood": "West Oakland",
+          "kind": "nightlife",
+          "source": "evening-texture"
+        }
+      ]
+    },
+    "scene": {
+      "colorRoom": "Storefront light, foot traffic, open/closed shutters. Named places only from ledger or evening texture. Headcount only when snapshot lists it. No invented owners or employee counts.",
+      "namedOnTop": []
+    },
+    "candidates": [
+      {
+        "className": "hood-cooling",
+        "score": 24,
+        "label": "Dimond cooling",
+        "hood": "Dimond",
+        "namedBusinesses": []
+      },
+      {
+        "className": "hood-cooling",
+        "score": 24,
+        "label": "San Antonio cooling",
+        "hood": "San Antonio",
+        "namedBusinesses": []
+      },
+      {
+        "className": "hood-cooling",
+        "score": 24,
+        "label": "East Oakland cooling",
+        "hood": "East Oakland",
+        "namedBusinesses": []
+      },
+      {
+        "className": "hood-rising",
+        "score": 24,
+        "label": "Laurel rising",
+        "hood": "Laurel",
+        "namedBusinesses": []
+      },
+      {
+        "className": "workforce-pressure",
+        "score": 19,
+        "label": "Fruitvale · transit ailment — economic footprint, affected businesses, workforce impact in F",
+        "hood": "Fruitvale",
+        "namedBusinesses": []
+      },
+      {
+        "className": "workforce-pressure",
+        "score": 19,
+        "label": "Downtown · economic ailment — economic footprint, affected businesses, workforce impact in ",
+        "hood": "Downtown",
+        "namedBusinesses": []
+      },
+      {
+        "className": "named-storefront",
+        "score": 14,
+        "label": "Piedmont Heights (Piedmont Ave)",
+        "hood": "Piedmont Ave",
+        "namedBusinesses": [
+          "Piedmont Heights"
+        ]
+      },
+      {
+        "className": "named-storefront",
+        "score": 14,
+        "label": "Festive Feast (Downtown)",
+        "hood": "Downtown",
+        "namedBusinesses": [
+          "Festive Feast"
+        ]
+      }
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Jordan Velez",
+    "popid": "POP-00153",
+    "text": "{\n  \"focus\": \"Dimond's cooling retail scene compared to the rest of the city\",\n  \"why\": \"Foot traffic is visibly down, storefronts feel quieter than usual\",\n  \"checks\": [\n    \"F-2c3c1b14061a\",\n    \"F-5967d0383c65\",\n    \"F-5f30e356b99b\"\n  ],\n  \"targets\": [],\n  \"interpretation\": \"This feels like more than just seasonal fluctuation—Dimond's usual bustle has dulled noticeably, especially against the city's overall retail uptick.\",\n  \"unverifiedLead\": [\n    \"Could this be early ripple effects from transit changes elsewhere in the city?\",\n    \"Is there a shift in where people are spending their disposable income?\"\n  ],\n  \"closeQuestion\": \"What's drawing people—or keeping them—away from Dimond's storefronts?\"\n}",
+    "plan": {
+      "focus": "Dimond's cooling retail scene compared to the rest of the city",
+      "why": "Foot traffic is visibly down, storefronts feel quieter than usual",
+      "checks": [
+        "F-2c3c1b14061a",
+        "F-5967d0383c65",
+        "F-5f30e356b99b"
+      ],
+      "targets": [],
+      "interpretation": "This feels like more than just seasonal fluctuation—Dimond's usual bustle has dulled noticeably, especially against the city's overall retail uptick.",
+      "unverifiedLead": [
+        "Could this be early ripple effects from transit changes elsewhere in the city?",
+        "Is there a shift in where people are spending their disposable income?"
+      ],
+      "closeQuestion": "What's drawing people—or keeping them—away from Dimond's storefronts?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "transit ailment — economic footprint, affected businesses, workforce impact in Fruitvale | Business conditions in Fruitvale track the transit picture.",
+      "kind": "anomaly",
+      "hood": "Fruitvale",
+      "ref": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+      "popids": [
+        "POP-00231",
+        "POP-00598",
+        "POP-00744"
+      ]
+    },
+    {
+      "label": "economic ailment — economic footprint, affected businesses, workforce impact in Downtown | Business conditions in Downtown track the economic picture.",
+      "kind": "anomaly",
+      "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District, East Oakland",
+      "ref": "output/engine_audit_c103.json patterns[3]; evidence: Neighborhood_Map row(s) ",
+      "popids": [
+        "POP-00010",
+        "POP-00039",
+        "POP-00635"
+      ]
+    },
+    {
+      "label": "fold-applied/initiative-implementation | Initiative work landed in 5 neighborhood(s): Downtown, Jack London, West Oakland, Temescal, Fruitvale",
+      "kind": "ripple",
+      "ref": "Ripple_Ledger cycle 103 (CauseType neighborhood-fold); rendered: world_summary_c103.md \"## What Moved\" > \"### neighborhood-fold\"",
+      "popids": []
+    },
+    {
+      "label": "traffic/retail/nightlife/publicSpaces/communityEngagement/culturalActivity | Edition coverage lifted the city: traffic +0.03, retail +0.048, nightlife +0.06, publicSpaces -0.026, communityEngagement -0.03, culturalActivity +0",
+      "kind": "ripple",
+      "ref": "Ripple_Ledger cycle 103 (CauseType edition-coverage); rendered: world_summary_c103.md \"## What Moved\" > \"### edition-coverage\"",
+      "popids": []
+    },
+    {
+      "label": "sentiment | prior-cycle coverage ratings × sentimentWeight × 0.015, clamped ±0.20",
+      "kind": "ripple",
+      "ref": "Ripple_Ledger cycle 103 (CauseType edition-coverage); rendered: world_summary_c103.md \"## What Moved\" > \"### edition-coverage\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 18,
+  "ranAt": "2026-08-11T11:16:09.325Z"
+}

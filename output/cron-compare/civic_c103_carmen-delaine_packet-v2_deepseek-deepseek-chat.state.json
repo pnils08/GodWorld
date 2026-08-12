@@ -1,0 +1,366 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00011",
+    "name": "Carmen Delaine",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write one Article and machine-parseable INTAKE from the supplied evidence",
+    "assignment": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+    "approach": "Civic-ledger approach: follow the supplied initiative, vote, or decision through money, clocks, and responsible offices. One record-backed civic claim; not a press release or multi-voice roundup.",
+    "voice": null
+  },
+  "signal": {
+    "kind": "initiative",
+    "hood": "West Oakland",
+    "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+    "plan": {
+      "focus": "West Oakland Stabilization Fund disbursement progress",
+      "closeQuestion": "What’s the gap between the ledger’s ‘disbursement-active’ status and tangible changes in West Oakland’s economic stability?"
+    }
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00231",
+        "name": "Calvin Turner",
+        "profile": "Calvin Turner",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      },
+      {
+        "pop": "POP-00598",
+        "name": "Vladimir Gonzalez",
+        "profile": "Vladimir Gonzalez",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      },
+      {
+        "pop": "POP-00744",
+        "name": "Tomas Renteria",
+        "profile": "Tomas Renteria",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      },
+      {
+        "pop": "POP-00010",
+        "name": "Dana Reeve",
+        "profile": "Dana Reeve",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00231-30f959e497",
+        "pop": "POP-00231",
+        "name": "Calvin Turner",
+        "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? The Tribune should keep pressing for an answer.",
+        "factIds": [
+          "F-68d6bc93c2e8",
+          "F-97e9f8f2c6df"
+        ],
+        "src": "packet.W2[POP-00231]"
+      },
+      {
+        "id": "Q-POP-00598-30f959e497",
+        "pop": "POP-00598",
+        "name": "Vladimir Gonzalez",
+        "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? The Tribune should keep pressing for an answer.",
+        "factIds": [
+          "F-68d6bc93c2e8",
+          "F-97e9f8f2c6df"
+        ],
+        "src": "packet.W2[POP-00598]"
+      },
+      {
+        "id": "Q-POP-00744-b0a7baf333",
+        "pop": "POP-00744",
+        "name": "Tomas Renteria",
+        "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
+        "factIds": [
+          "F-68d6bc93c2e8",
+          "F-97e9f8f2c6df"
+        ],
+        "src": "packet.W2[POP-00744]"
+      },
+      {
+        "id": "Q-POP-00010-30f959e497",
+        "pop": "POP-00010",
+        "name": "Dana Reeve",
+        "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? The Tribune should keep pressing for an answer.",
+        "factIds": [
+          "F-68d6bc93c2e8",
+          "F-97e9f8f2c6df"
+        ],
+        "src": "packet.W2[POP-00010]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Calvin Turner",
+        "text": "Feels like the money's moving, but not where it's needed most. Who's tracking where it actually lands?",
+        "usable": false
+      },
+      {
+        "from": "Carmen Delaine",
+        "text": "Are disbursements prioritizing areas with visible economic strain, or just those with political optics?",
+        "usable": false
+      },
+      {
+        "from": "Carmen Delaine",
+        "text": "Is there a disconnect between the fund’s paper trail and on-ground impact in West Oakland?",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C103",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-4ac610ea40fe"
+    },
+    {
+      "t": "FACT",
+      "text": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+      "id": "F-68d6bc93c2e8"
+    },
+    {
+      "t": "FACT",
+      "text": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+      "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+      "id": "F-97e9f8f2c6df"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "carmen-civic-ledger-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Trace Packet-backed city action across votes, Initiatives, money, and implementation clocks, then show the consequence carried by a named resident. Public clarity and a durable accountability trail are success; a process recap without lived consequence is not.",
+    "articleContract": {
+      "voice": "precise third-person civic ledger",
+      "targetWords": "500-900",
+      "opening": "a Packet-backed chamber, place, person, or resident consequence",
+      "closing": "a forward-open or extraction question the supplied record cannot yet answer"
+    },
+    "authorizedTexture": [
+      "unnamed street-level color that adds no person, business, institution, event, count, or attributed statement",
+      "transitions connecting a Packet-backed official action to a Packet-backed named resident consequence",
+      "analysis of Packet-backed vote, Initiative, money, timeline, or implementation state framed as analysis",
+      "an unanswered forward-looking question grounded in a limit or missing field declared by the Packet"
+    ],
+    "textureConditions": [
+      "every named person, place, business, institution, Project, Initiative, office, and organization must come from the Packet",
+      "vote coverage must use all nine seats supplied by the Packet and must not infer a position, bloc, absence, or tally",
+      "money, dates, durations, deadlines, and implementation clocks must come from the Packet or its tracker-backed claims",
+      "unnamed street color is not a sourced quote and must carry no official act, public reaction, or other canon claim"
+    ],
+    "canonBlockers": [
+      "a named person, place, business, institution, Project, Initiative, office, or organization not found in the supplied record",
+      "a false or unsupported vote, tally, bloc, office, official position, official act, official inaction, promise, decision, duty, or absence presented as fact",
+      "a budget, payment, date, duration, deadline, count, or implementation clock that contradicts or lacks the supplied record",
+      "an Initiative phase, Project status, milestone, or current-state claim that contradicts the tracker or verified prior coverage",
+      "a resident consequence, attributed statement, or collective public sentiment not supported by a Packet subject or quote"
+    ]
+  },
+  "manifest": {
+    "id": "AM-f1ab59491069",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-4ac610ea40fe",
+        "t": "FACT",
+        "text": "Current cycle: C103",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-68d6bc93c2e8",
+        "t": "FACT",
+        "text": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+      },
+      {
+        "id": "F-97e9f8f2c6df",
+        "t": "FACT",
+        "text": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00231-30f959e497",
+        "speakerId": "POP-00231",
+        "speakerName": "Calvin Turner",
+        "text": "What the record shows does not line up with what I expected. What explains the gap in the record? The Tribune should keep pressing for an answer.",
+        "factIds": [
+          "F-68d6bc93c2e8",
+          "F-97e9f8f2c6df"
+        ],
+        "src": "packet.W2[POP-00231]"
+      },
+      {
+        "id": "Q-POP-00598-30f959e497",
+        "speakerId": "POP-00598",
+        "speakerName": "Vladimir Gonzalez",
+        "text": "What the record shows does not line up with what I expected. What explains the gap in the record? The Tribune should keep pressing for an answer.",
+        "factIds": [
+          "F-68d6bc93c2e8",
+          "F-97e9f8f2c6df"
+        ],
+        "src": "packet.W2[POP-00598]"
+      },
+      {
+        "id": "Q-POP-00744-b0a7baf333",
+        "speakerId": "POP-00744",
+        "speakerName": "Tomas Renteria",
+        "text": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
+        "factIds": [
+          "F-68d6bc93c2e8",
+          "F-97e9f8f2c6df"
+        ],
+        "src": "packet.W2[POP-00744]"
+      },
+      {
+        "id": "Q-POP-00010-30f959e497",
+        "speakerId": "POP-00010",
+        "speakerName": "Dana Reeve",
+        "text": "What the record shows does not line up with what I expected. What explains the gap in the record? The Tribune should keep pressing for an answer.",
+        "factIds": [
+          "F-68d6bc93c2e8",
+          "F-97e9f8f2c6df"
+        ],
+        "src": "packet.W2[POP-00010]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00231",
+        "name": "Calvin Turner",
+        "profile": "Calvin Turner",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00598",
+        "name": "Vladimir Gonzalez",
+        "profile": "Vladimir Gonzalez",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00744",
+        "name": "Tomas Renteria",
+        "profile": "Tomas Renteria",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00010",
+        "name": "Dana Reeve",
+        "profile": "Dana Reeve",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Calvin Turner",
+        "text": "Feels like the money's moving, but not where it's needed most. Who's tracking where it actually lands?",
+        "publishable": false
+      },
+      {
+        "from": "Carmen Delaine",
+        "text": "Are disbursements prioritizing areas with visible economic strain, or just those with political optics?",
+        "publishable": false
+      },
+      {
+        "from": "Carmen Delaine",
+        "text": "Is there a disconnect between the fund’s paper trail and on-ground impact in West Oakland?",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "unnamed street-level color that adds no person, business, institution, event, count, or attributed statement",
+      "transitions connecting a Packet-backed official action to a Packet-backed named resident consequence",
+      "analysis of Packet-backed vote, Initiative, money, timeline, or implementation state framed as analysis",
+      "an unanswered forward-looking question grounded in a limit or missing field declared by the Packet"
+    ],
+    "textureConditions": [
+      "every named person, place, business, institution, Project, Initiative, office, and organization must come from the Packet",
+      "vote coverage must use all nine seats supplied by the Packet and must not infer a position, bloc, absence, or tally",
+      "money, dates, durations, deadlines, and implementation clocks must come from the Packet or its tracker-backed claims",
+      "unnamed street color is not a sourced quote and must carry no official act, public reaction, or other canon claim"
+    ],
+    "forbiddenClaimClasses": [
+      "a named person, place, business, institution, Project, Initiative, office, or organization not found in the supplied record",
+      "a false or unsupported vote, tally, bloc, office, official position, official act, official inaction, promise, decision, duty, or absence presented as fact",
+      "a budget, payment, date, duration, deadline, count, or implementation clock that contradicts or lacks the supplied record",
+      "an Initiative phase, Project status, milestone, or current-state claim that contradicts the tracker or verified prior coverage",
+      "a resident consequence, attributed statement, or collective public sentiment not supported by a Packet subject or quote"
+    ]
+  }
+}

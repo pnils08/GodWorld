@@ -1,0 +1,377 @@
+{
+  "date": "2026-08-11",
+  "cycle": 103,
+  "quotas": {
+    "civic": 2,
+    "sports": 2,
+    "culture": 1,
+    "business": 1
+  },
+  "assignments": [
+    {
+      "desk": "civic",
+      "name": "Sgt. Rachel Torres",
+      "popid": "POP-00057",
+      "beatDomain": "SAFETY",
+      "persona": "rachel-torres",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "packagePin": true,
+      "wakePackage": "RACHEL-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "civic",
+      "name": "Jax Caldera",
+      "popid": "POP-00799",
+      "beatDomain": "ACCOUNTABILITY",
+      "persona": "freelance-firebrand",
+      "approach": "Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay, crisis with no owner. Write into the contradiction. Name who must answer. End on the unanswered question. Scene color is yours (weather, street, bar) so long as it contradicts nothing on this slice. Never invent careers for named people — RoleType lines are immutable. Never invent citizen names.",
+      "story": {
+        "ref": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+        "label": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+        "kind": "anomaly",
+        "angle": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning — remedy path + responsible office",
+        "hookLine": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+        "hood": "Fruitvale",
+        "popids": [],
+        "citizens": [],
+        "stinkClass": "implementation-gap",
+        "stinkScore": 50
+      },
+      "stinkForce": true,
+      "stink": {
+        "className": "implementation-gap",
+        "score": 50,
+        "label": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+        "ref": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+        "kind": "anomaly",
+        "desk": "civic"
+      },
+      "jaxSlice": true,
+      "wakePackage": "JAX-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "civic",
+      "name": "Carmen Delaine",
+      "popid": "POP-00011",
+      "beatDomain": "CIVIC",
+      "persona": "carmen-delaine",
+      "approach": "Civic-ledger approach: follow the supplied initiative, vote, or decision through money, clocks, and responsible offices. One record-backed civic claim; not a press release or multi-voice roundup.",
+      "story": {
+        "ref": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+        "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "kind": "initiative",
+        "angle": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "hookLine": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+        "hood": "West Oakland",
+        "popids": [],
+        "citizens": []
+      },
+      "civicDomainSlice": true,
+      "civicDomainSeat": "carmen-delaine",
+      "pulse": {
+        "className": "civic-ledger",
+        "score": 55,
+        "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "hood": "West Oakland",
+        "source": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+      },
+      "prewrite": {
+        "anchorFacts": [
+          "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+          "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+        ],
+        "forbidden": [
+          "Do not add officials, votes, budgets, outcomes, measurements, quotes, or affected people absent from the supplied entries."
+        ]
+      },
+      "wakePackage": "CARMEN-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "P Slayer",
+      "popid": "POP-00008",
+      "beatDomain": "SPORTS",
+      "persona": "p-slayer",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "story": {
+        "angle": "One line anchors the board read — 2-3 — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar throws a No No in his MLB debut",
+        "label": "A's · player-feature — Pablo Almanzar throws a No No in his MLB debut",
+        "hookLine": "Pablo Almanzar throws a No No in his MLB debut",
+        "hood": "Downtown",
+        "pulseClass": "line-card",
+        "team": "A's",
+        "eventKind": "player-feature",
+        "citizens": [],
+        "popids": [],
+        "ref": "world_summary_c103.md ## Sports",
+        "cycle": 103
+      },
+      "anthonySlice": true,
+      "analytic": true,
+      "pulse": {
+        "className": "line-card",
+        "score": 72,
+        "label": "A's · player-feature — Pablo Almanzar throws a No No in his MLB debut",
+        "team": "A's",
+        "eventKind": "player-feature",
+        "seasonType": "late-season",
+        "storyAngle": "Pablo Almanzar throws a No No in his MLB debut",
+        "hasStats": true,
+        "record": "124-34",
+        "streak": "W15",
+        "foilNumber": "2-3",
+        "feedCycle": 103
+      },
+      "bag": {
+        "tools": [
+          {
+            "id": 1,
+            "name": "Box-Card Read"
+          },
+          {
+            "id": 5,
+            "name": "Repertoire vs Results"
+          }
+        ],
+        "claim": "One line anchors the board read — 2-3 — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar throws a No No in his MLB debut",
+        "foilNumber": "2-3"
+      },
+      "prewrite": {
+        "reporter": "Anthony Raines",
+        "bagTools": [
+          {
+            "id": 1,
+            "name": "Box-Card Read"
+          },
+          {
+            "id": 5,
+            "name": "Repertoire vs Results"
+          }
+        ],
+        "lineFacts": [
+          "Pablo Almanza line (feed): 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3",
+          "Feed line: HR, 3 RBI",
+          "Team record (feed): 124-34 · W15",
+          "Event kind (feed): A's — player-feature (late-season)",
+          "NamesUsed (feed): Pablo Almanzar (SP), Vinne Keane (DH)",
+          "StoryAngle (feed): Pablo Almanzar throws a No No in his MLB debut"
+        ],
+        "dossierFacts": [
+          "NONE — offline slice; use packet TrueSource only if wake supplies"
+        ],
+        "feedFacts": [
+          "StoryAngle: Pablo Almanzar throws a No No in his MLB debut",
+          "Notes: Pablo Alamazar (SP) made his major league debut in NY vs the Yankees, Pablo Almanzar just called up for the callup throws a no hitter while striking out 10. Making a major splash in his MLB debut in o",
+          "Record/Streak: 124-34 / W15"
+        ],
+        "claim": "One line anchors the board read — 2-3 — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar throws a No No in his MLB debut",
+        "missing": [
+          "x-stats / barrel% / launch angle / OAA not on feed",
+          "contracts or salaries not printed on this feed row",
+          "As_Roster sheet cells (offline pack uses feed Stats only — do not invent WAR/ERA beyond feed)",
+          "TrueSource dossier lines not loaded offline — DossierFacts: NONE unless packet supplies"
+        ],
+        "foilNumber": "2-3",
+        "anchorFacts": [
+          "StoryAngle (feed): Pablo Almanzar throws a No No in his MLB debut",
+          "Team record (feed): 124-34 · streak W15",
+          "Stats (feed): Pablo Almanza 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI",
+          "Event: A's — player-feature (late-season)"
+        ]
+      },
+      "packagePin": true,
+      "wakePackage": "PSLAYER-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "culture",
+      "name": "Kai Marston",
+      "popid": "POP-00158",
+      "beatDomain": "CULTURE",
+      "persona": "kai-marston",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+      "story": {
+        "ref": "output/neighborhood_texture_c103.md \"### Adams Point\"; events: world_summary_c103.md \"## World Events\"",
+        "label": "Adams Point | 1 world event(s) this cycle",
+        "kind": "hood",
+        "hood": "Adams Point"
+      },
+      "packagePin": true,
+      "wakePackage": "KAI-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "business",
+      "name": "Jordan Velez",
+      "popid": "POP-00153",
+      "beatDomain": "ECONOMIC",
+      "persona": "business-desk",
+      "approach": "Business approach: follow the money. Who pays, who collects, what changed hands this cycle, and which storefront or household feels it first. Anchor every claim to the record — never invent a figure; if the record gives no number, write the story without one.",
+      "story": {
+        "angle": "Storefronts quieter in Dimond — foot traffic down",
+        "label": "Dimond cooling",
+        "hookLine": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
+        "hood": "Dimond",
+        "pulseClass": "hood-cooling",
+        "namedBusinesses": [],
+        "citizens": [],
+        "popids": [],
+        "ref": "world_summary ## What Moved · trajectory",
+        "cycle": 103
+      },
+      "economicSlice": true,
+      "pulse": {
+        "className": "hood-cooling",
+        "score": 24,
+        "label": "Dimond cooling",
+        "hood": "Dimond",
+        "namedBusinesses": [],
+        "retail": 8.24,
+        "retailDelta": null
+      },
+      "prewrite": {
+        "pulseClass": "hood-cooling",
+        "angle": "Storefronts quieter in Dimond — foot traffic down",
+        "hookLine": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
+        "namedBusinesses": [],
+        "anchorFacts": [
+          "HOOD: Dimond",
+          "TRAJECTORY: cooling",
+          "MAGNITUDE (translate, do not lead): 6",
+          "RETAIL VITALITY (scene color): 8.24",
+          "NAMED BUSINESSES: none on disk for this hood — do not invent"
+        ],
+        "forbidden": [
+          "Do not invent Employee_Count",
+          "Do not invent Key_Personnel",
+          "Do not invent storefronts not on ledger or evening texture",
+          "Do not lead with raw RetailVitality decimals — translate to scene"
+        ]
+      },
+      "packagePin": true,
+      "wakePackage": "JORDAN-LEP2-1",
+      "packetContract": "v2"
+    }
+  ],
+  "shortfalls": [
+    {
+      "desk": "sports",
+      "wanted": 2,
+      "got": 1
+    }
+  ],
+  "rotationShortfalls": [],
+  "seedless": 1,
+  "signalMissing": false,
+  "packageGate": {
+    "policy": "package-only",
+    "pinned": [
+      {
+        "persona": "p-slayer",
+        "desk": "sports",
+        "replaced": "Anthony Raines"
+      },
+      {
+        "persona": "business-desk",
+        "desk": "business",
+        "replaced": "Dana Reeve"
+      },
+      {
+        "persona": "kai-marston",
+        "desk": "culture",
+        "replaced": "Celeste Tran"
+      },
+      {
+        "persona": "rachel-torres",
+        "desk": "civic",
+        "replaced": null
+      }
+    ],
+    "skipped": [
+      {
+        "name": "Ariana Reyes",
+        "desk": "sports",
+        "reason": "no-active-wake-package"
+      }
+    ],
+    "activeAssignments": [
+      {
+        "name": "Sgt. Rachel Torres",
+        "persona": "rachel-torres",
+        "wakePackage": "RACHEL-LEP2-1"
+      },
+      {
+        "name": "Jax Caldera",
+        "persona": "freelance-firebrand",
+        "wakePackage": "JAX-LEP2-1"
+      },
+      {
+        "name": "Carmen Delaine",
+        "persona": "carmen-delaine",
+        "wakePackage": "CARMEN-LEP2-1"
+      },
+      {
+        "name": "P Slayer",
+        "persona": "p-slayer",
+        "wakePackage": "PSLAYER-LEP2-1"
+      },
+      {
+        "name": "Kai Marston",
+        "persona": "kai-marston",
+        "wakePackage": "KAI-LEP2-1"
+      },
+      {
+        "name": "Jordan Velez",
+        "persona": "business-desk",
+        "wakePackage": "JORDAN-LEP2-1"
+      }
+    ]
+  },
+  "stinkForce": {
+    "attempted": true,
+    "forced": true,
+    "reason": "forced score=50 class=implementation-gap",
+    "top": {
+      "score": 50,
+      "className": "implementation-gap",
+      "label": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles"
+    },
+    "reportPath": "/root/GodWorld/output/cron-compare/stink_c103.json"
+  },
+  "pslayerEnrich": {
+    "enriched": false,
+    "reason": "no p-slayer assignment in rota (before=freelance-firebrand,carmen-delaine,anthony-raines,ariana-reyes,POP-00164,POP-00010)"
+  },
+  "anthonyEnrich": {
+    "enriched": true,
+    "reason": "pulse=line-card score=72 foil=2-3"
+  },
+  "halEnrich": {
+    "enriched": false,
+    "reason": "no hal-richmond assignment in rota"
+  },
+  "economicEnrich": {
+    "enriched": true,
+    "reason": "pulse=hood-cooling score=24 hood=Dimond"
+  },
+  "eveningEnrich": {
+    "enriched": false,
+    "reason": "no evening-consumer assignment in rota",
+    "seats": []
+  },
+  "civicDomainEnrich": {
+    "enriched": true,
+    "reason": "seats=1",
+    "seats": [
+      {
+        "persona": "carmen-delaine",
+        "domain": "civic-ledger",
+        "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active"
+      }
+    ]
+  },
+  "builtAt": "2026-08-11T11:15:07.760Z"
+}

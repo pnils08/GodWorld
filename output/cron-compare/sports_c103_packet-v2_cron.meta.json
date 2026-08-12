@@ -1,0 +1,17 @@
+{
+  "desk": "sports",
+  "cycle": "103",
+  "model": "meta-llama/llama-3.3-70b-instruct",
+  "turns": 1,
+  "maxTurns": 15,
+  "usageInputTokens": 7723,
+  "usageOutputTokens": 607,
+  "savedFiles": [
+    "output/cron-compare/sports_c103_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.md"
+  ],
+  "compareAgainst": "output/desk-output/sports_c103.md",
+  "durationMs": 8552,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-08-11T23:17:27.935Z"
+}

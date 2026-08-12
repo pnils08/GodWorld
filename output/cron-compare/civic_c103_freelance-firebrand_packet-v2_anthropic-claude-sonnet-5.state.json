@@ -1,0 +1,226 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00799",
+    "name": "Jax Caldera",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write one Article and machine-parseable INTAKE from the supplied evidence",
+    "assignment": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning — remedy path + responsible office",
+    "approach": "Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay, crisis with no owner. Write into the contradiction. Name who must answer. End on the unanswered question.  Never invent careers for named people — RoleType lines are immutable. Never invent citizen names.",
+    "voice": "Short, hot, first-person accountability column. Open on the sourced contradiction, press the supplied accountable subject, and end on the plan closeQuestion. No generic revitalization plea."
+  },
+  "signal": {
+    "kind": "anomaly",
+    "hood": "Fruitvale",
+    "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+    "plan": {
+      "focus": "Fruitvale Transit Hub Phase II initiative stall",
+      "closeQuestion": "Who is responsible for the stalled progress of the Fruitvale Transit Hub Phase II initiative?"
+    }
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Jax Caldera",
+        "text": "possible lack of accountability or transparency in the initiative's planning phase",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C103",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-4ac610ea40fe"
+    },
+    {
+      "t": "FACT",
+      "text": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+      "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+      "id": "F-11c83bcb168d"
+    },
+    {
+      "t": "FACT",
+      "text": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+      "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+      "id": "F-c4b3917a7eab"
+    },
+    {
+      "t": "FACT",
+      "text": "Official voice still treats the initiative as live / on track",
+      "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+      "id": "F-47080cc244cb"
+    },
+    {
+      "t": "FACT",
+      "text": "Season: Winter | Weather: 49°F overcast, NW 11 mph, overcast (frontState OVERCAST), humidity 67, visibility 10",
+      "src": "World_Config/weather snapshot for C103",
+      "id": "F-e7aca0ecc02c"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "jax-accountability-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Apply public accountability pressure when the record and the official story do not line up. Starting friction is success; resolving the civic problem is not the columnist's job.",
+    "articleContract": {
+      "voice": "adversarial first-person accountability column",
+      "targetWords": "400-650",
+      "opening": "street-level scene in a bar, laundromat, BART setting, corner, or similarly generic public room",
+      "closing": "an unanswered accountability question"
+    },
+    "authorizedTexture": [
+      "a named street or street-level time cue used only as scene location",
+      "a generic bar, laundromat, BART car or platform, corner, booth, counter, or sidewalk setting",
+      "the reporter's own physical presence, drink, or observation in that generic setting",
+      "an unnamed or role-only local voice such as a bartender, patron, neighbor, rider, or shop worker",
+      "adversarial inference and unanswered questions drawn from supplied facts"
+    ],
+    "textureConditions": [
+      "texture must not invent a named citizen, business, institution, Project, Initiative, or organization",
+      "an anonymous voice is color, not a sourced official statement, and must not be indexed as a quoted-source",
+      "texture must not carry a vote, official act or inaction, criminal accusation, budget, date, duration, count, or other load-bearing factual claim",
+      "a rhetorical question or inference must remain framed as a question or inference rather than settled fact"
+    ],
+    "canonBlockers": [
+      "a named person not found in the ledger or published record",
+      "a fabricated named business, institution, Project, Initiative, or organization",
+      "a false or unsupported vote, official act, official inaction, promise, decision, or duty presented as fact",
+      "a false criminal accusation or attributed admission",
+      "a load-bearing number, date, duration, budget, metric direction, or count that contradicts or lacks the supplied record",
+      "a current-state claim that contradicts the world summary or verified prior coverage"
+    ]
+  },
+  "manifest": {
+    "id": "AM-22bcb4e278fb",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-4ac610ea40fe",
+        "t": "FACT",
+        "text": "Current cycle: C103",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-11c83bcb168d",
+        "t": "FACT",
+        "text": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+        "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+      },
+      {
+        "id": "F-c4b3917a7eab",
+        "t": "FACT",
+        "text": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+        "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+      },
+      {
+        "id": "F-47080cc244cb",
+        "t": "FACT",
+        "text": "Official voice still treats the initiative as live / on track",
+        "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+      },
+      {
+        "id": "F-e7aca0ecc02c",
+        "t": "FACT",
+        "text": "Season: Winter | Weather: 49°F overcast, NW 11 mph, overcast (frontState OVERCAST), humidity 67, visibility 10",
+        "src": "World_Config/weather snapshot for C103"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Jax Caldera",
+        "text": "possible lack of accountability or transparency in the initiative's planning phase",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "a named street or street-level time cue used only as scene location",
+      "a generic bar, laundromat, BART car or platform, corner, booth, counter, or sidewalk setting",
+      "the reporter's own physical presence, drink, or observation in that generic setting",
+      "an unnamed or role-only local voice such as a bartender, patron, neighbor, rider, or shop worker",
+      "adversarial inference and unanswered questions drawn from supplied facts"
+    ],
+    "textureConditions": [
+      "texture must not invent a named citizen, business, institution, Project, Initiative, or organization",
+      "an anonymous voice is color, not a sourced official statement, and must not be indexed as a quoted-source",
+      "texture must not carry a vote, official act or inaction, criminal accusation, budget, date, duration, count, or other load-bearing factual claim",
+      "a rhetorical question or inference must remain framed as a question or inference rather than settled fact"
+    ],
+    "forbiddenClaimClasses": [
+      "a named person not found in the ledger or published record",
+      "a fabricated named business, institution, Project, Initiative, or organization",
+      "a false or unsupported vote, official act, official inaction, promise, decision, or duty presented as fact",
+      "a false criminal accusation or attributed admission",
+      "a load-bearing number, date, duration, budget, metric direction, or count that contradicts or lacks the supplied record",
+      "a current-state claim that contradicts the world summary or verified prior coverage"
+    ]
+  }
+}

@@ -1,0 +1,714 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "103",
+  "persona": "luis-navarro",
+  "packetContract": "LEP/2",
+  "reporter": null,
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+      "label": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+      "kind": "anomaly",
+      "angle": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning — remedy path + responsible office",
+      "hookLine": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+      "hood": "Fruitvale",
+      "popids": [
+        "POP-00231",
+        "POP-00744"
+      ],
+      "citizens": [
+        "Calvin Turner (POP-00231)",
+        "Tomas Renteria (POP-00744)"
+      ]
+    }
+  },
+  "angle": "output/cron-compare/civic_c103_luis-navarro_packet-v2_angle.json",
+  "quotesRequested": 2,
+  "quotesLanded": 2,
+  "quotes": [
+    {
+      "pop": "POP-00231",
+      "name": "Calvin Turner",
+      "quote": "What the record shows does not line up with what I expected. Who is responsible for answering this? I am going to keep watching this.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; devoted, family is everything",
+      "recorded": false,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"fact_ids\": [\"F-11c83bcb168d\", \"F-c4b3917a7eab\"],\n  \"stance_id\": \"S_MISMATCH\",\n  \"question_id\": \"Q_OWNER\",\n  \"intention_id\": \"I_WATCH\",\n  \"unverifiedLead\": [\"Feels like the usual promises without follow-through. Who's actually steering this ship?\"],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-11c83bcb168d",
+          "F-c4b3917a7eab"
+        ],
+        "stanceId": "S_MISMATCH",
+        "questionId": "Q_OWNER",
+        "intentionId": "I_WATCH",
+        "unverifiedLead": [
+          "Feels like the usual promises without follow-through. Who's actually steering this ship?"
+        ],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00231-42c685d910",
+        "publishableQuote": "What the record shows does not line up with what I expected. Who is responsible for answering this? I am going to keep watching this."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00231",
+          "name": null,
+          "role": "citizen",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question from bounded lived experience",
+          "reporter": "Luis Navarro",
+          "question": "As a resident of Fruitvale, what about the supplied trend \"Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Fruitvale",
+          "focus": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning",
+          "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+        },
+        "exposure": {
+          "basis": [
+            "desk-signal candidate",
+            "same-neighborhood"
+          ],
+          "self": null,
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+            "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+            "id": "F-11c83bcb168d"
+          },
+          {
+            "t": "FACT",
+            "text": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+            "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+            "id": "F-c4b3917a7eab"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Select supplied FACT ids and code-owned lattice ids only. Free text is allowed solely in unverifiedLead and never reaches Wake 3."
+        },
+        "output": {
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "fact_ids": [
+              "one or more ids from packet.known"
+            ],
+            "stance_id": "one id from packet.lattice.stances; null on abstain",
+            "question_id": "one id from packet.lattice.questions; null on abstain",
+            "intention_id": "one id from packet.lattice.intentions; I_NONE allowed",
+            "unverifiedLead": [
+              "free lead text; never publishable"
+            ],
+            "abstain_reason": "institutional_path_required|insufficient_evidence|contract_conflict|other|null"
+          },
+          "rule": "The backend renders the quote from selected lattice ids. Do not write quote prose."
+        },
+        "lattice": {
+          "stances": [
+            {
+              "id": "S_CONCERN",
+              "text": "What this record shows concerns me."
+            },
+            {
+              "id": "S_MISMATCH",
+              "text": "What the record shows does not line up with what I expected."
+            },
+            {
+              "id": "S_ATTENTION",
+              "text": "This deserves a closer look."
+            },
+            {
+              "id": "S_ACCOUNTABILITY",
+              "text": "Someone should answer for what the record shows."
+            }
+          ],
+          "questions": [
+            {
+              "id": "Q_ATTENTION",
+              "text": "Why is this not getting more attention?"
+            },
+            {
+              "id": "Q_OWNER",
+              "text": "Who is responsible for answering this?"
+            },
+            {
+              "id": "Q_NEXT",
+              "text": "What happens next?"
+            },
+            {
+              "id": "Q_GAP",
+              "text": "What explains the gap in the record?"
+            }
+          ],
+          "intentions": [
+            {
+              "id": "I_NONE",
+              "text": ""
+            },
+            {
+              "id": "I_WATCH",
+              "text": "I am going to keep watching this."
+            },
+            {
+              "id": "I_ANSWER",
+              "text": "I want a clear answer."
+            },
+            {
+              "id": "I_PRESS",
+              "text": "The Tribune should keep pressing for an answer."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "pop": "POP-00744",
+      "name": "Tomas Renteria",
+      "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
+      "disp": "draws people in, deep with them",
+      "recorded": false,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"fact_ids\": [\"F-11c83bcb168d\", \"F-c4b3917a7eab\"],\n  \"stance_id\": \"S_MISMATCH\",\n  \"question_id\": \"Q_GAP\",\n  \"intention_id\": \"I_WATCH\",\n  \"unverifiedLead\": [\"Feels like the same conversations keep happening without any shovels hitting dirt. Like we're stuck in a loop.\"],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-11c83bcb168d",
+          "F-c4b3917a7eab"
+        ],
+        "stanceId": "S_MISMATCH",
+        "questionId": "Q_GAP",
+        "intentionId": "I_WATCH",
+        "unverifiedLead": [
+          "Feels like the same conversations keep happening without any shovels hitting dirt. Like we're stuck in a loop."
+        ],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00744-00792a12a5",
+        "publishableQuote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00744",
+          "name": null,
+          "role": "citizen",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question from bounded lived experience",
+          "reporter": "Luis Navarro",
+          "question": "As a resident of Fruitvale, what about the supplied trend \"Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Fruitvale",
+          "focus": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning",
+          "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+        },
+        "exposure": {
+          "basis": [
+            "desk-signal candidate",
+            "same-neighborhood"
+          ],
+          "self": null,
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+            "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+            "id": "F-11c83bcb168d"
+          },
+          {
+            "t": "FACT",
+            "text": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+            "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+            "id": "F-c4b3917a7eab"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Select supplied FACT ids and code-owned lattice ids only. Free text is allowed solely in unverifiedLead and never reaches Wake 3."
+        },
+        "output": {
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "fact_ids": [
+              "one or more ids from packet.known"
+            ],
+            "stance_id": "one id from packet.lattice.stances; null on abstain",
+            "question_id": "one id from packet.lattice.questions; null on abstain",
+            "intention_id": "one id from packet.lattice.intentions; I_NONE allowed",
+            "unverifiedLead": [
+              "free lead text; never publishable"
+            ],
+            "abstain_reason": "institutional_path_required|insufficient_evidence|contract_conflict|other|null"
+          },
+          "rule": "The backend renders the quote from selected lattice ids. Do not write quote prose."
+        },
+        "lattice": {
+          "stances": [
+            {
+              "id": "S_CONCERN",
+              "text": "What this record shows concerns me."
+            },
+            {
+              "id": "S_MISMATCH",
+              "text": "What the record shows does not line up with what I expected."
+            },
+            {
+              "id": "S_ATTENTION",
+              "text": "This deserves a closer look."
+            },
+            {
+              "id": "S_ACCOUNTABILITY",
+              "text": "Someone should answer for what the record shows."
+            }
+          ],
+          "questions": [
+            {
+              "id": "Q_ATTENTION",
+              "text": "Why is this not getting more attention?"
+            },
+            {
+              "id": "Q_OWNER",
+              "text": "Who is responsible for answering this?"
+            },
+            {
+              "id": "Q_NEXT",
+              "text": "What happens next?"
+            },
+            {
+              "id": "Q_GAP",
+              "text": "What explains the gap in the record?"
+            }
+          ],
+          "intentions": [
+            {
+              "id": "I_NONE",
+              "text": ""
+            },
+            {
+              "id": "I_WATCH",
+              "text": "I am going to keep watching this."
+            },
+            {
+              "id": "I_ANSWER",
+              "text": "I want a clear answer."
+            },
+            {
+              "id": "I_PRESS",
+              "text": "The Tribune should keep pressing for an answer."
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-00231",
+      "name": "Calvin Turner",
+      "quote": "What the record shows does not line up with what I expected. Who is responsible for answering this? I am going to keep watching this.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; devoted, family is everything",
+      "recorded": false,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"fact_ids\": [\"F-11c83bcb168d\", \"F-c4b3917a7eab\"],\n  \"stance_id\": \"S_MISMATCH\",\n  \"question_id\": \"Q_OWNER\",\n  \"intention_id\": \"I_WATCH\",\n  \"unverifiedLead\": [\"Feels like the usual promises without follow-through. Who's actually steering this ship?\"],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-11c83bcb168d",
+          "F-c4b3917a7eab"
+        ],
+        "stanceId": "S_MISMATCH",
+        "questionId": "Q_OWNER",
+        "intentionId": "I_WATCH",
+        "unverifiedLead": [
+          "Feels like the usual promises without follow-through. Who's actually steering this ship?"
+        ],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00231-42c685d910",
+        "publishableQuote": "What the record shows does not line up with what I expected. Who is responsible for answering this? I am going to keep watching this."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00231",
+          "name": null,
+          "role": "citizen",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question from bounded lived experience",
+          "reporter": "Luis Navarro",
+          "question": "As a resident of Fruitvale, what about the supplied trend \"Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Fruitvale",
+          "focus": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning",
+          "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+        },
+        "exposure": {
+          "basis": [
+            "desk-signal candidate",
+            "same-neighborhood"
+          ],
+          "self": null,
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+            "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+            "id": "F-11c83bcb168d"
+          },
+          {
+            "t": "FACT",
+            "text": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+            "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+            "id": "F-c4b3917a7eab"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Select supplied FACT ids and code-owned lattice ids only. Free text is allowed solely in unverifiedLead and never reaches Wake 3."
+        },
+        "output": {
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "fact_ids": [
+              "one or more ids from packet.known"
+            ],
+            "stance_id": "one id from packet.lattice.stances; null on abstain",
+            "question_id": "one id from packet.lattice.questions; null on abstain",
+            "intention_id": "one id from packet.lattice.intentions; I_NONE allowed",
+            "unverifiedLead": [
+              "free lead text; never publishable"
+            ],
+            "abstain_reason": "institutional_path_required|insufficient_evidence|contract_conflict|other|null"
+          },
+          "rule": "The backend renders the quote from selected lattice ids. Do not write quote prose."
+        },
+        "lattice": {
+          "stances": [
+            {
+              "id": "S_CONCERN",
+              "text": "What this record shows concerns me."
+            },
+            {
+              "id": "S_MISMATCH",
+              "text": "What the record shows does not line up with what I expected."
+            },
+            {
+              "id": "S_ATTENTION",
+              "text": "This deserves a closer look."
+            },
+            {
+              "id": "S_ACCOUNTABILITY",
+              "text": "Someone should answer for what the record shows."
+            }
+          ],
+          "questions": [
+            {
+              "id": "Q_ATTENTION",
+              "text": "Why is this not getting more attention?"
+            },
+            {
+              "id": "Q_OWNER",
+              "text": "Who is responsible for answering this?"
+            },
+            {
+              "id": "Q_NEXT",
+              "text": "What happens next?"
+            },
+            {
+              "id": "Q_GAP",
+              "text": "What explains the gap in the record?"
+            }
+          ],
+          "intentions": [
+            {
+              "id": "I_NONE",
+              "text": ""
+            },
+            {
+              "id": "I_WATCH",
+              "text": "I am going to keep watching this."
+            },
+            {
+              "id": "I_ANSWER",
+              "text": "I want a clear answer."
+            },
+            {
+              "id": "I_PRESS",
+              "text": "The Tribune should keep pressing for an answer."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "pop": "POP-00744",
+      "name": "Tomas Renteria",
+      "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
+      "disp": "draws people in, deep with them",
+      "recorded": false,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"fact_ids\": [\"F-11c83bcb168d\", \"F-c4b3917a7eab\"],\n  \"stance_id\": \"S_MISMATCH\",\n  \"question_id\": \"Q_GAP\",\n  \"intention_id\": \"I_WATCH\",\n  \"unverifiedLead\": [\"Feels like the same conversations keep happening without any shovels hitting dirt. Like we're stuck in a loop.\"],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-11c83bcb168d",
+          "F-c4b3917a7eab"
+        ],
+        "stanceId": "S_MISMATCH",
+        "questionId": "Q_GAP",
+        "intentionId": "I_WATCH",
+        "unverifiedLead": [
+          "Feels like the same conversations keep happening without any shovels hitting dirt. Like we're stuck in a loop."
+        ],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00744-00792a12a5",
+        "publishableQuote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00744",
+          "name": null,
+          "role": "citizen",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question from bounded lived experience",
+          "reporter": "Luis Navarro",
+          "question": "As a resident of Fruitvale, what about the supplied trend \"Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Fruitvale",
+          "focus": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning",
+          "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+        },
+        "exposure": {
+          "basis": [
+            "desk-signal candidate",
+            "same-neighborhood"
+          ],
+          "self": null,
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+            "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+            "id": "F-11c83bcb168d"
+          },
+          {
+            "t": "FACT",
+            "text": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+            "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+            "id": "F-c4b3917a7eab"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Select supplied FACT ids and code-owned lattice ids only. Free text is allowed solely in unverifiedLead and never reaches Wake 3."
+        },
+        "output": {
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "fact_ids": [
+              "one or more ids from packet.known"
+            ],
+            "stance_id": "one id from packet.lattice.stances; null on abstain",
+            "question_id": "one id from packet.lattice.questions; null on abstain",
+            "intention_id": "one id from packet.lattice.intentions; I_NONE allowed",
+            "unverifiedLead": [
+              "free lead text; never publishable"
+            ],
+            "abstain_reason": "institutional_path_required|insufficient_evidence|contract_conflict|other|null"
+          },
+          "rule": "The backend renders the quote from selected lattice ids. Do not write quote prose."
+        },
+        "lattice": {
+          "stances": [
+            {
+              "id": "S_CONCERN",
+              "text": "What this record shows concerns me."
+            },
+            {
+              "id": "S_MISMATCH",
+              "text": "What the record shows does not line up with what I expected."
+            },
+            {
+              "id": "S_ATTENTION",
+              "text": "This deserves a closer look."
+            },
+            {
+              "id": "S_ACCOUNTABILITY",
+              "text": "Someone should answer for what the record shows."
+            }
+          ],
+          "questions": [
+            {
+              "id": "Q_ATTENTION",
+              "text": "Why is this not getting more attention?"
+            },
+            {
+              "id": "Q_OWNER",
+              "text": "Who is responsible for answering this?"
+            },
+            {
+              "id": "Q_NEXT",
+              "text": "What happens next?"
+            },
+            {
+              "id": "Q_GAP",
+              "text": "What explains the gap in the record?"
+            }
+          ],
+          "intentions": [
+            {
+              "id": "I_NONE",
+              "text": ""
+            },
+            {
+              "id": "I_WATCH",
+              "text": "I am going to keep watching this."
+            },
+            {
+              "id": "I_ANSWER",
+              "text": "I want a clear answer."
+            },
+            {
+              "id": "I_PRESS",
+              "text": "The Tribune should keep pressing for an answer."
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-08-12T07:03:52.512Z"
+}

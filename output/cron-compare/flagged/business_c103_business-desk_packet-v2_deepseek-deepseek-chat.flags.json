@@ -1,0 +1,31 @@
+{
+  "draft": "business_c103_business-desk_packet-v2_deepseek-deepseek-chat.md",
+  "flags": [
+    {
+      "claim": "Calvin Turner, who has owned a hardware store in the neighborhood for twelve years.",
+      "issue": "Calvin Turner is canonically a Mechanic residing in Fruitvale, not a hardware store owner in Dimond. This is a high-severity misrepresentation of a ledger citizen.",
+      "severity": "high"
+    },
+    {
+      "claim": "Vladimir Gonzalez, who manages a café near Dimond Park...",
+      "issue": "Vladimir Gonzalez is canonically an entry-level Right Fielder for the Oakland A's residing in Fruitvale, not a café manager in Dimond. This is a high-severity misrepresentation of a ledger citizen.",
+      "severity": "high"
+    },
+    {
+      "claim": "\"It's quieter than usual,\" said Calvin Turner... \"What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.\"",
+      "issue": "Fabricated interview and quotes containing unapproved lexical cues ('UNAPPROVED_QUOTE'), violating the jordan-economic-labor-v1 profile's explicit canon blockers against fabricated quotes.",
+      "severity": "high"
+    },
+    {
+      "claim": "Vladimir Gonzalez... \"What the record shows does not line up with what I expected,\" he said. \"What explains the gap in the record? I am going to keep watching this.\"",
+      "issue": "Fabricated interview and quotes containing unapproved lexical cues ('UNAPPROVED_QUOTE'), violating the jordan-economic-labor-v1 profile's explicit canon blockers against fabricated quotes.",
+      "severity": "high"
+    },
+    {
+      "claim": "...particularly along Telegraph Avenue and International Boulevard...",
+      "issue": "These corridors do not appear in the Cycle 103 World Summary or packet, violating the jordan-economic-labor-v1 condition that all named corridors must come from the Packet.",
+      "severity": "high"
+    }
+  ],
+  "summary": "Critical sourcing failures: fabricated quotes with unapproved lexical cues, misrepresentation of ledger citizens' roles/neighborhoods, and unsourced corridors."
+}

@@ -1,0 +1,264 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "103",
+  "persona": "rachel-torres",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00057",
+      "name": "Sgt. Rachel Torres",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Oakland Alternative Response Initiative | Status passed | phase operational",
+      "approach": "Measured public-safety approach: choose one packet-backed incident, classification gap, or OARI response question. Third-person only. Use supplied names, places, dates, and numbers; do not invent officers, cases, quotes, crime waves, or public fear.",
+      "creativeBrief": {
+        "kind": "public-safety",
+        "pulseClass": "initiative",
+        "safetyFrame": "Oakland Alternative Response Initiative | Status passed | phase operational",
+        "classificationNote": null,
+        "anchorFacts": [
+          "Oakland Alternative Response Initiative | Status passed | phase operational",
+          "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+          "Supplied area: West Oakland, Fruitvale, East Oakland"
+        ],
+        "missing": [
+          "officer names, case details, quotes, and response metrics unless supplied"
+        ],
+        "practicalClose": "State what the supplied record does and does not establish.",
+        "sceneRule": "Use only restrained, unnamed scene texture; it carries no incident fact, quote, or public sentiment.",
+        "sourcePointers": [
+          "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "public-safety",
+      "hood": "West Oakland, Fruitvale, East Oakland",
+      "score": null,
+      "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+      "nearby": [
+        {
+          "text": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+          "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+        },
+        {
+          "text": "repeating-event (medium) | Issue \"strain\" recurred 3 cycles",
+          "src": "output/engine_audit_c103.json patterns[1]; evidence: Riley_Digest row(s)"
+        },
+        {
+          "text": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+          "src": "output/engine_audit_c103.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s)"
+        },
+        {
+          "text": "production-imbalance (medium) | 22 neighborhoods report migration flow with zero economic events this cycle",
+          "src": "output/engine_audit_c103.json patterns[3]; evidence: Neighborhood_Map row(s)"
+        },
+        {
+          "text": "incoherence (high) | Initiative \"Oakland Alternative Response Initiative\" (operational, safety) but 3 affected neighborhoods show contradicting CrimeIndex",
+          "src": "output/engine_audit_c103.json patterns[4]; evidence: Initiative_Tracker row(s) 3"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": []
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C103",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-4ac610ea40fe"
+      },
+      {
+        "t": "FACT",
+        "text": "Oakland Alternative Response Initiative | Status passed | phase operational",
+        "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+        "id": "F-5df54683a1df"
+      },
+      {
+        "t": "FACT",
+        "text": "The record leaves a public-safety response or classification question open.",
+        "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+        "id": "F-d43a7e2d2c43"
+      },
+      {
+        "t": "FACT",
+        "text": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+        "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+        "id": "F-0fc9dd7a717d"
+      },
+      {
+        "t": "FACT",
+        "text": "Supplied area: West Oakland, Fruitvale, East Oakland",
+        "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+        "id": "F-253e91a50bf4"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier."
+    }
+  },
+  "reporter": {
+    "name": "Sgt. Rachel Torres",
+    "popid": "POP-00057"
+  },
+  "assignment": {
+    "story": {
+      "kind": "public-safety",
+      "angle": "Oakland Alternative Response Initiative | Status passed | phase operational",
+      "label": "Oakland Alternative Response Initiative | Status passed | phase operational",
+      "hookLine": "The record leaves a public-safety response or classification question open.",
+      "hood": "West Oakland, Fruitvale, East Oakland",
+      "ref": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+    },
+    "approach": "Measured public-safety approach: choose one packet-backed incident, classification gap, or OARI response question. Third-person only. Use supplied names, places, dates, and numbers; do not invent officers, cases, quotes, crime waves, or public fear."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "economicSlice": null,
+  "safetySlice": {
+    "pulse": {
+      "className": "initiative",
+      "label": "Oakland Alternative Response Initiative | Status passed | phase operational",
+      "hood": "West Oakland, Fruitvale, East Oakland",
+      "source": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+    },
+    "prewrite": {
+      "anchorFacts": [
+        "Oakland Alternative Response Initiative | Status passed | phase operational",
+        "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+        "Supplied area: West Oakland, Fruitvale, East Oakland"
+      ],
+      "classificationNote": null,
+      "practicalClose": "State what the supplied record does and does not establish.",
+      "missing": [
+        "officer names, case details, quotes, and response metrics unless supplied"
+      ]
+    },
+    "candidates": [],
+    "scene": {
+      "colorRoom": "Use only restrained, unnamed scene texture; it carries no incident fact, quote, or public sentiment."
+    },
+    "pointers": [
+      "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+    ]
+  },
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Rachel Torres",
+    "popid": "POP-00057",
+    "text": "{\n  \"focus\": \"Inconsistent impact of Oakland Alternative Response Initiative across targeted neighborhoods\",\n  \"why\": \"The initiative shows operational status but crime index data contradicts its effectiveness in West Oakland, Fruitvale, and East Oakland\",\n  \"checks\": [\n    \"Compare response metrics between neighborhoods if available in Initiative_Tracker\",\n    \"Verify if resource allocation differs by area\",\n    \"Check for community feedback mechanisms in operational plan\"\n  ],\n  \"targets\": [],\n  \"interpretation\": \"The disparity suggests either uneven implementation or external factors undermining the initiative's goals in certain areas\",\n  \"unverifiedLead\": [\n    \"Possible variation in community engagement levels affecting outcomes\",\n    \"Potential overlap with other initiatives causing confusion in reporting\"\n  ],\n  \"closeQuestion\": \"Does the initiative need neighborhood-specific adjustments, or is the crime index data failing to capture its full impact?\"\n}",
+    "plan": {
+      "focus": "Inconsistent impact of Oakland Alternative Response Initiative across targeted neighborhoods",
+      "why": "The initiative shows operational status but crime index data contradicts its effectiveness in West Oakland, Fruitvale, and East Oakland",
+      "checks": [
+        "Compare response metrics between neighborhoods if available in Initiative_Tracker",
+        "Verify if resource allocation differs by area",
+        "Check for community feedback mechanisms in operational plan"
+      ],
+      "targets": [],
+      "interpretation": "The disparity suggests either uneven implementation or external factors undermining the initiative's goals in certain areas",
+      "unverifiedLead": [
+        "Possible variation in community engagement levels affecting outcomes",
+        "Potential overlap with other initiatives causing confusion in reporting"
+      ],
+      "closeQuestion": "Does the initiative need neighborhood-specific adjustments, or is the crime index data failing to capture its full impact?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+      "kind": "anomaly",
+      "hood": "Fruitvale",
+      "ref": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+      "popids": [
+        "POP-00231",
+        "POP-00598",
+        "POP-00744"
+      ]
+    },
+    {
+      "label": "repeating-event (medium) | Issue \"strain\" recurred 3 cycles",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c103.json patterns[1]; evidence: Riley_Digest row(s) ",
+      "popids": []
+    },
+    {
+      "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c103.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s) ",
+      "popids": []
+    },
+    {
+      "label": "production-imbalance (medium) | 22 neighborhoods report migration flow with zero economic events this cycle",
+      "kind": "anomaly",
+      "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District, East Oakland",
+      "ref": "output/engine_audit_c103.json patterns[3]; evidence: Neighborhood_Map row(s) ",
+      "popids": [
+        "POP-00010",
+        "POP-00039",
+        "POP-00635"
+      ]
+    },
+    {
+      "label": "incoherence (high) | Initiative \"Oakland Alternative Response Initiative\" (operational, safety) but 3 affected neighborhoods show contradicting CrimeIndex",
+      "kind": "anomaly",
+      "hood": "West Oakland, Fruitvale, East Oakland",
+      "ref": "output/engine_audit_c103.json patterns[4]; evidence: Initiative_Tracker row(s) 3",
+      "popids": [
+        "POP-00758",
+        "POP-00771",
+        "POP-00773"
+      ]
+    }
+  ],
+  "laneEntries": 32,
+  "ranAt": "2026-08-11T11:15:21.610Z"
+}

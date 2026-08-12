@@ -1,0 +1,57 @@
+{
+  "draft": "output/cron-compare/sports_c103_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.md",
+  "cycle": "103",
+  "backend": "api",
+  "model": "google/gemini-3.5-flash",
+  "pass": false,
+  "flags": [
+    {
+      "claim": "Isley Kelley, the face of the A's for years, had resigned... time for him to hang up his cleats... It wasn't just Kelley who was gone",
+      "issue": "Isley Kelley did not retire or leave the team; he re-signed a 2-year, $50M contract in C102 and is actively playing in C103, hitting his 499th career home run. The draft misinterpreted 're-signed' (written as 'resigns' in the C102 feed) as retirement.",
+      "severity": "high"
+    },
+    {
+      "claim": "The team's record, 107-31 with a three-game winning streak",
+      "issue": "This is the A's record from C102. In the current cycle (C103), the A's record is 124-34 with a 15-game winning streak (W15).",
+      "severity": "high"
+    }
+  ],
+  "flagCount": 2,
+  "highSeverityCount": 2,
+  "summary": "Critical errors: Misinterpreted Isley Kelley's contract re-signing as retirement/resignation, and used the outdated C102 team record instead of C103.",
+  "review": {
+    "profileId": "p-slayer-fan-heat-v1",
+    "canonIntegrity": "fail",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "p-slayer-fan-heat-v1",
+    "packageVersion": "PSLAYER-LEP2-1",
+    "manifestId": "AM-738c2d5c1347",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Isley Kelley"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0625,
+  "durationMs": 20224,
+  "parseError": false,
+  "ranAt": "2026-08-11T23:17:48.354Z"
+}

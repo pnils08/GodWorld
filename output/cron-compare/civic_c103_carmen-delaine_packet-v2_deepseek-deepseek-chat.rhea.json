@@ -1,0 +1,84 @@
+{
+  "draft": "output/cron-compare/civic_c103_carmen-delaine_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "103",
+  "backend": "api",
+  "model": "google/gemini-3.5-flash",
+  "pass": false,
+  "flags": [
+    {
+      "claim": "“What the record shows does not line up with what I expected,” said Turner, echoing a sentiment shared by the others. “What explains the gap in the record? The Tribune should keep pressing for an answer.”",
+      "issue": "Fabricated quote attributed to Calvin Turner. No such quote or statement exists in the cycle 103 ground truth or packet.",
+      "severity": "high"
+    },
+    {
+      "claim": "Tomas Renteria voiced his concerns plainly: “I am going to keep watching this.”",
+      "issue": "Fabricated quote attributed to Tomas Renteria. No such quote or statement exists in the cycle 103 ground truth or packet.",
+      "severity": "high"
+    },
+    {
+      "claim": "Dana Reeve urged continued scrutiny: “The Tribune should keep pressing for an answer.”",
+      "issue": "Fabricated quote attributed to Dana Reeve. Additionally, Dana Reeve is a Lead Journalist for the Tribune (BIZ-00018) and cannot be quoted as an external source.",
+      "severity": "high"
+    },
+    {
+      "claim": "But for residents like Calvin Turner, Tomas Renteria, Vladimir Gonzalez, and Dana Reeve, the ledger’s status doesn’t align with what they’re seeing on the ground.",
+      "issue": "Misrepresentation of residence. None of these citizens live in West Oakland (Turner, Renteria, and Gonzalez live in Fruitvale; Reeve lives in Chinatown), meaning they cannot witness West Oakland Stabilization Fund effects 'on the ground' as local residents.",
+      "severity": "high"
+    }
+  ],
+  "flagCount": 4,
+  "highSeverityCount": 4,
+  "summary": "Critical sourcing failures: fabricated quotes attributed to ledger citizens, misrepresentation of citizen neighborhoods, and self-citation of a Tribune journalist.",
+  "review": {
+    "profileId": "carmen-civic-ledger-v1",
+    "canonIntegrity": "fail",
+    "texture": "overreach"
+  },
+  "reviewProfile": {
+    "id": "carmen-civic-ledger-v1",
+    "packageVersion": "CARMEN-LEP2-1",
+    "manifestId": "AM-f1ab59491069",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "What the record shows does not line up with what I expected,",
+          "What explains the gap in the record? The Tribune should keep pressing for an answer.",
+          "I am going to keep watching this.",
+          "The Tribune should keep pressing for an answer.",
+          "disbursement-active",
+          "disbursement-active"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Calvin Turner",
+      "Dana Reeve",
+      "Tomas Renteria",
+      "Vladimir Gonzalez"
+    ],
+    "unverified": [
+      "Initiative Tracker"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0617,
+  "durationMs": 17199,
+  "parseError": false,
+  "ranAt": "2026-08-11T23:17:19.212Z"
+}

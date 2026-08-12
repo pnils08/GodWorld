@@ -1,0 +1,21 @@
+{
+  "draft": "civic_c103_rachel-torres_packet-v2_deepseek-deepseek-chat.md",
+  "flags": [
+    {
+      "claim": "Vladimir Gonzalez ... 'What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.' / Dana Reeve ... 'What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.'",
+      "issue": "Fabricated and identical duplicated quotes attributed to both Vladimir Gonzalez and Dana Reeve, which do not exist in the ground truth.",
+      "severity": "high"
+    },
+    {
+      "claim": "Similar concerns surfaced in East Oakland, where Tomas Renteria observed the same pattern.",
+      "issue": "Tomas Renteria is canonically from Fruitvale, not East Oakland.",
+      "severity": "high"
+    },
+    {
+      "claim": "Quotes and interviews attributed to Vladimir Gonzalez, Tomas Renteria, and Dana Reeve.",
+      "issue": "Violates the persona-specific sourcing authority for Rachel Torres (rachel-public-safety-v1), which prohibits claiming interviews, observations, or quotes absent from the packet.",
+      "severity": "high"
+    }
+  ],
+  "summary": "Failed due to fabricated and duplicated quotes, citizen neighborhood mismatch, and violation of persona-specific sourcing authority."
+}

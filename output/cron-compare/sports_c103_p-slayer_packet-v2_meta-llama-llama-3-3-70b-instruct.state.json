@@ -1,0 +1,264 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00008",
+    "name": "P Slayer",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write one Article and machine-parseable INTAKE from the supplied evidence",
+    "assignment": "One line anchors the board read — 2-3 — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar throws a No No in his MLB debut",
+    "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "fan-heat",
+      "fanCharge": "fury",
+      "bagModes": [
+        "1 Hate the Move",
+        "3 Friction Pivot"
+      ],
+      "friction": "The stands feel sold out or sold short — write into that gap, not the press release.",
+      "centralFeeling": "Oakland should feel the FO heard the bleachers.",
+      "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
+      "sceneRule": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
+    }
+  },
+  "signal": {
+    "kind": "story-signal",
+    "hood": "Downtown",
+    "src": "world_summary_c103.md ## Sports",
+    "plan": {
+      "focus": "Isley Kelley's resignation",
+      "closeQuestion": "is this the end of an era for the A's?"
+    }
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "P Slayer",
+        "text": "the right move for an aging star",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C103",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-4ac610ea40fe"
+    },
+    {
+      "t": "FACT",
+      "text": "Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging star?",
+      "src": "Oakland_Sports_Feed cycle 102; world_summary_c103.md \"## Sports\" · Isley Kelley resigns, don't close the door just yet on the era, is this the righ",
+      "id": "F-bb64a5d01ffa"
+    },
+    {
+      "t": "FACT",
+      "text": "The stands feel sold out or sold short — write into that gap, not the press release.",
+      "src": "Oakland_Sports_Feed cycle 102; world_summary_c103.md \"## Sports\" · Isley Kelley resigns, don't close the door just yet on the era, is this the righ",
+      "id": "F-17e052a35c20"
+    },
+    {
+      "t": "FACT",
+      "text": "StoryAngle (feed): Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging star?",
+      "src": "Oakland_Sports_Feed cycle 102; world_summary_c103.md \"## Sports\" · Isley Kelley resigns, don't close the door just yet on the era, is this the righ",
+      "id": "F-f5ccbb8defe4"
+    },
+    {
+      "t": "FACT",
+      "text": "Team record (feed): 107-31 · streak W3",
+      "src": "Oakland_Sports_Feed cycle 102; world_summary_c103.md \"## Sports\" · Isley Kelley resigns, don't close the door just yet on the era, is this the righ",
+      "id": "F-4a594bb28620"
+    },
+    {
+      "t": "FACT",
+      "text": "Stats (feed): Isley Kelly, .339avg, 28hr, 92rbi, 7.1war",
+      "src": "Oakland_Sports_Feed cycle 102; world_summary_c103.md \"## Sports\" · Isley Kelley resigns, don't close the door just yet on the era, is this the righ",
+      "id": "F-8df40afc09fe"
+    },
+    {
+      "t": "FACT",
+      "text": "Event: A's — re-signing (late-season)",
+      "src": "Oakland_Sports_Feed cycle 102; world_summary_c103.md \"## Sports\" · Isley Kelley resigns, don't close the door just yet on the era, is this the righ",
+      "id": "F-1a6855793a4e"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "p-slayer-fan-heat-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn a Packet-backed sports result or roster move into fan consequence. Owning or doubling down on a prior take and applying fan or front-office pressure are success; press-box analysis and tidy resolution are not.",
+    "articleContract": {
+      "voice": "first-person I/we fan-heat column",
+      "targetWords": "400-700",
+      "opening": "an unnamed bar, lot, BART, bleacher, sidewalk, or sports-viewing sensory moment",
+      "closing": "a dare, confession, or update with the central friction still live"
+    },
+    "authorizedTexture": [
+      "an unnamed bar, lot, BART, bleacher, sidewalk, or sports-viewing setting with no invented named venue, entity, or event",
+      "the reporter's own presence, gut reaction, or sensory observation",
+      "collective I or we used as columnist rhetoric and emotional stance, not as measured public sentiment or a poll",
+      "a rhetorical counterargument from unnamed fans used as an argument foil, not as an attributed quote",
+      "metaphor and emotional inference grounded in a supplied fact"
+    ],
+    "textureConditions": [
+      "every named player, team, venue, business, institution, office, and organization must come from the Packet",
+      "I or we must not claim a verified collective sentiment, count, gathering, or event",
+      "an unnamed counterargument must remain rhetorical rather than becoming a quote or sourced statement",
+      "scene texture must carry no roster move, result, stat, contract, injury, player act, or front-office act",
+      "a prior-take confession or paraphrase requires a Packet-backed prior article or wall entry, and an exact quote requires supplied text"
+    ],
+    "canonBlockers": [
+      "a named player, team, venue, business, institution, office, or organization not found in the supplied record",
+      "an unsupported roster move, signing, trade, non-move, result, record, streak, award, contract, or front-office act",
+      "an unsupported stat, metric, number, date, duration, or salary",
+      "an unsupported injury, medical, private-life, or mindset claim",
+      "a fabricated player, coach, or front-office quote or interview",
+      "collective fan sentiment presented as measured fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-738c2d5c1347",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-4ac610ea40fe",
+        "t": "FACT",
+        "text": "Current cycle: C103",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-bb64a5d01ffa",
+        "t": "FACT",
+        "text": "Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging star?",
+        "src": "Oakland_Sports_Feed cycle 102; world_summary_c103.md \"## Sports\" · Isley Kelley resigns, don't close the door just yet on the era, is this the righ"
+      },
+      {
+        "id": "F-17e052a35c20",
+        "t": "FACT",
+        "text": "The stands feel sold out or sold short — write into that gap, not the press release.",
+        "src": "Oakland_Sports_Feed cycle 102; world_summary_c103.md \"## Sports\" · Isley Kelley resigns, don't close the door just yet on the era, is this the righ"
+      },
+      {
+        "id": "F-f5ccbb8defe4",
+        "t": "FACT",
+        "text": "StoryAngle (feed): Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging star?",
+        "src": "Oakland_Sports_Feed cycle 102; world_summary_c103.md \"## Sports\" · Isley Kelley resigns, don't close the door just yet on the era, is this the righ"
+      },
+      {
+        "id": "F-4a594bb28620",
+        "t": "FACT",
+        "text": "Team record (feed): 107-31 · streak W3",
+        "src": "Oakland_Sports_Feed cycle 102; world_summary_c103.md \"## Sports\" · Isley Kelley resigns, don't close the door just yet on the era, is this the righ"
+      },
+      {
+        "id": "F-8df40afc09fe",
+        "t": "FACT",
+        "text": "Stats (feed): Isley Kelly, .339avg, 28hr, 92rbi, 7.1war",
+        "src": "Oakland_Sports_Feed cycle 102; world_summary_c103.md \"## Sports\" · Isley Kelley resigns, don't close the door just yet on the era, is this the righ"
+      },
+      {
+        "id": "F-1a6855793a4e",
+        "t": "FACT",
+        "text": "Event: A's — re-signing (late-season)",
+        "src": "Oakland_Sports_Feed cycle 102; world_summary_c103.md \"## Sports\" · Isley Kelley resigns, don't close the door just yet on the era, is this the righ"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "P Slayer",
+        "text": "the right move for an aging star",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "an unnamed bar, lot, BART, bleacher, sidewalk, or sports-viewing setting with no invented named venue, entity, or event",
+      "the reporter's own presence, gut reaction, or sensory observation",
+      "collective I or we used as columnist rhetoric and emotional stance, not as measured public sentiment or a poll",
+      "a rhetorical counterargument from unnamed fans used as an argument foil, not as an attributed quote",
+      "metaphor and emotional inference grounded in a supplied fact"
+    ],
+    "textureConditions": [
+      "every named player, team, venue, business, institution, office, and organization must come from the Packet",
+      "I or we must not claim a verified collective sentiment, count, gathering, or event",
+      "an unnamed counterargument must remain rhetorical rather than becoming a quote or sourced statement",
+      "scene texture must carry no roster move, result, stat, contract, injury, player act, or front-office act",
+      "a prior-take confession or paraphrase requires a Packet-backed prior article or wall entry, and an exact quote requires supplied text"
+    ],
+    "forbiddenClaimClasses": [
+      "a named player, team, venue, business, institution, office, or organization not found in the supplied record",
+      "an unsupported roster move, signing, trade, non-move, result, record, streak, award, contract, or front-office act",
+      "an unsupported stat, metric, number, date, duration, or salary",
+      "an unsupported injury, medical, private-life, or mindset claim",
+      "a fabricated player, coach, or front-office quote or interview",
+      "collective fan sentiment presented as measured fact"
+    ]
+  }
+}

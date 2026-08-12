@@ -1,0 +1,367 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00057",
+    "name": "Sgt. Rachel Torres",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write one Article and machine-parseable INTAKE from the supplied evidence",
+    "assignment": "Oakland Alternative Response Initiative | Status passed | phase operational",
+    "approach": "Measured public-safety approach: choose one packet-backed incident, classification gap, or OARI response question. Third-person only. Use supplied names, places, dates, and numbers; do not invent officers, cases, quotes, crime waves, or public fear.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "public-safety",
+      "pulseClass": "initiative",
+      "safetyFrame": "Oakland Alternative Response Initiative | Status passed | phase operational",
+      "classificationNote": null,
+      "anchorFacts": [
+        "Oakland Alternative Response Initiative | Status passed | phase operational",
+        "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+        "Supplied area: West Oakland, Fruitvale, East Oakland"
+      ],
+      "missing": [
+        "officer names, case details, quotes, and response metrics unless supplied"
+      ],
+      "practicalClose": "State what the supplied record does and does not establish.",
+      "sceneRule": "Use only restrained, unnamed scene texture; it carries no incident fact, quote, or public sentiment.",
+      "sourcePointers": [
+        "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+      ]
+    }
+  },
+  "signal": {
+    "kind": "public-safety",
+    "hood": "West Oakland, Fruitvale, East Oakland",
+    "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+    "plan": {
+      "focus": "Inconsistent impact of Oakland Alternative Response Initiative across targeted neighborhoods",
+      "closeQuestion": "Does the initiative need neighborhood-specific adjustments, or is the crime index data failing to capture its full impact?"
+    }
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00598",
+        "name": "Vladimir Gonzalez",
+        "profile": "Vladimir Gonzalez",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      },
+      {
+        "pop": "POP-00744",
+        "name": "Tomas Renteria",
+        "profile": "Tomas Renteria",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      },
+      {
+        "pop": "POP-00010",
+        "name": "Dana Reeve",
+        "profile": "Dana Reeve",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00598-fd1096c673",
+        "pop": "POP-00598",
+        "name": "Vladimir Gonzalez",
+        "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
+        "factIds": [
+          "F-5df54683a1df",
+          "F-d43a7e2d2c43"
+        ],
+        "src": "packet.W2[POP-00598]"
+      },
+      {
+        "id": "Q-POP-00744-fd1096c673",
+        "pop": "POP-00744",
+        "name": "Tomas Renteria",
+        "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
+        "factIds": [
+          "F-5df54683a1df",
+          "F-d43a7e2d2c43"
+        ],
+        "src": "packet.W2[POP-00744]"
+      },
+      {
+        "id": "Q-POP-00010-fd1096c673",
+        "pop": "POP-00010",
+        "name": "Dana Reeve",
+        "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
+        "factIds": [
+          "F-5df54683a1df",
+          "F-d43a7e2d2c43"
+        ],
+        "src": "packet.W2[POP-00010]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Tomas Renteria",
+        "text": "Feels like the initiative's presence shifts block by block—some corners get all the attention, others feel forgotten. Like they're patching potholes on one street while the next one over's been crumbling for years.",
+        "usable": false
+      },
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "Possible variation in community engagement levels affecting outcomes",
+        "usable": false
+      },
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "Potential overlap with other initiatives causing confusion in reporting",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C103",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-4ac610ea40fe"
+    },
+    {
+      "t": "FACT",
+      "text": "Oakland Alternative Response Initiative | Status passed | phase operational",
+      "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+      "id": "F-5df54683a1df"
+    },
+    {
+      "t": "FACT",
+      "text": "The record leaves a public-safety response or classification question open.",
+      "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+      "id": "F-d43a7e2d2c43"
+    },
+    {
+      "t": "FACT",
+      "text": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+      "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+      "id": "F-0fc9dd7a717d"
+    },
+    {
+      "t": "FACT",
+      "text": "Supplied area: West Oakland, Fruitvale, East Oakland",
+      "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+      "id": "F-253e91a50bf4"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "rachel-public-safety-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Trace one Packet-backed public-safety incident, classification gap, or OARI response question without sensationalism or invented case detail.",
+    "articleContract": {
+      "voice": "measured third-person public-safety reporting",
+      "targetWords": "500-800",
+      "opening": "a Packet-backed safety signal, place, or resident consequence",
+      "closing": "an unresolved accountability or practical-safety question grounded in the record"
+    },
+    "authorizedTexture": [
+      "unnamed restrained scene texture with no incident facts",
+      "analysis of a supplied classification or response gap",
+      "a practical close limited to the supplied record"
+    ],
+    "textureConditions": [
+      "every named person, institution, incident, agency, number, and date must come from the Packet",
+      "do not claim an interview, observation, quote, fear, trend, or response metric absent from the Packet",
+      "crime or safety interpretation must remain framed as analysis when not a supplied fact"
+    ],
+    "canonBlockers": [
+      "invented incident, arrest, officer, case, quote, clearance, response time, or agency action",
+      "unsupported crime classification or collective fear claim",
+      "raw engine labels or decimals as public-facing evidence",
+      "a named person or institution not supplied by the Packet"
+    ]
+  },
+  "manifest": {
+    "id": "AM-9405edfd8e5b",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-4ac610ea40fe",
+        "t": "FACT",
+        "text": "Current cycle: C103",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-5df54683a1df",
+        "t": "FACT",
+        "text": "Oakland Alternative Response Initiative | Status passed | phase operational",
+        "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+      },
+      {
+        "id": "F-d43a7e2d2c43",
+        "t": "FACT",
+        "text": "The record leaves a public-safety response or classification question open.",
+        "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+      },
+      {
+        "id": "F-0fc9dd7a717d",
+        "t": "FACT",
+        "text": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+        "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+      },
+      {
+        "id": "F-253e91a50bf4",
+        "t": "FACT",
+        "text": "Supplied area: West Oakland, Fruitvale, East Oakland",
+        "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00598-fd1096c673",
+        "speakerId": "POP-00598",
+        "speakerName": "Vladimir Gonzalez",
+        "text": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
+        "factIds": [
+          "F-5df54683a1df",
+          "F-d43a7e2d2c43"
+        ],
+        "src": "packet.W2[POP-00598]"
+      },
+      {
+        "id": "Q-POP-00744-fd1096c673",
+        "speakerId": "POP-00744",
+        "speakerName": "Tomas Renteria",
+        "text": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
+        "factIds": [
+          "F-5df54683a1df",
+          "F-d43a7e2d2c43"
+        ],
+        "src": "packet.W2[POP-00744]"
+      },
+      {
+        "id": "Q-POP-00010-fd1096c673",
+        "speakerId": "POP-00010",
+        "speakerName": "Dana Reeve",
+        "text": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
+        "factIds": [
+          "F-5df54683a1df",
+          "F-d43a7e2d2c43"
+        ],
+        "src": "packet.W2[POP-00010]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00598",
+        "name": "Vladimir Gonzalez",
+        "profile": "Vladimir Gonzalez",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00744",
+        "name": "Tomas Renteria",
+        "profile": "Tomas Renteria",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00010",
+        "name": "Dana Reeve",
+        "profile": "Dana Reeve",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Tomas Renteria",
+        "text": "Feels like the initiative's presence shifts block by block—some corners get all the attention, others feel forgotten. Like they're patching potholes on one street while the next one over's been crumbling for years.",
+        "publishable": false
+      },
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "Possible variation in community engagement levels affecting outcomes",
+        "publishable": false
+      },
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "Potential overlap with other initiatives causing confusion in reporting",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "unnamed restrained scene texture with no incident facts",
+      "analysis of a supplied classification or response gap",
+      "a practical close limited to the supplied record"
+    ],
+    "textureConditions": [
+      "every named person, institution, incident, agency, number, and date must come from the Packet",
+      "do not claim an interview, observation, quote, fear, trend, or response metric absent from the Packet",
+      "crime or safety interpretation must remain framed as analysis when not a supplied fact"
+    ],
+    "forbiddenClaimClasses": [
+      "invented incident, arrest, officer, case, quote, clearance, response time, or agency action",
+      "unsupported crime classification or collective fear claim",
+      "raw engine labels or decimals as public-facing evidence",
+      "a named person or institution not supplied by the Packet"
+    ]
+  }
+}

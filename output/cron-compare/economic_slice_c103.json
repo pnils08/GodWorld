@@ -1,0 +1,643 @@
+{
+  "empty": false,
+  "cycle": 103,
+  "kind": "economic-storefront",
+  "pulse": {
+    "className": "hood-cooling",
+    "score": 24,
+    "label": "Dimond cooling",
+    "hood": "Dimond",
+    "namedBusinesses": [],
+    "retail": 8.24,
+    "retailDelta": null
+  },
+  "story": {
+    "angle": "Storefronts quieter in Dimond — foot traffic down",
+    "label": "Dimond cooling",
+    "hookLine": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
+    "hood": "Dimond",
+    "pulseClass": "hood-cooling",
+    "namedBusinesses": [],
+    "citizens": [],
+    "popids": [],
+    "ref": "world_summary ## What Moved · trajectory",
+    "cycle": 103
+  },
+  "approach": "Economic / storefront approach (business desk pack): open from a named hood trajectory or named business on this pack — rising retail, cooling storefronts, workforce/initiative footprint. Never invent Employee_Count, Key_Personnel, or storefronts not listed. Translate RetailVitality / magnitude into human language (busy counters, empty windows) — do not lead with raw engine decimals. One claim about how the block or the board is moving. Not civic process roundup. Not multi-voice business-desk average.",
+  "prewrite": {
+    "pulseClass": "hood-cooling",
+    "angle": "Storefronts quieter in Dimond — foot traffic down",
+    "hookLine": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
+    "namedBusinesses": [],
+    "anchorFacts": [
+      "HOOD: Dimond",
+      "TRAJECTORY: cooling",
+      "MAGNITUDE (translate, do not lead): 6",
+      "RETAIL VITALITY (scene color): 8.24",
+      "NAMED BUSINESSES: none on disk for this hood — do not invent"
+    ],
+    "forbidden": [
+      "Do not invent Employee_Count",
+      "Do not invent Key_Personnel",
+      "Do not invent storefronts not on ledger or evening texture",
+      "Do not lead with raw RetailVitality decimals — translate to scene"
+    ]
+  },
+  "texture": {
+    "hoodCount": 22,
+    "rising": [
+      "Laurel"
+    ],
+    "cooling": [
+      "Dimond",
+      "San Antonio",
+      "East Oakland"
+    ],
+    "venues": [
+      {
+        "name": "Piedmont Heights",
+        "hood": "Piedmont Ave",
+        "kind": "restaurant",
+        "source": "evening-texture"
+      },
+      {
+        "name": "Festive Feast",
+        "hood": "Downtown",
+        "kind": "restaurant",
+        "source": "evening-texture"
+      },
+      {
+        "name": "Rockridge Cellar",
+        "hood": "Rockridge",
+        "kind": "restaurant",
+        "source": "evening-texture"
+      },
+      {
+        "name": "SoupStop",
+        "hood": "Temescal",
+        "kind": "fast-food",
+        "source": "evening-texture"
+      },
+      {
+        "name": "Nightline Station",
+        "hood": "West Oakland",
+        "kind": "nightlife",
+        "source": "evening-texture"
+      }
+    ],
+    "ledgerCount": 0,
+    "ledgerSource": null,
+    "topRetail": [
+      {
+        "name": "Rockridge",
+        "sentiment": 0.53,
+        "retail": 14.78,
+        "eventAttractiveness": 9.38,
+        "crime": 0.37
+      },
+      {
+        "name": "Downtown",
+        "sentiment": 0.41,
+        "retail": 13.64,
+        "eventAttractiveness": 12.55,
+        "crime": 1.02
+      },
+      {
+        "name": "Temescal",
+        "sentiment": 0.55,
+        "retail": 13.51,
+        "eventAttractiveness": 11.09,
+        "crime": 0.76
+      },
+      {
+        "name": "Uptown",
+        "sentiment": 0.45,
+        "retail": 13.43,
+        "eventAttractiveness": 13.24,
+        "crime": 0.75
+      },
+      {
+        "name": "Grand Lake",
+        "sentiment": 0.55,
+        "retail": 13.24,
+        "eventAttractiveness": 10,
+        "crime": 0.57
+      }
+    ],
+    "bottomRetail": [
+      {
+        "name": "Ivy Hill",
+        "sentiment": 0.59,
+        "retail": 5.21,
+        "eventAttractiveness": 4,
+        "crime": 0.22
+      },
+      {
+        "name": "Baylight District",
+        "sentiment": 0.55,
+        "retail": 5.77,
+        "eventAttractiveness": 6,
+        "crime": 0.62
+      },
+      {
+        "name": "San Antonio",
+        "sentiment": 0.39,
+        "retail": 6.89,
+        "eventAttractiveness": 8,
+        "crime": 0.77
+      },
+      {
+        "name": "Brooklyn",
+        "sentiment": 0.47,
+        "retail": 7.18,
+        "eventAttractiveness": 5,
+        "crime": 0.71
+      },
+      {
+        "name": "Glenview",
+        "sentiment": 0.57,
+        "retail": 7.4,
+        "eventAttractiveness": 5.6,
+        "crime": 0.5
+      }
+    ]
+  },
+  "signals": {
+    "businessLaneCount": 18,
+    "sample": [
+      {
+        "kind": "anomaly",
+        "causeType": null,
+        "label": "transit ailment — economic footprint, affected businesses, workforce impact in Fruitvale | Business conditions in Fruitvale track the transit picture.",
+        "angle": "transit ailment — economic footprint, affected businesses, workforce impact in Fruitvale",
+        "hookLine": "Business conditions in Fruitvale track the transit picture.",
+        "hood": "Fruitvale",
+        "popids": [
+          "POP-00231",
+          "POP-00598",
+          "POP-00744"
+        ],
+        "citizens": [
+          "Calvin Turner (POP-00231)",
+          "Vladimir Gonzalez (POP-00598)",
+          "Tomas Renteria (POP-00744)"
+        ],
+        "ref": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+      },
+      {
+        "kind": "anomaly",
+        "causeType": null,
+        "label": "economic ailment — economic footprint, affected businesses, workforce impact in Downtown | Business conditions in Downtown track the economic picture.",
+        "angle": "economic ailment — economic footprint, affected businesses, workforce impact in Downtown",
+        "hookLine": "Business conditions in Downtown track the economic picture.",
+        "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District, East Oakland",
+        "popids": [
+          "POP-00010",
+          "POP-00039",
+          "POP-00635"
+        ],
+        "citizens": [
+          "Dana Reeve (POP-00010)",
+          "Mei Chen (POP-00635)",
+          "Simone Ellis (POP-00039)"
+        ],
+        "ref": "output/engine_audit_c103.json patterns[3]; evidence: Neighborhood_Map row(s) "
+      },
+      {
+        "kind": "ripple",
+        "causeType": "neighborhood-fold",
+        "label": "fold-applied/initiative-implementation | Initiative work landed in 5 neighborhood(s): Downtown, Jack London, West Oakland, Temescal, Fruitvale",
+        "angle": "fold-applied/initiative-implementation | Initiative work landed in 5 neighborhood(s): Downtown, Jack London, West Oakland, Temescal, Fruitvale",
+        "hookLine": null,
+        "hood": null,
+        "popids": [],
+        "citizens": [],
+        "ref": "Ripple_Ledger cycle 103 (CauseType neighborhood-fold); rendered: world_summary_c103.md \"## What Moved\" > \"### neighborhood-fold\""
+      },
+      {
+        "kind": "ripple",
+        "causeType": "edition-coverage",
+        "label": "traffic/retail/nightlife/publicSpaces/communityEngagement/culturalActivity | Edition coverage lifted the city: traffic +0.03, retail +0.048, nightlife +0.06, publicSpaces -0.026, communityEngagement -0.03, culturalActivity +0",
+        "angle": "traffic/retail/nightlife/publicSpaces/communityEngagement/culturalActivity | Edition coverage lifted the city: traffic +0.03, retail +0.048, nightlife +0.06, publicSpaces -0.026, communityEngagement -0.03, culturalActivity +0",
+        "hookLine": null,
+        "hood": null,
+        "popids": [],
+        "citizens": [],
+        "ref": "Ripple_Ledger cycle 103 (CauseType edition-coverage); rendered: world_summary_c103.md \"## What Moved\" > \"### edition-coverage\""
+      },
+      {
+        "kind": "ripple",
+        "causeType": "edition-coverage",
+        "label": "sentiment | prior-cycle coverage ratings × sentimentWeight × 0.015, clamped ±0.20",
+        "angle": "sentiment | prior-cycle coverage ratings × sentimentWeight × 0.015, clamped ±0.20",
+        "hookLine": null,
+        "hood": null,
+        "popids": [],
+        "citizens": [],
+        "ref": "Ripple_Ledger cycle 103 (CauseType edition-coverage); rendered: world_summary_c103.md \"## What Moved\" > \"### edition-coverage\""
+      }
+    ]
+  },
+  "candidates": [
+    {
+      "className": "hood-cooling",
+      "score": 24,
+      "label": "Dimond cooling",
+      "hood": "Dimond",
+      "namedBusinesses": []
+    },
+    {
+      "className": "hood-cooling",
+      "score": 24,
+      "label": "San Antonio cooling",
+      "hood": "San Antonio",
+      "namedBusinesses": []
+    },
+    {
+      "className": "hood-cooling",
+      "score": 24,
+      "label": "East Oakland cooling",
+      "hood": "East Oakland",
+      "namedBusinesses": []
+    },
+    {
+      "className": "hood-rising",
+      "score": 24,
+      "label": "Laurel rising",
+      "hood": "Laurel",
+      "namedBusinesses": []
+    },
+    {
+      "className": "workforce-pressure",
+      "score": 19,
+      "label": "Fruitvale · transit ailment — economic footprint, affected businesses, workforce impact in F",
+      "hood": "Fruitvale",
+      "namedBusinesses": []
+    },
+    {
+      "className": "workforce-pressure",
+      "score": 19,
+      "label": "Downtown · economic ailment — economic footprint, affected businesses, workforce impact in ",
+      "hood": "Downtown",
+      "namedBusinesses": []
+    },
+    {
+      "className": "named-storefront",
+      "score": 14,
+      "label": "Piedmont Heights (Piedmont Ave)",
+      "hood": "Piedmont Ave",
+      "namedBusinesses": [
+        "Piedmont Heights"
+      ]
+    },
+    {
+      "className": "named-storefront",
+      "score": 14,
+      "label": "Festive Feast (Downtown)",
+      "hood": "Downtown",
+      "namedBusinesses": [
+        "Festive Feast"
+      ]
+    },
+    {
+      "className": "named-storefront",
+      "score": 14,
+      "label": "Rockridge Cellar (Rockridge)",
+      "hood": "Rockridge",
+      "namedBusinesses": [
+        "Rockridge Cellar"
+      ]
+    },
+    {
+      "className": "named-storefront",
+      "score": 14,
+      "label": "SoupStop (Temescal)",
+      "hood": "Temescal",
+      "namedBusinesses": [
+        "SoupStop"
+      ]
+    },
+    {
+      "className": "named-storefront",
+      "score": 14,
+      "label": "Nightline Station (West Oakland)",
+      "hood": "West Oakland",
+      "namedBusinesses": [
+        "Nightline Station"
+      ]
+    }
+  ],
+  "pulses": [
+    {
+      "className": "hood-cooling",
+      "score": 24,
+      "label": "Dimond cooling",
+      "hood": "Dimond",
+      "mag": 6,
+      "retail": 8.24,
+      "sentiment": 0.63,
+      "namedBusinesses": [],
+      "businesses": [],
+      "venues": [],
+      "requiresName": false,
+      "source": "world_summary ## What Moved · trajectory",
+      "angle": "Storefronts quieter in Dimond — foot traffic down",
+      "hookLine": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
+      "sceneBits": [
+        "HOOD: Dimond",
+        "TRAJECTORY: cooling",
+        "MAGNITUDE (translate, do not lead): 6",
+        "RETAIL VITALITY (scene color): 8.24",
+        "NAMED BUSINESSES: none on disk for this hood — do not invent"
+      ],
+      "cycle": 103
+    },
+    {
+      "className": "hood-cooling",
+      "score": 24,
+      "label": "San Antonio cooling",
+      "hood": "San Antonio",
+      "mag": 6,
+      "retail": 6.89,
+      "sentiment": 0.39,
+      "namedBusinesses": [],
+      "businesses": [],
+      "venues": [],
+      "requiresName": false,
+      "source": "world_summary ## What Moved · trajectory",
+      "angle": "Storefronts quieter in San Antonio — foot traffic down",
+      "hookLine": "San Antonio cooling off: foot traffic down, storefronts quieter than the rest of the city",
+      "sceneBits": [
+        "HOOD: San Antonio",
+        "TRAJECTORY: cooling",
+        "MAGNITUDE (translate, do not lead): 6",
+        "RETAIL VITALITY (scene color): 6.89",
+        "NAMED BUSINESSES: none on disk for this hood — do not invent"
+      ],
+      "cycle": 103
+    },
+    {
+      "className": "hood-cooling",
+      "score": 24,
+      "label": "East Oakland cooling",
+      "hood": "East Oakland",
+      "mag": 6,
+      "retail": 8.39,
+      "sentiment": 0.51,
+      "namedBusinesses": [],
+      "businesses": [],
+      "venues": [],
+      "requiresName": false,
+      "source": "world_summary ## What Moved · trajectory",
+      "angle": "Storefronts quieter in East Oakland — foot traffic down",
+      "hookLine": "East Oakland cooling off: foot traffic down, storefronts quieter than the rest of the city",
+      "sceneBits": [
+        "HOOD: East Oakland",
+        "TRAJECTORY: cooling",
+        "MAGNITUDE (translate, do not lead): 6",
+        "RETAIL VITALITY (scene color): 8.39",
+        "NAMED BUSINESSES: none on disk for this hood — do not invent"
+      ],
+      "cycle": 103
+    },
+    {
+      "className": "hood-rising",
+      "score": 24,
+      "label": "Laurel rising",
+      "hood": "Laurel",
+      "mag": 5,
+      "retail": 10.37,
+      "sentiment": 0.49,
+      "namedBusinesses": [],
+      "businesses": [],
+      "venues": [],
+      "requiresName": false,
+      "source": "world_summary ## What Moved · trajectory",
+      "angle": "Retail turning upward in Laurel — busy counters, people moving in",
+      "hookLine": "Laurel turning upward: retail busy, events drawing crowds, people moving in",
+      "sceneBits": [
+        "HOOD: Laurel",
+        "TRAJECTORY: rising",
+        "MAGNITUDE (translate, do not lead): 5",
+        "RETAIL VITALITY (scene color): 10.37",
+        "NAMED BUSINESSES: none on disk for this hood — do not invent"
+      ],
+      "cycle": 103
+    },
+    {
+      "className": "workforce-pressure",
+      "score": 19,
+      "label": "Fruitvale · transit ailment — economic footprint, affected businesses, workforce impact in F",
+      "hood": "Fruitvale",
+      "namedBusinesses": [],
+      "businesses": [],
+      "popids": [
+        "POP-00231",
+        "POP-00598",
+        "POP-00744"
+      ],
+      "citizens": [
+        "Calvin Turner (POP-00231)",
+        "Vladimir Gonzalez (POP-00598)",
+        "Tomas Renteria (POP-00744)"
+      ],
+      "source": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+      "angle": "transit ailment — economic footprint, affected businesses, workforce impact in Fruitvale",
+      "hookLine": "Business conditions in Fruitvale track the transit picture.",
+      "sceneBits": [
+        "HOOD: Fruitvale",
+        "SIGNAL: transit ailment — economic footprint, affected businesses, workforce impact in Fruitvale",
+        "NAMED: none — do not invent businesses",
+        "CITIZENS (packet only): Calvin Turner (POP-00231); Vladimir Gonzalez (POP-00598); Tomas Renteria (POP-00744)"
+      ],
+      "cycle": 103
+    },
+    {
+      "className": "workforce-pressure",
+      "score": 19,
+      "label": "Downtown · economic ailment — economic footprint, affected businesses, workforce impact in ",
+      "hood": "Downtown",
+      "namedBusinesses": [],
+      "businesses": [],
+      "popids": [
+        "POP-00010",
+        "POP-00039",
+        "POP-00635"
+      ],
+      "citizens": [
+        "Dana Reeve (POP-00010)",
+        "Mei Chen (POP-00635)",
+        "Simone Ellis (POP-00039)"
+      ],
+      "source": "output/engine_audit_c103.json patterns[3]; evidence: Neighborhood_Map row(s) ",
+      "angle": "economic ailment — economic footprint, affected businesses, workforce impact in Downtown",
+      "hookLine": "Business conditions in Downtown track the economic picture.",
+      "sceneBits": [
+        "HOOD: Downtown",
+        "SIGNAL: economic ailment — economic footprint, affected businesses, workforce impact in Downtown",
+        "NAMED: none — do not invent businesses",
+        "CITIZENS (packet only): Dana Reeve (POP-00010); Mei Chen (POP-00635); Simone Ellis (POP-00039)"
+      ],
+      "cycle": 103
+    },
+    {
+      "className": "named-storefront",
+      "score": 14,
+      "label": "Piedmont Heights (Piedmont Ave)",
+      "hood": "Piedmont Ave",
+      "namedBusinesses": [
+        "Piedmont Heights"
+      ],
+      "venues": [
+        {
+          "name": "Piedmont Heights",
+          "hood": "Piedmont Ave",
+          "kind": "restaurant",
+          "source": "evening-texture"
+        }
+      ],
+      "businesses": [],
+      "requiresName": true,
+      "named": "Piedmont Heights",
+      "source": "world_summary ## Evening Texture + trajectory context",
+      "angle": "Named restaurant Piedmont Heights in Piedmont Ave",
+      "hookLine": "Piedmont Heights is on the evening board in Piedmont Ave.",
+      "sceneBits": [
+        "VENUE: Piedmont Heights",
+        "HOOD: Piedmont Ave",
+        "KIND: restaurant",
+        "Never invent Employee_Count or Key_Personnel for this room."
+      ],
+      "cycle": 103
+    },
+    {
+      "className": "named-storefront",
+      "score": 14,
+      "label": "Festive Feast (Downtown)",
+      "hood": "Downtown",
+      "namedBusinesses": [
+        "Festive Feast"
+      ],
+      "venues": [
+        {
+          "name": "Festive Feast",
+          "hood": "Downtown",
+          "kind": "restaurant",
+          "source": "evening-texture"
+        }
+      ],
+      "businesses": [],
+      "requiresName": true,
+      "named": "Festive Feast",
+      "source": "world_summary ## Evening Texture + trajectory context",
+      "angle": "Named restaurant Festive Feast in Downtown",
+      "hookLine": "Festive Feast is on the evening board in Downtown.",
+      "sceneBits": [
+        "VENUE: Festive Feast",
+        "HOOD: Downtown",
+        "KIND: restaurant",
+        "Never invent Employee_Count or Key_Personnel for this room."
+      ],
+      "cycle": 103
+    },
+    {
+      "className": "named-storefront",
+      "score": 14,
+      "label": "Rockridge Cellar (Rockridge)",
+      "hood": "Rockridge",
+      "namedBusinesses": [
+        "Rockridge Cellar"
+      ],
+      "venues": [
+        {
+          "name": "Rockridge Cellar",
+          "hood": "Rockridge",
+          "kind": "restaurant",
+          "source": "evening-texture"
+        }
+      ],
+      "businesses": [],
+      "requiresName": true,
+      "named": "Rockridge Cellar",
+      "source": "world_summary ## Evening Texture + trajectory context",
+      "angle": "Named restaurant Rockridge Cellar in Rockridge",
+      "hookLine": "Rockridge Cellar is on the evening board in Rockridge.",
+      "sceneBits": [
+        "VENUE: Rockridge Cellar",
+        "HOOD: Rockridge",
+        "KIND: restaurant",
+        "Never invent Employee_Count or Key_Personnel for this room."
+      ],
+      "cycle": 103
+    },
+    {
+      "className": "named-storefront",
+      "score": 14,
+      "label": "SoupStop (Temescal)",
+      "hood": "Temescal",
+      "namedBusinesses": [
+        "SoupStop"
+      ],
+      "venues": [
+        {
+          "name": "SoupStop",
+          "hood": "Temescal",
+          "kind": "fast-food",
+          "source": "evening-texture"
+        }
+      ],
+      "businesses": [],
+      "requiresName": true,
+      "named": "SoupStop",
+      "source": "world_summary ## Evening Texture + trajectory context",
+      "angle": "Named fast-food SoupStop in Temescal",
+      "hookLine": "SoupStop is on the evening board in Temescal.",
+      "sceneBits": [
+        "VENUE: SoupStop",
+        "HOOD: Temescal",
+        "KIND: fast-food",
+        "Never invent Employee_Count or Key_Personnel for this room."
+      ],
+      "cycle": 103
+    },
+    {
+      "className": "named-storefront",
+      "score": 14,
+      "label": "Nightline Station (West Oakland)",
+      "hood": "West Oakland",
+      "namedBusinesses": [
+        "Nightline Station"
+      ],
+      "venues": [
+        {
+          "name": "Nightline Station",
+          "hood": "West Oakland",
+          "kind": "nightlife",
+          "source": "evening-texture"
+        }
+      ],
+      "businesses": [],
+      "requiresName": true,
+      "named": "Nightline Station",
+      "source": "world_summary ## Evening Texture + trajectory context",
+      "angle": "Named nightlife Nightline Station in West Oakland",
+      "hookLine": "Nightline Station is on the evening board in West Oakland.",
+      "sceneBits": [
+        "VENUE: Nightline Station",
+        "HOOD: West Oakland",
+        "KIND: nightlife",
+        "Never invent Employee_Count or Key_Personnel for this room."
+      ],
+      "cycle": 103
+    }
+  ],
+  "scene": {
+    "colorRoom": "Storefront light, foot traffic, open/closed shutters. Named places only from ledger or evening texture. Headcount only when snapshot lists it. No invented owners or employee counts.",
+    "namedOnTop": []
+  },
+  "pointers": [
+    "output/world_summary_c103.md ## What Moved / Neighborhood snapshot",
+    "output/desk_signal_c103.json lanes.business",
+    "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 2"
+  ]
+}

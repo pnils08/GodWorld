@@ -110,6 +110,23 @@ function assertBase(packet, wake) {
 function buildAnglePacket(args) {
   const packet = clone(v1.buildAnglePacket(args));
   packet.v = VERSION;
+  const investigation = packet.task && packet.task.creativeBrief &&
+    packet.task.creativeBrief.kind === 'civic-investigation';
+  if (investigation) {
+    const story = args && args.story || {};
+    const source = clean(story.ref) || 'assignment';
+    const safeAssignment = clean(story.angle || story.label, 500)
+      .replace(/\s+—\s+remedy path \+ responsible office\s*$/i, '');
+    packet.task.goal = 'Plan one evidence-bounded records brief without inventing a reporting trail';
+    packet.task.assignment = safeAssignment;
+    packet.known = packet.known.filter(claim =>
+      !(clean(claim.text) === clean(story.label) && clean(story.label) !== safeAssignment));
+    if (safeAssignment && !packet.known.some(claim =>
+      clean(claim.text) === safeAssignment && clean(claim.src) === source)) {
+      packet.known.unshift({ t: 'FACT', text: safeAssignment, src: source });
+    }
+    packet.output.rule += ' Missing reporting evidence is a typed state, not proof that an act or response did not occur.';
+  }
   packet.known.unshift({
     t: 'FACT',
     text: 'Current cycle: C' + clean(args && args.cycle),
@@ -158,10 +175,13 @@ function selectedRow(rows, id, field, errs, required) {
 function validateReportOutput(value, input) {
   const out = typeof value === 'string' ? v1.parseJsonObject(value) : value;
   const errs = [];
+  const leadValues = Array.isArray(out && out.unverifiedLead)
+    ? out.unverifiedLead
+    : (clean(out && out.unverifiedLead) ? [out.unverifiedLead] : null);
   const answer = out && out.answer;
   if (!['quote', 'abstain'].includes(answer)) errs.push('answer must be quote|abstain');
   if (!Array.isArray(out && out.fact_ids)) errs.push('fact_ids must be an array');
-  if (!Array.isArray(out && out.unverifiedLead)) errs.push('unverifiedLead must be an array');
+  if (!leadValues) errs.push('unverifiedLead must be an array or one non-empty string');
   const known = idMap((input && input.known) || []);
   const facts = [];
   for (const id of (out && Array.isArray(out.fact_ids) ? out.fact_ids : [])) {
@@ -199,7 +219,7 @@ function validateReportOutput(value, input) {
     stanceId: selection.stance,
     questionId: selection.question,
     intentionId: selection.intention,
-    unverifiedLead: [...new Set((out.unverifiedLead || []).map(v => clean(v, 500)).filter(Boolean))].slice(0, 6),
+    unverifiedLead: [...new Set((leadValues || []).map(v => clean(v, 500)).filter(Boolean))].slice(0, 6),
     abstainReason: out.abstain_reason || null,
     quoteId,
     publishableQuote: answer === 'quote' ? fragments.join(' ') : null,
@@ -219,6 +239,37 @@ function buildWritePacket(args) {
   const packet = clone(v1.buildWritePacket(args));
   packet.v = VERSION;
   const reviewProfile = args.reviewProfile ? clone(args.reviewProfile) : null;
+  const investigation = packet.task && packet.task.creativeBrief &&
+    packet.task.creativeBrief.kind === 'civic-investigation';
+  const reportingEvidence = investigation && packet.task.creativeBrief.reportingEvidence || {};
+  const hasReportingTrail = Object.values(reportingEvidence).some(group =>
+    group && group.state !== 'NOT_SUPPLIED' &&
+    ((Array.isArray(group.events) && group.events.length) ||
+      (Array.isArray(group.entities) && group.entities.length)));
+  if (investigation) {
+    packet.exposure.excludedLeads = [];
+    packet.task.writingMode = hasReportingTrail ? 'FULL_INVESTIGATION' : 'RECORDS_BRIEF';
+    if (!hasReportingTrail) {
+      packet.task.goal = 'Write one concise records brief and machine-parseable INTAKE from the supplied evidence';
+      const safeAssignment = clean(args && args.story && (args.story.angle || args.story.label) ||
+        packet.task.assignment, 500).replace(/\s+—\s+remedy path \+ responsible office\s*$/i, '');
+      packet.task.assignment = safeAssignment;
+      packet.signal.plan = {
+        focus: safeAssignment,
+        closeQuestion: 'What record would explain why the supplied Initiative has not advanced?'
+      };
+      if (reviewProfile) {
+        reviewProfile.articleContract = Object.assign({}, reviewProfile.articleContract, {
+          voice: 'concise evidence-first records brief; no first-person reporting act unless supplied as a fact',
+          targetWords: '180-280',
+          opening: 'the strongest Packet-backed fact without engine classifier or row metadata',
+          closing: 'one open question or next needed record, without implying an owner or request exists'
+        });
+        reviewProfile.authorizedTexture = (reviewProfile.authorizedTexture || [])
+          .filter(rule => !/reporter's own act/i.test(rule));
+      }
+    }
+  }
   const loadBearingPolicy = reviewProfile && reviewProfile.canonPolicy === 'load-bearing';
   if (reviewProfile) packet.reviewProfile = reviewProfile;
   attachFactIds(packet);
@@ -254,7 +305,8 @@ function buildWritePacket(args) {
     }
   }
   const approvedSubjects = (packet.exposure.subjects || []).map(s => ({
-    id: s.pop, name: s.name, profile: s.profile, src: s.src,
+    id: s.pop, name: s.name,
+    profile: clean(s.profile, 300).replace(/\s+—\s+POP-\d+\s*$/i, ''), src: s.src,
     quotationEligible: approvedQuotes.some(q => q.speakerId === s.pop),
   }));
   packet.manifest = {
@@ -291,14 +343,16 @@ function buildWritePacket(args) {
   packet.limits.rule = loadBearingPolicy
     ? 'The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact.'
     : 'The Article claim manifest is exhaustive. Better prose may arrange and interpret it, but may not enlarge it.';
-  if (packet.task && packet.task.creativeBrief &&
-      packet.task.creativeBrief.kind === 'civic-investigation') {
+  if (investigation) {
     packet.limits.rule += ' For this investigation, do not convert a source intention to keep watching into past tracking; do not invent conversations, access, requests, responses, files, owners, duties, offices, expectations, or collective conclusions. Attribute each approved quote exactly and separately. Missing fields stay unknown, not implied.';
     packet.limits.rule += ' Use the exact epistemic form "the Packet does not establish X" for missing evidence. Never rewrite missing evidence as "X did not happen," "no one did X," "I looked/asked/requested," or "the absence proves X." First-person reporting acts require an approved fact that names that act.';
     packet.manifest.permittedInterpretationSlots.push({
       id: 'P_KNOWN_UNKNOWN',
       rule: 'Contrast approved facts with creativeBrief.missing only; do not narrate a missing item as an event that occurred.'
     });
+    if (!hasReportingTrail) {
+      packet.limits.rule += ' This Packet has no supplied reporting trail: write a 180-280 word RECORDS_BRIEF. Do not print engine classifier names, severity labels, source row numbers, or a silence-clock section.';
+    }
   }
   packet.output.preflight = {
     facts: 'select manifest.approvedFacts ids',
@@ -320,18 +374,73 @@ function quotedSpans(text) {
   return spans;
 }
 
+function renderRecordsBrief(packet) {
+  assertBase(packet, 'W3');
+  if (!packet.task || packet.task.writingMode !== 'RECORDS_BRIEF') {
+    throw new Error('renderRecordsBrief requires W3 RECORDS_BRIEF mode');
+  }
+  const facts = packet.manifest.approvedFacts.filter(row =>
+    row.src !== 'cron-desk-run explicit cycle argument');
+  if (!facts.length) throw new Error('RECORDS_BRIEF requires one approved non-runtime fact');
+  const missing = packet.task.creativeBrief && packet.task.creativeBrief.missing || [];
+  const quotes = packet.manifest.approvedQuotes || [];
+  const subjects = new Map((packet.manifest.approvedSubjects || []).map(row => [row.id, row]));
+  const closeQuestion = clean(packet.signal && packet.signal.plan && packet.signal.plan.closeQuestion, 400);
+  const title = clean(packet.task.assignment, 500).replace(/\s+stalled in\s+/i, ': stalled in ');
+  const sourceLines = quotes.flatMap(quote => {
+    const subject = subjects.get(quote.speakerId);
+    const profile = subject && clean(subject.profile, 300);
+    const prefix = clean(quote.speakerName, 160) + ' — ';
+    const descriptor = profile && profile.startsWith(prefix) ? profile.slice(prefix.length) : profile;
+    return [
+      '**' + clean(quote.speakerName, 160) + (descriptor ? ' — ' + descriptor : '') + '**',
+      '',
+      '> “' + clean(quote.text, 1400) + '”',
+      ''
+    ];
+  });
+  const lines = [
+    '# ' + title,
+    '',
+    'The supplied record establishes the following:',
+    '',
+    ...facts.map(row => '- ' + clean(row.text, 500)),
+    '',
+    'Those supplied claims define the current record for this brief.',
+    '',
+    ...(sourceLines.length ? [
+      'The supplied source material identifies the following people:',
+      '',
+      ...sourceLines,
+    ] : []),
+    'The supplied record does not establish ' + missing.map(value => clean(value, 300)).join('; ') + '.',
+    'Those gaps remain unknown. They are not evidence that a request, response, record check, or assignment of responsibility did not occur.',
+    '',
+    closeQuestion ? 'The open question is: ' + closeQuestion : null,
+    '',
+    '## INTAKE',
+    ...quotes.map(quote => 'NAMES: ' + clean(quote.speakerName, 160) + ' | quoted-source'),
+    packet.signal && packet.signal.hood ? 'HOOD: ' + clean(packet.signal.hood, 160) : null,
+    'CLAIM: ' + clean(facts[0].text, 500) + ' | ' + clean(facts[0].src, 300),
+    '<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=' + (quotes.length ? 'yes' : 'no') + '; sim-state-cited=yes -->',
+    ''
+  ];
+  return lines.filter(line => line !== null).join('\n');
+}
+
 function auditArticle(draftText, packet) {
   assertBase(packet, 'W3');
+  const bodyText = String(draftText || '').split(/^##\s+INTAKE\s*$/im)[0];
   const approvedText = [
     ...packet.manifest.approvedFacts.map(row => row.text),
     ...packet.manifest.approvedQuotes.map(row => row.text),
     ...packet.manifest.approvedSubjects.map(row => row.profile),
   ].join('\n');
   const allowedNumbers = new Set(numericTokens(approvedText).map(v => v.toLowerCase()));
-  const newNumbers = [...new Set(numericTokens(draftText)
+  const newNumbers = [...new Set(numericTokens(bodyText)
     .map(v => v.toLowerCase()).filter(v => !allowedNumbers.has(v)))];
   const approvedQuotes = new Set(packet.manifest.approvedQuotes.map(row => clean(row.text)));
-  const unknownQuotes = quotedSpans(draftText).filter(quote => !approvedQuotes.has(quote));
+  const unknownQuotes = quotedSpans(bodyText).filter(quote => !approvedQuotes.has(quote));
   const errors = [];
   if (newNumbers.length) errors.push({ code: 'UNAPPROVED_NUMBER', values: newNumbers });
   if (unknownQuotes.length) errors.push({ code: 'UNAPPROVED_QUOTE', values: unknownQuotes });
@@ -347,10 +456,21 @@ function auditArticle(draftText, packet) {
       /\b(?:the )?absence (?:is|becomes|proves|shows)\b/i,
       /\b(?:whoever|somebody)\s+(?:owns|holds)\b/i,
       /\b(?:office|owner|file-holder|duty-holder)\s+(?:behind|holding|responsible for)\b/i,
-    ].flatMap(re => String(draftText || '').match(re) || []).map(value => clean(value));
+      /\bno (?:documented )?(?:setback|request|response|office|record)\b/i,
+      /\b(?:residents have noticed|both are asking|same question from different angles)\b/i,
+    ].flatMap(re => bodyText.match(re) || []).map(value => clean(value));
     if (overreach.length) errors.push({
       code: 'INVESTIGATION_EPISTEMIC_OVERREACH',
       values: [...new Set(overreach)],
+    });
+    const engineMetadata = [
+      /\bstuck-initiative\b/i,
+      /\b(?:severity|marked)\s+high\b/i,
+      /\brow\s+\d+\b/i,
+    ].flatMap(re => bodyText.match(re) || []).map(value => clean(value));
+    if (engineMetadata.length) errors.push({
+      code: 'ENGINE_METADATA_LEAK',
+      values: [...new Set(engineMetadata)],
     });
   }
   // A load-bearing profile deliberately routes lexical differences to Rhea for
@@ -359,7 +479,9 @@ function auditArticle(draftText, packet) {
   // fatal lexical wall therefore becomes review evidence, while exhaustive
   // evaluation packets retain their original fail-closed behavior.
   if (packet.manifest.policy === 'load-bearing') {
-    const hard = errors.filter(error => error.code === 'INVESTIGATION_EPISTEMIC_OVERREACH');
+    const hard = errors.filter(error =>
+      ['INVESTIGATION_EPISTEMIC_OVERREACH', 'ENGINE_METADATA_LEAK'].includes(error.code) ||
+      (packet.task.writingMode === 'RECORDS_BRIEF' && error.code === 'UNAPPROVED_QUOTE'));
     if (hard.length) return { ok: false, manifestId: packet.manifest.id, errors: hard,
       observations: errors.filter(error => !hard.includes(error)) };
     return { ok: true, manifestId: packet.manifest.id, errors: [], observations: errors };
@@ -385,5 +507,6 @@ module.exports = {
   validateReportOutput,
   buildWritePacket,
   auditArticle,
+  renderRecordsBrief,
   prompt,
 };

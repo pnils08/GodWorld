@@ -100,7 +100,19 @@ function luisCandidateScope(entry, profiles) {
         .test(String(row.RoleType || '')));
     if (!row) excluded.push({ popid, reason: 'NO_LEDGER_PROFILE' });
     else if (sportsRole) excluded.push({ popid, reason: 'PRO_ATHLETE_CIVIC_INELIGIBLE' });
-    else allowed.push({ popid, name: String(row.Name || '').trim() });
+    else {
+      const name = String(row.Name || '').trim();
+      const role = String(row.RoleType || '').trim() || null;
+      const neighborhood = String(row.Neighborhood || '').trim() || null;
+      allowed.push({
+        popid,
+        name,
+        role,
+        neighborhood,
+        profile: [name, role, neighborhood ? neighborhood + ' resident' : null]
+          .filter(Boolean).join(' — ')
+      });
+    }
   }
   return { allowed, excluded };
 }
@@ -252,6 +264,12 @@ function prewriteForSeat(slug, top, candidateScope) {
       'request timestamp and elapsed silence duration',
       'responsible person, office, or duty unless named by the source'
     ],
+    reportingEvidence: {
+      recordChecks: { state: 'NOT_SUPPLIED', events: [] },
+      requestEvents: { state: 'NOT_SUPPLIED', events: [] },
+      responseEvents: { state: 'NOT_SUPPLIED', events: [] },
+      responsibleEntities: { state: 'NOT_SUPPLIED', entities: [] }
+    },
     silenceClock: { state: 'UNESTABLISHED', value: null, src: null },
     excludedCandidates: (candidateScope && candidateScope.excluded) || []
   };
@@ -305,6 +323,7 @@ function packetForEntries(entries, slug, profiles) {
       source: top.ref
     },
     prewrite: prewriteForSeat(slug, top, candidateScope),
+    citizens: candidateScope ? candidateScope.allowed : [],
     candidates,
     pointers: unique(candidates.map(candidate => candidate.ref))
   };
@@ -317,7 +336,7 @@ function buildCivicDomainSlice(cycle, { root = ROOT } = {}) {
     [slug, packetForEntries(entries, slug, profiles)]));
   const nonempty = Object.values(packets).filter(packet => packet && !packet.empty);
   return {
-    version: 'CIVIC-DOMAIN-SLICE-3',
+    version: 'CIVIC-DOMAIN-SLICE-4',
     cycle: Number(cycle),
     kind: 'civic-domain',
     empty: nonempty.length === 0,
@@ -376,7 +395,7 @@ function writeCivicDomainSlice(cycle, slice, root = ROOT) {
 
 function loadCivicDomainSlice(cycle, root = ROOT) {
   const existing = loadJson(slicePaths(cycle, root).json);
-  if (existing && existing.version === 'CIVIC-DOMAIN-SLICE-3') return existing;
+  if (existing && existing.version === 'CIVIC-DOMAIN-SLICE-4') return existing;
   const slice = buildCivicDomainSlice(cycle, { root });
   if (!slice.empty) writeCivicDomainSlice(cycle, slice, root);
   return slice.empty ? null : slice;

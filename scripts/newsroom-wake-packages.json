@@ -147,10 +147,10 @@
       "canonPolicy": "load-bearing",
       "purpose": "Separate what the Packet establishes from what remains open, pursue the accountable record fairly, and make a documented contradiction or documented silence visible without inventing either.",
       "articleContract": {
-        "voice": "short, evidence-first investigation in first or third person",
-        "targetWords": "450-750",
+        "voice": "evidence-first; concise records brief without reporting events, full investigation only with a Packet-backed reporting trail",
+        "targetWords": "180-280 without reporting events; 450-750 with Packet-backed reporting events",
         "opening": "the strongest Packet-backed fact followed by the unresolved question",
-        "closing": "the next record, responsible office, or answer still needed"
+        "closing": "the next record or answer still needed; name a responsible office only when supplied"
       },
       "authorizedTexture": [
         "the reporter's own act of reading, comparing, requesting, or following a record only when that act is supplied by the Packet",

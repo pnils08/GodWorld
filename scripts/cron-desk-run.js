@@ -299,10 +299,14 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
   const seen = new Set();
   const rested = [];
   const tally = interviewTally();
+  const exactPacketCandidates = angleArt && angleArt.inputPacket &&
+    angleArt.inputPacket.exposure && angleArt.inputPacket.exposure.candidates;
   const packetCandidates = story
-    ? livedPacket.candidateRows(story, angleArt &&
-      (angleArt.jaxSlice || angleArt.pslayerSlice || angleArt.economicSlice ||
-        angleArt.safetySlice || angleArt.eveningSlice || angleArt.civicDomainSlice))
+    ? (PACKET_ACTIVE && Array.isArray(exactPacketCandidates)
+      ? exactPacketCandidates
+      : livedPacket.candidateRows(story, angleArt &&
+        (angleArt.jaxSlice || angleArt.pslayerSlice || angleArt.economicSlice ||
+          angleArt.safetySlice || angleArt.eveningSlice || angleArt.civicDomainSlice)))
       .reduce((m, c) => m.set(c.pop, c), new Map())
     : new Map();
   const push = (pop, label, ignoreRest) => {
@@ -2076,8 +2080,9 @@ async function runWrite(assign) {
     }
   }
   const stateFile = path.join(COMPARE, base + (PACKET_ACTIVE ? '.state.json' : '.state.md'));
+  let writePacket = null;
   if (PACKET_ACTIVE) {
-    const writePacket = livedPacket.buildWritePacket({
+    writePacket = livedPacket.buildWritePacket({
       cycle, desk, reporter: byline,
       story: assignment && assignment.story,
       approach: assignment && assignment.approach,
@@ -2109,7 +2114,25 @@ async function runWrite(assign) {
   // (own citizen page, cp-<popid>) joins the tool loop.
   if (PACKET_ACTIVE) writerArgs.push('--strict-source-hygiene', '--packet-only');
   else if (byline && byline.popid) writerArgs.push('--byline-popid', byline.popid);
-  execFileSync('node', writerArgs, { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
+  const codeRenderedBrief = PACKET_ACTIVE && writePacket && writePacket.task &&
+    writePacket.task.writingMode === 'RECORDS_BRIEF';
+  if (codeRenderedBrief) {
+    log('rendering evidence-thin records brief locally (0 writer model calls)...');
+    fs.writeFileSync(draftPath, livedPacket.renderRecordsBrief(writePacket));
+    const text = fs.readFileSync(draftPath, 'utf8');
+    const parsed = require('../lib/articleIntake').parse(text);
+    if (!parsed.found || parsed.errors.length) {
+      throw new Error('code-rendered records brief INTAKE failed: ' +
+        (parsed.errors.length ? parsed.errors.map(e => e.code + ': ' + e.message).join('; ') : 'missing INTAKE'));
+    }
+    const audit = livedPacket.auditArticle(text, writePacket);
+    if (!audit.ok) {
+      throw new Error('code-rendered records brief audit failed (' + audit.manifestId + '): ' +
+        audit.errors.map(e => e.code + '=' + e.values.join(',')).join('; '));
+    }
+  } else {
+    execFileSync('node', writerArgs, { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
+  }
   if (!fs.existsSync(draftPath)) throw new Error('writer produced no draft at ' + path.relative(ROOT, draftPath));
 
   // gate (skipped for --no-gate samples)
@@ -2191,7 +2214,11 @@ async function runWrite(assign) {
   // Task 2.5.5 — tool-use scoreboard column (pressure-test #5): did the writer dig?
   const traceArt = readJson(path.join(COMPARE, (artifactTag ? desk + '_c' + cycle + '_' + artifactTag : desk + '_c' + cycle) + '.tooltrace.json'));
   const record = {
-    mode: 'wake-write', desk, cycle, provider: route.provider, model: route.model, gateModel: GATE_BACKEND === 'api' ? GATE_API_MODEL : GATE_MODEL,
+    mode: 'wake-write', desk, cycle,
+    provider: codeRenderedBrief ? 'local' : route.provider,
+    model: codeRenderedBrief ? 'code-rendered-records-brief' : route.model,
+    configuredWriterModel: route.model,
+    gateModel: GATE_BACKEND === 'api' ? GATE_API_MODEL : GATE_MODEL,
     persona: personaSlug,
     byline: byline ? { name: byline.name, popid: byline.popid, beatDomain: byline.beatDomain } : null,
     laneEntries: lane.length, quotesLanded: quotes.length,

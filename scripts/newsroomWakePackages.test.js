@@ -47,6 +47,7 @@ assert.equal(packagesApi.routeFor(luis, 'angle').model, 'deepseek/deepseek-chat'
 assert.equal(packagesApi.routeFor(luis, 'report').model, 'deepseek/deepseek-chat');
 assert.equal(packagesApi.routeFor(luis, 'write').model, 'anthropic/claude-sonnet-5');
 assert.equal(luis.reviewProfile.canonPolicy, 'load-bearing');
+assert.ok(luis.reviewProfile.articleContract.targetWords.includes('180-280'));
 assert.ok(luis.reviewProfile.textureConditions.some(v => v.includes('silence clock')));
 assert.ok(luis.reviewProfile.canonBlockers.some(v => v.includes('records request')));
 
@@ -158,6 +159,8 @@ const packetAsks = runApi.collectQuoteAsks([
 });
 assert.deepStrictEqual(packetAsks.map(row => row.pop), ['POP-90001', 'POP-90002'],
   'Packet quote pool must not fill from the generic desk lane');
+assert.equal(packetAsks[0].inputPacket.actor.name, 'Test Civic One');
+assert.equal(packetAsks[0].inputPacket.exposure.self, 'Test profile one');
 const pinned = applyWakePackageGate([
   { desk: 'civic', name: 'TEST-ONLY Civic One', popid: 'POP-99997', story: { ref: 'TEST-CIVIC-ONE', label: 'Test signal one' } },
   { desk: 'civic', name: 'TEST-ONLY Civic Two', popid: 'POP-99998', story: { ref: 'TEST-CIVIC-TWO', label: 'Test signal two' } },

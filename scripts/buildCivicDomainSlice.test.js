@@ -26,7 +26,7 @@ try {
     }
   }, null, 2));
   fs.writeFileSync(path.join(output, 'simulation_ledger_snapshot.jsonl'), [
-    { Name: 'Test Civic Resident', POPID: 'POP-90001', RoleType: 'Mechanic', EconomicProfileKey: 'Skilled Trade' },
+    { Name: 'Test Civic Resident', POPID: 'POP-90001', RoleType: 'Mechanic', Neighborhood: 'Fruitvale', EconomicProfileKey: 'Skilled Trade' },
     { Name: 'Test Pro Athlete', POPID: 'POP-90002', RoleType: 'Right Fielder, Test Team', EconomicProfileKey: 'SPORTS_OVERRIDE' }
   ].map(row => JSON.stringify(row)).join('\n') + '\n');
 
@@ -50,12 +50,16 @@ try {
     ['stuck-initiative | Fruitvale Transit Hub stalled for 9 cycles']);
   assert.deepStrictEqual(slice.packets['luis-navarro'].prewrite.silenceClock,
     { state: 'UNESTABLISHED', value: null, src: null });
+  assert.deepStrictEqual(slice.packets['luis-navarro'].prewrite.reportingEvidence.recordChecks,
+    { state: 'NOT_SUPPLIED', events: [] });
   assert(slice.packets['luis-navarro'].prewrite.missing.some(row => row.includes('elapsed silence')));
   assert(!slice.packets['luis-navarro'].prewrite.anchorFacts.includes('AUDIT-STUCK'),
     'source pointer must not be duplicated as a factual sentence');
   assert.deepStrictEqual(slice.packets['luis-navarro'].story.popids, ['POP-90001']);
   assert.deepStrictEqual(slice.packets['luis-navarro'].story.citizens,
     ['Test Civic Resident (POP-90001)']);
+  assert.strictEqual(slice.packets['luis-navarro'].citizens[0].profile,
+    'Test Civic Resident — Mechanic — Fruitvale resident');
   assert.deepStrictEqual(slice.packets['luis-navarro'].prewrite.excludedCandidates,
     [{ popid: 'POP-90002', reason: 'PRO_ATHLETE_CIVIC_INELIGIBLE' }]);
   assert.strictEqual(slice.packets['lila-mezran'].story.ref, 'INIT-HEALTH');
@@ -78,7 +82,7 @@ try {
   stale.packets['luis-navarro'].prewrite = { anchorFacts: ['STALE TEST-ONLY FACT'] };
   fs.writeFileSync(paths.json, JSON.stringify(stale, null, 2));
   const rebuilt = civic.loadCivicDomainSlice(103, root);
-  assert.strictEqual(rebuilt.version, 'CIVIC-DOMAIN-SLICE-3');
+  assert.strictEqual(rebuilt.version, 'CIVIC-DOMAIN-SLICE-4');
   assert.strictEqual(rebuilt.packets['luis-navarro'].prewrite.schema, 'INVESTIGATION-BRIEF-1');
   assert.notDeepStrictEqual(rebuilt.packets['luis-navarro'].prewrite.anchorFacts, ['STALE TEST-ONLY FACT']);
 

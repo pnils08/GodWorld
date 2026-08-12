@@ -57,7 +57,10 @@ function assertBase(packet, wake) {
 }
 
 function candidateRows(story, slice) {
-  const fromSlice = Array.isArray(slice && slice.citizens)
+  const packetCitizens = slice && slice.packetSeat && slice.packetSeat.citizens;
+  const fromSlice = Array.isArray(packetCitizens) && packetCitizens.length
+    ? packetCitizens
+    : Array.isArray(slice && slice.citizens)
     ? slice.citizens
     : (Array.isArray(slice && slice.players) ? slice.players
       : (Array.isArray(slice && slice.candidates) ? slice.candidates : []));
@@ -142,6 +145,12 @@ function creativeBriefFromSlice(slice) {
       kind: 'civic-investigation',
       method: clean(prewrite.method, 40) || 'KNOWN_UNKNOWN',
       missing: uniq(prewrite.missing).slice(0, 6),
+      reportingEvidence: prewrite.reportingEvidence || {
+        recordChecks: { state: 'NOT_SUPPLIED', events: [] },
+        requestEvents: { state: 'NOT_SUPPLIED', events: [] },
+        responseEvents: { state: 'NOT_SUPPLIED', events: [] },
+        responsibleEntities: { state: 'NOT_SUPPLIED', entities: [] },
+      },
       silenceClock: prewrite.silenceClock && prewrite.silenceClock.state === 'UNESTABLISHED'
         ? { state: 'UNESTABLISHED', value: null, src: null }
         : null,
@@ -204,7 +213,8 @@ function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane 
     signal: { kind: story.kind || 'story-signal', hood: story.hood || null,
       score: story.stinkScore == null ? null : story.stinkScore, src },
     exposure: { basis: ['editor-assignment', 'desk-signal'],
-      candidates: candidates.map(c => ({ pop: c.pop, name: c.name, profile: clean(c.profile, 300), why: c.why })) },
+      candidates: candidates.map(c => ({ pop: c.pop, name: c.name, profile: clean(c.profile, 300),
+        why: c.why, role: c.role, hood: c.hood })) },
     known: uniqueClaims(known),
     limits: {
       assert: ['FACT'],

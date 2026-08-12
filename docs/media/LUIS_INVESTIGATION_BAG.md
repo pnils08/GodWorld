@@ -1,7 +1,7 @@
 ---
 title: Luis Navarro — Investigation Bag
 created: 2026-08-07
-updated: 2026-08-07
+updated: 2026-08-12
 type: reference
 tags: [media, civic, luis-navarro, active]
 sources:
@@ -37,4 +37,19 @@ Records / silence clocks / attributed quotes / packet contradictions only. Docum
 BagModes / ConfirmedFacts / OpenQuestions / SilenceClock / Claim / Missing
 ```
 
-First-person investigator OK ("I've asked…"). Short paragraphs. Fair, not theatrical (Jax owns heat theater).
+First-person reporting is allowed only when the Packet supplies the reporting act.
+When `recordChecks`, `requestEvents`, `responseEvents`, and
+`responsibleEntities` are all `NOT_SUPPLIED`, use **Wire Tight** as a 180–280
+word records brief. Missing evidence stays unknown; it is not proof that nobody
+asked, answered, checked, or owned the record. Short paragraphs. Fair, not
+theatrical (Jax owns heat theater).
+
+Evidence-thin `RECORDS_BRIEF` output is code-rendered from approved facts, exact
+quotes, typed unknowns, and the code-owned close. It does not spend a Wake 3
+writer call. Sonnet remains the configured Wake 3 writer for
+`FULL_INVESTIGATION` Packets that contain a supplied reporting trail.
+
+## Changelog
+
+- 2026-08-12 (codex) — Added the evidence-mass rule: evidence-thin Packets produce a short records brief; full investigations and first-person reporting require typed reporting events.
+- 2026-08-12 (codex) — Made evidence-thin records briefs deterministic and zero-writer-token; Sonnet remains reserved for Packets with actual reporting events.

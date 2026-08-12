@@ -192,6 +192,12 @@ const luisW1 = p.buildAnglePacket({
   slice: { kind: 'civic-domain', packetSeat: {
     seat: { domain: 'accountability-anomaly' },
     prewrite: { method: 'KNOWN_UNKNOWN', missing: ['documented response'],
+      reportingEvidence: {
+        recordChecks: { state: 'NOT_SUPPLIED', events: [] },
+        requestEvents: { state: 'NOT_SUPPLIED', events: [] },
+        responseEvents: { state: 'NOT_SUPPLIED', events: [] },
+        responsibleEntities: { state: 'NOT_SUPPLIED', entities: [] },
+      },
       silenceClock: { state: 'UNESTABLISHED', value: null, src: null }, forbidden: [] }
   } }, lane: [],
 });
@@ -206,12 +212,39 @@ assert.match(luisW3.limits.rule, /do not convert a source intention to keep watc
 assert.match(luisW3.limits.rule, /the Packet does not establish X/);
 assert.match(luisW3.limits.rule, /First-person reporting acts require an approved fact/);
 assert.ok(luisW3.manifest.permittedInterpretationSlots.some(row => row.id === 'P_KNOWN_UNKNOWN'));
+assert.equal(luisW3.task.writingMode, 'RECORDS_BRIEF');
+assert.equal(luisW3.reviewProfile.articleContract.targetWords, '180-280');
+assert.deepStrictEqual(luisW3.manifest.unverifiedLeads, []);
+assert.ok(luisW3.manifest.approvedSubjects.every(row => !/POP-\d+/.test(row.profile)));
+assert.equal(luisW3.signal.plan.closeQuestion,
+  'What record would explain why the supplied Initiative has not advanced?');
 const luisOverreach = p.auditArticle(
   'I went looking. Two residents flagged it to me independently. Somebody owns the file.', luisW3);
 assert.equal(luisOverreach.ok, false);
 assert.ok(luisOverreach.errors.some(row => row.code === 'INVESTIGATION_EPISTEMIC_OVERREACH'));
+const luisEngineLeak = p.auditArticle('The stuck-initiative is marked high in row 4.', luisW3);
+assert.equal(luisEngineLeak.ok, false);
+assert.ok(luisEngineLeak.errors.some(row => row.code === 'ENGINE_METADATA_LEAK'));
+const luisMissingAsAbsence = p.auditArticle('There is no request and no response.', luisW3);
+assert.equal(luisMissingAsAbsence.ok, false);
+assert.ok(luisMissingAsAbsence.errors.some(row => row.code === 'INVESTIGATION_EPISTEMIC_OVERREACH'));
 assert.equal(p.auditArticle(
   'The Packet does not establish a request, response, owner, office, or cause.', luisW3).ok, true);
+const luisRendered = p.renderRecordsBrief(luisW3);
+assert.match(luisRendered, /^# /);
+assert.match(luisRendered, /The supplied record does not establish documented response/);
+assert.match(luisRendered, /^## INTAKE$/m);
+assert.equal(p.auditArticle(luisRendered, luisW3).ok, true);
+const scalarLead = p.validateReportOutput({
+  answer: 'quote', fact_ids: [luisW1.known[0].id], stance_id: 'S_ATTENTION',
+  question_id: 'Q_GAP', intention_id: 'I_NONE',
+  unverifiedLead: 'TEST-ONLY discarded lead', abstain_reason: null,
+}, p.buildReportPacket({
+  cycle: 999, desk: 'civic', reporter, angleInput: luisW1, anglePlan: luisPlan,
+  story: { ...story, popids: [], citizens: [] },
+  candidate: { pop: 'POP-TEST', name: 'Test Citizen', role: 'citizen', hood: story.hood },
+}));
+assert.deepStrictEqual(scalarLead.unverifiedLead, ['TEST-ONLY discarded lead']);
 
 // Jordan's economic slice carries sourced conditions and limits through LEP/2.
 const economicStory = {

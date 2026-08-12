@@ -233,10 +233,26 @@ function candidateFor(entry, score) {
   };
 }
 
+function publicInfrastructureFact(top) {
+  const hook = String(top && top.hookLine || '').trim();
+  if (hook && !/\b(?:stuck-initiative|construction-planning|severity)\b/i.test(hook)) return hook;
+  const label = String(top && top.label || '').trim();
+  const tracker = label.match(/^(.+?)\s*\|\s*Status\s+([^|]+?)(?:\s*\|\s*phase\s+(.+))?$/i);
+  if (tracker) {
+    return tracker[1] + ' is listed as ' + tracker[2].trim().replace(/-/g, ' ') +
+      (tracker[3] ? ', with the next phase still unestablished in public terms.' : '.');
+  }
+  const stalled = label.match(/(?:\|\s*)?(.+?)\s+stalled\s+for\s+(\d+)\s+cycles?/i);
+  if (stalled) return stalled[1].replace(/^stuck-initiative\s*/i, '').trim() +
+    ' has not advanced in ' + stalled[2] + ' cycles.';
+  return label.replace(/^stuck-initiative(?:\s*\([^)]*\))?\s*\|\s*/i, '')
+    .replace(/construction-planning/gi, 'its supplied planning phase');
+}
+
 function prewriteForSeat(slug, top, candidateScope) {
   if (slug === 'trevor-shimizu') {
     return {
-      anchorFacts: [top.label],
+      anchorFacts: [publicInfrastructureFact(top)],
       forbidden: ['Do not add outages, closures, delays, routes, timestamps, load scores, causes, repairs, agencies, or outcomes absent from the supplied entries.'],
       schema: 'SYSTEMS-BRIEF-1',
       method: 'INCIDENT_LINK_WARNING',
@@ -301,16 +317,17 @@ function packetForEntries(entries, slug, profiles) {
   const storyCitizens = candidateScope
     ? candidateScope.allowed.map(row => row.name + ' (' + row.popid + ')')
     : top.citizens;
+  const publicTopLabel = slug === 'trevor-shimizu' ? publicInfrastructureFact(top) : top.label;
   return {
     seat: { slug, name: seat.name, popid: seat.popid, domain: seat.domain },
     empty: false,
     approach: seat.approach,
     story: {
       ref: top.ref,
-      label: top.label,
+      label: publicTopLabel,
       kind: top.kind,
-      angle: top.angle || top.label,
-      hookLine: top.hookLine || seat.hook,
+      angle: slug === 'trevor-shimizu' ? publicTopLabel : (top.angle || top.label),
+      hookLine: slug === 'trevor-shimizu' ? publicTopLabel : (top.hookLine || seat.hook),
       hood: top.hood,
       popids: storyPopids,
       citizens: storyCitizens
@@ -318,7 +335,7 @@ function packetForEntries(entries, slug, profiles) {
     pulse: {
       className: seat.domain,
       score: top.score,
-      label: top.label,
+      label: publicTopLabel,
       hood: top.hood,
       source: top.ref
     },
@@ -463,6 +480,7 @@ module.exports = {
   loadCycleCivicEntries,
   scoreEntryForSeat,
   packetForEntries,
+  publicInfrastructureFact,
   buildCivicDomainSlice,
   formatCivicDomainSliceMarkdown,
   slicePaths,

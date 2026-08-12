@@ -37,7 +37,11 @@ try {
   assert.strictEqual(slice.packets['trevor-shimizu'].prewrite.schema, 'SYSTEMS-BRIEF-1');
   assert.strictEqual(slice.packets['trevor-shimizu'].prewrite.method, 'INCIDENT_LINK_WARNING');
   assert.deepStrictEqual(slice.packets['trevor-shimizu'].prewrite.anchorFacts,
-    ['Fruitvale Transit Hub | Status visioning-complete']);
+    ['Fruitvale Transit Hub is listed as visioning complete.']);
+  assert(!/construction-planning|stuck-initiative/i.test(JSON.stringify({
+    story: slice.packets['trevor-shimizu'].story,
+    prewrite: slice.packets['trevor-shimizu'].prewrite
+  })));
   assert.deepStrictEqual(slice.packets['trevor-shimizu'].prewrite.cascade,
     { state: 'UNESTABLISHED', facts: [], link: null, src: null });
   assert(slice.packets['trevor-shimizu'].prewrite.missing.some(row => row.includes('timestamp')));

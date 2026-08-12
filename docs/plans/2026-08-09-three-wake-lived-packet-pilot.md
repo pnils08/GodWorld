@@ -27,12 +27,15 @@ pointers:
 **Architecture:** Explicit `--packet-contract=v1|v2` remains an isolated,
 samples-only evaluation namespace and requires `--no-gate`. Live scheduled
 adoption is separate and package-gated through
-`scripts/newsroom-wake-packages.json`. Jax's `JAX-LEP2-1`, Carmen's
-`CARMEN-LEP2-1`, P Slayer's `PSLAYER-LEP2-1`, and Jordan Velez's
-`JORDAN-LEP2-1` packages automatically use LEP/2, zero live writer tools,
-per-wake model routing, and load-bearing manifests interpreted by persona-aware
-Rhea. P Slayer's typed fan-pulse slice and Jordan's typed economic/storefront
-slice add domain anchors and bounded creative briefs to that same contract.
+`scripts/newsroom-wake-packages.json`. Eight active packages automatically use
+LEP/2, zero live writer tools, per-wake model routing, and load-bearing
+manifests interpreted by persona-aware Rhea: Jax, Carmen, Luis, Trevor,
+P Slayer, Jordan, Kai, and Rachel. Their typed accountability, civic,
+investigation, systems, fan-pulse, economic/storefront, arts, and public-safety
+slices add domain anchors and bounded creative briefs to that same contract.
+Luis's `CIVIC-DOMAIN-SLICE-4` additionally selects between a zero-model local
+`RECORDS_BRIEF` when no reporting events are supplied and the configured Sonnet
+`FULL_INVESTIGATION` path when a typed reporting trail exists.
 Scheduled journalists without an active package are skipped; the legacy generic
 prompt is not a fallback.
 
@@ -334,7 +337,7 @@ slice and model text is a starting work surface, not an adopted contract.
 | CARMEN-LEP2-1 | Carmen Delaine / POP-00011 | civic ledger | Article LEP/2; initiatives/votes/money | DeepSeek / DeepSeek / DeepSeek | [x] | [ ] full W1-W3/Rhea |
 | PSLAYER-LEP2-1 | P Slayer / POP-00008 | sports | Article LEP/2; typed fan pulse | Llama / Llama / Llama | [x] | [ ] full W1-W3/Rhea |
 | JORDAN-LEP2-1 | Jordan Velez / POP-00153 | economics/labor | Article LEP/2; economic/storefront | DeepSeek / DeepSeek / DeepSeek | [x] | [ ] full W1-W3/Rhea |
-| LUIS-LEP2-1 | Luis Navarro / POP-00636 | civic investigations | Article LEP/2; typed known/unknown investigation brief and unestablished silence clock | DeepSeek / DeepSeek / Sonnet | [x] | [ ] full W1-W3/Rhea |
+| LUIS-LEP2-1 | Luis Navarro / POP-00636 | civic investigations | `CIVIC-DOMAIN-SLICE-4`; typed reporting evidence; local thin-record brief or reporting-backed Article | DeepSeek / DeepSeek / local-or-Sonnet | [x] | thin brief passed; [ ] full reporting/Sonnet/Rhea |
 | TREVOR-LEP2-1 | Trevor Shimizu / POP-00155 | infrastructure | Article LEP/2; typed incident/link/warning systems brief and unestablished cascade | DeepSeek / DeepSeek / DeepSeek | [x] | [ ] full W1-W3/Rhea |
 | RACHEL-LEP2-1 | Sgt. Rachel Torres / POP-00057 | safety | Article LEP/2; typed public-safety signal and classification/response gap | DeepSeek / DeepSeek / DeepSeek | [x] | [ ] full W1-W3/Rhea |
 | pending | Dr. Lila Mezran / POP-00154 | health | Candidate Article LEP/2; cluster/human cost | Candidate DeepSeek; benchmark | [ ] | [ ] |
@@ -353,7 +356,7 @@ slice and model text is a starting work surface, not an adopted contract.
 | pending | Elliot Marbury / POP-00166 | data/general | Separate data-memo contract; TrueSource/As_Roster audit slice | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | DeShawn Hartley / POP-00015 | visual media | Separate visual/photo-prompt contract; visual record slice | Candidate DeepSeek; benchmark | [ ] | [ ] |
 
-The six active packages have locked routes, but their cost/model comparison and
+The eight active packages have locked routes, but their cost/model comparison and
 full unattended graduation remain checklist work. Elliot Marbury and DeShawn
 Hartley are deliberately not forced into Article LEP/2 until their data-memo and
 visual contracts are specified; contract shape is part of Gate 1. Celeste Tran
@@ -459,10 +462,18 @@ observation remains open.
 
 ## Open questions
 
-- No implementation question blocks Jax, Carmen, P Slayer, or Jordan Velez. The
-  next evidence is their unattended week. Expansion remains blocked per
-  journalist until that person's wake models, Packet contract, creative
-  authority, movement contract, and Rhea profile are encoded in an active package.
+- C103 cohort review precedes further package expansion. The shared failure
+  classes are quote/profile contamination (Carmen, Jordan, Rachel), raw engine
+  metadata leakage (Jax, Kai), and state inversion or stale sports facts
+  (P Slayer). Repair the shared boundaries, then rerun Carmen, Kai, and P Slayer
+  as one representative per class. Trevor's first complete W1-W3/Rhea proof
+  follows those representative passes.
+- Luis's thin-record path passed locally, but his reporting-trail-backed Sonnet
+  path and Rhea proof remain open. A local manifest pass is not publication or
+  full package graduation.
+- Expansion remains blocked per journalist until that person's wake models,
+  Packet contract, creative authority, movement contract, and Rhea profile are
+  encoded in an active package and the existing cohort review is complete.
 
 ## Changelog
 
@@ -494,3 +505,4 @@ observation remains open.
 - 2026-08-12 (codex) — The final pre-write inspection confirmed two bounded quotes and zero visible leads, then removed redundant POPID literals from prose-facing subject profiles while retaining structural subject IDs.
 - 2026-08-12 (codex) — The 247-word Sonnet records brief passed the first lexical wall but still reversed the phase relationship, narrated missing requests/responses as absence, split one exact quote, truncated another, and inferred shared resident sentiment. Evidence-thin `RECORDS_BRIEF` now bypasses the writer and code-renders only approved facts, exact quotes, typed unknowns, and the neutral close; Sonnet remains for reporting-trail-backed `FULL_INVESTIGATION`.
 - 2026-08-12 (codex) — Evidence-thin C103 proof passed after `b3872535`: 182 body words, two exact quotes, zero writer calls/tools, and zero local manifest errors or observations. The old and corrected drafts were uploaded to the builder-supplied Drive folder as explicit `NOT_CANON` review artifacts; full reporting-trail/Sonnet and Rhea proof remain open.
+- 2026-08-12 (codex) — Truth-up after builder review: the active cohort is eight packages, Luis's slice now branches between local `RECORDS_BRIEF` and reporting-backed Sonnet, and further package expansion is gated behind review of the six C103 Rhea failures plus Trevor's first full proof.

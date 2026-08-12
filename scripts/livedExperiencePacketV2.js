@@ -347,7 +347,7 @@ function auditArticle(draftText, packet) {
       /\b(?:the )?absence (?:is|becomes|proves|shows)\b/i,
       /\b(?:whoever|somebody)\s+(?:owns|holds)\b/i,
       /\b(?:office|owner|file-holder|duty-holder)\s+(?:behind|holding|responsible for)\b/i,
-    ].flatMap(re => String(draftText || '').match(re) || []).map(clean);
+    ].flatMap(re => String(draftText || '').match(re) || []).map(value => clean(value));
     if (overreach.length) errors.push({
       code: 'INVESTIGATION_EPISTEMIC_OVERREACH',
       values: [...new Set(overreach)],

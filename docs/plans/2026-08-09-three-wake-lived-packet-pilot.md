@@ -36,8 +36,8 @@ slices add domain anchors and bounded creative briefs to that same contract.
 Luis's `CIVIC-DOMAIN-SLICE-4` additionally selects between a zero-model local
 `RECORDS_BRIEF` when no reporting events are supplied and the configured Sonnet
 `FULL_INVESTIGATION` path when a typed reporting trail exists.
-Evidence-thin Carmen, Jordan, Kai, Rachel, P Slayer, and Trevor Packets use a
-zero-model local `SOURCE_BRIEF`: W1/W2 may plan and gather bounded statements,
+Evidence-thin Jax, Carmen, Jordan, Kai, Rachel, P Slayer, and Trevor Packets use
+a zero-model local `SOURCE_BRIEF`: W1/W2 may plan and gather bounded statements,
 but W3 prints only filtered approved facts, exact quote blocks, and one open
 question. Their configured writer model remains recorded for a future
 reporting-rich branch; it is not spent on the thin branch.
@@ -338,13 +338,13 @@ slice and model text is a starting work surface, not an adopted contract.
 
 | Package | Seat / POPID | Domain | Contract and slice surface | Model route | Package | Proof |
 |---|---|---|---|---|---|---|
-| JAX-LEP2-1 | Jax Caldera / POP-00799 | accountability | Article LEP/2; stink contradiction | Llama / Llama / Sonnet | [x] | [ ] full W1-W3/Rhea |
+| JAX-LEP2-1 | Jax Caldera / POP-00799 | accountability | Article LEP/2; stink contradiction | Llama / Llama / local source brief | [x] | attended W1-W3/local audit passed on retained four-source Packet; [ ] fresh two-target W2/Rhea |
 | CARMEN-LEP2-1 | Carmen Delaine / POP-00011 | civic ledger | Article LEP/2; initiatives/votes/money | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/local audit passed; [ ] Rhea |
 | PSLAYER-LEP2-1 | P Slayer / POP-00008 | sports | Article LEP/2; typed fan pulse | Llama / Llama / local source brief | [x] | attended W1-W3/local audit passed; [ ] Rhea/reporting-rich column |
-| JORDAN-LEP2-1 | Jordan Velez / POP-00153 | economics/labor | Article LEP/2; economic/storefront | DeepSeek / DeepSeek / local source brief | [x] | [ ] corrected W1-W3/Rhea |
+| JORDAN-LEP2-1 | Jordan Velez / POP-00153 | economics/labor | Article LEP/2; economic/storefront | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/local audit passed with zero candidates/quotes; [ ] Rhea |
 | LUIS-LEP2-1 | Luis Navarro / POP-00636 | civic investigations | `CIVIC-DOMAIN-SLICE-4`; typed reporting evidence; local thin-record brief or reporting-backed Article | DeepSeek / DeepSeek / local-or-Sonnet | [x] | thin brief passed; [ ] full reporting/Sonnet/Rhea |
 | TREVOR-LEP2-1 | Trevor Shimizu / POP-00155 | infrastructure | Article LEP/2; typed incident/link/warning systems brief and unestablished cascade | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/local audit passed with 3 exact quotes; [ ] Rhea |
-| RACHEL-LEP2-1 | Sgt. Rachel Torres / POP-00057 | safety | Article LEP/2; typed public-safety signal and classification/response gap | DeepSeek / DeepSeek / local source brief | [x] | [ ] corrected W1-W3/Rhea |
+| RACHEL-LEP2-1 | Sgt. Rachel Torres / POP-00057 | safety | Article LEP/2; typed public-safety signal and classification/response gap | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/local audit passed with zero candidates/quotes; [ ] Rhea |
 | pending | Dr. Lila Mezran / POP-00154 | health | Candidate Article LEP/2; cluster/human cost | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | Angela Reyes / POP-00156 | education | Candidate Article LEP/2; school/youth stability | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | Noah Tan / POP-00157 | environment | Candidate Article LEP/2; weather/environment ground | Candidate DeepSeek; benchmark | [ ] | [ ] |
@@ -486,13 +486,31 @@ Kai and P Slayer model-written attempts were correctly rejected during repair
 and were not routed. These are local/sample proofs only: no Article was staged,
 published, uploaded, or ingested, and headless Rhea was not run.
 
+The remaining Jax, Jordan, and Rachel review is also complete locally. Jordan
+and Rachel each produced a candidate-free, quoteless `SOURCE_BRIEF` and passed
+the typed manifest audit. Jax Wake 1 selected Calvin Turner and Vladimir
+Gonzalez as its two bounded targets. An earlier Wake 2 Packet still contained
+four exact statements; its Sonnet draft then split unapproved quote text and
+failed closed before routing. The contained local Jax `SOURCE_BRIEF` built from
+that retained Packet passes, while a fresh external Wake 2 observation remains
+open to prove the new two-target boundary outside the regression fixture.
+
+Across Jax, Jordan, Rachel, Carmen, Kai, P Slayer, and Trevor, the final local
+gate now reports zero manifest errors, zero structural-junk hits, and zero
+engine-language hits in Article prose. The Rhea engine scanner previously read
+the machine-only `## INTAKE` provenance block and falsely surfaced canonical
+source names; `42802ff2` restricts that scan to prose and adds a regression.
+Independent model Rhea was not run because it would send each nonpublic Article
+plus its Packet manifest and review profile to OpenRouter. The attempted fresh
+Jax Wake 2 was likewise held because it would send two citizen profile Packets
+to OpenRouter Llama. Both require payload-specific builder approval.
+
 ## Open questions
 
-- C103 cohort review still precedes further package expansion. Shared boundary
-  repair and the Carmen/Kai/P Slayer representatives are complete locally;
-  Trevor's attended W1-W3/local audit is also complete. Review or rerun the
-  remaining completed packages—Jax, Jordan, and Rachel—then run the independent
-  Rhea gate before treating the cohort as graduated.
+- C103 local cohort review is complete, but graduation and further package
+  expansion remain gated on payload-specific approval for independent Rhea over
+  the seven repaired Articles and their W3 Packet/review context. Jax also needs
+  a fresh two-target Wake 2 observation before its external proof is current.
 - Luis's thin-record path passed locally, but his reporting-trail-backed Sonnet
   path and Rhea proof remain open. A local manifest pass is not publication or
   full package graduation.
@@ -533,3 +551,4 @@ published, uploaded, or ingested, and headless Rhea was not run.
 - 2026-08-12 (codex) — Truth-up after builder review: the active cohort is eight packages, Luis's slice now branches between local `RECORDS_BRIEF` and reporting-backed Sonnet, and further package expansion is gated behind review of the six C103 Rhea failures plus Trevor's first full proof.
 - 2026-08-12 (codex) — Repaired the three shared C103 failure classes at the Packet boundary: direct quotes fail closed, exact candidates own W2 identity exposure, public slice facts omit engine metadata, and P Slayer cannot promote a prior-Cycle row over a current feed row. Thin Carmen/Jordan/Rachel/Kai/P Slayer/Trevor W3 Packets now use zero-call `SOURCE_BRIEF` assembly.
 - 2026-08-12 (codex) — Attended `NOT_CANON` local proofs passed for Carmen, Kai, P Slayer, and Trevor; Trevor landed three exact quote blocks. No Rhea, staging, publication, upload, or ingestion occurred. Review Jax/Jordan/Rachel and run Rhea before another package.
+- 2026-08-12 (codex) — Completed the Jax/Jordan/Rachel local review and the seven-Article deterministic gate. All repaired briefs pass manifest, prose-engine, and structural scans; Jax's stale four-source Packet and the independent OpenRouter Rhea pass remain explicit external-proof gates.

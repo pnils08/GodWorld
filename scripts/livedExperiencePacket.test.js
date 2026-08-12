@@ -55,6 +55,12 @@ assert.deepStrictEqual(luisW1.task.creativeBrief, {
   kind: 'civic-investigation',
   method: 'KNOWN_UNKNOWN',
   missing: ['documented response', 'elapsed silence duration'],
+  reportingEvidence: {
+    recordChecks: { state: 'NOT_SUPPLIED', events: [] },
+    requestEvents: { state: 'NOT_SUPPLIED', events: [] },
+    responseEvents: { state: 'NOT_SUPPLIED', events: [] },
+    responsibleEntities: { state: 'NOT_SUPPLIED', entities: [] }
+  },
   silenceClock: { state: 'UNESTABLISHED', value: null, src: null },
   forbidden: ['Do not invent a response or records request.']
 });

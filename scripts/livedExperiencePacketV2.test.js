@@ -170,7 +170,8 @@ const sportsW1 = p.buildAnglePacket({
   cycle: 999, desk: 'sports', reporter: pReporter, story: sportsStory,
   approach: 'TEST-ONLY first-person fan heat', slice: sportsSlice, lane: [],
 });
-assert.equal(sportsW1.exposure.candidates[0].pop, 'TEST-PLAYER-01');
+assert.deepStrictEqual(sportsW1.exposure.candidates, []);
+assert.deepStrictEqual(sportsW1.output.schema.targets, []);
 assert.ok(sportsW1.known.some(row => row.text === sportsSlice.prewrite.anchorFacts[0]));
 assert.deepStrictEqual(sportsW1.task.creativeBrief, {
   kind: 'fan-heat',
@@ -203,6 +204,16 @@ assert.deepStrictEqual(sportsW3.task.creativeBrief, sportsW1.task.creativeBrief)
 assert.ok(sportsW3.manifest.approvedFacts.some(row =>
   row.text === sportsSlice.prewrite.anchorFacts[0]));
 assert.doesNotThrow(() => p.assertBase(sportsW3, 'W3'));
+
+const unresolvedSportsW1 = p.buildAnglePacket({
+  cycle: 999, desk: 'sports', reporter: pReporter,
+  story: { ...sportsStory, popids: [], citizens: ['Unresolved Test Player'] },
+  approach: 'TEST-ONLY first-person fan heat',
+  slice: { ...sportsSlice, players: [{ popid: null, name: 'Unresolved Test Player', why: 'feed-name' }] },
+  lane: [],
+});
+assert.deepStrictEqual(unresolvedSportsW1.exposure.candidates, []);
+assert.deepStrictEqual(unresolvedSportsW1.output.schema.targets, []);
 
 const luisProfile = {
   id: 'TEST-LUIS', canonPolicy: 'load-bearing',

@@ -199,8 +199,12 @@ function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane 
       known.push(refClaim('FACT', text, src));
     }
   }
-  const candidates = candidateRows(story, slice).slice(0, 12);
-  const hasTargetCandidates = candidates.some(candidate => clean(candidate.pop));
+  // Interview exposure is identity-bearing: unresolved names may remain in the
+  // assigned facts, but only ledger-resolved POPIDs can become W2 targets.
+  const candidates = candidateRows(story, slice)
+    .filter(candidate => clean(candidate.pop) && !(slice && slice.charge))
+    .slice(0, 12);
+  const hasTargetCandidates = candidates.length > 0;
   const creativeBrief = creativeBriefFromSlice(slice);
   const packet = {
     v: VERSION,

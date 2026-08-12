@@ -141,6 +141,19 @@ assert.match(sourceBrief, new RegExp(claims.publishableQuote.replace(/[.*+?^${}(
 assert.doesNotMatch(sourceBrief, /invented biography|collective sentiment/i);
 assert.equal(p.auditArticle(sourceBrief, sourceBriefW3).ok, true);
 
+const inlinePopProfileW3 = p.buildWritePacket({
+  cycle: 999, desk: 'civic', reporter, story, approach: 'Test the mismatch',
+  angleInput: { ...w1, exposure: { ...w1.exposure, candidates: [{
+    pop: 'TEST-POP-02', name: 'Test Resident',
+    profile: 'Test Resident (POP-90002) — role: TEST-ONLY Mechanic; neighborhood: TEST-HOOD',
+    why: 'assignment', role: 'TEST-ONLY Mechanic', hood: 'TEST-HOOD'
+  }] } },
+  anglePlan: plan,
+  interviews: [{ pop: 'TEST-POP-02', name: 'Test Resident', claims, inputPacket: resident }],
+  lane: [], reviewProfile: sourceBriefProfile,
+});
+assert.ok(inlinePopProfileW3.manifest.approvedSubjects.every(row => !/POP-\d+/.test(row.profile)));
+
 // P Slayer's fan-pulse slice is a typed LEP/2 input, not side-channel prompt text.
 const sportsStory = {
   ref: 'output/TEST_ONLY_SPORTS.json rows[1]',

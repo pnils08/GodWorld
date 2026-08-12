@@ -316,7 +316,9 @@ function buildWritePacket(args) {
   }
   const approvedSubjects = (packet.exposure.subjects || []).map(s => ({
     id: s.pop, name: s.name,
-    profile: clean(s.profile, 300).replace(/\s+—\s+POP-\d+\s*$/i, ''), src: s.src,
+    profile: clean(s.profile, 300)
+      .replace(/\s*\(POP-\d+\)/ig, '')
+      .replace(/\s+—\s+POP-\d+\s*$/i, ''), src: s.src,
     quotationEligible: approvedQuotes.some(q => q.speakerId === s.pop),
   }));
   packet.manifest = {

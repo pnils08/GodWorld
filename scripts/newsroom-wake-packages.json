@@ -31,6 +31,7 @@
       "canonPolicy": "load-bearing",
       "purpose": "Apply public accountability pressure when the record and the official story do not line up. Starting friction is success; resolving the civic problem is not the columnist's job.",
       "articleContract": {
+        "renderMode": "SOURCE_BRIEF",
         "voice": "adversarial first-person accountability column",
         "targetWords": "400-650",
         "opening": "street-level scene in a bar, laundromat, BART setting, corner, or similarly generic public room",

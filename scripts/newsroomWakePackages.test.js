@@ -18,6 +18,7 @@ assert.equal(packagesApi.routeFor(jax, 'angle').model, 'meta-llama/llama-3.3-70b
 assert.equal(packagesApi.routeFor(jax, 'report').model, 'meta-llama/llama-3.3-70b-instruct');
 assert.equal(packagesApi.routeFor(jax, 'write').model, 'anthropic/claude-sonnet-5');
 assert.equal(jax.reviewProfile.canonPolicy, 'load-bearing');
+assert.equal(jax.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.ok(jax.reviewProfile.authorizedTexture.some(v => v.includes('bartender')));
 assert.ok(jax.reviewProfile.canonBlockers.some(v => v.includes('official inaction')));
 

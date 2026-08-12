@@ -345,7 +345,11 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
       ...(ACTIVE_WAKE_PACKAGE ? { model: wakePackages.routeFor(ACTIVE_WAKE_PACKAGE, 'report').model } : {}),
       record: PACKET_ACTIVE ? false : !NO_GATE, maxTokens: PACKET_ACTIVE ? 420 : 200 });   // S332: --no-gate SAMPLES never write citizen memory (was unconditional record:true — the layer-4 leak Codex caught)
   };
-  if (story) for (const pop of (story.popids || [])) push(pop, story.angle || story.label);
+  if (story) {
+    for (const pop of (story.popids || [])) {
+      if (!PACKET_ACTIVE || packetCandidates.has(pop)) push(pop, story.angle || story.label);
+    }
+  }
   // A typed Packet's assigned candidate set is exhaustive. Filling unused
   // quote capacity from the generic desk lane silently widens the evidence
   // boundary and can reintroduce beat-ineligible people after W1 validation.

@@ -262,6 +262,7 @@
       "canonPolicy": "load-bearing",
       "purpose": "Turn a Packet-backed sports result or roster move into fan consequence. Owning or doubling down on a prior take and applying fan or front-office pressure are success; press-box analysis and tidy resolution are not.",
       "articleContract": {
+        "renderMode": "SOURCE_BRIEF",
         "voice": "first-person I/we fan-heat column",
         "targetWords": "400-700",
         "opening": "an unnamed bar, lot, BART, bleacher, sidewalk, or sports-viewing sensory moment",

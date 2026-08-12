@@ -78,6 +78,7 @@ assert.equal(packagesApi.routeFor(pSlayer, 'angle').model, 'meta-llama/llama-3.3
 assert.equal(packagesApi.routeFor(pSlayer, 'report').model, 'meta-llama/llama-3.3-70b-instruct');
 assert.equal(packagesApi.routeFor(pSlayer, 'write').model, 'meta-llama/llama-3.3-70b-instruct');
 assert.equal(pSlayer.reviewProfile.canonPolicy, 'load-bearing');
+assert.equal(pSlayer.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.ok(pSlayer.reviewProfile.textureConditions.some(v => v.includes('prior-take')));
 assert.ok(pSlayer.reviewProfile.canonBlockers.some(v => v.includes('collective fan sentiment')));
 
@@ -165,6 +166,19 @@ assert.deepStrictEqual(packetAsks.map(row => row.pop), ['POP-90001', 'POP-90002'
   'Packet quote pool must not fill from the generic desk lane');
 assert.equal(packetAsks[0].inputPacket.actor.name, 'Test Civic One');
 assert.equal(packetAsks[0].inputPacket.exposure.self, 'Test profile one');
+runApi.activateWakeContext(null, 'p-slayer');
+const fanAsks = runApi.collectQuoteAsks([], { name: 'P Slayer', popid: 'POP-00008' }, {
+  ref: 'TEST-ONLY-SPORTS', label: 'TEST-ONLY no-hitter', popids: ['POP-90005']
+}, {
+  cycle: 999, desk: 'sports',
+  inputPacket: {
+    v: 'LEP/2', wake: 'W1', actor: {}, task: {}, signal: {},
+    exposure: { candidates: [] }, known: [], limits: {}, output: {}
+  },
+  angleRead: { plan: { focus: 'TEST-ONLY fan focus', targets: [], closeQuestion: 'TEST-ONLY close' } }
+});
+assert.deepStrictEqual(fanAsks, [],
+  'Packet story POPIDs outside the exact candidate set must not become interview targets');
 const pinned = applyWakePackageGate([
   { desk: 'civic', name: 'TEST-ONLY Civic One', popid: 'POP-99997', story: { ref: 'TEST-CIVIC-ONE', label: 'Test signal one' } },
   { desk: 'civic', name: 'TEST-ONLY Civic Two', popid: 'POP-99998', story: { ref: 'TEST-CIVIC-TWO', label: 'Test signal two' } },

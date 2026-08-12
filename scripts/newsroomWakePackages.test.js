@@ -109,6 +109,7 @@ assert.equal(packagesApi.routeFor(kai, 'angle').model, 'meta-llama/llama-3.3-70b
 assert.equal(packagesApi.routeFor(kai, 'report').model, 'meta-llama/llama-3.3-70b-instruct');
 assert.equal(packagesApi.routeFor(kai, 'write').model, 'meta-llama/llama-3.3-70b-instruct');
 assert.equal(kai.reviewProfile.canonPolicy, 'load-bearing');
+assert.equal(kai.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.ok(kai.reviewProfile.textureConditions.some(v => v.includes('evening source')));
 assert.ok(kai.reviewProfile.canonBlockers.some(v => v.includes('social-media reaction')));
 

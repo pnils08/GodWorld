@@ -118,6 +118,10 @@ assert.ok(jaxAudit.observations.some(e => e.code === 'UNAPPROVED_NUMBER'));
 const jaxRawMetadata = p.auditArticle('The TEST-ONLY Initiative remains in construction-planning.', jaxW3);
 assert.equal(jaxRawMetadata.ok, false);
 assert.ok(jaxRawMetadata.errors.some(e => e.code === 'ENGINE_METADATA_LEAK'));
+const naturalizedMetadata = p.auditArticle(
+  'The room had a volume of 3, movement is restricted, and weather impact was at 1.05.', jaxW3);
+assert.equal(naturalizedMetadata.ok, false);
+assert.ok(naturalizedMetadata.errors.some(e => e.code === 'ENGINE_METADATA_LEAK'));
 
 const sourceBriefProfile = {
   ...jaxProfile,

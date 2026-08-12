@@ -448,6 +448,9 @@ function publicBriefFacts(packet) {
     if (!text) return false;
     if (/\b(?:engine_audit|snapshot:|world_summary|desk_signal)\b/i.test(text)) return false;
     if (/^(?:NAMED|PERSON|VENUE|HOOD|TRAJECTORY|VOLUME|VIBE|MOVEMENT|WEATHER IMPACT|RETAIL VITALITY)\s*:/i.test(text)) return false;
+    if (/\bvolume\s+(?:of\s+)?\d+(?:\.\d+)?\b/i.test(text)) return false;
+    if (/\bweather impact\b/i.test(text)) return false;
+    if (/\bmovement\s+(?:is\s+)?restricted\b/i.test(text)) return false;
     if (/\b\d+\.\d+\b/.test(text)) return false;
     return true;
   }).map(row => {
@@ -533,6 +536,9 @@ function auditArticle(draftText, packet) {
     /\b(?:severity|marked)\s+high\b/i,
     /\brow\s+\d+\b/i,
     /\b(?:VOLUME|WEATHER IMPACT|RETAIL VITALITY)\s*:\s*[+-]?\d+(?:\.\d+)?/i,
+    /\bvolume\s+(?:of\s+)?[+-]?\d+(?:\.\d+)?\b/i,
+    /\bweather impact(?:\s+(?:is|was|at))?\s*[=:]?\s*[+-]?\d+(?:\.\d+)?\b/i,
+    /\bmovement\s+(?:is\s+)?restricted\b/i,
   ].flatMap(re => bodyText.match(re) || []).map(value => clean(value));
   if (engineMetadata.length) errors.push({
     code: 'ENGINE_METADATA_LEAK',

@@ -382,6 +382,7 @@
       "canonPolicy": "load-bearing",
       "purpose": "Turn a sourced evening pulse into present-tense arts and entertainment reporting where art, media, and a named place become a neighborhood act. A vivid room grounded in the Packet is success; generic culture roundup and invented nightlife are not.",
       "articleContract": {
+        "renderMode": "SOURCE_BRIEF",
         "voice": "present-tense arts and entertainment scene with grounded neighborhood analysis",
         "targetWords": "500-800",
         "opening": "a Packet-backed named event, media slate, sighting, venue, or neighborhood arts consequence",

@@ -52,8 +52,8 @@ function prepareInterviewPacket(packet) {
   out.limits.rule = out.limits.quoteEligible === false
     ? 'Return abstain. This citizen is not eligible for this interview path.'
     : livedEvidence
-      ? 'Use only the supplied story facts and addressable story-linked lived evidence. Speak only for yourself. A quotation may express your own memory, feeling, interpretation, or intention; it does not independently prove a public event. Do not invent a named person, institution, event, official action, number, date, relationship, job, or place. If you have no grounded response, abstain.'
-      : 'No story-linked lived exposure is supplied. Give exactly one sentence of no more than 28 words beginning I think, I feel, I want, My, To me, or For me. Evaluate only the supplied fact. Use basis direct-reaction and unverifiedLead []. Do not use we, they, everyone, people, keep, still, again, ever, same, promises, updates, meetings, documents, shovels, scenes, effects, history, or community sentiment. Otherwise abstain.';
+      ? 'Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle\'s city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.'
+      : 'Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.';
   out.output = {
     contract: CONTRACT,
     format: 'json-only',
@@ -82,11 +82,11 @@ function hasLivedEvidence(packet) {
 function directReactionIssues(quote) {
   const issues = [];
   const text = clean(quote);
-  if (text.split(/\s+/).length > 28) issues.push('direct reaction exceeds 28 words');
+  if (text.split(/\s+/).length > 80) issues.push('direct reaction exceeds 80 words');
   const sentences = text.split(/(?<=[.!?])\s+/).map(value => value.trim()).filter(Boolean);
-  if (sentences.length !== 1) issues.push('direct reaction must be one sentence');
+  if (sentences.length < 1 || sentences.length > 3) issues.push('direct reaction must be one to three sentences');
   if (!/^(?:I\b|I['’]m\b|My\b|To me\b|For me\b)/i.test(text)) {
-    issues.push('direct reaction must be a first-person evaluation');
+    issues.push('direct reaction must be first person');
   }
   const unsupportedHistory = [
     /\b(?:no|without any) (?:real )?updates?\b/i,
@@ -97,10 +97,8 @@ function directReactionIssues(quote) {
     /\brebrand(?:ed|ing|s)?\b/i,
     /\bcontractor bids?\b/i,
     /\beveryone (?:around here )?knows\b/i,
-    /\bI(?:'ve| have) (?:seen|watched|heard|attended|waited|lived)\b/i,
-    /\bI (?:saw|heard|attended|remember|watched|pass|work)\b/i,
-    /\b(?:we|they|everyone|people)\b/i,
-    /\b(?:keep|keeps|kept|still|again|ever|same|redraw|shovel|this time)\b/i,
+    /\bshovel/i,
+    /\bredraw/i,
   ];
   if (unsupportedHistory.some(pattern => pattern.test(text))) {
     issues.push('direct reaction claims unsupplied history or experience');
@@ -163,8 +161,8 @@ function validateInterviewOutput(value, input) {
 function citizenEvidenceGuard(livedContextAllowed) {
   const grounding = livedContextAllowed
     ? 'The Packet supplies addressable story-linked lived evidence, so you may use the matching simulated-life context above.'
-    : 'The Packet does not supply story-linked lived evidence. Do not claim that you experienced, observed, attended, heard, waited for, or were affected by the story. Give exactly one sentence of no more than 28 words beginning I think, I feel, I want, My, To me, or For me. Evaluate only the supplied fact. Set basis to direct-reaction and unverifiedLead to []. Do not use we, they, everyone, people, keep, still, again, ever, same, promises, updates, meetings, documents, shovels, scenes, effects, history, or community sentiment. Otherwise abstain.';
-  return '\n\nINTERVIEW MODE: Return ONLY the JSON requested by packet.output. This is an interview happening now. ' + grounding + ' The quote field is your actual response and will be preserved exactly. Speak only for yourself. Your attributed feeling, interpretation, or intention is speech, not independent proof of a public event. Do not invent a person, institution, event, official act, number, date, relationship, job, meeting, document, update, promise, or place. If you have no grounded response, abstain. Never mention packets, data, records, prompts, or systems.';
+    : 'The Packet does not supply story-linked lived evidence. Speak as yourself anyway — your job, your block, the named people already in your life. One to three first-person sentences. The Packet fact is city news, not a spreadsheet. Do not invent a person, bakery, bar, or official act. Set basis to direct-reaction.';
+  return '\n\nINTERVIEW MODE: Return ONLY the JSON. This is a conversation on the street, not an analysis. ' + grounding + ' The quote field is what you actually say and will be preserved exactly. Never mention packets, data, records, prompts, or systems.';
 }
 
 module.exports = {

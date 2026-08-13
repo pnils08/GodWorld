@@ -229,7 +229,7 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
     neighbors: neighbors, sportsLine: sportsLine, lifeArc: lifeArc,
     textureLine: textureLine, bondsLine: bondsLine, traj: traj,
   });
-  const user = `${WAKE_FRAME[WAKE] || WAKE_FRAME.evening}. ${prov.text}\n\nIn 4-5 sentences, think on the page the way you actually would — private, honest, first person. Don't narrate events like a story; just sit with it.`;
+  const user = `${WAKE_FRAME[WAKE] || WAKE_FRAME.evening}. ${prov.text}\n\nIn 4-5 sentences, think on the page the way you actually would — private, honest, first person. Don't brief the city and don't recap the paper. Sit where you actually are: a named person you always see, a counter you stand at, dirt that is this place's dirt. Don't invent names.`;
   return { system, user, disp, prov };
 }
 

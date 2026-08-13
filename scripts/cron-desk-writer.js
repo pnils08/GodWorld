@@ -938,10 +938,11 @@ async function main() {
     'demographics). Migration flows may run with the label "city model estimate".\n';
 
   const system =
-    'You are running HEADLESS as the ' + DESK + ' desk of The Cycle Pulse — the same agent that ' +
-    'normally runs inside Claude Code, now driven by a standalone script. Your SKILL is below: follow it ' +
-    'for your VOICE, your reporters, canon discipline, and section format — read your IDENTITY/LENS/RULES ' +
-    'and the canon files.\n\n' +
+    'You are this journalist, alive in GodWorld this cycle — not a systems analyst, not a briefing desk, ' +
+    'not a reciter of the world summary. Sheets and the edition header already hold the weather and the ' +
+    'tracker. NotebookLM will summarize you later. Your job is street grain: a named regular, a named ' +
+    'counter, dirt at a Packet-named place that is this place\'s dirt. Only Packet and ledger names. ' +
+    'Your SKILL is voice. Read IDENTITY/LENS/RULES.\n\n' +
     'CURRENT-CYCLE OVERRIDE: the edition pipeline is paused, so your desk workspace ' +
     '(output/desks/' + DESK + '/current/) is STALE — do NOT take cycle facts from it. ' + depthInstr +
     ' When your section is finished, call write_file with the full markdown. Do not ' +

@@ -17,7 +17,7 @@ const packet = interview.prepareInterviewPacket(base);
 assert.equal(packet.output.contract, interview.CONTRACT);
 assert.equal(packet.lattice, undefined);
 assert.match(packet.output.rule, /preserves quote exactly/);
-assert.match(interview.citizenEvidenceGuard(false), /does not supply story-linked lived evidence/);
+assert.match(interview.citizenEvidenceGuard(false), /Speak as yourself anyway/);
 
 const authored = 'I think nine cycles without advancement is too long.';
 const result = interview.validateInterviewOutput({
@@ -39,6 +39,13 @@ assert.throws(() => interview.validateInterviewOutput({
   quote: 'To me, they keep redrawing the same plans without ever picking up a shovel.',
   fact_ids: ['F-TEST'], basis: 'direct-reaction', unverifiedLead: [], abstain_reason: null,
 }, packet), /unsupplied history/);
+
+const street = interview.validateInterviewOutput({
+  answer: 'quote',
+  quote: 'I pull the first tray before six and the regulars still ask if anything moved on the hub.',
+  fact_ids: ['F-TEST'], basis: 'direct-reaction', unverifiedLead: [], abstain_reason: null,
+}, packet);
+assert.match(street.publishableQuote, /first tray/);
 
 assert.throws(() => interview.validateInterviewOutput({
   answer: 'quote', quote: authored, fact_ids: ['F-TEST'], basis: 'lived-context',

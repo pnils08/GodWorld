@@ -446,7 +446,10 @@ function neighborsFromLedger(hood, opts) {
   const hoodName = clean(hood);
   const same = hoodName ? rows.filter(r => String(r.Neighborhood || '') === hoodName) : [];
   const rest = rows.filter(r => !same.includes(r));
+  const street = r => /\b(?:baker|bartender|barista|server|line cook|cook|bakery)\b/i.test(String(r.RoleType || '')) ? 0 : 1;
   const rank = (a, b) => {
+    const sw = street(a) - street(b);
+    if (sw) return sw;
     const aw = String(a.SMPageId || '').trim() ? 0 : 1;
     const bw = String(b.SMPageId || '').trim() ? 0 : 1;
     if (aw !== bw) return aw - bw;

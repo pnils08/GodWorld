@@ -90,6 +90,12 @@ console.log('Test 4b: staged proof is exact and fail-closed');
     rhea: { pass: true, draftSha256: latticeSha } }, lattice, null);
   assert('exact Rhea pass cannot override deterministic contamination',
     !blocked.ok && blocked.contamination && blocked.contamination.fail, JSON.stringify(blocked));
+  const brief = '# Dimond cooling\n\nThe supplied record establishes:\n\n- Dimond cooling\n\nThe next reporting question is: What remains to be learned here?\n';
+  const briefSha = crypto.createHash('sha256').update(brief).digest('hex');
+  const briefBlocked = verifyStagedProof({ status: 'staged', desk: 'business',
+    rhea: { pass: true, draftSha256: briefSha } }, brief, null);
+  assert('code-rendered source brief cannot become Saturday canon',
+    !briefBlocked.ok && /code-rendered/.test(briefBlocked.reason || ''), JSON.stringify(briefBlocked));
 }
 
 console.log('Test 5: aggregateStorylineSignals');

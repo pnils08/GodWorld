@@ -1,0 +1,131 @@
+{
+  "lastUpdated": "2026-08-13",
+  "updatedBy": "initiativeTrackerSnapshot.js (engine_audit snapshot)",
+  "initiatives": [
+    {
+      "id": "INIT-001",
+      "name": "West Oakland Stabilization Fund",
+      "keywords": [],
+      "status": "passed",
+      "voteCycle": 78,
+      "vote": "PASSED",
+      "budget": "$28M",
+      "domain": "economic",
+      "neighborhoods": [
+        "West Oakland"
+      ],
+      "implementation": {
+        "status": "disbursement-active",
+        "phase": "disbursement-active",
+        "summary": "C102: Month-four disbursement batch approved (7 households), total disbursed: 45 of ~280.",
+        "nextScheduledAction": "Month-five disbursement batch review",
+        "nextActionCycle": 103
+      }
+    },
+    {
+      "id": "INIT-002",
+      "name": "Oakland Alternative Response Initiative",
+      "keywords": [],
+      "status": "passed",
+      "voteCycle": 82,
+      "vote": "PASSED",
+      "budget": "$12.5M",
+      "domain": "safety",
+      "neighborhoods": [
+        "West Oakland",
+        "Fruitvale",
+        "East Oakland"
+      ],
+      "implementation": {
+        "status": "operational",
+        "phase": "operational",
+        "summary": "C102: D7 performance review confirms stabilization post-KONO crisis; monitoring continues.",
+        "nextScheduledAction": "D7 next-cycle report and community satisfaction survey",
+        "nextActionCycle": 103
+      }
+    },
+    {
+      "id": "INIT-003",
+      "name": "Fruitvale Transit Hub Phase II — Visioning",
+      "keywords": [],
+      "status": "visioning-complete",
+      "voteCycle": 94,
+      "vote": "COMPLETED",
+      "budget": "$230M",
+      "domain": "transit",
+      "neighborhoods": [
+        "Fruitvale"
+      ],
+      "implementation": {
+        "status": "construction-planning",
+        "phase": "construction-planning",
+        "summary": "C102: Submitted pipeline exhaustion docs + stamped pedestrian-path redesign",
+        "nextScheduledAction": "Bureau review of compliance submissions",
+        "nextActionCycle": 103
+      }
+    },
+    {
+      "id": "INIT-005",
+      "name": "Temescal Community Health Center",
+      "keywords": [],
+      "status": "passed",
+      "voteCycle": 80,
+      "vote": "PASSED",
+      "budget": "$45M",
+      "domain": "health",
+      "neighborhoods": [
+        "Temescal"
+      ],
+      "implementation": {
+        "status": "construction-active",
+        "phase": "construction-active",
+        "summary": "C102: Construction timeline accelerated; double shifts ordered for caisson drilling and excavation.",
+        "nextScheduledAction": "HCAI first-comments window resolution and Phase 1 close",
+        "nextActionCycle": 103
+      }
+    },
+    {
+      "id": "INIT-006",
+      "name": "Baylight District — Final Council Vote",
+      "keywords": [],
+      "status": "passed",
+      "voteCycle": 83,
+      "vote": "PASSED",
+      "budget": "$2.1B",
+      "domain": "sports",
+      "neighborhoods": [
+        "Jack London",
+        "Downtown"
+      ],
+      "implementation": {
+        "status": "construction-planning",
+        "phase": "construction-planning",
+        "summary": "C101: Post-event site inspection for the C100 Celebration closed clean — Delgado full walkdown of event field and construction exclusion perimeter found no surface failure beyond expected…",
+        "nextScheduledAction": "Phase II shortlist published — 4 qualified bidders reduced to 3",
+        "nextActionCycle": 103
+      }
+    },
+    {
+      "id": "INIT-007",
+      "name": "Oakland Youth Apprenticeship Pipeline",
+      "keywords": [],
+      "status": "announced",
+      "voteCycle": null,
+      "vote": null,
+      "budget": "$12.5M",
+      "domain": "workforce",
+      "neighborhoods": [
+        "West Oakland",
+        "East Oakland",
+        "Fruitvale"
+      ],
+      "implementation": {
+        "status": "pilot-active",
+        "phase": "pilot-active",
+        "summary": "C102: Executive review ordered to address stalled recruitment and intake bottlenecks.",
+        "nextScheduledAction": "Review findings and corrective actions report",
+        "nextActionCycle": 104
+      }
+    }
+  ]
+}

@@ -250,7 +250,7 @@ function buildWritePacket(args) {
     packet.exposure.excludedLeads = [];
     packet.task.writingMode = hasReportingTrail ? 'FULL_INVESTIGATION' : 'RECORDS_BRIEF';
     if (!hasReportingTrail) {
-      packet.task.goal = 'Write one concise records brief and machine-parseable INTAKE from the supplied evidence';
+      packet.task.goal = 'Write one Article from inside this city, in this reporter\'s voice, using only Packet-approved facts and exact quotes';
       const safeAssignment = clean(args && args.story && (args.story.angle || args.story.label) ||
         packet.task.assignment, 500).replace(/\s+—\s+remedy path \+ responsible office\s*$/i, '');
       packet.task.assignment = safeAssignment;
@@ -260,7 +260,6 @@ function buildWritePacket(args) {
       };
       if (reviewProfile) {
         reviewProfile.articleContract = Object.assign({}, reviewProfile.articleContract, {
-          voice: 'concise evidence-first records brief; no first-person reporting act unless supplied as a fact',
           targetWords: '180-280',
           opening: 'the strongest Packet-backed fact without engine classifier or row metadata',
           closing: 'one open question or next needed record, without implying an owner or request exists'
@@ -275,10 +274,10 @@ function buildWritePacket(args) {
     reviewProfile.articleContract.renderMode;
   if (!investigation && configuredRenderMode === 'SOURCE_BRIEF') {
     packet.task.writingMode = 'SOURCE_BRIEF';
-    packet.task.goal = 'Assemble one source brief and machine-parseable INTAKE from the supplied evidence';
+    packet.task.goal = 'Write one Article from inside this city, in this reporter\'s voice, using only Packet-approved facts and exact quotes';
     reviewProfile.articleContract = Object.assign({}, reviewProfile.articleContract, {
-      voice: 'concise evidence-first source brief with code-rendered exact quote blocks',
-      targetWords: 'evidence-bounded; length follows supplied public facts and exact quotes',
+      targetWords: reviewProfile.articleContract.targetWords ||
+        'evidence-bounded; length follows supplied public facts and exact quotes',
     });
   }
   if (reviewProfile) packet.reviewProfile = reviewProfile;
@@ -363,11 +362,11 @@ function buildWritePacket(args) {
       rule: 'Contrast approved facts with creativeBrief.missing only; do not narrate a missing item as an event that occurred.'
     });
     if (!hasReportingTrail) {
-      packet.limits.rule += ' This Packet has no supplied reporting trail: write a 180-280 word RECORDS_BRIEF. Do not print engine classifier names, severity labels, source row numbers, or a silence-clock section.';
+      packet.limits.rule += ' This Packet has no supplied reporting trail: write 180-280 words as this reporter. Do not print engine classifier names, severity labels, source row numbers, or a silence-clock section.';
     }
   }
   if (packet.task.writingMode === 'SOURCE_BRIEF') {
-    packet.limits.rule += ' This package uses a code-rendered SOURCE_BRIEF: preserve approved quote text exactly, omit raw engine fields and source-path metadata from public copy, and add no biographical or collective-sentiment prose.';
+    packet.limits.rule += ' Stay inside approved facts and exact quotes. Omit raw engine fields and source-path metadata from public copy. Do not write as an auditor of a supplied record.';
   }
   packet.output.preflight = {
     facts: 'select manifest.approvedFacts ids',

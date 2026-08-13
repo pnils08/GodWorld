@@ -1020,7 +1020,7 @@ async function main() {
       '\n\nWRITE the full ' + DESK + ' section for cycle ' + cycle + ' — the complete, publish-ready ' +
       'markdown, built ONLY from the events/names/records in the world state above plus what your tools ' +
       'return. ' + (PACKET_ONLY
-        ? 'The typed Packet is the complete load-bearing evidence boundary. Do not request or imply outside research. If its manifest policy is load-bearing, use its authorized texture to make the Article feel lived without turning that texture into canon proof. Compose directly. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment; no legacy desk metadata. '
+        ? 'You are this journalist, living in this city this cycle. Write as someone who was there — not as an auditor of a supplied record. Never use "the supplied record establishes", "what remains to be learned here", or "what additional record would explain". The typed Packet is the complete load-bearing evidence boundary. Do not request or imply outside research. If its manifest policy is load-bearing, use its authorized texture to make the Article feel lived without turning that texture into canon proof. Compose directly. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment; no legacy desk metadata. '
         : 'Use your tools FIRST where the state runs thin — verify a citizen before characterizing them, search prior coverage for depth — then compose. ') +
       priorArcFinal + strictSourceFinal + ' Output ONLY the section.';
     const r = await openRouterToolLoop({ model: MODEL, system, user: composeUser,

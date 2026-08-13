@@ -76,6 +76,14 @@ const ROLE_TO_USAGE = { subject: 'featured', mentioned: 'mentioned' };
 // ---------------------------------------------------------------------------
 // Staged-set reader — every .staged.json for the cycle, with its article text.
 // ---------------------------------------------------------------------------
+function isCodeRenderedBrief(articleText) {
+  const body = String(articleText || '').split(/^##\s+INTAKE\s*$/im)[0];
+  return /the supplied record establishes/i.test(body)
+    || /those supplied claims define the current record/i.test(body)
+    || /what remains to be learned here/i.test(body)
+    || /what additional record would explain/i.test(body);
+}
+
 function verifyStagedProof(side, articleText, fallbackVerdict) {
   if (!side || side.status !== 'staged') return { ok: false, reason: 'sidecar status is not staged' };
   const articleSha256 = crypto.createHash('sha256').update(articleText).digest('hex');
@@ -89,6 +97,10 @@ function verifyStagedProof(side, articleText, fallbackVerdict) {
   if (contamination.fail) {
     return { ok: false, articleSha256,
       reason: 'deterministic world-contamination blocker failed', contamination };
+  }
+  if (isCodeRenderedBrief(articleText)) {
+    return { ok: false, articleSha256,
+      reason: 'code-rendered source/records brief is not an Article' };
   }
   return { ok: true, articleSha256, contamination };
 }
@@ -776,4 +788,5 @@ if (require.main === module) {
 }
 
 module.exports = { loadStagedSet, articleCustomId, articleDoc, usageRowsFor, ROLE_TO_USAGE,
-  aggregateStorylineSignals, mergeStorylineLedger, STORYLINE_LEDGER_HEADERS, verifyStagedProof };
+  aggregateStorylineSignals, mergeStorylineLedger, STORYLINE_LEDGER_HEADERS, verifyStagedProof,
+  isCodeRenderedBrief };

@@ -2285,29 +2285,12 @@ async function runWrite(assign) {
   // (own citizen page, cp-<popid>) joins the tool loop.
   if (PACKET_ACTIVE) writerArgs.push('--strict-source-hygiene', '--packet-only');
   else if (byline && byline.popid) writerArgs.push('--byline-popid', byline.popid);
-  const codeRenderedMode = PACKET_ACTIVE && writePacket && writePacket.task &&
-    ['RECORDS_BRIEF', 'SOURCE_BRIEF'].includes(writePacket.task.writingMode)
-    ? writePacket.task.writingMode
-    : null;
-  if (codeRenderedMode) {
-    log('rendering ' + codeRenderedMode.toLowerCase().replace('_', ' ') + ' locally (0 writer model calls)...');
-    fs.writeFileSync(draftPath, codeRenderedMode === 'RECORDS_BRIEF'
-      ? livedPacket.renderRecordsBrief(writePacket)
-      : livedPacket.renderSourceBrief(writePacket));
-    const text = fs.readFileSync(draftPath, 'utf8');
-    const parsed = require('../lib/articleIntake').parse(text);
-    if (!parsed.found || parsed.errors.length) {
-      throw new Error('code-rendered brief INTAKE failed: ' +
-        (parsed.errors.length ? parsed.errors.map(e => e.code + ': ' + e.message).join('; ') : 'missing INTAKE'));
-    }
-    const audit = livedPacket.auditArticle(text, writePacket);
-    if (!audit.ok) {
-      throw new Error('code-rendered brief audit failed (' + audit.manifestId + '): ' +
-        audit.errors.map(e => e.code + '=' + e.values.join(',')).join('; '));
-    }
-  } else {
-    execFileSync('node', writerArgs, { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
-  }
+  // Live W3 is always the persona writer. Code-rendered SOURCE_BRIEF /
+  // RECORDS_BRIEF templates stay available for isolated tests; they are not
+  // the newspaper. Packet-only + auditArticle + contamination scan remain
+  // the hard walls.
+  const codeRenderedMode = null;
+  execFileSync('node', writerArgs, { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
   if (!fs.existsSync(draftPath)) throw new Error('writer produced no draft at ' + path.relative(ROOT, draftPath));
 
   const contamination = articleContamination.scanFile(draftPath, { desk });

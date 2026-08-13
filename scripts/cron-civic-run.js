@@ -410,10 +410,6 @@ async function runPrep() {
     if (!dir) return;
     (assignments[dir] = assignments[dir] || []).push(topic);
   };
-  const mustDecide = civicMust.demandsFromAudit(audit, tracker);
-  if (mustDecide.length) {
-    log('must-decide: ' + mustDecide.map(d => d.id + ' (' + d.currentPhase + ', ' + d.cyclesInState + 'c)').join('; '));
-  }
   const auditByInit = {};
   for (const p of audit.patterns) {
     for (const id of (p.affectedEntities && p.affectedEntities.initiatives) || []) {
@@ -433,14 +429,13 @@ async function runPrep() {
     hotInits.push(init);
     const ownerRule = INITIATIVE_AGENT.find(r => r.re.test(init.name));
     const owner = ownerRule ? ownerRule.dir : null;
-    const demand = mustDecide.find(d => d.id === init.id);
     const flagNotes = flagged.map(p => 'The engine\'s own review flags this: ' + ailmentPerception(p));
-    const body = demand ? civicMust.packetBody(demand) : [
+    const body = [
       cleanInline(impl.summary) ? 'Where it stands: ' + cleanInline(impl.summary) : 'Where it stands: in ' + phaseProse(impl.phase) + '.',
       impl.nextScheduledAction && cleanInline(impl.nextScheduledAction) ? 'On the calendar: ' + cleanInline(impl.nextScheduledAction) + (due ? ' — due THIS cycle.' : '.') : null,
       ...flagNotes,
     ].filter(Boolean).join('\n');
-    const topic = { kind: demand ? 'must-decide' : 'initiative', id: init.id, title: init.name + (demand ? ' — MUST DECIDE this cycle' : voteReady ? ' — VOTE PENDING' : due ? ' — action due this cycle' : ' — engine-flagged'), body };
+    const topic = { kind: 'initiative', id: init.id, title: init.name + (voteReady ? ' — VOTE PENDING' : due ? ' — action due this cycle' : ' — engine-flagged'), body };
     assign('civic-office-mayor', topic);
     assign(owner, topic);
     if (/stabilization/i.test(init.name)) assign('civic-office-okoro', topic);
@@ -891,12 +886,11 @@ function stripFences(t) {
   const a = s.indexOf('{'), b = s.lastIndexOf('}');
   return (a !== -1 && b > a) ? s.slice(a, b + 1) : s;
 }
-function outputContract(officeSlug, cycle, initiatives, demands) {
+function outputContract(officeSlug, cycle, initiatives) {
   // FLAT trackerUpdates + InitiativeID — the shape validateTrackerUpdates and
   // applyTrackerUpdates actually write. (First C102 chain run used the eval
   // harness's keyed-by-name shape; every write validated as unresolvable/dark.)
   const initList = (initiatives || []).map(i => '  - ' + i.id + ' = ' + i.name).join('\n');
-  const must = civicMust.contractAddendum(demands);
   return '\nRespond with ONLY a JSON object (no markdown fences, no prose before or after):\n' +
     JSON.stringify({
       office: officeSlug, cycle: Number(cycle), speaker: '<the office-holder\'s full name>',
@@ -911,7 +905,7 @@ function outputContract(officeSlug, cycle, initiatives, demands) {
     '\nIf a statement changes an initiative\'s state, fill trackerUpdates as a FLAT object whose "initiative" field is the INIT id (this exact key/format — the pipeline attributes the write by it):\n' +
     '{"initiative": "INIT-XXX", "ImplementationPhase": "<value or omit if unchanged>", "MilestoneNotes": "C' + cycle + ': <one sentence, max 200 chars>", "NextScheduledAction": "<optional>", "NextActionCycle": <optional number>}\n' +
     'Known initiatives:\n' + initList + '\n' +
-    (must || 'A statement with no state change keeps trackerUpdates as {} (empty).\n') +
+    'A statement with no state change keeps trackerUpdates as {} (empty).\n' +
     'ImplementationPhase MUST be one of: ' + [...PHASES].join(', ') + '.\n' +
     'Never invent citizens, businesses, statistics, or votes not present in your packet.';
 }
@@ -1054,7 +1048,7 @@ async function runDecide() {
     console.log('\n=== decide skipped: mayor vacant; cascade into ' + injected + ' packet(s) ===');
     return;
   }
-  const user = 'YOUR PENDING DECISIONS PACKET (cycle ' + cycle + '):\n\n' + packet + wallInj + '\n\n' + outputContract('mayor', cycle, initiatives, loadMustDecide(cycle));
+  const user = 'YOUR PENDING DECISIONS PACKET (cycle ' + cycle + '):\n\n' + packet + wallInj + '\n\n' + outputContract('mayor', cycle, initiatives);
   const r = await callVoice('civic-office-mayor', model, user, 5000);
   if (!r || r.error) {
     console.error('HALT: Mayor call failed — ' + (r ? r.error : 'no result') + '. Chain must not proceed (everything cascades from her).');
@@ -1116,7 +1110,7 @@ async function runVoices() {
       const model = officeModel(officeMap, dir);
       const packet = fs.readFileSync(packetPathFor(dir, cycle), 'utf8');
       const wallInj = await positionWallInject(officeMap, dir);
-      const user = 'YOUR PENDING DECISIONS PACKET (cycle ' + cycle + ') — the Mayor\'s decisions are at the bottom; react to them:\n\n' + packet + wallInj + '\n\n' + outputContract(slug, cycle, initiatives, loadMustDecide(cycle));
+      const user = 'YOUR PENDING DECISIONS PACKET (cycle ' + cycle + ') — the Mayor\'s decisions are at the bottom; react to them:\n\n' + packet + wallInj + '\n\n' + outputContract(slug, cycle, initiatives);
       const r = await callVoice(dir, model, user, 4000);
       if (!r || r.error) { results.push({ dir, slug, model, ok: false, error: r ? r.error : 'no result' }); return; }
       const out = writeVoiceJson(slug, cycle, r.json);
@@ -1167,7 +1161,7 @@ async function runProjects() {
         '- What details emerge from implementation?',
         '- What would a reporter see if they visited?',
         'You may invent operational details — names of facilities, timelines, specifics — but never citizens, statistics, or votes beyond your material.',
-        outputContract(slug, cycle, tracker.initiatives || [], loadMustDecide(cycle)),
+        outputContract(slug, cycle, tracker.initiatives || []),
       ].join('\n');
       const r = await callVoice(seat.agentDir, model, user, 4000);
       if (!r || r.error) { results.push({ slug, model, ok: false, error: r ? r.error : 'no result' }); continue; }

@@ -15,7 +15,7 @@
  * Phase 9 still runs later; applied=yes rows are skipped, so no double hit.
  *
  *   node scripts/drainReflectionIntake.js --dry-run
- *   (live apply is only from citizen-wake.js after a successful intake write)
+ *   Not called from citizen-wake.js.
  */
 
 const mem = require('/root/GodWorld/utilities/citizenMemory');

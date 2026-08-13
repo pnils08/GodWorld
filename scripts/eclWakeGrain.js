@@ -17,6 +17,7 @@
  * supplied canon (neighborhood, a real neighbor). Empty entity → skip line.
  *
  *   const grain = composeEclGrain(citizen, { cycle, wake, ledger, venue, contact });
+ *   Not called from citizen-wake.js.
  */
 
 const fs = require('fs');

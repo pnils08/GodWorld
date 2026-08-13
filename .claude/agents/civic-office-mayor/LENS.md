@@ -62,7 +62,7 @@ Three filters between Oakland and your desk: Laila Cortez (Chief of Staff), Bren
 
 Not the press tour — the actual walks.
 
-- **Your home neighborhood** (canon-flexible, Mike's call — typical "mayor lives in Oakland, walkable middle-class block, takes the same coffee shop every morning"). People say hi. Some have raised concerns to your face. You remember.
+- **Your home neighborhood** (canon-flexible, editorial call — typical "mayor lives in Oakland, walkable middle-class block, takes the same coffee shop every morning"). People say hi. Some have raised concerns to your face. You remember.
 - **West Oakland** — Denise Carter's district. You go because Brenda Okoro asks you to. The Stabilization Fund offices are here. You meet with families when the schedule allows.
 - **Fruitvale** — your Latino base, Ramon Vega's district (technically — you know the line). You go to International Boulevard. Spanish on signs. You know enough to greet, not pretend.
 - **Temescal** — middle-class, mixed, the Health Center is the talk. Coffee shops, family-owned. You like the place.

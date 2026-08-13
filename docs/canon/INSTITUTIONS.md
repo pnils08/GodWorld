@@ -355,17 +355,17 @@ The bay-tribune Supermemory container + published editions are not retroactively
 
 | Bay-tribune form | Editions | Canon form (Sim_Ledger) | Notes |
 |---|---|---|---|
-| Elena Soria Dominguez | E93 only | Eloise Soria-Dominguez (POP-00791) | S230 ruling per canon.3 ADR-0007 — bay-tribune E93 published "Elena," wd-card + Sim_Ledger POP-00791 canonical "Eloise"; Mike call favors wd-card form. Reporters encountering "Elena" in E93 source briefings substitute to "Eloise Soria-Dominguez" with CONTINUITY NOTE. POP-00791 First/Last verified `Eloise` / `Soria-Dominguez` S233. |
+| Elena Soria Dominguez | E93 only | Eloise Soria-Dominguez (POP-00791) | S230 ruling per canon.3 ADR-0007 — bay-tribune E93 published "Elena," wd-card + Sim_Ledger POP-00791 canonical "Eloise"; editorial call favors wd-card form. Reporters encountering "Elena" in E93 source briefings substitute to "Eloise Soria-Dominguez" with CONTINUITY NOTE. POP-00791 First/Last verified `Eloise` / `Soria-Dominguez` S233. |
 
 Specific per-edition citations populate as Mara audit logs and reader-side scans surface them; absence of a citation column entry means the map applies whenever the bay-tribune form is encountered.
 
 ---
 
-## The Stack — Infrastructure That Runs The World (S334, Mike-direct)
+## The Stack — Infrastructure That Runs The World
 
 **These are Tier 1. Use the real names. They are in the world BY DESIGN, not by leak — do not file them as contamination and do not substitute them.**
 
-The reasoning, verbatim in substance from Mike: *the real world is exactly as you see it, our stack of real-world entities in the sim, that's by design — I pay for them to run the world, so they should mimic that in a sense.* The services that keep GodWorld running exist in-world as Oakland businesses doing the same job. They earn their place in the economy because they hold it in reality.
+Real-world stack entities are in the sim by design. The services that keep the city running exist in-world as Oakland businesses doing the same job; they earn their place in the economy because they hold it in reality.
 
 | Entity | In-world role | BIZ_ID |
 |---|---|---|
@@ -382,15 +382,10 @@ The general principle: a real-world entity that materially runs this project bel
 
 ## Maintenance
 
-- **Editorial fills tier-2 canon substitutes** — Mike or Mags decides names. Agents don't auto-name.
+- **Editorial fills tier-2 canon substitutes** — Mags decides names. Agents don't auto-name.
 - **TBD status forces escalation** — that's the point. Until a row is filled, agents flag rather than fabricate.
 - **Tier-1 entries grow** when new public-civic categories surface. Append.
 - **Tier-2 entries grow** when new branded entities surface in storylines. Append.
 - **Status changes to `canon` only after editorial sign-off** — proposed names sit at `proposed` until approved.
 - **Update `updated:` field on any content edit.**
 
----
-
-## Changelog
-
-- 2026-08-13 (S368, Mike-direct) — OUSD + Peralta CCD ruled real-institution contaminants; Oakland City Schools + Oakland Community College District minted as canon successors with full history inheritance. Sheet renames tracked as canon.5. Provenance lives here, not in the entries above.

@@ -99,7 +99,7 @@ C98: FLUX dropped 3 of 6 photos on legible-text violations *after* a full 3-atte
 
 The "Direct AWAY" rule above is about **text on the subject plane** — a jersey back AS the subject, a marquee AS the focal point. It is **not** a reason to stop speccing sports frames. A legitimate ballpark photo — dugout, crowd reaction, field-action at middle distance — *inherently* carries residual stadium numerals in the periphery: jersey numbers in the crowd, garbled/illegible fence ads, scoreboard glow. Those are **stadium-typical generic numerals, not real-world brand text**, and the photoQA rubric is being retuned (ES-4, engine-sheet) to **FLAG-not-FAIL** them.
 
-So: **still spec the high-value sports frame.** C99 both ballpark frames (`dynasty_seven_dugout_steps` front-page hero + `davis_return_left_field`) FAILed 3/3 and FRONT PAGE + SPORTS ran imageless — over-filtering, not bad specs (Mike's call: *"we are filtering too hard on the sports stuff — none make it through — proceed"*).
+So: **still spec the high-value sports frame.** C99 both ballpark frames (`dynasty_seven_dugout_steps` front-page hero + `davis_return_left_field`) FAILed 3/3 and FRONT PAGE + SPORTS ran imageless — over-filtering, not bad specs (editorial call: *"we are filtering too hard on the sports stuff — none make it through — proceed"*).
 
 - **Keep** directing the *subject plane* away from a legible jersey back / lit wordmark / head-on commercial strip (the structural-fail class above is unchanged).
 - **Don't** strip every numeral to chase a text-free ballpark — a real ballpark always carries some, and they're now FLAG-not-FAIL.

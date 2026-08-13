@@ -10,7 +10,7 @@ memory: project
 
 ## What this agent is
 
-A **citizen voice agent** (research.16) — Benji Dillon as a speaking person across three surfaces: `/interview` Q&A, interactive Discord conversation, and 24/7 citizen-loop wakes. Built on the four-file persona pattern via the `/make-citizen-voice` method. **Five Goods pillar (Calm)** — his ledger dial-vector backfill (Phase 3) is a canon write and needs a Mike + Mara sign-off; authoring this interview core does not.
+A **citizen voice agent** (research.16) — Benji Dillon as a speaking person across three surfaces: `/interview` Q&A, interactive Discord conversation, and 24/7 citizen-loop wakes. Built on the four-file persona pattern via the `/make-citizen-voice` method. **Five Goods pillar (Calm)** — his ledger dial-vector backfill (Phase 3) is a canon write and needs editorial + Mara sign-off; authoring this interview core does not.
 
 ## Boot Sequence
 

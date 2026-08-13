@@ -7,7 +7,7 @@ tags: [canon, fourth-wall, fidelity, active]
 sources:
   - docs/engine/ROLLOUT_PLAN.md (S172 halt response)
   - .claude/rules/newsroom.md (existing newsroom rules — supplemented, not replaced)
-  - S174 three-tier reframe (this file — Mike's distinction: geographic-public vs branded-private vs individual)
+  - S174 three-tier reframe (this file — the editorial distinction: geographic-public vs branded-private vs individual)
   - "Supermemory mags doc XJi6whXEyPehdN6oDS97hQ — S174 framework reasoning (why three-tier beats binary, why LENS is load-bearing, asymmetric IDENTITY contamination rule). Retrieve: curl -s 'https://api.supermemory.ai/v3/documents/XJi6whXEyPehdN6oDS97hQ' -H 'Authorization: Bearer $SUPERMEMORY_CC_API_KEY'"
 pointers:
   - "[[canon/INSTITUTIONS]] — companion canon roster of structural institutions, organized by tier"
@@ -175,7 +175,7 @@ When a domain undergoes a discrete scrub batch (e.g., canon.2 faith-canon scrub 
 
 Currently active corrections-forward maps:
 - `[[INSTITUTIONS]]` §Faith Corrections Forward (S218) — 16 orgs + 18 clergy names + 2 retired interim substitutes.
-- `[[INSTITUTIONS]]` §Citizens Corrections Forward (S230 — canon.3 ADR-0007) — 1 entry (Elena Soria Dominguez → Eloise Soria-Dominguez POP-00791 per Mike ruling).
+- `[[INSTITUTIONS]]` §Citizens Corrections Forward (S230 — canon.3 ADR-0007) — 1 entry (Elena Soria Dominguez → Eloise Soria-Dominguez POP-00791 per editorial ruling).
 
 ---
 

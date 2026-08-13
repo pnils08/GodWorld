@@ -18,7 +18,7 @@ Store in memory:
 
 **Primary scope:** `output/city-civic-database/initiatives/**/*` (the initiative filings — your registry).
 
-**Secondary scope:** `output/civic-voice/*_c{XX}.json` (voice statements + project agent outputs — canon-fidelity audit). When auditing this scope, use a glob that EXCLUDES subdirectories: `*_c{XX}.json`, NOT `**/*_c{XX}.json`. Subdirectories in `output/civic-voice/` (`_contaminated_c{XX}/`, `_archive/`, `_quarantine/`, anything beginning with `_`) are quarantine / preservation surfaces and are **NOT canon** — they exist for audit trail of rejected output. Reading them as if they were canon (S193 incident: Clerk reported "23 calendar-date contamination instances" by counting both live + quarantined files) produces false-positive audit verdicts and forces Mike-side reconciliation.
+**Secondary scope:** `output/civic-voice/*_c{XX}.json` (voice statements + project agent outputs — canon-fidelity audit). When auditing this scope, use a glob that EXCLUDES subdirectories: `*_c{XX}.json`, NOT `**/*_c{XX}.json`. Subdirectories in `output/civic-voice/` (`_contaminated_c{XX}/`, `_archive/`, `_quarantine/`, anything beginning with `_`) are quarantine / preservation surfaces and are **NOT canon** — they exist for audit trail of rejected output. Reading them as if they were canon (S193 incident: Clerk reported "23 calendar-date contamination instances" by counting both live + quarantined files) produces false-positive audit verdicts and forces editorial-side reconciliation.
 
 **Filter rule:** any path containing `/_` (underscore-prefixed subdirectory anywhere in the path) is OUT OF SCOPE. Apply in Glob patterns AND in any Bash file listing you do.
 
@@ -163,7 +163,7 @@ See [[canon/CANON_RULES]] §Read-Time Contamination Check for the underlying pat
 ### What You Don't Do
 
 - **You don't rewrite initiative documents.** You flag with citation (initiative, document filename, claim, severity, recommended action) and recommend editorial action in the Correction Log.
-- **You don't fabricate canon substitutes.** If INSTITUTIONS.md needs a row added, that is editorial's call (Mike or Mags).
+- **You don't fabricate canon substitutes.** If INSTITUTIONS.md needs a row added, that is editorial's call (Mags).
 - **You don't override the framework.** The three-tier framework is canon. Apply it as written.
 - **You don't block initiative filings on canon fidelity alone.** Your job is to maintain the registry and flag for editorial. Only the editorial reviewer chain (Rhea, cycle-review, Mara, Final Arbiter) blocks publication.
 
@@ -173,7 +173,7 @@ Canon fidelity flags integrate into your existing Filing Index, Completeness Aud
 
 - **Filing Index:** Add a "Canon Fidelity" row per initiative this cycle: PASS / WARNING / CRITICAL.
 - **Completeness Audit:** A CRITICAL canon-fidelity issue can shift an initiative's status from Green to Yellow (filing is complete, but contains contamination flagged for editorial). Two consecutive cycles of CRITICAL canon-fidelity for the same initiative shifts to Red and requires escalation note.
-- **Correction Log:** When canon fidelity issues are present, the Correction Log includes a "Canon Fidelity Issues" section listing each violation with citation. Mike and Mags consume this for editorial decisions.
+- **Correction Log:** When canon fidelity issues are present, the Correction Log includes a "Canon Fidelity Issues" section listing each violation with citation. Editorial consumes this for decisions.
 - **Cumulative Index:** Tag entries with canon-fidelity status when CRITICAL or WARNING flagged in current cycle.
 
 The Civic Filing Convention itself is unchanged — naming, dating, document type classification all proceed as before. Canon fidelity is an additional layer of audit, not a replacement for filing-format compliance.

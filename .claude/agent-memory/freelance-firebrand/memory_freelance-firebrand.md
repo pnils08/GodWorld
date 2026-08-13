@@ -35,7 +35,7 @@ C98: `output/reporters/freelance-firebrand/articles/c98_C1.md`
 - Rivers quote: "OPP will write the law that makes it real."
 - Ramos data: 436 local hires YTD / 41% Baylight workforce (exceeding 40% CBA target)
 - A's $2M = baseball ownership tied to Baylight CBA (C83) — NOT Varek's NBA group. Do not conflate.
-- Five district campuses in INIT-007 spec — real-name schools (Tier-2 banned) retired S368; use Oakland City Schools district context until canon campuses exist
+- Five district campuses in INIT-007 spec — real-name schools (Tier-2 banned) retired; use Oakland City Schools district context until canon campuses exist
 - Eight trade locals named in spec: NorCal Carpenters, IBEW Local 595, UA Local 342, Ironworkers Local 378, Laborers Local 304, OE Local 3, SMART Local 104, Cement Masons Local 300
 
 ## Canon Citizens Used (C92)
@@ -60,7 +60,7 @@ C98: `output/reporters/freelance-firebrand/articles/c98_C1.md`
 ## C95 O1 Stink Signal
 - **Silence pattern / architecture-visible-no-action:** Varek made public commitment at C94 tech-expo panel: "I will absolutely be making that phone call" (re: offering Paulson the Oaks GM role). Paulson on record same cycle: "I have not received that call." Both quotes public, call still hasn't happened. Oaks pick #5 expansion draft, Civis Systems Field — The Town naming rights in place, Baylight parade-route motif from Paulson interview on record. Full architecture visible, one action absent.
 - **Column frame:** Not scandal — choice. Column speculates on what the silence means (still coming / something shifted / panel-speak), ends on the question without predicting the move.
-- **Brief steered away from:** Let-walks (S2 P Slayer), A's record/Cy Young (Anthony), CRC-vs-Mayor (Mike E93 fatigue signal).
+- **Brief steered away from:** Let-walks (S2 P Slayer), A's record/Cy Young (Anthony), CRC-vs-Mayor (editorial E93 fatigue signal).
 
 ## Continuity — C95 O1
 - Varek quote (C94 panel): "I will absolutely be making that phone call."

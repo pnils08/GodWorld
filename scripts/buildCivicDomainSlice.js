@@ -36,7 +36,7 @@ const CIVIC_SEATS = Object.freeze({
     hook: 'The supplied systems record shows an infrastructure or transit question with a visible clock.'
   },
   'lila-mezran': {
-    name: 'Lila Mezran',
+    name: 'Dr. Lila Mezran',
     popid: 'POP-00154',
     domain: 'health',
     approach: 'Health approach: use only packet-backed health facts and name the human consequence without diagnosis. Clinical calm, one record-backed claim.',
@@ -249,6 +249,24 @@ function publicInfrastructureFact(top) {
     .replace(/construction-planning/gi, 'its supplied planning phase');
 }
 
+function publicHealthFact(top) {
+  const label = String(top && top.label || '').trim();
+  const tracker = label.match(/^(.+?)\s*\|\s*Status\s+([^|]+?)(?:\s*\|\s*phase\s+(.+))?$/i);
+  if (tracker) {
+    const name = tracker[1].trim();
+    const status = tracker[2].trim().toLowerCase() === 'passed'
+      ? 'approved'
+      : 'listed as ' + tracker[2].trim().replace(/-/g, ' ');
+    const phase = tracker[3] && tracker[3].trim().toLowerCase() === 'construction-active'
+      ? 'construction is active'
+      : tracker[3] && 'the supplied implementation state is ' + tracker[3].trim().replace(/-/g, ' ');
+    return name + ' is ' + status + (phase ? ', and ' + phase : '') + '.';
+  }
+  const construction = label.match(/^(.+?)\s*\|\s*construction-active$/i);
+  if (construction) return 'Construction is active for ' + construction[1].trim() + '.';
+  return label.replace(/\bconstruction-active\b/gi, 'construction is active');
+}
+
 function prewriteForSeat(slug, top, candidateScope) {
   if (slug === 'trevor-shimizu') {
     return {
@@ -262,6 +280,22 @@ function prewriteForSeat(slug, top, candidateScope) {
         'responsible agency, maintenance action, capacity, load, or service effect unless named by the source'
       ],
       cascade: { state: 'UNESTABLISHED', facts: [], link: null, src: null }
+    };
+  }
+  if (slug === 'lila-mezran') {
+    return {
+      anchorFacts: [publicHealthFact(top)],
+      forbidden: [
+        'Do not add diagnoses, symptoms, prevalence, treatment outcomes, patients, residents, clinicians, staffing, capacity, budgets, measurements, quotes, or access effects absent from the supplied entries.'
+      ],
+      schema: 'HEALTH-SERVICE-BRIEF-1',
+      method: 'ACCESS_TIMELINE_HUMAN_COST',
+      missing: [
+        'a named affected resident, patient, clinician, or service user',
+        'an opening date, access change, service capacity, staffing level, or implementation timeline beyond the supplied construction state',
+        'a diagnosis, symptom pattern, prevalence measure, treatment result, or causal health outcome'
+      ],
+      humanConsequence: { state: 'UNESTABLISHED', subjects: [], facts: [], src: null }
     };
   }
   if (slug !== 'luis-navarro') {
@@ -317,7 +351,9 @@ function packetForEntries(entries, slug, profiles) {
   const storyCitizens = candidateScope
     ? candidateScope.allowed.map(row => row.name + ' (' + row.popid + ')')
     : top.citizens;
-  const publicTopLabel = slug === 'trevor-shimizu' ? publicInfrastructureFact(top) : top.label;
+  const publicTopLabel = slug === 'trevor-shimizu'
+    ? publicInfrastructureFact(top)
+    : slug === 'lila-mezran' ? publicHealthFact(top) : top.label;
   return {
     seat: { slug, name: seat.name, popid: seat.popid, domain: seat.domain },
     empty: false,
@@ -326,7 +362,9 @@ function packetForEntries(entries, slug, profiles) {
       ref: top.ref,
       label: publicTopLabel,
       kind: top.kind,
-      angle: slug === 'trevor-shimizu' ? publicTopLabel : (top.angle || top.label),
+      angle: ['trevor-shimizu', 'lila-mezran'].includes(slug)
+        ? publicTopLabel
+        : (top.angle || top.label),
       hookLine: slug === 'trevor-shimizu' ? publicTopLabel : (top.hookLine || seat.hook),
       hood: top.hood,
       popids: storyPopids,

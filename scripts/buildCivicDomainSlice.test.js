@@ -67,6 +67,17 @@ try {
   assert.deepStrictEqual(slice.packets['luis-navarro'].prewrite.excludedCandidates,
     [{ popid: 'POP-90002', reason: 'PRO_ATHLETE_CIVIC_INELIGIBLE' }]);
   assert.strictEqual(slice.packets['lila-mezran'].story.ref, 'INIT-HEALTH');
+  assert.strictEqual(slice.packets['lila-mezran'].story.label,
+    'Construction is active for Temescal Community Health Center.');
+  assert.strictEqual(slice.packets['lila-mezran'].prewrite.schema, 'HEALTH-SERVICE-BRIEF-1');
+  assert.strictEqual(slice.packets['lila-mezran'].prewrite.method, 'ACCESS_TIMELINE_HUMAN_COST');
+  assert.deepStrictEqual(slice.packets['lila-mezran'].prewrite.humanConsequence,
+    { state: 'UNESTABLISHED', subjects: [], facts: [], src: null });
+  assert(slice.packets['lila-mezran'].prewrite.missing.some(row => row.includes('diagnosis')));
+  assert(!/construction-active|Status passed|phase/i.test(JSON.stringify({
+    story: slice.packets['lila-mezran'].story,
+    prewrite: slice.packets['lila-mezran'].prewrite.anchorFacts
+  })));
   assert.strictEqual(slice.packets['noah-tan'].story.ref, 'ENV-1');
   assert.strictEqual(slice.packets['carmen-delaine'].story.ref, 'INIT-TRANSIT');
   assert.deepStrictEqual(slice.packets['carmen-delaine'].prewrite.anchorFacts,

@@ -316,6 +316,47 @@ const scalarLead = p.validateReportOutput({
 }));
 assert.deepStrictEqual(scalarLead.unverifiedLead, ['TEST-ONLY discarded lead']);
 
+// Lila's health-service brief keeps human consequence and clinical claims
+// explicitly unestablished when the slice supplies only implementation state.
+const healthProfile = {
+  id: 'TEST-LILA', canonPolicy: 'load-bearing',
+  articleContract: { renderMode: 'SOURCE_BRIEF' },
+  authorizedTexture: ['plain-language health-service translation'],
+  textureConditions: ['clinical claims require Packet support'],
+  canonBlockers: ['invented diagnosis or patient'],
+};
+const healthStory = {
+  ref: 'INIT-TEST-HEALTH', label: 'Construction is active for Test Health Center.',
+  angle: 'Construction is active for Test Health Center.', kind: 'initiative',
+  hood: 'TEST-HOOD', popids: [], citizens: [],
+};
+const healthSlice = { kind: 'civic-domain', packetSeat: {
+  seat: { domain: 'health' },
+  prewrite: {
+    method: 'ACCESS_TIMELINE_HUMAN_COST',
+    missing: ['a named affected resident', 'a diagnosis or treatment result'],
+    humanConsequence: { state: 'UNESTABLISHED', subjects: [], facts: [], src: null },
+    forbidden: ['Do not invent diagnoses, patients, or outcomes.'],
+  }
+} };
+const healthW1 = p.buildAnglePacket({ cycle: 999, desk: 'civic', reporter,
+  story: healthStory, approach: 'TEST-ONLY clinical calm', slice: healthSlice, lane: [] });
+assert.equal(healthW1.task.creativeBrief.kind, 'health-service');
+assert.equal(healthW1.task.creativeBrief.method, 'ACCESS_TIMELINE_HUMAN_COST');
+assert.deepStrictEqual(healthW1.task.creativeBrief.humanConsequence,
+  { state: 'UNESTABLISHED', subjects: [], facts: [], src: null });
+const healthPlan = p.validateAngleOutput({
+  focus: 'TEST-ONLY health service', why: 'The timeline remains open',
+  checks: ['Check the supplied record'], targets: [], interpretation: 'Impact is unknown',
+  unverifiedLead: [], closeQuestion: 'What access record is still needed?'
+}, healthW1);
+const healthW3 = p.buildWritePacket({ cycle: 999, desk: 'civic', reporter,
+  story: healthStory, approach: 'TEST-ONLY clinical calm', angleInput: healthW1,
+  anglePlan: healthPlan, interviews: [], lane: [], reviewProfile: healthProfile });
+assert.equal(healthW3.task.writingMode, 'SOURCE_BRIEF');
+assert.deepStrictEqual(healthW3.task.creativeBrief, healthW1.task.creativeBrief);
+assert.equal(p.auditArticle(p.renderSourceBrief(healthW3), healthW3).ok, true);
+
 // Jordan's economic slice carries sourced conditions and limits through LEP/2.
 const economicStory = {
   ref: 'output/TEST_ONLY_ECONOMIC.json rows[1]',

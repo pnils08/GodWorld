@@ -177,4 +177,18 @@ assert.equal(stageRoute('culture', kaiAssignment.persona, 'report').model,
 assert.equal(stageRoute('culture', kaiAssignment.persona, 'write').model,
   'meta-llama/llama-3.3-70b-instruct');
 
+const lilaAssignment = {
+  name: 'Dr. Lila Mezran', popid: 'POP-00154', desk: 'civic',
+  beatDomain: 'HEALTH', persona: 'lila-mezran',
+};
+const lilaContext = activateWakeContext(lilaAssignment, lilaAssignment.persona);
+assert.equal(lilaContext.packetContract, 'v2');
+assert.equal(lilaContext.wakePackage.version, 'LILA-LEP2-1');
+assert.equal(stageRoute('civic', lilaAssignment.persona, 'angle').model,
+  'deepseek/deepseek-chat');
+assert.equal(stageRoute('civic', lilaAssignment.persona, 'report').model,
+  'deepseek/deepseek-chat');
+assert.equal(stageRoute('civic', lilaAssignment.persona, 'write').model,
+  'deepseek/deepseek-chat');
+
 console.log('cron fan-out filename handoff tests: PASS');

@@ -496,6 +496,28 @@
       "canonBlockers": ["invented faith practice, belief, worship, membership, motive, companion, clergy, congregant, worker, pantry, grief room, gathering, service, aid act, quote, or civic effect", "an invented or altered person, institution, tradition, neighborhood, event, relationship, date, count, or quote", "a blocked real-world institution or clergy name, doctrine-war framing, raw engine label, or collective faith-community sentiment presented as fact"]
     }
   },
+  "mason-ortega": {
+    "version": "MASON-LEP2-1",
+    "active": true,
+    "requiredDaily": true,
+    "persona": "mason-ortega",
+    "assignment": { "desk": "culture", "name": "Mason Ortega", "popid": "POP-00160", "beatDomain": "CULTURE" },
+    "packetContract": "v2",
+    "models": {
+      "angle": { "provider": "openrouter", "model": "deepseek/deepseek-chat" },
+      "report": { "provider": "openrouter", "model": "deepseek/deepseek-chat" },
+      "write": { "provider": "openrouter", "model": "deepseek/deepseek-chat" }
+    },
+    "reviewProfile": {
+      "id": "mason-kitchen-ground-v1",
+      "canonPolicy": "load-bearing",
+      "purpose": "Treat a Packet-supplied restaurant signal as a workplace question without inventing Mason's presence, a worker, shift, service state, business condition, or labor consequence.",
+      "articleContract": { "renderMode": "SOURCE_BRIEF", "voice": "evidence-bounded kitchen-work brief", "targetWords": "evidence-bounded", "opening": "one Packet-named restaurant and location", "closing": "the worker or operating account still needed" },
+      "authorizedTexture": ["workplace-oriented questions about a supplied restaurant without claiming an answer", "kitchen vocabulary used only as interpretation and never as proof of a worker, action, condition, or event"],
+      "textureConditions": ["a restaurant appearing on an evening list proves only the supplied venue-location relation, not that it was open, busy, staffed, serving, struggling, or observed", "first-person embedding, every worker, owner, patron, shift, quote, action, count, wage, cost, supply issue, health score, and business outcome requires Packet support"],
+      "canonBlockers": ["invented attendance, kitchen access, worker, owner, patron, service, rush, shift, dialogue, quote, wage, cost, ticket count, equipment state, supply problem, health score, business condition, or labor consequence", "an invented or altered venue, person, neighborhood, event, relationship, date, number, or quote", "review language, raw engine labels, citywide food trend assigned to one venue, or collective worker sentiment presented as fact"]
+    }
+  },
   "business-desk": {
     "version": "JORDAN-LEP2-1",
     "active": true,

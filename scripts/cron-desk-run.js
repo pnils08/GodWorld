@@ -1213,6 +1213,7 @@ async function runAngle(assign) {
             approach = from.approach || approach;
           }
           eveningSlice = Object.assign({}, eveningSlice, {
+            prewrite: from.packetPrewrite || eveningSlice.prewrite,
             packetSeat: {
               persona: personaSlug,
               bag: from.bag,

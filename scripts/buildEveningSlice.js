@@ -347,14 +347,13 @@ function emitPulses(texture, signals, cycle) {
       names: [v.name],
       requiresName: true,
       source: 'world_summary ## Evening Texture · Restaurants',
-      angle: 'Kitchen / dining room at ' + v.name +
-        (v.hood ? ' in ' + v.hood : '') +
-        ' — who works the room and what the night costs them',
-      hookLine: v.name + ' is on the evening board' + (v.hood ? ' in ' + v.hood : '') + '.',
+      angle: v.name + ' appears on the evening restaurant list' +
+        (v.hood ? ' in ' + v.hood : '') + '. What was happening there is not established.',
+      hookLine: v.name + ' appears on the evening restaurant list' +
+        (v.hood ? ' in ' + v.hood : '') + '.',
       sceneBits: [
         'VENUE: ' + v.name,
-        v.hood ? 'HOOD: ' + v.hood : null,
-        texture.foodTrend ? 'FOOD TREND: ' + texture.foodTrend : null
+        v.hood ? 'HOOD: ' + v.hood : null
       ].filter(Boolean)
     });
   }
@@ -369,8 +368,10 @@ function emitPulses(texture, signals, cycle) {
       names: [v.name],
       requiresName: true,
       source: 'world_summary ## Evening Texture · Fast food',
-      angle: 'Counter rush at ' + v.name + ' — speed, labor, and who still shows up',
-      hookLine: v.name + ' holds the late-service line' + (v.hood ? ' in ' + v.hood : '') + '.',
+      angle: v.name + ' appears on the evening fast-food list' +
+        (v.hood ? ' in ' + v.hood : '') + '. What was happening there is not established.',
+      hookLine: v.name + ' appears on the evening fast-food list' +
+        (v.hood ? ' in ' + v.hood : '') + '.',
       sceneBits: ['VENUE: ' + v.name, v.hood ? 'HOOD: ' + v.hood : null].filter(Boolean)
     });
   }
@@ -738,6 +739,24 @@ function storyFromPulse(pulse, cycle) {
   };
 }
 
+function prewriteFromPulse(pulse, recommend) {
+  if (!pulse) return null;
+  return {
+    pulseClass: pulse.className,
+    angle: pulse.angle,
+    hookLine: pulse.hookLine,
+    anchorFacts: [
+      pulse.named ? 'NAMED: ' + pulse.named : null,
+      pulse.person ? 'PERSON: ' + pulse.person : null,
+      pulse.venue ? 'VENUE: ' + pulse.venue : null,
+      pulse.hood ? 'HOOD: ' + pulse.hood : null,
+      ...(pulse.sceneBits || [])
+    ].filter(Boolean).slice(0, 8),
+    bagRecommend: recommend && recommend.bag || null,
+    bagSlug: recommend && recommend.slug || null
+  };
+}
+
 function buildEveningSlice(cycle, opts) {
   const root = (opts && opts.root) || ROOT;
   const c = Number(cycle);
@@ -849,20 +868,7 @@ function buildEveningSlice(cycle, opts) {
     perSeat,
     approach: EVENING_APPROACH,
     story: storyFromPulse(top, c),
-    prewrite: {
-      pulseClass: top.className,
-      angle: top.angle,
-      hookLine: top.hookLine,
-      anchorFacts: [
-        top.named ? 'NAMED: ' + top.named : null,
-        top.person ? 'PERSON: ' + top.person : null,
-        top.venue ? 'VENUE: ' + top.venue : null,
-        top.hood ? 'HOOD: ' + top.hood : null,
-        ...(top.sceneBits || [])
-      ].filter(Boolean).slice(0, 8),
-      bagRecommend: recommend.bag,
-      bagSlug: recommend.slug
-    },
+    prewrite: prewriteFromPulse(top, recommend),
     scene: {
       venues,
       nightlifeMeta: texture.nightlifeMeta,
@@ -1064,6 +1070,7 @@ function assignmentFromSlice(slice, personaSlug) {
     bagDoc: consumer ? consumer.bagDoc : null,
     approach,
     story,
+    packetPrewrite: prewriteFromPulse(pulse, slice.recommend),
     eveningSlice: true,
     eveningLife: true,
     pulse: pulse ? {

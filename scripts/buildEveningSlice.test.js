@@ -82,6 +82,15 @@ console.log('emitPulses + recommend:');
   ok('has pulses', pulses.length >= 4);
   ok('has quiet-nightlife or nightlife', pulses.some(p => /nightlife/i.test(p.className)));
   ok('has named-restaurant', pulses.some(p => p.className === 'named-restaurant' && /44th Table/i.test(p.named)));
+  const restaurantPulse = pulses.find(p => p.className === 'named-restaurant');
+  const publicRestaurant = JSON.stringify({
+    angle: restaurantPulse && restaurantPulse.angle,
+    hookLine: restaurantPulse && restaurantPulse.hookLine,
+    sceneBits: restaurantPulse && restaurantPulse.sceneBits,
+  });
+  ok('restaurant pulse does not invent a shift, worker, cost, or service state',
+    !/who works|costs them|counter rush|late-service|FOOD TREND/i.test(publicRestaurant) &&
+    /appears on the evening restaurant list/i.test(publicRestaurant));
   ok('has fame-sighting with venue', pulses.some(p => p.className === 'fame-sighting' && p.venue === 'Foothill Builders'));
   ok('never invents venue', !pulses.some(p =>
     /Fake Bar|Unreal Lounge/i.test(p.named || '') ||
@@ -104,6 +113,17 @@ console.log('emitPulses + recommend:');
   const masonPulse = pickPulseForPersona(pulses, 'mason-ortega');
   ok('mason prefers kitchen-ish', masonPulse &&
     ['named-restaurant', 'fast-food', 'food-trend', 'quiet-nightlife'].includes(masonPulse.className));
+  const masonAssignment = assignmentFromSlice({
+    empty: false,
+    cycle: 99,
+    pulses,
+    recommend: rec,
+    story: null
+  }, 'mason-ortega');
+  const masonFacts = JSON.stringify(masonAssignment && masonAssignment.packetPrewrite);
+  ok('mason Packet prewrite follows his selected pulse, not the global top pulse',
+    masonAssignment && masonAssignment.story.named === masonPulse.named &&
+    masonFacts.includes(masonPulse.named) && !masonFacts.includes('KONO Cocktails'));
 }
 
 console.log('faith canon-forward boundary:');

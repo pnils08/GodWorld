@@ -66,8 +66,8 @@ const normalized = renderPacketIntake(
 );
 assert.ok(normalized.includes('## INTAKE'));
 assert.ok(normalized.includes('NAMES: Test Citizen | quoted-source'));
-assert.ok(normalized.includes('STORYLINE: test-hood-test-signal | referenced'));
-assert.ok(normalized.includes('CLAIM: TEST-ONLY value — changed | output/TEST_ONLY.json rows[1]'));
+assert.ok(normalized.includes('STORYLINE: test-hood-test-citizen-test-signal | opened'));
+assert.ok(normalized.includes('CLAIM: Test concern. | citizenVoice PRESS Test Citizen'));
 assert.ok(!normalized.includes('BIZ: None'));
 assert.equal(require('../lib/articleIntake').parse(normalized).errors.length, 0);
 

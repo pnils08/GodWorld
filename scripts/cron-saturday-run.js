@@ -101,6 +101,36 @@ function verifyStagedProof(side, articleText, fallbackVerdict) {
   return { ok: true, articleSha256, contamination };
 }
 
+function loadArcSeeds(cycle) {
+  const COMPARE = path.join(ROOT, 'output', 'cron-compare');
+  const out = [];
+  if (!fs.existsSync(COMPARE)) return out;
+  for (const f of fs.readdirSync(COMPARE).sort()) {
+    if (!f.endsWith('_arc.json')) continue;
+    let side;
+    try { side = JSON.parse(fs.readFileSync(path.join(COMPARE, f), 'utf8')); } catch (_) { continue; }
+    if (!side || side.status !== 'arc-seed') continue;
+    if (String(side.cycle) !== String(cycle)) continue;
+    if (!(side.quotes || []).length) continue;
+    out.push({
+      stem: f.replace(/\.json$/, ''),
+      sidecar: {
+        desk: side.desk,
+        cycle: side.cycle,
+        intake: {
+          storylines: side.storyline ? [side.storyline] : [],
+          hoods: side.hood ? [side.hood] : [],
+          names: side.quotes.map(q => ({
+            name: q.name, popid: q.pop, role: 'quoted-source'
+          }))
+        }
+      },
+      text: side.quotes.map(q => q.name + ': ' + q.quote).join('\n')
+    });
+  }
+  return out;
+}
+
 function loadStagedSet(cycle) {
   const out = [];
   if (!fs.existsSync(STAGED)) return out;
@@ -372,7 +402,7 @@ function mergeStorylineLedger(existing, signals, cycle) {
 
 async function stepSignals(cycle) {
   console.log('--- step 6b: storyline signals → Storyline_Ledger ---');
-  const signals = aggregateStorylineSignals(loadStagedSet(cycle));
+  const signals = aggregateStorylineSignals(loadStagedSet(cycle).concat(loadArcSeeds(cycle)));
   const outPath = path.join(ROOT, 'output', 'storyline_signal_c' + cycle + '.json');
   fs.writeFileSync(outPath, JSON.stringify({ cycle: String(cycle), signals }, null, 2));
   console.log(signals.length + ' storyline(s) → ' + path.relative(ROOT, outPath));
@@ -783,6 +813,6 @@ if (require.main === module) {
   main().catch(err => { console.error('[saturday] Fatal: ' + err.message); process.exit(1); });
 }
 
-module.exports = { loadStagedSet, articleCustomId, articleDoc, usageRowsFor, ROLE_TO_USAGE,
+module.exports = { loadStagedSet, loadArcSeeds, articleCustomId, articleDoc, usageRowsFor, ROLE_TO_USAGE,
   aggregateStorylineSignals, mergeStorylineLedger, STORYLINE_LEDGER_HEADERS, verifyStagedProof,
   isCodeRenderedBrief };

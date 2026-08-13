@@ -507,6 +507,41 @@ function runCitizenQuotePass(asks, cycle, stem) {
   return { quotes, interviews };
 }
 
+function citizenArcSlug(story, quote) {
+  const hood = String((story && story.hood) || 'city').toLowerCase();
+  const name = String((quote && quote.name) || 'citizen').toLowerCase();
+  const kind = String((story && (story.kind || story.pulseClass)) || 'arc').toLowerCase();
+  return (hood + '-' + name + '-' + kind).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 80);
+}
+
+function writeCitizenArc(stem, args) {
+  const quotes = (args.quotes || []).filter(q => q && q.quote && q.pop);
+  if (!quotes.length) return null;
+  const story = args.story || {};
+  const first = quotes[0];
+  const slug = citizenArcSlug(story, first);
+  const dest = path.join(COMPARE, stem + 'arc.json');
+  const prior = readJson(dest);
+  const verb = prior && prior.storyline && prior.storyline.slug === slug ? 'advanced' : 'opened';
+  const arc = {
+    status: 'arc-seed',
+    cycle: String(args.cycle),
+    desk: args.desk || null,
+    persona: args.persona || null,
+    storyline: { slug, verb },
+    hood: story.hood || null,
+    quotes: quotes.map(q => ({
+      pop: q.pop, name: q.name, quote: String(q.quote).replace(/\s+/g, ' ').trim()
+    })),
+    claim: String(first.quote).replace(/\s+/g, ' ').trim(),
+    src: 'citizenVoice PRESS c' + args.cycle,
+    ranAt: new Date().toISOString()
+  };
+  fs.writeFileSync(dest, JSON.stringify(arc, null, 2));
+  log('citizen arc ' + verb + ': ' + slug + ' → ' + path.relative(ROOT, dest));
+  return dest;
+}
+
 // Layer 3 — compose the injected state: byline note + lane pointers + real quotes.
 // This REPLACES the 40k world_summary blob as the writer's injected state.
 // Task 2.5.2/2.5.3: an assigned story leads the state — the angle is the
@@ -2175,6 +2210,9 @@ async function runReport(assign) {
     ranAt: new Date().toISOString()
   }, null, 2));
   console.log('packet → ' + path.relative(ROOT, packetPath) + ' (' + quotes.length + ' quotes)');
+  writeCitizenArc(stem, {
+    cycle, desk, persona: personaSlug, story, quotes
+  });
   // Task 2.5.3 — §3: the interviews land in the growing story doc.
   storyDocAppend(stem, '§3 INTERVIEWS (wake 2 — real citizens, real quotes)',
     quotes.map(q => '- ' + q.name + ' (' + q.pop + '): "' + String(q.quote).replace(/\s+/g, ' ').trim() + '"').join('\n'));
@@ -2276,6 +2314,11 @@ async function runWrite(assign) {
     packet.quotesLanded = quotes.length;
     if (pass.interviews) packet.interviews = pass.interviews;
     fs.writeFileSync(packetPath, JSON.stringify(packet, null, 2));
+    writeCitizenArc(stem, {
+      cycle, desk, persona: personaSlug,
+      story: (packet.assignment && packet.assignment.story) || (angle.assignment && angle.assignment.story),
+      quotes
+    });
   }
   if (!quotes.length) {
     throw new Error('W3 refused: 0 citizen quotes — will not write a summary article');
@@ -2821,6 +2864,8 @@ module.exports = {
   loadLane,
   yesterdaysFilings,
   buildIntakeSidecar,
+  writeCitizenArc,
+  citizenArcSlug,
   validateWakeHandoff,
   exactRheaProof,
   stagedRheaProof,

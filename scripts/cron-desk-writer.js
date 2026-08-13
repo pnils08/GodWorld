@@ -403,18 +403,30 @@ function renderPacketIntake(draftText, packet) {
     lines.push('NAMES: ' + name + ' | ' + role);
   }
   const hood = packet && packet.signal && packet.signal.hood;
-  lines.push('STORYLINE: ' + intakeSlug(packet) + ' | referenced');
+  const quoted = ((packet && packet.exposure && packet.exposure.sources) || [])
+    .find(s => s && s.quote && s.name && body.includes(s.name));
+  if (quoted) {
+    const slug = (String(hood || 'city') + '-' + String(quoted.name) + '-' +
+      String((packet.signal && packet.signal.kind) || 'arc'))
+      .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 80);
+    lines.push('STORYLINE: ' + slug + ' | opened');
+  }
   if (hood && body.includes(hood)) lines.push('HOOD: ' + hood);
-  const facts = (packet && packet.known || []).filter(c => c && c.t === 'FACT' && c.text && c.src &&
-    c.src !== 'cron-desk-run explicit cycle argument');
-  if (facts.length) {
-    const f = facts[0];
-    lines.push('CLAIM: ' + String(f.text).replace(/\|/g, '—').replace(/\s+/g, ' ').trim() +
-      ' | ' + String(f.src).replace(/\|/g, '—').replace(/\s+/g, ' ').trim());
+  if (quoted) {
+    lines.push('CLAIM: ' + String(quoted.quote).replace(/\|/g, '—').replace(/\s+/g, ' ').trim() +
+      ' | citizenVoice PRESS ' + String(quoted.name).replace(/\|/g, '—'));
+  } else {
+    const facts = (packet && packet.known || []).filter(c => c && c.t === 'FACT' && c.text && c.src &&
+      c.src !== 'cron-desk-run explicit cycle argument');
+    if (facts.length) {
+      const f = facts[0];
+      lines.push('CLAIM: ' + String(f.text).replace(/\|/g, '—').replace(/\s+/g, ' ').trim() +
+        ' | ' + String(f.src).replace(/\|/g, '—').replace(/\s+/g, ' ').trim());
+    }
   }
   lines.push('<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=' +
     (((packet && packet.exposure && packet.exposure.sources) || []).length ? 'yes' : 'no') +
-    '; sim-state-cited=' + (facts.length ? 'yes' : 'no') + ' -->');
+    '; sim-state-cited=' + (quoted ? 'yes' : 'no') + ' -->');
   return lines.join('\n') + '\n';
 }
 

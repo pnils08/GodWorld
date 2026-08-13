@@ -1453,7 +1453,7 @@ async function runAngle(assign) {
     if (PACKET_ACTIVE) {
       inputPacket = livedPacket.buildAnglePacket({
         cycle, desk, reporter: asker, story, approach,
-        slice: jaxSlice || pslayerSlice || economicSlice || safetySlice || eveningSlice || civicDomainSlice, lane,
+        slice: jaxSlice || pslayerSlice || anthonySlice || economicSlice || safetySlice || eveningSlice || civicDomainSlice, lane,
       });
       ask = livedPacket.prompt(inputPacket);
     }

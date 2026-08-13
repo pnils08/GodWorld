@@ -94,6 +94,19 @@ function creativeBriefFromSlice(slice) {
       priorTake: clean(slice.prewrite && slice.prewrite.priorTake, 300) || null,
       sceneRule: clean(slice.scene && slice.scene.colorRoom, 500) || null,
     };
+  } else if (slice.kind === 'anthony-analytic') {
+    const prewrite = slice.prewrite || {};
+    brief = {
+      kind: 'sports-analytics',
+      pulseClass: clean(slice.pulse && slice.pulse.className, 100) || null,
+      bagTools: (prewrite.bagTools || []).slice(0, 2).map(tool =>
+        clean([tool && tool.id, tool && tool.name].filter(Boolean).join(' '), 120)).filter(Boolean),
+      claim: clean(prewrite.claim, 500) || null,
+      lineFacts: uniq(prewrite.lineFacts).slice(0, 6),
+      missing: uniq(prewrite.missing).slice(0, 8),
+      sceneRule: clean(slice.scene && slice.scene.colorRoom, 500) || null,
+      sourcePointers: uniq(slice.pointers || []).slice(0, 5),
+    };
   } else if (slice.kind === 'economic-storefront') {
     const prewrite = slice.prewrite || {};
     brief = {

@@ -175,6 +175,10 @@ const NON_NAME_FIRST = new Set([
   'veteran', 'late', 'early', 'some', 'many', 'most', 'and', 'but', 'for'
 ]);
 
+const NON_PLAYER_PHRASES = new Set([
+  'no no'
+]);
+
 function extractPlayerNames(text) {
   if (!text) return [];
   const out = [];
@@ -188,6 +192,7 @@ function extractPlayerNames(text) {
     if (parts.some(p => p.length < 2)) continue;
     const first = parts[0].toLowerCase();
     if (NON_NAME_FIRST.has(first)) continue;
+    if (NON_PLAYER_PHRASES.has(n.toLowerCase())) continue;
     const last = parts[parts.length - 1].toLowerCase();
     if (['the', 'a', 'an', 'and', 'of', 'for', 'to', 'in', 'on', 'as', 'at', 'by', 'or'].includes(last)) continue;
     if (/^(Oakland|Bay Tribune|World Series|All Star|Summer League)/i.test(n)) continue;
@@ -232,13 +237,13 @@ function extractFoilNumber(stats, notes) {
   const patterns = [
     /(\d+\.\d+\s*war)/i,
     /(\.\d{3}\s*avg)/i,
-    /(\d+-\d+\s*(?:w-l|record)?)/i,
     /(\d+\.\d{2}\s*era)/i,
+    /(\d+\s*ip)/i,
+    /(\d+-\d+\s*(?:w-l|record)?)/i,
     /(\d+\s*hr)/i,
     /(\d+\s*rbi)/i,
     /(\d+\s*sb)/i,
     /(\d+\s*stl)/i,
-    /(\d+\s*ip)/i,
     /(\$\d+M)/i,
     /(\d+-year\s*\$?\d*M?)/i
   ];
@@ -253,8 +258,39 @@ function extractFoilNumber(stats, notes) {
 /** Split feed Stats field into discrete line tokens (feed only). */
 function parseStatsLine(stats) {
   if (!stats || stats === '-' || stats === '—') return [];
-  // "Danny Horn 384AB/.336AVG/32HR/71RBI/50SB" or multi-player "John Ellis 117IP/..., Eric Taveras ..."
-  const chunks = String(stats).split(/,\s*(?=[A-Z])/);
+  const raw = String(stats).trim();
+  // Feed rows do not consistently place a comma before the next player. Find
+  // each capitalized name that is immediately followed by a numeric stat line
+  // so "...10Ks Vinnie Keane 2-3" remains two attributed lines.
+  const nameRe = /\b([A-Z][A-Za-z'-]+(?:\s+[A-Z][A-Za-z'-]+){1,2})\s*,?\s*(?=[.$\d])/g;
+  const starts = [];
+  let match;
+  while ((match = nameRe.exec(raw))) {
+    starts.push({ index: match.index, end: nameRe.lastIndex, name: match[1].trim() });
+  }
+
+  if (starts.length) {
+    const out = [];
+    const prefix = raw.slice(0, starts[0].index).replace(/[\s,]+$/, '').trim();
+    if (prefix) out.push({ name: null, line: prefix, raw: prefix });
+    for (let i = 0; i < starts.length; i++) {
+      const start = starts[i];
+      const end = i + 1 < starts.length ? starts[i + 1].index : raw.length;
+      const line = raw.slice(start.end, end)
+        .replace(/^[\s,]+|[\s,]+$/g, '')
+        .replace(/\s+,/g, ',')
+        .trim();
+      if (!line) continue;
+      out.push({
+        name: start.name,
+        line,
+        raw: raw.slice(start.index, end).replace(/[\s,]+$/g, '').trim()
+      });
+    }
+    return out;
+  }
+
+  const chunks = raw.split(/,\s*(?=[A-Z])/);
   const out = [];
   for (const chunk of chunks) {
     const c = chunk.trim();
@@ -315,11 +351,15 @@ function loadSportsRows(cycle, opts) {
  * Resolve feed name pool → player objects with optional ledger POPID/RoleType.
  */
 function resolveFeedPlayers(row, ledger, limit) {
-  const namePool = [
-    ...extractPlayerNames(row.namesUsed),
+  const explicitNames = extractPlayerNames(row.namesUsed);
+  const fallbackNames = [
     ...extractPlayerNames(row.storyAngle),
     ...extractPlayerNames((row.notes || '').slice(0, 280))
-  ].filter((n, i, a) => a.findIndex(x => x.toLowerCase() === n.toLowerCase()) === i);
+  ];
+  // NamesUsed is the feed's explicit subject field. When present, do not let
+  // prose fragments or alternate spellings become additional people.
+  const namePool = (explicitNames.length ? explicitNames : fallbackNames)
+    .filter((n, i, a) => a.findIndex(x => x.toLowerCase() === n.toLowerCase()) === i);
 
   const players = [];
   const seenPop = new Set();

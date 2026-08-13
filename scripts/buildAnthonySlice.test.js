@@ -16,7 +16,13 @@ const {
   pickBagTools,
   ANTHONY_APPROACH
 } = require('./buildAnthonySlice');
-const { parseSportsSection } = require('./sportsSubstrate');
+const {
+  parseSportsSection,
+  parseStatsLine,
+  extractPlayerNames,
+  resolveFeedPlayers,
+  extractFoilNumber
+} = require('./sportsSubstrate');
 
 let failures = 0;
 function ok(label, cond) {
@@ -84,6 +90,68 @@ if (fs.existsSync(summaryPath)) {
   const md = fs.readFileSync(summaryPath, 'utf8');
   const rows = parseSportsSection(md, 102);
   ok('parsed sports rows', rows.length >= 5);
+}
+
+console.log('shared sports canon boundaries:');
+{
+  const parts = parseStatsLine('Pablo Almanza 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI');
+  ok('missing comma still splits player stat ownership',
+    parts.length === 2 &&
+    parts[0].name === 'Pablo Almanza' && parts[0].line === '9IP, 0H, 1BB, 10Ks' &&
+    parts[1].name === 'Vinnie Keane' && parts[1].line === '2-3, HR, 3 RBI');
+  const initials = parseStatsLine('Adash Stanley 23pt/7asst, AJ Dybantsa 19pts/6rebs');
+  ok('initialed player begins a second stat line',
+    initials.length === 2 && initials[1].name === 'AJ Dybantsa' && initials[1].line === '19pts/6rebs');
+  ok('pitching workload wins mixed-line foil',
+    extractFoilNumber('Pablo Almanza 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI', '') === '9IP');
+  ok('headline no-no phrase is not a player',
+    !extractPlayerNames('Pablo Almanzar throws a No No in his debut').includes('No No'));
+
+  const ledgerRow = {
+    POPID: 'POP-00001',
+    Name: 'Vinnie Keane',
+    RoleType: "Designated Hitter, Oakland A's Legend",
+    Neighborhood: 'Rockridge'
+  };
+  const players = resolveFeedPlayers({
+    namesUsed: 'Pablo Almanzar (SP), Vinne Keane (DH)',
+    storyAngle: 'Pablo Almanzar throws a No No in his debut',
+    notes: 'Pablo Alamazar made the start.'
+  }, {
+    byName: new Map([['vinnie keane', ledgerRow]]),
+    byPop: new Map([['POP-00001', ledgerRow]])
+  }, 10);
+  ok('explicit feed subjects exclude prose misspelling and false name',
+    players.length === 2 &&
+    players[0].name === 'Pablo Almanzar' && players[0].popid === null &&
+    players[1].name === 'Vinnie Keane' && players[1].popid === 'POP-00001');
+}
+
+const summary103 = path.join(__dirname, '..', 'output', 'world_summary_c103.md');
+if (fs.existsSync(summary103)) {
+  const current = buildAnthonySlice(103);
+  ok('c103 stat typo aligns to explicit feed subject',
+    current.prewrite.lineFacts.includes('Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks') &&
+    !current.prewrite.lineFacts.some(f => /Pablo Almanza line/.test(f)));
+  ok('c103 unresolved subject fails closed',
+    current.players.some(p => p.name === 'Pablo Almanzar' && p.popid === null) &&
+    current.prewrite.missing.some(m => /Pablo Almanzar has no Simulation_Ledger POPID/.test(m)));
+  const packet = require('./livedExperiencePacketV2').buildAnglePacket({
+    cycle: 103,
+    desk: 'sports',
+    reporter: { name: 'Anthony Raines', popid: 'POP-00017' },
+    story: current.story,
+    approach: current.approach,
+    slice: current,
+    lane: []
+  });
+  ok('c103 W1 carries typed sports analytics brief',
+    packet.task.creativeBrief && packet.task.creativeBrief.kind === 'sports-analytics' &&
+    packet.task.creativeBrief.lineFacts.includes('Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks'));
+  ok('c103 W1 exposes only ledger-resolved Vinnie for W2',
+    packet.exposure.candidates.length === 1 &&
+    packet.exposure.candidates[0].pop === 'POP-00001' &&
+    packet.exposure.candidates[0].name === 'Vinnie Keane');
 }
 
 console.log('buildAnthonySlice c102:');

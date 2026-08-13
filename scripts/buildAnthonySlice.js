@@ -259,7 +259,7 @@ function buildClaim(row, cls, foil) {
   return 'One board claim from the feed only — no invented receipts: ' + angle;
 }
 
-function buildMissingList(row, cls) {
+function buildMissingList(row, cls, players) {
   const missing = [
     'x-stats / barrel% / launch angle / OAA not on feed',
     'contracts or salaries not printed on this feed row',
@@ -269,14 +269,34 @@ function buildMissingList(row, cls) {
   if (!/TrueSource|dossier/i.test(row.notes || '')) {
     missing.push('TrueSource dossier lines not loaded offline — DossierFacts: NONE unless packet supplies');
   }
+  for (const player of players || []) {
+    if (!player.popid) {
+      missing.push(player.name + ' has no Simulation_Ledger POPID in the local snapshot — do not invent or interview');
+    }
+  }
   return missing;
 }
 
-function buildLineFacts(row) {
+function alignStatSubject(name, players) {
+  if (!name) return null;
+  const raw = String(name).replace(/\s+/g, ' ').trim();
+  const rawParts = raw.toLowerCase().split(' ');
+  const matches = (players || []).filter(player => {
+    const parts = String(player.name || '').toLowerCase().split(' ');
+    if (parts.length !== rawParts.length || parts[0] !== rawParts[0]) return false;
+    const rawLast = rawParts[rawParts.length - 1];
+    const last = parts[parts.length - 1];
+    return rawLast === last || rawLast.startsWith(last) || last.startsWith(rawLast);
+  });
+  return matches.length === 1 ? matches[0].name : raw;
+}
+
+function buildLineFacts(row, players) {
   const facts = [];
   const parts = sports.parseStatsLine(row.stats);
   for (const p of parts) {
-    facts.push(p.name ? (p.name + ' line (feed): ' + p.line) : ('Feed line: ' + p.line));
+    const subject = alignStatSubject(p.name, players);
+    facts.push(subject ? (subject + ' line (feed): ' + p.line) : ('Feed line: ' + p.line));
   }
   if (row.record && /\d/.test(row.record)) {
     facts.push('Team record (feed): ' + row.record + (row.streak ? ' · ' + row.streak : ''));
@@ -338,13 +358,13 @@ function buildAnthonySlice(cycle, opts) {
   const { row, score, cls } = top;
   const bagTools = pickBagTools(cls, row);
   const foil = sports.extractFoilNumber(row.stats, row.notes);
-  const lineFacts = buildLineFacts(row);
-  const claim = buildClaim(row, cls, foil);
-  const missing = buildMissingList(row, cls);
   const players = sports.resolveFeedPlayers(row, ledger, 10);
-  const anchors = sports.buildFeedAnchorFacts(row, cyc);
+  const lineFacts = buildLineFacts(row, players);
+  const claim = buildClaim(row, cls, foil);
+  const missing = buildMissingList(row, cls, players);
 
   const story = {
+    kind: 'sports-analytics',
     angle: claim,
     label: (row.team || '') + ' · ' + (row.eventKind || 'feed') + ' — ' +
       String(row.storyAngle || row.rawHeader || '').slice(0, 120),
@@ -372,7 +392,7 @@ function buildAnthonySlice(cycle, opts) {
     claim,
     missing,
     foilNumber: foil,
-    anchorFacts: anchors.slice(0, 4)
+    anchorFacts: lineFacts.slice(0, 4)
   };
 
   const candidates = scored.slice(0, 10).map(s => ({

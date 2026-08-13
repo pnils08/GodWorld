@@ -84,6 +84,22 @@ assert.equal(pSlayer.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.ok(pSlayer.reviewProfile.textureConditions.some(v => v.includes('prior-take')));
 assert.ok(pSlayer.reviewProfile.canonBlockers.some(v => v.includes('collective fan sentiment')));
 
+const anthony = packages['anthony-raines'];
+assert.equal(anthony.version, 'ANTHONY-LEP2-1');
+assert.equal(anthony.active, false);
+assert.equal(anthony.requiredDaily, true);
+assert.equal(anthony.assignment.desk, 'sports');
+assert.equal(anthony.assignment.name, 'Anthony Raines');
+assert.equal(anthony.assignment.popid, 'POP-00017');
+assert.equal(anthony.assignment.beatDomain, 'SPORTS_ANALYTICS');
+assert.equal(anthony.packetContract, 'v2');
+assert.equal(packagesApi.routeFor(anthony, 'angle').model, 'deepseek/deepseek-chat');
+assert.equal(packagesApi.routeFor(anthony, 'report').model, 'deepseek/deepseek-chat');
+assert.equal(packagesApi.routeFor(anthony, 'write').model, 'deepseek/deepseek-chat');
+assert.equal(anthony.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
+assert.ok(anthony.reviewProfile.textureConditions.some(v => v.includes('unresolved feed subject')));
+assert.ok(anthony.reviewProfile.canonBlockers.some(v => v.includes('wrong player')));
+
 const jordan = packages['business-desk'];
 assert.equal(jordan.version, 'JORDAN-LEP2-1');
 assert.equal(jordan.requiredDaily, true);
@@ -164,6 +180,7 @@ const gate = packagesApi.gateAssignments([
   { desk: 'civic', name: 'Jax Caldera', persona: 'freelance-firebrand' },
   { desk: 'civic', name: 'Carmen Delaine', persona: 'carmen-delaine' },
   { desk: 'sports', name: 'P Slayer', persona: 'p-slayer' },
+  { desk: 'sports', name: 'Anthony Raines', persona: 'anthony-raines' },
   { desk: 'business', name: 'Jordan Velez', persona: 'business-desk' },
   { desk: 'culture', name: 'TEST-ONLY Unpackaged Reporter', persona: 'test-only' },
 ], packages);
@@ -172,7 +189,8 @@ assert.equal(gate.eligible[0].wakePackage, 'JAX-LEP2-1');
 assert.equal(gate.eligible[1].wakePackage, 'CARMEN-LEP2-1');
 assert.equal(gate.eligible[2].wakePackage, 'PSLAYER-LEP2-1');
 assert.equal(gate.eligible[3].wakePackage, 'JORDAN-LEP2-1');
-assert.equal(gate.skipped.length, 1);
+assert.equal(gate.skipped.length, 2);
+assert.equal(gate.skipped[0].name, 'Anthony Raines');
 assert.equal(gate.skipped[0].reason, 'no-active-wake-package');
 
 assert.throws(() => packagesApi.routeFor(jax, 'publish'), /unknown wake stage/);
@@ -273,8 +291,7 @@ assert.equal(pinnedByPersona.get('noah-tan').approach, 'Noah weather ground');
 assert.deepStrictEqual(pinned.pinned.map(row => row.replaced),
   ['TEST-ONLY Civic One', 'TEST-ONLY Civic Two', null, null, 'TEST-ONLY Sports One',
     'TEST-ONLY Business Reporter', null, null, null, null, null]);
-assert.deepStrictEqual(pinned.skipped.map(row => row.name),
-  ['TEST-ONLY Sports Two']);
+assert.deepStrictEqual(pinned.skipped.map(row => row.name), ['TEST-ONLY Sports Two']);
 
 // Registry order cannot let one required civic package overwrite the other.
 const reversedPackages = {

@@ -349,7 +349,7 @@ slice and model text is a starting work surface, not an adopted contract.
 | LILA-LEP2-1 | Dr. Lila Mezran / POP-00154 | health | Article LEP/2; `HEALTH-SERVICE-BRIEF-1`; typed access/timeline/human-cost unknowns | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed; DeepSeek schema pass, Llama schema fail |
 | ANGELA-LEP2-1 | Angela Reyes / POP-00156 | education | Article LEP/2; `EDUCATION-STABILITY-BRIEF-1`; typed participation/access/outcome unknowns | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed; DeepSeek more useful than Llama on same W1 Packet |
 | NOAH-LEP2-1 | Noah Tan / POP-00157 | environment | Article LEP/2; `WEATHER-GROUND-BRIEF-1`; every Cycle's deterministic weather condition | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed; ordinary weather narrates the Cycle |
-| pending | Anthony Raines / POP-00017 | sports analytics | Candidate Article LEP/2; roster/board pulse | Candidate DeepSeek; benchmark | [ ] | [ ] |
+| ANTHONY-LEP2-1 | Anthony Raines / POP-00017 | sports analytics | Article LEP/2; typed line-card and unresolved-subject boundary | DeepSeek / DeepSeek / local source brief | [ ] second-model benchmark | attended W1-W3/Rhea passed; registry remains inactive pending benchmark |
 | pending | Hal Richmond / POP-00007 | sports history | Candidate Article LEP/2; archive/long-view pulse | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | Tanya Cruz / POP-00014 | sports sideline | Candidate Article LEP/2; clubhouse/sideline signal | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | Simon Leary / POP-00016 | sports long view | Candidate Article LEP/2; sports as civic architecture | Candidate DeepSeek; benchmark | [ ] | [ ] |
@@ -565,12 +565,29 @@ passed with zero flags for `$0.0425`, and the hash-bound Article became the
 ninth staged C103 pass. No byline, Sheet, Drive, Supermemory, publication, or
 canon-ingestion write occurred.
 
+Anthony Raines completed an attended C103 DeepSeek route proof after the shared
+sports substrate was repaired. The parser now separates player stat ownership
+even when the feed omits a comma, rejects `No No` as a false person, and treats
+the explicit feed subject list as authoritative over prose spelling variants.
+Anthony's Packet aligns `Pablo Almanza` to the explicitly supplied
+`Pablo Almanzar` label without inventing a POPID, exposes only ledger-resolved
+Vinnie Keane (`POP-00001`) to Wake 2, and preserves Pablo's unresolved identity
+as a typed blocker. Wake 1 and Wake 2 passed; Wake 3 locally rendered an exact
+source brief, quarantined all three free-form leads, and passed Gemini Rhea with
+zero flags for `$0.0537`. The eleventh C103 Article staged. The standard
+post-gate hooks also wrote Anthony's byline-usage row and a reporter PRESS entry
+plus gated `Reflection_Intake` row (`applied=no`); no Article publication or
+canon ingestion ran. A same-Packet Llama comparison was rejected before
+inference by the execution approval layer, so `ANTHONY-LEP2-1` remains
+`active: false` and package graduation stays open rather than waiving Gate 3.
+
 ## Open questions
 
-- All ten current Cycle 103 Rhea passes are staged behind the probation wall.
+- All eleven current Cycle 103 Rhea passes are staged behind the probation wall.
   Preserve Carmen's medium public-wording flag as a polish item. Angela Reyes's
   package and attended proof are complete. Noah Tan's weather package and proof
-  are complete; Anthony Raines is the next unchecked Task 17 seat.
+  are complete. Anthony's DeepSeek proof passed, but the required fixed-Packet
+  second-model benchmark remains the next unchecked Task 17 gate.
 - Luis's thin-record path passed locally, but his reporting-trail-backed Sonnet
   path and Rhea proof remain open. A local manifest pass is not publication or
   full package graduation.
@@ -619,3 +636,4 @@ canon-ingestion write occurred.
 - 2026-08-13 (codex) — Graduated ANGELA-LEP2-1 after Claude's protected verbiage cleanup: DeepSeek beat Llama on same-Packet usefulness, zero-call W2/W3 passed locally, independent Rhea passed with zero flags, and the ninth C103 Article staged without an external author-state or canon write. Noah Tan is next.
 - 2026-08-13 (codex) — Began Noah Tan's Task 17 audit: removed real air/weather agencies from his writable voice contract and required Packet-supplied monitoring authority. C103 has no environmental lane entry, and protected culture-desk agency references remain for Claude; NOAH-LEP2-1 was not activated on an invented assignment.
 - 2026-08-13 (codex) — Builder ruled ordinary weather is Cycle narration and all Rhea-cleared Articles become canon at Saturday's gate regardless of Edition selection. NOAH-LEP2-1 now sources every Cycle's deterministic weather line; W1 schema, zero-call W2/W3, manifest, and independent Rhea passed with zero flags. The tenth C103 Article staged; Anthony Raines is next.
+- 2026-08-13 (codex) — Built ANTHONY-LEP2-1 and repaired shared sports parsing: exact subject authority, false-name rejection, split stat ownership, and unresolved-POPID abstention. DeepSeek W1/W2, local W3, manifest, and Gemini Rhea passed; the eleventh C103 Article staged. The registry stays inactive because the required same-Packet second-model benchmark was rejected before inference.

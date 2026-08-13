@@ -2588,6 +2588,14 @@ async function runFanoutStage() {
     log('[package-gate] skipped ' + skipped.name + ' (' + skipped.desk + '): ' + skipped.reason);
   }
   list = packageGate.eligible;
+  if (!only) {
+    const bounded = fanoutApi.boundDailyAssignments(list);
+    if (bounded.dropped.length) {
+      log('[fanout-cap] dropped ' + bounded.dropped.length + ' assignment(s) from oversized saved rota: ' +
+        bounded.dropped.filter(Boolean).map(a => a.name + '/' + a.desk).join(', '));
+    }
+    list = bounded.assignments;
+  }
   if (limit > 0) list = list.slice(0, limit);
   console.log('Fan-out ' + STAGE.toUpperCase() + ' — ' + date + ', ' + list.length + ' assignment(s)');
   console.log('===================================');

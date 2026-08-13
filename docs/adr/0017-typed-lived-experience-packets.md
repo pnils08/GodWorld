@@ -1,7 +1,7 @@
 ---
 title: "ADR-0017: Typed lived-experience Packets are the standard dynamic LLM boundary"
 created: 2026-08-09
-updated: 2026-08-10
+updated: 2026-08-13
 type: reference
 tags: [architecture, agents, citizens, civic, sports, business, media, canon, decision, active]
 sources:
@@ -187,8 +187,9 @@ The second package is `carmen-delaine` (`CARMEN-LEP2-1`):
   Packet-backed named resident consequence, with unnamed street color only;
 - named people and places, nine-seat vote math, official acts or absence,
   budgets, timelines, and implementation state must remain Packet-backed;
-- the two required civic packages reserve separate same-desk seats. Neither may
-  replace the other, and a civic shortfall never consumes another desk's slot.
+- when both civic packages are selected, they occupy separate same-desk seats.
+  Neither may replace the other, and a civic shortfall never consumes another
+  desk's slot.
 
 The third package and first sports seat is `p-slayer` (`PSLAYER-LEP2-1`):
 
@@ -203,8 +204,8 @@ The third package and first sports seat is `p-slayer` (`PSLAYER-LEP2-1`):
 - roster moves, results, records, stats, numbers, contracts, injuries, named
   entities, player/coach/front-office acts, and attributed statements remain
   Packet-backed load-bearing claims;
-- the required sports package reserves only a sports seat and cannot evict either
-  civic package or consume another desk's assignment.
+- a selected sports package occupies only a sports seat and cannot evict a civic
+  package or consume another desk's assignment.
 
 The fourth package and first business seat is `business-desk`
 (`JORDAN-LEP2-1`), the established single-reporter Jordan Velez identity:
@@ -221,8 +222,8 @@ The fourth package and first business seat is `business-desk`
   disbursements, observable economic actions, and current-state claims remain
   Packet-backed load-bearing facts; raw engine labels and decimals stay out of
   public-facing prose;
-- the required package reserves only a business seat and cannot consume a civic,
-  sports, culture, or other desk assignment.
+- the selected package occupies only the business seat and cannot consume a
+  civic, sports, culture, or other desk assignment.
 
 The fifth package and first evening/culture seat is `kai-marston`
 (`KAI-LEP2-1`), the established Arts & Entertainment identity:
@@ -236,9 +237,19 @@ The fifth package and first evening/culture seat is `kai-marston`
 - named TV, movies, city events, venues, artists, famous sightings, and
   streaming signals remain source-addressed Packet inputs; unnamed sensory room
   color is allowed only under the review profile conditions;
-- the required package reserves only the culture seat and cannot evict a civic,
-  sports, or business package. Mason, Maria, Sharon, Graye, and future Social
-  Trends seats require their own packages even when they share this substrate.
+- a selected culture package occupies only the culture seat and cannot evict a
+  civic, sports, or business package. Mason, Maria, Sharon, Graye, and future
+  Social Trends seats require their own packages even when they share this
+  substrate.
+
+The daily rota is capacity-bounded independently of package count. Active
+`requiredDaily` entries form the eligible pool; the staged-count/LRU selector
+chooses at most the declared two civic, two sports, one culture, and one business
+seat. The package-only gate may normalize or reject those six selections, but it
+must never insert another package. Activation therefore expands coverage and
+rotation, not daily model calls or desk capacity. The stage runner reapplies the
+same cap to saved fanout files, preferring source-assigned seats, so an artifact
+written under older expansion semantics cannot bypass the live limit.
 
 ## Rejected alternatives
 
@@ -269,3 +280,4 @@ The fifth package and first evening/culture seat is `kai-marston`
 - 2026-08-10 (codex) — Added RACHEL-LEP2-1 for Sgt. Rachel Torres with a disk-first public-safety slice, typed classification/response creative brief, DeepSeek route, and safety-specific load-bearing review profile. Full proof remains pending; protected persona-document normalization is separate.
 - 2026-08-12 (codex) — Luis C103 showed that one state fact plus bounded reactions cannot support a full investigation without invented reporting history. LEP/2 now types absent reporting evidence as `NOT_SUPPLIED`, removes excluded leads from Luis's writer Packet, adapts evidence-thin work to a 180–280 word records brief, carries ledger-backed subject profiles, and blocks engine classifier/row leakage.
 - 2026-08-12 (codex) — A corrected Sonnet records-brief attempt still reversed the phase relationship, converted missing evidence into absence, split an approved quote, and inferred collective resident sentiment. `RECORDS_BRIEF` is now code-rendered with zero writer calls; the configured Sonnet route remains available only for `FULL_INVESTIGATION` Packets with supplied reporting events.
+- 2026-08-13 (codex) — Corrected package expansion semantics after the active cohort grew to nineteen: active packages are the LRU candidate pool, while the daily rota remains bounded at 2 civic / 2 sports / 1 culture / 1 business and the package gate can no longer insert seats.

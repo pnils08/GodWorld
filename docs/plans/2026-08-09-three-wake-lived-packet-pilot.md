@@ -27,7 +27,7 @@ pointers:
 **Architecture:** Explicit `--packet-contract=v1|v2` remains an isolated,
 samples-only evaluation namespace and requires `--no-gate`. Live scheduled
 adoption is separate and package-gated through
-`scripts/newsroom-wake-packages.json`. Eighteen active packages automatically use
+`scripts/newsroom-wake-packages.json`. Nineteen active packages automatically use
 LEP/2, zero live writer tools, per-wake model routing, and load-bearing
 manifests interpreted by persona-aware Rhea: Jax, Carmen, Luis, Trevor,
 P Slayer, Anthony, Hal, Tanya, Simon, Maria, Graye, Mason, Jordan, Kai, Rachel, Lila, Angela,
@@ -211,7 +211,7 @@ The final scored treatment Article is
 - **Files:**
   - `scripts/newsroom-wake-packages.json` — package registry and Jax authority
   - `scripts/newsroomWakePackages.js` — validator and package-only gate
-  - `scripts/newsroom-fanout.js` — pin required package seats; remove generic fallback
+  - `scripts/newsroom-fanout.js` — select active package seats within fixed desk quotas; remove generic fallback
   - `scripts/cron-desk-run.js` — automatic contract and per-wake routing
   - `scripts/citizenVoice.js` — explicit OpenRouter model per Wake 1/2 request
   - `scripts/cron-desk-writer.js` — load-bearing Packet composition
@@ -306,6 +306,15 @@ package becomes active only after its identity, typed slice, model route,
 angle/report/write contracts, reviewer boundary, tests, and attended proof all
 agree. The package registry remains package-only: an unchecked seat is skipped,
 never silently sent through the generic prompt.
+
+Daily eligibility is not compulsory daily execution. Active `requiredDaily`
+entries form the staged-count/LRU candidate pool; the rota still selects only
+two civic, two sports, one culture, and one business package. The package gate
+may normalize or reject those selected seats but may not insert extras. Package
+graduation expands rotation coverage without expanding the six-seat wake or its
+cost envelope. Every stage reapplies that cap to its saved fanout before model
+work, preferring source-assigned seats; this contains pre-fix rota artifacts
+without silently creating replacement reporters who missed earlier wakes.
 
 #### Non-negotiable gates for every seat
 
@@ -760,3 +769,4 @@ so an attended visual proof correctly remains open until Saturday compile.
 - 2026-08-13 (codex) — Graduated MASON-LEP2-1 on DeepSeek/DeepSeek/local after fixing the evening slice's global-top-pulse leak into seat-specific Packets. The corrected restaurant fact makes no worker or service premise, Llama failed W1 schema, W2/W3 made zero model calls, Gemini Rhea passed with zero flags, and the seventeenth C103 Article staged. Sharon Okafor is next.
 - 2026-08-13 (codex) — Graduated SHARON-LEP2-1 on Llama/Llama/local. DeepSeek invented peak-hours, clientele, mood, sports, and festival explanations from one quiet-venue fact; Llama stayed bounded, W2/W3 made zero model calls, Gemini Rhea passed with zero flags, and the eighteenth C103 Article staged. Marbury's separate data-memo contract is next.
 - 2026-08-13 (codex) — Audited the remaining special seats: Marbury is blocked on the absent current As_Roster + TrueSource artifact; Hartley waits for compiled C103 Edition + Sift inputs. Removed hardcoded real-world visual defaults from the active DJ bundle and added a pre-provider source-boundary gate; no image call or publication ran.
+- 2026-08-13 (codex) — Reconciled the nineteen-package cohort with the six-seat live schedule after saved fanouts exposed 8- and 11-seat expansion. Active packages now feed the existing staged-count/LRU selector at fixed 2/2/1/1 desk quotas; the package-only gate cannot insert seats, and every stage caps older saved fanouts before model work. Local tests only; no wake, Sheet write, or model call ran.

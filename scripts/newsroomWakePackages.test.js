@@ -274,7 +274,8 @@ assert.equal(gate.skipped[0].reason, 'no-active-wake-package');
 assert.throws(() => packagesApi.routeFor(jax, 'publish'), /unknown wake stage/);
 assert.throws(() => packagesApi.validatePackage('bad', { active: true }), /invalid wake package/);
 
-const { applyWakePackageGate } = require('./newsroom-fanout');
+const { applyWakePackageGate, activeRotaCandidates, boundDailyAssignments,
+  DAILY_QUOTAS } = require('./newsroom-fanout');
 const runApi = require('./cron-desk-run');
 runApi.activateWakeContext(null, 'luis-navarro');
 const packetAsks = runApi.collectQuoteAsks([
@@ -315,15 +316,10 @@ const fanAsks = runApi.collectQuoteAsks([], { name: 'P Slayer', popid: 'POP-0000
 });
 assert.deepStrictEqual(fanAsks, [],
   'Packet story POPIDs outside the exact candidate set must not become interview targets');
-const pinned = applyWakePackageGate([
-  { desk: 'civic', name: 'TEST-ONLY Civic One', popid: 'POP-99997', story: { ref: 'TEST-CIVIC-ONE', label: 'Test signal one' } },
-  { desk: 'civic', name: 'TEST-ONLY Civic Two', popid: 'POP-99998', story: { ref: 'TEST-CIVIC-TWO', label: 'Test signal two' } },
-  { desk: 'sports', name: 'TEST-ONLY Sports One', popid: 'POP-99999', story: { ref: 'TEST-SPORTS-ONE', label: 'Test sports signal one' } },
-  { desk: 'sports', name: 'TEST-ONLY Sports Two', popid: 'POP-99993', story: { ref: 'TEST-SPORTS-TWO', label: 'Test sports signal two' } },
-  { desk: 'business', name: 'TEST-ONLY Business Reporter', popid: 'POP-99992' },
-], {
+const approaches = {
   civic: 'generic civic',
   sports: 'generic sports',
+  culture: 'generic culture',
   business: 'generic business',
   'freelance-firebrand': 'Jax accountability',
   'carmen-delaine': 'Carmen civic ledger',
@@ -344,89 +340,67 @@ const pinned = applyWakePackageGate([
   'lila-mezran': 'Lila health service',
   'angela-reyes': 'Angela education stability',
   'noah-tan': 'Noah weather ground',
-}, packages);
-assert.equal(pinned.assignments.length, 19);
-const pinnedByPersona = new Map(pinned.assignments.map(row => [row.persona, row]));
-assert.equal(pinnedByPersona.get('freelance-firebrand').name, 'Jax Caldera');
-assert.equal(pinnedByPersona.get('freelance-firebrand').approach, 'Jax accountability');
-assert.equal(pinnedByPersona.get('freelance-firebrand').story.ref, 'TEST-CIVIC-ONE');
-assert.equal(pinnedByPersona.get('carmen-delaine').name, 'Carmen Delaine');
-assert.equal(pinnedByPersona.get('carmen-delaine').approach, 'Carmen civic ledger');
-assert.equal(pinnedByPersona.get('carmen-delaine').story.ref, 'TEST-CIVIC-TWO');
-assert.equal(pinnedByPersona.get('luis-navarro').name, 'Luis Navarro');
-assert.equal(pinnedByPersona.get('luis-navarro').approach, 'Luis investigation record');
-assert.equal(pinnedByPersona.get('luis-navarro').story, undefined);
-assert.equal(pinnedByPersona.get('trevor-shimizu').name, 'Trevor Shimizu');
-assert.equal(pinnedByPersona.get('trevor-shimizu').approach, 'Trevor systems warning');
-assert.equal(pinnedByPersona.get('trevor-shimizu').story, undefined);
-assert.equal(pinnedByPersona.get('p-slayer').name, 'P Slayer');
-assert.equal(pinnedByPersona.get('p-slayer').approach, 'P Slayer fan heat');
-assert.equal(pinnedByPersona.get('p-slayer').story.ref, 'TEST-SPORTS-ONE');
-assert.equal(pinnedByPersona.get('anthony-raines').name, 'Anthony Raines');
-assert.equal(pinnedByPersona.get('anthony-raines').approach, 'Anthony analytic board');
-assert.equal(pinnedByPersona.get('anthony-raines').story.ref, 'TEST-SPORTS-TWO');
-assert.equal(pinnedByPersona.get('hal-richmond').name, 'Hal Richmond');
-assert.equal(pinnedByPersona.get('hal-richmond').approach, 'Hal historical continuity');
-assert.equal(pinnedByPersona.get('hal-richmond').story, undefined);
-assert.equal(pinnedByPersona.get('tanya-cruz').name, 'Tanya Cruz');
-assert.equal(pinnedByPersona.get('tanya-cruz').approach, 'Tanya sideline record');
-assert.equal(pinnedByPersona.get('tanya-cruz').story, undefined);
-assert.equal(pinnedByPersona.get('simon-leary').name, 'Simon Leary');
-assert.equal(pinnedByPersona.get('simon-leary').approach, 'Simon long-view structure');
-assert.equal(pinnedByPersona.get('simon-leary').story, undefined);
-assert.equal(pinnedByPersona.get('maria-keen').name, 'Maria Keen');
-assert.equal(pinnedByPersona.get('maria-keen').approach, 'Maria neighborhood ground');
-assert.equal(pinnedByPersona.get('maria-keen').story, undefined);
-assert.equal(pinnedByPersona.get('elliot-graye').name, 'Elliot Graye');
-assert.equal(pinnedByPersona.get('elliot-graye').approach, 'Graye faith ground');
-assert.equal(pinnedByPersona.get('elliot-graye').story, undefined);
-assert.equal(pinnedByPersona.get('mason-ortega').name, 'Mason Ortega');
-assert.equal(pinnedByPersona.get('mason-ortega').approach, 'Mason kitchen ground');
-assert.equal(pinnedByPersona.get('mason-ortega').story, undefined);
-assert.equal(pinnedByPersona.get('sharon-okafor').name, 'Sharon Okafor');
-assert.equal(pinnedByPersona.get('sharon-okafor').approach, 'Sharon behavior ground');
-assert.equal(pinnedByPersona.get('sharon-okafor').story, undefined);
-assert.equal(pinnedByPersona.get('business-desk').name, 'Jordan Velez');
-assert.equal(pinnedByPersona.get('business-desk').approach, 'Jordan storefront ledger');
-assert.equal(pinnedByPersona.get('kai-marston').name, 'Kai Marston');
-assert.equal(pinnedByPersona.get('kai-marston').approach, 'Kai arts pulse');
-assert.equal(pinnedByPersona.get('rachel-torres').name, 'Sgt. Rachel Torres');
-assert.equal(pinnedByPersona.get('rachel-torres').approach, 'Rachel public safety');
-assert.equal(pinnedByPersona.get('lila-mezran').name, 'Dr. Lila Mezran');
-assert.equal(pinnedByPersona.get('lila-mezran').approach, 'Lila health service');
-assert.equal(pinnedByPersona.get('angela-reyes').name, 'Angela Reyes');
-assert.equal(pinnedByPersona.get('angela-reyes').approach, 'Angela education stability');
-assert.equal(pinnedByPersona.get('noah-tan').name, 'Noah Tan');
-assert.equal(pinnedByPersona.get('noah-tan').approach, 'Noah weather ground');
-assert.deepStrictEqual(pinned.pinned.map(row => row.replaced),
-  ['TEST-ONLY Civic One', 'TEST-ONLY Civic Two', null, null, 'TEST-ONLY Sports One',
-    'TEST-ONLY Sports Two', null, null, null, null, null, null, null, 'TEST-ONLY Business Reporter', null, null, null, null, null]);
-assert.deepStrictEqual(pinned.skipped.map(row => row.name), []);
-
-// Registry order cannot let one required civic package overwrite the other.
-const reversedPackages = {
-  'carmen-delaine': carmen,
-  'freelance-firebrand': jax,
 };
-const reversed = applyWakePackageGate([
-  { desk: 'civic', name: 'Carmen Delaine', popid: 'POP-00011', persona: 'carmen-delaine', story: { ref: 'TEST-CARMEN' } },
-  { desk: 'civic', name: 'TEST-ONLY Civic Open Seat', popid: 'POP-99996', story: { ref: 'TEST-JAX' } },
-], { civic: 'generic civic', 'freelance-firebrand': 'Jax accountability' }, reversedPackages);
-assert.deepStrictEqual(reversed.assignments.map(row => row.persona),
-  ['carmen-delaine', 'freelance-firebrand']);
-assert.equal(reversed.assignments[0].story.ref, 'TEST-CARMEN');
-assert.equal(reversed.assignments[1].story.ref, 'TEST-JAX');
 
-// Desk shortfalls add missing required seats without stealing another desk.
-const shortDesk = applyWakePackageGate([
-  { desk: 'civic', name: 'TEST-ONLY Civic Solo', popid: 'POP-99995', story: { ref: 'TEST-CIVIC' } },
-  { desk: 'business', name: 'TEST-ONLY Business Seat', popid: 'POP-99994', story: { ref: 'TEST-BUSINESS' } },
-  { desk: 'culture', name: 'TEST-ONLY Culture Preserved', popid: 'POP-99991', story: { ref: 'TEST-CULTURE' } },
-], { civic: 'generic civic' }, packages);
-assert.equal(shortDesk.assignments.length, 19);
-assert.deepStrictEqual(new Set(shortDesk.assignments.map(row => row.persona)),
-  new Set(['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'p-slayer', 'anthony-raines', 'hal-richmond', 'tanya-cruz', 'simon-leary', 'maria-keen', 'elliot-graye', 'mason-ortega', 'sharon-okafor', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'noah-tan']));
-assert.ok(shortDesk.pinned.some(row => row.replaced === 'TEST-ONLY Culture Preserved'));
-assert.equal(shortDesk.pinned.filter(row => row.replaced === null).length, 16);
+const rotaPool = activeRotaCandidates(packages);
+assert.equal(rotaPool.length, 19);
+assert.deepStrictEqual(
+  Object.fromEntries(Object.keys(DAILY_QUOTAS).map(desk => [desk,
+    rotaPool.filter(row => row.desk === desk).length])),
+  { civic: 8, sports: 5, culture: 5, business: 1 });
+
+// The daily selector supplies at most the declared 2/2/1/1 seats. The package
+// gate normalizes those selected identities but cannot insert the other active
+// packages or consume another desk's capacity.
+const selected = [
+  Object.assign({ story: { ref: 'TEST-CIVIC-ONE' } }, jax.assignment, { persona: 'freelance-firebrand' }),
+  Object.assign({ story: { ref: 'TEST-CIVIC-TWO' } }, carmen.assignment, { persona: 'carmen-delaine' }),
+  Object.assign({ story: { ref: 'TEST-SPORTS-ONE' } }, pSlayer.assignment, { persona: 'p-slayer' }),
+  Object.assign({ story: { ref: 'TEST-SPORTS-TWO' } }, anthony.assignment, { persona: 'anthony-raines' }),
+  Object.assign({ story: { ref: 'TEST-CULTURE' } }, kai.assignment, { persona: 'kai-marston' }),
+  Object.assign({ story: { ref: 'TEST-BUSINESS' } }, jordan.assignment, { persona: 'business-desk' }),
+];
+const bounded = applyWakePackageGate(selected, approaches, packages);
+assert.equal(bounded.assignments.length, 6);
+assert.deepStrictEqual(bounded.pinned, []);
+assert.deepStrictEqual(bounded.skipped, []);
+assert.deepStrictEqual(
+  Object.fromEntries(Object.keys(DAILY_QUOTAS).map(desk => [desk,
+    bounded.assignments.filter(row => row.desk === desk).length])),
+  DAILY_QUOTAS);
+assert.equal(bounded.assignments[0].approach, 'Jax accountability');
+assert.equal(bounded.assignments[0].story.ref, 'TEST-CIVIC-ONE');
+assert.equal(bounded.assignments[5].wakePackage, 'JORDAN-LEP2-1');
+
+const staleSeat = applyWakePackageGate(selected.concat({
+  desk: 'culture', name: 'TEST-ONLY Unpackaged Reporter', persona: 'test-only', popid: 'POP-99999'
+}), approaches, packages);
+assert.equal(staleSeat.assignments.length, 6);
+assert.deepStrictEqual(staleSeat.skipped.map(row => row.name),
+  ['TEST-ONLY Unpackaged Reporter']);
+
+const oversizedSavedRota = applyWakePackageGate([
+  Object.assign({}, noah.assignment, { persona: 'noah-tan' }),
+  Object.assign({}, angela.assignment, { persona: 'angela-reyes' }),
+  Object.assign({}, lila.assignment, { persona: 'lila-mezran' }),
+  Object.assign({}, rachel.assignment, { persona: 'rachel-torres' }),
+  Object.assign({ story: { ref: 'TEST-JAX-SEED' } }, jax.assignment,
+    { persona: 'freelance-firebrand' }),
+  Object.assign({ story: { ref: 'TEST-LUIS-SEED' } }, luis.assignment,
+    { persona: 'luis-navarro' }),
+  Object.assign({ story: { ref: 'TEST-SPORTS-SEED' } }, pSlayer.assignment,
+    { persona: 'p-slayer' }),
+  Object.assign({ story: { ref: 'TEST-CULTURE-SEED' } }, kai.assignment,
+    { persona: 'kai-marston' }),
+  Object.assign({ story: { ref: 'TEST-BUSINESS-SEED' } }, jordan.assignment,
+    { persona: 'business-desk' }),
+], approaches, packages).assignments;
+const runtimeBound = boundDailyAssignments(oversizedSavedRota);
+assert.deepStrictEqual(runtimeBound.assignments.map(row => row.persona), [
+  'freelance-firebrand', 'luis-navarro', 'p-slayer', 'kai-marston', 'business-desk'
+]);
+assert.equal(runtimeBound.dropped.length, 4);
+assert.ok(runtimeBound.assignments.length <=
+  Object.values(DAILY_QUOTAS).reduce((sum, value) => sum + value, 0));
 
 console.log('newsroomWakePackages.test.js: PASS');

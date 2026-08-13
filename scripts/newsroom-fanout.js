@@ -3,11 +3,10 @@
  * Newsroom fan-out rotation — scripts/newsroom-fanout.js
  *
  * Phase 2.3 fan-out (Mike-direct 2026-07-25): the three-wake cadence runs as a
- * daily ROTA, not one hardcoded desk. The base rota targets 5–7 assignments/day
- * with sports + civic weighted 2–3. ADR-0017 then applies a package-only gate:
- * only journalists with active entries in newsroom-wake-packages.json remain,
- * and required probation seats are pinned before the filter. Selection inside
- * the base rota remains least-recently-used, computed from prior fanout files.
+ * daily ROTA, not one hardcoded desk. The rota selects six active wake packages
+ * at the declared desk quotas. Selection inside each desk is least-recently-used,
+ * computed from prior fanout files, while the downstream package-only gate
+ * rejects stale or unchecked assignments without adding seats.
  *
  * grok 2026-08-06 — stink force-slot (research 2026-08-06-jax-caldera-sim-stink-audit):
  * when the deterministic stink scanner scores ≥ threshold and no firebrand force
@@ -29,35 +28,15 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const COMPARE = path.join(ROOT, 'output', 'cron-compare');
 
-// Pre-package desk quotas (sum = 6). The ADR-0017 gate below may intentionally
-// reduce the live set while journalist packages are being expanded.
+// Daily desk quotas (sum = 6). Package expansion grows the eligible pool, never
+// the number of scheduled seats.
 const DAILY_QUOTAS = { civic: 2, sports: 2, culture: 1, business: 1 };
-
-// Mirrors LANE_DOMAINS in cron-desk-run.js (keep in sync).
-// 2026-08-07: SPORTS beatDomain is live (P Slayer, Anthony, Tanya, …). Sports
-// quota no longer falls through to GENERAL-only (that was the Paulson-exclude hangover).
-const DESK_DOMAINS = {
-  civic:    ['CIVIC', 'HEALTH', 'SAFETY', 'INFRASTRUCTURE', 'EDUCATION', 'ENVIRONMENT'],
-  culture:  ['CULTURE', 'COMMUNITY'],
-  business: ['ECONOMIC', 'GENERAL'],
-  sports:   ['SPORTS']
-};
 
 function arg(flag, def) {
   const i = process.argv.indexOf(flag);
   if (i !== -1 && process.argv[i + 1]) return process.argv[i + 1];
   const eq = process.argv.find(a => a.startsWith(flag + '='));
   return eq ? eq.slice(flag.length + 1) : def;
-}
-
-// popid -> persona slug (personas are roster citizens too; Jax = POP-00799)
-function loadPersonaReverse() {
-  const rev = {};
-  try {
-    const map = JSON.parse(fs.readFileSync(path.join(__dirname, 'persona-map.json'), 'utf8'));
-    for (const [slug, p] of Object.entries(map)) if (p && p.popid) rev[p.popid] = slug;
-  } catch (_) { /* no map -> no personas */ }
-  return rev;
 }
 
 // name -> {count, last} across prior fanout files (least-recently-used rotation)
@@ -185,43 +164,28 @@ function approachFor(approachMap, desk, personaSlug) {
   return approachMap[desk] || approachMap._default || null;
 }
 
-// ADR-0017 live expansion gate. A scheduled journalist must own an active wake
-// package; the old generic prompt is not a fallback. Required packages are
-// pinned into their own desk before filtering, and an active package seat is
-// never used as another package's replacement candidate. This keeps multiple
-// required seats on one desk independent without stealing capacity cross-desk.
+// ADR-0017 package-only gate. A scheduled journalist must own an active wake
+// package; the old generic prompt is not a fallback. The rota builder owns seat
+// selection and quotas. This gate only normalizes selected package identities
+// and rejects stale/unchecked seats, so package growth can never expand a day.
 function applyWakePackageGate(assignments, approachMap, packagesOverride) {
   const packagesApi = require('./newsroomWakePackages');
   const packages = packagesOverride || packagesApi.loadPackages();
   const work = (assignments || []).map(row => Object.assign({}, row));
-  const pinned = [];
   const active = packagesApi.activePackages(packages);
   const matchesPackage = (row, key, value) => Boolean(row) && (
     row.persona === key ||
     row.popid === value.assignment.popid ||
     row.name === value.assignment.name
   );
-  const isReservedPackageSeat = row => active.some(({ key, value }) =>
-    matchesPackage(row, key, value));
-
-  for (const { key, value } of active) {
-    let index = work.findIndex(row => matchesPackage(row, key, value));
-    if (index < 0 && value.requiredDaily) {
-      index = work.findIndex(row => row.desk === value.assignment.desk &&
-        !isReservedPackageSeat(row));
-      const previous = index >= 0 ? work[index] : {};
-      const replacement = Object.assign({}, previous, value.assignment, {
-        persona: key,
-        approach: approachFor(approachMap, value.assignment.desk, key),
-        packagePin: true,
-      });
-      if (index >= 0) work[index] = replacement;
-      else work.unshift(replacement);
-      pinned.push({ persona: key, desk: value.assignment.desk,
-        replaced: previous.name || null });
-    } else if (index >= 0) {
-      work[index] = Object.assign({}, work[index], value.assignment, { persona: key });
-    }
+  for (let index = 0; index < work.length; index++) {
+    const matched = active.find(({ key, value }) => matchesPackage(work[index], key, value));
+    if (!matched) continue;
+    const { key, value } = matched;
+    work[index] = Object.assign({}, work[index], value.assignment, {
+      persona: key,
+      approach: approachFor(approachMap, value.assignment.desk, key),
+    });
   }
 
   const gated = packagesApi.gateAssignments(work, packages);
@@ -229,8 +193,40 @@ function applyWakePackageGate(assignments, approachMap, packagesOverride) {
     policy: 'package-only',
     assignments: gated.eligible,
     skipped: gated.skipped,
-    pinned,
+    pinned: [],
   };
+}
+
+// `requiredDaily` marks an active package as eligible for the daily rota. It no
+// longer means every eligible package runs every day; DAILY_QUOTAS and LRU own
+// that decision.
+function activeRotaCandidates(packagesOverride) {
+  const packagesApi = require('./newsroomWakePackages');
+  const packages = packagesOverride || packagesApi.loadPackages();
+  return packagesApi.activePackages(packages)
+    .filter(({ value }) => value.requiredDaily)
+    .map(({ key, value }) => Object.assign({}, value.assignment, { persona: key }));
+}
+
+// Backstop for fanout files written before the fixed-capacity package rota.
+// Within a desk, a source-assigned seat outranks an approach-only seat; stable
+// input order breaks ties. Unknown desks have no capacity and fail closed.
+function boundDailyAssignments(assignments, quotasOverride) {
+  const quotas = quotasOverride || DAILY_QUOTAS;
+  const indexed = (assignments || []).map((row, index) => ({ row, index }));
+  const selected = [];
+  const dropped = [];
+  for (const [desk, quota] of Object.entries(quotas)) {
+    const deskRows = indexed.filter(item => item.row && item.row.desk === desk)
+      .sort((a, b) => Number(Boolean(b.row.story)) - Number(Boolean(a.row.story)) ||
+        a.index - b.index);
+    selected.push(...deskRows.slice(0, quota).map(item => item.row));
+    dropped.push(...deskRows.slice(quota).map(item => item.row));
+  }
+  const knownDesks = new Set(Object.keys(quotas));
+  dropped.push(...indexed.filter(item => !item.row || !knownDesks.has(item.row.desk))
+    .map(item => item.row));
+  return { assignments: selected, dropped };
 }
 
 function loadFirebrandPersona() {
@@ -364,13 +360,18 @@ function applyStinkForce(assignments, cycle, date, approachMap, takenRefs) {
 async function buildFanout(date) {
   const { buildBylineRoster } = require(path.join(ROOT, 'scripts', 'engine-auditor', 'bayTribuneRoster'));
   const roster = await buildBylineRoster();
-  const pool = (roster.included || []).filter(j => j.popid);
-  if (!pool.length) throw new Error('byline roster is empty — cannot fan out');
+  const pool = activeRotaCandidates();
+  if (!pool.length) throw new Error('active wake-package rota is empty — cannot fan out');
+  const rosterPopids = new Set((roster.included || []).map(row => row.popid));
+  const absent = pool.filter(row => !rosterPopids.has(row.popid));
+  if (absent.length) {
+    throw new Error('active wake package absent from canonical byline roster: ' +
+      absent.map(row => row.persona + '/' + row.popid).join(', '));
+  }
   const hist = usageHistory();
   const getCurrentCycle = require(path.join(ROOT, 'lib', 'getCurrentCycle'));
   const cycle = getCurrentCycle({ soft: true, noArgv: true });
   const stagedBy = cycle === null ? {} : stagedTally(cycle).byByline;
-  const personaRev = loadPersonaReverse();
   // Task 2.5.2: the day's seed material. A missing desk_signal degrades to
   // approach-only assignments — the rota never blocks on the signal file —
   // but LOUDLY: seedless days are a pipeline break upstream (/run-cycle →
@@ -389,21 +390,18 @@ async function buildFanout(date) {
   const usedToday = new Set();
 
   for (const [desk, quota] of Object.entries(DAILY_QUOTAS)) {
-    const domains = DESK_DOMAINS[desk] || [];
-    let candidates = pool.filter(j => domains.includes(j.beatDomain));
-    if (!candidates.length) candidates = pool.filter(j => j.beatDomain === 'GENERAL');
+    const candidates = pool.filter(j => j.desk === desk);
     candidates.sort(bylinePreference(stagedBy, hist));
     const seeds = laneSeeds(lanes[desk], takenRefs, date);
     let taken = 0;
     for (const j of candidates) {
       if (taken >= quota) break;
-      if (usedToday.has(j.name)) continue;   // GENERAL pool is shared (sports+business)
+      if (usedToday.has(j.name)) continue;
       usedToday.add(j.name);
-      const persona = personaRev[j.popid] || null;
       const a = {
         desk, name: j.name, popid: j.popid, beatDomain: j.beatDomain,
-        persona,
-        approach: approachFor(approachMap, desk, persona)
+        persona: j.persona,
+        approach: approachFor(approachMap, desk, j.persona)
       };
       // EIC assignment: hand this reporter the next unassigned seed. Seed pool
       // exhausted -> approach-only open beat (never drops the slot).
@@ -705,4 +703,4 @@ if (require.main === module) {
 
 module.exports = { buildFanout, writeFanout, loadFanout, usageHistory, stagedTally, bylinePreference,
   assignedStoryRefs, laneSeeds, storyFromSeed, approachFor, applyStinkForce, loadFirebrandPersona,
-  applyWakePackageGate, DAILY_QUOTAS, DESK_DOMAINS };
+  applyWakePackageGate, activeRotaCandidates, boundDailyAssignments, DAILY_QUOTAS };

@@ -15,6 +15,9 @@ function validatePackage(key, value) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) errors.push('must be an object');
   if (value && value.persona !== key) errors.push('persona must equal registry key');
   if (value && value.active !== true && value.active !== false) errors.push('active must be boolean');
+  if (value && value.requiredDaily !== true && value.requiredDaily !== false) {
+    errors.push('requiredDaily must be boolean');
+  }
   if (value && !/^[A-Z0-9]+(?:-[A-Z0-9]+)*-\d+$/.test(String(value.version || ''))) {
     errors.push('version must be a stable uppercase package version ending in an integer');
   }

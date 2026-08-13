@@ -84,4 +84,15 @@ if git diff --cached --name-only | grep -q 'docs/engine/archive/ROLLOUT_PLAN\.md
   fi
 fi
 
+# ---------------------------------------------------------------------------
+# Canon-leak gate — sim-facing/agent-read files (.claude/agents/,
+# .claude/agent-memory/, docs/canon/, docs/media/) must never gain real-world
+# dates or builder references. Catches Bash-side writes (sed/echo/python) the
+# PreToolUse hook cannot see. Runs regardless of CLAUDE_CTL — this protects
+# canon, not the control plane. Detail: .claude/hooks/canon-leak-guard.sh
+# ---------------------------------------------------------------------------
+if ! bash "$(git rev-parse --show-toplevel)/.claude/hooks/canon-leak-guard.sh" --staged; then
+  exit 1
+fi
+
 exit 0

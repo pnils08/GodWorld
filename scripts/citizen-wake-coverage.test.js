@@ -171,10 +171,11 @@ const morningVoice = voicedCycle('morning');
     [], '', '', '', '', '', '', '',
     103, '', '', '', '', '',
   );
-  assert('wake sits in the engine event, not a reflect-assignment',
-    /What the city already did to you/.test(system) && /Don't say you are reflecting/.test(user));
-  assert('user prompt is the occasion, not think-on-the-page',
-    !/think on the page/.test(user) && !/sit inside this event/.test(system));
+  assert('system still carries the LifeHistory tail', /Real things from your life recently/.test(system));
+  assert('user message is only the daypart plus the engine line',
+    user.split('\n').filter(Boolean).length === 1 &&
+    /unwinding|running groups|night-shift lead/.test(user) &&
+    !/reflect|think on the page|First person|Don't invent/i.test(user));
 }
 
 try { fs.rmSync(TMP, { recursive: true, force: true }); } catch (e) {}

@@ -314,7 +314,7 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
   // facts never compete with page recall. T11 — authored speech texture rides beside it.
   const anchor = cardBlock ? `\n\nWho you are:\n${cardBlock}` : '';
   const talk = voiceLine ? `\n\nHow you talk: ${voiceLine}` : '';
-  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}${health}${anchor}${talk}\n\nWhat the city already did to you recently:\n${c.life || ''}${family}${who}${bonds}${ripple}${opinions}${sports}${paper}${texture}${memory}${tensions}`;
+  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. Your temperament: ${disp}.${trajLine}${arcLine}${health}${anchor}${talk}\n\nReal things from your life recently:\n${c.life || ''}${family}${who}${bonds}${ripple}${opinions}${sports}${paper}${texture}${memory}${tensions}`;
   const occasion = pickLivedEvent(c.life, [c.popId, cycle, WAKE].join(':'));
   const prov = occasion
     ? { id: 'engine-event', route: 'life', text: occasion }
@@ -323,10 +323,10 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
       neighbors: neighbors, sportsLine: sportsLine, lifeArc: lifeArc,
       textureLine: textureLine, bondsLine: bondsLine, traj: traj,
     });
+  // User message is the engine event (or a bank latch). No writing assignment —
+  // those clauses land in the mouth.
   const frame = WAKE_FRAME[WAKE] || WAKE_FRAME.evening;
-  const user = occasion
-    ? `${frame}. ${occasion}\n\nFirst person. Don't invent names. Don't say you are reflecting.`
-    : `${frame}. ${prov.text}\n\nFirst person. Don't invent names. Don't say you are reflecting.`;
+  const user = occasion ? `${frame}. ${occasion}` : `${frame}. ${prov.text}`;
   return { system, user, disp, prov, occasion };
 }
 

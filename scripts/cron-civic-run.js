@@ -49,6 +49,8 @@ const { lintText } = require('./lintCivicPackets');
 const { getDistrictForNeighborhood } = require('../lib/districtMap');
 const getCurrentCycle = require('../lib/getCurrentCycle');
 const officeWall = require('./officeWall');
+const civicMust = require('./civicMustDecide');
+const trackerSnapshot = require('./initiativeTrackerSnapshot');
 
 /** Non-fatal: prior CIVIC positions for holder of agentDir. */
 async function positionWallInject(officeMap, agentDir) {
@@ -211,7 +213,7 @@ function parseApprovalTable(sectionText) {
     const holder = cells[2];
     if (!holder) continue;
     rows[holder] = {
-      office: cells[1], faction: cells[3], status: cells[4],
+      office: cells[1], holder, faction: cells[3], status: cells[4],
       approval: parseInt(cells[5], 10),
       delta: parseInt(String(cells[6]).replace('+', ''), 10) || 0,
     };
@@ -294,7 +296,7 @@ function ailmentPerception(p) {
     case 'math-imbalance':
       return where + ': daily life is visibly declining — ' + (feels.length ? feels.join(', ') : 'several quality-of-life signals moved the wrong way') + ' — and no city program is currently pointed at it.';
     case 'stuck-initiative':
-      return (inits.join(', ') || 'an initiative') + ' has sat in the same stage for ' + (p.cyclesInState || 'several') + ' cycles without visible movement (' + where + ').';
+      return (inits.join(', ') || 'an initiative') + ' has sat in the same stage for ' + (p.cyclesInState || 'several') + ' cycles (' + where + '). The ledger already says that — this cycle you move the phase or take a fail phase.';
     case 'repeating-event':
       return where + ': the same strain keeps recurring cycle after cycle and the city still has no program for it.';
     case 'coverage-gap':
@@ -345,7 +347,7 @@ async function runPrep() {
   const audit = mustJson(path.join(ROOT, 'output', 'engine_audit_c' + cycle + '.json'), 'run /engine-review first');
   const briefsFile = mustJson(path.join(ROOT, 'output', 'baseline_briefs_c' + cycle + '.json'), 'engine review baseline briefs');
   const briefs = briefsFile.briefs || [];
-  const tracker = mustJson(path.join(ROOT, 'output', 'initiative_tracker.json'), 'tracker snapshot');
+  const tracker = trackerSnapshot.loadOrRebuild(cycle);
   const truesource = mustJson(path.join(ROOT, 'output', 'desk-packets', 'truesource_reference.json'), 'council truesource');
   const officeMap = mustJson(path.join(ROOT, 'scripts', 'civic-office-map.json'), 'civic.15 Task 0.2 office map');
 
@@ -408,6 +410,10 @@ async function runPrep() {
     if (!dir) return;
     (assignments[dir] = assignments[dir] || []).push(topic);
   };
+  const mustDecide = civicMust.demandsFromAudit(audit, tracker);
+  if (mustDecide.length) {
+    log('must-decide: ' + mustDecide.map(d => d.id + ' (' + d.currentPhase + ', ' + d.cyclesInState + 'c)').join('; '));
+  }
   const auditByInit = {};
   for (const p of audit.patterns) {
     for (const id of (p.affectedEntities && p.affectedEntities.initiatives) || []) {
@@ -427,13 +433,14 @@ async function runPrep() {
     hotInits.push(init);
     const ownerRule = INITIATIVE_AGENT.find(r => r.re.test(init.name));
     const owner = ownerRule ? ownerRule.dir : null;
+    const demand = mustDecide.find(d => d.id === init.id);
     const flagNotes = flagged.map(p => 'The engine\'s own review flags this: ' + ailmentPerception(p));
-    const body = [
+    const body = demand ? civicMust.packetBody(demand) : [
       cleanInline(impl.summary) ? 'Where it stands: ' + cleanInline(impl.summary) : 'Where it stands: in ' + phaseProse(impl.phase) + '.',
       impl.nextScheduledAction && cleanInline(impl.nextScheduledAction) ? 'On the calendar: ' + cleanInline(impl.nextScheduledAction) + (due ? ' — due THIS cycle.' : '.') : null,
       ...flagNotes,
     ].filter(Boolean).join('\n');
-    const topic = { kind: 'initiative', id: init.id, title: init.name + (voteReady ? ' — VOTE PENDING' : due ? ' — action due this cycle' : ' — engine-flagged'), body };
+    const topic = { kind: demand ? 'must-decide' : 'initiative', id: init.id, title: init.name + (demand ? ' — MUST DECIDE this cycle' : voteReady ? ' — VOTE PENDING' : due ? ' — action due this cycle' : ' — engine-flagged'), body };
     assign('civic-office-mayor', topic);
     assign(owner, topic);
     if (/stabilization/i.test(init.name)) assign('civic-office-okoro', topic);
@@ -452,7 +459,9 @@ async function runPrep() {
   // HIGH ailments: hood -> district bloc; initiative -> owner (already above);
   // crime-flavored -> police chief; ownerless hoods roll up to the Mayor digest.
   for (const p of audit.patterns.filter(p => p.severity === 'high')) {
-    const topic = { kind: 'ailment', title: 'Engine review HIGH: ' + p.type.replace(/-/g, ' '), body: ailmentPerception(p) + '\nNo city program currently answers this. Speak to it or own the silence.' };
+    const topic = { kind: 'ailment', title: 'Engine review HIGH: ' + p.type.replace(/-/g, ' '), body: ailmentPerception(p) + (p.type === 'stuck-initiative'
+      ? '\nThis is a decision demand, not a briefing. Advance the phase or take a fail phase. Silence fails the apply gate.'
+      : '\nNo city program currently answers this. Make a move this cycle — silence is a choice you will be charged for.') };
     const sig = JSON.stringify((p.evidence && p.evidence.fields) || {});
     if (p.type !== 'ledger-completeness') {
       for (const hood of (p.affectedEntities && p.affectedEntities.neighborhoods) || []) {
@@ -550,7 +559,7 @@ async function runPrep() {
       const sect = directive.split(/\n## /).find(s => s.includes('`' + dir + '`') || s.includes(dir));
       if (sect) {
         const clean = cleanLines('## ' + sect).trim();
-        if (clean) L.push('', '## Directive from Mara Vance, City Planning Director — answer it or own the silence', clean);
+        if (clean) L.push('', '## Directive from Mara Vance, City Planning Director — answer it; silence is a choice you will be charged for', clean);
       }
     }
 
@@ -683,7 +692,7 @@ async function runDirective() {
   const officeMap = mustJson(path.join(ROOT, 'scripts', 'civic-office-map.json'), 'office map');
   const summaryMd = mustRead(path.join(ROOT, 'output', 'world_summary_c' + cycle + '.md'), 'run /build-world-summary first');
   const audit = mustJson(path.join(ROOT, 'output', 'engine_audit_c' + cycle + '.json'), 'run /engine-review first');
-  const tracker = mustJson(path.join(ROOT, 'output', 'initiative_tracker.json'), 'tracker snapshot');
+  const tracker = trackerSnapshot.loadOrRebuild(cycle);
 
   // Friction rule (plan Task 2.2): the directive's model family must differ
   // from the Mayor's writer family.
@@ -882,11 +891,12 @@ function stripFences(t) {
   const a = s.indexOf('{'), b = s.lastIndexOf('}');
   return (a !== -1 && b > a) ? s.slice(a, b + 1) : s;
 }
-function outputContract(officeSlug, cycle, initiatives) {
+function outputContract(officeSlug, cycle, initiatives, demands) {
   // FLAT trackerUpdates + InitiativeID — the shape validateTrackerUpdates and
   // applyTrackerUpdates actually write. (First C102 chain run used the eval
   // harness's keyed-by-name shape; every write validated as unresolvable/dark.)
   const initList = (initiatives || []).map(i => '  - ' + i.id + ' = ' + i.name).join('\n');
+  const must = civicMust.contractAddendum(demands);
   return '\nRespond with ONLY a JSON object (no markdown fences, no prose before or after):\n' +
     JSON.stringify({
       office: officeSlug, cycle: Number(cycle), speaker: '<the office-holder\'s full name>',
@@ -898,10 +908,10 @@ function outputContract(officeSlug, cycle, initiatives) {
         fullStatement: '<the full public statement in your voice>', trackerUpdates: {}
       }]
     }, null, 2) +
-    '\nIf (and only if) a statement changes an initiative\'s state, fill trackerUpdates as a FLAT object whose "initiative" field is the INIT id (this exact key/format — the pipeline attributes the write by it):\n' +
+    '\nIf a statement changes an initiative\'s state, fill trackerUpdates as a FLAT object whose "initiative" field is the INIT id (this exact key/format — the pipeline attributes the write by it):\n' +
     '{"initiative": "INIT-XXX", "ImplementationPhase": "<value or omit if unchanged>", "MilestoneNotes": "C' + cycle + ': <one sentence, max 200 chars>", "NextScheduledAction": "<optional>", "NextActionCycle": <optional number>}\n' +
     'Known initiatives:\n' + initList + '\n' +
-    'A statement with no state change keeps trackerUpdates as {} (empty).\n' +
+    (must || 'A statement with no state change keeps trackerUpdates as {} (empty).\n') +
     'ImplementationPhase MUST be one of: ' + [...PHASES].join(', ') + '.\n' +
     'Never invent citizens, businesses, statistics, or votes not present in your packet.';
 }
@@ -986,6 +996,12 @@ function statementsTouching(voiceJsons, initId, tracker) {
   }
   return hits;
 }
+function loadMustDecide(cycle) {
+  const audit = readJson(path.join(ROOT, 'output', 'engine_audit_c' + cycle + '.json'));
+  const tracker = trackerSnapshot.loadOrRebuild(cycle);
+  return civicMust.demandsFromAudit(audit || {}, tracker || {});
+}
+
 function loadVoiceJsons(cycle) {
   const dir = path.join(ROOT, 'output', 'civic-voice');
   const out = {};
@@ -1003,12 +1019,42 @@ async function runDecide() {
   console.log('Civic DECIDE (Mayor) — c' + cycle);
   console.log('===================================');
   const officeMap = mustJson(path.join(ROOT, 'scripts', 'civic-office-map.json'), 'office map');
-  const initiatives = (mustJson(path.join(ROOT, 'output', 'initiative_tracker.json'), 'tracker snapshot').initiatives) || [];
+  const initiatives = (trackerSnapshot.loadOrRebuild(cycle).initiatives) || [];
   const packet = mustRead(packetPathFor('civic-office-mayor', cycle), 'run --stage=prep first');
   const model = officeModel(officeMap, 'civic-office-mayor');
   log('mayor model=' + model);
   const wallInj = await positionWallInject(officeMap, 'civic-office-mayor');
-  const user = 'YOUR PENDING DECISIONS PACKET (cycle ' + cycle + '):\n\n' + packet + wallInj + '\n\n' + outputContract('mayor', cycle, initiatives);
+  const summaryPath = path.join(ROOT, 'output', 'world_summary_c' + cycle + '.md');
+  const summaryMd = fs.existsSync(summaryPath) ? fs.readFileSync(summaryPath, 'utf8') : '';
+  const approvals = summaryMd ? parseApprovalTable(findSection(splitSections(summaryMd), 'Approval Ratings')) : {};
+  if (civicMust.isMayorVacant(approvals)) {
+    log('mayor seat is vacant — no decide call. The chair is empty.');
+    const MARKER = "## MAYOR'S DECISIONS THIS CYCLE";
+    const cascade = [MARKER, '',
+      '- The Mayor\'s chair is vacant this cycle. There is no executive decision.',
+      '',
+      'The city has no Mayor. React in your own voice — the work still has to move.'];
+    let injected = 0;
+    if (fs.existsSync(PACKETS)) {
+      for (const f of fs.readdirSync(PACKETS)) {
+        if (!f.endsWith('_c' + cycle + '.md') || f.startsWith('civic-office-mayor')) continue;
+        const p = path.join(PACKETS, f);
+        let body = fs.readFileSync(p, 'utf8');
+        const at = body.indexOf(MARKER);
+        if (at !== -1) body = body.slice(0, at).replace(/\n+$/, '\n');
+        fs.writeFileSync(p, body.replace(/\n+$/, '\n') + '\n' + cascade.join('\n') + '\n');
+        injected++;
+      }
+    }
+    fs.mkdirSync(CIVIC, { recursive: true });
+    fs.writeFileSync(path.join(CIVIC, 'decide_c' + cycle + '.json'), JSON.stringify({
+      stage: 'decide', cycle: Number(cycle), skipped: 'mayor-vacant',
+      cascadeInjected: injected, ranAt: new Date().toISOString(),
+    }, null, 2));
+    console.log('\n=== decide skipped: mayor vacant; cascade into ' + injected + ' packet(s) ===');
+    return;
+  }
+  const user = 'YOUR PENDING DECISIONS PACKET (cycle ' + cycle + '):\n\n' + packet + wallInj + '\n\n' + outputContract('mayor', cycle, initiatives, loadMustDecide(cycle));
   const r = await callVoice('civic-office-mayor', model, user, 5000);
   if (!r || r.error) {
     console.error('HALT: Mayor call failed — ' + (r ? r.error : 'no result') + '. Chain must not proceed (everything cascades from her).');
@@ -1054,7 +1100,7 @@ async function runVoices() {
   console.log('Civic VOICES (Layer 2) — c' + cycle);
   console.log('===================================');
   const officeMap = mustJson(path.join(ROOT, 'scripts', 'civic-office-map.json'), 'office map');
-  const initiatives = (mustJson(path.join(ROOT, 'output', 'initiative_tracker.json'), 'tracker snapshot').initiatives) || [];
+  const initiatives = (trackerSnapshot.loadOrRebuild(cycle).initiatives) || [];
   if (!fs.existsSync(path.join(ROOT, 'output', 'civic-voice', 'mayor_c' + cycle + '.json'))) {
     throw new Error('no mayor_c' + cycle + '.json — run --stage=decide first (the cascade order is canonical)');
   }
@@ -1070,7 +1116,7 @@ async function runVoices() {
       const model = officeModel(officeMap, dir);
       const packet = fs.readFileSync(packetPathFor(dir, cycle), 'utf8');
       const wallInj = await positionWallInject(officeMap, dir);
-      const user = 'YOUR PENDING DECISIONS PACKET (cycle ' + cycle + ') — the Mayor\'s decisions are at the bottom; react to them:\n\n' + packet + wallInj + '\n\n' + outputContract(slug, cycle, initiatives);
+      const user = 'YOUR PENDING DECISIONS PACKET (cycle ' + cycle + ') — the Mayor\'s decisions are at the bottom; react to them:\n\n' + packet + wallInj + '\n\n' + outputContract(slug, cycle, initiatives, loadMustDecide(cycle));
       const r = await callVoice(dir, model, user, 4000);
       if (!r || r.error) { results.push({ dir, slug, model, ok: false, error: r ? r.error : 'no result' }); return; }
       const out = writeVoiceJson(slug, cycle, r.json);
@@ -1096,7 +1142,7 @@ async function runProjects() {
   console.log('Civic PROJECTS (Layer 3) — c' + cycle);
   console.log('===================================');
   const officeMap = mustJson(path.join(ROOT, 'scripts', 'civic-office-map.json'), 'office map');
-  const tracker = mustJson(path.join(ROOT, 'output', 'initiative_tracker.json'), 'tracker snapshot');
+  const tracker = trackerSnapshot.loadOrRebuild(cycle);
   const voiceJsons = loadVoiceJsons(cycle);
   if (!voiceJsons.mayor) throw new Error('no mayor_c' + cycle + '.json — run decide/voices first');
   const layer12 = Object.fromEntries(Object.entries(voiceJsons).filter(([s]) => !['baylight_authority', 'stabilization_fund', 'oari', 'health_center', 'transit_hub'].includes(s)));
@@ -1121,7 +1167,7 @@ async function runProjects() {
         '- What details emerge from implementation?',
         '- What would a reporter see if they visited?',
         'You may invent operational details — names of facilities, timelines, specifics — but never citizens, statistics, or votes beyond your material.',
-        outputContract(slug, cycle, tracker.initiatives || []),
+        outputContract(slug, cycle, tracker.initiatives || [], loadMustDecide(cycle)),
       ].join('\n');
       const r = await callVoice(seat.agentDir, model, user, 4000);
       if (!r || r.error) { results.push({ slug, model, ok: false, error: r ? r.error : 'no result' }); continue; }
@@ -1445,7 +1491,7 @@ async function runDatawake() {
     return;
   }
   const officeMap = mustJson(path.join(ROOT, 'scripts', 'civic-office-map.json'), 'office map');
-  const tracker = mustJson(path.join(ROOT, 'output', 'initiative_tracker.json'), 'tracker snapshot');
+  const tracker = trackerSnapshot.loadOrRebuild(cycle);
   const audit = mustJson(path.join(ROOT, 'output', 'engine_audit_c' + cycle + '.json'), 'engine audit');
   const briefsFile = readJson(path.join(ROOT, 'output', 'baseline_briefs_c' + cycle + '.json')) || {};
   const briefs = briefsFile.briefs || [];
@@ -1463,19 +1509,38 @@ async function runDatawake() {
   if (!rota.length) throw new Error('no duty seats matched');
   log('rota: ' + rota.map(o => o.agentDir).join(', '));
 
+  if (process.argv.includes('--dry-run')) {
+    for (const office of rota) {
+      const slice = domainSlice(office, sections, hoods, briefs, tracker, audit);
+      const persona = readPersonaDir(office.agentDir);
+      log('DRY ' + office.agentDir + ' holder=' + office.holder +
+        ' personaBytes=' + (persona ? persona.length : 0) +
+        ' sliceChars=' + slice.length);
+      if (!persona) throw new Error('no IDENTITY/RULES for ' + office.agentDir);
+      if (!slice.length) throw new Error('empty domain slice for ' + office.agentDir);
+    }
+    console.log('=== datawake dry-run: ' + rota.length + ' seats, no model call ===');
+    return;
+  }
+
   fs.mkdirSync(DATAWAKE_DIR, { recursive: true });
   const results = [];
+  const mustDecide = civicMust.demandsFromAudit(audit, tracker);
   for (const office of rota) {
     try {
       const slice = domainSlice(office, sections, hoods, briefs, tracker, audit);
+      const demandHere = mustDecide.find(d =>
+        slice.includes(d.id) || (d.name && slice.includes(d.name)) || office.initiative === d.id);
       const wallInj = await positionWallInject(officeMap, office.agentDir);
       const user = [
-        'It\'s a working ' + ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][day] + 'day at your office. This is your domain\'s live picture this cycle:',
+        'It\'s a working ' + ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][day] + 'day and you are in the room, not writing a briefing. Speak as yourself. The numbers below already live in the sheets — do not recite them. Say who came in, what you did with your hands, what the place smelled like. This is your domain this cycle:',
         '', slice, '',
         wallInj,
-        'Speak as yourself doing the job — one public statement or action about what these numbers mean for the people you serve. You argue initiatives on Sundays; today you fight for your constituents with what your desk shows you.',
-        'Respond with ONLY JSON (no fences): {"office": "' + voiceSlug(office.agentDir) + '", "holder": "' + office.holder + '", "statement": "<2-4 sentences in your voice>", "action": "<the one concrete thing you are doing about it today, or null>", "numberMoved": "<the single most important number/shift in plain words>"}',
-        'Never invent citizens, statistics, or events not present above.',
+        demandHere
+          ? ('MUST MOVE today: ' + demandHere.id + ' (' + demandHere.name + ') is stuck in ' + (demandHere.currentPhase || 'its current stage') + '. Name the one concrete action you take before you leave the desk. "Monitor" is not an action.')
+          : 'Speak as yourself doing the job — one public statement and one concrete action. You argue tracker phase on Sundays; today you do the work the desk shows you.',
+        'Respond with ONLY JSON (no fences): {"office": "' + voiceSlug(office.agentDir) + '", "holder": "' + office.holder + '", "statement": "<2-4 sentences in your voice>", "action": "<the one concrete thing you are doing about it today — not null if a must-move is on this desk>", "numberMoved": "<the single most important number/shift in plain words>"}',
+        'Never invent citizens, statistics, or events not present above. Do not say nothing is happening.',
       ].join('\n');
       const persona = readPersonaDir(office.agentDir);
       let j = null;
@@ -1490,6 +1555,13 @@ async function runDatawake() {
           if (attempt === 2) throw new Error('no usable JSON statement after retry (model returned empty/invalid content)');
           log(office.agentDir + ' attempt ' + attempt + ': empty/invalid model output — retrying');
           attemptUser = user + '\n\nYOUR PREVIOUS ATTEMPT RETURNED NO USABLE JSON. Respond with ONLY the JSON object described above.';
+          continue;
+        }
+        const move = civicMust.checkDatawakeMove(cand, !!demandHere);
+        if (!move.ok) {
+          log(office.agentDir + ' attempt ' + attempt + ': ' + move.reason);
+          if (attempt === 2) throw new Error('datawake refused: ' + move.reason + ' — a move, not a monitor-note');
+          attemptUser = user + '\n\nYOUR PREVIOUS ATTEMPT WAS REJECTED: ' + move.reason + '. Name a concrete action. "Nothing is happening" / "continue to monitor" fails.';
           continue;
         }
         const bad = ungroundedNumbers(slice, [cand.statement, cand.action, cand.numberMoved], { district: office.district, cycle });
@@ -1555,4 +1627,4 @@ if (require.main === module) {
     .catch(err => { console.error('[civic] Fatal:', err.message); process.exit(1); });
 }
 
-module.exports = { sentimentWord, crimeWord, retailWord, ailmentPerception, cleanLines, parseApprovalTable, parseHoodTable };
+module.exports = { sentimentWord, crimeWord, retailWord, ailmentPerception, cleanLines, parseApprovalTable, parseHoodTable, outputContract, loadMustDecide };

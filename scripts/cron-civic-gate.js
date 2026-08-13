@@ -44,6 +44,7 @@ const { validateCycle } = require('./validateTrackerUpdates');
 // The pipeline's own initiative attribution (4-signal) — the gate must never
 // count initiatives differently than assembleDecisions writes them.
 const { attributeInitiative } = require('./assembleDecisions');
+const civicMust = require('./civicMustDecide');
 
 const PHASES = new Set([
   'announced', 'legislation-filed', 'vote-scheduled', 'vote-ready',
@@ -193,6 +194,34 @@ function stageDecisions(cycle) {
   log('phase vocab: strict check over ' + touched.size + ' touched initiative(s)');
   if (touched.size > MAX_ROWS) {
     failures.push({ check: 'diff-size', detail: touched.size + ' initiatives touched > max ' + MAX_ROWS + ' — implausibly large decision cycle' });
+  }
+
+  // 2b. HIGH stuck-initiative must be a phase MOVE (advance or fail). Silence
+  // and restating the current phase are not decisions — they fail the apply.
+  const audit = readJson(path.join(ROOT, 'output', 'engine_audit_c' + cycle + '.json')) || {};
+  const demands = civicMust.demandsFromAudit(audit, trackerSnap || audit);
+  if (demands.length) {
+    const writeSetForMust = [];
+    const decisionsDirMust = path.join(ROOT, 'output', 'city-civic-database', 'initiatives');
+    if (fs.existsSync(decisionsDirMust)) {
+      for (const slug of fs.readdirSync(decisionsDirMust)) {
+        const d = readJson(path.join(decisionsDirMust, slug, 'decisions_c' + cycle + '.json'));
+        if (d) writeSetForMust.push({ slug, d });
+      }
+    }
+    const verdict = civicMust.checkMustDecide(demands, civicMust.writesFromAssembled(writeSetForMust));
+    log('must-decide: ' + demands.length + ' demand(s), ' + (verdict.ok ? 'satisfied' : 'MISSING ' + verdict.missing.map(d => d.id).join(', ')));
+    if (!verdict.ok) {
+      for (const d of verdict.missing) {
+        failures.push({
+          check: 'must-decide',
+          detail: d.id + ' (' + d.name + ') sat in ' + (d.currentPhase || 'its current stage') +
+            (d.cyclesInState ? ' for ' + d.cyclesInState + ' cycles' : '') +
+            ' — Sunday must write a different ImplementationPhase (advance, or ' +
+            civicMust.FAIL_PHASES.join('/') + '). Empty or restated phase is not a decision.'
+        });
+      }
+    }
   }
 
   // 3. engine-verbiage scan over statement prose

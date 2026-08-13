@@ -14,6 +14,16 @@ The next reporting question is: What remains to be learned here?
 assert.equal(isSummaryArticle(brief).fail, true);
 assert.ok(isSummaryArticle(brief).reasons.includes('auditor-lede'));
 
+const weatherLede = `# Cycle 103 opened in winter conditions: 49°F overcast
+
+Someone said:
+
+> “It is cold.”
+
+More words here that still open on the snapshot the ledger already printed.
+`;
+assert.ok(isSummaryArticle(weatherLede).reasons.includes('weather-snapshot-lede'));
+
 const lived = `# Nightline still had the lights
 
 Kai stood under the Nightline awning on a quiet West Oakland night and watched

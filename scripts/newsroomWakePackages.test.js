@@ -252,7 +252,7 @@ assert.equal(noah.assignment.popid, 'POP-00157');
 assert.equal(noah.assignment.beatDomain, 'ENVIRONMENT');
 assert.equal(packagesApi.routeFor(noah, 'angle').model, 'deepseek/deepseek-chat');
 assert.equal(noah.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
-assert.ok(noah.reviewProfile.textureConditions.some(v => v.includes('ordinary weather')));
+assert.ok(noah.reviewProfile.textureConditions.some(v => v.includes('do not announce season')));
 assert.ok(noah.reviewProfile.canonBlockers.some(v => v.includes('invented forecast')));
 
 const gate = packagesApi.gateAssignments([

@@ -10,6 +10,8 @@
 
 const fs = require('fs');
 const path = require('path');
+const { isStuckDiagnosis } = require('./civicMustDecide');
+const seasonFeel = require('./buildSeasonFeelSlice');
 
 const ROOT = path.join(__dirname, '..');
 
@@ -46,8 +48,8 @@ const CIVIC_SEATS = Object.freeze({
     name: 'Noah Tan',
     popid: 'POP-00157',
     domain: 'environment',
-    approach: 'Environment approach: translate the supplied environmental or weather signal into grounded civic terms. Do not invent measurements, forecasts, or scientific conclusions.',
-    hook: 'The supplied civic record identifies an environmental condition or decision that needs grounded explanation.'
+    approach: 'Do not announce the season. Show what this cold or holiday cycle moved in GodWorld — a named person or Packet-named place living it. Temperature is context, never the lede.',
+    hook: 'A person or place in this city is living the season. The weather line is not the story.'
   },
   'angela-reyes': {
     name: 'Angela Reyes',
@@ -100,6 +102,7 @@ function luisCandidateScope(entry, profiles) {
         .test(String(row.RoleType || '')));
     if (!row) excluded.push({ popid, reason: 'NO_LEDGER_PROFILE' });
     else if (sportsRole) excluded.push({ popid, reason: 'PRO_ATHLETE_CIVIC_INELIGIBLE' });
+    else if (!String(row.SMPageId || '').trim()) excluded.push({ popid, reason: 'NEVER_WOKEN' });
     else {
       const name = String(row.Name || '').trim();
       const role = String(row.RoleType || '').trim() || null;
@@ -164,7 +167,7 @@ function loadCycleCivicEntries(cycle, root = ROOT) {
     : [];
   civicLane.forEach((row, index) => {
     const entry = normalizeEntry(row, 'desk-signal', index);
-    if (entry) entries.push(entry);
+    if (entry && !isStuckDiagnosis(entry.label + ' ' + entry.ref)) entries.push(entry);
   });
 
   const decisionsPath = path.join(root, 'output', 'cron-civic', 'decisions_lane_c' + cycle + '.json');
@@ -202,6 +205,18 @@ function loadCycleCivicEntries(cycle, root = ROOT) {
         label: 'Cycle ' + cycle + ' weather | Season ' + match[1].trim() + ' | ' + match[2].trim()
       }, 'world-summary', entries.length);
       if (entry) entries.push(entry);
+      const feel = seasonFeel.parseSeasonFeel(fs.readFileSync(summaryPath, 'utf8'), cycle, { root });
+      for (const row of feel.moved) {
+        const lived = normalizeEntry({
+          kind: 'season-feel',
+          ref: row.src,
+          label: row.text,
+          hood: row.hood,
+          popids: row.popids,
+          handle: { angle: row.text, hookLine: row.text, citizens: row.citizens }
+        }, 'season-feel', entries.length);
+        if (lived) entries.push(lived);
+      }
     }
   } catch (_) { /* missing summary leaves Noah empty and fail-closed */ }
 
@@ -228,7 +243,8 @@ function scoreEntryForSeat(entry, slug) {
     if (MATCHERS[slug].test(text)) score += 35;
     return score;
   }
-  if (slug === 'noah-tan' && entry.kind === 'weather') return 60;
+  if (slug === 'noah-tan' && entry.kind === 'season-feel') return 80;
+  if (slug === 'noah-tan' && entry.kind === 'weather') return 5;
   const matcher = MATCHERS[slug];
   return matcher && matcher.test(text) ? 45 : 0;
 }
@@ -359,19 +375,25 @@ function prewriteForSeat(slug, top, candidateScope) {
     };
   }
   if (slug === 'noah-tan') {
+    const lived = top.kind === 'season-feel' ? top.label : publicWeatherFact(top);
     return {
-      anchorFacts: [publicWeatherFact(top)],
+      anchorFacts: [lived],
       forbidden: [
-        'Do not add forecasts, comparisons, records, alerts, hazards, causes, measurements, agencies, resident reactions, or impacts absent from the supplied weather record.'
+        'Do not announce the season or temperature as the story.',
+        'Do not import real-world Oakland winter tropes absent from the Packet.',
+        'Do not add forecasts, agencies, or unsupplied measurements.'
       ],
-      schema: 'WEATHER-GROUND-BRIEF-1',
-      method: 'CONDITION_BASELINE',
+      schema: 'SEASON-FEEL-1',
+      method: 'WHAT_MOVED_ON_DAYS_LIKE_THIS',
       missing: [
-        'comparison with a prior Cycle, forecast, seasonal norm, or historical record',
-        'an alert, hazard, health effect, travel effect, infrastructure effect, or causal explanation',
-        'a named monitoring authority, affected resident, observation, quote, or next scheduled update'
+        'do not invent a feeling the Who Lived It / Evening Texture lines do not support'
       ],
-      impactEvidence: { state: 'UNESTABLISHED', subjects: [], facts: [], src: null }
+      impactEvidence: {
+        state: (top.popids && top.popids.length) ? 'SUPPLIED' : 'PLACE_ONLY',
+        subjects: top.popids || [],
+        facts: [lived],
+        src: top.ref
+      }
     };
   }
   if (slug !== 'luis-navarro') {
@@ -433,7 +455,9 @@ function packetForEntries(entries, slug, profiles) {
       ? publicHealthFact(top)
       : slug === 'angela-reyes'
         ? publicEducationFact(top)
-        : slug === 'noah-tan' ? publicWeatherFact(top) : top.label;
+        : slug === 'noah-tan'
+          ? (top.kind === 'season-feel' ? top.label : publicWeatherFact(top))
+          : top.label;
   return {
     seat: { slug, name: seat.name, popid: seat.popid, domain: seat.domain },
     empty: false,

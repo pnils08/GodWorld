@@ -18,6 +18,8 @@ try {
         { kind: 'initiative', ref: 'INIT-TRANSIT', label: 'Fruitvale Transit Hub | Status visioning-complete', hood: 'Fruitvale' },
         { kind: 'anomaly', ref: 'AUDIT-STUCK', label: 'stuck-initiative | Fruitvale Transit Hub stalled for 9 cycles', hood: 'Fruitvale',
           popids: ['POP-90001', 'POP-90002'], handle: { citizens: ['Test Civic Resident (POP-90001)', 'Test Pro Athlete (POP-90002)'] } },
+        { kind: 'anomaly', ref: 'AUDIT-INCOHERE', label: 'incoherence | OARI listed operational while CrimeIndex contradicts', hood: 'West Oakland',
+          popids: ['POP-90001', 'POP-90002'], handle: { citizens: ['Test Civic Resident (POP-90001)', 'Test Pro Athlete (POP-90002)'] } },
         { kind: 'initiative', ref: 'INIT-HEALTH', label: 'Temescal Community Health Center | construction-active', hood: 'Temescal' },
         { kind: 'initiative', ref: 'INIT-YOUTH', label: 'Oakland Youth Apprenticeship Pipeline | pilot-active', hood: 'East Oakland' },
         { kind: 'ripple', ref: 'ENV-1', label: 'environmental air quality review | public comment window', hood: 'West Oakland' },
@@ -26,11 +28,11 @@ try {
     }
   }, null, 2));
   fs.writeFileSync(path.join(output, 'simulation_ledger_snapshot.jsonl'), [
-    { Name: 'Test Civic Resident', POPID: 'POP-90001', RoleType: 'Mechanic', Neighborhood: 'Fruitvale', EconomicProfileKey: 'Skilled Trade' },
+    { Name: 'Test Civic Resident', POPID: 'POP-90001', RoleType: 'Mechanic', Neighborhood: 'Fruitvale', EconomicProfileKey: 'Skilled Trade', SMPageId: 'cp-POP-90001' },
     { Name: 'Test Pro Athlete', POPID: 'POP-90002', RoleType: 'Right Fielder, Test Team', EconomicProfileKey: 'SPORTS_OVERRIDE' }
   ].map(row => JSON.stringify(row)).join('\n') + '\n');
   fs.writeFileSync(path.join(output, 'world_summary_c103.md'),
-    '# World Summary — Cycle 103\n\n**Season:** Winter | **Weather:** 49°F overcast, NW 11 mph, overcast (frontState OVERCAST), humidity 67, visibility 10\n');
+    '# World Summary — Cycle 103\n\n**Season:** Winter | **Weather:** 49°F overcast, NW 11 mph, overcast (frontState OVERCAST), humidity 67, visibility 10\n\n## Who Lived It (cycle 103)\n\n### Relationship (1)\n- POP-90001 Test Civic Resident — relied on familiar social circles during cold period (Fruitvale)\n');
 
   const slice = civic.buildCivicDomainSlice(103, { root });
   assert.strictEqual(slice.empty, false);
@@ -49,11 +51,13 @@ try {
   assert(slice.packets['trevor-shimizu'].prewrite.missing.some(row => row.includes('timestamp')));
   assert(!slice.packets['trevor-shimizu'].prewrite.anchorFacts.includes('INIT-TRANSIT'),
     'source pointer must not be duplicated as a factual sentence');
-  assert.strictEqual(slice.packets['luis-navarro'].story.ref, 'AUDIT-STUCK');
+  assert.strictEqual(slice.packets['luis-navarro'].story.ref, 'AUDIT-INCOHERE');
+  assert(!slice.packets['luis-navarro'].candidates.some(row => /stuck-initiative/i.test(row.label + ' ' + row.ref)),
+    'stuck-initiative is a civic decision demand, not a newsroom assignment');
   assert.strictEqual(slice.packets['luis-navarro'].prewrite.schema, 'INVESTIGATION-BRIEF-1');
   assert.strictEqual(slice.packets['luis-navarro'].prewrite.method, 'KNOWN_UNKNOWN');
   assert.deepStrictEqual(slice.packets['luis-navarro'].prewrite.anchorFacts,
-    ['stuck-initiative | Fruitvale Transit Hub stalled for 9 cycles']);
+    ['incoherence | OARI listed operational while CrimeIndex contradicts']);
   assert.deepStrictEqual(slice.packets['luis-navarro'].prewrite.silenceClock,
     { state: 'UNESTABLISHED', value: null, src: null });
   assert.deepStrictEqual(slice.packets['luis-navarro'].prewrite.reportingEvidence.recordChecks,
@@ -95,12 +99,13 @@ try {
     prewrite: slice.packets['angela-reyes'].prewrite.anchorFacts
   })));
   assert.strictEqual(slice.packets['noah-tan'].seat.popid, 'POP-00157');
-  assert.strictEqual(slice.packets['noah-tan'].story.ref, 'output/world_summary_c103.md:3');
-  assert.strictEqual(slice.packets['noah-tan'].prewrite.schema, 'WEATHER-GROUND-BRIEF-1');
-  assert.strictEqual(slice.packets['noah-tan'].prewrite.method, 'CONDITION_BASELINE');
-  assert(!/frontState/i.test(slice.packets['noah-tan'].story.label));
-  assert.deepStrictEqual(slice.packets['noah-tan'].prewrite.impactEvidence,
-    { state: 'UNESTABLISHED', subjects: [], facts: [], src: null });
+  assert.strictEqual(slice.packets['noah-tan'].story.ref, 'output/world_summary_c103.md ## Who Lived It');
+  assert.match(slice.packets['noah-tan'].story.label, /Test Civic Resident/);
+  assert.strictEqual(slice.packets['noah-tan'].prewrite.schema, 'SEASON-FEEL-1');
+  assert.strictEqual(slice.packets['noah-tan'].prewrite.method, 'WHAT_MOVED_ON_DAYS_LIKE_THIS');
+  assert(!/frontState|49°F|opened in winter/i.test(slice.packets['noah-tan'].story.label));
+  assert.strictEqual(slice.packets['noah-tan'].prewrite.impactEvidence.state, 'SUPPLIED');
+  assert.deepStrictEqual(slice.packets['noah-tan'].prewrite.impactEvidence.subjects, ['POP-90001']);
   assert.strictEqual(slice.packets['carmen-delaine'].story.ref, 'INIT-TRANSIT');
   assert.deepStrictEqual(slice.packets['carmen-delaine'].prewrite.anchorFacts,
     ['Fruitvale Transit Hub | Status visioning-complete', 'INIT-TRANSIT'],

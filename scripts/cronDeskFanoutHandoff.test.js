@@ -10,6 +10,7 @@ const {
   writerArtifactTag,
   evaluationStem,
   validateAngleEvaluationOptions,
+  selectTypedSlice,
   buildWriterArgs,
   activateWakeContext,
   stageRoute,
@@ -142,6 +143,8 @@ assert.strictEqual(validateAngleEvaluationOptions({
   model: 'meta-llama/llama-3.3-70b-instruct', tag: 'llama', stage: 'angle',
   packetContract: 'v2', noGate: true, fanout: false,
 }), true);
+const halTypedSlice = { kind: 'hal-archive', empty: false };
+assert.strictEqual(selectTypedSlice([null, { empty: true }, halTypedSlice]), halTypedSlice);
 assert.throws(
   () => writerArtifactTag({ name: '---' }, null),
   /no usable reporter name/

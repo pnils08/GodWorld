@@ -116,6 +116,14 @@ assert.match(hal.reviewProfile.purpose, /unsupplied one remains explicitly missi
 assert.ok(hal.reviewProfile.textureConditions.some(v => v.includes('historical echo')));
 assert.ok(hal.reviewProfile.canonBlockers.some(v => v.includes('historical person')));
 
+const tanya = packages['tanya-cruz'];
+assert.equal(tanya.version, 'TANYA-LEP2-1');
+assert.equal(tanya.active, false);
+assert.equal(tanya.assignment.popid, 'POP-00014');
+assert.equal(tanya.assignment.beatDomain, 'SPORTS_SIDELINE');
+assert.equal(packagesApi.routeFor(tanya, 'angle').model, 'deepseek/deepseek-chat');
+assert.ok(tanya.reviewProfile.canonBlockers.some(v => v.includes('clubhouse or sideline access')));
+
 const jordan = packages['business-desk'];
 assert.equal(jordan.version, 'JORDAN-LEP2-1');
 assert.equal(jordan.requiredDaily, true);

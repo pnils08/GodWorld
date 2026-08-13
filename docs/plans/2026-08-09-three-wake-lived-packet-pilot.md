@@ -351,7 +351,7 @@ slice and model text is a starting work surface, not an adopted contract.
 | NOAH-LEP2-1 | Noah Tan / POP-00157 | environment | Article LEP/2; `WEATHER-GROUND-BRIEF-1`; every Cycle's deterministic weather condition | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed; ordinary weather narrates the Cycle |
 | ANTHONY-LEP2-1 | Anthony Raines / POP-00017 | sports analytics | Article LEP/2; typed line-card and unresolved-subject boundary | DeepSeek / DeepSeek / local source brief | [ ] second-model benchmark | attended W1-W3/Rhea passed; registry remains inactive pending benchmark |
 | HAL-LEP2-1 | Hal Richmond / POP-00007 | sports history | Article LEP/2; typed present-fact/unsupplied-history boundary | Candidate DeepSeek / DeepSeek / DeepSeek | [ ] model benchmark + proof | registry inactive; local Packet/manifest gates passed |
-| pending | Tanya Cruz / POP-00014 | sports sideline | Candidate Article LEP/2; clubhouse/sideline signal | Candidate DeepSeek; benchmark | [ ] | [ ] |
+| TANYA-LEP2-1 | Tanya Cruz / POP-00014 | sports sideline | Article LEP/2; typed record/access/observation boundary | Candidate DeepSeek / DeepSeek / DeepSeek | [ ] model benchmark + proof | registry inactive; local slice/Packet gates passed |
 | pending | Simon Leary / POP-00016 | sports long view | Candidate Article LEP/2; sports as civic architecture | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | Ariana Reyes / POP-00133 | sports analytics | Candidate Article LEP/2; numeric/board pulse | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | Maria Keen / POP-00013 | culture | Candidate Article LEP/2; evening-life/neighborhood ground | Candidate DeepSeek; benchmark | [ ] | [ ] |
@@ -603,6 +603,9 @@ its fixed-Packet model comparison and attended W1-W3/Rhea proof are still open.
 - Hal's typed package and local manifest proof pass, but model comparison and
   attended W1-W3/Rhea remain open; the registry must stay inactive until both
   pass.
+- Tanya's typed package keeps access, observed action, room mood, dialogue,
+  injury detail, and team response `NOT_SUPPLIED` unless the Packet carries
+  evidence; model comparison and attended proof remain open.
 - Expansion remains blocked per journalist until that person's wake models,
   Packet contract, creative authority, movement contract, and Rhea profile are
   encoded in an active package and the existing cohort review is complete.
@@ -650,3 +653,4 @@ its fixed-Packet model comparison and attended W1-W3/Rhea proof are still open.
 - 2026-08-13 (codex) — Builder ruled ordinary weather is Cycle narration and all Rhea-cleared Articles become canon at Saturday's gate regardless of Edition selection. NOAH-LEP2-1 now sources every Cycle's deterministic weather line; W1 schema, zero-call W2/W3, manifest, and independent Rhea passed with zero flags. The tenth C103 Article staged; Anthony Raines is next.
 - 2026-08-13 (codex) — Built ANTHONY-LEP2-1 and repaired shared sports parsing: exact subject authority, false-name rejection, split stat ownership, and unresolved-POPID abstention. DeepSeek W1/W2, local W3, manifest, and Gemini Rhea passed; the eleventh C103 Article staged. The registry stays inactive because the required same-Packet second-model benchmark was rejected before inference.
 - 2026-08-13 (codex) — Built inactive HAL-LEP2-1 local gates: present feed facts now enter W1/W3 manifests, unresolved names cannot become interview targets, and unsupplied history or witnessed memory is blocked rather than treated as a franchise carveout. Fixed-Packet comparison and attended W1-W3/Rhea remain open.
+- 2026-08-13 (codex) — Built inactive TANYA-LEP2-1 local gates and repaired the live typed-slice selector: Hal and Tanya now reach W1 as typed slices, while sideline access, observation, mood, dialogue, injuries, and team response remain unsupplied unless Packet-backed.

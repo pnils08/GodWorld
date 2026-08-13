@@ -975,6 +975,10 @@ function validateAngleEvaluationOptions(opts) {
   return true;
 }
 
+function selectTypedSlice(slices) {
+  return (slices || []).find(slice => slice && !slice.empty) || null;
+}
+
 function writerArtifactTag(assign, personaSlug) {
   if (!assign || personaSlug) return null;
   const tag = nameSlug(assign.name);
@@ -1061,6 +1065,7 @@ async function runAngle(assign) {
   let eveningSlice = null;
   let anthonySlice = null;
   let halSlice = null;
+  let tanyaSlice = null;
   let economicSlice = null;
   let safetySlice = null;
   let civicDomainSlice = null;
@@ -1126,6 +1131,19 @@ async function runAngle(assign) {
       }
     } catch (e) {
       log('hal slice load failed (non-fatal): ' + e.message);
+    }
+  } else if (personaSlug === 'tanya-cruz') {
+    try {
+      const { loadTanyaSlice } = require(path.join(__dirname, 'buildTanyaSlice'));
+      tanyaSlice = loadTanyaSlice(cycle);
+      if (tanyaSlice && !tanyaSlice.empty) {
+        story = tanyaSlice.story || story;
+        approach = tanyaSlice.approach || approach;
+        log('tanya slice loaded — pulse ' + tanyaSlice.pulse.className +
+          ' score ' + tanyaSlice.pulse.score);
+      }
+    } catch (e) {
+      log('tanya slice load failed (non-fatal): ' + e.message);
     }
   } else if (desk === 'business') {
     try {
@@ -1479,7 +1497,8 @@ async function runAngle(assign) {
     if (PACKET_ACTIVE) {
       inputPacket = livedPacket.buildAnglePacket({
         cycle, desk, reporter: asker, story, approach,
-        slice: jaxSlice || pslayerSlice || anthonySlice || economicSlice || safetySlice || eveningSlice || civicDomainSlice, lane,
+        slice: selectTypedSlice([jaxSlice, pslayerSlice, anthonySlice, halSlice, tanyaSlice,
+          economicSlice, safetySlice, eveningSlice, civicDomainSlice]), lane,
       });
       ask = livedPacket.prompt(inputPacket);
     }
@@ -2585,6 +2604,7 @@ module.exports = {
   writerArtifactTag,
   evaluationStem,
   validateAngleEvaluationOptions,
+  selectTypedSlice,
   buildWriterArgs,
   collectQuoteAsks,
   activateWakeContext,

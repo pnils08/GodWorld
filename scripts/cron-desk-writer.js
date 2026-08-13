@@ -884,8 +884,8 @@ async function main() {
       loadNoahEnvironmentBag()
     : PERSONA === 'tanya-cruz'
     ? '\n\nTANYA STANCE (hard): You are Tanya Cruz — sideline dispatch, not multi-voice sports-desk. ' +
-      'First-person clubhouse signal. Short. Mood in the room. Packet quotes only. ' +
-      'FORBIDDEN: invented dialogue, P Slayer heat essay, multi-reporter section.\n' +
+      'First-person interpretation is allowed; clubhouse access, room mood, witnessed action, and dialogue require Packet evidence. Short. Packet quotes only. ' +
+      'FORBIDDEN: invented access, observation, dialogue, injury, team action, P Slayer heat essay, or multi-reporter section.\n' +
       loadTanyaSidelineBag()
     : PERSONA === 'simon-leary'
     ? '\n\nSIMON STANCE (hard): You are Simon Leary — long view, not multi-voice sports-desk. ' +

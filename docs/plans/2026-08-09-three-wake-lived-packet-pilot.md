@@ -544,11 +544,20 @@ prose-engine, and structural checks passed, and independent Gemini Rhea passed
 with zero flags for `$0.0428`. No Article was staged, published, uploaded, or
 ingested.
 
+The builder then approved Rhea as the weekday staging disposition: any Article
+with a passing verdict moves to staged, while a non-pass stays flagged for
+review. `scripts/reconcileRheaDisposition.js` closes the standalone-rerun seam
+with hash-bound verdicts, reversible local history, and a dry-run default. The
+Cycle 103 reconciliation staged all eight current Rhea passes and cleared their
+stable active flag markers into history. It did not publish, upload, ingest, or
+write any external system; the Saturday run remains the only canon door.
+
 ## Open questions
 
-- The seven-Article repaired cohort proof is complete. Preserve Carmen's medium
-  public-wording flag as a polish item. Dr. Lila's package and attended proof
-  are complete; the next unchecked Task 17 seat is Angela Reyes.
+- All eight current Cycle 103 Rhea passes are staged behind the probation wall.
+  Preserve Carmen's medium public-wording flag as a polish item. Angela Reyes is
+  the next unchecked Task 17 seat after Claude lands the protected restricted-
+  verbiage cleanup.
 - Luis's thin-record path passed locally, but his reporting-trail-backed Sonnet
   path and Rhea proof remain open. A local manifest pass is not publication or
   full package graduation.
@@ -593,3 +602,4 @@ ingested.
 - 2026-08-13 (codex) — Builder approved fresh Jax W2 plus seven Gemini Rhea calls. OpenRouter's total key limit rejected both two-target Llama requests and the first Gemini request before inference; local Jax W3 passed with zero quotes. Rhea now excludes machine-only `## INTAKE` from model review while deterministic intake validation remains.
 - 2026-08-13 (codex) — After the key limit was raised, fresh Jax W2 landed 2/2 bounded sources and local W3 passed. Independent Gemini Rhea passed all seven repaired Articles with zero high flags for `$0.3223`; Carmen retained one medium public-wording flag. No publication or ingestion occurred.
 - 2026-08-13 (codex) — Added LILA-LEP2-1 with a typed health-service brief and public tracker translation. DeepSeek beat Llama on the identical W1 schema; zero-call W2/W3 and independent Rhea passed with zero flags. No publication or ingestion occurred; Angela Reyes is next.
+- 2026-08-13 (codex) — Added the local Rhea-disposition reconciler and applied the builder's staging policy to Cycle 103: eight passes staged, stable failure markers archived as review history, and no publication or canon ingestion executed. Angela remains gated on Claude's protected verbiage cleanup.

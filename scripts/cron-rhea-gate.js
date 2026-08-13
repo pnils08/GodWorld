@@ -26,6 +26,7 @@ require('/root/GodWorld/lib/env');
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
+const crypto = require('crypto');
 const { execFileSync } = require('child_process');
 const {
   normalizePriorArcRequirement,
@@ -550,6 +551,7 @@ async function main() {
 
   const out = {
     draft: draftRel, cycle, backend: BACKEND, model: BACKEND === 'api' ? API_MODEL : MODEL,
+    draftSha256: crypto.createHash('sha256').update(draftText).digest('hex'),
     pass: gatePass,
     flags: flagsArr,
     flagCount: Array.isArray(verdict.flags) ? verdict.flags.length : null,

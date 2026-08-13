@@ -90,7 +90,12 @@ Jax runs Llama/Llama/Sonnet, Carmen and Jordan run DeepSeek on all three wakes,
 and P Slayer runs Llama on all three wakes. P Slayer's fan-pulse slice and
 Jordan's economic/storefront slice travel as typed LEP/2 evidence and creative
 limits. Their write stages run the persona-aware Rhea API gate and leave output
-staged or flagged behind the probation wall.
+staged or flagged behind the probation wall. A passing Rhea verdict routes the
+reviewed Article to `output/cron-compare/staged/`; a non-pass remains in
+`output/cron-compare/flagged/` for review. Standalone Rhea reruns close that
+local disposition seam through `scripts/reconcileRheaDisposition.js`, which is
+dry-run by default and performs no external writes. Staging is not canon: the
+Saturday run remains the only canon-ingestion door.
 
 ### NotebookLM Newsroom Brief (Daily)
 Builds a source-grounded listening brief. The brief is a newsroom aid and is not

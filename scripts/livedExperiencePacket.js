@@ -139,6 +139,19 @@ function creativeBriefFromSlice(slice) {
       sceneRule: clean(slice.scene && slice.scene.colorRoom, 500) || null,
       sourcePointers: uniq(slice.pointers || []).slice(0, 5),
     };
+  } else if (slice.kind === 'simon-longview') {
+    const prewrite = slice.prewrite || {};
+    brief = {
+      kind: 'sports-long-view',
+      pulseClass: clean(slice.pulse && slice.pulse.className, 100) || null,
+      bagModes: (prewrite.bagModes || []).slice(0, 2).map(mode =>
+        clean([mode && mode.id, mode && mode.name].filter(Boolean).join(' '), 120)).filter(Boolean),
+      claim: clean(prewrite.claim, 500) || null,
+      anchorFacts: uniq(prewrite.anchorFacts).slice(0, 8),
+      missing: uniq(prewrite.missing).slice(0, 8),
+      sceneRule: clean(slice.scene && slice.scene.colorRoom, 500) || null,
+      sourcePointers: uniq(slice.pointers || []).slice(0, 5),
+    };
   } else if (slice.kind === 'economic-storefront') {
     const prewrite = slice.prewrite || {};
     brief = {

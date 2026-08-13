@@ -1088,6 +1088,7 @@ async function runAngle(assign) {
   let anthonySlice = null;
   let halSlice = null;
   let tanyaSlice = null;
+  let simonSlice = null;
   let economicSlice = null;
   let safetySlice = null;
   let civicDomainSlice = null;
@@ -1166,6 +1167,19 @@ async function runAngle(assign) {
       }
     } catch (e) {
       log('tanya slice load failed (non-fatal): ' + e.message);
+    }
+  } else if (personaSlug === 'simon-leary') {
+    try {
+      const { loadSimonSlice } = require(path.join(__dirname, 'buildSimonSlice'));
+      simonSlice = loadSimonSlice(cycle);
+      if (simonSlice && !simonSlice.empty) {
+        story = simonSlice.story || story;
+        approach = simonSlice.approach || approach;
+        log('simon slice loaded — pulse ' + simonSlice.pulse.className +
+          ' score ' + simonSlice.pulse.score);
+      }
+    } catch (e) {
+      log('simon slice load failed (non-fatal): ' + e.message);
     }
   } else if (desk === 'business') {
     try {
@@ -1519,7 +1533,7 @@ async function runAngle(assign) {
     if (PACKET_ACTIVE) {
       inputPacket = livedPacket.buildAnglePacket({
         cycle, desk, reporter: asker, story, approach,
-        slice: selectTypedSlice([jaxSlice, pslayerSlice, anthonySlice, halSlice, tanyaSlice,
+        slice: selectTypedSlice([jaxSlice, pslayerSlice, anthonySlice, halSlice, tanyaSlice, simonSlice,
           economicSlice, safetySlice, eveningSlice, civicDomainSlice]), lane,
       });
       ask = livedPacket.prompt(inputPacket);
@@ -1611,6 +1625,13 @@ async function runAngle(assign) {
       players: halSlice.players,
       scene: halSlice.scene,
       candidates: (halSlice.candidates || []).slice(0, 6)
+    } : null,
+    simonSlice: simonSlice && !simonSlice.empty ? {
+      pulse: simonSlice.pulse,
+      prewrite: simonSlice.prewrite,
+      players: simonSlice.players,
+      scene: simonSlice.scene,
+      candidates: (simonSlice.candidates || []).slice(0, 6)
     } : null,
     economicSlice: economicSlice && !economicSlice.empty ? {
       pulse: economicSlice.pulse,

@@ -154,21 +154,27 @@ const morningVoice = voicedCycle('morning');
     '<memory-context source="citizen-page:POP-00170">I opened the shop before the oven caught.</memory-context>',
     103, '', '', '', '', '',
   );
-  assert('return-visit prompt carries the last page entry',
-    /What's been on your mind lately/.test(system) && /opened the shop/.test(system));
+  assert('return-visit prompt carries the last page entry', /opened the shop/.test(system));
 }
 
 {
+  const life = [
+    'Y2C51 — [Daily] spent time unwinding in the evening',
+    'Y2C51 — [Neighborhood] dodged the running groups circling the lake',
+    'Y2C51 — [Promotion] took the night-shift lead at the Temescal shop',
+  ].join('\n');
+  const occasion = wake.pickLivedEvent(life, 'POP-00170:103:evening');
+  assert('occasion is an engine LifeHistory line, tag stripped',
+    occasion && !/\[/.test(occasion) && /unwinding|running groups|night-shift lead/.test(occasion));
   const { system, user } = wake.buildVoicePrompts(
-    person('POP-00170', { life: 'Y2C51 — [Daily] spent time unwinding in the evening' }),
+    person('POP-00170', { life }),
     [], '', '', '', '', '', '', '',
     103, '', '', '', '', '',
-    'opened the oven on a cold-morning crack in the sourdough, glad the regulars still came',
   );
-  assert('ECL grain sits in the prompt as the event',
-    /sit inside this event/.test(system) && /cold-morning crack/.test(system));
-  assert('vague Daily stamp yields to the composed line',
-    /dial mark/.test(system) && /This is what happened/.test(user));
+  assert('wake sits in the engine event, not a reflect-assignment',
+    /What the city already did to you/.test(system) && /Don't say you are reflecting/.test(user));
+  assert('user prompt is the occasion, not think-on-the-page',
+    !/think on the page/.test(user) && !/sit inside this event/.test(system));
 }
 
 try { fs.rmSync(TMP, { recursive: true, force: true }); } catch (e) {}

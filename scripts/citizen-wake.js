@@ -38,20 +38,15 @@ const { buildPool, coResidents, loadLifeArc, loadSportsSlice, loadNeighborhoodTe
 const { selectProvocation, _hash53 } = require('/root/GodWorld/lib/provocationBank'); // T5 varied-provocation bank; _hash53 seeds T1 draw + T2 slot
 const { matchBondTargets_ } = require('./bondTargetMatch'); // engine.101 — intake BondTarget (col I) + T4 ripple share one match
 
-
 const ARGV = process.argv.slice(2);
 const DRY = ARGV.includes('--dry-run');
 const arg = (k, d) => { const m = ARGV.find((a) => a.startsWith(`--${k}=`)); return m ? m.split('=')[1] : d; };
 const WAKE = (arg('wake', 'evening') || 'evening').toLowerCase();
 const FORCE_POP = arg('pop', null);
 
-const ROTATION_MEMORY = 100;    // don't re-wake the last N citizens (engine.48 T1: 25 -> 100 — reach past the orbit)
+const ROTATION_MEMORY = 100;    // don't re-wake the last N citizens (engine.48 T1: 25 -> 100 — reach past the orbit; re-wakes still possible within ~3 weeks at 5/day)
 const STATE_FILE = path.join(__dirname, '..', 'logs', 'citizen-wake-state.json');
 const LOG_FILE = path.join(__dirname, '..', 'logs', 'citizen-wake.log');
-const SNAPSHOT_FILE = path.join(__dirname, '..', 'output', 'simulation_ledger_snapshot.jsonl');
-const PAGE_CACHE_DIR = path.join(__dirname, '..', 'output', 'citizen-pages');
-const LOCAL_PAGE_N = 3;
-const LOCAL_PAGE_CAP = 320;
 const TENSION_FILE = path.join(__dirname, '..', 'logs', 'citizen-tension-state.json'); // B2 index — page is the durable surface, this skips a page search
 const RIPPLE_FILE = path.join(__dirname, '..', 'logs', 'citizen-ripple-state.json'); // engine.48 T4 — cross-citizen ripple register, keyed "from->to"
 const RIPPLE_EXPIRY_CYCLES = 12; // mirrors TENSION_EXPIRY_CYCLES; read by citizen-exchange.js too
@@ -74,62 +69,8 @@ function logLine(s) {
   try { fs.appendFileSync(LOG_FILE, line); } catch (e) {}
   console.log(s);
 }
-function loadState() { try { return JSON.parse(fs.readFileSync(STATE_FILE, 'utf8')); } catch (e) { return { recent: [], ever: [] }; } }
+function loadState() { try { return JSON.parse(fs.readFileSync(STATE_FILE, 'utf8')); } catch (e) { return { recent: [] }; } }
 function saveState(st) { try { fs.writeFileSync(STATE_FILE, JSON.stringify(st, null, 2)); } catch (e) {} }
-
-// Seed the ever-woken set from the ledger snapshot's SMPageId so a wiped
-// logs/citizen-wake-state.json does not treat 200+ existing wiki pages as first visits.
-function seedEver(state, snapshotPath) {
-  if (!state || state.everSeeded) return state || { recent: [], ever: [] };
-  const ever = new Set(state.ever || []);
-  try {
-    const txt = fs.readFileSync(snapshotPath || SNAPSHOT_FILE, 'utf8');
-    for (const line of txt.split('\n')) {
-      if (!line.trim()) continue;
-      let row;
-      try { row = JSON.parse(line); } catch (e) { continue; }
-      const id = String((row && (row.POPID || row.popId)) || '').toUpperCase();
-      const page = String((row && row.SMPageId) || '').trim();
-      if (id && page) ever.add(id);
-    }
-  } catch (e) { /* snapshot missing — ever stays whatever the state file already had */ }
-  state.ever = [...ever];
-  state.everSeeded = true;
-  return state;
-}
-
-function appendLocalPage(popId, entry, dir) {
-  try {
-    const root = dir || PAGE_CACHE_DIR;
-    fs.mkdirSync(root, { recursive: true });
-    const rec = {
-      ts: new Date().toISOString(),
-      cycle: entry && entry.cycle != null ? entry.cycle : null,
-      wake: (entry && entry.wake) || null,
-      text: String((entry && entry.text) || '').trim().slice(0, LOCAL_PAGE_CAP),
-    };
-    if (!rec.text) return false;
-    fs.appendFileSync(path.join(root, String(popId).toUpperCase() + '.jsonl'), JSON.stringify(rec) + '\n');
-    return true;
-  } catch (e) { return false; }
-}
-
-function loadLocalPage(popId, n, dir) {
-  try {
-    const raw = fs.readFileSync(path.join(dir || PAGE_CACHE_DIR, String(popId).toUpperCase() + '.jsonl'), 'utf8');
-    const rows = raw.split('\n').filter(Boolean).map((l) => {
-      try { return JSON.parse(l); } catch (e) { return null; }
-    }).filter((r) => r && r.text);
-    return rows.slice(-(n || LOCAL_PAGE_N)).reverse().map((r) => String(r.text).slice(0, LOCAL_PAGE_CAP));
-  } catch (e) { return []; }
-}
-
-function resolvePageMemory(popId, smBlock, localTexts) {
-  if (smBlock && String(smBlock).trim()) return { block: smBlock, source: 'supermemory' };
-  const texts = (localTexts || []).filter(Boolean);
-  if (!texts.length) return { block: '', source: 'empty' };
-  return { block: memoryFence.wrap(texts.join('\n\n'), 'citizen-page-local:' + popId), source: 'local' };
-}
 
 // ---- B2 tension register (seams Task 3) — loop-side only: no dial writes, no sheet writes,
 // no LifeHistory writes, never Reflection_Intake. State: { popId: [{q, cy, status}] }.
@@ -207,78 +148,42 @@ function voicedPopIds() {
   return out;
 }
 
-// engine.48 T1 — seeded WEIGHTED draw: high-delta citizens stay favored but mid-pool
-// citizens get real probability mass. Same (cycle, wake) -> same pick.
-// Lanes (2026-08-13): morning prefers a return visit (wiki page already exists);
-// other wakes prefer a first-timer until the city has pages. Voiced 1-in-5 stays
-// inside the lane and never re-picks someone already in recent.
-function pickWeighted(candidates, cycle, wake, slot) {
-  if (!candidates.length) return null;
-  const weights = candidates.map((p) => 1 + (p.eventMag || 0) * 2 + dials.deviation(p.cur) / 50);
-  const total = weights.reduce((s, w) => s + w, 0);
-  let x = (_hash53('select:' + cycle + ':' + wake, 0x5eed) % Math.max(1, Math.floor(total * 1000))) / 1000;
-  for (let i = 0; i < candidates.length; i++) {
-    if (x < weights[i]) return { c: candidates[i], slot };
-    x -= weights[i];
-  }
-  return { c: candidates[0], slot };
-}
-
-function selectCitizen(pool, state, cycle, opts) {
-  const o = opts || {};
-  const wake = o.wake != null ? o.wake : WAKE;
-  const forcePop = o.forcePop !== undefined ? o.forcePop : FORCE_POP;
-  const voicedIds = o.voicedIds || voicedPopIds();
-  if (forcePop) {
-    const forced = pool.find((p) => p.popId === String(forcePop).toUpperCase());
+// engine.48 T1 — seeded WEIGHTED draw replaces the deterministic sort[0] pick: high-delta
+// citizens stay favored but mid-pool citizens get real probability mass. Same (cycle, wake)
+// -> same pick. T2 — a seeded 1-in-5 slot goes to the least-recently-woken voiced citizen
+// that passes the same pool filters, so authored voices keep cycling into the loop.
+function selectCitizen(pool, state, cycle) {
+  if (FORCE_POP) {
+    const forced = pool.find((p) => p.popId === FORCE_POP.toUpperCase());
     if (forced) return { c: forced, slot: 'forced' };
-    logLine(`--pop ${forcePop} not in wake pool; falling back to rotation`);
+    logLine(`--pop ${FORCE_POP} not in shaped pool; falling back to rotation`);
   }
   const recentList = state.recent || [];
   const recent = new Set(recentList);
-  const ever = new Set(state.ever || []);
 
-  const notRecent = pool.filter((p) => !recent.has(p.popId));
-  const uncovered = notRecent.filter((p) => !ever.has(p.popId));
-  const returning = notRecent.filter((p) => ever.has(p.popId));
-
-  let lane = notRecent.length ? notRecent : pool;
-  let slot = 'rotation';
-  if (wake === 'morning' && returning.length) {
-    lane = returning;
-    slot = 'return';
-  } else if (uncovered.length) {
-    lane = uncovered;
-    slot = 'first';
-  }
-
-  if (_hash53('voiced:' + cycle + ':' + wake, 0x5eed) % 5 === 0) {
-    const voiced = voicedIds.map((id) => lane.find((p) => p.popId === id)).filter(Boolean);
+  // T2 voiced slot — before the weighted draw
+  if (_hash53('voiced:' + cycle + ':' + WAKE, 0x5eed) % 5 === 0) {
+    const voiced = voicedPopIds().map((id) => pool.find((p) => p.popId === id)).filter(Boolean);
     if (voiced.length) {
+      // least-recently-woken first: recent is most-recent-first, so absent beats present
+      // and a deeper index beats a shallower one.
       const oldness = (p) => { const i = recentList.indexOf(p.popId); return i < 0 ? Number.MAX_SAFE_INTEGER : i; };
       voiced.sort((a, b) => oldness(b) - oldness(a));
-      return { c: voiced[0], slot: 'voiced-' + slot };
+      return { c: voiced[0], slot: 'voiced' };
     }
+    logLine('voiced slot fired but no voiced citizen passes the pool filters; falling through to rotation');
   }
 
-  return pickWeighted(lane, cycle, wake, slot) || { c: pool[0], slot: 'rotation' };
-}
-
-function stripLifeLine(line) {
-  return String(line || '')
-    .replace(/^\s*(?:Y\d+)?C\d+\s*—\s*/i, '')
-    .replace(/^\d{4}-\d{2}-\d{2}[^\u2014—-]*[\u2014—-]\s*/, '')
-    .replace(/^\[[^\]]+\]\s*/, '')
-    .trim();
-}
-
-// The occasion is an engine-written LifeHistory line. Daily/Neighborhood filler
-// counts — most lottery draws are small. Do not invent a second event.
-function pickLivedEvent(life, seed) {
-  const lines = String(life || '').split('\n').map((l) => stripLifeLine(l)).filter(Boolean);
-  if (!lines.length) return '';
-  const cand = lines.slice(-3);
-  return cand[_hash53(String(seed || 'life'), 0xee71) % cand.length];
+  let candidates = pool.filter((p) => !recent.has(p.popId));
+  if (!candidates.length) candidates = pool; // everyone woken recently -> reset the cycle
+  const weights = candidates.map((p) => 1 + p.eventMag * 2 + dials.deviation(p.cur) / 50);
+  const total = weights.reduce((s, w) => s + w, 0);
+  let x = (_hash53('select:' + cycle + ':' + WAKE, 0x5eed) % Math.max(1, Math.floor(total * 1000))) / 1000;
+  for (let i = 0; i < candidates.length; i++) {
+    if (x < weights[i]) return { c: candidates[i], slot: 'rotation' };
+    x -= weights[i];
+  }
+  return { c: candidates[0], slot: 'rotation' };
 }
 
 function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, familyLine, healthLine, pageMemory, cycle, tensionBlock, editionLine, rippleLine, cardBlock, voiceLine) {
@@ -306,7 +211,7 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
   const texture = textureLine ? `\n\nAround your neighborhood: ${textureLine}` : ''; // T2 immediate world
   // T1c own-page memory — already fenced (memoryFence) by loadOwnPageReadback; appended as a distinct
   // tail so the fence block stays intact (mirrors lib/personaProvider.augment).
-  const memory = pageMemory ? `\n\n---\n\n${pageMemory}` : '';
+  const memory = pageMemory ? `\n\n---\n\nWhat's been on your mind lately, from your own private reflections:\n${pageMemory}` : '';
   // B2 open tensions — unresolved questions carried between wakes; fenced upstream (main flow)
   const tensions = tensionBlock ? `\n\nQuestions you've been sitting with, still unresolved:\n${tensionBlock}` : '';
   // immersion-ingredient order: continuity (T1a state + T1c own-memory) -> people (around you + history-with) -> world/A's (T1b) -> surroundings (T2)
@@ -314,20 +219,18 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
   // facts never compete with page recall. T11 — authored speech texture rides beside it.
   const anchor = cardBlock ? `\n\nWho you are:\n${cardBlock}` : '';
   const talk = voiceLine ? `\n\nHow you talk: ${voiceLine}` : '';
-  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. Your temperament: ${disp}.${trajLine}${arcLine}${health}${anchor}${talk}\n\nReal things from your life recently:\n${c.life || ''}${family}${who}${bonds}${ripple}${opinions}${sports}${paper}${texture}${memory}${tensions}`;
-  const occasion = pickLivedEvent(c.life, [c.popId, cycle, WAKE].join(':'));
-  const prov = occasion
-    ? { id: 'engine-event', route: 'life', text: occasion }
-    : selectProvocation(c.popId, cycle, WAKE, {
-      citizen: { name: c.name, occ: c.occ, nh: c.nh, age: c.age, disp: disp },
-      neighbors: neighbors, sportsLine: sportsLine, lifeArc: lifeArc,
-      textureLine: textureLine, bondsLine: bondsLine, traj: traj,
-    });
-  // User message is the engine event (or a bank latch). No writing assignment —
-  // those clauses land in the mouth.
-  const frame = WAKE_FRAME[WAKE] || WAKE_FRAME.evening;
-  const user = occasion ? `${frame}. ${occasion}` : `${frame}. ${prov.text}`;
-  return { system, user, disp, prov, occasion };
+  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}${health}${anchor}${talk}\n\nReal things from your life recently:\n${c.life}${family}${who}${bonds}${ripple}${opinions}${sports}${paper}${texture}${memory}${tensions}`;
+  // T5 — varied-provocation question bank. The fixed "small things on your mind"
+  // prompt becomes a deterministically-seeded pick latching a real signal this
+  // citizen perceives, so two citizens woken the same cycle are prompted
+  // DIFFERENTLY (fixes vector-2: the shared question that converges the mode).
+  const prov = selectProvocation(c.popId, cycle, WAKE, {
+    citizen: { name: c.name, occ: c.occ, nh: c.nh, age: c.age, disp: disp },
+    neighbors: neighbors, sportsLine: sportsLine, lifeArc: lifeArc,
+    textureLine: textureLine, bondsLine: bondsLine, traj: traj,
+  });
+  const user = `${WAKE_FRAME[WAKE] || WAKE_FRAME.evening}. ${prov.text}\n\nIn 4-5 sentences, think on the page the way you actually would — private, honest, first person. Don't narrate events like a story; just sit with it.`;
+  return { system, user, disp, prov };
 }
 
 async function generateVoice(system, user) {
@@ -341,13 +244,13 @@ async function generateVoice(system, user) {
   return String(j.choices?.[0]?.message?.content || '').trim();
 }
 
-async function main() {
+(async () => {
   const cycle = Number(arg('cycle', null)) || (() => { try { return getCurrentCycle(); } catch (e) { return null; } })();
-  const pool = await buildPool({ shapedMin: 0 });
-  logLine(`pool: ${pool.length} ledger citizens with lived history (wake=${WAKE}, cycle=${cycle}, dry=${DRY})`);
+  const pool = await buildPool();
+  logLine(`pool: ${pool.length} shaped citizens with lived history (wake=${WAKE}, cycle=${cycle}, dry=${DRY})`);
   if (!pool.length) { logLine('empty pool — nothing to wake'); process.exit(0); }
 
-  const state = seedEver(loadState());
+  const state = loadState();
   const picked = selectCitizen(pool, state, cycle);
   const c = picked.c;
   const neighbors = await coResidents(c.nh, c.popId);
@@ -389,16 +292,13 @@ async function main() {
     contextText: [textureLine, sportsLine, bondsLine, familyLine, healthLine, c.nh, c.occ, WAKE_FRAME[WAKE] || ''].filter(Boolean).join(' '),
     extraCandidates: resonance.tensionCandidates(tensionState[c.popId]).concat(resonance.unlivedCandidates(c.memReg)),
   });
-  const localTexts = loadLocalPage(c.popId, LOCAL_PAGE_N);
-  const resolved = resolvePageMemory(c.popId, pageRead.block, localTexts);
-  const pageMemory = resolved.block;
-  logLine(`page-recall: sm=${pageRead.block ? 'yes' : 'no'} local=${localTexts.length} used=${resolved.source}`);
+  const pageMemory = pageRead.block;
   const tensionBlock = openTensions.length
     ? memoryFence.wrap(openTensions.map((t) => t.q).join('\n'), 'citizen-tension:' + c.popId)
     : '';
   const { system, user, disp, prov } = buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, familyLine, healthLine, pageMemory, cycle, tensionBlock, editionLine, rippleLine, cardBlock, voiceLine);
 
-  logLine(`woke ${c.popId} ${c.name} — ${c.occ || 'resident'}, ${c.nh}${c.age ? ', ' + c.age : ''} | eventMag=${c.eventMag} | ${disp} | occasion=${prov.id} ${String(prov.text || '').slice(0, 80)} wake=${WAKE} slot=${picked.slot}`);
+  logLine(`woke ${c.popId} ${c.name} — ${c.occ || 'resident'}, ${c.nh}${c.age ? ', ' + c.age : ''} | eventMag=${c.eventMag} | ${disp} | provocation=${prov.id} route=${prov.route} wake=${WAKE} slot=${picked.slot}`);
   if (DRY) console.log('\n--- perception (system prompt) ---\n' + system + '\n----------------------------------');
   if (DRY) console.log('\n--- provocation (user prompt, T5) ---\n' + user + '\n----------------------------------');
   const reflection = await generateVoice(system, user);
@@ -426,7 +326,6 @@ async function main() {
     extra: { affect: cls.affect || null, event: cls.event || null }, // recall affectWeight input (B4)
   });
   if (appended.error) { logLine('appendReflection_ ERROR: ' + appended.error); process.exit(1); }
-  appendLocalPage(c.popId, { cycle, wake: WAKE, text: reflection });
   logLine(`page ${ptr.tag} (${ptr.created ? 'created' : 'existing'}) <- reflection doc ${appended.id || '?'}`);
 
   // 3) B2 tension register (seams Task 3) — voice-memory only: page lines + local index, NEVER
@@ -489,18 +388,6 @@ async function main() {
 
   // 5) record rotation + recall bookkeeping (staleness input for future wakes — live runs only)
   state.recent = [c.popId, ...(state.recent || [])].slice(0, ROTATION_MEMORY);
-  state.ever = [...new Set([c.popId, ...(state.ever || [])])];
   saveState(state);
   resonance.markRecalled(c.popId, cycle, pageRead.keys);
-}
-
-if (require.main === module) {
-  main().catch((e) => { logLine('FATAL ' + e.message); process.exit(1); });
-}
-
-module.exports = {
-  ROTATION_MEMORY, LOCAL_PAGE_N, LOCAL_PAGE_CAP,
-  seedEver, appendLocalPage, loadLocalPage, resolvePageMemory,
-  pickWeighted, selectCitizen, buildVoicePrompts, voicedPopIds,
-  pickLivedEvent, stripLifeLine,
-};
+})().catch((e) => { logLine('FATAL ' + e.message); process.exit(1); });

@@ -54,6 +54,7 @@ require('../lib/env');
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
+const crypto = require('crypto');
 
 const ROOT = path.resolve(__dirname, '..');
 const STAGED = path.join(ROOT, 'output', 'cron-compare', 'staged');
@@ -74,6 +75,18 @@ const ROLE_TO_USAGE = { subject: 'featured', mentioned: 'mentioned' };
 // ---------------------------------------------------------------------------
 // Staged-set reader — every .staged.json for the cycle, with its article text.
 // ---------------------------------------------------------------------------
+function verifyStagedProof(side, articleText, fallbackVerdict) {
+  if (!side || side.status !== 'staged') return { ok: false, reason: 'sidecar status is not staged' };
+  const articleSha256 = crypto.createHash('sha256').update(articleText).digest('hex');
+  const proofs = [side.rhea, fallbackVerdict].filter(Boolean);
+  const matched = proofs.find(proof => proof.pass === true && proof.draftSha256 === articleSha256);
+  if (!matched) {
+    const passed = proofs.some(proof => proof.pass === true);
+    return { ok: false, reason: passed ? 'Rhea pass hash does not match staged Article' : 'no exact Rhea pass proof' };
+  }
+  return { ok: true, articleSha256 };
+}
+
 function loadStagedSet(cycle) {
   const out = [];
   if (!fs.existsSync(STAGED)) return out;
@@ -82,12 +95,28 @@ function loadStagedSet(cycle) {
     let side;
     try { side = JSON.parse(fs.readFileSync(path.join(STAGED, f), 'utf8')); } catch (_) { continue; }
     if (String(side.cycle) !== String(cycle)) continue;
-    const artPath = path.join(ROOT, side.article || '');
+    const artPath = path.resolve(ROOT, side.article || '');
+    if (path.dirname(artPath) !== STAGED) {
+      console.log('[skip] staged sidecar points outside staged/: ' + f);
+      continue;
+    }
     if (!fs.existsSync(artPath)) { console.log('[skip] sidecar without article: ' + f); continue; }
+    const text = fs.readFileSync(artPath, 'utf8');
+    let fallbackVerdict = null;
+    try {
+      fallbackVerdict = JSON.parse(fs.readFileSync(path.join(ROOT, 'output', 'cron-compare',
+        f.replace(/\.staged\.json$/, '.rhea.json')), 'utf8'));
+    } catch (_) { /* reconciled sidecars carry the proof inline */ }
+    const proof = verifyStagedProof(side, text, fallbackVerdict);
+    if (!proof.ok) {
+      console.log('[skip] unproved staged Article ' + f + ': ' + proof.reason);
+      continue;
+    }
     out.push({
       stem: f.replace(/\.staged\.json$/, ''),
       sidecar: side,
-      text: fs.readFileSync(artPath, 'utf8')
+      text,
+      articleSha256: proof.articleSha256
     });
   }
   return out;
@@ -741,4 +770,4 @@ if (require.main === module) {
 }
 
 module.exports = { loadStagedSet, articleCustomId, articleDoc, usageRowsFor, ROLE_TO_USAGE,
-  aggregateStorylineSignals, mergeStorylineLedger, STORYLINE_LEDGER_HEADERS };
+  aggregateStorylineSignals, mergeStorylineLedger, STORYLINE_LEDGER_HEADERS, verifyStagedProof };

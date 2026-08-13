@@ -1,7 +1,7 @@
 ---
 title: Newsroom Canon Flow — Saturday Gate, Autonomy Graduation, Narrator
 created: 2026-08-04
-updated: 2026-08-10
+updated: 2026-08-13
 type: plan
 tags: [media, canon, infrastructure, architecture, active]
 sources:
@@ -96,7 +96,7 @@ One cron, six steps, in order:
 2. **Curation.** Rank staged articles mechanically first (self-score footers + INTAKE-derived moves-the-sim signals: storyline advancement, citizen impact, initiative pressure), Mags picks the top ~8–9. Storyline dedup happens here.
 3. **Narration.** Mags writes the Cycle Pulse as narrator — drawing on the curated set, quoting her own staff's reporting by name. One voice on the Pulse, seventeen in canon. (Hazard watch from the research file: sameness-of-register is the new cookie-cutter door; the accuracy audit in step 1 is also her interrogation surface, so narration isn't her only mode.)
 4. **Publish — the canon door.** Edition (narration + curated articles) → permanent NotebookLM notebook + standard canon ingest; `byline-published` Citizen_Media_Usage rows fire (engine.88 fame anchor unchanged).
-5. **Supermemory sweep — everything cleared, per-article.** ALL staged articles (curated or not) → bay-tribune container, one document per article, tagged journalist + cycle + INTAKE metadata. Not edition-combined. Idempotent via the engine.91 customId scheme.
+5. **Supermemory sweep — everything cleared, per-article.** ALL staged articles (curated or not) → bay-tribune container, one document per article, tagged journalist + cycle + INTAKE metadata. Not edition-combined. Idempotent via the engine.91 customId scheme. Before any consumer sees the set, the reader requires `status=staged`, an Article path inside `staged/`, and an exact Rhea-pass SHA-256 match from the sidecar or its adjacent legacy verdict; a manually dropped-in or post-review-mutated file fails closed.
 6. **Sheet ingest.** INTAKE-derived rows write via the Phase 1 parser.
 
 **Acceptance:** one Saturday run end-to-end unattended: scorecard emitted with a %-to-90 verdict; edition in the permanent notebook; every cleared article individually retrievable in Supermemory by journalist tag and by cycle tag; usage rows landed; nothing from `flagged/` touched any surface.
@@ -115,6 +115,7 @@ One cron, six steps, in order:
 
 ## Changelog
 
+- 2026-08-13 (codex) — Hardened the Saturday staged-set reader: status, path containment, Rhea pass, and reviewed Article hash are now rechecked before audit, curation, sweep, Sheets, or storyline consumers. The C103 dry sweep resolved all 18 exact-proved Articles, including Noah's weather Article and Anthony's legacy sidecar, with no external write.
 - 2026-08-10 (codex) — Upstream scheduled fanout is now ADR-0017 package-only with Jax as the first active cohort. This downstream Saturday canon door is unchanged; only Rhea-passed staged Articles can enter its candidate set.
 - 2026-08-09 (codex) — [[../adr/0017-typed-lived-experience-packets]] names this Saturday Edition/post-publish path as the life-cycle closure: samples, private reflections, and staged drafts do not become shared lived experience until this canon door succeeds. The upstream Packet pilot is [[2026-08-09-three-wake-lived-packet-pilot]].
 - 2026-08-04 — Initial plan (research-build, remote session). Ignited by Mike completing the narrator design — the adopt-trigger in the research file. Phase order = dependency order: INTAKE contract first (everything downstream reads it), Saturday run third, graduation last.

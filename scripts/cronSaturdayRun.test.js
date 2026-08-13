@@ -8,7 +8,8 @@
  */
 
 const { articleCustomId, articleDoc, usageRowsFor, ROLE_TO_USAGE,
-  aggregateStorylineSignals, mergeStorylineLedger, STORYLINE_LEDGER_HEADERS } = require('./cron-saturday-run');
+  aggregateStorylineSignals, mergeStorylineLedger, STORYLINE_LEDGER_HEADERS,
+  verifyStagedProof } = require('./cron-saturday-run');
 
 let passed = 0;
 let failed = 0;
@@ -72,6 +73,17 @@ console.log('Test 4: articleCustomId stable');
 {
   assert('deterministic', articleCustomId('102', 'stem') === articleCustomId('102', 'stem'));
   assert('cycle-distinct', articleCustomId('102', 'stem') !== articleCustomId('103', 'stem'));
+}
+
+console.log('Test 4b: staged proof is exact and fail-closed');
+{
+  const crypto = require('crypto');
+  const sha = crypto.createHash('sha256').update(ENTRY.text).digest('hex');
+  assert('inline Rhea proof accepted', verifyStagedProof({ status: 'staged', rhea: { pass: true, draftSha256: sha } }, ENTRY.text, null).ok);
+  assert('legacy adjacent verdict accepted', verifyStagedProof({ status: 'staged' }, ENTRY.text, { pass: true, draftSha256: sha }).ok);
+  assert('non-staged status rejected', !verifyStagedProof({ status: 'flagged', rhea: { pass: true, draftSha256: sha } }, ENTRY.text, null).ok);
+  assert('missing Rhea pass rejected', !verifyStagedProof({ status: 'staged' }, ENTRY.text, null).ok);
+  assert('post-review Article mutation rejected', !verifyStagedProof({ status: 'staged', rhea: { pass: true, draftSha256: sha } }, ENTRY.text + 'changed', null).ok);
 }
 
 console.log('Test 5: aggregateStorylineSignals');

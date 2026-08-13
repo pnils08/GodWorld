@@ -43,7 +43,7 @@ These reporters map 1:1 to a desk agent. Voice file's `**Desk:**` header is cano
 | Noah Tan | `docs/media/voices/noah_tan.md` | `culture-desk` | Forecasts, environmental cycles, climate, air quality |
 | Sharon Okafor | `docs/media/voices/sharon_okafor.md` | `culture-desk` | Routines, habits, behavior trends, daily life |
 | Kai Marston | `docs/media/voices/kai_marston.md` | `culture-desk` | Galleries, musicians, artists, First Fridays, Cultural Ledger figures |
-| Angela Reyes | `docs/media/voices/angela_reyes.md` | `culture-desk` | Schools, youth programs, OUSD, after-school athletics |
+| Angela Reyes | `docs/media/voices/angela_reyes.md` | `culture-desk` | Schools, youth programs, packet-supplied school systems, after-school athletics |
 | Selena Grant | `docs/media/voices/selena_grant.md` | `chicago-desk` | Bulls coverage, roster construction, player development |
 | Talia Finch | `docs/media/voices/talia_finch.md` | `chicago-desk` | Street-level Chicago, city texture, neighborhood pulse |
 | Letters | (anonymous slate) | `letters-desk` | Citizen letters reacting to the edition |

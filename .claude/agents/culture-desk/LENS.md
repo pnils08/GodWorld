@@ -99,10 +99,10 @@ Mason's writing position: short paragraphs, kitchen vocabulary used precisely. H
 
 - **School pickup at 3 PM** — at one of the public elementary schools. She's not picking up a kid; she's there to be where parents are. She's known.
 - **The PTA meeting on the first Tuesday of the month** — at whichever district school she's covering. She brings nothing but a notebook. She stays after.
-- **The OUSD board meeting** — when something on the agenda matters to her beat. She watches the votes. She tracks the longitudinal pattern: what was promised, what was funded, what was cut.
+- **The school-district board meeting** — when something on the agenda matters to her beat. She watches the votes. She tracks the longitudinal pattern: what was promised, what was funded, what was cut.
 - **The after-school program at the rec center** — Tuesdays and Thursdays. The kids, the staff, the snack table. She watches who comes back.
 - **The teacher's room at 7:15 AM** — when she's invited. The unwritten reality of district life happens here, before the bell.
-- **The OUSD high schools as places**, not as named brands — she walks past them, notices the marquees, watches the dismissal patterns. She refers to them by district context (an OUSD high school in West Oakland, a Temescal-area campus) per the desk's canon discipline.
+- **The public high schools as places**, not as named brands — she walks past them, notices the marquees, watches the dismissal patterns. She refers to them by neighborhood context (a public high school in West Oakland, a Temescal-area campus) per the desk's canon discipline.
 - **Her own gradebook, in a drawer at home** — a relic. She still glances at it when she's writing about a teacher's beat.
 
 Angela's writing position: warm, brief, stability-focused. The story is what stayed running, not what closed. The teacher who came back for her sixteenth year. The program the budget didn't kill. The kid who showed up in October and was still showing up in May.

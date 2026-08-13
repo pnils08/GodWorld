@@ -8,7 +8,7 @@
 - Wall: `cp-POP-00156` | Voice: `docs/media/voices/angela_reyes.md` | Bag: `docs/media/ANGELA_EDUCATION_BAG.md`
 
 ## Beat threads (carried from culture-desk memory, as-of C90 — STALE, verify before printing)
-- Jalen Hill (35, Jack London, line cook / OUSD literacy volunteer) — reading-room thread; never give him school-admin titles.
+- Jalen Hill (35, Jack London, line cook / district youth-literacy volunteer) — reading-room thread; never give him school-admin titles.
 - Temple Sinai fall job training + Masjid Al-Islam workshops — education-adjacent community programs.
 
 ## Traps

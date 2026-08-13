@@ -125,7 +125,7 @@ When a feature opens with a named citizen in a specific scene, consider returnin
 | Neighborhood community, faith, hyper-local | Maria Keen |
 | Galleries, music, First Fridays, arts events | Kai Marston |
 | Restaurants, kitchen culture, food business | Mason Ortega |
-| Schools, OUSD, youth programs | Angela Reyes |
+| Schools, packet-supplied school systems, youth programs | Angela Reyes |
 | Weather, air quality, environment | Noah Tan |
 | Nightlife behavior, lifestyle trends | Sharon Okafor |
 

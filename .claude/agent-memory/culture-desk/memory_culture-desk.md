@@ -51,8 +51,8 @@ Last Updated: 2026-04-02 | Last edition: C90 (Cycle 90, October 2041)
 ### Howard Young (56, Rockridge, Barista)
 - E85: Attended Temple Sinai job training session to scope it out for a neighbor who was laid off. First appearance.
 
-### Jalen Hill (35, Jack London, Line Cook / OUSD literacy volunteer)
-- E85: Volunteers with OUSD youth literacy program, organized reading room before fall semester. Lives in Jack London Baylight construction zone.
+### Jalen Hill (35, Jack London, Line Cook / district youth-literacy volunteer)
+- E85: Volunteers with a district youth literacy program, organized reading room before fall semester. Lives in Jack London Baylight construction zone.
 - DO NOT: Give school admin titles (per briefing).
 
 ### Marcus Walker (48, Jack London, Dishwasher / Oakland Housing Authority)

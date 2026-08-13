@@ -102,14 +102,14 @@ Beyond the shared rules in CANON_RULES.md:
 - **You may NOT invent:** Cultural venue names — venues come from Cultural_Ledger. Faith organization names — congregations come from Faith_Organizations. Existing rules, unchanged. New citizens only when packet authorizes.
 - **You may name freely (Tier 1):**
   - The 17 Oakland neighborhoods (use canonical names per Neighborhood_Map)
-  - OUSD as a district (when context warrants); Peralta Community College District
+  - The city school district as generic context (when context warrants); the community-college district as generic context
   - UC Berkeley (public research university)
   - Public-civic geographic functions: Lake Merritt, Oakland Museum of California (public county museum), Chabot Space & Science Center (public), Oakland Zoo (when context-appropriate as a place reference), the Port of Oakland, AC Transit, BART, Highland Hospital, Alameda Health System, OPD when relevant to a community-safety thread
   - Faith institutions from Faith_Organizations (canon)
   - Cultural venues from Cultural_Ledger (canon)
   - Public union locals when stories surface labor context (NorCal Carpenters, IBEW Local 595, etc.)
 - **You must canon-check before naming (Tier 2):**
-  - **Individual named OUSD high schools** (Skyline, Castlemont, McClymonds, Oakland Tech, Fremont, etc.) — Angela's beat surface. District is tier 1; individual schools are tier 2 because they have identities, principals, athletic histories. Reference "an OUSD high school in [neighborhood]" until canon-substitutes exist. This is your highest-frequency tier-2 trap.
+  - **Real-world school names** (individual campuses and district brands) — Angela's beat surface. Schools have identities, principals, athletic histories; importing a real name imports its history. Use only institutions established in canon and supplied by the packet; otherwise reference "a public high school in [neighborhood]". This is your highest-frequency tier-2 trap.
   - **Branded community-health orgs** (La Clínica de la Raza, Roots Community Health, Asian Health Services, Lifelong Medical Care) — Elliot's beat may surface these in faith/social-services overlap. Functional reference until canon-substitute.
   - **Branded advocacy/community orgs** (Unity Council, Greenlining Institute, EBASE) — Maria's neighborhood beat may reach for them; same handling.
   - **Named arts institutions beyond public museums** (private galleries with proprietary identity, named theater companies, named music labels). Public-civic arts venues (e.g., the Oakland Museum) are tier 1.
@@ -126,7 +126,7 @@ Each reporter's specific tier-2 reach surface:
 - **Elliot** — interfaith and food-pantry pieces drag toward named regional faith bodies, named regional religious nonprofits. Faith_Organizations is the only canon source.
 - **Kai** — gallery / venue / label naming. Public museums are fine; private galleries beyond canon are tier 2. Music labels are tier 2.
 - **Mason** — restaurants. Cultural_Ledger first, always. National food brands are tier 2 — generic if needed.
-- **Angela** — individual named OUSD high schools. The single most frequent tier-2 trap on this desk. Use district-context phrasing.
+- **Angela** — real-world school names. The single most frequent tier-2 trap on this desk. Use packet-supplied canon institutions or neighborhood-context phrasing.
 - **Noah** — weather sourcing. NOAA, NWS, AQI agencies, Cal Fire (public agencies — tier 1, fine to reference). Don't quote real meteorologists by name.
 
 ### Read-Time Contamination Scan

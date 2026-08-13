@@ -141,7 +141,7 @@ Reporters by specialty (not exhaustive — anyone can cover anything):
 | Mason Ortega | Food & Hospitality | Restaurants, food culture, kitchen life, nightlife |
 | Sharon Okafor | Lifestyle | Daily routines, behavior trends, how people live |
 | Kai Marston | Arts & Entertainment | Galleries, music, First Fridays, cultural events |
-| Angela Reyes | Education | Schools, youth, OUSD, after-school programs |
+| Angela Reyes | Education | Schools, youth, packet-supplied school systems, after-school programs |
 | Noah Tan | Weather & Environment | Climate, air quality, seasons, outdoor life |
 | Dr. Lila Mezran | Health | Public health, clinics, medical stories |
 | Sgt. Rachel Torres | Public Safety | Crime, safety, OPD, neighborhood security |

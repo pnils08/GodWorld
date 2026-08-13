@@ -312,6 +312,7 @@ None — both resolved 2026-07-01 (Mike, S281):
 
 ## Changelog
 
+- 2026-08-13 (grok) — Loop-side ECL consumer: `scripts/eclWakeGrain.js` composes one Event_Content_Ledger line + fragment fill for the woken citizen. Vague Daily/PrevEvening dial stamps yield to that sentence. Fail-closed (unfillable $SLOT drops; entity slots only fill from a real neighbor or neighborhood). Tests: `node scripts/eclWakeGrain.test.js`.
 - 2026-07-01 — Initial draft (S281, research-build). Substrate verified by three parallel code reads (compressor/memory, wake loop, slotter/ctx/determinism). Five designs specced; 12 handoff tasks; 5 findings logged.
 - 2026-07-01 — Open questions resolved (Mike, S281): one shared `MemoryRegisters` column (volume + writer-symmetry basis); bias targets v1 public-figures-only. Plan ACTIVE; indexed + ROLLOUT back-linked same commit. Builds are engine-sheet's, gated per §Interlock.
 - 2026-07-02 — Task 6 DONE (engine-sheet, S283). Measure-twice surfaced a false premise: Design B1's "texture version shipped in the depth build" claim was wrong (bias-lite pool never landed in S280 — changelog cross-check + code grep), so Task 6 built the pool and the intent hook together (Mike-approved scope). B1 §What-it-is corrected in place. `MemoryRegisters.biases` now has its live writer; `.unlived` awaits Task 8. Deploy: local-only, clasp push pending a clean window.

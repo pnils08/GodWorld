@@ -157,6 +157,19 @@ const morningVoice = voicedCycle('morning');
     /What's been on your mind lately/.test(system) && /opened the shop/.test(system));
 }
 
+{
+  const { system, user } = wake.buildVoicePrompts(
+    person('POP-00170', { life: 'Y2C51 — [Daily] spent time unwinding in the evening' }),
+    [], '', '', '', '', '', '', '',
+    103, '', '', '', '', '',
+    'opened the oven on a cold-morning crack in the sourdough, glad the regulars still came',
+  );
+  assert('ECL grain sits in the prompt as the event',
+    /sit inside this event/.test(system) && /cold-morning crack/.test(system));
+  assert('vague Daily stamp yields to the composed line',
+    /dial mark/.test(system) && /This is what happened/.test(user));
+}
+
 try { fs.rmSync(TMP, { recursive: true, force: true }); } catch (e) {}
 
 console.log(failed === 0 ? `\nPASS — ${passed} passed` : `\nFAIL — ${passed} passed, ${failed} failed`);

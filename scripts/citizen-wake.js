@@ -37,6 +37,7 @@ const { buildPool, coResidents, loadLifeArc, loadSportsSlice, loadNeighborhoodTe
   loadCardAnchor, loadVoiceTexture } = require('/root/GodWorld/lib/wakePerception'); // engine.48 T10 + T11; loadFamily loop-doctrine 2026-08-04; loadHealthState engine.101 health slice
 const { selectProvocation, _hash53 } = require('/root/GodWorld/lib/provocationBank'); // T5 varied-provocation bank; _hash53 seeds T1 draw + T2 slot
 const { matchBondTargets_ } = require('./bondTargetMatch'); // engine.101 — intake BondTarget (col I) + T4 ripple share one match
+const eclGrain = require('./eclWakeGrain');
 
 const ARGV = process.argv.slice(2);
 const DRY = ARGV.includes('--dry-run');
@@ -263,7 +264,7 @@ function selectCitizen(pool, state, cycle, opts) {
   return pickWeighted(lane, cycle, wake, slot) || { c: pool[0], slot: 'rotation' };
 }
 
-function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, familyLine, healthLine, pageMemory, cycle, tensionBlock, editionLine, rippleLine, cardBlock, voiceLine) {
+function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, familyLine, healthLine, pageMemory, cycle, tensionBlock, editionLine, rippleLine, cardBlock, voiceLine, eclLine) {
   const disp = dials.disposition(c.cur);
   const who = neighbors.length
     ? `\n\nPeople around you in ${c.nh}: ${neighbors.map((n) => `${n.name}${n.occupation ? ' (' + n.occupation + ')' : ''}`).join(', ')}.`
@@ -296,7 +297,11 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
   // facts never compete with page recall. T11 — authored speech texture rides beside it.
   const anchor = cardBlock ? `\n\nWho you are:\n${cardBlock}` : '';
   const talk = voiceLine ? `\n\nHow you talk: ${voiceLine}` : '';
-  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}${health}${anchor}${talk}\n\nReal things from your life recently:\n${c.life}${family}${who}${bonds}${ripple}${opinions}${sports}${paper}${texture}${memory}${tensions}`;
+  const happened = eclLine ? `\n\nWhat happened to you today — sit inside this event, do not recap it:\n${eclLine}` : '';
+  const lifeBlock = eclGrain.isVagueLifeTail(c.life) && eclLine
+    ? '(the usual daily stamp is just a dial mark — the event above is what actually happened)'
+    : c.life;
+  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}${health}${anchor}${talk}\n\nReal things from your life recently:\n${lifeBlock}${happened}${family}${who}${bonds}${ripple}${opinions}${sports}${paper}${texture}${memory}${tensions}`;
   // T5 — varied-provocation question bank. The fixed "small things on your mind"
   // prompt becomes a deterministically-seeded pick latching a real signal this
   // citizen perceives, so two citizens woken the same cycle are prompted
@@ -306,7 +311,9 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
     neighbors: neighbors, sportsLine: sportsLine, lifeArc: lifeArc,
     textureLine: textureLine, bondsLine: bondsLine, traj: traj,
   });
-  const user = `${WAKE_FRAME[WAKE] || WAKE_FRAME.evening}. ${prov.text}\n\nIn 4-5 sentences, think on the page the way you actually would — private, honest, first person. Don't brief the city and don't recap the paper. Sit where you actually are: a named person you always see, a counter you stand at, dirt that is this place's dirt. Don't invent names.`;
+  const user = eclLine
+    ? `${WAKE_FRAME[WAKE] || WAKE_FRAME.evening}. This is what happened: ${eclLine}\n\nIn 4-5 sentences, live that moment from where you are standing. Don't brief the city, don't name a tag, don't invent names.`
+    : `${WAKE_FRAME[WAKE] || WAKE_FRAME.evening}. ${prov.text}\n\nIn 4-5 sentences, think on the page the way you actually would — private, honest, first person. Don't brief the city and don't recap the paper. Sit where you actually are: a named person you always see, a counter you stand at, dirt that is this place's dirt. Don't invent names.`;
   return { system, user, disp, prov };
 }
 
@@ -364,6 +371,13 @@ async function main() {
   // T1c + B4 — fenced own-page read-back, resonance-scored against today's perception (seams Task 2).
   // Task 4: resolved tensions (open ones render in their own block below — no double-join) and
   // unlived entries (dormant until the Task-8 fold writes MemoryRegisters) compete as candidates.
+  const ecl = await eclGrain.grainForCitizen(c, {
+    cycle, wake: WAKE,
+    venue: c.nh ? ('a counter in ' + c.nh) : '',
+    contact: neighbors[0] && neighbors[0].name ? neighbors[0].name : '',
+  });
+  const eclLine = ecl.line || '';
+  logLine(`ecl-grain: ${ecl.source}${ecl.poolKey ? ' pool=' + ecl.poolKey : ''}${eclLine ? ' — ' + eclLine.slice(0, 80) : ''}`);
   const pageRead = await loadOwnPageReadback(c.popId, {
     cycle, wake: WAKE, milestone: lifeArc,
     contextText: [textureLine, sportsLine, bondsLine, familyLine, healthLine, c.nh, c.occ, WAKE_FRAME[WAKE] || ''].filter(Boolean).join(' '),
@@ -376,7 +390,7 @@ async function main() {
   const tensionBlock = openTensions.length
     ? memoryFence.wrap(openTensions.map((t) => t.q).join('\n'), 'citizen-tension:' + c.popId)
     : '';
-  const { system, user, disp, prov } = buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, familyLine, healthLine, pageMemory, cycle, tensionBlock, editionLine, rippleLine, cardBlock, voiceLine);
+  const { system, user, disp, prov } = buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, familyLine, healthLine, pageMemory, cycle, tensionBlock, editionLine, rippleLine, cardBlock, voiceLine, eclLine);
 
   logLine(`woke ${c.popId} ${c.name} — ${c.occ || 'resident'}, ${c.nh}${c.age ? ', ' + c.age : ''} | eventMag=${c.eventMag} | ${disp} | provocation=${prov.id} route=${prov.route} wake=${WAKE} slot=${picked.slot}`);
   if (DRY) console.log('\n--- perception (system prompt) ---\n' + system + '\n----------------------------------');

@@ -251,6 +251,12 @@ rotation, not daily model calls or desk capacity. The stage runner reapplies the
 same cap to saved fanout files, preferring source-assigned seats, so an artifact
 written under older expansion semantics cannot bypass the live limit.
 
+Wake artifacts are Cycle-scoped and may reuse the same filenames across several
+days. Existence is therefore not valid handoff proof. Before Wake 3, the report
+Packet must identify the current Cycle, package persona, reporter POPID, angle
+path, and assigned story, and its `ranAt` must be later than the current angle's
+`ranAt`. A failed or missing Wake 2 cannot silently revive a prior-day Packet.
+
 ## Rejected alternatives
 
 - **Prompt tuning only.** Rejected: the C102 defect was discarded structure and
@@ -281,3 +287,4 @@ written under older expansion semantics cannot bypass the live limit.
 - 2026-08-12 (codex) — Luis C103 showed that one state fact plus bounded reactions cannot support a full investigation without invented reporting history. LEP/2 now types absent reporting evidence as `NOT_SUPPLIED`, removes excluded leads from Luis's writer Packet, adapts evidence-thin work to a 180–280 word records brief, carries ledger-backed subject profiles, and blocks engine classifier/row leakage.
 - 2026-08-12 (codex) — A corrected Sonnet records-brief attempt still reversed the phase relationship, converted missing evidence into absence, split an approved quote, and inferred collective resident sentiment. `RECORDS_BRIEF` is now code-rendered with zero writer calls; the configured Sonnet route remains available only for `FULL_INVESTIGATION` Packets with supplied reporting events.
 - 2026-08-13 (codex) — Corrected package expansion semantics after the active cohort grew to nineteen: active packages are the LRU candidate pool, while the daily rota remains bounded at 2 civic / 2 sports / 1 culture / 1 business and the package gate can no longer insert seats.
+- 2026-08-13 (codex) — Closed the Cycle-scoped stale-packet seam: Wake 3 now requires a newer matching Wake 2 Packet for the current angle, persona, reporter POPID, and exact assigned story before any writer or Rhea work.

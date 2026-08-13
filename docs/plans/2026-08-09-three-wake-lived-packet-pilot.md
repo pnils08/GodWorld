@@ -244,6 +244,7 @@ The final scored treatment Article is
 - **Verify:** the saved fanout contains exactly two civic, two sports, one
   culture, and one business assignment; every assignment owns an active package
   and canonical byline-roster POPID; W2 and W3 consume the same six identities;
+  each W3 Packet is newer than and exactly bound to that seat's current W1 angle;
   Rhea pass/hash proof governs staged versus flagged; no generic wake or
   package-inserted seventh seat executes.
 - **Status:** [ ] first eligible proof is the next fresh M-F angle wake after
@@ -773,3 +774,4 @@ so an attended visual proof correctly remains open until Saturday compile.
 - 2026-08-13 (codex) — Audited the remaining special seats: Marbury is blocked on the absent current As_Roster + TrueSource artifact; Hartley waits for compiled C103 Edition + Sift inputs. Removed hardcoded real-world visual defaults from the active DJ bundle and added a pre-provider source-boundary gate; no image call or publication ran.
 - 2026-08-13 (codex) — Reconciled the nineteen-package cohort with the six-seat live schedule after saved fanouts exposed 8- and 11-seat expansion. Active packages now feed the existing staged-count/LRU selector at fixed 2/2/1/1 desk quotas; the package-only gate cannot insert seats, and every stage caps older saved fanouts before model work. Local tests only; no wake, Sheet write, or model call ran.
 - 2026-08-13 (codex) — Reopened Task 13 against the current cohort: graduation now requires one fresh unattended six-seat W1→W2→W3 chain with stable identities and exact Rhea/staging proof. The 2026-08-13 oversized saved fanout is runtime-contained but cannot prove the corrected builder path.
+- 2026-08-13 (codex) — Added a fail-closed W3 freshness gate after current C103 artifacts proved that Cycle-scoped filenames can leave yesterday's report Packet behind today's angle. Stage, Cycle, persona, reporter POPID, angle pointer, assigned story, and timestamp order must now agree before writer or Rhea work.

@@ -15,6 +15,7 @@ const {
   buildWriterArgs,
   activateWakeContext,
   stageRoute,
+  validateWakeHandoff,
 } = require('./cron-desk-run');
 const { buildOutputSlug } = require('./cron-desk-writer');
 
@@ -255,5 +256,34 @@ assert.equal(stageRoute('civic', noahAssignment.persona, 'angle').model,
   'deepseek/deepseek-chat');
 assert.equal(stageRoute('civic', noahAssignment.persona, 'write').model,
   'deepseek/deepseek-chat');
+
+const handoffAngle = {
+  stage: 'angle', cycle: '103', persona: 'luis-navarro', packetContract: 'v2',
+  reporter: { name: 'Luis Navarro', popid: 'POP-00636' },
+  assignment: { story: { ref: 'TEST-SIGNAL', label: 'Test signal' }, approach: 'Test approach' },
+  ranAt: '2026-08-13T11:16:54.979Z',
+};
+const handoffPacket = {
+  stage: 'report', cycle: '103', persona: 'luis-navarro', packetContract: 'v2',
+  reporter: { name: 'Luis Navarro', popid: 'POP-00636' },
+  assignment: { story: { ref: 'TEST-SIGNAL', label: 'Test signal' } },
+  angle: 'output/cron-compare/civic_c103_luis-navarro_packet-v2_angle.json',
+  ranAt: '2026-08-13T18:16:09.946Z',
+};
+const handoffExpected = {
+  cycle: '103', persona: 'luis-navarro',
+  reporter: { name: 'Luis Navarro', popid: 'POP-00636' },
+  anglePath: 'output/cron-compare/civic_c103_luis-navarro_packet-v2_angle.json',
+};
+assert.equal(validateWakeHandoff(handoffAngle, handoffPacket, handoffExpected), true);
+assert.throws(() => validateWakeHandoff(handoffAngle,
+  Object.assign({}, handoffPacket, { ranAt: '2026-08-12T18:16:09.946Z' }),
+  handoffExpected), /not newer than angle/);
+assert.throws(() => validateWakeHandoff(handoffAngle,
+  Object.assign({}, handoffPacket, { reporter: { name: 'Wrong', popid: 'POP-99999' } }),
+  handoffExpected), /reporter POPID mismatch/);
+assert.throws(() => validateWakeHandoff(handoffAngle,
+  Object.assign({}, handoffPacket, { assignment: { story: { ref: 'TEST-OTHER' } } }),
+  handoffExpected), /assigned story mismatch/);
 
 console.log('cron fan-out filename handoff tests: PASS');

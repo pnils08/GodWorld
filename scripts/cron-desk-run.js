@@ -174,6 +174,45 @@ function stageRoute(desk, persona, stage) {
 const slug = m => m.replace(/[^a-z0-9]+/gi, '-').toLowerCase();
 function readJson(p) { try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch (_) { return null; } }
 
+function validateWakeHandoff(angle, packet, expected) {
+  const want = expected || {};
+  const errors = [];
+  if (!angle || angle.stage !== 'angle') errors.push('angle stage missing or invalid');
+  if (!packet || packet.stage !== 'report') errors.push('report stage missing or invalid');
+  if (errors.length) throw new Error('invalid wake handoff: ' + errors.join('; '));
+
+  const cycle = String(want.cycle);
+  if (String(angle.cycle) !== cycle || String(packet.cycle) !== cycle) {
+    errors.push('Cycle mismatch');
+  }
+  if (String(angle.persona || '') !== String(want.persona || '') ||
+      String(packet.persona || '') !== String(want.persona || '')) {
+    errors.push('persona mismatch');
+  }
+  if (angle.packetContract !== packet.packetContract) errors.push('Packet contract mismatch');
+  if (want.anglePath && packet.angle !== want.anglePath) errors.push('angle pointer mismatch');
+
+  const angleTime = Date.parse(angle.ranAt);
+  const packetTime = Date.parse(packet.ranAt);
+  if (!Number.isFinite(angleTime) || !Number.isFinite(packetTime) || packetTime <= angleTime) {
+    errors.push('report packet is not newer than angle');
+  }
+
+  if (want.reporter && want.reporter.popid) {
+    if (!angle.reporter || angle.reporter.popid !== want.reporter.popid ||
+        !packet.reporter || packet.reporter.popid !== want.reporter.popid) {
+      errors.push('reporter POPID mismatch');
+    }
+  }
+  const angleStory = angle.assignment && angle.assignment.story;
+  const packetStory = packet.assignment && packet.assignment.story;
+  if (JSON.stringify(angleStory || null) !== JSON.stringify(packetStory || null)) {
+    errors.push('assigned story mismatch');
+  }
+  if (errors.length) throw new Error('invalid wake handoff: ' + errors.join('; '));
+  return true;
+}
+
 // engine.88 (S339): journalist usage→tier→fame. A gate-PASSED (staged) article
 // earns its author one Citizen_Media_Usage row, UsageType 'byline-landed'.
 // Phase 5 processMediaUsage_ counts it into the author's SL UsageCount next
@@ -2161,6 +2200,12 @@ async function runWrite(assign) {
   require('./canon-name-check').ensureLedgerSnapshot(cycle);
   const angle = readJson(anglePath);
   const packet = readJson(packetPath);
+  validateWakeHandoff(angle, packet, {
+    cycle,
+    persona: personaSlug,
+    reporter: assign || null,
+    anglePath: path.relative(ROOT, anglePath),
+  });
   const persona = personaInfo(personaSlug);
   const route = stageRoute(desk, personaSlug, 'write');
   const draftName = stem + slug(route.model) + '.md';
@@ -2704,6 +2749,7 @@ module.exports = {
   loadLane,
   yesterdaysFilings,
   buildIntakeSidecar,
+  validateWakeHandoff,
   exactRheaProof,
   stagedRheaProof,
 };

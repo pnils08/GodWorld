@@ -388,10 +388,11 @@ function emitPulses(texture, signals, cycle) {
       requiresName: true,
       source: 'world_summary ## Evening Texture · Nightlife',
       angle: quiet
-        ? 'A quiet night at ' + v.name + ' — what the supplied evening record can and cannot explain'
+        ? v.name + ' is open and quiet' + (v.hood ? ' in ' + v.hood : '') +
+          '. What that condition means is not yet established.'
         : 'Nightlife at ' + v.name + ' — who is out and what the block is saying',
       hookLine: quiet
-        ? 'The supplied evening record describes ' + v.name + ' as open and quiet.'
+        ? v.name + ' is open and quiet' + (v.hood ? ' in ' + v.hood : '') + '.'
         : v.name + ' holds the evening out' + (v.hood ? ' in ' + v.hood : '') + '.',
       sceneBits: [
         'VENUE: ' + v.name,
@@ -416,8 +417,8 @@ function emitPulses(texture, signals, cycle) {
       names: [],
       requiresName: false,
       source: 'world_summary ## Evening Texture · Nightlife meta',
-      angle: 'A quiet night across the city — where people still go and what the supplied record cannot explain',
-      hookLine: 'The supplied evening record describes city nightlife as quiet.',
+      angle: 'City nightlife is quiet. What that condition means is not yet established.',
+      hookLine: 'City nightlife is quiet.',
       sceneBits: ['EVENING RECORD: city nightlife is quiet'],
       nightlifeMeta: meta
     });

@@ -141,7 +141,8 @@ assert.match(sourceBrief, new RegExp(claims.publishableQuote.replace(/[.*+?^${}(
 assert.doesNotMatch(sourceBrief, /invented biography|collective sentiment/i);
 assert.doesNotMatch(sourceBrief, /supplied record establishes|source material provides|record leaves one question/i);
 assert.match(sourceBrief, /Test Resident said:/);
-assert.match(sourceBrief, /What additional record would explain the supplied condition\?/);
+assert.match(sourceBrief, /What remains to be learned here\?/);
+assert.doesNotMatch(sourceBrief, /supplied condition/i);
 assert.equal(p.auditArticle(sourceBrief, sourceBriefW3).ok, true);
 
 const trackerSourceBriefW3 = JSON.parse(JSON.stringify(sourceBriefW3));
@@ -152,6 +153,9 @@ trackerSourceBriefW3.manifest.approvedFacts = [{
   id: 'F-POINTER', t: 'FACT',
   text: 'Initiative_Tracker (InitiativeID TEST-ONLY); snapshot: engine_audit_c999.json snapshots.Initiative_Tracker',
   src: 'TEST-ONLY tracker'
+}, {
+  id: 'F-EVENING-RAW', t: 'FACT', text: 'EVENING RECORD: open and quiet',
+  src: 'TEST-ONLY evening record'
 }];
 trackerSourceBriefW3.known = trackerSourceBriefW3.manifest.approvedFacts.map(row => ({ ...row }));
 trackerSourceBriefW3.manifest.approvedQuotes = [];
@@ -161,6 +165,7 @@ const trackerSourceBrief = p.renderSourceBrief(trackerSourceBriefW3);
 assert.match(trackerSourceBrief,
   /TEST-ONLY Initiative is listed as passed, and its supplied phase is pilot active\./);
 assert.doesNotMatch(trackerSourceBrief, /engine_audit|snapshot:|CrimeIndex/);
+assert.doesNotMatch(trackerSourceBrief, /EVENING RECORD/);
 
 const inlinePopProfileW3 = p.buildWritePacket({
   cycle: 999, desk: 'civic', reporter, story, approach: 'Test the mismatch',

@@ -452,6 +452,28 @@
       "canonBlockers": ["invented franchise or city history, precedent, collective memory, institutional meaning, or civic behavior", "an invented cause, organizational intention, future plan, clubhouse fact, fan consensus, relationship, quote, event, statistic, or role", "Hal-style witnessed history, P Slayer fan heat, or Anthony-style unsupplied analytics presented as fact"]
     }
   },
+  "maria-keen": {
+    "version": "MARIA-LEP2-1",
+    "active": true,
+    "requiredDaily": true,
+    "persona": "maria-keen",
+    "assignment": { "desk": "culture", "name": "Maria Keen", "popid": "POP-00013", "beatDomain": "CULTURE_GROUND" },
+    "packetContract": "v2",
+    "models": {
+      "angle": { "provider": "openrouter", "model": "meta-llama/llama-3.3-70b-instruct" },
+      "report": { "provider": "openrouter", "model": "meta-llama/llama-3.3-70b-instruct" },
+      "write": { "provider": "openrouter", "model": "deepseek/deepseek-chat" }
+    },
+    "reviewProfile": {
+      "id": "maria-ground-v1",
+      "canonPolicy": "load-bearing",
+      "purpose": "Translate one Packet-named neighborhood or evening condition into a human-scale ground brief without inventing Maria's attendance, a neighbor, an action, a quote, or a civic outcome.",
+      "articleContract": { "renderMode": "SOURCE_BRIEF", "voice": "intimate neighborhood ground brief", "targetWords": "evidence-bounded", "opening": "one Packet-named place and condition", "closing": "the human observation still needed" },
+      "authorizedTexture": ["warm interpretation of a supplied place or condition without claiming attendance or observation", "unnamed sensory metaphor carrying no person, action, event, institution, or factual premise"],
+      "textureConditions": ["first person may express interpretation but may not assert presence, walking, seeing, hearing, meeting, speaking, or memory unless the Packet supplies it", "every named person, place, business, institution, gathering, action, quote, policy effect, and civic outcome requires Packet support"],
+      "canonBlockers": ["invented attendance, witnessed scene, neighbor, worker, patron, dialogue, gathering, action, policy consequence, or civic outcome", "an invented or altered venue, person, neighborhood, event, institution, relationship, date, count, or quote", "raw nightlife metrics, engine labels, or collective neighborhood sentiment presented as public fact"]
+    }
+  },
   "business-desk": {
     "version": "JORDAN-LEP2-1",
     "active": true,

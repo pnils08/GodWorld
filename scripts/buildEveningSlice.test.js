@@ -94,6 +94,8 @@ console.log('emitPulses + recommend:');
   });
   ok('quiet pulse keeps raw scoring fields out of public copy',
     !/VOLUME|WEATHER IMPACT|1\.03|restricted movement/i.test(publicQuiet));
+  ok('quiet pulse uses public prose instead of source scaffolding',
+    !/supplied (?:evening )?record/i.test(publicQuiet) && /is open and quiet/i.test(publicQuiet));
   ok('quiet pulse retains machine scoring metadata internally',
     quietPulse && quietPulse.nightlifeMeta && quietPulse.nightlifeMeta.weatherImpact === 1.03);
   const rec = recommendConsumer(pulses);

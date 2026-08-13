@@ -27,10 +27,11 @@ pointers:
 **Architecture:** Explicit `--packet-contract=v1|v2` remains an isolated,
 samples-only evaluation namespace and requires `--no-gate`. Live scheduled
 adoption is separate and package-gated through
-`scripts/newsroom-wake-packages.json`. Fifteen active packages automatically use
+`scripts/newsroom-wake-packages.json`. Sixteen active packages automatically use
 LEP/2, zero live writer tools, per-wake model routing, and load-bearing
 manifests interpreted by persona-aware Rhea: Jax, Carmen, Luis, Trevor,
-P Slayer, Anthony, Hal, Tanya, Simon, Jordan, Kai, Rachel, Lila, Angela, and Noah. Their typed accountability, civic,
+P Slayer, Anthony, Hal, Tanya, Simon, Maria, Jordan, Kai, Rachel, Lila, Angela,
+and Noah. Their typed accountability, civic,
 investigation, systems, fan-pulse, sports-analytics, sports-history, sideline, long-view, economic/storefront, arts, public-safety, and
 health-service, education-stability, and weather-ground slices add domain anchors and bounded
 creative briefs to that same contract.
@@ -353,8 +354,8 @@ slice and model text is a starting work surface, not an adopted contract.
 | HAL-LEP2-1 | Hal Richmond / POP-00007 | sports history | Article LEP/2; typed present-fact/unsupplied-history boundary | Llama / Llama / local source brief | [x] | attended W1-W3/Rhea passed; Llama safer than DeepSeek on same W1 Packet |
 | TANYA-LEP2-1 | Tanya Cruz / POP-00014 | sports sideline | Article LEP/2; typed record/access/observation boundary | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed; exact quote provenance and natural public stats |
 | SIMON-LEP2-1 | Simon Leary / POP-00016 | sports long view | Article LEP/2; present role change/current-record boundary | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed; Llama failed W1 schema |
-| pending | Ariana Reyes / POP-00133 | sports analytics | Candidate Article LEP/2; numeric/board pulse | Candidate DeepSeek; benchmark | [ ] | [ ] |
-| pending | Maria Keen / POP-00013 | culture | Candidate Article LEP/2; evening-life/neighborhood ground | Candidate DeepSeek; benchmark | [ ] | [ ] |
+| pending | Ariana Reyes / POP-00133 | sports analytics | Candidate Article LEP/2; numeric/board pulse; blocked until a current As_Roster + TrueSource audit artifact exists | Candidate DeepSeek; benchmark | [ ] | blocked: current `output/desk-packets/truesource_reference.json` is absent; feed-only fallback forbidden |
+| MARIA-LEP2-1 | Maria Keen / POP-00013 | culture | Article LEP/2; evening-life/neighborhood ground with no invented attendance | Llama / Llama / local source brief | [x] | attended W1-W3/Rhea passed; Llama safer and shorter than DeepSeek on the same W1 Packet |
 | pending | Elliot Graye / POP-00012 | community/faith | Candidate Article LEP/2; faith/quiet work | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | KAI-LEP2-1 | Kai Marston / POP-00158 | culture/arts | Article LEP/2; shared evening substrate with arts overlay | Llama / Llama / local source brief | [x] | attended W1-W3/Rhea passed; [ ] reporting-rich scene |
 | pending | Mason Ortega / POP-00160 | culture/food | Candidate Article LEP/2; restaurants as workplaces | Candidate DeepSeek; benchmark | [ ] | [ ] |
@@ -362,7 +363,7 @@ slice and model text is a starting work surface, not an adopted contract.
 | pending | Elliot Marbury / POP-00166 | data/general | Separate data-memo contract; TrueSource/As_Roster audit slice | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | DeShawn Hartley / POP-00015 | visual media | Separate visual/photo-prompt contract; visual record slice | Candidate DeepSeek; benchmark | [ ] | [ ] |
 
-The fifteen active packages have locked routes, but their cost/model comparison and
+The sixteen active packages have locked routes, but their cost/model comparison and
 full unattended graduation remain checklist work. Elliot Marbury and DeShawn
 Hartley are deliberately not forced into Article LEP/2 until their data-memo and
 visual contracts are specified; contract shape is part of Gate 1. Celeste Tran
@@ -624,16 +625,29 @@ and landed one bounded quote. Local W3 used zero writer calls, and contextual
 Gemini Rhea passed with zero flags for `$0.0437`. The fourteenth C103 Article
 staged and `SIMON-LEP2-1` is active.
 
+Ariana Reyes remains correctly blocked: the current runtime tree contains no
+`output/desk-packets/truesource_reference.json` or equivalent current
+As_Roster + TrueSource audit artifact, and her analytics contract forbids an
+archive-card or feed-only substitute. Maria Keen therefore became the next
+buildable Article seat. Her C103 package reuses the typed evening slice, exposes
+only Nightline Station's open-and-quiet condition in West Oakland, and blocks
+invented attendance, patrons, dialogue, neighborhood sentiment, or civic effect.
+Llama passed W1 at 2,136/95 tokens and stayed closer to the record than DeepSeek's
+2,218/256-token interpretation; W2 had zero candidates and zero calls, W3 rendered
+locally with zero writer calls, and contextual Gemini Rhea passed with zero flags
+for `$0.0423`. The fifteenth C103 Article staged and `MARIA-LEP2-1` is active.
+
 ## Open questions
 
-- All fourteen current Cycle 103 Rhea passes are staged behind the probation wall.
+- All fifteen current Cycle 103 Rhea passes are staged behind the probation wall.
   Preserve Carmen's medium public-wording flag as a polish item. Angela Reyes's
   package and attended proof are complete. Noah Tan's weather package and proof
   are complete. Anthony's DeepSeek route beat Llama on the fixed C103 Packet and
   the package is active. Hal and Tanya's model comparisons and attended proofs are
   also complete, and both packages are active.
-- Simon's present-structure package and attended proof are complete; Ariana Reyes
-  is the next unchecked Article seat.
+- Simon's and Maria's packages and attended proofs are complete. Ariana Reyes is
+  still the earliest unchecked Article seat but is blocked on a current
+  As_Roster + TrueSource audit artifact; Elliot Graye is the next buildable seat.
 - Luis's thin-record path passed locally, but his reporting-trail-backed Sonnet
   path and Rhea proof remain open. A local manifest pass is not publication or
   full package graduation.
@@ -692,3 +706,4 @@ staged and `SIMON-LEP2-1` is active.
 - 2026-08-13 (codex) — Graduated HAL-LEP2-1 on Llama/Llama/local after DeepSeek's same-Packet W1 introduced unsupported historical and roster implications. W2 safely abstained, local W3 used zero writer calls, Gemini Rhea passed with zero flags, and the twelfth C103 Article staged.
 - 2026-08-13 (codex) — Graduated TANYA-LEP2-1 on DeepSeek/DeepSeek/local. Rhea now receives exact manifest quote provenance; Tanya's public facts naturalize sports-feed labels. The corrected attended proof landed one bounded quote, passed contextual Rhea with zero flags, and staged the thirteenth C103 Article.
 - 2026-08-13 (codex) — Graduated SIMON-LEP2-1 on DeepSeek/DeepSeek/local. The typed slice confines sports-as-civic-architecture to interpretation over Benji Dillon's role change and the supplied current record; Llama failed W1 schema, local W3 used zero writer calls, Rhea passed with zero flags, and the fourteenth C103 Article staged.
+- 2026-08-13 (codex) — Recorded Ariana Reyes's missing current As_Roster + TrueSource audit substrate as a fail-closed package blocker, then graduated MARIA-LEP2-1 on Llama/Llama/local. The public evening brief drops backend record scaffolding, W2/W3 made zero model calls, Gemini Rhea passed with zero flags, and the fifteenth C103 Article staged. Elliot Graye is the next buildable seat.

@@ -451,7 +451,7 @@ function publicBriefFacts(packet) {
     if (/(?:engine_audit|snapshot:|world_summary|desk_signal|patterns?\[|rows?\[|\s##\s)/i.test(text)) return false;
     if (/^Initiative_Tracker\s*\(InitiativeID\b/i.test(text)) return false;
     if (/\bfrontState\b/i.test(text)) return false;
-    if (/^(?:NAMED|PERSON|VENUE|HOOD|TRAJECTORY|VOLUME|VIBE|MOVEMENT|WEATHER IMPACT|RETAIL VITALITY)\s*:/i.test(text)) return false;
+    if (/^(?:NAMED|PERSON|VENUE|HOOD|TRAJECTORY|VOLUME|VIBE|MOVEMENT|WEATHER IMPACT|RETAIL VITALITY|EVENING RECORD)\s*:/i.test(text)) return false;
     if (/\bvolume\s+(?:of\s+)?\d+(?:\.\d+)?\b/i.test(text)) return false;
     if (/\bweather impact\b/i.test(text)) return false;
     if (/\bmovement\s+(?:is\s+)?restricted\b/i.test(text)) return false;
@@ -486,7 +486,7 @@ function renderSourceBrief(packet) {
   if (!facts.length) throw new Error('SOURCE_BRIEF requires one public approved fact');
   const quotes = packet.manifest.approvedQuotes || [];
   const subjects = new Map((packet.manifest.approvedSubjects || []).map(row => [row.id, row]));
-  const closeQuestion = 'What additional record would explain the supplied condition?';
+  const closeQuestion = 'What remains to be learned here?';
   const title = clean(facts[0].text, 500).replace(/[.!?]+$/, '');
   const sourceLines = quotes.flatMap(quote => {
     const subject = subjects.get(quote.speakerId);

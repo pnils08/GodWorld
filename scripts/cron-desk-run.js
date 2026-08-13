@@ -30,6 +30,7 @@ require('/root/GodWorld/lib/env');
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
+const crypto = require('crypto');
 const { execFileSync } = require('child_process');
 
 const ROOT = path.join(__dirname, '..');
@@ -38,6 +39,26 @@ const PUBLISHED = path.join(COMPARE, 'published');
 const FLAGGED = path.join(COMPARE, 'flagged');
 const STAGED = path.join(COMPARE, 'staged');   // Phase 2 probation wall (S332): M–F articles stage here, NOT canon-ingested
 const SAMPLES = path.join(COMPARE, 'samples'); // --no-gate ungated review samples (S332): never canon
+
+function exactRheaProof(rhea, articleText) {
+  const articleSha256 = crypto.createHash('sha256').update(articleText).digest('hex');
+  if (!rhea || rhea.pass !== true) return { ok: false, articleSha256, reason: 'Rhea did not pass' };
+  if (!rhea.draftSha256 || rhea.draftSha256 !== articleSha256) {
+    return { ok: false, articleSha256, reason: 'Rhea verdict hash does not match Article' };
+  }
+  return { ok: true, articleSha256 };
+}
+
+function stagedRheaProof(rhea, articleSha256, verdictPath) {
+  return {
+    pass: true,
+    model: rhea.model || null,
+    manifestId: rhea.reviewProfile && rhea.reviewProfile.manifestId || null,
+    draftSha256: articleSha256,
+    verdict: path.relative(ROOT, verdictPath),
+    ranAt: rhea.ranAt || null
+  };
+}
 
 function arg(flag, def) {
   const i = process.argv.indexOf(flag);
@@ -2239,7 +2260,7 @@ async function runWrite(assign) {
   if (!fs.existsSync(draftPath)) throw new Error('writer produced no draft at ' + path.relative(ROOT, draftPath));
 
   // gate (skipped for --no-gate samples)
-  let rhea = null, pass = false;
+  let rhea = null, pass = false, rheaProof = null;
   if (NO_GATE) {
     log('gate SKIPPED (--no-gate sample) — output is ungated, NOT canon');
   } else {
@@ -2256,8 +2277,11 @@ async function runWrite(assign) {
         ...(angle && angle.canonResearch ? ['--canon-facts', path.relative(ROOT, anglePath)] : [])],
         { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
     } catch (_) { /* gate exit 2/3 — verdict json still written */ }
-    rhea = readJson(path.join(COMPARE, base + '.rhea.json'));
-    pass = rhea && rhea.pass === true;
+    const verdictPath = path.join(COMPARE, base + '.rhea.json');
+    rhea = readJson(verdictPath);
+    rheaProof = exactRheaProof(rhea, fs.readFileSync(draftPath, 'utf8'));
+    pass = rheaProof.ok;
+    if (rhea && rhea.pass === true && !pass) log('Rhea pass rejected: ' + rheaProof.reason);
   }
 
   // route (the wall — identical semantics to runWake)
@@ -2284,6 +2308,8 @@ async function runWrite(assign) {
       // pipeline.45 Phase 1: the id-enriched INTAKE — the one surface the
       // Saturday run (sheets, Supermemory tags, EIC audit) reads.
       intake: buildIntakeSidecar(fs.readFileSync(draftPath, 'utf8'), quotes),
+      rhea: stagedRheaProof(rhea, rheaProof.articleSha256,
+        path.join(COMPARE, base + '.rhea.json')),
       note: 'M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.',
       stagedAt: new Date().toISOString()
     }, null, 2));
@@ -2400,7 +2426,7 @@ async function runWake() {
 
   // 4. LAYER 2 — gate (existing headless Rhea). Skipped for --no-gate samples
   // (gate needs the subscription; writer/quotes are API-only).
-  let rhea = null, pass = false;
+  let rhea = null, pass = false, rheaProof = null;
   if (NO_GATE) {
     log('gate SKIPPED (--no-gate sample) — output is ungated, NOT canon');
   } else {
@@ -2409,8 +2435,11 @@ async function runWake() {
       execFileSync('node', [path.join(ROOT, 'scripts', 'cron-rhea-gate.js'), '--draft', path.relative(ROOT, draftPath),
         '--model', GATE_MODEL, '--backend', GATE_BACKEND, '--api-model', GATE_API_MODEL, '--cycle', cycle], { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
     } catch (_) { /* gate exit 2/3 — verdict json still written */ }
-    rhea = readJson(path.join(COMPARE, base + '.rhea.json'));
-    pass = rhea && rhea.pass === true;
+    const verdictPath = path.join(COMPARE, base + '.rhea.json');
+    rhea = readJson(verdictPath);
+    rheaProof = exactRheaProof(rhea, fs.readFileSync(draftPath, 'utf8'));
+    pass = rheaProof.ok;
+    if (rhea && rhea.pass === true && !pass) log('Rhea pass rejected: ' + rheaProof.reason);
   }
 
   // 5. LAYER 5 — THE WALL: stage (probation), never canon-ingest here.
@@ -2435,6 +2464,8 @@ async function runWake() {
       status: 'staged', desk: DESK, cycle, byline: byline ? byline.name : null, bylinePopid: byline ? byline.popid : null,
       article: path.relative(ROOT, destPath),
       bylineUsage,
+      rhea: stagedRheaProof(rhea, rheaProof.articleSha256,
+        path.join(COMPARE, base + '.rhea.json')),
       note: 'M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.',
       stagedAt: new Date().toISOString()
     }, null, 2));
@@ -2665,4 +2696,6 @@ module.exports = {
   loadLane,
   yesterdaysFilings,
   buildIntakeSidecar,
+  exactRheaProof,
+  stagedRheaProof,
 };

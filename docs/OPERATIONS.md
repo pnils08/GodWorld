@@ -83,13 +83,11 @@ under `output/exchanges/`, with the configured Supermemory and intake handoffs.
 The 06:00 digest summarizes the prior 36 hours. Monday through Friday, angle,
 report, and write cron entries consume the daily fanout. ADR-0017 now gates that
 fanout by `scripts/newsroom-wake-packages.json`: only active journalist packages
-wake, and missing packages are logged and skipped with no generic fallback. Jax
-Caldera and Carmen Delaine occupy separate required civic seats; P Slayer is the
-first required sports seat; Jordan Velez is the first required business seat.
-Jax runs Llama/Llama/Sonnet, Carmen and Jordan run DeepSeek on all three wakes,
-and P Slayer runs Llama on all three wakes. P Slayer's fan-pulse slice and
-Jordan's economic/storefront slice travel as typed LEP/2 evidence and creative
-limits. Their write stages run the persona-aware Rhea API gate and leave output
+wake, and missing packages are logged and skipped with no generic fallback. Ten
+active packages cover Jax, Carmen, Luis, Trevor, P Slayer, Jordan, Kai, Rachel,
+Lila, and Angela. Each route and typed LEP/2 slice is package-owned; thin-evidence
+Articles use deterministic local source briefs rather than model-authored prose.
+Their write stages run the persona-aware Rhea API gate and leave output
 staged or flagged behind the probation wall. A passing Rhea verdict routes the
 reviewed Article to `output/cron-compare/staged/`; a non-pass remains in
 `output/cron-compare/flagged/` for review. Standalone Rhea reruns close that

@@ -27,17 +27,17 @@ pointers:
 **Architecture:** Explicit `--packet-contract=v1|v2` remains an isolated,
 samples-only evaluation namespace and requires `--no-gate`. Live scheduled
 adoption is separate and package-gated through
-`scripts/newsroom-wake-packages.json`. Nine active packages automatically use
+`scripts/newsroom-wake-packages.json`. Ten active packages automatically use
 LEP/2, zero live writer tools, per-wake model routing, and load-bearing
 manifests interpreted by persona-aware Rhea: Jax, Carmen, Luis, Trevor,
-P Slayer, Jordan, Kai, Rachel, and Lila. Their typed accountability, civic,
+P Slayer, Jordan, Kai, Rachel, Lila, and Angela. Their typed accountability, civic,
 investigation, systems, fan-pulse, economic/storefront, arts, public-safety, and
-health-service slices add domain anchors and bounded creative briefs to that
-same contract.
+health-service and education-stability slices add domain anchors and bounded
+creative briefs to that same contract.
 Luis's `CIVIC-DOMAIN-SLICE-4` additionally selects between a zero-model local
 `RECORDS_BRIEF` when no reporting events are supplied and the configured Sonnet
 `FULL_INVESTIGATION` path when a typed reporting trail exists.
-Evidence-thin Jax, Carmen, Jordan, Kai, Rachel, Lila, P Slayer, and Trevor
+Evidence-thin Jax, Carmen, Jordan, Kai, Rachel, Lila, Angela, P Slayer, and Trevor
 Packets use a zero-model local `SOURCE_BRIEF`: W1/W2 may plan and gather bounded
 statements, but W3 prints only filtered approved facts, exact quote blocks, and
 one open question. Their configured writer model remains recorded for a future
@@ -347,7 +347,7 @@ slice and model text is a starting work surface, not an adopted contract.
 | TREVOR-LEP2-1 | Trevor Shimizu / POP-00155 | infrastructure | Article LEP/2; typed incident/link/warning systems brief and unestablished cascade | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed with 3 exact quotes |
 | RACHEL-LEP2-1 | Sgt. Rachel Torres / POP-00057 | safety | Article LEP/2; typed public-safety signal and classification/response gap | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed with zero candidates/quotes |
 | LILA-LEP2-1 | Dr. Lila Mezran / POP-00154 | health | Article LEP/2; `HEALTH-SERVICE-BRIEF-1`; typed access/timeline/human-cost unknowns | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed; DeepSeek schema pass, Llama schema fail |
-| pending | Angela Reyes / POP-00156 | education | Candidate Article LEP/2; school/youth stability | Candidate DeepSeek; benchmark | [ ] | [ ] |
+| ANGELA-LEP2-1 | Angela Reyes / POP-00156 | education | Article LEP/2; `EDUCATION-STABILITY-BRIEF-1`; typed participation/access/outcome unknowns | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed; DeepSeek more useful than Llama on same W1 Packet |
 | pending | Noah Tan / POP-00157 | environment | Candidate Article LEP/2; weather/environment ground | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | Anthony Raines / POP-00017 | sports analytics | Candidate Article LEP/2; roster/board pulse | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | Hal Richmond / POP-00007 | sports history | Candidate Article LEP/2; archive/long-view pulse | Candidate DeepSeek; benchmark | [ ] | [ ] |
@@ -362,7 +362,7 @@ slice and model text is a starting work surface, not an adopted contract.
 | pending | Elliot Marbury / POP-00166 | data/general | Separate data-memo contract; TrueSource/As_Roster audit slice | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | DeShawn Hartley / POP-00015 | visual media | Separate visual/photo-prompt contract; visual record slice | Candidate DeepSeek; benchmark | [ ] | [ ] |
 
-The nine active packages have locked routes, but their cost/model comparison and
+The ten active packages have locked routes, but their cost/model comparison and
 full unattended graduation remain checklist work. Elliot Marbury and DeShawn
 Hartley are deliberately not forced into Article LEP/2 until their data-memo and
 visual contracts are specified; contract shape is part of Gate 1. Celeste Tran
@@ -548,16 +548,29 @@ The builder then approved Rhea as the weekday staging disposition: any Article
 with a passing verdict moves to staged, while a non-pass stays flagged for
 review. `scripts/reconcileRheaDisposition.js` closes the standalone-rerun seam
 with hash-bound verdicts, reversible local history, and a dry-run default. The
-Cycle 103 reconciliation staged all eight current Rhea passes and cleared their
+Cycle 103 reconciliation staged all eight then-current Rhea passes and cleared their
 stable active flag markers into history. It did not publish, upload, ingest, or
 write any external system; the Saturday run remains the only canon door.
 
+After Claude removed the protected Angela-lane real-school references, Angela
+Reyes completed the next Task 17 package. Her education slice translates the
+canon Initiative record to `Oakland Youth Apprenticeship Pipeline has been
+announced, and its pilot is active` while holding every participant, school,
+eligibility, placement, staffing, and outcome detail unestablished. DeepSeek and
+Llama both passed the identical W1 schema; DeepSeek retained the route because
+it supplied a usable records checklist, while Llama returned no checks and a
+generic impact frame. W2 had zero candidates and made zero calls; W3 rendered
+locally and passed the manifest with zero observations. Independent Gemini Rhea
+passed with zero flags for `$0.0425`, and the hash-bound Article became the
+ninth staged C103 pass. No byline, Sheet, Drive, Supermemory, publication, or
+canon-ingestion write occurred.
+
 ## Open questions
 
-- All eight current Cycle 103 Rhea passes are staged behind the probation wall.
-  Preserve Carmen's medium public-wording flag as a polish item. Angela Reyes is
-  the next unchecked Task 17 seat after Claude lands the protected restricted-
-  verbiage cleanup.
+- All nine current Cycle 103 Rhea passes are staged behind the probation wall.
+  Preserve Carmen's medium public-wording flag as a polish item. Angela Reyes's
+  package and attended proof are complete; Noah Tan is the next unchecked Task
+  17 seat.
 - Luis's thin-record path passed locally, but his reporting-trail-backed Sonnet
   path and Rhea proof remain open. A local manifest pass is not publication or
   full package graduation.
@@ -603,3 +616,4 @@ write any external system; the Saturday run remains the only canon door.
 - 2026-08-13 (codex) — After the key limit was raised, fresh Jax W2 landed 2/2 bounded sources and local W3 passed. Independent Gemini Rhea passed all seven repaired Articles with zero high flags for `$0.3223`; Carmen retained one medium public-wording flag. No publication or ingestion occurred.
 - 2026-08-13 (codex) — Added LILA-LEP2-1 with a typed health-service brief and public tracker translation. DeepSeek beat Llama on the identical W1 schema; zero-call W2/W3 and independent Rhea passed with zero flags. No publication or ingestion occurred; Angela Reyes is next.
 - 2026-08-13 (codex) — Added the local Rhea-disposition reconciler and applied the builder's staging policy to Cycle 103: eight passes staged, stable failure markers archived as review history, and no publication or canon ingestion executed. Angela remains gated on Claude's protected verbiage cleanup.
+- 2026-08-13 (codex) — Graduated ANGELA-LEP2-1 after Claude's protected verbiage cleanup: DeepSeek beat Llama on same-Packet usefulness, zero-call W2/W3 passed locally, independent Rhea passed with zero flags, and the ninth C103 Article staged without an external author-state or canon write. Noah Tan is next.

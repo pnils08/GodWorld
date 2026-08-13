@@ -2,7 +2,7 @@
 
 **Purpose:** Canonical roster of every voice and agent Mara can address in a voice directive, or flag in an audit. Read at session start. Every addressee name in a voice directive MUST match an entry below — no off-roster names, no invented titles.
 
-**Last in-repo change:** 2026-05-12 (S217 — new file; Mara restructure)
+**Last in-repo change:** 2026-08-13 (Angela beat fenced to packet-supplied canon institutions)
 
 ---
 
@@ -56,7 +56,7 @@ Reporters write articles under their byline. Voice file is canonical for tone an
 | Noah Tan | Forecasts, environmental cycles, climate, air quality | `docs/media/voices/noah_tan.md` | culture-desk |
 | Sharon Okafor | Routines, habits, behavior trends, daily life | `docs/media/voices/sharon_okafor.md` | culture-desk |
 | Kai Marston | Galleries, musicians, artists, First Fridays, Cultural Ledger | `docs/media/voices/kai_marston.md` | culture-desk |
-| Angela Reyes | Schools, youth programs, OUSD, after-school athletics | `docs/media/voices/angela_reyes.md` | culture-desk |
+| Angela Reyes | Schools, youth programs, packet-supplied school systems, after-school athletics | `docs/media/voices/angela_reyes.md` | culture-desk |
 
 ### Chicago desk
 

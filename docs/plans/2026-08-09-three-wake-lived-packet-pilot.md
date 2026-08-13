@@ -571,6 +571,10 @@ canon-ingestion write occurred.
   Preserve Carmen's medium public-wording flag as a polish item. Angela Reyes's
   package and attended proof are complete; Noah Tan is the next unchecked Task
   17 seat.
+- Noah's Cycle 103 civic-domain slice is empty, so activation must wait for a
+  typed environmental assignment rather than promoting ordinary weather into
+  news. Claude must also remove the protected Noah-lane real-agency references
+  before proof; the writable voice file now fails closed on missing authority.
 - Luis's thin-record path passed locally, but his reporting-trail-backed Sonnet
   path and Rhea proof remain open. A local manifest pass is not publication or
   full package graduation.
@@ -617,3 +621,4 @@ canon-ingestion write occurred.
 - 2026-08-13 (codex) — Added LILA-LEP2-1 with a typed health-service brief and public tracker translation. DeepSeek beat Llama on the identical W1 schema; zero-call W2/W3 and independent Rhea passed with zero flags. No publication or ingestion occurred; Angela Reyes is next.
 - 2026-08-13 (codex) — Added the local Rhea-disposition reconciler and applied the builder's staging policy to Cycle 103: eight passes staged, stable failure markers archived as review history, and no publication or canon ingestion executed. Angela remains gated on Claude's protected verbiage cleanup.
 - 2026-08-13 (codex) — Graduated ANGELA-LEP2-1 after Claude's protected verbiage cleanup: DeepSeek beat Llama on same-Packet usefulness, zero-call W2/W3 passed locally, independent Rhea passed with zero flags, and the ninth C103 Article staged without an external author-state or canon write. Noah Tan is next.
+- 2026-08-13 (codex) — Began Noah Tan's Task 17 audit: removed real air/weather agencies from his writable voice contract and required Packet-supplied monitoring authority. C103 has no environmental lane entry, and protected culture-desk agency references remain for Claude; NOAH-LEP2-1 was not activated on an invented assignment.

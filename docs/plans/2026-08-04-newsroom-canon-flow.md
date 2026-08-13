@@ -24,7 +24,7 @@ pointers:
 1. **Saturday exists right now only to test.** Once the world covers itself at **90% accuracy**, Rhea publishes articles directly and **the autonomy begins**. Mags as EIC reports each Saturday how close we are or aren't.
 2. **Daily crons get the previous day's staged articles** plus the other context items. *(Supersedes the S332 zero-staged-retrieval wall within the cycle-week: staged articles are the newsroom's own prior filings — retrievable as "what we've filed this week," never as canon fact.)*
 3. **Saturday puts the edition into the permanent NotebookLM notebook** — the world-canon door.
-4. **All staged articles go into Supermemory** — per-article, NOT combined into an edition — **tagged to the journalist and the cycle**.
+4. **All Rhea-cleared staged articles become canon in the Saturday Supermemory sweep** — per-article, NOT combined into an edition — **tagged to the journalist and the cycle**. Edition curation controls presentation only; an Article does not lose its Cycle-narration canon status because it was omitted from the Edition.
 5. **The INTAKE sections of articles must be sheet-ingestable**, and retrieval queries use them for Supermemory searches.
 
 Confirmed same session: Saturday is **curation + narration both** — two steps of one run, not two products. Reporters stay authors-in-canon (seventeen voices); Mags narrates on top (one voice on the Pulse). The compile/assembly layer from [[../EDITION_PIPELINE]] is deleted, not repaired — curation and narration replace it.
@@ -73,7 +73,7 @@ CLAIM: Transit Hub Phase II is a $230M visioning process | world_summary_c102 §
 **Consumer contracts:**
 1. **Gate** (`cron-rhea-gate.js` pre-check): parse errors, unresolvable POPID/BIZ IDs, or an unbacked quoted-source → `flagged/`. INTAKE validity is part of clearance.
 2. **Sheets** (Saturday step 6): usage rows from INTAKE names — `quoted-source` rows already exist via `citizenVoice --record` (do NOT double-write; skip that class), so the new writes are `subject`/`mentioned` classes. Exact UsageType strings are an engine-sheet bind-point against `EMERGENCE_USAGE_TYPES` in `processAdvancementIntake.js` — bind at build, don't invent here. Header-mapped + idempotent like `recordBylineUsage`.
-3. **Supermemory** (Saturday step 5): one document per article. `containerTags`: `bay-tribune` + `journalist-<bylinePopid>` + `cycle-<N>` + desk. `metadata`: byline, bylinePopid, desk, cycle, POPIDs, hoods, storylines, status (`staged`→`published` on curation). Queries filter on these — Mike's "queries grab these for searches."
+3. **Supermemory** (Saturday step 5): one canon document per Rhea-cleared Article, whether or not selected for the Edition. `containerTags`: `bay-tribune` + `journalist-<bylinePopid>` + `cycle-<N>` + desk. `metadata`: byline, bylinePopid, desk, cycle, POPIDs, hoods, storylines, `status=canon`. Edition selection is a separate presentation attribute and never decides canon intake. Queries filter on these — Mike's "queries grab these for searches."
 4. **EIC audit** (Saturday step 1): per-article accuracy = claims verified / claims total, weighted by the S344 severity classes; NAMES resolution is a hard fail class (citizen-bending).
 
 **Known seam:** staged article bodies carry no `By <Name>` line — `ingestEdition.js:extractBylineMeta` regexes published-edition bylines and will find nothing on per-article input. The per-article ingest path must take byline/desk from the sidecar, not the regex. (This is the concrete instance of the "ingest scripts are edition-shaped" caveat.)

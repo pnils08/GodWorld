@@ -15,7 +15,7 @@
  *                voice-critical call) → cycle_pulse_c{N}.md
  *   4 publish  — canon door: assemble editions/cycle_pulse_c{N}.txt; --apply
  *                runs ingestEdition + permanent-NotebookLM source add
- *   5 sweep    — per-article Supermemory ingest (ALL staged, curated or not)
+ *   5 sweep    — per-article canon ingest (ALL staged, curated or not)
  *   6 sheets   — Citizen_Media_Usage rows from the INTAKE sidecar
  *
  * Seats built 2026-08-05 (narrator design adopted — docs/research/
@@ -108,7 +108,7 @@ function articleDoc(cycle, entry) {
   const meta = {
     title: entry.stem,
     source: 'saturday-sweep',
-    status: 'staged',
+    status: 'canon',
     cycle: String(cycle)
   };
   if (s.byline) meta.byline = s.byline;

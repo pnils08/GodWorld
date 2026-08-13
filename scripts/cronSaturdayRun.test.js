@@ -64,7 +64,7 @@ console.log('Test 3: articleDoc (Supermemory shape)');
   assert('metadata byline/desk/cycle', doc.metadata.byline === 'Dana Reeve' && doc.metadata.desk === 'business' && doc.metadata.cycle === '102');
   assert('metadata popids flat string, nulls dropped', doc.metadata.popids === 'POP-00654,POP-00381,POP-00122');
   assert('metadata hoods + storylines', doc.metadata.hoods === 'Fruitvale' && doc.metadata.storylines === 'fruitvale-transit-hub');
-  assert('status staged', doc.metadata.status === 'staged');
+  assert('all Saturday-swept Articles become canon', doc.metadata.status === 'canon');
   assert('content is article text', doc.content === ENTRY.text);
 }
 

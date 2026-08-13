@@ -361,8 +361,8 @@ function composeBundle(opts) {
   // §WORLD SNAPSHOT
   lines.push('## §WORLD SNAPSHOT');
   lines.push('');
-  lines.push('Neighborhood mood and atmospheric context for this cycle. Use for ');
-  lines.push('atmospheric Oakland frames per LENS §Vantage Points.');
+  lines.push('Neighborhood mood and atmospheric context for this cycle. Use only places ');
+  lines.push('and conditions explicitly supplied here; persona memory is not source authority.');
   lines.push('');
   lines.push(worldSummary.trim());
   lines.push('');
@@ -377,8 +377,7 @@ function composeBundle(opts) {
   lines.push('Produce **5–8 image specs** covering this distribution:');
   lines.push('- 1 hero shot for the front-page lead');
   lines.push('- 2–3 secondary article scenes (drawn from §FEATURED ARTICLES)');
-  lines.push('- 1–2 atmospheric Oakland frames per LENS §Vantage Points');
-  lines.push('  (Heinold\'s, ferry terminal, Coliseum tunnel, Lake Merritt pergola, etc.)');
+  lines.push('- 1–2 atmospheric frames grounded in a place or condition supplied above');
   lines.push('- 0–1 portrait if a citizen profile anchors the edition');
   lines.push('');
   lines.push('Output JSON — either a **bare array** of specs OR an **extended object** ');
@@ -399,8 +398,8 @@ function composeBundle(opts) {
   lines.push('  "composition": "framing + camera + eye level",');
   lines.push('  "credit": "Photographer Name / Bay Tribune",');
   lines.push('  "section": "FRONT PAGE | CIVIC AFFAIRS | SPORTS | CULTURE | BUSINESS | etc. — match the parsed section name in the compiled edition for any shot tied to a storyline. Use \\"ATMOSPHERIC\\" for vantage-point frames not tied to a specific article.",');
-  lines.push('  "image_prompt": "100-220 words. Include: specific cross-street + time-of-day, ');
-  lines.push('    explicit subject (age, role, what they wear, what they carry), ');
+  lines.push('  "image_prompt": "100-220 words. Include: exact supplied location/time detail, ');
+  lines.push('    explicit supplied subject detail; otherwise keep people anonymous and unidentifying, ');
   lines.push('    photojournalism camera language (35mm equivalent, eye-level), ');
   lines.push('    AND a closing negative-frame paragraph: \\"NOT in frame: tents, boarded ');
   lines.push('    storefronts, barred windows, broken glass, anyone in distress, decorative grit. ');
@@ -429,56 +428,40 @@ function composeBundle(opts) {
   lines.push('and fence as middle ground naturally blurred environmental text. Use that pattern when ');
   lines.push('signage is part of the scene but text legibility is canon-forbidden.');
   lines.push('');
+  lines.push('**Source boundary overrides persona examples.** Every named person, place, team, ');
+  lines.push('institution, business, venue, event, address, and visual history must appear in this ');
+  lines.push('bundle. Do not import a remembered city landmark, brand, team, institution, address, ');
+  lines.push('or habitual vantage point. If the bundle does not supply a name, use an unnamed ');
+  lines.push('architectural type or omit the frame. Apply corrections-forward to supplied legacy names.');
+  lines.push('');
   lines.push('**Credit assignment:** Apply LENS team rules from `.claude/agents/dj-hartley/LENS.md`.');
   lines.push('Use only Tribune photographer names defined there. Do NOT confuse photographers ');
   lines.push('with reviewer/audit agents (Mara Vance is canon audit, not a photographer).');
   lines.push('');
-  lines.push('### Canon-Allowed Brand Identification');
+  lines.push('### Packet-Grounded Identification');
   lines.push('');
-  lines.push('The negative-frame "NO recognizable real-world commercial identification" line is a ');
-  lines.push('default. The following overrides apply — these brands ARE canon and belong in scenes.');
-  lines.push('When a shot involves any of them, write the negative-frame to FORBID generic real-world ');
-  lines.push('chains while ALLOWING the canon brand by name.');
+  lines.push('A name or brand may appear only when the bundle supplies it. The supplied record also ');
+  lines.push('controls uniforms, colors, logos, roles, locations, and identifying marks; do not fill ');
+  lines.push('those details from general knowledge or persona memory.');
   lines.push('');
-  lines.push('**Oakland Athletics (A\'s) branding — ALLOWED.** Uniforms, "Athletics" wordmark, ');
-  lines.push('elephant logo, green/gold color scheme are canon. Photos at the Coliseum, training ');
-  lines.push('facility, or any A\'s-context shot SHOULD show them. Don\'t fight the canon.');
-  lines.push('');
-  lines.push('**Jersey numbers — MUST match the 2041 roster** (`docs/media/2041_athletics_roster.md`). ');
-  lines.push('Two valid approaches per shot:');
-  lines.push('- Name a specific roster player and specify their canon jersey number in the prompt');
-  lines.push('  (e.g., "Darrin Davis #25 at the plate"). Read the roster before writing the prompt.');
+  lines.push('**Jersey numbers require an exact supplied roster fact.** Two valid approaches per shot:');
+  lines.push('- Use the exact player and number only when both appear in the bundle.');
   lines.push('- Specify "no legible jersey numbers" or "players framed from behind / at distance ');
   lines.push('  so jersey numbers are not readable" — anonymity through composition.');
   lines.push('NEVER let the generator render arbitrary numbers. FLUX will fabricate plausible-but-wrong ');
   lines.push('numbers (#20, #18, #12 — none of which may be on the canon roster).');
   lines.push('');
-  lines.push('**Canon-allowed Oakland landmarks — REAL names allowed.** See ');
-  lines.push('`docs/canon/INSTITUTIONS.md` §Arts, Culture & Landmarks for the full Tier-1 list ');
-  lines.push('(Fox Theater, Paramount, Heinold\'s, OMCA, Lake Merritt pergola, Jack London Square, ');
-  lines.push('Coliseum, ferry terminal, OACC, Malonga Center, etc.). Real signage and identifying ');
-  lines.push('marks belong in these frames — write the venue name into the positive frame, not the ');
-  lines.push('negative frame. DJ LENS §Vantage Points carries the same list.');
+  lines.push('**Institutions and venues require bundle evidence.** Apply the current corrections-forward ');
+  lines.push('map to a supplied legacy name. Never browse for, recall, or invent a replacement.');
   lines.push('');
-  lines.push('**Tier-1 canon institutions** (per `docs/canon/INSTITUTIONS.md`) — use the real name ');
-  lines.push('(Temescal Community Health Center, Alameda Health System, Lake Merritt, etc.).');
+  lines.push('### Unnamed Background Businesses');
   lines.push('');
-  lines.push('**Tier-2 canon-substitute institutions** (per `docs/canon/INSTITUTIONS.md`) — use the ');
-  lines.push('substitute name only (Atlas Bay Architects, NOT the real firm). NEVER the real-world ');
-  lines.push('name. This is the canon-fidelity rollout from S174/S175.');
-  lines.push('');
-  lines.push('### Storefronts and Businesses Not in Any Canon List');
-  lines.push('');
-  lines.push('When a shot includes background storefronts or businesses that aren\'t on the canon list, ');
-  lines.push('two valid approaches:');
-  lines.push('- Use a clearly invented fictional name (e.g., "Buena Vista Hardware", "El Niño ');
-  lines.push('  Tortillería", "Lake Pharmacy" — invented, plausible, Oakland-flavored)');
+  lines.push('When a background storefront or business is not named by the bundle, keep it unnamed:');
   lines.push('- Specify "no legible storefront text" or "storefront window with generic awning, no ');
-  lines.push('  brand visible" if a clean frame fits the shot.');
+  lines.push('  brand visible" if a clean frame fits the shot. Never invent a plausible name.');
   lines.push('');
-  lines.push('NEVER let the generator render real-world chain names. Your negative-frame paragraph ');
-  lines.push('must explicitly list and forbid the most likely defaults — "NO Walgreens, NO Safeway, ');
-  lines.push('NO Starbucks, NO Target, NO real-world chain branding" — adapt to the shot context.');
+  lines.push('Never let the generator render an unsupplied real-world chain or other brand. Forbid ');
+  lines.push('all unsupplied branding generically rather than naming examples.');
   lines.push('');
 
   // Provenance footer
@@ -507,7 +490,7 @@ function composeBundle(opts) {
 
 // Per-type photo budget — emitted in §INSTRUCTION FOR DJ
 var PHOTO_BUDGET = {
-  edition: { min: 5, max: 8, label: '5-8 specs', distribution: '1 hero shot for the front-page lead, 2-3 secondary article scenes, 1-2 atmospheric Oakland frames per LENS §Vantage Points, 0-1 portrait if a citizen profile anchors' },
+  edition: { min: 5, max: 8, label: '5-8 specs', distribution: '1 hero shot for the front-page lead, 2-3 secondary article scenes, 1-2 Packet-grounded atmospheric frames, 0-1 portrait if a citizen profile anchors' },
   dispatch: { min: 1, max: 3, label: '1-3 specs', distribution: '1 hero scene for the dispatch storyline, 0-2 supporting frames (alternate angle, atmospheric beat, or detail shot)' },
   interview: { min: 1, max: 3, label: '1-3 specs', distribution: '1 portrait of the interview subject, 1-2 supporting frames (their workplace, the neighborhood referenced, an atmospheric beat tied to the conversation)' },
   supplemental: { min: 1, max: 3, label: '1-3 specs', distribution: '1 hero scene that anchors the supplemental topic, 0-2 supporting frames (secondary scene, atmospheric, or detail)' }
@@ -651,8 +634,8 @@ function composeNonEditionBundle(opts) {
   if (worldSummary && worldSummary.trim().length > 0) {
     lines.push('## §WORLD SNAPSHOT');
     lines.push('');
-    lines.push('Neighborhood mood and atmospheric context for this cycle. Use for atmospheric ');
-    lines.push('frames per LENS §Vantage Points where relevant.');
+    lines.push('Neighborhood mood and atmospheric context for this cycle. Use only places and ');
+    lines.push('conditions explicitly supplied here; persona memory is not source authority.');
     lines.push('');
     lines.push(worldSummary.trim());
     lines.push('');
@@ -691,7 +674,7 @@ function appendCanonAndOutputBlock(lines) {
   lines.push('  "composition": "framing + camera + eye level",');
   lines.push('  "credit": "Photographer Name / Bay Tribune",');
   lines.push('  "section": "FRONT PAGE | CIVIC | SPORTS | CULTURE | BUSINESS | ATMOSPHERIC | etc. — match the parsed section name where possible",');
-  lines.push('  "image_prompt": "100-220 words. Specific cross-street + time-of-day, explicit subject (age, role, what they wear, what they carry), photojournalism camera language (35mm equivalent, eye-level), AND a closing negative-frame paragraph: NOT in frame: tents, boarded storefronts, barred windows, broken glass, anyone in distress, decorative grit. NO text artifacts, NO logos, NO recognizable real-world brand identification."');
+  lines.push('  "image_prompt": "100-220 words. Exact supplied location/time detail, explicit supplied subject, photojournalism camera language (35mm equivalent, eye-level), AND a closing negative-frame paragraph: NOT in frame: tents, boarded storefronts, barred windows, broken glass, anyone in distress, decorative grit. NO text artifacts, NO logos, NO unsupplied brand identification."');
   lines.push('}');
   lines.push('```');
   lines.push('');
@@ -715,37 +698,24 @@ function appendCanonAndOutputBlock(lines) {
   lines.push('Use only Tribune photographer names defined there. Do NOT confuse photographers ');
   lines.push('with reviewer/audit agents (Mara Vance is canon audit, not a photographer).');
   lines.push('');
-  lines.push('### Canon-Allowed Brand Identification');
+  lines.push('### Packet-Grounded Identification');
   lines.push('');
-  lines.push('The negative-frame "NO recognizable real-world commercial identification" line is a ');
-  lines.push('default. The following overrides apply — these brands ARE canon and belong in scenes.');
+  lines.push('Every named person, place, team, institution, business, venue, event, address, brand, ');
+  lines.push('and visual history must appear in the supplied bundle. Persona examples are not evidence.');
+  lines.push('If the bundle does not supply a name, use an unnamed architectural type or omit the frame.');
   lines.push('');
-  lines.push('**Oakland Athletics (A\'s) branding — ALLOWED.** Uniforms, "Athletics" wordmark, ');
-  lines.push('elephant logo, green/gold are canon. A\'s in Coliseum/sports shots SHOULD show them.');
-  lines.push('');
-  lines.push('**Jersey numbers — MUST match the 2041 roster** (`docs/media/2041_athletics_roster.md`). ');
-  lines.push('Either name a specific roster player with their canon number, OR specify "no legible ');
+  lines.push('**Jersey numbers require an exact supplied roster fact.** Use the exact player and number ');
+  lines.push('only when both appear in the bundle, OR specify "no legible ');
   lines.push('jersey numbers" / "framed from behind / at distance." NEVER let FLUX fabricate.');
   lines.push('');
-  lines.push('**Canon-allowed Oakland landmarks — REAL names allowed.** See ');
-  lines.push('`docs/canon/INSTITUTIONS.md` §Arts, Culture & Landmarks (Fox Theater, Paramount, ');
-  lines.push('Heinold\'s, OMCA, Lake Merritt pergola, Jack London Square, Coliseum, ferry terminal, ');
-  lines.push('OACC, Malonga Center, etc.). Real signage/identifying marks belong in these frames — ');
-  lines.push('write the venue name into the positive frame, not the negative frame.');
+  lines.push('**Institutions and venues require bundle evidence.** Apply the current corrections-forward ');
+  lines.push('map to a supplied legacy name. Never browse for, recall, or invent a replacement.');
   lines.push('');
-  lines.push('**Tier-1 canon institutions** — use the real name (Temescal Community Health Center, ');
-  lines.push('Alameda Health System, etc., per `docs/canon/INSTITUTIONS.md`).');
+  lines.push('### Unnamed Background Businesses');
   lines.push('');
-  lines.push('**Tier-2 canon-substitute institutions** — use the substitute (Atlas Bay Architects ');
-  lines.push('not the real firm). NEVER the real-world name.');
-  lines.push('');
-  lines.push('### Storefronts and Businesses Not in Any Canon List');
-  lines.push('');
-  lines.push('- Use a clearly invented fictional name (e.g., "Buena Vista Hardware", "El Niño ');
-  lines.push('  Tortillería"), OR specify "no legible storefront text."');
-  lines.push('- NEVER let the generator render real-world chains. Negative-frame must explicitly ');
-  lines.push('  forbid common defaults — "NO Walgreens, NO Safeway, NO Starbucks, NO Target, NO ');
-  lines.push('  real-world chain branding" — adapt to shot context.');
+  lines.push('- Specify "no legible storefront text" or a generic awning with no brand visible.');
+  lines.push('- Never invent a plausible business name or name a real-world chain in positive or ');
+  lines.push('  negative instructions; forbid all unsupplied branding generically.');
   lines.push('');
 }
 

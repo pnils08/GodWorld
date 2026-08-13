@@ -115,7 +115,40 @@ function deriveOutDir(type, cycle, slug) {
 
 var REQUIRED_FIELDS = ['slug', 'thesis', 'mood', 'motifs', 'composition', 'credit', 'image_prompt'];
 
-function validateSpec(spec, idx) {
+// Hartley's retired persona examples historically supplied real-world city
+// landmarks and institutions even when the Edition/Packet did not. The input
+// bundle is the only authority for those names now. This targeted list catches
+// legacy defaults at the last local boundary before a paid image call; it does
+// not authorize a listed name merely because older canon docs mention it.
+var LEGACY_VISUAL_DEFAULTS = [
+  { label: 'Fox Theater', pattern: /\bFox Theater(?: Oakland)?\b/i },
+  { label: 'Paramount Theatre', pattern: /\bParamount Theat(?:er|re)\b/i },
+  { label: "Heinold's", pattern: /\bHeinold(?:'s|s)\b/i },
+  { label: 'Oakland Museum of California', pattern: /\b(?:Oakland Museum of California|OMCA)\b/i },
+  { label: 'Lake Merritt', pattern: /\bLake Merritt\b/i },
+  { label: 'Jack London Square', pattern: /\bJack London Square\b/i },
+  { label: 'Coliseum', pattern: /\b(?:Oakland )?Coliseum\b/i },
+  { label: 'Oakland ferry terminal', pattern: /\bOakland ferry terminal\b/i },
+  { label: 'Oakland Asian Cultural Center', pattern: /\b(?:Oakland Asian Cultural Center|OACC)\b/i },
+  { label: 'Malonga Center', pattern: /\bMalonga Center\b/i },
+  { label: 'Alameda Health System', pattern: /\bAlameda Health System\b/i },
+  { label: 'Highland Hospital', pattern: /\bHighland Hospital\b/i },
+  { label: 'Telegraph Avenue', pattern: /\bTelegraph Avenue\b/i },
+  { label: 'Port of Oakland', pattern: /\bPort of Oakland\b/i },
+  { label: 'AC Transit', pattern: /\bAC Transit\b/i },
+  { label: 'BART', pattern: /\bBART\b/i }
+];
+
+function findUnsourcedVisualDefaults(spec, bundleText) {
+  var specText = [spec.thesis, spec.mood, spec.motifs, spec.composition, spec.image_prompt]
+    .filter(Boolean).join('\n');
+  var source = String(bundleText || '');
+  return LEGACY_VISUAL_DEFAULTS.filter(function (entry) {
+    return entry.pattern.test(specText) && !entry.pattern.test(source);
+  }).map(function (entry) { return entry.label; });
+}
+
+function validateSpec(spec, idx, bundleText) {
   var missing = [];
   for (var f = 0; f < REQUIRED_FIELDS.length; f++) {
     if (!spec[REQUIRED_FIELDS[f]]) missing.push(REQUIRED_FIELDS[f]);
@@ -143,6 +176,10 @@ function validateSpec(spec, idx) {
   if (wc < 100 || wc > 220) {
     return { valid: false, reason: 'spec ' + idx + ' (' + slug + ') prompt word count ' + wc + ' outside 100-220' };
   }
+  var unsourcedDefaults = findUnsourcedVisualDefaults(spec, bundleText);
+  if (unsourcedDefaults.length > 0) {
+    return { valid: false, reason: 'spec ' + idx + ' (' + slug + ') imports visual default(s) absent from input bundle: ' + unsourcedDefaults.join(', ') };
+  }
   return { valid: true };
 }
 
@@ -158,12 +195,19 @@ async function main() {
 
   var outDir = deriveOutDir(argv.type, cycle, argv.slug);
   var directionPath = path.join(outDir, 'dj_direction.json');
+  var bundlePath = path.join(outDir, 'dj_input_bundle.md');
 
   if (!fs.existsSync(directionPath)) {
     console.error('Error: missing dj_direction.json at ' + directionPath);
     console.error('Run djDirect.js + invoke dj-hartley subagent first (Stage 1).');
     process.exit(1);
   }
+  if (!fs.existsSync(bundlePath)) {
+    console.error('Error: missing source bundle at ' + bundlePath);
+    console.error('Refusing photo generation without the exact Edition/Packet authority used for direction.');
+    process.exit(1);
+  }
+  var bundleText = fs.readFileSync(bundlePath, 'utf-8');
 
   var raw = fs.readFileSync(directionPath, 'utf-8');
   var parsed;
@@ -230,7 +274,7 @@ async function main() {
   // Validate all specs upfront — fail fast if any are malformed
   var invalid = [];
   for (var s = 0; s < specs.length; s++) {
-    var check = validateSpec(specs[s], s);
+    var check = validateSpec(specs[s], s, bundleText);
     if (!check.valid) invalid.push(check.reason);
   }
   if (invalid.length > 0) {
@@ -759,4 +803,8 @@ if (require.main === module) {
 }
 
 // S265 ES-5 — exported for unit testing the manifest/sidecar drop-state sync.
-module.exports = { syncDropStateToManifest: syncDropStateToManifest };
+module.exports = {
+  syncDropStateToManifest: syncDropStateToManifest,
+  validateSpec: validateSpec,
+  findUnsourcedVisualDefaults: findUnsourcedVisualDefaults
+};

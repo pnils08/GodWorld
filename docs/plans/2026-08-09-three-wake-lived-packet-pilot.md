@@ -360,8 +360,8 @@ slice and model text is a starting work surface, not an adopted contract.
 | KAI-LEP2-1 | Kai Marston / POP-00158 | culture/arts | Article LEP/2; shared evening substrate with arts overlay | Llama / Llama / local source brief | [x] | attended W1-W3/Rhea passed; [ ] reporting-rich scene |
 | MASON-LEP2-1 | Mason Ortega / POP-00160 | culture/food | Article LEP/2; restaurant-list fact and unsupplied-workplace boundary | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed; Llama failed corrected W1 schema |
 | SHARON-LEP2-1 | Sharon Okafor / POP-00159 | culture/lifestyle | Article LEP/2; quiet-venue fact and unsupplied-behavior boundary | Llama / Llama / local source brief | [x] | attended W1-W3/Rhea passed; Llama avoided DeepSeek's invented causes and trends |
-| pending | Elliot Marbury / POP-00166 | data/general | Separate data-memo contract; TrueSource/As_Roster audit slice | Candidate DeepSeek; benchmark | [ ] | [ ] |
-| pending | DeShawn Hartley / POP-00015 | visual media | Separate visual/photo-prompt contract; visual record slice | Candidate DeepSeek; benchmark | [ ] | [ ] |
+| pending | Elliot Marbury / POP-00166 | data/general | Separate data-memo contract; TrueSource/As_Roster audit slice | Candidate DeepSeek; benchmark | [ ] | blocked: current combined audit artifact is absent; feed-only memo forbidden |
+| pending | DeShawn Hartley / POP-00015 | visual media | Separate visual/photo-prompt contract; visual record slice | Existing DJ direction path; benchmark pending | [ ] | blocked: C103 compiled Edition + Sift inputs do not exist before Saturday; active path now rejects unsupplied landmark defaults |
 
 The nineteen active packages have locked routes, but their cost/model comparison and
 full unattended graduation remain checklist work. Elliot Marbury and DeShawn
@@ -671,6 +671,18 @@ rendered locally with zero writer calls, and contextual Gemini Rhea passed with
 zero flags for `$0.0407`. The eighteenth C103 Article staged and
 `SHARON-LEP2-1` is active.
 
+The two remaining special-contract seats were then audited without forcing them
+through Article LEP/2. Marbury cannot build an audit-grade memo because the
+current combined `As_Roster + TrueSource` artifact is absent; the feed-only
+fallback remains forbidden. Hartley's established visual path is structurally
+separate and waits for the compiled Edition plus Sift inputs. Its active
+`djDirect` bundle no longer seeds real-world landmark, institution, team,
+chain, or invented-business defaults: every named visual element must now come
+from the exact Edition/world bundle, and `generate-edition-photos` fails closed
+before a provider call when a retired legacy default is absent from that
+bundle. C103 has a world summary but no compiled Edition or Sift proposal file,
+so an attended visual proof correctly remains open until Saturday compile.
+
 ## Open questions
 
 - All eighteen current Cycle 103 Rhea passes are staged behind the probation wall.
@@ -682,7 +694,9 @@ zero flags for `$0.0407`. The eighteenth C103 Article staged and
 - Simon's, Maria's, Graye's, Mason's, and Sharon's packages and attended proofs
   are complete. Ariana Reyes is still the earliest unchecked Article seat but
   is blocked on a current As_Roster + TrueSource audit artifact. Elliot Marbury
-  is the next checklist row and must remain a separate data-memo contract gate.
+  is also blocked on that current combined audit substrate. Hartley's separate
+  visual contract is locally contained but awaits the first compiled Edition +
+  Sift Packet for an attended proof; do not substitute an Article Packet.
 - Luis's thin-record path passed locally, but his reporting-trail-backed Sonnet
   path and Rhea proof remain open. A local manifest pass is not publication or
   full package graduation.
@@ -745,3 +759,4 @@ zero flags for `$0.0407`. The eighteenth C103 Article staged and
 - 2026-08-13 (codex) — Graduated GRAYE-LEP2-1 on Llama/Llama/local after closing a real-name corrections-forward seam between raw C103 signals and Rhea. The typed slice removes the blocked real faith institution, W2/W3 made zero model calls, the unchanged Article passed corrected Gemini Rhea with zero flags, and the sixteenth C103 Article staged. Mason Ortega is next.
 - 2026-08-13 (codex) — Graduated MASON-LEP2-1 on DeepSeek/DeepSeek/local after fixing the evening slice's global-top-pulse leak into seat-specific Packets. The corrected restaurant fact makes no worker or service premise, Llama failed W1 schema, W2/W3 made zero model calls, Gemini Rhea passed with zero flags, and the seventeenth C103 Article staged. Sharon Okafor is next.
 - 2026-08-13 (codex) — Graduated SHARON-LEP2-1 on Llama/Llama/local. DeepSeek invented peak-hours, clientele, mood, sports, and festival explanations from one quiet-venue fact; Llama stayed bounded, W2/W3 made zero model calls, Gemini Rhea passed with zero flags, and the eighteenth C103 Article staged. Marbury's separate data-memo contract is next.
+- 2026-08-13 (codex) — Audited the remaining special seats: Marbury is blocked on the absent current As_Roster + TrueSource artifact; Hartley waits for compiled C103 Edition + Sift inputs. Removed hardcoded real-world visual defaults from the active DJ bundle and added a pre-provider source-boundary gate; no image call or publication ran.

@@ -27,19 +27,20 @@ pointers:
 **Architecture:** Explicit `--packet-contract=v1|v2` remains an isolated,
 samples-only evaluation namespace and requires `--no-gate`. Live scheduled
 adoption is separate and package-gated through
-`scripts/newsroom-wake-packages.json`. Eight active packages automatically use
+`scripts/newsroom-wake-packages.json`. Nine active packages automatically use
 LEP/2, zero live writer tools, per-wake model routing, and load-bearing
 manifests interpreted by persona-aware Rhea: Jax, Carmen, Luis, Trevor,
-P Slayer, Jordan, Kai, and Rachel. Their typed accountability, civic,
-investigation, systems, fan-pulse, economic/storefront, arts, and public-safety
-slices add domain anchors and bounded creative briefs to that same contract.
+P Slayer, Jordan, Kai, Rachel, and Lila. Their typed accountability, civic,
+investigation, systems, fan-pulse, economic/storefront, arts, public-safety, and
+health-service slices add domain anchors and bounded creative briefs to that
+same contract.
 Luis's `CIVIC-DOMAIN-SLICE-4` additionally selects between a zero-model local
 `RECORDS_BRIEF` when no reporting events are supplied and the configured Sonnet
 `FULL_INVESTIGATION` path when a typed reporting trail exists.
-Evidence-thin Jax, Carmen, Jordan, Kai, Rachel, P Slayer, and Trevor Packets use
-a zero-model local `SOURCE_BRIEF`: W1/W2 may plan and gather bounded statements,
-but W3 prints only filtered approved facts, exact quote blocks, and one open
-question. Their configured writer model remains recorded for a future
+Evidence-thin Jax, Carmen, Jordan, Kai, Rachel, Lila, P Slayer, and Trevor
+Packets use a zero-model local `SOURCE_BRIEF`: W1/W2 may plan and gather bounded
+statements, but W3 prints only filtered approved facts, exact quote blocks, and
+one open question. Their configured writer model remains recorded for a future
 reporting-rich branch; it is not spent on the thin branch.
 Scheduled journalists without an active package are skipped; the legacy generic
 prompt is not a fallback.
@@ -345,7 +346,7 @@ slice and model text is a starting work surface, not an adopted contract.
 | LUIS-LEP2-1 | Luis Navarro / POP-00636 | civic investigations | `CIVIC-DOMAIN-SLICE-4`; typed reporting evidence; local thin-record brief or reporting-backed Article | DeepSeek / DeepSeek / local-or-Sonnet | [x] | thin brief passed; [ ] full reporting/Sonnet/Rhea |
 | TREVOR-LEP2-1 | Trevor Shimizu / POP-00155 | infrastructure | Article LEP/2; typed incident/link/warning systems brief and unestablished cascade | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed with 3 exact quotes |
 | RACHEL-LEP2-1 | Sgt. Rachel Torres / POP-00057 | safety | Article LEP/2; typed public-safety signal and classification/response gap | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed with zero candidates/quotes |
-| pending | Dr. Lila Mezran / POP-00154 | health | Candidate Article LEP/2; cluster/human cost | Candidate DeepSeek; benchmark | [ ] | [ ] |
+| LILA-LEP2-1 | Dr. Lila Mezran / POP-00154 | health | Article LEP/2; `HEALTH-SERVICE-BRIEF-1`; typed access/timeline/human-cost unknowns | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed; DeepSeek schema pass, Llama schema fail |
 | pending | Angela Reyes / POP-00156 | education | Candidate Article LEP/2; school/youth stability | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | Noah Tan / POP-00157 | environment | Candidate Article LEP/2; weather/environment ground | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | Anthony Raines / POP-00017 | sports analytics | Candidate Article LEP/2; roster/board pulse | Candidate DeepSeek; benchmark | [ ] | [ ] |
@@ -361,7 +362,7 @@ slice and model text is a starting work surface, not an adopted contract.
 | pending | Elliot Marbury / POP-00166 | data/general | Separate data-memo contract; TrueSource/As_Roster audit slice | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | DeShawn Hartley / POP-00015 | visual media | Separate visual/photo-prompt contract; visual record slice | Candidate DeepSeek; benchmark | [ ] | [ ] |
 
-The eight active packages have locked routes, but their cost/model comparison and
+The nine active packages have locked routes, but their cost/model comparison and
 full unattended graduation remain checklist work. Elliot Marbury and DeShawn
 Hartley are deliberately not forced into Article LEP/2 until their data-memo and
 visual contracts are specified; contract shape is part of Gate 1. Celeste Tran
@@ -530,12 +531,24 @@ flags at a total gate cost of `$0.3223`. Carmen alone received one medium flag:
 language rather than public prose. No Article was staged, published, uploaded,
 or ingested.
 
+Dr. Lila Mezran then completed the next Task 17 package. Her C103 health slice
+now translates the tracker row to `Temescal Community Health Center is
+approved, and construction is active` while retaining the raw source pointer
+only in provenance. `HEALTH-SERVICE-BRIEF-1` keeps affected people, access,
+opening timeline, capacity, staffing, diagnoses, prevalence, treatment results,
+and causal outcomes explicitly unestablished until supplied. On the identical
+W1 Packet, DeepSeek passed the typed schema; Llama failed because
+`unverifiedLead` was not an array. W2 had no supplied citizen and made zero
+calls; W3 locally rendered a quoteless source brief with zero calls. Manifest,
+prose-engine, and structural checks passed, and independent Gemini Rhea passed
+with zero flags for `$0.0428`. No Article was staged, published, uploaded, or
+ingested.
+
 ## Open questions
 
 - The seven-Article repaired cohort proof is complete. Preserve Carmen's medium
-  public-wording flag as a polish item; the next unchecked Task 17 seat is Dr.
-  Lila Mezran and still requires its own slice, model benchmark, contracts,
-  tests, attended proof, and Rhea gate.
+  public-wording flag as a polish item. Dr. Lila's package and attended proof
+  are complete; the next unchecked Task 17 seat is Angela Reyes.
 - Luis's thin-record path passed locally, but his reporting-trail-backed Sonnet
   path and Rhea proof remain open. A local manifest pass is not publication or
   full package graduation.
@@ -579,3 +592,4 @@ or ingested.
 - 2026-08-12 (codex) — Completed the Jax/Jordan/Rachel local review and the seven-Article deterministic gate. All repaired briefs pass manifest, prose-engine, and structural scans; Jax's stale four-source Packet and the independent OpenRouter Rhea pass remain explicit external-proof gates.
 - 2026-08-13 (codex) — Builder approved fresh Jax W2 plus seven Gemini Rhea calls. OpenRouter's total key limit rejected both two-target Llama requests and the first Gemini request before inference; local Jax W3 passed with zero quotes. Rhea now excludes machine-only `## INTAKE` from model review while deterministic intake validation remains.
 - 2026-08-13 (codex) — After the key limit was raised, fresh Jax W2 landed 2/2 bounded sources and local W3 passed. Independent Gemini Rhea passed all seven repaired Articles with zero high flags for `$0.3223`; Carmen retained one medium public-wording flag. No publication or ingestion occurred.
+- 2026-08-13 (codex) — Added LILA-LEP2-1 with a typed health-service brief and public tracker translation. DeepSeek beat Llama on the identical W1 schema; zero-call W2/W3 and independent Rhea passed with zero flags. No publication or ingestion occurred; Angela Reyes is next.

@@ -353,7 +353,7 @@
   },
   "hal-richmond": {
     "version": "HAL-LEP2-1",
-    "active": false,
+    "active": true,
     "requiredDaily": true,
     "persona": "hal-richmond",
     "assignment": {
@@ -366,11 +366,11 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "meta-llama/llama-3.3-70b-instruct"
       },
       "report": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "meta-llama/llama-3.3-70b-instruct"
       },
       "write": {
         "provider": "openrouter",
@@ -382,6 +382,7 @@
       "canonPolicy": "load-bearing",
       "purpose": "Frame one Packet-backed present sports fact across time without inventing archive history. A supplied historical record may become an echo; an unsupplied one remains explicitly missing.",
       "articleContract": {
+        "renderMode": "SOURCE_BRIEF",
         "voice": "first-person reflective sports history",
         "targetWords": "evidence-bounded literary Article",
         "opening": "one Packet-backed present fact",
@@ -409,7 +410,7 @@
   },
   "tanya-cruz": {
     "version": "TANYA-LEP2-1",
-    "active": false,
+    "active": true,
     "requiredDaily": true,
     "persona": "tanya-cruz",
     "assignment": { "desk": "sports", "name": "Tanya Cruz", "popid": "POP-00014", "beatDomain": "SPORTS_SIDELINE" },
@@ -423,7 +424,7 @@
       "id": "tanya-sideline-v1",
       "canonPolicy": "load-bearing",
       "purpose": "File a short Packet-backed sports dispatch while treating access, observation, mood, dialogue, injuries, and team response as absent unless supplied.",
-      "articleContract": { "voice": "short first-person sideline interpretation", "targetWords": "evidence-bounded", "opening": "one supplied sports fact", "closing": "the access or observation still needed" },
+      "articleContract": { "renderMode": "SOURCE_BRIEF", "voice": "short first-person sideline interpretation", "targetWords": "evidence-bounded", "opening": "one supplied sports fact", "closing": "the access or observation still needed" },
       "authorizedTexture": ["first-person interpretation without a claim of attendance or access", "a concise transition carrying no observed place, action, mood, person, or event"],
       "textureConditions": ["every access claim, observation, quote, injury detail, team response, person, place, event, and statistic requires Packet support", "an unresolved feed subject may not receive a POPID, role, biography, quote, or interview"],
       "canonBlockers": ["invented clubhouse or sideline access, attendance, room mood, witnessed action, dialogue, injury detail, or team response", "an invented or altered person, quote, statistic, result, roster move, venue, event, or relationship", "an unresolved feed spelling silently assigned an identity or role"]

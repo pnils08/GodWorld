@@ -80,6 +80,7 @@ const PACKET_CONTRACT_FLAG = arg('--packet-contract', null);
 // with a unique artifact tag. It cannot alter a scheduled route or stage output.
 const ANGLE_MODEL_OVERRIDE = arg('--angle-model', null);
 const EVALUATION_TAG = arg('--evaluation-tag', null);
+const EVALUATE_PACKAGE = arg('--evaluate-package', null);
 const wakePackages = require('./newsroomWakePackages');
 let ACTIVE_WAKE_PACKAGE = null;
 let PACKET_CONTRACT = null;
@@ -88,7 +89,17 @@ let livedPacket = require('./livedExperiencePacket');
 
 function activateWakeContext(assign, personaSlug) {
   const packageAssignment = assign || (personaSlug ? { persona: personaSlug } : null);
-  ACTIVE_WAKE_PACKAGE = wakePackages.packageForAssignment(packageAssignment);
+  if (EVALUATE_PACKAGE) {
+    const all = wakePackages.loadPackages();
+    const candidate = all[EVALUATE_PACKAGE];
+    if (!candidate) throw new Error('evaluation package not found: ' + EVALUATE_PACKAGE);
+    if (packageAssignment && packageAssignment.persona && packageAssignment.persona !== candidate.persona) {
+      throw new Error('evaluation package/persona mismatch');
+    }
+    ACTIVE_WAKE_PACKAGE = candidate;
+  } else {
+    ACTIVE_WAKE_PACKAGE = wakePackages.packageForAssignment(packageAssignment);
+  }
   PACKET_CONTRACT = PACKET_CONTRACT_FLAG ||
     (ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.packetContract) || null;
   PACKET_ACTIVE = PACKET_CONTRACT === 'v1' || PACKET_CONTRACT === 'v2';
@@ -963,6 +974,7 @@ function evaluationStem(stem, tag) {
 
 function validateAngleEvaluationOptions(opts) {
   const o = opts || {};
+  if (o.packageKey && !o.model) return true;
   if (!o.model && !o.tag) return true;
   if (!o.model || !o.tag) throw new Error('--angle-model and --evaluation-tag must be supplied together');
   if (o.stage !== 'angle' || o.packetContract !== 'v2' || !o.noGate || o.fanout) {
@@ -970,6 +982,16 @@ function validateAngleEvaluationOptions(opts) {
   }
   if (!/^[a-z0-9._-]+\/[a-z0-9._-]+$/i.test(o.model)) {
     throw new Error('--angle-model must be an explicit provider/model route');
+  }
+  evaluationStem('', o.tag);
+  return true;
+}
+
+function validatePackageEvaluationOptions(opts) {
+  const o = opts || {};
+  if (!o.packageKey) return true;
+  if (!o.tag || !o.noGate || !['angle', 'report', 'write'].includes(o.stage) || o.fanout) {
+    throw new Error('--evaluate-package requires --evaluation-tag --no-gate, one --stage, and forbids --fanout');
   }
   evaluationStem('', o.tag);
   return true;
@@ -1979,7 +2001,7 @@ async function runReport(assign) {
   const desk = assign ? assign.desk : DESK;
   const personaSlug = assign ? assign.persona : PERSONA;
   activateWakeContext(assign, personaSlug);
-  const stem = wakeStageStem(cycle, desk, assign, personaSlug);
+  const stem = evaluationStem(wakeStageStem(cycle, desk, assign, personaSlug), EVALUATION_TAG);
   console.log('Wake 2 REPORT — ' + desk + ' c' + cycle + (personaSlug ? ' (' + personaSlug + ')' : '') + (assign ? ' [' + assign.name + ']' : ''));
   console.log('===================================');
   const anglePath = path.join(COMPARE, stem + 'angle.json');
@@ -2082,7 +2104,7 @@ async function runWrite(assign) {
   const desk = assign ? assign.desk : DESK;
   const personaSlug = assign ? assign.persona : PERSONA;
   activateWakeContext(assign, personaSlug);
-  const stem = wakeStageStem(cycle, desk, assign, personaSlug);
+  const stem = evaluationStem(wakeStageStem(cycle, desk, assign, personaSlug), EVALUATION_TAG);
   console.log('Wake 3 WRITE — ' + desk + ' c' + cycle + (personaSlug ? ' (' + personaSlug + ')' : '') + (assign ? ' [' + assign.name + ']' : ''));
   console.log('===================================');
   const anglePath = path.join(COMPARE, stem + 'angle.json');
@@ -2583,6 +2605,14 @@ try {
     packetContract: PACKET_CONTRACT_FLAG,
     noGate: NO_GATE,
     fanout: FANOUT,
+    packageKey: EVALUATE_PACKAGE,
+  });
+  validatePackageEvaluationOptions({
+    packageKey: EVALUATE_PACKAGE,
+    tag: EVALUATION_TAG,
+    stage: STAGE,
+    noGate: NO_GATE,
+    fanout: FANOUT,
   });
 } catch (e) {
   console.error('[run] ' + e.message);
@@ -2604,6 +2634,7 @@ module.exports = {
   writerArtifactTag,
   evaluationStem,
   validateAngleEvaluationOptions,
+  validatePackageEvaluationOptions,
   selectTypedSlice,
   buildWriterArgs,
   collectQuoteAsks,

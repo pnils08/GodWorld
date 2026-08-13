@@ -369,6 +369,25 @@ function buildPresentFacts(row, cycle) {
   return facts.slice(0, 6);
 }
 
+function buildPublishablePresentFacts(row, players, cycle) {
+  const resolved = new Map((players || []).filter(player => player.popid)
+    .map(player => [player.name.toLowerCase(), player.name]));
+  const facts = [];
+  for (const part of sports.parseStatsLine(row.stats || '')) {
+    const canonical = resolved.get(String(part.name || '').toLowerCase());
+    if (canonical && part.line) facts.push(canonical + ' line (feed): ' + part.line);
+  }
+  if (row.record && /\d/.test(row.record)) {
+    facts.push('Team record (feed): ' + row.record + (row.streak ? ' · streak ' + row.streak : ''));
+  }
+  if (row.eventKind) {
+    facts.push('Event (feed): ' + row.team + ' — ' + row.eventKind +
+      (row.seasonType ? ' (' + row.seasonType + ')' : ''));
+  }
+  facts.push('Cycle: C' + (row.cycle != null ? row.cycle : cycle));
+  return facts.slice(0, 6);
+}
+
 function buildHalSlice(cycle, opts) {
   const o = opts || {};
   const root = o.root || ROOT;
@@ -415,15 +434,16 @@ function buildHalSlice(cycle, opts) {
   const closing = pickClosing(cls, row);
   const historicalAnchor = pickHistoricalAnchor(cls, row);
   const foil = sports.extractFoilNumber(row.stats, row.notes);
-  const presentFacts = buildPresentFacts(row, cyc);
-  const claim = buildHistorianClaim(row, cls, foil, closing);
   const players = sports.resolveFeedPlayers(row, ledger, 10);
+  const presentFacts = buildPublishablePresentFacts(row, players, cyc);
+  const claim = buildHistorianClaim(row, cls, foil, closing);
 
+  const safeLabel = (row.team || 'Sports') + ' — ' + (row.eventKind || 'feed') +
+    ' — supplied C' + cyc + ' line card';
   const story = {
-    angle: claim,
-    label: (row.team || '') + ' · ' + (row.eventKind || 'feed') + ' — ' +
-      String(row.storyAngle || row.rawHeader || '').slice(0, 120),
-    hookLine: row.storyAngle || claim,
+    angle: 'What the supplied C' + cyc + ' line card establishes, and what history remains unsupplied.',
+    label: safeLabel,
+    hookLine: safeLabel,
     hood: row.neighborhood || null,
     pulseClass: cls.primary,
     team: row.team,
@@ -719,5 +739,6 @@ module.exports = {
   pickClosing,
   HAL_APPROACH,
   BAG_MODES,
-  CLOSING_PALETTE
+  CLOSING_PALETTE,
+  buildPublishablePresentFacts
 };

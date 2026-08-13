@@ -8,7 +8,17 @@ const profile = packages['freelance-firebrand'].reviewProfile;
 const reviewContext = {
   profile,
   packageVersion: 'JAX-LEP2-1',
-  manifest: { id: 'AM-TEST', policy: 'load-bearing' },
+  manifest: {
+    id: 'AM-TEST',
+    policy: 'load-bearing',
+    approvedQuotes: [{
+      id: 'Q-TEST',
+      speakerName: 'Test Citizen',
+      text: 'This exact Packet quote is supplied.',
+      src: 'packet.W2[TEST-CITIZEN]',
+      factIds: ['F-TEST'],
+    }],
+  },
   audit: {
     manifestId: 'AM-TEST',
     observations: [
@@ -37,5 +47,9 @@ const draftSection = prompt.user.split('=== DRAFT TO VERIFY ===')[1].split('Your
 assert.ok(draftSection.includes('A bartender on 7th spoke.'));
 assert.ok(!draftSection.includes('Initiative_Tracker'));
 assert.ok(prompt.user.includes('machine-only ## INTAKE provenance block was validated separately'));
+assert.ok(prompt.user.includes('EXACT PACKET QUOTE PROVENANCE'));
+assert.ok(prompt.user.includes('Test Citizen: "This exact Packet quote is supplied."'));
+assert.ok(prompt.user.includes('packet.W2[TEST-CITIZEN]; supports F-TEST'));
+assert.ok(prompt.user.includes('Do not call an exact listed quote fabricated'));
 
 console.log('cronRheaPersonaGate.test.js: PASS');

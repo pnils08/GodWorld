@@ -338,6 +338,14 @@ function buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profil
       '   WAKE-3 MANIFEST POLICY: ' + (reviewContext.manifest && reviewContext.manifest.policy || 'unknown'),
       '   LEXICAL REVIEW CUES (not automatic flags): ' +
         JSON.stringify(reviewContext.audit.observations || []),
+      '',
+      '5. EXACT PACKET QUOTE PROVENANCE (deterministically validated against the Wake-3 manifest):',
+      ...((reviewContext.manifest && reviewContext.manifest.approvedQuotes || []).length
+        ? reviewContext.manifest.approvedQuotes.map(quote =>
+          '   - ' + quote.speakerName + ': ' + JSON.stringify(quote.text) +
+          ' [' + quote.src + '; supports ' + (quote.factIds || []).join(', ') + ']')
+        : ['   (none)']),
+      '   These exact speaker/text pairs are supplied interview evidence for this draft. Do not call an exact listed quote fabricated merely because older canon records a different statement by the same citizen. Still flag altered text, wrong attribution, or factual prose that the approved facts do not support.',
     ] : []),
     '',
     'The machine-only ## INTAKE provenance block was validated separately and is intentionally omitted below. Do not flag its absence or speculate about its contents.',

@@ -21,6 +21,10 @@ if (fs.existsSync(summary)) {
   assert.equal(w1.task.creativeBrief.kind, 'sideline-dispatch');
   assert.deepStrictEqual(w1.task.creativeBrief.anchorFacts, slice.prewrite.anchorFacts);
   assert.ok(slice.prewrite.anchorFacts.every(text => w1.known.some(row => row.text === text)));
+  assert.ok(slice.prewrite.anchorFacts.every(text => !/Dybantsa|NamesUsed/.test(text)));
+  assert.ok(slice.prewrite.anchorFacts.every(text => !/\(feed\)|streak|mood|fan sentiment|team-update/i.test(text)));
+  assert.ok(slice.prewrite.anchorFacts.some(text => /23 points and 7 assists/.test(text)));
+  assert.match(slice.story.label, /preseason update: 0-1/);
   assert.ok(w1.exposure.candidates.every(row => /^POP-\d{5}$/.test(row.pop)));
 }
 console.log('buildTanyaSlice tests: PASS');

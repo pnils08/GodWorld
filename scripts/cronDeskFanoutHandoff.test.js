@@ -10,6 +10,7 @@ const {
   writerArtifactTag,
   evaluationStem,
   validateAngleEvaluationOptions,
+  validatePackageEvaluationOptions,
   selectTypedSlice,
   buildWriterArgs,
   activateWakeContext,
@@ -143,6 +144,12 @@ assert.strictEqual(validateAngleEvaluationOptions({
   model: 'meta-llama/llama-3.3-70b-instruct', tag: 'llama', stage: 'angle',
   packetContract: 'v2', noGate: true, fanout: false,
 }), true);
+assert.throws(() => validatePackageEvaluationOptions({ packageKey: 'hal-richmond',
+  tag: null, stage: 'report', noGate: true, fanout: false }), /requires --evaluation-tag/);
+assert.throws(() => validatePackageEvaluationOptions({ packageKey: 'hal-richmond',
+  tag: 'deepseek', stage: 'report', noGate: true, fanout: true }), /forbids --fanout/);
+assert.strictEqual(validatePackageEvaluationOptions({ packageKey: 'hal-richmond',
+  tag: 'deepseek', stage: 'write', noGate: true, fanout: false }), true);
 const halTypedSlice = { kind: 'hal-archive', empty: false };
 assert.strictEqual(selectTypedSlice([null, { empty: true }, halTypedSlice]), halTypedSlice);
 assert.throws(

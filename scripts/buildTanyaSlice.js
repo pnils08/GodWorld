@@ -20,6 +20,31 @@ function score(row, cycle) {
   return value;
 }
 
+function publishableAnchorFacts(row, players, cycle) {
+  const resolved = new Map((players || []).filter(player => player.popid)
+    .map(player => [player.name.toLowerCase(), player.name]));
+  const facts = [];
+  for (const part of sports.parseStatsLine(row.stats || '')) {
+    const canonical = resolved.get(String(part.name || '').toLowerCase());
+    if (canonical && part.line) {
+      const line = String(part.line)
+        .replace(/(\d+)\s*pt\b/gi, '$1 points')
+        .replace(/(\d+)\s*asst\b/gi, '$1 assists')
+        .replace(/(\d+)\s*ast\b/gi, '$1 assists')
+        .replace(/(\d+)\s*reb\b/gi, '$1 rebounds')
+        .replace(/(\d+)\s*stl\b/gi, '$1 steals')
+        .replace(/(\d+)\s*blk\b/gi, '$1 blocks')
+        .replace(/\s*\/\s*/g, ' and ');
+      facts.push(canonical + ' recorded ' + line + '.');
+    }
+  }
+  if (row.record && /\d/.test(row.record)) {
+    facts.push('The ' + row.team + (row.seasonType ? ' ' + row.seasonType : '') +
+      ' record is ' + row.record + '.');
+  }
+  return facts.slice(0, 8);
+}
+
 function buildTanyaSlice(cycle, opts) {
   const o = opts || {};
   const root = o.root || ROOT;
@@ -29,11 +54,16 @@ function buildTanyaSlice(cycle, opts) {
   const top = ranked[0];
   const row = top.row;
   const players = sports.resolveFeedPlayers(row, o.ledger || sports.loadLedgerNameIndex(root), 8);
-  const anchorFacts = sports.buildFeedAnchorFacts(row, cycle);
+  const anchorFacts = publishableAnchorFacts(row, players, cycle);
+  const storyLabel = [
+    row.team + (row.seasonType ? ' ' + row.seasonType : '') +
+      (row.record ? ' update: ' + row.record : ' update'),
+    anchorFacts.find(fact => !fact.startsWith('The ' + row.team)) || null,
+  ].filter(Boolean).join(' — ');
   const story = {
-    angle: row.storyAngle || row.rawHeader,
-    label: [row.team, row.eventKind, row.storyAngle || row.rawHeader].filter(Boolean).join(' — '),
-    hookLine: row.storyAngle || row.rawHeader,
+    angle: storyLabel,
+    label: storyLabel,
+    hookLine: storyLabel,
     kind: 'sideline-signal', hood: row.neighborhood || null,
     popids: players.filter(p => p.popid).map(p => p.popid),
     citizens: players.filter(p => p.popid).map(p => p.name + ' (' + p.popid + ')'),
@@ -87,4 +117,4 @@ if (require.main === module) {
   console.log(JSON.stringify(buildTanyaSlice(cycle), null, 2));
 }
 
-module.exports = { buildTanyaSlice, loadTanyaSlice, score, TANYA_APPROACH };
+module.exports = { buildTanyaSlice, loadTanyaSlice, score, publishableAnchorFacts, TANYA_APPROACH };

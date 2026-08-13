@@ -139,6 +139,8 @@ const sourceBrief = p.renderSourceBrief(sourceBriefW3);
 assert.equal(sourceBrief.split('\n')[0], '# TEST-ONLY signal changed');
 assert.match(sourceBrief, new RegExp(claims.publishableQuote.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
 assert.doesNotMatch(sourceBrief, /invented biography|collective sentiment/i);
+assert.doesNotMatch(sourceBrief, /supplied record establishes|source material provides|record leaves one question/i);
+assert.match(sourceBrief, /Test Resident said:/);
 assert.match(sourceBrief, /What additional record would explain the supplied condition\?/);
 assert.equal(p.auditArticle(sourceBrief, sourceBriefW3).ok, true);
 
@@ -173,7 +175,7 @@ const inlinePopProfileW3 = p.buildWritePacket({
 });
 assert.ok(inlinePopProfileW3.manifest.approvedSubjects.every(row => !/POP-\d+/.test(row.profile)));
 const inlineProfileBrief = p.renderSourceBrief(inlinePopProfileW3);
-assert.match(inlineProfileBrief, /\*\*Test Resident — TEST-ONLY Mechanic, TEST-HOOD\*\*/);
+assert.match(inlineProfileBrief, /Test Resident — TEST-ONLY Mechanic, TEST-HOOD said:/);
 assert.doesNotMatch(inlineProfileBrief, /careerStage|wealth|employerBiz|tier:/);
 
 // P Slayer's fan-pulse slice is a typed LEP/2 input, not side-channel prompt text.

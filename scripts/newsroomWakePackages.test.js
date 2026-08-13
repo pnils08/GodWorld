@@ -6,7 +6,7 @@ const packagesApi = require('./newsroomWakePackages');
 const packages = packagesApi.loadPackages();
 const active = packagesApi.activePackages(packages);
 assert.deepStrictEqual(active.map(row => row.key),
-  ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'p-slayer', 'anthony-raines', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'noah-tan']);
+  ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'p-slayer', 'anthony-raines', 'hal-richmond', 'tanya-cruz', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'noah-tan']);
 
 const jax = packages['freelance-firebrand'];
 assert.equal(jax.version, 'JAX-LEP2-1');
@@ -102,26 +102,28 @@ assert.ok(anthony.reviewProfile.canonBlockers.some(v => v.includes('wrong player
 
 const hal = packages['hal-richmond'];
 assert.equal(hal.version, 'HAL-LEP2-1');
-assert.equal(hal.active, false);
+assert.equal(hal.active, true);
 assert.equal(hal.requiredDaily, true);
 assert.equal(hal.assignment.desk, 'sports');
 assert.equal(hal.assignment.name, 'Hal Richmond');
 assert.equal(hal.assignment.popid, 'POP-00007');
 assert.equal(hal.assignment.beatDomain, 'SPORTS_HISTORY');
 assert.equal(hal.packetContract, 'v2');
-assert.equal(packagesApi.routeFor(hal, 'angle').model, 'deepseek/deepseek-chat');
-assert.equal(packagesApi.routeFor(hal, 'report').model, 'deepseek/deepseek-chat');
+assert.equal(packagesApi.routeFor(hal, 'angle').model, 'meta-llama/llama-3.3-70b-instruct');
+assert.equal(packagesApi.routeFor(hal, 'report').model, 'meta-llama/llama-3.3-70b-instruct');
 assert.equal(packagesApi.routeFor(hal, 'write').model, 'deepseek/deepseek-chat');
+assert.equal(hal.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.match(hal.reviewProfile.purpose, /unsupplied one remains explicitly missing/);
 assert.ok(hal.reviewProfile.textureConditions.some(v => v.includes('historical echo')));
 assert.ok(hal.reviewProfile.canonBlockers.some(v => v.includes('historical person')));
 
 const tanya = packages['tanya-cruz'];
 assert.equal(tanya.version, 'TANYA-LEP2-1');
-assert.equal(tanya.active, false);
+assert.equal(tanya.active, true);
 assert.equal(tanya.assignment.popid, 'POP-00014');
 assert.equal(tanya.assignment.beatDomain, 'SPORTS_SIDELINE');
 assert.equal(packagesApi.routeFor(tanya, 'angle').model, 'deepseek/deepseek-chat');
+assert.equal(tanya.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.ok(tanya.reviewProfile.canonBlockers.some(v => v.includes('clubhouse or sideline access')));
 
 const jordan = packages['business-desk'];
@@ -278,6 +280,8 @@ const pinned = applyWakePackageGate([
   'trevor-shimizu': 'Trevor systems warning',
   'p-slayer': 'P Slayer fan heat',
   'anthony-raines': 'Anthony analytic board',
+  'hal-richmond': 'Hal historical continuity',
+  'tanya-cruz': 'Tanya sideline record',
   'business-desk': 'Jordan storefront ledger',
   'kai-marston': 'Kai arts pulse',
   'rachel-torres': 'Rachel public safety',
@@ -285,7 +289,7 @@ const pinned = applyWakePackageGate([
   'angela-reyes': 'Angela education stability',
   'noah-tan': 'Noah weather ground',
 }, packages);
-assert.equal(pinned.assignments.length, 12);
+assert.equal(pinned.assignments.length, 14);
 const pinnedByPersona = new Map(pinned.assignments.map(row => [row.persona, row]));
 assert.equal(pinnedByPersona.get('freelance-firebrand').name, 'Jax Caldera');
 assert.equal(pinnedByPersona.get('freelance-firebrand').approach, 'Jax accountability');
@@ -305,6 +309,12 @@ assert.equal(pinnedByPersona.get('p-slayer').story.ref, 'TEST-SPORTS-ONE');
 assert.equal(pinnedByPersona.get('anthony-raines').name, 'Anthony Raines');
 assert.equal(pinnedByPersona.get('anthony-raines').approach, 'Anthony analytic board');
 assert.equal(pinnedByPersona.get('anthony-raines').story.ref, 'TEST-SPORTS-TWO');
+assert.equal(pinnedByPersona.get('hal-richmond').name, 'Hal Richmond');
+assert.equal(pinnedByPersona.get('hal-richmond').approach, 'Hal historical continuity');
+assert.equal(pinnedByPersona.get('hal-richmond').story, undefined);
+assert.equal(pinnedByPersona.get('tanya-cruz').name, 'Tanya Cruz');
+assert.equal(pinnedByPersona.get('tanya-cruz').approach, 'Tanya sideline record');
+assert.equal(pinnedByPersona.get('tanya-cruz').story, undefined);
 assert.equal(pinnedByPersona.get('business-desk').name, 'Jordan Velez');
 assert.equal(pinnedByPersona.get('business-desk').approach, 'Jordan storefront ledger');
 assert.equal(pinnedByPersona.get('kai-marston').name, 'Kai Marston');
@@ -319,7 +329,7 @@ assert.equal(pinnedByPersona.get('noah-tan').name, 'Noah Tan');
 assert.equal(pinnedByPersona.get('noah-tan').approach, 'Noah weather ground');
 assert.deepStrictEqual(pinned.pinned.map(row => row.replaced),
   ['TEST-ONLY Civic One', 'TEST-ONLY Civic Two', null, null, 'TEST-ONLY Sports One',
-    'TEST-ONLY Sports Two', 'TEST-ONLY Business Reporter', null, null, null, null, null]);
+    'TEST-ONLY Sports Two', null, null, 'TEST-ONLY Business Reporter', null, null, null, null, null]);
 assert.deepStrictEqual(pinned.skipped.map(row => row.name), []);
 
 // Registry order cannot let one required civic package overwrite the other.
@@ -342,10 +352,10 @@ const shortDesk = applyWakePackageGate([
   { desk: 'business', name: 'TEST-ONLY Business Seat', popid: 'POP-99994', story: { ref: 'TEST-BUSINESS' } },
   { desk: 'culture', name: 'TEST-ONLY Culture Preserved', popid: 'POP-99991', story: { ref: 'TEST-CULTURE' } },
 ], { civic: 'generic civic' }, packages);
-assert.equal(shortDesk.assignments.length, 12);
+assert.equal(shortDesk.assignments.length, 14);
 assert.deepStrictEqual(new Set(shortDesk.assignments.map(row => row.persona)),
-  new Set(['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'p-slayer', 'anthony-raines', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'noah-tan']));
+  new Set(['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'p-slayer', 'anthony-raines', 'hal-richmond', 'tanya-cruz', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'noah-tan']));
 assert.ok(shortDesk.pinned.some(row => row.replaced === 'TEST-ONLY Culture Preserved'));
-assert.equal(shortDesk.pinned.filter(row => row.replaced === null).length, 9);
+assert.equal(shortDesk.pinned.filter(row => row.replaced === null).length, 11);
 
 console.log('newsroomWakePackages.test.js: PASS');

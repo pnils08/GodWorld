@@ -492,7 +492,7 @@ function renderSourceBrief(packet) {
     const subject = subjects.get(quote.speakerId);
     const descriptor = subject && publicSubjectDescriptor(subject.profile, quote.speakerName);
     return [
-      '**' + clean(quote.speakerName, 160) + (descriptor ? ' — ' + descriptor : '') + '**',
+      clean(quote.speakerName, 160) + (descriptor ? ' — ' + descriptor : '') + ' said:',
       '',
       '> “' + clean(quote.text, 1400) + '”',
       ''
@@ -501,16 +501,13 @@ function renderSourceBrief(packet) {
   const lines = [
     '# ' + title,
     '',
-    'The supplied record establishes:',
+    ...facts.flatMap(row => {
+      const text = clean(row.text, 500);
+      return [text + (/[^.!?]$/.test(text) ? '.' : ''), ''];
+    }),
     '',
-    ...facts.map(row => '- ' + clean(row.text, 500)),
-    '',
-    ...(sourceLines.length ? [
-      'The supplied source material provides these exact statements:',
-      '',
-      ...sourceLines,
-    ] : []),
-    closeQuestion ? 'The record leaves one question open: ' + closeQuestion : null,
+    ...sourceLines,
+    closeQuestion ? 'The next reporting question is: ' + closeQuestion : null,
     '',
     '## INTAKE',
     ...quotes.map(quote => 'NAMES: ' + clean(quote.speakerName, 160) + ' | quoted-source'),

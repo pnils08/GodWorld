@@ -126,6 +126,9 @@ if (fs.existsSync(summary103)) {
     packet.task.creativeBrief && packet.task.creativeBrief.kind === 'sports-history');
   ok('c103 W1 carries feed present facts', current.prewrite.presentFacts.every(text =>
     packet.known.some(row => row.text === text)));
+  ok('c103 publishable facts exclude unresolved and misspelled feed names',
+    current.prewrite.presentFacts.every(text => !/Pablo|Vinne\b/.test(text)) &&
+    !/Pablo|Vinne\b/.test(current.story.label));
   ok('c103 W1 exposes only ledger-resolved subject for W2',
     packet.exposure.candidates.length === 1 &&
     packet.exposure.candidates[0].pop === 'POP-00001' &&

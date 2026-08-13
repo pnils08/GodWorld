@@ -338,13 +338,13 @@ slice and model text is a starting work surface, not an adopted contract.
 
 | Package | Seat / POPID | Domain | Contract and slice surface | Model route | Package | Proof |
 |---|---|---|---|---|---|---|
-| JAX-LEP2-1 | Jax Caldera / POP-00799 | accountability | Article LEP/2; stink contradiction | Llama / Llama / local source brief | [x] | fresh W2 held exact two-target boundary but provider rejected 2/2; zero-quote local W3 passed; [ ] Rhea |
-| CARMEN-LEP2-1 | Carmen Delaine / POP-00011 | civic ledger | Article LEP/2; initiatives/votes/money | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/local audit passed; [ ] Rhea |
-| PSLAYER-LEP2-1 | P Slayer / POP-00008 | sports | Article LEP/2; typed fan pulse | Llama / Llama / local source brief | [x] | attended W1-W3/local audit passed; [ ] Rhea/reporting-rich column |
-| JORDAN-LEP2-1 | Jordan Velez / POP-00153 | economics/labor | Article LEP/2; economic/storefront | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/local audit passed with zero candidates/quotes; [ ] Rhea |
+| JAX-LEP2-1 | Jax Caldera / POP-00799 | accountability | Article LEP/2; stink contradiction | Llama / Llama / local source brief | [x] | attended W1-W3/Rhea passed; exact 2-target W2 landed 2 quotes |
+| CARMEN-LEP2-1 | Carmen Delaine / POP-00011 | civic ledger | Article LEP/2; initiatives/votes/money | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed; one medium public-wording flag remains |
+| PSLAYER-LEP2-1 | P Slayer / POP-00008 | sports | Article LEP/2; typed fan pulse | Llama / Llama / local source brief | [x] | attended W1-W3/Rhea passed; [ ] reporting-rich column |
+| JORDAN-LEP2-1 | Jordan Velez / POP-00153 | economics/labor | Article LEP/2; economic/storefront | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed with zero candidates/quotes |
 | LUIS-LEP2-1 | Luis Navarro / POP-00636 | civic investigations | `CIVIC-DOMAIN-SLICE-4`; typed reporting evidence; local thin-record brief or reporting-backed Article | DeepSeek / DeepSeek / local-or-Sonnet | [x] | thin brief passed; [ ] full reporting/Sonnet/Rhea |
-| TREVOR-LEP2-1 | Trevor Shimizu / POP-00155 | infrastructure | Article LEP/2; typed incident/link/warning systems brief and unestablished cascade | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/local audit passed with 3 exact quotes; [ ] Rhea |
-| RACHEL-LEP2-1 | Sgt. Rachel Torres / POP-00057 | safety | Article LEP/2; typed public-safety signal and classification/response gap | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/local audit passed with zero candidates/quotes; [ ] Rhea |
+| TREVOR-LEP2-1 | Trevor Shimizu / POP-00155 | infrastructure | Article LEP/2; typed incident/link/warning systems brief and unestablished cascade | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed with 3 exact quotes |
+| RACHEL-LEP2-1 | Sgt. Rachel Torres / POP-00057 | safety | Article LEP/2; typed public-safety signal and classification/response gap | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed with zero candidates/quotes |
 | pending | Dr. Lila Mezran / POP-00154 | health | Candidate Article LEP/2; cluster/human cost | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | Angela Reyes / POP-00156 | education | Candidate Article LEP/2; school/youth stability | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | Noah Tan / POP-00157 | environment | Candidate Article LEP/2; weather/environment ground | Candidate DeepSeek; benchmark | [ ] | [ ] |
@@ -355,7 +355,7 @@ slice and model text is a starting work surface, not an adopted contract.
 | pending | Ariana Reyes / POP-00133 | sports analytics | Candidate Article LEP/2; numeric/board pulse | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | Maria Keen / POP-00013 | culture | Candidate Article LEP/2; evening-life/neighborhood ground | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | Elliot Graye / POP-00012 | community/faith | Candidate Article LEP/2; faith/quiet work | Candidate DeepSeek; benchmark | [ ] | [ ] |
-| KAI-LEP2-1 | Kai Marston / POP-00158 | culture/arts | Article LEP/2; shared evening substrate with arts overlay | Llama / Llama / local source brief | [x] | attended W1-W3/local audit passed; [ ] Rhea/reporting-rich scene |
+| KAI-LEP2-1 | Kai Marston / POP-00158 | culture/arts | Article LEP/2; shared evening substrate with arts overlay | Llama / Llama / local source brief | [x] | attended W1-W3/Rhea passed; [ ] reporting-rich scene |
 | pending | Mason Ortega / POP-00160 | culture/food | Candidate Article LEP/2; restaurants as workplaces | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | Sharon Okafor / POP-00159 | culture/lifestyle | Candidate Article LEP/2; behavior patterns | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | Elliot Marbury / POP-00166 | data/general | Separate data-memo contract; TrueSource/As_Roster audit slice | Candidate DeepSeek; benchmark | [ ] | [ ] |
@@ -521,12 +521,21 @@ omits that block from the model's draft while retaining deterministic intake
 validation. Trevor's overnight duplicate-quote finding remains a legitimate
 editorial warning to retest after provider capacity returns.
 
+After the builder raised the key limit, the approved proof completed. Jax Wake
+2 made exactly two Llama calls and landed exact statements from Calvin Turner
+and Vladimir Gonzalez; fresh zero-call W3 then passed every local gate. Gemini
+Rhea independently passed all seven repaired Articles with zero high-severity
+flags at a total gate cost of `$0.3223`. Carmen alone received one medium flag:
+`supplied phase is disbursement active` remains accurate but reads like status
+language rather than public prose. No Article was staged, published, uploaded,
+or ingested.
+
 ## Open questions
 
-- C103 local cohort review is complete, but graduation and further package
-  expansion are blocked on restored OpenRouter key capacity. Once restored,
-  rerun Jax's exact two-target Wake 2 and independent Rhea over the seven
-  repaired Articles with their W3 Packet/review context.
+- The seven-Article repaired cohort proof is complete. Preserve Carmen's medium
+  public-wording flag as a polish item; the next unchecked Task 17 seat is Dr.
+  Lila Mezran and still requires its own slice, model benchmark, contracts,
+  tests, attended proof, and Rhea gate.
 - Luis's thin-record path passed locally, but his reporting-trail-backed Sonnet
   path and Rhea proof remain open. A local manifest pass is not publication or
   full package graduation.
@@ -569,3 +578,4 @@ editorial warning to retest after provider capacity returns.
 - 2026-08-12 (codex) — Attended `NOT_CANON` local proofs passed for Carmen, Kai, P Slayer, and Trevor; Trevor landed three exact quote blocks. No Rhea, staging, publication, upload, or ingestion occurred. Review Jax/Jordan/Rachel and run Rhea before another package.
 - 2026-08-12 (codex) — Completed the Jax/Jordan/Rachel local review and the seven-Article deterministic gate. All repaired briefs pass manifest, prose-engine, and structural scans; Jax's stale four-source Packet and the independent OpenRouter Rhea pass remain explicit external-proof gates.
 - 2026-08-13 (codex) — Builder approved fresh Jax W2 plus seven Gemini Rhea calls. OpenRouter's total key limit rejected both two-target Llama requests and the first Gemini request before inference; local Jax W3 passed with zero quotes. Rhea now excludes machine-only `## INTAKE` from model review while deterministic intake validation remains.
+- 2026-08-13 (codex) — After the key limit was raised, fresh Jax W2 landed 2/2 bounded sources and local W3 passed. Independent Gemini Rhea passed all seven repaired Articles with zero high flags for `$0.3223`; Carmen retained one medium public-wording flag. No publication or ingestion occurred.

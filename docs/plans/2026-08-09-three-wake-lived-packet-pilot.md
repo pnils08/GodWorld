@@ -1,7 +1,7 @@
 ---
 title: Three-Wake Typed Lived-Experience Packet Pilot
 created: 2026-08-09
-updated: 2026-08-12
+updated: 2026-08-13
 type: plan
 tags: [media, citizens, civic, sports, business, agents, evaluation, active]
 sources:
@@ -338,7 +338,7 @@ slice and model text is a starting work surface, not an adopted contract.
 
 | Package | Seat / POPID | Domain | Contract and slice surface | Model route | Package | Proof |
 |---|---|---|---|---|---|---|
-| JAX-LEP2-1 | Jax Caldera / POP-00799 | accountability | Article LEP/2; stink contradiction | Llama / Llama / local source brief | [x] | attended W1-W3/local audit passed on retained four-source Packet; [ ] fresh two-target W2/Rhea |
+| JAX-LEP2-1 | Jax Caldera / POP-00799 | accountability | Article LEP/2; stink contradiction | Llama / Llama / local source brief | [x] | fresh W2 held exact two-target boundary but provider rejected 2/2; zero-quote local W3 passed; [ ] Rhea |
 | CARMEN-LEP2-1 | Carmen Delaine / POP-00011 | civic ledger | Article LEP/2; initiatives/votes/money | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/local audit passed; [ ] Rhea |
 | PSLAYER-LEP2-1 | P Slayer / POP-00008 | sports | Article LEP/2; typed fan pulse | Llama / Llama / local source brief | [x] | attended W1-W3/local audit passed; [ ] Rhea/reporting-rich column |
 | JORDAN-LEP2-1 | Jordan Velez / POP-00153 | economics/labor | Article LEP/2; economic/storefront | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/local audit passed with zero candidates/quotes; [ ] Rhea |
@@ -505,12 +505,28 @@ plus its Packet manifest and review profile to OpenRouter. The attempted fresh
 Jax Wake 2 was likewise held because it would send two citizen profile Packets
 to OpenRouter Llama. Both require payload-specific builder approval.
 
+The builder granted that approval on 2026-08-13. Fresh Jax Wake 2 requested only
+Calvin Turner and Vladimir Gonzalez, proving the two-target boundary, but
+OpenRouter rejected both Llama requests at the account key's total limit before
+inference; the resulting Packet visibly landed zero quotes. Its zero-call local
+W3 source brief then passed manifest, prose-engine, and structural checks. The
+first approved Gemini Rhea request hit the same total-limit rejection before a
+verdict, so the remaining six calls were not repeated against a confirmed
+account-wide block.
+
+Overnight Rhea artifacts are not accepted as repaired-cohort proof: Jordan and
+Kai predate the final corrections, while several later verdicts treated raw
+machine-only `## INTAKE` provenance as Article prose. Commit `622a3bd3` now
+omits that block from the model's draft while retaining deterministic intake
+validation. Trevor's overnight duplicate-quote finding remains a legitimate
+editorial warning to retest after provider capacity returns.
+
 ## Open questions
 
 - C103 local cohort review is complete, but graduation and further package
-  expansion remain gated on payload-specific approval for independent Rhea over
-  the seven repaired Articles and their W3 Packet/review context. Jax also needs
-  a fresh two-target Wake 2 observation before its external proof is current.
+  expansion are blocked on restored OpenRouter key capacity. Once restored,
+  rerun Jax's exact two-target Wake 2 and independent Rhea over the seven
+  repaired Articles with their W3 Packet/review context.
 - Luis's thin-record path passed locally, but his reporting-trail-backed Sonnet
   path and Rhea proof remain open. A local manifest pass is not publication or
   full package graduation.
@@ -552,3 +568,4 @@ to OpenRouter Llama. Both require payload-specific builder approval.
 - 2026-08-12 (codex) — Repaired the three shared C103 failure classes at the Packet boundary: direct quotes fail closed, exact candidates own W2 identity exposure, public slice facts omit engine metadata, and P Slayer cannot promote a prior-Cycle row over a current feed row. Thin Carmen/Jordan/Rachel/Kai/P Slayer/Trevor W3 Packets now use zero-call `SOURCE_BRIEF` assembly.
 - 2026-08-12 (codex) — Attended `NOT_CANON` local proofs passed for Carmen, Kai, P Slayer, and Trevor; Trevor landed three exact quote blocks. No Rhea, staging, publication, upload, or ingestion occurred. Review Jax/Jordan/Rachel and run Rhea before another package.
 - 2026-08-12 (codex) — Completed the Jax/Jordan/Rachel local review and the seven-Article deterministic gate. All repaired briefs pass manifest, prose-engine, and structural scans; Jax's stale four-source Packet and the independent OpenRouter Rhea pass remain explicit external-proof gates.
+- 2026-08-13 (codex) — Builder approved fresh Jax W2 plus seven Gemini Rhea calls. OpenRouter's total key limit rejected both two-target Llama requests and the first Gemini request before inference; local Jax W3 passed with zero quotes. Rhea now excludes machine-only `## INTAKE` from model review while deterministic intake validation remains.

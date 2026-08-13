@@ -52,4 +52,17 @@ assert.ok(prompt.user.includes('Test Citizen: "This exact Packet quote is suppli
 assert.ok(prompt.user.includes('packet.W2[TEST-CITIZEN]; supports F-TEST'));
 assert.ok(prompt.user.includes('Do not call an exact listed quote fabricated'));
 
+const faithPrompt = buildApiPrompt(
+  999,
+  "# TEST-ONLY\n\nA visitor was spotted at B'nai Tikvah Synagogue.\n\n## INTAKE\nCLAIM: Test-only | source",
+  'TEST-ONLY raw signal names Beth Jacob Congregation.',
+  { canonNames: 0, verified: [], unverified: ["B'nai Tikvah Synagogue"] },
+  [],
+  [],
+  null
+);
+assert.ok(faithPrompt.user.includes('AUTHORITATIVE FAITH CORRECTIONS FORWARD'));
+assert.ok(faithPrompt.user.includes('BLOCKED "Beth Jacob Congregation" => CANON "B\'nai Tikvah Synagogue"'));
+assert.ok(faithPrompt.user.includes('canon name on the right is not an invention'));
+
 console.log('cronRheaPersonaGate.test.js: PASS');

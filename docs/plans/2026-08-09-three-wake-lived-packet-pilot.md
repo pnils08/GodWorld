@@ -27,10 +27,10 @@ pointers:
 **Architecture:** Explicit `--packet-contract=v1|v2` remains an isolated,
 samples-only evaluation namespace and requires `--no-gate`. Live scheduled
 adoption is separate and package-gated through
-`scripts/newsroom-wake-packages.json`. Sixteen active packages automatically use
+`scripts/newsroom-wake-packages.json`. Seventeen active packages automatically use
 LEP/2, zero live writer tools, per-wake model routing, and load-bearing
 manifests interpreted by persona-aware Rhea: Jax, Carmen, Luis, Trevor,
-P Slayer, Anthony, Hal, Tanya, Simon, Maria, Jordan, Kai, Rachel, Lila, Angela,
+P Slayer, Anthony, Hal, Tanya, Simon, Maria, Graye, Jordan, Kai, Rachel, Lila, Angela,
 and Noah. Their typed accountability, civic,
 investigation, systems, fan-pulse, sports-analytics, sports-history, sideline, long-view, economic/storefront, arts, public-safety, and
 health-service, education-stability, and weather-ground slices add domain anchors and bounded
@@ -356,14 +356,14 @@ slice and model text is a starting work surface, not an adopted contract.
 | SIMON-LEP2-1 | Simon Leary / POP-00016 | sports long view | Article LEP/2; present role change/current-record boundary | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed; Llama failed W1 schema |
 | pending | Ariana Reyes / POP-00133 | sports analytics | Candidate Article LEP/2; numeric/board pulse; blocked until a current As_Roster + TrueSource audit artifact exists | Candidate DeepSeek; benchmark | [ ] | blocked: current `output/desk-packets/truesource_reference.json` is absent; feed-only fallback forbidden |
 | MARIA-LEP2-1 | Maria Keen / POP-00013 | culture | Article LEP/2; evening-life/neighborhood ground with no invented attendance | Llama / Llama / local source brief | [x] | attended W1-W3/Rhea passed; Llama safer and shorter than DeepSeek on the same W1 Packet |
-| pending | Elliot Graye / POP-00012 | community/faith | Candidate Article LEP/2; faith/quiet work | Candidate DeepSeek; benchmark | [ ] | [ ] |
+| GRAYE-LEP2-1 | Elliot Graye / POP-00012 | community/faith | Article LEP/2; canon-forward faith institution and sighting-only boundary | Llama / Llama / local source brief | [x] | attended W1-W3/Rhea passed; corrections-forward context fixed a false Rhea canon reversal |
 | KAI-LEP2-1 | Kai Marston / POP-00158 | culture/arts | Article LEP/2; shared evening substrate with arts overlay | Llama / Llama / local source brief | [x] | attended W1-W3/Rhea passed; [ ] reporting-rich scene |
 | pending | Mason Ortega / POP-00160 | culture/food | Candidate Article LEP/2; restaurants as workplaces | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | Sharon Okafor / POP-00159 | culture/lifestyle | Candidate Article LEP/2; behavior patterns | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | Elliot Marbury / POP-00166 | data/general | Separate data-memo contract; TrueSource/As_Roster audit slice | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | DeShawn Hartley / POP-00015 | visual media | Separate visual/photo-prompt contract; visual record slice | Candidate DeepSeek; benchmark | [ ] | [ ] |
 
-The sixteen active packages have locked routes, but their cost/model comparison and
+The seventeen active packages have locked routes, but their cost/model comparison and
 full unattended graduation remain checklist work. Elliot Marbury and DeShawn
 Hartley are deliberately not forced into Article LEP/2 until their data-memo and
 visual contracts are specified; contract shape is part of Gate 1. Celeste Tran
@@ -637,17 +637,30 @@ Llama passed W1 at 2,136/95 tokens and stayed closer to the record than DeepSeek
 locally with zero writer calls, and contextual Gemini Rhea passed with zero flags
 for `$0.0423`. The fifteenth C103 Article staged and `MARIA-LEP2-1` is active.
 
+Elliot Graye's C103 faith-ground package exposed a corrections-forward seam: the
+raw Ripple/world summary still named always-blocked real institution Beth Jacob
+Congregation, while the authoritative map supersedes it with B'nai Tikvah
+Synagogue. The evening slice now applies the map before typed facts are emitted,
+and Rhea injects only correction pairs relevant to the current Article/world
+comparison. Llama's W1 used 2,200/145 tokens and kept speculative purpose in
+typed interpretation/leads; DeepSeek used 2,306/229 and invented a sacred-space
+motive plus imagined congregant behavior. Llama won. W2 had zero candidates and
+zero calls, W3 rendered locally with zero writer calls, the first Gemini Rhea
+correctly failed closed but reversed the old/new authority for `$0.0469`, and the
+unchanged Article passed the corrected Rhea context with zero flags for `$0.0549`.
+The sixteenth C103 Article staged and `GRAYE-LEP2-1` is active.
+
 ## Open questions
 
-- All fifteen current Cycle 103 Rhea passes are staged behind the probation wall.
+- All sixteen current Cycle 103 Rhea passes are staged behind the probation wall.
   Preserve Carmen's medium public-wording flag as a polish item. Angela Reyes's
   package and attended proof are complete. Noah Tan's weather package and proof
   are complete. Anthony's DeepSeek route beat Llama on the fixed C103 Packet and
   the package is active. Hal and Tanya's model comparisons and attended proofs are
   also complete, and both packages are active.
-- Simon's and Maria's packages and attended proofs are complete. Ariana Reyes is
+- Simon's, Maria's, and Graye's packages and attended proofs are complete. Ariana Reyes is
   still the earliest unchecked Article seat but is blocked on a current
-  As_Roster + TrueSource audit artifact; Elliot Graye is the next buildable seat.
+  As_Roster + TrueSource audit artifact; Mason Ortega is the next buildable seat.
 - Luis's thin-record path passed locally, but his reporting-trail-backed Sonnet
   path and Rhea proof remain open. A local manifest pass is not publication or
   full package graduation.
@@ -707,3 +720,4 @@ for `$0.0423`. The fifteenth C103 Article staged and `MARIA-LEP2-1` is active.
 - 2026-08-13 (codex) — Graduated TANYA-LEP2-1 on DeepSeek/DeepSeek/local. Rhea now receives exact manifest quote provenance; Tanya's public facts naturalize sports-feed labels. The corrected attended proof landed one bounded quote, passed contextual Rhea with zero flags, and staged the thirteenth C103 Article.
 - 2026-08-13 (codex) — Graduated SIMON-LEP2-1 on DeepSeek/DeepSeek/local. The typed slice confines sports-as-civic-architecture to interpretation over Benji Dillon's role change and the supplied current record; Llama failed W1 schema, local W3 used zero writer calls, Rhea passed with zero flags, and the fourteenth C103 Article staged.
 - 2026-08-13 (codex) — Recorded Ariana Reyes's missing current As_Roster + TrueSource audit substrate as a fail-closed package blocker, then graduated MARIA-LEP2-1 on Llama/Llama/local. The public evening brief drops backend record scaffolding, W2/W3 made zero model calls, Gemini Rhea passed with zero flags, and the fifteenth C103 Article staged. Elliot Graye is the next buildable seat.
+- 2026-08-13 (codex) — Graduated GRAYE-LEP2-1 on Llama/Llama/local after closing a real-name corrections-forward seam between raw C103 signals and Rhea. The typed slice removes the blocked real faith institution, W2/W3 made zero model calls, the unchanged Article passed corrected Gemini Rhea with zero flags, and the sixteenth C103 Article staged. Mason Ortega is next.

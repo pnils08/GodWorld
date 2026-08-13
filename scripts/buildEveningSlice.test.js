@@ -13,6 +13,7 @@ const {
   writeEveningSlice,
   parseEveningTexture,
   parseCultureSignals,
+  applyFaithCanonForward,
   emitPulses,
   recommendConsumer,
   pickPulseForPersona,
@@ -103,6 +104,26 @@ console.log('emitPulses + recommend:');
   const masonPulse = pickPulseForPersona(pulses, 'mason-ortega');
   ok('mason prefers kitchen-ish', masonPulse &&
     ['named-restaurant', 'fast-food', 'food-trend', 'quiet-nightlife'].includes(masonPulse.className));
+}
+
+console.log('faith canon-forward boundary:');
+{
+  const corrected = applyFaithCanonForward('Claire Ashford at Beth Jacob Congregation');
+  ok('real faith institution is replaced from the authoritative map',
+    corrected === "Claire Ashford at B'nai Tikvah Synagogue");
+  const texture = parseEveningTexture(FIXTURE_TEXTURE.replace(
+    'Downtown Cultural Festival, KONO Arts District Celebration',
+    'Beth Jacob Congregation gathering, KONO Arts District Celebration'));
+  const signals = parseCultureSignals({ lanes: { culture: [{
+    causeType: 'lifestyle-sighting',
+    label: 'sighting | Claire Ashford spotted at Beth Jacob Congregation',
+    hood: 'Piedmont Ave'
+  }] } });
+  const publicBoundary = JSON.stringify({ texture, signals });
+  ok('blocked real faith name cannot survive typed evening input',
+    !/Beth Jacob Congregation/i.test(publicBoundary));
+  ok('canon substitute survives typed evening input',
+    /B'nai Tikvah Synagogue/i.test(publicBoundary));
 }
 
 console.log('isEveningConsumer:');

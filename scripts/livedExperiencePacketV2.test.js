@@ -156,6 +156,9 @@ trackerSourceBriefW3.manifest.approvedFacts = [{
 }, {
   id: 'F-EVENING-RAW', t: 'FACT', text: 'EVENING RECORD: open and quiet',
   src: 'TEST-ONLY evening record'
+}, {
+  id: 'F-SIGHTING', t: 'FACT', text: 'sighting | Test Resident spotted at Test Place',
+  src: 'TEST-ONLY sighting'
 }];
 trackerSourceBriefW3.known = trackerSourceBriefW3.manifest.approvedFacts.map(row => ({ ...row }));
 trackerSourceBriefW3.manifest.approvedQuotes = [];
@@ -166,6 +169,8 @@ assert.match(trackerSourceBrief,
   /TEST-ONLY Initiative is listed as passed, and its supplied phase is pilot active\./);
 assert.doesNotMatch(trackerSourceBrief, /engine_audit|snapshot:|CrimeIndex/);
 assert.doesNotMatch(trackerSourceBrief, /EVENING RECORD/);
+assert.match(trackerSourceBrief, /Test Resident was spotted at Test Place\./);
+assert.doesNotMatch(trackerSourceBrief, /sighting\s*\|/i);
 
 const inlinePopProfileW3 = p.buildWritePacket({
   cycle: 999, desk: 'civic', reporter, story, approach: 'Test the mismatch',

@@ -474,6 +474,28 @@
       "canonBlockers": ["invented attendance, witnessed scene, neighbor, worker, patron, dialogue, gathering, action, policy consequence, or civic outcome", "an invented or altered venue, person, neighborhood, event, institution, relationship, date, count, or quote", "raw nightlife metrics, engine labels, or collective neighborhood sentiment presented as public fact"]
     }
   },
+  "elliot-graye": {
+    "version": "GRAYE-LEP2-1",
+    "active": true,
+    "requiredDaily": true,
+    "persona": "elliot-graye",
+    "assignment": { "desk": "culture", "name": "Elliot Graye", "popid": "POP-00012", "beatDomain": "COMMUNITY" },
+    "packetContract": "v2",
+    "models": {
+      "angle": { "provider": "openrouter", "model": "meta-llama/llama-3.3-70b-instruct" },
+      "report": { "provider": "openrouter", "model": "meta-llama/llama-3.3-70b-instruct" },
+      "write": { "provider": "openrouter", "model": "deepseek/deepseek-chat" }
+    },
+    "reviewProfile": {
+      "id": "graye-faith-ground-v1",
+      "canonPolicy": "load-bearing",
+      "purpose": "Describe one Packet-supplied faith-community or quiet-care signal through observable function without inventing belief, doctrine, attendance, clergy, service, aid, or institutional action.",
+      "articleContract": { "renderMode": "SOURCE_BRIEF", "voice": "reflective faith-and-ethics ground brief", "targetWords": "evidence-bounded", "opening": "one Packet-named institution, person, or condition", "closing": "the function or human account still unestablished" },
+      "authorizedTexture": ["ethical or reflective interpretation of a supplied faith-adjacent condition without asserting belief or action", "dignity-first language carrying no invented person, service, gathering, doctrine, or factual premise"],
+      "textureConditions": ["a sighting proves only the supplied person-place relation, not worship, membership, motive, companionship, or participation", "every clergy member, congregant, worker, gathering, service, aid act, quote, belief, institutional role, and civic effect requires Packet support"],
+      "canonBlockers": ["invented faith practice, belief, worship, membership, motive, companion, clergy, congregant, worker, pantry, grief room, gathering, service, aid act, quote, or civic effect", "an invented or altered person, institution, tradition, neighborhood, event, relationship, date, count, or quote", "a blocked real-world institution or clergy name, doctrine-war framing, raw engine label, or collective faith-community sentiment presented as fact"]
+    }
+  },
   "business-desk": {
     "version": "JORDAN-LEP2-1",
     "active": true,

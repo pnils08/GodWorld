@@ -32,6 +32,7 @@ const {
   normalizePriorArcRequirement,
   formatReviewerEvidence,
 } = require('./priorArcRequirement');
+const { relevantFaithCanonCorrections } = require('./faithCanonForward');
 
 const ROOT = path.join(__dirname, '..');
 const COMPARE_DIR = path.join(ROOT, 'output', 'cron-compare');
@@ -100,6 +101,7 @@ function buildPrompt(cycle, draftRel, worldRel, nameCheck, evidenceRel, reviewCo
     'You are Rhea Morgan, the Cycle Pulse verification agent, running headless as a publish gate.',
     'First read your role and rules: .claude/agents/rhea-morgan/RULES.md and .claude/agents/rhea-morgan/IDENTITY.md.',
     'Ground truth for this cycle is the world state: ' + worldRel + ' (cycle ' + cycle + ').',
+    'Apply `docs/canon/INSTITUTIONS.md` Corrections Forward and `docs/media/REAL_NAMES_BLOCKLIST.md` before comparing faith names. A canon-forward substitute supersedes its blocked legacy/raw name; do not call the substitute invented.',
     ...(evidenceRel
       ? ['Verified prior-published historical evidence is: ' + evidenceRel +
         '. Current Cycle world state wins every conflict.']
@@ -298,6 +300,7 @@ function loadReviewContext(persona, articlePacketFile, draftText) {
 
 function buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profiles, reviewContext) {
   const articleProse = articleProseForReview(draftText);
+  const faithCorrections = relevantFaithCanonCorrections(draftText, worldText);
   const system = [
     'You are Rhea Morgan, the Cycle Pulse verification agent, running headless as a publish gate.',
     'Your role and rules follow — they govern your verdict.',
@@ -311,6 +314,12 @@ function buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profil
   const user = [
     'GROUND TRUTH for cycle ' + cycle + ' (the world state — claims are checked against THIS):',
     worldText,
+    ...(faithCorrections.length ? [
+      '',
+      '=== AUTHORITATIVE FAITH CORRECTIONS FORWARD ===',
+      'These repository mappings override legacy or raw-engine names in the world text. Treat each pair as the same institution or person under the canon name on the right. The blocked name on the left must not appear in the Article; the canon name on the right is not an invention.',
+      ...faithCorrections.map(row => '   - BLOCKED ' + JSON.stringify(row.blocked) + ' => CANON ' + JSON.stringify(row.canon)),
+    ] : []),
     '',
     '=== DETERMINISTIC PRE-CHECKS (already run against the ledger — trust these, they are not model output) ===',
     '1. Canon name check (' + (nameCheck ? nameCheck.canonNames : '?') + ' ledger citizens):',

@@ -30,6 +30,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { applyFaithCanonForward } = require('./faithCanonForward');
 
 const ROOT = path.join(__dirname, '..');
 
@@ -185,7 +186,7 @@ function parseNightlifeMeta(rest) {
  * Parse ## Evening Texture into structured fields + venue lists.
  */
 function parseEveningTexture(md) {
-  const body = extractEveningTexture(md);
+  const body = extractEveningTexture(applyFaithCanonForward(md));
   if (!body) {
     return {
       empty: true,
@@ -255,17 +256,17 @@ function parseCultureSignals(signal) {
   for (const e of lane) {
     const kind = String(e.kind || '');
     const cause = String(e.causeType || '');
-    const label = String(e.label || '');
+    const label = applyFaithCanonForward(e.label || '');
 
     if (kind === 'evening') {
-      eveningPointer = { ref: e.ref, label };
+      eveningPointer = { ref: e.ref ? applyFaithCanonForward(e.ref) : null, label };
       continue;
     }
     if (kind === 'faith-registry' || /faith/i.test(cause)) {
       faith.push({
         kind: kind || cause,
         label,
-        ref: e.ref || null,
+        ref: e.ref ? applyFaithCanonForward(e.ref) : null,
         hood: e.hood || null,
         popids: e.popids || []
       });
@@ -277,7 +278,7 @@ function parseCultureSignals(signal) {
         kind: 'fame-event',
         label,
         name: nameM ? nameM[1].trim() : null,
-        ref: e.ref || null,
+        ref: e.ref ? applyFaithCanonForward(e.ref) : null,
         hood: e.hood || null,
         popids: e.popids || []
       });
@@ -291,7 +292,7 @@ function parseCultureSignals(signal) {
         label,
         name: sm ? sm[1].replace(/^sighting\s*\|\s*/i, '').trim() : null,
         venue: sm ? sm[2].trim() : null,
-        ref: e.ref || null,
+        ref: e.ref ? applyFaithCanonForward(e.ref) : null,
         hood: e.hood || null,
         popids: e.popids || []
       });
@@ -1167,6 +1168,7 @@ module.exports = {
   slicePaths,
   parseEveningTexture,
   parseCultureSignals,
+  applyFaithCanonForward,
   emitPulses,
   recommendConsumer,
   pickPulseForPersona,

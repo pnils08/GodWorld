@@ -460,10 +460,13 @@ function publicBriefFacts(packet) {
   }).map(row => {
     const text = clean(row.text, 500);
     const tracker = text.match(/^(.+?)\s*\|\s*Status\s+([^|]+?)\s*\|\s*phase\s+(.+)$/i);
+    const sighting = text.match(/^sighting\s*\|\s*(.+?)\s+spotted at\s+(.+)$/i);
     return Object.assign({}, row, {
       text: tracker
         ? tracker[1] + ' is listed as ' + tracker[2].trim() + ', and its supplied phase is ' +
           tracker[3].trim().replace(/-/g, ' ') + '.'
+        : sighting
+          ? sighting[1].trim() + ' was spotted at ' + sighting[2].trim() + '.'
         : text,
     });
   });

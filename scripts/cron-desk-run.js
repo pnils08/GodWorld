@@ -2351,6 +2351,11 @@ async function runWrite(assign) {
   execFileSync('node', writerArgs, { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
   if (!fs.existsSync(draftPath)) throw new Error('writer produced no draft at ' + path.relative(ROOT, draftPath));
 
+  const shape = require('./livedArticleShape').isSummaryArticle(fs.readFileSync(draftPath, 'utf8'));
+  if (shape.fail) {
+    throw new Error('W3 refused summary article: ' + shape.reasons.join(','));
+  }
+
   const contamination = articleContamination.scanFile(draftPath, { desk });
   if (contamination.fail) {
     log('deterministic contamination blocker: ' + contamination.findings

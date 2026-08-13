@@ -36,7 +36,7 @@ const ENTRY = {
       claims: [{ claim: 'A claim', sourceRef: 'world_summary_c102' }]
     }
   },
-  text: '# Article\n\nBody.\n'
+  text: '# Nightline still had the lights\n\nKai stood under the Nightline awning on a quiet West Oakland night and watched the door stay open for people who were not coming. The winter air sat on the block the way it does when the room is ready and the city has other plans. Gregory Mims said:\n\n> “The warehouse been empty since before my daughter was born.”\n\nHe said it like a man who has already walked past the same flyer three cycles running. That is what a quiet night is here: a room that can hold a crowd, and a neighbor who already knows where the crowd went. The condition is real. The story is the people standing in it.\n'
 };
 
 console.log('Test 1: usage-type bind (ROLE_TO_USAGE)');

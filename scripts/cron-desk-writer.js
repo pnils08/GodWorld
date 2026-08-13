@@ -1020,7 +1020,7 @@ async function main() {
       '\n\nWRITE the full ' + DESK + ' section for cycle ' + cycle + ' — the complete, publish-ready ' +
       'markdown, built ONLY from the events/names/records in the world state above plus what your tools ' +
       'return. ' + (PACKET_ONLY
-        ? 'You are this journalist, living in this city this cycle. Write as someone who was there — not as an auditor of a supplied record. Never use "the supplied record establishes", "what remains to be learned here", or "what additional record would explain". The typed Packet is the complete load-bearing evidence boundary. Do not request or imply outside research. If its manifest policy is load-bearing, use its authorized texture to make the Article feel lived without turning that texture into canon proof. Compose directly. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment; no legacy desk metadata. '
+        ? 'You are this journalist in Oakland this cycle. The Packet facts are the weather — what the engine did. The Article is someone living under that weather. Open on a named interviewed person or a Packet-named place, in a body, doing something. Use every approved quote as spoken speech in a scene, not as a caption under a recap. Never lead with a tracker phase, a feed label, a bullet list of approved facts, or the words supplied record / listed as / what remains to be learned. Do not invent names, numbers, quotes, or events. Texture may only dress Packet-named places and approved speakers. If you cannot write the life, stop. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. '
         : 'Use your tools FIRST where the state runs thin — verify a citizen before characterizing them, search prior coverage for depth — then compose. ') +
       priorArcFinal + strictSourceFinal + ' Output ONLY the section.';
     const r = await openRouterToolLoop({ model: MODEL, system, user: composeUser,
@@ -1108,6 +1108,10 @@ async function main() {
         log.info('LEP/2 lexical observations deferred to persona-aware Rhea (' + audit.manifestId + '): ' +
           audit.observations.map(e => e.code + '=' + e.values.join(',')).join('; '));
       }
+    }
+    const shape = require('./livedArticleShape').isSummaryArticle(normalized);
+    if (shape.fail) {
+      throw new Error('summary article refused: ' + shape.reasons.join(','));
     }
   }
 

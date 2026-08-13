@@ -346,15 +346,15 @@ const luisW3 = p.buildWritePacket({ cycle: 999, desk: 'civic', reporter,
   story: { ...story, popids: [], citizens: [] }, approach: 'TEST-ONLY investigation',
   angleInput: luisW1, anglePlan: luisPlan, interviews: [], lane: [], reviewProfile: luisProfile });
 assert.match(luisW3.limits.rule, /do not convert a source intention to keep watching into past tracking/);
-assert.match(luisW3.limits.rule, /the Packet does not establish X/);
+assert.match(luisW3.limits.rule, /Do not print "the Packet does not establish X"/);
 assert.match(luisW3.limits.rule, /First-person reporting acts require an approved fact/);
 assert.ok(luisW3.manifest.permittedInterpretationSlots.some(row => row.id === 'P_KNOWN_UNKNOWN'));
 assert.equal(luisW3.task.writingMode, 'RECORDS_BRIEF');
-assert.equal(luisW3.reviewProfile.articleContract.targetWords, '180-280');
+assert.equal(luisW3.reviewProfile.articleContract.targetWords, '400-700');
 assert.deepStrictEqual(luisW3.manifest.unverifiedLeads, []);
 assert.ok(luisW3.manifest.approvedSubjects.every(row => !/POP-\d+/.test(row.profile)));
 assert.equal(luisW3.signal.plan.closeQuestion,
-  'What record would explain why the supplied Initiative has not advanced?');
+  'What is still unfinished for the people living this?');
 const luisOverreach = p.auditArticle(
   'I went looking. Two residents flagged it to me independently. Somebody owns the file.', luisW3);
 assert.equal(luisOverreach.ok, false);

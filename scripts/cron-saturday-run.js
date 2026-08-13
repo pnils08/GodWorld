@@ -77,11 +77,7 @@ const ROLE_TO_USAGE = { subject: 'featured', mentioned: 'mentioned' };
 // Staged-set reader — every .staged.json for the cycle, with its article text.
 // ---------------------------------------------------------------------------
 function isCodeRenderedBrief(articleText) {
-  const body = String(articleText || '').split(/^##\s+INTAKE\s*$/im)[0];
-  return /the supplied record establishes/i.test(body)
-    || /those supplied claims define the current record/i.test(body)
-    || /what remains to be learned here/i.test(body)
-    || /what additional record would explain/i.test(body);
+  return require('./livedArticleShape').isSummaryArticle(articleText).fail;
 }
 
 function verifyStagedProof(side, articleText, fallbackVerdict) {

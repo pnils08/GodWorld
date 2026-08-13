@@ -250,19 +250,19 @@ function buildWritePacket(args) {
     packet.exposure.excludedLeads = [];
     packet.task.writingMode = hasReportingTrail ? 'FULL_INVESTIGATION' : 'RECORDS_BRIEF';
     if (!hasReportingTrail) {
-      packet.task.goal = 'Write one Article from inside this city, in this reporter\'s voice, using only Packet-approved facts and exact quotes';
+      packet.task.goal = 'Write the life this cycle\'s record produced. Lead with a named interviewed person or a Packet-named place. The tracker line is the weather, never the lede.';
       const safeAssignment = clean(args && args.story && (args.story.angle || args.story.label) ||
         packet.task.assignment, 500).replace(/\s+—\s+remedy path \+ responsible office\s*$/i, '');
       packet.task.assignment = safeAssignment;
       packet.signal.plan = {
         focus: safeAssignment,
-        closeQuestion: 'What record would explain why the supplied Initiative has not advanced?'
+        closeQuestion: 'What is still unfinished for the people living this?'
       };
       if (reviewProfile) {
         reviewProfile.articleContract = Object.assign({}, reviewProfile.articleContract, {
-          targetWords: '180-280',
-          opening: 'the strongest Packet-backed fact without engine classifier or row metadata',
-          closing: 'one open question or next needed record, without implying an owner or request exists'
+          targetWords: '400-700',
+          opening: 'a named person or Packet-named place living the condition',
+          closing: 'one unfinished human question, not a request for more record'
         });
         reviewProfile.authorizedTexture = (reviewProfile.authorizedTexture || [])
           .filter(rule => !/reporter's own act/i.test(rule));
@@ -274,7 +274,7 @@ function buildWritePacket(args) {
     reviewProfile.articleContract.renderMode;
   if (!investigation && configuredRenderMode === 'SOURCE_BRIEF') {
     packet.task.writingMode = 'SOURCE_BRIEF';
-    packet.task.goal = 'Write one Article from inside this city, in this reporter\'s voice, using only Packet-approved facts and exact quotes';
+    packet.task.goal = 'Write the life this cycle\'s record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.';
     reviewProfile.articleContract = Object.assign({}, reviewProfile.articleContract, {
       targetWords: reviewProfile.articleContract.targetWords ||
         'evidence-bounded; length follows supplied public facts and exact quotes',
@@ -356,17 +356,17 @@ function buildWritePacket(args) {
     : 'The Article claim manifest is exhaustive. Better prose may arrange and interpret it, but may not enlarge it.';
   if (investigation) {
     packet.limits.rule += ' For this investigation, do not convert a source intention to keep watching into past tracking; do not invent conversations, access, requests, responses, files, owners, duties, offices, expectations, or collective conclusions. Attribute each approved quote exactly and separately. Missing fields stay unknown, not implied.';
-    packet.limits.rule += ' Use the exact epistemic form "the Packet does not establish X" for missing evidence. Never rewrite missing evidence as "X did not happen," "no one did X," "I looked/asked/requested," or "the absence proves X." First-person reporting acts require an approved fact that names that act.';
+    packet.limits.rule += ' Missing evidence stays off the page. Do not print "the Packet does not establish X". Never rewrite missing evidence as "X did not happen," "no one did X," "I looked/asked/requested," or "the absence proves X." First-person reporting acts require an approved fact that names that act.';
     packet.manifest.permittedInterpretationSlots.push({
       id: 'P_KNOWN_UNKNOWN',
       rule: 'Contrast approved facts with creativeBrief.missing only; do not narrate a missing item as an event that occurred.'
     });
     if (!hasReportingTrail) {
-      packet.limits.rule += ' This Packet has no supplied reporting trail: write 180-280 words as this reporter. Do not print engine classifier names, severity labels, source row numbers, or a silence-clock section.';
+      packet.limits.rule += ' Write 400-700 words as this reporter living the known condition. Do not print engine classifier names, severity labels, source row numbers, or a silence-clock section.';
     }
   }
   if (packet.task.writingMode === 'SOURCE_BRIEF') {
-    packet.limits.rule += ' Stay inside approved facts and exact quotes. Omit raw engine fields and source-path metadata from public copy. Do not write as an auditor of a supplied record.';
+    packet.limits.rule += ' Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition.';
   }
   packet.output.preflight = {
     facts: 'select manifest.approvedFacts ids',

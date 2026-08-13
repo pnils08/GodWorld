@@ -44,9 +44,13 @@ const arg = (k, d) => { const m = ARGV.find((a) => a.startsWith(`--${k}=`)); ret
 const WAKE = (arg('wake', 'evening') || 'evening').toLowerCase();
 const FORCE_POP = arg('pop', null);
 
-const ROTATION_MEMORY = 100;    // don't re-wake the last N citizens (engine.48 T1: 25 -> 100 — reach past the orbit; re-wakes still possible within ~3 weeks at 5/day)
+const ROTATION_MEMORY = 100;    // don't re-wake the last N citizens (engine.48 T1: 25 -> 100 — reach past the orbit)
 const STATE_FILE = path.join(__dirname, '..', 'logs', 'citizen-wake-state.json');
 const LOG_FILE = path.join(__dirname, '..', 'logs', 'citizen-wake.log');
+const SNAPSHOT_FILE = path.join(__dirname, '..', 'output', 'simulation_ledger_snapshot.jsonl');
+const PAGE_CACHE_DIR = path.join(__dirname, '..', 'output', 'citizen-pages');
+const LOCAL_PAGE_N = 3;
+const LOCAL_PAGE_CAP = 320;
 const TENSION_FILE = path.join(__dirname, '..', 'logs', 'citizen-tension-state.json'); // B2 index — page is the durable surface, this skips a page search
 const RIPPLE_FILE = path.join(__dirname, '..', 'logs', 'citizen-ripple-state.json'); // engine.48 T4 — cross-citizen ripple register, keyed "from->to"
 const RIPPLE_EXPIRY_CYCLES = 12; // mirrors TENSION_EXPIRY_CYCLES; read by citizen-exchange.js too
@@ -69,8 +73,62 @@ function logLine(s) {
   try { fs.appendFileSync(LOG_FILE, line); } catch (e) {}
   console.log(s);
 }
-function loadState() { try { return JSON.parse(fs.readFileSync(STATE_FILE, 'utf8')); } catch (e) { return { recent: [] }; } }
+function loadState() { try { return JSON.parse(fs.readFileSync(STATE_FILE, 'utf8')); } catch (e) { return { recent: [], ever: [] }; } }
 function saveState(st) { try { fs.writeFileSync(STATE_FILE, JSON.stringify(st, null, 2)); } catch (e) {} }
+
+// Seed the ever-woken set from the ledger snapshot's SMPageId so a wiped
+// logs/citizen-wake-state.json does not treat 200+ existing wiki pages as first visits.
+function seedEver(state, snapshotPath) {
+  if (!state || state.everSeeded) return state || { recent: [], ever: [] };
+  const ever = new Set(state.ever || []);
+  try {
+    const txt = fs.readFileSync(snapshotPath || SNAPSHOT_FILE, 'utf8');
+    for (const line of txt.split('\n')) {
+      if (!line.trim()) continue;
+      let row;
+      try { row = JSON.parse(line); } catch (e) { continue; }
+      const id = String((row && (row.POPID || row.popId)) || '').toUpperCase();
+      const page = String((row && row.SMPageId) || '').trim();
+      if (id && page) ever.add(id);
+    }
+  } catch (e) { /* snapshot missing — ever stays whatever the state file already had */ }
+  state.ever = [...ever];
+  state.everSeeded = true;
+  return state;
+}
+
+function appendLocalPage(popId, entry, dir) {
+  try {
+    const root = dir || PAGE_CACHE_DIR;
+    fs.mkdirSync(root, { recursive: true });
+    const rec = {
+      ts: new Date().toISOString(),
+      cycle: entry && entry.cycle != null ? entry.cycle : null,
+      wake: (entry && entry.wake) || null,
+      text: String((entry && entry.text) || '').trim().slice(0, LOCAL_PAGE_CAP),
+    };
+    if (!rec.text) return false;
+    fs.appendFileSync(path.join(root, String(popId).toUpperCase() + '.jsonl'), JSON.stringify(rec) + '\n');
+    return true;
+  } catch (e) { return false; }
+}
+
+function loadLocalPage(popId, n, dir) {
+  try {
+    const raw = fs.readFileSync(path.join(dir || PAGE_CACHE_DIR, String(popId).toUpperCase() + '.jsonl'), 'utf8');
+    const rows = raw.split('\n').filter(Boolean).map((l) => {
+      try { return JSON.parse(l); } catch (e) { return null; }
+    }).filter((r) => r && r.text);
+    return rows.slice(-(n || LOCAL_PAGE_N)).reverse().map((r) => String(r.text).slice(0, LOCAL_PAGE_CAP));
+  } catch (e) { return []; }
+}
+
+function resolvePageMemory(popId, smBlock, localTexts) {
+  if (smBlock && String(smBlock).trim()) return { block: smBlock, source: 'supermemory' };
+  const texts = (localTexts || []).filter(Boolean);
+  if (!texts.length) return { block: '', source: 'empty' };
+  return { block: memoryFence.wrap(texts.join('\n\n'), 'citizen-page-local:' + popId), source: 'local' };
+}
 
 // ---- B2 tension register (seams Task 3) — loop-side only: no dial writes, no sheet writes,
 // no LifeHistory writes, never Reflection_Intake. State: { popId: [{q, cy, status}] }.
@@ -148,42 +206,61 @@ function voicedPopIds() {
   return out;
 }
 
-// engine.48 T1 — seeded WEIGHTED draw replaces the deterministic sort[0] pick: high-delta
-// citizens stay favored but mid-pool citizens get real probability mass. Same (cycle, wake)
-// -> same pick. T2 — a seeded 1-in-5 slot goes to the least-recently-woken voiced citizen
-// that passes the same pool filters, so authored voices keep cycling into the loop.
-function selectCitizen(pool, state, cycle) {
-  if (FORCE_POP) {
-    const forced = pool.find((p) => p.popId === FORCE_POP.toUpperCase());
+// engine.48 T1 — seeded WEIGHTED draw: high-delta citizens stay favored but mid-pool
+// citizens get real probability mass. Same (cycle, wake) -> same pick.
+// Lanes (2026-08-13): morning prefers a return visit (wiki page already exists);
+// other wakes prefer a first-timer until the city has pages. Voiced 1-in-5 stays
+// inside the lane and never re-picks someone already in recent.
+function pickWeighted(candidates, cycle, wake, slot) {
+  if (!candidates.length) return null;
+  const weights = candidates.map((p) => 1 + (p.eventMag || 0) * 2 + dials.deviation(p.cur) / 50);
+  const total = weights.reduce((s, w) => s + w, 0);
+  let x = (_hash53('select:' + cycle + ':' + wake, 0x5eed) % Math.max(1, Math.floor(total * 1000))) / 1000;
+  for (let i = 0; i < candidates.length; i++) {
+    if (x < weights[i]) return { c: candidates[i], slot };
+    x -= weights[i];
+  }
+  return { c: candidates[0], slot };
+}
+
+function selectCitizen(pool, state, cycle, opts) {
+  const o = opts || {};
+  const wake = o.wake != null ? o.wake : WAKE;
+  const forcePop = o.forcePop !== undefined ? o.forcePop : FORCE_POP;
+  const voicedIds = o.voicedIds || voicedPopIds();
+  if (forcePop) {
+    const forced = pool.find((p) => p.popId === String(forcePop).toUpperCase());
     if (forced) return { c: forced, slot: 'forced' };
-    logLine(`--pop ${FORCE_POP} not in shaped pool; falling back to rotation`);
+    logLine(`--pop ${forcePop} not in wake pool; falling back to rotation`);
   }
   const recentList = state.recent || [];
   const recent = new Set(recentList);
+  const ever = new Set(state.ever || []);
 
-  // T2 voiced slot — before the weighted draw
-  if (_hash53('voiced:' + cycle + ':' + WAKE, 0x5eed) % 5 === 0) {
-    const voiced = voicedPopIds().map((id) => pool.find((p) => p.popId === id)).filter(Boolean);
+  const notRecent = pool.filter((p) => !recent.has(p.popId));
+  const uncovered = notRecent.filter((p) => !ever.has(p.popId));
+  const returning = notRecent.filter((p) => ever.has(p.popId));
+
+  let lane = notRecent.length ? notRecent : pool;
+  let slot = 'rotation';
+  if (wake === 'morning' && returning.length) {
+    lane = returning;
+    slot = 'return';
+  } else if (uncovered.length) {
+    lane = uncovered;
+    slot = 'first';
+  }
+
+  if (_hash53('voiced:' + cycle + ':' + wake, 0x5eed) % 5 === 0) {
+    const voiced = voicedIds.map((id) => lane.find((p) => p.popId === id)).filter(Boolean);
     if (voiced.length) {
-      // least-recently-woken first: recent is most-recent-first, so absent beats present
-      // and a deeper index beats a shallower one.
       const oldness = (p) => { const i = recentList.indexOf(p.popId); return i < 0 ? Number.MAX_SAFE_INTEGER : i; };
       voiced.sort((a, b) => oldness(b) - oldness(a));
-      return { c: voiced[0], slot: 'voiced' };
+      return { c: voiced[0], slot: 'voiced-' + slot };
     }
-    logLine('voiced slot fired but no voiced citizen passes the pool filters; falling through to rotation');
   }
 
-  let candidates = pool.filter((p) => !recent.has(p.popId));
-  if (!candidates.length) candidates = pool; // everyone woken recently -> reset the cycle
-  const weights = candidates.map((p) => 1 + p.eventMag * 2 + dials.deviation(p.cur) / 50);
-  const total = weights.reduce((s, w) => s + w, 0);
-  let x = (_hash53('select:' + cycle + ':' + WAKE, 0x5eed) % Math.max(1, Math.floor(total * 1000))) / 1000;
-  for (let i = 0; i < candidates.length; i++) {
-    if (x < weights[i]) return { c: candidates[i], slot: 'rotation' };
-    x -= weights[i];
-  }
-  return { c: candidates[0], slot: 'rotation' };
+  return pickWeighted(lane, cycle, wake, slot) || { c: pool[0], slot: 'rotation' };
 }
 
 function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, familyLine, healthLine, pageMemory, cycle, tensionBlock, editionLine, rippleLine, cardBlock, voiceLine) {
@@ -244,13 +321,13 @@ async function generateVoice(system, user) {
   return String(j.choices?.[0]?.message?.content || '').trim();
 }
 
-(async () => {
+async function main() {
   const cycle = Number(arg('cycle', null)) || (() => { try { return getCurrentCycle(); } catch (e) { return null; } })();
-  const pool = await buildPool();
-  logLine(`pool: ${pool.length} shaped citizens with lived history (wake=${WAKE}, cycle=${cycle}, dry=${DRY})`);
+  const pool = await buildPool({ shapedMin: 0 });
+  logLine(`pool: ${pool.length} ledger citizens with lived history (wake=${WAKE}, cycle=${cycle}, dry=${DRY})`);
   if (!pool.length) { logLine('empty pool — nothing to wake'); process.exit(0); }
 
-  const state = loadState();
+  const state = seedEver(loadState());
   const picked = selectCitizen(pool, state, cycle);
   const c = picked.c;
   const neighbors = await coResidents(c.nh, c.popId);
@@ -292,7 +369,10 @@ async function generateVoice(system, user) {
     contextText: [textureLine, sportsLine, bondsLine, familyLine, healthLine, c.nh, c.occ, WAKE_FRAME[WAKE] || ''].filter(Boolean).join(' '),
     extraCandidates: resonance.tensionCandidates(tensionState[c.popId]).concat(resonance.unlivedCandidates(c.memReg)),
   });
-  const pageMemory = pageRead.block;
+  const localTexts = loadLocalPage(c.popId, LOCAL_PAGE_N);
+  const resolved = resolvePageMemory(c.popId, pageRead.block, localTexts);
+  const pageMemory = resolved.block;
+  logLine(`page-recall: sm=${pageRead.block ? 'yes' : 'no'} local=${localTexts.length} used=${resolved.source}`);
   const tensionBlock = openTensions.length
     ? memoryFence.wrap(openTensions.map((t) => t.q).join('\n'), 'citizen-tension:' + c.popId)
     : '';
@@ -326,6 +406,7 @@ async function generateVoice(system, user) {
     extra: { affect: cls.affect || null, event: cls.event || null }, // recall affectWeight input (B4)
   });
   if (appended.error) { logLine('appendReflection_ ERROR: ' + appended.error); process.exit(1); }
+  appendLocalPage(c.popId, { cycle, wake: WAKE, text: reflection });
   logLine(`page ${ptr.tag} (${ptr.created ? 'created' : 'existing'}) <- reflection doc ${appended.id || '?'}`);
 
   // 3) B2 tension register (seams Task 3) — voice-memory only: page lines + local index, NEVER
@@ -388,6 +469,17 @@ async function generateVoice(system, user) {
 
   // 5) record rotation + recall bookkeeping (staleness input for future wakes — live runs only)
   state.recent = [c.popId, ...(state.recent || [])].slice(0, ROTATION_MEMORY);
+  state.ever = [...new Set([c.popId, ...(state.ever || [])])];
   saveState(state);
   resonance.markRecalled(c.popId, cycle, pageRead.keys);
-})().catch((e) => { logLine('FATAL ' + e.message); process.exit(1); });
+}
+
+if (require.main === module) {
+  main().catch((e) => { logLine('FATAL ' + e.message); process.exit(1); });
+}
+
+module.exports = {
+  ROTATION_MEMORY, LOCAL_PAGE_N, LOCAL_PAGE_CAP,
+  seedEver, appendLocalPage, loadLocalPage, resolvePageMemory,
+  pickWeighted, selectCitizen, buildVoicePrompts, voicedPopIds,
+};

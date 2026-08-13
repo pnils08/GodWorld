@@ -1,7 +1,7 @@
 ---
 title: Living City — Full-Population Life Coverage + Opinion Individuation Plan
 created: 2026-06-19
-updated: 2026-06-19
+updated: 2026-08-13
 type: plan
 tags: [engine, citizens, events, dials, opinion, draft]
 sources:
@@ -156,7 +156,7 @@ pointers:
   1. Drop/lower the `SHAPED_MIN=60` deviation gate so the eligibility **pool** is the whole ledger. **Keep `LIFE_MIN_CHARS=25`** — the confabulation guard. (Phase A makes the floor satisfiable for everyone: real events for all → real grounding for all → no shady-Greg fabrication.)
   2. Selection stays event-magnitude + dial-weighted (wake whoever's living the biggest real delta), now drawn from the full population.
 - **Verify:** wake pool size ≈ count of citizens with ≥25-char LifeHistory (grows toward 906 as Phase A lands); woken citizens span beyond the prior shaped 437.
-- **Status:** [ ] not started
+- **Status:** [x] built 2026-08-13 (grok) — `scripts/citizen-wake.js` now calls `buildPool({ shapedMin: 0 })`. LIFE_MIN_CHARS=25 kept. Morning lane is a return visit (has a page); midday/night prefer first-timers. Voiced 1-in-5 stays inside the lane and cannot re-pick someone already in `recent`. Local `output/citizen-pages/{POPID}.jsonl` fills the prompt when Supermemory readback is empty. Throughput stays the live 3 cron fires/day. Test: `node scripts/citizen-wake-coverage.test.js`.
 
 #### Task C2: Throughput cap + cost line
 - **Files:**
@@ -194,6 +194,7 @@ pointers:
 
 ## Changelog
 
+- 2026-08-13 (grok) — Task C1 shipped: wake eligibility is the full ledger (`buildPool({ shapedMin: 0 })`), not the 60-deviation shaped floor. Morning returns see their wiki page (Supermemory, local cache fallback); other wakes cover first-timers. Commit lands with `scripts/citizen-wake-coverage.test.js`.
 - 2026-06-23 — **Phase B extended: B3 ordinary-bad event content + B4 cross-system cap (S269, research-build, Mike-approved Option-B + advisor).** The "real-life generator, good & bad events" ask resolved to the OBJECTIVE half of Phase B's valence/divergence (B1 = the subjective/classifier half). Data-verified gap (EVENT_SYSTEM_MAP + DIAL_MAP read): good life richly covered; bad is **bimodal — catastrophe or nothing**, only ordinary-bad is `layoff`@0.004; every ambient tag pushes composure up/neutral → 0 volatile / 86% neutral. **B3** = (1) add mild objective-negative VOCAB (~−1/−2, additive — DIAL_MAP has none at ordinary scale; affect tags are wake-reserved, `Setback{-5}` is catastrophe-scale), (2) ordinary-bad pools in the 6 existing engines, (3) per-pool good:neutral:bad valence ratio, (4) dial-valence weighting (low-composure draws more friction), (5) activate built machinery (`runConductEngine` inert, chaos-cars smoke-pending) — Option-B (rebalance-in-place), NOT a new generator. **Key leverage: B3 is deterministic (no classifier) → ships on its own composure-distribution-widens dry-run gate, AHEAD of / independent of B1's affect re-audit.** **B4** = the cross-system cap: objective fold (B3) + reflection accretion (research.14 write-back) both hit composure on the same bad day → grounded-compounding-but-bounded via a per-citizen per-cycle net composure-delta cap across both feeders + both decay systems. Composer/apply for the write-back already built; B3 vocab + pools are the new build.
 - 2026-06-19 — Initial draft (S264, research-build). Diagnosed from S264 live data: 14%/cycle coverage, named generator orphaned, T8 four-gate throttle. Advisor-reviewed (4 load-bearing points folded: valence-is-the-crux dependency on research.14 affect-fix; free-engine vs paid-opinion split; coverage-prerequisite-for-opinion confabulation guard; don't-drown number + compressor verify). Sequencing grep-verified: texture-coverage is composure-neutral (runway to parallelize Phase A while Phase B lands). Mike-directed: every ledger citizen eligible for the 24/7 lifecycle + own opinions. Engine.38 row filed; research.14 + engine.32 cross-linked.
 

@@ -37,7 +37,7 @@ const { buildPool, coResidents, loadLifeArc, loadSportsSlice, loadNeighborhoodTe
   loadCardAnchor, loadVoiceTexture } = require('/root/GodWorld/lib/wakePerception'); // engine.48 T10 + T11; loadFamily loop-doctrine 2026-08-04; loadHealthState engine.101 health slice
 const { selectProvocation, _hash53 } = require('/root/GodWorld/lib/provocationBank'); // T5 varied-provocation bank; _hash53 seeds T1 draw + T2 slot
 const { matchBondTargets_ } = require('./bondTargetMatch'); // engine.101 — intake BondTarget (col I) + T4 ripple share one match
-const drainIntake = require('./drainReflectionIntake');
+
 
 const ARGV = process.argv.slice(2);
 const DRY = ARGV.includes('--dry-run');
@@ -470,17 +470,7 @@ async function main() {
       new Date().toISOString(), c.popId, cycle, WAKE, cls.event || '', reflection.slice(0, 180).replace(/\n/g, ' '), 'no', cls.affect || '',
       bondTarget, cls.tension || '', resolvedText,
     ]]);
-    logLine(`Reflection_Intake <- event=[${cls.event || '-'}] affect=[${cls.affect || '-'}]${cls.affectFallback ? ' (affect fallback)' : ''}${bondTarget ? ' bondTarget=' + bondTarget : ''} (applied=no)`);
-    try {
-      const drained = await drainIntake.drain();
-      logLine('essence-drain: citizens=' + (drained.plans || []).length +
-        ' applied=' + (drained.applied || []).length +
-        ' skipped=' + (drained.skipped || 0) +
-        (drained.plans || []).slice(0, 4).map((p) => ' ' + p.popId + JSON.stringify(p.deltas)).join(''));
-    } catch (e) {
-      logLine('essence-drain ERROR: ' + e.message);
-      process.exit(1);
-    }
+    logLine(`Reflection_Intake <- event=[${cls.event || '-'}] affect=[${cls.affect || '-'}]${cls.affectFallback ? ' (affect fallback)' : ''}${bondTarget ? ' bondTarget=' + bondTarget : ''} (applied=no, gated)`);
   } else {
     logLine(`classifier off-vocab/err, intake skipped: ${cls.raw}`);
   }

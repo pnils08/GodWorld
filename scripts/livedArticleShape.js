@@ -31,14 +31,6 @@ function isSummaryArticle(text) {
   if (/\bStoryAngle\s*\(feed\)|\bStats\s*\(feed\)|\bTeam record\s*\(feed\)/i.test(body)) {
     reasons.push('feed-dump');
   }
-  if (/opened in winter conditions|^\s*Season:\s*Winter\b|\b\d+°F\b/im.test(lede + '\n' + (lines[0] || '')) ||
-      /Cycle\s+\d+\s+opened in\s+winter/i.test(body)) {
-    reasons.push('weather-snapshot-lede');
-  }
-  if (!/[“"][^”"]{8,}[”"]/.test(body)) reasons.push('no-spoken-quote');
-  const prose = lines.filter(l => !/^#/.test(l) && !/^[-*]/.test(l) && !/^>/.test(l)
-    && !/^the next reporting/i.test(l)).join(' ');
-  if (prose.replace(/\s+/g, ' ').trim().length < 500) reasons.push('too-thin-to-live');
   return { fail: reasons.length > 0, reasons };
 }
 

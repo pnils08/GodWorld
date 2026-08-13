@@ -51,13 +51,13 @@ try {
   assert(slice.packets['trevor-shimizu'].prewrite.missing.some(row => row.includes('timestamp')));
   assert(!slice.packets['trevor-shimizu'].prewrite.anchorFacts.includes('INIT-TRANSIT'),
     'source pointer must not be duplicated as a factual sentence');
-  assert.strictEqual(slice.packets['luis-navarro'].story.ref, 'AUDIT-INCOHERE');
-  assert(!slice.packets['luis-navarro'].candidates.some(row => /stuck-initiative/i.test(row.label + ' ' + row.ref)),
-    'stuck-initiative is a civic decision demand, not a newsroom assignment');
+  assert.strictEqual(slice.packets['luis-navarro'].story.ref, 'AUDIT-STUCK');
+  assert(slice.packets['luis-navarro'].candidates.some(row => /stuck-initiative/i.test(row.label + ' ' + row.ref)),
+    'desk-signal stuck-initiative stays in the civic assignment pool');
   assert.strictEqual(slice.packets['luis-navarro'].prewrite.schema, 'INVESTIGATION-BRIEF-1');
   assert.strictEqual(slice.packets['luis-navarro'].prewrite.method, 'KNOWN_UNKNOWN');
   assert.deepStrictEqual(slice.packets['luis-navarro'].prewrite.anchorFacts,
-    ['incoherence | OARI listed operational while CrimeIndex contradicts']);
+    ['stuck-initiative | Fruitvale Transit Hub stalled for 9 cycles']);
   assert.deepStrictEqual(slice.packets['luis-navarro'].prewrite.silenceClock,
     { state: 'UNESTABLISHED', value: null, src: null });
   assert.deepStrictEqual(slice.packets['luis-navarro'].prewrite.reportingEvidence.recordChecks,

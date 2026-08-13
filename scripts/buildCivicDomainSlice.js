@@ -10,7 +10,6 @@
 
 const fs = require('fs');
 const path = require('path');
-const { isStuckDiagnosis } = require('./civicMustDecide');
 const seasonFeel = require('./buildSeasonFeelSlice');
 
 const ROOT = path.join(__dirname, '..');
@@ -167,7 +166,7 @@ function loadCycleCivicEntries(cycle, root = ROOT) {
     : [];
   civicLane.forEach((row, index) => {
     const entry = normalizeEntry(row, 'desk-signal', index);
-    if (entry && !isStuckDiagnosis(entry.label + ' ' + entry.ref)) entries.push(entry);
+    if (entry) entries.push(entry);
   });
 
   const decisionsPath = path.join(root, 'output', 'cron-civic', 'decisions_lane_c' + cycle + '.json');

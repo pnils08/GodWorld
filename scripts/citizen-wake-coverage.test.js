@@ -66,7 +66,7 @@ assert('cron pool drops SHAPED_MIN (shapedMin: 0)', /buildPool\(\{\s*shapedMin:\
 assert('LIFE_MIN_CHARS stays the default confab floor', !/buildPool\(\{\s*shapedMin:\s*0,\s*lifeMinChars:\s*0/.test(src));
 assert('page-recall is logged', /page-recall: sm=/.test(src));
 assert('local page cache writes on live append', /appendLocalPage\(c\.popId/.test(src));
-assert('wake drains Reflection_Intake into DialState', /drainIntake\.drain\(/.test(src));
+assert('wake does not write DialState; intake stays gated', /applied=no, gated/.test(src) && !/drainIntake\.drain\(/.test(src));
 
 // ── seedEver from snapshot SMPageId ────────────────────────────────────────
 {

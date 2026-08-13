@@ -1525,22 +1525,17 @@ async function runDatawake() {
 
   fs.mkdirSync(DATAWAKE_DIR, { recursive: true });
   const results = [];
-  const mustDecide = civicMust.demandsFromAudit(audit, tracker);
   for (const office of rota) {
     try {
       const slice = domainSlice(office, sections, hoods, briefs, tracker, audit);
-      const demandHere = mustDecide.find(d =>
-        slice.includes(d.id) || (d.name && slice.includes(d.name)) || office.initiative === d.id);
       const wallInj = await positionWallInject(officeMap, office.agentDir);
       const user = [
         'It\'s a working ' + ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][day] + 'day and you are in the room, not writing a briefing. Speak as yourself. The numbers below already live in the sheets — do not recite them. Say who came in, what you did with your hands, what the place smelled like. This is your domain this cycle:',
         '', slice, '',
         wallInj,
-        demandHere
-          ? ('MUST MOVE today: ' + demandHere.id + ' (' + demandHere.name + ') is stuck in ' + (demandHere.currentPhase || 'its current stage') + '. Name the one concrete action you take before you leave the desk. "Monitor" is not an action.')
-          : 'Speak as yourself doing the job — one public statement and one concrete action. You argue tracker phase on Sundays; today you do the work the desk shows you.',
-        'Respond with ONLY JSON (no fences): {"office": "' + voiceSlug(office.agentDir) + '", "holder": "' + office.holder + '", "statement": "<2-4 sentences in your voice>", "action": "<the one concrete thing you are doing about it today — not null if a must-move is on this desk>", "numberMoved": "<the single most important number/shift in plain words>"}',
-        'Never invent citizens, statistics, or events not present above. Do not say nothing is happening.',
+        'Speak as yourself doing the job — one public statement or action about what these numbers mean for the people you serve. You argue initiatives on Sundays; today you fight for your constituents with what your desk shows you.',
+        'Respond with ONLY JSON (no fences): {"office": "' + voiceSlug(office.agentDir) + '", "holder": "' + office.holder + '", "statement": "<2-4 sentences in your voice>", "action": "<the one concrete thing you are doing about it today, or null>", "numberMoved": "<the single most important number/shift in plain words>"}',
+        'Never invent citizens, statistics, or events not present above.',
       ].join('\n');
       const persona = readPersonaDir(office.agentDir);
       let j = null;
@@ -1555,13 +1550,6 @@ async function runDatawake() {
           if (attempt === 2) throw new Error('no usable JSON statement after retry (model returned empty/invalid content)');
           log(office.agentDir + ' attempt ' + attempt + ': empty/invalid model output — retrying');
           attemptUser = user + '\n\nYOUR PREVIOUS ATTEMPT RETURNED NO USABLE JSON. Respond with ONLY the JSON object described above.';
-          continue;
-        }
-        const move = civicMust.checkDatawakeMove(cand, !!demandHere);
-        if (!move.ok) {
-          log(office.agentDir + ' attempt ' + attempt + ': ' + move.reason);
-          if (attempt === 2) throw new Error('datawake refused: ' + move.reason + ' — a move, not a monitor-note');
-          attemptUser = user + '\n\nYOUR PREVIOUS ATTEMPT WAS REJECTED: ' + move.reason + '. Name a concrete action. "Nothing is happening" / "continue to monitor" fails.';
           continue;
         }
         const bad = ungroundedNumbers(slice, [cand.statement, cand.action, cand.numberMoved], { district: office.district, cycle });

@@ -1,7 +1,7 @@
 ---
 title: Canon Institutions — Oakland-as-Simulated 2041
 created: 2026-04-25
-updated: 2026-07-26
+updated: 2026-08-13
 type: reference
 tags: [canon, fourth-wall, institutions, active]
 sources:
@@ -71,16 +71,16 @@ When filling a tier-2 canon substitute, pick something that fits the prosperity-
 
 ### Tier 1 — Canon institutions (GodWorld-native)
 
-- **Oakland City Schools** — K-12 public district. minted: S368 | ledger: BIZ-00016 | MOU: INIT-007 C76 | retcon: all pre-C104 "OUSD"/"Oakland Unified" text reads as this institution
-- **Oakland Community College District** — community-college district. minted: S368 | ledger: Peralta row (rename open, canon.5) | MOU: INIT-007 C78 | retcon: all pre-C104 "Peralta CCD" text reads as this institution. "Peralta" street name = land, stays valid
+- **Oakland City Schools** — K-12 public district | ledger: BIZ-00016 | MOU: INIT-007 C76 | older text saying "OUSD"/"Oakland Unified" means this institution
+- **Oakland Community College District** — community-college district | ledger: Peralta row | MOU: INIT-007 C78 | older text saying "Peralta CCD" means this institution; "Peralta" as a street name stays valid
 - **UC Berkeley** — out-of-Oakland; backstory/credential references only; never an in-world actor
 
 ### Tier 2 — Canon-substitute required
 
 | Real Name | Canon Substitute | Status | Notes |
 |---|---|---|---|
-| OUSD / Oakland Unified School District | Oakland City Schools | canon | banned S368; substitute carries history |
-| Peralta Community College District | Oakland Community College District | canon | banned S368; street "Peralta" = land, valid |
+| OUSD / Oakland Unified School District | Oakland City Schools | canon | never write the real name |
+| Peralta Community College District | Oakland Community College District | canon | never write the real name; street "Peralta" is valid |
 | Oakland Technical High School | TBD | TBD | Individual public school — has identity, athletic history |
 | Skyline High School | TBD | TBD | Individual public school |
 | Fremont High School | TBD | TBD | Individual public school |
@@ -388,3 +388,9 @@ The general principle: a real-world entity that materially runs this project bel
 - **Tier-2 entries grow** when new branded entities surface in storylines. Append.
 - **Status changes to `canon` only after editorial sign-off** — proposed names sit at `proposed` until approved.
 - **Update `updated:` field on any content edit.**
+
+---
+
+## Changelog
+
+- 2026-08-13 (S368, Mike-direct) — OUSD + Peralta CCD ruled real-institution contaminants; Oakland City Schools + Oakland Community College District minted as canon successors with full history inheritance. Sheet renames tracked as canon.5. Provenance lives here, not in the entries above.

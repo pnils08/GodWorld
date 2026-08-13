@@ -30,20 +30,24 @@ pointers:
 
 ## Decision
 
-1. **Default register for repo-internal docs** (plans, ADRs, ROLLOUT rows, research files, gap logs, status/trace logs): data-first.
+Two tiers, split by who consumes the doc at execution time (Mike-direct S368 scope correction: "these are more cron, agent — when we hand a process to a lower model on a strict assignment").
+
+1. **Tier A — execution surface: data-first is MANDATORY.** Applies to any doc a scheduled or lower-model lane consumes while executing a strict assignment: cron skill files, agent briefs/prompts, wake package specs, handoff contracts, ROLLOUT rows, gap/trace/status logs.
    - tables / keyed fields / typed lists over sentences
    - one fact per line; front-load the state line
    - every claim carries its pointer (path, POPID, commit, Drive ID, row)
    - no restated context reachable by an existing pointer
-2. **Numbers over adjectives.** Write the measurement, not the characterization. `7 articles, 0 high flags, $0.3223` — not "cheap and clean."
-3. **Prose is authorized only where a human or the sim consumes it:** chat/Discord replies to Mike, teach-the-landscape moments, editions and all sim-facing media artifacts (persona layer untouched).
-4. **Grep-ability is the readability that matters.** Stable keys, exact IDs, section anchors. A doc is good when a lane can extract one fact without reading the file.
+   - the doc IS the contract — same law as an LEP/2 Packet, one layer up
+2. **Tier B — reasoning surface: register is RELAXED.** Plans, research files, ADRs — peer-model documents where rationale is the payload. Prose and connective tissue are allowed; **why-lines are protected data, never cut for terseness.** What still binds: no restated context reachable by pointer, numbers over adjectives (`7 articles, 0 high flags, $0.3223` — not "cheap and clean"), claims carry pointers.
+3. **Prose is unrestricted where a human or the sim consumes it:** chat/Discord replies to Mike, teach-the-landscape moments, editions and all sim-facing media artifacts (persona layer untouched).
+4. **Grep-ability is the readability that matters — both tiers.** Stable keys, exact IDs, section anchors. A doc is good when a lane can extract one fact without reading the file.
 5. **No sweep.** Existing docs convert opportunistically on touch (same rule as frontmatter backfill, SCHEMA §3).
 
 ## Consequences
 
-- Positive: per-read token cost drops across 8+ lanes; claims stay source-bound (drift shows as a broken pointer, not a stale paragraph); doc layer matches the LEP/2 runtime layer.
-- Cost: colder reads for a future human. Accepted — Mike reads the output layer; prose can be rendered on demand from the data.
+- Positive: per-read token cost drops across 8+ lanes; claims stay source-bound (drift shows as a broken pointer, not a stale paragraph); the execution surface matches the LEP/2 runtime layer.
+- Cost: colder reads for a future human on Tier A. Accepted — Mike reads the output layer; prose can be rendered on demand from the data.
+- Guarded failure mode: **over-correction.** The C102 lattice quotes show maximal structure's flat side — perfect safety, zero information. Tier B exists so design rationale never pays that price; a terse rewrite that cuts a why-line is a defect, not compliance.
 - Enforcement is by register-match on review, not a validator; the style is the contract.
 
 ## Rejected alternatives
@@ -55,3 +59,4 @@ pointers:
 ## Changelog
 
 - 2026-08-13 (research-build) — Initial decision, Mike-direct S368.
+- 2026-08-13 (research-build) — Scope correction, Mike-direct S368 same session: split into Tier A (execution surface — cron/agent/handoff docs, mandatory) and Tier B (reasoning surface — plans/research/ADRs, relaxed; why-lines protected). Guards the over-correction failure mode.

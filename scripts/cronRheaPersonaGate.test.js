@@ -19,7 +19,7 @@ const reviewContext = {
 };
 const prompt = buildApiPrompt(
   999,
-  '# TEST-ONLY Article\n\nA bartender on 7th spoke.',
+  '# TEST-ONLY Article\n\nA bartender on 7th spoke.\n\n## INTAKE\nCLAIM: Test-only | Initiative_Tracker row 4',
   'TEST-ONLY world state',
   { canonNames: 1, verified: [], unverified: [] },
   [],
@@ -33,5 +33,9 @@ assert.ok(prompt.user.includes('bartender'));
 assert.ok(prompt.user.includes('not automatic flags'));
 assert.ok(prompt.user.includes('Do not score whether the Article moves the sim'));
 assert.ok(prompt.system.includes('canonIntegrity'));
+const draftSection = prompt.user.split('=== DRAFT TO VERIFY ===')[1].split('Your job is TWO flag classes')[0];
+assert.ok(draftSection.includes('A bartender on 7th spoke.'));
+assert.ok(!draftSection.includes('Initiative_Tracker'));
+assert.ok(prompt.user.includes('machine-only ## INTAKE provenance block was validated separately'));
 
 console.log('cronRheaPersonaGate.test.js: PASS');

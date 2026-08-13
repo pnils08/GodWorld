@@ -201,11 +201,15 @@ function scanStructuralJunk(draftText) {
   return hits;
 }
 
+function articleProseForReview(draftText) {
+  return unwrapWholeDocFence(draftText).split(/^##\s+INTAKE\s*$/im)[0].trim();
+}
+
 function scanEngineVerbiage(draftText) {
   // INTAKE is machine-readable provenance, not Article prose. Source refs in
   // that block intentionally retain canonical table/artifact names, so scanning
   // it would turn valid sourcing metadata into a false engine-leak cue.
-  const prose = unwrapWholeDocFence(draftText).split(/^##\s+INTAKE\s*$/im)[0];
+  const prose = articleProseForReview(draftText);
   const body = prose.replace(/```[\s\S]*?```/g, '');
   const hits = [];
   for (const t of ENGINE_TOKENS) {
@@ -292,6 +296,7 @@ function loadReviewContext(persona, articlePacketFile, draftText) {
 }
 
 function buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profiles, reviewContext) {
+  const articleProse = articleProseForReview(draftText);
   const system = [
     'You are Rhea Morgan, the Cycle Pulse verification agent, running headless as a publish gate.',
     'Your role and rules follow — they govern your verdict.',
@@ -334,8 +339,10 @@ function buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profil
         JSON.stringify(reviewContext.audit.observations || []),
     ] : []),
     '',
+    'The machine-only ## INTAKE provenance block was validated separately and is intentionally omitted below. Do not flag its absence or speculate about its contents.',
+    '',
     '=== DRAFT TO VERIFY ===',
-    draftText,
+    articleProse,
     '',
     'Your job is TWO flag classes — you police the canon boundary, not the editorial voice:',
     '(a) ENGINE VERBIAGE — system language, status enums, raw table/column names leaking into prose. NOT numbers: ' +
@@ -597,6 +604,7 @@ module.exports = {
   buildPrompt,
   buildApiPrompt,
   loadReviewContext,
+  articleProseForReview,
   scanEngineVerbiage,
   scanStructuralJunk,
 };

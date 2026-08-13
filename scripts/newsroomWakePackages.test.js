@@ -6,7 +6,7 @@ const packagesApi = require('./newsroomWakePackages');
 const packages = packagesApi.loadPackages();
 const active = packagesApi.activePackages(packages);
 assert.deepStrictEqual(active.map(row => row.key),
-  ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'p-slayer', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes']);
+  ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'p-slayer', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'noah-tan']);
 
 const jax = packages['freelance-firebrand'];
 assert.equal(jax.version, 'JAX-LEP2-1');
@@ -151,6 +151,15 @@ assert.equal(angela.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.ok(angela.reviewProfile.textureConditions.some(v => v.includes('stability evidence')));
 assert.ok(angela.reviewProfile.canonBlockers.some(v => v.includes('invented student')));
 
+const noah = packages['noah-tan'];
+assert.equal(noah.version, 'NOAH-LEP2-1');
+assert.equal(noah.assignment.popid, 'POP-00157');
+assert.equal(noah.assignment.beatDomain, 'ENVIRONMENT');
+assert.equal(packagesApi.routeFor(noah, 'angle').model, 'deepseek/deepseek-chat');
+assert.equal(noah.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
+assert.ok(noah.reviewProfile.textureConditions.some(v => v.includes('ordinary weather')));
+assert.ok(noah.reviewProfile.canonBlockers.some(v => v.includes('invented forecast')));
+
 const gate = packagesApi.gateAssignments([
   { desk: 'civic', name: 'Jax Caldera', persona: 'freelance-firebrand' },
   { desk: 'civic', name: 'Carmen Delaine', persona: 'carmen-delaine' },
@@ -230,8 +239,9 @@ const pinned = applyWakePackageGate([
   'rachel-torres': 'Rachel public safety',
   'lila-mezran': 'Lila health service',
   'angela-reyes': 'Angela education stability',
+  'noah-tan': 'Noah weather ground',
 }, packages);
-assert.equal(pinned.assignments.length, 10);
+assert.equal(pinned.assignments.length, 11);
 const pinnedByPersona = new Map(pinned.assignments.map(row => [row.persona, row]));
 assert.equal(pinnedByPersona.get('freelance-firebrand').name, 'Jax Caldera');
 assert.equal(pinnedByPersona.get('freelance-firebrand').approach, 'Jax accountability');
@@ -258,9 +268,11 @@ assert.equal(pinnedByPersona.get('lila-mezran').name, 'Dr. Lila Mezran');
 assert.equal(pinnedByPersona.get('lila-mezran').approach, 'Lila health service');
 assert.equal(pinnedByPersona.get('angela-reyes').name, 'Angela Reyes');
 assert.equal(pinnedByPersona.get('angela-reyes').approach, 'Angela education stability');
+assert.equal(pinnedByPersona.get('noah-tan').name, 'Noah Tan');
+assert.equal(pinnedByPersona.get('noah-tan').approach, 'Noah weather ground');
 assert.deepStrictEqual(pinned.pinned.map(row => row.replaced),
   ['TEST-ONLY Civic One', 'TEST-ONLY Civic Two', null, null, 'TEST-ONLY Sports One',
-    'TEST-ONLY Business Reporter', null, null, null, null]);
+    'TEST-ONLY Business Reporter', null, null, null, null, null]);
 assert.deepStrictEqual(pinned.skipped.map(row => row.name),
   ['TEST-ONLY Sports Two']);
 
@@ -284,10 +296,10 @@ const shortDesk = applyWakePackageGate([
   { desk: 'business', name: 'TEST-ONLY Business Seat', popid: 'POP-99994', story: { ref: 'TEST-BUSINESS' } },
   { desk: 'culture', name: 'TEST-ONLY Culture Preserved', popid: 'POP-99991', story: { ref: 'TEST-CULTURE' } },
 ], { civic: 'generic civic' }, packages);
-assert.equal(shortDesk.assignments.length, 10);
+assert.equal(shortDesk.assignments.length, 11);
 assert.deepStrictEqual(new Set(shortDesk.assignments.map(row => row.persona)),
-  new Set(['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'p-slayer', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes']));
+  new Set(['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'p-slayer', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'noah-tan']));
 assert.ok(shortDesk.pinned.some(row => row.replaced === 'TEST-ONLY Culture Preserved'));
-assert.equal(shortDesk.pinned.filter(row => row.replaced === null).length, 7);
+assert.equal(shortDesk.pinned.filter(row => row.replaced === null).length, 8);
 
 console.log('newsroomWakePackages.test.js: PASS');

@@ -83,9 +83,9 @@ under `output/exchanges/`, with the configured Supermemory and intake handoffs.
 The 06:00 digest summarizes the prior 36 hours. Monday through Friday, angle,
 report, and write cron entries consume the daily fanout. ADR-0017 now gates that
 fanout by `scripts/newsroom-wake-packages.json`: only active journalist packages
-wake, and missing packages are logged and skipped with no generic fallback. Ten
+wake, and missing packages are logged and skipped with no generic fallback. Eleven
 active packages cover Jax, Carmen, Luis, Trevor, P Slayer, Jordan, Kai, Rachel,
-Lila, and Angela. Each route and typed LEP/2 slice is package-owned; thin-evidence
+Lila, Angela, and Noah. Each route and typed LEP/2 slice is package-owned; thin-evidence
 Articles use deterministic local source briefs rather than model-authored prose.
 Their write stages run the persona-aware Rhea API gate and leave output
 staged or flagged behind the probation wall. A passing Rhea verdict routes the

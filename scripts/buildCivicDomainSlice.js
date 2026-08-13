@@ -44,7 +44,7 @@ const CIVIC_SEATS = Object.freeze({
   },
   'noah-tan': {
     name: 'Noah Tan',
-    popid: null,
+    popid: 'POP-00157',
     domain: 'environment',
     approach: 'Environment approach: translate the supplied environmental or weather signal into grounded civic terms. Do not invent measurements, forecasts, or scientific conclusions.',
     hook: 'The supplied civic record identifies an environmental condition or decision that needs grounded explanation.'
@@ -190,6 +190,21 @@ function loadCycleCivicEntries(cycle, root = ROOT) {
     }
   } catch (_) { /* datawakes are optional local input */ }
 
+  const summaryPath = path.join(root, 'output', 'world_summary_c' + cycle + '.md');
+  try {
+    const line = fs.readFileSync(summaryPath, 'utf8').split(/\r?\n/)
+      .find(row => /^\*\*Season:\*\*.+\|\s*\*\*Weather:\*\*/.test(row));
+    const match = line && line.match(/^\*\*Season:\*\*\s*([^|]+?)\s*\|\s*\*\*Weather:\*\*\s*(.+)$/);
+    if (match) {
+      const entry = normalizeEntry({
+        kind: 'weather',
+        ref: 'output/world_summary_c' + cycle + '.md:3',
+        label: 'Cycle ' + cycle + ' weather | Season ' + match[1].trim() + ' | ' + match[2].trim()
+      }, 'world-summary', entries.length);
+      if (entry) entries.push(entry);
+    }
+  } catch (_) { /* missing summary leaves Noah empty and fail-closed */ }
+
   const seen = new Set();
   return entries.filter(entry => {
     const key = entry.ref + '\u0000' + entry.label;
@@ -213,6 +228,7 @@ function scoreEntryForSeat(entry, slug) {
     if (MATCHERS[slug].test(text)) score += 35;
     return score;
   }
+  if (slug === 'noah-tan' && entry.kind === 'weather') return 60;
   const matcher = MATCHERS[slug];
   return matcher && matcher.test(text) ? 45 : 0;
 }
@@ -285,6 +301,16 @@ function publicEducationFact(top) {
   return label.replace(/\bpilot-active\b/gi, 'pilot is active');
 }
 
+function publicWeatherFact(top) {
+  const label = String(top && top.label || '').trim();
+  const match = label.match(/^Cycle\s+(\d+)\s+weather\s*\|\s*Season\s+([^|]+)\s*\|\s*(.+)$/i);
+  if (!match) return label.replace(/,?\s*[^,]*\(frontState\s+[^)]+\)/gi, '');
+  const weather = match[3].replace(/,?\s*[^,]*\(frontState\s+[^)]+\)/gi, '')
+    .replace(/\s*,\s*,/g, ',').trim();
+  return 'Cycle ' + match[1] + ' opened in ' + match[2].trim().toLowerCase() +
+    ' conditions: ' + weather + '.';
+}
+
 function prewriteForSeat(slug, top, candidateScope) {
   if (slug === 'trevor-shimizu') {
     return {
@@ -330,6 +356,22 @@ function prewriteForSeat(slug, top, candidateScope) {
         'staffing, funding, support-service, retention, completion, learning, credential, or employment outcomes'
       ],
       stabilityEvidence: { state: 'UNESTABLISHED', participants: [], facts: [], src: null }
+    };
+  }
+  if (slug === 'noah-tan') {
+    return {
+      anchorFacts: [publicWeatherFact(top)],
+      forbidden: [
+        'Do not add forecasts, comparisons, records, alerts, hazards, causes, measurements, agencies, resident reactions, or impacts absent from the supplied weather record.'
+      ],
+      schema: 'WEATHER-GROUND-BRIEF-1',
+      method: 'CONDITION_BASELINE',
+      missing: [
+        'comparison with a prior Cycle, forecast, seasonal norm, or historical record',
+        'an alert, hazard, health effect, travel effect, infrastructure effect, or causal explanation',
+        'a named monitoring authority, affected resident, observation, quote, or next scheduled update'
+      ],
+      impactEvidence: { state: 'UNESTABLISHED', subjects: [], facts: [], src: null }
     };
   }
   if (slug !== 'luis-navarro') {
@@ -389,7 +431,9 @@ function packetForEntries(entries, slug, profiles) {
     ? publicInfrastructureFact(top)
     : slug === 'lila-mezran'
       ? publicHealthFact(top)
-      : slug === 'angela-reyes' ? publicEducationFact(top) : top.label;
+      : slug === 'angela-reyes'
+        ? publicEducationFact(top)
+        : slug === 'noah-tan' ? publicWeatherFact(top) : top.label;
   return {
     seat: { slug, name: seat.name, popid: seat.popid, domain: seat.domain },
     empty: false,
@@ -398,10 +442,12 @@ function packetForEntries(entries, slug, profiles) {
       ref: top.ref,
       label: publicTopLabel,
       kind: top.kind,
-      angle: ['trevor-shimizu', 'lila-mezran', 'angela-reyes'].includes(slug)
+      angle: ['trevor-shimizu', 'lila-mezran', 'angela-reyes', 'noah-tan'].includes(slug)
         ? publicTopLabel
         : (top.angle || top.label),
-      hookLine: slug === 'trevor-shimizu' ? publicTopLabel : (top.hookLine || seat.hook),
+      hookLine: ['trevor-shimizu', 'noah-tan'].includes(slug)
+        ? publicTopLabel
+        : (top.hookLine || seat.hook),
       hood: top.hood,
       popids: storyPopids,
       citizens: storyCitizens
@@ -556,6 +602,7 @@ module.exports = {
   packetForEntries,
   publicInfrastructureFact,
   publicEducationFact,
+  publicWeatherFact,
   buildCivicDomainSlice,
   formatCivicDomainSliceMarkdown,
   slicePaths,

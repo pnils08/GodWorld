@@ -27,17 +27,17 @@ pointers:
 **Architecture:** Explicit `--packet-contract=v1|v2` remains an isolated,
 samples-only evaluation namespace and requires `--no-gate`. Live scheduled
 adoption is separate and package-gated through
-`scripts/newsroom-wake-packages.json`. Ten active packages automatically use
+`scripts/newsroom-wake-packages.json`. Eleven active packages automatically use
 LEP/2, zero live writer tools, per-wake model routing, and load-bearing
 manifests interpreted by persona-aware Rhea: Jax, Carmen, Luis, Trevor,
-P Slayer, Jordan, Kai, Rachel, Lila, and Angela. Their typed accountability, civic,
+P Slayer, Jordan, Kai, Rachel, Lila, Angela, and Noah. Their typed accountability, civic,
 investigation, systems, fan-pulse, economic/storefront, arts, public-safety, and
-health-service and education-stability slices add domain anchors and bounded
+health-service, education-stability, and weather-ground slices add domain anchors and bounded
 creative briefs to that same contract.
 Luis's `CIVIC-DOMAIN-SLICE-4` additionally selects between a zero-model local
 `RECORDS_BRIEF` when no reporting events are supplied and the configured Sonnet
 `FULL_INVESTIGATION` path when a typed reporting trail exists.
-Evidence-thin Jax, Carmen, Jordan, Kai, Rachel, Lila, Angela, P Slayer, and Trevor
+Evidence-thin Jax, Carmen, Jordan, Kai, Rachel, Lila, Angela, Noah, P Slayer, and Trevor
 Packets use a zero-model local `SOURCE_BRIEF`: W1/W2 may plan and gather bounded
 statements, but W3 prints only filtered approved facts, exact quote blocks, and
 one open question. Their configured writer model remains recorded for a future
@@ -348,7 +348,7 @@ slice and model text is a starting work surface, not an adopted contract.
 | RACHEL-LEP2-1 | Sgt. Rachel Torres / POP-00057 | safety | Article LEP/2; typed public-safety signal and classification/response gap | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed with zero candidates/quotes |
 | LILA-LEP2-1 | Dr. Lila Mezran / POP-00154 | health | Article LEP/2; `HEALTH-SERVICE-BRIEF-1`; typed access/timeline/human-cost unknowns | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed; DeepSeek schema pass, Llama schema fail |
 | ANGELA-LEP2-1 | Angela Reyes / POP-00156 | education | Article LEP/2; `EDUCATION-STABILITY-BRIEF-1`; typed participation/access/outcome unknowns | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed; DeepSeek more useful than Llama on same W1 Packet |
-| pending | Noah Tan / POP-00157 | environment | Candidate Article LEP/2; weather/environment ground | Candidate DeepSeek; benchmark | [ ] | [ ] |
+| NOAH-LEP2-1 | Noah Tan / POP-00157 | environment | Article LEP/2; `WEATHER-GROUND-BRIEF-1`; every Cycle's deterministic weather condition | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed; ordinary weather narrates the Cycle |
 | pending | Anthony Raines / POP-00017 | sports analytics | Candidate Article LEP/2; roster/board pulse | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | Hal Richmond / POP-00007 | sports history | Candidate Article LEP/2; archive/long-view pulse | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | Tanya Cruz / POP-00014 | sports sideline | Candidate Article LEP/2; clubhouse/sideline signal | Candidate DeepSeek; benchmark | [ ] | [ ] |
@@ -362,7 +362,7 @@ slice and model text is a starting work surface, not an adopted contract.
 | pending | Elliot Marbury / POP-00166 | data/general | Separate data-memo contract; TrueSource/As_Roster audit slice | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | DeShawn Hartley / POP-00015 | visual media | Separate visual/photo-prompt contract; visual record slice | Candidate DeepSeek; benchmark | [ ] | [ ] |
 
-The ten active packages have locked routes, but their cost/model comparison and
+The eleven active packages have locked routes, but their cost/model comparison and
 full unattended graduation remain checklist work. Elliot Marbury and DeShawn
 Hartley are deliberately not forced into Article LEP/2 until their data-memo and
 visual contracts are specified; contract shape is part of Gate 1. Celeste Tran
@@ -567,14 +567,10 @@ canon-ingestion write occurred.
 
 ## Open questions
 
-- All nine current Cycle 103 Rhea passes are staged behind the probation wall.
+- All ten current Cycle 103 Rhea passes are staged behind the probation wall.
   Preserve Carmen's medium public-wording flag as a polish item. Angela Reyes's
-  package and attended proof are complete; Noah Tan is the next unchecked Task
-  17 seat.
-- Noah's Cycle 103 civic-domain slice is empty, so activation must wait for a
-  typed environmental assignment rather than promoting ordinary weather into
-  news. Claude must also remove the protected Noah-lane real-agency references
-  before proof; the writable voice file now fails closed on missing authority.
+  package and attended proof are complete. Noah Tan's weather package and proof
+  are complete; Anthony Raines is the next unchecked Task 17 seat.
 - Luis's thin-record path passed locally, but his reporting-trail-backed Sonnet
   path and Rhea proof remain open. A local manifest pass is not publication or
   full package graduation.
@@ -622,3 +618,4 @@ canon-ingestion write occurred.
 - 2026-08-13 (codex) — Added the local Rhea-disposition reconciler and applied the builder's staging policy to Cycle 103: eight passes staged, stable failure markers archived as review history, and no publication or canon ingestion executed. Angela remains gated on Claude's protected verbiage cleanup.
 - 2026-08-13 (codex) — Graduated ANGELA-LEP2-1 after Claude's protected verbiage cleanup: DeepSeek beat Llama on same-Packet usefulness, zero-call W2/W3 passed locally, independent Rhea passed with zero flags, and the ninth C103 Article staged without an external author-state or canon write. Noah Tan is next.
 - 2026-08-13 (codex) — Began Noah Tan's Task 17 audit: removed real air/weather agencies from his writable voice contract and required Packet-supplied monitoring authority. C103 has no environmental lane entry, and protected culture-desk agency references remain for Claude; NOAH-LEP2-1 was not activated on an invented assignment.
+- 2026-08-13 (codex) — Builder ruled ordinary weather is Cycle narration and all Rhea-cleared Articles become canon at Saturday's gate regardless of Edition selection. NOAH-LEP2-1 now sources every Cycle's deterministic weather line; W1 schema, zero-call W2/W3, manifest, and independent Rhea passed with zero flags. The tenth C103 Article staged; Anthony Raines is next.

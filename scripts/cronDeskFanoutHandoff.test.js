@@ -214,4 +214,16 @@ assert.equal(stageRoute('civic', angelaAssignment.persona, 'report').model,
 assert.equal(stageRoute('civic', angelaAssignment.persona, 'write').model,
   'deepseek/deepseek-chat');
 
+const noahAssignment = {
+  name: 'Noah Tan', popid: 'POP-00157', desk: 'civic',
+  beatDomain: 'ENVIRONMENT', persona: 'noah-tan',
+};
+const noahContext = activateWakeContext(noahAssignment, noahAssignment.persona);
+assert.equal(noahContext.packetContract, 'v2');
+assert.equal(noahContext.wakePackage.version, 'NOAH-LEP2-1');
+assert.equal(stageRoute('civic', noahAssignment.persona, 'angle').model,
+  'deepseek/deepseek-chat');
+assert.equal(stageRoute('civic', noahAssignment.persona, 'write').model,
+  'deepseek/deepseek-chat');
+
 console.log('cron fan-out filename handoff tests: PASS');

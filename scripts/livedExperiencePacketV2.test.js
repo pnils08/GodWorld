@@ -398,6 +398,37 @@ assert.equal(educationW3.task.writingMode, 'SOURCE_BRIEF');
 assert.deepStrictEqual(educationW3.task.creativeBrief, educationW1.task.creativeBrief);
 assert.equal(p.auditArticle(p.renderSourceBrief(educationW3), educationW3).ok, true);
 
+const weatherStory = {
+  ref: 'output/world_summary_c999.md:3',
+  label: 'Cycle 999 opened in winter conditions: 49°F overcast, NW 11 mph.',
+  angle: 'Cycle 999 opened in winter conditions: 49°F overcast, NW 11 mph.',
+  kind: 'weather', popids: [], citizens: [],
+};
+const weatherSlice = { kind: 'civic-domain', packetSeat: {
+  seat: { domain: 'environment' },
+  prewrite: {
+    method: 'CONDITION_BASELINE',
+    missing: ['comparison or forecast', 'alert, impact, or cause'],
+    impactEvidence: { state: 'UNESTABLISHED', subjects: [], facts: [], src: null },
+    forbidden: ['Do not invent forecasts, alerts, impacts, or authorities.'],
+  }
+} };
+const weatherW1 = p.buildAnglePacket({ cycle: 999, desk: 'civic', reporter,
+  story: weatherStory, approach: 'TEST-ONLY science first', slice: weatherSlice, lane: [] });
+assert.equal(weatherW1.task.creativeBrief.kind, 'weather-ground');
+assert.deepStrictEqual(weatherW1.task.creativeBrief.impactEvidence,
+  { state: 'UNESTABLISHED', subjects: [], facts: [], src: null });
+const weatherPlan = p.validateAngleOutput({ focus: 'TEST weather', why: 'Cycle narration',
+  checks: ['Check supplied weather record'], targets: [], interpretation: 'Impact unknown',
+  unverifiedLead: [], closeQuestion: 'What comparison is next?' }, weatherW1);
+const weatherW3 = p.buildWritePacket({ cycle: 999, desk: 'civic', reporter,
+  story: weatherStory, approach: 'TEST-ONLY science first', angleInput: weatherW1,
+  anglePlan: weatherPlan, interviews: [], lane: [], reviewProfile: {
+    id: 'TEST-NOAH', canonPolicy: 'load-bearing', articleContract: { renderMode: 'SOURCE_BRIEF' },
+    authorizedTexture: [], textureConditions: [], canonBlockers: ['invented forecast'] } });
+assert.equal(weatherW3.task.writingMode, 'SOURCE_BRIEF');
+assert.equal(p.auditArticle(p.renderSourceBrief(weatherW3), weatherW3).ok, true);
+
 // Jordan's economic slice carries sourced conditions and limits through LEP/2.
 const economicStory = {
   ref: 'output/TEST_ONLY_ECONOMIC.json rows[1]',

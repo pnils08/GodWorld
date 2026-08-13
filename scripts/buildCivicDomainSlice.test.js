@@ -29,6 +29,8 @@ try {
     { Name: 'Test Civic Resident', POPID: 'POP-90001', RoleType: 'Mechanic', Neighborhood: 'Fruitvale', EconomicProfileKey: 'Skilled Trade' },
     { Name: 'Test Pro Athlete', POPID: 'POP-90002', RoleType: 'Right Fielder, Test Team', EconomicProfileKey: 'SPORTS_OVERRIDE' }
   ].map(row => JSON.stringify(row)).join('\n') + '\n');
+  fs.writeFileSync(path.join(output, 'world_summary_c103.md'),
+    '# World Summary — Cycle 103\n\n**Season:** Winter | **Weather:** 49°F overcast, NW 11 mph, overcast (frontState OVERCAST), humidity 67, visibility 10\n');
 
   const slice = civic.buildCivicDomainSlice(103, { root });
   assert.strictEqual(slice.empty, false);
@@ -92,7 +94,13 @@ try {
     story: slice.packets['angela-reyes'].story,
     prewrite: slice.packets['angela-reyes'].prewrite.anchorFacts
   })));
-  assert.strictEqual(slice.packets['noah-tan'].story.ref, 'ENV-1');
+  assert.strictEqual(slice.packets['noah-tan'].seat.popid, 'POP-00157');
+  assert.strictEqual(slice.packets['noah-tan'].story.ref, 'output/world_summary_c103.md:3');
+  assert.strictEqual(slice.packets['noah-tan'].prewrite.schema, 'WEATHER-GROUND-BRIEF-1');
+  assert.strictEqual(slice.packets['noah-tan'].prewrite.method, 'CONDITION_BASELINE');
+  assert(!/frontState/i.test(slice.packets['noah-tan'].story.label));
+  assert.deepStrictEqual(slice.packets['noah-tan'].prewrite.impactEvidence,
+    { state: 'UNESTABLISHED', subjects: [], facts: [], src: null });
   assert.strictEqual(slice.packets['carmen-delaine'].story.ref, 'INIT-TRANSIT');
   assert.deepStrictEqual(slice.packets['carmen-delaine'].prewrite.anchorFacts,
     ['Fruitvale Transit Hub | Status visioning-complete', 'INIT-TRANSIT'],

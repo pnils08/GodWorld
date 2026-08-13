@@ -2,7 +2,7 @@
 
 **This file is canonical for open/closed work** (S207). Pointer-only: one line per job, detail lives in the pointer doc — never here (S286 hard rule, Mike-direct).
 
-**Status:** ACTIVE (building) | **Last Updated:** 2026-08-13 — pipeline.54 ANGELA-LEP2-1 passed attended W1-W3/Rhea; nine C103 passes staged; Noah Tan is next. pipeline.55 C102 print gaps filed (research-build).
+**Status:** ACTIVE (building) | **Last Updated:** 2026-08-13 — pipeline.54 NOAH-LEP2-1 passed attended W1-W3/Rhea; ten C103 passes staged; Anthony Raines is next. pipeline.55 C102 print gaps filed (research-build).
 **Filing protocol (S212):** semantic groups + pointer-only entries — see [[rollout-rules]] §3–§5 (taxonomy, add, close). Full design: [[../adr/0005-rollout-plan-structure]].
 **North star:** `docs/ARCHITECTURE_VISION.md` — Jarvis + persistent sessions. Everything we build points there.
 **Completed phase details:** [[engine/ROLLOUT_ARCHIVE]] — read on demand, not at boot.
@@ -56,7 +56,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | pipeline.51 | NotebookLM audio-direction injection + archive-query canon hook in desk wake (51b) — landed S358; watching next scheduled daily + M-F + Sat runs | in-progress | engine-sheet | [[../research/2026-08-07-notebooklm-audio-overview-direction]] |
 | pipeline.52 | Journalist heat-slice packs complete; Task 6 civic-domain pack and Task 7 bookkeeping closed | done-pending-archive | research-build | [[../plans/2026-08-08-journalist-heat-slice-packs]] |
 | pipeline.53 | Citizen day digest (kimi) — 24h people-slice folded into the 8am notebooklmDailyNews bounded source, written + audio per Mike 2026-08-09; engine-sheet lands config rebalance | in-progress | engine-sheet | [[../plans/2026-08-09-citizen-day-digest]] |
-| pipeline.54 | Journalist package rollout active; ANGELA-LEP2-1 passed attended W1-W3/Rhea and nine C103 passes are staged. Next: Noah Tan environment package | in-progress | research-build / engine-sheet | [[../plans/2026-08-09-three-wake-lived-packet-pilot]] + [[../adr/0017-typed-lived-experience-packets]] |
+| pipeline.54 | Journalist package rollout active; NOAH-LEP2-1 passed attended W1-W3/Rhea and ten C103 passes are staged. Next: Anthony Raines sports-analytics package | in-progress | research-build / engine-sheet | [[../plans/2026-08-09-three-wake-lived-packet-pilot]] + [[../adr/0017-typed-lived-experience-packets]] |
 | pipeline.55 | C102 recovery-run print gaps — photoQA API-credit fallback route, FLUX signage-concept ban in DJ instruction, one-FP-photo rule in djDirect, sanctioned eic-authored sift bypass for recovery editions | ready | research-build | output/production_log_c102_print_gaps.md |
 
 ### engine.* — Engine code, ledger, schema

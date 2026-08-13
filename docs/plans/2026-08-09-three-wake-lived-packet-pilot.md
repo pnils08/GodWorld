@@ -357,15 +357,15 @@ slice and model text is a starting work surface, not an adopted contract.
 | PSLAYER-LEP2-1 | P Slayer / POP-00008 | sports | Article LEP/2; typed fan pulse | Llama / Llama / local source brief | [x] | attended W1-W3/Rhea passed; [ ] reporting-rich column |
 | JORDAN-LEP2-1 | Jordan Velez / POP-00153 | economics/labor | Article LEP/2; economic/storefront | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed with zero candidates/quotes |
 | LUIS-LEP2-1 | Luis Navarro / POP-00636 | civic investigations | `CIVIC-DOMAIN-SLICE-4`; typed reporting evidence; local thin-record brief or reporting-backed Article | DeepSeek / DeepSeek / local-or-Sonnet | [x] | direct-speech records brief passed 2/2 direct reactions, exact quote proof, Packet-aware Rhea, and contamination scan; [ ] story-linked lived-exposure/Sonnet proof |
-| TREVOR-LEP2-1 | Trevor Shimizu / POP-00155 | infrastructure | Article LEP/2; typed incident/link/warning systems brief and unestablished cascade | DeepSeek / DeepSeek / local source brief | [x] | C103 proof invalid: 3 backend lattice lines were printed as quotes; [ ] fresh direct-speech W2/W3/Rhea |
+| TREVOR-LEP2-1 | Trevor Shimizu / POP-00155 | infrastructure | Article LEP/2; typed incident/link/warning systems brief and unestablished cascade | DeepSeek / DeepSeek / local source brief | [x] | replacement proof passed 1/3 direct reactions; one invalid response rejected, one source abstained; exact quote, Packet-aware Rhea, and contamination scan passed |
 | RACHEL-LEP2-1 | Sgt. Rachel Torres / POP-00057 | safety | Article LEP/2; typed public-safety signal and classification/response gap | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed with zero candidates/quotes |
 | LILA-LEP2-1 | Dr. Lila Mezran / POP-00154 | health | Article LEP/2; `HEALTH-SERVICE-BRIEF-1`; typed access/timeline/human-cost unknowns | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed; DeepSeek schema pass, Llama schema fail |
 | ANGELA-LEP2-1 | Angela Reyes / POP-00156 | education | Article LEP/2; `EDUCATION-STABILITY-BRIEF-1`; typed participation/access/outcome unknowns | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed; DeepSeek more useful than Llama on same W1 Packet |
 | NOAH-LEP2-1 | Noah Tan / POP-00157 | environment | Article LEP/2; `WEATHER-GROUND-BRIEF-1`; every Cycle's deterministic weather condition | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed; ordinary weather narrates the Cycle |
-| ANTHONY-LEP2-1 | Anthony Raines / POP-00017 | sports analytics | Article LEP/2; typed line-card and unresolved-subject boundary | DeepSeek / DeepSeek / local source brief | [x] | sheet facts survived, but C103 printed backend lattice as Vinnie Keane; [ ] fresh direct-speech W2/W3/Rhea |
+| ANTHONY-LEP2-1 | Anthony Raines / POP-00017 | sports analytics | Article LEP/2; typed line-card and unresolved-subject boundary | DeepSeek / DeepSeek / local source brief | [x] | replacement proof rejected Vinnie Keane's unsupported response, emitted a quote-free sheet recap, and passed Packet-aware Rhea plus contamination scan |
 | HAL-LEP2-1 | Hal Richmond / POP-00007 | sports history | Article LEP/2; typed present-fact/unsupplied-history boundary | Llama / Llama / local source brief | [x] | attended W1-W3/Rhea passed; Llama safer than DeepSeek on same W1 Packet |
-| TANYA-LEP2-1 | Tanya Cruz / POP-00014 | sports sideline | Article LEP/2; typed record/access/observation boundary | DeepSeek / DeepSeek / local source brief | [x] | sheet facts survived, but C103 printed backend lattice as Adash Stanley; [ ] fresh direct-speech W2/W3/Rhea |
-| SIMON-LEP2-1 | Simon Leary / POP-00016 | sports long view | Article LEP/2; present role change/current-record boundary | DeepSeek / DeepSeek / local source brief | [x] | sheet facts survived, but C103 printed backend lattice as Benji Dillon; [ ] fresh direct-speech W2/W3/Rhea |
+| TANYA-LEP2-1 | Tanya Cruz / POP-00014 | sports sideline | Article LEP/2; typed record/access/observation boundary | DeepSeek / DeepSeek / local source brief | [x] | replacement proof rejected Adash Stanley as quote-ineligible and his unsupported response, emitted a quote-free sheet recap, and passed Packet-aware Rhea plus contamination scan |
+| SIMON-LEP2-1 | Simon Leary / POP-00016 | sports long view | Article LEP/2; present role change/current-record boundary | DeepSeek / DeepSeek / local source brief | [x] | replacement proof passed 1/1 direct reaction with exact raw-to-Packet-to-Article text, Packet-aware Rhea, and contamination scan |
 | pending | Ariana Reyes / POP-00133 | sports analytics | Candidate Article LEP/2; numeric/board pulse; blocked until a current As_Roster + TrueSource audit artifact exists | Candidate DeepSeek; benchmark | [ ] | blocked: current `output/desk-packets/truesource_reference.json` is absent; feed-only fallback forbidden |
 | MARIA-LEP2-1 | Maria Keen / POP-00013 | culture | Article LEP/2; evening-life/neighborhood ground with no invented attendance | Llama / Llama / local source brief | [x] | attended W1-W3/Rhea passed; Llama safer and shorter than DeepSeek on the same W1 Packet |
 | GRAYE-LEP2-1 | Elliot Graye / POP-00012 | community/faith | Article LEP/2; canon-forward faith institution and sighting-only boundary | Llama / Llama / local source brief | [x] | attended W1-W3/Rhea passed; corrections-forward context fixed a false Rhea canon reversal |
@@ -697,13 +697,15 @@ so an attended visual proof correctly remains open until Saturday compile.
 
 ## Open questions
 
-- Fourteen Cycle 103 Articles are staged. Five artifacts are flagged: Jax,
-  Trevor, Anthony, Simon, and Tanya printed backend lattice as citizen speech.
+- Eighteen Cycle 103 Articles are staged and clear the deterministic
+  contamination scan. Five superseded artifacts remain flagged: Jax, Trevor,
+  Anthony, Simon, and Tanya printed backend lattice as citizen speech.
   Weekday routing, local Rhea reconciliation, and Saturday intake all apply the
   deterministic contamination blocker before a Rhea pass can stage or ingest an
-  Article. Luis now has the first corrected direct-speech proof; the other
-  thirteen staged briefs contain no interview quote and remain sheet-backed
-  briefs rather than proof that Wake 2 reporting worked.
+  Article. Luis passed 2/2 bounded direct reactions, Trevor passed 1/3, and Simon
+  passed 1/1 with exact citizen-authored text. Anthony's and Tanya's attempted
+  responses failed closed, so their replacement Articles are quote-free
+  sheet-backed recaps. None of these proves story-linked lived exposure.
   Preserve Carmen's medium public-wording flag as a polish item. Angela Reyes's
   package and attended proof are complete. Noah Tan's weather package and proof
   are complete. Anthony's DeepSeek route beat Llama on the fixed C103 Packet and
@@ -715,9 +717,9 @@ so an attended visual proof correctly remains open until Saturday compile.
   is also blocked on that current combined audit substrate. Hartley's separate
   visual contract is locally contained but awaits the first compiled Edition +
   Sift Packet for an attended proof; do not substitute an Article Packet.
-- Luis's thin-record path passed locally, but his reporting-trail-backed Sonnet
-  path and Rhea proof remain open. A local manifest pass is not publication or
-  full package graduation.
+- Luis's thin-record path and Packet-aware Rhea proof passed, but his
+  reporting-trail-backed Sonnet path and story-linked lived-exposure proof remain
+  open. A direct reaction is not evidence that a citizen experienced the story.
 - Tanya's typed package keeps access, observed action, room mood, dialogue,
   injury detail, and team response `NOT_SUPPLIED` unless the Packet carries
   evidence. Exact Packet quote provenance now constrains Rhea's fabrication check.
@@ -787,3 +789,4 @@ so an attended visual proof correctly remains open until Saturday compile.
 - 2026-08-13 (codex) — Reconciled the nineteen-package cohort with the six-seat live schedule after saved fanouts exposed 8- and 11-seat expansion. Active packages now feed the existing staged-count/LRU selector at fixed 2/2/1/1 desk quotas; the package-only gate cannot insert seats, and every stage caps older saved fanouts before model work. Local tests only; no wake, Sheet write, or model call ran.
 - 2026-08-13 (codex) — Reopened Task 13 against the current cohort: graduation now requires one fresh unattended six-seat W1→W2→W3 chain with stable identities and exact Rhea/staging proof. The 2026-08-13 oversized saved fanout is runtime-contained but cannot prove the corrected builder path.
 - 2026-08-13 (codex) — Added a fail-closed W3 freshness gate after current C103 artifacts proved that Cycle-scoped filenames can leave yesterday's report Packet behind today's angle. Stage, Cycle, persona, reporter POPID, angle pointer, assigned story, and timestamp order must now agree before writer or Rhea work.
+- 2026-08-13 (codex) — Rebuilt the four non-Jax lattice-bearing packages under `CITIZEN_INTERVIEW/1`: Trevor passed 1/3 direct reactions and Simon 1/1; Anthony and Tanya rejected unsupported responses and emitted quote-free recaps. All four passed Packet-aware Rhea and deterministic contamination checks, bringing Saturday's dry-run scope to eighteen clean C103 Articles. Jax remains inactive and story-linked lived exposure remains unproven.

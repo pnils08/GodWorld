@@ -33,6 +33,7 @@ const ROOT = path.join(__dirname, '..');
 const HAL_APPROACH =
   'Historian approach (Hal Richmond): first-person reflective — literary, not wire, not bleacher rage. ' +
   'Present fact first (feed-true: StoryAngle, Stats, record), then era echo. ' +
+  'An era echo may name a person, place, team, event, season, or statistic only when the Packet supplies it; otherwise mark the echo missing. ' +
   'Pick 1–2 archive-bag modes. Spell weighty numbers as poetry of time, not scouting grades. ' +
   'End on the closing palette note in this slice (continuity, break, quiet pride, unease, elegy, threshold, city remembers). ' +
   'FORBIDDEN: fan "we" charge, Anthony salary–value architecture as spine, inventing seasons/x-stats, ' +
@@ -447,6 +448,7 @@ function buildHalSlice(cycle, opts) {
     claim,
     foilNumber: foil,
     missing: [
+      'Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet',
       'No invented seasons or franchise history beyond packet + feed',
       'No x-stats / barrel% / invented OPS+',
       'Not a business-desk storefront assignment',
@@ -501,8 +503,8 @@ function buildHalSlice(cycle, opts) {
       record: row.record || null,
       streak: row.streak || null,
       colorRoom:
-        'Dawn desk, empty lot after parade, river of franchise time. ' +
-        'Sensory free; seasons and stats only from feed/packet. Not a business storefront beat.'
+        'An unnamed desk or quiet archive transition; literary texture may carry no witnessed event. ' +
+        'People, places, teams, seasons, events, and statistics only from the packet. Not a business storefront beat.'
     },
     candidates: scored.slice(0, 10).map(s => ({
       score: s.score,

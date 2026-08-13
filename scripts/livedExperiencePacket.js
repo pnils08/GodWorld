@@ -107,6 +107,22 @@ function creativeBriefFromSlice(slice) {
       sceneRule: clean(slice.scene && slice.scene.colorRoom, 500) || null,
       sourcePointers: uniq(slice.pointers || []).slice(0, 5),
     };
+  } else if (slice.kind === 'hal-archive') {
+    const prewrite = slice.prewrite || {};
+    brief = {
+      kind: 'sports-history',
+      pulseClass: clean(slice.pulse && slice.pulse.className, 100) || null,
+      bagModes: (prewrite.bagModes || []).slice(0, 2).map(mode =>
+        clean([mode && mode.id, mode && mode.name].filter(Boolean).join(' '), 120)).filter(Boolean),
+      historicalAnchor: clean(prewrite.historicalAnchor, 300) || null,
+      presentFacts: uniq(prewrite.presentFacts).slice(0, 6),
+      dossierFacts: uniq(prewrite.dossierFacts).slice(0, 4),
+      missing: uniq(prewrite.missing).slice(0, 8),
+      closingNote: clean(prewrite.closingNote, 100) || null,
+      priorFiling: clean(prewrite.priorFiling, 300) || null,
+      sceneRule: clean(slice.scene && slice.scene.colorRoom, 500) || null,
+      sourcePointers: uniq(slice.pointers || []).slice(0, 5),
+    };
   } else if (slice.kind === 'economic-storefront') {
     const prewrite = slice.prewrite || {};
     brief = {
@@ -248,6 +264,12 @@ function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane 
     const text = clean(fact, 500);
     if (text && !/\b(?:do not|never)\s+(?:invent|lead|print|publish|assert|name|use)\b/i.test(text) &&
         !known.some(claim => claim.text === text && claim.src === clean(src, 300))) {
+      known.push(refClaim('FACT', text, src));
+    }
+  }
+  for (const fact of (slice && slice.prewrite && slice.prewrite.presentFacts) || []) {
+    const text = clean(fact, 500);
+    if (text && !known.some(claim => claim.text === text && claim.src === clean(src, 300))) {
       known.push(refClaim('FACT', text, src));
     }
   }

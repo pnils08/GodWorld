@@ -69,6 +69,8 @@ if (!fs.existsSync(summaryPath)) {
   ok('forbids business desk', /business-desk|business desk/i.test(slice.approach));
   ok('forbids fan we / anthony spine', /fan "we"|Anthony|salary/i.test(slice.approach));
   ok('prewrite present facts >= 2', (slice.prewrite.presentFacts || []).length >= 2);
+  ok('missing history is explicit', (slice.prewrite.missing || []).some(v => /Historical people/.test(v)));
+  ok('scene forbids unsupplied names', /People, places, teams/.test(slice.scene.colorRoom));
   ok('prewrite closing', !!slice.prewrite.closingNote);
   ok('players array', Array.isArray(slice.players));
   ok('candidates', Array.isArray(slice.candidates) && slice.candidates.length >= 1);
@@ -102,6 +104,32 @@ if (!fs.existsSync(summaryPath)) {
   const live = writeHalSlice(102, slice);
   ok('wrote md', fs.existsSync(live.md));
   ok('wrote json', fs.existsSync(live.json));
+}
+
+const summary103 = path.join(__dirname, '..', 'output', 'world_summary_c103.md');
+if (fs.existsSync(summary103)) {
+  const current = buildHalSlice(103);
+  ok('c103 missing history is explicit', current.prewrite.missing.some(v =>
+    /Historical people, places, teams, events, seasons, and statistics are unsupplied/.test(v)));
+  ok('c103 scene is Packet-only', /People, places, teams, seasons, events, and statistics only from the packet/.test(
+    current.scene.colorRoom));
+  const packet = require('./livedExperiencePacketV2').buildAnglePacket({
+    cycle: 103,
+    desk: 'sports',
+    reporter: { name: 'Hal Richmond', popid: 'POP-00007' },
+    story: current.story,
+    approach: current.approach,
+    slice: current,
+    lane: []
+  });
+  ok('c103 W1 carries typed sports history brief',
+    packet.task.creativeBrief && packet.task.creativeBrief.kind === 'sports-history');
+  ok('c103 W1 carries feed present facts', current.prewrite.presentFacts.every(text =>
+    packet.known.some(row => row.text === text)));
+  ok('c103 W1 exposes only ledger-resolved subject for W2',
+    packet.exposure.candidates.length === 1 &&
+    packet.exposure.candidates[0].pop === 'POP-00001' &&
+    packet.exposure.candidates[0].name === 'Vinnie Keane');
 }
 
 ok('HAL_APPROACH', typeof HAL_APPROACH === 'string' && HAL_APPROACH.length > 40);

@@ -75,6 +75,11 @@ const STAGE = arg('--stage', null);   // 'angle' | 'report' | 'write'
 // override. Live scheduled fanout gets its Packet contract and models from the
 // journalist's active wake package instead; no package means no scheduled wake.
 const PACKET_CONTRACT_FLAG = arg('--packet-contract', null);
+// Task 17 fixed-Packet model comparison. This override is deliberately narrower
+// than the package registry: it can run only an isolated, ungated W1 evaluation
+// with a unique artifact tag. It cannot alter a scheduled route or stage output.
+const ANGLE_MODEL_OVERRIDE = arg('--angle-model', null);
+const EVALUATION_TAG = arg('--evaluation-tag', null);
 const wakePackages = require('./newsroomWakePackages');
 let ACTIVE_WAKE_PACKAGE = null;
 let PACKET_CONTRACT = null;
@@ -949,6 +954,27 @@ function wakeStageStem(cycle, desk, assign, personaSlug) {
   return PACKET_ACTIVE ? base + 'packet-' + PACKET_CONTRACT + '_' : base;
 }
 
+function evaluationStem(stem, tag) {
+  if (!tag) return stem;
+  const safe = nameSlug(tag);
+  if (!safe || safe.length > 48) throw new Error('evaluation tag must be 1-48 slug characters');
+  return stem + 'benchmark-' + safe + '_';
+}
+
+function validateAngleEvaluationOptions(opts) {
+  const o = opts || {};
+  if (!o.model && !o.tag) return true;
+  if (!o.model || !o.tag) throw new Error('--angle-model and --evaluation-tag must be supplied together');
+  if (o.stage !== 'angle' || o.packetContract !== 'v2' || !o.noGate || o.fanout) {
+    throw new Error('--angle-model requires --stage=angle --packet-contract=v2 --no-gate and forbids --fanout');
+  }
+  if (!/^[a-z0-9._-]+\/[a-z0-9._-]+$/i.test(o.model)) {
+    throw new Error('--angle-model must be an explicit provider/model route');
+  }
+  evaluationStem('', o.tag);
+  return true;
+}
+
 function writerArtifactTag(assign, personaSlug) {
   if (!assign || personaSlug) return null;
   const tag = nameSlug(assign.name);
@@ -992,7 +1018,7 @@ async function runAngle(assign) {
   const desk = assign ? assign.desk : DESK;
   const personaSlug = assign ? assign.persona : PERSONA;
   activateWakeContext(assign, personaSlug);
-  const stem = wakeStageStem(cycle, desk, assign, personaSlug);
+  const stem = evaluationStem(wakeStageStem(cycle, desk, assign, personaSlug), EVALUATION_TAG);
   console.log('Wake 1 ANGLE — ' + desk + ' c' + cycle + (personaSlug ? ' (' + personaSlug + ')' : '') + (assign ? ' [' + assign.name + ']' : ''));
   console.log('===================================');
   const lane = loadLane(cycle, desk);
@@ -1459,10 +1485,12 @@ async function runAngle(assign) {
     }
     log('asking ' + asker.name + ' (' + asker.popid + ') ' +
       (PACKET_ACTIVE ? 'for a typed reporter plan...' : 'what smells off...'));
+    const angleModel = ANGLE_MODEL_OVERRIDE ||
+      (ACTIVE_WAKE_PACKAGE ? wakePackages.routeFor(ACTIVE_WAKE_PACKAGE, 'angle').model : null);
     const out = execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
       '--pop=' + asker.popid, '--ask=' + ask, '--cycle=' + cycle, '--json',
       ...(PACKET_ACTIVE ? ['--evidence-bound'] : []),
-      ...(ACTIVE_WAKE_PACKAGE ? ['--model=' + wakePackages.routeFor(ACTIVE_WAKE_PACKAGE, 'angle').model] : []),
+      ...(angleModel ? ['--model=' + angleModel] : []),
       '--max-tokens=' + (PACKET_ACTIVE ? '700' : '320')],
       { cwd: ROOT, encoding: 'utf8', timeout: 300000 });
     const outTrim = out.trim();
@@ -2528,6 +2556,19 @@ if (PACKET_CONTRACT_FLAG && !STAGE) {
   console.error('[run] explicit --packet-contract=' + PACKET_CONTRACT_FLAG + ' requires one --stage=angle|report|write');
   process.exit(1);
 }
+try {
+  validateAngleEvaluationOptions({
+    model: ANGLE_MODEL_OVERRIDE,
+    tag: EVALUATION_TAG,
+    stage: STAGE,
+    packetContract: PACKET_CONTRACT_FLAG,
+    noGate: NO_GATE,
+    fanout: FANOUT,
+  });
+} catch (e) {
+  console.error('[run] ' + e.message);
+  process.exit(1);
+}
 if (require.main === module) {
   Promise.resolve()
     .then(() => (STAGE && FANOUT ? runFanoutStage()
@@ -2542,6 +2583,8 @@ module.exports = {
   stageStem,
   nameSlug,
   writerArtifactTag,
+  evaluationStem,
+  validateAngleEvaluationOptions,
   buildWriterArgs,
   collectQuoteAsks,
   activateWakeContext,

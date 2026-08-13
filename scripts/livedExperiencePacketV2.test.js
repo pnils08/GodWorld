@@ -250,6 +250,59 @@ const unresolvedSportsW1 = p.buildAnglePacket({
 assert.deepStrictEqual(unresolvedSportsW1.exposure.candidates, []);
 assert.deepStrictEqual(unresolvedSportsW1.output.schema.targets, []);
 
+// Hal's archive posture is typed, but history is not a creative blank check.
+// Present feed facts enter the manifest; unsupplied people/events remain missing.
+const halStory = {
+  ref: 'output/TEST_ONLY_SPORTS.json rows[2]',
+  label: 'TEST-ONLY Pitcher completed the supplied line',
+  angle: 'what the supplied line means across time', kind: 'player-feature',
+  popids: ['TEST-PLAYER-01'], citizens: ['Test Player — TEST-ONLY Player'],
+};
+const halSlice = {
+  kind: 'hal-archive',
+  pulse: { className: 'threshold' },
+  players: [
+    { popid: 'TEST-PLAYER-01', name: 'Test Player', role: 'TEST-ONLY Player', why: 'feed-name' },
+    { popid: null, name: 'Unresolved Test Pitcher', why: 'feed-name' },
+  ],
+  prewrite: {
+    bagModes: [{ id: 5, name: 'Crossing the Threshold' }],
+    historicalAnchor: 'TEST-ONLY threshold; no named predecessor supplied',
+    presentFacts: ['TEST-ONLY Stats: 9 innings, 0 hits', 'TEST-ONLY Cycle: C999'],
+    dossierFacts: ['NONE — no historical record supplied'],
+    closingNote: 'threshold crossed', priorFiling: 'NONE',
+    missing: ['historical person, event, season, and comparison record'],
+  },
+  scene: { colorRoom: 'TEST-ONLY unnamed archive transition; no witnessed event' },
+  pointers: ['output/TEST_ONLY_SPORTS.json rows[2]'],
+};
+const halReporter = { popid: 'POP-00007', name: 'Hal Richmond' };
+const halW1 = p.buildAnglePacket({ cycle: 999, desk: 'sports', reporter: halReporter,
+  story: halStory, approach: 'TEST-ONLY reflective, Packet-only history', slice: halSlice, lane: [] });
+assert.equal(halW1.task.creativeBrief.kind, 'sports-history');
+assert.deepStrictEqual(halW1.task.creativeBrief.presentFacts, halSlice.prewrite.presentFacts);
+assert.deepStrictEqual(halW1.task.creativeBrief.missing, halSlice.prewrite.missing);
+assert.ok(halSlice.prewrite.presentFacts.every(text => halW1.known.some(row => row.text === text)));
+assert.deepStrictEqual(halW1.exposure.candidates.map(row => row.pop), ['TEST-PLAYER-01']);
+const halPlan = p.validateAngleOutput({ focus: 'TEST-ONLY present line',
+  why: 'The supplied line marks a threshold', checks: ['Check supplied feed facts'],
+  targets: [], interpretation: 'Continuity cannot be established without history',
+  unverifiedLead: [], closeQuestion: 'What supplied archive record would establish continuity?' }, halW1);
+const halProfile = {
+  id: 'TEST-HAL', canonPolicy: 'load-bearing',
+  authorizedTexture: ['reflective stance without a witnessed event'],
+  textureConditions: ['history requires Packet support'],
+  canonBlockers: ['unsupplied historical person or event'],
+};
+const halW3 = p.buildWritePacket({ cycle: 999, desk: 'sports', reporter: halReporter,
+  story: halStory, approach: 'TEST-ONLY reflective', angleInput: halW1,
+  anglePlan: halPlan, interviews: [], lane: [], reviewProfile: halProfile });
+assert.deepStrictEqual(halW3.task.creativeBrief, halW1.task.creativeBrief);
+assert.ok(halSlice.prewrite.presentFacts.every(text =>
+  halW3.manifest.approvedFacts.some(row => row.text === text)));
+assert.ok(!halW3.manifest.approvedFacts.some(row => /named predecessor|historical person/i.test(row.text)));
+assert.doesNotThrow(() => p.assertBase(halW3, 'W3'));
+
 const luisProfile = {
   id: 'TEST-LUIS', canonPolicy: 'load-bearing',
   authorizedTexture: ['known versus unknown structure'],

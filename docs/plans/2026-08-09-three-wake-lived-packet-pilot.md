@@ -350,7 +350,7 @@ slice and model text is a starting work surface, not an adopted contract.
 | ANGELA-LEP2-1 | Angela Reyes / POP-00156 | education | Article LEP/2; `EDUCATION-STABILITY-BRIEF-1`; typed participation/access/outcome unknowns | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed; DeepSeek more useful than Llama on same W1 Packet |
 | NOAH-LEP2-1 | Noah Tan / POP-00157 | environment | Article LEP/2; `WEATHER-GROUND-BRIEF-1`; every Cycle's deterministic weather condition | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed; ordinary weather narrates the Cycle |
 | ANTHONY-LEP2-1 | Anthony Raines / POP-00017 | sports analytics | Article LEP/2; typed line-card and unresolved-subject boundary | DeepSeek / DeepSeek / local source brief | [ ] second-model benchmark | attended W1-W3/Rhea passed; registry remains inactive pending benchmark |
-| pending | Hal Richmond / POP-00007 | sports history | Candidate Article LEP/2; archive/long-view pulse | Candidate DeepSeek; benchmark | [ ] | [ ] |
+| HAL-LEP2-1 | Hal Richmond / POP-00007 | sports history | Article LEP/2; typed present-fact/unsupplied-history boundary | Candidate DeepSeek / DeepSeek / DeepSeek | [ ] model benchmark + proof | registry inactive; local Packet/manifest gates passed |
 | pending | Tanya Cruz / POP-00014 | sports sideline | Candidate Article LEP/2; clubhouse/sideline signal | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | Simon Leary / POP-00016 | sports long view | Candidate Article LEP/2; sports as civic architecture | Candidate DeepSeek; benchmark | [ ] | [ ] |
 | pending | Ariana Reyes / POP-00133 | sports analytics | Candidate Article LEP/2; numeric/board pulse | Candidate DeepSeek; benchmark | [ ] | [ ] |
@@ -581,6 +581,15 @@ canon ingestion ran. A same-Packet Llama comparison was rejected before
 inference by the execution approval layer, so `ANTHONY-LEP2-1` remains
 `active: false` and package graduation stays open rather than waiving Gate 3.
 
+Hal Richmond's local package now closes the unsafe archive-carveout seam without
+editing his protected persona sources. Feed-backed present facts enter the typed
+W1 and W3 manifests, unresolved feed names cannot become Wake 2 targets, and an
+era echo may name a person, place, team, event, season, or statistic only when
+the Packet supplies it. First-person interpretation remains permitted, but
+witnessed memories, archive access, prior coverage, and imported history are
+canon blockers unless supplied as facts. `HAL-LEP2-1` remains `active: false`:
+its fixed-Packet model comparison and attended W1-W3/Rhea proof are still open.
+
 ## Open questions
 
 - All eleven current Cycle 103 Rhea passes are staged behind the probation wall.
@@ -591,6 +600,9 @@ inference by the execution approval layer, so `ANTHONY-LEP2-1` remains
 - Luis's thin-record path passed locally, but his reporting-trail-backed Sonnet
   path and Rhea proof remain open. A local manifest pass is not publication or
   full package graduation.
+- Hal's typed package and local manifest proof pass, but model comparison and
+  attended W1-W3/Rhea remain open; the registry must stay inactive until both
+  pass.
 - Expansion remains blocked per journalist until that person's wake models,
   Packet contract, creative authority, movement contract, and Rhea profile are
   encoded in an active package and the existing cohort review is complete.
@@ -637,3 +649,4 @@ inference by the execution approval layer, so `ANTHONY-LEP2-1` remains
 - 2026-08-13 (codex) — Began Noah Tan's Task 17 audit: removed real air/weather agencies from his writable voice contract and required Packet-supplied monitoring authority. C103 has no environmental lane entry, and protected culture-desk agency references remain for Claude; NOAH-LEP2-1 was not activated on an invented assignment.
 - 2026-08-13 (codex) — Builder ruled ordinary weather is Cycle narration and all Rhea-cleared Articles become canon at Saturday's gate regardless of Edition selection. NOAH-LEP2-1 now sources every Cycle's deterministic weather line; W1 schema, zero-call W2/W3, manifest, and independent Rhea passed with zero flags. The tenth C103 Article staged; Anthony Raines is next.
 - 2026-08-13 (codex) — Built ANTHONY-LEP2-1 and repaired shared sports parsing: exact subject authority, false-name rejection, split stat ownership, and unresolved-POPID abstention. DeepSeek W1/W2, local W3, manifest, and Gemini Rhea passed; the eleventh C103 Article staged. The registry stays inactive because the required same-Packet second-model benchmark was rejected before inference.
+- 2026-08-13 (codex) — Built inactive HAL-LEP2-1 local gates: present feed facts now enter W1/W3 manifests, unresolved names cannot become interview targets, and unsupplied history or witnessed memory is blocked rather than treated as a franchise carveout. Fixed-Packet comparison and attended W1-W3/Rhea remain open.

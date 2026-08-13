@@ -100,6 +100,22 @@ assert.equal(anthony.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.ok(anthony.reviewProfile.textureConditions.some(v => v.includes('unresolved feed subject')));
 assert.ok(anthony.reviewProfile.canonBlockers.some(v => v.includes('wrong player')));
 
+const hal = packages['hal-richmond'];
+assert.equal(hal.version, 'HAL-LEP2-1');
+assert.equal(hal.active, false);
+assert.equal(hal.requiredDaily, true);
+assert.equal(hal.assignment.desk, 'sports');
+assert.equal(hal.assignment.name, 'Hal Richmond');
+assert.equal(hal.assignment.popid, 'POP-00007');
+assert.equal(hal.assignment.beatDomain, 'SPORTS_HISTORY');
+assert.equal(hal.packetContract, 'v2');
+assert.equal(packagesApi.routeFor(hal, 'angle').model, 'deepseek/deepseek-chat');
+assert.equal(packagesApi.routeFor(hal, 'report').model, 'deepseek/deepseek-chat');
+assert.equal(packagesApi.routeFor(hal, 'write').model, 'deepseek/deepseek-chat');
+assert.match(hal.reviewProfile.purpose, /unsupplied one remains explicitly missing/);
+assert.ok(hal.reviewProfile.textureConditions.some(v => v.includes('historical echo')));
+assert.ok(hal.reviewProfile.canonBlockers.some(v => v.includes('historical person')));
+
 const jordan = packages['business-desk'];
 assert.equal(jordan.version, 'JORDAN-LEP2-1');
 assert.equal(jordan.requiredDaily, true);

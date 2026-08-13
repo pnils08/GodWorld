@@ -8,6 +8,8 @@ const {
   stageStem,
   nameSlug,
   writerArtifactTag,
+  evaluationStem,
+  validateAngleEvaluationOptions,
   buildWriterArgs,
   activateWakeContext,
   stageRoute,
@@ -122,6 +124,24 @@ assert.strictEqual(emittedPersonaDraft, expectedPersonaDraft);
 
 assert.strictEqual(writerArtifactTag(null, null), null);
 assert.strictEqual(nameSlug(' Farrah Del Rio '), 'farrah-del-rio');
+assert.strictEqual(
+  evaluationStem('sports_c103_anthony-raines_packet-v2_', 'Llama 3.3'),
+  'sports_c103_anthony-raines_packet-v2_benchmark-llama-3-3_'
+);
+assert.throws(() => evaluationStem('sports_c103_', '---'), /evaluation tag/);
+assert.throws(() => validateAngleEvaluationOptions({ model: 'model-only' }), /supplied together/);
+assert.throws(() => validateAngleEvaluationOptions({
+  model: 'meta-llama/llama-3.3-70b-instruct', tag: 'llama', stage: 'write',
+  packetContract: 'v2', noGate: true, fanout: false,
+}), /requires --stage=angle/);
+assert.throws(() => validateAngleEvaluationOptions({
+  model: 'meta-llama/llama-3.3-70b-instruct', tag: 'llama', stage: 'angle',
+  packetContract: 'v2', noGate: true, fanout: true,
+}), /forbids --fanout/);
+assert.strictEqual(validateAngleEvaluationOptions({
+  model: 'meta-llama/llama-3.3-70b-instruct', tag: 'llama', stage: 'angle',
+  packetContract: 'v2', noGate: true, fanout: false,
+}), true);
 assert.throws(
   () => writerArtifactTag({ name: '---' }, null),
   /no usable reporter name/

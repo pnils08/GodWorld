@@ -191,4 +191,27 @@ assert.equal(stageRoute('civic', lilaAssignment.persona, 'report').model,
 assert.equal(stageRoute('civic', lilaAssignment.persona, 'write').model,
   'deepseek/deepseek-chat');
 
+const angelaAssignment = {
+  name: 'Angela Reyes', popid: 'POP-00156', desk: 'civic',
+  beatDomain: 'EDUCATION', persona: 'angela-reyes',
+};
+const angelaContext = activateWakeContext(angelaAssignment, angelaAssignment.persona);
+assert.equal(angelaContext.packetContract, 'v2');
+assert.equal(angelaContext.wakePackage.version, 'ANGELA-LEP2-1');
+for (const file of [
+  path.join(__dirname, '..', 'docs', 'media', 'voices', 'angela_reyes.md'),
+  path.join(__dirname, '..', 'docs', 'media', 'ANGELA_EDUCATION_BAG.md'),
+  path.join(__dirname, '..', 'docs', 'mara-vance', 'AGENT_INVENTORY.md'),
+]) {
+  assert.doesNotMatch(fs.readFileSync(file, 'utf8'),
+    /\bOUSD\b|Oakland Unified|Laurel Elementary|real Oakland school geography/i,
+    'Angela active newsroom source carries a real-world school reference: ' + file);
+}
+assert.equal(stageRoute('civic', angelaAssignment.persona, 'angle').model,
+  'deepseek/deepseek-chat');
+assert.equal(stageRoute('civic', angelaAssignment.persona, 'report').model,
+  'deepseek/deepseek-chat');
+assert.equal(stageRoute('civic', angelaAssignment.persona, 'write').model,
+  'deepseek/deepseek-chat');
+
 console.log('cron fan-out filename handoff tests: PASS');

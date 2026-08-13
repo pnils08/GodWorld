@@ -6,7 +6,7 @@ const packagesApi = require('./newsroomWakePackages');
 const packages = packagesApi.loadPackages();
 const active = packagesApi.activePackages(packages);
 assert.deepStrictEqual(active.map(row => row.key),
-  ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'p-slayer', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran']);
+  ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'p-slayer', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes']);
 
 const jax = packages['freelance-firebrand'];
 assert.equal(jax.version, 'JAX-LEP2-1');
@@ -138,6 +138,19 @@ assert.equal(lila.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.ok(lila.reviewProfile.textureConditions.some(v => v.includes('human consequence')));
 assert.ok(lila.reviewProfile.canonBlockers.some(v => v.includes('invented diagnosis')));
 
+const angela = packages['angela-reyes'];
+assert.equal(angela.version, 'ANGELA-LEP2-1');
+assert.equal(angela.requiredDaily, true);
+assert.equal(angela.assignment.name, 'Angela Reyes');
+assert.equal(angela.assignment.popid, 'POP-00156');
+assert.equal(angela.assignment.beatDomain, 'EDUCATION');
+assert.equal(packagesApi.routeFor(angela, 'angle').model, 'deepseek/deepseek-chat');
+assert.equal(packagesApi.routeFor(angela, 'report').model, 'deepseek/deepseek-chat');
+assert.equal(packagesApi.routeFor(angela, 'write').model, 'deepseek/deepseek-chat');
+assert.equal(angela.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
+assert.ok(angela.reviewProfile.textureConditions.some(v => v.includes('stability evidence')));
+assert.ok(angela.reviewProfile.canonBlockers.some(v => v.includes('invented student')));
+
 const gate = packagesApi.gateAssignments([
   { desk: 'civic', name: 'Jax Caldera', persona: 'freelance-firebrand' },
   { desk: 'civic', name: 'Carmen Delaine', persona: 'carmen-delaine' },
@@ -216,8 +229,9 @@ const pinned = applyWakePackageGate([
   'kai-marston': 'Kai arts pulse',
   'rachel-torres': 'Rachel public safety',
   'lila-mezran': 'Lila health service',
+  'angela-reyes': 'Angela education stability',
 }, packages);
-assert.equal(pinned.assignments.length, 9);
+assert.equal(pinned.assignments.length, 10);
 const pinnedByPersona = new Map(pinned.assignments.map(row => [row.persona, row]));
 assert.equal(pinnedByPersona.get('freelance-firebrand').name, 'Jax Caldera');
 assert.equal(pinnedByPersona.get('freelance-firebrand').approach, 'Jax accountability');
@@ -242,9 +256,11 @@ assert.equal(pinnedByPersona.get('rachel-torres').name, 'Sgt. Rachel Torres');
 assert.equal(pinnedByPersona.get('rachel-torres').approach, 'Rachel public safety');
 assert.equal(pinnedByPersona.get('lila-mezran').name, 'Dr. Lila Mezran');
 assert.equal(pinnedByPersona.get('lila-mezran').approach, 'Lila health service');
+assert.equal(pinnedByPersona.get('angela-reyes').name, 'Angela Reyes');
+assert.equal(pinnedByPersona.get('angela-reyes').approach, 'Angela education stability');
 assert.deepStrictEqual(pinned.pinned.map(row => row.replaced),
   ['TEST-ONLY Civic One', 'TEST-ONLY Civic Two', null, null, 'TEST-ONLY Sports One',
-    'TEST-ONLY Business Reporter', null, null, null]);
+    'TEST-ONLY Business Reporter', null, null, null, null]);
 assert.deepStrictEqual(pinned.skipped.map(row => row.name),
   ['TEST-ONLY Sports Two']);
 
@@ -268,10 +284,10 @@ const shortDesk = applyWakePackageGate([
   { desk: 'business', name: 'TEST-ONLY Business Seat', popid: 'POP-99994', story: { ref: 'TEST-BUSINESS' } },
   { desk: 'culture', name: 'TEST-ONLY Culture Preserved', popid: 'POP-99991', story: { ref: 'TEST-CULTURE' } },
 ], { civic: 'generic civic' }, packages);
-assert.equal(shortDesk.assignments.length, 9);
+assert.equal(shortDesk.assignments.length, 10);
 assert.deepStrictEqual(new Set(shortDesk.assignments.map(row => row.persona)),
-  new Set(['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'p-slayer', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran']));
+  new Set(['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'p-slayer', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes']));
 assert.ok(shortDesk.pinned.some(row => row.replaced === 'TEST-ONLY Culture Preserved'));
-assert.equal(shortDesk.pinned.filter(row => row.replaced === null).length, 6);
+assert.equal(shortDesk.pinned.filter(row => row.replaced === null).length, 7);
 
 console.log('newsroomWakePackages.test.js: PASS');

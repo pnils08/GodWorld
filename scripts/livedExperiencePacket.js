@@ -181,6 +181,19 @@ function creativeBriefFromSlice(slice) {
         : null,
       forbidden: uniq(prewrite.forbidden).slice(0, 6),
     };
+  } else if (slice.kind === 'civic-domain' && slice.packetSeat &&
+      slice.packetSeat.seat && slice.packetSeat.seat.domain === 'education-youth') {
+    const prewrite = slice.packetSeat.prewrite || {};
+    brief = {
+      kind: 'education-stability',
+      method: clean(prewrite.method, 40) || 'PROGRAM_CONTINUITY_ACCESS',
+      missing: uniq(prewrite.missing).slice(0, 6),
+      stabilityEvidence: prewrite.stabilityEvidence &&
+        prewrite.stabilityEvidence.state === 'UNESTABLISHED'
+        ? { state: 'UNESTABLISHED', participants: [], facts: [], src: null }
+        : null,
+      forbidden: uniq(prewrite.forbidden).slice(0, 6),
+    };
   }
   if (!brief) return null;
   return Object.values(brief).some(value => Array.isArray(value) ? value.length : value)

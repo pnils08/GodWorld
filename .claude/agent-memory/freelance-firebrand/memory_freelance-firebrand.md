@@ -35,7 +35,7 @@ C98: `output/reporters/freelance-firebrand/articles/c98_C1.md`
 - Rivers quote: "OPP will write the law that makes it real."
 - Ramos data: 436 local hires YTD / 41% Baylight workforce (exceeding 40% CBA target)
 - A's $2M = baseball ownership tied to Baylight CBA (C83) — NOT Varek's NBA group. Do not conflate.
-- Five OUSD schools in spec: Oakland Technical, Skyline, Fremont, Castlemont, McClymonds
+- Five district campuses in INIT-007 spec — real-name schools (Tier-2 banned) retired S368; use Oakland City Schools district context until canon campuses exist
 - Eight trade locals named in spec: NorCal Carpenters, IBEW Local 595, UA Local 342, Ironworkers Local 378, Laborers Local 304, OE Local 3, SMART Local 104, Cement Masons Local 300
 
 ## Canon Citizens Used (C92)

@@ -69,16 +69,18 @@ When filling a tier-2 canon substitute, pick something that fits the prosperity-
 
 ## Education
 
-### Tier 1 — Use real names
+### Tier 1 — Canon institutions (GodWorld-native)
 
-- **OUSD** (Oakland Unified School District) — K-12 public district
-- **Peralta Community College District** — community college district
-- **UC Berkeley** — major public research university
+- **Oakland City Schools** — the K-12 public district. Canon-minted 2026-08-13 (S368, Mike-direct: real Oakland institutions are contaminants unless canon or land structure). Inherits ALL prior published "OUSD" history: the C76 apprenticeship MOU (INIT-007), the E85 youth-literacy program, all education coverage, Business_Ledger BIZ-00016. Any pre-C104 published material reading "OUSD" / "Oakland Unified School District" refers to this institution.
+- **Oakland Community College District** — the community-college district. Canon-minted 2026-08-13 (S368). Inherits all prior "Peralta CCD" history incl. the C78 MOU (INIT-007) and its Business_Ledger row. ("Peralta" as a street/land name stays valid — rancho history is land history, the institution name is not.)
+- **UC Berkeley** — out-of-Oakland real institution; permitted for backstory/credential references only under the out-of-Oakland rule (real institutions outside Oakland don't trigger the fourth-wall). Not an in-world actor.
 
 ### Tier 2 — Canon-substitute required
 
 | Real Name | Canon Substitute | Status | Notes |
 |---|---|---|---|
+| OUSD / Oakland Unified School District | Oakland City Schools | canon | Real operating Oakland institution — cardinal-sin class (S368). Substitute carries the history. |
+| Peralta Community College District | Oakland Community College District | canon | Same class (S368). Street name "Peralta" remains valid land reference. |
 | Oakland Technical High School | TBD | TBD | Individual public school — has identity, athletic history |
 | Skyline High School | TBD | TBD | Individual public school |
 | Fremont High School | TBD | TBD | Individual public school |
@@ -88,7 +90,7 @@ When filling a tier-2 canon substitute, pick something that fits the prosperity-
 | Holy Names University | TBD | TBD | Private university |
 | USF / Saint Mary's | TBD | TBD | Private universities |
 
-**Note:** District (OUSD) is tier 1, but individual schools have their own identities (principals, athletic histories, named alumni) and live in tier 2. Reference "an OUSD high school in Temescal" rather than naming a specific real school until canon-substitutes exist.
+**Note:** The canon district (Oakland City Schools) is tier 1; individual real schools have their own identities (principals, athletic histories, named alumni) and live in tier 2. Reference "an Oakland City Schools high school in Temescal" rather than naming a specific real school until canon-substitutes exist.
 
 ---
 

@@ -183,12 +183,12 @@ Beyond the shared rules in CANON_RULES.md:
 - **You may name freely (Tier 1):**
   - Council members and the Mayor by canon name when calling them out (Vega, Ashford, Crane, Carter, Rivers, Tran, Mobley, Chen, Santana — canon names from civic-office-ledger). This is the entire point of the column — naming names of officials.
   - Canon initiatives (Stabilization Fund, Baylight, OARI, Transit Hub, Health Center)
-  - Public-civic functions: AC Transit, BART, OPD (when calling out OPD silence), the Port of Oakland, Highland Hospital, Lake Merritt, OUSD as district context
+  - Public-civic functions: AC Transit, BART, OPD (when calling out OPD silence), the Port of Oakland, Highland Hospital, Lake Merritt, Oakland City Schools as district context
   - The 17 Oakland neighborhoods and their streets
   - Cultural venues from Cultural_Ledger; faith institutions from Faith_Organizations
   - Public union locals when labor stories surface
 - **You must canon-check before naming (Tier 2):**
-  - Individual named OUSD high schools — district-context phrasing
+  - Individual named real-world high schools — district-context phrasing
   - Branded private health systems (Kaiser-class) — "the private health system that runs the clinic"
   - Branded community-health orgs (La Clínica, Roots, Asian Health Services) — functional reference
   - Branded community advocacy orgs (Unity Council, Greenlining, EBASE) — functional reference

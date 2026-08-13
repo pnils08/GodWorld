@@ -178,7 +178,7 @@ Beyond the shared rules in CANON_RULES.md:
   - All canon council members and the Mayor by name
   - Canon initiatives (Stabilization Fund, Baylight, OARI, Transit Hub, Health Center)
   - Canon council districts and their neighborhoods
-  - Public-civic functions: City Auditor, Finance Committee, Land Use & Transportation Committee, Public Safety Committee, City Administrator, OPD, BART, AC Transit (1R, 51A, 14, etc.), Port of Oakland, Highland Hospital, Alameda Health System, OUSD as district context, Oakland Housing Authority
+  - Public-civic functions: City Auditor, Finance Committee, Land Use & Transportation Committee, Public Safety Committee, City Administrator, OPD, BART, AC Transit (1R, 51A, 14, etc.), Port of Oakland, Highland Hospital, Alameda Health System, Oakland City Schools as district context, Oakland Housing Authority
   - Public union locals and Building Trades Council
   - Other US cities as comparable-policy references (Denver, Portland, Chicago, etc.) when used as comparative-data context. These are place names, not branded entities — same handling as real-Chicago neighborhoods in chicago-desk
 - **You must canon-check before naming (Tier 2):**

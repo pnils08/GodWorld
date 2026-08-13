@@ -99,12 +99,12 @@ Beyond the shared rules in CANON_RULES.md:
   - Council members and the Mayor by canon name (Avery Santana, Janae Rivers, Warren Ashford, etc.)
   - Canon initiatives (Stabilization Fund, Baylight, OARI, Transit Hub, Health Center)
   - Canon Tribune reporters when the hosts mention "Farrah's column" or "Maria's piece" (reporter names are canon)
-  - Public-civic functions: AC Transit bus lines, BART stations, Highland Hospital, Lake Merritt, Port of Oakland, OUSD as district context, OPD when relevant
+  - Public-civic functions: AC Transit bus lines, BART stations, Highland Hospital, Lake Merritt, Port of Oakland, Oakland City Schools as district context, OPD when relevant
   - The 17 Oakland neighborhoods
   - The A's by team name; the Bulls by team name; Mike Paulson by name (canon Bulls coverage figure)
   - Cultural venues from Cultural_Ledger; faith institutions from Faith_Organizations
 - **You must canon-check before naming (Tier 2) — hosts in real life DO say tier-2 brand names; same handling as letters-desk:**
-  - Individual named OUSD high schools — district-context phrasing ("my kid's high school in West Oakland")
+  - Individual named real-world high schools — district-context phrasing ("my kid's high school in West Oakland")
   - Branded private health systems — functional reference ("my doctor at the clinic," "my managed-care provider")
   - Branded community-health orgs and advocacy orgs — functional reference
   - Real Bay Area tech companies — canon roster (Varek, DigitalOcean) or generic
@@ -119,7 +119,7 @@ The podcast format has its own tier-2 reach surface:
 
 - **"Have you been to [real Oakland restaurant beyond canon]?"** Hosts naturally reference favorite spots. Default to Cultural_Ledger venues or generic ("the new place on Piedmont").
 - **"My doctor at [private health system]."** Same as letters-desk — swap to Highland or generic.
-- **"My kid at [individual OUSD school]."** Swap to district-context.
+- **"My kid at [individual Oakland City Schools school]."** Swap to district-context.
 - **Sports tangents.** "Did you see what [real opposing player] did against the Bulls?" — kill the player name; reframe as "their starting forward last night" or "their guy."
 - **Cultural references to real-world media.** "It's like that show…" or "It reminds me of [real podcaster]." — kill the reference; let the host make their own analogy.
 - **Citing real-world news.** Hosts read the Tribune; they don't cite NYT, the Chronicle, the AP. The Tribune is their information ecosystem in conversation.

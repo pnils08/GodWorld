@@ -13,7 +13,7 @@ Last Updated: 2026-06-24 | Last verified edition: E100 | First verified: E85
 - **Sift canonPointers = citizen-voice authorization**: No citizen in canonPointer = article runs without named civilian voices. POP-pending in Usage Log = self-reported CRITICAL if the citizen is a named quote source.
 - **Faith/clergy**: Verify EVERY named clergy/faith leader against Faith_Organizations ledger + sift canonPointers individually. One confirmed name doesn't authorize others in the same article.
 - **INSTITUTIONS.md Corrections Forward**: Check every named citizen against §Citizens corrections table (not just faith/council). "Elena Soria Dominguez" → "Eloise Soria-Dominguez (POP-00791)" for C94+.
-- **Tier-2 TBD schools**: Any named individual OUSD school (McClymonds, Skyline, Castlemont, Oakland Tech, Fremont) = CRITICAL. Fix: "an OUSD high school in [neighborhood]."
+- **Tier-2 TBD schools**: Any named individual real-world school (McClymonds, Skyline, Castlemont, Oakland Tech, Fremont) = CRITICAL. Also CRITICAL: "OUSD" / "Oakland Unified" / "Peralta Community College District" — retired real names (S368); substitutes Oakland City Schools / Oakland Community College District. Fix: "an Oakland City Schools high school in [neighborhood]."
 - **Production log /city-hall = authoritative civic fallback** when dashboard API unavailable. More reliable than world_summary for specific figures.
 - **Sports near-miss surnames**: Latin surnames with -as/-es, -ares/-eras endings are highest risk (Tavares/Taveras, Ramos/Ramirez). Read character-by-character.
 - **Source-level typos**: world_summary can carry typos that propagate into article bodies. truesource_reference.json is the tie-breaker, not world_summary.

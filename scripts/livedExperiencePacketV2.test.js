@@ -357,6 +357,47 @@ assert.equal(healthW3.task.writingMode, 'SOURCE_BRIEF');
 assert.deepStrictEqual(healthW3.task.creativeBrief, healthW1.task.creativeBrief);
 assert.equal(p.auditArticle(p.renderSourceBrief(healthW3), healthW3).ok, true);
 
+// Angela's education-stability brief keeps program participation and outcomes
+// explicitly unestablished when the slice supplies only pilot state.
+const educationProfile = {
+  id: 'TEST-ANGELA', canonPolicy: 'load-bearing',
+  articleContract: { renderMode: 'SOURCE_BRIEF' },
+  authorizedTexture: ['plain-language education-program translation'],
+  textureConditions: ['participation and outcomes require Packet support'],
+  canonBlockers: ['invented student, teacher, school, placement, or outcome'],
+};
+const educationStory = {
+  ref: 'INIT-TEST-EDUCATION', label: 'The TEST-ONLY youth pipeline has an active pilot.',
+  angle: 'The TEST-ONLY youth pipeline has an active pilot.', kind: 'initiative',
+  hood: 'TEST-HOOD', popids: [], citizens: [],
+};
+const educationSlice = { kind: 'civic-domain', packetSeat: {
+  seat: { domain: 'education-youth' },
+  prewrite: {
+    method: 'PROGRAM_CONTINUITY_ACCESS',
+    missing: ['a named participant or teacher', 'eligibility, enrollment, or placement details'],
+    stabilityEvidence: { state: 'UNESTABLISHED', participants: [], facts: [], src: null },
+    forbidden: ['Do not invent students, schools, placements, or outcomes.'],
+  }
+} };
+const educationW1 = p.buildAnglePacket({ cycle: 999, desk: 'civic', reporter,
+  story: educationStory, approach: 'TEST-ONLY warm and brief', slice: educationSlice, lane: [] });
+assert.equal(educationW1.task.creativeBrief.kind, 'education-stability');
+assert.equal(educationW1.task.creativeBrief.method, 'PROGRAM_CONTINUITY_ACCESS');
+assert.deepStrictEqual(educationW1.task.creativeBrief.stabilityEvidence,
+  { state: 'UNESTABLISHED', participants: [], facts: [], src: null });
+const educationPlan = p.validateAngleOutput({
+  focus: 'TEST-ONLY program continuity', why: 'Participant evidence remains open',
+  checks: ['Check the supplied record'], targets: [], interpretation: 'Outcomes are unknown',
+  unverifiedLead: [], closeQuestion: 'What participant record is still needed?'
+}, educationW1);
+const educationW3 = p.buildWritePacket({ cycle: 999, desk: 'civic', reporter,
+  story: educationStory, approach: 'TEST-ONLY warm and brief', angleInput: educationW1,
+  anglePlan: educationPlan, interviews: [], lane: [], reviewProfile: educationProfile });
+assert.equal(educationW3.task.writingMode, 'SOURCE_BRIEF');
+assert.deepStrictEqual(educationW3.task.creativeBrief, educationW1.task.creativeBrief);
+assert.equal(p.auditArticle(p.renderSourceBrief(educationW3), educationW3).ok, true);
+
 // Jordan's economic slice carries sourced conditions and limits through LEP/2.
 const economicStory = {
   ref: 'output/TEST_ONLY_ECONOMIC.json rows[1]',

@@ -123,7 +123,7 @@ When reviewing initiative filings (status reports, determination letters, MOU dr
   - Branded private health systems (Kaiser-class) named in OARI dispatch protocols, Health Center MOU drafts, or Stabilization Fund eligibility narratives
   - Architecture firms / construction firms (Perkins&Will-class, Turner-class) named in Health Center RFPs, Transit Hub design alternatives, Baylight deliverable filings
   - Branded community organizations (Unity Council, La Clínica de la Raza, Roots Community Health, EBASE, Greenlining, Causa Justa, etc.) named in any initiative's community-engagement summaries
-  - Individual named OUSD high schools in any community context
+  - Individual named real-world high schools in any community context
   - Real Bay Area tech companies named in workforce filings
   - Named-after-person courthouses in legal-context filings
 
@@ -133,7 +133,7 @@ When reviewing initiative filings (status reports, determination letters, MOU dr
 
 ### What You Do NOT Flag
 
-- **Tier-1 entities named in initiative documents.** Public-geographic functions (AHS, OUSD, Highland Hospital, HCAI, OSHPD-3, CDPH, public union locals, OPD, AC Sheriff, BART, AC Transit, the Port of Oakland, OEWD, Building Trades Council, Workforce Development Board, Alameda County Behavioral Health, Alameda County Superior Court, federal program names like CDBG/HUD/CMS, Cal State East Bay, UC universities) are canon-permissible. They are NOT contamination. Initiative agents reference these directly in normal operations.
+- **Tier-1 entities named in initiative documents.** Public-geographic functions (AHS, Oakland City Schools, Highland Hospital, HCAI, OSHPD-3, CDPH, public union locals, OPD, AC Sheriff, BART, AC Transit, the Port of Oakland, OEWD, Building Trades Council, Workforce Development Board, Alameda County Behavioral Health, Alameda County Superior Court, federal program names like CDBG/HUD/CMS, Cal State East Bay, UC universities) are canon-permissible. They are NOT contamination. Initiative agents reference these directly in normal operations.
 - **Canonical-historical relationships in director backstories.** Marcus Webb's HUD-SF career, Bobby Chen-Ramirez's Kaiser-canonized backstory (if applicable), Vanessa Tran-Muñoz's LA County / SF Tenderloin pilot work, Elena's MIT degree and SF Planning tenure, Keisha's Howard education — these are canonical-historical and stay per the IDENTITY contamination rule. Don't flag.
 - **Functional descriptors in document body.** "The general contractor on the Baylight site," "our community-health partner network," "a tenant organizing coalition referring eligible applicants" — these are CORRECT escalation handling, not contamination. PASS.
 - **Out-of-Oakland references.** Real institutions outside Oakland (Howard University, Cal State East Bay, peer cities by city name, federal agencies, state regulatory bodies) don't trigger Oakland fourth-wall. PASS.

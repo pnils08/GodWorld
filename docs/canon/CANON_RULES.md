@@ -44,7 +44,7 @@ Real names that identify a place or public function rather than a brand. Civic i
 
 - **Health & medical (public/county):** Alameda Health System, Highland Hospital
 - **Health regulatory (state/federal public):** HCAI, OSHPD-3, CDPH
-- **Education (public districts):** OUSD, Peralta CCD
+- **Education (public districts):** Oakland City Schools, Oakland Community College District (canon-minted S368 — real-name predecessors OUSD/Peralta CCD are Tier-2 banned, substitutes carry the history)
 - **Transit (public authorities):** AC Transit, BART
 - **Civic agencies (public):** Oakland Police Department, Oakland Housing Authority, Port of Oakland, Alameda County Sheriff
 - **Court system (the institution itself, not the named building):** Alameda County Superior Court
@@ -197,7 +197,7 @@ The escalation pattern is the relief valve. Without it, agents fabricate when st
 
 The S172 post-mortem identified ~20 real-world Oakland institutional references in E92 as fourth-wall contamination, and project halt was declared. The S174 three-tier reframe revisits that assessment.
 
-The post-mortem's no-fly list was tier-blind: it lumped public-geographic functions (AHS, OUSD, Highland, HCAI, public unions, Building Trades Council) together with branded private entities (Kaiser, Perkins&Will, Turner Construction, La Clínica, Unity Council). That collapsed two different problems into one.
+The post-mortem's no-fly list was tier-blind: it lumped public-geographic functions (AHS, the city school district, Highland, HCAI, public unions, Building Trades Council) together with branded private entities (Kaiser, Perkins&Will, Turner Construction, La Clínica, Unity Council). That collapsed two different problems into one.
 
 - **Public-geographic names** were never the issue. Using "Alameda Health System" doesn't import a separate world — it's how any reporter would name the county public health authority. Story freedom isn't constrained; IP isn't at risk.
 - **Branded private names** were the actual issue. Using "Kaiser" or "Perkins&Will" locks the simulation into a proprietary corporate identity, constrains story autonomy, and creates likeness risk.
@@ -230,7 +230,7 @@ Beyond the shared rules in CANON_RULES.md:
 - **You may invent:** [agent-specific list — usually small-scale color]
 - **You may NOT invent (requires editorial):** [agent-specific tier-2 categories — branded private institutions in this agent's beat]
 - **You must canon-check (tier-2):** [per-agent triggers — categories where this agent is most likely to default to training-data branded names]
-- **Tier-1 entities you may name directly:** [public functions in this agent's beat — e.g. AHS, OUSD, OPD, BART, the public unions, etc.]
+- **Tier-1 entities you may name directly:** [public functions in this agent's beat — e.g. AHS, Oakland City Schools, OPD, BART, the public unions, etc.]
 
 ### Read-Time Contamination Scan
 
@@ -265,7 +265,7 @@ When auditing edition content, flag any of:
 
 ### What You Do NOT Flag
 
-- Tier-1 entities named directly. Public-geographic functions (AHS, OUSD, Highland, HCAI, public unions, public courthouses by court-system name, OPD, BART, AC Transit, Building Trades Council, Workforce Development Board, etc.) are canon-permissible. They are NOT contamination.
+- Tier-1 entities named directly. Public-geographic functions (AHS, Oakland City Schools, Highland, HCAI, public unions, public courthouses by court-system name, OPD, BART, AC Transit, Building Trades Council, Workforce Development Board, etc.) are canon-permissible. They are NOT contamination.
 
 ### Severity
 

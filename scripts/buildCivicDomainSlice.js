@@ -51,7 +51,7 @@ const CIVIC_SEATS = Object.freeze({
   },
   'angela-reyes': {
     name: 'Angela Reyes',
-    popid: null,
+    popid: 'POP-00156',
     domain: 'education-youth',
     approach: 'Education approach: use only the supplied youth, school, education, or apprenticeship record. Warm, precise, and never invent scores, students, teachers, or outcomes.',
     hook: 'The supplied civic record identifies an education or youth question that needs a clear, humane account.'
@@ -267,6 +267,24 @@ function publicHealthFact(top) {
   return label.replace(/\bconstruction-active\b/gi, 'construction is active');
 }
 
+function publicEducationFact(top) {
+  const label = String(top && top.label || '').trim();
+  const tracker = label.match(/^(.+?)\s*\|\s*Status\s+([^|]+?)(?:\s*\|\s*phase\s+(.+))?$/i);
+  if (tracker) {
+    const name = tracker[1].trim();
+    const status = tracker[2].trim().toLowerCase() === 'announced'
+      ? 'has been announced'
+      : 'is listed as ' + tracker[2].trim().replace(/-/g, ' ');
+    const phase = tracker[3] && tracker[3].trim().toLowerCase() === 'pilot-active'
+      ? 'its pilot is active'
+      : tracker[3] && 'the supplied implementation state is ' + tracker[3].trim().replace(/-/g, ' ');
+    return name + ' ' + status + (phase ? ', and ' + phase : '') + '.';
+  }
+  const pilot = label.match(/^(.+?)\s*\|\s*pilot-active$/i);
+  if (pilot) return pilot[1].trim() + ' has an active pilot.';
+  return label.replace(/\bpilot-active\b/gi, 'pilot is active');
+}
+
 function prewriteForSeat(slug, top, candidateScope) {
   if (slug === 'trevor-shimizu') {
     return {
@@ -296,6 +314,22 @@ function prewriteForSeat(slug, top, candidateScope) {
         'a diagnosis, symptom pattern, prevalence measure, treatment result, or causal health outcome'
       ],
       humanConsequence: { state: 'UNESTABLISHED', subjects: [], facts: [], src: null }
+    };
+  }
+  if (slug === 'angela-reyes') {
+    return {
+      anchorFacts: [publicEducationFact(top)],
+      forbidden: [
+        'Do not add students, teachers, families, schools, employers, partners, program sites, quotes, eligibility rules, enrollment, placements, schedules, staffing, budgets, measurements, or outcomes absent from the supplied entries.'
+      ],
+      schema: 'EDUCATION-STABILITY-BRIEF-1',
+      method: 'PROGRAM_CONTINUITY_ACCESS',
+      missing: [
+        'a named student, teacher, family member, participant, or program staff member',
+        'eligibility, application, enrollment, participation, placement, schedule, school, employer, partner, or program-site details',
+        'staffing, funding, support-service, retention, completion, learning, credential, or employment outcomes'
+      ],
+      stabilityEvidence: { state: 'UNESTABLISHED', participants: [], facts: [], src: null }
     };
   }
   if (slug !== 'luis-navarro') {
@@ -353,7 +387,9 @@ function packetForEntries(entries, slug, profiles) {
     : top.citizens;
   const publicTopLabel = slug === 'trevor-shimizu'
     ? publicInfrastructureFact(top)
-    : slug === 'lila-mezran' ? publicHealthFact(top) : top.label;
+    : slug === 'lila-mezran'
+      ? publicHealthFact(top)
+      : slug === 'angela-reyes' ? publicEducationFact(top) : top.label;
   return {
     seat: { slug, name: seat.name, popid: seat.popid, domain: seat.domain },
     empty: false,
@@ -362,7 +398,7 @@ function packetForEntries(entries, slug, profiles) {
       ref: top.ref,
       label: publicTopLabel,
       kind: top.kind,
-      angle: ['trevor-shimizu', 'lila-mezran'].includes(slug)
+      angle: ['trevor-shimizu', 'lila-mezran', 'angela-reyes'].includes(slug)
         ? publicTopLabel
         : (top.angle || top.label),
       hookLine: slug === 'trevor-shimizu' ? publicTopLabel : (top.hookLine || seat.hook),
@@ -519,6 +555,7 @@ module.exports = {
   scoreEntryForSeat,
   packetForEntries,
   publicInfrastructureFact,
+  publicEducationFact,
   buildCivicDomainSlice,
   formatCivicDomainSliceMarkdown,
   slicePaths,

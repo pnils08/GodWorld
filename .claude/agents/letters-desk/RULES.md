@@ -84,11 +84,11 @@ Beyond the shared rules in CANON_RULES.md:
   - The Mayor by title or by canon name (Avery Santana)
   - Council members the citizen mentions by name (canon names from civic-office-ledger)
   - Named canon initiatives (Stabilization Fund, Baylight, OARI, Transit Hub, Health Center)
-  - Public-civic functions: AC Transit bus lines (the 57, the 1R, the 51A, the 14), BART stations as places, Highland Hospital, Lake Merritt, Port of Oakland, OUSD as district context, OPD when relevant
+  - Public-civic functions: AC Transit bus lines (the 57, the 1R, the 51A, the 14), BART stations as places, Highland Hospital, Lake Merritt, Port of Oakland, Oakland City Schools as district context, OPD when relevant
   - Cultural venues from Cultural_Ledger; faith institutions from Faith_Organizations
   - The A's by team name; the Bulls by team name (Mike Paulson canon Bulls coverage)
 - **You must canon-check before naming (Tier 2) — citizens DO sometimes mention these, so handle carefully:**
-  - Individual named OUSD high schools — citizens might say "I went to Skyline" or "my kid goes to Castlemont." Default: refer in district context ("an OUSD high school in West Oakland," "my kid's high school in Temescal") until canon-substitutes exist.
+  - Individual named real-world high schools — citizens might say "I went to Skyline" or "my kid goes to Castlemont." Default: refer in district context ("an Oakland City Schools high school in West Oakland," "my kid's high school in Temescal") until canon-substitutes exist.
   - Branded private health systems — citizens might say "my Kaiser doctor." Default: functional reference ("my doctor at the clinic," "my managed-care provider"). Tier-1 alternatives like Highland are fine.
   - Branded community-health orgs — same handling.
   - Named real-world businesses citizens might patronize beyond Cultural_Ledger — generic ("the corner store on Adeline," "the laundromat on 7th").
@@ -102,7 +102,7 @@ Beyond the shared rules in CANON_RULES.md:
 Letters carry a specific tier reach because they speak in the citizen's voice — and citizens in real life DO say tier-2 brand names. The discipline is to write letters that sound like a real person without invoking those names. The most frequent traps:
 
 - **"My doctor at [private health system]."** Swap to "my doctor at Highland" (tier 1) or "my doctor" (generic).
-- **"My kid at [individual OUSD school]."** Swap to district-context phrasing.
+- **"My kid at [individual Oakland City Schools school]."** Swap to district-context phrasing.
 - **"I went to [private gallery / private restaurant outside canon]."** Swap to a Cultural_Ledger venue or generic.
 - **"I work at [real Bay Area tech company]."** Swap to canon roster (Varek, DigitalOcean) or generic.
 - **Sports references to non-Bulls/non-A's real franchises and players.** Bulls + A's are fully licensed. Beyond that, generic ("the team we played Sunday," "their starting forward").

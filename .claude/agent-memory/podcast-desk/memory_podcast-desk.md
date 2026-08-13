@@ -24,7 +24,7 @@
 - Exchanges: 58
 - Stories covered: Stabilization Fund/Delaine front page, Faith institutions/Keen culture piece, A's 7-0 preseason + Devon Green letter, Hal's Vinnie Keane farewell essay
 - Quick Hits: OARI Day 30 (5-4 vote, Tran D2 expansion, Walker frustration, Nina Chen CRC), Velez rent map (Fruitvale 41% rent-burdened), Paulson presser Warriors deflection, Bulls 52-21
-- Stories skipped: Angela Reyes "First Day Back" (Jalen Hill/OUSD), Jalen Hill story — ran short on time
+- Stories skipped: Angela Reyes "First Day Back" (Jalen Hill/district literacy), Jalen Hill story — ran short on time
 - Key tension: "The filing cabinet isn't moving but the folding table is open" — Tomas on faith institutions vs. city bureaucracy; Sonia printing Patricia Nolan's letter (lives 2 blocks from Health Center site)
 - Callbacks resolved: September 8th meeting — Sonia attended with neighborhood association, nothing moved. Tomas closed late, couldn't make it.
 - Forward threads: September 15th Baylight deliverables (all five — workforce agreement is the one to watch), Beverly Hayes getting a check from Stabilization Fund ("that's the test")

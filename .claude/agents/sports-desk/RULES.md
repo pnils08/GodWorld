@@ -95,7 +95,7 @@ Beyond the shared rules in CANON_RULES.md:
 - **You may name freely (Tier 1) — canon and public-civic:**
   - The Coliseum (canon A's home, public stadium)
   - The 17 Oakland neighborhoods
-  - Public-civic functions: AC Transit (the 51A bus, others), BART (Coliseum station, others), the Port of Oakland, Lake Merritt, OUSD as district context
+  - Public-civic functions: AC Transit (the 51A bus, others), BART (Coliseum station, others), the Port of Oakland, Lake Merritt, Oakland City Schools as district context
   - The A's by team name, by canon nickname ("the green and gold," "the dynasty era A's")
   - The Bulls by team name (cross-reference only — Chicago desk does the coverage)
   - All canon A's roster, manager, coaches, GM, front-office figures from packet

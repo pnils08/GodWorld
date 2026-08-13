@@ -78,6 +78,20 @@ try {
     story: slice.packets['lila-mezran'].story,
     prewrite: slice.packets['lila-mezran'].prewrite.anchorFacts
   })));
+  assert.strictEqual(slice.packets['angela-reyes'].seat.popid, 'POP-00156');
+  assert.strictEqual(slice.packets['angela-reyes'].story.label,
+    'Oakland Youth Apprenticeship Pipeline has an active pilot.');
+  assert.strictEqual(slice.packets['angela-reyes'].prewrite.schema,
+    'EDUCATION-STABILITY-BRIEF-1');
+  assert.strictEqual(slice.packets['angela-reyes'].prewrite.method,
+    'PROGRAM_CONTINUITY_ACCESS');
+  assert.deepStrictEqual(slice.packets['angela-reyes'].prewrite.stabilityEvidence,
+    { state: 'UNESTABLISHED', participants: [], facts: [], src: null });
+  assert(slice.packets['angela-reyes'].prewrite.missing.some(row => row.includes('eligibility')));
+  assert(!/pilot-active|Status announced|phase/i.test(JSON.stringify({
+    story: slice.packets['angela-reyes'].story,
+    prewrite: slice.packets['angela-reyes'].prewrite.anchorFacts
+  })));
   assert.strictEqual(slice.packets['noah-tan'].story.ref, 'ENV-1');
   assert.strictEqual(slice.packets['carmen-delaine'].story.ref, 'INIT-TRANSIT');
   assert.deepStrictEqual(slice.packets['carmen-delaine'].prewrite.anchorFacts,

@@ -164,7 +164,7 @@ Beyond the shared rules in CANON_RULES.md:
   - All canon council members and the Mayor by name
   - Canon initiatives (Stabilization Fund, Baylight, OARI, Transit Hub, Health Center)
   - Canon council districts and their neighborhoods (West Oakland, Fruitvale, Laurel, Uptown, etc.)
-  - Public-civic functions: Oakland Housing Authority, AC Transit (with bus lines named when context warrants), BART, OEWD, OPD, Highland Hospital, Alameda Health System, OUSD, Port of Oakland, Workforce Development Board, Building Trades Council, Caltrans
+  - Public-civic functions: Oakland Housing Authority, AC Transit (with bus lines named when context warrants), BART, OEWD, OPD, Highland Hospital, Alameda Health System, Oakland City Schools, Port of Oakland, Workforce Development Board, Building Trades Council, Caltrans
   - Public union locals (NorCal Carpenters, IBEW Local 595, etc.) — labor allies in OPP framing
   - Cultural venues from Cultural_Ledger; faith institutions from Faith_Organizations
 - **You must canon-check before naming (Tier 2):**
@@ -172,7 +172,7 @@ Beyond the shared rules in CANON_RULES.md:
   - Branded community-health orgs (La Clínica de la Raza, Roots Community Health, Asian Health Services, Lifelong Medical Care) — functional reference
   - Architecture firms / construction firms when speaking to Baylight or Transit Hub contractor concerns — generic
   - Real Bay Area tech companies as employer references — canon roster (Varek, DigitalOcean) or generic
-  - Individual named OUSD high schools — district-context phrasing
+  - Individual named real-world high schools — district-context phrasing
   - Named tenant organizations beyond canon (Causa Justa::Just Cause, Oakland Tenants Union, etc.) — generic ("a tenant organizing coalition") unless in canon
   - Named real-world community land trusts (Oakland Community Land Trust, etc.) — generic ("a community land trust model")
   - Comparable-city policy implementations naming specific real city officials — abstracted (city names as places fine, real officials as tier 3)

@@ -217,7 +217,7 @@ Beyond the shared rules in CANON_RULES.md:
   - All canon council members and the Mayor by name (Vega, Ashford, Crane, Carter, Rivers, Tran, Mobley, Chen, Santana)
   - Canon initiatives (Stabilization Fund, Baylight, OARI, Transit Hub, Health Center)
   - Canon council districts and the neighborhoods they cover
-  - Public-civic functions: City Auditor's office, Finance Committee, Land Use & Transportation Committee, Planning Commission, City Administrator's office, OPD, BART, AC Transit, Port of Oakland, Highland Hospital, Alameda Health System, OUSD as district context
+  - Public-civic functions: City Auditor's office, Finance Committee, Land Use & Transportation Committee, Planning Commission, City Administrator's office, OPD, BART, AC Transit, Port of Oakland, Highland Hospital, Alameda Health System, Oakland City Schools as district context
   - Public union locals when labor cost stories surface (NorCal Carpenters, IBEW Local 595, etc.)
   - Building Trades Council and Workforce Development Board
 - **You must canon-check before naming (Tier 2):**

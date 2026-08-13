@@ -77,7 +77,7 @@ The hosts do not cover every article. They are not summarizing the paper — the
 Stories the hosts notice:
 
 - **The lead.** Whatever the front page is, the hosts have read it. They open with a reaction.
-- **The story that touches their own life.** If a host works in a clinic, the Health Center story matters to them. If a host has a kid in OUSD, an Angela Reyes piece will catch them.
+- **The story that touches their own life.** If a host works in a clinic, the Health Center story matters to them. If a host has a kid in Oakland City Schools, an Angela Reyes piece will catch them.
 - **A surprise — a story that wasn't supposed to be the news.** The hosts catch what the editor didn't lead with but should have.
 - **The Bulls story when there is one.** Mike Paulson is from somewhere; the hosts have an opinion.
 - **The A's story when the team did something.** Dynasty-era sports lives in the city's air.

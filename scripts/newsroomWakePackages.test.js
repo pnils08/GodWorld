@@ -6,20 +6,22 @@ const packagesApi = require('./newsroomWakePackages');
 const packages = packagesApi.loadPackages();
 const active = packagesApi.activePackages(packages);
 assert.deepStrictEqual(active.map(row => row.key),
-  ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'p-slayer', 'anthony-raines', 'hal-richmond', 'tanya-cruz', 'simon-leary', 'maria-keen', 'elliot-graye', 'mason-ortega', 'sharon-okafor', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'noah-tan']);
+  ['carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'p-slayer', 'anthony-raines', 'hal-richmond', 'tanya-cruz', 'simon-leary', 'maria-keen', 'elliot-graye', 'mason-ortega', 'sharon-okafor', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'noah-tan']);
 
 const jax = packages['freelance-firebrand'];
 assert.equal(jax.version, 'JAX-LEP2-1');
-assert.equal(jax.requiredDaily, true);
+assert.equal(jax.active, false);
+assert.equal(jax.requiredDaily, false);
 assert.equal(jax.assignment.name, 'Jax Caldera');
 assert.equal(jax.assignment.popid, 'POP-00799');
 assert.equal(jax.packetContract, 'v2');
 assert.equal(packagesApi.routeFor(jax, 'angle').model, 'meta-llama/llama-3.3-70b-instruct');
 assert.equal(packagesApi.routeFor(jax, 'report').model, 'meta-llama/llama-3.3-70b-instruct');
 assert.equal(packagesApi.routeFor(jax, 'write').model, 'anthropic/claude-sonnet-5');
-assert.equal(jax.reviewProfile.canonPolicy, 'load-bearing');
+assert.equal(jax.reviewProfile.canonPolicy, 'exhaustive');
 assert.equal(jax.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
-assert.ok(jax.reviewProfile.authorizedTexture.some(v => v.includes('bartender')));
+assert.deepStrictEqual(jax.reviewProfile.authorizedTexture, []);
+assert.ok(jax.reviewProfile.textureConditions.some(v => v.includes('backend-composed')));
 assert.ok(jax.reviewProfile.canonBlockers.some(v => v.includes('official inaction')));
 
 const carmen = packages['carmen-delaine'];
@@ -261,15 +263,14 @@ const gate = packagesApi.gateAssignments([
   { desk: 'business', name: 'Jordan Velez', persona: 'business-desk' },
   { desk: 'culture', name: 'TEST-ONLY Unpackaged Reporter', persona: 'test-only' },
 ], packages);
-assert.equal(gate.eligible.length, 5);
-assert.equal(gate.eligible[0].wakePackage, 'JAX-LEP2-1');
-assert.equal(gate.eligible[1].wakePackage, 'CARMEN-LEP2-1');
-assert.equal(gate.eligible[2].wakePackage, 'PSLAYER-LEP2-1');
-assert.equal(gate.eligible[3].wakePackage, 'ANTHONY-LEP2-1');
-assert.equal(gate.eligible[4].wakePackage, 'JORDAN-LEP2-1');
-assert.equal(gate.skipped.length, 1);
-assert.equal(gate.skipped[0].name, 'TEST-ONLY Unpackaged Reporter');
-assert.equal(gate.skipped[0].reason, 'no-active-wake-package');
+assert.equal(gate.eligible.length, 4);
+assert.equal(gate.eligible[0].wakePackage, 'CARMEN-LEP2-1');
+assert.equal(gate.eligible[1].wakePackage, 'PSLAYER-LEP2-1');
+assert.equal(gate.eligible[2].wakePackage, 'ANTHONY-LEP2-1');
+assert.equal(gate.eligible[3].wakePackage, 'JORDAN-LEP2-1');
+assert.deepStrictEqual(gate.skipped.map(row => row.name),
+  ['Jax Caldera', 'TEST-ONLY Unpackaged Reporter']);
+assert.ok(gate.skipped.every(row => row.reason === 'no-active-wake-package'));
 
 assert.throws(() => packagesApi.routeFor(jax, 'publish'), /unknown wake stage/);
 assert.throws(() => packagesApi.validatePackage('bad', { active: true }), /invalid wake package/);
@@ -303,6 +304,10 @@ assert.deepStrictEqual(packetAsks.map(row => row.pop), ['POP-90001', 'POP-90002'
   'Packet quote pool must not fill from the generic desk lane');
 assert.equal(packetAsks[0].inputPacket.actor.name, 'Test Civic One');
 assert.equal(packetAsks[0].inputPacket.exposure.self, 'Test profile one');
+assert.equal(packetAsks[0].inputPacket.output.contract, 'CITIZEN_INTERVIEW/1');
+assert.equal(packetAsks[0].interviewMode, true);
+assert.equal(packetAsks[0].inputPacket.lattice, undefined,
+  'Wake 2 must ask for citizen-authored speech, not backend lattice selection');
 runApi.activateWakeContext(null, 'p-slayer');
 const fanAsks = runApi.collectQuoteAsks([], { name: 'P Slayer', popid: 'POP-00008' }, {
   ref: 'TEST-ONLY-SPORTS', label: 'TEST-ONLY no-hitter', popids: ['POP-90005']
@@ -343,18 +348,18 @@ const approaches = {
 };
 
 const rotaPool = activeRotaCandidates(packages);
-assert.equal(rotaPool.length, 19);
+assert.equal(rotaPool.length, 18);
 assert.deepStrictEqual(
   Object.fromEntries(Object.keys(DAILY_QUOTAS).map(desk => [desk,
     rotaPool.filter(row => row.desk === desk).length])),
-  { civic: 8, sports: 5, culture: 5, business: 1 });
+  { civic: 7, sports: 5, culture: 5, business: 1 });
 
 // The daily selector supplies at most the declared 2/2/1/1 seats. The package
 // gate normalizes those selected identities but cannot insert the other active
 // packages or consume another desk's capacity.
 const selected = [
-  Object.assign({ story: { ref: 'TEST-CIVIC-ONE' } }, jax.assignment, { persona: 'freelance-firebrand' }),
-  Object.assign({ story: { ref: 'TEST-CIVIC-TWO' } }, carmen.assignment, { persona: 'carmen-delaine' }),
+  Object.assign({ story: { ref: 'TEST-CIVIC-ONE' } }, carmen.assignment, { persona: 'carmen-delaine' }),
+  Object.assign({ story: { ref: 'TEST-CIVIC-TWO' } }, luis.assignment, { persona: 'luis-navarro' }),
   Object.assign({ story: { ref: 'TEST-SPORTS-ONE' } }, pSlayer.assignment, { persona: 'p-slayer' }),
   Object.assign({ story: { ref: 'TEST-SPORTS-TWO' } }, anthony.assignment, { persona: 'anthony-raines' }),
   Object.assign({ story: { ref: 'TEST-CULTURE' } }, kai.assignment, { persona: 'kai-marston' }),
@@ -368,7 +373,7 @@ assert.deepStrictEqual(
   Object.fromEntries(Object.keys(DAILY_QUOTAS).map(desk => [desk,
     bounded.assignments.filter(row => row.desk === desk).length])),
   DAILY_QUOTAS);
-assert.equal(bounded.assignments[0].approach, 'Jax accountability');
+assert.equal(bounded.assignments[0].approach, 'Carmen civic ledger');
 assert.equal(bounded.assignments[0].story.ref, 'TEST-CIVIC-ONE');
 assert.equal(bounded.assignments[5].wakePackage, 'JORDAN-LEP2-1');
 
@@ -397,9 +402,9 @@ const oversizedSavedRota = applyWakePackageGate([
 ], approaches, packages).assignments;
 const runtimeBound = boundDailyAssignments(oversizedSavedRota);
 assert.deepStrictEqual(runtimeBound.assignments.map(row => row.persona), [
-  'freelance-firebrand', 'luis-navarro', 'p-slayer', 'kai-marston', 'business-desk'
+  'luis-navarro', 'noah-tan', 'p-slayer', 'kai-marston', 'business-desk'
 ]);
-assert.equal(runtimeBound.dropped.length, 4);
+assert.equal(runtimeBound.dropped.length, 3);
 assert.ok(runtimeBound.assignments.length <=
   Object.values(DAILY_QUOTAS).reduce((sum, value) => sum + value, 0));
 

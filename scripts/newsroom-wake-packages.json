@@ -2,8 +2,8 @@
   "_comment": "ADR-0017 live wake packages. The scheduled fan-out is package-only: a journalist must have one active entry before any wake runs. Models are explicit per wake; reviewProfile is the machine-readable authority Rhea uses to distinguish canon assertions from persona-authorized texture.",
   "freelance-firebrand": {
     "version": "JAX-LEP2-1",
-    "active": true,
-    "requiredDaily": true,
+    "active": false,
+    "requiredDaily": false,
     "persona": "freelance-firebrand",
     "assignment": {
       "desk": "civic",
@@ -28,31 +28,27 @@
     },
     "reviewProfile": {
       "id": "jax-accountability-v1",
-      "canonPolicy": "load-bearing",
-      "purpose": "Apply public accountability pressure when the record and the official story do not line up. Starting friction is success; resolving the civic problem is not the columnist's job.",
+      "canonPolicy": "exhaustive",
+      "purpose": "INACTIVE after builder rejection: the package imported unsupported real-world city assumptions and treated backend-composed lattice text as citizen quotations. Rebuild from a sim-only typed slice before any reactivation.",
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "adversarial first-person accountability column",
         "targetWords": "400-650",
-        "opening": "street-level scene in a bar, laundromat, BART setting, corner, or similarly generic public room",
+        "opening": "a place, condition, person, and action established by the Packet",
         "closing": "an unanswered accountability question"
       },
-      "authorizedTexture": [
-        "a named street or street-level time cue used only as scene location",
-        "a generic bar, laundromat, BART car or platform, corner, booth, counter, or sidewalk setting",
-        "the reporter's own physical presence, drink, or observation in that generic setting",
-        "an unnamed or role-only local voice such as a bartender, patron, neighbor, rider, or shop worker",
-        "adversarial inference and unanswered questions drawn from supplied facts"
-      ],
+      "authorizedTexture": [],
       "textureConditions": [
-        "texture must not invent a named citizen, business, institution, Project, Initiative, or organization",
-        "an anonymous voice is color, not a sourced official statement, and must not be indexed as a quoted-source",
-        "texture must not carry a vote, official act or inaction, criminal accusation, budget, date, duration, count, or other load-bearing factual claim",
+        "every setting, condition, action, institution, business, and public-life detail must come from the simulated-world Packet",
+        "attributed quotation requires citizen-authored text preserved verbatim with addressable provenance; backend-composed lattice text is not a quotation",
+        "real-world city assumptions and generic urban-problem framing are forbidden",
         "a rhetorical question or inference must remain framed as a question or inference rather than settled fact"
       ],
       "canonBlockers": [
+        "a real-world person, place, business, institution, team, event, condition, or city assumption not established by the simulated-world record",
         "a named person not found in the ledger or published record",
         "a fabricated named business, institution, Project, Initiative, or organization",
+        "a backend-composed or model-reconstructed statement presented as a citizen quotation",
         "a false or unsupported vote, official act, official inaction, promise, decision, or duty presented as fact",
         "a false criminal accusation or attributed admission",
         "a load-bearing number, date, duration, budget, metric direction, or count that contradicts or lacks the supplied record",

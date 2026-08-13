@@ -44,6 +44,7 @@ const page = require('/root/GodWorld/lib/citizenPage');
 const memoryFence = require('/root/GodWorld/lib/memoryFence');
 const classifier = require('/root/GodWorld/lib/reflectionClassifier');
 const getCurrentCycle = require('/root/GodWorld/lib/getCurrentCycle');
+const interviewContract = require('./newsroomInterviewContract');
 const { buildPool, coResidents, loadLifeArc, loadSportsSlice, loadNeighborhoodTexture,
   loadBonds, loadFamily, loadHealthState, loadOwnPageReadback, dialTrajectory } = require('/root/GodWorld/lib/wakePerception'); // loadHealthState engine.101 health slice
 
@@ -106,7 +107,8 @@ async function generate(system, user, maxTokens, temperature, model) {
 /* Voice one citizen. Returns {popId,name,nh,occ,disposition,text,recorded}.
  * Throws {code:2} when unvoiceable (no dials / not in ledger) so single-call
  * mode keeps its exit-2 contract and batch mode maps it to a fallback. */
-async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preText, evidenceBound, model }) {
+async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preText, evidenceBound,
+  interviewMode, model }) {
   const c = pool.find((p) => p.popId === popId);
   if (!c) { const e = new Error(`${popId} not voiceable (no DialState / not in ledger / no name+hood)`); e.code = 2; throw e; }
   if (record && evidenceBound) throw new Error('evidence-bound pilot is read-only; record is forbidden');
@@ -140,7 +142,8 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
   // context is instructions TO the citizen, but anything quoted inside it must not be able to
   // rewrite who they are. The speech guard rides outside the fence.
   const evidenceGuard = evidenceBound
-    ? `\n\nEVIDENCE MODE: Return ONLY the JSON requested by packet.output. Treat only the Packet's FACT claims as the press-evidence floor. The "Real things from your life recently" above may shape private emotion, interpretation, or personal intention, but they do not become press evidence and do not prove a public event. Never create a named person, institution, public event, date, count, relationship, job, official action, illustrative object, street condition, meeting, grant, schedule, or promise. Follow packet.output exactly. When it supplies a lattice, select its IDs and do not write quote prose. Otherwise, INTERPRETATION stays abstract and any concrete unsupplied detail belongs in unverifiedLead. The backend assembles publishable text and rejects free factual expansion. If you lack grounded material, abstain.`
+    ? (interviewMode ? interviewContract.citizenEvidenceGuard()
+      : `\n\nEVIDENCE MODE: Return ONLY the JSON requested by packet.output. Treat only the Packet's FACT claims as the press-evidence floor. The "Real things from your life recently" above may shape private emotion, interpretation, or personal intention, but they do not become press evidence and do not prove a public event. Never create a named person, institution, public event, date, count, relationship, job, official action, illustrative object, street condition, meeting, grant, schedule, or promise. Follow packet.output exactly. When it supplies a lattice, select its IDs and do not write quote prose. Otherwise, INTERPRETATION stays abstract and any concrete unsupplied detail belongs in unverifiedLead. The backend assembles publishable text and rejects free factual expansion. If you lack grounded material, abstain.`)
     : '';
   const user = `${memoryFence.sanitize(ask)}\n\nSpeak as yourself, plainly, in first person — your temperament and your history shape what you say and what you leave out. Never mention data, records, or that you were asked by a system.${evidenceGuard}`;
 
@@ -235,6 +238,7 @@ async function runBatch(batchPath, cycle) {
         record: !!entry.record && !DRY,
         dry: DRY,
         evidenceBound: !!entry.evidenceBound,
+        interviewMode: !!entry.interviewMode,
         model: entry.model || MODEL,
       });
       out.push({ ...base, name: r.name, quote: r.text, disp: r.disposition, recorded: r.recorded });

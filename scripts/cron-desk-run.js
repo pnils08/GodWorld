@@ -103,6 +103,7 @@ const ANGLE_MODEL_OVERRIDE = arg('--angle-model', null);
 const EVALUATION_TAG = arg('--evaluation-tag', null);
 const EVALUATE_PACKAGE = arg('--evaluate-package', null);
 const wakePackages = require('./newsroomWakePackages');
+const interviewContract = require('./newsroomInterviewContract');
 let ACTIVE_WAKE_PACKAGE = null;
 let PACKET_CONTRACT = null;
 let PACKET_ACTIVE = false;
@@ -401,7 +402,7 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
         pop, name: null, role: null, hood: story && story.hood || null,
         profile: null, why: 'desk-signal candidate',
       };
-      inputPacket = livedPacket.buildReportPacket({
+      inputPacket = interviewContract.prepareInterviewPacket(livedPacket.buildReportPacket({
         cycle: angleArt && angleArt.cycle,
         desk: angleArt && angleArt.desk,
         reporter: persona,
@@ -409,7 +410,7 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
         anglePlan: angleArt && angleArt.angleRead && angleArt.angleRead.plan,
         story,
         candidate,
-      });
+      }));
       askText = livedPacket.prompt(inputPacket);
     } else {
       askText = persona
@@ -417,7 +418,8 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
         : 'The Tribune is looking into this in your part of Oakland: "' + l + '". Speak about how it touches your life.';
     }
     asks.push({ pop, ask: askText,
-      ...(inputPacket ? { packetContract: livedPacket.VERSION, inputPacket, evidenceBound: true } : {}),
+      ...(inputPacket ? { packetContract: livedPacket.VERSION, inputPacket, evidenceBound: true,
+        interviewMode: interviewContract.isInterviewPacket(inputPacket) } : {}),
       ...(ACTIVE_WAKE_PACKAGE ? { model: wakePackages.routeFor(ACTIVE_WAKE_PACKAGE, 'report').model } : {}),
       record: PACKET_ACTIVE ? false : !NO_GATE, maxTokens: PACKET_ACTIVE ? 420 : 200 });   // S332: --no-gate SAMPLES never write citizen memory (was unconditional record:true — the layer-4 leak Codex caught)
   };
@@ -2116,7 +2118,9 @@ async function runReport(assign) {
           if (!q.quote || q.fallback) return { ...q, claims: null,
             ...(livedPacket.VERSION === 'LEP/2' ? { inputPacket } : {}) };
           try {
-            const claims = livedPacket.validateReportOutput(q.quote, inputPacket);
+            const claims = interviewContract.isInterviewPacket(inputPacket)
+              ? interviewContract.validateInterviewOutput(q.quote, inputPacket)
+              : livedPacket.validateReportOutput(q.quote, inputPacket);
             return { ...q, raw: q.quote, quote: claims.publishableQuote, claims,
               ...(livedPacket.VERSION === 'LEP/2' ? { inputPacket } : {}) };
           } catch (e) {

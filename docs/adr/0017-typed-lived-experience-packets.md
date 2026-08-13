@@ -26,7 +26,7 @@ pointers:
 
 # ADR-0017: Typed lived-experience Packets are the standard dynamic LLM boundary
 
-**Status:** Accepted; Jax, Carmen, P Slayer, and Jordan Velez are the first live package-gated cohort
+**Status:** Accepted; the Packet boundary remains active, while JAX-LEP2-1 is inactive after editorial rejection
 **Date:** 2026-08-09
 **Deciders:** Mike (direction), Codex (C102 trace and pilot implementation); research-build and engine-sheet remain reviewers/landers for their surfaces
 
@@ -81,6 +81,11 @@ backend can arrange once. Facts are canon inputs; prose is a rendering.
    new public event. A press/interview Packet either emits a bounded publishable
    quote, emits an unverified `LEAD`, or abstains. An attributed quote does not
    silently convert the event alleged inside it into a verified fact.
+
+   `CITIZEN_INTERVIEW/1` is the Wake 2 press contract. The citizen authors the
+   quote during the interview; the backend may validate, reject, or hash it but
+   may not paraphrase, assemble, or supply words. The former LEP/2 lattice was
+   not an interview and is rejected as quote provenance.
 
 5. **Load-bearing invention is not “color”; bounded lived texture is.** A wake
    package declares the reporter's creative authority. New named people,
@@ -141,9 +146,10 @@ Wake 2 placed produce trading and safety tips inside `INTERPRETATION`, then Wake
 sequence but changes the publication boundary:
 
 - each supplied fact receives a local immutable claim ID;
-- Wake 2 selects fact IDs and code-owned stance/question/intention IDs instead
-  of authoring quote prose;
-- code renders the quote and gives it a quote ID;
+- Wake 2 asks the citizen for one first-person response from the simulated life
+  context assembled by `citizenVoice.js`;
+- the backend preserves that authored response exactly, binds its quote ID to a
+  hash of the text, and never composes or completes citizen speech;
 - Wake 3 receives an Article claim manifest of approved fact, quote, and subject
   IDs plus non-publishable leads and forbidden claim classes;
 - evaluation manifests may remain exhaustive; a live package can declare a
@@ -158,25 +164,25 @@ quality remains a prose and compliance variable, never the canon authority.
 
 ## First live packages
 
-`scripts/newsroom-wake-packages.json` is the live registry. The first package is
+`scripts/newsroom-wake-packages.json` is the live registry. The first package was
 `freelance-firebrand` (`JAX-LEP2-1`):
 
 - Wake 1 and Wake 2 use `meta-llama/llama-3.3-70b-instruct`;
 - Wake 3 uses `anthropic/claude-sonnet-5`;
-- the writer receives LEP/2 with zero live research tools;
-- Jax may create generic street/bar/laundromat/BART/corner texture and role-only
-  anonymous voices under explicit conditions;
-- persona-aware Rhea remains strict on false named entities, official action or
-  inaction, votes, criminal claims, record contradictions, and load-bearing
-  figures;
-- Rhea judges sourcing/canon integrity. Whether the Article moves the sim remains
-  an editorial/capability judgment, consistent with her protected reviewer lane.
+- the writer received LEP/2 with zero live research tools;
+- the package initially permitted generic city texture and role-only anonymous
+  voices, an authority later proven unsafe for this constructed world;
+- persona-aware Rhea checked the package manifest but did not independently
+  establish that backend-composed lattice text was citizen-authored speech.
 
-The C102 LEP/2 Article is therefore a product pass, not a contaminated failure.
-Its `7th Street`, bar, and anonymous bartender are signature Jax texture. The
-pre-Rhea lexical rejection was the failed component. Remaining tuning issues are
-duplicate lattice language, exact framing of council responsibility, and ending
-the substantive copy on Jax's unanswered question.
+That activation decision is superseded. Builder review of the C103 Article found
+unsupported real-world city assumptions, invented public conditions, and
+backend-composed statements presented as citizen quotations. Rhea passed the
+same manifest that supplied those statements and recorded `packetChecked: false`,
+so its pass was circular provenance evidence rather than product proof.
+`JAX-LEP2-1` is inactive and has no authorized texture. Reactivation requires a
+sim-only typed slice, verbatim citizen-authored quote provenance, an independent
+Packet-aware review, and fresh builder acceptance.
 
 The second package is `carmen-delaine` (`CARMEN-LEP2-1`):
 
@@ -288,3 +294,5 @@ path, and assigned story, and its `ranAt` must be later than the current angle's
 - 2026-08-12 (codex) — A corrected Sonnet records-brief attempt still reversed the phase relationship, converted missing evidence into absence, split an approved quote, and inferred collective resident sentiment. `RECORDS_BRIEF` is now code-rendered with zero writer calls; the configured Sonnet route remains available only for `FULL_INVESTIGATION` Packets with supplied reporting events.
 - 2026-08-13 (codex) — Corrected package expansion semantics after the active cohort grew to nineteen: active packages are the LRU candidate pool, while the daily rota remains bounded at 2 civic / 2 sports / 1 culture / 1 business and the package gate can no longer insert seats.
 - 2026-08-13 (codex) — Closed the Cycle-scoped stale-packet seam: Wake 3 now requires a newer matching Wake 2 Packet for the current angle, persona, reporter POPID, and exact assigned story before any writer or Rhea work.
+- 2026-08-13 (codex) — Superseded the Jax activation verdict after builder rejection of the C103 Article. JAX-LEP2-1 is inactive; its generic city texture authority is removed, backend-composed lattice text is barred from quotation, and reactivation requires sim-only evidence plus verbatim citizen-authored quote provenance.
+- 2026-08-13 (codex) — Reclassified every LEP/2 lattice line as non-speech after the builder's cross-Article audit. Wake 2 now uses `CITIZEN_INTERVIEW/1`: the citizen sees their simulated life context, authors the response, and the backend preserves or rejects it without composing prose. Existing lattice-bearing proofs are invalid.

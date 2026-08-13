@@ -56,28 +56,56 @@ function assertBase(packet, wake) {
   return packet;
 }
 
-function candidateRows(story, slice) {
-  const packetCitizens = slice && slice.packetSeat && slice.packetSeat.citizens;
-  const fromSlice = Array.isArray(packetCitizens) && packetCitizens.length
-    ? packetCitizens
-    : Array.isArray(slice && slice.citizens)
-    ? slice.citizens
-    : (Array.isArray(slice && slice.players) ? slice.players
-      : (Array.isArray(slice && slice.candidates) ? slice.candidates : []));
-  if (fromSlice.length) return fromSlice.map(c => ({
-    pop: c.popid || null,
+function isLedgerPop(value) {
+  return /^(?:POP-|TEST-)/i.test(String(value || '').trim());
+}
+
+function rowFromPerson(c, story, why) {
+  const pop = c.popid || c.pop || null;
+  return {
+    pop,
     name: c.name || null,
     profile: c.profile || [c.name, c.role, c.neighborhood].filter(Boolean).join(' — '),
-    why: c.why || 'assignment',
+    why: c.why || why || 'assignment',
     role: c.role || null,
-    hood: c.neighborhood || story.hood || null,
-  }));
-  const pops = story.popids || [];
-  return (story.citizens || []).map((line, i) => {
+    hood: c.neighborhood || c.hood || (story && story.hood) || null,
+  };
+}
+
+function candidateRows(story, slice) {
+  const packetCitizens = slice && slice.packetSeat && slice.packetSeat.citizens;
+  const namedPools = [
+    Array.isArray(packetCitizens) ? packetCitizens : [],
+    Array.isArray(slice && slice.citizens) ? slice.citizens : [],
+    Array.isArray(slice && slice.players) ? slice.players : [],
+    Array.isArray(slice && slice.candidates) ? slice.candidates : [],
+  ];
+  for (const pool of namedPools) {
+    const people = pool.filter(c => isLedgerPop(c && (c.popid || c.pop))).map(c =>
+      rowFromPerson(c, story, 'assignment'));
+    if (people.length) return people;
+  }
+  const pops = (story && story.popids) || [];
+  const fromStory = (story && story.citizens || []).map((line, i) => {
     const parts = String(line).split(/\s+[—-]\s+/);
-    return { pop: pops[i] || null, name: parts[0] || null, profile: line,
+    const pop = pops[i] || (String(line).match(/POP-\d+/i) || [])[0] || null;
+    return { pop, name: parts[0] || null, profile: line,
       why: 'assignment', role: parts[1] || null, hood: story.hood || null };
-  });
+  }).filter(c => isLedgerPop(c.pop));
+  if (!fromStory.length && pops.length) {
+    for (const pop of pops) {
+      if (!isLedgerPop(pop)) continue;
+      const row = ledgerRowForPop(pop);
+      fromStory.push({
+        pop, name: row && row.Name || null, role: row && row.RoleType || null,
+        hood: (row && row.Neighborhood) || (story && story.hood) || null,
+        profile: row ? [row.Name, row.RoleType, row.Neighborhood].filter(Boolean).join(' — ') : pop,
+        why: 'assignment',
+      });
+    }
+  }
+  if (fromStory.length) return fromStory;
+  return neighborsFromLedger(story && story.hood, { cap: 4, story: story });
 }
 
 function creativeBriefFromSlice(slice) {
@@ -305,7 +333,7 @@ function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane 
   // Interview exposure is identity-bearing: unresolved names may remain in the
   // assigned facts, but only ledger-resolved POPIDs can become W2 targets.
   const candidates = candidateRows(story, slice)
-    .filter(candidate => clean(candidate.pop) && !(slice && slice.charge))
+    .filter(candidate => isLedgerPop(candidate.pop))
     .slice(0, 12);
   const hasTargetCandidates = candidates.length > 0;
   const creativeBrief = creativeBriefFromSlice(slice);
@@ -384,6 +412,91 @@ function validateAngleOutput(value, input) {
   };
 }
 
+const ATHLETE_ROLE_RE = /\b(?:athlete|player|pitcher|catcher|fielder|shortstop|baseman|outfielder|infielder|designated hitter|coach|roster)\b/i;
+
+let _ledgerByPop = null;
+function ledgerRowForPop(pop) {
+  const id = String(pop || '').trim().toUpperCase();
+  if (!id || !/^POP-\d+$/.test(id)) return null;
+  if (_ledgerByPop === null) {
+    _ledgerByPop = new Map();
+    try {
+      const fs = require('fs');
+      const path = require('path');
+      const file = path.join(__dirname, '..', 'output', 'simulation_ledger_snapshot.jsonl');
+      for (const line of fs.readFileSync(file, 'utf8').split(/\r?\n/).filter(Boolean)) {
+        const row = JSON.parse(line);
+        const pid = String(row.POPID || '').trim().toUpperCase();
+        if (pid) _ledgerByPop.set(pid, row);
+      }
+    } catch (_) { /* snapshot optional in isolated tests */ }
+  }
+  return _ledgerByPop.get(id) || null;
+}
+
+function neighborsFromLedger(hood, opts) {
+  const cap = (opts && opts.cap) || 4;
+  const exclude = new Set((opts && opts.exclude || []).map(x => String(x).toUpperCase()));
+  ledgerRowForPop('POP-00001');
+  const rows = [...(_ledgerByPop || new Map()).values()].filter(r => {
+    if (String(r.Status || '').toLowerCase() !== 'active') return false;
+    const pop = String(r.POPID || '').trim().toUpperCase();
+    return isLedgerPop(pop) && !exclude.has(pop);
+  });
+  const hoodName = clean(hood);
+  const same = hoodName ? rows.filter(r => String(r.Neighborhood || '') === hoodName) : [];
+  const rest = rows.filter(r => !same.includes(r));
+  const rank = (a, b) => {
+    const aw = String(a.SMPageId || '').trim() ? 0 : 1;
+    const bw = String(b.SMPageId || '').trim() ? 0 : 1;
+    if (aw !== bw) return aw - bw;
+    return String(a.POPID).localeCompare(String(b.POPID));
+  };
+  same.sort(rank);
+  rest.sort(rank);
+  const out = [];
+  for (const r of same.concat(rest)) {
+    const cand = {
+      pop: String(r.POPID).trim().toUpperCase(),
+      name: r.Name || null,
+      role: r.RoleType || null,
+      hood: r.Neighborhood || null,
+      profile: [r.Name, r.RoleType, r.Neighborhood].filter(Boolean).join(' — '),
+      why: hoodName && r.Neighborhood === hoodName ? 'same-hood-ledger' : 'ledger-resident',
+    };
+    if (/\b(?:journalist|reporter|columnist|editor)\b/i.test(String(r.RoleType || ''))) continue;
+    const block = quoteIneligibility(cand, opts && opts.desk, opts && opts.story);
+    if (block === 'INSTITUTIONAL' || block === 'PRO_ATHLETE_CIVIC_INELIGIBLE') continue;
+    out.push(cand);
+    if (out.length >= cap) break;
+  }
+  return out;
+}
+
+function isAthleteRow(row, role) {
+  const r = String(role || (row && row.RoleType) || '');
+  if (ATHLETE_ROLE_RE.test(r)) return true;
+  if (!row) return false;
+  if (String(row.EconomicProfileKey || '') === 'SPORTS_OVERRIDE') return true;
+  if (String(row.ClockMode || '').toUpperCase() === 'GAME') return true;
+  if (String(row['UNI (y/n)'] || '').toLowerCase().startsWith('y')) return true;
+  return false;
+}
+
+function isCivicStory(desk, story) {
+  if (String(desk || '') === 'civic') return true;
+  return /stuck-initiative|anomaly|initiative|accountability/i.test(String((story && story.kind) || ''));
+}
+
+/** A journalist may not invent a voice for someone the sim has never heard from. */
+function quoteIneligibility(candidate, desk, story) {
+  const row = ledgerRowForPop(candidate && candidate.pop);
+  const role = (candidate && candidate.role) || (row && row.RoleType) || '';
+  if (/council|mayor|official|director|chief/i.test(role)) return 'INSTITUTIONAL';
+  if (isCivicStory(desk, story) && isAthleteRow(row, role)) return 'PRO_ATHLETE_CIVIC_INELIGIBLE';
+  return null;
+}
+
 function questionFor(candidate, anglePlan, story) {
   const role = clean(candidate && candidate.role).toLowerCase();
   const focus = clean(anglePlan && anglePlan.focus, 260) || clean(story.angle || story.label, 260);
@@ -402,6 +515,7 @@ function buildReportPacket({ cycle, desk, reporter, angleInput, anglePlan, story
   const known = (angleInput && angleInput.known || []).filter(c => c.t === 'FACT').slice(0, 8);
   if (candidate.profile) known.push(refClaim('FACT', candidate.profile, 'Simulation_Ledger profile for ' + candidate.pop));
   const isOfficial = /council|mayor|official|director|chief/i.test(candidate.role || '');
+  const block = quoteIneligibility(candidate, desk, story);
   const packet = {
     v: VERSION,
     wake: 'W2',
@@ -416,11 +530,13 @@ function buildReportPacket({ cycle, desk, reporter, angleInput, anglePlan, story
       planTarget: (anglePlan && anglePlan.targets || []).find(t => t.pop === candidate.pop) || null },
     known,
     limits: {
-      quoteEligible: !isOfficial,
+      quoteEligible: !block,
       assert: ['FACT already supplied', 'your own feeling', 'your own intention'],
       classify: CLAIM_TYPES,
       never: ['invent a named person', 'invent a public event', 'invent a date', 'invent a count', 'turn suspicion into observation'],
-      rule: (isOfficial ? 'This generic citizen-voice path cannot create an institutional statement. Return abstain; an office statement must come from the civic voice record. ' : '') + 'Private memory may shape emotion, but it is not evidence of a public event. INTERPRETATION stays abstract: feeling, meaning, accountability, or a question about supplied facts only—no new illustrative objects or actions. INTENTION is a personal demand or attention stance only—no meeting, schedule, funding, program, institutional act, or promise. Put every concrete unsupplied detail in unverifiedLead or abstain.',
+      rule: (block === 'INSTITUTIONAL' ? 'This generic citizen-voice path cannot create an institutional statement. Return abstain; an office statement must come from the civic voice record. ' : '') +
+      (block === 'PRO_ATHLETE_CIVIC_INELIGIBLE' ? 'A GAME-clock athlete is not a civic street source. Return abstain. ' : '') +
+      'Private memory may shape emotion, but it is not evidence of a public event. INTERPRETATION stays abstract: feeling, meaning, accountability, or a question about supplied facts only—no new illustrative objects or actions. INTENTION is a personal demand or attention stance only—no meeting, schedule, funding, program, institutional act, or promise. Put every concrete unsupplied detail in unverifiedLead or abstain.',
     },
     output: {
       format: 'json-only',
@@ -569,5 +685,6 @@ function prompt(packet) {
 module.exports = {
   VERSION, CLAIM_TYPES, WAKES, refClaim, assertBase, buildAnglePacket,
   validateAngleOutput, candidateRows, buildReportPacket, validateReportOutput,
+  quoteIneligibility, isAthleteRow, ledgerRowForPop, neighborsFromLedger,
   buildWritePacket, parseJsonObject, prompt,
 };

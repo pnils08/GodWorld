@@ -378,18 +378,35 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
   const seen = new Set();
   const rested = [];
   const tally = interviewTally();
-  const exactPacketCandidates = angleArt && angleArt.inputPacket &&
-    angleArt.inputPacket.exposure && angleArt.inputPacket.exposure.candidates;
-  const packetCandidates = story
-    ? (PACKET_ACTIVE && Array.isArray(exactPacketCandidates)
+  const exactPacketCandidates = ((angleArt && angleArt.inputPacket &&
+    angleArt.inputPacket.exposure && angleArt.inputPacket.exposure.candidates) || [])
+    .filter(c => c && /^(?:POP-|TEST-)/i.test(String(c.pop || '')));
+  const slice = angleArt && (angleArt.jaxSlice || angleArt.pslayerSlice ||
+    angleArt.economicSlice || angleArt.safetySlice || angleArt.eveningSlice ||
+    angleArt.civicDomainSlice);
+  const filled = story
+    ? (exactPacketCandidates.length
       ? exactPacketCandidates
-      : livedPacket.candidateRows(story, angleArt &&
-        (angleArt.jaxSlice || angleArt.pslayerSlice || angleArt.economicSlice ||
-          angleArt.safetySlice || angleArt.eveningSlice || angleArt.civicDomainSlice)))
-      .reduce((m, c) => m.set(c.pop, c), new Map())
-    : new Map();
+      : livedPacket.candidateRows(story, slice))
+    : [];
+  const packetCandidates = new Map();
+  for (const c of filled) {
+    if (c && c.pop) packetCandidates.set(c.pop, c);
+  }
+  if (story && packetCandidates.size < 2) {
+    for (const c of livedPacket.neighborsFromLedger(story.hood, {
+      cap: QUOTE_CITIZEN_CAP,
+      exclude: [...packetCandidates.keys(), persona && persona.popid].filter(Boolean),
+      desk: angleArt && angleArt.desk,
+      story,
+    })) {
+      if (!packetCandidates.has(c.pop)) packetCandidates.set(c.pop, c);
+      if (packetCandidates.size >= QUOTE_CITIZEN_CAP) break;
+    }
+  }
   const push = (pop, label, ignoreRest) => {
     if (!pop || seen.has(pop) || asks.length >= QUOTE_CITIZEN_CAP) return;
+    if (persona && persona.popid && String(pop).toUpperCase() === String(persona.popid).toUpperCase()) return;
     // The A/B treatment holds the candidate pool fixed across retries. The
     // production rest window remains unchanged on the baseline path.
     if (!PACKET_ACTIVE && !ignoreRest && (tally[pop] || 0) >= REST_CAP) { rested.push({ pop, label }); return; }
@@ -424,20 +441,18 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
         interviewMode: interviewContract.isInterviewPacket(inputPacket),
         livedContextAllowed: interviewContract.hasLivedEvidence(inputPacket) } : {}),
       ...(ACTIVE_WAKE_PACKAGE ? { model: wakePackages.routeFor(ACTIVE_WAKE_PACKAGE, 'report').model } : {}),
-      record: PACKET_ACTIVE ? false : !NO_GATE, maxTokens: PACKET_ACTIVE ? 420 : 200 });   // S332: --no-gate SAMPLES never write citizen memory (was unconditional record:true — the layer-4 leak Codex caught)
+      record: !NO_GATE, maxTokens: PACKET_ACTIVE ? 420 : 200 });
   };
   if (story) {
     const plannedPops = PACKET_ACTIVE && angleArt && angleArt.angleRead &&
-      angleArt.angleRead.plan && Array.isArray(angleArt.angleRead.plan.targets)
+      angleArt.angleRead.plan && Array.isArray(angleArt.angleRead.plan.targets) &&
+      angleArt.angleRead.plan.targets.some(target => target && packetCandidates.has(target.pop))
       ? angleArt.angleRead.plan.targets.map(target => target && target.pop).filter(Boolean)
-      : (story.popids || []);
+      : [...packetCandidates.keys()];
     for (const pop of plannedPops) {
-      if (!PACKET_ACTIVE || packetCandidates.has(pop)) push(pop, story.angle || story.label);
+      if (packetCandidates.has(pop)) push(pop, story.angle || story.label);
     }
   }
-  // A typed Packet's assigned candidate set is exhaustive. Filling unused
-  // quote capacity from the generic desk lane silently widens the evidence
-  // boundary and can reintroduce beat-ineligible people after W1 validation.
   if (!PACKET_ACTIVE) {
     for (const e of lane) {
       for (const pop of (e.popids || [])) push(pop, e.label);
@@ -452,6 +467,44 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
     log('[rest] resting ' + rested.length + ' recently-interviewed citizen(s): ' + rested.map(r => r.pop).join(', '));
   }
   return asks;
+}
+
+function runCitizenQuotePass(asks, cycle, stem) {
+  if (!asks.length) throw new Error('W2 refused: no ledger citizens to interview');
+  const asksPath = path.join(COMPARE, stem + 'asks.json');
+  fs.writeFileSync(asksPath, JSON.stringify(asks, null, 2));
+  log('citizenVoice --batch ' + asks.length + ' (record=' + asks.some(a => a.record) + ')');
+  const out = execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
+    '--batch=' + asksPath, '--cycle=' + cycle], { cwd: ROOT, encoding: 'utf8', timeout: 600000 });
+  let interviews = [];
+  let quotes = [];
+  if (PACKET_ACTIVE) {
+    const inputByPop = new Map(asks.map(a => [a.pop, a.inputPacket]));
+    interviews = parseBatchResults(out).map(q => {
+      const inputPacket = inputByPop.get(q.pop);
+      if (!q.quote || q.fallback) return { ...q, claims: null,
+        ...(livedPacket.VERSION === 'LEP/2' ? { inputPacket } : {}) };
+      try {
+        const claims = interviewContract.isInterviewPacket(inputPacket)
+          ? interviewContract.validateInterviewOutput(q.quote, inputPacket)
+          : livedPacket.validateReportOutput(q.quote, inputPacket);
+        return { ...q, raw: q.quote, quote: claims.publishableQuote, claims,
+          ...(livedPacket.VERSION === 'LEP/2' ? { inputPacket } : {}) };
+      } catch (e) {
+        return { ...q, raw: q.quote, quote: null, claims: null,
+          ...(livedPacket.VERSION === 'LEP/2' ? { inputPacket } : {}),
+          fallback: 'contract-invalid: ' + e.message };
+      }
+    });
+    quotes = interviews.filter(q => q.quote && q.claims && !q.fallback);
+  } else {
+    quotes = parseBatchQuotes(out);
+  }
+  log('quotes landed: ' + quotes.length + '/' + asks.length + (quotes.length ? ' (' + quotes.map(q => q.name).join(', ') + ')' : ''));
+  if (!quotes.length) {
+    throw new Error('W2 refused: citizenVoice returned 0 quotes — no summary article');
+  }
+  return { quotes, interviews };
 }
 
 // Layer 3 — compose the injected state: byline note + lane pointers + real quotes.
@@ -2108,42 +2161,8 @@ async function runReport(assign) {
   const story = (angleArt && angleArt.assignment && angleArt.assignment.story)
     || (assign && assign.story) || null;
   const asks = collectQuoteAsks(lane, askVoice, story, angleArt);
-  let quotes = [];
-  let interviews = [];
-  if (asks.length) {
-    log('quote pre-pass (reporter-voiced): ' + asks.length + ' citizen(s)...');
-    const asksPath = path.join(COMPARE, stem + 'asks.json');
-    fs.writeFileSync(asksPath, JSON.stringify(asks, null, 2));
-    try {
-      const out = execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
-        '--batch=' + asksPath, '--cycle=' + cycle], { cwd: ROOT, encoding: 'utf8', timeout: 600000 });
-      if (PACKET_ACTIVE) {
-        const inputByPop = new Map(asks.map(a => [a.pop, a.inputPacket]));
-        interviews = parseBatchResults(out).map(q => {
-          const inputPacket = inputByPop.get(q.pop);
-          if (!q.quote || q.fallback) return { ...q, claims: null,
-            ...(livedPacket.VERSION === 'LEP/2' ? { inputPacket } : {}) };
-          try {
-            const claims = interviewContract.isInterviewPacket(inputPacket)
-              ? interviewContract.validateInterviewOutput(q.quote, inputPacket)
-              : livedPacket.validateReportOutput(q.quote, inputPacket);
-            return { ...q, raw: q.quote, quote: claims.publishableQuote, claims,
-              ...(livedPacket.VERSION === 'LEP/2' ? { inputPacket } : {}) };
-          } catch (e) {
-            return { ...q, raw: q.quote, quote: null, claims: null,
-              ...(livedPacket.VERSION === 'LEP/2' ? { inputPacket } : {}),
-              fallback: 'contract-invalid: ' + e.message };
-          }
-        });
-        quotes = interviews.filter(q => q.quote && q.claims && !q.fallback);
-      } else {
-        quotes = parseBatchQuotes(out);
-      }
-      log('quotes landed: ' + quotes.length + '/' + asks.length + (quotes.length ? ' (' + quotes.map(q => q.name).join(', ') + ')' : ''));
-    } catch (e) { log('quote pre-pass failed (non-fatal): ' + e.message); }
-  } else {
-    log('no candidate citizens in the lane this cycle — packet will be quoteless');
-  }
+  log('quote pre-pass (reporter-voiced): ' + asks.length + ' citizen(s)...');
+  const { quotes, interviews } = runCitizenQuotePass(asks, cycle, stem);
   const packetPath = path.join(COMPARE, stem + 'packet.json');
   fs.writeFileSync(packetPath, JSON.stringify({
     stage: 'report', desk, cycle, persona: personaSlug,
@@ -2158,9 +2177,7 @@ async function runReport(assign) {
   console.log('packet → ' + path.relative(ROOT, packetPath) + ' (' + quotes.length + ' quotes)');
   // Task 2.5.3 — §3: the interviews land in the growing story doc.
   storyDocAppend(stem, '§3 INTERVIEWS (wake 2 — real citizens, real quotes)',
-    quotes.length
-      ? quotes.map(q => '- ' + q.name + ' (' + q.pop + '): "' + String(q.quote).replace(/\s+/g, ' ').trim() + '"').join('\n')
-      : '(no quotes landed this wake — write from the record; do not invent residents)');
+    quotes.map(q => '- ' + q.name + ' (' + q.pop + '): "' + String(q.quote).replace(/\s+/g, ' ').trim() + '"').join('\n'));
 }
 
 // pipeline.45 Phase 1 — enrich the parsed INTAKE with ids for the sidecar.
@@ -2240,7 +2257,29 @@ async function runWrite(assign) {
       : await resolveByline(desk, lane, cycle);
   log('byline: ' + (byline ? byline.name + ' (' + byline.popid + (persona ? ', persona' : (assign ? ', fanout ' + byline.beatDomain : ', ' + byline.beatDomain + ', used ' + byline.usageCount)) + ')' : 'NONE — fallback, no self-record'));
 
-  const quotes = (packet && packet.quotes) || [];
+  let quotes = (packet && packet.quotes) || [];
+  if (!quotes.length) {
+    const story = (packet && packet.assignment && packet.assignment.story)
+      || (angle && angle.assignment && angle.assignment.story) || null;
+    const askVoice = personaInfo(personaSlug) || (assign ? { name: assign.name } : null);
+    const asks = collectQuoteAsks(lane, askVoice, story, angle);
+    if (DRY_RUN) {
+      log('W3 last-chance would interview: ' + asks.map(a => a.pop).join(', '));
+      throw new Error('W3 refused: 0 citizen quotes — no summary article (dry-run listed '
+        + asks.length + ' last-chance citizens)');
+    }
+    log('W3 last-chance: packet had 0 quotes — calling citizenVoice');
+    const pass = runCitizenQuotePass(asks, cycle, stem);
+    quotes = pass.quotes;
+    packet.quotes = quotes;
+    packet.quotesRequested = asks.length;
+    packet.quotesLanded = quotes.length;
+    if (pass.interviews) packet.interviews = pass.interviews;
+    fs.writeFileSync(packetPath, JSON.stringify(packet, null, 2));
+  }
+  if (!quotes.length) {
+    throw new Error('W3 refused: 0 citizen quotes — will not write a summary article');
+  }
   // Task 2.5.2: the assignment reaches the writer — from today's fanout entry,
   // falling back to the wake-1 angle artifact's copy. The wake-1 canon facts
   // (2.5.3 §2) ride along whichever path supplied the assignment.

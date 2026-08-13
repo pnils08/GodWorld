@@ -107,6 +107,21 @@ const plan = p.validateAngleOutput({
 assert.equal(plan.targets[0].pop, 'TEST-POP-01');
 assert.throws(() => p.validateAngleOutput({ ...plan, targets: [{ pop: 'MADE-UP', question: 'x', basis: 'x' }] }, w1), /supplied pop/);
 
+const chargePulse = {
+  charge: { fanCharge: 'dare' },
+  candidates: [{ angle: 'TEST-ONLY pulse', score: 58 }],
+};
+const chargePeople = p.candidateRows({
+  ref: 'TEST-ONLY-SPORTS', label: 'TEST-ONLY no-hitter',
+  popids: ['POP-00001'], citizens: ['Vinnie Keane — Designated Hitter'],
+  hood: 'Downtown',
+}, chargePulse);
+assert.ok(chargePeople.some(c => c.pop === 'POP-00001'),
+  'fan-heat pulse rows must not hide story POPIDs');
+const dimondPeople = p.neighborsFromLedger('Dimond', { cap: 2 });
+assert.ok(dimondPeople.length >= 1, 'Dimond still has ledger residents');
+assert.ok(dimondPeople.every(c => /^POP-\d+$/.test(c.pop)));
+
 const candidates = p.candidateRows(story, slice);
 const official = p.buildReportPacket({ cycle: 999, desk: 'civic', reporter: { name: 'Test Reporter' },
   angleInput: w1, anglePlan: plan, story, candidate: candidates[0] });
@@ -116,6 +131,16 @@ assert.notEqual(official.task.question, resident.task.question);
 assert.match(official.task.question, /creates accountability/);
 assert.match(resident.task.question, /supplied trend/);
 assert.equal(official.limits.quoteEligible, false);
+assert.equal(p.quoteIneligibility({ pop: 'POP-00599', role: 'Catcher, Oakland A\'s' }, 'civic', { kind: 'anomaly' }),
+  'PRO_ATHLETE_CIVIC_INELIGIBLE');
+{
+  const colon = p.ledgerRowForPop('POP-00599');
+  if (colon) {
+    assert.equal(String(colon.SMPageId || '').trim(), '', 'Colon has never been woken');
+    assert.equal(p.quoteIneligibility({ pop: 'POP-00599', role: colon.RoleType }, 'civic', { kind: 'anomaly' }),
+      'PRO_ATHLETE_CIVIC_INELIGIBLE');
+  }
+}
 assert.throws(() => p.validateReportOutput({ answer: 'quote', observation: [],
   interpretation: ['I speak for the office'], intention: [], unverifiedLead: [],
   quoteParts: [{ t: 'INTERPRETATION', i: 0 }], limits: [] }, official), /institutional quote/);

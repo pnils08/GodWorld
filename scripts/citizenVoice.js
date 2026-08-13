@@ -111,7 +111,8 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
   interviewMode, livedContextAllowed, model }) {
   const c = pool.find((p) => p.popId === popId);
   if (!c) { const e = new Error(`${popId} not voiceable (no DialState / not in ledger / no name+hood)`); e.code = 2; throw e; }
-  if (record && evidenceBound) throw new Error('evidence-bound pilot is read-only; record is forbidden');
+  // Recording an evidence-bound interview is the citizen cron hearing them.
+  // A read-only interview never lands on the page and does not move the sim.
 
   const [neighbors, sportsLine, lifeArc, bondsLine, familyLine, healthLine] = await Promise.all([
     coResidents(c.nh, c.popId), loadSportsSlice(), loadLifeArc(c.popId), loadBonds(c.popId), loadFamily(c.popId),

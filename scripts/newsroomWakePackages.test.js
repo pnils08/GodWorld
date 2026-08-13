@@ -310,17 +310,19 @@ assert.equal(packetAsks[0].inputPacket.lattice, undefined,
   'Wake 2 must ask for citizen-authored speech, not backend lattice selection');
 runApi.activateWakeContext(null, 'p-slayer');
 const fanAsks = runApi.collectQuoteAsks([], { name: 'P Slayer', popid: 'POP-00008' }, {
-  ref: 'TEST-ONLY-SPORTS', label: 'TEST-ONLY no-hitter', popids: ['POP-90005']
+  ref: 'TEST-ONLY-SPORTS', label: 'TEST-ONLY no-hitter', popids: ['POP-90005'],
+  hood: 'Downtown'
 }, {
   cycle: 999, desk: 'sports',
   inputPacket: {
-    v: 'LEP/2', wake: 'W1', actor: {}, task: {}, signal: {},
+    v: 'LEP/2', wake: 'W1', actor: {}, task: {}, signal: { hood: 'Downtown' },
     exposure: { candidates: [] }, known: [], limits: {}, output: {}
   },
   angleRead: { plan: { focus: 'TEST-ONLY fan focus', targets: [], closeQuestion: 'TEST-ONLY close' } }
 });
-assert.deepStrictEqual(fanAsks, [],
-  'Packet story POPIDs outside the exact candidate set must not become interview targets');
+assert.ok(fanAsks.some(row => row.pop === 'POP-90005'),
+  'empty packet candidates must not seal the city — story POPIDs become interviews');
+assert.ok(fanAsks.length >= 1, 'W2 must ask at least one ledger/story citizen');
 const approaches = {
   civic: 'generic civic',
   sports: 'generic sports',

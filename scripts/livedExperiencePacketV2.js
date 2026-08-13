@@ -607,6 +607,7 @@ module.exports = {
   LATTICE,
   assertBase,
   candidateRows: v1.candidateRows,
+  neighborsFromLedger: v1.neighborsFromLedger,
   validateAngleOutput: v1.validateAngleOutput,
   parseJsonObject: v1.parseJsonObject,
   buildAnglePacket,

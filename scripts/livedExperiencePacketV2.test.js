@@ -217,8 +217,9 @@ const sportsW1 = p.buildAnglePacket({
   cycle: 999, desk: 'sports', reporter: pReporter, story: sportsStory,
   approach: 'TEST-ONLY first-person fan heat', slice: sportsSlice, lane: [],
 });
-assert.deepStrictEqual(sportsW1.exposure.candidates, []);
-assert.deepStrictEqual(sportsW1.output.schema.targets, []);
+assert.ok(sportsW1.exposure.candidates.length >= 1,
+  'fan-heat with no assigned POPIDs still interviews ledger residents');
+assert.ok(sportsW1.exposure.candidates.every(c => /^(?:POP-|TEST-)/i.test(c.pop)));
 assert.ok(sportsW1.known.some(row => row.text === sportsSlice.prewrite.anchorFacts[0]));
 assert.deepStrictEqual(sportsW1.task.creativeBrief, {
   kind: 'fan-heat',
@@ -232,7 +233,7 @@ assert.deepStrictEqual(sportsW1.task.creativeBrief, {
 const sportsPlan = p.validateAngleOutput({
   focus: 'TEST-ONLY fan consequence', why: 'The supplied result leaves tension',
   checks: ['Check the supplied sports feed'],
-  targets: [{ pop: 'TEST-PLAYER-01', question: 'What changed?', basis: 'feed-name' }],
+  targets: [{ pop: sportsW1.exposure.candidates[0].pop, question: 'What changed?', basis: 'feed-name' }],
   interpretation: 'The result may sharpen the argument', unverifiedLead: [],
   closeQuestion: 'Does one result change the fan verdict?',
 }, sportsW1);
@@ -259,8 +260,9 @@ const unresolvedSportsW1 = p.buildAnglePacket({
   slice: { ...sportsSlice, players: [{ popid: null, name: 'Unresolved Test Player', why: 'feed-name' }] },
   lane: [],
 });
-assert.deepStrictEqual(unresolvedSportsW1.exposure.candidates, []);
-assert.deepStrictEqual(unresolvedSportsW1.output.schema.targets, []);
+assert.ok(unresolvedSportsW1.exposure.candidates.length >= 1,
+  'unresolved feed names fall through to ledger residents, not a sealed empty set');
+assert.ok(unresolvedSportsW1.exposure.candidates.every(c => /^(?:POP-|TEST-)/i.test(c.pop)));
 
 // Hal's archive posture is typed, but history is not a creative blank check.
 // Present feed facts enter the manifest; unsupplied people/events remain missing.
@@ -546,15 +548,16 @@ assert.deepStrictEqual(economicW1.task.creativeBrief, {
 });
 
 // C103 Jordan regression: a selected economic signal can carry no citizen POPIDs.
-// The Packet makes the empty contract explicit and narrows invented targets to [].
+// W1 now fills from the ledger instead of sealing an empty interview set.
 const noCandidateW1 = p.buildAnglePacket({
   cycle: 999, desk: 'business', reporter: jordanReporter,
   story: { ...economicStory, popids: [], citizens: [] },
-  approach: 'TEST-ONLY follow the money', slice: economicSlice, lane: [],
+  approach: 'TEST-ONLY follow the money',
+  slice: { ...economicSlice, citizens: [], candidates: [], players: [] },
+  lane: [],
 });
-assert.deepStrictEqual(noCandidateW1.output.schema.targets, []);
-assert.match(noCandidateW1.output.rule, /Return targets as an empty array/);
-const noCandidatePlan = p.validateAngleOutput({
+assert.ok(noCandidateW1.exposure.candidates.length >= 1);
+assert.throws(() => p.validateAngleOutput({
   focus: 'TEST-ONLY livelihood pressure', why: 'The supplied condition has a worker consequence',
   checks: ['Check the supplied ledger record'],
   targets: [
@@ -563,8 +566,15 @@ const noCandidatePlan = p.validateAngleOutput({
   ],
   interpretation: 'The pressure may reach payroll', unverifiedLead: [],
   closeQuestion: 'Who carries the supplied pressure?',
+}, noCandidateW1), /supplied pop/);
+const noCandidatePlan = p.validateAngleOutput({
+  focus: 'TEST-ONLY livelihood pressure', why: 'The supplied condition has a worker consequence',
+  checks: ['Check the supplied ledger record'],
+  targets: [{ pop: noCandidateW1.exposure.candidates[0].pop, question: 'What changed?', basis: 'assignment' }],
+  interpretation: 'The pressure may reach payroll', unverifiedLead: [],
+  closeQuestion: 'Who carries the supplied pressure?',
 }, noCandidateW1);
-assert.deepStrictEqual(noCandidatePlan.targets, []);
+assert.equal(noCandidatePlan.targets[0].pop, noCandidateW1.exposure.candidates[0].pop);
 const economicPlan = p.validateAngleOutput({
   focus: 'TEST-ONLY livelihood pressure', why: 'The supplied condition has a worker consequence',
   checks: ['Check the supplied ledger record'],

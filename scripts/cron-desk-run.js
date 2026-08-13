@@ -79,6 +79,7 @@ const GATE_API_MODEL = arg('--gate-api-model', 'google/gemini-3.5-flash');
 // subscription usage is depleted; the writer + quotes run on raw API keys. Ungated
 // output is NOT canon — it routes to samples/ marked ungated, for review only.
 const NO_GATE = process.argv.includes('--no-gate');
+const DRY_RUN = process.argv.includes('--dry-run');
 // Submission budget (headless plan "What's left" #2, S339): hard weekly ceiling
 // on gate-cleared (staged) articles per cycle-week — the ~20–28/wk cost envelope.
 // At the cap a write wake exits BEFORE any writer spend. --no-gate samples are
@@ -2102,7 +2103,10 @@ async function runReport(assign) {
   // rides the angle artifact (wake-1 handoff), so a report wake fired without
   // today's fanout entry still sees it.
   const angleArt = readJson(anglePath);
-  const story = (assign && assign.story) || (angleArt && angleArt.assignment && angleArt.assignment.story) || null;
+  // W1 owns the assignment. Fanout assign.story is only a W1 seed; using it
+  // at W2 swapped Almanzar/Nightline for leftover desk-signal rows.
+  const story = (angleArt && angleArt.assignment && angleArt.assignment.story)
+    || (assign && assign.story) || null;
   const asks = collectQuoteAsks(lane, askVoice, story, angleArt);
   let quotes = [];
   let interviews = [];
@@ -2206,6 +2210,15 @@ async function runWrite(assign) {
   require('./canon-name-check').ensureLedgerSnapshot(cycle);
   const angle = readJson(anglePath);
   const packet = readJson(packetPath);
+  if (angle && angle.assignment && angle.assignment.story && packet) {
+    const packed = packet.assignment && packet.assignment.story;
+    if (JSON.stringify(packed || null) !== JSON.stringify(angle.assignment.story)) {
+      log('handoff repair: W1 assignment replaces drifted W2 story');
+      packet.assignment = Object.assign({}, packet.assignment || {}, {
+        story: angle.assignment.story
+      });
+    }
+  }
   validateWakeHandoff(angle, packet, {
     cycle,
     persona: personaSlug,
@@ -2231,8 +2244,8 @@ async function runWrite(assign) {
   // Task 2.5.2: the assignment reaches the writer — from today's fanout entry,
   // falling back to the wake-1 angle artifact's copy. The wake-1 canon facts
   // (2.5.3 §2) ride along whichever path supplied the assignment.
-  const assignment = (assign && assign.story ? { story: assign.story, approach: assign.approach } : null)
-    || (angle && angle.assignment) || null;
+  const assignment = (angle && angle.assignment)
+    || (assign && assign.story ? { story: assign.story, approach: assign.approach } : null);
   if (assignment && angle && angle.canonResearch && Array.isArray(angle.canonResearch.facts)) {
     assignment.canonFacts = angle.canonResearch.facts;
   }
@@ -2285,11 +2298,17 @@ async function runWrite(assign) {
   // (own citizen page, cp-<popid>) joins the tool loop.
   if (PACKET_ACTIVE) writerArgs.push('--strict-source-hygiene', '--packet-only');
   else if (byline && byline.popid) writerArgs.push('--byline-popid', byline.popid);
-  // Live W3 is always the persona writer. Code-rendered SOURCE_BRIEF /
-  // RECORDS_BRIEF templates stay available for isolated tests; they are not
-  // the newspaper. Packet-only + auditArticle + contamination scan remain
-  // the hard walls.
-  const codeRenderedMode = null;
+  // Live W3 is always the persona writer. Packet-only + auditArticle +
+  // contamination scan remain the hard walls.
+  if (DRY_RUN) {
+    log('DRY-RUN write — no model call');
+    log('writer: ' + writerArgs.join(' '));
+    log('writingMode: ' + (writePacket && writePacket.task && writePacket.task.writingMode || 'none'));
+    log('goal: ' + (writePacket && writePacket.task && writePacket.task.goal || 'none'));
+    log('quotes: ' + quotes.length);
+    log('draft would be: ' + path.relative(ROOT, draftPath));
+    return;
+  }
   execFileSync('node', writerArgs, { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
   if (!fs.existsSync(draftPath)) throw new Error('writer produced no draft at ' + path.relative(ROOT, draftPath));
 

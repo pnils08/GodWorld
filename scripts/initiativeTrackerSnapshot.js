@@ -44,6 +44,18 @@ function fromAuditRows(rows) {
   };
 }
 
+function loadOrRebuild(cycle) {
+  const outPath = path.join(ROOT, 'output', 'initiative_tracker.json');
+  try {
+    const existing = JSON.parse(fs.readFileSync(outPath, 'utf8'));
+    if (existing && Array.isArray(existing.initiatives) && existing.initiatives.length) {
+      return existing;
+    }
+  } catch (_) { /* rebuild */ }
+  writeFromAudit(cycle);
+  return JSON.parse(fs.readFileSync(outPath, 'utf8'));
+}
+
 function writeFromAudit(cycle) {
   const auditPath = path.join(ROOT, 'output', 'engine_audit_c' + cycle + '.json');
   const audit = JSON.parse(fs.readFileSync(auditPath, 'utf8'));
@@ -57,7 +69,7 @@ function writeFromAudit(cycle) {
   return { outPath, count: tracker.initiatives.length, cycle };
 }
 
-module.exports = { fromAuditRows, writeFromAudit };
+module.exports = { fromAuditRows, writeFromAudit, loadOrRebuild };
 
 if (require.main === module) {
   const cycle = arg('--cycle', null) || require(path.join(ROOT, 'lib', 'getCurrentCycle'))({ noArgv: true });

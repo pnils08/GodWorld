@@ -22,4 +22,8 @@ assert.equal(tracker.initiatives[0].id, 'TEST-ONLY-INIT');
 assert.equal(tracker.initiatives[0].implementation.phase, 'disbursement-active');
 assert.deepStrictEqual(tracker.initiatives[0].neighborhoods, ['West Oakland', 'Fruitvale']);
 assert.equal(tracker.initiatives[0].vote, 'PASSED');
+
+const { loadOrRebuild } = require('./initiativeTrackerSnapshot');
+const live = loadOrRebuild(103);
+assert.ok(live.initiatives.some(i => i.id === 'INIT-001'));
 console.log('initiativeTrackerSnapshot.test.js ok');

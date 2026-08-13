@@ -296,7 +296,7 @@
   },
   "anthony-raines": {
     "version": "ANTHONY-LEP2-1",
-    "active": false,
+    "active": true,
     "requiredDaily": true,
     "persona": "anthony-raines",
     "assignment": {

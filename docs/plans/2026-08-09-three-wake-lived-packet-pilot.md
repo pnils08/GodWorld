@@ -349,7 +349,7 @@ slice and model text is a starting work surface, not an adopted contract.
 | LILA-LEP2-1 | Dr. Lila Mezran / POP-00154 | health | Article LEP/2; `HEALTH-SERVICE-BRIEF-1`; typed access/timeline/human-cost unknowns | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed; DeepSeek schema pass, Llama schema fail |
 | ANGELA-LEP2-1 | Angela Reyes / POP-00156 | education | Article LEP/2; `EDUCATION-STABILITY-BRIEF-1`; typed participation/access/outcome unknowns | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed; DeepSeek more useful than Llama on same W1 Packet |
 | NOAH-LEP2-1 | Noah Tan / POP-00157 | environment | Article LEP/2; `WEATHER-GROUND-BRIEF-1`; every Cycle's deterministic weather condition | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed; ordinary weather narrates the Cycle |
-| ANTHONY-LEP2-1 | Anthony Raines / POP-00017 | sports analytics | Article LEP/2; typed line-card and unresolved-subject boundary | DeepSeek / DeepSeek / local source brief | [ ] second-model benchmark | attended W1-W3/Rhea passed; registry remains inactive pending benchmark |
+| ANTHONY-LEP2-1 | Anthony Raines / POP-00017 | sports analytics | Article LEP/2; typed line-card and unresolved-subject boundary | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed; DeepSeek schema pass, Llama schema fail |
 | HAL-LEP2-1 | Hal Richmond / POP-00007 | sports history | Article LEP/2; typed present-fact/unsupplied-history boundary | Candidate DeepSeek / DeepSeek / DeepSeek | [ ] model benchmark + proof | registry inactive; local Packet/manifest gates passed |
 | TANYA-LEP2-1 | Tanya Cruz / POP-00014 | sports sideline | Article LEP/2; typed record/access/observation boundary | Candidate DeepSeek / DeepSeek / DeepSeek | [ ] model benchmark + proof | registry inactive; local slice/Packet gates passed |
 | pending | Simon Leary / POP-00016 | sports long view | Candidate Article LEP/2; sports as civic architecture | Candidate DeepSeek; benchmark | [ ] | [ ] |
@@ -577,9 +577,17 @@ source brief, quarantined all three free-form leads, and passed Gemini Rhea with
 zero flags for `$0.0537`. The eleventh C103 Article staged. The standard
 post-gate hooks also wrote Anthony's byline-usage row and a reporter PRESS entry
 plus gated `Reflection_Intake` row (`applied=no`); no Article publication or
-canon ingestion ran. A same-Packet Llama comparison was rejected before
-inference by the execution approval layer, so `ANTHONY-LEP2-1` remains
-`active: false` and package graduation stays open rather than waiving Gate 3.
+canon ingestion ran. A same-Packet Llama comparison was initially rejected
+before inference by the execution approval layer, so `ANTHONY-LEP2-1` remained
+`active: false` at that point rather than waiving Gate 3.
+
+After the builder explicitly approved OpenRouter Packet use, the same bounded
+C103 W1 Packet ran through Llama 3.3 70B. Llama used 2,132 prompt tokens and 194
+completion tokens but failed closed at LEP/2 validation because its target did
+not carry a supplied POPID with both question and basis. DeepSeek therefore wins
+the fixed-Packet comparison: it passed the schema and the already-attended
+W1-W3/Rhea path. `ANTHONY-LEP2-1` is active on its unchanged all-DeepSeek route;
+the failed Llama output did not stage or enter canon.
 
 Hal Richmond's local package now closes the unsafe archive-carveout seam without
 editing his protected persona sources. Feed-backed present facts enter the typed
@@ -595,8 +603,8 @@ its fixed-Packet model comparison and attended W1-W3/Rhea proof are still open.
 - All eleven current Cycle 103 Rhea passes are staged behind the probation wall.
   Preserve Carmen's medium public-wording flag as a polish item. Angela Reyes's
   package and attended proof are complete. Noah Tan's weather package and proof
-  are complete. Anthony's DeepSeek proof passed, but the required fixed-Packet
-  second-model benchmark remains the next unchecked Task 17 gate.
+  are complete. Anthony's DeepSeek route beat Llama on the fixed C103 Packet and
+  the package is active.
 - Luis's thin-record path passed locally, but his reporting-trail-backed Sonnet
   path and Rhea proof remain open. A local manifest pass is not publication or
   full package graduation.
@@ -654,3 +662,4 @@ its fixed-Packet model comparison and attended W1-W3/Rhea proof are still open.
 - 2026-08-13 (codex) — Built ANTHONY-LEP2-1 and repaired shared sports parsing: exact subject authority, false-name rejection, split stat ownership, and unresolved-POPID abstention. DeepSeek W1/W2, local W3, manifest, and Gemini Rhea passed; the eleventh C103 Article staged. The registry stays inactive because the required same-Packet second-model benchmark was rejected before inference.
 - 2026-08-13 (codex) — Built inactive HAL-LEP2-1 local gates: present feed facts now enter W1/W3 manifests, unresolved names cannot become interview targets, and unsupplied history or witnessed memory is blocked rather than treated as a franchise carveout. Fixed-Packet comparison and attended W1-W3/Rhea remain open.
 - 2026-08-13 (codex) — Built inactive TANYA-LEP2-1 local gates and repaired the live typed-slice selector: Hal and Tanya now reach W1 as typed slices, while sideline access, observation, mood, dialogue, injuries, and team response remain unsupplied unless Packet-backed.
+- 2026-08-13 (codex) — Graduated ANTHONY-LEP2-1 after the approved fixed-Packet comparison: Llama 3.3 70B failed W1 target schema after 2,132 input and 194 output tokens; DeepSeek's existing schema and attended W1-W3/Rhea proof won. Activated the unchanged all-DeepSeek route; no benchmark output staged.

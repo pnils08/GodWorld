@@ -55,6 +55,7 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 const crypto = require('crypto');
+const articleContamination = require('./articleContamination');
 
 const ROOT = path.resolve(__dirname, '..');
 const STAGED = path.join(ROOT, 'output', 'cron-compare', 'staged');
@@ -84,7 +85,12 @@ function verifyStagedProof(side, articleText, fallbackVerdict) {
     const passed = proofs.some(proof => proof.pass === true);
     return { ok: false, reason: passed ? 'Rhea pass hash does not match staged Article' : 'no exact Rhea pass proof' };
   }
-  return { ok: true, articleSha256 };
+  const contamination = articleContamination.scan(articleText, { desk: side.desk });
+  if (contamination.fail) {
+    return { ok: false, articleSha256,
+      reason: 'deterministic world-contamination blocker failed', contamination };
+  }
+  return { ok: true, articleSha256, contamination };
 }
 
 function loadStagedSet(cycle) {

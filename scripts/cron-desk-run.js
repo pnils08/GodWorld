@@ -32,6 +32,7 @@ const path = require('path');
 const https = require('https');
 const crypto = require('crypto');
 const { execFileSync } = require('child_process');
+const articleContamination = require('./articleContamination');
 
 const ROOT = path.join(__dirname, '..');
 const COMPARE = path.join(ROOT, 'output', 'cron-compare');
@@ -419,7 +420,8 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
     }
     asks.push({ pop, ask: askText,
       ...(inputPacket ? { packetContract: livedPacket.VERSION, inputPacket, evidenceBound: true,
-        interviewMode: interviewContract.isInterviewPacket(inputPacket) } : {}),
+        interviewMode: interviewContract.isInterviewPacket(inputPacket),
+        livedContextAllowed: interviewContract.hasLivedEvidence(inputPacket) } : {}),
       ...(ACTIVE_WAKE_PACKAGE ? { model: wakePackages.routeFor(ACTIVE_WAKE_PACKAGE, 'report').model } : {}),
       record: PACKET_ACTIVE ? false : !NO_GATE, maxTokens: PACKET_ACTIVE ? 420 : 200 });   // S332: --no-gate SAMPLES never write citizen memory (was unconditional record:true — the layer-4 leak Codex caught)
   };
@@ -2308,11 +2310,17 @@ async function runWrite(assign) {
   }
   if (!fs.existsSync(draftPath)) throw new Error('writer produced no draft at ' + path.relative(ROOT, draftPath));
 
+  const contamination = articleContamination.scanFile(draftPath, { desk });
+  if (contamination.fail) {
+    log('deterministic contamination blocker: ' + contamination.findings
+      .map(row => row.check + '=' + row.issue).join('; '));
+  }
+
   // gate (skipped for --no-gate samples)
   let rhea = null, pass = false, rheaProof = null;
   if (NO_GATE) {
     log('gate SKIPPED (--no-gate sample) — output is ungated, NOT canon');
-  } else {
+  } else if (!contamination.fail) {
     log('gating...');
     try {
       execFileSync('node', [path.join(ROOT, 'scripts', 'cron-rhea-gate.js'), '--draft', path.relative(ROOT, draftPath),
@@ -2368,7 +2376,10 @@ async function runWrite(assign) {
     appendWireEntry(cycle, '- c' + cycle + ' ' + desk + ' | ' + (byline ? byline.name : 'desk') + ': "' + headline + '" (staged)');
   } else {
     fs.writeFileSync(path.join(FLAGGED, base + '.flags.json'),
-      JSON.stringify({ draft: draftName, flags: (rhea && rhea.flags) || [], summary: (rhea && rhea.summary) || 'no rhea verdict' }, null, 2));
+      JSON.stringify({ draft: draftName, flags: (rhea && rhea.flags) || [],
+        contamination: contamination.findings,
+        summary: contamination.fail ? 'deterministic world-contamination blocker failed' :
+          (rhea && rhea.summary) || 'no rhea verdict' }, null, 2));
   }
 
   // reporter self-record (author-side; persona POPID when set)
@@ -2402,6 +2413,7 @@ async function runWrite(assign) {
     laneEntries: lane.length, quotesLanded: quotes.length,
     disposition: NO_GATE ? 'ungated-sample' : (pass ? 'staged' : 'flagged'),
     rheaPass: rhea ? rhea.pass : null, rheaFlagCount: rhea ? rhea.flagCount : null,
+    contamination,
     footerPresent,
     toolUse: traceArt ? traceArt.calls.map(t => t.tool) : [],
     article: path.relative(ROOT, destPath),
@@ -2473,12 +2485,18 @@ async function runWake() {
     ...(PERSONA ? ['--persona', PERSONA] : [])], { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
   if (!fs.existsSync(draftPath)) throw new Error('writer produced no draft at ' + path.relative(ROOT, draftPath));
 
+  const contamination = articleContamination.scanFile(draftPath, { desk: DESK });
+  if (contamination.fail) {
+    log('deterministic contamination blocker: ' + contamination.findings
+      .map(row => row.check + '=' + row.issue).join('; '));
+  }
+
   // 4. LAYER 2 — gate (existing headless Rhea). Skipped for --no-gate samples
   // (gate needs the subscription; writer/quotes are API-only).
   let rhea = null, pass = false, rheaProof = null;
   if (NO_GATE) {
     log('gate SKIPPED (--no-gate sample) — output is ungated, NOT canon');
-  } else {
+  } else if (!contamination.fail) {
     log('gating...');
     try {
       execFileSync('node', [path.join(ROOT, 'scripts', 'cron-rhea-gate.js'), '--draft', path.relative(ROOT, draftPath),
@@ -2520,7 +2538,10 @@ async function runWake() {
     }, null, 2));
   } else {
     fs.writeFileSync(path.join(FLAGGED, base + '.flags.json'),
-      JSON.stringify({ draft: draftName, flags: (rhea && rhea.flags) || [], summary: (rhea && rhea.summary) || 'no rhea verdict' }, null, 2));
+      JSON.stringify({ draft: draftName, flags: (rhea && rhea.flags) || [],
+        contamination: contamination.findings,
+        summary: contamination.fail ? 'deterministic world-contamination blocker failed' :
+          (rhea && rhea.summary) || 'no rhea verdict' }, null, 2));
   }
 
   // 6. LAYER 5 — reporter records their own filing (page + gated intake, author-side)
@@ -2546,6 +2567,7 @@ async function runWake() {
     laneEntries: lane.length, quotesRequested: asks.length, quotesLanded: quotes.length,
     disposition: NO_GATE ? 'ungated-sample' : (pass ? 'staged' : 'flagged'),
     rheaPass: rhea ? rhea.pass : null, rheaFlagCount: rhea ? rhea.flagCount : null,
+    contamination,
     article: path.relative(ROOT, destPath),
     selfRecord, ranAt: new Date().toISOString()
   };

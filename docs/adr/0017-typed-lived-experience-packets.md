@@ -85,7 +85,12 @@ backend can arrange once. Facts are canon inputs; prose is a rendering.
    `CITIZEN_INTERVIEW/1` is the Wake 2 press contract. The citizen authors the
    quote during the interview; the backend may validate, reject, or hash it but
    may not paraphrase, assemble, or supply words. The former LEP/2 lattice was
-   not an interview and is rejected as quote provenance.
+   not an interview and is rejected as quote provenance. Same-neighborhood or
+   assignment membership is not lived exposure: `lived-context` requires an
+   addressable story-linked evidence row. Without one, Wake 2 permits only a
+   short first-person `direct-reaction` to supplied facts or abstention. In that
+   mode the citizen retains ledger identity and temperament, but unrelated life
+   history is withheld so the model cannot project it onto the assigned story.
 
 5. **Load-bearing invention is not “color”; bounded lived texture is.** A wake
    package declares the reporter's creative authority. New named people,
@@ -296,3 +301,6 @@ path, and assigned story, and its `ranAt` must be later than the current angle's
 - 2026-08-13 (codex) — Closed the Cycle-scoped stale-packet seam: Wake 3 now requires a newer matching Wake 2 Packet for the current angle, persona, reporter POPID, and exact assigned story before any writer or Rhea work.
 - 2026-08-13 (codex) — Superseded the Jax activation verdict after builder rejection of the C103 Article. JAX-LEP2-1 is inactive; its generic city texture authority is removed, backend-composed lattice text is barred from quotation, and reactivation requires sim-only evidence plus verbatim citizen-authored quote provenance.
 - 2026-08-13 (codex) — Reclassified every LEP/2 lattice line as non-speech after the builder's cross-Article audit. Wake 2 now uses `CITIZEN_INTERVIEW/1`: the citizen sees their simulated life context, authors the response, and the backend preserves or rejects it without composing prose. Existing lattice-bearing proofs are invalid.
+- 2026-08-13 (codex) — The first direct-speech Luis spot test proved citizen authorship but not lived grounding: both respondents invented civic history from same-neighborhood assignment. Tightened `CITIZEN_INTERVIEW/1` so lived context requires addressable story-linked evidence; otherwise only a bounded first-person direct reaction or abstention can pass.
+- 2026-08-13 (codex) — Final Luis proof landed two distinct fact-bounded direct reactions, preserved each response exactly through the Article, passed Packet-aware Rhea, and cleared the deterministic contamination scan. The contract labels these as direct reaction; lived-exposure testimony still requires addressable story-linked evidence.
+- 2026-08-13 (codex) — Made world-contamination blocking independent of Rhea across weekday routing, reconciliation, and Saturday intake. Five C103 lattice-quote artifacts moved from staged to flagged; their historical Rhea passes remain recorded but cannot cross the canon door.

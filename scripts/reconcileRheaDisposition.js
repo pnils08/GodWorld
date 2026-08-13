@@ -15,6 +15,7 @@
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
+const articleContamination = require('./articleContamination');
 
 const ROOT = path.resolve(__dirname, '..');
 
@@ -131,6 +132,8 @@ function reconcileVerdict({ root = ROOT, verdictPath, apply = false, now = new D
   if (!wake.desk || !byline.name || !/^POP-\d{5}$/.test(String(byline.popid || byline.id || ''))) {
     throw new Error('wake record lacks desk or stable byline identity for ' + base);
   }
+  const contamination = articleContamination.scanFile(draftAbs, { desk: wake.desk });
+  const effectivePass = verdict.pass && !contamination.fail;
 
   const stamp = now.toISOString().replace(/\D/g, '').slice(0, 14);
   const stagedArticle = path.join(staged, base + '.staged.md');
@@ -139,7 +142,7 @@ function reconcileVerdict({ root = ROOT, verdictPath, apply = false, now = new D
   const flaggedSidecar = path.join(flagged, base + '.flags.json');
   const actions = [];
 
-  if (verdict.pass) {
+  if (effectivePass) {
     archiveFile(flaggedArticle, history, 'cleared', stamp, actions, apply);
     archiveFile(flaggedSidecar, history, 'cleared', stamp, actions, apply);
     if (fs.existsSync(stagedArticle) && sha256File(stagedArticle) !== draftSha256) {
@@ -202,13 +205,16 @@ function reconcileVerdict({ root = ROOT, verdictPath, apply = false, now = new D
       draftSha256,
       verdict: path.relative(root, verdictAbs),
       flags: Array.isArray(verdict.flags) ? verdict.flags : [],
-      summary: verdict.summary || 'Rhea did not pass this Article',
+      contamination: contamination.findings,
+      summary: contamination.fail ? 'deterministic world-contamination blocker failed' :
+        verdict.summary || 'Rhea did not pass this Article',
       reviewedAt: verdict.ranAt || null
     };
     actions.push('write ' + flaggedSidecar);
     if (apply) writeJsonAtomic(flaggedSidecar, flags);
     wake.disposition = 'flagged';
-    wake.rheaPass = false;
+    wake.rheaPass = verdict.pass;
+    wake.contamination = contamination;
     wake.rheaFlagCount = Number.isInteger(verdict.flagCount) ? verdict.flagCount : flags.flags.length;
     wake.gateModel = verdict.model || wake.gateModel;
     wake.article = path.relative(root, flaggedArticle);
@@ -217,7 +223,7 @@ function reconcileVerdict({ root = ROOT, verdictPath, apply = false, now = new D
   wake.dispositionReconciledAt = now.toISOString();
   actions.push('update ' + wakePath);
   if (apply) writeJsonAtomic(wakePath, wake);
-  return { base, cycle, disposition: verdict.pass ? 'staged' : 'flagged', actions };
+  return { base, cycle, disposition: effectivePass ? 'staged' : 'flagged', actions };
 }
 
 function verdictsForCycle(root, cycle) {

@@ -84,6 +84,12 @@ console.log('Test 4b: staged proof is exact and fail-closed');
   assert('non-staged status rejected', !verifyStagedProof({ status: 'flagged', rhea: { pass: true, draftSha256: sha } }, ENTRY.text, null).ok);
   assert('missing Rhea pass rejected', !verifyStagedProof({ status: 'staged' }, ENTRY.text, null).ok);
   assert('post-review Article mutation rejected', !verifyStagedProof({ status: 'staged', rhea: { pass: true, draftSha256: sha } }, ENTRY.text + 'changed', null).ok);
+  const lattice = '# Test\n\nCalvin Turner said: “This deserves a closer look. What happens next? I am going to keep watching this.”';
+  const latticeSha = crypto.createHash('sha256').update(lattice).digest('hex');
+  const blocked = verifyStagedProof({ status: 'staged', desk: 'civic',
+    rhea: { pass: true, draftSha256: latticeSha } }, lattice, null);
+  assert('exact Rhea pass cannot override deterministic contamination',
+    !blocked.ok && blocked.contamination && blocked.contamination.fail, JSON.stringify(blocked));
 }
 
 console.log('Test 5: aggregateStorylineSignals');

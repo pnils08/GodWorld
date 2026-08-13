@@ -370,6 +370,13 @@ assert.match(luisRendered, /^# /);
 assert.match(luisRendered, /The supplied record does not establish documented response/);
 assert.match(luisRendered, /^## INTAKE$/m);
 assert.equal(p.auditArticle(luisRendered, luisW3).ok, true);
+const luisRawPhase = JSON.parse(JSON.stringify(luisW3));
+luisRawPhase.task.assignment = 'TEST-ONLY Initiative stalled in construction-planning';
+luisRawPhase.manifest.approvedFacts[0].text = 'TEST-ONLY Initiative is in construction-planning';
+const luisPublicPhase = p.renderRecordsBrief(luisRawPhase);
+assert.doesNotMatch(luisPublicPhase.split(/^## INTAKE$/m)[0], /construction-planning/);
+assert.match(luisPublicPhase, /supplied planning phase/);
+assert.equal(p.auditArticle(luisPublicPhase, luisRawPhase).ok, true);
 const scalarLead = p.validateReportOutput({
   answer: 'quote', fact_ids: [luisW1.known[0].id], stance_id: 'S_ATTENTION',
   question_id: 'Q_GAP', intention_id: 'I_NONE',

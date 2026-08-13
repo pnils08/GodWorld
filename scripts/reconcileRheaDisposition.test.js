@@ -88,6 +88,23 @@ try {
   assert.equal(planned.disposition, 'staged');
   assert(!fs.existsSync(path.join(staged, 'civic_c999_test-dry.staged.md')));
 
+  console.log('Test 5: deterministic contamination overrides a Rhea pass');
+  const contaminated = fixture('civic_c999_test-contaminated', true);
+  fs.writeFileSync(contaminated.draft, fs.readFileSync(contaminated.draft, 'utf8').replace(
+    '## INTAKE',
+    'Calvin Turner said: “This deserves a closer look. What happens next? I am going to keep watching this.”\n\n## INTAKE'));
+  const contaminatedVerdict = JSON.parse(fs.readFileSync(contaminated.verdict, 'utf8'));
+  contaminatedVerdict.draftSha256 = sha256File(contaminated.draft);
+  writeJson(contaminated.verdict, contaminatedVerdict);
+  const quarantined = reconcileVerdict({ root, verdictPath: contaminated.verdict, apply: true,
+    now: new Date('2026-08-13T10:00:00.000Z') });
+  assert.equal(quarantined.disposition, 'flagged');
+  const quarantineWake = JSON.parse(fs.readFileSync(path.join(compare,
+    'civic_c999_test-contaminated.wake.json'), 'utf8'));
+  assert.equal(quarantineWake.rheaPass, true, 'Rhea result remains historically honest');
+  assert.equal(quarantineWake.contamination.fail, true);
+  assert(!fs.existsSync(path.join(staged, 'civic_c999_test-contaminated.staged.json')));
+
   console.log('reconcileRheaDisposition.test.js: PASS');
 } finally {
   fs.rmSync(root, { recursive: true, force: true });

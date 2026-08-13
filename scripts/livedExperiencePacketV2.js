@@ -389,6 +389,13 @@ function quotedSpans(text) {
   return spans;
 }
 
+function publicEngineText(value) {
+  return clean(value, 500)
+    .replace(/\bstuck-initiative\b/gi, 'Initiative stall')
+    .replace(/\bconstruction-planning\b/gi, 'the supplied planning phase')
+    .replace(/\bmarked high\b/gi, 'flagged for review');
+}
+
 function renderRecordsBrief(packet) {
   assertBase(packet, 'W3');
   if (!packet.task || packet.task.writingMode !== 'RECORDS_BRIEF') {
@@ -401,7 +408,7 @@ function renderRecordsBrief(packet) {
   const quotes = packet.manifest.approvedQuotes || [];
   const subjects = new Map((packet.manifest.approvedSubjects || []).map(row => [row.id, row]));
   const closeQuestion = clean(packet.signal && packet.signal.plan && packet.signal.plan.closeQuestion, 400);
-  const title = clean(packet.task.assignment, 500).replace(/\s+stalled in\s+/i, ': stalled in ');
+  const title = publicEngineText(packet.task.assignment).replace(/\s+stalled in\s+/i, ': stalled in ');
   const sourceLines = quotes.flatMap(quote => {
     const subject = subjects.get(quote.speakerId);
     const profile = subject && clean(subject.profile, 300);
@@ -419,7 +426,7 @@ function renderRecordsBrief(packet) {
     '',
     'The supplied record establishes the following:',
     '',
-    ...facts.map(row => '- ' + clean(row.text, 500)),
+    ...facts.map(row => '- ' + publicEngineText(row.text)),
     '',
     'Those supplied claims define the current record for this brief.',
     '',

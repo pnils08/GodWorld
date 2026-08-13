@@ -17,16 +17,33 @@ const packet = interview.prepareInterviewPacket(base);
 assert.equal(packet.output.contract, interview.CONTRACT);
 assert.equal(packet.lattice, undefined);
 assert.match(packet.output.rule, /preserves quote exactly/);
-assert.match(interview.citizenEvidenceGuard(), /real simulated-life context/);
+assert.match(interview.citizenEvidenceGuard(false), /does not supply story-linked lived evidence/);
 
-const authored = 'I pass that corner after work, and I want to know why the plan has not moved.';
+const authored = 'I think nine cycles without advancement is too long.';
 const result = interview.validateInterviewOutput({
-  answer: 'quote', quote: authored, fact_ids: ['F-TEST'], basis: 'lived-context',
+  answer: 'quote', quote: authored, fact_ids: ['F-TEST'], basis: 'direct-reaction',
   unverifiedLead: [], abstain_reason: null,
 }, packet);
 assert.equal(result.publishableQuote, authored, 'backend must preserve citizen speech exactly');
 assert.equal(result.authoredQuote, true);
 assert.match(result.quoteId, /^Q-POP-99999-/);
+
+assert.throws(() => interview.validateInterviewOutput({
+  answer: 'quote',
+  quote: 'What feels off is how long this has been dragging on without any real updates and promises.',
+  fact_ids: ['F-TEST'], basis: 'direct-reaction', unverifiedLead: [], abstain_reason: null,
+}, packet), /unsupplied history/);
+
+assert.throws(() => interview.validateInterviewOutput({
+  answer: 'quote',
+  quote: 'To me, they keep redrawing the same plans without ever picking up a shovel.',
+  fact_ids: ['F-TEST'], basis: 'direct-reaction', unverifiedLead: [], abstain_reason: null,
+}, packet), /unsupplied history/);
+
+assert.throws(() => interview.validateInterviewOutput({
+  answer: 'quote', quote: authored, fact_ids: ['F-TEST'], basis: 'lived-context',
+  unverifiedLead: [], abstain_reason: null,
+}, packet), /requires addressable story-linked evidence/);
 
 assert.throws(() => interview.validateInterviewOutput({
   answer: 'quote',
@@ -49,7 +66,7 @@ assert.throws(() => interview.validateInterviewOutput({
 
 const abstain = interview.validateInterviewOutput({
   answer: 'abstain', quote: null, fact_ids: [], basis: null,
-  unverifiedLead: [], abstain_reason: 'no_lived_basis',
+  unverifiedLead: null, abstain_reason: 'no_lived_basis',
 }, packet);
 assert.equal(abstain.publishableQuote, null);
 

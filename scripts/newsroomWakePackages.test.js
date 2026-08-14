@@ -18,9 +18,10 @@ assert.equal(jax.packetContract, 'v2');
 assert.equal(packagesApi.routeFor(jax, 'angle').model, 'meta-llama/llama-3.3-70b-instruct');
 assert.equal(packagesApi.routeFor(jax, 'report').model, 'meta-llama/llama-3.3-70b-instruct');
 assert.equal(packagesApi.routeFor(jax, 'write').model, 'anthropic/claude-sonnet-5');
-assert.equal(jax.reviewProfile.canonPolicy, 'exhaustive');
+assert.equal(jax.reviewProfile.canonPolicy, 'load-bearing');
 assert.equal(jax.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
-assert.deepStrictEqual(jax.reviewProfile.authorizedTexture, []);
+assert.ok(jax.reviewProfile.authorizedTexture.some(v => v.includes('many generic bars')));
+assert.ok(jax.reviewProfile.authorizedTexture.some(v => v.includes('count of generic bar visits')));
 assert.ok(jax.reviewProfile.textureConditions.some(v => v.includes('backend-composed')));
 assert.ok(jax.reviewProfile.canonBlockers.some(v => v.includes('official inaction')));
 

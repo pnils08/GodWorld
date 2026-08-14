@@ -45,7 +45,8 @@ one open question. Their configured writer model remains recorded for a future
 reporting-rich branch; it is not spent on the thin branch.
 Jax remains inactive. His local rebuild now converts one selected audit pattern
 into a two-sided data-accountability brief with distinct evidence pointers,
-affected-resident-first sourcing, and no generic scene authority; fresh attended
+affected-resident-first then citywide sourcing, and his established bar/street
+first-person scene authority; fresh attended
 W1 -> W2 -> W3, contamination, and Rhea proof remain the activation gate.
 Scheduled journalists without an active package are skipped; the legacy generic
 prompt is not a fallback.
@@ -356,7 +357,7 @@ slice and model text is a starting work surface, not an adopted contract.
 
 | Package | Seat / POPID | Domain | Contract and slice surface | Model route | Package | Proof |
 |---|---|---|---|---|---|---|
-| JAX-LEP2-1 | Jax Caldera / POP-00799 | accountability | Inactive; local sim-only two-sided data-audit rebuild complete, attended proof open | route withdrawn pending proof | [ ] | C103 now binds each mismatch side to its own audit source, prioritizes affected residents, and forbids generic scene invention; W1-W3/contamination/Rhea proof remains |
+| JAX-LEP2-1 | Jax Caldera / POP-00799 | accountability | Inactive; strongest-signal sim slice with sourced hard facts and persona-authorized bar/street texture, attended proof open | route withdrawn pending proof | [ ] | Affected residents lead, city residents fill the bench, and each typed mismatch side retains its source; W1-W3/contamination/Rhea proof remains |
 | CARMEN-LEP2-1 | Carmen Delaine / POP-00011 | civic ledger | Article LEP/2; initiatives/votes/money | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed; one medium public-wording flag remains |
 | PSLAYER-LEP2-1 | P Slayer / POP-00008 | sports | Article LEP/2; typed fan pulse | Llama / Llama / local source brief | [x] | attended W1-W3/Rhea passed; [ ] reporting-rich column |
 | JORDAN-LEP2-1 | Jordan Velez / POP-00153 | economics/labor | Article LEP/2; economic/storefront | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed with zero candidates/quotes |
@@ -796,3 +797,4 @@ so an attended visual proof correctly remains open until Saturday compile.
 - 2026-08-13 (codex) — Rebuilt the four non-Jax lattice-bearing packages under `CITIZEN_INTERVIEW/1`: Trevor passed 1/3 direct reactions and Simon 1/1; Anthony and Tanya rejected unsupported responses and emitted quote-free recaps. All four passed Packet-aware Rhea and deterministic contamination checks, bringing Saturday's dry-run scope to eighteen clean C103 Articles. Jax remains inactive and story-linked lived exposure remains unproven.
 - 2026-08-14 (codex) — Diagnosed the fresh unattended W1/W2 chain: Graye's invalid supplied-target output and three zero-quote runs were held gates, not empty candidate pools. Restored the bounded four-person W2 bench so affected/assigned citizens stay first, then same-neighborhood and city residents remain available after a reporter-selected target abstains or fails the direct-speech contract. Local Packet/package tests passed; fresh cron proof remains open.
 - 2026-08-14 (codex) — Rebuilt inactive Jax around the selected audit pattern: the C103 safety mismatch and unavailable comparison history carry separate source pointers into W1, affected residents lead the candidate pool, unrelated health data cannot cross into the story, and generic scene invention is forbidden. Local gates pass; paid attended W1-W3, contamination, and Rhea proof remain open.
+- 2026-08-14 (codex) — Corrected the unauthorized Jax policy in `96d1c18d`: strongest stink signals and stalled Initiatives remain eligible regardless of attached citizens; active city residents fill missing interview seats; and Jax retains first-person bar/street texture, including a route through many generic bars. Hard world claims, named entities, and attributed citizen speech remain source-bound. Package stays inactive pending attended proof.

@@ -82,9 +82,6 @@ function scoreEntry(entry, desk) {
   if (!entry || !entry.ref) return null;
   const label = entry.label || '';
   const kind = entry.kind || '';
-  // Stall diagnosis is a civic decision demand, not a firebrand assignment.
-  // Jax covers the bill (approval crash, replacement) once physics produce it.
-  if (/\bstuck-initiative\b/i.test(label)) return null;
   // Prefer explicit anomalies; still allow initiative/decision rows that carry
   // stuck/implementation language (implementation-gap class).
   const isAnomaly = kind === 'anomaly';

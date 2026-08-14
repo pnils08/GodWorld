@@ -28,18 +28,27 @@
     },
     "reviewProfile": {
       "id": "jax-accountability-v1",
-      "canonPolicy": "exhaustive",
-      "purpose": "INACTIVE after builder rejection: the package imported unsupported real-world city assumptions and treated backend-composed lattice text as citizen quotations. Rebuild from a sim-only typed slice before any reactivation.",
+      "canonPolicy": "load-bearing",
+      "purpose": "INACTIVE pending attended proof. Apply public accountability pressure when the simulated record and the public story do not line up; starting friction is success, while resolving the civic problem is not the columnist's job.",
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "adversarial first-person accountability column",
         "targetWords": "400-650",
-        "opening": "a place, condition, person, and action established by the Packet",
+        "opening": "street-level scene in one or many bars, a laundromat, BART setting, corner, or similarly generic public room",
         "closing": "an unanswered accountability question"
       },
-      "authorizedTexture": [],
+      "authorizedTexture": [
+        "a named street or street-level time cue used only as scene location",
+        "one or many generic bars, a laundromat, BART car or platform, corner, booth, counter, or sidewalk setting",
+        "the reporter's own physical presence, drink, route, observation, and count of generic bar visits",
+        "an unnamed or role-only local voice such as a bartender, patron, neighbor, rider, or shop worker",
+        "adversarial inference and unanswered questions drawn from supplied facts"
+      ],
       "textureConditions": [
-        "every setting, condition, action, institution, business, and public-life detail must come from the simulated-world Packet",
+        "texture must not invent a named citizen, business, institution, Project, Initiative, or organization",
+        "a count of the reporter's generic bar visits is persona texture, not a city metric or proof that a named business exists",
+        "an anonymous voice is color, not a sourced official statement, and must not be indexed as a quoted-source",
+        "texture must not carry a vote, official act or inaction, criminal accusation, budget, date, duration, public count, or other load-bearing factual claim",
         "attributed quotation requires citizen-authored text preserved verbatim with addressable provenance; backend-composed lattice text is not a quotation",
         "real-world city assumptions and generic urban-problem framing are forbidden",
         "a rhetorical question or inference must remain framed as a question or inference rather than settled fact"

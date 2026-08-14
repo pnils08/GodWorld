@@ -27,6 +27,8 @@ console.log('candidate-bound two-sided audit:');
   fs.writeFileSync(path.join(tmp, 'output', 'simulation_ledger_snapshot.jsonl'), [
     { POPID: 'POP-99001', Name: 'Test Resident One', RoleType: 'Mechanic', Neighborhood: 'Test Hood', Status: 'active' },
     { POPID: 'POP-99002', Name: 'Test Resident Two', RoleType: 'Teacher', Neighborhood: 'Second Hood', Status: 'active' },
+    { POPID: 'POP-99003', Name: 'Test Resident Three', RoleType: 'Baker', Neighborhood: 'Third Hood', Status: 'active' },
+    { POPID: 'POP-99004', Name: 'Test Resident Four', RoleType: 'Nurse', Neighborhood: 'Fourth Hood', Status: 'active' },
   ].map(row => JSON.stringify(row)).join('\n') + '\n');
   fs.writeFileSync(path.join(tmp, 'output', 'engine_audit_c999.json'), JSON.stringify({
     patterns: [{
@@ -59,22 +61,31 @@ console.log('candidate-bound two-sided audit:');
     top: health, candidates: [health, mismatch], illnessRate: 10.1,
     maxScore: 40, shouldForce: true, candidateCount: 2
   } });
-  ok('walks from source-less health alert to sourced mismatch', slice.stink.ref === mismatch.ref);
+  ok('keeps the strongest world signal when no citizens are attached', slice.stink.ref === health.ref);
+  ok('fills a four-person city bench instead of changing the story',
+    slice.citizens.length === 4 && slice.citizens.every(row => row.why === 'city-resident'));
+  ok('bar-going remains Jax-authorized scene texture',
+    /one or many bar/.test(slice.scene.colorRoom) && /own presence or route/.test(slice.scene.colorRoom));
+
+  const auditSlice = buildJaxSlice(999, { root: tmp, report: {
+    top: mismatch, candidates: [mismatch], illnessRate: 10.1,
+    maxScore: 38, shouldForce: true, candidateCount: 1
+  } });
   ok('contradiction stays on selected safety signal',
-    /Safety Initiative/.test(slice.contradiction.a) && !/illness/i.test(JSON.stringify(slice.contradiction)));
-  ok('second side exposes missing comparison history', /no prior audit/i.test(slice.contradiction.b));
-  ok('primary affected hood anchors the story', slice.story.hood === 'Test Hood');
-  ok('generic city invention is forbidden', /Do not invent a bar/.test(slice.scene.colorRoom));
+    /Safety Initiative/.test(auditSlice.contradiction.a) &&
+      !/illness/i.test(JSON.stringify(auditSlice.contradiction)));
+  ok('second side exposes missing comparison history', /no prior audit/i.test(auditSlice.contradiction.b));
+  ok('primary affected hood anchors the story', auditSlice.story.hood === 'Test Hood');
   const packet = livedPacketV2.buildAnglePacket({
     cycle: 999, desk: 'civic', reporter: { name: 'Jax Caldera', popid: 'POP-00799' },
-    story: slice.story, approach: slice.approach, slice, lane: []
+    story: auditSlice.story, approach: auditSlice.approach, slice: auditSlice, lane: []
   });
   ok('typed Jax creative brief survives to W1',
     packet.task.creativeBrief && packet.task.creativeBrief.kind === 'data-accountability');
   ok('both mismatch sides retain distinct sources',
     packet.known.some(row => /evidence\.fields$/.test(row.src)) &&
       packet.known.some(row => /\.measurement$/.test(row.src)));
-  const secondSide = packet.known.filter(row => row.text === slice.contradiction.b);
+  const secondSide = packet.known.filter(row => row.text === auditSlice.contradiction.b);
   ok('second side appears once with its own provenance',
     secondSide.length === 1 && /\.measurement$/.test(secondSide[0].src));
   fs.rmSync(tmp, { recursive: true, force: true });

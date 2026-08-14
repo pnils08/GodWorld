@@ -6,9 +6,9 @@
  * frame + citizens with RoleType + scene-color from existing cycle artifacts
  * (weather, neighborhood_texture, Who Lived It, Chaos_Cars, bonds).
  *
- * Color is bounded: only pointers and ledger-backed profiles. Jax may arrange
- * supplied sim detail, but may not invent a bar, street condition, career, or
- * person. The Packet must establish both sides of every mismatch he publishes.
+ * Jax may invent bar/street texture, including his own route through one or
+ * many bars, so long as it contradicts no supplied sim fact. Named citizens,
+ * careers, businesses, institutions, and load-bearing claims remain sourced.
  *
  * Usage:
  *   node scripts/buildJaxSlice.js --cycle 102
@@ -232,6 +232,15 @@ function collectCitizens(top, signal, ledger) {
       pushPop(row.POPID, 'same-hood-ledger');
     }
   }
+  // A missing affected/same-hood pool must not erase the world's strongest
+  // signal. Fill the interview bench from active city residents instead.
+  if (out.length < 4) {
+    for (const row of ledger.byPop.values()) {
+      if (out.length >= 4) break;
+      if (String(row.Status || '').toLowerCase() !== 'active') continue;
+      pushPop(row.POPID, 'city-resident');
+    }
+  }
   return out.slice(0, 12);
 }
 
@@ -319,7 +328,8 @@ const FIREBRAND_APPROACH =
   'Firebrand approach (sim stink-audit): do NOT open from the official timeline. ' +
   'Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay, crisis with no owner. ' +
   'Write into the contradiction. Name who must answer. End on the unanswered question. ' +
-  'Scene detail must come from the typed sim slice; do not import a generic city, street, bar, business, or institution. ' +
+  'Scene color is yours (weather, street, bar), including your own route through one or many bars, so long as it contradicts nothing on this slice. ' +
+  'Do not invent a named business or institution that the sim has not supplied. ' +
   'Never invent careers for named people — RoleType lines are immutable. Never invent citizen names.';
 
 /**
@@ -330,13 +340,7 @@ function buildJaxSlice(cycle, opts) {
   const root = o.root || ROOT;
   const scanner = require(path.join(__dirname, 'stink-scanner'));
   const report = o.report || scanner.scanCycle(cycle, { root });
-  let top = report.top;
-  if (top && /\bstuck-initiative\b/i.test(String(top.label || ''))) {
-    top = null;
-    if (Array.isArray(report.candidates)) {
-      top = report.candidates.find(c => !/\bstuck-initiative\b/i.test(String(c.label || ''))) || null;
-    }
-  }
+  const top = report.top;
   const signal = loadJson(path.join(root, 'output', 'desk_signal_c' + cycle + '.json'));
   const summary = loadText(path.join(root, 'output', 'world_summary_c' + cycle + '.md'));
   const texture = loadText(path.join(root, 'output', 'neighborhood_texture_c' + cycle + '.md'));
@@ -352,22 +356,7 @@ function buildJaxSlice(cycle, opts) {
     };
   }
 
-  // Prefer a high-score stink that still yields an interview pool. Some hoods
-  // appear on Neighborhood_Map (e.g. Brooklyn) with ZERO ledger residents —
-  // force-slotting that stink leaves Jax without voices. Walk candidates by score.
-  let citizens = collectCitizens(top, signal, ledger);
-  let chosen = top;
-  if (!citizens.length && Array.isArray(report.candidates)) {
-    for (const cand of report.candidates) {
-      const pool = collectCitizens(cand, signal, ledger);
-      if (pool.length) {
-        chosen = cand;
-        citizens = pool;
-        break;
-      }
-    }
-  }
-  top = chosen;
+  const citizens = collectCitizens(top, signal, ledger);
 
   const auditPattern = auditPatternForRef(root, cycle, top.ref);
 
@@ -413,8 +402,9 @@ function buildJaxSlice(cycle, opts) {
     whoLivedIt: whoLivedForHood(summary, hood),
     chaos: chaosLinesForHood(summary, hood),
     colorRoom:
-      'Use only the supplied weather, neighborhood texture, Who Lived It lines, chaos rows, and bond edges. ' +
-      'Do not invent a bar, street condition, public scene, business, institution, unnamed source, or named person. ' +
+      'You may invent one or many bar/street/sensory scenes and Jax\'s own presence or route through them, ' +
+      'so long as the color contradicts no supplied sim fact. A generic bar is persona texture, not a new canon business. ' +
+      'Named people must stay on the CITIZENS list or be unnamed. Do not invent a named business or institution. ' +
       'RoleType is immutable — do not reassign careers.'
   };
 

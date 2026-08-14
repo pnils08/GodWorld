@@ -230,12 +230,6 @@ A–C is engine-sheet. D–F is engine + media. G is research-build / civic / Mi
 
 ---
 
-## Applications (living)
-
-- 2026-08-14 — filed from Mike's process; no plan, no code.
-
----
-
 ## Changelog
 
 - 2026-08-14 (grok) — Codebase pass. Citizens, seeds, LifeHistory, voice files, scale. Tab choice left open.

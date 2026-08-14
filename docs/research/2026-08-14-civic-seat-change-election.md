@@ -103,16 +103,130 @@ The later plan must walk this list before it writes. An `Election_Log` row with 
 
 ## What the later plan must carry (not designed here)
 
-- Extend `Election_Log` only. Add the live-race columns on that tab. Update every current reader in the same change.
-- Added or reused columns for: race status (`open` / `incumbent-saved` / `challenger-seated` / `retirement-pending-vote`), entered-cycle, trigger (`approval-40` / `retirement`), challenger POPID/origin, media-heat signal. Existing Incumbent / Challenger / Winner / Narrative stay.
-- Who writes the row at 40: the approval function (it already sees the number) vs a new small writer after it.
-- Who names the challenger next cycle: same function, or a dedicated fill that runs after ApprovalRatings.
-- Who seats below 20: one function. Update office card + citizen row + ledger status together.
-- November `runCivicElections_` stay / shrink / write the same tab with a finished status so it does not collide with an open fitness race.
-- Media: how "interview both" and "losing interviews → faster hits" become engine numbers without inventing quotes.
-- Retirement two-candidate vote: its own design beat, after the approval-race works.
-- Tests: entry, fill order, no-double-list, win only below 20, mint dirty, no POPID leak into prose, stub/coupling updated.
-- Clasp / live sheet: engine-sheet. This research does not authorize that.
+Tab choice is **still open** (repurpose `Election_Log` vs a new live-race tab). Do not treat the 2026-08-14 correction commit as a lock.
+
+A later plan is a **phased month**, not one session. Suggested phase cut is in §Scale below. Until then: no engine, no schema write, no voice authoring.
+
+---
+
+## Codebase facts (verified 2026-08-14)
+
+What the idea thinks exists, vs what the files do.
+
+### 1. `Election_Log` is a result receipt, not a race
+
+Writer: `runCivicElectionsv1.js` only, and only on November trigger (cycle-of-year 45, even years, Group A or B). One append per contested seat. Columns are all names and flavor: Timestamp, Cycle, GodWorldYear, OfficeId, Title, District, Incumbent, Challenger, Winner, Margin, MarginType, IncumbentAdvantage, EconFactor, Narrative.
+
+**No POPID column.** Incumbent and Challenger are display names. Winner is a display name.
+
+Readers treat a row as finished:
+
+- `mediaRoomBriefingGenerator.js` `getCivicContext_` — last 5 cycles → "ELECTION RESULTS" lead. Winner vs incumbent decides who is the loser.
+- `buildCyclePacket.js` — same civic context.
+- `utilities/cycleRollback.js` — rolls the tab back by Cycle.
+
+`S.electionResults` is written to memory on that one November cycle. Grep found **no other JS reader**. The durable path is the sheet.
+
+### 2. Citizens do not really map onto that row
+
+November already picks a challenger from `Simulation_Ledger` (Tier 2–4, not already CIV, active). District match is a substring of `seat.title` against neighborhood — weak.
+
+If the challenger wins (upset), the same function:
+
+- writes Holder + PopId on `Civic_Office_Ledger`
+- finds the citizen on `Simulation_Ledger` **by full name string** and sets `CIV (y/n)=y` and `TierRole` to the office title
+- flips `ctx.ledger.dirty` (this path is correct)
+
+It does **not**:
+
+- write POPID onto `Election_Log`
+- set `ClockMode=CIVIC`
+- clear the old holder's CIV / ClockMode / TierRole
+- pull `Generic_Citizens` or mint out-of-town (empty pool → "Unopposed" or vacant open-seat "TBD")
+- write a LifeHistory line for win, loss, or campaign
+
+So "citizens mapping onto Election_Log" is new work. Today's map is name-on-a-receipt plus a name-matched CIV flag on upset only.
+
+Mike's fill order (SL → Generic_Citizens → out-of-town) does not exist on this writer.
+
+### 3. Story seeds do not read elections
+
+`applyStorySeeds_` (`phase07-evening-media/applyStorySeeds.js`) builds civic seeds from civic load, QoL, pattern/shock, holidays. It does **not** read `Election_Log`, `S.electionResults`, or approval triggers.
+
+`S.storyHooks` is a different bus (chaos-cars, grief, approval-ceiling leftover). Newsroom/sift can see hooks; they are not the Story_Seed_Deck.
+
+For "story seeds start to show the election" the plan must add a writer. Two existing doors:
+
+- emit a `S.storyHooks` item when a seat is listed / heated / seated, and teach a seed or desk path to read it
+- write a Story_Seed_Deck / Storyline_Tracker row
+
+Neither door is wired today. Media will not interview a challenger just because a name is on `Election_Log`.
+
+### 4. LifeHistory for civic people is a different engine
+
+`generateCivicModeEvents_` (Phase 5, after ApprovalRatings) writes `Simulation_Ledger.LifeHistory` plus `LifeHistory_Log` for rows with **`ClockMode === "CIVIC"`**. Role flavor (mayor / council / DA / chief) comes from `Civic_Office_Ledger` lookup by POPID, else RoleType text.
+
+Chance is low (~15–40%). Pools are generic civic days ("reviewed approval numbers"), not "I am in a race" or "I lost the chair."
+
+`runCivicRoleEngine_` also writes LifeHistory_Log (civic-role events). November elections write none.
+
+If a new officeholder is not ClockMode CIVIC, they get **no** civic life events. November seating today leaves ClockMode alone, so an upset winner can stay ENGINE-mode and miss this writer.
+
+Challengers who are still ordinary citizens get ordinary life engines, not campaign events.
+
+### 5. A new office does not get a voice file
+
+This is the largest non-engine gap.
+
+Civic Sunday (`cron-civic-run.js`) loads `.claude/agents/<agentDir>/IDENTITY.md` + LENS + RULES. The map is **static JSON**: `scripts/civic-office-map.json` hard-codes holder name, POPID, and `agentDir`.
+
+Examples:
+
+- `MAYOR-01` → `civic-office-mayor` → Avery Santana, POP-00034
+- Council seats share **faction** agents (`civic-office-opp-faction`, `crc`, `ind-swing`), not one file per person
+- Some offices have `agentDir: null` (Public Defender) — they do not speak
+
+`civic-office-mayor/IDENTITY.md` is Avery. Traits, POPID, term, voice. The engine cannot rewrite `.claude/agents/` (control plane). `/make-citizen-voice` is a **hand-authored** research-build skill for Tier-1 conversation voices, not a cycle writer.
+
+Position wall (`scripts/officeWall.js`) keys continuity by the map's POPID. A new holder on the office card still injects Avery's wall until the map moves.
+
+So "they win and then they speak" is not one function. It is at least:
+
+1. office card + citizen row (engine)
+2. `civic-office-map.json` holder/POPID swap (repo file, civic cron)
+3. IDENTITY rewrite or a generic office prompt that reads the live holder (control plane or a new injection)
+4. empty or migrated position wall
+5. Mike/Mara if the seat is canon-heavy (Mayor is)
+
+Council is easier if they keep speaking through the faction agent. Mayor / DA / Chief are person-shaped files. A minted out-of-town with no canon cannot pass `/make-citizen-voice` without invention.
+
+### 6. Approval at 40 / 20 is a different machine
+
+`updateCivicApprovalRatings_` scores `^COUNCIL` / `^MAYOR` every cycle. On main it does not write `Election_Log`. The unsaved leftover tries to campaign on Notes and seat below 20 without this tab.
+
+Nothing today lists a seat at 40 or seats from this log at 20.
+
+### Scale (why this is about a month)
+
+| Layer | What has to move | Why it is not a small patch |
+|---|---|---|
+| A | Live race rows (new cols or new tab) + status open vs won | Every current `Election_Log` reader + November writer |
+| B | Challenger fill SL → GC → mint, POPID on the row, `ledger.dirty` | New citizen-row writer; allocator; CIV/ClockMode |
+| C | Approval 40 lists, 20 seats, one seater | Two Phase-5 functions must not both rewrite Holder |
+| D | Story hook / seed so desks see the race | `applyStorySeeds_` and desk packets have no race input |
+| E | LifeHistory lines for listed / heated / seated / saved | Civic event pools have no race text; ClockMode gate |
+| F | Media "interview both" + faster hits if incumbent is losing | New signal; edition civic rating is citywide, not per-race |
+| G | Voice + map + wall for a seated winner | Control plane + static map + hand-authored IDENTITY |
+| H | Docs: stub, coupling, SCHEMA_HEADERS, tests, clasp | Required same-commit as A–C |
+
+A–C is engine-sheet. D–F is engine + media. G is research-build / civic / Mike. H rides every land. That is why one session cannot hold it.
+
+---
+
+## Applications (living)
+
+- 2026-08-14 — filed from Mike's process; no plan, no code.
+- 2026-08-14 — codebase pass: Election_Log names-only; no seed reader; civic LifeHistory is ClockMode-gated; office voices are static person files.
 
 ---
 
@@ -124,5 +238,6 @@ The later plan must walk this list before it writes. An `Election_Log` row with 
 
 ## Changelog
 
+- 2026-08-14 (grok) — Codebase pass. Citizens, seeds, LifeHistory, voice files, scale. Tab choice left open.
 - 2026-08-14 (grok) — Correction: process home is `Election_Log`. Dropped the invented second tab.
 - 2026-08-14 (grok) — Initial extraction. Mike process + existing November/`Election_Log`/approval facts. Verdict `adopt`, no plan ignited.

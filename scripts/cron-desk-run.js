@@ -477,7 +477,10 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
 }
 
 function runCitizenQuotePass(asks, cycle, stem) {
-  if (!asks.length) throw new Error('W2 refused: no ledger citizens to interview');
+  if (!asks.length) {
+    log('no candidate citizens in the lane this cycle — packet will be quoteless');
+    return { quotes: [], interviews: [] };
+  }
   const asksPath = path.join(COMPARE, stem + 'asks.json');
   fs.writeFileSync(asksPath, JSON.stringify(asks, null, 2));
   log('citizenVoice --batch ' + asks.length + ' (record=' + asks.some(a => a.record) + ')');
@@ -508,9 +511,6 @@ function runCitizenQuotePass(asks, cycle, stem) {
     quotes = parseBatchQuotes(out);
   }
   log('quotes landed: ' + quotes.length + '/' + asks.length + (quotes.length ? ' (' + quotes.map(q => q.name).join(', ') + ')' : ''));
-  if (!quotes.length) {
-    throw new Error('W2 refused: citizenVoice returned 0 quotes — no summary article');
-  }
   return { quotes, interviews };
 }
 
@@ -2310,25 +2310,21 @@ async function runWrite(assign) {
     const asks = collectQuoteAsks(lane, askVoice, story, angle);
     if (DRY_RUN) {
       log('W3 last-chance would interview: ' + asks.map(a => a.pop).join(', '));
-      throw new Error('W3 refused: 0 citizen quotes — no summary article (dry-run listed '
-        + asks.length + ' last-chance citizens)');
+    } else {
+      log('W3 last-chance: packet had 0 quotes — calling citizenVoice');
+      const pass = runCitizenQuotePass(asks, cycle, stem);
+      quotes = pass.quotes;
+      packet.quotes = quotes;
+      packet.quotesRequested = asks.length;
+      packet.quotesLanded = quotes.length;
+      if (pass.interviews) packet.interviews = pass.interviews;
+      fs.writeFileSync(packetPath, JSON.stringify(packet, null, 2));
+      writeCitizenArc(stem, {
+        cycle, desk, persona: personaSlug,
+        story: (packet.assignment && packet.assignment.story) || (angle.assignment && angle.assignment.story),
+        quotes
+      });
     }
-    log('W3 last-chance: packet had 0 quotes — calling citizenVoice');
-    const pass = runCitizenQuotePass(asks, cycle, stem);
-    quotes = pass.quotes;
-    packet.quotes = quotes;
-    packet.quotesRequested = asks.length;
-    packet.quotesLanded = quotes.length;
-    if (pass.interviews) packet.interviews = pass.interviews;
-    fs.writeFileSync(packetPath, JSON.stringify(packet, null, 2));
-    writeCitizenArc(stem, {
-      cycle, desk, persona: personaSlug,
-      story: (packet.assignment && packet.assignment.story) || (angle.assignment && angle.assignment.story),
-      quotes
-    });
-  }
-  if (!quotes.length) {
-    throw new Error('W3 refused: 0 citizen quotes — will not write a summary article');
   }
   // Task 2.5.2: the assignment reaches the writer — from today's fanout entry,
   // falling back to the wake-1 angle artifact's copy. The wake-1 canon facts

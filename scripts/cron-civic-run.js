@@ -49,7 +49,6 @@ const { lintText } = require('./lintCivicPackets');
 const { getDistrictForNeighborhood } = require('../lib/districtMap');
 const getCurrentCycle = require('../lib/getCurrentCycle');
 const officeWall = require('./officeWall');
-const civicMust = require('./civicMustDecide');
 const trackerSnapshot = require('./initiativeTrackerSnapshot');
 
 /** Non-fatal: prior CIVIC positions for holder of agentDir. */
@@ -990,12 +989,6 @@ function statementsTouching(voiceJsons, initId, tracker) {
   }
   return hits;
 }
-function loadMustDecide(cycle) {
-  const audit = readJson(path.join(ROOT, 'output', 'engine_audit_c' + cycle + '.json'));
-  const tracker = trackerSnapshot.loadOrRebuild(cycle);
-  return civicMust.demandsFromAudit(audit || {}, tracker || {});
-}
-
 function loadVoiceJsons(cycle) {
   const dir = path.join(ROOT, 'output', 'civic-voice');
   const out = {};
@@ -1018,36 +1011,6 @@ async function runDecide() {
   const model = officeModel(officeMap, 'civic-office-mayor');
   log('mayor model=' + model);
   const wallInj = await positionWallInject(officeMap, 'civic-office-mayor');
-  const summaryPath = path.join(ROOT, 'output', 'world_summary_c' + cycle + '.md');
-  const summaryMd = fs.existsSync(summaryPath) ? fs.readFileSync(summaryPath, 'utf8') : '';
-  const approvals = summaryMd ? parseApprovalTable(findSection(splitSections(summaryMd), 'Approval Ratings')) : {};
-  if (civicMust.isMayorVacant(approvals)) {
-    log('mayor seat is vacant — no decide call. The chair is empty.');
-    const MARKER = "## MAYOR'S DECISIONS THIS CYCLE";
-    const cascade = [MARKER, '',
-      '- The Mayor\'s chair is vacant this cycle. There is no executive decision.',
-      '',
-      'The city has no Mayor. React in your own voice — the work still has to move.'];
-    let injected = 0;
-    if (fs.existsSync(PACKETS)) {
-      for (const f of fs.readdirSync(PACKETS)) {
-        if (!f.endsWith('_c' + cycle + '.md') || f.startsWith('civic-office-mayor')) continue;
-        const p = path.join(PACKETS, f);
-        let body = fs.readFileSync(p, 'utf8');
-        const at = body.indexOf(MARKER);
-        if (at !== -1) body = body.slice(0, at).replace(/\n+$/, '\n');
-        fs.writeFileSync(p, body.replace(/\n+$/, '\n') + '\n' + cascade.join('\n') + '\n');
-        injected++;
-      }
-    }
-    fs.mkdirSync(CIVIC, { recursive: true });
-    fs.writeFileSync(path.join(CIVIC, 'decide_c' + cycle + '.json'), JSON.stringify({
-      stage: 'decide', cycle: Number(cycle), skipped: 'mayor-vacant',
-      cascadeInjected: injected, ranAt: new Date().toISOString(),
-    }, null, 2));
-    console.log('\n=== decide skipped: mayor vacant; cascade into ' + injected + ' packet(s) ===');
-    return;
-  }
   const user = 'YOUR PENDING DECISIONS PACKET (cycle ' + cycle + '):\n\n' + packet + wallInj + '\n\n' + outputContract('mayor', cycle, initiatives);
   const r = await callVoice('civic-office-mayor', model, user, 5000);
   if (!r || r.error) {
@@ -1609,4 +1572,4 @@ if (require.main === module) {
     .catch(err => { console.error('[civic] Fatal:', err.message); process.exit(1); });
 }
 
-module.exports = { sentimentWord, crimeWord, retailWord, ailmentPerception, cleanLines, parseApprovalTable, parseHoodTable, outputContract, loadMustDecide };
+module.exports = { sentimentWord, crimeWord, retailWord, ailmentPerception, cleanLines, parseApprovalTable, parseHoodTable, outputContract };

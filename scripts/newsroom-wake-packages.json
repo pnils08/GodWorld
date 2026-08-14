@@ -2,8 +2,8 @@
   "_comment": "ADR-0017 live wake packages. The scheduled fan-out is package-only: a journalist must have one active entry before any wake runs. Models are explicit per wake; reviewProfile is the machine-readable authority Rhea uses to distinguish canon assertions from persona-authorized texture.",
   "freelance-firebrand": {
     "version": "JAX-LEP2-1",
-    "active": false,
-    "requiredDaily": false,
+    "active": true,
+    "requiredDaily": true,
     "persona": "freelance-firebrand",
     "assignment": {
       "desk": "civic",
@@ -29,7 +29,7 @@
     "reviewProfile": {
       "id": "jax-accountability-v1",
       "canonPolicy": "load-bearing",
-      "purpose": "INACTIVE pending attended proof. Apply public accountability pressure when the simulated record and the public story do not line up; starting friction is success, while resolving the civic problem is not the columnist's job.",
+      "purpose": "ACTIVE probationary package. Apply public accountability pressure when the simulated record and the public story do not line up; starting friction is success, while resolving the civic problem is not the columnist's job.",
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "adversarial first-person accountability column",

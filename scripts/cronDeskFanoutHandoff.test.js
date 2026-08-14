@@ -163,15 +163,12 @@ assert.throws(
 );
 
 const liveContext = activateWakeContext(personaAssignment, personaAssignment.persona);
-assert.equal(liveContext.packetContract, null,
-  'inactive Jax package must not enter the scheduled Packet path');
-assert.equal(liveContext.wakePackage, null,
-  'inactive Jax package must remain outside live fanout until attended proof');
+assert.equal(liveContext.packetContract, 'v2');
+assert.equal(liveContext.wakePackage.version, 'JAX-LEP2-1');
 assert.equal(stageRoute('civic', personaAssignment.persona, 'angle').model,
   'meta-llama/llama-3.3-70b-instruct');
 assert.equal(stageRoute('civic', personaAssignment.persona, 'write').model,
-  'meta-llama/llama-3.3-70b-instruct',
-  'inactive Jax package must not leak its Sonnet write override');
+  'anthropic/claude-sonnet-5');
 
 const jordanAssignment = {
   name: 'Jordan Velez',

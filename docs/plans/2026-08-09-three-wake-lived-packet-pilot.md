@@ -27,9 +27,9 @@ pointers:
 **Architecture:** Explicit `--packet-contract=v1|v2` remains an isolated,
 samples-only evaluation namespace and requires `--no-gate`. Live scheduled
 adoption is separate and package-gated through
-`scripts/newsroom-wake-packages.json`. Eighteen active packages automatically use
+`scripts/newsroom-wake-packages.json`. Nineteen active packages automatically use
 LEP/2, zero live writer tools, per-wake model routing, and load-bearing
-manifests interpreted by persona-aware Rhea: Carmen, Luis, Trevor,
+manifests interpreted by persona-aware Rhea: Jax, Carmen, Luis, Trevor,
 P Slayer, Anthony, Hal, Tanya, Simon, Maria, Graye, Mason, Jordan, Kai, Rachel, Lila, Angela,
 Noah, and Sharon. Their typed civic,
 investigation, systems, fan-pulse, sports-analytics, sports-history, sideline, long-view, economic/storefront, arts, public-safety, and
@@ -38,16 +38,16 @@ creative briefs to that same contract.
 Luis's `CIVIC-DOMAIN-SLICE-4` additionally selects between a zero-model local
 `RECORDS_BRIEF` when no reporting events are supplied and the configured Sonnet
 `FULL_INVESTIGATION` path when a typed reporting trail exists.
-Evidence-thin Carmen, Jordan, Kai, Rachel, Lila, Angela, Noah, P Slayer, and Trevor
+Evidence-thin Jax, Carmen, Jordan, Kai, Rachel, Lila, Angela, Noah, P Slayer, and Trevor
 Packets use a zero-model local `SOURCE_BRIEF`: W1/W2 may plan and gather bounded
 statements, but W3 prints only filtered approved facts, exact quote blocks, and
 one open question. Their configured writer model remains recorded for a future
 reporting-rich branch; it is not spent on the thin branch.
-Jax remains inactive. His local rebuild now converts one selected audit pattern
-into a two-sided data-accountability brief with distinct evidence pointers,
-affected-resident-first then citywide sourcing, and his established bar/street
-first-person scene authority; fresh attended
-W1 -> W2 -> W3, contamination, and Rhea proof remain the activation gate.
+Jax is active under the probation wall. His rebuild preserves the strongest
+world signal, distinct evidence pointers, affected-resident-first then citywide
+sourcing, and his established bar/street first-person scene authority. Fresh
+W1 -> W2 -> W3, contamination, and Rhea output remain required product evidence,
+but no longer suppress his scheduled reporting.
 Scheduled journalists without an active package are skipped; the legacy generic
 prompt is not a fallback.
 
@@ -357,7 +357,7 @@ slice and model text is a starting work surface, not an adopted contract.
 
 | Package | Seat / POPID | Domain | Contract and slice surface | Model route | Package | Proof |
 |---|---|---|---|---|---|---|
-| JAX-LEP2-1 | Jax Caldera / POP-00799 | accountability | Inactive; strongest-signal sim slice with sourced hard facts and persona-authorized bar/street texture, attended proof open | route withdrawn pending proof | [ ] | Affected residents lead, city residents fill the bench, and each typed mismatch side retains its source; W1-W3/contamination/Rhea proof remains |
+| JAX-LEP2-1 | Jax Caldera / POP-00799 | accountability | Active probationary strongest-signal sim slice with sourced hard facts and persona-authorized bar/street texture | Llama / Llama / Sonnet | [x] | Affected residents lead, city residents fill the bench, and each typed mismatch side retains its source; inspect fresh W1-W3/contamination/Rhea output |
 | CARMEN-LEP2-1 | Carmen Delaine / POP-00011 | civic ledger | Article LEP/2; initiatives/votes/money | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed; one medium public-wording flag remains |
 | PSLAYER-LEP2-1 | P Slayer / POP-00008 | sports | Article LEP/2; typed fan pulse | Llama / Llama / local source brief | [x] | attended W1-W3/Rhea passed; [ ] reporting-rich column |
 | JORDAN-LEP2-1 | Jordan Velez / POP-00153 | economics/labor | Article LEP/2; economic/storefront | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed with zero candidates/quotes |
@@ -798,3 +798,4 @@ so an attended visual proof correctly remains open until Saturday compile.
 - 2026-08-14 (codex) — Diagnosed the fresh unattended W1/W2 chain: Graye's invalid supplied-target output and three zero-quote runs were held gates, not empty candidate pools. Restored the bounded four-person W2 bench so affected/assigned citizens stay first, then same-neighborhood and city residents remain available after a reporter-selected target abstains or fails the direct-speech contract. Local Packet/package tests passed; fresh cron proof remains open.
 - 2026-08-14 (codex) — Rebuilt inactive Jax around the selected audit pattern: the C103 safety mismatch and unavailable comparison history carry separate source pointers into W1, affected residents lead the candidate pool, unrelated health data cannot cross into the story, and generic scene invention is forbidden. Local gates pass; paid attended W1-W3, contamination, and Rhea proof remain open.
 - 2026-08-14 (codex) — Corrected the unauthorized Jax policy in `96d1c18d`: strongest stink signals and stalled Initiatives remain eligible regardless of attached citizens; active city residents fill missing interview seats; and Jax retains first-person bar/street texture, including a route through many generic bars. Hard world claims, named entities, and attributed citizen speech remain source-bound. Package stays inactive pending attended proof.
+- 2026-08-14 (codex) — Builder activated JAX-LEP2-1 for probationary scheduled reporting. The package again enters the fixed six-seat rota with Llama/Llama/Sonnet routing; staging, contamination, Rhea, publication, and canon controls remain unchanged.

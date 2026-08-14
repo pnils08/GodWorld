@@ -6,9 +6,9 @@
  * frame + citizens with RoleType + scene-color from existing cycle artifacts
  * (weather, neighborhood_texture, Who Lived It, Chaos_Cars, bonds).
  *
- * Color is bounded: only pointers and ledger-backed profiles. Jax may invent
- * bar/street texture that contradicts nothing; he may not invent careers or
- * people. Scene pack is what the data cannot *be* — sensory room to write into.
+ * Color is bounded: only pointers and ledger-backed profiles. Jax may arrange
+ * supplied sim detail, but may not invent a bar, street condition, career, or
+ * person. The Packet must establish both sides of every mismatch he publishes.
  *
  * Usage:
  *   node scripts/buildJaxSlice.js --cycle 102
@@ -23,6 +23,7 @@ const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
 const COMPARE = path.join(ROOT, 'output', 'cron-compare');
+const { quoteIneligibility } = require('./livedExperiencePacket');
 
 function arg(flag, def) {
   const i = process.argv.indexOf(flag);
@@ -165,6 +166,18 @@ function profileLine(row) {
   return name + ' (' + (row.POPID || '?') + ') — ' + bits.join('; ');
 }
 
+function sourceEligible(row, top) {
+  if (!row) return false;
+  if (/\b(?:journalist|reporter|columnist|editor(?:-in-chief)?)\b/i.test(String(row.RoleType || ''))) {
+    return false;
+  }
+  return !quoteIneligibility(
+    { pop: row.POPID, role: row.RoleType },
+    'civic',
+    { kind: 'anomaly', angle: top && top.label }
+  );
+}
+
 function collectCitizens(top, signal, ledger) {
   const out = [];
   const seen = new Set();
@@ -172,6 +185,7 @@ function collectCitizens(top, signal, ledger) {
     if (!pop || seen.has(pop)) return;
     const row = ledger.byPop.get(pop);
     if (!row) return;
+    if (!sourceEligible(row, top)) return;
     seen.add(pop);
     out.push({
       popid: pop,
@@ -231,7 +245,14 @@ function publicStuckFact(top) {
     ' has not advanced' + (cycles ? ' in ' + cycles + ' cycles' : ' over the supplied span') + '.';
 }
 
-function buildContradiction(top, illnessRate) {
+function auditPatternForRef(root, cycle, ref) {
+  const match = String(ref || '').match(/patterns\[(\d+)\]/i);
+  if (!match) return null;
+  const audit = loadJson(path.join(root, 'output', 'engine_audit_c' + cycle + '.json'));
+  return audit && Array.isArray(audit.patterns) ? audit.patterns[Number(match[1])] || null : null;
+}
+
+function buildContradiction(top, illnessRate, auditPattern, cycle) {
   if (!top) return null;
   const label = top.label || '';
   // metric-imbalance style: "decay [..] with no matching active initiative"
@@ -239,27 +260,58 @@ function buildContradiction(top, illnessRate) {
     return {
       a: label.replace(/^[^|]*\|\s*/, '').trim(),
       b: 'No active initiative (or mitigator) owns this break on the record',
-      frame: 'The map says decay; the program roster does not answer it.'
+      frame: 'The map says decay; the program roster does not answer it.',
+      aSrc: top.ref,
+      bSrc: top.ref,
     };
   }
   if (/stuck-initiative/i.test(label)) {
     return {
       a: publicStuckFact(top),
       b: 'The Initiative remains listed in the supplied tracker.',
-      frame: 'The record shows an Initiative that remains listed but has not advanced; what explains the stall?'
+      frame: 'The record shows an Initiative that remains listed but has not advanced; what explains the stall?',
+      aSrc: top.ref,
+      bSrc: top.ref,
     };
   }
-  if (top.className === 'crisis-unattended' || illnessRate >= 8) {
+  if (auditPattern && auditPattern.type === 'incoherence') {
+    const patternMatch = String(top.ref || '').match(/patterns\[(\d+)\]/i);
+    if (!patternMatch) return null;
+    const patternBase = 'output/engine_audit_c' + cycle + '.json patterns[' + patternMatch[1] + ']';
+    const fields = auditPattern.evidence && auditPattern.evidence.fields || {};
+    const neighborhoods = (fields.contradicting || []).map(row => row && row.name).filter(Boolean);
+    const initiative = fields.Name || 'The supplied Initiative';
+    const phase = String(fields.ImplementationPhase || 'the supplied phase').replace(/-/g, ' ');
+    const expected = /down/i.test(String(fields.expected || '')) ? 'an expected downward safety direction' :
+      'the expected direction';
+    const scope = neighborhoods.length ? neighborhoods.join(', ') : 'the supplied neighborhoods';
     return {
-      a: 'City illness ' + (illnessRate != null ? illnessRate + '%' : 'elevated'),
+      a: initiative + ' is listed as ' + phase + ', while Civis Systems flags readings in ' +
+        scope + ' against ' + expected + '.',
+      b: 'The same Cycle ' + cycle + ' audit says no prior audit is available for comparison.',
+      frame: 'Civis flags a contradiction while its own comparison history is unavailable. What evidence supports the alert?',
+      aSrc: patternBase + '.evidence.fields',
+      bSrc: patternBase + '.measurement',
+      scopeHoods: neighborhoods,
+      measurementAvailable: auditPattern.measurement && auditPattern.measurement.available === true,
+    };
+  }
+  if (top.kind === 'health-crisis' || /#illness-rate\b/i.test(String(top.ref || ''))) {
+    const rate = top.story && top.story.illnessRate != null ? top.story.illnessRate : illnessRate;
+    return {
+      a: 'City illness ' + (rate != null ? rate + '%' : 'elevated'),
       b: 'Page attention still on process timelines / non-health leads',
-      frame: 'A hard city number with no owner on the front of the paper.'
+      frame: 'A hard city number with no owner on the front of the paper.',
+      aSrc: top.ref,
+      bSrc: top.ref,
     };
   }
   return {
     a: label,
     b: 'The tidy official read of the same cycle',
-    frame: 'Something does not line up — write into the gap.'
+    frame: 'Something does not line up — write into the gap.',
+    aSrc: top.ref,
+    bSrc: top.ref,
   };
 }
 
@@ -267,7 +319,7 @@ const FIREBRAND_APPROACH =
   'Firebrand approach (sim stink-audit): do NOT open from the official timeline. ' +
   'Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay, crisis with no owner. ' +
   'Write into the contradiction. Name who must answer. End on the unanswered question. ' +
-  'Scene color is yours (weather, street, bar) so long as it contradicts nothing on this slice. ' +
+  'Scene detail must come from the typed sim slice; do not import a generic city, street, bar, business, or institution. ' +
   'Never invent careers for named people — RoleType lines are immutable. Never invent citizen names.';
 
 /**
@@ -279,6 +331,12 @@ function buildJaxSlice(cycle, opts) {
   const scanner = require(path.join(__dirname, 'stink-scanner'));
   const report = o.report || scanner.scanCycle(cycle, { root });
   let top = report.top;
+  if (top && /\bstuck-initiative\b/i.test(String(top.label || ''))) {
+    top = null;
+    if (Array.isArray(report.candidates)) {
+      top = report.candidates.find(c => !/\bstuck-initiative\b/i.test(String(c.label || ''))) || null;
+    }
+  }
   const signal = loadJson(path.join(root, 'output', 'desk_signal_c' + cycle + '.json'));
   const summary = loadText(path.join(root, 'output', 'world_summary_c' + cycle + '.md'));
   const texture = loadText(path.join(root, 'output', 'neighborhood_texture_c' + cycle + '.md'));
@@ -311,7 +369,13 @@ function buildJaxSlice(cycle, opts) {
   }
   top = chosen;
 
-  const hood = top.hood || null;
+  const auditPattern = auditPatternForRef(root, cycle, top.ref);
+
+  const auditHoods = auditPattern && auditPattern.affectedEntities &&
+    Array.isArray(auditPattern.affectedEntities.neighborhoods)
+    ? auditPattern.affectedEntities.neighborhoods.filter(Boolean)
+    : [];
+  const hood = auditHoods[0] || top.hood || null;
   const popids = citizens.map(c => c.popid);
   const bonds = loadBondEdges(root, popids).map(e => ({
     ...e,
@@ -325,7 +389,7 @@ function buildJaxSlice(cycle, opts) {
     const other = popids.includes(e.a) ? e.b : e.a;
     if (!popids.includes(other) && citizens.length < 12) {
       const row = ledger.byPop.get(other);
-      if (row) {
+      if (sourceEligible(row, top)) {
         citizens.push({
           popid: other,
           name: String(row.Name || '').replace(/\s+/g, ' ').trim(),
@@ -341,7 +405,7 @@ function buildJaxSlice(cycle, opts) {
     }
   }
 
-  const contradiction = buildContradiction(top, report.illnessRate);
+  const contradiction = buildContradiction(top, report.illnessRate, auditPattern, cycle);
   const scene = {
     weather: weatherLine(summary),
     hood,
@@ -349,23 +413,25 @@ function buildJaxSlice(cycle, opts) {
     whoLivedIt: whoLivedForHood(summary, hood),
     chaos: chaosLinesForHood(summary, hood),
     colorRoom:
-      'You may invent bar/street/sensory color that contradicts nothing above. ' +
-      'Named people must stay on the CITIZENS list or be unnamed ("a bartender who asked not to be named"). ' +
-      'RoleType is immutable — do not reassign careers. Soft side-work color only if it does not replace RoleType.'
+      'Use only the supplied weather, neighborhood texture, Who Lived It lines, chaos rows, and bond edges. ' +
+      'Do not invent a bar, street condition, public scene, business, institution, unnamed source, or named person. ' +
+      'RoleType is immutable — do not reassign careers.'
   };
 
   const rawStoryLabel = String(top.label || '');
   const stuckStory = /stuck-initiative/i.test(rawStoryLabel);
-  const publicStoryLabel = stuckStory ? publicStuckFact(top) : rawStoryLabel;
-  const publicStoryAngle = stuckStory
+  const publicStoryLabel = auditPattern && contradiction ? contradiction.a :
+    (stuckStory ? publicStuckFact(top) : rawStoryLabel);
+  const publicStoryAngle = auditPattern && contradiction ? contradiction.frame : stuckStory
     ? publicStoryLabel + ' What record explains the stall?'
     : ((top.handle && top.handle.angle) || rawStoryLabel);
+  const storyRef = contradiction && contradiction.aSrc || top.ref;
   const story = {
-    ref: top.ref,
+    ref: storyRef,
     label: publicStoryLabel,
     kind: top.kind || 'anomaly',
     angle: publicStoryAngle,
-    hookLine: stuckStory
+    hookLine: auditPattern && contradiction ? null : stuckStory
       ? publicStoryLabel
       : ((top.handle && top.handle.hookLine) || (contradiction && contradiction.frame) || null),
     hood,
@@ -373,6 +439,20 @@ function buildJaxSlice(cycle, opts) {
     citizens: citizens.map(c => c.name + (c.role ? ' — ' + c.role : '') + (c.neighborhood ? ', ' + c.neighborhood : '')),
     stinkClass: top.className,
     stinkScore: top.score
+  };
+
+  const prewrite = {
+    method: 'TWO_SIDED_DATA_AUDIT',
+    anchorFacts: [contradiction && contradiction.a, contradiction && contradiction.b].filter(Boolean),
+    evidence: [
+      contradiction && contradiction.a ? { side: 'A', text: contradiction.a, src: contradiction.aSrc || top.ref } : null,
+      contradiction && contradiction.b ? { side: 'B', text: contradiction.b, src: contradiction.bSrc || top.ref } : null,
+    ].filter(Boolean),
+    scopeHoods: contradiction && contradiction.scopeHoods || auditHoods,
+    missing: auditPattern && auditPattern.measurement && auditPattern.measurement.available === false
+      ? ['the prior comparison needed to validate the flagged direction', 'an office response to the data mismatch']
+      : ['the accountable response to the supplied mismatch'],
+    closeQuestion: contradiction && contradiction.frame || null,
   };
 
   const gaps = {
@@ -432,6 +512,7 @@ function buildJaxSlice(cycle, opts) {
     cycle: Number(cycle),
     builtAt: new Date().toISOString(),
     empty: false,
+    kind: 'jax-accountability',
     journalist: { name: 'Jax Caldera', popid: 'POP-00799', persona: 'freelance-firebrand' },
     approach: FIREBRAND_APPROACH,
     stink: {
@@ -444,6 +525,7 @@ function buildJaxSlice(cycle, opts) {
     },
     contradiction,
     story,
+    prewrite,
     citizens,
     bonds,
     scene,
@@ -454,6 +536,8 @@ function buildJaxSlice(cycle, opts) {
       'output/world_summary_c' + cycle + '.md',
       'output/neighborhood_texture_c' + cycle + '.md',
       'output/engine_audit_c' + cycle + '.json',
+      contradiction && contradiction.aSrc,
+      contradiction && contradiction.bSrc,
       top.ref
     ].filter(Boolean),
     reportMeta: {
@@ -481,7 +565,9 @@ function formatJaxSliceMarkdown(slice) {
   L.push('## CONTRADICTION');
   if (slice.contradiction) {
     L.push('A: ' + slice.contradiction.a);
+    if (slice.contradiction.aSrc) L.push('A REF: ' + slice.contradiction.aSrc);
     L.push('B: ' + slice.contradiction.b);
+    if (slice.contradiction.bSrc) L.push('B REF: ' + slice.contradiction.bSrc);
     L.push('FRAME: ' + slice.contradiction.frame);
   }
   L.push('');

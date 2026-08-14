@@ -55,7 +55,7 @@ const stuck = {
   handle: { angle: 'stuck hub' }
 };
 const stuckS = scoreEntry(stuck, 'civic');
-ok('stuck medium is force-eligible', stuckS && stuckS.score >= FORCE_THRESHOLD);
+ok('stuck diagnosis is not a firebrand assignment', stuckS === null);
 
 const lowOnly = {
   kind: 'anomaly',
@@ -71,7 +71,7 @@ const lanes = {
   business: [{ ...highDecay, desk: 'business' }] // same ref — dedup
 };
 const scanned = scanSignal(lanes);
-eq('dedup same ref across desks', scanned.candidates.length, 2);
+eq('dedup same ref across desks (stuck diagnosis dropped)', scanned.candidates.length, 1);
 ok('top is highest score', scanned.top.ref === highDecay.ref);
 ok('maxScore matches top', scanned.maxScore === scanned.top.score);
 

@@ -111,7 +111,25 @@ function candidateRows(story, slice) {
 function creativeBriefFromSlice(slice) {
   if (!slice) return null;
   let brief = null;
-  if (slice.charge) {
+  if (slice.kind === 'jax-accountability') {
+    const prewrite = slice.prewrite || {};
+    const contradiction = slice.contradiction || {};
+    brief = {
+      kind: 'data-accountability',
+      method: clean(prewrite.method, 60) || 'TWO_SIDED_DATA_AUDIT',
+      mismatch: {
+        a: clean(contradiction.a, 500) || null,
+        aSrc: clean(contradiction.aSrc, 300) || null,
+        b: clean(contradiction.b, 500) || null,
+        bSrc: clean(contradiction.bSrc, 300) || null,
+      },
+      scopeHoods: uniq(prewrite.scopeHoods).slice(0, 8),
+      missing: uniq(prewrite.missing).slice(0, 8),
+      closeQuestion: clean(prewrite.closeQuestion, 400) || null,
+      sceneRule: clean(slice.scene && slice.scene.colorRoom, 500) || null,
+      sourcePointers: uniq(slice.pointers || []).slice(0, 8),
+    };
+  } else if (slice.charge) {
     brief = {
       kind: 'fan-heat',
       fanCharge: clean(slice.charge.fanCharge, 80) || null,
@@ -308,8 +326,10 @@ function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane 
   ];
   if (story.hookLine) known.push(refClaim('FACT', story.hookLine, src));
   if (slice && slice.contradiction) {
-    if (slice.contradiction.a) known.push(refClaim('FACT', slice.contradiction.a, src));
-    if (slice.contradiction.b) known.push(refClaim('FACT', slice.contradiction.b, src));
+    if (slice.contradiction.a) known.push(refClaim('FACT', slice.contradiction.a,
+      slice.contradiction.aSrc || src));
+    if (slice.contradiction.b) known.push(refClaim('FACT', slice.contradiction.b,
+      slice.contradiction.bSrc || src));
   }
   if (slice && slice.scene && slice.scene.weather) {
     known.push(refClaim('FACT', slice.scene.weather, 'World_Config/weather snapshot for C' + cycle));
@@ -317,11 +337,14 @@ function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane 
   if (slice && slice.scene && slice.scene.neighborhoodTexture) {
     known.push(refClaim('FACT', slice.scene.neighborhoodTexture, src));
   }
+  const prewriteEvidence = (slice && slice.prewrite && slice.prewrite.evidence) || [];
   for (const fact of (slice && slice.prewrite && slice.prewrite.anchorFacts) || []) {
     const text = clean(fact, 500);
+    const evidence = prewriteEvidence.find(row => row && clean(row.text, 500) === text);
+    const factSrc = clean(evidence && evidence.src, 300) || clean(src, 300);
     if (text && !/\b(?:do not|never)\s+(?:invent|lead|print|publish|assert|name|use)\b/i.test(text) &&
-        !known.some(claim => claim.text === text && claim.src === clean(src, 300))) {
-      known.push(refClaim('FACT', text, src));
+        !known.some(claim => claim.text === text && claim.src === factSrc)) {
+      known.push(refClaim('FACT', text, factSrc));
     }
   }
   for (const fact of (slice && slice.prewrite && slice.prewrite.presentFacts) || []) {

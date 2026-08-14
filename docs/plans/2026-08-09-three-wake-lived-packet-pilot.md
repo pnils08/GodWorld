@@ -1,7 +1,7 @@
 ---
 title: Three-Wake Typed Lived-Experience Packet Pilot
 created: 2026-08-09
-updated: 2026-08-13
+updated: 2026-08-14
 type: plan
 tags: [media, citizens, civic, sports, business, agents, evaluation, active]
 sources:
@@ -790,3 +790,4 @@ so an attended visual proof correctly remains open until Saturday compile.
 - 2026-08-13 (codex) — Reopened Task 13 against the current cohort: graduation now requires one fresh unattended six-seat W1→W2→W3 chain with stable identities and exact Rhea/staging proof. The 2026-08-13 oversized saved fanout is runtime-contained but cannot prove the corrected builder path.
 - 2026-08-13 (codex) — Added a fail-closed W3 freshness gate after current C103 artifacts proved that Cycle-scoped filenames can leave yesterday's report Packet behind today's angle. Stage, Cycle, persona, reporter POPID, angle pointer, assigned story, and timestamp order must now agree before writer or Rhea work.
 - 2026-08-13 (codex) — Rebuilt the four non-Jax lattice-bearing packages under `CITIZEN_INTERVIEW/1`: Trevor passed 1/3 direct reactions and Simon 1/1; Anthony and Tanya rejected unsupported responses and emitted quote-free recaps. All four passed Packet-aware Rhea and deterministic contamination checks, bringing Saturday's dry-run scope to eighteen clean C103 Articles. Jax remains inactive and story-linked lived exposure remains unproven.
+- 2026-08-14 (codex) — Diagnosed the fresh unattended W1/W2 chain: Graye's invalid supplied-target output and three zero-quote runs were held gates, not empty candidate pools. Restored the bounded four-person W2 bench so affected/assigned citizens stay first, then same-neighborhood and city residents remain available after a reporter-selected target abstains or fails the direct-speech contract. Local Packet/package tests passed; fresh cron proof remains open.

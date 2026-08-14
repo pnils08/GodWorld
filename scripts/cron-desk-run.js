@@ -393,7 +393,12 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
   for (const c of filled) {
     if (c && c.pop) packetCandidates.set(c.pop, c);
   }
-  if (story && packetCandidates.size < 2) {
+  // A reporter target is a priority, not the whole source pool. Complete the
+  // bounded four-person bench so one abstention or rejected response cannot
+  // turn a sourced assignment into a quoteless wake. Assignment/affected
+  // citizens retain insertion priority; same-hood and then city residents fill
+  // the remaining seats through neighborsFromLedger().
+  if (story && packetCandidates.size < QUOTE_CITIZEN_CAP) {
     for (const c of livedPacket.neighborsFromLedger(story.hood, {
       cap: QUOTE_CITIZEN_CAP,
       exclude: [...packetCandidates.keys(), persona && persona.popid].filter(Boolean),
@@ -444,11 +449,13 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
       record: !NO_GATE, maxTokens: PACKET_ACTIVE ? 420 : 200 });
   };
   if (story) {
-    const plannedPops = PACKET_ACTIVE && angleArt && angleArt.angleRead &&
-      angleArt.angleRead.plan && Array.isArray(angleArt.angleRead.plan.targets) &&
-      angleArt.angleRead.plan.targets.some(target => target && packetCandidates.has(target.pop))
-      ? angleArt.angleRead.plan.targets.map(target => target && target.pop).filter(Boolean)
-      : [...packetCandidates.keys()];
+    const targetPops = PACKET_ACTIVE && angleArt && angleArt.angleRead &&
+      angleArt.angleRead.plan && Array.isArray(angleArt.angleRead.plan.targets)
+      ? angleArt.angleRead.plan.targets
+        .map(target => target && target.pop)
+        .filter(pop => pop && packetCandidates.has(pop))
+      : [];
+    const plannedPops = [...new Set(targetPops.concat([...packetCandidates.keys()]))];
     for (const pop of plannedPops) {
       if (packetCandidates.has(pop)) push(pop, story.angle || story.label);
     }

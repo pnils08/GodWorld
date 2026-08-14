@@ -300,7 +300,9 @@ const packetAsks = runApi.collectQuoteAsks([
     { pop: 'POP-90002', question: 'TEST-ONLY two?', basis: 'assignment' }
   ], closeQuestion: 'TEST-ONLY close' } }
 });
-assert.deepStrictEqual(packetAsks.map(row => row.pop), ['POP-90001', 'POP-90002'],
+assert.deepStrictEqual(packetAsks.slice(0, 2).map(row => row.pop), ['POP-90001', 'POP-90002'],
+  'assigned citizens must remain first in the completed quote pool');
+assert.ok(!packetAsks.some(row => ['POP-90003', 'POP-90004'].includes(row.pop)),
   'Packet quote pool must not fill from the generic desk lane');
 assert.equal(packetAsks[0].inputPacket.actor.name, 'Test Civic One');
 assert.equal(packetAsks[0].inputPacket.exposure.self, 'Test profile one');
@@ -308,6 +310,29 @@ assert.equal(packetAsks[0].inputPacket.output.contract, 'CITIZEN_INTERVIEW/1');
 assert.equal(packetAsks[0].interviewMode, true);
 assert.equal(packetAsks[0].inputPacket.lattice, undefined,
   'Wake 2 must ask for citizen-authored speech, not backend lattice selection');
+const cityBenchAsks = runApi.collectQuoteAsks([], {
+  name: 'Luis Navarro', popid: 'POP-00636'
+}, {
+  ref: 'TEST-ONLY-ASSIGNMENT', label: 'TEST-ONLY city bench', hood: 'Downtown'
+}, {
+  cycle: 999, desk: 'civic',
+  inputPacket: {
+    v: 'LEP/2', wake: 'W1', actor: {}, task: {}, signal: {}, exposure: {
+      candidates: [
+        { pop: 'POP-91001', name: 'Test Affected', profile: 'Test affected profile', why: 'assignment' },
+        { pop: 'POP-91002', name: 'Test Neighbor', profile: 'Test neighbor profile', why: 'same-hood-ledger' },
+        { pop: 'POP-91003', name: 'Test Resident One', profile: 'Test city profile one', why: 'ledger-resident' },
+        { pop: 'POP-91004', name: 'Test Resident Two', profile: 'Test city profile two', why: 'ledger-resident' }
+      ]
+    }, known: [], limits: {}, output: {}
+  },
+  angleRead: { plan: { focus: 'TEST-ONLY city focus', targets: [
+    { pop: 'POP-91001', question: 'TEST-ONLY affected?', basis: 'assignment' }
+  ], closeQuestion: 'TEST-ONLY close' } }
+});
+assert.deepStrictEqual(cityBenchAsks.map(row => row.pop),
+  ['POP-91001', 'POP-91002', 'POP-91003', 'POP-91004'],
+  'one reporter-selected target must not suppress the remaining supplied city bench');
 runApi.activateWakeContext(null, 'p-slayer');
 const fanAsks = runApi.collectQuoteAsks([], { name: 'P Slayer', popid: 'POP-00008' }, {
   ref: 'TEST-ONLY-SPORTS', label: 'TEST-ONLY no-hitter', popids: ['POP-90005'],

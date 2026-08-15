@@ -10,21 +10,30 @@ sources:
   - docs/research/2026-08-08-journalist-heat-slice-architecture.md — shared substrate + overlay (media civic desks shipped)
   - docs/plans/2026-08-08-journalist-heat-slice-packs.md — Task 6 reporter civic-domain pack (Carmen family)
   - docs/plans/2026-07-28-civic-cron-city-hall.md — civic.15 Sunday chain + weekday datawake
+  - docs/plans/2026-08-07-office-holder-position-wall.md — civic.16 wiki already saves stated:/datawake: to cp-POP
   - scripts/cron-civic-run.js domainSlice — current office input (world_summary hoods + INIT ids)
+  - Mike-direct 2026-08-15 — Sunday = city-hall packets; Mon–Thu = district packs; each wake reads prior wiki so Sunday they fight for what they learned
 pointers:
   - "[[engine/ROLLOUT_PLAN]] — civic.17"
   - "[[../research/2026-08-14-civic-process-install]] — research basis"
   - "[[../adr/0017-typed-lived-experience-packets]] — Packet contract"
   - "[[2026-08-08-journalist-heat-slice-packs]] — media civic desks already shipped; this is the office sibling"
-  - "[[2026-07-28-civic-cron-city-hall]] — civic.15; this plan does not flip --apply"
+  - "[[2026-07-28-civic-cron-city-hall]] — civic.15 Sunday packets; this plan does not flip --apply"
+  - "[[2026-08-07-office-holder-position-wall]] — civic.16 wall is the persist layer; do not invent a second wiki"
   - "[[index]] — registered same commit"
 ---
 
 # Civic office lived-experience packets Plan
 
-**Goal:** When a civic office clocks in, they get the same kind of typed pack the civic *reporters* already get — who they are, their district’s people and projects, what they may say, what they must not invent — so weekday living and Sunday decisions run on city lists, not a blank prompt.
+**Goal:** By Sunday city-hall, each office is already layered with a week of their district — so they fight for what they know and what that turf needs, not a cold brief.
 
-**Architecture:** One shared **office substrate** (district / citywide facts from disk snapshots) plus a thin **office overlay** (Mayor vs council vs project vs chief). Shape matches ADR-0017 and the journalist heat-slice pattern. Weekday datawake is the first consumer. Sunday prep is the second, after weekday works. civic.15 still owns the stamp; this plan does not write Initiative_Tracker.
+**Architecture:** Two handoffs, one memory.
+
+- **Mon–Thu:** district package (ADR-0017 Packet: people, projects, how the turf feels). They live with last week’s choices.
+- **Sunday:** city-hall packets (civic.15). Same office also gets that week’s district packs plus their wiki so the decide step is not a blank Monday.
+- **Every wake reads and writes the existing office wiki** (`officeWall.js` / cp-POP, daypart CIVIC). Thoughts persist to the next action. Do not build a second diary.
+
+civic.15 still owns the stamp. This plan does not write Initiative_Tracker.
 
 **Terminal:** grok / kimi on `scripts/` + `docs/`; engine-sheet only if a live sheet read is later approved. Sandbox before any live sheet touch.
 
@@ -34,9 +43,9 @@ pointers:
 - Research basis: [[../research/2026-08-14-civic-process-install]]
 
 **Acceptance criteria:**
-1. A weekday office wake receives a Packet with actor, task, signal, named constituents from the ledger snapshot (or an explicit empty list), known project facts from the tracker snapshot, and limits. No invented POPID or name.
-2. Offline test: missing snapshot rebuilds from `engine_audit` the same way the tracker already does; missing constituent list is empty, not guessed.
-3. One dry weekday run on disk produces a readable pack + statement for at least one office. No tracker `--apply`.
+1. Mon–Thu wake: district Packet + prior wiki lines injected; statement saved back to the same wiki.
+2. Sunday prep: city-hall packet includes that office’s week of wiki + latest district pack. They are not starting from zero.
+3. No invented people. No tracker `--apply` in this plan.
 
 ---
 
@@ -47,11 +56,11 @@ Disk-first. Same wipe lesson: if a copy is gone, rebuild from the cycle audit or
 | They need | Where it lives | In the pack |
 |---|---|---|
 | Who I am (name, seat, district, faction) | `civic-office-map.json` + office-ledger snap if present | `actor` |
-| What I am doing today | weekday = live with last decisions + district heat; Sunday = decide | `task` |
+| What I am doing today | **Mon–Thu = district package.** **Sunday = city-hall packet** (decide). | `task` |
 | How my turf feels | `world_summary` hood table (already parsed) | `signal` |
 | My projects | `initiative_tracker.json` (already rebuilds) | `known` FACT |
 | People I serve | `simulation_ledger_snapshot` rows in my district hoods — name, hood, work. Cap. No quotes invented. | `exposure.subjects` |
-| Last thing I said | position wall / prior datawake if on disk | `exposure.sources` |
+| What I already thought | **civic.16 office wiki** (cp-POP, `stated:` / `datawake:`). Load on every wake; save after. | `exposure.sources` + prompt inject |
 | Must not invent | people, counts, “complete,” votes | `limits` |
 | What I turn in | existing statement JSON (weekday); trackerUpdates stay civic.15 Sunday | `output` |
 
@@ -87,9 +96,9 @@ Not in v1: full voice-file rewrite, election/chair-change, live Sheet writes.
 
 - **Files:** `scripts/cron-civic-run.js` — modify `runDatawake` only
 - **Steps:**
-  1. Build pack before the model call. Prompt is the Packet + existing IDENTITY/RULES. Drop raw `domainSlice` prose as the main body (keep as a fallback signal field inside the pack if useful).
-  2. Keep the ungrounded-number wall.
-  3. No `--apply`. No Sunday change in this task.
+  1. Build the **district pack** before the model call. Prompt = Packet + IDENTITY/RULES + **prior wiki** (`loadPositionWall`). Drop raw `domainSlice` as the main body.
+  2. After a good statement, **save to the same wiki** (already wired; keep it).
+  3. Keep the ungrounded-number wall. No `--apply`.
 - **Verify:** `node --check scripts/cron-civic-run.js`; one `--stage=datawake --dry-run` shows pack path + non-empty limits.
 - **Status:** [ ] open
 
@@ -102,11 +111,14 @@ Not in v1: full voice-file rewrite, election/chair-change, live Sheet writes.
 - **Verify:** pack file + statement on disk; Mike has seen both.
 - **Status:** [ ] open
 
-### Task 5: Sunday prep inject (gated)
+### Task 5: Sunday city-hall packet carries the week (gated)
 
 - **Files:** `scripts/cron-civic-run.js` `runPrep` — only after Task 4
-- **Steps:** Attach the same pack to the pending-decisions packet so Sunday decide uses it. civic.15 gate and `--apply` stay as they are.
-- **Verify:** prep packet cites pack path; no sheet write.
+- **Steps:**
+  1. Sunday stays the city-hall packet (questions, cascade). Add: this office’s **wiki week** + latest **district pack**.
+  2. Goal: they arrive fighting for what they already learned Mon–Thu, not rereading a cold city report.
+  3. civic.15 gate and `--apply` stay as they are.
+- **Verify:** prep packet contains a “this week on the wall” block sourced from wiki, plus a pointer to the district pack. No sheet write.
 - **Status:** [ ] blocked on Task 4
 
 ---
@@ -114,9 +126,11 @@ Not in v1: full voice-file rewrite, election/chair-change, live Sheet writes.
 ## Status log
 
 - 2026-08-15 (grok) — Plan filed. Media civic desks already work; this is the office sibling. No code yet.
+- 2026-08-15 (grok) — Week locked: Sunday = city-hall packets; Mon–Thu = district packs; wiki (civic.16) is the persist layer so Sunday is not a cold start.
 
 ---
 
 ## Changelog
 
+- 2026-08-15 (grok) — Week locked (Sunday city-hall / Mon–Thu district / wiki carry-forward).
 - 2026-08-15 (grok) — Initial plan, civic.17. Research basis [[../research/2026-08-14-civic-process-install]].

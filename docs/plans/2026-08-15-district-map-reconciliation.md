@@ -159,7 +159,7 @@ Direction as stated, held for design once the map is trustworthy:
 - Packet split: the 9 districts + Mayor + voiced seats get **decision packets**; the remaining office-holders get **job-domain data only**.
 - End state: councilmembers **author their own initiatives and vote on them**. The 9 are the voters.
 
-**Blocked on:** civic.18 tasks 1–5 (a member cannot own an approval rating computed off phantom turf), and civic.17 pack landing so per-district input exists before per-district accountability is asserted.
+**Blocked on:** civic.18 tasks 1, 2, 4a–4e (a member cannot own an approval rating computed off phantom turf), civic.17 pack landing so per-district input exists before per-district accountability is asserted, and the INIT-006 tag correction below.
 
 **ALSO BLOCKED ON A DATA DEFECT THIS PLAN CANNOT TOUCH (escalation, 2026-08-15).**
 civic.19 makes each member responsible for their own approval rating. That is only
@@ -174,10 +174,31 @@ model must not ship on top of an initiative→district tag that is wrong for the
 flagship project.** Needs a ruling on whether INIT-006's tag is a correctable data
 error or intended canon before civic.19 leaves design.
 
+> **RULING 2026-08-15 (research-build) — correctable data error, not canon. No
+> escalation needed.** All six live initiatives were read. Five tag the project
+> site or the neighborhoods served: INIT-001 `West Oakland`, INIT-003
+> `Fruitvale`, INIT-005 `Temescal`, INIT-002 `West Oakland, Fruitvale, East
+> Oakland`, INIT-007 `West Oakland, East Oakland, Fruitvale`. The convention is
+> unambiguous — **`AffectedNeighborhoods` = where the project lands.** INIT-006
+> is the sole deviation, and `Jack London, Downtown` is neither its site nor its
+> served hoods; it reads as the *venue* of the "Final Council Vote" in the title,
+> a distinction no other row makes and one the column does not mean, since it
+> drives district attribution.
+>
+> **Correction:** INIT-006 `AffectedNeighborhoods` → `Baylight District`. One
+> cell. Owned by civic.15 (`--apply` path), not this plan. Until it lands, the
+> flagship credits Tran (D2) and Rivers (D5) gets nothing — so it gates civic.19
+> but needs no ruling from the builder.
+
 **Verified 2026-08-15 (no change needed):** every city-hall participant already has a heat-slice pack — 14/14 voiced offices + 4/4 projects, including all 9 `COUNCIL-D1..D9` individually. The 15 offices without packs are exactly the non-participant municipal seats (CHIEF-FIRE, DCOP-OPS, DCOP-COMM, IAD-LEAD, EMS-DIR, MED-EXAM, EMERG-DIR, ADA-MAJOR, ADA-SAFETY, DPD-DEPUTY, COURT-LIAISON, CPRB-CHAIR, OMBUDSMAN, REENTRY-DIR, PLANNING-DIR).
 
 ## Changelog
 
+- 2026-08-15 (research-build) — INIT-006 escalation RESOLVED without a builder
+  ruling: read all 6 live initiatives, convention is project-site tagging (5 of
+  6), INIT-006 is a lone venue-tagged deviation → correctable data error, one
+  cell, civic.15 owns the write. civic.19 blocked-on line re-pointed at the
+  corrected task set (1, 2, 4a–4e) + the INIT-006 fix.
 - 2026-08-15 (engine-sheet) — Task 3 shipped Node-only; Task 4 reversed as
   architecturally impossible (§7, ADR-0016 names it a rejected alternative);
   §3 Path A cause corrected against live `Initiative_Tracker` (INIT-006 is

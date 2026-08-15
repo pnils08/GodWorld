@@ -34,8 +34,8 @@ pointers:
 
 | Day | Job | Already on disk | Gap |
 |---|---|---|---|
-| **Sunday** | City-hall. Decide. Write Initiative_Tracker the way the old `/city-hall` ingest did. | `cron-civic-run.js` `--stage=chain`. Assemble + gate exist. `--apply` still Mike's flip (dry). | Live ingest without you in the loop is not flipped. |
-| **Mon–Thu** | In-world living: how last decisions landed on their constituents, plus their own heat slice of the district (the people, not a crime spreadsheet for the paper). | Datawake exists: domain numbers → statement JSON → media can source it. civic.15 framed this as "voice city data for desks." | Living reaction + constituent heat is not the same as reading a metric aloud for journalists. |
+| **Sunday** | City-hall packets. Decide. Arrive already layered with the week. Write Initiative_Tracker when stamped. | civic.15 chain. `--apply` still off. | Pack + wiki week not injected into Sunday yet (civic.17 Task 5). |
+| **Mon–Thu** | District packages. Live with last decisions and the people in the turf. Each wake reads/writes the office wiki so thought carries. | Datawake + civic.16 wall already save/inject lines. | District pack (people + projects + limits) not built yet (civic.17 Tasks 2–4). |
 | **Fri–Sat** | They are citizens. Life wakes, not office work. | Guard already skips datawake. | Leave it. |
 | **Later / rare** | Chair change if continued failure. | November `Election_Log` seater. Unsaved approval leftover. | **Parked.** See [[2026-08-14-civic-seat-change-election]]. |
 

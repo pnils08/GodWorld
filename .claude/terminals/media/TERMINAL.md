@@ -1,20 +1,16 @@
 # Media Terminal
 
-**Role:** Edition production, desk agents, supplementals, podcast, publish pipeline. The newsroom.
+**RETIRED AS A LIVE SEAT (Mike-direct, 2026-08-15, S372).** This terminal is not booted anymore — `cron-desk-run.js` runs edition production unattended. rb (research-build/Mags) designs pipeline tuning; es (engine-sheet) executes code/config changes. Live-CLI media work now is the Gemini deep-lore writer (antigravity, pipeline.56) and NotebookLM integration — new build threads, not day-to-day edition writing. The rest of this file is kept as a **reference** — the Owned Documentation tables below still point at the right files; the Launch/Session-Close sections below are historical and don't fire.
+
+**Role (historical):** Edition production, desk agents, supplementals, podcast, publish pipeline. The newsroom.
 **Established:** Session 135 (2026-04-05)
 **Terminal tag for saves:** `[media]`
 
 ---
 
-## Launch & Resume
+## Launch & Resume — RETIRED
 
-```bash
-claude --name "media"                     # start fresh
-claude --resume "media"                   # resume after crash
-claude --resume                           # picker (shows all named sessions)
-```
-
-Inside tmux `godworld` session: this is **window 3** (`Ctrl-b 3`).
+Nobody boots this window anymore. `cron-desk-run.js` runs the pipeline on schedule; rb/es edit its agents/skills directly, no session to launch.
 
 ---
 
@@ -221,12 +217,12 @@ Doctrine every terminal follows: [[../../../docs/engine/rollout-rules]] (§2 = t
 
 ## NOT Your Files
 
-- `docs/engine/*` — engine architecture (engine/sheet terminal)
-- `.claude/agents/civic-office-*/*` — civic office agents (civic terminal)
-- `.claude/agents/civic-project-*/*` — civic project agents (civic terminal)
-- `.claude/agents/city-clerk/*` — city clerk (civic terminal)
-- `docs/research4_*.md` — research files (research/build terminal)
-- `riley/*` — Riley ecosystem (research/build terminal)
+- `docs/engine/*` — engine architecture (engine-sheet executes, rb designs)
+- `.claude/agents/civic-office-*/*` — civic office agents (rb designs, es executes)
+- `.claude/agents/civic-project-*/*` — civic project agents (rb designs, es executes)
+- `.claude/agents/city-clerk/*` — city clerk (rb designs, es executes)
+- `docs/research4_*.md` — research files (research-build)
+- `riley/*` — Riley ecosystem (research-build)
 
 ---
 
@@ -245,67 +241,17 @@ Doctrine every terminal follows: [[../../../docs/engine/rollout-rules]] (§2 = t
 
 ## Handoff Protocol
 
-This terminal does not receive routed work. It runs skills.
-
-When this terminal discovers something broken during a skill run:
+Cron runs the pipeline unattended. When something breaks during a cron run:
 1. Capture it in the run's gap log (`output/production_log_edition_c{XX}_*_gaps.md`) per [[../../../docs/plans/GAP_LOG_TEMPLATE]]
-2. The gap log is the filing channel — research-build triages it next session and routes any fixes to research-build (skill / RULES / docs) or engine-sheet (code / sheets / scripts)
+2. rb triages the gap log and routes fixes: skill/RULES/docs to itself, code/sheets/scripts to engine-sheet
 3. Tag Supermemory saves with `[media]` prefix
-4. Never write a ROLLOUT row from this terminal
+
+For live build threads at this scope (Gemini deep-lore writer, NotebookLM integration): rb designs, es executes, tracked as normal rollout rows — no terminal-specific ritual.
 
 ---
 
-## End-of-Session Diagnostic (S241 governance.22)
+## Session Close — RETIRED
 
-At session-close, Mike runs `/usage` and pastes the per-category breakdown (skills / subagents / plugins / MCP servers) into the session-close commit body when notable. Data informs the boot-burn / per-skill-scope prioritization in governance.22. Source: Claude Code v2.1.149.
-
----
-
-## Session Close
-
-**Two close modes (S226).** Pick by next-session cadence, not by how much work shipped. Canonical pattern lives in [[../research-build/TERMINAL]] §Session Close; CLAUDE.md §Session Lifecycle carries the headline.
-
-### Soft close (~2 min) — chained-session cadence
-
-Use when Mike re-boots within minutes. The next session boots on the carried set — PIN + `NEXT[media]` in SESSION_CONTEXT — plus git log on demand; reflection conditioning comes from her page (`magsPageRecall.js`) whenever it's needed, not from a close-time write.
-
-**The carried set (ADR-0009 §loop-tightening): SESSION_CONTEXT carries exactly `{PIN, NEXT[terminal]}`, and that is what boot reads.** No STATUS paragraph, no Shipped block. **Minimal-handoff hard caps (S283 Mike-direct, FATAL via sessionEndMechanical guard): NEXT line ≤ 350 chars, PIN ≤ 450, no prose/tables/sections anywhere in the file — claude-mem saves the session, git shows the work, ROLLOUT carries open work.**
-
-1. **Cross-terminal git stack check.** `git log --oneline origin/main..HEAD` — expect empty (push-per-commit cadence). If non-empty, push or coordinate before declaring close.
-2. **Update the carried set in SESSION_CONTEXT.md** — the `**PIN:**` line (Session N→N+1, Day/Cycle/Edition as they changed) + your `**NEXT[media]:**` line (one line: what next session OPENS WITH — open work only, never a recap (git log + claude-mem already carry what shipped; if a clause is reconstructable from git log, cut it)). Don't touch other terminals' NEXT lines.
-3. **Commit** SESSION_CONTEXT.md (with any work commits). Push.
-
-**Skips at this terminal:** `node scripts/queryFamily.js`, NEWSROOM_MEMORY updates, `/save-to-mags`, PM2 restart, full Terminal-Specific Audit + Saves below. (Journal entry + JOURNAL_RECENT rotation retired S300 — no longer a close step anywhere; conscience-conditioning is written to the page in `/sift`, pipe.40 T4/T5.)
-
-**Does NOT skip if an edition was published this session:** canon ingest (`node scripts/ingestEdition.js` or `/save-to-bay-tribune`) is the publish step itself, not a close ritual. Bay-tribune must reflect canonical state immediately — never defer canon ingest to a soft close's next session.
-
-**Trade-off (S300 update):** the close-time journal that used to make soft-vs-hard bite harder here is retired — conscience-conditioning now lands on Mags' page inside `/sift` (an in-session EIC moment), independent of close mode (pipe.40 T4/T5). So the soft/hard distinction at media collapses toward the operational terminals': the remaining hard-close overhead is the sweep + Terminal-Specific Audit/Saves, not a conscience write. Still hard-close at end-of-day per rule of thumb ≥3 chained soft closes for the sweep.
-
-### Hard close (~5-10 min) — end of day, multi-day break, or cold-pickup boundary
-
-Per S229 governance.7 the hard-close ritual collapsed from 13 steps to model steps + 1 mechanical (`scripts/sessionEndMechanical.js`). Run the slimmed `/session-end` SKILL: Step 0 detect terminal → **Step 1 (journal) RETIRED S300 — no action (pipe.40 T4)** → Step 2 SESSION_CONTEXT PIN + NEXT + ROLLOUT updates + terminal-specific saves → Step 3 mechanical script → Step 4 commit & push. Full skill: `.claude/skills/session-end/SKILL.md` v2.4. (Conscience-conditioning is no longer a close step — it's written to Mags' page during `/sift`, pipe.40 T5.)
-
-### Terminal-Specific Audit
-
-Read before Step 2 — surface any stale files in the NEXT line or fix inline.
-
-| File | Check |
-|------|-------|
-| `docs/mags-corliss/NEWSROOM_MEMORY.md` | New errata added? Character continuity updated? Last Updated current? |
-| `docs/mags-corliss/NOTES_TO_SELF.md` | New story flags added or stale flags removed? |
-| `output/production_log_edition_c*.md` | Production log complete for this cycle's edition? |
-| `output/production_log_edition_c*_*_gaps.md` | Gap logs filed for any skill that surfaced inefficiency? |
-| `SESSION_CONTEXT.md` | PIN refreshed + `NEXT[media]` line updated? |
-
-### Terminal-Specific Saves (Step 2 — model judgment)
-
-Update during Step 2 of the slimmed SKILL alongside SESSION_CONTEXT + ROLLOUT:
-
-- **NEWSROOM_MEMORY.md** — add errata from any edition written or reviewed; update character continuity; update coverage patterns based on what landed or fell flat.
-- **Production log** — ensure `production_log_edition_c{XX}.md` is complete with all steps, reporter assignments, and editorial decisions.
-- **Canon ingest** — if an edition was published, run `node scripts/ingestEdition.js` or `/save-to-bay-tribune` to push it to bay-tribune. Never save session summaries to bay-tribune.
-- **`/save-to-mags`** — save editorial decisions, reporter performance notes, what worked and what didn't. Tag with `[media]`. Optional — model judgment.
-- **SESSION_CONTEXT.md PIN + NEXT[media] line** — refresh the PIN (Session/Day/Cycle/Edition); one NEXT line: what next session OPENS WITH — open work only, never a recap (git log + claude-mem already carry what shipped; if a clause is reconstructable from git log, cut it) (edition stage / pickup). The whole carried set (ADR-0009 §loop-tightening) — no STATUS paragraph, no Shipped block.
-- **Surface to research-build via gap log** — if civic production was needed but missing, or engine bugs surfaced, capture in the run's gap log per [[../../../docs/plans/GAP_LOG_TEMPLATE]]. Research-build triages from gap logs; do not write to ROLLOUT directly.
+No live session, no close ritual. When rb/es finish tuning a media agent/skill/pipeline, the change is a normal research-build commit — covered by rb's own Session Close (`.claude/terminals/research-build/TERMINAL.md` §Session Close). Canon ingest / edition publish is handled by the cron itself, not a close step here.
 
 **Mechanical (Step 3) — auto-runs from `sessionEndMechanical.js --terminal=media`:** session-summary → Supermemory bridge + `auditPlanTagDrift` (informational, never fatal) + ROLLOUT conformance lint + cross-terminal git stack check + `pm2 restart`. (`writeShippedBlock`, `minimalHandoffGuard`, `rotateJournalRecent`, and the JOURNAL content-quality check are all retired — see the skill's Step 3. `--rotate-history` is vestigial; leave it off.) Plan: [[archive/plans/2026-05-23-session-end-collapse]].

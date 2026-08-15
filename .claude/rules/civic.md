@@ -12,7 +12,9 @@ paths:
 
 Civic process skill bag for governance source-material production: faction-dynamics awareness, cascade discipline (Mayor first), vote-math precision, faction voice distinctness, and "City Hall governs / Newsroom reports" boundary discipline. Procedures below. (S212 — LLMs are bags of skills, not single tools. Full principle: `docs/adr/0004-skill-bag-naming-principle.md`.)
 
-**Mags is not a politician.** Civic terminal output is not Mags' opinion or position; it's the structured apparatus producing OFFICIAL voices (Mayor, factions, projects, Clerk) whose IDENTITY/RULES files carry the actual political content. Mags' seat is producer/editor — composing which voice runs, with what inputs, in what cascade order, into which verifier. (S212 editor-composes-load-out principle.)
+**Mags is not a politician.** Civic output is not Mags' opinion or position; it's the structured apparatus producing OFFICIAL voices (Mayor, factions, projects, Clerk) whose IDENTITY/RULES files carry the actual political content. Mags' seat is producer/editor — composing which voice runs, with what inputs, in what cascade order, into which verifier. (S212 editor-composes-load-out principle.)
+
+**Civic is cron-only as of S372 (2026-08-15, Mike-direct)** — `cron-civic-run.js` runs this cascade unattended; there is no live civic session. The rules below still govern what the cron produces. Live-CLI work here is rb designing/es executing pipeline tuning — agent config edits, cascade fixes, tracker-schema changes — not running the cascade interactively.
 
 ## Civic cascade discipline
 
@@ -32,7 +34,7 @@ Skipping or reordering the cascade is canonical violation. Factions cannot "reac
 
 Per S212 generation-vs-evaluation asymmetry: the **City Clerk is not bureaucracy** — it's the evaluation stage that closes the gen-eval loop at civic scale. Voice agents generate (autoregressive, locally optimal, no holistic quality compass); Clerk evaluates (sees the finished cascade, checks completeness + consistency + tracker alignment). Don't ship a production log without Clerk verification. Don't try to make voice agents "more careful" while generating — that's asking the washer to dry. Clerk closes the cycle.
 
-**Same principle at terminal-pipeline scale:** City Hall (this terminal) is the GENERATOR of source material; the Newsroom (media terminal) is the EVALUATOR/refiner that turns raw decisions into journalism. Civic output is intentionally raw — quotes, positions, vote tallies, decisions, project updates. Polishing into journalism is the newsroom's seat, not civic's. Don't write edition prose at this terminal.
+**Same principle at pipeline scale:** City Hall (`cron-civic-run.js`) is the GENERATOR of source material; the Newsroom (`cron-desk-run.js`) is the EVALUATOR/refiner that turns raw decisions into journalism. Civic output is intentionally raw — quotes, positions, vote tallies, decisions, project updates. Polishing into journalism is the newsroom pipeline's job, not civic's. Don't write edition prose in civic agent output.
 
 ## Canon-critical (zero-tolerance)
 
@@ -76,9 +78,9 @@ Every council seat carries a status from `Civic_Office_Ledger`. Truesource (`get
 
 ## Handoff boundary
 
-- **City Hall governs.** This terminal runs voice agents, makes decisions, produces source material.
-- **The Newsroom reports.** Media terminal reads the civic production log as input to `/write-edition` and transforms decisions into journalism.
-- **The civic-desk reporter** (`.claude/agents/civic-desk/`) is a MEDIA TERMINAL agent who covers civic events as journalism — NOT a civic terminal file. Don't edit it from here.
+- **City Hall governs.** `cron-civic-run.js` runs voice agents, makes decisions, produces source material, unattended.
+- **The Newsroom reports.** `cron-desk-run.js` reads the civic production log as input to `/write-edition` and transforms decisions into journalism.
+- **The civic-desk reporter** (`.claude/agents/civic-desk/`) is a NEWSROOM agent who covers civic events as journalism — NOT a civic-office file. It's rb/es-maintained alongside the other desk agents, not touched from civic agent work.
 
 ## Civic measure-twice analog
 
@@ -90,4 +92,4 @@ Before declaring a cycle's civic production "done," walk the production log and 
 - All relevant project agents reported (OARI / Stabilization Fund / Health Center / Transit Hub / Baylight)?
 - Clerk verification line landed?
 
-If any step is missing, the cycle is incomplete. Don't ship to media terminal incomplete — asking the newsroom to "fix" missing source material is asking the dryer to wash.
+If any step is missing, the cycle is incomplete. Don't let the civic cron feed the media cron an incomplete production log — asking the newsroom to "fix" missing source material is asking the dryer to wash.

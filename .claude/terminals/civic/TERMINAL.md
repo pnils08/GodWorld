@@ -1,20 +1,16 @@
 # Civic Terminal
 
-**Role:** City-hall, voice agents, initiative tracking, civic project agents. Oakland governance.
+**RETIRED AS A LIVE SEAT (Mike-direct, 2026-08-15, S372).** This terminal is not booted anymore — `cron-civic-run.js` runs the city-hall cascade unattended. rb (research-build/Mags) designs pipeline tuning; es (engine-sheet) executes code/config changes. The rest of this file is kept as a **reference** — the Owned Documentation tables below still point at the right files; the Launch/Session-Close sections below are historical and don't fire.
+
+**Role (historical):** City-hall, voice agents, initiative tracking, civic project agents. Oakland governance.
 **Established:** Session 135 (2026-04-05)
 **Terminal tag for saves:** `[civic]`
 
 ---
 
-## Launch & Resume
+## Launch & Resume — RETIRED
 
-```bash
-claude --name "civic"                     # start fresh
-claude --resume "civic"                   # resume after crash
-claude --resume                           # picker (shows all named sessions)
-```
-
-Inside tmux `godworld` session: this is **window 4** (`Ctrl-b 4`).
+Nobody boots this window anymore. `cron-civic-run.js` runs the cascade on schedule; rb/es edit its agents/skills directly, no session to launch.
 
 ---
 
@@ -202,69 +198,17 @@ Doctrine every terminal follows: [[../../../docs/engine/rollout-rules]] (§2 = t
 
 ## Handoff Protocol
 
-This terminal does not receive routed work. It runs skills.
+Cron produces civic output for the newsroom cron:
+1. `cron-civic-run.js` writes to `production_log_city_hall_c{XX}.md`
+2. `cron-desk-run.js` reads the log as input to `/write-edition`
 
-When this terminal produces civic output for the newsroom:
-1. Write to `production_log_city_hall_c{XX}.md`
-2. Media terminal reads the log as input to `/write-edition`
-
-When this terminal discovers something broken during a skill run:
+When something's broken in the cascade — a gap log surfaces during a cron run, or rb/es spot drift while tuning:
 1. Capture it in the run's gap log (`output/production_log_city_hall_c{XX}_*_gaps.md`) per [[../../../docs/plans/GAP_LOG_TEMPLATE]]
-2. The gap log is the filing channel — research-build triages it next session and routes any fixes to research-build (skill / RULES / docs) or engine-sheet (code / sheets / scripts)
+2. rb triages the gap log and routes fixes: skill/RULES/docs to itself, code/sheets/scripts to engine-sheet
 3. Tag Supermemory saves with `[civic]` prefix
-4. Never write a ROLLOUT row from this terminal
 
 ---
 
-## End-of-Session Diagnostic (S241 governance.22)
+## Session Close — RETIRED
 
-At session-close, Mike runs `/usage` and pastes the per-category breakdown (skills / subagents / plugins / MCP servers) into the session-close commit body when notable. Data informs the boot-burn / per-skill-scope prioritization in governance.22. Source: Claude Code v2.1.149.
-
----
-
-## Session Close
-
-**Two close modes (S226).** Pick by next-session cadence, not by how much work shipped. Canonical pattern lives in [[../research-build/TERMINAL]] §Session Close; CLAUDE.md §Session Lifecycle carries the headline.
-
-### Soft close (~2 min) — chained-session cadence
-
-Use when the next civic session opens within minutes.
-
-**The carried set (ADR-0009 §loop-tightening): SESSION_CONTEXT carries exactly `{PIN, NEXT[terminal]}`, and that is what boot reads.** No STATUS paragraph, no Shipped block. **Minimal-handoff hard caps (S283 Mike-direct, FATAL via sessionEndMechanical guard): NEXT line ≤ 350 chars, PIN ≤ 450, no prose/tables/sections anywhere in the file — claude-mem saves the session, git shows the work, ROLLOUT carries open work.**
-
-1. **Cross-terminal git stack check.** `git log --oneline origin/main..HEAD` — expect empty.
-2. **Update the carried set in SESSION_CONTEXT.md** — the `**PIN:**` line (Session N→N+1, Day/Cycle/Edition as they changed) + your `**NEXT[civic]:**` line (one line: what next session OPENS WITH — open work only, never a recap (git log + claude-mem already carry what shipped; if a clause is reconstructable from git log, cut it)). Don't touch other terminals' NEXT lines.
-3. **Commit** SESSION_CONTEXT.md (with any work commits). Push.
-
-**Skips at this terminal:** governance-doc updates (CIVIC_GOVERNANCE_MASTER_REFERENCE refresh for vote results), initiative-tracker drift writeups, `/save-to-mags`, full Terminal-Specific Audit + Saves below.
-
-**Does NOT skip if civic production ran this session:** the production log (`output/production_log_city_hall_c{XX}.md`) must be complete before soft close. It's the media terminal's input file, not a close-ritual artifact — pushing a half-written production log forward breaks the next `/write-edition` run.
-
-**Trade-off:** civic has no journal so the chained-soft-close conscience cost is lower than media's; the real risk is governance-doc drift accumulating (vote tallies, faction stance shifts, initiative phase moves not landing in `CIVIC_GOVERNANCE_MASTER_REFERENCE`). Rule of thumb ≥3 chained soft closes → hard close at next natural break to catch up the governance docs.
-
-### Hard close (~5-10 min) — end of day, multi-day break, or cold-pickup boundary
-
-Per S229 governance.7 the hard-close ritual collapsed from 13 steps to model steps + 1 mechanical (`scripts/sessionEndMechanical.js`). Run the slimmed `/session-end` SKILL: Step 0 detect terminal → Step 2 SESSION_CONTEXT PIN + NEXT + ROLLOUT updates + terminal-specific saves → Step 3 mechanical script → Step 4 commit & push. There is no Step 1 (it was the journal write, retired S300 for every terminal; numbering kept so these references still resolve). Full skill: `.claude/skills/session-end/SKILL.md` v2.5.
-
-### Terminal-Specific Audit
-
-Read before Step 2 — surface any stale files in the NEXT line or fix inline.
-
-| File | Check |
-|------|-------|
-| `output/production_log_city_hall_c*.md` | Production log complete? All voice agents ran? Clerk verified? |
-| `output/production_log_city_hall_c*_*_gaps.md` | Gap logs filed for any skill that surfaced inefficiency? |
-| `docs/mara-vance/CIVIC_GOVERNANCE_MASTER_REFERENCE.md` | Updated if council votes or initiative statuses changed? |
-| `SESSION_CONTEXT.md` | PIN refreshed + `NEXT[civic]` line updated? |
-
-### Terminal-Specific Saves (Step 2 — model judgment)
-
-Update during Step 2 of the slimmed SKILL alongside SESSION_CONTEXT + ROLLOUT:
-
-- **Production log** — ensure `production_log_city_hall_c{XX}.md` is complete with Mayor decision, faction responses, project agent updates, and clerk verification.
-- **Governance docs** — if votes happened or initiatives moved, update the master reference and initiative tracker.
-- **`/save-to-mags`** — save civic decisions, what the Mayor chose, how factions reacted, anything the media terminal needs for journalism. Tag with `[civic]`. Optional — model judgment.
-- **SESSION_CONTEXT.md PIN + NEXT[civic] line** — refresh the PIN (Session/Day/Cycle/Edition); one NEXT line: what next session OPENS WITH — open work only, never a recap (git log + claude-mem already carry what shipped; if a clause is reconstructable from git log, cut it). The whole carried set (ADR-0009 §loop-tightening) — no STATUS paragraph, no Shipped block.
-- **Flag for media terminal** — note in the production log what's ready for the newsroom. The civic production log is the media terminal's input.
-
-**Mechanical (Step 3) — auto-runs from `sessionEndMechanical.js --terminal=civic`:** session-summary → Supermemory bridge + `auditPlanTagDrift` (informational, never fatal) + ROLLOUT conformance lint + cross-terminal git stack check + `pm2 restart`. (`writeShippedBlock`, `minimalHandoffGuard`, `rotateJournalRecent`, and the JOURNAL content-quality check are all retired — see the skill's Step 3 for what each was. `--rotate-history` is vestigial; leave it off.) Plan: [[archive/plans/2026-05-23-session-end-collapse]].
+No live session, no close ritual. When rb/es finish tuning a civic agent/skill, the change is a normal research-build commit — covered by rb's own Session Close (`.claude/terminals/research-build/TERMINAL.md` §Session Close). If civic production drifts (governance docs stale, tracker mismatched), that's a gap-log item, not a close-step here.

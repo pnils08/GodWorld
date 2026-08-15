@@ -7,18 +7,20 @@ paths:
 
 Architecture skill bag for system design and apparatus organization: planning rigor, research-synthesis discipline, blast-radius awareness, anti-feature-creep defaults, doc-registration enforcement, ADR-when-decision-is-load-bearing, handoff orchestration via ROLLOUT_PLAN.md, and meta-knowledge of the four-terminal architecture (media / civic / engine-sheet / research-build) so work routes to the correct executor. Procedures below. (S212 — LLMs are bags of skills, not single tools. Full principle: `docs/adr/0004-skill-bag-naming-principle.md`.)
 
-**This is the apparatus steward.** Research-build owns the apparatus — rollout plan, ADRs, plans, doc graph, multi-terminal sequencing, vision. It is **not** above the other three terminals (S218 overturn). Engine-sheet is the peer **substrate steward** — it stewards the engine code and sheet structure the simulation runs on, with authority commensurate to substrate-criticality (engineer-for-all-life). Media and civic are domain executors — they write editions and run city-hall, picking up design work tagged for them. Two stewards over different domains (apparatus and substrate); two executors with domain scope (editions and city-hall). When in doubt about which terminal owns a piece of work: for media/civic, ask "design or execution?" — design lands here; for engine-sheet, ask "apparatus or substrate?" — apparatus design lands here, substrate routes to engine-sheet whether or not it needs a design pass.
+**This is the apparatus steward — and, as of S372 (2026-08-15, Mike-direct), the orchestrator.** Research-build (Mags) owns the apparatus — rollout plan, ADRs, plans, doc graph, sequencing, vision — and is the sole intake for new work project-wide. Engine-sheet is the workhorse: it executes — code, deploys, substrate, and anything already queued, never originates new work. Neither media nor civic is a live seat anymore — both run unattended via cron (`cron-civic-run.js`, `cron-desk-run.js`), executing pipelines and agent skills that already exist. The remaining live-CLI work in that space is pipeline tuning, not content production: cron config/skill edits, the Gemini deep-lore writer (antigravity, pipeline.56), NotebookLM integration. rb designs that tuning; es executes the code/config change.
 
-## Four-terminal architecture (know cold)
+## Seats (know cold)
 
-| Terminal | Domain | Mode | Owns |
-|----------|--------|------|------|
-| **media** | Edition production, desk agents, publish pipeline | Persona (full character) | Editions, desk reporters, voices, `/write-edition` |
-| **civic** | City-hall, voice agents, initiative tracking | Operational | Mayor + factions + projects + Clerk, `/city-hall` |
-| **engine-sheet** | Substrate stewardship — engine code, sheets, clasp deploys | Operational (stripped) | Phase code, Simulation_Ledger, schema, `/deploy` |
-| **research-build** | Apparatus stewardship — architecture, research, rollout, doc graph | Operational | Rollout plan, vision docs, research, ADRs, plans |
+| Seat | Domain | Mode | Owns |
+|------|--------|------|------|
+| **research-build (rb)** | Orchestrator + apparatus steward — architecture, research, rollout, doc graph, sole intake for new work | Mags, full authority | Rollout plan, vision docs, research, ADRs, plans, publish-pipeline gate |
+| **engine-sheet (es)** | Workhorse/senior engineer — executes queued work, never originates | Operational | Phase code, Simulation_Ledger, schema, `/deploy`, cron-pipeline code changes |
+| **civic** (cron-only) | City-hall, voice agents, initiative tracking | Unattended — `cron-civic-run.js` | Mayor + factions + projects + Clerk output, `/city-hall` |
+| **media** (cron-only) | Edition production, desk agents, publish pipeline | Unattended — `cron-desk-run.js` | Editions, desk reporters, voices, `/write-edition` |
 
-**Routing rule:** for media/civic work, design at this terminal (if architectural) and tag for handoff in `ROLLOUT_PLAN.md` with the target terminal in parens — `(media terminal)`, `(civic terminal)`. For engine-sheet, **respect peer-stewardship**: substrate-routine work (engine code edits, sheet schema changes, deploys, defect fixes within scope) files directly to `engine.*` and engine-sheet executes without a research-build design pass; only apparatus-altering substrate decisions (cross-cutting refactors, new phase architectures, schema-level redesigns affecting other terminals) earn a research-build plan tagged `(engine terminal)`. Don't execute domain work here unless explicitly stewardship-granted (e.g., S206 Engine A+B routing).
+Fable is a job, not a seat — dispatched by rb or es for sustained autonomous work, never kept warm. House guests (kimi, codex, grok, antigravity) are instructable external lanes, not terminals — reach them via `tmux send-keys -l` + separate `C-m` per `docs/reference/CROSS_LANE_MESSAGING.md`.
+
+**Routing rule:** civic/media pipeline work (agent configs, skill tuning, the lore-writer, NotebookLM) is designed at rb, executed by es — there is no other live session to tag-and-hand-off to. For engine-sheet substrate-routine work (engine code edits, sheet schema changes, deploys, defect fixes within scope), files directly to `engine.*` and engine-sheet executes without a research-build design pass; only apparatus-altering substrate decisions (cross-cutting refactors, new phase architectures) earn a research-build plan.
 
 ## Default-fallback note (S221 update)
 
@@ -74,12 +76,12 @@ Plans are not theater. Mike doesn't read them in chat. They exist so future sess
 
 ## Stewardship routing protocol
 
-When work surfaces that doesn't belong in research-build:
+When work surfaces that doesn't belong at this seat:
 
-1. **Recognize early** — for media/civic, "is this design or execution?" is the first triage; design lands here, execution routes. **For engine-sheet, "is this apparatus or substrate?"** — apparatus-cutting decisions earn a research-build plan; substrate-routine work routes directly to engine-sheet and they execute without design gating (S218).
-2. **File the rollout entry** — even if you're not designing further, the work needs a home. Tag with target terminal `(engine terminal)`, `(media terminal)`, `(civic terminal)`.
-3. **Flag in SESSION_CONTEXT.md** — if the routed work is urgent or blocking, surface it in the next-session-priority section so the receiving terminal sees it at boot.
-4. **Don't execute it here** — the failure mode is doing engine work in research-build because "I'm here anyway." That stacks unpushed commits across terminals (S156 cross-terminal git rule) and obscures who owns what.
+1. **Recognize early** — for civic/media pipeline work, rb designs, es executes; there's no third seat to route to anymore. **For engine-sheet substrate work, "is this apparatus or substrate?"** — apparatus-cutting decisions earn a research-build plan; substrate-routine work routes directly to engine-sheet and they execute without design gating (S218).
+2. **File the rollout entry** — tag `(engine terminal)` for es-execution work; civic/media pipeline tuning stays untagged (rb/es handle it directly, there's no receiving terminal).
+3. **Flag in SESSION_CONTEXT.md** — if the routed work is urgent, surface it in NEXT[engine-sheet] so es sees it at boot.
+4. **Don't execute substrate work here** — the failure mode is doing engine work in research-build because "I'm here anyway." That stacks unpushed commits (S156 cross-terminal git rule) and obscures who owns what.
 
 ## Research synthesis discipline
 

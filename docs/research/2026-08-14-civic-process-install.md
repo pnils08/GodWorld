@@ -11,7 +11,7 @@ sources:
   - docs/mara-vance/INITIATIVE_TRACKER_CONTRACT.md — tracker write contract
   - docs/research/2026-08-14-civic-seat-change-election.md — parked replacement valve
   - docs/plans/2026-07-31-per-hood-political-consequence.md — engine.93 hood fold
-  - docs/research/2026-08-08-journalist-heat-slice-architecture.md — heat-slice pattern (newsroom); civic Mon–Thu is the office-side sibling
+  - docs/research/2026-08-08-journalist-heat-slice-architecture.md — pack shape only; newsroom civic desks are not civic offices
 pointers:
   - "[[../engine/ROLLOUT_PLAN]] — civic.15 is the live install row; seat-change has no row yet (parked)"
   - "[[index]] — registered same change"

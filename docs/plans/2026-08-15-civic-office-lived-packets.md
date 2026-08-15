@@ -6,9 +6,8 @@ type: plan
 tags: [civic, architecture, active]
 sources:
   - docs/research/2026-08-14-civic-process-install.md — parent: Mon–Thu living + district heat
-  - docs/adr/0017-typed-lived-experience-packets.md — Packet law (actor → task → signal → exposure → known → limits → output)
-  - docs/research/2026-08-08-journalist-heat-slice-architecture.md — shared substrate + overlay (media civic desks shipped)
-  - docs/plans/2026-08-08-journalist-heat-slice-packs.md — Task 6 reporter civic-domain pack (Carmen family)
+  - docs/adr/0017-typed-lived-experience-packets.md — Packet order only. Media and civic are different teams.
+  - docs/research/2026-08-08-journalist-heat-slice-architecture.md — pack *shape* (substrate + overlay), not the newsroom civic desk
   - docs/plans/2026-07-28-civic-cron-city-hall.md — civic.15 Sunday chain + weekday datawake
   - docs/plans/2026-08-07-office-holder-position-wall.md — civic.16 wiki already saves stated:/datawake: to cp-POP
   - scripts/cron-civic-run.js domainSlice — current office input (world_summary hoods + INIT ids)
@@ -17,7 +16,7 @@ pointers:
   - "[[engine/ROLLOUT_PLAN]] — civic.17"
   - "[[../research/2026-08-14-civic-process-install]] — research basis"
   - "[[../adr/0017-typed-lived-experience-packets]] — Packet contract"
-  - "[[2026-08-08-journalist-heat-slice-packs]] — media civic desks already shipped; this is the office sibling"
+  - "[[2026-08-08-journalist-heat-slice-packs]] — newsroom only (Carmen et al. cover City Hall). Not this plan."
   - "[[2026-07-28-civic-cron-city-hall]] — civic.15 Sunday packets; this plan does not flip --apply"
   - "[[2026-08-07-office-holder-position-wall]] — civic.16 wall is the persist layer; do not invent a second wiki"
   - "[[index]] — registered same commit"
@@ -38,8 +37,8 @@ civic.15 still owns the stamp. This plan does not write Initiative_Tracker.
 **Terminal:** grok / kimi on `scripts/` + `docs/`; engine-sheet only if a live sheet read is later approved. Sandbox before any live sheet touch.
 
 **Pointers:**
-- Prior work: journalist civic-domain pack + civic.15 datawake
-- Related: [[2026-08-09-three-wake-lived-packet-pilot]] (media proving path)
+- Prior work: civic.15 Sunday packets + weekday datawake + civic.16 office wiki
+- Pattern only: ADR-0017 Packet order (not the newsroom wake)
 - Research basis: [[../research/2026-08-14-civic-process-install]]
 
 **Acceptance criteria:**
@@ -125,12 +124,13 @@ Not in v1: full voice-file rewrite, election/chair-change, live Sheet writes.
 
 ## Status log
 
-- 2026-08-15 (grok) — Plan filed. Media civic desks already work; this is the office sibling. No code yet.
+- 2026-08-15 (grok) — Plan filed for **offices** (Mayor, council, projects, chief). Newsroom civic reporters are a different team and stay on their own packs.
 - 2026-08-15 (grok) — Week locked: Sunday = city-hall packets; Mon–Thu = district packs; wiki (civic.16) is the persist layer so Sunday is not a cold start.
 
 ---
 
 ## Changelog
 
+- 2026-08-15 (grok) — Split locked: civic media ≠ civic offices. This plan is offices only.
 - 2026-08-15 (grok) — Week locked (Sunday city-hall / Mon–Thu district / wiki carry-forward).
 - 2026-08-15 (grok) — Initial plan, civic.17. Research basis [[../research/2026-08-14-civic-process-install]].

@@ -112,7 +112,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | civic.13 | City-hall engine-sheet reconciliation | blocked | engine-sheet | [[../plans/2026-05-22-c94-gap-log-triage]] — detail in pointer (relocated 2026-07-02) |
 | civic.14 | Initiative_Tracker contract + fine-tune | in-progress | research-build / engine-sheet | [[../plans/2026-06-01-initiative-tracker-contract]] + [[../research/2026-06-01-initiative-tracker-state]] — detail in pointer (relocated 2026-07-02) |
 | civic.15 | Civic cron city-hall (Mike-direct S343); Phases 0-4 built S344, dry-Sunday probation before --apply flip | in-progress | engine-sheet | [[../plans/2026-07-28-civic-cron-city-hall]] |
-| civic.17 | Office lived-experience packs (ADR-0017 sibling of journalist heat slices) | ready | grok | [[../plans/2026-08-15-civic-office-lived-packets]] |
+| civic.17 | Civic office district packs and Sunday city-hall depth (not newsroom civic desk) | ready | grok | [[../plans/2026-08-15-civic-office-lived-packets]] |
 
 ### infrastructure.* — Supermemory, services, ingest
 

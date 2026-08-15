@@ -82,6 +82,7 @@ These are the locked beats. Open gaps sit under each beat, not as a second proce
 5. **Win.** Challenger wins only if that office falls below 20. Otherwise the incumbent can still save the seat.
 6. **Retirement (same tab, later).** A retirement opens a race with two candidates. How the city votes that is not designed.
 7. **Voice is not automatic.** Chair change → media event that introduces the person from the citizen list. Mike writes the office voice file only if that seat change actually happens.
+8. **Purpose (Mike 2026-08-14).** Civic people are workers, not a show. They get a question (stadium green or blue, build this or reject this, citizens are complaining about X) and their answer becomes canon so the world moves without Mike. The Initiative_Tracker is that switchboard, not daytime drama. Chair change / election is a **rare valve**: the agent or cron stopped doing that job (dials + decisions made them unfit). Retirement is the likelier exit. Nobody needs a civic soap about who they are.
 
 ---
 
@@ -224,6 +225,8 @@ Nothing today lists a seat at 40 or seats from this log at 20.
 
 A–C is engine-sheet. D–F is engine + media. G is research-build / civic / Mike. H rides every land. That is why one session cannot hold it.
 
+**Reframe after Mike 2026-08-14:** D–G (seeds, interview heat, full voice) are the civic soap. Do not build them as the product. The product is civic.15: decide → tracker write → world shifts. Seat-change is a small replacement valve when a worker will not decide, plus a retirement path. A media "who is this" beat only if a chair actually flips.
+
 ---
 
 ## Applications (living)
@@ -231,11 +234,13 @@ A–C is engine-sheet. D–F is engine + media. G is research-build / civic / Mi
 - 2026-08-14 — filed from Mike's process; no plan, no code.
 - 2026-08-14 — codebase pass: Election_Log names-only; no seed reader; civic LifeHistory is ClockMode-gated; office voices are static person files.
 - 2026-08-14 — Mike: chair change is a media event; he writes the voice leg only if it occurs.
+- 2026-08-14 — Purpose reframe: civic = OpenClaw workers on Initiative_Tracker; seat change is a rare broken-worker valve; retirement likelier; no civic soap.
 
 ---
 
 ## Changelog
 
+- 2026-08-14 (grok) — Purpose reframe: workers who decide, not a civic series. Seat-change shrinks to a rare valve. civic.15 stays the product.
 - 2026-08-14 (grok) — Voice beat: media event first; Mike authors IDENTITY only if the chair actually changes. Civic cron still Avery until then.
 - 2026-08-14 (grok) — Codebase pass. Citizens, seeds, LifeHistory, voice files, scale. Tab choice left open.
 - 2026-08-14 (grok) — Correction: process home is `Election_Log`. Dropped the invented second tab.

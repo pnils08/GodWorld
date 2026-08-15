@@ -822,8 +822,39 @@ function persistHospitalLedger_(ctx) {
   var events = S.hospitalEvents || [];
   var cycle = S.absoluteCycle || S.cycleId || 0;
 
+  // Scan the ledger for citizens currently in a health state (engine.105).
+  // The census must reflect the Status column itself, not just the transition
+  // events that happened to arrive this cycle — any path that sets a health
+  // status directly (sports roster injuries, engine.77) would otherwise leave
+  // a patient the hospital never heard about.
+  var patients = {};
+  var patientCount = 0;
+  if (ctx.ledger && ctx.ledger.rows && ctx.ledger.headers) {
+    var ph = ctx.ledger.headers;
+    var pPop = ph.indexOf('POPID'), pStatus = ph.indexOf('Status'),
+        pFirst = ph.indexOf('First'), pLast = ph.indexOf('Last'),
+        pHood = ph.indexOf('Neighborhood'), pCause = ph.indexOf('HealthCause'),
+        pStart = ph.indexOf('StatusStartCycle');
+    if (pPop >= 0 && pStatus >= 0) {
+      for (var pr = 0; pr < ctx.ledger.rows.length; pr++) {
+        var pRow = ctx.ledger.rows[pr];
+        var pSt = String(pRow[pStatus] || '').trim().toLowerCase();
+        if (HOSPITAL_OPEN_STATES.indexOf(pSt) < 0) continue;
+        patients[String(pRow[pPop])] = {
+          status: pSt,
+          name: (((pFirst >= 0 ? pRow[pFirst] : '') || '') + ' ' +
+                 ((pLast >= 0 ? pRow[pLast] : '') || '')).toString().trim(),
+          neighborhood: pHood >= 0 ? (pRow[pHood] || '') : '',
+          cause: pCause >= 0 ? (pRow[pCause] || '') : '',
+          startCycle: pStart >= 0 ? (Number(pRow[pStart]) || 0) : 0
+        };
+        patientCount++;
+      }
+    }
+  }
+
   var sheet = ctx.ss.getSheetByName('Hospital_Ledger');
-  if (!sheet && events.length === 0) return null; // nothing to create, nothing to count
+  if (!sheet && events.length === 0 && patientCount === 0) return null; // nothing to create, nothing to count
 
   var HEADERS = ['AdmissionId', 'POPID', 'Name', 'Neighborhood', 'Cause',
                  'AdmitCycle', 'StatusNow', 'LastTransitionCycle',
@@ -926,6 +957,33 @@ function persistHospitalLedger_(ctx) {
     }
   }
 
+  // ═══════════════════════════════════════════════════════════════════════════
+  // MISSED-ADMISSION RECONCILE (engine.105)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // Mirror of the ghost-bed reconcile above, in the other direction: the
+  // ghost pass releases beds for citizens the ledger says are healthy; this
+  // pass admits citizens the ledger says are patients but who have no open
+  // bed. Found on bench 0814 C104/C105: POP-01028 Status=injured since C103
+  // (sports roster injury, engine.77 — sets Status directly, never emits a
+  // hospitalEvents entry) with no Hospital_Ledger row. The Status column is
+  // the authority both ways. Self-healing every cycle — catches every
+  // current and future path that sets a health status without an event.
+  var missedAdmits = 0;
+  for (var mPop in patients) {
+    if (!patients.hasOwnProperty(mPop)) continue;
+    if (openByPopId.hasOwnProperty(mPop)) continue; // already has a bed
+    var mp = patients[mPop];
+    var mAdmit = mp.startCycle > 0 ? mp.startCycle : cycle;
+    var mRow = ['H-C' + mAdmit + '-' + mPop, mPop, mp.name, mp.neighborhood,
+                mp.cause, mAdmit, mp.status, cycle, '', '', ''];
+    sheet.appendRow(mRow);
+    openByPopId[mPop] = data.length;
+    data.push(mRow);
+    missedAdmits++;
+    Logger.log('persistHospitalLedger_ reconcile: admitted untracked patient ' + mPop +
+               ' (ledger says "' + mp.status + '" since C' + mAdmit + ', no open bed)');
+  }
+
   var open = 0;
   for (var k in openByPopId) if (openByPopId.hasOwnProperty(k)) open++;
 
@@ -935,13 +993,14 @@ function persistHospitalLedger_(ctx) {
     dischargesThisCycle: discharges,
     deathsThisCycle: deaths,
     ghostsReleased: ghostsClosed,
+    missedAdmitsReconciled: missedAdmits,
     load: open / HOSPITAL_CAPACITY
   };
   ctx.summary.hospitalCensus = census;
 
   Logger.log('persistHospitalLedger_ (engine.52): cycle ' + cycle + ' | open ' + open +
     ' | admits ' + admits + ' | discharges ' + discharges + ' | deaths ' + deaths +
-    ' | ghost beds released ' + ghostsClosed);
+    ' | ghost beds released ' + ghostsClosed + ' | missed admits reconciled ' + missedAdmits);
 
   return census;
 }

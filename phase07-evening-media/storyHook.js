@@ -587,7 +587,9 @@ function storyHookEngine_(ctx) {
       'championship':   { priority: 3, text: function(t) { return t.team + ' CHAMPIONSHIP! City-wide celebration. Legacy story. All desks mobilize.'; } },
       'rivalry':        { priority: 2, text: function(t) { return t.team + ' rivalry game. Heated atmosphere' + (t.neighborhood ? ' in ' + t.neighborhood : '') + '. Fan culture feature.'; } },
       'home-opener':    { priority: 2, text: function(t) { return t.team + ' home opener' + (t.neighborhood ? ' in ' + t.neighborhood : '') + '. Season preview, fan energy, local business boost.'; } },
-      'season-finale':  { priority: 2, text: function(t) { return t.team + ' season finale. End-of-year reflection. Player profiles, record wrap-up.'; } }
+      'season-finale':  { priority: 2, text: function(t) { return t.team + ' season finale. End-of-year reflection. Player profiles, record wrap-up.'; } },
+      'injury':         { priority: 2, text: function(t) { return t.team + ' lose a player to injury. Roster impact, recovery timeline, who steps up' + (t.neighborhood ? ' — reaction in ' + t.neighborhood : '') + '.'; } },
+      'injury-return':  { priority: 2, text: function(t) { return t.team + ' get a player back from injury. Comeback story, rhythm question, lineup ripple.'; } }
     };
 
     for (var sti = 0; sti < sportsTriggers.length; sti++) {

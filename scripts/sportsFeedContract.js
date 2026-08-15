@@ -36,7 +36,7 @@ const SAFE_ENUMS = Object.freeze({
   SeasonType: SEASON_TYPES,
   EventType: EVENT_TYPES,
   PlayerMood: Object.freeze(['', 'confident', 'frustrated', 'hungry', 'reflective', 'dominant', 'uncertain', 'locked-in', 'quiet', 'electric']),
-  EventTrigger: Object.freeze(['', 'hot-streak', 'cold-streak', 'playoff-push', 'playoff-clinch', 'eliminated', 'championship', 'rivalry', 'home-opener', 'season-finale', 'trade-deadline', 'all-star', 'draft']),
+  EventTrigger: Object.freeze(['', 'hot-streak', 'cold-streak', 'playoff-push', 'playoff-clinch', 'eliminated', 'championship', 'rivalry', 'home-opener', 'season-finale', 'trade-deadline', 'all-star', 'draft', 'injury', 'injury-return']),
   HomeNeighborhood: OAKLAND_NEIGHBORHOODS,
   FanSentiment: Object.freeze(['', 'electric', 'euphoric', 'high', 'confident', 'excited', 'neutral', 'moderate', 'uncertain', 'anxious', 'low', 'apathetic', 'disappointed', 'frustrated', 'angry', 'hostile']),
   FranchiseStability: Object.freeze(['', 'stable', 'strong', 'growing', 'uncertain', 'unstable', 'crisis', 'relocating']),

@@ -16,8 +16,10 @@ sources:
   - docs/plans/2026-07-28-civic-cron-city-hall.md — elections / replacement pressure parked as civic.15 fine-tune
   - docs/mara-vance/CIVIC_ELECTION_ENGINE.md — November window + Group A/B stagger
 pointers:
-  - "[[../engine/ROLLOUT_PLAN]] — pending-state home (row not filed until this verdict ignites a plan)"
+  - "[[../engine/ROLLOUT_PLAN]] — no row; parked under civic-process-install"
+  - "[[2026-08-14-civic-process-install]] — parent; this valve stays parked"
   - "[[index]] — registered same change"
+  - "[[../index]] — catalog parked pointer"
   - "[[2026-07-07-simulation-narrative-open-items]] — §13 is the prior election gap"
   - "[[2026-07-28-civic-cron-city-hall]] — civic.15 parked elections / replacement"
   - "[[../plans/2026-07-31-citizen-memory-perception]] — engine.94 ceiling already live; this is not that"
@@ -63,9 +65,9 @@ pointers:
 - **civic.15 `--apply` and clasp.** Listing a race is engine state. Seating writes Civic_Office_Ledger. That is engine-sheet / live-sheet, not a docs-only close.
 - **Do not invent citizens** in tests or docs. Synthetic fixtures only, visibly non-canon.
 
-**Verdict:** `adopt`
+**Verdict:** `adopt` — **parked 2026-08-14**
 
-Mike named the process. The score machine and the November machine are not this. A plan can be written from this file. The plan is the build spec (tasks, readers, stub/coupling updates, tests). This file stays the measure-twice source. No plan ignited this change.
+Parent: [[2026-08-14-civic-process-install]]. Do not ignite a plan from this file until Sunday ingest and consequence are real. This file stays the measure-twice source for the rare valve.
 
 **Ignited plans:** none
 

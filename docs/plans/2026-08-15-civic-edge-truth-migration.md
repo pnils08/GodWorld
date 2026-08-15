@@ -405,8 +405,68 @@ is missing, but because there is almost no one there for him to represent. That 
 a **population** question, not an approval question and not a boundary question,
 and it needs to land before per-district accountability is built on top of it.
 
+## 10. The ledger seam — keep the tracker, add a conduct ledger
+
+**Question put to engine-sheet 2026-08-15:** is `Initiative_Tracker` the system this
+needs, or would a purpose-built city-hall ledger do the job better?
+
+**Recommendation: both, with a seam. Do not replace the tracker.**
+
+The two things have different **cardinality**, and that is the whole argument.
+
+| | Initiative | Conduct |
+|---|---|---|
+| Volume | 6 in ~103 cycles | 9 seats × weekly, rising to all 9 Mon–Thu |
+| Weight | heavy, formal, votable | light, atomic, mostly non-votable |
+| Lifetime | multi-cycle (proposal → vote → mayoral action → implementation → milestones) | single wake |
+| Examples | Baylight, OARI, Youth Pipeline | attacking someone else's initiative, demanding a report, abstaining, saying nothing |
+
+Forcing conduct into `Initiative_Tracker` means minting an `INIT-` row every time a
+member speaks. "Initiative" then stops naming a legislative object, and most rows
+sit ~90% empty against a 28-column schema built for a vote lifecycle. Conversely, a
+city-hall ledger that also held initiatives would duplicate the vote and
+mayoral-action machinery that demonstrably works — INIT-002 correctly records the
+5-4, Vega's no, Tran's yes, the signature, the implementation phase.
+
+**The seam:**
+
+- **`Initiative_Tracker` stays** as the *legislative-object* layer. It gains the
+  authorship columns it lacks (proposer, proposing office, proposed cycle) — the
+  §3.4 fix. Twelve code paths already depend on this tab; appending columns is a
+  header-lookup write, low blast radius.
+- **A city-hall / conduct ledger is added** as the *act* layer. One row per seat per
+  wake: what they did, what they declined, and what they were exposed to when they
+  decided.
+
+**Why the conduct ledger earns its existence** — it does three jobs at once, each of
+which this plan already needs:
+
+1. **It is the approval driver.** Every delta can cite a row instead of a timer.
+   That is §6.1 test 3 (legibility) satisfied structurally rather than by convention.
+2. **It is the omission recorder.** §6.1 test 1 requires that declining to act be
+   *recorded*, not merely absent. Only a per-wake row can hold a silence.
+3. **It is the initiative feeder.** Repeated conduct against the same issue is
+   precisely the signal that graduates into something votable — the cron mechanism
+   in §7, with a place to accumulate.
+
+It also matches the weekly shape exactly: Mon–Thu absorb (§8 — the packs already
+compute this), Sunday express, and the expression lands as a conduct row that may
+or may not escalate to an `INIT-`.
+
+**Blast radius:** a new tab has no existing readers, so it cannot regress anything;
+the tracker change is three appended columns. This is additive on both sides.
+
+**Status:** recommendation only — not approved, not built. Filed as civic.22's
+shape question.
+
 ## Changelog
 
+- 2026-08-15 (engine-sheet) — §10 added: answer to the tracker-vs-city-hall-ledger
+  fork. Recommend keeping Initiative_Tracker as the legislative-object layer (+3
+  authorship columns) and adding a conduct ledger as the act layer, on cardinality
+  grounds — 6 initiatives in 103 cycles vs 9 seats acting weekly. The conduct ledger
+  is simultaneously the approval driver (test 3), the omission recorder (test 1) and
+  the initiative feeder (§7). Recommendation only, not approved.
 - 2026-08-15 (engine-sheet) — §9 ROOT CAUSE: not a boundary defect, a feeder-pool
   defect. generateGenericCitizens draws from getCoreSimNeighborhoods_ (12 of 22
   hoods); the other 10 hold 15 citizens total against 825 in the core twelve, and

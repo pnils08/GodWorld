@@ -8,6 +8,10 @@
     "notebooklm": {
       "command": "/root/GodWorld/.venv/nlm/bin/notebooklm-mcp",
       "args": []
+    },
+    "spacemolt": {
+      "type": "http",
+      "url": "https://game.spacemolt.com/mcp"
     }
   }
 }

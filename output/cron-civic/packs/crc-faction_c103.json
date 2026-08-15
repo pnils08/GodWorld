@@ -1,0 +1,112 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "actor": {
+    "id": "POP-00504",
+    "name": "Warren Ashford",
+    "role": "City Council District 7",
+    "officeId": "COUNCIL-D7",
+    "district": "D7",
+    "faction": "CRC",
+    "agentDir": "civic-office-crc-faction"
+  },
+  "task": {
+    "goal": "Live with this district. Remember it. Sunday you fight for what you already know.",
+    "assignment": "weekday-district",
+    "approach": "Speak only from this pack and your prior notes. Do not invent people or counts."
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "Temescal",
+      "Rockridge",
+      "KONO"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00002",
+        "name": "Amara Keane",
+        "neighborhood": "Rockridge",
+        "role": "Pianist, Philanthropist",
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-00019",
+        "name": "Isley Kelley",
+        "neighborhood": "Rockridge",
+        "role": "Shortstop, Oakland A's",
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-00022",
+        "name": "Danny Horn",
+        "neighborhood": "Temescal",
+        "role": "Center Fielder, Oakland A's",
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-00055",
+        "name": "Ross Cabral",
+        "neighborhood": "Temescal",
+        "role": "Catcher, Las Vegas Aviators (AAA)",
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-00120",
+        "name": "Lou Hollis",
+        "neighborhood": "Rockridge",
+        "role": "Scout, Oakland A's",
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-00121",
+        "name": "Otis Redd",
+        "neighborhood": "Rockridge",
+        "role": "Scout, Oakland A's",
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-00124",
+        "name": "Steve Conrad",
+        "neighborhood": "Rockridge",
+        "role": "Ex-As Star - RF",
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-00169",
+        "name": "Brie Harris",
+        "neighborhood": "Temescal",
+        "role": "Flower Shop Owner",
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      }
+    ],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-INIT-005",
+      "t": "FACT",
+      "text": "Temescal Community Health Center is in construction-active — C102: Construction timeline accelerated; double shifts ordered for caisson drilling and excavation.",
+      "src": "output/initiative_tracker.json"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + action + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

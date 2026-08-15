@@ -76,7 +76,7 @@ Not in v1: full voice-file rewrite, election/chair-change, live Sheet writes.
   1. List exact snapshot column names for name, hood, role. If snapshot missing, builder must fail empty, not call Sheets, unless Mike approves a read.
   2. Mayor / chief / project: citywide or listed hoods, not “all 900 people.” Cap (e.g. 8 named constituents) by district then role, deterministic sort.
 - **Verify:** table in this plan names real columns (no invented fields).
-- **Status:** [ ] open
+- **Status:** [x] columns are POPID, Name (or First+Last), Neighborhood, RoleType, Status on `simulation_ledger_snapshot.jsonl`
 
 ### Task 2: `scripts/buildCivicOfficeSlice.js`
 
@@ -89,7 +89,7 @@ Not in v1: full voice-file rewrite, election/chair-change, live Sheet writes.
   3. Emit Packet JSON (ADR-0017 order) + a short markdown audit file under `output/cron-civic/packs/`.
   4. Reuse `livedExperiencePacket.js` helpers if they fit without dragging reporter wakes. Do not clone eighteen journalist builders.
 - **Verify:** `node scripts/buildCivicOfficeSlice.test.js` PASS; fixture office with no ledger rows gets `subjects: []`.
-- **Status:** [ ] open
+- **Status:** [x] builder + test shipped (grok 2026-08-15). C103 Ashford pack on disk. Cron not wired yet.
 
 ### Task 3: Wire weekday datawake to the pack
 

@@ -71,7 +71,7 @@ Do not start three unrelated plans. When we leave research, each plan cites this
 
 Umbrella for the civic process install. civic.15 remains the Sunday/datawake implementation plan. New child plans wait for a propose-then-build gate. Seat-change stays parked.
 
-**Ignited plans:** none new. Existing: [[../plans/2026-07-28-civic-cron-city-hall]] (civic.15).
+**Ignited plans:** [[../plans/2026-07-28-civic-cron-city-hall]] (civic.15). [[../plans/2026-08-15-civic-office-lived-packets]] (civic.17 — office packs).
 
 ---
 

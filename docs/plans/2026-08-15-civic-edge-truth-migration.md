@@ -377,6 +377,64 @@ So the districts are not drawn wrong. **The feeder only fills 12 of 22 hoods**, 
 the district map faithfully reflects a city whose population generator has been
 aimed at half of it.
 
+**CORRECTED 2026-08-15 (engine-sheet, execution pass) — civic.21 needs NO CODE
+CHANGE.** Two readings of the generator were wrong before this pass, both worth
+recording because they point opposite ways:
+
+1. *First read:* "expand `CoreSimRank`" — dismissed as too broad, because
+   `getCoreSimNeighborhoods_` has **11 consumers across 6 phases**
+   (`godWorldEngine2`, `generateCrisisSpikes`, `checkForPromotions`,
+   `generateGenericCitizens`, `runNeighborhoodEngine`, `cityEveningSystems`,
+   `buildEveningFamous`, `textureTriggers`, `culturalLedger`,
+   `recordWorldEventsv3`, `auditHoodDrift`).
+2. *Second read:* the picker seeds from a hardcoded `neighborhoodWeights` literal
+   (:415) holding exactly the 12 core hoods — so a separate placement pool looked
+   necessary.
+
+**Both wrong.** `pickWeightedNeighborhood` seeds `weights` from that literal
+(:508-510) but builds the weighted array by iterating **`neighborhoods`** — the
+ledger list from `getCoreSimNeighborhoods_` — with `weights[neighborhood] || 1.0`
+(:586-588). The literal is a **tuning table, not a gate**: any hood in the ledger
+core list that lacks a tuned weight is placed at a default weight of 1.0
+automatically. The ADR-0016 migration did its job; the substrate is already correct.
+
+**The entire gate is 10 empty cells.** `CoreSimRank` is populated 1–12 contiguous
+and blank for the other ten:
+
+| Ranked 1–12 (draw order) | Unranked — invisible to all 11 consumers |
+|---|---|
+| Temescal, Downtown, Fruitvale, Lake Merritt, West Oakland, Laurel, Rockridge, Jack London, Uptown, KONO, Chinatown, Piedmont Ave | Adams Point, Grand Lake, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, **East Oakland**, **Baylight District** |
+
+Two entries in that right-hand column deserve their own line: **East Oakland** —
+major Oakland geography, added S352 — and **Baylight District**, the flagship $2.1B
+build. Neither currently receives citizen placement, crisis detection, evening
+texture, cultural events, or promotions. The sim's headline development is a place
+where, mechanically, nothing happens.
+
+**What ranking a hood turns on** (all at once, per the consumer list above):
+placement, crisis spikes, promotions, neighborhood-engine processing, evening
+systems / famous / texture / cultural ledger, and world-event recording.
+
+**Determinism note.** Appending ranks 13–22 preserves the relative order of the
+existing twelve, but the weighted array's *length* changes, so `randInt` maps
+differently from the next cycle on. Forward-only; no replay of past cycles is valid
+across the change. Expected for a world change, but it should be a deliberate one.
+
+**This is not engine-sheet's call to make silently.** `canonNeighborhoodLoader`'s
+own docstring names it: *"promoting/reordering core hoods is a sheet edit with
+sim-wide behavioral reach, by design (Mike's lever)."* The substrate is ready; the
+lever is doctrine. Three shapes, in ascending reach:
+
+- **(a) Rank all ten** — the whole city becomes live. Maximum fidelity to
+  "every neighborhood is either performing well or isn't"; largest behavioral delta.
+- **(b) Rank the representation-critical five** — Glenview, Dimond, Ivy Hill (all of
+  D4, which is why Vega represents one citizen), plus East Oakland and Baylight
+  District (all of D5). Fixes the two broken districts and the flagship blind spot;
+  leaves Adams Point / Grand Lake / Brooklyn / Eastlake / San Antonio as quiet
+  child-areas.
+- **(c) Leave as-is** — accept that ten hoods are places without communities, and
+  that D4 and D5 are represented by members with almost no constituents.
+
 **Constraint on the fix (from the loader's own docstring):** `CoreSimRank` rank
 order *is* draw order, and seeded rng consumption depends on it — promoting or
 reordering core hoods is a sheet edit with sim-wide behavioural reach, by design.
@@ -519,6 +577,14 @@ Nothing in 1–4 needs a ruling. Only 5 does.
 
 ## Changelog
 
+- 2026-08-15 (engine-sheet) — civic.21 EXECUTION PASS: needs no code. Two wrong
+  reads corrected — the picker iterates the ledger core list with a `|| 1.0` default,
+  so `neighborhoodWeights` is a tuning table, not a gate, and no separate placement
+  pool is warranted. The whole gate is 10 blank `CoreSimRank` cells. Ranking turns on
+  11 consumers across 6 phases at once and shifts rng forward-only. East Oakland and
+  Baylight District (the flagship $2.1B build) are both unranked — no crisis, no
+  cultural, no evening, no placement. Lever is the builder's by the loader's own
+  docstring; three shapes offered.
 - 2026-08-15 (engine-sheet) — §11 handoff added. GATE CORRECTED: SANDBOX 0814 is
   standing, so the live smoke was never a blocker — read all gate notes as "prove on
   bench first". Flagged the DEPLOY.md sheet-write replay obligation, which this plan

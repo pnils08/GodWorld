@@ -459,8 +459,74 @@ the tracker change is three appended columns. This is additive on both sides.
 **Status:** recommendation only — not approved, not built. Filed as civic.22's
 shape question.
 
+## 11. Handoff to research-build
+
+### 11.1 Gate correction — the live smoke is not a blocker
+
+Earlier sections gate Apps-Script work behind the `ab55d0d8` live smoke. **That was
+over-conservative.** `SANDBOX 0814` is standing (DEPLOY.md §CURRENT, stood up S370,
+code current at main `1348e685`, 172/172 files byte-verified) and under the
+Groundhog model *"bench is the same state as live, so the bench fire + sheet verify
+IS the smoke."* Every cohort here can be proven on the bench without waiting for a
+live cycle. Read every "held behind the smoke gate" note in §4 and §8 as **"proven
+on SANDBOX 0814 first."**
+
+### 11.2 The obligation that is easy to miss
+
+DEPLOY.md §Sheet writes: *"anything not in CODE does not carry over."* A
+`clasp push` to live carries **code only**. Every schema change, column add, data
+migration and backfill performed against the sandbox **sheet** must be replayed
+against live explicitly (dry-run → apply → read-back verify). Self-arming
+`ensure*Schema_` code re-arms on live's first fire; **everything else does not.**
+
+This plan is unusually exposed to that rule, because most of its cohorts are
+*data* fixes. The replay column below is not optional bookkeeping — skip it and
+live runs corrected code against uncorrected data.
+
+### 11.3 Writer map — every finding, its writer, and what it costs
+
+| Artifact | Writer | Literal / source | Defect | Self-heals on live? | Replay |
+|---|---|---|---|---|---|
+| `Neighborhood_Map.District` | `v3NeighborhoodWriter.js` :123 map, :389 compute, :417-423 write | `NEIGHBORHOOD_DISTRICT_MAP` (8) | 14 of 22 blank-overwritten every cycle | n/a — fix is to **stop** writing | **Yes** — seed 22 District cells, *after* 4a deploys |
+| `Crime_Metrics` | `utilities/ensureCrimeMetrics.js:43` | `NEIGHBORHOOD_CRIME_PROFILES` (20) | 3 ghost hoods fed live data; 5 canon hoods absent incl. Baylight | **Partial** — update-or-append only, no delete path (:412-470) | **Yes** — delete 3 ghost rows by hand |
+| `Neighborhood_Demographics` | `utilities/ensureNeighborhoodDemographics.js:28` | `DEMO_NEIGHBORHOODS` (21) | East Oakland absent | **Partial** — same update-or-append shape | Verify for ghosts; append is automatic |
+| `Faith_Organizations` | `utilities/ensureFaithLedger.js` | 11 hood-literal lines | Montclair ghost; 11 canon hoods have no faith org | Partial | Delete/repoint Montclair row |
+| `Transit_Metrics` | `utilities/ensureTransitMetrics.js` | 27 hood-literal lines | **Different shape** — keyed by Station/Corridor, not Neighborhood. Audit only, do not force into this pattern | n/a | n/a |
+| `Household_Ledger.Neighborhood` | 7 writers across phase04/05 (`householdFormationEngine`, `migrationTrackingEngine`, `bondEngine`, `generationalWealthEngine`, `generationalEventsEngine`, `educationCareerEngine`, `generateCitizensEvents`) | free text, unconstrained | 25 rows on 7 non-canon values; `Piedmont Avenue` ×14 is a pure spelling split | No | **Yes** — fold + purge |
+| Generic citizen placement | `generateGenericCitizens.js:412` | `getCoreSimNeighborhoods_` → `CoreSimRank` (12 of 22) | 10 hoods never seeded; Vega left with 1 citizen | No | **Yes** — `CoreSimRank` is a sheet edit, **and rank order is rng draw order** |
+| `Initiative_Tracker` | **no creator exists** — `civicInitiativeEngine` resolves only | — | no authorship path, no authorship columns | No | **Yes** — 3 appended columns |
+
+### 11.4 Montclair is already in the world four times over
+
+It carries a `Crime_Metrics` row, 5 `Household_Ledger` households, a
+`Faith_Organizations` entry, and (until today) a district-map slot — while having no
+`Neighborhood_Map` row. The "bring Montclair aboard" ruling is not an addition; it
+is **regularising a hood the derived data already treats as real.** Seeding its row
+makes four existing artifacts legal rather than creating anything new.
+
+### 11.5 Suggested order for RB
+
+1. **civic.21 feeder pool** — no deploy dependency on E1, unblocks the population
+   floor everything else is measured against. Watch the rng draw-order constraint.
+2. **E1 + E2 together** — same defect class, both writer-first, both bench-provable.
+   E1 must precede the District seed (4a→4b).
+3. **E3 household/business geography** — independent, mostly data.
+4. **§8 wiring** — cheapest real win once E1 lands: exposure is already computed in
+   the packs and discarded.
+5. **E5 / civic.22** — after §10's ledger shape is approved.
+
+Nothing in 1–4 needs a ruling. Only 5 does.
+
 ## Changelog
 
+- 2026-08-15 (engine-sheet) — §11 handoff added. GATE CORRECTED: SANDBOX 0814 is
+  standing, so the live smoke was never a blocker — read all gate notes as "prove on
+  bench first". Flagged the DEPLOY.md sheet-write replay obligation, which this plan
+  is unusually exposed to since most cohorts are data fixes. Writer map completed for
+  all 8 artifacts. Two more ensure* literals found (ensureFaithLedger,
+  ensureTransitMetrics); Transit is station-keyed and explicitly NOT this pattern.
+  ensure* verified update-or-append with no delete path, so ghost rows need manual
+  removal while missing rows self-heal. Montclair present in 4 derived artifacts.
 - 2026-08-15 (engine-sheet) — §10 added: answer to the tracker-vs-city-hall-ledger
   fork. Recommend keeping Initiative_Tracker as the legislative-object layer (+3
   authorship columns) and adding a conduct ledger as the act layer, on cardinality

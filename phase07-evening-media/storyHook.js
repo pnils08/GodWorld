@@ -589,7 +589,8 @@ function storyHookEngine_(ctx) {
       'home-opener':    { priority: 2, text: function(t) { return t.team + ' home opener' + (t.neighborhood ? ' in ' + t.neighborhood : '') + '. Season preview, fan energy, local business boost.'; } },
       'season-finale':  { priority: 2, text: function(t) { return t.team + ' season finale. End-of-year reflection. Player profiles, record wrap-up.'; } },
       'injury':         { priority: 2, text: function(t) { return t.team + ' lose a player to injury. Roster impact, recovery timeline, who steps up' + (t.neighborhood ? ' — reaction in ' + t.neighborhood : '') + '.'; } },
-      'injury-return':  { priority: 2, text: function(t) { return t.team + ' get a player back from injury. Comeback story, rhythm question, lineup ripple.'; } }
+      'injury-return':  { priority: 2, text: function(t) { return t.team + ' get a player back from injury. Comeback story, rhythm question, lineup ripple.'; } },
+      'debut':          { priority: 2, text: function(t) { return t.team + ' debut a new face. First-impression story, scouting-report-vs-reality, fan verdict' + (t.neighborhood ? ' in ' + t.neighborhood : '') + '.'; } }
     };
 
     for (var sti = 0; sti < sportsTriggers.length; sti++) {

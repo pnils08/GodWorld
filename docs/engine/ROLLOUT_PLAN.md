@@ -2,7 +2,7 @@
 
 **This file is canonical for open/closed work** (S207). Pointer-only: one line per job, detail lives in the pointer doc — never here (S286 hard rule, Mike-direct).
 
-**Status:** ACTIVE (building) | **Last Updated:** 2026-08-15 — S371 consolidation (research-build). This file is now the ONLY open-work tracker: [[ENGINE_REPAIR]] retired to history, its 2 unique open rows migrated as `engine.106`/`engine.107`, and `engine.105` registered retroactively after shipping live with no row. S371 sweep moved 6 `done-pending-archive` rows out. 110 rows open: 40 touched in the last 30 days, 53 stale >30d, 14 never referenced by any commit — triage table in the S371 close note.
+**Status:** ACTIVE (building) | **Last Updated:** 2026-08-15 — S371 consolidation (research-build). This file is now the ONLY open-work tracker: [[ENGINE_REPAIR]] retired to history, its 2 unique open rows migrated as `engine.106`/`engine.107`, and `engine.105` registered retroactively after shipping live with no row. S371 sweep moved 6 `done-pending-archive` rows out. 110 rows open — of the 107 triaged at sweep close, 40 were touched within 30 days, 53 are stale past 30 days, and 14 have never been cited by any commit; the other 3 are `engine.105`/`106`/`107`, registered after the triage ran. Full triage table + the 14 ids: [[ROLLOUT_ARCHIVE]] §S371 triage.
 **Filing protocol (S212):** semantic groups + pointer-only entries — see [[rollout-rules]] §3–§5 (taxonomy, add, close). Full design: [[../adr/0005-rollout-plan-structure]].
 **North star:** `docs/ARCHITECTURE_VISION.md` — Jarvis + persistent sessions. Everything we build points there.
 **Completed phase details:** [[engine/ROLLOUT_ARCHIVE]] — read on demand, not at boot.

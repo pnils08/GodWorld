@@ -843,6 +843,39 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 6 rows — pipeline.52 + engine.9 + engine.77 + engine.101 + engine.103 + research.26. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
 
+### S371 triage — evidence pass over the surviving open rows
+
+Method: every open row id matched word-boundary against the full commit history (`git log --all --extended-regexp --grep`). Warm/stale is measured from the most recent commit that cites the id. **Cold means never cited in any commit — not dead.** Watch-type rows (external tools, monitoring) never earn commits by nature; keep/close is a per-row judgment, not a sweep action.
+
+Counts: 107 rows triaged (state at sweep close) — 40 warm ≤30d, 53 stale >30d, 14 never cited. `engine.105`/`106`/`107` were registered after the triage ran, bringing the open total to 110.
+
+**The 14 never cited by any commit:**
+
+| row | state | terminal | note |
+|---|---|---|---|
+| pipeline.3 | needs-info | research-build | /interview Step 8d coverage-ratings — deferred decision |
+| pipeline.36 | ready | engine-sheet / research-build | /edition-print C96 friction |
+| pipeline.37 | ready | engine-sheet / research-build | /post-publish C96 friction |
+| engine.1 | blocked | engine-sheet | Phase 40.2 cattle refactor (needs plan) |
+| engine.3 | needs-info | engine-sheet | Advance-initiative remedy threshold calibration |
+| engine.6 | blocked | engine-sheet | Press_Drafts.LinkedStoryline dead column, 164 rows |
+| infrastructure.1 | blocked | research-build / engine-sheet | Bay-tribune unified ingest rebuild, phases 2–7 |
+| infrastructure.2 | ready | engine-sheet | World Memory remaining — archive ingest |
+| infrastructure.7 | ready | engine-sheet | Gemini Notebook deep research integration |
+| research.2 | blocked | research-build | Memento CBR case-bank, Phase 2 gated |
+| research.3 | needs-info | research-build | Document processing pipeline evaluation |
+| research.7 | needs-info | research-build | KAIROS background daemon — watch-type |
+| research.8 | needs-info | research-build | Hermes Agent reference architecture — watch-type |
+| research.10 | blocked | research-build / engine-sheet | Arc engine grafts + Patterns A/B/D |
+
+**Oldest stale rows** (top of the >30d list, by last citing commit): research.5 97d · engine.15 95d · governance.3 95d · governance.8 95d · governance.9 95d · infrastructure.3 82d · research.4 82d · pipeline.2 81d · pipeline.8 81d · pipeline.24 81d · engine.20d 81d · governance.22 79d · research.9 76d · engine.5 75d · infrastructure.5 75d · governance.18 75d · governance.30 75d.
+
+**Cross-tracker alignment gaps found in the same pass** (SESSION_CONTEXT NEXT lines vs rows — other terminals' lines are theirs to edit, listed here as findings only):
+- `NEXT[grok]` reads "world closed, project dead" while grok shipped civic-office commits through 2026-08-14 22:56.
+- `NEXT[antigravity]` names an untracked research file — open work with no row and no commit.
+- `NEXT[kimi]`'s "Row 35 restatement belongs to engine-sheet" is moot; the row closed at migration. Its other two items are genuinely open.
+- `engine-sheet/TERMINAL.md:44` still sends boot to the retired [[ENGINE_REPAIR]] for open work.
+
 ## S359 Archive Pass (2026-08-07, research-build) — solo-seat week + S357 batch closures sweep
 
 10 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6). Each entry preserves the original ROLLOUT description verbatim. Cluster: 6 engine.*, 1 civic.*, 1 research.*, 2 governance.*.

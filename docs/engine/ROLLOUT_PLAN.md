@@ -115,7 +115,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | civic.18 | District map reconciliation — 4 drifted copies vs 22 live hoods; Task 3 + 4th copy shipped Node-side, Task 4 reversed per ADR-0016 (§7), Apps-Script half deploy-gated | in-progress | engine-sheet | [[../plans/2026-08-15-district-map-reconciliation]] §7 |
 | civic.19 | Council as actors — districts own approval, author their own initiatives | blocked | research-build | [[../plans/2026-08-15-district-map-reconciliation]] §6 — ALSO blocked on the INIT-006 tag ruling (credits Tran, not Rivers) |
 | civic.20 | Civic edge truth migration — entity layer is anchored, edges are not; 6 cohorts, writer-before-data | ready | engine-sheet | [[../plans/2026-08-15-civic-edge-truth-migration]] — §8 cheapest win, §9 escalation |
-| civic.21 | Districts do not map to population — Vega represents 1 citizen, Rivers 4, Tran 222; 7 of 22 hoods have 0 residents. Gates per-district accountability | needs-info | research-build | [[../plans/2026-08-15-civic-edge-truth-migration]] §9 |
+| civic.21 | Feeder pool fills 12 of 22 hoods — generateGenericCitizens draws CoreSimRank only; 10 hoods hold 15 citizens vs 825 core. Vega's 3 hoods all outside it. CoreSimRank order = rng draw order | ready | engine-sheet | [[../plans/2026-08-15-civic-edge-truth-migration]] §9 |
 | civic.22 | Initiative authorship — nothing can create an initiative; schema has 5 mayoral-action cols, 0 proposer cols. The inversion's generative half | ready | research-build | [[../plans/2026-08-15-civic-edge-truth-migration]] §7 |
 
 ### infrastructure.* — Supermemory, services, ingest

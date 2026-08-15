@@ -347,9 +347,51 @@ Active citizens per district, via the corrected map:
 development, represents four. Tran represents 222. Seven of the 22 hoods have zero
 residents.
 
-This is the same inversion one layer down: district boundaries came from a lookup
-table, citizen generation populated hoods by its own logic, and the two were never
-reconciled. Representation is an artifact of two unrelated processes.
+**ROOT CAUSE FOUND 2026-08-15 — this is a feeder-pool defect, not a boundary
+defect.** `generateGenericCitizens.js:412` draws placements from
+`getCoreSimNeighborhoods_(ctx)` — the `CoreSimRank` subset, which is **12 of the 22
+hoods**: Temescal, Downtown, Fruitvale, Lake Merritt, West Oakland, Laurel,
+Rockridge, Jack London, Uptown, KONO, Chinatown, Piedmont Ave.
+
+The other ten receive no generated citizens at all. Their populations, in total:
+
+| Non-core hood | Citizens |
+|---|---|
+| Adams Point | 7 |
+| San Antonio | 3 |
+| East Oakland | 2 |
+| Baylight District | 2 |
+| Ivy Hill | 1 |
+| Brooklyn, Dimond, Eastlake, Glenview, Grand Lake | **0 each** |
+
+**15 citizens across ten neighborhoods; 825 across the core twelve.** The
+correlation is exact — every underpopulated district is underpopulated precisely to
+the extent its hoods sit outside `CoreSimRank`.
+
+Vega represents one citizen because **all three of his neighborhoods** — Glenview,
+Dimond, Ivy Hill — are outside the feeder pool. Rivers holds two hoods that are
+both outside it, one of which (Baylight District) did not exist until recently and
+the other (East Oakland) was added at S352.
+
+So the districts are not drawn wrong. **The feeder only fills 12 of 22 hoods**, and
+the district map faithfully reflects a city whose population generator has been
+aimed at half of it.
+
+**Constraint on the fix (from the loader's own docstring):** `CoreSimRank` rank
+order *is* draw order, and seeded rng consumption depends on it — promoting or
+reordering core hoods is a sheet edit with sim-wide behavioural reach, by design.
+So expanding the pool is a deliberate lever-pull with determinism consequences, not
+a mechanical widening. Either route — expand `CoreSimRank`, or give the generator a
+secondary non-core placement path — needs that accounted for.
+
+**Migration will not solve this on its own.** `migrationTrackingEngine.js` *is*
+wealth-matched as expected (`MISFIT_INCOME_RATIO 2.5`, `MAX_BURDEN 0.40`,
+`TARGET_BURDEN 0.30`, live rent-burden scoring), but its cap is
+`MAX_UNITS_PER_CYCLE: 2` — two *households*, not five citizens — and its own comment
+describes moves as "rare, qualitative (1:438 sample)". It also *relocates existing*
+households rather than creating residents, so it redistributes scarcity rather than
+filling ten empty hoods. It is the right slow-burn mechanism to keep; it is not the
+repopulation mechanism.
 
 **Why this gates E5 and civic.19.** Per-district accountability across districts of
 1 and 222 is not accountability. And it bounds §6.2: *condition* exposure is always
@@ -360,11 +402,19 @@ constituents who do not exist.
 
 Vega passes no version of "does its life match its life" — not because the wiring
 is missing, but because there is almost no one there for him to represent. That is
-a population/boundary question, not an approval question, and it needs a ruling
-before per-district accountability is built on top of it.
+a **population** question, not an approval question and not a boundary question,
+and it needs to land before per-district accountability is built on top of it.
 
 ## Changelog
 
+- 2026-08-15 (engine-sheet) — §9 ROOT CAUSE: not a boundary defect, a feeder-pool
+  defect. generateGenericCitizens draws from getCoreSimNeighborhoods_ (12 of 22
+  hoods); the other 10 hold 15 citizens total against 825 in the core twelve, and
+  every underpopulated district is underpopulated exactly to the extent its hoods
+  sit outside CoreSimRank. Vega's three hoods are all outside it. Constraint:
+  CoreSimRank order is rng draw order. Migration verified wealth-matched but capped
+  at 2 households/cycle and relocates rather than creates — keep it, but it is not
+  the repopulation mechanism.
 - 2026-08-15 (engine-sheet) — §7 (the inversion: tracker is the arena; absorb
   Mon–Thu, express Sunday), §8 (absorption already computed in civic packs and
   discarded — test 2 needs wiring, not measurement), §9 (ESCALATION: districts do

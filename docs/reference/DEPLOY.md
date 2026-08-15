@@ -49,7 +49,14 @@ sandbox is the intended target for anything unverified.
 bench is the same state as live, so the bench fire + sheet verify is the smoke. Live runs
 clear whenever Mike fires them; they confirm, they don't gate.
 
-**NO CURRENT SANDBOX (Mike-direct 2026-08-11, S366).** SANDBOX 0720 is gone; no bench exists. Until a new one is stood up (§Standing up a NEW sandbox — requires Mike), engine changes prove via offline Node harnesses (vm-sandbox pattern, e.g. `scripts/hospitalTalkback.test.js`) and verify on the next live cycle fire.
+**CURRENT: `SANDBOX 0814` (stood up S370, 2026-08-14).** Copy of live at post-C103 state (Mike-made copy per §Standing up a NEW sandbox). This is the bench for engine-wave vetting under the Groundhog model.
+- Spreadsheet ID `1j1Xj6dcpxMImqz079w7bEf4N58R-ct_lOmVO2imEmsQ`
+- Bound Apps Script ID: `1WlAG5UUK5SOwlie7PnQHGXkidm-4Yhm_yKS_E5b_HYp3N9vngoaybiBM`
+- Code current at exact main `1348e685` (2026-08-14 sports debut EventTrigger). Pushed via temp-dir route, pull-back matched 172/172 files byte-for-byte.
+- Web-app deployment `AKfycbwMojhZb2Y1hopBVqii2FDBB-C7JAqauKc_PXxaX9IHcOUdmSXKZE5juiwx0NRBhBfw` @1. **WARNING: any valid-token GET fires a FULL cycle — no ping mode.**
+- Service-account read verified from Node (941 ledger rows, `GODWORLD_SHEET_ID` override — env default points at PROD).
+- Script Properties (`SIM_SSID` = sandbox sheet ID, `CYCLE_TRIGGER_TOKEN` = shared env-file value): Mike sets per protocol step 3 — first fire proves them.
+- First fire is a COLD START (PropertiesService doesn't copy) — carry-dependent channels prove from the second fire on.
 
 **RETIRED: `SANDBOX 0720` (S328 2026-07-20 → gone 2026-08-11).** Was: copy of live at post-C102 canonical state (prod code engine.57-.71 incl. weather/transit/crisis coupling; C102 fired live by Mike, verify PASS). Purpose: vet the next engine wave (Row 24 career-unfreeze prod window, engine.72 triage fixes) before live carries it. Sheet name `SANDBOX_0720_Simulation_Narrative` (71 tabs).
 - Spreadsheet ID `1SHlquj9iLCK129SQEcXcvFCNkuGMgwLItDPj_ERiofI`

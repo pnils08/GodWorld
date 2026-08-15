@@ -38,28 +38,14 @@ const PROJECT_ROOT = path.resolve(__dirname, '..');
 const OUTPUT_DIR = path.join(PROJECT_ROOT, 'output/civic-voice-packets');
 
 // ─── DISTRICT → NEIGHBORHOOD MAPPING ──────────────────────
-// Maps council districts to neighborhoods in the simulation.
-// Based on Civic_Office_Ledger notes and Oakland geography.
-const DISTRICT_NEIGHBORHOODS = {
-  D1: ['West Oakland', 'Brooklyn'],                           // Carter (OPP)
-  D2: ['Downtown', 'Chinatown', 'Jack London'],              // Tran (IND)
-  D3: ['Fruitvale', 'San Antonio'],                           // Delgado (OPP)
-  D4: ['Glenview', 'Dimond', 'Ivy Hill'],                     // Vega (IND)
-  D5: ['East Oakland', 'Coliseum', 'Elmhurst'],               // Rivers (OPP)
-  D6: ['Montclair', 'Piedmont Ave'],                           // Crane (CRC)
-  // S256 — KONO moved D2→D7 to conform to locked canon (INSTITUTIONS §Neighborhoods,
-  // canonized S215/civic.10a). Duplicate of lib/districtMap.js; fixed in lockstep.
-  D7: ['Temescal', 'Rockridge', 'KONO'],                      // Ashford (CRC)
-  D8: ['Lake Merritt', 'Adams Point', 'Grand Lake', 'Eastlake'], // Chen (CRC)
-  D9: ['Laurel', 'Uptown']                                    // Mobley (OPP)
-};
-
-// Faction → district groupings
-const FACTION_DISTRICTS = {
-  OPP: ['D1', 'D3', 'D5', 'D9'],   // Carter, Delgado, Rivers, Mobley
-  CRC: ['D6', 'D7', 'D8'],          // Crane, Ashford, Chen
-  IND: ['D2', 'D4']                  // Tran, Vega
-};
+// civic.18 — was a fourth verbatim copy of the district map, carrying a
+// "Duplicate of lib/districtMap.js; fixed in lockstep" note. Lockstep-by-comment
+// IS the drift mechanism ADR-0016 exists to retire: it kept KONO current here
+// while the approval engine sat stale at D2 for two months. Single-sourced.
+const {
+  DISTRICT_NEIGHBORHOODS,
+  DISTRICT_FACTIONS: FACTION_DISTRICTS
+} = require('../lib/districtMap');
 
 // ─── SHEET LOADING ─────────────────────────────────────────
 let sheets;

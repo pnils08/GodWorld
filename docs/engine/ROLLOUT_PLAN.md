@@ -113,6 +113,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | civic.17 | Civic office district packs and Sunday city-hall depth (not newsroom civic desk) | ready | grok | [[../plans/2026-08-15-civic-office-lived-packets]] |
 | civic.18 | District map reconciliation — 4 drifted copies vs 22 live hoods; Task 3 + 4th copy shipped Node-side, Task 4 reversed per ADR-0016 (§7), Apps-Script half deploy-gated | in-progress | engine-sheet | [[../plans/2026-08-15-district-map-reconciliation]] §7 |
 | civic.19 | Council as actors — districts own approval, author their own initiatives | blocked | research-build | [[../plans/2026-08-15-district-map-reconciliation]] §6 — ALSO blocked on the INIT-006 tag ruling (credits Tran, not Rivers) |
+| civic.20 | Civic edge truth migration — entity layer is anchored, edges are not; 6 cohorts, writer-before-data | ready | engine-sheet | [[../plans/2026-08-15-civic-edge-truth-migration]] — 4 rulings needed for E4/E5 |
 
 ### infrastructure.* — Supermemory, services, ingest
 
@@ -177,6 +178,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | governance.34 | C97 gap-log triage | in-progress | research-build / engine-sheet | [[../plans/2026-06-13-c97-gap-log-triage]] — detail in pointer (relocated 2026-07-02) |
 | governance.33 | C96 gap-log triage | in-progress | research-build / engine-sheet | [[../plans/2026-06-07-c96-gap-log-triage]] — detail in pointer (relocated 2026-07-02) |
 | governance.35 | REDUCED S260 by governance.36 §loop-tightening to the PIN-self-derive remnant | ready | engine-sheet (design: research-build DONE) | [[../plans/2026-06-14-session-context-mechanization]] — detail in pointer (relocated 2026-07-02) |
+| governance.47 | Cross-lane message bus — stop hand-relaying between lanes; deterministic transport + routing at a judgment seat | blocked | research-build | [[../plans/2026-08-15-cross-lane-message-bus]] |
 
 ---
 

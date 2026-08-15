@@ -141,7 +141,7 @@ path). Cohorts, each independently verifiable, writer-before-data throughout.
 | E1 | District edge | civic.18 §7 tasks 4a–4e — already specced | yes |
 | E2 | Per-hood table writers | `ensureCrimeMetrics` + demographics writer read the ledger instead of a literal; then reconcile rows | yes |
 | E3 | Household/business geography | fold `Piedmont Avenue`→`Piedmont Ave`; rule on `City-wide`; purge Chicago/`A's`/`traveling` | data + writer |
-| E4 | Initiative → place | authored location link; INIT-006 correction (civic.15 stamp — **needs a ruling**) | data |
+| E4 | Initiative → place | authored location link; INIT-006 correction — **ruling landed** (`bedbbedb`): data error, one cell → `Baylight District`, via civic.15 `--apply` | data |
 | E5 | Approval mechanism | the 4-of-9 dead seats + faction monoculture — **design, not repair** | design |
 | E6 | Remaining 62 files | continue engine.99's cohort pattern; `phase05-citizens` first (12 files, civic-critical) | yes |
 
@@ -154,16 +154,26 @@ unsmoked changes live; S250 forbids stacking a fourth).
 
 ## 5. Rulings needed before E4/E5
 
-1. **INIT-006's neighborhood tag** — data error to correct, or intended canon?
-   Blocks civic.19; the flagship project currently credits the wrong member.
-2. **`City-wide` as a business location** — legitimate value or drift?
+1. ~~**INIT-006's neighborhood tag**~~ — **RESOLVED 2026-08-15 (`bedbbedb`,
+   research-build).** Read against the other five rows the convention is
+   unambiguous: `AffectedNeighborhoods` = where the project lands. INIT-006 alone
+   tagged the *venue of its council vote*. Correctable data error, one cell →
+   `Baylight District`, owned by civic.15's `--apply` path. No builder ruling
+   needed. *(Method worth keeping: the fork dissolved by reading the sibling rows
+   rather than escalating it.)*
+2. **`City-wide` as a business location** — legitimate value or drift? 10 rows.
 3. **Faction monoculture** — should the engine be able to produce a CRC- or
    IND-led initiative, or is one-party leadership the intended state?
 4. **Dead seats** — should a councilmember with no initiative in their district
    have *any* path to approval movement? Today the answer is no, by construction.
 
+Rulings 3 and 4 are the only ones that gate code; 2 is a one-line data call.
+
 ## Changelog
 
+- 2026-08-15 (engine-sheet) — Ruling 1 closed by research-build `bedbbedb`
+  (INIT-006 is a data error, not canon); E4 and §5 updated. Two rulings now gate
+  code (faction monoculture, dead seats); `City-wide` is a one-line data call.
 - 2026-08-15 (engine-sheet) — Survey + plan created. Entity layer verified healthy
   (840/840 citizens, 9/9 offices); edge layer surveyed across 7 ledgers and the
   full engine file set. Writer-before-data rule generalised from civic.18 §7.

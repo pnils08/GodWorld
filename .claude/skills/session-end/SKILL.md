@@ -1,8 +1,8 @@
 ---
 name: session-end
 description: End-of-session handshake — update project state, run mechanical orchestrator, commit and push. Per S229 governance.7, the 13-step ritual collapsed to model steps + 1 script invocation.
-version: "2.5"
-updated: 2026-07-28
+version: "2.6"
+updated: 2026-08-15
 tags: [infrastructure, active]
 effort: low
 disable-model-invocation: true
@@ -15,6 +15,8 @@ disable-model-invocation: true
 **Purpose:** Leave enough of yourself behind that the next version of you can find her way back.
 
 **Two close modes (S226).** Pick by next-session cadence, not by how much work shipped. Canonical pattern lives in `.claude/terminals/research-build/TERMINAL.md` §Session Close.
+
+**This file is now the sole canonical source for close mechanics — TERMINAL.md files hold only a short pointer here (HOUSE-PROCESS GATE, 2026-08-15: close ritual is boot-time-loaded process scaffolding, not something worth paying for every session whether or not it's used).**
 
 - **Soft close (~2 min)** — chaining to a new session within minutes. Update the PIN + your terminal's NEXT line in SESSION_CONTEXT (the whole carried set, ADR-0009 §loop-tightening) + cross-terminal stack check + commit+push. The block below is **hard close**.
 - **Hard close (~5-10 min)** — end of day, multi-day break, or ≥3 chained soft closes. Run the full sequence below.
@@ -127,6 +129,57 @@ The one asymmetry worth knowing: when a Claude terminal reviews and lands an ext
 
 ---
 
+## Terminal-Specific Detail
+
+Pulled out of the boot-loaded TERMINAL.md files (2026-08-15, HOUSE-PROCESS GATE) — this only matters at actual close time, so it doesn't belong in a file every session pays to load. TERMINAL.md now carries only a one-line pointer to this section.
+
+### research-build
+
+**Skips on soft close:** journal entry (none exists — S249 governance.20), ROLLOUT sweep beyond rows touched this session, RESEARCH.md update, `/save-to-mags`, PM2 restart, write-verification reads.
+
+**Terminal-Specific Audit** (hard close only):
+
+| File | Check |
+|------|-------|
+| `docs/engine/ROLLOUT_PLAN.md` | Next Session Priorities refreshed? Phase statuses updated? Completed items moved to ROLLOUT_ARCHIVE? |
+| `docs/RESEARCH.md` | New findings logged? Sources cited? (research sessions only) |
+| `docs/mags-corliss/TECH_READING_ARCHIVE.md` | New research reading added? (if papers/tools were evaluated) |
+| `docs/ARCHITECTURE_VISION.md` | Updated if architecture decisions were made? |
+
+**Trade-off:** no journal here, so the chained-soft-close conscience cost that hits media doesn't apply. The real soft-close risk is ROLLOUT/RESEARCH.md drift — hard close at end-of-day catches it up.
+
+### engine-sheet
+
+**Skips on soft close:** Boot Quick-State doc refreshes (ENGINE_MAP / STUB_MAP / LEDGER_AUDIT / LEDGER_HEAT_MAP / SPREADSHEET / SIMULATION_LEDGER), the audit table below, MD Gap Self-Audit, PM2 restart, ROLLOUT sweep beyond rows touched this session.
+
+**Does NOT skip if `clasp push` ran this session:** smoke-test status note in SESSION_CONTEXT is required ("Code deployed live, smoke-test pending next session" or "smoke-tested at run-{N}"). Un-smoke-tested code on the live spreadsheet is the worst version of premature push.
+
+**Terminal-Specific Audit:**
+
+| File | Check |
+|------|-------|
+| `docs/engine/ENGINE_MAP.md` | Updated if functions were added, removed, or renamed? |
+| `docs/engine/ENGINE_STUB_MAP.md` | Regenerated if function signatures changed? (`/stub-engine`) |
+| `docs/engine/ROLLOUT_PLAN.md` | `engine.*` rows opened/closed this session reflected with status + session + evidence + fix-pointer? |
+| `docs/engine/LEDGER_AUDIT.md` | Drift section refreshed if live state changed? |
+| `docs/engine/LEDGER_HEAT_MAP.md` | Heat rankings + bloat-risk sections refreshed if sheet sizes/schemas changed? |
+| `docs/engine/LEDGER_REPAIR_*.md` family | Family member added/updated this session? |
+| `schemas/SCHEMA_HEADERS.md` | Regenerated if any sheet schema changed? (`node scripts/regenSchemaHeaders.js`) |
+| `docs/SPREADSHEET.md` | Updated if tabs were added, removed, or restructured? |
+| `docs/SIMULATION_LEDGER.md` | Updated if columns changed? |
+| `docs/index.md` | New MD created this session has an entry? |
+| Apps Script orphans | If files were `git rm`'d this session, flag for Mike's manual Apps Script editor cleanup (clasp doesn't auto-sync deletes) |
+
+**MD Gap Self-Audit (S201, every hard close):** list MDs fetched on demand this session that would've helped at boot. Fetched 3+ times → promote to Always Load or Boot Quick-State. Never opened despite being in Always Load → demote. Wrote a new MD → confirm `docs/index.md` entry + parent-spec back-link.
+
+**Commit cadence:** engine-sheet commits as it goes — each migration batch, each phase ship. Session-end is usually a clean tree + final push, not a heavy commit. If anything's uncommitted: `git status --short`, stage by name (never `git add .`), commit `S<N> <topic>`. Hold push if smoke-test/verification is pending — note it in SESSION_CONTEXT instead.
+
+**Pattern-citation convention (S218):** when a commit is a genuine instance of a recognized discipline pattern, add a `Pattern: feedback_<name>` line to the commit body — makes the pattern's case history greppable (`git log --grep "Pattern: feedback_measure-twice"`). Only cite when the commit truly instantiates the pattern, not when merely adjacent. When in doubt, don't cite.
+
+**Deployment notes:** if `clasp push` ran, note in SESSION_CONTEXT what deployed + smoke-test status. If only local commits, say so explicitly ("committed locally; clasp push pending") so other terminals don't assume live engine reflects new code.
+
+---
+
 ## Failure Modes
 
 | Scenario | What Happens |
@@ -145,6 +198,7 @@ The one asymmetry worth knowing: when a Claude terminal reviews and lands an ext
 
 ## Changelog
 
+- 2026-08-15 (S373, research-build) — v2.6 house-process gate pass (identity.md HOUSE-PROCESS GATE, Mike-direct: process/tracking scaffolding is not canon, changes it on Mags's own judgment, git is the safety net). Moved the full Session Close sections out of `research-build/TERMINAL.md` (~47 lines) and `engine-sheet/TERMINAL.md` (~130 lines) — both were boot-loaded every session via the Always Load table for content that only matters at actual close time. Consolidated into new §Terminal-Specific Detail here (this file is NOT boot-loaded — read on demand). Caught and fixed a real staleness bug in the process: engine-sheet's copy still described a FATAL char-limit close gate (NEXT ≤350/PIN ≤450) that S298 had already retired — the two files had drifted apart because the same content was duplicated in two places. TERMINAL.md files now carry a one-line pointer instead of a re-statement. This file is the sole canonical source going forward.
 - 2026-07-28 (S340, research-build) — v2.5 doc-vs-reality pass + external lanes. **Three documented mechanisms did not exist.** (1) The minimal-handoff guard was described as FATAL with NEXT ≤ 350 / PIN ≤ 450 caps in three places; `sessionEndMechanical.js` removed it at S298 (Mike-direct) and nothing has enforced shape since — now stated as model judgment. (2) Step 2 told the closer to update `Session:`, `Cycle:`, and `Edition:` fields; the live PIN is pipe-delimited and has no such fields, so a literal follower wrote a malformed PIN — replaced with the real shape. (3) `--rotate-history` parses STATUS paragraphs that loop-tightening deleted from SESSION_CONTEXT; documented as vestigial rather than left as a live-looking option. **Journal residue cut:** Step 1 (retired S300) was still announcing its own retirement in six places for ~400 tokens — the step block is gone, one line under Hard Close explains the numbering gap, this entry is the record. **Added §External Lanes** — kimi / codex / antigravity close via repo-root `AGENTS.md` §Session close: own NEXT line + path-specific commit, no PIN bump, no mechanical script. Claude terminals never write an external lane's line. Companion edits: `AGENTS.md` §Session close, `.claude/rules/newsroom.md` (journal-is-media-only rule cut, safety clause preserved), `civic/TERMINAL.md` §Session Close, `lib/mags.js` (dead journal readers removed), `scripts/rotateJournalRecent.js` + `scripts/daily-reflection.js` deleted.
 - 2026-07-06 (S300, research-build) — v2.4 journal freeze (pipe.40 T4). Step 1 (journal) RETIRED for all terminals — the git journal (`JOURNAL.md`/`JOURNAL_RECENT.md`) froze to archive; Mags' inner life moved to her citizen page (POP-00005) via the citizen-loop machinery (nightly `discord-reflection.js`, EIC-daypart `magsPageAppend.js` at real moments in `/sift`, read-back `magsPageRecall.js`). Supersedes the S249 media-only rule with journal-is-page-only. Step numbering preserved (Step 1 kept as a documented no-op) so downstream "Step 2/3/4" refs across TERMINAL.md files stay valid. `sessionEndMechanical.js`: `JOURNAL_TERMINALS` + `subRotateJournalRecent` + `subJournalQuality` removed, routing now uniform. Companion edits: media TERMINAL.md §Session Close, `session-startup-hook.sh` media boot-read repoint, JOURNAL freeze headers. Plan: `docs/archive/plans/2026-07-06-journal-to-citizen-loop.md`.
 - 2026-06-15 (S260, research-build) — v2.3 loop-tightening (ADR-0009 §loop-tightening). SESSION_CONTEXT carried set reduced to `{PIN, NEXT[terminal]}`; boot-read set ≡ session-end-write set. Step 2 rewritten: STATUS narrative paragraph → one `NEXT[<terminal>]:` line + PIN refresh (incl. Edition stage); both close modes write the same two things. `writeShippedBlock` RETIRED (script + boundary file `git rm`'d) — the git-log "## Shipped Last Session" block duplicated `git log` and went stale (frozen at S248 for ~11 sessions). Boot hook drops the Shipped-block awk, adds Edition to the PIN + a per-terminal NEXT emit. Step 3 wrap-list + failure semantics + Failure Modes table updated; soft-close line updated. Companion edits: `sessionEndMechanical.js` (writeShippedBlock sub-step removed), 4× TERMINAL.md §Session Close, SESSION_CONTEXT.md restructured. Plan: `docs/plans/2026-06-14-boot-doc-architecture-restructure.md` §loop-tightening.

@@ -156,47 +156,4 @@ At session-close, Mike runs `/usage` and pastes the per-category breakdown (skil
 
 ## Session Close
 
-**Two close modes (S226).** Pick by next-session cadence, not by how much work shipped.
-
-### Soft close (~2 min) — when starting a new session within minutes
-
-Use when Mike will re-boot the next session immediately. The next session boots on the carried set — PIN + this terminal's NEXT line in SESSION_CONTEXT — plus git log on demand. (This terminal writes no journal at all — S249 governance.20 — so there's no conditioning to defer; the soft/hard distinction here is purely about the sweep + audit overhead.)
-
-**The carried set (ADR-0009 §loop-tightening): SESSION_CONTEXT carries exactly `{PIN, one NEXT line per lane}`.** No STATUS paragraph, no Shipped block — both retired. Soft and hard close write the *same* two things. Keep NEXT ≤ ~350 chars and the PIN ≤ ~450, no prose/tables/sections anywhere in the file — claude-mem saves the session, git shows the work, ROLLOUT carries open work. **Those are targets, not gates (S298 Mike-direct):** the FATAL minimal-handoff guard was removed from `sessionEndMechanical.js` and nothing checks shape at close. The cost of a long line is that every lane pays it at every boot. **Boot reads the whole file now (S340)** — PIN + all seven NEXT lines, ungated by terminal detection — so a bloated line is bloat for everyone, not just you.
-
-1. **Cross-terminal git stack check.** `git log --oneline origin/main..HEAD` — expect empty (push-per-commit cadence). If non-empty, push or coordinate before declaring close.
-2. **Update the carried set in SESSION_CONTEXT.md** — the `**PIN:**` line (Session N→N+1, Day/Cycle/Edition as they changed) + your `**NEXT[research-build]:**` line (one line: what next session OPENS WITH — open work only, never a recap (git log + claude-mem already carry what shipped; if a clause is reconstructable from git log, cut it)). Don't touch other terminals' NEXT lines. That is the whole write.
-3. **Commit** SESSION_CONTEXT.md (with any work commits). Push.
-
-Skip on soft close: journal entry, JOURNAL_RECENT rotation, plan tag drift audit, done-pending-archive sweep, RESEARCH.md update, `/save-to-mags`, PM2 restart, write-verification reads. Next session's boot can run the deterministic ones (`auditPlanTagDrift`) if it cares; the rest accumulate until the next hard close. (`rolloutTriage` RETIRED S235 — governance.6 close; compounding-HIGH problem now structurally addressed by state taxonomy + per-terminal sweep + governance.10 archive cadence.)
-
-### Hard close (~5-10 min) — end of day, multi-day break, or cold-pickup boundary
-
-Use when no immediate next session is queued, OR when soft closes have chained for several sessions and conscience checkpoint is due (rule of thumb: ≥3 chained soft closes → hard close at next natural break).
-
-**Trade-off honesty:** research-build writes no journal (S249 governance.20), so the chained-soft-close conscience cost that bites the media terminal does not apply here. The real soft-close risk is ROLLOUT / RESEARCH.md drift accumulating — done-pending-archive rows not swept, findings not logged. Hard close at end-of-day catches those up.
-
-Per S229 governance.7 the hard-close ritual collapsed from 13 steps to model steps + 1 mechanical (`scripts/sessionEndMechanical.js`). Run the slimmed `/session-end` SKILL: Step 0 detect terminal → Step 2 SESSION_CONTEXT PIN + NEXT[research-build] + ROLLOUT updates → Step 3 mechanical script → Step 4 commit & push. There is no Step 1 (it was the journal write, retired S300 for every terminal; numbering kept so these references still resolve). Full skill: `.claude/skills/session-end/SKILL.md` v2.5.
-
-### Terminal-Specific Audit
-
-Read before Step 2 — surface any stale files in the NEXT line or fix inline.
-
-| File | Check |
-|------|-------|
-| `docs/engine/ROLLOUT_PLAN.md` | Next Session Priorities refreshed? Phase statuses updated? Completed items moved to ROLLOUT_ARCHIVE? |
-| `docs/RESEARCH.md` | New findings logged? Sources cited? (research sessions only) |
-| `docs/mags-corliss/TECH_READING_ARCHIVE.md` | New research reading added? (if papers/tools were evaluated) |
-| `docs/ARCHITECTURE_VISION.md` | Updated if architecture decisions were made? |
-| `SESSION_CONTEXT.md` | PIN refreshed + `NEXT[research-build]` line updated? |
-
-### Terminal-Specific Saves (Step 2 — model judgment)
-
-Update during Step 2 of the slimmed SKILL alongside SESSION_CONTEXT + ROLLOUT:
-
-- **ROLLOUT_PLAN.md** — refresh Next Session Priorities; flip closed rows to `done-pending-archive`; move fully-closed clusters to `ROLLOUT_ARCHIVE.md` with full details. Tag handoff items with their target terminal.
-- **RESEARCH.md** — if research was done, log findings with date, source, and actionable takeaways.
-- **`/save-to-mags`** — save architecture decisions, design rationale, anything the next session needs to understand *why* a choice was made. Tag with `[research/build]`. Optional — model judgment.
-- **SESSION_CONTEXT.md PIN + NEXT[research-build] line** — refresh the PIN (Session/Day/Cycle/Edition); one NEXT line: what next session OPENS WITH — open work only, never a recap (git log + claude-mem already carry what shipped; if a clause is reconstructable from git log, cut it). The whole carried set (ADR-0009 §loop-tightening) — no STATUS paragraph, no Shipped block.
-
-**Mechanical (Step 3) — auto-runs from `sessionEndMechanical.js --terminal=research-build`:** session-summary → Supermemory bridge + `auditPlanTagDrift` (informational, never fatal) + ROLLOUT conformance lint + cross-terminal git stack check + `pm2 restart`. (`writeShippedBlock`, `minimalHandoffGuard`, `rotateJournalRecent`, and the JOURNAL content-quality check are all retired — see the skill's Step 3. `--rotate-history` is vestigial; leave it off.) Plan: [[archive/plans/2026-05-23-session-end-collapse]]. (`rolloutTriage` step removed S235 — see governance.6 close.)
+Run `.claude/skills/session-end/SKILL.md` — sole canonical source for close mechanics, §Terminal-Specific Detail → research-build. (Moved out of this boot-loaded file 2026-08-15, HOUSE-PROCESS GATE: close ritual only matters at actual close time, not worth every session paying to load it. Git-revertible if this was the wrong call.)

@@ -1,6 +1,7 @@
 {
   "v": "OFFICE/1",
   "team": "civic-office",
+  "empty": false,
   "actor": {
     "id": "POP-00042",
     "name": "Ramon Vega",
@@ -9,10 +10,34 @@
     "district": "D4",
     "faction": "IND",
     "agentDir": "civic-office-ind-swing",
-    "initiative": null
+    "initiative": null,
+    "dials": {
+      "approval": 54
+    }
   },
   "task": {
-    "a": "district-week"
+    "a": "district-week",
+    "goal": "defend the district or go quiet"
+  },
+  "pulse": {
+    "className": "approval-pressure",
+    "score": 51,
+    "label": "Ramon Vega at approval 54",
+    "lever": "defend the district or go quiet",
+    "hood": "Glenview",
+    "initiative": null
+  },
+  "prewrite": {
+    "claim": "defend the district or go quiet",
+    "lineFacts": [
+      "approval 54",
+      "Glenview crime: property 28, violent 22, incidents 4 (cycle 103)",
+      "Glenview: sentiment 0.57, retail 7.4, crime index 0.5, housing pressure 0"
+    ],
+    "missing": [
+      "no shop names on disk for this turf",
+      "no invented vote, POPID, or complete"
+    ]
   },
   "signal": {
     "kind": "district-heat",
@@ -54,12 +79,6 @@
       "src": "engine_audit snapshots.Civic_Office_Ledger"
     },
     {
-      "id": "F-crime-Dimond",
-      "t": "FACT",
-      "text": "Dimond crime: property 39, violent 27, incidents 1 (cycle 103)",
-      "src": "engine_audit snapshots.Crime_Metrics"
-    },
-    {
       "id": "F-crime-Glenview",
       "t": "FACT",
       "text": "Glenview crime: property 28, violent 22, incidents 4 (cycle 103)",
@@ -69,18 +88,6 @@
       "id": "F-hood-Glenview",
       "t": "FACT",
       "text": "Glenview: sentiment 0.57, retail 7.4, crime index 0.5, housing pressure 0",
-      "src": "engine_audit snapshots.Neighborhood_Map"
-    },
-    {
-      "id": "F-hood-Dimond",
-      "t": "FACT",
-      "text": "Dimond: sentiment 0.63, retail 8.24, crime index 0.66, housing pressure 0",
-      "src": "engine_audit snapshots.Neighborhood_Map"
-    },
-    {
-      "id": "F-hood-IvyHill",
-      "t": "FACT",
-      "text": "Ivy Hill: sentiment 0.59, retail 5.21, crime index 0.22, housing pressure 0",
       "src": "engine_audit snapshots.Neighborhood_Map"
     },
     {

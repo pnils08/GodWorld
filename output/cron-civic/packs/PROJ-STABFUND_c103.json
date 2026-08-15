@@ -1,6 +1,7 @@
 {
   "v": "OFFICE/1",
   "team": "civic-office",
+  "empty": false,
   "actor": {
     "id": "POP-00790",
     "name": "Marcus Webb",
@@ -9,10 +10,37 @@
     "district": null,
     "faction": null,
     "agentDir": "civic-project-stabilization-fund",
-    "initiative": "INIT-001"
+    "initiative": "INIT-001",
+    "dials": {
+      "approval": null
+    }
   },
   "task": {
-    "a": "initiative-week"
+    "a": "initiative-week",
+    "goal": "Month-five disbursement batch review"
+  },
+  "pulse": {
+    "className": "initiative",
+    "score": 130,
+    "label": "West Oakland Stabilization Fund — Month-five disbursement batch review",
+    "lever": "Month-five disbursement batch review",
+    "hood": "West Oakland",
+    "initiative": "INIT-001"
+  },
+  "prewrite": {
+    "claim": "Month-five disbursement batch review",
+    "lineFacts": [
+      "West Oakland Stabilization Fund is in disbursement-active — C102: Month-four disbursement batch approved (7 households), total disbursed: 45 of ~280.",
+      "due: Month-five disbursement batch review",
+      "INIT-001 — disbursement-active — C103: Month-five disbursement batch approved (7 households), total disbursed: 52 of ~280. — Month-six disbursement batch review",
+      "West Oakland crime: property 58, violent 61, incidents 11 (cycle 103)",
+      "West Oakland: sentiment 0.5, retail 7.91, crime index 1.19, housing pressure 0"
+    ],
+    "missing": [
+      "no shop names on disk for this turf",
+      "no named applicant households — do not invent who got the check",
+      "no invented vote, POPID, or complete"
+    ]
   },
   "signal": {
     "kind": "initiative-heat",
@@ -23,22 +51,6 @@
   },
   "exposure": {
     "subjects": [
-      {
-        "pop": "POP-00176",
-        "name": "Talmon Lint",
-        "neighborhood": "West Oakland",
-        "role": "Solar Panel Installation Lead",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
-      },
-      {
-        "pop": "POP-00185",
-        "name": "Lila Patty",
-        "neighborhood": "West Oakland",
-        "role": "Solar Panel Installation Lead",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
-      },
       {
         "pop": "POP-00187",
         "name": "Isla Sike",
@@ -64,26 +76,10 @@
         "src": "output/simulation_ledger_snapshot.jsonl"
       },
       {
-        "pop": "POP-00201",
-        "name": "Elio Perez",
+        "pop": "POP-00176",
+        "name": "Talmon Lint",
         "neighborhood": "West Oakland",
-        "role": "Server",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
-      },
-      {
-        "pop": "POP-00202",
-        "name": "Marky Beal",
-        "neighborhood": "West Oakland",
-        "role": "Retail worker",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
-      },
-      {
-        "pop": "POP-00218",
-        "name": "Joel Wren",
-        "neighborhood": "West Oakland",
-        "role": "Mechanic",
+        "role": "Solar Panel Installation Lead",
         "tier": 4,
         "src": "output/simulation_ledger_snapshot.jsonl"
       }
@@ -95,12 +91,6 @@
         "neighborhood": "West Oakland",
         "text": "special Christmas service fills the sanctuary",
         "src": "world_summary faith-event"
-      },
-      {
-        "name": "New Covenant Pentecostal Assembly",
-        "neighborhood": "West Oakland",
-        "text": "2 citizen(s) joined the congregation at New Covenant Pentecostal Assembly",
-        "src": "world_summary faith-join"
       }
     ],
     "sources": [
@@ -138,33 +128,9 @@
       "src": "output/initiative_tracker.json"
     },
     {
-      "id": "F-doc-STABC000ProjectCharter20",
-      "t": "FACT",
-      "text": "STAB-C000-ProjectCharter-20400101",
-      "src": "output/city-civic-database/initiatives/stabilization-fund/STAB-C000-ProjectCharter-20400101.md"
-    },
-    {
-      "id": "F-doc-STABC076CouncilPositions",
-      "t": "FACT",
-      "text": "WEST OAKLAND STABILIZATION FUND — COUNCIL POSITIONS",
-      "src": "output/city-civic-database/initiatives/stabilization-fund/STAB-C076-CouncilPositions-20410301.md"
-    },
-    {
-      "id": "F-doc-STABC084OEWDResponse2041",
-      "t": "FACT",
-      "text": "WEST OAKLAND EMERGENCY STABILIZATION FUND — Disbursement Status",
-      "src": "output/city-civic-database/initiatives/stabilization-fund/STAB-C084-OEWDResponse-20410801.md"
-    },
-    {
-      "id": "F-doc-STABC085DisbursementRequ",
-      "t": "FACT",
-      "text": "Stabilization Fund — Disbursement Confirmation Request",
-      "src": "output/city-civic-database/initiatives/stabilization-fund/STAB-C085-DisbursementRequest-20410901.md"
-    },
-    {
       "id": "F-cabinet-decisions_c103json",
       "t": "FACT",
-      "text": "INIT-001 — disbursement-active — C103: Month-five disbursement batch approved (7 households), total disbursed: 52 of ~280.",
+      "text": "INIT-001 — disbursement-active — C103: Month-five disbursement batch approved (7 households), total disbursed: 52 of ~280. — Month-six disbursement batch review",
       "src": "output/city-civic-database/initiatives/stabilization-fund/decisions_c103.json"
     },
     {

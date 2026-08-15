@@ -1,6 +1,7 @@
 {
   "v": "OFFICE/1",
   "team": "civic-office",
+  "empty": false,
   "actor": {
     "id": "POP-00505",
     "name": "Nina Chen",
@@ -9,10 +10,33 @@
     "district": "D8",
     "faction": "CRC",
     "agentDir": "civic-office-crc-faction",
-    "initiative": null
+    "initiative": null,
+    "dials": {
+      "approval": 54
+    }
   },
   "task": {
-    "a": "district-week"
+    "a": "district-week",
+    "goal": "defend the district or go quiet"
+  },
+  "pulse": {
+    "className": "approval-pressure",
+    "score": 51,
+    "label": "Nina Chen at approval 54",
+    "lever": "defend the district or go quiet",
+    "hood": "Lake Merritt",
+    "initiative": null
+  },
+  "prewrite": {
+    "claim": "defend the district or go quiet",
+    "lineFacts": [
+      "approval 54",
+      "Lake Merritt crime: property 51, violent 35, incidents 4 (cycle 103)",
+      "Lake Merritt: sentiment 0.45, retail 12.07, crime index 0.85, housing pressure 1.5"
+    ],
+    "missing": [
+      "no invented vote, POPID, or complete"
+    ]
   },
   "signal": {
     "kind": "district-heat",
@@ -57,38 +81,6 @@
         "role": "Sea Level Monitoring Technician",
         "tier": 4,
         "src": "output/simulation_ledger_snapshot.jsonl"
-      },
-      {
-        "pop": "POP-00211",
-        "name": "Christopher Johnson",
-        "neighborhood": "Lake Merritt",
-        "role": "Janitor",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
-      },
-      {
-        "pop": "POP-00222",
-        "name": "Travis Paiz",
-        "neighborhood": "Lake Merritt",
-        "role": "Mover",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
-      },
-      {
-        "pop": "POP-00235",
-        "name": "Aaliyah Brennan",
-        "neighborhood": "Lake Merritt",
-        "role": "Mobile Clinic Nurse",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
-      },
-      {
-        "pop": "POP-00260",
-        "name": "Kevel Phoul",
-        "neighborhood": "Lake Merritt",
-        "role": "Warehouse worker",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
       }
     ],
     "businesses": [
@@ -127,36 +119,6 @@
       "t": "FACT",
       "text": "Lake Merritt crime: property 51, violent 35, incidents 4 (cycle 103)",
       "src": "engine_audit snapshots.Crime_Metrics"
-    },
-    {
-      "id": "F-crime-GrandLake",
-      "t": "FACT",
-      "text": "Grand Lake crime: property 35, violent 22, incidents 3 (cycle 103)",
-      "src": "engine_audit snapshots.Crime_Metrics"
-    },
-    {
-      "id": "F-crime-AdamsPoint",
-      "t": "FACT",
-      "text": "Adams Point crime: property 38, violent 29, incidents 6 (cycle 103)",
-      "src": "engine_audit snapshots.Crime_Metrics"
-    },
-    {
-      "id": "F-hood-AdamsPoint",
-      "t": "FACT",
-      "text": "Adams Point: sentiment 0.62, retail 8.44, crime index 0.67, housing pressure 0",
-      "src": "engine_audit snapshots.Neighborhood_Map"
-    },
-    {
-      "id": "F-hood-GrandLake",
-      "t": "FACT",
-      "text": "Grand Lake: sentiment 0.55, retail 13.24, crime index 0.57, housing pressure 0",
-      "src": "engine_audit snapshots.Neighborhood_Map"
-    },
-    {
-      "id": "F-hood-Eastlake",
-      "t": "FACT",
-      "text": "Eastlake: sentiment 0.51, retail 8.78, crime index 0.55, housing pressure 0",
-      "src": "engine_audit snapshots.Neighborhood_Map"
     },
     {
       "id": "F-hood-LakeMerritt",

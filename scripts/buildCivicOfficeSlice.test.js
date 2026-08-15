@@ -129,6 +129,7 @@ check('task is district-week', pack.task.a === 'district-week');
 check('Tier 4 before Tier 1', pack.exposure.subjects[0].name === 'Alpha Local' && pack.exposure.subjects.some(s => s.name === 'Star Player'));
 check('inactive and other-hood excluded', !pack.exposure.subjects.some(s => s.name === 'Beta Local' || s.name === 'Gamma Far'));
 check('project fact from tracker', pack.known.some(k => /Test Hub/.test(k.text)));
+check('district turn is Test Hub', pack.pulse && /Test Hub/.test(pack.pulse.label) && pack.task.goal);
 check('district church from turf', pack.exposure.churches.some(c => c.name === 'Test Chapel'));
 check('district shop from turf', pack.exposure.businesses.some(b => b.id === 'BIZ-00999'));
 check('other-hood church excluded', !pack.exposure.churches.some(c => c.name === 'Far Parish'));
@@ -141,7 +142,8 @@ const bay = buildPack({
 check('baylight is initiative-week', bay.task.a === 'initiative-week');
 check('baylight owns INIT-006', bay.known.some(k => /INIT-006|Baylight District/.test(k.text + k.id)));
 check('baylight does not eat Test Hub', !bay.known.some(k => /Test Hub/.test(k.text)));
-check('baylight reads cabinet', bay.known.some(k => /shortlist published/.test(k.text)) && bay.known.some(k => /Project Charter/.test(k.text)));
+check('baylight reads this-cycle cabinet only', bay.known.some(k => /shortlist published/.test(k.text)) && !bay.known.some(k => /Project Charter/.test(k.text)));
+check('baylight turn is INIT-006', bay.pulse && bay.pulse.initiative === 'INIT-006');
 check('baylight turf is the neighborhood', bay.signal.hoods.includes('Baylight District') && !bay.signal.hoods.includes('Temescal'));
 check('baylight people are site neighbors only', bay.exposure.subjects.length === 1 && bay.exposure.subjects[0].name === 'Site Neighbor');
 
@@ -151,11 +153,12 @@ const comms = buildPack({
 check('comms is role-week', comms.task.a === 'role-week');
 check('comms has no neighbor dump', comms.exposure.subjects.length === 0 && comms.signal.hoods.length === 0);
 check('comms does not eat city initiatives', !comms.known.some(k => /Test Hub|Baylight/.test(k.text)));
+check('comms with nothing to move is empty', comms.empty === true && comms.pulse == null);
 
 const mayor = buildPack({
   root: tmp, cycle: '103', agentDir: 'MAYOR-01', officeMap: map,
 });
-check('mayor sees the board', mayor.known.some(k => /Test Hub/.test(k.text)) && mayor.known.some(k => /Baylight/.test(k.text)));
+check('mayor picks one initiative', mayor.pulse && mayor.pulse.initiative && mayor.known.filter(k => /^F-INIT-/.test(k.id)).length === 1);
 check('mayor has no neighbor dump', mayor.exposure.subjects.length === 0);
 
 console.log((failed ? failed + ' failed' : 'ok') + ' civic office pack');

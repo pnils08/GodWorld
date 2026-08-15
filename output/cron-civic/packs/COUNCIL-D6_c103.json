@@ -1,6 +1,7 @@
 {
   "v": "OFFICE/1",
   "team": "civic-office",
+  "empty": false,
   "actor": {
     "id": "POP-00044",
     "name": "Elliott Crane",
@@ -9,10 +10,32 @@
     "district": "D6",
     "faction": "CRC",
     "agentDir": "civic-office-crc-faction",
-    "initiative": null
+    "initiative": null,
+    "dials": {
+      "approval": 54
+    }
   },
   "task": {
-    "a": "district-week"
+    "a": "district-week",
+    "goal": "defend the district or go quiet"
+  },
+  "pulse": {
+    "className": "approval-pressure",
+    "score": 51,
+    "label": "Elliott Crane at approval 54 — Piedmont Ave: sentiment 0.38, retail 10.4, crime index 0.38, housing pressure 0",
+    "lever": "defend the district or go quiet",
+    "hood": "Montclair",
+    "initiative": null
+  },
+  "prewrite": {
+    "claim": "defend the district or go quiet",
+    "lineFacts": [
+      "approval 54",
+      "Montclair crime: property 14, violent 13, incidents 2 (cycle 103)"
+    ],
+    "missing": [
+      "no invented vote, POPID, or complete"
+    ]
   },
   "signal": {
     "kind": "district-heat",
@@ -55,38 +78,6 @@
         "role": "Plumber",
         "tier": 4,
         "src": "output/simulation_ledger_snapshot.jsonl"
-      },
-      {
-        "pop": "POP-00226",
-        "name": "Jemeal Brim",
-        "neighborhood": "Piedmont Ave",
-        "role": "Bakery worker",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
-      },
-      {
-        "pop": "POP-00239",
-        "name": "Xiu Cello",
-        "neighborhood": "Piedmont Ave",
-        "role": "Mover",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
-      },
-      {
-        "pop": "POP-00255",
-        "name": "Howard Travis",
-        "neighborhood": "Piedmont Ave",
-        "role": "Construction laborer",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
-      },
-      {
-        "pop": "POP-00256",
-        "name": "Brady Lopez",
-        "neighborhood": "Piedmont Ave",
-        "role": "Dishwasher",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
       }
     ],
     "businesses": [
@@ -108,22 +99,10 @@
       "src": "engine_audit snapshots.Civic_Office_Ledger"
     },
     {
-      "id": "F-crime-PiedmontAve",
-      "t": "FACT",
-      "text": "Piedmont Ave crime: property 23, violent 15, incidents 3 (cycle 103)",
-      "src": "engine_audit snapshots.Crime_Metrics"
-    },
-    {
       "id": "F-crime-Montclair",
       "t": "FACT",
       "text": "Montclair crime: property 14, violent 13, incidents 2 (cycle 103)",
       "src": "engine_audit snapshots.Crime_Metrics"
-    },
-    {
-      "id": "F-hood-PiedmontAve",
-      "t": "FACT",
-      "text": "Piedmont Ave: sentiment 0.38, retail 10.4, crime index 0.38, housing pressure 0",
-      "src": "engine_audit snapshots.Neighborhood_Map"
     }
   ],
   "role": {

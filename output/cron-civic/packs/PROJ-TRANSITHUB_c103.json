@@ -1,6 +1,7 @@
 {
   "v": "OFFICE/1",
   "team": "civic-office",
+  "empty": false,
   "actor": {
     "id": "POP-00791",
     "name": "Elena Soria Dominguez",
@@ -9,10 +10,36 @@
     "district": null,
     "faction": null,
     "agentDir": "civic-project-transit-hub",
-    "initiative": "INIT-003"
+    "initiative": "INIT-003",
+    "dials": {
+      "approval": null
+    }
   },
   "task": {
-    "a": "initiative-week"
+    "a": "initiative-week",
+    "goal": "Bureau review of compliance submissions"
+  },
+  "pulse": {
+    "className": "initiative",
+    "score": 120,
+    "label": "Fruitvale Transit Hub Phase II — Visioning — Bureau review of compliance submissions",
+    "lever": "Bureau review of compliance submissions",
+    "hood": "Fruitvale",
+    "initiative": "INIT-003"
+  },
+  "prewrite": {
+    "claim": "Bureau review of compliance submissions",
+    "lineFacts": [
+      "Fruitvale Transit Hub Phase II — Visioning is in construction-planning — C102: Submitted pipeline exhaustion docs + stamped pedestrian-path redesign",
+      "due: Bureau review of compliance submissions",
+      "INIT-003 — visioning-complete — C103: Bureau review approved; visioning phase complete; transitioning to design phase. — Design phase kickoff",
+      "Fruitvale crime: property 54, violent 50, incidents 7 (cycle 103)",
+      "Fruitvale: sentiment 0.5, retail 12.22, crime index 1.04, housing pressure 0"
+    ],
+    "missing": [
+      "no shop names on disk for this turf",
+      "no invented vote, POPID, or complete"
+    ]
   },
   "signal": {
     "kind": "initiative-heat",
@@ -52,38 +79,6 @@
         "name": "Rick Walker",
         "neighborhood": "Fruitvale",
         "role": "Line cook",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
-      },
-      {
-        "pop": "POP-00207",
-        "name": "Owen Tower",
-        "neighborhood": "Fruitvale",
-        "role": "Taxi driver",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
-      },
-      {
-        "pop": "POP-00249",
-        "name": "Marrin Benry",
-        "neighborhood": "Fruitvale",
-        "role": "Mechanic",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
-      },
-      {
-        "pop": "POP-00261",
-        "name": "Ronnie Lar",
-        "neighborhood": "Fruitvale",
-        "role": "Painter",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
-      },
-      {
-        "pop": "POP-00264",
-        "name": "Bodhi Davis",
-        "neighborhood": "Fruitvale",
-        "role": "Mover",
         "tier": 4,
         "src": "output/simulation_ledger_snapshot.jsonl"
       }
@@ -126,21 +121,9 @@
       "src": "output/initiative_tracker.json"
     },
     {
-      "id": "F-doc-TRANC000ProjectCharter20",
-      "t": "FACT",
-      "text": "TRAN-C000-ProjectCharter-20400101",
-      "src": "output/city-civic-database/initiatives/transit-hub/TRAN-C000-ProjectCharter-20400101.md"
-    },
-    {
-      "id": "F-doc-TRANC083ScopeRelease2041",
-      "t": "FACT",
-      "text": "PROJECT SCOPE RELEASE — Fruitvale Transit Hub Phase II",
-      "src": "output/city-civic-database/initiatives/transit-hub/TRAN-C083-ScopeRelease-20410801.md"
-    },
-    {
       "id": "F-cabinet-decisions_c103json",
       "t": "FACT",
-      "text": "INIT-003 — visioning-complete — C103: Bureau review approved; visioning phase complete; transitioning to design phase.",
+      "text": "INIT-003 — visioning-complete — C103: Bureau review approved; visioning phase complete; transitioning to design phase. — Design phase kickoff",
       "src": "output/city-civic-database/initiatives/transit-hub/decisions_c103.json"
     },
     {

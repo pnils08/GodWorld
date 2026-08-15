@@ -1,6 +1,7 @@
 {
   "v": "OFFICE/1",
   "team": "civic-office",
+  "empty": false,
   "actor": {
     "id": "POP-00504",
     "name": "Warren Ashford",
@@ -9,10 +10,36 @@
     "district": "D7",
     "faction": "CRC",
     "agentDir": "civic-office-crc-faction",
-    "initiative": null
+    "initiative": null,
+    "dials": {
+      "approval": 48
+    }
   },
   "task": {
-    "a": "district-week"
+    "a": "district-week",
+    "goal": "HCAI first-comments window resolution and Phase 1 close"
+  },
+  "pulse": {
+    "className": "initiative",
+    "score": 80,
+    "label": "Temescal Community Health Center — HCAI first-comments window resolution and Phase 1 close",
+    "lever": "HCAI first-comments window resolution and Phase 1 close",
+    "hood": "Temescal",
+    "initiative": "INIT-005"
+  },
+  "prewrite": {
+    "claim": "HCAI first-comments window resolution and Phase 1 close",
+    "lineFacts": [
+      "approval 48",
+      "Temescal Community Health Center is in construction-active — C102: Construction timeline accelerated; double shifts ordered for caisson drilling and excavation.",
+      "due: HCAI first-comments window resolution and Phase 1 close",
+      "Temescal crime: property 43, violent 33, incidents 6 (cycle 103)",
+      "Temescal: sentiment 0.55, retail 13.51, crime index 0.76, housing pressure 1.5"
+    ],
+    "missing": [
+      "no shop names on disk for this turf",
+      "no invented vote, POPID, or complete"
+    ]
   },
   "signal": {
     "kind": "district-heat",
@@ -56,38 +83,6 @@
         "role": "Herbalist",
         "tier": 4,
         "src": "output/simulation_ledger_snapshot.jsonl"
-      },
-      {
-        "pop": "POP-00191",
-        "name": "Darius Scoot",
-        "neighborhood": "Rockridge",
-        "role": "Patent Attorney",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
-      },
-      {
-        "pop": "POP-00194",
-        "name": "Yu Zen",
-        "neighborhood": "Rockridge",
-        "role": "Commercial Insurance Broker",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
-      },
-      {
-        "pop": "POP-00197",
-        "name": "Rigo Ryno",
-        "neighborhood": "Temescal",
-        "role": "Vintage Clothing Store Owner",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
-      },
-      {
-        "pop": "POP-00210",
-        "name": "Depak Ying",
-        "neighborhood": "Rockridge",
-        "role": "Server",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
       }
     ],
     "businesses": [],
@@ -114,33 +109,9 @@
       "src": "engine_audit snapshots.Crime_Metrics"
     },
     {
-      "id": "F-crime-Rockridge",
-      "t": "FACT",
-      "text": "Rockridge crime: property 30, violent 22, incidents 2 (cycle 103)",
-      "src": "engine_audit snapshots.Crime_Metrics"
-    },
-    {
-      "id": "F-crime-KONO",
-      "t": "FACT",
-      "text": "KONO crime: property 41, violent 27, incidents 7 (cycle 103)",
-      "src": "engine_audit snapshots.Crime_Metrics"
-    },
-    {
       "id": "F-hood-Temescal",
       "t": "FACT",
       "text": "Temescal: sentiment 0.55, retail 13.51, crime index 0.76, housing pressure 1.5",
-      "src": "engine_audit snapshots.Neighborhood_Map"
-    },
-    {
-      "id": "F-hood-Rockridge",
-      "t": "FACT",
-      "text": "Rockridge: sentiment 0.53, retail 14.78, crime index 0.37, housing pressure 1.5",
-      "src": "engine_audit snapshots.Neighborhood_Map"
-    },
-    {
-      "id": "F-hood-KONO",
-      "t": "FACT",
-      "text": "KONO: sentiment 0.27, retail 9.69, crime index 0.68, housing pressure 1.5",
       "src": "engine_audit snapshots.Neighborhood_Map"
     },
     {

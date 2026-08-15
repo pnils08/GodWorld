@@ -341,11 +341,10 @@ function initFact(init) {
   };
 }
 
-function loadProjects(root, cycle, hoods, office, kind) {
+function loadInitRows(root, cycle, hoods, office, kind) {
   const tracker = loadTracker(root, cycle);
   const hoodSet = new Set((hoods || []).map(h => String(h).toLowerCase()));
   const initiativeId = office.initiative;
-  const cityBoard = /^(MAYOR-01|DA-01|PD-01)$/.test(office.officeId || '');
   const out = [];
   for (const init of tracker.initiatives || []) {
     const id = init.id || init.InitiativeID;
@@ -355,11 +354,18 @@ function loadProjects(root, cycle, hoods, office, kind) {
     let hits = false;
     if (kind === 'initiative') hits = !!owned;
     else if (kind === 'district') hits = inHood;
-    else if (kind === 'role') hits = cityBoard;
+    else if (kind === 'role' && office.officeId === 'MAYOR-01') hits = true;
+    else if (kind === 'role' && /^(DA-01|PD-01)$/.test(office.officeId || '')) {
+      hits = /safety|justice|oari|crime|court|legal/i.test(String(init.domain || '') + ' ' + String(init.name || ''));
+    }
     if (!hits) continue;
-    out.push(initFact(init));
+    out.push(init);
   }
   return out;
+}
+
+function loadProjects(root, cycle, hoods, office, kind) {
+  return loadInitRows(root, cycle, hoods, office, kind).map(initFact);
 }
 
 function cabinetPath(root, office) {
@@ -372,44 +378,178 @@ function cabinetPath(root, office) {
   return path.join(root, 'output', 'city-civic-database', 'initiatives', slug);
 }
 
-function loadCabinet(root, office) {
+function loadCabinet(root, office, cycle) {
   const dir = cabinetPath(root, office);
   if (!dir || !fs.existsSync(dir)) return [];
-  const facts = [];
-  const names = fs.readdirSync(dir).sort();
-  for (const name of names) {
-    if (facts.length >= 8) break;
-    const full = path.join(dir, name);
-    const src = path.relative(root, full).replace(/\\/g, '/');
-    if (name.endsWith('.json')) {
-      const j = loadJson(full);
-      if (!j) continue;
-      const tu = j.trackerUpdates || {};
-      const bits = [
-        j.initiativeId || j.initiative || '',
-        tu.ImplementationPhase || '',
-        tu.MilestoneNotes || '',
-      ].filter(Boolean);
-      if (!bits.length) continue;
-      facts.push({
-        id: 'F-cabinet-' + name.replace(/\W+/g, '').slice(0, 24),
-        t: 'FACT',
-        text: bits.join(' — ').slice(0, 200),
-        src,
-      });
-      continue;
+  const jsons = fs.readdirSync(dir).filter(n => /^decisions_c\d+\.json$/i.test(n));
+  jsons.sort((a, b) => Number((b.match(/\d+/) || [0])[0]) - Number((a.match(/\d+/) || [0])[0]));
+  const want = jsons.find(n => n === 'decisions_c' + cycle + '.json') || jsons[0];
+  if (!want) return [];
+  const full = path.join(dir, want);
+  const j = loadJson(full);
+  if (!j) return [];
+  const tu = j.trackerUpdates || {};
+  const bits = [
+    j.initiativeId || j.initiative || '',
+    tu.ImplementationPhase || '',
+    tu.MilestoneNotes || '',
+    tu.NextScheduledAction || '',
+  ].filter(Boolean);
+  if (!bits.length) return [];
+  return [{
+    id: 'F-cabinet-' + want.replace(/\W+/g, '').slice(0, 24),
+    t: 'FACT',
+    text: bits.join(' — ').slice(0, 220),
+    src: path.relative(root, full).replace(/\\/g, '/'),
+  }];
+}
+
+function approvalOf(job) {
+  const row = (job.mine || [])[0];
+  if (!row || row.Approval == null || row.Approval === '') return null;
+  const n = Number(row.Approval);
+  return Number.isFinite(n) ? n : null;
+}
+
+function initHeat(init, cycle, owned) {
+  const impl = init.implementation || {};
+  const due = Number(impl.nextActionCycle);
+  const blob = [impl.phase, impl.status, impl.summary, impl.nextScheduledAction].join(' ');
+  let s = 8;
+  if (owned) s += 50;
+  if (due === Number(cycle)) s += 40;
+  if (/stall|bottleneck|review|shortlist|disbursement|accelerat|double shift|HCAI/i.test(blob)) s += 22;
+  if (/disbursement-active|construction-active|pilot-active/.test(String(impl.phase || ''))) s += 10;
+  return s;
+}
+
+function peopleForPick(people, pick) {
+  const blob = String(
+    (pick.init && ((pick.init.name || '') + ' ' + (pick.init.domain || ''))) || pick.label || ''
+  ).toLowerCase();
+  function hit(role) {
+    const r = String(role || '').toLowerCase();
+    if (/hous|stab|displac|tenant|fund|economic/.test(blob)) {
+      return /shelter|organiz|reentry|housing|tenant|social/.test(r) ? 2 : 0;
     }
-    if (!name.endsWith('.md')) continue;
-    const md = fs.readFileSync(full, 'utf8');
-    const heading = ((md.match(/^#\s+(.+)$/m) || [])[1] || name.replace(/\.md$/, '')).trim();
-    facts.push({
-      id: 'F-doc-' + name.replace(/\W+/g, '').slice(0, 24),
-      t: 'FACT',
-      text: heading.slice(0, 180),
-      src,
+    if (/health/.test(blob)) return /nurse|health|aide|clinic|medical/.test(r) ? 2 : 0;
+    if (/oari|safety/.test(blob)) return /counsel|organiz|reentry/.test(r) ? 2 : 0;
+    return 0;
+  }
+  return people.slice().sort((a, b) =>
+    (hit(b.role) - hit(a.role)) || (b.tier - a.tier) || a.pop.localeCompare(b.pop)
+  ).slice(0, 4);
+}
+
+function pickTurn(opts) {
+  const { kind, office, cycle, inits, job, life, hoods, turf, chaos, cabinet } = opts;
+  const approval = approvalOf(job);
+  const candidates = [];
+  for (const init of inits) {
+    const owned = office.initiative && (init.id || init.InitiativeID) === office.initiative;
+    const impl = init.implementation || {};
+    const hoodLc = hoods.map(h => String(h).toLowerCase());
+    candidates.push({
+      type: 'initiative',
+      score: initHeat(init, cycle, owned),
+      init,
+      className: 'initiative',
+      label: (init.name || init.id) + ' — ' + (impl.nextScheduledAction || impl.phase || 'live'),
+      lever: impl.nextScheduledAction || 'advance or hold this initiative',
+      hood: (owned && hoods[0])
+        || (init.neighborhoods || []).find(n => hoodLc.indexOf(String(n).toLowerCase()) >= 0)
+        || (init.neighborhoods || [])[0]
+        || hoods[0]
+        || null,
     });
   }
-  return facts;
+  if (kind === 'district' && approval != null && approval < 55) {
+    const cool = (turf || []).find(f => /sentiment 0\.[0-3]/.test(f.text));
+    candidates.push({
+      type: 'approval-pressure',
+      score: 50 + (55 - approval),
+      className: 'approval-pressure',
+      label: office.holder + ' at approval ' + approval + (cool ? ' — ' + cool.text : ''),
+      lever: 'defend the district or go quiet',
+      hood: hoods[0] || null,
+      approval,
+      fact: cool || null,
+    });
+  }
+  candidates.sort((a, b) => b.score - a.score || String((a.init && a.init.id) || '').localeCompare(String((b.init && b.init.id) || '')));
+  const top = candidates[0];
+  if (!top) {
+    return {
+      empty: true,
+      pulse: null,
+      prewrite: {
+        claim: null,
+        lineFacts: [],
+        missing: ['no due action on this seat this cycle'],
+      },
+      known: [],
+    };
+  }
+
+  const known = [];
+  const lineFacts = [];
+  if (approval != null) {
+    const seatId = office.officeId || office.projectId || 'seat';
+    known.push({
+      id: 'F-office-' + seatId,
+      t: 'FACT',
+      text: (office.holder || '') + ' holds ' + seatId + ' at approval ' + approval,
+      src: 'engine_audit snapshots.Civic_Office_Ledger',
+    });
+    lineFacts.push('approval ' + approval);
+  }
+  if (top.init) {
+    const fact = initFact(top.init);
+    known.push(fact);
+    lineFacts.push(fact.text);
+    const impl = top.init.implementation || {};
+    if (impl.nextScheduledAction) lineFacts.push('due: ' + impl.nextScheduledAction);
+  }
+  for (const row of cabinet || []) {
+    known.push(row);
+    lineFacts.push(row.text);
+  }
+  const pickHood = top.hood ? String(top.hood).toLowerCase() : '';
+  for (const row of turf || []) {
+    if (pickHood && row.text.toLowerCase().indexOf(pickHood) < 0) continue;
+    known.push(row);
+    lineFacts.push(row.text);
+  }
+  for (const row of (life.events || []).concat(chaos || [])) {
+    if (pickHood && row.text.toLowerCase().indexOf(pickHood) < 0 && !eventHitsTurf(row.text, hoods)) continue;
+    if (known.length >= 10) break;
+    known.push(row);
+  }
+
+  const missing = [];
+  if (!(life.businesses || []).length) missing.push('no shop names on disk for this turf');
+  if (top.init && /stab|disbursement/i.test(String(top.init.name || '') + String((top.init.implementation || {}).phase || ''))) {
+    missing.push('no named applicant households — do not invent who got the check');
+  }
+  missing.push('no invented vote, POPID, or complete');
+
+  return {
+    empty: false,
+    pulse: {
+      className: top.className,
+      score: top.score,
+      label: top.label,
+      lever: top.lever,
+      hood: top.hood,
+      initiative: top.init ? (top.init.id || top.init.InitiativeID) : null,
+    },
+    prewrite: {
+      claim: top.lever,
+      lineFacts: lineFacts.slice(0, 6),
+      missing,
+    },
+    known: known.slice(0, 12),
+  };
 }
 
 function loadCascadeVoices(root, initiativeId) {
@@ -447,32 +587,27 @@ function buildPack(opts) {
 
   const kind = seatKind(office);
   const hoods = turfHoods(office);
-  const people = kind === 'role' ? [] : loadConstituents(root, hoods, opts.cap || CONSTITUENT_CAP);
+  const peopleAll = kind === 'role' ? [] : loadConstituents(root, hoods, opts.cap || CONSTITUENT_CAP);
   const audit = opts.audit || loadAudit(root, cycle);
   const job = loadOfficeJob(audit, office);
   const turf = kind === 'role' ? [] : loadTurfMetrics(audit, hoods);
   const life = kind === 'role' ? { businesses: [], churches: [], events: [] } : loadTurfLife(root, cycle, hoods);
   const chaos = kind === 'role' ? [] : loadCycleEvents(root, cycle, hoods);
-  const known = loadProjects(root, cycle, hoods, office, kind);
-  if (kind === 'initiative') {
-    for (const row of loadCabinet(root, office)) known.push(row);
-  }
-  for (const row of job.mine) {
-    known.unshift({
-      id: 'F-office-' + (row.OfficeId || 'seat'),
-      t: 'FACT',
-      text: (row.Holder || office.holder) + ' holds ' + (row.OfficeId || office.officeId || office.projectId) +
-        (row.Approval != null && row.Approval !== '' ? ' at approval ' + row.Approval : ''),
-      src: 'engine_audit snapshots.Civic_Office_Ledger',
-    });
-  }
+  const inits = loadInitRows(root, cycle, hoods, office, kind);
+  const cabinet = kind === 'initiative' ? loadCabinet(root, office, cycle) : [];
+  const turn = pickTurn({ kind, office, cycle, inits, job, life, hoods, turf, chaos, cabinet });
+  const people = turn.empty ? [] : peopleForPick(peopleAll, {
+    init: inits.find(i => turn.pulse && (i.id || i.InitiativeID) === turn.pulse.initiative),
+    label: turn.pulse && turn.pulse.label,
+  });
 
   const taskName = kind === 'district' ? 'district-week' : kind === 'initiative' ? 'initiative-week' : 'role-week';
-  const sources = kind === 'initiative' ? loadCascadeVoices(root, office.initiative) : [];
+  const sources = kind === 'initiative' && !turn.empty ? loadCascadeVoices(root, office.initiative) : [];
 
   return {
     v: 'OFFICE/1',
     team: 'civic-office',
+    empty: !!turn.empty,
     actor: {
       id: office.popid || agentDir,
       name: office.holder,
@@ -482,8 +617,14 @@ function buildPack(opts) {
       faction: office.faction || null,
       agentDir: office.agentDir || agentDir,
       initiative: office.initiative || null,
+      dials: { approval: approvalOf(job) },
     },
-    task: { a: taskName },
+    task: {
+      a: taskName,
+      goal: turn.empty ? 'no move this cycle' : turn.pulse.lever,
+    },
+    pulse: turn.pulse,
+    prewrite: turn.prewrite,
     signal: {
       kind: kind === 'district' ? 'district-heat' : kind === 'initiative' ? 'initiative-heat' : 'role-heat',
       hoods,
@@ -498,14 +639,14 @@ function buildPack(opts) {
         tier: p.tier,
         src: p.src,
       })),
-      businesses: life.businesses,
-      churches: life.churches,
+      businesses: turn.empty ? [] : life.businesses,
+      churches: turn.empty ? [] : life.churches,
       sources,
     },
-    known: known.concat(turf, life.events, chaos).slice(0, KNOWN_CAP),
+    known: turn.known,
     role: {
       officeRows: job.mine,
-      civicPeers: job.peers.slice(0, 12),
+      civicPeers: job.peers.slice(0, 4),
     },
     limits: {
       assert: [
@@ -536,7 +677,7 @@ function writePack(pack, root, cycle) {
 
 module.exports = {
   buildPack, resolveOffice, turfHoods, loadConstituents, loadProjects, loadTurfLife,
-  loadCabinet, seatKind, writePack, CONSTITUENT_CAP,
+  loadCabinet, loadInitRows, seatKind, pickTurn, writePack, CONSTITUENT_CAP,
 };
 
 if (require.main === module) {
@@ -545,10 +686,8 @@ if (require.main === module) {
   const pack = buildPack({ cycle, agentDir, root: ROOT });
   const file = writePack(pack, ROOT, cycle);
   console.log(file);
-  console.log(pack.actor.name + ' · ' + pack.task.a + ' · ' +
-    (pack.actor.district || pack.actor.initiative || 'citywide') + ' · ' +
-    pack.exposure.subjects.length + ' people · ' +
-    (pack.exposure.businesses || []).length + ' shops · ' +
-    (pack.exposure.churches || []).length + ' churches · ' +
+  console.log(pack.actor.name + ' · ' + pack.task.a +
+    (pack.empty ? ' · EMPTY' : ' · ' + (pack.pulse && pack.pulse.label || '')) +
+    ' · ' + pack.exposure.subjects.length + ' people · ' +
     pack.known.length + ' facts');
 }

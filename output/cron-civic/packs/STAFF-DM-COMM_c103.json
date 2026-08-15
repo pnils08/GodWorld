@@ -1,6 +1,7 @@
 {
   "v": "OFFICE/1",
   "team": "civic-office",
+  "empty": true,
   "actor": {
     "id": "POP-00037",
     "name": "Brenda Okoro",
@@ -9,10 +10,22 @@
     "district": "citywide",
     "faction": "STAFF",
     "agentDir": "civic-office-okoro",
-    "initiative": null
+    "initiative": null,
+    "dials": {
+      "approval": 65
+    }
   },
   "task": {
-    "a": "role-week"
+    "a": "role-week",
+    "goal": "no move this cycle"
+  },
+  "pulse": null,
+  "prewrite": {
+    "claim": null,
+    "lineFacts": [],
+    "missing": [
+      "no due action on this seat this cycle"
+    ]
   },
   "signal": {
     "kind": "role-heat",
@@ -25,14 +38,7 @@
     "churches": [],
     "sources": []
   },
-  "known": [
-    {
-      "id": "F-office-STAFF-DM-COMM",
-      "t": "FACT",
-      "text": "Brenda Okoro holds STAFF-DM-COMM at approval 65",
-      "src": "engine_audit snapshots.Civic_Office_Ledger"
-    }
-  ],
+  "known": [],
   "role": {
     "officeRows": [
       {

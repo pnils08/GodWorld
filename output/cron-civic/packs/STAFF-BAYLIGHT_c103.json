@@ -1,6 +1,7 @@
 {
   "v": "OFFICE/1",
   "team": "civic-office",
+  "empty": false,
   "actor": {
     "id": "POP-00041",
     "name": "Keisha Ramos",
@@ -9,10 +10,36 @@
     "district": "citywide",
     "faction": "STAFF",
     "agentDir": "civic-office-baylight-authority",
-    "initiative": "INIT-006"
+    "initiative": "INIT-006",
+    "dials": {
+      "approval": 65
+    }
   },
   "task": {
-    "a": "initiative-week"
+    "a": "initiative-week",
+    "goal": "Phase II shortlist published — 4 qualified bidders reduced to 3"
+  },
+  "pulse": {
+    "className": "initiative",
+    "score": 120,
+    "label": "Baylight District — Final Council Vote — Phase II shortlist published — 4 qualified bidders reduced to 3",
+    "lever": "Phase II shortlist published — 4 qualified bidders reduced to 3",
+    "hood": "Baylight District",
+    "initiative": "INIT-006"
+  },
+  "prewrite": {
+    "claim": "Phase II shortlist published — 4 qualified bidders reduced to 3",
+    "lineFacts": [
+      "approval 65",
+      "Baylight District — Final Council Vote is in construction-planning — C101: Post-event site inspection for the C100 Celebration closed clean — Delgado full walkdown of event field and construction exclusion perimeter found no surf",
+      "due: Phase II shortlist published — 4 qualified bidders reduced to 3",
+      "INIT-006 — construction-planning — C103: Phase II shortlist published (4 bidders reduced to 3); moving to final bid evaluation. — Final bid evaluation and selection",
+      "Baylight District: sentiment 0.55, retail 5.77, crime index 0.62, housing pressure 0"
+    ],
+    "missing": [
+      "no shop names on disk for this turf",
+      "no invented vote, POPID, or complete"
+    ]
   },
   "signal": {
     "kind": "initiative-heat",
@@ -75,45 +102,9 @@
       "src": "output/initiative_tracker.json"
     },
     {
-      "id": "F-doc-BAYLC000ProjectCharter20",
-      "t": "FACT",
-      "text": "BAYL-C000-ProjectCharter-20400101",
-      "src": "output/city-civic-database/initiatives/baylight/BAYL-C000-ProjectCharter-20400101.md"
-    },
-    {
-      "id": "F-doc-BAYLC081DEIR20410501md",
-      "t": "FACT",
-      "text": "DRAFT ENVIRONMENTAL IMPACT REPORT (DEIR)",
-      "src": "output/city-civic-database/initiatives/baylight/BAYL-C081-DEIR-20410501.md"
-    },
-    {
-      "id": "F-doc-BAYLC082ProjectImpactAna",
-      "t": "FACT",
-      "text": "Project Impact Analysis: Baylight District Draft Environmental Impact Report (DEIR)",
-      "src": "output/city-civic-database/initiatives/baylight/BAYL-C082-ProjectImpactAnalysis-20410601.md"
-    },
-    {
-      "id": "F-doc-BAYLC084RemediationBond2",
-      "t": "FACT",
-      "text": "ENVIRONMENTAL REMEDIATION PERFORMANCE BOND CERTIFICATE",
-      "src": "output/city-civic-database/initiatives/baylight/BAYL-C084-RemediationBond-20410801.md"
-    },
-    {
-      "id": "F-doc-BAYLC084TIFOrdinance2041",
-      "t": "FACT",
-      "text": "BAYLIGHT DISTRICT TAX INCREMENT FINANCING ORDINANCE",
-      "src": "output/city-civic-database/initiatives/baylight/BAYL-C084-TIFOrdinance-20410801.md"
-    },
-    {
-      "id": "F-doc-BAYLC085MobilizationRequ",
-      "t": "FACT",
-      "text": "Request for Construction Mobilization Timeline — Baylight District",
-      "src": "output/city-civic-database/initiatives/baylight/BAYL-C085-MobilizationRequest-20410901.md"
-    },
-    {
       "id": "F-cabinet-decisions_c103json",
       "t": "FACT",
-      "text": "INIT-006 — construction-planning — C103: Phase II shortlist published (4 bidders reduced to 3); moving to final bid evaluation.",
+      "text": "INIT-006 — construction-planning — C103: Phase II shortlist published (4 bidders reduced to 3); moving to final bid evaluation. — Final bid evaluation and selection",
       "src": "output/city-civic-database/initiatives/baylight/decisions_c103.json"
     },
     {

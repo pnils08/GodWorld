@@ -1,6 +1,7 @@
 {
   "v": "OFFICE/1",
   "team": "civic-office",
+  "empty": false,
   "actor": {
     "id": "POP-01021",
     "name": "Vanessa Tran-Muñoz",
@@ -9,10 +10,36 @@
     "district": null,
     "faction": null,
     "agentDir": "civic-project-oari",
-    "initiative": "INIT-002"
+    "initiative": "INIT-002",
+    "dials": {
+      "approval": null
+    }
   },
   "task": {
-    "a": "initiative-week"
+    "a": "initiative-week",
+    "goal": "D7 next-cycle report and community satisfaction survey"
+  },
+  "pulse": {
+    "className": "initiative",
+    "score": 120,
+    "label": "Oakland Alternative Response Initiative — D7 next-cycle report and community satisfaction survey",
+    "lever": "D7 next-cycle report and community satisfaction survey",
+    "hood": "West Oakland",
+    "initiative": "INIT-002"
+  },
+  "prewrite": {
+    "claim": "D7 next-cycle report and community satisfaction survey",
+    "lineFacts": [
+      "Oakland Alternative Response Initiative is in operational — C102: D7 performance review confirms stabilization post-KONO crisis; monitoring continues.",
+      "due: D7 next-cycle report and community satisfaction survey",
+      "INIT-002 — pilot_evaluation — C103: Executive order issued to create community task force for D7 satisfaction survey review. — Task force recommendations due",
+      "West Oakland crime: property 58, violent 61, incidents 11 (cycle 103)",
+      "West Oakland: sentiment 0.5, retail 7.91, crime index 1.19, housing pressure 0"
+    ],
+    "missing": [
+      "no shop names on disk for this turf",
+      "no invented vote, POPID, or complete"
+    ]
   },
   "signal": {
     "kind": "initiative-heat",
@@ -26,50 +53,10 @@
   "exposure": {
     "subjects": [
       {
-        "pop": "POP-00173",
-        "name": "Kaila Braun",
-        "neighborhood": "Fruitvale",
-        "role": "Immigrant Legal Aid Worker",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
-      },
-      {
-        "pop": "POP-00176",
-        "name": "Talmon Lint",
-        "neighborhood": "West Oakland",
-        "role": "Solar Panel Installation Lead",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
-      },
-      {
         "pop": "POP-00183",
         "name": "Toby Lamont",
         "neighborhood": "Fruitvale",
         "role": "Mutual Aid Network Organizer",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
-      },
-      {
-        "pop": "POP-00184",
-        "name": "Brooklyn Nguyen",
-        "neighborhood": "Fruitvale",
-        "role": "Teacher",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
-      },
-      {
-        "pop": "POP-00185",
-        "name": "Lila Patty",
-        "neighborhood": "West Oakland",
-        "role": "Solar Panel Installation Lead",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
-      },
-      {
-        "pop": "POP-00187",
-        "name": "Isla Sike",
-        "neighborhood": "West Oakland",
-        "role": "Domestic Violence Shelter Director",
         "tier": 4,
         "src": "output/simulation_ledger_snapshot.jsonl"
       },
@@ -86,6 +73,14 @@
         "name": "Jackson Sift",
         "neighborhood": "West Oakland",
         "role": "Ex-Offender Reentry Counselor",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-00173",
+        "name": "Kaila Braun",
+        "neighborhood": "Fruitvale",
+        "role": "Immigrant Legal Aid Worker",
         "tier": 4,
         "src": "output/simulation_ledger_snapshot.jsonl"
       }
@@ -109,12 +104,6 @@
         "neighborhood": "West Oakland",
         "text": "special Christmas service fills the sanctuary",
         "src": "world_summary faith-event"
-      },
-      {
-        "name": "New Covenant Pentecostal Assembly",
-        "neighborhood": "West Oakland",
-        "text": "2 citizen(s) joined the congregation at New Covenant Pentecostal Assembly",
-        "src": "world_summary faith-join"
       }
     ],
     "sources": [
@@ -158,40 +147,10 @@
       "src": "output/initiative_tracker.json"
     },
     {
-      "id": "F-doc-OARIC000ProjectCharter20",
-      "t": "FACT",
-      "text": "OARI-C000-ProjectCharter-20400101",
-      "src": "output/city-civic-database/initiatives/oari/OARI-C000-ProjectCharter-20400101.md"
-    },
-    {
-      "id": "F-doc-OARIC076OfficialRelease2",
-      "t": "FACT",
-      "text": "OAKLAND ALTERNATIVE RESPONSE INITIATIVE — OFFICIAL RELEASE",
-      "src": "output/city-civic-database/initiatives/oari/OARI-C076-OfficialRelease-20410301.md"
-    },
-    {
-      "id": "F-doc-OARIC084MayorsResponse20",
-      "t": "FACT",
-      "text": "OAKLAND ALTERNATIVE RESPONSE INITIATIVE — Implementation Status",
-      "src": "output/city-civic-database/initiatives/oari/OARI-C084-MayorsResponse-20410801.md"
-    },
-    {
-      "id": "F-doc-OARIC085TimelineRequest2",
-      "t": "FACT",
-      "text": "OARI Implementation Timeline — Status Request",
-      "src": "output/city-civic-database/initiatives/oari/OARI-C085-TimelineRequest-20410901.md"
-    },
-    {
       "id": "F-cabinet-decisions_c103json",
       "t": "FACT",
-      "text": "INIT-002 — pilot_evaluation — C103: Executive order issued to create community task force for D7 satisfaction survey review.",
+      "text": "INIT-002 — pilot_evaluation — C103: Executive order issued to create community task force for D7 satisfaction survey review. — Task force recommendations due",
       "src": "output/city-civic-database/initiatives/oari/decisions_c103.json"
-    },
-    {
-      "id": "F-crime-Fruitvale",
-      "t": "FACT",
-      "text": "Fruitvale crime: property 54, violent 50, incidents 7 (cycle 103)",
-      "src": "engine_audit snapshots.Crime_Metrics"
     },
     {
       "id": "F-crime-WestOakland",
@@ -200,27 +159,9 @@
       "src": "engine_audit snapshots.Crime_Metrics"
     },
     {
-      "id": "F-crime-EastOakland",
-      "t": "FACT",
-      "text": "East Oakland crime: property 54, violent 66, incidents 11 (cycle 103)",
-      "src": "engine_audit snapshots.Crime_Metrics"
-    },
-    {
       "id": "F-hood-WestOakland",
       "t": "FACT",
       "text": "West Oakland: sentiment 0.5, retail 7.91, crime index 1.19, housing pressure 0",
-      "src": "engine_audit snapshots.Neighborhood_Map"
-    },
-    {
-      "id": "F-hood-Fruitvale",
-      "t": "FACT",
-      "text": "Fruitvale: sentiment 0.5, retail 12.22, crime index 1.04, housing pressure 0",
-      "src": "engine_audit snapshots.Neighborhood_Map"
-    },
-    {
-      "id": "F-hood-EastOakland",
-      "t": "FACT",
-      "text": "East Oakland: sentiment 0.51, retail 8.39, crime index 1.2, housing pressure 0",
       "src": "engine_audit snapshots.Neighborhood_Map"
     },
     {

@@ -1,6 +1,7 @@
 {
   "v": "OFFICE/1",
   "team": "civic-office",
+  "empty": false,
   "actor": {
     "id": "POP-00034",
     "name": "Avery Santana",
@@ -9,10 +10,35 @@
     "district": "citywide",
     "faction": "OPP",
     "agentDir": "civic-office-mayor",
-    "initiative": null
+    "initiative": null,
+    "dials": {
+      "approval": 95
+    }
   },
   "task": {
-    "a": "role-week"
+    "a": "role-week",
+    "goal": "Month-five disbursement batch review"
+  },
+  "pulse": {
+    "className": "initiative",
+    "score": 80,
+    "label": "West Oakland Stabilization Fund — Month-five disbursement batch review",
+    "lever": "Month-five disbursement batch review",
+    "hood": "West Oakland",
+    "initiative": "INIT-001"
+  },
+  "prewrite": {
+    "claim": "Month-five disbursement batch review",
+    "lineFacts": [
+      "approval 95",
+      "West Oakland Stabilization Fund is in disbursement-active — C102: Month-four disbursement batch approved (7 households), total disbursed: 45 of ~280.",
+      "due: Month-five disbursement batch review"
+    ],
+    "missing": [
+      "no shop names on disk for this turf",
+      "no named applicant households — do not invent who got the check",
+      "no invented vote, POPID, or complete"
+    ]
   },
   "signal": {
     "kind": "role-heat",
@@ -36,36 +62,6 @@
       "id": "F-INIT-001",
       "t": "FACT",
       "text": "West Oakland Stabilization Fund is in disbursement-active — C102: Month-four disbursement batch approved (7 households), total disbursed: 45 of ~280.",
-      "src": "output/initiative_tracker.json"
-    },
-    {
-      "id": "F-INIT-002",
-      "t": "FACT",
-      "text": "Oakland Alternative Response Initiative is in operational — C102: D7 performance review confirms stabilization post-KONO crisis; monitoring continues.",
-      "src": "output/initiative_tracker.json"
-    },
-    {
-      "id": "F-INIT-003",
-      "t": "FACT",
-      "text": "Fruitvale Transit Hub Phase II — Visioning is in construction-planning — C102: Submitted pipeline exhaustion docs + stamped pedestrian-path redesign",
-      "src": "output/initiative_tracker.json"
-    },
-    {
-      "id": "F-INIT-005",
-      "t": "FACT",
-      "text": "Temescal Community Health Center is in construction-active — C102: Construction timeline accelerated; double shifts ordered for caisson drilling and excavation.",
-      "src": "output/initiative_tracker.json"
-    },
-    {
-      "id": "F-INIT-006",
-      "t": "FACT",
-      "text": "Baylight District — Final Council Vote is in construction-planning — C101: Post-event site inspection for the C100 Celebration closed clean — Delgado full walkdown of event field and construction exclusion perimeter found no surf",
-      "src": "output/initiative_tracker.json"
-    },
-    {
-      "id": "F-INIT-007",
-      "t": "FACT",
-      "text": "Oakland Youth Apprenticeship Pipeline is in pilot-active — C102: Executive review ordered to address stalled recruitment and intake bottlenecks.",
       "src": "output/initiative_tracker.json"
     }
   ],

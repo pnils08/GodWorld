@@ -1,7 +1,7 @@
 ---
 title: Civic process install — one research, three later plans — research
 created: 2026-08-14
-updated: 2026-08-14
+updated: 2026-08-15
 type: reference
 tags: [research, civic, architecture, active]
 sources:
@@ -78,9 +78,11 @@ Umbrella for the civic process install. civic.15 remains the Sunday/datawake imp
 ## Applications (living)
 
 - 2026-08-14 — filed as the parent for Sunday ingest / Mon–Thu living / consequence. Election parked under it.
+- 2026-08-15 — Heat-slice checklist civic (pipeline.52 Task 6) is **reporters** (Carmen, Luis, Trevor, Lila, Noah, Angela). `buildCivicDomainSlice.js` is disk-only (`desk_signal` + leftover datawakes); **never queries Sheets**. Civic *offices* still get datawake `domainSlice`: world_summary hood lines + a few INIT ids. No Civic_Office_Ledger, no constituent rows, no ADR-0017 Packet. Codex left office adoption until after the newsroom proof. That proof shipped; office pack did not.
 
 ---
 
 ## Changelog
 
+- 2026-08-15 (grok) — Civic ADR-0017 is the real work. Heat-slice Task 6 ≠ office pack. Sheets not parsed for what offices should get.
 - 2026-08-14 (grok) — Initial extraction. Mike cadence + consequence + park election. No plan ignited.

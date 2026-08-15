@@ -2,11 +2,9 @@
 'use strict';
 
 /**
- * District pack for a civic OFFICE (not a reporter).
- * Sunday they still get city-hall packets. This file is Mon–Thu: who lives
- * in the turf, what projects sit there, what they must not invent.
- *
- * Disk-first. Missing people list = empty, never guessed.
+ * OFFICE/1 pack. Cron food, not a brief.
+ * District seats: T4-first people + turf events + job numbers.
+ * Appointed citywide: role data + city events media would grab. No filler neighbors.
  */
 
 const fs = require('fs');
@@ -31,17 +29,80 @@ function loadOfficeMap(root) {
   return loadJson(path.join(root, 'scripts', 'civic-office-map.json')) || { offices: [], projects: [] };
 }
 
-function resolveOffice(officeMap, agentDir) {
-  const rows = [...(officeMap.offices || []), ...(officeMap.projects || [])]
-    .filter(o => o.agentDir === agentDir);
+function resolveOffice(officeMap, key) {
+  const all = [...(officeMap.offices || []), ...(officeMap.projects || [])];
+  const byId = all.find(o => o.officeId === key);
+  if (byId) return byId;
+  const rows = all.filter(o => o.agentDir === key);
   if (!rows.length) return null;
   const bloc = {
     'civic-office-opp-faction': 'D5',
     'civic-office-crc-faction': 'D7',
     'civic-office-ind-swing': 'D4',
   };
-  const want = bloc[agentDir];
+  const want = bloc[key];
   return want ? (rows.find(r => r.district === want) || rows[0]) : rows[0];
+}
+
+function isCitywide(office) {
+  return !office.district || String(office.district).toLowerCase() === 'citywide';
+}
+
+function eventHitsTurf(text, hoods) {
+  const t = String(text || '').toLowerCase();
+  if (!hoods.length) return true;
+  return hoods.some(h => t.indexOf(String(h).toLowerCase()) >= 0);
+}
+
+function domainWantsEvent(domain, text) {
+  const d = String(domain || '').toLowerCase();
+  const t = String(text || '').toLowerCase();
+  if (!d) return true;
+  if (/crime|safety|police|justice|prosecut|defend|court|iad|cprb|reentry|ombud/.test(d)) {
+    return /cop_car|oari|arrest|safety|crime|ticket|police|welfare|substance/.test(t);
+  }
+  if (/fire/.test(d)) return /fire|pge|transformer|ambulance|building_inspector/.test(t);
+  if (/ems|medical|exam|death|health/.test(d)) return /ambulance|injury|health|death|medical/.test(t);
+  if (/emerg|crisis/.test(d)) return /crisis|transformer|ambulance|cop_car|pge|spike/.test(t);
+  if (/plan|hous/.test(d)) return /building_inspector|housing|infrastructure|inspector/.test(t);
+  return true;
+}
+
+function loadCycleEvents(root, cycle, hoods, domain) {
+  const file = path.join(root, 'output', 'world_summary_c' + cycle + '.md');
+  if (!fs.existsSync(file)) return [];
+  const md = fs.readFileSync(file, 'utf8');
+  const facts = [];
+  const chaos = md.split('## Chaos Events')[1] || '';
+  const table = chaos.split('**Narrative')[0] || chaos;
+  for (const line of table.split('\n')) {
+    if (!/^\|/.test(line) || /Vehicle|---/.test(line)) continue;
+    const cells = line.split('|').map(s => s.trim()).filter(Boolean);
+    if (cells.length < 4) continue;
+    const blob = cells.join(' ');
+    if (!eventHitsTurf(blob, hoods) && hoods.length) continue;
+    if (!domainWantsEvent(domain, blob)) continue;
+    facts.push({
+      id: 'F-chaos-' + cells[0] + '-' + cells[2].slice(0, 24),
+      t: 'FACT',
+      text: cells[0] + ' ' + cells[1] + ' → ' + cells[2] + ' ' + cells[3] + ' ' + (cells[4] || ''),
+      src: 'world_summary Chaos_Cars',
+    });
+  }
+  const world = md.split('## World Events')[1] || '';
+  const worldBody = world.split('## Chaos')[0] || world;
+  for (const line of worldBody.split('\n')) {
+    if (!/^\- /.test(line)) continue;
+    if (!eventHitsTurf(line, hoods) && hoods.length) continue;
+    if (!domainWantsEvent(domain, line)) continue;
+    facts.push({
+      id: 'F-we-' + facts.length,
+      t: 'FACT',
+      text: line.replace(/^\- /, '').replace(/\*\*/g, '').slice(0, 180),
+      src: 'world_summary World Events',
+    });
+  }
+  return facts.slice(0, 12);
 }
 
 function turfHoods(office) {
@@ -109,9 +170,11 @@ function loadTurfMetrics(audit, hoods) {
   const facts = [];
   const crime = (audit && audit.snapshots && audit.snapshots.Crime_Metrics) || [];
   const map = (audit && audit.snapshots && audit.snapshots.Neighborhood_Map) || [];
-  for (const row of crime) {
+  const crimeRows = want.size
+    ? crime.filter(row => want.has(String(row.Neighborhood || '').toLowerCase()))
+    : crime.slice().sort((a, b) => Number(b.IncidentCount || 0) - Number(a.IncidentCount || 0)).slice(0, 8);
+  for (const row of crimeRows) {
     const hood = String(row.Neighborhood || '');
-    if (want.size && !want.has(hood.toLowerCase())) continue;
     facts.push({
       id: 'F-crime-' + hood.replace(/\s+/g, ''),
       t: 'FACT',
@@ -121,9 +184,10 @@ function loadTurfMetrics(audit, hoods) {
       src: 'engine_audit snapshots.Crime_Metrics',
     });
   }
+  if (!want.size) return facts;
   for (const row of map) {
     const hood = String(row.Neighborhood || '');
-    if (want.size && !want.has(hood.toLowerCase())) continue;
+    if (!want.has(hood.toLowerCase())) continue;
     const bits = [];
     if (row.Sentiment != null && row.Sentiment !== '') bits.push('sentiment ' + row.Sentiment);
     if (row.RetailVitality != null && row.RetailVitality !== '') bits.push('retail ' + row.RetailVitality);
@@ -140,7 +204,7 @@ function loadTurfMetrics(audit, hoods) {
   return facts;
 }
 
-function loadProjects(root, cycle, hoods, initiativeId) {
+function loadProjects(root, cycle, hoods, initiativeId, domain) {
   let tracker = loadJson(path.join(root, 'output', 'initiative_tracker.json'));
   if (!tracker || !Array.isArray(tracker.initiatives)) {
     try {
@@ -153,10 +217,14 @@ function loadProjects(root, cycle, hoods, initiativeId) {
   for (const init of tracker.initiatives || []) {
     const id = init.id || init.InitiativeID;
     const names = init.neighborhoods || [];
-    const hits = !hoodSet.size
-      || (initiativeId && id === initiativeId)
-      || names.some(n => hoodSet.has(String(n).toLowerCase()));
-    if (!hits && hoodSet.size) continue;
+    const inHood = names.some(n => hoodSet.has(String(n).toLowerCase()));
+    const owned = initiativeId && id === initiativeId;
+    let hits = owned || inHood;
+    if (!hoodSet.size && !owned) {
+      const d = String(domain || '') + ' ' + String(init.name || '');
+      hits = /oari|response|crime|safety|police/i.test(d) && /oari|response|safety|police/i.test(init.name || '');
+    }
+    if (!hits) continue;
     const phase = (init.implementation && (init.implementation.phase || init.implementation.status)) || init.status || '';
     const summary = (init.implementation && init.implementation.summary) || '';
     out.push({
@@ -182,7 +250,8 @@ function buildPack(opts) {
   const audit = opts.audit || loadAudit(root, cycle);
   const job = loadOfficeJob(audit, office);
   const turf = loadTurfMetrics(audit, hoods);
-  const known = loadProjects(root, cycle, hoods, office.initiative);
+  const known = loadProjects(root, cycle, hoods, office.initiative, office.dataDomain);
+  const events = loadCycleEvents(root, cycle, hoods, office.dataDomain);
   for (const row of job.mine) {
     known.unshift({
       id: 'F-office-' + (row.OfficeId || 'seat'),
@@ -203,12 +272,10 @@ function buildPack(opts) {
       officeId: office.officeId || office.projectId || null,
       district: office.district || null,
       faction: office.faction || null,
-      agentDir,
+      agentDir: office.agentDir || agentDir,
     },
     task: {
-      goal: 'Live with this district. Remember it. Sunday you fight for what you already know.',
-      assignment: 'weekday-district',
-      approach: 'Speak only from this pack and your prior notes. Do not invent people or counts.',
+      a: isCitywide(office) ? 'role-week' : 'district-week',
     },
     signal: {
       kind: 'district-heat',
@@ -226,7 +293,7 @@ function buildPack(opts) {
       })),
       sources: [],
     },
-    known: known.concat(turf),
+    known: known.concat(turf, events),
     role: {
       officeRows: job.mine,
       civicPeers: job.peers.slice(0, 12),
@@ -249,7 +316,8 @@ function buildPack(opts) {
 function writePack(pack, root, cycle) {
   const dir = path.join(root, 'output', 'cron-civic', 'packs');
   fs.mkdirSync(dir, { recursive: true });
-  const slug = String(pack.actor.agentDir).replace(/^civic-office-|^civic-project-/, '');
+  const slug = String(pack.actor.officeId || pack.actor.agentDir || 'office')
+    .replace(/^civic-office-|^civic-project-/, '');
   const file = path.join(dir, slug + '_c' + cycle + '.json');
   fs.writeFileSync(file, JSON.stringify(pack, null, 2) + '\n');
   return file;

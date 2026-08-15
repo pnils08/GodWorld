@@ -132,6 +132,7 @@ Not in v1: full voice-file rewrite, election/chair-change, live Sheet writes.
 
 ## Changelog
 
+- 2026-08-15 (grok) — Pack: T4-first people; chaos/news events on turf; appointed citywide (Montez et al.) get role numbers not neighbor filler. Short keys — cron food.
 - 2026-08-15 (grok) — Split locked: civic media ≠ civic offices. This plan is offices only.
 - 2026-08-15 (grok) — Week locked (Sunday city-hall / Mon–Thu district / wiki carry-forward).
 - 2026-08-15 (grok) — Initial plan, civic.17. Research basis [[../research/2026-08-14-civic-process-install]].

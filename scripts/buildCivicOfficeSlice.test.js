@@ -51,7 +51,7 @@ const pack = buildPack({
 });
 
 check('actor is the office holder not a reporter', pack.actor.name === 'Test Holder' && pack.team === 'civic-office');
-check('task is weekday district', pack.task.assignment === 'weekday-district');
+check('task is district-week', pack.task.a === 'district-week');
 check('Tier 4 before Tier 1', pack.exposure.subjects[0].name === 'Alpha Local' && pack.exposure.subjects.some(s => s.name === 'Star Player'));
 check('inactive and other-hood excluded', !pack.exposure.subjects.some(s => s.name === 'Beta Local' || s.name === 'Gamma Far'));
 check('project fact from tracker', pack.known.some(k => /Test Hub/.test(k.text)));

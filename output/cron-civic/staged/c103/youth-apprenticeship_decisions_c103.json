@@ -1,0 +1,19 @@
+{
+  "initiative": "INIT-007",
+  "initiativeId": "INIT-007",
+  "cycle": 103,
+  "primaryVoice": "Mayor (MAYOR-001)",
+  "consolidatedFrom": [
+    "STMT-103-crc_faction-002 (CRC — Youth Apprenticeship Pipeline Expansion)",
+    "STMT-103-ind_swing-003 (IND — Oakland Youth Apprenticeship Pipeline — Finance Committee Referral)",
+    "STMT-103-MAYOR-001 (Mayor — Oakland Youth Apprenticeship Pipeline — Recruitment and Intake Bottlenecks)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-007",
+    "ImplementationPhase": "implementation-active",
+    "MilestoneNotes": "C103: Executive directive issued to OEWD to clear recruitment bottlenecks and fast-track intake.",
+    "NextScheduledAction": "C104 findings report and intake evaluation",
+    "NextActionCycle": 104
+  },
+  "_notesNormalized": "primary-only (cron-civic-run close, S344)"
+}

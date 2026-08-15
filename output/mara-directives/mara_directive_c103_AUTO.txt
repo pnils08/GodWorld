@@ -1,0 +1,62 @@
+# C103 Voice Directives — Mara Vance (AUTO)
+
+**Cycle:** 103
+**Issued:** C103 (auto-derived, cron-civic-run.js --stage=directive)
+**Source:** world_summary_c103 + engine review HIGHs + tracker + C102 voice record
+
+---
+## Elena Soria Dominguez — Transit Hub Planning Lead
+
+- **Agent:** `.claude/agents/civic-project-transit-hub/`
+- **Address:** Publish the bureau's compliance review findings for the Fruitvale Transit Hub Phase II (INIT-003) pipeline submissions and pedestrian-path redesign.
+- **Why:** The initiative is flagged with a high-severity "stuck-initiative" pattern in C103, remaining stalled in the construction-planning phase despite the submission of pipeline exhaustion and pedestrian-path redesign documents in C102.
+- **Acceptance:** Public release of the Bureau's formal compliance determination and an updated Year 3 construction-planning timeline.
+- **Silence consequence:** Continued bureaucratic stagnation of INIT-003, delaying vital transit infrastructure coordination in Fruitvale.
+
+## Vanessa Tran-Muñoz — OARI Program Director
+
+- **Agent:** `.claude/agents/civic-project-oari/`
+- **Address:** Release the District 7 community satisfaction survey results and reconcile OARI's operational footprint with the elevated CrimeIndex metrics in West Oakland (1.19), Fruitvale (1.04), and East Oakland (1.20) recorded in C103.
+- **Why:** The engine reports a high-severity "incoherence" pattern in C103, where INIT-002 is marked operational but high CrimeIndex numbers persist in critical target zones.
+- **Acceptance:** Publication of the D7 satisfaction survey data and a targeted operational adjustment plan addressing the C103 CrimeIndex disparities.
+- **Silence consequence:** The OARI program faces a loss of institutional credibility and budget vulnerability due to unaddressed data mismatches.
+
+## Marcus Webb — OEWD Program Director (Stabilization Fund)
+
+- **Agent:** `.claude/agents/civic-project-stabilization-fund/`
+- **Address:** Submit the Month-five disbursement batch review for the West Oakland Stabilization Fund (INIT-001) to the Mayor and City Council.
+- **Why:** This review is slated for C103 to maintain the disbursement pipeline, following the C102 approval of 7 households which brought the total to 45 out of approximately 280.
+- **Acceptance:** A published report detailing the number of households approved in the Month-five batch and the updated cumulative disbursement total.
+- **Silence consequence:** Financial support to vulnerable West Oakland households halts, causing unnecessary economic distress and program delays.
+
+## Bobby Chen-Ramirez — Health Center Project Director
+
+- **Agent:** `.claude/agents/civic-project-health-center/`
+- **Address:** Deliver the formal resolution of the HCAI first-comments window and declare Phase 1 of the Temescal Community Health Center (INIT-005) closed.
+- **Why:** C103 requires resolution of the state-level HCAI comments to lock in the accelerated construction timeline and double shifts implemented in C102.
+- **Acceptance:** Submission of the HCAI sign-off sheet and a confirmed completion date for excavation and caisson drilling.
+- **Silence consequence:** High-intensity double shifts run the risk of structural and budgetary penalties without HCAI clearance.
+
+## Keisha Ramos — Baylight Authority Director
+
+- **Agent:** `.claude/agents/civic-office-baylight-authority/`
+- **Address:** Publish the final Phase II shortlist reduction, narrowing the qualified builders from four to three for the Baylight District development (INIT-006).
+- **Why:** This developer selection step is the gating deliverable scheduled for C103, building on the clean post-event site inspection reported in C101.
+- **Acceptance:** Public announcement of the three remaining qualified bidding consortiums selected for the final proposal phase.
+- **Silence consequence:** The selection process stalls, extending the high-risk "construction-planning" phase and jeopardizing developer engagement.
+
+## Rafael Montez — Police Chief
+
+- **Agent:** `.claude/agents/civic-office-police-chief/`
+- **Address:** Present a neighborhood security plan addressing the elevated CrimeIndex figures in East Oakland (1.20) and West Oakland (1.19) recorded in C103.
+- **Why:** High CrimeIndex values in East Oakland (1.20) and West Oakland (1.19) remain unchecked despite active local patrols and alternate response operations.
+- **Acceptance:** A coordinated safety response memo detailing patrol-hour adjustments or co-response allocations for East and West Oakland in C104.
+- **Silence consequence:** Continued public safety deterioration in Oakland's most vulnerable neighborhoods and a lack of municipal alignment.
+
+## Avery Santana — Mayor
+
+- **Agent:** `.claude/agents/civic-office-mayor/`
+- **Address:** Direct the Office of Economic and Workforce Development (OEWD) to clear the recruitment and intake bottlenecks flagged in the C102 executive review of the Oakland Youth Apprenticeship Pipeline (INIT-007).
+- **Why:** The program remains stalled with recruitment failures leading into the C104 findings report, requiring immediate executive intervention to unblock intake.
+- **Acceptance:** An executive directive instructing the program team on specific intake adjustments to be evaluated in C104.
+- **Silence consequence:** The apprenticeship pipeline will fail its pilot phase, leaving vulnerable youth without jobs and wasting allocated municipal resources.

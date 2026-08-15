@@ -1,0 +1,34 @@
+{
+  "office": "oari",
+  "cycle": 103,
+  "speaker": "Dr. Vanessa Tran-Muñoz",
+  "cascadeSummary": "Publishing D7 community satisfaction survey results showing 87% approval for alternative response model. Initiating targeted CrimeIndex review protocol in West Oakland and Fruitvale to align OARI deployment with neighborhood safety needs.",
+  "statements": [
+    {
+      "statementId": "STMT-103-oari-001",
+      "type": "operational_update",
+      "topic": "D7 Satisfaction Survey Release",
+      "initiative": "INIT-002",
+      "decision": "Survey publication with operational adjustments",
+      "quote": "87% of District 7 residents report feeling safer knowing non-police crisis teams are responding to behavioral health calls — that's the trust we're building citywide.",
+      "fullStatement": "The District 7 community satisfaction survey results demonstrate precisely why we built this program: 87% of respondents reported feeling safer knowing trained civilian teams are responding to behavioral health crises in their neighborhood. We're releasing the full dataset today along with our West Oakland and Fruitvale stabilization plan, which adapts our deployment patterns to the latest CrimeIndex metrics. This isn't just data — it's proof that when we meet people in crisis with care rather than handcuffs, communities respond with trust.",
+      "trackerUpdates": {
+        "initiative": "INIT-002",
+        "ImplementationPhase": "operational",
+        "MilestoneNotes": "C103: Published D7 satisfaction survey (87% approval); initiated CrimeIndex-adjusted deployment protocols",
+        "NextScheduledAction": "Quarterly performance review",
+        "NextActionCycle": 106
+      }
+    },
+    {
+      "statementId": "STMT-103-oari-002",
+      "type": "neighborhood_response",
+      "topic": "West Oakland Operations",
+      "initiative": null,
+      "decision": "Enhanced coverage for holiday season",
+      "quote": "Our West Oakland team is adding evening coverage through the holidays because crisis doesn't follow a 9-to-5 schedule.",
+      "fullStatement": "With holiday stressors impacting our communities, OARI is expanding West Oakland evening coverage through the new year. The New Covenant Pentecostal Assembly's night services will have a dedicated responder team on call — because crisis doesn't follow a 9-to-5 schedule. This builds on our District 7 success model while addressing West Oakland's unique CrimeIndex patterns.",
+      "trackerUpdates": {}
+    }
+  ]
+}

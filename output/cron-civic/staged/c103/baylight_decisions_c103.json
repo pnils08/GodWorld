@@ -1,0 +1,22 @@
+{
+  "initiative": "INIT-006",
+  "initiativeId": "INIT-006",
+  "cycle": 103,
+  "primaryVoice": "Mayor (MAYOR-006)",
+  "consolidatedFrom": [
+    "STMT-103-baylight_authority-001 (Ramos — Baylight District Phase II Shortlist)",
+    "STMT-103-baylight_authority-002 (Ramos — Baylight District Vendor Selection)",
+    "STMT-103-crc_faction-003 (CRC — Baylight District Shortlist)",
+    "STMT-103-ind_swing-001 (IND — Baylight District Phase II Shortlist)",
+    "STMT-103-MAYOR-006 (Mayor — Baylight District — Phase II Shortlist Publication)",
+    "STMT-103-opp_faction-004 (OPP — Baylight District Phase II Shortlist Credit Claim)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-006",
+    "ImplementationPhase": "construction-planning",
+    "MilestoneNotes": "C103: Phase II shortlist published (4 bidders reduced to 3); moving to final bid evaluation.",
+    "NextScheduledAction": "Final bid evaluation and selection",
+    "NextActionCycle": 105
+  },
+  "_notesNormalized": "primary-only (cron-civic-run close, S344)"
+}

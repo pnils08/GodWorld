@@ -124,6 +124,26 @@ function mustJson(p, why) {
   return j;
 }
 
+/** Council roster for packets. Prefer truesource; after a wipe, the office map is enough. */
+function loadCouncilRoster(officeMap) {
+  const p = path.join(ROOT, 'output', 'desk-packets', 'truesource_reference.json');
+  const ts = readJson(p);
+  if (ts && Array.isArray(ts.council) && ts.council.length >= 9) return ts.council;
+  const council = (officeMap.offices || [])
+    .filter(o => /^COUNCIL-/.test(String(o.officeId || '')) && o.district && o.holder)
+    .map(o => ({
+      name: o.holder,
+      district: o.district,
+      faction: o.faction,
+      status: String(o.status || 'active').toLowerCase(),
+    }));
+  if (council.length < 9) {
+    throw new Error('council roster missing (no truesource, map has ' + council.length + ' seats)');
+  }
+  log('council roster: civic-office-map.json (truesource file gone)');
+  return council;
+}
+
 // Faction -> bloc agent dir (agent topology G-10: 3 bloc agents speak for 9 seats)
 const FACTION_AGENT = {
   OPP: 'civic-office-opp-faction',
@@ -347,8 +367,8 @@ async function runPrep() {
   const briefsFile = mustJson(path.join(ROOT, 'output', 'baseline_briefs_c' + cycle + '.json'), 'engine review baseline briefs');
   const briefs = briefsFile.briefs || [];
   const tracker = trackerSnapshot.loadOrRebuild(cycle);
-  const truesource = mustJson(path.join(ROOT, 'output', 'desk-packets', 'truesource_reference.json'), 'council truesource');
   const officeMap = mustJson(path.join(ROOT, 'scripts', 'civic-office-map.json'), 'civic.15 Task 0.2 office map');
+  const truesource = { council: loadCouncilRoster(officeMap) };
 
   // Mara directive: manual beats AUTO (the directive stage writes the AUTO file
   // before prep in the chain). Absent both -> warn; the packet ships without a

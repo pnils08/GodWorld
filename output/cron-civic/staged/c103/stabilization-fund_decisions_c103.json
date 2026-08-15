@@ -1,0 +1,21 @@
+{
+  "initiative": "INIT-001",
+  "initiativeId": "INIT-001",
+  "cycle": 103,
+  "primaryVoice": "Mayor (MAYOR-002)",
+  "consolidatedFrom": [
+    "STMT-103-MAYOR-002 (Mayor — West Oakland Stabilization Fund — Month-Five Disbursement)",
+    "STMT-103-okoro-001 (okoro — West Oakland Stabilization Fund disbursement)",
+    "STMT-103-opp_faction-001 (OPP — West Oakland Stabilization Fund Month-Five Disbursement)",
+    "STMT-103-stabilization_fund-001 (Webb — Month-five disbursement batch)",
+    "STMT-103-stabilization_fund-002 (Webb — West Oakland service)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-001",
+    "ImplementationPhase": "disbursement-active",
+    "MilestoneNotes": "C103: Month-five disbursement batch approved (7 households), total disbursed: 52 of ~280.",
+    "NextScheduledAction": "Month-six disbursement batch review",
+    "NextActionCycle": 104
+  },
+  "_notesNormalized": "primary-only (cron-civic-run close, S344)"
+}

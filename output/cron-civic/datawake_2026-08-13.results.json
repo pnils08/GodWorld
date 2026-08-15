@@ -1,0 +1,22 @@
+{
+  "date": "2026-08-13",
+  "cycle": 103,
+  "results": [
+    {
+      "office": "civic-office-baylight-authority",
+      "ok": false,
+      "error": "fabricated statistic(s) after retry: 12%"
+    },
+    {
+      "office": "civic-office-crc-faction",
+      "ok": true,
+      "out": "output/cron-civic/datawake/civic-office-crc-faction_2026-08-13.json"
+    },
+    {
+      "office": "civic-office-district-attorney",
+      "ok": false,
+      "error": "no usable JSON statement after retry (model returned empty/invalid content)"
+    }
+  ],
+  "ranAt": "2026-08-15T01:32:29.712Z"
+}

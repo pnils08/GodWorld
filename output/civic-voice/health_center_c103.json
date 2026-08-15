@@ -1,0 +1,34 @@
+{
+  "office": "health_center",
+  "cycle": 103,
+  "speaker": "Bobby Chen-Ramirez",
+  "cascadeSummary": "Closed Phase 1 with HCAI sign-off on seismic submittals and excavation completion. Approved double shifts continue under reinforced compliance protocols per CRC audit request. Temescal demands speed without sacrificing safety—we're delivering both.",
+  "statements": [
+    {
+      "statementId": "STMT-103-health_center-001",
+      "type": "operational_status",
+      "topic": "HCAI resolution",
+      "initiative": "INIT-005",
+      "decision": "Phase 1 closed with HCAI seismic approval",
+      "quote": "HCAI stamped Sheet S-7.3 at 4:37 PM yesterday—that's the last structural note resolved. Caisson drilling finishes Thursday, three days ahead of schedule.",
+      "fullStatement": "HCAI's first-comment window closed with all seismic deficiencies resolved—no redesign required, just clarifying annotations. We've completed 94% of excavation and will finish caisson drilling this cycle. The double shifts stay, but we've added a third QC spot-check per shift at the contractor's cost per CRC's audit terms. Next up: foundation walls and slab pour. Phase 2 starts when the last caisson passes inspection—watch the site bulletin board.",
+      "trackerUpdates": {
+        "initiative": "INIT-005",
+        "ImplementationPhase": "construction-active",
+        "MilestoneNotes": "C103: HCAI seismic approval completed; excavation 94% done; caisson drilling finishing",
+        "NextScheduledAction": "Foundation wall forming and slab pour",
+        "NextActionCycle": 104
+      }
+    },
+    {
+      "statementId": "STMT-103-health_center-002",
+      "type": "constituent_response",
+      "topic": "Temescal engagement",
+      "initiative": null,
+      "decision": "Added neighborhood liaison for construction updates",
+      "quote": "The pharmacist at 47th & Telegraph gets more questions about our crane schedule than I do. Starting next week, his bulletin board gets daily progress photos.",
+      "fullStatement": "Temescal's patience is why we're ahead—they've tolerated the noise, the dust, the early-morning deliveries. Starting next cycle, we're posting daily progress photos at four neighborhood hubs: the pharmacy, the library, the senior center, and that bench at 51st where Mr. Aldridge holds court every afternoon. Concrete dates, real visuals—no marketing fluff.",
+      "trackerUpdates": {}
+    }
+  ]
+}

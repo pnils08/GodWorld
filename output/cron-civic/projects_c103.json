@@ -1,0 +1,66 @@
+{
+  "stage": "projects",
+  "cycle": 103,
+  "results": [
+    {
+      "slug": "stabilization_fund",
+      "model": "deepseek/deepseek-chat",
+      "ok": true,
+      "output": "output/civic-voice/stabilization_fund_c103.json",
+      "statements": 2,
+      "triggeredBy": [
+        "crc_faction",
+        "mayor",
+        "okoro",
+        "opp_faction"
+      ]
+    },
+    {
+      "slug": "oari",
+      "model": "deepseek/deepseek-chat",
+      "ok": true,
+      "output": "output/civic-voice/oari_c103.json",
+      "statements": 2,
+      "triggeredBy": [
+        "mayor",
+        "police_chief"
+      ]
+    },
+    {
+      "slug": "health_center",
+      "model": "deepseek/deepseek-chat",
+      "ok": true,
+      "output": "output/civic-voice/health_center_c103.json",
+      "statements": 2,
+      "triggeredBy": [
+        "crc_faction",
+        "mayor"
+      ]
+    },
+    {
+      "slug": "transit_hub",
+      "model": "deepseek/deepseek-chat",
+      "ok": true,
+      "output": "output/civic-voice/transit_hub_c103.json",
+      "statements": 1,
+      "triggeredBy": [
+        "mayor",
+        "opp_faction"
+      ]
+    },
+    {
+      "slug": "baylight_authority",
+      "model": "deepseek/deepseek-chat",
+      "ok": true,
+      "output": "output/civic-voice/baylight_authority_c103.json",
+      "statements": 2,
+      "triggeredBy": [
+        "crc_faction",
+        "ind_swing",
+        "mayor",
+        "opp_faction"
+      ]
+    }
+  ],
+  "ranAt": "2026-08-15T01:38:09.816Z"
+}

@@ -1,0 +1,19 @@
+{
+  "initiative": "INIT-005",
+  "initiativeId": "INIT-005",
+  "cycle": 103,
+  "primaryVoice": "Mayor (MAYOR-005)",
+  "consolidatedFrom": [
+    "STMT-103-health_center-001 (Chen-Ramirez — HCAI resolution)",
+    "STMT-103-health_center-002 (Chen-Ramirez — Temescal engagement)",
+    "STMT-103-MAYOR-005 (Mayor — Temescal Community Health Center — HCAI First-Comments Resolution)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-005",
+    "ImplementationPhase": "construction-active",
+    "MilestoneNotes": "C103: HCAI first-comments window resolved; Phase 1 closed; construction accelerated.",
+    "NextScheduledAction": "Phase 2 construction progress review",
+    "NextActionCycle": 104
+  },
+  "_notesNormalized": "primary-only (cron-civic-run close, S344)"
+}

@@ -1,0 +1,20 @@
+{
+  "initiative": "INIT-002",
+  "initiativeId": "INIT-002",
+  "cycle": 103,
+  "primaryVoice": "Mayor (MAYOR-003)",
+  "consolidatedFrom": [
+    "STMT-103-MAYOR-003 (Mayor — Oakland Alternative Response Initiative — D7 Community Satisfaction Survey)",
+    "STMT-103-oari-001 (Tran-Muñoz — D7 Satisfaction Survey Release)",
+    "STMT-103-oari-002 (Tran-Muñoz — West Oakland Operations)",
+    "STMT-103-police_chief-002 (Chief — OARI Pilot Expansion)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-002",
+    "ImplementationPhase": "pilot_evaluation",
+    "MilestoneNotes": "C103: Executive order issued to create community task force for D7 satisfaction survey review.",
+    "NextScheduledAction": "Task force recommendations due",
+    "NextActionCycle": 105
+  },
+  "_notesNormalized": "primary-only (cron-civic-run close, S344)"
+}

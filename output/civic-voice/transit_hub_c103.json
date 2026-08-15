@@ -1,0 +1,24 @@
+{
+  "office": "transit_hub",
+  "cycle": 103,
+  "speaker": "Elena Soria Dominguez",
+  "cascadeSummary": "Published the Bureau's compliance review findings for the Fruitvale Transit Hub Phase II, advancing the project into construction-active phase. The review confirms pipeline submissions meet local-hire targets and pedestrian-path redesign protects street vendors and small businesses.",
+  "statements": [
+    {
+      "statementId": "STMT-103-transit_hub-001",
+      "type": "compliance_review",
+      "topic": "Fruitvale Transit Hub Phase II",
+      "initiative": "INIT-003",
+      "decision": "Approved pipeline submissions and pedestrian-path redesign, advancing project to construction-active phase",
+      "quote": "This isn't just paperwork—it's protection for abuelas crossing to the panadería and proof we're putting Fruitvale residents to work first.",
+      "fullStatement": "After thorough review, the Bureau has approved the pipeline exhaustion submissions and stamped the pedestrian-path redesign for the Fruitvale Transit Hub Phase II. The pipeline logs demonstrate we've exceeded local-hire targets, with over 60% of construction jobs going to Fruitvale residents so far. The pedestrian-path redesign includes safeguards for street vendors and small businesses during construction, with protected access to staging areas and secure licensing extensions. With compliance confirmed, we're advancing the project into the construction-active phase. This vital transit infrastructure will connect Fruitvale to opportunity while protecting the neighborhood we serve.",
+      "trackerUpdates": {
+        "initiative": "INIT-003",
+        "ImplementationPhase": "construction-active",
+        "MilestoneNotes": "C103: Bureau approved pipeline submissions + pedestrian-path redesign; construction begins next cycle",
+        "NextScheduledAction": "Mobilize construction crews + launch community construction liaison program",
+        "NextActionCycle": 104
+      }
+    }
+  ]
+}

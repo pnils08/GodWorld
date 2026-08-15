@@ -1,0 +1,22 @@
+{
+  "cycle": 103,
+  "pass": false,
+  "failures": [
+    {
+      "check": "engine-verbiage",
+      "detail": "health_center: [metric-decimal] \"approval HCAI stamped Sheet S-7.3\""
+    }
+  ],
+  "touchedInitiatives": [
+    "INIT-006",
+    "INIT-005",
+    "INIT-007",
+    "INIT-001",
+    "INIT-002",
+    "INIT-003"
+  ],
+  "maxRows": 6,
+  "sanity": null,
+  "model": "google/gemini-3.5-flash",
+  "ranAt": "2026-08-15T01:38:21.328Z"
+}

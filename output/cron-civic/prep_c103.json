@@ -1,0 +1,80 @@
+{
+  "stage": "prep",
+  "cycle": 103,
+  "directive": "output/mara-directives/mara_directive_c103_AUTO.txt",
+  "ledgerSnapshot": {
+    "source": "Simulation_Ledger",
+    "cycle": 103,
+    "rowCount": 940,
+    "generatedAt": "2026-08-11T11:15:10.884Z",
+    "generatedBy": "scripts/dumpLedger.js",
+    "note": "Local-disk snapshot for search_everything disk shelf. Stable filename, overwritten each cycle."
+  },
+  "offices": [
+    {
+      "dir": "civic-office-mayor",
+      "path": "output/cron-civic/packets/civic-office-mayor_pending_decisions_c103.md",
+      "topics": 6
+    },
+    {
+      "dir": "civic-project-stabilization-fund",
+      "path": "output/cron-civic/packets/civic-project-stabilization-fund_pending_decisions_c103.md",
+      "topics": 2
+    },
+    {
+      "dir": "civic-office-okoro",
+      "path": "output/cron-civic/packets/civic-office-okoro_pending_decisions_c103.md",
+      "topics": 2
+    },
+    {
+      "dir": "civic-office-opp-faction",
+      "path": "output/cron-civic/packets/civic-office-opp-faction_pending_decisions_c103.md",
+      "topics": 8
+    },
+    {
+      "dir": "civic-project-oari",
+      "path": "output/cron-civic/packets/civic-project-oari_pending_decisions_c103.md",
+      "topics": 2
+    },
+    {
+      "dir": "civic-project-transit-hub",
+      "path": "output/cron-civic/packets/civic-project-transit-hub_pending_decisions_c103.md",
+      "topics": 2
+    },
+    {
+      "dir": "civic-project-health-center",
+      "path": "output/cron-civic/packets/civic-project-health-center_pending_decisions_c103.md",
+      "topics": 2
+    },
+    {
+      "dir": "civic-office-crc-faction",
+      "path": "output/cron-civic/packets/civic-office-crc-faction_pending_decisions_c103.md",
+      "topics": 2
+    },
+    {
+      "dir": "civic-office-baylight-authority",
+      "path": "output/cron-civic/packets/civic-office-baylight-authority_pending_decisions_c103.md",
+      "topics": 2
+    },
+    {
+      "dir": "civic-office-ind-swing",
+      "path": "output/cron-civic/packets/civic-office-ind-swing_pending_decisions_c103.md",
+      "topics": 2
+    },
+    {
+      "dir": "civic-office-police-chief",
+      "path": "output/cron-civic/packets/civic-office-police-chief_pending_decisions_c103.md",
+      "topics": 2
+    }
+  ],
+  "hotInitiatives": [
+    "INIT-001",
+    "INIT-002",
+    "INIT-003",
+    "INIT-005",
+    "INIT-006"
+  ],
+  "highPatterns": 2,
+  "lintLeaks": 0,
+  "ranAt": "2026-08-15T01:33:04.985Z"
+}

@@ -1,0 +1,50 @@
+{
+  "office": "ind_swing",
+  "cycle": 103,
+  "speaker": "Ramon Vega",
+  "cascadeSummary": "On Baylight Phase II, I'm satisfied with the clean site inspection and three-bidder shortlist—this is how development should proceed. For my constituents, I'm defending Chinatown's infrastructure needs while ensuring Dimond's progress gets properly attributed to the Stabilization Fund investments we approved, not just mayoral rhetoric. I'm also pulling the Youth Apprenticeship Pipeline into Finance Committee next week to fix the broken intake system I flagged in C102.",
+  "statements": [
+    {
+      "statementId": "STMT-103-ind_swing-001",
+      "type": "vote_explanation",
+      "topic": "Baylight District Phase II Shortlist",
+      "initiative": "INIT-006",
+      "decision": "support_shortlist_publication",
+      "quote": "Four qualified bidders, three finalists, one clean site—this is the process I demanded when I voted yes on Baylight.",
+      "fullStatement": "Council President Ramon Vega announced his support for the Baylight Phase II shortlist publication following the clean post-event site inspection conducted by Councilmember Delgado. \"Four qualified bidders, three finalists, one clean site—this is the process I demanded when I voted yes on Baylight,\" Vega stated. \"The construction exclusion perimeter held, no surface failure beyond expected wear, and we have three serious contenders for Phase II. This is how major development moves in Oakland—methodically, transparently, with the revenue and jobs case intact.\" Vega emphasized that his support for Baylight has always been conditional on procedural rigor and fiscal accountability, both of which he said were satisfied in this cycle's review.",
+      "trackerUpdates": {
+        "initiative": "INIT-006",
+        "ImplementationPhase": "construction-planning",
+        "MilestoneNotes": "C103: Phase II shortlist published (3 finalists), post-event site inspection clean, Council President Vega confirms support.",
+        "NextScheduledAction": "Phase II finalist selection and contract negotiation",
+        "NextActionCycle": 104
+      }
+    },
+    {
+      "statementId": "STMT-103-ind_swing-002",
+      "type": "district_focus",
+      "topic": "Chinatown Infrastructure Incident and Dimond Progress Attribution",
+      "initiative": null,
+      "decision": "demand_infrastructure_response_credit_stabilization_fund",
+      "quote": "Dimond's upbeat mood isn't magic—it's the Stabilization Fund working. Chinatown's infrastructure incident needs answers, not silence.",
+      "fullStatement": "Council President Vega, speaking as representative for District 4 and responding to conditions affecting neighboring districts, addressed both the Chinatown infrastructure incident and Dimond's positive trajectory. \"Dimond's upbeat mood isn't magic—it's the Stabilization Fund working,\" Vega said. \"The Mayor's attribution is fine, but the council approved those investments, and the Finance Committee I chair moved that money. Credit where it's due.\" On Chinatown, Vega struck a sharper tone: \"My colleague Tran has an infrastructure incident in his district—Chinatown's busy streets, low crime, and then this. I've asked the City Administrator for a briefing on what failed and who's accountable. The infrastructure investments we approved need to reach Chinatown, not just the projects that get headlines.\"",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-103-ind_swing-003",
+      "type": "procedural_statement",
+      "topic": "Oakland Youth Apprenticeship Pipeline — Finance Committee Referral",
+      "initiative": "INIT-007",
+      "decision": "refer_to_finance_committee",
+      "quote": "Eighty-six applicants stuck in paperwork isn't a bottleneck—it's a system failure. Finance Committee meets next week.",
+      "fullStatement": "Council President Vega exercised his procedural authority as Finance Committee chair to formally refer the Oakland Youth Apprenticeship Pipeline to committee review, accelerating scrutiny of the intake failures he first flagged in Cycle 102. \"Eighty-six applicants stuck in paperwork isn't a bottleneck—it's a system failure,\" Vega said. \"The Mayor's approval to cut red tape is welcome, but I want to see the structural fix, not just the announcement. Finance meets next week. I'm bringing the pipeline staff in to explain why thirty-one placements from eighty-six applicants is acceptable performance—and what changes before the next cohort.\" Vega noted that his Cycle 102 statement on this issue had already identified the broken intake system, and said the committee hearing would determine whether the Mayor's administrative fix meets the council's fiscal standards.",
+      "trackerUpdates": {
+        "initiative": "INIT-007",
+        "ImplementationPhase": "implementation-active",
+        "MilestoneNotes": "C103: Council President Vega refers pipeline to Finance Committee for intake system review; Mayor's red-tape cut approved administratively.",
+        "NextScheduledAction": "Finance Committee hearing on intake system reforms",
+        "NextActionCycle": 104
+      }
+    }
+  ]
+}

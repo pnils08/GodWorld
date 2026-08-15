@@ -1,0 +1,41 @@
+{
+  "stage": "directive",
+  "cycle": 103,
+  "model": "google/gemini-3.5-flash",
+  "mayorModel": "mistralai/mistral-large",
+  "blocks": [
+    "Elena Soria Dominguez — Transit Hub Planning Lead",
+    "Vanessa Tran-Muñoz — OARI Program Director",
+    "Marcus Webb — OEWD Program Director (Stabilization Fund)",
+    "Bobby Chen-Ramirez — Health Center Project Director",
+    "Keisha Ramos — Baylight Authority Director",
+    "Rafael Montez — Police Chief",
+    "Avery Santana — Mayor"
+  ],
+  "rejectedBlocks": [],
+  "usage": {
+    "prompt_tokens": 3836,
+    "completion_tokens": 4459,
+    "total_tokens": 8295,
+    "cost": 0.045885,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.045885,
+      "upstream_inference_prompt_cost": 0.005754,
+      "upstream_inference_completions_cost": 0.040131
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 3275,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "directive": "output/mara-directives/mara_directive_c103_AUTO.txt",
+  "ranAt": "2026-08-15T01:33:04.919Z"
+}

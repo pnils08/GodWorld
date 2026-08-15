@@ -1,0 +1,34 @@
+{
+  "office": "police_chief",
+  "cycle": 103,
+  "speaker": "Rafael Montez",
+  "cascadeSummary": "OPD will implement targeted patrol adjustments in East and West Oakland based on CrimeIndex data, focusing on high-frequency incident areas while maintaining citywide response capacity. The department continues to refine OARI co-deployment protocols in pilot districts.",
+  "statements": [
+    {
+      "statementId": "STMT-103-police_chief-001",
+      "type": "operations_update",
+      "topic": "Neighborhood Security Plan",
+      "initiative": null,
+      "decision": "Redeploy 4 additional marked units to East Oakland and 3 to West Oakland based on CrimeIndex data",
+      "quote": "Public safety resources must follow the data — that's why we're adjusting patrol deployments to match incident frequency in our highest-need neighborhoods.",
+      "fullStatement": "Chief Rafael Montez announced operational adjustments to address elevated CrimeIndex figures in East Oakland (1.20) and West Oakland (1.19). Effective immediately, OPD will redeploy 4 additional marked units to East Oakland and 3 to West Oakland, prioritizing areas with highest incident frequency. These deployments will operate alongside existing neighborhood safety initiatives and OARI co-response operations. The department maintains citywide response capacity through real-time dispatch coordination. Crime trends will be reassessed after 30 days of enhanced patrol presence.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-103-police_chief-002",
+      "type": "oari_coordination",
+      "topic": "OARI Pilot Expansion",
+      "initiative": "INIT-002",
+      "decision": "Continue current OARI co-deployment protocols in pilot districts",
+      "quote": "Behavioral health crisis response requires careful operational integration — we're methodically refining the co-deployment model district by district.",
+      "fullStatement": "The Oakland Police Department continues to work with OARI program leadership to refine crisis response protocols in pilot districts (D1, D3, D5). Current co-deployment procedures remain in effect while performance data is analyzed. Chief Montez emphasized that public safety integration of alternative responders requires measured operational planning: 'We're assessing response times, scene outcomes, and officer safety metrics before considering expansion.' The next quarterly evaluation of OARI-OPD coordination will occur in Cycle 105.",
+      "trackerUpdates": {
+        "initiative": "INIT-002",
+        "ImplementationPhase": "pilot-active",
+        "MilestoneNotes": "C103: Maintaining current OARI co-deployment protocols in pilot districts pending C105 evaluation",
+        "NextScheduledAction": "Quarterly OARI-OPD coordination review",
+        "NextActionCycle": 105
+      }
+    }
+  ]
+}

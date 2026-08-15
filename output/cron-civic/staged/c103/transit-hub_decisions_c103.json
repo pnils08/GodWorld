@@ -1,0 +1,19 @@
+{
+  "initiative": "INIT-003",
+  "initiativeId": "INIT-003",
+  "cycle": 103,
+  "primaryVoice": "Mayor (MAYOR-004)",
+  "consolidatedFrom": [
+    "STMT-103-MAYOR-004 (Mayor — Fruitvale Transit Hub Phase II — Visioning Compliance Review)",
+    "STMT-103-opp_faction-002 (OPP — Fruitvale Transit Hub Phase II Compliance Review)",
+    "STMT-103-transit_hub-001 (Soria Dominguez — Fruitvale Transit Hub Phase II)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-003",
+    "ImplementationPhase": "visioning-complete",
+    "MilestoneNotes": "C103: Bureau review approved; visioning phase complete; transitioning to design phase.",
+    "NextScheduledAction": "Design phase kickoff",
+    "NextActionCycle": 105
+  },
+  "_notesNormalized": "primary-only (cron-civic-run close, S344)"
+}

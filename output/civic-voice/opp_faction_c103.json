@@ -1,0 +1,56 @@
+{
+  "office": "opp_faction",
+  "cycle": 103,
+  "speaker": "Janae Rivers",
+  "cascadeSummary": "The OPP faction supports the Mayor’s actions on the West Oakland Stabilization Fund and Fruitvale Transit Hub Phase II compliance review but demands accelerated implementation. We endorse the OARI task force while emphasizing measurable outcomes and critique the Mayor’s Baylight District framing as disconnected from ground realities.",
+  "statements": [
+    {
+      "statementId": "STMT-103-opp_faction-001",
+      "type": "bloc_position",
+      "topic": "West Oakland Stabilization Fund Month-Five Disbursement",
+      "initiative": "INIT-001",
+      "decision": "Support Mayor’s approval but demand accelerated disbursement timelines",
+      "quote": "Forty-five families helped isn’t a victory—it’s a down payment on what Oakland owes West Oakland. We’ll keep pushing until every displaced family has a home.",
+      "fullStatement": "The OPP caucus applauds the Mayor’s approval of the month-five disbursement but stresses that 45 families represent less than 20% of the Stabilization Fund’s capacity. Denise Carter (D1) will introduce a motion to double the disbursement rate by Cycle 104, prioritizing multi-generational households and those displaced by the Mandela Parkway redevelopment. This fund was created to reverse decades of redlining—delays perpetuate the crisis.",
+      "trackerUpdates": {
+        "initiative": "INIT-001",
+        "ImplementationPhase": "disbursement-active",
+        "MilestoneNotes": "C103: Month-five batch approved; OPP demands accelerated disbursement rate."
+      }
+    },
+    {
+      "statementId": "STMT-103-opp_faction-002",
+      "type": "bloc_position",
+      "topic": "Fruitvale Transit Hub Phase II Compliance Review",
+      "initiative": "INIT-003",
+      "decision": "Conditional support for compliance approval with construction timeline demands",
+      "quote": "Phase II has been ‘visioning’ while Fruitvale’s small businesses bleed. We don’t need more studies—we need construction crews. Today’s compliance approval must trigger shovel-ready timelines.",
+      "fullStatement": "The OPP faction acknowledges the Mayor’s bureau review approval for Fruitvale Transit Hub Phase II but warns that 9 cycles of stagnation have eroded community trust. Rose Delgado (D3) will file a resolution requiring a 6-month construction timeline and quarterly public progress reports. The Hub must serve the 5:45 AM platform crowd, not just developers.",
+      "trackerUpdates": {
+        "initiative": "INIT-003",
+        "ImplementationPhase": "design-phase",
+        "MilestoneNotes": "C103: Compliance review approved; OPP mandates 6-month construction timeline."
+      }
+    },
+    {
+      "statementId": "STMT-103-opp_faction-003",
+      "type": "community_response",
+      "topic": "Neighborhood Coherence Task Force for West Oakland, Fruitvale, and East Oakland",
+      "initiative": null,
+      "decision": "Demand structural equity analysis in task force charter",
+      "quote": "Incoherence in our neighborhoods isn’t a mystery—it’s the legacy of policies that prioritized developers over residents. This task force must diagnose systemic disinvestment, not just symptoms.",
+      "fullStatement": "The OPP caucus welcomes the Mayor’s task force announcement for neighborhood coherence but insists on including a structural equity analysis in its charter. Janae Rivers (D5) will propose amendments to tie the task force’s findings to budget reallocations, ensuring that solutions address historical disinvestment in West Oakland, Fruitvale, and East Oakland.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-103-opp_faction-004",
+      "type": "dissent",
+      "topic": "Baylight District Phase II Shortlist Credit Claim",
+      "initiative": "INIT-006",
+      "decision": "Reject Mayor’s celebration as disconnected from neighborhood realities",
+      "quote": "Slow street trade in Baylight isn’t a ‘quiet victory’—it’s a symptom of a city that still prioritizes stadiums over storefronts. The real credit belongs to residents keeping their heads above water.",
+      "fullStatement": "Terrence Mobley (D9) dissents from the Mayor’s framing of Baylight’s slow street trade as success. While crime remains low, the absence of vibrant commerce reflects decades of disinvestment. Mobley will introduce an amendment to Baylight’s community benefits agreement requiring 30% of Phase II retail space for Oakland-based small businesses.",
+      "trackerUpdates": {}
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "office": "crc_faction",
+  "cycle": 103,
+  "speaker": "Warren Ashford",
+  "cascadeSummary": "The CRC faction demands fiscal oversight on accelerated health center construction and questions Baylight's shortlist transparency. We recognize Stabilization Fund disbursements but require an audit of the apprenticeship pipeline expansion.",
+  "statements": [
+    {
+      "statementId": "STMT-103-crc_faction-001",
+      "type": "oversight_demand",
+      "topic": "Temescal Health Center Timeline Acceleration",
+      "initiative": "INIT-005",
+      "decision": "Request Construction Compliance Audit",
+      "quote": "Double shifts mean double the risk—we need to see the change orders before celebrating an accelerated timeline.",
+      "fullStatement": "The CRC faction acknowledges the Mayor's urgency to deliver the Temescal Health Center, but accelerated construction without documented change orders invites cost overruns. We're requesting a construction compliance audit from the City Administrator's office to verify that timeline compression hasn't compromised safety or fiscal controls. Oakland deserves this facility, but not at the price of rushed work or hidden costs.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-103-crc_faction-002",
+      "type": "fiscal_warning",
+      "topic": "Youth Apprenticeship Pipeline Expansion",
+      "initiative": "INIT-007",
+      "decision": "Demand Performance Metrics",
+      "quote": "Cutting red tape shouldn't mean cutting corners—show us the data that justifies scaling this pilot.",
+      "fullStatement": "While we support workforce development, the CRC faction questions the Mayor's decision to fast-track 86 apprenticeship placements without publishing the pilot's performance metrics. Before expanding intake, the public deserves to see completion rates, wage outcomes, and employer satisfaction scores from the first cohort. We're requesting quarterly reports from the Workforce Development Board to ensure this expansion delivers measurable results.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-103-crc_faction-003",
+      "type": "process_critique",
+      "topic": "Baylight District Shortlist",
+      "initiative": "INIT-006",
+      "decision": "Request Vendor Selection Documentation",
+      "quote": "A $2.1B project deserves more transparency than a press release—publish the scoring criteria that produced this shortlist.",
+      "fullStatement": "Councilmember Chen joins me in demanding full disclosure of the evaluation criteria used to select Baylight Phase II vendors. The Mayor's celebratory announcement lacks necessary detail about how these firms were scored on local hiring commitments, cost controls, and risk management. We're referring this matter to the Finance Committee for a public review of procurement records before any contracts are finalized.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-103-crc_faction-004",
+      "type": "bloc_position",
+      "topic": "Stabilization Fund Disbursements",
+      "initiative": "INIT-001",
+      "decision": "Acknowledge Success With Oversight",
+      "quote": "The Stabilization Fund works when the numbers work—that's why Crane crossed over to support it.",
+      "fullStatement": "The CRC faction notes the successful disbursement to 45 West Oakland families this cycle, reaffirming Councilmember Crane's decisive vote to establish this program. However, we maintain our position that all stabilization efforts require rigorous oversight. We'll be reviewing the audit report on administrative costs to ensure future scaling doesn't erode the fund's efficiency.",
+      "trackerUpdates": {}
+    }
+  ]
+}

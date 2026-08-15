@@ -1,0 +1,124 @@
+{
+  "office": "mayor",
+  "cycle": 103,
+  "speaker": "Avery Santana",
+  "cascadeSummary": "This cycle, I directed immediate executive action to unblock the Oakland Youth Apprenticeship Pipeline, approved the next disbursement batch for the West Oakland Stabilization Fund, and advanced stalled initiatives in Fruitvale and Temescal. I also addressed neighborhood coherence concerns in West Oakland, Fruitvale, and East Oakland while celebrating progress in Dimond and KONO. Every decision was grounded in urgency, accountability, and Oakland's future.",
+  "statements": [
+    {
+      "statementId": "STMT-103-MAYOR-001",
+      "type": "executive_order",
+      "topic": "Oakland Youth Apprenticeship Pipeline — Recruitment and Intake Bottlenecks",
+      "initiative": "INIT-007",
+      "decision": "approved",
+      "quote": "Eighty-six applicants shouldn’t be stuck in paperwork. We’re cutting the red tape and getting these young people to work.",
+      "fullStatement": "This morning, I directed the Office of Economic and Workforce Development to immediately implement intake adjustments for the Oakland Youth Apprenticeship Pipeline. The C102 executive review confirmed what we already knew: recruitment bottlenecks are stalling this program. Starting today, OEWD will streamline application processing, expand outreach to underserved high schools, and fast-track interviews for qualified candidates. We’re not waiting for the C104 findings report to act—we’re building momentum now. Oakland’s young people deserve opportunity, not bureaucracy.",
+      "trackerUpdates": {
+        "initiative": "INIT-007",
+        "ImplementationPhase": "implementation-active",
+        "MilestoneNotes": "C103: Executive directive issued to OEWD to clear recruitment bottlenecks and fast-track intake.",
+        "NextScheduledAction": "C104 findings report and intake evaluation",
+        "NextActionCycle": 104
+      }
+    },
+    {
+      "statementId": "STMT-103-MAYOR-002",
+      "type": "authorization_response",
+      "topic": "West Oakland Stabilization Fund — Month-Five Disbursement",
+      "initiative": "INIT-001",
+      "decision": "approved",
+      "quote": "Forty-five families have their money. The next seven get theirs this week—no delays, no excuses.",
+      "fullStatement": "The West Oakland Stabilization Fund continues to deliver for this community. Today, I approved the month-five disbursement batch, bringing the total number of households supported to 52. That’s 52 families who can pay rent, keep the lights on, and stay in the neighborhood they call home. This program isn’t just about numbers—it’s about stability. We’re on track to meet our goal of 280 households, and we won’t let bureaucracy slow us down. Brenda Okoro’s team is already processing the next batch, and I expect to see those checks in hands by the end of the week.",
+      "trackerUpdates": {
+        "initiative": "INIT-001",
+        "ImplementationPhase": "disbursement-active",
+        "MilestoneNotes": "C103: Month-five disbursement batch approved (7 households), total disbursed: 52 of ~280.",
+        "NextScheduledAction": "Month-six disbursement batch review",
+        "NextActionCycle": 104
+      }
+    },
+    {
+      "statementId": "STMT-103-MAYOR-003",
+      "type": "executive_order",
+      "topic": "Oakland Alternative Response Initiative — D7 Community Satisfaction Survey",
+      "initiative": "INIT-002",
+      "decision": "task_force_created",
+      "quote": "Public safety isn’t just about response times—it’s about trust. We’re listening, and we’re acting.",
+      "fullStatement": "The Oakland Alternative Response Initiative has stabilized in D7, but stability isn’t enough. This morning, I issued an executive order creating a community task force to review the upcoming D7 satisfaction survey results and recommend immediate improvements. The task force will include representatives from West Oakland, Fruitvale, and East Oakland—neighborhoods where incoherence remains a concern. We’re not waiting for the next report to act. OARI is the future of public safety in Oakland, and we will hold it to that standard. Deputy Mayor Brenda Okoro will chair the task force, and I expect recommendations on my desk by Cycle 105.",
+      "trackerUpdates": {
+        "initiative": "INIT-002",
+        "ImplementationPhase": "pilot_evaluation",
+        "MilestoneNotes": "C103: Executive order issued to create community task force for D7 satisfaction survey review.",
+        "NextScheduledAction": "Task force recommendations due",
+        "NextActionCycle": 105
+      }
+    },
+    {
+      "statementId": "STMT-103-MAYOR-004",
+      "type": "policy_position",
+      "topic": "Fruitvale Transit Hub Phase II — Visioning Compliance Review",
+      "initiative": "INIT-003",
+      "decision": "bureau_review_approved",
+      "quote": "Fruitvale deserves a transit hub that works for the people who use it every day. We’re moving this forward.",
+      "fullStatement": "After nine cycles of delay, the Fruitvale Transit Hub Phase II visioning process is finally moving forward. Today, I directed the Bureau of Planning to approve the compliance submissions, including the pedestrian-path redesign. This project has been stalled for too long, and Fruitvale can’t wait any longer. The next step is finalizing the visioning phase and transitioning to design. I’ve instructed my team to fast-track the remaining reviews, and I expect to see this project in the design phase by Cycle 105. Oaklanders deserve infrastructure that connects neighborhoods to opportunity, and we’re delivering it.",
+      "trackerUpdates": {
+        "initiative": "INIT-003",
+        "ImplementationPhase": "visioning-complete",
+        "MilestoneNotes": "C103: Bureau review approved; visioning phase complete; transitioning to design phase.",
+        "NextScheduledAction": "Design phase kickoff",
+        "NextActionCycle": 105
+      }
+    },
+    {
+      "statementId": "STMT-103-MAYOR-005",
+      "type": "initiative_response",
+      "topic": "Temescal Community Health Center — HCAI First-Comments Resolution",
+      "initiative": "INIT-005",
+      "decision": "phase_one_close_approved",
+      "quote": "Temescal needs this health center now—not next year, not when the paperwork is perfect.",
+      "fullStatement": "The Temescal Community Health Center reached a major milestone today with the resolution of HCAI’s first-comments window. I’ve approved the close of Phase 1, and construction is now fully underway. The double shifts for caisson drilling and excavation are paying off, and we’re on track to deliver this facility ahead of schedule. Temescal has waited long enough for accessible healthcare. This isn’t just a construction project—it’s a lifeline for the neighborhood, and we’re building it with urgency.",
+      "trackerUpdates": {
+        "initiative": "INIT-005",
+        "ImplementationPhase": "construction-active",
+        "MilestoneNotes": "C103: HCAI first-comments window resolved; Phase 1 closed; construction accelerated.",
+        "NextScheduledAction": "Phase 2 construction progress review",
+        "NextActionCycle": 104
+      }
+    },
+    {
+      "statementId": "STMT-103-MAYOR-006",
+      "type": "policy_position",
+      "topic": "Baylight District — Phase II Shortlist Publication",
+      "initiative": "INIT-006",
+      "decision": "shortlist_published",
+      "quote": "Baylight isn’t just a stadium—it’s the future of Oakland. We’re building it right.",
+      "fullStatement": "The Baylight District reached another milestone today with the publication of the Phase II shortlist, reducing the qualified bidders from four to three. This process has been rigorous, transparent, and focused on delivering the best possible outcome for Oakland. The next phase will bring us closer to breaking ground on a project that will create jobs, drive economic growth, and put Oakland on the map. I want to thank the Baylight team for their hard work, and I look forward to seeing these bids come to life. This is what investment in Oakland looks like—not promises, but progress.",
+      "trackerUpdates": {
+        "initiative": "INIT-006",
+        "ImplementationPhase": "construction-planning",
+        "MilestoneNotes": "C103: Phase II shortlist published (4 bidders reduced to 3); moving to final bid evaluation.",
+        "NextScheduledAction": "Final bid evaluation and selection",
+        "NextActionCycle": 105
+      }
+    },
+    {
+      "statementId": "STMT-103-MAYOR-007",
+      "type": "public_remark",
+      "topic": "Neighborhood Coherence — West Oakland, Fruitvale, and East Oakland",
+      "initiative": null,
+      "decision": "task_force_announced",
+      "quote": "When neighborhoods are hurting, we don’t look away—we build a plan.",
+      "fullStatement": "This cycle, I’ve heard the concerns about incoherence in West Oakland, Fruitvale, and East Oakland. These neighborhoods are the heart of our city, and their challenges demand our attention. Today, I’m announcing a new task force, led by Deputy Mayor Brenda Okoro, to address these issues head-on. The task force will work with community leaders, local businesses, and residents to develop a targeted plan for each neighborhood. We’re not just talking about solutions—we’re building them. And we’re starting now. I expect the first recommendations on my desk by Cycle 106.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-103-MAYOR-008",
+      "type": "public_remark",
+      "topic": "Celebrating Progress in Dimond and KONO",
+      "initiative": null,
+      "decision": "credit_attributed",
+      "quote": "Dimond and KONO are proof that when we invest in neighborhoods, they thrive.",
+      "fullStatement": "This cycle, we’re celebrating the progress in Dimond and KONO—neighborhoods where the mood is upbeat, street trade is steady, and crime is low. This didn’t happen by accident. It’s the result of hard work by community leaders, local businesses, and city programs like OARI and the Stabilization Fund. In Dimond, we’re seeing the impact of targeted infrastructure investments and public safety reforms. In KONO, the community’s resilience is on full display. These neighborhoods are proof that when we invest in Oakland, Oakland invests in itself. I want to thank everyone who’s made this progress possible, and I look forward to building on it in the cycles ahead.",
+      "trackerUpdates": {}
+    }
+  ]
+}

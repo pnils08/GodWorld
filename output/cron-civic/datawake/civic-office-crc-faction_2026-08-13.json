@@ -1,0 +1,14 @@
+{
+  "office": "crc_faction",
+  "agentDir": "civic-office-crc-faction",
+  "holder": "Warren Ashford",
+  "popid": "POP-00504",
+  "title": "City Council District 7",
+  "date": "2026-08-13",
+  "cycle": 103,
+  "model": "deepseek/deepseek-chat",
+  "statement": "Rockridge's numbers tell a story Temescal and KONO deserve to share—but thriving businesses don't happen by accident. When stable storefronts become the exception rather than the expectation, that's when audits prove their worth.",
+  "action": "Pulling the last six quarters' small-business retention reports from Economic Development to map service gaps",
+  "numberMoved": "KONO's street trade holding steady while Rockridge booms—that's the gap policy should bridge",
+  "ranAt": "2026-08-15T01:31:19.517Z"
+}

@@ -1,0 +1,23 @@
+{
+  "stage": "close",
+  "cycle": 103,
+  "expected": [
+    "mayor",
+    "police_chief",
+    "okoro",
+    "crc_faction",
+    "ind_swing",
+    "opp_faction",
+    "stabilization_fund",
+    "oari",
+    "health_center",
+    "transit_hub",
+    "baylight_authority"
+  ],
+  "clerk": "pass",
+  "gatePass": false,
+  "applied": false,
+  "clerkModel": "deepseek/deepseek-chat",
+  "laneEntries": 32,
+  "ranAt": "2026-08-15T01:38:22.010Z"
+}

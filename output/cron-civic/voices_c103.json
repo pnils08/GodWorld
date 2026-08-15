@@ -1,0 +1,52 @@
+{
+  "stage": "voices",
+  "cycle": 103,
+  "results": [
+    {
+      "dir": "civic-office-police-chief",
+      "slug": "police_chief",
+      "model": "deepseek/deepseek-chat",
+      "ok": true,
+      "output": "output/civic-voice/police_chief_c103.json",
+      "statements": 2,
+      "attempts": 1
+    },
+    {
+      "dir": "civic-office-okoro",
+      "slug": "okoro",
+      "model": "deepseek/deepseek-chat",
+      "ok": true,
+      "output": "output/civic-voice/okoro_c103.json",
+      "statements": 2,
+      "attempts": 1
+    },
+    {
+      "dir": "civic-office-crc-faction",
+      "slug": "crc_faction",
+      "model": "deepseek/deepseek-chat",
+      "ok": true,
+      "output": "output/civic-voice/crc_faction_c103.json",
+      "statements": 4,
+      "attempts": 1
+    },
+    {
+      "dir": "civic-office-ind-swing",
+      "slug": "ind_swing",
+      "model": "moonshotai/kimi-k2",
+      "ok": true,
+      "output": "output/civic-voice/ind_swing_c103.json",
+      "statements": 3,
+      "attempts": 1
+    },
+    {
+      "dir": "civic-office-opp-faction",
+      "slug": "opp_faction",
+      "model": "qwen/qwen3-235b-a22b",
+      "ok": true,
+      "output": "output/civic-voice/opp_faction_c103.json",
+      "statements": 4,
+      "attempts": 1
+    }
+  ],
+  "ranAt": "2026-08-15T01:36:29.096Z"
+}

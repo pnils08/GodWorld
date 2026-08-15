@@ -91,6 +91,7 @@ Not in v1: full voice-file rewrite, election/chair-change, live Sheet writes.
   4. Reuse `livedExperiencePacket.js` helpers if they fit without dragging reporter wakes. Do not clone eighteen journalist builders.
 - **Verify:** `node scripts/buildCivicOfficeSlice.test.js` PASS; fixture office with no ledger rows gets `subjects: []`.
 - **Status:** [x] builder + test shipped (grok 2026-08-15). C103 Ashford pack on disk. Cron not wired yet.
+- 2026-08-14 (grok) — District packs pull turf people + world_summary shops/churches/events + hood numbers. Initiative seats (Ramos + 4 project directors) get owned INIT + cabinet folder, not a city dump. Staff without an initiative get the job row only.
 
 ### Task 3: Wire weekday datawake to the pack
 

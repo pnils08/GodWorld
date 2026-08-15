@@ -331,6 +331,8 @@
       "faction": "STAFF",
       "approval": 65,
       "agentDir": "civic-office-baylight-authority",
+      "initiative": "INIT-006",
+      "neighborhoods": ["Baylight District"],
       "dataDomain": "baylight-project",
       "dataSources": [
         "Initiative_Tracker (baylight)",

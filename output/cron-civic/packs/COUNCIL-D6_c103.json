@@ -8,7 +8,8 @@
     "officeId": "COUNCIL-D6",
     "district": "D6",
     "faction": "CRC",
-    "agentDir": "civic-office-crc-faction"
+    "agentDir": "civic-office-crc-faction",
+    "initiative": null
   },
   "task": {
     "a": "district-week"
@@ -88,6 +89,15 @@
         "src": "output/simulation_ledger_snapshot.jsonl"
       }
     ],
+    "businesses": [
+      {
+        "id": "BIZ-00086",
+        "name": "Beth Jacob Congregation",
+        "neighborhood": "Piedmont Ave",
+        "src": "world_summary lifestyle-sighting"
+      }
+    ],
+    "churches": [],
     "sources": []
   },
   "known": [
@@ -139,6 +149,8 @@
   "limits": {
     "assert": [
       "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
       "only project facts in known",
       "no invented POPID, vote, or complete"
     ],

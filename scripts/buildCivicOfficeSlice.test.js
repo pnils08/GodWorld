@@ -14,40 +14,114 @@ function check(name, cond, detail) {
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'civic-office-pack-'));
 fs.mkdirSync(path.join(tmp, 'output'));
 fs.mkdirSync(path.join(tmp, 'scripts'));
+fs.mkdirSync(path.join(tmp, 'output', 'city-civic-database', 'initiatives', 'baylight'), { recursive: true });
+
 fs.writeFileSync(path.join(tmp, 'scripts', 'civic-office-map.json'), JSON.stringify({
-  offices: [{
-    officeId: 'COUNCIL-D7',
-    title: 'City Council District 7',
-    holder: 'Test Holder',
-    popid: 'POP-TEST01',
-    district: 'D7',
-    faction: 'CRC',
-    agentDir: 'civic-office-crc-faction',
-  }],
+  offices: [
+    {
+      officeId: 'COUNCIL-D7',
+      title: 'City Council District 7',
+      holder: 'Test Holder',
+      popid: 'POP-TEST01',
+      district: 'D7',
+      faction: 'CRC',
+      agentDir: 'civic-office-crc-faction',
+    },
+    {
+      officeId: 'STAFF-BAYLIGHT',
+      title: 'Baylight Authority Director',
+      holder: 'Keisha Test',
+      popid: 'POP-TEST41',
+      district: 'citywide',
+      faction: 'STAFF',
+      agentDir: 'civic-office-baylight-authority',
+      initiative: 'INIT-006',
+      neighborhoods: ['Baylight District'],
+      dataSources: ['output/city-civic-database/initiatives/baylight/'],
+    },
+    {
+      officeId: 'STAFF-COMMS',
+      title: 'Communications Director',
+      holder: 'Comms Test',
+      popid: 'POP-TEST38',
+      district: 'citywide',
+      faction: 'STAFF',
+      agentDir: 'civic-office-none',
+    },
+    {
+      officeId: 'MAYOR-01',
+      title: 'Mayor',
+      holder: 'Mayor Test',
+      popid: 'POP-TEST34',
+      district: 'citywide',
+      faction: 'OPP',
+      agentDir: 'civic-office-mayor',
+    },
+  ],
   projects: [],
 }));
+
 fs.writeFileSync(path.join(tmp, 'output', 'simulation_ledger_snapshot.jsonl'),
   [
     JSON.stringify({ POPID: 'POP-00901', Name: 'Alpha Local', Neighborhood: 'Temescal', Status: 'active', RoleType: 'baker', Tier: 4 }),
     JSON.stringify({ POPID: 'POP-00021', Name: 'Star Player', Neighborhood: 'Temescal', Status: 'active', RoleType: 'Shortstop', Tier: 1 }),
     JSON.stringify({ POPID: 'POP-00902', Name: 'Beta Local', Neighborhood: 'Temescal', Status: 'inactive', RoleType: 'cook', Tier: 4 }),
     JSON.stringify({ POPID: 'POP-00903', Name: 'Gamma Far', Neighborhood: 'Fruitvale', Status: 'active', RoleType: 'nurse', Tier: 4 }),
+    JSON.stringify({ POPID: 'POP-00910', Name: 'Site Neighbor', Neighborhood: 'Baylight District', Status: 'active', RoleType: 'vendor', Tier: 4 }),
   ].join('\n') + '\n'
 );
+
 fs.writeFileSync(path.join(tmp, 'output', 'initiative_tracker.json'), JSON.stringify({
-  initiatives: [{
-    id: 'INIT-TEST',
-    name: 'Test Hub',
-    neighborhoods: ['Temescal'],
-    implementation: { phase: 'construction-planning', summary: 'waiting on a stamp' },
-  }],
+  initiatives: [
+    {
+      id: 'INIT-TEST',
+      name: 'Test Hub',
+      neighborhoods: ['Temescal'],
+      implementation: { phase: 'construction-planning', summary: 'waiting on a stamp' },
+    },
+    {
+      id: 'INIT-006',
+      name: 'Baylight District — Final Council Vote',
+      neighborhoods: ['Jack London', 'Downtown'],
+      implementation: { phase: 'construction-planning', summary: 'shortlist next' },
+    },
+  ],
 }));
 
+fs.writeFileSync(path.join(tmp, 'output', 'world_summary_c103.md'), `
+## City State
+
+### faith-event (1)
+- holy_day | Christmas service | Temescal | mag 0.01 | targets Test Chapel
+
+### lifestyle-sighting (1)
+- sighting | someone spotted at Test Cafe | Temescal | mag 0.01 | targets BIZ-00999
+
+### city-event (1)
+- city-event | Temescal Night Market (Temescal) | Temescal | mag 0.02
+
+### faith-event (extra)
+- holy_day | far church | Fruitvale | mag 0.01 | targets Far Parish
+`);
+
+fs.writeFileSync(
+  path.join(tmp, 'output', 'city-civic-database', 'initiatives', 'baylight', 'decisions_c103.json'),
+  JSON.stringify({
+    initiativeId: 'INIT-006',
+    trackerUpdates: {
+      ImplementationPhase: 'construction-planning',
+      MilestoneNotes: 'C103: shortlist published',
+    },
+  })
+);
+fs.writeFileSync(
+  path.join(tmp, 'output', 'city-civic-database', 'initiatives', 'baylight', 'BAYL-C000-ProjectCharter.md'),
+  '# Baylight District Project Charter\n\nScope line.\n'
+);
+
+const map = JSON.parse(fs.readFileSync(path.join(tmp, 'scripts', 'civic-office-map.json'), 'utf8'));
 const pack = buildPack({
-  root: tmp,
-  cycle: '103',
-  agentDir: 'civic-office-crc-faction',
-  officeMap: JSON.parse(fs.readFileSync(path.join(tmp, 'scripts', 'civic-office-map.json'), 'utf8')),
+  root: tmp, cycle: '103', agentDir: 'civic-office-crc-faction', officeMap: map,
 });
 
 check('actor is the office holder not a reporter', pack.actor.name === 'Test Holder' && pack.team === 'civic-office');
@@ -55,7 +129,34 @@ check('task is district-week', pack.task.a === 'district-week');
 check('Tier 4 before Tier 1', pack.exposure.subjects[0].name === 'Alpha Local' && pack.exposure.subjects.some(s => s.name === 'Star Player'));
 check('inactive and other-hood excluded', !pack.exposure.subjects.some(s => s.name === 'Beta Local' || s.name === 'Gamma Far'));
 check('project fact from tracker', pack.known.some(k => /Test Hub/.test(k.text)));
+check('district church from turf', pack.exposure.churches.some(c => c.name === 'Test Chapel'));
+check('district shop from turf', pack.exposure.businesses.some(b => b.id === 'BIZ-00999'));
+check('other-hood church excluded', !pack.exposure.churches.some(c => c.name === 'Far Parish'));
+check('district event from turf', pack.known.some(k => /Temescal Night Market/.test(k.text)));
 check('empty people if no snapshot', loadConstituents(path.join(tmp, 'missing'), ['Temescal'], 8).length === 0);
+
+const bay = buildPack({
+  root: tmp, cycle: '103', agentDir: 'STAFF-BAYLIGHT', officeMap: map,
+});
+check('baylight is initiative-week', bay.task.a === 'initiative-week');
+check('baylight owns INIT-006', bay.known.some(k => /INIT-006|Baylight District/.test(k.text + k.id)));
+check('baylight does not eat Test Hub', !bay.known.some(k => /Test Hub/.test(k.text)));
+check('baylight reads cabinet', bay.known.some(k => /shortlist published/.test(k.text)) && bay.known.some(k => /Project Charter/.test(k.text)));
+check('baylight turf is the neighborhood', bay.signal.hoods.includes('Baylight District') && !bay.signal.hoods.includes('Temescal'));
+check('baylight people are site neighbors only', bay.exposure.subjects.length === 1 && bay.exposure.subjects[0].name === 'Site Neighbor');
+
+const comms = buildPack({
+  root: tmp, cycle: '103', agentDir: 'STAFF-COMMS', officeMap: map,
+});
+check('comms is role-week', comms.task.a === 'role-week');
+check('comms has no neighbor dump', comms.exposure.subjects.length === 0 && comms.signal.hoods.length === 0);
+check('comms does not eat city initiatives', !comms.known.some(k => /Test Hub|Baylight/.test(k.text)));
+
+const mayor = buildPack({
+  root: tmp, cycle: '103', agentDir: 'MAYOR-01', officeMap: map,
+});
+check('mayor sees the board', mayor.known.some(k => /Test Hub/.test(k.text)) && mayor.known.some(k => /Baylight/.test(k.text)));
+check('mayor has no neighbor dump', mayor.exposure.subjects.length === 0);
 
 console.log((failed ? failed + ' failed' : 'ok') + ' civic office pack');
 process.exit(failed ? 1 : 0);

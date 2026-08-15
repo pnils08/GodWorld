@@ -8,7 +8,8 @@
     "officeId": "COUNCIL-D9",
     "district": "D9",
     "faction": "OPP",
-    "agentDir": "civic-office-opp-faction"
+    "agentDir": "civic-office-opp-faction",
+    "initiative": null
   },
   "task": {
     "a": "district-week"
@@ -88,6 +89,8 @@
         "src": "output/simulation_ledger_snapshot.jsonl"
       }
     ],
+    "businesses": [],
+    "churches": [],
     "sources": []
   },
   "known": [
@@ -120,6 +123,12 @@
       "t": "FACT",
       "text": "Uptown: sentiment 0.45, retail 13.43, crime index 0.75, housing pressure 1.5",
       "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-traj-0",
+      "t": "FACT",
+      "text": "Laurel turning upward: retail busy, events drawing crowds, people moving in",
+      "src": "world_summary trajectory"
     }
   ],
   "role": {
@@ -145,6 +154,8 @@
   "limits": {
     "assert": [
       "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
       "only project facts in known",
       "no invented POPID, vote, or complete"
     ],

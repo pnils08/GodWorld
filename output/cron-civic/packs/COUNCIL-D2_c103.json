@@ -8,7 +8,8 @@
     "officeId": "COUNCIL-D2",
     "district": "D2",
     "faction": "IND",
-    "agentDir": "civic-office-ind-swing"
+    "agentDir": "civic-office-ind-swing",
+    "initiative": null
   },
   "task": {
     "a": "district-week"
@@ -89,6 +90,15 @@
         "src": "output/simulation_ledger_snapshot.jsonl"
       }
     ],
+    "businesses": [
+      {
+        "id": "BIZ-00017",
+        "name": "City of Oakland",
+        "neighborhood": "Downtown",
+        "src": "world_summary lifestyle-sighting"
+      }
+    ],
+    "churches": [],
     "sources": []
   },
   "known": [
@@ -141,6 +151,12 @@
       "src": "engine_audit snapshots.Neighborhood_Map"
     },
     {
+      "id": "F-event-0",
+      "t": "FACT",
+      "text": "Jack London Holiday Market (Jack London) — Jack London",
+      "src": "world_summary city-event"
+    },
+    {
       "id": "F-chaos-cop_car-neighborhood Downtown",
       "t": "FACT",
       "text": "cop_car ticket → neighborhood Downtown CrimeIndex -0.13",
@@ -182,6 +198,8 @@
   "limits": {
     "assert": [
       "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
       "only project facts in known",
       "no invented POPID, vote, or complete"
     ],

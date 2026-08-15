@@ -1,0 +1,279 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "actor": {
+    "id": "POP-01021",
+    "name": "Vanessa Tran-Muñoz",
+    "role": "OARI Program Director",
+    "officeId": "PROJ-OARI",
+    "district": null,
+    "faction": null,
+    "agentDir": "civic-project-oari",
+    "initiative": "INIT-002"
+  },
+  "task": {
+    "a": "initiative-week"
+  },
+  "signal": {
+    "kind": "initiative-heat",
+    "hoods": [
+      "West Oakland",
+      "Fruitvale",
+      "East Oakland"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00173",
+        "name": "Kaila Braun",
+        "neighborhood": "Fruitvale",
+        "role": "Immigrant Legal Aid Worker",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-00176",
+        "name": "Talmon Lint",
+        "neighborhood": "West Oakland",
+        "role": "Solar Panel Installation Lead",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-00183",
+        "name": "Toby Lamont",
+        "neighborhood": "Fruitvale",
+        "role": "Mutual Aid Network Organizer",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-00184",
+        "name": "Brooklyn Nguyen",
+        "neighborhood": "Fruitvale",
+        "role": "Teacher",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-00185",
+        "name": "Lila Patty",
+        "neighborhood": "West Oakland",
+        "role": "Solar Panel Installation Lead",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-00187",
+        "name": "Isla Sike",
+        "neighborhood": "West Oakland",
+        "role": "Domestic Violence Shelter Director",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-00188",
+        "name": "Simone Cleng",
+        "neighborhood": "West Oakland",
+        "role": "Community Organizer",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-00190",
+        "name": "Jackson Sift",
+        "neighborhood": "West Oakland",
+        "role": "Ex-Offender Reentry Counselor",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      }
+    ],
+    "businesses": [],
+    "churches": [
+      {
+        "name": "Foothill Baptist Tabernacle",
+        "neighborhood": "East Oakland",
+        "text": "traditional Christmas rituals observed",
+        "src": "world_summary faith-event"
+      },
+      {
+        "name": "St. Esperanza Parish",
+        "neighborhood": "Fruitvale",
+        "text": "Advent and Christmas observance brings community together",
+        "src": "world_summary faith-event"
+      },
+      {
+        "name": "New Covenant Pentecostal Assembly",
+        "neighborhood": "West Oakland",
+        "text": "special Christmas service fills the sanctuary",
+        "src": "world_summary faith-event"
+      },
+      {
+        "name": "New Covenant Pentecostal Assembly",
+        "neighborhood": "West Oakland",
+        "text": "2 citizen(s) joined the congregation at New Covenant Pentecostal Assembly",
+        "src": "world_summary faith-join"
+      }
+    ],
+    "sources": [
+      {
+        "kind": "city-hall-voice",
+        "agentDir": "civic-project-oari",
+        "initiative": "INIT-002",
+        "src": ".claude/skills/city-hall/CASCADE_ROUTING.md"
+      },
+      {
+        "kind": "city-hall-voice",
+        "agentDir": "civic-office-police-chief",
+        "initiative": "INIT-002",
+        "src": ".claude/skills/city-hall/CASCADE_ROUTING.md"
+      },
+      {
+        "kind": "city-hall-voice",
+        "agentDir": "civic-office-opp-faction",
+        "initiative": "INIT-002",
+        "src": ".claude/skills/city-hall/CASCADE_ROUTING.md"
+      },
+      {
+        "kind": "city-hall-voice",
+        "agentDir": "civic-office-ind-swing",
+        "initiative": "INIT-002",
+        "src": ".claude/skills/city-hall/CASCADE_ROUTING.md"
+      },
+      {
+        "kind": "city-hall-voice",
+        "agentDir": "civic-office-district-attorney",
+        "initiative": "INIT-002",
+        "src": ".claude/skills/city-hall/CASCADE_ROUTING.md"
+      }
+    ]
+  },
+  "known": [
+    {
+      "id": "F-INIT-002",
+      "t": "FACT",
+      "text": "Oakland Alternative Response Initiative is in operational — C102: D7 performance review confirms stabilization post-KONO crisis; monitoring continues.",
+      "src": "output/initiative_tracker.json"
+    },
+    {
+      "id": "F-doc-OARIC000ProjectCharter20",
+      "t": "FACT",
+      "text": "OARI-C000-ProjectCharter-20400101",
+      "src": "output/city-civic-database/initiatives/oari/OARI-C000-ProjectCharter-20400101.md"
+    },
+    {
+      "id": "F-doc-OARIC076OfficialRelease2",
+      "t": "FACT",
+      "text": "OAKLAND ALTERNATIVE RESPONSE INITIATIVE — OFFICIAL RELEASE",
+      "src": "output/city-civic-database/initiatives/oari/OARI-C076-OfficialRelease-20410301.md"
+    },
+    {
+      "id": "F-doc-OARIC084MayorsResponse20",
+      "t": "FACT",
+      "text": "OAKLAND ALTERNATIVE RESPONSE INITIATIVE — Implementation Status",
+      "src": "output/city-civic-database/initiatives/oari/OARI-C084-MayorsResponse-20410801.md"
+    },
+    {
+      "id": "F-doc-OARIC085TimelineRequest2",
+      "t": "FACT",
+      "text": "OARI Implementation Timeline — Status Request",
+      "src": "output/city-civic-database/initiatives/oari/OARI-C085-TimelineRequest-20410901.md"
+    },
+    {
+      "id": "F-cabinet-decisions_c103json",
+      "t": "FACT",
+      "text": "INIT-002 — pilot_evaluation — C103: Executive order issued to create community task force for D7 satisfaction survey review.",
+      "src": "output/city-civic-database/initiatives/oari/decisions_c103.json"
+    },
+    {
+      "id": "F-crime-Fruitvale",
+      "t": "FACT",
+      "text": "Fruitvale crime: property 54, violent 50, incidents 7 (cycle 103)",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-crime-WestOakland",
+      "t": "FACT",
+      "text": "West Oakland crime: property 58, violent 61, incidents 11 (cycle 103)",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-crime-EastOakland",
+      "t": "FACT",
+      "text": "East Oakland crime: property 54, violent 66, incidents 11 (cycle 103)",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-WestOakland",
+      "t": "FACT",
+      "text": "West Oakland: sentiment 0.5, retail 7.91, crime index 1.19, housing pressure 0",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-hood-Fruitvale",
+      "t": "FACT",
+      "text": "Fruitvale: sentiment 0.5, retail 12.22, crime index 1.04, housing pressure 0",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-hood-EastOakland",
+      "t": "FACT",
+      "text": "East Oakland: sentiment 0.51, retail 8.39, crime index 1.2, housing pressure 0",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-event-0",
+      "t": "FACT",
+      "text": "Fruitvale Emergency Town Briefing (Fruitvale) — Fruitvale",
+      "src": "world_summary city-event"
+    },
+    {
+      "id": "F-traj-1",
+      "t": "FACT",
+      "text": "East Oakland cooling off: foot traffic down, storefronts quieter than the rest of the city",
+      "src": "world_summary trajectory"
+    },
+    {
+      "id": "F-we-0",
+      "t": "FACT",
+      "text": "FAITH — holy_day — East Oakland: Foothill Baptist Tabernacle observes Christmas",
+      "src": "world_summary World Events"
+    },
+    {
+      "id": "F-we-1",
+      "t": "FACT",
+      "text": "FAITH — holy_day — Fruitvale: St. Esperanza Parish observes Advent and Christmas",
+      "src": "world_summary World Events"
+    },
+    {
+      "id": "F-we-2",
+      "t": "FACT",
+      "text": "FAITH — holy_day — West Oakland: New Covenant Pentecostal Assembly observes Christmas",
+      "src": "world_summary World Events"
+    }
+  ],
+  "role": {
+    "officeRows": [],
+    "civicPeers": []
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + action + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

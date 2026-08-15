@@ -8,7 +8,8 @@
     "officeId": "COUNCIL-D7",
     "district": "D7",
     "faction": "CRC",
-    "agentDir": "civic-office-crc-faction"
+    "agentDir": "civic-office-crc-faction",
+    "initiative": null
   },
   "task": {
     "a": "district-week"
@@ -89,6 +90,8 @@
         "src": "output/simulation_ledger_snapshot.jsonl"
       }
     ],
+    "businesses": [],
+    "churches": [],
     "sources": []
   },
   "known": [
@@ -176,6 +179,8 @@
   "limits": {
     "assert": [
       "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
       "only project facts in known",
       "no invented POPID, vote, or complete"
     ],

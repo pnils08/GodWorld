@@ -8,7 +8,8 @@
     "officeId": "COUNCIL-D4",
     "district": "D4",
     "faction": "IND",
-    "agentDir": "civic-office-ind-swing"
+    "agentDir": "civic-office-ind-swing",
+    "initiative": null
   },
   "task": {
     "a": "district-week"
@@ -41,6 +42,8 @@
         "src": "output/simulation_ledger_snapshot.jsonl"
       }
     ],
+    "businesses": [],
+    "churches": [],
     "sources": []
   },
   "known": [
@@ -81,6 +84,12 @@
       "src": "engine_audit snapshots.Neighborhood_Map"
     },
     {
+      "id": "F-traj-0",
+      "t": "FACT",
+      "text": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
+      "src": "world_summary trajectory"
+    },
+    {
       "id": "F-chaos-ice_cream_truck-neighborhood Dimond",
       "t": "FACT",
       "text": "ice_cream_truck summer_morale_boost → neighborhood Dimond Sentiment 0.09",
@@ -110,6 +119,8 @@
   "limits": {
     "assert": [
       "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
       "only project facts in known",
       "no invented POPID, vote, or complete"
     ],

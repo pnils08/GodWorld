@@ -12,6 +12,7 @@ sources:
   - docs/canon/INSTITUTIONS.md §336 — Baylight = 65-acre former-Coliseum site, D5 successor
 pointers:
   - "[[engine/ROLLOUT_PLAN]] — civic.18, engine.108"
+  - "[[2026-08-15-civic-edge-truth-migration]] — civic.20; this plan is its cohort E1, and §7's writer-first rule generalises there"
   - "[[2026-08-15-civic-office-lived-packets]] — civic.17, the pack layer this unblocks"
   - "[[../canon/INSTITUTIONS]] §Neighborhoods — canon authority for district anchors"
   - "[[index]] — registered same commit"

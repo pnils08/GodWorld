@@ -57,7 +57,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 - **[[ARCHITECTURE_VISION]]** — Jarvis at /root, persistent sessions, the technical north star Phase 41 builds toward. *(concept, architecture, active)*
 - **[[BOOT_ARCHITECTURE]]** — boot sequence reference for S165. Skill split (boot=persona / session-startup=terminal), per-terminal persona levels, hook routing. *(reference, architecture, active)*
 - **[[FOUR_COMPONENT_MAP]]** — `model + harness + tools + environment` cross-section. Per-role model choices, terminal inventory, skill slice samples, Phase 40 seam map. *(reference, architecture, active)*
-- **[[MODEL_HIERARCHY]]** — model division of labor + cost-to-reasoning ratio. Hierarchy TBD; interim order (Mike-direct 2026-07-28): Claude=lead, Kimi=backup CLI, Codex+Antigravity/Gemini=gated read-only proposal assistants, Aider+Grok retired. `AGENTS.md` is the binding authorization source. *(reference, architecture, isolation, active)*
+- **[[MODEL_HIERARCHY]]** — model division of labor + cost-to-reasoning ratio. SETTLED (Mike-direct 2026-08-15, S372): two live seats — rb=Sonnet 5/high (Mags, orchestrator + publish gate), es=Opus 5/xhigh (workhorse, executes only); Fable=dispatched job not a seat; civic+media retired as live seats (cron-executed); house guests Kimi/Codex/Grok/Antigravity instructable by rb. `AGENTS.md` is the binding authorization source. *(reference, architecture, isolation, active)*
 - **[[WORKFLOWS]]** — 7 workflow patterns (media-room, civic, build/deploy, maintenance, cycle run, research, chat-with-mags). Orthogonal to terminals. Post-S165: workflow reference, not boot file. *(reference, architecture, active)*
 
 ### Stack & ops

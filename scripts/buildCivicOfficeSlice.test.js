@@ -28,9 +28,10 @@ fs.writeFileSync(path.join(tmp, 'scripts', 'civic-office-map.json'), JSON.string
 }));
 fs.writeFileSync(path.join(tmp, 'output', 'simulation_ledger_snapshot.jsonl'),
   [
-    JSON.stringify({ POPID: 'POP-00901', Name: 'Alpha Local', Neighborhood: 'Temescal', Status: 'active', RoleType: 'baker' }),
-    JSON.stringify({ POPID: 'POP-00902', Name: 'Beta Local', Neighborhood: 'Temescal', Status: 'inactive', RoleType: 'cook' }),
-    JSON.stringify({ POPID: 'POP-00903', Name: 'Gamma Far', Neighborhood: 'Fruitvale', Status: 'active', RoleType: 'nurse' }),
+    JSON.stringify({ POPID: 'POP-00901', Name: 'Alpha Local', Neighborhood: 'Temescal', Status: 'active', RoleType: 'baker', Tier: 4 }),
+    JSON.stringify({ POPID: 'POP-00021', Name: 'Star Player', Neighborhood: 'Temescal', Status: 'active', RoleType: 'Shortstop', Tier: 1 }),
+    JSON.stringify({ POPID: 'POP-00902', Name: 'Beta Local', Neighborhood: 'Temescal', Status: 'inactive', RoleType: 'cook', Tier: 4 }),
+    JSON.stringify({ POPID: 'POP-00903', Name: 'Gamma Far', Neighborhood: 'Fruitvale', Status: 'active', RoleType: 'nurse', Tier: 4 }),
   ].join('\n') + '\n'
 );
 fs.writeFileSync(path.join(tmp, 'output', 'initiative_tracker.json'), JSON.stringify({
@@ -51,7 +52,7 @@ const pack = buildPack({
 
 check('actor is the office holder not a reporter', pack.actor.name === 'Test Holder' && pack.team === 'civic-office');
 check('task is weekday district', pack.task.assignment === 'weekday-district');
-check('only active Temescal constituent', pack.exposure.subjects.length === 1 && pack.exposure.subjects[0].name === 'Alpha Local');
+check('Tier 4 before Tier 1', pack.exposure.subjects[0].name === 'Alpha Local' && pack.exposure.subjects.some(s => s.name === 'Star Player'));
 check('inactive and other-hood excluded', !pack.exposure.subjects.some(s => s.name === 'Beta Local' || s.name === 'Gamma Far'));
 check('project fact from tracker', pack.known.some(k => /Test Hub/.test(k.text)));
 check('empty people if no snapshot', loadConstituents(path.join(tmp, 'missing'), ['Temescal'], 8).length === 0);

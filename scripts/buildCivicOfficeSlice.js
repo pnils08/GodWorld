@@ -71,21 +71,73 @@ function loadConstituents(root, hoods, cap) {
     const name = String(row.Name || ((row.First || '') + ' ' + (row.Last || '')).trim()).trim();
     if (!pop || !name) continue;
     const role = String(row.RoleType || '').trim();
-    const civ = String(row['CIV (y/n)'] || '').toLowerCase().indexOf('y') === 0;
-    const med = String(row['MED (y/n)'] || '').toLowerCase().indexOf('y') === 0;
-    const famous = civ || med ||
-      /\b(athlete|player|pitcher|journalist|reporter|mayor|legend)\b/i.test(role);
+    const tier = Number(row.Tier);
     rows.push({
       pop,
       name,
       neighborhood: hood,
       role: role || null,
-      famous,
+      tier: isFinite(tier) ? tier : 3,
       src: 'output/simulation_ledger_snapshot.jsonl',
     });
   }
-  rows.sort((a, b) => (a.famous === b.famous ? a.pop.localeCompare(b.pop) : a.famous ? 1 : -1));
-  return rows.slice(0, cap).map(({ famous, ...rest }) => rest);
+  // All ledger people are fair game. Invert protection: Tier 4 first, Tier 1 last.
+  rows.sort((a, b) => (b.tier - a.tier) || a.pop.localeCompare(b.pop));
+  return rows.slice(0, cap);
+}
+
+function loadAudit(root, cycle) {
+  return loadJson(path.join(root, 'output', 'engine_audit_c' + cycle + '.json')) ||
+    loadJson(path.join(root, 'output', 'engine_audit.json'));
+}
+
+function loadOfficeJob(audit, office) {
+  const rows = (audit && audit.snapshots && audit.snapshots.Civic_Office_Ledger) || [];
+  const pop = String(office.popid || '').toUpperCase();
+  const id = String(office.officeId || '');
+  const mine = rows.filter(r => r.Holder).filter(r =>
+    String(r.PopId || r.POPID || '').toUpperCase() === pop ||
+    String(r.OfficeId || '') === id
+  );
+  const district = String(office.district || '').toUpperCase();
+  const peers = rows.filter(r => r.Holder && String(r.District || '').toUpperCase() === district);
+  return { mine, peers };
+}
+
+function loadTurfMetrics(audit, hoods) {
+  const want = new Set((hoods || []).map(h => String(h).toLowerCase()));
+  const facts = [];
+  const crime = (audit && audit.snapshots && audit.snapshots.Crime_Metrics) || [];
+  const map = (audit && audit.snapshots && audit.snapshots.Neighborhood_Map) || [];
+  for (const row of crime) {
+    const hood = String(row.Neighborhood || '');
+    if (want.size && !want.has(hood.toLowerCase())) continue;
+    facts.push({
+      id: 'F-crime-' + hood.replace(/\s+/g, ''),
+      t: 'FACT',
+      text: hood + ' crime: property ' + row.PropertyCrimeIndex +
+        ', violent ' + row.ViolentCrimeIndex +
+        ', incidents ' + row.IncidentCount + ' (cycle ' + row.LastUpdated + ')',
+      src: 'engine_audit snapshots.Crime_Metrics',
+    });
+  }
+  for (const row of map) {
+    const hood = String(row.Neighborhood || '');
+    if (want.size && !want.has(hood.toLowerCase())) continue;
+    const bits = [];
+    if (row.Sentiment != null && row.Sentiment !== '') bits.push('sentiment ' + row.Sentiment);
+    if (row.RetailVitality != null && row.RetailVitality !== '') bits.push('retail ' + row.RetailVitality);
+    if (row.CrimeIndex != null && row.CrimeIndex !== '') bits.push('crime index ' + row.CrimeIndex);
+    if (row.HousingPressure != null && row.HousingPressure !== '') bits.push('housing pressure ' + row.HousingPressure);
+    if (!bits.length) continue;
+    facts.push({
+      id: 'F-hood-' + hood.replace(/\s+/g, ''),
+      t: 'FACT',
+      text: hood + ': ' + bits.join(', '),
+      src: 'engine_audit snapshots.Neighborhood_Map',
+    });
+  }
+  return facts;
 }
 
 function loadProjects(root, cycle, hoods, initiativeId) {
@@ -127,7 +179,19 @@ function buildPack(opts) {
 
   const hoods = turfHoods(office);
   const people = loadConstituents(root, hoods, opts.cap || CONSTITUENT_CAP);
+  const audit = opts.audit || loadAudit(root, cycle);
+  const job = loadOfficeJob(audit, office);
+  const turf = loadTurfMetrics(audit, hoods);
   const known = loadProjects(root, cycle, hoods, office.initiative);
+  for (const row of job.mine) {
+    known.unshift({
+      id: 'F-office-' + (row.OfficeId || 'seat'),
+      t: 'FACT',
+      text: (row.Holder || office.holder) + ' holds ' + (row.OfficeId || office.officeId) +
+        (row.Approval != null && row.Approval !== '' ? ' at approval ' + row.Approval : ''),
+      src: 'engine_audit snapshots.Civic_Office_Ledger',
+    });
+  }
 
   return {
     v: 'OFFICE/1',
@@ -157,11 +221,16 @@ function buildPack(opts) {
         name: p.name,
         neighborhood: p.neighborhood,
         role: p.role,
+        tier: p.tier,
         src: p.src,
       })),
       sources: [],
     },
-    known,
+    known: known.concat(turf),
+    role: {
+      officeRows: job.mine,
+      civicPeers: job.peers.slice(0, 12),
+    },
     limits: {
       assert: [
         'only named subjects in exposure.subjects',

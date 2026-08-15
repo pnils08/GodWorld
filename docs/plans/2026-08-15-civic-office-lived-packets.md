@@ -58,7 +58,8 @@ Disk-first. Same wipe lesson: if a copy is gone, rebuild from the cycle audit or
 | What I am doing today | **Mon–Thu = district package.** **Sunday = city-hall packet** (decide). | `task` |
 | How my turf feels | `world_summary` hood table (already parsed) | `signal` |
 | My projects | `initiative_tracker.json` (already rebuilds) | `known` FACT |
-| People I serve | `simulation_ledger_snapshot` rows in my district hoods — name, hood, work. Cap. No quotes invented. | `exposure.subjects` |
+| People I serve | All active ledger people in my hoods. **Tier 4 first**, then 3, 2, 1. Athletes and names are fair game, not first. Cap. | `exposure.subjects` |
+| My civic job | `Civic_Office_Ledger` + crime + neighborhood rows for my turf (from cycle audit) | `known` + `role` |
 | What I already thought | **civic.16 office wiki** (cp-POP, `stated:` / `datawake:`). Load on every wake; save after. | `exposure.sources` + prompt inject |
 | Must not invent | people, counts, “complete,” votes | `limits` |
 | What I turn in | existing statement JSON (weekday); trackerUpdates stay civic.15 Sunday | `output` |

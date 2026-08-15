@@ -87,6 +87,14 @@ What gives each its voice + how it remembers: see [[2026-05-31-citizen-autonomou
 
 ---
 
+### Layer 0 — Fleet/spend self-governance (opened 2026-08-15, Mike-direct)
+
+Distinct from Layers 1–3 above (which govern the SIM) — this is autonomy of the build/orchestration process itself. Same session as the terminal restructure (rb=Mags/orchestrator, es=workhorse, Fable=job, house guests=kimi/codex/grok/antigravity): Mike wants operator involvement reduced further — Mags tracking usage across all models via the S113 Mission Control dashboard (confirmed alive 2026-08-15, pm2 `godworld-dashboard`, 21h uptime) and self-adjusting fleet routing over time without an operator turn per change.
+
+- **Mike named the prerequisite himself:** doctrine + the "show bible" (canon archive — `research4_2.md` §The "Show Bible" Concept) must be assembled accurately first — that's the ground truth any self-tuning gets checked against.
+- **Status:** NOT STARTED. Not yet scoped as a build.
+- **Caution on record** ([[project_weekly-claude-budget-and-house-guests]] memory, same session): "guests run wild without supervision" is a supervision problem, not a budget one — mechanical gates (ROLLOUT lint, canon-leak-guard, gapLogGate, pre-commit hooks) are what actually holds unattended; a usage dashboard alone is visibility, not the safety mechanism.
+
 ## Open questions
 
 - [ ] **research.9 preconditions — are they met?** S172 gated the real inter-agent test on Phase 39 reviewer chain + Phase 40 injection defense closing. Spine table (S147/S148/S156) shows 39.x + 40.1/40.6 DONE; 40.2 cattle refactor (engine.1) is the one possibly-open piece. Verify whether 40.2 actually gates the PoC or only the at-scale build before scheduling Layer 3's PoC.
@@ -108,7 +116,8 @@ Autonomy roadmap (umbrella) — continuous sim + autonomous agents. Three sequen
 
 ## Changelog
 
-- 2026-05-31 (S248) — Initial draft. Mike S248 directive: write a plan.md following the template that serves as the umbrella for the autonomous concepts we're already working toward, referencing the MDs that have been tracking them, so we track this better. Consolidates threads previously scattered across: research.9 (inter-agent harness, S172), Emergence World eval (RESEARCH §S248), engine.5 + engine.29 (deterministic citizen continuity), city-for-bots pivot (S114 memory), ARCHITECTURE_VISION (Jarvis/persistent-sessions), GPU-gate memory, spacemolt-miner (in-repo existence proof). Filed as research.12. Two Mike corrections folded in: (a) the newsroom IS the simulation — reporters/voices are in-world characters, so "autonomous agents" spans Layer 2 (newsroom) + Layer 3 (inhabitants), different builds; (b) newsroom automation is greps + file access, not new tooling. NOT a build schedule — sequencing + gate-tracking only; each layer promotes on Mike's go-ahead.
+- 2026-05-31 (S248) — Initial draft. Consolidates research.9, Emergence World eval, engine.5/.29, city-for-bots pivot, ARCHITECTURE_VISION, GPU-gate, spacemolt-miner. Filed as research.12. Not a build schedule — sequencing + gate-tracking only.
+- 2026-08-15 (S372, Mike-direct) — New Layer 0 opened: fleet/spend self-governance, doctrine-bible accuracy named as prerequisite. See §Layer 0 below.
 
 ---
 

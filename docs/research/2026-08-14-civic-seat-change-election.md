@@ -81,6 +81,7 @@ These are the locked beats. Open gaps sit under each beat, not as a second proce
 4. **Media.** Risk heightens under 40. Media interviews the standing office and the challenger. If the incumbent is losing those interviews, Approval hits come faster.
 5. **Win.** Challenger wins only if that office falls below 20. Otherwise the incumbent can still save the seat.
 6. **Retirement (same tab, later).** A retirement opens a race with two candidates. How the city votes that is not designed.
+7. **Voice is not automatic.** Chair change → media event that introduces the person from the citizen list. Mike writes the office voice file only if that seat change actually happens.
 
 ---
 
@@ -200,6 +201,8 @@ So "they win and then they speak" is not one function. It is at least:
 
 Council is easier if they keep speaking through the faction agent. Mayor / DA / Chief are person-shaped files. A minted out-of-town with no canon cannot pass `/make-citizen-voice` without invention.
 
+**Mike 2026-08-14 — media first, voice later.** He does not build sheets. If the chair changes, the sim creates a **media event** that introduces who this person is from ledger facts (name, neighborhood, work, dials — no invented bio; the desk already fails loud on `NO LEDGER PROFILE`). He writes the voice/IDENTITY leg **only if it actually happens**. That is the right human gate. It does not by itself stop Sunday city hall from still loading Avery's folder until that leg is written. Plan must say what the office says in the gap: skip the person-shaped agent, or speak as the office with live holder + ledger only.
+
 ### 6. Approval at 40 / 20 is a different machine
 
 `updateCivicApprovalRatings_` scores `^COUNCIL` / `^MAYOR` every cycle. On main it does not write `Election_Log`. The unsaved leftover tries to campaign on Notes and seat below 20 without this tab.
@@ -227,11 +230,13 @@ A–C is engine-sheet. D–F is engine + media. G is research-build / civic / Mi
 
 - 2026-08-14 — filed from Mike's process; no plan, no code.
 - 2026-08-14 — codebase pass: Election_Log names-only; no seed reader; civic LifeHistory is ClockMode-gated; office voices are static person files.
+- 2026-08-14 — Mike: chair change is a media event; he writes the voice leg only if it occurs.
 
 ---
 
 ## Changelog
 
+- 2026-08-14 (grok) — Voice beat: media event first; Mike authors IDENTITY only if the chair actually changes. Civic cron still Avery until then.
 - 2026-08-14 (grok) — Codebase pass. Citizens, seeds, LifeHistory, voice files, scale. Tab choice left open.
 - 2026-08-14 (grok) — Correction: process home is `Election_Log`. Dropped the invented second tab.
 - 2026-08-14 (grok) — Initial extraction. Mike process + existing November/`Election_Log`/approval facts. Verdict `adopt`, no plan ignited.

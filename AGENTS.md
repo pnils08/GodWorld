@@ -1,30 +1,26 @@
 # AGENTS.md — out-of-band CLI agent instructions for GodWorld
 
-GodWorld is a constructed city simulation built on Google Sheets, Apps Script,
-Node.js, generated Markdown, and agent-driven civic/newsroom workflows.
+GodWorld is a constructed city simulation on Google Sheets, Apps Script,
+Node.js, generated Markdown, and agent-driven civic/newsroom workflows. The
+Sheets and their citizens are the simulated world — fiction in an alternate
+timeline. Never import real-world Oakland people, institutions, businesses,
+teams, events, or assumptions.
 
-The Sheets and their citizens are the simulated world. This is fiction in an
-alternate timeline. Do not import real-world Oakland people, institutions,
-businesses, teams, events, or assumptions.
+This file governs every out-of-band CLI engineering assistant. Authorization is
+not transferable: Codex, Kimi, Grok, and Antigravity/Gemini each follow the tier
+that names them below.
 
-This file governs every out-of-band CLI engineering assistant working in this
-repository. Agent-specific authorization is not transferable: Codex, Kimi, Grok, and
-Antigravity/Gemini follow the tier that names them below.
+An out-of-band CLI agent is an engineering assistant to the builder — not Mags
+Corliss, a Bay Tribune reporter, a civic official, or a sim participant. Read
+persona and newsroom material as system context, never as an identity to adopt.
 
-An out-of-band CLI agent is an engineering assistant to the builder. It is not
-Mags Corliss, a Bay Tribune reporter, a civic official, or a participant in the
-simulation. Read persona and newsroom material as system context, not as an
-identity to adopt.
-
-Claude is the lead and owns the control plane. Kimi, Codex, and Grok may propose
-and implement inside their authorized scope. Antigravity/Gemini are fully gated:
-read-only inspection and proposed diffs only. They do not change project files,
-stage work, commit work, or push work. The sole exception is each agent's own
-`NEXT` handoff line under §Session close.
+Claude is lead and owns the control plane. Kimi, Codex, and Grok may propose and
+implement inside their authorized scope. Antigravity/Gemini are fully gated:
+read-only inspection and proposed diffs only — no file changes, staging,
+commits, or pushes. Sole exception: the agent's own `NEXT` handoff line under
+§Session close.
 
 ## Instruction precedence
-
-Apply instructions in this order:
 
 1. The builder's current request.
 2. This `AGENTS.md`.
@@ -32,8 +28,8 @@ Apply instructions in this order:
 4. Active repository contracts and documentation.
 5. Existing code conventions.
 
-If two repository sources conflict, stop and report the conflict. Do not silently
-choose one or rewrite either source.
+Repository sources in conflict → stop and report. Never silently choose one or
+rewrite either source.
 
 ## Grok and Codex speech constraint (builder-direct, 2026-08-13)
 
@@ -52,27 +48,28 @@ that names the missing gate. An untracked note is not delivery.
 
 This clause binds Grok and Codex. Other lanes do not adopt it as identity.
 
+Claude carries its own standing equivalent of this commitment — no
+narrate-and-repeat, no untracked note as proof of change, delivery is a
+committed in-scope change or a named refusal — held in
+`.claude/rules/identity.md` under Behavioral Rules (Mike-direct, 2026-08-13).
+
 ## Boot and orientation (proportional — do not dump context)
 
-Default is **minimal**. Do not load a fixed doc stack into every session.
-Search and open only what the current request needs. Tokens spent orienting
-are tokens not spent on the task.
+Default: **minimal**. No fixed doc stack per session. Open only what the current
+request needs; tokens spent orienting are tokens not spent on the task.
 
 ### Always (cheap)
 
-1. This `AGENTS.md` (harness-loaded project rules — do not re-read unless
-   checking a clause).
+1. This `AGENTS.md` (harness-loaded — do not re-read unless checking a clause).
 2. SessionStart hook output when present (PIN + NEXT lines). Follow it; do not
    re-detect or re-plan boot.
 3. `git status --short --branch` before claiming workspace state or changing
    files.
 
-For a narrow, fully specified task (run a named script, read a file, collect
-outputs), stop here and go straight to the task plus its directly-linked files.
+Narrow, fully specified task (named script, file read, output collection) → stop
+here; go straight to the task plus its directly-linked files.
 
 ### On demand by task surface
-
-Open a reference only when the work lands on it:
 
 | Need | Open |
 |------|------|
@@ -82,10 +79,12 @@ Open a reference only when the work lands on it:
 | "What doc exists about X" | **grep** `docs/index.md` — never load the whole catalog |
 | New/edited MD shape, frontmatter, registration | `docs/SCHEMA.md` |
 | Services, providers, PM2, runtime layout | `docs/STACK.md` |
-| Schedules, runbooks, live automation | `docs/OPERATIONS.md` |
+| Schedules, runbooks, crons, live automation | `docs/OPERATIONS.md` |
 | Newsroom / deep-dispatch / edition path | `docs/EDITION_PIPELINE_DEEP_DISPATCH.md` |
 | Model tiers / agent-boundary claims | `docs/MODEL_HIERARCHY.md` |
+| Durable-work filing loop / rollout row contract | `docs/engine/rollout-rules.md` |
 | Open tracked work / multi-session handoff | `docs/engine/ROLLOUT_PLAN.md` (+ owning plan) |
+| Prior findings/decisions from any lane | shared memory — `sl-godworld`, see below |
 
 Before non-trivial work, also read the task-specific plans, ADRs, contracts,
 scripts, and tests linked for *this* task — not every link in the index.
@@ -98,245 +97,135 @@ scripts, and tests linked for *this* task — not every link in the index.
 - Run memory, boot, publishing, civic, edition, deployment, or production
   skills merely to orient yourself.
 
+## Shared memory — one container, all lanes
+
+Container: `sl-godworld`. Every lane writes and reads the same one — kimi, codex,
+grok, antigravity, and all four Claude terminals. One brain; the reasoning model
+differs, the memory does not.
+
+- Save: `npx supermemory remember "<fact>" --tag sl-godworld` (`--static` = permanent)
+- Search: `npx supermemory search "<query>" --tag sl-godworld`
+
+Rules:
+
+- Never auto-pulled at boot. Search on demand, when a task has a reason to.
+- Hand-write only. Do not pipe session logs, transcripts, or diffs into it — a
+  bulk dump gets chunked and each fragment becomes its own searchable "memory",
+  which buries the deliberate writes. One fact per save.
+- Write a fact when it will not survive anywhere else: a decision and its why, a
+  dead end already tried, a non-obvious constraint. Anything the repo already
+  records (code, git history, ROLLOUT rows, plan docs) does not go here.
+- Per-lane `sl-<lane>` tags are frozen history as of 2026-08-15. Query an old tag
+  by hand for history; never write to one.
+- Narrative session history lands in `session-logs` automatically. Not your
+  concern; do not write there.
+
 ## Canonical terminology
 
-Use the terminology defined in `CONTEXT.md`. In particular:
-
-- **Cycle** — one engine run. Do not call it a tick, round, or iteration.
-- **Edition** — the cycle's compiled Bay Tribune publication.
-- **Article** — one publication unit inside an Edition.
-- **Dispatch** — a short off-cycle publication.
-- **Supplemental** — an off-cycle deep dive.
-- **POPID** — stable citizen identifier in `POP-XXXXX` form.
-- **Citizen Tier** — citizen protection level.
-- **Canon Tier** — real-name/canon-fidelity classification. It is not Citizen Tier.
-- **Initiative** — a council-passed civic program.
-- **Project** — the active implementation inside an Initiative.
-- **Desk reporter** — a newsroom generation agent.
-- **Voice agent** — an office or project source agent.
-- **Reviewer lane** — one structured editorial review pass.
-- **Sift** — editorial planning and assignment.
-- **Brief** — an Article assignment produced by Sift.
-- **Packet** — a desk context bundle.
-- **Compile** — deterministic assembly of publication artifacts.
-- **Post-publish** — the gated canon-ingestion and feedback stage.
-- **Phase** — one numbered engine stage.
-- **Ctx** — the in-memory state shared by engine Phases.
-- **Writer** — code that mutates a Sheet.
-- **Intent** — a queued write descriptor.
-
-Do not invent replacement vocabulary when a canonical term exists.
+Use the `CONTEXT.md` vocabulary; never invent replacement terms. Most-confused
+distinctions: **Cycle** = one engine run (never tick/round/iteration);
+**POPID** = stable citizen identifier, `POP-XXXXX` form; **Canon Tier** ≠
+**Citizen Tier**; **Initiative** (council-passed program) contains **Project**
+(active implementation); **Writer** mutates a Sheet, an **Intent** is only a
+queued write descriptor.
 
 ## World and canon rules
 
-The simulation ledger and related Sheets are canon authority for citizen and
-world state. Published Bay Tribune material is the paper-of-record for narrative
-appearances. Derived memory/card layers are not independent canon authorities.
+Canon authority: the simulation ledger and related Sheets own citizen/world
+state; published Bay Tribune material is the paper-of-record for narrative
+appearances. Derived memory/card layers are not canon authorities.
 
-Never invent:
+Never invent citizens or POPIDs; businesses, institutions, projects, or
+organizations; events, statistics, quotes, dates, votes, budgets, or metrics;
+relationships, employment, neighborhoods, or citizen history; missing schema
+values or plausible-looking test fixtures presented as canon.
 
-- citizens or POPIDs;
-- businesses, institutions, projects, or organizations;
-- events, statistics, quotes, dates, votes, budgets, or metrics;
-- relationships, employment, neighborhoods, or citizen history;
-- missing schema values or plausible-looking test fixtures presented as canon.
+Tests use existing fixtures or clearly synthetic placeholders in isolation.
+Synthetic test data must be visibly non-canon and never enter Sheets, published
+artifacts, Drive, Supermemory, or ingestion paths.
 
-Use existing fixtures or clearly synthetic placeholders in isolated tests.
-Synthetic test data must be visibly non-canon and must never enter Sheets,
-published artifacts, Drive, Supermemory, or ingestion paths.
+Engine signals are part of the simulated world. Never suppress an error, spike,
+drop, or anomaly because it may be engine-originated. Diagnose the mechanism; do
+not rewrite the world to hide it.
 
-Engine signals are part of the simulated world. Do not suppress an error, spike,
-drop, or anomaly merely because it may originate in engine behavior. Diagnose
-the mechanism; do not rewrite the world to hide it.
-
-World-facing artifacts use in-world time such as `Cycle N`, `C<N>`, or the
-project's canonical in-world date format. Do not introduce wall-clock dates into
-published or in-world copy. Engineering documentation metadata follows
-`docs/SCHEMA.md`.
+World-facing artifacts use in-world time (`Cycle N`, `C<N>`, or the canonical
+in-world date format). Never introduce wall-clock dates into published or
+in-world copy. Engineering documentation metadata follows `docs/SCHEMA.md`.
 
 ## Protected files and directories
 
-The Claude control plane is read-only to every out-of-band CLI:
+Claude control plane — read-only to every out-of-band CLI (no create, edit,
+move, delete, format, stage, or commit):
 
 - `.claude/**`
 - `.agents/**`
 - `CLAUDE.md`
 - `SESSION_CONTEXT.md`
 
-Do not create, edit, move, delete, format, stage, or commit those paths.
-
 Enforcement backstop: `.githooks/pre-commit` (`CLAUDE_CTL` gate) rejects any
 commit touching the control plane unless a Claude session prefixes
-`CLAUDE_CTL=1`. That prefix is for Claude only — never set it, and never bypass
-the hook with `--no-verify`.
+`CLAUDE_CTL=1`. Claude-only — never set it, never bypass the hook with
+`--no-verify`.
 
-Kimi's and Codex's ordinary writable scope is limited to:
+Kimi/Codex ordinary writable scope: `scripts/**`, `output/**`, `docs/**`.
 
-- `scripts/**`
-- `output/**`
-- `docs/**`
+Antigravity/Gemini have no ordinary writable scope: inspect the repository,
+return proposed patches; another authorized terminal reviews and applies them.
+They create or modify no repository-local scratch, reports, configuration,
+hooks, skills, or state — diagnostics and patches stay in the conversation until
+an authorized terminal applies them.
 
-Antigravity/Gemini have no ordinary writable scope. They may inspect
-the repository and return proposed patches, but another authorized terminal must
-review and apply them.
+All other areas — `phase*/`, `utilities/`, `lib/`, `dashboard/`, `editions/`,
+`schemas/`, configuration files, hooks, service manifests — require explicit
+permission naming that scope.
 
-Do not modify other areas—including `phase*/`, `utilities/`, `lib/`,
-`dashboard/`, `editions/`, `schemas/`, configuration files, hooks, or service
-manifests—without explicit permission naming that scope.
+`docs/MODEL_HIERARCHY.md` §6 mirrors these agent tiers. On drift, this file
+governs.
 
-`docs/MODEL_HIERARCHY.md` §6 mirrors these agent tiers. If the two documents
-drift, this file governs.
+Immutable source/history inside `docs/` unless explicitly told otherwise:
+`docs/archive/**`, `docs/research/papers/**`, `docs/drive-files/**`.
 
-Within `docs/`, treat these as immutable source/history unless explicitly told
-otherwise:
-
-- `docs/archive/**`
-- `docs/research/papers/**`
-- `docs/drive-files/**`
-
-Do not modify pre-existing dirty or untracked files unless the builder identifies
-them as part of the task.
-
-## Gated-agent local state
-
-Antigravity/Gemini do not create or modify repository-local scratch, reports,
-configuration, hooks, skills, or state. Their diagnostics and proposed patches
-remain in the conversation until an authorized terminal reviews and applies
-them.
+Do not modify pre-existing dirty or untracked files unless the builder
+identifies them as part of the task.
 
 ## Research, plan, rollout, and archive
 
-For durable research, non-trivial implementation, or cross-session work, follow
-the repository's canonical filing loop in
-`docs/engine/rollout-rules.md`:
+Durable research, non-trivial implementation, or cross-session work follows the
+filing loop in `docs/engine/rollout-rules.md`:
+`research → plan → rollout → archive`. Read that doc before writing any plan,
+research file, or rollout row — its contract is mechanical and enforced by
+scripts, not by reviewers.
 
-```text
-research → plan → rollout → archive
-```
+Boot-visible rules:
 
-Keep the layers distinct:
-
-- **Research** records findings, evaluated options, hazards, and a verdict. Copy
-  `docs/research/RESEARCH_TEMPLATE.md` to
-  `docs/research/YYYY-MM-DD-<topic>.md`; register the instance in
-  `docs/research/index.md`, not the top-level documentation index. Research
-  carries `adopt`, `watch`, or `take-nothing`—never rollout state—and remains a
-  standing, grep-able source after application.
-- **Plan** is the self-contained executable specification. Copy
-  `docs/plans/PLAN_TEMPLATE.md` to `docs/plans/YYYY-MM-DD-<topic>.md`; include exact
-  tasks, files, acceptance criteria, validation, terminal ownership, sources,
-  and pointers; register it in `docs/index.md`. An adopted research verdict
-  points forward to the plan, and the plan points back to its research basis.
-- **Rollout** is the clean open-work tracker at
-  `docs/engine/ROLLOUT_PLAN.md`. Each row contains only an ID, one
-  actionable summary, lifecycle state, builder-terminal owner, and pointers to
-  the owning plan or plans. Do not place research prose, implementation detail,
-  handoff instructions, or raw issues in a rollout row. The row is
-  machine-swept — see the row contract below before writing one.
-- **Archive** receives shipped plans and swept rollout rows according to
-  `rollout-rules.md`. Research files do not archive. This lifecycle description
-  does not authorize you to move or edit `docs/archive/**`; that still requires
-  explicit builder approval under this file's protected-history rule.
-
-### Rollout row contract (mechanical — a malformed row is silently skipped)
-
-`scripts/rolloutSweep.js` archives completed rows by splitting each line on its
-state cell. A row that breaks the contract is not rejected loudly; it is skipped
-forever, and its work stops being tracked. Five rows failed this way before
-2026-07-26.
-
-A row is exactly five cells:
-
-```text
-| <group>.<n> | <one actionable line> | <state> | <terminal> | <pointer> |
-```
-
-Rules:
-
-- The state cell is a bare token from this set and nothing else — no
-  parenthetical, no added status prose, no invented word:
-  `ready`, `in-progress`, `done-pending-archive`, `blocked`, `needs-info`,
-  `wontfix`, `parked`. `queued` and `draft` are not rollout states; a row using
-  one is skipped by the sweep.
-- Exactly one cell in the line may equal a state token. A stray `|` or a state
-  word sitting loose in the summary creates a phantom state cell and the sweep
-  may split on the wrong one.
-- No literal `|` anywhere in the summary cell.
-- The summary cell is at most 280 characters. Over that, the row has become a
-  notes blob: relocate the narrative to the owning plan's `## Status log`
-  (`scripts/rolloutDrain.js`, dry-run by default) or, when the row has no plan
-  doc, to the relocated-row section of the owning parent spec such as
-  `docs/engine/ENGINE_REPAIR.md`. Relocate the text; never delete it.
-- Verify before calling a row filed:
-
-```bash
-node scripts/docLoopStatus.js --lint
-```
-
-  Expected output: `ROLLOUT LINT: clean — every row is a sweep-safe pointer
-  within budget.` Anything else means your row is not filed yet.
-
-Creating a new plan MD or research MD is a builder-approved act. Propose the
-file and its rollout row together and wait for approval before writing either.
-
-Search for an existing research file, plan, and rollout row before creating a
-new one. Update the owning artifact rather than starting a parallel record.
-
-Use this loop proportionately. A narrow, fully specified, single-session task
-does not require new research, a plan, or a rollout row unless the builder asks
-for durable tracking. When the loop is used, the plan is the authoritative
-cross-session handoff payload and rollout is its discovery pointer;
-`output/codex/` may hold supporting diagnostics or proposed patches but must not
-be the only durable handoff.
-
-Under the active rollout doctrine, actionable rows are assigned only to the
-builder terminals: `research-build` for skills, rules, documentation, ADRs, and
-apparatus; `engine-sheet` for code, Sheets, schemas, and substrate. Media and
-civic are generator terminals: their run findings enter production gap logs and
-are promoted through research-build rather than assigned directly as rollout
-work.
-
-**Terminal names are Claude identities, not roles you can hold.**
-`research-build`, `engine-sheet`, `media`, and `civic` are Claude Code
-terminals; an out-of-band agent is never one of them and never writes "the
-research-build half is done" about its own work. When your task covers work a
-terminal would normally do, do the work, but attribute it to your own lane
-(`kimi`, `codex`, `antigravity`) in plan notes, changelogs, and commits —
-"design tasks 1–4 complete (kimi), engine-sheet builds 5–7" — so ownership and
-review boundaries stay legible. The terminal whose scope you touched remains
-the reviewer/lander of gated changes.
-
-### Marking completed work (rollout-rules.md §7)
-
-When an out-of-band agent completes plan work, completion is marked in the
-owning plan, lane-tagged, so any terminal can see who closed what without
-reading git blame:
-
-- Flip the finished task's `Status` line in the plan, and add a dated one-line
-  changelog entry prefixed with your lane name:
-  `- 2026-08-02 (kimi) — Task 3 shipped, commit <sha>.`
-- Keep the lane prefix on commit messages (`kimi: …`, `codex: …`) so
-  `git log --grep "^kimi:"` returns the lane's work history.
-- When a rollout row's work is fully complete, set its state to
-  `done-pending-archive` (respect the row contract above; lint before commit).
-  Never run `scripts/rolloutSweep.js` — sweeping and plan-archiving belong to
-  the owning builder terminal at session-end.
-- Update your `NEXT[<lane>]` line in `SESSION_CONTEXT.md` with open work only,
-  pointing at the plan — the plan is the handoff payload, the NEXT line is its
-  discovery pointer.
+- Creating a plan or research MD is a builder-approved act: propose file and
+  rollout row together, wait for approval. Search for an existing artifact
+  first; update the owning one rather than starting a parallel record.
+- A malformed rollout row is **silently skipped** by `scripts/rolloutSweep.js`
+  and its work stops being tracked. Before calling a row filed, run
+  `node scripts/docLoopStatus.js --lint`.
+- Rollout rows are assigned only to builder terminals (`research-build`,
+  `engine-sheet`); media and civic findings promote through gap logs.
+- **Terminal names are Claude identities, never roles you hold.** When your task
+  covers terminal-scope work, attribute it to your own lane (`kimi`, `codex`,
+  `antigravity`) in plan notes, changelogs, and commits. The terminal whose
+  scope you touched remains reviewer/lander of gated changes.
+- Marking completion: flip the plan task's `Status`, add a dated lane-prefixed
+  changelog line (`- 2026-08-02 (kimi) — Task 3 shipped, commit <sha>.`), keep
+  lane prefixes on commit messages, set finished rows to `done-pending-archive`,
+  and never run `rolloutSweep.js` yourself.
+- `output/codex/` diagnostics are never the only durable handoff — the plan is
+  the payload, the rollout row its pointer.
 
 ## Change protocol
 
-For analysis, orientation, review, or diagnosis:
+Analysis, orientation, review, or diagnosis → read-only: inspect actual code and
+current Git state; support conclusions with repository paths; distinguish
+verified behavior from documentation claims; report stale or conflicting
+documentation instead of silently correcting it.
 
-- remain read-only;
-- inspect actual code and current Git state;
-- support conclusions with repository paths;
-- distinguish verified behavior from documentation claims;
-- report stale or conflicting documentation instead of silently correcting it.
-
-Antigravity/Gemini stop after analysis and a proposed diff; they do not
-perform implementation. For an agent with implementation authorization:
+Antigravity/Gemini stop after analysis and a proposed diff — no implementation.
+For an agent with implementation authorization:
 
 1. Inspect `git status --short --branch`.
 2. Read the relevant active plan, contract, ADR, implementation, and tests.
@@ -347,14 +236,13 @@ perform implementation. For an agent with implementation authorization:
 6. Run proportionate local validation.
 7. Show the resulting diff and validation results.
 8. Do not deploy, publish, or ingest unless separately authorized. Commit and
-   push only within the Push authorization tier defined under Git and commit
-   rules below.
+   push only within the Push authorization tier under §Git and commit rules.
 
 Use `apply_patch` for manual edits. Preserve unrelated user changes.
 
 ## Permitted validation commands
 
-Read-only inspection is permitted:
+Read-only inspection:
 
 ```bash
 git status --short --branch
@@ -367,7 +255,7 @@ sed -n '<start>,<end>p' <file>
 node --check scripts/<file>.js
 ```
 
-Local validation is permitted after an authorized change:
+Local validation after an authorized change:
 
 ```bash
 node scripts/<targeted-test>.test.js
@@ -375,37 +263,33 @@ npm test
 npm run lint
 ```
 
-Rules:
-
 - Prefer the narrowest relevant test before the full suite.
-- `npm run lint` is permitted; `npm run lint:fix` requires approval because it
-  writes files mechanically.
+- `npm run lint` is permitted; `npm run lint:fix` requires approval (it writes
+  files mechanically).
 - Do not install or update dependencies.
 - Do not run scripts that contact Sheets, Drive, Supermemory, Discord, external
   model APIs, or other network services unless explicitly approved.
-- A `--dry-run` flag is not sufficient proof of safety. Inspect its implementation
-  before running it.
+- A `--dry-run` flag is not sufficient proof of safety — inspect its
+  implementation before running it.
 - Do not run API-backed validation that spends money without approval.
 - Never expose credentials or environment-variable values in output.
 
 ## Git and commit rules
 
-### Push authorization (builder decision, 2026-07-28)
+### Push authorization
 
-The builder assigns commit and push rights by agent tier:
-
-- **Kimi and Codex** may commit and push work that lies entirely inside the
-  ordinary writable scope (`scripts/**`, `output/**`, `docs/**`), including
-  tests. Conditions, all mandatory:
+- **Kimi and Codex** may commit and push work lying entirely inside the ordinary
+  writable scope (`scripts/**`, `output/**`, `docs/**`), including tests. All
+  conditions mandatory:
   - every touched or added test file passes locally before the commit;
   - `node --check` (or `python3 -m py_compile`) is clean on every changed
     script;
   - stage with path-specific `git add` — never `git add .` or `git add -A`;
   - the commit touches zero control-plane paths (`.claude/**`, `.agents/**`,
-    `CLAUDE.md`, `SESSION_CONTEXT.md`) — those still land only through a
-    Claude session under the `CLAUDE_CTL` gate. **One exception:** your own
+    `CLAUDE.md`, `SESSION_CONTEXT.md`) — those land only through a Claude
+    session under the `CLAUDE_CTL` gate. **One exception:** your own
     `**NEXT[<you>]:**` line in `SESSION_CONTEXT.md`, committed alone, per
-    §Session close below;
+    §Session close;
   - the commit message names the authoring agent;
   - **push immediately after committing** — banking commits forms the stack the
     next rule refuses to move;
@@ -414,96 +298,84 @@ The builder assigns commit and push rights by agent tier:
     along. Any Claude terminal may then land the stack: verify each commit is
     in its author's writable scope and push intact (no rebase/squash/amend);
     attribution stays with the author, the landing goes in the lander's `NEXT`.
-- **Engine substrate remains gated for every agent**: `phase*/`,
-  `utilities/`, `lib/`, `schemas/`, `dashboard/`, `editions/`, configuration
-  files, hooks, service manifests, and anything deployed via clasp. Changes
-  there are proposed only and land through the engine-sheet terminal.
-- **Antigravity and Gemini** have no project commit or push
-  authorization and remain fully gated on all work: propose diffs only. The
-  only exception is committing the agent's own `**NEXT[<agent>]:**` handoff
-  line alone, per §Session close below.
+- **Engine substrate remains gated for every agent**: `phase*/`, `utilities/`,
+  `lib/`, `schemas/`, `dashboard/`, `editions/`, configuration files, hooks,
+  service manifests, and anything deployed via clasp. Changes there are proposed
+  only and land through the engine-sheet terminal.
+- **Antigravity and Gemini** have no project commit or push authorization and
+  remain fully gated: propose diffs only. Sole exception: the agent's own
+  `**NEXT[<agent>]:**` handoff line committed alone, per §Session close.
 
 ### General rules (all agents)
 
-- Do not create a branch, tag, merge, rebase, amend, or open a pull
-  request unless explicitly requested.
-- Do not stage files unless preparing an authorized commit.
-- Never use `git reset --hard`, `git clean`, destructive checkout commands, or
-  equivalent operations.
-- Do not stash the builder's work without permission.
+- No branch, tag, merge, rebase, amend, or pull request unless explicitly
+  requested.
+- No staging files unless preparing an authorized commit.
+- Never `git reset --hard`, `git clean`, destructive checkout commands, or
+  equivalents.
+- No stashing the builder's work without permission.
 - Never bypass hooks with `--no-verify`.
-- Do not rewrite history.
+- Never rewrite history.
 - Keep unrelated working-tree changes intact.
 - Before any approved commit, show the final diff and list the exact files to be
   committed.
-- A commit must contain one coherent approved change and must not include
-  pre-existing unrelated modifications.
+- One commit = one coherent approved change; no pre-existing unrelated
+  modifications.
 
-## Session close (kimi, codex, grok, antigravity — builder decision, 2026-07-28)
+## Session close (kimi, codex, grok, antigravity)
 
-You carry a lane in `SESSION_CONTEXT.md`: a single `**NEXT[<you>]:**` line, sitting
-beside the four Claude terminals and sharing the same `**PIN:**`. Every terminal
-reads all of those lines at boot. That line is the only way work you did reaches
-the next session — yours or anyone's. Git history records what changed; the NEXT
-line records where the thread is.
+Each external lane carries one `**NEXT[<you>]:**` line in `SESSION_CONTEXT.md`,
+beside the four Claude terminals, sharing the `**PIN:**`. Every terminal reads
+all lines at boot; the NEXT line is the only way your work reaches the next
+session.
 
-**Close your session with the external-lane procedure.** Contract is the rules
-below; the step-by-step lives in `.grok/skills/session-end/SKILL.md` (tracked;
-Grok: `/session-end`). That is **not** the Claude Code `/session-end` skill —
-no PIN bump, no ROLLOUT sweep, no `sessionEndMechanical.js`, no Supermemory
-bridge. Those belong to Claude terminals.
+**Close with the external-lane procedure.** Step-by-step:
+`.grok/skills/session-end/SKILL.md` (tracked; Grok: `/session-end`) — **not**
+the Claude Code `/session-end` skill: no PIN bump, no ROLLOUT sweep, no
+`sessionEndMechanical.js`, no Supermemory bridge. Those belong to Claude
+terminals.
 
 **Two steps, nothing else (after any authorized work commits):**
 
-1. **Rewrite your own `**NEXT[<you>]:**` line, in place.** One line. Where the work
-   landed and what the next move is — not a task stub, not a paragraph. Detail
-   belongs in the ROLLOUT row, the plan changelog, or the commit body; the NEXT
-   line is the entry point into them. Aim for 350 characters. Nothing enforces
-   that; it costs every terminal at every boot, so keep it tight. Drop pointers
-   to work that already shipped.
+1. **Rewrite your own `**NEXT[<you>]:**` line, in place.** One line: where the
+   work landed and the next move. Detail belongs in the ROLLOUT row, plan
+   changelog, or commit body. Aim for 350 characters — every terminal pays it
+   at every boot. Drop pointers to shipped work.
+2. **Commit path-specifically** per the push-authorization rules; the handoff
+   commit stages **only** `SESSION_CONTEXT.md`. (Antigravity: this NEXT-line
+   commit is the one commit you are authorized to make — handoff bookkeeping,
+   not work.)
 
-2. **Commit path-specifically**, per the push-authorization rules above.
-   The handoff commit stages **only** `SESSION_CONTEXT.md`.
+**Never touch:**
 
-   **Antigravity:** the NEXT-line commit is the one commit you are authorized to
-   make. You have no commit or push authorization for work — diffs stay
-   proposals — but your own handoff line is bookkeeping, not work.
+- **The `**PIN:**` line** — whole-world state (cycle, prod engine range,
+  cadence), owned by a Claude terminal.
+- **Any other lane's NEXT line** — stale or not, it is that lane's to fix; this
+  binds you identically to the Claude terminals.
+- **Everything else in the file** — no header edits, new sections, or prose. The
+  file is a header line, a PIN line, and one NEXT line per lane.
 
-**What you must not touch:**
-
-- **The `**PIN:**` line.** It is whole-world state — cycle, prod engine range,
-  cadence — and a Claude terminal owns it. Never edit it.
-- **Any other lane's NEXT line.** If `NEXT[media]` is stale, that is media's line
-  to fix. Correct content in the wrong hand is still wrong; this rule has governed
-  the four Claude terminals since S304 and it binds you identically.
-- **Everything else in the file.** No header edits, no new sections, no prose. The
-  file is a header line, a PIN line, and one NEXT line per lane. That is all it
-  has ever been allowed to be.
-
-**Mechanically:** `SESSION_CONTEXT.md` is control-plane, so the pre-commit hook
-normally blocks it without `CLAUDE_CTL=1`. There is a narrow carve-out for exactly
-this close — a commit whose only control-plane change is one external lane's own
-NEXT line passes without the flag and prints
+**Mechanics:** `SESSION_CONTEXT.md` is control-plane; the pre-commit hook blocks
+it without `CLAUDE_CTL=1`. Narrow carve-out: a commit whose only control-plane
+change is one external lane's own NEXT line passes without the flag and prints
 `external-lane handoff — NEXT[<you>] only, control-plane gate waived`. Touch the
 PIN, a second lane, or any other protected path in the same commit and the whole
-commit blocks. **Do not set `CLAUDE_CTL=1` to get around that** — the flag is a
-Claude session's opt-in to the whole control plane, and reaching for it here is the
-thing the carve-out exists to make unnecessary. A block means you staged more than
-your own line; unstage the rest.
+commit blocks. **Do not set `CLAUDE_CTL=1` to get around that**; a block means
+you staged more than your own line — unstage the rest.
 
-**One asymmetry:** when a Claude terminal reviews and lands a batch you authored
-(engine-sheet did this for Codex at S338), the landing goes in *that terminal's*
-NEXT line and commit. You still write your own line for the work you did.
+**One asymmetry:** when a Claude terminal reviews and lands a batch you
+authored, the landing goes in *that terminal's* NEXT line and commit. You still
+write your own line for the work you did.
 
 ## Deployment and external-write restrictions
 
-**Sandbox proving-loop carve-out (builder decision, 2026-08-09):** Kimi and Codex
-may run the groundhog proving loop against the ACTIVE sandbox bench without
+**Sandbox proving-loop carve-out (builder-direct):** Kimi and Codex may run the
+groundhog proving loop against the ACTIVE sandbox bench without
 per-conversation approval — `clasp push`/`clasp deploy` targeting the sandbox
 deployment only, token-fired bench cycles, and sandbox-sheet verification reads.
 Procedure and bench IDs: `docs/reference/DEPLOY.md` §Groundhog; the fire token
-loads from the shared env file via the repository loaders (never print it).
-Everything below still applies to LIVE: live clasp deploys, live cycles, and
+loads from the shared env file via the repository loaders (never print it). All
+restrictions below apply to LIVE: live clasp deploys, live cycles, and
 live-sheet writes remain gated exactly as listed.
 
 Without explicit approval in the current conversation, do not:
@@ -516,7 +388,8 @@ Without explicit approval in the current conversation, do not:
   that mutates external state;
 - save files to Drive;
 - publish or ingest an Edition, Dispatch, Supplemental, or Interview;
-- write to Supermemory or claude-mem;
+- write to Supermemory or claude-mem (lane hand-writes to `sl-godworld` per
+  §Shared memory excepted);
 - alter PM2 processes or persistence;
 - edit or install crontab entries;
 - restart services;
@@ -530,241 +403,112 @@ is not approval for a live run.
 
 ## Secrets and credentials
 
-Do not print, copy, inspect, summarize, or move credential contents.
-
-Credential locations documented by the repository are operational pointers only.
-Use existing repository loaders when an explicitly approved command requires
-credentials. Never source an environment file merely to inspect it.
-
-Do not add secrets to code, documentation, output, fixtures, logs, diffs, commits,
-or command lines.
+Never print, copy, inspect, summarize, or move credential contents. Documented
+credential locations are operational pointers only: use existing repository
+loaders when an explicitly approved command requires credentials; never source
+an environment file merely to inspect it. No secrets in code, documentation,
+output, fixtures, logs, diffs, commits, or command lines.
 
 ## Documentation requirements
 
-Before creating or editing documentation, follow `docs/SCHEMA.md`.
+Follow `docs/SCHEMA.md` (frontmatter, page types, tags, wikilinks, changelogs)
+before creating or editing documentation. Boot-visible rules:
 
-**No isolated Markdown files.** Every `.md` created anywhere in the repository
-must be registered in its canonical index in the same approved change. Active
-documents and root-level references register in `docs/index.md`; research
-instances register in `docs/research/index.md`; generated or temporary Markdown
-registers in the owning pipeline's canonical artifact index or manifest. If no
-canonical index exists, stop and ask the builder where the file belongs before
-creating it. A pointer from an unrelated document is not a substitute for an
-index entry.
-
-For every new active document other than a research instance:
-
-- use the prescribed filename and folder;
-- add required YAML frontmatter;
-- use the controlled page type and tags;
-- record sources and pointers;
-- use `[[wikilinks]]` for internal docs;
-- add the document to `docs/index.md` in the same approved change;
-- update the document's changelog when appropriate.
-
-For a new research instance, follow `docs/research/RESEARCH_TEMPLATE.md` and register it
-in `docs/research/index.md` instead of `docs/index.md`.
-
-When renaming or moving a document:
-
-- find every inbound reference with `rg`;
-- update all affected links in the same change;
-- update `docs/index.md`;
-- do not leave broken pointers.
-
-Do not copy large bodies between documents. Prefer one canonical body with
-pointers from other files.
-
-Do not turn historical records into current instructions. Preserve decision
-history and mark supersession explicitly.
-
-If code changes a documented contract, update the owning active reference,
-schema, exemplar, or plan in the same change. Parser, validator, emitter, and
-detector changes must preserve the project's fail-loud format-contract rule.
+- **No isolated Markdown files.** Every `.md` registers in its canonical index
+  in the same approved change: active docs → `docs/index.md`; research
+  instances → `docs/research/index.md`; generated/temporary Markdown → the
+  owning pipeline's artifact index or manifest. No index exists → stop and ask.
+- Renaming or moving a doc: `rg` every inbound reference, update all links and
+  `docs/index.md` in the same change, leave no broken pointers.
+- One canonical body per topic; other files point at it. Historical records
+  never become current instructions — mark supersession explicitly.
+- Code that changes a documented contract → update the owning reference, schema,
+  exemplar, or plan in the same change. Parser/validator/emitter/detector
+  changes preserve the fail-loud format-contract rule.
 
 ## Lifecycle states
 
 System lifecycle and work-item state are different concepts. Do not infer one
 from the other.
 
-### Active
+- **Active** — current, load-bearing; its contract is authoritative; approved
+  fixes and investment OK. An active plan ≠ every phase shipped.
+- **Frozen** — runnable, no new investment; modify only for explicitly approved
+  compatibility/safety/blocking defects; not "retired" or "dead" unless an
+  active decision says so.
+- **Archived** — historical, read-only; never a current runbook; find the active
+  successor before implementing from it.
+- **Halted** — stopped as unsafe or contaminated; do not run, revive, migrate,
+  publish from, or build on without an explicit builder decision; read the
+  post-mortem and resumption gates first. Stricter than frozen.
 
-An active system is current and load-bearing.
-
-- Treat its active reference or contract as authoritative.
-- It may receive approved fixes and planned investment.
-- Validate changes against its current consumers.
-- Do not assume an active plan means every phase has shipped.
-
-### Frozen
-
-A frozen system remains runnable but receives no new investment.
-
-- Do not extend or redesign it.
-- Modify it only for an explicitly approved compatibility, safety, or blocking
-  defect.
-- New work should target the named successor or fork.
-- Do not describe frozen as retired or dead unless an active decision says so.
-
-### Archived
-
-An archived system or document is historical and read-only.
-
-- Do not execute it as a current runbook.
-- Do not implement directly from it without locating the active successor.
-- Do not edit it to reflect current behavior.
-- Update active pointers rather than rewriting history.
-
-### Halted
-
-A halted system was stopped because continuation was unsafe, contaminated, or
-otherwise unacceptable.
-
-- Do not run, revive, migrate, publish from, or build on it without an explicit
-  builder decision.
-- Read its post-mortem and stated resumption gates first.
-- A halted system is stricter than frozen.
-
-### Work-item state
-
-These describe work-item state, not system lifecycle. This is the complete
-controlled vocabulary a rollout state cell may contain — it matches
-`scripts/docLoopStatus.js` exactly, and a row using anything else is skipped by
-the archive sweep:
-
-- **ready** — sufficiently designed for authorized implementation;
-- **in-progress** — partially built or being validated;
-- **blocked** — cannot advance until its named dependency or decision clears;
-- **needs-info** — requires evidence or a builder decision;
-- **parked** — intentionally deferred;
-- **done-pending-archive** — complete, awaiting the next sweep to
-  `ROLLOUT_ARCHIVE.md`;
-- **wontfix** — decided against; rare, and the row records why.
-
-`draft` is a document status tag from `docs/SCHEMA.md` §5, not a work-item
-state. Do not put it, `queued`, or any other invented word in a state cell.
-
-Use the active rollout tracker and owning plan together. If their states disagree,
-report the drift before acting.
+Rollout state cells use exactly this vocabulary (matches
+`scripts/docLoopStatus.js`; anything else is silently skipped):
+`ready`, `in-progress`, `blocked`, `needs-info`, `parked`,
+`done-pending-archive`, `wontfix`. `draft` is a `docs/SCHEMA.md` document status,
+never a work-item state. Rollout tracker and owning plan disagree → report the
+drift before acting.
 
 ## Pipeline safety
 
 The legacy compiled Edition path, deep-dispatch fork, and headless newsroom may
-coexist. Do not assume that one has replaced another solely because newer code
+coexist. Do not assume one has replaced another solely because newer code
 exists.
 
-Before changing pipeline code, establish:
-
-- which path currently publishes;
-- which path is active, frozen, staged, or probationary;
-- which user approval gate applies;
-- whether the artifact is draft, staged, published, or canon-ingested;
-- which reviewer/canon gates are mandatory;
-- whether the change can write to external systems.
+Before changing pipeline code, establish: which path currently publishes; which
+path is active, frozen, staged, or probationary; which user approval gate
+applies; whether the artifact is draft, staged, published, or canon-ingested;
+which reviewer/canon gates are mandatory; whether the change can write to
+external systems. Current path states live in
+`docs/EDITION_PIPELINE_DEEP_DISPATCH.md`.
 
 Draft or staged newsroom output is not canon. Never make unpublished material
-retrievable as established fact.
-
-No artifact may cross into publication, Drive, Sheets, or canon ingestion without
-the applicable user approval and validation gates.
+retrievable as established fact. No artifact may cross into publication, Drive,
+Sheets, or canon ingestion without the applicable user approval and validation
+gates.
 
 ## Live automation
 
-These jobs run autonomously on the droplet. Several write to Sheets,
-Supermemory, Discord, and paid model APIs on a schedule. Treat them as live
-production: do not edit their scripts, crontab entries, or PM2 processes
-without explicit approval, and expect their output directories and logs to
-change under you.
-
-### Crontab (UTC; verify with `crontab -l` before relying on this table)
-
-| Schedule | Script | What it does |
-|---|---|---|
-| daily 05:00 | `scripts/backup.sh` | Tars credentials/logs/memory to `backups/` (keeps 7), uploads to Drive |
-| daily 06:00 | `scripts/newsroom-digest.js` | Phase 2.3 morning digest of the last 36h of newsroom runs → `output/cron-compare/digest-YYYY-MM-DD.md` (review surface for Mike) |
-| Mon–Fri 06:15 / 13:15 / 18:15 | `scripts/cron-desk-run.js --stage={angle,report,write} --fanout` | Phase 2.3 three-wake fan-out: 6 byline journalists/day on least-recently-used rotation (quotas civic 2, sports 2, culture 1, business 1). Angle builds today's rota; report gathers citizen quotes; write runs the Rhea gate (`--gate-backend api`, OpenRouter gemini-3.5-flash ~$0.06/run) → staged/flagged behind the probation wall, **never canon** until the Saturday compile |
-| 07:00 / 12:00 / 19:00 | `scripts/discord-reflection.js` | Mags reflection over Discord logs → citizen page + Supermemory + claude-mem (Anthropic API) |
-| 07:30 / 12:30 / 21:30 | `scripts/citizen-wake.js --wake=...` | Citizen-loop wake: Sheets + DeepSeek reflection → Supermemory page + gated `Reflection_Intake` row |
-| daily 17:00 | `scripts/citizen-exchange.js` | One agent-to-agent exchange per day → Supermemory + intake row; transcripts in `output/exchanges/` |
-| daily 08:00 | `scripts/notebooklmDailyNews.js` | Source-grounded NotebookLM newsroom listening brief; not canon |
-| Sat 16:00 | `scripts/cron-saturday-run.js --apply` | pipeline.45 Saturday run: EIC accuracy scorecard (%-to-90 graduation metric) → curation → Mags narration → canon door (ingestEdition + permanent NotebookLM) → per-article Supermemory sweep → Citizen_Media_Usage/Storyline_Ledger ingest. THE weekly publication event |
-| every 6h | `scripts/server-health-check.sh` | Disk/RAM/PM2/dashboard thresholds; Discord alert only on breach (silent when healthy) |
-| Wed 04:00 | `scripts/weekly-maintenance.sh` | Engine health audit; Discord alert on issues |
-| 1st of month 03:00 | `scripts/snapshot-droplet.sh` | DigitalOcean snapshot, keeps 1 |
-
-The crontab header comment mentioning a "Mags Daily Heartbeat" refers to
-`scripts/daily-reflection.js`, disabled since S187 — an orphan, not a live job.
-
-### PM2 processes (verify with `pm2 list`)
-
-- `godworld-dashboard` (online) — Express + React dashboard, port 3001.
-- `mags-bot` (online) — Discord bot; historically high restart count.
-- `wd-cards-daemon` (online) — world-data citizen-card builder.
-- `moltbook` (stopped between its scheduled runs) — do not restart manually
-  without approval.
-- `spacemolt-miner` is removed from the live PM2 registry; do not re-add or
-  restart it without approval.
+Cron jobs and PM2 processes on the droplet are live production — several write
+to Sheets, Supermemory, Discord, and paid model APIs on schedule. Do not edit
+their scripts, crontab entries, or PM2 processes without explicit approval, and
+expect their output directories and logs to change under you. Schedules, job
+inventory, and runbooks: `docs/OPERATIONS.md`.
 
 ## Newsroom and agent landscape
 
-The agent layer lives in `.claude/agents/` (read-only control plane — this is
-orientation, not a license to edit). Ownership is split across terminals even
-though all agents share one directory:
+The agent layer lives in `.claude/agents/` — read-only control plane, not a
+license to edit. Three publication pipelines coexist (compiled Edition path,
+deep-dispatch fork, headless cron newsroom) with different gates and states; see
+`docs/EDITION_PIPELINE_DEEP_DISPATCH.md` before touching any of them. Ungated
+newsroom output is sample-only, never canon. `openclaw-skills/` is archived
+legacy; do not implement from it.
 
-- **Media desks (media terminal):** civic, sports, culture, business, chicago,
-  letters, podcast desks; `dj-hartley` (photography); `freelance-firebrand`
-  (adversarial columnist). Most agents carry the four-file
-  IDENTITY/LENS/RULES/SKILL structure.
-- **Review lanes (media terminal):** `rhea-morgan` (Sourcing), `final-arbiter`,
-  `source-search` (agentic RAG), plus the deterministic capability reviewer in
-  `scripts/`.
-- **Citizen voices:** `citizen-voice-*` (canon citizens for interviews, Discord,
-  and the citizen loop).
-- **Civic voices (civic terminal):** `civic-office-*` (8 offices),
-  `civic-project-*` (4 project directors), `city-clerk`.
-- **Engine-side:** `engine-validator`.
-
-Three publication pipelines coexist (see Pipeline safety):
-
-1. **Compiled Edition path** (sift → write-edition → post-publish) — FROZEN
-   S313. Runnable, no new investment.
-2. **Deep-dispatch fork** (desk-slice → deep-dispatch → desk-review →
-   post-publish) — the FLAGSHIP (pipeline.44, S313).
-3. **Headless cron newsroom** (`scripts/cron-desk-run.js` →
-   `cron-desk-writer.js` → `cron-rhea-gate.js`) — in active build; see
-   `docs/plans/2026-07-20-headless-newsroom-pipeline.md`. Ungated output is
-   sample-only, never canon.
-
-`openclaw-skills/` at repo root is archived Cycle-78-era legacy (superseded by
-the `.claude/skills/` pipeline); do not implement from it.
-
-## Subagent cost discipline (kimi, codex — builder decision, 2026-08-01)
+## Subagent cost discipline (kimi, codex)
 
 A CLI lead never fans out to its own tier by default. Grunt subagent work —
 exploration sweeps, mechanical edits, test runs, bulk reads — goes to the
 cheapest model that clears the bar. The lead holds judgment and orchestration;
-the fan-out runs a tier down, where the harness supports model binding.
+the fan-out runs a tier down.
 
 - **Kimi Code:** bind subagents to the K2.7-code tier via `/secondary_model`
   (experimental — enable in `/experiments` first). K3-tier stays for the lead
   and for subtasks with a genuine reasoning floor.
-- **Codex:** use the cheapest subagent tier the harness exposes for grunt
-  work.
+- **Codex:** use the cheapest subagent tier the harness exposes for grunt work.
 
 Cheaper-by-default, not cheapest-always: escalate a subagent back up only when
 the subtask has a real reasoning floor (adversarial canon calls, subtle code
-review). This mirrors `docs/MODEL_HIERARCHY.md` §8, which binds the Claude
-terminals; this section binds the CLI lanes.
+review). Mirrors `docs/MODEL_HIERARCHY.md` §8 (binds the Claude terminals); this
+section binds the CLI lanes.
 
-### Doc propagation is subagent work (builder decision, 2026-08-01)
+### Doc propagation is subagent work
 
-When a change touches the Simulation_Ledger or other canon schema/state, the
+Changes touching the Simulation_Ledger or other canon schema/state: fan the
 correlating Markdown updates (`docs/SIMULATION_LEDGER.md`, `docs/SPREADSHEET.md`,
-`schemas/SCHEMA_HEADERS.md` pointers, `docs/index.md` entries) are fanned to the
-cheap subagent tier: the subagent pulls the relevant MDs and updates them, the
-lead reviews the diff before commit. The lead keeps `docs/index.md` registration
-discipline in mind on every doc touch — no isolated Markdown files — but the
-mechanical propagation itself is not lead-tier work.
+`schemas/SCHEMA_HEADERS.md` pointers, `docs/index.md` entries) to the cheap
+subagent tier; the lead reviews the diff before commit and keeps `docs/index.md`
+registration discipline (no isolated Markdown files). The mechanical propagation
+is not lead-tier work.
 
 ## Operating posture
 

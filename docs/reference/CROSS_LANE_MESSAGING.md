@@ -56,6 +56,25 @@ tmux capture-pane -p -t <pane_id> -S -40
 
 `agy`'s busy marker is `esc to cancel`; other CLIs differ — check the footer before relying on it.
 
+## Inbound — a lane blocked on Claude
+
+The channel runs both ways, and the `NEXT[<lane>]` line only reaches Claude at
+its **next boot**. A lane blocked mid-session on a spec, ruling, routing
+correction, or approval should message **research-build** rather than parking
+and waiting for the operator to notice.
+
+Same procedure in reverse — resolve the pane by window name, capture first,
+`send-keys -l` then a separate `C-m`:
+
+```bash
+PANE=$(tmux list-panes -a -F "#{window_name} #{pane_id}" | awk '/research-build/{print $2}')
+tmux capture-pane -p -t "$PANE" -S -25    # confirm Claude is booted and idle
+```
+
+A pane at bare `bash` means research-build is not running — fall back to the
+`NEXT[<lane>]` line. This rule is stated for the non-Claude lanes in
+`AGENTS.md` §Blocked on Claude.
+
 ## When to use it
 
 A live correction another lane needs **now** — wrong routing, a canon error about to be built on, a spec handoff that unblocks it. For anything that can wait, the `NEXT[<lane>]` line in `SESSION_CONTEXT.md` is the normal handoff and costs nothing.

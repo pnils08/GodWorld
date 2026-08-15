@@ -322,6 +322,29 @@ npm run lint
 - One commit = one coherent approved change; no pre-existing unrelated
   modifications.
 
+## Blocked on Claude? Send the message. Do not park.
+
+The `NEXT[<you>]` line is a **close-out** handoff — it reaches Claude at its next
+boot, not now. If you are blocked mid-session and waiting on Claude (a spec, a
+ruling, a routing correction, an approval), message the research-build terminal
+directly. Do not stop and wait for the builder to notice.
+
+- research-build is **tmux window 1**. Resolve the pane id live — ids are not
+  stable across restarts:
+  `tmux list-panes -a -F "#{window_name} #{pane_id}" | grep research-build`
+- Confirm it is idle first: `tmux capture-pane -p -t <pane_id> -S -25`.
+  A pane at bare `bash` means Claude is not booted — fall back to `NEXT[<you>]`.
+- Send, two steps (the first Enter is swallowed by paste mode):
+  `tmux send-keys -t <pane_id> -l "$MSG"` then `sleep 1` then
+  `tmux send-keys -t <pane_id> C-m`
+- One line, no embedded newlines. Open with who you are and what you are
+  blocked on.
+
+Full procedure incl. reading the reply: `docs/reference/CROSS_LANE_MESSAGING.md`.
+
+Applies to genuine blockers only. Anything that can wait until the next boot
+goes in `NEXT[<you>]` and costs nothing.
+
 ## Session close (kimi, codex, grok, antigravity)
 
 Each external lane carries one `**NEXT[<you>]:**` line in `SESSION_CONTEXT.md`,

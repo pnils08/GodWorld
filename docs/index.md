@@ -98,7 +98,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 
 - **[[engine/ROLLOUT_PLAN]]** — compressed rollout (S152): active plans, parked, spine-completed, open work items, pointers to per-phase plan files. *(plan, engine, active)*
 - **[[engine/rollout-rules]]** — operating doctrine for the doc-work pipeline (S251, governance.30 Task 1). Four roles (research / plan / rollout / archive), the clean-tracker discipline + gap-log-is-research keystone (skill terminals don't blind-log on rollout), state labels, group taxonomy, how to add/close, filing, archiving + sweep code. Every terminal follows it; ROLLOUT_PLAN points here. Rationale lives in ADR-0005. *(reference, governance, active)*
-- **[[engine/ENGINE_REPAIR]]** — tactical tracker for known engine/simulation defects surfaced by the S148 audit. Pointers only. *(plan, engine, active)*
+- **[[engine/ENGINE_REPAIR]]** — **RETIRED S371, history only.** Tactical tracker for engine/simulation defects surfaced by the S148 audit; 30 closed rows kept as the repair record. Open work moved to [[engine/ROLLOUT_PLAN]] (`engine.106`, `engine.107`); file new engine defects as `engine.*` rows. *(plan, engine, retired)*
 - **[[engine/archive/CHAOS_CARS_DEPLOY]]** — C99-gated deploy runbook for engine.11 chaos-cars (S265). Gate criteria (engine.38 C99 smoke must clear first), pre-deploy gates, 10-file deploy surface, post-deploy smoke, cross-terminal unblocks. Built + on main, NOT yet clasp-deployed. Parent: [[plans/2026-05-07-chaos-cars-engine]]. *(runbook, engine, deploy, active)*
 - **[[engine/ROLLOUT_ARCHIVE]]** — completed phase details. Read on demand. *(archive, engine, archived)*
 - **[[engine/ENGINE_MAP]]** — every engine function in execution order. *(reference, engine, active)*

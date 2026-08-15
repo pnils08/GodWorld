@@ -830,6 +830,19 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 <!-- ARCHIVE-PASS ORDERING CONVENTION (G-SE4, added S248). Foundational Phase sections + named passes through this S227 anchor are CHRONOLOGICAL top→bottom (oldest first). The post-S227 sweep-pass region below is NEWEST-FIRST going forward: insert a new "## S<NN> Archive Pass" block immediately below this comment (above the current first post-S227 pass), so the most recent pass sits nearest this anchor. The existing post-S227 region is NOT cleanly sorted (S230/S238/S236/S235/S234/S233 as of S248) — do NOT re-sort it; just insert new passes here at the top of the run. Each pass header records its own session + a "This pass: N rows" line. -->
 
+## S371 Archive Pass (2026-08-15, research-build) — post-S370 closures sweep
+
+6 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 pipeline.* + 4 engine.* + 1 research.*.
+
+- **pipeline.52** [research-build] — Journalist heat-slice packs complete; Task 6 civic-domain pack and Task 7 bookkeeping closed **State at archive:** done-pending-archive. Pointer: [[../plans/2026-08-08-journalist-heat-slice-packs]]
+- **engine.9** [engine-sheet] — Bounded test surface — offline default and 131/131 local fence complete **State at archive:** done-pending-archive. Pointer: [[ENGINE_REPAIR]] — detail in pointer (relocated 2026-07-02)
+- **engine.77** [engine-sheet] — Sports roster/life intake — attended roster-EVENT proof landed S369 (plan changelog); unattended gated on exclusion design **State at archive:** done-pending-archive. Pointer: [[../plans/2026-08-02-sports-stat-event-intake]] §Track B
+- **engine.101** [kimi] — Sheet↔cron loop closure (kimi) — ALL SHIPPED: family perception, bond write-back (intake A–K + drain nudge), health slice (loadHealthState wired into wake/voice/exchange prompts 2026-08-10) **State at archive:** done-pending-archive. Pointer: [[../research/2026-08-03-game-environment-review]] §Addendum
+- **engine.103** [engine-sheet / research-build] — WealthLevel v15 — bench confirmed S363; reader eyeball S364 (plan §Reader-file eyeball); LIVE DEPLOYED S364 (Mike-direct: no code ever waits); column self-heals next live fire **State at archive:** done-pending-archive. Pointer: [[../plans/2026-08-09-wealthlevel-networth-bands]]
+- **research.26** [research-build] — Data-analyst retrieval seat — seat SHIPPED S334 as source-search attributed to Marbury (794861f5 + 4138acd1); Rhea attribution superseded by separation-of-duties; verdict map zero gaps **State at archive:** done-pending-archive. Pointer: [[../plans/2026-08-10-data-analyst-retrieval-seat]]
+
+This pass: 6 rows — pipeline.52 + engine.9 + engine.77 + engine.101 + engine.103 + research.26. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S359 Archive Pass (2026-08-07, research-build) — solo-seat week + S357 batch closures sweep
 
 10 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6). Each entry preserves the original ROLLOUT description verbatim. Cluster: 6 engine.*, 1 civic.*, 1 research.*, 2 governance.*.

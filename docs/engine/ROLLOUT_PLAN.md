@@ -111,6 +111,8 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | civic.14 | Initiative_Tracker contract + fine-tune | in-progress | research-build / engine-sheet | [[../plans/2026-06-01-initiative-tracker-contract]] + [[../research/2026-06-01-initiative-tracker-state]] — detail in pointer (relocated 2026-07-02) |
 | civic.15 | Civic cron city-hall (Mike-direct S343); Phases 0-4 built S344, dry-Sunday probation before --apply flip | in-progress | engine-sheet | [[../plans/2026-07-28-civic-cron-city-hall]] |
 | civic.17 | Civic office district packs and Sunday city-hall depth (not newsroom civic desk) | ready | grok | [[../plans/2026-08-15-civic-office-lived-packets]] |
+| civic.18 | District map reconciliation — 3 drifted copies vs 22 live hoods | ready | engine-sheet | [[../plans/2026-08-15-district-map-reconciliation]] |
+| civic.19 | Council as actors — districts own approval, author their own initiatives | blocked | research-build | [[../plans/2026-08-15-district-map-reconciliation]] §6 |
 
 ### infrastructure.* — Supermemory, services, ingest
 

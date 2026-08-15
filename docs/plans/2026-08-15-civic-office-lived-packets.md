@@ -100,7 +100,7 @@ Not in v1: full voice-file rewrite, election/chair-change, live Sheet writes.
   2. After a good statement, **save to the same wiki** (already wired; keep it).
   3. Keep the ungrounded-number wall. No `--apply`.
 - **Verify:** `node --check scripts/cron-civic-run.js`; one `--stage=datawake --dry-run` shows pack path + non-empty limits.
-- **Status:** [ ] open
+- **Status:** [x] weekday datawake eats OFFICE/1 JSON + wiki. Prompt is pack + output schema only. 2026-08-15 dry CRC 8 people / 10 facts.
 
 ### Task 4: One attended dry run, then stop
 

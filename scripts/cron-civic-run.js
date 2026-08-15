@@ -50,6 +50,7 @@ const { getDistrictForNeighborhood } = require('../lib/districtMap');
 const getCurrentCycle = require('../lib/getCurrentCycle');
 const officeWall = require('./officeWall');
 const trackerSnapshot = require('./initiativeTrackerSnapshot');
+const { buildPack, writePack } = require('./buildCivicOfficeSlice');
 
 /** Non-fatal: prior CIVIC positions for holder of agentDir. */
 async function positionWallInject(officeMap, agentDir) {
@@ -1488,13 +1489,13 @@ async function runDatawake() {
 
   if (process.argv.includes('--dry-run')) {
     for (const office of rota) {
-      const slice = domainSlice(office, sections, hoods, briefs, tracker, audit);
+      const pack = buildPack({ cycle, agentDir: office.agentDir, root: ROOT });
       const persona = readPersonaDir(office.agentDir);
       log('DRY ' + office.agentDir + ' holder=' + office.holder +
         ' personaBytes=' + (persona ? persona.length : 0) +
-        ' sliceChars=' + slice.length);
+        ' facts=' + (pack.known || []).length +
+        ' people=' + ((pack.exposure && pack.exposure.subjects) || []).length);
       if (!persona) throw new Error('no IDENTITY/RULES for ' + office.agentDir);
-      if (!slice.length) throw new Error('empty domain slice for ' + office.agentDir);
     }
     console.log('=== datawake dry-run: ' + rota.length + ' seats, no model call ===');
     return;
@@ -1504,15 +1505,15 @@ async function runDatawake() {
   const results = [];
   for (const office of rota) {
     try {
-      const slice = domainSlice(office, sections, hoods, briefs, tracker, audit);
+      const pack = buildPack({ cycle, agentDir: office.agentDir, root: ROOT });
+      const packFile = writePack(pack, ROOT, cycle);
+      log('pack ' + path.relative(ROOT, packFile));
+      const hay = JSON.stringify(pack);
       const wallInj = await positionWallInject(officeMap, office.agentDir);
       const user = [
-        'It\'s a working ' + ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][day] + 'day and you are in the room, not writing a briefing. Speak as yourself. The numbers below already live in the sheets — do not recite them. Say who came in, what you did with your hands, what the place smelled like. This is your domain this cycle:',
-        '', slice, '',
-        wallInj,
-        'Speak as yourself doing the job — one public statement or action about what these numbers mean for the people you serve. You argue initiatives on Sundays; today you fight for your constituents with what your desk shows you.',
-        'Respond with ONLY JSON (no fences): {"office": "' + voiceSlug(office.agentDir) + '", "holder": "' + office.holder + '", "statement": "<2-4 sentences in your voice>", "action": "<the one concrete thing you are doing about it today, or null>", "numberMoved": "<the single most important number/shift in plain words>"}',
-        'Never invent citizens, statistics, or events not present above.',
+        hay,
+        wallInj || '',
+        'JSON only: {"office":"' + voiceSlug(office.agentDir) + '","holder":"' + office.holder + '","statement":"","action":null,"numberMoved":""}',
       ].join('\n');
       const persona = readPersonaDir(office.agentDir);
       let j = null;
@@ -1529,7 +1530,7 @@ async function runDatawake() {
           attemptUser = user + '\n\nYOUR PREVIOUS ATTEMPT RETURNED NO USABLE JSON. Respond with ONLY the JSON object described above.';
           continue;
         }
-        const bad = ungroundedNumbers(slice, [cand.statement, cand.action, cand.numberMoved], { district: office.district, cycle });
+        const bad = ungroundedNumbers(hay, [cand.statement, cand.action, cand.numberMoved], { district: office.district, cycle });
         if (!bad.length) { j = cand; break; }
         log(office.agentDir + ' attempt ' + attempt + ': ungrounded number(s) ' + bad.join(', '));
         if (attempt === 2) throw new Error('fabricated statistic(s) after retry: ' + bad.join(', '));

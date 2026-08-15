@@ -158,8 +158,12 @@ ROSTER
   # and pushed to origin/main"), and newsroom canon (Rhea gate, S332 probation) sitting
   # in a build container. Noisy and cross-contaminated, and the 0.6 similarity floor
   # passed it through. Supermemory is a write-then-query-later store, not a boot feed.
+  # S372 (Mike-direct): ONE shared container for every lane — Claude terminals and
+  # house-guest CLIs alike save to and search sl-godworld, so all work draws on the
+  # same brain regardless of which model is reasoning. Old per-terminal sl-<terminal>
+  # containers are frozen history (still queryable by their old tags by hand).
   if [ "$MAGS_ONLY" != "yes" ] && [ -n "$TERMINAL_NAME" ]; then
-    echo "Supermemory (on-demand, never auto-pulled at boot): your container is sl-$TERMINAL_NAME. Save: npx supermemory remember \"...\" --tag sl-$TERMINAL_NAME (--static = permanent). Recall: npx supermemory search \"...\" --tag sl-$TERMINAL_NAME."
+    echo "Supermemory (on-demand, never auto-pulled at boot): the shared all-lane container is sl-godworld. Save: npx supermemory remember \"...\" --tag sl-godworld (--static = permanent). Recall: npx supermemory search \"...\" --tag sl-godworld. (Per-terminal sl-<terminal> containers frozen S372 — query by old tag only for history.)"
     echo ""
   fi
 

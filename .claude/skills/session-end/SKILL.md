@@ -72,7 +72,7 @@ Three sub-actions:
 node scripts/sessionEndMechanical.js --terminal=<name> [--rotate-history]
 ```
 
-Wraps: **session summary → Supermemory (best-effort S283 — mirrors claude-mem's session summary to `session-logs` + `sl-<terminal>`; zero LLM calls, idempotent, never blocks a close)** → `auditPlanTagDrift` (informational — drift never fails close) → ROLLOUT conformance lint (informational) → cross-terminal git stack check (read-only report) → `pm2 restart`.
+Wraps: **session summary → Supermemory (best-effort S283 — mirrors claude-mem's session summary to `session-logs` ONLY (S341 — `sl-*` is hand-write; the shared hand-write container is `sl-godworld` as of S372); zero LLM calls, idempotent, never blocks a close)** → `auditPlanTagDrift` (informational — drift never fails close) → ROLLOUT conformance lint (informational) → cross-terminal git stack check (read-only report) → `pm2 restart`.
 
 Retired sub-steps, so nobody goes looking for them: `minimalHandoffGuard` (S298, Mike-direct — shape/length caps are model judgment now), `rotateJournalRecent` + JOURNAL content-quality (S300 journal freeze), `writeShippedBlock` (ADR-0009 §loop-tightening — the carried set is hand-written in Step 2), `rolloutTriage` (S235).
 

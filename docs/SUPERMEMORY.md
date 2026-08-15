@@ -435,11 +435,14 @@ read lane at SessionStart. Before later user prompts, reasoned recall decides
 whether a scoped memory search is useful. Treat recalled material as background
 to verify against repository and canon authorities.
 
-### Terminal Tagging (S135)
+### Terminal Tagging (S135 → shared container S372)
 
-For deliberate terminal memory, use the terminal's `sl-<terminal>` tag and keep
-the fact attributable. Do not simulate terminal isolation by adding prose
-prefixes to canon or city-state containers.
+For deliberate work memory, ALL lanes — Claude terminals and non-Claude CLIs
+(kimi/codex/antigravity) — save to and search the ONE shared tag `sl-godworld`
+(S372, all work draws on the same brain; only the reasoning model differs).
+Per-terminal `sl-<terminal>` tags are frozen S372 history — query by old tag by
+hand only. Keep the fact attributable. Do not simulate terminal isolation by
+adding prose prefixes to canon or city-state containers.
 
 ### During a Session
 - **Need past context?** Search `mags`: "What happened with the ledger recovery?" "What did we decide about citizen routing?"

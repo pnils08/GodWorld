@@ -11,7 +11,8 @@
 // Container design (S341 — was the citizen-pages umbrella+specific dual tag):
 //   containerTags: ["session-logs"]   ← auto-mirror writes HERE ONLY
 //   → search all session logs via "session-logs"; narrow by metadata.terminal.
-// `sl-<terminal>` is NO LONGER written automatically. It is a hand-write container:
+// `sl-*` is NO LONGER written automatically. Hand-write container (S372: the shared
+// all-lane container is `sl-godworld`; per-terminal `sl-<terminal>` tags are frozen history):
 // facts you deliberately put there so a future query surfaces them. Rationale in
 // full at the containerTags line below — short version, this script posts a whole
 // session log as one doc, Supermemory chunks it, and each chunk becomes its own
@@ -151,8 +152,8 @@ async function main() {
     // rows before mirroring), and newsroom canon (Rhea gate, S332 probation) — that
     // last because the tag records which TERMINAL WAS OPEN, not what the content is
     // about. Deliberate writes were drowned by chunk debris.
-    // Narrative history still lands here under `session-logs`. `sl-<terminal>` is now
-    // written ONLY by hand (npx supermemory remember ... --tag sl-<terminal>).
+    // Narrative history still lands here under `session-logs`. Deliberate facts are
+    // written ONLY by hand to the shared container (npx supermemory remember ... --tag sl-godworld, S372).
     // `metadata.terminal` below keeps these docs filterable by terminal regardless.
     containerTags: ['session-logs'],
     metadata: {
@@ -182,7 +183,7 @@ async function main() {
     });
     if (!res.ok) warnExit(`API ${res.status}: ${(await res.text()).slice(0, 200)}`);
     const data = await res.json();
-    console.log(`  ✓ session log → Supermemory [session-logs, sl-${args.terminal}] doc ${data.id || '(id n/a)'} (${content.length} chars, ${rows.length} summary rows folded)`);
+    console.log(`  ✓ session log → Supermemory [session-logs] doc ${data.id || '(id n/a)'} (${content.length} chars, ${rows.length} summary rows folded)`);
   } catch (err) {
     warnExit(`POST failed: ${err.message}`);
   }

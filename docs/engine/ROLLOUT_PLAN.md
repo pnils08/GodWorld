@@ -2,7 +2,7 @@
 
 **This file is canonical for open/closed work** (S207). Pointer-only: one line per job, detail lives in the pointer doc — never here (S286 hard rule, Mike-direct).
 
-**Status:** ACTIVE (building) | **Last Updated:** 2026-08-15 — S371 consolidation (research-build). This file is now the ONLY open-work tracker: [[ENGINE_REPAIR]] retired to history, its 2 unique open rows migrated as `engine.106`/`engine.107`, and `engine.105` registered retroactively after shipping live with no row. S371 sweep moved 6 `done-pending-archive` rows out. 110 rows open — of the 107 triaged at sweep close, 40 were touched within 30 days, 53 are stale past 30 days, and 14 have never been cited by any commit; the other 3 are `engine.105`/`106`/`107`, registered after the triage ran. Full triage table + the 14 ids: [[ROLLOUT_ARCHIVE]] §S371 triage.
+**Status:** ACTIVE (building) | **Last Updated:** 2026-08-15 — S371 consolidation (research-build). This file is now the ONLY open-work tracker: [[archive/ENGINE_REPAIR]] retired to history, its 2 unique open rows migrated as `engine.106`/`engine.107`, and `engine.105` registered retroactively after shipping live with no row. S371 sweep moved 6 `done-pending-archive` rows out. 110 rows open — of the 107 triaged at sweep close, 40 were touched within 30 days, 53 are stale past 30 days, and 14 have never been cited by any commit; the other 3 are `engine.105`/`106`/`107`, registered after the triage ran. Full triage table + the 14 ids: [[ROLLOUT_ARCHIVE]] §S371 triage.
 **Filing protocol (S212):** semantic groups + pointer-only entries — see [[rollout-rules]] §3–§5 (taxonomy, add, close). Full design: [[../adr/0005-rollout-plan-structure]].
 **North star:** `docs/ARCHITECTURE_VISION.md` — Jarvis + persistent sessions. Everything we build points there.
 **Completed phase details:** [[engine/ROLLOUT_ARCHIVE]] — read on demand, not at boot.
@@ -64,17 +64,17 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 |---|------|-------|----------|---------|
 | engine.1 | Phase 40.2 cattle refactor (needs plan) | blocked | engine-sheet | [[engine/archive/PHASE_40_PLAN]] §40.2 |
 | engine.2 | Phase 42 writer consolidation | in-progress | engine-sheet | [[../plans/2026-04-28-phase-42-writer-consolidation]] + [[engine/archive/PHASE_42_PATTERNS]] — detail in pointer (relocated 2026-07-02) |
-| engine.3 | Advance-initiative remedy threshold calibration (post-E92 audit) | needs-info | engine-sheet | [[ENGINE_REPAIR]]; `output/engine_review_c92.md` |
+| engine.3 | Advance-initiative remedy threshold calibration (post-E92 audit) | needs-info | engine-sheet | [[archive/ENGINE_REPAIR]]; `output/engine_review_c92.md` |
 | engine.5 | Household + family simulation (Representative Sample model, reframed S243) — functional youth seed → engine life-event simulation → publication-driven family materialization. Steward authority granted S243. | in-progress | engine-sheet | [[engine/archive/LEDGER_REPAIR_HOUSEHOLDS]] |
-| engine.6 | Press_Drafts.LinkedStoryline 0% populated (DEAD-COLUMN, 164 rows) | blocked | engine-sheet | [[ENGINE_REPAIR]] row |
+| engine.6 | Press_Drafts.LinkedStoryline 0% populated (DEAD-COLUMN, 164 rows) | blocked | engine-sheet | [[archive/ENGINE_REPAIR]] row |
 | engine.7 | Engine Routing Foundation — Phase 6 cutover (gated on 3 cycles shadow data) | in-progress | research-build / engine-sheet | [[../plans/2026-05-07-engine-routing-foundation]] |
 | engine.8 | Header-drift detector C93 Type-2 triage (16 MED clusters) + C94 sweep absorbed S225 (G-EC5–G-EC21 orphan literals + G-EC24–G-EC32 defensive-fallback noise + G-RC7 KONO civic.10b follow-up) per triage cluster C11 | blocked | engine-sheet | [[../plans/2026-05-05-writer-header-alignment-detector]] §Triage; C11 fold ref [[../plans/2026-05-22-c94-gap-log-triage]] §3 C11 |
 | engine.10 | Phase 43 — Engine Expansion (city-functions, 5-domain priority order) | needs-info | research-build / engine-sheet | [[../research/godworld_city_functions_analysis_2026-04-20.pdf]] |
 | engine.11 | Chaos-cars engine | in-progress | engine-sheet / research-build | [[../plans/2026-05-07-chaos-cars-engine]] — detail in pointer (relocated 2026-07-02) |
-| engine.15 | ENGINE_REPAIR `Pattern` column | needs-info | engine-sheet | [[ENGINE_REPAIR]] — detail in pointer (relocated 2026-07-02) |
+| engine.15 | ENGINE_REPAIR `Pattern` column | needs-info | engine-sheet | [[archive/ENGINE_REPAIR]] — detail in pointer (relocated 2026-07-02) |
 | engine.20d | Sift Step 5 `covered-by-feature` triage handle — absorb regulatory-process noise into civic round-up. Cadence cap: at most 1 dedicated article per cycle per initiative AND only if actual movement (not process-tick). | blocked | research-build | blocked on pipeline.24 (sift v2); plan [[../plans/2026-05-22-engine-regulatory-friction]] §Task 5, cross-link C2 plan Task 5 |
 | engine.27 | wd-card auto-invalidation hook | in-progress | engine-sheet | [[../plans/2026-05-26-engine-27-wd-card-auto-invalidation]] — detail in pointer (relocated 2026-07-02) |
-| engine.29 | Citizen lifecycle & fame system | parked | engine-sheet | [[../plans/2026-05-30-citizen-lifecycle-fame-system]] + [[ENGINE_REPAIR]] — detail in pointer (relocated 2026-07-02) |
+| engine.29 | Citizen lifecycle & fame system | parked | engine-sheet | [[../plans/2026-05-30-citizen-lifecycle-fame-system]] + [[archive/ENGINE_REPAIR]] — detail in pointer (relocated 2026-07-02) |
 | engine.41 | Engine-output → canon coverage | in-progress | engine-sheet | [[../plans/2026-06-24-engine-output-canon-coverage]] — detail in pointer (relocated 2026-07-02) |
 | engine.43 | Voices/agents sync contract — BUILT S306, runtime smoke pending (detail: plan §Build notes) | in-progress | engine-sheet | [[../adr/0014-citizen-self-authorship-live-drift]] + [[../plans/2026-07-04-voice-dial-sync-contract-build]] |
 | engine.45 | Ripple ledger — T1–T3b live in prod; T3c retired + T3e folded S311; open: T3d, per-hood fold, T0 traces | in-progress | engine-sheet | [[../plans/2026-07-04-ripple-ledger-attribution]] |
@@ -88,8 +88,8 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.99 | Neighborhood truth-source migration (ADR-0016 first application) — one canonical hood set from Neighborhood_Map + drift detector; 53 structural files across ~8 copy-pasted namespaces. Cohort 1 then re-price; a week where discovery is the output | ready | engine-sheet | [[../plans/2026-08-02-neighborhood-truth-source-migration]] + [[../adr/0016-data-ledgers-are-the-truth-source]] |
 | engine.104 | Economy native rebuild — salaries/education/career-stage born right; five S364 doctrines; awaiting S362 kimi/codex vet before any code | ready | research-build → kimi/codex | [[../plans/2026-08-10-economy-native-rebuild]] |
 | engine.105 | Hospital ledger reads the Status column — missed-admission reconcile. Shipped + live-deployed 2026-08-14; registered retroactively S371 (row was missing while the code ran) | in-progress | engine-sheet | git `engine.105:` commits 2026-08-14; state needs engine-sheet confirm |
-| engine.106 | Crisis arcs fed fabricated specificity to desk packets — C97 pull done; rebuild as a connected per-hood story signal, do NOT restore the city-wide illnessRate read | ready | engine-sheet | [[ENGINE_REPAIR]] Row 28 (migrated S371) |
-| engine.107 | ARC milestone EventText is engine bookkeeping, not person-readable — starves citizen-perception continuity; supply side of research.19 T1a' | ready | engine-sheet | [[ENGINE_REPAIR]] Row 32 (migrated S371) |
+| engine.106 | Crisis arcs fed fabricated specificity to desk packets — C97 pull done; rebuild as a connected per-hood story signal, do NOT restore the city-wide illnessRate read | ready | engine-sheet | [[archive/ENGINE_REPAIR]] Row 28 (migrated S371) |
+| engine.107 | ARC milestone EventText is engine bookkeeping, not person-readable — starves citizen-perception continuity; supply side of research.19 T1a' | ready | engine-sheet | [[archive/ENGINE_REPAIR]] Row 32 (migrated S371) |
 | engine.102 | City/hood cascade integrity — T1–T8 done; W4 bench-proven C114–C115 (kimi, criterion 5 PASS); T9 cron rule landed + /sift skill diff drafted (output/kimi/engine102); open: control-plane land only | in-progress | kimi | [[../plans/2026-08-08-engine-102-cascade-consistency]] + [[../research/2026-08-07-city-neighborhood-cascade-team-review]] |
 | engine.93 | Per-hood political consequence — ALL BUILDS SHIPPED S349 (Tasks 5-7 fold + Tasks 9-10 commute matrix/housing response, 3 sandbox suites, mutation-tested); open: live-cycle proof only; capital pool deferred to civic.14 | in-progress | engine-sheet | [[../plans/2026-07-31-per-hood-political-consequence]] |
 | engine.94 | Citizen memory and approval ceiling — Track A code-only self-arm plus grief and approval mechanics sandbox-proven through C116. Track B typed grudge, ambition, and folk-memory design remains gated on research.17 and a Mike design session | needs-info | research-build / engine-sheet | [[../plans/2026-07-31-citizen-memory-perception]] |
@@ -143,7 +143,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.31 | Citizen dial engine | in-progress | engine-sheet | [[../plans/2026-05-31-compression-tag-triage]] — detail in pointer (relocated 2026-07-02) |
 | engine.32 | Life-event generation | in-progress | engine-sheet | [[../plans/2026-05-31-life-event-generation]] — detail in pointer (relocated 2026-07-02) |
 | engine.34 | Ledger is a representative sample | parked | engine-sheet | [[../plans/2026-06-14-ledger-representative-sample-migration-removal]] — detail in pointer (relocated 2026-07-02) |
-| engine.36 | Isolated staging environment | parked | engine-sheet | [[ENGINE_REPAIR]] — detail in pointer (relocated 2026-07-02) |
+| engine.36 | Isolated staging environment | parked | engine-sheet | [[archive/ENGINE_REPAIR]] — detail in pointer (relocated 2026-07-02) |
 | engine.67 | Event pools — steps 1-9 + involvedCitizens wire LIVE S325, sweeps done; OPEN: Mike's live C102 verify + storylineWeaving status gap | in-progress | engine-sheet | [[../plans/2026-07-18-event-pools-design]] |
 | research.13 | Citizen-autonomous PoC | needs-info | research-build | [[../plans/2026-05-31-citizen-autonomous-poc]] — detail in pointer (relocated 2026-07-02) |
 | research.14 | Citizen-loop Phase 2 | in-progress | engine-sheet | [[../plans/2026-06-04-mags-citizen-loop]] — detail in pointer (relocated 2026-07-02) |
@@ -169,7 +169,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 |---|------|-------|----------|---------|
 | governance.3 | Mags-at-/root steward layer | blocked | research-build | [[../plans/2026-05-09-boot-load-audit]] — detail in pointer (relocated 2026-07-02) |
 | governance.8 | Plugin gating per terminal | needs-info | research-build | [[../plans/2026-05-09-boot-load-audit]] — detail in pointer (relocated 2026-07-02) |
-| governance.9 | `/post-pattern <name>` micro-skill | needs-info | research-build | [[ENGINE_REPAIR]] — detail in pointer (relocated 2026-07-02) |
+| governance.9 | `/post-pattern <name>` micro-skill | needs-info | research-build | [[archive/ENGINE_REPAIR]] — detail in pointer (relocated 2026-07-02) |
 | governance.18 | C12 boot-conditioning residual | in-progress | research-build | [[../plans/2026-05-22-c94-gap-log-triage]] — detail in pointer (relocated 2026-07-02) |
 | governance.22 | Claude Code v2.1.149–v2.1.153 feature adoption | needs-info | research-build | [[../plans/2026-05-28-disallowed-tools-skill-audit]] + [[../plans/2026-05-28-claude-code-2-1-149-153-feature-adoption]] — detail in pointer (relocated 2026-07-02) |
 | governance.26 | SESSION_CONTEXT on-demand log redesign | in-progress | research-build / engine-sheet | [[../plans/2026-05-29-session-context-on-demand]] — detail in pointer (relocated 2026-07-02) |

@@ -21,8 +21,8 @@ pointers:
   - "[[engine/ROLLOUT_PLAN]] — engine.89 workspace-plan discovery pointer"
   - "[[plans/2026-07-30-oakland-sports-workspace]] — approved engine.89 implementation plan"
   - "[[plans/2026-07-05-game-night-connection-design]] — downstream game-night design history"
-  - "[[engine/ENGINE_REPAIR]] §engine.40 — sports-stat intake"
-  - "[[engine/ENGINE_REPAIR]] §engine.77 — sports-event state and LifeHistory intake"
+  - "[[engine/archive/ENGINE_REPAIR]] §engine.40 — sports-stat intake"
+  - "[[engine/archive/ENGINE_REPAIR]] §engine.77 — sports-event state and LifeHistory intake"
   - "[[SPREADSHEET]] — wider Google Sheets environment"
 ---
 

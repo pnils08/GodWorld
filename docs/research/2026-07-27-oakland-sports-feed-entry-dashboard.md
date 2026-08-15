@@ -13,7 +13,7 @@ sources:
   - phase07-evening-media/sportsStreaming.js and storyHook.js — evening media and story-hook consumers
   - scripts/buildDeskPackets.js, buildWorldSummary.js, and preflightInputCheck.js — Node consumers and current input checks
   - dashboard/server.js and dashboard/src/App.jsx — current read-only Sports surface
-  - docs/engine/ENGINE_REPAIR.md §engine.40 and §engine.77 — stat-intake and sports-event siblings
+  - docs/engine/archive/ENGINE_REPAIR.md §engine.40 and §engine.77 — stat-intake and sports-event siblings
 pointers:
   - "[[../OAKLAND_SPORTS_FEED]] — verified current contract and consumer map"
   - "[[../engine/ROLLOUT_PLAN]] — engine.89 workspace-plan pointer; engine.40 and engine.77 implementation siblings"

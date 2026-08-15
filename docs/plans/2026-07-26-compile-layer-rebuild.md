@@ -6,11 +6,11 @@ type: plan
 tags: [engine, pipeline, compile, active]
 sources:
   - docs/engine/ROLLOUT_PLAN.md — engine.76 row
-  - docs/engine/ENGINE_REPAIR.md §engine.76 — the S328/S329/S332 narrative this plan replaces as the row's home
+  - docs/engine/archive/ENGINE_REPAIR.md §engine.76 — the S328/S329/S332 narrative this plan replaces as the row's home
   - claude-mem S328 (Mike's original 4-consumer design), S329 (W5 definition), S332 (W5 half 1 ship)
 pointers:
   - "[[../engine/ROLLOUT_PLAN]] — parent rollout (engine.76)"
-  - "[[../engine/ENGINE_REPAIR]] §engine.76 — prior narrative, kept for trail"
+  - "[[../engine/archive/ENGINE_REPAIR]] §engine.76 — prior narrative, kept for trail"
   - "[[2026-07-20-headless-newsroom-pipeline]] — research.25; its Phase 2 daily writer-wakes consume W5's signal partition"
   - "[[../research/2026-07-11-desk-slice-fork]] — pipeline.44; the fork W5 feeds and W4 waits on"
   - "[[SCHEMA]] — doc conventions"

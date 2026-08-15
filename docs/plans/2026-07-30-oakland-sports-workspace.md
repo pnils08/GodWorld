@@ -11,7 +11,7 @@ sources:
   - docs/DASHBOARD.md and 2026-07-30 source/runtime audit
   - schemas/SCHEMA_HEADERS.md §Oakland_Sports_Feed, §As_Roster, §Oaks_Roster
   - scripts/notebooklmDailyNews.js and docs/reference/notebookLM-CLI.md
-  - docs/engine/ENGINE_REPAIR.md §engine.40, §engine.77
+  - docs/engine/archive/ENGINE_REPAIR.md §engine.40, §engine.77
   - engine-sheet review verdict 2026-07-31 — Waves A–B verified; Wave C requires auth, compatibility, deployment-sequencing, and transport amendments
   - Mike-direct 2026-07-31 — proceed with the plan and optimize Wave C for the best browser UI experience
 pointers:
@@ -21,7 +21,7 @@ pointers:
   - "[[2026-07-10-notebooklm-bridge-deploy]] — authoritative Daily News artifact contract"
   - "[[2026-07-20-headless-newsroom-pipeline]] — adjacent newsroom boundary"
   - "[[2026-07-05-game-night-connection-design]] — downstream citizen-event design"
-  - "[[../engine/ENGINE_REPAIR]] — engine.40 and engine.77 sibling work"
+  - "[[../engine/archive/ENGINE_REPAIR]] — engine.40 and engine.77 sibling work"
 ---
 
 # Oakland Sports Workspace Plan
@@ -52,7 +52,7 @@ findings only; engine-sheet owns gated code changes and landing.
 - Prior work: [[../research/2026-07-27-oakland-sports-feed-entry-dashboard]]
 - Current contract: [[../OAKLAND_SPORTS_FEED]]
 - Parent rollout: [[../engine/ROLLOUT_PLAN]] `engine.89`
-- Sibling work: [[../engine/ENGINE_REPAIR]] `engine.40` and `engine.77`
+- Sibling work: [[../engine/archive/ENGINE_REPAIR]] `engine.40` and `engine.77`
 - Related design: [[2026-07-05-game-night-connection-design]]
 
 ## Scope lock

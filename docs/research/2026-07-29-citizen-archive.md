@@ -14,7 +14,7 @@ sources:
   - phase05-citizens/checkForPromotions.js, processIntakeV3.js, and bondEngine.js — current Simulation_Ledger-only POPID allocation
 pointers:
   - "[[2026-07-27-oakland-sports-feed-entry-dashboard]] — preceding sports-intake work; trade-away events eventually hand off to this separate lifecycle project"
-  - "[[../engine/ENGINE_REPAIR]] §engine.77 — sports event/state intake sibling"
+  - "[[../engine/archive/ENGINE_REPAIR]] §engine.77 — sports event/state intake sibling"
   - "[[../engine/ROLLOUT_PLAN]] — engine.90 discovery pointer for the separately sequenced project"
   - "[[index]] — research registration"
 ---

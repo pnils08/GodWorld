@@ -12,7 +12,7 @@ sources:
 pointers:
   - "[[../engine/ROLLOUT_PLAN]] — engine.71 row points here"
   - "[[2026-06-15-story-seed-deck-engine-emergence]] §crisis-arc — Row 28 fold; rebuild relocated here"
-  - "[[../engine/ENGINE_REPAIR]] — Row 28"
+  - "[[../engine/archive/ENGINE_REPAIR]] — Row 28"
   - "[[2026-07-20-weather-transit-citizen-coupling]] — engine.70 events are detector channels"
   - "[[../index]] — registered same commit"
 ---

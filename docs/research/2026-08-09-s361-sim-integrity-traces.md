@@ -11,7 +11,7 @@ sources:
 pointers:
   - "[[../engine/ROLLOUT_PLAN]] — pending-state home; NO row filed, C103 halted"
   - "[[index]] — registered here, same commit"
-  - "[[../engine/ENGINE_REPAIR]] — Row 35 filed this session, flagged NEEDS CORRECTION at #35 below"
+  - "[[../engine/archive/ENGINE_REPAIR]] — Row 35 filed this session, flagged NEEDS CORRECTION at #35 below"
   - "[[2026-08-04-mags-as-narrator]] — the design these publication findings bear on"
   - "[[../SIM_DOCTRINE]] — §1 no caps / §2 causes-then-dice decided the money fix"
 ---

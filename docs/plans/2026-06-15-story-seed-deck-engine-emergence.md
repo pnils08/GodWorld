@@ -12,7 +12,7 @@ sources:
   - scripts/engine-auditor/generateBaselineBriefs.js (engine_audit → briefs, the existing emergence surface)
 pointers:
   - "[[../engine/ROLLOUT_PLAN]] — engine.35 row points here"
-  - "[[../engine/ENGINE_REPAIR]] — Row 28 (crisis-arc rebuild) folds into this; same effort"
+  - "[[../engine/archive/ENGINE_REPAIR]] — Row 28 (crisis-arc rebuild) folds into this; same effort"
   - "[[2026-06-13-c97-gap-log-triage]] — supersedes ES-4 step 1's mechanical 'cap recycled' framing"
   - "[[../archive/plans/2026-06-10-engine33-neighborhood-citizen-loop]] — neighborhoodSlice is the who+numbers source"
   - "[[../index]] — registered same commit"

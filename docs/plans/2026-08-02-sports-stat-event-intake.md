@@ -11,7 +11,7 @@ sources:
   - docs/OAKLAND_SPORTS_FEED.md
   - docs/SIMULATION_LEDGER.md
   - docs/research/2026-07-29-citizen-archive.md
-  - docs/engine/ENGINE_REPAIR.md §engine.40 and §engine.77
+  - docs/engine/archive/ENGINE_REPAIR.md §engine.40 and §engine.77
   - schemas/SCHEMA_HEADERS.md §Oakland_Sports_Feed, §As_Roster, §Oaks_Roster, §LifeHistory_Log, §Ripple_Ledger, and §Simulation_Ledger
   - scripts/sportsFeedContract.js, scripts/sportsWorkspaceProjection.js, scripts/sportsFeedWriter.js, dashboard/sportsRoutes.js, and lib/sheets.js
   - phase04-events/generationalEventsEngine.js and phase05-citizens/applyGameNightMoments.js
@@ -24,7 +24,7 @@ pointers:
   - "[[../OAKLAND_SPORTS_FEED]] — active feed and roster contract"
   - "[[../SIMULATION_LEDGER]] — citizen Status, RoleType, and LifeHistory contract"
   - "[[../research/2026-07-29-citizen-archive]] — trade-away and future engine.90 handoff"
-  - "[[../engine/ENGINE_REPAIR]] — retained engine.40 and engine.77 history"
+  - "[[../engine/archive/ENGINE_REPAIR]] — retained engine.40 and engine.77 history"
 ---
 
 # Sports Stat and Event Intake Plan

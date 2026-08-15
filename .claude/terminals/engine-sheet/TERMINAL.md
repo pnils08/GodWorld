@@ -38,10 +38,10 @@ These files define the project, your rules, and current state. Read at every boo
 | `.claude/rules/identity.md` | Non-negotiable behavioral rules (auto-loaded) |
 | `.claude/rules/engine.md` | Engine code rules — ctx.rng, write-intents, cascade deps + measure-twice discipline at top (auto-loaded on engine files) |
 | `SESSION_CONTEXT.md` | **On-demand (ADR-0009, S248)** — NOT auto-read at boot. The hook emits the PIN + your `NEXT[engine-sheet]` line in `<godworld-state>`; pull the file only when continuing prior work. |
-| `docs/engine/ENGINE_REPAIR.md` | Tactical defects tracker — open rows tell you what's broken (highest-touch doc this terminal) |
+| `docs/engine/ROLLOUT_PLAN.md` — `engine.*` rows only | Open-work queue — engine defects and builds file here since ENGINE_REPAIR retired S371 (grep `engine.` rows, don't load the whole plan) |
 | `.claude/terminals/engine-sheet/TERMINAL.md` | This file — your scope, your docs, your rules |
 
-**Why ENGINE_REPAIR over README at boot (S201 self-audit):** README is project-scoped generic; ENGINE_REPAIR rows enumerate the exact defects this terminal closes. Boot reading it primes the open-work mental model immediately. README stays available on demand for orientation work.
+**Why ROLLOUT `engine.*` rows over README at boot (S201 self-audit, retargeted S371):** README is project-scoped generic; the open `engine.*` rows enumerate the exact defects this terminal closes. Boot reading them primes the open-work mental model immediately. `docs/engine/archive/ENGINE_REPAIR.md` is RETIRED S371 — history only, 30 closed rows kept as the repair record; never add rows there.
 
 ---
 
@@ -107,7 +107,7 @@ This terminal primarily files into:
 
 **The doc-work doctrine every terminal follows is [[../../../docs/engine/rollout-rules]]** — four roles (research / plan / rollout / archive), templates + save paths (§2), how to add/close (§4–§5), archiving + sweep code (§6). Read it before adding or closing a ROLLOUT row. Description content lives in the pointer doc:
 - Designed work → copy [[../../../docs/plans/PLAN_TEMPLATE]] to `docs/plans/YYYY-MM-DD-<topic>.md`
-- Engine work → existing parent spec ([[../../../docs/engine/archive/PHASE_42_PATTERNS]], [[../../../docs/engine/ENGINE_REPAIR]] row)
+- Engine work → existing parent spec ([[../../../docs/engine/archive/PHASE_42_PATTERNS]]; ENGINE_REPAIR is retired S371 — new defects get an `engine.*` ROLLOUT row per rollout-rules §4)
 - In-flight observations → engine gap logs (`output/production_log_..._gaps.md`)
 
 When work completes: set state `done-pending-archive`; session-end sweep moves the row to [[../../../docs/engine/ROLLOUT_ARCHIVE]] (engine-sheet sweeps `engine.*` rows it owns). Closed plans move to `docs/archive/plans/` (rollout-rules §6).
@@ -239,8 +239,7 @@ The stripped-persona framing applies to hard close. Per S229 governance.7, the s
 |------|-------|
 | `docs/engine/ENGINE_MAP.md` | Updated if functions were added, removed, or renamed? |
 | `docs/engine/ENGINE_STUB_MAP.md` | Regenerated if function signatures changed? (`/stub-engine`) |
-| `docs/engine/ENGINE_REPAIR.md` | Rows opened/closed this session reflected in tracker with status + session + evidence + fix-pointer? |
-| `docs/engine/ROLLOUT_PLAN.md` | Phase statuses updated? Completed items archived? Stale-pointer triage flagged? |
+| `docs/engine/ROLLOUT_PLAN.md` | `engine.*` rows opened/closed this session reflected with status + session + evidence + fix-pointer? Phase statuses updated? Completed items archived? (ENGINE_REPAIR retired S371 — never reopen) |
 | `docs/engine/LEDGER_AUDIT.md` | Drift section refreshed if live state changed (Status enum, schema, headcount)? |
 | `docs/engine/LEDGER_HEAT_MAP.md` | Heat rankings + bloat-risk sections refreshed if sheet sizes/schemas changed? |
 | `docs/engine/LEDGER_REPAIR_*.md` family | Family member added/updated this session? |

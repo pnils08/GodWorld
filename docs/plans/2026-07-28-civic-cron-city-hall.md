@@ -142,8 +142,8 @@ pointers:
 ## Parked for fine-tune (direction-logged, deliberately NOT tasks)
 
 Per Mike S343: build the basic core, dry-run, then tune. These live in the research file's Direction log and graduate to tasks only after Phase 4:
-- Approval-system refinement (nothing handed to officials easily; approval as a consequence engine)
-- Political bonds (mayor ↔ appointed offices) + replacement pressure (bad bond + low approval → replacement)
+- **Approval physics (LANDED v1.3 in `updateCivicApprovalRatings.js` — clasp still engine-sheet).** C103 proof: 6 initiatives, 0 `complete`, Mayor at 95. v1.3: only `complete` credits; sitting (due but unfinished) is −2 owner / −1 else; silence (overdue or unscheduled) is −6 owner / −4 else; chose-fail is −3; no free recovery toward 50; positive media does not pay. Needs a live clasp before the next engine cycle or the 95 stays. Replacement pressure still parked until the number can fall on PROD.
+- Political bonds (mayor ↔ appointed offices). Replacement of an *unfit elected* is no longer parked: v1.4 unseats at recall-pressure (`Status=vacant`). Appointed-staff scoring and successor seating still parked.
 - Elections
 - Full 35-office coverage (core can start with the 13 agented offices; the map from Task 0.2 names the gap)
 
@@ -159,6 +159,11 @@ Per Mike S343: build the basic core, dry-run, then tune. These live in the resea
 
 ## Changelog
 
+- 2026-08-13 (grok) — Approval v1.6: never default to an empty seat. In-ledger bar = Drive≥60, Integrity≥40, Composure≥40, adult 25–70, not T1, not already CIV. Generic_Citizens is a feeder. Else mint an out-of-town arrival (pumped Drive/Integrity/Composure, dumped Family). Vacant only if the ledger cannot be written — that delay is the designed crisis.
+- 2026-08-13 (grok) — Approval v1.5: demotion campaign, not election. `<40` picks a deterministic citizen challenger; `<20` seats them. The drop is the vote. Election window stays unused for this path.
+- 2026-08-13 (grok) — Approval v1.4: crossing `<20` (or already-unfit + still silent) removes the holder from office. In-world they failed the city; out-of-world the cron would not push. Civic decide skips a vacant mayor. Clasp still required.
+- 2026-08-13 (grok) — Approval v1.3: nothing free, only `complete` raises, silence is the biggest drain (`updateCivicApprovalRatings.js`). Clasp still engine-sheet before the next live cycle. Must-decide gate + media no-stuck-story from earlier this session stand.
+- 2026-08-13 (grok) — Must-decide on HIGH stuck: civic packets + output contract + apply gate require a phase MOVE (advance or fail). Media slices and stink-scanner stop assigning `stuck-initiative` as a story. `--apply` still Mike's flip.
 - 2026-08-10 (codex) — Jax's newsroom package now consumes ADR-0017 live; the separate civic-office cron remains unchanged and is not implicitly promoted by the newsroom cohort.
 - 2026-08-09 (codex) — The civic datawake's small deterministic slice + JSON + unsupported-number wall is the working domain precedent for [[../adr/0017-typed-lived-experience-packets]]. Civic adoption is intentionally after the newsroom A/B in [[2026-08-09-three-wake-lived-packet-pilot]]; no civic cron behavior changed.
 - 2026-07-28 — Initial draft (S343). Shape from Mike's think-tank direction (research file Direction log); tasks scoped to the basic core only.

@@ -54,7 +54,7 @@ Seven type-of-work groups. Each entry coded as `<group>.<n>`:
 | Group | Scope | Typical pointer destinations |
 |-------|-------|------------------------------|
 | **pipeline** | Edition production end-to-end (sift / write-edition / post-publish / dispatch / interview / supplemental / print / photos) | `[[plans/...]]`, `[[output/production_log_..._gaps]]`, `[[media/...]]` |
-| **engine** | Engine code, ledger, schema, tech debt, engine-sheet repair | `[[plans/...]]`, `[[engine/archive/PHASE_42_PATTERNS]]`, `[[engine/ENGINE_REPAIR]]` rows |
+| **engine** | Engine code, ledger, schema, tech debt, engine-sheet repair | `[[plans/...]]`, `[[engine/archive/PHASE_42_PATTERNS]]`, `[[engine/archive/ENGINE_REPAIR]]` rows |
 | **canon** | World-fidelity layer, citizens, voices, real-name blocklists, contamination scrub | `[[canon/CANON_RULES]]`, `[[canon/INSTITUTIONS]]` |
 | **civic** | City-hall, voice agents, council canon, civic-process gap-logs, governance simulation | `[[plans/...]]`, `[[output/production_log_city_hall_..._gaps]]`, `[[mara-vance/...]]` |
 | **infrastructure** | Supermemory, Discord, dashboard, MCP, claude-mem, services, ingest pipelines | `[[STACK]]`, `[[SUPERMEMORY]]`, `[[plans/...]]` |
@@ -198,7 +198,7 @@ ADR-0004 (skill-bag naming) and ADR-0005 (this) share a discovery-wiring pattern
 5. Set terminal — **builder terminals only**: `engine-sheet` (code / sheets / scripts) or `research-build` (skill / RULES / docs / ADRs / triage). Slash-separated for cross-builder work. Never `media` or `civic` — those are generator spaces and don't receive routed work (see §Part 3 routing flow).
 6. **Identify or create the pointer doc:**
    - For designed work: create or link `[[plans/YYYY-MM-DD-topic]]` — **copy `[[plans/PLAN_TEMPLATE]]` for shape; register in `[[index]]` same commit per S147 inbound-link rule**
-   - For in-flight observations from heavy-skill runs (civic + media generator terminals): link the gap log `[[output/production_log_..._gaps]]` — **new gap logs follow `[[plans/GAP_LOG_TEMPLATE]]` per S212 protocol; engine-sheet uses `[[engine/ENGINE_REPAIR]]` rows for its tactical-defects sidecar (different shape)**
+   - For in-flight observations from heavy-skill runs (civic + media generator terminals): link the gap log `[[output/production_log_..._gaps]]` — **new gap logs follow `[[plans/GAP_LOG_TEMPLATE]]` per S212 protocol; engine-sheet uses `[[engine/archive/ENGINE_REPAIR]]` rows for its tactical-defects sidecar (different shape)**
    - For evaluations: append to `[[RESEARCH]] §section` or create `[[research/topic]]`
    - For decisions: write or link an ADR (next ADR number, follow ADR-0001/0004/0005 shape)
    - For engine work: link to existing parent (PHASE_X_PATTERNS, ENGINE_REPAIR row)

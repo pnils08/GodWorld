@@ -20,7 +20,7 @@ These are your **memory** of the engine and the ledger. Reach for them reflexive
 | How a function works / what it reads+writes / phase execution order | `docs/engine/ENGINE_STUB_MAP.md` (condensed ctx-map) → `docs/engine/ENGINE_MAP.md` (full) |
 | Ledger columns, what writes a column, letters past Z, citizen-data fields | `docs/SIMULATION_LEDGER.md` + `docs/SCHEMA.md` |
 | Which script reads/writes which tab | `docs/engine/SHEETS_MANIFEST.md` |
-| Known defects / open repair rows | `docs/engine/ENGINE_REPAIR.md` *(already Always-Load)* |
+| Known defects / open repair rows | `docs/engine/ROLLOUT_PLAN.md` `engine.*` rows *(ENGINE_REPAIR retired S371 — history only)* |
 | Designing ANY engine mechanic — what makes it a sim, not a data system | `docs/SIM_DOCTRINE.md` *(Mike-direct S318 — no output caps, physics only, world allowed to hurt; consult BEFORE design)* |
 | What connects to what (dependency trace) | `graphify query "..."` (persistent graph) |
 

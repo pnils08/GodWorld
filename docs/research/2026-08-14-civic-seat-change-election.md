@@ -242,6 +242,7 @@ A–C is engine-sheet. D–F is engine + media. G is research-build / civic / Mi
 
 ## Changelog
 
+- 2026-08-14 (grok) — Parked under [[2026-08-14-civic-process-install]]. Catalogued in docs/index.md.
 - 2026-08-14 (grok) — Purpose reframe: workers who decide, not a civic series. Seat-change shrinks to a rare valve. civic.15 stays the product.
 - 2026-08-14 (grok) — Voice beat: media event first; Mike authors IDENTITY only if the chair actually changes. Civic cron still Avery until then.
 - 2026-08-14 (grok) — Codebase pass. Citizens, seeds, LifeHistory, voice files, scale. Tab choice left open.

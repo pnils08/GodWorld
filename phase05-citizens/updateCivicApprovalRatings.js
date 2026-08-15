@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * updateCivicApprovalRatings_ v1.2 (ES5)
+ * updateCivicApprovalRatings_ v1.5 (ES5)
  * ============================================================================
  * [engine/sheet] — Phase 27 civic feedback loop
  *
@@ -16,21 +16,54 @@
  * - Emits a deterministic story/ripple hook and an immediate approval drop
  *   when the seeded scandal roll fires. Manual scandal statuses are untouched.
  *
+ * v1.3 (Mike-direct 2026-08-13): C103 proof — 6 unfinished initiatives,
+ * Mayor clamped at 95. Live-sounding phases were scored as wins. Now:
+ * nothing is free, only `complete` credits, non-committal never raises,
+ * silence (overdue NextActionCycle / no scheduled action) is the biggest drain.
+ *
  * Updates Civic_Office_Ledger Approval column based on:
- * 1. Initiative performance in the official's district
- * 2. Edition coverage domain sentiment
- * 3. Baseline decay toward 50 (public memory fades)
+ * 1. Did they MOVE the initiative this cycle (complete / chose-fail / sit / silence)
+ * 2. Negative edition coverage (positive coverage no longer pays)
+ * 3. High-approval decay toward 50 (no free recovery when low)
  *
  * Approval thresholds create behavioral triggers:
  *   > 80: "popular" — more influence on swing votes
  *   40-80: normal range
  *   < 40: "vulnerable" — more cautious voting (existing veto logic)
- *   < 20: "recall-pressure" — story hook for reporters
+ *   < 20: "recall-pressure" — and they leave office (v1.4)
+ *
+ * v1.4 (Mike-direct 2026-08-13): approval is in-world fitness AND out-of-world
+ * cron fitness. A low number means this citizen/node is not built to run the
+ * city. Repeated refusal to move the sim removes them from office — the cron
+ * that will not push is not kept in the chair. Status=vacant, Holder=TBD,
+ * VotingPower=vacant. Media covers the departure, not the stall.
+ *
+ * v1.5 (Mike-direct 2026-08-13): demotion, not election. Crossing 40 starts a
+ * citizen campaign (deterministic challenger from the ledger). Crossing 20
+ * seats that challenger. No election window. The vote is the drop.
+ *
+ * v1.6: never leave a seat empty by default. In-ledger bar is the 8 dials
+ * (Drive to want it, Integrity to hold it, Composure to sit it) plus adult
+ * non-T1 non-CIV. Generic_Citizens is a name/occupation feeder. If neither
+ * presents, mint an out-of-town arrival with civic-challenger dial defaults.
+ * Vacant is only the designed crisis when the ledger itself is missing.
  *
  * Runs in Phase 5 after civicInitiativeEngine_.
  *
  * ============================================================================
  */
+
+var DISTRICT_HOODS = {
+  'D1': ['West Oakland', 'Brooklyn'],
+  'D2': ['Downtown', 'Chinatown', 'Jack London', 'KONO'],
+  'D3': ['Fruitvale', 'San Antonio'],
+  'D4': ['Glenview', 'Dimond', 'Ivy Hill'],
+  'D5': ['East Oakland', 'Coliseum', 'Elmhurst'],
+  'D6': ['Montclair', 'Piedmont Ave'],
+  'D7': ['Temescal', 'Rockridge'],
+  'D8': ['Lake Merritt', 'Adams Point', 'Grand Lake', 'Eastlake'],
+  'D9': ['Laurel', 'Uptown']
+};
 
 function getApprovalCeilingConfig_(ctx) {
   if (ctx && ctx._approvalCeilingConfig) return ctx._approvalCeilingConfig;
@@ -148,6 +181,8 @@ function updateCivicApprovalRatings_(ctx) {
 
   S.approvalChanges = [];
   S.approvalCeilingEvents = [];
+  S.officeDepartures = [];
+  S.civicCampaigns = [];
 
   var ceilingConfig = getApprovalCeilingConfig_(ctx);
   var rng = safeRand_(ctx);
@@ -183,6 +218,8 @@ function updateCivicApprovalRatings_(ctx) {
   var iHighStreak = findApprCol_(lHeaders, ['HighApprovalStreak', 'highapprovalstreak']);
   var iAutoUntil = findApprCol_(lHeaders, ['AutoScandalUntilCycle', 'autoscandaluntilcycle']);
   var iAutoSource = findApprCol_(lHeaders, ['AutoScandalSource', 'autoscandalsource']);
+  var iVotingPower = findApprCol_(lHeaders, ['VotingPower', 'votingpower']);
+  var iNotes = findApprCol_(lHeaders, ['Notes', 'notes']);
 
   var requiredColumns = [
     ['Status', iStatus], ['Approval', iApproval], ['HighApprovalStreak', iHighStreak],
@@ -212,6 +249,7 @@ function updateCivicApprovalRatings_(ctx) {
       var tHoods = findApprCol_(tHeaders, ['AffectedNeighborhoods', 'affectedneighborhoods']);
       var tLead = findApprCol_(tHeaders, ['LeadFaction', 'leadfaction']);
       var tOpp = findApprCol_(tHeaders, ['OppositionFaction', 'oppositionfaction']);
+      var tNext = findApprCol_(tHeaders, ['NextActionCycle', 'nextactioncycle']);
 
       for (var ti = 1; ti < tData.length; ti++) {
         var tr = tData[ti];
@@ -219,37 +257,24 @@ function updateCivicApprovalRatings_(ctx) {
         if (!initName) continue;
 
         var phase = tPhase !== -1 ? (tr[tPhase] || '').toString().trim().toLowerCase() : '';
+        var nextRaw = tNext !== -1 ? tr[tNext] : '';
+        var nextActionCycle = parseInt(nextRaw, 10);
+        if (isNaN(nextActionCycle)) nextActionCycle = null;
 
         initiatives.push({
           name: initName,
           status: tStatus !== -1 ? (tr[tStatus] || '').toString().trim().toLowerCase() : '',
           phase: phase,
+          nextActionCycle: nextActionCycle,
           domain: tDomain !== -1 ? (tr[tDomain] || '').toString().trim().toLowerCase() : '',
           neighborhoods: tHoods !== -1 ? (tr[tHoods] || '').toString().trim() : '',
           leadFaction: tLead !== -1 ? (tr[tLead] || '').toString().trim().toUpperCase() : '',
           oppFaction: tOpp !== -1 ? (tr[tOpp] || '').toString().trim().toUpperCase() : '',
-          performing: isPerforming_(phase),
-          failing: isFailing_(phase)
+          motion: classifyInitiativeMotion_(phase, nextActionCycle, cycle)
         });
       }
     }
   }
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // DISTRICT-TO-NEIGHBORHOOD MAP
-  // ═══════════════════════════════════════════════════════════════════════════
-
-  var DISTRICT_HOODS = {
-    'D1': ['West Oakland', 'Brooklyn'],
-    'D2': ['Downtown', 'Chinatown', 'Jack London', 'KONO'],
-    'D3': ['Fruitvale', 'San Antonio'],
-    'D4': ['Glenview', 'Dimond', 'Ivy Hill'],
-    'D5': ['East Oakland', 'Coliseum', 'Elmhurst'],
-    'D6': ['Montclair', 'Piedmont Ave'],
-    'D7': ['Temescal', 'Rockridge'],
-    'D8': ['Lake Merritt', 'Adams Point', 'Grand Lake', 'Eastlake'],
-    'D9': ['Laurel', 'Uptown']
-  };
 
   // ═══════════════════════════════════════════════════════════════════════════
   // EDITION COVERAGE DOMAIN BALANCE (from Phase 2)
@@ -260,6 +285,13 @@ function updateCivicApprovalRatings_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // CALCULATE APPROVAL CHANGES
   // ═══════════════════════════════════════════════════════════════════════════
+
+  var occupiedPopIds = {};
+  for (var op = 1; op < ledgerData.length; op++) {
+    var opPop = iPopId !== -1 ? String(ledgerData[op][iPopId] || '').trim() : '';
+    var opStatus = iStatus !== -1 ? String(ledgerData[op][iStatus] || '').trim().toLowerCase() : '';
+    if (opPop && opStatus !== 'vacant') occupiedPopIds[opPop] = true;
+  }
 
   var changes = [];
   var approvalTriggers = [];
@@ -289,6 +321,7 @@ function updateCivicApprovalRatings_(ctx) {
 
     // Only process active elected officials and mayor
     if (!officeId || (!officeId.match(/^COUNCIL/) && !officeId.match(/^MAYOR/))) continue;
+    if (status === 'vacant') continue;
 
     var lifecycle = resolveApprovalCeilingLifecycle_({
       status: status,
@@ -312,6 +345,7 @@ function updateCivicApprovalRatings_(ctx) {
 
     var delta = 0;
     var reasons = [];
+    var silenceOwned = 0;
 
     // ─────────────────────────────────────────────────────────────────────
     // INITIATIVE PERFORMANCE IN DISTRICT
@@ -342,31 +376,11 @@ function updateCivicApprovalRatings_(ctx) {
       var supportedByFaction = (init.leadFaction === faction);
       var opposedByFaction = (init.oppFaction === faction);
 
-      if (init.performing) {
-        if (supportedByFaction) {
-          delta += 3; // Backed a winner in their district
-          reasons.push(init.name + ' performing (+3 aligned)');
-        } else if (opposedByFaction) {
-          delta -= 2; // Opposed something that's working
-          reasons.push(init.name + ' performing despite opposition (-2)');
-        } else {
-          delta += 1; // Neutral benefit
-          reasons.push(init.name + ' performing (+1)');
-        }
-      }
-
-      if (init.failing) {
-        if (supportedByFaction) {
-          delta -= 4; // Backed a loser in their district
-          reasons.push(init.name + ' failing (-4 aligned)');
-        } else if (opposedByFaction) {
-          delta += 2; // "I told you so" effect
-          reasons.push(init.name + ' failing as predicted (+2)');
-        } else {
-          delta -= 1;
-          reasons.push(init.name + ' failing (-1)');
-        }
-      }
+      var owns = isMayor || supportedByFaction;
+      var scored = approvalDeltaForInitiative_(init.motion, owns, opposedByFaction);
+      delta += scored.delta;
+      reasons.push(init.name + ' ' + scored.reason);
+      if (init.motion === 'silence' && owns) silenceOwned++;
     }
 
     // ─────────────────────────────────────────────────────────────────────
@@ -379,10 +393,8 @@ function updateCivicApprovalRatings_(ctx) {
       if (civicRating <= -3) {
         delta -= 2; // Heavy negative civic coverage hurts all officials
         reasons.push('negative civic media (-2)');
-      } else if (civicRating >= 3) {
-        delta += 1; // Positive civic coverage gives a small lift
-        reasons.push('positive civic media (+1)');
       }
+      // v1.3: positive coverage does not pay. Non-committal never raises.
     }
 
     // ─────────────────────────────────────────────────────────────────────
@@ -391,10 +403,8 @@ function updateCivicApprovalRatings_(ctx) {
     if (currentApproval > 50) {
       delta -= 1; // High approval decays
       reasons.push('decay toward 50 (-1)');
-    } else if (currentApproval < 50) {
-      delta += 1; // Low approval recovers (slowly)
-      reasons.push('recovery toward 50 (+1)');
     }
+    // v1.3: no free recovery toward 50. They rise only by completing work.
 
     // ─────────────────────────────────────────────────────────────────────
     // APPLY AND CLAMP
@@ -433,15 +443,140 @@ function updateCivicApprovalRatings_(ctx) {
       }
     }
 
-    planCeilingWrite(li + 1, iStatus, row[iStatus], ceiling.status,
-      ceiling.triggered ? 'approval ceiling scandal triggered' :
-        (lifecycle.recovered ? 'approval ceiling scandal expired' : 'approval ceiling status state'));
+    var priorNotes = iNotes !== -1 ? (row[iNotes] || '').toString() : '';
+    var campaign = parseCampaignNote_(priorNotes);
+    var incumbentPop = iPopId !== -1 ? (row[iPopId] || '').toString().trim() : '';
+    if (shouldStartCampaign_(status, newApproval, campaign)) {
+      var picked = pickCampaignChallenger_(ctx, district, incumbentPop, occupiedPopIds, officeId, cycle);
+      if (picked) {
+        campaign = { pop: picked.popId, name: picked.name, since: cycle };
+        occupiedPopIds[picked.popId] = true;
+        reasons.push('campaign started: ' + picked.name);
+      }
+    }
+    if (campaign) {
+      S.civicCampaigns.push({
+        officeId: officeId, district: district, incumbent: holder,
+        challengerPopId: campaign.pop, challengerName: campaign.name,
+        since: campaign.since, approval: newApproval
+      });
+    }
+
+    var leaving = shouldLeaveOffice_(status, newApproval, currentApproval, silenceOwned);
+    var seating = leaving && campaign;
+    var nextStatus = leaving && !seating ? 'vacant' : (leaving && seating ? 'active' : ceiling.status);
+
+    planCeilingWrite(li + 1, iStatus, row[iStatus], nextStatus,
+      seating ? 'demoted — challenger seated' :
+        (leaving ? 'left office — unfit to run the city' :
+          (ceiling.triggered ? 'approval ceiling scandal triggered' :
+            (lifecycle.recovered ? 'approval ceiling scandal expired' : 'approval ceiling status state'))));
     planCeilingWrite(li + 1, iHighStreak, currentHighStreak, ceiling.highStreak,
       'approval ceiling streak update');
     planCeilingWrite(li + 1, iAutoUntil, currentAutoUntil, ceiling.untilCycle,
       'approval ceiling expiry update');
     planCeilingWrite(li + 1, iAutoSource, currentAutoSource, ceiling.source,
       'approval ceiling source update');
+
+    if (campaign && !leaving && iNotes !== -1) {
+      var kept = formatCampaignNote_(campaign, stripCampaignNote_(priorNotes));
+      planCeilingWrite(li + 1, iNotes, row[iNotes], kept, 'challenger campaign');
+    }
+    if (campaign && !leaving && campaign.since === cycle) {
+      var campHook = {
+        hookType: 'CIVIC_CHALLENGER_CAMPAIGN',
+        severity: 6,
+        description: campaign.name + ' began campaigning to replace ' + holder +
+          ' (approval ' + newApproval + ')',
+        cycleGenerated: cycle,
+        popid: campaign.pop,
+        officeId: officeId,
+        approval: newApproval
+      };
+      approvalTriggers.push({
+        type: 'campaign', holder: holder, district: district,
+        approval: newApproval, challenger: campaign.name, challengerPopId: campaign.pop
+      });
+      S.storyHooks = S.storyHooks || [];
+      S.storyHooks.push(campHook);
+      if (!isDryRun && typeof recordHookRipple_ === 'function') {
+        recordHookRipple_(ctx, 'challenger-campaign', campHook, 'updateCivicApprovalRatings');
+      }
+      Logger.log('  CAMPAIGN ' + campaign.name + ' vs ' + holder + ' (' + officeId + ')');
+    }
+
+    if (leaving) {
+      if (seating) {
+        if (iHolder !== -1) {
+          planCeilingWrite(li + 1, iHolder, holder, campaign.name, 'demotion — challenger seated');
+        }
+        if (iPopId !== -1) {
+          planCeilingWrite(li + 1, iPopId, row[iPopId], campaign.pop, 'demotion — challenger pop');
+        }
+        if (iVotingPower !== -1) {
+          planCeilingWrite(li + 1, iVotingPower, row[iVotingPower], 'yes', 'demotion — successor votes');
+        }
+        if (iApproval !== -1) {
+          newApproval = 50;
+          planCeilingWrite(li + 1, iApproval, currentApproval, 50, 'demotion — successor starts at 50');
+        }
+        if (iNotes !== -1) {
+          var seated = 'C' + cycle + ': ' + holder + ' demoted (approval dropped to unfit). ' +
+            campaign.name + ' (' + campaign.pop + ') seated from campaign since C' + campaign.since + '.';
+          planCeilingWrite(li + 1, iNotes, row[iNotes],
+            seated + (stripCampaignNote_(priorNotes) ? ' | ' + stripCampaignNote_(priorNotes) : ''),
+            'demotion — record');
+        }
+      } else {
+        if (iHolder !== -1) {
+          planCeilingWrite(li + 1, iHolder, holder, 'TBD', 'left office — seat vacant');
+        }
+        if (iVotingPower !== -1) {
+          planCeilingWrite(li + 1, iVotingPower, row[iVotingPower], 'vacant', 'left office — no vote');
+        }
+        if (iNotes !== -1) {
+          var former = 'C' + cycle + ': ' + holder + ' left office (approval ' +
+            newApproval + ', silence on ' + silenceOwned +
+            ' initiative(s)). Repeated refusal to move the city.';
+          planCeilingWrite(li + 1, iNotes, row[iNotes],
+            former + (stripCampaignNote_(priorNotes) ? ' | ' + stripCampaignNote_(priorNotes) : ''),
+            'left office — record');
+        }
+      }
+      var departure = {
+        type: seating ? 'demoted' : 'left-office',
+        holder: holder,
+        popid: incumbentPop,
+        officeId: officeId,
+        district: district,
+        approval: newApproval,
+        silenceOwned: silenceOwned,
+        cycle: cycle,
+        successor: seating ? { pop: campaign.pop, name: campaign.name } : null
+      };
+      approvalTriggers.push(departure);
+      S.officeDepartures.push(departure);
+      var leaveHook = {
+        hookType: seating ? 'CIVIC_DEMOTION' : 'CIVIC_LEFT_OFFICE',
+        severity: 8,
+        description: seating
+          ? holder + ' demoted — ' + campaign.name + ' takes the seat'
+          : holder + ' left office — approval ' + newApproval +
+            ' after repeated failure to move the city',
+        cycleGenerated: cycle,
+        popid: seating ? campaign.pop : departure.popid,
+        officeId: officeId,
+        approval: newApproval
+      };
+      S.storyHooks = S.storyHooks || [];
+      S.storyHooks.push(leaveHook);
+      if (!isDryRun && typeof recordHookRipple_ === 'function') {
+        recordHookRipple_(ctx, seating ? 'demotion' : 'left-office', leaveHook, 'updateCivicApprovalRatings');
+      }
+      Logger.log('  ' + (seating ? 'DEMOTED' : 'LEFT OFFICE') + ' ' + holder +
+        ' (' + officeId + ')' + (seating ? ' → ' + campaign.name : '') +
+        ' approval=' + newApproval + ' silenceOwned=' + silenceOwned);
+    }
 
     if (newApproval !== currentApproval) {
       changes.push({
@@ -464,7 +599,7 @@ function updateCivicApprovalRatings_(ctx) {
           approval: newApproval
         });
       }
-      if (newApproval < 30 && currentApproval >= 30) {
+      if (newApproval < 40 && currentApproval >= 40) {
         approvalTriggers.push({
           type: 'vulnerable',
           holder: holder,
@@ -564,20 +699,17 @@ function updateCivicApprovalRatings_(ctx) {
 
 
 /**
- * Is this ImplementationPhase performing? (positive outcomes)
+ * Only a finished initiative credits approval. Live-sounding phases
+ * (operational, disbursement-active, construction-active, pilot-active)
+ * are not wins — C103 sat at 95 on those and never built anything.
  */
 function isPerforming_(phase) {
   if (!phase) return false;
-  var performing = ['disbursement-active', 'dispatch-live', 'construction-active',
-    'implementation-active', 'operational', 'complete', 'pilot-active'];
-  for (var i = 0; i < performing.length; i++) {
-    if (phase.indexOf(performing[i]) >= 0) return true;
-  }
-  return false;
+  return String(phase).indexOf('complete') >= 0 && String(phase).indexOf('visioning-complete') < 0;
 }
 
 /**
- * Is this ImplementationPhase failing? (negative outcomes)
+ * They chose a fail phase. Committal — costs less than silence.
  */
 function isFailing_(phase) {
   if (!phase) return false;
@@ -586,6 +718,357 @@ function isFailing_(phase) {
     if (phase.indexOf(failing[i]) >= 0) return true;
   }
   return false;
+}
+
+/**
+ * Motion of one initiative at this cycle.
+ *   complete — finished. The only + path.
+ *   failed   — they took a fail phase. Paid, but they decided.
+ *   silence  — overdue or never scheduled. Biggest drain.
+ *   sitting  — still on the clock, not finished. Nothing is free.
+ */
+function classifyInitiativeMotion_(phase, nextActionCycle, cycle) {
+  if (isPerforming_(phase)) return 'complete';
+  if (isFailing_(phase)) return 'failed';
+  if (nextActionCycle === null || nextActionCycle === undefined || nextActionCycle === '') {
+    return 'silence';
+  }
+  if (Number(nextActionCycle) < Number(cycle)) return 'silence';
+  return 'sitting';
+}
+
+/**
+ * Per-initiative approval delta. Never positive except complete.
+ * Opposed-fail +1 is the only other raise: they took a side and were right.
+ */
+function approvalDeltaForInitiative_(motion, owns, opposed) {
+  if (motion === 'complete') {
+    if (owns) return { delta: 3, reason: 'complete (+3)' };
+    if (opposed) return { delta: 0, reason: 'complete, opposed (0)' };
+    return { delta: 1, reason: 'complete (+1)' };
+  }
+  if (motion === 'failed') {
+    if (owns) return { delta: -3, reason: 'chose fail (-3)' };
+    if (opposed) return { delta: 1, reason: 'opposed a fail (+1)' };
+    return { delta: -1, reason: 'chose fail (-1)' };
+  }
+  if (motion === 'silence') {
+    if (owns) return { delta: -6, reason: 'silence (-6)' };
+    return { delta: -4, reason: 'silence (-4)' };
+  }
+  if (owns) return { delta: -2, reason: 'sitting, nothing free (-2)' };
+  return { delta: -1, reason: 'sitting, nothing free (-1)' };
+}
+
+/**
+ * In-world: this person cannot run the city.
+ * Out-of-world: this cron/node will not push the sim.
+ * Crossing below 20 is the verdict after the drop. Already-unfit + still
+ * silent is the repeated refusal. Completing work while low does not unseat.
+ */
+function shouldLeaveOffice_(status, newApproval, currentApproval, silenceOwned) {
+  if (String(status || '').toLowerCase() === 'vacant') return false;
+  if (Number(newApproval) >= 20) return false;
+  if (Number(currentApproval) >= 20) return true;
+  return Number(silenceOwned) > 0;
+}
+
+function shouldStartCampaign_(status, newApproval, existingCampaign) {
+  if (existingCampaign) return false;
+  if (String(status || '').toLowerCase() === 'vacant') return false;
+  return Number(newApproval) < 40;
+}
+
+var CAMPAIGN_RE_ = /\[CAMPAIGN pop=(POP-\d+) name=([^\]|]+?) since=(\d+)\]/;
+
+function parseCampaignNote_(notes) {
+  var m = String(notes || '').match(CAMPAIGN_RE_);
+  if (!m) return null;
+  return { pop: m[1], name: String(m[2] || '').trim(), since: parseInt(m[3], 10) };
+}
+
+function stripCampaignNote_(notes) {
+  return String(notes || '').replace(CAMPAIGN_RE_, '').replace(/\s+\|\s+$/, '').replace(/^\s*\|\s+/, '').trim();
+}
+
+function formatCampaignNote_(campaign, rest) {
+  var mark = '[CAMPAIGN pop=' + campaign.pop + ' name=' + campaign.name + ' since=' + campaign.since + ']';
+  var tail = String(rest || '').trim();
+  return tail ? mark + ' ' + tail : mark;
+}
+
+var CIVIC_ROLE_RE_ = /community|advocate|organizer|attorney|educator|teacher|planner|counsel|union|pastor|deacon|principal/;
+var OUT_OF_TOWN_FIRST_ = ['Anjali', 'Cormac', 'Dina', 'Everett', 'Farah', 'Gideon', 'Hester', 'Ivo', 'Karim', 'Leda', 'Niall', 'Oona'];
+var OUT_OF_TOWN_LAST_ = ['Beltran', 'Crowley', 'Duvall', 'Eskridge', 'Farrow', 'Gupta', 'Holtz', 'Ingram', 'Jelinek', 'Keita', 'Langford', 'Moreau'];
+
+function civicHash_(s) {
+  var h = 0;
+  var str = String(s || '');
+  for (var i = 0; i < str.length; i++) h = ((h << 5) - h + str.charCodeAt(i)) | 0;
+  return Math.abs(h);
+}
+
+function dialBandIndexFromValue_(v) {
+  var n = Number(v);
+  if (!isFinite(n)) return 2;
+  if (n < 20) return 0;
+  if (n < 40) return 1;
+  if (n < 60) return 2;
+  if (n < 80) return 3;
+  return 4;
+}
+
+function readDialBase_(dialState, dial) {
+  if (!dialState) return null;
+  try {
+    var o = typeof dialState === 'string' ? JSON.parse(dialState) : dialState;
+    if (!o || !o.base || o.base[dial] == null) return null;
+    return Number(o.base[dial]);
+  } catch (e) {
+    return null;
+  }
+}
+
+/** Civic-challenger defaults: pumped Drive / Integrity / Composure; dumped Family (they left home). */
+function challengerDialStateJson_() {
+  return JSON.stringify({
+    base: {
+      drive: 72, sociability: 62, warmth: 52, openness: 58,
+      composure: 64, integrity: 68, family: 44, outabout: 66
+    },
+    streak: {
+      drive: 0, sociability: 0, warmth: 0, openness: 0,
+      composure: 0, integrity: 0, family: 0, outabout: 0
+    }
+  });
+}
+
+function isCivicAdjacentText_(text) {
+  return CIVIC_ROLE_RE_.test(String(text || '').toLowerCase()) ||
+    /government & civic|legal|education/i.test(String(text || ''));
+}
+
+/**
+ * In-ledger bar. Hard rejects: T1 (protected), already CIV, inactive,
+ * under 25 / over 70, Drive < 60 (won't run), Integrity < 40 (crime-reachable),
+ * Composure < 40 (can't sit a chamber). Missing DialState is not a reject —
+ * score on tags/hood only. Empty seat is worse than a quieter local.
+ */
+function scoreLedgerCitizenForOffice_(row, headers, district, incumbentPopId, occupiedPopIds) {
+  var col = function(name) { return headers.indexOf(name); };
+  var iPop = col('POPID');
+  if (iPop < 0) return null;
+  var pop = String(row[iPop] || '').trim();
+  if (!pop || pop === incumbentPopId) return null;
+  if (occupiedPopIds && occupiedPopIds[pop]) return null;
+  var iStatus = col('Status');
+  var st = iStatus >= 0 ? String(row[iStatus] || '').toLowerCase() : 'active';
+  if (st && st !== 'active') return null;
+  var iCiv = col('CIV (y/n)');
+  var civ = iCiv >= 0 ? String(row[iCiv] || '').toLowerCase() : '';
+  if (civ.indexOf('y') === 0) return null;
+  var iTier = col('Tier');
+  var tier = Number(row[iTier]);
+  if (!isFinite(tier)) tier = 3;
+  if (tier < 2 || tier > 4) return null;
+  var iBy = col('BirthYear');
+  if (iBy >= 0 && row[iBy] !== '' && row[iBy] != null) {
+    var by = Number(row[iBy]);
+    if (isFinite(by)) {
+      var age = 2041 - by;
+      if (age < 25 || age > 70) return null;
+    }
+  }
+  var iDial = col('DialState');
+  if (iDial >= 0 && row[iDial]) {
+    var drive = readDialBase_(row[iDial], 'drive');
+    var integ = readDialBase_(row[iDial], 'integrity');
+    var comp = readDialBase_(row[iDial], 'composure');
+    if (drive != null && dialBandIndexFromValue_(drive) < 3) return null;
+    if (integ != null && dialBandIndexFromValue_(integ) < 2) return null;
+    if (comp != null && dialBandIndexFromValue_(comp) < 2) return null;
+  }
+  var iRole = col('RoleType');
+  if (iRole < 0) iRole = col('TierRole');
+  var role = iRole >= 0 ? String(row[iRole] || '') : '';
+  var iTags = col('SkillTags');
+  var tags = iTags >= 0 ? String(row[iTags] || '') : '';
+  var iHood = col('Neighborhood');
+  var hood = iHood >= 0 ? String(row[iHood] || '') : '';
+  var hoods = DISTRICT_HOODS[String(district || '').toUpperCase()] || [];
+  var citywide = !hoods.length || String(district || '').toLowerCase() === 'citywide';
+  var local = citywide;
+  if (!local) {
+    for (var hi = 0; hi < hoods.length; hi++) {
+      if (hood.toLowerCase() === String(hoods[hi]).toLowerCase()) local = true;
+    }
+  }
+  var score = 1;
+  if (local) score += 100;
+  if (isCivicAdjacentText_(role + ' ' + tags)) score += 20;
+  if (tier === 2) score += 10;
+  else if (tier === 3) score += 5;
+  if (iDial >= 0 && row[iDial]) {
+    var dDrive = readDialBase_(row[iDial], 'drive');
+    if (dDrive != null) score += dialBandIndexFromValue_(dDrive);
+  }
+  var iFirst = col('First');
+  var iLast = col('Last');
+  var iFull = col('FullName');
+  var name = iFull >= 0 && row[iFull] ? String(row[iFull]).trim()
+    : ((iFirst >= 0 ? row[iFirst] : '') + ' ' + (iLast >= 0 ? row[iLast] : '')).trim();
+  if (!name) return null;
+  return { popId: pop, name: name, neighborhood: hood, tier: tier, score: score, origin: 'ledger' };
+}
+
+function nextChallengerPopId_(rows, iPop) {
+  var max = 0;
+  for (var r = 0; r < (rows || []).length; r++) {
+    var m = String((rows[r] && rows[r][iPop]) || '').match(/POP-(\d+)/);
+    if (m) max = Math.max(max, Number(m[1]));
+  }
+  return 'POP-' + String(max + 1).padStart(5, '0');
+}
+
+function mintChallengerOnLedger_(ctx, spec) {
+  var headers = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  var col = function(name) { return headers.indexOf(name); };
+  var iPop = col('POPID');
+  if (iPop < 0) return null;
+  var pop = nextChallengerPopId_(rows, iPop);
+  var row = [];
+  for (var i = 0; i < headers.length; i++) row[i] = '';
+  var set = function(name, val) {
+    var c = col(name);
+    if (c >= 0) row[c] = val;
+  };
+  set('POPID', pop);
+  set('First', spec.first);
+  set('Last', spec.last);
+  set('Status', 'active');
+  set('Tier', 3);
+  set('RoleType', 'Civic candidate');
+  set('ClockMode', 'CIVIC');
+  set('CIV (y/n)', 'n');
+  set('BirthYear', spec.birthYear);
+  set('Neighborhood', spec.hood);
+  set('Gender', spec.gender || '');
+  set('DialState', challengerDialStateJson_());
+  set('SkillTags', 'Government & Civic');
+  set('CareerStage', 'mid-career');
+  set('MigrationReason', spec.reason || 'arrived to challenge a failing office');
+  set('MigratedCycle', spec.cycle || '');
+  set('OrginCity', spec.originCity || 'out-of-town');
+  set('OriginGame', spec.originCity || 'out-of-town');
+  set('LifeHistory', 'C' + spec.cycle + ': Arrived to campaign for ' + (spec.officeId || 'a civic seat') + '.');
+  rows.push(row);
+  return {
+    popId: pop,
+    name: (spec.first + ' ' + spec.last).trim(),
+    neighborhood: spec.hood,
+    tier: 3,
+    origin: spec.origin || 'out-of-town'
+  };
+}
+
+function pickGenericCitizenChallenger_(ctx, district, specBase) {
+  if (!ctx || !ctx.ss || typeof ctx.ss.getSheetByName !== 'function') return null;
+  var sheet = ctx.ss.getSheetByName('Generic_Citizens');
+  if (!sheet || !sheet.getDataRange) return null;
+  var data = sheet.getDataRange().getValues();
+  if (!data || data.length < 2) return null;
+  var h = data[0];
+  var idx = function(name) {
+    for (var i = 0; i < h.length; i++) {
+      if (String(h[i] || '').trim() === name) return i;
+    }
+    return -1;
+  };
+  var iF = idx('First'), iL = idx('Last'), iOcc = idx('Occupation');
+  var iHood = idx('Neighborhood'), iBy = idx('BirthYear'), iSt = idx('Status'), iSex = idx('Sex');
+  var hoods = DISTRICT_HOODS[String(district || '').toUpperCase()] || [];
+  var best = null, bestScore = -1;
+  for (var r = 1; r < data.length; r++) {
+    var row = data[r];
+    var st = iSt >= 0 ? String(row[iSt] || 'active').toLowerCase() : 'active';
+    if (st && st !== 'active') continue;
+    var first = iF >= 0 ? String(row[iF] || '').trim() : '';
+    var last = iL >= 0 ? String(row[iL] || '').trim() : '';
+    if (!first && !last) continue;
+    var occ = iOcc >= 0 ? String(row[iOcc] || '') : '';
+    var hood = iHood >= 0 ? String(row[iHood] || '') : '';
+    if (iBy >= 0 && row[iBy] !== '' && row[iBy] != null) {
+      var age = 2041 - Number(row[iBy]);
+      if (isFinite(age) && (age < 25 || age > 70)) continue;
+    }
+    var local = !hoods.length;
+    for (var hi = 0; hi < hoods.length; hi++) {
+      if (hood.toLowerCase() === String(hoods[hi]).toLowerCase()) local = true;
+    }
+    if (!isCivicAdjacentText_(occ) && !local) continue;
+    var score = (isCivicAdjacentText_(occ) ? 20 : 0) + (local ? 100 : 0);
+    if (score > bestScore) {
+      bestScore = score;
+      best = {
+        first: first, last: last, hood: hood || (hoods[0] || 'Downtown'),
+        birthYear: iBy >= 0 ? row[iBy] : 1988,
+        gender: iSex >= 0 ? row[iSex] : '',
+        occ: occ
+      };
+    }
+  }
+  if (!best) return null;
+  return mintChallengerOnLedger_(ctx, {
+    first: best.first, last: best.last, hood: best.hood,
+    birthYear: best.birthYear || 1988, gender: best.gender,
+    cycle: specBase.cycle, officeId: specBase.officeId,
+    origin: 'generic', originCity: best.hood,
+    reason: 'emerged from the city to challenge a failing office'
+  });
+}
+
+function mintOutOfTownChallenger_(ctx, district, officeId, cycle) {
+  var hoods = DISTRICT_HOODS[String(district || '').toUpperCase()] || [];
+  var hood = hoods[0] || 'Downtown';
+  var seed = String(officeId || district || '') + ':' + String(cycle || 0);
+  var h = civicHash_(seed);
+  var first = OUT_OF_TOWN_FIRST_[h % OUT_OF_TOWN_FIRST_.length];
+  var last = OUT_OF_TOWN_LAST_[Math.floor(h / 7) % OUT_OF_TOWN_LAST_.length];
+  var birthYear = 1976 + (h % 20);
+  var gender = h % 2 === 0 ? 'F' : 'M';
+  return mintChallengerOnLedger_(ctx, {
+    first: first, last: last, hood: hood, birthYear: birthYear, gender: gender,
+    cycle: cycle, officeId: officeId, origin: 'out-of-town', originCity: 'out-of-town',
+    reason: 'arrived from outside the city to challenge a failing office'
+  });
+}
+
+/**
+ * Always return a challenger when the ledger is present.
+ * 1) in-ledger, dial-and-tag qualified
+ * 2) Generic_Citizens occupation/hood feeder, minted onto the ledger
+ * 3) out-of-town arrival with civic-challenger dial defaults
+ * Vacant (null) only if there is no ledger to write.
+ */
+function pickCampaignChallenger_(ctx, district, incumbentPopId, occupiedPopIds, officeId, cycle) {
+  if (!ctx || !ctx.ledger || !ctx.ledger.headers || !ctx.ledger.rows) return null;
+  var headers = ctx.ledger.headers;
+  var best = null;
+  for (var r = 0; r < ctx.ledger.rows.length; r++) {
+    var scored = scoreLedgerCitizenForOffice_(
+      ctx.ledger.rows[r], headers, district, incumbentPopId, occupiedPopIds
+    );
+    if (!scored) continue;
+    if (!best || scored.score > best.score ||
+      (scored.score === best.score && scored.popId < best.popId)) {
+      best = scored;
+    }
+  }
+  if (best) return best;
+  var fromGc = pickGenericCitizenChallenger_(ctx, district, { cycle: cycle, officeId: officeId });
+  if (fromGc) return fromGc;
+  return mintOutOfTownChallenger_(ctx, district, officeId, cycle);
 }
 
 /**

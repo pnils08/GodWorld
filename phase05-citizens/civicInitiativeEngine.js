@@ -589,14 +589,14 @@ function getCouncilState_(ctx) {
         title: title,
         status: status,
         faction: faction,
-        available: status !== 'hospitalized' && status !== 'deceased',
+        available: status !== 'hospitalized' && status !== 'deceased' && status !== 'vacant',
         approval: mayorApproval  // v1.7
       };
       continue;  // Skip vote counting for mayor
     }
 
     // Track vacant seats
-    if (votingPower === 'vacant' || holder === 'TBD' || !holder || holder === '') {
+    if (votingPower === 'vacant' || status === 'vacant' || holder === 'TBD' || !holder || holder === '') {
       state.vacantSeats++;
       continue;
     }

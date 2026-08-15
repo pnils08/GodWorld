@@ -16,6 +16,9 @@ Tools:
   lookup_initiative(name)    — initiative state from tracker sheet
   search_canon(query)        — search bay-tribune Supermemory
   search_world(query)        — search world-data Supermemory
+  search_build(query)        — search session-logs Supermemory (building brain:
+                               mirrored claude-mem session summaries; engineering
+                               memory, not sim canon)
   search_articles(query)     — search dashboard API articles
   get_roster(team)           — player roster from truesource
   get_neighborhood(name)     — neighborhood state from world-data
@@ -498,6 +501,26 @@ def search_world(query: str) -> str:
     neighborhoods, initiatives, player truesource, and Cycle summaries.
     Use for: 'Who lives in Temescal?', 'West Oakland businesses', 'neighborhood sentiment'."""
     return search_world_domains(query)
+
+
+@mcp.tool()
+def search_build(query: str) -> str:
+    """Search the building brain (session-logs container) — auto-mirrored
+    claude-mem session summaries from every Claude terminal close: what shipped,
+    why, debugging history, decisions. Engineering memory, NOT sim canon.
+    Newest first; narrow by terminal via the metadata.terminal field in hits.
+    Use for: 'how does the canon door work', 'why was the journal retired',
+    'who changed cron-rhea-gate last', 'boot-hook decisions'."""
+    return supermemory_search(
+        query,
+        'session-logs',
+        5,
+        mode='hybrid',
+        threshold=0.3,
+        sort='recency',
+        project=True,
+        label='building brain — engineering memory, not canon',
+    )
 
 
 @mcp.tool()

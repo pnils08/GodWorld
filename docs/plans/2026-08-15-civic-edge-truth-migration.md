@@ -98,12 +98,36 @@ that sits in D5. The defect is **semantic, not referential**: nothing ties an
 initiative to the place it is actually about. Type-checking the field does not fix
 this; only an authored link to the project's real location does.
 
-### 3.4 One faction leads every initiative
+### 3.4 One faction leads every initiative — and the data is telling the truth
 
 All six live initiatives carry `LeadFaction=OPP`. Approval treats
 `supportedByFaction = (init.leadFaction === faction)` and `owns = isMayor ||
 supportedByFaction`, so **CRC and IND members can never own an initiative** — they
 are structurally always the opposition, in every case the sim has ever produced.
+
+> **CORRECTED 2026-08-15.** This is **not** faction drift, and calling it
+> "monoculture" mis-framed it. Baylight, OARI and the Youth Pipeline are
+> hand-pushed **mayoral** programs; the tracker holds an accurate record of a city
+> hall where only the mayor authors. Two structural facts under it:
+>
+> 1. **Nothing can create an initiative.** `civicInitiativeEngine.js` resolves
+>    votes, external decisions, visioning, consequences and ripples — there is no
+>    `createInitiative_`. `seedInitiativeTracker` is one-time setup and
+>    `manualRunVote` is an operator trigger. Initiatives enter the world only by
+>    hand.
+> 2. **The schema cannot record authorship.** 28 columns, of which *five* describe
+>    mayoral action (`MayoralAction`, `MayoralActionCycle`, `VetoReason`,
+>    `OverrideVoteCycle`, `OverrideOutcome`) and *zero* describe who proposed the
+>    thing. No `Sponsor`, no `ProposedBy`, no author district.
+>
+> The tracker was built as *the mayor proposes, the council votes*. It can only
+> ever produce mayor-dominated data, so it does. Fixing `LeadFaction` values would
+> be forging a record; the fix is an authorship path (§7).
+>
+> The city-hall skill already *asks* for the missing behaviour — its open option
+> invites "a Tran who introduces an amendment nobody planned" — but a voice saying
+> so has nowhere to land it. The narrative layer is requesting a row the data layer
+> cannot hold.
 
 ### 3.5 Four of nine councilmembers cannot move their own approval
 
@@ -218,7 +242,8 @@ means nothing free *either* way.
 The four "dead seats" must **not** be fixed by granting them movement. That would
 be the same defect wearing the opposite sign.
 
-**They are fixed by exposure, and exposure can never be zero.** Every district
+**They are fixed by exposure, and *condition* exposure can never be zero** (though
+see §9 — *citizen* exposure very much can). Every district
 always has neighborhoods; every neighborhood always carries live condition —
 `CrimeIndex`, `Sentiment`, `RetailVitality`, `MigrationFlow`,
 `NeighborhoodTrajectory`, `HousingPressure`, `MedianIncome`, `MedianRent`,
@@ -254,8 +279,100 @@ answered by the line; ruling 3 (faction monoculture) dissolves once initiatives 
 cron-generated from real issues rather than authored, since lead faction then
 emerges from who acts.
 
+## 7. The inversion (builder-direct 2026-08-15)
+
+**The tracker is not a table, it is the arena.** The entire civic sim revolves
+around it: a member's district is their world, and the `Initiative_Tracker` is
+where they push their agenda.
+
+The build is currently **inverted**:
+
+| | Today (built) | Intended |
+|---|---|---|
+| Initiatives enter by | hand, mayor-authored | members pushing agendas; crons surfacing repeated issues into something to vote on |
+| Members relate to the tracker by | passive intersection of a hood string | attacking an existing initiative or filing a new one |
+| Approval derives from | that intersection, plus a timer | district condition + what they did or declined to do |
+| Direction of causation | tracker → member | member → tracker → outcomes → member |
+
+**The weekly shape.** Mon–Thu the districts **absorb** their world (one seat/week
+now, rising to all 9 Mon–Thu). By Sunday's city hall they arrive **already layered
+with the past cycle before they utter a word** — city hall is the *expression*
+step, not the input step. What they do there — attack, file, abstain — is conduct,
+and conduct is what §6.1 test 1 requires.
+
+Consequences for this plan: the "faction monoculture" ruling (§5.3) is not a
+values question at all — it dissolves the moment authorship exists, because lead
+faction becomes a record of who acted. And the missing generative half is a named
+future build, not a defect to patch.
+
+## 8. The absorption layer already exists — and is wired to the wrong place
+
+`output/cron-civic/packs/COUNCIL-D*_c103.json` already carries, per seat:
+
+- `signal: { kind: "district-heat", hoods: [...], src: "lib/districtMap.js + civic-office-map.json" }`
+- `exposure.subjects[]` — named citizens in those hoods, each with a `why` that
+  **already computes condition against the city baseline**: *"lives in Piedmont Ave
+  — sentiment 0.38 vs city 0.489."*
+- `actor.dials.approval` — the seat's current number, carried alongside.
+
+So the district→hood→citizen→condition path §6.1 test 2 needs **is built and runs
+every cycle.** It feeds the *writer's prompt* and stops there. The pack tells Crane
+his neighborhood sits 0.11 below the city on sentiment, and then his approval moves
+−1 because a timer fired. **Exposure is computed and discarded.**
+
+This is the cheapest available win in the plan: test 2 does not need new
+measurement, it needs the existing measurement to reach the record. Its only hard
+dependency is E1 — `signal.src` is literally `lib/districtMap.js`, so district
+truth must land first. (Today's civic.18 Node fix already removes Coliseum and
+Elmhurst from D5's heat on the next civic cron; Montclair remains until Task 1
+seeds it, which is why Crane's C103 pack drew 0 subjects from half his district.)
+
+## 9. ESCALATION — districts do not map to the population
+
+Active citizens per district, via the corrected map:
+
+| District | Member | Citizens | Detail |
+|---|---|---|---|
+| D2 | Tran | **222** | Downtown 85, Chinatown 71, Jack London 66 |
+| D7 | Ashford | 167 | Temescal 76, Rockridge 77, KONO 14 |
+| D9 | Mobley | 140 | Laurel 58, Uptown 82 |
+| D8 | Chen | 100 | Lake Merritt 93, Adams Point 7, Grand Lake 0, Eastlake 0 |
+| D3 | Delgado | 88 | Fruitvale 85, San Antonio 3 |
+| D1 | Carter | 69 | West Oakland 69, Brooklyn 0 |
+| D6 | Crane | 49 | Piedmont Ave 49, Montclair 0 |
+| **D5** | **Rivers** | **4** | East Oakland 2, Baylight District 2 |
+| **D4** | **Vega** | **1** | Ivy Hill 1, Glenview 0, Dimond 0 |
+
+**Ramon Vega represents one citizen.** Janae Rivers, who holds the flagship $2.1B
+development, represents four. Tran represents 222. Seven of the 22 hoods have zero
+residents.
+
+This is the same inversion one layer down: district boundaries came from a lookup
+table, citizen generation populated hoods by its own logic, and the two were never
+reconciled. Representation is an artifact of two unrelated processes.
+
+**Why this gates E5 and civic.19.** Per-district accountability across districts of
+1 and 222 is not accountability. And it bounds §6.2: *condition* exposure is always
+available (every hood has metrics regardless of who lives there), but *citizen*
+exposure is functionally zero for D4 — its pack drew **0 subjects**. A member can
+be made to answer for his district's condition; he cannot be made to answer to
+constituents who do not exist.
+
+Vega passes no version of "does its life match its life" — not because the wiring
+is missing, but because there is almost no one there for him to represent. That is
+a population/boundary question, not an approval question, and it needs a ruling
+before per-district accountability is built on top of it.
+
 ## Changelog
 
+- 2026-08-15 (engine-sheet) — §7 (the inversion: tracker is the arena; absorb
+  Mon–Thu, express Sunday), §8 (absorption already computed in civic packs and
+  discarded — test 2 needs wiring, not measurement), §9 (ESCALATION: districts do
+  not map to population — Vega represents 1 citizen, Rivers 4, Tran 222). §3.4
+  corrected: all-OPP is an accurate record of mayor-only authoring, not drift —
+  nothing can create an initiative and the schema has 5 mayoral-action columns and
+  0 authorship columns. §6.2 corrected: condition exposure is never zero, citizen
+  exposure can be.
 - 2026-08-15 (engine-sheet) — §6 added: builder direction on the initiative loop,
   wake-day conduct, and "nothing is free" recorded as given; the person-vs-mechanism
   line set as 3 tests. Current state fails all 3 on all 9 seats — the 4 frozen seats

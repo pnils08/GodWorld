@@ -1,0 +1,198 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "actor": {
+    "id": "POP-00502",
+    "name": "Leonard Tran",
+    "role": "City Council District 2",
+    "officeId": "COUNCIL-D2",
+    "district": "D2",
+    "faction": "IND",
+    "agentDir": "civic-office-ind-swing"
+  },
+  "task": {
+    "a": "district-week"
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "Downtown",
+      "Chinatown",
+      "Jack London"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00091",
+        "name": "Delmon Regan",
+        "neighborhood": "Downtown",
+        "role": "Relief Pitcher, Midland RockHounds (AA)",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-00131",
+        "name": "Lorenzo Jordan",
+        "neighborhood": "Downtown",
+        "role": "Public Defender",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-00133",
+        "name": "Ariana Reyes",
+        "neighborhood": "Downtown",
+        "role": "Data Analyst (Gridiron Analytics)",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-00171",
+        "name": "Sofia Jordan",
+        "neighborhood": "Downtown",
+        "role": "Environmental Consultant",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-00172",
+        "name": "Marlon Hingsley",
+        "neighborhood": "Downtown",
+        "role": "Housing Authority Inspector",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-00177",
+        "name": "Elle Lilo",
+        "neighborhood": "Jack London",
+        "role": "Harbor Tugboat Captain",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-00179",
+        "name": "Leo Leonard",
+        "neighborhood": "Downtown",
+        "role": "Juvenile Probation Officer",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-00180",
+        "name": "Cameron Wallen",
+        "neighborhood": "Downtown",
+        "role": "Corporate Accountant",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      }
+    ],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-COUNCIL-D2",
+      "t": "FACT",
+      "text": "Leonard Tran holds COUNCIL-D2 at approval 58",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-INIT-006",
+      "t": "FACT",
+      "text": "Baylight District — Final Council Vote is in construction-planning — C101: Post-event site inspection for the C100 Celebration closed clean — Delgado full walkdown of event field and construction exclusion perimeter found no surf",
+      "src": "output/initiative_tracker.json"
+    },
+    {
+      "id": "F-crime-Downtown",
+      "t": "FACT",
+      "text": "Downtown crime: property 62, violent 55, incidents 14 (cycle 103)",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-crime-JackLondon",
+      "t": "FACT",
+      "text": "Jack London crime: property 53, violent 43, incidents 8 (cycle 103)",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-crime-Chinatown",
+      "t": "FACT",
+      "text": "Chinatown crime: property 47, violent 42, incidents 7 (cycle 103)",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-Downtown",
+      "t": "FACT",
+      "text": "Downtown: sentiment 0.41, retail 13.64, crime index 1.02, housing pressure 1.5",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-hood-JackLondon",
+      "t": "FACT",
+      "text": "Jack London: sentiment 0.44, retail 11.06, crime index 0.96, housing pressure 1.5",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-hood-Chinatown",
+      "t": "FACT",
+      "text": "Chinatown: sentiment 0.39, retail 11.39, crime index 0.89, housing pressure 0",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-chaos-cop_car-neighborhood Downtown",
+      "t": "FACT",
+      "text": "cop_car ticket → neighborhood Downtown CrimeIndex -0.13",
+      "src": "world_summary Chaos_Cars"
+    },
+    {
+      "id": "F-we-1",
+      "t": "FACT",
+      "text": "INFRASTRUCTURE — crisis-spike — Chinatown: INFRASTRUCTURE event (impactScore 24)",
+      "src": "world_summary World Events"
+    },
+    {
+      "id": "F-we-2",
+      "t": "FACT",
+      "text": "CELEBRITY — texture — (no neighborhood): actor spotted downtown",
+      "src": "world_summary World Events"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D2",
+        "PopId": "POP-00502",
+        "Holder": "Leonard Tran",
+        "District": "D2",
+        "Approval": "58"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D2",
+        "PopId": "POP-00502",
+        "Holder": "Leonard Tran",
+        "District": "D2",
+        "Approval": "58"
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + action + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

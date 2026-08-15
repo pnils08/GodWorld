@@ -1,0 +1,179 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "actor": {
+    "id": "POP-00501",
+    "name": "Denise Carter",
+    "role": "City Council District 1",
+    "officeId": "COUNCIL-D1",
+    "district": "D1",
+    "faction": "OPP",
+    "agentDir": "civic-office-opp-faction"
+  },
+  "task": {
+    "a": "district-week"
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "West Oakland",
+      "Brooklyn"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00176",
+        "name": "Talmon Lint",
+        "neighborhood": "West Oakland",
+        "role": "Solar Panel Installation Lead",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-00185",
+        "name": "Lila Patty",
+        "neighborhood": "West Oakland",
+        "role": "Solar Panel Installation Lead",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-00187",
+        "name": "Isla Sike",
+        "neighborhood": "West Oakland",
+        "role": "Domestic Violence Shelter Director",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-00188",
+        "name": "Simone Cleng",
+        "neighborhood": "West Oakland",
+        "role": "Community Organizer",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-00190",
+        "name": "Jackson Sift",
+        "neighborhood": "West Oakland",
+        "role": "Ex-Offender Reentry Counselor",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-00201",
+        "name": "Elio Perez",
+        "neighborhood": "West Oakland",
+        "role": "Server",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-00202",
+        "name": "Marky Beal",
+        "neighborhood": "West Oakland",
+        "role": "Retail worker",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-00218",
+        "name": "Joel Wren",
+        "neighborhood": "West Oakland",
+        "role": "Mechanic",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      }
+    ],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-COUNCIL-D1",
+      "t": "FACT",
+      "text": "Denise Carter holds COUNCIL-D1 at approval 95",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-INIT-001",
+      "t": "FACT",
+      "text": "West Oakland Stabilization Fund is in disbursement-active — C102: Month-four disbursement batch approved (7 households), total disbursed: 45 of ~280.",
+      "src": "output/initiative_tracker.json"
+    },
+    {
+      "id": "F-INIT-002",
+      "t": "FACT",
+      "text": "Oakland Alternative Response Initiative is in operational — C102: D7 performance review confirms stabilization post-KONO crisis; monitoring continues.",
+      "src": "output/initiative_tracker.json"
+    },
+    {
+      "id": "F-INIT-007",
+      "t": "FACT",
+      "text": "Oakland Youth Apprenticeship Pipeline is in pilot-active — C102: Executive review ordered to address stalled recruitment and intake bottlenecks.",
+      "src": "output/initiative_tracker.json"
+    },
+    {
+      "id": "F-crime-WestOakland",
+      "t": "FACT",
+      "text": "West Oakland crime: property 58, violent 61, incidents 11 (cycle 103)",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-WestOakland",
+      "t": "FACT",
+      "text": "West Oakland: sentiment 0.5, retail 7.91, crime index 1.19, housing pressure 0",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-hood-Brooklyn",
+      "t": "FACT",
+      "text": "Brooklyn: sentiment 0.47, retail 7.18, crime index 0.71, housing pressure 0",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-we-0",
+      "t": "FACT",
+      "text": "FAITH — holy_day — West Oakland: New Covenant Pentecostal Assembly observes Christmas",
+      "src": "world_summary World Events"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D1",
+        "PopId": "POP-00501",
+        "Holder": "Denise Carter",
+        "District": "D1",
+        "Approval": "95"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D1",
+        "PopId": "POP-00501",
+        "Holder": "Denise Carter",
+        "District": "D1",
+        "Approval": "95"
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + action + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "actor": {
+    "id": "POP-00042",
+    "name": "Ramon Vega",
+    "role": "City Council District 4",
+    "officeId": "COUNCIL-D4",
+    "district": "D4",
+    "faction": "IND",
+    "agentDir": "civic-office-ind-swing"
+  },
+  "task": {
+    "a": "district-week"
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "Glenview",
+      "Dimond",
+      "Ivy Hill"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00730",
+        "name": "Clarence Moody",
+        "neighborhood": "Dimond",
+        "role": "Retired Machinist",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-00784",
+        "name": "Isaac Martinez",
+        "neighborhood": "Ivy Hill",
+        "role": "Plumber",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      }
+    ],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-COUNCIL-D4",
+      "t": "FACT",
+      "text": "Ramon Vega holds COUNCIL-D4 at approval 54",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-crime-Dimond",
+      "t": "FACT",
+      "text": "Dimond crime: property 39, violent 27, incidents 1 (cycle 103)",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-crime-Glenview",
+      "t": "FACT",
+      "text": "Glenview crime: property 28, violent 22, incidents 4 (cycle 103)",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-Glenview",
+      "t": "FACT",
+      "text": "Glenview: sentiment 0.57, retail 7.4, crime index 0.5, housing pressure 0",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-hood-Dimond",
+      "t": "FACT",
+      "text": "Dimond: sentiment 0.63, retail 8.24, crime index 0.66, housing pressure 0",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-hood-IvyHill",
+      "t": "FACT",
+      "text": "Ivy Hill: sentiment 0.59, retail 5.21, crime index 0.22, housing pressure 0",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-chaos-ice_cream_truck-neighborhood Dimond",
+      "t": "FACT",
+      "text": "ice_cream_truck summer_morale_boost → neighborhood Dimond Sentiment 0.09",
+      "src": "world_summary Chaos_Cars"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D4",
+        "PopId": "POP-00042",
+        "Holder": "Ramon Vega",
+        "District": "D4",
+        "Approval": "54"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D4",
+        "PopId": "POP-00042",
+        "Holder": "Ramon Vega",
+        "District": "D4",
+        "Approval": "54"
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + action + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

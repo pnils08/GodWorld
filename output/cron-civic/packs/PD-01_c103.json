@@ -1,0 +1,254 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "actor": {
+    "id": "POP-00146",
+    "name": "Caleb Reyes",
+    "role": "Public Defender",
+    "officeId": "PD-01",
+    "district": "citywide",
+    "faction": "OPP",
+    "agentDir": "PD-01"
+  },
+  "task": {
+    "a": "role-week"
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-PD-01",
+      "t": "FACT",
+      "text": "Caleb Reyes holds PD-01 at approval 65",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-INIT-002",
+      "t": "FACT",
+      "text": "Oakland Alternative Response Initiative is in operational — C102: D7 performance review confirms stabilization post-KONO crisis; monitoring continues.",
+      "src": "output/initiative_tracker.json"
+    },
+    {
+      "id": "F-crime-Downtown",
+      "t": "FACT",
+      "text": "Downtown crime: property 62, violent 55, incidents 14 (cycle 103)",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-crime-Elmhurst",
+      "t": "FACT",
+      "text": "Elmhurst crime: property 55, violent 62, incidents 12 (cycle 103)",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-crime-WestOakland",
+      "t": "FACT",
+      "text": "West Oakland crime: property 58, violent 61, incidents 11 (cycle 103)",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-crime-EastOakland",
+      "t": "FACT",
+      "text": "East Oakland crime: property 54, violent 66, incidents 11 (cycle 103)",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-crime-JackLondon",
+      "t": "FACT",
+      "text": "Jack London crime: property 53, violent 43, incidents 8 (cycle 103)",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-crime-Coliseum",
+      "t": "FACT",
+      "text": "Coliseum crime: property 65, violent 56, incidents 8 (cycle 103)",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-crime-Fruitvale",
+      "t": "FACT",
+      "text": "Fruitvale crime: property 54, violent 50, incidents 7 (cycle 103)",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-crime-Chinatown",
+      "t": "FACT",
+      "text": "Chinatown crime: property 47, violent 42, incidents 7 (cycle 103)",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-chaos-oari_van-citizen POP-00252 (T4)",
+      "t": "FACT",
+      "text": "oari_van welfare_check → citizen POP-00252 (T4) Recovering 0",
+      "src": "world_summary Chaos_Cars"
+    },
+    {
+      "id": "F-chaos-cop_car-neighborhood Baylight Di",
+      "t": "FACT",
+      "text": "cop_car helped_by_police → neighborhood Baylight District CrimeIndex -0.09",
+      "src": "world_summary Chaos_Cars"
+    },
+    {
+      "id": "F-chaos-cop_car-neighborhood Downtown",
+      "t": "FACT",
+      "text": "cop_car ticket → neighborhood Downtown CrimeIndex -0.13",
+      "src": "world_summary Chaos_Cars"
+    },
+    {
+      "id": "F-chaos-cop_car-citizen POP-00877 (T4)",
+      "t": "FACT",
+      "text": "cop_car ticket → citizen POP-00877 (T4) Setback 0",
+      "src": "world_summary Chaos_Cars"
+    },
+    {
+      "id": "F-chaos-oari_van-neighborhood Rockridge",
+      "t": "FACT",
+      "text": "oari_van substance_intervention → neighborhood Rockridge Sentiment 0.04",
+      "src": "world_summary Chaos_Cars"
+    },
+    {
+      "id": "F-chaos-cop_car-neighborhood San Antonio",
+      "t": "FACT",
+      "text": "cop_car helped_by_police → neighborhood San Antonio CrimeIndex -0.1",
+      "src": "world_summary Chaos_Cars"
+    },
+    {
+      "id": "F-chaos-oari_van-citizen POP-00167 (T4)",
+      "t": "FACT",
+      "text": "oari_van welfare_check → citizen POP-00167 (T4) Recovering 0",
+      "src": "world_summary Chaos_Cars"
+    },
+    {
+      "id": "F-chaos-cop_car-citizen POP-00519 (T3)",
+      "t": "FACT",
+      "text": "cop_car arrested → citizen POP-00519 (T3) Transgression-Serious 0",
+      "src": "world_summary Chaos_Cars"
+    },
+    {
+      "id": "F-we-8",
+      "t": "FACT",
+      "text": "SAFETY — texture — (no neighborhood): noise complaint",
+      "src": "world_summary World Events"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "PD-01",
+        "PopId": "POP-00146",
+        "Holder": "Caleb Reyes",
+        "District": "citywide",
+        "Approval": "65"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "MAYOR-01",
+        "PopId": "POP-00034",
+        "Holder": "Avery Santana",
+        "District": "citywide",
+        "Approval": "95"
+      },
+      {
+        "OfficeId": "DA-01",
+        "PopId": "POP-00143",
+        "Holder": "Clarissa Dane",
+        "District": "citywide",
+        "Approval": "65"
+      },
+      {
+        "OfficeId": "PD-01",
+        "PopId": "POP-00146",
+        "Holder": "Caleb Reyes",
+        "District": "citywide",
+        "Approval": "65"
+      },
+      {
+        "OfficeId": "STAFF-COS",
+        "PopId": "POP-00035",
+        "Holder": "Laila Cortez",
+        "District": "citywide",
+        "Approval": "65"
+      },
+      {
+        "OfficeId": "STAFF-DM-ECON",
+        "PopId": "POP-00036",
+        "Holder": "Marcus Osei",
+        "District": "citywide",
+        "Approval": "65"
+      },
+      {
+        "OfficeId": "STAFF-DM-COMM",
+        "PopId": "POP-00037",
+        "Holder": "Brenda Okoro",
+        "District": "citywide",
+        "Approval": "65"
+      },
+      {
+        "OfficeId": "STAFF-COMMS",
+        "PopId": "POP-00038",
+        "Holder": "Theo Park",
+        "District": "citywide",
+        "Approval": "65"
+      },
+      {
+        "OfficeId": "STAFF-LEGAL",
+        "PopId": "POP-00039",
+        "Holder": "Simone Ellis",
+        "District": "citywide",
+        "Approval": "65"
+      },
+      {
+        "OfficeId": "STAFF-MANAGER",
+        "PopId": "POP-00040",
+        "Holder": "Aaron Whitfield",
+        "District": "citywide",
+        "Approval": "65"
+      },
+      {
+        "OfficeId": "STAFF-BAYLIGHT",
+        "PopId": "POP-00041",
+        "Holder": "Keisha Ramos",
+        "District": "citywide",
+        "Approval": "65"
+      },
+      {
+        "OfficeId": "CHIEF-POLICE",
+        "PopId": "POP-00136",
+        "Holder": "Rafael Montez",
+        "District": "citywide",
+        "Approval": "65"
+      },
+      {
+        "OfficeId": "CHIEF-FIRE",
+        "PopId": "POP-00140",
+        "Holder": "Marcus Hollowell",
+        "District": "citywide",
+        "Approval": "65"
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + action + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

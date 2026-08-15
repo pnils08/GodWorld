@@ -1,0 +1,153 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "actor": {
+    "id": "POP-00043",
+    "name": "Janae Rivers",
+    "role": "City Council District 5",
+    "officeId": "COUNCIL-D5",
+    "district": "D5",
+    "faction": "OPP",
+    "agentDir": "civic-office-opp-faction"
+  },
+  "task": {
+    "a": "district-week"
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "East Oakland",
+      "Coliseum",
+      "Elmhurst",
+      "Baylight District"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00777",
+        "name": "Rico Valdez",
+        "neighborhood": "Baylight District",
+        "role": "Lead Sports Reporter, OakTown Echo",
+        "tier": 3,
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-01047",
+        "name": "Maria Conteras",
+        "neighborhood": "East Oakland",
+        "role": "High School Teacher",
+        "tier": 3,
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "pop": "POP-01055",
+        "name": "Jerome Pittman",
+        "neighborhood": "East Oakland",
+        "role": "Transit Hub D5 Intake Liaison",
+        "tier": 3,
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      }
+    ],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-COUNCIL-D5",
+      "t": "FACT",
+      "text": "Janae Rivers holds COUNCIL-D5 at approval 90",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-INIT-002",
+      "t": "FACT",
+      "text": "Oakland Alternative Response Initiative is in operational — C102: D7 performance review confirms stabilization post-KONO crisis; monitoring continues.",
+      "src": "output/initiative_tracker.json"
+    },
+    {
+      "id": "F-INIT-007",
+      "t": "FACT",
+      "text": "Oakland Youth Apprenticeship Pipeline is in pilot-active — C102: Executive review ordered to address stalled recruitment and intake bottlenecks.",
+      "src": "output/initiative_tracker.json"
+    },
+    {
+      "id": "F-crime-EastOakland",
+      "t": "FACT",
+      "text": "East Oakland crime: property 54, violent 66, incidents 11 (cycle 103)",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-crime-Coliseum",
+      "t": "FACT",
+      "text": "Coliseum crime: property 65, violent 56, incidents 8 (cycle 103)",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-crime-Elmhurst",
+      "t": "FACT",
+      "text": "Elmhurst crime: property 55, violent 62, incidents 12 (cycle 103)",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-BaylightDistrict",
+      "t": "FACT",
+      "text": "Baylight District: sentiment 0.55, retail 5.77, crime index 0.62, housing pressure 0",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-hood-EastOakland",
+      "t": "FACT",
+      "text": "East Oakland: sentiment 0.51, retail 8.39, crime index 1.2, housing pressure 0",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-chaos-cop_car-neighborhood Baylight Di",
+      "t": "FACT",
+      "text": "cop_car helped_by_police → neighborhood Baylight District CrimeIndex -0.09",
+      "src": "world_summary Chaos_Cars"
+    },
+    {
+      "id": "F-we-1",
+      "t": "FACT",
+      "text": "FAITH — holy_day — East Oakland: Foothill Baptist Tabernacle observes Christmas",
+      "src": "world_summary World Events"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D5",
+        "PopId": "POP-00043",
+        "Holder": "Janae Rivers",
+        "District": "D5",
+        "Approval": "90"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D5",
+        "PopId": "POP-00043",
+        "Holder": "Janae Rivers",
+        "District": "D5",
+        "Approval": "90"
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + action + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

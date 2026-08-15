@@ -17,21 +17,29 @@
   },
   "task": {
     "a": "district-week",
-    "goal": "defend the district or go quiet"
+    "goal": "stand with Piedmont Ave or leave it"
   },
   "pulse": {
-    "className": "approval-pressure",
-    "score": 51,
-    "label": "Elliott Crane at approval 54 — Piedmont Ave: sentiment 0.38, retail 10.4, crime index 0.38, housing pressure 0",
-    "lever": "defend the district or go quiet",
-    "hood": "Montclair",
-    "initiative": null
+    "className": "district-heat",
+    "score": 210.86363636363635,
+    "label": "Piedmont Ave — sentiment 0.38 vs city 0.489",
+    "lever": "stand with Piedmont Ave or leave it",
+    "hood": "Piedmont Ave",
+    "initiative": null,
+    "vsCity": {
+      "sentiment": 0.38,
+      "citySentiment": 0.48863636363636354,
+      "heat": 10.863636363636353,
+      "outlier": true
+    }
   },
   "prewrite": {
-    "claim": "defend the district or go quiet",
+    "claim": "stand with Piedmont Ave or leave it",
     "lineFacts": [
       "approval 54",
-      "Montclair crime: property 14, violent 13, incidents 2 (cycle 103)"
+      "Piedmont Ave: sentiment 0.38 vs city 0.489; steady momentum 5",
+      "Piedmont Ave crime: property 23, violent 15, incidents 3 (cycle 103)",
+      "Piedmont Ave: sentiment 0.38, retail 10.4, crime index 0.38, housing pressure 0, steady, momentum 5"
     ],
     "missing": [
       "no invented vote, POPID, or complete"
@@ -53,7 +61,8 @@
         "neighborhood": "Piedmont Ave",
         "role": "Landscape Architect",
         "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Piedmont Ave — Piedmont Ave — sentiment 0.38 vs city 0.489"
       },
       {
         "pop": "POP-00168",
@@ -61,7 +70,8 @@
         "neighborhood": "Piedmont Ave",
         "role": "Midwife",
         "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Piedmont Ave — Piedmont Ave — sentiment 0.38 vs city 0.489"
       },
       {
         "pop": "POP-00216",
@@ -69,7 +79,8 @@
         "neighborhood": "Piedmont Ave",
         "role": "Warehouse worker",
         "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Piedmont Ave — Piedmont Ave — sentiment 0.38 vs city 0.489"
       },
       {
         "pop": "POP-00217",
@@ -77,7 +88,8 @@
         "neighborhood": "Piedmont Ave",
         "role": "Plumber",
         "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Piedmont Ave — Piedmont Ave — sentiment 0.38 vs city 0.489"
       }
     ],
     "businesses": [
@@ -99,10 +111,22 @@
       "src": "engine_audit snapshots.Civic_Office_Ledger"
     },
     {
-      "id": "F-crime-Montclair",
+      "id": "F-heat-PiedmontAve",
       "t": "FACT",
-      "text": "Montclair crime: property 14, violent 13, incidents 2 (cycle 103)",
+      "text": "Piedmont Ave: sentiment 0.38 vs city 0.489; steady momentum 5",
+      "src": "engine_audit snapshots.Neighborhood_Map ranked vs city"
+    },
+    {
+      "id": "F-crime-PiedmontAve",
+      "t": "FACT",
+      "text": "Piedmont Ave crime: property 23, violent 15, incidents 3 (cycle 103)",
       "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-PiedmontAve",
+      "t": "FACT",
+      "text": "Piedmont Ave: sentiment 0.38, retail 10.4, crime index 0.38, housing pressure 0, steady, momentum 5",
+      "src": "engine_audit snapshots.Neighborhood_Map"
     }
   ],
   "role": {
@@ -117,11 +141,20 @@
     ],
     "civicPeers": [
       {
-        "OfficeId": "COUNCIL-D6",
-        "PopId": "POP-00044",
-        "Holder": "Elliott Crane",
-        "District": "D6",
-        "Approval": "54"
+        "OfficeId": "COUNCIL-D7",
+        "PopId": "POP-00504",
+        "Holder": "Warren Ashford",
+        "District": "D7",
+        "Faction": "CRC",
+        "Approval": 51
+      },
+      {
+        "OfficeId": "COUNCIL-D8",
+        "PopId": "POP-00505",
+        "Holder": "Nina Chen",
+        "District": "D8",
+        "Faction": "CRC",
+        "Approval": 55
       }
     ]
   },

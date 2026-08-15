@@ -25,16 +25,18 @@
     "label": "Ramon Vega at approval 54",
     "lever": "defend the district or go quiet",
     "hood": "Glenview",
-    "initiative": null
+    "initiative": null,
+    "vsCity": null
   },
   "prewrite": {
     "claim": "defend the district or go quiet",
     "lineFacts": [
       "approval 54",
       "Glenview crime: property 28, violent 22, incidents 4 (cycle 103)",
-      "Glenview: sentiment 0.57, retail 7.4, crime index 0.5, housing pressure 0"
+      "Glenview: sentiment 0.57, retail 7.4, crime index 0.5, housing pressure 0, decay, momentum 3"
     ],
     "missing": [
+      "no active ledger people in Glenview — do not borrow other hoods",
       "no shop names on disk for this turf",
       "no invented vote, POPID, or complete"
     ]
@@ -49,24 +51,7 @@
     "src": "lib/districtMap.js + civic-office-map.json"
   },
   "exposure": {
-    "subjects": [
-      {
-        "pop": "POP-00730",
-        "name": "Clarence Moody",
-        "neighborhood": "Dimond",
-        "role": "Retired Machinist",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
-      },
-      {
-        "pop": "POP-00784",
-        "name": "Isaac Martinez",
-        "neighborhood": "Ivy Hill",
-        "role": "Plumber",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
-      }
-    ],
+    "subjects": [],
     "businesses": [],
     "churches": [],
     "sources": []
@@ -87,20 +72,8 @@
     {
       "id": "F-hood-Glenview",
       "t": "FACT",
-      "text": "Glenview: sentiment 0.57, retail 7.4, crime index 0.5, housing pressure 0",
+      "text": "Glenview: sentiment 0.57, retail 7.4, crime index 0.5, housing pressure 0, decay, momentum 3",
       "src": "engine_audit snapshots.Neighborhood_Map"
-    },
-    {
-      "id": "F-traj-0",
-      "t": "FACT",
-      "text": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
-      "src": "world_summary trajectory"
-    },
-    {
-      "id": "F-chaos-ice_cream_truck-neighborhood Dimond",
-      "t": "FACT",
-      "text": "ice_cream_truck summer_morale_boost → neighborhood Dimond Sentiment 0.09",
-      "src": "world_summary Chaos_Cars"
     }
   ],
   "role": {
@@ -115,11 +88,12 @@
     ],
     "civicPeers": [
       {
-        "OfficeId": "COUNCIL-D4",
-        "PopId": "POP-00042",
-        "Holder": "Ramon Vega",
-        "District": "D4",
-        "Approval": "54"
+        "OfficeId": "COUNCIL-D2",
+        "PopId": "POP-00502",
+        "Holder": "Leonard Tran",
+        "District": "D2",
+        "Faction": "IND",
+        "Approval": 59
       }
     ]
   },

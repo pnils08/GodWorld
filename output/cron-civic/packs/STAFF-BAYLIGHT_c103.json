@@ -25,7 +25,8 @@
     "label": "Baylight District — Final Council Vote — Phase II shortlist published — 4 qualified bidders reduced to 3",
     "lever": "Phase II shortlist published — 4 qualified bidders reduced to 3",
     "hood": "Baylight District",
-    "initiative": "INIT-006"
+    "initiative": "INIT-006",
+    "vsCity": null
   },
   "prewrite": {
     "claim": "Phase II shortlist published — 4 qualified bidders reduced to 3",
@@ -34,7 +35,7 @@
       "Baylight District — Final Council Vote is in construction-planning — C101: Post-event site inspection for the C100 Celebration closed clean — Delgado full walkdown of event field and construction exclusion perimeter found no surf",
       "due: Phase II shortlist published — 4 qualified bidders reduced to 3",
       "INIT-006 — construction-planning — C103: Phase II shortlist published (4 bidders reduced to 3); moving to final bid evaluation. — Final bid evaluation and selection",
-      "Baylight District: sentiment 0.55, retail 5.77, crime index 0.62, housing pressure 0"
+      "Baylight District: sentiment 0.55, retail 5.77, crime index 0.62, housing pressure 0, decay, momentum 3"
     ],
     "missing": [
       "no shop names on disk for this turf",
@@ -56,7 +57,8 @@
         "neighborhood": "Baylight District",
         "role": "Lead Sports Reporter, OakTown Echo",
         "tier": 3,
-        "src": "output/simulation_ledger_snapshot.jsonl"
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Baylight District — Baylight District — Final Council Vote — Phase II shortlist published — 4 qualified bidders reduced to 3"
       }
     ],
     "businesses": [],
@@ -110,7 +112,7 @@
     {
       "id": "F-hood-BaylightDistrict",
       "t": "FACT",
-      "text": "Baylight District: sentiment 0.55, retail 5.77, crime index 0.62, housing pressure 0",
+      "text": "Baylight District: sentiment 0.55, retail 5.77, crime index 0.62, housing pressure 0, decay, momentum 3",
       "src": "engine_audit snapshots.Neighborhood_Map"
     },
     {
@@ -130,15 +132,7 @@
         "Approval": "65"
       }
     ],
-    "civicPeers": [
-      {
-        "OfficeId": "STAFF-BAYLIGHT",
-        "PopId": "POP-00041",
-        "Holder": "Keisha Ramos",
-        "District": "citywide",
-        "Approval": "65"
-      }
-    ]
+    "civicPeers": []
   },
   "limits": {
     "assert": [

@@ -49,15 +49,7 @@
         "Approval": "65"
       }
     ],
-    "civicPeers": [
-      {
-        "OfficeId": "STAFF-DM-COMM",
-        "PopId": "POP-00037",
-        "Holder": "Brenda Okoro",
-        "District": "citywide",
-        "Approval": "65"
-      }
-    ]
+    "civicPeers": []
   },
   "limits": {
     "assert": [

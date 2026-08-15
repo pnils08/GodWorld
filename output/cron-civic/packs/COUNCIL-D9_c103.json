@@ -25,14 +25,15 @@
     "label": "Terrence Mobley at approval 54",
     "lever": "defend the district or go quiet",
     "hood": "Laurel",
-    "initiative": null
+    "initiative": null,
+    "vsCity": null
   },
   "prewrite": {
     "claim": "defend the district or go quiet",
     "lineFacts": [
       "approval 54",
       "Laurel crime: property 27, violent 23, incidents 5 (cycle 103)",
-      "Laurel: sentiment 0.49, retail 10.37, crime index 0.45, housing pressure 0.5"
+      "Laurel: sentiment 0.49, retail 10.37, crime index 0.45, housing pressure 0.5, growth, momentum 6"
     ],
     "missing": [
       "no shop names on disk for this turf",
@@ -50,20 +51,13 @@
   "exposure": {
     "subjects": [
       {
-        "pop": "POP-00085",
-        "name": "Richie Ramiro",
-        "neighborhood": "Uptown",
-        "role": "First Baseman, Midland RockHounds (AA)",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
-      },
-      {
         "pop": "POP-00134",
         "name": "Brianna Lee",
         "neighborhood": "Laurel",
         "role": "Historic Preservation Carpenter",
         "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Laurel — Terrence Mobley at approval 54"
       },
       {
         "pop": "POP-00174",
@@ -71,15 +65,26 @@
         "neighborhood": "Laurel",
         "role": "Appliance Repair Technician",
         "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Laurel — Terrence Mobley at approval 54"
       },
       {
-        "pop": "POP-00182",
-        "name": "Jorry Cula",
-        "neighborhood": "Uptown",
-        "role": "Record Shop Owner",
+        "pop": "POP-00186",
+        "name": "Ray Samson",
+        "neighborhood": "Laurel",
+        "role": "Appliance Repair Technician",
         "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Laurel — Terrence Mobley at approval 54"
+      },
+      {
+        "pop": "POP-00192",
+        "name": "Bea Cartier",
+        "neighborhood": "Laurel",
+        "role": "Roofing Contractor",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Laurel — Terrence Mobley at approval 54"
       }
     ],
     "businesses": [],
@@ -102,7 +107,7 @@
     {
       "id": "F-hood-Laurel",
       "t": "FACT",
-      "text": "Laurel: sentiment 0.49, retail 10.37, crime index 0.45, housing pressure 0.5",
+      "text": "Laurel: sentiment 0.49, retail 10.37, crime index 0.45, housing pressure 0.5, growth, momentum 6",
       "src": "engine_audit snapshots.Neighborhood_Map"
     },
     {
@@ -124,11 +129,28 @@
     ],
     "civicPeers": [
       {
-        "OfficeId": "COUNCIL-D9",
-        "PopId": "POP-00506",
-        "Holder": "Terrence Mobley",
-        "District": "D9",
-        "Approval": "54"
+        "OfficeId": "COUNCIL-D1",
+        "PopId": "POP-00501",
+        "Holder": "Denise Carter",
+        "District": "D1",
+        "Faction": "OPP",
+        "Approval": 95
+      },
+      {
+        "OfficeId": "COUNCIL-D3",
+        "PopId": "POP-00503",
+        "Holder": "Rose Delgado",
+        "District": "D3",
+        "Faction": "OPP",
+        "Approval": 85
+      },
+      {
+        "OfficeId": "COUNCIL-D5",
+        "PopId": "POP-00043",
+        "Holder": "Janae Rivers",
+        "District": "D5",
+        "Faction": "OPP",
+        "Approval": 85
       }
     ]
   },

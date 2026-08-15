@@ -49,15 +49,7 @@
         "Approval": "65"
       }
     ],
-    "civicPeers": [
-      {
-        "OfficeId": "STAFF-COS",
-        "PopId": "POP-00035",
-        "Holder": "Laila Cortez",
-        "District": "citywide",
-        "Approval": "65"
-      }
-    ]
+    "civicPeers": []
   },
   "limits": {
     "assert": [

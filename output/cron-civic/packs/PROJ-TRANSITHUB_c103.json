@@ -25,7 +25,8 @@
     "label": "Fruitvale Transit Hub Phase II — Visioning — Bureau review of compliance submissions",
     "lever": "Bureau review of compliance submissions",
     "hood": "Fruitvale",
-    "initiative": "INIT-003"
+    "initiative": "INIT-003",
+    "vsCity": null
   },
   "prewrite": {
     "claim": "Bureau review of compliance submissions",
@@ -34,7 +35,7 @@
       "due: Bureau review of compliance submissions",
       "INIT-003 — visioning-complete — C103: Bureau review approved; visioning phase complete; transitioning to design phase. — Design phase kickoff",
       "Fruitvale crime: property 54, violent 50, incidents 7 (cycle 103)",
-      "Fruitvale: sentiment 0.5, retail 12.22, crime index 1.04, housing pressure 0"
+      "Fruitvale: sentiment 0.5, retail 12.22, crime index 1.04, housing pressure 0, steady, momentum 5"
     ],
     "missing": [
       "no shop names on disk for this turf",
@@ -56,7 +57,8 @@
         "neighborhood": "Fruitvale",
         "role": "Immigrant Legal Aid Worker",
         "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Fruitvale — Fruitvale Transit Hub Phase II — Visioning — Bureau review of compliance submissions"
       },
       {
         "pop": "POP-00183",
@@ -64,7 +66,8 @@
         "neighborhood": "Fruitvale",
         "role": "Mutual Aid Network Organizer",
         "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Fruitvale — Fruitvale Transit Hub Phase II — Visioning — Bureau review of compliance submissions"
       },
       {
         "pop": "POP-00184",
@@ -72,7 +75,8 @@
         "neighborhood": "Fruitvale",
         "role": "Teacher",
         "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Fruitvale — Fruitvale Transit Hub Phase II — Visioning — Bureau review of compliance submissions"
       },
       {
         "pop": "POP-00198",
@@ -80,7 +84,8 @@
         "neighborhood": "Fruitvale",
         "role": "Line cook",
         "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Fruitvale — Fruitvale Transit Hub Phase II — Visioning — Bureau review of compliance submissions"
       }
     ],
     "businesses": [],
@@ -135,7 +140,7 @@
     {
       "id": "F-hood-Fruitvale",
       "t": "FACT",
-      "text": "Fruitvale: sentiment 0.5, retail 12.22, crime index 1.04, housing pressure 0",
+      "text": "Fruitvale: sentiment 0.5, retail 12.22, crime index 1.04, housing pressure 0, steady, momentum 5",
       "src": "engine_audit snapshots.Neighborhood_Map"
     },
     {

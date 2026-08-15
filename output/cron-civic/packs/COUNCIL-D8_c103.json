@@ -25,14 +25,15 @@
     "label": "Nina Chen at approval 54",
     "lever": "defend the district or go quiet",
     "hood": "Lake Merritt",
-    "initiative": null
+    "initiative": null,
+    "vsCity": null
   },
   "prewrite": {
     "claim": "defend the district or go quiet",
     "lineFacts": [
       "approval 54",
       "Lake Merritt crime: property 51, violent 35, incidents 4 (cycle 103)",
-      "Lake Merritt: sentiment 0.45, retail 12.07, crime index 0.85, housing pressure 1.5"
+      "Lake Merritt: sentiment 0.45, retail 12.07, crime index 0.85, housing pressure 1.5, growth, momentum 7"
     ],
     "missing": [
       "no invented vote, POPID, or complete"
@@ -56,7 +57,8 @@
         "neighborhood": "Lake Merritt",
         "role": "Sea Level Monitoring Technician",
         "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Lake Merritt — Nina Chen at approval 54"
       },
       {
         "pop": "POP-00167",
@@ -64,7 +66,8 @@
         "neighborhood": "Lake Merritt",
         "role": "Medical Social Worker",
         "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Lake Merritt — Nina Chen at approval 54"
       },
       {
         "pop": "POP-00178",
@@ -72,7 +75,8 @@
         "neighborhood": "Lake Merritt",
         "role": "Climate Modeling Scientist",
         "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Lake Merritt — Nina Chen at approval 54"
       },
       {
         "pop": "POP-00195",
@@ -80,7 +84,8 @@
         "neighborhood": "Lake Merritt",
         "role": "Sea Level Monitoring Technician",
         "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Lake Merritt — Nina Chen at approval 54"
       }
     ],
     "businesses": [
@@ -96,12 +101,6 @@
         "name": "Cathedral of the Living Word",
         "neighborhood": "Lake Merritt",
         "text": "special Advent and Christmas service fills the sanctuary",
-        "src": "world_summary faith-event"
-      },
-      {
-        "name": "Adams Point United Methodist",
-        "neighborhood": "Adams Point",
-        "text": "Christmas observance brings community together",
         "src": "world_summary faith-event"
       }
     ],
@@ -123,7 +122,7 @@
     {
       "id": "F-hood-LakeMerritt",
       "t": "FACT",
-      "text": "Lake Merritt: sentiment 0.45, retail 12.07, crime index 0.85, housing pressure 1.5",
+      "text": "Lake Merritt: sentiment 0.45, retail 12.07, crime index 0.85, housing pressure 1.5, growth, momentum 7",
       "src": "engine_audit snapshots.Neighborhood_Map"
     },
     {
@@ -143,12 +142,6 @@
       "t": "FACT",
       "text": "FAITH — holy_day — Lake Merritt: Cathedral of the Living Word observes Advent and Christmas",
       "src": "world_summary World Events"
-    },
-    {
-      "id": "F-we-1",
-      "t": "FACT",
-      "text": "FAITH — holy_day — Adams Point: Adams Point United Methodist observes Christmas",
-      "src": "world_summary World Events"
     }
   ],
   "role": {
@@ -163,11 +156,20 @@
     ],
     "civicPeers": [
       {
-        "OfficeId": "COUNCIL-D8",
-        "PopId": "POP-00505",
-        "Holder": "Nina Chen",
-        "District": "D8",
-        "Approval": "54"
+        "OfficeId": "COUNCIL-D6",
+        "PopId": "POP-00044",
+        "Holder": "Elliott Crane",
+        "District": "D6",
+        "Faction": "CRC",
+        "Approval": 55
+      },
+      {
+        "OfficeId": "COUNCIL-D7",
+        "PopId": "POP-00504",
+        "Holder": "Warren Ashford",
+        "District": "D7",
+        "Faction": "CRC",
+        "Approval": 51
       }
     ]
   },

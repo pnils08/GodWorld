@@ -25,7 +25,8 @@
     "label": "Temescal Community Health Center — HCAI first-comments window resolution and Phase 1 close",
     "lever": "HCAI first-comments window resolution and Phase 1 close",
     "hood": "Temescal",
-    "initiative": "INIT-005"
+    "initiative": "INIT-005",
+    "vsCity": null
   },
   "prewrite": {
     "claim": "HCAI first-comments window resolution and Phase 1 close",
@@ -34,7 +35,7 @@
       "due: HCAI first-comments window resolution and Phase 1 close",
       "INIT-005 — construction-active — C103: HCAI first-comments window resolved; Phase 1 closed; construction accelerated. — Phase 2 construction progress review",
       "Temescal crime: property 43, violent 33, incidents 6 (cycle 103)",
-      "Temescal: sentiment 0.55, retail 13.51, crime index 0.76, housing pressure 1.5"
+      "Temescal: sentiment 0.55, retail 13.51, crime index 0.76, housing pressure 1.5, growth, momentum 7"
     ],
     "missing": [
       "no shop names on disk for this turf",
@@ -56,7 +57,17 @@
         "neighborhood": "Temescal",
         "role": "Nurse aide",
         "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Temescal — Temescal Community Health Center — HCAI first-comments window resolution and Phase 1 close"
+      },
+      {
+        "pop": "POP-00792",
+        "name": "Bobby Chen-Ramirez",
+        "neighborhood": "Temescal",
+        "role": "Health Center Project Director",
+        "tier": 3,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Temescal — Temescal Community Health Center — HCAI first-comments window resolution and Phase 1 close"
       },
       {
         "pop": "POP-00169",
@@ -64,7 +75,8 @@
         "neighborhood": "Temescal",
         "role": "Flower Shop Owner",
         "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Temescal — Temescal Community Health Center — HCAI first-comments window resolution and Phase 1 close"
       },
       {
         "pop": "POP-00170",
@@ -72,15 +84,8 @@
         "neighborhood": "Temescal",
         "role": "Sourdough Baker",
         "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
-      },
-      {
-        "pop": "POP-00175",
-        "name": "Sara Copper",
-        "neighborhood": "Temescal",
-        "role": "Theater Director",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Temescal — Temescal Community Health Center — HCAI first-comments window resolution and Phase 1 close"
       }
     ],
     "businesses": [],
@@ -128,7 +133,7 @@
     {
       "id": "F-hood-Temescal",
       "t": "FACT",
-      "text": "Temescal: sentiment 0.55, retail 13.51, crime index 0.76, housing pressure 1.5",
+      "text": "Temescal: sentiment 0.55, retail 13.51, crime index 0.76, housing pressure 1.5, growth, momentum 7",
       "src": "engine_audit snapshots.Neighborhood_Map"
     }
   ],

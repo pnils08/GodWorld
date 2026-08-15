@@ -49,15 +49,7 @@
         "Approval": "65"
       }
     ],
-    "civicPeers": [
-      {
-        "OfficeId": "STAFF-MANAGER",
-        "PopId": "POP-00040",
-        "Holder": "Aaron Whitfield",
-        "District": "citywide",
-        "Approval": "65"
-      }
-    ]
+    "civicPeers": []
   },
   "limits": {
     "assert": [

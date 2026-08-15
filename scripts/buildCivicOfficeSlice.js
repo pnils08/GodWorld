@@ -258,6 +258,7 @@ function loadConstituents(root, hoods, cap) {
     });
   }
   rows.sort((a, b) => (b.tier - a.tier) || a.pop.localeCompare(b.pop));
+  if (!cap) return rows;
   return rows.slice(0, cap);
 }
 
@@ -307,6 +308,8 @@ function loadTurfMetrics(audit, hoods) {
     if (row.RetailVitality != null && row.RetailVitality !== '') bits.push('retail ' + row.RetailVitality);
     if (row.CrimeIndex != null && row.CrimeIndex !== '') bits.push('crime index ' + row.CrimeIndex);
     if (row.HousingPressure != null && row.HousingPressure !== '') bits.push('housing pressure ' + row.HousingPressure);
+    if (row.NeighborhoodTrajectory) bits.push(String(row.NeighborhoodTrajectory));
+    if (row.TrajectoryMomentum != null && row.TrajectoryMomentum !== '') bits.push('momentum ' + row.TrajectoryMomentum);
     if (!bits.length) continue;
     facts.push({
       id: 'F-hood-' + hood.replace(/\s+/g, ''),
@@ -316,6 +319,73 @@ function loadTurfMetrics(audit, hoods) {
     });
   }
   return facts;
+}
+
+function num(v) {
+  const n = Number(v);
+  return Number.isFinite(n) ? n : null;
+}
+
+function avg(xs) {
+  const v = xs.filter(x => x != null);
+  if (!v.length) return null;
+  return v.reduce((a, b) => a + b, 0) / v.length;
+}
+
+function scoreHoods(audit) {
+  const map = (audit && audit.snapshots && audit.snapshots.Neighborhood_Map) || [];
+  const ms = avg(map.map(r => num(r.Sentiment)));
+  const mc = avg(map.map(r => num(r.CrimeIndex)));
+  const scored = [];
+  for (const r of map) {
+    const hood = String(r.Neighborhood || '').trim();
+    if (!hood) continue;
+    const sent = num(r.Sentiment);
+    const crime = num(r.CrimeIndex);
+    const traj = String(r.NeighborhoodTrajectory || '').toLowerCase();
+    const mom = num(r.TrajectoryMomentum);
+    let heat = 0;
+    const why = [];
+    if (ms != null && sent != null) {
+      const gap = ms - sent;
+      heat += gap * 100;
+      why.push('sentiment ' + sent + ' vs city ' + ms.toFixed(3));
+    }
+    if (mc != null && crime != null && crime > mc) {
+      heat += (crime - mc) * 20;
+      why.push('crime index ' + crime + ' vs city ' + mc.toFixed(3));
+    }
+    if (traj === 'decay') {
+      heat += 15 + (mom || 0);
+      why.push(traj + ' momentum ' + (mom == null ? '?' : mom));
+    }
+    scored.push({
+      hood, heat, sent, crime, traj, mom,
+      start: r.TrajectoryStartCycle || null,
+      citySent: ms,
+      cityCrime: mc,
+      why,
+      outlier: ms != null && sent != null && (ms - sent) >= 0.08,
+    });
+  }
+  scored.sort((a, b) => b.heat - a.heat);
+  return scored;
+}
+
+function loadFactionPeers(officeMap, office) {
+  if (!office.faction || !/^D\d$/.test(String(office.district || ''))) return [];
+  return (officeMap.offices || []).filter(o =>
+    o.faction === office.faction &&
+    o.officeId !== office.officeId &&
+    /^COUNCIL-/.test(String(o.officeId || ''))
+  ).map(o => ({
+    OfficeId: o.officeId,
+    PopId: o.popid,
+    Holder: o.holder,
+    District: o.district,
+    Faction: o.faction,
+    Approval: o.approval,
+  }));
 }
 
 function loadTracker(root, cycle) {
@@ -424,6 +494,10 @@ function initHeat(init, cycle, owned) {
 }
 
 function peopleForPick(people, pick) {
+  const hood = pick && pick.hood;
+  const inHood = hood
+    ? people.filter(p => String(p.neighborhood || '').toLowerCase() === String(hood).toLowerCase())
+    : people.slice();
   const blob = String(
     (pick.init && ((pick.init.name || '') + ' ' + (pick.init.domain || ''))) || pick.label || ''
   ).toLowerCase();
@@ -436,15 +510,31 @@ function peopleForPick(people, pick) {
     if (/oari|safety/.test(blob)) return /counsel|organiz|reentry/.test(r) ? 2 : 0;
     return 0;
   }
-  return people.slice().sort((a, b) =>
+  return inHood.slice().sort((a, b) =>
     (hit(b.role) - hit(a.role)) || (b.tier - a.tier) || a.pop.localeCompare(b.pop)
   ).slice(0, 4);
 }
 
 function pickTurn(opts) {
-  const { kind, office, cycle, inits, job, life, hoods, turf, chaos, cabinet } = opts;
+  const { kind, office, cycle, inits, job, life, hoods, turf, chaos, cabinet, hoodScores } = opts;
   const approval = approvalOf(job);
   const candidates = [];
+  if (kind === 'district' && hoodScores && hoodScores.length) {
+    const want = new Set(hoods.map(h => String(h).toLowerCase()));
+    const turfH = hoodScores.filter(h => want.has(String(h.hood).toLowerCase()));
+    const topH = turfH[0];
+    if (topH && topH.outlier) {
+      candidates.push({
+        type: 'hood-heat',
+        score: 200 + topH.heat,
+        className: 'district-heat',
+        label: topH.hood + ' — ' + (topH.why[0] || 'district outlier'),
+        lever: 'stand with ' + topH.hood + ' or leave it',
+        hood: topH.hood,
+        hoodScore: topH,
+      });
+    }
+  }
   for (const init of inits) {
     const owned = office.initiative && (init.id || init.InitiativeID) === office.initiative;
     const impl = init.implementation || {};
@@ -503,6 +593,18 @@ function pickTurn(opts) {
     });
     lineFacts.push('approval ' + approval);
   }
+  if (top.hoodScore) {
+    const h = top.hoodScore;
+    const text = h.hood + ': ' + h.why.join('; ') +
+      (h.traj ? '; ' + h.traj + (h.mom != null ? ' momentum ' + h.mom : '') : '');
+    known.push({
+      id: 'F-heat-' + String(h.hood).replace(/\s+/g, ''),
+      t: 'FACT',
+      text,
+      src: 'engine_audit snapshots.Neighborhood_Map ranked vs city',
+    });
+    lineFacts.push(text);
+  }
   if (top.init) {
     const fact = initFact(top.init);
     known.push(fact);
@@ -521,7 +623,7 @@ function pickTurn(opts) {
     lineFacts.push(row.text);
   }
   for (const row of (life.events || []).concat(chaos || [])) {
-    if (pickHood && row.text.toLowerCase().indexOf(pickHood) < 0 && !eventHitsTurf(row.text, hoods)) continue;
+    if (pickHood && row.text.toLowerCase().indexOf(pickHood) < 0) continue;
     if (known.length >= 10) break;
     known.push(row);
   }
@@ -542,6 +644,12 @@ function pickTurn(opts) {
       lever: top.lever,
       hood: top.hood,
       initiative: top.init ? (top.init.id || top.init.InitiativeID) : null,
+      vsCity: top.hoodScore ? {
+        sentiment: top.hoodScore.sent,
+        citySentiment: top.hoodScore.citySent,
+        heat: top.hoodScore.heat,
+        outlier: top.hoodScore.outlier,
+      } : null,
     },
     prewrite: {
       claim: top.lever,
@@ -587,7 +695,7 @@ function buildPack(opts) {
 
   const kind = seatKind(office);
   const hoods = turfHoods(office);
-  const peopleAll = kind === 'role' ? [] : loadConstituents(root, hoods, opts.cap || CONSTITUENT_CAP);
+  const peopleAll = kind === 'role' ? [] : loadConstituents(root, hoods, opts.cap || 0);
   const audit = opts.audit || loadAudit(root, cycle);
   const job = loadOfficeJob(audit, office);
   const turf = kind === 'role' ? [] : loadTurfMetrics(audit, hoods);
@@ -595,11 +703,16 @@ function buildPack(opts) {
   const chaos = kind === 'role' ? [] : loadCycleEvents(root, cycle, hoods);
   const inits = loadInitRows(root, cycle, hoods, office, kind);
   const cabinet = kind === 'initiative' ? loadCabinet(root, office, cycle) : [];
-  const turn = pickTurn({ kind, office, cycle, inits, job, life, hoods, turf, chaos, cabinet });
+  const hoodScores = scoreHoods(audit);
+  const turn = pickTurn({ kind, office, cycle, inits, job, life, hoods, turf, chaos, cabinet, hoodScores });
   const people = turn.empty ? [] : peopleForPick(peopleAll, {
     init: inits.find(i => turn.pulse && (i.id || i.InitiativeID) === turn.pulse.initiative),
     label: turn.pulse && turn.pulse.label,
+    hood: turn.pulse && turn.pulse.hood,
   });
+  if (!turn.empty && turn.pulse && turn.pulse.hood && !people.length) {
+    turn.prewrite.missing.unshift('no active ledger people in ' + turn.pulse.hood + ' — do not borrow other hoods');
+  }
 
   const taskName = kind === 'district' ? 'district-week' : kind === 'initiative' ? 'initiative-week' : 'role-week';
   const sources = kind === 'initiative' && !turn.empty ? loadCascadeVoices(root, office.initiative) : [];
@@ -638,15 +751,25 @@ function buildPack(opts) {
         role: p.role,
         tier: p.tier,
         src: p.src,
+        why: turn.pulse && turn.pulse.hood
+          ? 'lives in ' + turn.pulse.hood + (turn.pulse.label ? ' — ' + turn.pulse.label : '')
+          : null,
       })),
-      businesses: turn.empty ? [] : life.businesses,
-      churches: turn.empty ? [] : life.churches,
+      businesses: turn.empty ? [] : (turn.pulse && turn.pulse.hood
+        ? life.businesses.filter(b => String(b.neighborhood || '').toLowerCase() === String(turn.pulse.hood).toLowerCase())
+        : life.businesses),
+      churches: turn.empty ? [] : (turn.pulse && turn.pulse.hood
+        ? life.churches.filter(c => String(c.neighborhood || '').toLowerCase() === String(turn.pulse.hood).toLowerCase())
+        : life.churches),
       sources,
     },
     known: turn.known,
     role: {
       officeRows: job.mine,
-      civicPeers: job.peers.slice(0, 4),
+      civicPeers: (loadFactionPeers(officeMap, office).length
+        ? loadFactionPeers(officeMap, office)
+        : job.peers.filter(r => String(r.OfficeId || '') !== String(office.officeId || ''))
+      ).slice(0, 8),
     },
     limits: {
       assert: [
@@ -677,7 +800,8 @@ function writePack(pack, root, cycle) {
 
 module.exports = {
   buildPack, resolveOffice, turfHoods, loadConstituents, loadProjects, loadTurfLife,
-  loadCabinet, loadInitRows, seatKind, pickTurn, writePack, CONSTITUENT_CAP,
+  loadCabinet, loadInitRows, seatKind, pickTurn, scoreHoods, loadFactionPeers,
+  writePack, CONSTITUENT_CAP,
 };
 
 if (require.main === module) {

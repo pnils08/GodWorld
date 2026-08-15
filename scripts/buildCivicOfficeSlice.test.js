@@ -120,20 +120,48 @@ fs.writeFileSync(
 );
 
 const map = JSON.parse(fs.readFileSync(path.join(tmp, 'scripts', 'civic-office-map.json'), 'utf8'));
+map.offices.push(
+  {
+    officeId: 'COUNCIL-D6', title: 'D6', holder: 'Crane Test', popid: 'POP-TEST06',
+    district: 'D6', faction: 'CRC', agentDir: 'civic-office-crc-faction',
+  },
+  {
+    officeId: 'COUNCIL-D8', title: 'D8', holder: 'Chen Test', popid: 'POP-TEST08',
+    district: 'D8', faction: 'CRC', agentDir: 'civic-office-crc-faction',
+  }
+);
+fs.appendFileSync(path.join(tmp, 'output', 'simulation_ledger_snapshot.jsonl'),
+  JSON.stringify({ POPID: 'POP-00802', Name: 'Kono Local', Neighborhood: 'KONO', Status: 'active', RoleType: 'glazier', Tier: 4 }) + '\n'
+);
+const audit = {
+  snapshots: {
+    Neighborhood_Map: [
+      { Neighborhood: 'KONO', Sentiment: '0.27', CrimeIndex: '0.68', NeighborhoodTrajectory: 'growth', TrajectoryMomentum: '7' },
+      { Neighborhood: 'Temescal', Sentiment: '0.55', CrimeIndex: '0.76', NeighborhoodTrajectory: 'growth', TrajectoryMomentum: '7' },
+      { Neighborhood: 'Rockridge', Sentiment: '0.53', CrimeIndex: '0.37', NeighborhoodTrajectory: 'growth', TrajectoryMomentum: '7' },
+      { Neighborhood: 'West Oakland', Sentiment: '0.50', CrimeIndex: '1.19', NeighborhoodTrajectory: 'decay', TrajectoryMomentum: '3' },
+      { Neighborhood: 'Downtown', Sentiment: '0.41', CrimeIndex: '1.02', NeighborhoodTrajectory: 'growth', TrajectoryMomentum: '7' },
+    ],
+    Civic_Office_Ledger: [
+      { OfficeId: 'COUNCIL-D7', PopId: 'POP-TEST01', Holder: 'Test Holder', District: 'D7', Approval: '48' },
+    ],
+    Crime_Metrics: [],
+  },
+};
 const pack = buildPack({
-  root: tmp, cycle: '103', agentDir: 'civic-office-crc-faction', officeMap: map,
+  root: tmp, cycle: '103', agentDir: 'COUNCIL-D7', officeMap: map, audit,
 });
 
 check('actor is the office holder not a reporter', pack.actor.name === 'Test Holder' && pack.team === 'civic-office');
 check('task is district-week', pack.task.a === 'district-week');
-check('Tier 4 before Tier 1', pack.exposure.subjects[0].name === 'Alpha Local' && pack.exposure.subjects.some(s => s.name === 'Star Player'));
+check('lede is KONO not Temescal roster', pack.pulse && pack.pulse.hood === 'KONO' && /KONO/.test(pack.pulse.label));
+check('subjects are KONO only', pack.exposure.subjects.length === 1 && pack.exposure.subjects[0].name === 'Kono Local');
+check('Temescal names stay off the KONO lede', !pack.exposure.subjects.some(s => s.name === 'Alpha Local' || s.name === 'Star Player'));
 check('inactive and other-hood excluded', !pack.exposure.subjects.some(s => s.name === 'Beta Local' || s.name === 'Gamma Far'));
-check('project fact from tracker', pack.known.some(k => /Test Hub/.test(k.text)));
-check('district turn is Test Hub', pack.pulse && /Test Hub/.test(pack.pulse.label) && pack.task.goal);
-check('district church from turf', pack.exposure.churches.some(c => c.name === 'Test Chapel'));
-check('district shop from turf', pack.exposure.businesses.some(b => b.id === 'BIZ-00999'));
+check('CRC peers are the other CRC seats not self', pack.role.civicPeers.some(p => p.Holder === 'Crane Test') && pack.role.civicPeers.some(p => p.Holder === 'Chen Test') && !pack.role.civicPeers.some(p => p.OfficeId === 'COUNCIL-D7'));
+check('subject is attached to the KONO fact', pack.exposure.subjects[0].why && /KONO/.test(pack.exposure.subjects[0].why));
+check('Temescal church not on KONO lede', !pack.exposure.churches.some(c => c.name === 'Test Chapel'));
 check('other-hood church excluded', !pack.exposure.churches.some(c => c.name === 'Far Parish'));
-check('district event from turf', pack.known.some(k => /Temescal Night Market/.test(k.text)));
 check('empty people if no snapshot', loadConstituents(path.join(tmp, 'missing'), ['Temescal'], 8).length === 0);
 
 const bay = buildPack({

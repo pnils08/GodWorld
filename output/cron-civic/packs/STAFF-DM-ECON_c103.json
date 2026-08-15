@@ -49,15 +49,7 @@
         "Approval": "65"
       }
     ],
-    "civicPeers": [
-      {
-        "OfficeId": "STAFF-DM-ECON",
-        "PopId": "POP-00036",
-        "Holder": "Marcus Osei",
-        "District": "citywide",
-        "Approval": "65"
-      }
-    ]
+    "civicPeers": []
   },
   "limits": {
     "assert": [

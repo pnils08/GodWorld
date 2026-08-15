@@ -17,24 +17,28 @@
   },
   "task": {
     "a": "district-week",
-    "goal": "D7 next-cycle report and community satisfaction survey"
+    "goal": "stand with San Antonio or leave it"
   },
   "pulse": {
-    "className": "initiative",
-    "score": 70,
-    "label": "Oakland Alternative Response Initiative — D7 next-cycle report and community satisfaction survey",
-    "lever": "D7 next-cycle report and community satisfaction survey",
-    "hood": "Fruitvale",
-    "initiative": "INIT-002"
+    "className": "district-heat",
+    "score": 229.89090909090908,
+    "label": "San Antonio — sentiment 0.39 vs city 0.489",
+    "lever": "stand with San Antonio or leave it",
+    "hood": "San Antonio",
+    "initiative": null,
+    "vsCity": {
+      "sentiment": 0.39,
+      "citySentiment": 0.48863636363636354,
+      "heat": 29.89090909090908,
+      "outlier": true
+    }
   },
   "prewrite": {
-    "claim": "D7 next-cycle report and community satisfaction survey",
+    "claim": "stand with San Antonio or leave it",
     "lineFacts": [
       "approval 90",
-      "Oakland Alternative Response Initiative is in operational — C102: D7 performance review confirms stabilization post-KONO crisis; monitoring continues.",
-      "due: D7 next-cycle report and community satisfaction survey",
-      "Fruitvale crime: property 54, violent 50, incidents 7 (cycle 103)",
-      "Fruitvale: sentiment 0.5, retail 12.22, crime index 1.04, housing pressure 0"
+      "San Antonio: sentiment 0.39 vs city 0.489; crime index 0.77 vs city 0.719; decay momentum 4; decay momentum 4",
+      "San Antonio: sentiment 0.39, retail 6.89, crime index 0.77, housing pressure 0, decay, momentum 4"
     ],
     "missing": [
       "no shop names on disk for this turf",
@@ -52,47 +56,35 @@
   "exposure": {
     "subjects": [
       {
-        "pop": "POP-00183",
-        "name": "Toby Lamont",
-        "neighborhood": "Fruitvale",
-        "role": "Mutual Aid Network Organizer",
+        "pop": "POP-00796",
+        "name": "Dank Abara",
+        "neighborhood": "San Antonio",
+        "role": "Waiter",
         "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in San Antonio — San Antonio — sentiment 0.39 vs city 0.489"
       },
       {
-        "pop": "POP-00173",
-        "name": "Kaila Braun",
-        "neighborhood": "Fruitvale",
-        "role": "Immigrant Legal Aid Worker",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
+        "pop": "POP-00778",
+        "name": "Jamal Thompson",
+        "neighborhood": "San Antonio",
+        "role": "Fan & Culture Columnist, OakTown Echo",
+        "tier": 3,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in San Antonio — San Antonio — sentiment 0.39 vs city 0.489"
       },
       {
-        "pop": "POP-00184",
-        "name": "Brooklyn Nguyen",
-        "neighborhood": "Fruitvale",
-        "role": "Teacher",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
-      },
-      {
-        "pop": "POP-00198",
-        "name": "Rick Walker",
-        "neighborhood": "Fruitvale",
-        "role": "Line cook",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
+        "pop": "POP-01054",
+        "name": "Delia Vargas-Ruiz",
+        "neighborhood": "San Antonio",
+        "role": "Transit Hub D3 Intake Liaison",
+        "tier": 3,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in San Antonio — San Antonio — sentiment 0.39 vs city 0.489"
       }
     ],
     "businesses": [],
-    "churches": [
-      {
-        "name": "St. Esperanza Parish",
-        "neighborhood": "Fruitvale",
-        "text": "Advent and Christmas observance brings community together",
-        "src": "world_summary faith-event"
-      }
-    ],
+    "churches": [],
     "sources": []
   },
   "known": [
@@ -103,28 +95,16 @@
       "src": "engine_audit snapshots.Civic_Office_Ledger"
     },
     {
-      "id": "F-INIT-002",
+      "id": "F-heat-SanAntonio",
       "t": "FACT",
-      "text": "Oakland Alternative Response Initiative is in operational — C102: D7 performance review confirms stabilization post-KONO crisis; monitoring continues.",
-      "src": "output/initiative_tracker.json"
+      "text": "San Antonio: sentiment 0.39 vs city 0.489; crime index 0.77 vs city 0.719; decay momentum 4; decay momentum 4",
+      "src": "engine_audit snapshots.Neighborhood_Map ranked vs city"
     },
     {
-      "id": "F-crime-Fruitvale",
+      "id": "F-hood-SanAntonio",
       "t": "FACT",
-      "text": "Fruitvale crime: property 54, violent 50, incidents 7 (cycle 103)",
-      "src": "engine_audit snapshots.Crime_Metrics"
-    },
-    {
-      "id": "F-hood-Fruitvale",
-      "t": "FACT",
-      "text": "Fruitvale: sentiment 0.5, retail 12.22, crime index 1.04, housing pressure 0",
+      "text": "San Antonio: sentiment 0.39, retail 6.89, crime index 0.77, housing pressure 0, decay, momentum 4",
       "src": "engine_audit snapshots.Neighborhood_Map"
-    },
-    {
-      "id": "F-event-0",
-      "t": "FACT",
-      "text": "Fruitvale Emergency Town Briefing (Fruitvale) — Fruitvale",
-      "src": "world_summary city-event"
     },
     {
       "id": "F-traj-1",
@@ -137,12 +117,6 @@
       "t": "FACT",
       "text": "cop_car helped_by_police → neighborhood San Antonio CrimeIndex -0.1",
       "src": "world_summary Chaos_Cars"
-    },
-    {
-      "id": "F-we-1",
-      "t": "FACT",
-      "text": "FAITH — holy_day — Fruitvale: St. Esperanza Parish observes Advent and Christmas",
-      "src": "world_summary World Events"
     }
   ],
   "role": {
@@ -157,11 +131,28 @@
     ],
     "civicPeers": [
       {
-        "OfficeId": "COUNCIL-D3",
-        "PopId": "POP-00503",
-        "Holder": "Rose Delgado",
-        "District": "D3",
-        "Approval": "90"
+        "OfficeId": "COUNCIL-D1",
+        "PopId": "POP-00501",
+        "Holder": "Denise Carter",
+        "District": "D1",
+        "Faction": "OPP",
+        "Approval": 95
+      },
+      {
+        "OfficeId": "COUNCIL-D5",
+        "PopId": "POP-00043",
+        "Holder": "Janae Rivers",
+        "District": "D5",
+        "Faction": "OPP",
+        "Approval": 85
+      },
+      {
+        "OfficeId": "COUNCIL-D9",
+        "PopId": "POP-00506",
+        "Holder": "Terrence Mobley",
+        "District": "D9",
+        "Faction": "OPP",
+        "Approval": 55
       }
     ]
   },

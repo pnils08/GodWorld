@@ -17,24 +17,29 @@
   },
   "task": {
     "a": "district-week",
-    "goal": "HCAI first-comments window resolution and Phase 1 close"
+    "goal": "stand with KONO or leave it"
   },
   "pulse": {
-    "className": "initiative",
-    "score": 80,
-    "label": "Temescal Community Health Center — HCAI first-comments window resolution and Phase 1 close",
-    "lever": "HCAI first-comments window resolution and Phase 1 close",
-    "hood": "Temescal",
-    "initiative": "INIT-005"
+    "className": "district-heat",
+    "score": 221.86363636363635,
+    "label": "KONO — sentiment 0.27 vs city 0.489",
+    "lever": "stand with KONO or leave it",
+    "hood": "KONO",
+    "initiative": null,
+    "vsCity": {
+      "sentiment": 0.27,
+      "citySentiment": 0.48863636363636354,
+      "heat": 21.863636363636353,
+      "outlier": true
+    }
   },
   "prewrite": {
-    "claim": "HCAI first-comments window resolution and Phase 1 close",
+    "claim": "stand with KONO or leave it",
     "lineFacts": [
       "approval 48",
-      "Temescal Community Health Center is in construction-active — C102: Construction timeline accelerated; double shifts ordered for caisson drilling and excavation.",
-      "due: HCAI first-comments window resolution and Phase 1 close",
-      "Temescal crime: property 43, violent 33, incidents 6 (cycle 103)",
-      "Temescal: sentiment 0.55, retail 13.51, crime index 0.76, housing pressure 1.5"
+      "KONO: sentiment 0.27 vs city 0.489; growth momentum 7",
+      "KONO crime: property 41, violent 27, incidents 7 (cycle 103)",
+      "KONO: sentiment 0.27, retail 9.69, crime index 0.68, housing pressure 1.5, growth, momentum 7"
     ],
     "missing": [
       "no shop names on disk for this turf",
@@ -53,36 +58,40 @@
   "exposure": {
     "subjects": [
       {
-        "pop": "POP-00169",
-        "name": "Brie Harris",
-        "neighborhood": "Temescal",
-        "role": "Flower Shop Owner",
+        "pop": "POP-00802",
+        "name": "Funmi Shah",
+        "neighborhood": "KONO",
+        "role": "Glazier",
         "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in KONO — KONO — sentiment 0.27 vs city 0.489"
       },
       {
-        "pop": "POP-00170",
-        "name": "Melton Neilon",
-        "neighborhood": "Temescal",
-        "role": "Sourdough Baker",
+        "pop": "POP-00808",
+        "name": "Sahana Joshi",
+        "neighborhood": "KONO",
+        "role": "Elevator Mechanic",
         "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in KONO — KONO — sentiment 0.27 vs city 0.489"
       },
       {
-        "pop": "POP-00175",
-        "name": "Sara Copper",
-        "neighborhood": "Temescal",
+        "pop": "POP-00815",
+        "name": "Amal Nair",
+        "neighborhood": "KONO",
+        "role": "Physical Therapist",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in KONO — KONO — sentiment 0.27 vs city 0.489"
+      },
+      {
+        "pop": "POP-00845",
+        "name": "Crystal Oh",
+        "neighborhood": "KONO",
         "role": "Theater Director",
         "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
-      },
-      {
-        "pop": "POP-00181",
-        "name": "Xavier Ramington",
-        "neighborhood": "Temescal",
-        "role": "Herbalist",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in KONO — KONO — sentiment 0.27 vs city 0.489"
       }
     ],
     "businesses": [],
@@ -97,28 +106,22 @@
       "src": "engine_audit snapshots.Civic_Office_Ledger"
     },
     {
-      "id": "F-INIT-005",
+      "id": "F-heat-KONO",
       "t": "FACT",
-      "text": "Temescal Community Health Center is in construction-active — C102: Construction timeline accelerated; double shifts ordered for caisson drilling and excavation.",
-      "src": "output/initiative_tracker.json"
+      "text": "KONO: sentiment 0.27 vs city 0.489; growth momentum 7",
+      "src": "engine_audit snapshots.Neighborhood_Map ranked vs city"
     },
     {
-      "id": "F-crime-Temescal",
+      "id": "F-crime-KONO",
       "t": "FACT",
-      "text": "Temescal crime: property 43, violent 33, incidents 6 (cycle 103)",
+      "text": "KONO crime: property 41, violent 27, incidents 7 (cycle 103)",
       "src": "engine_audit snapshots.Crime_Metrics"
     },
     {
-      "id": "F-hood-Temescal",
+      "id": "F-hood-KONO",
       "t": "FACT",
-      "text": "Temescal: sentiment 0.55, retail 13.51, crime index 0.76, housing pressure 1.5",
+      "text": "KONO: sentiment 0.27, retail 9.69, crime index 0.68, housing pressure 1.5, growth, momentum 7",
       "src": "engine_audit snapshots.Neighborhood_Map"
-    },
-    {
-      "id": "F-chaos-oari_van-neighborhood Rockridge",
-      "t": "FACT",
-      "text": "oari_van substance_intervention → neighborhood Rockridge Sentiment 0.04",
-      "src": "world_summary Chaos_Cars"
     },
     {
       "id": "F-chaos-garbage_truck-neighborhood KONO",
@@ -139,11 +142,20 @@
     ],
     "civicPeers": [
       {
-        "OfficeId": "COUNCIL-D7",
-        "PopId": "POP-00504",
-        "Holder": "Warren Ashford",
-        "District": "D7",
-        "Approval": "48"
+        "OfficeId": "COUNCIL-D6",
+        "PopId": "POP-00044",
+        "Holder": "Elliott Crane",
+        "District": "D6",
+        "Faction": "CRC",
+        "Approval": 55
+      },
+      {
+        "OfficeId": "COUNCIL-D8",
+        "PopId": "POP-00505",
+        "Holder": "Nina Chen",
+        "District": "D8",
+        "Faction": "CRC",
+        "Approval": 55
       }
     ]
   },

@@ -25,7 +25,8 @@
     "label": "West Oakland Stabilization Fund — Month-five disbursement batch review",
     "lever": "Month-five disbursement batch review",
     "hood": "West Oakland",
-    "initiative": "INIT-001"
+    "initiative": "INIT-001",
+    "vsCity": null
   },
   "prewrite": {
     "claim": "Month-five disbursement batch review",
@@ -34,7 +35,7 @@
       "West Oakland Stabilization Fund is in disbursement-active — C102: Month-four disbursement batch approved (7 households), total disbursed: 45 of ~280.",
       "due: Month-five disbursement batch review",
       "West Oakland crime: property 58, violent 61, incidents 11 (cycle 103)",
-      "West Oakland: sentiment 0.5, retail 7.91, crime index 1.19, housing pressure 0"
+      "West Oakland: sentiment 0.5, retail 7.91, crime index 1.19, housing pressure 0, decay, momentum 3"
     ],
     "missing": [
       "no shop names on disk for this turf",
@@ -58,7 +59,8 @@
         "neighborhood": "West Oakland",
         "role": "Domestic Violence Shelter Director",
         "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in West Oakland — West Oakland Stabilization Fund — Month-five disbursement batch review"
       },
       {
         "pop": "POP-00188",
@@ -66,7 +68,8 @@
         "neighborhood": "West Oakland",
         "role": "Community Organizer",
         "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in West Oakland — West Oakland Stabilization Fund — Month-five disbursement batch review"
       },
       {
         "pop": "POP-00190",
@@ -74,15 +77,17 @@
         "neighborhood": "West Oakland",
         "role": "Ex-Offender Reentry Counselor",
         "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in West Oakland — West Oakland Stabilization Fund — Month-five disbursement batch review"
       },
       {
-        "pop": "POP-00176",
-        "name": "Talmon Lint",
+        "pop": "POP-00327",
+        "name": "Bambi Wart",
         "neighborhood": "West Oakland",
-        "role": "Solar Panel Installation Lead",
+        "role": "Ex-Offender Reentry Counselor",
         "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl"
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in West Oakland — West Oakland Stabilization Fund — Month-five disbursement batch review"
       }
     ],
     "businesses": [],
@@ -118,7 +123,7 @@
     {
       "id": "F-hood-WestOakland",
       "t": "FACT",
-      "text": "West Oakland: sentiment 0.5, retail 7.91, crime index 1.19, housing pressure 0",
+      "text": "West Oakland: sentiment 0.5, retail 7.91, crime index 1.19, housing pressure 0, decay, momentum 3",
       "src": "engine_audit snapshots.Neighborhood_Map"
     },
     {
@@ -140,11 +145,28 @@
     ],
     "civicPeers": [
       {
-        "OfficeId": "COUNCIL-D1",
-        "PopId": "POP-00501",
-        "Holder": "Denise Carter",
-        "District": "D1",
-        "Approval": "95"
+        "OfficeId": "COUNCIL-D3",
+        "PopId": "POP-00503",
+        "Holder": "Rose Delgado",
+        "District": "D3",
+        "Faction": "OPP",
+        "Approval": 85
+      },
+      {
+        "OfficeId": "COUNCIL-D5",
+        "PopId": "POP-00043",
+        "Holder": "Janae Rivers",
+        "District": "D5",
+        "Faction": "OPP",
+        "Approval": 85
+      },
+      {
+        "OfficeId": "COUNCIL-D9",
+        "PopId": "POP-00506",
+        "Holder": "Terrence Mobley",
+        "District": "D9",
+        "Faction": "OPP",
+        "Approval": 55
       }
     ]
   },

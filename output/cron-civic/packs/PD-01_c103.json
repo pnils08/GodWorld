@@ -25,7 +25,8 @@
     "label": "Oakland Alternative Response Initiative — D7 next-cycle report and community satisfaction survey",
     "lever": "D7 next-cycle report and community satisfaction survey",
     "hood": "West Oakland",
-    "initiative": "INIT-002"
+    "initiative": "INIT-002",
+    "vsCity": null
   },
   "prewrite": {
     "claim": "D7 next-cycle report and community satisfaction survey",
@@ -35,6 +36,7 @@
       "due: D7 next-cycle report and community satisfaction survey"
     ],
     "missing": [
+      "no active ledger people in West Oakland — do not borrow other hoods",
       "no shop names on disk for this turf",
       "no invented vote, POPID, or complete"
     ]
@@ -74,15 +76,7 @@
         "Approval": "65"
       }
     ],
-    "civicPeers": [
-      {
-        "OfficeId": "PD-01",
-        "PopId": "POP-00146",
-        "Holder": "Caleb Reyes",
-        "District": "citywide",
-        "Approval": "65"
-      }
-    ]
+    "civicPeers": []
   },
   "limits": {
     "assert": [

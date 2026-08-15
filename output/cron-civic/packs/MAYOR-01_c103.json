@@ -25,7 +25,8 @@
     "label": "West Oakland Stabilization Fund — Month-five disbursement batch review",
     "lever": "Month-five disbursement batch review",
     "hood": "West Oakland",
-    "initiative": "INIT-001"
+    "initiative": "INIT-001",
+    "vsCity": null
   },
   "prewrite": {
     "claim": "Month-five disbursement batch review",
@@ -35,6 +36,7 @@
       "due: Month-five disbursement batch review"
     ],
     "missing": [
+      "no active ledger people in West Oakland — do not borrow other hoods",
       "no shop names on disk for this turf",
       "no named applicant households — do not invent who got the check",
       "no invented vote, POPID, or complete"
@@ -75,15 +77,7 @@
         "Approval": "95"
       }
     ],
-    "civicPeers": [
-      {
-        "OfficeId": "MAYOR-01",
-        "PopId": "POP-00034",
-        "Holder": "Avery Santana",
-        "District": "citywide",
-        "Approval": "95"
-      }
-    ]
+    "civicPeers": []
   },
   "limits": {
     "assert": [

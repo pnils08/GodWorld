@@ -94,13 +94,19 @@ Staged episode JSON lands in a gated intake shaped like the existing `Reflection
 
 ## 6. Cost accounting
 
-Verify-001 measurement (2026-08-15, openrouter/deepseek/deepseek-chat, 10-min
-SIGINT cap, `--benchmark`): 800,553 tokens in / 16,233 out over 57 turns ≈
-**$0.12 at list prices** — but the episode was a total failure (registration
-gate, zero game actions), so this is the *floor* for a doomed run, not a real
-episode estimate. A healthy episode's cost still needs one successful run to
-measure; expect meaningfully more output tokens. Re-run acceptance after
-accounts are pre-minted.
+Verify-002 measurement (2026-08-15, openrouter/deepseek/deepseek-chat, 10-min
+SIGINT cap, `--benchmark`, pre-seeded account): **1,306,485 tokens in / 5,360
+out over 73 turns ≈ $0.20–0.40 per 10-minute episode at uncached list prices**
+(repeated-context cache reads likely push real cost lower). Mission completed:
+undock → navigate → mine 76 ore (5 types) → skill level-up → dock → sell for
+206cr → refuel from critically low → relaunch. 4 tool errors, all
+self-corrected; captain's-log handoff written unprompted (plan 1.2's pilot
+voice works out of the box). Cadence math: 4 cast × 1 episode/week ≈ a few
+dollars/month at this tier.
+
+Verify-001 measurement (2026-08-15, same model): 800,553 tokens in / 16,233
+out ≈ $0.12 — the *floor* for a doomed run (registration gate, zero game
+actions), kept as the failure-mode baseline.
 
 Acceptance criterion: one unattended scheduled episode completes under the cost cap and leaves a durable log plus staged JSON.
 

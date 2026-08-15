@@ -346,6 +346,7 @@ function updateCivicApprovalRatings_(ctx) {
     var delta = 0;
     var reasons = [];
     var silenceOwned = 0;
+    var silenceNearby = 0; // v1.7 — non-owned district silence, own ladder
 
     // ─────────────────────────────────────────────────────────────────────
     // INITIATIVE PERFORMANCE IN DISTRICT
@@ -378,9 +379,23 @@ function updateCivicApprovalRatings_(ctx) {
 
       var owns = isMayor || supportedByFaction;
       var scored = approvalDeltaForInitiative_(init.motion, owns, opposedByFaction);
-      delta += scored.delta;
-      reasons.push(init.name + ' ' + scored.reason);
-      if (init.motion === 'silence' && owns) silenceOwned++;
+      // v1.7: diminishing silence stacking. Silence on an owned initiative
+      // scores -6 / -3 / -2 / -1 / 0... in portfolio order, so the per-cycle
+      // fall is bounded (~-12 from silence) and the removal verdict comes
+      // from REPEATED silence across cycles (v1.4's own bar), not from
+      // portfolio width — a 6-initiative Mayor was losing 37 points in one
+      // cycle, a one-cycle near-removal. Non-silence deltas are unchanged.
+      if (init.motion === 'silence') {
+        var ladder = owns ? [-6, -3, -2, -1] : [-4, -2, -1];
+        var seen = owns ? silenceOwned : silenceNearby;
+        var dimDelta = seen < ladder.length ? ladder[seen] : 0;
+        delta += dimDelta;
+        reasons.push(init.name + ' silence (' + (dimDelta || '0, capped') + ')');
+        if (owns) silenceOwned++; else silenceNearby++;
+      } else {
+        delta += scored.delta;
+        reasons.push(init.name + ' ' + scored.reason);
+      }
     }
 
     // ─────────────────────────────────────────────────────────────────────

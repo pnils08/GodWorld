@@ -311,6 +311,14 @@ storylines. Their existing Status, LifeHistory, and Ripple consumers observe
 the confirmed state on the next Cycle. A trade-away hands archive eligibility
 to `engine.90` only after the atomic event batch has passed read-back.
 
+### Track B proof record (S369, 2026-08-14)
+
+- Event: attended C103 Oaks injury, POP-01028 Wendell Carter Jr. (Oaks_Roster row 8), dashboard Injury mode, submission `sports-67ba5097-3c85-4e98-ae15-c726d93cdb32`.
+- Verified read-back: feed row 203 (`roster-move`); Simulation_Ledger `Status=injured`, `StatusStartCycle=103`, `HealthCause=sprained ankle`; LifeHistory line `C103 — [SportsRoster] … entered injured status`; LifeHistory_Log 7-cell row; Ripple_Ledger `roster-injury` row (`SourceEngine=sportsFeedWriter.engine77`).
+- Precursor repair: dashboard `dist/` + `node_modules/` had been missing since the 2026-08-11 wipe (API alive, UI dead) — `npm install` + `vite build`, pm2 restart.
+- First attempt went through the game/note form → draft-only feed row 202 (`game-result`, mutation null; same failure class as S357). Stray row 202 left for hand-deletion in the Sheet.
+- UX gap (Mike-direct): ~25 inputs for one event; intake form needs a slimming pass before unattended design work.
+
 ## Atomic writer and recovery contract
 
 One process-global lock serializes every sports confirmation, regardless of
@@ -895,3 +903,4 @@ compensation.
   https://godworld.tail6d8700.ts.net sports workspace (direct :3001 and plain
   http login no longer work by design).
 - 2026-08-07 (engine-sheet, S357) — PROVING WRITE LANDED: attended cycle-103 Oaks game-result through preview→confirm→atomic append (feed row 202, full 20-col envelope, audit journal result:success, idempotency key recorded). Capability key rotated post-proof. engine.40 + engine.89 gates ALL CLEAR → done-pending-archive. engine.77 still needs a roster-EVENT proof (this one carried mutationAction null).
+- 2026-08-14 (engine-sheet, S369) — ROSTER-EVENT PROOF LANDED (§Track B proof record): attended C103 injury, POP-01028, all five write targets read-back verified. engine.77 → done-pending-archive; unattended still gated on exclusion design.

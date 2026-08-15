@@ -29,6 +29,8 @@
     "vsCity": {
       "sentiment": 0.27,
       "citySentiment": 0.48863636363636354,
+      "crime": 0.68,
+      "cityCrime": 0.7186363636363636,
       "heat": 21.863636363636353,
       "outlier": true
     }
@@ -37,9 +39,9 @@
     "claim": "stand with KONO or leave it",
     "lineFacts": [
       "approval 48",
-      "KONO: sentiment 0.27 vs city 0.489; growth momentum 7",
-      "KONO crime: property 41, violent 27, incidents 7 (cycle 103)",
-      "KONO: sentiment 0.27, retail 9.69, crime index 0.68, housing pressure 1.5, growth, momentum 7"
+      "KONO: sentiment 0.27 vs city 0.489; crime index 0.68 vs city 0.719; growth momentum 7",
+      "KONO crime: property 41, violent 27, incidents 7 (cycle 103) — city property 43.4, violent 36.5, incidents 6.3",
+      "KONO: sentiment 0.27 vs city 0.489; crime index 0.68 vs city 0.719; retail 9.69; housing pressure 1.5; growth; momentum 7"
     ],
     "missing": [
       "no shop names on disk for this turf",
@@ -108,19 +110,19 @@
     {
       "id": "F-heat-KONO",
       "t": "FACT",
-      "text": "KONO: sentiment 0.27 vs city 0.489; growth momentum 7",
+      "text": "KONO: sentiment 0.27 vs city 0.489; crime index 0.68 vs city 0.719; growth momentum 7",
       "src": "engine_audit snapshots.Neighborhood_Map ranked vs city"
     },
     {
       "id": "F-crime-KONO",
       "t": "FACT",
-      "text": "KONO crime: property 41, violent 27, incidents 7 (cycle 103)",
+      "text": "KONO crime: property 41, violent 27, incidents 7 (cycle 103) — city property 43.4, violent 36.5, incidents 6.3",
       "src": "engine_audit snapshots.Crime_Metrics"
     },
     {
       "id": "F-hood-KONO",
       "t": "FACT",
-      "text": "KONO: sentiment 0.27, retail 9.69, crime index 0.68, housing pressure 1.5, growth, momentum 7",
+      "text": "KONO: sentiment 0.27 vs city 0.489; crime index 0.68 vs city 0.719; retail 9.69; housing pressure 1.5; growth; momentum 7",
       "src": "engine_audit snapshots.Neighborhood_Map"
     },
     {

@@ -26,16 +26,23 @@
     "lever": "Phase II shortlist published — 4 qualified bidders reduced to 3",
     "hood": "Jack London",
     "initiative": "INIT-006",
-    "vsCity": null
+    "vsCity": {
+      "sentiment": 0.44,
+      "citySentiment": 0.48863636363636354,
+      "crime": 0.96,
+      "cityCrime": 0.7186363636363636,
+      "heat": 9.69090909090908,
+      "outlier": false
+    }
   },
   "prewrite": {
     "claim": "Phase II shortlist published — 4 qualified bidders reduced to 3",
     "lineFacts": [
       "approval 58",
-      "Baylight District — Final Council Vote is in construction-planning — C101: Post-event site inspection for the C100 Celebration closed clean — Delgado full walkdown of event field and construction exclusion perimeter found no surf",
+      "Baylight District — Final Council Vote is in construction-planning — C101: Post-event site inspection for the C100 Celebration closed clean — Delgado full walkdown of event field and construction exclusion perimeter found no surface failure beyond expected…",
       "due: Phase II shortlist published — 4 qualified bidders reduced to 3",
-      "Jack London crime: property 53, violent 43, incidents 8 (cycle 103)",
-      "Jack London: sentiment 0.44, retail 11.06, crime index 0.96, housing pressure 1.5, growth, momentum 7"
+      "Jack London crime: property 53, violent 43, incidents 8 (cycle 103) — city property 43.4, violent 36.5, incidents 6.3",
+      "Jack London: sentiment 0.44 vs city 0.489; crime index 0.96 vs city 0.719; retail 11.06; housing pressure 1.5; growth; momentum 7"
     ],
     "missing": [
       "no invented vote, POPID, or complete"
@@ -103,19 +110,19 @@
     {
       "id": "F-INIT-006",
       "t": "FACT",
-      "text": "Baylight District — Final Council Vote is in construction-planning — C101: Post-event site inspection for the C100 Celebration closed clean — Delgado full walkdown of event field and construction exclusion perimeter found no surf",
+      "text": "Baylight District — Final Council Vote is in construction-planning — C101: Post-event site inspection for the C100 Celebration closed clean — Delgado full walkdown of event field and construction exclusion perimeter found no surface failure beyond expected…",
       "src": "output/initiative_tracker.json"
     },
     {
       "id": "F-crime-JackLondon",
       "t": "FACT",
-      "text": "Jack London crime: property 53, violent 43, incidents 8 (cycle 103)",
+      "text": "Jack London crime: property 53, violent 43, incidents 8 (cycle 103) — city property 43.4, violent 36.5, incidents 6.3",
       "src": "engine_audit snapshots.Crime_Metrics"
     },
     {
       "id": "F-hood-JackLondon",
       "t": "FACT",
-      "text": "Jack London: sentiment 0.44, retail 11.06, crime index 0.96, housing pressure 1.5, growth, momentum 7",
+      "text": "Jack London: sentiment 0.44 vs city 0.489; crime index 0.96 vs city 0.719; retail 11.06; housing pressure 1.5; growth; momentum 7",
       "src": "engine_audit snapshots.Neighborhood_Map"
     },
     {

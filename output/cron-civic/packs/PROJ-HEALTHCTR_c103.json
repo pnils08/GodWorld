@@ -26,7 +26,14 @@
     "lever": "HCAI first-comments window resolution and Phase 1 close",
     "hood": "Temescal",
     "initiative": "INIT-005",
-    "vsCity": null
+    "vsCity": {
+      "sentiment": 0.55,
+      "citySentiment": 0.48863636363636354,
+      "crime": 0.76,
+      "cityCrime": 0.7186363636363636,
+      "heat": -5.309090909090923,
+      "outlier": false
+    }
   },
   "prewrite": {
     "claim": "HCAI first-comments window resolution and Phase 1 close",
@@ -34,8 +41,8 @@
       "Temescal Community Health Center is in construction-active — C102: Construction timeline accelerated; double shifts ordered for caisson drilling and excavation.",
       "due: HCAI first-comments window resolution and Phase 1 close",
       "INIT-005 — construction-active — C103: HCAI first-comments window resolved; Phase 1 closed; construction accelerated. — Phase 2 construction progress review",
-      "Temescal crime: property 43, violent 33, incidents 6 (cycle 103)",
-      "Temescal: sentiment 0.55, retail 13.51, crime index 0.76, housing pressure 1.5, growth, momentum 7"
+      "Temescal crime: property 43, violent 33, incidents 6 (cycle 103) — city property 43.4, violent 36.5, incidents 6.3",
+      "Temescal: sentiment 0.55 vs city 0.489; crime index 0.76 vs city 0.719; retail 13.51; housing pressure 1.5; growth; momentum 7"
     ],
     "missing": [
       "no shop names on disk for this turf",
@@ -127,13 +134,13 @@
     {
       "id": "F-crime-Temescal",
       "t": "FACT",
-      "text": "Temescal crime: property 43, violent 33, incidents 6 (cycle 103)",
+      "text": "Temescal crime: property 43, violent 33, incidents 6 (cycle 103) — city property 43.4, violent 36.5, incidents 6.3",
       "src": "engine_audit snapshots.Crime_Metrics"
     },
     {
       "id": "F-hood-Temescal",
       "t": "FACT",
-      "text": "Temescal: sentiment 0.55, retail 13.51, crime index 0.76, housing pressure 1.5, growth, momentum 7",
+      "text": "Temescal: sentiment 0.55 vs city 0.489; crime index 0.76 vs city 0.719; retail 13.51; housing pressure 1.5; growth; momentum 7",
       "src": "engine_audit snapshots.Neighborhood_Map"
     }
   ],

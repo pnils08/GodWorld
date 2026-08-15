@@ -17,6 +17,15 @@ const CONSTITUENT_CAP = 8;
 const KNOWN_CAP = 20;
 const PLACE_CAP = 8;
 
+function clip(s, n) {
+  const t = String(s || '');
+  if (t.length <= n) return t;
+  const cut = t.slice(0, n);
+  const sp = cut.lastIndexOf(' ');
+  const out = (sp > Math.floor(n * 0.6) ? cut.slice(0, sp) : cut).replace(/[\s.,;:]+$/, '');
+  return out + '…';
+}
+
 const CABINET_SLUG = {
   'civic-office-baylight-authority': 'baylight',
   'civic-project-oari': 'oari',
@@ -105,7 +114,7 @@ function loadCycleEvents(root, cycle, hoods) {
     facts.push({
       id: 'F-we-' + facts.length,
       t: 'FACT',
-      text: line.replace(/^\- /, '').replace(/\*\*/g, '').slice(0, 180),
+      text: clip(line.replace(/^\- /, '').replace(/\*\*/g, ''), 180),
       src: 'world_summary World Events',
     });
   }
@@ -288,25 +297,40 @@ function loadTurfMetrics(audit, hoods) {
   const facts = [];
   const crime = (audit && audit.snapshots && audit.snapshots.Crime_Metrics) || [];
   const map = (audit && audit.snapshots && audit.snapshots.Neighborhood_Map) || [];
+  const cityProp = avg(crime.map(r => num(r.PropertyCrimeIndex)));
+  const cityViol = avg(crime.map(r => num(r.ViolentCrimeIndex)));
+  const cityInc = avg(crime.map(r => num(r.IncidentCount)));
   for (const row of crime) {
     const hood = String(row.Neighborhood || '');
     if (!want.has(hood.toLowerCase())) continue;
+    let text = hood + ' crime: property ' + row.PropertyCrimeIndex +
+      ', violent ' + row.ViolentCrimeIndex +
+      ', incidents ' + row.IncidentCount + ' (cycle ' + row.LastUpdated + ')';
+    if (cityProp != null && cityViol != null) {
+      text += ' — city property ' + cityProp.toFixed(1) +
+        ', violent ' + cityViol.toFixed(1) +
+        ', incidents ' + (cityInc == null ? '?' : cityInc.toFixed(1));
+    }
     facts.push({
       id: 'F-crime-' + hood.replace(/\s+/g, ''),
       t: 'FACT',
-      text: hood + ' crime: property ' + row.PropertyCrimeIndex +
-        ', violent ' + row.ViolentCrimeIndex +
-        ', incidents ' + row.IncidentCount + ' (cycle ' + row.LastUpdated + ')',
+      text,
       src: 'engine_audit snapshots.Crime_Metrics',
     });
   }
+  const ranked = scoreHoods(audit);
+  const byHood = new Map(ranked.map(h => [String(h.hood).toLowerCase(), h]));
   for (const row of map) {
     const hood = String(row.Neighborhood || '');
     if (!want.has(hood.toLowerCase())) continue;
+    const r = byHood.get(hood.toLowerCase());
     const bits = [];
-    if (row.Sentiment != null && row.Sentiment !== '') bits.push('sentiment ' + row.Sentiment);
+    if (r && r.why.length) bits.push.apply(bits, r.why);
+    else {
+      if (row.Sentiment != null && row.Sentiment !== '') bits.push('sentiment ' + row.Sentiment);
+      if (row.CrimeIndex != null && row.CrimeIndex !== '') bits.push('crime index ' + row.CrimeIndex);
+    }
     if (row.RetailVitality != null && row.RetailVitality !== '') bits.push('retail ' + row.RetailVitality);
-    if (row.CrimeIndex != null && row.CrimeIndex !== '') bits.push('crime index ' + row.CrimeIndex);
     if (row.HousingPressure != null && row.HousingPressure !== '') bits.push('housing pressure ' + row.HousingPressure);
     if (row.NeighborhoodTrajectory) bits.push(String(row.NeighborhoodTrajectory));
     if (row.TrajectoryMomentum != null && row.TrajectoryMomentum !== '') bits.push('momentum ' + row.TrajectoryMomentum);
@@ -314,7 +338,7 @@ function loadTurfMetrics(audit, hoods) {
     facts.push({
       id: 'F-hood-' + hood.replace(/\s+/g, ''),
       t: 'FACT',
-      text: hood + ': ' + bits.join(', '),
+      text: hood + ': ' + bits.join('; '),
       src: 'engine_audit snapshots.Neighborhood_Map',
     });
   }
@@ -351,8 +375,8 @@ function scoreHoods(audit) {
       heat += gap * 100;
       why.push('sentiment ' + sent + ' vs city ' + ms.toFixed(3));
     }
-    if (mc != null && crime != null && crime > mc) {
-      heat += (crime - mc) * 20;
+    if (mc != null && crime != null) {
+      if (crime > mc) heat += (crime - mc) * 20;
       why.push('crime index ' + crime + ' vs city ' + mc.toFixed(3));
     }
     if (traj === 'decay') {
@@ -406,7 +430,7 @@ function initFact(init) {
   return {
     id: 'F-' + String(id || init.name || 'init'),
     t: 'FACT',
-    text: (init.name || id) + (phase ? ' is in ' + phase : '') + (summary ? ' — ' + String(summary).slice(0, 160) : ''),
+    text: (init.name || id) + (phase ? ' is in ' + phase : '') + (summary ? ' — ' + clip(summary, 240) : ''),
     src: 'output/initiative_tracker.json',
   };
 }
@@ -469,7 +493,7 @@ function loadCabinet(root, office, cycle) {
   return [{
     id: 'F-cabinet-' + want.replace(/\W+/g, '').slice(0, 24),
     t: 'FACT',
-    text: bits.join(' — ').slice(0, 220),
+    text: clip(bits.join(' — '), 220),
     src: path.relative(root, full).replace(/\\/g, '/'),
   }];
 }
@@ -644,12 +668,19 @@ function pickTurn(opts) {
       lever: top.lever,
       hood: top.hood,
       initiative: top.init ? (top.init.id || top.init.InitiativeID) : null,
-      vsCity: top.hoodScore ? {
-        sentiment: top.hoodScore.sent,
-        citySentiment: top.hoodScore.citySent,
-        heat: top.hoodScore.heat,
-        outlier: top.hoodScore.outlier,
-      } : null,
+      vsCity: (function vs() {
+        const h = top.hoodScore || (hoodScores || []).find(x =>
+          String(x.hood).toLowerCase() === String(top.hood || '').toLowerCase());
+        if (!h) return null;
+        return {
+          sentiment: h.sent,
+          citySentiment: h.citySent,
+          crime: h.crime,
+          cityCrime: h.cityCrime,
+          heat: h.heat,
+          outlier: h.outlier,
+        };
+      }()),
     },
     prewrite: {
       claim: top.lever,
@@ -801,7 +832,7 @@ function writePack(pack, root, cycle) {
 module.exports = {
   buildPack, resolveOffice, turfHoods, loadConstituents, loadProjects, loadTurfLife,
   loadCabinet, loadInitRows, seatKind, pickTurn, scoreHoods, loadFactionPeers,
-  writePack, CONSTITUENT_CAP,
+  clip, writePack, CONSTITUENT_CAP,
 };
 
 if (require.main === module) {

@@ -29,6 +29,8 @@
     "vsCity": {
       "sentiment": 0.39,
       "citySentiment": 0.48863636363636354,
+      "crime": 0.77,
+      "cityCrime": 0.7186363636363636,
       "heat": 29.89090909090908,
       "outlier": true
     }
@@ -38,7 +40,7 @@
     "lineFacts": [
       "approval 90",
       "San Antonio: sentiment 0.39 vs city 0.489; crime index 0.77 vs city 0.719; decay momentum 4; decay momentum 4",
-      "San Antonio: sentiment 0.39, retail 6.89, crime index 0.77, housing pressure 0, decay, momentum 4"
+      "San Antonio: sentiment 0.39 vs city 0.489; crime index 0.77 vs city 0.719; decay momentum 4; retail 6.89; housing pressure 0; decay; momentum 4"
     ],
     "missing": [
       "no shop names on disk for this turf",
@@ -103,7 +105,7 @@
     {
       "id": "F-hood-SanAntonio",
       "t": "FACT",
-      "text": "San Antonio: sentiment 0.39, retail 6.89, crime index 0.77, housing pressure 0, decay, momentum 4",
+      "text": "San Antonio: sentiment 0.39 vs city 0.489; crime index 0.77 vs city 0.719; decay momentum 4; retail 6.89; housing pressure 0; decay; momentum 4",
       "src": "engine_audit snapshots.Neighborhood_Map"
     },
     {

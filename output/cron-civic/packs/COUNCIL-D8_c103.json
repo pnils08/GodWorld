@@ -26,14 +26,21 @@
     "lever": "defend the district or go quiet",
     "hood": "Lake Merritt",
     "initiative": null,
-    "vsCity": null
+    "vsCity": {
+      "sentiment": 0.45,
+      "citySentiment": 0.48863636363636354,
+      "crime": 0.85,
+      "cityCrime": 0.7186363636363636,
+      "heat": 6.49090909090908,
+      "outlier": false
+    }
   },
   "prewrite": {
     "claim": "defend the district or go quiet",
     "lineFacts": [
       "approval 54",
-      "Lake Merritt crime: property 51, violent 35, incidents 4 (cycle 103)",
-      "Lake Merritt: sentiment 0.45, retail 12.07, crime index 0.85, housing pressure 1.5, growth, momentum 7"
+      "Lake Merritt crime: property 51, violent 35, incidents 4 (cycle 103) — city property 43.4, violent 36.5, incidents 6.3",
+      "Lake Merritt: sentiment 0.45 vs city 0.489; crime index 0.85 vs city 0.719; retail 12.07; housing pressure 1.5; growth; momentum 7"
     ],
     "missing": [
       "no invented vote, POPID, or complete"
@@ -116,13 +123,13 @@
     {
       "id": "F-crime-LakeMerritt",
       "t": "FACT",
-      "text": "Lake Merritt crime: property 51, violent 35, incidents 4 (cycle 103)",
+      "text": "Lake Merritt crime: property 51, violent 35, incidents 4 (cycle 103) — city property 43.4, violent 36.5, incidents 6.3",
       "src": "engine_audit snapshots.Crime_Metrics"
     },
     {
       "id": "F-hood-LakeMerritt",
       "t": "FACT",
-      "text": "Lake Merritt: sentiment 0.45, retail 12.07, crime index 0.85, housing pressure 1.5, growth, momentum 7",
+      "text": "Lake Merritt: sentiment 0.45 vs city 0.489; crime index 0.85 vs city 0.719; retail 12.07; housing pressure 1.5; growth; momentum 7",
       "src": "engine_audit snapshots.Neighborhood_Map"
     },
     {

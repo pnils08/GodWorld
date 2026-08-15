@@ -26,7 +26,14 @@
     "lever": "D7 next-cycle report and community satisfaction survey",
     "hood": "West Oakland",
     "initiative": "INIT-002",
-    "vsCity": null
+    "vsCity": {
+      "sentiment": 0.5,
+      "citySentiment": 0.48863636363636354,
+      "crime": 1.19,
+      "cityCrime": 0.7186363636363636,
+      "heat": 26.29090909090908,
+      "outlier": false
+    }
   },
   "prewrite": {
     "claim": "D7 next-cycle report and community satisfaction survey",

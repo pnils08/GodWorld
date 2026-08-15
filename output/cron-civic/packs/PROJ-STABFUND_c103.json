@@ -26,7 +26,14 @@
     "lever": "Month-five disbursement batch review",
     "hood": "West Oakland",
     "initiative": "INIT-001",
-    "vsCity": null
+    "vsCity": {
+      "sentiment": 0.5,
+      "citySentiment": 0.48863636363636354,
+      "crime": 1.19,
+      "cityCrime": 0.7186363636363636,
+      "heat": 26.29090909090908,
+      "outlier": false
+    }
   },
   "prewrite": {
     "claim": "Month-five disbursement batch review",
@@ -34,8 +41,8 @@
       "West Oakland Stabilization Fund is in disbursement-active — C102: Month-four disbursement batch approved (7 households), total disbursed: 45 of ~280.",
       "due: Month-five disbursement batch review",
       "INIT-001 — disbursement-active — C103: Month-five disbursement batch approved (7 households), total disbursed: 52 of ~280. — Month-six disbursement batch review",
-      "West Oakland crime: property 58, violent 61, incidents 11 (cycle 103)",
-      "West Oakland: sentiment 0.5, retail 7.91, crime index 1.19, housing pressure 0, decay, momentum 3"
+      "West Oakland crime: property 58, violent 61, incidents 11 (cycle 103) — city property 43.4, violent 36.5, incidents 6.3",
+      "West Oakland: sentiment 0.5 vs city 0.489; crime index 1.19 vs city 0.719; decay momentum 3; retail 7.91; housing pressure 0; decay; momentum 3"
     ],
     "missing": [
       "no shop names on disk for this turf",
@@ -141,13 +148,13 @@
     {
       "id": "F-crime-WestOakland",
       "t": "FACT",
-      "text": "West Oakland crime: property 58, violent 61, incidents 11 (cycle 103)",
+      "text": "West Oakland crime: property 58, violent 61, incidents 11 (cycle 103) — city property 43.4, violent 36.5, incidents 6.3",
       "src": "engine_audit snapshots.Crime_Metrics"
     },
     {
       "id": "F-hood-WestOakland",
       "t": "FACT",
-      "text": "West Oakland: sentiment 0.5, retail 7.91, crime index 1.19, housing pressure 0, decay, momentum 3",
+      "text": "West Oakland: sentiment 0.5 vs city 0.489; crime index 1.19 vs city 0.719; decay momentum 3; retail 7.91; housing pressure 0; decay; momentum 3",
       "src": "engine_audit snapshots.Neighborhood_Map"
     },
     {

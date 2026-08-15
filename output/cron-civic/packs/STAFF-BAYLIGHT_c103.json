@@ -26,16 +26,23 @@
     "lever": "Phase II shortlist published — 4 qualified bidders reduced to 3",
     "hood": "Baylight District",
     "initiative": "INIT-006",
-    "vsCity": null
+    "vsCity": {
+      "sentiment": 0.55,
+      "citySentiment": 0.48863636363636354,
+      "crime": 0.62,
+      "cityCrime": 0.7186363636363636,
+      "heat": 11.863636363636349,
+      "outlier": false
+    }
   },
   "prewrite": {
     "claim": "Phase II shortlist published — 4 qualified bidders reduced to 3",
     "lineFacts": [
       "approval 65",
-      "Baylight District — Final Council Vote is in construction-planning — C101: Post-event site inspection for the C100 Celebration closed clean — Delgado full walkdown of event field and construction exclusion perimeter found no surf",
+      "Baylight District — Final Council Vote is in construction-planning — C101: Post-event site inspection for the C100 Celebration closed clean — Delgado full walkdown of event field and construction exclusion perimeter found no surface failure beyond expected…",
       "due: Phase II shortlist published — 4 qualified bidders reduced to 3",
       "INIT-006 — construction-planning — C103: Phase II shortlist published (4 bidders reduced to 3); moving to final bid evaluation. — Final bid evaluation and selection",
-      "Baylight District: sentiment 0.55, retail 5.77, crime index 0.62, housing pressure 0, decay, momentum 3"
+      "Baylight District: sentiment 0.55 vs city 0.489; crime index 0.62 vs city 0.719; decay momentum 3; retail 5.77; housing pressure 0; decay; momentum 3"
     ],
     "missing": [
       "no shop names on disk for this turf",
@@ -100,7 +107,7 @@
     {
       "id": "F-INIT-006",
       "t": "FACT",
-      "text": "Baylight District — Final Council Vote is in construction-planning — C101: Post-event site inspection for the C100 Celebration closed clean — Delgado full walkdown of event field and construction exclusion perimeter found no surf",
+      "text": "Baylight District — Final Council Vote is in construction-planning — C101: Post-event site inspection for the C100 Celebration closed clean — Delgado full walkdown of event field and construction exclusion perimeter found no surface failure beyond expected…",
       "src": "output/initiative_tracker.json"
     },
     {
@@ -112,7 +119,7 @@
     {
       "id": "F-hood-BaylightDistrict",
       "t": "FACT",
-      "text": "Baylight District: sentiment 0.55, retail 5.77, crime index 0.62, housing pressure 0, decay, momentum 3",
+      "text": "Baylight District: sentiment 0.55 vs city 0.489; crime index 0.62 vs city 0.719; decay momentum 3; retail 5.77; housing pressure 0; decay; momentum 3",
       "src": "engine_audit snapshots.Neighborhood_Map"
     },
     {

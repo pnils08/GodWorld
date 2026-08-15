@@ -26,14 +26,21 @@
     "lever": "defend the district or go quiet",
     "hood": "Glenview",
     "initiative": null,
-    "vsCity": null
+    "vsCity": {
+      "sentiment": 0.57,
+      "citySentiment": 0.48863636363636354,
+      "crime": 0.5,
+      "cityCrime": 0.7186363636363636,
+      "heat": 9.863636363636358,
+      "outlier": false
+    }
   },
   "prewrite": {
     "claim": "defend the district or go quiet",
     "lineFacts": [
       "approval 54",
-      "Glenview crime: property 28, violent 22, incidents 4 (cycle 103)",
-      "Glenview: sentiment 0.57, retail 7.4, crime index 0.5, housing pressure 0, decay, momentum 3"
+      "Glenview crime: property 28, violent 22, incidents 4 (cycle 103) — city property 43.4, violent 36.5, incidents 6.3",
+      "Glenview: sentiment 0.57 vs city 0.489; crime index 0.5 vs city 0.719; decay momentum 3; retail 7.4; housing pressure 0; decay; momentum 3"
     ],
     "missing": [
       "no active ledger people in Glenview — do not borrow other hoods",
@@ -66,13 +73,13 @@
     {
       "id": "F-crime-Glenview",
       "t": "FACT",
-      "text": "Glenview crime: property 28, violent 22, incidents 4 (cycle 103)",
+      "text": "Glenview crime: property 28, violent 22, incidents 4 (cycle 103) — city property 43.4, violent 36.5, incidents 6.3",
       "src": "engine_audit snapshots.Crime_Metrics"
     },
     {
       "id": "F-hood-Glenview",
       "t": "FACT",
-      "text": "Glenview: sentiment 0.57, retail 7.4, crime index 0.5, housing pressure 0, decay, momentum 3",
+      "text": "Glenview: sentiment 0.57 vs city 0.489; crime index 0.5 vs city 0.719; decay momentum 3; retail 7.4; housing pressure 0; decay; momentum 3",
       "src": "engine_audit snapshots.Neighborhood_Map"
     }
   ],

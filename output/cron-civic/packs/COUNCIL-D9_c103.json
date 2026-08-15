@@ -26,14 +26,21 @@
     "lever": "defend the district or go quiet",
     "hood": "Laurel",
     "initiative": null,
-    "vsCity": null
+    "vsCity": {
+      "sentiment": 0.49,
+      "citySentiment": 0.48863636363636354,
+      "crime": 0.45,
+      "cityCrime": 0.7186363636363636,
+      "heat": -0.13636363636364557,
+      "outlier": false
+    }
   },
   "prewrite": {
     "claim": "defend the district or go quiet",
     "lineFacts": [
       "approval 54",
-      "Laurel crime: property 27, violent 23, incidents 5 (cycle 103)",
-      "Laurel: sentiment 0.49, retail 10.37, crime index 0.45, housing pressure 0.5, growth, momentum 6"
+      "Laurel crime: property 27, violent 23, incidents 5 (cycle 103) — city property 43.4, violent 36.5, incidents 6.3",
+      "Laurel: sentiment 0.49 vs city 0.489; crime index 0.45 vs city 0.719; retail 10.37; housing pressure 0.5; growth; momentum 6"
     ],
     "missing": [
       "no shop names on disk for this turf",
@@ -101,13 +108,13 @@
     {
       "id": "F-crime-Laurel",
       "t": "FACT",
-      "text": "Laurel crime: property 27, violent 23, incidents 5 (cycle 103)",
+      "text": "Laurel crime: property 27, violent 23, incidents 5 (cycle 103) — city property 43.4, violent 36.5, incidents 6.3",
       "src": "engine_audit snapshots.Crime_Metrics"
     },
     {
       "id": "F-hood-Laurel",
       "t": "FACT",
-      "text": "Laurel: sentiment 0.49, retail 10.37, crime index 0.45, housing pressure 0.5, growth, momentum 6",
+      "text": "Laurel: sentiment 0.49 vs city 0.489; crime index 0.45 vs city 0.719; retail 10.37; housing pressure 0.5; growth; momentum 6",
       "src": "engine_audit snapshots.Neighborhood_Map"
     },
     {

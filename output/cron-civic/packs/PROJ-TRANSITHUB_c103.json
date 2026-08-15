@@ -26,7 +26,14 @@
     "lever": "Bureau review of compliance submissions",
     "hood": "Fruitvale",
     "initiative": "INIT-003",
-    "vsCity": null
+    "vsCity": {
+      "sentiment": 0.5,
+      "citySentiment": 0.48863636363636354,
+      "crime": 1.04,
+      "cityCrime": 0.7186363636363636,
+      "heat": 5.290909090909081,
+      "outlier": false
+    }
   },
   "prewrite": {
     "claim": "Bureau review of compliance submissions",
@@ -34,8 +41,8 @@
       "Fruitvale Transit Hub Phase II — Visioning is in construction-planning — C102: Submitted pipeline exhaustion docs + stamped pedestrian-path redesign",
       "due: Bureau review of compliance submissions",
       "INIT-003 — visioning-complete — C103: Bureau review approved; visioning phase complete; transitioning to design phase. — Design phase kickoff",
-      "Fruitvale crime: property 54, violent 50, incidents 7 (cycle 103)",
-      "Fruitvale: sentiment 0.5, retail 12.22, crime index 1.04, housing pressure 0, steady, momentum 5"
+      "Fruitvale crime: property 54, violent 50, incidents 7 (cycle 103) — city property 43.4, violent 36.5, incidents 6.3",
+      "Fruitvale: sentiment 0.5 vs city 0.489; crime index 1.04 vs city 0.719; retail 12.22; housing pressure 0; steady; momentum 5"
     ],
     "missing": [
       "no shop names on disk for this turf",
@@ -134,13 +141,13 @@
     {
       "id": "F-crime-Fruitvale",
       "t": "FACT",
-      "text": "Fruitvale crime: property 54, violent 50, incidents 7 (cycle 103)",
+      "text": "Fruitvale crime: property 54, violent 50, incidents 7 (cycle 103) — city property 43.4, violent 36.5, incidents 6.3",
       "src": "engine_audit snapshots.Crime_Metrics"
     },
     {
       "id": "F-hood-Fruitvale",
       "t": "FACT",
-      "text": "Fruitvale: sentiment 0.5, retail 12.22, crime index 1.04, housing pressure 0, steady, momentum 5",
+      "text": "Fruitvale: sentiment 0.5 vs city 0.489; crime index 1.04 vs city 0.719; retail 12.22; housing pressure 0; steady; momentum 5",
       "src": "engine_audit snapshots.Neighborhood_Map"
     },
     {

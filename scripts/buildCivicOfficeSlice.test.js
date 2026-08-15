@@ -83,7 +83,10 @@ fs.writeFileSync(path.join(tmp, 'output', 'initiative_tracker.json'), JSON.strin
       id: 'INIT-006',
       name: 'Baylight District — Final Council Vote',
       neighborhoods: ['Jack London', 'Downtown'],
-      implementation: { phase: 'construction-planning', summary: 'shortlist next' },
+      implementation: {
+        phase: 'construction-planning',
+        summary: 'C101: Post-event site inspection for the C100 Celebration closed clean — Delgado full walkdown of event field and construction exclusion perimeter found no surface failure beyond expected',
+      },
     },
   ],
 }));
@@ -172,6 +175,8 @@ check('baylight owns INIT-006', bay.known.some(k => /INIT-006|Baylight District/
 check('baylight does not eat Test Hub', !bay.known.some(k => /Test Hub/.test(k.text)));
 check('baylight reads this-cycle cabinet only', bay.known.some(k => /shortlist published/.test(k.text)) && !bay.known.some(k => /Project Charter/.test(k.text)));
 check('baylight turn is INIT-006', bay.pulse && bay.pulse.initiative === 'INIT-006');
+check('facts do not cut mid-word', !bay.known.some(k => /surf$/.test(k.text)) && bay.known.some(k => /surface failure|…/.test(k.text)));
+check('ranked hood facts name the city baseline', pack.known.some(k => /vs city/.test(k.text)));
 check('baylight turf is the neighborhood', bay.signal.hoods.includes('Baylight District') && !bay.signal.hoods.includes('Temescal'));
 check('baylight people are site neighbors only', bay.exposure.subjects.length === 1 && bay.exposure.subjects[0].name === 'Site Neighbor');
 

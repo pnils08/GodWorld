@@ -652,8 +652,25 @@ or may not escalate to an `INIT-`.
 **Blast radius:** a new tab has no existing readers, so it cannot regress anything;
 the tracker change is three appended columns. This is additive on both sides.
 
-**Status:** recommendation only — not approved, not built. Filed as civic.22's
-shape question.
+**Status: CONVERGED — this recommendation landed as civic.24 §3 (2026-08-16).**
+The Sunday nine-seat-table plan ([[2026-08-16-city-hall-nine-seat-table]]) was
+designed independently and reaches the same seam: `Initiative_Tracker` keeps the
+legislative object, a separate **City Hall Ledger** records the room, and *only the
+gavel may stamp the tracker*. It is further along than this section — it carries a
+schema, a disk-first design (`output/cron-civic/city-hall-ledger_c{N}.json`, wipe
+lesson applied) and a task list, with the `City_Hall_Ledger` sheet tab as
+engine-sheet work after one clean dry Sunday.
+
+Two lanes reaching the same seam from different directions — this section from the
+cardinality argument (6 initiatives in ~103 cycles vs 9 seats acting weekly), civic.24
+from the hearing design — is reasonable evidence the seam is real rather than a
+preference.
+
+**civic.22 is therefore redundant with civic.24 and should close rather than be
+worked.** Its surviving unique content is the *authorship* half — the tracker's 28
+columns carry five mayoral-action fields and zero proposer fields (§3.4), which
+civic.24's "only the gavel may stamp" does not by itself fix. That belongs wherever
+authorship lands, not in a duplicate ledger row. Flagged to rb, who owns ROLLOUT.
 
 ## 11. Handoff to research-build
 

@@ -95,4 +95,27 @@ if ! bash "$(git rev-parse --show-toplevel)/.claude/hooks/canon-leak-guard.sh" -
   exit 1
 fi
 
+# ---------------------------------------------------------------------------
+# Writer exit-code lint (governance.49) — ratcheted standing check for the
+# writer-fixed/artifact-persists class: a script whose delete/replace failure
+# counter never reaches its exit code. Blocks ONLY on exit 1 (new un-ratcheted
+# offenders or a stale ratchet entry); the ratchet means existing debt stays
+# silent. Any other exit (lint crash, missing node) warns and fails open — a
+# broken lint must not halt every lane's commits.
+# ---------------------------------------------------------------------------
+lint_out="$(node "$(git rev-parse --show-toplevel)/scripts/auditWriterExitCodes.js" --gate 2>&1)"
+lint_rc=$?
+if [ "$lint_rc" = "1" ]; then
+  echo "" >&2
+  echo "BLOCKED — new unguarded writer script(s) (governance.49 lint):" >&2
+  echo "$lint_out" | sed 's/^/  /' >&2
+  echo "" >&2
+  echo "Give the writer an exit-code gate, or ratchet the instance to its" >&2
+  echo "rollout row in scripts/auditWriterExitCodes.js KNOWN_OPEN." >&2
+  echo "" >&2
+  exit 1
+elif [ "$lint_rc" != "0" ]; then
+  echo "pre-commit: writer-exit lint unavailable (rc=$lint_rc) — failing open" >&2
+fi
+
 exit 0

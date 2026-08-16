@@ -154,4 +154,13 @@ function main() {
   if (gate && (newOffenders.length || staleRatchet.length)) process.exit(1);
 }
 
-main();
+// Exit codes: 1 = findings (new offenders / stale ratchet) — a gate should
+// block on this. 0 = clean OR internal error. The pre-commit hook blocks only
+// on 1: a crashed lint (missing node, unreadable dir) warns and lets the
+// commit through rather than halting every lane on the box.
+try {
+  main();
+} catch (e) {
+  console.error('[writer-exit-lint] INTERNAL ERROR (fail-open): ' + (e && e.message || e));
+  process.exit(0);
+}

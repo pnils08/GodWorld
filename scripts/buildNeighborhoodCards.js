@@ -49,6 +49,10 @@ var CONTAINER_TAG = 'world-data';
 var DOMAIN_TAG = 'wd-neighborhood';
 var API_HOST = 'api.supermemory.ai';
 var APPLY = process.argv.includes('--apply');
+// engine.111 preventative — see the nbh-map block for why a clean projection is
+// hardened anyway.
+var ALLOW_PARTIAL_WIPE = process.argv.includes('--allow-partial-wipe');
+var RECONCILE = process.argv.includes('--reconcile');
 var WIPE_OLD = process.argv.includes('--wipe-old');
 
 var nameArg = process.argv.indexOf('--name');
@@ -126,7 +130,115 @@ function searchSupermemory(query, container) {
 var WRITE_MAX_RETRIES = 3;
 var WRITE_RETRY_SLEEP_MS = 8000;
 
-async function writeMemory(content, nbh) {
+// ═══════════════════════════════════════════════════════════════════════════
+// NBH → DOC MAP + RECONCILE + DELETE classification (engine.111 preventative)
+// ═══════════════════════════════════════════════════════════════════════════
+// wd-neighborhood measured 17 docs / 17 neighborhoods at the S376 census — a
+// clean 1.00. It is hardened anyway because the code path is identical to
+// wd-business (435/99) and wd-cultural (95/46); those degraded because they
+// rebuild often. This one is clean by low traffic, not by construction.
+async function buildNbhMap() {
+  console.log('[buildNeighborhoodCards] enumerating ' + DOMAIN_TAG + ' for nbh→id map…');
+  var map = new Map();
+  var dupes = [];
+  var total = 0;
+  var page = 1;
+  while (true) {
+    var r = await smRequest('POST', '/v3/documents/list', {
+      containerTags: [DOMAIN_TAG], limit: 200, page: page
+    });
+    if (r.status !== 200) throw new Error('nbh-map list failed at page ' + page + ': ' + r.status);
+    var mems = (r.body && r.body.memories) || [];
+    for (var i = 0; i < mems.length; i++) {
+      var m = mems[i];
+      var name = m.metadata && m.metadata.neighborhood;
+      total++;
+      if (!name) continue;
+      var rec = { id: m.id, createdAt: m.createdAt, name: name };
+      var prev = map.get(name);
+      if (!prev) { map.set(name, rec); continue; }
+      if (new Date(rec.createdAt) > new Date(prev.createdAt)) { map.set(name, rec); dupes.push(prev); }
+      else { dupes.push(rec); }
+    }
+    if (mems.length < 200) break;
+    page++;
+    if (page > 20) throw new Error('nbh-map pagination overflow (>20 pages)');
+  }
+  console.log('[buildNeighborhoodCards] nbh→id map: ' + map.size + ' unique neighborhoods across ' +
+    total + ' docs (' + dupes.length + ' surplus above the one-per-neighborhood invariant)');
+  return { map: map, dupes: dupes, total: total };
+}
+
+async function reconcileNeighborhoodCards() {
+  var enumerated = await buildNbhMap();
+  var dupes = enumerated.dupes;
+
+  console.log('\n[reconcile] mode: ' + (APPLY ? 'APPLY' : 'DRY-RUN'));
+  console.log('[reconcile] docs: ' + enumerated.total +
+    ' | neighborhoods: ' + enumerated.map.size + ' | surplus to delete: ' + dupes.length);
+
+  if (dupes.length === 0) {
+    console.log('[reconcile] one-doc-per-neighborhood invariant already holds — nothing to do.');
+    return;
+  }
+  dupes.slice(0, 10).forEach(function (d) {
+    console.log('  ' + d.name + ' — delete ' + String(d.createdAt).slice(0, 10) +
+      ' | keep ' + String(enumerated.map.get(d.name).createdAt).slice(0, 10));
+  });
+
+  if (!APPLY) {
+    console.log('\n[reconcile] DRY-RUN — no deletes issued. Re-run with --reconcile --apply to execute.');
+    return;
+  }
+
+  var fs = require('fs');
+  var path = require('path');
+  var stamp = new Date().toISOString().replace(/[:.]/g, '-');
+  var logPath = path.join('/root/GodWorld/output', 'wd-neighborhood-reconcile-' + stamp + '.log');
+  fs.writeFileSync(logPath, dupes.map(function (d) {
+    return [d.name, d.id, d.createdAt, 'keep=' + enumerated.map.get(d.name).id].join('\t');
+  }).join('\n') + '\n', 'utf8');
+  console.log('[reconcile] delete manifest written: ' + logPath);
+
+  var deleted = 0;
+  var alreadyGone = 0;
+  var failures = [];
+  for (var i = 0; i < dupes.length; i++) {
+    var res = await deleteDoc(dupes[i].id);
+    if (res.outcome === 'deleted') deleted++;
+    else if (res.outcome === 'already-gone') alreadyGone++;
+    else failures.push({ id: dupes[i].id, name: dupes[i].name, status: res.status });
+    await smSleep(250);
+  }
+  console.log('\n[reconcile] deleted: ' + deleted + ' | already-gone: ' + alreadyGone +
+    ' | failed: ' + failures.length);
+  if (failures.length > 0) {
+    failures.forEach(function (f) {
+      console.error('  [FAIL] ' + f.name + ' ' + f.id + ' → HTTP ' + f.status);
+    });
+    console.error('[GATE-FAIL] reconcile left ' + failures.length +
+      ' surplus doc(s) in place; manifest: ' + logPath);
+    process.exit(1);
+  }
+  console.log('[reconcile] one-doc-per-neighborhood invariant restored.');
+}
+
+// engine.111: 404 = already absent, which satisfies the caller's intent.
+async function deleteDoc(id) {
+  var del = await smRequest('DELETE', '/v3/documents/' + id, null);
+  if (del.status === 204 || del.status === 200) return { outcome: 'deleted', status: del.status };
+  if (del.status === 404) return { outcome: 'already-gone', status: 404 };
+  if (del.status === 409) {
+    await smSleep(20000);
+    var del2 = await smRequest('DELETE', '/v3/documents/' + id, null);
+    if (del2.status === 204 || del2.status === 200) return { outcome: 'deleted', status: del2.status };
+    if (del2.status === 404) return { outcome: 'already-gone', status: 404 };
+    return { outcome: 'failed', status: del2.status };
+  }
+  return { outcome: 'failed', status: del.status };
+}
+
+async function writeMemory(content, nbh, nbhMap) {
   var meta = {
     title: nbh.name,
     neighborhood: nbh.name,
@@ -138,17 +250,21 @@ async function writeMemory(content, nbh) {
     containerTags: [CONTAINER_TAG, DOMAIN_TAG],
     metadata: meta
   };
+  // engine.111: PATCH-if-exists / POST-if-new (one doc per neighborhood).
+  var existing = nbhMap && nbhMap.get(nbh.name);
+  var method = existing ? 'PATCH' : 'POST';
+  var apiPath = existing ? '/v3/documents/' + existing.id : '/v3/documents';
   for (var attempt = 0; attempt <= WRITE_MAX_RETRIES; attempt++) {
-    var r = await smRequest('POST', '/v3/documents', body);
+    var r = await smRequest(method, apiPath, body);
     if (r.status >= 200 && r.status < 300) {
-      return { status: r.status, id: r.body && r.body.id };
+      return { status: r.status, id: r.body && r.body.id, op: method };
     }
     if ((r.status === 401 || r.status === 429) && attempt < WRITE_MAX_RETRIES) {
-      console.log('  [retry] write got ' + r.status + ' (rate-limit?); sleeping ' + (WRITE_RETRY_SLEEP_MS / 1000) + 's, attempt ' + (attempt + 2) + '/' + (WRITE_MAX_RETRIES + 1));
+      console.log('  [retry] ' + method + ' got ' + r.status + ' (rate-limit?); sleeping ' + (WRITE_RETRY_SLEEP_MS / 1000) + 's, attempt ' + (attempt + 2) + '/' + (WRITE_MAX_RETRIES + 1));
       await smSleep(WRITE_RETRY_SLEEP_MS);
       continue;
     }
-    throw new Error('HTTP ' + r.status + ': ' + (typeof r.body === 'string' ? r.body : JSON.stringify(r.body)));
+    throw new Error('HTTP ' + r.status + ' on ' + method + ' ' + apiPath + ': ' + (typeof r.body === 'string' ? r.body : JSON.stringify(r.body)));
   }
   throw new Error('writeMemory exhausted ' + (WRITE_MAX_RETRIES + 1) + ' attempts');
 }
@@ -245,23 +361,38 @@ async function wipeOldNeighborhoodCards(nbhs) {
 
   console.log('[wipe-old] DELETE pass');
   var deleted = 0;
-  var failed = 0;
+  var alreadyGone = 0;
+  var failures = [];
   for (var k = 0; k < matches.length; k++) {
-    var del = await smRequest('DELETE', '/v3/documents/' + matches[k].id, null);
-    var ok = del.status === 204 || del.status === 200;
-    if (!ok && del.status === 409) {
-      await smSleep(20000);
-      var del2 = await smRequest('DELETE', '/v3/documents/' + matches[k].id, null);
-      ok = del2.status === 204 || del2.status === 200;
-    }
-    if (ok) deleted++; else failed++;
+    var res = await deleteDoc(matches[k].id);
+    if (res.outcome === 'deleted') deleted++;
+    else if (res.outcome === 'already-gone') alreadyGone++;
+    else failures.push({ id: matches[k].id, name: matches[k].name, status: res.status });
     if ((k + 1) % 25 === 0 || k === matches.length - 1) {
-      console.log('  DELETE ' + (k + 1) + '/' + matches.length + ' — ok=' + deleted + ' failed=' + failed);
+      console.log('  DELETE ' + (k + 1) + '/' + matches.length +
+        ' — deleted=' + deleted + ' already-gone=' + alreadyGone + ' failed=' + failures.length);
     }
     await smSleep(200);
   }
-  console.log('[wipe-old] DELETE results: ' + deleted + ' ok / ' + failed + ' failed');
-  return { candidates: ids.length, matched: matches.length, deleted: deleted, failed: failed };
+  console.log('[wipe-old] DELETE results: ' + deleted + ' deleted / ' + alreadyGone +
+    ' already-gone / ' + failures.length + ' failed');
+  // engine.111: abort before writing rather than stacking over the survivors.
+  if (failures.length > 0) {
+    failures.forEach(function (f) {
+      console.error('  [FAIL] wipe ' + f.name + ' ' + f.id + ' → HTTP ' + f.status);
+    });
+    if (!ALLOW_PARTIAL_WIPE) {
+      throw new Error('wipe-old: ' + failures.length + ' of ' + matches.length +
+        ' DELETEs failed. Refusing to write on top of a partial wipe. Re-run to retry, ' +
+        'or pass --allow-partial-wipe to override deliberately.');
+    }
+    console.error('[wipe-old] --allow-partial-wipe set — proceeding over ' + failures.length +
+      ' failed delete(s); expect duplicate cards for those neighborhoods.');
+  }
+  return {
+    candidates: ids.length, matched: matches.length,
+    deleted: deleted, alreadyGone: alreadyGone, failed: failures.length
+  };
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -475,6 +606,12 @@ function buildCard(nbh, demo, businesses, citizens, appearances) {
 // ═══════════════════════════════════════════════════════════════════════════
 
 async function main() {
+  // engine.111: standalone legacy-state pass — reads no sheet, writes no cards.
+  if (RECONCILE) {
+    await reconcileNeighborhoodCards();
+    return;
+  }
+
   console.log('[buildNeighborhoodCards] Mode: ' + (APPLY ? 'APPLY' : 'DRY-RUN'));
   if (NAME_FILTER) console.log('[buildNeighborhoodCards] Name filter: ' + NAME_FILTER);
   if (LIMIT < 999) console.log('[buildNeighborhoodCards] Limit: ' + LIMIT);
@@ -563,12 +700,22 @@ async function main() {
     console.log('[wipe-old] sleeping ' + (WIPE_INDEXING_SLEEP_MS / 1000) + 's for async indexing to settle before writes');
     await smSleep(WIPE_INDEXING_SLEEP_MS);
   } else if (APPLY && !WIPE_OLD) {
-    console.log('[buildNeighborhoodCards] --wipe-old not set — writes will land alongside any existing un-tagged cards.');
+    console.log('[buildNeighborhoodCards] --wipe-old not set — un-tagged legacy cards are left in place; ' +
+      'tagged cards are PATCHed in place, not duplicated.');
+  }
+
+  // engine.111: built after the wipe so it reflects post-delete state.
+  var nbhMap = null;
+  if (APPLY) {
+    nbhMap = (await buildNbhMap()).map;
   }
 
   // Process each neighborhood
   var written = 0;
+  var patched = 0;
+  var posted = 0;
   var errors = 0;
+  var failureList = [];
   var withAppearances = 0;
   var withBusinesses = 0;
   var withCitizens = 0;
@@ -609,13 +756,15 @@ async function main() {
       console.log('');
     } else {
       try {
-        await writeMemory(card, nbh);
+        var wr = await writeMemory(card, nbh, nbhMap);
         written++;
+        if (wr.op === 'PATCH') patched++; else posted++;
         if ((ni + 1) % 5 === 0) {
           console.log('  ... ' + (ni + 1) + '/' + nbhs.length + ' written');
         }
       } catch (e) {
         console.error('[FAIL] ' + nbh.name + ': ' + e.message);
+        failureList.push({ name: nbh.name, error: e.message });
         errors++;
       }
       await smSleep(500);
@@ -628,6 +777,7 @@ async function main() {
     ' | With citizens: ' + withCitizens +
     ' | With appearances: ' + withAppearances +
     ' | Written: ' + written +
+    (APPLY ? ' (PATCH: ' + patched + ' / POST: ' + posted + ')' : '') +
     ' | Errors: ' + errors);
   console.log('[FILTER] Raw bay-tribune hits: ' + rawAppearancesTotal +
     ' | Filtered out: ' + filteredOutTotal +
@@ -636,7 +786,17 @@ async function main() {
     console.log('[WIPE-OLD] candidates: ' + wipeReport.candidates +
       ' | matched (Nbh-name-scoped): ' + wipeReport.matched +
       ' | deleted: ' + wipeReport.deleted +
+      ' | already-gone: ' + wipeReport.alreadyGone +
       ' | failed: ' + wipeReport.failed);
+  }
+
+  // engine.111: errors-gate, matching canon.3 T6.
+  if (errors > 0) {
+    console.error('\n[GATE-FAIL] ' + errors + ' neighborhood card write(s) failed:');
+    failureList.forEach(function (f) {
+      console.error('  ' + f.name + ' — ' + f.error);
+    });
+    process.exit(1);
   }
 }
 

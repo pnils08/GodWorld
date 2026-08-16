@@ -38,6 +38,10 @@ var CONTAINER_TAG = 'world-data';
 var DOMAIN_TAG = 'wd-initiative';
 var API_HOST = 'api.supermemory.ai';
 var APPLY = process.argv.includes('--apply');
+// engine.111 preventative — see the INIT-ID-map block for why a clean projection
+// is hardened anyway.
+var ALLOW_PARTIAL_WIPE = process.argv.includes('--allow-partial-wipe');
+var RECONCILE = process.argv.includes('--reconcile');
 var WIPE_OLD = process.argv.includes('--wipe-old');
 
 var nameArg = process.argv.indexOf('--name');
@@ -117,7 +121,115 @@ function searchSupermemory(query, container) {
 var WRITE_MAX_RETRIES = 3;
 var WRITE_RETRY_SLEEP_MS = 8000;
 
-async function writeMemory(content, init) {
+// ═══════════════════════════════════════════════════════════════════════════
+// INIT → DOC MAP + RECONCILE + DELETE classification (engine.111 preventative)
+// ═══════════════════════════════════════════════════════════════════════════
+// wd-initiative measured 6 docs / 6 initiatives at the S376 census — clean 1.00,
+// and the smallest projection in the layer. Hardened anyway: the code path is
+// identical to wd-business (435/99) and wd-cultural (95/46), which degraded only
+// because they rebuild often. Clean by low traffic, not by construction.
+async function buildInitIdMap() {
+  console.log('[buildInitiativeCards] enumerating ' + DOMAIN_TAG + ' for INIT-ID→id map…');
+  var map = new Map();
+  var dupes = [];
+  var total = 0;
+  var page = 1;
+  while (true) {
+    var r = await smRequest('POST', '/v3/documents/list', {
+      containerTags: [DOMAIN_TAG], limit: 200, page: page
+    });
+    if (r.status !== 200) throw new Error('INIT-ID-map list failed at page ' + page + ': ' + r.status);
+    var mems = (r.body && r.body.memories) || [];
+    for (var i = 0; i < mems.length; i++) {
+      var m = mems[i];
+      var init = m.metadata && m.metadata.init_id;
+      total++;
+      if (!init) continue;
+      var rec = { id: m.id, createdAt: m.createdAt, initId: init };
+      var prev = map.get(init);
+      if (!prev) { map.set(init, rec); continue; }
+      if (new Date(rec.createdAt) > new Date(prev.createdAt)) { map.set(init, rec); dupes.push(prev); }
+      else { dupes.push(rec); }
+    }
+    if (mems.length < 200) break;
+    page++;
+    if (page > 20) throw new Error('INIT-ID-map pagination overflow (>20 pages)');
+  }
+  console.log('[buildInitiativeCards] INIT-ID→id map: ' + map.size + ' unique INIT-IDs across ' +
+    total + ' docs (' + dupes.length + ' surplus above the one-per-initiative invariant)');
+  return { map: map, dupes: dupes, total: total };
+}
+
+async function reconcileInitiativeCards() {
+  var enumerated = await buildInitIdMap();
+  var dupes = enumerated.dupes;
+
+  console.log('\n[reconcile] mode: ' + (APPLY ? 'APPLY' : 'DRY-RUN'));
+  console.log('[reconcile] docs: ' + enumerated.total +
+    ' | initiatives: ' + enumerated.map.size + ' | surplus to delete: ' + dupes.length);
+
+  if (dupes.length === 0) {
+    console.log('[reconcile] one-doc-per-initiative invariant already holds — nothing to do.');
+    return;
+  }
+  dupes.slice(0, 10).forEach(function (d) {
+    console.log('  ' + d.initId + ' — delete ' + String(d.createdAt).slice(0, 10) +
+      ' | keep ' + String(enumerated.map.get(d.initId).createdAt).slice(0, 10));
+  });
+
+  if (!APPLY) {
+    console.log('\n[reconcile] DRY-RUN — no deletes issued. Re-run with --reconcile --apply to execute.');
+    return;
+  }
+
+  var fs = require('fs');
+  var path = require('path');
+  var stamp = new Date().toISOString().replace(/[:.]/g, '-');
+  var logPath = path.join('/root/GodWorld/output', 'wd-initiative-reconcile-' + stamp + '.log');
+  fs.writeFileSync(logPath, dupes.map(function (d) {
+    return [d.initId, d.id, d.createdAt, 'keep=' + enumerated.map.get(d.initId).id].join('\t');
+  }).join('\n') + '\n', 'utf8');
+  console.log('[reconcile] delete manifest written: ' + logPath);
+
+  var deleted = 0;
+  var alreadyGone = 0;
+  var failures = [];
+  for (var i = 0; i < dupes.length; i++) {
+    var res = await deleteDoc(dupes[i].id);
+    if (res.outcome === 'deleted') deleted++;
+    else if (res.outcome === 'already-gone') alreadyGone++;
+    else failures.push({ id: dupes[i].id, initId: dupes[i].initId, status: res.status });
+    await smSleep(250);
+  }
+  console.log('\n[reconcile] deleted: ' + deleted + ' | already-gone: ' + alreadyGone +
+    ' | failed: ' + failures.length);
+  if (failures.length > 0) {
+    failures.forEach(function (f) {
+      console.error('  [FAIL] ' + f.initId + ' ' + f.id + ' → HTTP ' + f.status);
+    });
+    console.error('[GATE-FAIL] reconcile left ' + failures.length +
+      ' surplus doc(s) in place; manifest: ' + logPath);
+    process.exit(1);
+  }
+  console.log('[reconcile] one-doc-per-initiative invariant restored.');
+}
+
+// engine.111: 404 = already absent, which satisfies the caller's intent.
+async function deleteDoc(id) {
+  var del = await smRequest('DELETE', '/v3/documents/' + id, null);
+  if (del.status === 204 || del.status === 200) return { outcome: 'deleted', status: del.status };
+  if (del.status === 404) return { outcome: 'already-gone', status: 404 };
+  if (del.status === 409) {
+    await smSleep(20000);
+    var del2 = await smRequest('DELETE', '/v3/documents/' + id, null);
+    if (del2.status === 204 || del2.status === 200) return { outcome: 'deleted', status: del2.status };
+    if (del2.status === 404) return { outcome: 'already-gone', status: 404 };
+    return { outcome: 'failed', status: del2.status };
+  }
+  return { outcome: 'failed', status: del.status };
+}
+
+async function writeMemory(content, init, initIdMap) {
   var meta = {
     title: init.name,
     init_id: init.initId,
@@ -128,17 +240,21 @@ async function writeMemory(content, init) {
     containerTags: [CONTAINER_TAG, DOMAIN_TAG],
     metadata: meta
   };
+  // engine.111: PATCH-if-exists / POST-if-new (one doc per INIT-ID).
+  var existing = initIdMap && initIdMap.get(init.initId);
+  var method = existing ? 'PATCH' : 'POST';
+  var apiPath = existing ? '/v3/documents/' + existing.id : '/v3/documents';
   for (var attempt = 0; attempt <= WRITE_MAX_RETRIES; attempt++) {
-    var r = await smRequest('POST', '/v3/documents', body);
+    var r = await smRequest(method, apiPath, body);
     if (r.status >= 200 && r.status < 300) {
-      return { status: r.status, id: r.body && r.body.id };
+      return { status: r.status, id: r.body && r.body.id, op: method };
     }
     if ((r.status === 401 || r.status === 429) && attempt < WRITE_MAX_RETRIES) {
-      console.log('  [retry] write got ' + r.status + ' (rate-limit?); sleeping ' + (WRITE_RETRY_SLEEP_MS / 1000) + 's, attempt ' + (attempt + 2) + '/' + (WRITE_MAX_RETRIES + 1));
+      console.log('  [retry] ' + method + ' got ' + r.status + ' (rate-limit?); sleeping ' + (WRITE_RETRY_SLEEP_MS / 1000) + 's, attempt ' + (attempt + 2) + '/' + (WRITE_MAX_RETRIES + 1));
       await smSleep(WRITE_RETRY_SLEEP_MS);
       continue;
     }
-    throw new Error('HTTP ' + r.status + ': ' + (typeof r.body === 'string' ? r.body : JSON.stringify(r.body)));
+    throw new Error('HTTP ' + r.status + ' on ' + method + ' ' + apiPath + ': ' + (typeof r.body === 'string' ? r.body : JSON.stringify(r.body)));
   }
   throw new Error('writeMemory exhausted ' + (WRITE_MAX_RETRIES + 1) + ' attempts');
 }
@@ -235,23 +351,38 @@ async function wipeOldInitiativeCards(inits) {
 
   console.log('[wipe-old] DELETE pass');
   var deleted = 0;
-  var failed = 0;
+  var alreadyGone = 0;
+  var failures = [];
   for (var k = 0; k < matches.length; k++) {
-    var del = await smRequest('DELETE', '/v3/documents/' + matches[k].id, null);
-    var ok = del.status === 204 || del.status === 200;
-    if (!ok && del.status === 409) {
-      await smSleep(20000);
-      var del2 = await smRequest('DELETE', '/v3/documents/' + matches[k].id, null);
-      ok = del2.status === 204 || del2.status === 200;
-    }
-    if (ok) deleted++; else failed++;
+    var res = await deleteDoc(matches[k].id);
+    if (res.outcome === 'deleted') deleted++;
+    else if (res.outcome === 'already-gone') alreadyGone++;
+    else failures.push({ id: matches[k].id, initId: matches[k].initId, status: res.status });
     if ((k + 1) % 25 === 0 || k === matches.length - 1) {
-      console.log('  DELETE ' + (k + 1) + '/' + matches.length + ' — ok=' + deleted + ' failed=' + failed);
+      console.log('  DELETE ' + (k + 1) + '/' + matches.length +
+        ' — deleted=' + deleted + ' already-gone=' + alreadyGone + ' failed=' + failures.length);
     }
     await smSleep(200);
   }
-  console.log('[wipe-old] DELETE results: ' + deleted + ' ok / ' + failed + ' failed');
-  return { candidates: ids.length, matched: matches.length, deleted: deleted, failed: failed };
+  console.log('[wipe-old] DELETE results: ' + deleted + ' deleted / ' + alreadyGone +
+    ' already-gone / ' + failures.length + ' failed');
+  // engine.111: abort before writing rather than stacking over the survivors.
+  if (failures.length > 0) {
+    failures.forEach(function (f) {
+      console.error('  [FAIL] wipe ' + f.initId + ' ' + f.id + ' → HTTP ' + f.status);
+    });
+    if (!ALLOW_PARTIAL_WIPE) {
+      throw new Error('wipe-old: ' + failures.length + ' of ' + matches.length +
+        ' DELETEs failed. Refusing to write on top of a partial wipe. Re-run to retry, ' +
+        'or pass --allow-partial-wipe to override deliberately.');
+    }
+    console.error('[wipe-old] --allow-partial-wipe set — proceeding over ' + failures.length +
+      ' failed delete(s); expect duplicate cards for those initiatives.');
+  }
+  return {
+    candidates: ids.length, matched: matches.length,
+    deleted: deleted, alreadyGone: alreadyGone, failed: failures.length
+  };
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -347,6 +478,12 @@ function buildCard(init, appearances) {
 // ═══════════════════════════════════════════════════════════════════════════
 
 async function main() {
+  // engine.111: standalone legacy-state pass — reads no sheet, writes no cards.
+  if (RECONCILE) {
+    await reconcileInitiativeCards();
+    return;
+  }
+
   console.log('[buildInitiativeCards] Mode: ' + (APPLY ? 'APPLY' : 'DRY-RUN'));
   if (NAME_FILTER) console.log('[buildInitiativeCards] Name filter: ' + NAME_FILTER);
   if (INIT_FILTER) console.log('[buildInitiativeCards] INIT-ID filter: ' + INIT_FILTER);
@@ -441,9 +578,18 @@ async function main() {
     console.log('[buildInitiativeCards] --wipe-old not set — writes will land alongside any existing un-tagged cards.');
   }
 
+  // engine.111: built after the wipe so it reflects post-delete state.
+  var initIdMap = null;
+  if (APPLY) {
+    initIdMap = (await buildInitIdMap()).map;
+  }
+
   // Process each initiative
   var written = 0;
+  var patched = 0;
+  var posted = 0;
   var errors = 0;
+  var failureList = [];
   var withAppearances = 0;
   var withMilestones = 0;
   var rawAppearancesTotal = 0;
@@ -479,10 +625,12 @@ async function main() {
       console.log('');
     } else {
       try {
-        await writeMemory(card, init);
+        var wr = await writeMemory(card, init, initIdMap);
         written++;
+        if (wr.op === 'PATCH') patched++; else posted++;
       } catch (e) {
         console.error('[FAIL] ' + init.name + ' (' + init.initId + '): ' + e.message);
+        failureList.push({ initId: init.initId, name: init.name, error: e.message });
         errors++;
       }
       await smSleep(500);
@@ -494,6 +642,7 @@ async function main() {
     ' | With milestones: ' + withMilestones +
     ' | With appearances: ' + withAppearances +
     ' | Written: ' + written +
+    (APPLY ? ' (PATCH: ' + patched + ' / POST: ' + posted + ')' : '') +
     ' | Errors: ' + errors);
   console.log('[FILTER] Raw bay-tribune hits: ' + rawAppearancesTotal +
     ' | Filtered out: ' + filteredOutTotal +
@@ -502,7 +651,17 @@ async function main() {
     console.log('[WIPE-OLD] candidates: ' + wipeReport.candidates +
       ' | matched (INIT-ID-scoped): ' + wipeReport.matched +
       ' | deleted: ' + wipeReport.deleted +
+      ' | already-gone: ' + wipeReport.alreadyGone +
       ' | failed: ' + wipeReport.failed);
+  }
+
+  // engine.111: errors-gate, matching canon.3 T6.
+  if (errors > 0) {
+    console.error('\n[GATE-FAIL] ' + errors + ' initiative card write(s) failed:');
+    failureList.forEach(function (f) {
+      console.error('  ' + f.initId + ' ' + f.name + ' — ' + f.error);
+    });
+    process.exit(1);
   }
 }
 

@@ -95,6 +95,35 @@ pointers:
 - 2026-08-15 (kimi) — **0.2 acceptance PASSED.** Verify-002: pre-minted account (Clerk registration-code path, Mags account untouched), pre-seeded credentials, 10-min SIGINT cap, deepseek-chat. Full mission loop: mine → sell 206cr → refuel-from-critical → relaunch; durable log (`output/kimi/spacemolt-phase0/verify-episode-002.log`); measured cost ≈ $0.20–0.40 per 10-min episode uncached. Verify-001 established the registration-gate failure mode (agent self-registering = episode burned; runner must pre-seed). Kimi's harness now carries the SpaceMolt MCP (213 tools) via shared `.mcp.json`; stored April credentials re-verified live. Phase 0 fully closed except Mike's cast picks (0.3) — shortlist at `output/kimi/spacemolt-phase0/cast-shortlist.md`.
 - 2026-08-15 (research-build) — Cast selection redesigned to RANDOM lottery (Mike-direct), not curated shortlist — supersedes 0.3 + Cast model section; routed to kimi to design the mechanic.
 - 2026-08-15 (research-build) — CUL/POPID gap quantified: 21 of 46 `Cultural_Ledger` rows have no POPID link, real denominator is 46 not 39 — full list in commit body.
+- 2026-08-16 (engine-sheet) — **CUL mint prepared; one canon blocker found, not minted.**
+  Scope re-verified live against the sheet, not the cards: `Cultural_Ledger` 46 rows,
+  **25 linked / 21 unlinked** — rb's corrected split in `c11e2dd9` holds exactly.
+  Authorization traced to the ruling at line 93 of this plan (cultural figures get
+  full ledger citizenship; binding engine-sheet work), so the mint is authorized and
+  its parameters are specified. Also doctrine-consistent rather than an exception:
+  these figures carry FameScore/MediaCount, so they earned rows by the
+  media-coverage route (see [[2026-08-16-new-life-intake]] §1).
+  **Groundwork done, so the next pass executes rather than re-derives:** all 21
+  already carry Neighborhood, RoleType, FameCategory, CityTier and CulturalDomain in
+  `Cultural_Ledger` — little needs inventing. Mint template is **POP-00540 Jade
+  Orion**, the closest already-linked cultural analogue (Tier 2, ENGINE clock,
+  GodWorld origin, full economics: Income/NetWorth/WealthLevel/SavingsRate/
+  DebtLevel/EducationLevel/CareerStage/YearsInCareer/EconomicProfileKey/
+  EmployerBizId/SkillTags/Gender/TraitProfile/DialState). Next free POPID:
+  **POP-01056**. Their assigned hoods mostly already agree with the
+  [[../canon/INSTITUTIONS]] §Neighborhoods pass (Theo Banks/rapper in Uptown's arts
+  and nightlife district, Celeste Moon/singer in KONO's emerging arts corridor).
+  **BLOCKER — `CUL-5F7A348B` "Councilwoman Rivera" holds no council seat.** The nine
+  are Carter, Tran, Delgado, Vega, Rivers, Crane, Ashford, Chen, Mobley;
+  `Civic_Office_Ledger` has no Rivera, and the three Riveras in `Simulation_Ledger`
+  are a BART station manager, a quantum computing researcher and a paramedic.
+  Minting her with RoleType `civic leader` would put a **tenth councilmember** into
+  the citizen ledger where the civic packs and city-hall could surface her — a
+  contradiction that propagates rather than sits still. Needs a canon ruling first:
+  former officeholder / different civic role / candidate / mis-titled. Not
+  engine-sheet's call. The other 20 are unblocked.
+  Note also `CUL-C13B0483` "Claire Ashford" shares a surname with D7's Warren
+  Ashford — plausibly family, flagged not blocked.
 - 2026-08-15 (kimi) — **Lottery mechanic designed and written into the plan** (Cast model + 0.3 rewritten): deterministic seeded RNG over a frozen eligible-POPID snapshot (living adult Oakland residents; excludes minors, traded/dead/moved-away, sitting elected officials; Tribune staff eligible); output is 2–4 cast + ranked succession alternates; seed/snapshot/result recorded for reproducibility. Feedback loop spec: adapter scores episode performance → magnitude-stamped staged events → coverage → Saturday ingest into Citizen_Media_Usage/Storyline_Ledger → standing rises → more coverage. Mike approves filter + draw parameters, never names. Shortlist file bannered superseded-as-mechanism. **CUL gap scope for engine-sheet:** `output/kimi/spacemolt-phase0/cul-ledger-gap.md` — card-layer sweep (43 wd-cultural cards): 16 linked, 5 unlinked-with-existing-row (wire UniverseLinks only: Vinnie Keane POP-00001, Travis Coles POP-00533, Eric Taveras POP-00597, Jade Orion POP-00540, Steve Conrad POP-00124), 22 full mints. Count drift vs rb's sheet-side 46/21 noted — sheet is authoritative; kimi's file adds the wire-vs-mint split. Ready for rb's second look.
 - 2026-08-15 (kimi) — **Mike-direct: do not gate on Mike.** Approval of the lottery eligibility filter, draw parameters, and Phase 1 proceed decisions is delegated to research-build. Boundary kept: the 4b casino-ledger sign-off stays Mike-only (research hazard — a casino ledger is not authorized by mentioning it). Plan body updated to match.
 - 2026-08-15 (kimi) — **CORRECTION (Mike-direct, relayed via rb):** the no-gate directive covers EXECUTION PACE ONLY — proceed with build execution without step-by-step direction. It did NOT transfer policy: eligibility filter, draw parameters, and Phase-1 proceed still require Mike's sign-off, routed kimi → rb → Mike; rb never decides policy solo. Plan body corrected; this supersedes the broader delegation in the entry above.

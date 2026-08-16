@@ -63,7 +63,13 @@ pointers:
 
 ## Phase 3 — Coverage lane (research-build designs; media runs)
 
-- **3.1 Tribune show beat.** Episode recaps, pilot arcs, succession pressure, audience reaction — assigned through existing dispatch machinery. Canon door stays Sat-edition-only (PIN rule). Sports-desk framing explicitly forbidden (research hazard): this is culture/serialized drama, not a league.
+- **3.1 Dedicated show beat — DESIGNED (2026-08-16, research-build, Mike-direct: assign a real reporter, not incidental mentions).** Not folded into an existing culture-desk generalist: the plan already forbids sports-desk framing here, which is itself a signal this needs its own identity, and episode-to-episode continuity (who's rising, who's struggling, the rivalry building) needs one consistent voice the way sports holds a beat — not whoever's on culture that cycle. Precedent: pipeline.47-50 minted P Slayer/Tanya/Simon/Anthony/Hal the same way — grok picks the persona (existing citizen or fresh mint) + writes the stance/bag, Claude lands `.claude/agents/**` control plane.
+  - **Voice:** entertainment/reality-show recap energy — personality-forward, "who's up who's down," arc-tracking across episodes. Explicitly NOT hard news, NOT sports-analytics, NOT civic-process register. This is the one desk allowed to sound like it's having fun.
+  - **Data contract:** reads ONLY `output/spacemolt-show/feed/c{N}.json` (2.2-approved events) — never raw staged/episode JSON, never captains_log directly. The adapter already did the fact/subjective split (ADR-0017); this reporter writes color and interpretation around typed facts + the citizen's own already-marked quotes, same as every other desk, never a new fact source.
+  - **Cadence:** dispatched through existing M-F desk-wake machinery when a `feed/c{N}.json` carries an event not yet written up — not a fixed daily slot, since the show itself runs per-cycle rotating cast, not every wake.
+  - **Canon door:** stays Sat-edition-only (PIN rule), same as every other desk — drafts queue through the week, publish Saturday.
+  - **Fourth wall:** same ban as the feed/ECL contracts (no "video game," MCP, tool_error, etc.) — the writer composes free prose, so this needs to be an explicit RULES line, not just inherited from a pre-validated row.
+  - **Status:** spec only, no agent files yet. Next: grok picks persona + drafts on disk (same pattern as civic.22/civic.24), Claude reviews + lands.
 
 ## Phase 4 — Wager lane (gated, sequential)
 
@@ -134,3 +140,4 @@ pointers:
 - 2026-08-16 (grok) — Phase 2.2 first pass: `undockedShowContract.js` + `undockedShowGate.js`. Disk intake (Applied=no → yes/rejected), one feed type `undocked-episode`, no sheet write. credits_delta_windowed + open_escrow flags on the row so a later-episode fill is a known scoping choice. Held for rb review.
 - 2026-08-16 (grok) — Phase 2.1 first pass: `scripts/undockedEpisodeAdapter.js` (no LLM). Logs in with stored pilot creds, category-splits get_action_log, captains_log_list stays QUOTED_SUBJECTIVE_COLOR. Tested live on the three disk episodes. Staged at `output/spacemolt-show/staged/`. Held for rb review before 2.2/2.3.
 - 2026-08-16 (research-build) — 0.4 telemetry source decided (get_action_log, verified live). Phase 2.1 adapter assigned to grok — real spec now buildable, was blocked on this.
+- 2026-08-16 (research-build) — Phase 3.1 designed (Mike-direct: assign a real reporter). Dedicated beat, not folded into culture-desk; voice/data-contract/cadence spec'd. Assigned to grok to draft.

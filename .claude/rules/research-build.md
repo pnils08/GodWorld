@@ -80,7 +80,7 @@ When work surfaces that doesn't belong at this seat:
 
 1. **Recognize early** — for civic/media pipeline work, rb designs, es executes; there's no third seat to route to anymore. **For engine-sheet substrate work, "is this apparatus or substrate?"** — apparatus-cutting decisions earn a research-build plan; substrate-routine work routes directly to engine-sheet and they execute without design gating (S218).
 2. **File the rollout entry** — tag `(engine terminal)` for es-execution work; civic/media pipeline tuning stays untagged (rb/es handle it directly, there's no receiving terminal).
-3. **Flag in SESSION_CONTEXT.md** — if the routed work is urgent, surface it in NEXT[engine-sheet] so es sees it at boot.
+3. **Dispatch same turn, don't wait for their next boot** — message the executing lane directly (`SendMessage` per `ListAgents` for a live Claude session, `tmux send-keys -l` + separate `C-m` for house guests). Filing the row is the record; the message is the delivery. Reserve `SESSION_CONTEXT.md` NEXT-line flagging for work that's genuinely not urgent — the default is dispatch, not wait-and-hope-they-notice. (S375 correction, Mike-direct — this step read as passive SESSION_CONTEXT-flagging pre-fix, which is the pre-S372 steward pattern, not the orchestrator one.)
 4. **Don't execute substrate work here** — the failure mode is doing engine work in research-build because "I'm here anyway." That stacks unpushed commits (S156 cross-terminal git rule) and obscures who owns what.
 
 ## Research synthesis discipline

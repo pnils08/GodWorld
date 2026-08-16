@@ -124,7 +124,7 @@ Registry: `docs/index.md` — grep it, don't load it. New MDs still register the
 1. Design the work, document in `ROLLOUT_PLAN.md`
 2. Tag with `(engine terminal)`
 3. Include: what to build, which docs to read, acceptance criteria
-4. Engine-sheet picks it up and executes — this covers substrate work AND civic/media pipeline tuning; there is no other live terminal to route to.
+4. **Dispatch now, same turn** — message engine-sheet directly (`SendMessage` if a live session is up per `ListAgents`, `tmux send-keys -l` + separate `C-m` otherwise per [[../../../docs/reference/CROSS_LANE_MESSAGING]]). Filing the row is documentation of the decision, not delivery of it. A row left "ready" for es to notice at its own next boot is the pre-S372 steward pattern — this seat has live dispatch now, use it. (S375 correction, Mike-direct.)
 
 ### Civic/media pipeline work
 There's no receiving terminal — rb designs, es executes directly. No ROLLOUT tag needed unless the work is large enough to need tracking.

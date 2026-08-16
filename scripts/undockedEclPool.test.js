@@ -12,8 +12,12 @@ function check(name, cond, detail) {
 
 const v = P.validateRows(P.ROWS);
 check('rows valid', v.valid, v.errors && v.errors.join('; '));
-check('nine rows', P.ROWS.length === 9);
-check('pool key', P.POOL === 'culture.spacemolt-show');
+check('enough rows', P.ROWS.length >= 20);
+check('one pool key', P.POOL === 'culture.spacemolt-show');
+check('has love split', P.ROWS.some(function (r) { return /warmth>=60/.test(r.Conditions); }));
+check('has sting split', P.ROWS.some(function (r) { return /warmth<=39/.test(r.Conditions); }));
+check('has lottery fame=0', P.ROWS.some(function (r) { return /fame=0/.test(r.Conditions); }));
+check('no mechanism words', P.ROWS.every(function (r) { return !/\btier\b|FameScore|UsageCount/.test(r.Text); }));
 
 const src = fs.readFileSync(path.join(__dirname, 'undockedEclPool.js'), 'utf8');
 check('no sheet write', !/appendRows|batchUpdate|spreadsheets/.test(src));

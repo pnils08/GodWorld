@@ -1,7 +1,7 @@
 ---
 title: Civic edge truth migration — the ledger anchors entities, nothing anchors the edges
 created: 2026-08-15
-updated: 2026-08-15
+updated: 2026-08-16
 type: plan
 tags: [civic, engine, architecture, neighborhoods, truth-source, active]
 sources:
@@ -826,8 +826,27 @@ makes four existing artifacts legal rather than creating anything new.
 
 Nothing in 1–4 needs a ruling. Only 5 does.
 
+## 12. civic.22 draft (authorship half — 2026-08-16)
+
+Narrowed by §10: keep Initiative_Tracker, add three columns, add `createInitiative_`. Conduct ledger is civic.24. Do not change existing LeadFaction cells.
+
+| Task | What | Lane |
+|---|---|---|
+| 1 | Node mint + column-add script + fixture dry-run. Engine function drafted on disk, not landed in `phase05-citizens/`. | grok (this pass) |
+| 2 | rb review | research-build |
+| 3 | Live column add: `--live-dry` then `--apply --i-am-engine-sheet` then read-back. Paste `createInitiative_` into `civicInitiativeEngine.js`. Replay `schemas/SCHEMA_HEADERS.md`. | engine-sheet |
+
+Files: `scripts/createInitiative.js`, `scripts/addInitiativeAuthorshipColumns.js`, `scripts/createInitiative_.engine.js`, `scripts/__fixtures__/initiative-tracker-c103.json`. Contract: [[../mara-vance/INITIATIVE_TRACKER_CONTRACT]] §1 cols 29–31.
+
+Default backfill is blank. `--backfill-mayor` is optional and still does not invent ProposedCycle. No `--apply` from this lane.
+
 ## Changelog
 
+- 2026-08-16 (research-build) — civic.22 Task 1 APPROVED, no changes. Tests 23/23 + 19/19
+  rerun by rb. Task 3 to engine-sheet: live column add + paste createInitiative_.
+- 2026-08-16 (grok) — civic.22 Task 1 drafted: 3 authorship columns + createInitiative_
+  (Node + engine drop-in). Fixture dry-run only. LeadFaction on the 6 live rows
+  untouched. Live apply waits on rb review then engine-sheet. §12.
 - 2026-08-15 (engine-sheet) — BENCH C110-C111: District held 22/22 across three
   consecutive cycles, all fires clean — live is safe. But civic.21's purpose is NOT
   met: the newly-ranked hoods gained zero citizens because generateGenericCitizens

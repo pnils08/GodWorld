@@ -1,12 +1,12 @@
 ---
 title: Initiative_Tracker Contract — schema, ImplementationPhase vocabulary, lifecycle, add-procedure
 created: 2026-06-11
-updated: 2026-06-11
+updated: 2026-08-16
 type: reference
 tags: [civic, engine, schema, architecture, active]
 sources:
   - "phase02-world-state/applyInitiativeImplementationEffects.js §PHASE_INTENSITY — the engine's de-facto ImplementationPhase authority (20 phases + intensities); this doc canonicalizes it"
-  - "Live Initiative_Tracker sheet (28 cols) read S256 via lib/sheets"
+  - "Live Initiative_Tracker sheet (28 cols through C103; civic.22 appends 3 authorship cols → 31)"
   - "[[../research/2026-06-01-initiative-tracker-state]] — the diagnosis + read/write graph this contract closes"
   - "[[../plans/2026-06-01-initiative-tracker-contract]] — civic.14 plan (this is Phase 1 / D-1.1)"
 pointers:
@@ -25,9 +25,9 @@ pointers:
 
 ---
 
-## §1 — Schema (28 columns)
+## §1 — Schema (31 columns)
 
-The live sheet is 28 columns. This supersedes the stale 17-col schema in [[INITIATIVE_TRACKER_VOTER_LOGIC]] (which back-links here).
+The live sheet is 28 columns until civic.22's column add lands (engine-sheet dry-run → apply → read-back). After that land the sheet is 31 columns. This supersedes the stale 17-col schema in [[INITIATIVE_TRACKER_VOTER_LOGIC]] (which back-links here). Header-lookup writes: readers must not assume a fixed letter for cols 29–31 until the add has been read back.
 
 | # | Column | Meaning |
 |---|--------|---------|
@@ -59,6 +59,9 @@ The live sheet is 28 columns. This supersedes the stale 17-col schema in [[INITI
 | 26 | `MilestoneNotes` | Cycle-stamped operational progress (`C96: …`). The engine-false-flag disambiguator reads this (city-hall-prep auto-investigate). **Length cap (S258 RB-4, G-R4): one sentence, ≤~200 chars — name the deliverable that justifies the change, not a multi-paragraph operational dump.** This is a canon-facing tracker cell; the OARI director crammed ~400 words into it C97. Every tracker-writer (project agents + voice agents) holds to the cap. |
 | 27 | `NextScheduledAction` | The next concrete step. |
 | 28 | `NextActionCycle` | Cycle that step is due. |
+| 29 | `Proposer` | Holder name who filed the row (e.g. Warren Ashford). civic.22. |
+| 30 | `ProposingOffice` | `MAYOR-01` or `COUNCIL-D1`…`D9`. Not DA/staff. civic.22. |
+| 31 | `ProposedCycle` | Cycle the row was filed. Distinct from `VoteCycle`. civic.22. |
 
 ---
 
@@ -136,6 +139,10 @@ A new initiative is one new row. Minimum to be engine-legible:
 
 Leave vote-specific columns (6–14, 20–24) blank until the legislative arc reaches them. `LastUpdated` = today. `MilestoneNotes` gets its first `C{XX}: …` entry the cycle work begins.
 
+10. **`Proposer` + `ProposingOffice` + `ProposedCycle`** — required on every new row (civic.22). `createInitiative_` (`scripts/createInitiative.js`, engine drop-in `scripts/createInitiative_.engine.js`) is the only mint path. `LeadFaction` is the proposing seat's faction — never a hardcoded OPP. Existing C103 rows keep their LeadFaction; authorship cells stay blank unless engine-sheet opts into `--backfill-mayor` (Proposer/ProposingOffice only; ProposedCycle stays blank because VoteCycle is not proposal time). Do not reuse a retired ID (INIT-004 stays unused; next mint after INIT-007 is INIT-008).
+
+civic.24 still: Sunday hearing files do not stamp ImplementationPhase. Minting a new INIT is a new row via `createInitiative_`, not a gavel writeback on an old one.
+
 ---
 
 ## §5 — The drift rule (why this contract exists)
@@ -159,4 +166,5 @@ The engine map (`PHASE_INTENSITY`) and this §2 table are **one source of truth 
 
 ## Changelog
 
+- 2026-08-16 (grok) — civic.22 authorship: cols 29–31 Proposer / ProposingOffice / ProposedCycle. §4 step 10. Live sheet stays 28 until engine-sheet apply. Plan: [[../plans/2026-08-15-civic-edge-truth-migration]] §7 + §10 + §12.
 - 2026-06-11 — Initial contract (S256, civic.14 Phase 1 / D-1.1). 28-col schema (supersedes 17-col VOTER_LOGIC schema); 20-phase ImplementationPhase vocabulary canonicalized from engine `PHASE_INTENSITY`; per-Type lifecycle arcs; add-an-initiative procedure; drift rule + variant map. Phases 2 (engine drift-tolerance), 3 (writer enforcement), 4 (add-capability) build on this spine. Plan: [[../plans/2026-06-01-initiative-tracker-contract]].

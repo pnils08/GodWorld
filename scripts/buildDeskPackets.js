@@ -1573,7 +1573,7 @@ function formatBondsForPacket(bonds) {
  * Build a neighborhood → named citizens index (one-time, pre-loop)
  * Returns: { "Downtown": [{name, popId, tier, occupation}], ... }
  */
-function buildNeighborhoodCitizenIndex(simLedger) {
+function buildNeighborhoodCitizenIndex(simLedger, genericCitizens) {
   var index = {};
   simLedger.forEach(function(c) {
     var hood = c.Neighborhood || '';
@@ -1586,7 +1586,44 @@ function buildNeighborhoodCitizenIndex(simLedger) {
       name: name,
       popId: c.POPID || '',
       tier: c.Tier || '',
-      occupation: c.RoleType || ''
+      occupation: c.RoleType || '',
+      quotable: true
+    });
+  });
+
+  // ── engine.108: Tier-5 fallback ────────────────────────────────────────────
+  // Tracked citizens are primary and always win. A generic surfaces ONLY where a
+  // neighborhood has nobody tracked at all — which self-targets the hoods the
+  // sample never reached (Glenview, Dimond, Ivy Hill et al hold 85 Tier-5
+  // residents between them and zero tracked ones). Snapshot the tracked hoods
+  // BEFORE appending, or the first generic pushed into a hood makes it look
+  // tracked and blocks the rest.
+  //
+  // PRESENCE BEFORE VOICE: a Tier-5 may be seen, named, counted and described.
+  // It may NEVER be quoted — it has no wake and no voice. Being observed
+  // repeatedly is what earns the voice (EmergenceCount -> promotion), so the
+  // quoting limit is the mechanism, not a gap to close. `quotable: false` is the
+  // machine-readable half of that rule; consumers must honour it.
+  var trackedHoods = {};
+  Object.keys(index).forEach(function(h) { if (index[h].length) trackedHoods[h] = true; });
+
+  var TIER5_PER_HOOD_CAP = 5;
+  (genericCitizens || []).forEach(function(g) {
+    var hood = (g.Neighborhood || '').trim();
+    if (!hood || trackedHoods[hood]) return;
+    var status = (g.Status || '').trim();
+    if (status && !/^active$/i.test(status)) return;   // promoted/emerged rows are not waiting-room
+    var name = ((g.First || '') + ' ' + (g.Last || '')).trim();
+    if (!name) return;
+    if (!index[hood]) index[hood] = [];
+    if (index[hood].length >= TIER5_PER_HOOD_CAP) return;
+    index[hood].push({
+      name: name,
+      popId: '',                       // Tier-5 has no POPID until it earns one
+      tier: '5',
+      occupation: g.Occupation || '',
+      quotable: false,                 // presence before voice — never quote
+      tier5: true
     });
   });
   return index;
@@ -2042,12 +2079,25 @@ async function main() {
       return [];
     });
   }
-  // S205 Path B: Generic_Citizens read dropped — was loaded for console.log count
-  // only (single use, no functional consumer); SL is single source per S205
-  // architectural decision.
+  // engine.108 — Generic_Citizens read RESTORED, as a bounded fallback.
+  //
+  // S205 dropped this read ("SL is single source"), and at the time that was
+  // correct: GC was no-grow legacy and the read fed nothing but a console.log.
+  // S320 then reactivated GC as the Tier-5 waiting room AND the intake entry —
+  // but restored only the entry, never the read. The two rulings are each right
+  // alone and together they closed a loop: a Tier-5 could not be surfaced in a
+  // packet, so could not be covered, so coverage could never tick EmergenceCount.
+  // Of the two documented promotion routes (marriage / media coverage), MEDIA
+  // COVERAGE COULD NOT FIRE AT ALL. Verified: all 88 non-zero EmergenceCounts in
+  // the live pool trace to processIntake_ bumping an operator-mentioned name; no
+  // promotion in the sim's history has been autonomous.
+  //
+  // This is NOT a blanket restore. S205's "SL is primary" still holds — generics
+  // surface ONLY in neighborhoods where no tracked citizen exists. See
+  // buildNeighborhoodCitizenIndex.
   var [
     seedsRaw, hooksRaw, eventsRaw, arcsRaw,
-    civicRaw, initiativeRaw, simRaw,
+    civicRaw, initiativeRaw, simRaw, genericRaw,
     chicagoRaw, culturalRaw, oakSportsRaw, chiSportsRaw,
     storylineRaw, packetRaw, historyRaw,
     householdRaw, bondsRaw, worldPopRaw, simCalRaw,
@@ -2061,6 +2111,7 @@ async function main() {
     safeGet('Civic_Office_Ledger'),
     safeGet('Initiative_Tracker'),
     safeGet('Simulation_Ledger'),
+    safeGet('Generic_Citizens'),
     safeGet('Chicago_Citizens'),
     safeGet('Cultural_Ledger'),
     safeGet('Oakland_Sports_Feed'),
@@ -2341,9 +2392,14 @@ async function main() {
   console.log('  POPID index: ' + Object.keys(popIdIndex).length + ' citizens loaded');
 
   // ── Build enrichment indexes (one-time, reused per desk) ──
-  var neighborhoodCitizenIndex = buildNeighborhoodCitizenIndex(simLedger);
+  var genericCitizens = allToObjects(genericRaw);
+  var neighborhoodCitizenIndex = buildNeighborhoodCitizenIndex(simLedger, genericCitizens);
   var coverageEchoMap = buildCoverageEchoMap(prevEdition, simLedger);
+  var t5Hoods = Object.keys(neighborhoodCitizenIndex)
+    .filter(function(h) { return neighborhoodCitizenIndex[h].some(function(c) { return c.tier5; }); });
   console.log('  Neighborhood citizen index:', Object.keys(neighborhoodCitizenIndex).length, 'neighborhoods mapped');
+  console.log('  Tier-5 fallback (engine.108): ' + t5Hoods.length + ' hood(s) with no tracked citizen surfaced generics' +
+    (t5Hoods.length ? ' — ' + t5Hoods.join(', ') : '') + ' [presence only, never quotable]');
   console.log('  Coverage echo:', Object.keys(coverageEchoMap).length, 'citizens from previous edition');
 
   // ── Build base context ──

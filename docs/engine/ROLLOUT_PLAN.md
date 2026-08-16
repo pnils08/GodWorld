@@ -120,7 +120,9 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | civic.23 | Hood character layer — all 22 neighborhoods now carry authored canon (was 4 of 22); placement/crime tables read against it, not the reverse | done-pending-archive | research-build | [[../plans/2026-08-15-civic-edge-truth-migration]] §3.7 |
 | civic.24 | Sunday nine-seat table (Mike-direct, ruled D+B) — districts speak as themselves, faction-aware, Mayor-last gavel, new City Hall Ledger. Tied to civic.18/21/23 timing | ready | research-build / engine-sheet | [[../plans/2026-08-16-city-hall-nine-seat-table]] |
 | engine.108 | Media promotion is structurally DEAD — S205 stripped all Generic_Citizens reads from the seed/packet path, S320 restored GC as entry but not as readable, so a Tier-5 can never be covered. Fix: tracked-first fallback read, presence-before-voice | ready | engine-sheet | [[../plans/2026-08-16-new-life-intake]] §2-3.1 |
-| engine.110 | Card-layer drift — buildCulturalCards --wipe-old fails silently (78 ok/14 failed, exit 0) and has stacked versions for months; Lumi Crest holds 3 cards Apr/Aug/Aug. Needs loud-fail + dedupe-to-newest | ready | engine-sheet | [[../plans/2026-08-16-new-life-intake]] §6 |
+| engine.110 | Card-layer drift — buildCulturalCards --wipe-old failed silently and stacked versions for months. Code fixed S376; live reconcile of 49 surplus docs still pending | in-progress | engine-sheet | [[../plans/2026-08-16-new-life-intake]] §6 |
+| engine.111 | Card writers POST-only — business/faith/neighborhood/initiative never PATCH, never gate exit on write errors. Census each projection first | ready | engine-sheet | [[../plans/2026-08-16-writer-fixed-artifact-persists-audit]] §Findings Half A |
+| engine.112 | DELETE failures never reach the exit code in 7 Supermemory writers; 5 discard the HTTP status, so failures are undiagnosable later | ready | engine-sheet | [[../plans/2026-08-16-writer-fixed-artifact-persists-audit]] §Findings Half B |
 | engine.109 | New-life intake — household mint path (complete family = the reason, S320 held for lone names); route through the promotion populator; reduce Advancement_Intake to solely promotion | ready | engine-sheet | [[../plans/2026-08-16-new-life-intake]] §3.2 |
 | civic.22 | Initiative authorship — 0 proposer cols vs 5 mayoral-action cols; no createInitiative_; all 6 live INITs read LeadFaction=OPP as a result. Surfaces hard once civic.24 seats speak for themselves | ready | research-build | [[../plans/2026-08-15-civic-edge-truth-migration]] §7 + §10 |
 
@@ -188,7 +190,8 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | governance.33 | C96 gap-log triage | in-progress | research-build / engine-sheet | [[../plans/2026-06-07-c96-gap-log-triage]] — detail in pointer (relocated 2026-07-02) |
 | governance.35 | REDUCED S260 by governance.36 §loop-tightening to the PIN-self-derive remnant | ready | engine-sheet (design: research-build DONE) | [[../plans/2026-06-14-session-context-mechanization]] — detail in pointer (relocated 2026-07-02) |
 | governance.47 | Cross-lane message bus — stop hand-relaying between lanes; deterministic transport + routing at a judgment seat | blocked | research-build | [[../plans/2026-08-15-cross-lane-message-bus]] |
-| governance.48 | Writer-fixed, artifact-persists — silent partial-failure audit across writer scripts | ready | research-build | [[../plans/2026-08-16-writer-fixed-artifact-persists-audit]] |
+| governance.48 | Writer-fixed, artifact-persists — silent partial-failure audit across writer scripts. Tasks 1-3 done S376; 8 instances, rows engine.111/112 filed | done-pending-archive | research-build | [[../plans/2026-08-16-writer-fixed-artifact-persists-audit]] |
+| governance.49 | Standing lint for the writer-fixed/artifact-persists class — flag scripts whose delete/replace failure counter never reaches the exit code | ready | engine-sheet | [[../plans/2026-08-16-writer-fixed-artifact-persists-audit]] §Findings Task 3 |
 
 ---
 

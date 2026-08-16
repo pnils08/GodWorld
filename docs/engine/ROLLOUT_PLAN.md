@@ -171,7 +171,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | canon.4 | Real-world stack in the sim is BY DESIGN, not contamination — DigitalOcean/Discord/Moltbook/Anthropic stay as themselves, and Civis Systems (Varek, POP-00789) is the in-world blanket for engine/sheet vocabulary. Doctrine recorded, nothing to scrub | wontfix | research-build | [[canon/INSTITUTIONS]] §The Stack |
 | canon.5 | OUSD + Peralta CCD ruled contaminants (S368 Mike-direct); Oakland City Schools + Oakland CCD minted, repo text swapped. OPEN sheet renames: BIZ-00016, Peralta row, INIT-007 Notes; then Employer-column sweep | ready | engine-sheet | [[canon/INSTITUTIONS]] §Education |
 | research.25 | Headless newsroom pipeline — M–F writer-wakes + Sat compile; Phase 1 + Phase 2.0 done, next is Phase 2 daily writer-wakes (was gated on engine.76 W5 half 1, now shipped) | in-progress | research-build → engine-sheet | [[../plans/2026-07-20-headless-newsroom-pipeline]] |
-| research.27 | UNDOCKED/SpaceMolt game show — Phase 0 CLOSED except Mike's cast picks (0.3); 0.2 acceptance PASSED. Queued: engine-sheet cultural-figure ledger mint + evening-events wiring | in-progress | research-build → engine-sheet | [[../plans/2026-08-07-spacemolt-game-show]] |
+| research.27 | UNDOCKED/SpaceMolt game show — pilot flown live (Marcus Walker, exit 0, ~$0.13). Dane + Jumper ready. Cadence recommendation pending Mike sign-off | in-progress | research-build → kimi | [[../plans/2026-08-07-spacemolt-game-show]] |
 
 ### governance.* — Skills, MDs, ADRs, project hygiene
 

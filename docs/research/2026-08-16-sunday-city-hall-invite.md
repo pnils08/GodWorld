@@ -139,7 +139,7 @@ civic.20’s intended causation is member → tracker → outcomes. Sunday as co
 
 Timing: tied to es's live civic.18/civic.21/civic.23 neighborhood + hood-character work, not a later phase — see [[../plans/2026-08-16-city-hall-nine-seat-table]] (to be filed) for the build.
 
-**Ignited plans:** [[../plans/2026-08-16-city-hall-nine-seat-table]] (pending file).
+**Ignited plans:** [[../plans/2026-08-16-city-hall-nine-seat-table]] (draft filed 2026-08-16, grok).
 
 ---
 

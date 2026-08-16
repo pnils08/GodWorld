@@ -1,7 +1,7 @@
 ---
 title: Research Sub-Catalog
 created: 2026-06-01
-updated: 2026-08-14
+updated: 2026-08-16
 type: reference
 tags: [research, architecture, active]
 sources:
@@ -72,6 +72,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 | **[[2026-08-12-notebooklm-structured-source-generation]]** | Gemini-notebook template pack (Mike-shared) + S367 correction: NotebookLM is the consumption layer, never the story generator; ingestion is scripted (no hand gate), and it faithfully surfaces meta docs into media — so every source must be safe to quote on air (in-world docs only) | `adopt` — checklist fields + Tier-1 in-world dossiers + city-desk almanac via existing send skill; `reject` guardrail framing + Template 3 verbatim; build Mike-gated |
 | **[[2026-08-14-civic-process-install]]** | Umbrella for the civic week: Sunday city-hall writes Initiative_Tracker; Mon–Thu living reaction + district constituent heat; decide/don't/whisper feeds back and is not always a win. Three later plans, one parent. | `adopt` — no new plan ignited; civic.15 remains the Sunday/datawake plan |
 | **[[2026-08-14-civic-seat-change-election]]** | Rare replacement valve if a civic worker stays broken. Codebase pass on Election_Log / seeds / LifeHistory / voice. | `adopt` — **parked** under [[2026-08-14-civic-process-install]]; no plan |
+| **[[2026-08-16-sunday-city-hall-invite]]** | What Sunday actually hands offices, who may sit, Mayor-first lock, why it is not a round table; week-gated vs person-gated invite forks after civic.17 | `watch` — rb/Mike pick shape A–D before a plan |
 
 ---
 

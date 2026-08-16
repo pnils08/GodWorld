@@ -79,6 +79,7 @@ Umbrella for the civic process install. civic.15 remains the Sunday/datawake imp
 
 - 2026-08-14 — filed as the parent for Sunday ingest / Mon–Thu living / consequence. Election parked under it.
 - 2026-08-15 — Heat-slice checklist civic (pipeline.52 Task 6) is **reporters** (Carmen, Luis, Trevor, Lila, Noah, Angela). `buildCivicDomainSlice.js` is disk-only (`desk_signal` + leftover datawakes); **never queries Sheets**. Civic *offices* still get datawake `domainSlice`: world_summary hood lines + a few INIT ids. No Civic_Office_Ledger, no constituent rows, no ADR-0017 Packet. Codex left office adoption until after the newsroom proof. That proof shipped; office pack did not.
+- 2026-08-16 — Sunday invite/hearing findings: [[2026-08-16-sunday-city-hall-invite]]. civic.17 week block is on the packet; cascade shape unchanged.
 
 ---
 

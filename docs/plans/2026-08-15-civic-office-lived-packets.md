@@ -110,7 +110,7 @@ Not in v1: full voice-file rewrite, election/chair-change, live Sheet writes.
   1. Run one weekday office (or rota of 3) dry. Show Mike what they were handed and what they said.
   2. Do not stamp the tracker. Do not start Sunday inject until he says the pack looks like their job.
 - **Verify:** pack file + statement on disk; Mike has seen both.
-- **Status:** [ ] open
+- **Status:** [x] 2026-08-15 (grok) — first attended run ignored the pack (wall-first prompt). Prompt reordered: wall then lever then pack then schema. After: `output/cron-civic/datawake/civic-office-crc-faction_2026-08-10.json`. Task 5 still gated on Mike.
 
 ### Task 5: Sunday city-hall packet carries the week (gated)
 
@@ -120,7 +120,7 @@ Not in v1: full voice-file rewrite, election/chair-change, live Sheet writes.
   2. Goal: they arrive fighting for what they already learned Mon–Thu, not rereading a cold city report.
   3. civic.15 gate and `--apply` stay as they are.
 - **Verify:** prep packet contains a “this week on the wall” block sourced from wiki, plus a pointer to the district pack. No sheet write.
-- **Status:** [ ] blocked on Task 4
+- **Status:** [x] 2026-08-15 (grok) — `runPrep` splices `## This week on the wall` + latest pack pointer before DECISION. civic.15 gate and `--apply` untouched. C103 packets on disk carry the block; CRC points at `COUNCIL-D7_c103.json` / lever stand with KONO or leave it.
 
 ---
 
@@ -133,6 +133,9 @@ Not in v1: full voice-file rewrite, election/chair-change, live Sheet writes.
 
 ## Changelog
 
+- 2026-08-15 (grok) — Task 5: Sunday prep carries wiki week + latest district pack pointer (`weekCarryBlock` / `spliceWeekCarry` in `scripts/cron-civic-run.js`). Test `scripts/cron-civic-week-carry.test.js`. No tracker write, no `--apply`.
+- 2026-08-15 (grok) — Task 4 re-run after prompt reorder. Before `..._2026-08-12.json` reused the storefront-audit wall. After `..._2026-08-10.json` answers the KONO lever. `datawakeUserPrompt` in `scripts/cron-civic-run.js`; test `scripts/cron-civic-datawake-prompt.test.js`.
+- 2026-08-15 (grok) — Task 4 attended dry run: `--stage=datawake --office civic-office-crc-faction --date 2026-08-12 --cycle 103` (Wed stamp; wall-clock Sat is a no-wake day). Pack + statement on disk. Tracker and Sunday inject untouched.
 - 2026-08-15 (grok) — Pack: T4-first people; chaos/news events on turf; appointed citywide (Montez et al.) get role numbers not neighbor filler. Short keys — cron food.
 - 2026-08-15 (grok) — Split locked: civic media ≠ civic offices. This plan is offices only.
 - 2026-08-15 (grok) — Week locked (Sunday city-hall / Mon–Thu district / wiki carry-forward).

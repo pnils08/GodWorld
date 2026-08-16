@@ -305,9 +305,9 @@ function subPm2Restart(args) {
     return { ok: true };
   }
   try {
-    // mags-bot deliberately NOT restarted here (S252) — it's a standing service
-    // decoupled from the session lifecycle. Restart it by hand only on bot-code
-    // deploys; auto-restart (pm2) + pm2 save cover crashes + reboots.
+    // mags-bot deliberately NOT restarted here — SUSPENDED (Mike-direct 2026-08-16,
+    // real metered Anthropic spend, no active use, no functional dependency found).
+    // Only Mike's explicit word starts it again; this step never has.
     execSync('pm2 restart godworld-dashboard', { cwd: ROOT, stdio: 'pipe' });
     console.log('  ✓ godworld-dashboard restarted');
     return { ok: true };

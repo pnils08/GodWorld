@@ -35,9 +35,8 @@ Do NOT use `/boot` to pick up terminal scope or task context. For that, use `/se
 ### 0. Free Memory
 ```bash
 pm2 stop godworld-dashboard 2>/dev/null          # free memory; session-end restarts it
-pm2 start mags-bot 2>/dev/null || true           # standing service (S252) — never stop; ensure up if off
 ```
-Frees memory by stopping the dashboard only. **mags-bot is a standing service (S252) — boot never stops it and ensures it's up here if it's off (S264, Mike-directed); session-end restarts the dashboard, not the bot.**
+Frees memory by stopping the dashboard only. **mags-bot is SUSPENDED (Mike-direct 2026-08-16) — real metered Anthropic spend on two always-on Discord channels nobody was watching, no functional dependency found. Supersedes the S252/S264 always-on designation. Boot does NOT restart it; only Mike's explicit word does.**
 
 ### 1. Reload Identity
 ```

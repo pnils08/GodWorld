@@ -40,9 +40,8 @@ Why: the hook routes the same boot reads (`docs/SCHEMA.md`, `docs/index.md`, `TE
 ### 0. Free Memory (if hook didn't)
 ```bash
 pm2 stop godworld-dashboard 2>/dev/null          # free memory; session-end restarts it
-pm2 start mags-bot 2>/dev/null || true           # standing service (S252) — never stop; ensure up if off
 ```
-mags-bot is a standing service (S252) — never stop it; ensure it's up if off (S264, Mike-directed).
+mags-bot is SUSPENDED (Mike-direct 2026-08-16) — it bills real, metered Anthropic API on every Discord message on two always-on channels, nobody was actively watching them, and no process depends on it running (verified: no functional caller, only boot-ensure-up commands and this rule). Supersedes the S252/S264 "never stop it" standing service designation. Do NOT auto-start it here. `pm2 start mags-bot` only on Mike's explicit word.
 
 ### 1. Detect Terminal
 ```bash

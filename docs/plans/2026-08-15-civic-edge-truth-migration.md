@@ -685,12 +685,48 @@ live runs corrected code against uncorrected data.
 |---|---|---|---|---|---|
 | `Neighborhood_Map.District` | `v3NeighborhoodWriter.js` :123 map, :389 compute, :417-423 write | `NEIGHBORHOOD_DISTRICT_MAP` (8) | 14 of 22 blank-overwritten every cycle | n/a — fix is to **stop** writing | **Yes** — seed 22 District cells, *after* 4a deploys |
 | `Crime_Metrics` | `utilities/ensureCrimeMetrics.js:43` | `NEIGHBORHOOD_CRIME_PROFILES` (20) | 3 ghost hoods fed live data; 5 canon hoods absent incl. Baylight | **Partial** — update-or-append only, no delete path (:412-470) | **Yes** — delete 3 ghost rows by hand |
-| `Neighborhood_Demographics` | `utilities/ensureNeighborhoodDemographics.js:28` | `DEMO_NEIGHBORHOODS` (21) | East Oakland absent | **Partial** — same update-or-append shape | Verify for ghosts; append is automatic |
+| `Neighborhood_Demographics` | `utilities/ensureNeighborhoodDemographics.js:28` | `DEMO_NEIGHBORHOODS` (21) | East Oakland absent | **NO — corrected by bench C109.** `ensureNeighborhoodDemographicsSchema_` has **zero cycle-path callers**, unlike `ensureCrimeMetricsSchema_` which `updateCrimeMetrics.js:122` calls every cycle. Editing the literal changes only the holiday-modifier map; nothing creates the row | **Yes** — explicit row seed required |
 | `Faith_Organizations` | `utilities/ensureFaithLedger.js` | 11 hood-literal lines | Montclair ghost; 11 canon hoods have no faith org | Partial | Delete/repoint Montclair row |
 | `Transit_Metrics` | `utilities/ensureTransitMetrics.js` | 27 hood-literal lines | **Different shape** — keyed by Station/Corridor, not Neighborhood. Audit only, do not force into this pattern | n/a | n/a |
 | `Household_Ledger.Neighborhood` | 7 writers across phase04/05 (`householdFormationEngine`, `migrationTrackingEngine`, `bondEngine`, `generationalWealthEngine`, `generationalEventsEngine`, `educationCareerEngine`, `generateCitizensEvents`) | free text, unconstrained | 25 rows on 7 non-canon values; `Piedmont Avenue` ×14 is a pure spelling split | No | **Yes** — fold + purge |
 | Generic citizen placement | `generateGenericCitizens.js:412` | `getCoreSimNeighborhoods_` → `CoreSimRank` (12 of 22) | 10 hoods never seeded; Vega left with 1 citizen | No | **Yes** — `CoreSimRank` is a sheet edit, **and rank order is rng draw order** |
 | `Initiative_Tracker` | **no creator exists** — `civicInitiativeEngine` resolves only | — | no authorship path, no authorship columns | No | **Yes** — 3 appended columns |
+
+### 11.3a Bench C109 — what the fire actually proved (2026-08-15)
+
+Pushed 4a + E2 to SANDBOX 0814 (temp-dir route, target grep-verified), bumped the
+deployment to @5, seeded District + `CoreSimRank` on the bench sheet, fired.
+`{ok:true}`, cycle 109, 128 phases.
+
+**PROVEN:**
+
+- **4a.** `Neighborhood_Map` shows `Cycle 109` — the writer ran — and District is
+  **22/22 intact, zero blanked**. Before the fix that same fire would have wiped 14.
+- **E2 crime.** Coliseum and Elmhurst froze at `LastUpdated=108` (stopped updating);
+  Montclair updated at 109, correctly kept per the ruling; 18 of 20 rows fresh.
+- **The no-delete-path prediction.** Crime_Metrics still has 20 rows — the two ghosts
+  persist as frozen 108 rows exactly as §11.3 said. Manual deletion still owed, on
+  bench and live.
+
+**DISPROVEN — my own writer-map row was wrong.** Adding East Oakland to
+`DEMO_NEIGHBORHOODS` produced **no row**; the tab is still 21, all updated at 109.
+Cause: the two `ensure*` files are **not symmetric**. `ensureCrimeMetricsSchema_` is
+invoked on the cycle path at `updateCrimeMetrics.js:122`, so a literal edit there
+self-heals. `ensureNeighborhoodDemographicsSchema_` has **no cycle-path caller** —
+the only cycle-path use of `DEMO_NEIGHBORHOODS` is
+`updateNeighborhoodDemographics.js:293`, which builds the holiday inflow/outflow
+**modifier map**, not rows. So the edit was correct and inert.
+
+This also narrows DEPLOY.md's "self-arming `ensure*Schema_` re-arms on live's first
+fire": true for the crime schema, **false** for the demographics one. Do not treat
+the `ensure*` prefix as evidence of self-arming — check for a caller.
+
+**Next for the East Oakland row:** do not hand-build it in Node. Correct initial
+values come from `seedNeighborhoodDemographicsFromLedger_` (:347), engine-side —
+reimplementing that in a script would duplicate engine logic. The real fix is
+wiring the demographics ensure onto the cycle path so it behaves like crime's; that
+is a new phase call site and earns its own measure-twice pass rather than riding the
+end of this one.
 
 ### 11.4 Montclair is already in the world four times over
 
@@ -715,6 +751,14 @@ Nothing in 1–4 needs a ruling. Only 5 does.
 
 ## Changelog
 
+- 2026-08-15 (engine-sheet) — BENCH C109 on SANDBOX 0814. 4a PROVEN (writer ran at
+  cycle 109, District 22/22 intact, zero blanked). E2 crime PROVEN (Coliseum +
+  Elmhurst frozen at 108, Montclair still updating, ghost rows persist as predicted).
+  E2 demographics DISPROVEN — my §11 writer-map row was wrong: the two ensure* files
+  are not symmetric, crime's schema fn is called from updateCrimeMetrics.js:122 every
+  cycle but the demographics one has zero cycle-path callers, so the literal edit was
+  inert. §11.3a added; writer map corrected. Also caught pre-write: shell
+  GODWORLD_SHEET_ID does not redirect to a sandbox, it resolves back to production.
 - 2026-08-15 (builder) — GATE WITHDRAWN from §3.7. Canon is live, not retroactive
   ("this is what it is rn as I state it"); engine error is a Civis Systems fault the
   world lives through, so tuning swings are legitimate in-world stories (KONO

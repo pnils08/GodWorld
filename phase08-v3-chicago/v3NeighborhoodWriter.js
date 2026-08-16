@@ -116,29 +116,24 @@ function pulseFoldDelta_(pulse, key) {
   return raw;
 }
 
-// S215 civic.10b — neighborhood→district owner map. Canon-authorized only;
-// unmapped neighborhoods get blank District (civic.10c auditor flags them
-// as orphans, forcing canon expansion before they get a synthetic mapping).
-// Source: docs/canon/INSTITUTIONS.md §Neighborhoods.
-var NEIGHBORHOOD_DISTRICT_MAP = {
-  'KONO': 'D7',          // Ashford (CRC). Canon: KONO entry §Neighborhoods.
-  'Temescal': 'D7',      // Ashford (CRC). Canon: KONO/Temescal corridor adjacency.
-  'Downtown': 'D2',      // Tran (IND). Canon: KONO entry §Neighborhoods adjacency.
-  'Adams Point': 'D8',   // Chen (CRC). Canon: KONO entry §Neighborhoods adjacency.
-  // S256 roster alignment — canon-authorized in INSTITUTIONS §Neighborhoods (S256).
-  'Lake Merritt': 'D8',  // Chen (CRC). Lake-ring cluster (Adams Point/Grand Lake/Eastlake).
-  'Uptown': 'D9',        // Mobley (OPP). Legacy lib/districtMap assignment, ratified S256.
-  'Baylight District': 'D5', // Rivers (OPP). Coliseum-site build (Baylight Authority LENS:
-                          // 65-acre former-Coliseum grounds, Elmhurst/Coliseum-area context);
-                          // sim map already places Coliseum+Elmhurst in D5.
-  // S352 (Mike-direct): East Oakland placed in its logical district — the east
-  // flatlands sit with Coliseum/Elmhurst in D5; both civic maps already assumed
-  // it (engine.99 Finding #5 resolved).
-  'East Oakland': 'D5'
-  // 10 other neighborhoods (Laurel, West Oakland, Fruitvale, Jack London,
-  // Rockridge, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake,
-  // Glenview, Dimond, Ivy Hill, San Antonio) — pending canon authorization.
-};
+// civic.18 Task 4a — NEIGHBORHOOD_DISTRICT_MAP REMOVED. This writer no longer
+// owns the District column.
+//
+// It held 8 of the 22 live hoods and recomputed the column every cycle as
+// `MAP[name] || ''`, then wrote the whole column — so the other 14 were
+// blank-overwritten on every single run. That is why the live column read 8
+// populated / 14 blank: it was never a ledger, it was a printout of this literal.
+// A column a writer regenerates from code cannot be a truth source (ADR-0016),
+// and the S215 "canon expands, then the map grows" intent never survived contact
+// with a map that only one file could see.
+//
+// District is now ledger truth, hand-authored in Neighborhood_Map like
+// CoreSimRank. Seeded by scripts/seedNeighborhoodDistrict.js; read by consumers.
+// 'District' STAYS in NEIGHBORHOOD_MAP_HEADERS so the append-only schema ensure
+// keeps the column alive — the column persists, only the value-write is gone.
+//
+// DO NOT reintroduce a district literal here. If a hood's district is wrong, the
+// cell is wrong; fix the cell.
 
 
 function saveV3NeighborhoodMap_(ctx) {
@@ -316,7 +311,6 @@ function saveV3NeighborhoodMap_(ctx) {
 
   // Build batch rows
   var out = [];
-  var districtOut = []; // S315: single-column District payload, written by header lookup
 
   for (var i = 0; i < NMAP_NEIGHBORHOODS.length; i++) {
     var name = NMAP_NEIGHBORHOODS[i];
@@ -385,9 +379,7 @@ function saveV3NeighborhoodMap_(ctx) {
 
     var demoLabel = getDemographicMarkerV35_(name, baseDemoLabel, arcByNeighborhood, S, holiday, isFirstFriday, isCreationDay);
 
-    // S215 civic.10b — District resolved from canon map; blank for unmapped.
-    var district = NEIGHBORHOOD_DISTRICT_MAP[name] || '';
-    districtOut.push([district]);
+    // civic.18 Task 4a — District no longer computed here; it is ledger truth.
 
     out.push([
       now, cycle, name,
@@ -414,14 +406,9 @@ function saveV3NeighborhoodMap_(ctx) {
   // Write texture rows 2:N (cols A–O only)
   sheet.getRange(2, 1, out.length, TEXTURE_COL_COUNT).setValues(out);
 
-  // District — live column resolved by header, never positional
-  var liveDistrictCol = -1;
-  for (var dc = 0; dc < liveHeader.length; dc++) {
-    if (String(liveHeader[dc]) === 'District') { liveDistrictCol = dc; break; }
-  }
-  if (liveDistrictCol >= 0) {
-    sheet.getRange(2, liveDistrictCol + 1, districtOut.length, 1).setValues(districtOut);
-  }
+  // civic.18 Task 4a — the District write is GONE. This writer owns the texture
+  // block (A–O) and nothing else on this tab. District is ledger truth now; every
+  // cycle this ran, it blank-overwrote the 14 hoods missing from its private map.
 
   Logger.log('saveV3NeighborhoodMap_ v3.6: Updated ' + out.length + ' neighborhoods | Cycle ' + cycle + ' | Holiday: ' + holiday);
 }

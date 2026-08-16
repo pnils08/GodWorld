@@ -337,6 +337,7 @@ The largest and most complex phase; simulates individual citizen lifecycles each
 | `buildBusinessCards.js` (~19 KB) | Business entity cards |
 | `buildFaithCards.js` (~25 KB) | Faith community cards |
 | `buildCulturalCards.js` (~22 KB) | Cultural institution cards |
+| `auditCardLayerCensus.js` (~7 KB) | READ-ONLY census of the wd-* card layer — docs vs unique entity key per domain tag. Ratio 1.00 = one card per entity; >1.00 = surplus, run that builder's `--reconcile` (engine.111) |
 | `buildInitiativeCards.js` (~22 KB) | Initiative summary cards |
 | `buildInitiativeWorkspaces.js` | Initiative working documents |
 | `buildDecisionQueue.js` (~19 KB) | Pending decision queue document |

@@ -320,6 +320,8 @@ published provenance for canon searches.
 | Neighborhood card | `world-data` + `wd-neighborhood` | `node scripts/buildNeighborhoodCards.js --apply` | — | neighborhood-name-scoped wipe |
 | Initiative card | `world-data` + `wd-initiative` | `node scripts/buildInitiativeCards.js --apply` | — | INIT-ID-content-scoped wipe |
 | Player truesource | `world-data` + `wd-player-truesource` | `node scripts/ingestPlayerTrueSource.js --apply` | — | truesource-header-scoped wipe |
+
+**Card-layer health check (engine.111):** `node scripts/auditCardLayerCensus.js` — read-only, counts documents vs unique entity keys per `wd-*` tag. Ratio 1.00 means the one-card-per-entity invariant holds; anything above it is surplus and names the builder's `--reconcile` to run. Worth running before trusting a retrieval result, since the fan-out in `search_everything` takes only 2 hits per domain — duplicates crowd distinct entities out of that budget.
 | World summary (per-cycle) | `world-data` + `wd-summary` | post-publish skill via API | `curl /v3/documents -d '{"containerTags":["world-data","wd-summary"]...}'` | tag pair added S184 |
 | World-state snapshot one-liner (per-cycle) | planned `world-data` + `wd-snapshot` | post-publish Step 2c via API | — | Writer target exists, but no live documents were present on 2026-07-27; first approved write must be verified before this becomes a read lane |
 | Quick project note | `super-memory` | skill `/supermemory-save` | plugin handles | not canon and not a Mags identity save |

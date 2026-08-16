@@ -236,6 +236,33 @@ key is the only member of its own group and reads as clean. Two guards on it —
 zero-BIZ_ID ledger read throws rather than concluding the whole layer is orphaned,
 and >25% orphaned throws as a bad read rather than real drift.
 
+### engine.114 measure-twice (S376) — findings before any cut
+
+Four canon-ingestion writers, all the same shape: `errors++` inside a catch, a
+`[DONE] Written: N, Errors: M` line, and nothing that reaches the exit code.
+
+**The Saturday caller already expects the gate that is missing.**
+`cron-saturday-run.js:809` reads
+`if (ing.status !== 0) throw new Error('ingestEdition failed (exit ' + ing.status + ')')`.
+So adding the gate does not risk the chain — it *activates a check already
+written and currently dead*. Today a partial canon ingest (3 of 18 sections
+failing) satisfies that check, proceeds to the NotebookLM push, and logs
+"published: canon ingest". Canon can publish with sections missing and the chain
+reports success. This was the assumption most worth testing and it reversed the
+risk: gating is the conservative move here, not the bold one.
+
+Per-file notes for the implementation:
+- `ingestEdition.js` — cycle-path via cron (Sat 16:00). Gate is load-bearing.
+- `ingestCivicWiki.js`, `ingestEditionWiki.js` — operator-fired from
+  `/post-publish`. **Both are `(async () => {…})()` IIFEs with no
+  `main().catch`**, so use an explicit `process.exit(1)`; a bare `throw` would
+  rely on unhandled-rejection behaviour rather than a stated contract.
+- `supermemory-ingest.js` — zero callers found outside the lint ratchet; manual
+  tool, gate is free.
+- None of the four capture an HTTP status on the failure path (only
+  `err.message`), so "classify before you gate" needs the status threaded out of
+  each `addMemory` before the gate is worth more than a count.
+
 ### Root cause of the volume — the daemon retry loop, not manual wipes
 
 The census numbers track rebuild *frequency*, not anything about the four

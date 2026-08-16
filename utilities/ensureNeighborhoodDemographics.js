@@ -32,7 +32,13 @@ var DEMO_NEIGHBORHOODS = [
   // S256 roster alignment — these MAP_NEIGHBORHOODS hoods had residents but no
   // demographics row (silent skip, same class as the KONO G-S6 bug). KONO was
   // also missing here despite being canon since S215.
-  'KONO', 'Lake Merritt', 'Uptown', 'Baylight District'
+  'KONO', 'Lake Merritt', 'Uptown', 'Baylight District',
+  // civic.20 E2 — East Oakland. Canonized S352, and never added here: it was the
+  // ONLY one of the 22 live Neighborhood_Map hoods with no demographics row, so it
+  // silently skipped every cycle. Exactly the class the S256 note above describes,
+  // recurring one roster change later — the list is hand-maintained, so each new
+  // hood re-opens the same gap.
+  'East Oakland'
 ];
 
 /**
@@ -64,7 +70,13 @@ var NEIGHBORHOOD_PROFILES = {
   'Uptown': { studentMod: 0.8, adultMod: 1.4, seniorMod: 0.6, character: 'arts & nightlife district' },
   // Baylight: the A's-anchor flagship build — 35k-seat stadium + 3,200 brand-new
   // residential units; young professionals + incoming families, few seniors.
-  'Baylight District': { studentMod: 1.0, adultMod: 1.3, seniorMod: 0.5, character: 'new stadium district' }
+  'Baylight District': { studentMod: 1.0, adultMod: 1.3, seniorMod: 0.5, character: 'new stadium district' },
+  // civic.20 E2 — East Oakland, the east flatlands (D5, adjacent to the Baylight
+  // build). Authored in the prosperity register per the S256 note above: mods are
+  // AGE-DISTRIBUTION weights, not prosperity dials. Shaped like Fruitvale
+  // (multigenerational, families with school-age children) rather than the
+  // young-professional districts. Tuning, not truth — retune freely.
+  'East Oakland': { studentMod: 1.2, adultMod: 1.0, seniorMod: 1.0, character: 'east flatlands, multigenerational' }
 };
 
 

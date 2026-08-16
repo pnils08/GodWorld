@@ -425,8 +425,11 @@ own docstring names it: *"promoting/reordering core hoods is a sheet edit with
 sim-wide behavioral reach, by design (Mike's lever)."* The substrate is ready; the
 lever is doctrine. Three shapes, in ascending reach:
 
-- **(a) Rank all ten** — the whole city becomes live. Maximum fidelity to
-  "every neighborhood is either performing well or isn't"; largest behavioral delta.
+- **(a) Rank all ten — RULED 2026-08-15 (builder): "we should be using all hoods."**
+  The whole city becomes live. It is the only shape consistent with the §6 doctrine:
+  approval driven by whether a neighborhood is performing requires every neighborhood
+  to be performing at something. A hood that sits in the map while nothing happens in
+  it is a mechanism, not a place — the map would be lying about the size of the city.
 - **(b) Rank the representation-critical five** — Glenview, Dimond, Ivy Hill (all of
   D4, which is why Vega represents one citizen), plus East Oakland and Baylight
   District (all of D5). Fixes the two broken districts and the flagship blind spot;
@@ -434,6 +437,37 @@ lever is doctrine. Three shapes, in ascending reach:
   child-areas.
 - **(c) Leave as-is** — accept that ten hoods are places without communities, and
   that D4 and D5 are represented by members with almost no constituents.
+
+### 9.1 Executing the ruling — mechanism (engine-sheet)
+
+**It is a sheet edit, so it does not travel with a deploy.** Ten `CoreSimRank`
+cells. Per DEPLOY.md, `clasp push` carries code only — this must be applied to the
+SANDBOX sheet, proven, then replayed against live explicitly. It is not part of any
+code wave.
+
+**Rank order is a real choice, not filler.** Rank order *is* draw order and seeded
+rng consumption depends on it. Ordering by current population would bake in the very
+artifact being fixed (those hoods are empty *because* they were unranked), so the
+proposed order is by what the sim needs to start simulating, fixing the two broken
+districts first:
+
+| Rank | Hood | Why here |
+|---|---|---|
+| 13 | East Oakland | major geography, canonized S352, D5 |
+| 14 | Baylight District | the flagship $2.1B build, D5 — completes the district |
+| 15–17 | Glenview, Dimond, Ivy Hill | all of D4 — the district where Vega represents 1 citizen |
+| 18–22 | Adams Point, Grand Lake, Eastlake, Brooklyn, San Antonio | remaining child-areas |
+
+**Prove on bench before live.** Eleven consumers across six phases wake at once —
+citizen placement, crisis spikes, promotions, neighborhood engine, evening
+systems/famous/texture/cultural, world events. Expect volume changes, not just
+coverage: crisis surface grows from 12 hoods to 22, evening and cultural generation
+likewise, and the 8-citizens/cycle placement budget now spreads across 22 rather
+than 12 (slower per-hood growth in the core twelve — that is the intended trade).
+
+**rng shifts forward-only.** The weighted array's length changes, so no past-cycle
+replay is valid across the change. Expected for a world change; noted so nobody
+treats a post-change divergence as a regression.
 
 **Constraint on the fix (from the loader's own docstring):** `CoreSimRank` rank
 order *is* draw order, and seeded rng consumption depends on it — promoting or
@@ -577,6 +611,8 @@ Nothing in 1–4 needs a ruling. Only 5 does.
 
 ## Changelog
 
+- 2026-08-15 (builder) — RULING on §9: use all hoods. Shape (a), all ten ranked.
+  Mechanism + proposed rank order + bench-first sequencing recorded as §9.1.
 - 2026-08-15 (engine-sheet) — civic.21 EXECUTION PASS: needs no code. Two wrong
   reads corrected — the picker iterates the ledger core list with a `|| 1.0` default,
   so `neighborhoodWeights` is a tuning table, not a gate, and no separate placement

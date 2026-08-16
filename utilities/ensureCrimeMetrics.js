@@ -146,20 +146,23 @@ var NEIGHBORHOOD_CRIME_PROFILES = {
     baseIncidents: 3,
     character: 'quiet residential'
   },
-  'Coliseum': {
-    propertyCrimeMod: 1.25,
-    violentCrimeMod: 1.2,
-    responseMod: 0.9,
-    baseIncidents: 9,
-    character: 'stadium area, event-driven'
-  },
-  'Elmhurst': {
-    propertyCrimeMod: 1.2,
-    violentCrimeMod: 1.35,
-    responseMod: 0.8,
-    baseIncidents: 10,
-    character: 'deep east, underserved'
-  },
+  // civic.20 E2 — Coliseum and Elmhurst REMOVED. Neither has ever had a
+  // Neighborhood_Map row, so this file was generating live crime metrics for two
+  // places that do not exist in the world. `updateCrimeMetrics.js:190` iterates
+  // Object.keys of this object, which is why the tab carried exactly these ghosts.
+  // Canon retires both: INSTITUTIONS §336 makes Baylight District the successor on
+  // the same 65-acre former-Coliseum ground, so carrying Coliseum AND Baylight
+  // double-counted one land mass. Both remain legitimate CHILDREN of East Oakland
+  // in lib/canonNeighborhoods.js for photo scenes and sub-area speech — retired as
+  // simulated PLACES, not de-canonized as names.
+  //
+  // Montclair is deliberately KEPT below: it is ruled aboard for D6 and already
+  // present in 4 derived artifacts; its Neighborhood_Map row is plan Task 1.
+  //
+  // NOTE: this stops UPDATING those rows, it does not delete them — ensureCrimeMetrics
+  // is update-or-append with no delete path (:412-470). The two stale rows must be
+  // removed from the sheet by hand, and that removal replays to live separately
+  // (DEPLOY.md: sheet writes do not travel with clasp push).
   // S256 roster alignment — event-active CANON_12 hoods that had no crime profile
   // (silent-skipped by the crime engine every cycle). Thriving-register / low rates.
   'Laurel': {

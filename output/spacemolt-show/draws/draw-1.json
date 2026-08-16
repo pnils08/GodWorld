@@ -1,0 +1,77 @@
+{
+  "show": "UNDOCKED",
+  "draw": 1,
+  "cycle": "103",
+  "seedString": "UNDOCKED:draw1:cycle103",
+  "params": {
+    "cast": 3,
+    "alternates": 3,
+    "currentYear": 2042,
+    "minAge": 18
+  },
+  "eligibility": [
+    "Status === 'Active'",
+    "adult: BirthYear <= 2024",
+    "resides in Oakland (MigrationDestination empty or ReturnedCycle >= MigratedCycle)",
+    "not a sitting elected official (Civic_Office_Ledger active roster)",
+    "POPID and Neighborhood present"
+  ],
+  "eligibleCount": 784,
+  "eligibleSnapshotHash": "629bdc1895087189be83160e0c4e15f48433d8f1e8f25d4b3772d59ceb2b69e8",
+  "officialsExcluded": 10,
+  "ledgerRows": 940,
+  "cast": [
+    {
+      "popid": "POP-00143",
+      "name": "Clarissa Dane",
+      "age": 47,
+      "neighborhood": "Fruitvale",
+      "role": "DISTRICT ATTORNEY",
+      "tier": "3"
+    },
+    {
+      "popid": "POP-00962",
+      "name": "Marcus Walker",
+      "age": 49,
+      "neighborhood": "Jack London",
+      "role": "Dishwasher",
+      "tier": "4"
+    },
+    {
+      "popid": "POP-00688",
+      "name": "Merkin Jumper",
+      "age": 47,
+      "neighborhood": "Downtown",
+      "role": "Social Services Caseworker",
+      "tier": "4"
+    }
+  ],
+  "alternates": [
+    {
+      "popid": "POP-00946",
+      "name": "LaTrice Desai",
+      "age": 44,
+      "neighborhood": "Jack London",
+      "role": "Trade Union Representative",
+      "tier": "4"
+    },
+    {
+      "popid": "POP-00253",
+      "name": "Jango Lango",
+      "age": 52,
+      "neighborhood": "Piedmont Ave",
+      "role": "Hardware Store Owner",
+      "tier": "3"
+    },
+    {
+      "popid": "POP-00556",
+      "name": "Renata Voss",
+      "age": 41,
+      "neighborhood": "Rockridge",
+      "role": "Pharmacist",
+      "tier": "4"
+    }
+  ],
+  "drawnAt": "2026-08-16T05:45:29.482Z",
+  "drawnBy": "scripts/undockedDraw.js"
+}

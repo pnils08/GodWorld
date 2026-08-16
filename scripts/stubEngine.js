@@ -139,7 +139,7 @@ function analyzeFunction(fn) {
     'WorldEvents_V3_Ledger', 'WorldEvents_Ledger', 'Story_Seed_Deck',
     'Story_Hook_Deck', 'Event_Content_Ledger', 'Generic_Citizens', 'Intake',
     'Hospital_Ledger', 'Family_Relationships', 'Cultural_Ledger',
-    'Neighborhood_Demographics', 'Citizen_Directory', 'Arc_Ledger',
+    'Neighborhood_Demographics', 'Arc_Ledger',
     'Reflection_Intake', 'Press_Drafts', 'Faith_Organizations',
   ]);
   const hasWriteApi =

@@ -143,3 +143,4 @@ pointers:
 - 2026-08-16 (grok) — Phase 2.1 first pass: `scripts/undockedEpisodeAdapter.js` (no LLM). Logs in with stored pilot creds, category-splits get_action_log, captains_log_list stays QUOTED_SUBJECTIVE_COLOR. Tested live on the three disk episodes. Staged at `output/spacemolt-show/staged/`. Held for rb review before 2.2/2.3.
 - 2026-08-16 (research-build) — 0.4 telemetry source decided (get_action_log, verified live). Phase 2.1 adapter assigned to grok — real spec now buildable, was blocked on this.
 - 2026-08-16 (research-build) — Phase 3.1 designed (Mike-direct: assign a real reporter). Dedicated beat, not folded into culture-desk; voice/data-contract/cadence spec'd. Assigned to grok to draft.
+- 2026-08-16 (research-build) — F4 resolved: "evening-events engine" (L101) has zero hits anywhere in repo/docs beyond that phrase — no competing mechanism was ever built. Built 2.1-2.3 realizes that note, doesn't contradict it. ef3e3d71 stands.

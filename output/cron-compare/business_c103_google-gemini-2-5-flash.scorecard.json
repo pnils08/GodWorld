@@ -1,0 +1,18 @@
+{
+  "desk": "business",
+  "cycle": "103",
+  "provider": "openrouter",
+  "model": "google/gemini-2.5-flash",
+  "reporterVoice": true,
+  "factsCorrect": true,
+  "hallucinationCount": 0,
+  "hallucinations": [],
+  "wordCount": 971,
+  "humanEdits": null,
+  "runtimeSec": 11,
+  "apiCostUsd": 0.0196,
+  "usageInputTokens": 35832,
+  "usageOutputTokens": 1135,
+  "notes": "No issues found with reporter voice or factual accuracy. All claims trace back to the provided world state. Word count is accurate.",
+  "ranAt": "2026-08-16T01:40:54.231Z"
+}

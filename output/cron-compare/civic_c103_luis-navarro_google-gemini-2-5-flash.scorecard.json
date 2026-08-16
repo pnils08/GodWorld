@@ -1,0 +1,27 @@
+{
+  "desk": "civic",
+  "cycle": "103",
+  "provider": "openrouter",
+  "model": "google/gemini-2.5-flash",
+  "reporterVoice": true,
+  "factsCorrect": false,
+  "hallucinationCount": 2,
+  "hallucinations": [
+    {
+      "claim": "Isley Kelley, a citizen from Rockridge, attended a community feedback session for the Transit Hub in C51 and \"actually felt heard,\" but this sentiment of engagement now stands in stark contrast to the project's prolonged stasis.",
+      "why": "The world state does not indicate Isley Kelley (a citizen from Baylight District, per C102 sports) attended a community feedback session for the Fruitvale Transit Hub in C51 or any cycle, nor that they 'felt heard'."
+    },
+    {
+      "claim": "The engine review flags contradicting CrimeIndex readings in these very neighborhoods.",
+      "why": "There is no 'engine review' or 'contradicting CrimeIndex readings' explicitly stated in the world state for the Oakland Alternative Response Initiative's impact on West Oakland, Fruitvale, and East Oakland. While 'approval/district-sentiment' ripples exist for these districts, they do not directly contradict crime index readings. The initiative's impact is 'ongoing safety effects' and CrimeIndex metrics for these neighborhoods are within expected ranges given other ripples."
+    }
+  ],
+  "wordCount": 269,
+  "humanEdits": null,
+  "runtimeSec": 8,
+  "apiCostUsd": 0.0192,
+  "usageInputTokens": 35900,
+  "usageOutputTokens": 861,
+  "notes": "The article fabricates specific citizen involvement and an 'engine review' that flags contradictions in CrimeIndex, which are not present in the provided world state. The claim about Fruitvale Transit Hub being in 'construction-planning' for nine consecutive cycles is a possible extrapolation, but the specific length is not directly stated as 'nine consecutive cycles' in the provided text. However, the Fruitvale Transit Hub is listed as 'construction-planning' in this cycle and similar entries are seen in past cycles for the same project. The direct claim about Isley Kelley is a clear hallucination.",
+  "ranAt": "2026-08-16T01:40:10.344Z"
+}

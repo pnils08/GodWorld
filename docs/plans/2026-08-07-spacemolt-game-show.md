@@ -52,7 +52,7 @@ pointers:
 
 ## Phase 1 — Pilot infrastructure (research-build)
 
-- **1.1 Bounded episode runner.** Wrapper around commander: crontab-scheduled, one mission per episode, turn + cost caps, recovery-aware (the old miner stranded full-cargo/no-fuel; missions must include refuel/repair authority), durable per-episode JSON in `logs/spacemolt-show/`. Cadence RECOMMENDED (2026-08-16, research-build, pending Mike sign-off per the routing correction below): one episode per cycle, rotating across the live cast. Real pilot cost (~$0.13, 78 turns, exit 0, under the 10-min cap) makes cost a non-issue — the constraint is narrative pacing per "tie to cycle rhythm," and per-cycle lines up with the existing Saturday coverage-ingest window rather than adding a second clock. Not yet a ruling — routed kimi → rb → Mike same as draw parameters.
+- **1.1 Bounded episode runner.** Wrapper around commander: crontab-scheduled, one mission per episode, turn + cost caps, recovery-aware (the old miner stranded full-cargo/no-fuel; missions must include refuel/repair authority), durable per-episode JSON in `logs/spacemolt-show/`. Cadence DECIDED (2026-08-16, Mike sign-off): one episode per cycle, rotating across the live cast. Real pilot cost (~$0.13, 78 turns, exit 0, under the 10-min cap) makes cost a non-issue — the constraint is narrative pacing per "tie to cycle rhythm," and per-cycle lines up with the existing Saturday coverage-ingest window rather than adding a second clock.
 - **1.2 Pilot voice binding.** Mission briefs written in-world (the cast citizen's goals, in their register); `captains_log` entries as the pilot's own narrative record (cheap model). This is the show's raw character material — the adapter carries it as *quoted subjective color*, provenance-marked, never as fact.
 
 ## Phase 2 — Adapter + staged events (research-build adapter; engine-sheet sim wiring)
@@ -83,7 +83,7 @@ pointers:
 ## Open questions
 
 - [ ] In-world broadcaster: who *airs* the show in Oakland — an existing business entity (Civis Systems? a media house?) or a new minted business? (Shapes coverage voice + a possible sponsor thread; decide with Mike at Phase 0.3.)
-- [ ] Episode cadence — **RECOMMENDED per cycle, rotating cast** (2026-08-16, research-build, see 1.1), pending Mike's sign-off. Pilot's real cost number resolves the cost side of the trade; pacing call still goes to him.
+- [x] Episode cadence — **DECIDED per cycle, rotating cast** (2026-08-16, Mike sign-off on rb's recommendation; see 1.1).
 - [ ] Does the audience wake-day participation need any mechanic beyond perception + ECL (e.g., a "watched the episode" LifeHistory event), or is texture enough for v1?
 
 ## Changelog
@@ -128,3 +128,4 @@ pointers:
 - 2026-08-15 (kimi) — Mike-direct: do not gate on Mike — lottery filter/draw-params/Phase-1-proceed delegated to research-build. 4b casino-ledger sign-off stays Mike-only. Plan body updated.
 - 2026-08-15 (kimi) — CORRECTION (Mike-direct, via rb): no-gate covers EXECUTION PACE ONLY, not policy — eligibility filter/draw-params/Phase-1-proceed still need Mike's sign-off, routed kimi → rb → Mike. Supersedes entry above.
 - 2026-08-16 (research-build) — Pilot flown (kimi, `13fd2633`): Marcus Walker, exit 0, 78 turns, ~$0.13. 1.2 pilot-voice pattern proven live. Dane + Jumper ready. Cadence RECOMMENDED per-cycle/rotating-cast, held pending Mike per the correction above.
+- 2026-08-16 (kimi) — **Cadence DECIDED (Mike sign-off): one episode per cycle, rotating cast.** 1.1 and open-questions updated. Dane + Jumper proving flights authorized by rb as execution-pace (proven mechanism, no new policy) — flying same session.

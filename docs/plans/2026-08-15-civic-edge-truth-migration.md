@@ -181,17 +181,42 @@ Now the hoods canon does not describe:
 | **Temescal** | `'young professional'`, adultMod **1.3**, crime `'mixed commercial, family neighborhood'`, baseIncidents **5** (near-lowest) | the **health-crisis** district (`INSTITUTIONS` §42, INIT-005 Temescal Community Health Center) — **still behind the city boom** |
 | **West Oakland** | `'evolving industrial'`, crime `'industrial transition, gentrifying'` | home of **Civis Systems**, Elias Varek's urban-intelligence firm (§377) — a major anchor employer |
 | **East Oakland** | crime `'working class, underserved'`, baseIncidents **11** (highest) | D5, immediately adjacent to the flagship $2.1B build |
-| **Rockridge** | `'established affluent'`, baseIncidents **3** (lowest) | no canon entry — the label is a real-world prior |
+| **Rockridge** | `'established affluent'`, baseIncidents **3** (lowest) | no canon entry — unverifiable either way |
+
+World premise for anyone re-authoring these: **2042**, after a legendary A's run, a
+massive tech boom, Civis Systems (the billionaire's city-optimization system — the
+engine, in-world), and the gentrification that followed. Prosperity-era and
+self-contained; 2026 Oakland is not the reference.
 
 Temescal is the clearest inversion: canon makes it the health-crisis area lagging
 the boom, and the code makes it the city's young-professional magnet with
 near-lowest crime. **Placement follows that profile**, so the engine has been
 steering young professionals *into* the crisis district and reading it as low-risk.
 
-This violates the standing rule directly — *"don't import real-world cynicism, and
-don't reason from real-world sector/geography… Canon beats training-data priors
-every time."* Gentrification framing for West Oakland, "underserved" for East
-Oakland and affluence for Rockridge are 2026-Oakland reflexes, not this world.
+**REFINED after builder context, same session — the premise is 2042.** A legendary
+A's run, a massive tech boom, a billionaire who built a city-optimization system
+(Civis Systems — the engine itself), *and the gentrification that followed.* So
+gentrification **is** canon here. That partly rehabilitates West Oakland's
+`'gentrifying'` label — but for a reason the code never knew: post-Civis tech-boom
+displacement in 2042, not 2010s Bay Area.
+
+Which sharpens the finding rather than softening it. **The problem is not that every
+label is wrong — it is that none of them is traceable, so we cannot tell which are
+right.** Baylight's profile is traceable to §336 and correct. The others are
+untraceable, and land anywhere on the spectrum:
+
+- `'gentrifying'` for West Oakland — plausibly **right**, for the wrong reason
+  (arrived as a 2026 reflex, coincides with 2042 canon).
+- `'young professional'` + near-lowest crime for **Temescal** — **inverted**, canon
+  makes it the health-crisis district the boom left behind.
+- `'underserved'` for East Oakland, `'established affluent'` for Rockridge —
+  **unknown**, no canon to check them against either way.
+
+A label that happens to be correct by coincidence is still unsourced, and will drift
+the next time someone edits it with a different set of priors. This is the standing
+rule biting — *"don't reason from real-world sector/geography… Canon beats
+training-data priors every time"* — where the failure mode is not wrongness but
+**untraceability**.
 
 **Sequencing consequence — this gates civic.21.** Ranking all 22 hoods amplifies
 whatever these profiles say: it turns placement on for ten more neighborhoods and
@@ -663,6 +688,11 @@ Nothing in 1–4 needs a ruling. Only 5 does.
 
 ## Changelog
 
+- 2026-08-15 (engine-sheet) — §3.7 REFINED after builder context: premise is 2042
+  post-boom with canon gentrification, so West Oakland's 'gentrifying' is plausibly
+  right for the wrong reason. The defect is UNTRACEABILITY, not uniform wrongness —
+  Baylight traceable and correct, Temescal inverted, East Oakland and Rockridge
+  unverifiable. A label correct by coincidence still drifts on the next edit.
 - 2026-08-15 (engine-sheet) — §3.7 NEW: the hood character layer encodes real-world
   Oakland where canon is silent (Temescal coded 'young professional'/low-crime while
   canon makes it the health-crisis district behind the boom; West Oakland

@@ -66,6 +66,11 @@ var ALLOW_PARTIAL_WIPE = process.argv.includes('--allow-partial-wipe');
 // engine.111: reconcile mode — collapse each BIZ_ID to its newest doc. Dry-run
 // unless --apply; every delete is logged to output/ first for reversibility.
 var RECONCILE = process.argv.includes('--reconcile');
+// engine.113: delete cards whose BIZ_ID has no Business_Ledger row. --reconcile
+// cannot reach these — it groups by key, and each stale card is the only member
+// of its own key group, so the layer reads a clean 1.00 while the duplicate sits
+// there. Dry-run unless --apply, manifest written first, same as --reconcile.
+var PRUNE_ORPHANS = process.argv.includes('--prune-orphans');
 
 var nameArg = process.argv.indexOf('--name');
 var NAME_FILTER = nameArg > 0 ? process.argv[nameArg + 1] : null;
@@ -220,6 +225,99 @@ async function buildBizIdMap() {
   console.log('[buildBusinessCards] BIZ_ID→id map: ' + map.size + ' unique BIZ_IDs across ' +
     total + ' docs (' + dupes.length + ' surplus above the one-per-business invariant)');
   return { map: map, dupes: dupes, total: total };
+}
+
+/**
+ * engine.113 — prune cards whose BIZ_ID is absent from Business_Ledger.
+ *
+ * The five found at S376 were not lost businesses, they were second cards for
+ * businesses that exist under a different ID (Atlas Bay Architects as both
+ * BIZ-00089 and stale BIZ-00099, etc). Renumbering left the old-ID cards behind
+ * and nothing ever revisits them, because the builder only PATCHes keys the
+ * sheet still yields.
+ *
+ * Canon rule this implements: the current sheet is the truth, and a derived
+ * layer reconciles to it. A card the ledger does not vouch for is surplus even
+ * when it looks like the only surviving record of something.
+ */
+async function pruneOrphanBusinessCards() {
+  var sheets = require('../lib/sheets');
+  var rows = await sheets.getSheetData('Business_Ledger');
+  if (!rows || rows.length < 2) throw new Error('Business_Ledger unreadable — refusing to prune');
+  var idc = rows[0].indexOf('BIZ_ID');
+  if (idc < 0) throw new Error('Business_Ledger has no BIZ_ID column — refusing to prune');
+
+  var live = {};
+  var liveCount = 0;
+  for (var r = 1; r < rows.length; r++) {
+    var v = String(rows[r][idc] == null ? '' : rows[r][idc]).trim();
+    if (v) { live[v] = String(rows[r][rows[0].indexOf('Name')] || ''); liveCount++; }
+  }
+  // Guard: an empty or truncated read must never be interpreted as "every card
+  // is an orphan". This is the whole card layer on the line.
+  if (liveCount === 0) throw new Error('Business_Ledger yielded zero BIZ_IDs — refusing to prune');
+
+  var enumerated = await buildBizIdMap();
+  var orphans = [];
+  enumerated.map.forEach(function (rec, bizId) {
+    if (!live[bizId]) orphans.push(rec);
+  });
+  enumerated.dupes.forEach(function (rec) {
+    if (!live[rec.bizId]) orphans.push(rec);
+  });
+
+  console.log('\n[prune-orphans] mode: ' + (APPLY ? 'APPLY' : 'DRY-RUN'));
+  console.log('[prune-orphans] ledger BIZ_IDs: ' + liveCount +
+    ' | cards: ' + enumerated.total + ' | orphaned cards: ' + orphans.length);
+
+  if (orphans.length === 0) {
+    console.log('[prune-orphans] every card is vouched for by the ledger — nothing to do.');
+    return;
+  }
+  // Refuse a mass delete: this only ever cleans up a handful of stale keys. If
+  // it is proposing a large fraction of the layer, the ledger read is wrong.
+  if (orphans.length > enumerated.map.size * 0.25) {
+    throw new Error('prune-orphans: ' + orphans.length + ' of ' + enumerated.total +
+      ' cards look orphaned (>25%) — that is a bad ledger read, not real drift. Refusing.');
+  }
+  orphans.forEach(function (o) {
+    console.log('  ' + o.bizId + '  created=' + String(o.createdAt).slice(0, 10));
+  });
+
+  if (!APPLY) {
+    console.log('\n[prune-orphans] DRY-RUN — no deletes issued. Add --apply to execute.');
+    return;
+  }
+
+  var fs = require('fs');
+  var path = require('path');
+  var stamp = new Date().toISOString().replace(/[:.]/g, '-');
+  var logPath = path.join('/root/GodWorld/output', 'wd-business-orphan-prune-' + stamp + '.log');
+  fs.writeFileSync(logPath, orphans.map(function (o) {
+    return [o.bizId, o.id, o.createdAt, 'no-ledger-row'].join('\t');
+  }).join('\n') + '\n', 'utf8');
+  console.log('[prune-orphans] delete manifest written: ' + logPath);
+
+  var deleted = 0;
+  var alreadyGone = 0;
+  var failures = [];
+  for (var i = 0; i < orphans.length; i++) {
+    var res = await deleteDoc(orphans[i].id);
+    if (res.outcome === 'deleted') deleted++;
+    else if (res.outcome === 'already-gone') alreadyGone++;
+    else failures.push({ id: orphans[i].id, bizId: orphans[i].bizId, status: res.status });
+    await smSleep(250);
+  }
+  console.log('\n[prune-orphans] deleted: ' + deleted + ' | already-gone: ' + alreadyGone +
+    ' | failed: ' + failures.length);
+  if (failures.length > 0) {
+    failures.forEach(function (f) {
+      console.error('  [FAIL] ' + f.bizId + ' ' + f.id + ' → HTTP ' + f.status);
+    });
+    console.error('[GATE-FAIL] prune left ' + failures.length + ' orphan(s); manifest: ' + logPath);
+    process.exit(1);
+  }
+  console.log('[prune-orphans] every remaining card is vouched for by Business_Ledger.');
 }
 
 async function reconcileBusinessCards() {
@@ -492,6 +590,11 @@ async function buildCard(biz, appearances) {
 async function main() {
   // engine.111: reconcile is a standalone legacy-state pass — reads no sheet and
   // writes no cards, so it returns before the build path.
+  if (PRUNE_ORPHANS) {
+    await pruneOrphanBusinessCards();
+    return;
+  }
+
   if (RECONCILE) {
     await reconcileBusinessCards();
     return;

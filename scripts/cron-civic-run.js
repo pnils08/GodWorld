@@ -353,6 +353,111 @@ function constituentTopic(hoodNames, hoods, isCitywide) {
 }
 
 // ---------------------------------------------------------------------------
+// civic.17 Task 5 — Sunday packet carries the week (wiki + latest district pack)
+// Pointer only: do not dump pack JSON (lint) and do not write the tracker.
+// ---------------------------------------------------------------------------
+
+const WEEK_HEAD = '## This week on the wall';
+
+function districtPackRef(agentDir, cycle, officeMap, root) {
+  const base = root || ROOT;
+  const map = officeMap || {};
+  const holder = officeWall.resolveHolder(map, agentDir);
+  const rows = [...(map.offices || []), ...(map.projects || [])].filter(o => o.agentDir === agentDir);
+  const row = holder
+    ? rows.find(r => String(r.popid || '').toUpperCase() === holder.popid) || rows[0]
+    : rows[0];
+  const id = row && (row.officeId || row.projectId);
+  const packsDir = path.join(base, 'output', 'cron-civic', 'packs');
+  let abs = id ? path.join(packsDir, id + '_c' + cycle + '.json') : null;
+  if (!abs || !fs.existsSync(abs)) {
+    abs = null;
+    if (fs.existsSync(packsDir)) {
+      for (const f of fs.readdirSync(packsDir)) {
+        if (!f.endsWith('_c' + cycle + '.json')) continue;
+        try {
+          const p = JSON.parse(fs.readFileSync(path.join(packsDir, f), 'utf8'));
+          if (p && p.actor && p.actor.agentDir === agentDir) {
+            abs = path.join(packsDir, f);
+            if (id && f.startsWith(id + '_')) break;
+          }
+        } catch (_) { /* skip unreadable pack */ }
+      }
+    }
+  }
+  if (!abs || !fs.existsSync(abs)) return { path: null, lever: '', officeId: id || null };
+  let lever = '';
+  try {
+    const p = JSON.parse(fs.readFileSync(abs, 'utf8'));
+    lever = String((p.task && p.task.goal) || (p.pulse && p.pulse.lever) || '').trim();
+    if (lintText(lever).length) lever = '';
+  } catch (_) { /* pointer still valid without lever */ }
+  return { path: path.relative(base, abs), lever, officeId: id || null };
+}
+
+function weekCarryBlock(opts) {
+  const o = opts || {};
+  const L = [WEEK_HEAD, ''];
+  L.push('You already lived Mon through Thu. Sunday is decide, not a blank brief.');
+  if (o.wallError) {
+    const err = cleanInline(o.wallError);
+    L.push('_Position wall unread' + (err ? ' (' + err + ')' : '') + ' — fight from the district pack pointer below._');
+  } else if (!o.posts || !o.posts.length) {
+    L.push('_No CIVIC wall lines this week yet._');
+  } else {
+    L.push('Your own lines this week (continuity only, not tracker canon):');
+    let n = 0;
+    for (const p of o.posts) {
+      const line = cleanInline(String((p && p.content) || p || '').replace(/\s+/g, ' '));
+      if (!line || /\[object Object\]/.test(line)) continue;
+      n++;
+      L.push(n + '. ' + line.slice(0, 420));
+    }
+    if (!n) L.push('_Wall lines this week could not ship as packet prose._');
+  }
+  L.push('');
+  if (o.packPath) {
+    L.push('Latest district pack on disk: ' + o.packPath);
+    if (o.lever) L.push('This week\'s lever from that pack: ' + o.lever);
+  } else {
+    L.push('No district pack on disk for this office this cycle.');
+  }
+  return L.join('\n');
+}
+
+function spliceWeekCarry(md, block) {
+  let body = String(md || '');
+  const at = body.search(/^## This week on the wall\s*$/m);
+  if (at !== -1) {
+    const afterHead = body.slice(at);
+    const next = afterHead.slice(WEEK_HEAD.length).search(/\n## /);
+    body = body.slice(0, at) + (next === -1 ? '' : afterHead.slice(WEEK_HEAD.length + next + 1));
+  }
+  const insert = String(block || '').replace(/\s+$/, '') + '\n';
+  const dec = body.search(/^## DECISION /m);
+  if (dec === -1) return body.replace(/\s+$/, '') + '\n\n' + insert;
+  return body.slice(0, dec).replace(/\s+$/, '') + '\n\n' + insert + '\n' + body.slice(dec);
+}
+
+async function loadWeekCarry(officeMap, agentDir, cycle) {
+  const holder = officeWall.resolveHolder(officeMap, agentDir);
+  let posts = [];
+  let wallError = null;
+  if (!holder) wallError = 'no-holder';
+  else {
+    try {
+      const wall = await officeWall.loadPositionWall(holder.popid, 6);
+      if (wall && wall.error) wallError = wall.error;
+      else posts = (wall && wall.posts) || [];
+    } catch (e) {
+      wallError = e.message;
+    }
+  }
+  const pack = districtPackRef(agentDir, cycle, officeMap, ROOT);
+  return weekCarryBlock({ posts, wallError, packPath: pack.path, lever: pack.lever });
+}
+
+// ---------------------------------------------------------------------------
 // Stage: prep
 // ---------------------------------------------------------------------------
 
@@ -595,8 +700,9 @@ async function runPrep() {
       L.push('', '## DECISION 1 — Set the cycle\'s direction', '', 'No initiative demands action and no crisis forces your hand this cycle. Say what the city should make of that — where your attention goes when nothing is on fire.', '', 'No decision is not an option this cycle.');
     }
 
+    const week = await loadWeekCarry(officeMap, dir, cycle);
     const outPath = path.join(PACKETS, dir + '_pending_decisions_c' + cycle + '.md');
-    fs.writeFileSync(outPath, L.join('\n') + '\n');
+    fs.writeFileSync(outPath, spliceWeekCarry(L.join('\n'), week).replace(/\s+$/, '') + '\n');
     written.push({ dir, path: path.relative(ROOT, outPath), topics: topics.length });
   }
 
@@ -1426,6 +1532,36 @@ function datawakeRota(officeMap, limit) {
   return seats.slice(0, limit);
 }
 
+// Pack + lever last: the prior wiki wall used to sit immediately before the
+// output schema, so the model reused old stated: lines instead of this week's
+// task.goal (civic.17 Task 4 / Ashford D7, 2026-08-15).
+function datawakeUserPrompt(pack, wallInj, office) {
+  const hay = JSON.stringify(pack);
+  const lever = String(
+    (pack && pack.task && pack.task.goal) ||
+    (pack && pack.pulse && pack.pulse.lever) ||
+    ''
+  ).trim();
+  return [
+    wallInj || '',
+    'Prior wall is continuity only. Do not reuse its wording as this week\'s statement.',
+    lever ? 'THIS WEEK\'S LEVER (respond to this): ' + lever : '',
+    hay,
+    'JSON only: {"office":"' + voiceSlug(office.agentDir) + '","holder":"' + office.holder + '","statement":"","action":null,"numberMoved":""}',
+    'statement is one string that answers THIS WEEK\'S LEVER from the pack. Not a statement object. Not a prior-wall quote.',
+  ].join('\n');
+}
+
+function datawakeStatementText(cand) {
+  if (!cand) return '';
+  if (typeof cand.statement === 'string') return cand.statement.trim();
+  const o = cand.statement;
+  if (o && typeof o === 'object') {
+    return String(o.fullStatement || o.quote || o.text || '').trim();
+  }
+  return '';
+}
+
 // Numeric grounding: every digit-token in a datawake's output must appear in
 // the office's own data slice (commas stripped). Worded quantities ("seven
 // neighborhoods") pass; invented statistics ("renewals up 8%") don't — this
@@ -1510,11 +1646,7 @@ async function runDatawake() {
       log('pack ' + path.relative(ROOT, packFile));
       const hay = JSON.stringify(pack);
       const wallInj = await positionWallInject(officeMap, office.agentDir);
-      const user = [
-        hay,
-        wallInj || '',
-        'JSON only: {"office":"' + voiceSlug(office.agentDir) + '","holder":"' + office.holder + '","statement":"","action":null,"numberMoved":""}',
-      ].join('\n');
+      const user = datawakeUserPrompt(pack, wallInj, office);
       const persona = readPersonaDir(office.agentDir);
       let j = null;
       let attemptUser = user;
@@ -1524,12 +1656,14 @@ async function runDatawake() {
         try { cand = JSON.parse(stripFences(r.text)); } catch (_) { cand = null; }
         // kimi-k2 returned empty content on the first live IND wake (same class
         // as the glm-4.7 bake-off failure) — JSON.parse('') / 'null' yields null.
-        if (!cand || typeof cand !== 'object' || !cand.statement) {
+        const statement = datawakeStatementText(cand);
+        if (!cand || typeof cand !== 'object' || !statement) {
           if (attempt === 2) throw new Error('no usable JSON statement after retry (model returned empty/invalid content)');
           log(office.agentDir + ' attempt ' + attempt + ': empty/invalid model output — retrying');
           attemptUser = user + '\n\nYOUR PREVIOUS ATTEMPT RETURNED NO USABLE JSON. Respond with ONLY the JSON object described above.';
           continue;
         }
+        cand.statement = statement;
         const bad = ungroundedNumbers(hay, [cand.statement, cand.action, cand.numberMoved], { district: office.district, cycle });
         if (!bad.length) { j = cand; break; }
         log(office.agentDir + ' attempt ' + attempt + ': ungrounded number(s) ' + bad.join(', '));
@@ -1593,4 +1727,4 @@ if (require.main === module) {
     .catch(err => { console.error('[civic] Fatal:', err.message); process.exit(1); });
 }
 
-module.exports = { sentimentWord, crimeWord, retailWord, ailmentPerception, cleanLines, parseApprovalTable, parseHoodTable, outputContract };
+module.exports = { sentimentWord, crimeWord, retailWord, ailmentPerception, cleanLines, parseApprovalTable, parseHoodTable, outputContract, datawakeUserPrompt, datawakeStatementText, districtPackRef, weekCarryBlock, spliceWeekCarry, loadWeekCarry };

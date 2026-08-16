@@ -16,7 +16,19 @@ const A = new Function(approvalSource + '\nreturn {' +
   'getApprovalCeilingConfig_: getApprovalCeilingConfig_,' +
   'resolveApprovalCeilingLifecycle_: resolveApprovalCeilingLifecycle_,' +
   'applyApprovalCeilingRisk_: applyApprovalCeilingRisk_,' +
-  'updateCivicApprovalRatings_: updateCivicApprovalRatings_' +
+  'updateCivicApprovalRatings_: updateCivicApprovalRatings_,' +
+  'classifyInitiativeMotion_: classifyInitiativeMotion_,' +
+  'approvalDeltaForInitiative_: approvalDeltaForInitiative_,' +
+  'isPerforming_: isPerforming_,' +
+  'isFailing_: isFailing_,' +
+  'shouldLeaveOffice_: shouldLeaveOffice_,' +
+  'shouldStartCampaign_: shouldStartCampaign_,' +
+  'parseCampaignNote_: parseCampaignNote_,' +
+  'stripCampaignNote_: stripCampaignNote_,' +
+  'formatCampaignNote_: formatCampaignNote_,' +
+  'pickCampaignChallenger_: pickCampaignChallenger_,' +
+  'scoreLedgerCitizenForOffice_: scoreLedgerCitizenForOffice_,' +
+  'challengerDialStateJson_: challengerDialStateJson_' +
   '};')();
 const electionSource = fs.readFileSync(
   path.resolve(__dirname, '../phase05-citizens/runCivicElectionsv1.js'), 'utf8'
@@ -198,6 +210,141 @@ console.log('═══ E. Every-Cycle writer integration');
   };
   check('E5 missing owned-state column fails loud', throws(() =>
     A.updateCivicApprovalRatings_(missingHeaderCtx), /missing AutoScandalSource/));
+}
+
+console.log('═══ F. v1.3 motion physics — nothing free, silence costs most');
+{
+  check('F1 only complete is performing',
+    A.isPerforming_('complete') === true &&
+    A.isPerforming_('operational') === false &&
+    A.isPerforming_('disbursement-active') === false &&
+    A.isPerforming_('construction-active') === false &&
+    A.isPerforming_('pilot-active') === false &&
+    A.isPerforming_('construction-planning') === false &&
+    A.isPerforming_('visioning-complete') === false);
+  check('F2 fail phases stay fail',
+    A.isFailing_('stalled') && A.isFailing_('blocked') && !A.isFailing_('operational'));
+  check('F3 overdue or unscheduled is silence',
+    A.classifyInitiativeMotion_('construction-planning', 103, 104) === 'silence' &&
+    A.classifyInitiativeMotion_('operational', null, 103) === 'silence');
+  check('F4 due-this-cycle live phase is sitting, not a win',
+    A.classifyInitiativeMotion_('disbursement-active', 103, 103) === 'sitting' &&
+    A.classifyInitiativeMotion_('pilot-active', 104, 103) === 'sitting');
+  check('F5 complete and fail classify first',
+    A.classifyInitiativeMotion_('complete', 90, 104) === 'complete' &&
+    A.classifyInitiativeMotion_('stalled', 90, 104) === 'failed');
+  check('F6 only complete (or opposed-fail) can raise',
+    A.approvalDeltaForInitiative_('complete', true, false).delta === 3 &&
+    A.approvalDeltaForInitiative_('failed', false, true).delta === 1 &&
+    A.approvalDeltaForInitiative_('sitting', true, false).delta === -2 &&
+    A.approvalDeltaForInitiative_('silence', true, false).delta === -6 &&
+    A.approvalDeltaForInitiative_('sitting', false, false).delta < 0 &&
+    A.approvalDeltaForInitiative_('silence', false, false).delta <
+      A.approvalDeltaForInitiative_('sitting', true, false).delta);
+  check('F7 silence is the biggest owner drain',
+    A.approvalDeltaForInitiative_('silence', true, false).delta <
+      A.approvalDeltaForInitiative_('failed', true, false).delta &&
+    A.approvalDeltaForInitiative_('failed', true, false).delta <
+      A.approvalDeltaForInitiative_('sitting', true, false).delta);
+
+  // C103-shaped mayor: 4 live-sounding + 2 planning, all due this cycle → sitting, not +12.
+  const c103 = [
+    { motion: 'sitting' }, { motion: 'sitting' }, { motion: 'sitting' },
+    { motion: 'sitting' }, { motion: 'sitting' }, { motion: 'sitting' }
+  ].reduce((n, i) => n + A.approvalDeltaForInitiative_(i.motion, true, false).delta, 0);
+  check('F8 C103-style six sitters cannot raise a mayor', c103 === -12, String(c103));
+
+  const silentSunday = [
+    { motion: 'silence' }, { motion: 'silence' }, { motion: 'silence' },
+    { motion: 'silence' }, { motion: 'silence' }, { motion: 'silence' }
+  ].reduce((n, i) => n + A.approvalDeltaForInitiative_(i.motion, true, false).delta, 0);
+  check('F9 six silences drop a mayor off the ceiling in one cycle',
+    95 + silentSunday + (-1) <= 58, String(95 + silentSunday - 1));
+}
+
+console.log('═══ G. v1.4 leave office — unfit node leaves the chair');
+{
+  check('G1 crossing below 20 unseats',
+    A.shouldLeaveOffice_('active', 18, 22, 0) === true);
+  check('G2 already low and still silent unseats',
+    A.shouldLeaveOffice_('active', 10, 12, 2) === true);
+  check('G3 already low but they moved (no silence) stays',
+    A.shouldLeaveOffice_('active', 16, 18, 0) === false);
+  check('G4 above 20 never unseats',
+    A.shouldLeaveOffice_('active', 58, 95, 6) === false);
+  check('G5 vacant seat is not unseated twice',
+    A.shouldLeaveOffice_('vacant', 10, 10, 6) === false);
+}
+
+console.log('═══ H. v1.5 demotion campaign — the drop is the vote');
+{
+  check('H1 campaign starts below 40',
+    A.shouldStartCampaign_('active', 39, null) === true &&
+    A.shouldStartCampaign_('active', 40, null) === false);
+  check('H2 existing campaign is not replaced',
+    A.shouldStartCampaign_('active', 22, { pop: 'POP-1', name: 'A', since: 100 }) === false);
+  const note = A.formatCampaignNote_({ pop: 'POP-00999', name: 'Test Challenger', since: 104 }, 'old note');
+  const parsed = A.parseCampaignNote_(note);
+  check('H3 campaign note round-trips',
+    parsed && parsed.pop === 'POP-00999' && parsed.name === 'Test Challenger' && parsed.since === 104);
+  check('H4 strip leaves the rest',
+    A.stripCampaignNote_(note) === 'old note');
+
+  const headers = ['POPID', 'First', 'Last', 'FullName', 'Tier', 'Neighborhood', 'CIV (y/n)', 'Status', 'TierRole'];
+  const ledger = {
+    headers,
+    rows: [
+      ['POP-00034', 'Avery', 'Santana', 'Avery Santana', 1, 'Downtown', 'y', 'active', 'Mayor'],
+      ['POP-00901', 'Local', 'Organizer', 'Local Organizer', 3, 'Fruitvale', 'n', 'active', 'community organizer'],
+      ['POP-00902', 'Far', 'Away', 'Far Away', 2, 'Montclair', 'n', 'active', 'mechanic'],
+      ['POP-00900', 'Better', 'Local', 'Better Local', 2, 'Fruitvale', 'n', 'active', 'educator']
+    ]
+  };
+  const pick = A.pickCampaignChallenger_(
+    { ledger }, 'D3', 'POP-00034', { 'POP-00034': true }
+  );
+  check('H5 prefers local civic-adjacent over remote higher tier',
+    pick && pick.popId === 'POP-00900', JSON.stringify(pick));
+  const again = A.pickCampaignChallenger_(
+    { ledger }, 'D3', 'POP-00034', { 'POP-00034': true }
+  );
+  check('H6 pick is deterministic', again && again.popId === pick.popId);
+
+  const dialsOk = JSON.stringify({
+    base: { drive: 72, integrity: 68, composure: 64, sociability: 50, warmth: 50, openness: 50, family: 50, outabout: 50 },
+    streak: {}
+  });
+  const dialsLowDrive = JSON.stringify({
+    base: { drive: 30, integrity: 68, composure: 64, sociability: 50, warmth: 50, openness: 50, family: 50, outabout: 50 },
+    streak: {}
+  });
+  const scoreHeaders = headers.concat(['DialState', 'BirthYear', 'RoleType']);
+  const fit = ['POP-00910', 'Fit', 'Local', 'Fit Local', 3, 'Fruitvale', 'n', 'active', '', dialsOk, 1988, 'community organizer'];
+  const lazy = ['POP-00911', 'Lazy', 'Local', 'Lazy Local', 3, 'Fruitvale', 'n', 'active', '', dialsLowDrive, 1988, 'community organizer'];
+  check('H7 low-Drive citizen is not built to run',
+    A.scoreLedgerCitizenForOffice_(lazy, scoreHeaders, 'D3', 'POP-00034', {}) === null);
+  check('H8 high-Drive principled local scores',
+    !!(A.scoreLedgerCitizenForOffice_(fit, scoreHeaders, 'D3', 'POP-00034', {})));
+
+  const emptyPool = {
+    headers,
+    rows: [
+      ['POP-00034', 'Avery', 'Santana', 'Avery Santana', 1, 'Downtown', 'y', 'active', 'Mayor']
+    ]
+  };
+  const minted = A.pickCampaignChallenger_(
+    { ledger: emptyPool }, 'D3', 'POP-00034', { 'POP-00034': true }, 'COUNCIL-D3', 104
+  );
+  check('H9 empty qualified pool mints an out-of-town challenger',
+    minted && minted.origin === 'out-of-town' && /^POP-/.test(minted.popId), JSON.stringify(minted));
+  check('H10 mint is deterministic',
+    A.pickCampaignChallenger_(
+      { ledger: { headers, rows: [emptyPool.rows[0].slice()] } }, 'D3', 'POP-00034', { 'POP-00034': true }, 'COUNCIL-D3', 104
+    ).name === minted.name);
+  const defaults = JSON.parse(A.challengerDialStateJson_());
+  check('H11 out-of-town defaults pump Drive/Integrity/Composure and dump Family',
+    defaults.base.drive >= 70 && defaults.base.integrity >= 60 &&
+    defaults.base.composure >= 60 && defaults.base.family < 50);
 }
 
 console.log(`\n${passed}/${passed + failed} passed`);

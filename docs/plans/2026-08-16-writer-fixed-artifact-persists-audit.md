@@ -152,6 +152,34 @@ because they are safe — identical POST-only code, less traffic. `wd-faith` has
 already produced its first duplicate. Treat them as preventative work, not as
 evidence the pattern is optional.
 
+### Root cause of the volume — the daemon retry loop, not manual wipes
+
+The census numbers track rebuild *frequency*, not anything about the four
+projections' code, which is identical. `wdCardsDaemon.js` explains the volume:
+
+- `runBuilder` (L184-199) has always treated a builder as failed on
+  `/Errors:\s*[1-9]/` **in stdout**, independent of exit code. So the daemon was
+  already detecting write errors before any of the exit-code gates existed.
+- On failure it does not commit that chunk's row hashes, and re-dispatches the
+  same IDs next tick (`dispatchProjection`, L205+ — deliberate partial-progress
+  drain, the S252 storm fix).
+- Pre-fix the builders were POST-only. So **every retry tick wrote a fresh
+  duplicate document for every ID in the failing chunk.** One stuck ID in a
+  20-ID chunk added ~20 surplus docs per tick.
+
+That is the accumulation engine, and it explains the census ordering exactly:
+`wd-business` (chunked dispatch, highest rebuild traffic) worst at 4.39x,
+`wd-cultural` next at 2.07x, and the three low-traffic projections clean. It also
+means the surplus was never mostly about `--wipe-old` failing during occasional
+manual runs — that was the symptom that surfaced it, not the volume driver.
+
+**This makes PATCH-if-exists load-bearing rather than tidy, and it means the two
+halves of the fix had to ship together.** An exit-code gate *without* PATCH would
+have made things worse: more accurate failure signalling → more daemon retries →
+more duplicate POSTs per retry. With PATCH, a retry is idempotent — it refreshes
+the existing document instead of adding one. Any future work on Half B should
+check the same interaction before adding a gate to a POST-only writer.
+
 **A third sub-class exists and is NOT counted here.** civic.20 §11.3a's `ensure*`
 finding is about **sheet rows**, not Supermemory documents — different store,
 different failure mode (no HTTP status, no delete API), different owner. Folding
@@ -189,4 +217,5 @@ built inline, per this plan's own instruction.
 - 2026-08-16 — Initial draft, filed off a cross-lane message from engine-sheet (S375, research-build) naming the pattern after engine.110 and civic.20 §11.3a surfaced it twice in one night.
 - 2026-08-16 — Tasks 1–3 executed (S376, engine-sheet). §Findings added; 38 candidates → 8 instances in two halves; rows engine.111 / engine.112 / governance.49 filed.
 - 2026-08-16 — §Census added (S376, engine-sheet). All six projections counted: 386 surplus docs, wd-business worst at 4.39x. wd-citizens 1.00 proves PATCH is the cause.
+- 2026-08-16 — Root cause traced to the wdCardsDaemon retry loop over POST-only writers (S376, engine-sheet). Gate-without-PATCH would have made it worse; the two halves had to ship together.
 - 2026-08-16 — Both open questions resolved (S375, research-build): grouped rows ratified, census greenlit inside engine.111. governance.48 swept to ROLLOUT_ARCHIVE — this plan stays open, engine.111/112/governance.49 still point here.

@@ -157,8 +157,57 @@ cover Glenview and no Tier-5 there could ever ascend. The `INSTITUTIONS`
 §Neighborhoods pass is therefore not decoration ahead of this build — **it is the
 fuel supply for the promotion path** Task 1 reopens.
 
+## 6. Card-layer drift — `--wipe-old` fails silently and has been stacking versions
+
+Found while closing the research.27 CUL mint (2026-08-16). Not intake work, but it
+sits on the same canon-authority seam and it is live.
+
+`buildCulturalCards.js --apply --wipe-old` reported **78 ok / 14 failed** on the
+delete pass, then wrote 46 cards with 0 errors and **exited 0**. The failures are
+reported and then ignored, so a caller sees success.
+
+The consequence compounds across runs. Sampling one figure after the rebuild:
+
+| CUL-66EDE7C6 "Lumi Crest" | card `updatedAt` |
+|---|---|
+| tonight's write | 2026-08-16 |
+| survived a prior wipe | 2026-08-10 |
+| survived an earlier wipe | 2026-04-28 |
+
+**Three cards for one figure, spanning four months.** So `--wipe-old` has been
+partially failing for a long time and the card layer has been *accumulating*
+versions rather than replacing them.
+
+**Why it matters beyond tidiness.** The canon authority model is Sheets = truth,
+Supermemory = derived cards. A derived layer holding three versions of the same
+figure is not derived, it is archaeological — and agents *search* it. Retrieval
+returns whichever version ranks highest by similarity, not whichever is true, so a
+desk can be handed a stale fame score or an obsolete role with no signal that a
+newer card exists.
+
+**One instance was actively canon-contradicting and has been purged.** The stale
+`CUL-5F7A348B` card still read "Councilwoman Rivera" after the sheet was corrected
+to Marisol Rivera / Community Advocate — a fake councilmember sitting in the layer
+that civic-adjacent retrieval reads. Deleted by targeted ID after confirming the
+document content carried *both* the ruled-against phrase and the matching CUL-ID
+(never a blanket phrase delete). Verified 0 remaining.
+
+**Not fixed, deliberately.** A full card-layer dedupe across 46 figures and an
+unknown number of historical versions is its own job with its own blast radius, and
+the delete API is already the thing failing. Two things it needs: a **non-zero exit
+or loud failure when `--wipe-old` cannot delete**, so this stops being silent, and a
+**reconcile pass** that finds every CUL-ID holding more than one card and keeps the
+newest. Same shape as the `ensure*` finding in
+[[2026-08-15-civic-edge-truth-migration]] §11.3a — an artifact the writer stopped
+producing but never removes.
+
 ## Changelog
 
+- 2026-08-16 (engine-sheet) — §6 added: `--wipe-old` fails silently (78 ok / 14
+  failed, exit 0) and has been stacking card versions for months — Lumi Crest holds
+  three cards dated April, 10 Aug and tonight. Purged the one actively
+  canon-contradicting card ("Councilwoman Rivera" surviving the rename). Dedupe and
+  a loud-failure exit left as filed work.
 - 2026-08-16 (engine-sheet) — Plan created. Tier model recorded; the
   relationally-hollow reading withdrawn as a sample-vs-completeness error; the
   S205/S320 collision identified as a structurally dead media-promotion path;

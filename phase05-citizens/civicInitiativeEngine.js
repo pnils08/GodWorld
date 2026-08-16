@@ -2004,7 +2004,8 @@ function manualRunVote(initiativeId) {
 
   // Build minimal context
   var now = new Date();
-  var configSheet = ss.getSheetByName('Simulation_Config');
+  // infrastructure.6 Track B: was ghost 'Simulation_Config' — renamed World_Config
+  var configSheet = ss.getSheetByName('World_Config');
   var cycleCount = 0;
   if (configSheet) {
     var configData = configSheet.getDataRange().getValues();
@@ -2029,17 +2030,8 @@ function manualRunVote(initiativeId) {
     }
   };
 
-  // Try to get actual sentiment from City_Dynamics
-  var dynamicsSheet = ss.getSheetByName('City_Dynamics');
-  if (dynamicsSheet) {
-    var dynData = dynamicsSheet.getDataRange().getValues();
-    for (var d = 0; d < dynData.length; d++) {
-      if (dynData[d][0] === 'Sentiment' || dynData[d][0] === 'sentiment') {
-        ctx.summary.cityDynamics.sentiment = Number(dynData[d][1]) || 0;
-        break;
-      }
-    }
-  }
+  // City_Dynamics ghost-read removed (infrastructure.6 Track B): the tab never
+  // existed — sentiment stays at the default 0 set above.
 
   // Get council state
   var councilState = getCouncilState_(ctx);

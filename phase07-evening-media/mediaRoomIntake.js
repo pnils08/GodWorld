@@ -563,7 +563,6 @@ function routeCitizenUsageToIntake_(ctx, ss, cycle, cal) {
   // Get target sheets
   var intakeSheet = ss.getSheetByName('Intake');
   var advSheet = ss.getSheetByName('Advancement_Intake1');
-  if (!advSheet) advSheet = ss.getSheetByName('Advancement_Intake');
   if (!advSheet) {
     // Lazy-create: pipeline self-heals if tab was reset/migrated.
     // Schema matches the appendRow shape below (10 cols A–J).
@@ -881,8 +880,8 @@ function logCulturalMention_(ss, cycle, journalist, entityName, cal) {
 
 
 function flagCitizenForTierReview_(ss, citizenName, cycle, usageType) {
-  // Add to Advancement_Intake if profiled/featured
-  var advSheet = ss.getSheetByName('Advancement_Intake');
+  // Add to Advancement_Intake1 if profiled/featured
+  var advSheet = ss.getSheetByName('Advancement_Intake1');
   if (!advSheet) return;
 
   // Check if already flagged
@@ -1304,7 +1303,6 @@ function processCategoryEntries_(ss, entries, category, ledgerData, cycle, cal, 
 
   var intakeSheet = ss.getSheetByName('Intake');
   var advSheet = ss.getSheetByName('Advancement_Intake1');
-  if (!advSheet) advSheet = ss.getSheetByName('Advancement_Intake');
 
   for (var i = 0; i < entries.length; i++) {
     var citizen = entries[i];
@@ -1356,7 +1354,6 @@ function processQuotedCitizens_(ss, entries, ledgerData, cycle, cal, results) {
 
   var intakeSheet = ss.getSheetByName('Intake');
   var advSheet = ss.getSheetByName('Advancement_Intake1');
-  if (!advSheet) advSheet = ss.getSheetByName('Advancement_Intake');
   var logSheet = ss.getSheetByName('LifeHistory_Log');
 
   for (var i = 0; i < entries.length; i++) {

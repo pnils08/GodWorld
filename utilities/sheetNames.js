@@ -45,7 +45,6 @@ var SHEET_NAMES = {
   CITIZEN_USAGE_INTAKE: 'Citizen_Usage_Intake',
   // CONTINUITY_INTAKE: removed — pipeline eliminated
   MEDIAROOM_PASTE: 'MediaRoom_Paste',
-  ADVANCEMENT_INTAKE: 'Advancement_Intake',
   INTAKE: 'Intake',
 
   // === Cycle Output ===
@@ -64,7 +63,11 @@ var SHEET_NAMES = {
 
   // === Dashboard/Feeds ===
   DASHBOARD: 'Dashboard',
-  SPORTS_FEED: 'Sports_Feed',
+  // CHICAGO_FEED stays: Chicago_Feed is a LIVE tab, not a ghost —
+  // phase08-v3-chicago/v3ChicagoWriter.js ensures/writes it every cycle, and
+  // cycleExportAutomation + cycleRollback + auditSheetHeaders all reference it.
+  // It was never on the infrastructure.6 ghost list. (SPORTS_FEED above WAS a
+  // ghost — no such tab, no consumers — and is correctly gone.)
   CHICAGO_FEED: 'Chicago_Feed',
   OAKLAND_SPORTS_FEED: 'Oakland_Sports_Feed',
   CHICAGO_SPORTS_FEED: 'Chicago_Sports_Feed',

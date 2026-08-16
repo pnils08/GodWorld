@@ -505,7 +505,6 @@ function processAdvancementRows_(ctx, now, cycle) {
   var results = { processed: 0 };
   
   var intakeSheet = ss.getSheetByName('Advancement_Intake1');
-  if (!intakeSheet) intakeSheet = ss.getSheetByName('Advancement_Intake');
   if (!intakeSheet) return results;
   
   // Phase 42 §5.6: read SL from shared ctx.ledger; mutations land in place;
@@ -1050,7 +1049,6 @@ function checkEmergencePromotions_(ss, cycle, maxQueue) {
   if (gF < 0 || gL < 0 || gE < 0) return results;
 
   var advSheet = ss.getSheetByName('Advancement_Intake1');
-  if (!advSheet) advSheet = ss.getSheetByName('Advancement_Intake');
   if (!advSheet) {
     advSheet = ss.insertSheet('Advancement_Intake1');
     advSheet.appendRow(['First', 'Middle', 'Last', 'RoleType', 'Tier', 'ClockMode', 'CIV', 'MED', 'UNI', 'Notes']);
@@ -1221,7 +1219,6 @@ function checkFamilyMatchPromotions_(ctx, cycle, slots) {
 
   // ── Intake sheet + extra columns the family door rides on ──
   var advSheet = ss.getSheetByName('Advancement_Intake1');
-  if (!advSheet) advSheet = ss.getSheetByName('Advancement_Intake');
   if (!advSheet) {
     advSheet = ss.insertSheet('Advancement_Intake1');
     advSheet.appendRow(['First', 'Middle', 'Last', 'RoleType', 'Tier', 'ClockMode', 'CIV', 'MED', 'UNI', 'Notes']);

@@ -22,14 +22,15 @@
  *
  * Features:
  * - Chicago-specific weather (colder, lake effect, more snow)
- * - Independent sentiment drift (reacts to Bulls results from Game_Intake)
+ * - Independent sentiment drift (Bulls season from Sports Clock)
  * - Cycle-based calendar integration
  * - Holiday awareness (national holidays affect Chicago too)
  * - Bulls season awareness from Sports Clock
  * - Rich event pool (no auto-sports)
  *
  * SPORTS ARE NOT SIMULATED.
- * All sports content comes from Game_Intake (user gameplay).
+ * Sports output is empty — the Game_Intake ghost-read was removed
+ * (infrastructure.6 Track B, 2026-08-16); the tab never existed.
  *
  * Provides CONTEXT for journalists, not stories.
  *
@@ -280,11 +281,11 @@ function calculateChicagoSentiment_(ctx, weather, holiday, holidayPriority, bull
     sentiment += 0.1;
   }
 
-  // ═══════════════════════════════════════════════════════════
-  // BULLS PERFORMANCE (from Game_Intake)
-  // ═══════════════════════════════════════════════════════════
-  var bullsImpact = getBullsSentimentImpact_(ctx);
-  sentiment += bullsImpact;
+  // BULLS PERFORMANCE term removed with getBullsSentimentImpact_
+  // (infrastructure.6 Track B): its only data source was the ghost Game_Intake
+  // tab, which does not exist, so the function always returned 0 and the term
+  // was a no-op. Deleting the function without this caller left a call to an
+  // undefined symbol — both halves have to go together.
 
   // Random daily fluctuation
   sentiment += (rng() - 0.5) * 0.1;
@@ -295,80 +296,6 @@ function calculateChicagoSentiment_(ctx, weather, holiday, holidayPriority, bull
   sentiment = Math.round(sentiment * 100) / 100;
 
   return sentiment;
-}
-
-
-/**
- * ============================================================================
- * BULLS SENTIMENT IMPACT
- * Reads recent Bulls games from Game_Intake and calculates mood shift
- * ============================================================================
- */
-function getBullsSentimentImpact_(ctx) {
-  // Defensive guard
-  if (!ctx || !ctx.ss) return 0;
-
-  var ss = ctx.ss;
-  var sheet = ss.getSheetByName('Game_Intake');
-  if (!sheet) return 0;
-
-  var data = sheet.getDataRange().getValues();
-  if (data.length < 2) return 0;
-
-  var header = data[0];
-  var idxGame = header.indexOf('Game');
-  var idxEventType = header.indexOf('EventType');
-  var idxDetails = header.indexOf('Details');
-  var idxCycle = header.indexOf('Cycle');
-
-  if (idxGame < 0) return 0;
-
-  var currentCycle = (ctx.summary && ctx.summary.absoluteCycle) || (ctx.summary && ctx.summary.cycleId) || (ctx.config && ctx.config.cycleCount) || 0;
-  var recentWindow = 10; // Look back 10 cycles
-
-  var wins = 0;
-  var losses = 0;
-  var bigMoments = 0; // playoffs, championships, trades
-
-  for (var r = 1; r < data.length; r++) {
-    var row = data[r];
-    var game = (row[idxGame] || '').toString().toLowerCase();
-    var eventType = (row[idxEventType] || '').toString().toLowerCase();
-    var details = (row[idxDetails] || '').toString().toLowerCase();
-    var cycle = Number(row[idxCycle] || 0);
-
-    // Only count Bulls-related entries
-    if (game.indexOf('bulls') === -1 && game.indexOf('nba 2k') === -1) continue;
-
-    // Only count recent cycles
-    if (currentCycle - cycle > recentWindow) continue;
-
-    // Count outcomes
-    if (eventType.indexOf('win') !== -1 || details.indexOf('win') !== -1 || details.indexOf('victory') !== -1) {
-      wins++;
-    }
-    if (eventType.indexOf('loss') !== -1 || details.indexOf('loss') !== -1 || details.indexOf('defeat') !== -1) {
-      losses++;
-    }
-    if (details.indexOf('playoff') !== -1 || details.indexOf('championship') !== -1 || details.indexOf('finals') !== -1) {
-      bigMoments++;
-    }
-  }
-
-  // Calculate sentiment shift
-  var impact = 0;
-
-  // Win/loss differential
-  impact += (wins - losses) * 0.05;
-
-  // Big moments boost
-  impact += bigMoments * 0.1;
-
-  // Cap the impact
-  if (impact > 0.3) impact = 0.3;
-  if (impact < -0.3) impact = -0.3;
-
-  return impact;
 }
 
 

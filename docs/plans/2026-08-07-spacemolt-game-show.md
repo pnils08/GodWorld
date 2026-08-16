@@ -27,7 +27,7 @@ pointers:
 
 **Lottery mechanics:**
 
-- **Eligibility filter (v1, deliberately wide):** living adult ledger citizens currently residing in Oakland. Excludes minors, the traded/dead/moved-away (legacy-ledger categories), and sitting elected officials. Tribune staff stay eligible — the coverage-firewall gag is texture, not a blocker. Filter computes from ledger fields only; no judgment calls at draw time.
+- **Eligibility filter (v1, deliberately wide):** living adult ledger citizens currently residing in Oakland. Excludes minors and the traded/dead/moved-away (legacy-ledger categories). Sitting officeholders are NOT excluded (Mike-direct 2026-08-16, ruled after the draw pulled DA Clarissa Dane: "fair game"). Tribune staff stay eligible — the coverage-firewall gag is texture, not a blocker. Filter computes from ledger fields only; no judgment calls at draw time.
 - **Draw mechanism:** deterministic seeded RNG. Seed = show identifier + draw sequence number + cycle; input = the frozen eligible-POPID snapshot; output = 2–4 cast members plus a ranked alternate list that feeds succession. Seed, snapshot, and result are all recorded so any draw is reproducible and auditable. Code draws; the newsroom narrates.
 - **Mike approves the eligibility filter and draw parameters — never individual names; the draw decides.** Routing: the proposal goes to research-build, who takes it to Mike — rb does not decide policy solo. Build execution between decisions does not wait on step-by-step Mike direction (Mike-direct 2026-08-15, clarified same day: execution pace only, not build authority).
 
@@ -145,3 +145,4 @@ pointers:
 - 2026-08-16 (research-build) — 0.4 telemetry source decided (get_action_log, verified live). Phase 2.1 adapter assigned to grok — real spec now buildable, was blocked on this.
 - 2026-08-16 (research-build) — Phase 3.1 designed (Mike-direct: assign a real reporter). Dedicated beat, not folded into culture-desk; voice/data-contract/cadence spec'd. Assigned to grok to draft.
 - 2026-08-16 (research-build) — F4 resolved: "evening-events engine" (L101) has zero hits anywhere in repo/docs beyond that phrase — no competing mechanism was ever built. Built 2.1-2.3 realizes that note, doesn't contradict it. ef3e3d71 stands.
+- 2026-08-16 (Mike-direct) — F7 ruled: sitting officeholders are eligible for the lottery. DA Clarissa Dane (POP-00143, drawn) stays in the cast. Eligibility filter updated.

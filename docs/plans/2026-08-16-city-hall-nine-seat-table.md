@@ -231,7 +231,7 @@ Prep packets stop using the “CRC bloc (Crane, Ashford, Chen)” header for a s
   1. Sunday contract + gavel-only `trackerUpdates` + 9-seat vote math + IND-not-a-bloc + tone table.
   2. SKILL boot reads shared RULES then the seat IDENTITY.
 - **Verify:** no holder names except as examples; lint-free of engine words.
-- **Status:** [ ] drafted on disk 2026-08-16 (grok) — not committed. Claude lands with CLAUDE_CTL.
+- **Status:** [x] DONE 2026-08-16 — landed `7cecaa94` (Claude, CLAUDE_CTL).
 - **Lane:** Claude (control plane)
 
 ### Task 3: Nine thin IDENTITY files
@@ -241,7 +241,7 @@ Prep packets stop using the “CRC bloc (Crane, Ashford, Chen)” header for a s
   1. Split existing faction IDENTITY member sections. No new biography.
   2. Vega IDENTITY names Council President. Crane IDENTITY is written-statement-only if ledger says recovering.
 - **Verify:** each file has one POPID that matches the map; `rg "you are the (CRC|OPP) faction"` is empty in the nine files.
-- **Status:** [ ] drafted on disk 2026-08-16 (grok) — not committed. C103 seat status all active (Crane included). Claude lands with CLAUDE_CTL.
+- **Status:** [x] DONE 2026-08-16 — landed `7cecaa94`. Crane's IDENTITY states C103-active, flags re-check on later ledger read.
 - **Lane:** Claude (control plane)
 
 ### Task 4: Map + weekday rota key `officeId`
@@ -332,6 +332,7 @@ Prep packets stop using the “CRC bloc (Crane, Ashford, Chen)” header for a s
 
 ## Changelog
 
+- 2026-08-16 (research-build) — Tasks 2/3 landed `7cecaa94` (CLAUDE_CTL). Reviewed D1/D6/D7 in full before landing — fact/voice split clean, no caucus-microphone leakage, Crane's status handled without overasserting. Tasks 1-8 now all done; only Task 9 (dry Sunday, needs a new cycle) remains.
 - 2026-08-16 (grok) — Tasks 2/3 drafted on disk under `.claude/agents/civic-office-council-seat/` and `civic-office-council-d{1-9}/`. Not committed. `readPersonaDir` now loads shared LENS+RULES then seat IDENTITY.
 - 2026-08-16 (grok) — Tasks 1, 4, 5, 6, 7, 8 landed. Tasks 2/3 still Claude. Task 9 waits on a new cycle + IDENTITY files. No `--apply`.
 - 2026-08-16 (grok) — Draft for civic.24. D+B: nine seats, Mayor open+gavel, City Hall Ledger disk contract, faction as field not microphone. No code.

@@ -2,7 +2,7 @@
   "_meta": {
     "task": "civic.15 plan Task 0.2 — the civic persona-map (sibling of scripts/persona-map.json)",
     "source": "output/civic-office-ledger-dump_c102.json (35 offices, live-verified S343)",
-    "note": "dataSources are CANDIDATE pointers — verify each against real files/tabs at Phase 3 build before wiring. model stays null until Task 1.2 bake-off. Faction agents cover council rows collectively.",
+    "note": "civic.24: each COUNCIL-D* agentDir is civic-office-council-dN (person mic). Faction is a field, not a shared agentDir. Faction trees remain on disk until Claude retires them.",
     "frictionRule": "mayor, opp, crc, ind must land on different model families at Task 1.2",
     "modelAssignment": {
       "when": "S343 Task 1.2",
@@ -76,7 +76,7 @@
       "district": "D1",
       "faction": "OPP",
       "approval": 95,
-      "agentDir": "civic-office-opp-faction",
+      "agentDir": "civic-office-council-d1",
       "dataDomain": "district-representation",
       "dataSources": [
         "output/world_summary_c{XX}.md §neighborhoods (D1)",
@@ -93,7 +93,7 @@
       "district": "D2",
       "faction": "IND",
       "approval": 59,
-      "agentDir": "civic-office-ind-swing",
+      "agentDir": "civic-office-council-d2",
       "dataDomain": "district-representation",
       "dataSources": [
         "output/world_summary_c{XX}.md §neighborhoods (D2)",
@@ -110,7 +110,7 @@
       "district": "D3",
       "faction": "OPP",
       "approval": 85,
-      "agentDir": "civic-office-opp-faction",
+      "agentDir": "civic-office-council-d3",
       "dataDomain": "district-representation",
       "dataSources": [
         "output/world_summary_c{XX}.md §neighborhoods (D3)",
@@ -127,7 +127,7 @@
       "district": "D4",
       "faction": "IND",
       "approval": 55,
-      "agentDir": "civic-office-ind-swing",
+      "agentDir": "civic-office-council-d4",
       "dataDomain": "district-representation",
       "dataSources": [
         "output/world_summary_c{XX}.md §neighborhoods (D4)",
@@ -144,7 +144,7 @@
       "district": "D5",
       "faction": "OPP",
       "approval": 85,
-      "agentDir": "civic-office-opp-faction",
+      "agentDir": "civic-office-council-d5",
       "dataDomain": "district-representation",
       "dataSources": [
         "output/world_summary_c{XX}.md §neighborhoods (D5)",
@@ -161,7 +161,7 @@
       "district": "D6",
       "faction": "CRC",
       "approval": 55,
-      "agentDir": "civic-office-crc-faction",
+      "agentDir": "civic-office-council-d6",
       "dataDomain": "district-representation",
       "dataSources": [
         "output/world_summary_c{XX}.md §neighborhoods (D6)",
@@ -178,7 +178,7 @@
       "district": "D7",
       "faction": "CRC",
       "approval": 51,
-      "agentDir": "civic-office-crc-faction",
+      "agentDir": "civic-office-council-d7",
       "dataDomain": "district-representation",
       "dataSources": [
         "output/world_summary_c{XX}.md §neighborhoods (D7)",
@@ -195,7 +195,7 @@
       "district": "D8",
       "faction": "CRC",
       "approval": 55,
-      "agentDir": "civic-office-crc-faction",
+      "agentDir": "civic-office-council-d8",
       "dataDomain": "district-representation",
       "dataSources": [
         "output/world_summary_c{XX}.md §neighborhoods (D8)",
@@ -212,7 +212,7 @@
       "district": "D9",
       "faction": "OPP",
       "approval": 55,
-      "agentDir": "civic-office-opp-faction",
+      "agentDir": "civic-office-council-d9",
       "dataDomain": "district-representation",
       "dataSources": [
         "output/world_summary_c{XX}.md §neighborhoods (D9)",

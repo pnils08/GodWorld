@@ -92,6 +92,7 @@ const TOPIC_KEYWORD_TO_INIT = [
 // Voice priority weight (higher = more authoritative for "primary voice").
 // Tie-break: earliest statementId in the input ordering wins.
 const VOICE_PRIORITY = {
+  mayor_gavel: 200,
   mayor: 100,
   project_owner: 80,
   ind_swing: 60,           // Vega / Tran sponsorships often define the floor
@@ -108,7 +109,18 @@ const VOICE_PRIORITY = {
 
 // Voice-file basename → display label for `consolidatedFrom` rendering.
 const VOICE_LABEL = {
+  mayor_gavel: 'Mayor gavel',
+  mayor_open: 'Mayor agenda',
   mayor: 'Mayor',
+  council_d1: 'Carter D1',
+  council_d2: 'Tran D2',
+  council_d3: 'Delgado D3',
+  council_d4: 'Vega D4',
+  council_d5: 'Rivers D5',
+  council_d6: 'Crane D6',
+  council_d7: 'Ashford D7',
+  council_d8: 'Chen D8',
+  council_d9: 'Mobley D9',
   police_chief: 'Chief',
   district_attorney: 'DA',
   opp_faction: 'OPP',
@@ -233,7 +245,17 @@ function buildGroups(voices) {
 // ────────────────────────────────────────────────────────────────────────────
 // Pick primary voice for an initiative
 // ────────────────────────────────────────────────────────────────────────────
+function isGavelVoice(basename) {
+  return basename === 'mayor_gavel';
+}
+function isHearingVoice(basename) {
+  return /^council_d[1-9]$/.test(String(basename || ''));
+}
+
 function pickPrimary(group, init) {
+  // civic.24: mayor_gavel is the only political stamp. Hearing files are minutes.
+  const gavel = group.find(g => isGavelVoice(g.voiceBasename));
+  if (gavel) return gavel;
   // G-R1 (S246 ES-5, RB-4 trackerOwner contract): the statement whose
   // trackerOwner === this initiative is the operational owner — the deterministic
   // primary for the tracker write. The owning project agent (e.g. Webb on
@@ -317,12 +339,22 @@ function buildDecisions(init, group, cycle) {
     },
   };
 
-  // Take primary's structural fields when present
-  if (primaryTU.ImplementationPhase) out.trackerUpdates.ImplementationPhase = primaryTU.ImplementationPhase;
-  const merged = concatMilestoneNotes(group, primary, cycle);
-  if (merged) out.trackerUpdates.MilestoneNotes = merged;
-  if (primaryTU.NextScheduledAction) out.trackerUpdates.NextScheduledAction = primaryTU.NextScheduledAction;
-  if (primaryTU.NextActionCycle) out.trackerUpdates.NextActionCycle = primaryTU.NextActionCycle;
+  // civic.24: ImplementationPhase only from mayor_gavel when that file is in the group.
+  const gavel = group.find(g => isGavelVoice(g.voiceBasename));
+  const phaseSource = gavel ? (gavel.statement.trackerUpdates || {}) : primaryTU;
+  if (gavel) {
+    if (phaseSource.ImplementationPhase) out.trackerUpdates.ImplementationPhase = phaseSource.ImplementationPhase;
+    if (phaseSource.MilestoneNotes) out.trackerUpdates.MilestoneNotes = phaseSource.MilestoneNotes;
+    if (phaseSource.MayoralAction) out.trackerUpdates.MayoralAction = phaseSource.MayoralAction;
+    if (phaseSource.NextScheduledAction) out.trackerUpdates.NextScheduledAction = phaseSource.NextScheduledAction;
+    if (phaseSource.NextActionCycle) out.trackerUpdates.NextActionCycle = phaseSource.NextActionCycle;
+  } else {
+    if (primaryTU.ImplementationPhase) out.trackerUpdates.ImplementationPhase = primaryTU.ImplementationPhase;
+    const merged = concatMilestoneNotes(group, primary, cycle);
+    if (merged) out.trackerUpdates.MilestoneNotes = merged;
+    if (primaryTU.NextScheduledAction) out.trackerUpdates.NextScheduledAction = primaryTU.NextScheduledAction;
+    if (primaryTU.NextActionCycle) out.trackerUpdates.NextActionCycle = primaryTU.NextActionCycle;
+  }
 
   return { slug, payload: out };
 }
@@ -331,7 +363,7 @@ function buildDecisions(init, group, cycle) {
 // logic is unit-testable without running the CLI / reading the voice dir.
 module.exports = {
   loadVoiceFiles, attributeInitiative, voiceFor, priorityFor, buildGroups,
-  pickPrimary, concatMilestoneNotes, buildDecisions,
+  pickPrimary, concatMilestoneNotes, buildDecisions, isGavelVoice, isHearingVoice,
 };
 
 // ────────────────────────────────────────────────────────────────────────────

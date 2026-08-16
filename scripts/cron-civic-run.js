@@ -51,6 +51,8 @@ const getCurrentCycle = require('../lib/getCurrentCycle');
 const officeWall = require('./officeWall');
 const trackerSnapshot = require('./initiativeTrackerSnapshot');
 const { buildPack, writePack } = require('./buildCivicOfficeSlice');
+const civicSeat = require('./civicSeat');
+const cityHallLedger = require('./cityHallLedger');
 
 /** Non-fatal: prior CIVIC positions for holder of agentDir. */
 async function positionWallInject(officeMap, agentDir) {
@@ -564,16 +566,18 @@ async function runPrep() {
     assign('civic-office-mayor', topic);
     assign(owner, topic);
     if (/stabilization/i.test(init.name)) assign('civic-office-okoro', topic);
-    // District routing: initiative hoods -> districts -> faction blocs
-    const blocs = new Set();
+    // District routing: initiative hoods -> that seat's agentDir (civic.24)
+    const seatsHit = new Set();
     for (const hood of init.neighborhoods || []) {
       const d = getDistrictForNeighborhood(hood);
       const seat = d && truesource.council.find(c => c.district === d);
-      if (seat) blocs.add(FACTION_AGENT[seat.faction]);
+      if (seat) seatsHit.add(civicSeat.councilDir(seat.district));
     }
-    // G-R11: a pending vote goes to ALL blocs so all 9 positions surface
-    if (voteReady && (!impl.nextActionCycle || due)) Object.values(FACTION_AGENT).forEach(d => blocs.add(d));
-    for (const b of blocs) assign(b, topic);
+    // G-R11: a pending vote goes to ALL 9 districts
+    if (voteReady && (!impl.nextActionCycle || due)) {
+      civicSeat.councilAgentDirs(officeMap).forEach(d => seatsHit.add(d));
+    }
+    for (const b of seatsHit) assign(b, topic);
   }
 
   // HIGH ailments: hood -> district bloc; initiative -> owner (already above);
@@ -587,7 +591,7 @@ async function runPrep() {
       for (const hood of (p.affectedEntities && p.affectedEntities.neighborhoods) || []) {
         const d = getDistrictForNeighborhood(hood);
         const seat = d && truesource.council.find(c => c.district === d);
-        if (seat) assign(FACTION_AGENT[seat.faction], topic);
+        if (seat) assign(civicSeat.councilDir(seat.district), topic);
       }
       if (/CrimeIndex/i.test(sig)) assign('civic-office-police-chief', topic);
     }
@@ -618,19 +622,21 @@ async function runPrep() {
     const rows = officesByDir[dir];
     if (!rows) { log('skip: assignment for ' + dir + ' but no office-map rows with that agentDir'); continue; }
     const topics = assignments[dir];
-    const isBloc = Object.values(FACTION_AGENT).includes(dir);
+    const isCouncil = civicSeat.isCouncilOffice(rows[0]);
     const citywide = rows.every(r => r.district === 'citywide' || !r.district);
     const L = [];
 
-    if (isBloc) {
-      const members = truesource.council.filter(c => FACTION_AGENT[c.faction] === dir);
-      L.push('# Pending Decisions — ' + rows[0].faction + ' bloc (' + members.map(m => m.name.split(' ').pop() + ' ' + m.district).join(', ') + ') — Cycle ' + cycle);
+    if (isCouncil) {
+      const o = rows[0];
+      L.push('# Pending Decisions — ' + o.title + ' ' + o.holder + ' — Cycle ' + cycle);
       L.push('');
       L.push('## Live roster status (whip-read off THIS, not memory)');
       for (const m of truesource.council) {
         L.push('- ' + m.district + ' ' + m.name + ' (' + m.faction + ') — ' + m.status.toUpperCase() + (m.status !== 'active' ? ' (named absentee, not voting)' : '') + (approvals[m.name] ? '. Approval ' + approvals[m.name].approval + (approvals[m.name].delta ? ' (' + (approvals[m.name].delta > 0 ? 'up' : 'down') + ' ' + Math.abs(approvals[m.name].delta) + ' since last cycle)' : ' (holding)') : ''));
       }
       L.push('- Full council: ' + activeSeats + ' active of 9 → a majority is ' + (Math.floor(activeSeats / 2) + 1) + '.');
+      const appr = approvals[o.holder];
+      if (appr) L.push('Your approval stands at ' + appr.approval + (appr.delta ? ' — ' + (appr.delta > 0 ? 'up' : 'down') + ' ' + Math.abs(appr.delta) + ' since last cycle.' : ' — holding.'));
     } else {
       const o = rows[0];
       const appr = approvals[o.holder];
@@ -717,9 +723,9 @@ async function runPrep() {
   // Vote-ready routing check (G-R11)
   const voteInits = hotInits.filter(i => /vote-ready/i.test((i.implementation || {}).phase || '') || /vote-ready/i.test(i.status || ''));
   for (const vi of voteInits) {
-    for (const blocDir of Object.values(FACTION_AGENT)) {
-      const has = (assignments[blocDir] || []).some(t => t.id === vi.id);
-      if (!has) { console.error('  ✗ G-R11: vote-pending ' + vi.id + ' not routed to ' + blocDir); leaks++; }
+    for (const seatDir of civicSeat.councilAgentDirs(officeMap)) {
+      const has = (assignments[seatDir] || []).some(t => t.id === vi.id);
+      if (!has) { console.error('  ✗ G-R11: vote-pending ' + vi.id + ' not routed to ' + seatDir); leaks++; }
     }
   }
 
@@ -1058,8 +1064,23 @@ function validateVoiceJson(raw) {
 
 // One voice call with a single retry (models flake on JSON discipline; the
 // retry names the failure). Fail returns null — caller decides fatality.
-async function callVoice(dir, model, userPrompt, maxTokens) {
-  const persona = readPersonaDir(dir);
+function prepTargetDirForHood(hood, officeMap) {
+  const d = getDistrictForNeighborhood(hood);
+  if (!d) return null;
+  const row = (officeMap.offices || []).find(o => o.district === d);
+  return (row && row.agentDir) || civicSeat.councilDir(d);
+}
+
+function hearingHasPhase(json) {
+  for (const st of (json && json.statements) || []) {
+    if (st.trackerUpdates && st.trackerUpdates.ImplementationPhase) return true;
+  }
+  return false;
+}
+
+async function callVoice(dir, model, userPrompt, maxTokens, officeMap) {
+  const row = officeMap ? civicSeat.resolveOfficeRow(officeMap, dir) : null;
+  const persona = readPersonaDir((row && civicSeat.personaDirFor(row, ROOT)) || dir);
   for (let attempt = 1; attempt <= 2; attempt++) {
     try {
       const r = await callOpenRouter(model, persona, userPrompt, maxTokens || 4000);
@@ -1085,8 +1106,9 @@ function writeVoiceJson(slug, cycle, json) {
   return path.relative(ROOT, p);
 }
 function officeModel(officeMap, dir) {
-  const row = [...officeMap.offices, ...(officeMap.projects || [])].find(o => o.agentDir === dir && o.model);
-  if (!row) throw new Error('no model in civic-office-map.json for ' + dir);
+  const row = civicSeat.resolveOfficeRow(officeMap, dir)
+    || [...officeMap.offices, ...(officeMap.projects || [])].find(o => o.agentDir === dir && o.model);
+  if (!row || !row.model) throw new Error('no model in civic-office-map.json for ' + dir);
   return row.model;
 }
 // Baylight is a project seat behind an office-dir name (S229 G-R3); her
@@ -1127,10 +1149,29 @@ function loadVoiceJsons(cycle) {
   return out;
 }
 
-// --- stage: decide (Mayor only, then cascade injection) ---
-async function runDecide() {
+const AGENDA_MARK = "## MAYOR'S AGENDA THIS CYCLE";
+
+function injectPacketSection(cycle, marker, lines, skipPrefix) {
+  let injected = 0;
+  if (!fs.existsSync(PACKETS)) return 0;
+  for (const f of fs.readdirSync(PACKETS)) {
+    if (!f.endsWith('_c' + cycle + '.md') || (skipPrefix && f.startsWith(skipPrefix))) continue;
+    const p = path.join(PACKETS, f);
+    let body = fs.readFileSync(p, 'utf8');
+    const at = body.indexOf(marker);
+    if (at !== -1) body = body.slice(0, at).replace(/\n+$/, '\n');
+    fs.writeFileSync(p, body.replace(/\n+$/, '\n') + '\n' + lines.join('\n') + '\n');
+    const issues = lintText(fs.readFileSync(p, 'utf8'));
+    if (issues.length) { console.error('HALT: packet inject leaked telemetry into ' + f + ' — ' + issues.map(i => i.match).join(', ')); process.exit(1); }
+    injected++;
+  }
+  return injected;
+}
+
+// civic.24: Mayor opens the floor (agenda only). trackerUpdates forbidden.
+async function runMayorOpen() {
   const cycle = arg('--cycle', null) || detectCycle();
-  console.log('Civic DECIDE (Mayor) — c' + cycle);
+  console.log('Civic MAYOR-OPEN — c' + cycle);
   console.log('===================================');
   const officeMap = mustJson(path.join(ROOT, 'scripts', 'civic-office-map.json'), 'office map');
   const initiatives = (trackerSnapshot.loadOrRebuild(cycle).initiatives) || [];
@@ -1138,61 +1179,60 @@ async function runDecide() {
   const model = officeModel(officeMap, 'civic-office-mayor');
   log('mayor model=' + model);
   const wallInj = await positionWallInject(officeMap, 'civic-office-mayor');
-  const user = 'YOUR PENDING DECISIONS PACKET (cycle ' + cycle + '):\n\n' + packet + wallInj + '\n\n' + outputContract('mayor', cycle, initiatives);
-  const r = await callVoice('civic-office-mayor', model, user, 5000);
+  const user = [
+    'YOUR PENDING DECISIONS PACKET (cycle ' + cycle + '):',
+    '', packet, wallInj || '',
+    'This is the AGENDA turn. Name what is on the floor. Do NOT emit trackerUpdates.ImplementationPhase or MayoralAction. The gavel comes after the hearing.',
+    outputContract('mayor_open', cycle, initiatives),
+  ].join('\n');
+  const r = await callVoice('civic-office-mayor', model, user, 5000, officeMap);
   if (!r || r.error) {
-    console.error('HALT: Mayor call failed — ' + (r ? r.error : 'no result') + '. Chain must not proceed (everything cascades from her).');
-    if (r && r.raw) { fs.mkdirSync(CIVIC, { recursive: true }); fs.writeFileSync(path.join(CIVIC, 'decide_c' + cycle + '.raw.txt'), r.raw); }
+    console.error('HALT: Mayor open failed — ' + (r ? r.error : 'no result') + '. Hearing must not start.');
+    if (r && r.raw) { fs.mkdirSync(CIVIC, { recursive: true }); fs.writeFileSync(path.join(CIVIC, 'mayor_open_c' + cycle + '.raw.txt'), r.raw); }
     process.exit(1);
   }
-  const outPath = writeVoiceJson('mayor', cycle, r.json);
+  if (hearingHasPhase(r.json)) {
+    console.error('HALT: Mayor open emitted ImplementationPhase — agenda cannot stamp the tracker.');
+    process.exit(1);
+  }
+  const outPath = writeVoiceJson('mayor_open', cycle, r.json);
   await positionWallRecordCascade(officeMap, 'civic-office-mayor', r.json, cycle);
-
-  // Cascade: strip-then-append the Mayor's decisions into every other packet
-  // (idempotent — a re-run replaces the section, it never stacks).
-  const MARKER = "## MAYOR'S DECISIONS THIS CYCLE";
-  const cascade = [MARKER, ''];
+  const cascade = [AGENDA_MARK, ''];
   for (const st of r.json.statements) {
     const line = cleanInline([st.topic ? st.topic + ': ' : '', st.decision, st.quote ? ' — "' + st.quote + '"' : ''].join(''));
     if (line) cascade.push('- ' + line);
   }
-  cascade.push('', 'The Mayor has spoken. React in your own voice — support, oppose, or go your own way.');
-  let injected = 0;
-  for (const f of fs.readdirSync(PACKETS)) {
-    if (!f.endsWith('_c' + cycle + '.md') || f.startsWith('civic-office-mayor')) continue;
-    const p = path.join(PACKETS, f);
-    let body = fs.readFileSync(p, 'utf8');
-    const at = body.indexOf(MARKER);
-    if (at !== -1) body = body.slice(0, at).replace(/\n+$/, '\n');
-    fs.writeFileSync(p, body.replace(/\n+$/, '\n') + '\n' + cascade.join('\n') + '\n');
-    const issues = lintText(fs.readFileSync(p, 'utf8'));
-    if (issues.length) { console.error('HALT: cascade injection leaked telemetry into ' + f + ' — ' + issues.map(i => i.match).join(', ')); process.exit(1); }
-    injected++;
-  }
+  cascade.push('', 'The Mayor has set the agenda. Speak as yourself. Do not stamp ImplementationPhase — that is the gavel.');
+  const injected = injectPacketSection(cycle, AGENDA_MARK, cascade, 'civic-office-mayor');
   fs.mkdirSync(CIVIC, { recursive: true });
-  fs.writeFileSync(path.join(CIVIC, 'decide_c' + cycle + '.json'), JSON.stringify({
-    stage: 'decide', cycle: Number(cycle), model, output: outPath,
+  fs.writeFileSync(path.join(CIVIC, 'mayor_open_c' + cycle + '.json'), JSON.stringify({
+    stage: 'mayor-open', cycle: Number(cycle), model, output: outPath,
     statements: r.json.statements.length, cascadeInjected: injected,
     attempts: r.attempts, usage: r.usage, ranAt: new Date().toISOString(),
   }, null, 2));
-  console.log('\n=== decide complete: ' + r.json.statements.length + ' statement(s) → ' + outPath + '; cascade into ' + injected + ' packet(s) ===');
+  console.log('\n=== mayor-open complete: ' + r.json.statements.length + ' statement(s) → ' + outPath + '; agenda into ' + injected + ' packet(s) ===');
 }
 
-// --- stage: voices (Layer 2, parallel, per-office models) ---
-async function runVoices() {
+// civic.24 hearing: 9 districts + invited cabinet, parallel, no tracker phase.
+async function runHearing() {
   const cycle = arg('--cycle', null) || detectCycle();
-  console.log('Civic VOICES (Layer 2) — c' + cycle);
+  console.log('Civic HEARING — c' + cycle);
   console.log('===================================');
   const officeMap = mustJson(path.join(ROOT, 'scripts', 'civic-office-map.json'), 'office map');
   const initiatives = (trackerSnapshot.loadOrRebuild(cycle).initiatives) || [];
-  if (!fs.existsSync(path.join(ROOT, 'output', 'civic-voice', 'mayor_c' + cycle + '.json'))) {
-    throw new Error('no mayor_c' + cycle + '.json — run --stage=decide first (the cascade order is canonical)');
+  if (!fs.existsSync(path.join(ROOT, 'output', 'civic-voice', 'mayor_open_c' + cycle + '.json'))) {
+    throw new Error('no mayor_open_c' + cycle + '.json — run --stage=mayor-open first');
   }
   const dirs = fs.readdirSync(PACKETS)
     .filter(f => f.endsWith('_c' + cycle + '.md'))
     .map(f => f.replace('_pending_decisions_c' + cycle + '.md', ''))
     .filter(d => d !== 'civic-office-mayor' && !LAYER3_DIRS.has(d));
-  log('layer-2 seats with packets: ' + dirs.join(', '));
+  log('hearing seats with packets: ' + dirs.join(', '));
+  let ledger = cityHallLedger.loadOrCreate(cycle, ROOT);
+  const roster = loadCouncilRoster(officeMap).map(m => {
+    const row = civicSeat.councilSeats(officeMap).find(s => s.district === m.district);
+    return Object.assign({}, m, { officeId: row ? row.officeId : ('COUNCIL-' + m.district) });
+  });
   const results = [];
   await Promise.all(dirs.map(async dir => {
     const slug = voiceSlug(dir);
@@ -1200,16 +1240,41 @@ async function runVoices() {
       const model = officeModel(officeMap, dir);
       const packet = fs.readFileSync(packetPathFor(dir, cycle), 'utf8');
       const wallInj = await positionWallInject(officeMap, dir);
-      const user = 'YOUR PENDING DECISIONS PACKET (cycle ' + cycle + ') — the Mayor\'s decisions are at the bottom; react to them:\n\n' + packet + wallInj + '\n\n' + outputContract(slug, cycle, initiatives);
-      const r = await callVoice(dir, model, user, 4000);
+      const user = [
+        'YOUR PENDING DECISIONS PACKET (cycle ' + cycle + ') — the Mayor\'s AGENDA is in the packet; react as yourself.',
+        '', packet, wallInj || '',
+        'Do NOT emit trackerUpdates.ImplementationPhase. That is the Mayor\'s gavel after you speak.',
+        outputContract(slug, cycle, initiatives),
+      ].join('\n');
+      const r = await callVoice(dir, model, user, 4000, officeMap);
       if (!r || r.error) { results.push({ dir, slug, model, ok: false, error: r ? r.error : 'no result' }); return; }
+      if (hearingHasPhase(r.json)) {
+        results.push({ dir, slug, model, ok: false, error: 'hearing emitted ImplementationPhase' });
+        return;
+      }
       const out = writeVoiceJson(slug, cycle, r.json);
       await positionWallRecordCascade(officeMap, dir, r.json, cycle);
-      results.push({ dir, slug, model, ok: true, output: out, statements: r.json.statements.length, attempts: r.attempts });
+      const seat = civicSeat.resolveOfficeRow(officeMap, dir);
+      const packRef = districtPackRef(dir, cycle, officeMap, ROOT);
+      results.push({
+        dir, slug, model, ok: true, output: out,
+        statements: r.json.statements.length, attempts: r.attempts,
+        seat, voiceJson: r.json, lever: (packRef && packRef.lever) || '',
+      });
     } catch (e) { results.push({ dir, slug, ok: false, error: e.message }); }
   }));
+  for (const x of results.filter(r => r.ok && r.seat)) {
+    ledger = cityHallLedger.appendHearing(ledger, cityHallLedger.hearingRow(x.seat, x.voiceJson, x.output, {
+      seatStatus: civicSeat.seatStatus(x.seat, roster),
+      lever: x.lever,
+    }));
+  }
+  cityHallLedger.save(ledger, ROOT);
+  fs.writeFileSync(path.join(CIVIC, 'hearing_c' + cycle + '.json'), JSON.stringify({
+    stage: 'hearing', cycle: Number(cycle), results, ranAt: new Date().toISOString(),
+  }, null, 2));
   fs.writeFileSync(path.join(CIVIC, 'voices_c' + cycle + '.json'), JSON.stringify({
-    stage: 'voices', cycle: Number(cycle), results, ranAt: new Date().toISOString(),
+    stage: 'hearing', cycle: Number(cycle), results, ranAt: new Date().toISOString(),
   }, null, 2));
   const failed = results.filter(x => !x.ok);
   for (const x of results) console.log('  [' + (x.ok ? '✓' : '✗') + '] ' + x.slug + (x.ok ? ' — ' + x.statements + ' statement(s) (' + x.model + ')' : ' — ' + x.error));
@@ -1217,8 +1282,61 @@ async function runVoices() {
     console.error('\nHALT: ' + failed.length + ' voice(s) failed — fix or rerun before projects (Step 5.5 completeness).');
     process.exit(1);
   }
-  console.log('\n=== voices complete: ' + results.length + '/' + results.length + ' ok ===');
+  console.log('\n=== hearing complete: ' + results.length + '/' + results.length + ' ok ===');
 }
+
+async function runMayorGavel() {
+  const cycle = arg('--cycle', null) || detectCycle();
+  console.log('Civic MAYOR-GAVEL — c' + cycle);
+  console.log('===================================');
+  const officeMap = mustJson(path.join(ROOT, 'scripts', 'civic-office-map.json'), 'office map');
+  const initiatives = (trackerSnapshot.loadOrRebuild(cycle).initiatives) || [];
+  if (!fs.existsSync(path.join(ROOT, 'output', 'civic-voice', 'mayor_open_c' + cycle + '.json'))) {
+    throw new Error('no mayor_open_c' + cycle + '.json — run --stage=mayor-open first');
+  }
+  const hearingMan = readJson(path.join(CIVIC, 'hearing_c' + cycle + '.json'));
+  if (!hearingMan) throw new Error('no hearing_c' + cycle + '.json — run --stage=hearing first');
+  const packet = mustRead(packetPathFor('civic-office-mayor', cycle), 'mayor packet');
+  const transcript = [];
+  for (const x of (hearingMan.results || []).filter(r => r.ok)) {
+    const j = readJson(path.join(ROOT, 'output', 'civic-voice', x.slug + '_c' + cycle + '.json'));
+    const st = ((j && j.statements) || [])[0] || {};
+    const line = cleanInline((x.slug || '') + ': ' + (st.decision || st.quote || ''));
+    if (line) transcript.push('- ' + line);
+  }
+  const wallInj = await positionWallInject(officeMap, 'civic-office-mayor');
+  const model = officeModel(officeMap, 'civic-office-mayor');
+  const user = [
+    'YOUR PENDING DECISIONS PACKET (cycle ' + cycle + '):',
+    '', packet, wallInj || '',
+    'THE HEARING HAS SPOKEN. These are the nine districts and invited cabinet, as themselves:',
+    transcript.join('\n') || '(no hearing lines)',
+    '',
+    'This is the GAVEL. You may now stamp trackerUpdates (ImplementationPhase / MayoralAction) for initiatives that moved. Hearing voices do not stamp.',
+    outputContract('mayor_gavel', cycle, initiatives),
+  ].join('\n');
+  const r = await callVoice('civic-office-mayor', model, user, 5000, officeMap);
+  if (!r || r.error) {
+    console.error('HALT: Mayor gavel failed — ' + (r ? r.error : 'no result'));
+    if (r && r.raw) fs.writeFileSync(path.join(CIVIC, 'mayor_gavel_c' + cycle + '.raw.txt'), r.raw);
+    process.exit(1);
+  }
+  const outPath = writeVoiceJson('mayor_gavel', cycle, r.json);
+  await positionWallRecordCascade(officeMap, 'civic-office-mayor', r.json, cycle);
+  const mayorRow = civicSeat.resolveOfficeRow(officeMap, 'civic-office-mayor');
+  let ledger = cityHallLedger.loadOrCreate(cycle, ROOT);
+  ledger = cityHallLedger.writeGavel(ledger, mayorRow || { officeId: 'MAYOR-01', holder: 'Avery Santana', popid: 'POP-00034' }, r.json, outPath, cityHallLedger.gavelPhases(r.json));
+  cityHallLedger.save(ledger, ROOT);
+  fs.writeFileSync(path.join(CIVIC, 'mayor_gavel_c' + cycle + '.json'), JSON.stringify({
+    stage: 'mayor-gavel', cycle: Number(cycle), model, output: outPath,
+    statements: r.json.statements.length, attempts: r.attempts, usage: r.usage,
+    ranAt: new Date().toISOString(),
+  }, null, 2));
+  console.log('\n=== mayor-gavel complete: ' + r.json.statements.length + ' statement(s) → ' + outPath + ' ===');
+}
+
+const runDecide = runMayorOpen;
+const runVoices = runHearing;
 
 // --- stage: projects (Layer 3 — only where a decision touched their initiative) ---
 async function runProjects() {
@@ -1228,7 +1346,7 @@ async function runProjects() {
   const officeMap = mustJson(path.join(ROOT, 'scripts', 'civic-office-map.json'), 'office map');
   const tracker = trackerSnapshot.loadOrRebuild(cycle);
   const voiceJsons = loadVoiceJsons(cycle);
-  if (!voiceJsons.mayor) throw new Error('no mayor_c' + cycle + '.json — run decide/voices first');
+  if (!voiceJsons.mayor_gavel && !voiceJsons.mayor) throw new Error('no mayor_gavel_c' + cycle + '.json — run --stage=mayor-gavel first');
   const layer12 = Object.fromEntries(Object.entries(voiceJsons).filter(([s]) => !['baylight_authority', 'stabilization_fund', 'oari', 'health_center', 'transit_hub'].includes(s)));
 
   const results = [];
@@ -1253,7 +1371,7 @@ async function runProjects() {
         'You may invent operational details — names of facilities, timelines, specifics — but never citizens, statistics, or votes beyond your material.',
         outputContract(slug, cycle, tracker.initiatives || []),
       ].join('\n');
-      const r = await callVoice(seat.agentDir, model, user, 4000);
+      const r = await callVoice(seat.agentDir, model, user, 4000, officeMap);
       if (!r || r.error) { results.push({ slug, model, ok: false, error: r ? r.error : 'no result' }); continue; }
       const out = writeVoiceJson(slug, cycle, r.json);
       await positionWallRecordCascade(officeMap, seat.agentDir, r.json, cycle);
@@ -1278,8 +1396,8 @@ async function runClose() {
   const voiceJsons = loadVoiceJsons(cycle);
 
   // Step 5.5 completeness: everything decide/voices/projects reported as ok.
-  const expected = ['mayor'];
-  const vMan = readJson(path.join(CIVIC, 'voices_c' + cycle + '.json'));
+  const expected = ['mayor_gavel'];
+  const vMan = readJson(path.join(CIVIC, 'hearing_c' + cycle + '.json')) || readJson(path.join(CIVIC, 'voices_c' + cycle + '.json'));
   const pMan = readJson(path.join(CIVIC, 'projects_c' + cycle + '.json'));
   if (!vMan || !pMan) throw new Error('missing voices/projects manifest under output/cron-civic/ — run the earlier stages first');
   expected.push(...vMan.results.filter(x => x.ok).map(x => x.slug));
@@ -1614,9 +1732,8 @@ async function runDatawake() {
 
   let rota;
   if (ONLY) {
-    const rows = [...officeMap.offices, ...(officeMap.projects || [])].filter(o => o.agentDir === ONLY);
-    const wantDistrict = BLOC_SPOKESPERSON_DISTRICT[ONLY];
-    rota = rows.length ? [wantDistrict ? (rows.find(r => r.district === wantDistrict) || rows[0]) : rows[0]] : [];
+    const row = civicSeat.resolveOfficeRow(officeMap, ONLY);
+    rota = row ? [row] : [];
   } else {
     rota = datawakeRota(officeMap, LIMIT);
   }
@@ -1626,8 +1743,9 @@ async function runDatawake() {
   if (process.argv.includes('--dry-run')) {
     for (const office of rota) {
       const pack = buildPack({ cycle, agentDir: office.agentDir, root: ROOT });
-      const persona = readPersonaDir(office.agentDir);
+      const persona = readPersonaDir(civicSeat.personaDirFor(office, ROOT) || office.agentDir);
       log('DRY ' + office.agentDir + ' holder=' + office.holder +
+        ' district=' + (office.district || '') +
         ' personaBytes=' + (persona ? persona.length : 0) +
         ' facts=' + (pack.known || []).length +
         ' people=' + ((pack.exposure && pack.exposure.subjects) || []).length);
@@ -1647,7 +1765,7 @@ async function runDatawake() {
       const hay = JSON.stringify(pack);
       const wallInj = await positionWallInject(officeMap, office.agentDir);
       const user = datawakeUserPrompt(pack, wallInj, office);
-      const persona = readPersonaDir(office.agentDir);
+      const persona = readPersonaDir(civicSeat.personaDirFor(office, ROOT) || office.agentDir);
       let j = null;
       let attemptUser = user;
       for (let attempt = 1; attempt <= 2; attempt++) {
@@ -1712,12 +1830,18 @@ async function runChain() {
     console.log('[chain] engine has not fired for c' + cycle + ' yet (missing: ' + missing.join(', ') + '). Exiting clean.');
     return;
   }
-  for (const stage of [runDirective, runPrep, runDecide, runVoices, runProjects, runClose]) {
+  for (const stage of [runDirective, runPrep, runMayorOpen, runHearing, runMayorGavel, runProjects, runClose]) {
     await stage();   // each stage fails loud (process.exit) — a failure halts the chain with state staged
   }
 }
 
-const STAGES = { prep: runPrep, directive: runDirective, decide: runDecide, voices: runVoices, projects: runProjects, close: runClose, datawake: runDatawake, chain: runChain };
+const STAGES = {
+  prep: runPrep, directive: runDirective,
+  decide: runMayorOpen, 'mayor-open': runMayorOpen,
+  voices: runHearing, hearing: runHearing,
+  'mayor-gavel': runMayorGavel,
+  projects: runProjects, close: runClose, datawake: runDatawake, chain: runChain,
+};
 if (require.main === module) {
   if (!STAGE || !STAGES[STAGE]) {
     console.error('[civic] unknown or missing --stage (built so far: ' + Object.keys(STAGES).join(', ') + ')');
@@ -1727,4 +1851,4 @@ if (require.main === module) {
     .catch(err => { console.error('[civic] Fatal:', err.message); process.exit(1); });
 }
 
-module.exports = { sentimentWord, crimeWord, retailWord, ailmentPerception, cleanLines, parseApprovalTable, parseHoodTable, outputContract, datawakeUserPrompt, datawakeStatementText, districtPackRef, weekCarryBlock, spliceWeekCarry, loadWeekCarry };
+module.exports = { sentimentWord, crimeWord, retailWord, ailmentPerception, cleanLines, parseApprovalTable, parseHoodTable, outputContract, datawakeUserPrompt, datawakeStatementText, districtPackRef, weekCarryBlock, spliceWeekCarry, loadWeekCarry, hearingHasPhase, prepTargetDirForHood };

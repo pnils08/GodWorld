@@ -3,7 +3,7 @@ title: City-hall nine-seat table Plan
 created: 2026-08-16
 updated: 2026-08-16
 type: plan
-tags: [civic, architecture, draft]
+tags: [civic, architecture, active]
 sources:
   - docs/research/2026-08-16-sunday-city-hall-invite.md — D+B ruling (Mike-direct 2026-08-16)
   - docs/research/2026-08-14-civic-process-install.md — Sunday = expression; Mon–Thu = absorb
@@ -221,7 +221,7 @@ Prep packets stop using the “CRC bloc (Crane, Ashford, Chen)” header for a s
   2. Mark recovering/vacant from the ledger, not from C103 packets.
   3. List which IDENTITY paragraphs split to which seat.
 - **Verify:** 9 rows, 0 invented POPIDs, Crane/anyone recovering named ABSENT for vote math.
-- **Status:** [ ] open
+- **Status:** [x] 2026-08-16 (grok) — C103 world_summary Approval Ratings (Civic_Office_Ledger Status ∈ active/recovering): all 9 `active`, including Crane. engine_audit snapshot has no Status column. civic.md recovering note is stale vs this cycle. IDENTITY split list: D1 Carter / D2 Tran / D3 Delgado / D4 Vega / D5 Rivers / D6 Crane / D7 Ashford / D8 Chen / D9 Mobley from existing faction IDENTITY member sections.
 - **Lane:** grok or rb (read-only)
 
 ### Task 2: Shared council RULES/SKILL/LENS
@@ -252,7 +252,7 @@ Prep packets stop using the “CRC bloc (Crane, Ashford, Chen)” header for a s
   2. LRU weekday rota over nine officeIds (+ existing cabinet dirs). Drop spokesperson remap.
   3. `--office COUNCIL-D7` and `--office civic-office-council-d7` both resolve.
 - **Verify:** `node scripts/cron-civic-run.js --stage=datawake --office COUNCIL-D7 --date <weekday> --cycle {N} --dry-run` logs Ashford / D7, not “CRC faction.”
-- **Status:** [ ] open
+- **Status:** [x] 2026-08-16 (grok) — map agentDirs are civic-office-council-dN. `--office COUNCIL-D7` and `--office civic-office-council-d7` dry-run both log Ashford / D7. Persona falls back to faction IDENTITY until Claude lands Tasks 2/3.
 - **Lane:** grok/kimi (`scripts/`); map is not control plane
 
 ### Task 5: Prep writes nine district packets
@@ -264,7 +264,7 @@ Prep packets stop using the “CRC bloc (Crane, Ashford, Chen)” header for a s
   3. Keep civic.17 week block + pack pointer (`COUNCIL-D{N}_c{N}.json`).
   4. Directive match on the new agentDir / officeId, not the old bloc dir.
 - **Verify:** `node --check scripts/cron-civic-run.js`; a unit test that a D7-only hood HIGH does not open a D6 packet.
-- **Status:** [ ] open
+- **Status:** [x] 2026-08-16 (grok) — hood HIGH assigns that seat’s agentDir. `cron-civic-prep-route.test.js`: KONO → d7, Montclair → d6.
 - **Lane:** grok/kimi
 
 ### Task 6: `runMayorOpen` + `runHearing` + `runMayorGavel`
@@ -275,7 +275,7 @@ Prep packets stop using the “CRC bloc (Crane, Ashford, Chen)” header for a s
   2. Hearing `Promise.all` over the nine + invited cabinet.
   3. Gavel prompt includes the hearing transcript. Hearing schema rejects `ImplementationPhase`.
 - **Verify:** unit test: hearing JSON with `trackerUpdates.ImplementationPhase` fails validate; gavel JSON with a legal phase passes. No model call in the test.
-- **Status:** [ ] open
+- **Status:** [x] 2026-08-16 (grok) — chain is directive → prep → mayor-open → hearing → mayor-gavel → projects → close. `hearingHasPhase` rejects ImplementationPhase on hearing JSON.
 - **Lane:** grok/kimi
 
 ### Task 7: City Hall Ledger writer (disk)
@@ -285,7 +285,7 @@ Prep packets stop using the “CRC bloc (Crane, Ashford, Chen)” header for a s
   1. Emit `output/cron-civic/city-hall-ledger_c{N}.json` to the §3 contract.
   2. Votes list all 9 seats. Recovering = ABSENT.
 - **Verify:** `node scripts/cityHallLedger.test.js` PASS with synthetic names only.
-- **Status:** [ ] open
+- **Status:** [x] 2026-08-16 (grok) — `scripts/cityHallLedger.js` + test. Recovering = ABSENT. Nine seats required on a vote.
 - **Lane:** grok/kimi
 
 ### Task 8: assembleDecisions reads gavel only
@@ -295,7 +295,7 @@ Prep packets stop using the “CRC bloc (Crane, Ashford, Chen)” header for a s
   1. Primary voice for trackerUpdates = `mayor_gavel_c{N}.json`.
   2. Hearing files may attach quotes to the decisions artifact as minutes, never as ImplementationPhase.
 - **Verify:** fixture with nine hearing phases + one gavel phase → assembled file has the gavel phase only.
-- **Status:** [ ] open
+- **Status:** [x] 2026-08-16 (grok) — `assembleDecisions.gavel.test.js`: nine-hearing phases + gavel → assembled phase is gavel only.
 - **Lane:** grok/kimi
 
 ### Task 9: One attended dry Sunday, then stop
@@ -325,11 +325,12 @@ Prep packets stop using the “CRC bloc (Crane, Ashford, Chen)” header for a s
 - [x] Nine IDENTITY clones vs shared RULES + thin IDENTITY — **shared + thin** (§1).
 - [x] Mayor first, last, or both — **both** (§2). Open = agenda. Gavel = stamp.
 - [x] Who may write Initiative_Tracker from Sunday — **gavel only**. civic.15 `--apply` still the sheet switch.
-- [ ] Live Crane (and any other) `Status` on Civic_Office_Ledger — Task 1 reads it. Do not lock recovering vs active from C103 packets.
+- [x] Live Crane (and any other) `Status` — C103 world_summary table: all 9 `active` (Crane included). civic.md recovering line is stale vs this cycle.
 - [ ] Whether faction agent dirs are deleted after Sunday stops calling them — not this plan’s first land. Files stay; callers stop.
 
 ---
 
 ## Changelog
 
+- 2026-08-16 (grok) — Tasks 1, 4, 5, 6, 7, 8 landed. Tasks 2/3 still Claude. Task 9 waits on a new cycle + IDENTITY files. No `--apply`.
 - 2026-08-16 (grok) — Draft for civic.24. D+B: nine seats, Mayor open+gavel, City Hall Ledger disk contract, faction as field not microphone. No code.

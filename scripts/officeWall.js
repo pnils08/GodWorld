@@ -39,12 +39,16 @@ function loadOfficeMap() {
 function resolveHolder(officeMap, agentDir) {
   if (!agentDir) return null;
   const map = officeMap || loadOfficeMap();
-  const rows = [...(map.offices || []), ...(map.projects || [])].filter(
-    (o) => o.agentDir === agentDir && o.popid
-  );
+  const civicSeat = require('./civicSeat');
+  const byKey = civicSeat.resolveOfficeRow(map, agentDir);
+  const rows = byKey && byKey.popid
+    ? [byKey]
+    : [...(map.offices || []), ...(map.projects || [])].filter(
+      (o) => o.agentDir === agentDir && o.popid
+    );
   if (!rows.length) return null;
   const want = BLOC_SPOKESPERSON_DISTRICT[agentDir];
-  const row = want ? rows.find((r) => r.district === want) || rows[0] : rows[0];
+  const row = (rows.length > 1 && want) ? (rows.find((r) => r.district === want) || rows[0]) : rows[0];
   return {
     holder: row.holder,
     popid: String(row.popid).toUpperCase(),

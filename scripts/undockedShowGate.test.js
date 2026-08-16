@@ -80,9 +80,17 @@ catch (e) { check('approve requires by', /--by/.test(e.message)); }
 const rejected = G.decide('undocked-pop00962-test', 'rejected', 'rb', 'not this one', tmp);
 check('reject flips Applied', rejected.Applied === 'rejected');
 check('reject writes no feed file', !fs.existsSync(G.feedPath(103, tmp)));
+check('reject archives staged', !fs.existsSync(path.join(tmp, stagedRel))
+  && fs.existsSync(path.join(tmp, 'output', 'spacemolt-show', 'staged', 'archive', 'undocked-pop00962-test.json')));
+check('reject sweep empty', G.listSweepEligible(tmp).length === 0);
 
-// re-enqueue after resetting applied by rewriting
+// restore staged + pending intake so the approve path can run
+fs.renameSync(
+  path.join(tmp, 'output', 'spacemolt-show', 'staged', 'archive', 'undocked-pop00962-test.json'),
+  path.join(tmp, stagedRel)
+);
 enq.row.Applied = 'no';
+enq.row.StagedPath = stagedRel;
 fs.writeFileSync(enq.path, JSON.stringify(enq.row, null, 2));
 const approved = G.decide('undocked-pop00962-test', 'yes', 'rb', 'windowed escrow noted', tmp);
 check('approve Applied=yes', approved.Applied === 'yes');
@@ -93,6 +101,13 @@ check('feed has no captains prose', JSON.stringify(pack).indexOf('belt paid') ==
 
 try { G.decide('undocked-pop00962-test', 'yes', 'rb', '', tmp); check('no double apply', false); }
 catch (e) { check('no double apply', /already decided/.test(e.message)); }
+
+check('approve archives staged', !fs.existsSync(path.join(tmp, stagedRel)));
+check('approve staged lives under archive', fs.existsSync(path.join(
+  tmp, 'output', 'spacemolt-show', 'staged', 'archive', 'undocked-pop00962-test.json'
+)));
+check('decided episode gone from sweep set', G.listSweepEligible(tmp).indexOf('undocked-pop00962-test.json') < 0);
+check('enqueueStagedDir skips archived', G.enqueueStagedDir(104, tmp).length === 0);
 
 if (failed) { console.error(failed + ' failed'); process.exit(1); }
 console.log('undockedShowGate: ok');

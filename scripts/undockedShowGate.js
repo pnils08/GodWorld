@@ -32,6 +32,7 @@ function paths(root) {
     intake: path.join(r, 'output', 'spacemolt-show', 'intake'),
     feed: path.join(r, 'output', 'spacemolt-show', 'feed'),
     staged: path.join(r, 'output', 'spacemolt-show', 'staged'),
+    stagedArchive: path.join(r, 'output', 'spacemolt-show', 'staged', 'archive'),
   };
 }
 
@@ -65,6 +66,31 @@ function enqueue(stagedPath, cycle, root) {
   const staged = loadJson(abs);
   if (staged.v !== 'UNDOCKED-ADAPTER/1') throw new Error('not an adapter staged file: ' + abs);
   assertSplit(staged);
+
+  // engine.115 — DECISION GUARD. This function builds a fresh row with
+  // Applied:'no' and null DecidedAt/DecidedBy/Note/FeedEvent and saves it over
+  // intakePath(EpisodeId). Nothing archives staged/, so the next
+  // --enqueue-staged-dir --cycle N+1 sweeps the SAME staged files and silently
+  // wiped every prior approval: the intake row reverted to undecided under a new
+  // Cycle while the old cycle's feed pack kept its FeedEvent. Intake and feed
+  // diverge and an approved episode re-airs under a later cycle.
+  // A decided row is a human's editorial ruling — re-enqueue must never erase
+  // one. Returns a skip marker instead of throwing so a batch sweep reports the
+  // skip and continues rather than halting on the first already-approved file.
+  const existingPath = intakePath(staged.episode_id, base);
+  if (fs.existsSync(existingPath)) {
+    const prior = loadJson(existingPath);
+    if (prior && prior.Applied && prior.Applied !== 'no') {
+      return {
+        path: existingPath,
+        row: prior,
+        skipped: true,
+        reason: 'already decided (Applied=' + prior.Applied +
+          (prior.DecidedBy ? ' by ' + prior.DecidedBy : '') +
+          ', cycle ' + prior.Cycle + ')',
+      };
+    }
+  }
   const rel = path.relative(base, abs);
   const feed = C.projectFeed(staged, cycle, rel);
   const check = C.validateFeed(feed);
@@ -118,8 +144,34 @@ function decide(episodeId, applied, by, note, root) {
     row.FeedEvent = feed;
     appendFeed(feed, base);
   }
+  row.StagedPath = archiveStaged(row, base);
   saveJson(intakePath(episodeId, base), row);
   return row;
+}
+
+function archiveStaged(row, root) {
+  const base = root || ROOT;
+  const name = path.basename(row.StagedPath || '');
+  if (!name || !name.endsWith('.json')) {
+    throw new Error('cannot archive staged path: ' + row.StagedPath);
+  }
+  const destRel = path.join('output', 'spacemolt-show', 'staged', 'archive', name);
+  const dest = path.join(base, destRel);
+  const from = path.join(base, row.StagedPath);
+  if (path.resolve(from) === path.resolve(dest)) return destRel;
+  if (!fs.existsSync(from)) throw new Error('staged missing, cannot archive: ' + row.StagedPath);
+  fs.mkdirSync(path.dirname(dest), { recursive: true });
+  fs.renameSync(from, dest);
+  return destRel;
+}
+
+function listSweepEligible(root) {
+  const dir = paths(root).staged;
+  if (!fs.existsSync(dir)) return [];
+  return fs.readdirSync(dir).filter(function (f) {
+    if (f === 'archive' || !f.endsWith('.json')) return false;
+    return fs.statSync(path.join(dir, f)).isFile();
+  });
 }
 
 function appendFeed(event, root) {
@@ -134,12 +186,14 @@ function appendFeed(event, root) {
 
 function enqueueStagedDir(cycle, root) {
   const dir = paths(root).staged;
-  const files = fs.readdirSync(dir).filter(function (f) { return f.endsWith('.json'); });
-  return files.map(function (f) { return enqueue(path.join(dir, f), cycle, root); });
+  return listSweepEligible(root).map(function (f) {
+    return enqueue(path.join(dir, f), cycle, root);
+  });
 }
 
 module.exports = {
   INTAKE_V, intakePath, feedPath, enqueue, decide, appendFeed, enqueueStagedDir,
+  archiveStaged, listSweepEligible,
 };
 
 if (require.main === module) {
@@ -152,10 +206,24 @@ if (require.main === module) {
   try {
     if (argv.includes('--enqueue-staged-dir')) {
       if (!cycle) throw new Error('--cycle required');
-      enqueueStagedDir(cycle).forEach(function (r) {
+      const results = enqueueStagedDir(cycle);
+      results.forEach(function (r) {
+        if (r.skipped) {
+          console.log('SKIP ' + r.row.EpisodeId + ' — ' + r.reason);
+          return;
+        }
         console.log('INTAKE Applied=no ' + r.row.EpisodeId + ' mag=' + r.row.Magnitude
-          + ' flags=' + r.row.Flags.join(','));
+          + ' flags=' + (r.row.Flags || []).join(','));
       });
+      // engine.115: a sweep that skipped everything is the symptom of staged/
+      // never being archived. Say so plainly rather than printing nothing and
+      // exiting 0, which reads as "no episodes" instead of "all already decided".
+      const skips = results.filter(function (r) { return r.skipped; }).length;
+      if (skips) {
+        console.log('(' + skips + ' of ' + results.length +
+          ' already decided and left untouched — staged/ still holds them; ' +
+          'archiving is tracked separately)');
+      }
     } else if (argv.includes('--enqueue')) {
       if (!cycle || !arg('--staged')) throw new Error('--enqueue needs --staged and --cycle');
       const r = enqueue(arg('--staged'), cycle);

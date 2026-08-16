@@ -711,7 +711,7 @@ function generateMediaBriefing_(ctx) {
   briefing.push('Chicago: Bulls coverage via ' + getReporterBySignal_('athletics_basketball_bulls'));
   briefing.push('');
 
-  // v2.6: Active sports triggers from Sports_Feed
+  // v2.6: Active sports triggers from Oakland_Sports_Feed
   var sportsTriggers = S.sportsEventTriggers || [];
   if (sportsTriggers.length > 0) {
     briefing.push('ACTIVE TRIGGERS:');

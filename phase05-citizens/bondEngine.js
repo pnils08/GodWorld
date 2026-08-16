@@ -440,45 +440,8 @@ function ensureBondEngineData_(ctx) {
     ctx._bondNameLookup = {};
     ctx._bondIdToName = {};  // v2.5: ID-to-name lookup
 
-    // Try to load from Citizen_Directory sheet
-    try {
-      var ss = ctx.ss;
-      var dirSheet = ss.getSheetByName('Citizen_Directory');
-
-      if (dirSheet) {
-        var data = dirSheet.getDataRange().getValues();
-        var headers = data[0];
-
-        // Find column indices
-        var nameIdx = findColIndex_(headers, ['Name', 'CitizenName', 'Citizen']);
-        var nhIdx = findColIndex_(headers, ['Neighborhood', 'NH']);
-        var tierIdx = findColIndex_(headers, ['TierRole', 'Tier']);
-        var uniIdx = findColIndex_(headers, ['UNI']);
-        var medIdx = findColIndex_(headers, ['MED']);
-        var civIdx = findColIndex_(headers, ['CIV']);
-        var occIdx = findColIndex_(headers, ['Occupation', 'Job']);
-
-        for (var r = 1; r < data.length; r++) {
-          var row = data[r];
-          var name = nameIdx >= 0 ? row[nameIdx] : '';
-          if (!name) continue;
-
-          ctx._bondNameLookup[name] = {
-            Name: name,
-            Neighborhood: nhIdx >= 0 ? row[nhIdx] : '',
-            TierRole: tierIdx >= 0 ? row[tierIdx] : '',
-            UNI: uniIdx >= 0 ? row[uniIdx] : '',
-            MED: medIdx >= 0 ? row[medIdx] : '',
-            CIV: civIdx >= 0 ? row[civIdx] : '',
-            Occupation: occIdx >= 0 ? row[occIdx] : ''
-          };
-        }
-
-        diagnostics.sources.push('Citizen_Directory');
-      }
-    } catch (e) {
-      Logger.log('ensureBondEngineData_: Error loading Citizen_Directory - ' + e.message);
-    }
+    // Citizen_Directory ghost-read removed (infrastructure.6 Track B, 2026-08-16):
+    // the tab never existed; the Simulation_Ledger fallback below is the only path.
 
     // v2.5: Fallback to Simulation_Ledger if no citizens loaded.
     // Phase 42 §5.6: read from shared ctx.ledger so any mid-cycle mutations
@@ -2562,16 +2525,6 @@ function diagnoseBondEngine() {
   var ss = openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
 
   Logger.log('=== BOND ENGINE DIAGNOSTIC v2.4 ===');
-
-  // Check Citizen_Directory
-  var dirSheet = ss.getSheetByName('Citizen_Directory');
-  if (dirSheet) {
-    var data = dirSheet.getDataRange().getValues();
-    Logger.log('Citizen_Directory: ' + (data.length - 1) + ' citizens');
-    Logger.log('Headers: ' + data[0].join(', '));
-  } else {
-    Logger.log('Citizen_Directory: NOT FOUND');
-  }
 
   // Check Relationship_Bonds
   var bondSheet = ss.getSheetByName('Relationship_Bonds');

@@ -21,8 +21,10 @@
  *
  * Data sources (all formula-driven, no engine changes):
  * - World_Population (single-row state sheet)
- * - Sports_Feed (team records)
- * - Chicago_Feed (Chicago weather/sentiment)
+ * - Oakland_Sports_Feed (team records)
+ * - Chicago_Feed (Chicago weather/sentiment) — live tab, NOT a ghost:
+ *   v3ChicagoWriter.js ensures/writes it each cycle. Only Sports_Feed was a
+ *   ghost (infrastructure.6 Track B); Chicago_Feed was never on that list.
  * - Initiative_Tracker (civic initiative lifecycle)
  * - Relationship_Bonds (social bond state)
  *

@@ -1,0 +1,17 @@
+{
+  "show": "UNDOCKED",
+  "session": "undocked-pop00962",
+  "model": "openrouter/deepseek/deepseek-chat",
+  "startedAt": "2026-08-16T07:26:33.044Z",
+  "endedAt": "2026-08-16T07:36:44.052Z",
+  "capMinutes": 10,
+  "exitCode": 0,
+  "capped": false,
+  "turns": 78,
+  "tokensIn": 887785,
+  "tokensOut": 6228,
+  "toolErrors": 15,
+  "estCostUsd": 0.126,
+  "log": "output/spacemolt-show/episodes/undocked-pop00962-2026-08-16T07-26-33.log",
+  "runner": "scripts/undockedEpisode.js"
+}

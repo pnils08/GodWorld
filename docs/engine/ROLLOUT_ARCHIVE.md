@@ -830,6 +830,16 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 <!-- ARCHIVE-PASS ORDERING CONVENTION (G-SE4, added S248). Foundational Phase sections + named passes through this S227 anchor are CHRONOLOGICAL top→bottom (oldest first). The post-S227 sweep-pass region below is NEWEST-FIRST going forward: insert a new "## S<NN> Archive Pass" block immediately below this comment (above the current first post-S227 pass), so the most recent pass sits nearest this anchor. The existing post-S227 region is NOT cleanly sorted (S230/S238/S236/S235/S234/S233 as of S248) — do NOT re-sort it; just insert new passes here at the top of the run. Each pass header records its own session + a "This pass: N rows" line. -->
 
+## S375 Archive Pass (2026-08-16, research-build) — post-S374 closures sweep
+
+3 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 2 civic.* + 1 governance.*.
+
+- **civic.17** [grok] — Civic office district packs and Sunday city-hall depth — Tasks 1–5 shipped. Sunday prep carries wiki week + latest district pack pointer. civic.15 `--apply` untouched **State at archive:** done-pending-archive. Pointer: [[../plans/2026-08-15-civic-office-lived-packets]]
+- **civic.23** [research-build] — Hood character layer — all 22 neighborhoods now carry authored canon (was 4 of 22); placement/crime tables read against it, not the reverse **State at archive:** done-pending-archive. Pointer: [[../plans/2026-08-15-civic-edge-truth-migration]] §3.7
+- **governance.48** [research-build] — Writer-fixed, artifact-persists — silent partial-failure audit across writer scripts. Tasks 1-3 done S376; 8 instances, rows engine.111/112 filed **State at archive:** done-pending-archive. Pointer: [[../plans/2026-08-16-writer-fixed-artifact-persists-audit]]
+
+This pass: 3 rows — civic.17 + civic.23 + governance.48. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S371 Archive Pass (2026-08-15, research-build) — post-S370 closures sweep
 
 6 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 pipeline.* + 4 engine.* + 1 research.*.

@@ -135,17 +135,19 @@ built inline, per this plan's own instruction.
 
 ## Open questions
 
-- [ ] **Row granularity.** Task 2's acceptance criterion asks for one row per
-  confirmed instance (7 rows). Filed as 3 grouped rows instead — Half A is one
-  port across 4 files with one design, Half B is one guard across 7 files, and
-  the lint is one build. Seven near-identical rows reads against "ROLLOUT is an
-  index, one line per job" (S286). Row granularity is research-build's apparatus
-  call, not engine-sheet's: re-split if you want the per-instance form, the
-  per-script detail is in the tables above either way.
-- [ ] **Census the other four projections before porting.** `wd-cultural` turned
-  out to be 2× its true size. Nobody has counted `wd-business`, `wd-faith`,
-  `wd-neighborhood`, `wd-initiative` — the surplus there is unknown, and it sets
-  how much of engine.111 is a port versus a cleanup.
+- [x] **Row granularity — RATIFIED grouped (2026-08-16, research-build).** Keeping
+  engine.111 / engine.112 / governance.49 as filed, not re-splitting to 7. Half A
+  is one design ported across 4 files; Half B is one guard applied across 7 —
+  each half is one job with a repeated shape, not 4 or 7 independent jobs. S286
+  (ROLLOUT is an index, one line per job) argues for the grouped form here; the
+  per-script tables above carry the detail a re-split would have needed anyway.
+- [x] **Census the other four projections — GREENLIT inside engine.111 (2026-08-16,
+  research-build).** Read-only, cheap, and it decides the row's real scope before
+  any write touches business/faith/neighborhood/initiative cards — run it before
+  the port, not after. `wd-cultural` sat at 2× true size for 4 months with
+  nothing flagging it; if any of the other four show the same shape, that's a
+  live retrieval-integrity problem, not a backlog item — escalate immediately
+  (hour-one, with the count) rather than folding it quietly into engine.111's scope.
 
 ---
 
@@ -153,3 +155,4 @@ built inline, per this plan's own instruction.
 
 - 2026-08-16 — Initial draft, filed off a cross-lane message from engine-sheet (S375, research-build) naming the pattern after engine.110 and civic.20 §11.3a surfaced it twice in one night.
 - 2026-08-16 — Tasks 1–3 executed (S376, engine-sheet). §Findings added; 38 candidates → 8 instances in two halves; rows engine.111 / engine.112 / governance.49 filed.
+- 2026-08-16 — Both open questions resolved (S375, research-build): grouped rows ratified, census greenlit inside engine.111. governance.48 swept to ROLLOUT_ARCHIVE — this plan stays open, engine.111/112/governance.49 still point here.

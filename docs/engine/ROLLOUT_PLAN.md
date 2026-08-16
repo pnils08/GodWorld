@@ -58,6 +58,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | pipeline.54 | Eighteen clean C103 Articles staged; corrected four lattice-bearing packages proved. Rebuild inactive Jax and prove story-linked lived-exposure testimony | in-progress | research-build / engine-sheet | [[../plans/2026-08-09-three-wake-lived-packet-pilot]] + [[../adr/0017-typed-lived-experience-packets]] |
 | pipeline.56 | Lore writer — applied to scripts/, 3 security fixes (command injection, 2x path-clamp gaps); Vinnie test passed on real output | in-progress | antigravity (spec+hardening: research-build) | [[../plans/2026-08-15-lore-writer]] |
 | pipeline.55 | C102 recovery-run print gaps — photoQA API-credit fallback route, FLUX signage-concept ban in DJ instruction, one-FP-photo rule in djDirect, sanctioned eic-authored sift bypass for recovery editions | ready | research-build | output/production_log_c102_print_gaps.md |
+| pipeline.57 | lived-context basis systemically unreachable — no builder populates packet.exposure.evidence. Correct per ADR-0017, needs a real evidence-source design pass | needs-info | research-build | [[../adr/0017-typed-lived-experience-packets]] §1 |
 
 ### engine.* — Engine code, ledger, schema
 

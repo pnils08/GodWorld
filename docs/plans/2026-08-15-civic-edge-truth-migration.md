@@ -218,12 +218,39 @@ rule biting — *"don't reason from real-world sector/geography… Canon beats
 training-data priors every time"* — where the failure mode is not wrongness but
 **untraceability**.
 
-**Sequencing consequence — this gates civic.21.** Ranking all 22 hoods amplifies
-whatever these profiles say: it turns placement on for ten more neighborhoods and
-widens crisis generation to the full map. Doing that while the character layer
-carries real-world priors would place citizens into wrongly-premised neighborhoods
-at scale, and every story that then attaches to them inherits the error. **Fix the
-character layer before, or with, the ranking — not after.**
+**GATE WITHDRAWN 2026-08-15 (builder ruling, same session).** This section
+originally blocked civic.21 until the character layer was canon-correct. That was
+over-cautious and contradicted standing doctrine.
+
+The ruling: *"We are setting the table; the code and crons take it where it goes.
+This is what it is right now as I state it — canon is the world today. An error in
+code is just a Civis Systems code error, so swings in data while we fine-tune are
+legitimate in-world stories. KONO was blacked out — that's the world living the
+broken engine, is all."*
+
+Two things follow, and they dissolve the gate rather than defer it:
+
+1. **Canon is live, not retroactive.** It is what the builder states, when he states
+   it. So a profile that disagrees with a later statement is not a contradiction
+   needing reconciliation before the world may run — it is simply what was true
+   until the statement. The cycles in between stand.
+2. **Engine error is in-world event.** Civis Systems *is* the engine in-world
+   (`INSTITUTIONS` §377), so a mis-tuned table is a Civis instrumentation fault the
+   city lives through, not contamination to be quarantined. KONO's blackout is the
+   precedent. This is `project_engine-output-is-canon-bug-is-event` applied to a
+   build in progress: tuning volatility is story, not damage.
+
+**civic.21 is therefore NOT gated by this.** Rank the hoods; let the crons run it.
+
+**What survives, reframed.** The finding was never that the labels are wrong — §3.7
+already establishes most are unverifiable. It is that they are **untraceable**, and
+untraceability costs the builder his own lever: he cannot efficiently state canon
+over a layer when he cannot see which parts were authored and which were inherited
+from training-data priors. So civic.23 is not "fix the characters before running" —
+it is **make the character layer legible**, so a statement like "Temescal is the
+health-crisis district behind the boom" lands somewhere visible and stays landed
+instead of being silently re-inherited on the next edit. Mechanism in service of the
+doctrine, not a checkpoint in front of it.
 
 **Not fixed here.** Re-authoring a neighborhood's character is canon authoring, not
 mechanism, and belongs to the builder. What engine-sheet owns is having found it,
@@ -243,7 +270,7 @@ path). Cohorts, each independently verifiable, writer-before-data throughout.
 | E3 | Household/business geography | fold `Piedmont Avenue`→`Piedmont Ave`; rule on `City-wide`; purge Chicago/`A's`/`traveling` | data + writer |
 | E4 | Initiative → place | authored location link; INIT-006 correction — **ruling landed** (`bedbbedb`): data error, one cell → `Baylight District`, via civic.15 `--apply` | data |
 | E5 | Approval mechanism | approval = district condition + recorded conduct; delete the decay timer. Brief in **§6** | design; gated on E1+E2 |
-| E7 | Hood character layer (§3.7) — canon entries for hoods that lack them; profiles checked against canon, not authored from priors. **Gates E-civic.21** | builder authors canon; engine-sheet wires | data |
+| E7 | Hood character layer (§3.7) — make it LEGIBLE (authored vs inherited), so canon statements land and stay landed. Does **not** gate civic.21 | builder authors canon; engine-sheet wires | data |
 | E6 | Remaining 62 files | continue engine.99's cohort pattern; `phase05-citizens` first (12 files, civic-critical) | yes |
 
 **Ordering.** E1 and E2 are the same defect class and share the writer-first rule —
@@ -688,6 +715,11 @@ Nothing in 1–4 needs a ruling. Only 5 does.
 
 ## Changelog
 
+- 2026-08-15 (builder) — GATE WITHDRAWN from §3.7. Canon is live, not retroactive
+  ("this is what it is rn as I state it"); engine error is a Civis Systems fault the
+  world lives through, so tuning swings are legitimate in-world stories (KONO
+  blackout precedent). civic.21 is NOT gated. civic.23 reframed from "fix before
+  running" to "make the layer legible so canon statements stay landed".
 - 2026-08-15 (engine-sheet) — §3.7 REFINED after builder context: premise is 2042
   post-boom with canon gentrification, so West Oakland's 'gentrifying' is plausibly
   right for the wrong reason. The defect is UNTRACEABILITY, not uniform wrongness —

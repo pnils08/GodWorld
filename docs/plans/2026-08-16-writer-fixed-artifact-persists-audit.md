@@ -119,6 +119,39 @@ because nothing recorded whether they were 404 (benign — doc already gone), 42
 or 5xx. Any fix should classify before it gates; gating hard on a 404 would turn
 a benign condition into a stop.
 
+### Census — all six wd-* projections (S376, read-only, engine.111 greenlit by research-build)
+
+The Half-A table above said the other four projections "have never been censused."
+They have now. Counts are docs vs unique metadata key per `containerTag`:
+
+| projection | docs | keys | surplus | multi-carded | oldest dup |
+|---|---|---|---|---|---|
+| `wd-cultural` | 95 | 46 | 49 | 38 of 46 | 2026-04-28 |
+| `wd-citizens` | 940 | 940 | **0** | 0 of 940 | — |
+| `wd-business` | 435 | 99 | **336** | 91 of 99 | 2026-04-28 |
+| `wd-faith` | 17 | 16 | 1 | 1 of 16 | 2026-05-12 |
+| `wd-neighborhood` | 17 | 17 | 0 | 0 | — |
+| `wd-initiative` | 6 | 6 | 0 | 0 | — |
+
+**Total surplus across the card layer: 386 docs.**
+
+`wd-business` is 4.39 docs per business and more than twice as degraded as the
+projection that triggered this audit — 91 of 99 businesses multi-carded, stacking
+since 2026-04-28, the same window as cultural. `lookup_business` has been reading
+that layer the whole time. Escalated to research-build at discovery per their
+hour-one instruction, not held for session close.
+
+**`wd-citizens` is the control group and it settles the causation.** 940 docs for
+940 POPIDs, ratio exactly 1.00, zero surplus — on the largest projection by an
+order of magnitude. That is S223's PATCH-if-exists plus the `dedupWdCitizens`
+cleanup holding at scale. So duplicate stacking is not a property of the
+Supermemory write path; it is specifically what happens without PATCH.
+
+The three clean small projections are clean because they **rarely rebuild**, not
+because they are safe — identical POST-only code, less traffic. `wd-faith` has
+already produced its first duplicate. Treat them as preventative work, not as
+evidence the pattern is optional.
+
 **A third sub-class exists and is NOT counted here.** civic.20 §11.3a's `ensure*`
 finding is about **sheet rows**, not Supermemory documents — different store,
 different failure mode (no HTTP status, no delete API), different owner. Folding
@@ -155,4 +188,5 @@ built inline, per this plan's own instruction.
 
 - 2026-08-16 — Initial draft, filed off a cross-lane message from engine-sheet (S375, research-build) naming the pattern after engine.110 and civic.20 §11.3a surfaced it twice in one night.
 - 2026-08-16 — Tasks 1–3 executed (S376, engine-sheet). §Findings added; 38 candidates → 8 instances in two halves; rows engine.111 / engine.112 / governance.49 filed.
+- 2026-08-16 — §Census added (S376, engine-sheet). All six projections counted: 386 surplus docs, wd-business worst at 4.39x. wd-citizens 1.00 proves PATCH is the cause.
 - 2026-08-16 — Both open questions resolved (S375, research-build): grouped rows ratified, census greenlit inside engine.111. governance.48 swept to ROLLOUT_ARCHIVE — this plan stays open, engine.111/112/governance.49 still point here.

@@ -1,5 +1,11 @@
 # SpaceMolt Phase 0.3 — cast shortlist (kimi, 2026-08-15)
 
+> **SUPERSEDED AS SELECTION MECHANISM (2026-08-15, Mike-direct):** casting is a
+> deterministic lottery among eligible citizens, not a curated shortlist — see
+> the plan's Cast model section. This file is retained only as an illustration
+> of cast-role spread (underdog/heel/favorite/rival) and as evidence for the
+> CUL-ledger gap (`cul-ledger-gap.md`). Nobody below was cast.
+
 Plan: `docs/plans/2026-08-07-spacemolt-game-show.md` — Mike picks 2–4 and names
 the show. Every candidate below is a real canon entity with cited evidence;
 no invented traits. Sources: wd-citizens/wd-cultural cards + bay-tribune

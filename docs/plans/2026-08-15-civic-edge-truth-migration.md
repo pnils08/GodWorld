@@ -728,6 +728,59 @@ wiring the demographics ensure onto the cycle path so it behaves like crime's; t
 is a new phase call site and earns its own measure-twice pass rather than riding the
 end of this one.
 
+### 11.3b Bench C110-C111 — the ranking opened a door nobody walks through
+
+Two further bench cycles after the C109 proof. **Live-cleanliness is settled:**
+District held **22/22 across three consecutive cycles** (109, 110, 111) with the
+writer running each time, `CoreSimRank` 22/22, `{ok:true}` and 128 phases every
+fire, no new `Engine_Errors`. Nothing here threatens tomorrow's live run.
+
+**But civic.21's actual purpose is NOT achieved, and ranking alone cannot achieve
+it.** Across C110 the newly-ranked hoods gained **zero** citizens — ledger and
+feeder both. The cause is a throttle upstream of placement:
+
+`generateGenericCitizens.js:321` — `FEMALE_FLOOR = 60, MALE_FLOOR = 40,
+MAX_PER_CYCLE = 8`, then:
+
+```
+deficitF + deficitM === 0  ->  skip entirely ('pool-at-floor')
+fillCount = min(8, deficitF + deficitM, max(baseCount, 3))
+```
+
+Measured on the bench pool (300 rows: 264 Active / 19 Emerged / 17 Promoted):
+
+| | active | floor | deficit |
+|---|---|---|---|
+| female | **60** | 60 | **0** |
+| male | **204** | 40 | **0** |
+
+Both deficits are zero, so **the generator skips every cycle.** The pool sits
+exactly at the female floor and far above the male one, so the only generation that
+ever fires is a one-for-one replacement when a female is promoted out — which is
+precisely the `+1` seen in C110, and it is replacement, not growth. Net feeder
+growth is zero.
+
+Ranking the ten hoods was necessary and correct: placement now *can* reach all 22,
+and by weight the new hoods should take ~45% of placements (core-12 tuned weights
+sum to 12.2; ten new hoods enter at the `|| 1.0` default = 10.0). But ~45% of
+approximately nothing is nothing.
+
+**Second throttle behind the first.** Even when the feeder does grow, a `Generic_Citizens`
+row only becomes a real ledger citizen at `EmergenceCount >= 3`. Current
+distribution: `{0:212, 1:55, 2:22, 3:9, 4:1, 5:1}` — 11 of 300 are at or past the
+gate. So the path from "generated" to "counted as a constituent" is slow again.
+
+**Consequence for civic.21 and civic.19.** Vega does not stop representing one
+citizen because the hoods got ranked. The builder's original instinct — *"we need a
+generic citizen infusion into these hoods"* — is the actual requirement, and it is a
+**seeding operation**, not a config change. The ranking is the prerequisite that
+makes such a seed land in the right places; on its own it changes nothing
+observable. The slow-burn wealth migration is likewise not the answer (§9: 2
+households/cycle, relocation not creation).
+
+Filed as the open remainder of civic.21 rather than a new row: same defect, same
+plan, now with the mechanism measured.
+
 ### 11.4 Montclair is already in the world four times over
 
 It carries a `Crime_Metrics` row, 5 `Household_Ledger` households, a
@@ -751,6 +804,14 @@ Nothing in 1–4 needs a ruling. Only 5 does.
 
 ## Changelog
 
+- 2026-08-15 (engine-sheet) — BENCH C110-C111: District held 22/22 across three
+  consecutive cycles, all fires clean — live is safe. But civic.21's purpose is NOT
+  met: the newly-ranked hoods gained zero citizens because generateGenericCitizens
+  SKIPS every cycle (pool at floor — active F=60 vs floor 60, M=204 vs floor 40, both
+  deficits zero). The generator only replaces a promoted female one-for-one; net
+  feeder growth is zero. Second throttle behind it: SL promotion needs
+  EmergenceCount>=3 and only 11 of 300 qualify. Ranking was necessary and is not
+  sufficient — the infusion is a seeding operation. §11.3b.
 - 2026-08-15 (engine-sheet) — BENCH C109 on SANDBOX 0814. 4a PROVEN (writer ran at
   cycle 109, District 22/22 intact, zero blanked). E2 crime PROVEN (Coliseum +
   Elmhurst frozen at 108, Montclair still updating, ghost rows persist as predicted).

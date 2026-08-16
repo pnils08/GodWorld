@@ -180,6 +180,24 @@ more duplicate POSTs per retry. With PATCH, a retry is idempotent — it refresh
 the existing document instead of adding one. Any future work on Half B should
 check the same interaction before adding a gate to a POST-only writer.
 
+### governance.49 first run — 4 new instances, canon-ingestion writers (S376, kimi)
+
+`scripts/auditWriterExitCodes.js` shipped (`eac179de`) with ratcheted report +
+`--gate` modes. First run found 4 instances beyond the original 8, all
+canon-ingestion writers: `ingestCivicWiki.js`, `ingestEdition.js` (the Saturday
+canon door), `ingestEditionWiki.js`, `supermemory-ingest.js`.
+
+Verified in `ingestEdition.js`: `errors++` increments per failed section,
+prints in the `[DONE] Success: N, Errors: N` summary, and nothing after the
+loop checks it — no `process.exit(1)` on `errors > 0`. A partial edition-ingest
+failure (some sections fail to POST to Supermemory) reports success. A
+published edition can be silently missing sections from canon with no signal
+anywhere in the chain. Filed as **engine.113**.
+
+The 4 engine.111 card builders verified gated tonight and dropped from the
+ratchet. `dedupWdCitizens.js` had a detection blind spot — its DELETE call
+shape didn't match the detector's pattern — fixed same commit.
+
 **A third sub-class exists and is NOT counted here.** civic.20 §11.3a's `ensure*`
 finding is about **sheet rows**, not Supermemory documents — different store,
 different failure mode (no HTTP status, no delete API), different owner. Folding
@@ -219,3 +237,4 @@ built inline, per this plan's own instruction.
 - 2026-08-16 — §Census added (S376, engine-sheet). All six projections counted: 386 surplus docs, wd-business worst at 4.39x. wd-citizens 1.00 proves PATCH is the cause.
 - 2026-08-16 — Root cause traced to the wdCardsDaemon retry loop over POST-only writers (S376, engine-sheet). Gate-without-PATCH would have made it worse; the two halves had to ship together.
 - 2026-08-16 — Both open questions resolved (S375, research-build): grouped rows ratified, census greenlit inside engine.111. governance.48 swept to ROLLOUT_ARCHIVE — this plan stays open, engine.111/112/governance.49 still point here.
+- 2026-08-16 (kimi) — **governance.49 SHIPPED** (`eac179de`): `scripts/auditWriterExitCodes.js`, report + `--gate` modes. Mechanical shape per §Findings: delete/replace signal + loop-incremented failure counter + no exit-gate conditioned on it; secondary warning for discarded failure status (the undiagnosable-404 class). Self-test against the audit's 8 instances: the 4 engine.111 card builders matched the ratchet as already-gated (verified tonight, dropped); buildCitizenCards/ingestPlayerTrueSource/dedupWdCitizens correctly flagged (dedup required adding the `smRequest('DELETE', …)` call-shape to the detector). **4 NEW instances beyond the audit set, all canon-ingestion writers (Half-A-shaped):** `ingestCivicWiki.js`, `ingestEdition.js` — the Saturday canon door — `ingestEditionWiki.js`, `supermemory-ingest.js`. Ratcheted as "pending rb row filing." Integration recommendation (wire `--gate` into npm test or pre-commit) left to research-build/engine-sheet — gated config, not the kimi lane.

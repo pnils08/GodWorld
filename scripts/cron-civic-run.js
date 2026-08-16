@@ -1008,8 +1008,18 @@ const PHASES = new Set([
 const voiceSlug = dir => dir.replace(/^civic-(office|project)-/, '').replace(/-/g, '_');
 const agentPath = dir => path.join(ROOT, '.claude', 'agents', dir);
 function readPersonaDir(dir) {
-  const files = ['IDENTITY.md', 'LENS.md', 'RULES.md']
-    .map(f => path.join(agentPath(dir), f)).filter(fs.existsSync);
+  const files = [];
+  if (/^civic-office-council-d\d$/.test(dir)) {
+    const shared = agentPath('civic-office-council-seat');
+    for (const f of ['LENS.md', 'RULES.md']) {
+      const p = path.join(shared, f);
+      if (fs.existsSync(p)) files.push(p);
+    }
+  }
+  for (const f of ['IDENTITY.md', 'LENS.md', 'RULES.md']) {
+    const p = path.join(agentPath(dir), f);
+    if (fs.existsSync(p)) files.push(p);
+  }
   if (!files.length) throw new Error('no persona files under .claude/agents/' + dir);
   return files.map(f => fs.readFileSync(f, 'utf8')).join('\n\n---\n\n');
 }

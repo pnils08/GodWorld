@@ -559,6 +559,10 @@ async function main() {
   const bodyForScan = unwrapWholeDocFence(draftText).replace(/```[\s\S]*?```/g, '');
   const popHits = bodyForScan.match(/\bPOP-\d{5}\b/g);
   if (popHits) detBlockers.push({ severity: 'high', check: 'popid-leak', issue: 'raw POPID(s) in prose: ' + [...new Set(popHits)].join(', ') });
+  const worldLeak = require('./articleContamination').scan(articleProseForReview(draftText), { desk: PERSONA && /civic|firebrand|delaine|navarro|reyes|torres/i.test(PERSONA) ? 'civic' : undefined });
+  for (const f of worldLeak.findings) {
+    detBlockers.push({ severity: 'high', check: f.check, issue: f.issue });
+  }
   if (detBlockers.length) {
     console.log('deterministic blockers: ' + detBlockers.map(d => d.check).join(', '));
     flagsArr.push(...detBlockers);

@@ -171,33 +171,46 @@ total failure on a pair of runs that in fact succeeded completely. Keep-newest
 being deterministic is what made the race safe — both runs computed the same
 survivor per BIZ_ID, so neither could delete the other's keep.
 
-**Orphan cards — 5 businesses exist in the card layer with no `Business_Ledger`
-row.** The rebuild PATCHed 94, not 99, because the ledger holds 94 rows:
+**Stale-ID duplicate cards — 5 businesses hold two cards each, under different
+BIZ_IDs.** The rebuild PATCHed 94, not 99, because `Business_Ledger` holds 94
+rows against 99 cards. Every one of the five surplus cards is a **second card for
+a business that is present in the ledger under a different ID**:
 
-| card | name | created |
-|---|---|---|
-| `BIZ-00065` | Dragon Gate | 2026-07-17 |
-| `BIZ-00067` | Blue Lantern | 2026-07-17 |
-| `BIZ-00069` | Calderon-Nishi | 2026-07-17 |
-| `BIZ-00071` | West Side Cafe | 2026-07-27 |
-| `BIZ-00099` | Atlas Bay Architects | 2026-08-02 |
+| stale card | ledger row (canonical) |
+|---|---|
+| `BIZ-00065` Dragon Gate | `BIZ-00042` Dragon Gate Lounge |
+| `BIZ-00067` Blue Lantern | `BIZ-00036` Blue Lantern Bar |
+| `BIZ-00069` Calderon-Nishi | `BIZ-00090` Calderon-Nishi |
+| `BIZ-00071` West Side Cafe | `BIZ-00048` West Side Cafe |
+| `BIZ-00099` Atlas Bay Architects | `BIZ-00089` Atlas Bay Architects |
 
-`Business_Ledger` runs BIZ-00001→BIZ-00098 with **exactly four gaps: 65, 67, 69,
-71** — matching four of the five. Four *odd, alternating* IDs missing from the
-middle of the range is not five independent business closures; it has the shape
-of an every-other-row deletion. BIZ-00099 sits above the ledger max, so it was
-either minted without a row or lost from the end.
+So this is **not** source-side loss — it is the same duplicate class as the rest
+of the audit, wearing a different disguise: the businesses were renumbered (or
+the cards minted against wrong IDs), and the old-ID cards were never removed.
+`--reconcile` cannot touch them because it groups by key, and each stale card is
+the only member of its own key group.
 
-**This is the inverse of the duplicate problem and must not be "cleaned up."**
-The duplicates were a derived layer holding too much; this is the *source* having
-lost rows the derived layer still remembers. For these five, the cards are the
-surviving record. Deleting them to make the ledger and layer agree would destroy
-the only evidence the businesses existed.
+**This corrects an earlier reading in this file that called these "orphans," ruled
+them source-side data loss, and said they must not be deleted.** That was wrong,
+and it was wrong in the dangerous direction — it would have preserved five
+duplicate cards indefinitely under a do-not-touch label. Caught by the builder
+noticing Atlas Bay Architects sitting in the ledger at BIZ-00089. The four-gap
+pattern (65/67/69/71) is real but means renumbering, not every-other-row deletion.
 
-Structural exposure is nil — 888 citizens carry an `EmployerBizId`, none point at
-the five. But POP-01049 (Sarah Huang) carries "Healthcare Director, Atlas Bay
-Architects" in her role text, so at least one citizen's stated employer is a
-business the ledger no longer lists. Filed as `engine.113`; not acted on here.
+**The ratio gave a false all-clear, and that is the durable lesson.** `wd-business`
+reported 99 docs / 99 keys / ratio 1.00 while five businesses were double-carded,
+because a key-grouped count cannot see one entity under two keys. Every per-key
+group was size 1. Two checks were added to `auditCardLayerCensus.js` in response:
+a normalised-title pass grouping across keys, and `--check-source`, which compares
+keys against the owning sheet. They independently identify the same five, and the
+source check is definitive — a key the sheet no longer carries is a card no
+rebuild will ever revisit, because builders PATCH only keys the sheet still
+yields. **A ratio of 1.00 does not certify a layer clean; only the source
+comparison does.**
+
+Exposure: 888 citizens carry an `EmployerBizId`, none point at the five stale IDs.
+POP-01049 (Sarah Huang) names "Atlas Bay Architects" in her role text, which is
+canonical and correct — the business exists at `BIZ-00089`.
 
 ### Root cause of the volume — the daemon retry loop, not manual wipes
 
@@ -284,6 +297,7 @@ built inline, per this plan's own instruction.
 - 2026-08-16 — §Census added (S376, engine-sheet). All six projections counted: 386 surplus docs, wd-business worst at 4.39x. wd-citizens 1.00 proves PATCH is the cause.
 - 2026-08-16 — Root cause traced to the wdCardsDaemon retry loop over POST-only writers (S376, engine-sheet). Gate-without-PATCH would have made it worse; the two halves had to ship together.
 - 2026-08-16 — Both reconciles run live (S376). cultural 95→46, business 435→99, both ratio 1.00, 0 failures. Orphan finding filed as engine.113: 5 cards with no ledger row, 4 in an alternating gap pattern.
+- 2026-08-16 — engine.113 CORRECTED (S376). The 5 are stale-ID duplicates of businesses present under other IDs, not lost rows; ratio 1.00 was a false all-clear. Census gained cross-key alias + --check-source.
 - 2026-08-16 — Both open questions resolved (S375, research-build): grouped rows ratified, census greenlit inside engine.111. governance.48 swept to ROLLOUT_ARCHIVE — this plan stays open, engine.111/112/governance.49 still point here.
 - 2026-08-16 (kimi) — governance.49 SHIPPED (`eac179de`): `auditWriterExitCodes.js`, report + `--gate` modes. Self-test passed; found 4 new canon-ingestion instances. See §governance.49 first run.
 - 2026-08-16 (research-build) — Filed engine.113 for the 4 canon-ingestion instances, escalated to Mike (Saturday canon door affected). See §governance.49 first run.

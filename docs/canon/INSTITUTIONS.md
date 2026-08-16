@@ -329,11 +329,11 @@ Public-geographic units. Names and boundaries match real Oakland (simulation-is-
 
 - **KONO (Koreatown-Northgate)** — emerging neighborhood, Telegraph Avenue corridor north of Downtown and south of Temescal. Approximate boundaries: 20th Street (south) to 30th/MacArthur (north), Telegraph Avenue as spine. Cultural-event density (Fox Theater Oakland sits in KONO district per §Arts/Culture/Landmarks above). C92 dispatch "KONO Second Song" (Marin Tao POP-00537 + Brody Kale CUL-905CBDE8) is the load-bearing canon precedent. **Council district anchor: D7 (Warren Ashford, CRC)** — newly canonized S215 (closes civic.10a; KONO was unassigned through C93 despite inflow-strain rotation 2 of last 3 cycles per G-12 city-hall-prep gap log). Rationale: KONO/Temescal corridor framing in §Arts/Culture/Landmarks already binds KONO to Temescal (D7); fiscal-conservative voice posture (Ashford CRC) explains why KONO inflow-strain wasn't getting community-development voice attention through C93. Adjacent neighborhoods: Downtown (D2, Tran), Temescal (D7, Ashford), Adams Point (D8, Chen).
 
-- **Lake Merritt** — central lakeside neighborhood ringing the lake, civic-center adjacent. Thriving-Oakland register: a desirable mixed-residential core, not a struggle zone. **Council district anchor: D8 (Nina Chen, CRC)** — canonized S256 (closes the S256 roster-alignment district gap; 98 residents lived here untracked). Sits in the lake-ring cluster with Adams Point / Grand Lake / Eastlake (all D8) — the assignment was already legacy-present in `lib/districtMap.js`; S256 ratifies it into canon. Demographics character: lakeside civic core.
+- **Lake Merritt** — central lakeside neighborhood ringing the lake, civic-center adjacent. Thriving-Oakland register: **old Oakland's elite address, and the one the boom did not have to touch.** Inherited money rather than made money — the lake ring kept its character through the tech decades because it never needed them. Where Baylight is new and engineered, Lake Merritt is historic and settled; the distinction is the city's oldest social line. Not a struggle zone and not a showcase. **Council district anchor: D8 (Nina Chen, CRC)** — canonized S256 (closes the S256 roster-alignment district gap; 98 residents lived here untracked). Sits in the lake-ring cluster with Adams Point / Grand Lake / Eastlake (all D8) — the assignment was already legacy-present in `lib/districtMap.js`; S256 ratifies it into canon. Demographics character: lakeside civic core.
 
 - **Uptown** — central arts, dining, and nightlife district immediately north of Downtown, south of KONO. Thriving-Oakland register: dense young-professional entertainment district. **Council district anchor: D9 (Terrence Mobley, OPP)** — canonized S256 (89 residents untracked pre-alignment). Legacy assignment in `lib/districtMap.js` (paired with Laurel under Mobley); S256 ratifies it into canon. Demographics character: arts & nightlife district.
 
-- **Baylight District** — Oakland's flagship new-build neighborhood (INIT-006, $2.1B). Built on the 65-acre former-Coliseum site: 35,000-seat open-air stadium (the A's anchor tenant — see PRODUCT_VISION), 3,200 residential units, mixed retail and public realm. The prosperity-era centerpiece — sports + development showcase, the opposite of a struggle zone. **Council district anchor: D5 (Janae Rivers, OPP)** — canonized S256. Rationale: the Baylight Authority LENS places the build on the Coliseum grounds with Elmhurst / Coliseum-area neighborhood context, and the sim district map already anchors Coliseum + Elmhurst in D5; Baylight inherits D5 as the Coliseum-site successor. Residents grow as the build completes. Demographics character: new stadium district (young professionals + incoming families, few seniors — units are brand new).
+- **Baylight District** — Oakland's flagship new-build neighborhood and **the city's sports mecca — state-of-the-art living built around the game** (INIT-006, $2.1B). Built on the 65-acre former-Coliseum site: 35,000-seat open-air stadium (the A's anchor tenant — see PRODUCT_VISION), 3,200 residential units, mixed retail and public realm. The prosperity-era centerpiece — sports + development showcase, the opposite of a struggle zone. **Council district anchor: D5 (Janae Rivers, OPP)** — canonized S256. Rationale: the Baylight Authority LENS places the build on the Coliseum grounds with Elmhurst / Coliseum-area neighborhood context, and the sim district map already anchors Coliseum + Elmhurst in D5; Baylight inherits D5 as the Coliseum-site successor. Residents grow as the build completes. Demographics character: new stadium district (young professionals + incoming families, few seniors — units are brand new).
 
 ### Tier 2 — Canon-substitute required
 
@@ -341,7 +341,69 @@ Public-geographic units. Names and boundaries match real Oakland (simulation-is-
 
 ### District-anchor backlog
 
-Other Oakland neighborhoods that have surfaced in canon but lack explicit district anchors in this doc — fill incrementally as they appear in cycle work. Reference Neighborhood_Map sheet for current authoritative assignments; this doc carries the editorial framing layer on top.
+
+#### D1 — Denise Carter (OPP)
+
+- **West Oakland** — the industrial flats where the tech boom was *born*, and where **Civis Systems was founded**. The city's origin story for the prosperity era: warehouses and rail yards that became the first campuses, before Downtown had towers worth the name. Twenty years on it is built-out and expensive, but it reads as a working landscape that got rich rather than a district that was designed — brick and crane, not glass. The old order it displaced has not entirely left (see Dimond, D4). **Council district anchor: D1 (Denise Carter, OPP)** — canonized S374. Demographics character: boom-born industrial, first-wave money.
+
+- **Brooklyn** — Basin waterfront north of the estuary. The newest mid-rise housing in the city after Baylight, and the quieter of the two new builds: residential rather than spectacle, no stadium, no anchor tenant. Where people move when they want the new stock without the crowd. **Council district anchor: D1 (Denise Carter, OPP)** — canonized S374. Demographics character: new waterfront residential.
+
+#### D2 — Leonard Tran (IND)
+
+- **Downtown** — the civic and corporate spine. Where the boom's money is *administered* rather than made: towers, headquarters, City Hall, the courts. Dense on weekdays, thinner after dark than Uptown or Jack London. The district that gained the most institutional weight and the least neighborhood character. **Council district anchor: D2 (Leonard Tran, IND)** — canonized S374. Demographics character: urban core, institutional.
+
+- **Chinatown** — the neighborhood that refused. Dense, culturally anchored, multigenerational; the boom priced *around* it rather than through it, and the continuity is the point. Family businesses that predate every campus in West Oakland. The strongest counter-example in the city to the idea that prosperity has to mean replacement. **Council district anchor: D2 (Leonard Tran, IND)** — canonized S374. Demographics character: cultural enclave, multigenerational.
+
+- **Jack London** — the estuary waterfront. Warehouse district turned nightlife and waterfront-office corridor — the boom's evening face, where Downtown goes after work. Restaurants, venues, converted brick. **Council district anchor: D2 (Leonard Tran, IND)** — canonized S374. Demographics character: nightlife district, waterfront.
+
+#### D3 — Rose Delgado (OPP)
+
+- **Fruitvale** — the **new transit hub** (INIT-003 Phase II) made it the trendy young-professional address: rail access to everything, new housing above the platform, and a commercial strip that turned over fast. The clearest case in the city of transit driving demand. Retains the multigenerational core underneath the new arrivals — the tension between the two is the district's live story. **Council district anchor: D3 (Rose Delgado, OPP)** — canonized S374. Demographics character: transit-hub young professional over a multigenerational base.
+
+- **San Antonio** — dense working core between Fruitvale and the lake. Did not get a transit hub and did not get a stadium; absorbs the pressure from both neighbours. Where the people who service the boom actually live. **Council district anchor: D3 (Rose Delgado, OPP)** — canonized S374. Demographics character: diverse working, pressured.
+
+#### D4 — Ramon Vega (IND)
+
+The district the boom passed over, and the only one that was passed over for a *reputation* rather than a hardship. Its emptiness is canon, not an accident.
+
+- **Dimond** — a small commercial village on the hill approach, and **the district still living down a past era**. The strip's cash businesses were the home of an organized-crime operation in the decades before the boom; the operation is gone and the name is not. Nothing current, everything remembered — the city's one place where prosperity arrived late because people chose not to look. The last living link is **Gregory Mims (POP-00023)**, who holds a $25M inheritance drawn down to roughly half and lives, pointedly, in West Oakland rather than here. **Council district anchor: D4 (Ramon Vega, IND)** — canonized S374. Demographics character: village commercial, living down a name.
+
+- **Glenview** — quiet hill-adjacent residential above the Dimond strip. Nothing happened here, which is the character: intact, small, unremarkable, and cheap for exactly as long as its district's reputation held. **Council district anchor: D4 (Ramon Vega, IND)** — canonized S374. Demographics character: family suburban, untouched.
+
+- **Ivy Hill** — the smallest and quietest of the D4 villages, on the slope above Eastlake. Residential to the point of invisibility. **Council district anchor: D4 (Ramon Vega, IND)** — canonized S374. Demographics character: quiet residential.
+
+#### D5 — Janae Rivers (OPP)
+
+- **East Oakland** — the flatlands, and **the frontier the Baylight money is crossing right now**. The only district holding both a showcase and the ground it displaces: Rivers answers for the $2.1B build and for the blocks next to it in the same breath. Twenty years of boom reached here last and is arriving fast. The city's most contested square. **Council district anchor: D5 (Janae Rivers, OPP)** — canonized S374. Demographics character: east flatlands, arriving frontier.
+
+#### D6 — Elliott Crane (CRC)
+
+- **Piedmont Ave** — boutique and medical corridor serving the lake-ring money. Clinics, specialists, small storefront retail; the street the elite districts actually use. Steady rather than booming. **Council district anchor: D6 (Elliott Crane, CRC)** — canonized S374. Demographics character: upscale residential, medical corridor.
+
+#### D7 — Warren Ashford (CRC)
+
+- **Temescal** — **the area the boom left behind**, and the city's one true counter-example. A health crisis it is still battling (INIT-005, Temescal Community Health Center) held the neighborhood back while every district around it rose; the corridor that should have carried prosperity north from KONO instead carries a clinic waiting list. Prosperity-era Oakland with one place that did not prosper — deliberately. Not squalor: a neighborhood fighting something specific and losing ground slowly. **Council district anchor: D7 (Warren Ashford, CRC)** — canonized S374. Demographics character: behind the boom, health-strained.
+
+- **Rockridge** — affluent, professional, tree-lined. Distinct from Lake Merritt: earned money rather than inherited, doctors and directors rather than families with a name. Sits directly north of Temescal, and the contrast across that line is the sharpest in the city. **Council district anchor: D7 (Warren Ashford, CRC)** — canonized S374. Demographics character: established affluent, professional.
+
+#### D8 — Nina Chen (CRC)
+
+- **Adams Point** — dense lake-ring spillover immediately north of the lake. Younger and renting where Lake Merritt is settled and owning; the address for people who want the lake without the lineage. **Council district anchor: D8 (Nina Chen, CRC)** — canonized S374. Demographics character: lakeside residential, young dense.
+
+- **Grand Lake** — the lake ring's public face: theater, weekend market, family retail. Where the elite districts meet everyone else on neutral ground. **Council district anchor: D8 (Nina Chen, CRC)** — canonized S374. Demographics character: theater district, family retail.
+
+- **Eastlake** — the ring's eastern edge, where lake money thins into the flatlands. Mixed in a way none of its neighbours are, and the boundary is visible walking it. **Council district anchor: D8 (Nina Chen, CRC)** — canonized S374. Demographics character: lakeside mixed, transitional.
+
+#### D9 — Terrence Mobley (OPP)
+
+- **Laurel** — the family belt that stayed reachable. Where people priced out of the boom's districts went and stayed — schools, small commercial, ordinary streets. The largest concentration of people who work in the prosperity economy without living inside it. **Council district anchor: D9 (Terrence Mobley, OPP)** — canonized S374. Demographics character: family oriented, reachable.
+
+
+**Coverage complete as of S374: all 22 live `Neighborhood_Map` neighborhoods now carry an editorial framing here.** Previously 4 of 22 were documented, and every one of those had been written to justify a *district anchor* rather than to author character — which left the engine's placement and crime tables filling the gap with defaults that did not come from this world. Those tables should now be read against these entries, not the other way round.
+
+The shape of the city, in one pass: the boom is born in **West Oakland** (Civis), anchors at **Baylight** (sport and new build), rides transit into **Fruitvale**, breaks against **Temescal** (the one place it left behind), never needed to touch **Lake Merritt** (old money), and is crossing into **East Oakland** now. **D4** is the district it skipped for a reason of its own.
+
+New neighborhoods still get an entry here AND a `Neighborhood_Map` row in the same work cycle. Reference the sheet for authoritative district assignment + `CoreSimRank`; this doc carries the editorial framing layer on top.
 
 ---
 

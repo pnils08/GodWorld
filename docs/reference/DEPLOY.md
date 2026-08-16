@@ -83,7 +83,7 @@ The trigger token exists so the TERMINAL runs the proving loop itself, no Mike i
 6. **Deploy proven code to live** (repo-root `CLAUDE_CTL=1 npx clasp push`, /deploy pre-flight).
 7. **Terminal syncs the bench from live** for the next build wave: `node scripts/syncSandboxFromLive.js <sandboxSheetId> --apply` (S328, Mike-approved — replaces the manual version-history revert, which lost any direct writes postdating the sandbox's copy snapshot; live is the complete truth since every sheet write replays there). Values-only, batched under API write quota, oversized Media_Briefing cells truncated (regenerated display artifacts), read-back verified on the 5 biggest tabs. Dry-run without `--apply`. Refuses to run against the live ID. Bench 0720 is the PERMANENT bench under this model — no more per-wave sandbox stand-ups.
 
-**Sheet writes are a different animal (Mike-direct S328): anything not in CODE does not carry over.** A `clasp push` to live carries code only. Schema changes, new tabs, column adds, data migrations, backfills — anything written to the SANDBOX SHEET during proving — must be **replayed against the live sheet explicitly** (dry-run → apply → read-back verify, per protocol step 5). Track every bench-side sheet write during a wave and replay it at the live deploy, or live runs new code against old schema. Self-arming schema code (ensure*Schema_ patterns) re-arms itself on live's first fire and needs no replay — everything else does.
+**Sheet writes are a different animal (Mike-direct S328): anything not in CODE does not carry over.** A `clasp push` to live carries code only. Schema changes, new tabs, column adds, data migrations, backfills — anything written to the SANDBOX SHEET during proving — must be **replayed against the live sheet explicitly** (dry-run → apply → read-back verify, per protocol step 5). Track every bench-side sheet write during a wave and replay it at the live deploy, or live runs new code against old schema. Self-arming schema code (ensure*Schema_ patterns) re-arms itself on live's first fire and needs no replay — everything else does. **QUALIFIED 2026-08-15: only if the ensure fn actually has a cycle-path caller.** `ensureCrimeMetricsSchema_` does (`updateCrimeMetrics.js:122`); `ensureNeighborhoodDemographicsSchema_` does not, so nothing about it re-arms and its changes need an explicit replay like any other data migration. Verify the caller before relying on this sentence.
 
 **PropertiesService is per-script (S328 finding):** prev-cycle state (PREV_EVENING_JSON etc.) does not copy with the sheet. A fresh bench's FIRST fire is a cold start — carry-dependent channels (hospital→crisis detection, streak-gated weather alerts, prevRate) only prove from the SECOND bench fire on. Don't read a quiet first fire as a failed channel.
 
@@ -113,6 +113,56 @@ The trigger token exists so the TERMINAL runs the proving loop itself, no Mike i
 
 **RETIRED: `SANDBOX_0702`** (S318 — broken col-Q incident C134; do not deploy or write)
 - Spreadsheet `1syShVWfudY0eCC9rnR7AWZ8-b-fs5RpJW2bhn6nZtzs` / script `1bT3o5r6adZhSv20pa0ijoHv_HdeEbONtBT2bsw_8U-sHbWgyJz94ueIW`
+
+### Verified bench run — exact sequence + the traps that bit (2026-08-15)
+
+A full proving run executed end-to-end this session (4a + E2 → SANDBOX 0814 → fire
+C109 → verify). The steps above are correct but under-specified in five places that
+each cost a failure or a near-miss. This is the sequence that actually worked.
+
+```bash
+# 1. STAGE — fresh dir every time. Do NOT `rm -rf` a previous one; the rm-guard
+#    hook blocks it and the run dies mid-setup.
+STAGE=<scratchpad>/bench-s1 ; mkdir -p "$STAGE"
+git archive HEAD | tar -x -C "$STAGE"        # HEAD, so commit first
+
+# 2. CONFIRM THE HAZARD IS REAL, then overwrite LAST
+grep -o '"scriptId": *"[^"]*"' "$STAGE/.clasp.json"   # => PRODUCTION id. Every time.
+#    ...write the sandbox .clasp.json now, as the final setup step...
+grep -q "$SANDBOX_ID" "$STAGE/.clasp.json" && echo OK    # must pass
+grep -q "$PROD_ID"    "$STAGE/.clasp.json" && echo FAIL  # must NOT match
+
+# 3. Confirm the staged copy carries the change you think it does (grep for a
+#    marker from THIS commit — a stale staging dir looks identical otherwise)
+
+# 4. PUSH + BUMP. `clasp push` alone changes nothing the web app fires (S325).
+cd "$STAGE" && CLAUDE_CTL=1 npx clasp push -f
+CLAUDE_CTL=1 npx clasp deploy --deploymentId <sandbox-deployment> --description "<change>"
+
+# 5. SHEET WRITES — target explicitly, dry-run first, READ THE PRINTED TARGET ID
+node scripts/<seeder>.js --sheet-id=<SANDBOX_SHEET_ID>            # dry
+node scripts/<seeder>.js --sheet-id=<SANDBOX_SHEET_ID> --apply
+
+# 6. FIRE — takes ~125s, which EXCEEDS a 120s default timeout. Background it or
+#    raise the timeout, or the run reports failure on a cycle that succeeded.
+```
+
+**Traps, each one hit or narrowly avoided this session:**
+
+| # | Trap | What happens | Guard |
+|---|---|---|---|
+| 1 | **`GODWORLD_SHEET_ID=<sb> node …` does not redirect** | `lib/env` loads dotenv with `override: true`, so the `.env` PRODUCTION id wins. The write lands on **LIVE**, silently, with correct-looking output. Caught by probe seconds before a 14-cell seed. | Script-level `--sheet-id=` set **after** the `lib/env` require; print the resolved id before writing; dry-run and read it |
+| 2 | **`git archive` lands the PRODUCTION `.clasp.json`** | The S316 incident, still live — confirmed again this run. A staging dir looks ready but points at prod. | Write sandbox `.clasp.json` LAST; grep-verify sandbox present **and** prod absent |
+| 3 | **`ensure*` prefix ≠ self-arming** | `ensureCrimeMetricsSchema_` IS called each cycle (`updateCrimeMetrics.js:122`) so literal edits self-heal. `ensureNeighborhoodDemographicsSchema_` has **zero** cycle-path callers — an identical-looking edit is completely inert. | Before claiming a schema fix self-heals on live, `grep` for an actual caller. The naming convention is not evidence |
+| 4 | **Verifying against a guessed column name** | Read `Cycle` on `Crime_Metrics`; the column is `LastUpdated`. `findIndex` returned −1, every row read as blank, and the run looked like a total failure when it had fully succeeded. | Dump the header row before asserting on any column. A uniform-blank result means suspect the index, not the data |
+| 5 | **Fire exceeds the default command timeout** | 125s against a 120s default — the cycle succeeds, the caller reports timeout. | Background it or raise the timeout; then read the JSON, don't re-fire (a second GET runs a whole second cycle) |
+
+**What a clean proof looks like** — for reference, the C109 run: `{ok:true}`, 128
+phases, then a per-claim read-back against the sandbox sheet with the *specific*
+before/after numbers predicted in advance (District 22/22 not 8/22; Coliseum frozen
+at 108 while Montclair moved to 109). Predicting the numbers before the fire is what
+turned a passing cycle into a proof — and it is what exposed trap 3, since the
+demographics prediction failed while the others held.
 
 ### Standing up a NEW sandbox (protocol, S318)
 1. **Mike:** in Drive, File → Make a copy of the live spreadsheet (the bound Apps

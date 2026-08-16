@@ -175,6 +175,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | canon.5 | OUSD + Peralta CCD ruled contaminants (S368 Mike-direct); Oakland City Schools + Oakland CCD minted, repo text swapped. OPEN sheet renames: BIZ-00016, Peralta row, INIT-007 Notes; then Employer-column sweep | ready | engine-sheet | [[canon/INSTITUTIONS]] §Education |
 | research.25 | Headless newsroom pipeline — M–F writer-wakes + Sat compile; Phase 1 + Phase 2.0 done, next is Phase 2 daily writer-wakes (was gated on engine.76 W5 half 1, now shipped) | in-progress | research-build → engine-sheet | [[../plans/2026-07-20-headless-newsroom-pipeline]] |
 | research.27 | UNDOCKED/SpaceMolt — Phase 2 fully drafted (2.1/2.2/2.3, grok, rb-reviewed). Fail-closed until engine-sheet lands the DSL flag + condScopes + feed loader | ready | engine-sheet | [[../plans/2026-08-07-spacemolt-game-show]] §2.3 |
+| pipeline.58 | UNDOCKED Phase 3.1 — dedicated show-beat reporter, Mike-direct. Spec'd (voice/data-contract/cadence); grok drafts persona, Claude lands | ready | grok / research-build | [[../plans/2026-08-07-spacemolt-game-show]] §3.1 |
 
 ### governance.* — Skills, MDs, ADRs, project hygiene
 

@@ -155,6 +155,57 @@ in `phase08-v3-chicago` / `phase04-events`. The detector is honest about what it
 scans; it just does not scan most of the engine. **No `phase05-citizens` file uses
 a loader accessor** — the entire civic phase is unmigrated.
 
+### 3.7 The character layer encodes real-world Oakland, and it decides who moves in
+
+**Found 2026-08-15 while authoring the East Oakland demographics entry (builder
+direction, same session).** Two hardcoded tables give each hood a *character* that
+drives citizen placement and crime generation:
+`ensureNeighborhoodDemographics.NEIGHBORHOOD_PROFILES` (studentMod / adultMod /
+seniorMod + a character string, explicitly "used to derive initial demographics and
+influence citizen placement") and `ensureCrimeMetrics.NEIGHBORHOOD_CRIME_PROFILES`
+(crime modifiers, baseIncidents, character).
+
+**The tell is the asymmetry.** Where a hood has a written canon entry, its profile
+matches canon. Where canon is silent, the code filled in with training-data Oakland.
+
+`Baylight District` has canon `INSTITUTIONS.md` §336 — 65-acre former-Coliseum site,
+35,000-seat stadium, 3,200 units, *"the prosperity-era centerpiece, the opposite of
+a struggle zone"*, and it even specifies the demographic shape: *"new stadium
+district (young professionals + incoming families, few seniors — units are brand
+new)."* The code profile is exactly that. Someone did it correctly, from canon.
+
+Now the hoods canon does not describe:
+
+| Hood | Code says | Canon / stated world |
+|---|---|---|
+| **Temescal** | `'young professional'`, adultMod **1.3**, crime `'mixed commercial, family neighborhood'`, baseIncidents **5** (near-lowest) | the **health-crisis** district (`INSTITUTIONS` §42, INIT-005 Temescal Community Health Center) — **still behind the city boom** |
+| **West Oakland** | `'evolving industrial'`, crime `'industrial transition, gentrifying'` | home of **Civis Systems**, Elias Varek's urban-intelligence firm (§377) — a major anchor employer |
+| **East Oakland** | crime `'working class, underserved'`, baseIncidents **11** (highest) | D5, immediately adjacent to the flagship $2.1B build |
+| **Rockridge** | `'established affluent'`, baseIncidents **3** (lowest) | no canon entry — the label is a real-world prior |
+
+Temescal is the clearest inversion: canon makes it the health-crisis area lagging
+the boom, and the code makes it the city's young-professional magnet with
+near-lowest crime. **Placement follows that profile**, so the engine has been
+steering young professionals *into* the crisis district and reading it as low-risk.
+
+This violates the standing rule directly — *"don't import real-world cynicism, and
+don't reason from real-world sector/geography… Canon beats training-data priors
+every time."* Gentrification framing for West Oakland, "underserved" for East
+Oakland and affluence for Rockridge are 2026-Oakland reflexes, not this world.
+
+**Sequencing consequence — this gates civic.21.** Ranking all 22 hoods amplifies
+whatever these profiles say: it turns placement on for ten more neighborhoods and
+widens crisis generation to the full map. Doing that while the character layer
+carries real-world priors would place citizens into wrongly-premised neighborhoods
+at scale, and every story that then attaches to them inherits the error. **Fix the
+character layer before, or with, the ranking — not after.**
+
+**Not fixed here.** Re-authoring a neighborhood's character is canon authoring, not
+mechanism, and belongs to the builder. What engine-sheet owns is having found it,
+and the observation that a hood with a canon entry got a correct profile — so the
+durable fix is canon entries for the hoods that lack them, with the tables derived
+from or checked against them, rather than a one-off retune. Filed as civic.23.
+
 ## 4. Cohorts
 
 ADR-0016 rejected a big-bang sweep on regression surface (all files are live cycle
@@ -167,6 +218,7 @@ path). Cohorts, each independently verifiable, writer-before-data throughout.
 | E3 | Household/business geography | fold `Piedmont Avenue`→`Piedmont Ave`; rule on `City-wide`; purge Chicago/`A's`/`traveling` | data + writer |
 | E4 | Initiative → place | authored location link; INIT-006 correction — **ruling landed** (`bedbbedb`): data error, one cell → `Baylight District`, via civic.15 `--apply` | data |
 | E5 | Approval mechanism | approval = district condition + recorded conduct; delete the decay timer. Brief in **§6** | design; gated on E1+E2 |
+| E7 | Hood character layer (§3.7) — canon entries for hoods that lack them; profiles checked against canon, not authored from priors. **Gates E-civic.21** | builder authors canon; engine-sheet wires | data |
 | E6 | Remaining 62 files | continue engine.99's cohort pattern; `phase05-citizens` first (12 files, civic-critical) | yes |
 
 **Ordering.** E1 and E2 are the same defect class and share the writer-first rule —
@@ -611,6 +663,13 @@ Nothing in 1–4 needs a ruling. Only 5 does.
 
 ## Changelog
 
+- 2026-08-15 (engine-sheet) — §3.7 NEW: the hood character layer encodes real-world
+  Oakland where canon is silent (Temescal coded 'young professional'/low-crime while
+  canon makes it the health-crisis district behind the boom; West Oakland
+  'gentrifying' though it hosts Civis Systems; East Oakland 'underserved'; Rockridge
+  'affluent'). Baylight, which HAS a canon entry, is correct — the asymmetry is the
+  evidence. These tables drive placement, so this GATES civic.21: ranking all 22
+  amplifies the priors. Filed civic.23; canon authoring is the builder's.
 - 2026-08-15 (builder) — RULING on §9: use all hoods. Shape (a), all ten ranked.
   Mechanism + proposed rank order + bench-first sequencing recorded as §9.1.
 - 2026-08-15 (engine-sheet) — civic.21 EXECUTION PASS: needs no code. Two wrong

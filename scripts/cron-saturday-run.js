@@ -68,6 +68,13 @@ function arg(flag, def) {
   return i !== -1 && process.argv[i + 1] ? process.argv[i + 1] : def;
 }
 const APPLY = process.argv.includes('--apply');
+// --waive-style-gate "<reason>" — recovery-batch override (Mike-direct 2026-08-15,
+// post-wipe heat-slice rebuild in progress). Skips ONLY isCodeRenderedBrief
+// (prose-voice classifier). Rhea pass-hash + contamination scan stay hard gates,
+// no waiver path exists for either — this flag cannot make an unverified or
+// contaminated article publishable, only a factually-verified one that reads
+// in "auditor voice" instead of narrative voice.
+const WAIVE_STYLE_GATE_REASON = arg('--waive-style-gate', null);
 
 // USAGE-TYPE BIND (see header): INTAKE role → Citizen_Media_Usage UsageType.
 // quoted-source deliberately absent — wake-2 citizenVoice --record owns it.
@@ -95,6 +102,10 @@ function verifyStagedProof(side, articleText, fallbackVerdict) {
       reason: 'deterministic world-contamination blocker failed', contamination };
   }
   if (isCodeRenderedBrief(articleText)) {
+    if (WAIVE_STYLE_GATE_REASON) {
+      console.log('[waived] style gate bypassed for Rhea-verified, contamination-clean article — reason: ' + WAIVE_STYLE_GATE_REASON);
+      return { ok: true, articleSha256, contamination, styleGateWaived: true };
+    }
     return { ok: false, articleSha256,
       reason: 'code-rendered source/records brief is not an Article' };
   }
@@ -169,7 +180,18 @@ function loadStagedSet(cycle) {
 // ---------------------------------------------------------------------------
 // Step 5 — Supermemory sweep (per-article, idempotent via customId upsert).
 // ---------------------------------------------------------------------------
-function articleCustomId(cycle, stem) { return 'article-c' + cycle + '-' + stem; }
+function articleCustomId(cycle, stem) {
+  const id = 'article-c' + cycle + '-' + stem;
+  if (id.length <= 100) return id; // Supermemory customId hard cap
+  // Found live 2026-08-15: a long stem (doubled "benchmark-benchmark" in the
+  // source filename) produced a 102-char id and the API rejected it with a
+  // plain 400, no upsert, no retry. Truncate + hash suffix so it always fits
+  // and stays unique even if two long stems share a long common prefix.
+  const prefix = 'article-c' + cycle + '-';
+  const hash = crypto.createHash('sha256').update(stem).digest('hex').slice(0, 8);
+  const budget = 100 - prefix.length - 1 - hash.length;
+  return prefix + stem.slice(0, budget) + '-' + hash;
+}
 
 function articleDoc(cycle, entry) {
   const s = entry.sidecar;
@@ -215,9 +237,25 @@ function postDocument(doc) {
   });
 }
 
+// Shared by sweep/sheets/signals — stepCurate already excludes canon-violation
+// verdicts from the curated Edition, but these three steps called
+// loadStagedSet(cycle) directly with no such filter, so a confirmed
+// canon-violation article (Rhea-passed but factually wrong per the EIC audit)
+// could still reach Supermemory canon, Citizen_Media_Usage, and storyline
+// signals even after being correctly excluded from curation. Found live
+// 2026-08-15: sweep upserted Elliot Graye's wrong-venue Claire Ashford piece
+// to Supermemory before this fix landed; deleted by hand, see session record.
+function loadStagedSetExcludingCanonViolations(cycle) {
+  const set = loadStagedSet(cycle);
+  const scorecard = readJsonSafe(path.join(ROOT, 'output', 'eic_scorecard_c' + cycle + '.json'));
+  if (!scorecard) return set; // no audit run yet — nothing to exclude by
+  const violations = new Set(scorecard.articles.filter(a => a.verdict === 'canon-violation').map(a => a.stem));
+  return set.filter(e => !violations.has(e.stem));
+}
+
 async function stepSweep(cycle) {
   console.log('--- step 5: Supermemory sweep (per-article) ---');
-  const set = loadStagedSet(cycle);
+  const set = loadStagedSetExcludingCanonViolations(cycle);
   if (!set.length) { console.log('no staged articles for c' + cycle); return { swept: 0 }; }
   if (!API_KEY && APPLY) throw new Error('SUPERMEMORY_CC_API_KEY missing');
   let swept = 0;
@@ -254,7 +292,7 @@ function usageRowsFor(entry) {
 
 async function stepSheets(cycle) {
   console.log('--- step 6: Citizen_Media_Usage ingest from INTAKE ---');
-  const set = loadStagedSet(cycle);
+  const set = loadStagedSetExcludingCanonViolations(cycle);
   const wanted = set.flatMap(e => usageRowsFor(e));
   if (!wanted.length) { console.log('no INTAKE usage rows for c' + cycle); return { written: 0 }; }
   if (!APPLY) {
@@ -402,7 +440,7 @@ function mergeStorylineLedger(existing, signals, cycle) {
 
 async function stepSignals(cycle) {
   console.log('--- step 6b: storyline signals → Storyline_Ledger ---');
-  const signals = aggregateStorylineSignals(loadStagedSet(cycle).concat(loadArcSeeds(cycle)));
+  const signals = aggregateStorylineSignals(loadStagedSetExcludingCanonViolations(cycle).concat(loadArcSeeds(cycle)));
   const outPath = path.join(ROOT, 'output', 'storyline_signal_c' + cycle + '.json');
   fs.writeFileSync(outPath, JSON.stringify({ cycle: String(cycle), signals }, null, 2));
   console.log(signals.length + ' storyline(s) → ' + path.relative(ROOT, outPath));
@@ -773,7 +811,11 @@ async function stepPublish(cycle) {
   if (!config.notebookId) throw new Error('config/notebooklm.json missing notebookId (permanent notebook)');
   const { nlm } = require(path.join(ROOT, 'scripts', 'notebooklmPush'));
   const add = nlm(['source', 'add', config.notebookId, '--file', outPath, '--title', 'The Cycle Pulse — Y2C' + cycle, '--wait']);
-  if (add.status !== 0) throw new Error('NotebookLM source add failed: ' + String(add.stderr || add.stdout).slice(0, 200));
+  // nlm() returns {ok, out} (see notebooklmPush.js) — this checked {status,
+  // stdout, stderr}, which don't exist on that shape, so a successful push
+  // reported "Fatal: ... undefined" every time. Found live 2026-08-15 when a
+  // real publish threw despite the source landing in the notebook correctly.
+  if (!add.ok) throw new Error('NotebookLM source add failed: ' + String(add.out || '').slice(0, 200));
   console.log('published: canon ingest + permanent notebook (' + config.notebookName + ')');
   console.log('[follow-up] ingestPublishedEntities (byline-published fame rows) parses NAMES INDEX — run manually until its INTAKE adaptation lands.');
   return { published: true, path: outPath };

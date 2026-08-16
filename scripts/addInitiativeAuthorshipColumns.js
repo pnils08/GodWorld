@@ -15,6 +15,10 @@
  *   node scripts/addInitiativeAuthorshipColumns.js --create-example
  */
 
+// Loads GODWORLD_SHEET_ID + GOOGLE_APPLICATION_CREDENTIALS via dotenvx. Without
+// it --live-dry and --apply both die on "GODWORLD_SHEET_ID not set"; every other
+// live-touching script in scripts/ opens with this same line.
+require('/root/GodWorld/lib/env');
 const fs = require('fs');
 const path = require('path');
 const {
@@ -95,8 +99,13 @@ async function applyLive(plan) {
   const spreadsheetId = process.env.GODWORLD_SHEET_ID;
   if (!spreadsheetId) throw new Error('GODWORLD_SHEET_ID missing');
 
+  // Same credential resolution as lib/sheets.js. The previous hardcoded
+  // <repo>/credentials/service-account.json does not exist in this deployment —
+  // the key lives at GOOGLE_APPLICATION_CREDENTIALS (/root/.config/godworld/...).
+  const credentialsPath = process.env.GOOGLE_APPLICATION_CREDENTIALS
+    || '/root/.config/godworld/credentials/service-account.json';
   const auth = new google.auth.GoogleAuth({
-    keyFile: path.join(ROOT, 'credentials', 'service-account.json'),
+    keyFile: path.resolve(credentialsPath),
     scopes: ['https://www.googleapis.com/auth/spreadsheets'],
   });
   const sheets = google.sheets({ version: 'v4', auth });
@@ -138,6 +147,61 @@ async function applyLive(plan) {
   return { wrote: true, added: plan.added };
 }
 
+/**
+ * Live backfill of the authorship cells.
+ *
+ * Repair (engine-sheet, S376): --backfill-mayor was advertised for live use but
+ * could never fire there — the live branch calls planColumnAdd(headers, [], ...)
+ * with NO rows, so plan.rows was always empty and applyLive only ever wrote the
+ * header cells. The flag silently did nothing outside the fixture path.
+ *
+ * Writes Proposer + ProposingOffice only. ProposedCycle stays blank on purpose:
+ * the canon ruling is that the Mayor authored these six, which settles WHO, not
+ * WHEN. VoteCycle is when a thing was voted, not proposed — copying it across
+ * would invent a date. Blank is honest; a wrong number would not be.
+ *
+ * Only fills cells that are currently empty — never overwrites an existing
+ * attribution.
+ */
+async function backfillLive(headers) {
+  const { google } = require('googleapis');
+  const spreadsheetId = process.env.GODWORLD_SHEET_ID;
+  const credentialsPath = process.env.GOOGLE_APPLICATION_CREDENTIALS
+    || '/root/.config/godworld/credentials/service-account.json';
+  const auth = new google.auth.GoogleAuth({
+    keyFile: path.resolve(credentialsPath),
+    scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+  });
+  const sheets = google.sheets({ version: 'v4', auth });
+
+  const iProposer = headers.indexOf('Proposer');
+  const iOffice = headers.indexOf('ProposingOffice');
+  if (iProposer < 0 || iOffice < 0) throw new Error('authorship columns absent — add them first');
+
+  const read = await sheets.spreadsheets.values.get({
+    spreadsheetId: spreadsheetId,
+    range: SHEET_NAME + '!A1:' + colLetter(headers.length - 1) + '1000',
+  });
+  const rows = (read.data.values || []).slice(1);
+  const updates = [];
+  rows.forEach(function (r, i) {
+    const rowNum = i + 2;
+    if (!r || !String(r[0] || '').trim()) return;       // no InitiativeID → skip
+    if (String(r[iProposer] || '').trim()) return;      // already attributed
+    updates.push({
+      range: SHEET_NAME + '!' + colLetter(iProposer) + rowNum + ':' + colLetter(iOffice) + rowNum,
+      values: [[mayorBackfill('Proposer'), mayorBackfill('ProposingOffice')]],
+    });
+  });
+
+  if (!updates.length) return { filled: 0, reason: 'all rows already attributed' };
+  await sheets.spreadsheets.values.batchUpdate({
+    spreadsheetId: spreadsheetId,
+    requestBody: { valueInputOption: 'RAW', data: updates },
+  });
+  return { filled: updates.length };
+}
+
 function colLetter(col) {
   let letter = '';
   let num = col;
@@ -175,6 +239,10 @@ async function main() {
     const after = await readLiveHeaders();
     console.log('WRITTEN', JSON.stringify(result));
     console.log('read-back headers: ' + after.headers.length + '  last3=' + after.headers.slice(-3).join(','));
+    if (BACKFILL_MAYOR) {
+      const filled = await backfillLive(after.headers);
+      console.log('BACKFILL', JSON.stringify(filled));
+    }
     return;
   }
 

@@ -138,7 +138,7 @@ async function main() {
   console.log('[dedupWdCitizens] starting DELETE pass (' + toDelete.length + ' docs, ~' + Math.ceil(toDelete.length * (DELETE_SLEEP_MS / 1000)) + 's at ' + DELETE_SLEEP_MS + 'ms inter-delete)…');
   console.log('');
 
-  var ok = 0, failed = 0, rate429 = 0;
+  var ok = 0, failed = 0, rate429 = 0, alreadyGone = 0, halted = false;
   for (var j = 0; j < toDelete.length; j++) {
     var t = toDelete[j];
     var r = await smRequest('DELETE', '/v3/documents/' + t.delete_id, null);
@@ -146,6 +146,11 @@ async function main() {
     fs.appendFileSync(logPath, line + '\n');
     if (r.status >= 200 && r.status < 300) {
       ok++;
+    } else if (r.status === 404) {
+      // engine.112: already absent — the duplicate is gone, which is the whole
+      // point of this script. Counting it as a failure made a successful run
+      // look broken (and two concurrent runs make this common).
+      alreadyGone++;
     } else {
       failed++;
       if (r.status === 429) rate429++;
@@ -153,6 +158,7 @@ async function main() {
       // Halt on sustained 429 pressure
       if (rate429 >= 5) {
         console.error('[HALT] 5+ 429s — stopping to avoid rate-limit storm. Resume after waiting.');
+        halted = true;
         break;
       }
     }
@@ -163,8 +169,26 @@ async function main() {
   }
 
   console.log('');
-  console.log('[DONE] deleted: ' + ok + ' / failed: ' + failed + ' / total planned: ' + toDelete.length);
+  console.log('[DONE] deleted: ' + ok + ' / already-gone: ' + alreadyGone +
+    ' / failed: ' + failed + ' / total planned: ' + toDelete.length);
   console.log('[DONE] log: ' + logPath);
+
+  // engine.112: the whole job of this script is that duplicates stop existing.
+  // Previously a run that failed every delete — or halted early on 429 pressure
+  // with most of the list untouched — printed DONE and exited 0, so a caller
+  // could not tell "duplicates removed" from "duplicates still there". Two
+  // distinct exits so the halt case is not silently read as a partial success.
+  if (halted) {
+    console.error('[GATE-FAIL] halted on rate-limit pressure with ' +
+      (toDelete.length - ok - alreadyGone - failed) + ' doc(s) never attempted; ' +
+      'duplicates remain. Re-run after a cooldown. Log: ' + logPath);
+    process.exit(1);
+  }
+  if (failed > 0) {
+    console.error('[GATE-FAIL] ' + failed + ' duplicate(s) survived deletion; ' +
+      'the one-doc-per-POPID invariant does NOT hold. Log: ' + logPath);
+    process.exit(1);
+  }
 }
 
 main().catch(function(e) { console.error(e); process.exit(1); });

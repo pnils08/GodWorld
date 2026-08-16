@@ -55,6 +55,8 @@ var DOMAIN_TAG = 'wd-citizens';
 var API_HOST = 'api.supermemory.ai';
 var APPLY = process.argv.includes('--apply');
 var WIPE_OLD = process.argv.includes('--wipe-old');
+// engine.112: deliberate override for writing over a known-partial wipe.
+var ALLOW_PARTIAL_WIPE = process.argv.includes('--allow-partial-wipe');
 var WIPE_ONLY = process.argv.includes('--wipe-only'); // S183: wipe and exit (no writes) — recovery passes after partial bulk runs
 var NO_QUALITY_GATE = process.argv.includes('--no-quality-gate'); // S183: write thin cards too (cold-start fix). Combined with --wipe-old, also wipes already-tagged wd-citizens for a clean rebuild.
 
@@ -439,9 +441,12 @@ async function wipeOldCitizenCards(citizens) {
 
   console.log('[wipe-old] DELETE pass');
   var deleted = 0;
+  var alreadyGone = 0;
+  var failures = [];
   var failed = 0;
   for (var k = 0; k < matches.length; k++) {
     var ok = false;
+    var gone = false;
     var lastStatus = null;
     // S183: 4-attempt retry — 409 (indexing settle, 20s) and 401/429 (rate-limit, 8s).
     // Original 409-only retry lost ~70% of DELETEs on R2 first attempt; this
@@ -451,6 +456,10 @@ async function wipeOldCitizenCards(citizens) {
       lastStatus = del.status;
       ok = del.status === 204 || del.status === 200;
       if (ok) break;
+      // engine.112: 404 means the document is already absent, which satisfies
+      // the caller's intent. Previously it fell through to "non-recoverable" and
+      // was tallied as a failure — the reason a clean run could look broken.
+      if (del.status === 404) { gone = true; break; }
       if (del.status === 409) {
         await smSleep(20000);
       } else if (del.status === 401 || del.status === 429) {
@@ -459,14 +468,43 @@ async function wipeOldCitizenCards(citizens) {
         break; // non-recoverable
       }
     }
-    if (ok) deleted++; else { failed++; if (failed <= 5) console.log('    [DEL FAIL] id=' + matches[k].id + ' last_status=' + lastStatus); }
+    if (ok) deleted++;
+    else if (gone) alreadyGone++;
+    else {
+      failed++;
+      failures.push({ id: matches[k].id, popId: matches[k].popId, status: lastStatus });
+      if (failed <= 5) console.log('    [DEL FAIL] id=' + matches[k].id + ' last_status=' + lastStatus);
+    }
     if ((k + 1) % 100 === 0 || k === matches.length - 1) {
-      console.log('  DELETE ' + (k + 1) + '/' + matches.length + ' — ok=' + deleted + ' failed=' + failed);
+      console.log('  DELETE ' + (k + 1) + '/' + matches.length +
+        ' — ok=' + deleted + ' already-gone=' + alreadyGone + ' failed=' + failed);
     }
     await smSleep(200);
   }
-  console.log('[wipe-old] DELETE results: ' + deleted + ' ok / ' + failed + ' failed');
-  return { candidates: ids.length, matched: matches.length, deleted: deleted, failed: failed };
+  console.log('[wipe-old] DELETE results: ' + deleted + ' deleted / ' + alreadyGone +
+    ' already-gone / ' + failed + ' failed');
+  // engine.112: the failure count reached a log line and nothing else, so a
+  // partial wipe was indistinguishable from a clean one and the write pass ran
+  // on top of the survivors. That is what stacked wd-cultural and wd-business.
+  // Abort before writing instead — this file PATCHes in place (S223), so it was
+  // never the one accumulating, but the same silent-partial contract applies.
+  if (failures.length > 0) {
+    failures.slice(0, 20).forEach(function (f) {
+      console.error('  [FAIL] wipe ' + (f.popId || '') + ' ' + f.id + ' → HTTP ' + f.status);
+    });
+    if (failures.length > 20) console.error('  … +' + (failures.length - 20) + ' more');
+    if (!ALLOW_PARTIAL_WIPE) {
+      throw new Error('wipe-old: ' + failures.length + ' of ' + matches.length +
+        ' DELETEs failed. Refusing to write on top of a partial wipe. Re-run to retry, ' +
+        'or pass --allow-partial-wipe to override deliberately.');
+    }
+    console.error('[wipe-old] --allow-partial-wipe set — proceeding over ' + failures.length +
+      ' failed delete(s).');
+  }
+  return {
+    candidates: ids.length, matched: matches.length,
+    deleted: deleted, alreadyGone: alreadyGone, failed: failed
+  };
 }
 
 // ═══════════════════════════════════════════════════════════════════════════

@@ -679,7 +679,7 @@ pointers:
 ## Initiative_Tracker
 
 - **Rows:** 7
-- **Columns:** 28
+- **Columns:** 31
 
 | Col | Header |
 |-----|--------|
@@ -711,6 +711,17 @@ pointers:
 | Z | MilestoneNotes |
 | AA | NextScheduledAction |
 | AB | NextActionCycle |
+| AC | Proposer |
+| AD | ProposingOffice |
+| AE | ProposedCycle |
+
+*AC–AE added S376 (civic.22): the tracker carried five mayoral-action columns and
+zero proposer columns, so nothing recorded who authored an initiative. Written by
+`createInitiative_` in `phase05-citizens/civicInitiativeEngine.js` for new rows.
+The six pre-existing initiatives are backfilled to Avery Santana / MAYOR-01 per
+canon ruling — the Mayor did initiate all six, manually. ProposedCycle is left
+blank on those six deliberately: the ruling settles who, not when, and VoteCycle
+records a vote date rather than a proposal date.*
 
 ---
 

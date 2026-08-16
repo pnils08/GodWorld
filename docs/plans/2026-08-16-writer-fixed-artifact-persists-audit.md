@@ -212,6 +212,30 @@ Exposure: 888 citizens carry an `EmployerBizId`, none point at the five stale ID
 POP-01049 (Sarah Huang) names "Atlas Bay Architects" in her role text, which is
 canonical and correct — the business exists at `BIZ-00089`.
 
+### Final state — card layer clean, all three checks
+
+Builder-direct ruling that settled engine.113: **the current sheet is the truth.**
+The duplicates were prior issues; the derived layer reconciles to the sheet as it
+stands, and a card the sheet does not vouch for is surplus even when it looks
+like the only surviving record of something. That reverses the "preserve them,
+they may be the last evidence" reading recorded above.
+
+| projection | before | after | surplus | alias | orphan | ratio |
+|---|---|---|---|---|---|---|
+| `wd-citizens` | 940 / 940 | 940 / 940 | 0 | 0 | 0 | 1.00 |
+| `wd-business` | 435 / 99 | **94 / 94** | 0 | 0 | 0 | 1.00 |
+| `wd-cultural` | 95 / 46 | **46 / 46** | 0 | 0 | 0 | 1.00 |
+| `wd-faith` | 17 / 16 | **16 / 16** | 0 | 0 | 0 | 1.00 |
+| `wd-neighborhood` | 17 / 17 | 17 / 17 | 0 | 0 | 0 | 1.00 |
+| `wd-initiative` | 6 / 6 | 6 / 6 | 0 | 0 | 0 | 1.00 |
+
+**386 surplus documents → 0**, and zero cross-key aliases and zero orphans, which
+are the two classes the ratio alone could not see. `--prune-orphans` was added to
+`buildBusinessCards.js` for the last five: `--reconcile` groups by key, so a stale
+key is the only member of its own group and reads as clean. Two guards on it — a
+zero-BIZ_ID ledger read throws rather than concluding the whole layer is orphaned,
+and >25% orphaned throws as a bad read rather than real drift.
+
 ### Root cause of the volume — the daemon retry loop, not manual wipes
 
 The census numbers track rebuild *frequency*, not anything about the four
@@ -298,6 +322,7 @@ built inline, per this plan's own instruction.
 - 2026-08-16 — Root cause traced to the wdCardsDaemon retry loop over POST-only writers (S376, engine-sheet). Gate-without-PATCH would have made it worse; the two halves had to ship together.
 - 2026-08-16 — Both reconciles run live (S376). cultural 95→46, business 435→99, both ratio 1.00, 0 failures. Orphan finding filed as engine.113: 5 cards with no ledger row, 4 in an alternating gap pattern.
 - 2026-08-16 — engine.113 CORRECTED (S376). The 5 are stale-ID duplicates of businesses present under other IDs, not lost rows; ratio 1.00 was a false all-clear. Census gained cross-key alias + --check-source.
+- 2026-08-16 — CLOSED (S376). Sheet-is-canonical ruling; 5 orphans pruned, faith reconciled. Layer-wide 386 surplus → 0, every projection 1.00 with zero aliases and zero orphans.
 - 2026-08-16 — Both open questions resolved (S375, research-build): grouped rows ratified, census greenlit inside engine.111. governance.48 swept to ROLLOUT_ARCHIVE — this plan stays open, engine.111/112/governance.49 still point here.
 - 2026-08-16 (kimi) — governance.49 SHIPPED (`eac179de`): `auditWriterExitCodes.js`, report + `--gate` modes. Self-test passed; found 4 new canon-ingestion instances. See §governance.49 first run.
 - 2026-08-16 (research-build) — Filed engine.113 for the 4 canon-ingestion instances, escalated to Mike (Saturday canon door affected). See §governance.49 first run.

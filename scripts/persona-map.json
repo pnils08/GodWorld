@@ -131,5 +131,11 @@
     "popid": "POP-00015",
     "beatDomain": "SPORTS",
     "note": "Senior photographer (grok 2026-08-07). Visual record / prompts. Bag: HARTLEY_VISUAL_BAG. Wall cp-POP-00015. Not prose desk."
+  },
+  "nia-rook": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "beatDomain": "CULTURE",
+    "note": "Solo UNDOCKED recap \u2014 who's up, who's down, who the city is watching. Heat register, same band as p-slayer. NOT culture-desk generalist, NOT sports. Wall cp-POP-01076. Scheduled routing and Rhea authority come from newsroom-wake-packages.json; desk-model-map is legacy/manual fallback."
   }
 }

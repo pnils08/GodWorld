@@ -1,8 +1,8 @@
 {
   "nia-rook": {
     "name": "Nia Rook",
-    "popid": "PENDING-MINT",
+    "popid": "POP-01076",
     "beatDomain": "CULTURE",
-    "note": "Solo UNDOCKED recap (grok 2026-08-16). Not culture-desk generalist. Not sports. Do not add to live persona-map.json until engine-sheet assigns a POPID. Proposed model: llama-3.3-70b (heat, same band as p-slayer). Wall cp-PENDING-nia-rook."
+    "note": "Solo UNDOCKED recap (grok 2026-08-16). Not culture-desk generalist. Not sports. Minted POP-01076 and wired into scripts/persona-map.json (engine-sheet 2026-08-16). Proposed model: llama-3.3-70b (heat, same band as p-slayer). Wall cp-POP-01076."
   }
 }

@@ -1,7 +1,7 @@
 ---
 title: Three-Wake Typed Lived-Experience Packet Pilot
 created: 2026-08-09
-updated: 2026-08-14
+updated: 2026-08-16
 type: plan
 tags: [media, citizens, civic, sports, business, agents, evaluation, active]
 sources:
@@ -361,7 +361,7 @@ slice and model text is a starting work surface, not an adopted contract.
 | CARMEN-LEP2-1 | Carmen Delaine / POP-00011 | civic ledger | Article LEP/2; initiatives/votes/money | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed; one medium public-wording flag remains |
 | PSLAYER-LEP2-1 | P Slayer / POP-00008 | sports | Article LEP/2; typed fan pulse | Llama / Llama / local source brief | [x] | attended W1-W3/Rhea passed; [ ] reporting-rich column |
 | JORDAN-LEP2-1 | Jordan Velez / POP-00153 | economics/labor | Article LEP/2; economic/storefront | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed with zero candidates/quotes |
-| LUIS-LEP2-1 | Luis Navarro / POP-00636 | civic investigations | `CIVIC-DOMAIN-SLICE-4`; typed reporting evidence; local thin-record brief or reporting-backed Article | DeepSeek / DeepSeek / local-or-Sonnet | [x] | direct-speech records brief passed 2/2 direct reactions, exact quote proof, Packet-aware Rhea, and contamination scan; [ ] story-linked lived-exposure/Sonnet proof |
+| LUIS-LEP2-1 | Luis Navarro / POP-00636 | civic investigations | `CIVIC-DOMAIN-SLICE-4`; typed reporting evidence; local thin-record brief or reporting-backed Article | DeepSeek / DeepSeek / local-or-Sonnet | [x] | direct-speech records brief passed 2/2 direct reactions, exact quote proof, Packet-aware Rhea, and contamination scan; blocked on addressable story-linked evidence — [[../engine/ROLLOUT_PLAN]] pipeline.57 |
 | TREVOR-LEP2-1 | Trevor Shimizu / POP-00155 | infrastructure | Article LEP/2; typed incident/link/warning systems brief and unestablished cascade | DeepSeek / DeepSeek / local source brief | [x] | replacement proof passed 1/3 direct reactions; one invalid response rejected, one source abstained; exact quote, Packet-aware Rhea, and contamination scan passed |
 | RACHEL-LEP2-1 | Sgt. Rachel Torres / POP-00057 | safety | Article LEP/2; typed public-safety signal and classification/response gap | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed with zero candidates/quotes |
 | LILA-LEP2-1 | Dr. Lila Mezran / POP-00154 | health | Article LEP/2; `HEALTH-SERVICE-BRIEF-1`; typed access/timeline/human-cost unknowns | DeepSeek / DeepSeek / local source brief | [x] | attended W1-W3/Rhea passed; DeepSeek schema pass, Llama schema fail |
@@ -734,6 +734,7 @@ so an attended visual proof correctly remains open until Saturday compile.
 
 ## Changelog
 
+- 2026-08-16 (codex) — Marked Luis's story-linked lived-exposure/Sonnet proof blocked on the systemic `exposure.evidence` source-design gap tracked by pipeline.57; no propagation mapping was invented.
 - 2026-08-09 (codex) — Filed ADR/exemplar/validator and built the isolated three-wake treatment path; API run and comparison pending.
 - 2026-08-09 (codex) — Completed the C102 three-wake A/B and first tuning loop. v1 reduced unsupported hard detail and cut Wake 3 context/cost, but did not reach publishable accuracy; deterministic INTAKE shipped, quote lattice is the next variable.
 - 2026-08-09 (codex) — Re-ran Wake 3 after sanitizing W1/W2 handoff fields and fixing zero-tool fail-open behavior. Final sample used one compose turn and zero tools; v1 remains unfit for promotion because free quote text still becomes invented reporter observation.

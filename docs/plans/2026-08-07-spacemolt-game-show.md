@@ -84,6 +84,7 @@ pointers:
 
 - [ ] In-world broadcaster: who *airs* the show in Oakland — an existing business entity (Civis Systems? a media house?) or a new minted business? (Shapes coverage voice + a possible sponsor thread; decide with Mike at Phase 0.3.)
 - [x] Episode cadence — **DECIDED per cycle, rotating cast** (2026-08-16, Mike sign-off on rb's recommendation; see 1.1).
+- [ ] Themed special weeks (Mike-direction 2026-08-16): full special-event weeks around holidays and city moments once the base loop is locked in — a cadence variant, not a new mechanism. Revisit after the first cycles prove ingestion → coverage → feedback. The casino era spawning from the show remains Phase 4b: its own design doc + Mike sign-off, unchanged.
 - [ ] Does the audience wake-day participation need any mechanic beyond perception + ECL (e.g., a "watched the episode" LifeHistory event), or is texture enough for v1?
 
 ## Changelog

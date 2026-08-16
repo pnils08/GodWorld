@@ -603,6 +603,13 @@ and it needs to land before per-district accountability is built on top of it.
 
 ## 10. The ledger seam — keep the tracker, add a conduct ledger
 
+**Converged 2026-08-16:** the conduct-ledger half of this section landed as civic.24's
+City Hall Ledger ([[2026-08-16-city-hall-nine-seat-table]] §3), built independently from
+the hearing-design side and reaching the same cardinality argument below by a different
+route — two lanes finding the same seam is stronger evidence it's real than either
+argument alone. civic.22 is narrowed to the surviving half: authorship columns (§7),
+not the conduct ledger. The reasoning below stays as the record of why the seam exists.
+
 **Question put to engine-sheet 2026-08-15:** is `Initiative_Tracker` the system this
 needs, or would a purpose-built city-hall ledger do the job better?
 

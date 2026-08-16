@@ -69,7 +69,7 @@ pointers:
   - **Cadence:** dispatched through existing M-F desk-wake machinery when a `feed/c{N}.json` carries an event not yet written up — not a fixed daily slot, since the show itself runs per-cycle rotating cast, not every wake.
   - **Canon door:** stays Sat-edition-only (PIN rule), same as every other desk — drafts queue through the week, publish Saturday.
   - **Fourth wall:** same ban as the feed/ECL contracts (no "video game," MCP, tool_error, etc.) — the writer composes free prose, so this needs to be an explicit RULES line, not just inherited from a pre-validated row.
-  - **Status:** spec only, no agent files yet. Next: grok picks persona + drafts on disk (same pattern as civic.22/civic.24), Claude reviews + lands.
+  - **Status:** grok first pass drafted 2026-08-16 — persona **Nia Rook** (fresh mint, POPID pending). Voice + bag in `docs/media/`. Agent package in `output/grok/undocked-desk/` for Claude to land under `.claude/agents/nia-rook/`. Not in live `persona-map.json` until mint. Celeste Tran (POP-00164) considered and rejected: social-trends diagnosis, not episode-arc recap.
 
 ## Phase 4 — Wager lane (gated, sequential)
 
@@ -136,6 +136,7 @@ pointers:
 - 2026-08-15 (kimi) — CORRECTION (Mike-direct, via rb): no-gate covers EXECUTION PACE ONLY, not policy — eligibility filter/draw-params/Phase-1-proceed still need Mike's sign-off, routed kimi → rb → Mike. Supersedes entry above.
 - 2026-08-16 (research-build) — Pilot flown (kimi, `13fd2633`): Marcus Walker, exit 0, 78 turns, ~$0.13. 1.2 pilot-voice pattern proven live. Dane + Jumper ready. Cadence RECOMMENDED per-cycle/rotating-cast, held pending Mike per the correction above.
 - 2026-08-16 (kimi) — **Cadence DECIDED (Mike sign-off): one episode per cycle, rotating cast.** 1.1 and open-questions updated. Dane + Jumper proving flights authorized by rb as execution-pace (proven mechanism, no new policy) — flying same session.
+- 2026-08-16 (grok) — §3.1 first pass: Nia Rook (pending mint). Voice + UNDOCKED bag on disk; agent package at output/grok/undocked-desk/ (not .claude/agents). Feed-only data contract + explicit fourth-wall RULES. Claude lands after review; es mints POPID.
 - 2026-08-16 (grok) — 2.3 pool expanded for rb review: one PoolKey, 24 lines (watch/argue/love/sting/lottery). Love/sting gated on proposed warmth 0–100 DialState; lottery on fame=0. Fire-rate notes in script header (1–4 events/citizen, PoolKey mass balance, 40-row cap). Still fail-closed until es lands undocked+warmth+drive.
 - 2026-08-16 (grok) — Phase 2.3 drafted for engine-sheet land, not applied: 9 `culture.spacemolt-show` lines (watch/argue/aspire) in `scripts/undockedEclPool.js`. Conditions `undocked=1` fail-closed on today's loader. Drop-in `undockedEclPool.engine.js` (DSL flag + condScopes + approved-feed load). No Event_Content_Ledger write. 2.3 is sim-wiring per this plan's terminal split.
 - 2026-08-16 (grok) — Phase 2.2 first pass: `undockedShowContract.js` + `undockedShowGate.js`. Disk intake (Applied=no → yes/rejected), one feed type `undocked-episode`, no sheet write. credits_delta_windowed + open_escrow flags on the row so a later-episode fill is a known scoping choice. Held for rb review.

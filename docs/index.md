@@ -190,6 +190,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 - **[[media/TANYA_SIDELINE_BAG]]** · **[[media/SIMON_LONGVIEW_BAG]]** — sports-support bags (grok). *(reference, media, sports, active)*
 - **[[media/ARIANA_ANALYTICS_BAG]]** — Ariana Reyes sports-native deep analytics (grok). *(reference, media, sports, data, active)*
 - **[[media/SHARON_LIFESTYLE_BAG]]** — Sharon Okafor lifestyle (grok). *(reference, media, culture, active)*
+- **[[media/NIA_ROOK_UNDOCKED_BAG]]** — Nia Rook UNDOCKED recap bag (grok, pending mint). Feed-only facts. *(reference, media, culture, undocked, active)*
 - **[[media/HARTLEY_VISUAL_BAG]]** — DJ Hartley visual record (grok). *(reference, media, sports, photo, active)*
 - **[[media/P_SLAYER_JOURNEY_INDEX]]** — P Slayer's journey across editions. *(entity, media, active)*
 - **[[media/PAULSON_CARPENTERS_LINE]]** — "The Carpenter's Line" — Mike Paulson backstory by Hal Richmond. *(entity, media, active)*

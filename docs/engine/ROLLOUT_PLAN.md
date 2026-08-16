@@ -188,7 +188,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | governance.33 | C96 gap-log triage | in-progress | research-build / engine-sheet | [[../plans/2026-06-07-c96-gap-log-triage]] — detail in pointer (relocated 2026-07-02) |
 | governance.35 | REDUCED S260 by governance.36 §loop-tightening to the PIN-self-derive remnant | ready | engine-sheet (design: research-build DONE) | [[../plans/2026-06-14-session-context-mechanization]] — detail in pointer (relocated 2026-07-02) |
 | governance.47 | Cross-lane message bus — stop hand-relaying between lanes; deterministic transport + routing at a judgment seat | blocked | research-build | [[../plans/2026-08-15-cross-lane-message-bus]] |
-| governance.49 | Standing lint for the writer-fixed/artifact-persists class — flag scripts whose delete/replace failure counter never reaches the exit code | ready | engine-sheet | [[../plans/2026-08-16-writer-fixed-artifact-persists-audit]] §Findings Task 3 |
+| governance.49 | Standing lint for the writer-fixed/artifact-persists class — flag scripts whose delete/replace failure counter never reaches the exit code | ready | kimi | [[../plans/2026-08-16-writer-fixed-artifact-persists-audit]] §Findings Task 3 |
 
 ---
 

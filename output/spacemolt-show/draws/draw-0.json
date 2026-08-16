@@ -1,0 +1,77 @@
+{
+  "show": "UNDOCKED",
+  "draw": 0,
+  "cycle": "TEST",
+  "seedString": "UNDOCKED-TEST:draw0:cycleTEST",
+  "params": {
+    "cast": 3,
+    "alternates": 3,
+    "currentYear": 2042,
+    "minAge": 18
+  },
+  "eligibility": [
+    "Status === 'Active'",
+    "adult: BirthYear <= 2024",
+    "resides in Oakland (MigrationDestination empty or ReturnedCycle >= MigratedCycle)",
+    "not a sitting elected official (Civic_Office_Ledger active roster)",
+    "POPID and Neighborhood present"
+  ],
+  "eligibleCount": 784,
+  "eligibleSnapshotHash": "629bdc1895087189be83160e0c4e15f48433d8f1e8f25d4b3772d59ceb2b69e8",
+  "officialsExcluded": 10,
+  "ledgerRows": 940,
+  "cast": [
+    {
+      "popid": "POP-00882",
+      "name": "Basma Inoue",
+      "age": 55,
+      "neighborhood": "Jack London",
+      "role": "BBQ Pitmaster",
+      "tier": "4"
+    },
+    {
+      "popid": "POP-00932",
+      "name": "Winifred Chen",
+      "age": 54,
+      "neighborhood": "West Oakland",
+      "role": "Community Organizer",
+      "tier": "4"
+    },
+    {
+      "popid": "POP-00476",
+      "name": "Jenna Comer",
+      "age": 44,
+      "neighborhood": "Rockridge",
+      "role": "Real Estate Developer",
+      "tier": "4"
+    }
+  ],
+  "alternates": [
+    {
+      "popid": "POP-00296",
+      "name": "Den Blue",
+      "age": 60,
+      "neighborhood": "Piedmont Ave",
+      "role": "Nurse aide",
+      "tier": "4"
+    },
+    {
+      "popid": "POP-00576",
+      "name": "Beth Hayes",
+      "age": 66,
+      "neighborhood": "West Oakland",
+      "role": "Landscaper",
+      "tier": "3"
+    },
+    {
+      "popid": "POP-00330",
+      "name": "Blaire Jackson",
+      "age": 54,
+      "neighborhood": "Piedmont Ave",
+      "role": "Midwife",
+      "tier": "4"
+    }
+  ],
+  "drawnAt": "2026-08-16T05:26:31.008Z",
+  "drawnBy": "scripts/undockedDraw.js"
+}

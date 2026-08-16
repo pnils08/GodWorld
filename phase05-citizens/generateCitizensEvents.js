@@ -2627,9 +2627,14 @@ function generateCitizensEvents_(ctx) {
         hoodtrend: hoodStateForCond ? hoodStateForCond.trajectory : "",
         momentum: (hoodStateForCond && hoodStateForCond.trajectory) ? hoodStateForCond.trajectoryMomentum : null,
         // research.27 Phase 2.3 (S376): UNDOCKED color scopes.
-        // `undocked` gates on an APPROVED feed being loaded for this cycle —
-        // stepApprove writes S.undockedFeedEntries, and an unapproved or absent
-        // feed leaves the array empty so every UNDOCKED row fails closed. That
+        // `undocked` gates on an APPROVED feed being loaded for this cycle.
+        // NOTHING WRITES S.undockedFeedEntries YET — the Phase-2 loader is
+        // unbuilt (research.27 2.3 item 4), so this is false every cycle and
+        // every UNDOCKED row is unreachable until it lands. An earlier version
+        // of this comment credited a `stepApprove` function; no such function
+        // exists anywhere in the repo — the gate's verb is decide() in
+        // scripts/undockedShowGate.js, which writes disk, not summary state.
+        // An unapproved or absent feed must leave the array empty. That
         // is deliberate: the show's color must never appear in a cycle the show
         // did not actually air.
         undocked: !!(S.undockedFeedEntries && S.undockedFeedEntries.length),

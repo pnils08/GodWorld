@@ -75,9 +75,17 @@ This manifest is the registry of all active Google Sheets tabs hooked into the P
 - **`Cycle_Packet`**: The comprehensive cycle JSON digest.
 
 ## 8. Sports & Satellites
-- **`Oakland_Sports_Feed`**: Interactive sports event intake.
-- **`NBA_Game_Intake`**: Basketball stats and outcomes.
-- **`MLB_Game_Intake`**: Baseball stats and outcomes.
+- **`Oakland_Sports_Feed`**: Interactive sports event intake. **This is the live
+  feed-tab precedent** — a Phase-2 read (`applySportsSeason.js` L302,
+  `applySportsFeedTriggers_`) sets summary state before Phase 5 events. Copy this
+  shape for any new per-cycle feed, not the dead intakes below.
+- ~~**`NBA_Game_Intake`**~~ / ~~**`MLB_Game_Intake`**~~: **DEAD, removed S139**
+  (`phase10-persistence/cycleExportAutomation.js` L57). Listed here for years
+  after deletion, and that drift caused a real error: S376 cited them as live
+  precedent for a new feed design before Fable's review caught it. Kept as
+  struck-through tombstones rather than deleted so the next reader learns they
+  are gone instead of re-adding them. Same S139 pass also removed `Sports_Calendar`,
+  `Arc_Ledger`, and `Sports_Feed` (a duplicate of `Oakland_Sports_Feed`).
 - **`Chicago_Feed`**: Satellite world state reference.
 - **`Chicago_Sports_Feed`**: Satellite sports reference.
 - **`Chicago_Citizens`**: Satellite citizen roster.

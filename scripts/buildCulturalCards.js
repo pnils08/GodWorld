@@ -24,6 +24,29 @@
  *   node scripts/buildCulturalCards.js --apply --wipe-old                 # wipe + write
  *   node scripts/buildCulturalCards.js --apply --name "Beverly Hayes"     # one by name
  *   node scripts/buildCulturalCards.js --apply --cul CUL-3913E3E5         # one by CUL-ID
+ *   node scripts/buildCulturalCards.js --reconcile                        # dry-run dedupe report
+ *   node scripts/buildCulturalCards.js --reconcile --apply                # delete surplus cards
+ *   node scripts/buildCulturalCards.js --apply --wipe-old --allow-partial-wipe
+ *
+ * engine.110 (S376) — one-doc-per-CUL-ID invariant. Before this, writes were
+ * POST-only and `--wipe-old` counted DELETE failures without acting on them, so
+ * every partial wipe stacked another version: the live layer held 95 docs for 46
+ * figures (38 figures multi-carded, 49 surplus), with April-28 cards surviving
+ * every wipe since. Three changes close it:
+ *   1. PATCH-if-exists / POST-if-new, keyed on metadata.cul_id — a rebuild now
+ *      refreshes the card in place instead of adding a version. Census confirmed
+ *      metadata.cul_id present on 95/95 live docs, so the map sees every doc;
+ *      list rows carry no content, so metadata-keying also avoids a GET pass.
+ *   2. `--wipe-old` DELETE failures are classified (404 = already gone = success)
+ *      and any unresolved failure ABORTS before the write pass. Writing on top of
+ *      a half-completed wipe is precisely what built the stack.
+ *   3. `--reconcile` collapses each CUL-ID to its NEWEST doc.
+ * Keep-NEWEST is deliberate and diverges from dedupWdCitizens.js's keep-oldest:
+ * that script's oldest-id rule is safe because buildCitizenCards has PATCHed in
+ * place since S223, so its oldest doc carries fresh content. wd-cultural has
+ * never had PATCH, so here only the newest doc holds current content — keeping
+ * oldest would delete the fresh card and preserve an April one. The map below
+ * keys on newest for the same reason; map and reconcile MUST agree.
  *
  * Write payload: /v3/documents POST with
  *   containerTags: ['world-data', 'wd-cultural']
@@ -47,6 +70,12 @@ var DOMAIN_TAG = 'wd-cultural';
 var API_HOST = 'api.supermemory.ai';
 var APPLY = process.argv.includes('--apply');
 var WIPE_OLD = process.argv.includes('--wipe-old');
+// engine.110: escape hatch so an operator can still force a write pass over a
+// partial wipe. Off by default — the silent version of this was the defect.
+var ALLOW_PARTIAL_WIPE = process.argv.includes('--allow-partial-wipe');
+// engine.110: reconcile mode — collapse each CUL-ID to its newest doc. Dry-run
+// unless --apply is also passed; every delete is logged to output/ for reversal.
+var RECONCILE = process.argv.includes('--reconcile');
 
 var nameArg = process.argv.indexOf('--name');
 var NAME_FILTER = nameArg > 0 ? process.argv[nameArg + 1] : null;
@@ -129,7 +158,7 @@ function searchSupermemory(query, container) {
 var WRITE_MAX_RETRIES = 3;
 var WRITE_RETRY_SLEEP_MS = 8000;
 
-async function writeMemory(content, fig) {
+async function writeMemory(content, fig, culIdMap) {
   var meta = {
     title: fig.name,
     cul_id: fig.culId,
@@ -141,19 +170,148 @@ async function writeMemory(content, fig) {
     containerTags: [CONTAINER_TAG, DOMAIN_TAG],
     metadata: meta
   };
+  // engine.110: PATCH-if-exists / POST-if-new (one doc per CUL-ID invariant),
+  // ported from buildCitizenCards.js S223. culIdMap is built once per APPLY run
+  // by buildCulIdMap(); it holds the NEWEST doc id per CUL-ID — see header.
+  // Without this a rebuild POSTs a second doc whenever the wipe misses one.
+  var existing = culIdMap && culIdMap.get(fig.culId);
+  var method = existing ? 'PATCH' : 'POST';
+  var apiPath = existing ? '/v3/documents/' + existing.id : '/v3/documents';
   for (var attempt = 0; attempt <= WRITE_MAX_RETRIES; attempt++) {
-    var r = await smRequest('POST', '/v3/documents', body);
+    var r = await smRequest(method, apiPath, body);
     if (r.status >= 200 && r.status < 300) {
-      return { status: r.status, id: r.body && r.body.id };
+      return { status: r.status, id: r.body && r.body.id, op: method };
     }
     if ((r.status === 401 || r.status === 429) && attempt < WRITE_MAX_RETRIES) {
-      console.log('  [retry] write got ' + r.status + ' (rate-limit?); sleeping ' + (WRITE_RETRY_SLEEP_MS / 1000) + 's, attempt ' + (attempt + 2) + '/' + (WRITE_MAX_RETRIES + 1));
+      console.log('  [retry] ' + method + ' got ' + r.status + ' (rate-limit?); sleeping ' + (WRITE_RETRY_SLEEP_MS / 1000) + 's, attempt ' + (attempt + 2) + '/' + (WRITE_MAX_RETRIES + 1));
       await smSleep(WRITE_RETRY_SLEEP_MS);
       continue;
     }
-    throw new Error('HTTP ' + r.status + ': ' + (typeof r.body === 'string' ? r.body : JSON.stringify(r.body)));
+    throw new Error('HTTP ' + r.status + ' on ' + method + ' ' + apiPath + ': ' + (typeof r.body === 'string' ? r.body : JSON.stringify(r.body)));
   }
   throw new Error('writeMemory exhausted ' + (WRITE_MAX_RETRIES + 1) + ' attempts');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// CUL-ID → DOC MAP — enumerate wd-cultural to enable PATCH-in-place writes
+// ═══════════════════════════════════════════════════════════════════════════
+// engine.110. Built once per APPLY run and reused by --reconcile. Keys on
+// metadata.cul_id (census 2026-08-16: present on 95/95 live docs, and list rows
+// carry no content — so metadata-keying is both complete and one pass cheaper
+// than the content-scoped extraction the wipe path uses on un-tagged legacy).
+// Keeps the NEWEST doc per CUL-ID; see header for why this diverges from
+// dedupWdCitizens.js's keep-oldest. `dupes` carries every superseded doc so
+// reconcile can act on the same grouping the writer trusts.
+async function buildCulIdMap() {
+  console.log('[buildCulturalCards] enumerating ' + DOMAIN_TAG + ' for CUL-ID→id map…');
+  var map = new Map();
+  var dupes = [];
+  var total = 0;
+  var page = 1;
+  while (true) {
+    var r = await smRequest('POST', '/v3/documents/list', {
+      containerTags: [DOMAIN_TAG], limit: 200, page: page
+    });
+    if (r.status !== 200) throw new Error('CUL-ID-map list failed at page ' + page + ': ' + r.status);
+    var mems = (r.body && r.body.memories) || [];
+    for (var i = 0; i < mems.length; i++) {
+      var m = mems[i];
+      var cul = m.metadata && m.metadata.cul_id;
+      total++;
+      if (!cul) continue;
+      var rec = { id: m.id, createdAt: m.createdAt, culId: cul };
+      var prev = map.get(cul);
+      if (!prev) { map.set(cul, rec); continue; }
+      // Keep newest; the loser is a surplus doc.
+      if (new Date(rec.createdAt) > new Date(prev.createdAt)) {
+        map.set(cul, rec);
+        dupes.push(prev);
+      } else {
+        dupes.push(rec);
+      }
+    }
+    if (mems.length < 200) break;
+    page++;
+    if (page > 20) throw new Error('CUL-ID-map pagination overflow (>20 pages)');
+  }
+  console.log('[buildCulturalCards] CUL-ID→id map: ' + map.size + ' unique CUL-IDs across ' +
+    total + ' docs (' + dupes.length + ' surplus docs above the one-per-figure invariant)');
+  return { map: map, dupes: dupes, total: total };
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// RECONCILE — collapse each CUL-ID to its newest doc
+// ═══════════════════════════════════════════════════════════════════════════
+// engine.110. Legacy-state pass for the versions already stacked; PATCH-if-exists
+// above is what stops new ones. Dry-run unless --apply. Every delete is written
+// to output/wd-cultural-reconcile-<ts>.log before it happens, so the set is
+// recoverable from the log if a delete turns out to have been wrong.
+async function reconcileCulturalCards() {
+  var enumerated = await buildCulIdMap();
+  var dupes = enumerated.dupes;
+
+  console.log('\n[reconcile] mode: ' + (APPLY ? 'APPLY' : 'DRY-RUN'));
+  console.log('[reconcile] docs: ' + enumerated.total +
+    ' | figures: ' + enumerated.map.size +
+    ' | surplus to delete: ' + dupes.length);
+
+  if (dupes.length === 0) {
+    console.log('[reconcile] one-doc-per-CUL-ID invariant already holds — nothing to do.');
+    return;
+  }
+
+  var byCul = {};
+  dupes.forEach(function (d) { (byCul[d.culId] = byCul[d.culId] || []).push(d); });
+  var culs = Object.keys(byCul).sort();
+  console.log('[reconcile] figures holding surplus: ' + culs.length);
+  culs.slice(0, 10).forEach(function (c) {
+    var keep = enumerated.map.get(c);
+    console.log('  ' + c + ' — keep ' + String(keep.createdAt).slice(0, 10) +
+      ' | delete ' + byCul[c].map(function (d) { return String(d.createdAt).slice(0, 10); }).join(', '));
+  });
+  if (culs.length > 10) console.log('  … +' + (culs.length - 10) + ' more figures');
+
+  if (!APPLY) {
+    console.log('\n[reconcile] DRY-RUN — no deletes issued. Re-run with --reconcile --apply to execute.');
+    return;
+  }
+
+  var fs = require('fs');
+  var path = require('path');
+  var stamp = new Date().toISOString().replace(/[:.]/g, '-');
+  var logPath = path.join('/root/GodWorld/output', 'wd-cultural-reconcile-' + stamp + '.log');
+  var logLines = dupes.map(function (d) {
+    return [d.culId, d.id, d.createdAt, 'keep=' + enumerated.map.get(d.culId).id].join('\t');
+  });
+  fs.writeFileSync(logPath, logLines.join('\n') + '\n', 'utf8');
+  console.log('[reconcile] delete manifest written: ' + logPath);
+
+  var deleted = 0;
+  var alreadyGone = 0;
+  var failures = [];
+  for (var i = 0; i < dupes.length; i++) {
+    var res = await deleteDoc(dupes[i].id);
+    if (res.outcome === 'deleted') deleted++;
+    else if (res.outcome === 'already-gone') alreadyGone++;
+    else failures.push({ id: dupes[i].id, culId: dupes[i].culId, status: res.status });
+    if ((i + 1) % 25 === 0 || i === dupes.length - 1) {
+      console.log('  DELETE ' + (i + 1) + '/' + dupes.length +
+        ' — deleted=' + deleted + ' already-gone=' + alreadyGone + ' failed=' + failures.length);
+    }
+    await smSleep(250);
+  }
+
+  console.log('\n[reconcile] deleted: ' + deleted + ' | already-gone: ' + alreadyGone +
+    ' | failed: ' + failures.length);
+  if (failures.length > 0) {
+    failures.slice(0, 20).forEach(function (f) {
+      console.error('  [FAIL] ' + f.culId + ' ' + f.id + ' → HTTP ' + f.status);
+    });
+    console.error('[GATE-FAIL] reconcile left ' + failures.length +
+      ' surplus doc(s) in place; manifest: ' + logPath);
+    process.exit(1);
+  }
+  console.log('[reconcile] one-doc-per-CUL-ID invariant restored.');
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -252,23 +410,62 @@ async function wipeOldCulturalCards(figures) {
 
   console.log('[wipe-old] DELETE pass');
   var deleted = 0;
-  var failed = 0;
+  var alreadyGone = 0;
+  var failures = [];
   for (var k = 0; k < matches.length; k++) {
-    var del = await smRequest('DELETE', '/v3/documents/' + matches[k].id, null);
-    var ok = del.status === 204 || del.status === 200;
-    if (!ok && del.status === 409) {
-      await smSleep(20000);
-      var del2 = await smRequest('DELETE', '/v3/documents/' + matches[k].id, null);
-      ok = del2.status === 204 || del2.status === 200;
-    }
-    if (ok) deleted++; else failed++;
+    var res = await deleteDoc(matches[k].id);
+    if (res.outcome === 'deleted') deleted++;
+    else if (res.outcome === 'already-gone') alreadyGone++;
+    else failures.push({ id: matches[k].id, culId: matches[k].culId, status: res.status });
     if ((k + 1) % 25 === 0 || k === matches.length - 1) {
-      console.log('  DELETE ' + (k + 1) + '/' + matches.length + ' — ok=' + deleted + ' failed=' + failed);
+      console.log('  DELETE ' + (k + 1) + '/' + matches.length +
+        ' — deleted=' + deleted + ' already-gone=' + alreadyGone + ' failed=' + failures.length);
     }
     await smSleep(200);
   }
-  console.log('[wipe-old] DELETE results: ' + deleted + ' ok / ' + failed + ' failed');
-  return { candidates: ids.length, matched: matches.length, deleted: deleted, failed: failed };
+  console.log('[wipe-old] DELETE results: ' + deleted + ' deleted / ' + alreadyGone +
+    ' already-gone / ' + failures.length + ' failed');
+  // engine.110: the defect. Pre-fix this counted `failed` and returned; main()
+  // logged the number and wrote anyway, so every undeleted doc became a stacked
+  // version. Failures are now itemised with their HTTP status (previously the
+  // status was discarded, which is why "14 failed" was never diagnosable) and
+  // abort the run BEFORE the write pass — matching the emptyAfterRetry refusal
+  // above. 404 is NOT a failure: the doc is gone, which is the goal.
+  if (failures.length > 0) {
+    failures.slice(0, 20).forEach(function (f) {
+      console.error('  [FAIL] wipe ' + f.culId + ' ' + f.id + ' → HTTP ' + f.status);
+    });
+    if (failures.length > 20) console.error('  … +' + (failures.length - 20) + ' more');
+    if (!ALLOW_PARTIAL_WIPE) {
+      throw new Error('wipe-old: ' + failures.length + ' of ' + matches.length +
+        ' DELETEs failed. Refusing to write on top of a partial wipe — that is what stacked ' +
+        'the card layer. Re-run to retry, or pass --allow-partial-wipe to override deliberately.');
+    }
+    console.error('[wipe-old] --allow-partial-wipe set — proceeding over ' + failures.length +
+      ' failed delete(s); expect duplicate cards for those figures.');
+  }
+  return {
+    candidates: ids.length, matched: matches.length,
+    deleted: deleted, alreadyGone: alreadyGone, failed: failures.length
+  };
+}
+
+// engine.110: single DELETE with status classification, shared by wipe-old and
+// reconcile. 404 = the document is already absent, which satisfies the caller's
+// intent — counting it as a failure would turn a benign race into a hard stop.
+// 409 keeps the pre-existing 20s indexing-conflict retry.
+async function deleteDoc(id) {
+  var del = await smRequest('DELETE', '/v3/documents/' + id, null);
+  if (del.status === 204 || del.status === 200) return { outcome: 'deleted', status: del.status };
+  if (del.status === 404) return { outcome: 'already-gone', status: 404 };
+  if (del.status === 409) {
+    await smSleep(20000);
+    var del2 = await smRequest('DELETE', '/v3/documents/' + id, null);
+    if (del2.status === 204 || del2.status === 200) return { outcome: 'deleted', status: del2.status };
+    if (del2.status === 404) return { outcome: 'already-gone', status: 404 };
+    return { outcome: 'failed', status: del2.status };
+  }
+  return { outcome: 'failed', status: del.status };
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -343,6 +540,13 @@ function buildCard(fig, appearances) {
 // ═══════════════════════════════════════════════════════════════════════════
 
 async function main() {
+  // engine.110: reconcile is a standalone legacy-state pass over the card layer
+  // — it reads no sheet and writes no cards, so it returns before the build path.
+  if (RECONCILE) {
+    await reconcileCulturalCards();
+    return;
+  }
+
   console.log('[buildCulturalCards] Mode: ' + (APPLY ? 'APPLY' : 'DRY-RUN'));
   if (NAME_FILTER) console.log('[buildCulturalCards] Name filter: ' + NAME_FILTER);
   if (CUL_FILTER) console.log('[buildCulturalCards] CUL-ID filter: ' + CUL_FILTER);
@@ -428,12 +632,24 @@ async function main() {
     console.log('[wipe-old] sleeping ' + (WIPE_INDEXING_SLEEP_MS / 1000) + 's for async indexing to settle before writes');
     await smSleep(WIPE_INDEXING_SLEEP_MS);
   } else if (APPLY && !WIPE_OLD) {
-    console.log('[buildCulturalCards] --wipe-old not set — writes will land alongside any existing un-tagged cards.');
+    console.log('[buildCulturalCards] --wipe-old not set — un-tagged legacy cards are left in place; ' +
+      'tagged cards are PATCHed in place, not duplicated.');
+  }
+
+  // engine.110: built after the wipe so it reflects post-delete state. This is
+  // what makes a rebuild idempotent — every figure already carrying a card is
+  // PATCHed rather than POSTed a second time.
+  var culIdMap = null;
+  if (APPLY) {
+    culIdMap = (await buildCulIdMap()).map;
   }
 
   // Process each figure
   var written = 0;
+  var patched = 0;
+  var posted = 0;
   var errors = 0;
+  var failureList = [];
   var withAppearances = 0;
   var rawAppearancesTotal = 0;
   var filteredOutTotal = 0;
@@ -466,13 +682,15 @@ async function main() {
       console.log('');
     } else {
       try {
-        await writeMemory(card, fig);
+        var wr = await writeMemory(card, fig, culIdMap);
         written++;
+        if (wr.op === 'PATCH') patched++; else posted++;
         if ((fi + 1) % 10 === 0) {
           console.log('  ... ' + (fi + 1) + '/' + figures.length + ' written (' + withAppearances + ' with appearances)');
         }
       } catch (e) {
         console.error('[FAIL] ' + fig.name + ' (' + fig.culId + '): ' + e.message);
+        failureList.push({ culId: fig.culId, name: fig.name, error: e.message });
         errors++;
       }
       await smSleep(500);
@@ -483,6 +701,7 @@ async function main() {
   console.log('[DONE] Cultural figures: ' + figures.length +
     ' | With appearances: ' + withAppearances +
     ' | Written: ' + written +
+    (APPLY ? ' (PATCH: ' + patched + ' / POST: ' + posted + ')' : '') +
     ' | Errors: ' + errors);
   console.log('[FILTER] Raw bay-tribune hits: ' + rawAppearancesTotal +
     ' | Filtered out: ' + filteredOutTotal +
@@ -491,7 +710,19 @@ async function main() {
     console.log('[WIPE-OLD] candidates: ' + wipeReport.candidates +
       ' | matched (CUL-ID-scoped): ' + wipeReport.matched +
       ' | deleted: ' + wipeReport.deleted +
+      ' | already-gone: ' + wipeReport.alreadyGone +
       ' | failed: ' + wipeReport.failed);
+  }
+
+  // engine.110: errors-gate, same contract buildCitizenCards.js has carried since
+  // canon.3 T6 — /post-publish Step 2a-cul and wdCardsDaemon dispatch this script
+  // and had no way to detect a partial failure beyond grepping stdout.
+  if (errors > 0) {
+    console.error('\n[GATE-FAIL] ' + errors + ' cultural card write(s) failed:');
+    failureList.forEach(function (f) {
+      console.error('  ' + f.culId + ' ' + f.name + ' — ' + f.error);
+    });
+    process.exit(1);
   }
 }
 

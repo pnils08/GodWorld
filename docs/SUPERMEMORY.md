@@ -316,7 +316,7 @@ published provenance for canon searches.
 | Citizen card | `world-data` + `wd-citizens` | `node scripts/buildCitizenCards.js --apply` | — | writer handles tag pair + POPID-content-scoped wipe |
 | Business card | `world-data` + `wd-business` | `node scripts/buildBusinessCards.js --apply` | — | BIZID-content-scoped wipe |
 | Faith card | `world-data` + `wd-faith` | `node scripts/buildFaithCards.js --apply` | — | FAITH-ID-content-scoped wipe |
-| Cultural card | `world-data` + `wd-cultural` | `node scripts/buildCulturalCards.js --apply` | — | cultural-POPID-content-scoped wipe |
+| Cultural card | `world-data` + `wd-cultural` | `node scripts/buildCulturalCards.js --apply` | — | CUL-ID-content-scoped wipe (never POPID — the header is `(CUL-XXXXXXXX)`). engine.110: PATCH-if-exists keyed on `metadata.cul_id`, so a rebuild refreshes in place; `--wipe-old` aborts before writing if any DELETE fails; `--reconcile` collapses a figure's stacked cards to the newest |
 | Neighborhood card | `world-data` + `wd-neighborhood` | `node scripts/buildNeighborhoodCards.js --apply` | — | neighborhood-name-scoped wipe |
 | Initiative card | `world-data` + `wd-initiative` | `node scripts/buildInitiativeCards.js --apply` | — | INIT-ID-content-scoped wipe |
 | Player truesource | `world-data` + `wd-player-truesource` | `node scripts/ingestPlayerTrueSource.js --apply` | — | truesource-header-scoped wipe |

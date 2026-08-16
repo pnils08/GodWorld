@@ -1,0 +1,18 @@
+{
+  "desk": "civic",
+  "cycle": "103",
+  "provider": "openrouter",
+  "model": "deepseek/deepseek-chat",
+  "reporterVoice": true,
+  "factsCorrect": true,
+  "hallucinationCount": 0,
+  "hallucinations": [],
+  "wordCount": 369,
+  "humanEdits": null,
+  "runtimeSec": 25,
+  "apiCostUsd": 0.0096,
+  "usageInputTokens": 34683,
+  "usageOutputTokens": 576,
+  "notes": "All facts trace to world state. No hallucinations detected.",
+  "ranAt": "2026-08-16T03:06:39.595Z"
+}

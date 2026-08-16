@@ -152,6 +152,53 @@ because they are safe — identical POST-only code, less traffic. `wd-faith` has
 already produced its first duplicate. Treat them as preventative work, not as
 evidence the pattern is optional.
 
+### Reconcile results + an orphan finding pointing the other way (S376)
+
+Both live reconciles ran and the layer is clean:
+
+| projection | before | after | ratio | rebuild |
+|---|---|---|---|---|
+| `wd-cultural` | 95 docs / 46 figures | 46 / 46 | 2.07 → **1.00** | PATCH 46 / POST 0, 0 errors |
+| `wd-business` | 435 docs / 99 businesses | 99 / 99 | 4.39 → **1.00** | PATCH 94 / POST 0, 0 errors |
+
+**The business reconcile ran twice concurrently** — the first invocation went to
+background and a second started while it was still deleting. Combined: 289 + 47 =
+336 deleted, exactly the surplus, **0 failed**. Each run's "already-gone" tally
+(47 and 13) was the other run's deletes landing first. This is an accidental but
+decisive test of the `deleteDoc` 404 classification: without it both runs would
+have counted those as failures and exited non-zero with a GATE-FAIL, reporting
+total failure on a pair of runs that in fact succeeded completely. Keep-newest
+being deterministic is what made the race safe — both runs computed the same
+survivor per BIZ_ID, so neither could delete the other's keep.
+
+**Orphan cards — 5 businesses exist in the card layer with no `Business_Ledger`
+row.** The rebuild PATCHed 94, not 99, because the ledger holds 94 rows:
+
+| card | name | created |
+|---|---|---|
+| `BIZ-00065` | Dragon Gate | 2026-07-17 |
+| `BIZ-00067` | Blue Lantern | 2026-07-17 |
+| `BIZ-00069` | Calderon-Nishi | 2026-07-17 |
+| `BIZ-00071` | West Side Cafe | 2026-07-27 |
+| `BIZ-00099` | Atlas Bay Architects | 2026-08-02 |
+
+`Business_Ledger` runs BIZ-00001→BIZ-00098 with **exactly four gaps: 65, 67, 69,
+71** — matching four of the five. Four *odd, alternating* IDs missing from the
+middle of the range is not five independent business closures; it has the shape
+of an every-other-row deletion. BIZ-00099 sits above the ledger max, so it was
+either minted without a row or lost from the end.
+
+**This is the inverse of the duplicate problem and must not be "cleaned up."**
+The duplicates were a derived layer holding too much; this is the *source* having
+lost rows the derived layer still remembers. For these five, the cards are the
+surviving record. Deleting them to make the ledger and layer agree would destroy
+the only evidence the businesses existed.
+
+Structural exposure is nil — 888 citizens carry an `EmployerBizId`, none point at
+the five. But POP-01049 (Sarah Huang) carries "Healthcare Director, Atlas Bay
+Architects" in her role text, so at least one citizen's stated employer is a
+business the ledger no longer lists. Filed as `engine.113`; not acted on here.
+
 ### Root cause of the volume — the daemon retry loop, not manual wipes
 
 The census numbers track rebuild *frequency*, not anything about the four
@@ -236,6 +283,7 @@ built inline, per this plan's own instruction.
 - 2026-08-16 — Tasks 1–3 executed (S376, engine-sheet). §Findings added; 38 candidates → 8 instances in two halves; rows engine.111 / engine.112 / governance.49 filed.
 - 2026-08-16 — §Census added (S376, engine-sheet). All six projections counted: 386 surplus docs, wd-business worst at 4.39x. wd-citizens 1.00 proves PATCH is the cause.
 - 2026-08-16 — Root cause traced to the wdCardsDaemon retry loop over POST-only writers (S376, engine-sheet). Gate-without-PATCH would have made it worse; the two halves had to ship together.
+- 2026-08-16 — Both reconciles run live (S376). cultural 95→46, business 435→99, both ratio 1.00, 0 failures. Orphan finding filed as engine.113: 5 cards with no ledger row, 4 in an alternating gap pattern.
 - 2026-08-16 — Both open questions resolved (S375, research-build): grouped rows ratified, census greenlit inside engine.111. governance.48 swept to ROLLOUT_ARCHIVE — this plan stays open, engine.111/112/governance.49 still point here.
 - 2026-08-16 (kimi) — governance.49 SHIPPED (`eac179de`): `auditWriterExitCodes.js`, report + `--gate` modes. Self-test passed; found 4 new canon-ingestion instances. See §governance.49 first run.
 - 2026-08-16 (research-build) — Filed engine.113 for the 4 canon-ingestion instances, escalated to Mike (Saturday canon door affected). See §governance.49 first run.

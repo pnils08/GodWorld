@@ -488,7 +488,7 @@ async function wipeOldCitizenCards(citizens) {
   // on top of the survivors. That is what stacked wd-cultural and wd-business.
   // Abort before writing instead — this file PATCHes in place (S223), so it was
   // never the one accumulating, but the same silent-partial contract applies.
-  if (failures.length > 0) {
+  if (failed > 0) {
     failures.slice(0, 20).forEach(function (f) {
       console.error('  [FAIL] wipe ' + (f.popId || '') + ' ' + f.id + ' → HTTP ' + f.status);
     });

@@ -503,7 +503,7 @@ async function wipeOldTruesourceCards() {
   // engine.112: abort before the write pass rather than ingesting on top of
   // survivors. Matches the emptyAfterRetry refusal a few lines above, which
   // already treats incomplete wipe data as a stop condition.
-  if (failures.length > 0) {
+  if (failed > 0) {
     failures.slice(0, 20).forEach(function (f) {
       console.error('  [FAIL] wipe ' + f.id + ' → HTTP ' + f.status);
     });

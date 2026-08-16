@@ -41,8 +41,10 @@ const SCRIPTS_DIR = path.join(ROOT, 'scripts');
 // 2026-08-16: the four card builders (business/faith/neighborhood/initiative)
 // were verified gated same night (engine.111) and dropped from the ratchet.
 const KNOWN_OPEN = {
-  'buildCitizenCards.js': 'engine.112 (Half B only — Half A gate exists L1110)',
-  'ingestPlayerTrueSource.js': 'engine.112 (Half B)',
+  // engine.112 CLOSED 2026-08-16 (28f88cf5) — buildCitizenCards.js and
+  // ingestPlayerTrueSource.js both classify DELETE status and abort before the
+  // write pass now, so they leave the ratchet. dedupWdCitizens.js was dropped in
+  // 95c18c12 against an uncommitted fix; that fix is in the same commit.
   // Discovered by this lint's first run (kimi, 2026-08-16) — canon-ingestion
   // writers with ungated error counters (Half-A-shaped). Pending rb row filing.
   'ingestCivicWiki.js': 'pending rb row filing (discovered 2026-08-16, first lint run)',
@@ -60,7 +62,15 @@ const DELETE_OR_REPLACE = [
   /supermemory.*\b(?:delete|wipe)\b/i, /replaceArtifact|deleteOld/,
 ];
 const COUNTER_INC = /\b([a-zA-Z_]*(?:failed|errors|failures|errorCount|failCount)[a-zA-Z_]*)\s*(?:\+\+|\+=\s*1)/i;
-const EXIT_STMT = /process\.exit\s*\(\s*[1-9]|process\.exitCode\s*=\s*[1-9]/;
+// A throw counts as an exit path: every writer in scripts/ terminates with
+// `main().catch(e => { console.error(e); process.exit(1) })`, so a guarded throw
+// reaches a non-zero exit exactly like an explicit one. Without this the lint
+// reported buildCitizenCards.js and ingestPlayerTrueSource.js as unguarded when
+// both abort the write pass by throwing (engine.112, 28f88cf5).
+// Assumption worth knowing: a throw swallowed by an enclosing try/catch would be
+// counted as a gate here. No writer in scripts/ currently wraps its wipe pass
+// that way; if one starts to, this heuristic goes soft on it.
+const EXIT_STMT = /process\.exit\s*\(\s*[1-9]|process\.exitCode\s*=\s*[1-9]|throw\s+new\s+Error/;
 
 function analyzeFile(file) {
   const src = fs.readFileSync(file, 'utf8');
@@ -77,14 +87,41 @@ function analyzeFile(file) {
   }
   if (!counters.size) return { verdict: 'not-in-class' };
 
-  // A gate exists if some counter is referenced in a condition within 6 lines
-  // before an exit statement.
+  // A gate exists if some counter is referenced in a condition within
+  // GATE_LOOKBACK lines before an exit statement.
+  //
+  // Was 6, which was too tight for a real gate: buildCitizenCards.js opens with
+  // `if (errors > 0)` at L1148 and exits at L1161 — 13 lines, because the block
+  // between them dumps the failure list to a file first. That is the shape a
+  // good gate has (report, then exit), so the narrow window penalised exactly
+  // the code it should pass. 25 lines covers the dump-then-exit pattern without
+  // reaching into an unrelated block.
+  const GATE_LOOKBACK = 25;
   let gated = false;
   lines.forEach((line, i) => {
     if (!EXIT_STMT.test(line)) return;
-    const window = lines.slice(Math.max(0, i - 6), i + 1).join('\n');
+    const window = lines.slice(Math.max(0, i - GATE_LOOKBACK), i + 1).join('\n');
     for (const c of counters) {
-      if (new RegExp('if\\s*\\([^)]*\\b' + c + '\\b[^)]*[>!=]').test(window)) gated = true;
+      // The condition must mean FAILURES EXIST. The original `[>!=]` accepted any
+      // comparison, which let a success-path condition pass as a gate — and with
+      // the wider window that mattered: ingestEdition.js (the Saturday canon
+      // door) has `if (errors === 0 && !DRY_RUN)` printing a success line 8 lines
+      // above an unrelated exit, and was briefly reported FIXED on that basis. It
+      // is not: a partial ingest prints "Success: 15, Errors: 3" and exits 0.
+      // Accept  errors > 0 / != 0 / !== 0 / >= 1 / bare truthy / .length > 0
+      // Reject  errors === 0 / == 0 / < 1  — those are success conditions.
+      // (?<![.\w]) — the gate must test the bare counter, not some other object's
+      // property that happens to share the name. ingestEdition.js has
+      // `else if (fileIntake.parsed.errors.length)` (a parse-error array) eight
+      // lines above an unrelated exit; without this the canon door reads as
+      // gated when its own `errors` counter never reaches an exit at all.
+      const nonzero = new RegExp(
+        'if\\s*\\([^)]*(?<![.\\w])' + c + '\\b(?:\\.length)?\\s*(?:' +
+        '(?:!==?|>=?)\\s*(?:0|1)' +      // != 0, !== 0, > 0, >= 1
+        '|\\s*[)&|]' +                    // bare truthy: if (errors) / if (errors && …)
+        ')'
+      );
+      if (nonzero.test(window)) gated = true;
     }
   });
 

@@ -1,7 +1,7 @@
 ---
 title: Engine Observability & Tab Integrity Plan
 created: 2026-07-31
-updated: 2026-07-31
+updated: 2026-08-16
 type: plan
 tags: [infrastructure, engine, dashboard, active]
 sources:
@@ -28,9 +28,9 @@ pointers:
 - Verification basis: audit's "37 arcs stuck at 'early'" was **stale** (S83/S156-era finding; arc lifecycle disabled Mike-direct S313 at `phase01-config/godWorldEngine2.js:422-426`, residual is 36 arcs frozen at *peak* in a ledger nothing reads, `Ripple_Ledger` is the successor surface — no arc work in this plan). Audit's "40 endpoints of live world data" was overstated (many routes serve stale `output/` files per DASHBOARD.md's own flags).
 
 **Acceptance criteria:**
-1. `curl localhost:3001/api/sim-health` returns the latest audit cycle + pattern counts by type + anomaly count; panel renders in the dashboard UI.
-2. Zero open rows remain in `docs/SPREADSHEET.md` §Ghost References — each of the 11 carries a recorded disposition (created / repointed / deleted).
-3. `node scripts/tabReferenceIntegrity.test.js` passes, and fails when a fake tab reference is injected into engine code.
+1. `curl localhost:3001/api/sim-health` returns the latest audit cycle + pattern counts by type + anomaly count; panel renders in the dashboard UI. **Track A — still open.**
+2. Zero open rows remain in `docs/SPREADSHEET.md` §Ghost References — each of the 11 carries a recorded disposition (created / repointed / deleted). **Track B — recorded. 10 closed in `c3fe1780` + file-delete / stale-doc dispositions. `Health_Cause_Intake` stays PENDING CREATE (Mike-ruled; must reach engine-sheet from Mike, not a relay). `Chicago_Feed` was a false flag and is not a ghost.**
+3. `node scripts/tabReferenceIntegrity.test.js` passes, and fails when a fake tab reference is injected into engine code. **Track B — shipped `86f43999` (290 refs checked, self-test on Ghost_X/Ghost_Y).**
 
 ---
 
@@ -58,25 +58,41 @@ pointers:
 - **Files:** `docs/SPREADSHEET.md:155-174` — read; engine files per row — read
 - **Steps:** For each of the 11 open ghost references: grep the referencing code, then classify — **create** (tab should exist), **repoint** (code should read a real tab, e.g. `Simulation_Config` → `World_Config` per SPREADSHEET.md:168), or **delete** (reference is dead code). Record each disposition in a Build-notes table before touching code. Note: creating tabs or repointing live engine reads touches Sheets behavior — batch the dispositions for one Mike approval before Task 5.
 - **Verify:** disposition table (11 rows) in Build notes; Mike approval recorded
-- **Status:** [ ] not started
+- **Status:** [x] 2026-08-16 — dispositions recorded in Build notes + `docs/SPREADSHEET.md`. `Health_Cause_Intake` CREATE still needs Mike → engine-sheet.
 
 ### Task 5: Execute dispositions
 - **Files:** per Task 4 table — modify
 - **Steps:** Apply the approved dispositions. Code repoints/deletes in engine files; tab creations go through the normal sheet-change path (not ad-hoc). Update `docs/SPREADSHEET.md` §Ghost References rows with the disposition + date.
 - **Verify:** `rg` per tab name shows intended state; SPREADSHEET.md updated
-- **Status:** [ ] not started
+- **Status:** [x] 2026-08-16 — landed in `c3fe1780` (and the continuity parser file-delete / stale-doc rows). `Health_Cause_Intake` CREATE not executed.
 
 ### Task 6: Tab-reference integrity test
 - **Files:** `scripts/tabReferenceIntegrity.test.js` — create
 - **Steps:** Deterministic test: extract every `getSheetByName('...')` literal in `phase*/`, `utilities/`, `lib/`; assert each exists as a `## <Tab>` header in `schemas/SCHEMA_HEADERS.md` OR is on an explicit allowlist (auto-created tabs like `Election_Log`, with a comment citing the creating code). Fail loud with the offender list.
 - **Verify:** test passes on clean tree; injecting `getSheetByName('Ghost_X')` into a scratch copy fails the test
-- **Status:** [ ] not started
+- **Status:** [x] 2026-08-16 (kimi) — `86f43999`. Allowlist cites `MediaRoom_Paste` (Election_Log class) and `Health_Cause_Intake` (pending CREATE).
 
 ---
 
 ## Build notes
 
-Filled as tasks complete.
+Track B dispositions (what actually shipped):
+
+| Tab | Disposition | Evidence |
+|---|---|---|
+| Advancement_Intake / Sports_Feed fallbacks | deleted (guarded, no behavior change) | `c3fe1780` `processAdvancementIntake.js`, `mediaRoomIntake.js`, `sheetNames.js` |
+| Simulation_Config | repoint → World_Config | `civicInitiativeEngine.js` `manualRunVote` — was a silently-zero read |
+| City_Dynamics | deleted ghost-read | same file; tab never existed |
+| Citizen_Directory | constant gone; tab never existed | `sheetNames.js` |
+| Game_Intake | full delete of `getBullsSentimentImpact_` + caller | `chicagoSatellite.js`; Mike-direct Chicago dormant; zero live reads |
+| MediaRoom_Paste | keep + allowlist | `parseMediaRoomMarkdown.js` `insertSheet`; Election_Log precedent |
+| Citizens | stale doc-only | zero live `getSheetByName('Citizens')` |
+| Story_Hook_Archive | stale doc-only | zero live refs; `hookLifecycleEngine` gone |
+| Continuity_Intake / Raw_Continuity_Paste | file deleted | `continuityNotesParser.js` whole-file delete; never-existed tabs; zero live callers |
+| Chicago_Feed | **not a ghost** — false flag reverted | live writer `v3ChicagoWriter.js`; leave off the ghost table |
+| Health_Cause_Intake | **PENDING CREATE** | Mike-ruled; do not mark done; must reach engine-sheet from Mike |
+
+Regression guard: `node scripts/tabReferenceIntegrity.test.js` — 290 refs, exit 0 (`86f43999`).
 
 ---
 
@@ -89,4 +105,5 @@ Filled as tasks complete.
 
 ## Changelog
 
+- 2026-08-16 (grok) — Track B Tasks 4–6 + acceptance 2+3 closed against what shipped: `c3fe1780` (six reviewed dispositions + Game_Intake full delete + Chicago_Feed revert) and `86f43999` (integrity test). SPREADSHEET.md ghost table updated. Health_Cause_Intake CREATE remains pending Mike → engine-sheet. Track A (Tasks 1–3 / AC1) untouched.
 - 2026-07-31 — Initial draft (Kimi CLI, builder-directed external-audit remediation batch). Audit gaps #7+#8 combined (both are "the builder can't see when the engine is lying"). Audit's arcs bug dropped as stale (arc loop retired S313); ghost-tab claim confirmed with the Election_Log reclassification.

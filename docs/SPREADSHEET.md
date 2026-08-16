@@ -189,24 +189,27 @@ Not simulation data. Google Apps Script infrastructure and debugging.
 
 ## Ghost References — Engine Code Points to Tabs That Don't Exist
 
-These tab names appear in the GAS engine code but have no matching tab on the spreadsheet. Some are old names, some were never created. They cause silent failures (empty reads, skipped writes).
+infrastructure.6 Track B close (2026-08-16, `c3fe1780` + `86f43999`). Each row carries a disposition. One row stays open.
 
-| Ghost Tab | Where Referenced | Likely Reality |
+**Correction:** `Chicago_Feed` is **not** a ghost. A Track B pass flagged it and that change was reverted in `c3fe1780`. The engine writes the tab every cycle (`v3ChicagoWriter.js` `ensureSheet_`); `cycleExportAutomation.js`, `cycleRollback.js`, and `auditSheetHeaders.js` all reference it. Leave it off this table.
+
+| Ghost Tab | Where Referenced | Disposition (2026-08-16) |
 |-----------|-----------------|---------------|
-| **Intake** | `editionIntake.js` (old) | **FIXED S106** (old writer rerouted to `Citizen_Usage_Intake`). **No longer a ghost — tab created on prod S305** for the engine.51 `processIntake_` front door. |
-| **Advancement_Intake** / **Advancement_Intake1** | `editionIntake.js` (old), `processAdvancementIntake.js` | **FIXED S106.** Now writes to `Citizen_Usage_Intake`. `processAdvancementIntake.js` still references old name — separate fix. |
-| **Business_Intake** | `editionIntake.js` (old) | **FIXED S106.** Now writes to `Storyline_Intake`. |
-| **Sports_Feed** | `applySportsSeason.js` | Renamed to `Oakland_Sports_Feed`. Code updated S89 but old name may linger. |
-| **Citizens** | `buildDeskPackets.js` | Old name for Simulation_Ledger query. |
-| **Citizen_Directory** | Engine code | Never existed. |
-| **City_Dynamics** | Engine code | Never existed — city dynamics stored in ctx, not a tab. |
-| **Simulation_Config** | Engine code | Renamed to `World_Config`. |
-| **Game_Intake** | Engine code | Old name, possibly for MLB/NBA_Game_Intake. |
-| **Health_Cause_Intake** | Engine code | Renamed or never created. `Health_Cause_Queue` exists. |
-| **MediaRoom_Paste** / **Raw_Continuity_Paste** | Engine code | Old manual paste targets from pre-pipeline era. |
-| **Story_Hook_Archive** | Engine code | Never existed as a tab. |
-| **Election_Log** | Engine code | Never existed as a tab. |
-| **Continuity_Intake** | Engine code | Never existed. |
+| **Intake** | `editionIntake.js` (old) | **CLOSED S106 / S305.** Old writer rerouted to `Citizen_Usage_Intake`. Tab created on prod S305 for the engine.51 `processIntake_` front door. |
+| **Advancement_Intake** | `processAdvancementIntake.js`, `mediaRoomIntake.js` fallbacks | **CLOSED `c3fe1780` — fallbacks dropped.** Bare `Advancement_Intake` does not exist; each site already guarded (return / lazy-create / `if (advSheet)`). No behavior change. **`Advancement_Intake1` is live** (`schemas/SCHEMA_HEADERS.md`) and is not a ghost. `sheetNames.js` `ADVANCEMENT_INTAKE` constant removed. |
+| **Business_Intake** | `editionIntake.js` (old) | **CLOSED S106.** Writes to `Storyline_Intake`. |
+| **Sports_Feed** | `diagnoseDashboardData.js` (old), `sheetNames.js` | **CLOSED `c3fe1780`.** Diagnostic read repointed to `Oakland_Sports_Feed`. `SPORTS_FEED` constant removed. Zero consumers of the ghost name. |
+| **Citizens** | `buildDeskPackets.js` (historical) | **CLOSED — stale doc-only.** Zero live `getSheetByName('Citizens')` in `phase*/`, `utilities/`, `lib/`. Simulation_Ledger is the citizen tab. |
+| **Citizen_Directory** | `bondEngine.js` (historical), `sheetNames.js` | **CLOSED.** Tab never existed. Constant absent from `sheetNames.js`. Live lookup is Simulation_Ledger. |
+| **City_Dynamics** | `civicInitiativeEngine.js` `manualRunVote` | **CLOSED `c3fe1780` — ghost-read removed.** Tab never existed; sentiment already defaulted to 0. |
+| **Simulation_Config** | `civicInitiativeEngine.js` `manualRunVote` | **CLOSED `c3fe1780` — repointed to `World_Config`.** Fixes a silently-zero `cycleCount` read (operator-fired, not cycle-path). |
+| **Game_Intake** | `chicagoSatellite.js` `getBullsSentimentImpact_` | **CLOSED `c3fe1780` — full delete.** Mike-direct: Chicago dormant. Function + caller removed together (caller-only leftover would throw). Zero live `Game_Intake` reads remain. |
+| **Health_Cause_Intake** | `healthCauseIntake.js` | **PENDING — do not mark done.** Mike-ruled CREATE. Live tab creation is engine-sheet execute domain and must reach es from Mike, not a relay. `Health_Cause_Queue` exists. Allowlisted in `scripts/tabReferenceIntegrity.test.js` until the tab exists. |
+| **MediaRoom_Paste** | `parseMediaRoomMarkdown.js`, `mediaRoomIntake.js` | **CLOSED — kept + allowlisted.** Auto-created on operator run (`insertSheet`). Same class as `Election_Log`. |
+| **Raw_Continuity_Paste** | `continuityNotesParser.js` | **CLOSED — file deleted whole.** Tab never existed. Zero live callers. |
+| **Story_Hook_Archive** | `hookLifecycleEngine.js` (historical) | **CLOSED — stale doc-only.** Zero live code refs. `hookLifecycleEngine` itself is gone. |
+| **Election_Log** | `runCivicElectionsv1.js` | **CLOSED — reclassified, not a ghost.** Schema-documented; auto-created on write. Precedent for `MediaRoom_Paste`. |
+| **Continuity_Intake** | `continuityNotesParser.js` | **CLOSED — file deleted whole.** Tab never existed. Zero live callers. |
 
 ---
 
@@ -214,5 +217,5 @@ These tab names appear in the GAS engine code but have no matching tab on the sp
 
 - **Row counts from S105 audit.** Re-run after cycle runs to check growth.
 - **Civic_Office_Ledger and Initiative_Tracker** show ~1000 rows in the grid but actual data is much smaller. Google Sheets allocates rows in advance.
-- **The 3 ghost tab bugs are FIXED (S106).** `editionIntake.js` v2.1 now writes to `Citizen_Usage_Intake` and `Storyline_Intake`. `processAdvancementIntake.js` still references `Advancement_Intake1` — separate fix needed.
+- **Ghost-tab sweep (infrastructure.6 Track B, 2026-08-16).** Dispositions above. Open remainder: `Health_Cause_Intake` CREATE, Mike → engine-sheet directly. Regression guard: `scripts/tabReferenceIntegrity.test.js` (`86f43999`).
 - To archive a dead tab: copy data to a local CSV (`scripts/backupSpreadsheet.js`), then delete or hide the tab. Don't delete without a backup.

@@ -147,6 +147,20 @@ The trigger token exists so the TERMINAL runs the proving loop itself, no Mike i
   silently restored the production ID and one sandbox-intended push landed on the
   production script.
 - **Node scripts against the sandbox:** `GODWORLD_SHEET_ID` in the env points at
-  **production** — always pass the sandbox explicitly, e.g.
+  **production** — always pass the sandbox explicitly.
+
+  **⚠️ A SHELL VARIABLE DOES NOT WORK, AND FAILS SILENTLY TO LIVE (verified
+  2026-08-15).** `lib/env` loads dotenv with `override: true`, so the `.env` file's
+  production `GODWORLD_SHEET_ID` clobbers anything exported into the shell. Running
+  `GODWORLD_SHEET_ID=<sandbox> node scripts/foo.js --apply` resolves straight back to
+  the production id and **writes to LIVE** with no warning — confirmed by probe
+  before a seed write, which would otherwise have landed on production. Any script
+  that does `require('lib/env')` is affected, which is all of them.
+
+  The target must be set **after** the loader runs — a `--sheet-id=<id>` flag that
+  assigns `process.env.GODWORLD_SHEET_ID` post-require (see
+  `scripts/seedNeighborhoodDistrict.js`, which also prints the resolved id before
+  writing). **Before any sandbox `--apply`, dry-run first and read the printed target
+  id.** Example of the pattern to follow, not to trust blindly:
   `node scripts/draftContentRows.js --cycle {XX} --apply --sheet-id 1wmZTGqIbYL7eVYCplq3iCb2oOGDZ0Inq-pWCtnD1lzc`
 - Cycle runs are Mike-fired from the sandbox sheet; SANDBOX 0714 starts at C102.

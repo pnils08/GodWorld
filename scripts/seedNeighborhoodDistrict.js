@@ -25,6 +25,11 @@
  *   node scripts/seedNeighborhoodDistrict.js               # dry-run
  *   node scripts/seedNeighborhoodDistrict.js --apply       # write to sheet
  *   node scripts/seedNeighborhoodDistrict.js --add-rows    # also CREATE missing hoods (world-shape change)
+ *   node scripts/seedNeighborhoodDistrict.js --sheet-id=<id> --apply   # target a SANDBOX
+ *
+ * TARGETING: use --sheet-id for a sandbox. Do NOT try `GODWORLD_SHEET_ID=<id> node …`
+ * — lib/env loads dotenv with override:true, so the .env production id wins and the
+ * write lands on LIVE.
  *
  * ORDERING (civic.18): do not --apply until Task 4a is deployed live. Until then
  * v3NeighborhoodWriter still rewrites the District column every cycle and will
@@ -36,7 +41,21 @@
  */
 
 require('/root/GodWorld/lib/env');
+
+// SANDBOX TARGETING — must happen AFTER lib/env loads, and a shell variable will
+// NOT work. lib/env calls dotenv with `override: true`, so the .env file's
+// GODWORLD_SHEET_ID (PRODUCTION) clobbers anything exported into the shell. Passing
+// `GODWORLD_SHEET_ID=<sandbox> node …` therefore silently writes to LIVE — verified
+// 2026-08-15, the override resolved straight back to the production id. Set it here,
+// after the loader has run, where it sticks.
+const sheetIdArg = (process.argv.find(a => a.startsWith('--sheet-id=')) || '').split('=')[1];
+if (sheetIdArg) {
+  process.env.GODWORLD_SHEET_ID = sheetIdArg;
+  console.log(`[target] sheet id overridden -> ${sheetIdArg}`);
+}
+
 const sheets = require('/root/GodWorld/lib/sheets');
+console.log(`[target] writing against sheet ${process.env.GODWORLD_SHEET_ID}`);
 
 const SHEET_NAME = 'Neighborhood_Map';
 const APPLY = process.argv.includes('--apply');

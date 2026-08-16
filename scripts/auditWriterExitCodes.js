@@ -43,7 +43,6 @@ const SCRIPTS_DIR = path.join(ROOT, 'scripts');
 const KNOWN_OPEN = {
   'buildCitizenCards.js': 'engine.112 (Half B only — Half A gate exists L1110)',
   'ingestPlayerTrueSource.js': 'engine.112 (Half B)',
-  'dedupWdCitizens.js': 'engine.112 (Half B — the deduper that can fail silently)',
   // Discovered by this lint's first run (kimi, 2026-08-16) — canon-ingestion
   // writers with ungated error counters (Half-A-shaped). Pending rb row filing.
   'ingestCivicWiki.js': 'pending rb row filing (discovered 2026-08-16, first lint run)',

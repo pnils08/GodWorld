@@ -1115,9 +1115,17 @@ function getCitizenDialBands_(ctx, popId, dialStrOpt) {
     bands[d] = band_(c, d);            // signed -2..+2 (readable / engine.32)
     mult[d] = bandMultiplier_(c, d);   // 0.5..1.5 event-probability multiplier
   }
+  // research.27 Phase 2.3 (S376): raw 0-100 dials alongside the bands. The ECL
+  // DSL conditions on numbers (warmth>=60), not on the signed band, and this
+  // reuses current_() — the same base+mood clamp lib/citizenDials.js uses — so
+  // the sheet-side vocabulary and the Node-side reader cannot drift apart.
+  var current = {};
+  for (var ci = 0; ci < DIALS.length; ci++) current[DIALS[ci]] = current_(c, DIALS[ci]);
+
   var result = {
     bands: bands,
     mult: mult,
+    current: current,
     crimeReachable: bandIndex_(current_(c, 'integrity')) <= 0, // low band gates crime at all
     careerFreq: mult.drive,                                    // Drive -> career events
     familyFreq: mult.family                                    // Family-oriented -> birth/marriage

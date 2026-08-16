@@ -2625,7 +2625,21 @@ function generateCitizensEvents_(ctx) {
         // hood row is unwritten — null momentum then, never the loader's
         // blank-cell 0 (0 would read as maximal decay entrenchment).
         hoodtrend: hoodStateForCond ? hoodStateForCond.trajectory : "",
-        momentum: (hoodStateForCond && hoodStateForCond.trajectory) ? hoodStateForCond.trajectoryMomentum : null
+        momentum: (hoodStateForCond && hoodStateForCond.trajectory) ? hoodStateForCond.trajectoryMomentum : null,
+        // research.27 Phase 2.3 (S376): UNDOCKED color scopes.
+        // `undocked` gates on an APPROVED feed being loaded for this cycle —
+        // stepApprove writes S.undockedFeedEntries, and an unapproved or absent
+        // feed leaves the array empty so every UNDOCKED row fails closed. That
+        // is deliberate: the show's color must never appear in a cycle the show
+        // did not actually air.
+        undocked: !!(S.undockedFeedEntries && S.undockedFeedEntries.length),
+        // Live dials, 0-100. dialBands is already computed above for the
+        // participation weighting, so this reuses that cached read rather than
+        // re-parsing DialState. No DialState -> dialBands null -> both null,
+        // which fails any warmth/drive term while leaving plain `undocked`
+        // rows reachable (fail-closed on the dial, not on the whole beat).
+        warmth: dialBands ? dialBands.current.warmth : null,
+        drive: dialBands ? dialBands.current.drive : null
       };
       for (var clk in contentLedger.lines) {
         if (!contentLedger.lines.hasOwnProperty(clk)) continue;

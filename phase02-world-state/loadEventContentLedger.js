@@ -88,7 +88,18 @@ var CONTENT_LEDGER_DSL_FIELDS = {
   // hood's DIRECTION, not just its level. Reads S.neighborhoodState[hood]
   // (neighborhoodTrajectoryEngine); blank trajectory fails both terms.
   hoodtrend:    { kind: 'enum', values: { decay: 1, steady: 1, growth: 1 } },
-  momentum:     { kind: 'num' }
+  momentum:     { kind: 'num' },
+  // research.27 Phase 2.3 (S376): UNDOCKED color. `undocked` is true only when
+  // an APPROVED feed is loaded for the cycle — an unapproved or absent feed
+  // leaves it false and every UNDOCKED-conditioned row fails closed, which is
+  // the intended default. warmth/drive are the citizen's live dials (0-100,
+  // base+mood clamped) so the show's color can be aimed at who reacts to it:
+  // the warm talk about the pilots, the driven track the standings.
+  // Missing DialState leaves both null, which fails any warmth/drive term
+  // without touching rows that only condition on `undocked`.
+  undocked:     { kind: 'flag' },
+  warmth:       { kind: 'num' },
+  drive:        { kind: 'num' }
 };
 
 /**

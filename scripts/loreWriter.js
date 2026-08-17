@@ -11,6 +11,7 @@
 const fs = require('fs');
 const path = require('path');
 const { execFileSync } = require('child_process');
+require('../lib/env'); // loads /root/.config/godworld/.env — every other GodWorld script does this; this one didn't, so GEMINI_API_KEY in the central .env was invisible to it
 
 // -----------------------------------------------------------------------------
 // CONFIGURATION
@@ -18,6 +19,10 @@ const { execFileSync } = require('child_process');
 const GODWORLD_ROOT = '/root/GodWorld';
 const QUARANTINE_DIR = path.join(GODWORLD_ROOT, 'output', 'lore-quarantine');
 const MAX_ITERATIONS = 50;
+// Confirmed API model id gemini-3.7-flash (Google AI for Developers docs, checked
+// 2026-08-17) — was hardcoded to the older gemini-2.5-flash. Configurable so a
+// future model bump doesn't need another hunt-and-fix pass.
+const GEMINI_MODEL = process.env.LOREWRITER_MODEL || 'gemini-3.7-flash';
 
 const SYSTEM_PROMPT = "You are the GodWorld Lore Writer, responsible for generating long-form world depth grounded in the simulation ledger.\n\n" +
 "CRITICAL RULES (THE SEAM):\n" +
@@ -134,7 +139,7 @@ async function callGemini(messages) {
     tools: [{ functionDeclarations: TOOLS }]
   };
 
-  const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + apiKey, {
+  const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/" + GEMINI_MODEL + ":generateContent?key=" + apiKey, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)

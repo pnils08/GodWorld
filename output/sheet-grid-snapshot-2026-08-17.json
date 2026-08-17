@@ -1,0 +1,539 @@
+{
+  "capturedAt": "2026-08-17T08:05:32.048Z",
+  "spreadsheetTitle": "Simulation_Narrative",
+  "note": "Pre-resize grid dimensions. Restore = updateSheetProperties gridProperties per sheetId.",
+  "tabs": [
+    {
+      "sheetId": 1468219898,
+      "title": "GODWORLD Mission Control Dashboard",
+      "sheetType": "OBJECT",
+      "rowCount": null,
+      "columnCount": null
+    },
+    {
+      "sheetId": 423361831,
+      "title": "Oakland_Sports_Feed",
+      "sheetType": "GRID",
+      "rowCount": 1012,
+      "columnCount": 28
+    },
+    {
+      "sheetId": 0,
+      "title": "Simulation_Ledger",
+      "sheetType": "GRID",
+      "rowCount": 2970,
+      "columnCount": 54
+    },
+    {
+      "sheetId": 1486052158,
+      "title": "Reflection_Intake",
+      "sheetType": "GRID",
+      "rowCount": 1615,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 320668731,
+      "title": "Cultural_Ledger",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 27
+    },
+    {
+      "sheetId": 1835041680,
+      "title": "Civic_Office_Ledger",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 28
+    },
+    {
+      "sheetId": 856563407,
+      "title": "Generic_Citizens",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 27
+    },
+    {
+      "sheetId": 1775459856,
+      "title": "Heritage_Ledger",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 1442409820,
+      "title": "Household_Ledger",
+      "sheetType": "GRID",
+      "rowCount": 1007,
+      "columnCount": 24
+    },
+    {
+      "sheetId": 1807439683,
+      "title": "Family_Relationships",
+      "sheetType": "GRID",
+      "rowCount": 1003,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 218153677,
+      "title": "As_Roster",
+      "sheetType": "GRID",
+      "rowCount": 993,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 70323421,
+      "title": "Bay_Tribune_Oakland",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 683793642,
+      "title": "Oaks_Roster",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 151426461,
+      "title": "Relationship_Bond_Ledger",
+      "sheetType": "GRID",
+      "rowCount": 6769,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 1723274733,
+      "title": "Relationship_Bonds",
+      "sheetType": "GRID",
+      "rowCount": 1002,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 2070953955,
+      "title": "Dashboard",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 2014102841,
+      "title": "World_Population",
+      "sheetType": "GRID",
+      "rowCount": 996,
+      "columnCount": 28
+    },
+    {
+      "sheetId": 1001305911,
+      "title": "Simulation_Calendar",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 1208387102,
+      "title": "Cycle_Weather",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 596472373,
+      "title": "Advancement_Intake1",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 1009865409,
+      "title": "Event_Wiring_Ledger",
+      "sheetType": "GRID",
+      "rowCount": 1039,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 340805776,
+      "title": "Riley_Digest",
+      "sheetType": "GRID",
+      "rowCount": 927,
+      "columnCount": 28
+    },
+    {
+      "sheetId": 914561402,
+      "title": "Cycle_Packet",
+      "sheetType": "GRID",
+      "rowCount": 986,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 577435892,
+      "title": "WorldEvents_V3_Ledger",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 31
+    },
+    {
+      "sheetId": 274561285,
+      "title": "WorldEvents_Ledger",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 1605878565,
+      "title": "Chaos_Cars",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 337958340,
+      "title": "Story_Seed_Deck",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 1574172013,
+      "title": "Cycle_Seeds",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 1361640429,
+      "title": "Ripple_Ledger",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 61835593,
+      "title": "Media_Briefing",
+      "sheetType": "GRID",
+      "rowCount": 999,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 1051888373,
+      "title": "Media_Ledger",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 32
+    },
+    {
+      "sheetId": 1975368559,
+      "title": "Texture_Trigger_Log",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 16
+    },
+    {
+      "sheetId": 303337060,
+      "title": "Edition_Coverage_Ratings",
+      "sheetType": "GRID",
+      "rowCount": 991,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 2098921940,
+      "title": "Event_Content_Ledger",
+      "sheetType": "GRID",
+      "rowCount": 1267,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 1234780457,
+      "title": "Content_Telemetry",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 770022817,
+      "title": "Business_Ledger",
+      "sheetType": "GRID",
+      "rowCount": 1093,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 714988675,
+      "title": "Employment_Roster",
+      "sheetType": "GRID",
+      "rowCount": 1859,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 265075857,
+      "title": "Community_Programs",
+      "sheetType": "GRID",
+      "rowCount": 1031,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 1974481914,
+      "title": "Faith_Organizations",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 1924153997,
+      "title": "Faith_Ledger",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 1654114458,
+      "title": "Initiative_Tracker",
+      "sheetType": "GRID",
+      "rowCount": 1994,
+      "columnCount": 36
+    },
+    {
+      "sheetId": 390356505,
+      "title": "Election_Log",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 1374660933,
+      "title": "Neighborhood_Map",
+      "sheetType": "GRID",
+      "rowCount": 1023,
+      "columnCount": 24
+    },
+    {
+      "sheetId": 1464626236,
+      "title": "Neighborhood_Demographics",
+      "sheetType": "GRID",
+      "rowCount": 1004,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 1056463946,
+      "title": "Economic_Parameters",
+      "sheetType": "GRID",
+      "rowCount": 1198,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 525182707,
+      "title": "Crime_Metrics",
+      "sheetType": "GRID",
+      "rowCount": 998,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 644061088,
+      "title": "Transit_Metrics",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 1666499369,
+      "title": "Domain_Tracker",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 32
+    },
+    {
+      "sheetId": 222843695,
+      "title": "Storyline_Ledger",
+      "sheetType": "GRID",
+      "rowCount": 1004,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 1299639296,
+      "title": "LifeHistory_Log",
+      "sheetType": "GRID",
+      "rowCount": 9129,
+      "columnCount": 27
+    },
+    {
+      "sheetId": 1043445686,
+      "title": "Youth_Events",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 1914016103,
+      "title": "Engine_Errors",
+      "sheetType": "GRID",
+      "rowCount": 1539,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 1644440026,
+      "title": "World_Config",
+      "sheetType": "GRID",
+      "rowCount": 1017,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 1846403839,
+      "title": "Chicago_Feed",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 23
+    },
+    {
+      "sheetId": 7083038,
+      "title": "Chicago_Sports_Feed",
+      "sheetType": "GRID",
+      "rowCount": 1999,
+      "columnCount": 28
+    },
+    {
+      "sheetId": 1896459429,
+      "title": "Chicago_Citizens",
+      "sheetType": "GRID",
+      "rowCount": 1013,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 81364609,
+      "title": "LifeHistory_Archive",
+      "sheetType": "GRID",
+      "rowCount": 8466,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 1535890265,
+      "title": "Story_Seed_Deck_Archive",
+      "sheetType": "GRID",
+      "rowCount": 2558,
+      "columnCount": 19
+    },
+    {
+      "sheetId": 1878528279,
+      "title": "Intake",
+      "sheetType": "GRID",
+      "rowCount": 200,
+      "columnCount": 9
+    },
+    {
+      "sheetId": 1381276494,
+      "title": "World_Drift_Report",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 1760262566,
+      "title": "Civic_Sweep_Report",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 322530298,
+      "title": "Story_Hook_Deck",
+      "sheetType": "GRID",
+      "rowCount": 1135,
+      "columnCount": 14
+    },
+    {
+      "sheetId": 1809037126,
+      "title": "Event_Arc_Ledger",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 32
+    },
+    {
+      "sheetId": 1269411613,
+      "title": "Press_Drafts",
+      "sheetType": "GRID",
+      "rowCount": 1072,
+      "columnCount": 20
+    },
+    {
+      "sheetId": 260959421,
+      "title": "NBA_Game_Intake",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 27
+    },
+    {
+      "sheetId": 1490708352,
+      "title": "MLB_Game_Intake",
+      "sheetType": "GRID",
+      "rowCount": 1002,
+      "columnCount": 31
+    },
+    {
+      "sheetId": 618470103,
+      "title": "Arc_Ledger",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 16
+    },
+    {
+      "sheetId": 1073709359,
+      "title": "Sports_Calendar",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 2107133790,
+      "title": "Health_Cause_Queue",
+      "sheetType": "GRID",
+      "rowCount": 1000,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 716136494,
+      "title": "Story_Seed_Deck_v3_legacy",
+      "sheetType": "GRID",
+      "rowCount": 2829,
+      "columnCount": 20
+    },
+    {
+      "sheetId": 1072760855,
+      "title": "Media_Intake",
+      "sheetType": "GRID",
+      "rowCount": 1148,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 1553375351,
+      "title": "Citizen_Media_Usage",
+      "sheetType": "GRID",
+      "rowCount": 1235,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 332559243,
+      "title": "Citizen_Usage_Intake",
+      "sheetType": "GRID",
+      "rowCount": 1616,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 467292275,
+      "title": "Storyline_Intake",
+      "sheetType": "GRID",
+      "rowCount": 1160,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 714871046,
+      "title": "Storyline_Tracker",
+      "sheetType": "GRID",
+      "rowCount": 1241,
+      "columnCount": 26
+    },
+    {
+      "sheetId": 67165942,
+      "title": "Undocked_Feed",
+      "sheetType": "GRID",
+      "rowCount": 2001,
+      "columnCount": 12
+    }
+  ]
+}
